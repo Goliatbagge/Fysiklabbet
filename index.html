@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fysiklabbet - Interaktiva Fysiksimuleringar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Välkommen till Fysiklabbet</h1>
+            <p class="hero-subtitle">Utforska fysikens värld genom interaktiva simuleringar</p>
+            <div class="hero-cta">
+                <a href="fysik1.html" class="btn btn-primary">Fysik 1</a>
+                <a href="fysik2.html" class="btn btn-secondary">Fysik 2</a>
+            </div>
+        </div>
+        <div class="hero-background">
+            <div class="float-animation float-1">⚛️</div>
+            <div class="float-animation float-2">🔬</div>
+            <div class="float-animation float-3">⚡</div>
+            <div class="float-animation float-4">🌊</div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro-section">
+            <h2 class="section-title">Vad är Fysiklabbet?</h2>
+            <p class="intro-text">
+                Fysiklabbet är en samling interaktiva simuleringar som hjälper dig att förstå
+                fysikaliska fenomen på ett visuellt och engagerande sätt. Perfekt för
+                gymnasieelever som studerar Fysik 1 och Fysik 2.
+            </p>
+        </section>
+
+        <section class="courses-section">
+            <div class="course-card" onclick="location.href='fysik1.html'">
+                <div class="card-icon">📚</div>
+                <h3 class="card-title">Fysik 1</h3>
+                <p class="card-description">
+                    Grundläggande fysik: Rörelse, kraft, energi, tryck och vågor.
+                </p>
+                <div class="card-footer">
+                    <span class="card-link">Utforska simuleringar →</span>
+                </div>
+            </div>
+
+            <div class="course-card" onclick="location.href='fysik2.html'">
+                <div class="card-icon">🔬</div>
+                <h3 class="card-title">Fysik 2</h3>
+                <p class="card-description">
+                    Fördjupning: Elektricitet, magnetism, våglära och modern fysik.
+                </p>
+                <div class="card-footer">
+                    <span class="card-link">Utforska simuleringar →</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+</body>
+</html>

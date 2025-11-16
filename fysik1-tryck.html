@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tryck - Ideala Gaslagen - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik 1</a> / <span>Tryck</span>
+        </div>
+
+        <section class="intro-section">
+            <h1 class="section-title">Ideala Gaslagen</h1>
+            <p class="intro-text">
+                Utforska sambandet mellan tryck, volym, temperatur och antal molekyler i en gas.
+                Experimentera med olika värden och se hur gasen beter sig!
+            </p>
+        </section>
+
+        <div class="simulation-container">
+            <div id="root"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        // Hjälpfunktion för att formatera tal med komma istället för punkt
+        const formatNumber = (num, decimals = 1) => {
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Konstanter för simuleringen
+        const R = 0.0821; // Ideala gaskonstanten (L·atm)/(mol·K)
+        const MAX_PRESSURE = 40; // Max tryck innan explosion
+        const MIN_TEMP = 0; // Kelvin (absoluta nollpunkten)
+        const MAX_TEMP = 600; // Kelvin
+        const MIN_MOLECULES = 10;
+        const MAX_MOLECULES = 200;
+        const MIN_VOLUME = 5; // Liter
+        const MAX_VOLUME = 20; // Liter
+        const MOLECULE_SIZE = 8; // px
+
+
+        // Termometerkomponent
+        const Thermometer = ({ temperature, minTemp, maxTemp, onTemperatureChange, isExploded }) => {
+            const tempPercentage = (temperature - minTemp) / (maxTemp - minTemp);
+            const mercuryHeight = Math.max(0, Math.min(100, tempPercentage * 100));
+            const thermometerRef = useRef(null);
+
+            const mercuryColor = `rgb(
+                ${255 * tempPercentage},
+                80,
+                ${255 * (1 - tempPercentage)}
+            )`;
+
+            const handleMouseDown = useCallback((e) => {
+                if (isExploded) return;
+                e.preventDefault();
+
+                const thermometer = thermometerRef.current;
+                if (!thermometer) return;
+
+                const tube = thermometer.querySelector('.thermometer-tube-responsive');
+                if (!tube) return;
+
+                const rect = tube.getBoundingClientRect();
+
+                const updateTemperature = (clientY) => {
+                    const relativeY = clientY - rect.top;
+                    let percentage = 1 - (relativeY / rect.height);
+                    percentage = Math.max(0, Math.min(1, percentage));
+                    const newTemp = Math.round(minTemp + percentage * (maxTemp - minTemp));
+                    onTemperatureChange(newTemp);
+                };
+
+                updateTemperature(e.clientY);
+
+                const handleMouseMove = (moveEvent) => {
+                    updateTemperature(moveEvent.clientY);
+                };
+
+                const handleMouseUp = () => {
+                    window.removeEventListener('mousemove', handleMouseMove);
+                    window.removeEventListener('mouseup', handleMouseUp);
+                };
+
+                window.addEventListener('mousemove', handleMouseMove);
+                window.addEventListener('mouseup', handleMouseUp);
+            }, [isExploded, minTemp, maxTemp, onTemperatureChange]);
+
+
+            return (
+                <div ref={thermometerRef} style={{ ...styles.thermometer, pointerEvents: isExploded ? 'none' : 'auto' }} className="thermometer-responsive">
+                    <div onMouseDown={handleMouseDown} style={{...styles.thermometerInteractiveArea, cursor: isExploded ? 'default' : 'pointer'}}>
+                        <div style={styles.thermometerTube} className="thermometer-tube-responsive thermometer-tube">
+                            <div style={{ ...styles.thermometerMercury, height: `${mercuryHeight}%`, backgroundColor: mercuryColor }} />
+                        </div>
+                        <div style={{ ...styles.thermometerBulb, backgroundColor: mercuryColor }} className="thermometer-bulb-responsive" />
+                    </div>
+                    <span style={styles.thermometerReading} className="thermometer-reading-responsive">{temperature} K / {formatNumber(temperature - 273.15)}°C</span>
+                </div>
+            );
+        };
+
+        // GasPump component
+        const GasPump = ({ onPump, disabled }) => {
+            const [isPumping, setIsPumping] = useState(false);
+
+            const handlePumpClick = () => {
+                if (disabled) return;
+                setIsPumping(true);
+                onPump();
+                setTimeout(() => setIsPumping(false), 300); // Animation duration
+            };
+
+            return (
+                <div
+                    onClick={handlePumpClick}
+                    style={{ ...styles.pumpContainer, opacity: disabled ? 0.5 : 1, cursor: disabled ? 'not-allowed' : 'pointer' }}
+                    title={disabled ? "Max antal molekyler uppnått" : "Pumpa in fler molekyler"}
+                >
+                    <div style={styles.pumpBody}>
+                        <div style={styles.pumpNozzle}></div>
+                    </div>
+                    <div style={{...styles.pumpHandle, ...(isPumping ? styles.pumpHandlePumping : {})}}></div>
+                </div>
+            );
+        };
+
+
+        // Huvudappen
+        const GasSim = () => {
+            const [numMolecules, setNumMolecules] = useState(50);
+            const [temperature, setTemperature] = useState(300); // Kelvin
+            const [volume, setVolume] = useState(10); // Liter
+            const [pressure, setPressure] = useState(0);
+            const [isExploded, setIsExploded] = useState(false);
+            const [isExplanationVisible, setIsExplanationVisible] = useState(false);
+
+            const containerRef = useRef(null);
+            const simulationAreaRef = useRef(null);
+            const moleculesRef = useRef([]);
+            const moleculeElementsRef = useRef([]);
+            const animationFrameId = useRef();
+
+            // Ref to hold latest temperature to avoid re-running animation effect
+            const tempRef = useRef(temperature);
+            useEffect(() => {
+                tempRef.current = temperature;
+            }, [temperature]);
+
+            // Inject responsive styles once on mount
+            useEffect(() => {
+                const responsiveStyles = `
+                    @media (max-width: 900px) {
+                        body { padding: 0.5rem; }
+                        .main-layout-responsive {
+                            grid-template-columns: 1fr;
+                            gap: 1rem;
+                        }
+                        .simulation-area-responsive {
+                            min-height: 350px;
+                        }
+                        .gas-container-responsive {
+                            height: 300px !important;
+                        }
+                        .thermometer-responsive {
+                            height: 120px;
+                            width: 30px;
+                            top: 0.5rem;
+                            left: 0.5rem;
+                        }
+                        .thermometer-tube-responsive {
+                            height: 80px;
+                            width: 12px;
+                        }
+                        .thermometer-bulb-responsive {
+                            width: 20px;
+                            height: 20px;
+                        }
+                        .thermometer-reading-responsive {
+                            font-size: 0.7rem;
+                            margin-top: 4px;
+                        }
+                    }
+                `;
+                const styleSheet = document.createElement("style");
+                styleSheet.innerText = responsiveStyles;
+                document.head.appendChild(styleSheet);
+
+                return () => {
+                    document.head.removeChild(styleSheet);
+                };
+            }, []);
+
+            // Funktion för att spela explosionsljud
+            const playExplosionSound = useCallback(() => {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+                // Skapa oscillatorer för explosionsljudet
+                const oscillator1 = audioContext.createOscillator();
+                const oscillator2 = audioContext.createOscillator();
+
+                // Skapa gain nodes för volymkontroll
+                const gainNode1 = audioContext.createGain();
+                const gainNode2 = audioContext.createGain();
+                const masterGain = audioContext.createGain();
+
+                // Konfigurera första oscillatorn (djup bas)
+                oscillator1.type = 'sine';
+                oscillator1.frequency.setValueAtTime(100, audioContext.currentTime);
+                oscillator1.frequency.exponentialRampToValueAtTime(20, audioContext.currentTime + 0.5);
+
+                // Konfigurera andra oscillatorn (distorsion)
+                oscillator2.type = 'sawtooth';
+                oscillator2.frequency.setValueAtTime(80, audioContext.currentTime);
+                oscillator2.frequency.exponentialRampToValueAtTime(15, audioContext.currentTime + 0.5);
+
+                // Volymkurva för explosionseffekt
+                gainNode1.gain.setValueAtTime(0.8, audioContext.currentTime);
+                gainNode1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+                gainNode2.gain.setValueAtTime(0.4, audioContext.currentTime);
+                gainNode2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+                masterGain.gain.setValueAtTime(0.5, audioContext.currentTime);
+
+                // Koppla samman noderna
+                oscillator1.connect(gainNode1);
+                oscillator2.connect(gainNode2);
+                gainNode1.connect(masterGain);
+                gainNode2.connect(masterGain);
+                masterGain.connect(audioContext.destination);
+
+                // Starta och stoppa ljudet
+                oscillator1.start(audioContext.currentTime);
+                oscillator2.start(audioContext.currentTime);
+                oscillator1.stop(audioContext.currentTime + 0.5);
+                oscillator2.stop(audioContext.currentTime + 0.5);
+            }, []);
+
+            // Beräkna trycket när variabler ändras
+            useEffect(() => {
+                const p = (numMolecules * 0.1 * R * temperature) / volume;
+                setPressure(p);
+                if (p > MAX_PRESSURE && !isExploded) {
+                    setIsExploded(true);
+                    playExplosionSound();
+                }
+            }, [numMolecules, temperature, volume, isExploded, playExplosionSound]);
+
+            const resetSimulation = useCallback(() => {
+                setIsExploded(false);
+                setNumMolecules(50);
+                setTemperature(300);
+                setVolume(10);
+            }, []);
+
+            // Initialize or update molecules when their number changes or simulation resets
+            useEffect(() => {
+                const container = containerRef.current;
+                if (!container || isExploded) return;
+
+                const currentMolecules = moleculesRef.current;
+                const previousMoleculeCount = currentMolecules.length;
+
+                // Ensure existing molecules are within bounds (for resizing)
+                currentMolecules.forEach(mol => {
+                    mol.x = Math.max(0, Math.min(mol.x, container.offsetWidth - MOLECULE_SIZE));
+                    mol.y = Math.max(0, Math.min(mol.y, container.offsetHeight - MOLECULE_SIZE));
+                });
+
+                // Add new molecules if count has increased
+                if (numMolecules > previousMoleculeCount) {
+                    const newMoleculeCount = numMolecules - previousMoleculeCount;
+                    // Add molecules near pump nozzle if it's a small increase (likely pump)
+                    // or randomly if it's a large increase (likely slider)
+                    const fromPump = newMoleculeCount <= 10;
+                    const pumpX = container.offsetWidth / 2;
+                    const pumpY = MOLECULE_SIZE;
+
+                    for (let i = 0; i < newMoleculeCount; i++) {
+                        if (fromPump) {
+                             const angle = Math.PI * 0.25 + Math.random() * Math.PI * 0.5; // Downward cone
+                             currentMolecules.push({
+                                x: pumpX + (Math.random() - 0.5) * 20,
+                                y: pumpY,
+                                vx: Math.cos(angle),
+                                vy: Math.sin(angle),
+                            });
+                        } else {
+                            const angle = Math.random() * 2 * Math.PI;
+                            currentMolecules.push({
+                                x: Math.random() * (container.offsetWidth - MOLECULE_SIZE),
+                                y: Math.random() * (container.offsetHeight - MOLECULE_SIZE),
+                                vx: Math.cos(angle),
+                                vy: Math.sin(angle),
+                            });
+                        }
+                    }
+                }
+                // Remove molecules if count has decreased
+                else if (numMolecules < previousMoleculeCount) {
+                    currentMolecules.length = numMolecules;
+                }
+
+                moleculesRef.current = currentMolecules;
+                moleculeElementsRef.current = moleculeElementsRef.current.slice(0, numMolecules);
+            }, [numMolecules, isExploded, volume]);
+
+
+            // Main animation loop
+            useEffect(() => {
+                const animate = () => {
+                    const container = containerRef.current;
+                    if (!container || isExploded) {
+                        if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+                        return;
+                    }
+
+                    const containerWidth = container.offsetWidth;
+                    const containerHeight = container.offsetHeight;
+                    const speed = tempRef.current === 0 ? 0 : (tempRef.current / 200) * 2;
+                    const molecules = moleculesRef.current;
+
+                    // 1. Update positions based on velocity
+                    molecules.forEach(mol => {
+                        mol.x += mol.vx * speed;
+                        mol.y += mol.vy * speed;
+                    });
+
+                    // 2. Handle inter-molecule collisions
+                    for (let i = 0; i < molecules.length; i++) {
+                        for (let j = i + 1; j < molecules.length; j++) {
+                            const mol1 = molecules[i];
+                            const mol2 = molecules[j];
+
+                            const dx = mol2.x - mol1.x;
+                            const dy = mol2.y - mol1.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+
+                            if (distance < MOLECULE_SIZE) {
+                                // Normal vector
+                                const nx = dx / distance;
+                                const ny = dy / distance;
+
+                                // Tangent vector
+                                const tx = -ny;
+                                const ty = nx;
+
+                                // Project velocities
+                                const dpTan1 = mol1.vx * tx + mol1.vy * ty;
+                                const dpTan2 = mol2.vx * tx + mol2.vy * ty;
+                                const dpNorm1 = mol1.vx * nx + mol1.vy * ny;
+                                const dpNorm2 = mol2.vx * nx + mol2.vy * ny;
+
+                                // Conservation of momentum (for equal mass particles)
+                                const m1 = dpNorm2;
+                                const m2 = dpNorm1;
+
+                                // Update velocities
+                                mol1.vx = tx * dpTan1 + nx * m1;
+                                mol1.vy = ty * dpTan1 + ny * m1;
+                                mol2.vx = tx * dpTan2 + nx * m2;
+                                mol2.vy = ty * dpTan2 + ny * m2;
+
+                                // Prevent overlap
+                                const overlap = 0.5 * (MOLECULE_SIZE - distance);
+                                mol1.x -= overlap * nx;
+                                mol1.y -= overlap * ny;
+                                mol2.x += overlap * nx;
+                                mol2.y += overlap * ny;
+                            }
+                        }
+                    }
+
+                    // 3. Handle wall collisions
+                    molecules.forEach(mol => {
+                        if (mol.x <= 0 || mol.x >= containerWidth - MOLECULE_SIZE) {
+                            mol.vx *= -1;
+                            mol.x = Math.max(0, Math.min(mol.x, containerWidth - MOLECULE_SIZE));
+                        }
+                        if (mol.y <= 0 || mol.y >= containerHeight - MOLECULE_SIZE) {
+                            mol.vy *= -1;
+                            mol.y = Math.max(0, Math.min(mol.y, containerHeight - MOLECULE_SIZE));
+                        }
+                    });
+
+                    // 4. Update DOM
+                    molecules.forEach((mol, i) => {
+                        const el = moleculeElementsRef.current[i];
+                        if (el) {
+                            el.style.transform = `translate(${mol.x}px, ${mol.y}px)`;
+                        }
+                    });
+
+                    animationFrameId.current = requestAnimationFrame(animate);
+                };
+
+                if (!isExploded) {
+                    animationFrameId.current = requestAnimationFrame(animate);
+                } else {
+                     if(animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+                }
+
+                return () => {
+                    if (animationFrameId.current) {
+                        cancelAnimationFrame(animationFrameId.current);
+                    }
+                };
+            }, [isExploded]);
+
+            const handleContainerResize = useCallback((e) => {
+                if (isExploded) return;
+                e.preventDefault();
+
+                const container = containerRef.current;
+                const simulationArea = simulationAreaRef.current;
+                if (!container || !simulationArea) return;
+
+                const startX = e.clientX;
+                const startWidth = container.offsetWidth;
+                const parentWidth = simulationArea.offsetWidth;
+                const minPixelWidth = parentWidth * (50 / 100);
+                const maxPixelWidth = parentWidth;
+                const volumeStep = 0.5;
+
+                const handleMouseMove = (moveEvent) => {
+                    const dx = moveEvent.clientX - startX;
+                    let newWidth = startWidth + dx;
+
+                    // Clamp width to boundaries
+                    newWidth = Math.max(minPixelWidth, Math.min(newWidth, maxPixelWidth));
+
+                    // Convert pixel width back to volume
+                    const widthRatio = (newWidth - minPixelWidth) / (maxPixelWidth - minPixelWidth);
+                    const newVolume = MIN_VOLUME + widthRatio * (MAX_VOLUME - MIN_VOLUME);
+
+                    // Snap to the same step as the slider for consistency
+                    const steppedVolume = Math.round(newVolume / volumeStep) * volumeStep;
+
+                    setVolume(steppedVolume);
+                };
+
+                const handleMouseUp = () => {
+                    window.removeEventListener('mousemove', handleMouseMove);
+                    window.removeEventListener('mouseup', handleMouseUp);
+                };
+
+                window.addEventListener('mousemove', handleMouseMove);
+                window.addEventListener('mouseup', handleMouseUp);
+            }, [isExploded]);
+
+            const handlePump = useCallback(() => {
+                if (isExploded || numMolecules >= MAX_MOLECULES) return;
+                setNumMolecules(prev => Math.min(prev + 10, MAX_MOLECULES));
+            }, [isExploded, numMolecules]);
+
+
+            // Visuell representation av temperatur (färg)
+            const tempColor = `rgb(
+                ${255 * ((temperature - MIN_TEMP) / (MAX_TEMP - MIN_TEMP))},
+                80,
+                ${255 * (1 - (temperature - MIN_TEMP) / (MAX_TEMP - MIN_TEMP))}
+            )`;
+
+            // Visuell representation av tryck
+            const pressurePercentage = Math.min((pressure / MAX_PRESSURE) * 100, 100);
+            const pressureColor = pressurePercentage > 85 ? '#ef4444' : pressurePercentage > 60 ? '#f59e0b' : '#10b981';
+
+            return (
+                <div style={styles.appContainer}>
+                    <style>
+                        {`
+                        @keyframes explode {
+                            0% { transform: scale(1); opacity: 1; }
+                            100% { transform: scale(1.5); opacity: 0; }
+                        }
+                        @keyframes fly-top {
+                            to { transform: translateY(-150px) rotate(-20deg); opacity: 0; }
+                        }
+                        @keyframes fly-bottom {
+                            to { transform: translateY(150px) rotate(20deg); opacity: 0; }
+                        }
+                        @keyframes fly-left {
+                            to { transform: translateX(-150px) rotate(-20deg); opacity: 0; }
+                        }
+                        @keyframes fly-right {
+                            to { transform: translateX(150px) rotate(20deg); opacity: 0; }
+                        }
+
+                        .wall {
+                            position: absolute;
+                            background-color: var(--border-color);
+                        }
+                        .top-wall { top: -2px; left: -2px; right: -2px; height: 2px; }
+                        .bottom-wall { bottom: -2px; left: -2px; right: -2px; height: 2px; }
+                        .left-wall { top: -2px; bottom: -2px; left: -2px; width: 2px; }
+                        .right-wall { top: -2px; bottom: -2px; right: -2px; width: 2px; }
+
+                        .wall.exploded {
+                            background-color: #ef4444; /* Flash red */
+                        }
+                        .top-wall.exploded    { animation: fly-top 0.7s ease-out forwards; }
+                        .bottom-wall.exploded { animation: fly-bottom 0.7s ease-out forwards; }
+                        .left-wall.exploded   { animation: fly-left 0.7s ease-out forwards; }
+                        .right-wall.exploded  { animation: fly-right 0.7s ease-out forwards; }
+
+                        `}
+                    </style>
+                    <h1 style={styles.title}>Ideala gaslagen</h1>
+                    <p style={styles.formula}><span style={{letterSpacing: '-0.2em'}}>p · V = n · R · T</span></p>
+                    <p style={styles.subFormula}>För en given mängd gas:</p>
+                    <p style={styles.subFormula}>
+                        <span style={{display: 'inline-flex', alignItems: 'center', margin: '0 0.5rem'}}>
+                            <span style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                <span style={{fontWeight: 'bold', borderBottom: '2px solid #475569', paddingBottom: '2px', letterSpacing: '-0.2em'}}>p · V</span>
+                                <span style={{fontWeight: 'bold', paddingTop: '2px', letterSpacing: '-0.2em'}}>T</span>
+                            </span>
+                            <span style={{margin: '0 0.3rem', fontWeight: 'bold'}}>=</span>
+                            <span style={{fontWeight: 'bold'}}>konstant</span>
+                        </span>
+                    </p>
+                    <p style={styles.subFormula}>eller</p>
+                    <p style={styles.subFormula}>
+                        <span style={{display: 'inline-flex', alignItems: 'center', margin: '0 0.5rem'}}>
+                            <span style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                <span style={{fontWeight: 'bold', borderBottom: '2px solid #475569', paddingBottom: '2px', letterSpacing: '-0.2em'}}>p₁ · V₁</span>
+                                <span style={{fontWeight: 'bold', paddingTop: '2px', letterSpacing: '-0.2em'}}>T₁</span>
+                            </span>
+                            <span style={{margin: '0 0.3rem', fontWeight: 'bold'}}>=</span>
+                            <span style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                <span style={{fontWeight: 'bold', borderBottom: '2px solid #475569', paddingBottom: '2px', letterSpacing: '-0.2em'}}>p₂ · V₂</span>
+                                <span style={{fontWeight: 'bold', paddingTop: '2px', letterSpacing: '-0.2em'}}>T₂</span>
+                            </span>
+                        </span>
+                    </p>
+
+                    <div style={styles.explanationContainer}>
+                        <div
+                            style={styles.explanationHeader}
+                            onClick={() => setIsExplanationVisible(!isExplanationVisible)}
+                            role="button"
+                            aria-expanded={isExplanationVisible}
+                            aria-controls="explanation-content"
+                            tabIndex={0}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsExplanationVisible(!isExplanationVisible)}}
+                        >
+                            <span>Vad betyder formeln?</span>
+                            <span style={{...styles.explanationIcon, transform: isExplanationVisible ? 'rotate(180deg)' : 'rotate(0deg)'}}>
+                                ▾
+                            </span>
+                        </div>
+                        <div id="explanation-content" style={{
+                            ...styles.explanationContent,
+                            maxHeight: isExplanationVisible ? '350px' : '0px',
+                            paddingTop: isExplanationVisible ? '1rem' : '0',
+                            paddingBottom: isExplanationVisible ? '1rem' : '0',
+                            paddingLeft: '1rem',
+                            paddingRight: '1rem',
+                            borderTop: isExplanationVisible ? '1px solid var(--border-color)' : 'none',
+                        }}>
+                            <p>Den ideala gaslagen beskriver sambandet mellan tryck, volym, temperatur och mängden gas. Den andra formeln ovan är användbar för att jämföra ett gastillstånd med ett annat när mängden gas är konstant.</p>
+                            <p>Här är vad variablerna i grundformeln betyder:</p>
+                            <ul style={styles.explanationList}>
+                                <li style={styles.explanationListItem}><strong>p (Tryck):</strong> Kraften som gaspartiklarna utövar på behållarens väggar. Mäts i atmosfärer (atm) och kilopascal (kPa).</li>
+                                <li style={styles.explanationListItem}><strong>V (Volym):</strong> Utrymmet som gasen upptar. Mäts i liter (L).</li>
+                                <li style={styles.explanationListItem}><strong>n (Antal molekyler):</strong> Ett mått på mängden gas. I simuleringen är detta antalet partiklar.</li>
+                                <li style={styles.explanationListItem}><strong>R (Gaskonstanten):</strong> En proportionalitetskonstant. I denna simulering är värdet 0.0821 (L·atm)/(mol·K).</li>
+                                <li style={styles.explanationListItem}><strong>T (Temperatur):</strong> Ett mått på gaspartiklarnas genomsnittliga rörelseenergi. Mäts i Kelvin (K).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style={styles.mainLayout} className="main-layout-responsive">
+                        <div ref={simulationAreaRef} style={styles.simulationArea} className="simulation-area-responsive">
+                             <GasPump onPump={handlePump} disabled={isExploded || numMolecules >= MAX_MOLECULES} />
+                            <div
+                                ref={containerRef}
+                                className="gas-container-responsive"
+                                style={{
+                                    ...styles.gasContainer,
+                                    width: `${50 + (volume - MIN_VOLUME) / (MAX_VOLUME - MIN_VOLUME) * 50}%`,
+                                    backgroundColor: `rgba(${parseInt(tempColor.slice(4, -1).split(',')[0])}, ${parseInt(tempColor.slice(4, -1).split(',')[1])}, ${parseInt(tempColor.slice(4, -1).split(',')[2])}, 0.1)`,
+                                    border: '2px solid var(--border-color)',
+                                    borderColor: isExploded ? 'transparent' : 'var(--border-color)',
+                                }}
+                            >
+                                 <div className={`wall top-wall ${isExploded ? 'exploded' : ''}`}></div>
+                                 <div className={`wall bottom-wall ${isExploded ? 'exploded' : ''}`}></div>
+                                 <div className={`wall left-wall ${isExploded ? 'exploded' : ''}`}></div>
+                                 <div className={`wall right-wall ${isExploded ? 'exploded' : ''}`}></div>
+                                 {!isExploded ? (
+                                    <>
+                                        <Thermometer
+                                            temperature={temperature}
+                                            minTemp={MIN_TEMP}
+                                            maxTemp={MAX_TEMP}
+                                            onTemperatureChange={setTemperature}
+                                            isExploded={isExploded}
+                                        />
+                                        {Array.from({ length: numMolecules }).map((_, i) => (
+                                            <div
+                                                key={i}
+                                                ref={el => (moleculeElementsRef.current[i] = el)}
+                                                style={{
+                                                    width: `${MOLECULE_SIZE}px`,
+                                                    height: `${MOLECULE_SIZE}px`,
+                                                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                                                    borderRadius: '50%',
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    left: 0,
+                                                    willChange: 'transform', // Performance optimization
+                                                }}
+                                            />
+                                        ))}
+                                        <div onMouseDown={handleContainerResize} style={styles.resizeHandle}>
+                                            <div style={styles.handleDot}></div>
+                                            <div style={styles.handleDot}></div>
+                                            <div style={styles.handleDot}></div>
+                                            <div style={styles.handleDot}></div>
+                                            <div style={styles.handleDot}></div>
+                                        </div>
+                                    </>
+                                ) : <div style={styles.explosionText}>💥 EXPLOSION! 💥</div>}
+                            </div>
+                        </div>
+
+                        <div style={styles.controlsArea}>
+                            <div style={styles.pressureGauge}>
+                                <h2 style={styles.gaugeTitle}>Tryck</h2>
+                                <div style={styles.gaugeBarContainer}>
+                                     <div style={{ ...styles.gaugeBar, width: `${pressurePercentage}%`, backgroundColor: pressureColor }}></div>
+                                </div>
+                                <p style={styles.gaugeValue}>{formatNumber(pressure, 2)} atm / {Math.round(pressure * 101.325)} kPa</p>
+                                 {pressure > MAX_PRESSURE && <p style={{color: '#ef4444', fontWeight: 'bold'}}>FÖR HÖGT TRYCK!</p>}
+                            </div>
+
+                            <div style={styles.controlGroup}>
+                                <label htmlFor="molecules" style={styles.label}>Antal molekyler (n): {numMolecules}</label>
+                                 <input
+                                    type="range"
+                                    id="molecules"
+                                    min={MIN_MOLECULES}
+                                    max={MAX_MOLECULES}
+                                    value={numMolecules}
+                                    onChange={(e) => setNumMolecules(Number(e.target.value))}
+                                    disabled={isExploded}
+                                    style={styles.slider}
+                                />
+                            </div>
+
+                            <div style={styles.controlGroup}>
+                                <label htmlFor="temperature" style={styles.label}>Temperatur (T): {temperature} K / {formatNumber(temperature - 273.15)}°C</label>
+                                <input
+                                    type="range"
+                                    id="temperature"
+                                    min={MIN_TEMP}
+                                    max={MAX_TEMP}
+                                    value={temperature}
+                                    onChange={(e) => setTemperature(Number(e.target.value))}
+                                    disabled={isExploded}
+                                    style={{ ...styles.slider, '--thumb-color': tempColor }}
+                                />
+                            </div>
+
+                            <div style={styles.controlGroup}>
+                                <label htmlFor="volume" style={styles.label}>Volym (V): {formatNumber(volume)} L</label>
+                                <input
+                                    type="range"
+                                    id="volume"
+                                    min={MIN_VOLUME}
+                                    max={MAX_VOLUME}
+                                    step="0.5"
+                                    value={volume}
+                                    onChange={(e) => setVolume(Number(e.target.value))}
+                                    disabled={isExploded}
+                                    style={styles.slider}
+                                />
+                            </div>
+
+                            <button onClick={resetSimulation} style={styles.resetButton}>
+                                Återställ simulering
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // CSS-in-JS stilar
+        const styles = {
+            appContainer: {
+                backgroundColor: 'var(--container-bg)',
+                borderRadius: '16px',
+                padding: '2rem',
+                boxShadow: '0 10px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color)',
+                width: '100%',
+            },
+            title: {
+                textAlign: 'center',
+                color: 'var(--text-color)',
+                marginBottom: '0.5rem',
+                fontSize: '2rem',
+                fontWeight: '600',
+            },
+            formula: {
+                textAlign: 'center',
+                fontSize: '1.5rem',
+                fontFamily: `'Menlo', 'Monaco', 'Courier New', monospace`,
+                color: 'var(--primary-color)',
+                fontWeight: 'bold',
+                margin: '0 0 0.5rem 0',
+            },
+            subFormula: {
+                textAlign: 'center',
+                fontSize: '1rem',
+                fontFamily: `'Menlo', 'Monaco', 'Courier New', monospace`,
+                color: '#475569',
+                margin: '-0.25rem 0 1.5rem 0',
+            },
+            mainLayout: {
+                display: 'grid',
+                gridTemplateColumns: '2fr 1fr',
+                gap: '2rem',
+                alignItems: 'center',
+            },
+            simulationArea: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '400px',
+                position: 'relative',
+                marginTop: '50px',
+            },
+            gasContainer: {
+                position: 'relative',
+                height: '400px',
+                borderRadius: '8px',
+                transition: 'background-color 0.3s ease, border-color 0.3s ease',
+                overflow: 'visible',
+            },
+            resizeHandle: {
+                position: 'absolute',
+                right: '-13px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: '26px',
+                height: '100px',
+                backgroundColor: '#f3f4f6',
+                border: '1px solid #d1d5db',
+                borderRadius: '6px',
+                cursor: 'col-resize',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                zIndex: 10,
+            },
+            handleDot: {
+                width: '4px',
+                height: '4px',
+                backgroundColor: '#6b7280',
+                borderRadius: '50%',
+            },
+            explosionText: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%',
+                fontSize: '2.5rem',
+                fontWeight: 'bold',
+                color: '#ef4444',
+                animation: 'explode 0.5s 0.2s ease-out forwards',
+                overflow: 'hidden',
+            },
+            controlsArea: {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.5rem',
+                padding: '1.5rem',
+                backgroundColor: 'var(--bg-color)',
+                borderRadius: '12px',
+            },
+            pressureGauge: {
+              textAlign: 'center',
+              padding: '1rem',
+              backgroundColor: '#fff',
+              borderRadius: '8px',
+              boxShadow: '0 2px 4px var(--shadow-color)'
+            },
+            gaugeTitle: {
+              margin: '0 0 0.5rem 0',
+              fontSize: '1.2rem',
+              fontWeight: '500',
+            },
+            gaugeBarContainer: {
+              width: '100%',
+              height: '20px',
+              backgroundColor: '#e5e7eb',
+              borderRadius: '10px',
+              overflow: 'hidden',
+            },
+            gaugeBar: {
+              height: '100%',
+              borderRadius: '10px',
+              transition: 'width 0.2s ease, background-color 0.2s ease',
+            },
+            gaugeValue: {
+              marginTop: '0.5rem',
+              fontSize: '1rem',
+              fontWeight: '600',
+            },
+            controlGroup: {
+                display: 'flex',
+                flexDirection: 'column',
+            },
+            label: {
+                marginBottom: '0.5rem',
+                fontSize: '0.9rem',
+                color: '#475569',
+            },
+            slider: {
+                width: '100%',
+                cursor: 'pointer',
+            },
+            resetButton: {
+                padding: '0.75rem 1rem',
+                fontSize: '1rem',
+                fontWeight: '500',
+                color: '#fff',
+                backgroundColor: 'var(--primary-color)',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'background-color 0.2s ease',
+                marginTop: '1rem',
+            },
+            thermometer: {
+                position: 'absolute',
+                top: '1rem',
+                left: '1rem',
+                width: '40px',
+                height: '150px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                zIndex: 5,
+            },
+            thermometerInteractiveArea: {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            },
+            thermometerTube: {
+                width: '14px',
+                height: '100px',
+                border: '2px solid #4b5563',
+                borderRadius: '10px 10px 0 0',
+                backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                position: 'relative',
+                overflow: 'hidden',
+            },
+            thermometerMercury: {
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
+            },
+            thermometerBulb: {
+                width: '24px',
+                height: '24px',
+                border: '2px solid #4b5563',
+                borderRadius: '50%',
+                position: 'relative',
+                top: '-2px',
+            },
+            thermometerReading: {
+                marginTop: '8px',
+                padding: '2px 6px',
+                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                borderRadius: '4px',
+                fontSize: '0.8rem',
+                fontWeight: '600',
+                color: '#1e293b',
+                whiteSpace: 'nowrap',
+            },
+            pumpContainer: {
+                position: 'absolute',
+                top: '-50px', // Position above the container
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '80px',
+                height: '80px',
+                zIndex: 20,
+            },
+            pumpBody: {
+                position: 'absolute',
+                bottom: '20px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '20px',
+                height: '60px',
+                backgroundColor: '#9ca3af',
+                border: '2px solid #4b5563',
+                borderRadius: '4px 4px 0 0',
+            },
+            pumpNozzle: {
+                position: 'absolute',
+                bottom: '-10px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '30px',
+                height: '10px',
+                backgroundColor: '#6b7280',
+                borderRadius: '3px',
+            },
+            pumpHandle: {
+                position: 'absolute',
+                top: '0',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: '80px',
+                height: '20px',
+                backgroundColor: '#ef4444',
+                border: '2px solid #7f1d1d',
+                borderRadius: '5px',
+                transition: 'top 0.15s ease-in-out',
+            },
+            pumpHandlePumping: {
+                top: '40px',
+            },
+            explanationContainer: {
+                backgroundColor: 'var(--bg-color)',
+                borderRadius: '8px',
+                marginBottom: '2rem',
+                border: '1px solid var(--border-color)',
+                overflow: 'hidden',
+                transition: 'box-shadow 0.3s ease',
+            },
+            explanationHeader: {
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '1rem',
+                cursor: 'pointer',
+                fontWeight: 500,
+                userSelect: 'none',
+            },
+            explanationIcon: {
+                transition: 'transform 0.3s ease',
+                fontSize: '1.2rem',
+            },
+            explanationContent: {
+                overflow: 'hidden',
+                transition: 'max-height 0.3s ease-out, padding 0.3s ease-out, border-top 0.3s ease-out',
+                color: '#475569',
+            },
+            explanationList: {
+                paddingLeft: '20px',
+                lineHeight: 1.6,
+                margin: 0,
+            },
+            explanationListItem: {
+                marginBottom: '0.5rem',
+            },
+        };
+
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<GasSim />);
+    </script>
+</body>
+</html>

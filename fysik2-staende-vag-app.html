@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stående våg i sträng - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useCallback, useRef, useEffect, useId } = React;
+
+        const Slider = ({ label, min, max, step, value, onChange, unit }) => {
+            const displayValue = (step < 1 ? value.toFixed(1) : value.toFixed(0)).replace('.', ',');
+
+            return (
+                <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                        <label className="text-sm font-medium text-gray-300">{label}</label>
+                        <span className="text-sm font-mono bg-gray-700 text-cyan-300 px-2 py-1 rounded">
+                            {displayValue} {unit}
+                        </span>
+                    </div>
+                    <input
+                        type="range"
+                        min={min}
+                        max={max}
+                        step={step}
+                        value={value}
+                        onChange={onChange}
+                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer
+                                   [&::-webkit-slider-thumb]:appearance-none
+                                   [&::-webkit-slider-thumb]:w-5
+                                   [&::-webkit-slider-thumb]:h-5
+                                   [&::-webkit-slider-thumb]:rounded-full
+                                   [&::-webkit-slider-thumb]:bg-cyan-400
+                                   [&::-webkit-slider-thumb]:transition-shadow
+                                   [&::-webkit-slider-thumb]:shadow-md
+                                   [&::-webkit-slider-thumb]:shadow-cyan-500/30
+                                   [&::-webkit-slider-thumb]:hover:shadow-lg
+                                   [&::-webkit-slider-thumb]:hover:shadow-cyan-500/50
+                                   [&::-moz-range-thumb]:w-5
+                                   [&::-moz-range-thumb]:h-5
+                                   [&::-moz-range-thumb]:rounded-full
+                                   [&::-moz-range-thumb]:border-none
+                                   [&::-moz-range-thumb]:bg-cyan-400"
+                    />
+                </div>
+            );
+        };
+
+        const WaveDisplay = ({ length, frequency, waveSpeed, mass, amplitudeScale }) => {
+            const SVG_WIDTH = 1000;
+            const SVG_HEIGHT = 400;
+            const MAX_AMPLITUDE_PX = 180;
+            const NUM_POINTS = 200;
+
+            const pathRef = useRef(null);
+            const vibratorRodRef = useRef(null);
+            const [nodes, setNodes] = useState([]);
+            const animationFrameId = useRef(0);
+            const startTime = useRef(performance.now());
+
+            const fundamentalFrequency = waveSpeed / (2 * length);
+            const harmonicMatch = frequency > 0 && isFinite(fundamentalFrequency) ? frequency / fundamentalFrequency : 0;
+            const harmonic = Math.round(harmonicMatch);
+
+            const isResonant = Math.abs(harmonicMatch - harmonic) < 0.05 && harmonic > 0;
+
+            useEffect(() => {
+                const nodePositions = [];
+                if (harmonic > 0 && isResonant) {
+                    for (let i = 0; i <= harmonic; i++) {
+                        nodePositions.push({
+                            x: (i / harmonic) * SVG_WIDTH,
+                            y: SVG_HEIGHT / 2
+                        });
+                    }
+                }
+                setNodes(nodePositions);
+            }, [isResonant, harmonic]);
+
+            useEffect(() => {
+                startTime.current = performance.now();
+
+                const animate = (timestamp) => {
+                    if (!pathRef.current || !vibratorRodRef.current) {
+                        animationFrameId.current = requestAnimationFrame(animate);
+                        return;
+                    }
+
+                    const elapsedTime = (timestamp - startTime.current) / 1000;
+                    const y_driver_offset = (8 * amplitudeScale) * Math.cos(2 * Math.PI * frequency * elapsedTime);
+
+                    const resonanceFactor = Math.max(0, 1 - 20 * Math.abs(harmonicMatch - harmonic));
+                    const effectiveAmplitude = (MAX_AMPLITUDE_PX * amplitudeScale) * resonanceFactor;
+
+                    let pathData = `M 0,${(SVG_HEIGHT / 2) - y_driver_offset}`;
+
+                    if (frequency > 0.05) {
+                        for (let i = 1; i <= NUM_POINTS; i++) {
+                            const x_ratio = i / NUM_POINTS;
+                            const x_physics = x_ratio * length;
+                            const x_svg = x_ratio * SVG_WIDTH;
+
+                            const sin_term = Math.sin((harmonic * Math.PI / length) * x_physics);
+                            const cos_term = Math.cos(2 * Math.PI * frequency * elapsedTime);
+                            const y_standing_wave_px = sin_term * cos_term * effectiveAmplitude;
+
+                            const flutterAmplitudePx = 4.0;
+                            const pinFactor = Math.sin(x_ratio * Math.PI);
+                            const flutter_wave1 = Math.sin(elapsedTime * 15 + x_ratio * 10);
+                            const flutter_wave2 = Math.cos(elapsedTime * 27 - x_ratio * 5);
+                            const y_irregular_flutter_px = (flutter_wave1 * 0.6 + flutter_wave2 * 0.4) * pinFactor * flutterAmplitudePx * (1 - resonanceFactor);
+
+                            const total_y_offset_from_centerline = y_standing_wave_px + y_irregular_flutter_px;
+                            const driver_influence = y_driver_offset * (1 - x_ratio);
+                            const total_y_offset_px = total_y_offset_from_centerline + driver_influence;
+
+                            const y_svg = (SVG_HEIGHT / 2) - total_y_offset_px;
+                            pathData += ` L ${x_svg.toFixed(2)},${y_svg.toFixed(2)}`;
+                        }
+                    } else {
+                        pathData += ` L ${SVG_WIDTH},${SVG_HEIGHT / 2}`;
+                    }
+
+                    pathRef.current.setAttribute('d', pathData);
+
+                    const rodY2 = (SVG_HEIGHT / 2) - y_driver_offset;
+                    vibratorRodRef.current.setAttribute('y2', rodY2.toString());
+
+                    animationFrameId.current = requestAnimationFrame(animate);
+                };
+
+                animationFrameId.current = requestAnimationFrame(animate);
+
+                return () => {
+                    cancelAnimationFrame(animationFrameId.current);
+                };
+            }, [length, frequency, waveSpeed, harmonic, harmonicMatch, amplitudeScale]);
+
+            const waveColor = isResonant ? 'stroke-cyan-400' : 'stroke-cyan-600';
+            const waveGlowId = 'wave-glow';
+
+            const MIN_MASS_KG = 0.01;
+            const MAX_MASS_KG = 0.3;
+            const MIN_WEIGHT_SIDE = 20;
+            const MAX_WEIGHT_SIDE = 50;
+            const massRatio = Math.max(0, Math.min(1, (mass - MIN_MASS_KG) / (MAX_MASS_KG - MIN_MASS_KG)));
+            const weightSide = MIN_WEIGHT_SIDE + massRatio * (MAX_WEIGHT_SIDE - MIN_WEIGHT_SIDE);
+
+            const PULLEY_RADIUS = 25;
+            const PULLEY_CENTER_X = SVG_WIDTH;
+            const PULLEY_CENTER_Y = SVG_HEIGHT / 2 + PULLEY_RADIUS;
+            const STRING_HANG_LENGTH = 80;
+            const WEIGHT_TOP_Y = PULLEY_CENTER_Y + STRING_HANG_LENGTH;
+            const WEIGHT_WIDTH = weightSide;
+            const WEIGHT_HEIGHT = weightSide;
+
+            return (
+                <div className="relative">
+                    <svg viewBox={`-60 0 ${SVG_WIDTH + 120} ${SVG_HEIGHT}`} className="w-full h-auto" aria-hidden="true">
+                        <defs>
+                            <filter id={waveGlowId} x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur"></feGaussianBlur>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"></feMergeNode>
+                                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <line x1="0" y1={SVG_HEIGHT / 2} x2={SVG_WIDTH} y2={SVG_HEIGHT / 2} className="stroke-gray-600" strokeDasharray="5,5" />
+
+                        <path
+                            ref={pathRef}
+                            d={`M 0,${SVG_HEIGHT / 2} L ${SVG_WIDTH},${SVG_HEIGHT / 2}`}
+                            className={`${waveColor} transition-colors duration-300`}
+                            strokeWidth="3"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            style={{ filter: isResonant ? `url(#${waveGlowId})` : 'none' }}
+                        />
+
+                        {nodes.map((node, index) => (
+                            <circle
+                                key={index}
+                                cx={node.x}
+                                cy={node.y}
+                                r="6"
+                                className="fill-red-500"
+                            />
+                        ))}
+
+                        <g id="vibrator">
+                            <rect x="-25" y={SVG_HEIGHT / 2 + 10} width="50" height="50" rx="5" className="fill-gray-600" stroke="#2d3748" strokeWidth="2" />
+                            <rect x="-10" y={SVG_HEIGHT / 2 - 20} width="20" height="35" rx="3" className="fill-gray-700" />
+                            <line ref={vibratorRodRef} x1="0" y1={SVG_HEIGHT / 2 + 15} x2="0" y2={SVG_HEIGHT / 2} className="stroke-gray-400" strokeWidth="8" strokeLinecap="round" />
+                        </g>
+
+                        <g id="pulley-system">
+                            <path
+                                d={`M ${SVG_WIDTH}, ${SVG_HEIGHT / 2}
+                                    A ${PULLEY_RADIUS} ${PULLEY_RADIUS} 0 0 1 ${SVG_WIDTH + PULLEY_RADIUS} ${PULLEY_CENTER_Y}
+                                    L ${SVG_WIDTH + PULLEY_RADIUS} ${WEIGHT_TOP_Y}`}
+                                className={`${waveColor} transition-colors duration-300`}
+                                strokeWidth="3"
+                                fill="none"
+                                strokeLinecap="round"
+                            />
+
+                            <g>
+                                <circle cx={PULLEY_CENTER_X} cy={PULLEY_CENTER_Y} r={PULLEY_RADIUS} className="fill-gray-600" stroke="#2d3748" strokeWidth="2" />
+                                <circle cx={PULLEY_CENTER_X} cy={PULLEY_CENTER_Y} r={PULLEY_RADIUS-5} className="fill-none" stroke="#2d3748" strokeWidth="1.5" strokeDasharray="3 3"/>
+                                <circle cx={PULLEY_CENTER_X} cy={PULLEY_CENTER_Y} r="4" className="fill-gray-800" />
+                            </g>
+
+                            <rect
+                                x={SVG_WIDTH + PULLEY_RADIUS - (WEIGHT_WIDTH / 2)}
+                                y={WEIGHT_TOP_Y}
+                                width={WEIGHT_WIDTH}
+                                height={WEIGHT_HEIGHT}
+                                rx="4"
+                                className="fill-gray-500 transition-all duration-200"
+                                stroke="#2d3748"
+                                strokeWidth="2"
+                            />
+                        </g>
+                    </svg>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [frequency, setFrequency] = useState(5.0);
+            const [amplitudeScale, setAmplitudeScale] = useState(1.0);
+            const [length, setLength] = useState(5.0);
+            const [mass, setMass] = useState(0.15);
+            const [isAudioOn, setIsAudioOn] = useState(false);
+
+            const LINEAR_DENSITY = 0.002;
+            const GRAVITY = 9.81;
+
+            const tension = mass * GRAVITY;
+            const waveSpeed = Math.sqrt(tension / LINEAR_DENSITY);
+
+            const audioContextRef = useRef(null);
+            const oscillatorRef = useRef(null);
+            const gainNodeRef = useRef(null);
+            const humOscillatorRef = useRef(null);
+            const humGainNodeRef = useRef(null);
+
+            const fundamentalFrequency = waveSpeed / (2 * length);
+            const harmonicMatch = frequency / fundamentalFrequency;
+            const harmonic = Math.round(harmonicMatch);
+            const isResonant = Math.abs(harmonicMatch - harmonic) < 0.05 && harmonic > 0 && isFinite(fundamentalFrequency);
+
+            const handleFrequencyChange = useCallback((e) => {
+                setFrequency(parseFloat(e.target.value));
+            }, []);
+
+            const handleAmplitudeScaleChange = useCallback((e) => {
+                setAmplitudeScale(parseFloat(e.target.value));
+            }, []);
+
+            const handleLengthChange = useCallback((e) => {
+                setLength(parseFloat(e.target.value));
+            }, []);
+
+            const handleMassChange = useCallback((e) => {
+                setMass(parseFloat(e.target.value) / 1000);
+            }, []);
+
+            const handlePresetClick = (harmonicNumber) => {
+                if (!isFinite(fundamentalFrequency)) return;
+                const newFrequency = fundamentalFrequency * harmonicNumber;
+                const maxFrequency = 50;
+                const clampedFrequency = Math.max(0.1, Math.min(maxFrequency, newFrequency));
+                setFrequency(clampedFrequency);
+            };
+
+            const handleToggleAudio = () => {
+                if (!audioContextRef.current) {
+                    try {
+                        const context = new (window.AudioContext || window.webkitAudioContext)();
+
+                        const oscillator = context.createOscillator();
+                        const gainNode = context.createGain();
+                        oscillator.type = 'sine';
+                        oscillator.frequency.setValueAtTime(frequency, context.currentTime);
+                        gainNode.gain.setValueAtTime(0, context.currentTime);
+                        oscillator.connect(gainNode);
+                        gainNode.connect(context.destination);
+                        oscillator.start();
+
+                        const humOscillator = context.createOscillator();
+                        const humGainNode = context.createGain();
+                        humOscillator.type = 'sine';
+                        humOscillator.frequency.setValueAtTime(60, context.currentTime);
+                        humGainNode.gain.setValueAtTime(0, context.currentTime);
+                        humOscillator.connect(humGainNode);
+                        humGainNode.connect(context.destination);
+                        humOscillator.start();
+
+                        audioContextRef.current = context;
+                        oscillatorRef.current = oscillator;
+                        gainNodeRef.current = gainNode;
+                        humOscillatorRef.current = humOscillator;
+                        humGainNodeRef.current = humGainNode;
+
+                    } catch (e) {
+                        console.error("Web Audio API is not supported in this browser", e);
+                        return;
+                    }
+                }
+
+                if (audioContextRef.current.state === 'suspended') {
+                    audioContextRef.current.resume();
+                }
+
+                setIsAudioOn(current => !current);
+            };
+
+            useEffect(() => {
+                const audioCtx = audioContextRef.current;
+                const gainNode = gainNodeRef.current;
+                const oscillator = oscillatorRef.current;
+                const humGainNode = humGainNodeRef.current;
+
+                if (!audioCtx || !gainNode || !oscillator || !humGainNode) return;
+
+                if (isAudioOn) {
+                    oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.1, audioCtx.currentTime + 0.1);
+
+                    const baseHumVolume = 0.02;
+                    const resonantHumVolume = 0.04;
+                    const targetHumVolume = isResonant ? resonantHumVolume : baseHumVolume;
+                    humGainNode.gain.exponentialRampToValueAtTime(targetHumVolume, audioCtx.currentTime + 0.1);
+
+                } else {
+                    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.1);
+                    humGainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.1);
+                }
+            }, [isAudioOn, frequency, isResonant]);
+
+            useEffect(() => {
+                return () => {
+                    if (audioContextRef.current) {
+                        audioContextRef.current.close().catch(console.error);
+                    }
+                };
+            }, []);
+
+            return (
+                <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4 font-sans antialiased">
+                    <div className="w-full max-w-4xl bg-gray-800 rounded-xl shadow-2xl p-6 md:p-8 space-y-6 border border-gray-700">
+                        <header className="text-center">
+                            <h1 className="text-3xl md:text-4xl font-bold text-cyan-400">Stående våg i sträng</h1>
+                            <p className="text-gray-400 mt-2">Utforska resonans genom att justera frekvens, amplitud, stränglängd och spännkraft (via massan).</p>
+                        </header>
+
+                        <main className="space-y-8">
+                            <div className="bg-gray-900/50 rounded-lg p-4">
+                                <WaveDisplay
+                                    length={length}
+                                    frequency={frequency}
+                                    waveSpeed={waveSpeed}
+                                    mass={mass}
+                                    amplitudeScale={amplitudeScale}
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                                <div className="bg-gray-900/50 rounded-lg p-6 space-y-6 h-full flex flex-col justify-center">
+                                    <div>
+                                        <Slider
+                                            label="Frekvens"
+                                            min={0.1}
+                                            max={50}
+                                            step={0.1}
+                                            value={frequency}
+                                            onChange={handleFrequencyChange}
+                                            unit="Hz"
+                                        />
+                                        <div className="mt-3">
+                                            <label className="text-xs font-medium text-gray-400 mb-2 block">Snabbval:</label>
+                                            <div className="flex flex-wrap gap-2">
+                                                {[1, 2, 3, 4, 5, 6].map((n) => {
+                                                    const isActive = isResonant && harmonic === n;
+                                                    const calculatedFreq = fundamentalFrequency * n;
+                                                    const isBeyondMax = calculatedFreq > 50;
+                                                    const isDisabled = !isFinite(fundamentalFrequency) || isBeyondMax;
+
+                                                    return (
+                                                        <button
+                                                            key={n}
+                                                            onClick={() => handlePresetClick(n)}
+                                                            disabled={isDisabled}
+                                                            title={isDisabled ? (isBeyondMax ? `Kräver ${calculatedFreq.toFixed(1)} Hz` : `Beräkna grundfrekvens först`) : `${calculatedFreq.toFixed(2).replace('.',',')} Hz`}
+                                                            className={`px-3 py-1 text-xs rounded-md transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                                                                isActive
+                                                                    ? 'bg-cyan-500 text-white font-semibold shadow-md shadow-cyan-500/30'
+                                                                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                                                            } ${
+                                                                isDisabled ? 'opacity-50 cursor-not-allowed' : ''
+                                                            }`}
+                                                        >
+                                                            {n === 1 ? 'Grundton' : `${n - 1}:a`}
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <Slider
+                                        label="Amplitud"
+                                        min={0.1}
+                                        max={1.5}
+                                        step={0.1}
+                                        value={amplitudeScale}
+                                        onChange={handleAmplitudeScaleChange}
+                                        unit="x"
+                                    />
+                                    <Slider
+                                        label="Stränglängd"
+                                        min={1}
+                                        max={10}
+                                        step={0.1}
+                                        value={length}
+                                        onChange={handleLengthChange}
+                                        unit="m"
+                                    />
+                                    <Slider
+                                        label="Massa"
+                                        min={10}
+                                        max={300}
+                                        step={1}
+                                        value={mass * 1000}
+                                        onChange={handleMassChange}
+                                        unit="g"
+                                    />
+                                </div>
+                                <div className="bg-gray-900/50 rounded-lg p-6 text-center h-full flex flex-col justify-center">
+                                    <div className="flex items-center justify-center gap-3 mb-2">
+                                        <h3 className="text-lg font-semibold text-gray-300">Systemstatus</h3>
+                                        <button
+                                            onClick={handleToggleAudio}
+                                            className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-gray-900"
+                                            aria-label={isAudioOn ? "Stäng av ljudet" : "Sätt på ljudet"}
+                                            aria-pressed={isAudioOn}
+                                        >
+                                            {isAudioOn ? (
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-cyan-400" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM14.657 2.929a1 1 0 011.414 0A9.972 9.972 0 0119 10a9.972 9.972 0 01-2.929 7.071 1 1 0 01-1.414-1.414A7.971 7.971 0 0017 10c0-2.21-.894-4.208-2.343-5.657a1 1 0 010-1.414zm-2.829 2.828a1 1 0 011.415 0A5.983 5.983 0 0115 10a5.984 5.984 0 01-1.757 4.243 1 1 0 01-1.415-1.415A3.984 3.984 0 0013 10a3.983 3.983 0 00-1.172-2.828 1 1 0 010-1.415z" clipRule="evenodd" />
+                                                </svg>
+                                            ) : (
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fillRule="evenodd" d="M9.383 3.076A1 1 0 0110 4v12a1 1 0 01-1.707.707L4.586 13H2a1 1 0 01-1-1V8a1 1 0 011-1h2.586l3.707-3.707a1 1 0 011.09-.217zM12.293 7.293a1 1 0 011.414 0L15 8.586l1.293-1.293a1 1 0 111.414 1.414L16.414 10l1.293 1.293a1 1 0 01-1.414 1.414L15 11.414l-1.293 1.293a1 1 0 01-1.414-1.414L13.586 10l-1.293-1.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                </svg>
+                                            )}
+                                        </button>
+                                    </div>
+                                    <p className="text-2xl font-mono text-white mt-0 h-8">
+                                        {isResonant ? `${harmonic}. övertonen` : 'Ingen resonans'}
+                                    </p>
+                                    <p className={`mt-2 text-sm ${isResonant ? 'text-cyan-400' : 'text-gray-500'} transition-colors duration-300`}>
+                                        {isResonant ? 'Perfekt stående våg!' : 'Justera för att hitta en resonansfrekvens.'}
+                                    </p>
+                                    <p className="text-xs text-gray-500 mt-4">
+                                        Grundfrekvens: {isFinite(fundamentalFrequency) ? fundamentalFrequency.toFixed(2).replace('.', ',') : '...'} Hz
+                                    </p>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                    <footer className="text-center text-gray-600 mt-8 text-sm">
+                        Skapad med React, TypeScript, och Tailwind CSS.
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

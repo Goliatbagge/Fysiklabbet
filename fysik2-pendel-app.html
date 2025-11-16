@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan pendel - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        #canvas-container canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="min-h-screen w-full bg-gray-100 text-gray-800 flex flex-col lg:flex-row">
+        <div id="canvas-container" class="flex-grow h-[50vh] lg:h-screen w-full lg:w-2/3 relative bg-white">
+            <div class="absolute top-4 left-4 text-gray-900 p-2 rounded-lg z-10">
+                <h1 class="text-2xl md:text-4xl font-bold tracking-tighter">Plan pendel (matematisk)</h1>
+            </div>
+        </div>
+        <div class="w-full lg:w-1/3 bg-white/60 backdrop-blur-md p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto" id="controls-container">
+        </div>
+    </main>
+
+    <script type="module">
+        console.log('Loading Three.js module...');
+
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+        console.log('Three.js loaded successfully:', THREE);
+
+        const celestialBodies = [
+            { name: 'Solen', gravity: 274.0, gradient: 'linear-gradient(45deg, #fef08a, #f97316)' },
+            { name: 'Merkurius', gravity: 3.7, gradient: 'linear-gradient(45deg, #e5e5e5, #a3a3a3)' },
+            { name: 'Venus', gravity: 8.87, gradient: 'linear-gradient(45deg, #fef3c7, #f59e0b)' },
+            { name: 'Jorden', gravity: 9.81, gradient: 'linear-gradient(45deg, #22c55e, #3b82f6)' },
+            { name: 'Månen', gravity: 1.62, gradient: 'linear-gradient(45deg, #f5f5f5, #a3a3a3)' },
+            { name: 'Mars', gravity: 3.72, gradient: 'linear-gradient(45deg, #fb923c, #ef4444)' },
+            { name: 'Jupiter', gravity: 24.79, gradient: 'linear-gradient(45deg, #fcd34d, #d97706, #f5f5f5)' },
+            { name: 'Saturnus', gravity: 10.44, gradient: 'linear-gradient(45deg, #fde68a, #ca8a04)' },
+            { name: 'Uranus', gravity: 8.69, gradient: 'linear-gradient(45deg, #7dd3fc, #0ea5e9)' },
+            { name: 'Neptunus', gravity: 11.15, gradient: 'linear-gradient(45deg, #3b82f6, #1e3a8a)' },
+        ];
+
+        // State
+        let params = {
+            length: 1.5,
+            gravity: 9.81,
+            mass: 0.15,
+            initialAngle: 0,
+            damping: 0.05,
+        };
+
+        let simulationState = 'idle';
+        let timer = 0;
+        let swingCount = 0;
+        let measuredPeriod = null;
+        let timeRef = 0;
+        let swingCountRef = 0;
+
+        // Three.js setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf0f0f0);
+
+        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
+        camera.position.set(0, 1.5, 6);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.shadowMap.enabled = true;
+        container.appendChild(renderer.domElement);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        directionalLight.position.set(8, 6, 5);
+        directionalLight.castShadow = true;
+        directionalLight.shadow.mapSize.width = 2048;
+        directionalLight.shadow.mapSize.height = 2048;
+        scene.add(directionalLight);
+
+        // Floor
+        const floorGeometry = new THREE.PlaneGeometry(20, 20);
+        const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xC4A484 });
+        const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.y = -0.5;
+        floor.receiveShadow = true;
+        scene.add(floor);
+
+        // Lab stand
+        const standMaterial = new THREE.MeshStandardMaterial({ color: 0xBDBDBD, metalness: 0.8, roughness: 0.2 });
+
+        const VERTICAL_OFFSET = 1.0;
+        const PIVOT_Z_OFFSET = 0.4;
+        const verticalRodPositionX = -0.4;
+
+        function createLabStand(pendulumLength) {
+            const standGroup = new THREE.Group();
+            const PIVOT_Y = pendulumLength + VERTICAL_OFFSET;
+            const verticalRodHeight = PIVOT_Y + 0.5;
+
+            // Base
+            const baseGeometry = new THREE.BoxGeometry(1, 0.1, 1);
+            const base = new THREE.Mesh(baseGeometry, standMaterial);
+            base.position.set(verticalRodPositionX, -0.5 + 0.05, 0);
+            base.castShadow = true;
+            base.receiveShadow = true;
+            standGroup.add(base);
+
+            // Vertical rod
+            const verticalRodGeometry = new THREE.CylinderGeometry(0.04, 0.04, verticalRodHeight, 16);
+            const verticalRod = new THREE.Mesh(verticalRodGeometry, standMaterial);
+            verticalRod.position.set(verticalRodPositionX, -0.5 + verticalRodHeight / 2, 0);
+            verticalRod.castShadow = true;
+            standGroup.add(verticalRod);
+
+            // Clamp 1
+            const clamp1Geometry = new THREE.BoxGeometry(0.12, 0.15, 0.12);
+            const clamp1 = new THREE.Mesh(clamp1Geometry, standMaterial);
+            clamp1.position.set(verticalRodPositionX, PIVOT_Y, 0);
+            clamp1.castShadow = true;
+            standGroup.add(clamp1);
+
+            // Horizontal rod 1
+            const horizontalRod1Geometry = new THREE.CylinderGeometry(0.04, 0.04, Math.abs(verticalRodPositionX), 16);
+            const horizontalRod1 = new THREE.Mesh(horizontalRod1Geometry, standMaterial);
+            horizontalRod1.position.set(verticalRodPositionX / 2, PIVOT_Y, 0);
+            horizontalRod1.rotation.z = Math.PI / 2;
+            horizontalRod1.castShadow = true;
+            standGroup.add(horizontalRod1);
+
+            // Clamp 2
+            const clamp2Geometry = new THREE.BoxGeometry(0.12, 0.12, 0.15);
+            const clamp2 = new THREE.Mesh(clamp2Geometry, standMaterial);
+            clamp2.position.set(0, PIVOT_Y, 0);
+            clamp2.castShadow = true;
+            standGroup.add(clamp2);
+
+            // Horizontal rod 2
+            const horizontalRod2Geometry = new THREE.CylinderGeometry(0.04, 0.04, PIVOT_Z_OFFSET, 16);
+            const horizontalRod2 = new THREE.Mesh(horizontalRod2Geometry, standMaterial);
+            horizontalRod2.position.set(0, PIVOT_Y, PIVOT_Z_OFFSET / 2);
+            horizontalRod2.rotation.x = Math.PI / 2;
+            horizontalRod2.castShadow = true;
+            standGroup.add(horizontalRod2);
+
+            return standGroup;
+        }
+
+        let labStand = createLabStand(params.length);
+        scene.add(labStand);
+
+        // Pendulum
+        const pendulumGroup = new THREE.Group();
+
+        function createPendulum(length, mass) {
+            // Clear existing pendulum
+            while(pendulumGroup.children.length > 0) {
+                pendulumGroup.remove(pendulumGroup.children[0]);
+            }
+
+            const PIVOT_Y = length + VERTICAL_OFFSET;
+            pendulumGroup.position.set(0, PIVOT_Y, PIVOT_Z_OFFSET);
+
+            // Pivot
+            const pivotGeometry = new THREE.SphereGeometry(0.05, 16, 16);
+            const pivotMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc });
+            const pivot = new THREE.Mesh(pivotGeometry, pivotMaterial);
+            pendulumGroup.add(pivot);
+
+            // String
+            const stringGeometry = new THREE.CylinderGeometry(0.01, 0.01, length, 8);
+            const stringMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+            const string = new THREE.Mesh(stringGeometry, stringMaterial);
+            string.position.y = -length / 2;
+            pendulumGroup.add(string);
+
+            // Bob
+            const bobRadius = 0.18 * Math.cbrt(mass);
+            const bobHeight = bobRadius * 3.5;
+            const bobGeometry = new THREE.CylinderGeometry(bobRadius, bobRadius, bobHeight, 32);
+            const bobMaterial = new THREE.MeshStandardMaterial({ color: 0xE0E0E0, metalness: 0.2, roughness: 0.5 });
+            const bob = new THREE.Mesh(bobGeometry, bobMaterial);
+            bob.position.y = -length - bobHeight / 2;
+            bob.castShadow = true;
+            pendulumGroup.add(bob);
+
+            return bob;
+        }
+
+        const bob = createPendulum(params.length, params.mass);
+        scene.add(pendulumGroup);
+
+        // Update camera target
+        function updateCameraTarget() {
+            const PIVOT_Y = params.length + VERTICAL_OFFSET;
+            controls.target.set(0, PIVOT_Y - params.length / 2, 0);
+            controls.update();
+        }
+        updateCameraTarget();
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (simulationState === 'running') {
+                const delta = 1/60;
+                timeRef += delta;
+                timer = timeRef;
+
+                const initialAngleRad = (params.initialAngle * Math.PI) / 180;
+                const omega = Math.sqrt(params.gravity / params.length);
+                const angle = initialAngleRad * Math.exp(-params.damping * timeRef) * Math.cos(omega * timeRef);
+
+                pendulumGroup.rotation.z = angle;
+
+                const currentSwings = Math.floor((omega * timeRef) / (2 * Math.PI));
+                if (currentSwings !== swingCountRef) {
+                    swingCountRef = currentSwings;
+                    swingCount = currentSwings;
+                    updateControls();
+                }
+
+                if (swingCountRef >= 10) {
+                    simulationState = 'finished';
+                    measuredPeriod = timer / 10;
+                    updateControls();
+                }
+
+                updateControls();
+            } else {
+                const initialAngleRad = (params.initialAngle * Math.PI) / 180;
+                pendulumGroup.rotation.z = initialAngleRad;
+            }
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+
+        // Controls UI
+        function updateControls() {
+            const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
+            const isIdle = simulationState === 'idle';
+
+            const controlsHTML = `
+                <div class="space-y-6">
+                    <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2">Kontrollpanel</h2>
+
+                    <div class="w-full">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Trådlängd (l)</label>
+                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                                ${params.length.toFixed(2)} m
+                            </span>
+                        </div>
+                        <input id="length-slider" type="range" min="0.5" max="5" step="0.1" value="${params.length}" ${!isIdle ? 'disabled' : ''}
+                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                    </div>
+
+                    <div>
+                        <div class="w-full">
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Tyngdfaktor (g)</label>
+                                <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                                    ${params.gravity.toFixed(2)} m/s²
+                                </span>
+                            </div>
+                            <input id="gravity-slider" type="range" min="1" max="25" step="0.1" value="${params.gravity}" ${!isIdle ? 'disabled' : ''}
+                                class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                        </div>
+                        <div class="mt-4">
+                            <label class="text-sm font-medium mb-2 block ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Eller välj en himlakropp:</label>
+                            <div class="flex flex-wrap justify-center gap-3">
+                                ${celestialBodies.map(body => {
+                                    const isSelected = params.gravity.toFixed(2) === body.gravity.toFixed(2);
+                                    return `
+                                        <div class="flex flex-col items-center">
+                                            <button data-gravity="${body.gravity}" class="celestial-button p-1 rounded-full transition-all duration-200 focus:outline-none ${!isIdle ? 'opacity-50 cursor-not-allowed' : ''} ${isSelected ? 'bg-blue-200 ring-2 ring-blue-500 ring-offset-2 ring-offset-white' : 'bg-gray-200 hover:bg-gray-300'}"
+                                                ${!isIdle ? 'disabled' : ''} title="${body.name} (g = ${body.gravity} m/s²)">
+                                                <div class="w-10 h-10 rounded-full" style="background-image: ${body.gradient}"></div>
+                                            </button>
+                                            <span class="text-xs mt-1 ${isIdle ? 'text-gray-600' : 'text-gray-400'}">${body.name}</span>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Massa (m)</label>
+                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                                ${(params.mass * 1000).toFixed(0)} g
+                            </span>
+                        </div>
+                        <input id="mass-slider" type="range" min="10" max="300" step="5" value="${params.mass * 1000}" ${!isIdle ? 'disabled' : ''}
+                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                    </div>
+
+                    <div class="w-full">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Startvinkel (θ)</label>
+                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                                ${params.initialAngle.toFixed(2)} °
+                            </span>
+                        </div>
+                        <input id="angle-slider" type="range" min="0" max="25" step="0.5" value="${params.initialAngle}" ${!isIdle ? 'disabled' : ''}
+                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                    </div>
+
+                    <div class="w-full">
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Dämpning</label>
+                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                                ${params.damping.toFixed(2)}
+                            </span>
+                        </div>
+                        <input id="damping-slider" type="range" min="0" max="0.5" step="0.01" value="${params.damping}" ${!isIdle ? 'disabled' : ''}
+                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                    </div>
+
+                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg text-center space-y-2">
+                        <h3 class="text-lg font-semibold text-blue-800">Mätning</h3>
+                        ${simulationState === 'idle' ? '<p class="text-sm text-blue-700">Justera vinkeln och klicka Starta.</p>' : ''}
+                        ${simulationState === 'running' ? `
+                            <div class="flex justify-around items-center">
+                                <div>
+                                    <p class="text-sm text-gray-600">Svängningar</p>
+                                    <p class="text-3xl font-mono font-bold text-gray-800">${swingCount} / 10</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-600">Tid</p>
+                                    <p class="text-3xl font-mono font-bold text-gray-800">${timer.toFixed(2)} s</p>
+                                </div>
+                            </div>
+                        ` : ''}
+                        ${simulationState === 'finished' && measuredPeriod !== null ? `
+                            <div class="space-y-3">
+                                <div>
+                                    <p class="text-sm text-gray-600">Total tid (10 svängningar)</p>
+                                    <p class="text-3xl font-mono font-bold text-gray-800">${timer.toFixed(2)} s</p>
+                                </div>
+                                <div class="border-t border-blue-200 pt-3">
+                                    <p class="text-sm text-gray-600">Uppmätt Period (T)</p>
+                                    <p class="text-3xl font-mono font-bold text-green-600">${measuredPeriod.toFixed(3)} s</p>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <div class="flex items-center justify-center space-x-4 pt-4">
+                        <button id="start-button" ${!isIdle || params.initialAngle < 0.5 ? 'disabled' : ''}
+                            class="px-6 py-2 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 w-32 disabled:bg-blue-300 disabled:cursor-not-allowed">
+                            Starta
+                        </button>
+                        <button id="reset-button"
+                            class="px-6 py-2 font-semibold text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-100 w-32">
+                            Återställ
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-4 p-6 bg-white/50 rounded-lg border border-gray-200">
+                    <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2">Information</h2>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-600">Beräknad Period (T)</p>
+                        <p class="text-4xl font-mono font-bold text-blue-600 my-2">${period.toFixed(3)} s</p>
+                        <p class="text-sm font-mono text-gray-500">T = 2π * √(l/g)</p>
+                    </div>
+                    <div class="pt-4 text-sm text-gray-700 leading-relaxed">
+                        <p>
+                            <strong class="text-blue-600">Observera:</strong> Perioden – tiden för en komplett svängning fram och tillbaka – beror <strong class="font-semibold">endast</strong> på pendelns <span class="text-green-600">längd (l)</span> och den lokala <span class="text-green-600">tyngdfaktorn (g)</span>.
+                        </p>
+                        <p class="mt-2">
+                            Prova att ändra <span class="text-red-600">massan (m)</span> och <span class="text-red-600">startvinkeln (θ)</span>. Du kommer se att perioden förblir oförändrad. Detta är en fundamental egenskap hos en enkel pendel (för små vinklar).
+                        </p>
+                        <p class="mt-2">
+                            <strong class="text-blue-600">Dämpning</strong> simulerar luftmotstånd och gör att svängningarna gradvis minskar i storlek, precis som i verkligheten.
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('controls-container').innerHTML = controlsHTML;
+
+            // Attach event listeners
+            const lengthSlider = document.getElementById('length-slider');
+            const gravitySlider = document.getElementById('gravity-slider');
+            const massSlider = document.getElementById('mass-slider');
+            const angleSlider = document.getElementById('angle-slider');
+            const dampingSlider = document.getElementById('damping-slider');
+            const startButton = document.getElementById('start-button');
+            const resetButton = document.getElementById('reset-button');
+
+            if (lengthSlider) lengthSlider.addEventListener('input', (e) => {
+                params.length = parseFloat(e.target.value);
+                scene.remove(labStand);
+                labStand = createLabStand(params.length);
+                scene.add(labStand);
+                createPendulum(params.length, params.mass);
+                updateCameraTarget();
+                updateControls();
+            });
+
+            if (gravitySlider) gravitySlider.addEventListener('input', (e) => {
+                params.gravity = parseFloat(e.target.value);
+                updateControls();
+            });
+
+            if (massSlider) massSlider.addEventListener('input', (e) => {
+                params.mass = parseFloat(e.target.value) / 1000;
+                createPendulum(params.length, params.mass);
+                updateControls();
+            });
+
+            if (angleSlider) angleSlider.addEventListener('input', (e) => {
+                params.initialAngle = parseFloat(e.target.value);
+                updateControls();
+            });
+
+            if (dampingSlider) dampingSlider.addEventListener('input', (e) => {
+                params.damping = parseFloat(e.target.value);
+                updateControls();
+            });
+
+            if (startButton) startButton.addEventListener('click', () => {
+                if (params.initialAngle >= 0.5) {
+                    simulationState = 'running';
+                    timer = 0;
+                    timeRef = 0;
+                    swingCount = 0;
+                    swingCountRef = 0;
+                    measuredPeriod = null;
+                    updateControls();
+                }
+            });
+
+            if (resetButton) resetButton.addEventListener('click', () => {
+                simulationState = 'idle';
+                timer = 0;
+                timeRef = 0;
+                swingCount = 0;
+                swingCountRef = 0;
+                measuredPeriod = null;
+                params.initialAngle = 0;
+                updateControls();
+            });
+
+            const celestialButtons = document.querySelectorAll('.celestial-button');
+            celestialButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (!button.disabled) {
+                        params.gravity = parseFloat(button.dataset.gravity);
+                        updateControls();
+                    }
+                });
+            });
+        }
+
+        updateControls();
+    </script>
+</body>
+</html>

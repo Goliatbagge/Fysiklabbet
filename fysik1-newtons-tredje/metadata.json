@@ -1,0 +1,5 @@
+{
+  "name": "Newtons Tredje Lag Simulator",
+  "description": "En interaktiv webbapplikation som simulerar Newtons tredje lag i rymden. Användare kan styra en astronaut med en brandsläckare för att demonstrera principen om aktion och reaktion.",
+  "requestFramePermissions": []
+}

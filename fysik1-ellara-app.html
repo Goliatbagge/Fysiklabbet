@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektriska kretsar - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-900">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const CircuitType = {
+          DC: 'dc',
+          AC: 'ac',
+        };
+
+        // Constants for the SVG path
+        const PATH_LENGTH = 1000;
+        const TOP_WIRE_END = 300;
+        const RIGHT_WIRE_END = 500;
+        const BOTTOM_WIRE_END = 800;
+        const NUM_ELECTRONS = 50;
+        const NUM_ARROWS = 15;
+        const AC_AMPLITUDE_FACTOR = 10;
+        const ANIMATION_SPEED_FACTOR = 0.8;
+
+        const getCoordsOnPath = (position) => {
+          const p = position % PATH_LENGTH;
+
+          if (p >= 0 && p < TOP_WIRE_END) {
+            return { x: 50 + p, y: 50 };
+          } else if (p >= TOP_WIRE_END && p < RIGHT_WIRE_END) {
+            return { x: 350, y: 50 + (p - TOP_WIRE_END) };
+          } else if (p >= RIGHT_WIRE_END && p < BOTTOM_WIRE_END) {
+            return { x: 350 - (p - RIGHT_WIRE_END), y: 250 };
+          } else {
+            return { x: 50, y: 250 - (p - BOTTOM_WIRE_END) };
+          }
+        };
+
+        const CircuitDiagram = ({ circuitType, showElectrons, showCurrentDirection, currentStrength, acFrequency, isPaused }) => {
+          const [electrons, setElectrons] = useState([]);
+          const [arrows, setArrows] = useState([]);
+          const animationFrameId = useRef(null);
+          const dcPositionOffset = useRef(0);
+          const dcArrowPositionOffset = useRef(0);
+          const currentStrengthRef = useRef(currentStrength);
+          const isPausedRef = useRef(isPaused);
+          const animateRef = useRef(null);
+
+          useEffect(() => {
+            currentStrengthRef.current = currentStrength;
+          }, [currentStrength]);
+
+          useEffect(() => {
+            isPausedRef.current = isPaused;
+            if (!isPaused && animationFrameId.current === null && animateRef.current) {
+                animationFrameId.current = requestAnimationFrame(animateRef.current);
+            }
+          }, [isPaused]);
+
+          useEffect(() => {
+            const initialElectrons = [];
+            for (let i = 0; i < NUM_ELECTRONS; i++) {
+              initialElectrons.push({
+                id: i,
+                basePosition: (i * PATH_LENGTH) / NUM_ELECTRONS,
+              });
+            }
+            setElectrons(initialElectrons);
+
+            const initialArrows = [];
+            for (let i = 0; i < NUM_ARROWS; i++) {
+                initialArrows.push({
+                    id: i,
+                    basePosition: (i * PATH_LENGTH) / NUM_ARROWS,
+                });
+            }
+            setArrows(initialArrows);
+
+            dcPositionOffset.current = 0;
+            dcArrowPositionOffset.current = 0;
+
+            const animate = (timestamp) => {
+              if (isPausedRef.current) {
+                animationFrameId.current = null;
+                return;
+              }
+
+              if (circuitType === CircuitType.DC) {
+                const animationStep = currentStrengthRef.current * ANIMATION_SPEED_FACTOR;
+                dcPositionOffset.current = (dcPositionOffset.current - animationStep) % PATH_LENGTH;
+                dcArrowPositionOffset.current = (dcArrowPositionOffset.current + animationStep) % PATH_LENGTH;
+              }
+
+              setElectrons(prev => [...prev]);
+
+              animationFrameId.current = requestAnimationFrame(animate);
+            };
+
+            animateRef.current = animate;
+
+            if (!isPausedRef.current) {
+                animationFrameId.current = requestAnimationFrame(animate);
+            }
+
+            return () => {
+              if (animationFrameId.current) {
+                cancelAnimationFrame(animationFrameId.current);
+              }
+            };
+          }, [circuitType]);
+
+          const acAnimationFrequencyFactor = (2 * Math.PI * acFrequency) / 1000;
+
+          const Bulb = () => {
+            const glowOpacity = Math.max(0, Math.min(0.1 + currentStrength / 8, 1));
+            const glowBlur = 3 + currentStrength * 2.5;
+
+            return (
+              <>
+                <circle cx="350" cy="150" r="20" fill="none" stroke="#a78bfa" strokeWidth="2" />
+                <line x1="340" y1="140" x2="360" y2="160" stroke="#a78bfa" strokeWidth="2" />
+                <line x1="340" y1="160" x2="360" y2="140" stroke="#a78bfa" strokeWidth="2" />
+                <circle cx="350" cy="150" r="25" fill="#facc15" className="transition-all duration-300" style={{ opacity: glowOpacity, filter: `blur(${glowBlur}px)` }} />
+              </>
+            );
+          };
+
+          const PowerSource = () => {
+              if (circuitType === CircuitType.DC) {
+                  return (
+                      <g>
+                          <rect x="48" y="135" width="4" height="30" fill="#1f2937" />
+                          <line x1="35" y1="135" x2="65" y2="135" stroke="#a78bfa" strokeWidth="2" />
+                          <line x1="42" y1="165" x2="58" y2="165" stroke="#a78bfa" strokeWidth="2" />
+                           <text x="70" y="138" fill="#f9fafb" fontSize="12px">+</text>
+                           <text x="70" y="168" fill="#f9fafb" fontSize="12px">-</text>
+                      </g>
+                  );
+              } else {
+                  return (
+                      <g>
+                          <rect x="48" y="130" width="4" height="40" fill="#1f2937" />
+                          <circle cx="50" cy="135" r="3" fill="#a78bfa" />
+                          <circle cx="50" cy="165" r="3" fill="#a78bfa" />
+                          <path d="M 50 140 C 60 145, 40 155, 50 160" stroke="#f9fafb" fill="none" strokeWidth="1.5" />
+                      </g>
+                  )
+              }
+          };
+
+          const ArrowShapes = () => (
+            <>
+              {arrows.map(arrow => {
+                  const acAmplitude = currentStrength * AC_AMPLITUDE_FACTOR;
+                  const posValue = arrow.basePosition + (circuitType === CircuitType.AC
+                    ? -acAmplitude * Math.sin(performance.now() * acAnimationFrequencyFactor)
+                    : dcArrowPositionOffset.current
+                  );
+
+                  const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
+
+                  if (normalizedPos > 885 && normalizedPos < 915) return null;
+                  if (normalizedPos > 380 && normalizedPos < 420) return null;
+
+                  const { x, y } = getCoordsOnPath(normalizedPos);
+                  const { x: x2, y: y2 } = getCoordsOnPath(normalizedPos + 1);
+                  let angle = Math.atan2(y2 - y, x2 - x) * (180 / Math.PI);
+
+                  if (circuitType === CircuitType.AC) {
+                    const velocityDirection = -Math.cos(performance.now() * acAnimationFrequencyFactor);
+                    if (velocityDirection < 0) {
+                      angle += 180;
+                    }
+                  }
+
+                  return (
+                    <path
+                      key={`arrow-${arrow.id}`}
+                      d="M-5 -4 L5 0 L-5 4 Z"
+                      fill="#a78bfa"
+                      transform={`translate(${x} ${y}) rotate(${angle})`}
+                    />
+                  );
+              })}
+            </>
+          );
+
+          const ElectronDots = () => (
+            <>
+              {electrons.map(electron => {
+                  const acAmplitude = currentStrength * AC_AMPLITUDE_FACTOR;
+                  const posValue = electron.basePosition + (circuitType === CircuitType.AC
+                    ? acAmplitude * Math.sin(performance.now() * acAnimationFrequencyFactor)
+                    : dcPositionOffset.current
+                  );
+
+                  const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
+
+                  if (normalizedPos > 885 && normalizedPos < 915) return null;
+                  if (normalizedPos > 380 && normalizedPos < 420) return null;
+
+                  const { x, y } = getCoordsOnPath(normalizedPos);
+                  return (
+                    <g key={electron.id}>
+                      <circle cx={x} cy={y} r="4" fill="#facc15" />
+                      <text
+                        x={x}
+                        y={y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fill="#1f2937"
+                        fontSize="6px"
+                        fontWeight="bold"
+                      >
+                        -
+                      </text>
+                    </g>
+                  );
+              })}
+            </>
+          );
+
+          return (
+            <div className="w-full max-w-2xl p-4 bg-gray-800 rounded-lg shadow-2xl border border-gray-700">
+              <svg viewBox="0 0 400 300" className="w-full h-auto">
+                <path
+                  d="M 50 50 H 350 V 250 H 50 Z"
+                  fill="none"
+                  stroke="#4f46e5"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                />
+
+                <g>
+                    {showCurrentDirection && <ArrowShapes />}
+                </g>
+
+                <PowerSource />
+                <Bulb />
+
+                <g>
+                    {showElectrons && <ElectronDots/>}
+                </g>
+              </svg>
+            </div>
+          );
+        };
+
+        const App = () => {
+          const [circuitType, setCircuitType] = useState(CircuitType.DC);
+          const [displayMode, setDisplayMode] = useState('current');
+          const [voltage, setVoltage] = useState(12);
+          const [resistance, setResistance] = useState(10);
+          const [frequency, setFrequency] = useState(1.0);
+          const [isPaused, setIsPaused] = useState(false);
+
+          const handleCircuitTypeChange = (event) => {
+            setCircuitType(event.target.value);
+          };
+
+          const handleDisplayModeChange = (event) => {
+            setDisplayMode(event.target.value);
+          };
+
+          const handleVoltageChange = (event) => {
+            const value = parseFloat(event.target.value);
+            if (!isNaN(value)) {
+              setVoltage(value);
+            }
+          };
+
+          const handleResistanceChange = (event) => {
+            const value = parseFloat(event.target.value);
+            if (!isNaN(value)) {
+              setResistance(value);
+            }
+          };
+
+          const handleFrequencyChange = (event) => {
+            const value = parseFloat(event.target.value);
+            if (!isNaN(value)) {
+              setFrequency(value);
+            }
+          };
+
+          const handlePauseToggle = () => {
+            setIsPaused(prev => !prev);
+          };
+
+          const current = voltage / resistance;
+
+          return (
+            <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-4 font-sans">
+              <div className="w-full max-w-3xl mx-auto flex flex-col items-center gap-8">
+                <header className="text-center">
+                  <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
+                    Interaktiv kretssimulator
+                  </h1>
+                  <p className="mt-2 text-lg text-gray-400">
+                    Observera elektronflödet i likströms- och växelströmskretsar.
+                  </p>
+                </header>
+
+                <main className="w-full flex flex-col items-center gap-6">
+                  <div className="w-full max-w-2xl flex flex-col items-center gap-4 p-4 bg-gray-800 border border-gray-700 rounded-lg">
+                    <div className="flex flex-wrap items-start justify-center gap-x-6 gap-y-4">
+                      <fieldset className="flex items-center justify-center gap-4 p-2 border border-gray-600 rounded-lg">
+                        <legend className="px-2 text-sm text-gray-400">Kretstyp</legend>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="circuitType"
+                            value={CircuitType.DC}
+                            checked={circuitType === CircuitType.DC}
+                            onChange={handleCircuitTypeChange}
+                            className="form-radio h-4 w-4 text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500"
+                          />
+                          <span className={circuitType === CircuitType.DC ? 'text-purple-400 font-semibold' : 'text-gray-300'}>
+                            Likström (DC)
+                          </span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="circuitType"
+                            value={CircuitType.AC}
+                            checked={circuitType === CircuitType.AC}
+                            onChange={handleCircuitTypeChange}
+                            className="form-radio h-4 w-4 text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500"
+                          />
+                          <span className={circuitType === CircuitType.AC ? 'text-purple-400 font-semibold' : 'text-gray-300'}>
+                            Växelström (AC)
+                          </span>
+                        </label>
+                      </fieldset>
+
+                      <fieldset className="flex items-center justify-center gap-4 p-2 border border-gray-600 rounded-lg">
+                        <legend className="px-2 text-sm text-gray-400">Visningsläge</legend>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="displayMode"
+                            value="electrons"
+                            checked={displayMode === 'electrons'}
+                            onChange={handleDisplayModeChange}
+                            className="form-radio h-4 w-4 text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500"
+                          />
+                          <span className={displayMode === 'electrons' ? 'text-purple-400 font-semibold' : 'text-gray-300'}>
+                            Elektroner
+                          </span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="displayMode"
+                            value="current"
+                            checked={displayMode === 'current'}
+                            onChange={handleDisplayModeChange}
+                            className="form-radio h-4 w-4 text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500"
+                          />
+                          <span className={displayMode === 'current' ? 'text-purple-400 font-semibold' : 'text-gray-300'}>
+                            Strömriktning
+                          </span>
+                        </label>
+                      </fieldset>
+                    </div>
+
+                    <fieldset className="w-full max-w-md mt-4 p-3 border border-gray-600 rounded-lg">
+                      <legend className="px-2 text-sm text-gray-400">Kretsparametrar</legend>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                          <div className="w-full">
+                              <label htmlFor="voltage-slider" className="block text-center text-purple-300 font-semibold mb-1">
+                                  Spänning: {voltage.toFixed(0)} V
+                              </label>
+                              <input
+                                  id="voltage-slider"
+                                  type="range"
+                                  min="1"
+                                  max="24"
+                                  step="1"
+                                  value={voltage}
+                                  onChange={handleVoltageChange}
+                                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg accent-purple-500"
+                              />
+                          </div>
+                          <div className="w-full">
+                              <label htmlFor="resistance-slider" className="block text-center text-purple-300 font-semibold mb-1">
+                                  Resistans: {resistance.toFixed(0)} Ω
+                              </label>
+                              <input
+                                  id="resistance-slider"
+                                  type="range"
+                                  min="1"
+                                  max="50"
+                                  step="1"
+                                  value={resistance}
+                                  onChange={handleResistanceChange}
+                                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg accent-purple-500"
+                              />
+                          </div>
+                      </div>
+                      {circuitType === CircuitType.AC && (
+                        <div className="mt-4 w-full">
+                          <label htmlFor="frequency-slider" className="block text-center text-purple-300 font-semibold mb-1">
+                            Frekvens: {frequency.toFixed(1).replace('.', ',')} Hz
+                          </label>
+                          <input
+                            id="frequency-slider"
+                            type="range"
+                            min="0.2"
+                            max="5"
+                            step="0.1"
+                            value={frequency}
+                            onChange={handleFrequencyChange}
+                            className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg accent-purple-500"
+                          />
+                        </div>
+                      )}
+                      <div className="mt-4 flex flex-col items-center gap-3">
+                        <button
+                          onClick={handlePauseToggle}
+                          className="px-5 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition-colors"
+                        >
+                          {isPaused ? 'Återuppta' : 'Pausa'}
+                        </button>
+                        <div className="mt-1 text-center text-lg font-bold text-yellow-400">
+                          Strömstyrka (<i>I</i> = <i>U</i>/<i>R</i>): {current.toFixed(2).replace('.', ',')} A
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <CircuitDiagram
+                    circuitType={circuitType}
+                    showElectrons={displayMode === 'electrons'}
+                    showCurrentDirection={displayMode === 'current'}
+                    currentStrength={current}
+                    acFrequency={frequency}
+                    isPaused={isPaused}
+                  />
+
+                  <div className="mt-4 p-4 bg-gray-800/50 border border-gray-700 rounded-lg text-center max-w-2xl">
+                      <h2 className="text-xl font-semibold text-purple-300 mb-2">
+                          {circuitType === CircuitType.DC ? 'Likström (DC - Direct Current)' : 'Växelström (AC - Alternating Current)'}
+                      </h2>
+                      <p className="text-gray-400">
+                          {circuitType === CircuitType.DC
+                              ? 'I en likströmskrets flödar elektronerna kontinuerligt i en och samma riktning, från den negativa polen till den positiva. Den konventionella strömriktningen är motsatt, från plus till minus.'
+                              : 'I en växelströmskrets byter elektronerna riktning fram och tillbaka i en snabb, oscillerande rörelse. De gör ingen fullständig resa runt kretsen, utan överför energi genom att "knuffa" på varandra.'}
+                      </p>
+                  </div>
+                </main>
+              </div>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

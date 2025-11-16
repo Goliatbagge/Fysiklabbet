@@ -1,0 +1,5 @@
+{
+  "name": "Brytningslagen",
+  "description": "En interaktiv och pedagogisk simulering av Snells lag (brytningslagen). Visualisera hur ljus bryts när det passerar genom material med olika brytningsindex. Justera infallsvinkeln och materialens egenskaper för att se hur ljusstrålen påverkas, inklusive total intern reflektion.",
+  "requestFramePermissions": []
+}

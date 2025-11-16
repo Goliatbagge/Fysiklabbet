@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fysik 1 - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="intro-section">
+            <h1 class="section-title">Fysik 1</h1>
+            <p class="intro-text">
+                Välkommen till Fysik 1! Här hittar du interaktiva simuleringar som täcker
+                grundläggande fysikaliska begrepp och fenomen.
+            </p>
+        </section>
+
+        <section class="chapters-section">
+            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem;">Tryck</h2>
+            <div class="chapters-grid">
+                <div class="chapter-card" onclick="location.href='fysik1-tryck.html'">
+                    <div class="chapter-icon">💨</div>
+                    <h3 class="chapter-title">Ideala Gaslagen</h3>
+                    <p class="chapter-description">
+                        Utforska sambandet mellan tryck, volym och temperatur med en interaktiv gassimulering.
+                    </p>
+                </div>
+
+                <div class="chapter-card" onclick="location.href='fysik1-arkimedes.html'">
+                    <div class="chapter-icon">⚖️</div>
+                    <h3 class="chapter-title">Arkimedes Princip</h3>
+                    <p class="chapter-description">
+                        Upptäck förhållandet mellan lyftkraft och undanträngt vatten med ett dynamometer-experiment.
+                    </p>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Övriga kapitel</h2>
+            <div class="chapters-grid">
+
+                <div class="chapter-card" style="opacity: 0.6; cursor: not-allowed;" onclick="event.stopPropagation()">
+                    <div class="chapter-icon">🏃</div>
+                    <h3 class="chapter-title">Rörelse</h3>
+                    <p class="chapter-description">
+                        Kommer snart: Studier om hastighet, acceleration och rörelseenergi.
+                    </p>
+                </div>
+
+                <div class="chapter-card" style="opacity: 0.6; cursor: not-allowed;" onclick="event.stopPropagation()">
+                    <div class="chapter-icon">⚡</div>
+                    <h3 class="chapter-title">Kraft</h3>
+                    <p class="chapter-description">
+                        Kommer snart: Newtons lagar och olika typer av krafter.
+                    </p>
+                </div>
+
+                <div class="chapter-card" style="opacity: 0.6; cursor: not-allowed;" onclick="event.stopPropagation()">
+                    <div class="chapter-icon">🔋</div>
+                    <h3 class="chapter-title">Energi</h3>
+                    <p class="chapter-description">
+                        Kommer snart: Kinetisk energi, potentiell energi och energiprincipen.
+                    </p>
+                </div>
+
+                <div class="chapter-card" style="opacity: 0.6; cursor: not-allowed;" onclick="event.stopPropagation()">
+                    <div class="chapter-icon">🌊</div>
+                    <h3 class="chapter-title">Vågor</h3>
+                    <p class="chapter-description">
+                        Kommer snart: Vågrörelse, ljud och ljus.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "name": "Interaktiv Kretssimulator",
+  "description": "En interaktiv simulering som visar hur elektroner rör sig i en likströmskrets (DC) och en växelströmskrets (AC). Växla mellan kretstyper för att se skillnaden i elektronflöde genom en glödlampa.",
+  "requestFramePermissions": []
+}

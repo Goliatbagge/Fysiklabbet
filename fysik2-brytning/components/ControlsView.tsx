@@ -37,15 +37,6 @@ export const ControlsView: React.FC<ControlsViewProps> = ({ n1, setN1, n2, setN2
           displayPrecision={1}
         />
         <Slider
-          id="n1-slider"
-          label="Brytningsindex Medium 1 (n₁)"
-          min={1.00}
-          max={2.50}
-          step={0.01}
-          value={n1}
-          onChange={(e) => setN1(parseFloat(e.target.value))}
-        />
-        <Slider
           id="n2-slider"
           label="Brytningsindex Block (n₂)"
           min={1.00}
@@ -53,6 +44,15 @@ export const ControlsView: React.FC<ControlsViewProps> = ({ n1, setN1, n2, setN2
           step={0.01}
           value={n2}
           onChange={(e) => setN2(parseFloat(e.target.value))}
+        />
+        <Slider
+          id="n1-slider"
+          label="Brytningsindex Medium 1 (n₁)"
+          min={1.00}
+          max={2.50}
+          step={0.01}
+          value={n1}
+          onChange={(e) => setN1(parseFloat(e.target.value))}
         />
       </div>
 

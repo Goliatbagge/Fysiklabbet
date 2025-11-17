@@ -1,0 +1,5 @@
+{
+  "name": "Trycksimulering p = F/A",
+  "description": "En interaktiv 3D-simulering för att illustrera sambandet mellan tryck, kraft och area (p = F/A). Justera ett föremåls tyngd och area och se om isen håller eller spricker under trycket.",
+  "requestFramePermissions": []
+}

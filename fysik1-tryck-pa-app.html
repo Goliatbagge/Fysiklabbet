@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tryck p = F/A - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-900">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik 1</a> / <span>Tryck p = F/A</span>
+        </div>
+
+        <section class="intro-section">
+            <h1 class="section-title">Tryck: p = F / A</h1>
+            <p class="intro-text">
+                Utforska sambandet mellan tryck, kraft och area. Justera föremålets tyngd och area
+                för att se om isen håller eller spricker under trycket!
+            </p>
+        </section>
+
+        <div class="simulation-container">
+            <iframe
+                src="fysik1-tryck-pa/standalone.html"
+                style="width: 100%; height: 1000px; border: none; border-radius: 12px;"
+                title="Trycksimulering p = F/A"
+            ></iframe>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+</body>
+</html>

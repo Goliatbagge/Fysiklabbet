@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tryck p = F/A - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'ice-blue': '#e0f2fe',
+              'deep-blue': '#075985',
+              'accent-orange': '#f97316',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-in-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-slate-900">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik 1</a> / <span>Tryck p = F/A</span>
+        </div>
+
+        <section class="intro-section">
+            <h1 class="section-title">Tryck: p = F / A</h1>
+            <p class="intro-text">
+                Utforska sambandet mellan tryck, kraft och area. Justera föremålets tyngd och area
+                för att se om isen håller eller spricker under trycket!
+            </p>
+        </section>
+
+        <div class="simulation-container">
+            <!-- Embedded simulation iframe -->
+            <iframe
+                srcdoc='<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "ice-blue": "#e0f2fe",
+              "deep-blue": "#075985",
+              "accent-orange": "#f97316",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "@react-three/fiber": "https://esm.sh/@react-three/fiber@8.15.12",
+    "@react-three/drei": "https://esm.sh/@react-three/drei@9.92.7",
+    "three": "https://esm.sh/three@0.160.0",
+    "three/": "https://esm.sh/three@0.160.0/"
+  }
+}
+    </script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-sky-900 text-white font-sans" style="margin: 0; padding: 0;">
+    <div id="root"></div>
+    <script type="module">
+import React, { useState, useMemo, useCallback, useRef, Suspense } from "react";
+import { createRoot } from "react-dom/client";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Environment, Text, Plane, Circle } from "@react-three/drei";
+import * as THREE from "three";
+
+const ICE_BREAKING_POINT = 10000;
+const INITIAL_FORCE = 5000;
+const INITIAL_AREA = 1.0;
+const MIN_FORCE = 100;
+const MAX_FORCE = 25000;
+const MIN_AREA = 0.1;
+const MAX_AREA = 2.5;
+const MIN_CYLINDER_HEIGHT = 0.5;
+const MAX_CYLINDER_HEIGHT = 4.0;
+
+const Ice = ({ isBroken, pressure, breakingPoint, area }) => {
+  const holeRadius = useMemo(() => Math.sqrt(area / Math.PI), [area]);
+
+  const cracksTexture = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    const size = 512;
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext("2d");
+    if (!context) return new THREE.CanvasTexture(canvas);
+
+    context.strokeStyle = "rgba(0, 10, 20, 1)";
+    context.lineWidth = 1.5;
+    context.lineCap = "round";
+
+    const centerX = size / 2;
+    const centerY = size / 2;
+
+    for (let i = 0; i < 8; i++) {
+        let angle = (i / 8) * Math.PI * 2 + (Math.random() - 0.5) * 0.2;
+        let len1 = size / 5 + Math.random() * size / 10;
+        let ex1 = centerX + Math.cos(angle) * len1;
+        let ey1 = centerY + Math.sin(angle) * len1;
+        context.beginPath();
+        context.moveTo(centerX, centerY);
+        context.lineTo(ex1, ey1);
+        context.stroke();
+
+        let angle2 = angle + (Math.random() - 0.5) * 0.8;
+        let len2 = len1 * (Math.random() * 0.3 + 0.2);
+        let ex2 = ex1 + Math.cos(angle2) * len2;
+        let ey2 = ey1 + Math.sin(angle2) * len2;
+        context.beginPath();
+        context.moveTo(ex1, ey1);
+        context.lineTo(ex2, ey2);
+        context.stroke();
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }, []);
+
+  const cracksOpacity = useMemo(() => {
+    if (isBroken) return 0.8;
+    const pressureRatio = pressure / breakingPoint;
+    if (pressureRatio < 0.7) return 0;
+    const opacity = ((pressureRatio - 0.7) / 0.3) * 0.8;
+    return Math.min(Math.max(opacity, 0), 0.8);
+  }, [pressure, breakingPoint, isBroken]);
+
+  return (
+    <group>
+      <Plane
+        args={[20, 20]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, 0, 0]}
+        receiveShadow
+      >
+        <meshStandardMaterial
+          color="#e0f2fe"
+          opacity={0.85}
+          transparent
+          roughness={0.1}
+          metalness={0.2}
+          side={THREE.DoubleSide}
+        />
+      </Plane>
+
+      <Circle
+        args={[3, 64]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, 0.01, 0]}
+      >
+          <meshStandardMaterial
+            map={cracksTexture}
+            transparent={true}
+            opacity={cracksOpacity}
+            alphaTest={0.1}
+            depthWrite={false}
+            side={THREE.DoubleSide}
+          />
+      </Circle>
+
+      {isBroken && (
+        <Circle
+          args={[holeRadius, 32]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, 0.02, 0]}
+        >
+          <meshBasicMaterial color="black" />
+        </Circle>
+      )}
+    </group>
+  );
+};
+
+const WeightObject = ({ area, isBroken, force }) => {
+  const meshRef = useRef(null);
+
+  const height = useMemo(() => {
+    const forceRatio = (force - MIN_FORCE) / (MAX_FORCE - MIN_FORCE);
+    return MIN_CYLINDER_HEIGHT + forceRatio * (MAX_CYLINDER_HEIGHT - MIN_CYLINDER_HEIGHT);
+  }, [force]);
+
+  const radius = useMemo(() => Math.sqrt(area / Math.PI), [area]);
+
+  useFrame((state, delta) => {
+    if (isBroken && meshRef.current && meshRef.current.position.y > -10) {
+      meshRef.current.position.y -= 9.8 * delta * 2;
+      meshRef.current.rotation.x += delta;
+      meshRef.current.rotation.z += delta * 0.5;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef} position={[0, height / 2, 0]} castShadow>
+      <cylinderGeometry args={[radius, radius, height, 32]} />
+      <meshStandardMaterial color="#f97316" roughness={0.3} metalness={0.8} />
+    </mesh>
+  );
+};
+
+const Loader = () => {
+    return (
+      <Text
+        position={[0, 0, 0]}
+        fontSize={0.5}
+        color="white"
+        anchorX="center"
+        anchorY="middle"
+      >
+        Laddar 3D-scen...
+      </Text>
+    );
+};
+
+const Scene3D = ({ area, force, isBroken, pressure, breakingPoint }) => {
+  return (
+    <Canvas
+      camera={{ position: [5, 5, 5], fov: 50 }}
+      shadows
+      gl={{ antialias: true, alpha: true }}
+    >
+      <Suspense fallback={<Loader />}>
+        <ambientLight intensity={0.5} />
+        <directionalLight
+          position={[10, 10, 5]}
+          intensity={1.5}
+          castShadow
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+        />
+        <Environment preset="sunset" />
+
+        <WeightObject area={area} isBroken={isBroken} force={force} />
+        <Ice area={area} isBroken={isBroken} pressure={pressure} breakingPoint={breakingPoint} />
+
+        <OrbitControls
+          enablePan={true}
+          enableZoom={true}
+          enableRotate={true}
+          minDistance={3}
+          maxDistance={20}
+        />
+      </Suspense>
+    </Canvas>
+  );
+};
+
+const SliderControl = ({ label, value, min, max, step, unit, onChange, disabled }) => {
+  const isArea = unit === "m²";
+  const displayValue = isArea ? value.toFixed(2) : value.toFixed(0);
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex justify-between items-baseline">
+        <label className="font-semibold text-lg text-sky-300">{label}</label>
+        <span className="text-lg font-mono bg-slate-700 text-white py-1 px-3 rounded">
+          {displayValue} {unit}
+        </span>
+      </div>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer disabled:cursor-not-allowed
+                   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-accent-orange
+                   [&::-webkit-slider-thumb]:appearance-none
+                   [&::-webkit-slider-thumb]:w-5
+                   [&::-webkit-slider-thumb]:h-5
+                   [&::-webkit-slider-thumb]:bg-accent-orange
+                   [&::-webkit-slider-thumb]:rounded-full
+                   [&::-webkit-slider-thumb]:cursor-pointer
+                   [&::-webkit-slider-thumb]:transition-all
+                   [&::-webkit-slider-thumb]:shadow-md
+                   disabled:[&::-webkit-slider-thumb]:bg-slate-500
+                   [&::-moz-range-thumb]:w-5
+                   [&::-moz-range-thumb]:h-5
+                   [&::-moz-range-thumb]:bg-accent-orange
+                   [&::-moz-range-thumb]:rounded-full
+                   [&::-moz-range-thumb]:cursor-pointer
+                   [&::-moz-range-thumb]:border-none
+                   disabled:[&::-moz-range-thumb]:bg-slate-500"
+      />
+    </div>
+  );
+};
+
+const InfoPanel = ({ force, area, pressure, isBroken, breakingPoint, onReset }) => {
+  const pressurePercent = Math.min((pressure / breakingPoint) * 100, 100);
+  const isOverLimit = pressure > breakingPoint;
+
+  return (
+    <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-sky-800 animate-fade-in">
+      <h2 className="text-xl font-bold mb-4 text-sky-200 border-b border-sky-700 pb-2">Resultat</h2>
+      <div className="space-y-3 text-lg">
+        <p className="flex justify-between">
+          <span className="text-slate-300">Tyngd (F):</span>
+          <span className="font-mono">{force.toFixed(0)} N</span>
+        </p>
+        <p className="flex justify-between">
+          <span className="text-slate-300">Area (A):</span>
+          <span className="font-mono">{area.toFixed(2)} m²</span>
+        </p>
+        <p className="flex justify-between items-baseline font-bold text-xl text-sky-100 border-t border-slate-700 pt-3">
+          <span className="text-sky-300">Tryck (p):</span>
+          <span className="font-mono">{pressure.toFixed(0)} Pa</span>
+        </p>
+      </div>
+
+      <div className="mt-6">
+        <h3 className="font-semibold text-sky-300 mb-2">Isens Hållfasthet</h3>
+        <div className="w-full bg-slate-700 rounded-full h-4 overflow-hidden border-2 border-slate-600">
+          <div
+            className={"h-full rounded-full transition-all duration-300 " + (isOverLimit ? "bg-red-500" : "bg-cyan-400")}
+            style={{ width: pressurePercent + "%" }}
+          ></div>
+        </div>
+        <div className="text-xs text-slate-400 text-right mt-1">
+            Gräns: {breakingPoint} Pa
+        </div>
+      </div>
+
+      <div className="mt-6 text-center">
+        {isBroken ? (
+          <div className="p-4 bg-red-900/50 border border-red-700 rounded-lg">
+            <p className="text-2xl font-bold text-red-300 animate-pulse">ISEN SPRACK!</p>
+            <p className="text-red-400">Trycket blev för högt.</p>
+          </div>
+        ) : (
+          <div className="p-4 bg-green-900/50 border border-green-700 rounded-lg">
+            <p className="text-2xl font-bold text-green-300">Isen håller</p>
+            <p className="text-green-400">Trycket är under gränsen.</p>
+          </div>
+        )}
+      </div>
+
+      <button
+        onClick={onReset}
+        className="w-full mt-6 bg-accent-orange hover:bg-orange-500 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300
+                   focus:outline-none focus:ring-4 focus:ring-orange-500/50
+                   shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+      >
+        Återställ Simulering
+      </button>
+    </div>
+  );
+};
+
+const App = () => {
+  const [force, setForce] = useState(INITIAL_FORCE);
+  const [area, setArea] = useState(INITIAL_AREA);
+  const [isBroken, setIsBroken] = useState(false);
+  const [key, setKey] = useState(0);
+
+  const pressure = useMemo(() => {
+    if (area === 0) return Infinity;
+    const calculatedPressure = force / area;
+    if (calculatedPressure > ICE_BREAKING_POINT && !isBroken) {
+      setIsBroken(true);
+    }
+    return calculatedPressure;
+  }, [force, area, isBroken]);
+
+  const handleReset = useCallback(() => {
+    setForce(INITIAL_FORCE);
+    setArea(INITIAL_AREA);
+    setIsBroken(false);
+    setKey(prevKey => prevKey + 1);
+  }, []);
+
+  return (
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 to-sky-900 flex flex-col items-center p-4 lg:p-8 font-sans">
+      <header className="w-full max-w-6xl text-center mb-4 md:mb-6">
+        <h1 className="text-3xl md:text-5xl font-bold text-ice-blue">Interaktiv Trycksimulering</h1>
+        <p className="text-lg md:text-2xl text-sky-300 mt-2">p = F / A</p>
+      </header>
+
+      <main className="w-full max-w-6xl flex-grow flex flex-col lg:flex-row gap-6">
+        <div className="lg:w-3/5 h-[40vh] lg:h-auto rounded-xl bg-black/30 shadow-2xl overflow-hidden border border-sky-700">
+          <Scene3D
+            key={key}
+            area={area}
+            force={force}
+            isBroken={isBroken}
+            pressure={pressure}
+            breakingPoint={ICE_BREAKING_POINT}
+          />
+        </div>
+
+        <div className="lg:w-2/5 flex flex-col gap-6">
+          <div className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-sky-800 animate-fade-in">
+            <h2 className="text-xl font-bold mb-4 text-sky-200 border-b border-sky-700 pb-2">Kontrollpanel</h2>
+            <div className="space-y-6">
+              <SliderControl
+                label="Tyngd (F)"
+                value={force}
+                min={MIN_FORCE}
+                max={MAX_FORCE}
+                step={10}
+                unit="N"
+                onChange={(e) => !isBroken && setForce(parseFloat(e.target.value))}
+                disabled={isBroken}
+              />
+              <SliderControl
+                label="Area (A)"
+                value={area}
+                min={MIN_AREA}
+                max={MAX_AREA}
+                step={0.05}
+                unit="m²"
+                onChange={(e) => !isBroken && setArea(parseFloat(e.target.value))}
+                disabled={isBroken}
+              />
+            </div>
+          </div>
+
+          <InfoPanel
+            force={force}
+            area={area}
+            pressure={pressure}
+            isBroken={isBroken}
+            breakingPoint={ICE_BREAKING_POINT}
+            onReset={handleReset}
+          />
+        </div>
+      </main>
+
+      <footer className="w-full max-w-6xl text-center mt-8 text-slate-400 text-sm">
+        <p>Använd musen för att rotera, zooma och panorera 3D-vyn.</p>
+      </footer>
+    </div>
+  );
+};
+
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+root.render(<App />);
+    </script>
+</body>
+</html>'
+                style="width: 100%; height: 700px; border: none; border-radius: 12px;"
+                title="Trycksimulering p = F/A"
+            ></iframe>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+</body>
+</html>

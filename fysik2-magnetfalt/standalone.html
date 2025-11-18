@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magnetfält - Rak Ledare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+      ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "three": "https://esm.sh/three@0.149.0",
+    "three/": "https://esm.sh/three@0.149.0/",
+    "@react-three/fiber": "https://esm.sh/@react-three/fiber@8.10.0?deps=react@18.2.0,three@0.149.0",
+    "@react-three/drei": "https://esm.sh/@react-three/drei@9.56.0?deps=react@18.2.0,three@0.149.0,@react-three/fiber@8.10.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-900 text-white font-sans">
+    <div id="root"></div>
+    <script type="module">
+import React, { useState, useCallback, useRef, useMemo, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Stars, Text } from '@react-three/drei';
+import * as THREE from 'three';
+
+const FIELD_COLOR = "#3b82f6";
+
+// Conductor Component
+const Conductor = ({ direction, showLabels }) => {
+  const arrowGroupRef = useRef(null);
+
+  useFrame((state) => {
+    if (arrowGroupRef.current) {
+      const t = state.clock.getElapsedTime();
+      arrowGroupRef.current.position.y = (t % 1.5) * 2 * direction - (1 * direction);
+    }
+  });
+
+  const wireHeight = 10;
+  const wireRadius = 0.04;
+
+  return React.createElement('group', null,
+    React.createElement('mesh', { position: [0, 0, 0] },
+      React.createElement('cylinderGeometry', { args: [wireRadius, wireRadius, wireHeight, 16] }),
+      React.createElement('meshStandardMaterial', {
+        color: "#94a3b8",
+        emissive: "#94a3b8",
+        emissiveIntensity: 0.3,
+        metalness: 0.5,
+        roughness: 0.5
+      })
+    ),
+    React.createElement('group', { ref: arrowGroupRef },
+      React.createElement('group', { rotation: [direction === -1 ? Math.PI : 0, 0, 0] },
+        React.createElement('mesh', { position: [0, -0.6, 0] },
+          React.createElement('cylinderGeometry', { args: [0.08, 0.08, 1.2, 12] }),
+          React.createElement('meshStandardMaterial', { color: "#ef4444", emissive: "#ef4444", emissiveIntensity: 0.8 })
+        ),
+        React.createElement('mesh', { position: [0, 0.25, 0] },
+          React.createElement('coneGeometry', { args: [0.2, 0.5, 32] }),
+          React.createElement('meshStandardMaterial', { color: "#ef4444", emissive: "#ef4444", emissiveIntensity: 0.8 })
+        ),
+        showLabels && React.createElement(Text, {
+          position: [0.4, -0.2, 0],
+          fontSize: 0.6,
+          color: "#ef4444",
+          fontStyle: "italic",
+          anchorX: "center",
+          anchorY: "middle"
+        }, "I")
+      )
+    ),
+    React.createElement('group', { position: [0, wireHeight / 2, 0], rotation: [-Math.PI / 2, 0, 0] },
+      React.createElement('mesh', null,
+        React.createElement('ringGeometry', { args: [0.18, 0.22, 32] }),
+        React.createElement('meshStandardMaterial', { color: "#ef4444", side: THREE.DoubleSide })
+      ),
+      React.createElement('mesh', null,
+        React.createElement('circleGeometry', { args: [0.18, 32] }),
+        React.createElement('meshStandardMaterial', { color: "#64748b", side: THREE.DoubleSide })
+      ),
+      direction === 1 ?
+        React.createElement('mesh', { position: [0, 0, 0.001] },
+          React.createElement('circleGeometry', { args: [0.08, 32] }),
+          React.createElement('meshBasicMaterial', { color: "black" })
+        ) :
+        React.createElement('group', { position: [0, 0, 0.001] },
+          React.createElement('mesh', { rotation: [0, 0, Math.PI / 4] },
+            React.createElement('boxGeometry', { args: [0.25, 0.06, 0.001] }),
+            React.createElement('meshBasicMaterial', { color: "black" })
+          ),
+          React.createElement('mesh', { rotation: [0, 0, -Math.PI / 4] },
+            React.createElement('boxGeometry', { args: [0.25, 0.06, 0.001] }),
+            React.createElement('meshBasicMaterial', { color: "black" })
+          )
+        )
+    ),
+    React.createElement('group', { position: [0, -wireHeight / 2, 0], rotation: [Math.PI / 2, 0, 0] },
+      React.createElement('mesh', null,
+        React.createElement('ringGeometry', { args: [0.18, 0.22, 32] }),
+        React.createElement('meshStandardMaterial', { color: "#ef4444", side: THREE.DoubleSide })
+      ),
+      React.createElement('mesh', null,
+        React.createElement('circleGeometry', { args: [0.18, 32] }),
+        React.createElement('meshStandardMaterial', { color: "#64748b", side: THREE.DoubleSide })
+      ),
+      direction === 1 ?
+        React.createElement('group', { position: [0, 0, 0.001] },
+          React.createElement('mesh', { rotation: [0, 0, Math.PI / 4] },
+            React.createElement('boxGeometry', { args: [0.25, 0.06, 0.001] }),
+            React.createElement('meshBasicMaterial', { color: "black" })
+          ),
+          React.createElement('mesh', { rotation: [0, 0, -Math.PI / 4] },
+            React.createElement('boxGeometry', { args: [0.25, 0.06, 0.001] }),
+            React.createElement('meshBasicMaterial', { color: "black" })
+          )
+        ) :
+        React.createElement('mesh', { position: [0, 0, 0.001] },
+          React.createElement('circleGeometry', { args: [0.08, 32] }),
+          React.createElement('meshBasicMaterial', { color: "black" })
+        )
+    )
+  );
+};
+
+// FieldLines Component
+const FieldLines = ({ showLines, showDirection, currentDirection, showLabels }) => {
+  const groupRef = useRef(null);
+  const radii = [1.2, 2.2, 3.2, 4.2];
+  const arrowsPerRing = 8;
+
+  const arrowShape = useMemo(() => {
+    const shape = new THREE.Shape();
+    const width = 0.15;
+    const length = 0.4;
+    shape.moveTo(0, length);
+    shape.lineTo(width, 0);
+    shape.lineTo(0, 0.1);
+    shape.lineTo(-width, 0);
+    shape.lineTo(0, length);
+    return shape;
+  }, []);
+
+  useFrame((state) => {
+    if (groupRef.current && showLines) {
+      groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.1 * currentDirection;
+    }
+  });
+
+  if (!showLines) return null;
+
+  return React.createElement('group', { ref: groupRef },
+    radii.map((radius, i) =>
+      React.createElement('mesh', { key: "ring-" + i, rotation: [Math.PI / 2, 0, 0] },
+        React.createElement('torusGeometry', { args: [radius, 0.02, 16, 100] }),
+        React.createElement('meshStandardMaterial', {
+          color: FIELD_COLOR,
+          emissive: FIELD_COLOR,
+          emissiveIntensity: 0.5,
+          transparent: true,
+          opacity: 0.4
+        })
+      )
+    ),
+    showDirection && radii.map((radius, ringIdx) =>
+      React.createElement('group', { key: "arrows-group-" + ringIdx },
+        Array.from({ length: arrowsPerRing }).map((_, arrowIdx) => {
+          const angle = (arrowIdx / arrowsPerRing) * Math.PI * 2;
+          const x = Math.cos(angle) * radius;
+          const z = Math.sin(angle) * radius;
+          const rotationY = currentDirection === 1 ? Math.PI - angle : -angle;
+          const isLabelArrow = ringIdx === 1 && arrowIdx === 0;
+
+          return React.createElement('group', {
+            key: "arrow-container-" + ringIdx + "-" + arrowIdx,
+            position: [x, 0, z],
+            rotation: [0, rotationY, 0]
+          },
+            React.createElement('mesh', { rotation: [Math.PI / 2, 0, 0] },
+              React.createElement('shapeGeometry', { args: [arrowShape] }),
+              React.createElement('meshStandardMaterial', {
+                color: FIELD_COLOR,
+                emissive: "#60a5fa",
+                emissiveIntensity: 0.8,
+                side: THREE.DoubleSide,
+                roughness: 0.2
+              })
+            ),
+            showLabels && isLabelArrow && React.createElement(Text, {
+              position: [0, 0.5, 0],
+              fontSize: 0.6,
+              color: FIELD_COLOR,
+              fontStyle: "italic",
+              anchorX: "center",
+              anchorY: "bottom"
+            }, "B")
+          );
+        })
+      )
+    ),
+    showLabels && !showDirection && React.createElement(Text, {
+      position: [radii[1], 0.3, 0],
+      fontSize: 0.6,
+      color: FIELD_COLOR,
+      fontStyle: "italic",
+      anchorX: "center",
+      anchorY: "bottom"
+    }, "B")
+  );
+};
+
+// Loader Component
+const Loader = () => {
+  return React.createElement(Text, {
+    position: [0, 0, 0],
+    fontSize: 0.5,
+    color: "white",
+    anchorX: "center",
+    anchorY: "middle"
+  }, "Laddar 3D-scen...");
+};
+
+// Scene3D Component
+const Scene3D = ({ currentDirection, showFieldLines, showFieldDirection, showLabels }) => {
+  return React.createElement(Canvas, {
+    camera: { position: [10, 6, 12], fov: 45 },
+    shadows: true,
+    gl: { antialias: true, alpha: true }
+  },
+    React.createElement('color', { attach: "background", args: ['#0f172a'] }),
+    React.createElement(Suspense, { fallback: React.createElement(Loader) },
+      React.createElement('ambientLight', { intensity: 0.5 }),
+      React.createElement('pointLight', { position: [10, 10, 10], intensity: 1, castShadow: true }),
+      React.createElement('pointLight', { position: [-10, -10, -5], intensity: 0.5, color: "#4f46e5" }),
+      React.createElement(Stars, { radius: 100, depth: 50, count: 5000, factor: 4, saturation: 0, fade: true, speed: 1 }),
+      React.createElement(Conductor, { direction: currentDirection, showLabels: showLabels }),
+      React.createElement(FieldLines, {
+        showLines: showFieldLines,
+        showDirection: showFieldDirection,
+        currentDirection: currentDirection,
+        showLabels: showLabels
+      }),
+      React.createElement(OrbitControls, {
+        makeDefault: true,
+        minPolarAngle: 0,
+        maxPolarAngle: Math.PI,
+        minDistance: 2,
+        maxDistance: 20
+      })
+    )
+  );
+};
+
+// UIControls Component
+const UIControls = ({ currentDirection, showFieldLines, showFieldDirection, showLabels, onToggleDirection, onToggleFieldLines, onToggleFieldDirection, onToggleLabels }) => {
+  return React.createElement('div', { className: "absolute top-4 left-4 md:top-8 md:left-8 z-10 max-w-sm w-full" },
+    React.createElement('div', { className: "bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-xl p-6 shadow-2xl text-slate-100" },
+      React.createElement('h1', { className: "text-xl font-bold mb-1 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent" },
+        "Magnetfält (B) - Rak Ledare"
+      ),
+      React.createElement('p', { className: "text-slate-400 text-sm mb-6" },
+        "Oersteds experiment: Visualisering av högerhandsregeln."
+      ),
+      React.createElement('div', { className: "space-y-6" },
+        React.createElement('div', { className: "space-y-2" },
+          React.createElement('label', { className: "text-xs font-semibold text-slate-400 uppercase tracking-wider" },
+            "Strömriktning (I)"
+          ),
+          React.createElement('button', {
+            onClick: onToggleDirection,
+            className: "w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-300 font-medium group " + (
+              currentDirection === 1
+                ? "bg-red-500/20 border border-red-500/50 text-red-200 hover:bg-red-500/30"
+                : "bg-blue-500/20 border border-blue-500/50 text-blue-200 hover:bg-blue-500/30"
+            )
+          },
+            React.createElement('span', { className: "flex items-center gap-2" },
+              currentDirection === 1 ? '↑ Ström Uppåt' : '↓ Ström Nedåt'
+            )
+          )
+        ),
+        React.createElement('div', { className: "space-y-3" },
+          React.createElement('label', { className: "text-xs font-semibold text-slate-400 uppercase tracking-wider" },
+            "Visualisering"
+          ),
+          React.createElement('div', {
+            className: "flex items-center justify-between p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-colors cursor-pointer border border-transparent hover:border-slate-600",
+            onClick: onToggleFieldLines
+          },
+            React.createElement('div', { className: "flex items-center gap-3" },
+              React.createElement('div', {
+                className: "w-5 h-5 rounded border flex items-center justify-center transition-colors " + (showFieldLines ? "bg-blue-500 border-blue-500" : "border-slate-500")
+              }, showFieldLines && '✓'),
+              React.createElement('span', { className: "text-sm" }, "Visa magnetfält (Cirklar)")
+            )
+          ),
+          React.createElement('div', {
+            className: "flex items-center justify-between p-3 rounded-lg bg-slate-700/30 transition-all cursor-pointer border border-transparent " + (
+              !showFieldLines ? "opacity-50 pointer-events-none grayscale" : "hover:bg-slate-700/50 hover:border-slate-600"
+            ),
+            onClick: () => showFieldLines && onToggleFieldDirection()
+          },
+            React.createElement('div', { className: "flex items-center gap-3" },
+              React.createElement('div', {
+                className: "w-5 h-5 rounded border flex items-center justify-center transition-colors " + (showFieldDirection ? "bg-emerald-500 border-emerald-500" : "border-slate-500")
+              }, showFieldDirection && '✓'),
+              React.createElement('span', { className: "text-sm" }, "Visa fältriktning (Pilar)")
+            )
+          ),
+          React.createElement('div', {
+            className: "flex items-center justify-between p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-colors cursor-pointer border border-transparent hover:border-slate-600",
+            onClick: onToggleLabels
+          },
+            React.createElement('div', { className: "flex items-center gap-3" },
+              React.createElement('div', {
+                className: "w-5 h-5 rounded border flex items-center justify-center transition-colors " + (showLabels ? "bg-purple-500 border-purple-500" : "border-slate-500")
+              }, showLabels && '✓'),
+              React.createElement('span', { className: "text-sm" }, "Visa beteckningar (I, B)")
+            )
+          )
+        )
+      ),
+      React.createElement('div', { className: "mt-6 pt-4 border-t border-slate-700/50 flex gap-3 items-start text-xs text-slate-400" },
+        React.createElement('span', { className: "text-blue-400" }, "ℹ"),
+        React.createElement('p', null,
+          "Enligt ",
+          React.createElement('strong', null, "högerhandsregeln"),
+          ": Om du griper om ledaren med höger hand så att tummen pekar i strömmens riktning, så pekar dina övriga fingrar i magnetfältets riktning."
+        )
+      )
+    )
+  );
+};
+
+// Main App Component
+const App = () => {
+  const [currentDirection, setCurrentDirection] = useState(1);
+  const [showFieldLines, setShowFieldLines] = useState(true);
+  const [showFieldDirection, setShowFieldDirection] = useState(false);
+  const [showLabels, setShowLabels] = useState(false);
+
+  const handleToggleDirection = useCallback(() => {
+    setCurrentDirection(prev => prev === 1 ? -1 : 1);
+  }, []);
+
+  const handleToggleFieldLines = useCallback(() => {
+    setShowFieldLines(prev => {
+      const newShowLines = !prev;
+      if (!newShowLines) {
+        setShowFieldDirection(false);
+      }
+      return newShowLines;
+    });
+  }, []);
+
+  const handleToggleFieldDirection = useCallback(() => {
+    setShowFieldDirection(prev => !prev);
+  }, []);
+
+  const handleToggleLabels = useCallback(() => {
+    setShowLabels(prev => !prev);
+  }, []);
+
+  return React.createElement('div', { className: "relative w-screen h-screen bg-slate-900" },
+    React.createElement('div', { style: { width: '100%', height: '100vh' } },
+      React.createElement(Scene3D, {
+        currentDirection: currentDirection,
+        showFieldLines: showFieldLines,
+        showFieldDirection: showFieldDirection,
+        showLabels: showLabels
+      })
+    ),
+    React.createElement(UIControls, {
+      currentDirection: currentDirection,
+      showFieldLines: showFieldLines,
+      showFieldDirection: showFieldDirection,
+      showLabels: showLabels,
+      onToggleDirection: handleToggleDirection,
+      onToggleFieldLines: handleToggleFieldLines,
+      onToggleFieldDirection: handleToggleFieldDirection,
+      onToggleLabels: handleToggleLabels
+    }),
+    React.createElement('div', { className: "absolute bottom-4 right-4 text-slate-500 text-xs pointer-events-none select-none" },
+      "Interaktiv Fysik • React Three Fiber"
+    )
+  );
+};
+
+// Mount App
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const root = createRoot(rootElement);
+  root.render(React.createElement(App));
+}
+    </script>
+  </body>
+</html>

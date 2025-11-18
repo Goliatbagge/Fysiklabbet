@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trycksimulering p = F/A</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'ice-blue': '#e0f2fe',
+              'deep-blue': '#075985',
+              'accent-orange': '#f97316',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-in-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "three": "https://esm.sh/three@0.149.0",
+    "three/": "https://esm.sh/three@0.149.0/",
+    "@react-three/fiber": "https://esm.sh/@react-three/fiber@8.10.0?deps=react@18.2.0,three@0.149.0",
+    "@react-three/drei": "https://esm.sh/@react-three/drei@9.56.0?deps=react@18.2.0,three@0.149.0,@react-three/fiber@8.10.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-900 text-white font-sans">
+    <div id="root"></div>
+    <script type="module">
+import React, { useState, useMemo, useCallback, useRef, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, Text, Plane, Circle } from '@react-three/drei';
+import * as THREE from 'three';
+
+// Constants
+const ICE_BREAKING_POINT = 10000;
+const INITIAL_FORCE = 5000;
+const INITIAL_AREA = 1.0;
+const MIN_FORCE = 100;
+const MAX_FORCE = 25000;
+const MIN_AREA = 0.1;
+const MAX_AREA = 2.5;
+const MIN_CYLINDER_HEIGHT = 0.5;
+const MAX_CYLINDER_HEIGHT = 4.0;
+
+// Ice Component
+const Ice = ({ isBroken, pressure, breakingPoint, area }) => {
+  const holeRadius = useMemo(() => Math.sqrt(area / Math.PI), [area]);
+
+  const cracksTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    const size = 512;
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext('2d');
+    if (!context) return new THREE.CanvasTexture(canvas);
+
+    context.strokeStyle = 'rgba(0, 10, 20, 1)';
+    context.lineWidth = 1.5;
+    context.lineCap = 'round';
+
+    const centerX = size / 2;
+    const centerY = size / 2;
+
+    for (let i = 0; i < 8; i++) {
+        let angle = (i / 8) * Math.PI * 2 + (Math.random() - 0.5) * 0.2;
+        let len1 = size / 5 + Math.random() * size / 10;
+        let ex1 = centerX + Math.cos(angle) * len1;
+        let ey1 = centerY + Math.sin(angle) * len1;
+        context.beginPath();
+        context.moveTo(centerX, centerY);
+        context.lineTo(ex1, ey1);
+        context.stroke();
+
+        let angle2 = angle + (Math.random() - 0.5) * 0.8;
+        let len2 = len1 * (Math.random() * 0.3 + 0.2);
+        let ex2 = ex1 + Math.cos(angle2) * len2;
+        let ey2 = ey1 + Math.sin(angle2) * len2;
+        context.beginPath();
+        context.moveTo(ex1, ey1);
+        context.lineTo(ex2, ey2);
+        context.stroke();
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }, []);
+
+  const cracksOpacity = useMemo(() => {
+    if (isBroken) return 0.8;
+    const pressureRatio = pressure / breakingPoint;
+    if (pressureRatio < 0.7) return 0;
+    const opacity = ((pressureRatio - 0.7) / 0.3) * 0.8;
+    return Math.min(Math.max(opacity, 0), 0.8);
+  }, [pressure, breakingPoint, isBroken]);
+
+  return React.createElement('group', null,
+    React.createElement(Plane, {
+      args: [20, 20],
+      rotation: [-Math.PI / 2, 0, 0],
+      position: [0, 0, 0],
+      receiveShadow: true,
+      children: React.createElement('meshStandardMaterial', {
+        color: "#e0f2fe",
+        opacity: 0.85,
+        transparent: true,
+        roughness: 0.1,
+        metalness: 0.2,
+        side: THREE.DoubleSide
+      })
+    }),
+    React.createElement(Circle, {
+      args: [3, 64],
+      rotation: [-Math.PI / 2, 0, 0],
+      position: [0, 0.01, 0],
+      children: React.createElement('meshStandardMaterial', {
+        map: cracksTexture,
+        transparent: true,
+        opacity: cracksOpacity,
+        alphaTest: 0.1,
+        depthWrite: false,
+        side: THREE.DoubleSide
+      })
+    }),
+    isBroken && React.createElement(Circle, {
+      args: [holeRadius, 32],
+      rotation: [-Math.PI / 2, 0, 0],
+      position: [0, 0.02, 0],
+      children: React.createElement('meshBasicMaterial', { color: "black" })
+    })
+  );
+};
+
+// WeightObject Component
+const WeightObject = ({ area, isBroken, force }) => {
+  const meshRef = useRef(null);
+
+  const height = useMemo(() => {
+    const forceRatio = (force - MIN_FORCE) / (MAX_FORCE - MIN_FORCE);
+    return MIN_CYLINDER_HEIGHT + forceRatio * (MAX_CYLINDER_HEIGHT - MIN_CYLINDER_HEIGHT);
+  }, [force]);
+
+  const radius = useMemo(() => Math.sqrt(area / Math.PI), [area]);
+
+  useFrame((state, delta) => {
+    if (isBroken && meshRef.current && meshRef.current.position.y > -10) {
+      meshRef.current.position.y -= 9.8 * delta * 2;
+      meshRef.current.rotation.x += delta;
+      meshRef.current.rotation.z += delta * 0.5;
+    }
+  });
+
+  return React.createElement('mesh', {
+    ref: meshRef,
+    position: [0, height / 2, 0],
+    castShadow: true
+  },
+    React.createElement('cylinderGeometry', { args: [radius, radius, height, 32] }),
+    React.createElement('meshStandardMaterial', { color: "#f97316", roughness: 0.3, metalness: 0.8 })
+  );
+};
+
+// Loader Component
+const Loader = () => {
+  return React.createElement(Text, {
+    position: [0, 0, 0],
+    fontSize: 0.5,
+    color: "white",
+    anchorX: "center",
+    anchorY: "middle"
+  }, "Laddar 3D-scen...");
+};
+
+// Scene3D Component
+const Scene3D = ({ area, force, isBroken, pressure, breakingPoint }) => {
+  return React.createElement(Canvas, {
+    camera: { position: [5, 5, 5], fov: 50 },
+    shadows: true,
+    gl: { antialias: true, alpha: true }
+  },
+    React.createElement(Suspense, { fallback: React.createElement(Loader) },
+      React.createElement('ambientLight', { intensity: 0.5 }),
+      React.createElement('directionalLight', {
+        position: [10, 10, 5],
+        intensity: 1.5,
+        castShadow: true,
+        'shadow-mapSize-width': 2048,
+        'shadow-mapSize-height': 2048
+      }),
+      React.createElement('pointLight', { position: [-10, -10, -5], intensity: 0.3 }),
+      React.createElement(WeightObject, { area, isBroken, force }),
+      React.createElement(Ice, { area, isBroken, pressure, breakingPoint }),
+      React.createElement(OrbitControls, {
+        enablePan: true,
+        enableZoom: true,
+        enableRotate: true,
+        minDistance: 3,
+        maxDistance: 20
+      })
+    )
+  );
+};
+
+// SliderControl Component
+const SliderControl = ({ label, value, min, max, step, unit, onChange, disabled }) => {
+  const isArea = unit === 'm²';
+  const displayValue = isArea ? value.toFixed(2) : value.toFixed(0);
+
+  return React.createElement('div', { className: "flex flex-col gap-2" },
+    React.createElement('div', { className: "flex justify-between items-baseline" },
+      React.createElement('label', { className: "font-semibold text-lg text-sky-300" }, label),
+      React.createElement('span', { className: "text-lg font-mono bg-slate-700 text-white py-1 px-3 rounded" },
+        displayValue + " " + unit
+      )
+    ),
+    React.createElement('input', {
+      type: "range",
+      min,
+      max,
+      step,
+      value,
+      onChange,
+      disabled,
+      className: "w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-accent-orange [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-accent-orange [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:shadow-md disabled:[&::-webkit-slider-thumb]:bg-slate-500 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:bg-accent-orange [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-none disabled:[&::-moz-range-thumb]:bg-slate-500"
+    })
+  );
+};
+
+// InfoPanel Component
+const InfoPanel = ({ force, area, pressure, isBroken, breakingPoint, onReset }) => {
+  const pressurePercent = Math.min((pressure / breakingPoint) * 100, 100);
+  const isOverLimit = pressure > breakingPoint;
+
+  return React.createElement('div', { className: "bg-slate-800/50 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-sky-800 animate-fade-in" },
+    React.createElement('h2', { className: "text-lg font-bold mb-3 text-sky-200 border-b border-sky-700 pb-2" }, "Resultat"),
+    React.createElement('div', { className: "space-y-2 text-base" },
+      React.createElement('p', { className: "flex justify-between" },
+        React.createElement('span', { className: "text-slate-300" }, "Tyngd (F):"),
+        React.createElement('span', { className: "font-mono" }, force.toFixed(0) + " N")
+      ),
+      React.createElement('p', { className: "flex justify-between" },
+        React.createElement('span', { className: "text-slate-300" }, "Area (A):"),
+        React.createElement('span', { className: "font-mono" }, area.toFixed(2) + " m²")
+      ),
+      React.createElement('p', { className: "flex justify-between items-baseline font-bold text-lg text-sky-100 border-t border-slate-700 pt-2" },
+        React.createElement('span', { className: "text-sky-300" }, "Tryck (p):"),
+        React.createElement('span', { className: "font-mono" }, pressure.toFixed(0) + " Pa")
+      )
+    ),
+    React.createElement('div', { className: "mt-3" },
+      React.createElement('h3', { className: "font-semibold text-sky-300 mb-1 text-sm" }, "Isens Hållfasthet"),
+      React.createElement('div', { className: "w-full bg-slate-700 rounded-full h-3 overflow-hidden border-2 border-slate-600" },
+        React.createElement('div', {
+          className: `h-full rounded-full transition-all duration-300 ${isOverLimit ? 'bg-red-500' : 'bg-cyan-400'}`,
+          style: { width: `${pressurePercent}%` }
+        })
+      ),
+      React.createElement('div', { className: "text-xs text-slate-400 text-right mt-1" }, "Gräns: " + breakingPoint + " Pa")
+    ),
+    React.createElement('div', { className: "mt-3 text-center" },
+      isBroken ?
+        React.createElement('div', { className: "p-3 bg-red-900/50 border border-red-700 rounded-lg" },
+          React.createElement('p', { className: "text-xl font-bold text-red-300 animate-pulse" }, "ISEN SPRACK!"),
+          React.createElement('p', { className: "text-sm text-red-400" }, "Trycket blev för högt.")
+        ) :
+        React.createElement('div', { className: "p-3 bg-green-900/50 border border-green-700 rounded-lg" },
+          React.createElement('p', { className: "text-xl font-bold text-green-300" }, "Isen håller"),
+          React.createElement('p', { className: "text-sm text-green-400" }, "Trycket är under gränsen.")
+        )
+    ),
+    React.createElement('button', {
+      onClick: onReset,
+      className: "w-full mt-3 bg-accent-orange hover:bg-orange-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-orange-500/50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+    }, "Återställ Simulering")
+  );
+};
+
+// Main App Component
+const App = () => {
+  const [force, setForce] = useState(INITIAL_FORCE);
+  const [area, setArea] = useState(INITIAL_AREA);
+  const [isBroken, setIsBroken] = useState(false);
+  const [key, setKey] = useState(0);
+
+  const pressure = useMemo(() => {
+    if (area === 0) return Infinity;
+    const calculatedPressure = force / area;
+    if (calculatedPressure > ICE_BREAKING_POINT && !isBroken) {
+      setIsBroken(true);
+    }
+    return calculatedPressure;
+  }, [force, area, isBroken]);
+
+  const handleReset = useCallback(() => {
+    setForce(INITIAL_FORCE);
+    setArea(INITIAL_AREA);
+    setIsBroken(false);
+    setKey(prevKey => prevKey + 1);
+  }, []);
+
+  return React.createElement('div', { className: "min-h-screen w-full bg-gradient-to-br from-slate-900 to-sky-900 flex flex-col items-center p-3 lg:p-4 font-sans" },
+    React.createElement('header', { className: "w-full max-w-6xl text-center mb-2 md:mb-3" },
+      React.createElement('h1', { className: "text-2xl md:text-4xl font-bold text-ice-blue" }, "Interaktiv Trycksimulering"),
+      React.createElement('p', { className: "text-base md:text-xl text-sky-300 mt-1" }, "p = F / A")
+    ),
+    React.createElement('main', { className: "w-full max-w-6xl flex-grow flex flex-col lg:flex-row gap-4" },
+      React.createElement('div', { className: "lg:w-3/5 h-[40vh] lg:h-auto rounded-xl bg-black/30 shadow-2xl overflow-hidden border border-sky-700" },
+        React.createElement(Scene3D, { key, area, force, isBroken, pressure, breakingPoint: ICE_BREAKING_POINT })
+      ),
+      React.createElement('div', { className: "lg:w-2/5 flex flex-col gap-3" },
+        React.createElement('div', { className: "bg-slate-800/50 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-sky-800 animate-fade-in" },
+          React.createElement('h2', { className: "text-lg font-bold mb-3 text-sky-200 border-b border-sky-700 pb-2" }, "Kontrollpanel"),
+          React.createElement('div', { className: "space-y-4" },
+            React.createElement(SliderControl, {
+              label: "Tyngd (F)",
+              value: force,
+              min: MIN_FORCE,
+              max: MAX_FORCE,
+              step: 10,
+              unit: "N",
+              onChange: (e) => !isBroken && setForce(parseFloat(e.target.value)),
+              disabled: isBroken
+            }),
+            React.createElement(SliderControl, {
+              label: "Area (A)",
+              value: area,
+              min: MIN_AREA,
+              max: MAX_AREA,
+              step: 0.05,
+              unit: "m²",
+              onChange: (e) => !isBroken && setArea(parseFloat(e.target.value)),
+              disabled: isBroken
+            })
+          )
+        ),
+        React.createElement(InfoPanel, {
+          force,
+          area,
+          pressure,
+          isBroken,
+          breakingPoint: ICE_BREAKING_POINT,
+          onReset: handleReset
+        })
+      )
+    )
+  );
+};
+
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+root.render(React.createElement(App));
+    </script>
+  </body>
+</html>

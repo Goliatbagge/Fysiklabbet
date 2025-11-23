@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sträcka-tid-diagram - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+        .calc-step {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: 0.25rem;
+        }
+        .highlight-value {
+            background: #fef3c7;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const DistanceTimeSimulation = () => {
+            const [motionType, setMotionType] = useState('constant-velocity');
+            const [s0, setS0] = useState(0); // Initial position (m)
+            const [velocity, setVelocity] = useState(5); // Velocity (m/s)
+            const [showSlope, setShowSlope] = useState(false);
+            const [tangentTime, setTangentTime] = useState(5); // Time for tangent point
+
+            // Helper function to format numbers with comma as decimal separator (Swedish standard)
+            const formatNumber = (num, decimals = 1) => {
+                return num.toFixed(decimals).replace('.', ',');
+            };
+
+            // Calculate position at time t
+            const getPosition = (t) => {
+                switch(motionType) {
+                    case 'constant-velocity':
+                        return s0 + velocity * t;
+                    case 'accelerating':
+                        // s = s0 + v0*t + (1/2)*a*t²
+                        // Using velocity as v0 and acceleration = 1 m/s²
+                        return s0 + velocity * t + 0.5 * 1 * Math.pow(t, 2);
+                    case 'decelerating':
+                        // Deceleration with a = -0.5 m/s²
+                        return s0 + velocity * t + 0.5 * (-0.5) * Math.pow(t, 2);
+                    default:
+                        return s0;
+                }
+            };
+
+            // Calculate instantaneous velocity at time t (slope)
+            const getVelocityAtTime = (t) => {
+                switch(motionType) {
+                    case 'constant-velocity':
+                        return velocity;
+                    case 'accelerating':
+                        // v = v0 + at, where a = 1 m/s²
+                        return velocity + 1 * t;
+                    case 'decelerating':
+                        // v = v0 + at, where a = -0.5 m/s²
+                        return velocity + (-0.5) * t;
+                    default:
+                        return velocity;
+                }
+            };
+
+            // Calculate average velocity (slope) between two points
+            const getAverageSlope = (t1, t2) => {
+                const s1 = getPosition(t1);
+                const s2 = getPosition(t2);
+                return (s2 - s1) / (t2 - t1);
+            };
+
+            // SVG parameters
+            const svgWidth = 700;
+            const svgHeight = 400;
+            const padding = 60;
+            const graphWidth = svgWidth - 2 * padding;
+            const graphHeight = svgHeight - 2 * padding;
+
+            // Fixed scale for pedagogical clarity
+            const FIXED_MAX_TIME = 20;
+            const FIXED_MAX_S = 150;
+            const FIXED_MIN_S = -150;
+
+            const minS = FIXED_MIN_S;
+            const maxS = FIXED_MAX_S;
+
+            // Y-axis values with fixed step
+            const sStep = 20;
+            const yAxisValues = [];
+            for (let s = minS; s <= maxS; s += sStep) {
+                yAxisValues.push(s);
+            }
+
+            // Scale functions with fixed ranges
+            const scaleX = (t) => padding + (t / FIXED_MAX_TIME) * graphWidth;
+            const scaleY = (s) => svgHeight - padding - ((s - minS) / (maxS - minS)) * graphHeight;
+
+            // Generate path for graph
+            const generatePath = () => {
+                const points = [];
+                const steps = 100;
+                for (let i = 0; i <= steps; i++) {
+                    const t = (i / steps) * FIXED_MAX_TIME;
+                    const s = getPosition(t);
+                    points.push(`${scaleX(t)},${scaleY(s)}`);
+                }
+                return `M ${points.join(' L ')}`;
+            };
+
+            const avgSlope = getAverageSlope(2, 6);
+            const velocityAtTangent = getVelocityAtTime(tangentTime);
+            const positionAtTangent = getPosition(tangentTime);
+
+            return (
+                <div className="min-h-screen bg-gray-50 py-8 px-4">
+                    <div className="max-w-7xl mx-auto">
+                        {/* Header */}
+                        <div className="text-center mb-8">
+                            <h1 className="text-5xl font-bold text-gray-900 mb-4">Sträcka-tid-diagram</h1>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                Utforska hur sträcka förändras över tid. Lär dig tolka grafer och beräkna hastighet från lutning!
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            {/* Main Graph Area */}
+                            <div className="lg:col-span-2 space-y-6">
+                                {/* Graph */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-800">Sträcka-tid-graf</h2>
+                                    <svg width={svgWidth} height={svgHeight} className="border-2 border-gray-200 rounded-lg bg-white">
+                                        <defs>
+                                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                                <polygon points="0 0, 10 3, 0 6" fill="#000" />
+                                            </marker>
+                                        </defs>
+
+                                        {/* Grid lines */}
+                                        {[...Array(21)].map((_, i) => (
+                                            <line
+                                                key={`grid-x-${i}`}
+                                                x1={scaleX(i)}
+                                                y1={padding}
+                                                x2={scaleX(i)}
+                                                y2={svgHeight - padding}
+                                                stroke="#e5e7eb"
+                                                strokeWidth="1"
+                                            />
+                                        ))}
+                                        {yAxisValues.map((s, i) => (
+                                            <line
+                                                key={`grid-y-${i}`}
+                                                x1={padding}
+                                                y1={scaleY(s)}
+                                                x2={svgWidth - padding}
+                                                y2={scaleY(s)}
+                                                stroke="#e5e7eb"
+                                                strokeWidth="1"
+                                            />
+                                        ))}
+
+                                        {/* Axes with arrows */}
+                                        <line
+                                            x1={padding}
+                                            y1={scaleY(0)}
+                                            x2={svgWidth - padding + 10}
+                                            y2={scaleY(0)}
+                                            stroke="#000"
+                                            strokeWidth="2"
+                                            markerEnd="url(#arrowhead)"
+                                        />
+                                        <line
+                                            x1={padding}
+                                            y1={svgHeight - padding}
+                                            x2={padding}
+                                            y2={padding - 10}
+                                            stroke="#000"
+                                            strokeWidth="2"
+                                            markerEnd="url(#arrowhead)"
+                                        />
+
+                                        {/* Axis labels */}
+                                        {[...Array(21)].map((_, i) => (
+                                            <text
+                                                key={`label-x-${i}`}
+                                                x={scaleX(i)}
+                                                y={scaleY(0) + 20}
+                                                textAnchor="middle"
+                                                fontSize="12"
+                                                fill="#666"
+                                            >
+                                                {i}
+                                            </text>
+                                        ))}
+                                        {yAxisValues.map((s, i) => (
+                                            <text
+                                                key={`label-y-${i}`}
+                                                x={padding - 10}
+                                                y={scaleY(s) + 5}
+                                                textAnchor="end"
+                                                fontSize="12"
+                                                fill="#666"
+                                            >
+                                                {s}
+                                            </text>
+                                        ))}
+
+                                        {/* Axis titles */}
+                                        <text x={svgWidth / 2} y={svgHeight - 10} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#333">
+                                            Tid (s)
+                                        </text>
+                                        <text
+                                            x={20}
+                                            y={svgHeight / 2}
+                                            textAnchor="middle"
+                                            fontSize="16"
+                                            fontWeight="bold"
+                                            fill="#333"
+                                            transform={`rotate(-90, 20, ${svgHeight / 2})`}
+                                        >
+                                            Sträcka (m)
+                                        </text>
+
+                                        {/* Main graph line */}
+                                        <path
+                                            d={generatePath()}
+                                            fill="none"
+                                            stroke="#ef4444"
+                                            strokeWidth="3"
+                                        />
+
+                                        {/* Slope indicator */}
+                                        {showSlope && motionType === 'constant-velocity' && (
+                                            <>
+                                                {/* Slope triangle */}
+                                                <line
+                                                    x1={scaleX(2)}
+                                                    y1={scaleY(getPosition(2))}
+                                                    x2={scaleX(6)}
+                                                    y2={scaleY(getPosition(6))}
+                                                    stroke="#10b981"
+                                                    strokeWidth="2"
+                                                    strokeDasharray="5,5"
+                                                />
+                                                <line
+                                                    x1={scaleX(2)}
+                                                    y1={scaleY(getPosition(2))}
+                                                    x2={scaleX(6)}
+                                                    y2={scaleY(getPosition(2))}
+                                                    stroke="#10b981"
+                                                    strokeWidth="2"
+                                                />
+                                                <line
+                                                    x1={scaleX(6)}
+                                                    y1={scaleY(getPosition(2))}
+                                                    x2={scaleX(6)}
+                                                    y2={scaleY(getPosition(6))}
+                                                    stroke="#10b981"
+                                                    strokeWidth="2"
+                                                />
+                                                <text
+                                                    x={(scaleX(2) + scaleX(6)) / 2}
+                                                    y={scaleY(getPosition(2)) + 20}
+                                                    textAnchor="middle"
+                                                    fontSize="14"
+                                                    fill="#10b981"
+                                                    fontWeight="bold"
+                                                >
+                                                    Δt = 4 s
+                                                </text>
+                                                <text
+                                                    x={scaleX(6) + 35}
+                                                    y={(scaleY(getPosition(2)) + scaleY(getPosition(6))) / 2}
+                                                    textAnchor="middle"
+                                                    fontSize="14"
+                                                    fill="#10b981"
+                                                    fontWeight="bold"
+                                                >
+                                                    Δs = {formatNumber(getPosition(6) - getPosition(2))} m
+                                                </text>
+                                            </>
+                                        )}
+
+                                        {/* Tangent line for curved graphs */}
+                                        {showSlope && motionType !== 'constant-velocity' && (
+                                            <>
+                                                {/* Tangent at selected time */}
+                                                {(() => {
+                                                    const t = tangentTime;
+                                                    const s = getPosition(t);
+                                                    const v = getVelocityAtTime(t);
+                                                    // Extend tangent line across entire graph
+                                                    const x1 = scaleX(0);
+                                                    const y1 = scaleY(s - v * t);
+                                                    const x2 = scaleX(20);
+                                                    const y2 = scaleY(s + v * (20 - t));
+
+                                                    return (
+                                                        <>
+                                                            <line
+                                                                x1={x1}
+                                                                y1={y1}
+                                                                x2={x2}
+                                                                y2={y2}
+                                                                stroke="#2563eb"
+                                                                strokeWidth="3"
+                                                                strokeDasharray="8,4"
+                                                            />
+                                                            <circle
+                                                                cx={scaleX(t)}
+                                                                cy={scaleY(s)}
+                                                                r="6"
+                                                                fill="#2563eb"
+                                                                stroke="#fff"
+                                                                strokeWidth="2"
+                                                            />
+                                                            <text
+                                                                x={scaleX(t) + 15}
+                                                                y={scaleY(s) - 10}
+                                                                fontSize="14"
+                                                                fill="#2563eb"
+                                                                fontWeight="bold"
+                                                            >
+                                                                Tangent vid t={t}s
+                                                            </text>
+                                                        </>
+                                                    );
+                                                })()}
+                                            </>
+                                        )}
+                                    </svg>
+
+                                    {/* Status display */}
+                                    <div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                                        <h3 className="font-bold text-lg mb-2 text-blue-900">📊 Aktuell status vid t = {tangentTime} s:</h3>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <span className="text-gray-600">Sträcka:</span>
+                                                <span className="ml-2 font-bold text-xl text-blue-600">{formatNumber(positionAtTangent, 2)} m</span>
+                                            </div>
+                                            <div>
+                                                <span className="text-gray-600">Hastighet:</span>
+                                                <span className="ml-2 font-bold text-xl text-green-600">{formatNumber(velocityAtTangent, 2)} m/s</span>
+                                            </div>
+                                        </div>
+                                        <p className="mt-2 text-sm text-gray-700">
+                                            {motionType === 'constant-velocity' && velocityAtTangent > 0 && "➡️ Objektet rör sig framåt med konstant hastighet"}
+                                            {motionType === 'constant-velocity' && velocityAtTangent < 0 && "⬅️ Objektet rör sig bakåt med konstant hastighet"}
+                                            {motionType === 'constant-velocity' && velocityAtTangent === 0 && "⏸️ Objektet står still"}
+                                            {motionType === 'accelerating' && "🚀 Objektet accelererar (hastigheten ökar)"}
+                                            {motionType === 'decelerating' && "🛑 Objektet retarderar (hastigheten minskar)"}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Slope Analysis */}
+                                {showSlope && (
+                                    <div className="bg-green-50 rounded-xl shadow-lg p-6 border-2 border-green-200">
+                                        <h2 className="text-2xl font-bold mb-4 text-green-900">📐 Lutningsanalys (Hastighet)</h2>
+                                        <div className="formula-box bg-gradient-to-r from-green-500 to-emerald-600">
+                                            v = Δs / Δt = k-värde
+                                        </div>
+                                        <div className="calc-step">
+                                            <p className="font-semibold mb-2">Beräkning av lutning:</p>
+                                            {motionType === 'constant-velocity' && (
+                                                <>
+                                                    <p>Lutning k = (s₂ - s₁) / (t₂ - t₁)</p>
+                                                    <p>k = ({formatNumber(getPosition(6))} - {formatNumber(getPosition(2))}) / (6 - 2)</p>
+                                                    <p>k = {formatNumber(getPosition(6) - getPosition(2))} / 4</p>
+                                                    <p className="mt-2"><span className="highlight-value">Hastighet v = {formatNumber(avgSlope, 2)} m/s</span></p>
+                                                </>
+                                            )}
+                                            {motionType === 'accelerating' && (
+                                                <>
+                                                    <p>För kurvig graf använder vi tangentens lutning vid t={tangentTime}s:</p>
+                                                    <p className="mt-2"><span className="highlight-value">Momentanhastighet v({tangentTime}s) = {formatNumber(velocityAtTangent, 2)} m/s</span></p>
+                                                    <p className="text-sm text-gray-600 mt-2">Hastigheten ökar med tiden (acceleration)</p>
+                                                </>
+                                            )}
+                                            {motionType === 'decelerating' && (
+                                                <>
+                                                    <p>För kurvig graf använder vi tangentens lutning vid t={tangentTime}s:</p>
+                                                    <p className="mt-2"><span className="highlight-value">Momentanhastighet v({tangentTime}s) = {formatNumber(velocityAtTangent, 2)} m/s</span></p>
+                                                    <p className="text-sm text-gray-600 mt-2">Hastigheten minskar med tiden (retardation)</p>
+                                                </>
+                                            )}
+                                        </div>
+                                        <div className="mt-4 p-4 bg-white rounded border-l-4 border-green-500">
+                                            <p className="font-semibold text-green-900">💡 Fysikalisk tolkning:</p>
+                                            <p className="text-gray-700">
+                                                Lutningen på en s-t-graf visar <strong>hastigheten</strong>.
+                                                {motionType === 'constant-velocity' && " En konstant lutning betyder konstant hastighet."}
+                                                {motionType === 'accelerating' && " En ökande lutning (uppåtböjd kurva) betyder att hastigheten ökar."}
+                                                {motionType === 'decelerating' && " En minskande lutning (nedåtböjd kurva) betyder att hastigheten minskar."}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Controls */}
+                            <div className="space-y-6">
+                                {/* Motion Type */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <h3 className="text-xl font-bold mb-4 text-gray-800">🎯 Typ av rörelse</h3>
+                                    <div className="space-y-3">
+                                        <label className={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition ${motionType === 'constant-velocity' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                                            <input
+                                                type="radio"
+                                                name="motionType"
+                                                value="constant-velocity"
+                                                checked={motionType === 'constant-velocity'}
+                                                onChange={(e) => setMotionType(e.target.value)}
+                                                className="w-5 h-5"
+                                            />
+                                            <span className="ml-3 font-medium">Konstant hastighet</span>
+                                        </label>
+                                        <label className={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition ${motionType === 'accelerating' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                                            <input
+                                                type="radio"
+                                                name="motionType"
+                                                value="accelerating"
+                                                checked={motionType === 'accelerating'}
+                                                onChange={(e) => setMotionType(e.target.value)}
+                                                className="w-5 h-5"
+                                            />
+                                            <span className="ml-3 font-medium">Accelererande rörelse</span>
+                                        </label>
+                                        <label className={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition ${motionType === 'decelerating' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                                            <input
+                                                type="radio"
+                                                name="motionType"
+                                                value="decelerating"
+                                                checked={motionType === 'decelerating'}
+                                                onChange={(e) => setMotionType(e.target.value)}
+                                                className="w-5 h-5"
+                                            />
+                                            <span className="ml-3 font-medium">Retarderande rörelse</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                {/* Parameters */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <h3 className="text-xl font-bold mb-4 text-gray-800">⚙️ Parametrar</h3>
+
+                                    {/* Initial position */}
+                                    <div className="mb-6">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <label className="font-semibold text-gray-700">Startsträcka (s₀)</label>
+                                            <span className="text-lg font-bold text-blue-600">{s0} m</span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="-20"
+                                            max="30"
+                                            step="1"
+                                            value={s0}
+                                            onChange={(e) => setS0(parseFloat(e.target.value))}
+                                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                        />
+                                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                            <span>-20 m</span>
+                                            <span>30 m</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Velocity */}
+                                    <div className="mb-6">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <label className="font-semibold text-gray-700">
+                                                {motionType === 'constant-velocity' ? 'Hastighet (v)' : 'Starthastighet (v₀)'}
+                                            </label>
+                                            <span className="text-lg font-bold text-green-600">{velocity} m/s</span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="-10"
+                                            max="10"
+                                            step="1"
+                                            value={velocity}
+                                            onChange={(e) => setVelocity(parseFloat(e.target.value))}
+                                            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                        />
+                                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                            <span>-10 m/s</span>
+                                            <span>10 m/s</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Display options */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <h3 className="text-xl font-bold mb-4 text-gray-800">👁️ Visningsalternativ</h3>
+
+                                    <label className="flex items-center mb-4 cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            checked={showSlope}
+                                            onChange={(e) => setShowSlope(e.target.checked)}
+                                            className="w-5 h-5 text-green-600"
+                                        />
+                                        <span className="ml-3 font-medium">Visa lutning (hastighet)</span>
+                                    </label>
+
+                                    {/* Tangent time slider */}
+                                    {showSlope && (
+                                        <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label className="text-sm font-medium text-green-900">Tangeringspunkt</label>
+                                                <span className="font-bold text-green-700">t = {tangentTime} s</span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                min="0"
+                                                max="20"
+                                                step="1"
+                                                value={tangentTime}
+                                                onChange={(e) => setTangentTime(parseFloat(e.target.value))}
+                                                className="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer"
+                                            />
+                                            <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                                <span>0 s</span>
+                                                <span>20 s</span>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Formulas */}
+                                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 border-2 border-purple-200">
+                                    <h3 className="text-xl font-bold mb-4 text-purple-900">📚 Formelsamling</h3>
+                                    <div className="space-y-3 text-sm">
+                                        <div className="bg-white p-3 rounded shadow">
+                                            <p className="font-bold text-purple-800">Sträcka vid konstant hastighet:</p>
+                                            <p className="font-mono mt-1">s(t) = s₀ + v·t</p>
+                                            <p className="text-xs text-gray-600 mt-1">s₀ = {s0} m, v = {velocity} m/s</p>
+                                        </div>
+                                        <div className="bg-white p-3 rounded shadow">
+                                            <p className="font-bold text-purple-800">Hastighet från lutning:</p>
+                                            <p className="font-mono mt-1">v = Δs / Δt</p>
+                                        </div>
+                                        <div className="bg-white p-3 rounded shadow">
+                                            <p className="font-bold text-purple-800">Med acceleration:</p>
+                                            <p className="font-mono mt-1">s(t) = s₀ + v₀·t + ½·a·t²</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Info box */}
+                                <div className="bg-amber-50 rounded-xl shadow-lg p-6 border-2 border-amber-200">
+                                    <h3 className="text-xl font-bold mb-3 text-amber-900">💡 Kom ihåg!</h3>
+                                    <ul className="space-y-2 text-sm text-amber-900">
+                                        <li>✓ <strong>Lutning</strong> på s-t-graf = <strong>Hastighet</strong></li>
+                                        <li>✓ Rät linje = konstant hastighet</li>
+                                        <li>✓ Uppåtböjd kurva = ökande hastighet (acceleration)</li>
+                                        <li>✓ Nedåtböjd kurva = minskande hastighet (retardation)</li>
+                                        <li>✓ Horisontell linje = stillastående (v = 0)</li>
+                                        <li>✓ Brantare lutning = högre hastighet</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<DistanceTimeSimulation />, document.getElementById('root'));
+    </script>
+</body>
+</html>

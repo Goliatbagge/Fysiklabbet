@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Värmeflöde - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'Google Sans', 'Segoe UI', 'Roboto', 'sans-serif'],
+            },
+            colors: {
+              'comic-bg': '#fdfbf7',
+              'comic-border': '#1e293b',
+            }
+          }
+        }
+      }
+    </script>
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+  }
+}
+</script>
+    <script type="module">
+      import React, { useState } from 'react';
+      import ReactDOM from 'react-dom/client';
+      import { Thermometer, MoveHorizontal, Info } from 'lucide-react';
+
+      // ===== UTILS: CONVERSIONS =====
+      const kelvinToCelsius = (k) => {
+        return Math.round(k - 273.15);
+      };
+
+      const celsiusToKelvin = (c) => {
+        return c + 273.15;
+      };
+
+      const scaleArrowSize = (temp) => {
+        // Scaling proportional to T^4 (Stefan-Boltzmann Law)
+        const referenceTemp = 310;
+        const ratio = temp / referenceTemp;
+        const scale = 0.85 * Math.pow(ratio, 4);
+        return Number(scale.toFixed(3));
+      };
+
+      // ===== COMPONENT: HEAT ARROW =====
+      const HeatArrow = ({ x, y, angle, scale, color, animate = true }) => {
+        if (scale <= 0.1) return null;
+
+        const transform = `translate(${x}, ${y}) rotate(${angle}) scale(${scale})`;
+
+        const style = animate ? {
+          animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+        } : {};
+
+        return React.createElement('g', { transform, style },
+          React.createElement('path', {
+            d: "M -40 -10 L 20 -10 L 20 -25 L 60 0 L 20 25 L 20 10 L -40 10 Z",
+            fill: color,
+            stroke: "#1e293b",
+            strokeWidth: "2",
+            strokeLinejoin: "round"
+          }),
+          React.createElement('style', null, `
+            @keyframes pulse {
+              0%, 100% { opacity: 1; transform: ${transform} scale(1); }
+              50% { opacity: 0.85; transform: ${transform} scale(0.95); }
+            }
+          `)
+        );
+      };
+
+      // ===== COMPONENT: SIMULATION CANVAS =====
+      const SimulationCanvas = ({ envTemp, humanTemp, mode, showSensation }) => {
+        const WARM_COLOR = "#ef4444";
+        const COOL_COLOR = "#3b82f6";
+        const NEUTRAL_COLOR = "#f59e0b";
+        const HUMAN_TEMP_COLOR = "#ef4444";
+
+        const envColor = envTemp > humanTemp ? WARM_COLOR : (envTemp < 285 ? COOL_COLOR : NEUTRAL_COLOR);
+        const humanColor = WARM_COLOR;
+
+        const humanAbsScale = scaleArrowSize(humanTemp);
+        const envAbsScale = scaleArrowSize(envTemp);
+
+        const rawDiff = Math.abs(humanAbsScale - envAbsScale);
+        const netScale = Math.min(rawDiff, Math.max(humanAbsScale, envAbsScale));
+
+        const netDirection = envTemp > humanTemp ? 'in' : 'out';
+
+        const CENTER_X = 400;
+        const CENTER_Y = 250;
+        const LEFT_X = 150;
+        const RIGHT_X = 650;
+
+        const netLeftArrowX = 370 - (60 * netScale);
+        const netRightArrowX = 430 + (60 * netScale);
+
+        let sensationText = "NEUTRALT";
+        let sensationColorClass = "text-slate-500";
+
+        if (envTemp < humanTemp) {
+          sensationText = "KALLT";
+          sensationColorClass = "text-blue-600";
+        } else if (envTemp > humanTemp) {
+          sensationText = "VARMT";
+          sensationColorClass = "text-red-600";
+        }
+
+        return React.createElement('div', { className: "w-full aspect-[2/1] bg-comic-bg border-4 border-slate-800 rounded-xl overflow-hidden shadow-xl relative" },
+          // SVG
+          React.createElement('svg', { className: "w-full h-full", viewBox: "0 0 800 400", xmlns: "http://www.w3.org/2000/svg" },
+            // Floor
+            React.createElement('path', { d: "M 0 350 L 800 350 L 800 400 L 0 400 Z", fill: "#d6cbb6", stroke: "#000", strokeWidth: "2" }),
+            React.createElement('line', { x1: "0", y1: "350", x2: "800", y2: "350", stroke: "#000", strokeWidth: "3" }),
+            React.createElement('line', { x1: "100", y1: "350", x2: "50", y2: "400", stroke: "#a89f8e", strokeWidth: "2" }),
+            React.createElement('line', { x1: "250", y1: "350", x2: "220", y2: "400", stroke: "#a89f8e", strokeWidth: "2" }),
+            React.createElement('line', { x1: "400", y1: "350", x2: "400", y2: "400", stroke: "#a89f8e", strokeWidth: "2" }),
+            React.createElement('line', { x1: "550", y1: "350", x2: "580", y2: "400", stroke: "#a89f8e", strokeWidth: "2" }),
+            React.createElement('line', { x1: "700", y1: "350", x2: "750", y2: "400", stroke: "#a89f8e", strokeWidth: "2" }),
+            // Wall
+            React.createElement('rect', { x: "0", y: "330", width: "800", height: "20", fill: "#e5e5e5", stroke: "none" }),
+            React.createElement('line', { x1: "0", y1: "330", x2: "800", y2: "330", stroke: "#000", strokeWidth: "2" }),
+            // Plant
+            React.createElement('g', { transform: `translate(${LEFT_X}, 260)` },
+              React.createElement('path', { d: "M -20 90 L 20 90 L 25 40 L -25 40 Z", fill: "#bf744a", stroke: "#000", strokeWidth: "2"}),
+              React.createElement('ellipse', { cx: "0", cy: "40", rx: "25", ry: "5", fill: "#8a5233", stroke: "#000", strokeWidth: "2"}),
+              React.createElement('path', { d: "M 0 40 Q -10 0 -40 -20", fill: "none", stroke: "#166534", strokeWidth: "4"}),
+              React.createElement('path', { d: "M 0 40 Q 10 10 40 -10", fill: "none", stroke: "#166534", strokeWidth: "4"}),
+              React.createElement('path', { d: "M 0 40 L 0 -30", fill: "none", stroke: "#166534", strokeWidth: "4"}),
+              React.createElement('ellipse', { cx: "-40", cy: "-20", rx: "15", ry: "10", fill: "#22c55e", stroke: "#000", strokeWidth: "2", transform: "rotate(-20 -40 -20)"}),
+              React.createElement('ellipse', { cx: "40", cy: "-10", rx: "15", ry: "10", fill: "#22c55e", stroke: "#000", strokeWidth: "2", transform: "rotate(20 40 -10)"}),
+              React.createElement('ellipse', { cx: "0", cy: "-30", rx: "10", ry: "15", fill: "#22c55e", stroke: "#000", strokeWidth: "2"})
+            ),
+            // Chair
+            React.createElement('g', { transform: `translate(${RIGHT_X}, 280)` },
+              React.createElement('path', { d: "M -30 70 L -30 0 L 30 0 L 30 70", fill: "none", stroke: "#78350f", strokeWidth: "4", strokeLinecap: "round"}),
+              React.createElement('path', { d: "M -30 0 L -30 -50 L 30 -50 L 30 0", fill: "none", stroke: "#78350f", strokeWidth: "4", strokeLinejoin: "round"}),
+              React.createElement('path', { d: "M -25 -45 L -25 -5 L -5 -5 L -5 -45 Z", fill: "none", stroke: "#78350f", strokeWidth: "2"}),
+              React.createElement('path', { d: "M 5 -45 L 5 -5 L 25 -5 L 25 -45 Z", fill: "none", stroke: "#78350f", strokeWidth: "2"}),
+              React.createElement('path', { d: "M -35 0 L 35 0", stroke: "#78350f", strokeWidth: "6", strokeLinecap: "round"})
+            ),
+            // Human
+            React.createElement('g', { transform: `translate(${CENTER_X}, ${CENTER_Y})` },
+              React.createElement('line', { x1: "-10", y1: "40", x2: "-20", y2: "100", stroke: "#475569", strokeWidth: "6", strokeLinecap: "round" }),
+              React.createElement('line', { x1: "10", y1: "40", x2: "20", y2: "100", stroke: "#475569", strokeWidth: "6", strokeLinecap: "round" }),
+              React.createElement('line', { x1: "-15", y1: "-20", x2: "-45", y2: "30", stroke: "#475569", strokeWidth: "6", strokeLinecap: "round" }),
+              React.createElement('line', { x1: "15", y1: "-20", x2: "45", y2: "30", stroke: "#475569", strokeWidth: "6", strokeLinecap: "round" }),
+              React.createElement('ellipse', { cx: "0", cy: "0", rx: "20", ry: "50", fill: "#b48a72", stroke: "#000", strokeWidth: "3" }),
+              React.createElement('circle', { cx: "0", cy: "-70", r: "25", fill: "#b48a72", stroke: "#000", strokeWidth: "3" })
+            ),
+            // Arrows
+            mode === 'absolute' && React.createElement(React.Fragment, null,
+              React.createElement(HeatArrow, { x: LEFT_X + 40, y: 250, angle: 0, scale: envAbsScale, color: envColor }),
+              React.createElement(HeatArrow, { x: RIGHT_X - 40, y: 250, angle: 180, scale: envAbsScale, color: envColor }),
+              React.createElement(HeatArrow, { x: CENTER_X - 40, y: CENTER_Y, angle: 180, scale: humanAbsScale, color: humanColor }),
+              React.createElement(HeatArrow, { x: CENTER_X + 40, y: CENTER_Y, angle: 0, scale: humanAbsScale, color: humanColor }),
+              React.createElement('g', { opacity: 0.5 },
+                React.createElement('path', { d: "M 50 100 Q 70 120 50 140", stroke: envColor, strokeWidth: "3", fill: "none" }),
+                React.createElement('path', { d: "M 40 100 Q 60 120 40 140", stroke: envColor, strokeWidth: "3", fill: "none" }),
+                React.createElement('path', { d: "M 750 100 Q 730 120 750 140", stroke: envColor, strokeWidth: "3", fill: "none" }),
+                React.createElement('path', { d: "M 760 100 Q 740 120 760 140", stroke: envColor, strokeWidth: "3", fill: "none" })
+              )
+            ),
+            mode === 'net' && React.createElement(React.Fragment, null,
+              Math.abs(envTemp - humanTemp) > 0.5 ? (
+                netDirection === 'out' ? React.createElement(React.Fragment, null,
+                  React.createElement(HeatArrow, { x: CENTER_X - 50, y: CENTER_Y, angle: 180, scale: netScale, color: HUMAN_TEMP_COLOR }),
+                  React.createElement(HeatArrow, { x: CENTER_X + 50, y: CENTER_Y, angle: 0, scale: netScale, color: HUMAN_TEMP_COLOR })
+                ) : React.createElement(React.Fragment, null,
+                  React.createElement(HeatArrow, { x: netLeftArrowX, y: CENTER_Y, angle: 0, scale: netScale, color: envColor }),
+                  React.createElement(HeatArrow, { x: netRightArrowX, y: CENTER_Y, angle: 180, scale: netScale, color: envColor })
+                )
+              ) : React.createElement('text', { x: CENTER_X, y: CENTER_Y - 110, textAnchor: "middle", fontSize: "20", fill: "#334155", fontFamily: "sans-serif", fontWeight: "bold" },
+                "Termisk jämvikt"
+              )
+            )
+          ),
+          // Overlay Labels
+          React.createElement('div', { className: "absolute top-4 left-4 bg-white/90 p-3 rounded-lg border border-slate-200 text-sm shadow-md" },
+            React.createElement('strong', { className: "block text-slate-700 mb-1" }, "Omgivning (luft, växt och stol)"),
+            React.createElement('div', { className: "text-2xl font-mono text-slate-900" }, kelvinToCelsius(envTemp) + "°C"),
+            React.createElement('div', { className: "text-slate-500" }, "(" + Math.round(envTemp) + " K)")
+          ),
+          React.createElement('div', { className: "absolute top-4 right-4 bg-white/90 p-3 rounded-lg border border-slate-200 text-sm shadow-md text-right" },
+            React.createElement('strong', { className: "block text-slate-700 mb-1" }, "Du (människa)"),
+            React.createElement('div', { className: "text-2xl font-mono text-slate-900" }, "37°C"),
+            React.createElement('div', { className: "text-slate-500" }, "(310 K)")
+          ),
+          showSensation && React.createElement('div', { className: "absolute top-4 left-1/2 -translate-x-1/2 bg-white/90 p-3 rounded-lg border border-slate-200 text-sm shadow-md text-center min-w-[140px]" },
+            React.createElement('strong', { className: "block text-slate-700 mb-1" }, "Du upplever det"),
+            React.createElement('div', { className: `text-2xl font-bold ${sensationColorClass}` }, sensationText)
+          )
+        );
+      };
+
+      // ===== COMPONENT: APP =====
+      const App = () => {
+        const HUMAN_TEMP_K = 310;
+        const [envTemp, setEnvTemp] = useState(293);
+        const [mode, setMode] = useState('absolute');
+        const [showSensation, setShowSensation] = useState(true);
+
+        const handleTempChange = (e) => {
+          setEnvTemp(Number(e.target.value));
+        };
+
+        return React.createElement('div', { className: "min-h-screen bg-stone-50 py-8 px-4 md:px-8 font-sans text-slate-800" },
+          React.createElement('div', { className: "max-w-5xl mx-auto" },
+            // Header
+            React.createElement('header', { className: "mb-8 text-center" },
+              React.createElement('h1', { className: "text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight" }, "Värmeflöde"),
+              React.createElement('p', { className: "text-lg text-slate-600 max-w-2xl mx-auto" },
+                "Utforska hur värme strålar mellan en människa och omgivningen. Vi sänder alltid ut värme, men hur mycket vi tar emot beror på omgivningens temperatur."
+              )
+            ),
+            // Main Content Grid
+            React.createElement('div', { className: "grid grid-cols-1 lg:grid-cols-3 gap-8" },
+              // Simulation Area
+              React.createElement('div', { className: "lg:col-span-2 space-y-6" },
+                React.createElement(SimulationCanvas, {
+                  envTemp: envTemp,
+                  humanTemp: HUMAN_TEMP_K,
+                  mode: mode,
+                  showSensation: showSensation
+                }),
+                React.createElement('div', { className: "bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex justify-between items-center" },
+                  React.createElement('div', { className: "flex items-center gap-3" },
+                    React.createElement('div', { className: `w-3 h-3 rounded-full ${envTemp < HUMAN_TEMP_K ? 'bg-blue-500' : envTemp > HUMAN_TEMP_K ? 'bg-red-500' : 'bg-green-500'}` }),
+                    React.createElement('span', { className: "font-medium" },
+                      envTemp < HUMAN_TEMP_K ? 'Du förlorar värme (netto)' : envTemp > HUMAN_TEMP_K ? 'Du tar upp värme (netto)' : 'Värmebalans'
+                    )
+                  )
+                )
+              ),
+              // Controls Area
+              React.createElement('div', { className: "bg-white p-6 rounded-xl shadow-lg border border-slate-200 h-fit sticky top-8" },
+                React.createElement('h2', { className: "text-2xl font-bold mb-6 flex items-center gap-2 border-b pb-2 border-slate-100" },
+                  React.createElement(MoveHorizontal, { className: "w-6 h-6 text-blue-600" }),
+                  "Inställningar"
+                ),
+                // Show Sensation
+                React.createElement('div', { className: "mb-6" },
+                  React.createElement('label', { className: "flex items-center cursor-pointer" },
+                    React.createElement('input', {
+                      type: "checkbox",
+                      checked: showSensation,
+                      onChange: (e) => setShowSensation(e.target.checked),
+                      className: "w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                    }),
+                    React.createElement('span', { className: "ml-3 font-bold text-slate-700 uppercase text-sm tracking-wide" }, "Visa upplevelse")
+                  )
+                ),
+                // Mode
+                React.createElement('div', { className: "mb-8" },
+                  React.createElement('label', { className: "block text-sm font-bold text-slate-700 mb-3 uppercase tracking-wide" }, "Visningsläge"),
+                  React.createElement('div', { className: "flex flex-col gap-3" },
+                    React.createElement('label', { className: `flex items-center p-3 rounded-lg border-2 cursor-pointer transition-all ${mode === 'absolute' ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-slate-300'}` },
+                      React.createElement('input', {
+                        type: "radio",
+                        name: "mode",
+                        value: "absolute",
+                        checked: mode === 'absolute',
+                        onChange: () => setMode('absolute'),
+                        className: "w-5 h-5 text-blue-600 focus:ring-blue-500"
+                      }),
+                      React.createElement('span', { className: "ml-3 font-medium" }, "Alla värmeflöden")
+                    ),
+                    React.createElement('label', { className: `flex items-center p-3 rounded-lg border-2 cursor-pointer transition-all ${mode === 'net' ? 'border-blue-500 bg-blue-50' : 'border-slate-200 hover:border-slate-300'}` },
+                      React.createElement('input', {
+                        type: "radio",
+                        name: "mode",
+                        value: "net",
+                        checked: mode === 'net',
+                        onChange: () => setMode('net'),
+                        className: "w-5 h-5 text-blue-600 focus:ring-blue-500"
+                      }),
+                      React.createElement('span', { className: "ml-3 font-medium" }, "Resulterande flöde på människa")
+                    )
+                  ),
+                  React.createElement('p', { className: "text-xs text-slate-500 mt-2 px-1" },
+                    mode === 'absolute'
+                      ? 'Visar hur mycket värme som strålar ut från varje objekt oberoende av varandra.'
+                      : 'Visar skillnaden mellan utstrålad och absorberad värme för människan.'
+                  )
+                ),
+                // Temperature Slider
+                React.createElement('div', { className: "mb-8" },
+                  React.createElement('div', { className: "flex justify-between items-end mb-2 gap-2" },
+                    React.createElement('label', { className: "block text-sm font-bold text-slate-700 uppercase tracking-wide flex items-center gap-2" },
+                      React.createElement(Thermometer, { className: "w-4 h-4 flex-shrink-0" }),
+                      React.createElement('span', null, "Omgivningens Temperatur")
+                    ),
+                    React.createElement('span', { className: "text-2xl font-bold text-blue-600 font-mono whitespace-nowrap" },
+                      kelvinToCelsius(envTemp) + "°C",
+                      React.createElement('span', { className: "text-lg text-slate-400 font-normal ml-2" },
+                        "(" + Math.round(envTemp) + " K)"
+                      )
+                    )
+                  ),
+                  React.createElement('input', {
+                    type: "range",
+                    min: "200",
+                    max: "400",
+                    step: "1",
+                    value: envTemp,
+                    onChange: handleTempChange,
+                    className: "w-full h-3 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600 hover:accent-blue-700"
+                  }),
+                  React.createElement('div', { className: "flex justify-between text-xs text-slate-400 mt-2 font-mono" },
+                    React.createElement('span', null, "-73°C (200 K)"),
+                    React.createElement('span', null, "127°C (400 K)")
+                  )
+                ),
+                // Info
+                React.createElement('div', { className: "bg-amber-50 p-4 rounded border border-amber-200 text-sm text-amber-900" },
+                  React.createElement('h3', { className: "font-bold flex items-center gap-2 mb-2" },
+                    React.createElement(Info, { className: "w-4 h-4" }),
+                    "Hur fungerar det?"
+                  ),
+                  React.createElement('ul', { className: "space-y-1 list-disc pl-4" },
+                    React.createElement('li', null, "All materia över absoluta nollpunkten sänder ut värmestrålning."),
+                    React.createElement('li', null, "Människans temperatur hålls konstant (~37°C) av metabolismen."),
+                    React.createElement('li', null, "Om omgivningen är kallare strålar vi ut mer än vi tar emot (vi fryser)."),
+                    React.createElement('li', null, "Om omgivningen är varmare tar vi emot mer än vi strålar ut (vi svettas).")
+                  )
+                )
+              )
+            )
+          )
+        );
+      };
+
+      // ===== MOUNT APP =====
+      const rootElement = document.getElementById('root');
+      if (!rootElement) {
+        throw new Error("Could not find root element to mount to");
+      }
+
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(React.createElement(React.StrictMode, null, React.createElement(App)));
+    </script>
+  </head>
+  <body class="bg-stone-50 text-slate-900 antialiased">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+  </body>
+</html>

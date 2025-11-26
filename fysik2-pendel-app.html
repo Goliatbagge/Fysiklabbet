@@ -6,6 +6,17 @@
     <title>Plan pendel - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Import map to resolve "three" -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
+
     <style>
         #canvas-container {
             width: 100%;
@@ -33,22 +44,18 @@
     </nav>
 
     <main class="min-h-screen w-full bg-gray-100 text-gray-800 flex flex-col lg:flex-row">
-        <div id="canvas-container" class="flex-grow h-[50vh] lg:h-screen w-full lg:w-2/3 relative bg-white">
+        <div id="canvas-container" class="flex-grow min-h-[600px] w-full lg:w-1/2 relative bg-white">
             <div class="absolute top-4 left-4 text-gray-900 p-2 rounded-lg z-10">
                 <h1 class="text-2xl md:text-4xl font-bold tracking-tighter">Plan pendel (matematisk)</h1>
             </div>
         </div>
-        <div class="w-full lg:w-1/3 bg-white/60 backdrop-blur-md p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto" id="controls-container">
+        <div class="w-full lg:w-1/2 bg-white/60 backdrop-blur-md p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto" id="controls-container">
         </div>
     </main>
 
     <script type="module">
-        console.log('Loading Three.js module...');
-
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
         import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
-
-        console.log('Three.js loaded successfully:', THREE);
 
         const celestialBodies = [
             { name: 'Solen', gravity: 274.0, gradient: 'linear-gradient(45deg, #fef08a, #f97316)' },
@@ -85,7 +92,7 @@
         scene.background = new THREE.Color(0xf0f0f0);
 
         const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
-        camera.position.set(0, 1.5, 6);
+        camera.position.set(0, 1.8, 3.5);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -220,6 +227,84 @@
         const bob = createPendulum(params.length, params.mass);
         scene.add(pendulumGroup);
 
+        // Visual aids for angle
+        const angleVisualsGroup = new THREE.Group();
+        scene.add(angleVisualsGroup);
+
+        function updateAngleVisuals() {
+            // Clear previous visuals
+            while(angleVisualsGroup.children.length > 0) {
+                angleVisualsGroup.remove(angleVisualsGroup.children[0]);
+            }
+
+            if (Math.abs(params.initialAngle) > 0.1 && simulationState === 'idle') {
+                const PIVOT_Y = params.length + VERTICAL_OFFSET;
+
+                // Dashed vertical line (plumb line)
+                const lineMaterial = new THREE.LineDashedMaterial({
+                    color: 0x666666,
+                    dashSize: 0.1,
+                    gapSize: 0.05,
+                });
+                const lineGeometry = new THREE.BufferGeometry().setFromPoints([
+                    new THREE.Vector3(0, PIVOT_Y, PIVOT_Z_OFFSET),
+                    new THREE.Vector3(0, PIVOT_Y - params.length - 0.3, PIVOT_Z_OFFSET)
+                ]);
+                const plumbLine = new THREE.Line(lineGeometry, lineMaterial);
+                plumbLine.computeLineDistances();
+                angleVisualsGroup.add(plumbLine);
+
+                // Angle arc - from vertical line to pendulum string
+                const angleRad = (params.initialAngle * Math.PI) / 180;
+                const arcRadius = params.length * 0.25;
+                const arcPoints = [];
+                const steps = 20;
+
+                // Arc goes from vertical (0) to the pendulum angle
+                for (let i = 0; i <= steps; i++) {
+                    const t = i / steps;
+                    const angle = angleRad * t; // 0 to angleRad
+                    arcPoints.push(new THREE.Vector3(
+                        Math.sin(angle) * arcRadius,
+                        PIVOT_Y - Math.cos(angle) * arcRadius,
+                        PIVOT_Z_OFFSET
+                    ));
+                }
+
+                const arcGeometry = new THREE.BufferGeometry().setFromPoints(arcPoints);
+                const arcMaterial = new THREE.LineBasicMaterial({ color: 0x3b82f6, linewidth: 2 });
+                const arc = new THREE.Line(arcGeometry, arcMaterial);
+                angleVisualsGroup.add(arc);
+
+                // Angle text using canvas texture
+                const canvas = document.createElement('canvas');
+                canvas.width = 128;
+                canvas.height = 64;
+                const context = canvas.getContext('2d');
+                context.fillStyle = '#000000';  // Black text
+                context.font = 'Bold 28px Arial';
+                context.textAlign = 'center';
+                context.textBaseline = 'middle';
+                const angleText = params.initialAngle.toFixed(1).replace('.', ',') + '°';
+                context.fillText(angleText, 64, 32);
+
+                const texture = new THREE.CanvasTexture(canvas);
+                const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+                const sprite = new THREE.Sprite(spriteMaterial);
+
+                // Position text closer to arc and higher up
+                const textAngle = angleRad / 2;
+                const textRadius = arcRadius * 1.15;  // Closer to arc
+                sprite.position.set(
+                    Math.sin(textAngle) * textRadius,
+                    PIVOT_Y - Math.cos(textAngle) * textRadius,  // Higher up
+                    PIVOT_Z_OFFSET
+                );
+                sprite.scale.set(0.35, 0.175, 1);
+                angleVisualsGroup.add(sprite);
+            }
+        }
+
         // Update camera target
         function updateCameraTarget() {
             const PIVOT_Y = params.length + VERTICAL_OFFSET;
@@ -227,6 +312,84 @@
             controls.update();
         }
         updateCameraTarget();
+
+        // Mouse interaction for dragging pendulum
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        let isDragging = false;
+
+        function onMouseMove(event) {
+            const rect = renderer.domElement.getBoundingClientRect();
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            if (isDragging && simulationState === 'idle') {
+                raycaster.setFromCamera(mouse, camera);
+
+                // Calculate angle based on mouse position
+                const pivotY = params.length + VERTICAL_OFFSET;
+                const pivotPos = new THREE.Vector3(0, pivotY, PIVOT_Z_OFFSET);
+
+                // Project mouse ray onto a plane at the pendulum's Z position
+                const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), -PIVOT_Z_OFFSET);
+                const intersection = new THREE.Vector3();
+                raycaster.ray.intersectPlane(plane, intersection);
+
+                if (intersection) {
+                    // Calculate angle from pivot to intersection point
+                    const dx = intersection.x - pivotPos.x;
+                    const dy = intersection.y - pivotPos.y;
+                    const angle = Math.atan2(dx, -dy); // Negative dy because y is up
+
+                    // Limit angle to ±25 degrees
+                    const angleDeg = (angle * 180) / Math.PI;
+                    params.initialAngle = Math.max(-25, Math.min(25, angleDeg));
+
+                    // Update slider position
+                    const angleSlider = document.getElementById('angle-slider');
+                    if (angleSlider) angleSlider.value = params.initialAngle;
+
+                    updateAngleVisuals();
+                    updateValueDisplays();
+                }
+            }
+        }
+
+        function onMouseDown(event) {
+            const rect = renderer.domElement.getBoundingClientRect();
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            if (simulationState === 'idle') {
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObject(bob, true);
+
+                if (intersects.length > 0) {
+                    isDragging = true;
+                    controls.enabled = false; // Disable orbit controls while dragging
+                }
+            }
+        }
+
+        function onMouseUp() {
+            if (isDragging && params.initialAngle >= 0.5 && simulationState === 'idle') {
+                // Auto-start simulation when releasing after drag
+                simulationState = 'running';
+                timer = 0;
+                timeRef = 0;
+                swingCount = 0;
+                swingCountRef = 0;
+                measuredPeriod = null;
+                updateAngleVisuals(); // Clear angle visuals when starting
+                renderUI();
+            }
+            isDragging = false;
+            controls.enabled = true;
+        }
+
+        renderer.domElement.addEventListener('mousemove', onMouseMove);
+        renderer.domElement.addEventListener('mousedown', onMouseDown);
+        renderer.domElement.addEventListener('mouseup', onMouseUp);
 
         // Animation
         function animate() {
@@ -247,19 +410,20 @@
                 if (currentSwings !== swingCountRef) {
                     swingCountRef = currentSwings;
                     swingCount = currentSwings;
-                    updateControls();
+                    renderUI();
                 }
 
                 if (swingCountRef >= 10) {
                     simulationState = 'finished';
                     measuredPeriod = timer / 10;
-                    updateControls();
+                    renderUI();
                 }
 
-                updateControls();
+                renderUI();
             } else {
                 const initialAngleRad = (params.initialAngle * Math.PI) / 180;
                 pendulumGroup.rotation.z = initialAngleRad;
+                updateAngleVisuals();
             }
 
             controls.update();
@@ -275,8 +439,8 @@
             renderer.setSize(container.clientWidth, container.clientHeight);
         });
 
-        // Controls UI
-        function updateControls() {
+        // Controls UI - separated into render and event setup
+        function renderUI() {
             const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
             const isIdle = simulationState === 'idle';
 
@@ -288,7 +452,7 @@
                         <div class="flex justify-between items-center mb-1">
                             <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Trådlängd (l)</label>
                             <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
-                                ${params.length.toFixed(2)} m
+                                ${params.length.toFixed(2).replace('.', ',')} m
                             </span>
                         </div>
                         <input id="length-slider" type="range" min="0.5" max="5" step="0.1" value="${params.length}" ${!isIdle ? 'disabled' : ''}
@@ -300,7 +464,7 @@
                             <div class="flex justify-between items-center mb-1">
                                 <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Tyngdfaktor (g)</label>
                                 <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
-                                    ${params.gravity.toFixed(2)} m/s²
+                                    ${params.gravity.toFixed(2).replace('.', ',')} m/s²
                                 </span>
                             </div>
                             <input id="gravity-slider" type="range" min="1" max="25" step="0.1" value="${params.gravity}" ${!isIdle ? 'disabled' : ''}
@@ -310,11 +474,11 @@
                             <label class="text-sm font-medium mb-2 block ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Eller välj en himlakropp:</label>
                             <div class="flex flex-wrap justify-center gap-3">
                                 ${celestialBodies.map(body => {
-                                    const isSelected = params.gravity.toFixed(2) === body.gravity.toFixed(2);
+                                    const isSelected = Math.abs(params.gravity - body.gravity) < 0.01;
                                     return `
                                         <div class="flex flex-col items-center">
                                             <button data-gravity="${body.gravity}" class="celestial-button p-1 rounded-full transition-all duration-200 focus:outline-none ${!isIdle ? 'opacity-50 cursor-not-allowed' : ''} ${isSelected ? 'bg-blue-200 ring-2 ring-blue-500 ring-offset-2 ring-offset-white' : 'bg-gray-200 hover:bg-gray-300'}"
-                                                ${!isIdle ? 'disabled' : ''} title="${body.name} (g = ${body.gravity} m/s²)">
+                                                ${!isIdle ? 'disabled' : ''} title="${body.name} (g = ${body.gravity.toFixed(2).replace('.', ',')} m/s²)">
                                                 <div class="w-10 h-10 rounded-full" style="background-image: ${body.gradient}"></div>
                                             </button>
                                             <span class="text-xs mt-1 ${isIdle ? 'text-gray-600' : 'text-gray-400'}">${body.name}</span>
@@ -340,7 +504,7 @@
                         <div class="flex justify-between items-center mb-1">
                             <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Startvinkel (θ)</label>
                             <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
-                                ${params.initialAngle.toFixed(2)} °
+                                ${params.initialAngle.toFixed(2).replace('.', ',')} °
                             </span>
                         </div>
                         <input id="angle-slider" type="range" min="0" max="25" step="0.5" value="${params.initialAngle}" ${!isIdle ? 'disabled' : ''}
@@ -351,7 +515,7 @@
                         <div class="flex justify-between items-center mb-1">
                             <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Dämpning</label>
                             <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
-                                ${params.damping.toFixed(2)}
+                                ${params.damping.toFixed(2).replace('.', ',')}
                             </span>
                         </div>
                         <input id="damping-slider" type="range" min="0" max="0.5" step="0.01" value="${params.damping}" ${!isIdle ? 'disabled' : ''}
@@ -369,7 +533,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-gray-600">Tid</p>
-                                    <p class="text-3xl font-mono font-bold text-gray-800">${timer.toFixed(2)} s</p>
+                                    <p class="text-3xl font-mono font-bold text-gray-800">${timer.toFixed(2).replace('.', ',')} s</p>
                                 </div>
                             </div>
                         ` : ''}
@@ -377,11 +541,11 @@
                             <div class="space-y-3">
                                 <div>
                                     <p class="text-sm text-gray-600">Total tid (10 svängningar)</p>
-                                    <p class="text-3xl font-mono font-bold text-gray-800">${timer.toFixed(2)} s</p>
+                                    <p class="text-3xl font-mono font-bold text-gray-800">${timer.toFixed(2).replace('.', ',')} s</p>
                                 </div>
                                 <div class="border-t border-blue-200 pt-3">
                                     <p class="text-sm text-gray-600">Uppmätt Period (T)</p>
-                                    <p class="text-3xl font-mono font-bold text-green-600">${measuredPeriod.toFixed(3)} s</p>
+                                    <p class="text-3xl font-mono font-bold text-green-600">${measuredPeriod.toFixed(3).replace('.', ',')} s</p>
                                 </div>
                             </div>
                         ` : ''}
@@ -403,7 +567,7 @@
                     <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2">Information</h2>
                     <div class="text-center">
                         <p class="text-sm text-gray-600">Beräknad Period (T)</p>
-                        <p class="text-4xl font-mono font-bold text-blue-600 my-2">${period.toFixed(3)} s</p>
+                        <p class="text-4xl font-mono font-bold text-blue-600 my-2">${period.toFixed(3).replace('.', ',')} s</p>
                         <p class="text-sm font-mono text-gray-500">T = 2π * √(l/g)</p>
                     </div>
                     <div class="pt-4 text-sm text-gray-700 leading-relaxed">
@@ -421,60 +585,75 @@
             `;
 
             document.getElementById('controls-container').innerHTML = controlsHTML;
+        }
 
-            // Attach event listeners
-            const lengthSlider = document.getElementById('length-slider');
-            const gravitySlider = document.getElementById('gravity-slider');
-            const massSlider = document.getElementById('mass-slider');
-            const angleSlider = document.getElementById('angle-slider');
-            const dampingSlider = document.getElementById('damping-slider');
-            const startButton = document.getElementById('start-button');
-            const resetButton = document.getElementById('reset-button');
+        // Fast value update - directly update DOM without re-rendering
+        function updateValueDisplays() {
+            const container = document.getElementById('controls-container');
 
-            if (lengthSlider) lengthSlider.addEventListener('input', (e) => {
+            // Update all value displays
+            const lengthDisplay = container.querySelector('#length-slider').parentElement.querySelector('span');
+            if (lengthDisplay) lengthDisplay.textContent = params.length.toFixed(2).replace('.', ',') + ' m';
+
+            const gravityDisplay = container.querySelector('#gravity-slider').parentElement.querySelector('span');
+            if (gravityDisplay) gravityDisplay.textContent = params.gravity.toFixed(2).replace('.', ',') + ' m/s²';
+
+            const massDisplay = container.querySelector('#mass-slider').parentElement.querySelector('span');
+            if (massDisplay) massDisplay.textContent = (params.mass * 1000).toFixed(0) + ' g';
+
+            const angleDisplay = container.querySelector('#angle-slider').parentElement.querySelector('span');
+            if (angleDisplay) angleDisplay.textContent = params.initialAngle.toFixed(2).replace('.', ',') + ' °';
+
+            const dampingDisplay = container.querySelector('#damping-slider').parentElement.querySelector('span');
+            if (dampingDisplay) dampingDisplay.textContent = params.damping.toFixed(2).replace('.', ',');
+
+            // Update calculated period
+            const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
+            const periodDisplay = container.querySelector('.text-4xl.font-mono.font-bold.text-blue-600');
+            if (periodDisplay) periodDisplay.textContent = period.toFixed(3).replace('.', ',') + ' s';
+        }
+
+        // Setup event listeners using event delegation - only runs once
+        document.getElementById('controls-container').addEventListener('input', (e) => {
+            if (e.target.id === 'length-slider') {
                 params.length = parseFloat(e.target.value);
                 scene.remove(labStand);
                 labStand = createLabStand(params.length);
                 scene.add(labStand);
                 createPendulum(params.length, params.mass);
                 updateCameraTarget();
-                updateControls();
-            });
-
-            if (gravitySlider) gravitySlider.addEventListener('input', (e) => {
+                updateAngleVisuals();
+                updateValueDisplays();
+            } else if (e.target.id === 'gravity-slider') {
                 params.gravity = parseFloat(e.target.value);
-                updateControls();
-            });
-
-            if (massSlider) massSlider.addEventListener('input', (e) => {
+                updateValueDisplays();
+            } else if (e.target.id === 'mass-slider') {
                 params.mass = parseFloat(e.target.value) / 1000;
                 createPendulum(params.length, params.mass);
-                updateControls();
-            });
-
-            if (angleSlider) angleSlider.addEventListener('input', (e) => {
+                updateValueDisplays();
+            } else if (e.target.id === 'angle-slider') {
                 params.initialAngle = parseFloat(e.target.value);
-                updateControls();
-            });
-
-            if (dampingSlider) dampingSlider.addEventListener('input', (e) => {
+                updateAngleVisuals();
+                updateValueDisplays();
+            } else if (e.target.id === 'damping-slider') {
                 params.damping = parseFloat(e.target.value);
-                updateControls();
-            });
+                updateValueDisplays();
+            }
+        });
 
-            if (startButton) startButton.addEventListener('click', () => {
-                if (params.initialAngle >= 0.5) {
+        document.getElementById('controls-container').addEventListener('click', (e) => {
+            if (e.target.id === 'start-button' || e.target.closest('#start-button')) {
+                if (params.initialAngle >= 0.5 && simulationState === 'idle') {
                     simulationState = 'running';
                     timer = 0;
                     timeRef = 0;
                     swingCount = 0;
                     swingCountRef = 0;
                     measuredPeriod = null;
-                    updateControls();
+                    updateAngleVisuals(); // Clear angle visuals when starting
+                    renderUI();
                 }
-            });
-
-            if (resetButton) resetButton.addEventListener('click', () => {
+            } else if (e.target.id === 'reset-button' || e.target.closest('#reset-button')) {
                 simulationState = 'idle';
                 timer = 0;
                 timeRef = 0;
@@ -482,21 +661,18 @@
                 swingCountRef = 0;
                 measuredPeriod = null;
                 params.initialAngle = 0;
-                updateControls();
-            });
+                updateAngleVisuals();
+                renderUI();
+            } else if (e.target.closest('.celestial-button')) {
+                const button = e.target.closest('.celestial-button');
+                if (!button.disabled) {
+                    params.gravity = parseFloat(button.dataset.gravity);
+                    renderUI();
+                }
+            }
+        });
 
-            const celestialButtons = document.querySelectorAll('.celestial-button');
-            celestialButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    if (!button.disabled) {
-                        params.gravity = parseFloat(button.dataset.gravity);
-                        updateControls();
-                    }
-                });
-            });
-        }
-
-        updateControls();
+        renderUI();
     </script>
 </body>
 </html>

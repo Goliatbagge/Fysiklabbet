@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vågsimulator - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
+      #root {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-900 text-white overflow-hidden">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+const { useState, useRef, useEffect } = React;
+
+// Types (using JSDoc comments for type hints)
+/** @typedef {'single' | 'double' | 'planar' | 'doppler' | 'refraction'} SimulationMode */
+/** @typedef {{ x: number; y: number }} Point */
+/** @typedef {{ x: number; y: number; emitTime: number }} WaveFront */
+
+const WaveSimulator = () => {
+  // --- State ---
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [viewMode, setViewMode] = useState('2D');
+  const [mode, setMode] = useState('single');
+  const [showNodalLines, setShowNodalLines] = useState(false);
+
+  // Physics Parameters
+  const [frequency, setFrequency] = useState(2); // Hz
+  const [separation, setSeparation] = useState(150); // pixels
+  const [sourceSpeed, setSourceSpeed] = useState(1.5); // Multiplier
+  const [waveSpeedParam, setWaveSpeedParam] = useState(100); // pixels/s
+
+  // Refs for animation
+  const canvasRef = useRef(null);
+  const requestRef = useRef();
+  const timeRef = useRef(0);
+  const wavefrontsRef = useRef([]);
+  const lastEmitTimeRef = useRef(0);
+
+  // Refs for Camera Interaction
+  const cameraAngleRef = useRef({ h: Math.PI / 4, v: Math.PI / 4 }); // Azimuth (h), Elevation (v)
+  const isDraggingRef = useRef(false);
+  const lastMousePosRef = useRef({ x: 0, y: 0 });
+
+  // Configuration constants
+  const CANVAS_WIDTH = 800;
+  const CANVAS_HEIGHT = 600;
+
+  // Reset time when switching major modes to prevent jumps
+  useEffect(() => {
+    wavefrontsRef.current = [];
+    lastEmitTimeRef.current = timeRef.current;
+  }, [mode]);
+
+  // --- Physics & Math Helpers ---
+
+  const getSources = (t) => {
+    const centerX = CANVAS_WIDTH / 2;
+    const centerY = CANVAS_HEIGHT / 2;
+
+    if (mode === 'doppler') {
+      // Moving source for Doppler (Linear motion loop)
+      const cycleDur = 6; // seconds for one pass
+      const progress = (t % cycleDur) / cycleDur;
+
+      // Distance to travel
+      const range = 360;
+
+      const x = (centerX - range/2) + progress * range;
+      return [{ x, y: centerY }];
+    }
+
+    if (mode === 'double') {
+      return [
+        { x: centerX - separation / 2, y: centerY },
+        { x: centerX + separation / 2, y: centerY },
+      ];
+    }
+
+    if (mode === 'single') {
+        return [{ x: centerX, y: centerY }];
+    }
+
+    // Planar/Refraction waves don't have a point source in the same way
+    return [];
+  };
+
+  const calculateNodalHyperbolas = (wavelength, separation) => {
+      const curves = [];
+
+      const maxN = Math.floor(separation / wavelength - 0.5);
+      const cx = CANVAS_WIDTH / 2;
+      const cy = CANVAS_HEIGHT / 2;
+
+      for (let n = 0; n <= maxN; n++) {
+          const k = n + 0.5;
+          const delta = k * wavelength;
+
+          const a = delta / 2;
+          const c = separation / 2;
+
+          if (a >= c) continue;
+
+          const b = Math.sqrt(c * c - a * a);
+
+          const ptsRight = [];
+          const ptsLeft = [];
+
+          const yRange = CANVAS_HEIGHT / 2 + 50;
+
+          for (let y = -yRange; y <= yRange; y += 10) {
+              const xVal = a * Math.sqrt(1 + (y * y) / (b * b));
+
+              ptsRight.push({ x: cx + xVal, y: cy + y });
+              ptsLeft.push({ x: cx - xVal, y: cy + y });
+          }
+
+          curves.push(ptsRight);
+          curves.push(ptsLeft);
+      }
+      return curves;
+  };
+
+  // --- Interaction Handlers ---
+
+  const handleMouseDown = (e) => {
+    if (viewMode === '3D') {
+        isDraggingRef.current = true;
+        lastMousePosRef.current = { x: e.clientX, y: e.clientY };
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (viewMode === '3D' && isDraggingRef.current) {
+        const dx = e.clientX - lastMousePosRef.current.x;
+        const dy = e.clientY - lastMousePosRef.current.y;
+
+        const sensitivity = 0.01;
+
+        let newH = cameraAngleRef.current.h + dx * sensitivity;
+        let newV = cameraAngleRef.current.v - dy * sensitivity;
+
+        newV = Math.max(0.1, Math.min(Math.PI / 2, newV));
+
+        cameraAngleRef.current = { h: newH, v: newV };
+        lastMousePosRef.current = { x: e.clientX, y: e.clientY };
+    }
+  };
+
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+  };
+
+  const handleMouseLeave = () => {
+    isDraggingRef.current = false;
+  }
+
+  // --- Renderers ---
+
+  const draw2D = (ctx, t, sources) => {
+    const wavelength = waveSpeedParam / frequency;
+
+    // Background
+    ctx.fillStyle = '#001a33';
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    if (mode === 'doppler') {
+      // Doppler Visualization: Draw expanding wavefronts
+
+      const currentWavefronts = wavefrontsRef.current;
+
+      for (const wf of currentWavefronts) {
+        const age = t - wf.emitTime;
+        if (age < 0) continue;
+        const radius = age * waveSpeedParam;
+
+        const alpha = Math.max(0, 1 - radius / 600);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+
+        ctx.beginPath();
+        ctx.arc(wf.x, wf.y, radius, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // Draw source
+      ctx.fillStyle = '#ffcc00';
+      for (const src of sources) {
+        ctx.beginPath();
+        ctx.arc(src.x, src.y, 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+    } else {
+      // Interference / Standard Wave Field
+      const imgData = ctx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+      const data = imgData.data;
+
+      const k = (2 * Math.PI) / wavelength;
+      const omega = 2 * Math.PI * frequency;
+
+      const src1 = sources[0];
+      const src2 = sources[1];
+
+      // Refraction constants
+      const boundaryY = CANVAS_HEIGHT / 2;
+      const incidentAngle = Math.PI / 6;
+      const n1 = 1.0;
+      const n2 = 2.0;
+      const v1 = waveSpeedParam;
+      const v2 = v1 / n2;
+
+      const sinTheta2 = (v2 / v1) * Math.sin(incidentAngle);
+      const theta2 = Math.asin(sinTheta2);
+
+      const k1 = omega / v1;
+      const k2 = omega / v2;
+
+      const k1x = k1 * Math.sin(incidentAngle);
+      const k1y = k1 * Math.cos(incidentAngle);
+
+      const k2x = k2 * Math.sin(theta2);
+      const k2y = k2 * Math.cos(theta2);
+
+      const phaseOffset = (k1y - k2y) * boundaryY;
+
+      // Step 2 pixels for performance
+      for (let y = 0; y < CANVAS_HEIGHT; y += 2) {
+        for (let x = 0; x < CANVAS_WIDTH; x += 2) {
+           let z = 0;
+
+           if (mode === 'planar') {
+               z = Math.sin(k * x - omega * t);
+           } else if (mode === 'refraction') {
+               if (y < boundaryY) {
+                   z = Math.sin(k1x * x + k1y * y - omega * t);
+               } else {
+                   z = Math.sin(k2x * x + k2y * y - omega * t + phaseOffset);
+               }
+           } else {
+               if (src1) {
+                   const d1 = Math.sqrt((x - src1.x)**2 + (y - src1.y)**2);
+                   z += Math.sin(k * d1 - omega * t);
+               }
+               if (src2) {
+                   const d2 = Math.sqrt((x - src2.x)**2 + (y - src2.y)**2);
+                   z += Math.sin(k * d2 - omega * t);
+               }
+           }
+
+           const maxAmp = mode === 'double' ? 2 : 1;
+           let val = (z + maxAmp) / (maxAmp * 2);
+
+           if (val < 0) val = 0;
+           if (val > 1) val = 1;
+
+           const r = val * 200;
+           const g = 50 + val * 205;
+           const b = 100 + val * 155;
+
+           const idx = (y * CANVAS_WIDTH + x) * 4;
+           data[idx] = r; data[idx+1] = g; data[idx+2] = b; data[idx+3] = 255;
+           data[idx+4] = r; data[idx+5] = g; data[idx+6] = b; data[idx+7] = 255;
+
+           const idxBelow = ((y + 1) * CANVAS_WIDTH + x) * 4;
+           if (idxBelow < data.length) {
+              data[idxBelow] = r; data[idxBelow+1] = g; data[idxBelow+2] = b; data[idxBelow+3] = 255;
+              data[idxBelow+4] = r; data[idxBelow+5] = g; data[idxBelow+6] = b; data[idxBelow+7] = 255;
+           }
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      // Overlays
+      if (mode === 'refraction') {
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+          ctx.setLineDash([5, 5]);
+          ctx.moveTo(0, boundaryY);
+          ctx.lineTo(CANVAS_WIDTH, boundaryY);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.fillStyle = 'rgba(255,255,255,0.7)';
+          ctx.font = '14px Arial';
+          ctx.fillText("Djupt vatten (v)", 20, boundaryY - 10);
+          ctx.fillText("Grunt vatten (v/2)", 20, boundaryY + 20);
+      }
+
+      // Nodal Lines Overlay
+      if (showNodalLines && mode === 'double') {
+        const nodalCurves = calculateNodalHyperbolas(wavelength, separation);
+
+        ctx.strokeStyle = 'rgba(255, 50, 50, 0.9)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+
+        nodalCurves.forEach(curve => {
+            if (curve.length < 2) return;
+            ctx.beginPath();
+            ctx.moveTo(curve[0].x, curve[0].y);
+            for (let i = 1; i < curve.length; i++) {
+                ctx.lineTo(curve[i].x, curve[i].y);
+            }
+            ctx.stroke();
+        });
+
+        ctx.setLineDash([]);
+      }
+
+      if (mode !== 'planar' && mode !== 'refraction') {
+          ctx.fillStyle = '#ffcc00';
+          for (const src of sources) {
+            ctx.beginPath();
+            ctx.arc(src.x, src.y, 6, 0, Math.PI * 2);
+            ctx.fill();
+          }
+      }
+    }
+  };
+
+  const draw3D = (ctx, t, sources) => {
+    const cx = CANVAS_WIDTH / 2;
+    const cy = CANVAS_HEIGHT / 2;
+
+    // Background
+    ctx.fillStyle = '#111';
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    // Get Camera Rotation
+    const { h, v } = cameraAngleRef.current;
+    const cosH = Math.cos(h);
+    const sinH = Math.sin(h);
+    const cosV = Math.cos(v);
+    const sinV = Math.sin(v);
+
+    // Projection Function
+    const project = (x, y, z) => {
+        const dx = x - cx;
+        const dy = y - cy;
+
+        const xRot = dx * cosH - dy * sinH;
+        const yRot = dx * sinH + dy * cosH;
+
+        const px = cx + xRot;
+        const py = cy + yRot * sinV - z * 3 * cosV;
+
+        return { x: px, y: py, depth: yRot };
+    };
+
+    // --- Doppler 3D Visualization ---
+    if (mode === 'doppler') {
+       const currentWavefronts = wavefrontsRef.current;
+       ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+       ctx.lineWidth = 1;
+
+       for (const wf of currentWavefronts) {
+        const age = t - wf.emitTime;
+        if (age < 0) continue;
+        const radius = age * waveSpeedParam;
+
+        ctx.beginPath();
+        for (let a = 0; a <= Math.PI * 2; a += 0.2) {
+            const wx = wf.x + radius * Math.cos(a);
+            const wy = wf.y + radius * Math.sin(a);
+            const { x: px, y: py } = project(wx, wy, 0);
+
+            if (a === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.stroke();
+       }
+
+       // Draw source
+       ctx.fillStyle = '#ffcc00';
+       for (const src of sources) {
+          const { x: px, y: py } = project(src.x, src.y, 0);
+          ctx.beginPath();
+          ctx.arc(px, py, 4, 0, Math.PI * 2);
+          ctx.fill();
+       }
+       return;
+    }
+
+    // --- Standard Wave Surface ---
+    const wavelength = waveSpeedParam / frequency;
+    const k = (2 * Math.PI) / wavelength;
+    const omega = 2 * Math.PI * frequency;
+
+    // Refraction constants
+    const boundaryY = CANVAS_HEIGHT / 2;
+    const incidentAngle = Math.PI / 6;
+    const n2 = 2.0;
+    const v1 = waveSpeedParam;
+    const v2 = v1 / n2;
+    const sinTheta2 = (v2 / v1) * Math.sin(incidentAngle);
+    const theta2 = Math.asin(sinTheta2);
+    const k1 = omega / v1;
+    const k2 = omega / v2;
+
+    const k1x = k1 * Math.sin(incidentAngle);
+    const k1y = k1 * Math.cos(incidentAngle);
+    const k2x = k2 * Math.sin(theta2);
+    const k2y = k2 * Math.cos(theta2);
+    const phaseOffset = (k1y - k2y) * boundaryY;
+
+    const cols = 150;
+    const rows = 150;
+    const stepX = CANVAS_WIDTH / cols;
+    const stepY = CANVAS_HEIGHT / rows;
+
+    // Calculate vertices
+    const vertices = [];
+
+    for (let r = 0; r <= rows; r++) {
+        for (let c = 0; c <= cols; c++) {
+            const x = c * stepX;
+            const y = r * stepY;
+            let z = 0;
+
+            if (mode === 'planar') {
+                z = Math.sin(k * x - omega * t) * 5;
+            } else if (mode === 'refraction') {
+                if (y < boundaryY) {
+                   z = Math.sin(k1x * x + k1y * y - omega * t) * 5;
+                } else {
+                   z = Math.sin(k2x * x + k2y * y - omega * t + phaseOffset) * 5;
+                }
+            } else {
+                for (const src of sources) {
+                    const dist = Math.sqrt((x - src.x)**2 + (y - src.y)**2);
+                    const d = Math.max(0, 1000 - dist)/1000;
+                    z += Math.sin(k * dist - omega * t) * 5 * d;
+                }
+            }
+
+            const p = project(x, y, z);
+            vertices.push({ x, y, z, px: p.x, py: p.y, depth: p.depth });
+        }
+    }
+
+    // Create Quads
+    const quads = [];
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const idx = r * (cols + 1) + c;
+            const p1 = idx;
+            const p2 = idx + 1;
+            const p3 = idx + (cols + 1) + 1;
+            const p4 = idx + (cols + 1);
+
+            const v1 = vertices[p1];
+            const v2 = vertices[p2];
+            const v3 = vertices[p3];
+            const v4 = vertices[p4];
+
+            const avgDepth = (v1.depth + v2.depth + v3.depth + v4.depth) / 4;
+            const avgZ = (v1.z + v2.z + v3.z + v4.z) / 4;
+
+            quads.push({
+                p1, p2, p3, p4,
+                avgDepth,
+                avgZ,
+                centerX: (v1.x + v2.x + v3.x + v4.x)/4,
+                centerY: (v1.y + v2.y + v3.y + v4.y)/4
+            });
+        }
+    }
+
+    // Sort Quads
+    quads.sort((a, b) => a.avgDepth - b.avgDepth);
+
+    // Draw Quads
+    const maxAmp = mode === 'double' ? 10 : 5;
+
+    for (const q of quads) {
+        const v1 = vertices[q.p1];
+        const v2 = vertices[q.p2];
+        const v3 = vertices[q.p3];
+        const v4 = vertices[q.p4];
+
+        let val = (q.avgZ + maxAmp) / (maxAmp * 2);
+        if (val < 0) val = 0; if (val > 1) val = 1;
+
+        const red = val * 230;
+        const green = val * 240;
+        const blue = 80 + val * 175;
+
+        const fillStyle = `rgb(${red}, ${green}, ${blue})`;
+
+        ctx.fillStyle = fillStyle;
+        ctx.strokeStyle = fillStyle;
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(v1.px, v1.py);
+        ctx.lineTo(v2.px, v2.py);
+        ctx.lineTo(v3.px, v3.py);
+        ctx.lineTo(v4.px, v4.py);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    // Draw boundary line in 3D
+    if (mode === 'refraction') {
+        const pStart = project(0, boundaryY, 0);
+        const pEnd = project(CANVAS_WIDTH, boundaryY, 0);
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        ctx.moveTo(pStart.x, pStart.y);
+        ctx.lineTo(pEnd.x, pEnd.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+    }
+
+    // Draw Nodal Lines in 3D
+    if (showNodalLines && mode === 'double') {
+        const nodalCurves = calculateNodalHyperbolas(wavelength, separation);
+
+        ctx.strokeStyle = 'rgba(255, 50, 50, 0.9)';
+        ctx.lineWidth = 3;
+
+        nodalCurves.forEach(curve => {
+            if (curve.length < 2) return;
+
+            ctx.beginPath();
+
+            let p = project(curve[0].x, curve[0].y, 0);
+            ctx.moveTo(p.x, p.y);
+
+            for (let i = 1; i < curve.length; i++) {
+                p = project(curve[i].x, curve[i].y, 0);
+                ctx.lineTo(p.x, p.y);
+            }
+            ctx.stroke();
+        });
+    }
+
+    // Draw sources
+    if (mode !== 'planar' && mode !== 'refraction') {
+        ctx.fillStyle = '#ffcc00';
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1;
+        for (const src of sources) {
+            const { x: px, y: py } = project(src.x, src.y, 10);
+            ctx.beginPath();
+            ctx.arc(px, py, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+        }
+    }
+  };
+
+  const animate = (timestamp) => {
+    if (isPlaying) {
+      const dt = 0.016;
+      timeRef.current += dt * sourceSpeed;
+
+      // Handle Doppler Emission
+      if (mode === 'doppler') {
+          const emissionPeriod = 1 / frequency;
+          if (timeRef.current - lastEmitTimeRef.current >= emissionPeriod) {
+            const sources = getSources(timeRef.current);
+            wavefrontsRef.current.push({
+                x: sources[0].x,
+                y: sources[0].y,
+                emitTime: timeRef.current
+            });
+            lastEmitTimeRef.current = timeRef.current;
+
+            if (wavefrontsRef.current.length > 50) {
+                wavefrontsRef.current.shift();
+            }
+          }
+      }
+    }
+
+    const canvas = canvasRef.current;
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+            const sources = getSources(timeRef.current);
+            if (viewMode === '2D') {
+                draw2D(ctx, timeRef.current, sources);
+            } else {
+                draw3D(ctx, timeRef.current, sources);
+            }
+        }
+    }
+
+    requestRef.current = requestAnimationFrame(animate);
+  };
+
+  useEffect(() => {
+    requestRef.current = requestAnimationFrame(animate);
+    return () => {
+        if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    };
+  }, [isPlaying, viewMode, mode, showNodalLines, frequency, separation, sourceSpeed, waveSpeedParam]);
+
+  return (
+    <div className="flex h-screen bg-gray-900 text-white font-sans overflow-hidden">
+      {/* Sidebar Controls */}
+      <div className="w-80 p-6 flex flex-col gap-6 bg-gray-800 border-r border-gray-700 shadow-xl overflow-y-auto z-10">
+        <h1 className="text-2xl font-bold text-blue-400">Vågsimulator</h1>
+
+        {/* Play/Pause */}
+        <button
+            onClick={() => setIsPlaying(!isPlaying)}
+            className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                isPlaying ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'
+            }`}
+        >
+            {isPlaying ? 'Pausa' : 'Starta'}
+        </button>
+
+        {/* View Mode */}
+        <div className="flex flex-col gap-2">
+            <label className="text-sm text-gray-400 uppercase tracking-wide">Vy</label>
+            <div className="flex bg-gray-700 rounded-lg p-1">
+                <button
+                    onClick={() => setViewMode('2D')}
+                    className={`flex-1 py-1 rounded-md text-sm transition-all ${viewMode === '2D' ? 'bg-blue-500 shadow' : 'text-gray-300 hover:text-white'}`}
+                >
+                    2D
+                </button>
+                <button
+                    onClick={() => setViewMode('3D')}
+                    className={`flex-1 py-1 rounded-md text-sm transition-all ${viewMode === '3D' ? 'bg-blue-500 shadow' : 'text-gray-300 hover:text-white'}`}
+                >
+                    3D
+                </button>
+            </div>
+        </div>
+
+        {/* Source Settings */}
+        <div className="flex flex-col gap-2">
+            <label className="text-sm text-gray-400 uppercase tracking-wide">Vågkällor</label>
+
+            <select
+                value={mode}
+                onChange={(e) => setMode(e.target.value)}
+                className="w-full bg-gray-700 text-white p-2 rounded-lg border border-gray-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"
+            >
+                <option value="single">En punktkälla</option>
+                <option value="double">Två punktkällor</option>
+                <option value="planar">Plana vågor</option>
+                <option value="refraction">Refraktion</option>
+                <option value="doppler">Dopplereffekt</option>
+            </select>
+
+            {mode === 'double' && (
+                <div className="flex items-center gap-3 mt-2">
+                    <input
+                        type="checkbox"
+                        id="nodal"
+                        checked={showNodalLines}
+                        onChange={(e) => setShowNodalLines(e.target.checked)}
+                        className="w-4 h-4 rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-gray-700"
+                    />
+                    <label htmlFor="nodal" className="text-sm">Visa Nodlinjer</label>
+                </div>
+            )}
+        </div>
+
+        {/* Sliders */}
+        <div className="flex flex-col gap-4">
+            <div>
+                <div className="flex justify-between text-sm mb-1">
+                    <span className="text-gray-300">Frekvens</span>
+                    <span className="text-gray-400">{frequency.toFixed(1).replace('.', ',')} Hz</span>
+                </div>
+                <input
+                    type="range" min="0.5" max="5" step="0.1"
+                    value={frequency}
+                    onChange={(e) => setFrequency(parseFloat(e.target.value))}
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                />
+            </div>
+
+            <div>
+                <div className="flex justify-between text-sm mb-1">
+                    <span className="text-gray-300">Våglängd (i djupt vatten)</span>
+                    <span className="text-gray-400">{(waveSpeedParam / frequency).toFixed(0)} px</span>
+                </div>
+                <input
+                    type="range" min="20" max="200" step="1"
+                    value={waveSpeedParam / frequency}
+                    onChange={(e) => {
+                         const lambda = parseFloat(e.target.value);
+                         if (lambda > 0) setFrequency(waveSpeedParam / lambda);
+                    }}
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                />
+            </div>
+
+            <div>
+                <div className="flex justify-between text-sm mb-1">
+                    <span className="text-gray-300">Simuleringshastighet</span>
+                    <span className="text-gray-400">{sourceSpeed.toFixed(1).replace('.', ',')}x</span>
+                </div>
+                <input
+                    type="range" min="0" max="3" step="0.1"
+                    value={sourceSpeed}
+                    onChange={(e) => setSourceSpeed(parseFloat(e.target.value))}
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                />
+            </div>
+
+            {mode === 'double' && (
+                <div>
+                    <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-300">Avstånd</span>
+                        <span className="text-gray-400">{separation} px</span>
+                    </div>
+                    <input
+                        type="range" min="50" max="400" step="10"
+                        value={separation}
+                        onChange={(e) => setSeparation(parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    />
+                </div>
+            )}
+        </div>
+      </div>
+
+      {/* Main Canvas Area */}
+      <div className="flex-1 relative flex items-center justify-center bg-black cursor-crosshair">
+         <canvas
+            ref={canvasRef}
+            width={800}
+            height={600}
+            className="rounded shadow-2xl bg-black"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+            style={{ maxWidth: '100%', maxHeight: '100%' }}
+         />
+         {viewMode === '3D' && (
+             <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded text-xs pointer-events-none">
+                 Dra för att rotera kameran
+             </div>
+         )}
+      </div>
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<WaveSimulator />);
+    </script>
+</body>
+</html>

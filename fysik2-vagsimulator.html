@@ -57,7 +57,7 @@
 const { useState, useRef, useEffect } = React;
 
 // Types (using JSDoc comments for type hints)
-/** @typedef {'single' | 'double' | 'planar' | 'doppler' | 'refraction'} SimulationMode */
+/** @typedef {'single' | 'double' | 'planar' | 'doppler' | 'refraction' | 'diffraction' | 'diffraction-double'} SimulationMode */
 /** @typedef {{ x: number; y: number }} Point */
 /** @typedef {{ x: number; y: number; emitTime: number }} WaveFront */
 
@@ -67,12 +67,15 @@ const WaveSimulator = () => {
   const [viewMode, setViewMode] = useState('2D');
   const [mode, setMode] = useState('single');
   const [showNodalLines, setShowNodalLines] = useState(false);
+  const [showMaximaLines, setShowMaximaLines] = useState(false);
+  const [showRefractionAngles, setShowRefractionAngles] = useState(false);
 
   // Physics Parameters
   const [frequency, setFrequency] = useState(2); // Hz
   const [separation, setSeparation] = useState(150); // pixels
   const [sourceSpeed, setSourceSpeed] = useState(1.5); // Multiplier
   const [waveSpeedParam, setWaveSpeedParam] = useState(100); // pixels/s
+  const [slitWidth, setSlitWidth] = useState(50); // pixels
 
   // Refs for animation
   const canvasRef = useRef(null);
@@ -104,10 +107,12 @@ const WaveSimulator = () => {
 
     if (mode === 'doppler') {
       // Moving source for Doppler (Linear motion loop)
+      // Wave speed is 100 px/s. Source moves at 60 px/s (subsonic) to show doppler effect clearly.
+
       const cycleDur = 6; // seconds for one pass
       const progress = (t % cycleDur) / cycleDur;
 
-      // Distance to travel
+      // Distance to travel: 6s * 60px/s = 360px
       const range = 360;
 
       const x = (centerX - range/2) + progress * range;
@@ -125,22 +130,45 @@ const WaveSimulator = () => {
         return [{ x: centerX, y: centerY }];
     }
 
-    // Planar/Refraction waves don't have a point source in the same way
+    // Planar/Refraction/Diffraction waves don't have a point source in the same way
     return [];
   };
 
-  const calculateNodalHyperbolas = (wavelength, separation) => {
+  const calculateInterferenceLines = (wavelength, separation, type) => {
       const curves = [];
+      const phaseOffset = type === 'nodal' ? 0.5 : 0;
 
-      const maxN = Math.floor(separation / wavelength - 0.5);
+      // Nodal condition: |r1 - r2| = (n + 0.5) * lambda
+      // Maxima condition: |r1 - r2| = n * lambda
+
+      // Max path diff is separation d.
+      // So (n + offset) * lambda < separation
+
+      const maxN = Math.floor(separation / wavelength - phaseOffset - 0.01);
       const cx = CANVAS_WIDTH / 2;
       const cy = CANVAS_HEIGHT / 2;
+      const yRange = CANVAS_HEIGHT / 2 + 50;
 
+      // We iterate n to find the hyperbolas
       for (let n = 0; n <= maxN; n++) {
-          const k = n + 0.5;
-          const delta = k * wavelength;
+          const k = n + phaseOffset;
+          const delta = k * wavelength; // Path difference
 
+          if (delta === 0) {
+              // Center line for n=0 Maxima
+              const pts = [];
+              for (let y = -yRange; y <= yRange; y += 10) {
+                  pts.push({ x: cx, y: cy + y });
+              }
+              curves.push(pts);
+              continue;
+          }
+
+          // Hyperbola parameters: x^2/a^2 - y^2/b^2 = 1
+          // 2a = delta => a = delta / 2
           const a = delta / 2;
+
+          // c = separation / 2 (focal distance from center)
           const c = separation / 2;
 
           if (a >= c) continue;
@@ -150,9 +178,9 @@ const WaveSimulator = () => {
           const ptsRight = [];
           const ptsLeft = [];
 
-          const yRange = CANVAS_HEIGHT / 2 + 50;
-
+          // Generate points for the hyperbola
           for (let y = -yRange; y <= yRange; y += 10) {
+              // x = a * sqrt(1 + y^2/b^2)
               const xVal = a * Math.sqrt(1 + (y * y) / (b * b));
 
               ptsRight.push({ x: cx + xVal, y: cy + y });
@@ -181,9 +209,15 @@ const WaveSimulator = () => {
 
         const sensitivity = 0.01;
 
+        // Update angles
+        // h: Azimuth (rotation around vertical axis)
+        // v: Elevation (angle from horizon)
+
         let newH = cameraAngleRef.current.h + dx * sensitivity;
         let newV = cameraAngleRef.current.v - dy * sensitivity;
 
+        // Clamp elevation to avoid flipping upside down or going underground
+        // 0.1 rad (~5 deg) to PI/2 (90 deg, top down)
         newV = Math.max(0.1, Math.min(Math.PI / 2, newV));
 
         cameraAngleRef.current = { h: newH, v: newV };
@@ -218,6 +252,7 @@ const WaveSimulator = () => {
         if (age < 0) continue;
         const radius = age * waveSpeedParam;
 
+        // Fade out as it gets large
         const alpha = Math.max(0, 1 - radius / 600);
         ctx.lineWidth = 3;
         ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
@@ -236,7 +271,8 @@ const WaveSimulator = () => {
       }
 
     } else {
-      // Interference / Standard Wave Field
+      // Interference / Standard Wave Field / Planar / Refraction / Diffraction
+      // Using ImageData for performance in 2D heatmap mode
       const imgData = ctx.getImageData(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
       const data = imgData.data;
 
@@ -244,16 +280,18 @@ const WaveSimulator = () => {
       const omega = 2 * Math.PI * frequency;
 
       const src1 = sources[0];
-      const src2 = sources[1];
+      const src2 = sources[1]; // may be undefined
 
       // Refraction constants
+      // Horizontal boundary at middle of height
       const boundaryY = CANVAS_HEIGHT / 2;
-      const incidentAngle = Math.PI / 6;
+      const incidentAngle = Math.PI / 6; // 30 degrees w.r.t the normal (Vertical Y-axis)
       const n1 = 1.0;
-      const n2 = 2.0;
+      const n2 = 2.0; // Index of refraction (slower in medium 2)
       const v1 = waveSpeedParam;
       const v2 = v1 / n2;
 
+      // Snell's law
       const sinTheta2 = (v2 / v1) * Math.sin(incidentAngle);
       const theta2 = Math.asin(sinTheta2);
 
@@ -268,40 +306,93 @@ const WaveSimulator = () => {
 
       const phaseOffset = (k1y - k2y) * boundaryY;
 
+      // Diffraction Setup
+      let huygensSources = [];
+      const cx = CANVAS_WIDTH / 2;
+      const numPointsPerSlit = Math.max(3, Math.floor(slitWidth / 4));
+
+      if (mode === 'diffraction') {
+          // Single slit centered at cx
+          for (let i = 0; i < numPointsPerSlit; i++) {
+              const xPos = cx - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
+              huygensSources.push(xPos);
+          }
+      } else if (mode === 'diffraction-double') {
+          // Left Slit: centered at cx - separation/2
+          const centerLeft = cx - separation / 2;
+          for (let i = 0; i < numPointsPerSlit; i++) {
+              const xPos = centerLeft - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
+              huygensSources.push(xPos);
+          }
+          // Right Slit: centered at cx + separation/2
+          const centerRight = cx + separation / 2;
+          for (let i = 0; i < numPointsPerSlit; i++) {
+              const xPos = centerRight - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
+              huygensSources.push(xPos);
+          }
+      }
+
       // Step 2 pixels for performance
       for (let y = 0; y < CANVAS_HEIGHT; y += 2) {
         for (let x = 0; x < CANVAS_WIDTH; x += 2) {
            let z = 0;
 
            if (mode === 'planar') {
+               // Planar wave moving right
                z = Math.sin(k * x - omega * t);
            } else if (mode === 'refraction') {
                if (y < boundaryY) {
+                   // Medium 1 (Top)
                    z = Math.sin(k1x * x + k1y * y - omega * t);
                } else {
+                   // Medium 2 (Bottom)
                    z = Math.sin(k2x * x + k2y * y - omega * t + phaseOffset);
                }
+           } else if (mode === 'diffraction' || mode === 'diffraction-double') {
+               if (y < boundaryY) {
+                   // Planar wave coming from top
+                   z = Math.sin(k * y - omega * t);
+               } else {
+                   // Huygens Principle: Sum of point sources from the slit
+                   let sum = 0;
+                   // Phase match at boundary: Incident wave at y=boundaryY has phase k*boundaryY - wt
+                   const incidentPhaseAtBoundary = k * boundaryY;
+
+                   for (const hs of huygensSources) {
+                       const dist = Math.sqrt((x - hs)**2 + (y - boundaryY)**2);
+                       // Each source emits spherical wave.
+                       sum += Math.sin(k * dist - omega * t + incidentPhaseAtBoundary);
+                   }
+
+                   // Normalize amplitude
+                   z = sum / Math.sqrt(huygensSources.length * (mode === 'diffraction-double' ? 1 : 2));
+               }
            } else {
+               // Source 1
                if (src1) {
                    const d1 = Math.sqrt((x - src1.x)**2 + (y - src1.y)**2);
                    z += Math.sin(k * d1 - omega * t);
                }
+               // Source 2
                if (src2) {
                    const d2 = Math.sqrt((x - src2.x)**2 + (y - src2.y)**2);
                    z += Math.sin(k * d2 - omega * t);
                }
            }
 
-           const maxAmp = mode === 'double' ? 2 : 1;
+           // Normalize z to 0-1 range for coloring
+           const maxAmp = (mode === 'double' || mode === 'diffraction-double') ? 2 : 1;
            let val = (z + maxAmp) / (maxAmp * 2);
 
            if (val < 0) val = 0;
            if (val > 1) val = 1;
 
+           // Blue gradient with white peaks
            const r = val * 200;
            const g = 50 + val * 205;
            const b = 100 + val * 155;
 
+           // Fill 2x2 block
            const idx = (y * CANVAS_WIDTH + x) * 4;
            data[idx] = r; data[idx+1] = g; data[idx+2] = b; data[idx+3] = 255;
            data[idx+4] = r; data[idx+5] = g; data[idx+6] = b; data[idx+7] = 255;
@@ -317,6 +408,7 @@ const WaveSimulator = () => {
 
       // Overlays
       if (mode === 'refraction') {
+          // Draw boundary line (Horizontal)
           ctx.beginPath();
           ctx.strokeStyle = 'rgba(255,255,255,0.3)';
           ctx.setLineDash([5, 5]);
@@ -325,34 +417,138 @@ const WaveSimulator = () => {
           ctx.stroke();
           ctx.setLineDash([]);
 
+          // Text Labels
           ctx.fillStyle = 'rgba(255,255,255,0.7)';
           ctx.font = '14px Arial';
           ctx.fillText("Djupt vatten (v)", 20, boundaryY - 10);
           ctx.fillText("Grunt vatten (v/2)", 20, boundaryY + 20);
+
+          if (showRefractionAngles) {
+              const rayLen = 150;
+              const cx = CANVAS_WIDTH / 2;
+              const cy = boundaryY;
+
+              // Ray Geometry
+              // Incident Ray (From Top-Left)
+              const startX = cx - rayLen * Math.sin(incidentAngle);
+              const startY = cy - rayLen * Math.cos(incidentAngle);
+
+              // Refracted Ray (To Bottom-Right)
+              const endX = cx + rayLen * Math.sin(theta2);
+              const endY = cy + rayLen * Math.cos(theta2);
+
+              // Draw Rays
+              ctx.lineWidth = 3;
+              ctx.strokeStyle = 'rgba(255, 230, 0, 0.9)'; // Yellow
+              ctx.beginPath();
+              ctx.moveTo(startX, startY);
+              ctx.lineTo(cx, cy);
+              ctx.lineTo(endX, endY);
+              ctx.stroke();
+
+              // Draw Normal Line
+              ctx.lineWidth = 1;
+              ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+              ctx.setLineDash([4, 4]);
+              ctx.beginPath();
+              ctx.moveTo(cx, cy - rayLen);
+              ctx.lineTo(cx, cy + rayLen);
+              ctx.stroke();
+              ctx.setLineDash([]);
+
+              // Draw Angle Arcs
+              const arcRadius = 40;
+
+              // Incident Angle Arc (From Normal-Up to Incident Ray)
+              // Normal Up is -90 deg (-PI/2). Incident Ray comes from -90 - theta.
+              ctx.beginPath();
+              ctx.strokeStyle = '#fff';
+              ctx.arc(cx, cy, arcRadius, -Math.PI / 2 - incidentAngle, -Math.PI / 2);
+              ctx.stroke();
+
+              // Refracted Angle Arc (From Refracted Ray to Normal-Down)
+              // Normal Down is 90 deg (PI/2). Refracted Ray is at 90 - theta.
+              ctx.beginPath();
+              ctx.arc(cx, cy, arcRadius, Math.PI / 2 - theta2, Math.PI / 2);
+              ctx.stroke();
+
+              // Labels
+              ctx.fillStyle = '#fff';
+              ctx.font = 'bold 16px Arial';
+              const deg1 = Math.round(incidentAngle * 180 / Math.PI);
+              const deg2 = Math.round(theta2 * 180 / Math.PI);
+              ctx.fillText(`${deg1}°`, cx - 35, cy - 50);
+              ctx.fillText(`${deg2}°`, cx + 20, cy + 50);
+          }
       }
 
-      // Nodal Lines Overlay
-      if (showNodalLines && mode === 'double') {
-        const nodalCurves = calculateNodalHyperbolas(wavelength, separation);
+      if (mode === 'diffraction' || mode === 'diffraction-double') {
+           // Draw Barrier
+           ctx.fillStyle = '#000';
+           const cx = CANVAS_WIDTH / 2;
 
-        ctx.strokeStyle = 'rgba(255, 50, 50, 0.9)';
+           if (mode === 'diffraction') {
+                // Left part
+                ctx.fillRect(0, boundaryY - 2, cx - slitWidth / 2, 4);
+                // Right part
+                ctx.fillRect(cx + slitWidth / 2, boundaryY - 2, CANVAS_WIDTH - (cx + slitWidth / 2), 4);
+           } else {
+                // Double Slit Barriers
+                // Left Wall: 0 to (cx - sep/2 - w/2)
+                ctx.fillRect(0, boundaryY - 2, (cx - separation/2) - slitWidth/2, 4);
+                // Center Wall: (cx - sep/2 + w/2) to (cx + sep/2 - w/2)
+                const centerStart = (cx - separation/2) + slitWidth/2;
+                const centerEnd = (cx + separation/2) - slitWidth/2;
+                if (centerEnd > centerStart) {
+                    ctx.fillRect(centerStart, boundaryY - 2, centerEnd - centerStart, 4);
+                }
+                // Right Wall: (cx + sep/2 + w/2) to End
+                const rightStart = (cx + separation/2) + slitWidth/2;
+                ctx.fillRect(rightStart, boundaryY - 2, CANVAS_WIDTH - rightStart, 4);
+           }
+      }
+
+      const drawLines = (type, color) => {
+        const lines = calculateInterferenceLines(wavelength, separation, type);
+        ctx.strokeStyle = color;
         ctx.lineWidth = 2;
         ctx.setLineDash([5, 5]);
 
-        nodalCurves.forEach(curve => {
+        lines.forEach(curve => {
             if (curve.length < 2) return;
-            ctx.beginPath();
-            ctx.moveTo(curve[0].x, curve[0].y);
-            for (let i = 1; i < curve.length; i++) {
-                ctx.lineTo(curve[i].x, curve[i].y);
-            }
-            ctx.stroke();
-        });
 
+            if (mode === 'diffraction-double') {
+                let started = false;
+                ctx.beginPath();
+                for (let i = 0; i < curve.length; i++) {
+                    if (curve[i].y > boundaryY) {
+                        if (!started) {
+                            ctx.moveTo(curve[i].x, curve[i].y);
+                            started = true;
+                        } else {
+                            ctx.lineTo(curve[i].x, curve[i].y);
+                        }
+                    }
+                }
+                ctx.stroke();
+            } else {
+                ctx.beginPath();
+                ctx.moveTo(curve[0].x, curve[0].y);
+                for (let i = 1; i < curve.length; i++) {
+                    ctx.lineTo(curve[i].x, curve[i].y);
+                }
+                ctx.stroke();
+            }
+        });
         ctx.setLineDash([]);
+      };
+
+      if (mode === 'double' || mode === 'diffraction-double') {
+        if (showNodalLines) drawLines('nodal', 'rgba(255, 50, 50, 0.9)');
+        if (showMaximaLines) drawLines('maxima', 'rgba(50, 255, 50, 0.9)');
       }
 
-      if (mode !== 'planar' && mode !== 'refraction') {
+      if (mode !== 'planar' && mode !== 'refraction' && mode !== 'diffraction' && mode !== 'diffraction-double') {
           ctx.fillStyle = '#ffcc00';
           for (const src of sources) {
             ctx.beginPath();
@@ -383,16 +579,18 @@ const WaveSimulator = () => {
         const dx = x - cx;
         const dy = y - cy;
 
+        // Rotate Azimuth
         const xRot = dx * cosH - dy * sinH;
         const yRot = dx * sinH + dy * cosH;
 
+        // Rotate Elevation & Project
         const px = cx + xRot;
         const py = cy + yRot * sinV - z * 3 * cosV;
 
-        return { x: px, y: py, depth: yRot };
+        return { x: px, y: py, depth: yRot }; // Return depth for sorting
     };
 
-    // --- Doppler 3D Visualization ---
+    // --- Doppler 3D Visualization (Simple Rings) ---
     if (mode === 'doppler') {
        const currentWavefronts = wavefrontsRef.current;
        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
@@ -427,12 +625,12 @@ const WaveSimulator = () => {
        return;
     }
 
-    // --- Standard Wave Surface ---
+    // --- Standard Wave Surface (Filled Mesh) ---
     const wavelength = waveSpeedParam / frequency;
     const k = (2 * Math.PI) / wavelength;
     const omega = 2 * Math.PI * frequency;
 
-    // Refraction constants
+    // Refraction constants for 3D
     const boundaryY = CANVAS_HEIGHT / 2;
     const incidentAngle = Math.PI / 6;
     const n2 = 2.0;
@@ -443,18 +641,46 @@ const WaveSimulator = () => {
     const k1 = omega / v1;
     const k2 = omega / v2;
 
+    // Normal is Y axis
     const k1x = k1 * Math.sin(incidentAngle);
     const k1y = k1 * Math.cos(incidentAngle);
     const k2x = k2 * Math.sin(theta2);
     const k2y = k2 * Math.cos(theta2);
     const phaseOffset = (k1y - k2y) * boundaryY;
 
+    // Diffraction Setup for 3D
+    let huygensSources = [];
+    const numPointsPerSlit = Math.max(3, Math.floor(slitWidth / 4));
+
+    if (mode === 'diffraction') {
+        for (let i = 0; i < numPointsPerSlit; i++) {
+            const xPos = cx - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
+            huygensSources.push(xPos);
+        }
+    } else if (mode === 'diffraction-double') {
+          // Left Slit
+          const centerLeft = cx - separation / 2;
+          for (let i = 0; i < numPointsPerSlit; i++) {
+              const xPos = centerLeft - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
+              huygensSources.push(xPos);
+          }
+          // Right Slit
+          const centerRight = cx + separation / 2;
+          for (let i = 0; i < numPointsPerSlit; i++) {
+              const xPos = centerRight - slitWidth / 2 + (slitWidth * (i + 0.5)) / numPointsPerSlit;
+              huygensSources.push(xPos);
+          }
+    }
+    const incidentPhaseAtBoundary = k * boundaryY;
+
+
+    // Increased resolution for smoother surface (150x150)
     const cols = 150;
     const rows = 150;
     const stepX = CANVAS_WIDTH / cols;
     const stepY = CANVAS_HEIGHT / rows;
 
-    // Calculate vertices
+    // 1. Calculate vertices and heights
     const vertices = [];
 
     for (let r = 0; r <= rows; r++) {
@@ -471,9 +697,22 @@ const WaveSimulator = () => {
                 } else {
                    z = Math.sin(k2x * x + k2y * y - omega * t + phaseOffset) * 5;
                 }
+            } else if (mode === 'diffraction' || mode === 'diffraction-double') {
+                if (y < boundaryY) {
+                    z = Math.sin(k * y - omega * t) * 5;
+                } else {
+                    let sum = 0;
+                    for (const hs of huygensSources) {
+                        const dist = Math.sqrt((x - hs)**2 + (y - boundaryY)**2);
+                        sum += Math.sin(k * dist - omega * t + incidentPhaseAtBoundary);
+                    }
+                    const numSrc = mode === 'diffraction-double' ? huygensSources.length / 2 : huygensSources.length;
+                    z = (sum / Math.sqrt(numSrc * 2)) * 5;
+                }
             } else {
                 for (const src of sources) {
                     const dist = Math.sqrt((x - src.x)**2 + (y - src.y)**2);
+                    // Attenuation for visual fade at edges
                     const d = Math.max(0, 1000 - dist)/1000;
                     z += Math.sin(k * dist - omega * t) * 5 * d;
                 }
@@ -484,7 +723,7 @@ const WaveSimulator = () => {
         }
     }
 
-    // Create Quads
+    // 2. Create Quads (Faces)
     const quads = [];
 
     for (let r = 0; r < rows; r++) {
@@ -500,6 +739,7 @@ const WaveSimulator = () => {
             const v3 = vertices[p3];
             const v4 = vertices[p4];
 
+            // Use average depth for Painter's Algorithm sorting
             const avgDepth = (v1.depth + v2.depth + v3.depth + v4.depth) / 4;
             const avgZ = (v1.z + v2.z + v3.z + v4.z) / 4;
 
@@ -513,11 +753,11 @@ const WaveSimulator = () => {
         }
     }
 
-    // Sort Quads
+    // 3. Sort Quads (Painter's Algorithm)
     quads.sort((a, b) => a.avgDepth - b.avgDepth);
 
-    // Draw Quads
-    const maxAmp = mode === 'double' ? 10 : 5;
+    // 4. Draw Quads
+    const maxAmp = (mode === 'double' || mode === 'diffraction-double') ? 10 : 5;
 
     for (const q of quads) {
         const v1 = vertices[q.p1];
@@ -525,9 +765,12 @@ const WaveSimulator = () => {
         const v3 = vertices[q.p3];
         const v4 = vertices[q.p4];
 
+        // Color Logic
+        // Normalize Z: -max to +max map to 0-1
         let val = (q.avgZ + maxAmp) / (maxAmp * 2);
         if (val < 0) val = 0; if (val > 1) val = 1;
 
+        // Enhanced Gradient: Dark Blue -> Blue -> White
         const red = val * 230;
         const green = val * 240;
         const blue = 80 + val * 175;
@@ -535,7 +778,7 @@ const WaveSimulator = () => {
         const fillStyle = `rgb(${red}, ${green}, ${blue})`;
 
         ctx.fillStyle = fillStyle;
-        ctx.strokeStyle = fillStyle;
+        ctx.strokeStyle = fillStyle; // stroke with same color to fill gaps
         ctx.lineWidth = 1;
 
         ctx.beginPath();
@@ -560,37 +803,124 @@ const WaveSimulator = () => {
         ctx.lineTo(pEnd.x, pEnd.y);
         ctx.stroke();
         ctx.setLineDash([]);
+
+        if (showRefractionAngles) {
+            const rayLen = 150;
+            const cx = CANVAS_WIDTH / 2;
+            const cy = boundaryY;
+            const zOff = 10; // Draw slightly above waves
+
+            // Calculate 3D points
+            const startX = cx - rayLen * Math.sin(incidentAngle);
+            const startY = cy - rayLen * Math.cos(incidentAngle);
+            const endX = cx + rayLen * Math.sin(theta2);
+            const endY = cy + rayLen * Math.cos(theta2);
+
+            const pRayStart = project(startX, startY, zOff);
+            const pCenter = project(cx, cy, zOff);
+            const pRayEnd = project(endX, endY, zOff);
+            const pNormStart = project(cx, cy - rayLen, zOff);
+            const pNormEnd = project(cx, cy + rayLen, zOff);
+
+            // Rays
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'rgba(255, 230, 0, 0.9)';
+            ctx.beginPath();
+            ctx.moveTo(pRayStart.x, pRayStart.y);
+            ctx.lineTo(pCenter.x, pCenter.y);
+            ctx.lineTo(pRayEnd.x, pRayEnd.y);
+            ctx.stroke();
+
+            // Normal
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(pNormStart.x, pNormStart.y);
+            ctx.lineTo(pNormEnd.x, pNormEnd.y);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
     }
 
-    // Draw Nodal Lines in 3D
-    if (showNodalLines && mode === 'double') {
-        const nodalCurves = calculateNodalHyperbolas(wavelength, separation);
+    if (mode === 'diffraction' || mode === 'diffraction-double') {
+        // Helper to draw plate
+        const drawPlate = (xStart, xEnd) => {
+             const p1 = project(xStart, boundaryY - 5, 5);
+             const p2 = project(xEnd, boundaryY - 5, 5);
+             const p3 = project(xEnd, boundaryY + 5, 5);
+             const p4 = project(xStart, boundaryY + 5, 5);
 
-        ctx.strokeStyle = 'rgba(255, 50, 50, 0.9)';
+             ctx.beginPath();
+             ctx.moveTo(p1.x, p1.y);
+             ctx.lineTo(p2.x, p2.y);
+             ctx.lineTo(p3.x, p3.y);
+             ctx.lineTo(p4.x, p4.y);
+             ctx.closePath();
+             ctx.fill();
+             ctx.stroke();
+        };
+
+        ctx.fillStyle = 'rgba(20, 20, 20, 0.9)';
+        ctx.strokeStyle = '#555';
+        ctx.lineWidth = 1;
+
+        if (mode === 'diffraction') {
+            drawPlate(0, cx - slitWidth/2);
+            drawPlate(cx + slitWidth/2, CANVAS_WIDTH);
+        } else {
+             // Left Wall: 0 to (cx - sep/2 - w/2)
+             drawPlate(0, (cx - separation/2) - slitWidth/2);
+             // Center Wall
+             const centerStart = (cx - separation/2) + slitWidth/2;
+             const centerEnd = (cx + separation/2) - slitWidth/2;
+             if (centerEnd > centerStart) {
+                drawPlate(centerStart, centerEnd);
+             }
+             // Right Wall
+             const rightStart = (cx + separation/2) + slitWidth/2;
+             drawPlate(rightStart, CANVAS_WIDTH);
+        }
+    }
+
+    // Draw Lines in 3D (Analytical)
+    const draw3DLines = (type, color) => {
+        const lines = calculateInterferenceLines(wavelength, separation, type);
+        ctx.strokeStyle = color;
         ctx.lineWidth = 3;
 
-        nodalCurves.forEach(curve => {
+        lines.forEach(curve => {
             if (curve.length < 2) return;
-
             ctx.beginPath();
+            let started = false;
+            for (let i = 0; i < curve.length; i++) {
+                 // For diffraction, clip before boundary
+                 if (mode === 'diffraction-double' && curve[i].y <= boundaryY) continue;
 
-            let p = project(curve[0].x, curve[0].y, 0);
-            ctx.moveTo(p.x, p.y);
-
-            for (let i = 1; i < curve.length; i++) {
-                p = project(curve[i].x, curve[i].y, 0);
-                ctx.lineTo(p.x, p.y);
+                 let p = project(curve[i].x, curve[i].y, 0);
+                 if (!started) {
+                     ctx.moveTo(p.x, p.y);
+                     started = true;
+                 } else {
+                     ctx.lineTo(p.x, p.y);
+                 }
             }
-            ctx.stroke();
+            if (started) ctx.stroke();
         });
+    };
+
+    if (mode === 'double' || mode === 'diffraction-double') {
+        if (showNodalLines) draw3DLines('nodal', 'rgba(255, 50, 50, 0.9)');
+        if (showMaximaLines) draw3DLines('maxima', 'rgba(50, 255, 50, 0.9)');
     }
 
-    // Draw sources
-    if (mode !== 'planar' && mode !== 'refraction') {
+    // Draw sources (last, to be on top-ish)
+    if (mode !== 'planar' && mode !== 'refraction' && mode !== 'diffraction' && mode !== 'diffraction-double') {
         ctx.fillStyle = '#ffcc00';
         ctx.strokeStyle = '#fff';
         ctx.lineWidth = 1;
         for (const src of sources) {
+            // Calculate z roughly at source location (approximation)
             const { x: px, y: py } = project(src.x, src.y, 10);
             ctx.beginPath();
             ctx.arc(px, py, 6, 0, Math.PI * 2);
@@ -602,6 +932,7 @@ const WaveSimulator = () => {
 
   const animate = (timestamp) => {
     if (isPlaying) {
+      // Delta time in seconds
       const dt = 0.016;
       timeRef.current += dt * sourceSpeed;
 
@@ -610,6 +941,7 @@ const WaveSimulator = () => {
           const emissionPeriod = 1 / frequency;
           if (timeRef.current - lastEmitTimeRef.current >= emissionPeriod) {
             const sources = getSources(timeRef.current);
+            // Add new wavefront at current source position
             wavefrontsRef.current.push({
                 x: sources[0].x,
                 y: sources[0].y,
@@ -617,6 +949,7 @@ const WaveSimulator = () => {
             });
             lastEmitTimeRef.current = timeRef.current;
 
+            // Cleanup old wavefronts
             if (wavefrontsRef.current.length > 50) {
                 wavefrontsRef.current.shift();
             }
@@ -645,7 +978,8 @@ const WaveSimulator = () => {
     return () => {
         if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [isPlaying, viewMode, mode, showNodalLines, frequency, separation, sourceSpeed, waveSpeedParam]);
+  }, [isPlaying, viewMode, mode, showNodalLines, showMaximaLines, showRefractionAngles, frequency, separation, sourceSpeed, waveSpeedParam, slitWidth]);
+
 
   return (
     <div className="flex h-screen bg-gray-900 text-white font-sans overflow-hidden">
@@ -695,19 +1029,46 @@ const WaveSimulator = () => {
                 <option value="double">Två punktkällor</option>
                 <option value="planar">Plana vågor</option>
                 <option value="refraction">Refraktion</option>
+                <option value="diffraction">Diffraktion: en öppning</option>
+                <option value="diffraction-double">Diffraktion: två öppningar</option>
                 <option value="doppler">Dopplereffekt</option>
             </select>
 
-            {mode === 'double' && (
+            {(mode === 'double' || mode === 'diffraction-double') && (
+                <div className="flex flex-col gap-2 mt-2">
+                    <div className="flex items-center gap-3">
+                        <input
+                            type="checkbox"
+                            id="nodal"
+                            checked={showNodalLines}
+                            onChange={(e) => setShowNodalLines(e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-gray-700"
+                        />
+                        <label htmlFor="nodal" className="text-sm">Visa nodlinjer (röd)</label>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <input
+                            type="checkbox"
+                            id="maxima"
+                            checked={showMaximaLines}
+                            onChange={(e) => setShowMaximaLines(e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-600 text-green-500 focus:ring-green-500 bg-gray-700"
+                        />
+                        <label htmlFor="maxima" className="text-sm">Visa maximilinjer (grön)</label>
+                    </div>
+                </div>
+            )}
+
+            {mode === 'refraction' && (
                 <div className="flex items-center gap-3 mt-2">
                     <input
                         type="checkbox"
-                        id="nodal"
-                        checked={showNodalLines}
-                        onChange={(e) => setShowNodalLines(e.target.checked)}
-                        className="w-4 h-4 rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-gray-700"
+                        id="angles"
+                        checked={showRefractionAngles}
+                        onChange={(e) => setShowRefractionAngles(e.target.checked)}
+                        className="w-4 h-4 rounded border-gray-600 text-yellow-500 focus:ring-yellow-500 bg-gray-700"
                     />
-                    <label htmlFor="nodal" className="text-sm">Visa Nodlinjer</label>
+                    <label htmlFor="angles" className="text-sm">Visa vinklar</label>
                 </div>
             )}
         </div>
@@ -756,7 +1117,7 @@ const WaveSimulator = () => {
                 />
             </div>
 
-            {mode === 'double' && (
+            {(mode === 'double' || mode === 'diffraction-double') && (
                 <div>
                     <div className="flex justify-between text-sm mb-1">
                         <span className="text-gray-300">Avstånd</span>
@@ -766,6 +1127,21 @@ const WaveSimulator = () => {
                         type="range" min="50" max="400" step="10"
                         value={separation}
                         onChange={(e) => setSeparation(parseFloat(e.target.value))}
+                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                    />
+                </div>
+            )}
+
+            {(mode === 'diffraction' || mode === 'diffraction-double') && (
+                <div>
+                    <div className="flex justify-between text-sm mb-1">
+                        <span className="text-gray-300">Öppningsbredd</span>
+                        <span className="text-gray-400">{slitWidth} px</span>
+                    </div>
+                    <input
+                        type="range" min="20" max="300" step="5"
+                        value={slitWidth}
+                        onChange={(e) => setSlitWidth(parseFloat(e.target.value))}
                         className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
                     />
                 </div>

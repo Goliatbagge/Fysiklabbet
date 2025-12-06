@@ -29,9 +29,11 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-tryck-pa-app.html',
     'fysik1-ellara-app.html',
     'fysik1-tyngdfaktor-jorden.html',
+    'fysik1-influens.html',
     'fysik2-magnetfalt-standalone.html',
     'fysik2-magnetisk-kraft-ledare.html',
-    'fysik2-vagsimulator.html'
+    'fysik2-vagsimulator.html',
+    'fysik2-konisk-pendel.html'
 ];
 
 let hasErrors = false;

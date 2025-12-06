@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektrostatisk Induktion (Influens) - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback } = React;
+
+        // Controls Component
+        const Controls = ({ showCharges, onToggleCharges, onReset }) => {
+            return (
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-gray-200 z-10 w-11/12 max-w-md justify-center">
+                    <button
+                        onClick={onToggleCharges}
+                        className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
+                            showCharges
+                                ? 'bg-blue-600 text-white shadow-md hover:bg-blue-700'
+                                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        }`}
+                    >
+                        {showCharges ? 'Dölj Laddningar' : 'Visa Laddningar'}
+                    </button>
+
+                    <button
+                        onClick={onReset}
+                        className="px-6 py-2 rounded-lg font-semibold bg-red-500 text-white shadow-md hover:bg-red-600 transition-all duration-200"
+                    >
+                        Återställ
+                    </button>
+                </div>
+            );
+        };
+
+        // SimulationCanvas Component
+        const SimulationCanvas = ({ showCharges, resetSignal }) => {
+            const canvasRef = useRef(null);
+            const containerRef = useRef(null);
+            const showChargesRef = useRef(showCharges);
+
+            useEffect(() => {
+                showChargesRef.current = showCharges;
+            }, [showCharges]);
+
+            // Physics Constants
+            const ROD_WIDTH = 120;
+            const ROD_HEIGHT = 40;
+            const CAN_RADIUS = 60;
+            const FLOOR_Y_RATIO = 0.25; // Golv 25% från botten (75% ned på skärmen)
+
+            const ATTRACTION_STRENGTH = 300000;
+            const REPULSION_STRENGTH = 300000;
+            const DAMPING = 0.96;
+
+            const STATIC_FRICTION_THRESHOLD = 3.0;
+            const CHARGE_SHIFT_FACTOR = 0.85;
+            const ELECTRON_SMOOTHING = 0.15;
+
+            const physicsState = useRef({
+                canX: 0,
+                canV: 0,
+                canRotation: 0,
+                rodX: 200,
+                electrons: [],
+                lastTime: 0,
+            });
+
+            const initCharges = useCallback(() => {
+                const particles = [];
+                const rows = 4;
+                const cols = 4;
+                const step = (CAN_RADIUS * 1.4) / Math.max(rows, cols);
+
+                let idCounter = 0;
+                for (let r = -rows/2; r < rows/2; r++) {
+                    for (let c = -cols/2; c < cols/2; c++) {
+                        const x = (c + 0.5) * step;
+                        const y = (r + 0.5) * step;
+
+                        if (Math.sqrt(x*x + y*y) < CAN_RADIUS - 10) {
+                            particles.push({
+                                id: idCounter++,
+                                basePosition: { x, y },
+                                currentPosition: { x, y }
+                            });
+                        }
+                    }
+                }
+                physicsState.current.electrons = particles;
+            }, []);
+
+            useEffect(() => {
+                if (!containerRef.current) return;
+                const width = containerRef.current.clientWidth;
+
+                const startCanX = width * 0.75;
+                const startRodX = width * 0.15;
+
+                physicsState.current.canX = startCanX;
+                physicsState.current.canV = 0;
+                physicsState.current.canRotation = 0;
+                physicsState.current.rodX = startRodX;
+                physicsState.current.lastTime = 0;
+
+                initCharges();
+            }, [resetSignal, initCharges]);
+
+            const handleInput = useCallback((clientX) => {
+                if (!canvasRef.current) return;
+                const rect = canvasRef.current.getBoundingClientRect();
+                const x = clientX - rect.left;
+
+                physicsState.current.rodX = Math.max(ROD_WIDTH/2, Math.min(rect.width - ROD_WIDTH/2, x));
+            }, []);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+
+                const onMouseMove = (e) => handleInput(e.clientX);
+                const onTouchMove = (e) => {
+                    e.preventDefault();
+                    handleInput(e.touches[0].clientX);
+                };
+                const onMouseDown = (e) => handleInput(e.clientX);
+
+                canvas.addEventListener('mousemove', onMouseMove);
+                canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+                canvas.addEventListener('mousedown', onMouseDown);
+
+                return () => {
+                    canvas.removeEventListener('mousemove', onMouseMove);
+                    canvas.removeEventListener('touchmove', onTouchMove);
+                    canvas.removeEventListener('mousedown', onMouseDown);
+                };
+            }, [handleInput]);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                let animationFrameId;
+
+                const render = (time) => {
+                    const { width, height } = canvas;
+                    const state = physicsState.current;
+
+                    if (width === 0 || height === 0) {
+                        animationFrameId = requestAnimationFrame(render);
+                        return;
+                    }
+
+                    if (!Number.isFinite(state.canX)) state.canX = width * 0.75;
+                    if (!Number.isFinite(state.canV)) state.canV = 0;
+                    if (!Number.isFinite(state.rodX)) state.rodX = width * 0.15;
+
+                    if (state.lastTime === 0) {
+                        state.lastTime = time;
+                    }
+
+                    let deltaTime = (time - state.lastTime) / 1000;
+                    state.lastTime = time;
+
+                    if (deltaTime < 0 || deltaTime > 0.1) {
+                        deltaTime = 0.016;
+                    }
+
+                    const floorY = height * (1 - FLOOR_Y_RATIO);
+                    const canY = floorY - CAN_RADIUS;
+                    const rodY = canY;
+
+                    const distVector = state.canX - state.rodX;
+                    const dist = Math.abs(distVector);
+                    const effDist = Math.max(dist, ROD_WIDTH/2 + CAN_RADIUS + 5);
+                    const sign = Math.sign(distVector);
+
+                    const inductionStrength = Math.min(30000 / (effDist * effDist), 1);
+                    const repulsionDir = sign;
+
+                    state.electrons.forEach(p => {
+                        const cos = Math.cos(state.canRotation);
+                        const sin = Math.sin(state.canRotation);
+
+                        const rotX = p.basePosition.x * cos - p.basePosition.y * sin;
+                        const rotY = p.basePosition.x * sin + p.basePosition.y * cos;
+
+                        let targetX = rotX + (repulsionDir * inductionStrength * CAN_RADIUS * CHARGE_SHIFT_FACTOR);
+                        let targetY = rotY;
+
+                        const d = Math.sqrt(targetX*targetX + targetY*targetY);
+                        if (d > CAN_RADIUS - 12) {
+                            const scale = (CAN_RADIUS - 12) / d;
+                            targetX *= scale;
+                            targetY *= scale;
+                        }
+
+                        p.currentPosition.x += (targetX - p.currentPosition.x) * ELECTRON_SMOOTHING;
+                        p.currentPosition.y += (targetY - p.currentPosition.y) * ELECTRON_SMOOTHING;
+                    });
+
+                    let netForce = 0;
+                    state.electrons.forEach(p => {
+                        const cos = Math.cos(state.canRotation);
+                        const sin = Math.sin(state.canRotation);
+                        const pX = state.canX + (p.basePosition.x * cos - p.basePosition.y * sin);
+                        const pY = canY + (p.basePosition.x * sin + p.basePosition.y * cos);
+
+                        const eX = state.canX + p.currentPosition.x;
+                        const eY = canY + p.currentPosition.y;
+
+                        const dpX = pX - state.rodX;
+                        const dpY = pY - rodY;
+                        const distP2 = Math.max(dpX*dpX + dpY*dpY, 200);
+                        const distP = Math.sqrt(distP2);
+                        const dirPx = (state.rodX - pX) / distP;
+
+                        const forceProton = (ATTRACTION_STRENGTH / distP2) * dirPx;
+
+                        const deX = eX - state.rodX;
+                        const deY = eY - rodY;
+                        const distE2 = Math.max(deX*deX + deY*deY, 200);
+                        const distE = Math.sqrt(distE2);
+                        const dirEx = (state.rodX - eX) / distE;
+
+                        const forceElectron = -(REPULSION_STRENGTH / distE2) * dirEx;
+
+                        netForce += (forceProton + forceElectron);
+                    });
+
+                    if (Math.abs(state.canV) < 2.0 && Math.abs(netForce) < STATIC_FRICTION_THRESHOLD) {
+                        netForce = 0;
+                        state.canV = 0;
+                    }
+
+                    const acceleration = netForce;
+                    state.canV += acceleration * deltaTime;
+                    state.canV *= DAMPING;
+
+                    const minDist = ROD_WIDTH/2 + CAN_RADIUS;
+                    if (Math.abs(state.canX - state.rodX) < minDist) {
+                        if (state.canX > state.rodX && state.canV < 0) state.canV = 0;
+                        if (state.canX < state.rodX && state.canV > 0) state.canV = 0;
+
+                        if (state.canX > state.rodX) state.canX = state.rodX + minDist;
+                        else state.canX = state.rodX - minDist;
+                    }
+
+                    state.canX += state.canV * deltaTime;
+
+                    const dx = state.canV * deltaTime;
+                    state.canRotation += dx / CAN_RADIUS;
+
+                    ctx.clearRect(0, 0, width, height);
+
+                    ctx.beginPath();
+                    ctx.moveTo(0, floorY);
+                    ctx.lineTo(width, floorY);
+                    ctx.strokeStyle = '#9ca3af';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#1f2937';
+                    if (ctx.roundRect) {
+                        ctx.beginPath();
+                        ctx.roundRect(state.rodX - ROD_WIDTH/2, rodY - ROD_HEIGHT/2, ROD_WIDTH, ROD_HEIGHT, 5);
+                        ctx.fill();
+                    } else {
+                        ctx.fillRect(state.rodX - ROD_WIDTH/2, rodY - ROD_HEIGHT/2, ROD_WIDTH, ROD_HEIGHT);
+                    }
+
+                    ctx.fillStyle = '#ef4444';
+                    ctx.font = '24px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    for(let i=1; i<4; i++) {
+                        const rx = state.rodX - ROD_WIDTH/2 + (i * ROD_WIDTH/4);
+                        ctx.fillText('-', rx, rodY);
+                    }
+
+                    ctx.save();
+                    ctx.translate(state.canX, canY);
+                    ctx.rotate(state.canRotation);
+
+                    const gradient = ctx.createLinearGradient(-CAN_RADIUS, -CAN_RADIUS, CAN_RADIUS, CAN_RADIUS);
+                    gradient.addColorStop(0, '#e5e7eb');
+                    gradient.addColorStop(0.5, '#9ca3af');
+                    gradient.addColorStop(1, '#6b7280');
+
+                    ctx.beginPath();
+                    ctx.arc(0, 0, CAN_RADIUS, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+                    ctx.strokeStyle = '#4b5563';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.arc(0, 0, CAN_RADIUS - 5, 0, Math.PI * 2);
+                    ctx.strokeStyle = '#d1d5db';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#6b7280';
+                    ctx.beginPath();
+                    ctx.ellipse(CAN_RADIUS * 0.4, 0, 10, 15, 0, 0, Math.PI*2);
+                    ctx.fill();
+
+                    if (showChargesRef.current) {
+                        state.electrons.forEach(p => {
+                            ctx.fillStyle = '#ef4444';
+                            ctx.font = 'bold 16px Arial';
+                            ctx.fillText('+', p.basePosition.x, p.basePosition.y);
+                        });
+                    }
+                    ctx.restore();
+
+                    if (showChargesRef.current) {
+                        ctx.save();
+                        ctx.translate(state.canX, canY);
+                        state.electrons.forEach(p => {
+                            ctx.fillStyle = '#2563eb';
+                            ctx.font = 'bold 20px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('-', p.currentPosition.x, p.currentPosition.y);
+                        });
+                        ctx.restore();
+                    }
+
+                    animationFrameId = requestAnimationFrame(render);
+                };
+
+                animationFrameId = requestAnimationFrame(render);
+
+                return () => {
+                    cancelAnimationFrame(animationFrameId);
+                };
+            }, [resetSignal, initCharges]);
+
+            useEffect(() => {
+                const handleResize = () => {
+                    if (containerRef.current && canvasRef.current) {
+                        const rect = containerRef.current.getBoundingClientRect();
+                        canvasRef.current.width = rect.width;
+                        canvasRef.current.height = rect.height;
+
+                        if (!Number.isFinite(physicsState.current.canX) || physicsState.current.canX > rect.width + 200 || physicsState.current.canX < -200) {
+                            physicsState.current.canX = rect.width * 0.75;
+                            physicsState.current.rodX = rect.width * 0.15;
+                        }
+                    }
+                };
+
+                window.addEventListener('resize', handleResize);
+                // Initial resize with a small delay to ensure container is rendered
+                setTimeout(handleResize, 0);
+
+                return () => window.removeEventListener('resize', handleResize);
+            }, []);
+
+            return (
+                <div ref={containerRef} className="absolute inset-0 cursor-col-resize">
+                    <div className="absolute top-4 left-0 w-full text-center pointer-events-none select-none z-0">
+                        <h2 className="text-gray-500 text-sm font-medium">
+                            Dra staven med musen eller fingret
+                        </h2>
+                    </div>
+                    <canvas
+                        ref={canvasRef}
+                        className="block touch-none"
+                        style={{ width: '100%', height: '100%' }}
+                    />
+                </div>
+            );
+        };
+
+        // App Component
+        function App() {
+            const [showCharges, setShowCharges] = useState(true);
+            const [resetSignal, setResetSignal] = useState(0);
+
+            const handleToggleCharges = () => setShowCharges(prev => !prev);
+            const handleReset = () => setResetSignal(prev => prev + 1);
+
+            return (
+                <div className="relative w-full flex flex-col bg-gray-50" style={{ minHeight: 'calc(100vh - 60px)' }}>
+                    <header className="flex-none p-4 md:p-6 bg-white shadow-sm z-10">
+                        <div className="max-w-4xl mx-auto text-center">
+                            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+                                Elektrostatisk Induktion (Influens)
+                            </h1>
+                            <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
+                                Observera hur den neutrala aluminiumburken attraheras av den negativt laddade ebonitstaven.
+                                Elektronerna repelleras, vilket skapar en dipol som får burken att rulla.
+                            </p>
+                        </div>
+                    </header>
+
+                    <main className="flex-grow relative w-full bg-slate-100" style={{ minHeight: '600px', maxHeight: '800px' }}>
+                        <SimulationCanvas
+                            showCharges={showCharges}
+                            resetSignal={resetSignal}
+                        />
+
+                        <Controls
+                            showCharges={showCharges}
+                            onToggleCharges={handleToggleCharges}
+                            onReset={handleReset}
+                        />
+                    </main>
+                </div>
+            );
+        }
+
+        const rootElement = document.getElementById('root');
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<App />);
+    </script>
+</body>
+</html>

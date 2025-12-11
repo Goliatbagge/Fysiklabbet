@@ -48,6 +48,19 @@
             <div class="absolute top-4 left-4 text-gray-900 p-2 rounded-lg z-10">
                 <h1 class="text-2xl md:text-4xl font-bold tracking-tighter">Plan pendel (matematisk)</h1>
             </div>
+            <div id="simulation-controls" class="absolute top-4 right-4 flex flex-col gap-3 z-10">
+                <div class="flex gap-3">
+                    <button id="canvas-pause-button" class="px-4 py-2 bg-orange-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60">
+                        ⏸ Pausa
+                    </button>
+                    <button id="canvas-abort-button" class="px-4 py-2 bg-red-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60">
+                        ⏹ Återställ
+                    </button>
+                </div>
+                <button id="canvas-timing-button" class="px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60">
+                    ⏱ Ta tiden för 10 pendlingar
+                </button>
+            </div>
         </div>
         <div class="w-full lg:w-1/2 bg-white/60 backdrop-blur-md p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto" id="controls-container">
         </div>
@@ -79,12 +92,17 @@
             damping: 0.05,
         };
 
-        let simulationState = 'idle';
+        let simulationState = 'idle'; // 'idle', 'running', 'paused', 'finished'
         let timer = 0;
         let swingCount = 0;
         let measuredPeriod = null;
         let timeRef = 0;
         let swingCountRef = 0;
+        let timingActive = false; // Whether we're actively timing 10 swings
+        let timingStartTime = 0;
+        let timingStartSwing = 0;
+        let previousAngle = 0;
+        let waitingForTurningPoint = false;
 
         // Three.js setup
         const container = document.getElementById('canvas-container');
@@ -92,7 +110,7 @@
         scene.background = new THREE.Color(0xf0f0f0);
 
         const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
-        camera.position.set(0, 1.8, 3.5);
+        camera.position.set(0, 1.5, 5.0);
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
@@ -380,6 +398,9 @@
                 swingCount = 0;
                 swingCountRef = 0;
                 measuredPeriod = null;
+                timingActive = false;
+                waitingForTurningPoint = false;
+                previousAngle = 0;
                 updateAngleVisuals(); // Clear angle visuals when starting
                 renderUI();
             }
@@ -406,20 +427,34 @@
 
                 pendulumGroup.rotation.z = angle;
 
-                const currentSwings = Math.floor((omega * timeRef) / (2 * Math.PI));
-                if (currentSwings !== swingCountRef) {
-                    swingCountRef = currentSwings;
-                    swingCount = currentSwings;
+                // Detect turning points (angle changes sign)
+                if (waitingForTurningPoint && previousAngle * angle < 0) {
+                    // We've hit a turning point
+                    waitingForTurningPoint = false;
+                    timingActive = true;
+                    timingStartTime = timeRef;
+                    timingStartSwing = Math.floor((omega * timeRef) / (2 * Math.PI));
                     renderUI();
                 }
 
-                if (swingCountRef >= 10) {
-                    simulationState = 'finished';
-                    measuredPeriod = timer / 10;
-                    renderUI();
+                // Count swings if timing is active
+                if (timingActive) {
+                    const currentSwings = Math.floor((omega * timeRef) / (2 * Math.PI));
+                    const swingsSinceTiming = currentSwings - timingStartSwing;
+
+                    if (swingsSinceTiming >= 10) {
+                        // Completed 10 swings
+                        const elapsedTime = timeRef - timingStartTime;
+                        measuredPeriod = elapsedTime / 10;
+                        timingActive = false;
+                        renderUI();
+                    }
                 }
 
+                previousAngle = angle;
                 renderUI();
+            } else if (simulationState === 'paused') {
+                // When paused, keep current angle - do nothing
             } else {
                 const initialAngleRad = (params.initialAngle * Math.PI) / 180;
                 pendulumGroup.rotation.z = initialAngleRad;
@@ -524,29 +559,22 @@
 
                     <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg text-center space-y-2">
                         <h3 class="text-lg font-semibold text-blue-800">Mätning</h3>
-                        ${simulationState === 'idle' ? '<p class="text-sm text-blue-700">Justera vinkeln och klicka Starta.</p>' : ''}
-                        ${simulationState === 'running' ? `
-                            <div class="flex justify-around items-center">
+                        ${simulationState === 'idle' ? '<p class="text-sm text-blue-700">Dra pendeln och släpp för att starta.</p>' : ''}
+                        ${simulationState === 'running' && !waitingForTurningPoint && !timingActive ? '<p class="text-sm text-blue-700">Tryck på "Ta tiden" för att mäta perioden.</p>' : ''}
+                        ${waitingForTurningPoint ? '<p class="text-sm text-orange-600 font-semibold">Väntar på nästa vändläge...</p>' : ''}
+                        ${timingActive ? `
+                            <div class="space-y-2">
+                                <p class="text-sm text-green-600 font-semibold">Tidtagning pågår!</p>
                                 <div>
-                                    <p class="text-sm text-gray-600">Svängningar</p>
-                                    <p class="text-3xl font-mono font-bold text-gray-800">${swingCount} / 10</p>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-600">Tid</p>
-                                    <p class="text-3xl font-mono font-bold text-gray-800">${timer.toFixed(2).replace('.', ',')} s</p>
+                                    <p class="text-sm text-gray-600">Svängningar sedan start</p>
+                                    <p class="text-3xl font-mono font-bold text-gray-800">${Math.floor((Math.sqrt(params.gravity / params.length) * timeRef) / (2 * Math.PI)) - timingStartSwing} / 10</p>
                                 </div>
                             </div>
                         ` : ''}
-                        ${simulationState === 'finished' && measuredPeriod !== null ? `
-                            <div class="space-y-3">
-                                <div>
-                                    <p class="text-sm text-gray-600">Total tid (10 svängningar)</p>
-                                    <p class="text-3xl font-mono font-bold text-gray-800">${timer.toFixed(2).replace('.', ',')} s</p>
-                                </div>
-                                <div class="border-t border-blue-200 pt-3">
-                                    <p class="text-sm text-gray-600">Uppmätt Period (T)</p>
-                                    <p class="text-3xl font-mono font-bold text-green-600">${measuredPeriod.toFixed(3).replace('.', ',')} s</p>
-                                </div>
+                        ${measuredPeriod !== null && !timingActive ? `
+                            <div class="border-t border-blue-200 pt-3">
+                                <p class="text-sm text-gray-600">Uppmätt Period (T)</p>
+                                <p class="text-3xl font-mono font-bold text-green-600">${measuredPeriod.toFixed(3).replace('.', ',')} s</p>
                             </div>
                         ` : ''}
                     </div>
@@ -585,6 +613,57 @@
             `;
 
             document.getElementById('controls-container').innerHTML = controlsHTML;
+
+            // Update canvas control buttons
+            const canvasPauseButton = document.getElementById('canvas-pause-button');
+            const canvasAbortButton = document.getElementById('canvas-abort-button');
+            const canvasTimingButton = document.getElementById('canvas-timing-button');
+
+            if (canvasPauseButton && canvasAbortButton && canvasTimingButton) {
+                if (simulationState === 'running' || simulationState === 'paused') {
+                    // Active state - strong colors, enabled
+                    canvasPauseButton.disabled = false;
+                    canvasAbortButton.disabled = false;
+                    canvasPauseButton.className = 'px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-pointer';
+                    canvasAbortButton.className = 'px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-pointer';
+
+                    // Update pause button text
+                    if (simulationState === 'running') {
+                        canvasPauseButton.textContent = '⏸ Pausa';
+                    } else if (simulationState === 'paused') {
+                        canvasPauseButton.textContent = '▶ Fortsätt';
+                    }
+
+                    // Timing button - enabled when running and not already timing
+                    if (simulationState === 'running' && !waitingForTurningPoint && !timingActive) {
+                        canvasTimingButton.disabled = false;
+                        canvasTimingButton.className = 'px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-pointer';
+                        canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
+                    } else if (waitingForTurningPoint) {
+                        canvasTimingButton.disabled = true;
+                        canvasTimingButton.className = 'px-4 py-2 bg-yellow-500 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed';
+                        canvasTimingButton.textContent = '⏱ Väntar på vändläge...';
+                    } else if (timingActive) {
+                        canvasTimingButton.disabled = true;
+                        canvasTimingButton.className = 'px-4 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed';
+                        canvasTimingButton.textContent = '⏱ Tidtagning pågår...';
+                    } else {
+                        canvasTimingButton.disabled = true;
+                        canvasTimingButton.className = 'px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60';
+                        canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
+                    }
+                } else {
+                    // Inactive state - weak colors, disabled
+                    canvasPauseButton.disabled = true;
+                    canvasAbortButton.disabled = true;
+                    canvasTimingButton.disabled = true;
+                    canvasPauseButton.className = 'px-4 py-2 bg-orange-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60';
+                    canvasAbortButton.className = 'px-4 py-2 bg-red-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60';
+                    canvasTimingButton.className = 'px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60';
+                    canvasPauseButton.textContent = '⏸ Pausa';
+                    canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
+                }
+            }
         }
 
         // Fast value update - directly update DOM without re-rendering
@@ -638,6 +717,40 @@
             } else if (e.target.id === 'damping-slider') {
                 params.damping = parseFloat(e.target.value);
                 updateValueDisplays();
+            }
+        });
+
+        // Event listeners for canvas control buttons
+        document.getElementById('canvas-pause-button').addEventListener('click', () => {
+            if (simulationState === 'running') {
+                simulationState = 'paused';
+                renderUI();
+            } else if (simulationState === 'paused') {
+                simulationState = 'running';
+                renderUI();
+            }
+        });
+
+        document.getElementById('canvas-abort-button').addEventListener('click', () => {
+            simulationState = 'idle';
+            timer = 0;
+            timeRef = 0;
+            swingCount = 0;
+            swingCountRef = 0;
+            measuredPeriod = null;
+            timingActive = false;
+            waitingForTurningPoint = false;
+            params.initialAngle = 0;
+            updateAngleVisuals();
+            renderUI();
+        });
+
+        document.getElementById('canvas-timing-button').addEventListener('click', () => {
+            if (simulationState === 'running' && !waitingForTurningPoint && !timingActive) {
+                // Start waiting for next turning point
+                waitingForTurningPoint = true;
+                measuredPeriod = null;
+                renderUI();
             }
         });
 

@@ -427,7 +427,7 @@
                                                                 isDisabled ? 'opacity-50 cursor-not-allowed' : ''
                                                             }`}
                                                         >
-                                                            {n === 1 ? 'Grundton' : `${n - 1}:a`}
+                                                            {n === 1 ? 'Grundton' : n === 2 ? '1:a' : n === 3 ? '2:a' : `${n - 1}:e`}
                                                         </button>
                                                     );
                                                 })}
@@ -483,7 +483,12 @@
                                         </button>
                                     </div>
                                     <p className="text-2xl font-mono text-white mt-0 h-8">
-                                        {isResonant ? `${harmonic}. övertonen` : 'Ingen resonans'}
+                                        {isResonant ? (
+                                            harmonic === 1 ? 'Grundtonen' :
+                                            harmonic === 2 ? '1:a övertonen' :
+                                            harmonic === 3 ? '2:a övertonen' :
+                                            `${harmonic - 1}:e övertonen`
+                                        ) : 'Ingen resonans'}
                                     </p>
                                     <p className={`mt-2 text-sm ${isResonant ? 'text-cyan-400' : 'text-gray-500'} transition-colors duration-300`}>
                                         {isResonant ? 'Perfekt stående våg!' : 'Justera för att hitta en resonansfrekvens.'}

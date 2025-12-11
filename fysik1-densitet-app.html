@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Densitetlabbet - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              science: {
+                50: '#f0f9ff',
+                100: '#e0f2fe',
+                200: '#bae6fd',
+                300: '#7dd3fc',
+                500: '#0ea5e9',
+                600: '#0284c7',
+                700: '#0369a1',
+                900: '#0c4a6e',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        /* Custom slider styles */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .accent-emerald-600::-webkit-slider-thumb {
+            background: #059669;
+        }
+        .accent-purple-600::-webkit-slider-thumb {
+            background: #9333ea;
+        }
+        .accent-orange-600::-webkit-slider-thumb {
+            background: #ea580c;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo, useRef } = React;
+
+        // Constants
+        const MATERIALS = [
+          { name: 'Frigolit', density: 50, color: 'bg-slate-100 border-slate-300', dotColor: 'bg-slate-300' },
+          { name: 'Trä (Furu)', density: 500, color: 'bg-amber-200 border-amber-400', dotColor: 'bg-amber-700' },
+          { name: 'Is', density: 917, color: 'bg-cyan-100 border-cyan-300', dotColor: 'bg-cyan-400' },
+          { name: 'Vatten', density: 1000, color: 'bg-blue-300 border-blue-500', dotColor: 'bg-blue-700' },
+          { name: 'Tegel', density: 1900, color: 'bg-orange-700 border-orange-900', dotColor: 'bg-stone-800' },
+          { name: 'Aluminium', density: 2700, color: 'bg-gray-300 border-gray-400', dotColor: 'bg-gray-600' },
+          { name: 'Järn', density: 7870, color: 'bg-gray-500 border-gray-700', dotColor: 'bg-gray-900' },
+          { name: 'Silver', density: 10490, color: 'bg-slate-200 border-slate-400', dotColor: 'bg-slate-500' },
+          { name: 'Bly', density: 11340, color: 'bg-slate-600 border-slate-800', dotColor: 'bg-slate-900' },
+          { name: 'Guld', density: 19300, color: 'bg-yellow-400 border-yellow-600', dotColor: 'bg-yellow-700' },
+        ];
+
+        const MAX_VOLUME_LITERS = 10;
+        const MIN_VOLUME_LITERS = 1;
+        const MAX_MASS_KG = 200;
+        const MIN_MASS_KG = 0.1;
+        const WATER_DENSITY = 1000;
+
+        // Pre-generate random positions for atoms
+        const MAX_DOTS = 1000;
+        const STATIC_ATOM_POSITIONS = Array.from({ length: MAX_DOTS }).map(() => ({
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }));
+
+        // SliderControl Component
+        const SliderControl = ({ label, value, min, max, step = 1, unit, onChange, colorClass, disabled = false }) => {
+          return (
+            <div className={`p-4 rounded-lg bg-white border border-slate-200 shadow-sm ${disabled ? 'opacity-50' : ''}`}>
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-sm font-bold text-slate-700 uppercase tracking-wide">{label}</label>
+                <div className="text-lg font-mono font-semibold text-slate-900">
+                  {value.toFixed(step < 1 ? 2 : 1).replace('.', ',')} <span className="text-sm text-slate-500">{unit}</span>
+                </div>
+              </div>
+              <input
+                type="range"
+                min={min}
+                max={max}
+                step={step}
+                value={value}
+                disabled={disabled}
+                onChange={(e) => onChange(parseFloat(e.target.value))}
+                className={`w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-${colorClass}-600 hover:accent-${colorClass}-500 transition-all`}
+              />
+              <div className="flex justify-between mt-1 text-xs text-slate-400 font-mono">
+                <span>{min.toString().replace('.', ',')} {unit}</span>
+                <span>{max.toString().replace('.', ',')} {unit}</span>
+              </div>
+            </div>
+          );
+        };
+
+        // CubeVisualizer Component
+        const CubeVisualizer = React.memo(({ volume, mass, density, mode }) => {
+          const baseSize = 80;
+          const sideLength = baseSize * Math.pow(volume, 1/3);
+
+          const closestMaterial = useMemo(() => {
+            return MATERIALS.reduce((prev, curr) => {
+              return (Math.abs(curr.density - density) < Math.abs(prev.density - density) ? curr : prev);
+            });
+          }, [density]);
+
+          const numDots = Math.min(Math.floor(mass * 5), 400);
+          const activeDots = STATIC_ATOM_POSITIONS.slice(0, numDots);
+
+          const isFloating = density < 1000;
+          const waterLevel = 250;
+
+          const buoyancyTop = isFloating ? waterLevel - sideLength * 0.6 : 380 - sideLength;
+          const exploreTop = (400 - sideLength) / 2;
+          const exploreLeft = (400 - sideLength) / 2;
+
+          const currentTop = mode === 'BUOYANCY' ? buoyancyTop : exploreTop;
+          const currentLeft = mode === 'BUOYANCY' ? (400 - sideLength) / 2 : exploreLeft;
+
+          return (
+            <div className="relative w-[400px] h-[400px] bg-slate-50 border-2 border-slate-200 rounded-xl overflow-hidden shadow-inner transform-gpu">
+              <div className="absolute inset-0 opacity-10 pointer-events-none"
+                   style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+              </div>
+
+              {mode === 'BUOYANCY' && (
+                <div className="absolute bottom-0 w-full h-[150px] bg-blue-400/50 border-t-2 border-blue-400 backdrop-blur-[1px] transition-all duration-1000 ease-in-out z-10">
+                   <div className="absolute top-2 right-2 text-blue-800 font-bold text-sm">Vatten (1000 kg/m³)</div>
+                </div>
+              )}
+
+              <div
+                className={`absolute shadow-xl transition-all duration-300 ease-out flex flex-wrap content-start overflow-hidden ${closestMaterial.color}`}
+                style={{
+                  width: `${sideLength}px`,
+                  height: `${sideLength}px`,
+                  transform: `translate(${currentLeft}px, ${currentTop}px)`,
+                  borderWidth: '4px',
+                  borderRadius: '4px'
+                }}
+              >
+                {activeDots.map((dot, i) => (
+                  <div
+                    key={i}
+                    className={`absolute w-1.5 h-1.5 rounded-full opacity-70 ${closestMaterial.dotColor}`}
+                    style={{ left: dot.left, top: dot.top }}
+                  />
+                ))}
+
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                     <span className="bg-white/70 px-1 rounded text-xs font-bold text-black backdrop-blur-sm">
+                       {mass.toFixed(1).replace('.', ',')} kg
+                     </span>
+                </div>
+              </div>
+
+               <div className="absolute bottom-2 left-2 text-xs text-slate-400">
+                  Skala: Visualisering
+               </div>
+            </div>
+          );
+        });
+
+        // ChatInterface Component
+        const ChatInterface = ({ mass, volume, density }) => {
+          const [messages, setMessages] = useState([
+            { role: 'ai', text: 'Hej! Jag är din AI-fysiklärare. Undrar du varför vissa saker flyter eller hur atomer sitter ihop? Fråga mig!' }
+          ]);
+          const [input, setInput] = useState('');
+          const [loading, setLoading] = useState(false);
+          const scrollRef = useRef(null);
+
+          useEffect(() => {
+            if (scrollRef.current) {
+              scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+            }
+          }, [messages]);
+
+          const handleSend = async () => {
+            if (!input.trim()) return;
+
+            const userMsg = { role: 'user', text: input };
+            setMessages(prev => [...prev, userMsg]);
+            setInput('');
+            setLoading(true);
+
+            // Simple AI simulation since we can't use Gemini API without backend
+            const aiResponseText = generateSimpleResponse(input, mass, volume, density);
+
+            setTimeout(() => {
+              setLoading(false);
+              setMessages(prev => [...prev, { role: 'ai', text: aiResponseText }]);
+            }, 1000);
+          };
+
+          const generateSimpleResponse = (question, mass, volume, density) => {
+            const lowerQ = question.toLowerCase();
+
+            if (lowerQ.includes('flyt') || lowerQ.includes('sjunk')) {
+              if (density < 1000) {
+                return `Ja! Med en densitet på ${density.toFixed(0).replace('.', ',')} kg/m³ skulle detta objekt flyta i vatten. Det beror på att objektets densitet är lägre än vattnets densitet (1000 kg/m³). Tänk på det som att atomerna inte är lika tätt packade som i vatten!`;
+              } else {
+                return `Med en densitet på ${density.toFixed(0).replace('.', ',')} kg/m³ skulle detta objekt sjunka i vatten. Det beror på att objektets densitet är högre än vattnets densitet (1000 kg/m³). Atomerna är mer tätt packade än i vatten!`;
+              }
+            } else if (lowerQ.includes('densitet') || lowerQ.includes('vad är')) {
+              return `Densitet är ett mått på hur tätt packade atomerna är i ett material. Vi beräknar det genom att dela massa med volym: ρ = m/V. Just nu har objektet en densitet på ${density.toFixed(0).replace('.', ',')} kg/m³, vilket betyder att varje kubikmeter väger ${density.toFixed(0).replace('.', ',')} kg!`;
+            } else if (lowerQ.includes('atom') || lowerQ.includes('prick')) {
+              return `Bra observation! De små prickarna i kuben representerar atomer. När densiteten ökar ser du fler prickar - det betyder att atomerna är mer tätt packade. Just nu har vi ${mass.toFixed(1).replace('.', ',')} kg i ${volume.toFixed(1).replace('.', ',')} liter, vilket ger densiteten ${density.toFixed(0).replace('.', ',')} kg/m³.`;
+            } else if (lowerQ.includes('massa') || lowerQ.includes('vikt')) {
+              return `Massan är ${mass.toFixed(2).replace('.', ',')} kg. Massa är mängden materia i objektet. Om du ökar massan men behåller samma volym, blir densiteten högre eftersom atomerna packas tätare!`;
+            } else if (lowerQ.includes('volym')) {
+              return `Volymen är ${volume.toFixed(2).replace('.', ',')} liter (${(volume * 0.001).toFixed(3).replace('.', ',')} m³). Volym är hur mycket plats objektet tar upp. Om du ökar volymen men behåller samma massa, blir densiteten lägre!`;
+            } else {
+              return `Intressant fråga! Just nu: massa = ${mass.toFixed(1).replace('.', ',')} kg, volym = ${volume.toFixed(1).replace('.', ',')} L, densitet = ${density.toFixed(0).replace('.', ',')} kg/m³. Prova att ändra värdena och se vad som händer! Testa också flytkraft-läget för att se om objektet flyter.`;
+            }
+          };
+
+          return (
+            <div className="flex flex-col h-full bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+              <div className="bg-science-600 p-3 text-white font-bold flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+                </svg>
+                AI-Professorn
+              </div>
+
+              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50" ref={scrollRef}>
+                {messages.map((m, i) => (
+                  <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm ${
+                      m.role === 'user'
+                        ? 'bg-science-600 text-white rounded-br-none'
+                        : 'bg-white border border-slate-200 text-slate-800 rounded-bl-none shadow-sm'
+                    }`}>
+                      {m.text}
+                    </div>
+                  </div>
+                ))}
+                {loading && (
+                  <div className="flex justify-start">
+                    <div className="bg-slate-200 rounded-full px-3 py-1 text-xs animate-pulse text-slate-500">
+                      Professorn tänker...
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="p-3 bg-white border-t border-slate-200">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    className="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-science-500"
+                    placeholder="Ställ en fråga..."
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                  />
+                  <button
+                    onClick={handleSend}
+                    disabled={loading || !input.trim()}
+                    className="bg-science-600 hover:bg-science-700 text-white rounded-lg px-4 py-2 text-sm font-bold transition-colors disabled:opacity-50"
+                  >
+                    Skicka
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        // Main App Component
+        const App = () => {
+          const [mass, setMass] = useState(5.0);
+          const [volume, setVolume] = useState(5.0);
+          const [mode, setMode] = useState('EXPLORE');
+          const [selectedMaterialName, setSelectedMaterialName] = useState(null);
+
+          const density = (mass / (volume * 0.001));
+
+          const handleVolumeChange = (newVolume) => {
+            setVolume(newVolume);
+            setSelectedMaterialName(null);
+          };
+
+          const handleMassChange = (newMass) => {
+            setMass(newMass);
+            setSelectedMaterialName(null);
+          };
+
+          const handleDensityChange = (newDensity) => {
+            let newMass = newDensity * volume * 0.001;
+
+            if (newMass > MAX_MASS_KG) {
+              newMass = MAX_MASS_KG;
+            } else if (newMass < MIN_MASS_KG) {
+              newMass = MIN_MASS_KG;
+            }
+
+            setMass(newMass);
+            setSelectedMaterialName(null);
+          };
+
+          const selectMaterial = (material) => {
+            setSelectedMaterialName(material.name);
+            let newMass = material.density * volume * 0.001;
+
+            if (newMass > MAX_MASS_KG) {
+                newMass = MAX_MASS_KG;
+                const newVolume = (newMass / material.density) * 1000;
+                setVolume(Math.max(MIN_VOLUME_LITERS, Math.min(newVolume, MAX_VOLUME_LITERS)));
+            } else if (newMass < MIN_MASS_KG) {
+                newMass = MIN_MASS_KG;
+                const newVolume = (newMass / material.density) * 1000;
+                setVolume(Math.max(MIN_VOLUME_LITERS, Math.min(newVolume, MAX_VOLUME_LITERS)));
+            }
+            setMass(newMass);
+          };
+
+          return (
+            <div className="min-h-screen bg-slate-100 p-4 md:p-8 font-sans text-slate-800">
+
+              <header className="max-w-6xl mx-auto mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-black text-science-900 tracking-tight">
+                    Densitet<span className="text-science-500">labbet</span>
+                  </h1>
+                  <p className="text-slate-500 mt-1">Utforska sambandet mellan massa, volym och densitet.</p>
+                </div>
+
+                <div className="bg-white p-1 rounded-lg border border-slate-200 shadow-sm flex">
+                  <button
+                    onClick={() => setMode('EXPLORE')}
+                    className={`px-4 py-2 rounded-md text-sm font-bold transition-all ${mode === 'EXPLORE' ? 'bg-science-100 text-science-700' : 'text-slate-500 hover:bg-slate-50'}`}
+                  >
+                    Utforska
+                  </button>
+                  <button
+                     onClick={() => setMode('BUOYANCY')}
+                     className={`px-4 py-2 rounded-md text-sm font-bold transition-all ${mode === 'BUOYANCY' ? 'bg-blue-100 text-blue-700' : 'text-slate-500 hover:bg-slate-50'}`}
+                  >
+                    Flytkraft
+                  </button>
+                </div>
+              </header>
+
+              <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <div className="lg:col-span-5 flex flex-col gap-6">
+                  <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex justify-center items-center">
+                     <CubeVisualizer
+                        mass={mass}
+                        volume={volume}
+                        density={density}
+                        mode={mode}
+                     />
+                  </div>
+
+                  <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 h-[400px]">
+                    <ChatInterface mass={mass} volume={volume} density={density} />
+                  </div>
+                </div>
+
+                <div className="lg:col-span-7 flex flex-col gap-6">
+
+                  <div className="bg-science-900 text-white p-6 rounded-2xl shadow-lg flex flex-col md:flex-row justify-around items-center gap-4 text-center">
+                    <div>
+                       <div className="text-science-200 text-xs uppercase font-bold mb-1">Massa (m)</div>
+                       <div className="text-3xl font-mono">{mass.toFixed(2).replace('.', ',')} kg</div>
+                    </div>
+                    <div className="text-4xl opacity-50 font-light">÷</div>
+                    <div>
+                       <div className="text-science-200 text-xs uppercase font-bold mb-1">Volym (V)</div>
+                       <div className="text-3xl font-mono">{(volume * 0.001).toFixed(3).replace('.', ',')} m³</div>
+                    </div>
+                    <div className="text-4xl opacity-50 font-light">=</div>
+                    <div>
+                       <div className="text-science-200 text-xs uppercase font-bold mb-1">Densitet (ρ)</div>
+                       <div className="text-4xl font-bold font-mono text-yellow-400">{density.toFixed(0).replace('.', ',')}</div>
+                       <div className="text-xs text-science-300">kg/m³</div>
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4">
+                    <SliderControl
+                      label="Massa"
+                      value={mass}
+                      min={MIN_MASS_KG}
+                      max={MAX_MASS_KG}
+                      step={0.1}
+                      unit="kg"
+                      onChange={handleMassChange}
+                      colorClass="emerald"
+                    />
+
+                    <SliderControl
+                      label="Volym"
+                      value={volume}
+                      min={MIN_VOLUME_LITERS}
+                      max={MAX_VOLUME_LITERS}
+                      step={0.1}
+                      unit="L"
+                      onChange={handleVolumeChange}
+                      colorClass="purple"
+                    />
+
+                    <SliderControl
+                      label="Densitet (Resulterande)"
+                      value={density}
+                      min={50}
+                      max={20000}
+                      step={10}
+                      unit="kg/m³"
+                      onChange={handleDensityChange}
+                      colorClass="orange"
+                    />
+                  </div>
+
+                  <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                     <div className="p-4 bg-slate-50 border-b border-slate-200">
+                       <h3 className="font-bold text-slate-700">Välj material</h3>
+                     </div>
+                     <div className="p-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                       {MATERIALS.map((mat) => (
+                         <button
+                           key={mat.name}
+                           onClick={() => selectMaterial(mat)}
+                           className={`p-3 rounded-xl border-2 text-sm transition-all hover:-translate-y-1 hover:shadow-md flex flex-col items-center justify-center gap-1
+                             ${selectedMaterialName === mat.name
+                               ? 'border-science-500 bg-science-50 ring-2 ring-science-200'
+                               : 'border-slate-100 bg-white hover:border-science-300'
+                             }
+                           `}
+                         >
+                           <div className={`w-8 h-8 rounded-full mb-1 ${mat.dotColor}`}></div>
+                           <span className="font-bold text-slate-800">{mat.name}</span>
+                           <span className="text-xs text-slate-500">{mat.density.toString().replace('.', ',')} kg/m³</span>
+                         </button>
+                       ))}
+                     </div>
+                  </div>
+
+                  <div className="bg-blue-50 p-4 rounded-xl text-sm text-blue-800 border border-blue-100">
+                    <strong>Tips:</strong> Observera hur atomerna (prickarna) packas tätare när densiteten ökar. Testa "Flytkraft"-läget för att se vad som händer när du lägger kuben i vatten!
+                  </div>
+
+                </div>
+              </main>
+            </div>
+          );
+        };
+
+        // Render
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

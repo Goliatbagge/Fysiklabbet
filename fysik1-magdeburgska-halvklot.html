@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magdeburgska halvkloten - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik 1</a> / <span>Magdeburgska halvkloten</span>
+        </div>
+
+        <section class="intro-section">
+            <h1 class="section-title">Magdeburgska halvkloten</h1>
+            <p class="intro-text">
+                Ett berömt experiment från 1654 av Otto von Guericke. När luften pumpas ut ur klotet skapas ett vakuum.
+                Lufttrycket utanför pressar då ihop halvkloten med en enorm kraft.
+            </p>
+        </section>
+
+        <div id="root"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ===== TYPES & CONSTANTS =====
+        const SimulationState = {
+            SEALED: 'SEALED',
+            PUMPING: 'PUMPING',
+            LEAKING: 'LEAKING',
+            SEPARATED: 'SEPARATED',
+        };
+
+        const MAX_PARTICLES = 150;
+        const SPHERE_RADIUS = 120;
+        const FORCE_PER_HORSE = 800; // Newtons approx
+        const SPHERE_AREA = 0.2; // approx 0.2 m^2
+        const ATM_PRESSURE_PA = 101325; // Pascals
+
+        // ===== ICON COMPONENTS (SVG replacements for lucide-react) =====
+        const Info = ({ size = 16, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+        );
+
+        const Gauge = ({ size = 20, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M12 2v4"></path>
+                <path d="m6.8 15-3.5 2"></path>
+                <path d="m20.7 7-3.5 2"></path>
+                <path d="M6.8 9 3.3 7"></path>
+                <path d="m20.7 17-3.5-2"></path>
+                <path d="m9 22 3-8 3 8"></path>
+                <circle cx="12" cy="12" r="10"></circle>
+            </svg>
+        );
+
+        const Play = ({ size = 20, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+        );
+
+        const RotateCcw = ({ size = 20, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+        );
+
+        const Wind = ({ size = 20, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+            </svg>
+        );
+
+        const Settings2 = ({ size = 20, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <path d="M20 7h-9"></path>
+                <path d="M14 17H5"></path>
+                <circle cx="17" cy="17" r="3"></circle>
+                <circle cx="7" cy="7" r="3"></circle>
+            </svg>
+        );
+
+        const RotateCw = ({ size = 20, className = "" }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+        );
+
+        // ===== SIMULATION CANVAS COMPONENT =====
+        const SimulationCanvas = ({ simulationState, internalPressure, separationDistance, setInternalPressure, width, height }) => {
+            const canvasRef = useRef(null);
+            const particlesInsideRef = useRef([]);
+            const particlesOutsideRef = useRef([]);
+            const requestRef = useRef();
+
+            // Helper: Create random particle
+            const createParticle = (isInside, startX, startY, initialVx, initialVy) => {
+                let x, y, vx, vy;
+
+                if (startX !== undefined && startY !== undefined) {
+                    x = startX;
+                    y = startY;
+                } else {
+                    const angle = Math.random() * Math.PI * 2;
+                    if (isInside) {
+                        const r = Math.sqrt(Math.random()) * (SPHERE_RADIUS - 10);
+                        x = width / 2 + r * Math.cos(angle);
+                        y = height / 2 + r * Math.sin(angle);
+                    } else {
+                        x = Math.random() * width;
+                        y = Math.random() * height;
+                        const dx = x - width / 2;
+                        const dy = y - height / 2;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < SPHERE_RADIUS + 10) {
+                            const pushRatio = (SPHERE_RADIUS + 20) / dist;
+                            x = width / 2 + dx * pushRatio;
+                            y = height / 2 + dy * pushRatio;
+                        }
+                    }
+                }
+
+                if (initialVx !== undefined && initialVy !== undefined) {
+                    vx = initialVx;
+                    vy = initialVy;
+                } else {
+                    const vAngle = Math.random() * Math.PI * 2;
+                    const vSpeed = 2 + Math.random() * 3;
+                    vx = Math.cos(vAngle) * vSpeed;
+                    vy = Math.sin(vAngle) * vSpeed;
+                }
+
+                return {
+                    x, y, vx, vy,
+                    radius: 2,
+                    color: isInside ? '#ef4444' : '#3b82f6',
+                };
+            };
+
+            // Initialize particles once
+            useEffect(() => {
+                if (particlesInsideRef.current.length === 0) {
+                    for (let i = 0; i < MAX_PARTICLES; i++) {
+                        particlesInsideRef.current.push(createParticle(true));
+                        particlesOutsideRef.current.push(createParticle(false));
+                    }
+                }
+            }, [width, height]);
+
+            // Main Loop
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                const centerX = width / 2;
+                const centerY = height / 2;
+                const hoseY = centerY + SPHERE_RADIUS;
+                const hoseWidth = 30;
+                const hoseHeight = 100;
+
+                const update = () => {
+                    ctx.clearRect(0, 0, width, height);
+
+                    const isSealed = simulationState === SimulationState.SEALED;
+                    const isPumping = simulationState === SimulationState.PUMPING;
+                    const isLeaking = simulationState === SimulationState.LEAKING;
+                    const isSeparated = simulationState === SimulationState.SEPARATED;
+
+                    // --- Logic Updates ---
+
+                    // 1. Pumping (Suck particles out)
+                    if (isPumping && !isSeparated) {
+                        particlesInsideRef.current.forEach(p => {
+                            if (p.y > centerY) {
+                                const dx = centerX - p.x;
+                                const dy = hoseY - p.y;
+                                const dist = Math.sqrt(dx*dx + dy*dy);
+                                if (dist > 0) {
+                                    p.vx += (dx / dist) * 0.2;
+                                    p.vy += (dy / dist) * 0.2;
+                                }
+                            }
+                        });
+
+                        for (let i = particlesInsideRef.current.length - 1; i >= 0; i--) {
+                            const p = particlesInsideRef.current[i];
+                            const distToHole = Math.sqrt((p.x - centerX) ** 2 + (p.y - hoseY) ** 2);
+
+                            if (distToHole < 15) {
+                                particlesInsideRef.current.splice(i, 1);
+                            }
+                        }
+                    }
+
+                    // 2. Leaking (Inject particles)
+                    if ((isLeaking || isSeparated) && particlesInsideRef.current.length < MAX_PARTICLES) {
+                        const particlesToSpawn = 3;
+                        for (let k = 0; k < particlesToSpawn; k++) {
+                            if (particlesInsideRef.current.length >= MAX_PARTICLES) break;
+
+                            const spread = (Math.random() - 0.5) * 1.5;
+                            const speed = 5 + Math.random() * 3;
+                            particlesInsideRef.current.push(
+                                createParticle(true, centerX, hoseY - 5, spread * 2, -speed)
+                            );
+                        }
+                    }
+
+                    // Sync React State
+                    const currentPressure = particlesInsideRef.current.length / MAX_PARTICLES;
+                    if (Math.abs(currentPressure - internalPressure) > 0.01) {
+                        setInternalPressure(currentPressure);
+                    }
+
+                    // --- Rendering ---
+
+                    // Draw Hose (Back layer)
+                    if (!isSeparated) {
+                        ctx.fillStyle = '#9ca3af';
+                        ctx.fillRect(centerX - hoseWidth/2, hoseY - 5, hoseWidth, hoseHeight);
+
+                        ctx.strokeStyle = '#6b7280';
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(centerX - hoseWidth/2, hoseY - 5);
+                        ctx.lineTo(centerX - hoseWidth/2, hoseY + hoseHeight);
+                        ctx.moveTo(centerX + hoseWidth/2, hoseY - 5);
+                        ctx.lineTo(centerX + hoseWidth/2, hoseY + hoseHeight);
+                        ctx.stroke();
+
+                        if (isPumping && particlesInsideRef.current.length > 0) {
+                            ctx.fillStyle = '#ef4444';
+                            for(let i=0; i<5; i++) {
+                                if(Math.random() > 0.5) {
+                                    const px = centerX + (Math.random() - 0.5) * (hoseWidth - 8);
+                                    const py = hoseY + Math.random() * hoseHeight;
+                                    ctx.beginPath();
+                                    ctx.arc(px, py, 2, 0, Math.PI*2);
+                                    ctx.fill();
+                                }
+                            }
+                        }
+                        if (isLeaking && particlesInsideRef.current.length < MAX_PARTICLES) {
+                            ctx.fillStyle = '#3b82f6';
+                            for(let i=0; i<5; i++) {
+                                if(Math.random() > 0.5) {
+                                    const px = centerX + (Math.random() - 0.5) * (hoseWidth - 8);
+                                    const py = hoseY + Math.random() * hoseHeight;
+                                    ctx.beginPath();
+                                    ctx.arc(px, py, 2, 0, Math.PI*2);
+                                    ctx.fill();
+                                }
+                            }
+                        }
+                    }
+
+                    // Draw Sphere Halves
+                    const leftX = centerX - separationDistance / 2;
+                    const rightX = centerX + separationDistance / 2;
+
+                    ctx.fillStyle = '#e5e7eb';
+                    ctx.strokeStyle = '#374151';
+                    ctx.lineWidth = 4;
+
+                    // Left Hemisphere
+                    ctx.beginPath();
+                    ctx.arc(leftX, centerY, SPHERE_RADIUS, Math.PI / 2, -Math.PI / 2, false);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Right Hemisphere
+                    ctx.beginPath();
+                    ctx.arc(rightX, centerY, SPHERE_RADIUS, -Math.PI / 2, Math.PI / 2, false);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // Flanges
+                    ctx.fillStyle = '#9ca3af';
+                    ctx.fillRect(leftX - 10, centerY - SPHERE_RADIUS - 10, 20, 20);
+                    ctx.fillRect(leftX - 10, centerY + SPHERE_RADIUS - 10, 20, 20);
+                    ctx.fillRect(rightX - 10, centerY - SPHERE_RADIUS - 10, 20, 20);
+                    ctx.fillRect(rightX - 10, centerY + SPHERE_RADIUS - 10, 20, 20);
+
+                    // --- Particle Physics & Drawing ---
+                    const updateParticle = (p, isFromInsideList) => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        const speedSq = p.vx * p.vx + p.vy * p.vy;
+                        if (speedSq > 30) {
+                            p.vx *= 0.98;
+                            p.vy *= 0.98;
+                        }
+
+                        if (p.x < 0 || p.x > width) p.vx *= -1;
+                        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                        if (isSeparated) {
+                            // Left Hemisphere Interaction
+                            if (p.x < leftX) {
+                                const dx = p.x - leftX;
+                                const dy = p.y - centerY;
+                                const dist = Math.sqrt(dx * dx + dy * dy);
+                                const nx = dx / dist;
+                                const ny = dy / dist;
+                                const dot = p.vx * nx + p.vy * ny;
+
+                                if (dist < SPHERE_RADIUS && dot > 0) {
+                                    if (dist > SPHERE_RADIUS - 5) {
+                                        p.vx -= 2 * dot * nx;
+                                        p.vy -= 2 * dot * ny;
+                                        p.x = leftX + nx * (SPHERE_RADIUS - 5.1);
+                                        p.y = centerY + ny * (SPHERE_RADIUS - 5.1);
+                                    }
+                                }
+                                else if (dist > SPHERE_RADIUS && dot < 0) {
+                                    if (dist < SPHERE_RADIUS + 5) {
+                                        p.vx -= 2 * dot * nx;
+                                        p.vy -= 2 * dot * ny;
+                                        p.x = leftX + nx * (SPHERE_RADIUS + 5.1);
+                                        p.y = centerY + ny * (SPHERE_RADIUS + 5.1);
+                                    }
+                                }
+                            }
+
+                            // Right Hemisphere Interaction
+                            if (p.x > rightX) {
+                                const dx = p.x - rightX;
+                                const dy = p.y - centerY;
+                                const dist = Math.sqrt(dx * dx + dy * dy);
+                                const nx = dx / dist;
+                                const ny = dy / dist;
+                                const dot = p.vx * nx + p.vy * ny;
+
+                                if (dist < SPHERE_RADIUS && dot > 0) {
+                                    if (dist > SPHERE_RADIUS - 5) {
+                                        p.vx -= 2 * dot * nx;
+                                        p.vy -= 2 * dot * ny;
+                                        p.x = rightX + nx * (SPHERE_RADIUS - 5.1);
+                                        p.y = centerY + ny * (SPHERE_RADIUS - 5.1);
+                                    }
+                                }
+                                else if (dist > SPHERE_RADIUS && dot < 0) {
+                                    if (dist < SPHERE_RADIUS + 5) {
+                                        p.vx -= 2 * dot * nx;
+                                        p.vy -= 2 * dot * ny;
+                                        p.x = rightX + nx * (SPHERE_RADIUS + 5.1);
+                                        p.y = centerY + ny * (SPHERE_RADIUS + 5.1);
+                                    }
+                                }
+                            }
+                        } else {
+                            const dxL = p.x - leftX;
+                            const dy = p.y - centerY;
+                            const distL = Math.sqrt(dxL * dxL + dy * dy);
+
+                            if (isFromInsideList) {
+                                const distC = Math.sqrt((p.x - centerX) ** 2 + (p.y - centerY) ** 2);
+                                if (distC > SPHERE_RADIUS - 5) {
+                                    const inHoleZone = isPumping && Math.abs(p.x - centerX) < 15 && p.y > centerY + SPHERE_RADIUS - 20;
+                                    if (!inHoleZone) {
+                                        const nx = (p.x - centerX) / distC;
+                                        const ny = (p.y - centerY) / distC;
+                                        const dot = p.vx * nx + p.vy * ny;
+                                        if (dot > 0) {
+                                            p.vx = p.vx - 2 * dot * nx;
+                                            p.vy = p.vy - 2 * dot * ny;
+                                            const jitter = (Math.random() - 0.5) * 0.5;
+                                            p.vx += jitter; p.vy -= jitter;
+                                        }
+                                        p.x = centerX + (SPHERE_RADIUS - 5.1) * nx;
+                                        p.y = centerY + (SPHERE_RADIUS - 5.1) * ny;
+                                    }
+                                }
+                            } else {
+                                if (distL < SPHERE_RADIUS + 5) {
+                                    const angle = Math.atan2(dy, dxL);
+                                    const nx = Math.cos(angle);
+                                    const ny = Math.sin(angle);
+                                    const dot = p.vx * nx + p.vy * ny;
+                                    if (dot < 0) {
+                                        p.vx = p.vx - 2 * dot * nx;
+                                        p.vy = p.vy - 2 * dot * ny;
+                                    }
+                                }
+                                const distR = Math.sqrt((p.x - rightX) ** 2 + dy * dy);
+                                if (distR < SPHERE_RADIUS + 5) {
+                                    const angle = Math.atan2(dy, p.x - rightX);
+                                    const nx = Math.cos(angle);
+                                    const ny = Math.sin(angle);
+                                    const dot = p.vx * nx + p.vy * ny;
+                                    if (dot < 0) {
+                                        p.vx = p.vx - 2 * dot * nx;
+                                        p.vy = p.vy - 2 * dot * ny;
+                                    }
+                                }
+                            }
+                        }
+
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.fill();
+                    };
+
+                    particlesInsideRef.current.forEach(p => updateParticle(p, true));
+                    particlesOutsideRef.current.forEach(p => updateParticle(p, false));
+
+                    // Force Arrows Visualization
+                    const drawForceArrow = (tipX, tipY, angle, length, color) => {
+                        if (length < 5) return;
+
+                        const tailX = tipX - Math.cos(angle) * length;
+                        const tailY = tipY - Math.sin(angle) * length;
+
+                        ctx.beginPath();
+                        ctx.moveTo(tailX, tailY);
+                        ctx.lineTo(tipX, tipY);
+                        ctx.strokeStyle = color;
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+
+                        const headLen = 8;
+                        ctx.beginPath();
+                        ctx.moveTo(tipX, tipY);
+                        ctx.lineTo(tipX - headLen * Math.cos(angle - Math.PI / 6), tipY - headLen * Math.sin(angle - Math.PI / 6));
+                        ctx.lineTo(tipX - headLen * Math.cos(angle + Math.PI / 6), tipY - headLen * Math.sin(angle + Math.PI / 6));
+                        ctx.fillStyle = color;
+                        ctx.fill();
+                    };
+
+                    const arrowScale = 45;
+                    const internalForceLen = arrowScale * internalPressure;
+
+                    const drawArrowPair = (x, y, normalAngle) => {
+                        drawForceArrow(x, y, normalAngle, arrowScale, '#3b82f6');
+                        drawForceArrow(x, y, normalAngle + Math.PI, internalForceLen, '#ef4444');
+                    };
+
+                    // Left Hemisphere Arrows
+                    drawArrowPair(leftX, centerY - SPHERE_RADIUS, Math.PI / 2);
+                    drawArrowPair(leftX - SPHERE_RADIUS, centerY, 0);
+                    drawArrowPair(
+                        leftX + SPHERE_RADIUS * Math.cos(Math.PI * 1.25),
+                        centerY + SPHERE_RADIUS * Math.sin(Math.PI * 1.25),
+                        Math.PI * 0.25
+                    );
+                    drawArrowPair(
+                        leftX + SPHERE_RADIUS * Math.cos(Math.PI * 0.75),
+                        centerY + SPHERE_RADIUS * Math.sin(Math.PI * 0.75),
+                        Math.PI * -0.25
+                    );
+                    drawArrowPair(leftX, centerY + SPHERE_RADIUS, -Math.PI / 2);
+
+                    // Right Hemisphere Arrows
+                    drawArrowPair(rightX + SPHERE_RADIUS, centerY, Math.PI);
+                    drawArrowPair(rightX, centerY - SPHERE_RADIUS, Math.PI / 2);
+                    drawArrowPair(rightX, centerY + SPHERE_RADIUS, -Math.PI / 2);
+                    drawArrowPair(
+                        rightX + SPHERE_RADIUS * Math.cos(-Math.PI * 0.25),
+                        centerY + SPHERE_RADIUS * Math.sin(-Math.PI * 0.25),
+                        Math.PI * 0.75
+                    );
+                    drawArrowPair(
+                        rightX + SPHERE_RADIUS * Math.cos(Math.PI * 0.25),
+                        centerY + SPHERE_RADIUS * Math.sin(Math.PI * 0.25),
+                        Math.PI * 1.25
+                    );
+
+                    requestRef.current = requestAnimationFrame(update);
+                };
+
+                requestRef.current = requestAnimationFrame(update);
+                return () => {
+                    if (requestRef.current) cancelAnimationFrame(requestRef.current);
+                };
+            }, [width, height, simulationState, internalPressure, separationDistance, setInternalPressure]);
+
+            return (
+                <canvas
+                    ref={canvasRef}
+                    width={width}
+                    height={height}
+                    className="bg-white rounded-xl shadow-inner border border-slate-200 block mx-auto cursor-crosshair"
+                />
+            );
+        };
+
+        // ===== PRESSURE GAUGE COMPONENT =====
+        const PressureGauge = ({ value, label }) => {
+            const angle = -90 + (value * 180);
+
+            return (
+                <div className="flex flex-col items-center justify-center p-4 bg-slate-100 rounded-lg shadow-sm border border-slate-300 w-full max-w-[200px]">
+                    <div className="relative w-32 h-16 overflow-hidden mb-2">
+                        <div className="absolute top-0 left-0 w-32 h-32 rounded-full border-[12px] border-slate-300 box-border"></div>
+                        <div
+                            className="absolute bottom-0 left-1/2 w-1 h-14 bg-red-600 origin-bottom transform -translate-x-1/2 transition-transform duration-300 ease-out"
+                            style={{ transform: `translateX(-50%) rotate(${angle}deg)` }}
+                        ></div>
+                        <div className="absolute bottom-0 left-1/2 w-4 h-4 bg-slate-800 rounded-full -translate-x-1/2 translate-y-1/2"></div>
+                    </div>
+                    <div className="flex justify-between w-32 text-xs text-slate-500 font-mono mt-1 px-1">
+                        <span>0</span>
+                        <span>50</span>
+                        <span>100 kPa</span>
+                    </div>
+                    <span className="text-sm font-semibold text-slate-700 mt-2">{label}</span>
+                    <span className="text-xs text-slate-500">
+                        {(value * 101.3).toFixed(1).replace('.', ',')} kPa
+                    </span>
+                </div>
+            );
+        };
+
+        // ===== CONTROLS COMPONENT =====
+        const Controls = ({ simulationState, onTogglePump, onOpenValve, horses, setHorses, onPull, canPull, pullSuccess }) => {
+            const isPumping = simulationState === SimulationState.PUMPING;
+            const isSealed = simulationState === SimulationState.SEALED;
+            const isSeparated = simulationState === SimulationState.SEPARATED;
+
+            return (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
+
+                    {/* Experiment Controls */}
+                    <div className="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col gap-4">
+                        <div className="flex items-center gap-2 mb-2">
+                            <Settings2 size={20} className="text-indigo-600" />
+                            <h2 className="text-lg font-bold text-slate-800">Experimentkontroller</h2>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <button
+                                onClick={onTogglePump}
+                                disabled={isSeparated}
+                                className={`flex-1 py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
+                                    isPumping
+                                        ? 'bg-red-100 text-red-700 border border-red-300 animate-pulse'
+                                        : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-md'
+                                } ${isSeparated ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            >
+                                <Wind size={20} className={isPumping ? 'animate-spin' : ''} />
+                                {isPumping ? 'Stoppa pumpen' : 'Starta vakuumpump'}
+                            </button>
+
+                            <button
+                                onClick={onOpenValve}
+                                disabled={isPumping || (!isSealed && !isSeparated)}
+                                className="flex-1 py-3 px-4 bg-slate-100 text-slate-700 border border-slate-300 rounded-lg font-medium hover:bg-slate-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                            >
+                                <RotateCcw size={20} />
+                                Öppna ventil
+                            </button>
+                        </div>
+
+                        <p className="text-sm text-slate-500">
+                            När ventilen öppnas strömmar luft in igen och trycket utjämnas.
+                        </p>
+                    </div>
+
+                    {/* Horse Power Challenge */}
+                    <div className="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col gap-4">
+                        <div className="flex items-center gap-2 mb-2">
+                            <svg className="w-6 h-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+                                <path d="M5 17h.1" />
+                                <circle cx="5" cy="17" r="2" />
+                                <circle cx="19" cy="17" r="2" />
+                            </svg>
+                            <h2 className="text-lg font-bold text-slate-800">Hästkraftsutmaning</h2>
+                        </div>
+
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-center">
+                                <label className="text-sm font-medium text-slate-700">Antal hästar: <span className="text-orange-600 font-bold text-lg">{horses}</span></label>
+                                <span className="text-xs text-slate-400">1 häst ≈ 800N dragkraft</span>
+                            </div>
+
+                            <input
+                                type="range"
+                                min="1"
+                                max="16"
+                                value={horses}
+                                onChange={(e) => setHorses(parseInt(e.target.value))}
+                                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-600"
+                                disabled={isSeparated}
+                            />
+
+                            <button
+                                onClick={onPull}
+                                disabled={!canPull}
+                                className={`w-full py-3 rounded-lg font-bold text-white shadow-md transition-transform active:scale-95 flex items-center justify-center gap-2
+                                    ${isSeparated
+                                        ? 'bg-emerald-600 hover:bg-emerald-700'
+                                        : canPull
+                                            ? 'bg-orange-600 hover:bg-orange-700'
+                                            : 'bg-slate-300 cursor-not-allowed'}`}
+                            >
+                                {isSeparated ? (
+                                    <>
+                                        <RotateCw size={20} />
+                                        Sätt ihop kloten
+                                    </>
+                                ) : (
+                                    <>
+                                        <Play size={20} />
+                                        Försök dra isär!
+                                    </>
+                                )}
+                            </button>
+
+                            {pullSuccess === false && !isSeparated && (
+                                <div className="text-center text-red-500 text-sm font-medium animate-bounce">
+                                    Orkar inte! Trycket är för starkt!
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ===== MAIN APP COMPONENT =====
+        const App = () => {
+            const [simulationState, setSimulationState] = useState(SimulationState.SEALED);
+            const [internalPressure, setInternalPressure] = useState(1.0);
+            const [horses, setHorses] = useState(8);
+            const [separationDistance, setSeparationDistance] = useState(0);
+            const [pullSuccess, setPullSuccess] = useState(null);
+
+            const calculateNetForce = () => {
+                const pressureDiff = (1.0 - internalPressure) * ATM_PRESSURE_PA;
+                return pressureDiff * SPHERE_AREA;
+            };
+
+            const handleTogglePump = () => {
+                if (simulationState === SimulationState.PUMPING) {
+                    setSimulationState(SimulationState.SEALED);
+                } else {
+                    setSimulationState(SimulationState.PUMPING);
+                    setPullSuccess(null);
+                }
+            };
+
+            const handleOpenValve = () => {
+                setSimulationState(SimulationState.LEAKING);
+                setSeparationDistance(0);
+                setPullSuccess(null);
+            };
+
+            const handlePullOrReset = () => {
+                if (simulationState === SimulationState.SEPARATED) {
+                    setSimulationState(SimulationState.SEALED);
+                    setInternalPressure(1.0);
+                    setSeparationDistance(0);
+                    setPullSuccess(null);
+                    return;
+                }
+
+                const holdingForce = calculateNetForce();
+                const pullingForce = horses * FORCE_PER_HORSE;
+
+                if (pullingForce > holdingForce) {
+                    setSimulationState(SimulationState.SEPARATED);
+                    setSeparationDistance(200);
+                    setPullSuccess(true);
+                    setInternalPressure(1.0);
+                } else {
+                    setPullSuccess(false);
+                    setTimeout(() => setPullSuccess(null), 2000);
+                }
+            };
+
+            useEffect(() => {
+                if (simulationState === SimulationState.LEAKING && internalPressure >= 0.98) {
+                    setInternalPressure(1.0);
+                    setSimulationState(SimulationState.SEALED);
+                    setSeparationDistance(0);
+                }
+            }, [internalPressure, simulationState]);
+
+            return (
+                <div className="min-h-screen flex flex-col items-center py-8 px-4 gap-8 max-w-6xl mx-auto">
+
+                    {/* Header */}
+                    <header className="text-center space-y-2">
+                        <h1 className="text-4xl font-extrabold text-slate-800 tracking-tight">Magdeburgska halvkloten</h1>
+                        <p className="text-slate-600 max-w-2xl mx-auto">
+                            Ett berömt experiment från 1654 av Otto von Guericke. När luften pumpas ut ur klotet skapas ett vakuum.
+                            Lufttrycket utanför pressar då ihop halvkloten med en enorm kraft.
+                        </p>
+                    </header>
+
+                    {/* Main Simulation Area */}
+                    <div className="w-full flex flex-col lg:flex-row gap-6 items-start">
+
+                        {/* Left: Canvas */}
+                        <div className="flex-1 w-full bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-sm relative">
+                            <div className="absolute top-6 left-6 z-10 bg-white/90 backdrop-blur p-2 rounded-lg border border-slate-200 shadow-sm text-xs text-slate-500">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                                    <span>Luftmolekyler (utsida)</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                                    <span>Gasmolekyler (insida)</span>
+                                </div>
+                            </div>
+
+                            <SimulationCanvas
+                                width={600}
+                                height={400}
+                                simulationState={simulationState}
+                                internalPressure={internalPressure}
+                                setInternalPressure={setInternalPressure}
+                                separationDistance={separationDistance}
+                            />
+
+                            {/* Visualization Explainer Overlay */}
+                            <div className="mt-4 grid grid-cols-2 gap-4 text-sm text-slate-600">
+                                <div className="flex items-start gap-2">
+                                    <div className="mt-1 p-1 bg-blue-100 rounded text-blue-600"><Info size={16}/></div>
+                                    <p><strong>Blå pilar:</strong> Atmosfärstrycket (konstant kraft inåt). Detta tryck finns alltid runt omkring oss.</p>
+                                </div>
+                                <div className="flex items-start gap-2">
+                                    <div className="mt-1 p-1 bg-red-100 rounded text-red-600"><Info size={16}/></div>
+                                    <p><strong>Röda pilar:</strong> Det inre gastrycket. När molekyler pumpas ut minskar denna motkraft.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right: Data & Visuals */}
+                        <div className="w-full lg:w-64 flex flex-col gap-4 shrink-0">
+                            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center">
+                                <div className="flex items-center gap-2 text-slate-700 font-semibold mb-2">
+                                    <Gauge size={20} />
+                                    <span>Tryckmätare</span>
+                                </div>
+                                <PressureGauge value={internalPressure} label="Tryck inuti" />
+                            </div>
+
+                            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-sm space-y-2">
+                                <h3 className="font-semibold text-slate-800">Aktuell data</h3>
+                                <div className="flex justify-between border-b pb-1">
+                                    <span className="text-slate-500">Tryckskillnad:</span>
+                                    <span className="font-mono">{(101.3 * (1 - internalPressure)).toFixed(1).replace('.', ',')} kPa</span>
+                                </div>
+                                <div className="flex justify-between border-b pb-1">
+                                    <span className="text-slate-500">Nettokraft:</span>
+                                    <span className="font-mono">{(calculateNetForce() / 1000).toFixed(1).replace('.', ',')} kN</span>
+                                </div>
+                                <div className="text-xs text-slate-400 italic pt-1">
+                                    Kraften som krävs för att dra isär kloten.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* Controls Area */}
+                    <Controls
+                        simulationState={simulationState}
+                        onTogglePump={handleTogglePump}
+                        onOpenValve={handleOpenValve}
+                        horses={horses}
+                        setHorses={setHorses}
+                        onPull={handlePullOrReset}
+                        canPull={simulationState === SimulationState.SEALED || simulationState === SimulationState.PUMPING || simulationState === SimulationState.SEPARATED}
+                        pullSuccess={pullSuccess}
+                    />
+
+                </div>
+            );
+        };
+
+        // ===== RENDER APP =====
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

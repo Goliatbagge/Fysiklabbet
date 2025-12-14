@@ -771,6 +771,19 @@
                             <p className="text-xs text-slate-500 text-center">
                                 Dra i glidaren för att öka dragkraften. När kraften överstiger {(requiredForce / 1000).toFixed(1).replace('.', ',')} kN lossnar kloten automatiskt!
                             </p>
+
+                            {/* Reset button when separated */}
+                            {isSeparated && (
+                                <button
+                                    onClick={() => {
+                                        window.location.reload();
+                                    }}
+                                    className="w-full py-3 rounded-lg font-bold text-white shadow-md transition-transform active:scale-95 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700"
+                                >
+                                    <RotateCw size={20} />
+                                    Sätt ihop kloten
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

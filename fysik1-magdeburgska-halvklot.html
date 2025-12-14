@@ -822,7 +822,8 @@
                 setSimulationState(SimulationState.SEALED);
                 // Reset internal pressure to full
                 setInternalPressure(1.0);
-                // The animation will take care of bringing hemispheres together
+                // Bring hemispheres together
+                setTargetSeparation(0);
             };
 
             // Auto-switch from Leaking to Sealed when pressure is full

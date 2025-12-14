@@ -783,6 +783,8 @@
             const [internalPressure, setInternalPressure] = useState(1.0);
             const [pullingForce, setPullingForce] = useState(0); // Start at 0N
             const [separationDistance, setSeparationDistance] = useState(0);
+            const [targetSeparation, setTargetSeparation] = useState(0);
+            const animationRef = useRef(null);
 
             const calculateNetForce = () => {
                 const pressureDiff = (1.0 - internalPressure) * ATM_PRESSURE_PA;
@@ -799,7 +801,7 @@
 
             const handleOpenValve = () => {
                 setSimulationState(SimulationState.LEAKING);
-                setSeparationDistance(0);
+                setTargetSeparation(0);
             };
 
             // Auto-switch from Leaking to Sealed when pressure is full
@@ -807,9 +809,31 @@
                 if (simulationState === SimulationState.LEAKING && internalPressure >= 0.98) {
                     setInternalPressure(1.0);
                     setSimulationState(SimulationState.SEALED);
-                    setSeparationDistance(0);
+                    setTargetSeparation(0);
                 }
             }, [internalPressure, simulationState]);
+
+            // Animate separation distance smoothly
+            useEffect(() => {
+                const animate = () => {
+                    setSeparationDistance(current => {
+                        const diff = targetSeparation - current;
+                        if (Math.abs(diff) < 1) {
+                            return targetSeparation;
+                        }
+                        // Smooth animation: move 15% of remaining distance each frame
+                        return current + diff * 0.15;
+                    });
+                    animationRef.current = requestAnimationFrame(animate);
+                };
+
+                animationRef.current = requestAnimationFrame(animate);
+                return () => {
+                    if (animationRef.current) {
+                        cancelAnimationFrame(animationRef.current);
+                    }
+                };
+            }, [targetSeparation]);
 
             // Automatically separate or join hemispheres based on pulling force
             useEffect(() => {
@@ -821,14 +845,14 @@
                     // Force is strong enough - separate
                     if (simulationState !== SimulationState.SEPARATED) {
                         setSimulationState(SimulationState.SEPARATED);
-                        setSeparationDistance(200);
+                        setTargetSeparation(200);
                         setInternalPressure(1.0); // Air rushes in
                     }
                 } else {
                     // Force is not strong enough - keep together
                     if (simulationState === SimulationState.SEPARATED) {
                         setSimulationState(SimulationState.SEALED);
-                        setSeparationDistance(0);
+                        setTargetSeparation(0);
                     }
                 }
             }, [pullingForce, internalPressure, simulationState]);

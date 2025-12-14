@@ -636,7 +636,7 @@
         };
 
         // ===== CONTROLS COMPONENT =====
-        const Controls = ({ simulationState, onTogglePump, onOpenValve, pullingForce, setPullingForce, requiredForce }) => {
+        const Controls = ({ simulationState, onTogglePump, onOpenValve, pullingForce, setPullingForce, requiredForce, onReset }) => {
             const isPumping = simulationState === SimulationState.PUMPING;
             const isSealed = simulationState === SimulationState.SEALED;
             const isSeparated = simulationState === SimulationState.SEPARATED;
@@ -775,9 +775,7 @@
                             {/* Reset button when separated */}
                             {isSeparated && (
                                 <button
-                                    onClick={() => {
-                                        window.location.reload();
-                                    }}
+                                    onClick={onReset}
                                     className="w-full py-3 rounded-lg font-bold text-white shadow-md transition-transform active:scale-95 flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700"
                                 >
                                     <RotateCw size={20} />
@@ -815,6 +813,16 @@
             const handleOpenValve = () => {
                 setSimulationState(SimulationState.LEAKING);
                 setTargetSeparation(0);
+            };
+
+            const handleReset = () => {
+                // Reset pulling force to 0
+                setPullingForce(0);
+                // Set state to sealed
+                setSimulationState(SimulationState.SEALED);
+                // Reset internal pressure to full
+                setInternalPressure(1.0);
+                // The animation will take care of bringing hemispheres together
             };
 
             // Auto-switch from Leaking to Sealed when pressure is full
@@ -956,6 +964,7 @@
                         pullingForce={pullingForce}
                         setPullingForce={setPullingForce}
                         requiredForce={calculateNetForce()}
+                        onReset={handleReset}
                     />
 
                 </div>

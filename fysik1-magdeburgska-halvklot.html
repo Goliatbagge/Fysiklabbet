@@ -595,10 +595,16 @@
         };
 
         // ===== CONTROLS COMPONENT =====
-        const Controls = ({ simulationState, onTogglePump, onOpenValve, horses, setHorses, onPull, canPull, pullSuccess }) => {
+        const Controls = ({ simulationState, onTogglePump, onOpenValve, pullingForce, setPullingForce, requiredForce }) => {
             const isPumping = simulationState === SimulationState.PUMPING;
             const isSealed = simulationState === SimulationState.SEALED;
             const isSeparated = simulationState === SimulationState.SEPARATED;
+
+            // Calculate equivalent horses
+            const equivalentHorses = (pullingForce / FORCE_PER_HORSE).toFixed(1);
+
+            // Determine if force is sufficient
+            const isForceSufficient = pullingForce > requiredForce;
 
             return (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
@@ -639,7 +645,7 @@
                         </p>
                     </div>
 
-                    {/* Horse Power Challenge */}
+                    {/* Pulling Force Control */}
                     <div className="bg-white p-6 rounded-xl shadow-md border border-slate-200 flex flex-col gap-4">
                         <div className="flex items-center gap-2 mb-2">
                             <svg className="w-6 h-6 text-orange-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -648,53 +654,54 @@
                                 <circle cx="5" cy="17" r="2" />
                                 <circle cx="19" cy="17" r="2" />
                             </svg>
-                            <h2 className="text-lg font-bold text-slate-800">Hästkraftsutmaning</h2>
+                            <h2 className="text-lg font-bold text-slate-800">Dragkraft</h2>
                         </div>
 
                         <div className="space-y-4">
                             <div className="flex justify-between items-center">
-                                <label className="text-sm font-medium text-slate-700">Antal hästar: <span className="text-orange-600 font-bold text-lg">{horses}</span></label>
-                                <span className="text-xs text-slate-400">1 häst ≈ 800N dragkraft</span>
+                                <label className="text-sm font-medium text-slate-700">
+                                    Dragkraft: <span className="text-orange-600 font-bold text-lg">{pullingForce.toLocaleString('sv-SE')} N</span>
+                                </label>
+                                <span className="text-xs text-slate-400">≈ {equivalentHorses.replace('.', ',')} hästar 🐴</span>
                             </div>
 
                             <input
                                 type="range"
-                                min="1"
-                                max="16"
-                                value={horses}
-                                onChange={(e) => setHorses(parseInt(e.target.value))}
+                                min="0"
+                                max="25000"
+                                step="100"
+                                value={pullingForce}
+                                onChange={(e) => setPullingForce(parseInt(e.target.value))}
                                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-600"
-                                disabled={isSeparated}
                             />
 
-                            <button
-                                onClick={onPull}
-                                disabled={!canPull}
-                                className={`w-full py-3 rounded-lg font-bold text-white shadow-md transition-transform active:scale-95 flex items-center justify-center gap-2
-                                    ${isSeparated
-                                        ? 'bg-emerald-600 hover:bg-emerald-700'
-                                        : canPull
-                                            ? 'bg-orange-600 hover:bg-orange-700'
-                                            : 'bg-slate-300 cursor-not-allowed'}`}
-                            >
-                                {isSeparated ? (
-                                    <>
-                                        <RotateCw size={20} />
-                                        Sätt ihop kloten
-                                    </>
-                                ) : (
-                                    <>
-                                        <Play size={20} />
-                                        Försök dra isär!
-                                    </>
-                                )}
-                            </button>
+                            <div className="flex justify-between text-xs text-slate-400">
+                                <span>0 N</span>
+                                <span>25 000 N</span>
+                            </div>
 
-                            {pullSuccess === false && !isSeparated && (
-                                <div className="text-center text-red-500 text-sm font-medium animate-bounce">
-                                    Orkar inte! Trycket är för starkt!
-                                </div>
-                            )}
+                            {/* Force Status Indicator */}
+                            <div className={`p-3 rounded-lg text-center font-medium transition-all ${
+                                isForceSufficient
+                                    ? 'bg-green-100 text-green-700 border border-green-300'
+                                    : 'bg-red-100 text-red-700 border border-red-300'
+                            }`}>
+                                {isForceSufficient ? (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <span>✓</span>
+                                        <span>Kraften räcker! Kloten är isär</span>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <span>✗</span>
+                                        <span>För svagt! Behöver {Math.ceil((requiredForce - pullingForce) / 100) * 100} N till</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            <p className="text-xs text-slate-500 text-center">
+                                Dra i glidaren för att öka dragkraften. När kraften överstiger {(requiredForce / 1000).toFixed(1).replace('.', ',')} kN lossnar kloten automatiskt!
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -705,9 +712,8 @@
         const App = () => {
             const [simulationState, setSimulationState] = useState(SimulationState.SEALED);
             const [internalPressure, setInternalPressure] = useState(1.0);
-            const [horses, setHorses] = useState(8);
+            const [pullingForce, setPullingForce] = useState(6400); // Start at 6400N (8 horses)
             const [separationDistance, setSeparationDistance] = useState(0);
-            const [pullSuccess, setPullSuccess] = useState(null);
 
             const calculateNetForce = () => {
                 const pressureDiff = (1.0 - internalPressure) * ATM_PRESSURE_PA;
@@ -719,39 +725,15 @@
                     setSimulationState(SimulationState.SEALED);
                 } else {
                     setSimulationState(SimulationState.PUMPING);
-                    setPullSuccess(null);
                 }
             };
 
             const handleOpenValve = () => {
                 setSimulationState(SimulationState.LEAKING);
                 setSeparationDistance(0);
-                setPullSuccess(null);
             };
 
-            const handlePullOrReset = () => {
-                if (simulationState === SimulationState.SEPARATED) {
-                    setSimulationState(SimulationState.SEALED);
-                    setInternalPressure(1.0);
-                    setSeparationDistance(0);
-                    setPullSuccess(null);
-                    return;
-                }
-
-                const holdingForce = calculateNetForce();
-                const pullingForce = horses * FORCE_PER_HORSE;
-
-                if (pullingForce > holdingForce) {
-                    setSimulationState(SimulationState.SEPARATED);
-                    setSeparationDistance(200);
-                    setPullSuccess(true);
-                    setInternalPressure(1.0);
-                } else {
-                    setPullSuccess(false);
-                    setTimeout(() => setPullSuccess(null), 2000);
-                }
-            };
-
+            // Auto-switch from Leaking to Sealed when pressure is full
             useEffect(() => {
                 if (simulationState === SimulationState.LEAKING && internalPressure >= 0.98) {
                     setInternalPressure(1.0);
@@ -759,6 +741,28 @@
                     setSeparationDistance(0);
                 }
             }, [internalPressure, simulationState]);
+
+            // Automatically separate or join hemispheres based on pulling force
+            useEffect(() => {
+                if (simulationState === SimulationState.LEAKING) return; // Don't check during leaking
+
+                const holdingForce = calculateNetForce();
+
+                if (pullingForce > holdingForce) {
+                    // Force is strong enough - separate
+                    if (simulationState !== SimulationState.SEPARATED) {
+                        setSimulationState(SimulationState.SEPARATED);
+                        setSeparationDistance(200);
+                        setInternalPressure(1.0); // Air rushes in
+                    }
+                } else {
+                    // Force is not strong enough - keep together
+                    if (simulationState === SimulationState.SEPARATED) {
+                        setSimulationState(SimulationState.SEALED);
+                        setSeparationDistance(0);
+                    }
+                }
+            }, [pullingForce, internalPressure, simulationState]);
 
             return (
                 <div className="min-h-screen flex flex-col items-center py-8 px-4 gap-8 max-w-6xl mx-auto">
@@ -843,11 +847,9 @@
                         simulationState={simulationState}
                         onTogglePump={handleTogglePump}
                         onOpenValve={handleOpenValve}
-                        horses={horses}
-                        setHorses={setHorses}
-                        onPull={handlePullOrReset}
-                        canPull={simulationState === SimulationState.SEALED || simulationState === SimulationState.PUMPING || simulationState === SimulationState.SEPARATED}
-                        pullSuccess={pullSuccess}
+                        pullingForce={pullingForce}
+                        setPullingForce={setPullingForce}
+                        requiredForce={calculateNetForce()}
                     />
 
                 </div>

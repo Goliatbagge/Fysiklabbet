@@ -712,7 +712,7 @@
         const App = () => {
             const [simulationState, setSimulationState] = useState(SimulationState.SEALED);
             const [internalPressure, setInternalPressure] = useState(1.0);
-            const [pullingForce, setPullingForce] = useState(6400); // Start at 6400N (8 horses)
+            const [pullingForce, setPullingForce] = useState(0); // Start at 0N
             const [separationDistance, setSeparationDistance] = useState(0);
 
             const calculateNetForce = () => {

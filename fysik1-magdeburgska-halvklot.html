@@ -305,6 +305,59 @@
                     ctx.fillRect(rightX - 10, centerY - SPHERE_RADIUS - 10, 20, 20);
                     ctx.fillRect(rightX - 10, centerY + SPHERE_RADIUS - 10, 20, 20);
 
+                    // Draw Ropes
+                    const ropeWidth = 8;
+                    const ropeLength = 80;
+
+                    // Left rope
+                    const leftRopeStartX = leftX - SPHERE_RADIUS;
+                    const leftRopeEndX = leftRopeStartX - ropeLength;
+
+                    // Draw rope strands (3 strands twisted together effect)
+                    ctx.strokeStyle = '#8b4513'; // Brown color
+                    ctx.lineWidth = ropeWidth;
+                    ctx.lineCap = 'round';
+
+                    // Main rope
+                    ctx.beginPath();
+                    ctx.moveTo(leftRopeStartX, centerY);
+                    ctx.lineTo(leftRopeEndX, centerY);
+                    ctx.stroke();
+
+                    // Rope texture (twisted effect)
+                    ctx.strokeStyle = '#a0522d';
+                    ctx.lineWidth = ropeWidth * 0.6;
+                    for (let i = 0; i < 4; i++) {
+                        const offset = (i * ropeLength / 4);
+                        ctx.beginPath();
+                        ctx.moveTo(leftRopeStartX - offset, centerY - 2);
+                        ctx.lineTo(leftRopeStartX - offset - ropeLength / 8, centerY + 2);
+                        ctx.stroke();
+                    }
+
+                    // Right rope
+                    const rightRopeStartX = rightX + SPHERE_RADIUS;
+                    const rightRopeEndX = rightRopeStartX + ropeLength;
+
+                    // Main rope
+                    ctx.strokeStyle = '#8b4513';
+                    ctx.lineWidth = ropeWidth;
+                    ctx.beginPath();
+                    ctx.moveTo(rightRopeStartX, centerY);
+                    ctx.lineTo(rightRopeEndX, centerY);
+                    ctx.stroke();
+
+                    // Rope texture (twisted effect)
+                    ctx.strokeStyle = '#a0522d';
+                    ctx.lineWidth = ropeWidth * 0.6;
+                    for (let i = 0; i < 4; i++) {
+                        const offset = (i * ropeLength / 4);
+                        ctx.beginPath();
+                        ctx.moveTo(rightRopeStartX + offset, centerY - 2);
+                        ctx.lineTo(rightRopeStartX + offset + ropeLength / 8, centerY + 2);
+                        ctx.stroke();
+                    }
+
                     // --- Particle Physics & Drawing ---
                     const updateParticle = (p, isFromInsideList) => {
                         p.x += p.vx;

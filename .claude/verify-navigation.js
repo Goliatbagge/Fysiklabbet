@@ -34,7 +34,8 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-magnetfalt-standalone.html',
     'fysik2-magnetisk-kraft-ledare.html',
     'fysik2-vagsimulator.html',
-    'fysik2-konisk-pendel.html'
+    'fysik2-konisk-pendel.html',
+    'fysik2-jordmagnetiska-faltet.html'
 ];
 
 let hasErrors = false;

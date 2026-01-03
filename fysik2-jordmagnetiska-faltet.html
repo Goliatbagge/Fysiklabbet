@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordmagnetiska fältet - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <style>
+        .sim-container {
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 80px);
+        }
+
+        @media (min-width: 1024px) {
+            .sim-container {
+                flex-direction: row;
+            }
+        }
+
+        #canvas-container {
+            flex: 1;
+            min-height: 50vh;
+            position: relative;
+            background: radial-gradient(ellipse at center, #0a1628 0%, #050510 100%);
+        }
+
+        @media (min-width: 1024px) {
+            #canvas-container {
+                min-height: calc(100vh - 80px);
+            }
+        }
+
+        .controls-panel {
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-left: 1px solid rgba(56, 189, 248, 0.15);
+            overflow-y: auto;
+        }
+
+        @media (min-width: 1024px) {
+            .controls-panel {
+                width: 380px;
+                max-height: calc(100vh - 80px);
+            }
+        }
+
+        .panel-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            border-bottom: 2px solid #38bdf8;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: #38bdf8;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            color: #e2e8f0;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .info-box {
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-box h3 {
+            color: #38bdf8;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .highlight-red {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        .highlight-white {
+            color: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .scene-title {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 10;
+        }
+
+        .scene-title h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #38bdf8, #7dd3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.25rem;
+        }
+
+        .scene-title p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .legend-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+
+        .legend-line {
+            width: 20px;
+            height: 3px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="sim-container">
+        <div id="canvas-container">
+            <div class="scene-title">
+                <h1>Jordmagnetiska fältet</h1>
+                <p>Dra för att rotera modellen</p>
+            </div>
+            <div class="legend" id="legend">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <div class="controls-panel">
+            <h2 class="panel-title">Kontrollpanel</h2>
+
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="showField" checked>
+                    <label for="showField">Visa magnetfält</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="showMoreFields">
+                    <label for="showMoreFields">Visa fler magnetfält</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="showMagnet">
+                    <label for="showMagnet">Visa magnet</label>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Om jordmagnetiska fältet</h3>
+                <p>
+                    Jorden beter sig som en gigantisk stavmagnet med ett magnetfält som sträcker sig
+                    långt ut i rymden. Detta fält skyddar oss från solvindar och kosmisk strålning.
+                </p>
+                <p>
+                    <span class="highlight">Viktigt:</span> Den geografiska nordpolen är en
+                    <span class="highlight-white">magnetisk sydpol</span>! Det är därför kompassens
+                    nordpol (som är en magnetisk nordpol) pekar norrut - den attraheras av jordens
+                    magnetiska sydpol.
+                </p>
+                <p>
+                    Stavmagneten i modellen visar detta: <span class="highlight-red">röd ände (N-pol)</span>
+                    vid geografiska sydpolen, <span class="highlight-white">vit ände (S-pol)</span> vid
+                    geografiska nordpolen.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>Magnetfältets egenskaper</h3>
+                <p>
+                    • Fältlinjerna går <span class="highlight">ut från</span> den magnetiska nordpolen
+                    (geografiska sydpolen) och <span class="highlight">in i</span> den magnetiska sydpolen
+                    (geografiska nordpolen).
+                </p>
+                <p>
+                    • Vid ekvatorn är fältet horisontellt, vid polerna är det vertikalt.
+                </p>
+                <p>
+                    • Magnetfältets styrka vid jordytan är cirka 25-65 µT.
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h3>Interaktion</h3>
+                <p>
+                    🖱️ <span class="highlight">Vänsterklick + dra</span> - Rotera modellen
+                </p>
+                <p>
+                    🖱️ <span class="highlight">Scrollhjul</span> - Zooma in/ut
+                </p>
+                <p>
+                    🖱️ <span class="highlight">Högerklick + dra</span> - Panorera
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // Scene setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.set(4, 2, 4);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Controls
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.minDistance = 2.5;
+        controls.maxDistance = 15;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404060, 0.5);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+
+        const backLight = new THREE.DirectionalLight(0x38bdf8, 0.3);
+        backLight.position.set(-5, -3, -5);
+        scene.add(backLight);
+
+        // Create Earth texture with continents using canvas
+        function createEarthTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 2048;
+            canvas.height = 1024;
+            const ctx = canvas.getContext('2d');
+
+            // Ocean color (dark blue)
+            ctx.fillStyle = '#0a2540';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Continent color (light blue/cyan)
+            ctx.fillStyle = '#7dd3fc';
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 2;
+
+            // Helper function to convert lat/lon to canvas coords
+            function toCanvas(lon, lat) {
+                const x = (lon + 180) * (canvas.width / 360);
+                const y = (90 - lat) * (canvas.height / 180);
+                return [x, y];
+            }
+
+            // Draw simplified continents
+            function drawContinent(points) {
+                ctx.beginPath();
+                const [startX, startY] = toCanvas(points[0][0], points[0][1]);
+                ctx.moveTo(startX, startY);
+                for (let i = 1; i < points.length; i++) {
+                    const [x, y] = toCanvas(points[i][0], points[i][1]);
+                    ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+            }
+
+            // North America (simplified)
+            drawContinent([
+                [-170, 65], [-140, 70], [-100, 70], [-80, 75], [-60, 70],
+                [-55, 50], [-65, 45], [-75, 35], [-80, 25], [-90, 20],
+                [-105, 20], [-115, 25], [-120, 35], [-125, 50], [-130, 55],
+                [-145, 60], [-165, 60]
+            ]);
+
+            // South America (simplified)
+            drawContinent([
+                [-80, 10], [-60, 10], [-35, -5], [-35, -20], [-40, -25],
+                [-55, -35], [-65, -55], [-75, -50], [-80, -40], [-70, -20],
+                [-80, -5]
+            ]);
+
+            // Europe (simplified)
+            drawContinent([
+                [-10, 35], [0, 40], [5, 45], [10, 45], [30, 45],
+                [40, 50], [50, 55], [60, 60], [70, 70], [30, 72],
+                [10, 70], [-5, 60], [-10, 50]
+            ]);
+
+            // Africa (simplified)
+            drawContinent([
+                [-15, 35], [10, 37], [35, 30], [40, 15], [50, 10],
+                [40, -5], [35, -25], [20, -35], [15, -30], [10, -15],
+                [-5, 5], [-15, 15]
+            ]);
+
+            // Asia (simplified)
+            drawContinent([
+                [60, 60], [80, 70], [120, 75], [170, 65], [180, 60],
+                [145, 45], [140, 35], [120, 25], [105, 20], [100, 10],
+                [80, 10], [65, 25], [50, 30], [40, 35], [50, 45],
+                [50, 55]
+            ]);
+
+            // Australia (simplified)
+            drawContinent([
+                [115, -20], [130, -15], [145, -15], [155, -25],
+                [150, -35], [140, -40], [130, -35], [115, -30]
+            ]);
+
+            // Antarctica (simplified)
+            drawContinent([
+                [-180, -65], [-120, -70], [-60, -75], [0, -70],
+                [60, -75], [120, -70], [180, -65], [180, -90],
+                [-180, -90]
+            ]);
+
+            // Greenland
+            drawContinent([
+                [-45, 60], [-20, 65], [-15, 75], [-25, 83],
+                [-50, 80], [-60, 75], [-55, 65]
+            ]);
+
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        // Create Earth
+        const earthRadius = 1.5;
+        const earthGeometry = new THREE.SphereGeometry(earthRadius, 64, 64);
+        const earthTexture = createEarthTexture();
+        const earthMaterial = new THREE.MeshStandardMaterial({
+            map: earthTexture,
+            metalness: 0.1,
+            roughness: 0.8,
+        });
+        const earth = new THREE.Mesh(earthGeometry, earthMaterial);
+        scene.add(earth);
+
+        // Earth's axis tilt (approximately 11.5 degrees for magnetic axis)
+        const magneticTilt = 11.5 * Math.PI / 180;
+
+        // Atmosphere glow
+        const atmosphereGeometry = new THREE.SphereGeometry(earthRadius * 1.05, 64, 64);
+        const atmosphereMaterial = new THREE.ShaderMaterial({
+            vertexShader: `
+                varying vec3 vNormal;
+                void main() {
+                    vNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vNormal;
+                void main() {
+                    float intensity = pow(0.7 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+                    gl_FragColor = vec4(0.22, 0.74, 0.97, 1.0) * intensity * 0.5;
+                }
+            `,
+            side: THREE.BackSide,
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+        });
+        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        scene.add(atmosphere);
+
+        // Magnetic field lines group
+        const fieldLinesGroup = new THREE.Group();
+        fieldLinesGroup.rotation.x = magneticTilt;
+        scene.add(fieldLinesGroup);
+
+        // Create 3D magnetic field lines
+        function createFieldLines() {
+            const numLines = 8;
+            const pointsPerLine = 100;
+
+            for (let i = 0; i < numLines; i++) {
+                const phi = (i / numLines) * Math.PI * 2;
+
+                // Create field line using dipole field equation
+                const points = [];
+                for (let j = 0; j <= pointsPerLine; j++) {
+                    const theta = (j / pointsPerLine) * Math.PI; // 0 to PI (north to south)
+
+                    // Dipole field line equation: r = r0 * sin²(θ)
+                    const r0 = 3.5; // Maximum distance from center
+                    const r = r0 * Math.pow(Math.sin(theta), 2);
+
+                    if (r < 0.01) continue;
+
+                    // Convert to Cartesian
+                    const x = r * Math.sin(theta) * Math.cos(phi);
+                    const y = r * Math.cos(theta);
+                    const z = r * Math.sin(theta) * Math.sin(phi);
+
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+
+                if (points.length > 2) {
+                    const curve = new THREE.CatmullRomCurve3(points);
+                    const geometry = new THREE.TubeGeometry(curve, 64, 0.02, 8, false);
+                    const material = new THREE.MeshBasicMaterial({
+                        color: 0x38bdf8,
+                        transparent: true,
+                        opacity: 0.7,
+                    });
+                    const fieldLine = new THREE.Mesh(geometry, material);
+                    fieldLinesGroup.add(fieldLine);
+                }
+            }
+
+            // Add magnetic pole markers on Earth's surface
+            const magneticPoleSphereGeometry = new THREE.SphereGeometry(0.08, 16, 16);
+            const magneticPoleSphereMaterial = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+
+            // Magnetic north pole (on Earth's surface, tilted with the field)
+            const magneticNorthPole = new THREE.Mesh(magneticPoleSphereGeometry, magneticPoleSphereMaterial);
+            magneticNorthPole.position.set(0, earthRadius, 0);
+            fieldLinesGroup.add(magneticNorthPole);
+
+            // Magnetic south pole (on Earth's surface, tilted with the field)
+            const magneticSouthPole = new THREE.Mesh(magneticPoleSphereGeometry, magneticPoleSphereMaterial);
+            magneticSouthPole.position.set(0, -earthRadius, 0);
+            fieldLinesGroup.add(magneticSouthPole);
+
+            // Add arrows to show direction
+            for (let i = 0; i < numLines; i++) {
+                const phi = (i / numLines) * Math.PI * 2;
+
+                // Positions must be where the field line is outside Earth
+                // Field line crosses Earth surface at about t=0.23 and t=0.77
+                const arrowPositions = [0.28, 0.5, 0.72];
+                arrowPositions.forEach(t => {
+                    const theta = t * Math.PI;
+                    const r0 = 3.5;
+                    const r = r0 * Math.pow(Math.sin(theta), 2);
+
+                    if (r > earthRadius * 1.05) {
+                        const x = r * Math.sin(theta) * Math.cos(phi);
+                        const y = r * Math.cos(theta);
+                        const z = r * Math.sin(theta) * Math.sin(phi);
+
+                        // Calculate tangent direction (pointing toward north pole)
+                        const dt = -0.01;
+                        const theta2 = (t + dt) * Math.PI;
+                        const r2 = r0 * Math.pow(Math.sin(theta2), 2);
+                        const x2 = r2 * Math.sin(theta2) * Math.cos(phi);
+                        const y2 = r2 * Math.cos(theta2);
+                        const z2 = r2 * Math.sin(theta2) * Math.sin(phi);
+
+                        const dir = new THREE.Vector3(x2 - x, y2 - y, z2 - z).normalize();
+
+                        const arrowHelper = new THREE.ArrowHelper(dir, new THREE.Vector3(x, y, z), 0.25, 0x38bdf8, 0.15, 0.08);
+                        fieldLinesGroup.add(arrowHelper);
+                    }
+                });
+            }
+        }
+
+        createFieldLines();
+
+        // Extra field lines group (inner and outer, dashed)
+        const extraFieldLinesGroup = new THREE.Group();
+        extraFieldLinesGroup.rotation.x = magneticTilt;
+        extraFieldLinesGroup.visible = false;
+        scene.add(extraFieldLinesGroup);
+
+        function createExtraFieldLines() {
+            const numLines = 8;
+            const pointsPerLine = 100;
+
+            // Inner field lines (closer to Earth) - r0 = 2.2
+            const r0Inner = 2.2;
+            for (let i = 0; i < numLines; i++) {
+                const phi = (i / numLines) * Math.PI * 2;
+                const points = [];
+
+                for (let j = 0; j <= pointsPerLine; j++) {
+                    const theta = (j / pointsPerLine) * Math.PI;
+                    const r = r0Inner * Math.pow(Math.sin(theta), 2);
+                    if (r < 0.01) continue;
+
+                    const x = r * Math.sin(theta) * Math.cos(phi);
+                    const y = r * Math.cos(theta);
+                    const z = r * Math.sin(theta) * Math.sin(phi);
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+
+                if (points.length > 2) {
+                    const curve = new THREE.CatmullRomCurve3(points);
+                    const curvePoints = curve.getPoints(100);
+                    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+                    const material = new THREE.LineDashedMaterial({
+                        color: 0x38bdf8,
+                        transparent: true,
+                        opacity: 0.6,
+                        dashSize: 0.15,
+                        gapSize: 0.1,
+                    });
+                    const line = new THREE.Line(geometry, material);
+                    line.computeLineDistances();
+                    extraFieldLinesGroup.add(line);
+                }
+            }
+
+            // Outer field lines (further from Earth) - r0 = 5.0
+            const r0Outer = 5.0;
+            for (let i = 0; i < numLines; i++) {
+                const phi = (i / numLines) * Math.PI * 2;
+                const points = [];
+
+                for (let j = 0; j <= pointsPerLine; j++) {
+                    const theta = (j / pointsPerLine) * Math.PI;
+                    const r = r0Outer * Math.pow(Math.sin(theta), 2);
+                    if (r < 0.01) continue;
+
+                    const x = r * Math.sin(theta) * Math.cos(phi);
+                    const y = r * Math.cos(theta);
+                    const z = r * Math.sin(theta) * Math.sin(phi);
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+
+                if (points.length > 2) {
+                    const curve = new THREE.CatmullRomCurve3(points);
+                    const curvePoints = curve.getPoints(100);
+                    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+                    const material = new THREE.LineDashedMaterial({
+                        color: 0x38bdf8,
+                        transparent: true,
+                        opacity: 0.6,
+                        dashSize: 0.2,
+                        gapSize: 0.15,
+                    });
+                    const line = new THREE.Line(geometry, material);
+                    line.computeLineDistances();
+                    extraFieldLinesGroup.add(line);
+                }
+            }
+
+            // Add arrows for inner field lines
+            // Inner lines (r0=2.2) cross Earth at about t=0.31 and t=0.69
+            for (let i = 0; i < numLines; i++) {
+                const phi = (i / numLines) * Math.PI * 2;
+                const arrowPositions = [0.35, 0.5, 0.65];
+                arrowPositions.forEach(t => {
+                    const theta = t * Math.PI;
+                    const r = r0Inner * Math.pow(Math.sin(theta), 2);
+
+                    if (r > earthRadius * 1.05) {
+                        const x = r * Math.sin(theta) * Math.cos(phi);
+                        const y = r * Math.cos(theta);
+                        const z = r * Math.sin(theta) * Math.sin(phi);
+
+                        const dt = -0.01;
+                        const theta2 = (t + dt) * Math.PI;
+                        const r2 = r0Inner * Math.pow(Math.sin(theta2), 2);
+                        const x2 = r2 * Math.sin(theta2) * Math.cos(phi);
+                        const y2 = r2 * Math.cos(theta2);
+                        const z2 = r2 * Math.sin(theta2) * Math.sin(phi);
+
+                        const dir = new THREE.Vector3(x2 - x, y2 - y, z2 - z).normalize();
+                        const arrowHelper = new THREE.ArrowHelper(dir, new THREE.Vector3(x, y, z), 0.2, 0x38bdf8, 0.12, 0.06);
+                        extraFieldLinesGroup.add(arrowHelper);
+                    }
+                });
+            }
+
+            // Add arrows for outer field lines
+            // Outer lines (r0=5.0) cross Earth at about t=0.18 and t=0.82
+            for (let i = 0; i < numLines; i++) {
+                const phi = (i / numLines) * Math.PI * 2;
+                const arrowPositions = [0.25, 0.5, 0.75];
+                arrowPositions.forEach(t => {
+                    const theta = t * Math.PI;
+                    const r = r0Outer * Math.pow(Math.sin(theta), 2);
+
+                    if (r > earthRadius * 1.05) {
+                        const x = r * Math.sin(theta) * Math.cos(phi);
+                        const y = r * Math.cos(theta);
+                        const z = r * Math.sin(theta) * Math.sin(phi);
+
+                        const dt = -0.01;
+                        const theta2 = (t + dt) * Math.PI;
+                        const r2 = r0Outer * Math.pow(Math.sin(theta2), 2);
+                        const x2 = r2 * Math.sin(theta2) * Math.cos(phi);
+                        const y2 = r2 * Math.cos(theta2);
+                        const z2 = r2 * Math.sin(theta2) * Math.sin(phi);
+
+                        const dir = new THREE.Vector3(x2 - x, y2 - y, z2 - z).normalize();
+                        const arrowHelper = new THREE.ArrowHelper(dir, new THREE.Vector3(x, y, z), 0.3, 0x38bdf8, 0.18, 0.09);
+                        extraFieldLinesGroup.add(arrowHelper);
+                    }
+                });
+            }
+        }
+
+        createExtraFieldLines();
+
+        // Bar magnet group
+        const magnetGroup = new THREE.Group();
+        magnetGroup.rotation.x = magneticTilt;
+        magnetGroup.visible = false;
+        scene.add(magnetGroup);
+
+        // Create bar magnet that extends through Earth
+        function createBarMagnet() {
+            const magnetLength = earthRadius * 2.4; // Stick out a bit on both ends
+            const magnetRadius = 0.18;
+            const halfLength = magnetLength / 2;
+
+            // South pole (white/light gray) - at geographic North (magnetic north pole location)
+            // This half extends from center upward
+            const southPoleGeometry = new THREE.CylinderGeometry(magnetRadius, magnetRadius, halfLength, 32);
+            const southPoleMaterial = new THREE.MeshStandardMaterial({
+                color: 0xf1f5f9,
+                metalness: 0.3,
+                roughness: 0.4,
+            });
+            const southPole = new THREE.Mesh(southPoleGeometry, southPoleMaterial);
+            southPole.position.y = halfLength / 2;
+            magnetGroup.add(southPole);
+
+            // North pole (red) - at geographic South (magnetic south pole location)
+            // This half extends from center downward
+            const northPoleGeometry = new THREE.CylinderGeometry(magnetRadius, magnetRadius, halfLength, 32);
+            const northPoleMaterial = new THREE.MeshStandardMaterial({
+                color: 0xdc2626,
+                metalness: 0.3,
+                roughness: 0.4,
+            });
+            const northPole = new THREE.Mesh(northPoleGeometry, northPoleMaterial);
+            northPole.position.y = -halfLength / 2;
+            magnetGroup.add(northPole);
+
+            // Add curved labels on the magnet surface
+            const createCurvedLabel = (text, textColor, yPos) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 128;
+                canvas.height = 128;
+                const ctx = canvas.getContext('2d');
+
+                // Transparent background - only the letter will show
+                ctx.clearRect(0, 0, 128, 128);
+
+                // Text
+                ctx.fillStyle = textColor;
+                ctx.font = 'bold 100px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 64, 68);
+
+                const texture = new THREE.CanvasTexture(canvas);
+
+                // Create a curved surface (partial cylinder) that wraps around the magnet
+                const arcAngle = Math.PI * 0.4; // 72 degrees arc
+                const curvedGeometry = new THREE.CylinderGeometry(
+                    magnetRadius + 0.005,  // slightly larger than magnet
+                    magnetRadius + 0.005,
+                    0.25,                   // height of label
+                    16,                     // segments
+                    1,
+                    true,                   // open ended
+                    -arcAngle / 2,          // start angle
+                    arcAngle                // arc length
+                );
+
+                const curvedMaterial = new THREE.MeshBasicMaterial({
+                    map: texture,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    depthWrite: false
+                });
+
+                const curvedLabel = new THREE.Mesh(curvedGeometry, curvedMaterial);
+                curvedLabel.position.y = yPos;
+                return curvedLabel;
+            };
+
+            // S label on white part (white text)
+            magnetGroup.add(createCurvedLabel('S', '#ffffff', halfLength * 0.92));
+
+            // N label on red part (white text)
+            magnetGroup.add(createCurvedLabel('N', '#ffffff', -halfLength * 0.92));
+
+            // Add end caps for nicer look
+            const capGeometry = new THREE.SphereGeometry(magnetRadius, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+
+            const southCap = new THREE.Mesh(capGeometry, southPoleMaterial);
+            southCap.position.y = halfLength;
+            magnetGroup.add(southCap);
+
+            const northCap = new THREE.Mesh(capGeometry, northPoleMaterial);
+            northCap.position.y = -halfLength;
+            northCap.rotation.x = Math.PI;
+            magnetGroup.add(northCap);
+        }
+
+        createBarMagnet();
+
+        // Pole markers
+        const poleMarkersGroup = new THREE.Group();
+        scene.add(poleMarkersGroup);
+
+        function createPoleMarkers() {
+            // Geographic North pole marker (flat disk)
+            const northGeometry = new THREE.CylinderGeometry(0.08, 0.08, 0.02, 16);
+            const northMaterial = new THREE.MeshStandardMaterial({ color: 0x22c55e });
+            const northMarker = new THREE.Mesh(northGeometry, northMaterial);
+            northMarker.position.y = earthRadius + 0.01;
+            poleMarkersGroup.add(northMarker);
+
+            // Geographic South pole marker (flat disk)
+            const southGeometry = new THREE.CylinderGeometry(0.08, 0.08, 0.02, 16);
+            const southMaterial = new THREE.MeshStandardMaterial({ color: 0xf59e0b });
+            const southMarker = new THREE.Mesh(southGeometry, southMaterial);
+            southMarker.position.y = -earthRadius - 0.01;
+            poleMarkersGroup.add(southMarker);
+
+            // N and S labels
+            const createPoleLabel = (text, y, color) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = 64;
+                canvas.height = 64;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = color;
+                ctx.font = 'bold 48px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 32, 32);
+
+                const texture = new THREE.CanvasTexture(canvas);
+                const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+                const sprite = new THREE.Sprite(spriteMaterial);
+                sprite.position.set(0, y, 0);
+                sprite.scale.set(0.3, 0.3, 1);
+                return sprite;
+            };
+
+            poleMarkersGroup.add(createPoleLabel('N', earthRadius + 0.18, '#22c55e'));
+            poleMarkersGroup.add(createPoleLabel('S', -earthRadius - 0.18, '#f59e0b'));
+        }
+
+        createPoleMarkers();
+
+        // Update legend
+        function updateLegend() {
+            const legend = document.getElementById('legend');
+            legend.innerHTML = `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #7dd3fc;"></div>
+                    <span>Kontinenter</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #0a2540;"></div>
+                    <span>Hav</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-line" style="background: #38bdf8;"></div>
+                    <span>Magnetfältslinjer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #22c55e;"></div>
+                    <span>Geografiska nordpolen (N)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f59e0b;"></div>
+                    <span>Geografiska sydpolen (S)</span>
+                </div>
+            `;
+        }
+
+        updateLegend();
+
+        // Event listeners
+        document.getElementById('showField').addEventListener('change', (e) => {
+            fieldLinesGroup.visible = e.target.checked;
+        });
+
+        document.getElementById('showMoreFields').addEventListener('change', (e) => {
+            extraFieldLinesGroup.visible = e.target.checked;
+        });
+
+        document.getElementById('showMagnet').addEventListener('change', (e) => {
+            magnetGroup.visible = e.target.checked;
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+
+            // Slow rotation of Earth
+            earth.rotation.y += 0.001;
+            atmosphere.rotation.y += 0.001;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+    </script>
+</body>
+</html>

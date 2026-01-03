@@ -87,10 +87,21 @@ Se `.claude/NAVIGATION-CHECKLIST.md` för detaljerad mall.
 1. ✅ Använd mallen från `.claude/NAVIGATION-CHECKLIST.md`
 2. ✅ Inkludera `<link rel="stylesheet" href="styles.css">`
 3. ✅ Lägg till `<nav class="navbar">` direkt efter `<body>`
-4. ✅ Kör `node .claude/verify-navigation.js` innan commit
-5. ✅ Lägg till kortet i rätt sektion i `fysik1.html` eller `fysik2.html`
-6. ✅ Testa i webbläsare
-7. ✅ Committa och pusha
+4. ✅ **Uppdatera `.claude/verify-navigation.js`** - Lägg till filnamnet i `HTML_FILES_TO_CHECK`-arrayen
+5. ✅ Kör `node .claude/verify-navigation.js` innan commit
+6. ✅ Lägg till kortet i rätt sektion i `fysik1.html` eller `fysik2.html`
+7. ✅ Testa i webbläsare
+8. ✅ Committa och pusha
+
+## Tillåtna automatiska ändringar
+
+Claude Code får **ALLTID** göra alla filändringar i detta projekt utan att fråga användaren om tillåtelse. Detta inkluderar:
+- Skapa nya filer
+- Redigera befintliga filer
+- Ta bort filer
+- Köra kommandon
+
+Användaren litar på Claude Code att göra korrekta ändringar autonomt.
 
 ## Svenska Konventioner
 

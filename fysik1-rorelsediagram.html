@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rörelsediagram - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+        }
+        .graph-glow {
+            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+        }
+        /* Time slider styling */
+        .time-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, #0ea5e9 0%, #0ea5e9 var(--progress, 0%), #1e293b var(--progress, 0%), #1e293b 100%);
+            border-radius: 8px;
+            height: 8px;
+        }
+        .time-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .time-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.9);
+        }
+        .time-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+        .time-slider::-moz-range-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.9);
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="dark-container min-h-screen">
+        <div id="root"></div>
+    </main>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        // ===== CONSTANTS =====
+        const MOTION_TYPES = {
+            CONSTANT_VELOCITY: 'constant_velocity',
+            CONSTANT_ACCELERATION: 'constant_acceleration',
+            BRAKING: 'braking',
+            VERTICAL_THROW: 'vertical_throw'
+        };
+
+        const MOTION_CONFIG = {
+            [MOTION_TYPES.CONSTANT_VELOCITY]: {
+                name: 'Konstant hastighet',
+                description: 'En bil rör sig med konstant hastighet åt höger',
+                icon: '🚗',
+                duration: 5, // sekunder
+                v0: 2, // m/s
+                a: 0,
+                getPosition: (t, v0) => v0 * t,
+                getVelocity: (t, v0) => v0,
+                getAcceleration: () => 0,
+                maxS: 12,
+                maxV: 4,
+                maxA: 2,
+                minS: 0,
+                minV: 0,
+                minA: -2
+            },
+            [MOTION_TYPES.CONSTANT_ACCELERATION]: {
+                name: 'Konstant acceleration',
+                description: 'En bil accelererar konstant åt höger',
+                icon: '🏎️',
+                duration: 5,
+                v0: 0.5,
+                a: 0.8, // m/s²
+                getPosition: (t, v0, a) => v0 * t + 0.5 * a * t * t,
+                getVelocity: (t, v0, a) => v0 + a * t,
+                getAcceleration: (t, v0, a) => a,
+                maxS: 14,
+                maxV: 6,
+                maxA: 2,
+                minS: 0,
+                minV: 0,
+                minA: -1
+            },
+            [MOTION_TYPES.BRAKING]: {
+                name: 'Inbromsning',
+                description: 'En bil bromsar in med konstant acceleration (retardation)',
+                icon: '🚙',
+                duration: 4,
+                v0: 4, // m/s (starthastighet)
+                a: -1, // m/s² (negativ = retardation)
+                getPosition: (t, v0, a) => {
+                    const tStop = -v0 / a; // tid när bilen stannar
+                    if (t >= tStop) {
+                        // Bilen har stannat - position förblir konstant
+                        return v0 * tStop + 0.5 * a * tStop * tStop;
+                    }
+                    return v0 * t + 0.5 * a * t * t;
+                },
+                getVelocity: (t, v0, a) => {
+                    const tStop = -v0 / a;
+                    if (t >= tStop) return 0; // Bilen har stannat
+                    return v0 + a * t;
+                },
+                getAcceleration: (t, v0, a) => a, // Konstant acceleration under hela inbromsningen
+                maxS: 10,
+                maxV: 5,
+                maxA: 1,
+                minS: 0,
+                minV: 0,
+                minA: -2
+            },
+            [MOTION_TYPES.VERTICAL_THROW]: {
+                name: 'Kast uppåt',
+                description: 'En boll kastas uppåt och faller ner igen (positiv riktning = uppåt)',
+                icon: '⚾',
+                duration: 2, // Exakt tid för att landa: t = 2*v0/|a| = 2*10/10 = 2s
+                v0: 10, // m/s uppåt
+                a: -10, // m/s² (tyngdacceleration nedåt)
+                getPosition: (t, v0, a) => {
+                    const tLand = -2 * v0 / a; // t = 2s
+                    if (t >= tLand) return 0;
+                    return v0 * t + 0.5 * a * t * t;
+                },
+                getVelocity: (t, v0, a) => {
+                    const tLand = -2 * v0 / a;
+                    if (t >= tLand) return v0 + a * tLand; // Hastigheten vid landning
+                    return v0 + a * t;
+                },
+                getAcceleration: (t, v0, a) => a,
+                maxS: 6,
+                maxV: 12,
+                maxA: 2,
+                minS: 0,
+                minV: -12,
+                minA: -12
+            }
+        };
+
+        // ===== ICON COMPONENTS =====
+        const PlayIcon = ({ size = 24 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        );
+
+        const PauseIcon = ({ size = 24 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        );
+
+        const ResetIcon = ({ size = 24 }) => (
+            <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+        );
+
+        // ===== MOTION VISUALIZATION COMPONENT =====
+        const MotionVisualization = ({ motionType, progress, config }) => {
+            const canvasRef = useRef(null);
+            const t = progress * config.duration;
+            const position = config.getPosition(t, config.v0, config.a);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+
+                // High DPI support for sharp rendering
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+
+                const width = rect.width;
+                const height = rect.height;
+
+                // Clear canvas
+                ctx.fillStyle = '#050510';
+                ctx.fillRect(0, 0, width, height);
+
+                if (motionType === MOTION_TYPES.VERTICAL_THROW) {
+                    // Vertical visualization for ball throw
+                    const groundY = height - 40;
+                    const maxHeight = config.maxS;
+                    const scale = (groundY - 60) / maxHeight;
+
+                    // Draw subtle grid - vertical lines
+                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                    ctx.lineWidth = 1;
+                    for (let x = 60; x < width - 20; x += 60) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, 40);
+                        ctx.lineTo(x, groundY);
+                        ctx.stroke();
+                    }
+
+                    // Draw horizontal grid lines at each meter
+                    for (let s = 0; s <= maxHeight; s += 1) {
+                        const y = groundY - s * scale;
+                        ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(45, y);
+                        ctx.lineTo(width - 50, y);
+                        ctx.stroke();
+                    }
+
+                    // Draw ground
+                    ctx.fillStyle = '#1e3a5f';
+                    ctx.fillRect(0, groundY, width, height - groundY);
+
+                    // Ground line
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(0, groundY);
+                    ctx.lineTo(width, groundY);
+                    ctx.stroke();
+
+                    // Draw scale labels
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = '12px monospace';
+                    ctx.textAlign = 'right';
+                    for (let s = 0; s <= maxHeight; s += 1) {
+                        const y = groundY - s * scale;
+                        ctx.fillText(`${s} m`, 38, y + 4);
+                    }
+
+                    // Draw direction arrow (positive = up)
+                    ctx.strokeStyle = '#22c55e';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(width - 40, groundY - 20);
+                    ctx.lineTo(width - 40, 60);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(width - 45, 70);
+                    ctx.lineTo(width - 40, 60);
+                    ctx.lineTo(width - 35, 70);
+                    ctx.stroke();
+                    ctx.fillStyle = '#22c55e';
+                    ctx.font = '14px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('+s', width - 40, 50);
+
+                    // Draw baseball - subtract ball radius so bottom of ball sits on ground
+                    const ballRadius = 14;
+                    const ballY = groundY - Math.max(0, position) * scale - ballRadius;
+                    const ballX = width / 2;
+
+                    // Ball glow
+                    const gradient = ctx.createRadialGradient(ballX, ballY, 0, ballX, ballY, ballRadius + 10);
+                    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
+                    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(ballX, ballY, ballRadius + 10, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Baseball body - white/cream color
+                    const ballGradient = ctx.createRadialGradient(ballX - 3, ballY - 3, 0, ballX, ballY, ballRadius);
+                    ballGradient.addColorStop(0, '#ffffff');
+                    ballGradient.addColorStop(1, '#e0dcd4');
+                    ctx.fillStyle = ballGradient;
+                    ctx.beginPath();
+                    ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = '#aaa';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Simple curved red seam through the middle
+                    ctx.strokeStyle = '#dc2626';
+                    ctx.lineWidth = 2;
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.moveTo(ballX, ballY - ballRadius + 2);
+                    ctx.bezierCurveTo(
+                        ballX + ballRadius * 0.8, ballY - ballRadius * 0.3,
+                        ballX + ballRadius * 0.8, ballY + ballRadius * 0.3,
+                        ballX, ballY + ballRadius - 2
+                    );
+                    ctx.stroke();
+
+                } else {
+                    // Horizontal visualization for cars
+
+                    // Add subtle grid for cars
+                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                    ctx.lineWidth = 1;
+                    for (let x = 0; x < width; x += 40) {
+                        ctx.beginPath();
+                        ctx.moveTo(x, 0);
+                        ctx.lineTo(x, height);
+                        ctx.stroke();
+                    }
+                    for (let y = 0; y < height; y += 40) {
+                        ctx.beginPath();
+                        ctx.moveTo(0, y);
+                        ctx.lineTo(width, y);
+                        ctx.stroke();
+                    }
+
+                    const roadY = height / 2 + 30;
+                    const startX = 60;
+                    const endX = width - 40;
+                    const trackLength = endX - startX;
+                    const maxS = config.maxS;
+                    const scale = trackLength / maxS;
+
+                    // Draw road
+                    ctx.fillStyle = '#1e293b';
+                    ctx.fillRect(0, roadY - 30, width, 60);
+
+                    // Road lines
+                    ctx.strokeStyle = '#fbbf24';
+                    ctx.lineWidth = 3;
+                    ctx.setLineDash([30, 20]);
+                    ctx.beginPath();
+                    ctx.moveTo(0, roadY);
+                    ctx.lineTo(width, roadY);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    // Road edges
+                    ctx.strokeStyle = '#475569';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(0, roadY - 30);
+                    ctx.lineTo(width, roadY - 30);
+                    ctx.moveTo(0, roadY + 30);
+                    ctx.lineTo(width, roadY + 30);
+                    ctx.stroke();
+
+                    // Draw scale markers
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = '12px monospace';
+                    ctx.textAlign = 'center';
+                    for (let s = 0; s <= maxS; s += 2) {
+                        const x = startX + s * scale;
+                        ctx.fillText(`${s} m`, x, roadY + 55);
+                        ctx.strokeStyle = 'rgba(100, 116, 139, 0.5)';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(x, roadY + 32);
+                        ctx.lineTo(x, roadY + 40);
+                        ctx.stroke();
+                    }
+
+                    // Draw direction arrow
+                    ctx.strokeStyle = '#22c55e';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(startX + 20, roadY - 50);
+                    ctx.lineTo(startX + 80, roadY - 50);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(startX + 70, roadY - 55);
+                    ctx.lineTo(startX + 80, roadY - 50);
+                    ctx.lineTo(startX + 70, roadY - 45);
+                    ctx.stroke();
+                    ctx.fillStyle = '#22c55e';
+                    ctx.font = '14px sans-serif';
+                    ctx.fillText('+s', startX + 50, roadY - 60);
+
+                    // Car position
+                    const carX = startX + Math.min(position, maxS) * scale;
+                    const carY = roadY - 15;
+
+                    // Draw car body
+                    const carWidth = 50;
+                    const carHeight = 20;
+
+                    // Car glow - different colors for different motion types
+                    ctx.shadowBlur = 15;
+                    const isBraking = motionType === MOTION_TYPES.BRAKING;
+                    const isAccelerating = motionType === MOTION_TYPES.CONSTANT_ACCELERATION;
+                    ctx.shadowColor = isBraking ? '#ef4444' : (isAccelerating ? '#f97316' : '#38bdf8');
+
+                    // Car body - red for braking, orange for accelerating, blue for constant
+                    ctx.fillStyle = isBraking ? '#dc2626' : (isAccelerating ? '#ea580c' : '#0ea5e9');
+                    ctx.beginPath();
+                    ctx.roundRect(carX - carWidth/2, carY - carHeight/2, carWidth, carHeight, 4);
+                    ctx.fill();
+
+                    // Car roof
+                    ctx.fillStyle = isBraking ? '#b91c1c' : (isAccelerating ? '#c2410c' : '#0284c7');
+                    ctx.beginPath();
+                    ctx.roundRect(carX - 15, carY - carHeight/2 - 10, 25, 12, 3);
+                    ctx.fill();
+
+                    // Windows
+                    ctx.fillStyle = '#7dd3fc';
+                    ctx.fillRect(carX - 12, carY - carHeight/2 - 8, 8, 8);
+                    ctx.fillRect(carX, carY - carHeight/2 - 8, 8, 8);
+
+                    // Wheels
+                    ctx.shadowBlur = 0;
+                    ctx.fillStyle = '#1e293b';
+                    ctx.beginPath();
+                    ctx.arc(carX - 15, carY + carHeight/2, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(carX + 15, carY + carHeight/2, 6, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Wheel rims
+                    ctx.fillStyle = '#64748b';
+                    ctx.beginPath();
+                    ctx.arc(carX - 15, carY + carHeight/2, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(carX + 15, carY + carHeight/2, 3, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Headlights
+                    ctx.fillStyle = '#fef08a';
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = '#fef08a';
+                    ctx.beginPath();
+                    ctx.arc(carX + carWidth/2 - 2, carY - 3, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(carX + carWidth/2 - 2, carY + 3, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+
+                    // Brake lights (only for braking motion)
+                    if (isBraking) {
+                        ctx.fillStyle = '#ef4444';
+                        ctx.shadowBlur = 20;
+                        ctx.shadowColor = '#ef4444';
+                        ctx.beginPath();
+                        ctx.arc(carX - carWidth/2 + 2, carY - 3, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(carX - carWidth/2 + 2, carY + 3, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                    }
+                }
+
+            }, [motionType, progress, config, position]);
+
+            return (
+                <canvas
+                    ref={canvasRef}
+                    className="rounded-xl w-full"
+                    style={{ height: '200px', boxShadow: '0 0 30px rgba(56, 189, 248, 0.1), inset 0 0 40px rgba(0, 0, 0, 0.5)' }}
+                />
+            );
+        };
+
+        // ===== GRAPH COMPONENT =====
+        const Graph = ({ title, unit, data, maxY, minY, color, currentTime, duration }) => {
+            const canvasRef = useRef(null);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+
+                // High DPI support for sharp rendering
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+
+                const width = rect.width;
+                const height = rect.height;
+                const padding = { top: 25, right: 15, bottom: 35, left: 50 };
+                const graphWidth = width - padding.left - padding.right;
+                const graphHeight = height - padding.top - padding.bottom;
+
+                // Clear
+                ctx.fillStyle = '#0a0f1a';
+                ctx.fillRect(0, 0, width, height);
+
+                // Grid
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                ctx.lineWidth = 1;
+
+                // Vertical grid lines (time)
+                for (let t = 0; t <= duration; t += 1) {
+                    const x = padding.left + (t / duration) * graphWidth;
+                    ctx.beginPath();
+                    ctx.moveTo(x, padding.top);
+                    ctx.lineTo(x, height - padding.bottom);
+                    ctx.stroke();
+                }
+
+                // Horizontal grid lines
+                const range = maxY - minY;
+                const step = range / 4;
+                for (let i = 0; i <= 4; i++) {
+                    const value = minY + i * step;
+                    const y = height - padding.bottom - (i / 4) * graphHeight;
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, y);
+                    ctx.lineTo(width - padding.right, y);
+                    ctx.stroke();
+                }
+
+                // Zero line if applicable
+                if (minY < 0 && maxY > 0) {
+                    const zeroY = height - padding.bottom - ((0 - minY) / range) * graphHeight;
+                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, zeroY);
+                    ctx.lineTo(width - padding.right, zeroY);
+                    ctx.stroke();
+                }
+
+                // Axes
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(padding.left, padding.top);
+                ctx.lineTo(padding.left, height - padding.bottom);
+                ctx.lineTo(width - padding.right, height - padding.bottom);
+                ctx.stroke();
+
+                // Axis labels
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '12px monospace';
+                ctx.textAlign = 'center';
+
+                // X-axis labels (time)
+                for (let t = 0; t <= duration; t += 1) {
+                    const x = padding.left + (t / duration) * graphWidth;
+                    ctx.fillText(`${t}`, x, height - padding.bottom + 16);
+                }
+                ctx.fillText('t (s)', padding.left + graphWidth / 2, height - 5);
+
+                // Y-axis labels
+                ctx.textAlign = 'right';
+                for (let i = 0; i <= 4; i++) {
+                    const value = minY + i * step;
+                    const y = height - padding.bottom - (i / 4) * graphHeight;
+                    ctx.fillText(value.toFixed(1).replace('.', ','), padding.left - 8, y + 4);
+                }
+
+                // Title and unit
+                ctx.textAlign = 'left';
+                ctx.fillStyle = color;
+                ctx.font = 'bold 14px sans-serif';
+                ctx.fillText(`${title} (${unit})`, padding.left, 18);
+
+                // Draw data line
+                if (data.length > 1) {
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = 2.5;
+                    ctx.lineCap = 'round';
+                    ctx.lineJoin = 'round';
+
+                    // Glow effect
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = color;
+
+                    ctx.beginPath();
+                    data.forEach((point, i) => {
+                        const x = padding.left + (point.t / duration) * graphWidth;
+                        const y = height - padding.bottom - ((point.value - minY) / range) * graphHeight;
+                        if (i === 0) {
+                            ctx.moveTo(x, y);
+                        } else {
+                            ctx.lineTo(x, y);
+                        }
+                    });
+                    ctx.stroke();
+                    ctx.shadowBlur = 0;
+
+                    // Current point marker
+                    if (data.length > 0) {
+                        const lastPoint = data[data.length - 1];
+                        const x = padding.left + (lastPoint.t / duration) * graphWidth;
+                        const y = height - padding.bottom - ((lastPoint.value - minY) / range) * graphHeight;
+
+                        // Outer glow
+                        ctx.fillStyle = color;
+                        ctx.shadowBlur = 12;
+                        ctx.shadowColor = color;
+                        ctx.beginPath();
+                        ctx.arc(x, y, 6, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        // Inner dot
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = '#fff';
+                        ctx.beginPath();
+                        ctx.arc(x, y, 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                // Time cursor line
+                const cursorX = padding.left + (currentTime / duration) * graphWidth;
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([4, 4]);
+                ctx.beginPath();
+                ctx.moveTo(cursorX, padding.top);
+                ctx.lineTo(cursorX, height - padding.bottom);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+            }, [data, maxY, minY, color, currentTime, duration, title, unit]);
+
+            return (
+                <canvas
+                    ref={canvasRef}
+                    className="rounded-lg w-full"
+                    style={{ height: '160px', boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.5)' }}
+                />
+            );
+        };
+
+        // ===== MOTION TYPE SELECTOR =====
+        const MotionTypeSelector = ({ selected, onSelect }) => {
+            return (
+                <div className="flex flex-wrap gap-3 justify-center">
+                    {Object.entries(MOTION_CONFIG).map(([key, config]) => (
+                        <button
+                            key={key}
+                            onClick={() => onSelect(key)}
+                            className={`px-5 py-3 rounded-xl font-medium transition-all flex items-center gap-2 ${
+                                selected === key
+                                    ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                                    : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500 hover:text-slate-300'
+                            }`}
+                        >
+                            <span className="text-xl">{config.icon}</span>
+                            <span>{config.name}</span>
+                        </button>
+                    ))}
+                </div>
+            );
+        };
+
+        // ===== COMPARISON GRAPH (smaller, for 2x2 grid) =====
+        const ComparisonGraph = ({ title, subtitle, unit, config, graphType, color }) => {
+            const canvasRef = useRef(null);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+
+                const width = rect.width;
+                const height = rect.height;
+                const padding = { top: 35, right: 15, bottom: 35, left: 50 };
+                const graphWidth = width - padding.left - padding.right;
+                const graphHeight = height - padding.top - padding.bottom;
+
+                // Get min/max based on graph type
+                let minY, maxY, getValue;
+                if (graphType === 's') {
+                    minY = config.minS;
+                    maxY = config.maxS;
+                    getValue = (t) => config.getPosition(t, config.v0, config.a);
+                } else if (graphType === 'v') {
+                    minY = config.minV;
+                    maxY = config.maxV;
+                    getValue = (t) => config.getVelocity(t, config.v0, config.a);
+                } else {
+                    minY = config.minA;
+                    maxY = config.maxA;
+                    getValue = (t) => config.getAcceleration(t, config.v0, config.a);
+                }
+
+                const range = maxY - minY;
+                const duration = config.duration;
+
+                // Clear
+                ctx.fillStyle = '#0a0f1a';
+                ctx.fillRect(0, 0, width, height);
+
+                // Grid
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                ctx.lineWidth = 1;
+
+                for (let t = 0; t <= duration; t += 1) {
+                    const x = padding.left + (t / duration) * graphWidth;
+                    ctx.beginPath();
+                    ctx.moveTo(x, padding.top);
+                    ctx.lineTo(x, height - padding.bottom);
+                    ctx.stroke();
+                }
+
+                const step = range / 4;
+                for (let i = 0; i <= 4; i++) {
+                    const y = height - padding.bottom - (i / 4) * graphHeight;
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, y);
+                    ctx.lineTo(width - padding.right, y);
+                    ctx.stroke();
+                }
+
+                // Zero line
+                if (minY < 0 && maxY > 0) {
+                    const zeroY = height - padding.bottom - ((0 - minY) / range) * graphHeight;
+                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, zeroY);
+                    ctx.lineTo(width - padding.right, zeroY);
+                    ctx.stroke();
+                }
+
+                // Axes
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(padding.left, padding.top);
+                ctx.lineTo(padding.left, height - padding.bottom);
+                ctx.lineTo(width - padding.right, height - padding.bottom);
+                ctx.stroke();
+
+                // Labels
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '11px monospace';
+                ctx.textAlign = 'center';
+
+                for (let t = 0; t <= duration; t += 1) {
+                    const x = padding.left + (t / duration) * graphWidth;
+                    ctx.fillText(`${t}`, x, height - padding.bottom + 14);
+                }
+                ctx.fillText('t (s)', padding.left + graphWidth / 2, height - 5);
+
+                ctx.textAlign = 'right';
+                for (let i = 0; i <= 4; i++) {
+                    const value = minY + i * step;
+                    const y = height - padding.bottom - (i / 4) * graphHeight;
+                    ctx.fillText(value.toFixed(1).replace('.', ','), padding.left - 8, y + 4);
+                }
+
+                // Title
+                ctx.textAlign = 'center';
+                ctx.fillStyle = color;
+                ctx.font = 'bold 13px sans-serif';
+                ctx.fillText(title, width / 2, 16);
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '11px sans-serif';
+                ctx.fillText(subtitle, width / 2, 28);
+
+                // Draw the complete curve
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 2.5;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = color;
+
+                ctx.beginPath();
+                const numPoints = 100;
+                for (let i = 0; i <= numPoints; i++) {
+                    const t = (i / numPoints) * duration;
+                    const value = getValue(t);
+                    const x = padding.left + (t / duration) * graphWidth;
+                    const y = height - padding.bottom - ((value - minY) / range) * graphHeight;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+
+            }, [config, graphType, color, title, subtitle, unit]);
+
+            return (
+                <canvas
+                    ref={canvasRef}
+                    className="rounded-lg w-full"
+                    style={{ height: '180px', boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.5)' }}
+                />
+            );
+        };
+
+        // ===== COMPARISON VIEW =====
+        const ComparisonView = ({ graphType, onGraphTypeChange }) => {
+            const graphTypes = [
+                { key: 's', label: 's-t', fullName: 'Läge-tid', unit: 'm', color: '#38bdf8' },
+                { key: 'v', label: 'v-t', fullName: 'Hastighet-tid', unit: 'm/s', color: '#22c55e' },
+                { key: 'a', label: 'a-t', fullName: 'Acceleration-tid', unit: 'm/s²', color: '#f97316' }
+            ];
+
+            const currentGraph = graphTypes.find(g => g.key === graphType);
+            const motionTypes = Object.entries(MOTION_CONFIG);
+
+            return (
+                <div className="space-y-6">
+                    {/* Graph type selector */}
+                    <div className="flex flex-wrap justify-center gap-3">
+                        {graphTypes.map(({ key, label, fullName, color }) => (
+                            <button
+                                key={key}
+                                onClick={() => onGraphTypeChange(key)}
+                                className={`px-6 py-3 rounded-xl font-medium transition-all flex flex-col items-center ${
+                                    graphType === key
+                                        ? 'text-white border-2 btn-glow'
+                                        : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                                }`}
+                                style={graphType === key ? {
+                                    backgroundColor: `${color}30`,
+                                    borderColor: color,
+                                    color: color
+                                } : {}}
+                            >
+                                <span>{fullName}-diagram</span>
+                                <span className="text-xs opacity-70">({label}-diagram)</span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* 2x2 grid of graphs */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {motionTypes.map(([key, config]) => (
+                            <div key={key} className="glass-card p-3 rounded-xl">
+                                <ComparisonGraph
+                                    title={`${config.icon} ${config.name}`}
+                                    subtitle={`${currentGraph.label} (${currentGraph.unit})`}
+                                    unit={currentGraph.unit}
+                                    config={config}
+                                    graphType={graphType}
+                                    color={currentGraph.color}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Explanation */}
+                    <div className="glass-card p-4 rounded-xl">
+                        <h3 className="font-semibold text-slate-200 mb-2">Jämförelse av {currentGraph.fullName}-diagram ({currentGraph.label})</h3>
+                        <p className="text-sm text-slate-400">
+                            {graphType === 's' && 'Konstant hastighet ger en rät linje. Acceleration ger en kurva (parabel). Vid inbromsning planar kurvan ut när objektet stannar.'}
+                            {graphType === 'v' && 'Konstant hastighet ger en horisontell linje. Konstant acceleration ger en rät linje med lutning. Negativ lutning = retardation.'}
+                            {graphType === 'a' && 'Konstant hastighet har acceleration = 0. Acceleration och inbromsning har konstant (positiv resp. negativ) acceleration. Tyngdaccelerationen är alltid -10 m/s².'}
+                        </p>
+                    </div>
+                </div>
+            );
+        };
+
+        // ===== DATA DISPLAY =====
+        const DataDisplay = ({ label, value, unit, color }) => (
+            <div className="glass-card-light p-3 rounded-lg text-center">
+                <div className="text-xs text-slate-500 mb-1">{label}</div>
+                <div className="font-mono text-lg" style={{ color }}>
+                    {value.toFixed(2).replace('.', ',')} {unit}
+                </div>
+            </div>
+        );
+
+        // ===== MAIN APP =====
+        const App = () => {
+            const [viewMode, setViewMode] = useState('simulation'); // 'simulation' or 'comparison'
+            const [comparisonGraphType, setComparisonGraphType] = useState('s');
+            const [motionType, setMotionType] = useState(MOTION_TYPES.CONSTANT_VELOCITY);
+            const [isPlaying, setIsPlaying] = useState(false);
+            const [progress, setProgress] = useState(0);
+            const [sData, setSData] = useState([]);
+            const [vData, setVData] = useState([]);
+            const [aData, setAData] = useState([]);
+            const animationRef = useRef(null);
+            const startTimeRef = useRef(null);
+
+            const config = MOTION_CONFIG[motionType];
+            const currentTime = progress * config.duration;
+            const currentS = config.getPosition(currentTime, config.v0, config.a);
+            const currentV = config.getVelocity(currentTime, config.v0, config.a);
+            const currentA = config.getAcceleration(currentTime, config.v0, config.a);
+
+            const handleReset = useCallback(() => {
+                setIsPlaying(false);
+                setProgress(0);
+                setSData([]);
+                setVData([]);
+                setAData([]);
+                if (animationRef.current) {
+                    cancelAnimationFrame(animationRef.current);
+                }
+                startTimeRef.current = null;
+            }, []);
+
+            const handleMotionTypeChange = useCallback((type) => {
+                handleReset();
+                setMotionType(type);
+            }, [handleReset]);
+
+            const handlePlayPause = useCallback(() => {
+                if (progress >= 1) {
+                    handleReset();
+                    setIsPlaying(true);
+                    return;
+                }
+                setIsPlaying(prev => !prev);
+            }, [progress, handleReset]);
+
+            const handleSliderChange = useCallback((e) => {
+                const newProgress = parseFloat(e.target.value);
+                setIsPlaying(false);
+                setProgress(newProgress);
+                startTimeRef.current = null;
+
+                // Regenerera grafdata fram till den nya tidpunkten
+                const newTime = newProgress * config.duration;
+
+                if (newTime <= 0) {
+                    setSData([]);
+                    setVData([]);
+                    setAData([]);
+                    return;
+                }
+
+                const numPoints = Math.max(1, Math.ceil(newTime * 30)); // ~30 punkter per sekund
+                const newSData = [];
+                const newVData = [];
+                const newAData = [];
+
+                for (let i = 0; i <= numPoints; i++) {
+                    const t = (i / numPoints) * newTime;
+                    newSData.push({ t, value: config.getPosition(t, config.v0, config.a) });
+                    newVData.push({ t, value: config.getVelocity(t, config.v0, config.a) });
+                    newAData.push({ t, value: config.getAcceleration(t, config.v0, config.a) });
+                }
+
+                setSData(newSData);
+                setVData(newVData);
+                setAData(newAData);
+            }, [config]);
+
+            useEffect(() => {
+                if (!isPlaying) {
+                    if (animationRef.current) {
+                        cancelAnimationFrame(animationRef.current);
+                    }
+                    return;
+                }
+
+                const animate = (timestamp) => {
+                    if (!startTimeRef.current) {
+                        startTimeRef.current = timestamp - progress * config.duration * 1000;
+                    }
+
+                    const elapsed = (timestamp - startTimeRef.current) / 1000;
+                    const newProgress = Math.min(elapsed / config.duration, 1);
+
+                    setProgress(newProgress);
+
+                    const t = newProgress * config.duration;
+                    const s = config.getPosition(t, config.v0, config.a);
+                    const v = config.getVelocity(t, config.v0, config.a);
+                    const a = config.getAcceleration(t, config.v0, config.a);
+
+                    setSData(prev => [...prev.filter(p => p.t < t - 0.01), { t, value: s }]);
+                    setVData(prev => [...prev.filter(p => p.t < t - 0.01), { t, value: v }]);
+                    setAData(prev => [...prev.filter(p => p.t < t - 0.01), { t, value: a }]);
+
+                    if (newProgress < 1) {
+                        animationRef.current = requestAnimationFrame(animate);
+                    } else {
+                        setIsPlaying(false);
+                    }
+                };
+
+                animationRef.current = requestAnimationFrame(animate);
+
+                return () => {
+                    if (animationRef.current) {
+                        cancelAnimationFrame(animationRef.current);
+                    }
+                };
+            }, [isPlaying, config, progress]);
+
+            // Reset data when motion type changes
+            useEffect(() => {
+                handleReset();
+            }, [motionType, handleReset]);
+
+            return (
+                <div className="min-h-screen flex flex-col items-center py-8 px-4 gap-6 max-w-7xl mx-auto">
+
+                    {/* Header */}
+                    <header className="text-center space-y-3">
+                        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text">
+                            Rörelsediagram
+                        </h1>
+                        <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                            Utforska sambandet mellan position, hastighet och acceleration.
+                            Se hur graferna ritas upp i realtid medan rörelsen visualiseras.
+                        </p>
+                    </header>
+
+                    {/* View Mode Toggle */}
+                    <div className="flex gap-2 p-1 bg-slate-800/50 rounded-xl">
+                        <button
+                            onClick={() => setViewMode('simulation')}
+                            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+                                viewMode === 'simulation'
+                                    ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/30'
+                                    : 'text-slate-400 hover:text-slate-200'
+                            }`}
+                        >
+                            Simulering
+                        </button>
+                        <button
+                            onClick={() => setViewMode('comparison')}
+                            className={`px-6 py-2 rounded-lg font-medium transition-all ${
+                                viewMode === 'comparison'
+                                    ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/30'
+                                    : 'text-slate-400 hover:text-slate-200'
+                            }`}
+                        >
+                            Jämför diagram
+                        </button>
+                    </div>
+
+                    {viewMode === 'comparison' ? (
+                        <ComparisonView
+                            graphType={comparisonGraphType}
+                            onGraphTypeChange={setComparisonGraphType}
+                        />
+                    ) : (
+                    <>
+                    {/* Motion Type Selector */}
+                    <MotionTypeSelector selected={motionType} onSelect={handleMotionTypeChange} />
+
+                    {/* Motion Description */}
+                    <div className="glass-card-light px-6 py-3 rounded-xl text-center max-w-xl">
+                        <p className="text-slate-300">
+                            <span className="text-2xl mr-2">{config.icon}</span>
+                            {config.description}
+                        </p>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                        {/* Left: Visualization and Controls */}
+                        <div className="flex flex-col gap-4">
+                            <div className="glass-card p-4 rounded-2xl">
+                                <h2 className="text-lg font-semibold text-slate-300 mb-3 flex items-center gap-2">
+                                    <span className="text-cyan-400">▶</span> Visualisering
+                                </h2>
+                                <MotionVisualization
+                                    motionType={motionType}
+                                    progress={progress}
+                                    config={config}
+                                />
+                            </div>
+
+                            {/* Controls */}
+                            <div className="glass-card p-4 rounded-2xl">
+                                <div className="flex items-center justify-center gap-4">
+                                    <button
+                                        onClick={handlePlayPause}
+                                        className="flex items-center gap-2 px-8 py-3 rounded-xl font-bold text-white transition-all bg-gradient-to-r from-cyan-500 to-blue-600 btn-glow hover:scale-105 active:scale-95"
+                                    >
+                                        {isPlaying ? <PauseIcon size={24} /> : <PlayIcon size={24} />}
+                                        {isPlaying ? 'Pausa' : (progress >= 1 ? 'Spela igen' : 'Starta')}
+                                    </button>
+                                    <button
+                                        onClick={handleReset}
+                                        className="flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-slate-300 bg-slate-700/50 border border-slate-600 hover:bg-slate-600/50 transition-all"
+                                    >
+                                        <ResetIcon size={20} />
+                                        Återställ
+                                    </button>
+                                </div>
+
+                                {/* Time slider */}
+                                <div className="mt-4">
+                                    <div className="flex justify-between text-sm text-slate-500 mb-2">
+                                        <span>t = {currentTime.toFixed(1).replace('.', ',')} s</span>
+                                        <span>{config.duration},0 s</span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        step="0.005"
+                                        value={progress}
+                                        onChange={handleSliderChange}
+                                        className="w-full h-2 rounded-full cursor-pointer time-slider"
+                                        style={{ '--progress': `${progress * 100}%` }}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Current Values */}
+                            <div className="glass-card p-4 rounded-2xl">
+                                <h2 className="text-lg font-semibold text-slate-300 mb-3">Aktuella värden</h2>
+                                <div className="grid grid-cols-3 gap-3">
+                                    <DataDisplay label="Position (s)" value={currentS} unit="m" color="#38bdf8" />
+                                    <DataDisplay label="Hastighet (v)" value={currentV} unit="m/s" color="#22c55e" />
+                                    <DataDisplay label="Acceleration (a)" value={currentA} unit="m/s²" color="#f97316" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Right: Graphs */}
+                        <div className="flex flex-col gap-3">
+                            <div className="glass-card p-3 rounded-xl">
+                                <Graph
+                                    title="s-t"
+                                    unit="m"
+                                    data={sData}
+                                    maxY={config.maxS}
+                                    minY={config.minS}
+                                    color="#38bdf8"
+                                    currentTime={currentTime}
+                                    duration={config.duration}
+                                />
+                            </div>
+                            <div className="glass-card p-3 rounded-xl">
+                                <Graph
+                                    title="v-t"
+                                    unit="m/s"
+                                    data={vData}
+                                    maxY={config.maxV}
+                                    minY={config.minV}
+                                    color="#22c55e"
+                                    currentTime={currentTime}
+                                    duration={config.duration}
+                                />
+                            </div>
+                            <div className="glass-card p-3 rounded-xl">
+                                <Graph
+                                    title="a-t"
+                                    unit="m/s²"
+                                    data={aData}
+                                    maxY={config.maxA}
+                                    minY={config.minA}
+                                    color="#f97316"
+                                    currentTime={currentTime}
+                                    duration={config.duration}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Info Section */}
+                    <div className="w-full glass-card p-6 rounded-2xl mt-4">
+                        <h2 className="text-xl font-bold text-slate-200 mb-4">Så tolkar du diagrammen</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="space-y-2">
+                                <h3 className="font-semibold text-cyan-400 flex items-center gap-2">
+                                    <span className="w-3 h-3 rounded-full bg-cyan-400"></span>
+                                    s-t-diagram (position-tid)
+                                </h3>
+                                <p className="text-sm text-slate-400">
+                                    Visar hur positionen förändras över tid. Lutningen (tangentens riktningskoefficient)
+                                    anger hastigheten vid varje tidpunkt.
+                                </p>
+                            </div>
+                            <div className="space-y-2">
+                                <h3 className="font-semibold text-green-400 flex items-center gap-2">
+                                    <span className="w-3 h-3 rounded-full bg-green-400"></span>
+                                    v-t-diagram (hastighet-tid)
+                                </h3>
+                                <p className="text-sm text-slate-400">
+                                    Visar hur hastigheten förändras över tid. Lutningen anger accelerationen.
+                                    Arean under kurvan ger sträckan som tillryggalagts.
+                                </p>
+                            </div>
+                            <div className="space-y-2">
+                                <h3 className="font-semibold text-orange-400 flex items-center gap-2">
+                                    <span className="w-3 h-3 rounded-full bg-orange-400"></span>
+                                    a-t-diagram (acceleration-tid)
+                                </h3>
+                                <p className="text-sm text-slate-400">
+                                    Visar hur accelerationen förändras över tid. Arean under kurvan ger
+                                    förändringen i hastighet.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    </>
+                    )}
+
+                </div>
+            );
+        };
+
+        // ===== RENDER APP =====
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

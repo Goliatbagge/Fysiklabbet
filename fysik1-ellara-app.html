@@ -9,8 +9,68 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+        }
+        .electron-glow {
+            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
+        }
+        .wire-glow {
+            filter: drop-shadow(0 0 3px rgba(56, 189, 248, 0.4));
+        }
+        .bulb-glow {
+            filter: drop-shadow(0 0 15px rgba(250, 204, 21, 0.6));
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, #0ea5e9 0%, #0ea5e9 var(--progress, 50%), #1e293b var(--progress, 50%), #1e293b 100%);
+            border-radius: 8px;
+            height: 8px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+    </style>
 </head>
-<body class="bg-gray-900">
+<body class="bg-slate-950">
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -25,7 +85,9 @@
         </div>
     </nav>
 
-    <div id="root"></div>
+    <main class="dark-container min-h-screen">
+        <div id="root"></div>
+    </main>
 
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
@@ -40,8 +102,8 @@
         const TOP_WIRE_END = 300;
         const RIGHT_WIRE_END = 500;
         const BOTTOM_WIRE_END = 800;
-        const NUM_ELECTRONS = 50;
-        const NUM_ARROWS = 15;
+        const NUM_ELECTRONS = 40;
+        const NUM_ARROWS = 12;
         const AC_AMPLITUDE_FACTOR = 10;
         const ANIMATION_SPEED_FACTOR = 0.8;
 
@@ -59,7 +121,7 @@
           }
         };
 
-        const CircuitDiagram = ({ circuitType, showElectrons, showCurrentDirection, currentStrength, acFrequency, isPaused }) => {
+        const CircuitDiagram = ({ circuitType, showElectrons, showCurrentDirection, currentStrength, acFrequency, isPaused, isBulbBroken }) => {
           const [electrons, setElectrons] = useState([]);
           const [arrows, setArrows] = useState([]);
           const animationFrameId = useRef(null);
@@ -67,6 +129,7 @@
           const dcArrowPositionOffset = useRef(0);
           const currentStrengthRef = useRef(currentStrength);
           const isPausedRef = useRef(isPaused);
+          const isBulbBrokenRef = useRef(isBulbBroken);
           const animateRef = useRef(null);
 
           useEffect(() => {
@@ -79,6 +142,10 @@
                 animationFrameId.current = requestAnimationFrame(animateRef.current);
             }
           }, [isPaused]);
+
+          useEffect(() => {
+            isBulbBrokenRef.current = isBulbBroken;
+          }, [isBulbBroken]);
 
           useEffect(() => {
             const initialElectrons = [];
@@ -108,7 +175,8 @@
                 return;
               }
 
-              if (circuitType === CircuitType.DC) {
+              // Stop animation if bulb is broken
+              if (circuitType === CircuitType.DC && !isBulbBrokenRef.current) {
                 const animationStep = currentStrengthRef.current * ANIMATION_SPEED_FACTOR;
                 dcPositionOffset.current = (dcPositionOffset.current - animationStep) % PATH_LENGTH;
                 dcArrowPositionOffset.current = (dcArrowPositionOffset.current + animationStep) % PATH_LENGTH;
@@ -134,43 +202,142 @@
 
           const acAnimationFrequencyFactor = (2 * Math.PI * acFrequency) / 1000;
 
+          // Swedish standard symbol: circle with X
           const Bulb = () => {
-            const glowOpacity = Math.max(0, Math.min(0.1 + currentStrength / 8, 1));
-            const glowBlur = 3 + currentStrength * 2.5;
+            const glowIntensity = isBulbBroken ? 0 : Math.max(0, Math.min(currentStrength / 2, 1));
+            const glowColor = isBulbBroken ? '#64748b' : (glowIntensity > 0.1 ? '#fbbf24' : '#38bdf8');
+
+            if (isBulbBroken) {
+              return (
+                <g>
+                  {/* Smoke/burnt effect */}
+                  <ellipse cx="350" cy="130" rx="12" ry="20" fill="#475569" opacity="0.3" style={{ filter: 'blur(8px)' }} />
+                  {/* Broken circle with cracks */}
+                  <circle
+                    cx="350" cy="150" r="18"
+                    fill="none"
+                    stroke="#64748b"
+                    strokeWidth="2.5"
+                    strokeDasharray="8 4"
+                  />
+                  {/* Broken X - jagged lines */}
+                  <path
+                    d="M 337 137 L 348 148 M 352 152 L 363 163"
+                    stroke="#64748b"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M 363 137 L 352 148 M 348 152 L 337 163"
+                    stroke="#64748b"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  {/* Crack lines */}
+                  <path
+                    d="M 340 135 L 344 142 L 338 148"
+                    stroke="#ef4444"
+                    strokeWidth="1.5"
+                    fill="none"
+                    opacity="0.7"
+                  />
+                  <path
+                    d="M 360 155 L 364 160 L 358 166"
+                    stroke="#ef4444"
+                    strokeWidth="1.5"
+                    fill="none"
+                    opacity="0.7"
+                  />
+                  {/* Burnt spot */}
+                  <circle cx="350" cy="150" r="6" fill="#1e293b" opacity="0.5" />
+                </g>
+              );
+            }
 
             return (
-              <>
-                <circle cx="350" cy="150" r="20" fill="none" stroke="#a78bfa" strokeWidth="2" />
-                <line x1="340" y1="140" x2="360" y2="160" stroke="#a78bfa" strokeWidth="2" />
-                <line x1="340" y1="160" x2="360" y2="140" stroke="#a78bfa" strokeWidth="2" />
-                <circle cx="350" cy="150" r="25" fill="#facc15" className="transition-all duration-300" style={{ opacity: glowOpacity, filter: `blur(${glowBlur}px)` }} />
-              </>
+              <g>
+                {/* Outer glow when lit */}
+                <circle
+                  cx="350" cy="150" r="28"
+                  fill="#fef08a"
+                  style={{ opacity: glowIntensity * 0.4, filter: 'blur(10px)' }}
+                />
+                {/* Circle */}
+                <circle
+                  cx="350" cy="150" r="18"
+                  fill="none"
+                  stroke={glowColor}
+                  strokeWidth="2.5"
+                  style={{ filter: glowIntensity > 0.3 ? 'drop-shadow(0 0 8px rgba(251, 191, 36, 0.6))' : 'none' }}
+                />
+                {/* X inside - diagonal lines */}
+                <line
+                  x1="337" y1="137" x2="363" y2="163"
+                  stroke={glowColor}
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                />
+                <line
+                  x1="363" y1="137" x2="337" y2="163"
+                  stroke={glowColor}
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                />
+              </g>
             );
           };
 
+          // Swedish standard symbol: horizontal lines perpendicular to wire (long = +, short = -)
           const PowerSource = () => {
               if (circuitType === CircuitType.DC) {
                   return (
                       <g>
-                          <rect x="48" y="135" width="4" height="30" fill="#1f2937" />
-                          <line x1="35" y1="135" x2="65" y2="135" stroke="#a78bfa" strokeWidth="2" />
-                          <line x1="42" y1="165" x2="58" y2="165" stroke="#a78bfa" strokeWidth="2" />
-                           <text x="70" y="138" fill="#f9fafb" fontSize="12px">+</text>
-                           <text x="70" y="168" fill="#f9fafb" fontSize="12px">-</text>
+                          {/* Gap in wire - cover the wire between terminals */}
+                          <line x1="50" y1="135" x2="50" y2="165" stroke="#050510" strokeWidth="8" />
+                          {/* Long horizontal line (positive terminal) - top */}
+                          <line
+                            x1="30" y1="140" x2="70" y2="140"
+                            stroke="#38bdf8"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                          />
+                          {/* Short horizontal line (negative terminal) - bottom */}
+                          <line
+                            x1="38" y1="160" x2="62" y2="160"
+                            stroke="#38bdf8"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                          />
+                          {/* Plus label */}
+                          <text x="75" y="144" fill="#22c55e" fontSize="12px" fontWeight="bold">+</text>
+                          {/* Minus label */}
+                          <text x="66" y="164" fill="#ef4444" fontSize="12px" fontWeight="bold">−</text>
                       </g>
                   );
               } else {
+                  // AC source: circles at terminals with tilde between
                   return (
                       <g>
-                          <rect x="48" y="130" width="4" height="40" fill="#1f2937" />
-                          <circle cx="50" cy="135" r="3" fill="#a78bfa" />
-                          <circle cx="50" cy="165" r="3" fill="#a78bfa" />
-                          <path d="M 50 140 C 60 145, 40 155, 50 160" stroke="#f9fafb" fill="none" strokeWidth="1.5" />
+                          {/* Gap in wire */}
+                          <line x1="50" y1="120" x2="50" y2="180" stroke="#050510" strokeWidth="8" />
+                          {/* Top terminal circle */}
+                          <circle cx="50" cy="125" r="5" fill="none" stroke="#38bdf8" strokeWidth="2" />
+                          {/* Bottom terminal circle */}
+                          <circle cx="50" cy="175" r="5" fill="none" stroke="#38bdf8" strokeWidth="2" />
+                          {/* Tilde - horizontal ~ */}
+                          <path
+                            d="M 35 150 Q 42 138, 50 150 Q 58 162, 65 150"
+                            stroke="#38bdf8"
+                            fill="none"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                          />
                       </g>
                   )
               }
           };
 
+          // Current direction arrows
           const ArrowShapes = () => (
             <>
               {arrows.map(arrow => {
@@ -182,8 +349,9 @@
 
                   const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
 
-                  if (normalizedPos > 885 && normalizedPos < 915) return null;
-                  if (normalizedPos > 380 && normalizedPos < 420) return null;
+                  // Skip arrows near battery and bulb
+                  if (normalizedPos > 870 && normalizedPos < 930) return null;
+                  if (normalizedPos > 370 && normalizedPos < 430) return null;
 
                   const { x, y } = getCoordsOnPath(normalizedPos);
                   const { x: x2, y: y2 } = getCoordsOnPath(normalizedPos + 1);
@@ -199,68 +367,114 @@
                   return (
                     <path
                       key={`arrow-${arrow.id}`}
-                      d="M-5 -4 L5 0 L-5 4 Z"
-                      fill="#a78bfa"
+                      d="M-6 -4 L6 0 L-6 4 Z"
+                      fill="#38bdf8"
+                      opacity="0.95"
                       transform={`translate(${x} ${y}) rotate(${angle})`}
+                      style={{ filter: 'drop-shadow(0 0 4px rgba(56, 189, 248, 0.6))' }}
                     />
                   );
               })}
             </>
           );
 
-          const ElectronDots = () => (
+          // Glowing cyan electrons
+          const ElectronDots = () => {
+            return (
             <>
+              {/* Glow filter definition */}
+              <defs>
+                <filter id="electronGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="2" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
               {electrons.map(electron => {
-                  const acAmplitude = currentStrength * AC_AMPLITUDE_FACTOR;
-                  const posValue = electron.basePosition + (circuitType === CircuitType.AC
-                    ? acAmplitude * Math.sin(performance.now() * acAnimationFrequencyFactor)
-                    : dcPositionOffset.current
+                  // Freeze electrons when bulb is broken
+                  const acAmplitude = isBulbBroken ? 0 : currentStrength * AC_AMPLITUDE_FACTOR;
+                  const posValue = electron.basePosition + (isBulbBroken
+                    ? 0
+                    : (circuitType === CircuitType.AC
+                      ? acAmplitude * Math.sin(performance.now() * acAnimationFrequencyFactor)
+                      : dcPositionOffset.current)
                   );
 
                   const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
 
-                  if (normalizedPos > 885 && normalizedPos < 915) return null;
-                  if (normalizedPos > 380 && normalizedPos < 420) return null;
+                  // Skip electrons near battery and bulb
+                  if (normalizedPos > 870 && normalizedPos < 930) return null;
+                  if (normalizedPos > 370 && normalizedPos < 430) return null;
 
                   const { x, y } = getCoordsOnPath(normalizedPos);
                   return (
-                    <g key={electron.id}>
-                      <circle cx={x} cy={y} r="4" fill="#facc15" />
+                    <g key={electron.id} filter="url(#electronGlow)">
+                      {/* Outer glow */}
+                      <circle cx={x} cy={y} r="6" fill="#38bdf8" opacity="0.3" />
+                      {/* Main electron */}
+                      <circle cx={x} cy={y} r="4" fill="#38bdf8" />
+                      {/* Inner highlight */}
+                      <circle cx={x - 1} cy={y - 1} r="1.5" fill="#7dd3fc" opacity="0.8" />
+                      {/* Minus sign */}
                       <text
                         x={x}
                         y={y}
                         textAnchor="middle"
                         dominantBaseline="central"
-                        fill="#1f2937"
+                        fill="#0c4a6e"
                         fontSize="6px"
                         fontWeight="bold"
                       >
-                        -
+                        −
                       </text>
                     </g>
                   );
               })}
             </>
           );
+          };
 
           return (
-            <div className="w-full max-w-2xl p-4 bg-gray-800 rounded-lg shadow-2xl border border-gray-700">
+            <div className="glass-card rounded-2xl p-6 w-full max-w-2xl">
+              <h3 className="text-lg font-semibold text-slate-300 mb-4 flex items-center gap-2">
+                <span className="text-cyan-400">⚡</span> Kopplingsschema
+              </h3>
               <svg viewBox="0 0 400 300" className="w-full h-auto">
+                {/* Background */}
+                <rect x="0" y="0" width="400" height="300" fill="#050510" rx="8" />
+
+                {/* Wire path with glow */}
                 <path
                   d="M 50 50 H 350 V 250 H 50 Z"
                   fill="none"
-                  stroke="#4f46e5"
+                  stroke="#0ea5e9"
                   strokeWidth="4"
+                  strokeLinecap="round"
+                  className="wire-glow"
+                  opacity="0.8"
+                />
+
+                {/* Brighter wire overlay */}
+                <path
+                  d="M 50 50 H 350 V 250 H 50 Z"
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="2"
                   strokeLinecap="round"
                 />
 
+                {/* Current direction arrows - hidden when bulb is broken */}
                 <g>
-                    {showCurrentDirection && <ArrowShapes />}
+                    {showCurrentDirection && !isBulbBroken && <ArrowShapes />}
                 </g>
 
+                {/* Components */}
                 <PowerSource />
                 <Bulb />
 
+                {/* Electrons - still visible but frozen when bulb is broken */}
                 <g>
                     {showElectrons && <ElectronDots/>}
                 </g>
@@ -271,188 +485,209 @@
 
         const App = () => {
           const [circuitType, setCircuitType] = useState(CircuitType.DC);
-          const [displayMode, setDisplayMode] = useState('current');
+          const [displayMode, setDisplayMode] = useState('electrons');
           const [voltage, setVoltage] = useState(12);
           const [resistance, setResistance] = useState(10);
           const [frequency, setFrequency] = useState(1.0);
           const [isPaused, setIsPaused] = useState(false);
-
-          const handleCircuitTypeChange = (event) => {
-            setCircuitType(event.target.value);
-          };
-
-          const handleDisplayModeChange = (event) => {
-            setDisplayMode(event.target.value);
-          };
-
-          const handleVoltageChange = (event) => {
-            const value = parseFloat(event.target.value);
-            if (!isNaN(value)) {
-              setVoltage(value);
-            }
-          };
-
-          const handleResistanceChange = (event) => {
-            const value = parseFloat(event.target.value);
-            if (!isNaN(value)) {
-              setResistance(value);
-            }
-          };
-
-          const handleFrequencyChange = (event) => {
-            const value = parseFloat(event.target.value);
-            if (!isNaN(value)) {
-              setFrequency(value);
-            }
-          };
-
-          const handlePauseToggle = () => {
-            setIsPaused(prev => !prev);
-          };
+          const [isBulbBroken, setIsBulbBroken] = useState(false);
 
           const current = voltage / resistance;
 
+          // Break the bulb when current reaches 24 A
+          useEffect(() => {
+            if (current >= 24 && !isBulbBroken) {
+              setIsBulbBroken(true);
+            }
+          }, [current, isBulbBroken]);
+
+          const handleReplaceBulb = () => {
+            setIsBulbBroken(false);
+          };
+
+          const handleSliderStyle = (value, min, max) => {
+            const progress = ((value - min) / (max - min)) * 100;
+            return { '--progress': `${progress}%` };
+          };
+
           return (
-            <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-4 font-sans">
-              <div className="w-full max-w-3xl mx-auto flex flex-col items-center gap-8">
-                <header className="text-center">
-                  <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
-                    Interaktiv kretssimulator
-                  </h1>
-                  <p className="mt-2 text-lg text-gray-400">
-                    Observera elektronflödet i likströms- och växelströmskretsar.
-                  </p>
-                </header>
+            <div className="min-h-screen flex flex-col items-center py-8 px-4 gap-6 max-w-5xl mx-auto">
 
-                <main className="w-full flex flex-col items-center gap-6">
-                  <div className="w-full max-w-2xl flex flex-col items-center gap-4 p-4 bg-gray-800 border border-gray-700 rounded-lg">
-                    <div className="flex flex-wrap items-start justify-center gap-x-6 gap-y-4">
-                      <fieldset className="flex items-center justify-center gap-4 p-2 border border-gray-600 rounded-lg">
-                        <legend className="px-2 text-sm text-gray-400">Kretstyp</legend>
-                        <label className="flex items-center gap-2 cursor-pointer">
-                          <input
-                            type="radio"
-                            name="circuitType"
-                            value={CircuitType.DC}
-                            checked={circuitType === CircuitType.DC}
-                            onChange={handleCircuitTypeChange}
-                            className="form-radio h-4 w-4 text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500"
-                          />
-                          <span className={circuitType === CircuitType.DC ? 'text-purple-400 font-semibold' : 'text-gray-300'}>
-                            Likström (DC)
-                          </span>
-                        </label>
-                        <label className="flex items-center gap-2 cursor-pointer">
-                          <input
-                            type="radio"
-                            name="circuitType"
-                            value={CircuitType.AC}
-                            checked={circuitType === CircuitType.AC}
-                            onChange={handleCircuitTypeChange}
-                            className="form-radio h-4 w-4 text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500"
-                          />
-                          <span className={circuitType === CircuitType.AC ? 'text-purple-400 font-semibold' : 'text-gray-300'}>
-                            Växelström (AC)
-                          </span>
-                        </label>
-                      </fieldset>
+              {/* Header */}
+              <header className="text-center space-y-3">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text">
+                  Elektriska kretsar
+                </h1>
+                <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                  Utforska hur elektroner och ström flödar i likströms- och växelströmskretsar.
+                </p>
+              </header>
 
-                      <fieldset className="flex items-center justify-center gap-4 p-2 border border-gray-600 rounded-lg">
-                        <legend className="px-2 text-sm text-gray-400">Visningsläge</legend>
-                        <label className="flex items-center gap-2 cursor-pointer">
-                          <input
-                            type="radio"
-                            name="displayMode"
-                            value="electrons"
-                            checked={displayMode === 'electrons'}
-                            onChange={handleDisplayModeChange}
-                            className="form-radio h-4 w-4 text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500"
-                          />
-                          <span className={displayMode === 'electrons' ? 'text-purple-400 font-semibold' : 'text-gray-300'}>
-                            Elektroner
-                          </span>
-                        </label>
-                        <label className="flex items-center gap-2 cursor-pointer">
-                          <input
-                            type="radio"
-                            name="displayMode"
-                            value="current"
-                            checked={displayMode === 'current'}
-                            onChange={handleDisplayModeChange}
-                            className="form-radio h-4 w-4 text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500"
-                          />
-                          <span className={displayMode === 'current' ? 'text-purple-400 font-semibold' : 'text-gray-300'}>
-                            Strömriktning
-                          </span>
-                        </label>
-                      </fieldset>
+              {/* Main content */}
+              <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                {/* Left: Controls */}
+                <div className="flex flex-col gap-4">
+
+                  {/* Circuit Type */}
+                  <div className="glass-card p-4 rounded-xl">
+                    <h3 className="text-sm font-medium text-slate-400 mb-3">Kretstyp</h3>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setCircuitType(CircuitType.DC)}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
+                          circuitType === CircuitType.DC
+                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        ⎓ Likström (DC)
+                      </button>
+                      <button
+                        onClick={() => setCircuitType(CircuitType.AC)}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
+                          circuitType === CircuitType.AC
+                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        ∿ Växelström (AC)
+                      </button>
                     </div>
+                  </div>
 
-                    <fieldset className="w-full max-w-md mt-4 p-3 border border-gray-600 rounded-lg">
-                      <legend className="px-2 text-sm text-gray-400">Kretsparametrar</legend>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-                          <div className="w-full">
-                              <label htmlFor="voltage-slider" className="block text-center text-purple-300 font-semibold mb-1">
-                                  Spänning: {voltage.toFixed(0)} V
-                              </label>
-                              <input
-                                  id="voltage-slider"
-                                  type="range"
-                                  min="1"
-                                  max="24"
-                                  step="1"
-                                  value={voltage}
-                                  onChange={handleVoltageChange}
-                                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg accent-purple-500"
-                              />
-                          </div>
-                          <div className="w-full">
-                              <label htmlFor="resistance-slider" className="block text-center text-purple-300 font-semibold mb-1">
-                                  Resistans: {resistance.toFixed(0)} Ω
-                              </label>
-                              <input
-                                  id="resistance-slider"
-                                  type="range"
-                                  min="1"
-                                  max="50"
-                                  step="1"
-                                  value={resistance}
-                                  onChange={handleResistanceChange}
-                                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg accent-purple-500"
-                              />
-                          </div>
+                  {/* Display Mode */}
+                  <div className="glass-card p-4 rounded-xl">
+                    <h3 className="text-sm font-medium text-slate-400 mb-3">Visningsläge</h3>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setDisplayMode('electrons')}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
+                          displayMode === 'electrons'
+                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        ● Elektroner
+                      </button>
+                      <button
+                        onClick={() => setDisplayMode('current')}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
+                          displayMode === 'current'
+                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        → Strömriktning
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Parameters */}
+                  <div className="glass-card p-4 rounded-xl">
+                    <h3 className="text-sm font-medium text-slate-400 mb-4">Kretsparametrar</h3>
+
+                    <div className="space-y-5">
+                      {/* Voltage */}
+                      <div>
+                        <div className="flex justify-between items-center mb-2">
+                          <label className="text-slate-300">Spänning (U)</label>
+                          <span className="font-mono text-cyan-400 bg-slate-800 px-2 py-1 rounded">
+                            {voltage} V
+                          </span>
+                        </div>
+                        <input
+                          type="range"
+                          min="1"
+                          max="24"
+                          step="1"
+                          value={voltage}
+                          onChange={(e) => setVoltage(parseFloat(e.target.value))}
+                          className="w-full cursor-pointer"
+                          style={handleSliderStyle(voltage, 1, 24)}
+                        />
                       </div>
+
+                      {/* Resistance */}
+                      <div>
+                        <div className="flex justify-between items-center mb-2">
+                          <label className="text-slate-300">Resistans (R)</label>
+                          <span className="font-mono text-cyan-400 bg-slate-800 px-2 py-1 rounded">
+                            {resistance} Ω
+                          </span>
+                        </div>
+                        <input
+                          type="range"
+                          min="1"
+                          max="50"
+                          step="1"
+                          value={resistance}
+                          onChange={(e) => setResistance(parseFloat(e.target.value))}
+                          className="w-full cursor-pointer"
+                          style={handleSliderStyle(resistance, 1, 50)}
+                        />
+                      </div>
+
+                      {/* AC Frequency */}
                       {circuitType === CircuitType.AC && (
-                        <div className="mt-4 w-full">
-                          <label htmlFor="frequency-slider" className="block text-center text-purple-300 font-semibold mb-1">
-                            Frekvens: {frequency.toFixed(1).replace('.', ',')} Hz
-                          </label>
+                        <div>
+                          <div className="flex justify-between items-center mb-2">
+                            <label className="text-slate-300">Frekvens (f)</label>
+                            <span className="font-mono text-cyan-400 bg-slate-800 px-2 py-1 rounded">
+                              {frequency.toFixed(1).replace('.', ',')} Hz
+                            </span>
+                          </div>
                           <input
-                            id="frequency-slider"
                             type="range"
                             min="0.2"
                             max="5"
                             step="0.1"
                             value={frequency}
-                            onChange={handleFrequencyChange}
-                            className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg accent-purple-500"
+                            onChange={(e) => setFrequency(parseFloat(e.target.value))}
+                            className="w-full cursor-pointer"
+                            style={handleSliderStyle(frequency, 0.2, 5)}
                           />
                         </div>
                       )}
-                      <div className="mt-4 flex flex-col items-center gap-3">
-                        <button
-                          onClick={handlePauseToggle}
-                          className="px-5 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition-colors"
-                        >
-                          {isPaused ? 'Återuppta' : 'Pausa'}
-                        </button>
-                        <div className="mt-1 text-center text-lg font-bold text-yellow-400">
-                          Strömstyrka (<i>I</i> = <i>U</i>/<i>R</i>): {current.toFixed(2).replace('.', ',')} A
-                        </div>
-                      </div>
-                    </fieldset>
+                    </div>
                   </div>
 
+                  {/* Current Display & Controls */}
+                  <div className="glass-card p-4 rounded-xl">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <div className="text-sm text-slate-400">Strömstyrka (I = U/R)</div>
+                        <div className={`text-3xl font-mono font-bold ${isBulbBroken ? 'text-red-400' : 'text-yellow-400'}`}>
+                          {current.toFixed(2).replace('.', ',')} A
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => setIsPaused(prev => !prev)}
+                        className={`px-6 py-3 rounded-xl font-bold transition-all ${
+                          isPaused
+                            ? 'bg-green-500 text-white hover:bg-green-600'
+                            : 'bg-orange-500 text-white hover:bg-orange-600'
+                        }`}
+                      >
+                        {isPaused ? '▶ Starta' : '⏸ Pausa'}
+                      </button>
+                    </div>
+                    {isBulbBroken && (
+                      <div className="mt-3 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
+                        <div className="text-red-400 font-semibold text-center mb-3">⚠️ Lampan har gått sönder! Kretsen är bruten.</div>
+                        <button
+                          onClick={handleReplaceBulb}
+                          className="w-full px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-lg transition-all"
+                        >
+                          💡 Byt ut lampan
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right: Circuit Diagram */}
+                <div className="flex flex-col gap-4">
                   <CircuitDiagram
                     circuitType={circuitType}
                     showElectrons={displayMode === 'electrons'}
@@ -460,20 +695,56 @@
                     currentStrength={current}
                     acFrequency={frequency}
                     isPaused={isPaused}
+                    isBulbBroken={isBulbBroken}
                   />
 
-                  <div className="mt-4 p-4 bg-gray-800/50 border border-gray-700 rounded-lg text-center max-w-2xl">
-                      <h2 className="text-xl font-semibold text-purple-300 mb-2">
-                          {circuitType === CircuitType.DC ? 'Likström (DC - Direct Current)' : 'Växelström (AC - Alternating Current)'}
-                      </h2>
-                      <p className="text-gray-400">
-                          {circuitType === CircuitType.DC
-                              ? 'I en likströmskrets flödar elektronerna kontinuerligt i en och samma riktning, från den negativa polen till den positiva. Den konventionella strömriktningen är motsatt, från plus till minus.'
-                              : 'I en växelströmskrets byter elektronerna riktning fram och tillbaka i en snabb, oscillerande rörelse. De gör ingen fullständig resa runt kretsen, utan överför energi genom att "knuffa" på varandra.'}
-                      </p>
+                  {/* Info Box */}
+                  <div className="glass-card p-5 rounded-xl">
+                    <h3 className="text-lg font-semibold text-slate-200 mb-2">
+                      {circuitType === CircuitType.DC ? '⎓ Likström (DC)' : '∿ Växelström (AC)'}
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {circuitType === CircuitType.DC
+                        ? 'I en likströmskrets flödar elektronerna kontinuerligt i samma riktning – från minuspolen till pluspolen. Den konventionella strömriktningen (I) är motsatt, från plus till minus. Batterier och solceller ger likström.'
+                        : 'I en växelströmskrets byter elektronerna riktning många gånger per sekund i en oscillerande rörelse. De rör sig fram och tillbaka, men överför ändå energi genom att "knuffa" på varandra. Eluttag i hemmet ger växelström (50 Hz).'}
+                    </p>
                   </div>
-                </main>
+                </div>
               </div>
+
+              {/* Ohms Law */}
+              <div className="w-full glass-card p-6 rounded-2xl">
+                <h2 className="text-xl font-bold text-slate-200 mb-4">Ohms lag</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center p-4 bg-slate-800/50 rounded-xl">
+                    <div className="text-4xl font-mono font-bold text-cyan-400 mb-2">U = R · I</div>
+                    <div className="text-slate-400 text-sm">Spänning = Resistans × Ström</div>
+                  </div>
+                  <div className="text-center p-4 bg-slate-800/50 rounded-xl">
+                    <div className="text-4xl font-mono font-bold text-green-400 mb-2 flex items-center justify-center gap-2">
+                      <span>I</span>
+                      <span>=</span>
+                      <span className="inline-flex flex-col items-center">
+                        <span className="border-b-2 border-green-400 px-2">U</span>
+                        <span className="px-2">R</span>
+                      </span>
+                    </div>
+                    <div className="text-slate-400 text-sm">Ström = Spänning / Resistans</div>
+                  </div>
+                  <div className="text-center p-4 bg-slate-800/50 rounded-xl">
+                    <div className="text-4xl font-mono font-bold text-orange-400 mb-2 flex items-center justify-center gap-2">
+                      <span>R</span>
+                      <span>=</span>
+                      <span className="inline-flex flex-col items-center">
+                        <span className="border-b-2 border-orange-400 px-2">U</span>
+                        <span className="px-2">I</span>
+                      </span>
+                    </div>
+                    <div className="text-slate-400 text-sm">Resistans = Spänning / Ström</div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           );
         };

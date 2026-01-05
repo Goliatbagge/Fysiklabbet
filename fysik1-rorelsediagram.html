@@ -132,12 +132,12 @@
                 getPosition: (t, v0, a) => v0 * t + 0.5 * a * t * t,
                 getVelocity: (t, v0, a) => v0 + a * t,
                 getAcceleration: (t, v0, a) => a,
-                maxS: 14,
+                maxS: 16,
                 maxV: 6,
                 maxA: 2,
                 minS: 0,
                 minV: 0,
-                minA: -1
+                minA: -2
             },
             [MOTION_TYPES.BRAKING]: {
                 name: 'Inbromsning',
@@ -160,9 +160,9 @@
                     return v0 + a * t;
                 },
                 getAcceleration: (t, v0, a) => a, // Konstant acceleration under hela inbromsningen
-                maxS: 10,
-                maxV: 5,
-                maxA: 1,
+                maxS: 8,
+                maxV: 4,
+                maxA: 2,
                 minS: 0,
                 minV: 0,
                 minA: -2
@@ -187,7 +187,7 @@
                 getAcceleration: (t, v0, a) => a,
                 maxS: 6,
                 maxV: 12,
-                maxA: 2,
+                maxA: 12,
                 minS: 0,
                 minV: -12,
                 minA: -12
@@ -217,12 +217,29 @@
         // ===== MOTION VISUALIZATION COMPONENT =====
         const MotionVisualization = ({ motionType, progress, config }) => {
             const canvasRef = useRef(null);
+            const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
             const t = progress * config.duration;
             const position = config.getPosition(t, config.v0, config.a);
 
+            // ResizeObserver to handle initial render and window resizing
             useEffect(() => {
                 const canvas = canvasRef.current;
                 if (!canvas) return;
+
+                const resizeObserver = new ResizeObserver((entries) => {
+                    for (const entry of entries) {
+                        const { width, height } = entry.contentRect;
+                        setCanvasSize({ width, height });
+                    }
+                });
+
+                resizeObserver.observe(canvas);
+                return () => resizeObserver.disconnect();
+            }, []);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas || canvasSize.width === 0) return;
                 const ctx = canvas.getContext('2d');
 
                 // High DPI support for sharp rendering
@@ -302,7 +319,7 @@
                     ctx.fillStyle = '#22c55e';
                     ctx.font = '14px sans-serif';
                     ctx.textAlign = 'center';
-                    ctx.fillText('+s', width - 40, 50);
+                    ctx.fillText('+', width - 40, 50);
 
                     // Draw baseball - subtract ball radius so bottom of ball sits on ground
                     const ballRadius = 14;
@@ -422,7 +439,7 @@
                     ctx.stroke();
                     ctx.fillStyle = '#22c55e';
                     ctx.font = '14px sans-serif';
-                    ctx.fillText('+s', startX + 50, roadY - 60);
+                    ctx.fillText('+', startX + 50, roadY - 60);
 
                     // Car position
                     const carX = startX + Math.min(position, maxS) * scale;
@@ -501,7 +518,7 @@
                     }
                 }
 
-            }, [motionType, progress, config, position]);
+            }, [motionType, progress, config, position, canvasSize]);
 
             return (
                 <canvas
@@ -542,8 +559,11 @@
                 ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
                 ctx.lineWidth = 1;
 
+                // Calculate appropriate time step based on duration
+                const timeStep = duration <= 2 ? 0.25 : (duration <= 4 ? 0.5 : 1);
+
                 // Vertical grid lines (time)
-                for (let t = 0; t <= duration; t += 1) {
+                for (let t = 0; t <= duration; t += timeStep) {
                     const x = padding.left + (t / duration) * graphWidth;
                     ctx.beginPath();
                     ctx.moveTo(x, padding.top);
@@ -563,44 +583,68 @@
                     ctx.stroke();
                 }
 
-                // Zero line if applicable
-                if (minY < 0 && maxY > 0) {
-                    const zeroY = height - padding.bottom - ((0 - minY) / range) * graphHeight;
-                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
-                    ctx.lineWidth = 2;
-                    ctx.beginPath();
-                    ctx.moveTo(padding.left, zeroY);
-                    ctx.lineTo(width - padding.right, zeroY);
-                    ctx.stroke();
-                }
-
-                // Axes
-                ctx.strokeStyle = '#64748b';
+                // Axes - strong cyan color for x=0 and y=0
+                ctx.strokeStyle = '#38bdf8';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
+                // Y-axis (x = 0)
                 ctx.moveTo(padding.left, padding.top);
                 ctx.lineTo(padding.left, height - padding.bottom);
-                ctx.lineTo(width - padding.right, height - padding.bottom);
+                // X-axis (y = 0) - at bottom or at zero if zero is in range
+                if (minY < 0 && maxY > 0) {
+                    const zeroY = height - padding.bottom - ((0 - minY) / range) * graphHeight;
+                    ctx.moveTo(padding.left, zeroY);
+                    ctx.lineTo(width - padding.right, zeroY);
+                }
                 ctx.stroke();
+
+                // Bottom axis line (if y=0 is not the bottom)
+                if (minY >= 0 || maxY <= 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, height - padding.bottom);
+                    ctx.lineTo(width - padding.right, height - padding.bottom);
+                    ctx.stroke();
+                } else {
+                    // Draw bottom line in gray if zero line is elsewhere
+                    ctx.strokeStyle = '#64748b';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, height - padding.bottom);
+                    ctx.lineTo(width - padding.right, height - padding.bottom);
+                    ctx.stroke();
+                }
 
                 // Axis labels
                 ctx.fillStyle = '#94a3b8';
                 ctx.font = '12px monospace';
                 ctx.textAlign = 'center';
 
-                // X-axis labels (time)
-                for (let t = 0; t <= duration; t += 1) {
+                // X-axis labels (time) - place under y=0 line, not at bottom
+                const xAxisLabelY = (minY < 0 && maxY > 0)
+                    ? height - padding.bottom - ((0 - minY) / range) * graphHeight + 16
+                    : height - padding.bottom + 16;
+                const xAxisUnitY = (minY < 0 && maxY > 0)
+                    ? height - padding.bottom - ((0 - minY) / range) * graphHeight + 30
+                    : height - 5;
+
+                for (let t = 0; t <= duration + 0.001; t += timeStep) {
+                    // Skip "0" label when we have negative y-values (it overlaps with y-axis)
+                    if (t < 0.001 && minY < 0 && maxY > 0) continue;
                     const x = padding.left + (t / duration) * graphWidth;
-                    ctx.fillText(`${t}`, x, height - padding.bottom + 16);
+                    // Format: remove trailing zeros (1,0 → 1, 0,50 → 0,5)
+                    const tLabel = parseFloat(t.toFixed(2)).toString().replace('.', ',');
+                    ctx.fillText(tLabel, x, xAxisLabelY);
                 }
-                ctx.fillText('t (s)', padding.left + graphWidth / 2, height - 5);
+                ctx.fillText('t (s)', padding.left + graphWidth / 2, xAxisUnitY);
 
                 // Y-axis labels
                 ctx.textAlign = 'right';
                 for (let i = 0; i <= 4; i++) {
                     const value = minY + i * step;
                     const y = height - padding.bottom - (i / 4) * graphHeight;
-                    ctx.fillText(value.toFixed(1).replace('.', ','), padding.left - 8, y + 4);
+                    // Format: remove trailing zeros (1,0 → 1, 1,50 → 1,5)
+                    const valueLabel = parseFloat(value.toFixed(1)).toString().replace('.', ',');
+                    ctx.fillText(valueLabel, padding.left - 8, y + 4);
                 }
 
                 // Title and unit
@@ -740,6 +784,9 @@
                 const range = maxY - minY;
                 const duration = config.duration;
 
+                // Calculate appropriate time step based on duration
+                const timeStep = duration <= 2 ? 0.25 : (duration <= 4 ? 0.5 : 1);
+
                 // Clear
                 ctx.fillStyle = '#0a0f1a';
                 ctx.fillRect(0, 0, width, height);
@@ -748,7 +795,7 @@
                 ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
                 ctx.lineWidth = 1;
 
-                for (let t = 0; t <= duration; t += 1) {
+                for (let t = 0; t <= duration; t += timeStep) {
                     const x = padding.left + (t / duration) * graphWidth;
                     ctx.beginPath();
                     ctx.moveTo(x, padding.top);
@@ -765,10 +812,10 @@
                     ctx.stroke();
                 }
 
-                // Zero line
+                // Zero line (x-axis at y=0) - bright cyan
                 if (minY < 0 && maxY > 0) {
                     const zeroY = height - padding.bottom - ((0 - minY) / range) * graphHeight;
-                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
+                    ctx.strokeStyle = '#38bdf8';
                     ctx.lineWidth = 2;
                     ctx.beginPath();
                     ctx.moveTo(padding.left, zeroY);
@@ -776,12 +823,18 @@
                     ctx.stroke();
                 }
 
-                // Axes
-                ctx.strokeStyle = '#64748b';
+                // Axes - y-axis (x=0) in cyan, bottom axis in gray
+                ctx.strokeStyle = '#38bdf8';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(padding.left, padding.top);
                 ctx.lineTo(padding.left, height - padding.bottom);
+                ctx.stroke();
+
+                // Bottom axis line
+                ctx.strokeStyle = '#64748b';
+                ctx.beginPath();
+                ctx.moveTo(padding.left, height - padding.bottom);
                 ctx.lineTo(width - padding.right, height - padding.bottom);
                 ctx.stroke();
 
@@ -790,17 +843,31 @@
                 ctx.font = '11px monospace';
                 ctx.textAlign = 'center';
 
-                for (let t = 0; t <= duration; t += 1) {
+                // X-axis labels - place under y=0 line, not at bottom
+                const xAxisLabelY = (minY < 0 && maxY > 0)
+                    ? height - padding.bottom - ((0 - minY) / range) * graphHeight + 14
+                    : height - padding.bottom + 14;
+                const xAxisUnitY = (minY < 0 && maxY > 0)
+                    ? height - padding.bottom - ((0 - minY) / range) * graphHeight + 26
+                    : height - 5;
+
+                for (let t = 0; t <= duration + 0.001; t += timeStep) {
+                    // Skip "0" label when we have negative y-values (it overlaps with y-axis)
+                    if (t < 0.001 && minY < 0 && maxY > 0) continue;
                     const x = padding.left + (t / duration) * graphWidth;
-                    ctx.fillText(`${t}`, x, height - padding.bottom + 14);
+                    // Format: remove trailing zeros (1,0 → 1, 0,50 → 0,5)
+                    const tLabel = parseFloat(t.toFixed(2)).toString().replace('.', ',');
+                    ctx.fillText(tLabel, x, xAxisLabelY);
                 }
-                ctx.fillText('t (s)', padding.left + graphWidth / 2, height - 5);
+                ctx.fillText('t (s)', padding.left + graphWidth / 2, xAxisUnitY);
 
                 ctx.textAlign = 'right';
                 for (let i = 0; i <= 4; i++) {
                     const value = minY + i * step;
                     const y = height - padding.bottom - (i / 4) * graphHeight;
-                    ctx.fillText(value.toFixed(1).replace('.', ','), padding.left - 8, y + 4);
+                    // Format: remove trailing zeros (1,0 → 1, 1,50 → 1,5)
+                    const valueLabel = parseFloat(value.toFixed(1)).toString().replace('.', ',');
+                    ctx.fillText(valueLabel, padding.left - 8, y + 4);
                 }
 
                 // Title

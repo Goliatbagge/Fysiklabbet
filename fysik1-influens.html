@@ -560,7 +560,7 @@
             const canvasRef = useRef(null);
             const containerRef = useRef(null);
 
-            const BALLOON_RADIUS = 70;
+            const BALLOON_RADIUS = 50;
             const HEAD_WIDTH = 80;
             const HEAD_HEIGHT = 100;
             const CEILING_HEIGHT = 80;
@@ -581,6 +581,7 @@
                 headY: 0,
                 dipoles: [],
                 electrons: [],
+                hairStrands: [],
                 lastTime: 0,
             });
 
@@ -616,6 +617,30 @@
                 return electrons;
             }, []);
 
+            const initHairStrands = useCallback(() => {
+                const strands = [];
+                // Skapa hårstrån runt toppen av huvudet i en halvcirkel
+                const numStrands = 35;
+                for (let i = 0; i < numStrands; i++) {
+                    // Fördela i en båge från -80 till +80 grader (toppen av huvudet)
+                    const t = i / (numStrands - 1); // 0 till 1
+                    const arcAngle = -Math.PI * 0.45 + t * Math.PI * 0.9; // -80 till +80 grader
+
+                    // Kortare baslängd - håret blir längre efter laddning
+                    const baseLength = 12 + Math.random() * 8;
+
+                    strands.push({
+                        arcAngle, // Position på huvudets båge
+                        baseLength,
+                        randomCurve: (Math.random() - 0.5) * 0.4,
+                        randomLength: Math.random() * 0.3, // Extra längdvariation
+                        isHighlight: i % 4 === 0,
+                        flutter: 0,
+                    });
+                }
+                return strands;
+            }, []);
+
             useEffect(() => {
                 if (!containerRef.current) return;
                 const width = containerRef.current.clientWidth;
@@ -631,11 +656,12 @@
                 physicsState.current.isDragging = false;
                 physicsState.current.isStuck = false;
                 physicsState.current.headX = width * 0.7;
-                physicsState.current.headY = height * 0.55;
+                physicsState.current.headY = height * 0.75;
                 physicsState.current.dipoles = initDipoles(width);
                 physicsState.current.electrons = initElectrons();
+                physicsState.current.hairStrands = initHairStrands();
                 physicsState.current.lastTime = 0;
-            }, [resetSignal, initDipoles, initElectrons]);
+            }, [resetSignal, initDipoles, initElectrons, initHairStrands]);
 
             const handleInput = useCallback((clientX, clientY, isDown = false) => {
                 if (!canvasRef.current) return;
@@ -772,6 +798,18 @@
                         });
                     }
 
+                    // Update hair strands - endast fladder vid gnuggning
+                    state.hairStrands.forEach(strand => {
+                        if (state.isRubbing) {
+                            // Fladdra medan man gnuggar
+                            strand.flutter = Math.sin(time * 0.02 + strand.arcAngle * 5) * 0.15;
+                        } else {
+                            // Inget fladder annars - håret står stilla
+                            strand.flutter *= 0.9; // Mjuk övergång tillbaka till stillhet
+                            if (Math.abs(strand.flutter) < 0.001) strand.flutter = 0;
+                        }
+                    });
+
                     // Apply gravity if not dragging and not stuck
                     if (!state.isDragging && !state.isStuck && state.balloonY < height - BALLOON_RADIUS) {
                         state.balloonVY += 200 * deltaTime;
@@ -852,27 +890,47 @@
                     ctx.translate(state.headX, state.headY);
 
                     // Hair (drawn first, behind head)
-                    const hairColor = '#4a3728';
-                    const hairHighlight = '#6b4c35';
+                    const hairColor = '#5d4037';
+                    const hairHighlight = '#8d6e63';
 
-                    // Hair strands on top
-                    ctx.strokeStyle = hairColor;
-                    ctx.lineWidth = 4;
+                    // Rita hårstrån runt huvudets topp
+                    ctx.lineWidth = 3;
                     ctx.lineCap = 'round';
-                    for (let i = 0; i < 20; i++) {
-                        const startX = -35 + i * 3.5;
-                        const startY = -HEAD_HEIGHT / 2 + 10;
-                        const endX = startX + (Math.random() - 0.5) * 15;
-                        const endY = startY - 25 - Math.random() * 20;
-                        const controlX = startX + (Math.random() - 0.5) * 20;
-                        const controlY = (startY + endY) / 2;
+
+                    // Huvudets radie för att placera hårfästen
+                    const headRadiusX = HEAD_WIDTH / 2;
+                    const headRadiusY = HEAD_HEIGHT / 2;
+
+                    state.hairStrands.forEach(strand => {
+                        // Startposition på huvudets ellips
+                        const startX = Math.sin(strand.arcAngle) * headRadiusX * 0.9;
+                        const startY = -Math.cos(strand.arcAngle) * headRadiusY * 0.85;
+
+                        // Hårlängd - blir längre när laddat (håret spretar mer)
+                        // chargeLevel 0 = kort hår, chargeLevel 1 = långt hår (2x längre)
+                        const chargeLengthMultiplier = 1 + state.chargeLevel * 1.5;
+                        const hairLength = strand.baseLength * (1 + strand.randomLength) * chargeLengthMultiplier;
+
+                        // Håret pekar alltid ut från huvudet
+                        const normalAngle = strand.arcAngle;
+
+                        // Lägg till lite fladder endast vid gnuggning
+                        const flutterOffset = strand.flutter || 0;
+
+                        // Slutposition - pekar ut från huvudet
+                        const endX = startX + Math.sin(normalAngle + flutterOffset) * hairLength;
+                        const endY = startY - Math.cos(normalAngle + flutterOffset) * hairLength;
+
+                        // Kontrollpunkt för mjuk kurva
+                        const ctrlX = startX + Math.sin(normalAngle + flutterOffset) * hairLength * 0.5 + strand.randomCurve * 8;
+                        const ctrlY = startY - Math.cos(normalAngle + flutterOffset) * hairLength * 0.5;
 
                         ctx.beginPath();
                         ctx.moveTo(startX, startY);
-                        ctx.quadraticCurveTo(controlX, controlY, endX, endY);
-                        ctx.strokeStyle = i % 3 === 0 ? hairHighlight : hairColor;
+                        ctx.quadraticCurveTo(ctrlX, ctrlY, endX, endY);
+                        ctx.strokeStyle = strand.isHighlight ? hairHighlight : hairColor;
                         ctx.stroke();
-                    }
+                    });
 
                     // Head shape (oval face)
                     const headGradient = ctx.createRadialGradient(-10, -15, 10, 0, 0, HEAD_HEIGHT / 2);
@@ -913,22 +971,52 @@
                     ctx.arc(0, 10, 15, 0.2, Math.PI - 0.2);
                     ctx.stroke();
 
-                    // Label
-                    ctx.fillStyle = '#94a3b8';
-                    ctx.font = '14px sans-serif';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('Hår', 0, HEAD_HEIGHT / 2 + 25);
+                    // Neck
+                    const neckGradient = ctx.createLinearGradient(-15, HEAD_HEIGHT/2, 15, HEAD_HEIGHT/2);
+                    neckGradient.addColorStop(0, '#d4a584');
+                    neckGradient.addColorStop(0.5, '#e8b896');
+                    neckGradient.addColorStop(1, '#d4a584');
+                    ctx.fillStyle = neckGradient;
+                    ctx.fillRect(-15, HEAD_HEIGHT/2 - 5, 30, 25);
 
-                    // Show positive charges in hair if electrons transferred
+                    // Shoulders/upper body
+                    const bodyGradient = ctx.createLinearGradient(0, HEAD_HEIGHT/2 + 15, 0, HEAD_HEIGHT/2 + 80);
+                    bodyGradient.addColorStop(0, '#3b82f6');
+                    bodyGradient.addColorStop(1, '#1d4ed8');
+                    ctx.fillStyle = bodyGradient;
+                    ctx.beginPath();
+                    ctx.moveTo(-15, HEAD_HEIGHT/2 + 20);
+                    ctx.quadraticCurveTo(-60, HEAD_HEIGHT/2 + 30, -70, HEAD_HEIGHT/2 + 80);
+                    ctx.lineTo(70, HEAD_HEIGHT/2 + 80);
+                    ctx.quadraticCurveTo(60, HEAD_HEIGHT/2 + 30, 15, HEAD_HEIGHT/2 + 20);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    // Collar/shirt detail
+                    ctx.strokeStyle = '#2563eb';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(-10, HEAD_HEIGHT/2 + 20);
+                    ctx.lineTo(0, HEAD_HEIGHT/2 + 35);
+                    ctx.lineTo(10, HEAD_HEIGHT/2 + 20);
+                    ctx.stroke();
+
+                    // Show positive charges in hair if electrons transferred - i en båge
                     if (state.chargeLevel > 0) {
-                        ctx.shadowBlur = 10;
-                        ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
+                        ctx.shadowBlur = 15;
+                        ctx.shadowColor = 'rgba(239, 68, 68, 1)';
                         ctx.fillStyle = '#ef4444';
-                        ctx.font = 'bold 14px Arial';
+                        ctx.font = 'bold 18px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
                         const numCharges = Math.floor(state.chargeLevel * 6);
                         for (let i = 0; i < numCharges; i++) {
-                            const x = -30 + (i % 3) * 30;
-                            const y = -HEAD_HEIGHT / 2 - 20 - Math.floor(i / 3) * 15;
+                            // Fördela i en båge över huvudet
+                            const t = numCharges > 1 ? i / (numCharges - 1) : 0.5;
+                            const arcAngle = -Math.PI * 0.35 + t * Math.PI * 0.7;
+                            const radius = HEAD_HEIGHT / 2 + 15;
+                            const x = Math.sin(arcAngle) * radius;
+                            const y = -Math.cos(arcAngle) * radius;
                             ctx.fillText('+', x, y);
                         }
                         ctx.shadowBlur = 0;
@@ -968,11 +1056,11 @@
                     ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
                     ctx.fill();
 
-                    // Balloon knot
+                    // Balloon knot - vriden 180 grader (pekar uppåt in i ballongen)
                     ctx.beginPath();
-                    ctx.moveTo(-8, BALLOON_RADIUS);
-                    ctx.lineTo(8, BALLOON_RADIUS);
-                    ctx.lineTo(0, BALLOON_RADIUS + 15);
+                    ctx.moveTo(0, BALLOON_RADIUS - 5);
+                    ctx.lineTo(-6, BALLOON_RADIUS + 8);
+                    ctx.lineTo(6, BALLOON_RADIUS + 8);
                     ctx.closePath();
                     ctx.fillStyle = '#9d174d';
                     ctx.fill();
@@ -1011,20 +1099,25 @@
 
                     ctx.restore();
 
-                    // Instructions
-                    let instruction = 'Dra ballongen mot håret för att ladda den';
-                    if (state.isRubbing) {
-                        instruction = 'Gnugga ballongen mot håret!';
-                    } else if (state.isCharged && !state.isStuck) {
-                        instruction = 'Dra den laddade ballongen mot taket';
-                    } else if (state.isStuck) {
-                        instruction = 'Ballongen sitter fast! Dipolerna har vridit sig.';
+                    // Instructions - placerad till höger om huvudet
+                    let instruction = 'Dra ballongen mot håret\nför att ladda den';
+                    if (state.isStuck) {
+                        instruction = 'Ballongen sitter fast!\nDipolerna har vridit sig.';
+                    } else if (state.isCharged) {
+                        instruction = 'Dra den laddade\nballongen mot taket';
+                    } else if (state.isRubbing || state.chargeLevel > 0) {
+                        instruction = 'Gnugga mer!';
                     }
 
-                    ctx.fillStyle = '#64748b';
+                    ctx.fillStyle = '#94a3b8';
                     ctx.font = '14px sans-serif';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(instruction, width / 2, height - 30);
+                    ctx.textAlign = 'left';
+                    const instructionX = state.headX + HEAD_WIDTH / 2 + 40;
+                    const instructionY = state.headY;
+                    const lines = instruction.split('\n');
+                    lines.forEach((line, i) => {
+                        ctx.fillText(line, instructionX, instructionY + i * 18);
+                    });
 
                     animationFrameId = requestAnimationFrame(render);
                 };
@@ -1068,10 +1161,10 @@
                     <div className="glass-card rounded-2xl p-4 mb-6">
                         <div className="relative w-full" style={{ minHeight: '500px', maxHeight: '600px' }}>
                             <IsolatorCanvas resetSignal={resetSignal} />
-                            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 glass-card p-4 rounded-2xl z-10">
+                            <div className="absolute top-32 right-4 z-10">
                                 <button
                                     onClick={() => setResetSignal(prev => prev + 1)}
-                                    className="px-6 py-3 rounded-lg font-semibold bg-slate-700/50 text-slate-300 border border-slate-600 hover:bg-slate-600/50 transition-all duration-200"
+                                    className="px-4 py-2 rounded-lg font-semibold bg-slate-700/80 text-slate-300 border border-slate-600 hover:bg-slate-600/50 transition-all duration-200 text-sm"
                                 >
                                     Återställ
                                 </button>

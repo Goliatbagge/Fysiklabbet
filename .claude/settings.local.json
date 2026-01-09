@@ -27,7 +27,10 @@
       "Bash(cd:*)",
       "Bash(powershell -Command \"\\(Get-Content fysik1-newtons-tredje-app.html\\) -replace ''Newtons Tredje Lag'', ''Newtons tredje lag'' | Set-Content fysik1-newtons-tredje-app.html -Encoding UTF8\")",
       "Bash(powershell -Command \"\\(Get-Content fysik1-tryck.html\\) -replace ''Ideala Gaslagen'', ''Ideala gaslagen'' | Set-Content fysik1-tryck.html -Encoding UTF8\")",
-      "Bash(powershell -Command:*)"
+      "Bash(powershell -Command:*)",
+      "Bash(start C:claudeFysiklabbetfysik1-influens.html)",
+      "Bash(start fysik1-influens.html)",
+      "Bash(start fysik1-coulombs-lag.html)"
     ],
     "deny": [],
     "ask": []

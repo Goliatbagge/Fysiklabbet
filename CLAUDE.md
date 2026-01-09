@@ -75,6 +75,28 @@ Alla simuleringar följer samma struktur:
 5. React-komponenter: Simulation, Controls, Results, Explanation
 6. Footer
 
+### Typografi och variabler
+
+- **Teckensnitt**: Använd Poppins för text i canvas och UI-element
+- **Fysikaliska variabler**: Ska ALLTID skrivas med *kursiv stil* (t.ex. *F*, *Q*, *r*, *v*, *a*)
+- **Enheter**: Ska skrivas med rak stil (t.ex. N, C, m, m/s)
+- **Subscript**: Använd Unicode-subscript för index (Q₁, Q₂, v₀, etc.)
+
+```javascript
+// I canvas: variabel i kursiv, värde i normal stil
+ctx.font = 'italic 18px Poppins, sans-serif';
+ctx.fillText('F', x, y);  // Variabel
+ctx.font = '18px Poppins, sans-serif';
+ctx.fillText(' = 5,0 N', x + 10, y);  // Värde med enhet
+```
+
+```html
+<!-- Lägg till Poppins i head -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+```
+
 ### Decimaltalsformatering
 
 ```javascript

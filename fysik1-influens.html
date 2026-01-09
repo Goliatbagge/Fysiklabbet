@@ -33,6 +33,15 @@
         .btn-glow:hover {
             box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
         }
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: rgba(56, 189, 248, 0.5);
+            color: #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
     </style>
 </head>
 <body class="bg-slate-950">
@@ -55,8 +64,9 @@
     <script type="text/babel">
         const { useState, useRef, useEffect, useCallback } = React;
 
-        // Controls Component
-        const Controls = ({ showCharges, onToggleCharges, onReset }) => {
+        // ==================== LEDARE SIMULATION (BURK) ====================
+
+        const LedareControls = ({ showCharges, onToggleCharges, onReset }) => {
             return (
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 glass-card p-4 rounded-2xl z-10 w-11/12 max-w-md justify-center">
                     <button
@@ -80,8 +90,7 @@
             );
         };
 
-        // SimulationCanvas Component
-        const SimulationCanvas = ({ showCharges, resetSignal }) => {
+        const LedareCanvas = ({ showCharges, resetSignal }) => {
             const canvasRef = useRef(null);
             const containerRef = useRef(null);
             const showChargesRef = useRef(showCharges);
@@ -90,11 +99,10 @@
                 showChargesRef.current = showCharges;
             }, [showCharges]);
 
-            // Physics Constants
             const ROD_WIDTH = 120;
             const ROD_HEIGHT = 40;
             const CAN_RADIUS = 60;
-            const FLOOR_Y_RATIO = 0.25; // Golv 25% från botten (75% ned på skärmen)
+            const FLOOR_Y_RATIO = 0.25;
 
             const ATTRACTION_STRENGTH = 300000;
             const REPULSION_STRENGTH = 300000;
@@ -168,9 +176,7 @@
                 const x = clientX - rect.left;
                 const y = clientY - rect.top;
 
-                // Beräkna golvets position (bordskanten)
                 const floorY = rect.height * (1 - FLOOR_Y_RATIO);
-                // Stavens botten får inte gå under golvet
                 const maxRodY = floorY - ROD_HEIGHT/2;
 
                 physicsState.current.rodX = Math.max(ROD_WIDTH/2, Math.min(rect.width - ROD_WIDTH/2, x));
@@ -237,13 +243,11 @@
 
                     const rodY = state.rodY;
 
-                    // 2D distance and direction from rod to can
                     const distVectorX = state.canX - state.rodX;
                     const distVectorY = canY - rodY;
                     const dist = Math.sqrt(distVectorX * distVectorX + distVectorY * distVectorY);
                     const effDist = Math.max(dist, ROD_WIDTH/2 + CAN_RADIUS + 5);
 
-                    // Normalized direction (from rod toward can)
                     const dirX = dist > 0 ? distVectorX / dist : 1;
                     const dirY = dist > 0 ? distVectorY / dist : 0;
 
@@ -256,7 +260,6 @@
                         const rotX = p.basePosition.x * cos - p.basePosition.y * sin;
                         const rotY = p.basePosition.x * sin + p.basePosition.y * cos;
 
-                        // Electrons move away from rod in 2D direction
                         let targetX = rotX + (dirX * inductionStrength * CAN_RADIUS * CHARGE_SHIFT_FACTOR);
                         let targetY = rotY + (dirY * inductionStrength * CAN_RADIUS * CHARGE_SHIFT_FACTOR);
 
@@ -308,28 +311,21 @@
                     const acceleration = netForce;
                     state.canV += acceleration * deltaTime;
 
-                    // Applicera dämpning endast när ingen kraft verkar (friktion vid rullning)
-                    // När kraft verkar tillåts acceleration enligt F=ma
                     if (Math.abs(netForce) < STATIC_FRICTION_THRESHOLD * 2) {
                         state.canV *= DAMPING;
                     } else {
-                        // Minimal luftmotstånd vid acceleration
                         state.canV *= 0.998;
                     }
 
-                    // 2D collision detection between rod and can
                     const collisionDistX = state.canX - state.rodX;
                     const collisionDistY = canY - rodY;
                     const collisionDist = Math.sqrt(collisionDistX * collisionDistX + collisionDistY * collisionDistY);
                     const minDist = ROD_WIDTH/2 + CAN_RADIUS;
 
-                    // Only apply collision if actually close in 2D space
                     if (collisionDist < minDist && collisionDist > 0) {
-                        // Push can away from rod
                         const pushX = (collisionDistX / collisionDist) * (minDist - collisionDist);
                         state.canX += pushX;
 
-                        // Stop velocity if moving toward rod
                         if ((collisionDistX > 0 && state.canV < 0) || (collisionDistX < 0 && state.canV > 0)) {
                             state.canV = 0;
                         }
@@ -340,18 +336,15 @@
                     const dx = state.canV * deltaTime;
                     state.canRotation += dx / CAN_RADIUS;
 
-                    // Dark background
                     ctx.fillStyle = '#050510';
                     ctx.fillRect(0, 0, width, height);
 
-                    // Subtle gradient overlay
                     const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.7);
                     bgGradient.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
                     bgGradient.addColorStop(1, 'rgba(5, 5, 16, 0)');
                     ctx.fillStyle = bgGradient;
                     ctx.fillRect(0, 0, width, height);
 
-                    // Floor line with glow
                     ctx.shadowBlur = 10;
                     ctx.shadowColor = 'rgba(56, 189, 248, 0.3)';
                     ctx.beginPath();
@@ -362,7 +355,6 @@
                     ctx.stroke();
                     ctx.shadowBlur = 0;
 
-                    // Ebonite rod (dark with negative charge glow)
                     const rodGradient = ctx.createLinearGradient(state.rodX - ROD_WIDTH/2, 0, state.rodX + ROD_WIDTH/2, 0);
                     rodGradient.addColorStop(0, '#1e293b');
                     rodGradient.addColorStop(0.3, '#334155');
@@ -385,7 +377,6 @@
                     }
                     ctx.shadowBlur = 0;
 
-                    // Negative charges on rod with cyan glow
                     ctx.shadowBlur = 15;
                     ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
                     ctx.fillStyle = '#38bdf8';
@@ -398,12 +389,10 @@
                     }
                     ctx.shadowBlur = 0;
 
-                    // Aluminum can with metallic gradient
                     ctx.save();
                     ctx.translate(state.canX, canY);
                     ctx.rotate(state.canRotation);
 
-                    // Metallic can gradient
                     const gradient = ctx.createRadialGradient(-20, -20, 10, 0, 0, CAN_RADIUS);
                     gradient.addColorStop(0, '#94a3b8');
                     gradient.addColorStop(0.3, '#64748b');
@@ -421,21 +410,18 @@
                     ctx.stroke();
                     ctx.shadowBlur = 0;
 
-                    // Inner ring highlight
                     ctx.beginPath();
                     ctx.arc(0, 0, CAN_RADIUS - 5, 0, Math.PI * 2);
                     ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
                     ctx.lineWidth = 1;
                     ctx.stroke();
 
-                    // Handle/tab on can
                     ctx.fillStyle = '#64748b';
                     ctx.beginPath();
                     ctx.ellipse(CAN_RADIUS * 0.4, 0, 10, 15, 0, 0, Math.PI*2);
                     ctx.fill();
 
                     if (showChargesRef.current) {
-                        // Positive charges (protons) with red glow
                         state.electrons.forEach(p => {
                             ctx.shadowBlur = 10;
                             ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
@@ -452,9 +438,7 @@
                     if (showChargesRef.current) {
                         ctx.save();
                         ctx.translate(state.canX, canY);
-                        // Negative charges (electrons) with cyan glow
                         state.electrons.forEach(p => {
-                            // Outer glow
                             const outerGlow = ctx.createRadialGradient(p.currentPosition.x, p.currentPosition.y, 0, p.currentPosition.x, p.currentPosition.y, 15);
                             outerGlow.addColorStop(0, 'rgba(56, 189, 248, 0.6)');
                             outerGlow.addColorStop(0.5, 'rgba(14, 165, 233, 0.2)');
@@ -464,7 +448,6 @@
                             ctx.fillStyle = outerGlow;
                             ctx.fill();
 
-                            // Core
                             ctx.shadowBlur = 12;
                             ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
                             ctx.fillStyle = '#38bdf8';
@@ -502,7 +485,6 @@
                 };
 
                 window.addEventListener('resize', handleResize);
-                // Initial resize with a small delay to ensure container is rendered
                 setTimeout(handleResize, 0);
 
                 return () => window.removeEventListener('resize', handleResize);
@@ -524,13 +506,611 @@
             );
         };
 
-        // App Component
-        function App() {
+        const LedareSimulation = () => {
             const [showCharges, setShowCharges] = useState(true);
             const [resetSignal, setResetSignal] = useState(0);
 
-            const handleToggleCharges = () => setShowCharges(prev => !prev);
-            const handleReset = () => setResetSignal(prev => prev + 1);
+            return (
+                <>
+                    <div className="glass-card rounded-2xl p-4 mb-6">
+                        <div className="relative w-full" style={{ minHeight: '500px', maxHeight: '600px' }}>
+                            <LedareCanvas
+                                showCharges={showCharges}
+                                resetSignal={resetSignal}
+                            />
+                            <LedareControls
+                                showCharges={showCharges}
+                                onToggleCharges={() => setShowCharges(prev => !prev)}
+                                onReset={() => setResetSignal(prev => prev + 1)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="glass-card-light p-4 rounded-xl">
+                            <div className="flex items-start gap-3">
+                                <div className="p-2 bg-cyan-500/20 rounded-lg">
+                                    <span className="text-cyan-400 text-xl font-bold">−</span>
+                                </div>
+                                <div>
+                                    <h3 className="text-slate-200 font-semibold mb-1">Ebonitstav</h3>
+                                    <p className="text-slate-400 text-sm">Negativt laddad efter att ha gnidits mot päls. De negativa laddningarna repellerar elektronerna i burken.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="glass-card-light p-4 rounded-xl">
+                            <div className="flex items-start gap-3">
+                                <div className="p-2 bg-cyan-500/20 rounded-lg">
+                                    <span className="text-cyan-400 text-xl font-bold">⚡</span>
+                                </div>
+                                <div>
+                                    <h3 className="text-slate-200 font-semibold mb-1">Influens i ledare</h3>
+                                    <p className="text-slate-400 text-sm">Elektronerna i burken flyttar sig fritt bort från staven, vilket skapar en positiv sida närmast staven som attraheras.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            );
+        };
+
+        // ==================== ISOLATOR SIMULATION (BALLONG) ====================
+
+        const IsolatorCanvas = ({ resetSignal }) => {
+            const canvasRef = useRef(null);
+            const containerRef = useRef(null);
+
+            const BALLOON_RADIUS = 70;
+            const HEAD_WIDTH = 80;
+            const HEAD_HEIGHT = 100;
+            const CEILING_HEIGHT = 80;
+            const NUM_DIPOLES = 10;
+            const DIPOLE_ROWS = 2;
+
+            const physicsState = useRef({
+                balloonX: 0,
+                balloonY: 0,
+                balloonVY: 0,
+                isCharged: false,
+                chargeLevel: 0,
+                isRubbing: false,
+                rubCount: 0,
+                isDragging: false,
+                isStuck: false,
+                headX: 0,
+                headY: 0,
+                dipoles: [],
+                electrons: [],
+                lastTime: 0,
+            });
+
+            const initDipoles = useCallback((width) => {
+                const dipoles = [];
+                const spacing = width / (NUM_DIPOLES + 1);
+                const rowSpacing = 30;
+                for (let row = 0; row < DIPOLE_ROWS; row++) {
+                    const offset = row % 2 === 1 ? spacing / 2 : 0; // Offset every other row
+                    for (let i = 0; i < NUM_DIPOLES; i++) {
+                        dipoles.push({
+                            x: spacing * (i + 1) + offset,
+                            y: 35 + row * rowSpacing,
+                            angle: Math.random() * Math.PI * 2,
+                            targetAngle: Math.random() * Math.PI * 2,
+                        });
+                    }
+                }
+                return dipoles;
+            }, []);
+
+            const initElectrons = useCallback(() => {
+                const electrons = [];
+                const numElectrons = 16;
+                for (let i = 0; i < numElectrons; i++) {
+                    const angle = (i / numElectrons) * Math.PI * 2;
+                    electrons.push({
+                        angle: angle,
+                        radius: BALLOON_RADIUS - 8,
+                        baseAngle: angle,
+                    });
+                }
+                return electrons;
+            }, []);
+
+            useEffect(() => {
+                if (!containerRef.current) return;
+                const width = containerRef.current.clientWidth;
+                const height = containerRef.current.clientHeight;
+
+                physicsState.current.balloonX = width * 0.3;
+                physicsState.current.balloonY = height * 0.6;
+                physicsState.current.balloonVY = 0;
+                physicsState.current.isCharged = false;
+                physicsState.current.chargeLevel = 0;
+                physicsState.current.isRubbing = false;
+                physicsState.current.rubCount = 0;
+                physicsState.current.isDragging = false;
+                physicsState.current.isStuck = false;
+                physicsState.current.headX = width * 0.7;
+                physicsState.current.headY = height * 0.55;
+                physicsState.current.dipoles = initDipoles(width);
+                physicsState.current.electrons = initElectrons();
+                physicsState.current.lastTime = 0;
+            }, [resetSignal, initDipoles, initElectrons]);
+
+            const handleInput = useCallback((clientX, clientY, isDown = false) => {
+                if (!canvasRef.current) return;
+                const rect = canvasRef.current.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const y = clientY - rect.top;
+                const state = physicsState.current;
+
+                const distToBalloon = Math.sqrt(
+                    Math.pow(x - state.balloonX, 2) + Math.pow(y - state.balloonY, 2)
+                );
+
+                if (isDown && distToBalloon < BALLOON_RADIUS + 20) {
+                    state.isDragging = true;
+                    state.isStuck = false;
+                }
+
+                if (state.isDragging) {
+                    // Ceiling line is at CEILING_HEIGHT + 30, balloon stops when its top edge touches it
+                    const ceilingLineY = CEILING_HEIGHT + 30;
+                    const minBalloonY = ceilingLineY + BALLOON_RADIUS;
+
+                    state.balloonX = x;
+                    state.balloonY = Math.max(minBalloonY, y);
+
+                    // Check if rubbing against hair on head
+                    const hairTopY = state.headY - HEAD_HEIGHT / 2 - 30; // Top of hair
+                    const distToHead = Math.sqrt(
+                        Math.pow(x - state.headX, 2) + Math.pow(y - hairTopY, 2)
+                    );
+
+                    if (distToHead < BALLOON_RADIUS + 50) {
+                        if (!state.isRubbing) {
+                            state.isRubbing = true;
+                            state.rubCount++;
+                            if (state.rubCount >= 3) {
+                                state.isCharged = true;
+                            }
+                            state.chargeLevel = Math.min(1, state.chargeLevel + 0.35);
+                        }
+                    } else {
+                        state.isRubbing = false;
+                    }
+
+                    // Check if near ceiling - balloon sticks when charged and touching ceiling
+                    if (state.isCharged && state.balloonY <= minBalloonY + 10) {
+                        state.isStuck = true;
+                        state.balloonY = minBalloonY;
+                    }
+                }
+            }, []);
+
+            const handleInputEnd = useCallback(() => {
+                physicsState.current.isDragging = false;
+            }, []);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+
+                const onMouseMove = (e) => handleInput(e.clientX, e.clientY);
+                const onMouseDown = (e) => handleInput(e.clientX, e.clientY, true);
+                const onMouseUp = () => handleInputEnd();
+                const onTouchMove = (e) => {
+                    e.preventDefault();
+                    handleInput(e.touches[0].clientX, e.touches[0].clientY);
+                };
+                const onTouchStart = (e) => {
+                    e.preventDefault();
+                    handleInput(e.touches[0].clientX, e.touches[0].clientY, true);
+                };
+                const onTouchEnd = () => handleInputEnd();
+
+                canvas.addEventListener('mousemove', onMouseMove);
+                canvas.addEventListener('mousedown', onMouseDown);
+                canvas.addEventListener('mouseup', onMouseUp);
+                canvas.addEventListener('mouseleave', onMouseUp);
+                canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+                canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+                canvas.addEventListener('touchend', onTouchEnd);
+
+                return () => {
+                    canvas.removeEventListener('mousemove', onMouseMove);
+                    canvas.removeEventListener('mousedown', onMouseDown);
+                    canvas.removeEventListener('mouseup', onMouseUp);
+                    canvas.removeEventListener('mouseleave', onMouseUp);
+                    canvas.removeEventListener('touchmove', onTouchMove);
+                    canvas.removeEventListener('touchstart', onTouchStart);
+                    canvas.removeEventListener('touchend', onTouchEnd);
+                };
+            }, [handleInput, handleInputEnd]);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                let animationFrameId;
+
+                const render = (time) => {
+                    const { width, height } = canvas;
+                    const state = physicsState.current;
+
+                    if (width === 0 || height === 0) {
+                        animationFrameId = requestAnimationFrame(render);
+                        return;
+                    }
+
+                    if (state.lastTime === 0) state.lastTime = time;
+                    let deltaTime = (time - state.lastTime) / 1000;
+                    state.lastTime = time;
+                    if (deltaTime < 0 || deltaTime > 0.1) deltaTime = 0.016;
+
+                    // Update dipole angles based on balloon position
+                    if (state.isCharged) {
+                        state.dipoles.forEach(dipole => {
+                            const dx = state.balloonX - dipole.x;
+                            const dy = state.balloonY - dipole.y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+
+                            // Only start rotating when balloon is close (within 180px)
+                            if (dist < 180) {
+                                // Point positive end toward balloon
+                                dipole.targetAngle = Math.atan2(dy, dx);
+                                // Faster rotation when closer
+                                const rotationSpeed = 0.15 * (1 - dist / 180);
+                                let angleDiff = dipole.targetAngle - dipole.angle;
+                                while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+                                while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+                                dipole.angle += angleDiff * (0.05 + rotationSpeed);
+                            }
+                            // When far away, dipoles stay in their random orientation
+                        });
+                    }
+
+                    // Apply gravity if not dragging and not stuck
+                    if (!state.isDragging && !state.isStuck && state.balloonY < height - BALLOON_RADIUS) {
+                        state.balloonVY += 200 * deltaTime;
+                        state.balloonY += state.balloonVY * deltaTime;
+
+                        if (state.balloonY > height - BALLOON_RADIUS) {
+                            state.balloonY = height - BALLOON_RADIUS;
+                            state.balloonVY = 0;
+                        }
+                    }
+
+                    // Dark background
+                    ctx.fillStyle = '#050510';
+                    ctx.fillRect(0, 0, width, height);
+
+                    const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.7);
+                    bgGradient.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
+                    bgGradient.addColorStop(1, 'rgba(5, 5, 16, 0)');
+                    ctx.fillStyle = bgGradient;
+                    ctx.fillRect(0, 0, width, height);
+
+                    // Draw ceiling
+                    const ceilingGradient = ctx.createLinearGradient(0, 0, 0, CEILING_HEIGHT + 30);
+                    ceilingGradient.addColorStop(0, '#1e293b');
+                    ceilingGradient.addColorStop(1, '#0f172a');
+                    ctx.fillStyle = ceilingGradient;
+                    ctx.fillRect(0, 0, width, CEILING_HEIGHT + 30);
+
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = 'rgba(56, 189, 248, 0.3)';
+                    ctx.beginPath();
+                    ctx.moveTo(0, CEILING_HEIGHT + 30);
+                    ctx.lineTo(width, CEILING_HEIGHT + 30);
+                    ctx.strokeStyle = '#334155';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    ctx.shadowBlur = 0;
+
+                    // Draw dipoles in ceiling
+                    state.dipoles.forEach(dipole => {
+                        ctx.save();
+                        ctx.translate(dipole.x, dipole.y);
+                        ctx.rotate(dipole.angle);
+
+                        // Dipole oval shape
+                        const dipoleWidth = 40;
+                        const dipoleHeight = 16;
+
+                        // Draw oval
+                        ctx.beginPath();
+                        ctx.ellipse(0, 0, dipoleWidth / 2, dipoleHeight / 2, 0, 0, Math.PI * 2);
+                        ctx.fillStyle = '#334155';
+                        ctx.strokeStyle = '#475569';
+                        ctx.lineWidth = 2;
+                        ctx.fill();
+                        ctx.stroke();
+
+                        // Positive side (right, toward balloon when aligned)
+                        ctx.shadowBlur = 8;
+                        ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
+                        ctx.fillStyle = '#ef4444';
+                        ctx.font = 'bold 14px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText('+', dipoleWidth / 4, 0);
+
+                        // Negative side (left)
+                        ctx.shadowColor = 'rgba(56, 189, 248, 0.8)';
+                        ctx.fillStyle = '#38bdf8';
+                        ctx.fillText('−', -dipoleWidth / 4, 0);
+                        ctx.shadowBlur = 0;
+
+                        ctx.restore();
+                    });
+
+                    // Draw head with hair
+                    ctx.save();
+                    ctx.translate(state.headX, state.headY);
+
+                    // Hair (drawn first, behind head)
+                    const hairColor = '#4a3728';
+                    const hairHighlight = '#6b4c35';
+
+                    // Hair strands on top
+                    ctx.strokeStyle = hairColor;
+                    ctx.lineWidth = 4;
+                    ctx.lineCap = 'round';
+                    for (let i = 0; i < 20; i++) {
+                        const startX = -35 + i * 3.5;
+                        const startY = -HEAD_HEIGHT / 2 + 10;
+                        const endX = startX + (Math.random() - 0.5) * 15;
+                        const endY = startY - 25 - Math.random() * 20;
+                        const controlX = startX + (Math.random() - 0.5) * 20;
+                        const controlY = (startY + endY) / 2;
+
+                        ctx.beginPath();
+                        ctx.moveTo(startX, startY);
+                        ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+                        ctx.strokeStyle = i % 3 === 0 ? hairHighlight : hairColor;
+                        ctx.stroke();
+                    }
+
+                    // Head shape (oval face)
+                    const headGradient = ctx.createRadialGradient(-10, -15, 10, 0, 0, HEAD_HEIGHT / 2);
+                    headGradient.addColorStop(0, '#fcd5b8');
+                    headGradient.addColorStop(0.5, '#e8b896');
+                    headGradient.addColorStop(1, '#d4a584');
+
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, HEAD_WIDTH / 2, HEAD_HEIGHT / 2, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = headGradient;
+                    ctx.fill();
+                    ctx.strokeStyle = '#c4957a';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    // Eyes
+                    ctx.fillStyle = '#1e293b';
+                    ctx.beginPath();
+                    ctx.ellipse(-15, -10, 6, 8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.ellipse(15, -10, 6, 8, 0, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Eye highlights
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.arc(-17, -12, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(13, -12, 2, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Smile
+                    ctx.strokeStyle = '#8b6c5c';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(0, 10, 15, 0.2, Math.PI - 0.2);
+                    ctx.stroke();
+
+                    // Label
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.font = '14px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Hår', 0, HEAD_HEIGHT / 2 + 25);
+
+                    // Show positive charges in hair if electrons transferred
+                    if (state.chargeLevel > 0) {
+                        ctx.shadowBlur = 10;
+                        ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
+                        ctx.fillStyle = '#ef4444';
+                        ctx.font = 'bold 14px Arial';
+                        const numCharges = Math.floor(state.chargeLevel * 6);
+                        for (let i = 0; i < numCharges; i++) {
+                            const x = -30 + (i % 3) * 30;
+                            const y = -HEAD_HEIGHT / 2 - 20 - Math.floor(i / 3) * 15;
+                            ctx.fillText('+', x, y);
+                        }
+                        ctx.shadowBlur = 0;
+                    }
+
+                    ctx.restore();
+
+                    // Draw balloon
+                    ctx.save();
+                    ctx.translate(state.balloonX, state.balloonY);
+
+                    // Balloon glow if charged
+                    if (state.isCharged) {
+                        ctx.shadowBlur = 30;
+                        ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
+                    }
+
+                    // Balloon gradient
+                    const balloonGradient = ctx.createRadialGradient(-20, -20, 10, 0, 0, BALLOON_RADIUS);
+                    balloonGradient.addColorStop(0, '#f472b6');
+                    balloonGradient.addColorStop(0.4, '#ec4899');
+                    balloonGradient.addColorStop(0.8, '#be185d');
+                    balloonGradient.addColorStop(1, '#831843');
+
+                    ctx.beginPath();
+                    ctx.arc(0, 0, BALLOON_RADIUS, 0, Math.PI * 2);
+                    ctx.fillStyle = balloonGradient;
+                    ctx.fill();
+                    ctx.strokeStyle = '#f9a8d4';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    ctx.shadowBlur = 0;
+
+                    // Balloon highlight
+                    ctx.beginPath();
+                    ctx.arc(-25, -25, 15, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                    ctx.fill();
+
+                    // Balloon knot
+                    ctx.beginPath();
+                    ctx.moveTo(-8, BALLOON_RADIUS);
+                    ctx.lineTo(8, BALLOON_RADIUS);
+                    ctx.lineTo(0, BALLOON_RADIUS + 15);
+                    ctx.closePath();
+                    ctx.fillStyle = '#9d174d';
+                    ctx.fill();
+
+                    // Draw electrons on balloon if charged
+                    if (state.chargeLevel > 0) {
+                        const numVisible = Math.max(1, Math.floor(state.chargeLevel * state.electrons.length));
+                        const electronRadius = BALLOON_RADIUS - 8;
+                        for (let i = 0; i < numVisible; i++) {
+                            // Distribute electrons evenly around the balloon
+                            const angle = (i / numVisible) * Math.PI * 2;
+                            const x = Math.cos(angle) * electronRadius;
+                            const y = Math.sin(angle) * electronRadius;
+
+                            // Outer glow
+                            const outerGlow = ctx.createRadialGradient(x, y, 0, x, y, 12);
+                            outerGlow.addColorStop(0, 'rgba(56, 189, 248, 0.8)');
+                            outerGlow.addColorStop(0.5, 'rgba(14, 165, 233, 0.3)');
+                            outerGlow.addColorStop(1, 'rgba(2, 132, 199, 0)');
+                            ctx.beginPath();
+                            ctx.arc(x, y, 12, 0, Math.PI * 2);
+                            ctx.fillStyle = outerGlow;
+                            ctx.fill();
+
+                            // Minus sign
+                            ctx.shadowBlur = 15;
+                            ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
+                            ctx.fillStyle = '#38bdf8';
+                            ctx.font = 'bold 16px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('−', x, y);
+                        }
+                        ctx.shadowBlur = 0;
+                    }
+
+                    ctx.restore();
+
+                    // Instructions
+                    let instruction = 'Dra ballongen mot håret för att ladda den';
+                    if (state.isRubbing) {
+                        instruction = 'Gnugga ballongen mot håret!';
+                    } else if (state.isCharged && !state.isStuck) {
+                        instruction = 'Dra den laddade ballongen mot taket';
+                    } else if (state.isStuck) {
+                        instruction = 'Ballongen sitter fast! Dipolerna har vridit sig.';
+                    }
+
+                    ctx.fillStyle = '#64748b';
+                    ctx.font = '14px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(instruction, width / 2, height - 30);
+
+                    animationFrameId = requestAnimationFrame(render);
+                };
+
+                animationFrameId = requestAnimationFrame(render);
+
+                return () => cancelAnimationFrame(animationFrameId);
+            }, [resetSignal]);
+
+            useEffect(() => {
+                const handleResize = () => {
+                    if (containerRef.current && canvasRef.current) {
+                        const rect = containerRef.current.getBoundingClientRect();
+                        canvasRef.current.width = rect.width;
+                        canvasRef.current.height = rect.height;
+                    }
+                };
+
+                window.addEventListener('resize', handleResize);
+                setTimeout(handleResize, 0);
+
+                return () => window.removeEventListener('resize', handleResize);
+            }, []);
+
+            return (
+                <div ref={containerRef} className="absolute inset-0 cursor-grab active:cursor-grabbing">
+                    <canvas
+                        ref={canvasRef}
+                        className="block touch-none"
+                        style={{ width: '100%', height: '100%', boxShadow: '0 0 40px rgba(56, 189, 248, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.5)' }}
+                    />
+                </div>
+            );
+        };
+
+        const IsolatorSimulation = () => {
+            const [resetSignal, setResetSignal] = useState(0);
+
+            return (
+                <>
+                    <div className="glass-card rounded-2xl p-4 mb-6">
+                        <div className="relative w-full" style={{ minHeight: '500px', maxHeight: '600px' }}>
+                            <IsolatorCanvas resetSignal={resetSignal} />
+                            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 glass-card p-4 rounded-2xl z-10">
+                                <button
+                                    onClick={() => setResetSignal(prev => prev + 1)}
+                                    className="px-6 py-3 rounded-lg font-semibold bg-slate-700/50 text-slate-300 border border-slate-600 hover:bg-slate-600/50 transition-all duration-200"
+                                >
+                                    Återställ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="glass-card-light p-4 rounded-xl">
+                            <div className="flex items-start gap-3">
+                                <div className="p-2 bg-pink-500/20 rounded-lg">
+                                    <span className="text-pink-400 text-xl">🎈</span>
+                                </div>
+                                <div>
+                                    <h3 className="text-slate-200 font-semibold mb-1">Laddad ballong</h3>
+                                    <p className="text-slate-400 text-sm">När ballongen gnuggas mot hår överförs elektroner till ballongen, som blir negativt laddad.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="glass-card-light p-4 rounded-xl">
+                            <div className="flex items-start gap-3">
+                                <div className="p-2 bg-cyan-500/20 rounded-lg">
+                                    <span className="text-cyan-400 text-xl font-bold">↔</span>
+                                </div>
+                                <div>
+                                    <h3 className="text-slate-200 font-semibold mb-1">Influens i isolator</h3>
+                                    <p className="text-slate-400 text-sm">I en isolator kan elektroner inte röra sig fritt. Istället vrids dipolerna så att deras positiva ändar pekar mot ballongen.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            );
+        };
+
+        // ==================== MAIN APP ====================
+
+        function App() {
+            const [activeTab, setActiveTab] = useState('ledare');
 
             return (
                 <div className="dark-container min-h-screen">
@@ -540,53 +1120,39 @@
                             <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text mb-4">
                                 Elektrisk influens
                             </h1>
-                            <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                                Observera hur den neutrala aluminiumburken attraheras av den negativt laddade ebonitstaven.
-                                Elektronerna repelleras, vilket skapar en dipol som får burken att rulla.
+                            <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed mb-6">
+                                {activeTab === 'ledare'
+                                    ? 'Observera hur den neutrala aluminiumburken attraheras av den negativt laddade ebonitstaven. Elektronerna repelleras, vilket skapar en dipol som får burken att rulla.'
+                                    : 'Se hur en negativt laddad ballong får dipolerna i taket att vrida sig och attrahera ballongen. I en isolator kan elektroner inte röra sig fritt – istället vrids molekylernas dipoler.'}
                             </p>
+
+                            {/* Tab buttons */}
+                            <div className="flex justify-center gap-4 mb-6">
+                                <button
+                                    onClick={() => setActiveTab('ledare')}
+                                    className={`tab-button px-6 py-3 rounded-lg font-semibold border transition-all duration-200 ${
+                                        activeTab === 'ledare'
+                                            ? 'active'
+                                            : 'bg-slate-800/50 text-slate-400 border-slate-700 hover:bg-slate-700/50'
+                                    }`}
+                                >
+                                    Elektrisk influens i ledare
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab('isolator')}
+                                    className={`tab-button px-6 py-3 rounded-lg font-semibold border transition-all duration-200 ${
+                                        activeTab === 'isolator'
+                                            ? 'active'
+                                            : 'bg-slate-800/50 text-slate-400 border-slate-700 hover:bg-slate-700/50'
+                                    }`}
+                                >
+                                    Elektrisk influens i isolator
+                                </button>
+                            </div>
                         </header>
 
-                        {/* Main simulation area */}
-                        <div className="glass-card rounded-2xl p-4 mb-6">
-                            <div className="relative w-full" style={{ minHeight: '500px', maxHeight: '600px' }}>
-                                <SimulationCanvas
-                                    showCharges={showCharges}
-                                    resetSignal={resetSignal}
-                                />
-
-                                <Controls
-                                    showCharges={showCharges}
-                                    onToggleCharges={handleToggleCharges}
-                                    onReset={handleReset}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Info cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="glass-card-light p-4 rounded-xl">
-                                <div className="flex items-start gap-3">
-                                    <div className="p-2 bg-cyan-500/20 rounded-lg">
-                                        <span className="text-cyan-400 text-xl font-bold">−</span>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-slate-200 font-semibold mb-1">Ebonitstav</h3>
-                                        <p className="text-slate-400 text-sm">Negativt laddad efter att ha gnidits mot päls. De negativa laddningarna repellerar elektronerna i burken.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="glass-card-light p-4 rounded-xl">
-                                <div className="flex items-start gap-3">
-                                    <div className="p-2 bg-cyan-500/20 rounded-lg">
-                                        <span className="text-cyan-400 text-xl font-bold">⚡</span>
-                                    </div>
-                                    <div>
-                                        <h3 className="text-slate-200 font-semibold mb-1">Influens</h3>
-                                        <p className="text-slate-400 text-sm">Elektronerna i burken flyttar sig bort från staven, vilket skapar en positiv sida närmast staven som attraheras.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {/* Simulation content */}
+                        {activeTab === 'ledare' ? <LedareSimulation /> : <IsolatorSimulation />}
                     </div>
                 </div>
             );

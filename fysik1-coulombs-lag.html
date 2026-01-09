@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -82,6 +84,98 @@
     <script type="text/babel">
         const { useState, useRef, useEffect, useCallback } = React;
 
+        // KaTeX-komponent för att rendera LaTeX
+        const Latex = ({ math, displayMode = false }) => {
+            const containerRef = useRef(null);
+
+            useEffect(() => {
+                if (containerRef.current && window.katex) {
+                    try {
+                        window.katex.render(math, containerRef.current, {
+                            throwOnError: false,
+                            displayMode: displayMode,
+                        });
+                    } catch (e) {
+                        containerRef.current.textContent = math;
+                    }
+                }
+            }, [math, displayMode]);
+
+            return <span ref={containerRef} />;
+        };
+
+        // Beräkningsvisning med KaTeX
+        const CalculationDisplay = ({ charge1, charge2, distance, force, formatNumber }) => {
+            const q1 = charge1 * 1e-6;
+            const q2 = charge2 * 1e-6;
+            const q1Exp = Math.floor(Math.log10(Math.abs(q1)));
+            const q2Exp = Math.floor(Math.log10(Math.abs(q2)));
+            const q1Mantissa = q1 / Math.pow(10, q1Exp);
+            const q2Mantissa = q2 / Math.pow(10, q2Exp);
+            const r2 = distance * distance;
+            const r2Exp = Math.floor(Math.log10(r2));
+            const r2Mantissa = r2 / Math.pow(10, r2Exp);
+
+            const formatMantissa = (m) => m.toFixed(2).replace('.', ',');
+
+            return (
+                <div className="bg-slate-900/50 rounded-xl p-5 border border-slate-700">
+                    <h4 className="text-slate-300 font-semibold mb-4">Beräkning med Coulombs lag:</h4>
+
+                    <div className="space-y-4 text-slate-300">
+                        {/* Huvudformel */}
+                        <div className="text-center py-4 bg-slate-800/50 rounded-lg text-2xl">
+                            <Latex math="F = k \cdot \frac{Q_1 \cdot Q_2}{r^2}" displayMode={true} />
+                        </div>
+
+                        {/* Värden */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                            <div className="bg-slate-800/30 p-3 rounded-lg">
+                                <div className="text-slate-400 mb-1"><Latex math="k =" /></div>
+                                <div className="text-slate-300"><Latex math="8{,}99 \cdot 10^9 \, \mathrm{N{\cdot}m^2/C^2}" /></div>
+                            </div>
+                            <div className="bg-slate-800/30 p-3 rounded-lg">
+                                <div className="text-red-400 mb-1"><Latex math="Q_1 =" /></div>
+                                <div className="text-slate-300">{formatNumber(charge1, 1)} µC</div>
+                            </div>
+                            <div className="bg-slate-800/30 p-3 rounded-lg">
+                                <div className="text-cyan-400 mb-1"><Latex math="Q_2 =" /></div>
+                                <div className="text-slate-300">{formatNumber(charge2, 1)} µC</div>
+                            </div>
+                            <div className="bg-slate-800/30 p-3 rounded-lg">
+                                <div className="text-slate-400 mb-1"><Latex math="r =" /></div>
+                                <div className="text-slate-300">{formatNumber(distance * 100, 1)} cm = {formatNumber(distance, 4)} m</div>
+                            </div>
+                        </div>
+
+                        {/* Uträkning */}
+                        <div className="bg-slate-800/30 p-4 rounded-lg space-y-4">
+                            <div className="text-slate-400 text-sm mb-2">Insättning av värden:</div>
+                            <div className="text-lg overflow-x-auto">
+                                <Latex
+                                    math={`F = 8{,}99 \\cdot 10^9 \\cdot \\frac{|${formatMantissa(q1Mantissa)} \\cdot 10^{${q1Exp}}| \\cdot |${formatMantissa(q2Mantissa)} \\cdot 10^{${q2Exp}}|}{(${formatNumber(distance, 4)})^2}`}
+                                    displayMode={true}
+                                />
+                            </div>
+                            <div className="text-lg overflow-x-auto">
+                                <Latex
+                                    math={`F = 8{,}99 \\cdot 10^9 \\cdot \\frac{${formatMantissa(Math.abs(q1Mantissa))} \\cdot 10^{${q1Exp}} \\cdot ${formatMantissa(Math.abs(q2Mantissa))} \\cdot 10^{${q2Exp}}}{${formatMantissa(r2Mantissa)} \\cdot 10^{${r2Exp}}}`}
+                                    displayMode={true}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Resultat */}
+                        <div className="text-center py-4 bg-amber-500/10 rounded-lg border border-amber-500/30">
+                            <span className="text-amber-400 font-bold text-2xl">
+                                <Latex math={`F = ${force < 0.01 ? (force.toExponential(2).replace('.', ',')) : formatNumber(force, 3)} \\, \\text{N}`} />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
         // Coulombs konstant
         const K = 8.99e9; // N·m²/C²
 
@@ -99,17 +193,31 @@
         const CoulombSimulation = () => {
             const canvasRef = useRef(null);
             const containerRef = useRef(null);
-            const [charge1, setCharge1] = useState(2); // µC
-            const [charge2, setCharge2] = useState(-3); // µC
+            const [charge1, setCharge1] = useState(5); // µC
+            const [charge2, setCharge2] = useState(-5); // µC
             const [showCalculation, setShowCalculation] = useState(false);
-            const [pos1, setPos1] = useState({ x: 200, y: 250 });
-            const [pos2, setPos2] = useState({ x: 500, y: 250 });
+            const [pos1, setPos1] = useState({ x: 275, y: 250 });
+            const [pos2, setPos2] = useState({ x: 525, y: 250 });
+            const [canvasReady, setCanvasReady] = useState(false);
             const [dragging, setDragging] = useState(null);
+            const [clickStart, setClickStart] = useState(null);
             const [distance, setDistance] = useState(0);
             const [force, setForce] = useState(0);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const fullscreenRef = useRef(null);
 
-            const CHARGE_RADIUS = 35;
+            const MIN_CHARGE_RADIUS = 20;
+            const MAX_CHARGE_RADIUS = 45;
             const PIXELS_PER_CM = 50; // 50 pixlar = 1 cm
+
+            // Beräkna radie baserat på laddningens storlek
+            const getChargeRadius = (charge) => {
+                const absCharge = Math.abs(charge);
+                return MIN_CHARGE_RADIUS + (MAX_CHARGE_RADIUS - MIN_CHARGE_RADIUS) * (absCharge / 10);
+            };
+
+            const charge1Radius = getChargeRadius(charge1);
+            const charge2Radius = getChargeRadius(charge2);
 
             // Beräkna avstånd och kraft
             useEffect(() => {
@@ -135,26 +243,32 @@
                 const dist1 = Math.sqrt((x - pos1.x) ** 2 + (y - pos1.y) ** 2);
                 const dist2 = Math.sqrt((x - pos2.x) ** 2 + (y - pos2.y) ** 2);
 
-                if (dist1 < CHARGE_RADIUS + 10) {
+                if (dist1 < charge1Radius + 10) {
                     setDragging(1);
-                } else if (dist2 < CHARGE_RADIUS + 10) {
+                    setClickStart({ x, y, charge: 1 });
+                } else if (dist2 < charge2Radius + 10) {
                     setDragging(2);
+                    setClickStart({ x, y, charge: 2 });
+                } else {
+                    setClickStart(null);
                 }
-            }, [pos1, pos2]);
+            }, [pos1, pos2, charge1Radius, charge2Radius]);
 
             const handleMouseMove = useCallback((e) => {
                 if (!dragging || !canvasRef.current) return;
 
                 const rect = canvasRef.current.getBoundingClientRect();
-                let x = Math.max(CHARGE_RADIUS, Math.min(rect.width - CHARGE_RADIUS, e.clientX - rect.left));
-                let y = Math.max(CHARGE_RADIUS, Math.min(rect.height - CHARGE_RADIUS, e.clientY - rect.top));
+                const myRadius = dragging === 1 ? charge1Radius : charge2Radius;
+                const otherRadius = dragging === 1 ? charge2Radius : charge1Radius;
+                let x = Math.max(myRadius, Math.min(rect.width - myRadius, e.clientX - rect.left));
+                let y = Math.max(myRadius, Math.min(rect.height - myRadius, e.clientY - rect.top));
 
                 // Förhindra överlappning
                 const otherPos = dragging === 1 ? pos2 : pos1;
                 const dx = x - otherPos.x;
                 const dy = y - otherPos.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                const minDist = CHARGE_RADIUS * 2 + 10;
+                const minDist = myRadius + otherRadius + 10;
 
                 if (dist < minDist && dist > 0) {
                     // Flytta bort från den andra laddningen
@@ -163,8 +277,8 @@
                     x = otherPos.x + pushX;
                     y = otherPos.y + pushY;
                     // Håll inom canvas
-                    x = Math.max(CHARGE_RADIUS, Math.min(rect.width - CHARGE_RADIUS, x));
-                    y = Math.max(CHARGE_RADIUS, Math.min(rect.height - CHARGE_RADIUS, y));
+                    x = Math.max(myRadius, Math.min(rect.width - myRadius, x));
+                    y = Math.max(myRadius, Math.min(rect.height - myRadius, y));
                 }
 
                 if (dragging === 1) {
@@ -172,11 +286,27 @@
                 } else {
                     setPos2({ x, y });
                 }
-            }, [dragging, pos1, pos2]);
+            }, [dragging, pos1, pos2, charge1Radius, charge2Radius]);
 
-            const handleMouseUp = useCallback(() => {
+            const handleMouseUp = useCallback((e) => {
+                if (clickStart && canvasRef.current && e.clientX !== undefined) {
+                    const rect = canvasRef.current.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const moveDistance = Math.sqrt((x - clickStart.x) ** 2 + (y - clickStart.y) ** 2);
+
+                    // Om musen inte rört sig mer än 5 pixlar, räkna som klick
+                    if (moveDistance < 5) {
+                        if (clickStart.charge === 1) {
+                            setCharge1(prev => -prev);
+                        } else if (clickStart.charge === 2) {
+                            setCharge2(prev => -prev);
+                        }
+                    }
+                }
                 setDragging(null);
-            }, []);
+                setClickStart(null);
+            }, [clickStart]);
 
             const handleTouchStart = useCallback((e) => {
                 e.preventDefault();
@@ -188,12 +318,16 @@
                 const dist1 = Math.sqrt((x - pos1.x) ** 2 + (y - pos1.y) ** 2);
                 const dist2 = Math.sqrt((x - pos2.x) ** 2 + (y - pos2.y) ** 2);
 
-                if (dist1 < CHARGE_RADIUS + 20) {
+                if (dist1 < charge1Radius + 20) {
                     setDragging(1);
-                } else if (dist2 < CHARGE_RADIUS + 20) {
+                    setClickStart({ x, y, charge: 1 });
+                } else if (dist2 < charge2Radius + 20) {
                     setDragging(2);
+                    setClickStart({ x, y, charge: 2 });
+                } else {
+                    setClickStart(null);
                 }
-            }, [pos1, pos2]);
+            }, [pos1, pos2, charge1Radius, charge2Radius]);
 
             const handleTouchMove = useCallback((e) => {
                 if (!dragging || !canvasRef.current) return;
@@ -201,23 +335,25 @@
 
                 const touch = e.touches[0];
                 const rect = canvasRef.current.getBoundingClientRect();
-                let x = Math.max(CHARGE_RADIUS, Math.min(rect.width - CHARGE_RADIUS, touch.clientX - rect.left));
-                let y = Math.max(CHARGE_RADIUS, Math.min(rect.height - CHARGE_RADIUS, touch.clientY - rect.top));
+                const myRadius = dragging === 1 ? charge1Radius : charge2Radius;
+                const otherRadius = dragging === 1 ? charge2Radius : charge1Radius;
+                let x = Math.max(myRadius, Math.min(rect.width - myRadius, touch.clientX - rect.left));
+                let y = Math.max(myRadius, Math.min(rect.height - myRadius, touch.clientY - rect.top));
 
                 // Förhindra överlappning
                 const otherPos = dragging === 1 ? pos2 : pos1;
                 const dx = x - otherPos.x;
                 const dy = y - otherPos.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                const minDist = CHARGE_RADIUS * 2 + 10;
+                const minDist = myRadius + otherRadius + 10;
 
                 if (dist < minDist && dist > 0) {
                     const pushX = (dx / dist) * minDist;
                     const pushY = (dy / dist) * minDist;
                     x = otherPos.x + pushX;
                     y = otherPos.y + pushY;
-                    x = Math.max(CHARGE_RADIUS, Math.min(rect.width - CHARGE_RADIUS, x));
-                    y = Math.max(CHARGE_RADIUS, Math.min(rect.height - CHARGE_RADIUS, y));
+                    x = Math.max(myRadius, Math.min(rect.width - myRadius, x));
+                    y = Math.max(myRadius, Math.min(rect.height - myRadius, y));
                 }
 
                 if (dragging === 1) {
@@ -225,7 +361,75 @@
                 } else {
                     setPos2({ x, y });
                 }
-            }, [dragging, pos1, pos2]);
+            }, [dragging, pos1, pos2, charge1Radius, charge2Radius]);
+
+            const handleTouchEnd = useCallback((e) => {
+                if (clickStart && e.changedTouches && e.changedTouches.length > 0) {
+                    const touch = e.changedTouches[0];
+                    const rect = canvasRef.current.getBoundingClientRect();
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+                    const moveDistance = Math.sqrt((x - clickStart.x) ** 2 + (y - clickStart.y) ** 2);
+
+                    // Om fingret inte rört sig mer än 10 pixlar, räkna som tap
+                    if (moveDistance < 10) {
+                        if (clickStart.charge === 1) {
+                            setCharge1(prev => -prev);
+                        } else if (clickStart.charge === 2) {
+                            setCharge2(prev => -prev);
+                        }
+                    }
+                }
+                setDragging(null);
+                setClickStart(null);
+            }, [clickStart]);
+
+            // Fullskärmsfunktioner
+            const toggleFullscreen = useCallback(() => {
+                if (!document.fullscreenElement) {
+                    fullscreenRef.current?.requestFullscreen?.();
+                } else {
+                    document.exitFullscreen?.();
+                }
+            }, []);
+
+            useEffect(() => {
+                const handleFullscreenChange = () => {
+                    const wasFullscreen = isFullscreen;
+                    const nowFullscreen = !!document.fullscreenElement;
+                    setIsFullscreen(nowFullscreen);
+
+                    // Trigga omritning av canvas när fullskärmsläge ändras
+                    setTimeout(() => {
+                        if (containerRef.current && canvasRef.current) {
+                            const rect = containerRef.current.getBoundingClientRect();
+                            canvasRef.current.width = rect.width;
+                            canvasRef.current.height = rect.height;
+
+                            // Om vi lämnar fullskärm, flytta tillbaka laddningarna så de syns
+                            if (wasFullscreen && !nowFullscreen) {
+                                const margin = MAX_CHARGE_RADIUS + 20;
+                                const maxX = rect.width - margin;
+                                const maxY = rect.height - margin;
+
+                                setPos1(prev => ({
+                                    x: Math.max(margin, Math.min(maxX, prev.x)),
+                                    y: Math.max(margin, Math.min(maxY, prev.y))
+                                }));
+                                setPos2(prev => ({
+                                    x: Math.max(margin, Math.min(maxX, prev.x)),
+                                    y: Math.max(margin, Math.min(maxY, prev.y))
+                                }));
+                            }
+
+                            setCanvasReady(prev => !prev);
+                        }
+                    }, 100);
+                };
+
+                document.addEventListener('fullscreenchange', handleFullscreenChange);
+                return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+            }, [isFullscreen]);
 
             // Rita canvas
             useEffect(() => {
@@ -271,10 +475,10 @@
                 // Bestäm om attraktion eller repulsion
                 const isAttraction = (charge1 > 0 && charge2 < 0) || (charge1 < 0 && charge2 > 0);
 
-                // Skala kraftvektorn för visualisering (linjär skala - proportionell mot kraften)
-                // Referens: 1 N = 15 pixlar, max 120 pixlar, min 15 pixlar
-                const PIXELS_PER_NEWTON = 15;
-                const forceScale = Math.min(120, Math.max(15, force * PIXELS_PER_NEWTON));
+                // Skala kraftvektorn för visualisering (linjär skala - strikt proportionell mot kraften)
+                // 1 N = 0.5 pixlar, inget tak - pilarna är alltid proportionella
+                const PIXELS_PER_NEWTON = 0.5;
+                const forceScale = force * PIXELS_PER_NEWTON;
 
                 // Rita kraftvektorer
                 const drawArrow = (fromX, fromY, toX, toY, color) => {
@@ -307,14 +511,15 @@
                 };
 
                 // Kraftvektorer för laddning 1
-                if (charge1 !== 0 && charge2 !== 0 && dist > CHARGE_RADIUS * 2) {
+                // Rita endast om det finns en kraft och laddningarna inte överlappar
+                if (charge1 !== 0 && charge2 !== 0 && dist > charge1Radius + charge2Radius && forceScale > 5) {
                     const f1DirX = isAttraction ? dirX : -dirX;
                     const f1DirY = isAttraction ? dirY : -dirY;
                     drawArrow(
-                        pos1.x + f1DirX * (CHARGE_RADIUS + 5),
-                        pos1.y + f1DirY * (CHARGE_RADIUS + 5),
-                        pos1.x + f1DirX * (CHARGE_RADIUS + forceScale),
-                        pos1.y + f1DirY * (CHARGE_RADIUS + forceScale),
+                        pos1.x + f1DirX * (charge1Radius + 5),
+                        pos1.y + f1DirY * (charge1Radius + 5),
+                        pos1.x + f1DirX * (charge1Radius + 5 + forceScale),
+                        pos1.y + f1DirY * (charge1Radius + 5 + forceScale),
                         '#fbbf24'
                     );
 
@@ -322,16 +527,16 @@
                     const f2DirX = isAttraction ? -dirX : dirX;
                     const f2DirY = isAttraction ? -dirY : dirY;
                     drawArrow(
-                        pos2.x + f2DirX * (CHARGE_RADIUS + 5),
-                        pos2.y + f2DirY * (CHARGE_RADIUS + 5),
-                        pos2.x + f2DirX * (CHARGE_RADIUS + forceScale),
-                        pos2.y + f2DirY * (CHARGE_RADIUS + forceScale),
+                        pos2.x + f2DirX * (charge2Radius + 5),
+                        pos2.y + f2DirY * (charge2Radius + 5),
+                        pos2.x + f2DirX * (charge2Radius + 5 + forceScale),
+                        pos2.y + f2DirY * (charge2Radius + 5 + forceScale),
                         '#fbbf24'
                     );
                 }
 
-                // Rita laddning 1
-                const drawCharge = (x, y, charge, labelVar, labelValue) => {
+                // Rita laddning
+                const drawCharge = (x, y, charge, radius, labelVar, labelValue) => {
                     const isPositive = charge > 0;
                     const color = isPositive ? '#ef4444' : '#38bdf8';
                     const glowColor = isPositive ? 'rgba(239, 68, 68, 0.6)' : 'rgba(56, 189, 248, 0.6)';
@@ -341,13 +546,13 @@
                     ctx.shadowColor = glowColor;
 
                     // Gradient för laddningen
-                    const gradient = ctx.createRadialGradient(x - 10, y - 10, 5, x, y, CHARGE_RADIUS);
+                    const gradient = ctx.createRadialGradient(x - 10, y - 10, 5, x, y, radius);
                     gradient.addColorStop(0, isPositive ? '#fca5a5' : '#7dd3fc');
                     gradient.addColorStop(0.5, color);
                     gradient.addColorStop(1, isPositive ? '#991b1b' : '#0369a1');
 
                     ctx.beginPath();
-                    ctx.arc(x, y, CHARGE_RADIUS, 0, Math.PI * 2);
+                    ctx.arc(x, y, radius, 0, Math.PI * 2);
                     ctx.fillStyle = gradient;
                     ctx.fill();
 
@@ -357,9 +562,10 @@
 
                     ctx.shadowBlur = 0;
 
-                    // Plus eller minus tecken
+                    // Plus eller minus tecken - storlek anpassas efter radien
                     ctx.fillStyle = '#ffffff';
-                    ctx.font = 'bold 28px Poppins, sans-serif';
+                    const fontSize = Math.max(16, Math.min(32, radius * 0.7));
+                    ctx.font = `bold ${fontSize}px Poppins, sans-serif`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
                     ctx.fillText(isPositive ? '+' : '−', x, y);
@@ -381,16 +587,16 @@
                     ctx.fillStyle = isPositive ? '#fca5a5' : '#7dd3fc';
                     ctx.font = 'italic 18px Poppins, sans-serif';
                     ctx.textAlign = 'left';
-                    ctx.fillText(labelVar, startX, y + CHARGE_RADIUS + 14);
+                    ctx.fillText(labelVar, startX, y + radius + 14);
 
                     // Värde (normal)
                     ctx.fillStyle = '#cbd5e1';
                     ctx.font = '18px Poppins, sans-serif';
-                    ctx.fillText(' = ' + labelValue, startX + varWidth, y + CHARGE_RADIUS + 14);
+                    ctx.fillText(' = ' + labelValue, startX + varWidth, y + radius + 14);
                 };
 
-                drawCharge(pos1.x, pos1.y, charge1, 'Q₁', `${formatNumber(charge1, 1)} µC`);
-                drawCharge(pos2.x, pos2.y, charge2, 'Q₂', `${formatNumber(charge2, 1)} µC`);
+                drawCharge(pos1.x, pos1.y, charge1, charge1Radius, 'Q₁', `${formatNumber(charge1, 1)} µC`);
+                drawCharge(pos2.x, pos2.y, charge2, charge2Radius, 'Q₂', `${formatNumber(charge2, 1)} µC`);
 
                 // Rita avståndslinje
                 ctx.setLineDash([5, 5]);
@@ -417,7 +623,7 @@
                 ctx.font = '17px Poppins, sans-serif';
                 ctx.fillText(` = ${formatNumber(distCm, 1)} cm`, midX + 5, midY - 12);
 
-            }, [pos1, pos2, charge1, charge2, force, distance]);
+            }, [pos1, pos2, charge1, charge2, charge1Radius, charge2Radius, force, distance, canvasReady]);
 
             // Hantera resize
             useEffect(() => {
@@ -426,11 +632,14 @@
                         const rect = containerRef.current.getBoundingClientRect();
                         canvasRef.current.width = rect.width;
                         canvasRef.current.height = rect.height;
+                        setCanvasReady(prev => !prev); // Trigga omritning
                     }
                 };
 
                 window.addEventListener('resize', handleResize);
-                setTimeout(handleResize, 0);
+                // Fördröj lite för att säkerställa att containern har rätt storlek
+                setTimeout(handleResize, 50);
+                setTimeout(handleResize, 200);
 
                 return () => window.removeEventListener('resize', handleResize);
             }, []);
@@ -448,169 +657,137 @@
                             </p>
                         </header>
 
-                        {/* Simulation */}
-                        <div className="glass-card rounded-2xl p-4 mb-6">
-                            <div
-                                ref={containerRef}
-                                className="relative w-full cursor-grab active:cursor-grabbing"
-                                style={{ minHeight: '450px' }}
-                            >
-                                <canvas
-                                    ref={canvasRef}
-                                    className="block touch-none"
-                                    style={{ width: '100%', height: '100%' }}
-                                    onMouseDown={handleMouseDown}
-                                    onMouseMove={handleMouseMove}
-                                    onMouseUp={handleMouseUp}
-                                    onMouseLeave={handleMouseUp}
-                                    onTouchStart={handleTouchStart}
-                                    onTouchMove={handleTouchMove}
-                                    onTouchEnd={handleMouseUp}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Controls */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <div className="glass-card-light p-5 rounded-xl">
-                                <h3 className="text-slate-200 font-semibold mb-4 flex items-center gap-2">
-                                    <span className="w-4 h-4 rounded-full bg-red-500"></span>
-                                    Laddning Q₁
-                                </h3>
-                                <input
-                                    type="range"
-                                    min="-10"
-                                    max="10"
-                                    step="0.5"
-                                    value={charge1}
-                                    onChange={(e) => setCharge1(parseFloat(e.target.value))}
-                                    className="w-full slider-custom"
-                                />
-                                <div className="flex justify-between text-sm text-slate-400 mt-2">
-                                    <span>-10 µC</span>
-                                    <span className={`font-semibold ${charge1 >= 0 ? 'text-red-400' : 'text-cyan-400'}`}>
-                                        {formatNumber(charge1, 1)} µC
-                                    </span>
-                                    <span>+10 µC</span>
+                        {/* Main layout: Simulation + Controls side by side */}
+                        <div
+                            ref={fullscreenRef}
+                            className={`flex flex-col lg:flex-row gap-6 mb-6 ${isFullscreen ? 'bg-slate-950 p-6 h-screen' : ''}`}
+                        >
+                            {/* Simulation - left side */}
+                            <div className={`glass-card rounded-2xl p-4 flex-grow lg:flex-grow-[2] relative ${isFullscreen ? 'h-full' : ''}`}>
+                                {/* Fullscreen button */}
+                                <button
+                                    onClick={toggleFullscreen}
+                                    className="absolute top-3 right-3 z-10 p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                                    title={isFullscreen ? 'Avsluta fullskärm (Esc)' : 'Fullskärm'}
+                                >
+                                    {isFullscreen ? (
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    ) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                        </svg>
+                                    )}
+                                </button>
+                                <div
+                                    ref={containerRef}
+                                    className={`relative w-full cursor-grab active:cursor-grabbing ${isFullscreen ? 'h-full' : ''}`}
+                                    style={{ minHeight: isFullscreen ? '100%' : '400px' }}
+                                >
+                                    <canvas
+                                        ref={canvasRef}
+                                        className="block touch-none"
+                                        style={{ width: '100%', height: '100%' }}
+                                        onMouseDown={handleMouseDown}
+                                        onMouseMove={handleMouseMove}
+                                        onMouseUp={handleMouseUp}
+                                        onMouseLeave={handleMouseUp}
+                                        onTouchStart={handleTouchStart}
+                                        onTouchMove={handleTouchMove}
+                                        onTouchEnd={handleTouchEnd}
+                                    />
                                 </div>
                             </div>
 
-                            <div className="glass-card-light p-5 rounded-xl">
-                                <h3 className="text-slate-200 font-semibold mb-4 flex items-center gap-2">
-                                    <span className="w-4 h-4 rounded-full bg-cyan-500"></span>
-                                    Laddning Q₂
-                                </h3>
-                                <input
-                                    type="range"
-                                    min="-10"
-                                    max="10"
-                                    step="0.5"
-                                    value={charge2}
-                                    onChange={(e) => setCharge2(parseFloat(e.target.value))}
-                                    className="w-full slider-custom"
-                                />
-                                <div className="flex justify-between text-sm text-slate-400 mt-2">
-                                    <span>-10 µC</span>
-                                    <span className={`font-semibold ${charge2 >= 0 ? 'text-red-400' : 'text-cyan-400'}`}>
-                                        {formatNumber(charge2, 1)} µC
-                                    </span>
-                                    <span>+10 µC</span>
+                            {/* Controls - right side */}
+                            <div className={`flex flex-col gap-4 lg:w-80 ${isFullscreen ? 'justify-center' : ''}`}>
+                                {/* Charge 1 slider */}
+                                <div className="glass-card-light p-4 rounded-xl">
+                                    <h3 className="text-slate-200 font-semibold mb-3 flex items-center gap-2 text-sm">
+                                        <span className="w-3 h-3 rounded-full bg-red-500"></span>
+                                        Laddning Q₁
+                                    </h3>
+                                    <input
+                                        type="range"
+                                        min="-10"
+                                        max="10"
+                                        step="0.5"
+                                        value={charge1}
+                                        onChange={(e) => setCharge1(parseFloat(e.target.value))}
+                                        className="w-full slider-custom"
+                                    />
+                                    <div className="flex justify-between text-xs text-slate-400 mt-2">
+                                        <span>-10 µC</span>
+                                        <span className={`font-semibold ${charge1 >= 0 ? 'text-red-400' : 'text-cyan-400'}`}>
+                                            {formatNumber(charge1, 1)} µC
+                                        </span>
+                                        <span>+10 µC</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        {/* Force display and calculation toggle */}
-                        <div className="glass-card rounded-2xl p-6 mb-6">
-                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-                                <div>
-                                    <h3 className="text-slate-200 font-semibold text-lg">Elektrisk kraft</h3>
-                                    <p className="text-3xl font-bold text-amber-400 glow-text">
+                                {/* Charge 2 slider */}
+                                <div className="glass-card-light p-4 rounded-xl">
+                                    <h3 className="text-slate-200 font-semibold mb-3 flex items-center gap-2 text-sm">
+                                        <span className="w-3 h-3 rounded-full bg-cyan-500"></span>
+                                        Laddning Q₂
+                                    </h3>
+                                    <input
+                                        type="range"
+                                        min="-10"
+                                        max="10"
+                                        step="0.5"
+                                        value={charge2}
+                                        onChange={(e) => setCharge2(parseFloat(e.target.value))}
+                                        className="w-full slider-custom"
+                                    />
+                                    <div className="flex justify-between text-xs text-slate-400 mt-2">
+                                        <span>-10 µC</span>
+                                        <span className={`font-semibold ${charge2 >= 0 ? 'text-red-400' : 'text-cyan-400'}`}>
+                                            {formatNumber(charge2, 1)} µC
+                                        </span>
+                                        <span>+10 µC</span>
+                                    </div>
+                                </div>
+
+                                {/* Force display */}
+                                <div className="glass-card rounded-xl p-4 flex-grow">
+                                    <h3 className="text-slate-200 font-semibold text-sm mb-2">Elektrisk kraft</h3>
+                                    <p className="text-2xl font-bold text-amber-400 glow-text mb-1">
                                         F = {force < 0.01 ? formatScientific(force) : formatNumber(force, 3)} N
                                     </p>
-                                    <p className="text-slate-400 text-sm mt-1">
+                                    <p className="text-slate-400 text-xs mb-3">
                                         {(charge1 > 0 && charge2 < 0) || (charge1 < 0 && charge2 > 0)
                                             ? 'Attraktiv kraft (olika tecken)'
                                             : 'Repulsiv kraft (samma tecken)'}
                                     </p>
+                                    {!isFullscreen && (
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                checked={showCalculation}
+                                                onChange={(e) => setShowCalculation(e.target.checked)}
+                                                className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-slate-900"
+                                            />
+                                            <span className="text-slate-300 text-sm">Visa beräkning</span>
+                                        </label>
+                                    )}
                                 </div>
-                                <label className="flex items-center gap-3 cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        checked={showCalculation}
-                                        onChange={(e) => setShowCalculation(e.target.checked)}
-                                        className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-slate-900"
-                                    />
-                                    <span className="text-slate-300">Visa beräkning av kraft</span>
-                                </label>
                             </div>
-
-                            {showCalculation && (
-                                <div className="bg-slate-900/50 rounded-xl p-5 border border-slate-700">
-                                    <h4 className="text-slate-300 font-semibold mb-4">Beräkning med Coulombs lag:</h4>
-
-                                    <div className="space-y-4 text-slate-300">
-                                        {/* Formel */}
-                                        <div className="text-center py-4 bg-slate-800/50 rounded-lg">
-                                            <div className="text-2xl font-serif">
-                                                <span className="text-amber-400 italic">F</span>
-                                                <span className="text-slate-400"> = </span>
-                                                <span className="text-slate-400 italic">k</span>
-                                                <span className="text-slate-400"> · </span>
-                                                <span className="inline-block text-center">
-                                                    <span className="block border-b-2 border-slate-500 px-3 pb-1">
-                                                        <span className="text-red-400 italic">Q</span><sub className="text-red-400">1</sub>
-                                                        <span className="text-slate-400"> · </span>
-                                                        <span className="text-cyan-400 italic">Q</span><sub className="text-cyan-400">2</sub>
-                                                    </span>
-                                                    <span className="block pt-1 italic">r</span><sup>2</sup>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        {/* Värden */}
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-                                            <div className="bg-slate-800/30 p-3 rounded-lg">
-                                                <span className="text-slate-500 block">k =</span>
-                                                <span className="text-slate-300">8,99 × 10⁹ N·m²/C²</span>
-                                            </div>
-                                            <div className="bg-slate-800/30 p-3 rounded-lg">
-                                                <span className="text-red-400 block">Q₁ =</span>
-                                                <span className="text-slate-300">{formatNumber(charge1, 1)} µC = {formatScientific(charge1 * 1e-6)} C</span>
-                                            </div>
-                                            <div className="bg-slate-800/30 p-3 rounded-lg">
-                                                <span className="text-cyan-400 block">Q₂ =</span>
-                                                <span className="text-slate-300">{formatNumber(charge2, 1)} µC = {formatScientific(charge2 * 1e-6)} C</span>
-                                            </div>
-                                            <div className="bg-slate-800/30 p-3 rounded-lg">
-                                                <span className="text-slate-500 block">r =</span>
-                                                <span className="text-slate-300">{formatNumber(distance * 100, 1)} cm = {formatNumber(distance, 4)} m</span>
-                                            </div>
-                                        </div>
-
-                                        {/* Uträkning */}
-                                        <div className="bg-slate-800/30 p-4 rounded-lg space-y-3">
-                                            <div className="text-slate-400 text-sm">Insättning av värden:</div>
-                                            <div className="font-mono text-base text-slate-300">
-                                                <span className="text-amber-400 italic">F</span> = <span className="text-slate-400">k</span> · |<span className="text-red-400 italic">Q</span>₁| · |<span className="text-cyan-400 italic">Q</span>₂| / <span className="italic">r</span>²
-                                            </div>
-                                            <div className="font-mono text-base text-slate-300">
-                                                <span className="text-amber-400 italic">F</span> = 8,99×10⁹ · |{formatScientific(charge1 * 1e-6)}| · |{formatScientific(charge2 * 1e-6)}| / ({formatNumber(distance, 4)})²
-                                            </div>
-                                            <div className="font-mono text-base text-slate-300">
-                                                <span className="text-amber-400 italic">F</span> = 8,99×10⁹ · {formatScientific(Math.abs(charge1 * 1e-6))} · {formatScientific(Math.abs(charge2 * 1e-6))} / {formatScientific(distance * distance)}
-                                            </div>
-                                        </div>
-
-                                        {/* Resultat */}
-                                        <div className="text-center py-4 bg-amber-500/10 rounded-lg border border-amber-500/30">
-                                            <span className="text-amber-400 font-bold text-2xl">
-                                                <span className="italic">F</span> = {force < 0.01 ? formatScientific(force) : formatNumber(force, 3)} N
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
                         </div>
+
+                        {/* Calculation display - full width below */}
+                        {showCalculation && (
+                            <div className="glass-card rounded-2xl p-6 mb-6">
+                                <CalculationDisplay
+                                    charge1={charge1}
+                                    charge2={charge2}
+                                    distance={distance}
+                                    force={force}
+                                    formatNumber={formatNumber}
+                                />
+                            </div>
+                        )}
 
                         {/* Info cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

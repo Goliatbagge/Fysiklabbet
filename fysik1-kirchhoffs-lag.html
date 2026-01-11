@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirchhoffs första lag - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, #0ea5e9 0%, #0ea5e9 var(--progress, 50%), #1e293b var(--progress, 50%), #1e293b 100%);
+            border-radius: 8px;
+            height: 8px;
+            touch-action: none;
+            cursor: grab;
+        }
+        input[type="range"]:active {
+            cursor: grabbing;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+        @keyframes flowForward {
+            0% { stroke-dashoffset: 40; }
+            100% { stroke-dashoffset: 0; }
+        }
+        .flow-animate {
+            stroke-dasharray: 10 30;
+            animation: flowForward var(--flow-duration, 1s) linear infinite;
+        }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        .confetti {
+            position: fixed;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            animation: confetti-fall 3s ease-out forwards;
+            z-index: 1000;
+        }
+        @keyframes pulse-success {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            50% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); }
+        }
+        .pulse-success {
+            animation: pulse-success 1s ease-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .shake {
+            animation: shake 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="dark-container min-h-screen">
+        <div id="root"></div>
+    </main>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // Formatera nummer med svenskt decimalkomma
+        const formatNumber = (num, decimals = 2) => {
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Olika konfigurationer för förgreningspunkten
+        const CONFIGURATIONS = {
+            '1in2out': {
+                name: '1 in, 2 ut',
+                description: 'En ledning in till förgreningspunkten och två ledningar ut',
+                inWires: 1,
+                outWires: 2
+            },
+            '2in2out': {
+                name: '2 in, 2 ut',
+                description: 'Två ledningar in till förgreningspunkten och två ledningar ut',
+                inWires: 2,
+                outWires: 2
+            },
+            '2in1out': {
+                name: '2 in, 1 ut',
+                description: 'Två ledningar in till förgreningspunkten och en ledning ut',
+                inWires: 2,
+                outWires: 1
+            }
+        };
+
+        // Komponent för SVG kopplingsschema
+        const CircuitDiagram = ({ config, currents, totalIn, totalOut }) => {
+            const centerX = 250;
+            const centerY = 180;
+            const wireLength = 120;
+
+            const { inWires, outWires } = CONFIGURATIONS[config];
+
+            // Beräkna animationshastighet baserat på strömstyrka (snabbare = högre ström)
+            const getFlowDuration = (current) => {
+                const maxCurrent = 5;
+                const minDuration = 0.3;
+                const maxDuration = 2;
+                const normalized = Math.min(current / maxCurrent, 1);
+                return maxDuration - normalized * (maxDuration - minDuration);
+            };
+
+            // Rita inkommande ledningar (vänster sida)
+            const renderInWires = () => {
+                const wires = [];
+                if (inWires === 1) {
+                    // En ledning rakt in från vänster
+                    const startX = centerX - wireLength;
+                    const flowDuration = getFlowDuration(currents.in1);
+                    wires.push(
+                        <g key="in1">
+                            {/* Bakgrundsledning */}
+                            <line
+                                x1={startX} y1={centerY}
+                                x2={centerX} y2={centerY}
+                                stroke="#0ea5e9"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                                opacity="0.4"
+                            />
+                            {/* Animerad strömindikator */}
+                            <line
+                                x1={startX} y1={centerY}
+                                x2={centerX} y2={centerY}
+                                stroke="#38bdf8"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                                className="flow-animate"
+                                style={{ '--flow-duration': `${flowDuration}s` }}
+                            />
+                            {/* Strömvärde */}
+                            <text x={startX - 10} y={centerY - 15} fill="#22c55e" fontSize="16" fontWeight="bold" textAnchor="end" fontFamily="Poppins">
+                                <tspan fontStyle="italic">I</tspan>₁ = {formatNumber(currents.in1)} A
+                            </text>
+                            {/* Pilspets */}
+                            <polygon
+                                points={`${centerX - 30},${centerY - 8} ${centerX - 15},${centerY} ${centerX - 30},${centerY + 8}`}
+                                fill="#22c55e"
+                            />
+                        </g>
+                    );
+                } else {
+                    // Två ledningar in - snett uppifrån och nedifrån vänster
+                    const angles = [-35, 35];
+                    const currentKeys = ['in1', 'in2'];
+                    const labels = ['₁', '₂'];
+
+                    angles.forEach((angle, i) => {
+                        const rad = (angle * Math.PI) / 180;
+                        const startX = centerX - wireLength * Math.cos(rad);
+                        const startY = centerY - wireLength * Math.sin(rad);
+                        const flowDuration = getFlowDuration(currents[currentKeys[i]]);
+
+                        // Pilspets position (nära centrum, längs ledningen)
+                        const arrowDist = 30;
+                        const arrowX = centerX - arrowDist * Math.cos(rad);
+                        const arrowY = centerY - arrowDist * Math.sin(rad);
+                        // Rotation för pilen (pekar mot centrum)
+                        // angle är definierat från centrum, så vi behöver bara angle (inte -angle)
+                        const arrowRotation = angle;
+
+                        wires.push(
+                            <g key={`in${i + 1}`}>
+                                <line
+                                    x1={startX} y1={startY}
+                                    x2={centerX} y2={centerY}
+                                    stroke="#0ea5e9"
+                                    strokeWidth="6"
+                                    strokeLinecap="round"
+                                    opacity="0.4"
+                                />
+                                <line
+                                    x1={startX} y1={startY}
+                                    x2={centerX} y2={centerY}
+                                    stroke="#38bdf8"
+                                    strokeWidth="6"
+                                    strokeLinecap="round"
+                                    className="flow-animate"
+                                    style={{ '--flow-duration': `${flowDuration}s` }}
+                                />
+                                <text
+                                    x={startX - 15}
+                                    y={angle < 0 ? startY - 10 : startY + 25}
+                                    fill="#22c55e"
+                                    fontSize="16"
+                                    fontWeight="bold"
+                                    textAnchor="end"
+                                    fontFamily="Poppins"
+                                >
+                                    <tspan fontStyle="italic">I</tspan>{labels[i]} = {formatNumber(currents[currentKeys[i]])} A
+                                </text>
+                                <polygon
+                                    points="-12,-8 0,0 -12,8"
+                                    fill="#22c55e"
+                                    transform={`translate(${arrowX}, ${arrowY}) rotate(${arrowRotation})`}
+                                />
+                            </g>
+                        );
+                    });
+                }
+                return wires;
+            };
+
+            // Rita utgående ledningar (höger sida)
+            const renderOutWires = () => {
+                const wires = [];
+                if (outWires === 1) {
+                    // En ledning rakt ut till höger
+                    const endX = centerX + wireLength;
+                    const flowDuration = getFlowDuration(currents.out1);
+                    wires.push(
+                        <g key="out1">
+                            <line
+                                x1={centerX} y1={centerY}
+                                x2={endX} y2={centerY}
+                                stroke="#0ea5e9"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                                opacity="0.4"
+                            />
+                            <line
+                                x1={centerX} y1={centerY}
+                                x2={endX} y2={centerY}
+                                stroke="#38bdf8"
+                                strokeWidth="6"
+                                strokeLinecap="round"
+                                className="flow-animate"
+                                style={{ '--flow-duration': `${flowDuration}s` }}
+                            />
+                            <text x={endX + 10} y={centerY - 15} fill="#f97316" fontSize="16" fontWeight="bold" fontFamily="Poppins">
+                                <tspan fontStyle="italic">I</tspan>₃ = {formatNumber(currents.out1)} A
+                            </text>
+                            <polygon
+                                points={`${endX - 15},${centerY - 8} ${endX},${centerY} ${endX - 15},${centerY + 8}`}
+                                fill="#f97316"
+                            />
+                        </g>
+                    );
+                } else {
+                    // Två ledningar ut - snett uppåt och nedåt till höger
+                    const angles = [-35, 35];
+                    const currentKeys = ['out1', 'out2'];
+                    const labels = config === '1in2out' ? ['₂', '₃'] : ['₃', '₄'];
+
+                    angles.forEach((angle, i) => {
+                        const rad = (angle * Math.PI) / 180;
+                        const endX = centerX + wireLength * Math.cos(rad);
+                        const endY = centerY - wireLength * Math.sin(rad);
+                        const flowDuration = getFlowDuration(currents[currentKeys[i]]);
+
+                        // Pilspets position (lite innan slutet av linjen)
+                        const arrowDist = 20;
+                        const arrowX = endX - arrowDist * Math.cos(rad);
+                        const arrowY = endY + arrowDist * Math.sin(rad);
+                        // Rotation för pilen (negativ vinkel eftersom y-axeln är inverterad i SVG)
+                        const arrowRotation = -angle;
+
+                        wires.push(
+                            <g key={`out${i + 1}`}>
+                                <line
+                                    x1={centerX} y1={centerY}
+                                    x2={endX} y2={endY}
+                                    stroke="#0ea5e9"
+                                    strokeWidth="6"
+                                    strokeLinecap="round"
+                                    opacity="0.4"
+                                />
+                                <line
+                                    x1={centerX} y1={centerY}
+                                    x2={endX} y2={endY}
+                                    stroke="#38bdf8"
+                                    strokeWidth="6"
+                                    strokeLinecap="round"
+                                    className="flow-animate"
+                                    style={{ '--flow-duration': `${flowDuration}s` }}
+                                />
+                                <text
+                                    x={endX + 10}
+                                    y={angle < 0 ? endY - 10 : endY + 25}
+                                    fill="#f97316"
+                                    fontSize="16"
+                                    fontWeight="bold"
+                                    fontFamily="Poppins"
+                                >
+                                    <tspan fontStyle="italic">I</tspan>{labels[i]} = {formatNumber(currents[currentKeys[i]])} A
+                                </text>
+                                <polygon
+                                    points="-12,-8 0,0 -12,8"
+                                    fill="#f97316"
+                                    transform={`translate(${arrowX}, ${arrowY}) rotate(${arrowRotation})`}
+                                />
+                            </g>
+                        );
+                    });
+                }
+                return wires;
+            };
+
+            return (
+                <div className="glass-card rounded-2xl p-6 w-full">
+                    <h3 className="text-lg font-semibold text-slate-300 mb-4 flex items-center gap-2">
+                        <span className="text-cyan-400">⚡</span> Kopplingsschema
+                    </h3>
+                    <svg viewBox="0 0 500 360" className="w-full h-auto">
+                        {/* Bakgrund */}
+                        <rect x="0" y="0" width="500" height="360" fill="#050510" rx="8" />
+
+                        {/* Rita ledningar */}
+                        {renderInWires()}
+                        {renderOutWires()}
+
+                        {/* Förgreningspunkt (nod) */}
+                        <circle
+                            cx={centerX}
+                            cy={centerY}
+                            r="12"
+                            fill="#38bdf8"
+                            stroke="#0ea5e9"
+                            strokeWidth="3"
+                            style={{ filter: 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.8))' }}
+                        />
+
+                        {/* Etikett för förgreningspunkt */}
+                        <text x={centerX} y={centerY + 40} fill="#94a3b8" fontSize="14" textAnchor="middle" fontFamily="Poppins">
+                            Förgreningspunkt
+                        </text>
+
+                        {/* Legend */}
+                        <g transform="translate(20, 310)">
+                            <rect x="0" y="0" width="200" height="40" fill="rgba(15, 23, 42, 0.8)" rx="6" />
+                            <circle cx="20" cy="20" r="6" fill="#22c55e" />
+                            <text x="35" y="25" fill="#94a3b8" fontSize="12" fontFamily="Poppins">Ström in</text>
+                            <circle cx="110" cy="20" r="6" fill="#f97316" />
+                            <text x="125" y="25" fill="#94a3b8" fontSize="12" fontFamily="Poppins">Ström ut</text>
+                        </g>
+
+                        {/* Summeringsruta */}
+                        <g transform="translate(280, 300)">
+                            <rect x="0" y="0" width="200" height="50" fill="rgba(15, 23, 42, 0.9)" rx="8" stroke="rgba(56, 189, 248, 0.3)" />
+                            <text x="100" y="20" fill="#22c55e" fontSize="14" textAnchor="middle" fontFamily="Poppins" fontWeight="600">
+                                Σ<tspan fontStyle="italic">I</tspan><tspan baselineShift="sub" fontSize="10">in</tspan> = {formatNumber(totalIn)} A
+                            </text>
+                            <text x="100" y="40" fill="#f97316" fontSize="14" textAnchor="middle" fontFamily="Poppins" fontWeight="600">
+                                Σ<tspan fontStyle="italic">I</tspan><tspan baselineShift="sub" fontSize="10">ut</tspan> = {formatNumber(totalOut)} A
+                            </text>
+                        </g>
+                    </svg>
+                </div>
+            );
+        };
+
+        // Confetti-effekt för rätt svar
+        const Confetti = ({ active }) => {
+            if (!active) return null;
+
+            const colors = ['#22c55e', '#38bdf8', '#f97316', '#eab308', '#ec4899'];
+            const confettiPieces = Array.from({ length: 50 }, (_, i) => ({
+                id: i,
+                left: Math.random() * 100,
+                delay: Math.random() * 0.5,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                size: 8 + Math.random() * 8
+            }));
+
+            return (
+                <>
+                    {confettiPieces.map(piece => (
+                        <div
+                            key={piece.id}
+                            className="confetti"
+                            style={{
+                                left: `${piece.left}%`,
+                                animationDelay: `${piece.delay}s`,
+                                backgroundColor: piece.color,
+                                width: piece.size,
+                                height: piece.size,
+                                borderRadius: Math.random() > 0.5 ? '50%' : '0'
+                            }}
+                        />
+                    ))}
+                </>
+            );
+        };
+
+        // Övningsdiagram (liknande CircuitDiagram men med okänd ström)
+        const ExerciseDiagram = ({ config, currents, unknownKey }) => {
+            const centerX = 250;
+            const centerY = 180;
+            const wireLength = 120;
+
+            const { inWires, outWires } = CONFIGURATIONS[config];
+
+            // Visa värde eller frågetecken
+            const displayValue = (key, value) => {
+                if (key === unknownKey) {
+                    return '?';
+                }
+                return formatNumber(value) + ' A';
+            };
+
+            // Rita inkommande ledningar
+            const renderInWires = () => {
+                const wires = [];
+                if (inWires === 1) {
+                    const startX = centerX - wireLength;
+                    wires.push(
+                        <g key="in1">
+                            <line x1={startX} y1={centerY} x2={centerX} y2={centerY}
+                                stroke="#0ea5e9" strokeWidth="6" strokeLinecap="round" opacity="0.4" />
+                            <line x1={startX} y1={centerY} x2={centerX} y2={centerY}
+                                stroke="#38bdf8" strokeWidth="6" strokeLinecap="round" className="flow-animate"
+                                style={{ '--flow-duration': '1s' }} />
+                            <text x={startX - 10} y={centerY - 15} fill="#22c55e" fontSize="16" fontWeight="bold" textAnchor="end" fontFamily="Poppins">
+                                <tspan fontStyle="italic">I</tspan>₁ = {displayValue('in1', currents.in1)}
+                            </text>
+                            <polygon points={`${centerX - 30},${centerY - 8} ${centerX - 15},${centerY} ${centerX - 30},${centerY + 8}`} fill="#22c55e" />
+                        </g>
+                    );
+                } else {
+                    const angles = [-35, 35];
+                    const keys = ['in1', 'in2'];
+                    const labels = ['₁', '₂'];
+                    angles.forEach((angle, i) => {
+                        const rad = (angle * Math.PI) / 180;
+                        const startX = centerX - wireLength * Math.cos(rad);
+                        const startY = centerY - wireLength * Math.sin(rad);
+                        const arrowDist = 30;
+                        const arrowX = centerX - arrowDist * Math.cos(rad);
+                        const arrowY = centerY - arrowDist * Math.sin(rad);
+                        wires.push(
+                            <g key={`in${i + 1}`}>
+                                <line x1={startX} y1={startY} x2={centerX} y2={centerY}
+                                    stroke="#0ea5e9" strokeWidth="6" strokeLinecap="round" opacity="0.4" />
+                                <line x1={startX} y1={startY} x2={centerX} y2={centerY}
+                                    stroke="#38bdf8" strokeWidth="6" strokeLinecap="round" className="flow-animate"
+                                    style={{ '--flow-duration': '1s' }} />
+                                <text x={startX - 15} y={angle < 0 ? startY - 10 : startY + 25}
+                                    fill={keys[i] === unknownKey ? '#eab308' : '#22c55e'} fontSize="16" fontWeight="bold" textAnchor="end" fontFamily="Poppins">
+                                    <tspan fontStyle="italic">I</tspan>{labels[i]} = {displayValue(keys[i], currents[keys[i]])}
+                                </text>
+                                <polygon points="-12,-8 0,0 -12,8" fill="#22c55e" transform={`translate(${arrowX}, ${arrowY}) rotate(${angle})`} />
+                            </g>
+                        );
+                    });
+                }
+                return wires;
+            };
+
+            // Rita utgående ledningar
+            const renderOutWires = () => {
+                const wires = [];
+                if (outWires === 1) {
+                    const endX = centerX + wireLength;
+                    const label = config === '2in1out' ? '₃' : '₂';
+                    const key = 'out1';
+                    wires.push(
+                        <g key="out1">
+                            <line x1={centerX} y1={centerY} x2={endX} y2={centerY}
+                                stroke="#0ea5e9" strokeWidth="6" strokeLinecap="round" opacity="0.4" />
+                            <line x1={centerX} y1={centerY} x2={endX} y2={centerY}
+                                stroke="#38bdf8" strokeWidth="6" strokeLinecap="round" className="flow-animate"
+                                style={{ '--flow-duration': '1s' }} />
+                            <text x={endX + 10} y={centerY - 15} fill={key === unknownKey ? '#eab308' : '#f97316'} fontSize="16" fontWeight="bold" fontFamily="Poppins">
+                                <tspan fontStyle="italic">I</tspan>{label} = {displayValue(key, currents[key])}
+                            </text>
+                            <polygon points={`${endX - 15},${centerY - 8} ${endX},${centerY} ${endX - 15},${centerY + 8}`} fill="#f97316" />
+                        </g>
+                    );
+                } else {
+                    const angles = [-35, 35];
+                    const keys = ['out1', 'out2'];
+                    const labels = config === '1in2out' ? ['₂', '₃'] : ['₃', '₄'];
+                    angles.forEach((angle, i) => {
+                        const rad = (angle * Math.PI) / 180;
+                        const endX = centerX + wireLength * Math.cos(rad);
+                        const endY = centerY - wireLength * Math.sin(rad);
+                        const arrowDist = 20;
+                        const arrowX = endX - arrowDist * Math.cos(rad);
+                        const arrowY = endY + arrowDist * Math.sin(rad);
+                        wires.push(
+                            <g key={`out${i + 1}`}>
+                                <line x1={centerX} y1={centerY} x2={endX} y2={endY}
+                                    stroke="#0ea5e9" strokeWidth="6" strokeLinecap="round" opacity="0.4" />
+                                <line x1={centerX} y1={centerY} x2={endX} y2={endY}
+                                    stroke="#38bdf8" strokeWidth="6" strokeLinecap="round" className="flow-animate"
+                                    style={{ '--flow-duration': '1s' }} />
+                                <text x={endX + 10} y={angle < 0 ? endY - 10 : endY + 25}
+                                    fill={keys[i] === unknownKey ? '#eab308' : '#f97316'} fontSize="16" fontWeight="bold" fontFamily="Poppins">
+                                    <tspan fontStyle="italic">I</tspan>{labels[i]} = {displayValue(keys[i], currents[keys[i]])}
+                                </text>
+                                <polygon points="-12,-8 0,0 -12,8" fill="#f97316" transform={`translate(${arrowX}, ${arrowY}) rotate(${-angle})`} />
+                            </g>
+                        );
+                    });
+                }
+                return wires;
+            };
+
+            return (
+                <div className="glass-card rounded-2xl p-6 w-full">
+                    <h3 className="text-lg font-semibold text-slate-300 mb-4 flex items-center gap-2">
+                        <span className="text-yellow-400">❓</span> Beräkna den okända strömmen
+                    </h3>
+                    <svg viewBox="0 0 500 320" className="w-full h-auto">
+                        <rect x="0" y="0" width="500" height="320" fill="#050510" rx="8" />
+                        {renderInWires()}
+                        {renderOutWires()}
+                        <circle cx={centerX} cy={centerY} r="12" fill="#38bdf8" stroke="#0ea5e9" strokeWidth="3"
+                            style={{ filter: 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.8))' }} />
+                        <text x={centerX} y={centerY + 40} fill="#94a3b8" fontSize="14" textAnchor="middle" fontFamily="Poppins">
+                            Förgreningspunkt
+                        </text>
+                    </svg>
+                </div>
+            );
+        };
+
+        // Övningsläge
+        const ExerciseMode = () => {
+            const [exercise, setExercise] = useState(null);
+            const [userAnswer, setUserAnswer] = useState('');
+            const [feedback, setFeedback] = useState(null);
+            const [showConfetti, setShowConfetti] = useState(false);
+            const [score, setScore] = useState({ correct: 0, total: 0 });
+            const [shake, setShake] = useState(false);
+
+            // Generera ny övning
+            const generateExercise = () => {
+                const configs = ['1in2out', '2in2out', '2in1out'];
+                const config = configs[Math.floor(Math.random() * configs.length)];
+                const { inWires, outWires } = CONFIGURATIONS[config];
+
+                // Generera slumpmässiga strömmar (hela eller halva tal för enklare räkning)
+                const randomCurrent = () => {
+                    const val = 0.5 + Math.floor(Math.random() * 9) * 0.5;
+                    return Math.round(val * 10) / 10;
+                };
+
+                let currents = {};
+                let unknownKey;
+
+                if (config === '1in2out') {
+                    // 1 in, 2 ut: I1 = I2 + I3
+                    const i2 = randomCurrent();
+                    const i3 = randomCurrent();
+                    const i1 = i2 + i3;
+                    currents = { in1: i1, out1: i2, out2: i3 };
+                    const keys = ['in1', 'out1', 'out2'];
+                    unknownKey = keys[Math.floor(Math.random() * keys.length)];
+                } else if (config === '2in1out') {
+                    // 2 in, 1 ut: I1 + I2 = I3
+                    const i1 = randomCurrent();
+                    const i2 = randomCurrent();
+                    const i3 = i1 + i2;
+                    currents = { in1: i1, in2: i2, out1: i3 };
+                    const keys = ['in1', 'in2', 'out1'];
+                    unknownKey = keys[Math.floor(Math.random() * keys.length)];
+                } else {
+                    // 2 in, 2 ut: I1 + I2 = I3 + I4
+                    const i1 = randomCurrent();
+                    const i2 = randomCurrent();
+                    const total = i1 + i2;
+                    const i3 = Math.round((0.3 + Math.random() * 0.4) * total * 10) / 10;
+                    const i4 = Math.round((total - i3) * 10) / 10;
+                    currents = { in1: i1, in2: i2, out1: i3, out2: i4 };
+                    const keys = ['in1', 'in2', 'out1', 'out2'];
+                    unknownKey = keys[Math.floor(Math.random() * keys.length)];
+                }
+
+                setExercise({ config, currents, unknownKey });
+                setUserAnswer('');
+                setFeedback(null);
+            };
+
+            // Starta första övningen
+            useEffect(() => {
+                generateExercise();
+            }, []);
+
+            // Kontrollera svar
+            const checkAnswer = () => {
+                if (!exercise || !userAnswer) return;
+
+                const correctAnswer = exercise.currents[exercise.unknownKey];
+                const userNum = parseFloat(userAnswer.replace(',', '.'));
+
+                if (Math.abs(userNum - correctAnswer) < 0.01) {
+                    // Rätt svar!
+                    setFeedback({
+                        correct: true,
+                        message: getSuccessMessage()
+                    });
+                    setShowConfetti(true);
+                    setScore(prev => ({ correct: prev.correct + 1, total: prev.total + 1 }));
+                    setTimeout(() => setShowConfetti(false), 3000);
+                } else {
+                    // Fel svar
+                    setShake(true);
+                    setTimeout(() => setShake(false), 300);
+                    setFeedback({
+                        correct: false,
+                        message: getHintMessage(exercise)
+                    });
+                    setScore(prev => ({ ...prev, total: prev.total + 1 }));
+                }
+            };
+
+            const getSuccessMessage = () => {
+                const messages = [
+                    'Fantastiskt! Du behärskar Kirchhoffs lag!',
+                    'Helt rätt! Du är en riktig elexpert!',
+                    'Bravo! Strömmen flödar rätt i dina beräkningar!',
+                    'Utmärkt! Kirchhoff skulle vara stolt!',
+                    'Perfekt! Du har koll på strömbalansen!'
+                ];
+                return messages[Math.floor(Math.random() * messages.length)];
+            };
+
+            const getHintMessage = (ex) => {
+                const { config, currents, unknownKey } = ex;
+                const { inWires, outWires } = CONFIGURATIONS[config];
+
+                const totalIn = inWires === 1 ? currents.in1 : currents.in1 + currents.in2;
+                const totalOut = outWires === 1 ? currents.out1 : currents.out1 + currents.out2;
+
+                if (unknownKey.startsWith('in')) {
+                    return `Tänk på att summan av strömmarna IN måste vara lika med summan av strömmarna UT. Strömmarna ut är totalt ${formatNumber(totalOut)} A.`;
+                } else {
+                    return `Tänk på att summan av strömmarna UT måste vara lika med summan av strömmarna IN. Strömmarna in är totalt ${formatNumber(totalIn)} A.`;
+                }
+            };
+
+            if (!exercise) return null;
+
+            return (
+                <div className="w-full flex flex-col lg:flex-row gap-6">
+                    <Confetti active={showConfetti} />
+
+                    {/* Vänster: Diagram */}
+                    <div className="flex-1">
+                        <ExerciseDiagram
+                            config={exercise.config}
+                            currents={exercise.currents}
+                            unknownKey={exercise.unknownKey}
+                        />
+                    </div>
+
+                    {/* Höger: Svarsfält */}
+                    <div className="flex flex-col gap-4 lg:w-80">
+                        {/* Poängräknare */}
+                        <div className="glass-card p-4 rounded-xl">
+                            <div className="flex justify-between items-center">
+                                <span className="text-slate-400">Poäng</span>
+                                <span className="text-2xl font-bold text-cyan-400">
+                                    {score.correct} / {score.total}
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Svarsfält */}
+                        <div className={`glass-card p-4 rounded-xl ${shake ? 'shake' : ''}`}>
+                            <h3 className="text-sm font-medium text-yellow-400 mb-3">
+                                Vad är den okända strömmen?
+                            </h3>
+                            <div className="flex gap-2">
+                                <input
+                                    type="text"
+                                    value={userAnswer}
+                                    onChange={(e) => setUserAnswer(e.target.value)}
+                                    onKeyPress={(e) => e.key === 'Enter' && checkAnswer()}
+                                    placeholder="t.ex. 2,5"
+                                    className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-4 py-3 text-white text-lg font-mono focus:outline-none focus:border-cyan-400"
+                                />
+                                <span className="flex items-center text-slate-400 text-lg">A</span>
+                            </div>
+                            <button
+                                onClick={feedback?.correct ? generateExercise : checkAnswer}
+                                className={`w-full mt-3 px-4 py-3 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 ${
+                                    feedback?.correct
+                                        ? 'bg-green-600 hover:bg-green-500'
+                                        : 'bg-cyan-600 hover:bg-cyan-500'
+                                }`}
+                            >
+                                {feedback?.correct ? '🔄 Ny uppgift' : 'Kontrollera'}
+                            </button>
+                        </div>
+
+                        {/* Feedback */}
+                        {feedback && (
+                            <div className={`glass-card p-4 rounded-xl border-2 ${
+                                feedback.correct
+                                    ? 'border-green-500/50 bg-green-500/10 pulse-success'
+                                    : 'border-orange-500/50 bg-orange-500/10'
+                            }`}>
+                                <div className={`text-lg font-semibold mb-2 ${
+                                    feedback.correct ? 'text-green-400' : 'text-orange-400'
+                                }`}>
+                                    {feedback.correct ? '🎉 Rätt!' : '💡 Nästan!'}
+                                </div>
+                                <p className="text-slate-300 text-sm">{feedback.message}</p>
+                                {feedback.correct && (
+                                    <p className="text-slate-400 text-sm mt-2">
+                                        Rätt svar: <span className="text-cyan-400 font-mono">{formatNumber(exercise.currents[exercise.unknownKey])} A</span>
+                                    </p>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Ledtråd */}
+                        <div className="glass-card p-4 rounded-xl">
+                            <h4 className="text-sm font-medium text-slate-400 mb-2">Kom ihåg:</h4>
+                            <div className="bg-slate-800/50 p-3 rounded-lg text-center">
+                                <div className="text-lg font-mono text-cyan-400">
+                                    Σ<em>I</em><sub>in</sub> = Σ<em>I</em><sub>ut</sub>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Huvudapp
+        const App = () => {
+            const [activeTab, setActiveTab] = useState('simulation');
+            const [config, setConfig] = useState('1in2out');
+            const [currents, setCurrents] = useState({
+                in1: 3.0,
+                in2: 2.0,
+                out1: 1.5,
+                out2: 1.5
+            });
+
+            const { inWires, outWires } = CONFIGURATIONS[config];
+
+            // Beräkna totala strömmar in och ut
+            const totalIn = inWires === 1 ? currents.in1 : currents.in1 + currents.in2;
+            const totalOut = outWires === 1 ? currents.out1 : currents.out1 + currents.out2;
+
+            // Balansera strömmarna när konfigurationen ändras
+            useEffect(() => {
+                setCurrents(prev => {
+                    const newCurrents = { ...prev };
+                    const currentTotalIn = prev.in1 + prev.in2;
+
+                    // Justera utgående strömmar baserat på inkommande
+                    if (outWires === 1) {
+                        newCurrents.out1 = inWires === 1 ? prev.in1 : currentTotalIn;
+                    } else {
+                        const targetTotal = inWires === 1 ? prev.in1 : currentTotalIn;
+                        newCurrents.out1 = targetTotal / 2;
+                        newCurrents.out2 = targetTotal / 2;
+                    }
+
+                    return newCurrents;
+                });
+            }, [config, inWires, outWires]);
+
+            // Uppdatera ström med automatisk balansering
+            const handleCurrentChange = (key, value) => {
+                setCurrents(prev => {
+                    const newCurrents = { ...prev, [key]: value };
+
+                    // Bestäm om det är en inkommande eller utgående ström som ändrades
+                    const isIncoming = key.startsWith('in');
+
+                    if (isIncoming) {
+                        // Beräkna nya totalIn
+                        const newTotalIn = inWires === 1
+                            ? newCurrents.in1
+                            : newCurrents.in1 + newCurrents.in2;
+
+                        // Justera utgående strömmar proportionellt
+                        if (outWires === 1) {
+                            newCurrents.out1 = newTotalIn;
+                        } else {
+                            // Behåll proportionerna mellan out1 och out2
+                            const currentTotalOut = prev.out1 + prev.out2;
+                            if (currentTotalOut > 0) {
+                                const ratio1 = prev.out1 / currentTotalOut;
+                                const ratio2 = prev.out2 / currentTotalOut;
+                                newCurrents.out1 = newTotalIn * ratio1;
+                                newCurrents.out2 = newTotalIn * ratio2;
+                            } else {
+                                newCurrents.out1 = newTotalIn / 2;
+                                newCurrents.out2 = newTotalIn / 2;
+                            }
+                        }
+                    } else {
+                        // Beräkna nya totalOut
+                        const newTotalOut = outWires === 1
+                            ? newCurrents.out1
+                            : newCurrents.out1 + newCurrents.out2;
+
+                        // Justera inkommande strömmar proportionellt
+                        if (inWires === 1) {
+                            newCurrents.in1 = newTotalOut;
+                        } else {
+                            // Behåll proportionerna mellan in1 och in2
+                            const currentTotalIn = prev.in1 + prev.in2;
+                            if (currentTotalIn > 0) {
+                                const ratio1 = prev.in1 / currentTotalIn;
+                                const ratio2 = prev.in2 / currentTotalIn;
+                                newCurrents.in1 = newTotalOut * ratio1;
+                                newCurrents.in2 = newTotalOut * ratio2;
+                            } else {
+                                newCurrents.in1 = newTotalOut / 2;
+                                newCurrents.in2 = newTotalOut / 2;
+                            }
+                        }
+                    }
+
+                    return newCurrents;
+                });
+            };
+
+            const handleSliderStyle = (value, min, max) => {
+                const progress = ((value - min) / (max - min)) * 100;
+                return { '--progress': `${progress}%` };
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col items-center py-8 px-4 gap-6 max-w-6xl mx-auto">
+
+                    {/* Header */}
+                    <header className="text-center space-y-3">
+                        <nav className="text-sm text-slate-500 mb-2">
+                            <a href="index.html" className="hover:text-cyan-400">Hem</a>
+                            <span className="mx-2">/</span>
+                            <a href="fysik1.html" className="hover:text-cyan-400">Fysik 1</a>
+                            <span className="mx-2">/</span>
+                            <span className="text-slate-400">Kirchhoffs första lag</span>
+                        </nav>
+                        <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text">
+                            Kirchhoffs första lag
+                        </h1>
+                        <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                            Summan av alla strömmar som går in i en förgreningspunkt är lika med summan av alla strömmar som lämnar punkten.
+                        </p>
+                    </header>
+
+                    {/* Tabs */}
+                    <div className="flex gap-2 bg-slate-800/50 p-1 rounded-xl">
+                        <button
+                            onClick={() => setActiveTab('simulation')}
+                            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                                activeTab === 'simulation'
+                                    ? 'bg-cyan-500 text-white'
+                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                            }`}
+                        >
+                            Simulering
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('exercises')}
+                            className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                                activeTab === 'exercises'
+                                    ? 'bg-cyan-500 text-white'
+                                    : 'text-slate-400 hover:text-white hover:bg-slate-700'
+                            }`}
+                        >
+                            Övningar
+                        </button>
+                    </div>
+
+                    {/* Övningar */}
+                    {activeTab === 'exercises' && <ExerciseMode />}
+
+                    {/* Simulering - Huvudinnehåll */}
+                    {activeTab === 'simulation' && (
+                    <>
+                    <div className="w-full flex flex-col lg:flex-row gap-6">
+
+                        {/* Vänster: Simulation */}
+                        <div className="flex-1">
+                            <CircuitDiagram
+                                config={config}
+                                currents={currents}
+                                totalIn={totalIn}
+                                totalOut={totalOut}
+                            />
+                        </div>
+
+                        {/* Höger: Kontroller */}
+                        <div className="flex flex-col gap-4 lg:w-80">
+
+                            {/* Konfigurationsval */}
+                            <div className="glass-card p-4 rounded-xl">
+                                <h3 className="text-sm font-medium text-slate-400 mb-3">Konfiguration</h3>
+                                <div className="flex flex-col gap-2">
+                                    {Object.entries(CONFIGURATIONS).map(([key, value]) => (
+                                        <button
+                                            key={key}
+                                            onClick={() => setConfig(key)}
+                                            className={`px-4 py-2 rounded-lg font-medium transition-all text-left ${
+                                                config === key
+                                                    ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                                                    : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                                            }`}
+                                        >
+                                            {value.name}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Strömkontroller - Inkommande */}
+                            <div className="glass-card p-4 rounded-xl">
+                                <h3 className="text-sm font-medium text-green-400 mb-4">Strömmar in (grön)</h3>
+
+                                <div className="space-y-4">
+                                    <div>
+                                        <div className="flex justify-between items-center mb-2">
+                                            <label className="text-slate-300"><em>I</em>₁ (in)</label>
+                                            <span className="font-mono text-green-400 bg-slate-800 px-2 py-1 rounded">
+                                                {formatNumber(currents.in1)} A
+                                            </span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="0.5"
+                                            max="5"
+                                            step="0.1"
+                                            value={currents.in1}
+                                            onChange={(e) => handleCurrentChange('in1', parseFloat(e.target.value))}
+                                            className="w-full cursor-pointer"
+                                            style={handleSliderStyle(currents.in1, 0.5, 5)}
+                                        />
+                                    </div>
+
+                                    {inWires === 2 && (
+                                        <div>
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label className="text-slate-300"><em>I</em>₂ (in)</label>
+                                                <span className="font-mono text-green-400 bg-slate-800 px-2 py-1 rounded">
+                                                    {formatNumber(currents.in2)} A
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                min="0.5"
+                                                max="5"
+                                                step="0.1"
+                                                value={currents.in2}
+                                                onChange={(e) => handleCurrentChange('in2', parseFloat(e.target.value))}
+                                                className="w-full cursor-pointer"
+                                                style={handleSliderStyle(currents.in2, 0.5, 5)}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Strömkontroller - Utgående */}
+                            <div className="glass-card p-4 rounded-xl">
+                                <h3 className="text-sm font-medium text-orange-400 mb-4">Strömmar ut (orange)</h3>
+
+                                <div className="space-y-4">
+                                    <div>
+                                        <div className="flex justify-between items-center mb-2">
+                                            <label className="text-slate-300"><em>I</em>{config === '1in2out' ? '₂' : '₃'} (ut)</label>
+                                            <span className="font-mono text-orange-400 bg-slate-800 px-2 py-1 rounded">
+                                                {formatNumber(currents.out1)} A
+                                            </span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="0.5"
+                                            max="5"
+                                            step="0.1"
+                                            value={currents.out1}
+                                            onChange={(e) => handleCurrentChange('out1', parseFloat(e.target.value))}
+                                            className="w-full cursor-pointer"
+                                            style={handleSliderStyle(currents.out1, 0.5, 5)}
+                                        />
+                                    </div>
+
+                                    {outWires === 2 && (
+                                        <div>
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label className="text-slate-300"><em>I</em>{config === '1in2out' ? '₃' : '₄'} (ut)</label>
+                                                <span className="font-mono text-orange-400 bg-slate-800 px-2 py-1 rounded">
+                                                    {formatNumber(currents.out2)} A
+                                                </span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                min="0.5"
+                                                max="5"
+                                                step="0.1"
+                                                value={currents.out2}
+                                                onChange={(e) => handleCurrentChange('out2', parseFloat(e.target.value))}
+                                                className="w-full cursor-pointer"
+                                                style={handleSliderStyle(currents.out2, 0.5, 5)}
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Resultat */}
+                            <div className="glass-card p-4 rounded-xl border-2 border-green-500/50">
+                                <h3 className="text-sm font-medium text-slate-400 mb-3">Kirchhoffs första lag</h3>
+                                <div className="grid grid-cols-3 gap-2 items-center">
+                                    <div className="text-center p-3 bg-green-500/10 rounded-lg">
+                                        <div className="text-slate-400 text-xs">Σ<em>I</em><sub>in</sub></div>
+                                        <div className="text-xl font-mono font-bold text-green-400">
+                                            {formatNumber(totalIn)} A
+                                        </div>
+                                    </div>
+                                    <div className="text-center text-2xl text-cyan-400 font-bold">
+                                        =
+                                    </div>
+                                    <div className="text-center p-3 bg-orange-500/10 rounded-lg">
+                                        <div className="text-slate-400 text-xs">Σ<em>I</em><sub>ut</sub></div>
+                                        <div className="text-xl font-mono font-bold text-orange-400">
+                                            {formatNumber(totalOut)} A
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="mt-4 p-3 rounded-lg text-center font-semibold bg-green-500/20 text-green-400">
+                                    ✓ Lagen är alltid uppfylld - strömmarna balanseras automatiskt!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Förklaring */}
+                    <div className="w-full glass-card p-5 rounded-xl">
+                        <h3 className="text-lg font-semibold text-slate-200 mb-3">
+                            Om Kirchhoffs första lag
+                        </h3>
+                        <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                            Kirchhoffs första lag, även kallad <strong className="text-cyan-400">strömlagen</strong> eller <strong className="text-cyan-400">nodlagen</strong>,
+                            säger att den totala strömmen som flödar in i en förgreningspunkt måste vara lika med den totala strömmen som flödar ut.
+                        </p>
+                        <div className="bg-slate-800/50 p-4 rounded-lg text-center">
+                            <div className="text-2xl font-mono text-cyan-400 mb-2">
+                                Σ<em>I</em><sub>in</sub> = Σ<em>I</em><sub>ut</sub>
+                            </div>
+                            <div className="text-slate-500 text-sm">
+                                Summan av strömmar in = Summan av strömmar ut
+                            </div>
+                        </div>
+                        <p className="text-slate-400 text-sm leading-relaxed mt-4">
+                            Detta är en konsekvens av <strong className="text-cyan-400">laddningsbevarande</strong> –
+                            elektrisk laddning kan varken skapas eller förstöras. Om mer ström flödade in än ut skulle laddning
+                            ackumuleras i förgreningspunkten, vilket inte sker i verkligheten.
+                        </p>
+                    </div>
+
+                    {/* Exempel och tillämpningar */}
+                    <div className="w-full glass-card p-6 rounded-2xl">
+                        <h2 className="text-xl font-bold text-slate-200 mb-4">Praktiska tillämpningar</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="p-4 bg-slate-800/50 rounded-xl">
+                                <div className="text-3xl mb-2">🏠</div>
+                                <h4 className="text-cyan-400 font-semibold mb-2">Hemkretsar</h4>
+                                <p className="text-slate-400 text-sm">
+                                    I ett hushåll delas strömmen upp till olika uttag och lampor. Strömmen som går in i säkringsskåpet
+                                    är summan av alla strömmar som används i hemmet.
+                                </p>
+                            </div>
+                            <div className="p-4 bg-slate-800/50 rounded-xl">
+                                <div className="text-3xl mb-2">🔌</div>
+                                <h4 className="text-cyan-400 font-semibold mb-2">Parallellkoppling</h4>
+                                <p className="text-slate-400 text-sm">
+                                    I en parallellkoppling delas strömmen upp mellan grenarna. Kirchhoffs lag hjälper oss
+                                    beräkna hur stor ström som går genom varje gren.
+                                </p>
+                            </div>
+                            <div className="p-4 bg-slate-800/50 rounded-xl">
+                                <div className="text-3xl mb-2">🔋</div>
+                                <h4 className="text-cyan-400 font-semibold mb-2">Felsökning</h4>
+                                <p className="text-slate-400 text-sm">
+                                    Elektriker använder Kirchhoffs lag för att hitta fel i kretsar. Om strömmarna inte balanserar
+                                    finns det ett läckage eller kortslutning någonstans.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    </>
+                    )}
+
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

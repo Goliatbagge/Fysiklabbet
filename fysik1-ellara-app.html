@@ -338,6 +338,68 @@
             );
           };
 
+          // Swedish standard symbol: rectangular box for resistor
+          const Resistor = () => {
+            const boxWidth = 50;
+            const boxHeight = 20;
+            const x = 200;  // Center of bottom wire
+            const y = 250;
+
+            return (
+              <g>
+                {/* Background to hide wire */}
+                <rect
+                  x={x - boxWidth/2 - 5}
+                  y={y - 3}
+                  width={boxWidth + 10}
+                  height={6}
+                  fill="#050510"
+                />
+                {/* Resistor box */}
+                <rect
+                  x={x - boxWidth/2}
+                  y={y - boxHeight/2}
+                  width={boxWidth}
+                  height={boxHeight}
+                  fill="none"
+                  stroke="#38bdf8"
+                  strokeWidth="2.5"
+                  rx="2"
+                />
+                {/* Connection lines (already part of main wire, just for visual clarity) */}
+                <line
+                  x1={x - boxWidth/2}
+                  y1={y}
+                  x2={x - boxWidth/2 - 5}
+                  y2={y}
+                  stroke="#38bdf8"
+                  strokeWidth="2"
+                />
+                <line
+                  x1={x + boxWidth/2}
+                  y1={y}
+                  x2={x + boxWidth/2 + 5}
+                  y2={y}
+                  stroke="#38bdf8"
+                  strokeWidth="2"
+                />
+                {/* R label */}
+                <text
+                  x={x}
+                  y={y + 1}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fill="#38bdf8"
+                  fontSize="14px"
+                  fontWeight="bold"
+                  fontStyle="italic"
+                >
+                  R
+                </text>
+              </g>
+            );
+          };
+
           // Swedish standard symbol: horizontal lines perpendicular to wire (long = +, short = -)
           const PowerSource = () => {
               if (circuitType === CircuitType.DC) {
@@ -422,9 +484,10 @@
 
                   const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
 
-                  // Skip arrows near battery and bulb
+                  // Skip arrows near battery, bulb, and resistor
                   if (normalizedPos > 870 && normalizedPos < 930) return null;
                   if (normalizedPos > 370 && normalizedPos < 430) return null;
+                  if (normalizedPos > 620 && normalizedPos < 680) return null;
 
                   const { x, y } = getCoordsOnPath(normalizedPos);
                   const { x: x2, y: y2 } = getCoordsOnPath(normalizedPos + 1);
@@ -480,9 +543,10 @@
 
                   const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
 
-                  // Skip electrons near battery and bulb
+                  // Skip electrons near battery, bulb, and resistor
                   if (normalizedPos > 870 && normalizedPos < 930) return null;
                   if (normalizedPos > 370 && normalizedPos < 430) return null;
+                  if (normalizedPos > 620 && normalizedPos < 680) return null;
 
                   const { x, y } = getCoordsOnPath(normalizedPos);
                   return (
@@ -549,6 +613,7 @@
                 {/* Components */}
                 <PowerSource />
                 <Bulb />
+                <Resistor />
 
                 {/* Electrons - still visible but frozen when bulb is broken */}
                 <g>

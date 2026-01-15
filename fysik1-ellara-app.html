@@ -134,7 +134,7 @@
           }
         };
 
-        const CircuitDiagram = ({ circuitType, showElectrons, showCurrentDirection, currentStrength, acFrequency, isPaused, isBulbBroken, batteryFlipped, onBatteryClick }) => {
+        const CircuitDiagram = ({ circuitType, showElectrons, showCurrentDirection, currentStrength, acFrequency, isPaused, isBulbBroken, batteryFlipped, onBatteryClick, showValues, voltage, resistance, componentType }) => {
           const [electrons, setElectrons] = useState([]);
           const [arrows, setArrows] = useState([]);
           const animationFrameId = useRef(null);
@@ -144,6 +144,7 @@
           const isPausedRef = useRef(isPaused);
           const isBulbBrokenRef = useRef(isBulbBroken);
           const batteryFlippedRef = useRef(batteryFlipped);
+          const componentTypeRef = useRef(componentType);
           const animateRef = useRef(null);
 
           useEffect(() => {
@@ -164,6 +165,10 @@
           useEffect(() => {
             batteryFlippedRef.current = batteryFlipped;
           }, [batteryFlipped]);
+
+          useEffect(() => {
+            componentTypeRef.current = componentType;
+          }, [componentType]);
 
           useEffect(() => {
             const initialElectrons = [];
@@ -193,8 +198,9 @@
                 return;
               }
 
-              // Stop animation if bulb is broken
-              if (circuitType === CircuitType.DC && !isBulbBrokenRef.current) {
+              // Stop animation if bulb is broken (only when bulb is selected)
+              const isFrozen = componentTypeRef.current === 'bulb' && isBulbBrokenRef.current;
+              if (circuitType === CircuitType.DC && !isFrozen) {
                 const animationStep = currentStrengthRef.current * ANIMATION_SPEED_FACTOR;
                 // Reverse direction if battery is flipped
                 const direction = batteryFlippedRef.current ? 1 : -1;
@@ -334,6 +340,13 @@
                   strokeWidth="2.5"
                   strokeLinecap="round"
                 />
+                {/* Resistance value */}
+                {showValues && (
+                  <text x="320" y="150" textAnchor="end" dominantBaseline="middle" fill="#94a3b8" fontSize="12px">
+                    <tspan fontStyle="italic">R</tspan>
+                    <tspan> = {resistance} Ω</tspan>
+                  </text>
+                )}
               </g>
             );
           };
@@ -396,6 +409,19 @@
                 >
                   R
                 </text>
+                {/* Resistance value */}
+                {showValues && (
+                  <text
+                    x={x}
+                    y={y - boxHeight/2 - 8}
+                    textAnchor="middle"
+                    fill="#94a3b8"
+                    fontSize="12px"
+                  >
+                    <tspan fontStyle="italic">R</tspan>
+                    <tspan> = {resistance} Ω</tspan>
+                  </text>
+                )}
               </g>
             );
           };
@@ -445,6 +471,13 @@
                           <text x="75" y={plusY} fill="#22c55e" fontSize="12px" fontWeight="bold">+</text>
                           {/* Minus label */}
                           <text x="66" y={minusY} fill="#ef4444" fontSize="12px" fontWeight="bold">−</text>
+                          {/* Voltage value */}
+                          {showValues && (
+                            <text x="88" y="150" textAnchor="start" dominantBaseline="middle" fill="#94a3b8" fontSize="12px">
+                              <tspan fontStyle="italic">U</tspan>
+                              <tspan> = {voltage} V</tspan>
+                            </text>
+                          )}
                           {/* Hover hint */}
                           <title>Klicka för att vända batteriet</title>
                       </g>
@@ -467,6 +500,13 @@
                             strokeWidth="2.5"
                             strokeLinecap="round"
                           />
+                          {/* Voltage value */}
+                          {showValues && (
+                            <text x="75" y="150" textAnchor="start" dominantBaseline="middle" fill="#94a3b8" fontSize="12px">
+                              <tspan fontStyle="italic">U</tspan>
+                              <tspan> = {voltage} V</tspan>
+                            </text>
+                          )}
                       </g>
                   )
               }
@@ -484,10 +524,10 @@
 
                   const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
 
-                  // Skip arrows near battery, bulb, and resistor
+                  // Skip arrows near battery and active component
                   if (normalizedPos > 870 && normalizedPos < 930) return null;
-                  if (normalizedPos > 370 && normalizedPos < 430) return null;
-                  if (normalizedPos > 620 && normalizedPos < 680) return null;
+                  if (componentType === 'bulb' && normalizedPos > 370 && normalizedPos < 430) return null;
+                  if (componentType === 'resistor' && normalizedPos > 620 && normalizedPos < 680) return null;
 
                   const { x, y } = getCoordsOnPath(normalizedPos);
                   const { x: x2, y: y2 } = getCoordsOnPath(normalizedPos + 1);
@@ -532,9 +572,10 @@
                 </filter>
               </defs>
               {electrons.map(electron => {
-                  // Freeze electrons when bulb is broken
-                  const acAmplitude = isBulbBroken ? 0 : currentStrength * AC_AMPLITUDE_FACTOR;
-                  const posValue = electron.basePosition + (isBulbBroken
+                  // Freeze electrons when bulb is broken (only if bulb is selected)
+                  const isFrozen = componentType === 'bulb' && isBulbBroken;
+                  const acAmplitude = isFrozen ? 0 : currentStrength * AC_AMPLITUDE_FACTOR;
+                  const posValue = electron.basePosition + (isFrozen
                     ? 0
                     : (circuitType === CircuitType.AC
                       ? acAmplitude * Math.sin(performance.now() * acAnimationFrequencyFactor)
@@ -543,10 +584,10 @@
 
                   const normalizedPos = ((posValue % PATH_LENGTH) + PATH_LENGTH) % PATH_LENGTH;
 
-                  // Skip electrons near battery, bulb, and resistor
+                  // Skip electrons near battery and active component
                   if (normalizedPos > 870 && normalizedPos < 930) return null;
-                  if (normalizedPos > 370 && normalizedPos < 430) return null;
-                  if (normalizedPos > 620 && normalizedPos < 680) return null;
+                  if (componentType === 'bulb' && normalizedPos > 370 && normalizedPos < 430) return null;
+                  if (componentType === 'resistor' && normalizedPos > 620 && normalizedPos < 680) return null;
 
                   const { x, y } = getCoordsOnPath(normalizedPos);
                   return (
@@ -605,15 +646,23 @@
                   strokeLinecap="round"
                 />
 
+                {/* Current value above top wire */}
+                {showValues && (
+                  <text x="200" y="35" textAnchor="middle" fill="#94a3b8" fontSize="12px">
+                    <tspan fontStyle="italic">I</tspan>
+                    <tspan> = {currentStrength.toFixed(2).replace('.', ',')} A</tspan>
+                  </text>
+                )}
+
                 {/* Current direction arrows - hidden when bulb is broken */}
                 <g>
-                    {showCurrentDirection && !isBulbBroken && <ArrowShapes />}
+                    {showCurrentDirection && !(componentType === 'bulb' && isBulbBroken) && <ArrowShapes />}
                 </g>
 
                 {/* Components */}
                 <PowerSource />
-                <Bulb />
-                <Resistor />
+                {componentType === 'bulb' && <Bulb />}
+                {componentType === 'resistor' && <Resistor />}
 
                 {/* Electrons - still visible but frozen when bulb is broken */}
                 <g>
@@ -633,15 +682,17 @@
           const [isPaused, setIsPaused] = useState(false);
           const [isBulbBroken, setIsBulbBroken] = useState(false);
           const [batteryFlipped, setBatteryFlipped] = useState(false);
+          const [showValues, setShowValues] = useState(true);
+          const [componentType, setComponentType] = useState('bulb'); // 'bulb' or 'resistor'
 
           const current = voltage / resistance;
 
-          // Break the bulb when current reaches 24 A
+          // Break the bulb when current reaches 24 A (only when bulb is selected)
           useEffect(() => {
-            if (current >= 24 && !isBulbBroken) {
+            if (componentType === 'bulb' && current >= 24 && !isBulbBroken) {
               setIsBulbBroken(true);
             }
-          }, [current, isBulbBroken]);
+          }, [current, isBulbBroken, componentType]);
 
           const handleReplaceBulb = () => {
             setIsBulbBroken(false);
@@ -680,6 +731,10 @@
                     isBulbBroken={isBulbBroken}
                     batteryFlipped={batteryFlipped}
                     onBatteryClick={() => setBatteryFlipped(prev => !prev)}
+                    showValues={showValues}
+                    voltage={voltage}
+                    resistance={resistance}
+                    componentType={componentType}
                   />
 
                   {/* Info Box */}
@@ -770,6 +825,44 @@
                     </div>
                   </div>
 
+                  {/* Component Type */}
+                  <div className="glass-card p-4 rounded-xl">
+                    <h3 className="text-sm font-medium text-slate-400 mb-3">Komponent i kretsen</h3>
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setComponentType('bulb')}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
+                          componentType === 'bulb'
+                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        💡 Glödlampa
+                      </button>
+                      <button
+                        onClick={() => setComponentType('resistor')}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
+                          componentType === 'resistor'
+                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        ▭ Resistor
+                      </button>
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-slate-700">
+                      <label className="flex items-center gap-3 cursor-pointer group">
+                        <input
+                          type="checkbox"
+                          checked={showValues}
+                          onChange={(e) => setShowValues(e.target.checked)}
+                          className="w-5 h-5 rounded border-slate-600 bg-slate-800 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0 cursor-pointer"
+                        />
+                        <span className="text-slate-300 group-hover:text-slate-200">Visa värden</span>
+                      </label>
+                    </div>
+                  </div>
+
                   {/* Parameters */}
                   <div className="glass-card p-4 rounded-xl">
                     <h3 className="text-sm font-medium text-slate-400 mb-4">Kretsparametrar</h3>
@@ -844,7 +937,7 @@
                     <div className="flex items-center justify-between mb-4">
                       <div>
                         <div className="text-sm text-slate-400">Strömstyrka (I = U/R)</div>
-                        <div className={`text-3xl font-mono font-bold ${isBulbBroken ? 'text-red-400' : 'text-yellow-400'}`}>
+                        <div className={`text-3xl font-mono font-bold ${componentType === 'bulb' && isBulbBroken ? 'text-red-400' : 'text-yellow-400'}`}>
                           {current.toFixed(2).replace('.', ',')} A
                         </div>
                       </div>
@@ -859,7 +952,7 @@
                         {isPaused ? '▶ Starta' : '⏸ Pausa'}
                       </button>
                     </div>
-                    {isBulbBroken && (
+                    {componentType === 'bulb' && isBulbBroken && (
                       <div className="mt-3 p-3 bg-red-500/20 border border-red-500/50 rounded-lg">
                         <div className="text-red-400 font-semibold text-center mb-3">⚠️ Lampan har gått sönder! Kretsen är bruten.</div>
                         <button

@@ -38,7 +38,8 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-jordmagnetiska-faltet.html',
     'fysik1-rorelsediagram.html',
     'fysik1-coulombs-lag.html',
-    'fysik1-kirchhoffs-lag.html'
+    'fysik1-kirchhoffs-lag.html',
+    'fysik2-svangningar-jamforelse.html'
 ];
 
 let hasErrors = false;

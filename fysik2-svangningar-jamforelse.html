@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jämförelse av svängningar - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(to right, #0ea5e9 0%, #0ea5e9 var(--progress, 50%), #1e293b var(--progress, 50%), #1e293b 100%);
+            border-radius: 8px;
+            height: 8px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="dark-container min-h-screen">
+        <div id="root"></div>
+    </main>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // KaTeX-komponent för att rendera matematiska formler
+        const Katex = ({ math, displayMode = true }) => {
+            const containerRef = useRef(null);
+
+            useEffect(() => {
+                if (containerRef.current && window.katex) {
+                    try {
+                        window.katex.render(math, containerRef.current, {
+                            displayMode: displayMode,
+                            throwOnError: false
+                        });
+                    } catch (e) {
+                        containerRef.current.textContent = math;
+                    }
+                }
+            }, [math, displayMode]);
+
+            return <span ref={containerRef} />;
+        };
+
+        const formatNumber = (num, decimals = 2) => {
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Harmonisk svängning (fjäderpendel)
+        const HarmonicOscillation = ({ time, period, amplitude }) => {
+            const omega = (2 * Math.PI) / period;
+            const y = amplitude * Math.cos(omega * time);
+
+            const centerY = 150;
+            const bobY = centerY + y * 100;
+
+            // Fjäder-zigzag
+            const springCoils = 8;
+            const springTop = 30;
+            const springBottom = bobY - 15;
+            const springHeight = springBottom - springTop;
+            const coilHeight = springHeight / springCoils;
+
+            let springPath = `M 100 ${springTop}`;
+            for (let i = 0; i < springCoils; i++) {
+                const yPos = springTop + i * coilHeight;
+                const xOffset = (i % 2 === 0) ? 15 : -15;
+                springPath += ` L ${100 + xOffset} ${yPos + coilHeight / 2}`;
+            }
+            springPath += ` L 100 ${springBottom}`;
+
+            return (
+                <svg viewBox="0 0 200 300" className="w-full h-full">
+                    {/* Bakgrund */}
+                    <rect x="0" y="0" width="200" height="300" fill="#050510" rx="8" />
+
+                    {/* Tak */}
+                    <rect x="60" y="20" width="80" height="10" fill="#475569" rx="2" />
+
+                    {/* Fjäder */}
+                    <path
+                        d={springPath}
+                        fill="none"
+                        stroke="#38bdf8"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+
+                    {/* Kula */}
+                    <circle
+                        cx="100"
+                        cy={bobY}
+                        r="20"
+                        fill="#f59e0b"
+                        style={{ filter: 'drop-shadow(0 0 10px rgba(245, 158, 11, 0.5))' }}
+                    />
+
+                    {/* Jämviktsläge */}
+                    <line x1="60" y1={centerY} x2="140" y2={centerY} stroke="#22c55e" strokeWidth="1" strokeDasharray="5 5" opacity="0.5" />
+
+                    {/* Etikett */}
+                    <text x="100" y="285" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="Poppins">
+                        Harmonisk svängning
+                    </text>
+                </svg>
+            );
+        };
+
+        // Plan pendel (matematisk pendel)
+        const PlanePendulum = ({ time, period, amplitude }) => {
+            const omega = (2 * Math.PI) / period;
+            // Negativ cos så pendeln startar längst till vänster
+            const theta = -amplitude * Math.cos(omega * time);
+
+            const pivotX = 100;
+            const pivotY = 30;
+            const length = 150;
+
+            const bobX = pivotX + length * Math.sin(theta);
+            const bobY = pivotY + length * Math.cos(theta);
+
+            return (
+                <svg viewBox="0 0 200 300" className="w-full h-full">
+                    {/* Bakgrund */}
+                    <rect x="0" y="0" width="200" height="300" fill="#050510" rx="8" />
+
+                    {/* Tak */}
+                    <rect x="60" y="20" width="80" height="10" fill="#475569" rx="2" />
+
+                    {/* Upphängningspunkt */}
+                    <circle cx={pivotX} cy={pivotY} r="5" fill="#64748b" />
+
+                    {/* Snöre */}
+                    <line
+                        x1={pivotX}
+                        y1={pivotY}
+                        x2={bobX}
+                        y2={bobY}
+                        stroke="#38bdf8"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                    />
+
+                    {/* Kula */}
+                    <circle
+                        cx={bobX}
+                        cy={bobY}
+                        r="20"
+                        fill="#ec4899"
+                        style={{ filter: 'drop-shadow(0 0 10px rgba(236, 72, 153, 0.5))' }}
+                    />
+
+                    {/* Jämviktsläge (vertikal linje) */}
+                    <line x1={pivotX} y1={pivotY} x2={pivotX} y2={pivotY + length} stroke="#22c55e" strokeWidth="1" strokeDasharray="5 5" opacity="0.5" />
+
+                    {/* Etikett */}
+                    <text x="100" y="285" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="Poppins">
+                        Plan pendel
+                    </text>
+                </svg>
+            );
+        };
+
+        // Konisk pendel (3D)
+        const ConicalPendulum = ({ time, period, amplitude }) => {
+            const omega = (2 * Math.PI) / period;
+            // Fasförskjutning så pendeln startar längst till vänster (synkad med plan pendel)
+            const phi = omega * time - Math.PI / 2;
+            const theta = amplitude; // Konstant vinkel från vertikalen
+
+            const pivotX = 100;
+            const pivotY = 30;
+            const length = 130;
+
+            // 3D till 2D projektion (isometrisk-liknande)
+            const bobX = pivotX + length * Math.sin(theta) * Math.sin(phi);
+            const bobY = pivotY + length * Math.cos(theta);
+            const bobZ = length * Math.sin(theta) * Math.cos(phi); // Djup
+
+            // Skala kulan baserat på djup för 3D-effekt
+            const scale = 1 + bobZ / 400;
+            const bobRadius = 18 * scale;
+
+            // Ellips för banan (projicerad cirkel)
+            const ellipseRx = length * Math.sin(theta);
+            const ellipseRy = ellipseRx * 0.3; // Komprimerad för 3D-effekt
+            const ellipseCy = pivotY + length * Math.cos(theta);
+
+            // Bestäm om kulan är framför eller bakom (för rendering order)
+            const isFront = bobZ > 0;
+
+            return (
+                <svg viewBox="0 0 200 300" className="w-full h-full">
+                    {/* Bakgrund */}
+                    <rect x="0" y="0" width="200" height="300" fill="#050510" rx="8" />
+
+                    {/* Tak */}
+                    <rect x="60" y="20" width="80" height="10" fill="#475569" rx="2" />
+
+                    {/* Upphängningspunkt */}
+                    <circle cx={pivotX} cy={pivotY} r="5" fill="#64748b" />
+
+                    {/* Cirkulär bana (ellips i perspektiv) - bakre del */}
+                    <ellipse
+                        cx={pivotX}
+                        cy={ellipseCy}
+                        rx={ellipseRx}
+                        ry={ellipseRy}
+                        fill="none"
+                        stroke="#22c55e"
+                        strokeWidth="1"
+                        strokeDasharray="5 5"
+                        opacity="0.3"
+                    />
+
+                    {/* Snöre och kula - renderingsordning beror på djup */}
+                    {!isFront && (
+                        <>
+                            {/* Kula (bakom) */}
+                            <circle
+                                cx={bobX}
+                                cy={bobY}
+                                r={bobRadius}
+                                fill="#8b5cf6"
+                                opacity="0.7"
+                                style={{ filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.3))' }}
+                            />
+                            {/* Snöre */}
+                            <line
+                                x1={pivotX}
+                                y1={pivotY}
+                                x2={bobX}
+                                y2={bobY}
+                                stroke="#38bdf8"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                opacity="0.7"
+                            />
+                        </>
+                    )}
+
+                    {isFront && (
+                        <>
+                            {/* Snöre */}
+                            <line
+                                x1={pivotX}
+                                y1={pivotY}
+                                x2={bobX}
+                                y2={bobY}
+                                stroke="#38bdf8"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                            />
+                            {/* Kula (framför) */}
+                            <circle
+                                cx={bobX}
+                                cy={bobY}
+                                r={bobRadius}
+                                fill="#8b5cf6"
+                                style={{ filter: 'drop-shadow(0 0 10px rgba(139, 92, 246, 0.5))' }}
+                            />
+                        </>
+                    )}
+
+                    {/* Vertikal referenslinje */}
+                    <line x1={pivotX} y1={pivotY} x2={pivotX} y2={pivotY + length} stroke="#22c55e" strokeWidth="1" strokeDasharray="3 3" opacity="0.3" />
+
+                    {/* Etikett */}
+                    <text x="100" y="285" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="Poppins">
+                        Konisk pendel
+                    </text>
+                </svg>
+            );
+        };
+
+        const App = () => {
+            const [time, setTime] = useState(0);
+            const [period, setPeriod] = useState(2.0);
+            const [isPaused, setIsPaused] = useState(false);
+            const animationRef = useRef(null);
+            const lastTimeRef = useRef(performance.now());
+
+            useEffect(() => {
+                const animate = (currentTime) => {
+                    if (!isPaused) {
+                        const deltaTime = (currentTime - lastTimeRef.current) / 1000;
+                        lastTimeRef.current = currentTime;
+                        setTime(prev => prev + deltaTime);
+                    } else {
+                        lastTimeRef.current = currentTime;
+                    }
+                    animationRef.current = requestAnimationFrame(animate);
+                };
+
+                animationRef.current = requestAnimationFrame(animate);
+
+                return () => {
+                    if (animationRef.current) {
+                        cancelAnimationFrame(animationRef.current);
+                    }
+                };
+            }, [isPaused]);
+
+            const handleSliderStyle = (value, min, max) => {
+                const progress = ((value - min) / (max - min)) * 100;
+                return { '--progress': `${progress}%` };
+            };
+
+            const resetSimulation = () => {
+                setTime(0);
+                lastTimeRef.current = performance.now();
+            };
+
+            // Amplitud för varje typ
+            const harmonicAmplitude = 0.8; // Normaliserad
+            const pendulumAmplitude = 0.4; // Radianer (~23 grader)
+            const conicalAmplitude = 0.35; // Radianer (~20 grader från vertikalen)
+
+            return (
+                <div className="min-h-screen flex flex-col items-center py-8 px-4 gap-6 max-w-6xl mx-auto">
+
+                    {/* Header */}
+                    <header className="text-center space-y-3">
+                        <nav className="text-sm text-slate-500 mb-2">
+                            <a href="index.html" className="hover:text-cyan-400">Hem</a>
+                            <span className="mx-2">/</span>
+                            <a href="fysik2.html" className="hover:text-cyan-400">Fysik 2</a>
+                            <span className="mx-2">/</span>
+                            <span className="text-slate-400">Jämförelse av svängningar</span>
+                        </nav>
+                        <h1 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text">
+                            Jämförelse av svängningar
+                        </h1>
+                        <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                            Tre typer av svängningsrörelse med samma periodtid. Observera likheterna och skillnaderna!
+                        </p>
+                    </header>
+
+                    {/* Tre simuleringar bredvid varandra */}
+                    <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="glass-card rounded-2xl p-4">
+                            <HarmonicOscillation
+                                time={time}
+                                period={period}
+                                amplitude={harmonicAmplitude}
+                            />
+                        </div>
+                        <div className="glass-card rounded-2xl p-4">
+                            <PlanePendulum
+                                time={time}
+                                period={period}
+                                amplitude={pendulumAmplitude}
+                            />
+                        </div>
+                        <div className="glass-card rounded-2xl p-4">
+                            <ConicalPendulum
+                                time={time}
+                                period={period}
+                                amplitude={conicalAmplitude}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Kontroller */}
+                    <div className="w-full max-w-xl glass-card rounded-2xl p-6">
+                        <div className="space-y-6">
+                            {/* Periodtid */}
+                            <div>
+                                <div className="flex justify-between items-center mb-2">
+                                    <label className="text-slate-300">Periodtid (<em>T</em>)</label>
+                                    <span className="font-mono text-cyan-400 bg-slate-800 px-3 py-1 rounded">
+                                        {formatNumber(period)} s
+                                    </span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0.5"
+                                    max="4"
+                                    step="0.1"
+                                    value={period}
+                                    onChange={(e) => setPeriod(parseFloat(e.target.value))}
+                                    className="w-full cursor-pointer"
+                                    style={handleSliderStyle(period, 0.5, 4)}
+                                />
+                            </div>
+
+                            {/* Knappar */}
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={() => setIsPaused(prev => !prev)}
+                                    className={`flex-1 px-6 py-3 rounded-xl font-bold transition-all ${
+                                        isPaused
+                                            ? 'bg-green-500 text-white hover:bg-green-600'
+                                            : 'bg-orange-500 text-white hover:bg-orange-600'
+                                    }`}
+                                >
+                                    {isPaused ? '▶ Starta' : '⏸ Pausa'}
+                                </button>
+                                <button
+                                    onClick={resetSimulation}
+                                    className="flex-1 px-6 py-3 rounded-xl font-bold bg-slate-700 text-white hover:bg-slate-600 transition-all"
+                                >
+                                    ↺ Återställ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Förklaring */}
+                    <div className="w-full glass-card p-6 rounded-2xl">
+                        <h2 className="text-xl font-bold text-slate-200 mb-4">Om svängningstyperna</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="p-4 bg-slate-800/50 rounded-xl border-l-4 border-amber-500">
+                                <h3 className="text-amber-400 font-semibold mb-2">Harmonisk svängning</h3>
+                                <p className="text-slate-400 text-sm">
+                                    En massa fäst i en fjäder oscillerar upp och ned. Rörelsen beskrivs av
+                                    <em> y</em> = <em>A</em> cos(<em>ωt</em>). Kraften är proportionell mot
+                                    utslaget från jämviktsläget.
+                                </p>
+                            </div>
+                            <div className="p-4 bg-slate-800/50 rounded-xl border-l-4 border-pink-500">
+                                <h3 className="text-pink-400 font-semibold mb-2">Plan pendel</h3>
+                                <p className="text-slate-400 text-sm">
+                                    En matematisk pendel svänger i ett vertikalt plan. För små utslag är
+                                    rörelsen approximativt harmonisk. Periodtiden beror på längden och
+                                    tyngdaccelerationen.
+                                </p>
+                            </div>
+                            <div className="p-4 bg-slate-800/50 rounded-xl border-l-4 border-violet-500">
+                                <h3 className="text-violet-400 font-semibold mb-2">Konisk pendel</h3>
+                                <p className="text-slate-400 text-sm">
+                                    Pendelkulan rör sig i en horisontell cirkel medan snöret bildar en kon.
+                                    Detta är <strong>inte</strong> en harmonisk svängning, utan en likformig
+                                    cirkelrörelse i horisontalplanet.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Formler */}
+                    <div className="w-full glass-card p-6 rounded-2xl">
+                        <h2 className="text-xl font-bold text-slate-200 mb-4">Periodtidsformler</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                            <div className="p-5 bg-slate-800/50 rounded-xl">
+                                <div className="text-amber-400 text-sm mb-3">Fjäderpendel</div>
+                                <div className="text-slate-200">
+                                    <Katex math="T = 2\pi\sqrt{\frac{m}{k}}" />
+                                </div>
+                            </div>
+                            <div className="p-5 bg-slate-800/50 rounded-xl">
+                                <div className="text-pink-400 text-sm mb-3">Plan pendel</div>
+                                <div className="text-slate-200">
+                                    <Katex math="T = 2\pi\sqrt{\frac{l}{g}}" />
+                                </div>
+                            </div>
+                            <div className="p-5 bg-slate-800/50 rounded-xl">
+                                <div className="text-violet-400 text-sm mb-3">Konisk pendel</div>
+                                <div className="text-slate-200">
+                                    <Katex math="T = 2\pi\sqrt{\frac{l \cdot \cos\alpha}{g}}" />
+                                </div>
+                            </div>
+                        </div>
+                        <p className="text-slate-500 text-sm mt-4 text-center">
+                            där <Katex math="m" displayMode={false} /> = massa,{' '}
+                            <Katex math="k" displayMode={false} /> = fjäderkonstant,{' '}
+                            <Katex math="l" displayMode={false} /> = pendellängd,{' '}
+                            <Katex math="g" displayMode={false} /> = tyngdacceleration,{' '}
+                            <Katex math="\alpha" displayMode={false} /> = vinkel från vertikalen
+                        </p>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

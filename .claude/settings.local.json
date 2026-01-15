@@ -30,7 +30,10 @@
       "Bash(powershell -Command:*)",
       "Bash(start C:claudeFysiklabbetfysik1-influens.html)",
       "Bash(start fysik1-influens.html)",
-      "Bash(start fysik1-coulombs-lag.html)"
+      "Bash(start fysik1-coulombs-lag.html)",
+      "Bash(start C:/claude/Fysiklabbet/fysik1-kirchhoffs-lag.html)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nLägg till Kirchhoffs första lag-simulering\n\n- Ny interaktiv simulering för Kirchhoffs första lag \\(strömlagen\\)\n- Tre konfigurationer: 1 in/2 ut, 2 in/2 ut, 2 in/1 ut\n- Automatisk balansering av strömmar \\(summan in = summan ut\\)\n- Animerade strömpilar som visar flödesriktning\n- Övningsflik med slumpmässiga uppgifter och feedback\n- Confetti-animation vid rätt svar\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(start C:claudeFysiklabbetfysik1-ellara-app.html)"
     ],
     "deny": [],
     "ask": []

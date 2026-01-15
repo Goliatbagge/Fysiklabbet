@@ -42,6 +42,19 @@
         .bulb-glow {
             filter: drop-shadow(0 0 15px rgba(250, 204, 21, 0.6));
         }
+        .battery-clickable:hover .battery-pole {
+            stroke: #67e8f9;
+            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
+        }
+        .battery-clickable:hover text {
+            filter: drop-shadow(0 0 4px currentColor);
+        }
+        .battery-clickable {
+            transition: transform 0.1s ease;
+        }
+        .battery-clickable:active {
+            transform: scale(0.95);
+        }
         input[type="range"] {
             -webkit-appearance: none;
             appearance: none;
@@ -121,7 +134,7 @@
           }
         };
 
-        const CircuitDiagram = ({ circuitType, showElectrons, showCurrentDirection, currentStrength, acFrequency, isPaused, isBulbBroken }) => {
+        const CircuitDiagram = ({ circuitType, showElectrons, showCurrentDirection, currentStrength, acFrequency, isPaused, isBulbBroken, batteryFlipped, onBatteryClick }) => {
           const [electrons, setElectrons] = useState([]);
           const [arrows, setArrows] = useState([]);
           const animationFrameId = useRef(null);
@@ -130,6 +143,7 @@
           const currentStrengthRef = useRef(currentStrength);
           const isPausedRef = useRef(isPaused);
           const isBulbBrokenRef = useRef(isBulbBroken);
+          const batteryFlippedRef = useRef(batteryFlipped);
           const animateRef = useRef(null);
 
           useEffect(() => {
@@ -146,6 +160,10 @@
           useEffect(() => {
             isBulbBrokenRef.current = isBulbBroken;
           }, [isBulbBroken]);
+
+          useEffect(() => {
+            batteryFlippedRef.current = batteryFlipped;
+          }, [batteryFlipped]);
 
           useEffect(() => {
             const initialElectrons = [];
@@ -178,8 +196,10 @@
               // Stop animation if bulb is broken
               if (circuitType === CircuitType.DC && !isBulbBrokenRef.current) {
                 const animationStep = currentStrengthRef.current * ANIMATION_SPEED_FACTOR;
-                dcPositionOffset.current = (dcPositionOffset.current - animationStep) % PATH_LENGTH;
-                dcArrowPositionOffset.current = (dcArrowPositionOffset.current + animationStep) % PATH_LENGTH;
+                // Reverse direction if battery is flipped
+                const direction = batteryFlippedRef.current ? 1 : -1;
+                dcPositionOffset.current = (dcPositionOffset.current + direction * animationStep) % PATH_LENGTH;
+                dcArrowPositionOffset.current = (dcArrowPositionOffset.current - direction * animationStep) % PATH_LENGTH;
               }
 
               setElectrons(prev => [...prev]);
@@ -202,6 +222,14 @@
 
           const acAnimationFrequencyFactor = (2 * Math.PI * acFrequency) / 1000;
 
+          // Handler for battery click - defined at component level
+          const handleBatteryClick = (e) => {
+            e.stopPropagation();
+            if (onBatteryClick) {
+              onBatteryClick();
+            }
+          };
+
           // Swedish standard symbol: circle with X
           const Bulb = () => {
             const glowIntensity = isBulbBroken ? 0 : Math.max(0, Math.min(currentStrength / 2, 1));
@@ -212,6 +240,11 @@
                 <g>
                   {/* Smoke/burnt effect */}
                   <ellipse cx="350" cy="130" rx="12" ry="20" fill="#475569" opacity="0.3" style={{ filter: 'blur(8px)' }} />
+                  {/* Background circle to hide wire */}
+                  <circle
+                    cx="350" cy="150" r="17"
+                    fill="#050510"
+                  />
                   {/* Broken circle with cracks */}
                   <circle
                     cx="350" cy="150" r="18"
@@ -254,6 +287,11 @@
               );
             }
 
+            // Background color transitions from dark to warm glow
+            const bgColor = glowIntensity > 0.1
+              ? `rgba(251, 191, 36, ${glowIntensity * 0.3})`
+              : '#050510';
+
             return (
               <g>
                 {/* Outer glow when lit */}
@@ -262,6 +300,19 @@
                   fill="#fef08a"
                   style={{ opacity: glowIntensity * 0.4, filter: 'blur(10px)' }}
                 />
+                {/* Background circle to hide wire - glows when lit */}
+                <circle
+                  cx="350" cy="150" r="17"
+                  fill="#050510"
+                />
+                {/* Inner glow overlay */}
+                {glowIntensity > 0.1 && (
+                  <circle
+                    cx="350" cy="150" r="16"
+                    fill="#fbbf24"
+                    style={{ opacity: glowIntensity * 0.4 }}
+                  />
+                )}
                 {/* Circle */}
                 <circle
                   cx="350" cy="150" r="18"
@@ -290,28 +341,50 @@
           // Swedish standard symbol: horizontal lines perpendicular to wire (long = +, short = -)
           const PowerSource = () => {
               if (circuitType === CircuitType.DC) {
+                  // When battery is flipped, swap the positions of + and -
+                  const topY = 140;
+                  const bottomY = 160;
+                  const longLineY = batteryFlipped ? bottomY : topY;
+                  const shortLineY = batteryFlipped ? topY : bottomY;
+                  const plusY = batteryFlipped ? bottomY + 4 : topY + 4;
+                  const minusY = batteryFlipped ? topY + 4 : bottomY + 4;
+
                   return (
-                      <g>
+                      <g
+                        style={{ cursor: 'pointer', pointerEvents: 'all' }}
+                        className="battery-clickable"
+                        onPointerDown={(e) => { e.stopPropagation(); onBatteryClick && onBatteryClick(); }}
+                      >
+                          {/* Invisible larger hit area for easier clicking */}
+                          <rect
+                            x="20" y="130" width="60" height="40"
+                            fill="rgba(0,0,0,0.01)"
+                            style={{ pointerEvents: 'all' }}
+                          />
                           {/* Gap in wire - cover the wire between terminals */}
                           <line x1="50" y1="135" x2="50" y2="165" stroke="#050510" strokeWidth="8" />
-                          {/* Long horizontal line (positive terminal) - top */}
+                          {/* Long horizontal line (positive terminal) */}
                           <line
-                            x1="30" y1="140" x2="70" y2="140"
+                            className="battery-pole"
+                            x1="30" y1={longLineY} x2="70" y2={longLineY}
                             stroke="#38bdf8"
                             strokeWidth="3"
                             strokeLinecap="round"
                           />
-                          {/* Short horizontal line (negative terminal) - bottom */}
+                          {/* Short horizontal line (negative terminal) */}
                           <line
-                            x1="38" y1="160" x2="62" y2="160"
+                            className="battery-pole"
+                            x1="38" y1={shortLineY} x2="62" y2={shortLineY}
                             stroke="#38bdf8"
                             strokeWidth="3"
                             strokeLinecap="round"
                           />
                           {/* Plus label */}
-                          <text x="75" y="144" fill="#22c55e" fontSize="12px" fontWeight="bold">+</text>
+                          <text x="75" y={plusY} fill="#22c55e" fontSize="12px" fontWeight="bold">+</text>
                           {/* Minus label */}
-                          <text x="66" y="164" fill="#ef4444" fontSize="12px" fontWeight="bold">−</text>
+                          <text x="66" y={minusY} fill="#ef4444" fontSize="12px" fontWeight="bold">−</text>
+                          {/* Hover hint */}
+                          <title>Klicka för att vända batteriet</title>
                       </g>
                   );
               } else {
@@ -362,6 +435,9 @@
                     if (velocityDirection < 0) {
                       angle += 180;
                     }
+                  } else if (batteryFlipped) {
+                    // Flip arrow direction when battery is flipped
+                    angle += 180;
                   }
 
                   return (
@@ -485,12 +561,13 @@
 
         const App = () => {
           const [circuitType, setCircuitType] = useState(CircuitType.DC);
-          const [displayMode, setDisplayMode] = useState('electrons');
+          const [displayMode, setDisplayMode] = useState('current');
           const [voltage, setVoltage] = useState(12);
           const [resistance, setResistance] = useState(10);
           const [frequency, setFrequency] = useState(1.0);
           const [isPaused, setIsPaused] = useState(false);
           const [isBulbBroken, setIsBulbBroken] = useState(false);
+          const [batteryFlipped, setBatteryFlipped] = useState(false);
 
           const current = voltage / resistance;
 
@@ -526,7 +603,39 @@
               {/* Main content */}
               <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-                {/* Left: Controls */}
+                {/* Left: Circuit Diagram */}
+                <div className="flex flex-col gap-4">
+                  <CircuitDiagram
+                    circuitType={circuitType}
+                    showElectrons={displayMode === 'electrons'}
+                    showCurrentDirection={displayMode === 'current'}
+                    currentStrength={current}
+                    acFrequency={frequency}
+                    isPaused={isPaused}
+                    isBulbBroken={isBulbBroken}
+                    batteryFlipped={batteryFlipped}
+                    onBatteryClick={() => setBatteryFlipped(prev => !prev)}
+                  />
+
+                  {/* Info Box */}
+                  <div className="glass-card p-5 rounded-xl">
+                    <h3 className="text-lg font-semibold text-slate-200 mb-2">
+                      {circuitType === CircuitType.DC ? '⎓ Likström (DC)' : '∿ Växelström (AC)'}
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {circuitType === CircuitType.DC
+                        ? 'I en likströmskrets flödar elektronerna kontinuerligt i samma riktning – från minuspolen till pluspolen. Den konventionella strömriktningen (I) är motsatt, från plus till minus. Batterier och solceller ger likström.'
+                        : 'I en växelströmskrets byter elektronerna riktning många gånger per sekund i en oscillerande rörelse. De rör sig fram och tillbaka, men överför ändå energi genom att "knuffa" på varandra. Eluttag i hemmet ger växelström (50 Hz).'}
+                    </p>
+                    {circuitType === CircuitType.DC && batteryFlipped && (
+                      <p className="text-orange-400 text-sm mt-3 p-2 bg-orange-500/10 rounded-lg">
+                        🔄 Batteriet är vänt - strömmen flödar nu åt motsatt håll!
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right: Controls */}
                 <div className="flex flex-col gap-4">
 
                   {/* Circuit Type */}
@@ -554,22 +663,25 @@
                         ∿ Växelström (AC)
                       </button>
                     </div>
+                    {/* Flip battery button - only for DC */}
+                    {circuitType === CircuitType.DC && (
+                      <button
+                        onClick={() => setBatteryFlipped(prev => !prev)}
+                        className={`w-full mt-3 px-4 py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 ${
+                          batteryFlipped
+                            ? 'bg-orange-500/30 text-orange-300 border-2 border-orange-400'
+                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        🔄 Vänd batteri {batteryFlipped ? '(vänt)' : ''}
+                      </button>
+                    )}
                   </div>
 
                   {/* Display Mode */}
                   <div className="glass-card p-4 rounded-xl">
                     <h3 className="text-sm font-medium text-slate-400 mb-3">Visningsläge</h3>
                     <div className="flex gap-3">
-                      <button
-                        onClick={() => setDisplayMode('electrons')}
-                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
-                          displayMode === 'electrons'
-                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
-                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
-                        }`}
-                      >
-                        ● Elektroner
-                      </button>
                       <button
                         onClick={() => setDisplayMode('current')}
                         className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
@@ -579,6 +691,16 @@
                         }`}
                       >
                         → Strömriktning
+                      </button>
+                      <button
+                        onClick={() => setDisplayMode('electrons')}
+                        className={`flex-1 px-4 py-3 rounded-xl font-medium transition-all ${
+                          displayMode === 'electrons'
+                            ? 'bg-cyan-500/30 text-cyan-300 border-2 border-cyan-400 btn-glow'
+                            : 'bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        ● Elektroner
                       </button>
                     </div>
                   </div>
@@ -683,31 +805,6 @@
                         </button>
                       </div>
                     )}
-                  </div>
-                </div>
-
-                {/* Right: Circuit Diagram */}
-                <div className="flex flex-col gap-4">
-                  <CircuitDiagram
-                    circuitType={circuitType}
-                    showElectrons={displayMode === 'electrons'}
-                    showCurrentDirection={displayMode === 'current'}
-                    currentStrength={current}
-                    acFrequency={frequency}
-                    isPaused={isPaused}
-                    isBulbBroken={isBulbBroken}
-                  />
-
-                  {/* Info Box */}
-                  <div className="glass-card p-5 rounded-xl">
-                    <h3 className="text-lg font-semibold text-slate-200 mb-2">
-                      {circuitType === CircuitType.DC ? '⎓ Likström (DC)' : '∿ Växelström (AC)'}
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      {circuitType === CircuitType.DC
-                        ? 'I en likströmskrets flödar elektronerna kontinuerligt i samma riktning – från minuspolen till pluspolen. Den konventionella strömriktningen (I) är motsatt, från plus till minus. Batterier och solceller ger likström.'
-                        : 'I en växelströmskrets byter elektronerna riktning många gånger per sekund i en oscillerande rörelse. De rör sig fram och tillbaka, men överför ändå energi genom att "knuffa" på varandra. Eluttag i hemmet ger växelström (50 Hz).'}
-                    </p>
                   </div>
                 </div>
               </div>

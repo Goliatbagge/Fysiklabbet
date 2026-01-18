@@ -39,7 +39,8 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-rorelsediagram.html',
     'fysik1-coulombs-lag.html',
     'fysik1-kirchhoffs-lag.html',
-    'fysik2-svangningar-jamforelse.html'
+    'fysik2-svangningar-jamforelse.html',
+    'fysik1-serie-parallell.html'
 ];
 
 let hasErrors = false;

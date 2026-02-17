@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnetfält i spole - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <style>
+        .sim-container {
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 80px);
+        }
+
+        @media (min-width: 1024px) {
+            .sim-container {
+                flex-direction: row;
+            }
+        }
+
+        #canvas-container {
+            flex: 1;
+            min-height: 50vh;
+            position: relative;
+            background: radial-gradient(ellipse at center, #0a1628 0%, #050510 100%);
+        }
+
+        @media (min-width: 1024px) {
+            #canvas-container {
+                min-height: calc(100vh - 80px);
+            }
+        }
+
+        .controls-panel {
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-left: 1px solid rgba(56, 189, 248, 0.15);
+            overflow-y: auto;
+        }
+
+        @media (min-width: 1024px) {
+            .controls-panel {
+                width: 380px;
+                max-height: calc(100vh - 80px);
+            }
+        }
+
+        .panel-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e2e8f0;
+            border-bottom: 2px solid #38bdf8;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 2px solid rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            color: #94a3b8;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .mode-btn:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        .mode-btn.active {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: #38bdf8;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            color: #e2e8f0;
+            font-weight: 500;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .slider-group {
+            margin-top: 1.5rem;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .slider-value {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .slider-container {
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            background: rgba(56, 189, 248, 0.2);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #38bdf8;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .info-box {
+            background: rgba(56, 189, 248, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-box h3 {
+            color: #38bdf8;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .info-box p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .highlight-orange {
+            color: #f97316;
+            font-weight: 600;
+        }
+
+        .scene-title {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 10;
+        }
+
+        .scene-title h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #38bdf8, #7dd3fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.25rem;
+        }
+
+        .scene-title p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .legend-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+        }
+
+        .legend-line {
+            width: 20px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .formula-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.2rem;
+            color: #e2e8f0;
+        }
+
+        .formula i {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="sim-container">
+        <div id="canvas-container">
+            <div class="scene-title">
+                <h1>Magnetfält i spole</h1>
+                <p>Dra för att rotera modellen</p>
+            </div>
+            <div class="legend" id="legend"></div>
+        </div>
+
+        <div class="controls-panel">
+            <h2 class="panel-title">Kontrollpanel</h2>
+
+            <div class="mode-selector">
+                <button class="mode-btn active" id="loopBtn">Slinga</button>
+                <button class="mode-btn" id="coilBtn">Spole</button>
+            </div>
+
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="showField" checked>
+                    <label for="showField">Visa magnetfält</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="showMoreField">
+                    <label for="showMoreField">Visa fler fältlinjer</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="showCurrent" checked>
+                    <label for="showCurrent">Visa strömriktning</label>
+                </div>
+            </div>
+
+            <button class="mode-btn" id="reverseCurrentBtn" style="width: 100%; margin-top: 1rem;">
+                ⇄ Skifta strömriktning
+            </button>
+
+            <div class="slider-group" id="coilSliders" style="display: none;">
+                <div class="slider-container">
+                    <div class="slider-label">
+                        <span>Antal varv</span>
+                        <span class="slider-value" id="turnsValue">5</span>
+                    </div>
+                    <input type="range" id="turnsSlider" min="2" max="10" value="5">
+                </div>
+            </div>
+
+            <div class="info-box" id="loopInfo">
+                <h3>Magnetfält kring en slinga</h3>
+                <p>
+                    När ström går genom en slinga (ledare formad som en ring) skapas ett
+                    <span class="highlight">magnetfält</span> runt den. Fältet går genom slingans mitt
+                    och böjer sig tillbaka runt utsidan.
+                </p>
+                <p>
+                    <span class="highlight-orange">Högerhandsregeln:</span> Kröker du fingrarna i
+                    strömriktningen pekar tummen i magnetfältets riktning genom slingan.
+                </p>
+                <div class="formula-box">
+                    <div class="formula">
+                        <i>B</i> = <i>μ</i>₀<i>I</i> / (2<i>r</i>)
+                    </div>
+                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.5rem; margin-bottom: 0;">
+                        Magnetfält i slingans centrum
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-box" id="coilInfo" style="display: none;">
+                <h3>Magnetfält i en spole</h3>
+                <p>
+                    En spole är flera slingor placerade tätt efter varandra. Magnetfälten från
+                    varje slinga <span class="highlight">förstärker varandra</span>, vilket ger ett
+                    starkare och mer homogent fält inuti spolen.
+                </p>
+                <p>
+                    Fältet inuti en lång spole är nästan <span class="highlight">likformigt</span>
+                    och påminner om fältet från en stavmagnet.
+                </p>
+                <div class="formula-box">
+                    <div class="formula">
+                        <i>B</i> = <i>μ</i>₀<i>nI</i>
+                    </div>
+                    <p style="color: #64748b; font-size: 0.8rem; margin-top: 0.5rem; margin-bottom: 0;">
+                        <i>n</i> = antal varv per längdenhet
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>Interaktion</h3>
+                <p>
+                    🖱️ <span class="highlight">Vänsterklick + dra</span> - Rotera modellen
+                </p>
+                <p>
+                    🖱️ <span class="highlight">Scrollhjul</span> - Zooma in/ut
+                </p>
+                <p>
+                    🖱️ <span class="highlight">Högerklick + dra</span> - Panorera
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // Scene setup
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.set(4, 2, 4);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Controls
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.minDistance = 2;
+        controls.maxDistance = 15;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x404060, 0.6);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
+
+        const backLight = new THREE.DirectionalLight(0x38bdf8, 0.3);
+        backLight.position.set(-5, -3, -5);
+        scene.add(backLight);
+
+        // Constants
+        const loopRadius = 1.5;
+        const wireRadius = 0.06;
+        const loopColor = 0xf97316; // Orange
+
+        // Groups
+        let loopGroup = new THREE.Group();
+        let coilGroup = new THREE.Group();
+        let fieldLinesGroup = new THREE.Group();
+        let extraFieldLinesGroup = new THREE.Group();
+        let currentArrowsGroup = new THREE.Group();
+
+        scene.add(loopGroup);
+        scene.add(coilGroup);
+        scene.add(fieldLinesGroup);
+        scene.add(extraFieldLinesGroup);
+        scene.add(currentArrowsGroup);
+
+        // State
+        let mode = 'loop'; // 'loop' or 'coil'
+        let numTurns = 5;
+        let showField = true;
+        let showMoreField = false;
+        let showCurrent = true;
+        let currentReversed = false; // false = CCW (B up), true = CW (B down)
+
+        // Create a single loop (torus)
+        function createLoop(yOffset = 0) {
+            const geometry = new THREE.TorusGeometry(loopRadius, wireRadius, 16, 64);
+            const material = new THREE.MeshStandardMaterial({
+                color: loopColor,
+                metalness: 0.5,
+                roughness: 0.3,
+            });
+            const loop = new THREE.Mesh(geometry, material);
+            loop.rotation.x = Math.PI / 2; // Lay flat
+            loop.position.y = yOffset;
+            return loop;
+        }
+
+        // Create current direction arrows on a loop (arrows along the wire, like field line arrows)
+        function createCurrentArrows(yOffset = 0, radius = loopRadius) {
+            const arrows = new THREE.Group();
+            const numArrows = 6;
+
+            for (let i = 0; i < numArrows; i++) {
+                const angle = (i / numArrows) * Math.PI * 2;
+
+                // Position on the loop
+                const x = radius * Math.cos(angle);
+                const z = radius * Math.sin(angle);
+
+                // Tangent direction for CCW motion (when viewed from above)
+                // CCW tangent at angle θ is (-sin(θ), 0, cos(θ))
+                // CW tangent is the opposite: (sin(θ), 0, -cos(θ))
+                const tangentX = currentReversed ? Math.sin(angle) : -Math.sin(angle);
+                const tangentZ = currentReversed ? -Math.cos(angle) : Math.cos(angle);
+                const tangent = new THREE.Vector3(tangentX, 0, tangentZ);
+
+                // Create arrow along the wire
+                const arrow = new THREE.ArrowHelper(
+                    tangent,
+                    new THREE.Vector3(x, yOffset, z),
+                    0.35,
+                    0xfbbf24,
+                    0.2,
+                    0.1
+                );
+                arrows.add(arrow);
+            }
+
+            return arrows;
+        }
+
+        // Create dipole-like magnetic field lines for a single loop
+        function createLoopFieldLines() {
+            const group = new THREE.Group();
+            const numLines = 6;
+            const pointsPerLine = 80;
+            const r0 = 2.5; // Dipole field maximum distance
+
+            // Field lines that go through the center and curve around
+            for (let i = 0; i < numLines; i++) {
+                const phi = (i / numLines) * Math.PI * 2;
+                const points = [];
+
+                for (let j = 0; j <= pointsPerLine; j++) {
+                    const t = (j / pointsPerLine) * Math.PI; // 0 to PI
+
+                    // Dipole field equation: r = r0 * sin²(θ)
+                    const r = r0 * Math.pow(Math.sin(t), 2);
+
+                    if (r < 0.05) continue;
+
+                    // Convert to Cartesian (y is up)
+                    const x = r * Math.sin(t) * Math.cos(phi);
+                    const y = r * Math.cos(t);
+                    const z = r * Math.sin(t) * Math.sin(phi);
+
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+
+                if (points.length > 2) {
+                    const curve = new THREE.CatmullRomCurve3(points);
+                    const geometry = new THREE.TubeGeometry(curve, 64, 0.015, 8, false);
+                    const material = new THREE.MeshBasicMaterial({
+                        color: 0x38bdf8,
+                        transparent: true,
+                        opacity: 0.8,
+                    });
+                    const fieldLine = new THREE.Mesh(geometry, material);
+                    group.add(fieldLine);
+
+                    // Add arrows to show direction (larger arrows)
+                    const arrowPositions = [0.35, 0.65];
+                    arrowPositions.forEach(tPos => {
+                        const theta = tPos * Math.PI;
+                        const r = r0 * Math.pow(Math.sin(theta), 2);
+
+                        if (r > 0.3) {
+                            const x = r * Math.sin(theta) * Math.cos(phi);
+                            const y = r * Math.cos(theta);
+                            const z = r * Math.sin(theta) * Math.sin(phi);
+
+                            // Calculate direction along field line
+                            const dt = currentReversed ? -0.02 : 0.02;
+                            const theta2 = (tPos + dt) * Math.PI;
+                            const r2 = r0 * Math.pow(Math.sin(theta2), 2);
+                            const x2 = r2 * Math.sin(theta2) * Math.cos(phi);
+                            const y2 = r2 * Math.cos(theta2);
+                            const z2 = r2 * Math.sin(theta2) * Math.sin(phi);
+
+                            const dir = new THREE.Vector3(x2 - x, y2 - y, z2 - z).normalize();
+                            const arrow = new THREE.ArrowHelper(dir, new THREE.Vector3(x, y, z), 0.35, 0x38bdf8, 0.2, 0.1);
+                            group.add(arrow);
+                        }
+                    });
+                }
+            }
+
+            // Central field line going straight up/down
+            const centerPoints = [];
+            for (let y = -2; y <= 2; y += 0.1) {
+                centerPoints.push(new THREE.Vector3(0, y, 0));
+            }
+            const centerCurve = new THREE.CatmullRomCurve3(centerPoints);
+            const centerGeometry = new THREE.TubeGeometry(centerCurve, 32, 0.02, 8, false);
+            const centerMaterial = new THREE.MeshBasicMaterial({
+                color: 0x38bdf8,
+                transparent: true,
+                opacity: 0.8,
+            });
+            const centerLine = new THREE.Mesh(centerGeometry, centerMaterial);
+            group.add(centerLine);
+
+            // Arrow on center line (direction depends on current) - larger
+            const centerDirection = currentReversed ? -1 : 1;
+            const centerArrow = new THREE.ArrowHelper(
+                new THREE.Vector3(0, centerDirection, 0),
+                new THREE.Vector3(0, 0.5 * centerDirection, 0),
+                0.5,
+                0x38bdf8,
+                0.25,
+                0.12
+            );
+            group.add(centerArrow);
+
+            return group;
+        }
+
+        // Create extra dashed field lines (outer, weaker field)
+        function createExtraLoopFieldLines() {
+            const group = new THREE.Group();
+            const numLines = 6;
+            const pointsPerLine = 80;
+            const r0 = 3.8; // Larger radius for outer field lines
+
+            for (let i = 0; i < numLines; i++) {
+                const phi = (i / numLines) * Math.PI * 2;
+                const points = [];
+
+                for (let j = 0; j <= pointsPerLine; j++) {
+                    const t = (j / pointsPerLine) * Math.PI;
+                    const r = r0 * Math.pow(Math.sin(t), 2);
+                    if (r < 0.05) continue;
+
+                    const x = r * Math.sin(t) * Math.cos(phi);
+                    const y = r * Math.cos(t);
+                    const z = r * Math.sin(t) * Math.sin(phi);
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+
+                if (points.length > 2) {
+                    // Create dashed line
+                    const curve = new THREE.CatmullRomCurve3(points);
+                    const curvePoints = curve.getPoints(100);
+                    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+                    const material = new THREE.LineDashedMaterial({
+                        color: 0x38bdf8,
+                        transparent: true,
+                        opacity: 0.5,
+                        dashSize: 0.15,
+                        gapSize: 0.1,
+                    });
+                    const line = new THREE.Line(geometry, material);
+                    line.computeLineDistances();
+                    group.add(line);
+
+                    // Add arrows
+                    const arrowPositions = [0.4, 0.6];
+                    arrowPositions.forEach(tPos => {
+                        const theta = tPos * Math.PI;
+                        const r = r0 * Math.pow(Math.sin(theta), 2);
+
+                        if (r > 0.5) {
+                            const x = r * Math.sin(theta) * Math.cos(phi);
+                            const y = r * Math.cos(theta);
+                            const z = r * Math.sin(theta) * Math.sin(phi);
+
+                            const dt = currentReversed ? -0.02 : 0.02;
+                            const theta2 = (tPos + dt) * Math.PI;
+                            const r2 = r0 * Math.pow(Math.sin(theta2), 2);
+                            const x2 = r2 * Math.sin(theta2) * Math.cos(phi);
+                            const y2 = r2 * Math.cos(theta2);
+                            const z2 = r2 * Math.sin(theta2) * Math.sin(phi);
+
+                            const dir = new THREE.Vector3(x2 - x, y2 - y, z2 - z).normalize();
+                            const arrow = new THREE.ArrowHelper(dir, new THREE.Vector3(x, y, z), 0.3, 0x38bdf8, 0.18, 0.09);
+                            group.add(arrow);
+                        }
+                    });
+                }
+            }
+
+            return group;
+        }
+
+        // Create magnetic field lines for a coil (solenoid)
+        function createCoilFieldLines(turns, spacing) {
+            const group = new THREE.Group();
+            const coilLength = (turns - 1) * spacing;
+            const halfLength = coilLength / 2;
+
+            // Internal parallel field lines
+            const numInternalLines = 5;
+            for (let i = 0; i < numInternalLines; i++) {
+                const angle = (i / numInternalLines) * Math.PI * 2;
+                const radius = 0.5;
+                const x = radius * Math.cos(angle);
+                const z = radius * Math.sin(angle);
+
+                const points = [];
+                for (let y = -halfLength - 0.5; y <= halfLength + 0.5; y += 0.1) {
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+
+                const curve = new THREE.CatmullRomCurve3(points);
+                const geometry = new THREE.TubeGeometry(curve, 32, 0.02, 8, false);
+                const material = new THREE.MeshBasicMaterial({
+                    color: 0x38bdf8,
+                    transparent: true,
+                    opacity: 0.7,
+                });
+                const line = new THREE.Mesh(geometry, material);
+                group.add(line);
+
+                // Arrow (direction depends on current) - larger
+                const dir = currentReversed ? -1 : 1;
+                const arrow = new THREE.ArrowHelper(
+                    new THREE.Vector3(0, dir, 0),
+                    new THREE.Vector3(x, 0, z),
+                    0.5,
+                    0x38bdf8,
+                    0.25,
+                    0.12
+                );
+                group.add(arrow);
+            }
+
+            // Central field line
+            const centerPoints = [];
+            for (let y = -halfLength - 1.5; y <= halfLength + 1.5; y += 0.1) {
+                centerPoints.push(new THREE.Vector3(0, y, 0));
+            }
+            const centerCurve = new THREE.CatmullRomCurve3(centerPoints);
+            const centerGeometry = new THREE.TubeGeometry(centerCurve, 32, 0.03, 8, false);
+            const centerMaterial = new THREE.MeshBasicMaterial({
+                color: 0x38bdf8,
+                transparent: true,
+                opacity: 0.9,
+            });
+            group.add(new THREE.Mesh(centerGeometry, centerMaterial));
+
+            // Arrows on central line (direction depends on current) - larger
+            const fieldDir = currentReversed ? -1 : 1;
+            const centerArrow1 = new THREE.ArrowHelper(
+                new THREE.Vector3(0, fieldDir, 0),
+                new THREE.Vector3(0, fieldDir * (halfLength + 0.8), 0),
+                0.6,
+                0x38bdf8,
+                0.3,
+                0.15
+            );
+            group.add(centerArrow1);
+
+            const centerArrow2 = new THREE.ArrowHelper(
+                new THREE.Vector3(0, fieldDir, 0),
+                new THREE.Vector3(0, fieldDir * (-halfLength - 0.8), 0),
+                0.6,
+                0x38bdf8,
+                0.3,
+                0.15
+            );
+            group.add(centerArrow2);
+
+            // External return field lines
+            const numExternalLines = 4;
+            for (let i = 0; i < numExternalLines; i++) {
+                const phi = (i / numExternalLines) * Math.PI * 2;
+                const points = [];
+
+                // Create curved path from top to bottom outside the coil
+                for (let t = 0; t <= 1; t += 0.02) {
+                    const y = halfLength + 1 - t * (coilLength + 2);
+                    const bulge = Math.sin(t * Math.PI);
+                    const r = loopRadius + 0.5 + bulge * 1.5;
+
+                    const x = r * Math.cos(phi);
+                    const z = r * Math.sin(phi);
+
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+
+                if (points.length > 2) {
+                    const curve = new THREE.CatmullRomCurve3(points);
+                    const geometry = new THREE.TubeGeometry(curve, 64, 0.015, 8, false);
+                    const material = new THREE.MeshBasicMaterial({
+                        color: 0x38bdf8,
+                        transparent: true,
+                        opacity: 0.5,
+                    });
+                    group.add(new THREE.Mesh(geometry, material));
+
+                    // Arrow at middle of external line (opposite to internal direction) - larger
+                    const midY = 0;
+                    const midBulge = Math.sin(0.5 * Math.PI);
+                    const midR = loopRadius + 0.5 + midBulge * 1.5;
+                    const midX = midR * Math.cos(phi);
+                    const midZ = midR * Math.sin(phi);
+
+                    const externalDir = currentReversed ? 1 : -1;
+                    const arrow = new THREE.ArrowHelper(
+                        new THREE.Vector3(0, externalDir, 0),
+                        new THREE.Vector3(midX, midY, midZ),
+                        0.5,
+                        0x38bdf8,
+                        0.25,
+                        0.12
+                    );
+                    group.add(arrow);
+                }
+            }
+
+            return group;
+        }
+
+        // Create extra dashed field lines for coil (outer, weaker field)
+        function createExtraCoilFieldLines(turns, spacing) {
+            const group = new THREE.Group();
+            const coilLength = (turns - 1) * spacing;
+            const halfLength = coilLength / 2;
+
+            // Extra external return field lines (further out, dashed)
+            const numExternalLines = 4;
+            for (let i = 0; i < numExternalLines; i++) {
+                const phi = (i / numExternalLines) * Math.PI * 2 + Math.PI / 8; // Offset from main lines
+                const points = [];
+
+                for (let t = 0; t <= 1; t += 0.02) {
+                    const y = halfLength + 1.5 - t * (coilLength + 3);
+                    const bulge = Math.sin(t * Math.PI);
+                    const r = loopRadius + 1.2 + bulge * 2;
+
+                    const x = r * Math.cos(phi);
+                    const z = r * Math.sin(phi);
+                    points.push(new THREE.Vector3(x, y, z));
+                }
+
+                if (points.length > 2) {
+                    const curve = new THREE.CatmullRomCurve3(points);
+                    const curvePoints = curve.getPoints(100);
+                    const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+                    const material = new THREE.LineDashedMaterial({
+                        color: 0x38bdf8,
+                        transparent: true,
+                        opacity: 0.4,
+                        dashSize: 0.15,
+                        gapSize: 0.1,
+                    });
+                    const line = new THREE.Line(geometry, material);
+                    line.computeLineDistances();
+                    group.add(line);
+
+                    // Arrow
+                    const midBulge = Math.sin(0.5 * Math.PI);
+                    const midR = loopRadius + 1.2 + midBulge * 2;
+                    const midX = midR * Math.cos(phi);
+                    const midZ = midR * Math.sin(phi);
+
+                    const externalDir = currentReversed ? 1 : -1;
+                    const arrow = new THREE.ArrowHelper(
+                        new THREE.Vector3(0, externalDir, 0),
+                        new THREE.Vector3(midX, 0, midZ),
+                        0.4,
+                        0x38bdf8,
+                        0.2,
+                        0.1
+                    );
+                    group.add(arrow);
+                }
+            }
+
+            return group;
+        }
+
+        // Build loop mode
+        function buildLoopMode() {
+            clearScene();
+
+            // Create single loop
+            loopGroup.add(createLoop(0));
+            loopGroup.visible = true;
+            coilGroup.visible = false;
+
+            // Create field lines
+            if (showField) {
+                fieldLinesGroup.add(createLoopFieldLines());
+            }
+
+            // Create extra field lines (dashed, outer)
+            if (showMoreField) {
+                extraFieldLinesGroup.add(createExtraLoopFieldLines());
+            }
+
+            // Create current arrows
+            if (showCurrent) {
+                currentArrowsGroup.add(createCurrentArrows(0));
+            }
+        }
+
+        // Build coil mode
+        function buildCoilMode() {
+            clearScene();
+
+            const spacing = 0.4;
+            const halfLength = ((numTurns - 1) * spacing) / 2;
+
+            // Create coil (multiple loops)
+            for (let i = 0; i < numTurns; i++) {
+                const y = -halfLength + i * spacing;
+                coilGroup.add(createLoop(y));
+            }
+
+            loopGroup.visible = false;
+            coilGroup.visible = true;
+
+            // Create field lines
+            if (showField) {
+                const fieldLines = createCoilFieldLines(numTurns, spacing);
+                fieldLinesGroup.add(fieldLines);
+            }
+
+            // Create extra field lines (dashed, outer)
+            if (showMoreField) {
+                extraFieldLinesGroup.add(createExtraCoilFieldLines(numTurns, spacing));
+            }
+
+            // Create current arrows (on first and last loop, and middle)
+            if (showCurrent) {
+                currentArrowsGroup.add(createCurrentArrows(-halfLength));
+                currentArrowsGroup.add(createCurrentArrows(halfLength));
+                if (numTurns > 2) {
+                    currentArrowsGroup.add(createCurrentArrows(0));
+                }
+            }
+        }
+
+        // Clear scene
+        function clearScene() {
+            while (loopGroup.children.length > 0) {
+                loopGroup.remove(loopGroup.children[0]);
+            }
+            while (coilGroup.children.length > 0) {
+                coilGroup.remove(coilGroup.children[0]);
+            }
+            while (fieldLinesGroup.children.length > 0) {
+                fieldLinesGroup.remove(fieldLinesGroup.children[0]);
+            }
+            while (extraFieldLinesGroup.children.length > 0) {
+                extraFieldLinesGroup.remove(extraFieldLinesGroup.children[0]);
+            }
+            while (currentArrowsGroup.children.length > 0) {
+                currentArrowsGroup.remove(currentArrowsGroup.children[0]);
+            }
+        }
+
+        // Update visualization
+        function updateVisualization() {
+            if (mode === 'loop') {
+                buildLoopMode();
+            } else {
+                buildCoilMode();
+            }
+            updateLegend();
+        }
+
+        // Update legend
+        function updateLegend() {
+            const legend = document.getElementById('legend');
+            legend.innerHTML = `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f97316;"></div>
+                    <span>${mode === 'loop' ? 'Strömförande slinga' : 'Spole (lindning)'}</span>
+                </div>
+                ${showField ? `
+                <div class="legend-item">
+                    <div class="legend-line" style="background: #38bdf8;"></div>
+                    <span>Magnetfältlinjer</span>
+                </div>
+                ` : ''}
+                ${showCurrent ? `
+                <div class="legend-item">
+                    <div class="legend-line" style="background: #fbbf24;"></div>
+                    <span>Strömriktning</span>
+                </div>
+                ` : ''}
+            `;
+        }
+
+        // Event listeners
+        document.getElementById('loopBtn').addEventListener('click', () => {
+            mode = 'loop';
+            document.getElementById('loopBtn').classList.add('active');
+            document.getElementById('coilBtn').classList.remove('active');
+            document.getElementById('coilSliders').style.display = 'none';
+            document.getElementById('loopInfo').style.display = 'block';
+            document.getElementById('coilInfo').style.display = 'none';
+            updateVisualization();
+        });
+
+        document.getElementById('coilBtn').addEventListener('click', () => {
+            mode = 'coil';
+            document.getElementById('coilBtn').classList.add('active');
+            document.getElementById('loopBtn').classList.remove('active');
+            document.getElementById('coilSliders').style.display = 'block';
+            document.getElementById('loopInfo').style.display = 'none';
+            document.getElementById('coilInfo').style.display = 'block';
+            updateVisualization();
+        });
+
+        document.getElementById('showField').addEventListener('change', (e) => {
+            showField = e.target.checked;
+            updateVisualization();
+        });
+
+        document.getElementById('showMoreField').addEventListener('change', (e) => {
+            showMoreField = e.target.checked;
+            updateVisualization();
+        });
+
+        document.getElementById('showCurrent').addEventListener('change', (e) => {
+            showCurrent = e.target.checked;
+            updateVisualization();
+        });
+
+        document.getElementById('turnsSlider').addEventListener('input', (e) => {
+            numTurns = parseInt(e.target.value);
+            document.getElementById('turnsValue').textContent = numTurns;
+            if (mode === 'coil') {
+                updateVisualization();
+            }
+        });
+
+        document.getElementById('reverseCurrentBtn').addEventListener('click', () => {
+            currentReversed = !currentReversed;
+            updateVisualization();
+        });
+
+        // Initial setup
+        updateVisualization();
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+    </script>
+</body>
+</html>

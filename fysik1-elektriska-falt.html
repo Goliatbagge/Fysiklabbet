@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektriska fält - Fysiklabbet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .tool-btn {
+            transition: all 0.2s ease;
+        }
+        .tool-btn:hover {
+            transform: scale(1.05);
+        }
+        .tool-btn.active {
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+            border-color: rgba(56, 189, 248, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback } = React;
+
+        const formatNumber = (num, decimals = 2) => {
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Coulombs konstant
+        const K = 8.99e9;
+
+        const ElectricFieldSimulation = () => {
+            const canvasRef = useRef(null);
+            const containerRef = useRef(null);
+            const [canvasSize, setCanvasSize] = useState({ width: 800, height: 500 });
+            const [objects, setObjects] = useState([]);
+            const [showFieldLines, setShowFieldLines] = useState(true);
+            const [fieldLineDensity, setFieldLineDensity] = useState(8);
+            const [dragging, setDragging] = useState(null);
+            const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+            const [dragMode, setDragMode] = useState('move'); // 'move' eller 'rotate'
+            const justDraggedRef = useRef(false); // Förhindra att klick efter drag lägger till objekt
+
+            // Beräkna elektriskt fält vid en punkt från alla objekt
+            const calculateField = useCallback((x, y, excludeIndex = -1) => {
+                let Ex = 0;
+                let Ey = 0;
+
+                objects.forEach((obj, index) => {
+                    if (index === excludeIndex) return;
+
+                    if (obj.type === 'charge') {
+                        const dx = x - obj.x;
+                        const dy = y - obj.y;
+                        const r2 = dx * dx + dy * dy;
+                        const r = Math.sqrt(r2);
+
+                        if (r < 10) return; // Undvik singularitet nära laddningen
+
+                        // E = k * Q / r^2, riktning utåt från positiv
+                        const E = K * Math.abs(obj.charge * 1e-6) / r2;
+                        const sign = obj.charge > 0 ? 1 : -1;
+
+                        Ex += sign * E * (dx / r);
+                        Ey += sign * E * (dy / r);
+                    } else if (obj.type === 'plate') {
+                        // Platta - approximera som linje av laddningar
+                        const plateLength = obj.width;
+                        const numCharges = 20;
+                        const chargePerPoint = obj.charge / numCharges;
+
+                        for (let i = 0; i < numCharges; i++) {
+                            const t = (i + 0.5) / numCharges;
+                            const px = obj.x + (t - 0.5) * plateLength * Math.cos(obj.angle || 0);
+                            const py = obj.y + (t - 0.5) * plateLength * Math.sin(obj.angle || 0);
+
+                            const dx = x - px;
+                            const dy = y - py;
+                            const r2 = dx * dx + dy * dy;
+                            const r = Math.sqrt(r2);
+
+                            if (r < 5) continue;
+
+                            const E = K * Math.abs(chargePerPoint * 1e-6) / r2;
+                            const sign = obj.charge > 0 ? 1 : -1;
+
+                            Ex += sign * E * (dx / r);
+                            Ey += sign * E * (dy / r);
+                        }
+                    }
+                });
+
+                return { Ex, Ey };
+            }, [objects]);
+
+            // Följ en fältlinje från en startpunkt
+            const traceFieldLine = useCallback((startX, startY, direction) => {
+                const points = [{ x: startX, y: startY }];
+                let x = startX;
+                let y = startY;
+                const stepSize = 5;
+                const maxSteps = 500;
+
+                for (let i = 0; i < maxSteps; i++) {
+                    const { Ex, Ey } = calculateField(x, y);
+                    const magnitude = Math.sqrt(Ex * Ex + Ey * Ey);
+
+                    if (magnitude < 1e-10) break;
+
+                    // Normalisera och ta ett steg
+                    const dx = direction * (Ex / magnitude) * stepSize;
+                    const dy = direction * (Ey / magnitude) * stepSize;
+
+                    x += dx;
+                    y += dy;
+
+                    // Kolla om vi är utanför canvas
+                    if (x < 0 || x > canvasSize.width || y < 0 || y > canvasSize.height) break;
+
+                    // Kolla om vi träffar en negativ laddning (om vi går i positiv riktning)
+                    // eller positiv laddning (om vi går i negativ riktning)
+                    let hitCharge = false;
+                    for (const obj of objects) {
+                        if (obj.type === 'charge') {
+                            const dist = Math.sqrt((x - obj.x) ** 2 + (y - obj.y) ** 2);
+                            if (dist < 25) {
+                                hitCharge = true;
+                                break;
+                            }
+                        } else if (obj.type === 'plate') {
+                            // Kolla avstånd till plattan
+                            const plateHalfLength = obj.width / 2;
+                            const cos = Math.cos(obj.angle || 0);
+                            const sin = Math.sin(obj.angle || 0);
+
+                            // Projicera punkten på plattans linje
+                            const dx = x - obj.x;
+                            const dy = y - obj.y;
+                            const proj = dx * cos + dy * sin;
+
+                            if (Math.abs(proj) < plateHalfLength) {
+                                const perpDist = Math.abs(-dx * sin + dy * cos);
+                                if (perpDist < 15) {
+                                    hitCharge = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (hitCharge) {
+                        points.push({ x, y });
+                        break;
+                    }
+
+                    points.push({ x, y });
+                }
+
+                return points;
+            }, [calculateField, canvasSize, objects]);
+
+            // Generera startpunkter för fältlinjer
+            const generateFieldLines = useCallback(() => {
+                const lines = [];
+
+                objects.forEach(obj => {
+                    if (obj.type === 'charge' && obj.charge > 0) {
+                        // Starta fältlinjer från positiva laddningar
+                        const numLines = fieldLineDensity;
+                        for (let i = 0; i < numLines; i++) {
+                            const angle = (2 * Math.PI * i) / numLines;
+                            const startX = obj.x + 25 * Math.cos(angle);
+                            const startY = obj.y + 25 * Math.sin(angle);
+                            const points = traceFieldLine(startX, startY, 1);
+                            if (points.length > 1) {
+                                lines.push({ points, fromPositive: true });
+                            }
+                        }
+                    } else if (obj.type === 'plate' && obj.charge > 0) {
+                        // Starta fältlinjer från positiva plattor
+                        const numLines = Math.ceil(fieldLineDensity * 1.5);
+                        const plateLength = obj.width;
+                        const cos = Math.cos(obj.angle || 0);
+                        const sin = Math.sin(obj.angle || 0);
+
+                        for (let i = 0; i < numLines; i++) {
+                            const t = (i + 0.5) / numLines - 0.5;
+                            const px = obj.x + t * plateLength * cos;
+                            const py = obj.y + t * plateLength * sin;
+
+                            // Starta linjer på båda sidor av plattan
+                            for (const side of [1, -1]) {
+                                const startX = px + side * 15 * (-sin);
+                                const startY = py + side * 15 * cos;
+                                const points = traceFieldLine(startX, startY, 1);
+                                if (points.length > 1) {
+                                    lines.push({ points, fromPositive: true });
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Starta fältlinjer från negativa objekt (baklänges - från kanten in mot objektet)
+                // Detta visar fältlinjer som kommer "utifrån" och går in i negativa laddningar
+                objects.forEach(obj => {
+                    if (obj.type === 'charge' && obj.charge < 0) {
+                        // Starta fältlinjer baklänges från negativa laddningar
+                        const numLines = fieldLineDensity;
+                        for (let i = 0; i < numLines; i++) {
+                            const angle = (2 * Math.PI * i) / numLines;
+                            const startX = obj.x + 25 * Math.cos(angle);
+                            const startY = obj.y + 25 * Math.sin(angle);
+                            // Trace baklänges (direction = -1) för att hitta var linjen kommer ifrån
+                            const points = traceFieldLine(startX, startY, -1);
+                            if (points.length > 1) {
+                                // Vänd punkterna så de går i rätt riktning (mot den negativa laddningen)
+                                points.reverse();
+                                // Kolla om linjen börjar utanför alla positiva objekt
+                                const startPoint = points[0];
+                                let startsFromPositive = false;
+                                for (const other of objects) {
+                                    if (other.charge > 0) {
+                                        if (other.type === 'charge') {
+                                            const dist = Math.sqrt((startPoint.x - other.x) ** 2 + (startPoint.y - other.y) ** 2);
+                                            if (dist < 40) startsFromPositive = true;
+                                        } else if (other.type === 'plate') {
+                                            const plateHalfLength = other.width / 2;
+                                            const cos = Math.cos(other.angle || 0);
+                                            const sin = Math.sin(other.angle || 0);
+                                            const dx = startPoint.x - other.x;
+                                            const dy = startPoint.y - other.y;
+                                            const proj = dx * cos + dy * sin;
+                                            const perpDist = Math.abs(-dx * sin + dy * cos);
+                                            if (Math.abs(proj) < plateHalfLength && perpDist < 30) startsFromPositive = true;
+                                        }
+                                    }
+                                }
+                                // Lägg bara till om linjen inte redan täcks av en positiv källa
+                                if (!startsFromPositive) {
+                                    lines.push({ points, fromPositive: false });
+                                }
+                            }
+                        }
+                    } else if (obj.type === 'plate' && obj.charge < 0) {
+                        // Starta fältlinjer baklänges från negativa plattor
+                        const numLines = Math.ceil(fieldLineDensity * 1.5);
+                        const plateLength = obj.width;
+                        const cos = Math.cos(obj.angle || 0);
+                        const sin = Math.sin(obj.angle || 0);
+
+                        for (let i = 0; i < numLines; i++) {
+                            const t = (i + 0.5) / numLines - 0.5;
+                            const px = obj.x + t * plateLength * cos;
+                            const py = obj.y + t * plateLength * sin;
+
+                            // Starta linjer på båda sidor av plattan
+                            for (const side of [1, -1]) {
+                                const startX = px + side * 15 * (-sin);
+                                const startY = py + side * 15 * cos;
+                                // Trace baklänges för att hitta var linjen kommer ifrån
+                                const points = traceFieldLine(startX, startY, -1);
+                                if (points.length > 1) {
+                                    // Vänd punkterna så de går i rätt riktning
+                                    points.reverse();
+                                    // Kolla om linjen börjar nära en positiv källa
+                                    const startPoint = points[0];
+                                    let startsFromPositive = false;
+                                    for (const other of objects) {
+                                        if (other.charge > 0) {
+                                            if (other.type === 'charge') {
+                                                const dist = Math.sqrt((startPoint.x - other.x) ** 2 + (startPoint.y - other.y) ** 2);
+                                                if (dist < 40) startsFromPositive = true;
+                                            } else if (other.type === 'plate') {
+                                                const plateHalfLength = other.width / 2;
+                                                const otherCos = Math.cos(other.angle || 0);
+                                                const otherSin = Math.sin(other.angle || 0);
+                                                const dx = startPoint.x - other.x;
+                                                const dy = startPoint.y - other.y;
+                                                const proj = dx * otherCos + dy * otherSin;
+                                                const perpDist = Math.abs(-dx * otherSin + dy * otherCos);
+                                                if (Math.abs(proj) < plateHalfLength && perpDist < 30) startsFromPositive = true;
+                                            }
+                                        }
+                                    }
+                                    // Lägg bara till om linjen kommer utifrån (inte från en positiv källa)
+                                    if (!startsFromPositive) {
+                                        lines.push({ points, fromPositive: false });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                return lines;
+            }, [objects, fieldLineDensity, traceFieldLine, canvasSize]);
+
+            // Funktion för att lägga till objekt i mitten av canvas
+            const addObject = useCallback((type) => {
+                const centerX = canvasSize.width / 2;
+                const centerY = canvasSize.height / 2;
+
+                // Hitta en ledig plats nära mitten
+                let x = centerX;
+                let y = centerY;
+                let offset = 0;
+
+                // Om det redan finns objekt i mitten, flytta lite
+                while (offset < 200) {
+                    let collision = false;
+                    for (const obj of objects) {
+                        const dist = Math.sqrt((x - obj.x) ** 2 + (y - obj.y) ** 2);
+                        if (dist < 60) {
+                            collision = true;
+                            break;
+                        }
+                    }
+                    if (!collision) break;
+                    offset += 50;
+                    x = centerX + offset;
+                }
+
+                if (type === 'positiveCharge') {
+                    setObjects(prev => [...prev, { type: 'charge', x, y, charge: 5 }]);
+                } else if (type === 'negativeCharge') {
+                    setObjects(prev => [...prev, { type: 'charge', x, y, charge: -5 }]);
+                } else if (type === 'positivePlate') {
+                    setObjects(prev => [...prev, { type: 'plate', x, y, charge: 10, width: 120, angle: Math.PI / 2 }]);
+                } else if (type === 'negativePlate') {
+                    setObjects(prev => [...prev, { type: 'plate', x, y, charge: -10, width: 120, angle: Math.PI / 2 }]);
+                }
+            }, [canvasSize, objects]);
+
+            // Hantera drag
+            const handleMouseDown = useCallback((e) => {
+                const rect = canvasRef.current.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                for (let i = 0; i < objects.length; i++) {
+                    const obj = objects[i];
+                    if (obj.type === 'charge') {
+                        const dist = Math.sqrt((x - obj.x) ** 2 + (y - obj.y) ** 2);
+                        if (dist < 30) {
+                            setDragging(i);
+                            setDragMode('move');
+                            setDragOffset({ x: obj.x - x, y: obj.y - y });
+                            return;
+                        }
+                    } else if (obj.type === 'plate') {
+                        const plateHalfLength = obj.width / 2;
+                        const cos = Math.cos(obj.angle || 0);
+                        const sin = Math.sin(obj.angle || 0);
+                        const dx = x - obj.x;
+                        const dy = y - obj.y;
+                        const proj = dx * cos + dy * sin; // Projektion längs plattan
+                        const perpDist = Math.abs(-dx * sin + dy * cos); // Avstånd vinkelrätt mot plattan
+
+                        // Utökad träffzon för rotation (lite utanför plattans ändar)
+                        const hitPlate = Math.abs(proj) < plateHalfLength + 20 && perpDist < 30;
+
+                        if (hitPlate) {
+                            setDragging(i);
+                            // Om nära kanterna (>60% av halva längden) → rotera, annars flytta
+                            if (Math.abs(proj) > plateHalfLength * 0.5) {
+                                setDragMode('rotate');
+                            } else {
+                                setDragMode('move');
+                                setDragOffset({ x: obj.x - x, y: obj.y - y });
+                            }
+                            return;
+                        }
+                    }
+                }
+            }, [objects]);
+
+            const handleMouseMove = useCallback((e) => {
+                if (dragging === null) return;
+
+                const rect = canvasRef.current.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                if (dragMode === 'rotate') {
+                    // Rotera plattan så att den pekar mot muspekaren
+                    setObjects(prev => {
+                        const newObjects = [...prev];
+                        const obj = newObjects[dragging];
+                        const dx = mouseX - obj.x;
+                        const dy = mouseY - obj.y;
+                        const newAngle = Math.atan2(dy, dx);
+                        newObjects[dragging] = { ...obj, angle: newAngle };
+                        return newObjects;
+                    });
+                } else {
+                    // Flytta objektet
+                    const x = Math.max(30, Math.min(canvasSize.width - 30, mouseX + dragOffset.x));
+                    const y = Math.max(30, Math.min(canvasSize.height - 30, mouseY + dragOffset.y));
+
+                    setObjects(prev => {
+                        const newObjects = [...prev];
+                        newObjects[dragging] = { ...newObjects[dragging], x, y };
+                        return newObjects;
+                    });
+                }
+            }, [dragging, dragOffset, canvasSize, dragMode]);
+
+            const handleMouseUp = useCallback(() => {
+                if (dragging !== null) {
+                    justDraggedRef.current = true;
+                    // Återställ efter kort delay så nästa klick fungerar
+                    setTimeout(() => { justDraggedRef.current = false; }, 100);
+                }
+                setDragging(null);
+                setDragMode('move');
+            }, [dragging]);
+
+            // Touch-hantering
+            const handleTouchStart = useCallback((e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const rect = canvasRef.current.getBoundingClientRect();
+                const x = touch.clientX - rect.left;
+                const y = touch.clientY - rect.top;
+
+                for (let i = 0; i < objects.length; i++) {
+                    const obj = objects[i];
+                    if (obj.type === 'charge') {
+                        const dist = Math.sqrt((x - obj.x) ** 2 + (y - obj.y) ** 2);
+                        if (dist < 40) {
+                            setDragging(i);
+                            setDragMode('move');
+                            setDragOffset({ x: obj.x - x, y: obj.y - y });
+                            return;
+                        }
+                    } else if (obj.type === 'plate') {
+                        const plateHalfLength = obj.width / 2;
+                        const cos = Math.cos(obj.angle || 0);
+                        const sin = Math.sin(obj.angle || 0);
+                        const dx = x - obj.x;
+                        const dy = y - obj.y;
+                        const proj = dx * cos + dy * sin;
+                        const perpDist = Math.abs(-dx * sin + dy * cos);
+
+                        // Utökad träffzon för rotation
+                        const hitPlate = Math.abs(proj) < plateHalfLength + 25 && perpDist < 35;
+
+                        if (hitPlate) {
+                            setDragging(i);
+                            // Om nära kanterna → rotera, annars flytta
+                            if (Math.abs(proj) > plateHalfLength * 0.5) {
+                                setDragMode('rotate');
+                            } else {
+                                setDragMode('move');
+                                setDragOffset({ x: obj.x - x, y: obj.y - y });
+                            }
+                            return;
+                        }
+                    }
+                }
+            }, [objects]);
+
+            const handleTouchMove = useCallback((e) => {
+                if (dragging === null) return;
+                e.preventDefault();
+
+                const touch = e.touches[0];
+                const rect = canvasRef.current.getBoundingClientRect();
+                const touchX = touch.clientX - rect.left;
+                const touchY = touch.clientY - rect.top;
+
+                if (dragMode === 'rotate') {
+                    // Rotera plattan så att den pekar mot fingret
+                    setObjects(prev => {
+                        const newObjects = [...prev];
+                        const obj = newObjects[dragging];
+                        const dx = touchX - obj.x;
+                        const dy = touchY - obj.y;
+                        const newAngle = Math.atan2(dy, dx);
+                        newObjects[dragging] = { ...obj, angle: newAngle };
+                        return newObjects;
+                    });
+                } else {
+                    // Flytta objektet
+                    const x = Math.max(30, Math.min(canvasSize.width - 30, touchX + dragOffset.x));
+                    const y = Math.max(30, Math.min(canvasSize.height - 30, touchY + dragOffset.y));
+
+                    setObjects(prev => {
+                        const newObjects = [...prev];
+                        newObjects[dragging] = { ...newObjects[dragging], x, y };
+                        return newObjects;
+                    });
+                }
+            }, [dragging, dragOffset, canvasSize, dragMode]);
+
+            // Ta bort objekt med dubbelklick
+            const handleDoubleClick = useCallback((e) => {
+                const rect = canvasRef.current.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                for (let i = 0; i < objects.length; i++) {
+                    const obj = objects[i];
+                    if (obj.type === 'charge') {
+                        const dist = Math.sqrt((x - obj.x) ** 2 + (y - obj.y) ** 2);
+                        if (dist < 30) {
+                            setObjects(prev => prev.filter((_, idx) => idx !== i));
+                            return;
+                        }
+                    } else if (obj.type === 'plate') {
+                        const plateHalfLength = obj.width / 2;
+                        const cos = Math.cos(obj.angle || 0);
+                        const sin = Math.sin(obj.angle || 0);
+                        const dx = x - obj.x;
+                        const dy = y - obj.y;
+                        const proj = dx * cos + dy * sin;
+                        const perpDist = Math.abs(-dx * sin + dy * cos);
+
+                        if (Math.abs(proj) < plateHalfLength && perpDist < 25) {
+                            setObjects(prev => prev.filter((_, idx) => idx !== i));
+                            return;
+                        }
+                    }
+                }
+            }, [objects]);
+
+            // Rita canvas
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                const { width, height } = canvasSize;
+
+                canvas.width = width;
+                canvas.height = height;
+
+                // Rensa canvas
+                ctx.fillStyle = '#050510';
+                ctx.fillRect(0, 0, width, height);
+
+                // Bakgrundseffekt
+                const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.6);
+                bgGradient.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
+                bgGradient.addColorStop(1, 'rgba(5, 5, 16, 0)');
+                ctx.fillStyle = bgGradient;
+                ctx.fillRect(0, 0, width, height);
+
+                // Subtilt rutnät
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.08)';
+                ctx.lineWidth = 1;
+                const gridSize = 50;
+                for (let x = 0; x < width; x += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, height);
+                    ctx.stroke();
+                }
+                for (let y = 0; y < height; y += gridSize) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(width, y);
+                    ctx.stroke();
+                }
+
+                // Rita fältlinjer
+                if (showFieldLines && objects.length > 0) {
+                    const fieldLines = generateFieldLines();
+
+                    fieldLines.forEach(line => {
+                        if (line.points.length < 2) return;
+
+                        ctx.beginPath();
+                        ctx.moveTo(line.points[0].x, line.points[0].y);
+
+                        for (let i = 1; i < line.points.length; i++) {
+                            ctx.lineTo(line.points[i].x, line.points[i].y);
+                        }
+
+                        ctx.strokeStyle = 'rgba(251, 191, 36, 0.6)';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                        // Rita pilar längs linjen för att visa riktning
+                        const arrowInterval = 40;
+                        let distance = 0;
+
+                        for (let i = 1; i < line.points.length; i++) {
+                            const dx = line.points[i].x - line.points[i-1].x;
+                            const dy = line.points[i].y - line.points[i-1].y;
+                            distance += Math.sqrt(dx * dx + dy * dy);
+
+                            if (distance > arrowInterval) {
+                                distance = 0;
+                                const angle = Math.atan2(dy, dx);
+                                const x = line.points[i].x;
+                                const y = line.points[i].y;
+                                const arrowSize = 6;
+
+                                ctx.beginPath();
+                                ctx.moveTo(x, y);
+                                ctx.lineTo(x - arrowSize * Math.cos(angle - Math.PI/6), y - arrowSize * Math.sin(angle - Math.PI/6));
+                                ctx.moveTo(x, y);
+                                ctx.lineTo(x - arrowSize * Math.cos(angle + Math.PI/6), y - arrowSize * Math.sin(angle + Math.PI/6));
+                                ctx.strokeStyle = 'rgba(251, 191, 36, 0.8)';
+                                ctx.lineWidth = 1.5;
+                                ctx.stroke();
+                            }
+                        }
+                    });
+                }
+
+                // Rita objekt
+                objects.forEach((obj, index) => {
+                    if (obj.type === 'charge') {
+                        const isPositive = obj.charge > 0;
+                        const color = isPositive ? '#ef4444' : '#38bdf8';
+                        const glowColor = isPositive ? 'rgba(239, 68, 68, 0.5)' : 'rgba(56, 189, 248, 0.5)';
+                        const radius = 22;
+
+                        // Glöd
+                        ctx.shadowBlur = 20;
+                        ctx.shadowColor = glowColor;
+
+                        // Gradient för laddningen
+                        const gradient = ctx.createRadialGradient(obj.x - 5, obj.y - 5, 3, obj.x, obj.y, radius);
+                        gradient.addColorStop(0, isPositive ? '#fca5a5' : '#7dd3fc');
+                        gradient.addColorStop(0.5, color);
+                        gradient.addColorStop(1, isPositive ? '#991b1b' : '#0369a1');
+
+                        ctx.beginPath();
+                        ctx.arc(obj.x, obj.y, radius, 0, Math.PI * 2);
+                        ctx.fillStyle = gradient;
+                        ctx.fill();
+
+                        ctx.strokeStyle = isPositive ? '#fecaca' : '#bae6fd';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+
+                        ctx.shadowBlur = 0;
+
+                        // Plus eller minus tecken
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = 'bold 24px Poppins, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(isPositive ? '+' : '−', obj.x, obj.y);
+
+                    } else if (obj.type === 'plate') {
+                        const isPositive = obj.charge > 0;
+                        const color = isPositive ? '#ef4444' : '#38bdf8';
+                        const glowColor = isPositive ? 'rgba(239, 68, 68, 0.4)' : 'rgba(56, 189, 248, 0.4)';
+
+                        const cos = Math.cos(obj.angle || 0);
+                        const sin = Math.sin(obj.angle || 0);
+                        const halfLength = obj.width / 2;
+
+                        // Startpunkt och slutpunkt
+                        const x1 = obj.x - halfLength * cos;
+                        const y1 = obj.y - halfLength * sin;
+                        const x2 = obj.x + halfLength * cos;
+                        const y2 = obj.y + halfLength * sin;
+
+                        // Glöd
+                        ctx.shadowBlur = 15;
+                        ctx.shadowColor = glowColor;
+
+                        // Rita plattan som en tjock linje
+                        ctx.beginPath();
+                        ctx.moveTo(x1, y1);
+                        ctx.lineTo(x2, y2);
+                        ctx.strokeStyle = color;
+                        ctx.lineWidth = 10;
+                        ctx.lineCap = 'round';
+                        ctx.stroke();
+
+                        ctx.shadowBlur = 0;
+
+                        // Rita plus/minus-tecken längs plattan
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = 'bold 14px Poppins, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+
+                        const numSigns = 5;
+                        for (let i = 0; i < numSigns; i++) {
+                            const t = (i + 0.5) / numSigns - 0.5;
+                            const sx = obj.x + t * obj.width * cos;
+                            const sy = obj.y + t * obj.width * sin;
+                            ctx.fillText(isPositive ? '+' : '−', sx, sy);
+                        }
+
+                        // Rita rotationshandtag vid plattans ändar
+                        const handleRadius = 8;
+                        const handleColor = 'rgba(255, 255, 255, 0.6)';
+                        const handleBorder = isPositive ? '#fecaca' : '#bae6fd';
+
+                        // Handtag vid ändarna
+                        [{ x: x1, y: y1 }, { x: x2, y: y2 }].forEach(({ x, y }) => {
+                            ctx.beginPath();
+                            ctx.arc(x, y, handleRadius, 0, Math.PI * 2);
+                            ctx.fillStyle = handleColor;
+                            ctx.fill();
+                            ctx.strokeStyle = handleBorder;
+                            ctx.lineWidth = 2;
+                            ctx.stroke();
+
+                            // Liten rotationsikon (böjd pil)
+                            ctx.beginPath();
+                            ctx.arc(x, y, 4, -Math.PI * 0.7, Math.PI * 0.3);
+                            ctx.strokeStyle = isPositive ? '#991b1b' : '#0369a1';
+                            ctx.lineWidth = 1.5;
+                            ctx.stroke();
+                        });
+                    }
+                });
+
+            }, [objects, canvasSize, showFieldLines, generateFieldLines]);
+
+            // Hantera resize
+            useEffect(() => {
+                const handleResize = () => {
+                    if (containerRef.current) {
+                        const rect = containerRef.current.getBoundingClientRect();
+                        setCanvasSize({ width: rect.width, height: Math.max(400, rect.height) });
+                    }
+                };
+
+                window.addEventListener('resize', handleResize);
+                setTimeout(handleResize, 50);
+                setTimeout(handleResize, 200);
+
+                return () => window.removeEventListener('resize', handleResize);
+            }, []);
+
+            const clearAll = () => {
+                setObjects([]);
+            };
+
+            const loadPreset = (preset) => {
+                if (preset === 'dipole') {
+                    setObjects([
+                        { type: 'charge', x: canvasSize.width / 2 - 80, y: canvasSize.height / 2, charge: 5 },
+                        { type: 'charge', x: canvasSize.width / 2 + 80, y: canvasSize.height / 2, charge: -5 }
+                    ]);
+                } else if (preset === 'twoPositive') {
+                    setObjects([
+                        { type: 'charge', x: canvasSize.width / 2 - 80, y: canvasSize.height / 2, charge: 5 },
+                        { type: 'charge', x: canvasSize.width / 2 + 80, y: canvasSize.height / 2, charge: 5 }
+                    ]);
+                } else if (preset === 'capacitor') {
+                    setObjects([
+                        { type: 'plate', x: canvasSize.width / 2 - 60, y: canvasSize.height / 2, charge: 10, width: 150, angle: Math.PI / 2 },
+                        { type: 'plate', x: canvasSize.width / 2 + 60, y: canvasSize.height / 2, charge: -10, width: 150, angle: Math.PI / 2 }
+                    ]);
+                } else if (preset === 'quadrupole') {
+                    const cx = canvasSize.width / 2;
+                    const cy = canvasSize.height / 2;
+                    const d = 70;
+                    setObjects([
+                        { type: 'charge', x: cx - d, y: cy - d, charge: 5 },
+                        { type: 'charge', x: cx + d, y: cy - d, charge: -5 },
+                        { type: 'charge', x: cx - d, y: cy + d, charge: -5 },
+                        { type: 'charge', x: cx + d, y: cy + d, charge: 5 }
+                    ]);
+                }
+            };
+
+            return (
+                <div className="dark-container min-h-screen">
+                    <div className="max-w-6xl mx-auto py-8 px-4">
+                        {/* Header */}
+                        <header className="text-center mb-8">
+                            <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text mb-4">
+                                Elektriska fält
+                            </h1>
+                            <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                                Utforska hur elektriska fält uppstår kring laddningar och laddade plattor.
+                                Klicka för att placera ut objekt och se hur fältlinjerna ritas ut.
+                            </p>
+                        </header>
+
+                        {/* Main layout */}
+                        <div className="flex flex-col lg:flex-row gap-6 mb-6">
+                            {/* Canvas */}
+                            <div className="glass-card rounded-2xl p-4 flex-grow lg:flex-grow-[2]">
+                                <div
+                                    ref={containerRef}
+                                    className="relative w-full cursor-grab active:cursor-grabbing"
+                                    style={{ minHeight: '450px' }}
+                                >
+                                    <canvas
+                                        ref={canvasRef}
+                                        className="block touch-none rounded-lg"
+                                        style={{ width: '100%', height: '100%' }}
+                                        onMouseDown={handleMouseDown}
+                                        onMouseMove={handleMouseMove}
+                                        onMouseUp={handleMouseUp}
+                                        onMouseLeave={handleMouseUp}
+                                        onDoubleClick={handleDoubleClick}
+                                        onTouchStart={handleTouchStart}
+                                        onTouchMove={handleTouchMove}
+                                        onTouchEnd={handleMouseUp}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Controls */}
+                            <div className="flex flex-col gap-4 lg:w-72">
+                                {/* Lägg till objekt */}
+                                <div className="glass-card-light p-4 rounded-xl">
+                                    <h3 className="text-slate-200 font-semibold mb-3 text-sm">Lägg till</h3>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <button
+                                            onClick={() => addObject('positiveCharge')}
+                                            className="tool-btn p-3 rounded-lg flex flex-col items-center gap-1 bg-red-500/20 border-2 border-red-400/50 hover:bg-red-500/30 hover:border-red-400"
+                                        >
+                                            <span className="text-2xl">⊕</span>
+                                            <span className="text-xs text-slate-300">+ laddning</span>
+                                        </button>
+                                        <button
+                                            onClick={() => addObject('negativeCharge')}
+                                            className="tool-btn p-3 rounded-lg flex flex-col items-center gap-1 bg-cyan-500/20 border-2 border-cyan-400/50 hover:bg-cyan-500/30 hover:border-cyan-400"
+                                        >
+                                            <span className="text-2xl">⊖</span>
+                                            <span className="text-xs text-slate-300">− laddning</span>
+                                        </button>
+                                        <button
+                                            onClick={() => addObject('positivePlate')}
+                                            className="tool-btn p-3 rounded-lg flex flex-col items-center gap-1 bg-red-500/20 border-2 border-red-400/50 hover:bg-red-500/30 hover:border-red-400"
+                                        >
+                                            <span className="text-lg text-red-400">▮ +</span>
+                                            <span className="text-xs text-slate-300">+ platta</span>
+                                        </button>
+                                        <button
+                                            onClick={() => addObject('negativePlate')}
+                                            className="tool-btn p-3 rounded-lg flex flex-col items-center gap-1 bg-cyan-500/20 border-2 border-cyan-400/50 hover:bg-cyan-500/30 hover:border-cyan-400"
+                                        >
+                                            <span className="text-lg text-cyan-400">▮ −</span>
+                                            <span className="text-xs text-slate-300">− platta</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Förinställningar */}
+                                <div className="glass-card-light p-4 rounded-xl">
+                                    <h3 className="text-slate-200 font-semibold mb-3 text-sm">Förinställningar</h3>
+                                    <div className="flex flex-col gap-2">
+                                        <button
+                                            onClick={() => loadPreset('dipole')}
+                                            className="px-3 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-sm text-slate-300 text-left"
+                                        >
+                                            Dipol (+/−)
+                                        </button>
+                                        <button
+                                            onClick={() => loadPreset('twoPositive')}
+                                            className="px-3 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-sm text-slate-300 text-left"
+                                        >
+                                            Två positiva (+/+)
+                                        </button>
+                                        <button
+                                            onClick={() => loadPreset('capacitor')}
+                                            className="px-3 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-sm text-slate-300 text-left"
+                                        >
+                                            Kondensator
+                                        </button>
+                                        <button
+                                            onClick={() => loadPreset('quadrupole')}
+                                            className="px-3 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-sm text-slate-300 text-left"
+                                        >
+                                            Kvadrupol
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Inställningar */}
+                                <div className="glass-card-light p-4 rounded-xl">
+                                    <h3 className="text-slate-200 font-semibold mb-3 text-sm">Inställningar</h3>
+                                    <label className="flex items-center gap-2 cursor-pointer mb-3">
+                                        <input
+                                            type="checkbox"
+                                            checked={showFieldLines}
+                                            onChange={(e) => setShowFieldLines(e.target.checked)}
+                                            className="w-4 h-4 rounded border-slate-600 bg-slate-700 text-cyan-500"
+                                        />
+                                        <span className="text-slate-300 text-sm">Visa fältlinjer</span>
+                                    </label>
+                                    <div className="mb-3">
+                                        <label className="text-slate-400 text-xs mb-1 block">Linjetäthet: {fieldLineDensity}</label>
+                                        <input
+                                            type="range"
+                                            min="4"
+                                            max="16"
+                                            value={fieldLineDensity}
+                                            onChange={(e) => setFieldLineDensity(parseInt(e.target.value))}
+                                            className="w-full"
+                                        />
+                                    </div>
+                                    <button
+                                        onClick={clearAll}
+                                        className="w-full px-3 py-2 bg-red-500/20 hover:bg-red-500/30 border border-red-500/50 rounded-lg text-sm text-red-400"
+                                    >
+                                        Rensa allt
+                                    </button>
+                                </div>
+
+                                {/* Info */}
+                                <div className="glass-card rounded-xl p-4">
+                                    <h3 className="text-slate-200 font-semibold text-sm mb-2">Instruktioner</h3>
+                                    <ul className="text-slate-400 text-xs space-y-1">
+                                        <li>• Klicka på knapparna ovan för att lägga till</li>
+                                        <li>• Dra i <strong>mitten</strong> för att flytta</li>
+                                        <li>• Dra i <strong>ändarna</strong> för att rotera plattor</li>
+                                        <li>• Dubbelklicka för att ta bort</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Info cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="glass-card-light p-4 rounded-xl">
+                                <div className="flex items-start gap-3">
+                                    <div className="p-2 bg-amber-500/20 rounded-lg">
+                                        <span className="text-amber-400 text-xl">→</span>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-slate-200 font-semibold mb-1">Fältlinjer</h3>
+                                        <p className="text-slate-400 text-sm">
+                                            Fältlinjer går alltid <strong>ut från positiva</strong> laddningar och <strong>in i negativa</strong>.
+                                            De visar riktningen på kraften som en positiv provladdning skulle känna.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="glass-card-light p-4 rounded-xl">
+                                <div className="flex items-start gap-3">
+                                    <div className="p-2 bg-cyan-500/20 rounded-lg">
+                                        <span className="text-cyan-400 text-xl font-bold">≡</span>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-slate-200 font-semibold mb-1">Fältstyrka</h3>
+                                        <p className="text-slate-400 text-sm">
+                                            Ju <strong>tätare fältlinjerna</strong> ligger, desto starkare är det elektriska fältet.
+                                            Fältet är starkast nära laddningarna.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="glass-card-light p-4 rounded-xl">
+                                <div className="flex items-start gap-3">
+                                    <div className="p-2 bg-red-500/20 rounded-lg">
+                                        <span className="text-red-400 text-xl font-bold">▮▮</span>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-slate-200 font-semibold mb-1">Homogent fält</h3>
+                                        <p className="text-slate-400 text-sm">
+                                            Mellan två parallella plattor (kondensator) blir fältet nästan <strong>homogent</strong> -
+                                            linjerna är parallella och jämnt fördelade.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const rootElement = document.getElementById('root');
+        const root = ReactDOM.createRoot(rootElement);
+        root.render(<ElectricFieldSimulation />);
+    </script>
+</body>
+</html>

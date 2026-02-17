@@ -40,7 +40,9 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-coulombs-lag.html',
     'fysik1-kirchhoffs-lag.html',
     'fysik2-svangningar-jamforelse.html',
-    'fysik1-serie-parallell.html'
+    'fysik1-serie-parallell.html',
+    'fysik2-magnetfalt-spole.html',
+    'fysik1-elektriska-falt.html'
 ];
 
 let hasErrors = false;

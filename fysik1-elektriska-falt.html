@@ -39,6 +39,9 @@
             box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
             border-color: rgba(56, 189, 248, 0.8);
         }
+        .cursor-rotate {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8'/%3E%3Cpath d='M21 3v5h-5'/%3E%3C/svg%3E") 12 12, pointer;
+        }
     </style>
 </head>
 <body class="bg-slate-950">
@@ -78,7 +81,12 @@
             const [dragging, setDragging] = useState(null);
             const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
             const [dragMode, setDragMode] = useState('move'); // 'move' eller 'rotate'
+            const [selectedObject, setSelectedObject] = useState(null); // index för valt objekt (papperskorg)
+            const [trashFading, setTrashFading] = useState(false); // För fade-out animation
+            const [cursorMode, setCursorMode] = useState('default'); // 'default', 'grab', 'rotate'
             const justDraggedRef = useRef(false); // Förhindra att klick efter drag lägger till objekt
+            const dragStartPos = useRef(null); // För att detektera klick vs drag
+            const trashTimerRef = useRef(null); // Timer för att dölja papperskorgen
 
             // Beräkna elektriskt fält vid en punkt från alla objekt
             const calculateField = useCallback((x, y, excludeIndex = -1) => {
@@ -377,12 +385,16 @@
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
 
+                // Spara startposition för att detektera klick vs drag
+                dragStartPos.current = { x, y };
+
                 for (let i = 0; i < objects.length; i++) {
                     const obj = objects[i];
                     if (obj.type === 'charge') {
                         const dist = Math.sqrt((x - obj.x) ** 2 + (y - obj.y) ** 2);
                         if (dist < 30) {
                             setDragging(i);
+                            setSelectedObject(i); // Visa papperskorgen
                             setDragMode('move');
                             setDragOffset({ x: obj.x - x, y: obj.y - y });
                             return;
@@ -401,6 +413,7 @@
 
                         if (hitPlate) {
                             setDragging(i);
+                            setSelectedObject(i); // Visa papperskorgen
                             // Om nära kanterna (>60% av halva längden) → rotera, annars flytta
                             if (Math.abs(proj) > plateHalfLength * 0.5) {
                                 setDragMode('rotate');
@@ -412,48 +425,99 @@
                         }
                     }
                 }
+
+                // Klickade inte på något objekt - avmarkera
+                setSelectedObject(null);
             }, [objects]);
 
             const handleMouseMove = useCallback((e) => {
-                if (dragging === null) return;
-
                 const rect = canvasRef.current.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
 
-                if (dragMode === 'rotate') {
-                    // Rotera plattan så att den pekar mot muspekaren
-                    setObjects(prev => {
-                        const newObjects = [...prev];
-                        const obj = newObjects[dragging];
+                // Om vi drar, hantera drag
+                if (dragging !== null) {
+                    if (dragMode === 'rotate') {
+                        // Rotera plattan så att den pekar mot muspekaren
+                        setObjects(prev => {
+                            const newObjects = [...prev];
+                            const obj = newObjects[dragging];
+                            const dx = mouseX - obj.x;
+                            const dy = mouseY - obj.y;
+                            let newAngle = Math.atan2(dy, dx);
+
+                            // Snap till 90-gradersvinklar (0, π/2, π, -π/2)
+                            const snapAngles = [0, Math.PI / 2, Math.PI, -Math.PI / 2, -Math.PI];
+                            const snapThreshold = 0.1; // ~5.7 grader
+                            for (const snapAngle of snapAngles) {
+                                if (Math.abs(newAngle - snapAngle) < snapThreshold) {
+                                    newAngle = snapAngle;
+                                    break;
+                                }
+                            }
+
+                            newObjects[dragging] = { ...obj, angle: newAngle };
+                            return newObjects;
+                        });
+                    } else {
+                        // Flytta objektet
+                        const x = Math.max(30, Math.min(canvasSize.width - 30, mouseX + dragOffset.x));
+                        const y = Math.max(30, Math.min(canvasSize.height - 30, mouseY + dragOffset.y));
+
+                        setObjects(prev => {
+                            const newObjects = [...prev];
+                            newObjects[dragging] = { ...newObjects[dragging], x, y };
+                            return newObjects;
+                        });
+                    }
+                    return;
+                }
+
+                // Detektera hover över objekt för cursor-ändring
+                let newCursor = 'default';
+                for (const obj of objects) {
+                    if (obj.type === 'charge') {
+                        const dist = Math.sqrt((mouseX - obj.x) ** 2 + (mouseY - obj.y) ** 2);
+                        if (dist < 30) {
+                            newCursor = 'grab';
+                            break;
+                        }
+                    } else if (obj.type === 'plate') {
+                        const plateHalfLength = obj.width / 2;
+                        const cos = Math.cos(obj.angle || 0);
+                        const sin = Math.sin(obj.angle || 0);
                         const dx = mouseX - obj.x;
                         const dy = mouseY - obj.y;
-                        const newAngle = Math.atan2(dy, dx);
-                        newObjects[dragging] = { ...obj, angle: newAngle };
-                        return newObjects;
-                    });
-                } else {
-                    // Flytta objektet
-                    const x = Math.max(30, Math.min(canvasSize.width - 30, mouseX + dragOffset.x));
-                    const y = Math.max(30, Math.min(canvasSize.height - 30, mouseY + dragOffset.y));
+                        const proj = dx * cos + dy * sin;
+                        const perpDist = Math.abs(-dx * sin + dy * cos);
 
-                    setObjects(prev => {
-                        const newObjects = [...prev];
-                        newObjects[dragging] = { ...newObjects[dragging], x, y };
-                        return newObjects;
-                    });
+                        const hitPlate = Math.abs(proj) < plateHalfLength + 20 && perpDist < 30;
+
+                        if (hitPlate) {
+                            // Om nära kanterna → rotation cursor
+                            if (Math.abs(proj) > plateHalfLength * 0.5) {
+                                newCursor = 'rotate';
+                            } else {
+                                newCursor = 'grab';
+                            }
+                            break;
+                        }
+                    }
                 }
-            }, [dragging, dragOffset, canvasSize, dragMode]);
+                setCursorMode(newCursor);
+            }, [dragging, dragOffset, canvasSize, dragMode, objects]);
 
             const handleMouseUp = useCallback(() => {
                 if (dragging !== null) {
                     justDraggedRef.current = true;
-                    // Återställ efter kort delay så nästa klick fungerar
                     setTimeout(() => { justDraggedRef.current = false; }, 100);
+                    // Återställ timern när man släpper objektet
+                    resetTrashTimer();
                 }
                 setDragging(null);
                 setDragMode('move');
-            }, [dragging]);
+                dragStartPos.current = null;
+            }, [dragging, resetTrashTimer]);
 
             // Touch-hantering
             const handleTouchStart = useCallback((e) => {
@@ -463,12 +527,16 @@
                 const x = touch.clientX - rect.left;
                 const y = touch.clientY - rect.top;
 
+                // Spara startposition för att detektera tap vs drag
+                dragStartPos.current = { x, y };
+
                 for (let i = 0; i < objects.length; i++) {
                     const obj = objects[i];
                     if (obj.type === 'charge') {
                         const dist = Math.sqrt((x - obj.x) ** 2 + (y - obj.y) ** 2);
                         if (dist < 40) {
                             setDragging(i);
+                            setSelectedObject(i); // Visa papperskorgen
                             setDragMode('move');
                             setDragOffset({ x: obj.x - x, y: obj.y - y });
                             return;
@@ -487,6 +555,7 @@
 
                         if (hitPlate) {
                             setDragging(i);
+                            setSelectedObject(i); // Visa papperskorgen
                             // Om nära kanterna → rotera, annars flytta
                             if (Math.abs(proj) > plateHalfLength * 0.5) {
                                 setDragMode('rotate');
@@ -498,6 +567,9 @@
                         }
                     }
                 }
+
+                // Tappade inte på något objekt - avmarkera
+                setSelectedObject(null);
             }, [objects]);
 
             const handleTouchMove = useCallback((e) => {
@@ -533,36 +605,45 @@
                 }
             }, [dragging, dragOffset, canvasSize, dragMode]);
 
-            // Ta bort objekt med dubbelklick
-            const handleDoubleClick = useCallback((e) => {
-                const rect = canvasRef.current.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                for (let i = 0; i < objects.length; i++) {
-                    const obj = objects[i];
-                    if (obj.type === 'charge') {
-                        const dist = Math.sqrt((x - obj.x) ** 2 + (y - obj.y) ** 2);
-                        if (dist < 30) {
-                            setObjects(prev => prev.filter((_, idx) => idx !== i));
-                            return;
-                        }
-                    } else if (obj.type === 'plate') {
-                        const plateHalfLength = obj.width / 2;
-                        const cos = Math.cos(obj.angle || 0);
-                        const sin = Math.sin(obj.angle || 0);
-                        const dx = x - obj.x;
-                        const dy = y - obj.y;
-                        const proj = dx * cos + dy * sin;
-                        const perpDist = Math.abs(-dx * sin + dy * cos);
-
-                        if (Math.abs(proj) < plateHalfLength && perpDist < 25) {
-                            setObjects(prev => prev.filter((_, idx) => idx !== i));
-                            return;
-                        }
-                    }
+            // Ta bort valt objekt
+            const deleteSelectedObject = useCallback(() => {
+                if (selectedObject !== null) {
+                    setObjects(prev => prev.filter((_, idx) => idx !== selectedObject));
+                    setSelectedObject(null);
+                    setTrashFading(false);
                 }
-            }, [objects]);
+            }, [selectedObject]);
+
+            // Starta timer för att dölja papperskorgen efter 2 sekunder
+            const resetTrashTimer = useCallback(() => {
+                // Rensa eventuell befintlig timer
+                if (trashTimerRef.current) {
+                    clearTimeout(trashTimerRef.current);
+                }
+                setTrashFading(false);
+
+                // Starta ny timer
+                trashTimerRef.current = setTimeout(() => {
+                    setTrashFading(true);
+                    // Efter fade-out (300ms), dölj helt
+                    setTimeout(() => {
+                        setSelectedObject(null);
+                        setTrashFading(false);
+                    }, 300);
+                }, 2000);
+            }, []);
+
+            // Hantera timer när selectedObject ändras
+            useEffect(() => {
+                if (selectedObject !== null) {
+                    resetTrashTimer();
+                }
+                return () => {
+                    if (trashTimerRef.current) {
+                        clearTimeout(trashTimerRef.current);
+                    }
+                };
+            }, [selectedObject, resetTrashTimer]);
 
             // Rita canvas
             useEffect(() => {
@@ -704,13 +785,13 @@
                         ctx.shadowBlur = 15;
                         ctx.shadowColor = glowColor;
 
-                        // Rita plattan som en tjock linje
+                        // Rita plattan som en tjock linje med raka ändar
                         ctx.beginPath();
                         ctx.moveTo(x1, y1);
                         ctx.lineTo(x2, y2);
                         ctx.strokeStyle = color;
                         ctx.lineWidth = 10;
-                        ctx.lineCap = 'round';
+                        ctx.lineCap = 'butt';
                         ctx.stroke();
 
                         ctx.shadowBlur = 0;
@@ -728,29 +809,6 @@
                             const sy = obj.y + t * obj.width * sin;
                             ctx.fillText(isPositive ? '+' : '−', sx, sy);
                         }
-
-                        // Rita rotationshandtag vid plattans ändar
-                        const handleRadius = 8;
-                        const handleColor = 'rgba(255, 255, 255, 0.6)';
-                        const handleBorder = isPositive ? '#fecaca' : '#bae6fd';
-
-                        // Handtag vid ändarna
-                        [{ x: x1, y: y1 }, { x: x2, y: y2 }].forEach(({ x, y }) => {
-                            ctx.beginPath();
-                            ctx.arc(x, y, handleRadius, 0, Math.PI * 2);
-                            ctx.fillStyle = handleColor;
-                            ctx.fill();
-                            ctx.strokeStyle = handleBorder;
-                            ctx.lineWidth = 2;
-                            ctx.stroke();
-
-                            // Liten rotationsikon (böjd pil)
-                            ctx.beginPath();
-                            ctx.arc(x, y, 4, -Math.PI * 0.7, Math.PI * 0.3);
-                            ctx.strokeStyle = isPositive ? '#991b1b' : '#0369a1';
-                            ctx.lineWidth = 1.5;
-                            ctx.stroke();
-                        });
                     }
                 });
 
@@ -774,9 +832,11 @@
 
             const clearAll = () => {
                 setObjects([]);
+                setSelectedObject(null);
             };
 
             const loadPreset = (preset) => {
+                setSelectedObject(null);
                 if (preset === 'dipole') {
                     setObjects([
                         { type: 'charge', x: canvasSize.width / 2 - 80, y: canvasSize.height / 2, charge: 5 },
@@ -825,7 +885,7 @@
                             <div className="glass-card rounded-2xl p-4 flex-grow lg:flex-grow-[2]">
                                 <div
                                     ref={containerRef}
-                                    className="relative w-full cursor-grab active:cursor-grabbing"
+                                    className={`relative w-full ${cursorMode === 'rotate' ? 'cursor-rotate' : cursorMode === 'grab' ? 'cursor-grab' : 'cursor-default'}`}
                                     style={{ minHeight: '450px' }}
                                 >
                                     <canvas
@@ -835,12 +895,28 @@
                                         onMouseDown={handleMouseDown}
                                         onMouseMove={handleMouseMove}
                                         onMouseUp={handleMouseUp}
-                                        onMouseLeave={handleMouseUp}
-                                        onDoubleClick={handleDoubleClick}
+                                        onMouseLeave={() => { handleMouseUp(); setCursorMode('default'); }}
                                         onTouchStart={handleTouchStart}
                                         onTouchMove={handleTouchMove}
                                         onTouchEnd={handleMouseUp}
                                     />
+                                    {/* Papperskorg för att ta bort objekt */}
+                                    {selectedObject !== null && objects[selectedObject] && (
+                                        <button
+                                            onClick={deleteSelectedObject}
+                                            className={`absolute flex items-center justify-center w-7 h-7 bg-red-500/90 hover:bg-red-600 rounded-full shadow-lg transform hover:scale-110 transition-all duration-300 ${trashFading ? 'opacity-0 scale-75' : 'opacity-100 scale-100'}`}
+                                            style={{
+                                                left: objects[selectedObject].x + (objects[selectedObject].type === 'charge' ? 18 : 25),
+                                                top: objects[selectedObject].y - (objects[selectedObject].type === 'charge' ? 32 : 40),
+                                                zIndex: 10
+                                            }}
+                                            title="Ta bort"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    )}
                                 </div>
                             </div>
 
@@ -950,7 +1026,7 @@
                                         <li>• Klicka på knapparna ovan för att lägga till</li>
                                         <li>• Dra i <strong>mitten</strong> för att flytta</li>
                                         <li>• Dra i <strong>ändarna</strong> för att rotera plattor</li>
-                                        <li>• Dubbelklicka för att ta bort</li>
+                                        <li>• Klicka på objekt → 🗑️ för att ta bort</li>
                                     </ul>
                                 </div>
                             </div>

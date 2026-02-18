@@ -62,7 +62,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useRef, useEffect, useCallback } = React;
+        const { useState, useRef, useEffect, useCallback, useMemo } = React;
 
         const formatNumber = (num, decimals = 2) => {
             return num.toFixed(decimals).replace('.', ',');
@@ -87,6 +87,13 @@
             const justDraggedRef = useRef(false); // Förhindra att klick efter drag lägger till objekt
             const dragStartPos = useRef(null); // För att detektera klick vs drag
             const trashTimerRef = useRef(null); // Timer för att dölja papperskorgen
+            const [testCharges, setTestCharges] = useState([]);
+            const [placingTestCharge, setPlacingTestCharge] = useState(null); // null | 1 | -1
+            const [placingPos, setPlacingPos] = useState(null); // { x, y } musposition under placering
+            const animFrameRef = useRef(null);
+            const calculateFieldRef = useRef(null);
+            const canvasSizeRef = useRef(canvasSize);
+            const objectsRef = useRef(objects);
 
             // Beräkna elektriskt fält vid en punkt från alla objekt
             const calculateField = useCallback((x, y, excludeIndex = -1) => {
@@ -187,7 +194,7 @@
 
                             if (Math.abs(proj) < plateHalfLength) {
                                 const perpDist = Math.abs(-dx * sin + dy * cos);
-                                if (perpDist < 15) {
+                                if (perpDist < 7) {
                                     hitCharge = true;
                                     break;
                                 }
@@ -235,10 +242,10 @@
                             const px = obj.x + t * plateLength * cos;
                             const py = obj.y + t * plateLength * sin;
 
-                            // Starta linjer på båda sidor av plattan
+                            // Starta linjer på båda sidor av plattan (7px = strax utanför ytan)
                             for (const side of [1, -1]) {
-                                const startX = px + side * 15 * (-sin);
-                                const startY = py + side * 15 * cos;
+                                const startX = px + side * 7 * (-sin);
+                                const startY = py + side * 7 * cos;
                                 const points = traceFieldLine(startX, startY, 1);
                                 if (points.length > 1) {
                                     lines.push({ points, fromPositive: true });
@@ -301,10 +308,10 @@
                             const px = obj.x + t * plateLength * cos;
                             const py = obj.y + t * plateLength * sin;
 
-                            // Starta linjer på båda sidor av plattan
+                            // Starta linjer på båda sidor av plattan (7px = strax utanför ytan)
                             for (const side of [1, -1]) {
-                                const startX = px + side * 15 * (-sin);
-                                const startY = py + side * 15 * cos;
+                                const startX = px + side * 7 * (-sin);
+                                const startY = py + side * 7 * cos;
                                 // Trace baklänges för att hitta var linjen kommer ifrån
                                 const points = traceFieldLine(startX, startY, -1);
                                 if (points.length > 1) {
@@ -343,6 +350,17 @@
                 return lines;
             }, [objects, fieldLineDensity, traceFieldLine, canvasSize]);
 
+            // Refs för animationsloop
+            useEffect(() => { calculateFieldRef.current = calculateField; }, [calculateField]);
+            useEffect(() => { canvasSizeRef.current = canvasSize; }, [canvasSize]);
+            useEffect(() => { objectsRef.current = objects; }, [objects]);
+
+            // Memoisera fältlinjer (undvik omräkning vid testladdningsanimation)
+            const fieldLines = useMemo(() => {
+                if (!showFieldLines || objects.length === 0) return [];
+                return generateFieldLines();
+            }, [showFieldLines, objects, fieldLineDensity, generateFieldLines]);
+
             // Funktion för att lägga till objekt i mitten av canvas
             const addObject = useCallback((type) => {
                 const centerX = canvasSize.width / 2;
@@ -379,11 +397,30 @@
                 }
             }, [canvasSize, objects]);
 
+            // Aktivera placeringsläge för testladdning
+            const startPlacingTestCharge = useCallback((positive) => {
+                setPlacingTestCharge(positive ? 1 : -1);
+                setPlacingPos(null);
+            }, []);
+
             // Hantera drag
             const handleMouseDown = useCallback((e) => {
                 const rect = canvasRef.current.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
+
+                // Om vi placerar en testladdning, släpp den här
+                if (placingTestCharge !== null) {
+                    setTestCharges(prev => [...prev, {
+                        x, y,
+                        charge: placingTestCharge,
+                        trail: [],
+                        stopped: false
+                    }]);
+                    setPlacingTestCharge(null);
+                    setPlacingPos(null);
+                    return;
+                }
 
                 // Spara startposition för att detektera klick vs drag
                 dragStartPos.current = { x, y };
@@ -428,12 +465,19 @@
 
                 // Klickade inte på något objekt - avmarkera
                 setSelectedObject(null);
-            }, [objects]);
+            }, [objects, placingTestCharge]);
 
             const handleMouseMove = useCallback((e) => {
                 const rect = canvasRef.current.getBoundingClientRect();
                 const mouseX = e.clientX - rect.left;
                 const mouseY = e.clientY - rect.top;
+
+                // Om vi placerar testladdning, uppdatera ghostposition
+                if (placingTestCharge !== null) {
+                    setPlacingPos({ x: mouseX, y: mouseY });
+                    setCursorMode('default');
+                    return;
+                }
 
                 // Om vi drar, hantera drag
                 if (dragging !== null) {
@@ -505,7 +549,7 @@
                     }
                 }
                 setCursorMode(newCursor);
-            }, [dragging, dragOffset, canvasSize, dragMode, objects]);
+            }, [dragging, dragOffset, canvasSize, dragMode, objects, placingTestCharge]);
 
             const handleMouseUp = useCallback(() => {
                 if (dragging !== null) {
@@ -526,6 +570,19 @@
                 const rect = canvasRef.current.getBoundingClientRect();
                 const x = touch.clientX - rect.left;
                 const y = touch.clientY - rect.top;
+
+                // Om vi placerar en testladdning, släpp den här
+                if (placingTestCharge !== null) {
+                    setTestCharges(prev => [...prev, {
+                        x, y,
+                        charge: placingTestCharge,
+                        trail: [],
+                        stopped: false
+                    }]);
+                    setPlacingTestCharge(null);
+                    setPlacingPos(null);
+                    return;
+                }
 
                 // Spara startposition för att detektera tap vs drag
                 dragStartPos.current = { x, y };
@@ -570,11 +627,20 @@
 
                 // Tappade inte på något objekt - avmarkera
                 setSelectedObject(null);
-            }, [objects]);
+            }, [objects, placingTestCharge]);
 
             const handleTouchMove = useCallback((e) => {
-                if (dragging === null) return;
                 e.preventDefault();
+
+                // Om vi placerar testladdning, uppdatera ghostposition
+                if (placingTestCharge !== null) {
+                    const touch = e.touches[0];
+                    const rect = canvasRef.current.getBoundingClientRect();
+                    setPlacingPos({ x: touch.clientX - rect.left, y: touch.clientY - rect.top });
+                    return;
+                }
+
+                if (dragging === null) return;
 
                 const touch = e.touches[0];
                 const rect = canvasRef.current.getBoundingClientRect();
@@ -645,6 +711,81 @@
                 };
             }, [selectedObject, resetTrashTimer]);
 
+            // Animationsloop för testladdningar
+            useEffect(() => {
+                if (testCharges.length === 0) {
+                    if (animFrameRef.current) {
+                        cancelAnimationFrame(animFrameRef.current);
+                        animFrameRef.current = null;
+                    }
+                    return;
+                }
+
+                let lastTime = performance.now();
+
+                const animate = (time) => {
+                    const dt = Math.min((time - lastTime) / 1000, 0.04);
+                    lastTime = time;
+
+                    setTestCharges(prev => {
+                        if (prev.every(tc => tc.stopped)) return prev;
+
+                        const calcField = calculateFieldRef.current;
+                        const cs = canvasSizeRef.current;
+                        const objs = objectsRef.current;
+                        if (!calcField) return prev;
+
+                        return prev.map(tc => {
+                            if (tc.stopped) return tc;
+
+                            const { Ex, Ey } = calcField(tc.x, tc.y);
+                            const mag = Math.sqrt(Ex * Ex + Ey * Ey);
+                            if (mag < 1e-10) return { ...tc, stopped: true };
+
+                            const speed = 100;
+                            const dir = tc.charge > 0 ? 1 : -1;
+                            const newX = tc.x + dir * (Ex / mag) * speed * dt;
+                            const newY = tc.y + dir * (Ey / mag) * speed * dt;
+
+                            // Kantcheck
+                            if (newX < 5 || newX > cs.width - 5 || newY < 5 || newY > cs.height - 5) {
+                                return { ...tc, stopped: true };
+                            }
+
+                            // Kolla om den träffar en källaddning/platta
+                            for (const obj of objs) {
+                                if (obj.type === 'charge') {
+                                    const dist = Math.sqrt((newX - obj.x) ** 2 + (newY - obj.y) ** 2);
+                                    if (dist < 22) return { ...tc, stopped: true };
+                                } else if (obj.type === 'plate') {
+                                    const cos = Math.cos(obj.angle || 0);
+                                    const sin = Math.sin(obj.angle || 0);
+                                    const pdx = newX - obj.x;
+                                    const pdy = newY - obj.y;
+                                    const proj = pdx * cos + pdy * sin;
+                                    const perp = Math.abs(-pdx * sin + pdy * cos);
+                                    if (Math.abs(proj) < obj.width / 2 && perp < 8) return { ...tc, stopped: true };
+                                }
+                            }
+
+                            const trail = [...tc.trail, { x: tc.x, y: tc.y }];
+                            if (trail.length > 200) trail.shift();
+                            return { ...tc, x: newX, y: newY, trail };
+                        });
+                    });
+
+                    animFrameRef.current = requestAnimationFrame(animate);
+                };
+
+                animFrameRef.current = requestAnimationFrame(animate);
+                return () => {
+                    if (animFrameRef.current) {
+                        cancelAnimationFrame(animFrameRef.current);
+                        animFrameRef.current = null;
+                    }
+                };
+            }, [testCharges.length === 0]);
+
             // Rita canvas
             useEffect(() => {
                 const canvas = canvasRef.current;
@@ -683,10 +824,8 @@
                     ctx.stroke();
                 }
 
-                // Rita fältlinjer
-                if (showFieldLines && objects.length > 0) {
-                    const fieldLines = generateFieldLines();
-
+                // Rita fältlinjer (memoiserade)
+                if (fieldLines.length > 0) {
                     fieldLines.forEach(line => {
                         if (line.points.length < 2) return;
 
@@ -812,7 +951,98 @@
                     }
                 });
 
-            }, [objects, canvasSize, showFieldLines, generateFieldLines]);
+                // Rita testladdningar med spår
+                testCharges.forEach(tc => {
+                    const isPositive = tc.charge > 0;
+                    const trailColor = isPositive ? [252, 165, 165] : [125, 211, 252];
+
+                    // Rita spår med fadande opacitet (i batchar för prestanda)
+                    if (tc.trail.length > 1) {
+                        const numBatches = 12;
+                        ctx.lineWidth = 2.5;
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+
+                        for (let b = 0; b < numBatches; b++) {
+                            const start = Math.floor(b * tc.trail.length / numBatches);
+                            const end = Math.floor((b + 1) * tc.trail.length / numBatches);
+                            if (start >= end) continue;
+
+                            const alpha = ((b + 1) / numBatches) * 0.6;
+                            ctx.beginPath();
+                            ctx.moveTo(tc.trail[start].x, tc.trail[start].y);
+                            for (let i = start + 1; i <= Math.min(end, tc.trail.length - 1); i++) {
+                                ctx.lineTo(tc.trail[i].x, tc.trail[i].y);
+                            }
+                            ctx.strokeStyle = `rgba(${trailColor[0]}, ${trailColor[1]}, ${trailColor[2]}, ${alpha})`;
+                            ctx.stroke();
+                        }
+
+                        // Linje från sista spårpunkten till nuvarande position
+                        ctx.beginPath();
+                        ctx.moveTo(tc.trail[tc.trail.length - 1].x, tc.trail[tc.trail.length - 1].y);
+                        ctx.lineTo(tc.x, tc.y);
+                        ctx.strokeStyle = `rgba(${trailColor[0]}, ${trailColor[1]}, ${trailColor[2]}, 0.7)`;
+                        ctx.lineWidth = 2.5;
+                        ctx.stroke();
+                    }
+
+                    // Rita testladdningen (liten cirkel)
+                    const radius = 8;
+                    const color = isPositive ? '#ef4444' : '#38bdf8';
+                    const glowColor = isPositive ? 'rgba(239, 68, 68, 0.6)' : 'rgba(56, 189, 248, 0.6)';
+
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = glowColor;
+
+                    ctx.beginPath();
+                    ctx.arc(tc.x, tc.y, radius, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                    ctx.strokeStyle = isPositive ? '#fecaca' : '#bae6fd';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+
+                    ctx.shadowBlur = 0;
+
+                    // Plus/minus-tecken
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = 'bold 12px Poppins, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(isPositive ? '+' : '−', tc.x, tc.y);
+                });
+
+                // Rita ghost-testladdning (följer muspekaren under placering)
+                if (placingTestCharge !== null && placingPos) {
+                    const isPositive = placingTestCharge > 0;
+                    const color = isPositive ? 'rgba(239, 68, 68, 0.5)' : 'rgba(56, 189, 248, 0.5)';
+                    const glowColor = isPositive ? 'rgba(239, 68, 68, 0.3)' : 'rgba(56, 189, 248, 0.3)';
+                    const radius = 8;
+
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = glowColor;
+
+                    ctx.beginPath();
+                    ctx.arc(placingPos.x, placingPos.y, radius, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                    ctx.setLineDash([3, 3]);
+                    ctx.strokeStyle = isPositive ? 'rgba(254, 202, 202, 0.7)' : 'rgba(186, 230, 253, 0.7)';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    ctx.shadowBlur = 0;
+
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                    ctx.font = 'bold 12px Poppins, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(isPositive ? '+' : '−', placingPos.x, placingPos.y);
+                }
+
+            }, [objects, canvasSize, showFieldLines, fieldLines, testCharges, placingTestCharge, placingPos]);
 
             // Hantera resize
             useEffect(() => {
@@ -832,11 +1062,17 @@
 
             const clearAll = () => {
                 setObjects([]);
+                setTestCharges([]);
+                setPlacingTestCharge(null);
+                setPlacingPos(null);
                 setSelectedObject(null);
             };
 
             const loadPreset = (preset) => {
                 setSelectedObject(null);
+                setTestCharges([]);
+                setPlacingTestCharge(null);
+                setPlacingPos(null);
                 if (preset === 'dipole') {
                     setObjects([
                         { type: 'charge', x: canvasSize.width / 2 - 80, y: canvasSize.height / 2, charge: 5 },
@@ -851,6 +1087,11 @@
                     setObjects([
                         { type: 'plate', x: canvasSize.width / 2 - 60, y: canvasSize.height / 2, charge: 10, width: 150, angle: Math.PI / 2 },
                         { type: 'plate', x: canvasSize.width / 2 + 60, y: canvasSize.height / 2, charge: -10, width: 150, angle: Math.PI / 2 }
+                    ]);
+                } else if (preset === 'parallelPlates') {
+                    setObjects([
+                        { type: 'plate', x: canvasSize.width / 2, y: canvasSize.height / 2 - 60, charge: 10, width: 200, angle: 0 },
+                        { type: 'plate', x: canvasSize.width / 2, y: canvasSize.height / 2 + 60, charge: -10, width: 200, angle: 0 }
                     ]);
                 } else if (preset === 'quadrupole') {
                     const cx = canvasSize.width / 2;
@@ -885,7 +1126,7 @@
                             <div className="glass-card rounded-2xl p-4 flex-grow lg:flex-grow-[2]">
                                 <div
                                     ref={containerRef}
-                                    className={`relative w-full ${cursorMode === 'rotate' ? 'cursor-rotate' : cursorMode === 'grab' ? 'cursor-grab' : 'cursor-default'}`}
+                                    className={`relative w-full ${placingTestCharge !== null ? 'cursor-crosshair' : cursorMode === 'rotate' ? 'cursor-rotate' : cursorMode === 'grab' ? 'cursor-grab' : 'cursor-default'}`}
                                     style={{ minHeight: '450px' }}
                                 >
                                     <canvas
@@ -895,7 +1136,7 @@
                                         onMouseDown={handleMouseDown}
                                         onMouseMove={handleMouseMove}
                                         onMouseUp={handleMouseUp}
-                                        onMouseLeave={() => { handleMouseUp(); setCursorMode('default'); }}
+                                        onMouseLeave={() => { handleMouseUp(); setCursorMode('default'); setPlacingPos(null); }}
                                         onTouchStart={handleTouchStart}
                                         onTouchMove={handleTouchMove}
                                         onTouchEnd={handleMouseUp}
@@ -955,6 +1196,36 @@
                                             <span className="text-xs text-slate-300">− platta</span>
                                         </button>
                                     </div>
+                                    <div className="mt-3 pt-3 border-t border-slate-600/30">
+                                        <h4 className="text-slate-400 text-xs mb-2">Testladdningar</h4>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <button
+                                                onClick={() => startPlacingTestCharge(true)}
+                                                className={`tool-btn p-2 rounded-lg flex flex-col items-center gap-1 border border-dashed ${placingTestCharge === 1 ? 'bg-red-500/30 border-red-400 shadow-[0_0_10px_rgba(239,68,68,0.3)]' : 'bg-red-500/10 border-red-400/40 hover:bg-red-500/20 hover:border-red-400/70'}`}
+                                            >
+                                                <span className="text-sm text-red-300">+</span>
+                                                <span className="text-xs text-slate-400">{placingTestCharge === 1 ? 'Placera...' : '+ test'}</span>
+                                            </button>
+                                            <button
+                                                onClick={() => startPlacingTestCharge(false)}
+                                                className={`tool-btn p-2 rounded-lg flex flex-col items-center gap-1 border border-dashed ${placingTestCharge === -1 ? 'bg-cyan-500/30 border-cyan-400 shadow-[0_0_10px_rgba(56,189,248,0.3)]' : 'bg-cyan-500/10 border-cyan-400/40 hover:bg-cyan-500/20 hover:border-cyan-400/70'}`}
+                                            >
+                                                <span className="text-sm text-cyan-300">−</span>
+                                                <span className="text-xs text-slate-400">{placingTestCharge === -1 ? 'Placera...' : '− test'}</span>
+                                            </button>
+                                        </div>
+                                        {placingTestCharge !== null && (
+                                            <p className="text-xs text-amber-400/80 mt-2 text-center">Klicka på ritytan för att placera</p>
+                                        )}
+                                        {testCharges.length > 0 && (
+                                            <button
+                                                onClick={() => setTestCharges([])}
+                                                className="w-full mt-2 px-2 py-1.5 text-xs text-slate-400 hover:text-slate-300 bg-slate-700/30 hover:bg-slate-700/50 rounded-lg"
+                                            >
+                                                Rensa testladdningar
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Förinställningar */}
@@ -978,6 +1249,12 @@
                                             className="px-3 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-sm text-slate-300 text-left"
                                         >
                                             Kondensator
+                                        </button>
+                                        <button
+                                            onClick={() => loadPreset('parallelPlates')}
+                                            className="px-3 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-sm text-slate-300 text-left"
+                                        >
+                                            Två parallella plattor
                                         </button>
                                         <button
                                             onClick={() => loadPreset('quadrupole')}

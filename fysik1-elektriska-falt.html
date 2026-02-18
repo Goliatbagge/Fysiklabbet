@@ -1083,11 +1083,6 @@
                         { type: 'charge', x: canvasSize.width / 2 - 80, y: canvasSize.height / 2, charge: 5 },
                         { type: 'charge', x: canvasSize.width / 2 + 80, y: canvasSize.height / 2, charge: 5 }
                     ]);
-                } else if (preset === 'capacitor') {
-                    setObjects([
-                        { type: 'plate', x: canvasSize.width / 2 - 60, y: canvasSize.height / 2, charge: 10, width: 150, angle: Math.PI / 2 },
-                        { type: 'plate', x: canvasSize.width / 2 + 60, y: canvasSize.height / 2, charge: -10, width: 150, angle: Math.PI / 2 }
-                    ]);
                 } else if (preset === 'parallelPlates') {
                     setObjects([
                         { type: 'plate', x: canvasSize.width / 2, y: canvasSize.height / 2 - 60, charge: 10, width: 200, angle: 0 },
@@ -1169,31 +1164,37 @@
                                     <div className="grid grid-cols-2 gap-2">
                                         <button
                                             onClick={() => addObject('positiveCharge')}
-                                            className="tool-btn p-3 rounded-lg flex flex-col items-center gap-1 bg-red-500/20 border-2 border-red-400/50 hover:bg-red-500/30 hover:border-red-400"
+                                            className="tool-btn p-3 rounded-lg flex flex-col items-center justify-center gap-1 bg-red-500/20 border-2 border-red-400/50 hover:bg-red-500/30 hover:border-red-400"
                                         >
-                                            <span className="text-2xl">⊕</span>
-                                            <span className="text-xs text-slate-300">+ laddning</span>
+                                            <span className="flex items-center justify-center" style={{height: '38px'}}><span className="text-2xl">⊕</span></span>
+                                            <span className="text-xs text-slate-300 whitespace-nowrap">Positiv laddning</span>
                                         </button>
                                         <button
                                             onClick={() => addObject('negativeCharge')}
-                                            className="tool-btn p-3 rounded-lg flex flex-col items-center gap-1 bg-cyan-500/20 border-2 border-cyan-400/50 hover:bg-cyan-500/30 hover:border-cyan-400"
+                                            className="tool-btn p-3 rounded-lg flex flex-col items-center justify-center gap-1 bg-cyan-500/20 border-2 border-cyan-400/50 hover:bg-cyan-500/30 hover:border-cyan-400"
                                         >
-                                            <span className="text-2xl">⊖</span>
-                                            <span className="text-xs text-slate-300">− laddning</span>
+                                            <span className="flex items-center justify-center" style={{height: '38px'}}><span className="text-2xl">⊖</span></span>
+                                            <span className="text-xs text-slate-300 whitespace-nowrap">Negativ laddning</span>
                                         </button>
                                         <button
                                             onClick={() => addObject('positivePlate')}
-                                            className="tool-btn p-3 rounded-lg flex flex-col items-center gap-1 bg-red-500/20 border-2 border-red-400/50 hover:bg-red-500/30 hover:border-red-400"
+                                            className="tool-btn p-3 rounded-lg flex flex-col items-center justify-center gap-1 bg-red-500/20 border-2 border-red-400/50 hover:bg-red-500/30 hover:border-red-400"
                                         >
-                                            <span className="text-lg text-red-400">▮ +</span>
-                                            <span className="text-xs text-slate-300">+ platta</span>
+                                            <span className="flex flex-col items-center justify-center" style={{height: '38px'}}>
+                                                <span className="text-red-400 text-sm font-bold leading-none">+</span>
+                                                <span style={{width: '4px', height: '22px', backgroundColor: '#f87171', borderRadius: '1px', display: 'inline-block'}}></span>
+                                            </span>
+                                            <span className="text-xs text-slate-300">Positiv platta</span>
                                         </button>
                                         <button
                                             onClick={() => addObject('negativePlate')}
-                                            className="tool-btn p-3 rounded-lg flex flex-col items-center gap-1 bg-cyan-500/20 border-2 border-cyan-400/50 hover:bg-cyan-500/30 hover:border-cyan-400"
+                                            className="tool-btn p-3 rounded-lg flex flex-col items-center justify-center gap-1 bg-cyan-500/20 border-2 border-cyan-400/50 hover:bg-cyan-500/30 hover:border-cyan-400"
                                         >
-                                            <span className="text-lg text-cyan-400">▮ −</span>
-                                            <span className="text-xs text-slate-300">− platta</span>
+                                            <span className="flex flex-col items-center justify-center" style={{height: '38px'}}>
+                                                <span className="text-cyan-400 text-sm font-bold leading-none">−</span>
+                                                <span style={{width: '4px', height: '22px', backgroundColor: '#22d3ee', borderRadius: '1px', display: 'inline-block'}}></span>
+                                            </span>
+                                            <span className="text-xs text-slate-300">Negativ platta</span>
                                         </button>
                                     </div>
                                     <div className="mt-3 pt-3 border-t border-slate-600/30">
@@ -1203,15 +1204,15 @@
                                                 onClick={() => startPlacingTestCharge(true)}
                                                 className={`tool-btn p-2 rounded-lg flex flex-col items-center gap-1 border border-dashed ${placingTestCharge === 1 ? 'bg-red-500/30 border-red-400 shadow-[0_0_10px_rgba(239,68,68,0.3)]' : 'bg-red-500/10 border-red-400/40 hover:bg-red-500/20 hover:border-red-400/70'}`}
                                             >
-                                                <span className="text-sm text-red-300">+</span>
-                                                <span className="text-xs text-slate-400">{placingTestCharge === 1 ? 'Placera...' : '+ test'}</span>
+                                                <span className="text-sm text-red-300">⊕</span>
+                                                <span className="text-xs text-slate-400">{placingTestCharge === 1 ? 'Placera...' : 'Positiv test'}</span>
                                             </button>
                                             <button
                                                 onClick={() => startPlacingTestCharge(false)}
                                                 className={`tool-btn p-2 rounded-lg flex flex-col items-center gap-1 border border-dashed ${placingTestCharge === -1 ? 'bg-cyan-500/30 border-cyan-400 shadow-[0_0_10px_rgba(56,189,248,0.3)]' : 'bg-cyan-500/10 border-cyan-400/40 hover:bg-cyan-500/20 hover:border-cyan-400/70'}`}
                                             >
-                                                <span className="text-sm text-cyan-300">−</span>
-                                                <span className="text-xs text-slate-400">{placingTestCharge === -1 ? 'Placera...' : '− test'}</span>
+                                                <span className="text-sm text-cyan-300">⊖</span>
+                                                <span className="text-xs text-slate-400">{placingTestCharge === -1 ? 'Placera...' : 'Negativ test'}</span>
                                             </button>
                                         </div>
                                         {placingTestCharge !== null && (
@@ -1243,12 +1244,6 @@
                                             className="px-3 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-sm text-slate-300 text-left"
                                         >
                                             Två positiva (+/+)
-                                        </button>
-                                        <button
-                                            onClick={() => loadPreset('capacitor')}
-                                            className="px-3 py-2 bg-slate-700/50 hover:bg-slate-700 rounded-lg text-sm text-slate-300 text-left"
-                                        >
-                                            Kondensator
                                         </button>
                                         <button
                                             onClick={() => loadPreset('parallelPlates')}
@@ -1306,6 +1301,7 @@
                                         <li>• Klicka på objekt → 🗑️ för att ta bort</li>
                                     </ul>
                                 </div>
+
                             </div>
                         </div>
 

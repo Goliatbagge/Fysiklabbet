@@ -18,7 +18,11 @@
       "Bash(pushd:*)",
       "Bash(npx tsc:*)",
       "Bash(cd:*)",
-      "Bash(powershell -Command:*)"
+      "Bash(powershell -Command:*)",
+      "Bash(python -m http.server:*)",
+      "Bash(npm install:*)",
+      "Bash(claude --version)",
+      "Bash(gh api:*)"
     ],
     "deny": [],
     "ask": []

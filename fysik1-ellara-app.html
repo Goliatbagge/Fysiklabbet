@@ -105,6 +105,44 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
+        // Generera "burnout"-ljud - kort elektrisk smäll när lampan bränner sönder
+        const playBurnoutSound = () => {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const duration = 0.5;
+                const sampleRate = ctx.sampleRate;
+                const length = sampleRate * duration;
+                const buffer = ctx.createBuffer(1, length, sampleRate);
+                const data = buffer.getChannelData(0);
+
+                for (let i = 0; i < length; i++) {
+                    const t = i / sampleRate;
+                    // Kort kraftig attack som snabbt dör ut
+                    const pop = (t < 0.01) ? Math.sin(2 * Math.PI * 150 * t) * 4 : 0;
+                    // Elektriskt surr/fräsande som tonar ut
+                    const buzz = Math.sin(2 * Math.PI * 100 * t) * Math.exp(-t * 8) * 0.5;
+                    const fizzle = (Math.random() * 2 - 1) * Math.exp(-t * 6) * 0.4;
+                    // Lågfrekvent "thump"
+                    const thump = Math.sin(2 * Math.PI * 60 * t) * Math.exp(-t * 20);
+                    data[i] = (pop + buzz + fizzle + thump) * 0.25;
+                }
+
+                const source = ctx.createBufferSource();
+                source.buffer = buffer;
+
+                const lowpass = ctx.createBiquadFilter();
+                lowpass.type = 'lowpass';
+                lowpass.frequency.value = 2000;
+
+                source.connect(lowpass);
+                lowpass.connect(ctx.destination);
+                source.start();
+                source.onended = () => ctx.close();
+            } catch (e) {
+                // Ljud stöds inte - ignorera tyst
+            }
+        };
+
         const CircuitType = {
           DC: 'dc',
           AC: 'ac',
@@ -650,7 +688,7 @@
                 {showValues && (
                   <text x="200" y="35" textAnchor="middle" fill="#94a3b8" fontSize="12px">
                     <tspan fontStyle="italic">I</tspan>
-                    <tspan> = {currentStrength.toFixed(2).replace('.', ',')} A</tspan>
+                    <tspan> = {currentStrength.toFixed(1).replace('.', ',')} A</tspan>
                   </text>
                 )}
 
@@ -690,6 +728,7 @@
           // Break the bulb when current reaches 24 A (only when bulb is selected)
           useEffect(() => {
             if (componentType === 'bulb' && current >= 24 && !isBulbBroken) {
+              playBurnoutSound();
               setIsBulbBroken(true);
             }
           }, [current, isBulbBroken, componentType]);
@@ -971,7 +1010,7 @@
                       <div>
                         <div className="text-sm text-slate-400">Strömstyrka (I = U/R)</div>
                         <div className={`text-3xl font-mono font-bold ${componentType === 'bulb' && isBulbBroken ? 'text-red-400' : 'text-yellow-400'}`}>
-                          {current.toFixed(2).replace('.', ',')} A
+                          {current.toFixed(1).replace('.', ',')} A
                         </div>
                       </div>
                       <button

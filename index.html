@@ -8,8 +8,49 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .construction-ribbon {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 10000;
+            overflow: hidden;
+            width: 200px;
+            height: 200px;
+            pointer-events: none;
+        }
+        .construction-ribbon span {
+            display: block;
+            position: absolute;
+            top: 42px;
+            right: -35px;
+            width: 280px;
+            padding: 8px 0;
+            background: repeating-linear-gradient(
+                -45deg,
+                #f59e0b,
+                #f59e0b 10px,
+                #1a1a2e 10px,
+                #1a1a2e 20px
+            );
+            color: #fff;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            pointer-events: auto;
+        }
+    </style>
 </head>
 <body>
+    <div class="construction-ribbon">
+        <span>Under konstruktion</span>
+    </div>
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">

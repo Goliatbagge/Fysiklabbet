@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyngdfaktorn på jorden - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         body {
             margin: 0;
             overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
         }
+
         #canvas-container {
             width: 100%;
             height: 600px;
@@ -23,35 +28,114 @@
             border-radius: 12px;
             overflow: hidden;
         }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
         .info-panel {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            min-width: 200px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.08);
+            min-width: 210px;
         }
+
         .instruction-panel {
             position: absolute;
             bottom: 20px;
             left: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            padding: 15px 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
             max-width: 300px;
         }
+
+        .panel-divider {
+            border: none;
+            border-top: 1px solid rgba(56, 189, 248, 0.15);
+            margin: 12px 0;
+        }
+
+        /* Custom checkbox */
+        .dark-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid rgba(56, 189, 248, 0.4);
+            border-radius: 4px;
+            background: rgba(15, 23, 42, 0.8);
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .dark-checkbox:checked {
+            background: rgba(56, 189, 248, 0.25);
+            border-color: rgba(56, 189, 248, 0.8);
+        }
+
+        .dark-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 5px;
+            height: 9px;
+            border: 2px solid #38bdf8;
+            border-top: none;
+            border-left: none;
+            transform: rotate(45deg);
+        }
+
+        .dark-checkbox:hover {
+            border-color: rgba(56, 189, 248, 0.7);
+        }
+
         canvas {
             cursor: grab;
         }
+
         canvas:active {
             cursor: grabbing;
         }
+
+        @media (max-width: 768px) {
+            #canvas-container {
+                height: 420px;
+            }
+            .info-panel {
+                top: 10px;
+                right: 10px;
+                min-width: 170px;
+                padding: 14px;
+            }
+            .instruction-panel {
+                bottom: 10px;
+                left: 10px;
+                max-width: 220px;
+                padding: 12px;
+            }
+        }
     </style>
 </head>
-<body>
+<body class="bg-slate-950">
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -363,104 +447,193 @@
             }, [showPoles]);
 
             return (
-                <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4" style={{ marginTop: '80px' }}>
-                    <div className="max-w-6xl mx-auto">
-                        <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-                            <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                <div
+                    className="min-h-screen"
+                    style={{
+                        background: 'linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%)',
+                        fontFamily: 'Poppins, sans-serif',
+                        paddingBottom: '0'
+                    }}
+                >
+                    <div className="max-w-6xl mx-auto px-4 md:px-8" style={{ paddingTop: '2rem' }}>
+
+                        {/* Breadcrumb */}
+                        <div className="breadcrumb mb-6">
+                            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik 1</a> / Tyngdfaktorn på jorden
+                        </div>
+
+                        {/* Header */}
+                        <div
+                            className="rounded-2xl p-6 md:p-8 mb-8 glass-card"
+                        >
+                            <h1
+                                className="font-black tracking-tight glow-text mb-3"
+                                style={{
+                                    fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
+                                    color: '#e2e8f0'
+                                }}
+                            >
                                 Tyngdfaktorn på jorden
                             </h1>
-                            <p className="text-gray-600 text-lg">
+                            <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: '1.7' }}>
                                 Tyngdaccelerationen (<em>g</em>) varierar på jorden beroende på var du befinner dig.
                                 Vid ekvatorn är den lägst (cirka 9,78 m/s²) och vid polerna högst (cirka 9,83 m/s²).
                                 Detta beror på jordens rotation och att jorden är något tillplattad vid polerna.
                             </p>
                         </div>
 
-                        <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-4">Interaktiv jordglob</h2>
+                        {/* Globe section */}
+                        <div className="rounded-2xl p-6 md:p-8 mb-8 glass-card">
+                            <h2
+                                className="font-bold mb-5"
+                                style={{ fontSize: '1.4rem', color: '#e2e8f0' }}
+                            >
+                                Interaktiv jordglob
+                            </h2>
 
                             <div ref={containerRef} id="canvas-container">
+
+                                {/* Info panel */}
                                 <div className="info-panel">
-                                    <h3 className="text-lg font-bold text-gray-800 mb-3">Mätning</h3>
+                                    <h3
+                                        className="font-bold mb-3"
+                                        style={{ color: '#38bdf8', fontSize: '1rem', letterSpacing: '0.02em' }}
+                                    >
+                                        Matning
+                                    </h3>
                                     {gravity ? (
                                         <>
                                             <div className="mb-3">
-                                                <p className="text-sm text-gray-600">Latitud</p>
-                                                <p className="text-xl font-bold text-blue-600">{clickedPoint.latitude}°</p>
+                                                <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '2px' }}>Latitud</p>
+                                                <p style={{ fontSize: '1.25rem', fontWeight: '700', color: '#38bdf8' }}>{clickedPoint.latitude}°</p>
                                             </div>
                                             <div className="mb-3">
-                                                <p className="text-sm text-gray-600">Longitud</p>
-                                                <p className="text-xl font-bold text-blue-600">{clickedPoint.longitude}°</p>
+                                                <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '2px' }}>Longitud</p>
+                                                <p style={{ fontSize: '1.25rem', fontWeight: '700', color: '#38bdf8' }}>{clickedPoint.longitude}°</p>
                                             </div>
-                                            <div className="border-t pt-3">
-                                                <p className="text-sm text-gray-600">Tyngdfaktor (<em>g</em>)</p>
-                                                <p className="text-2xl font-bold text-red-600"><em>g</em> = {gravity} m/s²</p>
+                                            <hr className="panel-divider" />
+                                            <div>
+                                                <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '4px' }}>Tyngdfaktor (<em>g</em>)</p>
+                                                <p style={{ fontSize: '1.4rem', fontWeight: '700', color: '#facc15', textShadow: '0 0 12px rgba(250, 204, 21, 0.4)' }}>
+                                                    <em>g</em> = {gravity} m/s²
+                                                </p>
                                             </div>
                                         </>
                                     ) : (
-                                        <p className="text-gray-500 text-sm">Klicka på jordklotet för att mäta <em>g</em>-värdet</p>
+                                        <p style={{ color: '#64748b', fontSize: '0.85rem' }}>
+                                            Klicka på jordklotet för att mata <em>g</em>-värdet
+                                        </p>
                                     )}
-                                    <div className="border-t mt-3 pt-3">
-                                        <label className="flex items-center cursor-pointer mb-2">
+                                    <hr className="panel-divider" />
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                                             <input
                                                 type="checkbox"
                                                 checked={showEquator}
                                                 onChange={(e) => setShowEquator(e.target.checked)}
-                                                className="mr-2"
+                                                className="dark-checkbox"
+                                                aria-label="Visa ekvatorn"
                                             />
-                                            <span className="text-sm text-gray-700">Visa ekvatorn</span>
+                                            <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Visa ekvatorn</span>
                                         </label>
-                                        <label className="flex items-center cursor-pointer">
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                                             <input
                                                 type="checkbox"
                                                 checked={showPoles}
                                                 onChange={(e) => setShowPoles(e.target.checked)}
-                                                className="mr-2"
+                                                className="dark-checkbox"
+                                                aria-label="Visa polerna"
                                             />
-                                            <span className="text-sm text-gray-700">Visa polerna</span>
+                                            <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Visa polerna</span>
                                         </label>
                                     </div>
                                 </div>
 
+                                {/* Instruction panel */}
                                 <div className="instruction-panel">
-                                    <h3 className="text-sm font-bold text-gray-800 mb-2">📍 Instruktioner</h3>
-                                    <ul className="text-sm text-gray-600 space-y-1">
-                                        <li>• Dra för att rotera jorden</li>
-                                        <li>• Scrolla för att zooma in/ut</li>
-                                        <li>• Klicka för att mäta <em>g</em>-värdet</li>
-                                        <li>• Rosa kryss visar vald plats</li>
+                                    <h3
+                                        className="font-bold mb-2"
+                                        style={{ fontSize: '0.85rem', color: '#38bdf8' }}
+                                    >
+                                        Instruktioner
+                                    </h3>
+                                    <ul style={{ fontSize: '0.82rem', color: '#94a3b8', display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: '#38bdf8' }}>•</span> Dra för att rotera jorden</li>
+                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: '#38bdf8' }}>•</span> Scrolla för att zooma in/ut</li>
+                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: '#38bdf8' }}>•</span> Klicka för att mata <em>g</em>-värdet</li>
+                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: '#ff66ff' }}>•</span> Rosa kryss visar vald plats</li>
                                     </ul>
                                 </div>
+
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-xl shadow-lg p-8">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-4">Varför varierar <em>g</em>?</h2>
-                            <div className="space-y-4 text-gray-700">
+                        {/* Explanation section */}
+                        <div className="rounded-2xl p-6 md:p-8 mb-8 glass-card">
+                            <h2
+                                className="font-bold mb-5"
+                                style={{ fontSize: '1.4rem', color: '#e2e8f0' }}
+                            >
+                                Varför varierar <em>g</em>?
+                            </h2>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+
                                 <div>
-                                    <h3 className="font-bold text-lg mb-2">1. Jordens rotation</h3>
-                                    <p>
+                                    <h3
+                                        className="font-bold mb-2"
+                                        style={{ fontSize: '1.05rem', color: '#7dd3fc' }}
+                                    >
+                                        1. Jordens rotation
+                                    </h3>
+                                    <p style={{ color: '#94a3b8', lineHeight: '1.7' }}>
                                         Vid ekvatorn roterar jorden snabbast, vilket skapar en centrifugalkraft som motverkar
                                         gravitationen. Detta gör att <em>g</em> blir lägre där.
                                     </p>
                                 </div>
+
                                 <div>
-                                    <h3 className="font-bold text-lg mb-2">2. Jordens form</h3>
-                                    <p>
+                                    <h3
+                                        className="font-bold mb-2"
+                                        style={{ fontSize: '1.05rem', color: '#7dd3fc' }}
+                                    >
+                                        2. Jordens form
+                                    </h3>
+                                    <p style={{ color: '#94a3b8', lineHeight: '1.7' }}>
                                         Jorden är inte perfekt sfärisk utan något tillplattad vid polerna. Vid ekvatorn är
                                         du längre från jordens centrum, vilket också bidrar till ett lägre <em>g</em>-värde.
                                     </p>
                                 </div>
-                                <div className="bg-blue-50 p-4 rounded-lg">
-                                    <h3 className="font-bold text-lg mb-2">💡 Intressant fakta</h3>
-                                    <p>
+
+                                <div
+                                    className="rounded-xl p-5"
+                                    style={{
+                                        background: 'rgba(14, 165, 233, 0.08)',
+                                        border: '1px solid rgba(56, 189, 248, 0.2)'
+                                    }}
+                                >
+                                    <h3
+                                        className="font-bold mb-2"
+                                        style={{ fontSize: '1.05rem', color: '#38bdf8' }}
+                                    >
+                                        Intressant fakta
+                                    </h3>
+                                    <p style={{ color: '#94a3b8', lineHeight: '1.7' }}>
                                         Om du väger 70 kg i Stockholm (<em>g</em> ≈ 9,82 m/s²) skulle du väga cirka 250 gram mindre
                                         vid ekvatorn (<em>g</em> ≈ 9,78 m/s²)!
                                     </p>
                                 </div>
+
                             </div>
                         </div>
+
                     </div>
+
+                    {/* Footer */}
+                    <footer className="footer">
+                        <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
+                            Fysiklabbet &mdash; Interaktiva simuleringar för gymnasiefysik
+                        </p>
+                    </footer>
                 </div>
             );
         }

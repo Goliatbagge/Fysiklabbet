@@ -16,7 +16,7 @@ export const UIControls: React.FC<ControlProps> = ({
     <div className="absolute top-4 left-4 md:top-8 md:left-8 z-10 max-w-sm w-full">
       <div className="bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-xl p-6 shadow-2xl text-slate-100">
         <h1 className="text-xl font-bold mb-1 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-          Magnetfält (B) - Rak Ledare
+          Magnetfält (<i>B</i>) - Rak ledare
         </h1>
         <p className="text-slate-400 text-sm mb-6">
           Oersteds experiment: Visualisering av högerhandsregeln.
@@ -26,7 +26,7 @@ export const UIControls: React.FC<ControlProps> = ({
           {/* Current Direction Control */}
           <div className="space-y-2">
             <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              Strömriktning (I)
+              Strömriktning (<i>I</i>)
             </label>
             <button
               onClick={toggleDirection}
@@ -38,7 +38,7 @@ export const UIControls: React.FC<ControlProps> = ({
             >
               <span className="flex items-center gap-2">
                 {currentDirection === 1 ? <ArrowUp size={20} /> : <ArrowDown size={20} />}
-                {currentDirection === 1 ? 'Ström Uppåt' : 'Ström Nedåt'}
+                {currentDirection === 1 ? 'Ström uppåt' : 'Ström nedåt'}
               </span>
               <RotateCcw size={16} className="opacity-50 group-hover:rotate-180 transition-transform duration-500" />
             </button>
@@ -84,7 +84,7 @@ export const UIControls: React.FC<ControlProps> = ({
                     <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${showLabels ? 'bg-purple-500 border-purple-500' : 'border-slate-500'}`}>
                         {showLabels && <Check size={14} className="text-white" />}
                     </div>
-                    <span className="text-sm">Visa beteckningar (I, B)</span>
+                    <span className="text-sm">Visa beteckningar (<i>I</i>, <i>B</i>)</span>
                 </div>
                 <Type size={16} className="text-purple-400 opacity-70" />
             </div>

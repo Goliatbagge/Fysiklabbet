@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan pendel - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Import map to resolve "three" -->
@@ -18,6 +21,24 @@
     </script>
 
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
         #canvas-container {
             width: 100%;
             height: 100%;
@@ -26,9 +47,128 @@
         #canvas-container canvas {
             display: block;
         }
+
+        /* Slider styling - dark theme */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            height: 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            background: rgba(148, 163, 184, 0.25);
+            border-radius: 4px;
+            height: 6px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #38bdf8;
+            margin-top: -7px;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: #7dd3fc;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+        }
+        input[type="range"]::-moz-range-track {
+            background: rgba(148, 163, 184, 0.25);
+            border-radius: 4px;
+            height: 6px;
+            border: none;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        input[type="range"]::-moz-range-thumb:hover {
+            background: #7dd3fc;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+        }
+        input[type="range"]:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        input[type="range"]:disabled::-webkit-slider-thumb {
+            background: #475569;
+            cursor: not-allowed;
+        }
+        input[type="range"]:disabled::-moz-range-thumb {
+            background: #475569;
+            cursor: not-allowed;
+        }
+
+        /* Canvas overlay buttons */
+        .canvas-btn {
+            padding: 0.5rem 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            color: #e2e8f0;
+            transition: all 0.2s;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .canvas-btn:hover:not(:disabled) {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: rgba(56, 189, 248, 0.35);
+        }
+        .canvas-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+        .canvas-btn-orange {
+            border-color: rgba(251, 146, 60, 0.35);
+            color: #fb923c;
+        }
+        .canvas-btn-orange:hover:not(:disabled) {
+            background: rgba(251, 146, 60, 0.12);
+            border-color: rgba(251, 146, 60, 0.6);
+        }
+        .canvas-btn-red {
+            border-color: rgba(248, 113, 113, 0.35);
+            color: #f87171;
+        }
+        .canvas-btn-red:hover:not(:disabled) {
+            background: rgba(248, 113, 113, 0.12);
+            border-color: rgba(248, 113, 113, 0.6);
+        }
+        .canvas-btn-cyan {
+            border-color: rgba(56, 189, 248, 0.35);
+            color: #38bdf8;
+        }
+        .canvas-btn-cyan:hover:not(:disabled) {
+            background: rgba(56, 189, 248, 0.12);
+            border-color: rgba(56, 189, 248, 0.6);
+        }
+        .canvas-btn-yellow {
+            border-color: rgba(234, 179, 8, 0.4);
+            color: #eab308;
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+        .canvas-btn-green {
+            border-color: rgba(74, 222, 128, 0.4);
+            color: #4ade80;
+            cursor: not-allowed;
+            opacity: 0.85;
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body class="bg-slate-950">
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -45,28 +185,37 @@
         </div>
     </nav>
 
-    <main class="min-h-screen w-full bg-gray-100 text-gray-800 flex flex-col lg:flex-row">
-        <div id="canvas-container" class="flex-grow min-h-[600px] w-full lg:w-1/2 relative bg-white">
-            <div class="absolute top-4 left-4 text-gray-900 p-2 rounded-lg z-10">
-                <h1 class="text-2xl md:text-4xl font-bold tracking-tighter">Plan pendel (matematisk)</h1>
+    <main class="min-h-screen w-full dark-container text-slate-100 flex flex-col lg:flex-row">
+        <div id="canvas-container" class="flex-grow min-h-[600px] w-full lg:w-1/2 relative" style="background: #0a0f1e;">
+            <div class="absolute top-4 left-4 z-10 p-2">
+                <div class="breadcrumb mb-2" style="font-size: 0.75rem;">
+                    <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik 2</a> / Plan pendel
+                </div>
+                <h1 class="text-2xl md:text-4xl font-bold tracking-tight" style="background: linear-gradient(90deg, #38bdf8, #7dd3fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));">Plan pendel (matematisk)</h1>
             </div>
             <div id="simulation-controls" class="absolute top-4 right-4 flex flex-col gap-3 z-10">
                 <div class="flex gap-3">
-                    <button id="canvas-pause-button" class="px-4 py-2 bg-orange-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60">
+                    <button id="canvas-pause-button" class="canvas-btn canvas-btn-orange" disabled>
                         ⏸ Pausa
                     </button>
-                    <button id="canvas-abort-button" class="px-4 py-2 bg-red-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60">
+                    <button id="canvas-abort-button" class="canvas-btn canvas-btn-red" disabled>
                         ⏹ Återställ
                     </button>
                 </div>
-                <button id="canvas-timing-button" class="px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60">
+                <button id="canvas-timing-button" class="canvas-btn canvas-btn-cyan" disabled>
                     ⏱ Ta tiden för 10 pendlingar
                 </button>
             </div>
         </div>
-        <div class="w-full lg:w-1/2 bg-white/60 backdrop-blur-md p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto" id="controls-container">
+        <div class="w-full lg:w-1/2 p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto"
+             id="controls-container"
+             style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border-left: 1px solid rgba(56, 189, 248, 0.15);">
         </div>
     </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad av Sam Skoglund.</p>
+    </footer>
 
     <script type="module">
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
@@ -109,7 +258,7 @@
         // Three.js setup
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0xf0f0f0);
+        scene.background = new THREE.Color(0x0a0f1e);
 
         const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
         camera.position.set(0, 1.5, 5.0);
@@ -123,20 +272,25 @@
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
 
-        // Lights
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+        // Lights - adjusted for dark scene
+        const ambientLight = new THREE.AmbientLight(0x8ab4d0, 0.5);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        const directionalLight = new THREE.DirectionalLight(0xc8e0ff, 1.2);
         directionalLight.position.set(8, 6, 5);
         directionalLight.castShadow = true;
         directionalLight.shadow.mapSize.width = 2048;
         directionalLight.shadow.mapSize.height = 2048;
         scene.add(directionalLight);
 
-        // Floor
+        // Subtle fill light from below/back for depth
+        const fillLight = new THREE.DirectionalLight(0x1a3a5c, 0.4);
+        fillLight.position.set(-4, -2, -3);
+        scene.add(fillLight);
+
+        // Floor - dark tile/concrete look
         const floorGeometry = new THREE.PlaneGeometry(20, 20);
-        const floorMaterial = new THREE.MeshStandardMaterial({ color: 0xC4A484 });
+        const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x0d1a2e, roughness: 0.9, metalness: 0.05 });
         const floor = new THREE.Mesh(floorGeometry, floorMaterial);
         floor.rotation.x = -Math.PI / 2;
         floor.position.y = -0.5;
@@ -144,7 +298,7 @@
         scene.add(floor);
 
         // Lab stand
-        const standMaterial = new THREE.MeshStandardMaterial({ color: 0xBDBDBD, metalness: 0.8, roughness: 0.2 });
+        const standMaterial = new THREE.MeshStandardMaterial({ color: 0x9ab4cc, metalness: 0.75, roughness: 0.25 });
 
         const VERTICAL_OFFSET = 1.0;
         const PIVOT_Z_OFFSET = 0.4;
@@ -220,13 +374,13 @@
 
             // Pivot
             const pivotGeometry = new THREE.SphereGeometry(0.05, 16, 16);
-            const pivotMaterial = new THREE.MeshStandardMaterial({ color: 0xcccccc });
+            const pivotMaterial = new THREE.MeshStandardMaterial({ color: 0xb0c8e0, metalness: 0.6 });
             const pivot = new THREE.Mesh(pivotGeometry, pivotMaterial);
             pendulumGroup.add(pivot);
 
             // String
             const stringGeometry = new THREE.CylinderGeometry(0.01, 0.01, length, 8);
-            const stringMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+            const stringMaterial = new THREE.MeshStandardMaterial({ color: 0xd0e4f0 });
             const string = new THREE.Mesh(stringGeometry, stringMaterial);
             string.position.y = -length / 2;
             string.castShadow = true;
@@ -236,7 +390,7 @@
             const bobRadius = 0.18 * Math.cbrt(mass);
             const bobHeight = bobRadius * 3.5;
             const bobGeometry = new THREE.CylinderGeometry(bobRadius, bobRadius, bobHeight, 32);
-            const bobMaterial = new THREE.MeshStandardMaterial({ color: 0xE0E0E0, metalness: 0.2, roughness: 0.5 });
+            const bobMaterial = new THREE.MeshStandardMaterial({ color: 0x90c0e0, metalness: 0.5, roughness: 0.3 });
             const bob = new THREE.Mesh(bobGeometry, bobMaterial);
             bob.position.y = -length - bobHeight / 2;
             bob.castShadow = true;
@@ -263,7 +417,7 @@
 
                 // Dashed vertical line (plumb line)
                 const lineMaterial = new THREE.LineDashedMaterial({
-                    color: 0x666666,
+                    color: 0x4a6a8a,
                     dashSize: 0.1,
                     gapSize: 0.05,
                 });
@@ -293,7 +447,7 @@
                 }
 
                 const arcGeometry = new THREE.BufferGeometry().setFromPoints(arcPoints);
-                const arcMaterial = new THREE.LineBasicMaterial({ color: 0x3b82f6, linewidth: 2 });
+                const arcMaterial = new THREE.LineBasicMaterial({ color: 0x38bdf8, linewidth: 2 });
                 const arc = new THREE.Line(arcGeometry, arcMaterial);
                 angleVisualsGroup.add(arc);
 
@@ -302,11 +456,11 @@
                 canvas.width = 128;
                 canvas.height = 64;
                 const context = canvas.getContext('2d');
-                context.fillStyle = '#000000';  // Black text
-                context.font = 'Bold 28px Arial';
+                context.fillStyle = '#38bdf8';
+                context.font = 'Bold 28px Poppins, Arial, sans-serif';
                 context.textAlign = 'center';
                 context.textBaseline = 'middle';
-                const angleText = params.initialAngle.toFixed(1).replace('.', ',') + '°';
+                const angleText = Math.round(params.initialAngle) + '°';
                 context.fillText(angleText, 64, 32);
 
                 const texture = new THREE.CanvasTexture(canvas);
@@ -484,42 +638,45 @@
 
             const controlsHTML = `
                 <div class="space-y-6">
-                    <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2">Kontrollpanel</h2>
+                    <h2 class="text-xl font-bold text-slate-100 pb-2" style="border-bottom: 2px solid rgba(56, 189, 248, 0.4);">Kontrollpanel</h2>
 
                     <div class="w-full">
                         <div class="flex justify-between items-center mb-1">
-                            <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Trådlängd (l)</label>
-                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                            <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Trådlängd (<em>l</em>)</label>
+                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
+                                  style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                 ${params.length.toFixed(2).replace('.', ',')} m
                             </span>
                         </div>
-                        <input id="length-slider" type="range" min="0.5" max="5" step="0.1" value="${params.length}" ${!isIdle ? 'disabled' : ''}
-                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                        <input id="length-slider" type="range" min="0.5" max="5" step="0.1" value="${params.length}" ${!isIdle ? 'disabled' : ''}>
                     </div>
 
                     <div>
                         <div class="w-full">
                             <div class="flex justify-between items-center mb-1">
-                                <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Tyngdfaktor (g)</label>
-                                <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                                <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Tyngdfaktor (<em>g</em>)</label>
+                                <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
+                                      style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                     ${params.gravity.toFixed(2).replace('.', ',')} m/s²
                                 </span>
                             </div>
-                            <input id="gravity-slider" type="range" min="1" max="25" step="0.1" value="${params.gravity}" ${!isIdle ? 'disabled' : ''}
-                                class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                            <input id="gravity-slider" type="range" min="1" max="25" step="0.1" value="${params.gravity}" ${!isIdle ? 'disabled' : ''}>
                         </div>
                         <div class="mt-4">
-                            <label class="text-sm font-medium mb-2 block ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Eller välj en himlakropp:</label>
+                            <label class="text-sm font-medium mb-2 block ${isIdle ? 'text-slate-200' : 'text-slate-500'}">Eller välj en himlakropp:</label>
                             <div class="flex flex-wrap justify-center gap-3">
                                 ${celestialBodies.map(body => {
                                     const isSelected = Math.abs(params.gravity - body.gravity) < 0.01;
                                     return `
                                         <div class="flex flex-col items-center">
-                                            <button data-gravity="${body.gravity}" class="celestial-button p-1 rounded-full transition-all duration-200 focus:outline-none ${!isIdle ? 'opacity-50 cursor-not-allowed' : ''} ${isSelected ? 'bg-blue-200 ring-2 ring-blue-500 ring-offset-2 ring-offset-white' : 'bg-gray-200 hover:bg-gray-300'}"
+                                            <button data-gravity="${body.gravity}" class="celestial-button p-1 rounded-full transition-all duration-200 focus:outline-none ${!isIdle ? 'opacity-40 cursor-not-allowed' : 'hover:scale-105'}"
+                                                style="${isSelected
+                                                    ? 'background: rgba(56, 189, 248, 0.15); box-shadow: 0 0 0 2px #38bdf8, 0 0 12px rgba(56, 189, 248, 0.3); outline-offset: 2px;'
+                                                    : 'background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(148, 163, 184, 0.15);;'}"
                                                 ${!isIdle ? 'disabled' : ''} title="${body.name} (g = ${body.gravity.toFixed(2).replace('.', ',')} m/s²)">
                                                 <div class="w-10 h-10 rounded-full" style="background-image: ${body.gradient}"></div>
                                             </button>
-                                            <span class="text-xs mt-1 ${isIdle ? 'text-gray-600' : 'text-gray-400'}">${body.name}</span>
+                                            <span class="text-xs mt-1 ${isIdle ? 'text-slate-200' : 'text-slate-500'}">${body.name}</span>
                                         </div>
                                     `;
                                 }).join('')}
@@ -529,87 +686,92 @@
 
                     <div class="w-full">
                         <div class="flex justify-between items-center mb-1">
-                            <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Massa (m)</label>
-                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                            <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Massa (<em>m</em>)</label>
+                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
+                                  style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                 ${(params.mass * 1000).toFixed(0)} g
                             </span>
                         </div>
-                        <input id="mass-slider" type="range" min="10" max="300" step="5" value="${params.mass * 1000}" ${!isIdle ? 'disabled' : ''}
-                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                        <input id="mass-slider" type="range" min="10" max="300" step="5" value="${params.mass * 1000}" ${!isIdle ? 'disabled' : ''}>
                     </div>
 
                     <div class="w-full">
                         <div class="flex justify-between items-center mb-1">
-                            <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Startvinkel (θ)</label>
-                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
-                                ${params.initialAngle.toFixed(2).replace('.', ',')} °
+                            <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Startvinkel (<em>θ</em>)</label>
+                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
+                                  style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
+                                ${Math.round(params.initialAngle)}°
                             </span>
                         </div>
-                        <input id="angle-slider" type="range" min="0" max="25" step="0.5" value="${params.initialAngle}" ${!isIdle ? 'disabled' : ''}
-                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                        <input id="angle-slider" type="range" min="0" max="25" step="1" value="${params.initialAngle}" ${!isIdle ? 'disabled' : ''}>
                     </div>
 
                     <div class="w-full">
                         <div class="flex justify-between items-center mb-1">
-                            <label class="text-sm font-medium ${isIdle ? 'text-gray-700' : 'text-gray-400'}">Dämpning</label>
-                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'bg-blue-100 text-blue-700' : 'bg-gray-200 text-gray-500'}">
+                            <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Dämpning</label>
+                            <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
+                                  style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                 ${params.damping.toFixed(2).replace('.', ',')}
                             </span>
                         </div>
-                        <input id="damping-slider" type="range" min="0" max="0.5" step="0.01" value="${params.damping}" ${!isIdle ? 'disabled' : ''}
-                            class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer range-lg accent-blue-500 disabled:accent-gray-400 disabled:bg-gray-200 disabled:cursor-not-allowed">
+                        <input id="damping-slider" type="range" min="0" max="0.5" step="0.01" value="${params.damping}" ${!isIdle ? 'disabled' : ''}>
                     </div>
 
-                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg text-center space-y-2">
-                        <h3 class="text-lg font-semibold text-blue-800">Mätning</h3>
-                        ${simulationState === 'idle' ? '<p class="text-sm text-blue-700">Dra pendeln och släpp för att starta.</p>' : ''}
-                        ${simulationState === 'running' && !waitingForTurningPoint && !timingActive ? '<p class="text-sm text-blue-700">Tryck på "Ta tiden" för att mäta perioden.</p>' : ''}
-                        ${waitingForTurningPoint ? '<p class="text-sm text-orange-600 font-semibold">Väntar på nästa vändläge...</p>' : ''}
+                    <div class="p-4 rounded-lg text-center space-y-2"
+                         style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(56, 189, 248, 0.2);">
+                        <h3 class="text-lg font-semibold text-cyan-300">Mätning</h3>
+                        ${simulationState === 'idle' ? '<p class="text-sm text-slate-300">Dra pendeln och släpp för att starta.</p>' : ''}
+                        ${simulationState === 'running' && !waitingForTurningPoint && !timingActive ? '<p class="text-sm text-slate-300">Tryck på "Ta tiden" för att mäta perioden.</p>' : ''}
+                        ${waitingForTurningPoint ? '<p class="text-sm font-semibold" style="color: #fb923c;">Väntar på nästa vändläge...</p>' : ''}
                         ${timingActive ? `
                             <div class="space-y-2">
-                                <p class="text-sm text-green-600 font-semibold">Tidtagning pågår!</p>
+                                <p class="text-sm font-semibold" style="color: #4ade80;">Tidtagning pågår!</p>
                                 <div>
-                                    <p class="text-sm text-gray-600">Svängningar sedan start</p>
-                                    <p class="text-3xl font-mono font-bold text-gray-800">${Math.floor((Math.sqrt(params.gravity / params.length) * timeRef) / (2 * Math.PI)) - timingStartSwing} / 10</p>
+                                    <p class="text-sm text-slate-300">Svängningar sedan start</p>
+                                    <p class="text-3xl font-mono font-bold text-slate-100">${Math.floor((Math.sqrt(params.gravity / params.length) * timeRef) / (2 * Math.PI)) - timingStartSwing} / 10</p>
                                 </div>
                             </div>
                         ` : ''}
                         ${measuredPeriod !== null && !timingActive ? `
-                            <div class="border-t border-blue-200 pt-3">
-                                <p class="text-sm text-gray-600">Uppmätt Period (T)</p>
-                                <p class="text-3xl font-mono font-bold text-green-600">${measuredPeriod.toFixed(3).replace('.', ',')} s</p>
+                            <div class="pt-3" style="border-top: 1px solid rgba(56, 189, 248, 0.2);">
+                                <p class="text-sm text-slate-300">Uppmätt period (<em>T</em>)</p>
+                                <p class="text-3xl font-mono font-bold" style="color: #4ade80;">${measuredPeriod.toFixed(3).replace('.', ',')} s</p>
                             </div>
                         ` : ''}
                     </div>
 
                     <div class="flex items-center justify-center space-x-4 pt-4">
                         <button id="start-button" ${!isIdle || params.initialAngle < 0.5 ? 'disabled' : ''}
-                            class="px-6 py-2 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 w-32 disabled:bg-blue-300 disabled:cursor-not-allowed">
+                            class="px-6 py-2 font-semibold text-slate-900 rounded-lg transition-all duration-200 focus:outline-none w-32"
+                            style="${!isIdle || params.initialAngle < 0.5
+                                ? 'background: rgba(56, 189, 248, 0.25); color: rgba(148, 163, 184, 0.5); cursor: not-allowed; border: 1px solid rgba(56, 189, 248, 0.15);'
+                                : 'background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #0f172a; cursor: pointer; border: none; box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);'}">
                             Starta
                         </button>
                         <button id="reset-button"
-                            class="px-6 py-2 font-semibold text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-100 w-32">
+                            class="px-6 py-2 font-semibold text-slate-300 rounded-lg transition-all duration-200 focus:outline-none w-32"
+                            style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(148, 163, 184, 0.2); cursor: pointer;">
                             Återställ
                         </button>
                     </div>
                 </div>
 
-                <div class="space-y-4 p-6 bg-white/50 rounded-lg border border-gray-200">
-                    <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2">Information</h2>
+                <div class="space-y-4 p-6 rounded-lg" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.12);">
+                    <h2 class="text-xl font-bold text-slate-100 pb-2" style="border-bottom: 2px solid rgba(56, 189, 248, 0.4);">Information</h2>
                     <div class="text-center">
-                        <p class="text-sm text-gray-600">Beräknad Period (T)</p>
-                        <p class="text-4xl font-mono font-bold text-blue-600 my-2">${period.toFixed(3).replace('.', ',')} s</p>
-                        <p class="text-sm font-mono text-gray-500">T = 2π * √(l/g)</p>
+                        <p class="text-sm text-slate-300">Beräknad period (<em>T</em>)</p>
+                        <p class="text-4xl font-mono font-bold my-2 period-display" style="color: #38bdf8; text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);">${period.toFixed(3).replace('.', ',')} s</p>
+                        <p class="text-sm font-mono text-slate-400">T = 2π · √(<em>l</em>/<em>g</em>)</p>
                     </div>
-                    <div class="pt-4 text-sm text-gray-700 leading-relaxed">
+                    <div class="pt-4 text-sm text-slate-200 leading-relaxed space-y-2">
                         <p>
-                            <strong class="text-blue-600">Observera:</strong> Perioden – tiden för en komplett svängning fram och tillbaka – beror <strong class="font-semibold">endast</strong> på pendelns <span class="text-green-600">längd (l)</span> och den lokala <span class="text-green-600">tyngdfaktorn (g)</span>.
+                            <strong style="color: #38bdf8;">Observera:</strong> Perioden – tiden för en komplett svängning fram och tillbaka – beror <strong class="font-semibold text-white">endast</strong> på pendelns <span style="color: #4ade80;">längd (<em>l</em>)</span> och den lokala <span style="color: #4ade80;">tyngdfaktorn (<em>g</em>)</span>.
                         </p>
-                        <p class="mt-2">
-                            Prova att ändra <span class="text-red-600">massan (m)</span> och <span class="text-red-600">startvinkeln (θ)</span>. Du kommer se att perioden förblir oförändrad. Detta är en fundamental egenskap hos en enkel pendel (för små vinklar).
+                        <p>
+                            Prova att ändra <span style="color: #f87171;">massan (<em>m</em>)</span> och <span style="color: #f87171;">startvinkeln (<em>θ</em>)</span>. Du kommer se att perioden förblir oförändrad. Detta är en fundamental egenskap hos en enkel pendel (för små vinklar).
                         </p>
-                        <p class="mt-2">
-                            <strong class="text-blue-600">Dämpning</strong> simulerar luftmotstånd och gör att svängningarna gradvis minskar i storlek, precis som i verkligheten.
+                        <p>
+                            <strong style="color: #38bdf8;">Dämpning</strong> simulerar luftmotstånd och gör att svängningarna gradvis minskar i storlek, precis som i verkligheten.
                         </p>
                     </div>
                 </div>
@@ -624,11 +786,11 @@
 
             if (canvasPauseButton && canvasAbortButton && canvasTimingButton) {
                 if (simulationState === 'running' || simulationState === 'paused') {
-                    // Active state - strong colors, enabled
+                    // Active state - enabled
                     canvasPauseButton.disabled = false;
                     canvasAbortButton.disabled = false;
-                    canvasPauseButton.className = 'px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-pointer';
-                    canvasAbortButton.className = 'px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-pointer';
+                    canvasPauseButton.className = 'canvas-btn canvas-btn-orange';
+                    canvasAbortButton.className = 'canvas-btn canvas-btn-red';
 
                     // Update pause button text
                     if (simulationState === 'running') {
@@ -640,29 +802,29 @@
                     // Timing button - enabled when running and not already timing
                     if (simulationState === 'running' && !waitingForTurningPoint && !timingActive) {
                         canvasTimingButton.disabled = false;
-                        canvasTimingButton.className = 'px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-pointer';
+                        canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
                         canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
                     } else if (waitingForTurningPoint) {
                         canvasTimingButton.disabled = true;
-                        canvasTimingButton.className = 'px-4 py-2 bg-yellow-500 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed';
+                        canvasTimingButton.className = 'canvas-btn canvas-btn-yellow';
                         canvasTimingButton.textContent = '⏱ Väntar på vändläge...';
                     } else if (timingActive) {
                         canvasTimingButton.disabled = true;
-                        canvasTimingButton.className = 'px-4 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed';
+                        canvasTimingButton.className = 'canvas-btn canvas-btn-green';
                         canvasTimingButton.textContent = '⏱ Tidtagning pågår...';
                     } else {
                         canvasTimingButton.disabled = true;
-                        canvasTimingButton.className = 'px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60';
+                        canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
                         canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
                     }
                 } else {
-                    // Inactive state - weak colors, disabled
+                    // Inactive state - disabled
                     canvasPauseButton.disabled = true;
                     canvasAbortButton.disabled = true;
                     canvasTimingButton.disabled = true;
-                    canvasPauseButton.className = 'px-4 py-2 bg-orange-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60';
-                    canvasAbortButton.className = 'px-4 py-2 bg-red-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60';
-                    canvasTimingButton.className = 'px-4 py-2 bg-blue-300 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 cursor-not-allowed opacity-60';
+                    canvasPauseButton.className = 'canvas-btn canvas-btn-orange';
+                    canvasAbortButton.className = 'canvas-btn canvas-btn-red';
+                    canvasTimingButton.className = 'canvas-btn canvas-btn-cyan';
                     canvasPauseButton.textContent = '⏸ Pausa';
                     canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
                 }
@@ -684,14 +846,14 @@
             if (massDisplay) massDisplay.textContent = (params.mass * 1000).toFixed(0) + ' g';
 
             const angleDisplay = container.querySelector('#angle-slider').parentElement.querySelector('span');
-            if (angleDisplay) angleDisplay.textContent = params.initialAngle.toFixed(2).replace('.', ',') + ' °';
+            if (angleDisplay) angleDisplay.textContent = Math.round(params.initialAngle) + '°';
 
             const dampingDisplay = container.querySelector('#damping-slider').parentElement.querySelector('span');
             if (dampingDisplay) dampingDisplay.textContent = params.damping.toFixed(2).replace('.', ',');
 
             // Update calculated period
             const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
-            const periodDisplay = container.querySelector('.text-4xl.font-mono.font-bold.text-blue-600');
+            const periodDisplay = container.querySelector('.period-display');
             if (periodDisplay) periodDisplay.textContent = period.toFixed(3).replace('.', ',') + ' s';
         }
 

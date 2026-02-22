@@ -16,6 +16,8 @@ const REQUIRED_NAV = [
     '<a href="index.html" class="logo">',
     '<a href="fysik1.html" class="nav-link',
     '<a href="fysik2.html" class="nav-link',
+    '<a href="om.html" class="nav-link',
+    '<a href="kontakt.html" class="nav-link',
     '<link rel="stylesheet" href="styles.css">'
 ];
 
@@ -42,7 +44,10 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-svangningar-jamforelse.html',
     'fysik1-serie-parallell.html',
     'fysik2-magnetfalt-spole.html',
-    'fysik1-elektriska-falt.html'
+    'fysik1-elektriska-falt.html',
+    'fysik2-rorelse-app.html',
+    'om.html',
+    'kontakt.html'
 ];
 
 let hasErrors = false;

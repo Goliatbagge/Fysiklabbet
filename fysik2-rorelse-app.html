@@ -1,16 +1,1050 @@
 <!DOCTYPE html>
 <html lang="sv">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snett kast - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="./fysik2-rorelse-assets/index-CKZUoitj.js"></script>
-    <link rel="stylesheet" crossorigin href="./fysik2-rorelse-assets/index-BQVRhejP.css">
-  </head>
-  <body class="bg-slate-900 text-white">
-    <div id="root"></div>
-  </body>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.3s ease-in; }
+    </style>
+</head>
+<body class="bg-slate-900 text-white">
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">⚛️</span>
+            <span class="logo-text">Fysiklabbet</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Hem</a></li>
+            <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+            <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            <li><a href="om.html" class="nav-link">Om</a></li>
+            <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="breadcrumb">
+    <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik 2</a> / Snett kast
+</div>
+
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useRef, useCallback, useEffect } = React;
+
+// ── Constants ────────────────────────────────────────────────────────────────
+const DEFAULT_GRAVITY = 9.82;
+const TIME_STEP = 1 / 60;
+const DRAG_COEFFICIENT = 0.01;
+const SCALE_X = 6;
+const SCALE_Y = 15;
+
+const CELESTIAL_BODIES = [
+    { name: 'Solen',     gravity: 274.0, gradient: 'linear-gradient(45deg, #fef08a, #f97316)', groundColor: '#f97316', groundHighlightColor: '#fcd34d' },
+    { name: 'Merkurius', gravity: 3.7,   gradient: 'linear-gradient(45deg, #a8a29e, #78716c)', groundColor: '#78716c', groundHighlightColor: '#a8a29e' },
+    { name: 'Venus',     gravity: 8.87,  gradient: 'linear-gradient(45deg, #fde68a, #eab308)', groundColor: '#eab308', groundHighlightColor: '#fde68a' },
+    { name: 'Jorden',    gravity: 9.82,  gradient: 'linear-gradient(45deg, #22c55e, #3b82f6)', groundColor: '#16a34a', groundHighlightColor: '#22c55e' },
+    { name: 'Månen',     gravity: 1.62,  gradient: 'linear-gradient(45deg, #f8fafc, #a1a1aa)', groundColor: '#a1a1aa', groundHighlightColor: '#e2e8f0' },
+    { name: 'Mars',      gravity: 3.72,  gradient: 'linear-gradient(45deg, #f87171, #b91c1c)', groundColor: '#b91c1c', groundHighlightColor: '#f87171' },
+    { name: 'Jupiter',   gravity: 24.79, gradient: 'linear-gradient(45deg, #fcd34d, #a16207)', groundColor: '#a16207', groundHighlightColor: '#fcd34d' },
+    { name: 'Saturnus',  gravity: 10.44, gradient: 'linear-gradient(45deg, #fde68a, #ca8a04)', groundColor: '#ca8a04', groundHighlightColor: '#fde68a' },
+    { name: 'Uranus',    gravity: 8.69,  gradient: 'linear-gradient(45deg, #7dd3fc, #0ea5e9)', groundColor: '#0ea5e9', groundHighlightColor: '#7dd3fc' },
+    { name: 'Neptunus',  gravity: 11.15, gradient: 'linear-gradient(45deg, #38bdf8, #2563eb)', groundColor: '#2563eb', groundHighlightColor: '#38bdf8' },
+];
+
+// ── Icons ────────────────────────────────────────────────────────────────────
+const PlayIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+    </svg>
+);
+
+const PauseIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1zm4 0a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+    </svg>
+);
+
+const ResetIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 110 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
+    </svg>
+);
+
+const StepForwardIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M6 5v10l7-5-7-5zm9 0h2v10h-2V5z" />
+    </svg>
+);
+
+const StepBackwardIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M14 5v10L7 10l7-5zM5 5H3v10h2V5z" />
+    </svg>
+);
+
+const ResetViewIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+        <path fillRule="evenodd" d="M9 10a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2H10a1 1 0 0 1-1-1Z" clipRule="evenodd" />
+        <path d="M.5 10a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0ZM10 3a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 3Zm0 11.5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5a.75.75 0 0 1 .75-.75ZM4.505 12.242a.75.75 0 0 1-.028 1.06l-1.06 1.06a.75.75 0 1 1-1.06-1.06l1.06-1.06a.75.75 0 0 1 1.088 0Zm12.08-1.06a.75.75 0 0 1 1.06.028l1.06 1.06a.75.75 0 1 1-1.06 1.06l-1.06-1.06a.75.75 0 0 1 0-1.088ZM15.495 7.758a.75.75 0 0 1 .028-1.06l1.06-1.06a.75.75 0 0 1 1.06 1.06l-1.06 1.06a.75.75 0 0 1-1.088 0Zm-12.08 1.06a.75.75 0 0 1-1.06-.028l-1.06-1.06a.75.75 0 0 1 1.06-1.06l1.06 1.06a.75.75 0 0 1 0 1.088Z" />
+    </svg>
+);
+
+// ── Canvas constants ─────────────────────────────────────────────────────────
+const GROUND_HEIGHT = 40;
+const Y_AXIS_PADDING = 40;
+const VECTOR_SCALE = 3;
+
+// ── Utility ──────────────────────────────────────────────────────────────────
+const fmt = (num, decimals = 2) => num.toFixed(decimals).replace('.', ',');
+
+// ── drawArrow helper ─────────────────────────────────────────────────────────
+function drawArrow(ctx, fromX, fromY, toX, toY, color) {
+    const headlen = 8;
+    const dx = toX - fromX;
+    const dy = toY - fromY;
+    const angle = Math.atan2(dy, dx);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(fromX, fromY);
+    ctx.lineTo(toX, toY);
+    ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+    ctx.moveTo(toX, toY);
+    ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+    ctx.stroke();
+}
+
+// ── SimulationCanvas ─────────────────────────────────────────────────────────
+function SimulationCanvas({
+    projectile, trajectory, velocity,
+    showVx, showVy, showV,
+    initialHeight, groundColor, groundHighlightColor,
+    launchAngle, initialVelocity,
+    status, showAxes, showSymmetryLine, trajectoryPeak,
+    zoom, setZoom, cameraOffset, setCameraOffset,
+}) {
+    const canvasRef = useRef(null);
+    const panState = useRef({ isPanning: false, start: { x: 0, y: 0 } });
+
+    const resetView = () => {
+        setZoom(1);
+        setCameraOffset({ x: 0, y: 0 });
+    };
+
+    const handleWheel = (e) => {
+        e.preventDefault();
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Scale mouse coordinates to canvas resolution
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const canvasMouseX = mouseX * scaleX;
+        const canvasMouseY = mouseY * scaleY;
+
+        const zoomFactor = 1.1;
+        const newZoom = e.deltaY < 0 ? zoom * zoomFactor : zoom / zoomFactor;
+        const clampedZoom = Math.max(0.1, Math.min(10, newZoom));
+
+        const worldX = (canvasMouseX - Y_AXIS_PADDING - cameraOffset.x) / (SCALE_X * zoom);
+        const worldY = (canvas.height - GROUND_HEIGHT - canvasMouseY - cameraOffset.y) / (SCALE_Y * zoom);
+
+        setZoom(clampedZoom);
+
+        const newOffsetX = canvasMouseX - Y_AXIS_PADDING - worldX * SCALE_X * clampedZoom;
+        const newOffsetY = canvas.height - GROUND_HEIGHT - canvasMouseY - worldY * SCALE_Y * clampedZoom;
+
+        setCameraOffset({ x: newOffsetX, y: newOffsetY });
+    };
+
+    const handleMouseDown = (e) => {
+        panState.current = { isPanning: true, start: { x: e.clientX, y: e.clientY } };
+        e.currentTarget.style.cursor = 'grabbing';
+    };
+    const handleMouseUp = (e) => {
+        panState.current.isPanning = false;
+        e.currentTarget.style.cursor = 'grab';
+    };
+    const handleMouseLeave = (e) => {
+        panState.current.isPanning = false;
+        e.currentTarget.style.cursor = 'grab';
+    };
+    const handleMouseMove = (e) => {
+        if (!panState.current.isPanning) return;
+        const dx = e.clientX - panState.current.start.x;
+        const dy = e.clientY - panState.current.start.y;
+        setCameraOffset(prev => ({ x: prev.x + dx, y: prev.y + dy }));
+        panState.current.start = { x: e.clientX, y: e.clientY };
+    };
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const { width, height } = canvas;
+
+        const toCanvasX = (x) => Y_AXIS_PADDING + cameraOffset.x + x * SCALE_X * zoom;
+        const toCanvasY = (y) => height - GROUND_HEIGHT - cameraOffset.y - y * SCALE_Y * zoom;
+
+        const groundCanvasY = toCanvasY(0);
+
+        ctx.clearRect(0, 0, width, height);
+
+        // World bounds for grid
+        const worldXMin = (-Y_AXIS_PADDING - cameraOffset.x) / (SCALE_X * zoom);
+        const worldXMax = (width - Y_AXIS_PADDING - cameraOffset.x) / (SCALE_X * zoom);
+        const worldYMin = (groundCanvasY - height) / (SCALE_Y * zoom);
+        const worldYMax = groundCanvasY / (SCALE_Y * zoom);
+
+        const getNiceStep = (range) => {
+            if (range <= 0) return 1;
+            const exponent = Math.floor(Math.log10(range));
+            const fraction = range / Math.pow(10, exponent);
+            let niceFraction;
+            if (fraction < 1.5) niceFraction = 1;
+            else if (fraction < 3) niceFraction = 2;
+            else if (fraction < 7) niceFraction = 5;
+            else niceFraction = 10;
+            return Math.max(0.1, niceFraction * Math.pow(10, exponent - 1));
+        };
+
+        const xTickStep = getNiceStep(worldXMax - worldXMin);
+        const yTickStep = getNiceStep(worldYMax - worldYMin);
+
+        // Draw grid
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.lineWidth = 1;
+        const firstXLine = Math.floor(worldXMin / xTickStep) * xTickStep;
+        for (let x = firstXLine; x < worldXMax; x += xTickStep) {
+            const canvasX = toCanvasX(x);
+            if (canvasX > Y_AXIS_PADDING) {
+                ctx.beginPath();
+                ctx.moveTo(canvasX, 0);
+                ctx.lineTo(canvasX, height);
+                ctx.stroke();
+            }
+        }
+        const firstYLine = Math.floor(worldYMin / yTickStep) * yTickStep;
+        for (let y = firstYLine; y < worldYMax; y += yTickStep) {
+            const canvasY = toCanvasY(y);
+            if (canvasY < groundCanvasY && canvasY > 0) {
+                ctx.beginPath();
+                ctx.moveTo(0, canvasY);
+                ctx.lineTo(width, canvasY);
+                ctx.stroke();
+            }
+        }
+
+        // Ground
+        ctx.fillStyle = groundColor;
+        ctx.fillRect(0, groundCanvasY, width, height - groundCanvasY);
+        ctx.fillStyle = groundHighlightColor;
+        ctx.fillRect(0, groundCanvasY, width, 5);
+
+        // Axes
+        if (showAxes) {
+            ctx.save();
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.lineWidth = 1;
+            ctx.font = "12px 'Poppins', sans-serif";
+
+            // Y axis line
+            ctx.beginPath();
+            ctx.moveTo(Y_AXIS_PADDING, groundCanvasY);
+            ctx.lineTo(Y_AXIS_PADDING, 10);
+            ctx.stroke();
+
+            // Y tick labels
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            const firstYLabel = Math.max(0, Math.ceil(worldYMin / yTickStep) * yTickStep);
+            for (let meter = firstYLabel; meter < worldYMax; meter += yTickStep) {
+                const y_px = toCanvasY(meter);
+                if (y_px < 10 || y_px > groundCanvasY) continue;
+                ctx.beginPath();
+                ctx.moveTo(Y_AXIS_PADDING - 5, y_px);
+                ctx.lineTo(Y_AXIS_PADDING, y_px);
+                ctx.stroke();
+                ctx.fillText(`${Number(meter.toFixed(2)).toString()} m`, Y_AXIS_PADDING - 8, y_px);
+            }
+
+            // X tick labels
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            const firstXLabel = Math.max(0, Math.ceil(worldXMin / xTickStep) * xTickStep);
+            for (let meter = firstXLabel; meter < worldXMax; meter += xTickStep) {
+                const x_px = toCanvasX(meter);
+                if (x_px < Y_AXIS_PADDING + 15 || x_px > width - 15) continue;
+                ctx.beginPath();
+                ctx.moveTo(x_px, groundCanvasY);
+                ctx.lineTo(x_px, groundCanvasY + 5);
+                ctx.stroke();
+                ctx.fillText(`${Number(meter.toFixed(2)).toString()} m`, x_px, groundCanvasY + 8);
+            }
+            ctx.restore();
+        }
+
+        // Launch angle indicator (idle state)
+        if (status === 'idle') {
+            const sx = toCanvasX(0);
+            const sy = toCanvasY(initialHeight);
+            const angleRad = (launchAngle * Math.PI) / 180;
+            const indicatorLength = initialVelocity * VECTOR_SCALE * zoom;
+            const ex = sx + indicatorLength * Math.cos(angleRad);
+            const ey = sy - indicatorLength * Math.sin(angleRad);
+
+            ctx.save();
+            ctx.setLineDash([6, 6]);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(sx, sy);
+            ctx.lineTo(ex, ey);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        // Trajectory
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        if (trajectory.length > 0) {
+            ctx.moveTo(toCanvasX(trajectory[0].x), toCanvasY(trajectory[0].y));
+            for (let i = 1; i < trajectory.length; i++) {
+                ctx.lineTo(toCanvasX(trajectory[i].x), toCanvasY(trajectory[i].y));
+            }
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Symmetry line
+        if (showSymmetryLine && trajectoryPeak) {
+            const peakX = toCanvasX(trajectoryPeak.x);
+            ctx.save();
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = 'rgba(34, 211, 238, 0.6)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(peakX, 10);
+            ctx.lineTo(peakX, groundCanvasY);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        // Projectile
+        const projX = toCanvasX(projectile.x);
+        const projY = toCanvasY(projectile.y);
+
+        if (projY < height) {
+            // Glow
+            ctx.fillStyle = 'rgba(34, 211, 238, 0.2)';
+            ctx.beginPath();
+            ctx.arc(projX, projY, 16, 0, Math.PI * 2);
+            ctx.fill();
+            // Ball
+            ctx.fillStyle = '#22d3ee';
+            ctx.beginPath();
+            ctx.arc(projX, projY, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.font = "16px 'Poppins', sans-serif";
+            const vec_scale = VECTOR_SCALE * zoom;
+
+            if (showV) {
+                const endVx = projX + velocity.vx * vec_scale;
+                const endVy = projY - velocity.vy * vec_scale;
+                drawArrow(ctx, projX, projY, endVx, endVy, '#f472b6');
+                ctx.fillStyle = '#f472b6';
+                ctx.textAlign = velocity.vx >= 0 ? 'left' : 'right';
+                ctx.textBaseline = velocity.vy >= 0 ? 'bottom' : 'top';
+                const offsetX = velocity.vx >= 0 ? 8 : -8;
+                const offsetY = velocity.vy >= 0 ? -8 : 8;
+                ctx.fillText('v', endVx + offsetX, endVy + offsetY);
+            }
+            if (showVx) {
+                const endX = projX + velocity.vx * vec_scale;
+                drawArrow(ctx, projX, projY, endX, projY, '#facc15');
+                ctx.fillStyle = '#facc15';
+                ctx.textAlign = velocity.vx >= 0 ? 'left' : 'right';
+                ctx.textBaseline = 'bottom';
+                const offsetX = velocity.vx >= 0 ? 5 : -5;
+                ctx.fillText('v\u2093', endX + offsetX, projY - 5);
+            }
+            if (showVy) {
+                const endY = projY - velocity.vy * vec_scale;
+                drawArrow(ctx, projX, projY, projX, endY, '#a78bfa');
+                ctx.fillStyle = '#a78bfa';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = velocity.vy >= 0 ? 'bottom' : 'top';
+                const offsetY = velocity.vy >= 0 ? -5 : 5;
+                ctx.fillText('v\u1D67', projX + 8, endY + offsetY);
+            }
+        }
+
+        // Initial height marker
+        if (initialHeight > 0) {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+            ctx.fillRect(Y_AXIS_PADDING - 5, toCanvasY(initialHeight) - 2, 10, 4);
+        }
+
+        // Finished markers
+        if (status === 'finished' && trajectoryPeak) {
+            const peakX = toCanvasX(trajectoryPeak.x);
+            const peakY = toCanvasY(trajectoryPeak.y);
+
+            ctx.save();
+            ctx.font = "bold 14px 'Poppins', sans-serif";
+
+            // y_max label
+            const yMaxText = `y\u2098\u2090\u2093 = ${fmt(trajectoryPeak.y)} m`;
+            const yMaxWidth = ctx.measureText(yMaxText).width;
+            const yBoxX = peakX + 15;
+            const yBoxY = peakY - 25;
+            const yBoxPadding = 8;
+            const yBoxWidth = yMaxWidth + yBoxPadding * 2;
+            const yBoxHeight = 24;
+
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+            ctx.beginPath();
+            ctx.roundRect(yBoxX, yBoxY, yBoxWidth, yBoxHeight, 4);
+            ctx.fill();
+            ctx.strokeStyle = '#22d3ee';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.fillStyle = '#22d3ee';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(yMaxText, yBoxX + yBoxPadding, yBoxY + yBoxHeight / 2);
+
+            ctx.strokeStyle = 'rgba(34, 211, 238, 0.6)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(peakX, peakY);
+            ctx.lineTo(yBoxX, yBoxY + yBoxHeight / 2);
+            ctx.stroke();
+
+            // x_max label
+            const rangeX = toCanvasX(projectile.x);
+            const rangeY = toCanvasY(0);
+            const xMaxText = `x\u2098\u2090\u2093 = ${fmt(projectile.x)} m`;
+            const xMaxWidth = ctx.measureText(xMaxText).width;
+            const xBoxX = rangeX - xMaxWidth / 2 - 8;
+            const xBoxY = rangeY - 45;
+            const xBoxPadding = 8;
+            const xBoxWidth = xMaxWidth + xBoxPadding * 2;
+            const xBoxHeight = 24;
+
+            ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+            ctx.beginPath();
+            ctx.roundRect(xBoxX, xBoxY, xBoxWidth, xBoxHeight, 4);
+            ctx.fill();
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            ctx.fillStyle = '#10b981';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(xMaxText, xBoxX + xBoxPadding, xBoxY + xBoxHeight / 2);
+
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.6)';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(rangeX, rangeY);
+            ctx.lineTo(rangeX, xBoxY + xBoxHeight);
+            ctx.stroke();
+
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(rangeX, rangeY - 5);
+            ctx.lineTo(rangeX, 10);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.restore();
+        }
+
+    }, [projectile, trajectory, velocity, showVx, showVy, showV, initialHeight, groundColor, groundHighlightColor, launchAngle, initialVelocity, status, showAxes, showSymmetryLine, trajectoryPeak, zoom, cameraOffset]);
+
+    return (
+        <div
+            className="relative w-full max-w-4xl aspect-[5/3] bg-slate-900/70 rounded-lg overflow-hidden shadow-lg border border-slate-700 cursor-grab"
+            onWheel={handleWheel}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+        >
+            <canvas
+                ref={canvasRef}
+                width={800}
+                height={480}
+                className="w-full h-full"
+            />
+            <button
+                onClick={resetView}
+                className="absolute top-3 right-3 bg-slate-800/50 hover:bg-slate-700/70 text-slate-300 p-2 rounded-full transition-all duration-200 opacity-70 hover:opacity-100"
+                title="Återställ vy"
+                aria-label="Återställ vy"
+            >
+                <ResetViewIcon />
+            </button>
+        </div>
+    );
+}
+
+// ── Slider ───────────────────────────────────────────────────────────────────
+function Slider({ label, value, min, max, step, unit, onChange, disabled, decimalPlaces = 2 }) {
+    const [inputValue, setInputValue] = useState(value.toFixed(decimalPlaces));
+
+    useEffect(() => {
+        if (parseFloat(inputValue) !== value) {
+            setInputValue(value.toFixed(decimalPlaces));
+        }
+    }, [value, decimalPlaces]);
+
+    const processValue = () => {
+        let numericValue = parseFloat(inputValue);
+        if (isNaN(numericValue)) numericValue = value;
+        const clampedValue = Math.max(min, Math.min(max, numericValue));
+        onChange(clampedValue);
+        setInputValue(clampedValue.toFixed(decimalPlaces));
+    };
+
+    const handleBlur = () => processValue();
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            processValue();
+            e.target.blur();
+        }
+    };
+
+    return (
+        <div className="space-y-2">
+            <div className="flex justify-between items-center">
+                <label className="text-sm font-medium text-slate-300">{label}</label>
+                <div className="flex items-center space-x-2 bg-slate-800 border border-slate-700 rounded-md">
+                    <input
+                        type="number"
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        onBlur={handleBlur}
+                        onKeyDown={handleKeyDown}
+                        disabled={disabled}
+                        className="w-16 bg-transparent text-right pr-1 py-1 text-sm font-semibold text-cyan-300 focus:outline-none appearance-none"
+                        min={min}
+                        max={max}
+                        step={step}
+                    />
+                    <span className="text-xs text-slate-400 pr-2 select-none">{unit}</span>
+                </div>
+            </div>
+            <input
+                type="range"
+                min={min}
+                max={max}
+                step={step}
+                value={value}
+                onChange={(e) => onChange(parseFloat(e.target.value))}
+                disabled={disabled}
+                className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer disabled:cursor-not-allowed"
+                style={{ accentColor: '#22d3ee' }}
+            />
+        </div>
+    );
+}
+
+// ── Checkbox ─────────────────────────────────────────────────────────────────
+function Checkbox({ label, checked, onChange, color }) {
+    return (
+        <label className="flex items-center space-x-3 cursor-pointer">
+            <input
+                type="checkbox"
+                checked={checked}
+                onChange={(e) => onChange(e.target.checked)}
+                style={{ accentColor: color, width: '1.25rem', height: '1.25rem' }}
+            />
+            <span className="text-slate-200">{label}</span>
+        </label>
+    );
+}
+
+// ── CelestialBodySelector ────────────────────────────────────────────────────
+function CelestialBodySelector({ onSelect, currentGravity, disabled }) {
+    return (
+        <div>
+            <p className="text-sm font-medium text-slate-400 mb-3">eller välj en himlakropp:</p>
+            <div className="grid grid-cols-5 gap-2">
+                {CELESTIAL_BODIES.map((body) => {
+                    const isSelected = Math.abs(body.gravity - currentGravity) < 0.01;
+                    return (
+                        <button
+                            key={body.name}
+                            onClick={() => onSelect(body.gravity)}
+                            disabled={disabled}
+                            title={`${body.name}: ${body.gravity} m/s\u00B2`}
+                            aria-label={`${body.name}: ${body.gravity} m/s\u00B2`}
+                            className="flex flex-col items-center space-y-1 rounded-md p-1 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-cyan-400 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-slate-800"
+                        >
+                            <div
+                                className="w-8 h-8 rounded-full transition-all duration-200"
+                                style={{
+                                    backgroundImage: body.gradient,
+                                    boxShadow: isSelected
+                                        ? '0 0 0 2px #22d3ee, 0 0 0 4px #0f172a'
+                                        : '0 0 0 1px #334155',
+                                }}
+                            />
+                            <span className="text-center text-slate-300 leading-tight" style={{ fontSize: '11px' }}>{body.name}</span>
+                        </button>
+                    );
+                })}
+            </div>
+        </div>
+    );
+}
+
+// ── ControlPanel ─────────────────────────────────────────────────────────────
+function ControlPanel({ params, setParams, status, results, finishedRunAirResistance }) {
+    const isRunning = status === 'running';
+
+    const handleParamChange = (key, value) => {
+        setParams(prev => ({ ...prev, [key]: value }));
+    };
+
+    return (
+        <div className="h-full flex flex-col space-y-6">
+            <div className="flex-grow space-y-6">
+                <h2 className="text-xl font-bold text-center lg:text-left text-slate-100 mt-12 lg:mt-0">Inställningar</h2>
+
+                <div className="space-y-4 p-4 bg-slate-900/50 rounded-lg">
+                    <Slider
+                        label="Utkastvinkel"
+                        value={params.angle}
+                        min={0} max={90} step={1} unit="°"
+                        onChange={(v) => handleParamChange('angle', v)}
+                        disabled={isRunning}
+                        decimalPlaces={0}
+                    />
+                    <Slider
+                        label="Utgångshastighet"
+                        value={params.initialVelocity}
+                        min={1} max={30} step={1} unit="m/s"
+                        onChange={(v) => handleParamChange('initialVelocity', v)}
+                        disabled={isRunning}
+                        decimalPlaces={0}
+                    />
+                    <Slider
+                        label="Utkasthöjd"
+                        value={params.initialHeight}
+                        min={0} max={20} step={0.01} unit="m"
+                        onChange={(v) => handleParamChange('initialHeight', v)}
+                        disabled={isRunning}
+                        decimalPlaces={2}
+                    />
+                </div>
+
+                <div className="p-4 bg-slate-900/50 rounded-lg space-y-3">
+                    <h3 className="text-md font-semibold text-slate-200 mb-2">Visualisering</h3>
+                    <Checkbox label="Visa koordinataxlar" checked={params.showAxes} onChange={(c) => handleParamChange('showAxes', c)} color="#34d399" />
+                    <Checkbox label="Hastighet (total)" checked={params.showV} onChange={(c) => handleParamChange('showV', c)} color="#f472b6" />
+                    <Checkbox label="Hastighet (x-led)" checked={params.showVx} onChange={(c) => handleParamChange('showVx', c)} color="#facc15" />
+                    <Checkbox label="Hastighet (y-led)" checked={params.showVy} onChange={(c) => handleParamChange('showVy', c)} color="#a78bfa" />
+                    {status === 'finished' && !finishedRunAirResistance && (
+                        <Checkbox
+                            label="Visa symmetrilinje"
+                            checked={params.showSymmetryLine}
+                            onChange={(c) => handleParamChange('showSymmetryLine', c)}
+                            color="#22d3ee"
+                        />
+                    )}
+                </div>
+
+                <div className="p-4 bg-slate-900/50 rounded-lg space-y-4">
+                    <h3 className="text-md font-semibold text-slate-200 mb-3">Fysik</h3>
+                    <Checkbox label="Luftmotstånd" checked={params.airResistance} onChange={(c) => handleParamChange('airResistance', c)} color="#60a5fa" />
+                    <div className="pt-2">
+                        <Slider
+                            label="Tyngdfaktor (g)"
+                            value={params.gravity}
+                            min={0} max={30} step={0.01} unit="m/s²"
+                            onChange={(v) => handleParamChange('gravity', v)}
+                            disabled={isRunning}
+                        />
+                    </div>
+                    <CelestialBodySelector
+                        onSelect={(g) => handleParamChange('gravity', g)}
+                        currentGravity={params.gravity}
+                        disabled={isRunning}
+                    />
+                </div>
+
+                {(status === 'finished' || (status === 'idle' && results.flightTime > 0)) && (
+                    <div className="p-4 bg-slate-900/50 rounded-lg space-y-2 animate-fade-in">
+                        <h3 className="text-md font-semibold text-slate-200 mb-2">Resultat</h3>
+                        <div className="flex justify-between text-sm">
+                            <span className="text-slate-400">Maxhöjd:</span>
+                            <span className="font-mono text-cyan-300">{fmt(results.maxHeight)} m</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                            <span className="text-slate-400">Kastlängd:</span>
+                            <span className="font-mono text-cyan-300">{fmt(results.range)} m</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                            <span className="text-slate-400">Tid i luften:</span>
+                            <span className="font-mono text-cyan-300">{fmt(results.flightTime)} s</span>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+// ── App ──────────────────────────────────────────────────────────────────────
+function App() {
+    const [params, setParams] = useState({
+        angle: 45,
+        initialVelocity: 26,
+        initialHeight: 0,
+        showVx: true,
+        showVy: true,
+        showV: true,
+        airResistance: false,
+        gravity: DEFAULT_GRAVITY,
+        showAxes: true,
+        showSymmetryLine: false,
+    });
+
+    const [status, setStatus] = useState('idle');
+    const [projectile, setProjectile] = useState({ x: 0, y: params.initialHeight });
+    const [velocity, setVelocity] = useState({ vx: 0, vy: 0 });
+    const [trajectory, setTrajectory] = useState([{ x: 0, y: params.initialHeight }]);
+    const [history, setHistory] = useState([]);
+    const [maxHeight, setMaxHeight] = useState(0);
+    const [flightTime, setFlightTime] = useState(0);
+    const [range, setRange] = useState(0);
+    const [trajectoryPeak, setTrajectoryPeak] = useState(null);
+    const [finishedRunAirResistance, setFinishedRunAirResistance] = useState(false);
+    const [zoom, setZoom] = useState(1);
+    const [cameraOffset, setCameraOffset] = useState({ x: 0, y: 0 });
+
+    const simulationState = useRef({
+        time: 0, x: 0, y: 0, vx: 0, vy: 0,
+        currentPeak: { x: 0, y: 0 },
+    });
+    const animationFrameId = useRef(null);
+
+    const resetSimulation = useCallback(() => {
+        setStatus('idle');
+        if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+        const initialY = params.initialHeight > 0 ? params.initialHeight : 0;
+        setProjectile({ x: 0, y: initialY });
+        setVelocity({ vx: 0, vy: 0 });
+        setTrajectory([{ x: 0, y: initialY }]);
+        setHistory([]);
+        setMaxHeight(0);
+        setFlightTime(0);
+        setRange(0);
+        setTrajectoryPeak(null);
+        setParams(p => ({ ...p, showSymmetryLine: false }));
+        setZoom(1);
+        setCameraOffset({ x: 0, y: 0 });
+    }, [params.initialHeight]);
+
+    // Reset when key params change
+    useEffect(() => {
+        resetSimulation();
+    }, [params.angle, params.initialVelocity, params.initialHeight, params.airResistance, params.gravity, params.showAxes]);
+
+    const startSimulation = () => {
+        setStatus('idle');
+        if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+
+        const initialY = params.initialHeight > 0 ? params.initialHeight : 0;
+        const initialPoint = { x: 0, y: initialY };
+
+        setProjectile(initialPoint);
+        setVelocity({ vx: 0, vy: 0 });
+        setTrajectory([initialPoint]);
+        setMaxHeight(0);
+        setFlightTime(0);
+        setRange(0);
+        setTrajectoryPeak(null);
+        setZoom(1);
+        setCameraOffset({ x: 0, y: 0 });
+
+        const angleInRadians = (params.angle * Math.PI) / 180;
+        const initialState = {
+            time: 0,
+            x: 0,
+            y: initialY,
+            vx: params.initialVelocity * Math.cos(angleInRadians),
+            vy: params.initialVelocity * Math.sin(angleInRadians),
+            currentPeak: { x: 0, y: initialY },
+        };
+        simulationState.current = initialState;
+        setHistory([initialState]);
+        setFinishedRunAirResistance(params.airResistance);
+        setStatus('running');
+    };
+
+    const simulationLoop = useCallback(() => {
+        const state = simulationState.current;
+        let { time, x, y, vx, vy, currentPeak } = state;
+
+        if (params.airResistance) {
+            const speed = Math.sqrt(vx * vx + vy * vy);
+            const dragForceX = -DRAG_COEFFICIENT * vx * speed;
+            const dragForceY = -DRAG_COEFFICIENT * vy * speed;
+            vx += dragForceX * TIME_STEP;
+            vy += (-params.gravity + dragForceY) * TIME_STEP;
+        } else {
+            vy -= params.gravity * TIME_STEP;
+        }
+
+        x += vx * TIME_STEP;
+        y += vy * TIME_STEP;
+        time += TIME_STEP;
+
+        if (y > currentPeak.y) currentPeak = { x, y };
+
+        const newState = { time, x, y, vx, vy, currentPeak };
+        simulationState.current = newState;
+
+        setProjectile({ x, y });
+        setVelocity({ vx, vy });
+        setHistory(prev => [...prev, newState]);
+        setTrajectory(prev => {
+            if (Math.floor(time / (TIME_STEP * 5)) > prev.length - 1) {
+                return [...prev, { x, y }];
+            }
+            return prev;
+        });
+
+        if (y < 0) {
+            setStatus('finished');
+            setMaxHeight(newState.currentPeak.y);
+            setTrajectoryPeak(newState.currentPeak);
+            setFlightTime(time);
+            setRange(x);
+            cancelAnimationFrame(animationFrameId.current);
+        } else {
+            animationFrameId.current = requestAnimationFrame(simulationLoop);
+        }
+    }, [params.airResistance, params.gravity]);
+
+    useEffect(() => {
+        if (status === 'running') {
+            animationFrameId.current = requestAnimationFrame(simulationLoop);
+        }
+        return () => {
+            if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+        };
+    }, [status, simulationLoop]);
+
+    const handlePrimaryAction = () => {
+        if (status === 'running') {
+            setStatus('paused');
+        } else if (status === 'paused') {
+            setStatus('running');
+        } else {
+            startSimulation();
+        }
+    };
+
+    const stepForward = () => {
+        if (status !== 'paused' || projectile.y < 0) return;
+
+        const state = simulationState.current;
+        let { time, x, y, vx, vy, currentPeak } = state;
+
+        if (params.airResistance) {
+            const speed = Math.sqrt(vx * vx + vy * vy);
+            const dragForceX = -DRAG_COEFFICIENT * vx * speed;
+            const dragForceY = -DRAG_COEFFICIENT * vy * speed;
+            vx += dragForceX * TIME_STEP;
+            vy += (-params.gravity + dragForceY) * TIME_STEP;
+        } else {
+            vy -= params.gravity * TIME_STEP;
+        }
+
+        x += vx * TIME_STEP;
+        y += vy * TIME_STEP;
+        time += TIME_STEP;
+
+        if (y > currentPeak.y) currentPeak = { x, y };
+
+        const newState = { time, x, y, vx, vy, currentPeak };
+        simulationState.current = newState;
+
+        setProjectile({ x, y });
+        setVelocity({ vx, vy });
+        setHistory(prev => [...prev, newState]);
+        setTrajectory(prev => {
+            if (Math.floor(time / (TIME_STEP * 5)) > prev.length - 1) {
+                return [...prev, { x, y }];
+            }
+            return prev;
+        });
+
+        if (y < 0) {
+            setStatus('finished');
+            setMaxHeight(newState.currentPeak.y);
+            setTrajectoryPeak(newState.currentPeak);
+            setFlightTime(time);
+            setRange(x);
+        }
+    };
+
+    const stepBackward = () => {
+        if (status !== 'paused' || history.length <= 1) return;
+
+        const newHistory = history.slice(0, -1);
+        const prevState = newHistory[newHistory.length - 1];
+
+        simulationState.current = prevState;
+        setHistory(newHistory);
+        setProjectile({ x: prevState.x, y: prevState.y });
+        setVelocity({ vx: prevState.vx, vy: prevState.vy });
+        setTrajectory(prev => {
+            const newTrajLength = Math.floor(prevState.time / (TIME_STEP * 5)) + 1;
+            if (prev.length > newTrajLength) return prev.slice(0, newTrajLength);
+            return prev;
+        });
+    };
+
+    const activeBody = CELESTIAL_BODIES.find(body => Math.abs(body.gravity - params.gravity) < 0.01);
+    const groundColor = activeBody ? activeBody.groundColor : '#16a34a';
+    const groundHighlightColor = activeBody ? activeBody.groundHighlightColor : '#22c55e';
+
+    const primaryButtonText =
+        status === 'running' ? 'Pausa' :
+        status === 'paused'  ? 'Återuppta' :
+        (status === 'idle' && flightTime > 0) ? 'Kör igen' : 'Starta';
+    const PrimaryIcon = status === 'running' ? PauseIcon : PlayIcon;
+
+    return (
+        <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#0f172a' }}>
+            <main className="flex-grow flex flex-col lg:flex-row items-stretch">
+
+                {/* Canvas area */}
+                <div className="flex-grow flex flex-col items-center justify-start p-4 lg:p-6">
+                    <h1 className="text-2xl md:text-3xl font-bold text-cyan-400 mb-6">Snett kast</h1>
+
+                    <SimulationCanvas
+                        projectile={projectile}
+                        trajectory={trajectory}
+                        velocity={velocity}
+                        showVx={params.showVx}
+                        showVy={params.showVy}
+                        showV={params.showV}
+                        initialHeight={params.initialHeight}
+                        groundColor={groundColor}
+                        groundHighlightColor={groundHighlightColor}
+                        launchAngle={params.angle}
+                        initialVelocity={params.initialVelocity}
+                        status={status}
+                        showAxes={params.showAxes}
+                        showSymmetryLine={params.showSymmetryLine}
+                        trajectoryPeak={trajectoryPeak}
+                        zoom={zoom}
+                        setZoom={setZoom}
+                        cameraOffset={cameraOffset}
+                        setCameraOffset={setCameraOffset}
+                    />
+
+                    {/* Controls */}
+                    <div className="flex items-center space-x-4 mt-6">
+                        <button
+                            onClick={handlePrimaryAction}
+                            className="w-48 flex items-center justify-center space-x-2 bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 text-lg"
+                        >
+                            <PrimaryIcon />
+                            <span>{primaryButtonText}</span>
+                        </button>
+
+                        <div className="flex items-center bg-slate-700/50 rounded-lg">
+                            <button
+                                onClick={stepBackward}
+                                disabled={status !== 'paused' || history.length <= 1}
+                                className="p-3 text-slate-200 hover:bg-slate-600 rounded-l-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                aria-label="Stega bakåt"
+                                title="Stega bakåt"
+                            >
+                                <StepBackwardIcon />
+                            </button>
+                            <div className="w-px h-5 bg-slate-600/50"></div>
+                            <button
+                                onClick={stepForward}
+                                disabled={status !== 'paused'}
+                                className="p-3 text-slate-200 hover:bg-slate-600 rounded-r-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                aria-label="Stega framåt"
+                                title="Stega framåt"
+                            >
+                                <StepForwardIcon />
+                            </button>
+                        </div>
+
+                        <button
+                            onClick={resetSimulation}
+                            className="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold p-4 rounded-lg transition-all duration-200"
+                            aria-label="Återställ"
+                            title="Återställ"
+                        >
+                            <ResetIcon />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Side panel */}
+                <aside className="w-full lg:w-96 bg-slate-800/50 backdrop-blur-sm p-6 shadow-2xl flex-shrink-0">
+                    <ControlPanel
+                        params={params}
+                        setParams={setParams}
+                        status={status}
+                        results={{ maxHeight, flightTime, range }}
+                        finishedRunAirResistance={finishedRunAirResistance}
+                    />
+                </aside>
+            </main>
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
 </html>

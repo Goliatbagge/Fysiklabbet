@@ -42,6 +42,7 @@ start [filnamn].html
             <li><a href="index.html" class="nav-link">Hem</a></li>
             <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
             <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            <li><a href="om.html" class="nav-link">Om</a></li>
         </ul>
     </div>
 </nav>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om Fysiklabbet - Sam Skoglund</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-hero {
+            position: relative;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--gradient-hero);
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 800px;
+        }
+
+        .about-hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #38bdf8, #7dd3fc, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.4));
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .about-hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            animation: fadeInUp 1s ease;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            background: var(--container-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--container-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .about-section h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .about-section p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 1rem;
+        }
+
+        .about-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .award-box {
+            background: rgba(56, 189, 248, 0.05);
+            border-left: 3px solid var(--primary-color);
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.2rem 0;
+        }
+
+        .award-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        .quote {
+            font-style: italic;
+            color: var(--text-color);
+            font-size: 1.15rem;
+            text-align: center;
+            padding: 1.5rem 2rem;
+            position: relative;
+        }
+
+        .quote::before {
+            content: '\201C';
+            font-size: 3rem;
+            color: var(--primary-color);
+            opacity: 0.5;
+            position: absolute;
+            top: -0.2rem;
+            left: 0.5rem;
+            font-family: Georgia, serif;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero-title {
+                font-size: 2.2rem;
+            }
+
+            .about-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link active">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="about-hero">
+        <div class="about-hero-content">
+            <h1 class="about-hero-title">Om Fysiklabbet</h1>
+            <p class="about-hero-subtitle">Interaktiva simuleringar som gör fysiken levande</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="about-content">
+
+            <section class="about-section">
+                <div class="quote">
+                    Fysik handlar inte om att memorera formler &ndash; det handlar om att förstå hur världen fungerar.
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2>Om mig</h2>
+                <p>
+                    Jag heter <span class="highlight">Sam Skoglund</span> och är legitimerad gymnasielärare
+                    i matematik och fysik. Jag har skapat Fysiklabbet för att ge mina elever &ndash; och alla
+                    andra som vill &ndash; möjligheten att experimentera med fysikens lagar på ett sätt som
+                    läroboken inte alltid kan erbjuda.
+                </p>
+                <p>
+                    För mig handlar undervisning om att ständigt söka nya vägar att göra det abstrakta konkret.
+                    Interaktiva simuleringar ger elever chansen att ställa frågor som "vad händer om...?"
+                    och omedelbart se svaret &ndash; att vrida på parametrar, observera mönster och bygga
+                    sin egen förståelse. Det är i de ögonblicken jag ser att lärandet verkligen händer.
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2>Nominerad till Guldäpplet 2021</h2>
+                <p>
+                    2021 blev jag nominerad till <span class="highlight">Guldäpplet</span>, ett av Sveriges
+                    mest prestigefyllda utmärkelser inom pedagogik och digitalt lärande.
+                </p>
+                <div class="award-box">
+                    <p>
+                        Guldäpplet delas ut årligen av <span class="highlight">Stiftelsen Yngve Lindbergs minne</span>
+                        i samarbete med föreningen Datorn i Utbildningen (DIU). Priset uppmärksammar lärare
+                        som på ett nyskapande och inspirerande sätt använder digital teknik i sin undervisning
+                        för att stärka elevers lärande.
+                    </p>
+                    <p>
+                        Sedan starten 2002 har Guldäpplet blivit en symbol för pedagogisk innovation i Sverige
+                        och lyfter fram lärare som visar hur tekniken kan berika klassrummet, väcka nyfikenhet
+                        och göra kunskap tillgänglig för alla elever.
+                    </p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2>Visionen med Fysiklabbet</h2>
+                <p>
+                    Jag är övertygad om att <span class="highlight">alla kan förstå fysik</span>.
+                    Med interaktiva simuleringar vill jag ge elever möjlighet att utforska fenomen som annars
+                    är svåra att visualisera: elektriska fält som formar sig runt laddningar, vågor som
+                    bryter mot ytor, krafter som verkar i komplexa system.
+                </p>
+                <p>
+                    Varje simulering är designad för att passa gymnasiekurserna Fysik 1 och Fysik 2 och
+                    fungerar som ett komplement till undervisningen. Mitt mål är enkelt: att göra fysiken
+                    tillgänglig, begriplig och &ndash; inte minst &ndash; rolig.
+                </p>
+                <p>
+                    Simuleringarna är fria att använda för alla. God fysik åt alla!
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad av Sam Skoglund.</p>
+    </footer>
+</body>
+</html>

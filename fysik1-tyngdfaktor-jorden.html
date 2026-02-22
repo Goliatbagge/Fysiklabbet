@@ -100,7 +100,7 @@
                         0.1,
                         1000
                     );
-                    camera.position.set(0, 0, 3);
+                    camera.position.set(0, 0, 1.9);
                     camera.lookAt(0, 0, 0);
 
                     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -171,16 +171,18 @@
                     // Pole markers
                     const polesGroup = new THREE.Group();
 
-                    // North pole marker (yellow sphere)
-                    const northPoleGeometry = new THREE.SphereGeometry(0.04, 16, 16);
-                    const poleMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-                    const northPole = new THREE.Mesh(northPoleGeometry, poleMaterial);
+                    // North pole marker (flat disc)
+                    const poleGeometry = new THREE.CircleGeometry(0.06, 32);
+                    const poleMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
+                    const northPole = new THREE.Mesh(poleGeometry, poleMaterial);
                     northPole.position.set(0, 1.01, 0);
+                    northPole.rotation.x = -Math.PI / 2;
                     polesGroup.add(northPole);
 
-                    // South pole marker (yellow sphere)
-                    const southPole = new THREE.Mesh(northPoleGeometry, poleMaterial);
+                    // South pole marker (flat disc)
+                    const southPole = new THREE.Mesh(poleGeometry, poleMaterial);
                     southPole.position.set(0, -1.01, 0);
+                    southPole.rotation.x = Math.PI / 2;
                     polesGroup.add(southPole);
 
                     polesRef.current = polesGroup;
@@ -201,10 +203,12 @@
 
                     // Mouse controls
                     let isDragging = false;
+                    let hasDragged = false;
                     let previousMousePosition = { x: 0, y: 0 };
 
                     const onMouseDown = (e) => {
                         isDragging = true;
+                        hasDragged = false;
                         previousMousePosition = { x: e.clientX, y: e.clientY };
                     };
 
@@ -212,6 +216,10 @@
                         if (isDragging) {
                             const deltaX = e.clientX - previousMousePosition.x;
                             const deltaY = e.clientY - previousMousePosition.y;
+
+                            if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) {
+                                hasDragged = true;
+                            }
 
                             earth.rotation.y += deltaX * 0.005;
                             earth.rotation.x += deltaY * 0.005;
@@ -238,7 +246,7 @@
                     };
 
                     const onClick = (e) => {
-                        if (isDragging) return;
+                        if (hasDragged) return;
 
                         const rect = renderer.domElement.getBoundingClientRect();
                         const mouse = new THREE.Vector2();
@@ -274,12 +282,12 @@
 
                             // Remove old marker
                             if (marker) {
-                                scene.remove(marker);
+                                earth.remove(marker);
                             }
 
                             // Add new marker (yellow X-cross using boxes)
                             const markerGroup = new THREE.Group();
-                            const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+                            const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff66ff });
                             const markerSize = 0.045;
                             const thickness = 0.01;
 
@@ -295,12 +303,14 @@
                             bar2.rotation.z = -Math.PI / 4; // -45 degrees
                             markerGroup.add(bar2);
 
-                            // Position and orient the marker to face outward from earth
-                            markerGroup.position.copy(point);
-                            markerGroup.lookAt(camera.position);
+                            // Position marker in earth's local space, slightly above surface
+                            const surfacePoint = localPoint.clone().normalize().multiplyScalar(1.02);
+                            markerGroup.position.copy(surfacePoint);
+                            // Orient the marker to face outward from the earth surface
+                            markerGroup.lookAt(surfacePoint.clone().multiplyScalar(2));
 
                             marker = markerGroup;
-                            scene.add(marker);
+                            earth.add(marker);
                         }
                     };
 
@@ -360,7 +370,7 @@
                                 Tyngdfaktorn på jorden
                             </h1>
                             <p className="text-gray-600 text-lg">
-                                Tyngdaccelerationen (g) varierar på jorden beroende på var du befinner dig.
+                                Tyngdaccelerationen (<em>g</em>) varierar på jorden beroende på var du befinner dig.
                                 Vid ekvatorn är den lägst (cirka 9,78 m/s²) och vid polerna högst (cirka 9,83 m/s²).
                                 Detta beror på jordens rotation och att jorden är något tillplattad vid polerna.
                             </p>
@@ -383,12 +393,12 @@
                                                 <p className="text-xl font-bold text-blue-600">{clickedPoint.longitude}°</p>
                                             </div>
                                             <div className="border-t pt-3">
-                                                <p className="text-sm text-gray-600">Tyngdfaktor</p>
-                                                <p className="text-2xl font-bold text-red-600">{gravity} m/s²</p>
+                                                <p className="text-sm text-gray-600">Tyngdfaktor (<em>g</em>)</p>
+                                                <p className="text-2xl font-bold text-red-600"><em>g</em> = {gravity} m/s²</p>
                                             </div>
                                         </>
                                     ) : (
-                                        <p className="text-gray-500 text-sm">Klicka på jordklotet för att mäta g-värdet</p>
+                                        <p className="text-gray-500 text-sm">Klicka på jordklotet för att mäta <em>g</em>-värdet</p>
                                     )}
                                     <div className="border-t mt-3 pt-3">
                                         <label className="flex items-center cursor-pointer mb-2">
@@ -417,44 +427,35 @@
                                     <ul className="text-sm text-gray-600 space-y-1">
                                         <li>• Dra för att rotera jorden</li>
                                         <li>• Scrolla för att zooma in/ut</li>
-                                        <li>• Klicka för att mäta g-värdet</li>
-                                        <li>• Gult kryss visar vald plats</li>
+                                        <li>• Klicka för att mäta <em>g</em>-värdet</li>
+                                        <li>• Rosa kryss visar vald plats</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
                         <div className="bg-white rounded-xl shadow-lg p-8">
-                            <h2 className="text-2xl font-bold text-gray-800 mb-4">Varför varierar g?</h2>
+                            <h2 className="text-2xl font-bold text-gray-800 mb-4">Varför varierar <em>g</em>?</h2>
                             <div className="space-y-4 text-gray-700">
                                 <div>
                                     <h3 className="font-bold text-lg mb-2">1. Jordens rotation</h3>
                                     <p>
                                         Vid ekvatorn roterar jorden snabbast, vilket skapar en centrifugalkraft som motverkar
-                                        gravitationen. Detta gör att g blir lägre där.
+                                        gravitationen. Detta gör att <em>g</em> blir lägre där.
                                     </p>
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-lg mb-2">2. Jordens form</h3>
                                     <p>
                                         Jorden är inte perfekt sfärisk utan något tillplattad vid polerna. Vid ekvatorn är
-                                        du längre från jordens centrum, vilket också bidrar till ett lägre g-värde.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-lg mb-2">3. Formeln</h3>
-                                    <p className="font-mono bg-gray-100 p-3 rounded">
-                                        g = 9,78 + 0,05 × sin²(φ)
-                                    </p>
-                                    <p className="mt-2 text-sm">
-                                        där φ är latituden i grader
+                                        du längre från jordens centrum, vilket också bidrar till ett lägre <em>g</em>-värde.
                                     </p>
                                 </div>
                                 <div className="bg-blue-50 p-4 rounded-lg">
                                     <h3 className="font-bold text-lg mb-2">💡 Intressant fakta</h3>
                                     <p>
-                                        Om du väger 70 kg i Stockholm (g ≈ 9,82 m/s²) skulle du väga cirka 250 gram mindre
-                                        vid ekvatorn (g ≈ 9,78 m/s²)!
+                                        Om du väger 70 kg i Stockholm (<em>g</em> ≈ 9,82 m/s²) skulle du väga cirka 250 gram mindre
+                                        vid ekvatorn (<em>g</em> ≈ 9,78 m/s²)!
                                     </p>
                                 </div>
                             </div>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnetiskt flöde - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Custom slider styles */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 4px;
+            height: 6px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        .accent-emerald-600::-webkit-slider-thumb {
+            background: #34d399;
+        }
+        .accent-purple-600::-webkit-slider-thumb {
+            background: #c084fc;
+        }
+        .accent-emerald-600::-moz-range-thumb {
+            background: #34d399;
+        }
+        .accent-purple-600::-moz-range-thumb {
+            background: #c084fc;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        const formatNum = (num, decimals = 2) => {
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // SliderControl Component
+        const SliderControl = ({ label, value, min, max, step, unit, onChange, colorClass, decimals = 2 }) => {
+          return (
+            <div className="p-4 rounded-xl glass-card">
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-sm font-bold text-slate-400 uppercase tracking-wide">{label}</label>
+                <div className="text-lg font-mono font-semibold text-cyan-300">
+                  {formatNum(value, decimals)} <span className="text-sm text-slate-500">{unit}</span>
+                </div>
+              </div>
+              <input
+                type="range"
+                min={min}
+                max={max}
+                step={step}
+                value={value}
+                onChange={(e) => onChange(parseFloat(e.target.value))}
+                className={`w-full rounded-lg appearance-none cursor-pointer accent-${colorClass}-600 transition-all`}
+              />
+              <div className="flex justify-between mt-1 text-xs text-slate-500 font-mono">
+                <span>{formatNum(min, decimals)} {unit}</span>
+                <span>{formatNum(max, decimals)} {unit}</span>
+              </div>
+            </div>
+          );
+        };
+
+        // 3D Visualization using Canvas
+        const FluxVisualization = ({ B, A }) => {
+            const canvasRef = useRef(null);
+
+            const draw = useCallback(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                const W = canvas.width;
+                const H = canvas.height;
+
+                ctx.clearRect(0, 0, W, H);
+
+                // Background
+                const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+                bgGrad.addColorStop(0, '#0a0a1a');
+                bgGrad.addColorStop(1, '#0d1526');
+                ctx.fillStyle = bgGrad;
+                ctx.fillRect(0, 0, W, H);
+
+                // Subtle grid
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.04)';
+                ctx.lineWidth = 1;
+                for (let x = 0; x < W; x += 25) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, H);
+                    ctx.stroke();
+                }
+                for (let y = 0; y < H; y += 25) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(W, y);
+                    ctx.stroke();
+                }
+
+                // 3D parallelogram (area) parameters
+                // Area scales the size of the parallelogram
+                const areaScale = Math.sqrt(A / 0.50); // normalized around 0.50 m²
+                const baseW = 240 * areaScale;
+                const baseH = 170 * areaScale;
+
+                // Perspective: skew to create 3D look
+                const cx = W / 2;
+                const cy = H / 2 + 40;
+                const skewX = 0.55;
+                const skewY = 0.50;
+
+                // Four corners of parallelogram in perspective
+                const corners = [
+                    { x: cx - baseW/2 - baseH*skewX/2, y: cy + baseH*skewY/2 },           // bottom-left
+                    { x: cx + baseW/2 - baseH*skewX/2, y: cy + baseH*skewY/2 },           // bottom-right
+                    { x: cx + baseW/2 + baseH*skewX/2, y: cy - baseH*skewY/2 },           // top-right
+                    { x: cx - baseW/2 + baseH*skewX/2, y: cy - baseH*skewY/2 },           // top-left
+                ];
+
+                // ── Field lines on a fixed world-space grid ──
+                // B controls density (spacing). A controls area size.
+                // Arrows are placed on a regular grid in "top-down" world
+                // coordinates, then projected into the perspective view.
+
+                const arrowColor = 'rgba(52, 211, 153, 0.85)';
+                const arrowColorFaint = 'rgba(52, 211, 153, 0.45)';
+                const arrowGlow = 'rgba(52, 211, 153, 0.3)';
+                const arrowAbove = 70;   // pixels above surface
+                const arrowBelow = 70;   // pixels below surface
+                const arrowHeadSize = 8;
+
+                // World-space grid spacing – only B changes this
+                const spacing = Math.max(18, 140 - B * 122);
+
+                // We work in a "world" top-down coordinate system (wx, wy)
+                // where the parallelogram is axis-aligned: a rectangle.
+                // Then project to screen with the same skew as the area.
+
+                // World-space area rectangle, centered at origin
+                const halfWW = baseW / 2;
+                const halfWH = baseH / 2;
+
+                // Fixed world-space extent that covers the full canvas
+                // (use max possible area size so grid is constant)
+                const maxAreaScale = Math.sqrt(1.0 / 0.50);
+                const fieldHalfW = 240 * maxAreaScale / 2 + 30;
+                const fieldHalfH = 170 * maxAreaScale / 2 + 30;
+
+                // Project world (wx, wy) → screen (sx, sy)
+                const toScreen = (wx, wy) => ({
+                    x: cx + wx + wy * skewX,
+                    y: cy - wy * skewY
+                });
+
+                // Build list of ALL arrow positions covering the full field
+                const arrows = [];
+                for (let wy = -fieldHalfH; wy <= fieldHalfH; wy += spacing) {
+                    for (let wx = -fieldHalfW; wx <= fieldHalfW; wx += spacing) {
+                        const scr = toScreen(wx, wy);
+                        // Skip if off-canvas
+                        if (scr.x < 10 || scr.x > W - 10) continue;
+                        const insideArea = wx >= -halfWW && wx <= halfWW && wy >= -halfWH && wy <= halfWH;
+                        arrows.push({ sx: scr.x, sy: scr.y, wy: wy, inside: insideArea });
+                    }
+                }
+
+                // Sort back-to-front (higher wy = further back = draw first)
+                arrows.sort((a, b) => b.wy - a.wy);
+
+                // ── PASS 1: Draw upper half of all arrows (above surface) ──
+                arrows.forEach(({ sx, sy, inside }) => {
+                    const topY = sy - arrowAbove;
+                    const color = inside ? arrowColor : arrowColorFaint;
+                    ctx.save();
+                    if (inside) { ctx.shadowColor = arrowGlow; ctx.shadowBlur = 6; }
+                    ctx.beginPath();
+                    ctx.moveTo(sx, topY);
+                    ctx.lineTo(sx, sy);
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = inside ? 2.5 : 1.5;
+                    ctx.stroke();
+                    ctx.restore();
+                });
+
+                // ── PASS 2: Draw the area surface ──
+                // Shadow
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(corners[0].x + 4, corners[0].y + 6);
+                ctx.lineTo(corners[1].x + 4, corners[1].y + 6);
+                ctx.lineTo(corners[2].x + 4, corners[2].y + 6);
+                ctx.lineTo(corners[3].x + 4, corners[3].y + 6);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.fill();
+                ctx.restore();
+
+                // Surface fill
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(corners[0].x, corners[0].y);
+                ctx.lineTo(corners[1].x, corners[1].y);
+                ctx.lineTo(corners[2].x, corners[2].y);
+                ctx.lineTo(corners[3].x, corners[3].y);
+                ctx.closePath();
+
+                const surfGrad = ctx.createLinearGradient(corners[3].x, corners[3].y, corners[0].x, corners[0].y);
+                surfGrad.addColorStop(0, 'rgba(251, 146, 60, 0.20)');
+                surfGrad.addColorStop(1, 'rgba(251, 146, 60, 0.10)');
+                ctx.fillStyle = surfGrad;
+                ctx.fill();
+
+                ctx.strokeStyle = 'rgba(251, 146, 60, 0.7)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                ctx.restore();
+
+                // "A" label
+                ctx.save();
+                ctx.font = 'italic 20px Poppins, sans-serif';
+                ctx.fillStyle = 'rgba(251, 146, 60, 0.9)';
+                ctx.textAlign = 'center';
+                const labelX = (corners[1].x + corners[2].x) / 2 + 12;
+                const labelY = (corners[1].y + corners[2].y) / 2 + 6;
+                ctx.fillText('A', labelX, labelY);
+                ctx.restore();
+
+                // ── PASS 3: Draw lower half of arrows (below surface) + arrowheads ──
+                arrows.forEach(({ sx, sy, inside }) => {
+                    const bottomY = sy + arrowBelow;
+                    const color = inside ? arrowColor : arrowColorFaint;
+                    ctx.save();
+                    if (inside) { ctx.shadowColor = arrowGlow; ctx.shadowBlur = 6; }
+
+                    // Shaft below surface
+                    ctx.beginPath();
+                    ctx.moveTo(sx, sy);
+                    ctx.lineTo(sx, bottomY);
+                    ctx.strokeStyle = color;
+                    ctx.lineWidth = inside ? 2.5 : 1.5;
+                    ctx.stroke();
+
+                    // Arrowhead
+                    ctx.beginPath();
+                    ctx.moveTo(sx, bottomY);
+                    ctx.lineTo(sx - arrowHeadSize, bottomY - arrowHeadSize * 1.5);
+                    ctx.lineTo(sx + arrowHeadSize, bottomY - arrowHeadSize * 1.5);
+                    ctx.closePath();
+                    ctx.fillStyle = color;
+                    ctx.fill();
+
+                    ctx.restore();
+                });
+
+                // ── "B" label ──
+                const topMostArrowY = arrows.length > 0
+                    ? Math.min(...arrows.map(a => a.sy)) - arrowAbove
+                    : cy - 100;
+                ctx.save();
+                ctx.font = 'italic bold 22px Poppins, sans-serif';
+                ctx.fillStyle = 'rgba(52, 211, 153, 0.9)';
+                ctx.textAlign = 'center';
+                const bLabelY = topMostArrowY - 25;
+                ctx.fillText('B', cx, bLabelY);
+
+                ctx.restore();
+
+            }, [B, A]);
+
+            useEffect(() => {
+                draw();
+            }, [draw]);
+
+            return (
+                <div className="glass-card rounded-2xl overflow-hidden p-4">
+                    <canvas
+                        ref={canvasRef}
+                        width={500}
+                        height={420}
+                        className="w-full rounded-xl"
+                        style={{ maxWidth: '500px', margin: '0 auto', display: 'block' }}
+                    />
+                </div>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            const [B, setB] = useState(0.50);
+            const [A, setA] = useState(0.30);
+
+            const flux = B * A;
+
+            return (
+                <div className="min-h-screen dark-container p-4 md:p-8 font-sans" style={{ fontFamily: 'Poppins, sans-serif' }}>
+
+                    <div className="max-w-6xl mx-auto">
+                        <div className="breadcrumb mb-6">
+                            <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik 2</a> / Magnetiskt flöde
+                        </div>
+                    </div>
+
+                    <header className="max-w-6xl mx-auto mb-8">
+                        <div>
+                            <h1 className="text-3xl md:text-4xl font-black text-slate-100 tracking-tight glow-text">
+                                Magnetiskt flöde
+                            </h1>
+
+                            {/* Formula display like densitet */}
+                            <div className="mt-3 flex items-end gap-3 text-cyan-300 flex-wrap" style={{fontFamily: 'Poppins, sans-serif'}}>
+                                <div style={{textAlign: 'center'}}>
+                                    <div className="text-xs text-cyan-400/60 font-semibold mb-1">Magnetiskt flöde</div>
+                                    <div className="text-2xl font-bold"><em>&Phi;</em></div>
+                                </div>
+                                <div className="text-xl text-slate-500 pb-1">=</div>
+                                <div style={{textAlign: 'center'}}>
+                                    <div className="text-xs text-cyan-400/60 font-semibold mb-1">Flödestäthet</div>
+                                    <div className="text-2xl font-bold"><em>B</em></div>
+                                </div>
+                                <div className="text-xl text-slate-500 pb-1">&middot;</div>
+                                <div style={{textAlign: 'center'}}>
+                                    <div className="text-xs text-cyan-400/60 font-semibold mb-1">Area</div>
+                                    <div className="text-2xl font-bold"><em>A</em></div>
+                                </div>
+                                <div className="text-xl text-slate-500 pb-1">=</div>
+                                <div style={{textAlign: 'center'}}>
+                                    <div className="text-lg font-mono pb-0.5">{formatNum(B, 2)} T</div>
+                                </div>
+                                <div className="text-xl text-slate-500 pb-1">&middot;</div>
+                                <div style={{textAlign: 'center'}}>
+                                    <div className="text-lg font-mono pb-0.5">{formatNum(A, 2)} m&sup2;</div>
+                                </div>
+                                <div className="text-xl text-slate-500 pb-1">=</div>
+                                <div className="text-2xl font-bold font-mono text-yellow-400" style={{textShadow: '0 0 15px rgba(250, 204, 21, 0.4)'}}>
+                                    {formatNum(flux, 2)} Wb
+                                </div>
+                            </div>
+
+                            <p className="text-slate-400 mt-2">Utforska sambandet mellan magnetisk flödestäthet, area och magnetiskt flöde.</p>
+                        </div>
+                    </header>
+
+                    <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                        <div className="lg:col-span-5 flex flex-col gap-6">
+                            <FluxVisualization B={B} A={A} />
+                        </div>
+
+                        <div className="lg:col-span-7 flex flex-col gap-6">
+                            <div className="grid gap-4">
+                                <SliderControl
+                                    label="Magnetisk flödestäthet (B)"
+                                    value={B}
+                                    min={0.01}
+                                    max={1.00}
+                                    step={0.01}
+                                    unit="T"
+                                    onChange={setB}
+                                    colorClass="emerald"
+                                    decimals={2}
+                                />
+
+                                <SliderControl
+                                    label="Area (A)"
+                                    value={A}
+                                    min={0.01}
+                                    max={1.00}
+                                    step={0.01}
+                                    unit="m&sup2;"
+                                    onChange={setA}
+                                    colorClass="purple"
+                                    decimals={2}
+                                />
+                            </div>
+
+                            {/* Result card */}
+                            <div className="p-5 rounded-xl glass-card">
+                                <div className="text-sm font-bold text-slate-400 uppercase tracking-wide mb-3">Resultat</div>
+                                <div className="flex items-baseline gap-2">
+                                    <span className="text-3xl font-bold font-mono text-yellow-400" style={{textShadow: '0 0 15px rgba(250, 204, 21, 0.3)'}}>
+                                        {formatNum(flux, 2)}
+                                    </span>
+                                    <span className="text-lg text-slate-400">Wb (weber)</span>
+                                </div>
+                                <div className="mt-2 text-sm text-slate-500">
+                                    <em>&Phi;</em> = {formatNum(B, 2)} T &middot; {formatNum(A, 2)} m&sup2; = {formatNum(flux, 2)} Wb
+                                </div>
+                            </div>
+
+                            {/* Explanation */}
+                            <div className="p-4 rounded-xl text-sm"
+                                 style={{ background: 'rgba(14, 165, 233, 0.08)', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+                                <strong className="text-cyan-400">Viktigt att skilja p&aring;:</strong>
+                                <ul className="text-slate-300 mt-2 space-y-2 list-none pl-0">
+                                    <li>
+                                        <strong className="text-emerald-400">Magnetisk flödestäthet (<em>B</em>)</strong> beskriver hur <em>tätt</em> fältlinjerna ligger &ndash; alltså styrkan p&aring; magnetfältet p&aring; en viss plats. M&auml;ts i tesla (T).
+                                    </li>
+                                    <li>
+                                        <strong className="text-yellow-400">Magnetiskt flöde (<em>&Phi;</em>)</strong> beskriver det <em>totala antalet</em> fältlinjer som passerar genom en yta. M&auml;ts i weber (Wb).
+                                    </li>
+                                </ul>
+                                <p className="text-slate-400 mt-3">
+                                    T&auml;nk dig att <em>B</em> anger hur t&auml;tt det &auml;r mellan fältlinjerna (som regndroppar per kvadratmeter), medan <em>&Phi;</em> anger det totala antalet linjer (droppar) som tr&auml;ffar ytan. En stor yta i ett svagt fält kan ge samma flöde som en liten yta i ett starkt fält.
+                                </p>
+                            </div>
+
+                            {/* Tips */}
+                            <div className="p-4 rounded-xl text-sm"
+                                 style={{ background: 'rgba(14, 165, 233, 0.08)', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
+                                <strong className="text-cyan-400">Tips:</strong>
+                                <span className="text-slate-300"> Dra i glidarna och se hur antalet fältlinjer (pilar) ändras med <em>B</em>, och hur ytans storlek ändras med <em>A</em>. Formeln g&auml;ller n&auml;r fältet st&aring;r vinkelrätt mot ytan.</span>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        // Render
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

@@ -46,6 +46,9 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-magnetfalt-spole.html',
     'fysik1-elektriska-falt.html',
     'fysik2-rorelse-app.html',
+    'fysik2-brytning-app.html',
+    'fysik2-pendel-app.html',
+    'fysik2-magnetiskt-flode.html',
     'om.html',
     'kontakt.html'
 ];

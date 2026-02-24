@@ -36,6 +36,24 @@
         .btn-glow:hover {
             box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
         }
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+        .step-indicator.active {
+            background: rgba(56, 189, 248, 0.3);
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+        .step-indicator.done {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: rgba(34, 197, 94, 0.5);
+            color: #4ade80;
+        }
+        .step-indicator.pending {
+            background: rgba(15, 23, 42, 0.5);
+            border-color: rgba(56, 189, 248, 0.15);
+            color: #475569;
+        }
     </style>
 </head>
 <body class="bg-slate-950">
@@ -60,126 +78,150 @@
     <script type="text/babel">
         const { useState, useRef, useEffect, useCallback } = React;
 
-        // === CONSTANTS ===
         const WALL_THICKNESS = 22;
-        const NUM_ELECTRONS = 28;
-        const ANIMATION_DURATION = 1200; // ms for electron migration
+        const NUM_ELECTRONS = 24;
+        const ELECTRON_ANIM_DURATION = 3500;
+        const ELECTRON_DELAY = 2000;
+        const FADE_DURATION = 800;
 
-        function FaradayCanvas({ fieldOn, viewMode }) {
+        // Convert perimeter distance to x,y coordinates on the cage wall
+        function perimeterToXY(dist, cageRect) {
+            const { x, y, w, h } = cageRect;
+            const t = WALL_THICKNESS;
+            const perimeter = 2 * (w + h);
+            const d = ((dist % perimeter) + perimeter) % perimeter;
+            if (d < w) return { x: x + d, y: y + t / 2 };
+            if (d < w + h) return { x: x + w - t / 2, y: y + (d - w) };
+            if (d < 2 * w + h) return { x: x + w - (d - w - h), y: y + h - t / 2 };
+            return { x: x + t / 2, y: y + h - (d - 2 * w - h) };
+        }
+
+        const STEP_DESCRIPTIONS = [
+            'Metallhöljet (Faradays bur) med sina laddningar. Buren är elektriskt neutral – lika många positiva som negativa laddningar.',
+            'Ett yttre elektriskt fält (högerriktat) läggs på. De fria elektronerna i metallen känner av fältet och vandrar långsamt åt vänster. De positiva laddningarna sitter fast i metallgittret.',
+            'Laddningsseparationen gör att vänster sida blir negativ och höger sida blir positiv.',
+            'Laddningsseparationen skapar ett inducerat fält (vänsterriktat, cyan) inuti buren som motverkar det yttre fältet.',
+            'Det inducerade fältet tar exakt ut det yttre fältet inuti buren. Resultat: noll fält inne i buren!'
+        ];
+
+        function FaradayCanvas({ step, viewMode }) {
             const canvasRef = useRef(null);
             const containerRef = useRef(null);
-            const animStartRef = useRef(null);
-            const fieldOnRef = useRef(fieldOn);
+            const stepRef = useRef(step);
             const viewModeRef = useRef(viewMode);
+            const animStartRef = useRef(null);
+            const fadeStartRef = useRef(null);
+            const prevStepRef = useRef(step);
+            const electronsRef = useRef([]);
+            const protonsRef = useRef([]);
 
             useEffect(() => {
-                fieldOnRef.current = fieldOn;
-                if (fieldOn) animStartRef.current = performance.now();
-                else animStartRef.current = null;
-            }, [fieldOn]);
+                const prevStep = prevStepRef.current;
+                stepRef.current = step;
+                prevStepRef.current = step;
+                // Trigger electron animation when entering step 2
+                if (step === 2 && prevStep < 2) {
+                    animStartRef.current = performance.now();
+                } else if (step < 2) {
+                    animStartRef.current = null;
+                }
+                // Trigger fade animation when entering step 3
+                if (step === 3 && prevStep < 3) {
+                    fadeStartRef.current = performance.now();
+                } else if (step < 3) {
+                    fadeStartRef.current = null;
+                }
+            }, [step]);
 
             useEffect(() => {
                 viewModeRef.current = viewMode;
             }, [viewMode]);
 
-            // Initialize electrons evenly distributed in the walls
-            const electronsRef = useRef([]);
-
-            const initElectrons = useCallback((cageRect) => {
-                const electrons = [];
+            const initParticles = useCallback((cageRect) => {
+                const particles = [];
                 const { x, y, w, h } = cageRect;
                 const t = WALL_THICKNESS;
-
-                // Distribute electrons along all four walls
                 const perimeter = 2 * (w + h);
-                for (let i = 0; i < NUM_ELECTRONS; i++) {
-                    const frac = i / NUM_ELECTRONS;
-                    const dist = frac * perimeter;
 
+                for (let i = 0; i < NUM_ELECTRONS; i++) {
+                    const frac = (i + 0.25) / NUM_ELECTRONS;
+                    const dist = frac * perimeter;
                     let ex, ey;
                     if (dist < w) {
-                        // Top wall
-                        ex = x + dist;
-                        ey = y + t / 2;
+                        ex = x + dist; ey = y + t / 2;
                     } else if (dist < w + h) {
-                        // Right wall
-                        ex = x + w - t / 2;
-                        ey = y + (dist - w);
+                        ex = x + w - t / 2; ey = y + (dist - w);
                     } else if (dist < 2 * w + h) {
-                        // Bottom wall
-                        ex = x + w - (dist - w - h);
-                        ey = y + h - t / 2;
+                        ex = x + w - (dist - w - h); ey = y + h - t / 2;
                     } else {
-                        // Left wall
-                        ex = x + t / 2;
-                        ey = y + h - (dist - 2 * w - h);
+                        ex = x + t / 2; ey = y + h - (dist - 2 * w - h);
                     }
-
-                    electrons.push({
-                        baseX: ex,
-                        baseY: ey,
-                        currentX: ex,
-                        currentY: ey,
-                        targetX: ex,
-                        targetY: ey,
-                    });
+                    particles.push({ baseDist: dist, baseX: ex, baseY: ey, currentX: ex, currentY: ey, targetDist: dist });
                 }
-                return electrons;
+                return particles;
             }, []);
 
-            const computeTargets = useCallback((electrons, cageRect, isFieldOn) => {
-                if (!isFieldOn) {
-                    electrons.forEach(e => {
-                        e.targetX = e.baseX;
-                        e.targetY = e.baseY;
-                    });
-                    return;
-                }
-
+            const initProtons = useCallback((cageRect) => {
+                const protons = [];
                 const { x, y, w, h } = cageRect;
                 const t = WALL_THICKNESS;
-                const leftWallCenter = x + t / 2;
-                const rightWallCenter = x + w - t / 2;
+                const perimeter = 2 * (w + h);
 
-                // When field is on, electrons rush to the LEFT wall
-                // We stack them vertically along the left wall
-                const leftCount = Math.ceil(NUM_ELECTRONS * 0.7);
-                const rightCount = NUM_ELECTRONS - leftCount; // remaining stay spread but sparse on right
+                for (let i = 0; i < NUM_ELECTRONS; i++) {
+                    const frac = (i + 0.75) / NUM_ELECTRONS;
+                    const dist = frac * perimeter;
+                    let px, py;
+                    if (dist < w) {
+                        px = x + dist; py = y + t / 2;
+                    } else if (dist < w + h) {
+                        px = x + w - t / 2; py = y + (dist - w);
+                    } else if (dist < 2 * w + h) {
+                        px = x + w - (dist - w - h); py = y + h - t / 2;
+                    } else {
+                        px = x + t / 2; py = y + h - (dist - 2 * w - h);
+                    }
+                    protons.push({ x: px, y: py });
+                }
+                return protons;
+            }, []);
 
-                // Sort electrons by distance to left wall for smooth animation
-                const sorted = electrons.map((e, i) => ({ ...e, idx: i }))
-                    .sort((a, b) => a.baseX - b.baseX);
+            const computeElectronTargets = useCallback((electrons, cageRect, currentStep) => {
+                if (currentStep < 2) {
+                    electrons.forEach(e => { e.targetDist = e.baseDist; });
+                    return;
+                }
+                const { x, y, w, h } = cageRect;
+                const t = WALL_THICKNESS;
+                const leftCount = NUM_ELECTRONS - 2;
 
+                const sorted = electrons.map((e, i) => ({ ...e, idx: i })).sort((a, b) => a.baseX - b.baseX);
                 for (let i = 0; i < sorted.length; i++) {
                     const idx = sorted[i].idx;
                     if (i < leftCount) {
-                        // Stack on left wall
+                        // Left wall: perimeter dist goes from 2w+h (bottom) to 2w+2h (top)
                         const spacing = (h - t * 2) / (leftCount + 1);
-                        electrons[idx].targetX = leftWallCenter;
-                        electrons[idx].targetY = y + t + spacing * (i + 1);
+                        const targetY = y + t + spacing * (i + 1);
+                        electrons[idx].targetDist = 2 * w + h + (y + h - targetY);
                     } else {
-                        // Sparse on top/bottom/right walls
+                        // Right wall: perimeter dist goes from w (top) to w+h (bottom)
                         const ri = i - leftCount;
+                        const rightCount = NUM_ELECTRONS - leftCount;
                         const spacing = (h - t * 2) / (rightCount + 1);
-                        electrons[idx].targetX = rightWallCenter;
-                        electrons[idx].targetY = y + t + spacing * (ri + 1);
+                        const targetY = y + t + spacing * (ri + 1);
+                        electrons[idx].targetDist = w + (targetY - y);
                     }
                 }
             }, []);
 
             const drawArrow = useCallback((ctx, fromX, fromY, toX, toY, color, lineWidth = 2) => {
                 const headLen = 10;
-                const dx = toX - fromX;
-                const dy = toY - fromY;
-                const angle = Math.atan2(dy, dx);
-
+                const angle = Math.atan2(toY - fromY, toX - fromX);
                 ctx.strokeStyle = color;
                 ctx.lineWidth = lineWidth;
                 ctx.beginPath();
                 ctx.moveTo(fromX, fromY);
                 ctx.lineTo(toX, toY);
                 ctx.stroke();
-
                 ctx.fillStyle = color;
                 ctx.beginPath();
                 ctx.moveTo(toX, toY);
@@ -189,6 +231,74 @@
                 ctx.fill();
             }, []);
 
+            const drawExternalField = useCallback((ctx, width, height, cageX, cageY, cageW, cageH) => {
+                const arrowColor = 'rgba(245, 158, 11, 0.7)';
+                const arrowSpacing = 50;
+                const rows = Math.floor(height / arrowSpacing);
+                const margin = 20;
+                const headLen = 10;
+
+                const drawArrowhead = (ax, ay) => {
+                    ctx.fillStyle = arrowColor;
+                    ctx.beginPath();
+                    ctx.moveTo(ax, ay);
+                    ctx.lineTo(ax - headLen * Math.cos(0.4), ay - headLen * Math.sin(0.4));
+                    ctx.lineTo(ax - headLen * Math.cos(0.4), ay + headLen * Math.sin(0.4));
+                    ctx.closePath();
+                    ctx.fill();
+                };
+
+                for (let r = 1; r <= rows; r++) {
+                    const ay = r * arrowSpacing;
+                    const insideCage = ay > cageY - 10 && ay < cageY + cageH + 10;
+
+                    // Build line segments for this row
+                    const segments = [];
+                    if (insideCage) {
+                        segments.push({ x1: margin, x2: cageX - 2 });
+                        segments.push({ x1: cageX + cageW + 2, x2: width - margin });
+                    } else {
+                        segments.push({ x1: margin, x2: width - margin });
+                    }
+
+                    // Draw all line segments
+                    for (const seg of segments) {
+                        const segLen = seg.x2 - seg.x1;
+                        if (segLen < 20) continue;
+                        ctx.strokeStyle = arrowColor;
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(seg.x1, ay);
+                        ctx.lineTo(seg.x2, ay);
+                        ctx.stroke();
+                    }
+
+                    // Place 3 arrowheads across the full row width (at 25%, 50%, 75%)
+                    // For cage rows, one lands in each segment (left, inside, right)
+                    const fullLen = width - 2 * margin;
+                    for (const frac of [0.08, 0.5, 0.92]) {
+                        const ax = margin + fullLen * frac;
+                        // Only draw if it falls inside a visible segment
+                        const inSegment = segments.some(s => ax >= s.x1 && ax <= s.x2);
+                        if (inSegment) drawArrowhead(ax, ay);
+                    }
+                }
+            }, []);
+
+            const drawInducedField = useCallback((ctx, cageX, cageY, cageW, cageH) => {
+                const t = WALL_THICKNESS;
+                const innerLeft = cageX + t + 10;
+                const innerRight = cageX + cageW - t - 10;
+                const innerTop = cageY + t + 10;
+                const innerBottom = cageY + cageH - t - 10;
+                const innerRows = 4;
+                const innerSpacing = (innerBottom - innerTop) / (innerRows + 1);
+                for (let r = 1; r <= innerRows; r++) {
+                    const iy = innerTop + r * innerSpacing;
+                    drawArrow(ctx, innerRight, iy, innerLeft, iy, 'rgba(56, 189, 248, 0.6)', 2);
+                }
+            }, [drawArrow]);
+
             useEffect(() => {
                 const canvas = canvasRef.current;
                 if (!canvas) return;
@@ -197,51 +307,61 @@
 
                 const render = (time) => {
                     const { width, height } = canvas;
-                    if (width === 0 || height === 0) {
-                        animId = requestAnimationFrame(render);
-                        return;
-                    }
+                    if (width === 0 || height === 0) { animId = requestAnimationFrame(render); return; }
 
-                    // Cage rectangle
                     const cageW = Math.min(440, width * 0.55);
                     const cageH = Math.min(280, height * 0.55);
                     const cageX = (width - cageW) / 2;
                     const cageY = (height - cageH) / 2;
                     const cageRect = { x: cageX, y: cageY, w: cageW, h: cageH };
                     const t = WALL_THICKNESS;
+                    const currentStep = stepRef.current;
+                    const mode = viewModeRef.current;
 
-                    // Init electrons if needed
                     if (electronsRef.current.length === 0) {
-                        electronsRef.current = initElectrons(cageRect);
+                        electronsRef.current = initParticles(cageRect);
+                        protonsRef.current = initProtons(cageRect);
                     }
 
                     const electrons = electronsRef.current;
-                    const isFieldOn = fieldOnRef.current;
-                    const mode = viewModeRef.current;
+                    const protons = protonsRef.current;
 
-                    // Compute targets
-                    computeTargets(electrons, cageRect, isFieldOn);
+                    computeElectronTargets(electrons, cageRect, currentStep);
 
-                    // Animate electron positions
-                    let progress = 1;
-                    if (animStartRef.current !== null) {
-                        progress = Math.min(1, (time - animStartRef.current) / ANIMATION_DURATION);
-                        progress = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-                    }
-
-                    electrons.forEach(e => {
-                        if (animStartRef.current !== null && progress < 1) {
-                            e.currentX = e.baseX + (e.targetX - e.baseX) * progress;
-                            e.currentY = e.baseY + (e.targetY - e.baseY) * progress;
+                    // Electron animation progress (with 2s delay)
+                    const perimeter = 2 * (cageW + cageH);
+                    let eProgress = 1;
+                    if (currentStep >= 2 && animStartRef.current !== null) {
+                        const elapsed = time - animStartRef.current - ELECTRON_DELAY;
+                        if (elapsed < 0) {
+                            eProgress = 0;
                         } else {
-                            e.currentX = e.targetX;
-                            e.currentY = e.targetY;
+                            eProgress = Math.min(1, elapsed / ELECTRON_ANIM_DURATION);
+                            eProgress = 1 - Math.pow(1 - eProgress, 3);
+                        }
+                    }
+                    electrons.forEach(e => {
+                        if (currentStep >= 2 && eProgress < 1) {
+                            // Interpolate along perimeter (shortest path)
+                            let diff = e.targetDist - e.baseDist;
+                            const half = perimeter / 2;
+                            if (diff > half) diff -= perimeter;
+                            if (diff < -half) diff += perimeter;
+                            const currentDist = e.baseDist + diff * eProgress;
+                            const pos = perimeterToXY(currentDist, cageRect);
+                            e.currentX = pos.x;
+                            e.currentY = pos.y;
+                        } else if (currentStep >= 2) {
+                            const pos = perimeterToXY(e.targetDist, cageRect);
+                            e.currentX = pos.x;
+                            e.currentY = pos.y;
+                        } else {
+                            e.currentX = e.baseX;
+                            e.currentY = e.baseY;
                         }
                     });
 
-                    // === DRAW ===
-
-                    // Background
+                    // === BACKGROUND ===
                     ctx.fillStyle = '#050510';
                     ctx.fillRect(0, 0, width, height);
                     const bgGrad = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.7);
@@ -250,189 +370,261 @@
                     ctx.fillStyle = bgGrad;
                     ctx.fillRect(0, 0, width, height);
 
-                    // === EXTERNAL FIELD ARROWS (always when field is on) ===
-                    if (isFieldOn) {
-                        const arrowColor = 'rgba(245, 158, 11, 0.7)'; // amber
-                        const arrowSpacing = 50;
-                        const rows = Math.floor(height / arrowSpacing);
+                    // === STEP 2+: EXTERNAL FIELD ===
+                    if (currentStep >= 2) {
+                        const showFieldInside = currentStep === 2 || (currentStep === 5 && mode !== 'resultant') || (currentStep === 6 && mode === 'separate');
+                        // Steps 2: field everywhere including inside
+                        // Steps 3-4: field outside + inside (electrons moving but field still present)
+                        // Step 5 separate: both fields inside
+                        // Step 5 default: external field inside + induced
+                        // Step 6 resultant: no field inside
+                        // Step 6 separate: both fields inside
+                        let fieldInside = false;
+                        if (currentStep === 2) fieldInside = true;
+                        else if (currentStep === 3 || currentStep === 4) fieldInside = true;
+                        else if (currentStep === 5) fieldInside = true; // always show external in step 5 (along with induced)
+                        else if (currentStep === 6 && mode === 'separate') fieldInside = true;
 
-                        for (let r = 1; r <= rows; r++) {
-                            const ay = r * arrowSpacing;
-
-                            // Left side arrows (outside cage)
-                            const leftStart = 30;
-                            const leftEnd = cageX - 15;
-                            if (leftEnd - leftStart > 40) {
-                                const mid = (leftStart + leftEnd) / 2;
-                                drawArrow(ctx, leftStart, ay, mid - 5, ay, arrowColor, 2);
-                                drawArrow(ctx, mid + 5, ay, leftEnd, ay, arrowColor, 2);
-                            }
-
-                            // Right side arrows (outside cage)
-                            const rightStart = cageX + cageW + 15;
-                            const rightEnd = width - 30;
-                            if (rightEnd - rightStart > 40) {
-                                const mid = (rightStart + rightEnd) / 2;
-                                drawArrow(ctx, rightStart, ay, mid - 5, ay, arrowColor, 2);
-                                drawArrow(ctx, mid + 5, ay, rightEnd, ay, arrowColor, 2);
-                            }
-
-                            // Top/bottom arrows outside cage vertically
-                            if (ay < cageY - 10 || ay > cageY + cageH + 10) {
-                                // Full width arrows
-                                const segments = 4;
-                                const segLen = (width - 60) / segments;
-                                for (let s = 0; s < segments; s++) {
-                                    const sx = 30 + s * segLen;
-                                    const ex = sx + segLen - 10;
-                                    drawArrow(ctx, sx, ay, ex, ay, arrowColor, 2);
-                                }
-                            }
-                        }
-
-                        // Arrows INSIDE the cage
-                        const innerLeft = cageX + t + 10;
-                        const innerRight = cageX + cageW - t - 10;
-                        const innerTop = cageY + t + 10;
-                        const innerBottom = cageY + cageH - t - 10;
-                        const innerRows = 4;
-                        const innerSpacing = (innerBottom - innerTop) / (innerRows + 1);
-
-                        if (mode === 'separate') {
-                            // External field inside cage (rightward, amber)
-                            for (let r = 1; r <= innerRows; r++) {
-                                const iy = innerTop + r * innerSpacing;
-                                drawArrow(ctx, innerLeft, iy - 8, innerRight, iy - 8, 'rgba(245, 158, 11, 0.6)', 2);
-                            }
-
-                            // Induced field inside cage (leftward, cyan) - from charge separation
-                            const inducedColor = 'rgba(56, 189, 248, 0.6)';
-                            for (let r = 1; r <= innerRows; r++) {
-                                const iy = innerTop + r * innerSpacing;
-                                drawArrow(ctx, innerRight, iy + 8, innerLeft, iy + 8, inducedColor, 2);
-                            }
-                        }
-                        // In 'resultant' mode: no arrows inside the cage (they cancel!)
+                        drawExternalField(ctx, width, height, cageX, cageY, cageW, cageH);
                     }
 
-                    // === CAGE (metal walls) ===
-                    // Outer rect
+                    // === CAGE ===
                     const wallGrad = ctx.createLinearGradient(cageX, cageY, cageX + cageW, cageY + cageH);
                     wallGrad.addColorStop(0, '#475569');
                     wallGrad.addColorStop(0.5, '#64748b');
                     wallGrad.addColorStop(1, '#475569');
-
                     ctx.fillStyle = wallGrad;
                     ctx.beginPath();
-                    if (ctx.roundRect) {
-                        ctx.roundRect(cageX, cageY, cageW, cageH, 6);
-                    } else {
-                        ctx.rect(cageX, cageY, cageW, cageH);
-                    }
+                    if (ctx.roundRect) ctx.roundRect(cageX, cageY, cageW, cageH, 6);
+                    else ctx.rect(cageX, cageY, cageW, cageH);
                     ctx.fill();
 
-                    // Inner rect (hollow inside)
+                    // Inner hollow
                     ctx.fillStyle = '#0a0a1a';
                     ctx.beginPath();
-                    if (ctx.roundRect) {
-                        ctx.roundRect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t, 3);
-                    } else {
-                        ctx.rect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t);
-                    }
+                    if (ctx.roundRect) ctx.roundRect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t, 3);
+                    else ctx.rect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t);
                     ctx.fill();
 
-                    // Cage border glow
+                    // Borders
                     ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
                     ctx.lineWidth = 2;
                     ctx.beginPath();
-                    if (ctx.roundRect) {
-                        ctx.roundRect(cageX, cageY, cageW, cageH, 6);
-                    } else {
-                        ctx.rect(cageX, cageY, cageW, cageH);
-                    }
+                    if (ctx.roundRect) ctx.roundRect(cageX, cageY, cageW, cageH, 6);
+                    else ctx.rect(cageX, cageY, cageW, cageH);
                     ctx.stroke();
-
                     ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
-                    if (ctx.roundRect) {
-                        ctx.roundRect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t, 3);
-                    } else {
-                        ctx.rect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t);
-                    }
+                    if (ctx.roundRect) ctx.roundRect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t, 3);
+                    else ctx.rect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t);
                     ctx.stroke();
 
-                    // === CHARGE SIGNS when field is on ===
-                    if (isFieldOn && progress > 0.3) {
-                        const signAlpha = Math.min(1, (progress - 0.3) / 0.4);
+                    // === FIELD INSIDE CAGE (drawn after cage, same y-positions as external field) ===
+                    if (currentStep >= 2) {
+                        let showExtInside = false;
+                        let showInduced = false;
 
-                        // Plus signs on right wall
-                        ctx.shadowBlur = 12;
-                        ctx.shadowColor = `rgba(239, 68, 68, ${signAlpha * 0.8})`;
-                        ctx.fillStyle = `rgba(239, 68, 68, ${signAlpha})`;
-                        ctx.font = 'bold 20px Poppins, sans-serif';
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        const numSigns = 6;
-                        const signSpacing = (cageH - t * 2) / (numSigns + 1);
-                        for (let i = 1; i <= numSigns; i++) {
-                            ctx.fillText('+', cageX + cageW - t / 2, cageY + t + i * signSpacing);
+                        if (currentStep === 2 || currentStep === 3) {
+                            showExtInside = true;
+                        } else if (currentStep === 4) {
+                            showExtInside = true;
+                            showInduced = true;
+                        } else if (currentStep === 5) {
+                            if (mode === 'separate') {
+                                showExtInside = true;
+                                showInduced = true;
+                            }
+                            // resultant: nothing inside
                         }
 
-                        // Minus signs on left wall
-                        ctx.shadowColor = `rgba(56, 189, 248, ${signAlpha * 0.8})`;
-                        ctx.fillStyle = `rgba(56, 189, 248, ${signAlpha})`;
-                        for (let i = 1; i <= numSigns; i++) {
-                            ctx.fillText('\u2212', cageX + t / 2, cageY + t + i * signSpacing);
+                        const innerLeft = cageX + t + 10;
+                        const innerRight = cageX + cageW - t - 10;
+                        const innerTop = cageY + t + 10;
+                        const innerBottom = cageY + cageH - t - 10;
+                        // Use same spacing as external field (arrowSpacing = 50)
+                        const arrowSpacing = 50;
+                        const fieldRows = Math.floor(height / arrowSpacing);
+
+                        const headLen = 10;
+
+                        if (showExtInside) {
+                            const extColor = 'rgba(245, 158, 11, 0.7)';
+                            for (let r = 1; r <= fieldRows; r++) {
+                                const ay = r * arrowSpacing;
+                                if (ay > innerTop && ay < innerBottom) {
+                                    const ly = ay;
+                                    ctx.strokeStyle = extColor;
+                                    ctx.lineWidth = 2;
+                                    ctx.beginPath();
+                                    ctx.moveTo(innerLeft, ly);
+                                    ctx.lineTo(innerRight, ly);
+                                    ctx.stroke();
+                                    // Arrowhead in the middle
+                                    const ax = (innerLeft + innerRight) / 2;
+                                    ctx.fillStyle = extColor;
+                                    ctx.beginPath();
+                                    ctx.moveTo(ax, ly);
+                                    ctx.lineTo(ax - headLen * Math.cos(0.4), ly - headLen * Math.sin(0.4));
+                                    ctx.lineTo(ax - headLen * Math.cos(0.4), ly + headLen * Math.sin(0.4));
+                                    ctx.closePath();
+                                    ctx.fill();
+                                }
+                            }
                         }
-                        ctx.shadowBlur = 0;
+
+                        if (showInduced) {
+                            const indColor = 'rgba(56, 189, 248, 0.6)';
+                            for (let r = 1; r <= fieldRows; r++) {
+                                const ay = r * arrowSpacing;
+                                if (ay > innerTop && ay < innerBottom) {
+                                    const ly = ay + 8;
+                                    ctx.strokeStyle = indColor;
+                                    ctx.lineWidth = 2;
+                                    ctx.beginPath();
+                                    ctx.moveTo(innerRight, ly);
+                                    ctx.lineTo(innerLeft, ly);
+                                    ctx.stroke();
+                                    // Arrowhead pointing left in the middle
+                                    const ax = (innerLeft + innerRight) / 2;
+                                    ctx.fillStyle = indColor;
+                                    ctx.beginPath();
+                                    ctx.moveTo(ax, ly);
+                                    ctx.lineTo(ax + headLen * Math.cos(0.4), ly - headLen * Math.sin(0.4));
+                                    ctx.lineTo(ax + headLen * Math.cos(0.4), ly + headLen * Math.sin(0.4));
+                                    ctx.closePath();
+                                    ctx.fill();
+                                }
+                            }
+                        }
+
+                        // "Resulterande = 0" text
+                        if (currentStep === 5 && mode === 'resultant') {
+                            ctx.fillStyle = 'rgba(34, 197, 94, 0.8)';
+                            ctx.font = '14px Poppins, sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('Resulterande fält = 0', cageX + cageW / 2, cageY + cageH / 2);
+                        }
                     }
 
-                    // === ELECTRONS ===
-                    electrons.forEach(e => {
-                        // Glow
-                        const glow = ctx.createRadialGradient(e.currentX, e.currentY, 0, e.currentX, e.currentY, 12);
-                        glow.addColorStop(0, 'rgba(56, 189, 248, 0.5)');
-                        glow.addColorStop(0.5, 'rgba(14, 165, 233, 0.15)');
-                        glow.addColorStop(1, 'rgba(2, 132, 199, 0)');
-                        ctx.beginPath();
-                        ctx.arc(e.currentX, e.currentY, 12, 0, Math.PI * 2);
-                        ctx.fillStyle = glow;
-                        ctx.fill();
+                    // === FADE PROGRESS (step 3+: small charges fade out, big signs fade in) ===
+                    let fadeProgress = 0;
+                    if (currentStep >= 3) {
+                        if (fadeStartRef.current !== null) {
+                            fadeProgress = Math.min(1, (time - fadeStartRef.current) / FADE_DURATION);
+                            fadeProgress = 1 - Math.pow(1 - fadeProgress, 3); // ease-out
+                        } else {
+                            fadeProgress = 1;
+                        }
+                    }
+                    const smallChargeAlpha = 1 - fadeProgress;
 
-                        // Electron dot
-                        ctx.shadowBlur = 10;
-                        ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
-                        ctx.fillStyle = '#38bdf8';
-                        ctx.font = 'bold 14px Arial';
+                    // === CHARGE SIGNS (step 3+): one big − left, one big + right ===
+                    if (currentStep >= 3 && fadeProgress > 0) {
+                        ctx.save();
+                        ctx.globalAlpha = fadeProgress;
+
+                        // Big minus on left wall (with outline for readability)
+                        ctx.font = 'bold 32px Poppins, sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'middle';
-                        ctx.fillText('\u2212', e.currentX, e.currentY);
-                    });
-                    ctx.shadowBlur = 0;
+                        const minusX = cageX + t / 2;
+                        const minusY = cageY + cageH / 2;
+                        ctx.shadowColor = 'rgba(56, 189, 248, 1)';
+                        ctx.shadowBlur = 30;
+                        ctx.strokeStyle = '#0a0a1a';
+                        ctx.lineWidth = 5;
+                        ctx.lineJoin = 'round';
+                        ctx.strokeText('−', minusX, minusY);
+                        ctx.fillStyle = '#7dd3fc';
+                        ctx.fillText('−', minusX, minusY);
 
-                    // === LABELS ===
+                        // Big plus on right wall (with outline for readability)
+                        const plusX = cageX + cageW - t / 2;
+                        const plusY = cageY + cageH / 2;
+                        ctx.shadowColor = 'rgba(239, 68, 68, 1)';
+                        ctx.shadowBlur = 30;
+                        ctx.strokeStyle = '#0a0a1a';
+                        ctx.lineWidth = 5;
+                        ctx.lineJoin = 'round';
+                        ctx.strokeText('+', plusX, plusY);
+                        ctx.fillStyle = '#f87171';
+                        ctx.fillText('+', plusX, plusY);
+
+                        ctx.restore();
+                    }
+
+                    // === PROTONS (fade out at step 4+) ===
+                    if (smallChargeAlpha > 0) {
+                        ctx.save();
+                        ctx.globalAlpha = smallChargeAlpha;
+                        protons.forEach(p => {
+                            ctx.shadowBlur = 8;
+                            ctx.shadowColor = 'rgba(239, 68, 68, 0.7)';
+                            ctx.fillStyle = '#ef4444';
+                            ctx.font = 'bold 14px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('+', p.x, p.y);
+                        });
+                        ctx.restore();
+                    }
+
+                    // === ELECTRONS (fade out at step 4+) ===
+                    if (smallChargeAlpha > 0) {
+                        ctx.save();
+                        ctx.globalAlpha = smallChargeAlpha;
+                        electrons.forEach(e => {
+                            const glow = ctx.createRadialGradient(e.currentX, e.currentY, 0, e.currentX, e.currentY, 12);
+                            glow.addColorStop(0, 'rgba(56, 189, 248, 0.5)');
+                            glow.addColorStop(0.5, 'rgba(14, 165, 233, 0.15)');
+                            glow.addColorStop(1, 'rgba(2, 132, 199, 0)');
+                            ctx.beginPath();
+                            ctx.arc(e.currentX, e.currentY, 12, 0, Math.PI * 2);
+                            ctx.fillStyle = glow;
+                            ctx.fill();
+
+                            ctx.shadowBlur = 10;
+                            ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
+                            ctx.fillStyle = '#38bdf8';
+                            ctx.font = 'bold 14px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText('−', e.currentX, e.currentY);
+                        });
+                        ctx.restore();
+                    }
+
+                    // === LABEL ===
                     ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
                     ctx.font = '13px Poppins, sans-serif';
                     ctx.textAlign = 'center';
                     ctx.fillText('Metallhölje', cageX + cageW / 2, cageY - 12);
 
-                    if (isFieldOn) {
-                        // External field label
-                        ctx.fillStyle = 'rgba(245, 158, 11, 0.8)';
+                    if (currentStep >= 2 && currentStep < 5) {
                         ctx.font = 'italic 13px Poppins, sans-serif';
                         ctx.textAlign = 'left';
-                        ctx.fillText('Yttre E-fält \u2192', 30, height - 25);
-
-                        if (mode === 'separate') {
-                            ctx.fillStyle = 'rgba(56, 189, 248, 0.8)';
-                            ctx.textAlign = 'right';
-                            ctx.fillText('\u2190 Inducerat fält', width - 30, height - 25);
-                        } else {
-                            ctx.fillStyle = 'rgba(34, 197, 94, 0.8)';
-                            ctx.textAlign = 'center';
-                            ctx.fillText('Resulterande fält inuti = 0', cageX + cageW / 2, cageY + cageH / 2 + 5);
-                        }
+                        const extLabel = 'Yttre elektriskt fält →';
+                        const extLabelX = cageX + t + 14;
+                        const extLabelY = cageY + t + 18;
+                        const extLabelW = ctx.measureText(extLabel).width;
+                        ctx.fillStyle = 'rgba(10, 10, 26, 0.9)';
+                        ctx.fillRect(extLabelX - 6, extLabelY - 11, extLabelW + 12, 22);
+                        ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
+                        ctx.fillText(extLabel, extLabelX, extLabelY);
+                    }
+                    if (currentStep === 4) {
+                        ctx.font = 'italic 13px Poppins, sans-serif';
+                        ctx.textAlign = 'right';
+                        const indLabel = '← Inducerat fält';
+                        const indLabelX = cageX + cageW - t - 14;
+                        const indLabelY = cageY + cageH - t - 14;
+                        const indLabelW = ctx.measureText(indLabel).width;
+                        ctx.fillStyle = 'rgba(10, 10, 26, 0.9)';
+                        ctx.fillRect(indLabelX - indLabelW - 6, indLabelY - 11, indLabelW + 12, 22);
+                        ctx.fillStyle = 'rgba(56, 189, 248, 0.9)';
+                        ctx.fillText(indLabel, indLabelX, indLabelY);
                     }
 
                     animId = requestAnimationFrame(render);
@@ -440,7 +632,7 @@
 
                 animId = requestAnimationFrame(render);
                 return () => cancelAnimationFrame(animId);
-            }, [initElectrons, computeTargets, drawArrow]);
+            }, [initParticles, initProtons, computeElectronTargets, drawArrow, drawExternalField, drawInducedField]);
 
             useEffect(() => {
                 const handleResize = () => {
@@ -448,43 +640,51 @@
                         const rect = containerRef.current.getBoundingClientRect();
                         canvasRef.current.width = rect.width;
                         canvasRef.current.height = rect.height;
-                        // Reinit electrons on resize
                         const cageW = Math.min(440, rect.width * 0.55);
                         const cageH = Math.min(280, rect.height * 0.55);
                         const cageX = (rect.width - cageW) / 2;
                         const cageY = (rect.height - cageH) / 2;
-                        electronsRef.current = initElectrons({ x: cageX, y: cageY, w: cageW, h: cageH });
+                        const cageRect = { x: cageX, y: cageY, w: cageW, h: cageH };
+                        electronsRef.current = initParticles(cageRect);
+                        protonsRef.current = initProtons(cageRect);
                     }
                 };
                 window.addEventListener('resize', handleResize);
                 setTimeout(handleResize, 0);
                 return () => window.removeEventListener('resize', handleResize);
-            }, [initElectrons]);
+            }, [initParticles, initProtons]);
 
             return (
                 <div ref={containerRef} className="absolute inset-0">
-                    <canvas
-                        ref={canvasRef}
-                        className="block"
-                        style={{ width: '100%', height: '100%' }}
-                    />
+                    <canvas ref={canvasRef} className="block" style={{ width: '100%', height: '100%' }} />
                 </div>
             );
         }
 
         function App() {
-            const [fieldOn, setFieldOn] = useState(false);
-            const [viewMode, setViewMode] = useState('separate');
-            const [resetKey, setResetKey] = useState(0);
+            const [step, setStep] = useState(1);
+            const [viewMode, setViewMode] = useState('resultant');
 
-            const handleToggleField = () => {
-                if (fieldOn) {
-                    setFieldOn(false);
-                    setViewMode('separate');
-                    setResetKey(k => k + 1);
-                } else {
-                    setFieldOn(true);
+            const maxStep = 5;
+
+            const handleNext = () => {
+                if (step < maxStep) {
+                    const nextStep = step + 1;
+                    setStep(nextStep);
+                    if (nextStep === 5) setViewMode('resultant');
                 }
+            };
+
+            const handlePrev = () => {
+                if (step > 1) {
+                    setStep(step - 1);
+                    if (step - 1 < 5) setViewMode('resultant');
+                }
+            };
+
+            const handleReset = () => {
+                setStep(1);
+                setViewMode('resultant');
             };
 
             return (
@@ -502,46 +702,81 @@
                                 Faradays bur
                             </h1>
                             <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                                Ett metallhölje skärmar av elektriska fält. När ett yttre fält läggs på
-                                omfördelas elektronerna i metallen och skapar ett motfält som exakt
-                                upphäver fältet inuti buren.
+                                Stega igenom hur ett metallhölje skärmar av elektriska fält.
                             </p>
                         </header>
 
+                        {/* Step indicators */}
+                        <div className="flex justify-center gap-2 mb-4">
+                            {Array.from({ length: maxStep }, (_, i) => {
+                                const s = i + 1;
+                                let cls = 'pending';
+                                if (s === step) cls = 'active';
+                                else if (s < step) cls = 'done';
+                                return (
+                                    <div key={s} className={`step-indicator w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold`}
+                                         style={{
+                                             background: cls === 'active' ? 'rgba(56, 189, 248, 0.3)' : cls === 'done' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(15, 23, 42, 0.5)',
+                                             borderColor: cls === 'active' ? '#38bdf8' : cls === 'done' ? 'rgba(34, 197, 94, 0.5)' : 'rgba(56, 189, 248, 0.15)',
+                                             color: cls === 'active' ? '#38bdf8' : cls === 'done' ? '#4ade80' : '#475569'
+                                         }}>
+                                        {s}
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* Step description */}
+                        <div className="glass-card rounded-xl p-4 mb-4 text-center">
+                            <p className="text-slate-300 text-sm">
+                                <span className="text-cyan-400 font-semibold">Steg {step}:</span>{' '}
+                                {STEP_DESCRIPTIONS[step - 1]}
+                            </p>
+                        </div>
+
+                        {/* Canvas */}
                         <div className="glass-card rounded-2xl p-4 mb-6">
                             <div className="relative w-full" style={{ minHeight: '480px', maxHeight: '560px' }}>
-                                <FaradayCanvas key={resetKey} fieldOn={fieldOn} viewMode={viewMode} />
+                                <FaradayCanvas step={step} viewMode={viewMode} />
                             </div>
                         </div>
 
                         {/* Controls */}
                         <div className="glass-card rounded-2xl p-6 mb-6">
-                            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                                <button
-                                    onClick={handleToggleField}
-                                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${
-                                        fieldOn
-                                            ? 'bg-amber-500/20 text-amber-400 border-2 border-amber-500/50 btn-glow'
-                                            : 'bg-cyan-500/20 text-cyan-400 border-2 border-cyan-500/50 btn-glow'
-                                    }`}
-                                    style={{ minWidth: '220px' }}
-                                >
-                                    {fieldOn ? 'Stäng av fältet' : 'Lägg på elektriskt fält'}
-                                </button>
+                            <div className="flex flex-col items-center gap-4">
+                                <div className="flex items-center gap-4">
+                                    <button
+                                        onClick={handleReset}
+                                        className="px-5 py-2.5 rounded-xl font-semibold text-slate-400 border-2 border-slate-600 hover:bg-slate-700/50 transition-all duration-200 text-sm"
+                                    >
+                                        Börja om
+                                    </button>
+                                    <button
+                                        onClick={handlePrev}
+                                        disabled={step <= 1}
+                                        className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 text-sm border-2 ${
+                                            step <= 1
+                                                ? 'text-slate-600 border-slate-700 cursor-not-allowed'
+                                                : 'text-slate-300 border-slate-500 hover:bg-slate-700/50'
+                                        }`}
+                                    >
+                                        ← Föregående steg
+                                    </button>
+                                    <button
+                                        onClick={handleNext}
+                                        disabled={step >= maxStep}
+                                        className={`px-6 py-2.5 rounded-xl font-semibold transition-all duration-200 text-sm border-2 ${
+                                            step >= maxStep
+                                                ? 'text-slate-600 border-slate-700 cursor-not-allowed'
+                                                : 'bg-cyan-500/20 text-cyan-400 border-cyan-500/50 btn-glow'
+                                        }`}
+                                    >
+                                        Nästa steg →
+                                    </button>
+                                </div>
 
-                                {fieldOn && (
-                                    <div className="flex gap-4">
-                                        <label className="flex items-center gap-2 cursor-pointer">
-                                            <input
-                                                type="radio"
-                                                name="viewMode"
-                                                value="separate"
-                                                checked={viewMode === 'separate'}
-                                                onChange={() => setViewMode('separate')}
-                                                className="accent-cyan-500"
-                                            />
-                                            <span className="text-slate-300 text-sm font-medium">Visa separata fält</span>
-                                        </label>
+                                {step === 5 && (
+                                    <div className="flex gap-4 mt-2">
                                         <label className="flex items-center gap-2 cursor-pointer">
                                             <input
                                                 type="radio"
@@ -553,6 +788,17 @@
                                             />
                                             <span className="text-slate-300 text-sm font-medium">Visa resulterande fält</span>
                                         </label>
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="viewMode"
+                                                value="separate"
+                                                checked={viewMode === 'separate'}
+                                                onChange={() => setViewMode('separate')}
+                                                className="accent-cyan-500"
+                                            />
+                                            <span className="text-slate-300 text-sm font-medium">Visa separata fält</span>
+                                        </label>
                                     </div>
                                 )}
                             </div>
@@ -563,7 +809,7 @@
                             <div className="glass-card-light p-4 rounded-xl">
                                 <div className="flex items-start gap-3">
                                     <div className="p-2 bg-amber-500/20 rounded-lg">
-                                        <span className="text-amber-400 text-xl font-bold">\u2192</span>
+                                        <span className="text-amber-400 text-xl font-bold">→</span>
                                     </div>
                                     <div>
                                         <h3 className="text-slate-200 font-semibold mb-1">Yttre elektriskt fält</h3>
@@ -577,7 +823,7 @@
                             <div className="glass-card-light p-4 rounded-xl">
                                 <div className="flex items-start gap-3">
                                     <div className="p-2 bg-cyan-500/20 rounded-lg">
-                                        <span className="text-cyan-400 text-xl font-bold">\u2190</span>
+                                        <span className="text-cyan-400 text-xl font-bold">←</span>
                                     </div>
                                     <div>
                                         <h3 className="text-slate-200 font-semibold mb-1">Inducerat motfält</h3>

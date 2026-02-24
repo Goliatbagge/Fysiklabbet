@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhetskollen - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .option-btn {
+            background: rgba(15, 23, 42, 0.9);
+            border: 2px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .option-btn:hover:not(.answered) {
+            border-color: rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            transform: translateY(-2px);
+        }
+        .option-btn.correct {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.15);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+        .option-btn.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        }
+        .mode-tab {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .mode-tab.active {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+        .mode-tab:not(.active) {
+            background: rgba(15, 23, 42, 0.5);
+            border-color: rgba(56, 189, 248, 0.15);
+            color: #94a3b8;
+        }
+        .mode-tab:hover:not(.active) {
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #e2e8f0;
+        }
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .progress-dot.pending { background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.3); }
+        .progress-dot.current { background: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
+        .progress-dot.correct { background: #22c55e; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4); }
+        .progress-dot.wrong { background: #ef4444; box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+        @keyframes confetti-fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes celebrate-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes bonus-pop {
+            0% { opacity: 0; transform: scale(0.8) translateY(10px); }
+            50% { transform: scale(1.03) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .bonus-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 900;
+            animation: bonus-pop 0.4s ease-out;
+        }
+        .bonus-banner {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid rgba(245, 158, 11, 0.6);
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.3), 0 0 80px rgba(245, 158, 11, 0.1);
+            max-width: 420px;
+            width: 90%;
+        }
+        @keyframes slide-in {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .slide-in {
+            animation: slide-in 0.4s ease-out;
+        }
+        .celebrate {
+            animation: celebrate-pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: 100px; padding-bottom: 3rem;">
+        <nav style="margin-bottom: 1rem; font-size: 0.9rem;">
+            <a href="index.html" style="color: #94a3b8; text-decoration: none;">Hem</a>
+            <span style="color: #475569; margin: 0 0.5rem;">/</span>
+            <a href="fysik1.html" style="color: #94a3b8; text-decoration: none;">Fysik 1</a>
+            <span style="color: #475569; margin: 0 0.5rem;">/</span>
+            <span style="color: #38bdf8;">Enhetskollen</span>
+        </nav>
+        <div id="root"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel">
+        const { useState, useCallback, useMemo, useEffect } = React;
+
+        // === DATA ===
+
+        const unitQuestions = [
+            {
+                quantity: 'Tid',
+                correct: 's',
+                options: ['s', 'min', 'h', 'dygn'],
+                hint: 'Sekund (s) är SI-enheten. Minut, timme och dygn är vanliga men inte SI.'
+            },
+            {
+                quantity: 'Ström',
+                correct: 'A',
+                options: ['A', 'C', 'V', 'mAh'],
+                hint: 'Ampere (A) är SI-enheten för ström. Coulomb (C) är laddning, volt (V) är spänning.'
+            },
+            {
+                quantity: 'Kraft',
+                correct: 'N',
+                options: ['N', 'kg', 'Pa', 'J'],
+                hint: 'Newton (N) är SI-enheten. Kilogram (kg) är massa, pascal (Pa) är tryck, joule (J) är energi.'
+            },
+            {
+                quantity: 'Energi',
+                correct: 'J',
+                options: ['J', 'W', 'eV', 'kWh'],
+                hint: 'Joule (J) är SI-enheten. Watt (W) är effekt. Elektronvolt (eV) och kilowattimme (kWh) är energi men inte SI.'
+            },
+            {
+                quantity: 'Effekt',
+                correct: 'W',
+                options: ['W', 'J', 'kWh', 'V'],
+                hint: 'Watt (W) är SI-enheten. Joule (J) och kWh är energi. Volt (V) är spänning.'
+            },
+            {
+                quantity: 'Laddning',
+                correct: 'C',
+                options: ['C', 'A', 'Ah', 'e'],
+                hint: 'Coulomb (C) är SI-enheten. Ampere (A) är ström. Amperetimme (Ah) är laddning men inte SI.'
+            },
+            {
+                quantity: 'Spänning',
+                correct: 'V',
+                options: ['V', 'A', 'W', '\u03A9'],
+                hint: 'Volt (V) är SI-enheten. Ampere (A) är ström, watt (W) är effekt, ohm (\u03A9) är resistans.'
+            },
+            {
+                quantity: 'Elektrisk fältstyrka',
+                correct: 'N/C',
+                options: ['N/C', 'V', 'N', 'C/m\u00B2'],
+                hint: 'Newton per coulomb (N/C) är SI-enheten.',
+                bonusInfo: 'Även V/m är en SI-enhet för elektrisk fältstyrka!'
+            },
+            {
+                quantity: 'Resistans',
+                correct: '\u03A9',
+                options: ['\u03A9', 'S', 'V', 'A'],
+                hint: 'Ohm (\u03A9) är SI-enheten. Siemens (S) är konduktans (inverterad resistans).'
+            },
+            {
+                quantity: 'Potential',
+                correct: 'V',
+                options: ['V', 'J', 'W', '\u03A9'],
+                hint: 'Volt (V) är SI-enheten för elektrisk potential. Joule (J) är energi, watt (W) är effekt.'
+            }
+        ];
+
+        const symbolQuestions = [
+            {
+                symbol: 't',
+                correct: 'Tid',
+                options: ['Tid', 'Temperatur', 'Tryck', 'Tyngdkraft'],
+                hint: 'Liten t står för tid. Temperatur betecknas T (stor), tryck betecknas p.'
+            },
+            {
+                symbol: 'I',
+                correct: 'Ström',
+                options: ['Ström', 'Laddning', 'Intensitet', 'Induktans'],
+                hint: 'I står för ström (intensit\u00E9 du courant p\u00E5 franska). Laddning betecknas Q, induktans L.'
+            },
+            {
+                symbol: 'F',
+                correct: 'Kraft',
+                options: ['Kraft', 'Frekvens', 'Fältstyrka', 'kg'],
+                hint: 'F står för kraft (force). Frekvens betecknas f (liten), fältstyrka E. kg är en enhet, inte en storhet.'
+            },
+            {
+                symbol: 'E',
+                correct: 'Energi',
+                options: ['Energi', 'Effekt', 'Elektrisk fältstyrka', 'Elasticitet'],
+                hint: 'E står för energi. Effekt betecknas P, elektrisk fältstyrka betecknas \uD835\uDD3C.'
+            },
+            {
+                symbol: 'P',
+                correct: 'Effekt',
+                options: ['Effekt', 'Tryck', 'Rörelsemängd', 'Potential'],
+                hint: 'P (stor) står för effekt (power). Tryck betecknas p (liten), rörelsemängd p.'
+            },
+            {
+                symbol: 'Q',
+                correct: 'Laddning',
+                options: ['Laddning', 'Elektrisk fältstyrka', 'Spänning', 'Resistans'],
+                hint: 'Q står för laddning (quantity of charge). Elektrisk fältstyrka betecknas \uD835\uDD3C, spänning U, resistans R.'
+            },
+            {
+                symbol: 'U',
+                correct: 'Spänning',
+                options: ['Spänning', 'Inre energi', 'Hastighet', 'Arbete'],
+                hint: 'U står för spänning. Inre energi betecknas ibland U i termodynamik, men i ellära är det spänning.'
+            },
+            {
+                symbol: '\uD835\uDD3C',
+                correct: 'Elektrisk fältstyrka',
+                options: ['Elektrisk fältstyrka', 'Energi', 'Effekt', 'Elasticitet'],
+                hint: '\uD835\uDD3C (dubbel-E) står för elektrisk fältstyrka. Energi betecknas E, effekt P.'
+            },
+            {
+                symbol: 'R',
+                correct: 'Resistans',
+                options: ['Resistans', 'Radie', 'Resultant', 'Reaktans'],
+                hint: 'R står för resistans. Radie betecknas r (liten), reaktans X.'
+            },
+            {
+                symbol: 'V',
+                correct: 'Potential',
+                options: ['Potential', 'Area', 'Hastighet', 'Spänning'],
+                hint: 'V står för elektrisk potential. Volym betecknas också V men i ellära avses potential. Spänning betecknas U.'
+            }
+        ];
+
+        const encouragements = [
+            'Fantastiskt jobbat! Du är en riktig fysikexpert!',
+            'Briljant! Du har koll på alla enheter och beteckningar!',
+            'Strålande resultat! Fysiken sitter som en smäck!',
+            'Imponerande! Du behärskar ellärans storheter perfekt!',
+            'Toppen! Nu kan ingen enhet eller beteckning lura dig!',
+            'Suveränt! Du är redo för alla fysikprov!'
+        ];
+
+        function shuffle(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // === COMPONENTS ===
+
+        function Confetti() {
+            const pieces = useMemo(() => {
+                const colors = ['#38bdf8', '#22c55e', '#f59e0b', '#ec4899', '#a78bfa', '#f97316'];
+                return Array.from({ length: 60 }, (_, i) => ({
+                    id: i,
+                    color: colors[i % colors.length],
+                    left: Math.random() * 100,
+                    delay: Math.random() * 2,
+                    duration: 2 + Math.random() * 3,
+                    size: 6 + Math.random() * 10
+                }));
+            }, []);
+
+            return React.createElement('div', {
+                style: { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1000 }
+            }, pieces.map(p =>
+                React.createElement('div', {
+                    key: p.id,
+                    style: {
+                        position: 'fixed',
+                        top: 0,
+                        left: p.left + '%',
+                        width: p.size + 'px',
+                        height: p.size + 'px',
+                        background: p.color,
+                        borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+                        animation: `confetti-fall ${p.duration}s ease-in ${p.delay}s forwards`
+                    }
+                })
+            ));
+        }
+
+        function ProgressDots({ questions, currentIndex, results }) {
+            return React.createElement('div', {
+                className: 'flex flex-wrap gap-2 justify-center mb-6'
+            }, questions.map((_, i) => {
+                let status = 'pending';
+                if (i === currentIndex) status = 'current';
+                else if (results[i] === true) status = 'correct';
+                else if (results[i] === false) status = 'wrong';
+                return React.createElement('div', {
+                    key: i,
+                    className: `progress-dot ${status}`,
+                    title: `Fråga ${i + 1}`
+                });
+            }));
+        }
+
+        function QuizQuestion({ question, questionLabel, onAnswer, answered, selectedAnswer, correctAnswer }) {
+            const shuffledOptions = useMemo(() => shuffle(question.options), [question]);
+
+            return React.createElement('div', { className: 'slide-in' },
+                React.createElement('div', {
+                    className: 'text-center mb-8'
+                },
+                    React.createElement('p', {
+                        className: 'text-sky-400 text-sm font-semibold mb-2 tracking-wider uppercase'
+                    }, questionLabel),
+                    React.createElement('h2', {
+                        className: 'text-3xl md:text-4xl font-bold text-white glow-text',
+                        style: { fontFamily: "'Poppins', sans-serif" }
+                    }, question.quantity || question.symbol)
+                ),
+                React.createElement('div', {
+                    className: 'grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mx-auto'
+                }, shuffledOptions.map((opt, i) =>
+                    React.createElement('button', {
+                        key: opt,
+                        className: `option-btn rounded-xl px-6 py-4 text-lg font-semibold text-center ${answered ? 'answered' : ''} ${answered && opt === correctAnswer ? 'correct' : ''} ${answered && opt === selectedAnswer && opt !== correctAnswer ? 'wrong' : ''}`,
+                        onClick: () => !answered && onAnswer(opt),
+                        disabled: answered,
+                        style: { color: answered && opt === correctAnswer ? '#22c55e' : answered && opt === selectedAnswer && opt !== correctAnswer ? '#ef4444' : '#e2e8f0' }
+                    }, opt)
+                )),
+                answered && React.createElement('div', {
+                    className: 'mt-6 text-center',
+                    style: { animation: 'slide-in 0.3s ease-out' }
+                },
+                    React.createElement('p', {
+                        className: `text-sm ${selectedAnswer === correctAnswer ? 'text-green-400' : 'text-amber-400'}`,
+                        style: { fontFamily: "'Poppins', sans-serif" }
+                    }, question.hint)
+                )
+            );
+        }
+
+        function RoundSummary({ round, totalQuestions, correctCount, wrongQuestions, onContinue, allDone, mode }) {
+            if (allDone) {
+                const msg = encouragements[Math.floor(Math.random() * encouragements.length)];
+                return React.createElement('div', { className: 'text-center slide-in' },
+                    React.createElement(Confetti),
+                    React.createElement('div', { className: 'celebrate mb-6' },
+                        React.createElement('div', {
+                            className: 'text-7xl mb-4'
+                        }, '\u{1F3C6}'),
+                        React.createElement('h2', {
+                            className: 'text-3xl font-bold text-green-400 glow-text mb-4',
+                            style: { fontFamily: "'Poppins', sans-serif", textShadow: '0 0 20px rgba(34, 197, 94, 0.5)' }
+                        }, 'Alla rätt!'),
+                        React.createElement('p', {
+                            className: 'text-xl text-sky-300 mb-2',
+                            style: { fontFamily: "'Poppins', sans-serif" }
+                        }, msg)
+                    ),
+                    React.createElement('p', {
+                        className: 'text-slate-400 mb-8'
+                    }, round === 1
+                        ? `Du klarade alla ${totalQuestions} frågor på första försöket!`
+                        : `Du klarade alla ${totalQuestions} frågor på ${round} rundor.`
+                    ),
+                    React.createElement('button', {
+                        className: 'px-8 py-3 rounded-xl font-semibold text-white',
+                        style: {
+                            background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
+                            boxShadow: '0 0 20px rgba(56, 189, 248, 0.3)',
+                            fontFamily: "'Poppins', sans-serif",
+                            cursor: 'pointer',
+                            border: 'none',
+                            fontSize: '1rem'
+                        },
+                        onClick: onContinue
+                    }, 'Spela igen')
+                );
+            }
+
+            return React.createElement('div', { className: 'text-center slide-in' },
+                React.createElement('h2', {
+                    className: 'text-2xl font-bold text-white mb-4',
+                    style: { fontFamily: "'Poppins', sans-serif" }
+                }, `Runda ${round} klar!`),
+                React.createElement('div', { className: 'flex justify-center gap-8 mb-6' },
+                    React.createElement('div', null,
+                        React.createElement('div', { className: 'text-3xl font-bold text-green-400' }, correctCount),
+                        React.createElement('div', { className: 'text-slate-400 text-sm' }, 'Rätt')
+                    ),
+                    React.createElement('div', null,
+                        React.createElement('div', { className: 'text-3xl font-bold text-red-400' }, wrongQuestions.length),
+                        React.createElement('div', { className: 'text-slate-400 text-sm' }, 'Fel')
+                    )
+                ),
+                React.createElement('p', {
+                    className: 'text-slate-300 mb-2'
+                }, `Du svarade fel på ${wrongQuestions.length} ${wrongQuestions.length === 1 ? 'fråga' : 'frågor'}:`),
+                React.createElement('div', { className: 'flex flex-wrap gap-2 justify-center mb-6' },
+                    wrongQuestions.map((q, i) =>
+                        React.createElement('span', {
+                            key: i,
+                            className: 'px-3 py-1 rounded-full text-sm font-medium',
+                            style: { background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)', color: '#fca5a5' }
+                        }, q.quantity || q.symbol)
+                    )
+                ),
+                React.createElement('p', {
+                    className: 'text-sky-400 mb-6 text-sm'
+                }, `Runda ${round + 1} innehåller bara de frågor du svarade fel på.`),
+                React.createElement('button', {
+                    className: 'px-8 py-3 rounded-xl font-semibold text-white',
+                    style: {
+                        background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
+                        boxShadow: '0 0 20px rgba(56, 189, 248, 0.3)',
+                        fontFamily: "'Poppins', sans-serif",
+                        cursor: 'pointer',
+                        border: 'none',
+                        fontSize: '1rem'
+                    },
+                    onClick: onContinue
+                }, `Starta runda ${round + 1}`)
+            );
+        }
+
+        function BonusOverlay({ text, onDismiss }) {
+            return React.createElement('div', {
+                className: 'bonus-overlay',
+                onClick: onDismiss
+            },
+                React.createElement('div', {
+                    className: 'bonus-banner rounded-2xl px-8 py-8 text-center',
+                    onClick: (e) => e.stopPropagation()
+                },
+                    React.createElement('div', { className: 'text-5xl mb-4' }, '\u{1F4A1}'),
+                    React.createElement('p', {
+                        className: 'text-amber-300 font-bold text-xl mb-6',
+                        style: { fontFamily: "'Poppins', sans-serif", lineHeight: '1.5' }
+                    }, text),
+                    React.createElement('button', {
+                        className: 'px-6 py-2.5 rounded-xl font-semibold text-white text-sm',
+                        style: {
+                            background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontFamily: "'Poppins', sans-serif"
+                        },
+                        onClick: onDismiss
+                    }, 'Uppfattat!')
+                )
+            );
+        }
+
+        function Quiz({ mode }) {
+            const allQuestions = mode === 'units' ? unitQuestions : symbolQuestions;
+            const [currentQuestions, setCurrentQuestions] = useState(() => shuffle(allQuestions));
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const [results, setResults] = useState({});
+            const [selectedAnswer, setSelectedAnswer] = useState(null);
+            const [round, setRound] = useState(1);
+            const [showSummary, setShowSummary] = useState(false);
+            const [wrongThisRound, setWrongThisRound] = useState([]);
+            const [allDone, setAllDone] = useState(false);
+            const [showBonus, setShowBonus] = useState(null);
+            const pendingAdvance = React.useRef(null);
+
+            useEffect(() => {
+                setCurrentQuestions(shuffle(allQuestions));
+                setCurrentIndex(0);
+                setResults({});
+                setSelectedAnswer(null);
+                setRound(1);
+                setShowSummary(false);
+                setWrongThisRound([]);
+                setAllDone(false);
+                setShowBonus(null);
+            }, [mode]);
+
+            const question = currentQuestions[currentIndex];
+            const correctAnswer = question ? (question.correct) : null;
+
+            const advanceToNext = useCallback((isCorrect, updatedWrongThisRound) => {
+                if (currentIndex < currentQuestions.length - 1) {
+                    setCurrentIndex(prev => prev + 1);
+                    setSelectedAnswer(null);
+                } else {
+                    if (updatedWrongThisRound.length === 0) {
+                        setAllDone(true);
+                    }
+                    setShowSummary(true);
+                }
+            }, [currentIndex, currentQuestions]);
+
+            const handleAnswer = useCallback((answer) => {
+                setSelectedAnswer(answer);
+                const isCorrect = answer === correctAnswer;
+                setResults(prev => ({ ...prev, [currentIndex]: isCorrect }));
+                const newWrong = !isCorrect ? [...wrongThisRound, question] : wrongThisRound;
+                if (!isCorrect) {
+                    setWrongThisRound(newWrong);
+                }
+
+                if (isCorrect && question.bonusInfo) {
+                    // Show bonus overlay after a short delay, then wait for dismiss
+                    setTimeout(() => {
+                        setShowBonus(question.bonusInfo);
+                        pendingAdvance.current = () => advanceToNext(isCorrect, newWrong);
+                    }, 800);
+                } else {
+                    setTimeout(() => {
+                        advanceToNext(isCorrect, newWrong);
+                    }, 1200);
+                }
+            }, [currentIndex, correctAnswer, question, wrongThisRound, advanceToNext]);
+
+            const handleContinue = useCallback(() => {
+                if (allDone) {
+                    setCurrentQuestions(shuffle(allQuestions));
+                    setCurrentIndex(0);
+                    setResults({});
+                    setSelectedAnswer(null);
+                    setRound(1);
+                    setShowSummary(false);
+                    setWrongThisRound([]);
+                    setAllDone(false);
+                } else {
+                    setCurrentQuestions(shuffle(wrongThisRound));
+                    setCurrentIndex(0);
+                    setResults({});
+                    setSelectedAnswer(null);
+                    setRound(prev => prev + 1);
+                    setShowSummary(false);
+                    setWrongThisRound([]);
+                }
+            }, [allDone, wrongThisRound, allQuestions]);
+
+            const correctCount = Object.values(results).filter(Boolean).length;
+            const questionLabel = mode === 'units'
+                ? `Vilken är SI-enheten för denna storhet?`
+                : `Vilken storhet betecknas med denna symbol?`;
+
+            const handleDismissBonus = useCallback(() => {
+                setShowBonus(null);
+                if (pendingAdvance.current) {
+                    pendingAdvance.current();
+                    pendingAdvance.current = null;
+                }
+            }, []);
+
+            if (showSummary) {
+                return React.createElement(RoundSummary, {
+                    round,
+                    totalQuestions: allQuestions.length,
+                    correctCount,
+                    wrongQuestions: wrongThisRound,
+                    onContinue: handleContinue,
+                    allDone,
+                    mode
+                });
+            }
+
+            return React.createElement('div', null,
+                showBonus && React.createElement(BonusOverlay, {
+                    text: showBonus,
+                    onDismiss: handleDismissBonus
+                }),
+                React.createElement('div', { className: 'flex justify-between items-center mb-2' },
+                    React.createElement('span', { className: 'text-slate-400 text-sm' },
+                        `Runda ${round}`
+                    ),
+                    React.createElement('span', { className: 'text-slate-400 text-sm' },
+                        `Fråga ${currentIndex + 1} av ${currentQuestions.length}`
+                    )
+                ),
+                React.createElement(ProgressDots, {
+                    questions: currentQuestions,
+                    currentIndex,
+                    results
+                }),
+                question && React.createElement(QuizQuestion, {
+                    key: `${round}-${currentIndex}`,
+                    question,
+                    questionLabel,
+                    onAnswer: handleAnswer,
+                    answered: selectedAnswer !== null,
+                    selectedAnswer,
+                    correctAnswer
+                })
+            );
+        }
+
+        function App() {
+            const [mode, setMode] = useState('units');
+
+            return React.createElement('div', {
+                className: 'dark-container min-h-0 rounded-2xl p-6 md:p-10',
+                style: { fontFamily: "'Poppins', sans-serif" }
+            },
+                React.createElement('div', { className: 'text-center mb-8' },
+                    React.createElement('h1', {
+                        className: 'text-3xl md:text-4xl font-bold text-white glow-text mb-3',
+                        style: { fontFamily: "'Poppins', sans-serif" }
+                    }, 'Enhetskollen'),
+                    React.createElement('p', {
+                        className: 'text-slate-400 max-w-xl mx-auto'
+                    }, 'Testa dina kunskaper om storheter, enheter och beteckningar inom elläran! Svara fel? Då får du öva igen tills allt sitter.')
+                ),
+                React.createElement('div', {
+                    className: 'flex justify-center gap-3 mb-8'
+                },
+                    React.createElement('button', {
+                        className: `mode-tab px-5 py-2.5 rounded-xl text-sm font-semibold border-2 ${mode === 'units' ? 'active' : ''}`,
+                        onClick: () => setMode('units')
+                    }, 'Storheter \u2192 SI-enheter'),
+                    React.createElement('button', {
+                        className: `mode-tab px-5 py-2.5 rounded-xl text-sm font-semibold border-2 ${mode === 'symbols' ? 'active' : ''}`,
+                        onClick: () => setMode('symbols')
+                    }, 'Beteckningar \u2192 Storheter')
+                ),
+                React.createElement(Quiz, { mode })
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+            React.createElement(App)
+        );
+    </script>
+</body>
+</html>

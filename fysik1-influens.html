@@ -33,6 +33,29 @@
         .btn-glow:hover {
             box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
         }
+        .contact-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 900;
+            animation: contact-pop 0.4s ease-out;
+        }
+        .contact-banner {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.25), 0 0 80px rgba(56, 189, 248, 0.1);
+            max-width: 460px;
+            width: 90%;
+        }
+        @keyframes contact-pop {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { transform: scale(1.03); }
+            100% { opacity: 1; transform: scale(1); }
+        }
         .tab-button {
             transition: all 0.3s ease;
         }
@@ -92,14 +115,20 @@
             );
         };
 
-        const LedareCanvas = ({ showCharges, resetSignal }) => {
+        const LedareCanvas = ({ showCharges, resetSignal, onContact }) => {
             const canvasRef = useRef(null);
             const containerRef = useRef(null);
             const showChargesRef = useRef(showCharges);
 
+            const onContactRef = useRef(onContact);
+
             useEffect(() => {
                 showChargesRef.current = showCharges;
             }, [showCharges]);
+
+            useEffect(() => {
+                onContactRef.current = onContact;
+            }, [onContact]);
 
             const ROD_WIDTH = 120;
             const ROD_HEIGHT = 40;
@@ -324,7 +353,12 @@
                     const collisionDist = Math.sqrt(collisionDistX * collisionDistX + collisionDistY * collisionDistY);
                     const minDist = ROD_WIDTH/2 + CAN_RADIUS;
 
-                    if (collisionDist < minDist && collisionDist > 0) {
+                    if (collisionDist < minDist + 5 && collisionDist > 0) {
+                        if (onContactRef.current) {
+                            onContactRef.current();
+                            onContactRef.current = null;
+                            return;
+                        }
                         const pushX = (collisionDistX / collisionDist) * (minDist - collisionDist);
                         state.canX += pushX;
 
@@ -508,17 +542,59 @@
             );
         };
 
+        const ContactOverlay = ({ onReset }) => {
+            return (
+                <div className="contact-overlay" onClick={onReset}>
+                    <div className="contact-banner rounded-2xl px-8 py-8 text-center" onClick={(e) => e.stopPropagation()}>
+                        <div className="text-5xl mb-4">⚡</div>
+                        <p className="text-cyan-300 font-bold text-xl mb-3" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                            Staven nuddade burken!
+                        </p>
+                        <p className="text-slate-300 text-base mb-6" style={{ lineHeight: '1.7' }}>
+                            Nu överförs elektroner från den negativt laddade staven till burken.
+                            Burken blir negativt laddad och är inte längre neutral.
+                            Eftersom både staven och burken nu är negativa kommer de att repellera varandra!
+                        </p>
+                        <button
+                            className="px-6 py-2.5 rounded-xl font-semibold text-white text-sm"
+                            style={{
+                                background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
+                                border: 'none',
+                                cursor: 'pointer',
+                                boxShadow: '0 0 20px rgba(56, 189, 248, 0.3)'
+                            }}
+                            onClick={onReset}
+                        >
+                            Börja om
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
         const LedareSimulation = () => {
             const [showCharges, setShowCharges] = useState(true);
             const [resetSignal, setResetSignal] = useState(0);
+            const [showContact, setShowContact] = useState(false);
+
+            const handleContact = useCallback(() => {
+                setShowContact(true);
+            }, []);
+
+            const handleReset = useCallback(() => {
+                setShowContact(false);
+                setResetSignal(prev => prev + 1);
+            }, []);
 
             return (
                 <>
+                    {showContact && <ContactOverlay onReset={handleReset} />}
                     <div className="glass-card rounded-2xl p-4 mb-6">
                         <div className="relative w-full" style={{ minHeight: '500px', maxHeight: '600px' }}>
                             <LedareCanvas
                                 showCharges={showCharges}
                                 resetSignal={resetSignal}
+                                onContact={handleContact}
                             />
                             <LedareControls
                                 showCharges={showCharges}

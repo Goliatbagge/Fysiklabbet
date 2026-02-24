@@ -106,6 +106,13 @@
             max-width: 420px;
             width: 90%;
         }
+        .wrong-banner {
+            background: linear-gradient(135deg, #1a1a2e, #1e1028);
+            border: 2px solid rgba(239, 68, 68, 0.6);
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.25), 0 0 80px rgba(239, 68, 68, 0.1);
+            max-width: 420px;
+            width: 90%;
+        }
         @keyframes slide-in {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -160,62 +167,112 @@
                 quantity: 'Tid',
                 correct: 's',
                 options: ['s', 'min', 'h', 'dygn'],
-                hint: 'Sekund (s) är SI-enheten. Minut, timme och dygn är vanliga men inte SI.'
+                hint: 'Sekund (s) är SI-enheten. Minut, timme och dygn är vanliga men inte SI.',
+                wrongInfo: {
+                    'min': 'min (minut) är en enhet för tid, men inte SI-enheten.',
+                    'h': 'h (timme) är en enhet för tid, men inte SI-enheten.',
+                    'dygn': 'dygn är en enhet för tid, men inte SI-enheten.'
+                }
             },
             {
                 quantity: 'Ström',
                 correct: 'A',
                 options: ['A', 'C', 'V', 'mAh'],
-                hint: 'Ampere (A) är SI-enheten för ström. Coulomb (C) är laddning, volt (V) är spänning.'
+                hint: 'Ampere (A) är SI-enheten för ström. Coulomb (C) är laddning, volt (V) är spänning.',
+                wrongInfo: {
+                    'C': 'C (coulomb) är SI-enheten för laddning.',
+                    'V': 'V (volt) är SI-enheten för spänning.',
+                    'mAh': 'mAh (milliamperetimme) är en enhet för laddning, men inte SI.'
+                }
             },
             {
                 quantity: 'Kraft',
                 correct: 'N',
                 options: ['N', 'kg', 'Pa', 'J'],
-                hint: 'Newton (N) är SI-enheten. Kilogram (kg) är massa, pascal (Pa) är tryck, joule (J) är energi.'
+                hint: 'Newton (N) är SI-enheten. Kilogram (kg) är massa, pascal (Pa) är tryck, joule (J) är energi.',
+                wrongInfo: {
+                    'kg': 'kg (kilogram) är SI-enheten för massa.',
+                    'Pa': 'Pa (pascal) är SI-enheten för tryck.',
+                    'J': 'J (joule) är SI-enheten för energi.'
+                }
             },
             {
                 quantity: 'Energi',
                 correct: 'J',
                 options: ['J', 'W', 'eV', 'kWh'],
-                hint: 'Joule (J) är SI-enheten. Watt (W) är effekt. Elektronvolt (eV) och kilowattimme (kWh) är energi men inte SI.'
+                hint: 'Joule (J) är SI-enheten. Watt (W) är effekt. Elektronvolt (eV) och kilowattimme (kWh) är energi men inte SI.',
+                wrongInfo: {
+                    'W': 'W (watt) är SI-enheten för effekt.',
+                    'eV': 'eV (elektronvolt) är en enhet för energi, men inte SI.',
+                    'kWh': 'kWh (kilowattimme) är en enhet för energi, men inte SI.'
+                }
             },
             {
                 quantity: 'Effekt',
                 correct: 'W',
                 options: ['W', 'J', 'kWh', 'V'],
-                hint: 'Watt (W) är SI-enheten. Joule (J) och kWh är energi. Volt (V) är spänning.'
+                hint: 'Watt (W) är SI-enheten. Joule (J) och kWh är energi. Volt (V) är spänning.',
+                wrongInfo: {
+                    'J': 'J (joule) är SI-enheten för energi.',
+                    'kWh': 'kWh (kilowattimme) är en enhet för energi, men inte SI.',
+                    'V': 'V (volt) är SI-enheten för spänning.'
+                }
             },
             {
                 quantity: 'Laddning',
                 correct: 'C',
                 options: ['C', 'A', 'Ah', 'e'],
-                hint: 'Coulomb (C) är SI-enheten. Ampere (A) är ström. Amperetimme (Ah) är laddning men inte SI.'
+                hint: 'Coulomb (C) är SI-enheten. Ampere (A) är ström. Amperetimme (Ah) är laddning men inte SI.',
+                wrongInfo: {
+                    'A': 'A (ampere) är SI-enheten för ström.',
+                    'Ah': 'Ah (amperetimme) är en enhet för laddning, men inte SI.',
+                    'e': 'e (elementarladdningen) är en enhet för laddning, men inte SI.'
+                }
             },
             {
                 quantity: 'Spänning',
                 correct: 'V',
                 options: ['V', 'A', 'W', '\u03A9'],
-                hint: 'Volt (V) är SI-enheten. Ampere (A) är ström, watt (W) är effekt, ohm (\u03A9) är resistans.'
+                hint: 'Volt (V) är SI-enheten. Ampere (A) är ström, watt (W) är effekt, ohm (\u03A9) är resistans.',
+                wrongInfo: {
+                    'A': 'A (ampere) är SI-enheten för ström.',
+                    'W': 'W (watt) är SI-enheten för effekt.',
+                    '\u03A9': '\u03A9 (ohm) är SI-enheten för resistans.'
+                }
             },
             {
                 quantity: 'Elektrisk fältstyrka',
                 correct: 'N/C',
                 options: ['N/C', 'V', 'N', 'C/m\u00B2'],
                 hint: 'Newton per coulomb (N/C) är SI-enheten.',
-                bonusInfo: 'Även V/m är en SI-enhet för elektrisk fältstyrka!'
+                bonusInfo: 'Även V/m är en SI-enhet för elektrisk fältstyrka!',
+                wrongInfo: {
+                    'V': 'V (volt) är SI-enheten för spänning.',
+                    'N': 'N (newton) är SI-enheten för kraft.',
+                    'C/m\u00B2': 'C/m\u00B2 (coulomb per kvadratmeter) är SI-enheten för ytladdningstäthet.'
+                }
             },
             {
                 quantity: 'Resistans',
                 correct: '\u03A9',
                 options: ['\u03A9', 'S', 'V', 'A'],
-                hint: 'Ohm (\u03A9) är SI-enheten. Siemens (S) är konduktans (inverterad resistans).'
+                hint: 'Ohm (\u03A9) är SI-enheten. Siemens (S) är konduktans (inverterad resistans).',
+                wrongInfo: {
+                    'S': 'S (siemens) är SI-enheten för konduktans.',
+                    'V': 'V (volt) är SI-enheten för spänning.',
+                    'A': 'A (ampere) är SI-enheten för ström.'
+                }
             },
             {
                 quantity: 'Potential',
                 correct: 'V',
                 options: ['V', 'J', 'W', '\u03A9'],
-                hint: 'Volt (V) är SI-enheten för elektrisk potential. Joule (J) är energi, watt (W) är effekt.'
+                hint: 'Volt (V) är SI-enheten för elektrisk potential. Joule (J) är energi, watt (W) är effekt.',
+                wrongInfo: {
+                    'J': 'J (joule) är SI-enheten för energi.',
+                    'W': 'W (watt) är SI-enheten för effekt.',
+                    '\u03A9': '\u03A9 (ohm) är SI-enheten för resistans.'
+                }
             }
         ];
 
@@ -472,6 +529,47 @@
             );
         }
 
+        function WrongAnswerOverlay({ wrongUnit, wrongExplanation, correctUnit, quantity, onDismiss }) {
+            return React.createElement('div', {
+                className: 'bonus-overlay',
+                onClick: onDismiss
+            },
+                React.createElement('div', {
+                    className: 'wrong-banner rounded-2xl px-8 py-8 text-center',
+                    onClick: (e) => e.stopPropagation()
+                },
+                    React.createElement('div', { className: 'text-5xl mb-4' }, '\u274C'),
+                    React.createElement('p', {
+                        className: 'text-red-400 font-bold text-lg mb-2',
+                        style: { fontFamily: "'Poppins', sans-serif" }
+                    }, `Du valde ${wrongUnit}`),
+                    React.createElement('p', {
+                        className: 'text-slate-300 text-base mb-5',
+                        style: { fontFamily: "'Poppins', sans-serif", lineHeight: '1.6' }
+                    }, wrongExplanation),
+                    React.createElement('div', {
+                        className: 'rounded-xl px-5 py-3 mb-6',
+                        style: { background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.3)' }
+                    },
+                        React.createElement('p', {
+                            className: 'text-green-400 font-bold text-base',
+                            style: { fontFamily: "'Poppins', sans-serif" }
+                        }, `SI-enheten för ${quantity.toLowerCase()} är ${correctUnit}`)
+                    ),
+                    React.createElement('button', {
+                        className: 'px-6 py-2.5 rounded-xl font-semibold text-white text-sm',
+                        style: {
+                            background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontFamily: "'Poppins', sans-serif"
+                        },
+                        onClick: onDismiss
+                    }, 'Jag förstår!')
+                )
+            );
+        }
+
         function BonusOverlay({ text, onDismiss }) {
             return React.createElement('div', {
                 className: 'bonus-overlay',
@@ -511,6 +609,7 @@
             const [wrongThisRound, setWrongThisRound] = useState([]);
             const [allDone, setAllDone] = useState(false);
             const [showBonus, setShowBonus] = useState(null);
+            const [showWrongInfo, setShowWrongInfo] = useState(null);
             const pendingAdvance = React.useRef(null);
 
             useEffect(() => {
@@ -523,6 +622,7 @@
                 setWrongThisRound([]);
                 setAllDone(false);
                 setShowBonus(null);
+                setShowWrongInfo(null);
             }, [mode]);
 
             const question = currentQuestions[currentIndex];
@@ -550,9 +650,18 @@
                 }
 
                 if (isCorrect && question.bonusInfo) {
-                    // Show bonus overlay after a short delay, then wait for dismiss
                     setTimeout(() => {
                         setShowBonus(question.bonusInfo);
+                        pendingAdvance.current = () => advanceToNext(isCorrect, newWrong);
+                    }, 800);
+                } else if (!isCorrect && question.wrongInfo && question.wrongInfo[answer]) {
+                    setTimeout(() => {
+                        setShowWrongInfo({
+                            wrongUnit: answer,
+                            wrongExplanation: question.wrongInfo[answer],
+                            correctUnit: question.correct,
+                            quantity: question.quantity
+                        });
                         pendingAdvance.current = () => advanceToNext(isCorrect, newWrong);
                     }, 800);
                 } else {
@@ -588,8 +697,9 @@
                 ? `Vilken är SI-enheten för denna storhet?`
                 : `Vilken storhet betecknas med denna symbol?`;
 
-            const handleDismissBonus = useCallback(() => {
+            const handleDismissOverlay = useCallback(() => {
                 setShowBonus(null);
+                setShowWrongInfo(null);
                 if (pendingAdvance.current) {
                     pendingAdvance.current();
                     pendingAdvance.current = null;
@@ -611,7 +721,14 @@
             return React.createElement('div', null,
                 showBonus && React.createElement(BonusOverlay, {
                     text: showBonus,
-                    onDismiss: handleDismissBonus
+                    onDismiss: handleDismissOverlay
+                }),
+                showWrongInfo && React.createElement(WrongAnswerOverlay, {
+                    wrongUnit: showWrongInfo.wrongUnit,
+                    wrongExplanation: showWrongInfo.wrongExplanation,
+                    correctUnit: showWrongInfo.correctUnit,
+                    quantity: showWrongInfo.quantity,
+                    onDismiss: handleDismissOverlay
                 }),
                 React.createElement('div', { className: 'flex justify-between items-center mb-2' },
                     React.createElement('span', { className: 'text-slate-400 text-sm' },

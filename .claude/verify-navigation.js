@@ -50,6 +50,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-pendel-app.html',
     'fysik2-magnetiskt-flode.html',
     'fysik1-enhetskollen.html',
+    'fysik1-faradays-bur.html',
     'om.html',
     'kontakt.html'
 ];

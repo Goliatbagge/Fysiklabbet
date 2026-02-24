@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faradays bur - Fysiklabbet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback } = React;
+
+        // === CONSTANTS ===
+        const WALL_THICKNESS = 22;
+        const NUM_ELECTRONS = 28;
+        const ANIMATION_DURATION = 1200; // ms for electron migration
+
+        function FaradayCanvas({ fieldOn, viewMode }) {
+            const canvasRef = useRef(null);
+            const containerRef = useRef(null);
+            const animStartRef = useRef(null);
+            const fieldOnRef = useRef(fieldOn);
+            const viewModeRef = useRef(viewMode);
+
+            useEffect(() => {
+                fieldOnRef.current = fieldOn;
+                if (fieldOn) animStartRef.current = performance.now();
+                else animStartRef.current = null;
+            }, [fieldOn]);
+
+            useEffect(() => {
+                viewModeRef.current = viewMode;
+            }, [viewMode]);
+
+            // Initialize electrons evenly distributed in the walls
+            const electronsRef = useRef([]);
+
+            const initElectrons = useCallback((cageRect) => {
+                const electrons = [];
+                const { x, y, w, h } = cageRect;
+                const t = WALL_THICKNESS;
+
+                // Distribute electrons along all four walls
+                const perimeter = 2 * (w + h);
+                for (let i = 0; i < NUM_ELECTRONS; i++) {
+                    const frac = i / NUM_ELECTRONS;
+                    const dist = frac * perimeter;
+
+                    let ex, ey;
+                    if (dist < w) {
+                        // Top wall
+                        ex = x + dist;
+                        ey = y + t / 2;
+                    } else if (dist < w + h) {
+                        // Right wall
+                        ex = x + w - t / 2;
+                        ey = y + (dist - w);
+                    } else if (dist < 2 * w + h) {
+                        // Bottom wall
+                        ex = x + w - (dist - w - h);
+                        ey = y + h - t / 2;
+                    } else {
+                        // Left wall
+                        ex = x + t / 2;
+                        ey = y + h - (dist - 2 * w - h);
+                    }
+
+                    electrons.push({
+                        baseX: ex,
+                        baseY: ey,
+                        currentX: ex,
+                        currentY: ey,
+                        targetX: ex,
+                        targetY: ey,
+                    });
+                }
+                return electrons;
+            }, []);
+
+            const computeTargets = useCallback((electrons, cageRect, isFieldOn) => {
+                if (!isFieldOn) {
+                    electrons.forEach(e => {
+                        e.targetX = e.baseX;
+                        e.targetY = e.baseY;
+                    });
+                    return;
+                }
+
+                const { x, y, w, h } = cageRect;
+                const t = WALL_THICKNESS;
+                const leftWallCenter = x + t / 2;
+                const rightWallCenter = x + w - t / 2;
+
+                // When field is on, electrons rush to the LEFT wall
+                // We stack them vertically along the left wall
+                const leftCount = Math.ceil(NUM_ELECTRONS * 0.7);
+                const rightCount = NUM_ELECTRONS - leftCount; // remaining stay spread but sparse on right
+
+                // Sort electrons by distance to left wall for smooth animation
+                const sorted = electrons.map((e, i) => ({ ...e, idx: i }))
+                    .sort((a, b) => a.baseX - b.baseX);
+
+                for (let i = 0; i < sorted.length; i++) {
+                    const idx = sorted[i].idx;
+                    if (i < leftCount) {
+                        // Stack on left wall
+                        const spacing = (h - t * 2) / (leftCount + 1);
+                        electrons[idx].targetX = leftWallCenter;
+                        electrons[idx].targetY = y + t + spacing * (i + 1);
+                    } else {
+                        // Sparse on top/bottom/right walls
+                        const ri = i - leftCount;
+                        const spacing = (h - t * 2) / (rightCount + 1);
+                        electrons[idx].targetX = rightWallCenter;
+                        electrons[idx].targetY = y + t + spacing * (ri + 1);
+                    }
+                }
+            }, []);
+
+            const drawArrow = useCallback((ctx, fromX, fromY, toX, toY, color, lineWidth = 2) => {
+                const headLen = 10;
+                const dx = toX - fromX;
+                const dy = toY - fromY;
+                const angle = Math.atan2(dy, dx);
+
+                ctx.strokeStyle = color;
+                ctx.lineWidth = lineWidth;
+                ctx.beginPath();
+                ctx.moveTo(fromX, fromY);
+                ctx.lineTo(toX, toY);
+                ctx.stroke();
+
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(toX, toY);
+                ctx.lineTo(toX - headLen * Math.cos(angle - 0.4), toY - headLen * Math.sin(angle - 0.4));
+                ctx.lineTo(toX - headLen * Math.cos(angle + 0.4), toY - headLen * Math.sin(angle + 0.4));
+                ctx.closePath();
+                ctx.fill();
+            }, []);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                let animId;
+
+                const render = (time) => {
+                    const { width, height } = canvas;
+                    if (width === 0 || height === 0) {
+                        animId = requestAnimationFrame(render);
+                        return;
+                    }
+
+                    // Cage rectangle
+                    const cageW = Math.min(440, width * 0.55);
+                    const cageH = Math.min(280, height * 0.55);
+                    const cageX = (width - cageW) / 2;
+                    const cageY = (height - cageH) / 2;
+                    const cageRect = { x: cageX, y: cageY, w: cageW, h: cageH };
+                    const t = WALL_THICKNESS;
+
+                    // Init electrons if needed
+                    if (electronsRef.current.length === 0) {
+                        electronsRef.current = initElectrons(cageRect);
+                    }
+
+                    const electrons = electronsRef.current;
+                    const isFieldOn = fieldOnRef.current;
+                    const mode = viewModeRef.current;
+
+                    // Compute targets
+                    computeTargets(electrons, cageRect, isFieldOn);
+
+                    // Animate electron positions
+                    let progress = 1;
+                    if (animStartRef.current !== null) {
+                        progress = Math.min(1, (time - animStartRef.current) / ANIMATION_DURATION);
+                        progress = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+                    }
+
+                    electrons.forEach(e => {
+                        if (animStartRef.current !== null && progress < 1) {
+                            e.currentX = e.baseX + (e.targetX - e.baseX) * progress;
+                            e.currentY = e.baseY + (e.targetY - e.baseY) * progress;
+                        } else {
+                            e.currentX = e.targetX;
+                            e.currentY = e.targetY;
+                        }
+                    });
+
+                    // === DRAW ===
+
+                    // Background
+                    ctx.fillStyle = '#050510';
+                    ctx.fillRect(0, 0, width, height);
+                    const bgGrad = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.7);
+                    bgGrad.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
+                    bgGrad.addColorStop(1, 'rgba(5, 5, 16, 0)');
+                    ctx.fillStyle = bgGrad;
+                    ctx.fillRect(0, 0, width, height);
+
+                    // === EXTERNAL FIELD ARROWS (always when field is on) ===
+                    if (isFieldOn) {
+                        const arrowColor = 'rgba(245, 158, 11, 0.7)'; // amber
+                        const arrowSpacing = 50;
+                        const rows = Math.floor(height / arrowSpacing);
+
+                        for (let r = 1; r <= rows; r++) {
+                            const ay = r * arrowSpacing;
+
+                            // Left side arrows (outside cage)
+                            const leftStart = 30;
+                            const leftEnd = cageX - 15;
+                            if (leftEnd - leftStart > 40) {
+                                const mid = (leftStart + leftEnd) / 2;
+                                drawArrow(ctx, leftStart, ay, mid - 5, ay, arrowColor, 2);
+                                drawArrow(ctx, mid + 5, ay, leftEnd, ay, arrowColor, 2);
+                            }
+
+                            // Right side arrows (outside cage)
+                            const rightStart = cageX + cageW + 15;
+                            const rightEnd = width - 30;
+                            if (rightEnd - rightStart > 40) {
+                                const mid = (rightStart + rightEnd) / 2;
+                                drawArrow(ctx, rightStart, ay, mid - 5, ay, arrowColor, 2);
+                                drawArrow(ctx, mid + 5, ay, rightEnd, ay, arrowColor, 2);
+                            }
+
+                            // Top/bottom arrows outside cage vertically
+                            if (ay < cageY - 10 || ay > cageY + cageH + 10) {
+                                // Full width arrows
+                                const segments = 4;
+                                const segLen = (width - 60) / segments;
+                                for (let s = 0; s < segments; s++) {
+                                    const sx = 30 + s * segLen;
+                                    const ex = sx + segLen - 10;
+                                    drawArrow(ctx, sx, ay, ex, ay, arrowColor, 2);
+                                }
+                            }
+                        }
+
+                        // Arrows INSIDE the cage
+                        const innerLeft = cageX + t + 10;
+                        const innerRight = cageX + cageW - t - 10;
+                        const innerTop = cageY + t + 10;
+                        const innerBottom = cageY + cageH - t - 10;
+                        const innerRows = 4;
+                        const innerSpacing = (innerBottom - innerTop) / (innerRows + 1);
+
+                        if (mode === 'separate') {
+                            // External field inside cage (rightward, amber)
+                            for (let r = 1; r <= innerRows; r++) {
+                                const iy = innerTop + r * innerSpacing;
+                                drawArrow(ctx, innerLeft, iy - 8, innerRight, iy - 8, 'rgba(245, 158, 11, 0.6)', 2);
+                            }
+
+                            // Induced field inside cage (leftward, cyan) - from charge separation
+                            const inducedColor = 'rgba(56, 189, 248, 0.6)';
+                            for (let r = 1; r <= innerRows; r++) {
+                                const iy = innerTop + r * innerSpacing;
+                                drawArrow(ctx, innerRight, iy + 8, innerLeft, iy + 8, inducedColor, 2);
+                            }
+                        }
+                        // In 'resultant' mode: no arrows inside the cage (they cancel!)
+                    }
+
+                    // === CAGE (metal walls) ===
+                    // Outer rect
+                    const wallGrad = ctx.createLinearGradient(cageX, cageY, cageX + cageW, cageY + cageH);
+                    wallGrad.addColorStop(0, '#475569');
+                    wallGrad.addColorStop(0.5, '#64748b');
+                    wallGrad.addColorStop(1, '#475569');
+
+                    ctx.fillStyle = wallGrad;
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(cageX, cageY, cageW, cageH, 6);
+                    } else {
+                        ctx.rect(cageX, cageY, cageW, cageH);
+                    }
+                    ctx.fill();
+
+                    // Inner rect (hollow inside)
+                    ctx.fillStyle = '#0a0a1a';
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t, 3);
+                    } else {
+                        ctx.rect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t);
+                    }
+                    ctx.fill();
+
+                    // Cage border glow
+                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(cageX, cageY, cageW, cageH, 6);
+                    } else {
+                        ctx.rect(cageX, cageY, cageW, cageH);
+                    }
+                    ctx.stroke();
+
+                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t, 3);
+                    } else {
+                        ctx.rect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t);
+                    }
+                    ctx.stroke();
+
+                    // === CHARGE SIGNS when field is on ===
+                    if (isFieldOn && progress > 0.3) {
+                        const signAlpha = Math.min(1, (progress - 0.3) / 0.4);
+
+                        // Plus signs on right wall
+                        ctx.shadowBlur = 12;
+                        ctx.shadowColor = `rgba(239, 68, 68, ${signAlpha * 0.8})`;
+                        ctx.fillStyle = `rgba(239, 68, 68, ${signAlpha})`;
+                        ctx.font = 'bold 20px Poppins, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        const numSigns = 6;
+                        const signSpacing = (cageH - t * 2) / (numSigns + 1);
+                        for (let i = 1; i <= numSigns; i++) {
+                            ctx.fillText('+', cageX + cageW - t / 2, cageY + t + i * signSpacing);
+                        }
+
+                        // Minus signs on left wall
+                        ctx.shadowColor = `rgba(56, 189, 248, ${signAlpha * 0.8})`;
+                        ctx.fillStyle = `rgba(56, 189, 248, ${signAlpha})`;
+                        for (let i = 1; i <= numSigns; i++) {
+                            ctx.fillText('\u2212', cageX + t / 2, cageY + t + i * signSpacing);
+                        }
+                        ctx.shadowBlur = 0;
+                    }
+
+                    // === ELECTRONS ===
+                    electrons.forEach(e => {
+                        // Glow
+                        const glow = ctx.createRadialGradient(e.currentX, e.currentY, 0, e.currentX, e.currentY, 12);
+                        glow.addColorStop(0, 'rgba(56, 189, 248, 0.5)');
+                        glow.addColorStop(0.5, 'rgba(14, 165, 233, 0.15)');
+                        glow.addColorStop(1, 'rgba(2, 132, 199, 0)');
+                        ctx.beginPath();
+                        ctx.arc(e.currentX, e.currentY, 12, 0, Math.PI * 2);
+                        ctx.fillStyle = glow;
+                        ctx.fill();
+
+                        // Electron dot
+                        ctx.shadowBlur = 10;
+                        ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
+                        ctx.fillStyle = '#38bdf8';
+                        ctx.font = 'bold 14px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText('\u2212', e.currentX, e.currentY);
+                    });
+                    ctx.shadowBlur = 0;
+
+                    // === LABELS ===
+                    ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+                    ctx.font = '13px Poppins, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Metallhölje', cageX + cageW / 2, cageY - 12);
+
+                    if (isFieldOn) {
+                        // External field label
+                        ctx.fillStyle = 'rgba(245, 158, 11, 0.8)';
+                        ctx.font = 'italic 13px Poppins, sans-serif';
+                        ctx.textAlign = 'left';
+                        ctx.fillText('Yttre E-fält \u2192', 30, height - 25);
+
+                        if (mode === 'separate') {
+                            ctx.fillStyle = 'rgba(56, 189, 248, 0.8)';
+                            ctx.textAlign = 'right';
+                            ctx.fillText('\u2190 Inducerat fält', width - 30, height - 25);
+                        } else {
+                            ctx.fillStyle = 'rgba(34, 197, 94, 0.8)';
+                            ctx.textAlign = 'center';
+                            ctx.fillText('Resulterande fält inuti = 0', cageX + cageW / 2, cageY + cageH / 2 + 5);
+                        }
+                    }
+
+                    animId = requestAnimationFrame(render);
+                };
+
+                animId = requestAnimationFrame(render);
+                return () => cancelAnimationFrame(animId);
+            }, [initElectrons, computeTargets, drawArrow]);
+
+            useEffect(() => {
+                const handleResize = () => {
+                    if (containerRef.current && canvasRef.current) {
+                        const rect = containerRef.current.getBoundingClientRect();
+                        canvasRef.current.width = rect.width;
+                        canvasRef.current.height = rect.height;
+                        // Reinit electrons on resize
+                        const cageW = Math.min(440, rect.width * 0.55);
+                        const cageH = Math.min(280, rect.height * 0.55);
+                        const cageX = (rect.width - cageW) / 2;
+                        const cageY = (rect.height - cageH) / 2;
+                        electronsRef.current = initElectrons({ x: cageX, y: cageY, w: cageW, h: cageH });
+                    }
+                };
+                window.addEventListener('resize', handleResize);
+                setTimeout(handleResize, 0);
+                return () => window.removeEventListener('resize', handleResize);
+            }, [initElectrons]);
+
+            return (
+                <div ref={containerRef} className="absolute inset-0">
+                    <canvas
+                        ref={canvasRef}
+                        className="block"
+                        style={{ width: '100%', height: '100%' }}
+                    />
+                </div>
+            );
+        }
+
+        function App() {
+            const [fieldOn, setFieldOn] = useState(false);
+            const [viewMode, setViewMode] = useState('separate');
+            const [resetKey, setResetKey] = useState(0);
+
+            const handleToggleField = () => {
+                if (fieldOn) {
+                    setFieldOn(false);
+                    setViewMode('separate');
+                    setResetKey(k => k + 1);
+                } else {
+                    setFieldOn(true);
+                }
+            };
+
+            return (
+                <div className="dark-container min-h-screen">
+                    <div className="max-w-6xl mx-auto py-8 px-4">
+                        <header className="text-center mb-8">
+                            <nav style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
+                                <a href="index.html" style={{ color: '#94a3b8', textDecoration: 'none' }}>Hem</a>
+                                <span style={{ color: '#475569', margin: '0 0.5rem' }}>/</span>
+                                <a href="fysik1.html" style={{ color: '#94a3b8', textDecoration: 'none' }}>Fysik 1</a>
+                                <span style={{ color: '#475569', margin: '0 0.5rem' }}>/</span>
+                                <span style={{ color: '#38bdf8' }}>Faradays bur</span>
+                            </nav>
+                            <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text mb-4">
+                                Faradays bur
+                            </h1>
+                            <p className="text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                                Ett metallhölje skärmar av elektriska fält. När ett yttre fält läggs på
+                                omfördelas elektronerna i metallen och skapar ett motfält som exakt
+                                upphäver fältet inuti buren.
+                            </p>
+                        </header>
+
+                        <div className="glass-card rounded-2xl p-4 mb-6">
+                            <div className="relative w-full" style={{ minHeight: '480px', maxHeight: '560px' }}>
+                                <FaradayCanvas key={resetKey} fieldOn={fieldOn} viewMode={viewMode} />
+                            </div>
+                        </div>
+
+                        {/* Controls */}
+                        <div className="glass-card rounded-2xl p-6 mb-6">
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                                <button
+                                    onClick={handleToggleField}
+                                    className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${
+                                        fieldOn
+                                            ? 'bg-amber-500/20 text-amber-400 border-2 border-amber-500/50 btn-glow'
+                                            : 'bg-cyan-500/20 text-cyan-400 border-2 border-cyan-500/50 btn-glow'
+                                    }`}
+                                    style={{ minWidth: '220px' }}
+                                >
+                                    {fieldOn ? 'Stäng av fältet' : 'Lägg på elektriskt fält'}
+                                </button>
+
+                                {fieldOn && (
+                                    <div className="flex gap-4">
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="viewMode"
+                                                value="separate"
+                                                checked={viewMode === 'separate'}
+                                                onChange={() => setViewMode('separate')}
+                                                className="accent-cyan-500"
+                                            />
+                                            <span className="text-slate-300 text-sm font-medium">Visa separata fält</span>
+                                        </label>
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input
+                                                type="radio"
+                                                name="viewMode"
+                                                value="resultant"
+                                                checked={viewMode === 'resultant'}
+                                                onChange={() => setViewMode('resultant')}
+                                                className="accent-cyan-500"
+                                            />
+                                            <span className="text-slate-300 text-sm font-medium">Visa resulterande fält</span>
+                                        </label>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Explanations */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="glass-card-light p-4 rounded-xl">
+                                <div className="flex items-start gap-3">
+                                    <div className="p-2 bg-amber-500/20 rounded-lg">
+                                        <span className="text-amber-400 text-xl font-bold">\u2192</span>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-slate-200 font-semibold mb-1">Yttre elektriskt fält</h3>
+                                        <p className="text-slate-400 text-sm">
+                                            Det yttre fältet verkar på de fria elektronerna i metallhöljet
+                                            och tvingar dem att röra sig mot ena sidan av buren.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="glass-card-light p-4 rounded-xl">
+                                <div className="flex items-start gap-3">
+                                    <div className="p-2 bg-cyan-500/20 rounded-lg">
+                                        <span className="text-cyan-400 text-xl font-bold">\u2190</span>
+                                    </div>
+                                    <div>
+                                        <h3 className="text-slate-200 font-semibold mb-1">Inducerat motfält</h3>
+                                        <p className="text-slate-400 text-sm">
+                                            Laddningsseparationen skapar ett eget fält i motsatt riktning
+                                            som exakt tar ut det yttre fältet inuti buren. Resultat: noll fält inne i buren!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

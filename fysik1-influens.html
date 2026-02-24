@@ -356,7 +356,6 @@
                     if (collisionDist < minDist + 5 && collisionDist > 0) {
                         if (onContactRef.current) {
                             onContactRef.current();
-                            onContactRef.current = null;
                             return;
                         }
                         const pushX = (collisionDistX / collisionDist) * (minDist - collisionDist);
@@ -594,7 +593,7 @@
                             <LedareCanvas
                                 showCharges={showCharges}
                                 resetSignal={resetSignal}
-                                onContact={handleContact}
+                                onContact={showContact ? null : handleContact}
                             />
                             <LedareControls
                                 showCharges={showCharges}

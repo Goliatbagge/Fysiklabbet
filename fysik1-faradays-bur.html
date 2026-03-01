@@ -101,7 +101,8 @@
             'Ett yttre elektriskt fält (högerriktat) läggs på. De fria elektronerna i metallen känner av fältet och vandrar långsamt åt vänster. De positiva laddningarna sitter fast i metallgittret.',
             'Laddningsseparationen gör att vänster sida blir negativ och höger sida blir positiv.',
             'Laddningsseparationen skapar ett inducerat fält (vänsterriktat, cyan) inuti buren som motverkar det yttre fältet.',
-            'Det inducerade fältet tar exakt ut det yttre fältet inuti buren. Resultat: noll fält inne i buren!'
+            'Det inducerade fältet tar exakt ut det yttre fältet inuti buren. Resultat: noll fält inne i buren!',
+            'Testa själv! Rör musen över simuleringen. Utanför buren blåser fransarna åt höger av fältet. Inuti buren finns inget fält – fransarna hänger rakt ned.'
         ];
 
         function FaradayCanvas({ step, viewMode }) {
@@ -114,6 +115,7 @@
             const prevStepRef = useRef(step);
             const electronsRef = useRef([]);
             const protonsRef = useRef([]);
+            const probeRef = useRef({ x: 0, y: 0, active: false, prevX: 0, prevY: 0, vx: 0, vy: 0 });
 
             useEffect(() => {
                 const prevStep = prevStepRef.current;
@@ -386,6 +388,26 @@
                         else if (currentStep === 6 && mode === 'separate') fieldInside = true;
 
                         drawExternalField(ctx, width, height, cageX, cageY, cageW, cageH);
+
+                        // Large + and − signs at left and right edges showing field source
+                        ctx.save();
+                        ctx.font = 'bold 64px Poppins, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+
+                        // + on the left (positive charge)
+                        ctx.shadowColor = 'rgba(239, 68, 68, 0.8)';
+                        ctx.shadowBlur = 25;
+                        ctx.fillStyle = '#f87171';
+                        ctx.fillText('+', 36, height / 2);
+
+                        // − on the right (negative charge)
+                        ctx.shadowColor = 'rgba(56, 189, 248, 0.8)';
+                        ctx.shadowBlur = 25;
+                        ctx.fillStyle = '#7dd3fc';
+                        ctx.fillText('−', width - 36, height / 2);
+
+                        ctx.restore();
                     }
 
                     // === CAGE ===
@@ -627,6 +649,287 @@
                         ctx.fillText(indLabel, indLabelX, indLabelY);
                     }
 
+                    // === PROBE (step 6) ===
+                    if (currentStep === 6 && probeRef.current.active) {
+                        const px = probeRef.current.x;
+                        const py = probeRef.current.y;
+
+                        // Smooth velocity tracking (exponential moving average)
+                        const rawVx = px - probeRef.current.prevX;
+                        const rawVy = py - probeRef.current.prevY;
+                        const smooth = 0.15;
+                        probeRef.current.vx += (rawVx - probeRef.current.vx) * smooth;
+                        probeRef.current.vy += (rawVy - probeRef.current.vy) * smooth;
+                        probeRef.current.prevX = px;
+                        probeRef.current.prevY = py;
+                        const vx = probeRef.current.vx;
+                        const vy = probeRef.current.vy;
+
+                        // "Drinkpinne" design: handle at top (mouse), stick down, fringes droop from top
+                        const stickLen = 120;
+                        const fringeAttachX = px;
+                        const fringeAttachY = py;
+                        const stickBottom = py + stickLen;
+
+                        // Draw the stick downward from the attachment point
+                        ctx.strokeStyle = '#a0aec0';
+                        ctx.lineWidth = 3;
+                        ctx.lineCap = 'round';
+                        ctx.beginPath();
+                        ctx.moveTo(px, fringeAttachY);
+                        ctx.lineTo(px, stickBottom);
+                        ctx.stroke();
+
+                        // Small handle ball at bottom of stick
+                        ctx.fillStyle = '#cbd5e1';
+                        ctx.beginPath();
+                        ctx.arc(px, stickBottom, 5, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.strokeStyle = '#94a3b8';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+
+                        // Threads from the top: hang down without field, arc up-right in field
+                        const numFringes = 12;
+                        const fringeLen = 80;
+
+                        // Gentle flutter
+                        const t1 = time * 0.002;
+                        const t2 = time * 0.0035;
+
+                        let anyInside = false;
+                        let anyOutside = false;
+
+                        // Helper: sample a cubic bezier at parameter bt
+                        const cubicBezierPt = (p0x, p0y, p1x, p1y, p2x, p2y, p3x, p3y, bt) => {
+                            const u = 1 - bt;
+                            return {
+                                x: u*u*u*p0x + 3*u*u*bt*p1x + 3*u*bt*bt*p2x + bt*bt*bt*p3x,
+                                y: u*u*u*p0y + 3*u*u*bt*p1y + 3*u*bt*bt*p2y + bt*bt*bt*p3y
+                            };
+                        };
+
+                        const fringeData = [];
+                        for (let i = 0; i < numFringes; i++) {
+                            const frac = i / (numFringes - 1);
+
+                            const flutter = Math.sin(t1 + i * 0.7) * 1.5 + Math.sin(t2 + i * 1.1) * 0.8;
+
+                            const attachInCage = fringeAttachX >= cageX && fringeAttachX <= cageX + cageW &&
+                                                 fringeAttachY >= cageY && fringeAttachY <= cageY + cageH;
+
+                            // Drag from mouse movement
+                            const dragScale = 1.5;
+                            const maxDrag = fringeLen * 0.4;
+                            const dragX = Math.max(-maxDrag, Math.min(maxDrag, -vx * dragScale));
+                            const dragY = Math.max(-maxDrag, Math.min(maxDrag, -vy * dragScale));
+
+                            // === Thread angles: spread evenly ===
+                            const angleDeg = -75 + frac * 150;
+                            const angle = angleDeg * Math.PI / 180;
+                            const len = 80 + Math.abs(angleDeg) * 0.3;
+
+                            // === WITHOUT FIELD: threads go outward-UP then droop far DOWN ===
+                            const dx = Math.sin(angle);
+                            const dy = -Math.cos(angle);
+                            const natCp1_x = fringeAttachX + dx * len * 0.45;
+                            const natCp1_y = fringeAttachY + dy * len * 0.45;
+                            const natCp2_x = fringeAttachX + dx * len * 0.75;
+                            const natCp2_y = fringeAttachY + dy * len * 0.1;
+                            const natEnd_x = fringeAttachX + dx * len * 0.55;
+                            const natEnd_y = fringeAttachY + len * 0.7;
+
+                            // === WITH FIELD: threads go UP then BEND RIGHT ===
+                            const fldLen = 40 + frac * 55;
+                            const fldCp1_x = fringeAttachX;
+                            const fldCp1_y = fringeAttachY - fldLen * 0.8;
+                            const fldCp2_x = fringeAttachX + fldLen * 0.8;
+                            const fldCp2_y = fringeAttachY - fldLen * 0.75;
+                            const fldEnd_x = fringeAttachX + fldLen * 1.1;
+                            const fldEnd_y = fringeAttachY - fldLen * 0.7;
+
+                            // === Field detection: only when probe is fully outside ===
+                            let fieldFrac;
+                            if (!attachInCage) {
+                                fieldFrac = 1;
+                            } else {
+                                fieldFrac = 0;
+                            }
+
+                            if (fieldFrac > 0.01) anyOutside = true;
+                            if (fieldFrac < 0.99) anyInside = true;
+
+                            const ff = fieldFrac;
+                            let endX = natEnd_x * (1 - ff) + fldEnd_x * ff + dragX * 0.4 + flutter * 0.15;
+                            let endY = natEnd_y * (1 - ff) + fldEnd_y * ff + dragY * 0.1 + flutter * 0.1;
+                            let cp1X = natCp1_x * (1 - ff) + fldCp1_x * ff + dragX * 0.15 + flutter * 0.08;
+                            let cp1Y = natCp1_y * (1 - ff) + fldCp1_y * ff + dragY * 0.05 + flutter * 0.05;
+                            let cp2X = natCp2_x * (1 - ff) + fldCp2_x * ff + dragX * 0.3 + flutter * 0.1;
+                            let cp2Y = natCp2_y * (1 - ff) + fldCp2_y * ff + dragY * 0.08 + flutter * 0.08;
+
+                            fringeData.push({ endX, endY, cp1X, cp1Y, cp2X, cp2Y, flutter, fieldFrac });
+                        }
+
+                        // Draw each thread as a distinct, visible line
+                        const segments = 24;
+                        for (const f of fringeData) {
+                            ctx.strokeStyle = '#e0e0ff';
+                            ctx.lineWidth = 1.5;
+                            ctx.lineCap = 'round';
+
+                            // Sample cubic bezier curve and detect cage entry
+                            const points = [];
+                            for (let s = 0; s <= segments; s++) {
+                                const pt = cubicBezierPt(fringeAttachX, fringeAttachY, f.cp1X, f.cp1Y, f.cp2X, f.cp2Y, f.endX, f.endY, s / segments);
+                                points.push(pt);
+                            }
+
+                            // If probe is inside cage, draw full curve (no clipping)
+                            // If probe is outside, detect where threads enter the cage
+                            const probeInCage = fringeAttachX >= cageX && fringeAttachX <= cageX + cageW &&
+                                                fringeAttachY >= cageY && fringeAttachY <= cageY + cageH;
+
+                            const ptInCage = (p) => p.x >= cageX && p.x <= cageX + cageW && p.y >= cageY && p.y <= cageY + cageH;
+
+                            if (probeInCage) {
+                                // Inside cage: draw natural curve, but if it exits the cage,
+                                // the part outside bends to the right (field-affected)
+                                let exitIdx = -1;
+                                for (let s = 1; s < points.length; s++) {
+                                    if (!ptInCage(points[s])) {
+                                        exitIdx = s;
+                                        break;
+                                    }
+                                }
+
+                                if (exitIdx === -1) {
+                                    // Entire curve stays inside — draw fully natural
+                                    ctx.beginPath();
+                                    ctx.moveTo(points[0].x, points[0].y);
+                                    for (let s = 1; s < points.length; s++) {
+                                        ctx.lineTo(points[s].x, points[s].y);
+                                    }
+                                    ctx.stroke();
+                                } else {
+                                    // Draw natural part inside cage
+                                    ctx.beginPath();
+                                    ctx.moveTo(points[0].x, points[0].y);
+                                    for (let s = 1; s <= exitIdx; s++) {
+                                        ctx.lineTo(points[s].x, points[s].y);
+                                    }
+                                    ctx.stroke();
+
+                                    // From exit point: determine which wall was crossed
+                                    const exitPt = points[exitIdx];
+                                    const remainFrac = 1 - exitIdx / segments;
+                                    const bendLen = fringeLen * 1.0 * remainFrac + 15;
+
+                                    // Only left wall: hang down (bending right would go back into cage)
+                                    // Right wall, top, bottom: bend to the right (field direction)
+                                    const exitedLeftWall = exitPt.x <= cageX;
+
+                                    if (bendLen > 3) {
+                                        anyOutside = true;
+                                        if (exitedLeftWall) {
+                                            // Exited through side wall: just hang straight down
+                                            const hangEndX = exitPt.x + f.flutter * 0.15;
+                                            const hangEndY = exitPt.y + bendLen * 0.7;
+                                            const hangCpX = exitPt.x + f.flutter * 0.08;
+                                            const hangCpY = exitPt.y + bendLen * 0.35;
+                                            ctx.beginPath();
+                                            ctx.moveTo(exitPt.x, exitPt.y);
+                                            ctx.quadraticCurveTo(hangCpX, hangCpY, hangEndX, hangEndY);
+                                            ctx.stroke();
+                                        } else {
+                                            // Exited through top/bottom: bend to the RIGHT
+                                            const bendEndX = exitPt.x + bendLen;
+                                            const bendEndY = exitPt.y + bendLen * 0.15;
+                                            const bendCpX = exitPt.x + bendLen * 0.4;
+                                            const bendCpY = exitPt.y + bendLen * 0.08;
+                                            ctx.beginPath();
+                                            ctx.moveTo(exitPt.x, exitPt.y);
+                                            ctx.quadraticCurveTo(bendCpX, bendCpY, bendEndX, bendEndY);
+                                            ctx.stroke();
+                                        }
+                                    }
+                                }
+                            } else {
+                                // Outside cage: find where thread enters cage and clip
+                                let entryIdx = -1;
+                                for (let s = 1; s < points.length; s++) {
+                                    const p = points[s];
+                                    if (p.x >= cageX && p.x <= cageX + cageW && p.y >= cageY && p.y <= cageY + cageH) {
+                                        entryIdx = s;
+                                        break;
+                                    }
+                                }
+
+                                if (entryIdx === -1) {
+                                    // Entire curve is outside — draw fully
+                                    ctx.beginPath();
+                                    ctx.moveTo(points[0].x, points[0].y);
+                                    for (let s = 1; s < points.length; s++) {
+                                        ctx.lineTo(points[s].x, points[s].y);
+                                    }
+                                    ctx.stroke();
+                                } else {
+                                    // Draw part outside cage
+                                    ctx.beginPath();
+                                    ctx.moveTo(points[0].x, points[0].y);
+                                    for (let s = 1; s <= entryIdx; s++) {
+                                        ctx.lineTo(points[s].x, points[s].y);
+                                    }
+                                    ctx.stroke();
+
+                                    // From entry point, hang straight down (no field)
+                                    const entryPt = points[entryIdx];
+                                    const remainLen = fringeLen * 0.5 * (1 - entryIdx / segments);
+                                    if (remainLen > 2) {
+                                        const hangEndX = entryPt.x + f.flutter * 0.2;
+                                        const hangEndY = entryPt.y + remainLen;
+                                        const hangCpX = entryPt.x + f.flutter * 0.1;
+                                        const hangCpY = entryPt.y + remainLen * 0.5;
+                                        ctx.beginPath();
+                                        ctx.moveTo(entryPt.x, entryPt.y);
+                                        ctx.quadraticCurveTo(hangCpX, hangCpY, hangEndX, hangEndY);
+                                        ctx.stroke();
+                                    }
+                                }
+                            }
+                        }
+
+                        // Small dot at the fringe attachment point
+                        ctx.fillStyle = '#e2e8f0';
+                        ctx.beginPath();
+                        ctx.arc(fringeAttachX, fringeAttachY, 4, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        // Label below the stick
+                        const labelY = stickBottom + 18;
+                        ctx.font = '12px Poppins, sans-serif';
+                        ctx.textAlign = 'center';
+                        if (anyInside && anyOutside) {
+                            ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
+                            ctx.fillText('Fält → utanför', px, labelY);
+                            ctx.fillStyle = 'rgba(34, 197, 94, 0.9)';
+                            ctx.fillText('Inget fält inuti!', px, labelY + 14);
+                        } else if (anyInside) {
+                            ctx.fillStyle = 'rgba(34, 197, 94, 0.9)';
+                            ctx.fillText('Inget fält!', px, labelY);
+                        } else {
+                            ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
+                            ctx.fillText('Fält →', px, labelY);
+                        }
+                    }
+
+                    // Step 6 instruction when probe not active
+                    if (currentStep === 6 && !probeRef.current.active) {
+                        ctx.fillStyle = 'rgba(148, 163, 184, 0.5)';
+                        ctx.font = '16px Poppins, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('Rör musen över simuleringen för att använda fältprovaren', width / 2, height - 30);
+                    }
+
                     animId = requestAnimationFrame(render);
                 };
 
@@ -654,9 +957,45 @@
                 return () => window.removeEventListener('resize', handleResize);
             }, [initParticles, initProtons]);
 
+            // Mouse/touch tracking for probe in step 6
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+
+                const updateProbe = (clientX, clientY) => {
+                    const rect = canvas.getBoundingClientRect();
+                    probeRef.current.x = (clientX - rect.left) * (canvas.width / rect.width);
+                    probeRef.current.y = (clientY - rect.top) * (canvas.height / rect.height);
+                    probeRef.current.active = true;
+                };
+
+                const handleMouseMove = (e) => {
+                    if (stepRef.current === 6) updateProbe(e.clientX, e.clientY);
+                };
+                const handleMouseLeave = () => { probeRef.current.active = false; };
+                const handleTouchMove = (e) => {
+                    if (stepRef.current === 6 && e.touches.length > 0) {
+                        e.preventDefault();
+                        updateProbe(e.touches[0].clientX, e.touches[0].clientY);
+                    }
+                };
+                const handleTouchEnd = () => { probeRef.current.active = false; };
+
+                canvas.addEventListener('mousemove', handleMouseMove);
+                canvas.addEventListener('mouseleave', handleMouseLeave);
+                canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+                canvas.addEventListener('touchend', handleTouchEnd);
+                return () => {
+                    canvas.removeEventListener('mousemove', handleMouseMove);
+                    canvas.removeEventListener('mouseleave', handleMouseLeave);
+                    canvas.removeEventListener('touchmove', handleTouchMove);
+                    canvas.removeEventListener('touchend', handleTouchEnd);
+                };
+            }, []);
+
             return (
                 <div ref={containerRef} className="absolute inset-0">
-                    <canvas ref={canvasRef} className="block" style={{ width: '100%', height: '100%' }} />
+                    <canvas ref={canvasRef} className="block" style={{ width: '100%', height: '100%', cursor: step === 6 ? 'none' : 'default' }} />
                 </div>
             );
         }
@@ -665,7 +1004,7 @@
             const [step, setStep] = useState(1);
             const [viewMode, setViewMode] = useState('resultant');
 
-            const maxStep = 5;
+            const maxStep = 6;
 
             const handleNext = () => {
                 if (step < maxStep) {
@@ -714,14 +1053,15 @@
                                 if (s === step) cls = 'active';
                                 else if (s < step) cls = 'done';
                                 return (
-                                    <div key={s} className={`step-indicator w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold`}
+                                    <button key={s} onClick={() => { setStep(s); if (s === 5) setViewMode('resultant'); }}
+                                         className={`step-indicator w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold cursor-pointer hover:scale-110 transition-transform`}
                                          style={{
                                              background: cls === 'active' ? 'rgba(56, 189, 248, 0.3)' : cls === 'done' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(15, 23, 42, 0.5)',
                                              borderColor: cls === 'active' ? '#38bdf8' : cls === 'done' ? 'rgba(34, 197, 94, 0.5)' : 'rgba(56, 189, 248, 0.15)',
                                              color: cls === 'active' ? '#38bdf8' : cls === 'done' ? '#4ade80' : '#475569'
                                          }}>
                                         {s}
-                                    </div>
+                                    </button>
                                 );
                             })}
                         </div>

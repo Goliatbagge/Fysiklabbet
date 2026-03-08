@@ -364,6 +364,56 @@
             ctx.restore();
         }
 
+        /**
+         * Draw legend in the top-left corner of the canvas.
+         */
+        function drawLegend(ctx, decayType, x, y, currentPhase, progress) {
+            const showProducts = currentPhase === 'animating' || currentPhase === 'done' || currentPhase === 'formula';
+            const prodProg = currentPhase === 'formula' || currentPhase === 'done' ? 1 : progress;
+            const items = [
+                { color: '#ef4444', label: 'Proton', show: true },
+                { color: '#60a5fa', label: 'Neutron', show: true },
+            ];
+            // Alpha: cluster starts forming at prodProg ~0.15
+            if (decayType === 'alpha')     items.push({ color: '#f59e0b', label: 'Alfapartikel (⁴He)', show: showProducts && prodProg > 0.15 });
+            // Beta⁻: electron ejects at prodProg 0.3, neutrino at 0.38
+            if (decayType === 'betaMinus') {
+                const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
+                items.push({ color: '#22c55e', label: 'Elektron (e⁻)', show: showProducts && ejectProg > 0 });
+                items.push({ color: '#94a3b8', label: 'Antineutrino (ν̄ₑ)', show: showProducts && ejectProg > 0.1 });
+            }
+            // Beta⁺: same timing as beta⁻
+            if (decayType === 'betaPlus') {
+                const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
+                items.push({ color: '#c084fc', label: 'Positron (e⁺)', show: showProducts && ejectProg > 0 });
+                items.push({ color: '#94a3b8', label: 'Neutrino (νₑ)', show: showProducts && ejectProg > 0.1 });
+            }
+            // Gamma: photon appears at prodProg ~0.1
+            if (decayType === 'gamma')     items.push({ color: '#fbbf24', label: 'Gammafoton (γ)', show: showProducts && prodProg > 0.1 });
+
+            const visibleItems = items.filter(it => it.show);
+
+            ctx.save();
+            ctx.font = '11px Poppins, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            const dotR = 5;
+            const lineH = 18;
+            visibleItems.forEach((item, i) => {
+                const iy = y + i * lineH;
+                ctx.fillStyle = item.color;
+                ctx.shadowColor = item.color;
+                ctx.shadowBlur = 4;
+                ctx.beginPath();
+                ctx.arc(x + dotR, iy, dotR, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fillText(item.label, x + dotR * 2 + 6, iy);
+            });
+            ctx.restore();
+        }
+
         // Structured nucleus label data for canvas rendering
         // { name: 'Radium-226', mass: '226', Z: '88', symbol: 'Ra' }
         const NUCLEUS_LABELS = {
@@ -444,7 +494,7 @@
         function DecayCanvas({ decayType }) {
             const canvasRef   = useRef(null);
             const stateRef    = useRef({ phase: 'idle', progress: 0, rafId: null, startTime: null });
-            const [phase, setPhase]       = useState('idle'); // idle | animating | done
+            const [phase, setPhase]       = useState('idle'); // idle | animating | done | formula
             const [canvasSize, setCanvasSize] = useState({ w: 750, h: 480 });
             const containerRef = useRef(null);
 
@@ -542,13 +592,13 @@
                 ctx.fillStyle = bg;
                 ctx.fillRect(0, 0, w, h);
 
-                const isSplit = (currentPhase === 'animating' || currentPhase === 'done');
+                const isSplit = (currentPhase === 'formula');
 
                 // Helper: compute scale and a drawR that ensures nucleons touch
                 let maxGridR = 0;
                 nucleons.forEach(n => { if (n.distFromCenter > maxGridR) maxGridR = n.distFromCenter; });
 
-                if (!isSplit) {
+                if (currentPhase === 'idle') {
                     // ── IDLE: single centred view ────────────────────────────
                     const padding = nr * 3;
                     const availR  = Math.min(w, h) * 0.42 - padding;
@@ -557,8 +607,8 @@
                     const cx = w / 2;
                     const cy = h / 2;
 
-                    const jiggleAmp = decayType === 'gamma' ? drawR * 0.22 : drawR * 0.10;
-                    const glowStr   = decayType === 'gamma' ? 10 + Math.sin(time * 8) * 5 : 0;
+                    const jiggleAmp = decayType === 'gamma' ? drawR * 0.38 : drawR * 0.10;
+                    const glowStr   = decayType === 'gamma' ? 12 + Math.sin(time * 8) * 6 : 0;
 
                     nucleons.forEach((n, idx) => {
                         const jx = Math.sin(time * (decayType === 'gamma' ? 5 + idx * 0.13 : 4.1) + idx * 1.3) * jiggleAmp;
@@ -569,7 +619,6 @@
                         drawNucleon(ctx, px, py, drawR, color, decayType === 'gamma' ? color : null, glowStr * 0.7);
                     });
 
-                    // Gamma excited label in idle
                     // Decay type title at top
                     const DECAY_TITLES = { alpha: 'Alfasönderfall', betaMinus: 'Beta⁻-sönderfall', betaPlus: 'Beta⁺-sönderfall', gamma: 'Gammasönderfall' };
                     const headingSize = Math.max(16, Math.min(24, w / 30));
@@ -603,7 +652,7 @@
                         ctx.textBaseline = 'middle';
                         ctx.shadowColor = '#fbbf24';
                         ctx.shadowBlur = 12;
-                        ctx.fillText('Exciterat tillstånd', w / 2, nucleusTop - 4);
+                        ctx.fillText('Exciterat tillstånd', w / 2, nucleusTop - 36);
                         ctx.restore();
                     }
 
@@ -612,7 +661,459 @@
                     const fTokens = FORMULA_TOKENS[decayType];
                     drawFormula(ctx, w / 2, h - 18, fTokens, fmSize, '#94a3b8');
 
-                } else {
+                    // Legend top-left
+                    drawLegend(ctx, decayType, 12, 16, currentPhase, progress);
+
+                } else if (currentPhase === 'animating' || currentPhase === 'done') {
+                    // ── SINGLE VIEW: decay animation / final products ────────
+                    const padding = nr * 3;
+                    const availR  = Math.min(w, h) * 0.42 - padding;
+                    const scale   = maxGridR > 0 ? availR / (maxGridR + nr) : availR;
+                    const drawR   = Math.max(nr, scale * 0.48);
+                    const cx = w / 2;
+                    const cy = h / 2;
+
+                    // prodProg is just the raw animation progress (0 to 1), no hold
+                    const prodProg = progress;
+
+                    // Decay type title at top
+                    const DECAY_TITLES = { alpha: 'Alfasönderfall', betaMinus: 'Beta⁻-sönderfall', betaPlus: 'Beta⁺-sönderfall', gamma: 'Gammasönderfall' };
+                    const headingSize = Math.max(16, Math.min(24, w / 30));
+                    ctx.save();
+                    ctx.font = `bold ${headingSize}px Poppins, sans-serif`;
+                    ctx.fillStyle = '#e2e8f0';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.shadowColor = 'rgba(56,189,248,0.3)';
+                    ctx.shadowBlur = 8;
+                    ctx.fillText(DECAY_TITLES[decayType], w / 2, 24);
+                    ctx.restore();
+
+                    const lblSize = Math.max(16, Math.min(22, w / 32));
+                    const nLabels = NUCLEUS_LABELS[decayType];
+
+                    // ── ALPHA single view ─────────────────────────────────────
+                    if (decayType === 'alpha') {
+                        const alphaSet = new Set(specialIndices);
+
+                        // Tight diamond cluster offsets
+                        const cR = drawR * 1.1;
+                        const alphaProtons  = specialIndices.filter(i => nucleons[i].type === 'proton');
+                        const alphaNeutrons = specialIndices.filter(i => nucleons[i].type === 'neutron');
+                        const orderedAlpha = [alphaProtons[0], alphaNeutrons[0], alphaProtons[1], alphaNeutrons[1]];
+                        const clusterOffsets = [
+                            { dx: -cR, dy: 0 },
+                            { dx: 0,   dy: -cR },
+                            { dx: cR,  dy: 0 },
+                            { dx: 0,   dy: cR },
+                        ];
+
+                        const convergeProg = easeInOut(clamp(prodProg / 0.40, 0, 1));
+                        const driftProg    = easeInOut(clamp((prodProg - 0.15) / 0.75, 0, 1));
+
+                        const nucleusVisR = maxGridR * scale + drawR;
+                        const targetDist  = nucleusVisR + drawR * 8;
+                        const clusterCX   = cx + targetDist * driftProg;
+                        const clusterCY   = cy;
+
+                        // Draw daughter nucleus (all nucleons except alpha ones)
+                        const daughterJiggle = drawR * 0.08;
+                        nucleons.forEach((n, idx) => {
+                            if (alphaSet.has(idx)) return;
+                            const jx = Math.sin(time * 4.1 + idx * 1.3) * daughterJiggle;
+                            const jy = Math.cos(time * 3.7 + idx * 0.9) * daughterJiggle;
+                            const px = cx + n.gx * scale + jx;
+                            const py = cy + n.gy * scale + jy;
+                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                            drawNucleon(ctx, px, py, drawR, color);
+                        });
+
+                        // Alpha nucleons: interpolate from original grid position to tight cluster
+                        const glowAmt = 12 + Math.sin(time * 6) * 4;
+                        orderedAlpha.forEach((idx, si) => {
+                            const n = nucleons[idx];
+                            const origX = cx + n.gx * scale;
+                            const origY = cy + n.gy * scale;
+                            const targetX = clusterCX + clusterOffsets[si].dx;
+                            const targetY = clusterCY + clusterOffsets[si].dy;
+                            const px = origX + (targetX - origX) * convergeProg;
+                            const py = origY + (targetY - origY) * convergeProg;
+                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                            drawNucleon(ctx, px, py, drawR, color, COL_ALPHA, glowAmt);
+                        });
+
+                        // Circle border around alpha cluster (once mostly converged)
+                        if (convergeProg > 0.5) {
+                            ctx.save();
+                            ctx.globalAlpha = (convergeProg - 0.5) * 2 * 0.45;
+                            ctx.strokeStyle = COL_ALPHA;
+                            ctx.lineWidth = 1.5;
+                            ctx.shadowColor = COL_ALPHA;
+                            ctx.shadowBlur = 10;
+                            ctx.beginPath();
+                            ctx.arc(clusterCX, clusterCY, cR + drawR + 3, 0, Math.PI * 2);
+                            ctx.stroke();
+                            ctx.restore();
+                        }
+
+                        // Alpha label above the cluster
+                        if (prodProg > 0.4) {
+                            const alphaInfo = { mass: '4', Z: '2', symbol: 'He', name: 'Helium-4' };
+                            ctx.save();
+                            ctx.globalAlpha = clamp((prodProg - 0.4) / 0.25, 0, 1);
+                            ctx.shadowColor = COL_ALPHA;
+                            ctx.shadowBlur = 12;
+                            drawNucleusLabel(ctx, clusterCX, clusterCY - cR - drawR - 14, alphaInfo, lblSize, COL_ALPHA, '(α)');
+                            ctx.restore();
+                        }
+
+                        // Daughter label above nucleus
+                        const nucleusTopY = cy - (maxGridR * scale + drawR);
+                        ctx.save();
+                        ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
+                        ctx.shadowColor = 'rgba(56,189,248,0.4)';
+                        ctx.shadowBlur = 8;
+                        drawNucleusLabel(ctx, cx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                        ctx.restore();
+                    }
+
+                    // ── BETA⁻ single view ─────────────────────────────────────
+                    if (decayType === 'betaMinus') {
+                        const convIdx = specialIndices[0];
+                        const convNucleon = nucleons[convIdx];
+                        const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
+                        const rightJiggle = drawR * 0.08;
+
+                        nucleons.forEach((n, idx) => {
+                            const jx = Math.sin(time * 4.1 + idx * 1.3) * rightJiggle;
+                            const jy = Math.cos(time * 3.7 + idx * 0.9) * rightJiggle;
+                            const px = cx + n.gx * scale + jx;
+                            const py = cy + n.gy * scale + jy;
+
+                            if (idx === convIdx) {
+                                drawNucleon(ctx, px, py, drawR, COL_PROTON, '#fff', 8);
+                                if (prodProg < 0.7) {
+                                    ctx.save();
+                                    ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1) * (1 - clamp((prodProg - 0.5) / 0.2, 0, 1));
+                                    ctx.font = `italic bold ${drawR * 1.3}px Poppins, sans-serif`;
+                                    ctx.fillStyle = '#fff';
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+                                    ctx.shadowColor = '#fff';
+                                    ctx.shadowBlur = 10;
+                                    ctx.fillText('n \u2192 p', px, py - drawR * 2.2);
+                                    ctx.restore();
+                                }
+                            } else {
+                                const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                                drawNucleon(ctx, px, py, drawR, color);
+                            }
+                        });
+
+                        // Electron & antineutrino: fly out and settle to the right
+                        const nucleusVisR = maxGridR * scale + drawR;
+                        const eRadius = drawR * 0.55;
+                        const nuRadius = drawR * 0.35;
+                        const particleSpacing = drawR * 6;
+                        const eFinalX = cx + nucleusVisR + drawR * 5;
+                        const eFinalY = cy;
+                        const nuFinalX = eFinalX + particleSpacing;
+                        const nuFinalY = cy;
+                        const eStartX = cx + convNucleon.gx * scale;
+                        const eStartY = cy + convNucleon.gy * scale;
+
+                        if (ejectProg > 0) {
+                            const eProg = easeInOut(clamp(ejectProg / 0.8, 0, 1));
+                            const ex = eStartX + (eFinalX - eStartX) * eProg;
+                            const ey = eStartY + (eFinalY - eStartY) * eProg;
+                            ctx.save();
+                            ctx.shadowColor = COL_ALPHA;
+                            ctx.shadowBlur = 14;
+                            ctx.beginPath();
+                            ctx.arc(ex, ey, eRadius, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_ELECTRON;
+                            ctx.fill();
+                            ctx.strokeStyle = COL_ALPHA;
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(ex, ey, eRadius + 3, 0, Math.PI * 2);
+                            ctx.stroke();
+                            ctx.restore();
+
+                            if (ejectProg > 0.5) {
+                                const eInfo = { mass: '0', Z: '-1', symbol: 'e\u207B', name: '' };
+                                ctx.save();
+                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
+                                ctx.shadowColor = COL_ALPHA;
+                                ctx.shadowBlur = 10;
+                                drawNucleusLabel(ctx, ex, ey - eRadius - 18, eInfo, lblSize, COL_ALPHA, '(\u03B2\u207B)');
+                                ctx.restore();
+                            }
+                        }
+
+                        if (ejectProg > 0.1) {
+                            const nuProg = easeInOut(clamp((ejectProg - 0.1) / 0.8, 0, 1));
+                            const nx = eStartX + (nuFinalX - eStartX) * nuProg;
+                            const ny = eStartY + (nuFinalY - eStartY) * nuProg;
+                            ctx.save();
+                            ctx.shadowColor = COL_NEUTRINO;
+                            ctx.shadowBlur = 8;
+                            ctx.strokeStyle = COL_NEUTRINO;
+                            ctx.lineWidth = 1.5;
+                            ctx.setLineDash([4, 5]);
+                            ctx.beginPath();
+                            ctx.moveTo(eStartX, eStartY);
+                            ctx.lineTo(nx, ny);
+                            ctx.stroke();
+                            ctx.setLineDash([]);
+                            ctx.beginPath();
+                            ctx.arc(nx, ny, nuRadius, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_NEUTRINO;
+                            ctx.fill();
+                            ctx.restore();
+
+                            if (ejectProg > 0.5) {
+                                ctx.save();
+                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
+                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                                ctx.fillStyle = COL_NEUTRINO;
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'alphabetic';
+                                ctx.fillText('\u03BD\u0304\u2091', nx, ny - nuRadius - 10);
+                                ctx.restore();
+                            }
+                        }
+
+                        // Daughter label above nucleus
+                        const nucleusTopY = cy - (maxGridR * scale + drawR);
+                        ctx.save();
+                        ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
+                        ctx.shadowColor = 'rgba(56,189,248,0.4)';
+                        ctx.shadowBlur = 8;
+                        drawNucleusLabel(ctx, cx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                        ctx.restore();
+                    }
+
+                    // ── BETA⁺ single view ─────────────────────────────────────
+                    if (decayType === 'betaPlus') {
+                        const convIdx = specialIndices[0];
+                        const convNucleon = nucleons[convIdx];
+                        const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
+                        const rightJiggle = drawR * 0.08;
+
+                        nucleons.forEach((n, idx) => {
+                            const jx = Math.sin(time * 4.1 + idx * 1.3) * rightJiggle;
+                            const jy = Math.cos(time * 3.7 + idx * 0.9) * rightJiggle;
+                            const px = cx + n.gx * scale + jx;
+                            const py = cy + n.gy * scale + jy;
+
+                            if (idx === convIdx) {
+                                drawNucleon(ctx, px, py, drawR, COL_NEUTRON, '#fff', 8);
+                                if (prodProg < 0.7) {
+                                    ctx.save();
+                                    ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1) * (1 - clamp((prodProg - 0.5) / 0.2, 0, 1));
+                                    ctx.font = `italic bold ${drawR * 1.3}px Poppins, sans-serif`;
+                                    ctx.fillStyle = '#fff';
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+                                    ctx.shadowColor = '#fff';
+                                    ctx.shadowBlur = 10;
+                                    ctx.fillText('p \u2192 n', px, py - drawR * 2.2);
+                                    ctx.restore();
+                                }
+                            } else {
+                                const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                                drawNucleon(ctx, px, py, drawR, color);
+                            }
+                        });
+
+                        // Positron & neutrino: fly out and settle to the right
+                        const nucleusVisRBp = maxGridR * scale + drawR;
+                        const eRadiusBp = drawR * 0.55;
+                        const nuRadiusBp = drawR * 0.35;
+                        const particleSpacingBp = drawR * 6;
+                        const eFinalXBp = cx + nucleusVisRBp + drawR * 5;
+                        const eFinalYBp = cy;
+                        const nuFinalXBp = eFinalXBp + particleSpacingBp;
+                        const nuFinalYBp = cy;
+                        const eStartXBp = cx + convNucleon.gx * scale;
+                        const eStartYBp = cy + convNucleon.gy * scale;
+
+                        if (ejectProg > 0) {
+                            const eProg = easeInOut(clamp(ejectProg / 0.8, 0, 1));
+                            const ex = eStartXBp + (eFinalXBp - eStartXBp) * eProg;
+                            const ey = eStartYBp + (eFinalYBp - eStartYBp) * eProg;
+                            ctx.save();
+                            ctx.shadowColor = COL_ALPHA;
+                            ctx.shadowBlur = 14;
+                            ctx.beginPath();
+                            ctx.arc(ex, ey, eRadiusBp, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_POSITRON;
+                            ctx.fill();
+                            ctx.strokeStyle = COL_ALPHA;
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(ex, ey, eRadiusBp + 3, 0, Math.PI * 2);
+                            ctx.stroke();
+                            ctx.restore();
+
+                            if (ejectProg > 0.5) {
+                                const eInfoBp = { mass: '0', Z: '1', symbol: 'e\u207A', name: '' };
+                                ctx.save();
+                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
+                                ctx.shadowColor = COL_ALPHA;
+                                ctx.shadowBlur = 10;
+                                drawNucleusLabel(ctx, ex, ey - eRadiusBp - 18, eInfoBp, lblSize, COL_ALPHA, '(\u03B2\u207A)');
+                                ctx.restore();
+                            }
+                        }
+
+                        if (ejectProg > 0.1) {
+                            const nuProg = easeInOut(clamp((ejectProg - 0.1) / 0.8, 0, 1));
+                            const nx = eStartXBp + (nuFinalXBp - eStartXBp) * nuProg;
+                            const ny = eStartYBp + (nuFinalYBp - eStartYBp) * nuProg;
+                            ctx.save();
+                            ctx.shadowColor = COL_NEUTRINO;
+                            ctx.shadowBlur = 8;
+                            ctx.strokeStyle = COL_NEUTRINO;
+                            ctx.lineWidth = 1.5;
+                            ctx.setLineDash([4, 5]);
+                            ctx.beginPath();
+                            ctx.moveTo(eStartXBp, eStartYBp);
+                            ctx.lineTo(nx, ny);
+                            ctx.stroke();
+                            ctx.setLineDash([]);
+                            ctx.beginPath();
+                            ctx.arc(nx, ny, nuRadiusBp, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_NEUTRINO;
+                            ctx.fill();
+                            ctx.restore();
+
+                            if (ejectProg > 0.5) {
+                                ctx.save();
+                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
+                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                                ctx.fillStyle = COL_NEUTRINO;
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'alphabetic';
+                                ctx.fillText('\u03BD\u2091', nx, ny - nuRadiusBp - 10);
+                                ctx.restore();
+                            }
+                        }
+
+                        // Daughter label above nucleus
+                        const nucleusTopY = cy - (maxGridR * scale + drawR);
+                        ctx.save();
+                        ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
+                        ctx.shadowColor = 'rgba(56,189,248,0.4)';
+                        ctx.shadowBlur = 8;
+                        drawNucleusLabel(ctx, cx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                        ctx.restore();
+                    }
+
+                    // ── GAMMA single view ─────────────────────────────────────
+                    if (decayType === 'gamma') {
+                        // Ground state: calm nucleus (slight residual jiggle that fades)
+                        const calmProg = clamp(prodProg / 0.3, 0, 1);
+                        const jiggleAmp = drawR * (0.22 - 0.19 * calmProg);
+                        const glowStr = (10 + Math.sin(time * 8) * 5) * (1 - calmProg);
+
+                        nucleons.forEach((n, idx) => {
+                            const freq = decayType === 'gamma' ? (5 + idx * 0.13) - calmProg * 3 : 2;
+                            const jx = Math.sin(time * freq + idx * 1.3) * jiggleAmp;
+                            const jy = Math.cos(time * (freq - 0.3) + idx * 0.9) * jiggleAmp;
+                            const px = cx + n.gx * scale + jx;
+                            const py = cy + n.gy * scale + jy;
+                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                            drawNucleon(ctx, px, py, drawR, color, calmProg < 1 ? color : null, glowStr * 0.7);
+                        });
+
+                        // "Grundtillstånd" label
+                        if (prodProg > 0.2) {
+                            const gtTopY = cy - (maxGridR * scale + drawR);
+                            ctx.save();
+                            ctx.globalAlpha = clamp((prodProg - 0.2) / 0.3, 0, 1);
+                            ctx.font = `bold ${Math.max(10, lblSize * 0.7)}px Poppins, sans-serif`;
+                            ctx.fillStyle = '#38bdf8';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.shadowColor = '#38bdf8';
+                            ctx.shadowBlur = 10;
+                            ctx.fillText('Grundtillst\u00e5nd', cx, gtTopY - 36);
+                            ctx.restore();
+                        }
+
+                        // Wavy gamma photon going to the right
+                        const gammaProg = clamp((prodProg - 0.1) / 0.7, 0, 1);
+                        const gammaFade = clamp((prodProg - 0.85) / 0.15, 0, 1);
+                        const nucleusVisRG = maxGridR * scale + drawR;
+                        const gammaStartX = cx + nucleusVisRG + drawR;
+                        const gammaEndX   = cx + nucleusVisRG + drawR * 12;
+                        const gammaFinalX = gammaStartX + (gammaEndX - gammaStartX) * easeInOut(gammaProg);
+                        const gammaY = cy;
+
+                        if (gammaProg > 0) {
+                            const numWaves = 5;
+                            const waveAmp  = drawR * 1.4;
+                            const steps = 80;
+                            const waveLength = gammaFinalX - gammaStartX;
+
+                            ctx.save();
+                            ctx.globalAlpha = clamp(gammaProg / 0.2, 0, 1) * (1 - gammaFade);
+                            ctx.strokeStyle = COL_GAMMA;
+                            ctx.lineWidth = 2.5;
+                            ctx.shadowColor = COL_GAMMA;
+                            ctx.shadowBlur = 18;
+                            ctx.lineJoin = 'round';
+                            ctx.beginPath();
+                            for (let s = 0; s <= steps; s++) {
+                                const frac = s / steps;
+                                const px = gammaStartX + frac * waveLength;
+                                const py = gammaY + Math.sin(frac * numWaves * Math.PI * 2) * waveAmp;
+                                s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                            }
+                            ctx.stroke();
+                            ctx.restore();
+
+                            const gDotR = drawR * 0.5;
+                            ctx.save();
+                            ctx.globalAlpha = clamp(gammaProg / 0.2, 0, 1);
+                            ctx.shadowColor = COL_GAMMA;
+                            ctx.shadowBlur = 16;
+                            ctx.beginPath();
+                            ctx.arc(gammaFinalX, gammaY, gDotR, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_GAMMA;
+                            ctx.fill();
+                            ctx.restore();
+
+                            if (gammaProg > 0.3) {
+                                ctx.save();
+                                ctx.globalAlpha = clamp((gammaProg - 0.3) / 0.25, 0, 1);
+                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                                ctx.fillStyle = COL_GAMMA;
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'alphabetic';
+                                ctx.shadowColor = COL_GAMMA;
+                                ctx.shadowBlur = 12;
+                                ctx.fillText('\u03B3', gammaFinalX, gammaY - gDotR - 10);
+                                ctx.restore();
+                            }
+                        }
+
+                        // Daughter label above nucleus
+                        const nucleusTopY = cy - (maxGridR * scale + drawR);
+                        ctx.save();
+                        ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
+                        ctx.shadowColor = 'rgba(56,189,248,0.4)';
+                        ctx.shadowBlur = 8;
+                        drawNucleusLabel(ctx, cx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                        ctx.restore();
+                    }
+
+                    // Legend top-left
+                    drawLegend(ctx, decayType, 12, 16, currentPhase, progress);
+
+                } else if (currentPhase === 'formula') {
                     // ── SPLIT VIEW: Före (left) | Efter (right) ──────────────
                     const panelW = w / 2;
 
@@ -628,9 +1129,8 @@
                     const rcx = 3 * w / 4;
                     const rcy = h / 2 + 8;
 
-                    // prodProg: 2s hold (progress 0–0.385) then decay animation
-                    const holdFrac = 2000 / 5200;  // first 2s: show identical nucleus
-                    const prodProg = clamp((progress - holdFrac) / (1 - holdFrac), 0, 1);
+                    // Static final state: prodProg = 1
+                    const prodProg = 1;
 
                     // ── Dashed divider ────────────────────────────────────────
                     ctx.save();
@@ -651,8 +1151,7 @@
                     ctx.textBaseline = 'top';
                     ctx.textAlign = 'center';
                     ctx.fillStyle = '#94a3b8';
-                    ctx.fillText('Före', w / 4, 10);
-                    ctx.globalAlpha = clamp(prodProg / 0.25, 0, 1);
+                    ctx.fillText('F\u00f6re', w / 4, 10);
                     ctx.fillText('Efter', 3 * w / 4, 10);
                     ctx.restore();
 
@@ -689,36 +1188,16 @@
                         ctx.textBaseline = 'middle';
                         ctx.shadowColor = '#fbbf24';
                         ctx.shadowBlur = 12;
-                        ctx.fillText('Exciterat tillstånd', lcx, parentTopY - 40);
+                        ctx.fillText('Exciterat tillst\u00e5nd', lcx, parentTopY - 40);
                         ctx.restore();
                     }
 
-                    // ── RIGHT PANEL: decay products ───────────────────────────
-                    ctx.save();
-                    ctx.globalAlpha = clamp(progress / 0.05, 0, 1);
-
-                    // During hold phase (prodProg === 0): draw full nucleus unchanged
-                    if (prodProg === 0) {
-                        nucleons.forEach(n => {
-                            const px = rcx + n.gx * scale;
-                            const py = rcy + n.gy * scale;
-                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
-                            drawNucleon(ctx, px, py, drawR, color, null, 0);
-                        });
-                        // Parent label on right panel during hold
-                        const rTopY = rcy - (maxGridR * scale + drawR);
-                        ctx.save();
-                        ctx.shadowColor = 'rgba(56,189,248,0.3)';
-                        ctx.shadowBlur = 6;
-                        drawNucleusLabel(ctx, rcx, rTopY - 18, nLabels.parent, lblSize, '#e2e8f0');
-                        ctx.restore();
-                    }
+                    // ── RIGHT PANEL: decay products (static final state) ─────
 
                     // ── ALPHA right panel ─────────────────────────────────────
                     if (decayType === 'alpha') {
                         const alphaSet = new Set(specialIndices);
 
-                        // Tight diamond cluster offsets
                         const cR = drawR * 1.1;
                         const alphaProtons  = specialIndices.filter(i => nucleons[i].type === 'proton');
                         const alphaNeutrons = specialIndices.filter(i => nucleons[i].type === 'neutron');
@@ -730,19 +1209,12 @@
                             { dx: 0,   dy: cR },
                         ];
 
-                        // Animation phases:
-                        //  0–40%: nucleons converge from grid positions into tight cluster
-                        // 15–90%: cluster drifts to the right away from daughter
-                        const convergeProg = easeInOut(clamp(prodProg / 0.40, 0, 1));
-                        const driftProg    = easeInOut(clamp((prodProg - 0.15) / 0.75, 0, 1));
-
-                        // Cluster target centre: always to the RIGHT of the daughter
                         const nucleusVisR = maxGridR * scale + drawR;
                         const targetDist  = nucleusVisR + drawR * 8;
-                        const clusterCX   = rcx + targetDist * driftProg;
+                        const clusterCX   = rcx + targetDist;
                         const clusterCY   = rcy;
 
-                        // Draw daughter nucleus (all nucleons except alpha ones)
+                        // Draw daughter nucleus
                         const daughterJiggle = drawR * 0.08;
                         nucleons.forEach((n, idx) => {
                             if (alphaSet.has(idx)) return;
@@ -754,288 +1226,188 @@
                             drawNucleon(ctx, px, py, drawR, color);
                         });
 
-                        // Alpha nucleons: interpolate from original grid position → tight cluster
+                        // Alpha cluster at final position
                         const glowAmt = 12 + Math.sin(time * 6) * 4;
                         orderedAlpha.forEach((idx, si) => {
-                            const n = nucleons[idx];
-                            // Original position (inside the nucleus)
-                            const origX = rcx + n.gx * scale;
-                            const origY = rcy + n.gy * scale;
-                            // Target position in the tight cluster
                             const targetX = clusterCX + clusterOffsets[si].dx;
                             const targetY = clusterCY + clusterOffsets[si].dy;
-                            // Interpolate
-                            const px = origX + (targetX - origX) * convergeProg;
-                            const py = origY + (targetY - origY) * convergeProg;
-                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
-                            drawNucleon(ctx, px, py, drawR, color, COL_ALPHA, glowAmt);
+                            const color = nucleons[idx].type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                            drawNucleon(ctx, targetX, targetY, drawR, color, COL_ALPHA, glowAmt);
                         });
 
-                        // Circle border around alpha cluster (once mostly converged)
-                        if (convergeProg > 0.5) {
-                            ctx.save();
-                            ctx.globalAlpha = (convergeProg - 0.5) * 2 * 0.45;
-                            ctx.strokeStyle = COL_ALPHA;
-                            ctx.lineWidth = 1.5;
-                            ctx.shadowColor = COL_ALPHA;
-                            ctx.shadowBlur = 10;
-                            ctx.beginPath();
-                            ctx.arc(clusterCX, clusterCY, cR + drawR + 3, 0, Math.PI * 2);
-                            ctx.stroke();
-                            ctx.restore();
-                        }
+                        // Circle border
+                        ctx.save();
+                        ctx.globalAlpha = 0.45;
+                        ctx.strokeStyle = COL_ALPHA;
+                        ctx.lineWidth = 1.5;
+                        ctx.shadowColor = COL_ALPHA;
+                        ctx.shadowBlur = 10;
+                        ctx.beginPath();
+                        ctx.arc(clusterCX, clusterCY, cR + drawR + 3, 0, Math.PI * 2);
+                        ctx.stroke();
+                        ctx.restore();
 
-                        // Alpha label above the cluster, same style as nucleus labels
-                        if (prodProg > 0.4) {
-                            const alphaInfo = { mass: '4', Z: '2', symbol: 'He', name: 'Helium-4' };
-                            ctx.save();
-                            ctx.globalAlpha = clamp((prodProg - 0.4) / 0.25, 0, 1);
-                            ctx.shadowColor = COL_ALPHA;
-                            ctx.shadowBlur = 12;
-                            drawNucleusLabel(ctx, clusterCX, clusterCY - cR - drawR - 14, alphaInfo, lblSize, COL_ALPHA, '(α)');
-                            ctx.restore();
-                        }
+                        // Alpha label
+                        const alphaInfo = { mass: '4', Z: '2', symbol: 'He', name: 'Helium-4' };
+                        ctx.save();
+                        ctx.shadowColor = COL_ALPHA;
+                        ctx.shadowBlur = 12;
+                        drawNucleusLabel(ctx, clusterCX, clusterCY - cR - drawR - 14, alphaInfo, lblSize, COL_ALPHA, '(\u03B1)');
+                        ctx.restore();
                     }
 
                     // ── BETA⁻ right panel ─────────────────────────────────────
                     if (decayType === 'betaMinus') {
                         const convIdx = specialIndices[0];
                         const convNucleon = nucleons[convIdx];
-                        const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
                         const rightJiggle = drawR * 0.08;
+
+                        // Shift group left so electron is roughly centered in right panel
+                        const nucleusVisR_bm = maxGridR * scale + drawR;
+                        const groupExtent = nucleusVisR_bm + drawR * 5 + drawR * 6;
+                        const groupShift = (groupExtent - nucleusVisR_bm) / 2;
+                        const bmRcx = rcx - groupShift;
 
                         nucleons.forEach((n, idx) => {
                             const jx = Math.sin(time * 4.1 + idx * 1.3) * rightJiggle;
                             const jy = Math.cos(time * 3.7 + idx * 0.9) * rightJiggle;
-                            const px = rcx + n.gx * scale + jx;
+                            const px = bmRcx + n.gx * scale + jx;
                             const py = rcy + n.gy * scale + jy;
 
                             if (idx === convIdx) {
-                                // Fully converted to proton
                                 drawNucleon(ctx, px, py, drawR, COL_PROTON, '#fff', 8);
-                                if (prodProg < 0.7) {
-                                    ctx.save();
-                                    ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1) * (1 - clamp((prodProg - 0.5) / 0.2, 0, 1));
-                                    ctx.font = `italic bold ${drawR * 1.3}px Poppins, sans-serif`;
-                                    ctx.fillStyle = '#fff';
-                                    ctx.textAlign = 'center';
-                                    ctx.textBaseline = 'middle';
-                                    ctx.shadowColor = '#fff';
-                                    ctx.shadowBlur = 10;
-                                    ctx.fillText('n → p', px, py - drawR * 2.2);
-                                    ctx.restore();
-                                }
                             } else {
                                 const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
                                 drawNucleon(ctx, px, py, drawR, color);
                             }
                         });
 
-                        // Electron & antineutrino: fly out and settle to the right
-                        const nucleusVisR = maxGridR * scale + drawR;
+                        const nucleusVisR = nucleusVisR_bm;
                         const eRadius = drawR * 0.55;
                         const nuRadius = drawR * 0.35;
-                        const particleSpacing = drawR * 3.5;
-                        // Final resting positions: electron left, antineutrino right
-                        const eFinalX = rcx + nucleusVisR + drawR * 5;
+                        const particleSpacing = drawR * 6;
+                        const eFinalX = bmRcx + nucleusVisR + drawR * 5;
                         const eFinalY = rcy;
                         const nuFinalX = eFinalX + particleSpacing;
                         const nuFinalY = rcy;
-                        // Start positions (from converted nucleon)
-                        const eStartX = rcx + convNucleon.gx * scale;
-                        const eStartY = rcy + convNucleon.gy * scale;
 
-                        // Electron flying out and settling
-                        if (ejectProg > 0) {
-                            const eProg = easeInOut(clamp(ejectProg / 0.8, 0, 1));
-                            const ex = eStartX + (eFinalX - eStartX) * eProg;
-                            const ey = eStartY + (eFinalY - eStartY) * eProg;
-                            ctx.save();
-                            // Gold ring around electron (like alpha particle)
-                            ctx.shadowColor = COL_ALPHA;
-                            ctx.shadowBlur = 14;
-                            ctx.beginPath();
-                            ctx.arc(ex, ey, eRadius, 0, Math.PI * 2);
-                            ctx.fillStyle = COL_ELECTRON;
-                            ctx.fill();
-                            ctx.strokeStyle = COL_ALPHA;
-                            ctx.lineWidth = 2;
-                            ctx.beginPath();
-                            ctx.arc(ex, ey, eRadius + 3, 0, Math.PI * 2);
-                            ctx.stroke();
-                            ctx.restore();
+                        // Electron at final position
+                        ctx.save();
+                        ctx.shadowColor = COL_ALPHA;
+                        ctx.shadowBlur = 14;
+                        ctx.beginPath();
+                        ctx.arc(eFinalX, eFinalY, eRadius, 0, Math.PI * 2);
+                        ctx.fillStyle = COL_ELECTRON;
+                        ctx.fill();
+                        ctx.strokeStyle = COL_ALPHA;
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.arc(eFinalX, eFinalY, eRadius + 3, 0, Math.PI * 2);
+                        ctx.stroke();
+                        ctx.restore();
 
-                            // Electron label above (with mass/Z like nucleus labels)
-                            if (ejectProg > 0.5) {
-                                const eInfo = { mass: '0', Z: '-1', symbol: 'e⁻', name: '' };
-                                ctx.save();
-                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
-                                ctx.shadowColor = COL_ALPHA;
-                                ctx.shadowBlur = 10;
-                                drawNucleusLabel(ctx, ex, ey - eRadius - 18, eInfo, lblSize, COL_ALPHA, '(β⁻)');
-                                ctx.restore();
-                            }
-                        }
+                        const eInfo = { mass: '0', Z: '-1', symbol: 'e\u207B', name: '' };
+                        ctx.save();
+                        ctx.shadowColor = COL_ALPHA;
+                        ctx.shadowBlur = 10;
+                        drawNucleusLabel(ctx, eFinalX, eFinalY - eRadius - 18, eInfo, lblSize, COL_ALPHA, '(\u03B2\u207B)');
+                        ctx.restore();
 
-                        // Antineutrino flying out and settling
-                        if (ejectProg > 0.1) {
-                            const nuProg = easeInOut(clamp((ejectProg - 0.1) / 0.8, 0, 1));
-                            const nx = eStartX + (nuFinalX - eStartX) * nuProg;
-                            const ny = eStartY + (nuFinalY - eStartY) * nuProg;
-                            ctx.save();
-                            ctx.shadowColor = COL_NEUTRINO;
-                            ctx.shadowBlur = 8;
-                            // Dashed trail
-                            ctx.strokeStyle = COL_NEUTRINO;
-                            ctx.lineWidth = 1.5;
-                            ctx.setLineDash([4, 5]);
-                            ctx.beginPath();
-                            ctx.moveTo(eStartX, eStartY);
-                            ctx.lineTo(nx, ny);
-                            ctx.stroke();
-                            ctx.setLineDash([]);
-                            // Neutrino dot
-                            ctx.beginPath();
-                            ctx.arc(nx, ny, nuRadius, 0, Math.PI * 2);
-                            ctx.fillStyle = COL_NEUTRINO;
-                            ctx.fill();
-                            ctx.restore();
+                        // Antineutrino at final position
+                        ctx.save();
+                        ctx.shadowColor = COL_NEUTRINO;
+                        ctx.shadowBlur = 8;
+                        ctx.beginPath();
+                        ctx.arc(nuFinalX, nuFinalY, nuRadius, 0, Math.PI * 2);
+                        ctx.fillStyle = COL_NEUTRINO;
+                        ctx.fill();
+                        ctx.restore();
 
-                            // Antineutrino label above
-                            if (ejectProg > 0.5) {
-                                ctx.save();
-                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
-                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
-                                ctx.fillStyle = COL_NEUTRINO;
-                                ctx.textAlign = 'center';
-                                ctx.textBaseline = 'alphabetic';
-                                ctx.fillText('ν̄ₑ', nx, ny - nuRadius - 10);
-                                ctx.restore();
-                            }
-                        }
+                        ctx.save();
+                        ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                        ctx.fillStyle = COL_NEUTRINO;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'alphabetic';
+                        ctx.fillText('\u03BD\u0304\u2091', nuFinalX, nuFinalY - nuRadius - 10);
+                        ctx.restore();
                     }
 
                     // ── BETA⁺ right panel ─────────────────────────────────────
                     if (decayType === 'betaPlus') {
                         const convIdx = specialIndices[0];
                         const convNucleon = nucleons[convIdx];
-                        const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
                         const rightJiggle = drawR * 0.08;
+
+                        // Shift group left so positron is roughly centered in right panel
+                        const nucleusVisRBp = maxGridR * scale + drawR;
+                        const groupShiftBp = (drawR * 5 + drawR * 6) / 2;
+                        const bpRcx = rcx - groupShiftBp;
 
                         nucleons.forEach((n, idx) => {
                             const jx = Math.sin(time * 4.1 + idx * 1.3) * rightJiggle;
                             const jy = Math.cos(time * 3.7 + idx * 0.9) * rightJiggle;
-                            const px = rcx + n.gx * scale + jx;
+                            const px = bpRcx + n.gx * scale + jx;
                             const py = rcy + n.gy * scale + jy;
 
                             if (idx === convIdx) {
-                                // Fully converted to neutron
                                 drawNucleon(ctx, px, py, drawR, COL_NEUTRON, '#fff', 8);
-                                if (prodProg < 0.7) {
-                                    ctx.save();
-                                    ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1) * (1 - clamp((prodProg - 0.5) / 0.2, 0, 1));
-                                    ctx.font = `italic bold ${drawR * 1.3}px Poppins, sans-serif`;
-                                    ctx.fillStyle = '#fff';
-                                    ctx.textAlign = 'center';
-                                    ctx.textBaseline = 'middle';
-                                    ctx.shadowColor = '#fff';
-                                    ctx.shadowBlur = 10;
-                                    ctx.fillText('p → n', px, py - drawR * 2.2);
-                                    ctx.restore();
-                                }
                             } else {
                                 const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
                                 drawNucleon(ctx, px, py, drawR, color);
                             }
                         });
 
-                        // Positron & neutrino: fly out and settle to the right
-                        const nucleusVisRBp = maxGridR * scale + drawR;
                         const eRadiusBp = drawR * 0.55;
                         const nuRadiusBp = drawR * 0.35;
-                        const particleSpacingBp = drawR * 3.5;
-                        // Final resting positions: positron left, neutrino right
-                        const eFinalXBp = rcx + nucleusVisRBp + drawR * 5;
+                        const particleSpacingBp = drawR * 6;
+                        const eFinalXBp = bpRcx + nucleusVisRBp + drawR * 5;
                         const eFinalYBp = rcy;
                         const nuFinalXBp = eFinalXBp + particleSpacingBp;
                         const nuFinalYBp = rcy;
-                        // Start positions (from converted nucleon)
-                        const eStartXBp = rcx + convNucleon.gx * scale;
-                        const eStartYBp = rcy + convNucleon.gy * scale;
 
-                        // Positron flying out and settling
-                        if (ejectProg > 0) {
-                            const eProg = easeInOut(clamp(ejectProg / 0.8, 0, 1));
-                            const ex = eStartXBp + (eFinalXBp - eStartXBp) * eProg;
-                            const ey = eStartYBp + (eFinalYBp - eStartYBp) * eProg;
-                            ctx.save();
-                            // Gold ring around positron (energetic particle)
-                            ctx.shadowColor = COL_ALPHA;
-                            ctx.shadowBlur = 14;
-                            ctx.beginPath();
-                            ctx.arc(ex, ey, eRadiusBp, 0, Math.PI * 2);
-                            ctx.fillStyle = COL_POSITRON;
-                            ctx.fill();
-                            ctx.strokeStyle = COL_ALPHA;
-                            ctx.lineWidth = 2;
-                            ctx.beginPath();
-                            ctx.arc(ex, ey, eRadiusBp + 3, 0, Math.PI * 2);
-                            ctx.stroke();
-                            ctx.restore();
+                        // Positron at final position
+                        ctx.save();
+                        ctx.shadowColor = COL_ALPHA;
+                        ctx.shadowBlur = 14;
+                        ctx.beginPath();
+                        ctx.arc(eFinalXBp, eFinalYBp, eRadiusBp, 0, Math.PI * 2);
+                        ctx.fillStyle = COL_POSITRON;
+                        ctx.fill();
+                        ctx.strokeStyle = COL_ALPHA;
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.arc(eFinalXBp, eFinalYBp, eRadiusBp + 3, 0, Math.PI * 2);
+                        ctx.stroke();
+                        ctx.restore();
 
-                            // Positron label above
-                            if (ejectProg > 0.5) {
-                                const eInfoBp = { mass: '0', Z: '1', symbol: 'e⁺', name: '' };
-                                ctx.save();
-                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
-                                ctx.shadowColor = COL_ALPHA;
-                                ctx.shadowBlur = 10;
-                                drawNucleusLabel(ctx, ex, ey - eRadiusBp - 18, eInfoBp, lblSize, COL_ALPHA, '(β⁺)');
-                                ctx.restore();
-                            }
-                        }
+                        const eInfoBp = { mass: '0', Z: '1', symbol: 'e\u207A', name: '' };
+                        ctx.save();
+                        ctx.shadowColor = COL_ALPHA;
+                        ctx.shadowBlur = 10;
+                        drawNucleusLabel(ctx, eFinalXBp, eFinalYBp - eRadiusBp - 18, eInfoBp, lblSize, COL_ALPHA, '(\u03B2\u207A)');
+                        ctx.restore();
 
-                        // Neutrino flying out and settling
-                        if (ejectProg > 0.1) {
-                            const nuProg = easeInOut(clamp((ejectProg - 0.1) / 0.8, 0, 1));
-                            const nx = eStartXBp + (nuFinalXBp - eStartXBp) * nuProg;
-                            const ny = eStartYBp + (nuFinalYBp - eStartYBp) * nuProg;
-                            ctx.save();
-                            ctx.shadowColor = COL_NEUTRINO;
-                            ctx.shadowBlur = 8;
-                            // Dashed trail
-                            ctx.strokeStyle = COL_NEUTRINO;
-                            ctx.lineWidth = 1.5;
-                            ctx.setLineDash([4, 5]);
-                            ctx.beginPath();
-                            ctx.moveTo(eStartXBp, eStartYBp);
-                            ctx.lineTo(nx, ny);
-                            ctx.stroke();
-                            ctx.setLineDash([]);
-                            // Neutrino dot
-                            ctx.beginPath();
-                            ctx.arc(nx, ny, nuRadiusBp, 0, Math.PI * 2);
-                            ctx.fillStyle = COL_NEUTRINO;
-                            ctx.fill();
-                            ctx.restore();
+                        // Neutrino at final position
+                        ctx.save();
+                        ctx.shadowColor = COL_NEUTRINO;
+                        ctx.shadowBlur = 8;
+                        ctx.beginPath();
+                        ctx.arc(nuFinalXBp, nuFinalYBp, nuRadiusBp, 0, Math.PI * 2);
+                        ctx.fillStyle = COL_NEUTRINO;
+                        ctx.fill();
+                        ctx.restore();
 
-                            // Neutrino label above
-                            if (ejectProg > 0.5) {
-                                ctx.save();
-                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
-                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
-                                ctx.fillStyle = COL_NEUTRINO;
-                                ctx.textAlign = 'center';
-                                ctx.textBaseline = 'alphabetic';
-                                ctx.fillText('νₑ', nx, ny - nuRadiusBp - 10);
-                                ctx.restore();
-                            }
-                        }
+                        ctx.save();
+                        ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                        ctx.fillStyle = COL_NEUTRINO;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'alphabetic';
+                        ctx.fillText('\u03BD\u2091', nuFinalXBp, nuFinalYBp - nuRadiusBp - 10);
+                        ctx.restore();
                     }
 
                     // ── GAMMA right panel ─────────────────────────────────────
                     if (decayType === 'gamma') {
-                        // Ground state: calm nucleus (slight residual jiggle that fades)
                         const calmJiggle = drawR * 0.03;
                         nucleons.forEach((n, idx) => {
                             const jx = Math.sin(time * 2 + idx * 1.3) * calmJiggle;
@@ -1046,97 +1418,91 @@
                             drawNucleon(ctx, px, py, drawR, color);
                         });
 
-                        // "Grundtillstånd" label below daughter label
-                        if (prodProg > 0.2) {
-                            const gtTopY = rcy - (maxGridR * scale + drawR);
-                            ctx.save();
-                            ctx.globalAlpha = clamp((prodProg - 0.2) / 0.3, 0, 1);
-                            ctx.font = `bold ${Math.max(10, lblSize * 0.7)}px Poppins, sans-serif`;
-                            ctx.fillStyle = '#38bdf8';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.shadowColor = '#38bdf8';
-                            ctx.shadowBlur = 10;
-                            ctx.fillText('Grundtillstånd', rcx, gtTopY - 40);
-                            ctx.restore();
-                        }
+                        // "Grundtillstånd" label
+                        const gtTopY = rcy - (maxGridR * scale + drawR);
+                        ctx.save();
+                        ctx.font = `bold ${Math.max(10, lblSize * 0.7)}px Poppins, sans-serif`;
+                        ctx.fillStyle = '#38bdf8';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.shadowColor = '#38bdf8';
+                        ctx.shadowBlur = 10;
+                        ctx.fillText('Grundtillst\u00e5nd', rcx, gtTopY - 40);
+                        ctx.restore();
 
-                        // Wavy gamma photon going to the right
-                        const gammaProg = clamp((prodProg - 0.1) / 0.7, 0, 1);
-                        const gammaFade = clamp((prodProg - 0.85) / 0.15, 0, 1); // fade wave at end
+                        // Gamma dot at final position (no wave)
                         const nucleusVisRG = maxGridR * scale + drawR;
-                        const gammaStartX = rcx + nucleusVisRG + drawR;
-                        const gammaEndX   = rcx + nucleusVisRG + drawR * 12;
-                        const gammaFinalX = gammaStartX + (gammaEndX - gammaStartX) * easeInOut(gammaProg);
+                        const gammaEndX = rcx + nucleusVisRG + drawR * 12;
                         const gammaY = rcy;
+                        const gDotR = drawR * 0.5;
 
-                        if (gammaProg > 0) {
-                            const numWaves = 5;
-                            const waveAmp  = drawR * 1.4;
-                            const steps = 80;
-                            const waveLength = gammaFinalX - gammaStartX;
+                        ctx.save();
+                        ctx.shadowColor = COL_GAMMA;
+                        ctx.shadowBlur = 16;
+                        ctx.beginPath();
+                        ctx.arc(gammaEndX, gammaY, gDotR, 0, Math.PI * 2);
+                        ctx.fillStyle = COL_GAMMA;
+                        ctx.fill();
+                        ctx.restore();
 
-                            // Sine wave (fades out when animation is done)
-                            ctx.save();
-                            ctx.globalAlpha = clamp(gammaProg / 0.2, 0, 1) * (1 - gammaFade);
-                            ctx.strokeStyle = COL_GAMMA;
-                            ctx.lineWidth = 2.5;
-                            ctx.shadowColor = COL_GAMMA;
-                            ctx.shadowBlur = 18;
-                            ctx.lineJoin = 'round';
-                            ctx.beginPath();
-                            for (let s = 0; s <= steps; s++) {
-                                const frac = s / steps;
-                                const px = gammaStartX + frac * waveLength;
-                                const py = gammaY + Math.sin(frac * numWaves * Math.PI * 2) * waveAmp;
-                                s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
-                            }
-                            ctx.stroke();
-                            ctx.restore();
-
-                            // Glowing gamma dot at the tip (stays visible)
-                            const gDotR = drawR * 0.5;
-                            ctx.save();
-                            ctx.globalAlpha = clamp(gammaProg / 0.2, 0, 1);
-                            ctx.shadowColor = COL_GAMMA;
-                            ctx.shadowBlur = 16;
-                            ctx.beginPath();
-                            ctx.arc(gammaFinalX, gammaY, gDotR, 0, Math.PI * 2);
-                            ctx.fillStyle = COL_GAMMA;
-                            ctx.fill();
-                            ctx.restore();
-
-                            // Gamma label above the dot
-                            if (gammaProg > 0.3) {
-                                ctx.save();
-                                ctx.globalAlpha = clamp((gammaProg - 0.3) / 0.25, 0, 1);
-                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
-                                ctx.fillStyle = COL_GAMMA;
-                                ctx.textAlign = 'center';
-                                ctx.textBaseline = 'alphabetic';
-                                ctx.shadowColor = COL_GAMMA;
-                                ctx.shadowBlur = 12;
-                                ctx.fillText('γ', gammaFinalX, gammaY - gDotR - 10);
-                                ctx.restore();
-                            }
-                        }
+                        ctx.save();
+                        ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                        ctx.fillStyle = COL_GAMMA;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'alphabetic';
+                        ctx.shadowColor = COL_GAMMA;
+                        ctx.shadowBlur = 12;
+                        ctx.fillText('\u03B3', gammaEndX, gammaY - gDotR - 10);
+                        ctx.restore();
                     }
-
-                    ctx.restore(); // end prodProg globalAlpha
 
                     // Daughter label above right-panel nucleus
                     const nucleusTopY = rcy - (maxGridR * scale + drawR);
+                    const daughterLabelX = (decayType === 'betaMinus' || decayType === 'betaPlus') ? rcx - drawR * 5.5 : rcx;
                     ctx.save();
-                    ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
                     ctx.shadowColor = 'rgba(56,189,248,0.4)';
                     ctx.shadowBlur = 8;
-                    drawNucleusLabel(ctx, rcx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                    drawNucleusLabel(ctx, daughterLabelX, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
                     ctx.restore();
 
-                    // Formula centred at very bottom
-                    const fmSize = Math.max(12, Math.min(17, w / 46));
+                    // Formula aligned with panels: reactant left, arrow center, products right
+                    const fmSize = Math.max(16, Math.min(24, w / 32));
                     const fTokens = FORMULA_TOKENS[decayType];
-                    drawFormula(ctx, w / 2, h - 12, fTokens, fmSize, '#94a3b8');
+                    const reactant = [fTokens[0]];
+                    const products = fTokens.slice(2);
+                    const formulaY = h - 38;
+                    const formulaBoxH = fmSize * 2.2;
+
+                    // Background box
+                    ctx.save();
+                    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.2)';
+                    ctx.lineWidth = 1;
+                    const boxY = formulaY - formulaBoxH / 2;
+                    const boxR = 8;
+                    ctx.beginPath();
+                    ctx.roundRect(10, boxY, w - 20, formulaBoxH, boxR);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.restore();
+
+                    // Reactant centred in left panel
+                    drawFormula(ctx, lcx, formulaY, reactant, fmSize, '#e2e8f0');
+
+                    // Arrow at centre
+                    ctx.save();
+                    ctx.font = `${fmSize}px Poppins, sans-serif`;
+                    ctx.fillStyle = '#e2e8f0';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('→', w / 2, formulaY);
+                    ctx.restore();
+
+                    // Products centred in right panel
+                    drawFormula(ctx, rcx, formulaY, products, fmSize, '#e2e8f0');
+
+                    // Legend top-left
+                    drawLegend(ctx, decayType, 12, 16, currentPhase, progress);
                 }
 
             }, [decayType, nucleons, specialIndices, cfg]);
@@ -1148,7 +1514,7 @@
                 stateRef.current.startTime = null;
                 setPhase('animating');
 
-                const duration = 5200; // ms (includes 2s hold at start)
+                const duration = 3200; // ms
 
                 function loop(ts) {
                     if (!stateRef.current.startTime) stateRef.current.startTime = ts;
@@ -1172,7 +1538,7 @@
             const startIdleLoop = useCallback(() => {
                 function loop() {
                     const p = stateRef.current.phase;
-                    if (p !== 'idle' && p !== 'done') return;
+                    if (p !== 'idle' && p !== 'done' && p !== 'formula') return;
                     draw(stateRef.current.progress, p);
                     idleRafRef.current = requestAnimationFrame(loop);
                 }
@@ -1191,9 +1557,16 @@
                 setPhase('idle');
             }, [stopIdleLoop]);
 
+            const showFormula = useCallback(() => {
+                stopIdleLoop();
+                stateRef.current.phase = 'formula';
+                stateRef.current.progress = 1;
+                setPhase('formula');
+            }, [stopIdleLoop]);
+
             // Start/stop idle loop based on phase
             useEffect(() => {
-                if (phase === 'idle' || phase === 'done') {
+                if (phase === 'idle' || phase === 'done' || phase === 'formula') {
                     startIdleLoop();
                 } else {
                     stopIdleLoop();
@@ -1216,6 +1589,8 @@
                 stateRef.current.phase = 'idle';
                 stateRef.current.progress = 0;
                 setPhase('idle');
+                // Restart idle loop since phase may already be 'idle' (effect won't re-trigger)
+                setTimeout(() => startIdleLoop(), 0);
             }, [decayType]);
 
             // Draw initial frame whenever canvas size changes
@@ -1232,7 +1607,7 @@
                         style={{ width: '100%', height: 'auto', borderRadius: '0.75rem', background: '#050510' }}
                     />
                     <div className="flex gap-3 justify-center mt-5">
-                        {phase !== 'animating' && phase !== 'done' && (
+                        {phase === 'idle' && (
                             <button
                                 onClick={startAnimation}
                                 className="btn-primary px-8 py-3 rounded-xl text-base"
@@ -1250,6 +1625,24 @@
                             </span>
                         )}
                         {phase === 'done' && (
+                            <React.Fragment>
+                                <button
+                                    onClick={reset}
+                                    className="btn-secondary px-8 py-3 rounded-xl text-base"
+                                    style={{ fontFamily: 'Poppins, sans-serif' }}
+                                >
+                                    Återställ
+                                </button>
+                                <button
+                                    onClick={showFormula}
+                                    className="btn-primary px-8 py-3 rounded-xl text-base"
+                                    style={{ fontFamily: 'Poppins, sans-serif' }}
+                                >
+                                    Visa sönderfallsformel
+                                </button>
+                            </React.Fragment>
+                        )}
+                        {phase === 'formula' && (
                             <button
                                 onClick={reset}
                                 className="btn-secondary px-8 py-3 rounded-xl text-base"
@@ -1465,10 +1858,7 @@
                         <div className="glass-card rounded-2xl p-5 mb-6">
                             <DecayCanvas key={activeTab} decayType={activeTab} />
 
-                            {/* Legend */}
-                            <div className="mt-5 mb-4">
-                                <Legend decayType={activeTab} />
-                            </div>
+                            {/* Legend is now drawn on the canvas */}
                         </div>
 
                         {/* Nucleus info */}

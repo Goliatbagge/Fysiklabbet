@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Växelströmsgenerator - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        #three-canvas-container {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: grab;
+        }
+        #three-canvas-container:active {
+            cursor: grabbing;
+        }
+        #three-canvas-container canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .emk-graph-canvas {
+            width: 100%;
+            height: 160px;
+            display: block;
+            border-radius: 8px;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 4px;
+            height: 6px;
+            width: 100%;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #38bdf8;
+            cursor: pointer;
+        }
+
+        .result-value {
+            font-family: 'Poppins', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #38bdf8;
+        }
+        .result-label {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .sim-grid {
+                grid-template-columns: 1fr;
+            }
+            #three-canvas-container {
+                height: 360px;
+            }
+        }
+
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        .play-btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a0a1a;
+        }
+        .play-btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        .play-btn-secondary {
+            background: rgba(30,41,59,0.9);
+            color: #94a3b8;
+            border: 1px solid rgba(56,189,248,0.2);
+        }
+        .play-btn-secondary:hover {
+            color: #38bdf8;
+            border-color: rgba(56,189,248,0.5);
+        }
+
+        .formula-box {
+            background: rgba(56, 189, 248, 0.07);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 10px;
+            padding: 0.8rem 1.1rem;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" style="max-width:1300px; margin:0 auto; padding: 1.5rem 1rem 3rem;">
+        <div class="breadcrumb" style="margin-bottom:1rem;">
+            <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik 2</a> / <span>Växelströmsgenerator</span>
+        </div>
+
+        <section style="margin-bottom:1.5rem;">
+            <h1 class="section-title glow-text" style="font-size:1.8rem; font-weight:700; color:#e2e8f0; margin-bottom:0.5rem;">Växelströmsgenerator</h1>
+            <p style="color:#94a3b8; max-width:720px; line-height:1.7;">
+                Utforska hur en roterande spole i ett magnetfält alstrar en sinusformad växelspänning.
+                Faradays induktionslag förklarar principen bakom all storskalig elproduktion.
+            </p>
+        </section>
+
+        <div id="root"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel">
+    const { useState, useEffect, useRef, useCallback } = React;
+
+    const formatNum = (num, decimals = 2) => {
+        if (!isFinite(num)) return '0,' + '0'.repeat(decimals);
+        return num.toFixed(decimals).replace('.', ',');
+    };
+
+    // ─── Three.js scene manager ───────────────────────────────────────────────
+    class ACGeneratorScene {
+        constructor(container) {
+            this.container = container;
+            this.angle = 0;
+            this.showB = true;
+            this.showF = true;
+            this.showI = true;
+            this.B = 0.5;
+            this.coilBrightness = 0;
+
+            this._initRenderer();
+            this._initScene();
+            this._initCamera();
+            this._initLights();
+            this._buildMagnets();
+            this._buildAxis();
+            this._buildCoil();
+            this._buildSlipRings();
+            this._buildBrushes();
+            this._buildExternalCircuit();
+            this._buildBArrows();
+            this._buildFArrows();
+            this._buildIArrows();
+            this._initOrbitControls();
+
+            this._onResize = this._onResize.bind(this);
+            window.addEventListener('resize', this._onResize);
+        }
+
+        _initRenderer() {
+            this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            this.renderer.shadowMap.enabled = true;
+            this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            this.renderer.setClearColor(0x060918, 1);
+            const w = this.container.clientWidth || 700;
+            const h = this.container.clientHeight || 500;
+            this.renderer.setSize(w, h);
+            this.container.appendChild(this.renderer.domElement);
+        }
+
+        _initScene() {
+            this.scene = new THREE.Scene();
+            // Subtle fog
+            this.scene.fog = new THREE.FogExp2(0x060918, 0.04);
+        }
+
+        _initCamera() {
+            const w = this.container.clientWidth || 700;
+            const h = this.container.clientHeight || 500;
+            this.camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 200);
+            this.camera.position.set(7, 5, 10);
+            this.camera.lookAt(0, 0, 0);
+        }
+
+        _initLights() {
+            const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+            this.scene.add(ambient);
+
+            const dir = new THREE.DirectionalLight(0xffffff, 0.8);
+            dir.position.set(5, 10, 8);
+            dir.castShadow = true;
+            this.scene.add(dir);
+
+            // Accent glow
+            const pt = new THREE.PointLight(0x38bdf8, 0.6, 20);
+            pt.position.set(0, 4, 0);
+            this.scene.add(pt);
+
+            // Lamp glow - will be updated
+            this.lampLight = new THREE.PointLight(0xffdd88, 0, 5);
+            this.lampLight.position.set(0, -4.8, 0);
+            this.scene.add(this.lampLight);
+        }
+
+        _buildMagnets() {
+            // North pole (red, left = -X side)
+            const northMat = new THREE.MeshPhongMaterial({
+                color: 0xb52020,
+                emissive: 0x601010,
+                shininess: 80
+            });
+            // South pole (white, right = +X side)
+            const southMat = new THREE.MeshPhongMaterial({
+                color: 0xe8e8e8,
+                emissive: 0x333333,
+                shininess: 80
+            });
+
+            // Simple box magnets with flat faces
+            const yokeGeo = new THREE.BoxGeometry(1.2, 3.5, 2.0);
+
+            const northMesh = new THREE.Mesh(yokeGeo, northMat);
+            northMesh.position.set(-3.3, 0, 0);
+            this.scene.add(northMesh);
+
+            const southMesh = new THREE.Mesh(yokeGeo, southMat);
+            southMesh.position.set(3.3, 0, 0);
+            this.scene.add(southMesh);
+
+            // N / S labels as sprites
+            this._addLabel('N', new THREE.Vector3(-3.9, 0, 1.1), '#ff8080', 64);
+            this._addLabel('S', new THREE.Vector3(3.9, 0, 1.1), '#999999', 64);
+        }
+
+        _addLabel(text, position, color, size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size * 2;
+            canvas.height = size * 2;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = `bold ${size}px Poppins, sans-serif`;
+            ctx.fillStyle = color;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text, size, size);
+            const tex = new THREE.CanvasTexture(canvas);
+            const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+            const sprite = new THREE.Sprite(mat);
+            sprite.position.copy(position);
+            sprite.scale.set(0.9, 0.9, 1);
+            this.scene.add(sprite);
+        }
+
+        _buildAxis() {
+            // Horizontal rotation axis (Z-axis in local coil space = X in world, but we rotate around Y)
+            const axisGeo = new THREE.CylinderGeometry(0.06, 0.06, 7, 16);
+            const axisMat = new THREE.MeshPhongMaterial({ color: 0x888888, shininess: 120 });
+            this.axisObj = new THREE.Mesh(axisGeo, axisMat);
+            this.axisObj.rotation.z = Math.PI / 2; // horizontal
+            this.scene.add(this.axisObj);
+        }
+
+        _buildCoil() {
+            this.coilGroup = new THREE.Group();
+
+            // Coil wire: copper-colored rectangular loop
+            const coilMat = new THREE.MeshPhongMaterial({
+                color: 0xd4853a,
+                emissive: 0x3a1800,
+                shininess: 120
+            });
+            this.coilMat = coilMat;
+
+            const r = 0.07; // wire radius
+            // The coil is a rectangle in the X-Y plane of coilGroup.
+            // halfX = half-length along X (rotation axis direction, between magnets)
+            // halfY = half-length along Y (perpendicular, becomes the "sweeping" dimension)
+            // coilGroup rotates around X, so Y sweeps into Z.
+            const halfX = 1.3;
+            const halfY = 1.1;
+
+            // At angle=0: coil lies in X-Y plane (horizontal if Y is "up")
+            // We want it horizontal at start, so we build it in X-Z plane instead:
+            // Two bars along X at z=±halfY, two bars along Z at x=±halfX
+            const segments = [
+                // front bar (along X at z=+halfY)
+                { geo: new THREE.CylinderGeometry(r, r, halfX * 2, 12), pos: [0, 0, halfY], rot: [0, 0, Math.PI / 2] },
+                // back bar (along X at z=-halfY)
+                { geo: new THREE.CylinderGeometry(r, r, halfX * 2, 12), pos: [0, 0, -halfY], rot: [0, 0, Math.PI / 2] },
+                // right active bar (along Z at x=+halfX)
+                { geo: new THREE.CylinderGeometry(r, r, halfY * 2, 12), pos: [halfX, 0, 0], rot: [Math.PI / 2, 0, 0] },
+                // left active bar (along Z at x=-halfX)
+                { geo: new THREE.CylinderGeometry(r, r, halfY * 2, 12), pos: [-halfX, 0, 0], rot: [Math.PI / 2, 0, 0] },
+            ];
+
+            segments.forEach(s => {
+                const mesh = new THREE.Mesh(s.geo, coilMat);
+                mesh.position.set(...s.pos);
+                mesh.rotation.set(...s.rot);
+                this.coilGroup.add(mesh);
+            });
+
+            this.scene.add(this.coilGroup);
+        }
+
+        _buildSlipRings() {
+            const ringMat = new THREE.MeshPhongMaterial({ color: 0xd4a03a, shininess: 150 });
+            const ring1 = new THREE.Mesh(
+                new THREE.TorusGeometry(0.22, 0.045, 12, 40),
+                ringMat
+            );
+            ring1.rotation.x = Math.PI / 2;
+            ring1.position.set(-1.5, -1.5, 0);
+            this.scene.add(ring1);
+
+            const ring2 = new THREE.Mesh(
+                new THREE.TorusGeometry(0.22, 0.045, 12, 40),
+                ringMat
+            );
+            ring2.rotation.x = Math.PI / 2;
+            ring2.position.set(-1.5, -1.5, 0.55);
+            this.scene.add(ring2);
+
+            // Labels
+            this._addLabel('slipringar', new THREE.Vector3(-2.2, -1.5, 0.28), '#94a3b8', 28);
+        }
+
+        _buildBrushes() {
+            const brushMat = new THREE.MeshPhongMaterial({ color: 0x888888 });
+            const brushGeo = new THREE.BoxGeometry(0.12, 0.4, 0.12);
+
+            const b1 = new THREE.Mesh(brushGeo, brushMat);
+            b1.position.set(-1.5, -1.85, 0);
+            this.scene.add(b1);
+
+            const b2 = new THREE.Mesh(brushGeo, brushMat);
+            b2.position.set(-1.5, -1.85, 0.55);
+            this.scene.add(b2);
+
+            this._addLabel('borstar', new THREE.Vector3(-2.2, -1.9, 0.28), '#94a3b8', 28);
+        }
+
+        _buildExternalCircuit() {
+            // Wire lines using TubeGeometry
+            const wireMat = new THREE.MeshPhongMaterial({ color: 0xdd3333, emissive: 0x220000 });
+
+            // Down wires from brushes
+            const pts1 = [
+                new THREE.Vector3(-1.5, -2.1, 0),
+                new THREE.Vector3(-1.5, -3.5, 0),
+                new THREE.Vector3(-0.5, -3.5, 0),
+                new THREE.Vector3(-0.5, -4.2, 0),
+            ];
+            const curve1 = new THREE.CatmullRomCurve3(pts1);
+            const tube1 = new THREE.Mesh(new THREE.TubeGeometry(curve1, 20, 0.04, 8, false), wireMat);
+            this.scene.add(tube1);
+
+            const pts2 = [
+                new THREE.Vector3(-1.5, -2.1, 0.55),
+                new THREE.Vector3(-1.5, -3.5, 0.55),
+                new THREE.Vector3(0.5, -3.5, 0.55),
+                new THREE.Vector3(0.5, -4.2, 0.55),
+            ];
+            const curve2 = new THREE.CatmullRomCurve3(pts2);
+            const tube2 = new THREE.Mesh(new THREE.TubeGeometry(curve2, 20, 0.04, 8, false), wireMat);
+            this.scene.add(tube2);
+
+            // Lamp sphere
+            this.lampMat = new THREE.MeshPhongMaterial({
+                color: 0xffdd88,
+                emissive: 0x332200,
+                transparent: true,
+                opacity: 0.95,
+                shininess: 60
+            });
+            this.lamp = new THREE.Mesh(new THREE.SphereGeometry(0.28, 24, 24), this.lampMat);
+            this.lamp.position.set(0, -4.8, 0.275);
+            this.scene.add(this.lamp);
+
+            // Lamp glass highlight
+            const glassGeo = new THREE.SphereGeometry(0.30, 24, 24);
+            const glassMat = new THREE.MeshPhongMaterial({
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.08,
+                side: THREE.BackSide
+            });
+            const glass = new THREE.Mesh(glassGeo, glassMat);
+            glass.position.copy(this.lamp.position);
+            this.scene.add(glass);
+
+            // Close the external circuit
+            const pts3 = [
+                new THREE.Vector3(-0.5, -4.2, 0),
+                new THREE.Vector3(-0.5, -5.2, 0),
+                new THREE.Vector3(0, -5.5, 0.275),
+                new THREE.Vector3(0.5, -5.2, 0.55),
+                new THREE.Vector3(0.5, -4.2, 0.55),
+            ];
+            const curve3 = new THREE.CatmullRomCurve3(pts3);
+            const tube3 = new THREE.Mesh(new THREE.TubeGeometry(curve3, 30, 0.04, 8, false), wireMat);
+            this.scene.add(tube3);
+
+            this._addLabel('lampa', new THREE.Vector3(1.0, -4.8, 0.275), '#94a3b8', 28);
+        }
+
+        _makeArrow(dir, origin, length, color) {
+            const group = new THREE.Group();
+            const mat = new THREE.MeshPhongMaterial({ color, emissive: color, emissiveIntensity: 0.4 });
+
+            // Shaft
+            const shaftLen = length * 0.72;
+            const shaft = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.04, 0.04, shaftLen, 8),
+                mat
+            );
+            shaft.position.y = shaftLen / 2;
+            group.add(shaft);
+
+            // Head
+            const head = new THREE.Mesh(
+                new THREE.ConeGeometry(0.10, length * 0.28, 8),
+                mat
+            );
+            head.position.y = shaftLen + length * 0.14;
+            group.add(head);
+
+            // Align to direction
+            const up = new THREE.Vector3(0, 1, 0);
+            const normDir = dir.clone().normalize();
+            const q = new THREE.Quaternion().setFromUnitVectors(up, normDir);
+            group.quaternion.copy(q);
+            group.position.copy(origin);
+
+            return group;
+        }
+
+        _buildBArrows() {
+            this.bArrowGroup = new THREE.Group();
+            // Horizontal B field lines from N to S (left to right = -X to +X)
+            // Span the full gap between magnet faces: from x=-2.7 to x=+2.7 (length ~5.4)
+            const positions = [-0.8, 0, 0.8];
+            const startX = -2.6;
+            const lineLength = 5.2;
+            positions.forEach(z => {
+                const arr = this._makeArrow(
+                    new THREE.Vector3(1, 0, 0),
+                    new THREE.Vector3(startX, 0, z),
+                    lineLength,
+                    0x4ade80
+                );
+                this.bArrowGroup.add(arr);
+            });
+            // Label
+            this._addLabelToGroup(this.bArrowGroup, 'B', new THREE.Vector3(0, 0.6, -1.3), '#4ade80', 36);
+            this.scene.add(this.bArrowGroup);
+        }
+
+        _buildFArrows() {
+            this.fArrowGroup = new THREE.Group();
+            // Will be repositioned each frame
+            // Two arrows on the active (vertical) sides of the coil
+            const fColor = 0xfde047;
+            this.fArr1 = this._makeArrow(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, -1.3), 0.9, fColor);
+            this.fArr2 = this._makeArrow(new THREE.Vector3(0, -1, 0), new THREE.Vector3(0, 0, 1.3), 0.9, fColor);
+            this.fArrowGroup.add(this.fArr1);
+            this.fArrowGroup.add(this.fArr2);
+            this._addLabelToGroup(this.fArrowGroup, 'F', new THREE.Vector3(0.6, 0.5, -1.3), '#fde047', 36);
+            this.scene.add(this.fArrowGroup);
+        }
+
+        _buildIArrows() {
+            this.iArrowGroup = new THREE.Group();
+            // Arrows along coil sides showing current direction - updated each frame
+            const iColor = 0xfb923c;
+            // We'll use 4 arrows for each side of the coil
+            this.iArr = [];
+            for (let i = 0; i < 4; i++) {
+                const a = this._makeArrow(new THREE.Vector3(0, 1, 0), new THREE.Vector3(0, 0, 0), 0.7, iColor);
+                this.iArrowGroup.add(a);
+                this.iArr.push(a);
+            }
+            this._addLabelToGroup(this.iArrowGroup, 'I', new THREE.Vector3(-0.5, 1.5, 1.5), '#fb923c', 36);
+            this.scene.add(this.iArrowGroup);
+        }
+
+        _addLabelToGroup(group, text, position, color, size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size * 2;
+            canvas.height = size * 2;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = `italic bold ${size}px Poppins, sans-serif`;
+            ctx.fillStyle = color;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text, size, size);
+            const tex = new THREE.CanvasTexture(canvas);
+            const mat = new THREE.SpriteMaterial({ map: tex, transparent: true });
+            const sprite = new THREE.Sprite(mat);
+            sprite.position.copy(position);
+            sprite.scale.set(0.8, 0.8, 1);
+            group.add(sprite);
+        }
+
+        _initOrbitControls() {
+            this._isDragging = false;
+            this._prevMouse = { x: 0, y: 0 };
+            this._spherical = { theta: 0.5, phi: 0.8 };
+            this._radius = 14;
+
+            const el = this.renderer.domElement;
+            el.addEventListener('mousedown', e => {
+                this._isDragging = true;
+                this._prevMouse = { x: e.clientX, y: e.clientY };
+            });
+            el.addEventListener('mousemove', e => {
+                if (!this._isDragging) return;
+                const dx = e.clientX - this._prevMouse.x;
+                const dy = e.clientY - this._prevMouse.y;
+                this._spherical.theta -= dx * 0.008;
+                this._spherical.phi = Math.max(0.1, Math.min(Math.PI - 0.1, this._spherical.phi + dy * 0.008));
+                this._prevMouse = { x: e.clientX, y: e.clientY };
+                this._updateCamera();
+            });
+            el.addEventListener('mouseup', () => { this._isDragging = false; });
+            el.addEventListener('mouseleave', () => { this._isDragging = false; });
+
+            // Touch support
+            el.addEventListener('touchstart', e => {
+                this._isDragging = true;
+                this._prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            });
+            el.addEventListener('touchmove', e => {
+                if (!this._isDragging) return;
+                const dx = e.touches[0].clientX - this._prevMouse.x;
+                const dy = e.touches[0].clientY - this._prevMouse.y;
+                this._spherical.theta -= dx * 0.008;
+                this._spherical.phi = Math.max(0.1, Math.min(Math.PI - 0.1, this._spherical.phi + dy * 0.008));
+                this._prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+                this._updateCamera();
+            });
+            el.addEventListener('touchend', () => { this._isDragging = false; });
+
+            // Scroll to zoom
+            el.addEventListener('wheel', e => {
+                this._radius = Math.max(6, Math.min(25, this._radius + e.deltaY * 0.02));
+                this._updateCamera();
+            }, { passive: true });
+
+            this._updateCamera();
+        }
+
+        _updateCamera() {
+            const { theta, phi } = this._spherical;
+            const r = this._radius;
+            this.camera.position.set(
+                r * Math.sin(phi) * Math.sin(theta),
+                r * Math.cos(phi),
+                r * Math.sin(phi) * Math.cos(theta)
+            );
+            this.camera.lookAt(0, -0.5, 0);
+        }
+
+        _onResize() {
+            const w = this.container.clientWidth;
+            const h = this.container.clientHeight;
+            this.camera.aspect = w / h;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(w, h);
+        }
+
+        update(angle, B, coilBrightness) {
+            this.angle = angle;
+            this.B = B;
+
+            // Rotate coil group around X axis
+            this.coilGroup.rotation.x = angle;
+
+            // Coil is built in X-Z plane. Rotation around X:
+            //   X stays X, Z -> (0, -sin(a), cos(a)), Y -> (0, cos(a), sin(a))
+            // Active sides are at x=±halfX, running along local Z.
+            // Connecting sides are at local z=±halfY, running along X.
+            const ca = Math.cos(angle);
+            const sa = Math.sin(angle);
+
+            const halfX = 1.3;
+            const halfY = 1.1;
+
+            // Local Z in world after rotation around X:
+            const localZ_world = new THREE.Vector3(0, -sa, ca);
+            // Local Y in world (unused for geometry but needed for current arrows on connecting sides):
+            // not needed since connecting sides run along X
+
+            // Active sides at x=±halfX, centered at local (±halfX, 0, 0)
+            // These don't move (X is the rotation axis), position stays (±halfX, 0, 0)
+            const posActive = new THREE.Vector3(halfX, 0, 0);
+            const negActive = new THREE.Vector3(-halfX, 0, 0);
+
+            // Force on active sides: F = IL × B
+            // L is along local Z direction (the active bar direction)
+            // localZ_world = (0, -sa, ca), B = (1, 0, 0)
+            // F = localZ_world × B = (0, -sa, ca) × (1, 0, 0)
+            //   = (-sa*0 - ca*0, ca*1 - 0*0, 0*0 - (-sa)*1)
+            //   = (0, ca, sa)
+            let fDir1 = new THREE.Vector3(0, ca, sa);
+            let fDir2 = new THREE.Vector3(0, -ca, -sa);
+            const fLen1 = fDir1.length();
+            if (fLen1 > 0.01) { fDir1.normalize(); fDir2.normalize(); }
+
+            this.fArr1.visible = fLen1 > 0.05;
+            this.fArr2.visible = fLen1 > 0.05;
+
+            if (fLen1 > 0.05) {
+                const up = new THREE.Vector3(0, 1, 0);
+                const q1 = new THREE.Quaternion().setFromUnitVectors(up, fDir1);
+                this.fArr1.quaternion.copy(q1);
+                this.fArr1.position.copy(posActive);
+
+                const q2 = new THREE.Quaternion().setFromUnitVectors(up, fDir2);
+                this.fArr2.quaternion.copy(q2);
+                this.fArr2.position.copy(negActive);
+            }
+
+            // Update I arrows (current flows around the coil loop)
+            const emfSign = Math.sin(angle) >= 0 ? 1 : -1;
+            const absEMF = Math.abs(Math.sin(angle));
+
+            // Connecting side centers (at local z=±halfY, along X):
+            // local (0, 0, halfY) -> world (0, -halfY*sa, halfY*ca)
+            const frontCenter = localZ_world.clone().multiplyScalar(halfY);
+            const backCenter = localZ_world.clone().multiplyScalar(-halfY);
+
+            // Current directions:
+            // Active sides (along local Z): current along ±localZ_world
+            // Connecting sides (along X): current along ±X
+            const xDir = new THREE.Vector3(1, 0, 0);
+
+            const iDirFront = xDir.clone().multiplyScalar(emfSign);       // front connecting bar
+            const iDirBack = xDir.clone().multiplyScalar(-emfSign);       // back connecting bar
+            const iDirRight = localZ_world.clone().multiplyScalar(-emfSign); // right active bar (x=+halfX)
+            const iDirLeft = localZ_world.clone().multiplyScalar(emfSign);   // left active bar (x=-halfX)
+
+            const iDirs = [iDirFront, iDirBack, iDirRight, iDirLeft];
+            const iPos = [frontCenter, backCenter, posActive, negActive];
+            const up3 = new THREE.Vector3(0, 1, 0);
+
+            for (let i = 0; i < 4; i++) {
+                const d = iDirs[i];
+                const dLen = d.length();
+                if (dLen > 0.01) {
+                    const dn = d.clone().normalize();
+                    try {
+                        const q = new THREE.Quaternion().setFromUnitVectors(up3, dn);
+                        this.iArr[i].quaternion.copy(q);
+                    } catch(e) {}
+                }
+                this.iArr[i].position.copy(iPos[i]);
+                this.iArr[i].children.forEach(ch => {
+                    if (ch.material) ch.material.opacity = absEMF;
+                    if (ch.material) ch.material.transparent = true;
+                });
+            }
+
+            // Visibility
+            this.bArrowGroup.visible = this.showB;
+            this.fArrowGroup.visible = this.showF;
+            this.iArrowGroup.visible = this.showI;
+
+            // Coil glow based on brightness
+            const emissiveIntensity = coilBrightness * 0.5;
+            this.coilMat.emissive.setHex(0x3a1800);
+            this.coilMat.emissiveIntensity = emissiveIntensity;
+
+            // Lamp
+            const lampIntensity = Math.max(0, coilBrightness);
+            this.lampMat.emissive.setHex(0x332200);
+            this.lampMat.emissiveIntensity = lampIntensity * 2.0;
+            this.lampMat.color.setRGB(1.0, 0.87 + lampIntensity * 0.13, 0.53 + lampIntensity * 0.1);
+            this.lampLight.intensity = lampIntensity * 2.5;
+        }
+
+        render() {
+            this.renderer.render(this.scene, this.camera);
+        }
+
+        dispose() {
+            window.removeEventListener('resize', this._onResize);
+            this.renderer.dispose();
+            if (this.renderer.domElement.parentNode) {
+                this.renderer.domElement.parentNode.removeChild(this.renderer.domElement);
+            }
+        }
+    }
+
+    // ─── EMK Graph ────────────────────────────────────────────────────────────
+    function drawEMKGraph(canvas, history, emkMax, currentEMK) {
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width;
+        const H = canvas.height;
+        ctx.clearRect(0, 0, W, H);
+
+        // Background
+        ctx.fillStyle = 'rgba(5, 10, 30, 0.95)';
+        ctx.fillRect(0, 0, W, H);
+
+        const padL = 48, padR = 12, padT = 14, padB = 28;
+        const gW = W - padL - padR;
+        const gH = H - padT - padB;
+
+        const axisColor = '#38bdf8';
+        const gridColor = 'rgba(56,189,248,0.08)';
+
+        // Grid & axes
+        ctx.strokeStyle = gridColor;
+        ctx.lineWidth = 1;
+        // Horizontal grid lines
+        for (let i = -1; i <= 1; i++) {
+            const y = padT + gH / 2 - (i * gH / 2);
+            ctx.beginPath();
+            ctx.moveTo(padL, y);
+            ctx.lineTo(padL + gW, y);
+            ctx.stroke();
+        }
+
+        // Axes
+        ctx.strokeStyle = axisColor;
+        ctx.lineWidth = 1.5;
+        // X axis (y=0)
+        const axisY = padT + gH / 2;
+        ctx.beginPath();
+        ctx.moveTo(padL, axisY);
+        ctx.lineTo(padL + gW, axisY);
+        ctx.stroke();
+        // Y axis
+        ctx.beginPath();
+        ctx.moveTo(padL, padT);
+        ctx.lineTo(padL, padT + gH);
+        ctx.stroke();
+
+        // Y labels
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px Poppins, sans-serif';
+        ctx.textAlign = 'right';
+        const topVal = emkMax > 0 ? emkMax : 1;
+        ctx.fillText('+' + topVal.toFixed(0) + ' V', padL - 4, padT + 4);
+        ctx.fillText('0', padL - 4, axisY + 4);
+        ctx.fillText('-' + topVal.toFixed(0) + ' V', padL - 4, padT + gH + 4);
+
+        // X label
+        ctx.textAlign = 'center';
+        ctx.fillText('tid', padL + gW / 2, padT + gH + padB - 2);
+
+        if (history.length < 2) return;
+
+        // Draw sine curve from history
+        const n = history.length;
+        ctx.beginPath();
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 4;
+
+        for (let i = 0; i < n; i++) {
+            const x = padL + (i / (n - 1)) * gW;
+            const yNorm = emkMax > 0 ? history[i] / emkMax : 0;
+            const y = axisY - yNorm * (gH / 2);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Moving dot at current position
+        const dotX = padL + gW; // always at right edge (latest value)
+        const dotYNorm = emkMax > 0 ? currentEMK / emkMax : 0;
+        const dotY = axisY - dotYNorm * (gH / 2);
+
+        ctx.beginPath();
+        ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#f0abfc';
+        ctx.shadowColor = '#f0abfc';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    }
+
+    // ─── Main App ─────────────────────────────────────────────────────────────
+    function App() {
+        const [isPlaying, setIsPlaying] = useState(true);
+        const [speed, setSpeed] = useState(1.0);       // varv/s
+        const [fieldB, setFieldB] = useState(0.5);     // T
+        const [area, setArea] = useState(0.04);        // m²
+        const [turns, setTurns] = useState(1);         // N
+        const [showB, setShowB] = useState(true);
+        const [showF, setShowF] = useState(true);
+        const [showI, setShowI] = useState(true);
+
+        const [angle, setAngle] = useState(0);
+        const [currentEMK, setCurrentEMK] = useState(0);
+        const [emkHistory, setEmkHistory] = useState([]);
+
+        const canvasContainerRef = useRef(null);
+        const graphCanvasRef = useRef(null);
+        const sceneRef = useRef(null);
+        const animRef = useRef(null);
+        const lastTimeRef = useRef(null);
+        const angleRef = useRef(0);
+        const isPlayingRef = useRef(true);
+        const speedRef = useRef(1.0);
+        const fieldBRef = useRef(0.5);
+        const areaRef = useRef(0.04);
+        const turnsRef = useRef(1);
+        const emkHistoryRef = useRef([]);
+
+        isPlayingRef.current = isPlaying;
+        speedRef.current = speed;
+        fieldBRef.current = fieldB;
+        areaRef.current = area;
+        turnsRef.current = turns;
+
+        // Init Three.js scene
+        useEffect(() => {
+            if (!canvasContainerRef.current) return;
+            const scene = new ACGeneratorScene(canvasContainerRef.current);
+            sceneRef.current = scene;
+            return () => {
+                if (sceneRef.current) {
+                    sceneRef.current.dispose();
+                    sceneRef.current = null;
+                }
+            };
+        }, []);
+
+        // Update arrow visibility when changed
+        useEffect(() => {
+            if (sceneRef.current) {
+                sceneRef.current.showB = showB;
+                sceneRef.current.showF = showF;
+                sceneRef.current.showI = showI;
+            }
+        }, [showB, showF, showI]);
+
+        // Animation loop
+        useEffect(() => {
+            const HISTORY_SIZE = 200;
+
+            const loop = (timestamp) => {
+                animRef.current = requestAnimationFrame(loop);
+
+                const dt = lastTimeRef.current ? Math.min((timestamp - lastTimeRef.current) / 1000, 0.05) : 0;
+                lastTimeRef.current = timestamp;
+
+                if (isPlayingRef.current) {
+                    const omega = speedRef.current * 2 * Math.PI; // rad/s
+                    angleRef.current += omega * dt;
+                }
+
+                const a = angleRef.current;
+                const N = turnsRef.current;
+                const B = fieldBRef.current;
+                const A = areaRef.current;
+                const omega = speedRef.current * 2 * Math.PI;
+                const emk = N * B * A * omega * Math.sin(a);
+                const emkMax = N * B * A * omega;
+
+                // Update history
+                emkHistoryRef.current = [...emkHistoryRef.current.slice(-(HISTORY_SIZE - 1)), emk];
+
+                // Update scene
+                if (sceneRef.current) {
+                    const brightness = Math.abs(emk) / (emkMax > 0 ? emkMax : 1);
+                    sceneRef.current.update(a, B, brightness);
+                    sceneRef.current.render();
+                }
+
+                // Draw graph
+                if (graphCanvasRef.current) {
+                    drawEMKGraph(graphCanvasRef.current, emkHistoryRef.current, emkMax, emk);
+                }
+
+                // Update React state (throttled - every few frames)
+                if (Math.round(timestamp / 16) % 3 === 0) {
+                    setAngle(a % (2 * Math.PI));
+                    setCurrentEMK(emk);
+                    setEmkHistory([...emkHistoryRef.current]);
+                }
+            };
+
+            animRef.current = requestAnimationFrame(loop);
+            return () => {
+                if (animRef.current) cancelAnimationFrame(animRef.current);
+                lastTimeRef.current = null;
+            };
+        }, []);
+
+        const omega = speed * 2 * Math.PI;
+        const emkMax = turns * fieldB * area * omega;
+        const emkNow = turns * fieldB * area * omega * Math.sin(angle);
+        const angleDeg = (angle * 180 / Math.PI) % 360;
+
+        return (
+            <div>
+                {/* Main simulation grid */}
+                <div className="sim-grid">
+                    {/* Left: 3D scene + graph */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <div className="glass-card" style={{ borderRadius: '12px', overflow: 'hidden', padding: '0' }}>
+                            <div ref={canvasContainerRef} id="three-canvas-container" />
+                        </div>
+
+                        {/* EMK graph */}
+                        <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem' }}>
+                            <div style={{ marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <span style={{ fontSize: '0.8rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                    EMK vs tid
+                                </span>
+                                <span style={{ fontSize: '0.75rem', color: '#38bdf8', fontFamily: 'monospace' }}>
+                                    &epsilon;(t) = NBA&omega;&middot;sin(&omega;t)
+                                </span>
+                            </div>
+                            <canvas
+                                ref={graphCanvasRef}
+                                className="emk-graph-canvas"
+                                width={600}
+                                height={160}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Right: controls + results */}
+                    <aside style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        {/* Play/pause */}
+                        <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                            <button
+                                className="play-btn play-btn-primary"
+                                onClick={() => setIsPlaying(p => !p)}
+                                aria-label={isPlaying ? 'Pausa simuleringen' : 'Starta simuleringen'}
+                                style={{ flex: 1 }}
+                            >
+                                {isPlaying ? '⏸ Pausa' : '▶ Starta'}
+                            </button>
+                        </div>
+
+                        {/* Sliders */}
+                        <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8', marginBottom: '0.2rem' }}>
+                                Parametrar
+                            </h3>
+
+                            {/* Speed */}
+                            <div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                                    <label style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                                        Rotationshastighet
+                                    </label>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', fontFamily: 'monospace' }}>
+                                        {formatNum(speed, 1)} varv/s
+                                    </span>
+                                </div>
+                                <input type="range" min="0.5" max="5.0" step="0.1" value={speed}
+                                    onChange={e => setSpeed(parseFloat(e.target.value))}
+                                    aria-label="Rotationshastighet" />
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '2px' }}>
+                                    <span>0,5 varv/s</span><span>5,0 varv/s</span>
+                                </div>
+                            </div>
+
+                            {/* B */}
+                            <div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                                    <label style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                                        Magnetfält <em>B</em>
+                                    </label>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#4ade80', fontFamily: 'monospace' }}>
+                                        {formatNum(fieldB, 2)} T
+                                    </span>
+                                </div>
+                                <input type="range" min="0.1" max="2.0" step="0.05" value={fieldB}
+                                    onChange={e => setFieldB(parseFloat(e.target.value))}
+                                    style={{ accentColor: '#4ade80' }}
+                                    aria-label="Magnetfältsstyrka" />
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '2px' }}>
+                                    <span>0,10 T</span><span>2,00 T</span>
+                                </div>
+                            </div>
+
+                            {/* Area */}
+                            <div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                                    <label style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                                        Slingans area <em>A</em>
+                                    </label>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#c084fc', fontFamily: 'monospace' }}>
+                                        {formatNum(area * 100, 0)} cm²
+                                    </span>
+                                </div>
+                                <input type="range" min="0.01" max="0.10" step="0.005" value={area}
+                                    onChange={e => setArea(parseFloat(e.target.value))}
+                                    style={{ accentColor: '#c084fc' }}
+                                    aria-label="Slingans area" />
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '2px' }}>
+                                    <span>100 cm²</span><span>1 000 cm²</span>
+                                </div>
+                            </div>
+
+                            {/* Turns */}
+                            <div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
+                                    <label style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                                        Antal varv <em>N</em>
+                                    </label>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#fbbf24', fontFamily: 'monospace' }}>
+                                        {turns}
+                                    </span>
+                                </div>
+                                <input type="range" min="1" max="20" step="1" value={turns}
+                                    onChange={e => setTurns(parseInt(e.target.value))}
+                                    style={{ accentColor: '#fbbf24' }}
+                                    aria-label="Antal varv" />
+                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748b', marginTop: '2px' }}>
+                                    <span>1</span><span>20</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Checkboxes */}
+                        <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8', marginBottom: '0.7rem' }}>
+                                Visa vektorer
+                            </h3>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: '#e2e8f0', minHeight: '44px' }}>
+                                    <input type="checkbox" checked={showB} onChange={e => setShowB(e.target.checked)} aria-label="Visa magnetfält B" />
+                                    <span style={{ color: '#4ade80', fontWeight: '600' }}>B</span>
+                                    <span style={{ color: '#94a3b8' }}>Magnetfält (grönt)</span>
+                                </label>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: '#e2e8f0', minHeight: '44px' }}>
+                                    <input type="checkbox" checked={showF} onChange={e => setShowF(e.target.checked)} aria-label="Visa kraft F" />
+                                    <span style={{ color: '#fde047', fontWeight: '600' }}>F</span>
+                                    <span style={{ color: '#94a3b8' }}>Kraft på ledare (gult)</span>
+                                </label>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: '#e2e8f0', minHeight: '44px' }}>
+                                    <input type="checkbox" checked={showI} onChange={e => setShowI(e.target.checked)} aria-label="Visa ström I" />
+                                    <span style={{ color: '#fb923c', fontWeight: '600' }}>I</span>
+                                    <span style={{ color: '#94a3b8' }}>Strömriktning (orange)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        {/* Results */}
+                        <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8', marginBottom: '0.8rem' }}>
+                                Aktuella värden
+                            </h3>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.7rem' }}>
+                                <div style={{ background: 'rgba(5,10,30,0.5)', borderRadius: '8px', padding: '0.6rem 0.8rem' }}>
+                                    <div className="result-label">Vinkel &theta;</div>
+                                    <div className="result-value">{formatNum(angleDeg % 360, 1)}&deg;</div>
+                                    <div style={{ fontSize: '0.7rem', color: '#64748b' }}>
+                                        {formatNum((angle % (2 * Math.PI)), 2)} rad
+                                    </div>
+                                </div>
+                                <div style={{ background: 'rgba(5,10,30,0.5)', borderRadius: '8px', padding: '0.6rem 0.8rem' }}>
+                                    <div className="result-label">Vinkelfrekvens &omega;</div>
+                                    <div className="result-value">{formatNum(omega, 1)} rad/s</div>
+                                </div>
+                                <div style={{ background: 'rgba(5,10,30,0.5)', borderRadius: '8px', padding: '0.6rem 0.8rem', gridColumn: '1/-1' }}>
+                                    <div className="result-label">Aktuell EMK &epsilon;</div>
+                                    <div className="result-value" style={{ fontSize: '1.35rem' }}>
+                                        {formatNum(emkNow, 3)} V
+                                    </div>
+                                </div>
+                                <div style={{ background: 'rgba(5,10,30,0.5)', borderRadius: '8px', padding: '0.6rem 0.8rem', gridColumn: '1/-1' }}>
+                                    <div className="result-label">Max-EMK &epsilon;₀ = NBA&omega;</div>
+                                    <div className="result-value" style={{ color: '#f0abfc' }}>
+                                        {formatNum(emkMax, 3)} V
+                                    </div>
+                                </div>
+                                <div style={{ background: 'rgba(5,10,30,0.5)', borderRadius: '8px', padding: '0.6rem 0.8rem', gridColumn: '1/-1' }}>
+                                    <div className="result-label">Magnetiskt flöde &Phi;</div>
+                                    <div className="result-value" style={{ color: '#4ade80', fontSize: '1rem' }}>
+                                        {formatNum(fieldB * area * Math.cos(angle) * 1000, 2)} mWb
+                                    </div>
+                                    <div style={{ fontSize: '0.7rem', color: '#64748b' }}>
+                                        &Phi; = BA&middot;cos(&theta;)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                {/* Explanation */}
+                <div className="glass-card" style={{ borderRadius: '12px', padding: '1.5rem', marginTop: '1.5rem' }}>
+                    <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#e2e8f0', marginBottom: '1rem' }}>
+                        Hur fungerar en växelströmsgenerator?
+                    </h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.2rem', marginBottom: '1.2rem' }}>
+                        <div>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', marginBottom: '0.4rem' }}>
+                                Faradays induktionslag
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.7' }}>
+                                En roterande spole i ett magnetfält genererar en EMK (elektromotorisk kraft)
+                                eftersom det magnetiska flödet &Phi; = BA&middot;cos(&theta;) varierar med tid.
+                                Enligt Faradays lag: <em>&epsilon;</em> = &minus;N d&Phi;/dt
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', marginBottom: '0.4rem' }}>
+                                Sinusformad växelspänning
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.7' }}>
+                                När slingan roterar med konstant vinkelhastighet &omega; = 2&pi;<em>f</em> fås:
+                                <br />
+                                <em>&epsilon;</em>(t) = NBA&omega;&middot;sin(&omega;t)
+                                <br />
+                                Den maximala spänningen &epsilon;₀ = NBA&omega;
+                                ökar med fältets styrka, slingans area, antal varv och rotationshastighet.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', marginBottom: '0.4rem' }}>
+                                Kraft och strömriktning
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.7' }}>
+                                Kraften på en ström&shy;förande ledare i magnetfält ges av
+                                Lorentzkraften: <em>F</em> = <em>I</em>(<em>L</em> &times; <em>B</em>).
+                                Strömmen byter riktning varje halvvarv via slipringar och borstar,
+                                vilket ger växelström i den externa kretsen.
+                                Glödlampan lyser starkast vid max-EMK.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', marginBottom: '0.4rem' }}>
+                                Tillämpningar
+                            </h3>
+                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.7' }}>
+                                Principen används i alla kraftverk &mdash; vattenkraft, vindkraft,
+                                kärnkraft och värmekraft roterar en generator med exakt detta upplägg,
+                                men med tusentals varv och starka elektromagneter.
+                                I Sverige är nätfrekvensen 50 Hz, vilket kräver 3 000 varv/min för en 2-polsmaskin.
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr className="section-divider" />
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem' }}>
+                        <div className="formula-box">
+                            <em>&epsilon;</em>(t) = NBA&omega;&middot;sin(&omega;t)
+                        </div>
+                        <div className="formula-box">
+                            &epsilon;₀ = NBA&omega;
+                        </div>
+                        <div className="formula-box">
+                            &Phi;(t) = BA&middot;cos(&omega;t)
+                        </div>
+                        <div className="formula-box">
+                            <em>F</em> = <em>BIL</em>
+                        </div>
+                        <div className="formula-box">
+                            &omega; = 2&pi;<em>f</em> = 2&pi;n
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+    </script>
+</body>
+</html>

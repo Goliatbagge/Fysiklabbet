@@ -111,6 +111,12 @@
             0%, 100% { transform: translateX(0); }
             50% { transform: translateX(10px); }
         }
+
+        /* Guppande animation för flytande kuber */
+        @keyframes bobbing {
+            0%, 100% { transform: var(--bob-base) translateY(0px); }
+            50% { transform: var(--bob-base) translateY(-6px); }
+        }
     </style>
 </head>
 <body class="bg-slate-950">
@@ -302,9 +308,11 @@
                 style={{
                   width: `${sideLength}px`,
                   height: `${sideLength}px`,
+                  '--bob-base': `translate(${currentLeft}px, ${currentTop}px)`,
                   transform: `translate(${currentLeft}px, ${currentTop}px)`,
                   transformStyle: 'preserve-3d',
                   zIndex: 10,
+                  ...(mode === 'BUOYANCY' && density <= WATER_DENSITY ? { animation: 'bobbing 3s ease-in-out infinite' } : {}),
                 }}
               >
                 {/* 3D cube with CSS transforms */}

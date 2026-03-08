@@ -51,6 +51,8 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-magnetiskt-flode.html',
     'fysik1-enhetskollen.html',
     'fysik1-faradays-bur.html',
+    'fysik1-sonderfall.html',
+    'fysik2-vaxelstromsgenerator.html',
     'om.html',
     'kontakt.html'
 ];

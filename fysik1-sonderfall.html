@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radioaktivt sönderfall - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a0a1a;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+            transition: all 0.25s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: translateY(0px);
+        }
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #94a3b8;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+        }
+        .tab-btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 0.6rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(15, 23, 42, 0.6);
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            color: #e2e8f0;
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        .tab-btn.active {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.55);
+            color: #38bdf8;
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.2);
+        }
+        canvas {
+            display: block;
+            border-radius: 0.75rem;
+        }
+        .equation-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            color: #e2e8f0;
+            text-align: center;
+        }
+        .equation-box sup { font-size: 0.65em; vertical-align: super; }
+        .equation-box sub { font-size: 0.65em; vertical-align: sub; }
+        .legend-dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+        .breadcrumb { color: #64748b; font-size: 0.8rem; }
+        .breadcrumb a { color: #38bdf8; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .explanation-box {
+            background: rgba(15, 23, 42, 0.75);
+            border-left: 3px solid rgba(56, 189, 248, 0.5);
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.65;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback, useMemo } = React;
+
+        // ─── Seeded pseudo-random number generator (mulberry32) ───────────────
+        function seededRng(seed) {
+            let s = seed >>> 0;
+            return function () {
+                s |= 0; s = s + 0x6D2B79F5 | 0;
+                let t = Math.imul(s ^ s >>> 15, 1 | s);
+                t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+                return ((t ^ t >>> 14) >>> 0) / 4294967296;
+            };
+        }
+
+        // ─── Hex-packed nucleus builder ───────────────────────────────────────
+        function buildNucleus(protons, neutrons, seed = 42) {
+            const total = protons + neutrons;
+            const rng = seededRng(seed);
+            const spacing = 1.0;
+            const points = [];
+
+            // Generate hex grid points, collect those within a circle
+            const radius = Math.sqrt(total / Math.PI) * spacing * 1.25 + spacing;
+            const iMax = Math.ceil(radius / spacing) + 2;
+            for (let row = -iMax; row <= iMax; row++) {
+                for (let col = -iMax; col <= iMax; col++) {
+                    const x = col * spacing + (row % 2) * spacing * 0.5;
+                    const y = row * spacing * 0.866;
+                    if (x * x + y * y <= radius * radius * 1.05) {
+                        points.push({ x, y });
+                    }
+                }
+            }
+
+            // Sort by distance from centre, keep exactly `total`
+            points.sort((a, b) => (a.x * a.x + a.y * a.y) - (b.x * b.x + b.y * b.y));
+            const kept = points.slice(0, total);
+
+            // Shuffle assignment of proton/neutron
+            const types = Array(protons).fill('proton').concat(Array(neutrons).fill('neutron'));
+            for (let i = types.length - 1; i > 0; i--) {
+                const j = Math.floor(rng() * (i + 1));
+                [types[i], types[j]] = [types[j], types[i]];
+            }
+
+            // Compute bounding circle radius (for later sizing)
+            let maxR = 0;
+            kept.forEach(p => { const r = Math.sqrt(p.x * p.x + p.y * p.y); if (r > maxR) maxR = r; });
+
+            return kept.map((p, i) => ({
+                gx: p.x,   // grid x
+                gy: p.y,   // grid y
+                type: types[i],
+                distFromCenter: Math.sqrt(p.x * p.x + p.y * p.y),
+            }));
+        }
+
+        // ─── Decay configurations ─────────────────────────────────────────────
+        const DECAY_CONFIGS = {
+            alpha: {
+                label: 'Alfasönderfall',
+                shortLabel: 'α',
+                protons: 88,
+                neutrons: 138,
+                nucleonRadius: 4,
+                seed: 17,
+            },
+            betaMinus: {
+                label: 'Beta⁻-sönderfall',
+                shortLabel: 'β⁻',
+                protons: 6,
+                neutrons: 8,
+                nucleonRadius: 13,
+                seed: 7,
+            },
+            betaPlus: {
+                label: 'Beta⁺-sönderfall',
+                shortLabel: 'β⁺',
+                protons: 9,
+                neutrons: 9,
+                nucleonRadius: 11,
+                seed: 23,
+            },
+            gamma: {
+                label: 'Gammasönderfall',
+                shortLabel: 'γ',
+                protons: 43,
+                neutrons: 56,
+                nucleonRadius: 5.5,
+                seed: 31,
+            },
+        };
+
+        // ─── Colours ──────────────────────────────────────────────────────────
+        const COL_PROTON   = '#ef4444';
+        const COL_NEUTRON  = '#60a5fa';
+        const COL_ELECTRON = '#22c55e';
+        const COL_POSITRON = '#ec4899';
+        const COL_NEUTRINO = '#94a3b8';
+        const COL_GAMMA    = '#fbbf24';
+        const COL_ALPHA    = '#f59e0b';
+
+        // Draw a single nucleon with a simple 3-D gradient
+        function drawNucleon(ctx, x, y, r, color, glowColor = null, glowStrength = 0) {
+            ctx.save();
+            if (glowColor && glowStrength > 0) {
+                ctx.shadowColor = glowColor;
+                ctx.shadowBlur  = glowStrength;
+            }
+            const grad = ctx.createRadialGradient(x - r * 0.3, y - r * 0.3, r * 0.05, x, y, r);
+            grad.addColorStop(0, lighten(color, 0.55));
+            grad.addColorStop(0.5, color);
+            grad.addColorStop(1, darken(color, 0.45));
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function lighten(hex, amt) {
+            const [r, g, b] = hexToRgb(hex);
+            return `rgb(${Math.min(255, Math.round(r + (255 - r) * amt))},${Math.min(255, Math.round(g + (255 - g) * amt))},${Math.min(255, Math.round(b + (255 - b) * amt))})`;
+        }
+        function darken(hex, amt) {
+            const [r, g, b] = hexToRgb(hex);
+            return `rgb(${Math.round(r * (1 - amt))},${Math.round(g * (1 - amt))},${Math.round(b * (1 - amt))})`;
+        }
+        function hexToRgb(hex) {
+            const n = parseInt(hex.slice(1), 16);
+            return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+        }
+        function lerpColor(hexA, hexB, t) {
+            const [r1, g1, b1] = hexToRgb(hexA);
+            const [r2, g2, b2] = hexToRgb(hexB);
+            return `rgb(${Math.round(r1 + (r2 - r1) * t)},${Math.round(g1 + (g2 - g1) * t)},${Math.round(b1 + (b2 - b1) * t)})`;
+        }
+        function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+        function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+        // ─── Label data ───────────────────────────────────────────────────────
+        const LABEL_INFO = {
+            alpha:     { parent: 'Radium-226 (²²⁶Ra)',      daughter: 'Radon-222 (²²²Rn)' },
+            betaMinus: { parent: 'Kol-14 (¹⁴C)',            daughter: 'Kväve-14 (¹⁴N)' },
+            betaPlus:  { parent: 'Fluor-18 (¹⁸F)',          daughter: 'Syre-18 (¹⁸O)' },
+            gamma:     { parent: 'Teknetium-99 (⁹⁹Tc*)',    daughter: 'Teknetium-99 (⁹⁹Tc)' },
+        };
+
+        // Formula tokens: { mass, Z, sym } for nuclide notation, or plain string for arrows/particles
+        const FORMULA_TOKENS = {
+            alpha: [
+                { mass:'226', Z:'88', sym:'Ra' }, '→',
+                { mass:'222', Z:'86', sym:'Rn' }, '+',
+                { mass:'4', Z:'2', sym:'He' }
+            ],
+            betaMinus: [
+                { mass:'14', Z:'6', sym:'C' }, '→',
+                { mass:'14', Z:'7', sym:'N' }, '+',
+                { mass:'0', Z:'-1', sym:'e⁻' }, '+',
+                'ν̄ₑ'
+            ],
+            betaPlus: [
+                { mass:'18', Z:'9', sym:'F' }, '→',
+                { mass:'18', Z:'8', sym:'O' }, '+',
+                { mass:'0', Z:'1', sym:'e⁺' }, '+',
+                'νₑ'
+            ],
+            gamma: [
+                { mass:'99', Z:'43', sym:'Tc*' }, '→',
+                { mass:'99', Z:'43', sym:'Tc' }, '+',
+                'γ'
+            ],
+        };
+
+        /**
+         * Draw a decay formula centred at (cx, cy) using canvas-rendered
+         * superscript/subscript for mass/Z numbers.
+         */
+        function drawFormula(ctx, cx, cy, tokens, fontSize, color) {
+            const symSize    = fontSize;
+            const scriptSize = Math.round(fontSize * 0.6);
+            const spacing    = Math.round(fontSize * 0.6);  // space around arrows/plus
+
+            // First pass: measure total width
+            let totalW = 0;
+            const parts = tokens.map(tok => {
+                if (typeof tok === 'string') {
+                    ctx.font = `${symSize}px Poppins, sans-serif`;
+                    const tw = ctx.measureText('  ' + tok + '  ').width;
+                    return { type: 'text', text: '  ' + tok + '  ', w: tw };
+                } else {
+                    ctx.font = `bold ${scriptSize}px Poppins, sans-serif`;
+                    const massW = ctx.measureText(tok.mass).width;
+                    const zW    = ctx.measureText(tok.Z).width;
+                    const scriptColW = Math.max(massW, zW);
+                    ctx.font = `bold ${symSize}px Poppins, sans-serif`;
+                    const symW = ctx.measureText(tok.sym).width;
+                    const gap  = Math.round(fontSize * 0.08);
+                    const w = scriptColW + gap + symW;
+                    return { type: 'nuclide', tok, scriptColW, symW, gap, w };
+                }
+            });
+            parts.forEach(p => totalW += p.w);
+
+            // Second pass: draw left-to-right
+            let x = cx - totalW / 2;
+            ctx.save();
+            ctx.fillStyle = color;
+            ctx.textBaseline = 'middle';
+
+            parts.forEach(p => {
+                if (p.type === 'text') {
+                    ctx.font = `${symSize}px Poppins, sans-serif`;
+                    ctx.textAlign = 'left';
+                    ctx.fillText(p.text, x, cy);
+                } else {
+                    const midX = x + p.scriptColW / 2;
+                    // Mass (superscript)
+                    ctx.font = `bold ${scriptSize}px Poppins, sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.fillText(p.tok.mass, midX, cy - symSize * 0.3);
+                    // Z (subscript)
+                    ctx.fillText(p.tok.Z, midX, cy + symSize * 0.3);
+                    // Symbol
+                    ctx.font = `bold ${symSize}px Poppins, sans-serif`;
+                    ctx.textAlign = 'left';
+                    ctx.fillText(p.tok.sym, x + p.scriptColW + p.gap, cy);
+                }
+                x += p.w;
+            });
+
+            ctx.restore();
+        }
+
+        // Structured nucleus label data for canvas rendering
+        // { name: 'Radium-226', mass: '226', Z: '88', symbol: 'Ra' }
+        const NUCLEUS_LABELS = {
+            alpha:     { parent: { name: 'Radium-226',       mass: '226', Z: '88', symbol: 'Ra' },
+                         daughter:{ name: 'Radon-222',        mass: '222', Z: '86', symbol: 'Rn' } },
+            betaMinus: { parent: { name: 'Kol-14',           mass: '14',  Z: '6',  symbol: 'C'  },
+                         daughter:{ name: 'Kväve-14',         mass: '14',  Z: '7',  symbol: 'N'  } },
+            betaPlus:  { parent: { name: 'Fluor-18',         mass: '18',  Z: '9',  symbol: 'F'  },
+                         daughter:{ name: 'Syre-18',          mass: '18',  Z: '8',  symbol: 'O'  } },
+            gamma:     { parent: { name: 'Teknetium-99',     mass: '99', Z: '43', symbol: 'Tc*' },
+                         daughter:{ name: 'Teknetium-99',     mass: '99',  Z: '43', symbol: 'Tc' } },
+        };
+
+        /**
+         * Draw a nucleus label like:  226
+         *                              88 Ra   Radium-226
+         * centred at (cx, cy). fontSize is for the chemical symbol.
+         */
+        function drawNucleusLabel(ctx, cx, cy, info, fontSize, color, suffix) {
+            const symSize  = fontSize;
+            const scriptSize = Math.round(fontSize * 0.62);
+            const nameSize = Math.round(fontSize * 0.72);
+            const gap = Math.round(fontSize * 0.12);   // gap between scripts and symbol
+
+            ctx.save();
+            ctx.fillStyle = color;
+            ctx.textBaseline = 'middle';
+
+            // Measure symbol
+            ctx.font = `bold ${symSize}px Poppins, sans-serif`;
+            const symW = ctx.measureText(info.symbol).width;
+
+            // Measure suffix (e.g. " (α)")
+            const suffixStr = suffix ? '  ' + suffix : '';
+            const suffixW = suffix ? ctx.measureText(suffixStr).width : 0;
+
+            // Measure name
+            ctx.font = `${nameSize}px Poppins, sans-serif`;
+            const nameStr = info.name ? '  ' + info.name : '';
+            const nameW = info.name ? ctx.measureText(nameStr).width : 0;
+
+            // Measure scripts - use the wider of mass/Z for the column
+            ctx.font = `bold ${scriptSize}px Poppins, sans-serif`;
+            const massW = ctx.measureText(info.mass).width;
+            const zW    = ctx.measureText(info.Z).width;
+            const scriptColW = Math.max(massW, zW);
+
+            // Total width
+            const rightPart = suffix ? suffixW : nameW;
+            const totalW = scriptColW + gap + symW + rightPart;
+            const startX = cx - totalW / 2;
+
+            // Draw mass number and atomic number - manually centred on same X
+            ctx.font = `bold ${scriptSize}px Poppins, sans-serif`;
+            ctx.textAlign = 'left';
+            const scriptMidX = startX + scriptColW / 2;
+            ctx.fillText(info.mass, scriptMidX - massW / 2, cy - symSize * 0.28);
+            ctx.fillText(info.Z,    scriptMidX - zW / 2,    cy + symSize * 0.32);
+
+            // Draw chemical symbol
+            ctx.font = `bold ${symSize}px Poppins, sans-serif`;
+            ctx.textAlign = 'left';
+            ctx.fillText(info.symbol, startX + scriptColW + gap, cy);
+
+            // Draw name or suffix
+            if (suffix) {
+                ctx.font = `bold ${symSize}px Poppins, sans-serif`;
+                ctx.fillText(suffixStr, startX + scriptColW + gap + symW, cy);
+            } else {
+                ctx.font = `${nameSize}px Poppins, sans-serif`;
+                ctx.fillText(nameStr, startX + scriptColW + gap + symW, cy);
+            }
+
+            ctx.restore();
+        }
+
+        // ─── The Canvas simulation component ─────────────────────────────────
+        function DecayCanvas({ decayType }) {
+            const canvasRef   = useRef(null);
+            const stateRef    = useRef({ phase: 'idle', progress: 0, rafId: null, startTime: null });
+            const [phase, setPhase]       = useState('idle'); // idle | animating | done
+            const [canvasSize, setCanvasSize] = useState({ w: 750, h: 480 });
+            const containerRef = useRef(null);
+
+            const cfg = DECAY_CONFIGS[decayType];
+
+            // Build nucleus once per decayType
+            const nucleons = useMemo(() => buildNucleus(cfg.protons, cfg.neutrons, cfg.seed), [decayType]);
+
+            // Find indices of nucleons to use in each decay
+            const specialIndices = useMemo(() => {
+                if (decayType === 'alpha') {
+                    // Find 4 ADJACENT outer nucleons: 2 protons + 2 neutrons
+                    const indexed = nucleons.map((n, i) => ({ ...n, i }));
+                    const outer = [...indexed].sort((a, b) => b.distFromCenter - a.distFromCenter);
+                    const candidates = outer.slice(0, Math.max(30, Math.floor(nucleons.length * 0.25)));
+
+                    let best = null;
+                    let bestSpread = Infinity;
+                    for (const anchor of candidates) {
+                        const nearby = candidates
+                            .filter(c => c.i !== anchor.i)
+                            .sort((a, b) => {
+                                const da = (a.gx - anchor.gx) ** 2 + (a.gy - anchor.gy) ** 2;
+                                const db = (b.gx - anchor.gx) ** 2 + (b.gy - anchor.gy) ** 2;
+                                return da - db;
+                            });
+                        let group = [anchor];
+                        let pC = anchor.type === 'proton' ? 1 : 0;
+                        let nC = anchor.type === 'neutron' ? 1 : 0;
+                        for (const o of nearby) {
+                            if (group.length >= 4) break;
+                            if (o.type === 'proton' && pC < 2) { group.push(o); pC++; }
+                            else if (o.type === 'neutron' && nC < 2) { group.push(o); nC++; }
+                        }
+                        if (pC === 2 && nC === 2) {
+                            let maxD = 0;
+                            for (let a = 0; a < 4; a++)
+                                for (let b = a + 1; b < 4; b++) {
+                                    const d = (group[a].gx - group[b].gx) ** 2 + (group[a].gy - group[b].gy) ** 2;
+                                    if (d > maxD) maxD = d;
+                                }
+                            if (maxD < bestSpread) { bestSpread = maxD; best = group.map(g => g.i); }
+                        }
+                    }
+                    return best || [];
+                }
+                if (decayType === 'betaMinus') {
+                    // Find a neutron near the surface
+                    const neutrons = nucleons
+                        .map((n, i) => ({ ...n, i }))
+                        .filter(n => n.type === 'neutron')
+                        .sort((a, b) => b.distFromCenter - a.distFromCenter);
+                    return [neutrons[0].i];
+                }
+                if (decayType === 'betaPlus') {
+                    const protons = nucleons
+                        .map((n, i) => ({ ...n, i }))
+                        .filter(n => n.type === 'proton')
+                        .sort((a, b) => b.distFromCenter - a.distFromCenter);
+                    return [protons[0].i];
+                }
+                return [];
+            }, [decayType, nucleons]);
+
+            // Responsive canvas sizing
+            useEffect(() => {
+                function updateSize() {
+                    if (containerRef.current) {
+                        const rect = containerRef.current.getBoundingClientRect();
+                        const w = Math.min(rect.width || 750, 750);
+                        const h = Math.round(w * 480 / 750);
+                        setCanvasSize({ w, h });
+                    }
+                }
+                updateSize();
+                window.addEventListener('resize', updateSize);
+                return () => window.removeEventListener('resize', updateSize);
+            }, []);
+
+            // ── Main draw function ────────────────────────────────────────────
+            const draw = useCallback((progress, currentPhase) => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width;
+                const h = canvas.height;
+                const nr = cfg.nucleonRadius;
+                const time = Date.now() / 1000;
+                const labels = LABEL_INFO[decayType];
+
+                // Background
+                const bg = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.7);
+                bg.addColorStop(0, '#0d1526');
+                bg.addColorStop(1, '#050510');
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, w, h);
+
+                const isSplit = (currentPhase === 'animating' || currentPhase === 'done');
+
+                // Helper: compute scale and a drawR that ensures nucleons touch
+                let maxGridR = 0;
+                nucleons.forEach(n => { if (n.distFromCenter > maxGridR) maxGridR = n.distFromCenter; });
+
+                if (!isSplit) {
+                    // ── IDLE: single centred view ────────────────────────────
+                    const padding = nr * 3;
+                    const availR  = Math.min(w, h) * 0.42 - padding;
+                    const scale   = maxGridR > 0 ? availR / (maxGridR + nr) : availR;
+                    const drawR   = Math.max(nr, scale * 0.48);
+                    const cx = w / 2;
+                    const cy = h / 2;
+
+                    const jiggleAmp = decayType === 'gamma' ? drawR * 0.22 : drawR * 0.10;
+                    const glowStr   = decayType === 'gamma' ? 10 + Math.sin(time * 8) * 5 : 0;
+
+                    nucleons.forEach((n, idx) => {
+                        const jx = Math.sin(time * (decayType === 'gamma' ? 5 + idx * 0.13 : 4.1) + idx * 1.3) * jiggleAmp;
+                        const jy = Math.cos(time * (decayType === 'gamma' ? 4.7 + idx * 0.11 : 3.7) + idx * 0.9) * jiggleAmp;
+                        const px = cx + n.gx * scale + jx;
+                        const py = cy + n.gy * scale + jy;
+                        const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                        drawNucleon(ctx, px, py, drawR, color, decayType === 'gamma' ? color : null, glowStr * 0.7);
+                    });
+
+                    // Gamma excited label in idle
+                    // Decay type title at top
+                    const DECAY_TITLES = { alpha: 'Alfasönderfall', betaMinus: 'Beta⁻-sönderfall', betaPlus: 'Beta⁺-sönderfall', gamma: 'Gammasönderfall' };
+                    const headingSize = Math.max(16, Math.min(24, w / 30));
+                    ctx.save();
+                    ctx.font = `bold ${headingSize}px Poppins, sans-serif`;
+                    ctx.fillStyle = '#e2e8f0';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.shadowColor = 'rgba(56,189,248,0.3)';
+                    ctx.shadowBlur = 8;
+                    ctx.fillText(DECAY_TITLES[decayType], w / 2, 24);
+                    ctx.restore();
+
+                    // Parent isotope label closer to nucleus
+                    const nucleusTop = cy - (maxGridR * scale + drawR);
+                    const titleSize = Math.max(16, Math.min(22, w / 32));
+                    const nLabels = NUCLEUS_LABELS[decayType];
+                    ctx.save();
+                    ctx.shadowColor = 'rgba(56,189,248,0.3)';
+                    ctx.shadowBlur = 8;
+                    drawNucleusLabel(ctx, w / 2, nucleusTop - 18, nLabels.parent, titleSize, '#e2e8f0');
+                    ctx.restore();
+
+                    // "Exciterat tillstånd" label for gamma
+                    if (decayType === 'gamma') {
+                        ctx.save();
+                        ctx.globalAlpha = 0.75 + Math.sin(time * 2) * 0.15;
+                        ctx.font = `bold ${Math.max(11, titleSize * 0.6)}px Poppins, sans-serif`;
+                        ctx.fillStyle = '#fbbf24';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.shadowColor = '#fbbf24';
+                        ctx.shadowBlur = 12;
+                        ctx.fillText('Exciterat tillstånd', w / 2, nucleusTop - 4);
+                        ctx.restore();
+                    }
+
+                    // Formula at bottom
+                    const fmSize = Math.max(13, Math.min(19, w / 40));
+                    const fTokens = FORMULA_TOKENS[decayType];
+                    drawFormula(ctx, w / 2, h - 18, fTokens, fmSize, '#94a3b8');
+
+                } else {
+                    // ── SPLIT VIEW: Före (left) | Efter (right) ──────────────
+                    const panelW = w / 2;
+
+                    // Compute scale that fits a nucleus in a half-width panel
+                    const padding = nr * 3;
+                    const availR  = Math.min(panelW - 10, h - 80) * 0.40 - padding;
+                    const scale   = maxGridR > 0 ? availR / (maxGridR + nr) : availR;
+                    const drawR   = Math.max(nr, scale * 0.48);
+
+                    // Panel centres
+                    const lcx = w / 4;
+                    const lcy = h / 2 + 8;
+                    const rcx = 3 * w / 4;
+                    const rcy = h / 2 + 8;
+
+                    // prodProg: 2s hold (progress 0–0.385) then decay animation
+                    const holdFrac = 2000 / 5200;  // first 2s: show identical nucleus
+                    const prodProg = clamp((progress - holdFrac) / (1 - holdFrac), 0, 1);
+
+                    // ── Dashed divider ────────────────────────────────────────
+                    ctx.save();
+                    ctx.strokeStyle = 'rgba(148,163,184,0.25)';
+                    ctx.lineWidth = 1.5;
+                    ctx.setLineDash([6, 6]);
+                    ctx.beginPath();
+                    ctx.moveTo(w / 2, 10);
+                    ctx.lineTo(w / 2, h - 10);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    ctx.restore();
+
+                    // ── Panel headers ─────────────────────────────────────────
+                    const hdrSize = Math.max(13, Math.min(18, w / 45));
+                    ctx.save();
+                    ctx.font = `bold ${hdrSize}px Poppins, sans-serif`;
+                    ctx.textBaseline = 'top';
+                    ctx.textAlign = 'center';
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.fillText('Före', w / 4, 10);
+                    ctx.globalAlpha = clamp(prodProg / 0.25, 0, 1);
+                    ctx.fillText('Efter', 3 * w / 4, 10);
+                    ctx.restore();
+
+                    // ── LEFT PANEL: frozen original nucleus with subtle jiggle ─
+                    const leftJiggle = decayType === 'gamma' ? drawR * 0.22 : drawR * 0.10;
+                    const leftGlowStr = decayType === 'gamma' ? 10 + Math.sin(time * 8) * 5 : 0;
+
+                    nucleons.forEach((n, idx) => {
+                        const jx = Math.sin(time * (decayType === 'gamma' ? 5 + idx * 0.13 : 4.1) + idx * 1.3) * leftJiggle;
+                        const jy = Math.cos(time * (decayType === 'gamma' ? 4.7 + idx * 0.11 : 3.7) + idx * 0.9) * leftJiggle;
+                        const px = lcx + n.gx * scale + jx;
+                        const py = lcy + n.gy * scale + jy;
+                        const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                        drawNucleon(ctx, px, py, drawR, color, decayType === 'gamma' ? color : null, leftGlowStr * 0.7);
+                    });
+
+                    // Parent label above left-panel nucleus
+                    const parentTopY = lcy - (maxGridR * scale + drawR);
+                    const lblSize = Math.max(14, Math.min(20, w / 42));
+                    const nLabels = NUCLEUS_LABELS[decayType];
+                    ctx.save();
+                    ctx.shadowColor = 'rgba(56,189,248,0.3)';
+                    ctx.shadowBlur = 6;
+                    drawNucleusLabel(ctx, lcx, parentTopY - 18, nLabels.parent, lblSize, '#e2e8f0');
+                    ctx.restore();
+
+                    // Gamma: "Exciterat tillstånd" below parent label
+                    if (decayType === 'gamma') {
+                        ctx.save();
+                        ctx.globalAlpha = 0.85;
+                        ctx.font = `bold ${Math.max(10, lblSize * 0.7)}px Poppins, sans-serif`;
+                        ctx.fillStyle = '#fbbf24';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.shadowColor = '#fbbf24';
+                        ctx.shadowBlur = 12;
+                        ctx.fillText('Exciterat tillstånd', lcx, parentTopY - 40);
+                        ctx.restore();
+                    }
+
+                    // ── RIGHT PANEL: decay products ───────────────────────────
+                    ctx.save();
+                    ctx.globalAlpha = clamp(progress / 0.05, 0, 1);
+
+                    // During hold phase (prodProg === 0): draw full nucleus unchanged
+                    if (prodProg === 0) {
+                        nucleons.forEach(n => {
+                            const px = rcx + n.gx * scale;
+                            const py = rcy + n.gy * scale;
+                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                            drawNucleon(ctx, px, py, drawR, color, null, 0);
+                        });
+                        // Parent label on right panel during hold
+                        const rTopY = rcy - (maxGridR * scale + drawR);
+                        ctx.save();
+                        ctx.shadowColor = 'rgba(56,189,248,0.3)';
+                        ctx.shadowBlur = 6;
+                        drawNucleusLabel(ctx, rcx, rTopY - 18, nLabels.parent, lblSize, '#e2e8f0');
+                        ctx.restore();
+                    }
+
+                    // ── ALPHA right panel ─────────────────────────────────────
+                    if (decayType === 'alpha') {
+                        const alphaSet = new Set(specialIndices);
+
+                        // Tight diamond cluster offsets
+                        const cR = drawR * 1.1;
+                        const alphaProtons  = specialIndices.filter(i => nucleons[i].type === 'proton');
+                        const alphaNeutrons = specialIndices.filter(i => nucleons[i].type === 'neutron');
+                        const orderedAlpha = [alphaProtons[0], alphaNeutrons[0], alphaProtons[1], alphaNeutrons[1]];
+                        const clusterOffsets = [
+                            { dx: -cR, dy: 0 },
+                            { dx: 0,   dy: -cR },
+                            { dx: cR,  dy: 0 },
+                            { dx: 0,   dy: cR },
+                        ];
+
+                        // Animation phases:
+                        //  0–40%: nucleons converge from grid positions into tight cluster
+                        // 15–90%: cluster drifts to the right away from daughter
+                        const convergeProg = easeInOut(clamp(prodProg / 0.40, 0, 1));
+                        const driftProg    = easeInOut(clamp((prodProg - 0.15) / 0.75, 0, 1));
+
+                        // Cluster target centre: always to the RIGHT of the daughter
+                        const nucleusVisR = maxGridR * scale + drawR;
+                        const targetDist  = nucleusVisR + drawR * 8;
+                        const clusterCX   = rcx + targetDist * driftProg;
+                        const clusterCY   = rcy;
+
+                        // Draw daughter nucleus (all nucleons except alpha ones)
+                        const daughterJiggle = drawR * 0.08;
+                        nucleons.forEach((n, idx) => {
+                            if (alphaSet.has(idx)) return;
+                            const jx = Math.sin(time * 4.1 + idx * 1.3) * daughterJiggle;
+                            const jy = Math.cos(time * 3.7 + idx * 0.9) * daughterJiggle;
+                            const px = rcx + n.gx * scale + jx;
+                            const py = rcy + n.gy * scale + jy;
+                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                            drawNucleon(ctx, px, py, drawR, color);
+                        });
+
+                        // Alpha nucleons: interpolate from original grid position → tight cluster
+                        const glowAmt = 12 + Math.sin(time * 6) * 4;
+                        orderedAlpha.forEach((idx, si) => {
+                            const n = nucleons[idx];
+                            // Original position (inside the nucleus)
+                            const origX = rcx + n.gx * scale;
+                            const origY = rcy + n.gy * scale;
+                            // Target position in the tight cluster
+                            const targetX = clusterCX + clusterOffsets[si].dx;
+                            const targetY = clusterCY + clusterOffsets[si].dy;
+                            // Interpolate
+                            const px = origX + (targetX - origX) * convergeProg;
+                            const py = origY + (targetY - origY) * convergeProg;
+                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                            drawNucleon(ctx, px, py, drawR, color, COL_ALPHA, glowAmt);
+                        });
+
+                        // Circle border around alpha cluster (once mostly converged)
+                        if (convergeProg > 0.5) {
+                            ctx.save();
+                            ctx.globalAlpha = (convergeProg - 0.5) * 2 * 0.45;
+                            ctx.strokeStyle = COL_ALPHA;
+                            ctx.lineWidth = 1.5;
+                            ctx.shadowColor = COL_ALPHA;
+                            ctx.shadowBlur = 10;
+                            ctx.beginPath();
+                            ctx.arc(clusterCX, clusterCY, cR + drawR + 3, 0, Math.PI * 2);
+                            ctx.stroke();
+                            ctx.restore();
+                        }
+
+                        // Alpha label above the cluster, same style as nucleus labels
+                        if (prodProg > 0.4) {
+                            const alphaInfo = { mass: '4', Z: '2', symbol: 'He', name: 'Helium-4' };
+                            ctx.save();
+                            ctx.globalAlpha = clamp((prodProg - 0.4) / 0.25, 0, 1);
+                            ctx.shadowColor = COL_ALPHA;
+                            ctx.shadowBlur = 12;
+                            drawNucleusLabel(ctx, clusterCX, clusterCY - cR - drawR - 14, alphaInfo, lblSize, COL_ALPHA, '(α)');
+                            ctx.restore();
+                        }
+                    }
+
+                    // ── BETA⁻ right panel ─────────────────────────────────────
+                    if (decayType === 'betaMinus') {
+                        const convIdx = specialIndices[0];
+                        const convNucleon = nucleons[convIdx];
+                        const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
+                        const rightJiggle = drawR * 0.08;
+
+                        nucleons.forEach((n, idx) => {
+                            const jx = Math.sin(time * 4.1 + idx * 1.3) * rightJiggle;
+                            const jy = Math.cos(time * 3.7 + idx * 0.9) * rightJiggle;
+                            const px = rcx + n.gx * scale + jx;
+                            const py = rcy + n.gy * scale + jy;
+
+                            if (idx === convIdx) {
+                                // Fully converted to proton
+                                drawNucleon(ctx, px, py, drawR, COL_PROTON, '#fff', 8);
+                                if (prodProg < 0.7) {
+                                    ctx.save();
+                                    ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1) * (1 - clamp((prodProg - 0.5) / 0.2, 0, 1));
+                                    ctx.font = `italic bold ${drawR * 1.3}px Poppins, sans-serif`;
+                                    ctx.fillStyle = '#fff';
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+                                    ctx.shadowColor = '#fff';
+                                    ctx.shadowBlur = 10;
+                                    ctx.fillText('n → p', px, py - drawR * 2.2);
+                                    ctx.restore();
+                                }
+                            } else {
+                                const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                                drawNucleon(ctx, px, py, drawR, color);
+                            }
+                        });
+
+                        // Electron & antineutrino: fly out and settle to the right
+                        const nucleusVisR = maxGridR * scale + drawR;
+                        const eRadius = drawR * 0.55;
+                        const nuRadius = drawR * 0.35;
+                        const particleSpacing = drawR * 3.5;
+                        // Final resting positions: electron left, antineutrino right
+                        const eFinalX = rcx + nucleusVisR + drawR * 5;
+                        const eFinalY = rcy;
+                        const nuFinalX = eFinalX + particleSpacing;
+                        const nuFinalY = rcy;
+                        // Start positions (from converted nucleon)
+                        const eStartX = rcx + convNucleon.gx * scale;
+                        const eStartY = rcy + convNucleon.gy * scale;
+
+                        // Electron flying out and settling
+                        if (ejectProg > 0) {
+                            const eProg = easeInOut(clamp(ejectProg / 0.8, 0, 1));
+                            const ex = eStartX + (eFinalX - eStartX) * eProg;
+                            const ey = eStartY + (eFinalY - eStartY) * eProg;
+                            ctx.save();
+                            // Gold ring around electron (like alpha particle)
+                            ctx.shadowColor = COL_ALPHA;
+                            ctx.shadowBlur = 14;
+                            ctx.beginPath();
+                            ctx.arc(ex, ey, eRadius, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_ELECTRON;
+                            ctx.fill();
+                            ctx.strokeStyle = COL_ALPHA;
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(ex, ey, eRadius + 3, 0, Math.PI * 2);
+                            ctx.stroke();
+                            ctx.restore();
+
+                            // Electron label above (with mass/Z like nucleus labels)
+                            if (ejectProg > 0.5) {
+                                const eInfo = { mass: '0', Z: '-1', symbol: 'e⁻', name: '' };
+                                ctx.save();
+                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
+                                ctx.shadowColor = COL_ALPHA;
+                                ctx.shadowBlur = 10;
+                                drawNucleusLabel(ctx, ex, ey - eRadius - 18, eInfo, lblSize, COL_ALPHA, '(β⁻)');
+                                ctx.restore();
+                            }
+                        }
+
+                        // Antineutrino flying out and settling
+                        if (ejectProg > 0.1) {
+                            const nuProg = easeInOut(clamp((ejectProg - 0.1) / 0.8, 0, 1));
+                            const nx = eStartX + (nuFinalX - eStartX) * nuProg;
+                            const ny = eStartY + (nuFinalY - eStartY) * nuProg;
+                            ctx.save();
+                            ctx.shadowColor = COL_NEUTRINO;
+                            ctx.shadowBlur = 8;
+                            // Dashed trail
+                            ctx.strokeStyle = COL_NEUTRINO;
+                            ctx.lineWidth = 1.5;
+                            ctx.setLineDash([4, 5]);
+                            ctx.beginPath();
+                            ctx.moveTo(eStartX, eStartY);
+                            ctx.lineTo(nx, ny);
+                            ctx.stroke();
+                            ctx.setLineDash([]);
+                            // Neutrino dot
+                            ctx.beginPath();
+                            ctx.arc(nx, ny, nuRadius, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_NEUTRINO;
+                            ctx.fill();
+                            ctx.restore();
+
+                            // Antineutrino label above
+                            if (ejectProg > 0.5) {
+                                ctx.save();
+                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
+                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                                ctx.fillStyle = COL_NEUTRINO;
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'alphabetic';
+                                ctx.fillText('ν̄ₑ', nx, ny - nuRadius - 10);
+                                ctx.restore();
+                            }
+                        }
+                    }
+
+                    // ── BETA⁺ right panel ─────────────────────────────────────
+                    if (decayType === 'betaPlus') {
+                        const convIdx = specialIndices[0];
+                        const convNucleon = nucleons[convIdx];
+                        const ejectProg = clamp((prodProg - 0.3) / 0.7, 0, 1);
+                        const rightJiggle = drawR * 0.08;
+
+                        nucleons.forEach((n, idx) => {
+                            const jx = Math.sin(time * 4.1 + idx * 1.3) * rightJiggle;
+                            const jy = Math.cos(time * 3.7 + idx * 0.9) * rightJiggle;
+                            const px = rcx + n.gx * scale + jx;
+                            const py = rcy + n.gy * scale + jy;
+
+                            if (idx === convIdx) {
+                                // Fully converted to neutron
+                                drawNucleon(ctx, px, py, drawR, COL_NEUTRON, '#fff', 8);
+                                if (prodProg < 0.7) {
+                                    ctx.save();
+                                    ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1) * (1 - clamp((prodProg - 0.5) / 0.2, 0, 1));
+                                    ctx.font = `italic bold ${drawR * 1.3}px Poppins, sans-serif`;
+                                    ctx.fillStyle = '#fff';
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+                                    ctx.shadowColor = '#fff';
+                                    ctx.shadowBlur = 10;
+                                    ctx.fillText('p → n', px, py - drawR * 2.2);
+                                    ctx.restore();
+                                }
+                            } else {
+                                const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                                drawNucleon(ctx, px, py, drawR, color);
+                            }
+                        });
+
+                        // Positron & neutrino: fly out and settle to the right
+                        const nucleusVisRBp = maxGridR * scale + drawR;
+                        const eRadiusBp = drawR * 0.55;
+                        const nuRadiusBp = drawR * 0.35;
+                        const particleSpacingBp = drawR * 3.5;
+                        // Final resting positions: positron left, neutrino right
+                        const eFinalXBp = rcx + nucleusVisRBp + drawR * 5;
+                        const eFinalYBp = rcy;
+                        const nuFinalXBp = eFinalXBp + particleSpacingBp;
+                        const nuFinalYBp = rcy;
+                        // Start positions (from converted nucleon)
+                        const eStartXBp = rcx + convNucleon.gx * scale;
+                        const eStartYBp = rcy + convNucleon.gy * scale;
+
+                        // Positron flying out and settling
+                        if (ejectProg > 0) {
+                            const eProg = easeInOut(clamp(ejectProg / 0.8, 0, 1));
+                            const ex = eStartXBp + (eFinalXBp - eStartXBp) * eProg;
+                            const ey = eStartYBp + (eFinalYBp - eStartYBp) * eProg;
+                            ctx.save();
+                            // Gold ring around positron (energetic particle)
+                            ctx.shadowColor = COL_ALPHA;
+                            ctx.shadowBlur = 14;
+                            ctx.beginPath();
+                            ctx.arc(ex, ey, eRadiusBp, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_POSITRON;
+                            ctx.fill();
+                            ctx.strokeStyle = COL_ALPHA;
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(ex, ey, eRadiusBp + 3, 0, Math.PI * 2);
+                            ctx.stroke();
+                            ctx.restore();
+
+                            // Positron label above
+                            if (ejectProg > 0.5) {
+                                const eInfoBp = { mass: '0', Z: '1', symbol: 'e⁺', name: '' };
+                                ctx.save();
+                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
+                                ctx.shadowColor = COL_ALPHA;
+                                ctx.shadowBlur = 10;
+                                drawNucleusLabel(ctx, ex, ey - eRadiusBp - 18, eInfoBp, lblSize, COL_ALPHA, '(β⁺)');
+                                ctx.restore();
+                            }
+                        }
+
+                        // Neutrino flying out and settling
+                        if (ejectProg > 0.1) {
+                            const nuProg = easeInOut(clamp((ejectProg - 0.1) / 0.8, 0, 1));
+                            const nx = eStartXBp + (nuFinalXBp - eStartXBp) * nuProg;
+                            const ny = eStartYBp + (nuFinalYBp - eStartYBp) * nuProg;
+                            ctx.save();
+                            ctx.shadowColor = COL_NEUTRINO;
+                            ctx.shadowBlur = 8;
+                            // Dashed trail
+                            ctx.strokeStyle = COL_NEUTRINO;
+                            ctx.lineWidth = 1.5;
+                            ctx.setLineDash([4, 5]);
+                            ctx.beginPath();
+                            ctx.moveTo(eStartXBp, eStartYBp);
+                            ctx.lineTo(nx, ny);
+                            ctx.stroke();
+                            ctx.setLineDash([]);
+                            // Neutrino dot
+                            ctx.beginPath();
+                            ctx.arc(nx, ny, nuRadiusBp, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_NEUTRINO;
+                            ctx.fill();
+                            ctx.restore();
+
+                            // Neutrino label above
+                            if (ejectProg > 0.5) {
+                                ctx.save();
+                                ctx.globalAlpha = clamp((ejectProg - 0.5) / 0.3, 0, 1);
+                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                                ctx.fillStyle = COL_NEUTRINO;
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'alphabetic';
+                                ctx.fillText('νₑ', nx, ny - nuRadiusBp - 10);
+                                ctx.restore();
+                            }
+                        }
+                    }
+
+                    // ── GAMMA right panel ─────────────────────────────────────
+                    if (decayType === 'gamma') {
+                        // Ground state: calm nucleus (slight residual jiggle that fades)
+                        const calmJiggle = drawR * 0.03;
+                        nucleons.forEach((n, idx) => {
+                            const jx = Math.sin(time * 2 + idx * 1.3) * calmJiggle;
+                            const jy = Math.cos(time * 1.7 + idx * 0.9) * calmJiggle;
+                            const px = rcx + n.gx * scale + jx;
+                            const py = rcy + n.gy * scale + jy;
+                            const color = n.type === 'proton' ? COL_PROTON : COL_NEUTRON;
+                            drawNucleon(ctx, px, py, drawR, color);
+                        });
+
+                        // "Grundtillstånd" label below daughter label
+                        if (prodProg > 0.2) {
+                            const gtTopY = rcy - (maxGridR * scale + drawR);
+                            ctx.save();
+                            ctx.globalAlpha = clamp((prodProg - 0.2) / 0.3, 0, 1);
+                            ctx.font = `bold ${Math.max(10, lblSize * 0.7)}px Poppins, sans-serif`;
+                            ctx.fillStyle = '#38bdf8';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.shadowColor = '#38bdf8';
+                            ctx.shadowBlur = 10;
+                            ctx.fillText('Grundtillstånd', rcx, gtTopY - 40);
+                            ctx.restore();
+                        }
+
+                        // Wavy gamma photon going to the right
+                        const gammaProg = clamp((prodProg - 0.1) / 0.7, 0, 1);
+                        const gammaFade = clamp((prodProg - 0.85) / 0.15, 0, 1); // fade wave at end
+                        const nucleusVisRG = maxGridR * scale + drawR;
+                        const gammaStartX = rcx + nucleusVisRG + drawR;
+                        const gammaEndX   = rcx + nucleusVisRG + drawR * 12;
+                        const gammaFinalX = gammaStartX + (gammaEndX - gammaStartX) * easeInOut(gammaProg);
+                        const gammaY = rcy;
+
+                        if (gammaProg > 0) {
+                            const numWaves = 5;
+                            const waveAmp  = drawR * 1.4;
+                            const steps = 80;
+                            const waveLength = gammaFinalX - gammaStartX;
+
+                            // Sine wave (fades out when animation is done)
+                            ctx.save();
+                            ctx.globalAlpha = clamp(gammaProg / 0.2, 0, 1) * (1 - gammaFade);
+                            ctx.strokeStyle = COL_GAMMA;
+                            ctx.lineWidth = 2.5;
+                            ctx.shadowColor = COL_GAMMA;
+                            ctx.shadowBlur = 18;
+                            ctx.lineJoin = 'round';
+                            ctx.beginPath();
+                            for (let s = 0; s <= steps; s++) {
+                                const frac = s / steps;
+                                const px = gammaStartX + frac * waveLength;
+                                const py = gammaY + Math.sin(frac * numWaves * Math.PI * 2) * waveAmp;
+                                s === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                            }
+                            ctx.stroke();
+                            ctx.restore();
+
+                            // Glowing gamma dot at the tip (stays visible)
+                            const gDotR = drawR * 0.5;
+                            ctx.save();
+                            ctx.globalAlpha = clamp(gammaProg / 0.2, 0, 1);
+                            ctx.shadowColor = COL_GAMMA;
+                            ctx.shadowBlur = 16;
+                            ctx.beginPath();
+                            ctx.arc(gammaFinalX, gammaY, gDotR, 0, Math.PI * 2);
+                            ctx.fillStyle = COL_GAMMA;
+                            ctx.fill();
+                            ctx.restore();
+
+                            // Gamma label above the dot
+                            if (gammaProg > 0.3) {
+                                ctx.save();
+                                ctx.globalAlpha = clamp((gammaProg - 0.3) / 0.25, 0, 1);
+                                ctx.font = `bold ${lblSize}px Poppins, sans-serif`;
+                                ctx.fillStyle = COL_GAMMA;
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'alphabetic';
+                                ctx.shadowColor = COL_GAMMA;
+                                ctx.shadowBlur = 12;
+                                ctx.fillText('γ', gammaFinalX, gammaY - gDotR - 10);
+                                ctx.restore();
+                            }
+                        }
+                    }
+
+                    ctx.restore(); // end prodProg globalAlpha
+
+                    // Daughter label above right-panel nucleus
+                    const nucleusTopY = rcy - (maxGridR * scale + drawR);
+                    ctx.save();
+                    ctx.globalAlpha = clamp(prodProg / 0.3, 0, 1);
+                    ctx.shadowColor = 'rgba(56,189,248,0.4)';
+                    ctx.shadowBlur = 8;
+                    drawNucleusLabel(ctx, rcx, nucleusTopY - 18, nLabels.daughter, lblSize, '#38bdf8');
+                    ctx.restore();
+
+                    // Formula centred at very bottom
+                    const fmSize = Math.max(12, Math.min(17, w / 46));
+                    const fTokens = FORMULA_TOKENS[decayType];
+                    drawFormula(ctx, w / 2, h - 12, fTokens, fmSize, '#94a3b8');
+                }
+
+            }, [decayType, nucleons, specialIndices, cfg]);
+
+            // Animation loop
+            const startAnimation = useCallback(() => {
+                if (stateRef.current.phase === 'animating') return;
+                stateRef.current.phase = 'animating';
+                stateRef.current.startTime = null;
+                setPhase('animating');
+
+                const duration = 5200; // ms (includes 2s hold at start)
+
+                function loop(ts) {
+                    if (!stateRef.current.startTime) stateRef.current.startTime = ts;
+                    const elapsed = ts - stateRef.current.startTime;
+                    const prog = Math.min(elapsed / duration, 1);
+                    stateRef.current.progress = prog;
+                    draw(prog, 'animating');
+
+                    if (prog < 1) {
+                        stateRef.current.rafId = requestAnimationFrame(loop);
+                    } else {
+                        stateRef.current.phase = 'done';
+                        setPhase('done');
+                    }
+                }
+                stateRef.current.rafId = requestAnimationFrame(loop);
+            }, [draw]);
+
+            // Idle jiggle loop (also keeps running in 'done' so left panel stays alive)
+            const idleRafRef = useRef(null);
+            const startIdleLoop = useCallback(() => {
+                function loop() {
+                    const p = stateRef.current.phase;
+                    if (p !== 'idle' && p !== 'done') return;
+                    draw(stateRef.current.progress, p);
+                    idleRafRef.current = requestAnimationFrame(loop);
+                }
+                idleRafRef.current = requestAnimationFrame(loop);
+            }, [draw]);
+
+            const stopIdleLoop = useCallback(() => {
+                if (idleRafRef.current) cancelAnimationFrame(idleRafRef.current);
+            }, []);
+
+            const reset = useCallback(() => {
+                if (stateRef.current.rafId) cancelAnimationFrame(stateRef.current.rafId);
+                stopIdleLoop();
+                stateRef.current.phase = 'idle';
+                stateRef.current.progress = 0;
+                setPhase('idle');
+            }, [stopIdleLoop]);
+
+            // Start/stop idle loop based on phase
+            useEffect(() => {
+                if (phase === 'idle' || phase === 'done') {
+                    startIdleLoop();
+                } else {
+                    stopIdleLoop();
+                }
+                return () => stopIdleLoop();
+            }, [phase, startIdleLoop, stopIdleLoop]);
+
+            // Cleanup on decay type change or unmount
+            useEffect(() => {
+                return () => {
+                    if (stateRef.current.rafId) cancelAnimationFrame(stateRef.current.rafId);
+                    stopIdleLoop();
+                };
+            }, [decayType, stopIdleLoop]);
+
+            // Reset when decay type changes
+            useEffect(() => {
+                if (stateRef.current.rafId) cancelAnimationFrame(stateRef.current.rafId);
+                stopIdleLoop();
+                stateRef.current.phase = 'idle';
+                stateRef.current.progress = 0;
+                setPhase('idle');
+            }, [decayType]);
+
+            // Draw initial frame whenever canvas size changes
+            useEffect(() => {
+                draw(stateRef.current.progress, stateRef.current.phase);
+            }, [canvasSize, draw]);
+
+            return (
+                <div ref={containerRef} style={{ width: '100%' }}>
+                    <canvas
+                        ref={canvasRef}
+                        width={canvasSize.w}
+                        height={canvasSize.h}
+                        style={{ width: '100%', height: 'auto', borderRadius: '0.75rem', background: '#050510' }}
+                    />
+                    <div className="flex gap-3 justify-center mt-5">
+                        {phase !== 'animating' && phase !== 'done' && (
+                            <button
+                                onClick={startAnimation}
+                                className="btn-primary px-8 py-3 rounded-xl text-base"
+                                style={{ fontFamily: 'Poppins, sans-serif' }}
+                            >
+                                {{ alpha: 'α-sönderfall', betaMinus: 'β⁻-sönderfall', betaPlus: 'β⁺-sönderfall', gamma: 'γ-sönderfall' }[decayType]}
+                            </button>
+                        )}
+                        {phase === 'animating' && (
+                            <span
+                                className="px-8 py-3 rounded-xl text-base text-slate-400"
+                                style={{ fontFamily: 'Poppins, sans-serif', background: 'rgba(30,41,59,0.5)', border: '1px solid rgba(148,163,184,0.2)' }}
+                            >
+                                Animerar...
+                            </span>
+                        )}
+                        {phase === 'done' && (
+                            <button
+                                onClick={reset}
+                                className="btn-secondary px-8 py-3 rounded-xl text-base"
+                                style={{ fontFamily: 'Poppins, sans-serif' }}
+                            >
+                                Återställ
+                            </button>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        // ─── Equation display for each decay ─────────────────────────────────
+        function DecayEquation({ decayType }) {
+            const equations = {
+                alpha: (
+                    <span>
+                        <sup>226</sup><sub>88</sub>Ra
+                        {' '}&rarr;{' '}
+                        <sup>222</sup><sub>86</sub>Rn
+                        {' '}+{' '}
+                        <sup>4</sup><sub>2</sub>He&nbsp;(α)
+                    </span>
+                ),
+                betaMinus: (
+                    <span>
+                        <sup>14</sup><sub>6</sub>C
+                        {' '}&rarr;{' '}
+                        <sup>14</sup><sub>7</sub>N
+                        {' '}+{' '}
+                        e<sup>&minus;</sup>
+                        {' '}+{' '}
+                        &nu;&#x0305;<sub>e</sub>
+                    </span>
+                ),
+                betaPlus: (
+                    <span>
+                        <sup>18</sup><sub>9</sub>F
+                        {' '}&rarr;{' '}
+                        <sup>18</sup><sub>8</sub>O
+                        {' '}+{' '}
+                        e<sup>+</sup>
+                        {' '}+{' '}
+                        &nu;<sub>e</sub>
+                    </span>
+                ),
+                gamma: (
+                    <span>
+                        <sup>99</sup><sub>43</sub>Tc*
+                        {' '}&rarr;{' '}
+                        <sup>99</sup><sub>43</sub>Tc
+                        {' '}+{' '}
+                        &gamma;
+                    </span>
+                ),
+            };
+            return (
+                <div className="equation-box">
+                    {equations[decayType]}
+                </div>
+            );
+        }
+
+        // ─── Explanation text for each decay ──────────────────────────────────
+        function DecayExplanation({ decayType }) {
+            const texts = {
+                alpha: 'En alfapartikel (2 protoner och 2 neutroner) lämnar kärnan. Masstalet minskar med 4 och atomnumret minskar med 2. Radium-226 omvandlas till Radon-222.',
+                betaMinus: 'En neutron i kärnan omvandlas till en proton. En elektron (e⁻) och en antineutrino (ν̄ₑ) sänds ut. Atomnumret ökar med 1, masstalet är oförändrat. Kol-14 omvandlas till Kväve-14.',
+                betaPlus: 'En proton i kärnan omvandlas till en neutron. En positron (e⁺) och en neutrino (νₑ) sänds ut. Atomnumret minskar med 1, masstalet är oförändrat. Fluor-18 omvandlas till Syre-18.',
+                gamma: 'Kärnan befinner sig i ett exciterat tillstånd (hög energi). Den avger energi som en gammafoton (elektromagnetisk strålning) och övergår till grundtillståndet. Varken masstal eller atomnummer förändras. Teknetium-99 i exciterat tillstånd övergår till grundtillståndet.',
+            };
+            return <p className="explanation-box">{texts[decayType]}</p>;
+        }
+
+        // ─── Legend ────────────────────────────────────────────────────────────
+        function Legend({ decayType }) {
+            const items = [
+                { color: '#ef4444', label: 'Proton' },
+                { color: '#60a5fa', label: 'Neutron' },
+            ];
+            if (decayType === 'alpha') {
+                items.push({ color: '#f59e0b', label: 'Alfapartikel (⁴He)' });
+            }
+            if (decayType === 'betaMinus') {
+                items.push({ color: '#22c55e', label: 'Elektron (e⁻)' });
+                items.push({ color: '#94a3b8', label: 'Antineutrino (ν̄ₑ)' });
+            }
+            if (decayType === 'betaPlus') {
+                items.push({ color: '#ec4899', label: 'Positron (e⁺)' });
+                items.push({ color: '#94a3b8', label: 'Neutrino (νₑ)' });
+            }
+            if (decayType === 'gamma') {
+                items.push({ color: '#fbbf24', label: 'Gammafoton (γ)' });
+            }
+            return (
+                <div className="flex flex-wrap gap-4 justify-center">
+                    {items.map(item => (
+                        <div key={item.label} className="flex items-center gap-2">
+                            <span
+                                className="legend-dot"
+                                style={{ background: item.color, boxShadow: `0 0 6px ${item.color}88` }}
+                            />
+                            <span className="text-slate-300 text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                {item.label}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // ─── Nucleus info display ─────────────────────────────────────────────
+        function NucleusInfo({ decayType }) {
+            const info = {
+                alpha: {
+                    before: { name: 'Radium-226', symbol: '²²⁶₈₈Ra', protons: 88, neutrons: 138 },
+                    after:  { name: 'Radon-222',  symbol: '²²²₈₆Rn', protons: 86, neutrons: 136 },
+                },
+                betaMinus: {
+                    before: { name: 'Kol-14',    symbol: '¹⁴₆C', protons: 6, neutrons: 8 },
+                    after:  { name: 'Kväve-14',  symbol: '¹⁴₇N', protons: 7, neutrons: 7 },
+                },
+                betaPlus: {
+                    before: { name: 'Fluor-18',  symbol: '¹⁸₉F',  protons: 9,  neutrons: 9  },
+                    after:  { name: 'Syre-18',   symbol: '¹⁸₈O',  protons: 8,  neutrons: 10 },
+                },
+                gamma: {
+                    before: { name: 'Teknetium-99', symbol: '⁹⁹₄₃Tc*', protons: 43, neutrons: 56 },
+                    after:  { name: 'Teknetium-99',  symbol: '⁹⁹₄₃Tc',  protons: 43, neutrons: 56 },
+                },
+            };
+            const d = info[decayType];
+            return (
+                <div className="flex flex-wrap gap-4 justify-center text-sm" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="glass-card-light rounded-lg px-4 py-3 text-center min-w-[160px]">
+                        <div className="text-slate-400 text-xs mb-1">Moderkärna</div>
+                        <div className="text-white font-semibold">{d.before.name}</div>
+                        <div className="text-slate-300 text-xs mt-1">
+                            <span style={{ color: '#ef4444' }}>{d.before.protons}p</span>
+                            {' '}&middot;{' '}
+                            <span style={{ color: '#60a5fa' }}>{d.before.neutrons}n</span>
+                        </div>
+                    </div>
+                    <div className="flex items-center text-slate-400 text-xl">&rarr;</div>
+                    <div className="glass-card-light rounded-lg px-4 py-3 text-center min-w-[160px]">
+                        <div className="text-slate-400 text-xs mb-1">Dotterkärna</div>
+                        <div className="text-white font-semibold">{d.after.name}</div>
+                        <div className="text-slate-300 text-xs mt-1">
+                            <span style={{ color: '#ef4444' }}>{d.after.protons}p</span>
+                            {' '}&middot;{' '}
+                            <span style={{ color: '#60a5fa' }}>{d.after.neutrons}n</span>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ─── Tab definitions ──────────────────────────────────────────────────
+        const TABS = [
+            { key: 'alpha',     label: 'Alfasönderfall' },
+            { key: 'betaMinus', label: 'Beta\u207B-sönderfall' },
+            { key: 'betaPlus',  label: 'Beta\u207A-sönderfall' },
+            { key: 'gamma',     label: 'Gammasönderfall' },
+        ];
+
+        // ─── Main App ─────────────────────────────────────────────────────────
+        function App() {
+            const [activeTab, setActiveTab] = useState('alpha');
+
+            function handleTabChange(key) {
+                if (key !== activeTab) setActiveTab(key);
+            }
+
+            return (
+                <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%)' }}>
+                    <div className="max-w-4xl mx-auto px-4 py-8">
+
+                        {/* Breadcrumb */}
+                        <div className="breadcrumb mb-4">
+                            <a href="index.html">Hem</a>
+                            <span className="mx-2">/</span>
+                            <a href="fysik1.html">Fysik 1</a>
+                            <span className="mx-2">/</span>
+                            <span className="text-slate-300">Radioaktivt sönderfall</span>
+                        </div>
+
+                        {/* Heading */}
+                        <div className="mb-8 text-center">
+                            <h1 className="text-3xl font-bold glow-text mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                Radioaktivt sönderfall
+                            </h1>
+                            <p className="text-slate-400 text-sm max-w-xl mx-auto" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                Utforska de fyra typerna av radioaktivt sönderfall. Varje atom är uppbyggd av
+                                individuella protoner (röda) och neutroner (blå) i kärnan.
+                            </p>
+                        </div>
+
+                        {/* Tabs */}
+                        <div className="flex flex-wrap gap-2 justify-center mb-6">
+                            {TABS.map(tab => (
+                                <button
+                                    key={tab.key}
+                                    className={`tab-btn ${activeTab === tab.key ? 'active' : ''}`}
+                                    onClick={() => handleTabChange(tab.key)}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Main card */}
+                        <div className="glass-card rounded-2xl p-5 mb-6">
+                            <DecayCanvas key={activeTab} decayType={activeTab} />
+
+                            {/* Legend */}
+                            <div className="mt-5 mb-4">
+                                <Legend decayType={activeTab} />
+                            </div>
+                        </div>
+
+                        {/* Nucleus info */}
+                        <div className="mb-5">
+                            <NucleusInfo decayType={activeTab} />
+                        </div>
+
+                        {/* Equation */}
+                        <div className="mb-4">
+                            <div className="text-xs text-slate-500 uppercase tracking-widest mb-2 text-center"
+                                 style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                Kärnreaktionsformel
+                            </div>
+                            <DecayEquation decayType={activeTab} />
+                        </div>
+
+                        {/* Explanation */}
+                        <div className="mb-8">
+                            <div className="text-xs text-slate-500 uppercase tracking-widest mb-2"
+                                 style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                Förklaring
+                            </div>
+                            <DecayExplanation decayType={activeTab} />
+                        </div>
+
+                        {/* Info cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                            <div className="glass-card-light rounded-xl p-4">
+                                <h3 className="text-sm font-semibold text-sky-400 mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    Om visualiseringen
+                                </h3>
+                                <p className="text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    Kärnorna ritas med hexagonal packning för att efterlikna hur nukleoner sitter
+                                    tätt packade i verkligheten. Storlekarna är inte i skala – en riktig atomkärna
+                                    är ungefär 100&nbsp;000 gånger mindre än atomen.
+                                </p>
+                            </div>
+                            <div className="glass-card-light rounded-xl p-4">
+                                <h3 className="text-sm font-semibold text-sky-400 mb-2" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    Bevaringslagen
+                                </h3>
+                                <p className="text-slate-400 text-xs leading-relaxed" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                                    Vid alla typer av sönderfall bevaras det totala masstalet (antal nukleoner) och
+                                    den totala laddningen. Energi och rörelsemängd bevaras också – det är kärn­fysikens
+                                    grundlagar.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="footer">
+                        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>

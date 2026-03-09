@@ -52,6 +52,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-enhetskollen.html',
     'fysik1-faradays-bur.html',
     'fysik1-sonderfall.html',
+    'fysik1-massdefekt.html',
     'fysik2-vaxelstromsgenerator.html',
     'om.html',
     'kontakt.html'

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Massdefekt och bindningsenergi - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a0a1a;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+            transition: all 0.25s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active { transform: translateY(0px); }
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #94a3b8;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+        }
+        .tab-btn {
+            padding: 0.5rem 1.1rem;
+            border-radius: 0.6rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(15, 23, 42, 0.6);
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .tab-btn:hover { color: #e2e8f0; border-color: rgba(56, 189, 248, 0.3); }
+        .tab-btn.active {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.55);
+            color: #38bdf8;
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+        }
+        canvas { display: block; border-radius: 0.75rem; }
+        .breadcrumb { color: #64748b; font-size: 0.8rem; }
+        .breadcrumb a { color: #38bdf8; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .explanation-box {
+            background: rgba(15, 23, 42, 0.75);
+            border-left: 3px solid rgba(56, 189, 248, 0.5);
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+        .mode-toggle {
+            display: flex;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        .mode-btn {
+            padding: 0.5rem 1.3rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #64748b;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .mode-btn.active { background: rgba(56, 189, 248, 0.18); color: #38bdf8; }
+        .mode-btn:hover:not(.active) { color: #94a3b8; }
+        .mass-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.28rem 0;
+            font-size: 0.82rem;
+        }
+        .mass-row.divider {
+            border-top: 1px solid rgba(100, 116, 139, 0.25);
+            margin-top: 0.3rem;
+            padding-top: 0.5rem;
+        }
+        .mass-row.highlight {
+            background: rgba(56, 189, 248, 0.09);
+            border-radius: 0.3rem;
+            padding: 0.4rem 0.5rem;
+            margin: 0.2rem -0.5rem;
+        }
+        .formula-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1.2rem;
+            font-size: 1rem;
+            color: #e2e8f0;
+            text-align: center;
+            letter-spacing: 0.03em;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">⚛️</span>
+            <span class="logo-text">Fysiklabbet</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Hem</a></li>
+            <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+            <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+            <li><a href="om.html" class="nav-link">Om</a></li>
+            <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const { useState, useRef, useEffect, useCallback } = React;
+
+    // ─── Färger ───────────────────────────────────────────────────────────────
+    const C_PROTON  = '#ef4444';
+    const C_NEUTRON = '#60a5fa';
+    const C_ENERGY  = '#fbbf24';
+
+    // ─── Hjälpfunktioner ─────────────────────────────────────────────────────
+    function hexToRgb(hex) {
+        const n = parseInt(hex.slice(1), 16);
+        return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+    }
+    function lighten(hex, a) {
+        const [r, g, b] = hexToRgb(hex);
+        return `rgb(${Math.min(255, Math.round(r + (255-r)*a))},${Math.min(255, Math.round(g + (255-g)*a))},${Math.min(255, Math.round(b + (255-b)*a))})`;
+    }
+    function darken(hex, a) {
+        const [r, g, b] = hexToRgb(hex);
+        return `rgb(${Math.round(r*(1-a))},${Math.round(g*(1-a))},${Math.round(b*(1-a))})`;
+    }
+    function eio(t) { return t < 0.5 ? 2*t*t : -1 + (4-2*t)*t; }
+    function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+    function fmt(n, d = 6) { return n.toFixed(d).replace('.', ','); }
+
+    // ─── Fysikdata ────────────────────────────────────────────────────────────
+    // Massor i atomära massenheter (u), kärnmassor (utan elektroner)
+    const EXAMPLES = {
+        deuteron: {
+            label: 'Proton + neutron → deuterium',
+            shortLabel: 'p + n',
+            p1: { name: 'Proton', sym: 'p', protons: 1, neutrons: 0, mass: 1.007276 },
+            p2: { name: 'Neutron', sym: 'n', protons: 0, neutrons: 1, mass: 1.008665 },
+            prod: { name: 'Deuterium', sym: '²H', protons: 1, neutrons: 1, mass: 2.013553 },
+            deltaM: 0.002388,
+            Eb: 2.224,
+            EbPerA: 1.112,
+            nucleons: 2,
+        },
+        helium: {
+            label: 'Deuterium + deuterium → helium-4',
+            shortLabel: '²H + ²H',
+            p1: { name: 'Deuterium', sym: '²H', protons: 1, neutrons: 1, mass: 2.013553 },
+            p2: { name: 'Deuterium', sym: '²H', protons: 1, neutrons: 1, mass: 2.013553 },
+            prod: { name: 'Helium-4', sym: '⁴He', protons: 2, neutrons: 2, mass: 4.001506 },
+            deltaM: 0.025600,
+            Eb: 23.85,
+            EbPerA: 5.96,
+            nucleons: 4,
+        },
+    };
+
+    // ─── Klusterpositioner (gx, gy i nukleonsteg-enheter) ────────────────────
+    function getLayout(protons, neutrons) {
+        const total = protons + neutrons;
+        if (total === 1) return protons ? [{gx:0, gy:0, t:'p'}] : [{gx:0, gy:0, t:'n'}];
+        if (total === 2) {
+            const items = [];
+            for (let i = 0; i < protons; i++) items.push({ gx: -0.55 + i*1.1, gy: 0, t: 'p' });
+            for (let i = 0; i < neutrons; i++) items.push({ gx: (protons-1)*0.55 + 0.55 + i*1.1, gy: 0, t: 'n' });
+            return items;
+        }
+        // 4 nukleoner: 2p övre, 2n nedre
+        return [
+            { gx: -0.55, gy: -0.55, t: 'p' },
+            { gx:  0.55, gy: -0.55, t: 'p' },
+            { gx: -0.55, gy:  0.55, t: 'n' },
+            { gx:  0.55, gy:  0.55, t: 'n' },
+        ];
+    }
+
+    // ─── Ritfunktioner ────────────────────────────────────────────────────────
+    function drawNucleon(ctx, x, y, r, color, glow = 0) {
+        ctx.save();
+        if (glow > 0) { ctx.shadowColor = color; ctx.shadowBlur = glow; }
+        const g = ctx.createRadialGradient(x - r*0.3, y - r*0.3, r*0.05, x, y, r);
+        g.addColorStop(0, lighten(color, 0.55));
+        g.addColorStop(0.5, color);
+        g.addColorStop(1, darken(color, 0.45));
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI*2);
+        ctx.fillStyle = g;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawCluster(ctx, cx, cy, r, lay, glow = 0) {
+        const sp = r * 2.2;
+        lay.forEach(n => {
+            drawNucleon(ctx, cx + n.gx * sp, cy + n.gy * sp, r,
+                n.t === 'p' ? C_PROTON : C_NEUTRON, glow);
+        });
+    }
+
+    function txt(ctx, text, x, y, font, color, alpha = 1, align = 'center') {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.font = font;
+        ctx.fillStyle = color;
+        ctx.textAlign = align;
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, x, y);
+        ctx.restore();
+    }
+
+    function drawEnergyPhoton(ctx, x, y, r, alpha, label) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        // Glöd
+        const gr = ctx.createRadialGradient(x, y, 0, x, y, r*3);
+        gr.addColorStop(0, 'rgba(251,191,36,0.55)');
+        gr.addColorStop(0.5, 'rgba(251,191,36,0.18)');
+        gr.addColorStop(1, 'rgba(251,191,36,0)');
+        ctx.fillStyle = gr;
+        ctx.beginPath();
+        ctx.arc(x, y, r*3, 0, Math.PI*2);
+        ctx.fill();
+        // Kärna
+        ctx.shadowColor = C_ENERGY;
+        ctx.shadowBlur = 14;
+        const gc = ctx.createRadialGradient(x - r*0.25, y - r*0.25, r*0.05, x, y, r);
+        gc.addColorStop(0, '#fff7c0');
+        gc.addColorStop(0.5, C_ENERGY);
+        gc.addColorStop(1, '#b45309');
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI*2);
+        ctx.fillStyle = gc;
+        ctx.fill();
+        // Etikett
+        ctx.shadowBlur = 0;
+        ctx.font = `bold ${Math.max(9, r*1.3)|0}px Poppins, sans-serif`;
+        ctx.fillStyle = '#0a0a1a';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('γ', x, y);
+        ctx.restore();
+        // Energitext bredvid
+        if (label) {
+            txt(ctx, label, x + r*2.5, y, `bold ${Math.max(10, r*1.1)|0}px Poppins, sans-serif`, C_ENERGY, alpha, 'left');
+        }
+    }
+
+    function drawFlash(ctx, cx, cy, radius, alpha) {
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        const fg = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+        fg.addColorStop(0, 'rgba(255,255,255,1)');
+        fg.addColorStop(0.4, 'rgba(180,220,255,0.6)');
+        fg.addColorStop(1, 'rgba(56,189,248,0)');
+        ctx.fillStyle = fg;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawBackground(ctx, W, H) {
+        const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, Math.max(W, H)*0.7);
+        bg.addColorStop(0, '#0d1526');
+        bg.addColorStop(1, '#050510');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, W, H);
+    }
+
+    function drawLegend(ctx, x, y, dotR) {
+        const items = [
+            { color: C_PROTON,  label: 'Proton'  },
+            { color: C_NEUTRON, label: 'Neutron' },
+        ];
+        const lineH = dotR * 3;
+        ctx.save();
+        ctx.font = `${Math.max(10, dotR*1.8)|0}px Poppins, sans-serif`;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        items.forEach((item, i) => {
+            const iy = y + i * lineH;
+            ctx.fillStyle = item.color;
+            ctx.shadowColor = item.color;
+            ctx.shadowBlur = 4;
+            ctx.beginPath();
+            ctx.arc(x + dotR, iy, dotR, 0, Math.PI*2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = '#94a3b8';
+            ctx.fillText(item.label, x + dotR*2 + 5, iy);
+        });
+        ctx.restore();
+    }
+
+    // ─── Canvas-simuleringskomponent ──────────────────────────────────────────
+    function SimCanvas({ mode, exKey, phase, onPhaseChange }) {
+        const canvasRef    = useRef(null);
+        const containerRef = useRef(null);
+        const animRef      = useRef({ rafId: null, start: null });
+        const [size, setSize] = useState({ w: 750, h: 450 });
+
+        const cfg = EXAMPLES[exKey];
+
+        // Responsiv storleksändring
+        useEffect(() => {
+            function upd() {
+                if (containerRef.current) {
+                    const w = Math.min(containerRef.current.getBoundingClientRect().width, 750);
+                    setSize({ w, h: Math.round(w * 450 / 750) });
+                }
+            }
+            upd();
+            window.addEventListener('resize', upd);
+            return () => window.removeEventListener('resize', upd);
+        }, []);
+
+        // ── Ritfunktion ──────────────────────────────────────────────────────
+        const draw = useCallback((prog, ph) => {
+            const canvas = canvasRef.current;
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width;
+            const H = canvas.height;
+
+            drawBackground(ctx, W, H);
+
+            const cx   = W / 2;
+            const cy   = H * 0.42;
+            const nr   = W * 0.034;
+            const dotR = Math.max(4, nr * 0.42);
+
+            const lay1    = getLayout(cfg.p1.protons,   cfg.p1.neutrons);
+            const lay2    = getLayout(cfg.p2.protons,   cfg.p2.neutrons);
+            const layProd = getLayout(cfg.prod.protons, cfg.prod.neutrons);
+
+            const lx0 = cx - W * 0.26;
+            const rx0 = cx + W * 0.26;
+
+            const fs  = `${Math.max(10, W*0.018)|0}px Poppins, sans-serif`;
+            const fsB = `bold ${Math.max(11, W*0.02)|0}px Poppins, sans-serif`;
+            const fsH = `bold ${Math.max(13, W*0.024)|0}px Poppins, sans-serif`;
+
+            if (mode === 'bind') {
+                // ── FUSION-läge ──────────────────────────────────────────────
+                if (ph === 'idle') {
+                    drawCluster(ctx, lx0, cy, nr, lay1);
+                    drawCluster(ctx, rx0, cy, nr, lay2);
+                    txt(ctx, cfg.p1.name,           lx0, cy + nr*3.4, fsB, '#e2e8f0');
+                    txt(ctx, fmt(cfg.p1.mass) + ' u', lx0, cy + nr*5.1, fs, '#64748b');
+                    txt(ctx, cfg.p2.name,           rx0, cy + nr*3.4, fsB, '#e2e8f0');
+                    txt(ctx, fmt(cfg.p2.mass) + ' u', rx0, cy + nr*5.1, fs, '#64748b');
+                    // "+" tecken
+                    txt(ctx, '+', cx, cy, `bold ${Math.max(20, W*0.044)|0}px Poppins`, '#475569');
+                    // Tiptext
+                    txt(ctx, 'Tryck "Starta fusion" för att se reaktionen',
+                        cx, H * 0.87, fs, '#334155');
+                } else {
+                    const APPROACH_END = 0.42;
+                    const FLASH_END    = 0.57;
+
+                    if (prog < APPROACH_END) {
+                        // Fas 1: Partiklar närmar sig
+                        const t  = eio(prog / APPROACH_END);
+                        const lx = lx0 + (cx - lx0) * t;
+                        const rx = rx0 - (rx0 - cx) * t;
+                        const fa = 1 - t * 0.85;
+                        drawCluster(ctx, lx, cy, nr, lay1);
+                        drawCluster(ctx, rx, cy, nr, lay2);
+                        txt(ctx, cfg.p1.name,             lx, cy + nr*3.4, fsB, '#e2e8f0', fa);
+                        txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  '#64748b', fa);
+                        txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#e2e8f0', fa);
+                        txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  '#64748b', fa);
+
+                    } else if (prog < FLASH_END) {
+                        // Fas 2: Bindningsblixten
+                        const ft = (prog - APPROACH_END) / (FLASH_END - APPROACH_END);
+                        const flashAlpha = Math.sin(ft * Math.PI) * 0.9;
+                        drawCluster(ctx, cx, cy, nr, layProd, 22 * Math.sin(ft * Math.PI));
+                        drawFlash(ctx, cx, cy, nr * 7 * ft, flashAlpha);
+
+                    } else {
+                        // Fas 3: Produkt visas, energi flyger uppåt
+                        const rt  = clamp((prog - FLASH_END) / (1 - FLASH_END), 0, 1);
+                        const rte = eio(rt);
+                        drawCluster(ctx, cx, cy, nr, layProd, rte * 12);
+
+                        txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
+                            cx, cy + nr*3.4, fsB, '#e2e8f0', rte);
+                        txt(ctx, fmt(cfg.prod.mass) + ' u',
+                            cx, cy + nr*5.1, fs, '#64748b', rte);
+
+                        // Energifotonen flyger uppåt och åt sidan
+                        const py = cy - nr*2.5 - H*0.24*rte;
+                        const px = cx + W*0.1*rte;
+                        drawEnergyPhoton(ctx, px, py, nr*0.88, Math.min(1, rte*2),
+                            rte > 0.5 ? fmt(cfg.Eb, 2) + ' MeV' : null);
+
+                        // Massdefektinfo
+                        if (rte > 0.45) {
+                            const ea = clamp((rte - 0.45) / 0.55, 0, 1);
+                            txt(ctx, 'Δm = ' + fmt(cfg.deltaM) + ' u',
+                                cx, H*0.79, fs, '#38bdf8', ea);
+                            txt(ctx, 'E = Δm · c² = ' + fmt(cfg.Eb, 3) + ' MeV',
+                                cx, H*0.86, fsH, '#22c55e', ea);
+                        }
+                    }
+                }
+
+            } else {
+                // ── SEPARATIONS-läge ─────────────────────────────────────────
+                if (ph === 'idle') {
+                    drawCluster(ctx, cx, cy, nr, layProd);
+                    txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
+                        cx, cy + nr*3.4, fsB, '#e2e8f0');
+                    txt(ctx, fmt(cfg.prod.mass) + ' u',
+                        cx, cy + nr*5.1, fs, '#64748b');
+                    // Energiindikator (hur mycket som krävs)
+                    txt(ctx, 'Krävs: ' + fmt(cfg.Eb, 2) + ' MeV för att bryta bindningen',
+                        cx, cy - nr*4.5, fs, '#fbbf24', 0.6);
+                    txt(ctx, 'Tryck "Bryt bindningen" för att se separationen',
+                        cx, H*0.87, fs, '#334155');
+                } else {
+                    const ENERGY_END = 0.38;
+                    const FLASH_END  = 0.54;
+
+                    if (prog < ENERGY_END) {
+                        // Fas 1: Energifotonen kommer in uppifrån, kärnan glöder
+                        const et  = eio(prog / ENERGY_END);
+                        const py  = cy - H*0.28 + H*0.28*et;
+                        const px  = cx - W*0.08*et;
+                        drawCluster(ctx, cx, cy, nr, layProd, et * 28);
+                        drawEnergyPhoton(ctx, px, py, nr*0.88, 1, null);
+                        txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
+                            cx, cy + nr*3.4, fsB, '#e2e8f0', 1 - et*0.5);
+                        txt(ctx, fmt(cfg.prod.mass) + ' u',
+                            cx, cy + nr*5.1, fs, '#64748b', 1 - et*0.5);
+                        txt(ctx, 'Tillförd energi: ' + fmt(cfg.Eb, 2) + ' MeV',
+                            cx, H*0.84, fsB, C_ENERGY, et);
+
+                    } else if (prog < FLASH_END) {
+                        // Fas 2: Blixt
+                        const ft = (prog - ENERGY_END) / (FLASH_END - ENERGY_END);
+                        drawCluster(ctx, cx, cy, nr, layProd, 30);
+                        drawFlash(ctx, cx, cy, nr * 7 * ft, Math.sin(ft * Math.PI) * 0.9);
+
+                    } else {
+                        // Fas 3: Separation – partiklar flyger isär
+                        const st  = clamp((prog - FLASH_END) / (1 - FLASH_END), 0, 1);
+                        const ste = eio(st);
+                        const lx  = cx - W*0.26*ste;
+                        const rx  = cx + W*0.26*ste;
+                        drawCluster(ctx, lx, cy, nr, lay1);
+                        drawCluster(ctx, rx, cy, nr, lay2);
+                        txt(ctx, cfg.p1.name,             lx, cy + nr*3.4, fsB, '#e2e8f0', ste);
+                        txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  '#64748b', ste);
+                        txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#e2e8f0', ste);
+                        txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  '#64748b', ste);
+
+                        if (ste > 0.4) {
+                            const ea = clamp((ste - 0.4) / 0.6, 0, 1);
+                            const sumM = cfg.p1.mass + cfg.p2.mass;
+                            txt(ctx, 'Summa massa: ' + fmt(sumM) + ' u',
+                                cx, H*0.79, fs, '#94a3b8', ea);
+                            txt(ctx, 'Ökade med Δm = ' + fmt(cfg.deltaM) + ' u  (= ' + fmt(cfg.Eb, 2) + ' MeV)',
+                                cx, H*0.86, fsB, C_ENERGY, ea);
+                        }
+                    }
+                }
+            }
+
+            // Teckenförklaring (övre vänster)
+            drawLegend(ctx, W*0.025, H*0.06, dotR);
+
+        }, [mode, exKey]);
+
+        // Starta animation
+        const animate = useCallback(() => {
+            if (animRef.current.rafId) cancelAnimationFrame(animRef.current.rafId);
+            onPhaseChange('animating');
+            animRef.current.start = null;
+            const DURATION = 3200;
+
+            function frame(ts) {
+                if (!animRef.current.start) animRef.current.start = ts;
+                const prog = Math.min((ts - animRef.current.start) / DURATION, 1);
+                draw(prog, 'animating');
+                if (prog < 1) {
+                    animRef.current.rafId = requestAnimationFrame(frame);
+                } else {
+                    onPhaseChange('done');
+                }
+            }
+            animRef.current.rafId = requestAnimationFrame(frame);
+        }, [draw, onPhaseChange]);
+
+        // Rita om vid fas-/exempeländring
+        useEffect(() => {
+            if (phase === 'idle') draw(0, 'idle');
+            if (phase === 'done') draw(1, 'done');
+        }, [phase, draw, size]);
+
+        // Städa upp RAF
+        useEffect(() => () => {
+            if (animRef.current.rafId) cancelAnimationFrame(animRef.current.rafId);
+        }, []);
+
+        const btnLabel = phase === 'idle'
+            ? (mode === 'bind' ? 'Starta fusion' : 'Bryt bindningen')
+            : 'Kör igen';
+
+        return (
+            <div ref={containerRef} className="w-full">
+                <canvas ref={canvasRef} width={size.w} height={size.h} className="w-full" />
+                <div className="flex justify-center gap-3 mt-5">
+                    {phase !== 'animating' ? (
+                        <>
+                            <button onClick={animate}
+                                className="btn-primary px-7 py-2.5 rounded-xl text-sm">
+                                {btnLabel}
+                            </button>
+                            {phase === 'done' && (
+                                <button onClick={() => onPhaseChange('idle')}
+                                    className="btn-secondary px-6 py-2.5 rounded-xl text-sm">
+                                    Återställ
+                                </button>
+                            )}
+                        </>
+                    ) : (
+                        <p className="text-slate-500 text-sm py-2.5">Animering pågår…</p>
+                    )}
+                </div>
+            </div>
+        );
+    }
+
+    // ─── Masspanel ────────────────────────────────────────────────────────────
+    function MassPanel({ exKey, mode }) {
+        const cfg = EXAMPLES[exKey];
+        const sum = cfg.p1.mass + cfg.p2.mass;
+
+        return (
+            <div className="glass-card rounded-2xl p-5 space-y-0.5">
+                <h3 className="text-sky-400 font-bold mb-3 text-base">Massbalans</h3>
+
+                <div className="mass-row font-mono">
+                    <span className="text-slate-300">{cfg.p1.name} ({cfg.p1.sym})</span>
+                    <span className="text-slate-100">{fmt(cfg.p1.mass)} u</span>
+                </div>
+                <div className="mass-row font-mono">
+                    <span className="text-slate-300">+ {cfg.p2.name} ({cfg.p2.sym})</span>
+                    <span className="text-slate-100">{fmt(cfg.p2.mass)} u</span>
+                </div>
+                <div className="mass-row divider font-mono">
+                    <span className="text-slate-400">= Summa (fria)</span>
+                    <span className="text-slate-100">{fmt(sum)} u</span>
+                </div>
+                <div className="mass-row font-mono">
+                    <span className="text-slate-400">− {cfg.prod.sym} (bunden)</span>
+                    <span className="text-slate-100">{fmt(cfg.prod.mass)} u</span>
+                </div>
+
+                <div className="mass-row divider highlight font-mono mt-1">
+                    <span className="text-sky-300 font-semibold">Massdefekt (Δm)</span>
+                    <span className="text-sky-300 font-semibold">{fmt(cfg.deltaM)} u</span>
+                </div>
+
+                <div className="pt-3 mt-3 border-t border-slate-700/50 space-y-2">
+                    <div className="mass-row font-mono">
+                        <span className="text-green-400">Bindningsenergi (E_b)</span>
+                        <span className="text-green-400 font-bold">{fmt(cfg.Eb, 3)} MeV</span>
+                    </div>
+                    <div className="mass-row font-mono">
+                        <span className="text-slate-400">Per nukleon (E_b/A)</span>
+                        <span className="text-slate-200">{fmt(cfg.EbPerA, 3)} MeV/nukleon</span>
+                    </div>
+                </div>
+
+                <div className="pt-3 mt-3 border-t border-slate-700/50 text-center">
+                    <p className="text-slate-500 text-xs font-mono leading-relaxed">
+                        E = Δm · c²<br/>
+                        = {fmt(cfg.deltaM)} u × 931,5 MeV/u
+                    </p>
+                    <p className="text-green-400 font-bold mt-1 text-base">
+                        = {fmt(cfg.Eb, 3)} MeV
+                    </p>
+                </div>
+
+                <div className="pt-3 mt-3 border-t border-slate-700/50">
+                    <p className="text-xs text-slate-500 mb-1 text-center">Reaktion ({mode === 'bind' ? 'fusion' : 'separation'})</p>
+                    <div className="formula-box text-sm">
+                        {mode === 'bind'
+                            ? <>{cfg.p1.sym} + {cfg.p2.sym} → {cfg.prod.sym} + γ</>
+                            : <>{cfg.prod.sym} + γ → {cfg.p1.sym} + {cfg.p2.sym}</>
+                        }
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // ─── Huvud-app ────────────────────────────────────────────────────────────
+    function App() {
+        const [mode,   setMode]   = useState('bind');
+        const [exKey,  setExKey]  = useState('deuteron');
+        const [phase,  setPhase]  = useState('idle');
+
+        function switchMode(m) { setMode(m); setPhase('idle'); }
+        function switchEx(k)   { setExKey(k); setPhase('idle'); }
+
+        return (
+            <div className="min-h-screen bg-slate-950 pb-16">
+                <div className="max-w-5xl mx-auto px-4 pt-6">
+
+                    {/* Brödsmulor */}
+                    <p className="breadcrumb mb-4">
+                        <a href="index.html">Hem</a> /{' '}
+                        <a href="fysik1.html">Fysik 1</a> /{' '}
+                        Massdefekt och bindningsenergi
+                    </p>
+
+                    {/* Titel */}
+                    <div className="mb-6">
+                        <h1 className="text-3xl md:text-4xl font-bold text-white glow-text mb-2">
+                            Massdefekt och bindningsenergi
+                        </h1>
+                        <p className="text-slate-400 text-sm md:text-base max-w-2xl leading-relaxed">
+                            När nukleoner (protoner och neutroner) binder ihop sig till en atomkärna
+                            minskar den totala massan. Den "saknade" massan omvandlas till
+                            bindningsenergi enligt <em>E</em> = Δ<em>m</em> · <em>c</em>².
+                        </p>
+                    </div>
+
+                    {/* Läge + exempelval */}
+                    <div className="flex flex-wrap items-center gap-3 mb-5">
+                        <div className="mode-toggle">
+                            <button
+                                className={`mode-btn${mode === 'bind'  ? ' active' : ''}`}
+                                onClick={() => switchMode('bind')}>
+                                ⚡ Fusion
+                            </button>
+                            <button
+                                className={`mode-btn${mode === 'break' ? ' active' : ''}`}
+                                onClick={() => switchMode('break')}>
+                                💥 Separation
+                            </button>
+                        </div>
+                        <div className="flex gap-2">
+                            {Object.entries(EXAMPLES).map(([k, ex]) => (
+                                <button key={k}
+                                    className={`tab-btn${exKey === k ? ' active' : ''}`}
+                                    onClick={() => switchEx(k)}>
+                                    {ex.shortLabel}
+                                </button>
+                            ))}
+                        </div>
+                        <span className="text-slate-500 text-xs hidden md:block ml-1">
+                            {EXAMPLES[exKey].label}
+                        </span>
+                    </div>
+
+                    {/* Canvas + sidopanel */}
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
+                        <div className="lg:col-span-2 glass-card rounded-2xl p-4">
+                            <SimCanvas
+                                mode={mode}
+                                exKey={exKey}
+                                phase={phase}
+                                onPhaseChange={setPhase}
+                            />
+                        </div>
+                        <div>
+                            <MassPanel exKey={exKey} mode={mode} />
+                        </div>
+                    </div>
+
+                    {/* Förklaringssektion */}
+                    <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <h2 className="text-sky-400 font-bold text-lg mb-3">Vad är massdefekt?</h2>
+                            <div className="explanation-box">
+                                En fri proton väger <strong className="text-white">1,007 276 u</strong> och
+                                en fri neutron väger <strong className="text-white">1,008 665 u</strong>.
+                                Deras summa är 2,015 941 u. Men en deuteronkärna (²H) väger bara{' '}
+                                <strong className="text-white">2,013 553 u</strong> – alltså{' '}
+                                <em>mindre</em> än de fria partiklarna.
+                                <br/><br/>
+                                Massdifferensen kallas <strong className="text-sky-300">massdefekt</strong> (Δm).
+                                Enligt Einsteins formel <em>E = Δm · c²</em> har denna massa omvandlats till
+                                den <strong className="text-green-400">bindningsenergi</strong> som håller kärnan samman.
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 className="text-sky-400 font-bold text-lg mb-3">Fusion och separation</h2>
+                            <div className="explanation-box">
+                                Vid <strong className="text-sky-300">fusion</strong> slås kärnor ihop och
+                                bindningsenergin <em>frigörs</em> – ofta som gammastrålning (γ). Det är
+                                denna process som driver solen och stjärnorna.
+                                <br/><br/>
+                                Vid <strong className="text-yellow-300">separation</strong> bryts kärnan isär.
+                                Då måste <em>exakt lika mycket</em> energi <em>tillföras</em> som frigörs
+                                vid fusionen. Bindningsenergin är det "lim" som håller kärnan samman –
+                                ju mer per nukleon, desto stabilare kärna.
+                            </div>
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <h2 className="text-sky-400 font-bold text-lg mb-3">Räkneexempel: p + n → ²H</h2>
+                            <div className="explanation-box">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-mono text-sm">
+                                    <div>
+                                        <p className="text-slate-400 mb-1">Massor av fria partiklar:</p>
+                                        <p>m(p) = 1,007 276 u</p>
+                                        <p>m(n) = 1,008 665 u</p>
+                                        <p className="border-t border-slate-600 mt-1 pt-1">
+                                            Summa = <strong className="text-white">2,015 941 u</strong>
+                                        </p>
+                                        <p className="mt-3 text-slate-400">Massa bunden kärna (²H):</p>
+                                        <p><strong className="text-white">2,013 553 u</strong></p>
+                                        <p className="mt-3 text-sky-300">
+                                            Δm = 2,015 941 − 2,013 553 = <strong>0,002 388 u</strong>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p className="text-slate-400 mb-1">Bindningsenergi:</p>
+                                        <p>1 u · c² = 931,5 MeV</p>
+                                        <p className="mt-1">
+                                            E_b = 0,002 388 u × 931,5 MeV/u
+                                        </p>
+                                        <p className="text-green-400 mt-1">
+                                            <strong>E_b = 2,224 MeV</strong>
+                                        </p>
+                                        <p className="mt-3 text-slate-400">Per nukleon (A = 2):</p>
+                                        <p className="text-green-400">
+                                            <strong>E_b/A = 1,112 MeV/nukleon</strong>
+                                        </p>
+                                        <p className="mt-3 text-slate-400 text-xs">
+                                            (Helium-4 har 7,07 MeV/nukleon – mycket stabilare!)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <footer className="mt-14 text-center text-slate-600 text-sm">
+                    <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+                </footer>
+            </div>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

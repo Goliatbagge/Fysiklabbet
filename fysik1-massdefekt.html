@@ -232,7 +232,7 @@
     }
 
     function drawCluster(ctx, cx, cy, r, lay, glow = 0) {
-        const sp = r * 2.2;
+        const sp = r * 1.55;
         lay.forEach(n => {
             drawNucleon(ctx, cx + n.gx * sp, cy + n.gy * sp, r,
                 n.t === 'p' ? C_PROTON : C_NEUTRON, glow);
@@ -666,9 +666,10 @@
                             Massdefekt och bindningsenergi
                         </h1>
                         <p className="text-slate-400 text-sm md:text-base max-w-2xl leading-relaxed">
-                            När nukleoner (protoner och neutroner) binder ihop sig till en atomkärna
-                            minskar den totala massan. Den "saknade" massan omvandlas till
-                            bindningsenergi enligt <em>E</em> = Δ<em>m</em> · <em>c</em>².
+                            När nukleoner (protoner och neutroner) bildar en kärna minskar den totala
+                            massan eftersom energi strålar ut i form av en foton (γ). Denna förlorade
+                            energi motsvarar kärnans bindningsenergi – det vill säga den mängd energi
+                            man måste tillföra för att bryta upp kärnan igen.
                         </p>
                     </div>
 

@@ -267,8 +267,8 @@ const Scene3D = ({ currentDirection, showFieldLines, showFieldDirection, showLab
 
 // UIControls Component
 const UIControls = ({ currentDirection, showFieldLines, showFieldDirection, showLabels, onToggleDirection, onToggleFieldLines, onToggleFieldDirection, onToggleLabels }) => {
-  return React.createElement('div', { className: "absolute top-4 left-4 md:top-8 md:left-8 z-10 max-w-sm w-full" },
-    React.createElement('div', { className: "bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-xl p-6 shadow-2xl text-slate-100" },
+  return React.createElement('div', { className: "w-full h-full" },
+    React.createElement('div', { className: "bg-slate-800/80 backdrop-blur-md border border-slate-700 rounded-xl p-6 shadow-2xl text-slate-100 h-full" },
       React.createElement('h1', { className: "text-xl font-bold mb-1 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent" },
         "Magnetfält (", React.createElement('i', null, 'B'), ") - Rak ledare"
       ),
@@ -375,8 +375,8 @@ const App = () => {
     setShowLabels(prev => !prev);
   }, []);
 
-  return React.createElement('div', { className: "relative w-screen h-screen bg-slate-900" },
-    React.createElement('div', { style: { width: '100%', height: '100vh' } },
+  return React.createElement('div', { className: "flex w-screen h-screen bg-slate-900" },
+    React.createElement('div', { className: "flex-1 h-full" },
       React.createElement(Scene3D, {
         currentDirection: currentDirection,
         showFieldLines: showFieldLines,
@@ -384,18 +384,17 @@ const App = () => {
         showLabels: showLabels
       })
     ),
-    React.createElement(UIControls, {
-      currentDirection: currentDirection,
-      showFieldLines: showFieldLines,
-      showFieldDirection: showFieldDirection,
-      showLabels: showLabels,
-      onToggleDirection: handleToggleDirection,
-      onToggleFieldLines: handleToggleFieldLines,
-      onToggleFieldDirection: handleToggleFieldDirection,
-      onToggleLabels: handleToggleLabels
-    }),
-    React.createElement('div', { className: "absolute bottom-4 right-4 text-slate-500 text-xs pointer-events-none select-none" },
-      "Interaktiv fysik • React Three Fiber"
+    React.createElement('div', { className: "w-80 shrink-0 h-full overflow-y-auto p-4" },
+      React.createElement(UIControls, {
+        currentDirection: currentDirection,
+        showFieldLines: showFieldLines,
+        showFieldDirection: showFieldDirection,
+        showLabels: showLabels,
+        onToggleDirection: handleToggleDirection,
+        onToggleFieldLines: handleToggleFieldLines,
+        onToggleFieldDirection: handleToggleFieldDirection,
+        onToggleLabels: handleToggleLabels
+      })
     )
   );
 };

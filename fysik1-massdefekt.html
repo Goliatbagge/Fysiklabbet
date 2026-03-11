@@ -375,6 +375,41 @@
             const fsB = `bold ${Math.max(11, W*0.02)|0}px Poppins, sans-serif`;
             const fsH = `bold ${Math.max(13, W*0.024)|0}px Poppins, sans-serif`;
 
+            // ── Gemensamma massruta-variabler ─────────────────────────────
+            const sumMass = cfg.p1.mass + cfg.p2.mass;
+            const fsBig = `bold ${Math.max(18, W*0.038)|0}px Poppins, sans-serif`;
+            const fsBigLabel = `${Math.max(11, W*0.016)|0}px Poppins, sans-serif`;
+            const massBoxY = H * 0.14;
+
+            function drawMassBox(currentMass, alpha, highlight) {
+                    ctx.save();
+                    ctx.globalAlpha = alpha;
+                    // Bakgrund
+                    const bw = W * 0.38;
+                    const bh = H * 0.14;
+                    const bx = cx - bw/2;
+                    const by = massBoxY - bh/2;
+                    ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+                    ctx.strokeStyle = highlight ? 'rgba(56, 189, 248, 0.6)' : 'rgba(100, 116, 139, 0.3)';
+                    ctx.lineWidth = highlight ? 2 : 1;
+                    ctx.beginPath();
+                    ctx.roundRect(bx, by, bw, bh, 8);
+                    ctx.fill();
+                    ctx.stroke();
+                    // Label
+                    ctx.font = fsBigLabel;
+                    ctx.fillStyle = '#64748b';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('Total massa', cx, massBoxY - bh*0.22);
+                    // Värde
+                    ctx.font = fsBig;
+                    ctx.fillStyle = highlight ? '#38bdf8' : '#e2e8f0';
+                    if (highlight) { ctx.shadowColor = '#38bdf8'; ctx.shadowBlur = 12; }
+                    ctx.fillText(fmt(currentMass) + ' u', cx, massBoxY + bh*0.18);
+                    ctx.restore();
+                }
+
             if (mode === 'bind') {
                 // ── FUSION-läge ──────────────────────────────────────────────
                 if (ph === 'idle') {
@@ -386,12 +421,16 @@
                     txt(ctx, fmt(cfg.p2.mass) + ' u', rx0, cy + nr*5.1, fs, '#64748b');
                     // "+" tecken
                     txt(ctx, '+', cx, cy, `bold ${Math.max(20, W*0.044)|0}px Poppins`, '#475569');
+                    // Total massa (stor ruta)
+                    drawMassBox(sumMass, 1, false);
                     // Tiptext
                     txt(ctx, 'Tryck "Starta fusion" för att se reaktionen',
                         cx, H * 0.87, fs, '#334155');
                 } else {
-                    const APPROACH_END = 0.42;
-                    const FLASH_END    = 0.57;
+                    const APPROACH_END = 0.35;
+                    const FLASH_END    = 0.48;
+                    const RATTLE_START = 0.55;  // Massa-rasslet startar
+                    const RATTLE_END   = 0.82;  // Massa-rasslet avslutas
 
                     if (prog < APPROACH_END) {
                         // Fas 1: Partiklar närmar sig
@@ -405,6 +444,8 @@
                         txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  '#64748b', fa);
                         txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#e2e8f0', fa);
                         txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  '#64748b', fa);
+                        // Visa total massa hela tiden
+                        drawMassBox(sumMass, 1, false);
 
                     } else if (prog < FLASH_END) {
                         // Fas 2: Bindningsblixten
@@ -412,17 +453,17 @@
                         const flashAlpha = Math.sin(ft * Math.PI) * 0.9;
                         drawCluster(ctx, cx, cy, nr, layProd, 22 * Math.sin(ft * Math.PI));
                         drawFlash(ctx, cx, cy, nr * 7 * ft, flashAlpha);
+                        // Massa-rutan kvar
+                        drawMassBox(sumMass, 1, false);
 
                     } else {
-                        // Fas 3: Produkt visas, energi flyger uppåt
+                        // Fas 3: Produkt visas, massa rasslar ner
                         const rt  = clamp((prog - FLASH_END) / (1 - FLASH_END), 0, 1);
                         const rte = eio(rt);
                         drawCluster(ctx, cx, cy, nr, layProd, rte * 12);
 
                         txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
                             cx, cy + nr*3.4, fsB, '#e2e8f0', rte);
-                        txt(ctx, fmt(cfg.prod.mass) + ' u',
-                            cx, cy + nr*5.1, fs, '#64748b', rte);
 
                         // Energifotonen skjuts ut från kärnan snett uppåt höger
                         const px = cx + W*0.18 * rte;
@@ -431,10 +472,23 @@
                         drawEnergyPhoton(ctx, px, py, nr*0.88, photonAlpha,
                             rte > 0.5 ? fmt(cfg.Eb, 2) + ' MeV' : null);
 
-                        // Massdefektinfo
-                        if (rte > 0.45) {
-                            const ea = clamp((rte - 0.45) / 0.55, 0, 1);
-                            txt(ctx, 'Δm = ' + fmt(cfg.deltaM) + ' u',
+                        // Massa-rasslet: räkna ner från summa till produktmassa
+                        const rattleT = clamp((prog - RATTLE_START) / (RATTLE_END - RATTLE_START), 0, 1);
+                        const rattleEased = eio(rattleT);
+                        const displayMass = sumMass - (sumMass - cfg.prod.mass) * rattleEased;
+                        const isRattling = prog >= RATTLE_START && rattleT < 1;
+                        drawMassBox(displayMass, 1, isRattling || rattleT >= 1);
+
+                        // Visa produktmassa under kärnan när rasslet är klart
+                        if (rattleT >= 1) {
+                            txt(ctx, fmt(cfg.prod.mass) + ' u',
+                                cx, cy + nr*5.1, fs, '#38bdf8', rte);
+                        }
+
+                        // Massdefektinfo – visa efter rasslet
+                        if (rattleT >= 0.8) {
+                            const ea = clamp((rattleT - 0.8) / 0.2, 0, 1);
+                            txt(ctx, 'Δm = ' + fmt(cfg.deltaM) + ' u  (massa som blev energi)',
                                 cx, H*0.79, fs, '#38bdf8', ea);
                             txt(ctx, 'E = Δm · c² = ' + fmt(cfg.Eb, 3) + ' MeV',
                                 cx, H*0.86, fsH, '#22c55e', ea);
@@ -450,26 +504,30 @@
                         cx, cy + nr*3.4, fsB, '#e2e8f0');
                     txt(ctx, fmt(cfg.prod.mass) + ' u',
                         cx, cy + nr*5.1, fs, '#64748b');
+                    // Massruta visar bundna kärnans massa
+                    drawMassBox(cfg.prod.mass, 1, false);
                     // Energiindikator (hur mycket som krävs)
                     txt(ctx, 'Krävs: ' + fmt(cfg.Eb, 2) + ' MeV för att bryta bindningen',
-                        cx, cy - nr*4.5, fs, '#fbbf24', 0.6);
+                        cx, H*0.87, fs, '#fbbf24', 0.6);
                     txt(ctx, 'Tryck "Bryt bindningen" för att se separationen',
-                        cx, H*0.87, fs, '#334155');
+                        cx, H*0.93, fs, '#334155');
                 } else {
-                    const ENERGY_END = 0.38;
-                    const FLASH_END  = 0.54;
+                    const ENERGY_END   = 0.32;
+                    const FLASH_END    = 0.45;
+                    const RATTLE_S_START = 0.52;
+                    const RATTLE_S_END   = 0.80;
 
                     if (prog < ENERGY_END) {
                         // Fas 1: Energifotonen kommer in uppifrån, kärnan glöder
                         const et  = eio(prog / ENERGY_END);
                         const py  = cy - H*0.28 + H*0.28*et;
-                        const px  = cx - W*0.08*et;
+                        const px  = cx;
                         drawCluster(ctx, cx, cy, nr, layProd, et * 28);
                         drawEnergyPhoton(ctx, px, py, nr*0.88, 1, null);
                         txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
                             cx, cy + nr*3.4, fsB, '#e2e8f0', 1 - et*0.5);
-                        txt(ctx, fmt(cfg.prod.mass) + ' u',
-                            cx, cy + nr*5.1, fs, '#64748b', 1 - et*0.5);
+                        // Massruta visar bundna massan
+                        drawMassBox(cfg.prod.mass, 1, false);
                         txt(ctx, 'Tillförd energi: ' + fmt(cfg.Eb, 2) + ' MeV',
                             cx, H*0.84, fsB, C_ENERGY, et);
 
@@ -478,9 +536,11 @@
                         const ft = (prog - ENERGY_END) / (FLASH_END - ENERGY_END);
                         drawCluster(ctx, cx, cy, nr, layProd, 30);
                         drawFlash(ctx, cx, cy, nr * 7 * ft, Math.sin(ft * Math.PI) * 0.9);
+                        // Massruta kvar
+                        drawMassBox(cfg.prod.mass, 1, false);
 
                     } else {
-                        // Fas 3: Separation – partiklar flyger isär
+                        // Fas 3: Separation – partiklar flyger isär, massa rasslar upp
                         const st  = clamp((prog - FLASH_END) / (1 - FLASH_END), 0, 1);
                         const ste = eio(st);
                         const lx  = cx - W*0.26*ste;
@@ -492,13 +552,20 @@
                         txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#e2e8f0', ste);
                         txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  '#64748b', ste);
 
-                        if (ste > 0.4) {
-                            const ea = clamp((ste - 0.4) / 0.6, 0, 1);
-                            const sumM = cfg.p1.mass + cfg.p2.mass;
-                            txt(ctx, 'Summa massa: ' + fmt(sumM) + ' u',
-                                cx, H*0.79, fs, '#94a3b8', ea);
-                            txt(ctx, 'Ökade med Δm = ' + fmt(cfg.deltaM) + ' u  (= ' + fmt(cfg.Eb, 2) + ' MeV)',
-                                cx, H*0.86, fsB, C_ENERGY, ea);
+                        // Massa-rasslet uppåt: från produktmassa till summa
+                        const rattleT = clamp((prog - RATTLE_S_START) / (RATTLE_S_END - RATTLE_S_START), 0, 1);
+                        const rattleEased = eio(rattleT);
+                        const displayMass = cfg.prod.mass + (sumMass - cfg.prod.mass) * rattleEased;
+                        const isRattling = prog >= RATTLE_S_START && rattleT < 1;
+                        drawMassBox(displayMass, 1, isRattling || rattleT >= 1);
+
+                        // Massdefektinfo – visa efter rasslet
+                        if (rattleT >= 0.8) {
+                            const ea = clamp((rattleT - 0.8) / 0.2, 0, 1);
+                            txt(ctx, 'Ökade med Δm = ' + fmt(cfg.deltaM) + ' u  (energi blev massa)',
+                                cx, H*0.79, fs, C_ENERGY, ea);
+                            txt(ctx, 'Tillförd energi: ' + fmt(cfg.Eb, 3) + ' MeV → massa',
+                                cx, H*0.86, fsH, C_ENERGY, ea);
                         }
                     }
                 }

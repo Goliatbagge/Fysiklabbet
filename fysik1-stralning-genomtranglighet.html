@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strålnings genomtränglighet - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a0a1a;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+            transition: all 0.25s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: translateY(0px);
+        }
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #94a3b8;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+        }
+        .tab-btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 0.6rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            background: rgba(15, 23, 42, 0.6);
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            color: #e2e8f0;
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+        .tab-btn.active {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.55);
+            color: #38bdf8;
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.2);
+        }
+        canvas {
+            display: block;
+            border-radius: 0.75rem;
+        }
+        .equation-box {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            color: #e2e8f0;
+            text-align: center;
+        }
+        .equation-box sup { font-size: 0.65em; vertical-align: super; }
+        .equation-box sub { font-size: 0.65em; vertical-align: sub; }
+        .legend-dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+        .breadcrumb { color: #64748b; font-size: 0.8rem; }
+        .breadcrumb a { color: #38bdf8; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .explanation-box {
+            background: rgba(15, 23, 42, 0.75);
+            border-left: 3px solid rgba(56, 189, 248, 0.5);
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.65;
+        }
+        .gm-display {
+            font-family: 'Courier New', monospace;
+            background: #0a1a0a;
+            border: 2px solid #22c55e;
+            border-radius: 0.5rem;
+            color: #22c55e;
+            text-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.5), 0 0 10px rgba(34, 197, 94, 0.15);
+            letter-spacing: 0.08em;
+        }
+        .sound-btn {
+            padding: 0.4rem 0.9rem;
+            border-radius: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: rgba(15, 23, 42, 0.7);
+            color: #94a3b8;
+        }
+        .sound-btn.on {
+            border-color: rgba(34, 197, 94, 0.5);
+            color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.15);
+        }
+        .reset-btn {
+            padding: 0.4rem 0.9rem;
+            border-radius: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: rgba(30, 41, 59, 0.8);
+            color: #94a3b8;
+        }
+        .reset-btn:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback } = React;
+
+        // ─── Fysikaliska genomtränglighetsdata ────────────────────────────────
+        // transmissionRate: andel partiklar som passerar igenom (0–1)
+        const TRANSMISSION = {
+            // [strålkälla][hinder]
+            alpha: {
+                none:      1.00,
+                textile:   0.00,
+                aluminum:  0.00,
+                thinlead:  0.00,
+                thicklead: 0.00,
+            },
+            beta: {
+                none:      1.00,
+                textile:   0.95,
+                aluminum:  0.00,
+                thinlead:  0.00,
+                thicklead: 0.00,
+            },
+            gamma: {
+                none:      1.00,
+                textile:   0.98,
+                aluminum:  0.90,
+                thinlead:  0.18,
+                thicklead: 0.05,
+            },
+        };
+
+        // Antal partiklar som skapas per sekund för varje strålkälla
+        const EMISSION_RATE = {
+            none:  0,
+            alpha: 6,
+            beta:  7,
+            gamma: 8,
+        };
+
+        // Partikelns färg per stråltyp
+        const PARTICLE_COLOR = {
+            alpha: '#ef4444',  // röd
+            beta:  '#60a5fa',  // blå
+            gamma: '#a3e635',  // gul-grön
+        };
+
+        // Hindrets utseende
+        const BARRIER_STYLE = {
+            none:      { label: 'Inget hinder',    color: null,      width: 0 },
+            textile:   { label: 'Textil',           color: '#78716c', width: 14 },
+            aluminum:  { label: 'Tunn aluminium',   color: '#94a3b8', width: 20 },
+            thinlead:  { label: 'Tunn bly',         color: '#475569', width: 26 },
+            thicklead: { label: 'Tjock bly',        color: '#334155', width: 50 },
+        };
+
+        // ─── Web Audio pip ────────────────────────────────────────────────────
+        let audioCtx = null;
+        function playPip() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.frequency.setValueAtTime(900, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.055);
+            osc.start(audioCtx.currentTime);
+            osc.stop(audioCtx.currentTime + 0.055);
+        }
+
+        // ─── Hjälpfunktioner ──────────────────────────────────────────────────
+        function formatNum(n, dec = 1) {
+            return n.toFixed(dec).replace('.', ',');
+        }
+
+        // ─── Canvas-renderare ─────────────────────────────────────────────────
+        function drawScene(ctx, W, H, particles, source, barrier, flashAlpha) {
+            // Bakgrund
+            ctx.clearRect(0, 0, W, H);
+            const bg = ctx.createLinearGradient(0, 0, 0, H);
+            bg.addColorStop(0, '#0f172a');
+            bg.addColorStop(1, '#0c1322');
+            ctx.fillStyle = bg;
+            ctx.roundRect(0, 0, W, H, 12);
+            ctx.fill();
+
+            const midY = H / 2;
+
+            // Zone-koordinater
+            const srcX = W * 0.12;         // centrum på preparatet
+            const gmLeft = W * 0.82;        // vänster kant GM-rör
+            const gmRight = W * 0.96;
+            const gmMid = (gmLeft + gmRight) / 2;
+
+            // Hindrets x-centrum
+            const barrierCX = W * 0.50;
+            const bs = BARRIER_STYLE[barrier];
+            const bw = bs.width * (W / 600);  // skala med canvas-bredd
+
+            // ── Rita hinder ────────────────────────────────────────────────────
+            if (barrier !== 'none') {
+                const bH = H * 0.68;
+                const bTop = midY - bH / 2;
+
+                // Kant-highlight
+                ctx.fillStyle = bs.color;
+                ctx.globalAlpha = 0.9;
+                ctx.beginPath();
+                ctx.roundRect(barrierCX - bw / 2, bTop, bw, bH, 4);
+                ctx.fill();
+
+                // Textur-indikation
+                if (barrier === 'textile') {
+                    ctx.globalAlpha = 0.25;
+                    ctx.strokeStyle = '#a8a29e';
+                    ctx.lineWidth = 1.2;
+                    for (let y = bTop + 4; y < bTop + bH; y += 5) {
+                        ctx.beginPath();
+                        ctx.moveTo(barrierCX - bw / 2, y);
+                        ctx.lineTo(barrierCX + bw / 2, y);
+                        ctx.stroke();
+                    }
+                }
+
+                ctx.globalAlpha = 1;
+
+                // Etikett ovanför hindret
+                ctx.font = `bold ${Math.max(10, W * 0.022)}px Poppins, sans-serif`;
+                ctx.fillStyle = '#e2e8f0';
+                ctx.textAlign = 'center';
+                ctx.fillText(bs.label, barrierCX, bTop - 10);
+            }
+
+            // ── Rita preparat (glasstav med preparat i spetsen) ─────────────
+            const stavLen = Math.max(60, W * 0.14);
+            const stavH = Math.max(8, W * 0.016);
+            const tipR = Math.max(8, W * 0.018);
+            const stavLeft = srcX - stavLen * 0.6;
+            const tipX = srcX + stavLen * 0.4;
+
+            // Glasstav - kropp (halvtransparent glas-look)
+            const stavGrad = ctx.createLinearGradient(stavLeft, midY - stavH, stavLeft, midY + stavH);
+            stavGrad.addColorStop(0, 'rgba(148, 190, 220, 0.35)');
+            stavGrad.addColorStop(0.3, 'rgba(200, 220, 240, 0.5)');
+            stavGrad.addColorStop(0.7, 'rgba(148, 190, 220, 0.35)');
+            stavGrad.addColorStop(1, 'rgba(100, 150, 180, 0.25)');
+            ctx.beginPath();
+            ctx.roundRect(stavLeft, midY - stavH, tipX - stavLeft, stavH * 2, [stavH, 2, 2, stavH]);
+            ctx.fillStyle = stavGrad;
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(180, 210, 240, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Glasreflex (ljusstrimma längs staven)
+            ctx.beginPath();
+            ctx.moveTo(stavLeft + stavH, midY - stavH * 0.45);
+            ctx.lineTo(tipX - tipR, midY - stavH * 0.45);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Handtag/grepp (mörkare ände till vänster)
+            const gripW = stavLen * 0.15;
+            ctx.beginPath();
+            ctx.roundRect(stavLeft, midY - stavH * 1.15, gripW, stavH * 2.3, [stavH, 0, 0, stavH]);
+            ctx.fillStyle = '#374151';
+            ctx.fill();
+            ctx.strokeStyle = '#4b5563';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Preparatspets (aktiv ände till höger)
+            if (source !== 'none') {
+                const col = PARTICLE_COLOR[source];
+                // Glöd runt spetsen
+                const grd = ctx.createRadialGradient(tipX, midY, tipR * 0.2, tipX, midY, tipR * 3);
+                grd.addColorStop(0, col + '66');
+                grd.addColorStop(1, 'transparent');
+                ctx.beginPath();
+                ctx.arc(tipX, midY, tipR * 3, 0, Math.PI * 2);
+                ctx.fillStyle = grd;
+                ctx.fill();
+
+                // Preparatklump
+                ctx.beginPath();
+                ctx.arc(tipX, midY, tipR, 0, Math.PI * 2);
+                ctx.fillStyle = col;
+                ctx.globalAlpha = 0.9;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.strokeStyle = col;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            } else {
+                // Tom spets (inget preparat)
+                ctx.beginPath();
+                ctx.arc(tipX, midY, tipR, 0, Math.PI * 2);
+                ctx.fillStyle = '#1e293b';
+                ctx.fill();
+                ctx.strokeStyle = '#475569';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+
+            // Stråltyp ovanför staven
+            if (source !== 'none') {
+                const srcLabels = { alpha: 'Alfa (α)', beta: 'Beta (β)', gamma: 'Gamma (γ)' };
+                const col = PARTICLE_COLOR[source];
+                ctx.font = `bold ${Math.max(11, W * 0.022)}px Poppins, sans-serif`;
+                ctx.fillStyle = col;
+                ctx.textAlign = 'center';
+                ctx.fillText(srcLabels[source], (stavLeft + tipX) / 2, midY - stavH - 12);
+            }
+
+            // Etikett under staven
+            ctx.font = `${Math.max(9, W * 0.02)}px Poppins, sans-serif`;
+            ctx.fillStyle = '#94a3b8';
+            ctx.textAlign = 'center';
+            ctx.fillText('Preparat', (stavLeft + tipX) / 2, midY + stavH + 20);
+
+            // ── Rita GM-rör ────────────────────────────────────────────────────
+            const gmH = H * 0.40;
+            const gmTop = midY - gmH / 2;
+            const gmW = gmRight - gmLeft;
+
+            // Cylinder-kropp
+            const gmGrad = ctx.createLinearGradient(gmLeft, 0, gmRight, 0);
+            gmGrad.addColorStop(0, '#334155');
+            gmGrad.addColorStop(0.3, '#475569');
+            gmGrad.addColorStop(1, '#1e293b');
+            ctx.beginPath();
+            ctx.roundRect(gmLeft, gmTop, gmW, gmH, 6);
+            ctx.fillStyle = gmGrad;
+            ctx.fill();
+            ctx.strokeStyle = '#64748b';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Fönster (känslig yta mot strålningen)
+            ctx.beginPath();
+            ctx.rect(gmLeft, gmTop + gmH * 0.2, 5, gmH * 0.6);
+            ctx.fillStyle = '#94a3b8';
+            ctx.fill();
+
+            // Flash-effekt vid registrering
+            if (flashAlpha > 0) {
+                const fl = ctx.createRadialGradient(gmLeft + 3, midY, 0, gmLeft + 3, midY, gmH * 0.4);
+                fl.addColorStop(0, `rgba(34,197,94,${flashAlpha * 0.8})`);
+                fl.addColorStop(1, 'transparent');
+                ctx.beginPath();
+                ctx.arc(gmLeft + 3, midY, gmH * 0.4, 0, Math.PI * 2);
+                ctx.fillStyle = fl;
+                ctx.fill();
+            }
+
+            // GM-etikett
+            ctx.font = `bold ${Math.max(9, W * 0.02)}px Poppins, sans-serif`;
+            ctx.fillStyle = '#94a3b8';
+            ctx.textAlign = 'center';
+            ctx.fillText('GM-rör', gmMid, gmTop - 10);
+
+            // ── Rita partiklar ─────────────────────────────────────────────────
+            for (const p of particles) {
+                ctx.globalAlpha = p.alpha;
+                const col = PARTICLE_COLOR[p.type];
+                const r = p.type === 'alpha' ? 4.5 : p.type === 'beta' ? 3.5 : 3;
+
+                if (p.type === 'gamma') {
+                    // Gamma: prickad linje-stil
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+                    ctx.fillStyle = col;
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, r * 1.8, 0, Math.PI * 2);
+                    ctx.strokeStyle = col;
+                    ctx.lineWidth = 1;
+                    ctx.globalAlpha = p.alpha * 0.35;
+                    ctx.stroke();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+                    ctx.fillStyle = col;
+                    ctx.fill();
+                    // Liten glöd
+                    const pg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 2.5);
+                    pg.addColorStop(0, col + '60');
+                    pg.addColorStop(1, 'transparent');
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, r * 2.5, 0, Math.PI * 2);
+                    ctx.fillStyle = pg;
+                    ctx.fill();
+                }
+            }
+            ctx.globalAlpha = 1;
+
+            // ── Stråltyp-etikett ───────────────────────────────────────────────
+            if (source !== 'none') {
+                const labels = { alpha: 'α-strålning', beta: 'β-strålning', gamma: 'γ-strålning' };
+                const cols   = { alpha: '#ef4444', beta: '#60a5fa', gamma: '#a3e635' };
+                ctx.font = `italic bold ${Math.max(12, W * 0.027)}px Poppins, sans-serif`;
+                ctx.fillStyle = cols[source];
+                ctx.textAlign = 'left';
+                ctx.fillText(labels[source], srcX + srcR + 10, midY - srcR * 0.5);
+            }
+
+            // ── Bakgrundsstrålnings-pil (diskret) ─────────────────────────────
+            // (ingen visuell – bara räknaren tickar)
+        }
+
+        // ─── Huvud-komponent ──────────────────────────────────────────────────
+        function App() {
+            const canvasRef = useRef(null);
+            const stateRef  = useRef({
+                particles: [],
+                count: 0,
+                totalCounts: 0,
+                lastEmit: 0,
+                lastBg: 0,
+                startTime: performance.now(),
+                flashAlpha: 0,
+                soundOn: false,
+                source: 'none',
+                barrier: 'none',
+                animId: null,
+            });
+
+            const [source,       setSourceState]  = useState('none');
+            const [barrier,      setBarrierState]  = useState('none');
+            const [totalCounts,  setTotalCounts]   = useState(0);
+            const [cpm,          setCpm]           = useState(0);
+            const [soundOn,      setSoundOnState]  = useState(false);
+            const [elapsed,      setElapsed]       = useState(0);
+
+            // Synkronisera state-ref med React-state
+            useEffect(() => { stateRef.current.source  = source;  }, [source]);
+            useEffect(() => { stateRef.current.barrier = barrier; }, [barrier]);
+            useEffect(() => { stateRef.current.soundOn = soundOn; }, [soundOn]);
+
+            // Huvudloop
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+
+                const st = stateRef.current;
+                st.startTime = performance.now();
+
+                function resize() {
+                    const parent = canvas.parentElement;
+                    canvas.width  = parent.clientWidth;
+                    canvas.height = Math.round(parent.clientWidth * 0.42);
+                }
+                resize();
+                const ro = new ResizeObserver(resize);
+                ro.observe(canvas.parentElement);
+
+                let lastFrame = performance.now();
+
+                function loop(now) {
+                    st.animId = requestAnimationFrame(loop);
+                    const dt = Math.min((now - lastFrame) / 1000, 0.05);
+                    lastFrame = now;
+                    const W = canvas.width;
+                    const H = canvas.height;
+
+                    // ── Geometri ────────────────────────────────────────────────
+                    const srcX     = W * 0.12;
+                    const stavLen  = Math.max(60, W * 0.14);
+                    const tipX     = srcX + stavLen * 0.4;
+                    const tipR     = Math.max(8, W * 0.018);
+                    const barrierCX = W * 0.50;
+                    const bs       = BARRIER_STYLE[st.barrier];
+                    const bw       = bs.width * (W / 600);
+                    const barrierL = barrierCX - bw / 2;
+                    const barrierR = barrierCX + bw / 2;
+                    const gmLeft   = W * 0.82;
+                    const midY     = H / 2;
+
+                    // ── Emittera nya partiklar ──────────────────────────────────
+                    const rate = EMISSION_RATE[st.source];
+                    if (rate > 0 && now - st.lastEmit > 1000 / rate) {
+                        st.lastEmit = now;
+                        const angle = (Math.random() - 0.5) * 0.55; // spridning
+                        const speed = W * (0.28 + Math.random() * 0.06); // px/s
+                        const trans = TRANSMISSION[st.source]?.[st.barrier] ?? 0;
+                        const passes = Math.random() < trans;
+
+                        st.particles.push({
+                            type: st.source,
+                            x: tipX + tipR,
+                            y: midY + (Math.random() - 0.5) * 12,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            alpha: 1,
+                            passes,
+                            absorbed: false,
+                            registered: false,
+                        });
+                    }
+
+                    // ── Bakgrundsstrålning (1–3 per 10 sek) ────────────────────
+                    const bgInterval = 3500 + Math.random() * 3000; // varierar lite
+                    if (now - st.lastBg > bgInterval) {
+                        st.lastBg = now + Math.random() * 2000;
+                        // Registrera direkt (bakgrundsstrålning syns ej visuellt)
+                        st.totalCounts++;
+                        setTotalCounts(st.totalCounts);
+                        if (st.soundOn) playPip();
+                        st.flashAlpha = 1;
+                    }
+
+                    // ── Uppdatera partiklar ─────────────────────────────────────
+                    const remaining = [];
+                    for (const p of st.particles) {
+                        p.x += p.vx * dt;
+                        p.y += p.vy * dt;
+
+                        // Bromsning i hindret (visuell effekt)
+                        if (p.x >= barrierL && p.x <= barrierR && st.barrier !== 'none') {
+                            p.vx *= (1 - dt * 5);
+                        }
+
+                        // Absorberas i hindret?
+                        if (!p.passes && !p.absorbed && p.x >= barrierL && st.barrier !== 'none') {
+                            p.absorbed = true;
+                            p.alpha = 0.6;
+                        }
+                        if (p.absorbed) {
+                            p.alpha -= dt * 3;
+                            if (p.alpha <= 0) continue; // ta bort
+                        }
+
+                        // Registreras av GM-röret
+                        if (!p.registered && !p.absorbed && p.x >= gmLeft) {
+                            p.registered = true;
+                            st.totalCounts++;
+                            setTotalCounts(st.totalCounts);
+                            if (st.soundOn) playPip();
+                            st.flashAlpha = 1;
+                        }
+
+                        // Fade ut utanför skärm
+                        if (p.registered || p.x > W + 20) {
+                            p.alpha -= dt * 4;
+                            if (p.alpha <= 0) continue;
+                        }
+
+                        // Håll partiklar inom vertikal yta (liten studs)
+                        if (p.y < 10 || p.y > H - 10) p.vy *= -0.5;
+
+                        remaining.push(p);
+                    }
+                    st.particles = remaining;
+
+                    // ── Flash-decay ─────────────────────────────────────────────
+                    if (st.flashAlpha > 0) {
+                        st.flashAlpha = Math.max(0, st.flashAlpha - dt * 5);
+                    }
+
+                    // ── CPM beräkning ───────────────────────────────────────────
+                    const elapsedSec = (now - st.startTime) / 1000;
+                    const minutes = elapsedSec / 60;
+                    setElapsed(Math.floor(elapsedSec));
+                    if (minutes > 0) setCpm(Math.round(st.totalCounts / minutes));
+
+                    // ── Rita ────────────────────────────────────────────────────
+                    const ctx2d = canvas.getContext('2d');
+                    drawScene(ctx2d, W, H, st.particles, st.source, st.barrier, st.flashAlpha);
+                }
+
+                st.animId = requestAnimationFrame(loop);
+                return () => {
+                    cancelAnimationFrame(st.animId);
+                    ro.disconnect();
+                };
+            }, []);
+
+            const resetCounter = () => {
+                const st = stateRef.current;
+                st.totalCounts = 0;
+                st.startTime = performance.now();
+                setTotalCounts(0);
+                setCpm(0);
+                setElapsed(0);
+            };
+
+            const handleSource = (s) => setSourceState(s);
+            const handleBarrier = (b) => setBarrierState(b);
+            const toggleSound = () => setSoundOnState(v => !v);
+
+            // Etiketter
+            const sourceLabels = {
+                none:  'Ingen källa',
+                alpha: 'Alfastrålare (α)',
+                beta:  'Betastrålare (β)',
+                gamma: 'Gammastrålare (γ)',
+            };
+            const barrierLabels = {
+                none:      'Inget hinder',
+                textile:   'Textil',
+                aluminum:  'Tunn aluminium',
+                thinlead:  'Tunn bly',
+                thicklead: 'Tjock bly',
+            };
+
+            // Förklaringstext baserad på val
+            const getExplanation = () => {
+                if (source === 'none') return 'Välj en strålkälla för att starta simuleringen. Bakgrundsstrålning registreras alltid av GM-röret.';
+                const trans = TRANSMISSION[source]?.[barrier] ?? 0;
+                const pct = Math.round(trans * 100);
+                if (source === 'alpha') {
+                    if (barrier === 'none') return 'Alfapartiklar (²He-kärnor, laddning +2) är tunga och joniserande. Utan hinder når nästan alla GM-röret. Räckvidd i luft: bara några centimeter.';
+                    return `Alfapartiklar stoppas effektivt av ${barrierLabels[barrier].toLowerCase()}. Alfastrålning kan stoppas av ett papper eller huden – det är intern exponering som är farligt. Genomtränglighet: ${pct}%.`;
+                }
+                if (source === 'beta') {
+                    if (barrier === 'none') return 'Betapartiklar (elektroner, laddning −1) är lättare och snabbare än alfapartiklar. Räckvidd i luft: upp till några meter.';
+                    if (barrier === 'textile') return `Betastrålning passerar nästan obehindrat genom textil (${pct}% transmission). Klädsel skyddar knappt mot beta.`;
+                    return `Betapartiklar absorberas helt i ${barrierLabels[barrier].toLowerCase()}. Aluminium på några mm räcker för att stoppa de flesta betapartiklar. Genomtränglighet: ${pct}%.`;
+                }
+                if (source === 'gamma') {
+                    if (barrier === 'none') return 'Gammastrålning är elektromagnetisk strålning (fotoner) med mycket hög energi. Den har ingen elektrisk laddning och är svår att stoppa.';
+                    if (barrier === 'textile' || barrier === 'aluminum') return `Gammastrålning passerar nästan opåverkat genom ${barrierLabels[barrier].toLowerCase()} (${pct}% transmission). Det krävs täta, tunga material som bly eller betong.`;
+                    if (barrier === 'thinlead') return `Tunn bly reducerar gammastrålningen kraftigt till ${pct}% transmission. Bly är effektivt p.g.a. sin höga atomvikt och densitet – elektroner i blyatomer interagerar med fotonerna.`;
+                    return `Tjock bly absorberar nästan all gammastrålning (${pct}% transmission kvarstår). Tjockt bly eller betong används som strålskärm runt reaktorer och röntgenrum.`;
+                }
+                return '';
+            };
+
+            return (
+                <div className="min-h-screen" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-4xl mx-auto px-4 py-8">
+
+                        {/* Breadcrumb */}
+                        <div className="breadcrumb mb-4">
+                            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik 1</a> / Strålnings genomtränglighet
+                        </div>
+
+                        {/* Rubrik */}
+                        <h1 className="text-3xl font-bold text-white mb-1 glow-text">
+                            Strålnings genomtränglighet
+                        </h1>
+                        <p className="text-slate-400 mb-6 text-sm">
+                            Undersök hur alfa-, beta- och gammastrålning passerar genom olika material. En GM-räknare registrerar de partiklar som tar sig igenom.
+                        </p>
+
+                        {/* Canvas-kort */}
+                        <div className="glass-card rounded-2xl p-4 mb-4">
+                            <div style={{ width: '100%' }}>
+                                <canvas ref={canvasRef} style={{ width: '100%' }} />
+                            </div>
+                        </div>
+
+                        {/* GM-räknare */}
+                        <div className="glass-card rounded-2xl p-4 mb-4 flex flex-wrap items-center gap-4">
+                            <div className="flex flex-col items-center">
+                                <span className="text-xs text-slate-500 mb-1">Registreringar</span>
+                                <div className="gm-display text-3xl font-bold px-5 py-2 min-w-[90px] text-center">
+                                    {String(totalCounts).padStart(5, '0')}
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <span className="text-xs text-slate-500 mb-1">Räkningar/min</span>
+                                <div className="gm-display text-2xl font-bold px-4 py-2 min-w-[80px] text-center">
+                                    {String(cpm).padStart(4, '0')}
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-center">
+                                <span className="text-xs text-slate-500 mb-1">Tid (s)</span>
+                                <div className="gm-display text-2xl font-bold px-4 py-2 min-w-[70px] text-center">
+                                    {elapsed}
+                                </div>
+                            </div>
+                            <div className="flex gap-2 ml-auto">
+                                <button className="reset-btn" onClick={resetCounter}>Nollställ</button>
+                                <button
+                                    className={`sound-btn${soundOn ? ' on' : ''}`}
+                                    onClick={toggleSound}
+                                >
+                                    {soundOn ? '🔊 Ljud på' : '🔇 Ljud av'}
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Kontroller */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+
+                            {/* Strålkälla */}
+                            <div className="glass-card-light rounded-xl p-4">
+                                <h2 className="text-sm font-semibold text-slate-300 mb-3">Strålkälla</h2>
+                                <div className="flex flex-wrap gap-2">
+                                    {Object.entries(sourceLabels).map(([key, label]) => (
+                                        <button
+                                            key={key}
+                                            className={`tab-btn${source === key ? ' active' : ''}`}
+                                            onClick={() => handleSource(key)}
+                                            style={source === key && key !== 'none' ? {
+                                                borderColor: key === 'alpha' ? 'rgba(239,68,68,0.6)' : key === 'beta' ? 'rgba(96,165,250,0.6)' : 'rgba(163,230,53,0.6)',
+                                                color: key === 'alpha' ? '#ef4444' : key === 'beta' ? '#60a5fa' : '#a3e635',
+                                                background: key === 'alpha' ? 'rgba(239,68,68,0.12)' : key === 'beta' ? 'rgba(96,165,250,0.12)' : 'rgba(163,230,53,0.12)',
+                                                boxShadow: key === 'alpha' ? '0 0 14px rgba(239,68,68,0.2)' : key === 'beta' ? '0 0 14px rgba(96,165,250,0.2)' : '0 0 14px rgba(163,230,53,0.2)',
+                                            } : {}}
+                                        >
+                                            {label}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Färglegende */}
+                                {source !== 'none' && (
+                                    <div className="mt-3 flex items-center gap-2 text-xs text-slate-400">
+                                        <span
+                                            className="legend-dot"
+                                            style={{ background: PARTICLE_COLOR[source] }}
+                                        />
+                                        <span>
+                                            {source === 'alpha' && 'Alfapartiklar (He-2-kärna, laddning +2)'}
+                                            {source === 'beta'  && 'Betapartiklar (elektron, laddning −1)'}
+                                            {source === 'gamma' && 'Gammastrålning (foton, ingen laddning)'}
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Hinder */}
+                            <div className="glass-card-light rounded-xl p-4">
+                                <h2 className="text-sm font-semibold text-slate-300 mb-3">Hinder</h2>
+                                <div className="flex flex-wrap gap-2">
+                                    {Object.entries(barrierLabels).map(([key, label]) => (
+                                        <button
+                                            key={key}
+                                            className={`tab-btn${barrier === key ? ' active' : ''}`}
+                                            onClick={() => handleBarrier(key)}
+                                        >
+                                            {label}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* Genomtränglighet-indikator */}
+                                {source !== 'none' && (
+                                    <div className="mt-3">
+                                        <div className="flex justify-between text-xs text-slate-400 mb-1">
+                                            <span>Genomtränglighet</span>
+                                            <span className="font-semibold" style={{
+                                                color: TRANSMISSION[source]?.[barrier] > 0.5 ? '#22c55e' :
+                                                       TRANSMISSION[source]?.[barrier] > 0.05 ? '#f59e0b' : '#ef4444'
+                                            }}>
+                                                {Math.round((TRANSMISSION[source]?.[barrier] ?? 0) * 100)}%
+                                            </span>
+                                        </div>
+                                        <div className="w-full rounded-full h-2" style={{ background: 'rgba(15,23,42,0.6)', border: '1px solid rgba(100,116,139,0.3)' }}>
+                                            <div
+                                                className="h-2 rounded-full"
+                                                style={{
+                                                    width: `${(TRANSMISSION[source]?.[barrier] ?? 0) * 100}%`,
+                                                    background: TRANSMISSION[source]?.[barrier] > 0.5 ? 'linear-gradient(90deg,#16a34a,#22c55e)' :
+                                                                TRANSMISSION[source]?.[barrier] > 0.05 ? 'linear-gradient(90deg,#b45309,#f59e0b)' :
+                                                                'linear-gradient(90deg,#b91c1c,#ef4444)',
+                                                    transition: 'width 0.5s ease',
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Genomtränglighets-matris */}
+                        <div className="glass-card rounded-2xl p-4 mb-4">
+                            <h2 className="text-sm font-semibold text-slate-300 mb-3">Genomtränglighet – översikt</h2>
+                            <div className="overflow-x-auto">
+                                <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '4px', fontSize: '0.82rem', fontFamily: 'Poppins, sans-serif' }}>
+                                    <thead>
+                                        <tr>
+                                            <th style={{ textAlign: 'left', color: '#64748b', padding: '4px 8px', fontWeight: 600 }}>Strålning</th>
+                                            {Object.entries(barrierLabels).filter(([k]) => k !== 'none').map(([k, l]) => (
+                                                <th key={k} style={{ color: '#94a3b8', padding: '4px 8px', fontWeight: 600, textAlign: 'center' }}>{l}</th>
+                                            ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {[
+                                            { key: 'alpha', label: 'Alfa (α)', color: '#ef4444' },
+                                            { key: 'beta',  label: 'Beta (β)',  color: '#60a5fa' },
+                                            { key: 'gamma', label: 'Gamma (γ)', color: '#a3e635' },
+                                        ].map(row => (
+                                            <tr key={row.key}>
+                                                <td style={{ color: row.color, padding: '5px 8px', fontWeight: 600 }}>{row.label}</td>
+                                                {['textile','aluminum','thinlead','thicklead'].map(b => {
+                                                    const t = TRANSMISSION[row.key][b];
+                                                    const bg = t > 0.5 ? 'rgba(34,197,94,0.12)' : t > 0.05 ? 'rgba(245,158,11,0.12)' : 'rgba(239,68,68,0.12)';
+                                                    const fg = t > 0.5 ? '#22c55e' : t > 0.05 ? '#f59e0b' : '#ef4444';
+                                                    const sym = t > 0.5 ? 'Passerar' : t > 0.05 ? 'Delvis' : 'Stoppas';
+                                                    return (
+                                                        <td key={b} style={{ textAlign: 'center', padding: '5px 8px', background: bg, borderRadius: '6px', color: fg, fontWeight: 600 }}>
+                                                            {sym}
+                                                        </td>
+                                                    );
+                                                })}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        {/* Förklaringsruta */}
+                        <div className="glass-card rounded-2xl p-5 mb-6">
+                            <h2 className="text-base font-semibold text-slate-200 mb-3">Fysiken bakom genomtränglighet</h2>
+                            <div className="explanation-box mb-3">
+                                {getExplanation()}
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                                <div className="glass-card-light rounded-xl p-3">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="legend-dot" style={{ background: '#ef4444' }} />
+                                        <span className="font-semibold text-red-400">Alfastrålning (α)</span>
+                                    </div>
+                                    <p className="text-slate-400">Helium-4-kärna (2 protoner + 2 neutroner). Stor massa, hög jonisationsförmåga, kort räckvidd. Stoppas av några cm luft eller ett papper.</p>
+                                </div>
+                                <div className="glass-card-light rounded-xl p-3">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="legend-dot" style={{ background: '#60a5fa' }} />
+                                        <span className="font-semibold text-blue-400">Betastrålning (β)</span>
+                                    </div>
+                                    <p className="text-slate-400">Elektron eller positron med hög hastighet. Större räckvidd än alfa, men stoppas av mm-tjockt aluminium eller plast.</p>
+                                </div>
+                                <div className="glass-card-light rounded-xl p-3">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="legend-dot" style={{ background: '#a3e635' }} />
+                                        <span className="font-semibold" style={{ color: '#a3e635' }}>Gammastrålning (γ)</span>
+                                    </div>
+                                    <p className="text-slate-400">Elektromagnetisk strålning (fotoner). Ingen massa, ingen laddning – extremt genomträngande. Kräver tjockt bly eller betong för avskärmning.</p>
+                                </div>
+                            </div>
+                            <div className="explanation-box mt-3">
+                                <strong className="text-slate-300">Bakgrundsstrålning:</strong> Det finns alltid en liten mängd naturlig joniserande strålning från marken, byggnadsmaterial och kosmisk strålning. GM-röret registrerar ca 1–3 impulser per 10 sekunder oavsett hinder – detta syns i räknaren även utan strålkälla.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <footer className="footer">
+                        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+                    </footer>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

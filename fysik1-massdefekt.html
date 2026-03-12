@@ -308,8 +308,9 @@
             { color: C_NEUTRON, label: 'Neutron' },
         ];
         const lineH = dotR * 3;
+        const fontSize = Math.max(10, dotR*1.8)|0;
         ctx.save();
-        ctx.font = `${Math.max(10, dotR*1.8)|0}px Poppins, sans-serif`;
+        ctx.font = `${fontSize}px Poppins, sans-serif`;
         ctx.textAlign = 'left';
         ctx.textBaseline = 'middle';
         items.forEach((item, i) => {
@@ -324,6 +325,21 @@
             ctx.fillStyle = '#94a3b8';
             ctx.fillText(item.label, x + dotR*2 + 5, iy);
         });
+        // Foton (γ) – liten prick med γ-symbol
+        const photonY = y + items.length * lineH;
+        const photonDotR = 4;
+        ctx.fillStyle = C_ENERGY;
+        ctx.shadowColor = C_ENERGY;
+        ctx.shadowBlur = 4;
+        ctx.beginPath();
+        ctx.arc(x + dotR, photonY, photonDotR, 0, Math.PI*2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.font = `${fontSize}px Poppins, sans-serif`;
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillText('Foton (γ)', x + dotR*2 + 5, photonY);
         ctx.restore();
     }
 

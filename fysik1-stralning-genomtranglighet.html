@@ -199,8 +199,8 @@
                 none:      1.00,
                 textile:   0.98,
                 aluminum:  0.90,
-                thinlead:  0.18,
-                thicklead: 0.05,
+                thinlead:  0.75,
+                thicklead: 0.10,
             },
         };
 
@@ -591,8 +591,8 @@
                         p.x += p.vx * dt;
                         p.y += p.vy * dt;
 
-                        // Bromsning i hindret (visuell effekt)
-                        if (p.x >= barrierL && p.x <= barrierR && st.barrier !== 'none') {
+                        // Bromsning i hindret (visuell effekt, bara för absorberade)
+                        if (!p.passes && p.x >= barrierL && p.x <= barrierR && st.barrier !== 'none') {
                             p.vx *= (1 - dt * 5);
                         }
 

@@ -22,7 +22,17 @@
       "Bash(python -m http.server:*)",
       "Bash(npm install:*)",
       "Bash(claude --version)",
-      "Bash(gh api:*)"
+      "Bash(gh api:*)",
+      "Bash(python3:*)",
+      "Bash(git status:*)",
+      "Bash(git restore:*)",
+      "Bash(curl:*)",
+      "Bash(tasklist:*)",
+      "Bash(git fetch:*)",
+      "Bash(git log:*)",
+      "Bash(git merge:*)",
+      "Bash(cmd.exe /c start \"\" \"C:\\\\claude\\\\Fysiklabbet\\\\fysik1-massdefekt.html\")",
+      "Bash(explorer.exe \"C:\\\\claude\\\\Fysiklabbet\\\\fysik1-massdefekt.html\")"
     ],
     "deny": [],
     "ask": []

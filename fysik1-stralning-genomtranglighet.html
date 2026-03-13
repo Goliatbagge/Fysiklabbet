@@ -722,7 +722,22 @@
                         {/* Canvas + sidopanel */}
                         <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', alignItems: 'stretch' }}>
                             {/* Canvas-kort */}
-                            <div className="glass-card rounded-2xl p-4" style={{ flex: '1 1 0', minWidth: 0 }}>
+                            <div className="glass-card rounded-2xl p-4" style={{ flex: '1 1 0', minWidth: 0, position: 'relative' }}>
+                                <button
+                                    onClick={toggleSound}
+                                    title={soundOn ? 'Stäng av ljud' : 'Sätt på ljud'}
+                                    style={{
+                                        position: 'absolute', top: '0.75rem', right: '0.75rem', zIndex: 10,
+                                        background: soundOn ? 'rgba(56,189,248,0.15)' : 'rgba(30,41,59,0.7)',
+                                        border: soundOn ? '1px solid rgba(56,189,248,0.4)' : '1px solid rgba(148,163,184,0.25)',
+                                        borderRadius: '0.5rem', padding: '0.4rem 0.5rem',
+                                        cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1,
+                                        color: soundOn ? '#38bdf8' : '#64748b',
+                                        transition: 'all 0.2s ease',
+                                    }}
+                                >
+                                    {soundOn ? '🔊' : '🔇'}
+                                </button>
                                 <div style={{ width: '100%' }}>
                                     <canvas ref={canvasRef} style={{ width: '100%' }} />
                                 </div>

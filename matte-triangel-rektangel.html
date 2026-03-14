@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maximera rektangelns area i en triangel - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .dark-container {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 4px;
+            height: 6px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            border: none;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback } = React;
+
+        const formatNumber = (num, decimals = 2) => {
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Triangle constants
+        const BASE = 9, HEIGHT = 7;
+        const Ax_cm = 2;
+        const MAX_AREA = 15.75;
+
+        function TriangleCanvas({ h }) {
+            const canvasRef = useRef(null);
+
+            const drawTriangle = useCallback((canvas, h) => {
+                const ctx = canvas.getContext('2d');
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                const W = rect.width, H = rect.height;
+
+                ctx.clearRect(0, 0, W, H);
+
+                const margin = { l: 50, r: 20, t: 30, b: 50 };
+                const plotW = W - margin.l - margin.r;
+                const plotH = H - margin.t - margin.b;
+                const scale = Math.min(plotW / BASE, plotH / HEIGHT);
+                const ox = margin.l;
+                const oy = H - margin.b;
+
+                const cmX = (x) => ox + x * scale;
+                const cmY = (y) => oy - y * scale;
+
+                const w = BASE * (1 - h / HEIGHT);
+                const xL = Ax_cm * h / HEIGHT;
+                const xR = BASE + (Ax_cm - BASE) * h / HEIGHT;
+                const area = h * w;
+
+                // Grid
+                ctx.strokeStyle = 'rgba(51, 65, 85, 0.5)';
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i <= BASE; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(cmX(i), cmY(0));
+                    ctx.lineTo(cmX(i), cmY(HEIGHT + 0.3));
+                    ctx.stroke();
+                }
+                for (let i = 0; i <= HEIGHT; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(cmX(-0.3), cmY(i));
+                    ctx.lineTo(cmX(BASE + 0.3), cmY(i));
+                    ctx.stroke();
+                }
+
+                // Fill triangle
+                ctx.fillStyle = 'rgba(56, 189, 248, 0.07)';
+                ctx.beginPath();
+                ctx.moveTo(cmX(0), cmY(0));
+                ctx.lineTo(cmX(BASE), cmY(0));
+                ctx.lineTo(cmX(Ax_cm), cmY(HEIGHT));
+                ctx.closePath();
+                ctx.fill();
+
+                // Rectangle
+                if (h > 0.01 && h < HEIGHT - 0.01) {
+                    const isMax = Math.abs(h - 3.5) < 0.05;
+                    ctx.fillStyle = isMax ? 'rgba(74, 222, 128, 0.35)' : 'rgba(251, 191, 36, 0.25)';
+                    ctx.fillRect(cmX(xL), cmY(h), (xR - xL) * scale, h * scale);
+                    ctx.strokeStyle = isMax ? '#4ade80' : '#fbbf24';
+                    ctx.lineWidth = 2.5;
+                    ctx.strokeRect(cmX(xL), cmY(h), (xR - xL) * scale, h * scale);
+
+                    // Dimension labels
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.font = 'bold 12px Poppins, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(formatNumber(w) + ' cm', cmX((xL + xR) / 2), cmY(0) + 14);
+
+                    ctx.save();
+                    ctx.translate(cmX(xL) - 8, cmY(h / 2));
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText(formatNumber(h) + ' cm', 0, 0);
+                    ctx.restore();
+
+                    // Area label
+                    ctx.fillStyle = isMax ? '#4ade80' : '#fbbf24';
+                    ctx.font = 'bold 13px Poppins, sans-serif';
+                    ctx.textAlign = 'center';
+                    const labelY = cmY(h / 2) + 5;
+                    ctx.fillText('A = ' + formatNumber(area) + ' cm²', cmX((xL + xR) / 2), labelY);
+                }
+
+                // Triangle edges
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(cmX(0), cmY(0));
+                ctx.lineTo(cmX(BASE), cmY(0));
+                ctx.lineTo(cmX(Ax_cm), cmY(HEIGHT));
+                ctx.closePath();
+                ctx.stroke();
+
+                // Height dashed line
+                ctx.setLineDash([6, 4]);
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(cmX(Ax_cm), cmY(0));
+                ctx.lineTo(cmX(Ax_cm), cmY(HEIGHT));
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Vertex labels
+                ctx.fillStyle = '#e2e8f0';
+                ctx.font = 'bold 15px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('B', cmX(0) - 12, cmY(0) + 16);
+                ctx.fillText('C', cmX(BASE) + 12, cmY(0) + 16);
+                ctx.fillText('A', cmX(Ax_cm) - 4, cmY(HEIGHT) - 10);
+
+                // Dimension labels
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '12px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('9,0 cm', cmX(BASE / 2), cmY(0) + 32);
+                ctx.save();
+                ctx.translate(cmX(Ax_cm) - 24, cmY(HEIGHT / 2));
+                ctx.rotate(-Math.PI / 2);
+                ctx.fillText('7,0 cm', 0, 0);
+                ctx.restore();
+
+                // Axis ticks
+                ctx.fillStyle = '#64748b';
+                ctx.font = '10px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                for (let i = 0; i <= BASE; i++) {
+                    ctx.fillText(i, cmX(i), cmY(0) + 44);
+                }
+                ctx.textAlign = 'right';
+                for (let i = 0; i <= HEIGHT; i++) {
+                    ctx.fillText(i, cmX(-0.15), cmY(i) + 4);
+                }
+
+                // Optimal dashed line
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = 'rgba(74, 222, 128, 0.4)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(cmX(-0.3), cmY(3.5));
+                ctx.lineTo(cmX(BASE + 0.3), cmY(3.5));
+                ctx.stroke();
+                ctx.setLineDash([]);
+                ctx.fillStyle = 'rgba(74, 222, 128, 0.6)';
+                ctx.font = '10px Poppins, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('h = 3,5 (optimalt)', cmX(BASE) + 4, cmY(3.5) + 4);
+            }, []);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (canvas) drawTriangle(canvas, h);
+            }, [h, drawTriangle]);
+
+            useEffect(() => {
+                const handleResize = () => {
+                    const canvas = canvasRef.current;
+                    if (canvas) drawTriangle(canvas, h);
+                };
+                window.addEventListener('resize', handleResize);
+                return () => window.removeEventListener('resize', handleResize);
+            }, [h, drawTriangle]);
+
+            return React.createElement('canvas', {
+                ref: canvasRef,
+                style: { width: '100%', height: '100%' }
+            });
+        }
+
+        function GraphCanvas({ h }) {
+            const canvasRef = useRef(null);
+
+            const areaFn = (hVal) => BASE * hVal * (1 - hVal / HEIGHT);
+
+            const drawGraph = useCallback((canvas, h) => {
+                const ctx = canvas.getContext('2d');
+                const dpr = window.devicePixelRatio || 1;
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.scale(dpr, dpr);
+                const W = rect.width, H = rect.height;
+
+                ctx.clearRect(0, 0, W, H);
+
+                const margin = { l: 50, r: 25, t: 40, b: 50 };
+                const plotW = W - margin.l - margin.r;
+                const plotH = H - margin.t - margin.b;
+                const gox = margin.l;
+                const goy = H - margin.b;
+                const maxA = 18;
+
+                const gX = (val) => gox + (val / HEIGHT) * plotW;
+                const gY = (a) => goy - (a / maxA) * plotH;
+
+                const area = h * BASE * (1 - h / HEIGHT);
+
+                // Title
+                ctx.fillStyle = '#e2e8f0';
+                ctx.font = 'bold 13px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('Area A(h) = 9h(1 \u2212 h/7)', gox + plotW / 2, margin.t - 16);
+
+                // Grid
+                ctx.strokeStyle = 'rgba(51, 65, 85, 0.5)';
+                ctx.lineWidth = 0.5;
+                for (let i = 0; i <= 7; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(gX(i), goy);
+                    ctx.lineTo(gX(i), gY(maxA));
+                    ctx.stroke();
+                }
+                for (let a = 0; a <= maxA; a += 2) {
+                    ctx.beginPath();
+                    ctx.moveTo(gox, gY(a));
+                    ctx.lineTo(gX(7), gY(a));
+                    ctx.stroke();
+                }
+
+                // Axes
+                ctx.strokeStyle = '#64748b';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(gox, goy);
+                ctx.lineTo(gX(7), goy);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(gox, goy);
+                ctx.lineTo(gox, gY(maxA));
+                ctx.stroke();
+
+                // Axis labels
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '12px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.font = 'italic 12px Poppins, sans-serif';
+                ctx.fillText('h', gox + plotW / 2, goy + 42);
+                ctx.font = '12px Poppins, sans-serif';
+                ctx.fillText(' (cm)', gox + plotW / 2 + 10, goy + 42);
+                ctx.save();
+                ctx.translate(gox - 38, goy - plotH / 2);
+                ctx.rotate(-Math.PI / 2);
+                ctx.fillText('Area (cm\u00b2)', 0, 0);
+                ctx.restore();
+
+                // Tick labels
+                ctx.fillStyle = '#64748b';
+                ctx.font = '10px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                for (let i = 0; i <= 7; i++) {
+                    ctx.fillText(i, gX(i), goy + 16);
+                }
+                ctx.textAlign = 'right';
+                for (let a = 0; a <= maxA; a += 2) {
+                    ctx.fillText(a, gox - 8, gY(a) + 4);
+                }
+
+                // Filled area under curve up to current h
+                if (h > 0.01) {
+                    ctx.beginPath();
+                    ctx.moveTo(gX(0), gY(0));
+                    const steps = Math.ceil(h * 20);
+                    for (let i = 0; i <= steps; i++) {
+                        const hh = (i / steps) * h;
+                        ctx.lineTo(gX(hh), gY(areaFn(hh)));
+                    }
+                    ctx.lineTo(gX(h), gY(0));
+                    ctx.closePath();
+                    ctx.fillStyle = 'rgba(251, 191, 36, 0.1)';
+                    ctx.fill();
+                }
+
+                // Curve
+                ctx.beginPath();
+                ctx.strokeStyle = '#fbbf24';
+                ctx.lineWidth = 2.5;
+                for (let i = 0; i <= 200; i++) {
+                    const hh = (i / 200) * HEIGHT;
+                    const aa = areaFn(hh);
+                    if (i === 0) ctx.moveTo(gX(hh), gY(aa));
+                    else ctx.lineTo(gX(hh), gY(aa));
+                }
+                ctx.stroke();
+
+                // Max point dashed lines
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = 'rgba(74, 222, 128, 0.5)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(gX(3.5), goy);
+                ctx.lineTo(gX(3.5), gY(MAX_AREA));
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(gox, gY(MAX_AREA));
+                ctx.lineTo(gX(3.5), gY(MAX_AREA));
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Max point dot
+                ctx.beginPath();
+                ctx.arc(gX(3.5), gY(MAX_AREA), 5, 0, Math.PI * 2);
+                ctx.fillStyle = '#4ade80';
+                ctx.fill();
+                ctx.fillStyle = '#4ade80';
+                ctx.font = 'bold 11px Poppins, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText('Max: 15,75 cm\u00b2', gX(3.5) + 10, gY(MAX_AREA) - 6);
+                ctx.font = 'italic 11px Poppins, sans-serif';
+                ctx.fillText('h', gX(3.5) + 10, gY(MAX_AREA) + 10);
+                ctx.font = '11px Poppins, sans-serif';
+                ctx.fillText(' = 3,5', gX(3.5) + 16, gY(MAX_AREA) + 10);
+
+                // Current point
+                if (h > 0.01 && h < HEIGHT - 0.01) {
+                    ctx.setLineDash([3, 3]);
+                    ctx.strokeStyle = 'rgba(251, 191, 36, 0.5)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(gX(h), goy);
+                    ctx.lineTo(gX(h), gY(area));
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(gox, gY(area));
+                    ctx.lineTo(gX(h), gY(area));
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    ctx.beginPath();
+                    ctx.arc(gX(h), gY(area), 7, 0, Math.PI * 2);
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.fill();
+                    ctx.strokeStyle = '#0f172a';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+            }, []);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (canvas) drawGraph(canvas, h);
+            }, [h, drawGraph]);
+
+            useEffect(() => {
+                const handleResize = () => {
+                    const canvas = canvasRef.current;
+                    if (canvas) drawGraph(canvas, h);
+                };
+                window.addEventListener('resize', handleResize);
+                return () => window.removeEventListener('resize', handleResize);
+            }, [h, drawGraph]);
+
+            return React.createElement('canvas', {
+                ref: canvasRef,
+                style: { width: '100%', height: '100%' }
+            });
+        }
+
+        function App() {
+            const [h, setH] = useState(3.5);
+
+            const w = BASE * (1 - h / HEIGHT);
+            const area = h * w;
+            const isMax = Math.abs(h - 3.5) < 0.05;
+
+            return React.createElement('div', { className: 'dark-container min-h-screen pt-20 pb-12 px-4' },
+                // Breadcrumb
+                React.createElement('div', { className: 'max-w-6xl mx-auto mb-4' },
+                    React.createElement('p', { className: 'text-sm text-slate-500' },
+                        React.createElement('a', { href: 'index.html', className: 'hover:text-sky-400 transition-colors' }, 'Hem'),
+                        ' / ',
+                        'Maximera rektangelns area'
+                    )
+                ),
+
+                // Title
+                React.createElement('div', { className: 'max-w-6xl mx-auto text-center mb-6' },
+                    React.createElement('h1', { className: 'text-3xl font-bold text-white glow-text mb-3', style: { fontFamily: 'Poppins, sans-serif' } },
+                        'Maximera rektangelns area i en triangel'
+                    ),
+                    React.createElement('p', { className: 'text-slate-400 max-w-2xl mx-auto', style: { fontFamily: 'Poppins, sans-serif' } },
+                        'Triangel ABC har basen 9,0 cm och h\u00f6jden 7,0 cm. En rektangel ritas s\u00e5 att tv\u00e5 h\u00f6rn ligger p\u00e5 basen och de andra tv\u00e5 p\u00e5 triangelns sidor. Dra i glidaren f\u00f6r att hitta den maximala arean.'
+                    )
+                ),
+
+                // Canvas area
+                React.createElement('div', { className: 'max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6' },
+                    // Triangle
+                    React.createElement('div', { className: 'glass-card rounded-2xl p-4' },
+                        React.createElement('div', { style: { height: '380px' } },
+                            React.createElement(TriangleCanvas, { h })
+                        )
+                    ),
+                    // Graph
+                    React.createElement('div', { className: 'glass-card rounded-2xl p-4' },
+                        React.createElement('div', { style: { height: '380px' } },
+                            React.createElement(GraphCanvas, { h })
+                        )
+                    )
+                ),
+
+                // Slider
+                React.createElement('div', { className: 'max-w-6xl mx-auto mb-6' },
+                    React.createElement('div', { className: 'glass-card rounded-2xl p-5' },
+                        React.createElement('div', { className: 'flex items-center gap-4' },
+                            React.createElement('label', {
+                                className: 'text-slate-300 font-semibold whitespace-nowrap text-sm',
+                                style: { fontFamily: 'Poppins, sans-serif' }
+                            },
+                                'Rektangelns h\u00f6jd ',
+                                React.createElement('span', { className: 'italic' }, 'h'),
+                                ':'
+                            ),
+                            React.createElement('input', {
+                                type: 'range',
+                                min: 0,
+                                max: 700,
+                                value: Math.round(h * 100),
+                                onChange: (e) => setH(e.target.value / 100),
+                                className: 'flex-1'
+                            }),
+                            React.createElement('span', {
+                                className: 'text-sky-400 font-bold text-lg min-w-[80px] text-right',
+                                style: { fontFamily: 'Poppins, sans-serif' }
+                            }, formatNumber(h) + ' cm')
+                        )
+                    )
+                ),
+
+                // Info cards
+                React.createElement('div', { className: 'max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 mb-6' },
+                    // Width
+                    React.createElement('div', { className: 'glass-card rounded-xl p-4 text-center' },
+                        React.createElement('p', { className: 'text-xs text-slate-500 mb-1', style: { fontFamily: 'Poppins, sans-serif' } }, 'Bredd'),
+                        React.createElement('p', { className: 'text-xl font-bold text-sky-400', style: { fontFamily: 'Poppins, sans-serif' } },
+                            formatNumber(w) + ' cm'
+                        )
+                    ),
+                    // Height
+                    React.createElement('div', { className: 'glass-card rounded-xl p-4 text-center' },
+                        React.createElement('p', { className: 'text-xs text-slate-500 mb-1', style: { fontFamily: 'Poppins, sans-serif' } }, 'H\u00f6jd'),
+                        React.createElement('p', { className: 'text-xl font-bold text-sky-400', style: { fontFamily: 'Poppins, sans-serif' } },
+                            formatNumber(h) + ' cm'
+                        )
+                    ),
+                    // Area
+                    React.createElement('div', { className: 'glass-card rounded-xl p-4 text-center' },
+                        React.createElement('p', { className: 'text-xs text-slate-500 mb-1', style: { fontFamily: 'Poppins, sans-serif' } }, 'Area'),
+                        React.createElement('p', {
+                            className: 'text-xl font-bold ' + (isMax ? 'text-green-400' : 'text-amber-400'),
+                            style: { fontFamily: 'Poppins, sans-serif' }
+                        },
+                            formatNumber(area) + ' cm\u00b2'
+                        )
+                    ),
+                    // Max area
+                    React.createElement('div', { className: 'glass-card rounded-xl p-4 text-center' },
+                        React.createElement('p', { className: 'text-xs text-slate-500 mb-1', style: { fontFamily: 'Poppins, sans-serif' } }, 'Max area'),
+                        React.createElement('p', { className: 'text-xl font-bold text-green-400', style: { fontFamily: 'Poppins, sans-serif' } },
+                            '15,75 cm\u00b2'
+                        )
+                    )
+                ),
+
+                // Formula / explanation
+                React.createElement('div', { className: 'max-w-6xl mx-auto' },
+                    React.createElement('div', { className: 'glass-card rounded-2xl p-5' },
+                        React.createElement('h3', {
+                            className: 'text-white font-semibold mb-3',
+                            style: { fontFamily: 'Poppins, sans-serif' }
+                        }, 'L\u00f6sning'),
+                        React.createElement('div', {
+                            className: 'text-slate-400 text-sm leading-relaxed space-y-2',
+                            style: { fontFamily: 'Poppins, sans-serif' }
+                        },
+                            React.createElement('p', null,
+                                'Vid h\u00f6jd ', React.createElement('span', { className: 'italic text-slate-300' }, 'h'),
+                                ' fr\u00e5n basen \u00e4r rektangelns bredd ',
+                                React.createElement('span', { className: 'italic text-slate-300' }, 'w'),
+                                ' = 9 \u00b7 (1 \u2212 ', React.createElement('span', { className: 'italic' }, 'h'),
+                                '/7) eftersom triangelns sidor konvergerar linj\u00e4rt.'
+                            ),
+                            React.createElement('p', null,
+                                'Arean blir: ',
+                                React.createElement('span', { className: 'text-amber-400 font-semibold' },
+                                    'A(', React.createElement('span', { className: 'italic' }, 'h'),
+                                    ') = 9', React.createElement('span', { className: 'italic' }, 'h'),
+                                    '(1 \u2212 ', React.createElement('span', { className: 'italic' }, 'h'),
+                                    '/7) = 9', React.createElement('span', { className: 'italic' }, 'h'),
+                                    ' \u2212 9', React.createElement('span', { className: 'italic' }, 'h'),
+                                    '\u00b2/7'
+                                )
+                            ),
+                            React.createElement('p', null,
+                                'Derivatan: A\u2032(',
+                                React.createElement('span', { className: 'italic' }, 'h'),
+                                ') = 9 \u2212 18',
+                                React.createElement('span', { className: 'italic' }, 'h'),
+                                '/7 = 0  \u21d2  ',
+                                React.createElement('span', { className: 'text-green-400 font-semibold' },
+                                    React.createElement('span', { className: 'italic' }, 'h'),
+                                    ' = 3,5 cm'
+                                )
+                            ),
+                            React.createElement('p', null,
+                                'Maximal area: A(3,5) = 9 \u00b7 3,5 \u00b7 (1 \u2212 3,5/7) = 9 \u00b7 3,5 \u00b7 0,5 = ',
+                                React.createElement('span', { className: 'text-green-400 font-bold text-base' }, '15,75 cm\u00b2')
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        ReactDOM.render(React.createElement(App), document.getElementById('root'));
+    </script>
+</body>
+</html>

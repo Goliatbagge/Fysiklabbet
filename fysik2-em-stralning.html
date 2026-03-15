@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektromagnetisk strålning - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .glass-card-inner {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            border-radius: 12px;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .page-wrapper {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+            min-height: 100vh;
+        }
+
+        /* Knob styles */
+        .knob-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+        .knob-svg {
+            cursor: grab;
+            filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.4));
+            transition: filter 0.2s;
+        }
+        .knob-svg:active {
+            cursor: grabbing;
+            filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.7));
+        }
+
+        /* Spectrum bar */
+        .spectrum-bar-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        .spectrum-indicator {
+            position: absolute;
+            top: -8px;
+            width: 3px;
+            height: calc(100% + 16px);
+            background: white;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(255,255,255,0.9);
+            transform: translateX(-50%);
+            pointer-events: none;
+            transition: left 0.05s linear;
+        }
+        .spectrum-indicator::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid white;
+        }
+
+        /* Wave canvas */
+        .wave-canvas-wrap {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.12);
+        }
+
+        /* Ionizing warning */
+        @keyframes pulse-warning {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.75; transform: scale(1.04); }
+        }
+        .ionizing-warning {
+            animation: pulse-warning 1.8s ease-in-out infinite;
+        }
+
+        /* Radiation hazard symbol */
+        .hazard-symbol {
+            display: inline-block;
+        }
+
+        /* Display value cards */
+        .value-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            min-width: 0;
+        }
+        .value-label {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+        .value-number {
+            font-size: 1.35rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #e2e8f0;
+            white-space: nowrap;
+        }
+        .value-number span.unit {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-left: 3px;
+        }
+
+        /* Region badge */
+        .region-badge {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 99px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        /* Explanation */
+        .formula-box {
+            background: rgba(56, 189, 248, 0.07);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        /* Visible light zoom button */
+        .visible-zoom-btn {
+            position: absolute;
+            transform: translateX(-50%);
+            top: -36px;
+            padding: 3px 12px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            background: linear-gradient(to right, #6d28d9, #2563eb, #16a34a, #ca8a04, #dc2626);
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            z-index: 5;
+        }
+        .visible-zoom-btn:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 0 16px rgba(255,255,255,0.3);
+        }
+
+        /* Back button */
+        .back-to-full-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #94a3b8;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .back-to-full-btn:hover {
+            color: #e2e8f0;
+            border-color: rgba(56, 189, 248, 0.5);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        /* Visible color labels */
+        .visible-color-label {
+            position: absolute;
+            bottom: -22px;
+            transform: translateX(-50%);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.62rem;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
+        ::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(56,189,248,0.45); }
+    </style>
+</head>
+<body class="bg-slate-950">
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">⚛️</span>
+            <span class="logo-text">Fysiklabbet</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Hem</a></li>
+            <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+            <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            <li><a href="om.html" class="nav-link">Om</a></li>
+            <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-wrapper">
+    <div style="max-width:1100px;margin:0 auto;padding:28px 20px 60px;">
+
+        <!-- Breadcrumb -->
+        <nav style="margin-bottom:20px;font-family:'Poppins',sans-serif;font-size:0.82rem;color:#64748b;">
+            <a href="index.html" style="color:#38bdf8;text-decoration:none;">Hem</a>
+            <span style="margin:0 7px;">/</span>
+            <a href="fysik2.html" style="color:#38bdf8;text-decoration:none;">Fysik 2</a>
+            <span style="margin:0 7px;">/</span>
+            <span style="color:#94a3b8;">Elektromagnetisk strålning</span>
+        </nav>
+
+        <!-- Title -->
+        <div style="margin-bottom:30px;">
+            <h1 class="glow-text" style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:700;color:#e2e8f0;margin-bottom:8px;">
+                Elektromagnetisk strålning
+            </h1>
+            <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:#94a3b8;max-width:680px;line-height:1.65;">
+                Vrid ratten för att utforska det elektromagnetiska spektrumet — från kilometerlånga radiovågor till de kortaste gammastrålarna. Se hur våglängd, frekvens och fotonenergi hänger samman.
+            </p>
+        </div>
+
+        <div id="root"></div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+</footer>
+
+<script type="text/babel">
+const { useState, useRef, useEffect, useCallback, useMemo } = React;
+
+// ── Physics constants ──────────────────────────────────────────────────────────
+const C_LIGHT   = 2.998e8;   // m/s
+const H_PLANCK  = 6.626e-34; // J·s
+const EV        = 1.602e-19; // J per eV
+
+// ── Spectrum regions ───────────────────────────────────────────────────────────
+const REGIONS = [
+    { id: 'radio',   name: 'Radiovågor',             minLam: 1e-1,    maxLam: 1e6,    color: '#6366f1', textColor: '#a5b4fc' },
+    { id: 'micro',   name: 'Mikrovågor',              minLam: 1e-3,    maxLam: 1e-1,   color: '#8b5cf6', textColor: '#c4b5fd' },
+    { id: 'ir',      name: 'Infraröd strålning',      minLam: 7e-7,    maxLam: 1e-3,   color: '#dc2626', textColor: '#fca5a5' },
+    { id: 'vis',     name: 'Synligt ljus',             minLam: 3.8e-7,  maxLam: 7e-7,   color: '#ffffff', textColor: '#ffffff' },
+    { id: 'uv',      name: 'Ultraviolett strålning',   minLam: 1e-8,    maxLam: 3.8e-7, color: '#7c3aed', textColor: '#c084fc' },
+    { id: 'xray',    name: 'Röntgenstrålning',         minLam: 1e-11,   maxLam: 1e-8,   color: '#0ea5e9', textColor: '#7dd3fc' },
+    { id: 'gamma',   name: 'Gammastrålning',           minLam: 1e-16,   maxLam: 1e-11,  color: '#22c55e', textColor: '#86efac' },
+];
+
+// Log scale boundaries (metres)
+const LAM_MIN = 1e-16;  // 0.0001 pm (hard gamma)
+const LAM_MAX = 1e6;    // 1000 km (long radio)
+
+// Ionizing threshold
+const IONIZING_THRESHOLD = 1.25e-7; // ~125 nm (UV-C)
+
+// ── Helper: wavelength → normalised position [0,1] left = long λ, right = short λ ──
+// Bar goes left=radio (long λ) → right=gamma (short λ), i.e. increasing energy left→right
+function lamToPos(lam) {
+    const logMin = Math.log10(LAM_MIN);
+    const logMax = Math.log10(LAM_MAX);
+    // Invert: long λ (logMax) → 0 (left), short λ (logMin) → 1 (right)
+    return (logMax - Math.log10(lam)) / (logMax - logMin);
+}
+
+// ── Helper: format wavelength with best unit ─────────────────────────────────
+function formatWavelength(lamM) {
+    const fmt = (v, d = 2) => v.toFixed(d).replace('.', ',');
+    if (lamM >= 1000)        return { val: fmt(lamM / 1000),    unit: 'km' };
+    if (lamM >= 1)           return { val: fmt(lamM),           unit: 'm' };
+    if (lamM >= 1e-3)        return { val: fmt(lamM * 1e3),     unit: 'mm' };
+    if (lamM >= 1e-6)        return { val: fmt(lamM * 1e6),     unit: 'μm' };
+    if (lamM >= 1e-9)        return { val: fmt(lamM * 1e9),     unit: 'nm' };
+    if (lamM >= 1e-12)       return { val: fmt(lamM * 1e12),    unit: 'pm' };
+    return                        { val: fmt(lamM * 1e15, 1),   unit: 'fm' };
+}
+
+// ── Helper: format frequency ─────────────────────────────────────────────────
+function formatFrequency(freqHz) {
+    const fmt = (v, d = 3) => {
+        if (v >= 100) return v.toFixed(1).replace('.', ',');
+        if (v >= 10)  return v.toFixed(2).replace('.', ',');
+        return v.toFixed(d).replace('.', ',');
+    };
+    if (freqHz >= 1e18)  return { val: fmt(freqHz / 1e18), unit: 'EHz' };
+    if (freqHz >= 1e15)  return { val: fmt(freqHz / 1e15), unit: 'PHz' };
+    if (freqHz >= 1e12)  return { val: fmt(freqHz / 1e12), unit: 'THz' };
+    if (freqHz >= 1e9)   return { val: fmt(freqHz / 1e9),  unit: 'GHz' };
+    if (freqHz >= 1e6)   return { val: fmt(freqHz / 1e6),  unit: 'MHz' };
+    if (freqHz >= 1e3)   return { val: fmt(freqHz / 1e3),  unit: 'kHz' };
+    return                    { val: fmt(freqHz),           unit: 'Hz'  };
+}
+
+// ── Helper: format energy in eV ──────────────────────────────────────────────
+function formatEnergy(joules) {
+    const eV = joules / EV;
+    const fmt = (v, d = 3) => {
+        if (v >= 1000)  return v.toFixed(0).replace('.', ',');
+        if (v >= 10)    return v.toFixed(1).replace('.', ',');
+        return v.toFixed(d).replace('.', ',');
+    };
+    if (eV >= 1e6)   return { val: fmt(eV / 1e6), unit: 'MeV' };
+    if (eV >= 1e3)   return { val: fmt(eV / 1e3), unit: 'keV' };
+    if (eV >= 1)     return { val: fmt(eV),        unit: 'eV'  };
+    if (eV >= 1e-3)  return { val: fmt(eV * 1e3),  unit: 'meV' };
+    return                { val: fmt(eV * 1e6, 2), unit: 'μeV' };
+}
+
+// ── Helper: visible wavelength (nm) → RGB ────────────────────────────────────
+function visibleToRgb(lamM) {
+    const nm = lamM * 1e9;
+    let r = 0, g = 0, b = 0;
+    if      (nm >= 380 && nm < 440) { r = -(nm - 440)/(440-380); g = 0; b = 1; }
+    else if (nm >= 440 && nm < 490) { r = 0; g = (nm - 440)/(490-440); b = 1; }
+    else if (nm >= 490 && nm < 510) { r = 0; g = 1; b = -(nm - 510)/(510-490); }
+    else if (nm >= 510 && nm < 580) { r = (nm - 510)/(580-510); g = 1; b = 0; }
+    else if (nm >= 580 && nm < 645) { r = 1; g = -(nm - 645)/(645-580); b = 0; }
+    else if (nm >= 645 && nm <= 700){ r = 1; g = 0; b = 0; }
+    let factor = 1;
+    if      (nm >= 380 && nm < 420) factor = 0.3 + 0.7*(nm-380)/(420-380);
+    else if (nm >= 700 && nm <= 780) factor = 0.3 + 0.7*(780-nm)/(780-700);
+    r = Math.round(255 * Math.pow(r * factor, 0.8));
+    g = Math.round(255 * Math.pow(g * factor, 0.8));
+    b = Math.round(255 * Math.pow(b * factor, 0.8));
+    return `rgb(${r},${g},${b})`;
+}
+
+// ── Helper: get region for a wavelength ──────────────────────────────────────
+function getRegion(lamM) {
+    for (const r of REGIONS) {
+        if (lamM >= r.minLam && lamM < r.maxLam) return r;
+    }
+    return REGIONS[REGIONS.length - 1];
+}
+
+// ── Radiation hazard SVG ──────────────────────────────────────────────────────
+function HazardSymbol({ size = 56 }) {
+    // Classic trefoil radiation hazard symbol
+    const r = size / 2;
+    return (
+        <svg width={size} height={size} viewBox="0 0 100 100" aria-label="Varningssymbol för joniserande strålning">
+            {/* Yellow background circle */}
+            <circle cx="50" cy="50" r="48" fill="#facc15" stroke="#1a1a1a" strokeWidth="3"/>
+            {/* Inner black circle */}
+            <circle cx="50" cy="50" r="13" fill="#1a1a1a"/>
+            {/* Three blades */}
+            {[0, 120, 240].map(deg => {
+                const rad = (deg - 90) * Math.PI / 180;
+                // blade as a path: inner radius 15, outer radius 40, sweep 60deg
+                const innerR = 15, outerR = 42;
+                const sweepStart = rad - (60 * Math.PI / 180) / 2;
+                const sweepEnd   = rad + (60 * Math.PI / 180) / 2;
+                const x1 = 50 + innerR * Math.cos(sweepStart);
+                const y1 = 50 + innerR * Math.sin(sweepStart);
+                const x2 = 50 + outerR * Math.cos(sweepStart);
+                const y2 = 50 + outerR * Math.sin(sweepStart);
+                const x3 = 50 + outerR * Math.cos(sweepEnd);
+                const y3 = 50 + outerR * Math.sin(sweepEnd);
+                const x4 = 50 + innerR * Math.cos(sweepEnd);
+                const y4 = 50 + innerR * Math.sin(sweepEnd);
+                const d = `M${x1},${y1} L${x2},${y2} A${outerR},${outerR} 0 0,1 ${x3},${y3} L${x4},${y4} A${innerR},${innerR} 0 0,0 ${x1},${y1} Z`;
+                return <path key={deg} d={d} fill="#1a1a1a"/>;
+            })}
+        </svg>
+    );
+}
+
+// ── Visible spectrum bar (zoomed) ─────────────────────────────────────────────
+const VIS_MIN = 380; // nm
+const VIS_MAX = 700; // nm
+
+const VISIBLE_COLORS = [
+    { nm: 380, name: 'Violett',    color: '#7c3aed' },
+    { nm: 420, name: 'Blåviolett', color: '#4338ca' },
+    { nm: 450, name: 'Blå',        color: '#2563eb' },
+    { nm: 490, name: 'Cyan',       color: '#06b6d4' },
+    { nm: 510, name: 'Grön',       color: '#16a34a' },
+    { nm: 560, name: 'Gulgrön',    color: '#84cc16' },
+    { nm: 580, name: 'Gul',        color: '#eab308' },
+    { nm: 600, name: 'Orange',     color: '#ea580c' },
+    { nm: 640, name: 'Röd',        color: '#dc2626' },
+    { nm: 700, name: 'Mörkröd',    color: '#991b1b' },
+];
+
+function VisibleSpectrumBar({ currentLam, onBack }) {
+    const nm = currentLam * 1e9;
+    const clampedNm = Math.max(VIS_MIN, Math.min(VIS_MAX, nm));
+    // Inverted: long λ (red, 700nm) at left (pos=0), short λ (violet, 380nm) at right (pos=1)
+    const pos = (VIS_MAX - clampedNm) / (VIS_MAX - VIS_MIN);
+
+    // Build a detailed visible gradient: red (left) → violet (right)
+    const gradientStops = [];
+    for (let wl = VIS_MAX; wl >= VIS_MIN; wl -= 2) {
+        const pct = ((VIS_MAX - wl) / (VIS_MAX - VIS_MIN)) * 100;
+        gradientStops.push(`${visibleToRgb(wl * 1e-9)} ${pct.toFixed(1)}%`);
+    }
+
+    return (
+        <div style={{width:'100%'}}>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:'14px'}}>
+                <button className="back-to-full-btn" onClick={onBack}>
+                    ← Hela spektrumet
+                </button>
+                <span style={{fontSize:'0.78rem',color:'#94a3b8',fontFamily:"'Poppins',sans-serif"}}>
+                    Synligt ljus: {VIS_MIN} – {VIS_MAX} nm
+                </span>
+            </div>
+
+            {/* Visible spectrum bar */}
+            <div className="spectrum-bar-wrapper" style={{marginBottom:'34px'}}>
+                <div style={{
+                    background: `linear-gradient(to right, ${gradientStops.join(', ')})`,
+                    width: '100%',
+                    height: '48px',
+                    borderRadius: '10px',
+                    boxShadow: '0 0 24px rgba(255,255,255,0.1)',
+                    position: 'relative',
+                }}>
+                    {/* Indicator */}
+                    <div className="spectrum-indicator" style={{left: `${pos * 100}%`}}/>
+
+                    {/* Color labels below the bar */}
+                    {VISIBLE_COLORS.map((c, i) => {
+                        const p = ((VIS_MAX - c.nm) / (VIS_MAX - VIS_MIN)) * 100;
+                        return (
+                            <span key={i} className="visible-color-label" style={{
+                                left: `${p}%`,
+                                color: c.color,
+                            }}>
+                                {c.name}
+                            </span>
+                        );
+                    })}
+                </div>
+
+                {/* Wavelength ticks */}
+                <div style={{position:'relative',height:'20px',marginTop:'28px'}}>
+                    {[700, 660, 620, 580, 540, 500, 460, 420, 380].map((wl, i) => {
+                        const p = ((VIS_MAX - wl) / (VIS_MAX - VIS_MIN)) * 100;
+                        return (
+                            <span key={i} style={{
+                                position:'absolute',
+                                left: `${p}%`,
+                                transform: 'translateX(-50%)',
+                                fontSize:'0.65rem',
+                                color:'#64748b',
+                                fontFamily:"'Poppins',sans-serif",
+                            }}>
+                                {wl} nm
+                            </span>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+// ── Spectrum bar ──────────────────────────────────────────────────────────────
+function SpectrumBar({ currentLam, onZoomVisible }) {
+    const pos = lamToPos(currentLam); // 0 = gamma (left), 1 = radio (right)
+
+    // Gradient segments: left = long wavelength (radio) → right = short wavelength (gamma)
+    const gradientStyle = {
+        background: 'linear-gradient(to right, ' +
+            '#1e3a5f 0%,' +       // long radio
+            '#3730a3 14%,' +      // radio
+            '#4c1d95 24%,' +      // micro
+            '#5b21b6 34%,' +      // micro
+            '#6b21a8 42%,' +      // far IR / micro boundary
+            '#b91c1c 56%,' +      // mid IR
+            '#991b1b 64%,' +      // near-IR
+            '#7f1d1d 68%,' +      // deep red ~700nm
+            '#dc2626 70%,' +      // red   ~650nm
+            '#ea580c 71.5%,' +    // orange ~610nm
+            '#ca8a04 72.5%,' +    // yellow ~580nm
+            '#84cc16 73.5%,' +    // yellow-green ~560nm
+            '#16a34a 75%,' +      // green ~530nm
+            '#0284c7 76.5%,' +    // cyan  ~490nm
+            '#2563eb 77.5%,' +    // blue  ~450nm
+            '#4338ca 77.8%,' +
+            '#7c3aed 78%,' +      // 380nm
+            '#6d28d9 78.5%,' +    // violet
+            '#4f46e5 79%,' +      // violet
+            '#3b0764 79.5%,' +    // near UV edge
+            '#c026d3 80.5%,' +    // UV-near
+            '#9333ea 83%,' +      // UV
+            '#7c3aed 86%,' +      // UV-far
+            '#0ea5e9 92%,' +      // x-ray
+            '#22c55e 100%' +      // gamma
+        ')',
+    };
+
+    const leftPercent = pos * 100;
+
+    // Region label ticks
+    const regionTicks = [
+        { label: 'Gamma',       pos: lamToPos(1e-13) },
+        { label: 'Röntgen',     pos: lamToPos(1e-10) },
+        { label: 'UV',          pos: lamToPos(1e-7)  },
+        { label: 'Synligt',     pos: lamToPos(5.5e-7)},
+        { label: 'IR',          pos: lamToPos(1e-5)  },
+        { label: 'Mikro',       pos: lamToPos(3e-3)  },
+        { label: 'Radio',       pos: lamToPos(1)     },
+    ];
+
+    return (
+        <div style={{width:'100%'}}>
+            {/* Bar */}
+            <div className="spectrum-bar-wrapper" style={{marginBottom:'28px'}}>
+                <div style={{
+                    ...gradientStyle,
+                    width: '100%',
+                    height: '36px',
+                    borderRadius: '8px',
+                    boxShadow: '0 0 18px rgba(56,189,248,0.15)',
+                    position: 'relative',
+                }}>
+                    {/* Synligt ljus zoom button */}
+                    <button
+                        className="visible-zoom-btn"
+                        style={{left: `${lamToPos(5.5e-7) * 100}%`}}
+                        onClick={onZoomVisible}
+                        title="Zooma in på synligt ljus"
+                    >
+                        🔍 Synligt ljus
+                    </button>
+
+                    {/* Indicator line */}
+                    <div className="spectrum-indicator" style={{left: `${leftPercent}%`}}/>
+                </div>
+
+                {/* Region labels below bar */}
+                <div style={{position:'relative',height:'24px',marginTop:'8px'}}>
+                    {regionTicks.map((t,i) => (
+                        <span key={i} style={{
+                            position: 'absolute',
+                            left: `${t.pos * 100}%`,
+                            transform: 'translateX(-50%)',
+                            fontSize: '0.67rem',
+                            color: '#64748b',
+                            fontFamily: "'Poppins',sans-serif",
+                            whiteSpace: 'nowrap',
+                        }}>
+                            {t.label}
+                        </span>
+                    ))}
+                </div>
+            </div>
+
+            {/* Wavelength scale labels */}
+            <div style={{display:'flex',justifyContent:'space-between',marginTop:'-18px',marginBottom:'6px'}}>
+                {['1 km','1 m','1 mm','1 μm','100 nm','1 nm','0,01 nm','0,001 pm'].map((l,i) => (
+                    <span key={i} style={{
+                        fontSize:'0.6rem',
+                        color:'#334155',
+                        fontFamily:"'Poppins',sans-serif",
+                        userSelect:'none',
+                    }}>{l}</span>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+// ── Rotary knob ───────────────────────────────────────────────────────────────
+// knobAngle: rotation angle in radians.
+// We map full rotation range -2.35 to +2.35 rad (about 270 degrees)
+// to the full log wavelength range.
+const KNOB_ANGLE_MIN = -2.35;
+const KNOB_ANGLE_MAX =  2.35;
+
+function RotaryKnob({ angle, onAngleChange, color }) {
+    const svgRef   = useRef(null);
+    const dragging = useRef(false);
+    const lastAngle= useRef(null);
+
+    // Get angle from mouse/touch position relative to knob center
+    const getAngleFromEvent = useCallback((e) => {
+        const svg = svgRef.current;
+        if (!svg) return null;
+        const rect = svg.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top  + rect.height / 2;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return Math.atan2(clientY - cy, clientX - cx);
+    }, []);
+
+    const onPointerDown = useCallback((e) => {
+        e.preventDefault();
+        dragging.current = true;
+        lastAngle.current = getAngleFromEvent(e);
+        window.addEventListener('mousemove', onPointerMove);
+        window.addEventListener('mouseup',   onPointerUp);
+        window.addEventListener('touchmove', onPointerMove, { passive: false });
+        window.addEventListener('touchend',  onPointerUp);
+    }, []);
+
+    const onPointerMove = useCallback((e) => {
+        if (!dragging.current) return;
+        e.preventDefault();
+        const newMouseAngle = getAngleFromEvent(e);
+        if (newMouseAngle === null || lastAngle.current === null) return;
+        let delta = newMouseAngle - lastAngle.current;
+        // Wrap delta to [-π, π]
+        if (delta >  Math.PI) delta -= 2 * Math.PI;
+        if (delta < -Math.PI) delta += 2 * Math.PI;
+        lastAngle.current = newMouseAngle;
+        onAngleChange(prev => {
+            const next = Math.max(KNOB_ANGLE_MIN, Math.min(KNOB_ANGLE_MAX, prev + delta));
+            return next;
+        });
+    }, [onAngleChange]);
+
+    const onPointerUp = useCallback(() => {
+        dragging.current = false;
+        lastAngle.current = null;
+        window.removeEventListener('mousemove', onPointerMove);
+        window.removeEventListener('mouseup',   onPointerUp);
+        window.removeEventListener('touchmove', onPointerMove);
+        window.removeEventListener('touchend',  onPointerUp);
+    }, []);
+
+    // Tick marks
+    const N_TICKS = 36;
+    const ticks = [];
+    for (let i = 0; i < N_TICKS; i++) {
+        const a = (i / N_TICKS) * 2 * Math.PI;
+        const major = i % 4 === 0;
+        const r1 = 86, r2 = major ? 72 : 78;
+        ticks.push({
+            x1: 100 + r1 * Math.cos(a), y1: 100 + r1 * Math.sin(a),
+            x2: 100 + r2 * Math.cos(a), y2: 100 + r2 * Math.sin(a),
+            major,
+        });
+    }
+
+    // Indicator dot position
+    const indR = 60;
+    const indX = 100 + indR * Math.cos(angle - Math.PI / 2);
+    const indY = 100 + indR * Math.sin(angle - Math.PI / 2);
+
+    return (
+        <svg
+            ref={svgRef}
+            className="knob-svg"
+            width="200" height="200"
+            viewBox="0 0 200 200"
+            onMouseDown={onPointerDown}
+            onTouchStart={onPointerDown}
+        >
+            {/* Outer glow ring */}
+            <circle cx="100" cy="100" r="90" fill="none" stroke={color} strokeWidth="1.5" strokeOpacity="0.25"/>
+
+            {/* Tick marks */}
+            {ticks.map((t, i) => (
+                <line key={i}
+                    x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}
+                    stroke={t.major ? '#94a3b8' : '#334155'}
+                    strokeWidth={t.major ? 2 : 1}
+                    strokeLinecap="round"
+                />
+            ))}
+
+            {/* Knob body gradient */}
+            <defs>
+                <radialGradient id="knobGrad" cx="40%" cy="30%" r="70%">
+                    <stop offset="0%"   stopColor="#1e3a5f"/>
+                    <stop offset="60%"  stopColor="#0f1f38"/>
+                    <stop offset="100%" stopColor="#070d1a"/>
+                </radialGradient>
+                <filter id="knobShadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="3" stdDeviation="6" floodColor={color} floodOpacity="0.5"/>
+                </filter>
+            </defs>
+            <circle cx="100" cy="100" r="76" fill="url(#knobGrad)" filter="url(#knobShadow)"
+                stroke={color} strokeWidth="1.5" strokeOpacity="0.5"/>
+
+            {/* Concentric ring detail */}
+            <circle cx="100" cy="100" r="56" fill="none" stroke={color} strokeWidth="0.75" strokeOpacity="0.2"/>
+            <circle cx="100" cy="100" r="40" fill="none" stroke={color} strokeWidth="0.5"  strokeOpacity="0.12"/>
+
+            {/* Indicator line */}
+            <line
+                x1="100" y1="100"
+                x2={indX} y2={indY}
+                stroke={color} strokeWidth="3" strokeLinecap="round"
+                style={{filter: `drop-shadow(0 0 5px ${color})`}}
+            />
+
+            {/* Indicator dot */}
+            <circle cx={indX} cy={indY} r="7" fill={color}
+                style={{filter: `drop-shadow(0 0 8px ${color})`}}/>
+
+            {/* Center cap */}
+            <circle cx="100" cy="100" r="14" fill="#0d1a2d" stroke={color} strokeWidth="1.5" strokeOpacity="0.5"/>
+            <circle cx="100" cy="100" r="5"  fill={color} fillOpacity="0.8"/>
+        </svg>
+    );
+}
+
+// ── Wave canvas ───────────────────────────────────────────────────────────────
+function WaveCanvas({ wavelengthM, color, isIonizing, isVisible, visibleColor }) {
+    const canvasRef = useRef(null);
+    const animRef   = useRef(null);
+    const timeRef   = useRef(0);
+    const lastTsRef = useRef(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width;
+        const H = canvas.height;
+
+        // Visual wavelength mapped to screen pixels
+        // We compress the range so it's always visible
+        const logRange = Math.log10(LAM_MAX) - Math.log10(LAM_MIN);
+        const logVal   = Math.log10(wavelengthM) - Math.log10(LAM_MIN);
+        const t        = logVal / logRange; // 0..1
+
+        // Screen wavelength: from 6px (very short) to 220px (very long)
+        const screenLam = 6 + t * 214;
+        const amplitude = H * 0.33;
+
+        let waveColor = color;
+        if (isVisible) waveColor = visibleColor;
+
+        const draw = (ts) => {
+            if (lastTsRef.current !== null) {
+                timeRef.current += (ts - lastTsRef.current) / 1000;
+            }
+            lastTsRef.current = ts;
+
+            ctx.clearRect(0, 0, W, H);
+
+            // Background
+            ctx.fillStyle = 'rgba(7, 13, 26, 0.0)';
+            ctx.fillRect(0, 0, W, H);
+
+            // Center line
+            ctx.strokeStyle = 'rgba(56,189,248,0.08)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([4, 6]);
+            ctx.beginPath();
+            ctx.moveTo(0, H / 2);
+            ctx.lineTo(W, H / 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Wave
+            ctx.beginPath();
+            ctx.lineWidth = 2.5;
+
+            // Glow pass
+            ctx.shadowColor = waveColor;
+            ctx.shadowBlur  = 12;
+
+            const phase = timeRef.current * 1.4;
+            const k     = (2 * Math.PI) / screenLam;
+
+            for (let x = 0; x <= W; x += 1) {
+                const y = H / 2 + amplitude * Math.sin(k * x - phase);
+                if (x === 0) ctx.moveTo(x, y);
+                else         ctx.lineTo(x, y);
+            }
+
+            // Gradient stroke
+            const grad = ctx.createLinearGradient(0, 0, W, 0);
+            grad.addColorStop(0,   'transparent');
+            grad.addColorStop(0.1, waveColor);
+            grad.addColorStop(0.9, waveColor);
+            grad.addColorStop(1,   'transparent');
+            ctx.strokeStyle = grad;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            animRef.current = requestAnimationFrame(draw);
+        };
+
+        animRef.current = requestAnimationFrame(draw);
+        return () => {
+            cancelAnimationFrame(animRef.current);
+            lastTsRef.current = null;
+        };
+    }, [wavelengthM, color, isIonizing, isVisible, visibleColor]);
+
+    return (
+        <div className="wave-canvas-wrap" style={{background:'rgba(7,13,26,0.6)'}}>
+            <canvas
+                ref={canvasRef}
+                width={640}
+                height={120}
+                style={{width:'100%',height:'120px',display:'block'}}
+            />
+        </div>
+    );
+}
+
+// ── Main app ──────────────────────────────────────────────────────────────────
+function EMSpectrum() {
+    // knobAngle: maps from KNOB_ANGLE_MIN (= radio) to KNOB_ANGLE_MAX (= gamma)
+    // Start near middle-ish (visible light range)
+    const [knobAngle, setKnobAngle] = useState(0.45);
+
+    // View mode: 'full' or 'visible'
+    const [viewMode, setViewMode] = useState('full');
+
+    // Map knob angle → wavelength (log scale)
+    // In visible mode, clamp to 380-700nm range
+    const wavelengthM = useMemo(() => {
+        const t = (knobAngle - KNOB_ANGLE_MIN) / (KNOB_ANGLE_MAX - KNOB_ANGLE_MIN);
+        if (viewMode === 'visible') {
+            // Map full knob range to visible spectrum only
+            const visLamMin = 3.8e-7; // 380nm
+            const visLamMax = 7.0e-7; // 700nm
+            const logLam = Math.log10(visLamMax) + t * (Math.log10(visLamMin) - Math.log10(visLamMax));
+            return Math.pow(10, logLam);
+        }
+        // t=0 → LAM_MAX (radio), t=1 → LAM_MIN (gamma)  — knob to the left = short λ
+        const logLam = Math.log10(LAM_MAX) + t * (Math.log10(LAM_MIN) - Math.log10(LAM_MAX));
+        return Math.pow(10, logLam);
+    }, [knobAngle, viewMode]);
+
+    const freqHz  = C_LIGHT / wavelengthM;
+    const energyJ = H_PLANCK * freqHz;
+
+    const lamFmt  = formatWavelength(wavelengthM);
+    const freqFmt = formatFrequency(freqHz);
+    const eFmt    = formatEnergy(energyJ);
+
+    const region    = getRegion(wavelengthM);
+    const isVisible = wavelengthM >= 3.8e-7 && wavelengthM <= 7e-7;
+    const isIonizing= wavelengthM < IONIZING_THRESHOLD;
+
+    const visibleColor = isVisible ? visibleToRgb(wavelengthM) : '#ffffff';
+
+    // Knob indicator color based on region
+    let knobColor = region.color;
+    if (isVisible) knobColor = visibleColor;
+
+    // Region badge colors
+    const badgeStyle = {
+        backgroundColor: isVisible ? visibleColor + '22' : region.color + '22',
+        borderColor:     isVisible ? visibleColor        : region.color,
+        color:           isVisible ? visibleColor        : region.textColor,
+    };
+
+    return (
+        <div style={{fontFamily:"'Poppins',sans-serif"}}>
+
+            {/* ── Spectrum bar ── */}
+            <div className="glass-card" style={{padding:'28px 28px 20px',marginBottom:'22px'}}>
+                <h2 style={{fontSize:'0.8rem',fontWeight:600,color:'#64748b',
+                    textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'18px'}}>
+                    {viewMode === 'full' ? 'Det elektromagnetiska spektrumet' : 'Synligt ljus — detaljvy'}
+                </h2>
+                {viewMode === 'full' ? (
+                    <SpectrumBar currentLam={wavelengthM} onZoomVisible={() => {
+                        setViewMode('visible');
+                        // Set knob to middle of visible range (~540nm)
+                        const targetLam = 5.4e-7;
+                        const logLam = Math.log10(targetLam);
+                        const logMin = Math.log10(LAM_MIN);
+                        const logMax = Math.log10(LAM_MAX);
+                        const t = (logLam - logMax) / (logMin - logMax);
+                        const newAngle = KNOB_ANGLE_MIN + t * (KNOB_ANGLE_MAX - KNOB_ANGLE_MIN);
+                        setKnobAngle(newAngle);
+                    }}/>
+                ) : (
+                    <VisibleSpectrumBar currentLam={wavelengthM} onBack={() => setViewMode('full')}/>
+                )}
+            </div>
+
+            {/* ── Knob + displays ── */}
+            <div style={{display:'grid',gridTemplateColumns:'auto 1fr',gap:'22px',
+                alignItems:'start',marginBottom:'22px'}}>
+
+                {/* Knob */}
+                <div className="glass-card" style={{padding:'28px 24px',
+                    display:'flex',flexDirection:'column',alignItems:'center',gap:'12px'}}>
+                    <div style={{fontSize:'0.75rem',fontWeight:600,color:'#64748b',
+                        textTransform:'uppercase',letterSpacing:'0.07em'}}>
+                        Vrid ratten
+                    </div>
+                    <div className="knob-container">
+                        <RotaryKnob
+                            angle={knobAngle}
+                            onAngleChange={setKnobAngle}
+                            color={knobColor}
+                        />
+                    </div>
+                    <div style={{fontSize:'0.72rem',color:'#475569',textAlign:'center',
+                        lineHeight:1.5,maxWidth:'140px'}}>
+                        {viewMode === 'visible'
+                            ? <>← Röd (lång λ)<br/>Violett (kort λ) →</>
+                            : <>← Längre våglängd<br/>Kortare våglängd →</>
+                        }
+                    </div>
+                </div>
+
+                {/* Right panel: region badge + values + wave */}
+                <div style={{display:'flex',flexDirection:'column',gap:'16px'}}>
+
+                    {/* Region + ionizing warning */}
+                    <div className="glass-card" style={{padding:'20px 24px'}}>
+                        <div style={{marginBottom:'14px'}}>
+                            <div style={{fontSize:'0.72rem',fontWeight:600,color:'#64748b',
+                                textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:'8px'}}>
+                                Typ av strålning
+                            </div>
+                            <span className="region-badge" style={badgeStyle}>
+                                {region.name}
+                            </span>
+                        </div>
+
+                        {/* Ionizing warning */}
+                        {isIonizing && (
+                            <div className="ionizing-warning" style={{
+                                display:'flex',alignItems:'center',gap:'14px',
+                                background:'rgba(250,204,21,0.08)',
+                                border:'1.5px solid rgba(250,204,21,0.4)',
+                                borderRadius:'10px',
+                                padding:'12px 16px',
+                                marginTop:'8px',
+                            }}>
+                                <HazardSymbol size={48}/>
+                                <div>
+                                    <div style={{fontWeight:700,fontSize:'1rem',color:'#facc15',
+                                        letterSpacing:'0.02em'}}>
+                                        Joniserande strålning!
+                                    </div>
+                                    <div style={{fontSize:'0.78rem',color:'#fde68a',lineHeight:1.5,
+                                        marginTop:'3px'}}>
+                                        Denna strålning har tillräcklig energi för att slå loss elektroner från atomer och molekyler, vilket kan skada levande vävnad.
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Value displays */}
+                    <div className="glass-card" style={{padding:'20px 24px'}}>
+                        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'12px'}}>
+
+                            {/* Wavelength */}
+                            <div className="value-card">
+                                <div className="value-label">Våglängd</div>
+                                <div className="value-number" style={{color: isVisible ? visibleColor : region.textColor}}>
+                                    <em>λ</em> = {lamFmt.val}
+                                    <span className="unit">{lamFmt.unit}</span>
+                                </div>
+                            </div>
+
+                            {/* Frequency */}
+                            <div className="value-card">
+                                <div className="value-label">Frekvens</div>
+                                <div className="value-number">
+                                    <em>f</em> = {freqFmt.val}
+                                    <span className="unit">{freqFmt.unit}</span>
+                                </div>
+                            </div>
+
+                            {/* Energy */}
+                            <div className="value-card">
+                                <div className="value-label">Fotonenergi</div>
+                                <div className="value-number">
+                                    <em>E</em> = {eFmt.val}
+                                    <span className="unit">{eFmt.unit}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Wave animation */}
+                    <div className="glass-card" style={{padding:'16px 20px'}}>
+                        <div style={{fontSize:'0.72rem',fontWeight:600,color:'#64748b',
+                            textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:'10px'}}>
+                            Våganimation (illustrativ skala)
+                        </div>
+                        <WaveCanvas
+                            wavelengthM={wavelengthM}
+                            color={region.color}
+                            isIonizing={isIonizing}
+                            isVisible={isVisible}
+                            visibleColor={visibleColor}
+                        />
+                        {isVisible && (
+                            <div style={{
+                                marginTop:'10px',
+                                display:'flex',
+                                alignItems:'center',
+                                gap:'8px',
+                                fontSize:'0.78rem',
+                                color: visibleColor,
+                            }}>
+                                <span style={{
+                                    display:'inline-block',
+                                    width:'14px',height:'14px',
+                                    borderRadius:'50%',
+                                    background: visibleColor,
+                                    boxShadow: `0 0 8px ${visibleColor}`,
+                                    flexShrink:0,
+                                }}/>
+                                Synlig färg: {Math.round(wavelengthM * 1e9)} nm
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* ── Explanation ── */}
+            <div className="glass-card" style={{padding:'28px 32px'}}>
+                <h2 style={{fontSize:'1rem',fontWeight:700,color:'#e2e8f0',
+                    marginBottom:'20px',letterSpacing:'0.01em'}}>
+                    Sambanden i det elektromagnetiska spektrumet
+                </h2>
+
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',
+                    gap:'16px',marginBottom:'20px'}}>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.75rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Ljusets hastighet
+                        </div>
+                        <div style={{fontSize:'1.05rem',color:'#38bdf8',fontWeight:600}}>
+                            <em>c</em> = <em>λ</em> · <em>f</em>
+                        </div>
+                        <div style={{fontSize:'0.78rem',color:'#64748b',marginTop:'4px'}}>
+                            c = 3,00 × 10⁸ m/s i vakuum
+                        </div>
+                    </div>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.75rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Fotonens energi
+                        </div>
+                        <div style={{fontSize:'1.05rem',color:'#a855f7',fontWeight:600}}>
+                            <em>E</em> = <em>h</em> · <em>f</em>
+                        </div>
+                        <div style={{fontSize:'0.78rem',color:'#64748b',marginTop:'4px'}}>
+                            h = 6,63 × 10⁻³⁴ J·s (Plancks konstant)
+                        </div>
+                    </div>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.75rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Sambandet λ och E
+                        </div>
+                        <div style={{fontSize:'1.05rem',color:'#22c55e',fontWeight:600}}>
+                            <em>E</em> = <em>h</em> · <em>c</em> / <em>λ</em>
+                        </div>
+                        <div style={{fontSize:'0.78rem',color:'#64748b',marginTop:'4px'}}>
+                            Kortare våglängd → högre energi
+                        </div>
+                    </div>
+                </div>
+
+                <div style={{
+                    display:'grid',
+                    gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',
+                    gap:'16px',
+                    fontSize:'0.85rem',
+                    color:'#94a3b8',
+                    lineHeight:1.7,
+                }}>
+                    <div>
+                        <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>
+                            Varför kortare våglängd ger mer energi
+                        </strong>
+                        Eftersom ljusets hastighet <em>c</em> är konstant gäller att en kortare våglängd <em>λ</em> innebär en högre frekvens <em>f</em>. Fotonens energi är proportionell mot frekvensen (<em>E = h·f</em>), och därför bär fotoner med kort våglängd — som röntgen och gammastrålning — mycket mer energi än t.ex. radiovågor.
+                    </div>
+                    <div>
+                        <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>
+                            Joniserande strålning
+                        </strong>
+                        Strålning med våglängd kortare än ungefär 125 nm (UV-C, röntgen, gamma) kallas joniserande. Fotonerna har tillräcklig energi för att slå loss elektroner från atomer. Detta kan bryta kemiska bindningar i DNA och orsaka cellskador. Strålning med längre våglängd — som synligt ljus, IR och radiovågor — saknar denna förmåga och kallas icke-joniserande.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    );
+}
+
+// Mount
+const container = document.getElementById('root');
+const rootEl = ReactDOM.createRoot(container);
+rootEl.render(<EMSpectrum/>);
+</script>
+
+</body>
+</html>

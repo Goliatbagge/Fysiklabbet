@@ -55,6 +55,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-massdefekt.html',
     'fysik1-stralning-genomtranglighet.html',
     'fysik2-vaxelstromsgenerator.html',
+    'fysik2-em-stralning.html',
     'om.html',
     'kontakt.html'
 ];

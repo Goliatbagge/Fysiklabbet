@@ -397,6 +397,66 @@ body {
     text-shadow: 0 0 10px var(--primary-glow);
 }
 
+/* Updates Section */
+.updates-section {
+    margin-top: 3rem;
+}
+
+.updates-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+    background: var(--container-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--container-border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.update-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s ease;
+}
+
+.update-item:last-child {
+    border-bottom: none;
+}
+
+.update-item:hover {
+    background: rgba(56, 189, 248, 0.04);
+}
+
+.update-date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    white-space: nowrap;
+    min-width: 90px;
+    flex-shrink: 0;
+}
+
+.update-text {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.update-text a {
+    color: var(--text-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.update-text a:hover {
+    color: var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-glow);
+}
+
 /* Chapter Cards */
 .chapters-grid {
     display: grid;

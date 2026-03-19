@@ -198,9 +198,9 @@
             gamma: {
                 none:      1.00,
                 textile:   0.98,
-                aluminum:  0.90,
+                aluminum:  0.95,
                 thinlead:  0.90,
-                thicklead: 0.10,
+                thicklead: 0.20,
             },
         };
 
@@ -438,33 +438,78 @@
             // ── Rita partiklar ─────────────────────────────────────────────────
             for (const p of particles) {
                 ctx.globalAlpha = p.alpha;
-                const col = PARTICLE_COLOR[p.type];
-                const r = p.type === 'alpha' ? 4.5 : p.type === 'beta' ? 3.5 : 3;
 
-                if (p.type === 'gamma') {
-                    // Gamma: prickad linje-stil
+                if (p.type === 'alpha') {
+                    // Alfa: 4 bollar (2 röda protoner + 2 blå neutroner) i kluster
+                    const br = 3.2; // boll-radie
+                    const off = 3.0; // offset från centrum
+                    const positions = [
+                        { dx: -off, dy: -off, color: '#ef4444' }, // proton
+                        { dx:  off, dy: -off, color: '#3b82f6' }, // neutron
+                        { dx: -off, dy:  off, color: '#3b82f6' }, // neutron
+                        { dx:  off, dy:  off, color: '#ef4444' }, // proton
+                    ];
+                    // Glöd runt hela klustret
+                    const ag = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 14);
+                    ag.addColorStop(0, 'rgba(239, 68, 68, 0.25)');
+                    ag.addColorStop(1, 'transparent');
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-                    ctx.fillStyle = col;
+                    ctx.arc(p.x, p.y, 14, 0, Math.PI * 2);
+                    ctx.fillStyle = ag;
                     ctx.fill();
+                    // Rita de fyra bollarna
+                    for (const bp of positions) {
+                        ctx.beginPath();
+                        ctx.arc(p.x + bp.dx, p.y + bp.dy, br, 0, Math.PI * 2);
+                        ctx.fillStyle = bp.color;
+                        ctx.fill();
+                        ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                        // Highlight
+                        ctx.beginPath();
+                        ctx.arc(p.x + bp.dx - br * 0.25, p.y + bp.dy - br * 0.25, br * 0.35, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+                        ctx.fill();
+                    }
+                } else if (p.type === 'beta') {
+                    // Beta: en blå glödande boll, mindre än alfa
+                    const br = 2.5;
+                    // Yttre glöd
+                    const bg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, br * 4);
+                    bg.addColorStop(0, 'rgba(96, 165, 250, 0.5)');
+                    bg.addColorStop(0.5, 'rgba(96, 165, 250, 0.15)');
+                    bg.addColorStop(1, 'transparent');
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, r * 1.8, 0, Math.PI * 2);
-                    ctx.strokeStyle = col;
-                    ctx.lineWidth = 1;
-                    ctx.globalAlpha = p.alpha * 0.35;
-                    ctx.stroke();
+                    ctx.arc(p.x, p.y, br * 4, 0, Math.PI * 2);
+                    ctx.fillStyle = bg;
+                    ctx.fill();
+                    // Kärna
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, br, 0, Math.PI * 2);
+                    ctx.fillStyle = '#93c5fd';
+                    ctx.fill();
+                    // Ljus mitt
+                    ctx.beginPath();
+                    ctx.arc(p.x - br * 0.2, p.y - br * 0.2, br * 0.5, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                    ctx.fill();
                 } else {
+                    // Gamma: pyttesmå vita skinande punkter
+                    const gr = 1.2;
+                    // Yttre glöd
+                    const gg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, gr * 5);
+                    gg.addColorStop(0, 'rgba(255, 255, 255, 0.7)');
+                    gg.addColorStop(0.3, 'rgba(200, 255, 200, 0.2)');
+                    gg.addColorStop(1, 'transparent');
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-                    ctx.fillStyle = col;
+                    ctx.arc(p.x, p.y, gr * 5, 0, Math.PI * 2);
+                    ctx.fillStyle = gg;
                     ctx.fill();
-                    // Liten glöd
-                    const pg = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 2.5);
-                    pg.addColorStop(0, col + '60');
-                    pg.addColorStop(1, 'transparent');
+                    // Vit kärna
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, r * 2.5, 0, Math.PI * 2);
-                    ctx.fillStyle = pg;
+                    ctx.arc(p.x, p.y, gr, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffffff';
                     ctx.fill();
                 }
             }
@@ -556,7 +601,7 @@
                     const rate = EMISSION_RATE[st.source];
                     if (rate > 0 && now - st.lastEmit > 1000 / rate) {
                         st.lastEmit = now;
-                        const angle = (Math.random() - 0.5) * 0.55; // spridning
+                        const angle = (Math.random() - 0.5) * 0.18; // spridning
                         const speed = W * (0.28 + Math.random() * 0.06); // px/s
                         const trans = TRANSMISSION[st.source]?.[st.barrier] ?? 0;
                         const passes = Math.random() < trans;

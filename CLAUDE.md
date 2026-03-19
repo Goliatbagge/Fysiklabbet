@@ -145,8 +145,9 @@ const xAxisLabelY = (minY < 0 && maxY > 0)
 4. [ ] Uppdatera `verify-navigation.js` med filnamnet
 5. [ ] Kör `node .claude/verify-navigation.js`
 6. [ ] Lägg till kort i `fysik1.html` eller `fysik2.html`
-7. [ ] Testa i webbläsare
-8. [ ] Verifiera decimalformatering (komma, inte punkt)
+7. [ ] Lägg till rad i "Senaste uppdateringar" i `index.html` (behåll max 4–5 poster, ta bort äldsta)
+8. [ ] Testa i webbläsare
+9. [ ] Verifiera decimalformatering (komma, inte punkt)
 
 ## CDN-länkar (standard)
 

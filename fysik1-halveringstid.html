@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halveringstid - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a0a1a;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+            transition: all 0.25s ease;
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
+            transform: translateY(-1px);
+        }
+        .btn-primary:active {
+            transform: translateY(0px);
+        }
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: #94a3b8;
+            font-weight: 600;
+            transition: all 0.25s ease;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+        }
+        canvas {
+            display: block;
+            border-radius: 0.75rem;
+        }
+        .breadcrumb { color: #64748b; font-size: 0.8rem; }
+        .breadcrumb a { color: #38bdf8; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .explanation-box {
+            background: rgba(15, 23, 42, 0.75);
+            border-left: 3px solid rgba(56, 189, 248, 0.5);
+            border-radius: 0 0.5rem 0.5rem 0;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.65;
+        }
+        .legend-dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link active">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback, useMemo } = React;
+
+        const formatNumber = (num, decimals = 2) => {
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        const formatPercent = (num) => {
+            return Number.isInteger(num) ? String(num) : formatNumber(num, 1);
+        };
+
+        // Seeded PRNG for reproducible randomness
+        function seededRng(seed) {
+            let s = seed >>> 0;
+            return function () {
+                s |= 0; s = s + 0x6D2B79F5 | 0;
+                let t = Math.imul(s ^ s >>> 15, 1 | s);
+                t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+                return ((t ^ t >>> 14) >>> 0) / 4294967296;
+            };
+        }
+
+        const GRID_COLS = 40;
+        const GRID_ROWS = 25;
+
+        // Generate initial nuclei grid
+        function generateNuclei(seed = 42) {
+            const nuclei = [];
+            for (let row = 0; row < GRID_ROWS; row++) {
+                for (let col = 0; col < GRID_COLS; col++) {
+                    nuclei.push({
+                        id: row * GRID_COLS + col,
+                        row,
+                        col,
+                        decayedAtStep: -1,
+                    });
+                }
+            }
+            return nuclei;
+        }
+
+        // Pre-compute decay order: at each half-life step, which nuclei decay?
+        function computeDecaySchedule(nuclei, seed = 123) {
+            const rng = seededRng(seed);
+            const schedule = [[], [], [], [], []]; // 5 half-life steps
+            let remaining = nuclei.map(n => n.id);
+
+            for (let step = 0; step < 5; step++) {
+                // Shuffle remaining
+                for (let i = remaining.length - 1; i > 0; i--) {
+                    const j = Math.floor(rng() * (i + 1));
+                    [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+                }
+                // Half of remaining decay
+                const halfCount = Math.round(remaining.length / 2);
+                const decaying = remaining.slice(0, halfCount);
+                const surviving = remaining.slice(halfCount);
+                schedule[step] = decaying;
+                remaining = surviving;
+            }
+            return schedule;
+        }
+
+        const TOTAL_NUCLEI = 1000;
+        const HALF_LIFE_STEPS = 5;
+
+        function HalveringstidSimulation() {
+            const canvasRef = useRef(null);
+            const [currentStep, setCurrentStep] = useState(0); // 0 = start (all active), 1-5 = after each half-life
+            const [nuclei] = useState(() => generateNuclei(42));
+            const [decaySchedule] = useState(() => computeDecaySchedule(nuclei, 123));
+
+            // Compute which nuclei are decayed at current step
+            const decayedSet = useMemo(() => {
+                const set = new Set();
+                for (let s = 0; s < currentStep; s++) {
+                    decaySchedule[s].forEach(id => set.add(id));
+                }
+                return set;
+            }, [currentStep, decaySchedule]);
+
+            const remainingCount = TOTAL_NUCLEI - decayedSet.size;
+            const remainingPercent = (remainingCount / TOTAL_NUCLEI) * 100;
+
+            // Data points for graph
+            const dataPoints = useMemo(() => {
+                const points = [{ step: 0, percent: 100 }];
+                let count = TOTAL_NUCLEI;
+                for (let s = 0; s < HALF_LIFE_STEPS; s++) {
+                    count -= decaySchedule[s].length;
+                    points.push({ step: s + 1, percent: (count / TOTAL_NUCLEI) * 100 });
+                }
+                return points;
+            }, [decaySchedule]);
+
+            const nextStep = () => {
+                if (currentStep < HALF_LIFE_STEPS) {
+                    setCurrentStep(prev => prev + 1);
+                }
+            };
+
+            const prevStep = () => {
+                if (currentStep > 0) {
+                    setCurrentStep(prev => prev - 1);
+                }
+            };
+
+            const reset = () => {
+                setCurrentStep(0);
+            };
+
+            // Draw canvas
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                const W = canvas.width;
+                const H = canvas.height;
+
+                ctx.clearRect(0, 0, W, H);
+
+                // Background
+                ctx.fillStyle = '#0f172a';
+                ctx.fillRect(0, 0, W, H);
+
+                // ─── Nuclei grid (top area) ─────────────────────
+                const gridPadX = 20;
+                const gridPadY = 15;
+                const gridW = W - gridPadX * 2;
+                const gridH = 180;
+                const cellW = gridW / GRID_COLS;
+                const cellH = gridH / GRID_ROWS;
+                const nucleusRadius = Math.min(cellW, cellH) * 0.40;
+
+                nuclei.forEach(n => {
+                    const cx = gridPadX + n.col * cellW + cellW / 2;
+                    const cy = gridPadY + n.row * cellH + cellH / 2;
+                    const isDecayed = decayedSet.has(n.id);
+
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, nucleusRadius, 0, Math.PI * 2);
+
+                    if (isDecayed) {
+                        ctx.fillStyle = '#4b5563';
+                    } else {
+                        ctx.fillStyle = '#3b82f6';
+                    }
+                    ctx.fill();
+                });
+
+                // Grid label
+                ctx.font = '600 13px Poppins, sans-serif';
+                ctx.fillStyle = '#94a3b8';
+                ctx.textAlign = 'center';
+                ctx.fillText(`${remainingCount} av ${TOTAL_NUCLEI} kärnor kvar (${formatPercent(remainingPercent)} %)`, W / 2, gridPadY + gridH + 20);
+
+                // ─── Graph ─────────────────────────────
+                const graphLeft = 70;
+                const graphRight = W - 30;
+                const graphTop = gridPadY + gridH + 45;
+                const graphBottom = H - 35;
+                const graphWidth = graphRight - graphLeft;
+                const graphHeight = graphBottom - graphTop;
+
+                // Axes
+                ctx.strokeStyle = '#38bdf8';
+                ctx.lineWidth = 2;
+
+                // Y-axis
+                ctx.beginPath();
+                ctx.moveTo(graphLeft, graphTop - 10);
+                ctx.lineTo(graphLeft, graphBottom);
+                ctx.stroke();
+
+                // X-axis
+                ctx.beginPath();
+                ctx.moveTo(graphLeft, graphBottom);
+                ctx.lineTo(graphRight + 10, graphBottom);
+                ctx.stroke();
+
+                // Y-axis arrow
+                ctx.beginPath();
+                ctx.moveTo(graphLeft - 5, graphTop - 2);
+                ctx.lineTo(graphLeft, graphTop - 12);
+                ctx.lineTo(graphLeft + 5, graphTop - 2);
+                ctx.fillStyle = '#38bdf8';
+                ctx.fill();
+
+                // X-axis arrow
+                ctx.beginPath();
+                ctx.moveTo(graphRight + 2, graphBottom - 5);
+                ctx.lineTo(graphRight + 12, graphBottom);
+                ctx.lineTo(graphRight + 2, graphBottom + 5);
+                ctx.fillStyle = '#38bdf8';
+                ctx.fill();
+
+                // Y-axis labels & grid lines
+                const yValues = [100, 50, 25, 12.5, 6.25];
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+
+                yValues.forEach(val => {
+                    const y = graphBottom - (val / 100) * graphHeight;
+
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(graphLeft + 1, y);
+                    ctx.lineTo(graphRight, y);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(graphLeft - 5, y);
+                    ctx.lineTo(graphLeft, y);
+                    ctx.stroke();
+
+                    ctx.font = '12px Poppins, sans-serif';
+                    ctx.fillStyle = '#cbd5e1';
+                    ctx.fillText(formatPercent(val), graphLeft - 10, y);
+                });
+
+                ctx.fillText('0', graphLeft - 10, graphBottom);
+
+                // Y-axis title
+                ctx.save();
+                ctx.translate(16, graphTop + graphHeight / 2);
+                ctx.rotate(-Math.PI / 2);
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = 'italic 13px Poppins, sans-serif';
+                ctx.fillStyle = '#94a3b8';
+                ctx.fillText('Återstående mängd (%)', 0, 0);
+                ctx.restore();
+
+                // X-axis labels
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                for (let i = 0; i <= HALF_LIFE_STEPS; i++) {
+                    const x = graphLeft + (i / HALF_LIFE_STEPS) * graphWidth;
+
+                    if (i > 0) {
+                        ctx.strokeStyle = '#38bdf8';
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(x, graphBottom);
+                        ctx.lineTo(x, graphBottom + 5);
+                        ctx.stroke();
+
+                        ctx.setLineDash([4, 4]);
+                        ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(x, graphTop);
+                        ctx.lineTo(x, graphBottom - 1);
+                        ctx.stroke();
+                        ctx.setLineDash([]);
+                    }
+
+                    ctx.font = '12px Poppins, sans-serif';
+                    ctx.fillStyle = '#cbd5e1';
+                    ctx.fillText(String(i), x, graphBottom + 8);
+                }
+
+                // X-axis title
+                ctx.font = 'italic 13px Poppins, sans-serif';
+                ctx.fillStyle = '#94a3b8';
+                ctx.textAlign = 'center';
+                ctx.fillText('Antal halveringstider', graphLeft + graphWidth / 2, graphBottom + 26);
+
+                // ─── Smooth exponential curve (faded, full range) ───
+                ctx.strokeStyle = 'rgba(239, 68, 68, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let i = 0; i <= 200; i++) {
+                    const t = (i / 200) * HALF_LIFE_STEPS;
+                    const percent = 100 * Math.pow(0.5, t);
+                    const x = graphLeft + (t / HALF_LIFE_STEPS) * graphWidth;
+                    const y = graphBottom - (percent / 100) * graphHeight;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // ─── Revealed portion of curve ───
+                if (currentStep > 0) {
+                    ctx.strokeStyle = '#ef4444';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    for (let i = 0; i <= 200; i++) {
+                        const t = (i / 200) * currentStep;
+                        const percent = 100 * Math.pow(0.5, t);
+                        const x = graphLeft + (t / HALF_LIFE_STEPS) * graphWidth;
+                        const y = graphBottom - (percent / 100) * graphHeight;
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+
+                // ─── Data points and dashed lines ───
+                for (let i = 0; i <= currentStep; i++) {
+                    const pt = dataPoints[i];
+                    const x = graphLeft + (pt.step / HALF_LIFE_STEPS) * graphWidth;
+                    const y = graphBottom - (pt.percent / 100) * graphHeight;
+
+                    if (i > 0) {
+                        ctx.setLineDash([5, 5]);
+                        ctx.strokeStyle = 'rgba(203, 213, 225, 0.3)';
+                        ctx.lineWidth = 1;
+
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(graphLeft, y);
+                        ctx.stroke();
+
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(x, graphBottom);
+                        ctx.stroke();
+
+                        ctx.setLineDash([]);
+                    }
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, 6, 0, Math.PI * 2);
+                    ctx.fillStyle = '#0f172a';
+                    ctx.fill();
+                    ctx.strokeStyle = '#f8fafc';
+                    ctx.lineWidth = 2.5;
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = '#f8fafc';
+                    ctx.fill();
+                }
+
+            }, [currentStep, nuclei, decayedSet, dataPoints, remainingCount, remainingPercent]);
+
+            return (
+                <div className="max-w-6xl mx-auto px-4 py-6" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                    <div className="breadcrumb mb-4">
+                        <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik 1</a> / Halveringstid
+                    </div>
+
+                    <h1 className="text-3xl font-bold text-white mb-2 glow-text">Halveringstid</h1>
+                    <p className="text-slate-400 mb-6 text-sm leading-relaxed max-w-2xl">
+                        Utforska hur radioaktiva kärnor sönderfaller exponentiellt.
+                        Stega dig genom fem halveringstider och se hur antalet aktiva kärnor minskar.
+                    </p>
+
+                    <div className="flex gap-5" style={{ alignItems: 'flex-start' }}>
+                        {/* Canvas */}
+                        <div className="glass-card rounded-xl p-4" style={{ flex: '1 1 0' }}>
+                            <canvas
+                                ref={canvasRef}
+                                width={700}
+                                height={520}
+                                className="w-full"
+                                style={{ background: '#0f172a' }}
+                            />
+                        </div>
+
+                        {/* Sidebar: controls + info */}
+                        <div style={{ width: 240, flexShrink: 0 }}>
+                            {/* Step controls */}
+                            <div className="glass-card rounded-xl p-4 mb-4">
+                                <div className="text-center mb-4">
+                                    <span className="text-slate-400 text-xs">Halveringstid</span>
+                                    <div className="text-3xl font-bold text-sky-400">{currentStep} / {HALF_LIFE_STEPS}</div>
+                                </div>
+
+                                <div className="flex flex-col gap-2">
+                                    <button
+                                        onClick={nextStep}
+                                        disabled={currentStep >= HALF_LIFE_STEPS}
+                                        className="btn-primary px-4 py-2.5 rounded-lg text-sm w-full"
+                                        style={{ opacity: currentStep >= HALF_LIFE_STEPS ? 0.4 : 1, cursor: currentStep >= HALF_LIFE_STEPS ? 'default' : 'pointer' }}
+                                    >
+                                        Nästa halveringstid →
+                                    </button>
+
+                                    <button
+                                        onClick={prevStep}
+                                        disabled={currentStep === 0}
+                                        className="btn-secondary px-4 py-2 rounded-lg text-sm w-full"
+                                        style={{ opacity: currentStep === 0 ? 0.4 : 1, cursor: currentStep === 0 ? 'default' : 'pointer' }}
+                                    >
+                                        ← Föregående
+                                    </button>
+
+                                    <button
+                                        onClick={reset}
+                                        className="btn-secondary px-4 py-2 rounded-lg text-sm w-full"
+                                    >
+                                        Återställ
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Stats */}
+                            <div className="glass-card rounded-xl p-4 mb-4">
+                                <div className="mb-3 text-center">
+                                    <div className="text-slate-400 text-xs mb-1">Aktiva kärnor</div>
+                                    <div className="text-2xl font-bold text-emerald-400">{remainingCount}</div>
+                                </div>
+                                <div className="mb-3 text-center">
+                                    <div className="text-slate-400 text-xs mb-1">Sönderfallna</div>
+                                    <div className="text-2xl font-bold text-red-400">{TOTAL_NUCLEI - remainingCount}</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-slate-400 text-xs mb-1">Återstående</div>
+                                    <div className="text-2xl font-bold text-sky-400">{formatPercent(remainingPercent)} %</div>
+                                </div>
+                            </div>
+
+                            {/* Legend */}
+                            <div className="glass-card rounded-xl p-4">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className="legend-dot" style={{ background: '#3b82f6' }}></span>
+                                    <span className="text-slate-300 text-xs">Aktiva kärnor</span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <span className="legend-dot" style={{ background: '#4b5563' }}></span>
+                                    <span className="text-slate-300 text-xs">Sönderfallna kärnor</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Explanation */}
+                    <div className="glass-card rounded-xl p-5 mt-5">
+                        <h3 className="text-white font-semibold mb-3">Vad är halveringstid?</h3>
+                        <div className="explanation-box mb-3">
+                            <strong>Halveringstid</strong> (<em>t</em><sub>½</sub>) är den tid det tar
+                            för hälften av de radioaktiva kärnorna i ett prov att sönderfalla.
+                            Efter varje halveringstid halveras antalet aktiva kärnor.
+                        </div>
+                        <div className="explanation-box mb-3">
+                            <strong>Exponentiellt avtagande:</strong> Mängden kvarvarande kärnor följer formeln
+                            <em> N</em>(<em>t</em>) = <em>N</em>₀ &middot; (½)<sup><em>t</em>/<em>t</em><sub>½</sub></sup>,
+                            där <em>N</em>₀ är ursprungliga antalet kärnor.
+                        </div>
+                        <div className="explanation-box">
+                            <strong>Exempel:</strong> Om vi börjar med 1 000 kärnor:
+                            efter 1 halveringstid finns ca 500 kvar,
+                            efter 2 ca 250,
+                            efter 3 ca 125,
+                            efter 4 ca 63,
+                            efter 5 ca 31.
+                            Sönderfallet är slumpmässigt, så exakta antal varierar.
+                        </div>
+                    </div>
+
+                    <footer className="text-center text-slate-600 text-xs mt-8 mb-4">
+                        &copy; 2025 Fysiklabbet. Skapad för gymnasieelever.
+                    </footer>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<HalveringstidSimulation />);
+    </script>
+</body>
+</html>

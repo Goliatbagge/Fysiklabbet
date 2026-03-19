@@ -66,7 +66,13 @@
             box-shadow: 0 0 8px rgba(255,255,255,0.9);
             transform: translateX(-50%);
             pointer-events: none;
-            transition: left 0.05s linear;
+            z-index: 2;
+        }
+        .spectrum-bar-interactive {
+            cursor: pointer;
+        }
+        .spectrum-bar-interactive:active {
+            cursor: grabbing;
         }
         .spectrum-indicator::before {
             content: '';
@@ -367,7 +373,7 @@ function visibleToRgb(lamM) {
 // ── Helper: get region for a wavelength ──────────────────────────────────────
 function getRegion(lamM) {
     for (const r of REGIONS) {
-        if (lamM >= r.minLam && lamM < r.maxLam) return r;
+        if (lamM >= r.minLam && lamM <= r.maxLam) return r;
     }
     return REGIONS[REGIONS.length - 1];
 }
@@ -404,6 +410,84 @@ function HazardSymbol({ size = 56 }) {
     );
 }
 
+// ── Bar drag hook ────────────────────────────────────────────────────────────
+function useBarDrag(barRef, posToLam, onLamChange) {
+    const dragging = useRef(false);
+    const rafId = useRef(null);
+    const pendingLam = useRef(null);
+    const callbackRef = useRef(onLamChange);
+    const posToLamRef = useRef(posToLam);
+    callbackRef.current = onLamChange;
+    posToLamRef.current = posToLam;
+
+    const getPos = useCallback((e) => {
+        const bar = barRef.current;
+        if (!bar) return null;
+        const rect = bar.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        return Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    }, [barRef]);
+
+    // Move the indicator element directly via DOM for instant feedback
+    const moveIndicator = useCallback((pos) => {
+        const bar = barRef.current;
+        if (!bar) return;
+        const indicator = bar.querySelector('.spectrum-indicator');
+        if (indicator) indicator.style.left = `${pos * 100}%`;
+    }, [barRef]);
+
+    const flush = useCallback(() => {
+        if (pendingLam.current !== null && callbackRef.current) {
+            callbackRef.current(pendingLam.current);
+            pendingLam.current = null;
+        }
+        rafId.current = null;
+    }, []);
+
+    const onMove = useCallback((e) => {
+        if (!dragging.current) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        if (pos !== null) {
+            // Instant DOM update for the indicator
+            moveIndicator(pos);
+            pendingLam.current = posToLamRef.current(pos);
+            if (!rafId.current) {
+                rafId.current = requestAnimationFrame(flush);
+            }
+        }
+    }, [getPos, moveIndicator, flush]);
+
+    const onUp = useCallback(() => {
+        dragging.current = false;
+        if (rafId.current) { cancelAnimationFrame(rafId.current); rafId.current = null; }
+        if (pendingLam.current !== null && callbackRef.current) {
+            callbackRef.current(pendingLam.current);
+            pendingLam.current = null;
+        }
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('mouseup', onUp);
+        window.removeEventListener('touchmove', onMove);
+        window.removeEventListener('touchend', onUp);
+    }, [onMove, flush]);
+
+    const onDown = useCallback((e) => {
+        e.preventDefault();
+        dragging.current = true;
+        const pos = getPos(e);
+        if (pos !== null) {
+            moveIndicator(pos);
+            if (callbackRef.current) callbackRef.current(posToLamRef.current(pos));
+        }
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onUp);
+        window.addEventListener('touchmove', onMove, { passive: false });
+        window.addEventListener('touchend', onUp);
+    }, [getPos, onMove, onUp, moveIndicator]);
+
+    return onDown;
+}
+
 // ── Visible spectrum bar (zoomed) ─────────────────────────────────────────────
 const VIS_MIN = 380; // nm
 const VIS_MAX = 700; // nm
@@ -421,7 +505,7 @@ const VISIBLE_COLORS = [
     { nm: 700, name: 'Mörkröd',    color: '#991b1b' },
 ];
 
-function VisibleSpectrumBar({ currentLam, onBack }) {
+function VisibleSpectrumBar({ currentLam, onBack, onLamChange }) {
     const nm = currentLam * 1e9;
     const clampedNm = Math.max(VIS_MIN, Math.min(VIS_MAX, nm));
     // Inverted: long λ (red, 700nm) at left (pos=0), short λ (violet, 380nm) at right (pos=1)
@@ -433,6 +517,14 @@ function VisibleSpectrumBar({ currentLam, onBack }) {
         const pct = ((VIS_MAX - wl) / (VIS_MAX - VIS_MIN)) * 100;
         gradientStops.push(`${visibleToRgb(wl * 1e-9)} ${pct.toFixed(1)}%`);
     }
+
+    // Drag support: pos (0=left=red 700nm, 1=right=violet 380nm) → wavelength
+    const barRef = useRef(null);
+    const posToLam = useCallback((p) => {
+        const nmVal = VIS_MAX - p * (VIS_MAX - VIS_MIN);
+        return nmVal * 1e-9;
+    }, []);
+    const onBarDown = useBarDrag(barRef, posToLam, onLamChange);
 
     return (
         <div style={{width:'100%'}}>
@@ -447,7 +539,12 @@ function VisibleSpectrumBar({ currentLam, onBack }) {
 
             {/* Visible spectrum bar */}
             <div className="spectrum-bar-wrapper" style={{marginBottom:'34px'}}>
-                <div style={{
+                <div
+                    ref={barRef}
+                    className="spectrum-bar-interactive"
+                    onMouseDown={onBarDown}
+                    onTouchStart={onBarDown}
+                    style={{
                     background: `linear-gradient(to right, ${gradientStops.join(', ')})`,
                     width: '100%',
                     height: '48px',
@@ -496,8 +593,8 @@ function VisibleSpectrumBar({ currentLam, onBack }) {
 }
 
 // ── Spectrum bar ──────────────────────────────────────────────────────────────
-function SpectrumBar({ currentLam, onZoomVisible }) {
-    const pos = lamToPos(currentLam); // 0 = gamma (left), 1 = radio (right)
+function SpectrumBar({ currentLam, onZoomVisible, onLamChange }) {
+    const pos = lamToPos(currentLam); // 0 = radio (left), 1 = gamma (right)
 
     // Gradient segments: left = long wavelength (radio) → right = short wavelength (gamma)
     const gradientStyle = {
@@ -532,6 +629,15 @@ function SpectrumBar({ currentLam, onZoomVisible }) {
 
     const leftPercent = pos * 100;
 
+    // Drag support: pos (0=left=radio long λ, 1=right=gamma short λ) → wavelength
+    const barRef = useRef(null);
+    const posToLam = useCallback((p) => {
+        // p=0 → LAM_MAX (radio), p=1 → LAM_MIN (gamma)
+        const logLam = Math.log10(LAM_MAX) - p * (Math.log10(LAM_MAX) - Math.log10(LAM_MIN));
+        return Math.pow(10, logLam);
+    }, []);
+    const onBarDown = useBarDrag(barRef, posToLam, onLamChange);
+
     // Region label ticks
     const regionTicks = [
         { label: 'Gamma',       pos: lamToPos(1e-13) },
@@ -547,7 +653,12 @@ function SpectrumBar({ currentLam, onZoomVisible }) {
         <div style={{width:'100%'}}>
             {/* Bar */}
             <div className="spectrum-bar-wrapper" style={{marginBottom:'28px'}}>
-                <div style={{
+                <div
+                    ref={barRef}
+                    className="spectrum-bar-interactive"
+                    onMouseDown={onBarDown}
+                    onTouchStart={onBarDown}
+                    style={{
                     ...gradientStyle,
                     width: '100%',
                     height: '36px',
@@ -560,6 +671,8 @@ function SpectrumBar({ currentLam, onZoomVisible }) {
                         className="visible-zoom-btn"
                         style={{left: `${lamToPos(5.5e-7) * 100}%`}}
                         onClick={onZoomVisible}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onTouchStart={(e) => e.stopPropagation()}
                         title="Zooma in på synligt ljus"
                     >
                         🔍 Synligt ljus
@@ -862,6 +975,20 @@ function EMSpectrum() {
         return Math.pow(10, logLam);
     }, [knobAngle, viewMode]);
 
+    // Convert a wavelength (m) to knob angle — used by bar drag
+    const lamToKnobAngle = useCallback((lam) => {
+        let t;
+        if (viewMode === 'visible') {
+            const visLamMin = 3.8e-7;
+            const visLamMax = 7.0e-7;
+            t = (Math.log10(lam) - Math.log10(visLamMax)) / (Math.log10(visLamMin) - Math.log10(visLamMax));
+        } else {
+            t = (Math.log10(lam) - Math.log10(LAM_MAX)) / (Math.log10(LAM_MIN) - Math.log10(LAM_MAX));
+        }
+        t = Math.max(0, Math.min(1, t));
+        setKnobAngle(KNOB_ANGLE_MIN + t * (KNOB_ANGLE_MAX - KNOB_ANGLE_MIN));
+    }, [viewMode]);
+
     const freqHz  = C_LIGHT / wavelengthM;
     const energyJ = H_PLANCK * freqHz;
 
@@ -896,7 +1023,7 @@ function EMSpectrum() {
                     {viewMode === 'full' ? 'Det elektromagnetiska spektrumet' : 'Synligt ljus — detaljvy'}
                 </h2>
                 {viewMode === 'full' ? (
-                    <SpectrumBar currentLam={wavelengthM} onZoomVisible={() => {
+                    <SpectrumBar currentLam={wavelengthM} onLamChange={lamToKnobAngle} onZoomVisible={() => {
                         setViewMode('visible');
                         // Set knob to middle of visible range (~540nm)
                         const targetLam = 5.4e-7;
@@ -908,7 +1035,7 @@ function EMSpectrum() {
                         setKnobAngle(newAngle);
                     }}/>
                 ) : (
-                    <VisibleSpectrumBar currentLam={wavelengthM} onBack={() => setViewMode('full')}/>
+                    <VisibleSpectrumBar currentLam={wavelengthM} onLamChange={lamToKnobAngle} onBack={() => setViewMode('full')}/>
                 )}
             </div>
 

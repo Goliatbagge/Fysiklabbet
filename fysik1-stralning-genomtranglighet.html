@@ -249,7 +249,7 @@
         }
 
         // ─── Canvas-renderare ─────────────────────────────────────────────────
-        function drawScene(ctx, W, H, particles, source, barrier, flashAlpha) {
+        function drawScene(ctx, W, H, particles, source, barrier, flashAlpha, srcXPos, gmLeftPos) {
             // Bakgrund
             ctx.clearRect(0, 0, W, H);
             const bg = ctx.createLinearGradient(0, 0, 0, H);
@@ -262,9 +262,10 @@
             const midY = H / 2;
 
             // Zone-koordinater
-            const srcX = W * 0.12;         // centrum på preparatet
-            const gmLeft = W * 0.82;        // vänster kant GM-rör
-            const gmRight = W * 0.96;
+            const srcX = srcXPos;
+            const gmW = W * 0.14;
+            const gmLeft = gmLeftPos;
+            const gmRight = gmLeft + gmW;
             const gmMid = (gmLeft + gmRight) / 2;
 
             // Hindrets x-centrum
@@ -544,6 +545,11 @@
                 source: 'none',
                 barrier: 'none',
                 animId: null,
+                // Drag-state
+                srcXFrac: 0.12,    // preparat x-position som andel av W
+                gmLeftFrac: 0.82,  // GM-rör x-position som andel av W
+                dragging: null,    // 'source' | 'gm' | null
+                dragOffsetX: 0,
             });
 
             const [source,       setSourceState]  = useState('none');
@@ -585,7 +591,7 @@
                     const H = canvas.height;
 
                     // ── Geometri ────────────────────────────────────────────────
-                    const srcX     = W * 0.12;
+                    const srcX     = W * st.srcXFrac;
                     const stavLen  = Math.max(60, W * 0.14);
                     const tipX     = srcX + stavLen * 0.4;
                     const tipR     = Math.max(8, W * 0.018);
@@ -594,7 +600,7 @@
                     const bw       = bs.width * (W / 600);
                     const barrierL = barrierCX - bw / 2;
                     const barrierR = barrierCX + bw / 2;
-                    const gmLeft   = W * 0.82;
+                    const gmLeft   = W * st.gmLeftFrac;
                     const midY     = H / 2;
 
                     // ── Emittera nya partiklar ──────────────────────────────────
@@ -686,13 +692,117 @@
 
                     // ── Rita ────────────────────────────────────────────────────
                     const ctx2d = canvas.getContext('2d');
-                    drawScene(ctx2d, W, H, st.particles, st.source, st.barrier, st.flashAlpha);
+                    drawScene(ctx2d, W, H, st.particles, st.source, st.barrier, st.flashAlpha, W * st.srcXFrac, W * st.gmLeftFrac);
                 }
 
                 st.animId = requestAnimationFrame(loop);
                 return () => {
                     cancelAnimationFrame(st.animId);
                     ro.disconnect();
+                };
+            }, []);
+
+            // ── Drag-hantering för preparat och GM-rör ──────────────────
+            const getCanvasPos = (e) => {
+                const canvas = canvasRef.current;
+                if (!canvas) return { x: 0, y: 0 };
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                return {
+                    x: (e.clientX - rect.left) * scaleX,
+                    y: (e.clientY - rect.top) * (canvas.height / rect.height),
+                };
+            };
+
+            const handlePointerDown = (e) => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const pos = getCanvasPos(e);
+                const st = stateRef.current;
+                const W = canvas.width;
+                const H = canvas.height;
+                const midY = H / 2;
+
+                // Preparat-område
+                const srcX = W * st.srcXFrac;
+                const stavLen = Math.max(60, W * 0.14);
+                const stavLeft = srcX - stavLen * 0.6;
+                const tipX = srcX + stavLen * 0.4;
+                const stavH = Math.max(8, W * 0.016);
+                if (pos.x >= stavLeft - 10 && pos.x <= tipX + 15 && pos.y >= midY - stavH * 2 && pos.y <= midY + stavH * 2) {
+                    st.dragging = 'source';
+                    st.dragOffsetX = pos.x - srcX;
+                    canvas.setPointerCapture(e.pointerId);
+                    return;
+                }
+
+                // GM-rör-område
+                const gmLeft = W * st.gmLeftFrac;
+                const gmW = W * 0.14;
+                const gmH = H * 0.40;
+                const gmTop = midY - gmH / 2;
+                if (pos.x >= gmLeft - 5 && pos.x <= gmLeft + gmW + 5 && pos.y >= gmTop - 5 && pos.y <= gmTop + gmH + 5) {
+                    st.dragging = 'gm';
+                    st.dragOffsetX = pos.x - gmLeft;
+                    canvas.setPointerCapture(e.pointerId);
+                    return;
+                }
+            };
+
+            const handlePointerMove = (e) => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const st = stateRef.current;
+                if (!st.dragging) {
+                    // Ändra cursor om man hovrar över draggbara objekt
+                    const pos = getCanvasPos(e);
+                    const W = canvas.width;
+                    const H = canvas.height;
+                    const midY = H / 2;
+                    const srcX = W * st.srcXFrac;
+                    const stavLen = Math.max(60, W * 0.14);
+                    const stavLeft = srcX - stavLen * 0.6;
+                    const tipX = srcX + stavLen * 0.4;
+                    const stavH = Math.max(8, W * 0.016);
+                    const gmLeft = W * st.gmLeftFrac;
+                    const gmW = W * 0.14;
+                    const gmH = H * 0.40;
+                    const gmTop = midY - gmH / 2;
+                    const overSource = pos.x >= stavLeft - 10 && pos.x <= tipX + 15 && pos.y >= midY - stavH * 2 && pos.y <= midY + stavH * 2;
+                    const overGm = pos.x >= gmLeft - 5 && pos.x <= gmLeft + gmW + 5 && pos.y >= gmTop - 5 && pos.y <= gmTop + gmH + 5;
+                    canvas.style.cursor = (overSource || overGm) ? 'grab' : 'default';
+                    return;
+                }
+                canvas.style.cursor = 'grabbing';
+                const pos = getCanvasPos(e);
+                const W = canvas.width;
+                if (st.dragging === 'source') {
+                    let newFrac = (pos.x - st.dragOffsetX) / W;
+                    newFrac = Math.max(0.05, Math.min(0.35, newFrac));
+                    st.srcXFrac = newFrac;
+                } else if (st.dragging === 'gm') {
+                    let newFrac = (pos.x - st.dragOffsetX) / W;
+                    newFrac = Math.max(0.60, Math.min(0.88, newFrac));
+                    st.gmLeftFrac = newFrac;
+                }
+            };
+
+            const handlePointerUp = (e) => {
+                const st = stateRef.current;
+                st.dragging = null;
+                if (canvasRef.current) canvasRef.current.style.cursor = 'default';
+            };
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                canvas.addEventListener('pointerdown', handlePointerDown);
+                canvas.addEventListener('pointermove', handlePointerMove);
+                canvas.addEventListener('pointerup', handlePointerUp);
+                return () => {
+                    canvas.removeEventListener('pointerdown', handlePointerDown);
+                    canvas.removeEventListener('pointermove', handlePointerMove);
+                    canvas.removeEventListener('pointerup', handlePointerUp);
                 };
             }, []);
 

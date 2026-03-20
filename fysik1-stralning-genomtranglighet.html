@@ -191,13 +191,13 @@
             beta: {
                 none:      1.00,
                 textile:   0.95,
-                aluminum:  0.00,
+                aluminum:  0.50,
                 thinlead:  0.00,
                 thicklead: 0.00,
             },
             gamma: {
                 none:      1.00,
-                textile:   0.98,
+                textile:   1.00,
                 aluminum:  0.95,
                 thinlead:  0.90,
                 thicklead: 0.20,
@@ -207,9 +207,9 @@
         // Antal partiklar som skapas per sekund för varje strålkälla
         const EMISSION_RATE = {
             none:  0,
-            alpha: 6,
-            beta:  7,
-            gamma: 8,
+            alpha: 40,
+            beta:  45,
+            gamma: 50,
         };
 
         // Partikelns färg per stråltyp
@@ -249,7 +249,7 @@
         }
 
         // ─── Canvas-renderare ─────────────────────────────────────────────────
-        function drawScene(ctx, W, H, particles, source, barrier, flashAlpha, srcXPos, gmLeftPos) {
+        function drawScene(ctx, W, H, particles, source, barrier, flashAlpha, srcXPos, srcYPos, gmLeftPos, gmYPos, barrierCXPos, barrierCYPos) {
             // Bakgrund
             ctx.clearRect(0, 0, W, H);
             const bg = ctx.createLinearGradient(0, 0, 0, H);
@@ -259,24 +259,25 @@
             ctx.roundRect(0, 0, W, H, 12);
             ctx.fill();
 
-            const midY = H / 2;
-
             // Zone-koordinater
             const srcX = srcXPos;
-            const gmW = W * 0.14;
+            const srcY = srcYPos;
+            const gmY = gmYPos;
+            const gmW = W * 0.28;
             const gmLeft = gmLeftPos;
             const gmRight = gmLeft + gmW;
             const gmMid = (gmLeft + gmRight) / 2;
 
-            // Hindrets x-centrum
-            const barrierCX = W * 0.50;
+            // Hindrets position
+            const barrierCX = barrierCXPos;
+            const barrierCY = barrierCYPos;
             const bs = BARRIER_STYLE[barrier];
             const bw = bs.width * (W / 600);  // skala med canvas-bredd
 
             // ── Rita hinder ────────────────────────────────────────────────────
             if (barrier !== 'none') {
                 const bH = H * 0.68;
-                const bTop = midY - bH / 2;
+                const bTop = barrierCY - bH / 2;
 
                 // Kant-highlight
                 ctx.fillStyle = bs.color;
@@ -315,13 +316,13 @@
             const tipX = srcX + stavLen * 0.4;
 
             // Glasstav - kropp (halvtransparent glas-look)
-            const stavGrad = ctx.createLinearGradient(stavLeft, midY - stavH, stavLeft, midY + stavH);
+            const stavGrad = ctx.createLinearGradient(stavLeft, srcY - stavH, stavLeft, srcY + stavH);
             stavGrad.addColorStop(0, 'rgba(148, 190, 220, 0.35)');
             stavGrad.addColorStop(0.3, 'rgba(200, 220, 240, 0.5)');
             stavGrad.addColorStop(0.7, 'rgba(148, 190, 220, 0.35)');
             stavGrad.addColorStop(1, 'rgba(100, 150, 180, 0.25)');
             ctx.beginPath();
-            ctx.roundRect(stavLeft, midY - stavH, tipX - stavLeft, stavH * 2, [stavH, 2, 2, stavH]);
+            ctx.roundRect(stavLeft, srcY - stavH, tipX - stavLeft, stavH * 2, [stavH, 2, 2, stavH]);
             ctx.fillStyle = stavGrad;
             ctx.fill();
             ctx.strokeStyle = 'rgba(180, 210, 240, 0.4)';
@@ -330,8 +331,8 @@
 
             // Glasreflex (ljusstrimma längs staven)
             ctx.beginPath();
-            ctx.moveTo(stavLeft + stavH, midY - stavH * 0.45);
-            ctx.lineTo(tipX - tipR, midY - stavH * 0.45);
+            ctx.moveTo(stavLeft + stavH, srcY - stavH * 0.45);
+            ctx.lineTo(tipX - tipR, srcY - stavH * 0.45);
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
             ctx.lineWidth = 1.5;
             ctx.stroke();
@@ -339,7 +340,7 @@
             // Handtag/grepp (mörkare ände till vänster)
             const gripW = stavLen * 0.15;
             ctx.beginPath();
-            ctx.roundRect(stavLeft, midY - stavH * 1.15, gripW, stavH * 2.3, [stavH, 0, 0, stavH]);
+            ctx.roundRect(stavLeft, srcY - stavH * 1.15, gripW, stavH * 2.3, [stavH, 0, 0, stavH]);
             ctx.fillStyle = '#374151';
             ctx.fill();
             ctx.strokeStyle = '#4b5563';
@@ -350,17 +351,17 @@
             if (source !== 'none') {
                 const col = PARTICLE_COLOR[source];
                 // Glöd runt spetsen
-                const grd = ctx.createRadialGradient(tipX, midY, tipR * 0.2, tipX, midY, tipR * 3);
+                const grd = ctx.createRadialGradient(tipX, srcY, tipR * 0.2, tipX, srcY, tipR * 3);
                 grd.addColorStop(0, col + '66');
                 grd.addColorStop(1, 'transparent');
                 ctx.beginPath();
-                ctx.arc(tipX, midY, tipR * 3, 0, Math.PI * 2);
+                ctx.arc(tipX, srcY, tipR * 3, 0, Math.PI * 2);
                 ctx.fillStyle = grd;
                 ctx.fill();
 
                 // Preparatklump
                 ctx.beginPath();
-                ctx.arc(tipX, midY, tipR, 0, Math.PI * 2);
+                ctx.arc(tipX, srcY, tipR, 0, Math.PI * 2);
                 ctx.fillStyle = col;
                 ctx.globalAlpha = 0.9;
                 ctx.fill();
@@ -371,7 +372,7 @@
             } else {
                 // Tom spets (inget preparat)
                 ctx.beginPath();
-                ctx.arc(tipX, midY, tipR, 0, Math.PI * 2);
+                ctx.arc(tipX, srcY, tipR, 0, Math.PI * 2);
                 ctx.fillStyle = '#1e293b';
                 ctx.fill();
                 ctx.strokeStyle = '#475569';
@@ -386,19 +387,19 @@
                 ctx.font = `bold ${Math.max(11, W * 0.022)}px Poppins, sans-serif`;
                 ctx.fillStyle = col;
                 ctx.textAlign = 'center';
-                ctx.fillText(srcLabels[source], (stavLeft + tipX) / 2, midY - stavH - 12);
+                ctx.fillText(srcLabels[source], (stavLeft + tipX) / 2, srcY - stavH - 12);
             }
 
             // Etikett under staven
             ctx.font = `${Math.max(9, W * 0.02)}px Poppins, sans-serif`;
             ctx.fillStyle = '#94a3b8';
             ctx.textAlign = 'center';
-            ctx.fillText('Preparat', (stavLeft + tipX) / 2, midY + stavH + 20);
+            ctx.fillText('Preparat', (stavLeft + tipX) / 2, srcY + stavH + 20);
 
             // ── Rita GM-rör ────────────────────────────────────────────────────
-            const gmH = H * 0.40;
-            const gmTop = midY - gmH / 2;
-            const gmW = gmRight - gmLeft;
+            const gmH = H * 0.18;
+            const gmTop = gmY - gmH / 2;
+            // gmW redan definierad ovan
 
             // Cylinder-kropp
             const gmGrad = ctx.createLinearGradient(gmLeft, 0, gmRight, 0);
@@ -421,11 +422,11 @@
 
             // Flash-effekt vid registrering
             if (flashAlpha > 0) {
-                const fl = ctx.createRadialGradient(gmLeft + 3, midY, 0, gmLeft + 3, midY, gmH * 0.4);
+                const fl = ctx.createRadialGradient(gmLeft + 3, gmY, 0, gmLeft + 3, gmY, gmH * 0.4);
                 fl.addColorStop(0, `rgba(34,197,94,${flashAlpha * 0.8})`);
                 fl.addColorStop(1, 'transparent');
                 ctx.beginPath();
-                ctx.arc(gmLeft + 3, midY, gmH * 0.4, 0, Math.PI * 2);
+                ctx.arc(gmLeft + 3, gmY, gmH * 0.4, 0, Math.PI * 2);
                 ctx.fillStyle = fl;
                 ctx.fill();
             }
@@ -516,15 +517,6 @@
             }
             ctx.globalAlpha = 1;
 
-            // ── Stråltyp-etikett ───────────────────────────────────────────────
-            if (source !== 'none') {
-                const labels = { alpha: 'α-strålning', beta: 'β-strålning', gamma: 'γ-strålning' };
-                const cols   = { alpha: '#ef4444', beta: '#60a5fa', gamma: '#a3e635' };
-                ctx.font = `italic bold ${Math.max(12, W * 0.027)}px Poppins, sans-serif`;
-                ctx.fillStyle = cols[source];
-                ctx.textAlign = 'left';
-                ctx.fillText(labels[source], srcX + srcR + 10, midY - srcR * 0.5);
-            }
 
             // ── Bakgrundsstrålnings-pil (diskret) ─────────────────────────────
             // (ingen visuell – bara räknaren tickar)
@@ -542,14 +534,21 @@
                 startTime: performance.now(),
                 flashAlpha: 0,
                 soundOn: false,
+                showParticles: true,
+                activity: 50,
                 source: 'none',
                 barrier: 'none',
                 animId: null,
                 // Drag-state
                 srcXFrac: 0.12,    // preparat x-position som andel av W
-                gmLeftFrac: 0.82,  // GM-rör x-position som andel av W
+                srcYFrac: 0.50,    // preparat y-position som andel av H
+                barrierXFrac: 0.50, // hinder x-centrum som andel av W
+                barrierYFrac: 0.50, // hinder y-centrum som andel av H
+                gmLeftFrac: 0.68,  // GM-rör x-position som andel av W
+                gmYFrac: 0.50,     // GM-rör y-centrum som andel av H
                 dragging: null,    // 'source' | 'gm' | null
                 dragOffsetX: 0,
+                dragOffsetY: 0,
             });
 
             const [source,       setSourceState]  = useState('none');
@@ -558,11 +557,15 @@
             const [cpm,          setCpm]           = useState(0);
             const [soundOn,      setSoundOnState]  = useState(false);
             const [elapsed,      setElapsed]       = useState(0);
+            const [showParticles, setShowParticles] = useState(true);
+            const [activity, setActivity] = useState(50);
 
             // Synkronisera state-ref med React-state
             useEffect(() => { stateRef.current.source  = source;  }, [source]);
             useEffect(() => { stateRef.current.barrier = barrier; }, [barrier]);
             useEffect(() => { stateRef.current.soundOn = soundOn; }, [soundOn]);
+            useEffect(() => { stateRef.current.showParticles = showParticles; }, [showParticles]);
+            useEffect(() => { stateRef.current.activity = activity; }, [activity]);
 
             // Huvudloop
             useEffect(() => {
@@ -592,34 +595,37 @@
 
                     // ── Geometri ────────────────────────────────────────────────
                     const srcX     = W * st.srcXFrac;
+                    const srcY     = H * st.srcYFrac;
                     const stavLen  = Math.max(60, W * 0.14);
                     const tipX     = srcX + stavLen * 0.4;
                     const tipR     = Math.max(8, W * 0.018);
-                    const barrierCX = W * 0.50;
+                    const barrierCX = W * st.barrierXFrac;
+                    const barrierY  = H * st.barrierYFrac;
                     const bs       = BARRIER_STYLE[st.barrier];
                     const bw       = bs.width * (W / 600);
                     const barrierL = barrierCX - bw / 2;
                     const barrierR = barrierCX + bw / 2;
                     const gmLeft   = W * st.gmLeftFrac;
-                    const midY     = H / 2;
+                    const gmY      = H * st.gmYFrac;
 
                     // ── Emittera nya partiklar ──────────────────────────────────
-                    const rate = EMISSION_RATE[st.source];
+                    const rate = st.source !== 'none' ? st.activity : 0;
                     if (rate > 0 && now - st.lastEmit > 1000 / rate) {
                         st.lastEmit = now;
-                        const angle = (Math.random() - 0.5) * 0.18; // spridning
+                        const angle = (Math.random() - 0.5) * 1.2; // spridning
                         const speed = W * (0.28 + Math.random() * 0.06); // px/s
                         const trans = TRANSMISSION[st.source]?.[st.barrier] ?? 0;
-                        const passes = Math.random() < trans;
+                        const passRoll = Math.random() < trans;
 
                         st.particles.push({
                             type: st.source,
-                            x: tipX + tipR,
-                            y: midY + (Math.random() - 0.5) * 12,
+                            x: tipX,
+                            y: srcY + (Math.random() - 0.5) * 12,
                             vx: Math.cos(angle) * speed,
                             vy: Math.sin(angle) * speed,
                             alpha: 1,
-                            passes,
+                            passRoll,
+                            barrierChecked: false,
                             absorbed: false,
                             registered: false,
                         });
@@ -637,18 +643,28 @@
                     }
 
                     // ── Uppdatera partiklar ─────────────────────────────────────
+                    const bH_coll = H * 0.68;
+                    const barrierTop = barrierY - bH_coll / 2;
+                    const barrierBot = barrierY + bH_coll / 2;
+                    const gmH_coll = H * 0.18;
+                    const gmTop_coll = gmY - gmH_coll / 2;
+                    const gmBot_coll = gmY + gmH_coll / 2;
+                    // Hindret blockerar bara om det är mellan preparatet och GM-röret
+                    const barrierActive = st.barrier !== 'none' && barrierCX > tipX && barrierCX < gmLeft;
                     const remaining = [];
                     for (const p of st.particles) {
                         p.x += p.vx * dt;
                         p.y += p.vy * dt;
 
+                        const inBarrierY = p.y >= barrierTop && p.y <= barrierBot;
+
                         // Bromsning i hindret (visuell effekt, bara för absorberade)
-                        if (!p.passes && p.x >= barrierL && p.x <= barrierR && st.barrier !== 'none') {
+                        if (!p.passRoll && p.x >= barrierL && p.x <= barrierR && barrierActive && inBarrierY) {
                             p.vx *= (1 - dt * 5);
                         }
 
                         // Absorberas i hindret?
-                        if (!p.passes && !p.absorbed && p.x >= barrierL && st.barrier !== 'none') {
+                        if (!p.passRoll && !p.absorbed && p.x >= barrierL && barrierActive && inBarrierY) {
                             p.absorbed = true;
                             p.alpha = 0.6;
                         }
@@ -658,7 +674,8 @@
                         }
 
                         // Registreras av GM-röret
-                        if (!p.registered && !p.absorbed && p.x >= gmLeft) {
+                        const inGmY = p.y >= gmTop_coll && p.y <= gmBot_coll;
+                        if (!p.registered && !p.absorbed && p.x >= gmLeft && inGmY) {
                             p.registered = true;
                             st.totalCounts++;
                             setTotalCounts(st.totalCounts);
@@ -672,8 +689,8 @@
                             if (p.alpha <= 0) continue;
                         }
 
-                        // Håll partiklar inom vertikal yta (liten studs)
-                        if (p.y < 10 || p.y > H - 10) p.vy *= -0.5;
+                        // Ta bort partiklar som lämnar canvas
+                        if (p.y < -10 || p.y > H + 10) continue;
 
                         remaining.push(p);
                     }
@@ -692,7 +709,7 @@
 
                     // ── Rita ────────────────────────────────────────────────────
                     const ctx2d = canvas.getContext('2d');
-                    drawScene(ctx2d, W, H, st.particles, st.source, st.barrier, st.flashAlpha, W * st.srcXFrac, W * st.gmLeftFrac);
+                    drawScene(ctx2d, W, H, st.showParticles ? st.particles : [], st.source, st.barrier, st.flashAlpha, W * st.srcXFrac, H * st.srcYFrac, W * st.gmLeftFrac, H * st.gmYFrac, W * st.barrierXFrac, H * st.barrierYFrac);
                 }
 
                 st.animId = requestAnimationFrame(loop);
@@ -721,29 +738,46 @@
                 const st = stateRef.current;
                 const W = canvas.width;
                 const H = canvas.height;
-                const midY = H / 2;
+                const srcX = W * st.srcXFrac;
+                const srcY = H * st.srcYFrac;
 
                 // Preparat-område
-                const srcX = W * st.srcXFrac;
                 const stavLen = Math.max(60, W * 0.14);
                 const stavLeft = srcX - stavLen * 0.6;
                 const tipX = srcX + stavLen * 0.4;
                 const stavH = Math.max(8, W * 0.016);
-                if (pos.x >= stavLeft - 10 && pos.x <= tipX + 15 && pos.y >= midY - stavH * 2 && pos.y <= midY + stavH * 2) {
+                if (pos.x >= stavLeft - 10 && pos.x <= tipX + 15 && pos.y >= srcY - stavH * 2 && pos.y <= srcY + stavH * 2) {
                     st.dragging = 'source';
                     st.dragOffsetX = pos.x - srcX;
+                    st.dragOffsetY = pos.y - srcY;
+                    canvas.setPointerCapture(e.pointerId);
+                    return;
+                }
+
+                // Hinder-område
+                const barrierCX = W * st.barrierXFrac;
+                const barrierCY = H * st.barrierYFrac;
+                const bs = BARRIER_STYLE[st.barrier];
+                const bw = bs.width * (W / 600);
+                const bH = H * 0.68;
+                if (st.barrier !== 'none' && pos.x >= barrierCX - bw / 2 - 10 && pos.x <= barrierCX + bw / 2 + 10 && pos.y >= barrierCY - bH / 2 - 5 && pos.y <= barrierCY + bH / 2 + 5) {
+                    st.dragging = 'barrier';
+                    st.dragOffsetX = pos.x - barrierCX;
+                    st.dragOffsetY = pos.y - barrierCY;
                     canvas.setPointerCapture(e.pointerId);
                     return;
                 }
 
                 // GM-rör-område
                 const gmLeft = W * st.gmLeftFrac;
-                const gmW = W * 0.14;
-                const gmH = H * 0.40;
-                const gmTop = midY - gmH / 2;
+                const gmY = H * st.gmYFrac;
+                const gmW = W * 0.28;
+                const gmH = H * 0.18;
+                const gmTop = gmY - gmH / 2;
                 if (pos.x >= gmLeft - 5 && pos.x <= gmLeft + gmW + 5 && pos.y >= gmTop - 5 && pos.y <= gmTop + gmH + 5) {
                     st.dragging = 'gm';
                     st.dragOffsetX = pos.x - gmLeft;
+                    st.dragOffsetY = pos.y - gmY;
                     canvas.setPointerCapture(e.pointerId);
                     return;
                 }
@@ -758,32 +792,47 @@
                     const pos = getCanvasPos(e);
                     const W = canvas.width;
                     const H = canvas.height;
-                    const midY = H / 2;
                     const srcX = W * st.srcXFrac;
+                    const srcY = H * st.srcYFrac;
                     const stavLen = Math.max(60, W * 0.14);
                     const stavLeft = srcX - stavLen * 0.6;
                     const tipX = srcX + stavLen * 0.4;
                     const stavH = Math.max(8, W * 0.016);
                     const gmLeft = W * st.gmLeftFrac;
-                    const gmW = W * 0.14;
-                    const gmH = H * 0.40;
-                    const gmTop = midY - gmH / 2;
-                    const overSource = pos.x >= stavLeft - 10 && pos.x <= tipX + 15 && pos.y >= midY - stavH * 2 && pos.y <= midY + stavH * 2;
+                    const gmY = H * st.gmYFrac;
+                    const gmW = W * 0.28;
+                    const gmH = H * 0.18;
+                    const gmTop = gmY - gmH / 2;
+                    const barrierCX = W * st.barrierXFrac;
+                    const barrierCY = H * st.barrierYFrac;
+                    const bs = BARRIER_STYLE[st.barrier];
+                    const bw = bs.width * (W / 600);
+                    const bH = H * 0.68;
+                    const overSource = pos.x >= stavLeft - 10 && pos.x <= tipX + 15 && pos.y >= srcY - stavH * 2 && pos.y <= srcY + stavH * 2;
                     const overGm = pos.x >= gmLeft - 5 && pos.x <= gmLeft + gmW + 5 && pos.y >= gmTop - 5 && pos.y <= gmTop + gmH + 5;
-                    canvas.style.cursor = (overSource || overGm) ? 'grab' : 'default';
+                    const overBarrier = st.barrier !== 'none' && pos.x >= barrierCX - bw / 2 - 10 && pos.x <= barrierCX + bw / 2 + 10 && pos.y >= barrierCY - bH / 2 - 5 && pos.y <= barrierCY + bH / 2 + 5;
+                    canvas.style.cursor = (overSource || overGm || overBarrier) ? 'grab' : 'default';
                     return;
                 }
                 canvas.style.cursor = 'grabbing';
                 const pos = getCanvasPos(e);
                 const W = canvas.width;
+                const H = canvas.height;
                 if (st.dragging === 'source') {
-                    let newFrac = (pos.x - st.dragOffsetX) / W;
-                    newFrac = Math.max(0.05, Math.min(0.35, newFrac));
-                    st.srcXFrac = newFrac;
+                    let newX = (pos.x - st.dragOffsetX) / W;
+                    let newY = (pos.y - st.dragOffsetY) / H;
+                    st.srcXFrac = Math.max(0.02, Math.min(0.98, newX));
+                    st.srcYFrac = Math.max(0.05, Math.min(0.95, newY));
+                } else if (st.dragging === 'barrier') {
+                    let newX = (pos.x - st.dragOffsetX) / W;
+                    let newY = (pos.y - st.dragOffsetY) / H;
+                    st.barrierXFrac = Math.max(0.02, Math.min(0.98, newX));
+                    st.barrierYFrac = Math.max(0.05, Math.min(0.95, newY));
                 } else if (st.dragging === 'gm') {
-                    let newFrac = (pos.x - st.dragOffsetX) / W;
-                    newFrac = Math.max(0.60, Math.min(0.88, newFrac));
-                    st.gmLeftFrac = newFrac;
+                    let newX = (pos.x - st.dragOffsetX) / W;
+                    let newY = (pos.y - st.dragOffsetY) / H;
+                    st.gmLeftFrac = Math.max(0.02, Math.min(0.98, newX));
+                    st.gmYFrac = Math.max(0.05, Math.min(0.95, newY));
                 }
             };
 
@@ -893,6 +942,25 @@
                                 >
                                     {soundOn ? '🔊' : '🔇'}
                                 </button>
+                                <label
+                                    style={{
+                                        position: 'absolute', top: '0.75rem', left: '0.75rem', zIndex: 10,
+                                        display: 'flex', alignItems: 'center', gap: '0.4rem',
+                                        background: 'rgba(30,41,59,0.8)',
+                                        border: '1px solid rgba(148,163,184,0.25)',
+                                        borderRadius: '0.5rem', padding: '0.35rem 0.6rem',
+                                        cursor: 'pointer', fontSize: '0.8rem',
+                                        color: '#94a3b8', userSelect: 'none',
+                                    }}
+                                >
+                                    <input
+                                        type="checkbox"
+                                        checked={showParticles}
+                                        onChange={() => setShowParticles(v => !v)}
+                                        style={{ accentColor: '#38bdf8', cursor: 'pointer' }}
+                                    />
+                                    Visa partiklar
+                                </label>
                                 <div style={{ width: '100%' }}>
                                     <canvas ref={canvasRef} style={{ width: '100%' }} />
                                 </div>
@@ -974,6 +1042,23 @@
                                             </div>
                                         </div>
                                     )}
+                                </div>
+
+                                {/* Aktivitet */}
+                                <div className="glass-card-light rounded-xl p-3" style={{ flex: '0 0 auto' }}>
+                                    <h2 className="text-sm font-semibold text-slate-300 mb-2">Aktivitet</h2>
+                                    <input
+                                        type="range"
+                                        min="5"
+                                        max="150"
+                                        step="5"
+                                        value={activity}
+                                        onChange={(e) => setActivity(parseInt(e.target.value))}
+                                        style={{ width: '100%', accentColor: '#38bdf8', cursor: 'pointer' }}
+                                    />
+                                    <div className="text-xs text-slate-400 text-center mt-1">
+                                        {activity} Bq
+                                    </div>
                                 </div>
                             </div>
                         </div>

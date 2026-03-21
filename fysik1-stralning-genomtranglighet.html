@@ -924,9 +924,10 @@
                         </p>
 
                         {/* Canvas + sidopanel */}
-                        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', alignItems: 'stretch' }}>
-                            {/* Canvas-kort */}
-                            <div className="glass-card rounded-2xl p-4" style={{ flex: '1 1 0', minWidth: 0, position: 'relative' }}>
+                        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', alignItems: 'flex-start' }}>
+                            {/* Canvas-kort + GM-räknare */}
+                            <div style={{ flex: '1 1 0', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                            <div className="glass-card rounded-2xl p-4" style={{ position: 'relative' }}>
                                 <button
                                     onClick={toggleSound}
                                     title={soundOn ? 'Stäng av ljud' : 'Sätt på ljud'}
@@ -964,6 +965,32 @@
                                 <div style={{ width: '100%' }}>
                                     <canvas ref={canvasRef} style={{ width: '100%' }} />
                                 </div>
+                            </div>
+
+                            {/* GM-räknare */}
+                            <div className="glass-card rounded-2xl p-3 flex flex-wrap items-center gap-3">
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs text-slate-500 mb-1">Registreringar</span>
+                                    <div className="gm-display text-2xl font-bold px-4 py-1 min-w-[80px] text-center">
+                                        {String(totalCounts).padStart(5, '0')}
+                                    </div>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs text-slate-500 mb-1">Räkningar/min</span>
+                                    <div className="gm-display text-xl font-bold px-3 py-1 min-w-[70px] text-center">
+                                        {String(cpm).padStart(4, '0')}
+                                    </div>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs text-slate-500 mb-1">Tid (s)</span>
+                                    <div className="gm-display text-xl font-bold px-3 py-1 min-w-[60px] text-center">
+                                        {elapsed}
+                                    </div>
+                                </div>
+                                <div className="flex gap-2 ml-auto">
+                                    <button className="reset-btn" onClick={resetCounter}>Nollställ</button>
+                                </div>
+                            </div>
                             </div>
 
                             {/* Kontrollpanel till höger */}
@@ -1060,31 +1087,6 @@
                                         {activity} Bq
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* GM-räknare */}
-                        <div className="glass-card rounded-2xl p-4 mb-4 flex flex-wrap items-center gap-4">
-                            <div className="flex flex-col items-center">
-                                <span className="text-xs text-slate-500 mb-1">Registreringar</span>
-                                <div className="gm-display text-3xl font-bold px-5 py-2 min-w-[90px] text-center">
-                                    {String(totalCounts).padStart(5, '0')}
-                                </div>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <span className="text-xs text-slate-500 mb-1">Räkningar/min</span>
-                                <div className="gm-display text-2xl font-bold px-4 py-2 min-w-[80px] text-center">
-                                    {String(cpm).padStart(4, '0')}
-                                </div>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <span className="text-xs text-slate-500 mb-1">Tid (s)</span>
-                                <div className="gm-display text-2xl font-bold px-4 py-2 min-w-[70px] text-center">
-                                    {elapsed}
-                                </div>
-                            </div>
-                            <div className="flex gap-2 ml-auto">
-                                <button className="reset-btn" onClick={resetCounter}>Nollställ</button>
                             </div>
                         </div>
 

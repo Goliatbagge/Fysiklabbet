@@ -821,7 +821,7 @@
             const getCurtainButton = () => {
                 switch (phase) {
                     case 'curtain-closed':
-                        return { label: 'Skjut elektroner', onClick: handleStartHiddenFiring };
+                        return { label: 'Öppna draperiet', onClick: handleRevealCurtain };
                     case 'firing-hidden':
                         return { label: 'Sluta skjuta elektroner', onClick: handleStopHiddenFiring };
                     case 'ready-to-reveal':
@@ -837,7 +837,7 @@
             };
 
             const curtainButton = getCurtainButton();
-            const showCurtainOverlay = phase === 'ready-to-reveal' || phase === 'revealing';
+            const showCurtainOverlay = phase === 'curtain-closed' || phase === 'ready-to-reveal' || phase === 'revealing';
 
             return (
                 <div>

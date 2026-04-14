@@ -274,6 +274,28 @@
         });
 
         // Controls UI
+        function updateDisplayValues() {
+            const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
+            const isIdle = simulationState === 'idle';
+            // Update display spans (they are the second child in each flex container)
+            const lengthDisplay = document.querySelector('#length-slider')?.parentElement?.querySelector('span');
+            const gravityDisplay = document.querySelector('#gravity-slider')?.parentElement?.parentElement?.querySelector('span');
+            const massDisplay = document.querySelector('#mass-slider')?.parentElement?.querySelector('span');
+            const angleDisplay = document.querySelector('#angle-slider')?.parentElement?.querySelector('span');
+            const dampingDisplay = document.querySelector('#damping-slider')?.parentElement?.querySelector('span');
+            if (lengthDisplay) lengthDisplay.textContent = params.length.toFixed(2) + ' m';
+            if (gravityDisplay) gravityDisplay.textContent = params.gravity.toFixed(2) + ' m/s²';
+            if (massDisplay) massDisplay.textContent = (params.mass * 1000).toFixed(0) + ' g';
+            if (angleDisplay) angleDisplay.textContent = params.initialAngle.toFixed(2) + ' °';
+            if (dampingDisplay) dampingDisplay.textContent = params.damping.toFixed(2);
+            // Update start button disabled state
+            const startBtn = document.getElementById('start-button');
+            if (startBtn) startBtn.disabled = !isIdle || params.initialAngle < 0.5;
+            // Update calculated period display
+            const periodDisplay = document.querySelector('#controls-container .text-4xl.text-blue-600');
+            if (periodDisplay) periodDisplay.textContent = period.toFixed(3) + ' s';
+        }
+
         function updateControls() {
             const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
             const isIdle = simulationState === 'idle';
@@ -436,28 +458,28 @@
                 scene.add(labStand);
                 createPendulum(params.length, params.mass);
                 updateCameraTarget();
-                updateControls();
+                updateDisplayValues();
             });
 
             if (gravitySlider) gravitySlider.addEventListener('input', (e) => {
                 params.gravity = parseFloat(e.target.value);
-                updateControls();
+                updateDisplayValues();
             });
 
             if (massSlider) massSlider.addEventListener('input', (e) => {
                 params.mass = parseFloat(e.target.value) / 1000;
                 createPendulum(params.length, params.mass);
-                updateControls();
+                updateDisplayValues();
             });
 
             if (angleSlider) angleSlider.addEventListener('input', (e) => {
                 params.initialAngle = parseFloat(e.target.value);
-                updateControls();
+                updateDisplayValues();
             });
 
             if (dampingSlider) dampingSlider.addEventListener('input', (e) => {
                 params.damping = parseFloat(e.target.value);
-                updateControls();
+                updateDisplayValues();
             });
 
             if (startButton) startButton.addEventListener('click', () => {

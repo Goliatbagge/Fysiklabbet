@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubbelspaltexperimentet - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .glass-card-inner {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            border-radius: 12px;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .page-wrapper {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+            min-height: 100vh;
+        }
+        .sim-canvas {
+            border-radius: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.12);
+        }
+        .eye-btn {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+        .eye-btn:hover {
+            transform: scale(1.05);
+        }
+        .eye-btn.observing {
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+            border-color: rgba(239, 68, 68, 0.6);
+        }
+        .eye-btn.not-observing {
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(56, 189, 248, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+        }
+        .fire-btn {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        .fire-btn:hover {
+            transform: scale(1.02);
+        }
+        .fire-btn:active {
+            transform: scale(0.98);
+        }
+        .curtain-btn {
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: Poppins, sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .curtain-btn:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper" style="padding-top: 80px;">
+        <main class="container" style="max-width: 1100px; margin: 0 auto; padding: 2rem 1rem;">
+            <!-- Breadcrumb -->
+            <nav style="margin-bottom: 1.5rem;">
+                <span style="color: #94a3b8; font-family: Poppins, sans-serif; font-size: 0.9rem;">
+                    <a href="index.html" style="color: #38bdf8; text-decoration: none;">Hem</a> /
+                    <a href="fysik2.html" style="color: #38bdf8; text-decoration: none;">Fysik 2</a> /
+                    Dubbelspaltexperimentet
+                </span>
+            </nav>
+
+            <h1 class="glow-text" style="font-family: Poppins, sans-serif; font-size: 2.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem;">
+                Dubbelspaltexperimentet
+            </h1>
+            <p style="font-family: Poppins, sans-serif; color: #94a3b8; font-size: 1.05rem; margin-bottom: 2rem; max-width: 750px; line-height: 1.6;">
+                Ett av kvantfysikens mest berömda experiment. Skjut elektroner mot en dubbelspalt och se hur de bildar
+                ett interferensmönster &mdash; om ingen observerar dem. Aktivera observatören och se hur mönstret försvinner!
+            </p>
+
+            <div id="root"></div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback } = React;
+
+        // --- Physics constants ---
+        const SLIT_WALL_X = 0.35;      // Position of slit wall (fraction of canvas width)
+        const SCREEN_X = 0.88;         // Position of detection screen
+        const SLIT_GAP = 40;           // Distance between slit centers (pixels)
+        const SLIT_WIDTH = 12;         // Width of each slit opening
+        const WALL_THICKNESS = 6;
+        const ELECTRON_SPEED = 3.5;
+        const SCREEN_HEIGHT_FRACTION = 0.85;
+
+        function formatNumber(num, decimals = 0) {
+            return num.toFixed(decimals).replace('.', ',');
+        }
+
+        // Generate interference pattern probability
+        function interferenceProb(y, centerY, screenH) {
+            const dy = (y - centerY) / screenH;
+            // Double-slit interference: cos^2 for interference * sinc^2 for diffraction envelope
+            const d = 8.0;  // slit separation parameter
+            const a = 2.5;  // slit width parameter
+            const interference = Math.cos(Math.PI * d * dy) ** 2;
+            const diffraction = dy === 0 ? 1 : (Math.sin(Math.PI * a * dy) / (Math.PI * a * dy)) ** 2;
+            return interference * diffraction;
+        }
+
+        // Generate classical two-slit pattern (two Gaussians)
+        function classicalProb(y, centerY, slitGap) {
+            const dy1 = (y - (centerY - slitGap / 2));
+            const dy2 = (y - (centerY + slitGap / 2));
+            const sigma = 18;
+            return Math.exp(-dy1 * dy1 / (2 * sigma * sigma)) + Math.exp(-dy2 * dy2 / (2 * sigma * sigma));
+        }
+
+        // Sample y-position from probability distribution
+        function sampleFromDistribution(centerY, screenH, slitGap, observing) {
+            // Rejection sampling
+            for (let i = 0; i < 1000; i++) {
+                const y = centerY + (Math.random() - 0.5) * screenH;
+                const prob = observing
+                    ? classicalProb(y, centerY, slitGap)
+                    : interferenceProb(y, centerY, screenH);
+                if (Math.random() < prob) {
+                    return y;
+                }
+            }
+            return centerY; // fallback
+        }
+
+        function DoubleSlit() {
+            const canvasRef = useRef(null);
+            const screenCanvasRef = useRef(null);
+            // Phase: 'observing' | 'curtain-closed' | 'firing-hidden' | 'ready-to-reveal' | 'revealing'
+            const [phase, setPhase] = useState('observing');
+            const [autoFire, setAutoFire] = useState(false);
+            const [fireRate, setFireRate] = useState(10);
+            const [electronCount, setElectronCount] = useState(0);
+            const screenViewCanvasRef = useRef(null);
+            const electronsRef = useRef([]);
+            const hitsRef = useRef([]);
+            const screenDataRef = useRef(null);
+            const animFrameRef = useRef(null);
+            const phaseRef = useRef('observing');
+            const autoFireRef = useRef(false);
+            const fireRateRef = useRef(10);
+            const curtainTargetRef = useRef(0);
+            const curtainPosRef = useRef(0);
+            const hiddenFiringRef = useRef(false);
+            const drawScreenViewRef = useRef(null);
+
+            // Keep refs in sync
+            useEffect(() => { phaseRef.current = phase; }, [phase]);
+            useEffect(() => { autoFireRef.current = autoFire; }, [autoFire]);
+            useEffect(() => { fireRateRef.current = fireRate; }, [fireRate]);
+
+            const getCanvasSize = useCallback(() => {
+                const w = Math.min(1060, window.innerWidth - 40);
+                const h = Math.round(w * 0.5);
+                return { w, h };
+            }, []);
+
+            const fireElectron = useCallback((canvasW, canvasH) => {
+                const centerY = canvasH / 2;
+                const slitWallX = canvasW * SLIT_WALL_X;
+                const startX = 30;
+                const screenX = canvasW * SCREEN_X;
+                const screenH = canvasH * SCREEN_HEIGHT_FRACTION;
+                const slitGap = SLIT_GAP * (canvasH / 400);
+                const slitW = SLIT_WIDTH * (canvasH / 400);
+                const isObserving = phaseRef.current === 'observing';
+
+                // Electrons fly in horizontally from the left, spread vertically to cover both slits
+                const spread = slitGap + slitW * 2;
+                const startY = centerY + (Math.random() - 0.5) * spread;
+
+                // Horizontal flight: targetWallY = startY (no angle)
+                const targetWallY = startY;
+
+                // Check if targetWallY hits a slit opening
+                const topSlitCenter = centerY - slitGap / 2;
+                const botSlitCenter = centerY + slitGap / 2;
+                const hitsTopSlit = Math.abs(targetWallY - topSlitCenter) < slitW / 2;
+                const hitsBotSlit = Math.abs(targetWallY - botSlitCenter) < slitW / 2;
+                const hitsAnySlit = hitsTopSlit || hitsBotSlit;
+
+                let slitY, finalY, blocked;
+
+                if (isObserving) {
+                    if (hitsAnySlit) {
+                        // Goes through the slit it hits, straight horizontal
+                        slitY = hitsTopSlit ? topSlitCenter : botSlitCenter;
+                        finalY = slitY; // straight through
+                        blocked = false;
+                    } else {
+                        // Blocked by the wall
+                        slitY = targetWallY;
+                        finalY = targetWallY;
+                        blocked = true;
+                    }
+                } else {
+                    // Quantum: goes through both slits, interference pattern
+                    const throughTop = Math.random() < 0.5;
+                    slitY = throughTop ? topSlitCenter : botSlitCenter;
+                    finalY = sampleFromDistribution(centerY, screenH, slitGap, false);
+                    blocked = false;
+                }
+
+                return {
+                    x: startX,
+                    y: startY,
+                    phase: 'toSlit', // toSlit -> throughSlit -> toScreen -> hit / blocked
+                    slitY,
+                    slitX: slitWallX,
+                    targetWallY,
+                    finalY,
+                    screenX,
+                    speed: ELECTRON_SPEED + Math.random() * 1,
+                    observed: isObserving,
+                    blocked,
+                    blockTimer: 0,
+                    trail: [],
+                    wave: !isObserving,
+                    wavePhase: Math.random() * Math.PI * 2
+                };
+            }, []);
+
+            const resetExperiment = useCallback(() => {
+                electronsRef.current = [];
+                hitsRef.current = [];
+                screenDataRef.current = null;
+                setElectronCount(0);
+            }, []);
+
+            const handleFireClick = useCallback(() => {
+                const { w, h } = getCanvasSize();
+                const newElectrons = [];
+                for (let i = 0; i < fireRateRef.current; i++) {
+                    newElectrons.push(fireElectron(w, h));
+                }
+                electronsRef.current.push(...newElectrons);
+            }, [fireElectron, getCanvasSize]);
+
+            // Main animation loop
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const screenCanvas = screenCanvasRef.current;
+                if (!canvas || !screenCanvas) return;
+                const ctx = canvas.getContext('2d');
+                const sctx = screenCanvas.getContext('2d');
+
+                const resize = () => {
+                    const { w, h } = getCanvasSize();
+                    canvas.width = w;
+                    canvas.height = h;
+                    screenCanvas.width = w;
+                    screenCanvas.height = h;
+                };
+                resize();
+                window.addEventListener('resize', resize);
+
+                let lastTime = performance.now();
+                let autoFireAccum = 0;
+                let hiddenFireAccum = 0;
+
+                const animate = (now) => {
+                    const dt = (now - lastTime) / 1000; // seconds
+                    lastTime = now;
+                    const W = canvas.width;
+                    const H = canvas.height;
+                    const centerY = H / 2;
+                    const slitWallX = W * SLIT_WALL_X;
+                    const screenX = W * SCREEN_X;
+                    const slitGap = SLIT_GAP * (H / 400);
+                    const slitW = SLIT_WIDTH * (H / 400);
+
+                    // Hidden firing: add hits at the correct rate
+                    if (hiddenFiringRef.current) {
+                        hiddenFireAccum += fireRateRef.current * dt;
+                        const count = Math.floor(hiddenFireAccum);
+                        hiddenFireAccum -= count;
+                        for (let i = 0; i < count; i++) {
+                            const screenH = H * SCREEN_HEIGHT_FRACTION;
+                            const hitY = sampleFromDistribution(centerY, screenH, slitGap, false);
+                            hitsRef.current.push({ y: hitY, observed: false, xOff: (Math.random() - 0.5) * 2 });
+                            sctx.beginPath();
+                            sctx.arc(screenX, hitY, 1.5, 0, Math.PI * 2);
+                            sctx.fillStyle = 'rgba(56, 189, 248, 0.7)';
+                            sctx.fill();
+                            setElectronCount(prev => prev + 1);
+                            if (drawScreenViewRef.current) drawScreenViewRef.current();
+                        }
+                    } else {
+                        hiddenFireAccum = 0;
+                    }
+
+                    // Auto-fire (only in observing mode)
+                    if (autoFireRef.current && phaseRef.current === 'observing') {
+                        autoFireAccum += fireRateRef.current * dt;
+                        const count = Math.floor(autoFireAccum);
+                        autoFireAccum -= count;
+                        for (let i = 0; i < count; i++) {
+                            electronsRef.current.push(fireElectron(W, H));
+                        }
+                    } else {
+                        autoFireAccum = 0;
+                    }
+
+                    // Clear main canvas
+                    ctx.clearRect(0, 0, W, H);
+
+                    // Background
+                    const bgGrad = ctx.createLinearGradient(0, 0, W, 0);
+                    bgGrad.addColorStop(0, '#0a0a1a');
+                    bgGrad.addColorStop(0.35, '#0d1526');
+                    bgGrad.addColorStop(1, '#0a1020');
+                    ctx.fillStyle = bgGrad;
+                    ctx.fillRect(0, 0, W, H);
+
+                    // Label electron source
+                    ctx.font = '11px Poppins, sans-serif';
+                    ctx.fillStyle = '#64748b';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('e\u207B', 12, centerY + 4);
+
+                    // Draw slit wall
+                    ctx.fillStyle = '#334155';
+                    ctx.strokeStyle = '#475569';
+                    ctx.lineWidth = 1;
+                    // Top part
+                    ctx.fillRect(slitWallX - WALL_THICKNESS/2, 0, WALL_THICKNESS, centerY - slitGap/2 - slitW/2);
+                    // Middle part
+                    ctx.fillRect(slitWallX - WALL_THICKNESS/2, centerY - slitGap/2 + slitW/2, WALL_THICKNESS, slitGap - slitW);
+                    // Bottom part
+                    ctx.fillRect(slitWallX - WALL_THICKNESS/2, centerY + slitGap/2 + slitW/2, WALL_THICKNESS, H - centerY - slitGap/2 - slitW/2);
+
+
+                    // Label slits
+                    ctx.font = '14px Poppins, sans-serif';
+                    ctx.fillStyle = '#64748b';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Dubbelspalt', slitWallX, H - 10);
+
+                    // Draw detection screen background
+                    ctx.fillStyle = '#1e293b';
+                    ctx.fillRect(screenX - 2, H * (1 - SCREEN_HEIGHT_FRACTION) / 2, 4, H * SCREEN_HEIGHT_FRACTION);
+                    ctx.strokeStyle = '#334155';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(screenX - 2, H * (1 - SCREEN_HEIGHT_FRACTION) / 2, 4, H * SCREEN_HEIGHT_FRACTION);
+
+                    // Label screen
+                    ctx.font = '14px Poppins, sans-serif';
+                    ctx.fillStyle = '#64748b';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Detektorskärm', screenX, H - 10);
+
+
+
+                    // Update and draw electrons
+                    const electrons = electronsRef.current;
+                    let newHits = 0;
+
+                    for (let i = electrons.length - 1; i >= 0; i--) {
+                        const e = electrons[i];
+
+                        // Update position based on phase
+                        if (e.phase === 'toSlit') {
+                            // All electrons fly horizontally
+                            e.x += e.speed;
+                            if (e.x >= slitWallX) {
+                                e.x = slitWallX;
+                                if (e.observed) {
+                                    if (e.blocked) {
+                                        e.phase = 'blocked';
+                                        e.blockTimer = 0;
+                                    } else {
+                                        e.phase = 'throughSlit';
+                                        e.y = e.slitY;
+                                    }
+                                } else {
+                                    e.phase = 'throughSlit';
+                                    e.y = e.slitY;
+                                }
+                            }
+                        } else if (e.phase === 'blocked') {
+                            // Absorbed by wall - flash and fade
+                            e.blockTimer++;
+                            if (e.blockTimer > 15) {
+                                electrons.splice(i, 1);
+                                continue;
+                            }
+                            // Draw impact flash
+                            const alpha = 1 - e.blockTimer / 15;
+                            const r = e.blockTimer * 1.5;
+                            ctx.beginPath();
+                            ctx.arc(e.x, e.y, 3 + r, 0, Math.PI * 2);
+                            ctx.fillStyle = `rgba(248, 113, 113, ${alpha * 0.5})`;
+                            ctx.fill();
+                            ctx.beginPath();
+                            ctx.arc(e.x, e.y, 2, 0, Math.PI * 2);
+                            ctx.fillStyle = `rgba(248, 113, 113, ${alpha})`;
+                            ctx.fill();
+                            continue;
+                        } else if (e.phase === 'throughSlit') {
+                            e.x += e.speed;
+                            if (e.x > slitWallX + WALL_THICKNESS) {
+                                e.phase = 'toScreen';
+                            }
+                        } else if (e.phase === 'toScreen') {
+                            if (e.observed) {
+                                // Observed: go straight horizontal (finalY = slitY)
+                                e.x += e.speed;
+                                // y stays constant (straight through)
+                            } else {
+                                // Not observed: fly towards interference-sampled position
+                                const dx = screenX - e.x;
+                                const dy = e.finalY - e.y;
+                                const dist = Math.sqrt(dx * dx + dy * dy);
+                                const vx = (dx / dist) * e.speed;
+                                const vy = (dy / dist) * e.speed;
+                                e.x += vx;
+                                e.y += vy;
+                            }
+
+                            if (e.x >= screenX - e.speed) {
+                                e.phase = 'hit';
+                                e.x = screenX;
+                                e.y = e.finalY;
+                                hitsRef.current.push({ y: e.finalY, observed: e.observed, xOff: (Math.random() - 0.5) * 2 });
+                                newHits++;
+                                electrons.splice(i, 1);
+                                continue;
+                            }
+                        }
+
+                        e.wavePhase += 0.3;
+
+                        // Draw electron
+                        if (e.wave && e.phase === 'toScreen') {
+                            // Draw as wave packet (multiple semi-transparent circles)
+                            const waveSize = 6;
+                            for (let w = -2; w <= 2; w++) {
+                                const wy = e.y + w * 5 * Math.sin(e.wavePhase + w * 0.8);
+                                const alpha = 0.4 - Math.abs(w) * 0.1;
+                                ctx.beginPath();
+                                ctx.arc(e.x + w * 3, wy, waveSize - Math.abs(w), 0, Math.PI * 2);
+                                ctx.fillStyle = `rgba(56, 189, 248, ${alpha})`;
+                                ctx.fill();
+                            }
+                        } else {
+                            // Draw as particle
+                            ctx.beginPath();
+                            ctx.arc(e.x, e.y, 3, 0, Math.PI * 2);
+                            ctx.fillStyle = e.observed ? '#f87171' : '#38bdf8';
+                            ctx.fill();
+                            ctx.beginPath();
+                            ctx.arc(e.x, e.y, 6, 0, Math.PI * 2);
+                            ctx.fillStyle = e.observed ? 'rgba(248, 113, 113, 0.2)' : 'rgba(56, 189, 248, 0.2)';
+                            ctx.fill();
+                        }
+                    }
+
+                    if (newHits > 0) {
+                        setElectronCount(prev => prev + newHits);
+                    }
+
+                    // Draw hits on screen canvas (persistent)
+                    if (newHits > 0) {
+                        const hits = hitsRef.current;
+                        // Draw only new hits
+                        for (let i = hits.length - newHits; i < hits.length; i++) {
+                            const hit = hits[i];
+                            sctx.beginPath();
+                            sctx.arc(screenX, hit.y, 1.5, 0, Math.PI * 2);
+                            sctx.fillStyle = hit.observed
+                                ? 'rgba(248, 113, 113, 0.7)'
+                                : 'rgba(56, 189, 248, 0.7)';
+                            sctx.fill();
+                        }
+                        if (drawScreenViewRef.current) drawScreenViewRef.current();
+                    }
+
+                    // Draw the persistent screen hits
+                    ctx.drawImage(screenCanvas, 0, 0);
+
+                    // Draw histogram on right edge
+                    const histBins = 60;
+                    const histW = 50;
+                    const histX = screenX + 10;
+                    const screenTop = H * (1 - SCREEN_HEIGHT_FRACTION) / 2;
+                    const screenHPx = H * SCREEN_HEIGHT_FRACTION;
+                    const bins = new Array(histBins).fill(0);
+                    const hits = hitsRef.current;
+
+                    for (const hit of hits) {
+                        const binIdx = Math.floor(((hit.y - screenTop) / screenHPx) * histBins);
+                        if (binIdx >= 0 && binIdx < histBins) {
+                            bins[binIdx]++;
+                        }
+                    }
+
+                    const maxBin = Math.max(...bins, 1);
+                    const binH = screenHPx / histBins;
+
+                    for (let b = 0; b < histBins; b++) {
+                        const barW = (bins[b] / maxBin) * histW;
+                        if (barW > 0.5) {
+                            const by = screenTop + b * binH;
+                            ctx.fillStyle = phaseRef.current === 'observing'
+                                ? 'rgba(248, 113, 113, 0.4)'
+                                : 'rgba(56, 189, 248, 0.4)';
+                            ctx.fillRect(histX, by, barW, binH - 1);
+                        }
+                    }
+
+                    // Label histogram
+                    if (hits.length > 10) {
+                        ctx.save();
+                        ctx.translate(histX + histW + 14, centerY);
+                        ctx.rotate(-Math.PI / 2);
+                        ctx.font = '13px Poppins, sans-serif';
+                        ctx.fillStyle = '#64748b';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('Intensitetsfördelning', 0, 0);
+                        ctx.restore();
+                    }
+
+                    // --- Draw curtain ---
+                    // Animate curtain position toward target
+                    const cTarget = curtainTargetRef.current;
+                    const cSpeed = 0.025;
+                    if (curtainPosRef.current < cTarget) {
+                        curtainPosRef.current = Math.min(cTarget, curtainPosRef.current + cSpeed);
+                    } else if (curtainPosRef.current > cTarget) {
+                        curtainPosRef.current = Math.max(cTarget, curtainPosRef.current - cSpeed);
+                    }
+                    const cPos = curtainPosRef.current;
+
+                    if (cPos > 0.001) {
+                        const curtainW = (W / 2) * cPos;
+
+                        // Draw left curtain
+                        const drawCurtainHalf = (startX, dir) => {
+                            const cw = curtainW;
+                            // Main fabric
+                            const grad = ctx.createLinearGradient(startX, 0, startX + dir * cw, 0);
+                            grad.addColorStop(0, '#8c1414');
+                            grad.addColorStop(0.3, '#b41e1e');
+                            grad.addColorStop(0.5, '#780f0f');
+                            grad.addColorStop(0.7, '#a01919');
+                            grad.addColorStop(0.85, '#640c0c');
+                            grad.addColorStop(1, '#500a0a');
+                            ctx.fillStyle = grad;
+                            ctx.fillRect(
+                                dir > 0 ? startX : startX - cw,
+                                0, cw, H
+                            );
+
+                            // Fold lines (vertical drapes)
+                            const folds = Math.max(3, Math.floor(cw / 25));
+                            for (let f = 0; f < folds; f++) {
+                                const fx = dir > 0
+                                    ? startX + (f / folds) * cw
+                                    : startX - (f / folds) * cw;
+                                const fAlpha = (f % 2 === 0) ? 0.15 : 0.08;
+                                ctx.beginPath();
+                                ctx.moveTo(fx, 0);
+                                // Wavy fold line
+                                for (let fy = 0; fy < H; fy += 8) {
+                                    const wave = Math.sin(fy * 0.02 + f * 1.5) * 3;
+                                    ctx.lineTo(fx + wave, fy);
+                                }
+                                ctx.strokeStyle = `rgba(0, 0, 0, ${fAlpha})`;
+                                ctx.lineWidth = 2;
+                                ctx.stroke();
+
+                                // Highlight on opposite side of fold
+                                ctx.beginPath();
+                                ctx.moveTo(fx + dir * 2, 0);
+                                for (let fy = 0; fy < H; fy += 8) {
+                                    const wave = Math.sin(fy * 0.02 + f * 1.5) * 3;
+                                    ctx.lineTo(fx + wave + dir * 2, fy);
+                                }
+                                ctx.strokeStyle = `rgba(255, 200, 200, ${fAlpha * 0.4})`;
+                                ctx.lineWidth = 1;
+                                ctx.stroke();
+                            }
+                        };
+
+                        drawCurtainHalf(0, 1);       // left curtain from left edge
+                        drawCurtainHalf(W, -1);       // right curtain from right edge
+
+                        // Top rod/pelmet
+                        const rodGrad = ctx.createLinearGradient(0, 0, 0, 14);
+                        rodGrad.addColorStop(0, '#d4a017');
+                        rodGrad.addColorStop(0.5, '#f0d060');
+                        rodGrad.addColorStop(1, '#b8860b');
+                        ctx.fillStyle = rodGrad;
+                        ctx.fillRect(0, 0, W, 10);
+
+                        // Rod shadow
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                        ctx.fillRect(0, 10, W, 4);
+
+                        // Gold tassels at curtain edges
+                        if (cPos < 0.98) {
+                            const leftEdge = curtainW;
+                            const rightEdge = W - curtainW;
+                            for (const ex of [leftEdge, rightEdge]) {
+                                // Tassel cord
+                                ctx.beginPath();
+                                ctx.moveTo(ex, 10);
+                                ctx.quadraticCurveTo(ex + 5, 40, ex, 60);
+                                ctx.strokeStyle = '#d4a017';
+                                ctx.lineWidth = 2;
+                                ctx.stroke();
+                                // Tassel
+                                for (let t = 0; t < 5; t++) {
+                                    ctx.beginPath();
+                                    ctx.moveTo(ex, 58);
+                                    ctx.lineTo(ex - 6 + t * 3, 78);
+                                    ctx.strokeStyle = '#d4a017';
+                                    ctx.lineWidth = 1.5;
+                                    ctx.stroke();
+                                }
+                            }
+                        }
+
+                        // Center seam glow when fully closed
+                        if (cPos > 0.95) {
+                            ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                            ctx.fillRect(W/2 - 2, 0, 4, H);
+                        }
+                    }
+
+                    animFrameRef.current = requestAnimationFrame(animate);
+                };
+
+                animFrameRef.current = requestAnimationFrame(animate);
+
+                return () => {
+                    window.removeEventListener('resize', resize);
+                    cancelAnimationFrame(animFrameRef.current);
+                };
+            }, [fireElectron, getCanvasSize]);
+
+            // Clear screen canvas on reset
+            useEffect(() => {
+                const screenCanvas = screenCanvasRef.current;
+                if (screenCanvas && electronCount === 0) {
+                    const sctx = screenCanvas.getContext('2d');
+                    sctx.clearRect(0, 0, screenCanvas.width, screenCanvas.height);
+                }
+            }, [electronCount]);
+
+            const clearScreen = () => {
+                const screenCanvas = screenCanvasRef.current;
+                if (screenCanvas) {
+                    const sctx = screenCanvas.getContext('2d');
+                    sctx.clearRect(0, 0, screenCanvas.width, screenCanvas.height);
+                }
+            };
+
+            // "Sluta observera" → close curtain
+            const handleStopObserving = () => {
+                resetExperiment();
+                clearScreen();
+                curtainTargetRef.current = 1;
+                setPhase('curtain-closed');
+            };
+
+            // "Skjut elektroner" → fire behind curtain
+            const handleStartHiddenFiring = () => {
+                hiddenFiringRef.current = true;
+                setPhase('firing-hidden');
+            };
+
+            // "Sluta skjuta elektroner" → stop, prepare reveal
+            const handleStopHiddenFiring = () => {
+                hiddenFiringRef.current = false;
+                electronsRef.current = []; // clear in-flight electrons
+                setPhase('ready-to-reveal');
+            };
+
+            // "Öppna draperiet" → open curtain, show pattern
+            const handleRevealCurtain = () => {
+                curtainTargetRef.current = 0;
+                setPhase('revealing');
+            };
+
+            // "Börja om med observation" → back to start
+            const handleRestart = () => {
+                resetExperiment();
+                clearScreen();
+                curtainTargetRef.current = 0;
+                curtainPosRef.current = 0;
+                setAutoFire(false);
+                setPhase('observing');
+            };
+
+            const handleReset = () => {
+                hitsRef.current = [];
+                screenDataRef.current = null;
+                setElectronCount(0);
+                clearScreen();
+            };
+
+            // Click on canvas to toggle screen view
+
+            // Draw screen front view (also stored in ref for use in animation loop)
+            const drawScreenView = useCallback(() => {
+                const svCanvas = screenViewCanvasRef.current;
+                if (!svCanvas) return;
+                const container = svCanvas.parentElement;
+                const w = container.clientWidth - 12; // account for padding
+                const h = container.clientHeight - 12;
+                if (w <= 0 || h <= 0) return;
+                svCanvas.width = w;
+                svCanvas.height = h;
+                const ctx = svCanvas.getContext('2d');
+
+                // Black background
+                ctx.fillStyle = '#050510';
+                ctx.fillRect(0, 0, w, h);
+
+                // Subtle border
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(0, 0, w, h);
+
+                const hits = hitsRef.current;
+                if (hits.length === 0) return;
+
+                // Map hit y-positions to screen view coordinates
+                const mainCanvas = canvasRef.current;
+                if (!mainCanvas) return;
+                const mainH = mainCanvas.height;
+                const centerY = mainH / 2;
+                const screenHPx = mainH * SCREEN_HEIGHT_FRACTION;
+                const screenTop = mainH * (1 - SCREEN_HEIGHT_FRACTION) / 2;
+
+                const padding = 30;
+                const viewH = h - padding * 2;
+                const viewW = w - padding * 2;
+
+                for (const hit of hits) {
+                    // Map from main canvas y to screen view y
+                    const normalizedY = (hit.y - screenTop) / screenHPx;
+                    const sy = padding + normalizedY * viewH;
+                    // xOff gives random horizontal spread
+                    const sx = w / 2 + hit.xOff * viewW * 0.45;
+
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, 1.2, 0, Math.PI * 2);
+                    ctx.fillStyle = hit.observed
+                        ? 'rgba(248, 200, 200, 0.85)'
+                        : 'rgba(200, 230, 255, 0.85)';
+                    ctx.fill();
+                }
+
+                // Label
+                ctx.font = '12px Poppins, sans-serif';
+                ctx.fillStyle = '#64748b';
+                ctx.textAlign = 'center';
+                ctx.fillText(`${formatNumber(hits.length)} träffar`, w / 2, h - 8);
+            }, []);
+
+            // Keep ref in sync
+            drawScreenViewRef.current = drawScreenView;
+
+            useEffect(() => {
+                const t = setTimeout(drawScreenView, 50);
+                return () => clearTimeout(t);
+            }, [drawScreenView, electronCount]);
+
+            // Curtain button label and handler
+            const getCurtainButton = () => {
+                switch (phase) {
+                    case 'curtain-closed':
+                        return { label: 'Skjut elektroner', onClick: handleStartHiddenFiring };
+                    case 'firing-hidden':
+                        return { label: 'Sluta skjuta elektroner', onClick: handleStopHiddenFiring };
+                    case 'ready-to-reveal':
+                        return { label: 'Öppna draperiet', onClick: handleRevealCurtain };
+                    case 'revealing':
+                        return { label: 'Stäng draperiet', onClick: () => {
+                            curtainTargetRef.current = 1;
+                            setPhase('curtain-closed');
+                        }};
+                    default:
+                        return null;
+                }
+            };
+
+            const curtainButton = getCurtainButton();
+            const showCurtainOverlay = phase === 'ready-to-reveal' || phase === 'revealing';
+
+            return (
+                <div>
+                    {/* Canvas area + screen view */}
+                    <div className="glass-card p-4 mb-4" style={{ position: 'relative', display: 'flex', gap: '16px', alignItems: 'stretch' }}>
+                        <div style={{ flex: 1, minWidth: 0, position: 'relative' }}>
+                        <canvas ref={canvasRef} className="sim-canvas" style={{ width: '100%', display: 'block' }} />
+                        <canvas ref={screenCanvasRef} style={{ display: 'none' }} />
+                        {/* Curtain overlay button */}
+                        {showCurtainOverlay && curtainButton && (
+                            <div style={{
+                                position: 'absolute',
+                                bottom: '24px',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                zIndex: 10
+                            }}>
+                                <button
+                                    onClick={curtainButton.onClick}
+                                    className="curtain-btn px-8 py-3 rounded-xl"
+                                    style={{
+                                        background: 'linear-gradient(135deg, rgba(180, 30, 30, 0.9), rgba(140, 20, 20, 0.95))',
+                                        color: '#fde68a',
+                                        border: '2px solid rgba(212, 160, 23, 0.6)',
+                                        fontSize: '1rem',
+                                        boxShadow: '0 0 20px rgba(180, 30, 30, 0.4)'
+                                    }}
+                                >
+                                    {curtainButton.label}
+                                </button>
+                            </div>
+                        )}
+                        </div>
+                        {/* Screen front view - always visible */}
+                        <div style={{ width: '180px', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <p style={{
+                                fontFamily: 'Poppins, sans-serif',
+                                color: '#94a3b8',
+                                fontSize: '0.8rem',
+                                textAlign: 'center',
+                                marginBottom: '6px'
+                            }}>
+                                Skärm framifrån
+                            </p>
+                            <div className="glass-card-inner" style={{ padding: '6px', borderRadius: '10px', width: '100%', flex: 1 }}>
+                                <canvas
+                                    ref={screenViewCanvasRef}
+                                    style={{ width: '100%', height: '100%', display: 'block', borderRadius: '6px' }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Controls */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                        {/* Observation / phase control */}
+                        <div className="glass-card p-4 flex flex-col items-center justify-center">
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+                                Observatör vid spalten
+                            </p>
+                            {phase === 'observing' ? (
+                                <button
+                                    onClick={handleStopObserving}
+                                    className="eye-btn observing px-6 py-3 rounded-xl text-lg font-semibold"
+                                    style={{
+                                        fontFamily: 'Poppins, sans-serif',
+                                        background: 'rgba(239, 68, 68, 0.15)',
+                                        color: '#f87171',
+                                        border: '2px solid rgba(239, 68, 68, 0.4)'
+                                    }}
+                                >
+                                    👁️ Sluta observera
+                                </button>
+                            ) : phase === 'revealing' ? (
+                                <button
+                                    onClick={handleRestart}
+                                    className="px-4 py-2 rounded-lg"
+                                    style={{
+                                        fontFamily: 'Poppins, sans-serif',
+                                        background: 'rgba(100, 116, 139, 0.1)',
+                                        color: '#64748b',
+                                        border: '1px solid rgba(100, 116, 139, 0.2)',
+                                        fontSize: '0.8rem',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    Börja om med observation
+                                </button>
+                            ) : (
+                                <div
+                                    className="px-6 py-3 rounded-xl text-lg font-semibold"
+                                    style={{
+                                        fontFamily: 'Poppins, sans-serif',
+                                        background: 'rgba(56, 189, 248, 0.05)',
+                                        color: '#64748b',
+                                        border: '2px solid rgba(100, 116, 139, 0.2)',
+                                        textAlign: 'center'
+                                    }}
+                                >
+                                    🔇 Ingen observation
+                                </div>
+                            )}
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#64748b', fontSize: '0.75rem', marginTop: '0.5rem', textAlign: 'center' }}>
+                                {phase === 'observing' && 'Elektronen beter sig som en partikel'}
+                                {phase === 'curtain-closed' && 'Draperiet är fördraget'}
+                                {phase === 'firing-hidden' && 'Elektroner skjuts bakom draperiet...'}
+                                {phase === 'ready-to-reveal' && 'Redo att avslöja mönstret'}
+                                {phase === 'revealing' && 'Interferensmönster avslöjat!'}
+                            </p>
+                        </div>
+
+                        {/* Fire controls - only in observing mode */}
+                        <div className="glass-card p-4 flex flex-col items-center justify-center">
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+                                {phase === 'observing' ? 'Skjut elektroner (med observation)' : 'Elektrontakt'}
+                            </p>
+                            {phase === 'observing' && (
+                                <div className="flex gap-3 mb-3">
+                                    <button
+                                        onClick={() => setAutoFire(prev => !prev)}
+                                        className="px-5 py-2 rounded-lg font-semibold"
+                                        style={{
+                                            fontFamily: 'Poppins, sans-serif',
+                                            background: autoFire ? 'rgba(34, 197, 94, 0.15)' : 'rgba(56, 189, 248, 0.15)',
+                                            color: autoFire ? '#22c55e' : '#38bdf8',
+                                            border: '1px solid',
+                                            borderColor: autoFire ? 'rgba(34, 197, 94, 0.3)' : 'rgba(56, 189, 248, 0.3)',
+                                            fontSize: '0.9rem',
+                                            transition: 'all 0.3s'
+                                        }}
+                                    >
+                                        {autoFire ? 'Stoppa' : 'Skjut elektroner'}
+                                    </button>
+                                </div>
+                            )}
+                            {(phase === 'curtain-closed' || phase === 'firing-hidden') && (
+                                <div className="flex gap-3 mb-3">
+                                    <button
+                                        onClick={phase === 'curtain-closed' ? handleStartHiddenFiring : handleStopHiddenFiring}
+                                        className="px-5 py-2 rounded-lg font-semibold"
+                                        style={{
+                                            fontFamily: 'Poppins, sans-serif',
+                                            background: phase === 'firing-hidden' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(56, 189, 248, 0.15)',
+                                            color: phase === 'firing-hidden' ? '#22c55e' : '#38bdf8',
+                                            border: '1px solid',
+                                            borderColor: phase === 'firing-hidden' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(56, 189, 248, 0.3)',
+                                            fontSize: '0.9rem',
+                                            transition: 'all 0.3s'
+                                        }}
+                                    >
+                                        {phase === 'firing-hidden' ? 'Sluta skjuta' : 'Skjut elektroner'}
+                                    </button>
+                                </div>
+                            )}
+                            <div className="flex items-center gap-2" style={{ width: '100%' }}>
+                                <span style={{ fontFamily: 'Poppins, sans-serif', color: '#64748b', fontSize: '0.75rem', whiteSpace: 'nowrap' }}>Takt:</span>
+                                <input
+                                    type="range"
+                                    min="10"
+                                    max="50"
+                                    value={fireRate}
+                                    onChange={(e) => setFireRate(parseInt(e.target.value))}
+                                    style={{ flex: 1, accentColor: '#38bdf8' }}
+                                />
+                                <span style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.75rem', minWidth: '35px' }}>
+                                    {fireRate}/s
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Stats */}
+                        <div className="glass-card p-4 flex flex-col items-center justify-center">
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                                Antal träffar
+                            </p>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '2rem', fontWeight: '700' }}>
+                                {formatNumber(electronCount)}
+                            </p>
+                            {(phase === 'observing' || phase === 'revealing') && (
+                                <button
+                                    onClick={phase === 'revealing' ? handleRestart : handleReset}
+                                    className="mt-3 px-4 py-1.5 rounded-lg"
+                                    style={{
+                                        fontFamily: 'Poppins, sans-serif',
+                                        background: 'rgba(100, 116, 139, 0.15)',
+                                        color: '#94a3b8',
+                                        border: '1px solid rgba(100, 116, 139, 0.2)',
+                                        fontSize: '0.8rem',
+                                        cursor: 'pointer',
+                                        transition: 'all 0.3s'
+                                    }}
+                                >
+                                    Återställ
+                                </button>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Explanation */}
+                    <div className="glass-card p-6">
+                        <h3 style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '1.2rem', fontWeight: '600', marginBottom: '1rem' }}>
+                            Vad händer här?
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="glass-card-inner p-4">
+                                <h4 style={{ fontFamily: 'Poppins, sans-serif', color: '#38bdf8', fontSize: '0.95rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                                    🔇 Utan observation
+                                </h4>
+                                <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.6' }}>
+                                    Varje elektron passerar genom <strong style={{ color: '#e2e8f0' }}>båda spalterna samtidigt</strong> som en
+                                    sannolikhetsvåg. Vågen interfererar med sig själv och skapar ett
+                                    <strong style={{ color: '#e2e8f0' }}> interferensmönster</strong> med ljusa och mörka ränder på
+                                    skärmen &mdash; precis som ljusvågor.
+                                </p>
+                            </div>
+                            <div className="glass-card-inner p-4">
+                                <h4 style={{ fontFamily: 'Poppins, sans-serif', color: '#f87171', fontSize: '0.95rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                                    👁️ Med observation
+                                </h4>
+                                <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.6' }}>
+                                    När vi mäter vilken spalt elektronen passerar genom, <strong style={{ color: '#e2e8f0' }}>kollapsar
+                                    vågfunktionen</strong>. Elektronen beter sig nu som en klassisk partikel och passerar
+                                    genom <strong style={{ color: '#e2e8f0' }}>en av spalterna</strong>. Interferensmönstret försvinner
+                                    och vi ser istället två ränder &mdash; en bakom varje spalt.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="glass-card-inner p-4 mt-4">
+                            <h4 style={{ fontFamily: 'Poppins, sans-serif', color: '#a78bfa', fontSize: '0.95rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                                Varför är detta märkligt?
+                            </h4>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.6' }}>
+                                Även om vi skjuter <strong style={{ color: '#e2e8f0' }}>en elektron i taget</strong> bildas interferensmönstret
+                                gradvis. Varje enskild elektron verkar "veta" om båda spalterna &mdash; trots att den är en enda partikel.
+                                Det är som om elektronen interfererar med sig själv! Detta fenomen, kallat
+                                <strong style={{ color: '#e2e8f0' }}> våg-partikeldualiteten</strong>, är en av kvantmekanikens mest
+                                grundläggande och fascinerande egenskaper.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<DoubleSlit />);
+    </script>
+</body>
+</html>

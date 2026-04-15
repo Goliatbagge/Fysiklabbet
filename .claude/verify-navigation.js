@@ -57,6 +57,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-vaxelstromsgenerator.html',
     'fysik2-em-stralning.html',
     'fysik2-dubbelspalt.html',
+    'fysik2-manens-faser.html',
     'fysik1-halveringstid.html',
     'om.html',
     'kontakt.html'

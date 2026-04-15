@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Månens faser - Fysiklabbet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .phase-label-active {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+        }
+        .phase-label-inactive {
+            background: rgba(100, 116, 139, 0.08);
+            border-color: rgba(100, 116, 139, 0.15);
+            color: #64748b;
+        }
+        .control-btn {
+            font-family: 'Poppins', sans-serif;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .control-btn:hover {
+            transform: translateY(-1px);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(100, 116, 139, 0.3);
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="breadcrumb">
+            <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik 2</a> / <span>Månens faser</span>
+        </div>
+
+        <section class="intro-section">
+            <h1 class="section-title">Månens faser</h1>
+            <p class="intro-text">
+                Månen lyser inte med eget ljus utan reflekterar solens strålar. Beroende på var månen befinner sig
+                i sin bana runt jorden ser vi olika stor del av den belysta sidan. Det tar cirka 29,5 dygn
+                för månen att fullborda en hel cykler av faser.
+            </p>
+        </section>
+
+        <div id="root"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+
+        const PHASES = [
+            { name: 'Nymåne',               angle: 0,   desc: 'Månen är mellan jorden och solen. Den belysta sidan är vänd bort från oss.' },
+            { name: 'Vaxande skära',         angle: 45,  desc: 'En tunn skära av ljus syns på månens högra sida.' },
+            { name: 'Första kvarteret',      angle: 90,  desc: 'Halva månens skiva är belyst, den högra halvan sedd från norra halvklotet.' },
+            { name: 'Vaxande halvmåne',      angle: 135, desc: 'Mer än hälften av månen är belyst och den växer mot fullmåne.' },
+            { name: 'Fullmåne',              angle: 180, desc: 'Hela den synliga sidan av månen är belyst av solen.' },
+            { name: 'Avtagande halvmåne',    angle: 225, desc: 'Mer än hälften är fortfarande belyst, men ljuset minskar.' },
+            { name: 'Sista kvarteret',       angle: 270, desc: 'Halva månens skiva är belyst, den vänstra halvan sedd från norra halvklotet.' },
+            { name: 'Avtagande skära',       angle: 315, desc: 'Bara en tunn skära av ljus syns på månens vänstra sida.' },
+        ];
+
+        const App = () => {
+            const canvasRef = useRef(null);
+            const moonViewRef = useRef(null);
+            const animRef = useRef(null);
+            const [playing, setPlaying] = useState(false);
+            const [angleDeg, setAngleDeg] = useState(0);
+            const [speed, setSpeed] = useState(1);
+            const playingRef = useRef(false);
+            const angleRef = useRef(0);
+            const speedRef = useRef(1);
+
+            useEffect(() => { playingRef.current = playing; }, [playing]);
+            useEffect(() => { angleRef.current = angleDeg; }, [angleDeg]);
+            useEffect(() => { speedRef.current = speed; }, [speed]);
+
+            // Find current phase
+            const currentPhase = (() => {
+                let a = ((angleDeg % 360) + 360) % 360;
+                // Find closest phase
+                let best = 0, bestDist = 999;
+                PHASES.forEach((p, i) => {
+                    let dist = Math.abs(a - p.angle);
+                    if (dist > 180) dist = 360 - dist;
+                    if (dist < bestDist) { bestDist = dist; best = i; }
+                });
+                return PHASES[best];
+            })();
+
+            // Draw moon as seen from earth
+            const drawMoonView = useCallback((ctx, cx, cy, r, angleDeg) => {
+                // angleDeg: 0 = new moon (completely dark), 180 = full moon (completely lit)
+                const a = ((angleDeg % 360) + 360) % 360;
+                const rad = a * Math.PI / 180;
+                const cosA = Math.cos(rad);
+                // illumination: 0 at new moon, 0.5 at quarters, 1 at full moon
+                const illumination = (1 - cosA) / 2;
+
+                // Dark background circle (moon body)
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                ctx.fillStyle = '#1a1a2e';
+                ctx.fill();
+
+                // Clip to moon circle
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                ctx.clip();
+
+                const craters = [
+                    { x: -0.3, y: -0.25, r: 0.18 },
+                    { x: 0.2, y: -0.4, r: 0.12 },
+                    { x: -0.1, y: 0.3, r: 0.15 },
+                    { x: 0.35, y: 0.15, r: 0.1 },
+                    { x: -0.4, y: 0.1, r: 0.08 },
+                    { x: 0.1, y: -0.1, r: 0.2 },
+                    { x: -0.15, y: -0.5, r: 0.09 },
+                    { x: 0.3, y: -0.15, r: 0.07 },
+                    { x: -0.25, y: 0.45, r: 0.11 },
+                    { x: 0.0, y: 0.5, r: 0.08 },
+                ];
+
+                // Gradient for lit surface
+                const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+                grad.addColorStop(0, '#e8e0d0');
+                grad.addColorStop(0.6, '#d4caba');
+                grad.addColorStop(1, '#bab0a0');
+
+                const N = 80;
+
+                if (illumination > 0.999) {
+                    // Full moon - entire disk lit
+                    ctx.beginPath();
+                    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                } else if (illumination > 0.001) {
+                    // Partial phase - draw lit area using limb arc + terminator curve
+                    ctx.beginPath();
+
+                    if (a <= 180) {
+                        // Waxing: right side lit
+                        // Right limb arc: top -> right -> bottom
+                        ctx.arc(cx, cy, r, -Math.PI / 2, Math.PI / 2, false);
+                        // Terminator: bottom -> top (y-parametrized for clean curve)
+                        for (let i = 0; i <= N; i++) {
+                            const y = cy + r - (2 * r * i / N);
+                            const dy = y - cy;
+                            const halfW = Math.sqrt(Math.max(0, r * r - dy * dy));
+                            ctx.lineTo(cx + cosA * halfW, y);
+                        }
+                    } else {
+                        // Waning: left side lit
+                        // Left limb arc: top -> left -> bottom (counterclockwise)
+                        ctx.arc(cx, cy, r, -Math.PI / 2, Math.PI / 2, true);
+                        // Terminator: bottom -> top (y-parametrized)
+                        for (let i = 0; i <= N; i++) {
+                            const y = cy + r - (2 * r * i / N);
+                            const dy = y - cy;
+                            const halfW = Math.sqrt(Math.max(0, r * r - dy * dy));
+                            ctx.lineTo(cx - cosA * halfW, y);
+                        }
+                    }
+
+                    ctx.closePath();
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                }
+                // else: new moon - leave entirely dark
+
+                // Crater lit check helper
+                const isCraterLit = (relX) => {
+                    if (a <= 180) return relX > cosA;
+                    return relX < -cosA;
+                };
+
+                // Draw craters on lit side
+                craters.forEach(c => {
+                    const crX = cx + c.x * r;
+                    const crY = cy + c.y * r;
+                    const crR = c.r * r;
+
+                    if (isCraterLit(c.x)) {
+                        ctx.beginPath();
+                        ctx.arc(crX, crY, crR, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(160, 150, 135, 0.6)';
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(crX - crR * 0.15, crY - crR * 0.15, crR * 0.85, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(130, 120, 105, 0.3)';
+                        ctx.fill();
+                    }
+                });
+
+                // Dark side craters (subtle)
+                craters.forEach(c => {
+                    const crX = cx + c.x * r;
+                    const crY = cy + c.y * r;
+                    const crR = c.r * r;
+                    if (!isCraterLit(c.x)) {
+                        ctx.beginPath();
+                        ctx.arc(crX, crY, crR, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(10, 10, 25, 0.3)';
+                        ctx.fill();
+                    }
+                });
+
+                ctx.restore();
+
+                // Subtle rim glow
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(200, 200, 220, 0.15)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }, []);
+
+            // Main canvas drawing
+            const draw = useCallback(() => {
+                const canvas = canvasRef.current;
+                const mvCanvas = moonViewRef.current;
+                if (!canvas || !mvCanvas) return;
+
+                const ctx = canvas.getContext('2d');
+                const mvCtx = mvCanvas.getContext('2d');
+                const W = canvas.width;
+                const H = canvas.height;
+                const cx = W * 0.42;
+                const cy = H * 0.5;
+
+                const angle = angleRef.current;
+                const rad = (angle * Math.PI / 180);
+
+                ctx.clearRect(0, 0, W, H);
+
+                // Starfield background
+                ctx.fillStyle = '#050510';
+                ctx.fillRect(0, 0, W, H);
+
+                // Draw fixed stars
+                const starSeed = 42;
+                for (let i = 0; i < 120; i++) {
+                    const sx = ((i * 7919 + starSeed * 31) % W);
+                    const sy = ((i * 6271 + starSeed * 17) % H);
+                    const brightness = 0.2 + ((i * 3571) % 100) / 130;
+                    const size = 0.5 + ((i * 2311) % 100) / 120;
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(200, 210, 255, ${brightness})`;
+                    ctx.fill();
+                }
+
+                // Orbit parameters
+                const orbitA = Math.min(W, H) * 0.35; // semi-major
+                const orbitB = orbitA * 0.92;
+
+                // Draw sun glow on right side
+                const sunX = W + 60;
+                const sunY = cy;
+                const sunGrad = ctx.createRadialGradient(sunX, sunY, 20, sunX, sunY, 400);
+                sunGrad.addColorStop(0, 'rgba(255, 230, 100, 0.9)');
+                sunGrad.addColorStop(0.15, 'rgba(255, 200, 50, 0.5)');
+                sunGrad.addColorStop(0.4, 'rgba(255, 170, 30, 0.15)');
+                sunGrad.addColorStop(0.7, 'rgba(255, 150, 20, 0.03)');
+                sunGrad.addColorStop(1, 'transparent');
+                ctx.fillStyle = sunGrad;
+                ctx.fillRect(0, 0, W, H);
+
+                // Sun label
+                ctx.font = '600 14px Poppins, sans-serif';
+                ctx.fillStyle = '#fde68a';
+                ctx.textAlign = 'center';
+                ctx.fillText('Solljus', W - 30, 30);
+
+                // Sun rays arrows
+                ctx.strokeStyle = 'rgba(253, 230, 138, 0.4)';
+                ctx.lineWidth = 1.5;
+                for (let i = 0; i < 8; i++) {
+                    const rayY = cy - 140 + i * 40;
+                    const startRayX = W - 10;
+                    const endRayX = W - 65;
+                    ctx.beginPath();
+                    ctx.moveTo(startRayX, rayY);
+                    ctx.lineTo(endRayX, rayY);
+                    ctx.stroke();
+                    // Arrowhead
+                    ctx.beginPath();
+                    ctx.moveTo(endRayX, rayY);
+                    ctx.lineTo(endRayX + 8, rayY - 4);
+                    ctx.lineTo(endRayX + 8, rayY + 4);
+                    ctx.closePath();
+                    ctx.fillStyle = 'rgba(253, 230, 138, 0.4)';
+                    ctx.fill();
+                }
+
+                // Draw orbit path
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, orbitA, orbitB, 0, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([4, 6]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Orbit direction arrow
+                const arrowAngle = Math.PI * 0.15;
+                const arrowX = cx + orbitA * Math.cos(arrowAngle);
+                const arrowY = cy - orbitB * Math.sin(arrowAngle);
+                const tangentAngle = Math.atan2(-orbitB * Math.cos(arrowAngle), -orbitA * Math.sin(arrowAngle));
+                ctx.save();
+                ctx.translate(arrowX, arrowY);
+                ctx.rotate(tangentAngle);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(-8, -5);
+                ctx.lineTo(-8, 5);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(148, 163, 184, 0.35)';
+                ctx.fill();
+                ctx.restore();
+
+                // Draw Earth at center
+                const earthR = Math.min(W, H) * 0.065;
+                // Earth gradient
+                const earthGrad = ctx.createRadialGradient(cx - earthR * 0.3, cy - earthR * 0.3, 0, cx, cy, earthR);
+                earthGrad.addColorStop(0, '#4a9eff');
+                earthGrad.addColorStop(0.4, '#2563eb');
+                earthGrad.addColorStop(0.8, '#1e40af');
+                earthGrad.addColorStop(1, '#1e3a5f');
+                ctx.beginPath();
+                ctx.arc(cx, cy, earthR, 0, Math.PI * 2);
+                ctx.fillStyle = earthGrad;
+                ctx.fill();
+
+                // Landmasses
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(cx, cy, earthR, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.fillStyle = '#22c55e';
+                // Simplified continents
+                // "Europe/Africa"
+                ctx.beginPath();
+                ctx.ellipse(cx + earthR * 0.1, cy - earthR * 0.15, earthR * 0.15, earthR * 0.25, 0.2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(cx + earthR * 0.05, cy + earthR * 0.25, earthR * 0.12, earthR * 0.2, -0.1, 0, Math.PI * 2);
+                ctx.fill();
+                // "Americas"
+                ctx.beginPath();
+                ctx.ellipse(cx - earthR * 0.35, cy - earthR * 0.1, earthR * 0.12, earthR * 0.3, 0.15, 0, Math.PI * 2);
+                ctx.fill();
+                // Atmosphere glow
+                ctx.beginPath();
+                ctx.arc(cx, cy, earthR + 2, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                ctx.restore();
+
+                // Earth label
+                ctx.font = '600 14px Poppins, sans-serif';
+                ctx.fillStyle = '#94a3b8';
+                ctx.textAlign = 'center';
+                ctx.fillText('Jorden', cx, cy + earthR + 22);
+
+                // Draw moon at orbital position
+                // angle 0 = between earth and sun (right side / new moon)
+                // Positive angle = counterclockwise (as seen from north pole)
+                const moonX = cx + orbitA * Math.cos(rad);
+                const moonY = cy - orbitB * Math.sin(rad);
+                const moonR = Math.min(W, H) * 0.035;
+
+                // Moon shadow side - the side away from the sun
+                // Sun is to the right, so the right side of the moon is always lit
+                // We draw moon as a circle with half lit, half dark
+                const moonToSunAngle = Math.atan2(sunY - moonY, sunX - moonX);
+
+                // Dark base
+                ctx.beginPath();
+                ctx.arc(moonX, moonY, moonR, 0, Math.PI * 2);
+                ctx.fillStyle = '#2a2a3e';
+                ctx.fill();
+
+                // Lit half (facing the sun = right side always)
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(moonX, moonY, moonR, 0, Math.PI * 2);
+                ctx.clip();
+
+                // The lit half is always facing the sun (to the right)
+                ctx.beginPath();
+                ctx.arc(moonX, moonY, moonR + 1, -Math.PI/2, Math.PI/2, false);
+                ctx.closePath();
+                const moonLitGrad = ctx.createRadialGradient(moonX + moonR * 0.3, moonY, 0, moonX, moonY, moonR);
+                moonLitGrad.addColorStop(0, '#e8e0d0');
+                moonLitGrad.addColorStop(0.8, '#c8bfaf');
+                moonLitGrad.addColorStop(1, '#a89f8f');
+                ctx.fillStyle = moonLitGrad;
+                ctx.fill();
+                ctx.restore();
+
+                // Moon rim
+                ctx.beginPath();
+                ctx.arc(moonX, moonY, moonR, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(200, 200, 220, 0.2)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Phase labels around orbit
+                PHASES.forEach((p, i) => {
+                    const pRad = p.angle * Math.PI / 180;
+                    const labelDist = orbitA + 30;
+                    const labelDistB = orbitB + 30;
+                    const lx = cx + labelDist * Math.cos(pRad);
+                    const ly = cy - labelDistB * Math.sin(pRad);
+
+                    const isActive = p.name === currentPhase.name;
+                    ctx.font = isActive ? '600 12px Poppins, sans-serif' : '400 11px Poppins, sans-serif';
+                    ctx.fillStyle = isActive ? '#38bdf8' : 'rgba(148, 163, 184, 0.5)';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(p.name, lx, ly);
+
+                    // Small dot on orbit for this phase
+                    const dotX = cx + orbitA * Math.cos(pRad);
+                    const dotY = cy - orbitB * Math.sin(pRad);
+                    ctx.beginPath();
+                    ctx.arc(dotX, dotY, isActive ? 3 : 2, 0, Math.PI * 2);
+                    ctx.fillStyle = isActive ? '#38bdf8' : 'rgba(148, 163, 184, 0.3)';
+                    ctx.fill();
+                });
+
+                // Dashed line from earth to moon
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(moonX, moonY);
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 5]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Draw moon view (how it looks from earth)
+                const mvW = mvCanvas.width;
+                const mvH = mvCanvas.height;
+                mvCtx.clearRect(0, 0, mvW, mvH);
+
+                // Background
+                mvCtx.fillStyle = '#050510';
+                mvCtx.fillRect(0, 0, mvW, mvH);
+
+                // Stars in moon view
+                for (let i = 0; i < 40; i++) {
+                    const sx = ((i * 4919 + 13) % mvW);
+                    const sy = ((i * 3271 + 7) % mvH);
+                    const br = 0.15 + ((i * 2571) % 100) / 200;
+                    mvCtx.beginPath();
+                    mvCtx.arc(sx, sy, 0.5, 0, Math.PI * 2);
+                    mvCtx.fillStyle = `rgba(200, 210, 255, ${br})`;
+                    mvCtx.fill();
+                }
+
+                const mvCx = mvW / 2;
+                const mvCy = mvH / 2;
+                const mvR = Math.min(mvW, mvH) * 0.35;
+
+                drawMoonView(mvCtx, mvCx, mvCy, mvR, angle);
+
+                // Day count
+                const dayInCycle = ((angle % 360 + 360) % 360) / 360 * 29.53;
+                ctx.font = '400 13px Poppins, sans-serif';
+                ctx.fillStyle = '#64748b';
+                ctx.textAlign = 'left';
+                ctx.fillText(`Dag ${dayInCycle.toFixed(1).replace('.', ',')} av 29,5`, 15, H - 15);
+
+            }, [drawMoonView, currentPhase]);
+
+            // Animation loop
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const mvCanvas = moonViewRef.current;
+                if (!canvas || !mvCanvas) return;
+
+                const resize = () => {
+                    const container = canvas.parentElement;
+                    const w = container.clientWidth;
+                    const h = Math.min(w * 0.6, 550);
+                    canvas.width = w;
+                    canvas.height = h;
+                    canvas.style.height = h + 'px';
+
+                    // Moon view canvas
+                    const mvContainer = mvCanvas.parentElement;
+                    const mvSize = mvContainer.clientWidth - 24;
+                    mvCanvas.width = mvSize;
+                    mvCanvas.height = mvSize;
+                };
+                resize();
+                window.addEventListener('resize', resize);
+
+                let lastTime = performance.now();
+
+                const animate = (now) => {
+                    const dt = (now - lastTime) / 1000;
+                    lastTime = now;
+
+                    if (playingRef.current) {
+                        const newAngle = (angleRef.current + speedRef.current * 30 * dt) % 360;
+                        angleRef.current = newAngle;
+                        // Update React state less frequently to reduce re-renders
+                        setAngleDeg(newAngle);
+                    }
+
+                    draw();
+                    animRef.current = requestAnimationFrame(animate);
+                };
+
+                animRef.current = requestAnimationFrame(animate);
+
+                return () => {
+                    window.removeEventListener('resize', resize);
+                    if (animRef.current) cancelAnimationFrame(animRef.current);
+                };
+            }, [draw]);
+
+            // Update angleRef when slider changes
+            const handleAngleChange = (val) => {
+                angleRef.current = val;
+                setAngleDeg(val);
+            };
+
+            // Jump to phase
+            const jumpToPhase = (phase) => {
+                setPlaying(false);
+                playingRef.current = false;
+                handleAngleChange(phase.angle);
+            };
+
+            return (
+                <div>
+                    {/* Main simulation + moon view */}
+                    <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', alignItems: 'stretch' }}>
+                        <div className="glass-card p-3" style={{ flex: 1, minWidth: 0 }}>
+                            <canvas ref={canvasRef} style={{ width: '100%', display: 'block', borderRadius: '12px' }} />
+                        </div>
+                        <div className="glass-card p-3" style={{ width: '220px', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600, marginBottom: '8px' }}>
+                                Vy från jorden
+                            </p>
+                            <div style={{ width: '100%', aspectRatio: '1', position: 'relative' }}>
+                                <canvas ref={moonViewRef} style={{ width: '100%', height: '100%', borderRadius: '12px' }} />
+                            </div>
+                            <p style={{
+                                fontFamily: 'Poppins, sans-serif',
+                                color: '#38bdf8',
+                                fontSize: '1.05rem',
+                                fontWeight: 700,
+                                marginTop: '12px',
+                                textAlign: 'center'
+                            }}>
+                                {currentPhase.name}
+                            </p>
+                            <p style={{
+                                fontFamily: 'Poppins, sans-serif',
+                                color: '#94a3b8',
+                                fontSize: '0.75rem',
+                                textAlign: 'center',
+                                marginTop: '6px',
+                                lineHeight: 1.4
+                            }}>
+                                {currentPhase.desc}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Controls */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+                        {/* Play / Pause */}
+                        <div className="glass-card p-4" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '12px' }}>
+                                Animation
+                            </p>
+                            <button
+                                className="control-btn"
+                                onClick={() => setPlaying(p => !p)}
+                                style={{
+                                    padding: '10px 28px',
+                                    fontSize: '1rem',
+                                    background: playing ? 'rgba(239, 68, 68, 0.15)' : 'rgba(56, 189, 248, 0.15)',
+                                    color: playing ? '#f87171' : '#38bdf8',
+                                    border: `2px solid ${playing ? 'rgba(239, 68, 68, 0.3)' : 'rgba(56, 189, 248, 0.3)'}`
+                                }}
+                            >
+                                {playing ? 'Pausa' : 'Spela'}
+                            </button>
+                            <div style={{ marginTop: '12px', width: '100%' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: '#64748b', fontSize: '0.75rem' }}>Hastighet:</span>
+                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.75rem' }}>{speed.toFixed(1).replace('.', ',')}x</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="0.2"
+                                    max="5"
+                                    step="0.1"
+                                    value={speed}
+                                    onChange={(e) => setSpeed(parseFloat(e.target.value))}
+                                    style={{ width: '100%', accentColor: '#38bdf8' }}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Angle slider */}
+                        <div className="glass-card p-4" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '12px' }}>
+                                Månens position
+                            </p>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '1.5rem', fontWeight: 700 }}>
+                                {Math.round(((angleDeg % 360) + 360) % 360)}°
+                            </p>
+                            <input
+                                type="range"
+                                min="0"
+                                max="359"
+                                step="1"
+                                value={Math.round(((angleDeg % 360) + 360) % 360)}
+                                onChange={(e) => handleAngleChange(parseFloat(e.target.value))}
+                                style={{ width: '100%', marginTop: '8px', accentColor: '#38bdf8' }}
+                            />
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#64748b', fontSize: '0.7rem', marginTop: '6px' }}>
+                                Dra för att flytta månen manuellt
+                            </p>
+                        </div>
+
+                        {/* Phase info */}
+                        <div className="glass-card p-4" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '8px' }}>
+                                Hoppa till fas
+                            </p>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px', width: '100%' }}>
+                                {PHASES.map((p) => (
+                                    <button
+                                        key={p.name}
+                                        className="control-btn"
+                                        onClick={() => jumpToPhase(p)}
+                                        style={{
+                                            padding: '4px 6px',
+                                            fontSize: '0.7rem',
+                                            background: currentPhase.name === p.name ? 'rgba(56, 189, 248, 0.15)' : 'rgba(100, 116, 139, 0.08)',
+                                            color: currentPhase.name === p.name ? '#38bdf8' : '#94a3b8',
+                                            border: `1px solid ${currentPhase.name === p.name ? 'rgba(56, 189, 248, 0.3)' : 'rgba(100, 116, 139, 0.15)'}`,
+                                        }}
+                                    >
+                                        {p.name}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Explanation */}
+                    <div className="glass-card p-6" style={{ marginTop: '16px' }}>
+                        <h3 style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '1.2rem', fontWeight: 600, marginBottom: '12px' }}>
+                            Hur uppstår månens faser?
+                        </h3>
+                        <div style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                            <p style={{ marginBottom: '10px' }}>
+                                Månen kretsar runt jorden med en period på cirka <strong style={{ color: '#e2e8f0' }}>29,5 dygn</strong> (en synodisk månad).
+                                Eftersom månen inte har eget ljus ser vi bara den del som belyses av solen.
+                            </p>
+                            <p style={{ marginBottom: '10px' }}>
+                                Vid <strong style={{ color: '#e2e8f0' }}>nymåne</strong> befinner sig månen mellan jorden och solen, och den belysta sidan är vänd
+                                bort från oss. Vid <strong style={{ color: '#e2e8f0' }}>fullmåne</strong> är jorden mellan solen och månen, och hela den synliga sidan
+                                är upplyst.
+                            </p>
+                            <p>
+                                Under den <strong style={{ color: '#e2e8f0' }}>vaxande</strong> fasen (nymåne till fullmåne) växer den belysta delen från höger.
+                                Under den <strong style={{ color: '#e2e8f0' }}>avtagande</strong> fasen (fullmåne till nymåne) minskar ljuset från höger.
+                                Detta gäller sett från norra halvklotet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />);
+    </script>
+</body>
+</html>

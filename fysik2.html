@@ -36,117 +36,130 @@
         </section>
 
         <section class="chapters-section">
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem;">Rörelse och Krafter</h2>
-            <div class="chapters-grid">
-                <a href="fysik2-rorelse-app.html" class="chapter-card">
-                    <div class="chapter-icon">🎯</div>
-                    <h3 class="chapter-title">Snett kast</h3>
-                    <p class="chapter-description">
-                        Utforska projektilrörelse och kastparabeln. Se hur vinkeln och hastigheten påverkar rörelsen!
-                    </p>
-                </a>
+            <nav class="topic-nav">
+                <button class="topic-btn active" onclick="showTopic('rorelse', this)">Rörelse och krafter</button>
+                <button class="topic-btn" onclick="showTopic('vagor', this)">Ljud och mekaniska vågor</button>
+                <button class="topic-btn" onclick="showTopic('em', this)">Elektromagnetism</button>
+                <button class="topic-btn" onclick="showTopic('partiklar', this)">Vågor och partiklar</button>
+                <button class="topic-btn" onclick="showTopic('astronomi', this)">Astronomi</button>
+            </nav>
+
+            <div id="rorelse" class="topic-section active">
+                <div class="chapters-grid">
+                    <a href="fysik2-rorelse-app.html" class="chapter-card">
+                        <div class="chapter-icon">🎯</div>
+                        <h3 class="chapter-title">Snett kast</h3>
+                        <p class="chapter-description">
+                            Utforska projektilrörelse och kastparabeln. Se hur vinkeln och hastigheten påverkar rörelsen!
+                        </p>
+                    </a>
+                </div>
             </div>
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Ljud och mekaniska vågor</h2>
-            <div class="chapters-grid">
-                <a href="fysik2-brytning-app.html" class="chapter-card">
-                    <div class="chapter-icon">💎</div>
-                    <h3 class="chapter-title">Brytningslagen</h3>
-                    <p class="chapter-description">
-                        Utforska Snells lag och se hur ljus bryts vid gränsytan mellan olika medier. Testa total intern reflektion!
-                    </p>
-                </a>
-                <a href="fysik2-staende-vag-app.html" class="chapter-card">
-                    <div class="chapter-icon">🎸</div>
-                    <h3 class="chapter-title">Stående våg i sträng</h3>
-                    <p class="chapter-description">
-                        Utforska resonans och stående vågor. Justera frekvens, stränglängd och spännkraft för att hitta perfekta övertoner!
-                    </p>
-                </a>
-                <a href="fysik2-pendel-app.html" class="chapter-card">
-                    <div class="chapter-icon">⏱️</div>
-                    <h3 class="chapter-title">Plan pendel</h3>
-                    <p class="chapter-description">
-                        Undersök hur pendelns period beror på längd och tyngdfaktor. Testa på olika himlakroppar och se att massan inte påverkar!
-                    </p>
-                </a>
-                <a href="fysik2-vagsimulator.html" class="chapter-card">
-                    <div class="chapter-icon">🌊</div>
-                    <h3 class="chapter-title">Vågsimulator</h3>
-                    <p class="chapter-description">
-                        Utforska mekaniska vågor i 2D och 3D. Testa interferens, dopplereffekt, refraktion och nodlinjer!
-                    </p>
-                </a>
-                <a href="fysik2-svangningar-jamforelse.html" class="chapter-card">
-                    <div class="chapter-icon">〰️</div>
-                    <h3 class="chapter-title">Jämförelse av svängningar</h3>
-                    <p class="chapter-description">
-                        Se harmonisk svängning, plan pendel och konisk pendel sida vid sida med samma periodtid!
-                    </p>
-                </a>
+            <div id="vagor" class="topic-section">
+                <div class="chapters-grid">
+                    <a href="fysik2-brytning-app.html" class="chapter-card">
+                        <div class="chapter-icon">💎</div>
+                        <h3 class="chapter-title">Brytningslagen</h3>
+                        <p class="chapter-description">
+                            Utforska Snells lag och se hur ljus bryts vid gränsytan mellan olika medier. Testa total intern reflektion!
+                        </p>
+                    </a>
+                    <a href="fysik2-staende-vag-app.html" class="chapter-card">
+                        <div class="chapter-icon">🎸</div>
+                        <h3 class="chapter-title">Stående våg i sträng</h3>
+                        <p class="chapter-description">
+                            Utforska resonans och stående vågor. Justera frekvens, stränglängd och spännkraft för att hitta perfekta övertoner!
+                        </p>
+                    </a>
+                    <a href="fysik2-pendel-app.html" class="chapter-card">
+                        <div class="chapter-icon">⏱️</div>
+                        <h3 class="chapter-title">Plan pendel</h3>
+                        <p class="chapter-description">
+                            Undersök hur pendelns period beror på längd och tyngdfaktor. Testa på olika himlakroppar och se att massan inte påverkar!
+                        </p>
+                    </a>
+                    <a href="fysik2-vagsimulator.html" class="chapter-card">
+                        <div class="chapter-icon">🌊</div>
+                        <h3 class="chapter-title">Vågsimulator</h3>
+                        <p class="chapter-description">
+                            Utforska mekaniska vågor i 2D och 3D. Testa interferens, dopplereffekt, refraktion och nodlinjer!
+                        </p>
+                    </a>
+                    <a href="fysik2-svangningar-jamforelse.html" class="chapter-card">
+                        <div class="chapter-icon">〰️</div>
+                        <h3 class="chapter-title">Jämförelse av svängningar</h3>
+                        <p class="chapter-description">
+                            Se harmonisk svängning, plan pendel och konisk pendel sida vid sida med samma periodtid!
+                        </p>
+                    </a>
+                </div>
             </div>
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Vågor och partiklar</h2>
-            <div class="chapters-grid">
-                <a href="fysik2-em-stralning.html" class="chapter-card">
-                    <div class="chapter-icon">📡</div>
-                    <h3 class="chapter-title">Elektromagnetisk strålning</h3>
-                    <p class="chapter-description">
-                        Utforska det elektromagnetiska spektrumet från radiovågor till gammastrålning. Se sambandet mellan våglängd, frekvens och energi!
-                    </p>
-                </a>
-                <a href="fysik2-dubbelspalt.html" class="chapter-card">
-                    <div class="chapter-icon">🔬</div>
-                    <h3 class="chapter-title">Dubbelspaltexperimentet</h3>
-                    <p class="chapter-description">
-                        Skjut elektroner genom en dubbelspalt och upptäck våg-partikeldualiteten. Se hur observation förändrar beteendet!
-                    </p>
-                </a>
+            <div id="partiklar" class="topic-section">
+                <div class="chapters-grid">
+                    <a href="fysik2-em-stralning.html" class="chapter-card">
+                        <div class="chapter-icon">📡</div>
+                        <h3 class="chapter-title">Elektromagnetisk strålning</h3>
+                        <p class="chapter-description">
+                            Utforska det elektromagnetiska spektrumet från radiovågor till gammastrålning. Se sambandet mellan våglängd, frekvens och energi!
+                        </p>
+                    </a>
+                    <a href="fysik2-dubbelspalt.html" class="chapter-card">
+                        <div class="chapter-icon">🔬</div>
+                        <h3 class="chapter-title">Dubbelspaltexperimentet</h3>
+                        <p class="chapter-description">
+                            Skjut elektroner genom en dubbelspalt och upptäck våg-partikeldualiteten. Se hur observation förändrar beteendet!
+                        </p>
+                    </a>
+                </div>
             </div>
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Astronomi</h2>
-            <div class="chapters-grid">
-                <a href="fysik2-manens-faser.html" class="chapter-card">
-                    <div class="chapter-icon">🌙</div>
-                    <h3 class="chapter-title">Månens faser</h3>
-                    <p class="chapter-description">
-                        Se hur månens position i sin bana runt jorden ger upphov till de olika månfaserna. Animera omloppet och studera varje fas!
-                    </p>
-                </a>
+            <div id="astronomi" class="topic-section">
+                <div class="chapters-grid">
+                    <a href="fysik2-manens-faser.html" class="chapter-card">
+                        <div class="chapter-icon">🌙</div>
+                        <h3 class="chapter-title">Månens faser</h3>
+                        <p class="chapter-description">
+                            Se hur månens position i sin bana runt jorden ger upphov till de olika månfaserna. Animera omloppet och studera varje fas!
+                        </p>
+                    </a>
+                </div>
             </div>
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Elektromagnetism</h2>
-            <div class="chapters-grid">
-                <a href="fysik2-magnetfalt-app.html" class="chapter-card">
-                    <div class="chapter-icon">🧲</div>
-                    <h3 class="chapter-title">Magnetfält kring rak ledare</h3>
-                    <p class="chapter-description">
-                        Utforska magnetfältet runt en strömförande ledare. Visualisera högerhandsregeln och Oersteds experiment i 3D!
-                    </p>
-                </a>
-                <a href="fysik2-jordmagnetiska-faltet.html" class="chapter-card">
-                    <div class="chapter-icon">🌍</div>
-                    <h3 class="chapter-title">Jordmagnetiska fältet</h3>
-                    <p class="chapter-description">
-                        Utforska jordens magnetfält i 3D! Se hur fältlinjerna går och varför kompassnålen pekar norrut.
-                    </p>
-                </a>
-                <a href="fysik2-magnetiskt-flode.html" class="chapter-card">
-                    <div class="chapter-icon">🧲</div>
-                    <h3 class="chapter-title">Magnetiskt flöde</h3>
-                    <p class="chapter-description">
-                        Utforska sambandet mellan magnetisk flödestäthet och magnetiskt flöde. Se hur fältlinjer passerar genom en yta!
-                    </p>
-                </a>
-                <!-- Dold tills vidare
-                <a href="fysik2-vaxelstromsgenerator.html" class="chapter-card">
-                    <div class="chapter-icon">⚡</div>
-                    <h3 class="chapter-title">Växelströmsgenerator</h3>
-                    <p class="chapter-description">
-                        Utforska hur en roterande spole i ett magnetfält alstrar sinusformad växelspänning. Se Faradays lag i 3D!
-                    </p>
-                </a>
-                -->
+            <div id="em" class="topic-section">
+                <div class="chapters-grid">
+                    <a href="fysik2-magnetfalt-app.html" class="chapter-card">
+                        <div class="chapter-icon">🧲</div>
+                        <h3 class="chapter-title">Magnetfält kring rak ledare</h3>
+                        <p class="chapter-description">
+                            Utforska magnetfältet runt en strömförande ledare. Visualisera högerhandsregeln och Oersteds experiment i 3D!
+                        </p>
+                    </a>
+                    <a href="fysik2-jordmagnetiska-faltet.html" class="chapter-card">
+                        <div class="chapter-icon">🌍</div>
+                        <h3 class="chapter-title">Jordmagnetiska fältet</h3>
+                        <p class="chapter-description">
+                            Utforska jordens magnetfält i 3D! Se hur fältlinjerna går och varför kompassnålen pekar norrut.
+                        </p>
+                    </a>
+                    <a href="fysik2-magnetiskt-flode.html" class="chapter-card">
+                        <div class="chapter-icon">🧲</div>
+                        <h3 class="chapter-title">Magnetiskt flöde</h3>
+                        <p class="chapter-description">
+                            Utforska sambandet mellan magnetisk flödestäthet och magnetiskt flöde. Se hur fältlinjer passerar genom en yta!
+                        </p>
+                    </a>
+                    <!-- Dold tills vidare
+                    <a href="fysik2-vaxelstromsgenerator.html" class="chapter-card">
+                        <div class="chapter-icon">⚡</div>
+                        <h3 class="chapter-title">Växelströmsgenerator</h3>
+                        <p class="chapter-description">
+                            Utforska hur en roterande spole i ett magnetfält alstrar sinusformad växelspänning. Se Faradays lag i 3D!
+                        </p>
+                    </a>
+                    -->
+                </div>
             </div>
         </section>
     </main>
@@ -154,5 +167,14 @@
     <footer class="footer">
         <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
     </footer>
+
+    <script>
+        function showTopic(id, btn) {
+            document.querySelectorAll('.topic-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+        }
+    </script>
 </body>
 </html>

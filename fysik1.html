@@ -36,189 +36,210 @@
         </section>
 
         <section class="chapters-section">
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem;">Rörelse</h2>
-            <div class="chapters-grid">
-                <div class="chapter-card" onclick="location.href='fysik1-tyngdfaktor-jorden.html'">
-                    <div class="chapter-icon">🌍</div>
-                    <h3 class="chapter-title">Tyngdfaktorn på jorden</h3>
-                    <p class="chapter-description">
-                        Utforska hur tyngdaccelerationen varierar på jorden! Klicka på olika platser på 3D-jordklotet för att se g-värdet.
-                    </p>
-                </div>
+            <nav class="topic-nav">
+                <button class="topic-btn active" onclick="showTopic('rorelse', this)">Rörelse</button>
+                <button class="topic-btn" onclick="showTopic('krafter', this)">Krafter</button>
+                <button class="topic-btn" onclick="showTopic('densitet', this)">Densitet och tryck</button>
+                <button class="topic-btn" onclick="showTopic('varme', this)">Värmelära</button>
+                <button class="topic-btn" onclick="showTopic('el', this)">Elektricitet</button>
+                <button class="topic-btn" onclick="showTopic('karnfysik', this)">Kärnfysik</button>
+            </nav>
 
-                <div class="chapter-card" onclick="location.href='fysik1-rorelsediagram.html'">
-                    <div class="chapter-icon">📉</div>
-                    <h3 class="chapter-title">Rörelsediagram</h3>
-                    <p class="chapter-description">
-                        Se s-t, v-t och a-t grafer ritas upp i realtid för konstant hastighet, konstant acceleration och kast uppåt!
-                    </p>
-                </div>
-            </div>
+            <div id="rorelse" class="topic-section active">
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Krafter</h2>
-            <div class="chapters-grid">
-                <div class="chapter-card" onclick="location.href='fysik1-newtons-tredje-app.html'">
-                    <div class="chapter-icon">🚀</div>
-                    <h3 class="chapter-title">Newtons tredje lag</h3>
-                    <p class="chapter-description">
-                        Utforska aktion och reaktion i rymden. Använd en brandsläckare för att navigera till rymdstationen!
-                    </p>
-                </div>
-            </div>
+                <div class="chapters-grid">
+                    <div class="chapter-card" onclick="location.href='fysik1-tyngdfaktor-jorden.html'">
+                        <div class="chapter-icon">🌍</div>
+                        <h3 class="chapter-title">Tyngdfaktorn på jorden</h3>
+                        <p class="chapter-description">
+                            Utforska hur tyngdaccelerationen varierar på jorden! Klicka på olika platser på 3D-jordklotet för att se g-värdet.
+                        </p>
+                    </div>
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Densitet och tryck</h2>
-            <div class="chapters-grid">
-                <div class="chapter-card" onclick="location.href='fysik1-densitet-app.html'">
-                    <div class="chapter-icon">🔬</div>
-                    <h3 class="chapter-title">Densitet och flytförmåga</h3>
-                    <p class="chapter-description">
-                        Utforska hur massa och volym påverkar densitet. Se hur atomer packas och testa flytkraft i vatten!
-                    </p>
-                </div>
-
-                <div class="chapter-card" onclick="location.href='fysik1-tryck.html'">
-                    <div class="chapter-icon">💨</div>
-                    <h3 class="chapter-title">Ideala gaslagen</h3>
-                    <p class="chapter-description">
-                        Utforska sambandet mellan tryck, volym och temperatur med en interaktiv gassimulering.
-                    </p>
-                </div>
-
-                <div class="chapter-card" onclick="location.href='fysik1-tryck-pa-app.html'">
-                    <div class="chapter-icon">🧊</div>
-                    <h3 class="chapter-title">Tryck: p = F/A</h3>
-                    <p class="chapter-description">
-                        Utforska sambandet mellan tryck, kraft och area. Se om isen håller eller spricker under trycket!
-                    </p>
-                </div>
-
-                <div class="chapter-card" onclick="location.href='fysik1-arkimedes.html'">
-                    <div class="chapter-icon">⚖️</div>
-                    <h3 class="chapter-title">Arkimedes princip</h3>
-                    <p class="chapter-description">
-                        Upptäck förhållandet mellan lyftkraft och undanträngt vatten med ett dynamometer-experiment.
-                    </p>
-                </div>
-
-                <div class="chapter-card" onclick="location.href='fysik1-magdeburgska-halvklot.html'">
-                    <div class="chapter-icon">🐴</div>
-                    <h3 class="chapter-title">Magdeburgska halvkloten</h3>
-                    <p class="chapter-description">
-                        Utforska Otto von Guerickes berömda experiment från 1654. Se hur vakuum gör halvkloten omöjliga att dra isär!
-                    </p>
+                    <div class="chapter-card" onclick="location.href='fysik1-rorelsediagram.html'">
+                        <div class="chapter-icon">📉</div>
+                        <h3 class="chapter-title">Rörelsediagram</h3>
+                        <p class="chapter-description">
+                            Se sträcka-, hastighet- och acceleration-tid-grafer ritas upp i realtid för konstant hastighet, konstant acceleration och kast uppåt!
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Värme</h2>
-            <div class="chapters-grid">
-                <div class="chapter-card" onclick="location.href='fysik1-varme-app.html'">
-                    <div class="chapter-icon">🔥</div>
-                    <h3 class="chapter-title">Värmeflöde</h3>
-                    <p class="chapter-description">
-                        Utforska hur värme strålar mellan en människa och omgivningen. Se hur värmebalansen förändras med temperaturen!
-                    </p>
+            <div id="krafter" class="topic-section">
+
+                <div class="chapters-grid">
+                    <div class="chapter-card" onclick="location.href='fysik1-newtons-tredje-app.html'">
+                        <div class="chapter-icon">🚀</div>
+                        <h3 class="chapter-title">Newtons tredje lag</h3>
+                        <p class="chapter-description">
+                            Utforska aktion och reaktion i rymden. Använd en brandsläckare för att navigera till rymdstationen!
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Elektricitet</h2>
-            <div class="chapters-grid">
-                <div class="chapter-card" onclick="location.href='fysik1-ellara-app.html'">
-                    <div class="chapter-icon">⚡</div>
-                    <h3 class="chapter-title">Elektriska kretsar</h3>
-                    <p class="chapter-description">
-                        Se hur elektroner rör sig i likströms- och växelströmskretsar. Justera spänning och resistans!
-                    </p>
-                </div>
+            <div id="densitet" class="topic-section">
 
-                <div class="chapter-card" onclick="location.href='fysik1-influens.html'">
-                    <div class="chapter-icon">🧲</div>
-                    <h3 class="chapter-title">Elektrisk influens</h3>
-                    <p class="chapter-description">
-                        Utforska hur en neutral aluminiumburk attraheras av en laddad stav. Se influens i aktion!
-                    </p>
-                </div>
+                <div class="chapters-grid">
+                    <div class="chapter-card" onclick="location.href='fysik1-densitet-app.html'">
+                        <div class="chapter-icon">🔬</div>
+                        <h3 class="chapter-title">Densitet och flytförmåga</h3>
+                        <p class="chapter-description">
+                            Utforska hur massa och volym påverkar densitet. Se hur atomer packas och testa flytkraft i vatten!
+                        </p>
+                    </div>
 
-                <div class="chapter-card" onclick="location.href='fysik1-coulombs-lag.html'">
-                    <div class="chapter-icon">⚡</div>
-                    <h3 class="chapter-title">Coulombs lag</h3>
-                    <p class="chapter-description">
-                        Visualisera den elektriska kraften mellan två laddningar. Flytta laddningarna och se hur kraften ändras!
-                    </p>
-                </div>
+                    <div class="chapter-card" onclick="location.href='fysik1-tryck.html'">
+                        <div class="chapter-icon">💨</div>
+                        <h3 class="chapter-title">Ideala gaslagen</h3>
+                        <p class="chapter-description">
+                            Utforska sambandet mellan tryck, volym och temperatur med en interaktiv gassimulering.
+                        </p>
+                    </div>
 
-                <div class="chapter-card" onclick="location.href='fysik1-kirchhoffs-lag.html'">
-                    <div class="chapter-icon">🔀</div>
-                    <h3 class="chapter-title">Kirchhoffs första lag</h3>
-                    <p class="chapter-description">
-                        Utforska hur strömmar fördelas i en förgreningspunkt. Summan in = summan ut!
-                    </p>
-                </div>
+                    <div class="chapter-card" onclick="location.href='fysik1-tryck-pa-app.html'">
+                        <div class="chapter-icon">🧊</div>
+                        <h3 class="chapter-title">Tryck: p = F/A</h3>
+                        <p class="chapter-description">
+                            Utforska sambandet mellan tryck, kraft och area. Se om isen håller eller spricker under trycket!
+                        </p>
+                    </div>
 
-                <div class="chapter-card" onclick="location.href='fysik1-serie-parallell.html'">
-                    <div class="chapter-icon">💡</div>
-                    <h3 class="chapter-title">Serie- och parallellkoppling</h3>
-                    <p class="chapter-description">
-                        Jämför serie- och parallellkoppling. Krossa lampor med hammaren och se vad som händer!
-                    </p>
-                </div>
+                    <div class="chapter-card" onclick="location.href='fysik1-arkimedes.html'">
+                        <div class="chapter-icon">⚖️</div>
+                        <h3 class="chapter-title">Arkimedes princip</h3>
+                        <p class="chapter-description">
+                            Upptäck förhållandet mellan lyftkraft och undanträngt vatten med ett dynamometer-experiment.
+                        </p>
+                    </div>
 
-                <div class="chapter-card" onclick="location.href='fysik1-elektriska-falt.html'">
-                    <div class="chapter-icon">📐</div>
-                    <h3 class="chapter-title">Elektriska fält</h3>
-                    <p class="chapter-description">
-                        Visualisera elektriska fält! Placera ut laddningar och plattor och se hur fältlinjerna ritas ut.
-                    </p>
-                </div>
-
-                <div class="chapter-card" onclick="location.href='fysik1-faradays-bur.html'">
-                    <div class="chapter-icon">🛡️</div>
-                    <h3 class="chapter-title">Faradays bur</h3>
-                    <p class="chapter-description">
-                        Se hur ett metallhölje skärmar av elektriska fält. Elektroner omfördelas och skapar ett motfält som upphäver fältet inuti buren.
-                    </p>
-                </div>
-
-                <div class="chapter-card" onclick="location.href='fysik1-enhetskollen.html'">
-                    <div class="chapter-icon">📝</div>
-                    <h3 class="chapter-title">Enhetskollen</h3>
-                    <p class="chapter-description">
-                        Testa dina kunskaper om SI-enheter och beteckningar inom elläran. Quiz som körs tills du kan allt!
-                    </p>
+                    <div class="chapter-card" onclick="location.href='fysik1-magdeburgska-halvklot.html'">
+                        <div class="chapter-icon">🐴</div>
+                        <h3 class="chapter-title">Magdeburgska halvkloten</h3>
+                        <p class="chapter-description">
+                            Utforska Otto von Guerickes berömda experiment från 1654. Se hur vakuum gör halvkloten omöjliga att dra isär!
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 1.5rem; margin-top: 3rem;">Kärnfysik</h2>
-            <div class="chapters-grid">
-                <div class="chapter-card" onclick="location.href='fysik1-massdefekt.html'">
-                    <div class="chapter-icon">⚖️</div>
-                    <h3 class="chapter-title">Massdefekt och bindningsenergi</h3>
-                    <p class="chapter-description">
-                        Se hur massa omvandlas till bindningsenergi när kärnor slås ihop. Utforska fusion och separation med E = Δm · c²!
-                    </p>
-                </div>
+            <div id="varme" class="topic-section">
 
-                <div class="chapter-card" onclick="location.href='fysik1-sonderfall.html'">
-                    <div class="chapter-icon">☢️</div>
-                    <h3 class="chapter-title">Sönderfall</h3>
-                    <p class="chapter-description">
-                        Utforska alfa-, beta- och gammasönderfall. Se hur atomkärnor omvandlas och vilka partiklar som sänds ut!
-                    </p>
+                <div class="chapters-grid">
+                    <div class="chapter-card" onclick="location.href='fysik1-varme-app.html'">
+                        <div class="chapter-icon">🔥</div>
+                        <h3 class="chapter-title">Värmeflöde</h3>
+                        <p class="chapter-description">
+                            Utforska hur värme strålar mellan en människa och omgivningen. Se hur värmebalansen förändras med temperaturen!
+                        </p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="chapter-card" onclick="location.href='fysik1-halveringstid.html'">
-                    <div class="chapter-icon">⏳</div>
-                    <h3 class="chapter-title">Halveringstid</h3>
-                    <p class="chapter-description">
-                        Se hur radioaktiva kärnor sönderfaller exponentiellt. Stega genom fem halveringstider och följ den avtagande kurvan!
-                    </p>
+            <div id="el" class="topic-section">
+
+                <div class="chapters-grid">
+                    <div class="chapter-card" onclick="location.href='fysik1-ellara-app.html'">
+                        <div class="chapter-icon">⚡</div>
+                        <h3 class="chapter-title">Elektriska kretsar</h3>
+                        <p class="chapter-description">
+                            Se hur elektroner rör sig i likströms- och växelströmskretsar. Justera spänning och resistans!
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-influens.html'">
+                        <div class="chapter-icon">🧲</div>
+                        <h3 class="chapter-title">Elektrisk influens</h3>
+                        <p class="chapter-description">
+                            Utforska hur en neutral aluminiumburk attraheras av en laddad stav. Se influens i aktion!
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-coulombs-lag.html'">
+                        <div class="chapter-icon">⚡</div>
+                        <h3 class="chapter-title">Coulombs lag</h3>
+                        <p class="chapter-description">
+                            Visualisera den elektriska kraften mellan två laddningar. Flytta laddningarna och se hur kraften ändras!
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-kirchhoffs-lag.html'">
+                        <div class="chapter-icon">🔀</div>
+                        <h3 class="chapter-title">Kirchhoffs första lag</h3>
+                        <p class="chapter-description">
+                            Utforska hur strömmar fördelas i en förgreningspunkt. Summan in = summan ut!
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-serie-parallell.html'">
+                        <div class="chapter-icon">💡</div>
+                        <h3 class="chapter-title">Serie- och parallellkoppling</h3>
+                        <p class="chapter-description">
+                            Jämför serie- och parallellkoppling. Krossa lampor med hammaren och se vad som händer!
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-elektriska-falt.html'">
+                        <div class="chapter-icon">📐</div>
+                        <h3 class="chapter-title">Elektriska fält</h3>
+                        <p class="chapter-description">
+                            Visualisera elektriska fält! Placera ut laddningar och plattor och se hur fältlinjerna ritas ut.
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-faradays-bur.html'">
+                        <div class="chapter-icon">🛡️</div>
+                        <h3 class="chapter-title">Faradays bur</h3>
+                        <p class="chapter-description">
+                            Se hur ett metallhölje skärmar av elektriska fält. Elektroner omfördelas och skapar ett motfält som upphäver fältet inuti buren.
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-enhetskollen.html'">
+                        <div class="chapter-icon">📝</div>
+                        <h3 class="chapter-title">Enhetskollen</h3>
+                        <p class="chapter-description">
+                            Testa dina kunskaper om SI-enheter och beteckningar inom elläran. Quiz som körs tills du kan allt!
+                        </p>
+                    </div>
                 </div>
+            </div>
 
-                <div class="chapter-card" onclick="location.href='fysik1-stralning-genomtranglighet.html'">
-                    <div class="chapter-icon">🛡️</div>
-                    <h3 class="chapter-title">Strålnings genomtränglighet</h3>
-                    <p class="chapter-description">
-                        Undersök hur alfa-, beta- och gammastrålning passerar genom textil, aluminium och bly. En GM-räknare visar vad som tar sig igenom!
-                    </p>
+            <div id="karnfysik" class="topic-section">
+
+                <div class="chapters-grid">
+                    <div class="chapter-card" onclick="location.href='fysik1-massdefekt.html'">
+                        <div class="chapter-icon">⚖️</div>
+                        <h3 class="chapter-title">Massdefekt och bindningsenergi</h3>
+                        <p class="chapter-description">
+                            Se hur massa omvandlas till bindningsenergi när kärnor slås ihop. Utforska fusion och separation med E = Δm · c²!
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-sonderfall.html'">
+                        <div class="chapter-icon">☢️</div>
+                        <h3 class="chapter-title">Sönderfall</h3>
+                        <p class="chapter-description">
+                            Utforska alfa-, beta- och gammasönderfall. Se hur atomkärnor omvandlas och vilka partiklar som sänds ut!
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-halveringstid.html'">
+                        <div class="chapter-icon">⏳</div>
+                        <h3 class="chapter-title">Halveringstid</h3>
+                        <p class="chapter-description">
+                            Se hur radioaktiva kärnor sönderfaller exponentiellt. Stega genom fem halveringstider och följ den avtagande kurvan!
+                        </p>
+                    </div>
+
+                    <div class="chapter-card" onclick="location.href='fysik1-stralning-genomtranglighet.html'">
+                        <div class="chapter-icon">🛡️</div>
+                        <h3 class="chapter-title">Strålnings genomtränglighet</h3>
+                        <p class="chapter-description">
+                            Undersök hur alfa-, beta- och gammastrålning passerar genom textil, aluminium och bly. En GM-räknare visar vad som tar sig igenom!
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -227,5 +248,14 @@
     <footer class="footer">
         <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
     </footer>
+
+    <script>
+        function showTopic(id, btn) {
+            document.querySelectorAll('.topic-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+        }
+    </script>
 </body>
 </html>

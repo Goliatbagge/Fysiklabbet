@@ -12,6 +12,8 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <style>
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
@@ -116,16 +118,22 @@
             const canvasRef = useRef(null);
             const moonViewRef = useRef(null);
             const animRef = useRef(null);
-            const [playing, setPlaying] = useState(false);
+            const [playing, setPlaying] = useState(true);
             const [angleDeg, setAngleDeg] = useState(0);
             const [speed, setSpeed] = useState(1);
-            const playingRef = useRef(false);
+            const [viewMode, setViewMode] = useState('2d');
+            const playingRef = useRef(true);
             const angleRef = useRef(0);
             const speedRef = useRef(1);
+            const [showPhaseLabels, setShowPhaseLabels] = useState(true);
+            const showPhaseLabelsRef = useRef(true);
+            const threeContainerRef = useRef(null);
+            const threeRef = useRef(null);
 
             useEffect(() => { playingRef.current = playing; }, [playing]);
             useEffect(() => { angleRef.current = angleDeg; }, [angleDeg]);
             useEffect(() => { speedRef.current = speed; }, [speed]);
+            useEffect(() => { showPhaseLabelsRef.current = showPhaseLabels; }, [showPhaseLabels]);
 
             // Find current phase
             const currentPhase = (() => {
@@ -462,7 +470,7 @@
                 ctx.stroke();
 
                 // Phase labels around orbit
-                PHASES.forEach((p, i) => {
+                if (showPhaseLabelsRef.current) PHASES.forEach((p, i) => {
                     const pRad = p.angle * Math.PI / 180;
                     const labelDist = orbitA + 30;
                     const labelDistB = orbitB + 30;
@@ -578,6 +586,406 @@
                 };
             }, [draw]);
 
+            // --- 3D Mode ---
+            const createEarthTexture = () => {
+                const c = document.createElement('canvas');
+                c.width = 2048; c.height = 1024;
+                const ctx = c.getContext('2d');
+
+                // Ocean
+                const grad = ctx.createLinearGradient(0, 0, 0, 1024);
+                grad.addColorStop(0, '#0e2a50');
+                grad.addColorStop(0.15, '#153a6a');
+                grad.addColorStop(0.4, '#1a5090');
+                grad.addColorStop(0.5, '#1e5898');
+                grad.addColorStop(0.6, '#1a5090');
+                grad.addColorStop(0.85, '#153a6a');
+                grad.addColorStop(1, '#0e2a50');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 2048, 1024);
+
+                // Ocean variation
+                for (let i = 0; i < 200; i++) {
+                    const x = Math.random() * 2048;
+                    const y = Math.random() * 1024;
+                    const r = 20 + Math.random() * 80;
+                    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+                    g.addColorStop(0, `rgba(${20+Math.random()*20}, ${60+Math.random()*30}, ${120+Math.random()*40}, 0.3)`);
+                    g.addColorStop(1, 'transparent');
+                    ctx.fillStyle = g;
+                    ctx.fillRect(x - r, y - r, r * 2, r * 2);
+                }
+
+                // Continent drawing helper
+                const drawLand = (points, color) => {
+                    ctx.fillStyle = color || '#2a7a40';
+                    ctx.beginPath();
+                    ctx.moveTo(points[0][0], points[0][1]);
+                    for (let i = 1; i < points.length; i++) {
+                        const prev = points[i - 1];
+                        const curr = points[i];
+                        const mx = (prev[0] + curr[0]) / 2;
+                        const my = (prev[1] + curr[1]) / 2;
+                        ctx.quadraticCurveTo(prev[0], prev[1], mx, my);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                };
+
+                // Africa
+                drawLand([[1100,310],[1140,290],[1180,310],[1200,360],[1210,420],[1200,500],[1210,560],[1190,640],[1150,690],[1120,680],[1090,620],[1070,550],[1060,470],[1070,400],[1080,350]], '#2d7a3e');
+                drawLand([[1100,310],[1140,290],[1180,310],[1200,360],[1210,420],[1200,500],[1210,560],[1190,640],[1150,690],[1120,680],[1090,620],[1070,550],[1060,470],[1070,400],[1080,350]], 'rgba(60,130,55,0.5)');
+
+                // Europe
+                drawLand([[1060,240],[1100,220],[1150,230],[1130,260],[1140,290],[1100,310],[1060,300],[1030,280],[1040,260]], '#3a8a4a');
+
+                // Asia
+                drawLand([[1150,230],[1220,200],[1320,190],[1420,210],[1500,240],[1560,280],[1540,340],[1480,380],[1500,320],[1440,300],[1380,330],[1320,360],[1260,380],[1220,350],[1200,300],[1180,310],[1140,290],[1130,260]], '#2d7a3e');
+                // India
+                drawLand([[1320,360],[1340,380],[1360,440],[1340,490],[1310,470],[1300,420],[1310,380]], '#3a9050');
+                // Southeast Asia
+                drawLand([[1480,380],[1520,400],[1540,430],[1560,400],[1580,430],[1560,460],[1520,450],[1490,420]], '#2d7a3e');
+
+                // North America
+                drawLand([[600,200],[680,180],[740,200],[780,250],[760,300],[800,320],[780,380],[720,400],[660,420],[620,400],[580,380],[560,340],[540,300],[560,260],[580,230]], '#3a8a4a');
+
+                // South America
+                drawLand([[700,460],[740,440],[760,480],[770,540],[760,600],[740,660],[710,720],[680,740],[660,700],[650,640],[660,580],[670,520],[680,480]], '#2d7a3e');
+
+                // Australia
+                drawLand([[1560,560],[1620,540],[1680,560],[1700,600],[1680,650],[1640,670],[1580,650],[1560,610]], '#4a8a3a');
+
+                // Antarctica
+                drawLand([[200,920],[400,900],[600,910],[800,900],[1000,910],[1200,900],[1400,910],[1600,900],[1800,920],[1800,1024],[200,1024]], '#c8d8e8');
+
+                // Greenland
+                drawLand([[720,160],[760,150],[790,170],[780,210],[750,220],[720,200]], '#3a9050');
+
+                // Land texture noise
+                for (let i = 0; i < 500; i++) {
+                    const x = Math.random() * 2048;
+                    const y = Math.random() * 1024;
+                    const r = 5 + Math.random() * 30;
+                    ctx.fillStyle = `rgba(${30+Math.random()*40}, ${80+Math.random()*60}, ${30+Math.random()*30}, 0.15)`;
+                    ctx.beginPath();
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Ice caps
+                const iceGrad1 = ctx.createLinearGradient(0, 0, 0, 70);
+                iceGrad1.addColorStop(0, 'rgba(220,230,245,0.9)');
+                iceGrad1.addColorStop(1, 'rgba(220,230,245,0)');
+                ctx.fillStyle = iceGrad1;
+                ctx.fillRect(0, 0, 2048, 70);
+
+                // Cloud wisps
+                ctx.globalAlpha = 0.12;
+                for (let i = 0; i < 40; i++) {
+                    const x = Math.random() * 2048;
+                    const y = 100 + Math.random() * 824;
+                    const w = 60 + Math.random() * 200;
+                    const h = 10 + Math.random() * 30;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.ellipse(x, y, w, h, Math.random() * Math.PI, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+
+                return new THREE.CanvasTexture(c);
+            };
+
+            const createMoonTexture = () => {
+                const c = document.createElement('canvas');
+                c.width = 1024; c.height = 512;
+                const ctx = c.getContext('2d');
+
+                // Base gray
+                const grad = ctx.createLinearGradient(0, 0, 0, 512);
+                grad.addColorStop(0, '#8a8a8a');
+                grad.addColorStop(0.5, '#9a9590');
+                grad.addColorStop(1, '#8a8a8a');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 1024, 512);
+
+                // Surface noise
+                for (let i = 0; i < 2000; i++) {
+                    const x = Math.random() * 1024;
+                    const y = Math.random() * 512;
+                    const r = 1 + Math.random() * 6;
+                    const brightness = 100 + Math.random() * 80;
+                    ctx.fillStyle = `rgba(${brightness}, ${brightness-5}, ${brightness-10}, 0.3)`;
+                    ctx.beginPath();
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Maria (dark "seas")
+                const maria = [
+                    { x: 350, y: 200, rx: 100, ry: 80 },   // Mare Imbrium
+                    { x: 500, y: 240, rx: 70, ry: 60 },    // Mare Serenitatis
+                    { x: 550, y: 300, rx: 80, ry: 50 },    // Mare Tranquillitatis
+                    { x: 450, y: 320, rx: 60, ry: 50 },    // Mare Nubium
+                    { x: 380, y: 280, rx: 50, ry: 45 },    // Oceanus Procellarum part
+                    { x: 280, y: 250, rx: 90, ry: 70 },    // Oceanus Procellarum
+                    { x: 600, y: 200, rx: 40, ry: 35 },    // Mare Crisium
+                    { x: 480, y: 180, rx: 50, ry: 40 },    // Mare Frigoris
+                ];
+                maria.forEach(m => {
+                    const g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, Math.max(m.rx, m.ry));
+                    g.addColorStop(0, 'rgba(60, 58, 55, 0.6)');
+                    g.addColorStop(0.7, 'rgba(70, 68, 65, 0.4)');
+                    g.addColorStop(1, 'transparent');
+                    ctx.fillStyle = g;
+                    ctx.beginPath();
+                    ctx.ellipse(m.x, m.y, m.rx, m.ry, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                // Craters
+                for (let i = 0; i < 120; i++) {
+                    const x = Math.random() * 1024;
+                    const y = Math.random() * 512;
+                    const r = 3 + Math.random() * 15;
+                    // Crater rim (bright)
+                    ctx.strokeStyle = `rgba(180, 175, 170, ${0.2 + Math.random() * 0.3})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.arc(x, y, r, 0, Math.PI * 2);
+                    ctx.stroke();
+                    // Crater floor (darker)
+                    ctx.fillStyle = `rgba(70, 68, 65, ${0.1 + Math.random() * 0.2})`;
+                    ctx.beginPath();
+                    ctx.arc(x, y, r * 0.7, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // Highland bright spots
+                for (let i = 0; i < 30; i++) {
+                    const x = Math.random() * 1024;
+                    const y = Math.random() * 512;
+                    const r = 10 + Math.random() * 40;
+                    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+                    g.addColorStop(0, 'rgba(190, 185, 175, 0.3)');
+                    g.addColorStop(1, 'transparent');
+                    ctx.fillStyle = g;
+                    ctx.fillRect(x - r, y - r, r * 2, r * 2);
+                }
+
+                return new THREE.CanvasTexture(c);
+            };
+
+            // 3D scene setup and animation
+            useEffect(() => {
+                if (viewMode !== '3d') {
+                    if (threeRef.current) {
+                        const { renderer, frameId, onResize } = threeRef.current;
+                        cancelAnimationFrame(frameId);
+                        window.removeEventListener('resize', onResize);
+                        renderer.dispose();
+                        const el = renderer.domElement;
+                        if (el.parentElement) el.parentElement.removeChild(el);
+                        threeRef.current = null;
+                    }
+                    return;
+                }
+
+                const container = threeContainerRef.current;
+                if (!container) return;
+
+                // Wait one frame for layout to settle after display change
+                let cancelled = false;
+                const initTimeout = requestAnimationFrame(() => {
+                if (cancelled) return;
+
+                const w = container.clientWidth || 800;
+                const h = Math.min(w * 0.6, 550);
+
+                // Scene
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 2000);
+                camera.position.set(0, 10, 16);
+
+                const renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(w, h);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setClearColor(0x030308);
+                renderer.domElement.style.borderRadius = '12px';
+                renderer.domElement.style.display = 'block';
+                container.appendChild(renderer.domElement);
+
+                // Controls
+                const controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.07;
+                controls.minDistance = 5;
+                controls.maxDistance = 40;
+                controls.target.set(0, 0, 0);
+
+                // Lighting
+                const sunLight = new THREE.DirectionalLight(0xfff8e8, 2.8);
+                sunLight.position.set(100, 5, 0);
+                scene.add(sunLight);
+
+                const fillLight = new THREE.DirectionalLight(0x4488cc, 0.15);
+                fillLight.position.set(-50, 10, 30);
+                scene.add(fillLight);
+
+                const ambientLight = new THREE.AmbientLight(0x080818, 0.5);
+                scene.add(ambientLight);
+
+                // Stars
+                const starGeom = new THREE.BufferGeometry();
+                const starCount = 4000;
+                const starPos = new Float32Array(starCount * 3);
+                const starSizes = new Float32Array(starCount);
+                for (let i = 0; i < starCount; i++) {
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos(2 * Math.random() - 1);
+                    const dist = 300 + Math.random() * 500;
+                    starPos[i*3] = dist * Math.sin(phi) * Math.cos(theta);
+                    starPos[i*3+1] = dist * Math.sin(phi) * Math.sin(theta);
+                    starPos[i*3+2] = dist * Math.cos(phi);
+                    starSizes[i] = 0.3 + Math.random() * 1.2;
+                }
+                starGeom.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+                starGeom.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
+                const starMat = new THREE.PointsMaterial({ color: 0xccd0ff, size: 0.8, sizeAttenuation: true });
+                scene.add(new THREE.Points(starGeom, starMat));
+
+                // Earth
+                const earthTex = createEarthTexture();
+                const earthGeom = new THREE.SphereGeometry(1.5, 64, 64);
+                const earthMat = new THREE.MeshStandardMaterial({ map: earthTex, roughness: 0.65, metalness: 0.05 });
+                const earth = new THREE.Mesh(earthGeom, earthMat);
+                scene.add(earth);
+
+                // Atmosphere glow (two layers)
+                const atmosGeom = new THREE.SphereGeometry(1.62, 64, 64);
+                const atmosMat = new THREE.MeshBasicMaterial({ color: 0x4a9eff, transparent: true, opacity: 0.06, side: THREE.BackSide });
+                scene.add(new THREE.Mesh(atmosGeom, atmosMat));
+
+                const atmosGeom2 = new THREE.SphereGeometry(1.75, 64, 64);
+                const atmosMat2 = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.03, side: THREE.BackSide });
+                scene.add(new THREE.Mesh(atmosGeom2, atmosMat2));
+
+                // Moon
+                const moonTex = createMoonTexture();
+                const moonGeom = new THREE.SphereGeometry(0.42, 48, 48);
+                const moonMat = new THREE.MeshStandardMaterial({ map: moonTex, roughness: 0.95, metalness: 0.0 });
+                const moon = new THREE.Mesh(moonGeom, moonMat);
+                scene.add(moon);
+
+                // Moon orbit ring
+                const orbitPts = [];
+                for (let i = 0; i <= 256; i++) {
+                    const t = (i / 256) * Math.PI * 2;
+                    orbitPts.push(new THREE.Vector3(5.5 * Math.cos(t), 0, -5.5 * Math.sin(t)));
+                }
+                const orbitLineGeom = new THREE.BufferGeometry().setFromPoints(orbitPts);
+                const orbitLineMat = new THREE.LineBasicMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.12 });
+                scene.add(new THREE.LineLoop(orbitLineGeom, orbitLineMat));
+
+                // Sun glow (billboard sprite)
+                const sunCanvas = document.createElement('canvas');
+                sunCanvas.width = 256; sunCanvas.height = 256;
+                const sCtx = sunCanvas.getContext('2d');
+                const sg = sCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
+                sg.addColorStop(0, 'rgba(255, 240, 180, 1)');
+                sg.addColorStop(0.1, 'rgba(255, 220, 100, 0.8)');
+                sg.addColorStop(0.3, 'rgba(255, 180, 50, 0.3)');
+                sg.addColorStop(0.6, 'rgba(255, 150, 30, 0.08)');
+                sg.addColorStop(1, 'rgba(255, 130, 20, 0)');
+                sCtx.fillStyle = sg;
+                sCtx.fillRect(0, 0, 256, 256);
+                const sunSpriteMat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(sunCanvas), transparent: true, depthWrite: false });
+                const sunSprite = new THREE.Sprite(sunSpriteMat);
+                sunSprite.position.set(45, 0, 0);
+                sunSprite.scale.set(25, 25, 1);
+                scene.add(sunSprite);
+
+                // Sun label
+                const sunLabelCanvas = document.createElement('canvas');
+                sunLabelCanvas.width = 256; sunLabelCanvas.height = 64;
+                const slCtx = sunLabelCanvas.getContext('2d');
+                slCtx.font = '600 32px Poppins, sans-serif';
+                slCtx.fillStyle = '#fde68a';
+                slCtx.textAlign = 'center';
+                slCtx.fillText('Solen', 128, 40);
+                const sunLabelMat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(sunLabelCanvas), transparent: true, depthWrite: false });
+                const sunLabel = new THREE.Sprite(sunLabelMat);
+                sunLabel.position.set(30, 4, 0);
+                sunLabel.scale.set(6, 1.5, 1);
+                scene.add(sunLabel);
+
+                // Phase label sprites around orbit
+                const phaseLabelSprites = [];
+                PHASES.forEach(p => {
+                    const pRad = p.angle * Math.PI / 180;
+                    const labelCanvas = document.createElement('canvas');
+                    labelCanvas.width = 256; labelCanvas.height = 48;
+                    const lCtx = labelCanvas.getContext('2d');
+                    lCtx.font = '400 22px Poppins, sans-serif';
+                    lCtx.fillStyle = 'rgba(148, 163, 184, 0.7)';
+                    lCtx.textAlign = 'center';
+                    lCtx.fillText(p.name, 128, 32);
+                    const mat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(labelCanvas), transparent: true, depthWrite: false });
+                    const sprite = new THREE.Sprite(mat);
+                    sprite.position.set(7.5 * Math.cos(pRad), 0.8, -7.5 * Math.sin(pRad));
+                    sprite.scale.set(4, 0.75, 1);
+                    scene.add(sprite);
+                    phaseLabelSprites.push(sprite);
+                });
+
+                // Animation
+                let frameId;
+                const animate3d = () => {
+                    frameId = requestAnimationFrame(animate3d);
+
+                    const angle = angleRef.current * Math.PI / 180;
+
+                    // Toggle phase labels visibility
+                    const labelsVisible = showPhaseLabelsRef.current;
+                    phaseLabelSprites.forEach(s => { s.visible = labelsVisible; });
+                    moon.position.set(5.5 * Math.cos(angle), 0, -5.5 * Math.sin(angle));
+                    // Tidally locked: same face toward Earth
+                    moon.rotation.y = -angle + Math.PI;
+
+                    earth.rotation.y += 0.002;
+
+                    controls.update();
+                    renderer.render(scene, camera);
+                };
+                animate3d();
+
+                // Resize handler
+                const onResize = () => {
+                    const w2 = container.clientWidth;
+                    const h2 = Math.min(w2 * 0.6, 550);
+                    camera.aspect = w2 / h2;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(w2, h2);
+                };
+                window.addEventListener('resize', onResize);
+
+                threeRef.current = { renderer, frameId, onResize };
+
+                }); // end requestAnimationFrame init
+
+                return () => {
+                    cancelled = true;
+                    if (threeRef.current) {
+                        cancelAnimationFrame(threeRef.current.frameId);
+                        window.removeEventListener('resize', threeRef.current.onResize);
+                        threeRef.current.renderer.dispose();
+                        const el = threeRef.current.renderer.domElement;
+                        if (el.parentElement) el.parentElement.removeChild(el);
+                    }
+                    threeRef.current = null;
+                };
+            }, [viewMode]);
+
             // Update angleRef when slider changes
             const handleAngleChange = (val) => {
                 angleRef.current = val;
@@ -593,10 +1001,41 @@
 
             return (
                 <div>
+                    {/* Mode toggle */}
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                        <div style={{
+                            display: 'inline-flex',
+                            background: 'rgba(15, 23, 42, 0.8)',
+                            border: '1px solid rgba(56, 189, 248, 0.15)',
+                            borderRadius: '12px',
+                            padding: '4px',
+                            gap: '4px'
+                        }}>
+                            {['2d', '3d'].map(mode => (
+                                <button
+                                    key={mode}
+                                    className="control-btn"
+                                    onClick={() => setViewMode(mode)}
+                                    style={{
+                                        padding: '8px 24px',
+                                        fontSize: '0.95rem',
+                                        background: viewMode === mode ? 'rgba(56, 189, 248, 0.15)' : 'transparent',
+                                        color: viewMode === mode ? '#38bdf8' : '#64748b',
+                                        border: viewMode === mode ? '1px solid rgba(56, 189, 248, 0.3)' : '1px solid transparent',
+                                        borderRadius: '9px',
+                                    }}
+                                >
+                                    {mode.toUpperCase()}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Main simulation + moon view */}
                     <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', alignItems: 'stretch' }}>
                         <div className="glass-card p-3" style={{ flex: 1, minWidth: 0 }}>
-                            <canvas ref={canvasRef} style={{ width: '100%', display: 'block', borderRadius: '12px' }} />
+                            <canvas ref={canvasRef} style={{ width: '100%', display: viewMode === '2d' ? 'block' : 'none', borderRadius: '12px' }} />
+                            <div ref={threeContainerRef} style={{ width: '100%', display: viewMode === '3d' ? 'block' : 'none', borderRadius: '12px', overflow: 'hidden' }} />
                         </div>
                         <div className="glass-card p-3" style={{ width: '220px', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600, marginBottom: '8px' }}>

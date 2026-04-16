@@ -457,6 +457,57 @@ body {
     text-shadow: 0 0 8px var(--primary-glow);
 }
 
+/* Topic Navigation Bar */
+.topic-nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    padding: 0.5rem;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--container-border);
+    border-radius: 14px;
+}
+
+.topic-btn {
+    padding: 0.6rem 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-light);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.topic-btn:hover {
+    color: var(--text-color);
+    background: rgba(56, 189, 248, 0.08);
+    border-color: rgba(56, 189, 248, 0.15);
+}
+
+.topic-btn.active {
+    color: var(--primary-color);
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.3);
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.15);
+}
+
+.topic-section {
+    display: none;
+    animation: fadeInUp 0.3s ease;
+}
+
+.topic-section.active {
+    display: block;
+}
+
 /* Chapter Cards */
 .chapters-grid {
     display: grid;

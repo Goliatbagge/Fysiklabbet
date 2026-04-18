@@ -355,7 +355,7 @@ function formatEmittance(watt_per_m2) {
 
 // ── Presets ──────────────────────────────────────────────────────────────────
 const PRESETS = [
-    { name: 'Människans yta', T: 310,   icon: '🧑' },
+    { name: 'Människans yta', T: 293,   icon: '🧑' },
     { name: 'Glödtråd',       T: 3000,  icon: '💡' },
     { name: 'Solens yta',     T: 5778,  icon: '☀️' },
     { name: 'Blå stjärna',    T: 12000, icon: '⭐' },
@@ -774,6 +774,10 @@ function WienSim() {
                                     {T}
                                 </span>
                                 <span style={{fontSize:'1rem',color:'#94a3b8'}}>K</span>
+                                <span style={{fontSize:'0.9rem',color:'#64748b',marginLeft:'6px',
+                                    fontVariantNumeric:'tabular-nums'}}>
+                                    ({Math.round(T - 273.15)} °C)
+                                </span>
                             </div>
                             <div style={{fontSize:'0.72rem',color:'#94a3b8',marginTop:'4px'}}>
                                 {blackbodyDescription(T)}
@@ -911,7 +915,7 @@ function WienSim() {
                         </strong>
                         En varm kropp strålar ut ett helt spektrum av våglängder, men intensiteten är som störst vid en viss våglängd <em>λ</em><sub>max</sub>. Wiens förskjutningslag säger att produkten <em>λ</em><sub>max</sub>·<em>T</em> är konstant. Dubblar du temperaturen halveras alltså topp-våglängden — toppen "förskjuts" mot kortare våglängder.
                         <br/><br/>
-                        Solens yta (≈ 5778 K) har topp vid ca 500 nm (grönt–gult ljus), medan en människa (≈ 310 K) har sin topp kring 9,4 μm i infrarött, det som värmekameror ser.
+                        Solens yta (≈ 5778 K) har topp vid ca 500 nm (grönt–gult ljus), medan en människas hud (≈ 293 K, ca 20 °C) har sin topp kring 9,9 μm i infrarött, det som värmekameror ser.
                     </div>
                     <div>
                         <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>

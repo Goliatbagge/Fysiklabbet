@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiens förskjutningslag - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .page-wrapper {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Value displays */
+        .value-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            min-width: 0;
+        }
+        .value-label {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .value-number {
+            font-size: 1.35rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #e2e8f0;
+            white-space: nowrap;
+        }
+        .value-number span.unit {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-left: 3px;
+        }
+        .value-number sub {
+            font-size: 0.7em;
+            vertical-align: sub;
+        }
+
+        /* Formula box */
+        .formula-box {
+            background: rgba(56, 189, 248, 0.06);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Preset buttons */
+        .preset-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1.5px solid rgba(56, 189, 248, 0.2);
+            background: rgba(15, 23, 42, 0.55);
+            cursor: pointer;
+            transition: all 0.18s ease;
+            font-family: 'Poppins', sans-serif;
+            text-align: left;
+        }
+        .preset-btn:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            background: rgba(15, 23, 42, 0.8);
+            transform: translateY(-1px);
+        }
+        .preset-btn.active {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.12);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+        }
+        .preset-icon {
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .preset-name {
+            font-size: 0.82rem;
+            color: #e2e8f0;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .preset-temp {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        /* Custom slider */
+        .temp-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 12px;
+            border-radius: 6px;
+            background: linear-gradient(to right,
+                #1a0f0f 0%,
+                #3b0d0d 8%,
+                #7a1111 18%,
+                #c2410c 32%,
+                #f59e0b 48%,
+                #fef3c7 62%,
+                #dbeafe 75%,
+                #93c5fd 86%,
+                #3b82f6 100%);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            outline: none;
+            cursor: pointer;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .temp-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            border: 2.5px solid #38bdf8;
+            cursor: grab;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.7),
+                        0 2px 4px rgba(0, 0, 0, 0.4);
+            transition: transform 0.1s;
+        }
+        .temp-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+        .temp-slider::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.15);
+        }
+        .temp-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            border: 2.5px solid #38bdf8;
+            cursor: grab;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
+        }
+
+        /* Canvas */
+        .graph-canvas {
+            width: 100%;
+            height: 440px;
+            display: block;
+            border-radius: 10px;
+            background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.6) 0%, rgba(7, 13, 26, 0.9) 100%);
+        }
+
+        /* Color swatch */
+        .color-swatch {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            flex-shrink: 0;
+        }
+
+        /* Checkbox */
+        .compare-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: #94a3b8;
+            cursor: pointer;
+            user-select: none;
+            font-family: 'Poppins', sans-serif;
+        }
+        .compare-toggle input {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid rgba(56, 189, 248, 0.4);
+            border-radius: 4px;
+            background: rgba(15, 23, 42, 0.8);
+            cursor: pointer;
+            position: relative;
+        }
+        .compare-toggle input:checked {
+            background: #38bdf8;
+            border-color: #38bdf8;
+        }
+        .compare-toggle input:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 0px;
+            width: 5px;
+            height: 10px;
+            border: solid #0a0a1a;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
+        ::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(56,189,248,0.45); }
+    </style>
+</head>
+<body class="bg-slate-950">
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">⚛️</span>
+            <span class="logo-text">Fysiklabbet</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Hem</a></li>
+            <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+            <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            <li><a href="om.html" class="nav-link">Om</a></li>
+            <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-wrapper">
+    <div style="max-width:1100px;margin:0 auto;padding:28px 20px 60px;">
+
+        <!-- Breadcrumb -->
+        <nav style="margin-bottom:20px;font-family:'Poppins',sans-serif;font-size:0.82rem;color:#64748b;">
+            <a href="index.html" style="color:#38bdf8;text-decoration:none;">Hem</a>
+            <span style="margin:0 7px;">/</span>
+            <a href="fysik2.html" style="color:#38bdf8;text-decoration:none;">Fysik 2</a>
+            <span style="margin:0 7px;">/</span>
+            <span style="color:#94a3b8;">Wiens förskjutningslag</span>
+        </nav>
+
+        <!-- Title -->
+        <div style="margin-bottom:30px;">
+            <h1 class="glow-text" style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:700;color:#e2e8f0;margin-bottom:8px;">
+                Wiens förskjutningslag
+            </h1>
+            <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:#94a3b8;max-width:720px;line-height:1.65;">
+                Varje varm kropp strålar ut elektromagnetisk strålning i ett kontinuerligt spektrum. Dra i temperaturreglaget och se hur Planck-kurvans topp förskjuts mot kortare våglängder samtidigt som den totala emittansen växer dramatiskt.
+            </p>
+        </div>
+
+        <div id="root"></div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+</footer>
+
+<script type="text/babel">
+const { useState, useRef, useEffect, useMemo, useCallback } = React;
+
+// ── Physics constants ────────────────────────────────────────────────────────
+const H_PLANCK = 6.62607015e-34;   // J·s
+const C_LIGHT  = 2.99792458e8;     // m/s
+const K_B      = 1.380649e-23;     // J/K
+const SIGMA    = 5.670374419e-8;   // W/(m²·K⁴) — Stefan–Boltzmann
+const B_WIEN   = 2.897771955e-3;   // m·K — Wiens förskjutningskonstant
+
+// ── Planck's law: spectral emittance in W/(m²·μm) ──────────────────────────
+// M_λ(λ,T) = (2πhc²/λ⁵) · 1/(exp(hc/λkT) − 1)
+// Returnerar i W/(m²·μm) genom att dela med 1e6 (från W/m³ → W/(m²·μm)).
+function planck(lam_m, T) {
+    if (T <= 0 || lam_m <= 0) return 0;
+    const exponent = (H_PLANCK * C_LIGHT) / (lam_m * K_B * T);
+    if (exponent > 700) return 0;           // exp-overflow = 0 strålning
+    const numerator = (2 * Math.PI * H_PLANCK * C_LIGHT * C_LIGHT) / Math.pow(lam_m, 5);
+    const denom = Math.exp(exponent) - 1;
+    return (numerator / denom) / 1e6;
+}
+
+// ── Black-body colour approximation (Tanner Helland) ────────────────────────
+function blackbodyColor(T) {
+    const t = T / 100;
+    let r, g, b;
+    if (t <= 66) {
+        r = 255;
+        g = 99.4708025861 * Math.log(Math.max(t, 1e-3)) - 161.1195681661;
+        b = (t <= 19) ? 0 : 138.5177312231 * Math.log(Math.max(t - 10, 1e-3)) - 305.0447927307;
+    } else {
+        r = 329.698727446 * Math.pow(t - 60, -0.1332047592);
+        g = 288.1221695283 * Math.pow(t - 60, -0.0755148492);
+        b = 255;
+    }
+    r = Math.max(0, Math.min(255, r));
+    g = Math.max(0, Math.min(255, g));
+    b = Math.max(0, Math.min(255, b));
+    return { r: Math.round(r), g: Math.round(g), b: Math.round(b),
+             hex: `rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})` };
+}
+
+// Beskrivande text för svartkroppsfärg
+function blackbodyDescription(T) {
+    if (T < 700)   return 'Helt mörk — ingen synlig färg';
+    if (T < 1200)  return 'Djupt mörkröd glöd';
+    if (T < 1800)  return 'Mörkröd (t.ex. smide som svalnar)';
+    if (T < 2400)  return 'Röd (glödande kol)';
+    if (T < 3200)  return 'Orange-gul (glödtråd)';
+    if (T < 4200)  return 'Varmvit (gulvit)';
+    if (T < 5200)  return 'Gulvit';
+    if (T < 6200)  return 'Nästan vit (ungefär som solen)';
+    if (T < 8000)  return 'Kylig vit';
+    if (T < 10500) return 'Blåvit';
+    return 'Skarpt blå (heta stjärnor)';
+}
+
+// ── Formatters ──────────────────────────────────────────────────────────────
+const fmt = (v, d = 2) => v.toFixed(d).replace('.', ',');
+
+function formatWavelength(lam_m) {
+    const nm = lam_m * 1e9;
+    if (nm < 1)    return { val: fmt(nm * 1000, 1), unit: 'pm' };
+    if (nm < 1000) return { val: fmt(nm, nm < 10 ? 2 : (nm < 100 ? 1 : 0)), unit: 'nm' };
+    const um = nm / 1000;
+    if (um < 10)   return { val: fmt(um, 2), unit: 'μm' };
+    if (um < 100)  return { val: fmt(um, 1), unit: 'μm' };
+    return { val: fmt(um, 0), unit: 'μm' };
+}
+
+function formatEmittance(watt_per_m2) {
+    const v = watt_per_m2;
+    if (v >= 1e9) return { val: fmt(v / 1e9, 2), unit: 'GW/m²' };
+    if (v >= 1e6) return { val: fmt(v / 1e6, 2), unit: 'MW/m²' };
+    if (v >= 1e3) return { val: fmt(v / 1e3, 2), unit: 'kW/m²' };
+    if (v >= 1)   return { val: fmt(v, v < 10 ? 2 : 1), unit: 'W/m²' };
+    return              { val: fmt(v, 3), unit: 'W/m²' };
+}
+
+// ── Presets ──────────────────────────────────────────────────────────────────
+const PRESETS = [
+    { name: 'Människans yta', T: 310,   icon: '🧑' },
+    { name: 'Glödtråd',       T: 3000,  icon: '💡' },
+    { name: 'Solens yta',     T: 5778,  icon: '☀️' },
+    { name: 'Blå stjärna',    T: 12000, icon: '⭐' },
+];
+
+// ── Graph range ──────────────────────────────────────────────────────────────
+const X_MIN_M = 1e-7;   // 100 nm
+const X_MAX_M = 1e-4;   // 100 μm
+const Y_MIN   = 1e-1;   // W/(m²·μm)
+const Y_MAX   = 1e10;
+const VIS_MIN_M = 3.8e-7; // 380 nm
+const VIS_MAX_M = 7.0e-7; // 700 nm
+const T_MIN = 200;
+const T_MAX = 12000;
+
+// ── Mixed-font text helper for canvas ───────────────────────────────────────
+function drawMixedText(ctx, parts, x, y, { align = 'left', baseline = 'alphabetic' } = {}) {
+    // Mät total bredd för centrering/högerjustering
+    let total = 0;
+    for (const p of parts) {
+        ctx.font = p.font;
+        total += ctx.measureText(p.text).width;
+    }
+    let cx = x;
+    if (align === 'center') cx = x - total / 2;
+    else if (align === 'right') cx = x - total;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = baseline;
+    for (const p of parts) {
+        ctx.font = p.font;
+        ctx.fillStyle = p.color || '#cbd5e1';
+        const dx = p.dx || 0;
+        const dy = p.dy || 0;
+        ctx.fillText(p.text, cx + dx, y + dy);
+        cx += ctx.measureText(p.text).width;
+    }
+}
+
+// ── Planck-graf komponent ────────────────────────────────────────────────────
+function PlanckGraph({ T, showComparison }) {
+    const canvasRef = useRef(null);
+    const [size, setSize] = useState({ w: 900, h: 440 });
+
+    // Följ storleksförändringar
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const update = () => {
+            const rect = canvas.getBoundingClientRect();
+            if (rect.width > 0 && rect.height > 0) {
+                setSize({ w: rect.width, h: rect.height });
+            }
+        };
+        update();
+        const observer = new ResizeObserver(update);
+        observer.observe(canvas);
+        window.addEventListener('resize', update);
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('resize', update);
+        };
+    }, []);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const W = size.w;
+        const H = size.h;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width  = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        const ctx = canvas.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const pad = { top: 24, right: 30, bottom: 56, left: 78 };
+        const gw = W - pad.left - pad.right;
+        const gh = H - pad.top - pad.bottom;
+        if (gw <= 0 || gh <= 0) return;
+
+        const logXMin = Math.log10(X_MIN_M);
+        const logXMax = Math.log10(X_MAX_M);
+        const logYMin = Math.log10(Y_MIN);
+        const logYMax = Math.log10(Y_MAX);
+
+        const xMap = (lam_m) => pad.left + ((Math.log10(lam_m) - logXMin) / (logXMax - logXMin)) * gw;
+        const yMap = (val)   => pad.top + gh - ((Math.log10(Math.max(val, 1e-30)) - logYMin) / (logYMax - logYMin)) * gh;
+
+        // Bakgrund
+        ctx.clearRect(0, 0, W, H);
+
+        // Synligt ljus-band (bakgrund)
+        const visLeft  = xMap(VIS_MIN_M);
+        const visRight = xMap(VIS_MAX_M);
+        const visGrad = ctx.createLinearGradient(visLeft, 0, visRight, 0);
+        visGrad.addColorStop(0,    'rgba(124, 58, 237, 0.22)');
+        visGrad.addColorStop(0.15, 'rgba(37, 99, 235, 0.22)');
+        visGrad.addColorStop(0.35, 'rgba(14, 165, 233, 0.22)');
+        visGrad.addColorStop(0.55, 'rgba(22, 163, 74, 0.22)');
+        visGrad.addColorStop(0.75, 'rgba(234, 179, 8, 0.22)');
+        visGrad.addColorStop(1,    'rgba(220, 38, 38, 0.22)');
+        ctx.fillStyle = visGrad;
+        ctx.fillRect(visLeft, pad.top, visRight - visLeft, gh);
+
+        // Etikett för synligt ljus-band
+        ctx.font = '10px Poppins, sans-serif';
+        ctx.fillStyle = 'rgba(226, 232, 240, 0.55)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillText('Synligt ljus', (visLeft + visRight) / 2, pad.top + 4);
+
+        // Grid (små linjer per decimaldel)
+        ctx.lineWidth = 1;
+        for (let dec = Math.floor(logXMin); dec <= Math.ceil(logXMax); dec++) {
+            for (let m = 1; m < 10; m++) {
+                const lam = m * Math.pow(10, dec);
+                if (lam < X_MIN_M || lam > X_MAX_M) continue;
+                const x = xMap(lam);
+                ctx.strokeStyle = m === 1 ? 'rgba(56,189,248,0.14)' : 'rgba(56,189,248,0.05)';
+                ctx.beginPath();
+                ctx.moveTo(x, pad.top);
+                ctx.lineTo(x, pad.top + gh);
+                ctx.stroke();
+            }
+        }
+        for (let dec = Math.floor(logYMin); dec <= Math.ceil(logYMax); dec++) {
+            for (let m = 1; m < 10; m++) {
+                const val = m * Math.pow(10, dec);
+                if (val < Y_MIN || val > Y_MAX) continue;
+                const y = yMap(val);
+                ctx.strokeStyle = m === 1 ? 'rgba(56,189,248,0.14)' : 'rgba(56,189,248,0.05)';
+                ctx.beginPath();
+                ctx.moveTo(pad.left, y);
+                ctx.lineTo(pad.left + gw, y);
+                ctx.stroke();
+            }
+        }
+
+        // Rita axlar (ljusblå/cyan enligt fysik-konvention)
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, pad.top);
+        ctx.lineTo(pad.left, pad.top + gh);
+        ctx.lineTo(pad.left + gw, pad.top + gh);
+        ctx.stroke();
+
+        // X-axel ticks + etiketter
+        const xTicks = [
+            { m: 1e-7, label: '100 nm' },
+            { m: 1e-6, label: '1 μm' },
+            { m: 1e-5, label: '10 μm' },
+            { m: 1e-4, label: '100 μm' },
+        ];
+        ctx.font = '11px Poppins, sans-serif';
+        ctx.fillStyle = '#cbd5e1';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        xTicks.forEach(t => {
+            const x = xMap(t.m);
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(x, pad.top + gh);
+            ctx.lineTo(x, pad.top + gh + 5);
+            ctx.stroke();
+            ctx.fillText(t.label, x, pad.top + gh + 9);
+        });
+        // Mindre tick-labels vid 300 nm, 3 μm, 30 μm för extra orientering
+        ctx.font = '9px Poppins, sans-serif';
+        ctx.fillStyle = '#64748b';
+        [{ m: 3e-7, label: '300 nm' }, { m: 3e-6, label: '3 μm' }, { m: 3e-5, label: '30 μm' }].forEach(t => {
+            const x = xMap(t.m);
+            ctx.fillText(t.label, x, pad.top + gh + 26);
+        });
+
+        // X-axel titel (variabel i kursiv + rak enhet)
+        drawMixedText(ctx, [
+            { text: 'Våglängd ', font: '12px Poppins, sans-serif', color: '#cbd5e1' },
+            { text: 'λ',         font: 'italic 13px Poppins, sans-serif', color: '#e2e8f0' },
+            { text: '  (logaritmisk skala)', font: '11px Poppins, sans-serif', color: '#64748b' },
+        ], pad.left + gw / 2, pad.top + gh + 48, { align: 'center', baseline: 'alphabetic' });
+
+        // Y-axel ticks + etiketter (varannan decenn)
+        const supMap = { '-1': '⁻¹', '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '10': '¹⁰' };
+        ctx.font = '11px Poppins, sans-serif';
+        ctx.fillStyle = '#cbd5e1';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
+        for (let dec = Math.floor(logYMin); dec <= Math.ceil(logYMax); dec++) {
+            const val = Math.pow(10, dec);
+            if (val < Y_MIN || val > Y_MAX) continue;
+            const y = yMap(val);
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, y);
+            ctx.lineTo(pad.left - 5, y);
+            ctx.stroke();
+            // Skriv bara varannan decenn för att inte trängas
+            if (dec % 2 !== 0 && dec !== -1) continue;
+            const label = `10${supMap[String(dec)] || '^' + dec}`;
+            ctx.fillText(label, pad.left - 10, y);
+        }
+
+        // Y-axel titel (roterad 90°)
+        ctx.save();
+        ctx.translate(22, pad.top + gh / 2);
+        ctx.rotate(-Math.PI / 2);
+        drawMixedText(ctx, [
+            { text: 'Spektral emittans ', font: '12px Poppins, sans-serif', color: '#cbd5e1' },
+            { text: 'M',                   font: 'italic 13px Poppins, sans-serif', color: '#e2e8f0' },
+            { text: 'λ',                   font: 'italic 9px Poppins, sans-serif',  color: '#e2e8f0', dy: 4 },
+            { text: '  (W/(m²·μm))',       font: '11px Poppins, sans-serif',         color: '#64748b' },
+        ], 0, 0, { align: 'center', baseline: 'alphabetic' });
+        ctx.restore();
+
+        // Hjälpfunktion för att rita en Planck-kurva
+        const drawCurve = (temp, color, lineWidth, glow, alpha) => {
+            ctx.save();
+            if (alpha !== undefined) ctx.globalAlpha = alpha;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.lineJoin = 'round';
+            if (glow) {
+                ctx.shadowColor = color;
+                ctx.shadowBlur  = 10;
+            }
+            ctx.beginPath();
+            const steps = 480;
+            let started = false;
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const lam = Math.pow(10, logXMin + t * (logXMax - logXMin));
+                const val = planck(lam, temp);
+                if (!isFinite(val) || val <= 0) { started = false; continue; }
+                const x = xMap(lam);
+                const y = yMap(val);
+                // Klippning: bara rita medan vi är inom y-intervallet
+                const inRange = val >= Y_MIN && val <= Y_MAX;
+                if (inRange) {
+                    if (!started) {
+                        // Rita liten startpunkt från kanten
+                        const yClamped = Math.max(pad.top, Math.min(pad.top + gh, y));
+                        ctx.moveTo(x, yClamped);
+                        started = true;
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                } else if (started) {
+                    // Rita sista punkten precis vid kanten för att avsluta snyggt
+                    const yClamped = Math.max(pad.top, Math.min(pad.top + gh, y));
+                    ctx.lineTo(x, yClamped);
+                    started = false;
+                }
+            }
+            ctx.stroke();
+            ctx.restore();
+        };
+
+        // Jämförelsekurvor (dämpade)
+        if (showComparison) {
+            const compColors = ['#f87171', '#fbbf24', '#fde68a', '#93c5fd'];
+            PRESETS.forEach((p, i) => {
+                if (Math.abs(p.T - T) < 1) return;
+                drawCurve(p.T, compColors[i % compColors.length], 1.6, false, 0.45);
+            });
+        }
+
+        // Huvudkurva (i svartkroppens färg)
+        const bb = blackbodyColor(T);
+        // Gör färgen tydlig även vid låga temperaturer där den blir svart
+        const curveColor = (T < 1500)
+            ? `rgb(${Math.max(bb.r, 220)},${Math.max(bb.g, 80)},${Math.max(bb.b, 80)})`
+            : bb.hex;
+        drawCurve(T, curveColor, 3, true);
+
+        // λ_max-markör
+        const lam_max = B_WIEN / T;
+        const peakVal = planck(lam_max, T);
+        if (lam_max >= X_MIN_M && lam_max <= X_MAX_M && peakVal >= Y_MIN && peakVal <= Y_MAX) {
+            const xp = xMap(lam_max);
+            const yp = yMap(peakVal);
+
+            // Streckad linje ned till x-axel
+            ctx.save();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+            ctx.setLineDash([5, 5]);
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(xp, yp);
+            ctx.lineTo(xp, pad.top + gh);
+            ctx.stroke();
+            ctx.restore();
+
+            // Topppunkt
+            ctx.fillStyle = '#ffffff';
+            ctx.strokeStyle = curveColor;
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(xp, yp, 6, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+
+            // Etikett för λ_max
+            const lamFmt = formatWavelength(lam_max);
+            const labelX = Math.min(pad.left + gw - 12, xp + 12);
+            const labelY = Math.max(pad.top + 14, yp - 14);
+            drawMixedText(ctx, [
+                { text: 'λ',     font: 'italic 13px Poppins, sans-serif', color: '#ffffff' },
+                { text: 'max',   font: 'italic 9px Poppins, sans-serif',  color: '#e2e8f0', dy: 4 },
+                { text: ' = ',   font: '12px Poppins, sans-serif',         color: '#e2e8f0' },
+                { text: `${lamFmt.val} ${lamFmt.unit}`, font: '600 12px Poppins, sans-serif', color: '#ffffff' },
+            ], labelX, labelY, { align: 'left', baseline: 'alphabetic' });
+        } else if (lam_max > X_MAX_M) {
+            // Peak utanför diagrammet till höger
+            const xp = pad.left + gw - 4;
+            ctx.fillStyle = 'rgba(255,255,255,0.7)';
+            ctx.font = 'italic 11px Poppins, sans-serif';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'top';
+            const lamFmt = formatWavelength(lam_max);
+            ctx.fillText(`→ λmax ≈ ${lamFmt.val} ${lamFmt.unit}`, xp, pad.top + 8);
+        } else if (lam_max < X_MIN_M) {
+            const xp = pad.left + 4;
+            ctx.fillStyle = 'rgba(255,255,255,0.7)';
+            ctx.font = 'italic 11px Poppins, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            const lamFmt = formatWavelength(lam_max);
+            ctx.fillText(`← λmax ≈ ${lamFmt.val} ${lamFmt.unit}`, xp, pad.top + 8);
+        }
+
+        // Pilar på axlar för att följa svensk diagramkonvention
+        ctx.fillStyle = '#38bdf8';
+        ctx.strokeStyle = '#38bdf8';
+        ctx.beginPath();
+        ctx.moveTo(pad.left + gw + 8, pad.top + gh);
+        ctx.lineTo(pad.left + gw, pad.top + gh - 4);
+        ctx.lineTo(pad.left + gw, pad.top + gh + 4);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(pad.left, pad.top - 8);
+        ctx.lineTo(pad.left - 4, pad.top);
+        ctx.lineTo(pad.left + 4, pad.top);
+        ctx.closePath();
+        ctx.fill();
+
+    }, [T, showComparison, size]);
+
+    return <canvas ref={canvasRef} className="graph-canvas" />;
+}
+
+// ── Huvudkomponent ──────────────────────────────────────────────────────────
+function WienSim() {
+    const [T, setT] = useState(5778);
+    const [showComparison, setShowComparison] = useState(false);
+
+    // Beräkna härledningar
+    const lam_max = B_WIEN / T;
+    const M_tot   = SIGMA * Math.pow(T, 4);
+    const M_peak  = planck(lam_max, T);
+
+    const bbColor = blackbodyColor(T);
+    const lamFmt   = formatWavelength(lam_max);
+    const emittFmt = formatEmittance(M_tot);
+    const peakSpectralFmt = (() => {
+        const v = M_peak;
+        if (v >= 1e9) return { val: fmt(v / 1e9, 2), unit: 'GW/(m²·μm)' };
+        if (v >= 1e6) return { val: fmt(v / 1e6, 2), unit: 'MW/(m²·μm)' };
+        if (v >= 1e3) return { val: fmt(v / 1e3, 2), unit: 'kW/(m²·μm)' };
+        if (v >= 1)   return { val: fmt(v, v < 10 ? 2 : 1), unit: 'W/(m²·μm)' };
+        return              { val: fmt(v, 3), unit: 'W/(m²·μm)' };
+    })();
+
+    return (
+        <div style={{fontFamily:"'Poppins',sans-serif"}}>
+
+            {/* ── Diagram ── */}
+            <div className="glass-card" style={{padding:'22px 26px 20px',marginBottom:'20px'}}>
+                <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:'14px',flexWrap:'wrap',gap:'10px'}}>
+                    <h2 style={{fontSize:'0.8rem',fontWeight:600,color:'#64748b',
+                        textTransform:'uppercase',letterSpacing:'0.08em'}}>
+                        Spektral emittans enligt Plancks strålningslag
+                    </h2>
+                    <label className="compare-toggle">
+                        <input
+                            type="checkbox"
+                            checked={showComparison}
+                            onChange={e => setShowComparison(e.target.checked)}
+                        />
+                        Visa jämförelsekurvor
+                    </label>
+                </div>
+                <PlanckGraph T={T} showComparison={showComparison} />
+            </div>
+
+            {/* ── Reglage + snabbval ── */}
+            <div style={{display:'grid',gridTemplateColumns:'minmax(0,1fr) minmax(0,1.1fr)',gap:'18px',marginBottom:'20px'}}>
+
+                {/* Temperatur-slider */}
+                <div className="glass-card" style={{padding:'22px 24px'}}>
+                    <div style={{fontSize:'0.72rem',fontWeight:600,color:'#64748b',
+                        textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:'14px'}}>
+                        Temperatur
+                    </div>
+                    <div style={{display:'flex',alignItems:'center',gap:'14px',marginBottom:'18px'}}>
+                        <div className="color-swatch" style={{
+                            background: bbColor.hex,
+                            boxShadow: `0 0 22px ${bbColor.hex}, inset 0 0 8px rgba(255,255,255,0.15)`,
+                        }}/>
+                        <div>
+                            <div style={{display:'flex',alignItems:'baseline',gap:'6px'}}>
+                                <span style={{fontSize:'2.3rem',fontWeight:700,color:'#e2e8f0',
+                                    fontVariantNumeric:'tabular-nums',lineHeight:1}}>
+                                    {T}
+                                </span>
+                                <span style={{fontSize:'1rem',color:'#94a3b8'}}>K</span>
+                            </div>
+                            <div style={{fontSize:'0.72rem',color:'#94a3b8',marginTop:'4px'}}>
+                                {blackbodyDescription(T)}
+                            </div>
+                        </div>
+                    </div>
+                    <input
+                        type="range"
+                        className="temp-slider"
+                        min={T_MIN}
+                        max={T_MAX}
+                        step={10}
+                        value={T}
+                        onChange={e => setT(+e.target.value)}
+                    />
+                    <div style={{display:'flex',justifyContent:'space-between',
+                        fontSize:'0.68rem',color:'#475569',marginTop:'8px',
+                        fontFamily:"'Poppins',sans-serif"}}>
+                        <span>{T_MIN} K</span>
+                        <span>{T_MAX} K</span>
+                    </div>
+                </div>
+
+                {/* Snabbval */}
+                <div className="glass-card" style={{padding:'22px 24px'}}>
+                    <div style={{fontSize:'0.72rem',fontWeight:600,color:'#64748b',
+                        textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:'14px'}}>
+                        Snabbval
+                    </div>
+                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'10px'}}>
+                        {PRESETS.map(p => (
+                            <button
+                                key={p.T}
+                                onClick={() => setT(p.T)}
+                                className={`preset-btn${T === p.T ? ' active' : ''}`}
+                            >
+                                <span className="preset-icon">{p.icon}</span>
+                                <div>
+                                    <div className="preset-name">{p.name}</div>
+                                    <div className="preset-temp">{p.T} K</div>
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* ── Värden ── */}
+            <div className="glass-card" style={{padding:'20px 24px',marginBottom:'20px'}}>
+                <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px'}}>
+
+                    <div className="value-card">
+                        <div className="value-label">Max våglängd</div>
+                        <div className="value-number">
+                            <em>λ</em><sub>max</sub> = {lamFmt.val}
+                            <span className="unit">{lamFmt.unit}</span>
+                        </div>
+                    </div>
+
+                    <div className="value-card">
+                        <div className="value-label">Total emittans</div>
+                        <div className="value-number" title="Total utstrålad effekt per ytenhet (integral över alla våglängder)">
+                            <em>M</em> = {emittFmt.val}
+                            <span className="unit">{emittFmt.unit}</span>
+                        </div>
+                    </div>
+
+                    <div className="value-card">
+                        <div className="value-label">Topp-intensitet</div>
+                        <div className="value-number" style={{fontSize:'1.15rem'}}>
+                            <em>M</em><sub>λ,max</sub> = {peakSpectralFmt.val}
+                            <span className="unit" style={{fontSize:'0.72rem'}}>{peakSpectralFmt.unit}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* ── Teori ── */}
+            <div className="glass-card" style={{padding:'28px 32px'}}>
+                <h2 style={{fontSize:'1.05rem',fontWeight:700,color:'#e2e8f0',
+                    marginBottom:'18px',letterSpacing:'0.01em'}}>
+                    Teorin bakom
+                </h2>
+
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',
+                    gap:'14px',marginBottom:'22px'}}>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.72rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Wiens förskjutningslag
+                        </div>
+                        <div style={{fontSize:'1.1rem',color:'#38bdf8',fontWeight:600}}>
+                            <em>λ</em><sub>max</sub> · <em>T</em> = <em>b</em>
+                        </div>
+                        <div style={{fontSize:'0.76rem',color:'#64748b',marginTop:'5px'}}>
+                            <em>b</em> = 2,898 · 10⁻³ m·K
+                        </div>
+                    </div>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.72rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Stefan–Boltzmanns lag
+                        </div>
+                        <div style={{fontSize:'1.1rem',color:'#a855f7',fontWeight:600}}>
+                            <em>M</em> = σ<em>T</em><sup>4</sup>
+                        </div>
+                        <div style={{fontSize:'0.76rem',color:'#64748b',marginTop:'5px'}}>
+                            σ = 5,67 · 10⁻⁸ W/(m²·K⁴)
+                        </div>
+                    </div>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.72rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Plancks strålningslag
+                        </div>
+                        <div style={{fontSize:'0.95rem',color:'#22c55e',fontWeight:600,lineHeight:1.5}}>
+                            <em>M</em><sub>λ</sub> = <span style={{display:'inline-block',whiteSpace:'nowrap'}}>
+                            (2π<em>hc</em>²⁄<em>λ</em>⁵)</span> · <span style={{display:'inline-block',whiteSpace:'nowrap'}}>
+                            1⁄(e<sup><em>hc</em>⁄<em>λk</em><sub>B</sub><em>T</em></sup> − 1)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style={{
+                    display:'grid',
+                    gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',
+                    gap:'18px',
+                    fontSize:'0.88rem',
+                    color:'#94a3b8',
+                    lineHeight:1.7,
+                }}>
+                    <div>
+                        <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>
+                            Förskjutningen av toppen
+                        </strong>
+                        En varm kropp strålar ut ett helt spektrum av våglängder, men intensiteten är som störst vid en viss våglängd <em>λ</em><sub>max</sub>. Wiens förskjutningslag säger att produkten <em>λ</em><sub>max</sub>·<em>T</em> är konstant. Dubblar du temperaturen halveras alltså topp-våglängden — toppen "förskjuts" mot kortare våglängder.
+                        <br/><br/>
+                        Solens yta (≈ 5778 K) har topp vid ca 500 nm (grönt–gult ljus), medan en människa (≈ 310 K) har sin topp kring 9,4 μm i infrarött, det som värmekameror ser.
+                    </div>
+                    <div>
+                        <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>
+                            Varför ökar emittansen så dramatiskt?
+                        </strong>
+                        Den totala utstrålade effekten per ytenhet ges av Stefan–Boltzmanns lag <em>M</em> = σ<em>T</em><sup>4</sup>. Potensen fyra gör att emittansen blir extremt temperaturkänslig: fördubblar du temperaturen växer <em>M</em> med 16 gånger, och tiodubblar du den blir effekten 10 000 gånger större.
+                        <br/><br/>
+                        I diagrammet syns detta som att hela Planck-kurvan lyfts kraftigt uppåt när du drar reglaget åt höger, samtidigt som toppen flyttar sig åt vänster. Arean under kurvan — den totala emittansen — motsvarar just σ<em>T</em><sup>4</sup>.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    );
+}
+
+// Mount
+const container = document.getElementById('root');
+const rootEl = ReactDOM.createRoot(container);
+rootEl.render(<WienSim />);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solens färg - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .page-wrapper {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .scene-wrap {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255,255,255,0.05);
+        }
+        .scene-canvas {
+            display: block;
+            width: 100%;
+            height: 460px;
+            background: #0a0a1a;
+        }
+
+        .value-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 10px;
+            padding: 12px 16px;
+            min-width: 0;
+        }
+        .value-label {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .value-number {
+            font-size: 1.3rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #e2e8f0;
+            white-space: nowrap;
+        }
+        .value-number span.unit {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-left: 3px;
+        }
+
+        .formula-box {
+            background: rgba(56, 189, 248, 0.06);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Time slider */
+        .time-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 14px;
+            border-radius: 7px;
+            background: linear-gradient(to right,
+                #0a0f1e 0%,
+                #1a1930 6%,
+                #382c54 13%,
+                #7a3a4a 22%,
+                #d08442 30%,
+                #f3c775 45%,
+                #fff5d9 50%,
+                #f3c775 55%,
+                #d08442 70%,
+                #7a3a4a 78%,
+                #382c54 87%,
+                #1a1930 94%,
+                #0a0f1e 100%);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            outline: none;
+            cursor: pointer;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+        }
+        .time-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fef9e7 0%, #fbbf24 40%, #d97706 100%);
+            border: 2.5px solid #0a0a1a;
+            cursor: grab;
+            box-shadow: 0 0 16px rgba(251, 191, 36, 0.8),
+                        0 2px 6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.1s;
+        }
+        .time-slider::-webkit-slider-thumb:hover { transform: scale(1.08); }
+        .time-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.15); }
+        .time-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fef9e7 0%, #fbbf24 40%, #d97706 100%);
+            border: 2.5px solid #0a0a1a;
+            cursor: grab;
+            box-shadow: 0 0 16px rgba(251, 191, 36, 0.8);
+        }
+
+        /* Play button */
+        .play-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(56, 189, 248, 0.4);
+            background: rgba(15, 23, 42, 0.8);
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .play-btn:hover {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            transform: scale(1.05);
+        }
+        .play-btn.active {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Preset buttons */
+        .preset-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 9px;
+            border: 1.5px solid rgba(56, 189, 248, 0.2);
+            background: rgba(15, 23, 42, 0.55);
+            cursor: pointer;
+            transition: all 0.18s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+        .preset-btn:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        .preset-btn.active {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.12);
+        }
+
+        /* Speed selector */
+        .speed-selector {
+            display: flex;
+            gap: 4px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 10px;
+            padding: 3px;
+        }
+        .speed-btn {
+            padding: 5px 12px;
+            border: none;
+            border-radius: 7px;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+        .speed-btn:hover { color: #e2e8f0; }
+        .speed-btn.active {
+            background: rgba(56, 189, 248, 0.2);
+            color: #e0f2fe;
+        }
+
+        /* Color swatch in info */
+        .sun-swatch {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            flex-shrink: 0;
+        }
+
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
+        ::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(56,189,248,0.45); }
+    </style>
+</head>
+<body class="bg-slate-950">
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">⚛️</span>
+            <span class="logo-text">Fysiklabbet</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Hem</a></li>
+            <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+            <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            <li><a href="om.html" class="nav-link">Om</a></li>
+            <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-wrapper">
+    <div style="max-width:1100px;margin:0 auto;padding:28px 20px 60px;">
+
+        <nav style="margin-bottom:20px;font-family:'Poppins',sans-serif;font-size:0.82rem;color:#64748b;">
+            <a href="index.html" style="color:#38bdf8;text-decoration:none;">Hem</a>
+            <span style="margin:0 7px;">/</span>
+            <a href="fysik2.html" style="color:#38bdf8;text-decoration:none;">Fysik 2</a>
+            <span style="margin:0 7px;">/</span>
+            <span style="color:#94a3b8;">Solens färg</span>
+        </nav>
+
+        <div style="margin-bottom:28px;">
+            <h1 class="glow-text" style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:700;color:#e2e8f0;margin-bottom:8px;">
+                Solens färg
+            </h1>
+            <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:#94a3b8;max-width:720px;line-height:1.65;">
+                Varför är solen vit mitt på dagen men glödande röd vid solnedgång? Dra reglaget eller tryck på play och låt solen vandra över himlen — solens färg beräknas i realtid utifrån Rayleigh-spridning genom atmosfären.
+            </p>
+        </div>
+
+        <div id="root"></div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+</footer>
+
+<script type="text/babel">
+const { useState, useRef, useEffect, useMemo } = React;
+
+// ── Konstanter ──────────────────────────────────────────────────────────────
+const H_PLANCK = 6.62607015e-34;   // J·s
+const C_LIGHT  = 2.99792458e8;     // m/s
+const K_B      = 1.380649e-23;     // J/K
+const T_SUN    = 5778;             // K — solens yttemperatur
+const MAX_ALT_DEG = 60;            // solhöjd vid lokal middag (ekvinoxnära, mellanbreddar)
+const TIME_MIN = 5.0;              // tid för slider, timmar
+const TIME_MAX = 19.0;
+
+// ── Plancks strålningslag (relativt spektrum) ──────────────────────────────
+function planck(lam_nm, T) {
+    const lam_m = lam_nm * 1e-9;
+    const exponent = (H_PLANCK * C_LIGHT) / (lam_m * K_B * T);
+    if (exponent > 700) return 0;
+    const num = (2 * Math.PI * H_PLANCK * C_LIGHT * C_LIGHT) / Math.pow(lam_m, 5);
+    return num / (Math.exp(exponent) - 1);
+}
+
+// ── Rayleigh-optisk tjocklek (vertikal, havsnivå) ──────────────────────────
+// Bodhaine/Iqbal approximation: τ(λ) ≈ 0,00879 · (λ[μm])^(-4,09)
+function rayleighTau(lam_nm) {
+    const lam_um = lam_nm / 1000;
+    return 0.00879 * Math.pow(lam_um, -4.09);
+}
+
+// ── Kasten-Young airmass ────────────────────────────────────────────────────
+// Mycket noggrann ner till horisonten, M(0°) ≈ 38
+function airmass(altitude_deg) {
+    const alt = Math.max(altitude_deg, -0.833);
+    const z = 90 - alt;
+    return 1 / (Math.cos(z * Math.PI / 180) + 0.50572 * Math.pow(96.07995 - z, -1.6364));
+}
+
+// ── CIE 1931 2° färgmatchningsfunktioner (Wyman asymmetriska gaussianer) ──
+function asymGauss(x, mu, s1, s2) {
+    const s = (x < mu) ? s1 : s2;
+    const t = (x - mu) / s;
+    return Math.exp(-0.5 * t * t);
+}
+function cieX(lam) {
+    return 1.056 * asymGauss(lam, 599.8, 37.9, 31.0)
+         + 0.362 * asymGauss(lam, 442.0, 16.0, 26.7)
+         - 0.065 * asymGauss(lam, 501.1, 20.4, 26.2);
+}
+function cieY(lam) {
+    return 0.821 * asymGauss(lam, 568.8, 46.9, 40.5)
+         + 0.286 * asymGauss(lam, 530.9, 16.3, 31.1);
+}
+function cieZ(lam) {
+    return 1.217 * asymGauss(lam, 437.0, 11.8, 36.0)
+         + 0.681 * asymGauss(lam, 459.0, 26.0, 13.8);
+}
+
+// ── sRGB gamma-kodning ──────────────────────────────────────────────────────
+function srgbGamma(c) {
+    if (c <= 0) return 0;
+    if (c >= 1) return 1;
+    return (c <= 0.0031308) ? 12.92 * c : 1.055 * Math.pow(c, 1/2.4) - 0.055;
+}
+
+// ── Beräkna solens färg vid en given solhöjd ────────────────────────────────
+// Principen: blackbody(5778 K) × exp(-τ(λ)·M) integrerat mot CIE XYZ,
+// konverterat till sRGB, normaliserat så max-kanal = 1 (bibehåller kulör).
+function sunColorAt(altitude_deg) {
+    const alt = Math.max(altitude_deg, 0.02); // undvik division med noll
+    const M = airmass(alt);
+    let X = 0, Y = 0, Z = 0;
+    for (let lam = 380; lam <= 720; lam += 5) {
+        const tau = rayleighTau(lam);
+        const trans = Math.exp(-tau * M);
+        const spec = planck(lam, T_SUN);
+        const P = spec * trans;
+        X += P * cieX(lam);
+        Y += P * cieY(lam);
+        Z += P * cieZ(lam);
+    }
+    // XYZ → linjär sRGB (D65)
+    let R =  3.2406 * X - 1.5372 * Y - 0.4986 * Z;
+    let G = -0.9689 * X + 1.8758 * Y + 0.0415 * Z;
+    let B =  0.0557 * X - 0.2040 * Y + 1.0570 * Z;
+    R = Math.max(0, R); G = Math.max(0, G); B = Math.max(0, B);
+    const maxC = Math.max(R, G, B, 1e-12);
+    R /= maxC; G /= maxC; B /= maxC;
+    R = srgbGamma(R); G = srgbGamma(G); B = srgbGamma(B);
+    return {
+        r: Math.round(R * 255),
+        g: Math.round(G * 255),
+        b: Math.round(B * 255),
+        M,
+    };
+}
+
+// ── Solhöjd från klockslag ──────────────────────────────────────────────────
+// Enkel modell: timvinkel ω = (t − 12) · 15°.
+// Sin(alt) ≈ cos(ω) vid ekvinox + låg deklination + lat ≈ komplement.
+// För visuell simulering: alt = MAX_ALT · cos(ω). Ger alt = 0 vid 06:00 och 18:00,
+// alt = MAX_ALT vid 12:00, och blir svagt negativ utanför dessa tider (gryning/skymning).
+function altitudeFromTime(t_hours) {
+    const ha_deg = (t_hours - 12) * 15;
+    return MAX_ALT_DEG * Math.cos(ha_deg * Math.PI / 180);
+}
+
+// ── Skyfärger (sorterade fallande i solhöjd) ────────────────────────────────
+const SKY_STOPS = [
+    { alt:  70, zenith:{r: 20,g: 70,b:160}, horizon:{r:170,g:210,b:235} },
+    { alt:  45, zenith:{r: 32,g: 92,b:178}, horizon:{r:192,g:218,b:238} },
+    { alt:  25, zenith:{r: 40,g: 88,b:162}, horizon:{r:216,g:204,b:190} },
+    { alt:  12, zenith:{r: 52,g: 70,b:140}, horizon:{r:234,g:170,b:114} },
+    { alt:   6, zenith:{r: 58,g: 58,b:120}, horizon:{r:232,g:116,b: 62} },
+    { alt:   3, zenith:{r: 46,g: 44,b: 92}, horizon:{r:210,g: 74,b: 36} },
+    { alt:   0, zenith:{r: 26,g: 30,b: 66}, horizon:{r:158,g: 50,b: 34} },
+    { alt:  -3, zenith:{r: 14,g: 18,b: 40}, horizon:{r: 72,g: 30,b: 32} },
+    { alt:  -8, zenith:{r:  6,g:  9,b: 20}, horizon:{r: 24,g: 16,b: 24} },
+    { alt: -15, zenith:{r:  2,g:  3,b:  8}, horizon:{r:  8,g:  6,b: 10} },
+];
+
+function lerpRgb(a, b, t) {
+    return {
+        r: a.r + (b.r - a.r) * t,
+        g: a.g + (b.g - a.g) * t,
+        b: a.b + (b.b - a.b) * t,
+    };
+}
+function rgbStr({r,g,b}) { return `rgb(${r|0},${g|0},${b|0})`; }
+function rgbaStr({r,g,b}, a) { return `rgba(${r|0},${g|0},${b|0},${a})`; }
+
+function skyColorsAt(alt) {
+    const s = SKY_STOPS;
+    if (alt >= s[0].alt) return { zenith: {...s[0].zenith}, horizon: {...s[0].horizon} };
+    if (alt <= s[s.length-1].alt) return { zenith: {...s[s.length-1].zenith}, horizon: {...s[s.length-1].horizon} };
+    for (let i = 0; i < s.length - 1; i++) {
+        if (alt <= s[i].alt && alt > s[i+1].alt) {
+            const t = (s[i].alt - alt) / (s[i].alt - s[i+1].alt);
+            return {
+                zenith:  lerpRgb(s[i].zenith,  s[i+1].zenith,  t),
+                horizon: lerpRgb(s[i].horizon, s[i+1].horizon, t),
+            };
+        }
+    }
+    return { zenith: {...s[0].zenith}, horizon: {...s[0].horizon} };
+}
+
+// ── Molnkonfiguration (placerade så de inte skymmer solens bana) ────────────
+const CLOUDS = [
+    { baseX: 0.10, y: 0.16, scale: 1.05, drift: 0.0040 },
+    { baseX: 0.80, y: 0.12, scale: 1.25, drift: 0.0032 },
+    { baseX: 0.35, y: 0.30, scale: 0.75, drift: 0.0055 },
+    { baseX: 0.62, y: 0.28, scale: 0.90, drift: 0.0048 },
+];
+
+// ── Ritar ett mjukt moln med överlappande radiella gradient-puffar ──────────
+function drawCloud(ctx, cx, cy, size, tintTopRgb, tintBotRgb, alphaScale) {
+    const puffs = [
+        { dx: -size*0.75, dy: size*0.08,  r: size*0.55 },
+        { dx: -size*0.30, dy: -size*0.22, r: size*0.68 },
+        { dx:  size*0.12, dy: -size*0.32, r: size*0.70 },
+        { dx:  size*0.55, dy: -size*0.10, r: size*0.62 },
+        { dx:  size*0.95, dy: size*0.08,  r: size*0.50 },
+        { dx:  size*0.25, dy: size*0.18,  r: size*0.60 },
+        { dx: -size*0.45, dy: size*0.22,  r: size*0.48 },
+    ];
+    for (const p of puffs) {
+        const px = cx + p.dx;
+        const py = cy + p.dy;
+        // Ljusa ovansidan, skuggig undersida
+        const topColor = tintTopRgb;
+        const botColor = tintBotRgb;
+        const g = ctx.createRadialGradient(px, py - p.r*0.25, 0, px, py, p.r);
+        g.addColorStop(0,   rgbaStr(topColor, 0.92 * alphaScale));
+        g.addColorStop(0.5, rgbaStr(lerpRgb(topColor, botColor, 0.4), 0.55 * alphaScale));
+        g.addColorStop(1,   rgbaStr(botColor, 0));
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(px, py, p.r, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+// ── Ritar hela scenen ───────────────────────────────────────────────────────
+function drawScene(ctx, W, H, time_hours, altitude, sunCol, sky, waveT, cloudT) {
+    const horizonY = Math.round(H * 0.58);
+
+    // Solens position på duken
+    const dayFrac = (time_hours - 6) / 12;       // 0 vid soluppgång, 1 vid solnedgång
+    const sunX = W * 0.08 + dayFrac * W * 0.84;
+    const altMax = MAX_ALT_DEG;
+    const sunY = horizonY - (altitude / altMax) * (horizonY - H * 0.10);
+
+    // ───────── HIMMEL ─────────
+    const skyGrad = ctx.createLinearGradient(0, 0, 0, horizonY);
+    skyGrad.addColorStop(0,   rgbStr(sky.zenith));
+    skyGrad.addColorStop(1,   rgbStr(sky.horizon));
+    ctx.fillStyle = skyGrad;
+    ctx.fillRect(0, 0, W, horizonY);
+
+    // Varm horisontglöd centrerad kring solens position (asymmetri över himlen)
+    if (altitude > -10) {
+        const warmIntensity = Math.max(0, Math.min(1, (35 - altitude) / 35));
+        if (warmIntensity > 0.01) {
+            const glowR = W * 0.55;
+            const wg = ctx.createRadialGradient(sunX, horizonY, 0, sunX, horizonY, glowR);
+            wg.addColorStop(0,   rgbaStr(sky.horizon, 0.55 * warmIntensity));
+            wg.addColorStop(0.35,rgbaStr(sky.horizon, 0.25 * warmIntensity));
+            wg.addColorStop(1,   rgbaStr(sky.horizon, 0));
+            ctx.fillStyle = wg;
+            ctx.fillRect(0, 0, W, horizonY + 4);
+        }
+    }
+
+    // Solens korona/glow (stor, omkring solen)
+    if (altitude > -4) {
+        const altClamp = Math.max(0, altitude);
+        const haloR = 130 + Math.max(0, 18 - altClamp) * 10;
+        const halo = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, haloR);
+        halo.addColorStop(0,   rgbaStr(sunCol, 0.75));
+        halo.addColorStop(0.2, rgbaStr(sunCol, 0.45));
+        halo.addColorStop(0.5, rgbaStr(sunCol, 0.18));
+        halo.addColorStop(1,   rgbaStr(sunCol, 0));
+        ctx.fillStyle = halo;
+        ctx.fillRect(0, 0, W, horizonY + 6);
+    }
+
+    // ───────── MOLN (över himlen, bakom sol) ─────────
+    // Moln färgas av himlens horisontfärg + lätt höjdgradient.
+    const cloudTop = { r: 255, g: 255, b: 255 };
+    const cloudBot = { r: 180, g: 185, b: 200 };
+    // Mer tintad vid låg sol
+    const tintStrength = Math.max(0, Math.min(0.9, (30 - altitude) / 40));
+    const tintedTop = lerpRgb(cloudTop, sky.horizon, tintStrength * 0.75);
+    const tintedBot = lerpRgb(cloudBot, sky.horizon, tintStrength * 0.60);
+    // Minska molnalfa när det blir mörkt
+    const cloudAlpha = Math.max(0.2, Math.min(1, (altitude + 10) / 25));
+
+    for (const c of CLOUDS) {
+        const cx = ((c.baseX + cloudT * c.drift) % 1 + 1) % 1 * W;
+        const cy = c.y * horizonY;
+        const size = 44 * c.scale * (W / 1000) * 1.15 + 20;
+        // Avstånd till solen — hoppa över detta moln om det skulle hamna ovanpå
+        const distToSun = Math.hypot(cx - sunX, cy - sunY);
+        if (distToSun < size + 70) continue;
+        drawCloud(ctx, cx, cy, size, tintedTop, tintedBot, cloudAlpha);
+    }
+
+    // ───────── SOL (ovanför hav) ─────────
+    if (altitude > -3) {
+        const altClamp = Math.max(0, altitude);
+        const baseR = 22 + Math.max(0, 12 - altClamp) * 1.2;
+        // Varmare kärna vid hög sol (nästan vit); mättad färg vid låg sol
+        const whiteAmount = Math.min(0.35, altClamp / 35);
+        const coreColor = lerpRgb(sunCol, { r:255,g:255,b:255 }, whiteAmount);
+
+        // Yttre sken/aura
+        const outer = ctx.createRadialGradient(sunX, sunY, baseR * 0.6, sunX, sunY, baseR * 3);
+        outer.addColorStop(0,   rgbaStr(coreColor, 0.75));
+        outer.addColorStop(0.5, rgbaStr(sunCol, 0.35));
+        outer.addColorStop(1,   rgbaStr(sunCol, 0));
+        ctx.fillStyle = outer;
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, baseR * 3, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Solskivan
+        const disk = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, baseR);
+        disk.addColorStop(0,   rgbStr(coreColor));
+        disk.addColorStop(0.7, rgbStr(sunCol));
+        disk.addColorStop(1,   rgbStr(sunCol));
+        ctx.fillStyle = disk;
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, baseR, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // ───────── HAV ─────────
+    const seaH = H - horizonY;
+    // Basfärg: mörkare version av himlens horisontfärg
+    const seaBase = {
+        r: sky.horizon.r * 0.38,
+        g: sky.horizon.g * 0.42,
+        b: sky.horizon.b * 0.52,
+    };
+    // Vertikal gradient: ljusare vid horisonten, mörkare ner mot kameran
+    const seaGrad = ctx.createLinearGradient(0, horizonY, 0, H);
+    seaGrad.addColorStop(0, rgbStr(lerpRgb(seaBase, sky.horizon, 0.35)));
+    seaGrad.addColorStop(0.35, rgbStr(seaBase));
+    seaGrad.addColorStop(1, rgbStr({r: seaBase.r*0.45, g: seaBase.g*0.50, b: seaBase.b*0.65}));
+    ctx.fillStyle = seaGrad;
+    ctx.fillRect(0, horizonY, W, seaH);
+
+    // ── Solens glitterväg på vattnet ──
+    if (altitude > -2 && sunX > -200 && sunX < W + 200) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'lighter';
+        const glitterHeight = seaH * 0.95;
+        const baseWidthTop = 18 + (35 - Math.max(0, altitude)) * 0.6;   // smal vid horisonten
+        const baseWidthBot = baseWidthTop + 80 + (1 - Math.min(1, altitude/30)) * 120; // bredare nedåt
+
+        const strips = 80;
+        for (let i = 0; i < strips; i++) {
+            const t1 = i / strips;
+            const y = horizonY + t1 * glitterHeight;
+            const w = baseWidthTop + (baseWidthBot - baseWidthTop) * t1;
+            // Lokal vågförskjutning (flera frekvenser)
+            const phase = waveT * (1.2 + t1 * 0.7);
+            const wobble = 6 * Math.sin(y * 0.12 + phase) + 3 * Math.sin(y * 0.28 + phase * 1.7);
+            // Alfa fadar mot botten + flimrar subtilt med tiden
+            const flicker = 0.85 + 0.15 * Math.sin(y * 0.5 + waveT * 3 + i);
+            const baseAlpha = (1 - t1) * 0.42 * flicker;
+            // Extra glitter-modulering
+            const bandMod = 0.35 + 0.65 * Math.abs(Math.sin(y * 0.18 + waveT * 1.1));
+            const alpha = baseAlpha * bandMod;
+            ctx.fillStyle = rgbaStr(sunCol, alpha);
+            ctx.fillRect(sunX - w/2 + wobble, y, w, 3);
+        }
+        ctx.restore();
+    }
+
+    // ── Våglinjer: tunna ljusa strokes som illustrerar kammar ──
+    const layers = 36;
+    for (let i = 0; i < layers; i++) {
+        const t1 = i / layers;
+        const persp = t1 * t1; // perspektiv: fler lager närmare kameran
+        const y = horizonY + persp * seaH;
+        const amp = 1 + t1 * 7;
+        const wl = 30 + t1 * 160;
+        const phase = waveT * (0.7 + t1 * 1.2);
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += 6) {
+            const wy = y
+                + amp * Math.sin(x / wl + phase)
+                + amp * 0.5 * Math.sin(x / (wl * 0.3) + phase * 1.6 + t1 * 2);
+            if (x === 0) ctx.moveTo(x, wy);
+            else         ctx.lineTo(x, wy);
+        }
+        // Ljusare vid horisonten, mörkare nedåt
+        const lineAlpha = (1 - t1 * 0.85) * 0.16;
+        ctx.strokeStyle = `rgba(255, 255, 255, ${lineAlpha.toFixed(3)})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+
+    // ── Horisontlinje, diskret ─────────
+    ctx.beginPath();
+    ctx.moveTo(0, horizonY);
+    ctx.lineTo(W, horizonY);
+    ctx.strokeStyle = `rgba(${Math.round(sky.horizon.r*0.65)}, ${Math.round(sky.horizon.g*0.65)}, ${Math.round(sky.horizon.b*0.7)}, 0.5)`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+}
+
+// ── Formaterare ─────────────────────────────────────────────────────────────
+const fmt = (v, d = 1) => v.toFixed(d).replace('.', ',');
+function formatTime(h) {
+    h = ((h % 24) + 24) % 24;
+    const hh = Math.floor(h);
+    const mm = Math.round((h - hh) * 60);
+    const m = mm === 60 ? 0 : mm;
+    const extra = mm === 60 ? 1 : 0;
+    return `${String((hh + extra) % 24).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+// Kort beskrivning av solens hue
+function colorDescription(altitude, sunCol) {
+    if (altitude < -1) return 'Under horisonten';
+    if (altitude < 2)  return 'Djupt röd';
+    if (altitude < 5)  return 'Glödande röd-orange';
+    if (altitude < 10) return 'Varm orange';
+    if (altitude < 20) return 'Gulorange';
+    if (altitude < 35) return 'Gulvit';
+    if (altitude < 55) return 'Varm vit';
+    return 'Nära vit';
+}
+
+// ── Tidspreset-knappar ──────────────────────────────────────────────────────
+const PRESETS = [
+    { name: 'Soluppgång',   icon: '🌅', t: 6.0  },
+    { name: 'Förmiddag',    icon: '☀️', t: 9.0  },
+    { name: 'Middag',       icon: '🔆', t: 12.0 },
+    { name: 'Solnedgång',   icon: '🌇', t: 18.0 },
+];
+
+const SPEEDS = [1, 2, 5, 15];
+
+// ── Huvudkomponent ─────────────────────────────────────────────────────────
+function SolensFarg() {
+    const [time, setTime]       = useState(12.0);
+    const [playing, setPlaying] = useState(false);
+    const [speed, setSpeed]     = useState(2);
+
+    // Refs för animationsloopen
+    const timeRef    = useRef(time);
+    const playingRef = useRef(playing);
+    const speedRef   = useRef(speed);
+    useEffect(() => { timeRef.current    = time;    }, [time]);
+    useEffect(() => { playingRef.current = playing; }, [playing]);
+    useEffect(() => { speedRef.current   = speed;   }, [speed]);
+
+    const canvasRef  = useRef(null);
+    const waveTRef   = useRef(0);
+    const cloudTRef  = useRef(0);
+    const [size, setSize] = useState({ W: 1000, H: 460 });
+
+    // Resize observer
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const update = () => {
+            const rect = canvas.getBoundingClientRect();
+            if (rect.width > 0 && rect.height > 0) {
+                setSize({ W: rect.width, H: rect.height });
+            }
+        };
+        update();
+        const obs = new ResizeObserver(update);
+        obs.observe(canvas);
+        window.addEventListener('resize', update);
+        return () => { obs.disconnect(); window.removeEventListener('resize', update); };
+    }, []);
+
+    // Sätt canvas pixel-storlek när size ändras
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width  = Math.round(size.W * dpr);
+        canvas.height = Math.round(size.H * dpr);
+        const ctx = canvas.getContext('2d');
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }, [size]);
+
+    // Animationsloop
+    useEffect(() => {
+        let raf;
+        let lastT = performance.now();
+
+        const tick = (now) => {
+            const dt = Math.min(0.05, (now - lastT) / 1000); // cap för att undvika stora hopp
+            lastT = now;
+
+            // Tiden för vågor och moln flyter alltid
+            waveTRef.current  += dt;
+            cloudTRef.current += dt;
+
+            // Solens tid avancerar bara när playing är true
+            if (playingRef.current) {
+                const dThours = dt * speedRef.current * 0.5; // 0,5 h per sekund vid hastighet 1×
+                let nt = timeRef.current + dThours;
+                if (nt > TIME_MAX) nt = TIME_MIN + (nt - TIME_MAX);
+                timeRef.current = nt;
+                setTime(nt);
+            }
+
+            // Rita scen
+            const canvas = canvasRef.current;
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                const t   = timeRef.current;
+                const alt = altitudeFromTime(t);
+                const sunCol = sunColorAt(alt);
+                const sky = skyColorsAt(alt);
+                drawScene(ctx, size.W, size.H, t, alt, sunCol, sky, waveTRef.current, cloudTRef.current);
+            }
+
+            raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(raf);
+    }, [size]);
+
+    // Härledningar för paneler
+    const altitude = altitudeFromTime(time);
+    const sunCol   = sunColorAt(altitude);
+    const M = airmass(altitude);
+
+    return (
+        <div style={{fontFamily:"'Poppins',sans-serif"}}>
+
+            {/* ── Scen ── */}
+            <div className="glass-card" style={{padding:'16px',marginBottom:'18px'}}>
+                <div className="scene-wrap">
+                    <canvas ref={canvasRef} className="scene-canvas" />
+                </div>
+            </div>
+
+            {/* ── Kontroller ── */}
+            <div className="glass-card" style={{padding:'20px 24px',marginBottom:'18px'}}>
+                <div style={{display:'flex',alignItems:'center',gap:'14px',marginBottom:'14px',flexWrap:'wrap'}}>
+                    <button
+                        className={`play-btn${playing ? ' active' : ''}`}
+                        onClick={() => setPlaying(p => !p)}
+                        aria-label={playing ? 'Pausa' : 'Spela'}
+                    >
+                        {playing ? (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#38bdf8">
+                                <rect x="6" y="5" width="4" height="14" rx="1"/>
+                                <rect x="14" y="5" width="4" height="14" rx="1"/>
+                            </svg>
+                        ) : (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="#38bdf8">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        )}
+                    </button>
+
+                    <div style={{flex:1,minWidth:'200px'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:'6px'}}>
+                            <div style={{fontSize:'0.72rem',fontWeight:600,color:'#64748b',textTransform:'uppercase',letterSpacing:'0.07em'}}>
+                                Tid på dygnet
+                            </div>
+                            <div style={{fontSize:'1.15rem',fontWeight:700,color:'#e2e8f0',fontVariantNumeric:'tabular-nums'}}>
+                                {formatTime(time)}
+                            </div>
+                        </div>
+                        <input
+                            type="range"
+                            className="time-slider"
+                            min={TIME_MIN}
+                            max={TIME_MAX}
+                            step={0.01}
+                            value={time}
+                            onChange={e => {
+                                const v = +e.target.value;
+                                timeRef.current = v;
+                                setTime(v);
+                            }}
+                        />
+                        <div style={{display:'flex',justifyContent:'space-between',fontSize:'0.68rem',color:'#475569',marginTop:'4px'}}>
+                            <span>05:00</span><span>09:00</span><span>12:00</span><span>15:00</span><span>19:00</span>
+                        </div>
+                    </div>
+
+                    <div className="speed-selector">
+                        {SPEEDS.map(s => (
+                            <button
+                                key={s}
+                                className={`speed-btn${speed === s ? ' active' : ''}`}
+                                onClick={() => setSpeed(s)}
+                            >
+                                {s}×
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                <div style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
+                    {PRESETS.map(p => (
+                        <button
+                            key={p.name}
+                            className={`preset-btn${Math.abs(time - p.t) < 0.01 ? ' active' : ''}`}
+                            onClick={() => { setPlaying(false); timeRef.current = p.t; setTime(p.t); }}
+                        >
+                            <span style={{fontSize:'1.05rem'}}>{p.icon}</span>
+                            <span>{p.name}</span>
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {/* ── Värden ── */}
+            <div className="glass-card" style={{padding:'18px 24px',marginBottom:'18px'}}>
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:'10px'}}>
+                    <div className="value-card">
+                        <div className="value-label">Solhöjd</div>
+                        <div className="value-number">
+                            <em>h</em> = {fmt(altitude, 1)}
+                            <span className="unit">°</span>
+                        </div>
+                    </div>
+                    <div className="value-card">
+                        <div className="value-label">Luftmassa</div>
+                        <div className="value-number" title="Kasten-Young airmass">
+                            <em>M</em> = {altitude > -0.5 ? fmt(M, 2) : '—'}
+                        </div>
+                    </div>
+                    <div className="value-card">
+                        <div className="value-label">Solens färg</div>
+                        <div style={{display:'flex',alignItems:'center',gap:'12px',marginTop:'2px'}}>
+                            <div className="sun-swatch" style={{
+                                background: rgbStr(sunCol),
+                                boxShadow: altitude > 0 ? `0 0 18px ${rgbStr(sunCol)}` : 'none',
+                            }}/>
+                            <div style={{fontSize:'0.82rem',color:'#cbd5e1',lineHeight:1.35}}>
+                                {colorDescription(altitude, sunCol)}
+                                <div style={{fontSize:'0.68rem',color:'#64748b',marginTop:'2px'}}>
+                                    RGB ({sunCol.r}, {sunCol.g}, {sunCol.b})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* ── Teori ── */}
+            <div className="glass-card" style={{padding:'26px 30px'}}>
+                <h2 style={{fontSize:'1.05rem',fontWeight:700,color:'#e2e8f0',marginBottom:'16px'}}>
+                    Fysiken bakom
+                </h2>
+
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:'14px',marginBottom:'20px'}}>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.72rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Rayleigh-spridning
+                        </div>
+                        <div style={{fontSize:'1.05rem',color:'#38bdf8',fontWeight:600}}>
+                            σ<sub>R</sub> ∝ 1⁄<em>λ</em><sup>4</sup>
+                        </div>
+                        <div style={{fontSize:'0.74rem',color:'#64748b',marginTop:'5px'}}>
+                            Blått ljus (440 nm) sprids ≈ 6× mer än rött (650 nm).
+                        </div>
+                    </div>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.72rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Transmission genom atmosfären
+                        </div>
+                        <div style={{fontSize:'1.05rem',color:'#a855f7',fontWeight:600}}>
+                            <em>I</em>(<em>λ</em>) = <em>I</em><sub>0</sub>(<em>λ</em>) · e<sup>−τ(<em>λ</em>)·<em>M</em></sup>
+                        </div>
+                        <div style={{fontSize:'0.74rem',color:'#64748b',marginTop:'5px'}}>
+                            τ är atmosfärens optiska tjocklek vid våglängden λ.
+                        </div>
+                    </div>
+
+                    <div className="formula-box">
+                        <div style={{fontSize:'0.72rem',color:'#94a3b8',marginBottom:'6px',fontWeight:600}}>
+                            Luftmassa
+                        </div>
+                        <div style={{fontSize:'1.05rem',color:'#22c55e',fontWeight:600}}>
+                            <em>M</em>(<em>h</em>) ≈ 1 ⁄ sin <em>h</em>
+                        </div>
+                        <div style={{fontSize:'0.74rem',color:'#64748b',marginTop:'5px'}}>
+                            Vid zenit: M = 1. Vid horisonten: M ≈ 38 (Kasten-Young).
+                        </div>
+                    </div>
+                </div>
+
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'18px',
+                    fontSize:'0.88rem',color:'#94a3b8',lineHeight:1.7}}>
+                    <div>
+                        <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>
+                            Varför blir solen röd vid horisonten?
+                        </strong>
+                        När solen står högt passerar dess strålar genom ungefär en luftmassa atmosfär — då sprids ett måttligt antal blå fotoner ur den direkta strålen och det räcker inte för att förändra färgen nämnvärt. När solen närmar sig horisonten måste ljuset däremot korsa <em>mycket</em> mer luft — upp till cirka 38 luftmassor. Eftersom Rayleigh-spridningen är starkt våglängdsberoende (∝ 1/λ⁴) försvinner då nästan allt blått och mycket av det gröna, medan det röda ljuset slipper igenom.
+                    </div>
+                    <div>
+                        <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>
+                            Varför är himlen blå?
+                        </strong>
+                        Samma spridningsfenomen som förskjuter solen mot rött gör himlen blå. Det blå ljuset som sprids ur den direkta solstrålen behöver ta vägen någonstans — och det når oss från hela himlen istället för från solen. Vid solnedgången blir himlen nära horisonten orange och rosa av samma anledning, medan zenit förblir ganska mörkblå.
+                    </div>
+                    <div>
+                        <strong style={{color:'#cbd5e1',display:'block',marginBottom:'4px'}}>
+                            Hur färgen beräknas
+                        </strong>
+                        Simuleringen startar med solens spektrum approximerat som svartkroppsstrålning vid 5778 K. För varje våglängd i intervallet 380–720 nm beräknas transmissionen <em>e</em><sup>−τ·M</sup>, där τ(λ) följer Rayleighs lag. Det filtrerade spektrumet integreras mot CIE 1931-färgmatchningsfunktionerna för att få XYZ, som sedan omvandlas till sRGB. Resultatet är solens verkliga färg — inte en artistisk tolkning.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    );
+}
+
+const container = document.getElementById('root');
+const rootEl = ReactDOM.createRoot(container);
+rootEl.render(<SolensFarg />);
+</script>
+
+</body>
+</html>

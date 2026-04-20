@@ -40,15 +40,33 @@
             width: 100%;
             height: 520px;
         }
-        .scene-wrap:fullscreen,
+        .scene-wrap:fullscreen {
+            background: #05080f;
+            border-radius: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            display: block !important;
+        }
         .scene-wrap:-webkit-full-screen {
             background: #05080f;
             border-radius: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            display: block !important;
         }
-        .scene-wrap:fullscreen .scene-canvas,
+        .scene-wrap:fullscreen .scene-canvas {
+            width: 100vw !important;
+            height: 100vh !important;
+        }
         .scene-wrap:-webkit-full-screen .scene-canvas {
-            height: 100vh;
-            width: 100vw;
+            width: 100vw !important;
+            height: 100vh !important;
+        }
+        .scene-wrap:fullscreen .scene-canvas > canvas,
+        .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
+            width: 100vw !important;
+            height: 100vh !important;
+            display: block !important;
         }
 
         .fs-btn {
@@ -72,6 +90,50 @@
             z-index: 5;
         }
         .fs-btn:hover { transform: scale(1.08); background: rgba(56,189,248,0.18); }
+
+        .fs-controls {
+            position: absolute;
+            left: 50%;
+            bottom: 32px;
+            transform: translateX(-50%);
+            width: min(820px, 92vw);
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            padding: 14px 22px;
+            border-radius: 14px;
+            background: rgba(10, 15, 30, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.28);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+            z-index: 6;
+            font-family: 'Poppins', sans-serif;
+        }
+        .scene-wrap:fullscreen .fs-controls,
+        .scene-wrap:-webkit-full-screen .fs-controls {
+            display: flex;
+        }
+        .fs-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .fs-label {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            font-weight: 600;
+            white-space: nowrap;
+            min-width: 96px;
+        }
+        .fs-value {
+            color: #e2e8f0;
+            font-size: 0.92rem;
+            font-weight: 600;
+            min-width: 80px;
+            text-align: right;
+            white-space: nowrap;
+        }
 
         /* Value cards */
         .value-card {
@@ -815,7 +877,21 @@ function SceneView({ wavelength, intensity, Ek, emitted, metalHex }) {
         if (!containerRef.current) return;
         const scene = new PhotoelectricScene(containerRef.current);
         sceneRef.current = scene;
-        return () => { scene.dispose(); };
+
+        // Vid fullskärmsskifte: låt DOM reflowa, tvinga sedan resize
+        const onFs = () => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => scene.onResize());
+            });
+        };
+        document.addEventListener('fullscreenchange', onFs);
+        document.addEventListener('webkitfullscreenchange', onFs);
+
+        return () => {
+            document.removeEventListener('fullscreenchange', onFs);
+            document.removeEventListener('webkitfullscreenchange', onFs);
+            scene.dispose();
+        };
     }, []);
 
     useEffect(() => {
@@ -902,6 +978,36 @@ function App() {
                     emitted={emitted}
                     metalHex={metal.hex}
                 />
+                <div className="fs-controls">
+                    <div className="fs-row">
+                        <span className="fs-label">Våglängd <em className="italic-var">λ</em></span>
+                        <input
+                            type="range"
+                            className="wl-slider"
+                            style={{ flex: 1 }}
+                            min={WL_MIN}
+                            max={WL_MAX}
+                            step={1}
+                            value={WL_MIN + WL_MAX - wavelength}
+                            onChange={e => setWavelength(WL_MIN + WL_MAX - parseFloat(e.target.value))}
+                        />
+                        <span className="fs-value">{fmt(wavelength, 0)} nm</span>
+                    </div>
+                    <div className="fs-row">
+                        <span className="fs-label">Intensitet</span>
+                        <input
+                            type="range"
+                            className="int-slider"
+                            style={{ flex: 1 }}
+                            min={0}
+                            max={100}
+                            step={1}
+                            value={intensity}
+                            onChange={e => setIntensity(parseFloat(e.target.value))}
+                        />
+                        <span className="fs-value">{fmt(intensity, 0)} %</span>
+                    </div>
+                </div>
                 <button className="fs-btn" onClick={toggleFullscreen}
                         title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                     {isFullscreen ? (

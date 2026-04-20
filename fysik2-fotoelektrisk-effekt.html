@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotoelektrisk effekt - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        .page-wrapper {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .scene-wrap {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255,255,255,0.05);
+            background: radial-gradient(ellipse at 30% 20%, #1b2540 0%, #0a0f1e 55%, #05080f 100%);
+        }
+        .scene-canvas {
+            display: block;
+            width: 100%;
+            height: 520px;
+        }
+        .scene-wrap:fullscreen,
+        .scene-wrap:-webkit-full-screen {
+            background: #05080f;
+            border-radius: 0;
+        }
+        .scene-wrap:fullscreen .scene-canvas,
+        .scene-wrap:-webkit-full-screen .scene-canvas {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .fs-btn {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease, background 0.15s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            z-index: 5;
+        }
+        .fs-btn:hover { transform: scale(1.08); background: rgba(56,189,248,0.18); }
+
+        /* Value cards */
+        .value-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 10px;
+            padding: 12px 16px;
+            min-width: 0;
+        }
+        .value-label {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .value-number {
+            font-size: 1.25rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            color: #e2e8f0;
+            white-space: nowrap;
+        }
+        .value-number span.unit {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-left: 3px;
+        }
+        .value-number em {
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        /* Wavelength slider with spectrum */
+        .wl-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 18px;
+            border-radius: 9px;
+            background: linear-gradient(to left,
+                #6b21a8 0%,
+                #6b21a8 4%,
+                #7c3aed 12%,
+                #4338ca 18%,
+                #1d4ed8 24%,
+                #0284c7 30%,
+                #0891b2 36%,
+                #16a34a 45%,
+                #ca8a04 58%,
+                #ea580c 68%,
+                #dc2626 78%,
+                #991b1b 90%,
+                #7f1d1d 100%);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            outline: none;
+            cursor: pointer;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+        }
+        .wl-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
+            border: 2.5px solid #0a0a1a;
+            cursor: grab;
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.6),
+                        0 2px 6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.1s;
+        }
+        .wl-slider::-webkit-slider-thumb:hover { transform: scale(1.08); }
+        .wl-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.15); }
+        .wl-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
+            border: 2.5px solid #0a0a1a;
+            cursor: grab;
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Intensity slider */
+        .int-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #1e293b 0%, #fbbf24 100%);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            outline: none;
+            cursor: pointer;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+        }
+        .int-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fef9c3 0%, #fbbf24 60%, #d97706 100%);
+            border: 2px solid #0a0a1a;
+            cursor: grab;
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+        }
+        .int-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fef9c3 0%, #fbbf24 60%, #d97706 100%);
+            border: 2px solid #0a0a1a;
+            cursor: grab;
+        }
+
+        /* Metal selector */
+        .metal-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 10px 14px;
+            border-radius: 11px;
+            border: 1.5px solid rgba(56, 189, 248, 0.18);
+            background: rgba(15, 23, 42, 0.55);
+            cursor: pointer;
+            transition: all 0.18s ease;
+            font-family: 'Poppins', sans-serif;
+            color: #cbd5e1;
+            min-width: 92px;
+        }
+        .metal-btn:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            background: rgba(15, 23, 42, 0.85);
+            transform: translateY(-1px);
+        }
+        .metal-btn.active {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.14);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.22);
+        }
+        .metal-symbol {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #e0f2fe;
+            font-style: italic;
+        }
+        .metal-name {
+            font-size: 0.78rem;
+            color: #94a3b8;
+        }
+        .metal-w {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        /* Formula box */
+        .formula-box {
+            background: rgba(56, 189, 248, 0.06);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-family: 'Poppins', sans-serif;
+            color: #e2e8f0;
+        }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.92rem;
+            letter-spacing: 0.01em;
+        }
+        .status-on {
+            background: rgba(34, 197, 94, 0.13);
+            color: #86efac;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            box-shadow: 0 0 18px rgba(34, 197, 94, 0.2);
+        }
+        .status-off {
+            background: rgba(148, 163, 184, 0.08);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        /* Light wave description pill */
+        .band-pill {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border: 1px solid currentColor;
+        }
+
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
+        ::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(56,189,248,0.45); }
+
+        .italic-var {
+            font-style: italic;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">⚛️</span>
+            <span class="logo-text">Fysiklabbet</span>
+        </a>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="nav-link">Hem</a></li>
+            <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+            <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+            <li><a href="om.html" class="nav-link">Om</a></li>
+            <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-wrapper">
+    <div style="max-width:1120px;margin:0 auto;padding:28px 20px 60px;">
+
+        <nav style="margin-bottom:20px;font-family:'Poppins',sans-serif;font-size:0.82rem;color:#64748b;">
+            <a href="index.html" style="color:#38bdf8;text-decoration:none;">Hem</a>
+            <span style="margin:0 7px;">/</span>
+            <a href="fysik2.html" style="color:#38bdf8;text-decoration:none;">Fysik 2</a>
+            <span style="margin:0 7px;">/</span>
+            <span style="color:#94a3b8;">Fotoelektrisk effekt</span>
+        </nav>
+
+        <div style="margin-bottom:28px;">
+            <h1 class="glow-text" style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:700;color:#e2e8f0;margin-bottom:8px;">
+                Fotoelektrisk effekt
+            </h1>
+            <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:#94a3b8;max-width:780px;line-height:1.65;">
+                Skjut ljus mot en metallyta och undersök Einsteins fotonteori. Dra i våglängdsreglaget
+                för att ändra fotonens energi — bara när energin överstiger metallens utträdesarbete
+                <span class="italic-var">W</span> frigörs elektroner, och ytterligare energi blir till rörelseenergi.
+            </p>
+        </div>
+
+        <div id="root"></div>
+
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+</footer>
+
+<script type="text/babel">
+const { useState, useRef, useEffect, useMemo } = React;
+
+// ── Fysikaliska konstanter ──────────────────────────────────────────────────
+const H_PLANCK = 6.62607015e-34;   // J·s
+const C_LIGHT  = 2.99792458e8;     // m/s
+const EV       = 1.602176634e-19;  // J per eV
+const ME       = 9.1093837e-31;    // kg
+const HC_EV_NM = 1239.8419;        // hc i eV·nm
+
+// Våglängdsintervall för slider
+const WL_MIN = 200;   // nm (UV)
+const WL_MAX = 750;   // nm (röd/nära-IR)
+
+// ── Metaller (utträdesarbete i eV) ─────────────────────────────────────────
+const METALS = [
+    { id: 'cs', name: 'Cesium',  symbol: 'Cs', W: 1.95, hex: '#f3dba9' },
+    { id: 'na', name: 'Natrium', symbol: 'Na', W: 2.28, hex: '#d4d4d8' },
+    { id: 'ca', name: 'Kalcium', symbol: 'Ca', W: 2.87, hex: '#e5e7eb' },
+    { id: 'zn', name: 'Zink',    symbol: 'Zn', W: 4.30, hex: '#b8c5cf' },
+];
+
+// ── Hjälpfunktioner ─────────────────────────────────────────────────────────
+function fmt(num, decimals = 2) {
+    if (!isFinite(num)) return '—';
+    return num.toFixed(decimals).replace('.', ',');
+}
+
+function fmtSci(num, decimals = 2) {
+    if (!isFinite(num) || num === 0) return fmt(num, decimals);
+    const exp = Math.floor(Math.log10(Math.abs(num)));
+    const mantissa = num / Math.pow(10, exp);
+    return `${fmt(mantissa, decimals)}·10${supNumber(exp)}`;
+}
+
+function supNumber(n) {
+    const map = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+    return String(n).split('').map(c => map[c] || c).join('');
+}
+
+// Våglängd (nm) → RGB (0-1), med mild UV/IR-hantering
+function wavelengthToRgb(wl) {
+    let r = 0, g = 0, b = 0;
+    if (wl < 380) { // UV
+        const t = Math.max(0, (wl - 200) / 180);
+        r = 0.45 + 0.15 * t;
+        g = 0.15 * t;
+        b = 0.85;
+    } else if (wl < 440) {
+        r = -(wl - 440) / 60; g = 0; b = 1;
+    } else if (wl < 490) {
+        r = 0; g = (wl - 440) / 50; b = 1;
+    } else if (wl < 510) {
+        r = 0; g = 1; b = -(wl - 510) / 20;
+    } else if (wl < 580) {
+        r = (wl - 510) / 70; g = 1; b = 0;
+    } else if (wl < 645) {
+        r = 1; g = -(wl - 645) / 65; b = 0;
+    } else if (wl <= 780) {
+        r = 1; g = 0; b = 0;
+    } else {
+        r = 0.6; g = 0; b = 0;
+    }
+    // Dämpa nära kanterna för naturlig intensitet
+    let f = 1;
+    if (wl >= 380 && wl < 420) f = 0.35 + 0.65 * (wl - 380) / 40;
+    else if (wl > 700 && wl <= 780) f = 0.35 + 0.65 * (780 - wl) / 80;
+    return [r * f, g * f, b * f];
+}
+
+function rgbToHex(rgb) {
+    const toHex = c => Math.max(0, Math.min(255, Math.round(c * 255))).toString(16).padStart(2, '0');
+    return `#${toHex(rgb[0])}${toHex(rgb[1])}${toHex(rgb[2])}`;
+}
+
+function spectralBand(wl) {
+    if (wl < 380) return { label: 'Ultraviolett', color: '#a855f7' };
+    if (wl < 450) return { label: 'Violett', color: '#7c3aed' };
+    if (wl < 495) return { label: 'Blått', color: '#3b82f6' };
+    if (wl < 570) return { label: 'Grönt', color: '#22c55e' };
+    if (wl < 590) return { label: 'Gult', color: '#eab308' };
+    if (wl < 620) return { label: 'Orange', color: '#f97316' };
+    if (wl <= 780) return { label: 'Rött', color: '#ef4444' };
+    return { label: 'Infrarött', color: '#991b1b' };
+}
+
+// Fysikaliska beräkningar
+function photonEnergyEv(wl_nm) {
+    return HC_EV_NM / wl_nm;
+}
+function photonFrequencyHz(wl_nm) {
+    return C_LIGHT / (wl_nm * 1e-9);
+}
+function kineticEnergyEv(wl_nm, W_ev) {
+    return Math.max(0, photonEnergyEv(wl_nm) - W_ev);
+}
+function electronSpeedMs(Ek_ev) {
+    if (Ek_ev <= 0) return 0;
+    return Math.sqrt(2 * Ek_ev * EV / ME);
+}
+function thresholdWavelengthNm(W_ev) {
+    return HC_EV_NM / W_ev;
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Three.js-scen: fotoelektrisk 3D-visualisering
+// ══════════════════════════════════════════════════════════════════════════
+class PhotoelectricScene {
+    constructor(container) {
+        this.container = container;
+        this.width = container.clientWidth;
+        this.height = container.clientHeight;
+
+        // Scen
+        this.scene = new THREE.Scene();
+        this.scene.fog = new THREE.Fog(0x080c1a, 14, 30);
+
+        // Kamera
+        this.camera = new THREE.PerspectiveCamera(38, this.width / this.height, 0.1, 100);
+        this.camera.position.set(5.5, 3.6, 8.5);
+        this.camera.lookAt(0.2, 0.2, 0);
+
+        // Renderer
+        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.renderer.setSize(this.width, this.height);
+        this.renderer.setClearColor(0x000000, 0);
+        container.appendChild(this.renderer.domElement);
+
+        // OrbitControls — användaren kan rotera vyn med musen/touchen
+        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.target.set(0.2, 0.2, 0);
+        this.controls.enableDamping = true;
+        this.controls.dampingFactor = 0.08;
+        this.controls.enablePan = false;
+        this.controls.minDistance = 5;
+        this.controls.maxDistance = 18;
+        this.controls.minPolarAngle = Math.PI / 10;
+        this.controls.maxPolarAngle = Math.PI / 2.05;
+        this.controls.rotateSpeed = 0.7;
+        this.controls.update();
+
+        // Ljussättning
+        this.ambient = new THREE.AmbientLight(0xbac6d6, 0.55);
+        this.scene.add(this.ambient);
+
+        this.keyLight = new THREE.DirectionalLight(0xffffff, 0.85);
+        this.keyLight.position.set(5, 9, 6);
+        this.scene.add(this.keyLight);
+
+        this.rimLight = new THREE.PointLight(0x38bdf8, 0.7, 20);
+        this.rimLight.position.set(-5, 3, -4);
+        this.scene.add(this.rimLight);
+
+        this.hitLight = new THREE.PointLight(0xffffff, 0, 7);
+        this.hitLight.position.set(0.3, 0.6, 0);
+        this.scene.add(this.hitLight);
+
+        // Golvplan (osynligt men ger reflektion via shadow)
+        const floorGeo = new THREE.PlaneGeometry(30, 30);
+        const floorMat = new THREE.MeshBasicMaterial({
+            color: 0x0a0f1e, transparent: true, opacity: 0.35
+        });
+        const floor = new THREE.Mesh(floorGeo, floorMat);
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.y = -0.6;
+        this.scene.add(floor);
+
+        // Subtle grid på golvet
+        const grid = new THREE.GridHelper(18, 18, 0x1e3a5f, 0x0f1e30);
+        grid.position.y = -0.59;
+        grid.material.opacity = 0.35;
+        grid.material.transparent = true;
+        this.scene.add(grid);
+
+        // Metallplatta (huvudobjekt)
+        this.plateTop = 0.0;       // y-koordinat för plattans översida
+        this.plateWidth = 5.6;
+        this.plateDepth = 3.6;
+        this.plateThickness = 0.3;
+
+        const plateGeo = new THREE.BoxGeometry(this.plateWidth, this.plateThickness, this.plateDepth);
+        this.plateMat = new THREE.MeshStandardMaterial({
+            color: 0xd4d4d8,
+            metalness: 0.9,
+            roughness: 0.32,
+            envMapIntensity: 0.8,
+        });
+        this.plate = new THREE.Mesh(plateGeo, this.plateMat);
+        this.plate.position.set(0, -this.plateThickness / 2, 0);
+        this.scene.add(this.plate);
+
+        // Fasad/kant på plattan – ljus ring för definition
+        const edgeGeo = new THREE.EdgesGeometry(plateGeo);
+        const edgeMat = new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.35 });
+        const edges = new THREE.LineSegments(edgeGeo, edgeMat);
+        edges.position.copy(this.plate.position);
+        this.scene.add(edges);
+
+        // Vågor (ljusstrålar)
+        // Vi skapar 3 parallella våglinjer med olika z-offset
+        this.waveZOffsets = [-0.9, 0.0, 0.9];
+        this.waves = this.waveZOffsets.map(z => this.createWaveMesh(z));
+        this.waves.forEach(w => this.scene.add(w));
+
+        // Elektroner (spawnas under körning)
+        this.electrons = [];
+        this.electronGeo = new THREE.SphereGeometry(0.07, 16, 12);
+        this.electronMat = new THREE.MeshStandardMaterial({
+            color: 0x001c40,
+            emissive: 0x2563eb,
+            emissiveIntensity: 2.2,
+            metalness: 0.0,
+            roughness: 0.55,
+            toneMapped: false,
+        });
+
+        // Halo-textur (radial blå gradient) för glow runt elektronen
+        this.haloTexture = (() => {
+            const size = 128;
+            const canvas = document.createElement('canvas');
+            canvas.width = size; canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+            g.addColorStop(0.00, 'rgba(147, 197, 253, 1.0)');
+            g.addColorStop(0.18, 'rgba(59, 130, 246, 0.85)');
+            g.addColorStop(0.45, 'rgba(37, 99, 235, 0.35)');
+            g.addColorStop(1.00, 'rgba(30, 64, 175, 0.0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, size, size);
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.needsUpdate = true;
+            return tex;
+        })();
+        this.haloMat = new THREE.SpriteMaterial({
+            map: this.haloTexture,
+            color: 0xffffff,
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            toneMapped: false,
+        });
+
+        // Dynamiskt tillstånd
+        this.wavelength = 400;
+        this.intensity = 60;        // 0-100
+        this.Ek = 0;
+        this.emitted = false;
+        this.hitFlash = 0;
+        this.emissionAccumulator = 0;
+
+        // Tid
+        this.clock = new THREE.Clock();
+        this.phase = 0;
+
+        // Handle resize
+        this._onResize = this.onResize.bind(this);
+        window.addEventListener('resize', this._onResize);
+        this.resizeObserver = new ResizeObserver(this._onResize);
+        this.resizeObserver.observe(container);
+
+        this.running = true;
+        this.animate();
+    }
+
+    // Skapa en vågbärare (ljusstråle) med start längst upp till vänster, slut vid plattan
+    createWaveMesh(zOffset) {
+        // Vi bygger vågen i lokala koordinater: längs +X, amplitud i Y
+        // Sedan placerar vi + roterar gruppen så den träffar plattan
+        const group = new THREE.Group();
+        group.userData.zOffset = zOffset;
+
+        // Start-punkt i världen, slut-punkt vid plattan
+        const start = new THREE.Vector3(-5.8, 3.9, zOffset);
+        const end   = new THREE.Vector3(0.2, this.plateTop + 0.02, zOffset);
+        const delta = new THREE.Vector3().subVectors(end, start);
+        const length = delta.length();
+        const angle = Math.atan2(delta.y, delta.x);
+
+        group.position.copy(start);
+        group.rotation.z = angle;
+        group.userData.length = length;
+
+        // Material för vågens tubgeometri – ändras när våglängd ändras
+        const mat = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.75,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            toneMapped: false,
+        });
+        const initialGeo = this.buildWaveGeometry(length, 0.9, 0.22, 0);
+        const tube = new THREE.Mesh(initialGeo, mat);
+        group.add(tube);
+        group.userData.tube = tube;
+        group.userData.mat = mat;
+        group.userData.phaseOffset = Math.random() * Math.PI * 2;
+        return group;
+    }
+
+    // Skapa tubgeometri för en våg i lokala koordinater (längs +X, sinus i Y)
+    buildWaveGeometry(length, localWavelength, amplitude, phase, segments = 80) {
+        const points = [];
+        for (let i = 0; i <= segments; i++) {
+            const s = (i / segments) * length;
+            const y = amplitude * Math.sin((s / localWavelength) * 2 * Math.PI + phase);
+            points.push(new THREE.Vector3(s, y, 0));
+        }
+        const curve = new THREE.CatmullRomCurve3(points);
+        return new THREE.TubeGeometry(curve, segments, 0.022, 6, false);
+    }
+
+    setWavelength(wl) { this.wavelength = wl; }
+    setIntensity(i)   { this.intensity = i; }
+    setEk(ek)         { this.Ek = ek; }
+    setEmitted(e)     { this.emitted = e; }
+
+    setMetalColor(hex) {
+        this.plateMat.color.set(hex);
+    }
+
+    // Hur många elektroner/sek vid full intensitet och Ek>0
+    emissionRate() {
+        return 22 * (this.intensity / 100);
+    }
+
+    // Visuell hastighet för elektronen (scenenheter per sekund) – skalning från Ek
+    electronVisualSpeed() {
+        // sqrt(Ek) ger rimlig dynamik
+        return 2.2 + Math.sqrt(Math.max(0, this.Ek)) * 3.4;
+    }
+
+    spawnElectron() {
+        const group = new THREE.Group();
+        const mesh = new THREE.Mesh(this.electronGeo, this.electronMat);
+        group.add(mesh);
+
+        const halo = new THREE.Sprite(this.haloMat);
+        halo.scale.set(0.55, 0.55, 1);
+        group.add(halo);
+
+        // Spawna från slumpad plats på plattans översida
+        const x = -1.2 + Math.random() * 2.6;
+        const z = -1.4 + Math.random() * 2.8;
+        group.position.set(x, this.plateTop + 0.06, z);
+
+        // Fast riktning: alla elektroner flyger parallellt uppåt–höger
+        const dir = new THREE.Vector3(0.35, 1.0, 0).normalize();
+        const speed = this.electronVisualSpeed();
+
+        this.scene.add(group);
+        this.electrons.push({
+            mesh: group,
+            halo,
+            velocity: dir.multiplyScalar(speed),
+        });
+    }
+
+    onResize() {
+        this.width = this.container.clientWidth;
+        this.height = this.container.clientHeight;
+        if (this.width <= 0 || this.height <= 0) return;
+        this.camera.aspect = this.width / this.height;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(this.width, this.height, false);
+    }
+
+    animate() {
+        if (!this.running) return;
+        requestAnimationFrame(() => this.animate());
+        const dt = Math.min(0.05, this.clock.getDelta());
+
+        // Våglängd i scenenheter — kortare våglängd → tätare vågor
+        // Mappning: WL_MIN (200nm) → 0.38 scenenheter; WL_MAX (750nm) → 1.35 scenenheter
+        const sceneWavelength = 0.38 + ((this.wavelength - WL_MIN) / (WL_MAX - WL_MIN)) * (1.35 - 0.38);
+
+        // Uppdatera våg-utseende
+        const rgb = wavelengthToRgb(this.wavelength);
+        const col = new THREE.Color(rgb[0], rgb[1], rgb[2]);
+        const amp = 0.14 + (this.intensity / 100) * 0.22;  // amplitud växer med intensitet
+        const opacity = 0.55 + (this.intensity / 100) * 0.35;
+
+        // Fasen flyter – ljusvågens rörelse
+        this.phase += dt * 8;
+
+        this.waves.forEach(group => {
+            const mat = group.userData.mat;
+            mat.color.copy(col);
+            mat.opacity = opacity;
+
+            const tube = group.userData.tube;
+            // Bygg om geometri med aktuell våglängd/amplitud/fas
+            const geo = this.buildWaveGeometry(
+                group.userData.length,
+                sceneWavelength,
+                amp,
+                this.phase + group.userData.phaseOffset
+            );
+            tube.geometry.dispose();
+            tube.geometry = geo;
+        });
+
+        // Emit-glöd (punktljus) ovanför plattan
+        const targetLight = this.emitted ? 0.8 : 0.0;
+        this.hitLight.intensity += (targetLight - this.hitLight.intensity) * Math.min(1, dt * 6);
+        this.hitLight.color.copy(col).lerp(new THREE.Color(0xfde68a), 0.5);
+
+        // Spawnera elektroner
+        if (this.emitted) {
+            this.emissionAccumulator += dt * this.emissionRate();
+            while (this.emissionAccumulator >= 1) {
+                this.spawnElectron();
+                this.emissionAccumulator -= 1;
+            }
+        } else {
+            this.emissionAccumulator = 0;
+        }
+
+        // Uppdatera elektroner — konstant hastighet, inga storleksändringar
+        for (let i = this.electrons.length - 1; i >= 0; i--) {
+            const e = this.electrons[i];
+            e.mesh.position.addScaledVector(e.velocity, dt);
+            if (e.mesh.position.y > 6.5 || e.mesh.position.x > 8) {
+                this.scene.remove(e.mesh);
+                this.electrons.splice(i, 1);
+            }
+        }
+
+        if (this.controls) this.controls.update();
+        this.renderer.render(this.scene, this.camera);
+    }
+
+    dispose() {
+        this.running = false;
+        if (this.controls) this.controls.dispose();
+        window.removeEventListener('resize', this._onResize);
+        if (this.resizeObserver) this.resizeObserver.disconnect();
+        // Städa scenen
+        this.electrons.forEach(e => {
+            this.scene.remove(e.mesh);
+        });
+        this.waves.forEach(w => {
+            if (w.userData.tube) w.userData.tube.geometry.dispose();
+            if (w.userData.mat) w.userData.mat.dispose();
+        });
+        this.plateMat.dispose();
+        this.electronGeo.dispose();
+        this.electronMat.dispose();
+        this.haloMat.dispose();
+        this.haloTexture.dispose();
+        this.renderer.dispose();
+        if (this.container.contains(this.renderer.domElement)) {
+            this.container.removeChild(this.renderer.domElement);
+        }
+    }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// React-komponenter
+// ══════════════════════════════════════════════════════════════════════════
+function SceneView({ wavelength, intensity, Ek, emitted, metalHex }) {
+    const containerRef = useRef(null);
+    const sceneRef = useRef(null);
+
+    useEffect(() => {
+        if (!containerRef.current) return;
+        const scene = new PhotoelectricScene(containerRef.current);
+        sceneRef.current = scene;
+        return () => { scene.dispose(); };
+    }, []);
+
+    useEffect(() => {
+        if (!sceneRef.current) return;
+        sceneRef.current.setWavelength(wavelength);
+        sceneRef.current.setIntensity(intensity);
+        sceneRef.current.setEk(Ek);
+        sceneRef.current.setEmitted(emitted);
+        sceneRef.current.setMetalColor(metalHex);
+    }, [wavelength, intensity, Ek, emitted, metalHex]);
+
+    return <div ref={containerRef} className="scene-canvas"></div>;
+}
+
+function MetalSelector({ metalId, onChange }) {
+    return (
+        <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+            {METALS.map(m => (
+                <button
+                    key={m.id}
+                    className={`metal-btn ${metalId === m.id ? 'active' : ''}`}
+                    onClick={() => onChange(m.id)}>
+                    <span className="metal-symbol">{m.symbol}</span>
+                    <span className="metal-name">{m.name}</span>
+                    <span className="metal-w"><em style={{fontStyle:'italic'}}>W</em> = {fmt(m.W, 2)} eV</span>
+                </button>
+            ))}
+        </div>
+    );
+}
+
+function App() {
+    const [wavelength, setWavelength] = useState(420);
+    const [intensity, setIntensity]   = useState(65);
+    const [metalId, setMetalId]       = useState('na');
+    const [isFullscreen, setIsFullscreen] = useState(false);
+    const sceneWrapRef = useRef(null);
+
+    useEffect(() => {
+        const handler = () => {
+            setIsFullscreen(
+                document.fullscreenElement === sceneWrapRef.current ||
+                document.webkitFullscreenElement === sceneWrapRef.current
+            );
+        };
+        document.addEventListener('fullscreenchange', handler);
+        document.addEventListener('webkitfullscreenchange', handler);
+        return () => {
+            document.removeEventListener('fullscreenchange', handler);
+            document.removeEventListener('webkitfullscreenchange', handler);
+        };
+    }, []);
+
+    const toggleFullscreen = () => {
+        const el = sceneWrapRef.current;
+        if (!el) return;
+        const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+        if (isFs) {
+            (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        } else {
+            (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+        }
+    };
+
+    const metal = useMemo(() => METALS.find(m => m.id === metalId), [metalId]);
+    const eFoton = photonEnergyEv(wavelength);
+    const freq   = photonFrequencyHz(wavelength);
+    const Ek     = kineticEnergyEv(wavelength, metal.W);
+    const v_e    = electronSpeedMs(Ek);
+    const emitted = Ek > 0;
+    const threshold = thresholdWavelengthNm(metal.W);
+    const band = spectralBand(wavelength);
+
+    const wlColor = rgbToHex(wavelengthToRgb(wavelength));
+
+    return (
+        <div style={{ display:'flex', flexDirection:'column', gap:22 }}>
+            {/* 3D-vy */}
+            <div className="scene-wrap" ref={sceneWrapRef}>
+                <SceneView
+                    wavelength={wavelength}
+                    intensity={intensity}
+                    Ek={Ek}
+                    emitted={emitted}
+                    metalHex={metal.hex}
+                />
+                <button className="fs-btn" onClick={toggleFullscreen}
+                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                    {isFullscreen ? (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                        </svg>
+                    ) : (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                        </svg>
+                    )}
+                </button>
+                {/* Status badge överst till höger */}
+                <div style={{ position:'absolute', top:16, right:16, zIndex:3 }}>
+                    <div className={`status-badge ${emitted ? 'status-on' : 'status-off'}`}>
+                        <span className="status-dot" style={{ background: emitted ? '#22c55e' : '#94a3b8' }}></span>
+                        {emitted
+                            ? <>Elektroner frigörs</>
+                            : <>För låg energi — ingen emission</>}
+                    </div>
+                </div>
+                {/* Bandinfo nere till vänster */}
+                <div style={{ position:'absolute', bottom:16, left:16, zIndex:3,
+                              display:'flex', alignItems:'center', gap:10,
+                              background:'rgba(10,15,30,0.72)', backdropFilter:'blur(8px)',
+                              border:'1px solid rgba(56,189,248,0.25)', borderRadius:12, padding:'8px 14px' }}>
+                    <span style={{
+                        width:18, height:18, borderRadius:'50%',
+                        background: wlColor,
+                        boxShadow: `0 0 14px ${wlColor}`,
+                        border: '1.5px solid rgba(255,255,255,0.35)'
+                    }}></span>
+                    <span className="band-pill" style={{ color: band.color }}>{band.label}</span>
+                    <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.85rem', color:'#cbd5e1' }}>
+                        <em className="italic-var">λ</em> = {fmt(wavelength, 0)} nm
+                    </span>
+                </div>
+            </div>
+
+            {/* Kontroller */}
+            <div className="glass-card" style={{ padding:20 }}>
+                <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:20 }}>
+
+                    {/* Metallval */}
+                    <div>
+                        <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
+                                      color:'#94a3b8', letterSpacing:'0.05em', textTransform:'uppercase',
+                                      marginBottom:8 }}>
+                            Metall
+                        </div>
+                        <MetalSelector metalId={metalId} onChange={setMetalId} />
+                    </div>
+
+                    {/* Våglängd */}
+                    <div>
+                        <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:8 }}>
+                            <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
+                                           color:'#94a3b8', letterSpacing:'0.05em', textTransform:'uppercase' }}>
+                                Våglängd <em className="italic-var" style={{color:'#cbd5e1'}}>λ</em>
+                            </span>
+                            <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.95rem',
+                                           color:'#e2e8f0', fontWeight:600 }}>
+                                {fmt(wavelength, 0)} nm
+                            </span>
+                        </div>
+                        <input
+                            type="range"
+                            className="wl-slider"
+                            min={WL_MIN}
+                            max={WL_MAX}
+                            step={1}
+                            value={WL_MIN + WL_MAX - wavelength}
+                            onChange={e => setWavelength(WL_MIN + WL_MAX - parseFloat(e.target.value))}
+                        />
+                        <div style={{ display:'flex', justifyContent:'space-between',
+                                      fontFamily:'Poppins,sans-serif', fontSize:'0.72rem',
+                                      color:'#64748b', marginTop:4 }}>
+                            <span>{WL_MAX} nm (rött)</span>
+                            <span>550</span>
+                            <span>380</span>
+                            <span>{WL_MIN} nm (UV) — mer energi</span>
+                        </div>
+                    </div>
+
+                    {/* Intensitet */}
+                    <div>
+                        <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:8 }}>
+                            <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
+                                           color:'#94a3b8', letterSpacing:'0.05em', textTransform:'uppercase' }}>
+                                Intensitet
+                            </span>
+                            <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.95rem',
+                                           color:'#e2e8f0', fontWeight:600 }}>
+                                {fmt(intensity, 0)} %
+                            </span>
+                        </div>
+                        <input
+                            type="range"
+                            className="int-slider"
+                            min={0}
+                            max={100}
+                            step={1}
+                            value={intensity}
+                            onChange={e => setIntensity(parseFloat(e.target.value))}
+                        />
+                        <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.75rem',
+                                      color:'#64748b', marginTop:6, lineHeight:1.5 }}>
+                            Intensiteten påverkar <em>antalet</em> elektroner som frigörs per sekund — inte deras rörelseenergi.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Infokort */}
+            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(170px, 1fr))', gap:12 }}>
+                <div className="value-card">
+                    <div className="value-label">Fotonens energi</div>
+                    <div className="value-number">
+                        <em className="italic-var">E</em><sub style={{fontSize:'0.75em'}}>foton</sub> = {fmt(eFoton, 2)}
+                        <span className="unit">eV</span>
+                    </div>
+                </div>
+                <div className="value-card">
+                    <div className="value-label">Frekvens</div>
+                    <div className="value-number">
+                        <em className="italic-var">f</em> = {fmtSci(freq, 2)}
+                        <span className="unit">Hz</span>
+                    </div>
+                </div>
+                <div className="value-card">
+                    <div className="value-label">Utträdesarbete</div>
+                    <div className="value-number">
+                        <em className="italic-var">W</em> = {fmt(metal.W, 2)}
+                        <span className="unit">eV</span>
+                    </div>
+                </div>
+                <div className="value-card">
+                    <div className="value-label">Tröskelvåglängd</div>
+                    <div className="value-number">
+                        <em className="italic-var">λ</em><sub style={{fontSize:'0.75em'}}>0</sub> = {fmt(threshold, 0)}
+                        <span className="unit">nm</span>
+                    </div>
+                </div>
+                <div className="value-card" style={{
+                    borderColor: emitted ? 'rgba(34,197,94,0.5)' : 'rgba(148,163,184,0.25)',
+                    boxShadow: emitted ? '0 0 18px rgba(34,197,94,0.12)' : 'none'
+                }}>
+                    <div className="value-label">Max rörelseenergi</div>
+                    <div className="value-number">
+                        <em className="italic-var">E</em><sub style={{fontSize:'0.75em'}}>k</sub> = {fmt(Ek, 2)}
+                        <span className="unit">eV</span>
+                    </div>
+                </div>
+                <div className="value-card" style={{
+                    borderColor: emitted ? 'rgba(34,197,94,0.5)' : 'rgba(148,163,184,0.25)',
+                    boxShadow: emitted ? '0 0 18px rgba(34,197,94,0.12)' : 'none'
+                }}>
+                    <div className="value-label">Elektronens fart</div>
+                    <div className="value-number">
+                        <em className="italic-var">v</em> = {emitted ? fmtSci(v_e, 2) : '0'}
+                        <span className="unit">m/s</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Förklaringsruta */}
+            <div className="glass-card" style={{ padding:24 }}>
+                <h3 style={{ fontFamily:'Poppins,sans-serif', fontWeight:700,
+                             fontSize:'1.2rem', color:'#e2e8f0', marginBottom:14 }}>
+                    Einsteins förklaring (1905)
+                </h3>
+                <p style={{ fontFamily:'Poppins,sans-serif', color:'#cbd5e1',
+                            lineHeight:1.7, marginBottom:14 }}>
+                    Ljus består av små energipaket, <strong>fotoner</strong>. Varje foton bär energin
+                    <span style={{whiteSpace:'nowrap'}}> <em className="italic-var">E</em>₍foton₎ = <em className="italic-var">h·f</em> = <em className="italic-var">h·c/λ</em></span>.
+                    För att slå loss en elektron ur metallen krävs minst energin
+                    <span style={{whiteSpace:'nowrap'}}> <em className="italic-var">W</em> </span>
+                    (metallens <em>utträdesarbete</em>). Resten blir elektronens rörelseenergi:
+                </p>
+
+                <div className="formula-box" style={{ textAlign:'center', fontSize:'1.25rem', letterSpacing:'0.02em', marginBottom:18 }}>
+                    <em className="italic-var">E</em><sub>k,max</sub> = <em className="italic-var">h·f</em> − <em className="italic-var">W</em>
+                </div>
+
+                <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:14 }}>
+                    <div style={{
+                        background:'rgba(15,23,42,0.55)',
+                        border:'1px solid rgba(239,68,68,0.25)',
+                        borderRadius:10, padding:'12px 16px'
+                    }}>
+                        <div style={{ color:'#fca5a5', fontWeight:600, fontFamily:'Poppins,sans-serif',
+                                      fontSize:'0.9rem', marginBottom:6 }}>
+                            Om <em className="italic-var">h·f</em> &lt; <em className="italic-var">W</em>
+                        </div>
+                        <div style={{ color:'#cbd5e1', fontFamily:'Poppins,sans-serif',
+                                      fontSize:'0.88rem', lineHeight:1.55 }}>
+                            Ingen elektron frigörs — oavsett hur ljusstark strålen är. En enda foton
+                            har helt enkelt inte tillräckligt med energi.
+                        </div>
+                    </div>
+                    <div style={{
+                        background:'rgba(15,23,42,0.55)',
+                        border:'1px solid rgba(34,197,94,0.3)',
+                        borderRadius:10, padding:'12px 16px'
+                    }}>
+                        <div style={{ color:'#86efac', fontWeight:600, fontFamily:'Poppins,sans-serif',
+                                      fontSize:'0.9rem', marginBottom:6 }}>
+                            Om <em className="italic-var">h·f</em> ≥ <em className="italic-var">W</em>
+                        </div>
+                        <div style={{ color:'#cbd5e1', fontFamily:'Poppins,sans-serif',
+                                      fontSize:'0.88rem', lineHeight:1.55 }}>
+                            Elektroner frigörs direkt. Högre frekvens → mer överskottsenergi → snabbare elektroner.
+                            Starkare ljus → <em>fler</em> elektroner (men inte snabbare).
+                        </div>
+                    </div>
+                </div>
+
+                <div style={{ marginTop:18, padding:'14px 18px',
+                              background:'rgba(250,204,21,0.06)',
+                              border:'1px solid rgba(250,204,21,0.25)',
+                              borderRadius:10 }}>
+                    <div style={{ color:'#fde68a', fontFamily:'Poppins,sans-serif',
+                                  fontWeight:600, fontSize:'0.92rem', marginBottom:6 }}>
+                        💡 Klassisk fysik funkar inte här
+                    </div>
+                    <div style={{ color:'#cbd5e1', fontFamily:'Poppins,sans-serif',
+                                  fontSize:'0.88rem', lineHeight:1.6 }}>
+                        Om ljus vore en kontinuerlig våg skulle även rött ljus kunna slå ut elektroner —
+                        bara man väntade länge nog eller skruvade upp intensiteten. Experimentet visar
+                        motsatsen: finns ingen foton med tillräcklig energi händer <em>inget</em>.
+                        Einstein fick Nobelpriset i fysik 1921 för just den här förklaringen.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

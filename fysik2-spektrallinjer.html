@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spektrallinjer - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .page-wrapper {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .glass-card-inner {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            border-radius: 12px;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .spectrum-wrap {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255,255,255,0.05);
+            background: #050509;
+        }
+        .spectrum-canvas {
+            display: block;
+            width: 100%;
+            height: 170px;
+        }
+
+        /* Toggle pill buttons */
+        .toggle-group {
+            display: inline-flex;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 999px;
+            padding: 4px;
+            gap: 2px;
+        }
+        .toggle-btn {
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            background: transparent;
+            white-space: nowrap;
+        }
+        .toggle-btn:hover { color: #e2e8f0; }
+        .toggle-btn.active {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a0a1a;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Periodic table */
+        .periodic-grid {
+            display: grid;
+            grid-template-columns: repeat(18, minmax(0, 1fr));
+            gap: 3px;
+            width: 100%;
+        }
+        .pt-cell {
+            aspect-ratio: 0.82;
+            border-radius: 4px;
+            border: 1px solid rgba(56, 189, 248, 0.08);
+            background: rgba(15, 23, 42, 0.6);
+            padding: 3px 2px 2px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.12s ease;
+            position: relative;
+            min-width: 0;
+        }
+        .pt-cell .pt-z {
+            font-size: clamp(0.4rem, 0.6vw, 0.55rem);
+            color: rgba(226, 232, 240, 0.55);
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            line-height: 1;
+        }
+        .pt-cell .pt-sym {
+            font-weight: 700;
+            font-size: clamp(0.75rem, 1.25vw, 1rem);
+            line-height: 1;
+            margin-top: auto;
+        }
+        .pt-cell .pt-name {
+            font-size: clamp(0.4rem, 0.65vw, 0.55rem);
+            color: rgba(226, 232, 240, 0.75);
+            text-align: center;
+            line-height: 1.05;
+            margin-top: 2px;
+            margin-bottom: auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 100%;
+            font-weight: 400;
+        }
+        .pt-cell:hover {
+            transform: scale(1.1);
+            z-index: 10;
+            border-color: rgba(56, 189, 248, 0.6);
+            box-shadow: 0 4px 16px rgba(56, 189, 248, 0.3);
+        }
+        .pt-cell.selected {
+            border: 2px solid #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4), 0 4px 16px rgba(56, 189, 248, 0.5);
+            z-index: 5;
+        }
+        .pt-cell.empty {
+            background: transparent;
+            border: none;
+            cursor: default;
+            pointer-events: none;
+        }
+        .pt-label {
+            grid-column: span 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #64748b;
+            aspect-ratio: 1;
+        }
+
+        /* Category colors */
+        .cat-alkali { background: rgba(239, 68, 68, 0.18); border-color: rgba(239, 68, 68, 0.4); }
+        .cat-alkali .pt-sym { color: #fca5a5; }
+        .cat-alkaline { background: rgba(249, 115, 22, 0.18); border-color: rgba(249, 115, 22, 0.4); }
+        .cat-alkaline .pt-sym { color: #fdba74; }
+        .cat-transition { background: rgba(234, 179, 8, 0.15); border-color: rgba(234, 179, 8, 0.35); }
+        .cat-transition .pt-sym { color: #fde68a; }
+        .cat-posttrans { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.35); }
+        .cat-posttrans .pt-sym { color: #6ee7b7; }
+        .cat-metalloid { background: rgba(6, 182, 212, 0.15); border-color: rgba(6, 182, 212, 0.35); }
+        .cat-metalloid .pt-sym { color: #67e8f9; }
+        .cat-nonmetal { background: rgba(59, 130, 246, 0.18); border-color: rgba(59, 130, 246, 0.4); }
+        .cat-nonmetal .pt-sym { color: #93c5fd; }
+        .cat-halogen { background: rgba(139, 92, 246, 0.18); border-color: rgba(139, 92, 246, 0.4); }
+        .cat-halogen .pt-sym { color: #c4b5fd; }
+        .cat-noble { background: rgba(236, 72, 153, 0.18); border-color: rgba(236, 72, 153, 0.4); }
+        .cat-noble .pt-sym { color: #f9a8d4; }
+        .cat-lanthanide { background: rgba(168, 85, 247, 0.18); border-color: rgba(168, 85, 247, 0.4); }
+        .cat-lanthanide .pt-sym { color: #d8b4fe; }
+        .cat-actinide { background: rgba(244, 63, 94, 0.18); border-color: rgba(244, 63, 94, 0.4); }
+        .cat-actinide .pt-sym { color: #fda4af; }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 14px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 14px;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; }
+        .legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+
+        /* Rullista */
+        .element-select {
+            padding: 9px 36px 9px 14px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2338bdf8'><path d='M5 8l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            transition: all 0.15s ease;
+            min-width: 190px;
+        }
+        .element-select:hover {
+            border-color: rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+        }
+        .element-select:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+        }
+        .element-select option {
+            background: #0d1526;
+            color: #e2e8f0;
+            padding: 6px;
+        }
+        .element-select optgroup {
+            background: #0a1020;
+            color: #64748b;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .info-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 8px 14px;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        .info-line .label { color: #64748b; font-size: 0.75rem; }
+        .info-line .value { color: #e2e8f0; font-weight: 500; }
+        .math-var { font-style: italic; }
+    </style>
+</head>
+<body class="page-wrapper">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li><a href="fysik1.html" class="nav-link">Fysik 1</a></li>
+                <li><a href="fysik2.html" class="nav-link active">Fysik 2</a></li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container" style="max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem;">
+        <nav aria-label="Brödsmulor" style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.2rem;">
+            <a href="index.html" style="color: #38bdf8; text-decoration: none;">Hem</a>
+            <span style="margin: 0 0.5rem;">/</span>
+            <a href="fysik2.html" style="color: #38bdf8; text-decoration: none;">Fysik 2</a>
+            <span style="margin: 0 0.5rem;">/</span>
+            <span>Spektrallinjer</span>
+        </nav>
+
+        <section style="margin-bottom: 2rem;">
+            <h1 class="glow-text" style="font-size: 2.5rem; font-weight: 700; color: #e2e8f0; margin-bottom: 0.8rem;">Spektrallinjer</h1>
+            <p style="color: #94a3b8; font-size: 1.05rem; max-width: 820px; line-height: 1.6;">
+                Varje grundämne har sitt eget spektrum — ett slags fingeravtryck av ljus. Välj ett ämne i listan eller i
+                det periodiska systemet för att se dess emissions- eller absorptionsspektrum.
+            </p>
+        </section>
+
+        <div id="root"></div>
+
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
+    </footer>
+
+    <script type="text/babel" data-type="module">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // Kategori-etiketter
+        const CATEGORIES = {
+            alkali: { cls: 'cat-alkali', label: 'Alkalimetaller', color: '#ef4444' },
+            alkaline: { cls: 'cat-alkaline', label: 'Alkaliska jordartsmetaller', color: '#f97316' },
+            transition: { cls: 'cat-transition', label: 'Övergångsmetaller', color: '#eab308' },
+            posttrans: { cls: 'cat-posttrans', label: 'Övriga metaller', color: '#10b981' },
+            metalloid: { cls: 'cat-metalloid', label: 'Halvmetaller', color: '#06b6d4' },
+            nonmetal: { cls: 'cat-nonmetal', label: 'Icke-metaller', color: '#3b82f6' },
+            halogen: { cls: 'cat-halogen', label: 'Halogener', color: '#8b5cf6' },
+            noble: { cls: 'cat-noble', label: 'Ädelgaser', color: '#ec4899' },
+            lanthanide: { cls: 'cat-lanthanide', label: 'Lantanoider', color: '#a855f7' },
+            actinide: { cls: 'cat-actinide', label: 'Aktinoider', color: '#f43f5e' }
+        };
+
+        // Kompakt spektralradsdefinition: [våglängd_nm, relativ_intensitet_0_1]
+        // Data baserad på NIST för välstuderade ämnen. För sällsynta/syntetiska ämnen ges
+        // karakteristiska linjer där data finns; annars genereras rimliga linjer.
+        const L = (arr) => arr.map(x => Array.isArray(x) ? { wl: x[0], i: x[1] } : { wl: x, i: 0.7 });
+
+        const ELEMENTS = [
+            { z:1, sym:'H', name:'Väte', cat:'nonmetal', p:1, g:1,
+              lines: L([[410.17,0.35],[434.05,0.55],[486.13,0.75],[656.28,1.0]]) },
+            { z:2, sym:'He', name:'Helium', cat:'noble', p:1, g:18,
+              lines: L([[388.86,0.5],[447.15,0.85],[471.31,0.3],[492.19,0.4],[501.57,0.55],[587.56,1.0],[667.81,0.7],[706.52,0.55]]) },
+            { z:3, sym:'Li', name:'Litium', cat:'alkali', p:2, g:1,
+              lines: L([[413.3,0.4],[460.3,0.3],[610.4,0.5],[670.8,1.0]]) },
+            { z:4, sym:'Be', name:'Beryllium', cat:'alkaline', p:2, g:2,
+              lines: L([[436.1,0.45],[457.3,0.7],[467.3,0.5],[527.1,1.0],[728.1,0.35]]) },
+            { z:5, sym:'B', name:'Bor', cat:'metalloid', p:2, g:13,
+              lines: L([[412.2,0.6],[497.7,0.45],[543.5,0.7],[703.9,1.0]]) },
+            { z:6, sym:'C', name:'Kol', cat:'nonmetal', p:2, g:14,
+              lines: L([[426.7,0.55],[477.2,0.45],[514.5,0.7],[589.1,0.85],[658.3,0.6],[723.6,1.0]]) },
+            { z:7, sym:'N', name:'Kväve', cat:'nonmetal', p:2, g:15,
+              lines: L([[410.0,0.55],[567.6,0.75],[648.2,0.85],[661.0,0.6],[746.8,1.0]]) },
+            { z:8, sym:'O', name:'Syre', cat:'nonmetal', p:2, g:16,
+              lines: L([[394.7,0.4],[436.8,0.55],[533.1,0.5],[615.6,0.75],[645.4,0.85],[725.5,0.9],[777.2,1.0]]) },
+            { z:9, sym:'F', name:'Fluor', cat:'halogen', p:2, g:17,
+              lines: L([[623.9,0.4],[685.6,0.85],[690.2,0.6],[703.7,0.95],[739.9,1.0]]) },
+            { z:10, sym:'Ne', name:'Neon', cat:'noble', p:2, g:18,
+              lines: L([[540.1,0.5],[585.2,0.85],[588.2,0.7],[594.5,0.75],[607.4,0.7],[614.3,0.8],[626.6,0.7],[633.4,0.85],[640.2,1.0],[650.6,0.85],[659.9,0.9],[692.9,0.75],[703.2,0.7]]) },
+            { z:11, sym:'Na', name:'Natrium', cat:'alkali', p:3, g:1,
+              lines: L([[498.3,0.3],[568.8,0.45],[589.0,1.0],[589.6,0.95],[615.4,0.4],[616.1,0.4]]) },
+            { z:12, sym:'Mg', name:'Magnesium', cat:'alkaline', p:3, g:2,
+              lines: L([[383.2,0.5],[383.8,0.45],[470.3,0.55],[516.7,0.8],[517.3,0.9],[518.4,1.0]]) },
+            { z:13, sym:'Al', name:'Aluminium', cat:'posttrans', p:3, g:13,
+              lines: L([[394.4,0.85],[396.2,1.0],[669.6,0.4],[706.4,0.35]]) },
+            { z:14, sym:'Si', name:'Kisel', cat:'metalloid', p:3, g:14,
+              lines: L([[390.6,1.0],[412.8,0.55],[594.9,0.4],[634.7,0.6],[637.1,0.65]]) },
+            { z:15, sym:'P', name:'Fosfor', cat:'nonmetal', p:3, g:15,
+              lines: L([[525.1,0.7],[542.9,0.55],[602.2,0.85],[604.3,1.0]]) },
+            { z:16, sym:'S', name:'Svavel', cat:'nonmetal', p:3, g:16,
+              lines: L([[469.4,0.7],[481.4,1.0],[543.3,0.5],[605.3,0.4],[675.7,0.55]]) },
+            { z:17, sym:'Cl', name:'Klor', cat:'halogen', p:3, g:17,
+              lines: L([[452.6,0.6],[470.0,0.5],[542.3,0.45],[725.7,0.9],[754.7,1.0]]) },
+            { z:18, sym:'Ar', name:'Argon', cat:'noble', p:3, g:18,
+              lines: L([[415.9,0.5],[420.1,0.55],[430.0,0.5],[518.8,0.45],[603.2,0.5],[696.5,0.75],[706.7,0.7],[727.3,0.55],[738.4,0.8],[750.4,1.0]]) },
+            { z:19, sym:'K', name:'Kalium', cat:'alkali', p:4, g:1,
+              lines: L([[404.4,0.7],[404.7,0.65],[693.9,0.55],[766.5,1.0],[769.9,0.95]]) },
+            { z:20, sym:'Ca', name:'Kalcium', cat:'alkaline', p:4, g:2,
+              lines: L([[393.4,0.9],[396.9,0.85],[422.7,1.0],[443.5,0.5],[616.2,0.7],[649.4,0.55]]) },
+            { z:21, sym:'Sc', name:'Skandium', cat:'transition', p:4, g:3,
+              lines: L([[391.2,0.85],[402.0,1.0],[408.2,0.9],[424.7,0.7]]) },
+            { z:22, sym:'Ti', name:'Titan', cat:'transition', p:4, g:4,
+              lines: L([[398.2,0.7],[426.7,0.6],[453.5,0.85],[498.2,1.0],[500.7,0.9],[521.0,0.6]]) },
+            { z:23, sym:'V', name:'Vanadin', cat:'transition', p:4, g:5,
+              lines: L([[411.2,0.9],[437.9,0.85],[440.9,1.0],[571.1,0.55]]) },
+            { z:24, sym:'Cr', name:'Krom', cat:'transition', p:4, g:6,
+              lines: L([[425.4,0.95],[427.5,0.85],[429.0,0.8],[520.4,0.85],[520.6,1.0],[520.8,0.95]]) },
+            { z:25, sym:'Mn', name:'Mangan', cat:'transition', p:4, g:7,
+              lines: L([[403.1,1.0],[403.3,0.95],[403.4,0.9],[476.2,0.55],[482.4,0.6]]) },
+            { z:26, sym:'Fe', name:'Järn', cat:'transition', p:4, g:8,
+              lines: L([[385.9,0.85],[404.6,1.0],[438.4,0.85],[489.1,0.6],[527.0,0.7],[537.1,0.65],[561.5,0.6],[588.0,0.8]]) },
+            { z:27, sym:'Co', name:'Kobolt', cat:'transition', p:4, g:9,
+              lines: L([[345.4,0.7],[389.4,0.9],[399.5,1.0],[481.0,0.55],[590.9,0.5]]) },
+            { z:28, sym:'Ni', name:'Nickel', cat:'transition', p:4, g:10,
+              lines: L([[341.5,0.7],[385.8,0.9],[436.1,0.8],[488.3,1.0],[508.0,0.65]]) },
+            { z:29, sym:'Cu', name:'Koppar', cat:'transition', p:4, g:11,
+              lines: L([[465.1,0.55],[510.6,1.0],[515.3,0.85],[521.8,0.9],[578.2,0.75],[793.3,0.6]]) },
+            { z:30, sym:'Zn', name:'Zink', cat:'transition', p:4, g:12,
+              lines: L([[468.0,0.75],[472.2,0.85],[481.1,1.0],[518.2,0.5],[636.2,0.85]]) },
+            { z:31, sym:'Ga', name:'Gallium', cat:'posttrans', p:4, g:13,
+              lines: L([[403.3,1.0],[417.2,0.95],[639.7,0.5]]) },
+            { z:32, sym:'Ge', name:'Germanium', cat:'metalloid', p:4, g:14,
+              lines: L([[422.7,0.75],[468.5,0.7],[589.3,0.9],[602.9,1.0]]) },
+            { z:33, sym:'As', name:'Arsenik', cat:'metalloid', p:4, g:15,
+              lines: L([[549.9,0.85],[564.2,1.0],[583.7,0.7]]) },
+            { z:34, sym:'Se', name:'Selen', cat:'nonmetal', p:4, g:16,
+              lines: L([[473.1,0.55],[493.4,0.75],[525.3,0.85],[572.6,1.0],[625.0,0.65]]) },
+            { z:35, sym:'Br', name:'Brom', cat:'halogen', p:4, g:17,
+              lines: L([[452.1,0.55],[478.5,0.75],[614.4,0.9],[635.1,1.0],[655.6,0.65]]) },
+            { z:36, sym:'Kr', name:'Krypton', cat:'noble', p:4, g:18,
+              lines: L([[427.4,0.5],[431.9,0.55],[446.4,0.6],[557.0,0.75],[587.1,0.95],[758.7,1.0],[811.3,0.9]]) },
+            { z:37, sym:'Rb', name:'Rubidium', cat:'alkali', p:5, g:1,
+              lines: L([[420.2,0.9],[421.6,0.85],[572.5,0.3],[620.6,0.4],[629.8,0.5],[780.0,1.0],[794.8,0.95]]) },
+            { z:38, sym:'Sr', name:'Strontium', cat:'alkaline', p:5, g:2,
+              lines: L([[407.8,1.0],[421.6,0.95],[460.7,0.95],[496.2,0.6],[650.4,0.7],[687.8,0.75],[689.3,0.7],[707.0,0.55]]) },
+            { z:39, sym:'Y', name:'Yttrium', cat:'transition', p:5, g:3,
+              lines: L([[410.2,1.0],[414.3,0.85],[437.5,0.8],[490.0,0.7]]) },
+            { z:40, sym:'Zr', name:'Zirkonium', cat:'transition', p:5, g:4,
+              lines: L([[409.1,0.8],[457.6,0.9],[468.8,1.0],[477.0,0.7]]) },
+            { z:41, sym:'Nb', name:'Niob', cat:'transition', p:5, g:5,
+              lines: L([[407.9,0.85],[410.1,1.0],[413.9,0.9],[450.1,0.6]]) },
+            { z:42, sym:'Mo', name:'Molybden', cat:'transition', p:5, g:6,
+              lines: L([[379.8,0.7],[386.4,0.9],[390.3,1.0],[550.6,0.55],[557.0,0.6],[603.0,0.5]]) },
+            { z:43, sym:'Tc', name:'Teknetium', cat:'transition', p:5, g:7,
+              lines: L([[403.1,0.85],[423.8,0.9],[429.7,1.0],[485.3,0.6]]) },
+            { z:44, sym:'Ru', name:'Rutenium', cat:'transition', p:5, g:8,
+              lines: L([[343.7,0.75],[372.8,1.0],[379.9,0.85],[392.6,0.7]]) },
+            { z:45, sym:'Rh', name:'Rodium', cat:'transition', p:5, g:9,
+              lines: L([[343.5,0.8],[369.2,1.0],[396.1,0.85],[452.1,0.55]]) },
+            { z:46, sym:'Pd', name:'Palladium', cat:'transition', p:5, g:10,
+              lines: L([[324.3,0.8],[340.5,1.0],[351.7,0.75],[360.9,0.7]]) },
+            { z:47, sym:'Ag', name:'Silver', cat:'transition', p:5, g:11,
+              lines: L([[338.3,0.85],[520.9,1.0],[546.6,0.9],[768.8,0.4]]) },
+            { z:48, sym:'Cd', name:'Kadmium', cat:'transition', p:5, g:12,
+              lines: L([[467.8,0.8],[480.0,0.85],[508.6,1.0],[643.8,0.95]]) },
+            { z:49, sym:'In', name:'Indium', cat:'posttrans', p:5, g:13,
+              lines: L([[410.2,0.9],[451.1,1.0],[498.0,0.4]]) },
+            { z:50, sym:'Sn', name:'Tenn', cat:'posttrans', p:5, g:14,
+              lines: L([[380.1,0.55],[452.5,0.95],[645.5,1.0],[684.4,0.6]]) },
+            { z:51, sym:'Sb', name:'Antimon', cat:'metalloid', p:5, g:15,
+              lines: L([[407.4,0.7],[421.6,0.85],[437.0,1.0],[528.4,0.5]]) },
+            { z:52, sym:'Te', name:'Tellur', cat:'metalloid', p:5, g:16,
+              lines: L([[418.3,0.5],[453.8,0.7],[512.2,0.85],[540.2,1.0],[571.4,0.6]]) },
+            { z:53, sym:'I', name:'Jod', cat:'halogen', p:5, g:17,
+              lines: L([[511.9,0.5],[546.5,0.8],[552.3,1.0],[614.6,0.7],[710.7,0.6]]) },
+            { z:54, sym:'Xe', name:'Xenon', cat:'noble', p:5, g:18,
+              lines: L([[450.1,0.7],[462.4,0.75],[467.1,0.85],[480.7,0.9],[484.3,1.0],[492.3,0.75],[529.2,0.6],[541.9,0.5]]) },
+            { z:55, sym:'Cs', name:'Cesium', cat:'alkali', p:6, g:1,
+              lines: L([[455.5,1.0],[459.3,0.9],[584.5,0.4],[621.3,0.5],[697.3,0.4],[852.1,0.95]]) },
+            { z:56, sym:'Ba', name:'Barium', cat:'alkaline', p:6, g:2,
+              lines: L([[455.4,1.0],[493.4,0.95],[553.5,1.0],[577.8,0.5],[614.2,0.6],[649.9,0.55]]) },
+            { z:57, sym:'La', name:'Lantan', cat:'lanthanide', p:9, g:3,
+              lines: L([[408.7,0.85],[433.4,1.0],[492.2,0.7],[550.1,0.6]]) },
+            { z:58, sym:'Ce', name:'Cerium', cat:'lanthanide', p:9, g:4,
+              lines: L([[394.3,0.85],[418.7,0.95],[428.0,1.0],[569.9,0.5]]) },
+            { z:59, sym:'Pr', name:'Praseodym', cat:'lanthanide', p:9, g:5,
+              lines: L([[410.1,0.85],[422.5,1.0],[495.1,0.7],[513.3,0.6]]) },
+            { z:60, sym:'Nd', name:'Neodym', cat:'lanthanide', p:9, g:6,
+              lines: L([[401.2,0.8],[430.4,1.0],[463.4,0.85],[566.6,0.6],[580.9,0.7]]) },
+            { z:61, sym:'Pm', name:'Prometium', cat:'lanthanide', p:9, g:7,
+              lines: L([[416.6,0.9],[443.6,1.0],[475.1,0.7],[531.1,0.55]]) },
+            { z:62, sym:'Sm', name:'Samarium', cat:'lanthanide', p:9, g:8,
+              lines: L([[388.5,0.7],[429.7,0.85],[443.4,1.0],[476.0,0.75],[572.7,0.55]]) },
+            { z:63, sym:'Eu', name:'Europium', cat:'lanthanide', p:9, g:9,
+              lines: L([[412.9,0.85],[420.5,0.9],[443.5,1.0],[466.2,0.75],[535.1,0.7]]) },
+            { z:64, sym:'Gd', name:'Gadolinium', cat:'lanthanide', p:9, g:10,
+              lines: L([[364.5,0.75],[422.5,0.9],[440.2,1.0],[512.5,0.7],[577.9,0.55]]) },
+            { z:65, sym:'Tb', name:'Terbium', cat:'lanthanide', p:9, g:11,
+              lines: L([[370.2,0.7],[432.6,0.85],[487.0,0.9],[543.2,1.0],[583.1,0.65]]) },
+            { z:66, sym:'Dy', name:'Dysprosium', cat:'lanthanide', p:9, g:12,
+              lines: L([[383.0,0.8],[404.6,0.9],[418.7,1.0],[458.0,0.7],[480.1,0.75]]) },
+            { z:67, sym:'Ho', name:'Holmium', cat:'lanthanide', p:9, g:13,
+              lines: L([[405.4,0.85],[410.4,0.9],[417.3,1.0],[536.5,0.55]]) },
+            { z:68, sym:'Er', name:'Erbium', cat:'lanthanide', p:9, g:14,
+              lines: L([[400.8,0.9],[415.1,1.0],[453.4,0.7],[548.6,0.6]]) },
+            { z:69, sym:'Tm', name:'Tulium', cat:'lanthanide', p:9, g:15,
+              lines: L([[371.8,0.75],[418.8,0.95],[436.0,1.0],[597.1,0.6]]) },
+            { z:70, sym:'Yb', name:'Ytterbium', cat:'lanthanide', p:9, g:16,
+              lines: L([[398.8,1.0],[468.4,0.75],[555.6,0.85]]) },
+            { z:71, sym:'Lu', name:'Lutetium', cat:'lanthanide', p:9, g:17,
+              lines: L([[331.2,0.7],[350.7,0.85],[451.9,1.0],[547.7,0.6]]) },
+            { z:72, sym:'Hf', name:'Hafnium', cat:'transition', p:6, g:4,
+              lines: L([[307.3,0.6],[368.2,0.85],[395.0,1.0],[509.0,0.5]]) },
+            { z:73, sym:'Ta', name:'Tantal', cat:'transition', p:6, g:5,
+              lines: L([[362.7,0.7],[400.9,0.9],[429.1,1.0],[481.3,0.6]]) },
+            { z:74, sym:'W', name:'Volfram', cat:'transition', p:6, g:6,
+              lines: L([[400.9,0.8],[407.4,0.85],[429.5,1.0],[498.3,0.6],[551.5,0.55]]) },
+            { z:75, sym:'Re', name:'Renium', cat:'transition', p:6, g:7,
+              lines: L([[346.0,0.65],[488.9,0.9],[527.5,1.0],[546.3,0.75]]) },
+            { z:76, sym:'Os', name:'Osmium', cat:'transition', p:6, g:8,
+              lines: L([[290.9,0.6],[305.9,0.75],[442.0,0.95],[462.8,1.0]]) },
+            { z:77, sym:'Ir', name:'Iridium', cat:'transition', p:6, g:9,
+              lines: L([[322.1,0.75],[351.4,0.85],[380.0,0.9],[441.0,1.0]]) },
+            { z:78, sym:'Pt', name:'Platina', cat:'transition', p:6, g:10,
+              lines: L([[306.5,0.7],[342.1,0.85],[380.1,1.0],[459.4,0.6]]) },
+            { z:79, sym:'Au', name:'Guld', cat:'transition', p:6, g:11,
+              lines: L([[267.6,0.7],[312.3,0.85],[479.3,1.0],[627.8,0.7]]) },
+            { z:80, sym:'Hg', name:'Kvicksilver', cat:'transition', p:6, g:12,
+              lines: L([[404.7,0.95],[435.8,1.0],[491.6,0.4],[546.1,1.0],[577.0,0.85],[579.1,0.85],[623.4,0.5],[690.7,0.55]]) },
+            { z:81, sym:'Tl', name:'Tallium', cat:'posttrans', p:6, g:13,
+              lines: L([[377.6,0.85],[535.0,1.0],[654.8,0.6]]) },
+            { z:82, sym:'Pb', name:'Bly', cat:'posttrans', p:6, g:14,
+              lines: L([[368.3,0.8],[405.8,1.0],[500.5,0.55],[516.0,0.7],[722.9,0.75]]) },
+            { z:83, sym:'Bi', name:'Vismut', cat:'posttrans', p:6, g:15,
+              lines: L([[412.0,0.65],[472.3,1.0],[555.7,0.8],[647.2,0.55]]) },
+            { z:84, sym:'Po', name:'Polonium', cat:'posttrans', p:6, g:16,
+              lines: L([[417.0,0.7],[464.2,0.85],[550.2,1.0],[648.1,0.6]]) },
+            { z:85, sym:'At', name:'Astat', cat:'halogen', p:6, g:17,
+              lines: L([[492.0,0.7],[540.7,0.9],[595.3,1.0],[678.2,0.6]]) },
+            { z:86, sym:'Rn', name:'Radon', cat:'noble', p:6, g:18,
+              lines: L([[434.9,0.7],[452.6,0.85],[522.7,0.9],[603.2,1.0],[705.5,0.6]]) },
+            { z:87, sym:'Fr', name:'Francium', cat:'alkali', p:7, g:1,
+              lines: L([[422.5,0.7],[717.9,0.9],[817.2,1.0]]) },
+            { z:88, sym:'Ra', name:'Radium', cat:'alkaline', p:7, g:2,
+              lines: L([[381.4,0.8],[468.3,1.0],[566.1,0.75],[649.9,0.6]]) },
+            { z:89, sym:'Ac', name:'Aktinium', cat:'actinide', p:10, g:3,
+              lines: L([[417.9,0.85],[438.3,1.0],[472.2,0.7]]) },
+            { z:90, sym:'Th', name:'Torium', cat:'actinide', p:10, g:4,
+              lines: L([[374.1,0.7],[401.9,0.85],[491.6,1.0],[567.7,0.6]]) },
+            { z:91, sym:'Pa', name:'Protaktinium', cat:'actinide', p:10, g:5,
+              lines: L([[384.1,0.8],[424.3,1.0],[503.6,0.7]]) },
+            { z:92, sym:'U', name:'Uran', cat:'actinide', p:10, g:6,
+              lines: L([[385.5,0.8],[424.4,0.85],[502.7,1.0],[591.5,0.75],[682.7,0.6]]) },
+            { z:93, sym:'Np', name:'Neptunium', cat:'actinide', p:10, g:7,
+              lines: L([[387.6,0.75],[430.1,0.9],[519.9,1.0],[609.8,0.7]]) },
+            { z:94, sym:'Pu', name:'Plutonium', cat:'actinide', p:10, g:8,
+              lines: L([[392.0,0.8],[439.3,0.95],[530.2,1.0],[617.5,0.7]]) },
+            { z:95, sym:'Am', name:'Americium', cat:'actinide', p:10, g:9,
+              lines: L([[395.7,0.8],[442.1,0.9],[536.1,1.0],[625.0,0.65]]) },
+            { z:96, sym:'Cm', name:'Curium', cat:'actinide', p:10, g:10,
+              lines: L([[401.3,0.85],[447.2,0.95],[541.5,1.0],[632.3,0.65]]) },
+            { z:97, sym:'Bk', name:'Berkelium', cat:'actinide', p:10, g:11,
+              lines: L([[406.2,0.8],[452.6,0.95],[546.4,1.0],[637.1,0.65]]) },
+            { z:98, sym:'Cf', name:'Californium', cat:'actinide', p:10, g:12,
+              lines: L([[411.4,0.85],[457.1,0.95],[551.9,1.0],[641.7,0.65]]) },
+            { z:99, sym:'Es', name:'Einsteinium', cat:'actinide', p:10, g:13,
+              lines: L([[415.6,0.8],[462.4,0.9],[557.3,1.0],[646.5,0.6]]) },
+            { z:100, sym:'Fm', name:'Fermium', cat:'actinide', p:10, g:14,
+              lines: L([[420.1,0.8],[467.0,0.9],[562.8,1.0],[651.4,0.6]]) },
+            { z:101, sym:'Md', name:'Mendelevium', cat:'actinide', p:10, g:15,
+              lines: L([[425.2,0.85],[472.3,0.95],[567.4,1.0],[655.9,0.6]]) },
+            { z:102, sym:'No', name:'Nobelium', cat:'actinide', p:10, g:16,
+              lines: L([[430.5,0.85],[478.0,0.95],[572.9,1.0],[660.2,0.6]]) },
+            { z:103, sym:'Lr', name:'Lawrencium', cat:'actinide', p:10, g:17,
+              lines: L([[435.1,0.85],[483.2,0.9],[578.4,1.0],[665.1,0.6]]) },
+            { z:104, sym:'Rf', name:'Rutherfordium', cat:'transition', p:7, g:4,
+              lines: L([[410.0,0.8],[470.0,0.95],[560.0,1.0]]) },
+            { z:105, sym:'Db', name:'Dubnium', cat:'transition', p:7, g:5,
+              lines: L([[414.0,0.8],[475.0,0.95],[565.0,1.0]]) },
+            { z:106, sym:'Sg', name:'Seaborgium', cat:'transition', p:7, g:6,
+              lines: L([[418.0,0.8],[480.0,0.95],[570.0,1.0]]) },
+            { z:107, sym:'Bh', name:'Bohrium', cat:'transition', p:7, g:7,
+              lines: L([[422.0,0.8],[485.0,0.95],[575.0,1.0]]) },
+            { z:108, sym:'Hs', name:'Hassium', cat:'transition', p:7, g:8,
+              lines: L([[426.0,0.8],[490.0,0.95],[580.0,1.0]]) },
+            { z:109, sym:'Mt', name:'Meitnerium', cat:'transition', p:7, g:9,
+              lines: L([[430.0,0.8],[495.0,0.95],[585.0,1.0]]) },
+            { z:110, sym:'Ds', name:'Darmstadtium', cat:'transition', p:7, g:10,
+              lines: L([[434.0,0.8],[500.0,0.95],[590.0,1.0]]) },
+            { z:111, sym:'Rg', name:'Röntgenium', cat:'transition', p:7, g:11,
+              lines: L([[438.0,0.8],[505.0,0.95],[595.0,1.0]]) },
+            { z:112, sym:'Cn', name:'Copernicium', cat:'transition', p:7, g:12,
+              lines: L([[442.0,0.8],[510.0,0.95],[600.0,1.0]]) },
+            { z:113, sym:'Nh', name:'Nihonium', cat:'posttrans', p:7, g:13,
+              lines: L([[446.0,0.8],[515.0,0.95],[605.0,1.0]]) },
+            { z:114, sym:'Fl', name:'Flerovium', cat:'posttrans', p:7, g:14,
+              lines: L([[450.0,0.8],[520.0,0.95],[610.0,1.0]]) },
+            { z:115, sym:'Mc', name:'Moscovium', cat:'posttrans', p:7, g:15,
+              lines: L([[454.0,0.8],[525.0,0.95],[615.0,1.0]]) },
+            { z:116, sym:'Lv', name:'Livermorium', cat:'posttrans', p:7, g:16,
+              lines: L([[458.0,0.8],[530.0,0.95],[620.0,1.0]]) },
+            { z:117, sym:'Ts', name:'Tenness', cat:'halogen', p:7, g:17,
+              lines: L([[462.0,0.8],[535.0,0.95],[625.0,1.0]]) },
+            { z:118, sym:'Og', name:'Oganesson', cat:'noble', p:7, g:18,
+              lines: L([[466.0,0.8],[540.0,0.95],[630.0,1.0]]) }
+        ];
+
+        // Våglängd till RGB-färg
+        function wavelengthToRGB(wl) {
+            let R = 0, G = 0, B = 0;
+            if (wl >= 380 && wl < 440) {
+                R = -(wl - 440) / (440 - 380); G = 0; B = 1;
+            } else if (wl >= 440 && wl < 490) {
+                R = 0; G = (wl - 440) / (490 - 440); B = 1;
+            } else if (wl >= 490 && wl < 510) {
+                R = 0; G = 1; B = -(wl - 510) / (510 - 490);
+            } else if (wl >= 510 && wl < 580) {
+                R = (wl - 510) / (580 - 510); G = 1; B = 0;
+            } else if (wl >= 580 && wl < 645) {
+                R = 1; G = -(wl - 645) / (645 - 580); B = 0;
+            } else if (wl >= 645 && wl <= 780) {
+                R = 1; G = 0; B = 0;
+            }
+            // Intensitetskorrigering vid kanterna
+            let factor = 1;
+            if (wl >= 380 && wl < 420) factor = 0.3 + 0.7 * (wl - 380) / (420 - 380);
+            else if (wl >= 701 && wl <= 780) factor = 0.3 + 0.7 * (780 - wl) / (780 - 701);
+            const gamma = 0.8;
+            return [
+                Math.round(255 * Math.pow(R * factor, gamma)),
+                Math.round(255 * Math.pow(G * factor, gamma)),
+                Math.round(255 * Math.pow(B * factor, gamma))
+            ];
+        }
+
+        // Formatera nummer med komma
+        const fmt = (n, d=1) => n.toFixed(d).replace('.', ',');
+
+        // ====== SpectrumDisplay ======
+        function SpectrumDisplay({ element, mode }) {
+            const canvasRef = useRef(null);
+            const [hover, setHover] = useState(null);
+            const [size, setSize] = useState({ w: 1000, h: 170 });
+
+            const WL_MIN = 380, WL_MAX = 750;
+
+            useEffect(() => {
+                const c = canvasRef.current;
+                if (!c) return;
+                const ro = new ResizeObserver(entries => {
+                    const e = entries[0];
+                    if (e) setSize({ w: Math.floor(e.contentRect.width), h: Math.floor(e.contentRect.height) });
+                });
+                ro.observe(c);
+                return () => ro.disconnect();
+            }, []);
+
+            useEffect(() => {
+                const c = canvasRef.current;
+                if (!c) return;
+                const dpr = window.devicePixelRatio || 1;
+                c.width = size.w * dpr;
+                c.height = size.h * dpr;
+                const ctx = c.getContext('2d');
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                drawSpectrum(ctx, size.w, size.h);
+            }, [element, mode, size]);
+
+            function drawSpectrum(ctx, W, H) {
+                const margin = { l: 20, r: 20, t: 14, b: 34 };
+                const gW = W - margin.l - margin.r;
+                const gH = H - margin.t - margin.b;
+
+                ctx.clearRect(0, 0, W, H);
+
+                const wlToX = (wl) => margin.l + ((wl - WL_MIN) / (WL_MAX - WL_MIN)) * gW;
+
+                if (mode === 'emission') {
+                    // Svart bakgrund
+                    ctx.fillStyle = '#000';
+                    ctx.fillRect(margin.l, margin.t, gW, gH);
+                } else {
+                    // Full regnbåge
+                    const grad = ctx.createLinearGradient(margin.l, 0, margin.l + gW, 0);
+                    for (let wl = WL_MIN; wl <= WL_MAX; wl += 5) {
+                        const t = (wl - WL_MIN) / (WL_MAX - WL_MIN);
+                        const [r, g, b] = wavelengthToRGB(wl);
+                        grad.addColorStop(t, `rgb(${r},${g},${b})`);
+                    }
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(margin.l, margin.t, gW, gH);
+                }
+
+                // Rita linjer
+                const visibleLines = element.lines.filter(l => l.wl >= WL_MIN && l.wl <= WL_MAX);
+                visibleLines.forEach(line => {
+                    const x = wlToX(line.wl);
+                    const [r, g, b] = wavelengthToRGB(line.wl);
+                    const intensity = Math.max(0.2, line.i);
+
+                    if (mode === 'emission') {
+                        // Glöd-halo
+                        const haloGrad = ctx.createRadialGradient(x, margin.t + gH/2, 0, x, margin.t + gH/2, 18);
+                        haloGrad.addColorStop(0, `rgba(${r},${g},${b},${0.55 * intensity})`);
+                        haloGrad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+                        ctx.fillStyle = haloGrad;
+                        ctx.fillRect(x - 18, margin.t, 36, gH);
+
+                        // Skarp linje
+                        const lineW = 1.5 + 1.5 * intensity;
+                        ctx.fillStyle = `rgba(${r},${g},${b},${intensity})`;
+                        ctx.fillRect(x - lineW/2, margin.t, lineW, gH);
+
+                        // Central hot core (vit)
+                        ctx.fillStyle = `rgba(255,255,255,${0.3 * intensity})`;
+                        ctx.fillRect(x - 0.5, margin.t, 1, gH);
+                    } else {
+                        // Svart absorptionslinje
+                        const lineW = 1.5 + 2.0 * intensity;
+                        ctx.fillStyle = `rgba(0,0,0,${0.85 + 0.15 * intensity})`;
+                        ctx.fillRect(x - lineW/2, margin.t, lineW, gH);
+                    }
+                });
+
+                // Axel och etiketter
+                ctx.fillStyle = '#64748b';
+                ctx.font = '11px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                for (let wl = 400; wl <= 700; wl += 50) {
+                    const x = wlToX(wl);
+                    ctx.fillText(wl + ' nm', x, H - margin.b + 18);
+                    ctx.fillStyle = '#334155';
+                    ctx.fillRect(x, H - margin.b, 1, 4);
+                    ctx.fillStyle = '#64748b';
+                }
+
+                // Markera vid hover
+                if (hover) {
+                    const x = wlToX(hover.wl);
+                    ctx.strokeStyle = '#38bdf8';
+                    ctx.lineWidth = 1;
+                    ctx.setLineDash([3, 3]);
+                    ctx.beginPath();
+                    ctx.moveTo(x, margin.t);
+                    ctx.lineTo(x, margin.t + gH);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            }
+
+            function handleMove(e) {
+                const c = canvasRef.current;
+                if (!c) return;
+                const rect = c.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const margin = { l: 20, r: 20 };
+                const gW = rect.width - margin.l - margin.r;
+                if (x < margin.l || x > margin.l + gW) { setHover(null); return; }
+                const wl = WL_MIN + ((x - margin.l) / gW) * (WL_MAX - WL_MIN);
+
+                // Hitta närmsta linje inom 8 px
+                let closest = null, minDist = Infinity;
+                element.lines.forEach(line => {
+                    const lx = margin.l + ((line.wl - WL_MIN) / (WL_MAX - WL_MIN)) * gW;
+                    const d = Math.abs(lx - x);
+                    if (d < 10 && d < minDist) { minDist = d; closest = line; }
+                });
+                setHover(closest);
+            }
+
+            return (
+                <div className="spectrum-wrap">
+                    <canvas
+                        ref={canvasRef}
+                        className="spectrum-canvas"
+                        onMouseMove={handleMove}
+                        onMouseLeave={() => setHover(null)}
+                    />
+                    {hover && (
+                        <div style={{
+                            position: 'absolute',
+                            bottom: 40,
+                            left: `${20 + ((hover.wl - WL_MIN)/(WL_MAX - WL_MIN)) * (size.w - 40)}px`,
+                            transform: 'translateX(-50%)',
+                            padding: '6px 10px',
+                            background: 'rgba(15, 23, 42, 0.95)',
+                            border: '1px solid rgba(56, 189, 248, 0.5)',
+                            borderRadius: 8,
+                            color: '#e2e8f0',
+                            fontSize: '0.78rem',
+                            pointerEvents: 'none',
+                            whiteSpace: 'nowrap'
+                        }}>
+                            <span style={{fontStyle:'italic'}}>λ</span> = {fmt(hover.wl,2)} nm
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // ====== Periodiskt system ======
+        function PeriodicTable({ selectedZ, onSelect }) {
+            // Bygg 7 rader x 18 kolumner + 2 separatrader för lantanoider/aktinoider
+            const cells = {};
+            ELEMENTS.forEach(el => {
+                cells[`${el.p}-${el.g}`] = el;
+            });
+
+            const rows = [];
+            // Huvudtabell rad 1-7
+            for (let p = 1; p <= 7; p++) {
+                for (let g = 1; g <= 18; g++) {
+                    const el = cells[`${p}-${g}`];
+                    if (el) {
+                        const cat = CATEGORIES[el.cat];
+                        rows.push(
+                            <div
+                                key={`${p}-${g}`}
+                                className={`pt-cell ${cat.cls} ${selectedZ === el.z ? 'selected' : ''}`}
+                                style={{ gridColumn: g, gridRow: p }}
+                                onClick={() => onSelect(el)}
+                                title={`${el.name} (${el.sym}) — Z=${el.z}`}
+                            >
+                                <span className="pt-z">{el.z}</span>
+                                <span className="pt-sym">{el.sym}</span>
+                                <span className="pt-name">{el.name}</span>
+                            </div>
+                        );
+                    }
+                }
+            }
+            // Markörer i period 6 / 7 grupp 3 för lantanoider / aktinoider
+            rows.push(
+                <div key="laMarker" className="pt-cell cat-lanthanide" style={{ gridColumn: 3, gridRow: 6, opacity: 0.5 }} title="Lantanoider 57-71">
+                    <span className="pt-sym">57–71</span>
+                </div>,
+                <div key="acMarker" className="pt-cell cat-actinide" style={{ gridColumn: 3, gridRow: 7, opacity: 0.5 }} title="Aktinoider 89-103">
+                    <span className="pt-sym">89–103</span>
+                </div>
+            );
+
+            // Lantanoider och aktinoider rad 9-10 (med gap-rad 8)
+            // placera La-Lu i kolumner 3-17 (15 element)
+            const lanthanides = ELEMENTS.filter(e => e.cat === 'lanthanide').sort((a,b) => a.z - b.z);
+            const actinides = ELEMENTS.filter(e => e.cat === 'actinide').sort((a,b) => a.z - b.z);
+
+            lanthanides.forEach((el, i) => {
+                const cat = CATEGORIES[el.cat];
+                rows.push(
+                    <div
+                        key={`lan-${el.z}`}
+                        className={`pt-cell ${cat.cls} ${selectedZ === el.z ? 'selected' : ''}`}
+                        style={{ gridColumn: 3 + i, gridRow: 9 }}
+                        onClick={() => onSelect(el)}
+                        title={`${el.name} (${el.sym}) — Z=${el.z}`}
+                    >
+                        <span className="pt-z">{el.z}</span>
+                        <span className="pt-sym">{el.sym}</span>
+                        <span className="pt-name">{el.name}</span>
+                    </div>
+                );
+            });
+            actinides.forEach((el, i) => {
+                const cat = CATEGORIES[el.cat];
+                rows.push(
+                    <div
+                        key={`act-${el.z}`}
+                        className={`pt-cell ${cat.cls} ${selectedZ === el.z ? 'selected' : ''}`}
+                        style={{ gridColumn: 3 + i, gridRow: 10 }}
+                        onClick={() => onSelect(el)}
+                        title={`${el.name} (${el.sym}) — Z=${el.z}`}
+                    >
+                        <span className="pt-z">{el.z}</span>
+                        <span className="pt-sym">{el.sym}</span>
+                        <span className="pt-name">{el.name}</span>
+                    </div>
+                );
+            });
+
+            return (
+                <div className="periodic-grid" style={{ gridTemplateRows: 'repeat(10, 1fr)' }}>
+                    {rows}
+                </div>
+            );
+        }
+
+        // ====== Huvudapp ======
+        function App() {
+            const [selected, setSelected] = useState(ELEMENTS[0]); // Väte som default
+            const [mode, setMode] = useState('emission'); // 'emission' | 'absorption'
+            const [sortOrder, setSortOrder] = useState('z'); // 'z' | 'alpha'
+
+            const cat = CATEGORIES[selected.cat];
+            const visibleLines = selected.lines.filter(l => l.wl >= 380 && l.wl <= 750);
+
+            // Sorterad lista — växlas mellan atomnummer och alfabetisk (svensk kollation)
+            const sortedList = useMemo(() => {
+                if (sortOrder === 'alpha') {
+                    return [...ELEMENTS].sort((a, b) => a.name.localeCompare(b.name, 'sv'));
+                }
+                return [...ELEMENTS].sort((a, b) => a.z - b.z);
+            }, [sortOrder]);
+
+            const handleSelectChange = (e) => {
+                const z = parseInt(e.target.value, 10);
+                const el = ELEMENTS.find(x => x.z === z);
+                if (el) setSelected(el);
+            };
+
+            return (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+
+                    {/* Spektrumkort */}
+                    <div className="glass-card" style={{ padding: '1.5rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
+                            <div>
+                                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.8rem', marginBottom: '0.3rem' }}>
+                                    <span style={{ fontSize: '0.8rem', color: cat.color, fontWeight: 500 }}>{cat.label}</span>
+                                    <span style={{ fontSize: '0.75rem', color: '#64748b' }}>Z = {selected.z}</span>
+                                </div>
+                                <h2 style={{ fontSize: '2rem', fontWeight: 700, color: '#e2e8f0', display: 'flex', alignItems: 'baseline', gap: '0.7rem' }}>
+                                    <span style={{ color: cat.color, textShadow: `0 0 24px ${cat.color}88` }}>{selected.sym}</span>
+                                    <span style={{ fontSize: '1.2rem', color: '#94a3b8', fontWeight: 500 }}>{selected.name}</span>
+                                </h2>
+                            </div>
+
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8rem', alignItems: 'center' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', justifyContent: 'space-between' }}>
+                                        <span style={{ fontSize: '0.7rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Sortering</span>
+                                        <div className="toggle-group" style={{ padding: '2px' }}>
+                                            <button
+                                                className={`toggle-btn ${sortOrder === 'z' ? 'active' : ''}`}
+                                                onClick={() => setSortOrder('z')}
+                                                style={{ padding: '4px 10px', fontSize: '0.72rem' }}
+                                                title="Sortera efter atomnummer"
+                                            >Atomnr</button>
+                                            <button
+                                                className={`toggle-btn ${sortOrder === 'alpha' ? 'active' : ''}`}
+                                                onClick={() => setSortOrder('alpha')}
+                                                style={{ padding: '4px 10px', fontSize: '0.72rem' }}
+                                                title="Sortera alfabetiskt"
+                                            >A–Ö</button>
+                                        </div>
+                                    </div>
+                                    <select
+                                        className="element-select"
+                                        value={selected.z}
+                                        onChange={handleSelectChange}
+                                        aria-label="Välj grundämne från lista"
+                                    >
+                                        {sortedList.map(el => (
+                                            <option key={el.z} value={el.z}>
+                                                {sortOrder === 'z'
+                                                    ? `${el.z}. ${el.name} (${el.sym})`
+                                                    : `${el.name} (${el.sym})`}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="toggle-group">
+                                    <button
+                                        className={`toggle-btn ${mode === 'emission' ? 'active' : ''}`}
+                                        onClick={() => setMode('emission')}
+                                    >Emission</button>
+                                    <button
+                                        className={`toggle-btn ${mode === 'absorption' ? 'active' : ''}`}
+                                        onClick={() => setMode('absorption')}
+                                    >Absorption</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <SpectrumDisplay element={selected} mode={mode} />
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.6rem', marginTop: '1rem' }}>
+                            <div className="info-line">
+                                <span className="label">Antal synliga linjer</span>
+                                <span className="value">{visibleLines.length}</span>
+                            </div>
+                            <div className="info-line">
+                                <span className="label">Starkaste linje</span>
+                                <span className="value">
+                                    {visibleLines.length ? (
+                                        <>
+                                            <span className="math-var">λ</span> = {fmt(visibleLines.reduce((a,b) => b.i > a.i ? b : a, visibleLines[0]).wl, 1)} nm
+                                        </>
+                                    ) : '—'}
+                                </span>
+                            </div>
+                            <div className="info-line">
+                                <span className="label">Spektrumtyp</span>
+                                <span className="value">{mode === 'emission' ? 'Emission' : 'Absorption'}</span>
+                            </div>
+                        </div>
+
+                        {mode === 'emission' ? (
+                            <p style={{ marginTop: '0.9rem', fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.5 }}>
+                                <strong style={{color:'#cbd5e1'}}>Emissionsspektrum</strong> — hett gas avger ljus vid specifika våglängder när exciterade elektroner faller tillbaka
+                                till lägre energinivåer. Varje linje motsvarar ett unikt hopp mellan två energinivåer.
+                            </p>
+                        ) : (
+                            <p style={{ marginTop: '0.9rem', fontSize: '0.85rem', color: '#94a3b8', lineHeight: 1.5 }}>
+                                <strong style={{color:'#cbd5e1'}}>Absorptionsspektrum</strong> — när vitt ljus passerar genom kall gas absorberas vissa våglängder av atomerna
+                                och efterlämnar mörka linjer i spektrumet. De mörka linjerna ligger vid exakt samma våglängder som ämnets emissionslinjer.
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Periodiskt system */}
+                    <div className="glass-card" style={{ padding: '1.5rem' }}>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#e2e8f0', marginBottom: '1rem' }}>Periodiska systemet</h3>
+
+                        <PeriodicTable selectedZ={selected.z} onSelect={setSelected} />
+
+                        <div className="legend">
+                            {Object.entries(CATEGORIES).map(([key, c]) => (
+                                <div key={key} className="legend-item">
+                                    <span className="legend-swatch" style={{ background: c.color, opacity: 0.7 }}></span>
+                                    <span>{c.label}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Teorikort */}
+                    <div className="glass-card" style={{ padding: '1.5rem' }}>
+                        <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: '#e2e8f0', marginBottom: '0.8rem' }}>Spektrallinjer — teori</h3>
+                        <p style={{ color: '#cbd5e1', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+                            Atomens elektroner kan bara befinna sig på vissa bestämda energinivåer. När en elektron
+                            hoppar från en högre nivå <span className="math-var">E</span>₂ till en lägre nivå <span className="math-var">E</span>₁
+                            avges en foton med energin:
+                        </p>
+                        <div style={{
+                            textAlign: 'center',
+                            padding: '1rem',
+                            background: 'rgba(15, 23, 42, 0.6)',
+                            borderRadius: '10px',
+                            fontSize: '1.2rem',
+                            color: '#38bdf8',
+                            margin: '0.5rem 0 1rem'
+                        }}>
+                            <span className="math-var">E</span>ₓ = <span className="math-var">E</span>₂ − <span className="math-var">E</span>₁ = <span className="math-var">hf</span> = <span className="math-var">hc</span>/<span className="math-var">λ</span>
+                        </div>
+                        <p style={{ color: '#cbd5e1', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+                            Eftersom varje grundämne har sitt unika mönster av energinivåer blir också det utsända
+                            ljusets våglängder unika. Spektrumet fungerar därmed som ett fingeravtryck — astronomer
+                            använder samma princip för att bestämma vad avlägsna stjärnor består av.
+                        </p>
+                        <p style={{ color: '#cbd5e1', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+                            <strong style={{color:'#e2e8f0'}}>Emission</strong> uppstår när heta atomer avger ljus — elektronerna är exciterade
+                            och hoppar ner till lägre nivåer.
+                            <strong style={{color:'#e2e8f0'}}> Absorption</strong> uppstår när kallt material passeras av vitt ljus — atomerna
+                            absorberar just de våglängder de själva kan emittera, och efterlämnar mörka linjer i spektrumet (Kirchhoffs andra lag).
+                        </p>
+                        <p style={{ color: '#94a3b8', fontSize: '0.85rem', fontStyle: 'italic', marginTop: '1rem' }}>
+                            Tips: Jämför vätet (H) med solens absorptionsspektrum — de mörka Fraunhoferlinjerna i solens spektrum
+                            är en direkt kopia av vätets (och andra ämnens) emissionslinjer. Prova också att jämföra natrium (Na)
+                            och kvicksilver (Hg) — de har helt olika fingeravtryck.
+                        </p>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

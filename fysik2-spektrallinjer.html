@@ -241,6 +241,158 @@
         .info-line .label { color: #64748b; font-size: 0.75rem; }
         .info-line .value { color: #e2e8f0; font-weight: 500; }
         .math-var { font-style: italic; }
+
+        /* Jämförelsesektion */
+        .compare-row {
+            display: flex;
+            gap: 0.9rem;
+            align-items: stretch;
+        }
+        .compare-label {
+            width: 170px;
+            flex-shrink: 0;
+            padding: 10px 12px;
+            border-left: 3px solid;
+            background: rgba(15, 23, 42, 0.55);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: space-between;
+        }
+        .compare-label-top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 6px;
+        }
+        .compare-label-top .sym {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 0.01em;
+        }
+        .compare-label-top .name {
+            font-size: 0.72rem;
+            color: #94a3b8;
+        }
+        .compare-label-top .z-tag {
+            font-size: 0.65rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        .element-select.compact {
+            min-width: 0;
+            width: 100%;
+            font-size: 0.78rem;
+            padding: 6px 28px 6px 10px;
+            background-size: 12px;
+            background-position: right 8px center;
+        }
+        .compare-remove {
+            width: 38px;
+            flex-shrink: 0;
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: 8px;
+            color: #f87171;
+            font-size: 1.3rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+        .compare-remove:hover:not(:disabled) {
+            background: rgba(239, 68, 68, 0.18);
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: scale(1.05);
+        }
+        .compare-remove:disabled {
+            opacity: 0.25;
+            cursor: not-allowed;
+        }
+        .add-compare-btn {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 12px;
+            background: rgba(56, 189, 248, 0.07);
+            border: 1px dashed rgba(56, 189, 248, 0.35);
+            border-radius: 10px;
+            color: #38bdf8;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: inherit;
+            transition: all 0.15s;
+        }
+        .add-compare-btn:hover {
+            background: rgba(56, 189, 248, 0.14);
+            border-color: rgba(56, 189, 248, 0.65);
+            transform: translateY(-1px);
+        }
+        .add-compare-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @media (max-width: 720px) {
+            .compare-row {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .compare-label {
+                width: 100%;
+                flex-direction: row;
+                align-items: center;
+            }
+            .compare-remove {
+                width: 100%;
+                padding: 6px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Flikar */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.18s ease;
+            margin-bottom: -1px;
+        }
+        .tab-btn:hover { color: #e2e8f0; }
+        .tab-btn.active {
+            color: #38bdf8;
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 12px;
+            right: 12px;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+            border-radius: 2px 2px 0 0;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
     </style>
 </head>
 <body class="page-wrapper">
@@ -578,10 +730,10 @@
         const fmt = (n, d=1) => n.toFixed(d).replace('.', ',');
 
         // ====== SpectrumDisplay ======
-        function SpectrumDisplay({ element, mode }) {
+        function SpectrumDisplay({ element, mode, height = 170 }) {
             const canvasRef = useRef(null);
             const [hover, setHover] = useState(null);
-            const [size, setSize] = useState({ w: 1000, h: 170 });
+            const [size, setSize] = useState({ w: 1000, h: height });
 
             const WL_MIN = 380, WL_MAX = 750;
 
@@ -714,6 +866,7 @@
                     <canvas
                         ref={canvasRef}
                         className="spectrum-canvas"
+                        style={{ height: `${height}px` }}
                         onMouseMove={handleMove}
                         onMouseLeave={() => setHover(null)}
                     />
@@ -825,11 +978,110 @@
             );
         }
 
+        // ====== Jämförelsesektion ======
+        function CompareSection({ sortedList, sortOrder, list, setList, cMode, setCMode }) {
+            const updateAt = (idx, z) => {
+                const el = ELEMENTS.find(e => e.z === z);
+                if (!el) return;
+                setList(list.map((item, i) => i === idx ? el : item));
+            };
+
+            const removeAt = (idx) => {
+                if (list.length > 1) setList(list.filter((_, i) => i !== idx));
+            };
+
+            const addElement = () => {
+                const next = ELEMENTS.find(e => !list.some(l => l.z === e.z));
+                if (next) setList([...list, next]);
+            };
+
+            return (
+                <div className="glass-card" style={{ padding: '1.5rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
+                        <div>
+                            <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#e2e8f0' }}>Jämför spektrallinjer</h3>
+                            <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginTop: '0.3rem' }}>
+                                Stapla två eller fler grundämnen ovanför varandra och jämför deras fingeravtryck av ljus.
+                            </p>
+                        </div>
+                        <div className="toggle-group">
+                            <button
+                                className={`toggle-btn ${cMode === 'emission' ? 'active' : ''}`}
+                                onClick={() => setCMode('emission')}
+                            >Emission</button>
+                            <button
+                                className={`toggle-btn ${cMode === 'absorption' ? 'active' : ''}`}
+                                onClick={() => setCMode('absorption')}
+                            >Absorption</button>
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+                        {list.map((el, idx) => {
+                            const cat = CATEGORIES[el.cat];
+                            return (
+                                <div key={idx} className="compare-row">
+                                    <div className="compare-label" style={{ borderLeftColor: cat.color }}>
+                                        <div className="compare-label-top">
+                                            <span className="sym" style={{ color: cat.color, textShadow: `0 0 18px ${cat.color}66` }}>{el.sym}</span>
+                                            <span className="z-tag">Z = {el.z}</span>
+                                        </div>
+                                        <span className="name" style={{ fontSize: '0.78rem', color: '#cbd5e1' }}>{el.name}</span>
+                                        <select
+                                            className="element-select compact"
+                                            value={el.z}
+                                            onChange={(e) => updateAt(idx, parseInt(e.target.value, 10))}
+                                            aria-label={`Välj grundämne för rad ${idx + 1}`}
+                                        >
+                                            {sortedList.map(e => (
+                                                <option key={e.z} value={e.z}>
+                                                    {sortOrder === 'z'
+                                                        ? `${e.z}. ${e.name} (${e.sym})`
+                                                        : `${e.name} (${e.sym})`}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                        <SpectrumDisplay element={el} mode={cMode} height={120} />
+                                    </div>
+                                    <button
+                                        className="compare-remove"
+                                        onClick={() => removeAt(idx)}
+                                        disabled={list.length <= 1}
+                                        title="Ta bort denna rad"
+                                        aria-label="Ta bort"
+                                    >×</button>
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <button
+                        className="add-compare-btn"
+                        onClick={addElement}
+                        disabled={list.length >= ELEMENTS.length}
+                    >
+                        <span style={{ fontSize: '1.3rem', lineHeight: 1 }}>+</span>
+                        <span>Lägg till grundämne</span>
+                    </button>
+                </div>
+            );
+        }
+
         // ====== Huvudapp ======
         function App() {
+            const [activeTab, setActiveTab] = useState('single'); // 'single' | 'compare'
             const [selected, setSelected] = useState(ELEMENTS[0]); // Väte som default
             const [mode, setMode] = useState('emission'); // 'emission' | 'absorption'
             const [sortOrder, setSortOrder] = useState('z'); // 'z' | 'alpha'
+
+            // Jämförelsestate lyft till App så det bevaras vid flikbyte
+            const [compareList, setCompareList] = useState(() => [
+                ELEMENTS.find(e => e.sym === 'H'),
+                ELEMENTS.find(e => e.sym === 'He')
+            ]);
+            const [compareMode, setCompareMode] = useState('emission');
 
             const cat = CATEGORIES[selected.cat];
             const visibleLines = selected.lines.filter(l => l.wl >= 380 && l.wl <= 750);
@@ -850,6 +1102,24 @@
 
             return (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+
+                    {/* Flikmeny */}
+                    <div className="tabs" role="tablist" aria-label="Visningsläge">
+                        <button
+                            role="tab"
+                            aria-selected={activeTab === 'single'}
+                            className={`tab-btn ${activeTab === 'single' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('single')}
+                        >Enskilt spektrum</button>
+                        <button
+                            role="tab"
+                            aria-selected={activeTab === 'compare'}
+                            className={`tab-btn ${activeTab === 'compare' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('compare')}
+                        >Jämför spektrallinjer</button>
+                    </div>
+
+                    {activeTab === 'single' && <>
 
                     {/* Spektrumkort */}
                     <div className="glass-card" style={{ padding: '1.5rem' }}>
@@ -963,6 +1233,19 @@
                             ))}
                         </div>
                     </div>
+
+                    </>}
+
+                    {activeTab === 'compare' && (
+                        <CompareSection
+                            sortedList={sortedList}
+                            sortOrder={sortOrder}
+                            list={compareList}
+                            setList={setCompareList}
+                            cMode={compareMode}
+                            setCMode={setCompareMode}
+                        />
+                    )}
 
                     {/* Teorikort */}
                     <div className="glass-card" style={{ padding: '1.5rem' }}>

@@ -94,25 +94,59 @@
         .fs-controls {
             position: absolute;
             left: 50%;
-            bottom: 32px;
+            bottom: 62px;
             transform: translateX(-50%);
             width: min(820px, 92vw);
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 12px;
             padding: 14px 22px;
             border-radius: 14px;
-            background: rgba(10, 15, 30, 0.78);
+            background: rgba(10, 15, 30, 0.82);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(56, 189, 248, 0.28);
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
             z-index: 6;
             font-family: 'Poppins', sans-serif;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.25s ease;
         }
-        .scene-wrap:fullscreen .fs-controls,
-        .scene-wrap:-webkit-full-screen .fs-controls {
-            display: flex;
+        .fs-controls.collapsed {
+            transform: translateX(-50%) translateY(calc(100% + 40px));
+            opacity: 0;
+            pointer-events: none;
+        }
+        .fs-toggle-handle {
+            position: absolute;
+            left: 50%;
+            bottom: 14px;
+            transform: translateX(-50%);
+            padding: 8px 16px;
+            border-radius: 10px;
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: #cbd5e1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 7;
+            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+            white-space: nowrap;
+        }
+        .fs-toggle-handle:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.65);
+            color: #e0f2fe;
+        }
+        .fs-toggle-handle svg {
+            transition: transform 0.3s ease;
         }
         .fs-row {
             display: flex;
@@ -174,8 +208,8 @@
             -webkit-appearance: none;
             appearance: none;
             width: 100%;
-            height: 18px;
-            border-radius: 9px;
+            height: 10px;
+            border-radius: 5px;
             background: linear-gradient(to left,
                 #6b21a8 0%,
                 #6b21a8 4%,
@@ -190,7 +224,7 @@
                 #dc2626 78%,
                 #991b1b 90%,
                 #7f1d1d 100%);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            border: 1px solid rgba(56, 189, 248, 0.2);
             outline: none;
             cursor: pointer;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
@@ -198,26 +232,26 @@
         .wl-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 28px;
-            height: 28px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
-            border: 2.5px solid #0a0a1a;
+            border: 2px solid #0a0a1a;
             cursor: grab;
-            box-shadow: 0 0 16px rgba(255, 255, 255, 0.6),
-                        0 2px 6px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.55),
+                        0 2px 5px rgba(0, 0, 0, 0.5);
             transition: transform 0.1s;
         }
         .wl-slider::-webkit-slider-thumb:hover { transform: scale(1.08); }
         .wl-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.15); }
         .wl-slider::-moz-range-thumb {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
-            border: 2.5px solid #0a0a1a;
+            border: 2px solid #0a0a1a;
             cursor: grab;
-            box-shadow: 0 0 16px rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.55);
         }
 
         /* Intensity slider */
@@ -348,6 +382,39 @@
             border: 1px solid currentColor;
         }
 
+        /* Visningsläge för ljus: våg ↔ fotoner */
+        .mode-toggle {
+            display: inline-flex;
+            gap: 2px;
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 10px;
+            padding: 3px;
+        }
+        .mode-toggle-btn {
+            padding: 8px 14px;
+            border-radius: 7px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            white-space: nowrap;
+        }
+        .mode-toggle-btn:hover:not(.active) { color: #cbd5e1; }
+        .mode-toggle-btn.active {
+            background: rgba(56, 189, 248, 0.18);
+            color: #e0f2fe;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.18);
+        }
+        .mode-toggle-btn svg { opacity: 0.95; }
+
         ::-webkit-scrollbar { width: 7px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
         ::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.25); border-radius: 4px; }
@@ -393,9 +460,12 @@
                 Fotoelektrisk effekt
             </h1>
             <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:#94a3b8;max-width:780px;line-height:1.65;">
-                Skjut ljus mot en metallyta och undersök Einsteins fotonteori. Dra i våglängdsreglaget
+                Skjut ljus mot en metallyta och undersök Einsteins fotoelektriska effekt. Dra i våglängdsreglaget
                 för att ändra fotonens energi — bara när energin överstiger metallens utträdesarbete
                 <span class="italic-var">W</span> frigörs elektroner, och ytterligare energi blir till rörelseenergi.
+                Observera hur de frigjorda elektronernas rörelseenergi ökar med högre frekvens
+                (kortare våglängd), medan antalet elektroner per sekund ökar med intensiteten —
+                utan att deras rörelseenergi påverkas.
             </p>
         </div>
 
@@ -551,16 +621,12 @@ class PhotoelectricScene {
         this.controls.update();
 
         // Ljussättning
-        this.ambient = new THREE.AmbientLight(0xbac6d6, 0.55);
+        this.ambient = new THREE.AmbientLight(0xbac6d6, 0.75);
         this.scene.add(this.ambient);
 
-        this.keyLight = new THREE.DirectionalLight(0xffffff, 0.85);
+        this.keyLight = new THREE.DirectionalLight(0xffffff, 0.95);
         this.keyLight.position.set(5, 9, 6);
         this.scene.add(this.keyLight);
-
-        this.rimLight = new THREE.PointLight(0x38bdf8, 0.7, 20);
-        this.rimLight.position.set(-5, 3, -4);
-        this.scene.add(this.rimLight);
 
         this.hitLight = new THREE.PointLight(0xffffff, 0, 7);
         this.hitLight.position.set(0.3, 0.6, 0);
@@ -613,6 +679,43 @@ class PhotoelectricScene {
         this.waves = this.waveZOffsets.map(z => this.createWaveMesh(z));
         this.waves.forEach(w => this.scene.add(w));
 
+        // Fotoner (partikelvy av ljus)
+        this.visualMode = 'wave';   // 'wave' | 'photons'
+        this.photons = [];
+        this.photonSpawnAccumulator = 0;
+        this.photonPaths = this.waveZOffsets.map(z => ({
+            start: new THREE.Vector3(-5.8, 3.9, z),
+            end:   new THREE.Vector3(0.2, this.plateTop + 0.02, z),
+        }));
+        this.photonGeo = new THREE.SphereGeometry(0.09, 14, 10);
+        this.photonMat = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            toneMapped: false,
+        });
+        this.photonHaloTexture = (() => {
+            const size = 128;
+            const canvas = document.createElement('canvas');
+            canvas.width = size; canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+            g.addColorStop(0.00, 'rgba(255, 255, 255, 1.0)');
+            g.addColorStop(0.25, 'rgba(255, 255, 255, 0.55)');
+            g.addColorStop(1.00, 'rgba(255, 255, 255, 0.0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, size, size);
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.needsUpdate = true;
+            return tex;
+        })();
+        this.photonHaloMat = new THREE.SpriteMaterial({
+            map: this.photonHaloTexture,
+            color: 0xffffff,
+            transparent: true,
+            depthWrite: false,
+            blending: THREE.AdditiveBlending,
+            toneMapped: false,
+        });
+
         // Elektroner (spawnas under körning)
         this.electrons = [];
         this.electronGeo = new THREE.SphereGeometry(0.07, 16, 12);
@@ -648,6 +751,47 @@ class PhotoelectricScene {
             transparent: true,
             depthWrite: false,
             blending: THREE.AdditiveBlending,
+            toneMapped: false,
+        });
+
+        // Badge med blått minustecken – gör det tydligt att objektet är en elektron
+        this.electronBadgeTexture = (() => {
+            const size = 128;
+            const canvas = document.createElement('canvas');
+            canvas.width = size; canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            const cx = size / 2, cy = size / 2;
+            const r = size * 0.42;
+
+            // Ljus bakgrundscirkel för kontrast mot den blå elektronen
+            ctx.fillStyle = 'rgba(240, 249, 255, 0.98)';
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Ring runt cirkeln
+            ctx.strokeStyle = 'rgba(59, 130, 246, 0.9)';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Blått minustecken
+            ctx.fillStyle = '#1d4ed8';
+            const mw = size * 0.5;
+            const mh = size * 0.13;
+            ctx.fillRect(cx - mw / 2, cy - mh / 2, mw, mh);
+
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.needsUpdate = true;
+            return tex;
+        })();
+        this.electronBadgeMat = new THREE.SpriteMaterial({
+            map: this.electronBadgeTexture,
+            color: 0xffffff,
+            transparent: true,
+            depthTest: false,
+            depthWrite: false,
             toneMapped: false,
         });
 
@@ -730,9 +874,64 @@ class PhotoelectricScene {
         this.plateMat.color.set(hex);
     }
 
+    setVisualMode(mode) {
+        if (mode === this.visualMode) return;
+        this.visualMode = mode;
+        this.waves.forEach(w => { w.visible = (mode === 'wave'); });
+        if (mode !== 'photons') {
+            for (const p of this.photons) this.scene.remove(p.mesh);
+            this.photons.length = 0;
+            this.photonSpawnAccumulator = 0;
+        }
+    }
+
     // Hur många elektroner/sek vid full intensitet och Ek>0
     emissionRate() {
         return 22 * (this.intensity / 100);
+    }
+
+    // Antal fotoner som spawnas per sekund i partikelvyn.
+    // Intensitet 0 → inget ljus alls.
+    photonRate() {
+        if (this.intensity <= 0) return 0;
+        return (this.intensity / 100) * 16;
+    }
+
+    spawnPhoton() {
+        const base = this.photonPaths[Math.floor(Math.random() * this.photonPaths.length)];
+
+        // Liten spridning så strömmen inte blir tre linjer; större spridning
+        // på slutpunkten så fotonerna träffar olika platser på plattan.
+        const start = base.start.clone();
+        start.x += (Math.random() - 0.5) * 0.3;
+        start.y += (Math.random() - 0.5) * 0.2;
+        start.z += (Math.random() - 0.5) * 0.35;
+
+        const end = base.end.clone();
+        end.x += (Math.random() - 0.5) * 1.6;
+        end.z += (Math.random() - 0.5) * 0.9;
+
+        const group = new THREE.Group();
+
+        const mesh = new THREE.Mesh(this.photonGeo, this.photonMat);
+        group.add(mesh);
+
+        const halo = new THREE.Sprite(this.photonHaloMat);
+        halo.scale.set(0.55, 0.55, 1);
+        group.add(halo);
+
+        group.position.copy(start);
+        const dir = new THREE.Vector3().subVectors(end, start).normalize();
+        // Fotonfarten är fast och alltid högre än den snabbast möjliga elektronen.
+        // Max elektronfart i scenen är 2,2 + sqrt(Ek_max) · 3,4 ≈ 9,2 (Cs vid 200 nm).
+        // 12 ger tydlig marginal utan att fotonen blir en osynlig streck.
+        const speed = 12;
+
+        this.scene.add(group);
+        this.photons.push({
+            mesh: group,
+            velocity: dir.multiplyScalar(speed),
+        });
     }
 
     // Visuell hastighet för elektronen (scenenheter per sekund) – skalning från Ek
@@ -741,7 +940,7 @@ class PhotoelectricScene {
         return 2.2 + Math.sqrt(Math.max(0, this.Ek)) * 3.4;
     }
 
-    spawnElectron() {
+    spawnElectron(atX, atZ) {
         const group = new THREE.Group();
         const mesh = new THREE.Mesh(this.electronGeo, this.electronMat);
         group.add(mesh);
@@ -750,9 +949,16 @@ class PhotoelectricScene {
         halo.scale.set(0.55, 0.55, 1);
         group.add(halo);
 
-        // Spawna från slumpad plats på plattans översida
-        const x = -1.2 + Math.random() * 2.6;
-        const z = -1.4 + Math.random() * 2.8;
+        // Badge med minustecken – alltid vänd mot kameran, ritad ovanpå sfären
+        const badge = new THREE.Sprite(this.electronBadgeMat);
+        badge.scale.set(0.22, 0.22, 1);
+        badge.renderOrder = 2;
+        group.add(badge);
+
+        // Vid fotonträff: spawna vid den exakta träffpunkten.
+        // Annars (vågläge): slumpad plats på plattans översida.
+        const x = (atX !== undefined) ? atX : (-1.2 + Math.random() * 2.6);
+        const z = (atZ !== undefined) ? atZ : (-1.4 + Math.random() * 2.8);
         group.position.set(x, this.plateTop + 0.06, z);
 
         // Fast riktning: alla elektroner flyger parallellt uppåt–höger
@@ -788,36 +994,86 @@ class PhotoelectricScene {
         // Uppdatera våg-utseende
         const rgb = wavelengthToRgb(this.wavelength);
         const col = new THREE.Color(rgb[0], rgb[1], rgb[2]);
-        const amp = 0.14 + (this.intensity / 100) * 0.22;  // amplitud växer med intensitet
+        // Amplituden skalar linjärt med intensiteten — vid 1 % blir vågen
+        // nästan helt platt, vid 100 % full amplitud.
+        const amp = (this.intensity / 100) * 0.36;
         const opacity = 0.55 + (this.intensity / 100) * 0.35;
 
         // Fasen flyter – ljusvågens rörelse
         this.phase += dt * 8;
 
-        this.waves.forEach(group => {
-            const mat = group.userData.mat;
-            mat.color.copy(col);
-            mat.opacity = opacity;
+        // Vid intensitet 0 ska inget ljus alls visas.
+        const lightOn = this.intensity > 0;
 
-            const tube = group.userData.tube;
-            // Bygg om geometri med aktuell våglängd/amplitud/fas
-            const geo = this.buildWaveGeometry(
-                group.userData.length,
-                sceneWavelength,
-                amp,
-                this.phase + group.userData.phaseOffset
-            );
-            tube.geometry.dispose();
-            tube.geometry = geo;
-        });
+        if (this.visualMode === 'wave') {
+            this.waves.forEach(group => {
+                group.visible = lightOn;
+                if (!lightOn) return;
+
+                const mat = group.userData.mat;
+                mat.color.copy(col);
+                mat.opacity = opacity;
+
+                const tube = group.userData.tube;
+                // Bygg om geometri med aktuell våglängd/amplitud/fas
+                const geo = this.buildWaveGeometry(
+                    group.userData.length,
+                    sceneWavelength,
+                    amp,
+                    this.phase + group.userData.phaseOffset
+                );
+                tube.geometry.dispose();
+                tube.geometry = geo;
+            });
+        }
+
+        // Fotoner: matcha färg mot våglängd och spawn/uppdatera i partikelvyn
+        this.photonMat.color.copy(col);
+        this.photonHaloMat.color.copy(col);
+
+        if (this.visualMode === 'photons') {
+            this.photonSpawnAccumulator += dt * this.photonRate();
+            while (this.photonSpawnAccumulator >= 1) {
+                this.spawnPhoton();
+                this.photonSpawnAccumulator -= 1;
+            }
+
+            for (let i = this.photons.length - 1; i >= 0; i--) {
+                const p = this.photons[i];
+                p.mesh.position.addScaledVector(p.velocity, dt);
+                if (p.mesh.position.y <= this.plateTop + 0.05) {
+                    // Alla fotoner absorberas vid ytan — ge dem en blink av
+                    // träffljuset oavsett om elektronen frigörs eller inte.
+                    this.hitLight.position.set(p.mesh.position.x, this.plateTop + 0.3, p.mesh.position.z);
+                    this.hitLight.intensity = Math.min(1.4, this.hitLight.intensity + 0.55);
+
+                    // Om fotonenergin räcker (h·f ≥ W) frigörs dessutom en elektron
+                    // exakt vid träffpunkten.
+                    if (this.emitted) {
+                        this.spawnElectron(p.mesh.position.x, p.mesh.position.z);
+                    }
+                    this.scene.remove(p.mesh);
+                    this.photons.splice(i, 1);
+                }
+            }
+        }
 
         // Emit-glöd (punktljus) ovanför plattan
-        const targetLight = this.emitted ? 0.8 : 0.0;
-        this.hitLight.intensity += (targetLight - this.hitLight.intensity) * Math.min(1, dt * 6);
+        // Vågläge: stadig glöd när elektroner frigörs.
+        // Fotonläge: glöden decayar mot 0 och puffas upp vid varje fotonträff.
+        if (this.visualMode === 'wave') {
+            const targetLight = this.emitted ? 0.8 : 0.0;
+            this.hitLight.intensity += (targetLight - this.hitLight.intensity) * Math.min(1, dt * 6);
+        } else {
+            this.hitLight.intensity *= Math.max(0, 1 - dt * 4);
+        }
         this.hitLight.color.copy(col).lerp(new THREE.Color(0xfde68a), 0.5);
 
         // Spawnera elektroner
-        if (this.emitted) {
+        // Vågläge: kontinuerlig emission proportionell mot intensiteten.
+        // Fotonläge: ingen kontinuerlig emission – elektronen frigörs exakt
+        // när en foton träffar plattan (hanteras i fotonslingan nedan).
+        if (this.visualMode === 'wave' && this.emitted) {
             this.emissionAccumulator += dt * this.emissionRate();
             while (this.emissionAccumulator >= 1) {
                 this.spawnElectron();
@@ -854,11 +1110,19 @@ class PhotoelectricScene {
             if (w.userData.tube) w.userData.tube.geometry.dispose();
             if (w.userData.mat) w.userData.mat.dispose();
         });
+        this.photons.forEach(p => this.scene.remove(p.mesh));
+        this.photons.length = 0;
+        this.photonGeo.dispose();
+        this.photonMat.dispose();
+        this.photonHaloMat.dispose();
+        this.photonHaloTexture.dispose();
         this.plateMat.dispose();
         this.electronGeo.dispose();
         this.electronMat.dispose();
         this.haloMat.dispose();
         this.haloTexture.dispose();
+        this.electronBadgeMat.dispose();
+        this.electronBadgeTexture.dispose();
         this.renderer.dispose();
         if (this.container.contains(this.renderer.domElement)) {
             this.container.removeChild(this.renderer.domElement);
@@ -869,7 +1133,7 @@ class PhotoelectricScene {
 // ══════════════════════════════════════════════════════════════════════════
 // React-komponenter
 // ══════════════════════════════════════════════════════════════════════════
-function SceneView({ wavelength, intensity, Ek, emitted, metalHex }) {
+function SceneView({ wavelength, intensity, Ek, emitted, metalHex, lightMode }) {
     const containerRef = useRef(null);
     const sceneRef = useRef(null);
 
@@ -901,9 +1165,42 @@ function SceneView({ wavelength, intensity, Ek, emitted, metalHex }) {
         sceneRef.current.setEk(Ek);
         sceneRef.current.setEmitted(emitted);
         sceneRef.current.setMetalColor(metalHex);
-    }, [wavelength, intensity, Ek, emitted, metalHex]);
+        sceneRef.current.setVisualMode(lightMode);
+    }, [wavelength, intensity, Ek, emitted, metalHex, lightMode]);
 
     return <div ref={containerRef} className="scene-canvas"></div>;
+}
+
+function LightModeToggle({ mode, onChange }) {
+    return (
+        <div className="mode-toggle" role="tablist" aria-label="Visningsläge för ljus">
+            <button
+                role="tab"
+                aria-selected={mode === 'wave'}
+                className={`mode-toggle-btn ${mode === 'wave' ? 'active' : ''}`}
+                onClick={() => onChange('wave')}
+                title="Visa ljuset som en kontinuerlig våg">
+                <svg width="16" height="14" viewBox="0 0 24 20" fill="none" stroke="currentColor"
+                     strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2 10 C 5 2, 8 18, 11 10 S 17 2, 20 10 S 23 16, 24 12"/>
+                </svg>
+                <span>Våg</span>
+            </button>
+            <button
+                role="tab"
+                aria-selected={mode === 'photons'}
+                className={`mode-toggle-btn ${mode === 'photons' ? 'active' : ''}`}
+                onClick={() => onChange('photons')}
+                title="Visa ljuset som partiklar (fotoner)">
+                <svg width="16" height="14" viewBox="0 0 24 20" fill="currentColor">
+                    <circle cx="4" cy="10" r="2"/>
+                    <circle cx="12" cy="10" r="2.6"/>
+                    <circle cx="20" cy="10" r="2"/>
+                </svg>
+                <span>Fotoner</span>
+            </button>
+        </div>
+    );
 }
 
 function MetalSelector({ metalId, onChange }) {
@@ -925,9 +1222,11 @@ function MetalSelector({ metalId, onChange }) {
 
 function App() {
     const [wavelength, setWavelength] = useState(420);
-    const [intensity, setIntensity]   = useState(65);
+    const [intensity, setIntensity]   = useState(10);
     const [metalId, setMetalId]       = useState('na');
+    const [lightMode, setLightMode]   = useState('wave'); // 'wave' | 'photons'
     const [isFullscreen, setIsFullscreen] = useState(false);
+    const [controlsOpen, setControlsOpen] = useState(true);
     const sceneWrapRef = useRef(null);
 
     useEffect(() => {
@@ -977,8 +1276,9 @@ function App() {
                     Ek={Ek}
                     emitted={emitted}
                     metalHex={metal.hex}
+                    lightMode={lightMode}
                 />
-                <div className="fs-controls">
+                <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
                     <div className="fs-row">
                         <span className="fs-label">Våglängd <em className="italic-var">λ</em></span>
                         <input
@@ -1008,6 +1308,19 @@ function App() {
                         <span className="fs-value">{fmt(intensity, 0)} %</span>
                     </div>
                 </div>
+                <button
+                    className="fs-toggle-handle"
+                    onClick={() => setControlsOpen(o => !o)}
+                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                    aria-label={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                    aria-expanded={controlsOpen}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                         style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                    <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                </button>
                 <button className="fs-btn" onClick={toggleFullscreen}
                         title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
                     {isFullscreen ? (
@@ -1051,6 +1364,25 @@ function App() {
             <div className="glass-card" style={{ padding:20 }}>
                 <div style={{ display:'grid', gridTemplateColumns:'1fr', gap:20 }}>
 
+                    {/* Visningsläge för ljus */}
+                    <div style={{ display:'flex', flexWrap:'wrap', alignItems:'center',
+                                  justifyContent:'space-between', gap:12 }}>
+                        <div>
+                            <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
+                                          color:'#94a3b8', letterSpacing:'0.05em', textTransform:'uppercase',
+                                          marginBottom:4 }}>
+                                Visa ljus som
+                            </div>
+                            <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
+                                          color:'#64748b', lineHeight:1.45 }}>
+                                {lightMode === 'wave'
+                                    ? 'Klassisk vågbild — ljusets intensitet syns som amplitud.'
+                                    : 'Partikelbild — ljuset är en ström av fotoner. Intensiteten styr antalet.'}
+                            </div>
+                        </div>
+                        <LightModeToggle mode={lightMode} onChange={setLightMode} />
+                    </div>
+
                     {/* Metallval */}
                     <div>
                         <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
@@ -1059,63 +1391,10 @@ function App() {
                             Metall
                         </div>
                         <MetalSelector metalId={metalId} onChange={setMetalId} />
-                    </div>
-
-                    {/* Våglängd */}
-                    <div>
-                        <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:8 }}>
-                            <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
-                                           color:'#94a3b8', letterSpacing:'0.05em', textTransform:'uppercase' }}>
-                                Våglängd <em className="italic-var" style={{color:'#cbd5e1'}}>λ</em>
-                            </span>
-                            <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.95rem',
-                                           color:'#e2e8f0', fontWeight:600 }}>
-                                {fmt(wavelength, 0)} nm
-                            </span>
-                        </div>
-                        <input
-                            type="range"
-                            className="wl-slider"
-                            min={WL_MIN}
-                            max={WL_MAX}
-                            step={1}
-                            value={WL_MIN + WL_MAX - wavelength}
-                            onChange={e => setWavelength(WL_MIN + WL_MAX - parseFloat(e.target.value))}
-                        />
-                        <div style={{ display:'flex', justifyContent:'space-between',
-                                      fontFamily:'Poppins,sans-serif', fontSize:'0.72rem',
-                                      color:'#64748b', marginTop:4 }}>
-                            <span>{WL_MAX} nm (rött)</span>
-                            <span>550</span>
-                            <span>380</span>
-                            <span>{WL_MIN} nm (UV) — mer energi</span>
-                        </div>
-                    </div>
-
-                    {/* Intensitet */}
-                    <div>
-                        <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:8 }}>
-                            <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
-                                           color:'#94a3b8', letterSpacing:'0.05em', textTransform:'uppercase' }}>
-                                Intensitet
-                            </span>
-                            <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.95rem',
-                                           color:'#e2e8f0', fontWeight:600 }}>
-                                {fmt(intensity, 0)} %
-                            </span>
-                        </div>
-                        <input
-                            type="range"
-                            className="int-slider"
-                            min={0}
-                            max={100}
-                            step={1}
-                            value={intensity}
-                            onChange={e => setIntensity(parseFloat(e.target.value))}
-                        />
                         <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.75rem',
-                                      color:'#64748b', marginTop:6, lineHeight:1.5 }}>
-                            Intensiteten påverkar <em>antalet</em> elektroner som frigörs per sekund — inte deras rörelseenergi.
+                                      color:'#64748b', marginTop:10, lineHeight:1.5 }}>
+                            Justera <em className="italic-var">λ</em> och intensitet direkt i reglaget längst ned i scenen.
+                            Intensiteten styr <em>antalet</em> frigjorda elektroner per sekund — inte deras rörelseenergi.
                         </div>
                     </div>
                 </div>

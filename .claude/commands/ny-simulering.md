@@ -104,15 +104,28 @@ Mall att utgå från:
 2. **Lägg till kort i kursöversikten**:
    Uppdatera `fysik1.html` eller `fysik2.html`
 
-3. **Verifiera**:
+3. **Lägg till i sökkatalogen** (`index.html` → `SIMULATIONS`-arrayen):
+   Lägg till ett nytt objekt med `title`, `description`, `href`, `icon`,
+   `course` och **lämpliga `keywords`** (huvudområde + specifika begrepp
+   + synonymer). Se CLAUDE.md för riktlinjer.
+   ```javascript
+   { title: "…", description: "…", href: "fysik[X]-[ämne].html",
+     icon: "…", course: "Fysik [X]",
+     keywords: ["huvudområde", "begrepp1", "begrepp2", "synonym"] }
+   ```
+
+4. **Uppdatera "Senaste uppdateringar"** i `index.html` (max 4–5 poster, ta bort äldsta).
+
+5. **Verifiera**:
    ```bash
    node .claude/verify-navigation.js
    ```
 
-4. **Testa i webbläsare**:
+6. **Testa i webbläsare**:
    ```bash
    start [filnamn].html
    ```
+   Testa även att sökrutan på startsidan hittar simuleringen via ett nyckelord.
 
 ## Steg 5: Kvalitetskontroll
 

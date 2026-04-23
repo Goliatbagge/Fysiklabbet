@@ -78,6 +78,80 @@ body {
     background-clip: text;
 }
 
+/* Dropdown-menyer i navbaren */
+.nav-menu {
+    position: relative;
+}
+
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown > .nav-link::after {
+    content: '▾';
+    font-size: 0.75em;
+    margin-left: 0.35rem;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+
+.nav-dropdown:hover > .nav-link::after,
+.nav-dropdown:focus-within > .nav-link::after {
+    transform: translateY(2px);
+    opacity: 1;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    min-width: 240px;
+    background: rgba(12, 18, 32, 0.97);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--container-border);
+    border-radius: 12px;
+    padding: 0.5rem 0;
+    list-style: none;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 1001;
+}
+
+.nav-dropdown:hover > .dropdown-menu,
+.nav-dropdown:focus-within > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-link {
+    display: block;
+    padding: 0.6rem 1.25rem;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    border-left: 3px solid transparent;
+    white-space: nowrap;
+}
+
+.dropdown-link:hover,
+.dropdown-link:focus {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+    outline: none;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
@@ -787,6 +861,35 @@ body {
 
     .search-result-title {
         font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        background: transparent;
+        backdrop-filter: none;
+        border: none;
+        box-shadow: none;
+        padding: 0.25rem 0 0.5rem 1.25rem;
+        min-width: auto;
+    }
+
+    .nav-dropdown:hover > .dropdown-menu,
+    .nav-dropdown:focus-within > .dropdown-menu {
+        transform: none;
+    }
+
+    .dropdown-link {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .nav-dropdown > .nav-link::after {
+        display: none;
     }
 }
 

@@ -39,40 +39,26 @@
         </div>
     </header>
 
+    <section class="search-section" aria-label="Sök simulering">
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input
+                    type="text"
+                    id="sim-search"
+                    class="search-input"
+                    placeholder="Sök simulering — t.ex. kärnfysik, pendel, magnetfält, ljus…"
+                    autocomplete="off"
+                    aria-label="Sök simulering"
+                    aria-controls="search-results"
+                    aria-expanded="false">
+                <button class="search-clear" id="search-clear" aria-label="Rensa sökning" type="button">✕</button>
+            </div>
+            <div class="search-results" id="search-results" role="listbox"></div>
+        </div>
+    </section>
+
     <main class="container">
-        <section class="intro-section">
-            <h2 class="section-title">Vad är Fysiklabbet?</h2>
-            <p class="intro-text">
-                Fysiklabbet är en samling interaktiva simuleringar som hjälper dig att förstå
-                fysikaliska fenomen på ett visuellt och engagerande sätt. Perfekt för
-                gymnasieelever som studerar Fysik 1 och Fysik 2.
-            </p>
-        </section>
-
-        <section class="courses-section">
-            <div class="course-card" onclick="location.href='fysik1.html'">
-                <div class="card-icon">📚</div>
-                <h3 class="card-title">Fysik 1</h3>
-                <p class="card-description">
-                    Grundläggande fysik: Rörelse, kraft, energi, tryck och vågor.
-                </p>
-                <div class="card-footer">
-                    <span class="card-link">Utforska simuleringar →</span>
-                </div>
-            </div>
-
-            <div class="course-card" onclick="location.href='fysik2.html'">
-                <div class="card-icon">🔬</div>
-                <h3 class="card-title">Fysik 2</h3>
-                <p class="card-description">
-                    Fördjupning: Elektricitet, magnetism, våglära och modern fysik.
-                </p>
-                <div class="card-footer">
-                    <span class="card-link">Utforska simuleringar →</span>
-                </div>
-            </div>
-        </section>
-
         <section class="updates-section">
             <h2 class="section-title">Senaste uppdateringar</h2>
             <ul class="updates-list">
@@ -99,5 +85,182 @@
     <footer class="footer">
         <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
     </footer>
+
+    <script>
+        // Katalog över simuleringar. Nyckelord är osynliga för användaren
+        // men används för sökning. Varje ny simulering MÅSTE läggas till här
+        // med lämpliga nyckelord — se CLAUDE.md.
+        const SIMULATIONS = [
+            // ---------- Fysik 1 ----------
+            { title: "Tyngdfaktorn på jorden", description: "Se hur tyngdaccelerationen varierar på olika platser på 3D-jordklotet.", href: "fysik1-tyngdfaktor-jorden.html", icon: "🌍", course: "Fysik 1", keywords: ["rörelse", "gravitation", "tyngdkraft", "tyngdfaktor", "g-värde", "jorden", "planet", "3d", "mekanik"] },
+            { title: "Rörelsediagram", description: "Sträcka-, hastighet- och accelerationsgrafer i realtid.", href: "fysik1-rorelsediagram.html", icon: "📉", course: "Fysik 1", keywords: ["rörelse", "kinematik", "hastighet", "acceleration", "sträcka", "graf", "diagram", "fritt fall", "kast"] },
+            { title: "Newtons tredje lag", description: "Aktion och reaktion i rymden — navigera med brandsläckare.", href: "fysik1-newtons-tredje-app.html", icon: "🚀", course: "Fysik 1", keywords: ["krafter", "newton", "tredje lagen", "aktion", "reaktion", "rymd", "raket", "impuls", "mekanik"] },
+            { title: "Densitet och flytförmåga", description: "Utforska hur massa och volym påverkar densitet och om föremål flyter.", href: "fysik1-densitet-app.html", icon: "🔬", course: "Fysik 1", keywords: ["densitet", "massa", "volym", "flytförmåga", "flytkraft", "atomer", "material", "vatten"] },
+            { title: "Ideala gaslagen", description: "Sambandet mellan tryck, volym och temperatur i en gas.", href: "fysik1-tryck.html", icon: "💨", course: "Fysik 1", keywords: ["tryck", "gas", "ideala gaslagen", "volym", "temperatur", "termodynamik", "molekyler"] },
+            { title: "Tryck: p = F/A", description: "Sambandet mellan tryck, kraft och area — håller isen?", href: "fysik1-tryck-pa-app.html", icon: "🧊", course: "Fysik 1", keywords: ["tryck", "kraft", "area", "is", "mekanik"] },
+            { title: "Arkimedes princip", description: "Lyftkraft och undanträngt vatten med dynamometer.", href: "fysik1-arkimedes.html", icon: "⚖️", course: "Fysik 1", keywords: ["arkimedes", "lyftkraft", "flytkraft", "densitet", "vätska", "vatten", "dynamometer"] },
+            { title: "Magdeburgska halvkloten", description: "Otto von Guerickes vakuumexperiment från 1654.", href: "fysik1-magdeburgska-halvklot.html", icon: "🐴", course: "Fysik 1", keywords: ["tryck", "vakuum", "atmosfärstryck", "historia", "guericke"] },
+            { title: "Värmeflöde", description: "Värmestrålning mellan människa och omgivning.", href: "fysik1-varme-app.html", icon: "🔥", course: "Fysik 1", keywords: ["värme", "värmelära", "termodynamik", "temperatur", "strålning", "energi"] },
+            { title: "Elektriska kretsar", description: "Hur elektroner rör sig i likströms- och växelströmskretsar.", href: "fysik1-ellara-app.html", icon: "⚡", course: "Fysik 1", keywords: ["ellära", "elektricitet", "ström", "spänning", "resistans", "ohm", "elektroner", "likström", "växelström", "krets"] },
+            { title: "Elektrisk influens", description: "Hur en neutral aluminiumburk attraheras av en laddad stav.", href: "fysik1-influens.html", icon: "🧲", course: "Fysik 1", keywords: ["ellära", "elektricitet", "influens", "elektrostatik", "laddning", "neutral", "statisk elektricitet"] },
+            { title: "Coulombs lag", description: "Elektrisk kraft mellan två laddningar — flytta och se kraften ändras.", href: "fysik1-coulombs-lag.html", icon: "⚡", course: "Fysik 1", keywords: ["ellära", "elektricitet", "coulomb", "elektrostatik", "laddning", "kraft", "avstånd"] },
+            { title: "Kirchhoffs första lag", description: "Hur strömmar fördelas i en förgreningspunkt.", href: "fysik1-kirchhoffs-lag.html", icon: "🔀", course: "Fysik 1", keywords: ["ellära", "elektricitet", "kirchhoff", "ström", "krets", "förgrening", "knutpunkt"] },
+            { title: "Serie- och parallellkoppling", description: "Jämför kopplingar — krossa lampor och se vad som händer.", href: "fysik1-serie-parallell.html", icon: "💡", course: "Fysik 1", keywords: ["ellära", "elektricitet", "serie", "parallell", "koppling", "krets", "resistans", "lampor"] },
+            { title: "Elektriska fält", description: "Visualisera fältlinjer från laddningar och plattor.", href: "fysik1-elektriska-falt.html", icon: "📐", course: "Fysik 1", keywords: ["ellära", "elektricitet", "elektriska fält", "fältlinjer", "laddning", "elektrostatik", "plattkondensator"] },
+            { title: "Faradays bur", description: "Hur ett metallhölje skärmar av elektriska fält.", href: "fysik1-faradays-bur.html", icon: "🛡️", course: "Fysik 1", keywords: ["ellära", "elektricitet", "faraday", "avskärmning", "elektrostatik", "ledare", "bur"] },
+            { title: "Enhetskollen", description: "Quiz om SI-enheter och beteckningar i elläran.", href: "fysik1-enhetskollen.html", icon: "📝", course: "Fysik 1", keywords: ["ellära", "elektricitet", "si-enheter", "enheter", "beteckningar", "quiz", "test"] },
+            { title: "Massdefekt och bindningsenergi", description: "Massa omvandlas till energi när kärnor slås ihop — E = Δm·c².", href: "fysik1-massdefekt.html", icon: "⚖️", course: "Fysik 1", keywords: ["kärnfysik", "atomfysik", "massdefekt", "bindningsenergi", "einstein", "fusion", "fission", "e=mc2"] },
+            { title: "Sönderfall", description: "Alfa-, beta- och gammasönderfall av atomkärnor.", href: "fysik1-sonderfall.html", icon: "☢️", course: "Fysik 1", keywords: ["kärnfysik", "atomfysik", "sönderfall", "alfa", "beta", "gamma", "strålning", "radioaktivitet", "atomkärna"] },
+            { title: "Halveringstid", description: "Exponentiellt sönderfall genom fem halveringstider.", href: "fysik1-halveringstid.html", icon: "⏳", course: "Fysik 1", keywords: ["kärnfysik", "atomfysik", "halveringstid", "radioaktivitet", "exponentiell", "sönderfall", "kurva"] },
+            { title: "Strålnings genomtränglighet", description: "Alfa, beta och gamma genom textil, aluminium och bly.", href: "fysik1-stralning-genomtranglighet.html", icon: "🛡️", course: "Fysik 1", keywords: ["kärnfysik", "atomfysik", "strålning", "alfa", "beta", "gamma", "skärmning", "gm-räknare", "radioaktivitet"] },
+
+            // ---------- Fysik 2 ----------
+            { title: "Snett kast", description: "Projektilrörelse och kastparabeln.", href: "fysik2-rorelse-app.html", icon: "🎯", course: "Fysik 2", keywords: ["rörelse", "kast", "projektil", "parabel", "snett kast", "kinematik", "gravitation"] },
+            { title: "Brytningslagen", description: "Snells lag — ljus som bryts vid gränsytan mellan medier.", href: "fysik2-brytning-app.html", icon: "💎", course: "Fysik 2", keywords: ["vågor", "optik", "ljus", "brytning", "snells lag", "refraktion", "totalreflektion", "brytningsindex"] },
+            { title: "Stående våg i sträng", description: "Resonans och övertoner — justera frekvens och spännkraft.", href: "fysik2-staende-vag-app.html", icon: "🎸", course: "Fysik 2", keywords: ["vågor", "stående våg", "resonans", "övertoner", "sträng", "frekvens", "musik", "harmonisk"] },
+            { title: "Plan pendel", description: "Hur pendelns period beror på längd och tyngdfaktor.", href: "fysik2-pendel-app.html", icon: "⏱️", course: "Fysik 2", keywords: ["vågor", "pendel", "matematisk pendel", "period", "svängning", "gravitation", "tyngdfaktor", "harmonisk rörelse"] },
+            { title: "Vågsimulator", description: "Mekaniska vågor i 2D och 3D — interferens, doppler, nodlinjer.", href: "fysik2-vagsimulator.html", icon: "🌊", course: "Fysik 2", keywords: ["vågor", "mekaniska vågor", "interferens", "doppler", "dopplereffekt", "refraktion", "nodlinjer", "2d", "3d"] },
+            { title: "Jämförelse av svängningar", description: "Harmonisk svängning, plan pendel och konisk pendel sida vid sida.", href: "fysik2-svangningar-jamforelse.html", icon: "〰️", course: "Fysik 2", keywords: ["vågor", "svängning", "harmonisk", "pendel", "konisk pendel", "jämförelse", "period"] },
+            { title: "Elektromagnetisk strålning", description: "Spektrumet från radiovågor till gammastrålning.", href: "fysik2-em-stralning.html", icon: "📡", course: "Fysik 2", keywords: ["vågor", "modern fysik", "elektromagnetisk strålning", "em-spektrum", "våglängd", "frekvens", "energi", "radio", "ljus", "gamma", "röntgen", "foton"] },
+            { title: "Wiens förskjutningslag", description: "Hur strålningstoppen förskjuts när temperaturen ökar.", href: "fysik2-wiens-lag.html", icon: "🌡️", course: "Fysik 2", keywords: ["vågor", "modern fysik", "wien", "förskjutningslag", "strålning", "temperatur", "svartkropp", "spektrum", "termisk strålning"] },
+            { title: "Solens färg", description: "Rayleighspridning — varför solen skiftar färg över dagen.", href: "fysik2-solens-farg.html", icon: "🌅", course: "Fysik 2", keywords: ["vågor", "optik", "sol", "rayleigh", "spridning", "atmosfär", "färg", "ljus", "himmel", "solnedgång"] },
+            { title: "Dubbelspaltexperimentet", description: "Elektroner genom dubbelspalt — våg-partikeldualitet.", href: "fysik2-dubbelspalt.html", icon: "🔬", course: "Fysik 2", keywords: ["modern fysik", "kvantfysik", "dubbelspalt", "elektroner", "interferens", "våg-partikel", "våg-partikeldualitet", "observation"] },
+            { title: "Fotoelektrisk effekt", description: "Ljusvågor mot en metallyta — Einsteins fotonteori.", href: "fysik2-fotoelektrisk-effekt.html", icon: "💡", course: "Fysik 2", keywords: ["modern fysik", "kvantfysik", "fotoelektrisk effekt", "einstein", "foton", "metall", "utträdesarbete", "våglängd", "intensitet"] },
+            { title: "Spektrallinjer", description: "Grundämnenas fingeravtryck — emissions- och absorptionsspektrum.", href: "fysik2-spektrallinjer.html", icon: "🌈", course: "Fysik 2", keywords: ["modern fysik", "atomfysik", "spektrallinjer", "grundämnen", "emission", "absorption", "spektrum", "periodiska systemet", "bohr"] },
+            { title: "Månens faser", description: "Månens position i banan ger de olika månfaserna.", href: "fysik2-manens-faser.html", icon: "🌙", course: "Fysik 2", keywords: ["astronomi", "måne", "faser", "omloppsbana", "jorden", "sol", "3d"] },
+            { title: "Magnetfält kring rak ledare", description: "Högerhandsregeln och Oersteds experiment i 3D.", href: "fysik2-magnetfalt-app.html", icon: "🧲", course: "Fysik 2", keywords: ["elektromagnetism", "magnetism", "magnetfält", "ledare", "högerhandsregeln", "oersted", "ström", "3d"] },
+            { title: "Jordmagnetiska fältet", description: "Jordens magnetfält i 3D — varför kompassen pekar norrut.", href: "fysik2-jordmagnetiska-faltet.html", icon: "🌍", course: "Fysik 2", keywords: ["elektromagnetism", "magnetism", "magnetfält", "jorden", "kompass", "fältlinjer", "3d", "geomagnetism"] },
+            { title: "Magnetiskt flöde", description: "Sambandet mellan magnetisk flödestäthet och flöde genom en yta.", href: "fysik2-magnetiskt-flode.html", icon: "🧲", course: "Fysik 2", keywords: ["elektromagnetism", "magnetism", "magnetiskt flöde", "flödestäthet", "magnetfält", "yta", "faraday"] }
+        ];
+
+        (function initSearch() {
+            const input = document.getElementById('sim-search');
+            const results = document.getElementById('search-results');
+            const clearBtn = document.getElementById('search-clear');
+
+            // Normalisera svenska tecken så att "karnfysik" matchar "kärnfysik"
+            const normalize = (text) => text.toLowerCase()
+                .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
+                .replace(/é/g, 'e').replace(/è/g, 'e');
+
+            // Förberäkna haystack per simulering för snabb filtrering
+            const haystacks = SIMULATIONS.map(sim =>
+                normalize([sim.title, sim.description, sim.course, ...sim.keywords].join(' '))
+            );
+
+            let activeIndex = -1;
+            let currentMatches = [];
+
+            function filter(query) {
+                const q = normalize(query.trim());
+                if (!q) return [];
+                // Stöd för flera söktermer separerade med mellanslag (AND-match)
+                const terms = q.split(/\s+/);
+                return SIMULATIONS.filter((_, i) => terms.every(t => haystacks[i].includes(t)));
+            }
+
+            function render(matches, query) {
+                results.innerHTML = '';
+                if (!query.trim()) {
+                    results.classList.remove('visible');
+                    input.setAttribute('aria-expanded', 'false');
+                    return;
+                }
+                if (matches.length === 0) {
+                    const empty = document.createElement('div');
+                    empty.className = 'search-no-results';
+                    empty.textContent = 'Inga simuleringar matchar "' + query + '"';
+                    results.appendChild(empty);
+                } else {
+                    matches.forEach((sim, idx) => {
+                        const a = document.createElement('a');
+                        a.className = 'search-result';
+                        a.href = sim.href;
+                        a.setAttribute('role', 'option');
+                        a.dataset.index = idx;
+                        a.innerHTML =
+                            '<span class="search-result-icon">' + sim.icon + '</span>' +
+                            '<div class="search-result-body">' +
+                                '<div class="search-result-title">' +
+                                    escapeHtml(sim.title) +
+                                    '<span class="search-result-meta">' + sim.course + '</span>' +
+                                '</div>' +
+                                '<div class="search-result-description">' + escapeHtml(sim.description) + '</div>' +
+                            '</div>';
+                        a.addEventListener('mouseenter', () => setActive(idx));
+                        results.appendChild(a);
+                    });
+                }
+                results.classList.add('visible');
+                input.setAttribute('aria-expanded', 'true');
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function setActive(idx) {
+                activeIndex = idx;
+                Array.from(results.querySelectorAll('.search-result')).forEach((el, i) => {
+                    el.classList.toggle('active', i === idx);
+                    if (i === idx) el.scrollIntoView({ block: 'nearest' });
+                });
+            }
+
+            function update() {
+                const q = input.value;
+                currentMatches = filter(q);
+                activeIndex = currentMatches.length > 0 ? 0 : -1;
+                render(currentMatches, q);
+                setActive(activeIndex);
+                clearBtn.classList.toggle('visible', q.length > 0);
+            }
+
+            input.addEventListener('input', update);
+
+            input.addEventListener('keydown', (e) => {
+                if (!results.classList.contains('visible')) return;
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (currentMatches.length === 0) return;
+                    setActive((activeIndex + 1) % currentMatches.length);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (currentMatches.length === 0) return;
+                    setActive((activeIndex - 1 + currentMatches.length) % currentMatches.length);
+                } else if (e.key === 'Enter') {
+                    if (activeIndex >= 0 && currentMatches[activeIndex]) {
+                        e.preventDefault();
+                        window.location.href = currentMatches[activeIndex].href;
+                    }
+                } else if (e.key === 'Escape') {
+                    input.value = '';
+                    update();
+                    input.blur();
+                }
+            });
+
+            clearBtn.addEventListener('click', () => {
+                input.value = '';
+                update();
+                input.focus();
+            });
+
+            // Stäng dropdown vid klick utanför
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    results.classList.remove('visible');
+                    input.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // Öppna igen vid fokus om det finns text
+            input.addEventListener('focus', () => {
+                if (input.value.trim()) update();
+            });
+        })();
+    </script>
 </body>
 </html>

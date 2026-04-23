@@ -137,6 +137,34 @@ const xAxisLabelY = (minY < 0 && maxY > 0)
 - Pendlar: matematisk, konisk
 - Jordmagnetiska fältet
 
+## Sökruta och nyckelord
+
+Startsidan (`index.html`) har en sökruta som filtrerar simuleringar i realtid. Varje
+simulering finns i `SIMULATIONS`-arrayen i bottnen av `index.html` med fälten
+`title`, `description`, `href`, `icon`, `course` och `keywords`.
+
+**Nyckelord (`keywords`)** är osynliga för användaren men är det som gör att
+simuleringen hittas via sökningen. Varje ny simulering MÅSTE få lämpliga nyckelord:
+
+- Inkludera alltid **huvudområdet** (ett av: `rörelse`, `krafter`, `densitet`,
+  `tryck`, `värme`, `ellära`, `kärnfysik`, `vågor`, `optik`, `elektromagnetism`,
+  `magnetism`, `modern fysik`, `kvantfysik`, `atomfysik`, `astronomi`, `mekanik`,
+  `termodynamik`).
+- Inkludera **specifika begrepp** som eleven kan tänkas söka på (t.ex. `coulomb`,
+  `newton`, `halveringstid`, `interferens`, `pendel`, `foton`).
+- Inkludera **synonymer och vardagsuttryck** (t.ex. både `elektricitet` och `ellära`,
+  både `ljus` och `optik`).
+- Använd gemener och svenska tecken där det är naturligt — sökningen normaliserar
+  automatiskt å/ä/ö så att "karnfysik" matchar "kärnfysik".
+
+Exempel:
+```javascript
+{ title: "Halveringstid", description: "...", href: "fysik1-halveringstid.html",
+  icon: "⏳", course: "Fysik 1",
+  keywords: ["kärnfysik", "atomfysik", "halveringstid", "radioaktivitet",
+             "exponentiell", "sönderfall", "strålning"] }
+```
+
 ## Checklista: Ny simulering
 
 1. [ ] Kopiera navigation från mall
@@ -145,9 +173,11 @@ const xAxisLabelY = (minY < 0 && maxY > 0)
 4. [ ] Uppdatera `verify-navigation.js` med filnamnet
 5. [ ] Kör `node .claude/verify-navigation.js`
 6. [ ] Lägg till kort i `fysik1.html` eller `fysik2.html`
-7. [ ] Lägg till rad i "Senaste uppdateringar" i `index.html` (behåll max 4–5 poster, ta bort äldsta)
-8. [ ] Testa i webbläsare
-9. [ ] Verifiera decimalformatering (komma, inte punkt)
+7. [ ] **Lägg till i `SIMULATIONS`-arrayen i `index.html` med lämpliga `keywords`** (se ovan)
+8. [ ] Lägg till rad i "Senaste uppdateringar" i `index.html` (behåll max 4–5 poster, ta bort äldsta)
+9. [ ] Testa i webbläsare
+10. [ ] Verifiera decimalformatering (komma, inte punkt)
+11. [ ] Testa att sökningen hittar simuleringen via minst ett av nyckelorden
 
 ## CDN-länkar (standard)
 

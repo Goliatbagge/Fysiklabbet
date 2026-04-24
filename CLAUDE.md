@@ -50,6 +50,8 @@ start [filnamn].html
 
 3. **Uppdatera** `.claude/verify-navigation.js` - lägg till filnamnet i `HTML_FILES_TO_CHECK`
 
+4. Direkt före `</body>`: `<script src="feedback.js" defer></script>` (lägger in feedback-widgeten)
+
 ## Projektstruktur
 
 ```

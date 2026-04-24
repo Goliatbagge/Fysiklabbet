@@ -18,7 +18,8 @@ const REQUIRED_NAV = [
     '<a href="fysik2.html" class="nav-link',
     '<a href="om.html" class="nav-link',
     '<a href="kontakt.html" class="nav-link',
-    '<link rel="stylesheet" href="styles.css">'
+    '<link rel="stylesheet" href="styles.css">',
+    '<script src="feedback.js"'
 ];
 
 // Files to check

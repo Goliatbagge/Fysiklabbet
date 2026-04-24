@@ -558,25 +558,54 @@
             }
         }
 
+        // Bruten lodrät axel — övre regionen visar -2…+0,4 eV (rymmer n=2 till n=∞
+        // med gott om utrymme), nedre visar -14…-2 eV (rymmer n=1). Ett zigzag
+        // mellan regionerna markerar att skalan är bruten.
+        const DIAGRAM_PAD = { top: 28, bottom: 40, left: 54, right: 84 };
+        const DIAGRAM_LAYOUT = {
+            breakH: 24,
+            upperFraction: 0.76,
+            upperEMax: 0.4,
+            upperEMin: -2,
+            lowerEMin: -14,
+        };
+
+        function diagramGeom(canvasH) {
+            const plotH = canvasH - DIAGRAM_PAD.top - DIAGRAM_PAD.bottom;
+            const upperPlotH = (plotH - DIAGRAM_LAYOUT.breakH) * DIAGRAM_LAYOUT.upperFraction;
+            const lowerPlotH = plotH - DIAGRAM_LAYOUT.breakH - upperPlotH;
+            const upperY0 = DIAGRAM_PAD.top;
+            const upperY1 = upperY0 + upperPlotH;
+            const lowerY0 = upperY1 + DIAGRAM_LAYOUT.breakH;
+            const lowerY1 = lowerY0 + lowerPlotH;
+            return { plotH, upperPlotH, lowerPlotH, upperY0, upperY1, lowerY0, lowerY1 };
+        }
+
+        function diagramMapE(e, canvasH) {
+            const g = diagramGeom(canvasH);
+            const L = DIAGRAM_LAYOUT;
+            if (e >= L.upperEMin) {
+                return g.upperY0 + (L.upperEMax - e) / (L.upperEMax - L.upperEMin) * g.upperPlotH;
+            }
+            return g.lowerY0 + (L.upperEMin - e) / (L.upperEMin - L.lowerEMin) * g.lowerPlotH;
+        }
+
         function drawDiagram(ctx, displayInfo, hoverN, showAllSeries) {
             const W = ctx.canvas.width;
             const H = ctx.canvas.height;
             ctx.fillStyle = '#050a18';
             ctx.fillRect(0, 0, W, H);
 
-            const pad = { top: 28, bottom: 40, left: 54, right: 84 };
+            const pad = DIAGRAM_PAD;
             const plotW = W - pad.left - pad.right;
-            const plotH = H - pad.top - pad.bottom;
+            const g = diagramGeom(H);
+            const mapE = (e) => diagramMapE(e, H);
 
-            const eMin = -14;
-            const eMax = 1.2;
-            const mapE = (e) => pad.top + plotH * (eMax - e) / (eMax - eMin);
-
-            // Kontinuum (ovanför E=0)
+            // Kontinuum-band ovanför E=0
             const y0 = mapE(0);
             const contGrad = ctx.createLinearGradient(0, pad.top, 0, y0);
-            contGrad.addColorStop(0, 'rgba(168, 85, 247, 0.18)');
-            contGrad.addColorStop(1, 'rgba(168, 85, 247, 0.02)');
+            contGrad.addColorStop(0, 'rgba(168, 85, 247, 0.22)');
+            contGrad.addColorStop(1, 'rgba(168, 85, 247, 0.04)');
             ctx.fillStyle = contGrad;
             ctx.fillRect(pad.left, pad.top, plotW, y0 - pad.top);
 
@@ -586,17 +615,19 @@
             ctx.textBaseline = 'top';
             ctx.fillText('Kontinuum (joniserad)', pad.left + 8, pad.top + 6);
 
-            // Y-axel
+            // Y-axel (bruten)
             ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.moveTo(pad.left, pad.top);
-            ctx.lineTo(pad.left, pad.top + plotH);
+            ctx.moveTo(pad.left, g.upperY0);
+            ctx.lineTo(pad.left, g.upperY1);
+            ctx.moveTo(pad.left, g.lowerY0);
+            ctx.lineTo(pad.left, g.lowerY1);
             ctx.stroke();
 
             // "Energi (eV)" etikett
             ctx.save();
-            ctx.translate(16, pad.top + plotH / 2);
+            ctx.translate(16, pad.top + g.plotH / 2);
             ctx.rotate(-Math.PI / 2);
             ctx.fillStyle = 'rgba(148, 163, 184, 0.75)';
             ctx.font = '500 11px Poppins, sans-serif';
@@ -605,22 +636,34 @@
             ctx.fillText('Energi (eV)', 0, 0);
             ctx.restore();
 
-            // Beräkna nivåer + staggade etikettpositioner
-            // Linjerna ritas på sina fysiskt korrekta y-positioner (visar konvergens),
-            // men etiketterna skjuts isär med ledarlinjer så de blir läsbara.
+            // Brott-indikator (zigzag) mellan övre och nedre regionen
+            const breakMid = (g.upperY1 + g.lowerY0) / 2;
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+            ctx.lineWidth = 1.2;
+            const zzSteps = 14;
+            for (const zyBase of [breakMid - 5, breakMid + 4]) {
+                ctx.beginPath();
+                for (let i = 0; i <= zzSteps; i++) {
+                    const x = pad.left + (plotW * i) / zzSteps;
+                    const y = zyBase + (i % 2 === 0 ? 0 : 3.5);
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+            // Brott-etikett
+            ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+            ctx.font = 'italic 9px Poppins, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('bruten skala', pad.left + plotW - 72, breakMid);
+
+            // Alla nivåer (linjer ritas på sina korrekta positioner — inga staggade etiketter)
             const levelDefs = [
                 { n: Infinity, e: 0, isInfinity: true },
                 ...SHELLS.map(n => ({ n, e: energyOf(n), isInfinity: false }))
             ];
-            for (const l of levelDefs) { l.actualY = mapE(l.e); }
-            levelDefs.sort((a, b) => a.actualY - b.actualY);
-
-            const minLabelGap = 16;
-            levelDefs[0].labelY = levelDefs[0].actualY;
-            for (let i = 1; i < levelDefs.length; i++) {
-                const needed = levelDefs[i - 1].labelY + minLabelGap;
-                levelDefs[i].labelY = Math.max(levelDefs[i].actualY, needed);
-            }
+            for (const l of levelDefs) { l.y = mapE(l.e); }
 
             // Om "visa alla Balmer" är på — rita alla möjliga Balmer-övergångar som skuggade pilar
             if (showAllSeries) {
@@ -648,9 +691,9 @@
                 }
             }
 
-            // Rita varje nivå + etikett med ledarlinje vid förskjutning
+            // Rita varje nivå med etikett vid själva linjen
             for (const level of levelDefs) {
-                const { n, e, actualY, labelY, isInfinity } = level;
+                const { n, e, y, isInfinity } = level;
                 const isFrom = n === displayInfo.ni;
                 const isTo = n === displayInfo.nf;
                 const isHover = hoverN === n;
@@ -675,28 +718,10 @@
                 ctx.strokeStyle = lineColor;
                 ctx.lineWidth = lineWidth;
                 ctx.beginPath();
-                ctx.moveTo(pad.left, actualY);
-                ctx.lineTo(pad.left + plotW, actualY);
+                ctx.moveTo(pad.left, y);
+                ctx.lineTo(pad.left + plotW, y);
                 ctx.stroke();
                 ctx.setLineDash([]);
-
-                // Ledarlinje när etiketten är förskjuten från linjen
-                if (Math.abs(labelY - actualY) > 1.5) {
-                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.32)';
-                    ctx.lineWidth = 0.8;
-                    ctx.setLineDash([2, 2]);
-                    // Vänster ledare
-                    ctx.beginPath();
-                    ctx.moveTo(pad.left - 2, actualY);
-                    ctx.lineTo(pad.left - 14, labelY);
-                    ctx.stroke();
-                    // Höger ledare
-                    ctx.beginPath();
-                    ctx.moveTo(pad.left + plotW + 2, actualY);
-                    ctx.lineTo(pad.left + plotW + 14, labelY);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-                }
 
                 // n-etikett (vänster): "n" kursivt, "=X" rakt
                 const nLabelColor = isFrom ? '#c084fc'
@@ -709,14 +734,14 @@
                 drawMixedText(ctx, [
                     { text: 'n', italic: true },
                     { text: `=${isInfinity ? '∞' : n}`, italic: false }
-                ], pad.left - 16, labelY, 12, nWeight, 'right');
+                ], pad.left - 6, y, 12, nWeight, 'right');
 
                 // Energi-etikett (höger)
                 const eLabel = isInfinity ? '0 eV' : `${formatNum(e, 2)} eV`;
                 ctx.fillStyle = 'rgba(148, 163, 184, 0.85)';
                 ctx.font = '500 11px Poppins, sans-serif';
                 ctx.textAlign = 'left';
-                ctx.fillText(eLabel, pad.left + plotW + 16, labelY);
+                ctx.fillText(eLabel, pad.left + plotW + 6, y);
             }
 
             // Pil för aktuell övergång
@@ -1155,6 +1180,16 @@
                 setAtomHoverN(closest);
             };
 
+            const findClosestLevel = (canvas, my) => {
+                let closest = null, minDist = Infinity;
+                for (const n of SHELLS) {
+                    const y_n = diagramMapE(energyOf(n), canvas.height);
+                    const d = Math.abs(y_n - my);
+                    if (d < minDist) { minDist = d; closest = n; }
+                }
+                return { closest, minDist };
+            };
+
             const handleDiagramClick = (e) => {
                 if (isAnimating) return;
                 const canvas = diagramCanvasRef.current;
@@ -1162,19 +1197,8 @@
                 const rect = canvas.getBoundingClientRect();
                 const scaleY = canvas.height / rect.height;
                 const my = (e.clientY - rect.top) * scaleY;
-                const pad = { top: 28, bottom: 40 };
-                const plotH = canvas.height - pad.top - pad.bottom;
-                const eMin = -14, eMax = 1.2;
-                const eAt = eMax - ((my - pad.top) / plotH) * (eMax - eMin);
-                // Hitta närmaste skal
-                let closest = null, minDist = Infinity;
-                for (const n of SHELLS) {
-                    const d = Math.abs(energyOf(n) - eAt);
-                    if (d < minDist) { minDist = d; closest = n; }
-                }
-                // Om klick är inom tolerans
-                const tol = 1.5;
-                if (minDist < tol && closest !== null) {
+                const { closest, minDist } = findClosestLevel(canvas, my);
+                if (minDist < 22 && closest !== null) {
                     handleFinalSelect(closest);
                 }
             };
@@ -1185,17 +1209,8 @@
                 const rect = canvas.getBoundingClientRect();
                 const scaleY = canvas.height / rect.height;
                 const my = (e.clientY - rect.top) * scaleY;
-                const pad = { top: 28, bottom: 40 };
-                const plotH = canvas.height - pad.top - pad.bottom;
-                const eMin = -14, eMax = 1.2;
-                const eAt = eMax - ((my - pad.top) / plotH) * (eMax - eMin);
-                let closest = null, minDist = Infinity;
-                for (const n of SHELLS) {
-                    const d = Math.abs(energyOf(n) - eAt);
-                    if (d < minDist) { minDist = d; closest = n; }
-                }
-                const tol = 0.8;
-                setDiagramHoverN(minDist < tol ? closest : null);
+                const { closest, minDist } = findClosestLevel(canvas, my);
+                setDiagramHoverN(minDist < 14 ? closest : null);
             };
 
             // Presets

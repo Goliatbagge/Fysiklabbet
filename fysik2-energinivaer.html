@@ -291,6 +291,28 @@
 
         // ========== RITFUNKTIONER ==========
 
+        // Ritar text med blandad kursiv/rak stil (fysikaliska variabler kursivt).
+        // parts = [{ text, italic }]. Använder nuvarande textBaseline, sätter textAlign internt.
+        function drawMixedText(ctx, parts, x, y, fontSize, weight = '400', align = 'left') {
+            const widths = parts.map(p => {
+                ctx.font = `${weight} ${p.italic ? 'italic ' : ''}${fontSize}px Poppins, sans-serif`;
+                return ctx.measureText(p.text).width;
+            });
+            const totalWidth = widths.reduce((a, b) => a + b, 0);
+            let startX = x;
+            if (align === 'right') startX = x - totalWidth;
+            else if (align === 'center') startX = x - totalWidth / 2;
+            ctx.textAlign = 'left';
+            let cursor = startX;
+            for (let i = 0; i < parts.length; i++) {
+                const p = parts[i];
+                ctx.font = `${weight} ${p.italic ? 'italic ' : ''}${fontSize}px Poppins, sans-serif`;
+                ctx.fillText(p.text, cursor, y);
+                cursor += widths[i];
+            }
+            return totalWidth;
+        }
+
         function drawAtom(ctx, state, hoverN) {
             const W = ctx.canvas.width;
             const H = ctx.canvas.height;
@@ -347,18 +369,18 @@
                 ctx.stroke();
                 ctx.setLineDash([]);
 
-                // Etikett n= på övre höger
+                // Etikett n= på övre höger ("n" kursivt)
                 const la = -Math.PI / 3;
                 const lx = cx + Math.cos(la) * r;
                 const ly = cy + Math.sin(la) * r;
-                ctx.font = 'italic 13px Poppins, sans-serif';
                 ctx.fillStyle = isCurrent ? '#c084fc'
                                : isTo ? '#38bdf8'
                                : 'rgba(148, 163, 184, 0.55)';
-                ctx.textAlign = 'left';
                 ctx.textBaseline = 'middle';
-                ctx.font = `${isCurrent || isTo ? '600' : '400'} italic 12px Poppins, sans-serif`;
-                ctx.fillText(`n=${n}`, lx + 4, ly - 8);
+                drawMixedText(ctx, [
+                    { text: 'n', italic: true },
+                    { text: `=${n}`, italic: false }
+                ], lx + 4, ly - 8, 12, isCurrent || isTo ? '600' : '400', 'left');
             }
 
             // Kärna — glow
@@ -386,11 +408,6 @@
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText('+', cx, cy);
-
-            // Kärnetikett
-            ctx.font = '500 10px Poppins, sans-serif';
-            ctx.fillStyle = 'rgba(253, 186, 116, 0.8)';
-            ctx.fillText('1 proton', cx, cy + 28);
 
             // Elektron
             let eR;
@@ -460,17 +477,21 @@
                 drawPhoton(ctx, cx, cy, state);
             }
 
-            // Energi-etikett nere
-            ctx.font = '600 11px Poppins, sans-serif';
-            ctx.fillStyle = 'rgba(203, 213, 225, 0.75)';
-            ctx.textAlign = 'left';
+            // Energi-etikett nere ("n" och "E" kursiva)
             ctx.textBaseline = 'alphabetic';
             const displayN = phase === 'idle' ? currentN : (phase === 'transitioning' ? state.transitionTo : state.currentN);
             const e = energyOf(displayN);
-            ctx.fillText(`Elektron i n=${displayN}`, 14, H - 28);
-            ctx.font = '500 11px Poppins, sans-serif';
+            ctx.fillStyle = 'rgba(203, 213, 225, 0.75)';
+            drawMixedText(ctx, [
+                { text: 'Elektron i ', italic: false },
+                { text: 'n', italic: true },
+                { text: `=${displayN}`, italic: false }
+            ], 14, H - 28, 11, '600', 'left');
             ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
-            ctx.fillText(`E = ${formatNum(e, 2)} eV`, 14, H - 12);
+            drawMixedText(ctx, [
+                { text: 'E', italic: true },
+                { text: ` = ${formatNum(e, 2)} eV`, italic: false }
+            ], 14, H - 12, 11, '500', 'left');
         }
 
         function drawPhoton(ctx, cx, cy, state) {
@@ -584,21 +605,22 @@
             ctx.fillText('Energi (eV)', 0, 0);
             ctx.restore();
 
-            // n=∞ linje
-            ctx.strokeStyle = 'rgba(168, 85, 247, 0.5)';
-            ctx.setLineDash([4, 3]);
-            ctx.beginPath();
-            ctx.moveTo(pad.left, y0);
-            ctx.lineTo(pad.left + plotW, y0);
-            ctx.stroke();
-            ctx.setLineDash([]);
-            ctx.fillStyle = 'rgba(196, 181, 253, 0.9)';
-            ctx.font = 'italic 12px Poppins, sans-serif';
-            ctx.textAlign = 'right';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('n=∞', pad.left - 6, y0);
-            ctx.textAlign = 'left';
-            ctx.fillText('0 eV', pad.left + plotW + 6, y0);
+            // Beräkna nivåer + staggade etikettpositioner
+            // Linjerna ritas på sina fysiskt korrekta y-positioner (visar konvergens),
+            // men etiketterna skjuts isär med ledarlinjer så de blir läsbara.
+            const levelDefs = [
+                { n: Infinity, e: 0, isInfinity: true },
+                ...SHELLS.map(n => ({ n, e: energyOf(n), isInfinity: false }))
+            ];
+            for (const l of levelDefs) { l.actualY = mapE(l.e); }
+            levelDefs.sort((a, b) => a.actualY - b.actualY);
+
+            const minLabelGap = 16;
+            levelDefs[0].labelY = levelDefs[0].actualY;
+            for (let i = 1; i < levelDefs.length; i++) {
+                const needed = levelDefs[i - 1].labelY + minLabelGap;
+                levelDefs[i].labelY = Math.max(levelDefs[i].actualY, needed);
+            }
 
             // Om "visa alla Balmer" är på — rita alla möjliga Balmer-övergångar som skuggade pilar
             if (showAllSeries) {
@@ -615,7 +637,6 @@
                     ctx.moveTo(xPos, yUpper);
                     ctx.lineTo(xPos, yLower);
                     ctx.stroke();
-                    // Pilhuvud
                     ctx.fillStyle = c.hex;
                     ctx.beginPath();
                     ctx.moveTo(xPos, yLower);
@@ -627,37 +648,75 @@
                 }
             }
 
-            // Rita energinivåerna
-            for (const n of SHELLS) {
-                const e = energyOf(n);
-                const y = mapE(e);
+            // Rita varje nivå + etikett med ledarlinje vid förskjutning
+            for (const level of levelDefs) {
+                const { n, e, actualY, labelY, isInfinity } = level;
                 const isFrom = n === displayInfo.ni;
                 const isTo = n === displayInfo.nf;
                 const isHover = hoverN === n;
 
-                let lineColor, lineWidth;
-                if (isFrom) { lineColor = 'rgba(168, 85, 247, 0.95)'; lineWidth = 3; }
-                else if (isTo) { lineColor = 'rgba(56, 189, 248, 0.95)'; lineWidth = 3; }
-                else if (isHover) { lineColor = 'rgba(226, 232, 240, 0.7)'; lineWidth = 2; }
-                else { lineColor = 'rgba(226, 232, 240, 0.55)'; lineWidth = 1.5; }
+                let lineColor, lineWidth, isDashed = false;
+                if (isFrom) {
+                    lineColor = 'rgba(168, 85, 247, 0.95)'; lineWidth = 3;
+                    isDashed = isInfinity;
+                } else if (isTo) {
+                    lineColor = 'rgba(56, 189, 248, 0.95)'; lineWidth = 3;
+                    isDashed = isInfinity;
+                } else if (isInfinity) {
+                    lineColor = 'rgba(168, 85, 247, 0.5)'; lineWidth = 1.5;
+                    isDashed = true;
+                } else if (isHover) {
+                    lineColor = 'rgba(226, 232, 240, 0.7)'; lineWidth = 2;
+                } else {
+                    lineColor = 'rgba(226, 232, 240, 0.55)'; lineWidth = 1.5;
+                }
 
+                if (isDashed) ctx.setLineDash([4, 3]);
                 ctx.strokeStyle = lineColor;
                 ctx.lineWidth = lineWidth;
                 ctx.beginPath();
-                ctx.moveTo(pad.left, y);
-                ctx.lineTo(pad.left + plotW, y);
+                ctx.moveTo(pad.left, actualY);
+                ctx.lineTo(pad.left + plotW, actualY);
                 ctx.stroke();
+                ctx.setLineDash([]);
 
-                ctx.fillStyle = isFrom ? '#c084fc' : isTo ? '#38bdf8' : 'rgba(203, 213, 225, 0.85)';
-                ctx.font = `${isFrom || isTo ? '600' : '400'} italic 13px Poppins, sans-serif`;
-                ctx.textAlign = 'right';
+                // Ledarlinje när etiketten är förskjuten från linjen
+                if (Math.abs(labelY - actualY) > 1.5) {
+                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.32)';
+                    ctx.lineWidth = 0.8;
+                    ctx.setLineDash([2, 2]);
+                    // Vänster ledare
+                    ctx.beginPath();
+                    ctx.moveTo(pad.left - 2, actualY);
+                    ctx.lineTo(pad.left - 14, labelY);
+                    ctx.stroke();
+                    // Höger ledare
+                    ctx.beginPath();
+                    ctx.moveTo(pad.left + plotW + 2, actualY);
+                    ctx.lineTo(pad.left + plotW + 14, labelY);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+
+                // n-etikett (vänster): "n" kursivt, "=X" rakt
+                const nLabelColor = isFrom ? '#c084fc'
+                                  : isTo ? '#38bdf8'
+                                  : isInfinity ? 'rgba(196, 181, 253, 0.9)'
+                                  : 'rgba(203, 213, 225, 0.85)';
+                ctx.fillStyle = nLabelColor;
                 ctx.textBaseline = 'middle';
-                ctx.fillText(`n=${n}`, pad.left - 6, y);
+                const nWeight = (isFrom || isTo) ? '600' : '400';
+                drawMixedText(ctx, [
+                    { text: 'n', italic: true },
+                    { text: `=${isInfinity ? '∞' : n}`, italic: false }
+                ], pad.left - 16, labelY, 12, nWeight, 'right');
 
+                // Energi-etikett (höger)
+                const eLabel = isInfinity ? '0 eV' : `${formatNum(e, 2)} eV`;
                 ctx.fillStyle = 'rgba(148, 163, 184, 0.85)';
                 ctx.font = '500 11px Poppins, sans-serif';
                 ctx.textAlign = 'left';
-                ctx.fillText(`${formatNum(e, 2)} eV`, pad.left + plotW + 6, y);
+                ctx.fillText(eLabel, pad.left + plotW + 16, labelY);
             }
 
             // Pil för aktuell övergång
@@ -683,7 +742,6 @@
                 ctx.stroke();
                 ctx.restore();
 
-                // Pilhuvud
                 const dir = yTo > yFrom ? 1 : -1;
                 ctx.fillStyle = color;
                 ctx.beginPath();
@@ -693,16 +751,22 @@
                 ctx.closePath();
                 ctx.fill();
 
-                // ΔE-etikett
+                // ΔE-etikett ("E" kursivt)
                 const midY = (yFrom + yTo) / 2;
-                ctx.fillStyle = '#e2e8f0';
-                ctx.font = '600 12px Poppins, sans-serif';
-                ctx.textAlign = 'left';
                 ctx.textBaseline = 'middle';
-                ctx.fillText(`ΔE = ${formatNum(deltaE, 2)} eV`, ax + 14, midY - 10);
+                ctx.fillStyle = '#e2e8f0';
+                drawMixedText(ctx, [
+                    { text: 'Δ', italic: false },
+                    { text: 'E', italic: true },
+                    { text: ` = ${formatNum(deltaE, 2)} eV`, italic: false }
+                ], ax + 14, midY - 10, 12, '600', 'left');
+
+                // λ-etikett ("λ" kursivt)
                 ctx.fillStyle = color;
-                ctx.font = '500 11px Poppins, sans-serif';
-                ctx.fillText(`λ = ${formatNum(wl, 0)} nm`, ax + 14, midY + 8);
+                drawMixedText(ctx, [
+                    { text: 'λ', italic: true },
+                    { text: ` = ${formatNum(wl, 0)} nm`, italic: false }
+                ], ax + 14, midY + 8, 11, '500', 'left');
 
                 // Emission/absorption-tag
                 ctx.fillStyle = isEmission ? '#fbbf24' : '#22d3ee';

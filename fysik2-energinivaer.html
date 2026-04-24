@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energinivåer - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: 'Poppins', -apple-system, sans-serif; }
+        .page-wrapper {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.82);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .glass-card-inner {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            border-radius: 12px;
+        }
+        .glow-text { text-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
+
+        .canvas-wrap {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #050a18;
+            box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.12), 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+        .canvas-wrap canvas { display: block; width: 100%; height: auto; }
+
+        .level-btn {
+            padding: 0.45rem 0.7rem;
+            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            color: #cbd5e1;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            min-width: 42px;
+        }
+        .level-btn:hover:not(:disabled) {
+            border-color: rgba(56, 189, 248, 0.5);
+            background: rgba(56, 189, 248, 0.08);
+            color: #e2e8f0;
+        }
+        .level-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .level-btn.active-initial {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            border-color: rgba(168, 85, 247, 0.7);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35);
+        }
+        .level-btn.active-final {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            border-color: rgba(56, 189, 248, 0.7);
+            color: #0a1628;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+        }
+
+        .action-btn {
+            padding: 0.6rem 1.1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(14, 165, 233, 0.16));
+            color: #7dd3fc;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .action-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(14, 165, 233, 0.3));
+            border-color: rgba(56, 189, 248, 0.55);
+            color: #e2e8f0;
+            transform: translateY(-1px);
+        }
+        .action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .action-btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a1628;
+            border-color: transparent;
+        }
+        .action-btn-primary:hover:not(:disabled) {
+            box-shadow: 0 8px 22px rgba(56, 189, 248, 0.45);
+            color: #0a1628;
+        }
+
+        .preset-btn {
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        .preset-btn:hover:not(:disabled) {
+            border-color: rgba(56, 189, 248, 0.45);
+            color: #e2e8f0;
+            background: rgba(56, 189, 248, 0.06);
+        }
+        .preset-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+        .mode-toggle {
+            display: inline-flex;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 999px;
+            padding: 3px;
+            gap: 2px;
+        }
+        .mode-toggle button {
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #94a3b8;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.15s ease;
+        }
+        .mode-toggle button:hover:not(.active-emission):not(.active-absorption) { color: #e2e8f0; }
+        .mode-toggle button.active-emission {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: #0a1628;
+        }
+        .mode-toggle button.active-absorption {
+            background: linear-gradient(135deg, #06b6d4, #38bdf8);
+            color: #0a1628;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .data-row:last-child { border-bottom: none; }
+        .data-label { color: #94a3b8; font-size: 0.9rem; }
+        .data-value { color: #e2e8f0; font-family: 'Poppins', sans-serif; font-weight: 600; }
+
+        @keyframes photon-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 var(--pulse-color), 0 0 15px var(--pulse-color); }
+            50%      { box-shadow: 0 0 0 6px transparent, 0 0 25px var(--pulse-color); }
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li class="nav-dropdown">
+                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
+                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
+                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
+                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
+                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
+                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
+                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
+                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
+                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
+                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
+                    </ul>
+                </li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div id="root"></div>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+        // ========== KONSTANTER & HJÄLPFUNKTIONER ==========
+        const E_RYD = -13.6; // eV, väteatomens grundtillstånd
+        const HC_EV_NM = 1239.84; // h·c i eV·nm
+        const SHELLS = [1, 2, 3, 4, 5, 6];
+        const GREEK = ['α', 'β', 'γ', 'δ', 'ε', 'ζ'];
+
+        const SERIES = {
+            1: { name: 'Lyman',    region: 'Ultraviolett (UV)',  sym: 'Ly', accent: '#a78bfa' },
+            2: { name: 'Balmer',   region: 'Synligt ljus',       sym: 'H',  accent: '#38bdf8' },
+            3: { name: 'Paschen',  region: 'Infrarött (IR)',     sym: 'Pa', accent: '#fb923c' },
+            4: { name: 'Brackett', region: 'Infrarött (IR)',     sym: 'Br', accent: '#f87171' },
+            5: { name: 'Pfund',    region: 'Infrarött långt (IR)', sym: 'Pf', accent: '#ef4444' },
+        };
+
+        const energyOf = (n) => n === Infinity ? 0 : E_RYD / (n * n);
+        const radiusOf = (n) => 32 + n * 33; // för atomritningen
+
+        const formatNum = (v, d = 2) => {
+            if (!isFinite(v)) return '∞';
+            return v.toFixed(d).replace('.', ',');
+        };
+
+        const formatSci = (v, d = 2) => {
+            if (!isFinite(v) || v === 0) return '0';
+            const exp = Math.floor(Math.log10(Math.abs(v)));
+            const mant = v / Math.pow(10, exp);
+            return `${formatNum(mant, d)}·10${toSuperscript(exp)}`;
+        };
+
+        const toSuperscript = (n) => {
+            const map = { '-': '⁻', '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+            return String(n).split('').map(c => map[c] || c).join('');
+        };
+
+        const seriesFor = (lowerN) => SERIES[lowerN] || { name: 'Okänd', region: '', sym: '?', accent: '#94a3b8' };
+
+        const greekFor = (lowerN, upperN) => {
+            const idx = upperN - lowerN - 1;
+            return GREEK[idx] || `(${upperN})`;
+        };
+
+        const transitionLabel = (ni, nf) => {
+            const lower = Math.min(ni, nf);
+            const upper = Math.max(ni, nf);
+            const s = seriesFor(lower);
+            return `${s.sym}-${greekFor(lower, upper)}`;
+        };
+
+        // Våglängd (nm) till RGB för synligt spektrum, med stiliserade färger för UV/IR
+        const wavelengthToColor = (wl) => {
+            if (wl < 380) return { hex: '#8b5cf6', label: 'UV', visible: false };
+            if (wl > 780) return { hex: '#7f1d1d', label: 'IR', visible: false };
+            let R, G, B;
+            if (wl < 440) { R = -(wl - 440) / 60; G = 0; B = 1; }
+            else if (wl < 490) { R = 0; G = (wl - 440) / 50; B = 1; }
+            else if (wl < 510) { R = 0; G = 1; B = -(wl - 510) / 20; }
+            else if (wl < 580) { R = (wl - 510) / 70; G = 1; B = 0; }
+            else if (wl < 645) { R = 1; G = -(wl - 645) / 65; B = 0; }
+            else { R = 1; G = 0; B = 0; }
+            let a = 1;
+            if (wl < 420) a = 0.3 + 0.7 * (wl - 380) / 40;
+            else if (wl > 700) a = 0.3 + 0.7 * (780 - wl) / 80;
+            const r = Math.round(R * 255 * a);
+            const g = Math.round(G * 255 * a);
+            const b = Math.round(B * 255 * a);
+            const hex = '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            return { hex, label: colorNameSwedish(wl), visible: true };
+        };
+
+        const colorNameSwedish = (wl) => {
+            if (wl < 430) return 'violett';
+            if (wl < 480) return 'blått';
+            if (wl < 510) return 'cyan';
+            if (wl < 565) return 'grönt';
+            if (wl < 590) return 'gult';
+            if (wl < 625) return 'orange';
+            return 'rött';
+        };
+
+        // ========== RITFUNKTIONER ==========
+
+        function drawAtom(ctx, state, hoverN) {
+            const W = ctx.canvas.width;
+            const H = ctx.canvas.height;
+            const cx = W / 2;
+            const cy = H / 2;
+
+            ctx.fillStyle = '#050a18';
+            ctx.fillRect(0, 0, W, H);
+
+            // Rutnät (subtilt)
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.04)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < W; x += 30) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+            }
+            for (let y = 0; y < H; y += 30) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+            }
+
+            const currentN = state.currentN;
+            const phase = state.phase;
+
+            // Rita skal
+            for (const n of SHELLS) {
+                const r = radiusOf(n);
+                const isCurrent = n === currentN && phase === 'idle';
+                const isFrom = phase !== 'idle' && n === state.transitionFrom;
+                const isTo = phase !== 'idle' && n === state.transitionTo;
+                const isHover = hoverN === n;
+
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+                if (isCurrent) {
+                    ctx.strokeStyle = 'rgba(168, 85, 247, 0.85)';
+                    ctx.lineWidth = 2.5;
+                    ctx.setLineDash([]);
+                } else if (isTo) {
+                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.85)';
+                    ctx.lineWidth = 2.5;
+                    ctx.setLineDash([]);
+                } else if (isFrom) {
+                    ctx.strokeStyle = 'rgba(168, 85, 247, 0.5)';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([6, 4]);
+                } else if (isHover) {
+                    ctx.strokeStyle = 'rgba(226, 232, 240, 0.5)';
+                    ctx.lineWidth = 1.5;
+                    ctx.setLineDash([]);
+                } else {
+                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
+                    ctx.lineWidth = 1;
+                    ctx.setLineDash([4, 5]);
+                }
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Etikett n= på övre höger
+                const la = -Math.PI / 3;
+                const lx = cx + Math.cos(la) * r;
+                const ly = cy + Math.sin(la) * r;
+                ctx.font = 'italic 13px Poppins, sans-serif';
+                ctx.fillStyle = isCurrent ? '#c084fc'
+                               : isTo ? '#38bdf8'
+                               : 'rgba(148, 163, 184, 0.55)';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'middle';
+                ctx.font = `${isCurrent || isTo ? '600' : '400'} italic 12px Poppins, sans-serif`;
+                ctx.fillText(`n=${n}`, lx + 4, ly - 8);
+            }
+
+            // Kärna — glow
+            const nucGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 32);
+            nucGlow.addColorStop(0, 'rgba(251, 146, 60, 0.9)');
+            nucGlow.addColorStop(0.4, 'rgba(249, 115, 22, 0.4)');
+            nucGlow.addColorStop(1, 'rgba(239, 68, 68, 0)');
+            ctx.fillStyle = nucGlow;
+            ctx.beginPath();
+            ctx.arc(cx, cy, 32, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Kärna — kropp
+            const coreGrad = ctx.createRadialGradient(cx - 4, cy - 4, 1, cx, cy, 14);
+            coreGrad.addColorStop(0, '#fed7aa');
+            coreGrad.addColorStop(0.6, '#f97316');
+            coreGrad.addColorStop(1, '#c2410c');
+            ctx.fillStyle = coreGrad;
+            ctx.beginPath();
+            ctx.arc(cx, cy, 14, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = '#7c2d12';
+            ctx.font = 'bold 17px Poppins, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('+', cx, cy);
+
+            // Kärnetikett
+            ctx.font = '500 10px Poppins, sans-serif';
+            ctx.fillStyle = 'rgba(253, 186, 116, 0.8)';
+            ctx.fillText('1 proton', cx, cy + 28);
+
+            // Elektron
+            let eR;
+            if (phase === 'transitioning') {
+                const t = Math.min(1, Math.max(0, state.transitionProgress));
+                const fromR = radiusOf(state.transitionFrom);
+                const toR = radiusOf(state.transitionTo);
+                const eased = t * t * (3 - 2 * t); // smooth
+                eR = fromR + (toR - fromR) * eased;
+            } else if (phase === 'ionizing') {
+                const t = Math.min(1, state.ionProgress);
+                eR = radiusOf(state.transitionFrom) + t * 500;
+            } else {
+                eR = radiusOf(currentN);
+            }
+
+            const ea = state.electronAngle;
+            const ex = cx + Math.cos(ea) * eR;
+            const ey = cy + Math.sin(ea) * eR;
+
+            // Spiral-svans vid övergång
+            if (phase === 'transitioning' || phase === 'ionizing') {
+                ctx.strokeStyle = 'rgba(56, 189, 248, 0.28)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const trailSteps = 22;
+                for (let i = 0; i < trailSteps; i++) {
+                    const t = (trailSteps - i) / trailSteps;
+                    const fromR = radiusOf(state.transitionFrom);
+                    const toR = phase === 'ionizing'
+                        ? radiusOf(state.transitionFrom) + state.ionProgress * 500
+                        : radiusOf(state.transitionTo);
+                    const prog = Math.max(0, (phase === 'ionizing' ? state.ionProgress : state.transitionProgress) - t * 0.35);
+                    const eased2 = prog * prog * (3 - 2 * prog);
+                    const rr = fromR + (toR - fromR) * eased2;
+                    const aa = ea - t * 0.4;
+                    const px = cx + Math.cos(aa) * rr;
+                    const py = cy + Math.sin(aa) * rr;
+                    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+                }
+                ctx.stroke();
+            }
+
+            // Elektron-glow
+            const eGlow = ctx.createRadialGradient(ex, ey, 0, ex, ey, 20);
+            eGlow.addColorStop(0, 'rgba(56, 189, 248, 1)');
+            eGlow.addColorStop(0.35, 'rgba(56, 189, 248, 0.55)');
+            eGlow.addColorStop(1, 'rgba(56, 189, 248, 0)');
+            ctx.fillStyle = eGlow;
+            ctx.beginPath();
+            ctx.arc(ex, ey, 20, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Elektron-kropp
+            ctx.fillStyle = '#0ea5e9';
+            ctx.beginPath();
+            ctx.arc(ex, ey, 7, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = '#dbeafe';
+            ctx.font = 'bold 11px Poppins, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('−', ex, ey);
+
+            // Foton
+            if (phase === 'photonOut' || phase === 'photonIn') {
+                drawPhoton(ctx, cx, cy, state);
+            }
+
+            // Energi-etikett nere
+            ctx.font = '600 11px Poppins, sans-serif';
+            ctx.fillStyle = 'rgba(203, 213, 225, 0.75)';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'alphabetic';
+            const displayN = phase === 'idle' ? currentN : (phase === 'transitioning' ? state.transitionTo : state.currentN);
+            const e = energyOf(displayN);
+            ctx.fillText(`Elektron i n=${displayN}`, 14, H - 28);
+            ctx.font = '500 11px Poppins, sans-serif';
+            ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
+            ctx.fillText(`E = ${formatNum(e, 2)} eV`, 14, H - 12);
+        }
+
+        function drawPhoton(ctx, cx, cy, state) {
+            // Foton färdas uppåt-höger i fast vinkel
+            const ang = -Math.PI / 5;
+            const dx = Math.cos(ang);
+            const dy = Math.sin(ang);
+            const maxDist = 300;
+            const packetLen = 160;
+            const wl = state.wavelength;
+            const col = state.photonColor;
+
+            // Skala våglängd → pixlar (visuell komprimering så både UV och IR ser olika ut)
+            let pxWL;
+            if (wl < 100) pxWL = 8;
+            else if (wl < 380) pxWL = 8 + (wl - 100) / 280 * 8; // UV: 8-16 px
+            else if (wl <= 780) pxWL = 16 + (wl - 380) / 400 * 24; // synligt: 16-40 px
+            else pxWL = 40 + Math.min(18, (wl - 780) / 200 * 10); // IR: 40-58 px
+
+            const amp = 7;
+
+            let centerDist;
+            if (state.phase === 'photonOut') {
+                centerDist = 28 + state.photonProgress * (maxDist - 28);
+            } else {
+                centerDist = maxDist - state.photonProgress * (maxDist - 28);
+            }
+
+            const perpX = -dy;
+            const perpY = dx;
+
+            // Vågpaket
+            ctx.save();
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = col.hex;
+            ctx.strokeStyle = col.hex;
+            ctx.lineWidth = 2.2;
+            ctx.beginPath();
+            const steps = 80;
+            for (let i = 0; i <= steps; i++) {
+                const local = (i / steps - 0.5) * packetLen;
+                const env = Math.exp(-Math.pow(local / (packetLen * 0.28), 2));
+                const dist = centerDist + local;
+                if (dist < 18 || dist > maxDist) continue;
+                const wavePhase = (dist / pxWL) * 2 * Math.PI;
+                const wy = Math.sin(wavePhase) * amp * env;
+                const px = cx + dist * dx + wy * perpX;
+                const py = cy + dist * dy + wy * perpY;
+                if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+            }
+            ctx.stroke();
+            ctx.restore();
+
+            // γ-etikett vid paketets centrum
+            const labelDist = centerDist;
+            const lpx = cx + labelDist * dx + (packetLen * 0.55) * dx;
+            const lpy = cy + labelDist * dy + (packetLen * 0.55) * dy;
+            if (labelDist > 40 && labelDist < maxDist - 20) {
+                ctx.fillStyle = col.hex;
+                ctx.font = 'bold 14px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('γ', lpx, lpy - 14);
+            }
+        }
+
+        function drawDiagram(ctx, displayInfo, hoverN, showAllSeries) {
+            const W = ctx.canvas.width;
+            const H = ctx.canvas.height;
+            ctx.fillStyle = '#050a18';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { top: 28, bottom: 40, left: 54, right: 84 };
+            const plotW = W - pad.left - pad.right;
+            const plotH = H - pad.top - pad.bottom;
+
+            const eMin = -14;
+            const eMax = 1.2;
+            const mapE = (e) => pad.top + plotH * (eMax - e) / (eMax - eMin);
+
+            // Kontinuum (ovanför E=0)
+            const y0 = mapE(0);
+            const contGrad = ctx.createLinearGradient(0, pad.top, 0, y0);
+            contGrad.addColorStop(0, 'rgba(168, 85, 247, 0.18)');
+            contGrad.addColorStop(1, 'rgba(168, 85, 247, 0.02)');
+            ctx.fillStyle = contGrad;
+            ctx.fillRect(pad.left, pad.top, plotW, y0 - pad.top);
+
+            ctx.fillStyle = 'rgba(196, 181, 253, 0.85)';
+            ctx.font = 'italic 11px Poppins, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            ctx.fillText('Kontinuum (joniserad)', pad.left + 8, pad.top + 6);
+
+            // Y-axel
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, pad.top);
+            ctx.lineTo(pad.left, pad.top + plotH);
+            ctx.stroke();
+
+            // "Energi (eV)" etikett
+            ctx.save();
+            ctx.translate(16, pad.top + plotH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillStyle = 'rgba(148, 163, 184, 0.75)';
+            ctx.font = '500 11px Poppins, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Energi (eV)', 0, 0);
+            ctx.restore();
+
+            // n=∞ linje
+            ctx.strokeStyle = 'rgba(168, 85, 247, 0.5)';
+            ctx.setLineDash([4, 3]);
+            ctx.beginPath();
+            ctx.moveTo(pad.left, y0);
+            ctx.lineTo(pad.left + plotW, y0);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = 'rgba(196, 181, 253, 0.9)';
+            ctx.font = 'italic 12px Poppins, sans-serif';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('n=∞', pad.left - 6, y0);
+            ctx.textAlign = 'left';
+            ctx.fillText('0 eV', pad.left + plotW + 6, y0);
+
+            // Om "visa alla Balmer" är på — rita alla möjliga Balmer-övergångar som skuggade pilar
+            if (showAllSeries) {
+                for (let upper = 3; upper <= 6; upper++) {
+                    const yUpper = mapE(energyOf(upper));
+                    const yLower = mapE(energyOf(2));
+                    const wl = HC_EV_NM / Math.abs(energyOf(2) - energyOf(upper));
+                    const c = wavelengthToColor(wl);
+                    const xPos = pad.left + plotW * (0.25 + (upper - 3) * 0.12);
+                    ctx.strokeStyle = c.hex;
+                    ctx.globalAlpha = 0.35;
+                    ctx.lineWidth = 1.5;
+                    ctx.beginPath();
+                    ctx.moveTo(xPos, yUpper);
+                    ctx.lineTo(xPos, yLower);
+                    ctx.stroke();
+                    // Pilhuvud
+                    ctx.fillStyle = c.hex;
+                    ctx.beginPath();
+                    ctx.moveTo(xPos, yLower);
+                    ctx.lineTo(xPos - 5, yLower - 7);
+                    ctx.lineTo(xPos + 5, yLower - 7);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+            }
+
+            // Rita energinivåerna
+            for (const n of SHELLS) {
+                const e = energyOf(n);
+                const y = mapE(e);
+                const isFrom = n === displayInfo.ni;
+                const isTo = n === displayInfo.nf;
+                const isHover = hoverN === n;
+
+                let lineColor, lineWidth;
+                if (isFrom) { lineColor = 'rgba(168, 85, 247, 0.95)'; lineWidth = 3; }
+                else if (isTo) { lineColor = 'rgba(56, 189, 248, 0.95)'; lineWidth = 3; }
+                else if (isHover) { lineColor = 'rgba(226, 232, 240, 0.7)'; lineWidth = 2; }
+                else { lineColor = 'rgba(226, 232, 240, 0.55)'; lineWidth = 1.5; }
+
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = lineWidth;
+                ctx.beginPath();
+                ctx.moveTo(pad.left, y);
+                ctx.lineTo(pad.left + plotW, y);
+                ctx.stroke();
+
+                ctx.fillStyle = isFrom ? '#c084fc' : isTo ? '#38bdf8' : 'rgba(203, 213, 225, 0.85)';
+                ctx.font = `${isFrom || isTo ? '600' : '400'} italic 13px Poppins, sans-serif`;
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(`n=${n}`, pad.left - 6, y);
+
+                ctx.fillStyle = 'rgba(148, 163, 184, 0.85)';
+                ctx.font = '500 11px Poppins, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(`${formatNum(e, 2)} eV`, pad.left + plotW + 6, y);
+            }
+
+            // Pil för aktuell övergång
+            if (displayInfo.ni !== displayInfo.nf) {
+                const yFrom = mapE(energyOf(displayInfo.ni));
+                const yTo = mapE(energyOf(displayInfo.nf));
+                const ax = pad.left + plotW * 0.62;
+                const isEmission = displayInfo.ni > displayInfo.nf;
+                const deltaE = Math.abs(energyOf(displayInfo.ni) - energyOf(displayInfo.nf));
+                const wl = HC_EV_NM / deltaE;
+                const col = wavelengthToColor(wl);
+                const color = col.hex;
+
+                ctx.save();
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = color;
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(ax, yFrom);
+                ctx.lineTo(ax, yTo);
+                ctx.stroke();
+                ctx.restore();
+
+                // Pilhuvud
+                const dir = yTo > yFrom ? 1 : -1;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(ax, yTo);
+                ctx.lineTo(ax - 7, yTo - dir * 10);
+                ctx.lineTo(ax + 7, yTo - dir * 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // ΔE-etikett
+                const midY = (yFrom + yTo) / 2;
+                ctx.fillStyle = '#e2e8f0';
+                ctx.font = '600 12px Poppins, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(`ΔE = ${formatNum(deltaE, 2)} eV`, ax + 14, midY - 10);
+                ctx.fillStyle = color;
+                ctx.font = '500 11px Poppins, sans-serif';
+                ctx.fillText(`λ = ${formatNum(wl, 0)} nm`, ax + 14, midY + 8);
+
+                // Emission/absorption-tag
+                ctx.fillStyle = isEmission ? '#fbbf24' : '#22d3ee';
+                ctx.font = '600 10px Poppins, sans-serif';
+                ctx.textAlign = 'right';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(isEmission ? 'emission ↓' : 'absorption ↑', ax - 10, midY);
+            }
+        }
+
+        function drawSpectrumStrip(ctx, currentWL, showAllSeries) {
+            const W = ctx.canvas.width;
+            const H = ctx.canvas.height;
+            ctx.fillStyle = '#050509';
+            ctx.fillRect(0, 0, W, H);
+
+            const pad = { left: 38, right: 38, top: 10, bottom: 26 };
+            const stripY = pad.top;
+            const stripH = H - pad.top - pad.bottom;
+
+            const wlMin = 380, wlMax = 780;
+            const mapWL = (wl) => pad.left + (wl - wlMin) / (wlMax - wlMin) * (W - pad.left - pad.right);
+
+            // Regnbågsstrip
+            for (let wl = wlMin; wl <= wlMax; wl += 1) {
+                const c = wavelengthToColor(wl);
+                ctx.fillStyle = c.hex;
+                const x = mapWL(wl);
+                const xEnd = mapWL(wl + 1);
+                ctx.fillRect(x, stripY, xEnd - x + 1, stripH);
+            }
+
+            // Ramar
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(pad.left, stripY, W - pad.left - pad.right, stripH);
+
+            // Våglängds-etiketter
+            ctx.fillStyle = 'rgba(148, 163, 184, 0.8)';
+            ctx.font = '500 10px Poppins, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            for (const wl of [400, 450, 500, 550, 600, 650, 700, 750]) {
+                const x = mapWL(wl);
+                ctx.beginPath();
+                ctx.moveTo(x, stripY + stripH);
+                ctx.lineTo(x, stripY + stripH + 4);
+                ctx.stroke();
+                ctx.fillText(`${wl}`, x, stripY + stripH + 6);
+            }
+
+            // "nm"-etikett
+            ctx.textAlign = 'right';
+            ctx.fillStyle = 'rgba(148, 163, 184, 0.65)';
+            ctx.font = 'italic 10px Poppins, sans-serif';
+            ctx.fillText('nm', W - 4, stripY + stripH + 6);
+
+            // UV/IR-ändar
+            ctx.fillStyle = 'rgba(196, 181, 253, 0.85)';
+            ctx.font = '600 10px Poppins, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('◄ UV', 18, stripY + stripH / 2 + 3);
+            ctx.fillStyle = 'rgba(252, 165, 165, 0.85)';
+            ctx.fillText('IR ►', W - 18, stripY + stripH / 2 + 3);
+
+            // Balmer-linjer som referensmarkörer
+            if (showAllSeries) {
+                for (let upper = 3; upper <= 10; upper++) {
+                    const wl = HC_EV_NM / Math.abs(energyOf(2) - energyOf(upper));
+                    if (wl < wlMin || wl > wlMax) continue;
+                    const x = mapWL(wl);
+                    ctx.strokeStyle = 'rgba(226, 232, 240, 0.7)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(x, stripY);
+                    ctx.lineTo(x, stripY + stripH);
+                    ctx.stroke();
+                    if (upper <= 6) {
+                        ctx.fillStyle = '#e2e8f0';
+                        ctx.font = '600 9px Poppins, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillText(`H-${GREEK[upper - 3]}`, x, stripY - 2);
+                    }
+                }
+            }
+
+            // Aktuell linje
+            if (isFinite(currentWL) && currentWL >= wlMin && currentWL <= wlMax) {
+                const x = mapWL(currentWL);
+                ctx.strokeStyle = '#fef2f2';
+                ctx.lineWidth = 2.5;
+                ctx.beginPath();
+                ctx.moveTo(x, stripY - 6);
+                ctx.lineTo(x, stripY + stripH + 6);
+                ctx.stroke();
+                // Liten pil högst upp
+                ctx.fillStyle = '#fef2f2';
+                ctx.beginPath();
+                ctx.moveTo(x, stripY - 6);
+                ctx.lineTo(x - 4, stripY - 12);
+                ctx.lineTo(x + 4, stripY - 12);
+                ctx.closePath();
+                ctx.fill();
+            } else if (isFinite(currentWL)) {
+                // Utanför synligt — visa i marginalen
+                const side = currentWL < wlMin ? 'left' : 'right';
+                ctx.fillStyle = '#fef2f2';
+                ctx.font = '600 10px Poppins, sans-serif';
+                ctx.textAlign = 'center';
+                const tx = side === 'left' ? pad.left - 8 : W - pad.right + 8;
+                ctx.save();
+                ctx.translate(tx, stripY + stripH / 2);
+                ctx.fillText('● ' + (side === 'left' ? 'UV' : 'IR'), 0, 0);
+                ctx.restore();
+            }
+        }
+
+        // ========== HUVUDKOMPONENT ==========
+
+        const App = () => {
+            const [initialN, setInitialN] = useState(3);
+            const [finalN, setFinalN] = useState(2);
+            const [mode, setMode] = useState('emission'); // 'emission' | 'absorption'
+            const [showAllSeries, setShowAllSeries] = useState(false);
+            const [displayInfo, setDisplayInfo] = useState({ ni: 3, nf: 2 });
+            const [isAnimating, setIsAnimating] = useState(false);
+            const [atomHoverN, setAtomHoverN] = useState(null);
+            const [diagramHoverN, setDiagramHoverN] = useState(null);
+
+            const atomCanvasRef = useRef(null);
+            const diagramCanvasRef = useRef(null);
+            const spectrumCanvasRef = useRef(null);
+
+            const stateRef = useRef({
+                phase: 'idle', // idle | transitioning | photonOut | photonIn | ionizing
+                phaseStart: 0,
+                currentN: 3,
+                transitionFrom: 3,
+                transitionTo: 2,
+                transitionProgress: 0,
+                photonProgress: 0,
+                ionProgress: 0,
+                electronAngle: 0,
+                wavelength: 656,
+                photonColor: { hex: '#ef4444', visible: true, label: 'rött' },
+            });
+
+            // Härledda värden för display
+            const ei = energyOf(displayInfo.ni);
+            const ef = energyOf(displayInfo.nf);
+            const deltaE = Math.abs(ei - ef);
+            const wavelength = deltaE > 0 ? HC_EV_NM / deltaE : Infinity;
+            const frequency = deltaE > 0 ? deltaE * 2.418e14 : 0; // eV → Hz via E=hf, 1 eV = 2.418e14 Hz
+            const isEmission = displayInfo.ni > displayInfo.nf;
+            const lowerLevel = Math.min(displayInfo.ni, displayInfo.nf);
+            const upperLevel = Math.max(displayInfo.ni, displayInfo.nf);
+            const series = seriesFor(lowerLevel);
+            const color = wavelengthToColor(wavelength);
+            const label = transitionLabel(displayInfo.ni, displayInfo.nf);
+
+            // Animation-loop
+            useEffect(() => {
+                let rafId;
+                let last = performance.now();
+                const loop = (t) => {
+                    const dt = Math.min(0.05, (t - last) / 1000);
+                    last = t;
+                    const s = stateRef.current;
+
+                    // Omloppshastighet (långsammare i yttre skal)
+                    const orbitN = s.phase === 'transitioning'
+                        ? s.transitionFrom + (s.transitionTo - s.transitionFrom) * s.transitionProgress
+                        : s.currentN;
+                    const omega = 1.6 / Math.max(1, orbitN * 0.4);
+                    s.electronAngle += dt * omega;
+
+                    if (s.phase !== 'idle') {
+                        const elapsed = t - s.phaseStart;
+                        if (s.phase === 'photonIn') {
+                            s.photonProgress = Math.min(1, elapsed / 900);
+                            if (elapsed >= 900) {
+                                s.phase = 'transitioning';
+                                s.phaseStart = t;
+                                s.transitionProgress = 0;
+                            }
+                        } else if (s.phase === 'transitioning') {
+                            s.transitionProgress = Math.min(1, elapsed / 600);
+                            if (elapsed >= 600) {
+                                s.currentN = s.transitionTo;
+                                if (s.pendingMode === 'emission') {
+                                    s.phase = 'photonOut';
+                                    s.phaseStart = t;
+                                    s.photonProgress = 0;
+                                } else {
+                                    s.phase = 'idle';
+                                    setIsAnimating(false);
+                                }
+                            }
+                        } else if (s.phase === 'photonOut') {
+                            s.photonProgress = Math.min(1, elapsed / 1400);
+                            if (elapsed >= 1400) {
+                                s.phase = 'idle';
+                                setIsAnimating(false);
+                            }
+                        } else if (s.phase === 'ionizing') {
+                            s.ionProgress = Math.min(1, elapsed / 1300);
+                            if (elapsed >= 1300) {
+                                s.phase = 'idle';
+                                s.currentN = 1; // återställ till grundtillstånd
+                                setIsAnimating(false);
+                            }
+                        }
+                    }
+
+                    if (atomCanvasRef.current) {
+                        drawAtom(atomCanvasRef.current.getContext('2d'), s, atomHoverN);
+                    }
+                    if (diagramCanvasRef.current) {
+                        drawDiagram(diagramCanvasRef.current.getContext('2d'), displayInfo, diagramHoverN, showAllSeries);
+                    }
+                    if (spectrumCanvasRef.current) {
+                        drawSpectrumStrip(spectrumCanvasRef.current.getContext('2d'), wavelength, showAllSeries);
+                    }
+
+                    rafId = requestAnimationFrame(loop);
+                };
+                rafId = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(rafId);
+            }, [displayInfo, atomHoverN, diagramHoverN, showAllSeries, wavelength]);
+
+            const startTransition = useCallback(() => {
+                if (isAnimating) return;
+                if (initialN === finalN) return;
+                // Säkerställ att initial/final stämmer med mode
+                let ni = initialN, nf = finalN;
+                if (mode === 'emission' && ni <= nf) { const t = ni; ni = nf; nf = t; }
+                if (mode === 'absorption' && ni >= nf) { const t = ni; ni = nf; nf = t; }
+                setInitialN(ni);
+                setFinalN(nf);
+                setDisplayInfo({ ni, nf });
+                const s = stateRef.current;
+                const dE = Math.abs(energyOf(ni) - energyOf(nf));
+                const wl = HC_EV_NM / dE;
+                s.wavelength = wl;
+                s.photonColor = wavelengthToColor(wl);
+                s.transitionFrom = ni;
+                s.transitionTo = nf;
+                s.pendingMode = mode;
+                s.currentN = ni;
+                s.phaseStart = performance.now();
+                if (mode === 'emission') {
+                    s.phase = 'transitioning';
+                } else {
+                    s.phase = 'photonIn';
+                }
+                s.transitionProgress = 0;
+                s.photonProgress = 0;
+                setIsAnimating(true);
+            }, [initialN, finalN, mode, isAnimating]);
+
+            const startIonization = useCallback(() => {
+                if (isAnimating) return;
+                const s = stateRef.current;
+                s.transitionFrom = initialN;
+                s.transitionTo = Infinity;
+                s.phase = 'ionizing';
+                s.phaseStart = performance.now();
+                s.ionProgress = 0;
+                s.currentN = initialN;
+                setDisplayInfo({ ni: initialN, nf: Infinity });
+                setIsAnimating(true);
+            }, [initialN, isAnimating]);
+
+            const handleInitialSelect = (n) => {
+                if (isAnimating) return;
+                setInitialN(n);
+                if (mode === 'emission' && n <= finalN) {
+                    const newFinal = Math.max(1, n - 1);
+                    setFinalN(newFinal);
+                    setDisplayInfo({ ni: n, nf: newFinal });
+                } else if (mode === 'absorption' && n >= finalN) {
+                    const newFinal = Math.min(6, n + 1);
+                    setFinalN(newFinal);
+                    setDisplayInfo({ ni: n, nf: newFinal });
+                } else {
+                    setDisplayInfo({ ni: n, nf: finalN });
+                }
+                stateRef.current.currentN = n;
+            };
+
+            const handleFinalSelect = (n) => {
+                if (isAnimating) return;
+                if (n === initialN) return;
+                // Uppdatera mode automatiskt baserat på val
+                if (n < initialN) {
+                    setMode('emission');
+                } else {
+                    setMode('absorption');
+                }
+                setFinalN(n);
+                setDisplayInfo({ ni: initialN, nf: n });
+            };
+
+            const applyPreset = (ni, nf) => {
+                if (isAnimating) return;
+                const newMode = ni > nf ? 'emission' : 'absorption';
+                setMode(newMode);
+                setInitialN(ni);
+                setFinalN(nf);
+                setDisplayInfo({ ni, nf });
+                stateRef.current.currentN = ni;
+            };
+
+            const setModeSafe = (m) => {
+                if (isAnimating) return;
+                setMode(m);
+                // Swappa om nuvarande val strider mot mode
+                if (m === 'emission' && initialN <= finalN) {
+                    const ni = Math.max(2, finalN);
+                    const nf = Math.max(1, ni - 1);
+                    setInitialN(ni);
+                    setFinalN(nf);
+                    setDisplayInfo({ ni, nf });
+                    stateRef.current.currentN = ni;
+                } else if (m === 'absorption' && initialN >= finalN) {
+                    const ni = Math.min(5, finalN);
+                    const nf = Math.min(6, ni + 1);
+                    setInitialN(ni);
+                    setFinalN(nf);
+                    setDisplayInfo({ ni, nf });
+                    stateRef.current.currentN = ni;
+                }
+            };
+
+            const isFinalDisabled = (n) => {
+                if (n === initialN) return true;
+                if (mode === 'emission') return n >= initialN;
+                return n <= initialN;
+            };
+
+            // Klick på atom-canvas → välj skal
+            const handleAtomClick = (e) => {
+                if (isAnimating) return;
+                const canvas = atomCanvasRef.current;
+                if (!canvas) return;
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const mx = (e.clientX - rect.left) * scaleX;
+                const my = (e.clientY - rect.top) * scaleY;
+                const dx = mx - canvas.width / 2;
+                const dy = my - canvas.height / 2;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                let closest = null, minDist = 20;
+                for (const n of SHELLS) {
+                    const r = radiusOf(n);
+                    const dist = Math.abs(d - r);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        closest = n;
+                    }
+                }
+                if (closest !== null) {
+                    handleInitialSelect(closest);
+                }
+            };
+
+            const handleAtomHover = (e) => {
+                if (!atomCanvasRef.current) return;
+                const canvas = atomCanvasRef.current;
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const mx = (e.clientX - rect.left) * scaleX;
+                const my = (e.clientY - rect.top) * scaleY;
+                const dx = mx - canvas.width / 2;
+                const dy = my - canvas.height / 2;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                let closest = null, minDist = 20;
+                for (const n of SHELLS) {
+                    const r = radiusOf(n);
+                    const dist = Math.abs(d - r);
+                    if (dist < minDist) { minDist = dist; closest = n; }
+                }
+                setAtomHoverN(closest);
+            };
+
+            const handleDiagramClick = (e) => {
+                if (isAnimating) return;
+                const canvas = diagramCanvasRef.current;
+                if (!canvas) return;
+                const rect = canvas.getBoundingClientRect();
+                const scaleY = canvas.height / rect.height;
+                const my = (e.clientY - rect.top) * scaleY;
+                const pad = { top: 28, bottom: 40 };
+                const plotH = canvas.height - pad.top - pad.bottom;
+                const eMin = -14, eMax = 1.2;
+                const eAt = eMax - ((my - pad.top) / plotH) * (eMax - eMin);
+                // Hitta närmaste skal
+                let closest = null, minDist = Infinity;
+                for (const n of SHELLS) {
+                    const d = Math.abs(energyOf(n) - eAt);
+                    if (d < minDist) { minDist = d; closest = n; }
+                }
+                // Om klick är inom tolerans
+                const tol = 1.5;
+                if (minDist < tol && closest !== null) {
+                    handleFinalSelect(closest);
+                }
+            };
+
+            const handleDiagramHover = (e) => {
+                if (!diagramCanvasRef.current) return;
+                const canvas = diagramCanvasRef.current;
+                const rect = canvas.getBoundingClientRect();
+                const scaleY = canvas.height / rect.height;
+                const my = (e.clientY - rect.top) * scaleY;
+                const pad = { top: 28, bottom: 40 };
+                const plotH = canvas.height - pad.top - pad.bottom;
+                const eMin = -14, eMax = 1.2;
+                const eAt = eMax - ((my - pad.top) / plotH) * (eMax - eMin);
+                let closest = null, minDist = Infinity;
+                for (const n of SHELLS) {
+                    const d = Math.abs(energyOf(n) - eAt);
+                    if (d < minDist) { minDist = d; closest = n; }
+                }
+                const tol = 0.8;
+                setDiagramHoverN(minDist < tol ? closest : null);
+            };
+
+            // Presets
+            const PRESETS_EMISSION = [
+                { label: 'H-α (röd)', ni: 3, nf: 2 },
+                { label: 'H-β (cyan)', ni: 4, nf: 2 },
+                { label: 'H-γ (violett)', ni: 5, nf: 2 },
+                { label: 'Ly-α (UV)', ni: 2, nf: 1 },
+                { label: 'Pa-α (IR)', ni: 4, nf: 3 },
+            ];
+
+            return (
+                <div className="p-4 md:p-8" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-7xl mx-auto">
+                        <div className="breadcrumb mb-6">
+                            <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik 2</a> / Energinivåer
+                        </div>
+
+                        <header className="mb-8">
+                            <h1 className="text-3xl md:text-4xl font-bold text-slate-100 tracking-tight glow-text mb-3">
+                                Energinivåer i väteatomen
+                            </h1>
+                            <p className="text-slate-400 max-w-3xl">
+                                Bohrs atommodell visar att elektronen bara kan befinna sig i vissa bestämda
+                                skal med bestämda energier. När den hoppar mellan skal absorberas eller
+                                emitteras en foton med exakt den energi som motsvarar energidifferensen.
+                            </p>
+                            <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-cyan-300">
+                                <span className="inline-flex items-center gap-2">
+                                    <em>E</em><sub>n</sub> =
+                                    <span className="px-2 py-0.5 rounded bg-slate-800/60 font-mono">
+                                        −13,6 eV / <em>n</em>²
+                                    </span>
+                                </span>
+                                <span className="inline-flex items-center gap-2">
+                                    Δ<em>E</em> = <em>hf</em> = <em>hc</em>/<em>λ</em>
+                                </span>
+                            </div>
+                        </header>
+
+                        {/* Huvudvisning: Atom + Diagram sida vid sida */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+                            <div className="lg:col-span-7 glass-card p-5">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h2 className="text-lg font-semibold text-slate-200">Bohrs atommodell</h2>
+                                    <span className="text-xs text-slate-500">Klicka på ett skal för att välja startnivå</span>
+                                </div>
+                                <div className="canvas-wrap">
+                                    <canvas
+                                        ref={atomCanvasRef}
+                                        width={640}
+                                        height={560}
+                                        onClick={handleAtomClick}
+                                        onMouseMove={handleAtomHover}
+                                        onMouseLeave={() => setAtomHoverN(null)}
+                                        style={{ cursor: isAnimating ? 'default' : 'pointer' }}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="lg:col-span-5 glass-card p-5">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h2 className="text-lg font-semibold text-slate-200">Energinivådiagram</h2>
+                                    <span className="text-xs text-slate-500">Klicka på en nivå för slutnivå</span>
+                                </div>
+                                <div className="canvas-wrap">
+                                    <canvas
+                                        ref={diagramCanvasRef}
+                                        width={440}
+                                        height={560}
+                                        onClick={handleDiagramClick}
+                                        onMouseMove={handleDiagramHover}
+                                        onMouseLeave={() => setDiagramHoverN(null)}
+                                        style={{ cursor: isAnimating ? 'default' : 'pointer' }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Kontrollpanel */}
+                        <div className="glass-card p-5 mb-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Startnivå + slutnivå */}
+                                <div>
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="w-3 h-3 rounded-full bg-purple-500 inline-block"></span>
+                                        <label className="text-sm font-semibold text-purple-300">Startnivå (<em>n</em><sub>i</sub>)</label>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                                        {SHELLS.map(n => (
+                                            <button
+                                                key={`i-${n}`}
+                                                onClick={() => handleInitialSelect(n)}
+                                                disabled={isAnimating}
+                                                className={`level-btn ${initialN === n ? 'active-initial' : ''}`}
+                                            >
+                                                <em>n</em>={n}
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="w-3 h-3 rounded-full bg-sky-500 inline-block"></span>
+                                        <label className="text-sm font-semibold text-sky-300">Slutnivå (<em>n</em><sub>f</sub>)</label>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {SHELLS.map(n => (
+                                            <button
+                                                key={`f-${n}`}
+                                                onClick={() => handleFinalSelect(n)}
+                                                disabled={isAnimating || isFinalDisabled(n)}
+                                                className={`level-btn ${finalN === n ? 'active-final' : ''}`}
+                                            >
+                                                <em>n</em>={n}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Läge + kör */}
+                                <div>
+                                    <label className="text-sm font-semibold text-slate-300 mb-2 block">Läge</label>
+                                    <div className="mode-toggle mb-4">
+                                        <button
+                                            onClick={() => setModeSafe('emission')}
+                                            disabled={isAnimating}
+                                            className={mode === 'emission' ? 'active-emission' : ''}
+                                        >
+                                            ↓ Emission
+                                        </button>
+                                        <button
+                                            onClick={() => setModeSafe('absorption')}
+                                            disabled={isAnimating}
+                                            className={mode === 'absorption' ? 'active-absorption' : ''}
+                                        >
+                                            ↑ Absorption
+                                        </button>
+                                    </div>
+
+                                    <div className="flex flex-wrap gap-3">
+                                        <button
+                                            onClick={startTransition}
+                                            disabled={isAnimating || initialN === finalN}
+                                            className="action-btn action-btn-primary"
+                                        >
+                                            {mode === 'emission' ? '▶ Skjut ut foton' : '▶ Absorbera foton'}
+                                        </button>
+                                        <button
+                                            onClick={startIonization}
+                                            disabled={isAnimating}
+                                            className="action-btn"
+                                            title="Flytta elektronen till n=∞"
+                                        >
+                                            ⚡ Jonisera
+                                        </button>
+                                    </div>
+
+                                    <div className="mt-4">
+                                        <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                checked={showAllSeries}
+                                                onChange={(e) => setShowAllSeries(e.target.checked)}
+                                                className="w-4 h-4 accent-cyan-500"
+                                            />
+                                            Visa alla synliga Balmer-linjer på spektrumet
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Presets */}
+                            <div className="mt-6 pt-5 border-t border-slate-700/50">
+                                <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2 block">
+                                    Kända spektrallinjer (snabbval)
+                                </label>
+                                <div className="flex flex-wrap gap-2">
+                                    {PRESETS_EMISSION.map(p => (
+                                        <button
+                                            key={p.label}
+                                            onClick={() => applyPreset(p.ni, p.nf)}
+                                            disabled={isAnimating}
+                                            className="preset-btn"
+                                            title={`n=${p.ni} → n=${p.nf}`}
+                                        >
+                                            {p.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Resultat + Spektrumstrip */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+                            <div className="lg:col-span-5 glass-card p-5">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div
+                                        className="w-5 h-5 rounded-full"
+                                        style={{
+                                            background: color.hex,
+                                            boxShadow: color.visible ? `0 0 20px ${color.hex}` : 'none',
+                                        }}
+                                    />
+                                    <h2 className="text-lg font-semibold text-slate-100">
+                                        {displayInfo.nf === Infinity
+                                            ? 'Jonisation'
+                                            : `${label}${series.name !== 'Okänd' ? ` (${series.name})` : ''}`}
+                                    </h2>
+                                </div>
+
+                                <div className="space-y-1">
+                                    <div className="data-row">
+                                        <span className="data-label">Övergång</span>
+                                        <span className="data-value">
+                                            <em>n</em><sub>i</sub> = {displayInfo.ni} &nbsp;→&nbsp;
+                                            <em>n</em><sub>f</sub> = {displayInfo.nf === Infinity ? '∞' : displayInfo.nf}
+                                        </span>
+                                    </div>
+                                    <div className="data-row">
+                                        <span className="data-label">Energidifferens</span>
+                                        <span className="data-value text-yellow-300">
+                                            Δ<em>E</em> = {formatNum(deltaE, 2)} eV
+                                        </span>
+                                    </div>
+                                    <div className="data-row">
+                                        <span className="data-label">Våglängd</span>
+                                        <span className="data-value" style={{ color: color.hex, textShadow: color.visible ? `0 0 10px ${color.hex}` : 'none' }}>
+                                            <em>λ</em> = {formatNum(wavelength, 1)} nm
+                                        </span>
+                                    </div>
+                                    <div className="data-row">
+                                        <span className="data-label">Frekvens</span>
+                                        <span className="data-value text-cyan-300">
+                                            <em>f</em> = {formatSci(frequency, 2)} Hz
+                                        </span>
+                                    </div>
+                                    <div className="data-row">
+                                        <span className="data-label">Spektralområde</span>
+                                        <span className="data-value">
+                                            {color.visible ? (
+                                                <span>Synligt — <span style={{ color: color.hex }}>{color.label}</span></span>
+                                            ) : (
+                                                <span className={color.label === 'UV' ? 'text-violet-300' : 'text-red-300'}>
+                                                    {color.label === 'UV' ? 'Ultraviolett' : 'Infrarött'}
+                                                </span>
+                                            )}
+                                        </span>
+                                    </div>
+                                    {displayInfo.nf !== Infinity && (
+                                        <div className="data-row">
+                                            <span className="data-label">Serie</span>
+                                            <span className="data-value" style={{ color: series.accent }}>
+                                                {series.name}-serien
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="lg:col-span-7 glass-card p-5">
+                                <div className="flex items-center justify-between mb-3">
+                                    <h2 className="text-lg font-semibold text-slate-200">Synligt spektrum</h2>
+                                    <span className="text-xs text-slate-500">
+                                        {color.visible ? `Aktuell linje: ${formatNum(wavelength, 0)} nm (${color.label})` : 'Utanför synligt område'}
+                                    </span>
+                                </div>
+                                <div className="canvas-wrap" style={{ padding: 0 }}>
+                                    <canvas
+                                        ref={spectrumCanvasRef}
+                                        width={720}
+                                        height={140}
+                                    />
+                                </div>
+                                <p className="text-xs text-slate-500 mt-3">
+                                    Väteatomens Balmer-serie ger de synliga linjerna <em>H-α</em> (656 nm, röd),
+                                    <em> H-β</em> (486 nm, cyan), <em>H-γ</em> (434 nm, violett), <em>H-δ</em> (410 nm, violett)…
+                                    De är fingeravtrycket för väte i stjärnors spektrum.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Förklaring */}
+                        <div className="glass-card p-6">
+                            <h2 className="text-lg font-semibold text-slate-100 mb-3">Så funkar det</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-sm text-slate-300">
+                                <div>
+                                    <h3 className="font-semibold text-cyan-300 mb-2">Kvantiserade nivåer</h3>
+                                    <p>
+                                        Elektronen kan bara befinna sig i vissa bestämda skal med energierna
+                                        <em> E</em><sub>n</sub> = −13,6&nbsp;eV / <em>n</em>². Avståndet mellan
+                                        nivåerna krymper när <em>n</em> växer — över <em>E</em>=0 blir spektrat
+                                        kontinuerligt och elektronen är fri.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-amber-300 mb-2">Emission (↓)</h3>
+                                    <p>
+                                        När elektronen hoppar ner från ett högre till ett lägre skal
+                                        skickas överskottsenergin iväg som en foton. Fotonens energi är
+                                        exakt <em>hf</em> = |<em>E</em><sub>i</sub> − <em>E</em><sub>f</sub>|,
+                                        vilket bestämmer våglängden och färgen.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-sky-300 mb-2">Absorption (↑)</h3>
+                                    <p>
+                                        För att hoppa uppåt måste elektronen absorbera en foton med
+                                        <em> precis</em> rätt energi. Det är därför vi ser mörka
+                                        absorptionslinjer i solens spektrum — de våglängder som saknas
+                                        motsvarar hopp i vätet i solens atmosfär.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="mt-6 pt-5 border-t border-slate-700/50 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                                <div className="glass-card-inner p-3">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="w-2.5 h-2.5 rounded-full" style={{ background: SERIES[1].accent }}></span>
+                                        <strong className="text-slate-200">Lyman-serien</strong>
+                                    </div>
+                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=1. Ligger i ultraviolett (91–122 nm).</p>
+                                </div>
+                                <div className="glass-card-inner p-3">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="w-2.5 h-2.5 rounded-full" style={{ background: SERIES[2].accent }}></span>
+                                        <strong className="text-slate-200">Balmer-serien</strong>
+                                    </div>
+                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=2. Ligger i synligt ljus + nära UV (365–656 nm).</p>
+                                </div>
+                                <div className="glass-card-inner p-3">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="w-2.5 h-2.5 rounded-full" style={{ background: SERIES[3].accent }}></span>
+                                        <strong className="text-slate-200">Paschen-serien</strong>
+                                    </div>
+                                    <p className="text-slate-400 text-xs">Alla hopp till <em>n</em>=3. Ligger i infrarött (820 nm och längre).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+</body>
+</html>

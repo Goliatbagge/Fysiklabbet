@@ -248,24 +248,25 @@
           const numDots = Math.min(Math.floor(density * 0.02), 400);
           const activeDots = STATIC_ATOM_POSITIONS.slice(0, numDots);
 
-          const isFloating = density < WATER_DENSITY;
+          const NEUTRAL_TOLERANCE = 0.5; // kg/m³ – krymper floating-point-glapp kring 1000
+          const isNeutralBuoyant = Math.abs(density - WATER_DENSITY) < NEUTRAL_TOLERANCE;
+          const isFloating = !isNeutralBuoyant && density < WATER_DENSITY;
           const containerHeight = 400;
           const waterHeight = 280; // px vatten
-          const waterSurfaceY = containerHeight - waterHeight; // 160px from top
+          const waterSurfaceY = containerHeight - waterHeight; // 120px from top
 
           // Arkimedes princip: andel under vatten = ρ_objekt / ρ_vatten
           let buoyancyTop;
-          if (isFloating) {
+          const bottomThickness = 70;
+          if (isNeutralBuoyant) {
+            // Samma densitet som vatten – svävar mitt i vattnet
+            buoyancyTop = waterSurfaceY + (waterHeight - bottomThickness - sideLength) / 2;
+          } else if (isFloating) {
             const submergedFraction = density / WATER_DENSITY;
             buoyancyTop = waterSurfaceY - sideLength * (1 - submergedFraction);
-          } else if (density === WATER_DENSITY) {
-            // Samma densitet som vatten – svävar mitt i vattnet
-            const bottomThickness = 70;
-            buoyancyTop = waterSurfaceY + (waterHeight - bottomThickness - sideLength) / 2;
           } else {
             // Sjunker till botten, vilar på sandbotten
             // Extra offset för att 3D-rotationen gör att hörnen sticker ut ~20px
-            const bottomThickness = 70;
             buoyancyTop = Math.max(waterSurfaceY, containerHeight - bottomThickness - sideLength + 20);
           }
           const exploreTop = (400 - sideLength) / 2;

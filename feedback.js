@@ -15,7 +15,9 @@
     'use strict';
     if (document.getElementById('fb-feedback-widget')) return;
 
-    const FEEDBACK_ENDPOINT = 'https://formsubmit.co/sam.skoglund83@gmail.com';
+    const FEEDBACK_EMAIL = 'sam.skoglund83@gmail.com';
+    const FEEDBACK_ENDPOINT = `https://formsubmit.co/${FEEDBACK_EMAIL}`;
+    const FEEDBACK_ENDPOINT_AJAX = `https://formsubmit.co/ajax/${FEEDBACK_EMAIL}`;
     const CONFIRMATION_TEXT = 'Snyggt! Vi har registrerat din kraftfulla input. Acceleration mot en bättre sida påbörjad!';
 
     const CSS = `
@@ -248,6 +250,18 @@
         font-size: 0.95rem;
         line-height: 1.55;
     }
+    .fb-error {
+        margin-top: 0.75rem;
+        padding: 0.65rem 0.85rem;
+        background: rgba(248, 113, 113, 0.12);
+        border: 1px solid rgba(248, 113, 113, 0.35);
+        border-radius: 8px;
+        color: #fecaca;
+        font-size: 0.85rem;
+        line-height: 1.45;
+        display: none;
+    }
+    .fb-error.fb-error-visible { display: block; }
     @media (max-width: 480px) {
         .fb-btn { bottom: 1rem; right: 1rem; width: 52px; height: 52px; font-size: 1.45rem; }
         .fb-panel { bottom: 4.6rem; right: 1rem; left: 1rem; width: auto; }
@@ -264,13 +278,12 @@
     container.innerHTML = `
     <button class="fb-btn" id="fb-btn" aria-label="Lämna feedback" aria-expanded="false" type="button">💡</button>
     <div class="fb-tooltip" role="tooltip">Lämna feedback</div>
-    <iframe name="fb-sink" id="fb-sink" title="feedback-svar" aria-hidden="true" tabindex="-1" style="display:none"></iframe>
     <section class="fb-panel" id="fb-panel" role="dialog" aria-labelledby="fb-title" aria-hidden="true">
         <div class="fb-header">
             <div class="fb-title" id="fb-title"><span aria-hidden="true">💡</span><span>Lämna feedback</span></div>
             <button class="fb-close" id="fb-close" type="button" aria-label="Stäng">✕</button>
         </div>
-        <form id="fb-form" action="${FEEDBACK_ENDPOINT}" method="POST" enctype="multipart/form-data" target="fb-sink">
+        <form id="fb-form" action="${FEEDBACK_ENDPOINT}" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_subject" value="Feedback från Fysiklabbet">
             <input type="hidden" name="_template" value="table">
@@ -295,6 +308,7 @@
             </div>
 
             <button class="fb-submit" type="submit" id="fb-submit">Skicka feedback</button>
+            <div class="fb-error" id="fb-error" role="alert" aria-live="assertive"></div>
         </form>
         <div class="fb-success" id="fb-success" role="status" aria-live="polite" style="display:none;">
             <div class="fb-success-icon" aria-hidden="true">⚡</div>
@@ -314,6 +328,7 @@
     const submitBtn = document.getElementById('fb-submit');
     const successBox = document.getElementById('fb-success');
     const messageInput = document.getElementById('fb-message');
+    const errorBox = document.getElementById('fb-error');
 
     function openPanel() {
         urlInput.value = window.location.href;
@@ -336,6 +351,17 @@
         submitBtn.disabled = false;
         submitBtn.textContent = 'Skicka feedback';
         fileName.textContent = '';
+        hideError();
+    }
+
+    function showError(msg) {
+        errorBox.textContent = msg;
+        errorBox.classList.add('fb-error-visible');
+    }
+
+    function hideError() {
+        errorBox.textContent = '';
+        errorBox.classList.remove('fb-error-visible');
     }
 
     btn.addEventListener('click', () => {
@@ -352,16 +378,40 @@
         fileName.textContent = fileInput.files && fileInput.files[0] ? fileInput.files[0].name : '';
     });
 
-    form.addEventListener('submit', () => {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        hideError();
         submitBtn.disabled = true;
         submitBtn.textContent = 'Skickar…';
-        setTimeout(() => {
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(FEEDBACK_ENDPOINT_AJAX, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            let data = {};
+            try { data = await response.json(); } catch (_) {}
+
+            if (!response.ok || String(data.success) !== 'true') {
+                const detail = data.message || `HTTP ${response.status}`;
+                throw new Error(detail);
+            }
+
             form.style.display = 'none';
             successBox.style.display = 'block';
             setTimeout(() => {
                 closePanel();
                 setTimeout(resetForm, 320);
             }, 5000);
-        }, 400);
+        } catch (err) {
+            console.error('[feedback] submit misslyckades:', err);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Försök igen';
+            showError(`Kunde inte skicka: ${err.message}. Försök igen, eller mejla ${FEEDBACK_EMAIL} direkt.`);
+        }
     });
 })();

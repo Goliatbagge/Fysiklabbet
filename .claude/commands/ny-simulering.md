@@ -69,6 +69,8 @@ Mall att utgå från:
         <p>&copy; 2025 Fysiklabbet. Skapad för gymnasieelever.</p>
     </footer>
 
+    <script src="feedback.js" defer></script>
+
     <script type="text/babel">
         const { useState, useEffect, useRef, useMemo } = React;
 

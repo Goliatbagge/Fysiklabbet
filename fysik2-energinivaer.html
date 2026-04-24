@@ -165,6 +165,46 @@
             0%, 100% { box-shadow: 0 0 0 0 var(--pulse-color), 0 0 15px var(--pulse-color); }
             50%      { box-shadow: 0 0 0 6px transparent, 0 0 25px var(--pulse-color); }
         }
+
+        /* Snett "Under konstruktion"-band i övre högra hörnet */
+        .uc-ribbon {
+            position: fixed;
+            top: 82px;
+            right: -70px;
+            width: 240px;
+            transform: rotate(45deg);
+            background: repeating-linear-gradient(
+                45deg,
+                #f59e0b 0 16px,
+                #1e1b0a 16px 26px
+            );
+            color: #0a0a0a;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 0.82rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            user-select: none;
+        }
+        .uc-ribbon span {
+            background: rgba(254, 243, 199, 0.92);
+            padding: 2px 10px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        @media (max-width: 640px) {
+            .uc-ribbon {
+                top: 70px;
+                right: -90px;
+                width: 220px;
+                font-size: 0.72rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-950">
@@ -202,6 +242,10 @@
             </ul>
         </div>
     </nav>
+
+    <div class="uc-ribbon" aria-label="Denna sida är under konstruktion">
+        <span>Under konstruktion</span>
+    </div>
 
     <div class="page-wrapper">
         <div id="root"></div>

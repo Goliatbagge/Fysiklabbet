@@ -100,6 +100,29 @@ ctx.fillText(' = 5,0 N', x + 10, y);  // Värde med enhet
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 ```
 
+### Formelpresentation
+
+När formler presenteras i förklaringar, härledningar eller resultatpaneler ska de följa svensk fysiklärobok-standard:
+
+1. **Raka divisionsstreck** (horisontell bråkstreck) — använd ALDRIG snedstreck `/` mellan täljare och nämnare i presentationsformler. Snedstreck är endast tillåtet i sammansatta enheter (t.ex. `m/s`, `kg/m³`).
+   - ✓ ρ = *m* / *V* renderat som bråk med horisontellt streck
+   - ✗ ρ = *m*/*V* med snedstreck
+2. **Definiera beteckningar** — varje variabel som förekommer i en formel ska förklaras med ord (antingen ovanför/under variabeln eller i en intilliggande lista). Exempel: ovanför *m* står "Massa", under *V* står "Volym".
+3. **Enheter alltid med värden** — om formeln visas med insatta numeriska värden ska varje värde ha sin SI-enhet. Skriv `5,0 kg` och `0,005 m³`, inte `5,0` och `0,005`. Slutresultatet ska också ha enhet (t.ex. `1 000 kg/m³`).
+4. **Variabler i kursiv, enheter rakt** (se Typografi-avsnittet ovan).
+
+Mönster att följa (se densitetssimuleringen för referensimplementation):
+
+```
+        Massa
+ρ  =     m       =     5,0 kg       =   1 000 kg/m³
+       ─────         ─────────
+         V            0,005 m³
+        Volym
+```
+
+Implementera bråk i React/JSX med stackad layout (täljare och nämnare i kolumn med `border-top` som divisionsstreck). I canvas: rita en horisontell linje mellan numerator och denominator istället för att skriva ut `/`.
+
 ### Decimaltalsformatering
 
 ```javascript

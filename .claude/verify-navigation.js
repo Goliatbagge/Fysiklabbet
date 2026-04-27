@@ -65,6 +65,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-spektrallinjer.html',
     'fysik2-energinivaer.html',
     'fysik1-halveringstid.html',
+    'fysik1-newtons-gravitationslag.html',
     'om.html',
     'kontakt.html'
 ];

@@ -102,14 +102,16 @@ ctx.fillText(' = 5,0 N', x + 10, y);  // Värde med enhet
 
 ### Formelpresentation
 
-När formler presenteras i förklaringar, härledningar eller resultatpaneler ska de följa svensk fysiklärobok-standard:
+**Gäller överallt där formler visas i en simulering** — introduktionstext, ingress, headern, formelpaneler, förklaringar, härledningar och resultatpaneler. Så fort en formel som `F = G·m₁m₂/r²`, `ρ = m/V` eller liknande dyker upp som en tydlig formel (inte bara som löpande text om en variabel) ska följande regler följas:
 
-1. **Raka divisionsstreck** (horisontell bråkstreck) — använd ALDRIG snedstreck `/` mellan täljare och nämnare i presentationsformler. Snedstreck är endast tillåtet i sammansatta enheter (t.ex. `m/s`, `kg/m³`).
+1. **Raka divisionsstreck** (horisontell bråkstreck) — använd ALDRIG snedstreck `/` mellan täljare och nämnare när formeln presenteras. Snedstreck är endast tillåtet i sammansatta enheter (t.ex. `m/s`, `kg/m³`).
    - ✓ ρ = *m* / *V* renderat som bråk med horisontellt streck
    - ✗ ρ = *m*/*V* med snedstreck
+   - ✗ Att dölja en formel i ingress-texten med snedstreck "för att den är liten" — flytta då hellre formeln till en egen formelruta strax under ingressen.
 2. **Definiera beteckningar** — varje variabel som förekommer i en formel ska förklaras med ord (antingen ovanför/under variabeln eller i en intilliggande lista). Exempel: ovanför *m* står "Massa", under *V* står "Volym".
 3. **Enheter alltid med värden** — om formeln visas med insatta numeriska värden ska varje värde ha sin SI-enhet. Skriv `5,0 kg` och `0,005 m³`, inte `5,0` och `0,005`. Slutresultatet ska också ha enhet (t.ex. `1 000 kg/m³`).
 4. **Variabler i kursiv, enheter rakt** (se Typografi-avsnittet ovan).
+5. **Konstanter har också benämning** — t.ex. *G* (gravitationskonstanten), *k* (Coulombs konstant), σ (Stefan–Boltzmanns konstant). Skriv aldrig bara symbolen utan att i närheten också ange vad den heter och dess värde med enhet.
 
 Mönster att följa (se densitetssimuleringen för referensimplementation):
 
@@ -122,6 +124,8 @@ Mönster att följa (se densitetssimuleringen för referensimplementation):
 ```
 
 Implementera bråk i React/JSX med stackad layout (täljare och nämnare i kolumn med `border-top` som divisionsstreck). I canvas: rita en horisontell linje mellan numerator och denominator istället för att skriva ut `/`.
+
+**Introduktionstext (header/ingress):** Om formeln är central för simuleringen ska den lyftas ut ur löptexten till en egen formelruta direkt under ingressen, med raka bråkstreck och definierade beteckningar. Skriv inte hela formeln inbäddad i ingressmeningen — där räcker det att hänvisa till "formeln nedan" eller "Newtons gravitationslag".
 
 ### Decimaltalsformatering
 

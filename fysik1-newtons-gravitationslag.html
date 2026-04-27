@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newtons gravitationslag - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body { font-family: 'Poppins', -apple-system, sans-serif; }
+        .page-wrapper {
+            background: radial-gradient(ellipse at center, #0a1428 0%, #050810 60%, #02040a 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.78);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+        }
+        .glass-card-inner {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(56, 189, 248, 0.12);
+            border-radius: 12px;
+        }
+        .glow-text { text-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
+
+        .canvas-wrap {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #02040a;
+            box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.12), 0 12px 40px rgba(0, 0, 0, 0.55);
+        }
+        .canvas-wrap canvas { display: block; width: 100%; height: auto; touch-action: none; }
+
+        .mode-toggle {
+            display: inline-flex;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 999px;
+            padding: 3px;
+            gap: 2px;
+            flex-wrap: wrap;
+        }
+        .mode-toggle button {
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #94a3b8;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.15s ease;
+        }
+        .mode-toggle button:hover:not(.active) { color: #e2e8f0; }
+        .mode-toggle button.active {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a1628;
+        }
+
+        .mass-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #1e293b 0%, #38bdf8 100%);
+            outline: none;
+            cursor: pointer;
+        }
+        .mass-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #f8fafc;
+            border: 2.5px solid #38bdf8;
+            cursor: grab;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+        .mass-slider::-webkit-slider-thumb:active { cursor: grabbing; }
+        .mass-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f8fafc;
+            border: 2.5px solid #38bdf8;
+            cursor: grab;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+
+        .action-btn {
+            padding: 0.55rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(14, 165, 233, 0.16));
+            color: #7dd3fc;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .action-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(14, 165, 233, 0.32));
+            border-color: rgba(56, 189, 248, 0.6);
+            color: #e2e8f0;
+            transform: translateY(-1px);
+        }
+        .action-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .action-btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            color: #0a1628;
+            border-color: transparent;
+        }
+        .action-btn-primary:hover:not(:disabled) {
+            box-shadow: 0 8px 22px rgba(56, 189, 248, 0.45);
+            color: #0a1628;
+        }
+
+        .preset-btn {
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #cbd5e1;
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+        .preset-btn:hover {
+            border-color: rgba(56, 189, 248, 0.45);
+            color: #e2e8f0;
+            background: rgba(56, 189, 248, 0.06);
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .data-row:last-child { border-bottom: none; }
+        .data-label { color: #94a3b8; font-size: 0.88rem; }
+        .data-value { color: #e2e8f0; font-family: 'Poppins', sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+        /* Formel-highlight */
+        @keyframes highlight-pulse {
+            0% { background: rgba(251, 191, 36, 0.55); }
+            100% { background: transparent; }
+        }
+        .formula-highlight {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 0 1px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        .formula-highlight.changed {
+            animation: highlight-pulse 1.0s ease-out;
+        }
+
+    </style>
+</head>
+<body class="bg-slate-950">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚛️</span>
+                <span class="logo-text">Fysiklabbet</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Hem</a></li>
+                <li class="nav-dropdown">
+                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
+                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
+                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
+                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
+                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
+                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
+                    </ul>
+                </li>
+                <li class="nav-dropdown">
+                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
+                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
+                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
+                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
+                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
+                    </ul>
+                </li>
+                <li><a href="om.html" class="nav-link">Om</a></li>
+                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div id="root"></div>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+        // ======================================================================
+        // KONSTANTER
+        // ======================================================================
+        const G = 6.6743e-11;          // N·m²/kg² — gravitationskonstanten
+        const M_EARTH = 5.972e24;      // kg
+        const R_EARTH = 6.371e6;       // m
+        const M_HUMAN = 70;            // kg
+        const M_SUN   = 1.989e30;      // kg
+        const M_MOON  = 7.342e22;      // kg
+        const M_JUPITER = 1.898e27;    // kg
+
+        // Logiska canvas-mått (rita-koordinatsystem)
+        const CANVAS_W = 880;
+        const CANVAS_H = 540;
+
+        // Pixel→meter-skala för statiskt läge: 1 px = 1e8 m (= 100 000 km)
+        // Det gör t.ex. 800 px ≈ 8·10¹⁰ m (drygt halva Jorden–Sol-avståndet)
+        const M_PER_PX = 1e8;
+
+        // Mass-slider-enhet: 10²⁴ kg (dvs ungefär Jordens massa-storlek)
+        const MASS_UNIT = 1e24;
+
+        // ======================================================================
+        // HJÄLPFUNKTIONER
+        // ======================================================================
+        const formatNum = (v, d = 2) => {
+            if (!isFinite(v)) return '∞';
+            return v.toFixed(d).replace('.', ',');
+        };
+
+        // Vetenskaplig notation med svenskt komma och Unicode-superscript
+        const SUPER = { '-': '⁻', '0': '⁰', '1': '¹', '2': '²', '3': '³',
+                        '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+        const sup = (n) => String(n).split('').map(c => SUPER[c] || c).join('');
+
+        const formatSci = (v, d = 2) => {
+            if (!isFinite(v) || v === 0) return '0';
+            const exp = Math.floor(Math.log10(Math.abs(v)));
+            const mant = v / Math.pow(10, exp);
+            return `${formatNum(mant, d)}·10${sup(exp)}`;
+        };
+
+        // Smart formattering för krafter
+        const formatForce = (F) => {
+            if (!isFinite(F) || F === 0) return '0 N';
+            const abs = Math.abs(F);
+            if (abs < 1e-3) return `${formatSci(F, 2)} N`;
+            if (abs < 1)    return `${formatNum(F, 3)} N`;
+            if (abs < 1e3)  return `${formatNum(F, 1)} N`;
+            if (abs < 1e6)  return `${formatNum(F / 1e3, 2)} kN`;
+            if (abs < 1e9)  return `${formatNum(F / 1e6, 2)} MN`;
+            return `${formatSci(F, 2)} N`;
+        };
+
+        const formatMass = (m_kg) => {
+            return `${formatSci(m_kg, 1)} kg`;
+        };
+
+        const formatDistance = (r_m) => {
+            if (r_m < 1e3)  return `${formatNum(r_m, 1)} m`;
+            if (r_m < 1e6)  return `${formatNum(r_m / 1e3, 1)} km`;
+            if (r_m < 1e9)  return `${formatNum(r_m / 1e6, 1)} Mm`;
+            return `${formatSci(r_m, 1)} m`;
+        };
+
+        // HiDPI-canvas
+        function setupCanvasHiDPI(canvas, logicalW, logicalH) {
+            const dpr = window.devicePixelRatio || 1;
+            const displayW = canvas.clientWidth || logicalW;
+            const targetW = Math.max(logicalW, Math.round(displayW * dpr));
+            const targetH = Math.round(targetW * (logicalH / logicalW));
+            if (canvas.width !== targetW || canvas.height !== targetH) {
+                canvas.width = targetW;
+                canvas.height = targetH;
+            }
+            return targetW / logicalW;
+        }
+
+        // Blandad text (kursiva variabler + raka enheter, valfritt nedsänkt) på canvas
+        function drawMixedText(ctx, parts, x, y, fontSize, weight = '400', align = 'left') {
+            const subFontSize = Math.round(fontSize * 0.72);
+            const subYOffset = fontSize * 0.28;
+            const widths = parts.map(p => {
+                const fs = p.subscript ? subFontSize : fontSize;
+                ctx.font = `${weight} ${p.italic ? 'italic ' : ''}${fs}px Poppins, sans-serif`;
+                return ctx.measureText(p.text).width;
+            });
+            const total = widths.reduce((a, b) => a + b, 0);
+            let startX = x;
+            if (align === 'right') startX = x - total;
+            else if (align === 'center') startX = x - total / 2;
+            ctx.textAlign = 'left';
+            let cursor = startX;
+            for (let i = 0; i < parts.length; i++) {
+                const p = parts[i];
+                const fs = p.subscript ? subFontSize : fontSize;
+                ctx.font = `${weight} ${p.italic ? 'italic ' : ''}${fs}px Poppins, sans-serif`;
+                ctx.fillStyle = p.color || ctx.fillStyle;
+                ctx.fillText(p.text, cursor, p.subscript ? y + subYOffset : y);
+                cursor += widths[i];
+            }
+            return total;
+        }
+
+        // Visuell radie för en kropp baserad på massa (logaritmisk för stora skillnader)
+        const bodyRadius = (m_units) => {
+            // m_units i 10²⁴ kg, mellan ca 0.1 och 2000
+            const log = Math.log10(Math.max(0.1, m_units));   // -1 till 3.3
+            return 14 + (log + 1) * 8;                          // ca 14 till 48 px
+        };
+
+        // ======================================================================
+        // STJÄRNFÄLT (statisk bakgrund)
+        // ======================================================================
+        const STARS = (() => {
+            const arr = [];
+            for (let i = 0; i < 220; i++) {
+                arr.push({
+                    x: Math.random() * CANVAS_W,
+                    y: Math.random() * CANVAS_H,
+                    r: Math.random() * 1.2 + 0.2,
+                    a: Math.random() * 0.6 + 0.2,
+                });
+            }
+            return arr;
+        })();
+
+        function drawStarfield(ctx, W, H) {
+            ctx.fillStyle = '#020308';
+            ctx.fillRect(0, 0, W, H);
+            // Subtil galax-glöd
+            const g = ctx.createRadialGradient(W * 0.6, H * 0.4, 20, W * 0.6, H * 0.4, W * 0.55);
+            g.addColorStop(0, 'rgba(56, 189, 248, 0.05)');
+            g.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+            for (const s of STARS) {
+                ctx.fillStyle = `rgba(226, 232, 240, ${s.a})`;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // ======================================================================
+        // RITHJÄLPARE
+        // ======================================================================
+        function drawBody(ctx, x, y, r, colors, label, texture) {
+            // Glow
+            const glow = ctx.createRadialGradient(x, y, r * 0.5, x, y, r * 2.4);
+            glow.addColorStop(0, colors.glow);
+            glow.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(x, y, r * 2.4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Kropp
+            const grad = ctx.createRadialGradient(x - r * 0.35, y - r * 0.35, r * 0.1, x, y, r);
+            grad.addColorStop(0, colors.bright);
+            grad.addColorStop(0.55, colors.mid);
+            grad.addColorStop(1, colors.dark);
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Texturöverlägg (klippt till kroppen) — bara när kroppen är stor nog
+            if (texture && r >= 14) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(x, y, r - 0.5, 0, Math.PI * 2);
+                ctx.clip();
+                drawPlanetTexture(ctx, x, y, r, texture);
+                // Återapplicera radial-skuggning ovanpå texturen för 3D-känsla
+                const shade = ctx.createRadialGradient(x - r * 0.35, y - r * 0.35, r * 0.2, x, y, r * 1.05);
+                shade.addColorStop(0, 'rgba(255, 255, 255, 0.12)');
+                shade.addColorStop(0.55, 'rgba(0, 0, 0, 0)');
+                shade.addColorStop(1, 'rgba(0, 0, 0, 0.5)');
+                ctx.fillStyle = shade;
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            ctx.strokeStyle = colors.edge;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Etikett
+            if (label) {
+                ctx.fillStyle = '#e2e8f0';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top';
+                drawMixedText(ctx, label, x, y + r + 8, 13, '600', 'center');
+            }
+        }
+
+        // Planetspecifik yttextur — ritas inom en cirkulär klippmask centrerad i (x,y) med radie r
+        function drawPlanetTexture(ctx, x, y, r, texture) {
+            // Hjälpfunktion: rita en oval-fläck (dx, dy är -1..1 fraktion av r)
+            const blob = (dx, dy, sx, sy, color, rot = 0) => {
+                ctx.save();
+                ctx.translate(x + dx * r, y + dy * r);
+                ctx.rotate(rot);
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, sx * r, sy * r, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            };
+
+            if (texture === 'earth') {
+                // Hav (lätt ljusare/mörkare variation för djup)
+                ctx.fillStyle = 'rgba(8, 47, 73, 0.25)';
+                ctx.fillRect(x - r, y - r, r * 2, r * 2);
+                // Kontinenter — gröna landmassor
+                const land = 'rgba(22, 101, 52, 0.92)';
+                const landLight = 'rgba(74, 124, 60, 0.85)';
+                const sand = 'rgba(180, 142, 78, 0.7)';
+                // Eurasien
+                blob(0.20, -0.30, 0.55, 0.28, land, -0.25);
+                blob(0.45, -0.15, 0.22, 0.18, landLight);
+                blob(0.10, -0.18, 0.18, 0.12, landLight);
+                // Afrika
+                blob(0.18, 0.20, 0.22, 0.32, land, 0.05);
+                blob(0.25, 0.45, 0.13, 0.18, sand, 0.1);
+                // Nordamerika
+                blob(-0.45, -0.30, 0.30, 0.30, land, -0.4);
+                blob(-0.25, -0.15, 0.10, 0.12, landLight);
+                // Sydamerika
+                blob(-0.30, 0.30, 0.16, 0.30, land, -0.2);
+                // Australien
+                blob(0.55, 0.45, 0.18, 0.10, sand, 0);
+                // Polarisar
+                ctx.fillStyle = 'rgba(248, 250, 252, 0.85)';
+                ctx.beginPath();
+                ctx.ellipse(x, y - r * 0.92, r * 0.55, r * 0.13, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(x, y + r * 0.94, r * 0.45, r * 0.10, 0, 0, Math.PI * 2);
+                ctx.fill();
+                // Molnstråk
+                const cloud = 'rgba(248, 250, 252, 0.32)';
+                blob(-0.50, 0.10, 0.30, 0.06, cloud, 0.1);
+                blob(0.30, 0.55, 0.25, 0.05, cloud, -0.2);
+                blob(0.55, -0.45, 0.20, 0.05, cloud, 0.3);
+                blob(-0.10, -0.55, 0.22, 0.05, cloud, 0);
+
+            } else if (texture === 'mars') {
+                // Dammig rost-bas
+                ctx.fillStyle = 'rgba(133, 60, 30, 0.35)';
+                ctx.fillRect(x - r, y - r, r * 2, r * 2);
+                // Mörka basaltområden (Syrtis Major, etc.) — naturliga, inte cirklar
+                const dark = 'rgba(76, 33, 18, 0.55)';
+                blob(-0.15, -0.10, 0.30, 0.18, dark, -0.3);
+                blob(0.30, 0.10, 0.22, 0.30, dark, 0.4);
+                blob(-0.30, 0.30, 0.22, 0.13, dark, 0.1);
+                blob(0.45, -0.30, 0.15, 0.10, dark, 0);
+                // Ljusare dammbälten
+                const dust = 'rgba(228, 175, 110, 0.4)';
+                blob(0.05, 0.40, 0.40, 0.14, dust, -0.1);
+                blob(-0.45, -0.05, 0.20, 0.18, dust, 0.2);
+                // Polarisar (mindre och något off-white än jordens)
+                ctx.fillStyle = 'rgba(254, 252, 232, 0.82)';
+                ctx.beginPath();
+                ctx.ellipse(x, y - r * 0.9, r * 0.32, r * 0.10, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(x + r * 0.05, y + r * 0.92, r * 0.22, r * 0.08, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+            } else if (texture === 'moon') {
+                // Maria — mörka basaltslätter
+                const mare = 'rgba(55, 65, 81, 0.55)';
+                blob(-0.18, -0.30, 0.28, 0.22, mare, -0.2);  // Mare Imbrium
+                blob(0.10, -0.15, 0.18, 0.16, mare, 0.1);    // Mare Serenitatis
+                blob(0.30, 0.05, 0.16, 0.20, mare, 0.3);     // Mare Tranquillitatis
+                blob(-0.05, 0.25, 0.30, 0.18, mare, -0.1);   // Mare Nubium / Cognitum
+                blob(-0.40, 0.10, 0.16, 0.20, mare, 0.2);    // Oceanus Procellarum
+                // Ljusare högländer (subtila)
+                const high = 'rgba(241, 245, 249, 0.18)';
+                blob(0.45, 0.40, 0.18, 0.18, high, 0);
+                blob(-0.45, -0.50, 0.15, 0.15, high, 0);
+                // Stora kratrar (Tycho m.fl.) med ljus rand
+                const drawCrater = (cx, cy, cr) => {
+                    ctx.save();
+                    ctx.translate(x + cx * r, y + cy * r);
+                    ctx.fillStyle = 'rgba(248, 250, 252, 0.55)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, cr * r, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = 'rgba(71, 85, 105, 0.45)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, cr * r * 0.6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                };
+                drawCrater(-0.05, 0.55, 0.06);   // Tycho
+                drawCrater(0.45, -0.35, 0.04);
+                drawCrater(-0.55, 0.20, 0.035);
+
+            } else if (texture === 'jupiter') {
+                // Horisontella band (zoner ljusare, bälten mörkare)
+                const bands = [
+                    { y0: -0.95, y1: -0.78, color: 'rgba(120, 53, 15, 0.45)' },
+                    { y0: -0.78, y1: -0.55, color: 'rgba(254, 215, 170, 0.45)' },
+                    { y0: -0.55, y1: -0.30, color: 'rgba(146, 64, 14, 0.50)' },
+                    { y0: -0.30, y1: -0.05, color: 'rgba(254, 243, 199, 0.40)' },
+                    { y0: -0.05, y1:  0.18, color: 'rgba(180, 83, 9, 0.45)' },
+                    { y0:  0.18, y1:  0.42, color: 'rgba(254, 215, 170, 0.40)' },
+                    { y0:  0.42, y1:  0.65, color: 'rgba(146, 64, 14, 0.50)' },
+                    { y0:  0.65, y1:  0.85, color: 'rgba(254, 243, 199, 0.35)' },
+                    { y0:  0.85, y1:  1.0,  color: 'rgba(120, 53, 15, 0.45)' },
+                ];
+                for (const b of bands) {
+                    ctx.fillStyle = b.color;
+                    ctx.fillRect(x - r, y + b.y0 * r, r * 2, (b.y1 - b.y0) * r);
+                }
+                // Turbulens — små virvlar längs bandgränser
+                const swirl = 'rgba(120, 53, 15, 0.35)';
+                blob(-0.40, -0.25, 0.10, 0.04, swirl, 0.1);
+                blob(0.20, -0.05, 0.12, 0.04, swirl, -0.05);
+                blob(-0.10, 0.40, 0.14, 0.04, swirl, 0.15);
+                // Stora röda fläcken
+                ctx.save();
+                ctx.translate(x + r * 0.20, y + r * 0.30);
+                const grsGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, r * 0.18);
+                grsGrad.addColorStop(0, 'rgba(220, 100, 70, 0.75)');
+                grsGrad.addColorStop(1, 'rgba(127, 29, 29, 0.4)');
+                ctx.fillStyle = grsGrad;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, r * 0.20, r * 0.11, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+            } else if (texture === 'sun') {
+                // Ljusare kärna (fotosfär-glöd) — ren yta utan fläckar
+                const core = ctx.createRadialGradient(x, y, 0, x, y, r * 0.7);
+                core.addColorStop(0, 'rgba(255, 255, 235, 0.35)');
+                core.addColorStop(1, 'rgba(255, 255, 235, 0)');
+                ctx.fillStyle = core;
+                ctx.beginPath();
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function drawArrow(ctx, fromX, fromY, toX, toY, color, lineWidth = 3, headSize = 12) {
+            const dx = toX - fromX;
+            const dy = toY - fromY;
+            const len = Math.sqrt(dx * dx + dy * dy);
+            if (len < 4) return;
+            const angle = Math.atan2(dy, dx);
+
+            ctx.save();
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = color;
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.lineCap = 'round';
+
+            // Linje (lite kortare så pilspetsen ligger på toX/toY)
+            const lineEndX = toX - Math.cos(angle) * (headSize - 1);
+            const lineEndY = toY - Math.sin(angle) * (headSize - 1);
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(lineEndX, lineEndY);
+            ctx.stroke();
+
+            // Pilspets
+            ctx.beginPath();
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - headSize * Math.cos(angle - Math.PI / 6),
+                       toY - headSize * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(toX - headSize * Math.cos(angle + Math.PI / 6),
+                       toY - headSize * Math.sin(angle + Math.PI / 6));
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        // Rita streckad avståndslinje med "r = ..." i mitten
+        function drawDistanceLine(ctx, x1, y1, x2, y2, distLabel) {
+            ctx.save();
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.5)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            ctx.restore();
+
+            const mx = (x1 + x2) / 2;
+            const my = (y1 + y2) / 2;
+
+            // Bakgrund så texten är läsbar mot stjärnorna
+            ctx.font = '600 13px Poppins, sans-serif';
+            const totalW = ctx.measureText(distLabel).width + 22;
+            ctx.fillStyle = 'rgba(2, 6, 16, 0.78)';
+            ctx.beginPath();
+            ctx.roundRect(mx - totalW / 2, my - 12, totalW, 24, 6);
+            ctx.fill();
+
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            const labelW = ctx.measureText(distLabel).width;
+            const startX = mx - labelW / 2 - 5;
+            // "r" kursivt
+            ctx.fillStyle = '#a5b4fc';
+            ctx.font = 'italic 14px Poppins, sans-serif';
+            ctx.fillText('r', startX, my);
+            // " = ..." normal — lägg till luft mellan r och =
+            ctx.fillStyle = '#e2e8f0';
+            const rWidth = ctx.measureText('r').width;
+            ctx.font = '600 13px Poppins, sans-serif';
+            ctx.fillText(' = ' + distLabel, startX + rWidth + 3, my);
+        }
+
+        // ======================================================================
+        // KROPPSPRESETER
+        // ======================================================================
+        // Standardfärger när inget preset är aktivt
+        const DEFAULT_BODY_COLORS_1 = {
+            glow: 'rgba(251, 146, 60, 0.55)',
+            bright: '#fde68a', mid: '#f59e0b', dark: '#b45309', edge: '#fed7aa',
+        };
+        const DEFAULT_BODY_COLORS_2 = {
+            glow: 'rgba(56, 189, 248, 0.55)',
+            bright: '#bae6fd', mid: '#38bdf8', dark: '#0369a1', edge: '#bae6fd',
+        };
+
+        const PRESETS = [
+            { name: 'Måne',     m_units: 0.073, texture: 'moon', colors: {
+                // Bonewhite/regolit — varmgrå med subtil glöd
+                glow: 'rgba(226, 232, 240, 0.28)',
+                bright: '#e2e8f0', mid: '#a8a29e', dark: '#44403c', edge: '#d6d3d1',
+            }},
+            { name: 'Mars',     m_units: 0.642, texture: 'mars', colors: {
+                // Dammig rost/sienna — inte knallröd, varm jordton
+                glow: 'rgba(160, 82, 45, 0.42)',
+                bright: '#deb887', mid: '#a0522d', dark: '#5c2710', edge: '#cd853f',
+            }},
+            { name: 'Jorden',   m_units: 5.972, texture: 'earth', colors: {
+                // Hav i blått, kontinenterna ritas i texturen
+                glow: 'rgba(56, 189, 248, 0.40)',
+                bright: '#7dd3fc', mid: '#0284c7', dark: '#0c4a6e', edge: '#bae6fd',
+            }},
+            { name: 'Jupiter',  m_units: 1898, texture: 'jupiter', colors: {
+                // Cremebas — banden ger den slutliga karaktären
+                glow: 'rgba(202, 138, 4, 0.40)',
+                bright: '#fef3c7', mid: '#d97706', dark: '#78350f', edge: '#fbbf24',
+            }},
+            { name: 'Solen',    m_units: 1.989e6, texture: 'sun', colors: {
+                // Stark fotosfärsglöd, vitgul kärna mot orange limb
+                glow: 'rgba(251, 191, 36, 0.75)',
+                bright: '#fffbeb', mid: '#fbbf24', dark: '#c2410c', edge: '#fde047',
+            }},
+        ];
+
+        // Logaritmisk slider eftersom massor spänner 8 storleksordningar
+        const SLIDER_LOG_MIN = -1.3;   // ≈ 5·10²² kg (mindre än månen)
+        const SLIDER_LOG_MAX = 6.5;    // ≈ 3·10³⁰ kg (lite tyngre än solen)
+
+        // ======================================================================
+        // HUVUDKOMPONENT
+        // ======================================================================
+        const App = () => {
+            const [mode, setMode] = useState('statisk'); // 'statisk' | 'manniska'
+            const [m1Units, setM1Units] = useState(50);   // i 10²⁴ kg
+            const [m2Units, setM2Units] = useState(5);
+            const [pos1, setPos1] = useState({ x: 240, y: 270 });
+            const [pos2, setPos2] = useState({ x: 640, y: 270 });
+            const [showForces, setShowForces] = useState(true);
+            const [showDistance, setShowDistance] = useState(false);
+            const [showMasses, setShowMasses] = useState(false);
+            const [humanAngle, setHumanAngle] = useState(-Math.PI / 2);
+            const [highlight, setHighlight] = useState({ m1: false, m2: false, r: false });
+
+            const canvasRef = useRef(null);
+            const fullscreenRef = useRef(null);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [dragging, setDragging] = useState(null); // null | 1 | 2 | 'human'
+
+            // Härled massor i kg
+            const m1_kg = m1Units * MASS_UNIT;
+            const m2_kg = m2Units * MASS_UNIT;
+
+            // Härled radie (för kollisions/visuell skala)
+            const r1_px = bodyRadius(m1Units);
+            const r2_px = bodyRadius(m2Units);
+
+            // Aktuellt avstånd och kraft
+            const dx = pos2.x - pos1.x;
+            const dy = pos2.y - pos1.y;
+            const dist_px = Math.sqrt(dx * dx + dy * dy);
+            const r_m = dist_px * M_PER_PX;
+            const F_static = (r_m > 0) ? G * m1_kg * m2_kg / (r_m * r_m) : 0;
+
+            // ----------------------------------------------------------
+            // Highlight-effekter när variabler ändras
+            // ----------------------------------------------------------
+            useEffect(() => {
+                setHighlight(h => ({ ...h, m1: true }));
+                const t = setTimeout(() => setHighlight(h => ({ ...h, m1: false })), 1000);
+                return () => clearTimeout(t);
+            }, [m1Units]);
+            useEffect(() => {
+                setHighlight(h => ({ ...h, m2: true }));
+                const t = setTimeout(() => setHighlight(h => ({ ...h, m2: false })), 1000);
+                return () => clearTimeout(t);
+            }, [m2Units]);
+            useEffect(() => {
+                setHighlight(h => ({ ...h, r: true }));
+                const t = setTimeout(() => setHighlight(h => ({ ...h, r: false })), 700);
+                return () => clearTimeout(t);
+            }, [Math.round(dist_px)]);
+
+            // ----------------------------------------------------------
+            // Fullskärm
+            // ----------------------------------------------------------
+            const toggleFullscreen = useCallback(() => {
+                const el = fullscreenRef.current;
+                if (!el) return;
+                if (!document.fullscreenElement) el.requestFullscreen?.();
+                else document.exitFullscreen?.();
+            }, []);
+            useEffect(() => {
+                const h = () => setIsFullscreen(!!document.fullscreenElement);
+                document.addEventListener('fullscreenchange', h);
+                return () => document.removeEventListener('fullscreenchange', h);
+            }, []);
+
+            // ----------------------------------------------------------
+            // Interaktion (dra kroppar / människa)
+            // ----------------------------------------------------------
+            const getCanvasCoord = useCallback((clientX, clientY) => {
+                const canvas = canvasRef.current;
+                if (!canvas) return null;
+                const rect = canvas.getBoundingClientRect();
+                const sx = CANVAS_W / rect.width;
+                const sy = CANVAS_H / rect.height;
+                return { x: (clientX - rect.left) * sx, y: (clientY - rect.top) * sy };
+            }, []);
+
+            const earthCenter = { x: CANVAS_W / 2, y: CANVAS_H / 2 + 30 };
+            const earthVisualR = 150;
+            const humanVisualR = 26;
+
+            const onPointerDown = useCallback((e) => {
+                const c = getCanvasCoord(e.clientX, e.clientY);
+                if (!c) return;
+                if (mode === 'manniska') {
+                    // Klick nära jordens yta → dra människan
+                    const ddx = c.x - earthCenter.x;
+                    const ddy = c.y - earthCenter.y;
+                    const d = Math.sqrt(ddx * ddx + ddy * ddy);
+                    if (Math.abs(d - earthVisualR) < humanVisualR + 30) {
+                        setDragging('human');
+                        e.currentTarget.setPointerCapture?.(e.pointerId);
+                    }
+                    return;
+                }
+                const d1 = Math.hypot(c.x - pos1.x, c.y - pos1.y);
+                const d2 = Math.hypot(c.x - pos2.x, c.y - pos2.y);
+                // Statisk: båda kroppar dragbara
+                if (d1 < r1_px + 12 && d1 < d2) {
+                    setDragging(1);
+                    e.currentTarget.setPointerCapture?.(e.pointerId);
+                } else if (d2 < r2_px + 12) {
+                    setDragging(2);
+                    e.currentTarget.setPointerCapture?.(e.pointerId);
+                }
+            }, [getCanvasCoord, mode, pos1, pos2, r1_px, r2_px]);
+
+            const onPointerMove = useCallback((e) => {
+                if (!dragging) return;
+                const c = getCanvasCoord(e.clientX, e.clientY);
+                if (!c) return;
+                if (dragging === 'human') {
+                    const ang = Math.atan2(c.y - earthCenter.y, c.x - earthCenter.x);
+                    setHumanAngle(ang);
+                    return;
+                }
+                // Statisk: håll innanför canvas och förhindra överlappning
+                const myR  = dragging === 1 ? r1_px : r2_px;
+                const otherR = dragging === 1 ? r2_px : r1_px;
+                const otherPos = dragging === 1 ? pos2 : pos1;
+                let nx = Math.max(myR + 4, Math.min(CANVAS_W - myR - 4, c.x));
+                let ny = Math.max(myR + 4, Math.min(CANVAS_H - myR - 4, c.y));
+                const ddx = nx - otherPos.x;
+                const ddy = ny - otherPos.y;
+                const d = Math.hypot(ddx, ddy);
+                const minD = myR + otherR + 6;
+                if (d < minD && d > 0) {
+                    nx = otherPos.x + (ddx / d) * minD;
+                    ny = otherPos.y + (ddy / d) * minD;
+                    nx = Math.max(myR + 4, Math.min(CANVAS_W - myR - 4, nx));
+                    ny = Math.max(myR + 4, Math.min(CANVAS_H - myR - 4, ny));
+                }
+                if (dragging === 1) {
+                    setPos1({ x: nx, y: ny });
+                } else {
+                    setPos2({ x: nx, y: ny });
+                }
+            }, [dragging, getCanvasCoord, pos1, pos2, r1_px, r2_px, mode]);
+
+            const onPointerUp = useCallback(() => {
+                setDragging(null);
+            }, []);
+
+            // ----------------------------------------------------------
+            // RITNING
+            // ----------------------------------------------------------
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                if (!canvas) return;
+                const scale = setupCanvasHiDPI(canvas, CANVAS_W, CANVAS_H);
+                const ctx = canvas.getContext('2d');
+                ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+                drawStarfield(ctx, CANVAS_W, CANVAS_H);
+
+                if (mode === 'manniska') {
+                    drawHumanScene(ctx);
+                } else {
+                    drawTwoBodyScene(ctx);
+                }
+            });
+
+            const drawTwoBodyScene = (ctx) => {
+                // Avståndslinje (kan döljas via kryssruta)
+                if (showDistance && dist_px > r1_px + r2_px + 8) {
+                    drawDistanceLine(ctx, pos1.x, pos1.y, pos2.x, pos2.y, formatDistance(r_m));
+                }
+
+                // Rita kropparna FÖRST så att kraftpilarna kan ritas ovanpå (utgår
+                // från tyngdpunkten — alltså kroppens centrum)
+                const m1Label = showMasses ? [
+                    { text: 'm', italic: true, color: '#fde68a' },
+                    { text: '₁', italic: false, color: '#fde68a' },
+                    { text: ` = ${formatSci(m1_kg, 1)} kg`, italic: false, color: '#fcd34d' },
+                ] : null;
+                const m2Label = showMasses ? [
+                    { text: 'm', italic: true, color: '#bae6fd' },
+                    { text: '₂', italic: false, color: '#bae6fd' },
+                    { text: ` = ${formatSci(m2_kg, 1)} kg`, italic: false, color: '#a5f3fc' },
+                ] : null;
+                const preset1 = PRESETS.find(p => p.m_units === m1Units);
+                const preset2 = PRESETS.find(p => p.m_units === m2Units);
+                const colors1 = preset1?.colors ?? DEFAULT_BODY_COLORS_1;
+                const colors2 = preset2?.colors ?? DEFAULT_BODY_COLORS_2;
+
+                drawBody(ctx, pos1.x, pos1.y, r1_px, colors1, m1Label, preset1?.texture);
+                drawBody(ctx, pos2.x, pos2.y, r2_px, colors2, m2Label, preset2?.texture);
+
+                // Kraftvektorer (bara om användaren vill se dem och kroppar inte överlappar)
+                const minSep = r1_px + r2_px + 8;
+                if (showForces && dist_px > minSep && F_static > 0) {
+                    // STRIKT LINJÄR skala: pillängd = F · K där K är en FAST konstant
+                    // (oberoende av aktuella massor och avstånd). Konstanten är vald så att
+                    // default-scenariot (m₁=5·10²⁵ kg, m₂=5·10²⁴ kg, r=4·10¹⁰ m, F≈10¹⁹ N)
+                    // ger ca 100 px pil — en pil som syns tydligt utan att nå över till
+                    // den andra kroppen. När bodies dras närmare → F ökar → pilen blir
+                    // proportionellt längre (upp till canvasens halva storlek).
+                    const PX_PER_N = 1e-17;
+                    const MAX_ARROW = Math.min(CANVAS_W, CANVAS_H) / 2 - 30;
+                    const linearLen = F_static * PX_PER_N;
+                    const arrowLen = Math.min(MAX_ARROW, Math.max(4, linearLen));
+                    const ux = dx / dist_px;
+                    const uy = dy / dist_px;
+                    // Pil från kropp 1:s tyngdpunkt mot kropp 2 (sträcker sig
+                    // arrowLen pixlar utanför kroppen)
+                    const arrow1TipX = pos1.x + ux * (r1_px + arrowLen);
+                    const arrow1TipY = pos1.y + uy * (r1_px + arrowLen);
+                    drawArrow(ctx,
+                        pos1.x, pos1.y,
+                        arrow1TipX, arrow1TipY,
+                        '#fbbf24', 3, 12);
+                    // Pil från kropp 2:s tyngdpunkt mot kropp 1
+                    const arrow2TipX = pos2.x - ux * (r2_px + arrowLen);
+                    const arrow2TipY = pos2.y - uy * (r2_px + arrowLen);
+                    drawArrow(ctx,
+                        pos2.x, pos2.y,
+                        arrow2TipX, arrow2TipY,
+                        '#fbbf24', 3, 12);
+
+                    // Skriv ut kraften strax bortom varje pilspets, med vinkelrät
+                    // förskjutning på motstående sidor så etiketterna aldrig överlappar
+                    // varandra eller kropparna
+                    ctx.textBaseline = 'middle';
+                    const forceParts = [
+                        { text: 'F', italic: true, color: '#fbbf24' },
+                        { text: ` = ${formatForce(F_static)}`, italic: false, color: '#fde68a' },
+                    ];
+                    const tipPad = 6;        // kort förskjutning bortom spetsen i pilens riktning
+                    const perpOffset = 14;   // vinkelrät förskjutning (motsatt tecken för pil 1/2)
+                    // Pil 1 — etikett bortom spetsen, vinkelrätt åt ena sidan
+                    drawMixedText(ctx, forceParts,
+                        arrow1TipX + ux * tipPad + uy * perpOffset,
+                        arrow1TipY + uy * tipPad - ux * perpOffset,
+                        12, '600', ux >= 0 ? 'left' : 'right');
+                    // Pil 2 — etikett bortom spetsen, vinkelrätt åt motsatt sida
+                    drawMixedText(ctx, forceParts,
+                        arrow2TipX - ux * tipPad - uy * perpOffset,
+                        arrow2TipY - uy * tipPad + ux * perpOffset,
+                        12, '600', ux >= 0 ? 'right' : 'left');
+                }
+            };
+
+            const drawHumanScene = (ctx) => {
+                // Stor jord, centrerad
+                const ex = earthCenter.x;
+                const ey = earthCenter.y;
+                const er = earthVisualR;
+
+                // Jorden — stor planet med kontinent-anstrykning
+                drawBody(ctx, ex, ey, er, {
+                    glow:   'rgba(56, 189, 248, 0.4)',
+                    bright: '#7dd3fc',
+                    mid:    '#0ea5e9',
+                    dark:   '#075985',
+                    edge:   '#bae6fd',
+                });
+                // Naturtrogna kontinenter — stiliserade silhuetter med polygonpath
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(ex, ey, er - 2, 0, Math.PI * 2);
+                ctx.clip();
+
+                const drawLand = (points, color) => {
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.moveTo(ex + points[0][0], ey + points[0][1]);
+                    for (let i = 1; i < points.length; i++) {
+                        ctx.lineTo(ex + points[i][0], ey + points[i][1]);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                };
+
+                const landDark = 'rgba(22, 101, 52, 0.92)';   // mörkgrön (skog)
+                const landLight = 'rgba(74, 124, 60, 0.85)';  // ljusgrön
+                const sand = 'rgba(180, 142, 78, 0.7)';       // ökensand
+
+                // Nordamerika
+                drawLand([
+                    [-95, -55], [-90, -75], [-72, -92], [-50, -100], [-28, -95],
+                    [-14, -78], [-10, -55], [-22, -38], [-30, -22], [-44, -10],
+                    [-58, -16], [-72, -28], [-88, -38]
+                ], landDark);
+                // Mexiko/Centralamerika smal förbindelse
+                drawLand([
+                    [-44, -10], [-32, -5], [-28, 5], [-38, 0], [-44, -4]
+                ], landDark);
+
+                // Sydamerika
+                drawLand([
+                    [-38, 5], [-22, 0], [-10, 18], [-12, 42], [-22, 65],
+                    [-36, 82], [-46, 70], [-50, 42], [-48, 18]
+                ], landDark);
+
+                // Eurasien (Europa + Asien som en enhet)
+                drawLand([
+                    [-8, -78], [12, -85], [38, -92], [70, -94], [105, -82],
+                    [118, -65], [115, -45], [95, -38], [70, -42], [45, -48],
+                    [22, -55], [5, -62], [-5, -68]
+                ], landDark);
+                // Indiska halvön
+                drawLand([
+                    [55, -42], [70, -38], [72, -22], [60, -10], [52, -22]
+                ], landDark);
+                // Sahara/öknar — sandfärgad accent över norra Afrika
+                drawLand([
+                    [12, -32], [35, -36], [48, -28], [42, -16], [22, -14], [10, -22]
+                ], sand);
+
+                // Afrika
+                drawLand([
+                    [8, -38], [30, -42], [48, -32], [55, -12], [48, 12],
+                    [38, 32], [25, 50], [14, 38], [4, 14], [2, -10]
+                ], landDark);
+
+                // Australien
+                drawLand([
+                    [62, 38], [80, 32], [96, 38], [100, 52], [85, 60], [68, 56]
+                ], landDark);
+
+                // Polarisar — vita kalotter
+                ctx.fillStyle = 'rgba(241, 245, 249, 0.85)';
+                ctx.beginPath();
+                ctx.ellipse(ex, ey - er * 0.95, er * 0.55, er * 0.13, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(ex, ey + er * 0.95, er * 0.45, er * 0.10, 0, 0, Math.PI * 2);
+                ctx.fill();
+                // Subtila ljusare landområden för djupkänsla
+                drawLand([
+                    [-70, -60], [-50, -65], [-45, -50], [-60, -45]
+                ], landLight);
+                drawLand([
+                    [85, -65], [105, -60], [100, -50], [80, -52]
+                ], landLight);
+
+                ctx.restore();
+                // Etikett — vit text för läsbarhet mot blå hav
+                const earthLabelColor = '#f1f5f9';
+                ctx.fillStyle = earthLabelColor;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = '600 14px Poppins, sans-serif';
+                ctx.fillText('Jorden', ex, ey);
+                drawMixedText(ctx, [
+                    { text: 'm', italic: true, color: earthLabelColor },
+                    { text: 'J', subscript: true, color: earthLabelColor },
+                    { text: ` = ${formatSci(M_EARTH, 1)} kg`, color: earthLabelColor },
+                ], ex, ey + 18, 11, '500', 'center');
+
+                // Människa — överdimensionerad så hen syns
+                const hx = ex + Math.cos(humanAngle) * (er + humanVisualR);
+                const hy = ey + Math.sin(humanAngle) * (er + humanVisualR);
+                // Rita en stiliserad människa stående på jorden (rotera så att hen står upp radiellt)
+                const humanColor = '#e8d5b7';  // ljusbeige
+                ctx.save();
+                ctx.translate(hx, hy);
+                ctx.rotate(humanAngle + Math.PI / 2);
+                // Huvud
+                ctx.fillStyle = humanColor;
+                ctx.beginPath();
+                ctx.arc(0, -16, 7, 0, Math.PI * 2);
+                ctx.fill();
+                // Kropp
+                ctx.strokeStyle = humanColor;
+                ctx.lineWidth = 4;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(0, -8);
+                ctx.lineTo(0, 10);
+                ctx.stroke();
+                // Armar
+                ctx.beginPath();
+                ctx.moveTo(-9, 0);
+                ctx.lineTo(9, 0);
+                ctx.stroke();
+                // Ben
+                ctx.beginPath();
+                ctx.moveTo(0, 10);
+                ctx.lineTo(-7, 22);
+                ctx.moveTo(0, 10);
+                ctx.lineTo(7, 22);
+                ctx.stroke();
+                ctx.restore();
+
+                // Etikett bredvid människan — riktningsbaserad textjustering så att
+                // texten alltid sträcker sig utåt bort från figuren och aldrig hamnar
+                // ovanpå den, oavsett var på jordytan människan befinner sig
+                const cosA = Math.cos(humanAngle);
+                const sinA = Math.sin(humanAngle);
+                let labelAlign = 'center';
+                let labelOffset = 38;
+                if (Math.abs(cosA) > 0.3) {
+                    // Människan står huvudsakligen på höger/vänster sida — låt texten
+                    // sträcka sig utåt från figuren istället för att centreras över den
+                    labelAlign = cosA > 0 ? 'left' : 'right';
+                    labelOffset = 32;
+                }
+                const lx = ex + cosA * (er + humanVisualR + labelOffset);
+                const ly = ey + sinA * (er + humanVisualR + labelOffset);
+                const humanLabelColor = '#f1f5f9';  // vit, motsvarande Jorden
+                ctx.fillStyle = humanLabelColor;
+                ctx.textAlign = labelAlign;
+                ctx.textBaseline = 'middle';
+                ctx.font = '600 12px Poppins, sans-serif';
+                ctx.fillText('Människa', lx, ly - 8);
+                drawMixedText(ctx, [
+                    { text: 'm', italic: true, color: humanLabelColor },
+                    { text: 'p', subscript: true, color: humanLabelColor },
+                    { text: ` = ${M_HUMAN} kg`, color: humanLabelColor },
+                ], lx, ly + 7, 11, '500', labelAlign);
+
+                // Beräkna kraften (samma åt båda håll!)
+                const F_human = G * M_EARTH * M_HUMAN / (R_EARTH * R_EARTH);
+
+                // Pil 1: kraft PÅ människan, riktad mot jordens centrum
+                const ux = (ex - hx) / Math.hypot(ex - hx, ey - hy);
+                const uy = (ey - hy) / Math.hypot(ex - hx, ey - hy);
+                drawArrow(ctx,
+                    hx, hy,
+                    hx + ux * 60, hy + uy * 60,
+                    '#fbbf24', 3.5, 14);
+                // Etikett "F" intill pilen på människan
+                ctx.font = '600 12px Poppins, sans-serif';
+                ctx.fillStyle = '#fbbf24';
+                ctx.textBaseline = 'middle';
+                const labelX1 = hx + ux * 35 - uy * 16;
+                const labelY1 = hy + uy * 35 + ux * 16;
+                drawMixedText(ctx, [
+                    { text: 'F', italic: true, color: '#fbbf24' },
+                ], labelX1, labelY1, 11, '600', 'center');
+
+                // Pil 2: kraft PÅ jorden från människan — startar i jordens centrum
+                // och pekar radiellt mot människan (det är riktningen kraften verkar i)
+                const arrow2Len = 60;
+                const arrow2EndX = ex + Math.cos(humanAngle) * arrow2Len;
+                const arrow2EndY = ey + Math.sin(humanAngle) * arrow2Len;
+                drawArrow(ctx,
+                    ex, ey,
+                    arrow2EndX, arrow2EndY,
+                    '#fbbf24', 3.5, 14);
+                // Etikett "F" placerad bredvid pilens mitt på jorden
+                const arrow2MidX = ex + Math.cos(humanAngle) * (arrow2Len * 0.55);
+                const arrow2MidY = ey + Math.sin(humanAngle) * (arrow2Len * 0.55);
+                const labelX2 = arrow2MidX - Math.sin(humanAngle) * 18;
+                const labelY2 = arrow2MidY + Math.cos(humanAngle) * 18;
+                drawMixedText(ctx, [
+                    { text: 'F', italic: true, color: '#fbbf24' },
+                ], labelX2, labelY2, 11, '600', 'center');
+
+                // Stort kraftvärde i hörnet
+                ctx.fillStyle = 'rgba(2, 6, 16, 0.78)';
+                ctx.beginPath();
+                ctx.roundRect(14, 14, 280, 70, 10);
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(251, 191, 36, 0.4)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.fillStyle = '#fcd34d';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'top';
+                ctx.font = '600 12px Poppins, sans-serif';
+                ctx.fillText('Gravitationskraften (samma åt båda håll)', 24, 22);
+                ctx.font = '700 22px Poppins, sans-serif';
+                ctx.fillStyle = '#fbbf24';
+                drawMixedText(ctx, [
+                    { text: 'F', italic: true, color: '#fbbf24' },
+                    { text: ` = ${formatNum(F_human, 0)} N`, italic: false, color: '#fde68a' },
+                ], 24, 44, 22, '700', 'left');
+                ctx.font = '500 11px Poppins, sans-serif';
+                ctx.fillStyle = '#cbd5e1';
+                ctx.fillText(`≈ tyngden av en 70 kg-person på jordytan`, 24, 70);
+            };
+
+            // ----------------------------------------------------------
+            // JSX
+            // ----------------------------------------------------------
+            return (
+                <div className="p-4 md:p-8" style={{fontFamily:'Poppins, sans-serif'}}>
+                    <div className="max-w-7xl mx-auto">
+                        <div className="breadcrumb mb-6">
+                            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik 1</a> / Newtons gravitationslag
+                        </div>
+
+                        <header className="mb-6">
+                            <h1 className="text-3xl md:text-4xl font-bold text-slate-100 tracking-tight glow-text mb-3">
+                                Newtons gravitationslag
+                            </h1>
+                            <p className="text-slate-400 max-w-3xl mb-5">
+                                Två kroppar drar i varandra med en gravitationskraft som beror på deras massor och avståndet
+                                mellan dem. Dra i kropparna, ändra massorna med reglagen, och se hur kraften förändras
+                                enligt Newtons gravitationslag:
+                            </p>
+
+                            {/* Introduktionsformel — raka divisionsstreck och definierade beteckningar */}
+                            <div className="inline-flex items-stretch gap-5 px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/50">
+                                {/* F = */}
+                                <div className="flex flex-col items-center justify-center">
+                                    <div className="text-xs text-cyan-400/70 font-semibold mb-1">Gravitations­kraft</div>
+                                    <div className="text-2xl font-bold text-amber-300"><em>F</em></div>
+                                    <div className="text-xs text-transparent mt-1">·</div>
+                                </div>
+                                <div className="flex items-center text-2xl text-slate-400">=</div>
+                                {/* G */}
+                                <div className="flex flex-col items-center justify-center">
+                                    <div className="text-xs text-cyan-400/70 font-semibold mb-1">Gravitations­konstant</div>
+                                    <div className="text-2xl font-bold text-cyan-300"><em>G</em></div>
+                                    <div className="text-[0.65rem] text-slate-500 mt-1">6,674·10⁻¹¹ N·m²/kg²</div>
+                                </div>
+                                <div className="flex items-center text-2xl text-slate-500">·</div>
+                                {/* (m1·m2) / r² som riktigt bråk */}
+                                <div className="flex flex-col items-center justify-center text-center">
+                                    {/* Täljare: m1·m2 med etiketter ovan */}
+                                    <div className="flex items-end gap-2 mb-1">
+                                        <div className="flex flex-col items-center">
+                                            <div className="text-xs text-amber-300/70 font-semibold mb-1">Massa 1</div>
+                                            <div className="text-2xl font-bold text-amber-300"><em>m</em>₁</div>
+                                        </div>
+                                        <div className="text-2xl text-slate-500 mb-[2px]">·</div>
+                                        <div className="flex flex-col items-center">
+                                            <div className="text-xs text-sky-300/70 font-semibold mb-1">Massa 2</div>
+                                            <div className="text-2xl font-bold text-sky-300"><em>m</em>₂</div>
+                                        </div>
+                                    </div>
+                                    {/* Bråkstreck */}
+                                    <div className="border-t-2 border-slate-300 w-full"></div>
+                                    {/* Nämnare: r² med etikett under */}
+                                    <div className="flex flex-col items-center mt-1">
+                                        <div className="text-2xl font-bold text-indigo-300"><em>r</em>²</div>
+                                        <div className="text-xs text-indigo-300/70 font-semibold mt-1">Avstånd²</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </header>
+
+                        {/* Lägesväxlare */}
+                        <div className="mb-4 flex flex-wrap items-center gap-3">
+                            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Läge</span>
+                            <div className="mode-toggle">
+                                <button onClick={() => setMode('statisk')} className={mode === 'statisk' ? 'active' : ''}>📍 Statisk</button>
+                                <button onClick={() => setMode('manniska')} className={mode === 'manniska' ? 'active' : ''}>🧍 Människa på jorden</button>
+                            </div>
+                        </div>
+
+                        {/* Visualisering */}
+                        <div
+                            ref={fullscreenRef}
+                            className={`glass-card p-4 md:p-5 mb-6 ${isFullscreen ? 'bg-slate-950' : ''}`}
+                        >
+                            <div className="flex items-center justify-between mb-3">
+                                <h2 className="text-lg font-semibold text-slate-200">
+                                    {mode === 'statisk' && 'Två kroppar i rymden'}
+                                    {mode === 'manniska' && 'Människa på jordytan'}
+                                </h2>
+                                <span className="text-xs text-slate-500 hidden md:inline">
+                                    {mode === 'manniska'
+                                        ? 'Klicka och dra människan runt jorden'
+                                        : 'Klicka och dra kropparna för att flytta dem'}
+                                </span>
+                            </div>
+                            <div className="canvas-wrap" style={isFullscreen ? {
+                                height: 'calc(100vh - 120px)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            } : undefined}>
+                                <button
+                                    onClick={toggleFullscreen}
+                                    aria-label={isFullscreen ? 'Stäng fullskärm' : 'Öppna fullskärm'}
+                                    title={isFullscreen ? 'Stäng fullskärm' : 'Öppna fullskärm'}
+                                    className="absolute top-3 left-3 z-20 w-9 h-9 flex items-center justify-center rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-cyan-500/30 text-cyan-300 transition-colors"
+                                >
+                                    {isFullscreen
+                                        ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+                                        : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>}
+                                </button>
+
+                                {/* Visningsalternativ-overlay i övre högra hörnet — alltid synlig (även i fullskärm) */}
+                                {mode !== 'manniska' && (
+                                    <div className="absolute top-3 right-3 z-20 flex flex-col gap-1.5 px-3 py-2 rounded-lg bg-slate-900/80 border border-cyan-500/25 backdrop-blur-sm">
+                                        <label className="flex items-center gap-2 text-xs text-slate-200 cursor-pointer select-none">
+                                            <input type="checkbox" checked={showForces} onChange={e => setShowForces(e.target.checked)} className="w-3.5 h-3.5 accent-amber-500" />
+                                            Visa krafter
+                                        </label>
+                                        <label className="flex items-center gap-2 text-xs text-slate-200 cursor-pointer select-none">
+                                            <input type="checkbox" checked={showDistance} onChange={e => setShowDistance(e.target.checked)} className="w-3.5 h-3.5 accent-indigo-500" />
+                                            Visa avstånd
+                                        </label>
+                                        <label className="flex items-center gap-2 text-xs text-slate-200 cursor-pointer select-none">
+                                            <input type="checkbox" checked={showMasses} onChange={e => setShowMasses(e.target.checked)} className="w-3.5 h-3.5 accent-orange-500" />
+                                            Visa massor
+                                        </label>
+                                    </div>
+                                )}
+
+                                <canvas
+                                    ref={canvasRef}
+                                    width={CANVAS_W}
+                                    height={CANVAS_H}
+                                    onPointerDown={onPointerDown}
+                                    onPointerMove={onPointerMove}
+                                    onPointerUp={onPointerUp}
+                                    onPointerCancel={onPointerUp}
+                                    style={{
+                                        cursor: dragging ? 'grabbing' : 'grab',
+                                        ...(isFullscreen && {
+                                            // Fyll tillgänglig höjd, behåll proportioner och var horisontellt centrerad
+                                            maxHeight: '100%',
+                                            maxWidth: '100%',
+                                            width: 'auto',
+                                            height: '100%',
+                                            display: 'block',
+                                        }),
+                                    }}
+                                />
+
+                                {/* Massreglage-overlay längst ned — alltid synlig (även i fullskärm).
+                                    Begränsad i bredd och centrerad så den inte sträcker sig över hela canvasen. */}
+                                {mode !== 'manniska' && (
+                                    <div className="absolute bottom-3 left-1/2 z-20 grid grid-cols-1 md:grid-cols-2 gap-3 px-4 py-3 rounded-xl bg-slate-900/80 border border-cyan-500/25 backdrop-blur-sm"
+                                         style={{ transform: 'translateX(-50%)', width: 'min(820px, calc(100% - 24px))' }}>
+                                        {/* Massa 1 */}
+                                        <div>
+                                            <div className="flex items-center justify-between mb-1.5 gap-2">
+                                                <label className="text-xs font-semibold text-amber-300 whitespace-nowrap">
+                                                    <em>m</em>₁
+                                                </label>
+                                                <span className="text-[0.68rem] text-amber-200/80 font-mono">{formatSci(m1_kg, 1)} kg</span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                className="mass-slider"
+                                                min={SLIDER_LOG_MIN} max={SLIDER_LOG_MAX} step={0.02}
+                                                value={Math.log10(Math.max(m1Units, Math.pow(10, SLIDER_LOG_MIN)))}
+                                                onChange={e => setM1Units(Math.pow(10, parseFloat(e.target.value)))}
+                                            />
+                                            <div className="flex flex-wrap gap-1 mt-1.5">
+                                                {PRESETS.map(p => (
+                                                    <button key={'1-'+p.name} onClick={() => setM1Units(p.m_units)} className="preset-btn" style={{padding:'0.2rem 0.55rem',fontSize:'0.7rem'}}>
+                                                        {p.name}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        {/* Massa 2 */}
+                                        <div>
+                                            <div className="flex items-center justify-between mb-1.5 gap-2">
+                                                <label className="text-xs font-semibold text-sky-300 whitespace-nowrap">
+                                                    <em>m</em>₂
+                                                </label>
+                                                <span className="text-[0.68rem] text-sky-200/80 font-mono">{formatSci(m2_kg, 1)} kg</span>
+                                            </div>
+                                            <input
+                                                type="range"
+                                                className="mass-slider"
+                                                min={SLIDER_LOG_MIN} max={SLIDER_LOG_MAX} step={0.02}
+                                                value={Math.log10(Math.max(m2Units, Math.pow(10, SLIDER_LOG_MIN)))}
+                                                onChange={e => setM2Units(Math.pow(10, parseFloat(e.target.value)))}
+                                            />
+                                            <div className="flex flex-wrap gap-1 mt-1.5">
+                                                {PRESETS.map(p => (
+                                                    <button key={'2-'+p.name} onClick={() => setM2Units(p.m_units)} className="preset-btn" style={{padding:'0.2rem 0.55rem',fontSize:'0.7rem'}}>
+                                                        {p.name}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                        </div>
+
+                        {/* Formel + data */}
+                        {mode !== 'manniska' && (
+                            <div className="glass-card p-5 mb-6">
+                                <h2 className="text-lg font-semibold text-slate-200 mb-3">Newtons gravitationslag</h2>
+                                <div className="bg-slate-900/60 rounded-xl p-5 mb-4">
+                                    <div className="flex items-center justify-center gap-3 text-2xl flex-wrap">
+                                        <span className="text-amber-300"><em>F</em></span>
+                                        <span className="text-slate-500">=</span>
+                                        <span className="text-cyan-300"><em>G</em></span>
+                                        <span className="text-slate-500">·</span>
+                                        <div className="inline-flex flex-col items-center text-center">
+                                            <div className="px-2 pb-1">
+                                                <span className={`formula-highlight ${highlight.m1 ? 'changed' : ''}`} style={{color:'#fde68a'}}>
+                                                    <em>m</em>₁
+                                                </span>
+                                                <span className="mx-1 text-slate-500">·</span>
+                                                <span className={`formula-highlight ${highlight.m2 ? 'changed' : ''}`} style={{color:'#bae6fd'}}>
+                                                    <em>m</em>₂
+                                                </span>
+                                            </div>
+                                            <div className="border-t-2 border-slate-300 px-2 pt-1 text-center">
+                                                <span className={`formula-highlight ${highlight.r ? 'changed' : ''}`} style={{color:'#a5b4fc'}}>
+                                                    <em>r</em>²
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="mt-4 text-center text-sm text-slate-400">
+                                        <em>G</em> = 6,674·10⁻¹¹ N·m²/kg²
+                                    </div>
+                                </div>
+
+                                <div className="space-y-1">
+                                    <div className="data-row">
+                                        <span className="data-label">Massa 1</span>
+                                        <span className="data-value text-amber-300">
+                                            <em>m</em>₁ = {formatSci(m1_kg, 1)} kg
+                                        </span>
+                                    </div>
+                                    <div className="data-row">
+                                        <span className="data-label">Massa 2</span>
+                                        <span className="data-value text-sky-300">
+                                            <em>m</em>₂ = {formatSci(m2_kg, 1)} kg
+                                        </span>
+                                    </div>
+                                    <div className="data-row">
+                                        <span className="data-label">Avstånd</span>
+                                        <span className="data-value text-indigo-300">
+                                            <em>r</em> = {formatDistance(r_m)}
+                                        </span>
+                                    </div>
+                                    <div className="data-row">
+                                        <span className="data-label">Gravitationskraft</span>
+                                        <span className="data-value text-amber-400 text-lg">
+                                            <em>F</em> = {formatForce(F_static)}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Människa på jorden — egen sektion */}
+                        {mode === 'manniska' && (
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+                                <div className="glass-card p-5">
+                                    <h3 className="text-cyan-300 font-semibold mb-2">Lika stora krafter</h3>
+                                    <p className="text-sm text-slate-400 leading-relaxed">
+                                        Människan dras mot jordens centrum med en kraft <em>F</em> ≈ 686 N — och samtidigt
+                                        drar människan jorden mot sig med exakt samma kraft. Det är vad Newtons tredje lag säger.
+                                    </p>
+                                </div>
+                                <div className="glass-card p-5">
+                                    <h3 className="text-amber-300 font-semibold mb-2">Varför märks det inte?</h3>
+                                    <p className="text-sm text-slate-400 leading-relaxed">
+                                        Jordens acceleration är <em>a</em> = <em>F</em>/<em>m</em>_J ≈ 1,15·10⁻²² m/s² —
+                                        helt omätbart. Men <em>kraften</em> är fortfarande lika stor, oavsett massa.
+                                    </p>
+                                </div>
+                                <div className="glass-card p-5">
+                                    <h3 className="text-violet-300 font-semibold mb-2">Insättning</h3>
+                                    <p className="text-sm text-slate-300 leading-relaxed font-mono">
+                                        F = G · m_J · m_p / R_J²<br/>
+                                        F = 6,67·10⁻¹¹ · 5,97·10²⁴ · 70 / (6,37·10⁶)²<br/>
+                                        F ≈ <span className="text-amber-300 font-semibold">686 N</span>
+                                    </p>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Förklaring */}
+                        <div className="glass-card p-6">
+                            <h2 className="text-lg font-semibold text-slate-100 mb-4">Så funkar det</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-sm text-slate-300">
+                                <div>
+                                    <h3 className="font-semibold text-amber-300 mb-2">Massornas roll</h3>
+                                    <p>
+                                        Kraften växer linjärt med båda massorna: dubblar du <em>m</em>₁ blir kraften
+                                        dubbelt så stor. Dubblar du både <em>m</em>₁ och <em>m</em>₂ blir kraften
+                                        fyra gånger så stor.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-cyan-300 mb-2">Avståndets roll</h3>
+                                    <p>
+                                        Kraften avtar med kvadraten på avståndet — det är "invers kvadratlagen". Just därför
+                                        är gravitationen så mycket starkare nära en kropp än långt bort, och det är
+                                        anledningen till att månen håller sin bana men inte rusar in i jorden.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-violet-300 mb-2">Newtons tredje lag</h3>
+                                    <p>
+                                        De två gravitationspilarna är alltid lika långa — kropparna drar i varandra med
+                                        exakt samma kraft, oavsett om den ena är en planet och den andra ett dammkorn.
+                                        Bara <em>accelerationen</em> blir olika.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+</body>
+</html>

@@ -749,7 +749,7 @@
         const fmt = (n, d=1) => n.toFixed(d).replace('.', ',');
 
         // ====== SpectrumDisplay ======
-        function SpectrumDisplay({ element, mode, height = 170 }) {
+        function SpectrumDisplay({ element, mode, flipped = false, height = 170 }) {
             const canvasRef = useRef(null);
             const [hover, setHover] = useState(null);
             const [size, setSize] = useState({ w: 1000, h: height });
@@ -776,7 +776,7 @@
                 const ctx = c.getContext('2d');
                 ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
                 drawSpectrum(ctx, size.w, size.h);
-            }, [element, mode, size]);
+            }, [element, mode, flipped, size]);
 
             function drawSpectrum(ctx, W, H) {
                 const margin = { l: 20, r: 20, t: 14, b: 34 };
@@ -785,15 +785,21 @@
 
                 ctx.clearRect(0, 0, W, H);
 
-                const wlToX = (wl) => margin.l + ((wl - WL_MIN) / (WL_MAX - WL_MIN)) * gW;
+                const wlToX = (wl) => {
+                    const t = (wl - WL_MIN) / (WL_MAX - WL_MIN);
+                    return margin.l + (flipped ? 1 - t : t) * gW;
+                };
 
                 if (mode === 'emission') {
                     // Svart bakgrund
                     ctx.fillStyle = '#000';
                     ctx.fillRect(margin.l, margin.t, gW, gH);
                 } else {
-                    // Full regnbåge
-                    const grad = ctx.createLinearGradient(margin.l, 0, margin.l + gW, 0);
+                    // Full regnbåge — byt riktning på gradienten när spektrumet är vänt
+                    const grad = ctx.createLinearGradient(
+                        flipped ? margin.l + gW : margin.l, 0,
+                        flipped ? margin.l : margin.l + gW, 0
+                    );
                     for (let wl = WL_MIN; wl <= WL_MAX; wl += 5) {
                         const t = (wl - WL_MIN) / (WL_MAX - WL_MIN);
                         const [r, g, b] = wavelengthToRGB(wl);
@@ -868,12 +874,12 @@
                 const margin = { l: 20, r: 20 };
                 const gW = rect.width - margin.l - margin.r;
                 if (x < margin.l || x > margin.l + gW) { setHover(null); return; }
-                const wl = WL_MIN + ((x - margin.l) / gW) * (WL_MAX - WL_MIN);
 
-                // Hitta närmsta linje inom 8 px
+                // Hitta närmsta linje inom 10 px
                 let closest = null, minDist = Infinity;
                 element.lines.forEach(line => {
-                    const lx = margin.l + ((line.wl - WL_MIN) / (WL_MAX - WL_MIN)) * gW;
+                    const t = (line.wl - WL_MIN) / (WL_MAX - WL_MIN);
+                    const lx = margin.l + (flipped ? 1 - t : t) * gW;
                     const d = Math.abs(lx - x);
                     if (d < 10 && d < minDist) { minDist = d; closest = line; }
                 });
@@ -893,7 +899,7 @@
                         <div style={{
                             position: 'absolute',
                             bottom: 40,
-                            left: `${20 + ((hover.wl - WL_MIN)/(WL_MAX - WL_MIN)) * (size.w - 40)}px`,
+                            left: `${20 + (flipped ? 1 - (hover.wl - WL_MIN)/(WL_MAX - WL_MIN) : (hover.wl - WL_MIN)/(WL_MAX - WL_MIN)) * (size.w - 40)}px`,
                             transform: 'translateX(-50%)',
                             padding: '6px 10px',
                             background: 'rgba(15, 23, 42, 0.95)',
@@ -998,7 +1004,7 @@
         }
 
         // ====== Jämförelsesektion ======
-        function CompareSection({ sortedList, sortOrder, list, setList, cMode, setCMode }) {
+        function CompareSection({ sortedList, sortOrder, list, setList, cMode, setCMode, flipped, setFlipped }) {
             const updateAt = (idx, z) => {
                 const el = ELEMENTS.find(e => e.z === z);
                 if (!el) return;
@@ -1023,15 +1029,29 @@
                                 Stapla två eller fler grundämnen ovanför varandra och jämför deras fingeravtryck av ljus.
                             </p>
                         </div>
-                        <div className="toggle-group">
-                            <button
-                                className={`toggle-btn ${cMode === 'emission' ? 'active' : ''}`}
-                                onClick={() => setCMode('emission')}
-                            >Emission</button>
-                            <button
-                                className={`toggle-btn ${cMode === 'absorption' ? 'active' : ''}`}
-                                onClick={() => setCMode('absorption')}
-                            >Absorption</button>
+                        <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                            <div className="toggle-group">
+                                <button
+                                    className={`toggle-btn ${!flipped ? 'active' : ''}`}
+                                    onClick={() => setFlipped(false)}
+                                    title="Korta våglängder till vänster"
+                                >380 → 750 nm</button>
+                                <button
+                                    className={`toggle-btn ${flipped ? 'active' : ''}`}
+                                    onClick={() => setFlipped(true)}
+                                    title="Korta våglängder till höger"
+                                >750 → 380 nm</button>
+                            </div>
+                            <div className="toggle-group">
+                                <button
+                                    className={`toggle-btn ${cMode === 'emission' ? 'active' : ''}`}
+                                    onClick={() => setCMode('emission')}
+                                >Emission</button>
+                                <button
+                                    className={`toggle-btn ${cMode === 'absorption' ? 'active' : ''}`}
+                                    onClick={() => setCMode('absorption')}
+                                >Absorption</button>
+                            </div>
                         </div>
                     </div>
 
@@ -1062,7 +1082,7 @@
                                         </select>
                                     </div>
                                     <div style={{ flex: 1, minWidth: 0 }}>
-                                        <SpectrumDisplay element={el} mode={cMode} height={120} />
+                                        <SpectrumDisplay element={el} mode={cMode} flipped={flipped} height={120} />
                                     </div>
                                     <button
                                         className="compare-remove"
@@ -1094,6 +1114,7 @@
             const [selected, setSelected] = useState(ELEMENTS[0]); // Väte som default
             const [mode, setMode] = useState('emission'); // 'emission' | 'absorption'
             const [sortOrder, setSortOrder] = useState('z'); // 'z' | 'alpha'
+            const [flipped, setFlipped] = useState(false); // false: 380→750 nm, true: 750→380 nm
 
             // Jämförelsestate lyft till App så det bevaras vid flikbyte
             const [compareList, setCompareList] = useState(() => [
@@ -1190,6 +1211,18 @@
                                 </div>
                                 <div className="toggle-group">
                                     <button
+                                        className={`toggle-btn ${!flipped ? 'active' : ''}`}
+                                        onClick={() => setFlipped(false)}
+                                        title="Korta våglängder till vänster"
+                                    >380 → 750 nm</button>
+                                    <button
+                                        className={`toggle-btn ${flipped ? 'active' : ''}`}
+                                        onClick={() => setFlipped(true)}
+                                        title="Korta våglängder till höger"
+                                    >750 → 380 nm</button>
+                                </div>
+                                <div className="toggle-group">
+                                    <button
                                         className={`toggle-btn ${mode === 'emission' ? 'active' : ''}`}
                                         onClick={() => setMode('emission')}
                                     >Emission</button>
@@ -1201,7 +1234,7 @@
                             </div>
                         </div>
 
-                        <SpectrumDisplay element={selected} mode={mode} />
+                        <SpectrumDisplay element={selected} mode={mode} flipped={flipped} />
 
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.6rem', marginTop: '1rem' }}>
                             <div className="info-line">
@@ -1263,6 +1296,8 @@
                             setList={setCompareList}
                             cMode={compareMode}
                             setCMode={setCompareMode}
+                            flipped={flipped}
+                            setFlipped={setFlipped}
                         />
                     )}
 

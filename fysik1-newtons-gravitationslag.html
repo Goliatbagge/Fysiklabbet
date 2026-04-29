@@ -404,11 +404,6 @@
                 ctx.restore();
             }
 
-            ctx.strokeStyle = colors.edge;
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.arc(x, y, r, 0, Math.PI * 2);
-            ctx.stroke();
 
             // Etikett
             if (label) {
@@ -569,6 +564,78 @@
             }
         }
 
+        // Påskägg: flygande tefat som svischar förbi ungefär en gång per minut
+        function drawUFO(ctx, x, y, dir) {
+            ctx.save();
+
+            // Rörelseoskärpa-spår bakom tefatet
+            const trailLen = 120;
+            const trailGrad = ctx.createLinearGradient(x - dir * trailLen, y, x, y);
+            trailGrad.addColorStop(0, 'rgba(186, 230, 253, 0)');
+            trailGrad.addColorStop(0.7, 'rgba(186, 230, 253, 0.25)');
+            trailGrad.addColorStop(1, 'rgba(186, 230, 253, 0.55)');
+            ctx.fillStyle = trailGrad;
+            ctx.beginPath();
+            ctx.ellipse(x - dir * trailLen / 2, y, trailLen / 2, 4, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Glöd undertill
+            const glow = ctx.createRadialGradient(x, y + 5, 0, x, y + 5, 32);
+            glow.addColorStop(0, 'rgba(56, 189, 248, 0.55)');
+            glow.addColorStop(1, 'rgba(56, 189, 248, 0)');
+            ctx.fillStyle = glow;
+            ctx.beginPath();
+            ctx.arc(x, y + 5, 32, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Tefatets botten/skiva
+            const bodyGrad = ctx.createLinearGradient(x, y - 4, x, y + 6);
+            bodyGrad.addColorStop(0, '#e2e8f0');
+            bodyGrad.addColorStop(0.5, '#94a3b8');
+            bodyGrad.addColorStop(1, '#334155');
+            ctx.fillStyle = bodyGrad;
+            ctx.beginPath();
+            ctx.ellipse(x, y, 28, 7, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(203, 213, 225, 0.6)';
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+
+            // Lysande mittband (fönsterrad)
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.85)';
+            ctx.beginPath();
+            ctx.ellipse(x, y, 26, 1.6, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Kupol ovanpå
+            const domeGrad = ctx.createRadialGradient(x - 3, y - 8, 1, x, y - 4, 13);
+            domeGrad.addColorStop(0, 'rgba(224, 242, 254, 0.95)');
+            domeGrad.addColorStop(0.6, 'rgba(56, 189, 248, 0.7)');
+            domeGrad.addColorStop(1, 'rgba(14, 165, 233, 0.5)');
+            ctx.fillStyle = domeGrad;
+            ctx.beginPath();
+            ctx.ellipse(x, y - 3, 12, 9, 0, Math.PI, Math.PI * 2);
+            ctx.fill();
+
+            // Blinkande lampor undertill
+            const t = Math.floor(performance.now() / 80);
+            for (let i = 0; i < 3; i++) {
+                const ix = x - 14 + i * 14;
+                const on = (t + i) % 3 === 0;
+                ctx.fillStyle = on ? 'rgba(251, 191, 36, 1)' : 'rgba(251, 191, 36, 0.35)';
+                if (on) {
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = '#fbbf24';
+                }
+                ctx.beginPath();
+                ctx.arc(ix, y + 5, 1.6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            ctx.restore();
+        }
+
         function drawArrow(ctx, fromX, fromY, toX, toY, color, lineWidth = 3, headSize = 12) {
             const dx = toX - fromX;
             const dy = toY - fromY;
@@ -576,31 +643,56 @@
             if (len < 4) return;
             const angle = Math.atan2(dy, dx);
 
-            ctx.save();
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = color;
-            ctx.strokeStyle = color;
-            ctx.fillStyle = color;
-            ctx.lineWidth = lineWidth;
-            ctx.lineCap = 'round';
-
-            // Linje (lite kortare så pilspetsen ligger på toX/toY)
             const lineEndX = toX - Math.cos(angle) * (headSize - 1);
             const lineEndY = toY - Math.sin(angle) * (headSize - 1);
+            const headLeftX = toX - headSize * Math.cos(angle - Math.PI / 6);
+            const headLeftY = toY - headSize * Math.sin(angle - Math.PI / 6);
+            const headRightX = toX - headSize * Math.cos(angle + Math.PI / 6);
+            const headRightY = toY - headSize * Math.sin(angle + Math.PI / 6);
+
+            ctx.save();
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            // 1. Svart kontur underst — bredare linje runt linjen
+            ctx.shadowBlur = 0;
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.85)';
+            ctx.lineWidth = lineWidth + 2.5;
             ctx.beginPath();
             ctx.moveTo(fromX, fromY);
             ctx.lineTo(lineEndX, lineEndY);
             ctx.stroke();
 
-            // Pilspets
+            // Pilspetskontur — svart fylld + svart stroke runt
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
+            ctx.lineWidth = 2.5;
             ctx.beginPath();
             ctx.moveTo(toX, toY);
-            ctx.lineTo(toX - headSize * Math.cos(angle - Math.PI / 6),
-                       toY - headSize * Math.sin(angle - Math.PI / 6));
-            ctx.lineTo(toX - headSize * Math.cos(angle + Math.PI / 6),
-                       toY - headSize * Math.sin(angle + Math.PI / 6));
+            ctx.lineTo(headLeftX, headLeftY);
+            ctx.lineTo(headRightX, headRightY);
             ctx.closePath();
             ctx.fill();
+            ctx.stroke();
+
+            // 2. Färgad pil ovanpå (med glöd)
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = color;
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(lineEndX, lineEndY);
+            ctx.stroke();
+
+            ctx.shadowBlur = 0;  // skarp pilspets utan blur
+            ctx.beginPath();
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(headLeftX, headLeftY);
+            ctx.lineTo(headRightX, headRightY);
+            ctx.closePath();
+            ctx.fill();
+
             ctx.restore();
         }
 
@@ -692,10 +784,11 @@
         // ======================================================================
         const App = () => {
             const [mode, setMode] = useState('statisk'); // 'statisk' | 'manniska'
-            const [m1Units, setM1Units] = useState(50);   // i 10²⁴ kg
-            const [m2Units, setM2Units] = useState(5);
-            const [pos1, setPos1] = useState({ x: 240, y: 270 });
-            const [pos2, setPos2] = useState({ x: 640, y: 270 });
+            // Startinställning: solen till vänster, jorden till höger
+            const [m1Units, setM1Units] = useState(1.989e6);  // Solen (i 10²⁴ kg)
+            const [m2Units, setM2Units] = useState(5.972);    // Jorden
+            const [pos1, setPos1] = useState({ x: 270, y: 270 });
+            const [pos2, setPos2] = useState({ x: 610, y: 270 });
             const [showForces, setShowForces] = useState(true);
             const [showDistance, setShowDistance] = useState(false);
             const [showMasses, setShowMasses] = useState(false);
@@ -706,6 +799,8 @@
             const fullscreenRef = useRef(null);
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [dragging, setDragging] = useState(null); // null | 1 | 2 | 'human'
+            // Påskägg: flygande tefat. null när inaktivt; objekt med x, y, dir vid svisch
+            const [ufo, setUfo] = useState(null);
 
             // Härled massor i kg
             const m1_kg = m1Units * MASS_UNIT;
@@ -740,6 +835,40 @@
                 const t = setTimeout(() => setHighlight(h => ({ ...h, r: false })), 700);
                 return () => clearTimeout(t);
             }, [Math.round(dist_px)]);
+
+            // ----------------------------------------------------------
+            // Påskägg — flygande tefat svischar förbi ca en gång per minut
+            // ----------------------------------------------------------
+            useEffect(() => {
+                let timeoutId, rafId;
+                const scheduleNext = () => {
+                    const delay = 45000 + Math.random() * 30000; // 45–75 sekunder
+                    timeoutId = setTimeout(triggerFlyby, delay);
+                };
+                const triggerFlyby = () => {
+                    const dir = Math.random() > 0.5 ? 1 : -1;
+                    const y = 30 + Math.random() * 130;     // övre delen av canvasen
+                    const speed = 1500;                     // px/sek — snabbt!
+                    const startX = dir === 1 ? -100 : CANVAS_W + 100;
+                    const startTime = performance.now();
+                    const animate = (now) => {
+                        const x = startX + dir * speed * (now - startTime) / 1000;
+                        if ((dir === 1 && x > CANVAS_W + 120) || (dir === -1 && x < -120)) {
+                            setUfo(null);
+                            scheduleNext();
+                            return;
+                        }
+                        setUfo({ x, y, dir });
+                        rafId = requestAnimationFrame(animate);
+                    };
+                    rafId = requestAnimationFrame(animate);
+                };
+                scheduleNext();
+                return () => {
+                    clearTimeout(timeoutId);
+                    cancelAnimationFrame(rafId);
+                };
+            }, []);
 
             // ----------------------------------------------------------
             // Fullskärm
@@ -851,6 +980,11 @@
                 } else {
                     drawTwoBodyScene(ctx);
                 }
+
+                // Påskägg — flygande tefat ovanpå allt
+                if (ufo) {
+                    drawUFO(ctx, ufo.x, ufo.y, ufo.dir);
+                }
             });
 
             const drawTwoBodyScene = (ctx) => {
@@ -882,20 +1016,24 @@
                 // Kraftvektorer (bara om användaren vill se dem och kroppar inte överlappar)
                 const minSep = r1_px + r2_px + 8;
                 if (showForces && dist_px > minSep && F_static > 0) {
-                    // STRIKT LINJÄR skala: pillängd = F · K där K är en FAST konstant
-                    // (oberoende av aktuella massor och avstånd). Konstanten är vald så att
-                    // default-scenariot (m₁=5·10²⁵ kg, m₂=5·10²⁴ kg, r=4·10¹⁰ m, F≈10¹⁹ N)
-                    // ger ca 100 px pil — en pil som syns tydligt utan att nå över till
-                    // den andra kroppen. När bodies dras närmare → F ökar → pilen blir
-                    // proportionellt längre (upp till canvasens halva storlek).
-                    const PX_PER_N = 1e-17;
-                    const MAX_ARROW = Math.min(CANVAS_W, CANVAS_H) / 2 - 30;
-                    const linearLen = F_static * PX_PER_N;
-                    const arrowLen = Math.min(MAX_ARROW, Math.max(4, linearLen));
+                    // STRIKT LINJÄR pilskala — pillängden är exakt proportionell
+                    // mot kraften: 2× kraft ⇒ 2× pillängd, alltid.
+                    //
+                    // Eftersom gravitationskrafter spänner över ~14 storleks-
+                    // ordningar mellan olika kombinationer av kroppar (måne–måne
+                    // ≈ 10¹³ N upp till sol–jupiter ≈ 10²⁷ N) auto-kalibreras
+                    // skalan per kombination: pilen blir ~600 px när kropparna
+                    // är som närmast (maximal kraft för det aktuella paret).
+                    // Inom varje par är förhållandet pillängd/kraft konstant.
+                    const r_min_m = (r1_px + r2_px) * M_PER_PX;
+                    const F_MAX_pair = G * m1_kg * m2_kg / (r_min_m * r_min_m);
+                    const TARGET_MAX_PX = 600;
+                    const arrowLen = F_static * TARGET_MAX_PX / F_MAX_pair;
                     const ux = dx / dist_px;
                     const uy = dy / dist_px;
-                    // Pil från kropp 1:s tyngdpunkt mot kropp 2 (sträcker sig
-                    // arrowLen pixlar utanför kroppen)
+                    // Pilarna utgår från varje kropps tyngdpunkt (centrum) — där
+                    // gravitationskraften fysikaliskt verkar — och pekar mot den
+                    // andra kroppen. Pilspetsen ligger arrowLen pixlar utanför ytan.
                     const arrow1TipX = pos1.x + ux * (r1_px + arrowLen);
                     const arrow1TipY = pos1.y + uy * (r1_px + arrowLen);
                     drawArrow(ctx,
@@ -1141,10 +1279,13 @@
                     { text: 'F', italic: true, color: '#fbbf24' },
                 ], labelX2, labelY2, 11, '600', 'center');
 
-                // Stort kraftvärde i hörnet
+                // Stort kraftvärde i hörnet — förskjuten åt höger så fullskärms-
+                // knappen i övre vänstra hörnet inte hamnar framför rutan
+                const boxX = 60;
+                const textX = boxX + 10;
                 ctx.fillStyle = 'rgba(2, 6, 16, 0.78)';
                 ctx.beginPath();
-                ctx.roundRect(14, 14, 280, 70, 10);
+                ctx.roundRect(boxX, 14, 280, 70, 10);
                 ctx.fill();
                 ctx.strokeStyle = 'rgba(251, 191, 36, 0.4)';
                 ctx.lineWidth = 1;
@@ -1153,16 +1294,16 @@
                 ctx.textAlign = 'left';
                 ctx.textBaseline = 'top';
                 ctx.font = '600 12px Poppins, sans-serif';
-                ctx.fillText('Gravitationskraften (samma åt båda håll)', 24, 22);
+                ctx.fillText('Gravitationskraften (samma åt båda håll)', textX, 22);
                 ctx.font = '700 22px Poppins, sans-serif';
                 ctx.fillStyle = '#fbbf24';
                 drawMixedText(ctx, [
                     { text: 'F', italic: true, color: '#fbbf24' },
                     { text: ` = ${formatNum(F_human, 0)} N`, italic: false, color: '#fde68a' },
-                ], 24, 44, 22, '700', 'left');
+                ], textX, 44, 22, '700', 'left');
                 ctx.font = '500 11px Poppins, sans-serif';
                 ctx.fillStyle = '#cbd5e1';
-                ctx.fillText(`≈ tyngden av en 70 kg-person på jordytan`, 24, 70);
+                ctx.fillText(`≈ tyngden av en 70 kg-person på jordytan`, textX, 70);
             };
 
             // ----------------------------------------------------------

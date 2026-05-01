@@ -78,6 +78,74 @@ Alla simuleringar följer samma struktur:
 5. React-komponenter: Simulation, Controls, Results, Explanation
 6. Footer
 
+### Fullskärmsläge och integrerade reglage
+
+**Varje simulering ska ha ett fullskärmsläge** där visualiseringen kan ta upp hela
+skärmen. De **viktigaste reglagen ska finnas inne i visualiseringen** (flytande
+panel ovanpå scenen) så att man kommer åt dem även i fullskärmsläget.
+Referensimplementation: `fysik2-fotoelektrisk-effekt.html` (se även
+`fysik2-brytning-app.html`).
+
+Krav:
+
+1. **Wrapper med `position: relative;`** runt canvas/SVG. Lägg till CSS-klassen
+   `.scene-wrap` med stöd för `:fullscreen` och `:-webkit-full-screen`-pseudoklasser
+   (sätt `width/height` till `100vw/100vh` och ta bort `border-radius`).
+2. **Fullskärmsknapp** (`.fs-btn`) i ett hörn av scenen som kallar
+   `el.requestFullscreen()` / `document.exitFullscreen()`. Lyssna på
+   `fullscreenchange`-eventet och uppdatera ikonen (utvidga ↔ komprimera).
+3. **Flytande kontrollpanel** (`.fs-controls`) inuti scen-wrappern, absolut
+   positionerad nära botten, med backdrop-blur och halvgenomskinlig bakgrund.
+   Ska innehålla de viktigaste reglagen (det elever oftast behöver justera).
+4. **Visa/dölj-knapp** (`.fs-toggle-handle`) som låter användaren minimera
+   panelen om den skymmer scenen.
+5. Tunga eller sällan använda kontroller (förklaringar, avancerade inställningar)
+   kan ligga kvar i den vanliga sidopanelen utanför scenen — de behöver inte
+   dupliceras i fullskärmspanelen.
+6. **Förhindra textmarkering vid drag**: scen-wrappern ska ha
+   `user-select: none` (alla varianter med vendor-prefix). Annars markeras
+   etiketter ("Medium 1", axlar, m.m.) blått när användaren drar i scenen.
+
+CSS-mönstret (kopiera från `fysik2-fotoelektrisk-effekt.html` eller
+`fysik2-brytning-app.html`):
+
+```css
+.scene-wrap { position: relative; ... }
+.scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+    width: 100vw !important; height: 100vh !important; border-radius: 0;
+}
+.fs-btn { position: absolute; top: 14px; right: 14px; ... z-index: 5; }
+.fs-controls { position: absolute; bottom: 62px; left: 50%;
+    transform: translateX(-50%); ... z-index: 6; }
+.fs-controls.collapsed { transform: translateX(-50%) translateY(...); opacity: 0; }
+.fs-toggle-handle { position: absolute; bottom: 14px; left: 50%; ... z-index: 7; }
+```
+
+React-mönstret:
+
+```jsx
+const sceneWrapRef = useRef(null);
+const [isFullscreen, setIsFullscreen] = useState(false);
+const [controlsOpen, setControlsOpen] = useState(true);
+
+useEffect(() => {
+    const handler = () => setIsFullscreen(
+        document.fullscreenElement === sceneWrapRef.current ||
+        document.webkitFullscreenElement === sceneWrapRef.current
+    );
+    document.addEventListener('fullscreenchange', handler);
+    document.addEventListener('webkitfullscreenchange', handler);
+    return () => { /* cleanup */ };
+}, []);
+
+const toggleFullscreen = () => {
+    const el = sceneWrapRef.current;
+    const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+    if (isFs) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+};
+```
+
 ### Typografi och variabler
 
 - **Teckensnitt**: Använd Poppins för text i canvas och UI-element

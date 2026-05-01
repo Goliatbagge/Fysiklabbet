@@ -72,6 +72,156 @@
             background: #7dd3fc;
             box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
+
+        .scene-wrap {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        .scene-wrap svg text { user-select: none; -webkit-user-select: none; }
+        .scene-wrap:fullscreen,
+        .scene-wrap:-webkit-full-screen {
+            background: #05080f;
+            border-radius: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+        }
+        .scene-wrap > svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .fs-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #38bdf8;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease, background 0.15s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            z-index: 5;
+        }
+        .fs-btn:hover { transform: scale(1.08); background: rgba(56,189,248,0.18); }
+
+        .fs-controls {
+            position: absolute;
+            left: 50%;
+            bottom: 62px;
+            transform: translateX(-50%);
+            width: min(720px, 92%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.28);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+            z-index: 6;
+            font-family: 'Poppins', sans-serif;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+        }
+        .fs-controls.collapsed {
+            transform: translateX(-50%) translateY(calc(100% + 40px));
+            opacity: 0;
+            pointer-events: none;
+        }
+        .fs-toggle-handle {
+            position: absolute;
+            left: 50%;
+            bottom: 14px;
+            transform: translateX(-50%);
+            padding: 8px 16px;
+            border-radius: 10px;
+            background: rgba(10, 15, 30, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: #cbd5e1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 7;
+            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+            white-space: nowrap;
+        }
+        .fs-toggle-handle:hover {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.65);
+            color: #e0f2fe;
+        }
+        .fs-toggle-handle svg {
+            transition: transform 0.3s ease;
+        }
+        .fs-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .fs-label {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            min-width: 130px;
+        }
+        .fs-value {
+            color: #e2e8f0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            min-width: 64px;
+            text-align: right;
+            white-space: nowrap;
+            font-family: 'Poppins', sans-serif;
+        }
+        .fs-materials {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .fs-mat-btn {
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border-radius: 6px;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #cbd5e1;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+        .fs-mat-btn.active {
+            background: rgba(56, 189, 248, 0.18);
+            border-color: rgba(56, 189, 248, 0.7);
+            color: #7dd3fc;
+        }
+        .fs-mat-btn:hover { background: rgba(56, 189, 248, 0.12); }
     </style>
 </head>
 <body class="bg-slate-950">
@@ -113,7 +263,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useRef, useCallback, useMemo } = React;
+        const { useState, useRef, useCallback, useMemo, useEffect } = React;
 
         const Slider = ({ id, label, value, min, max, step, onChange, displayPrecision = 2, suffix = '' }) => {
             return (
@@ -136,7 +286,41 @@
             );
         };
 
-        const ControlsView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle }) => {
+        const MATERIALS = [
+            { name: 'Luft', n: 1.00 },
+            { name: 'Vatten', n: 1.33 },
+            { name: 'Glas', n: 1.52 },
+            { name: 'Diamant', n: 2.42 }
+        ];
+
+        const MaterialButtons = ({ value, onSelect }) => (
+            <div className="flex gap-1.5 flex-wrap">
+                {MATERIALS.map(m => {
+                    const active = Math.abs(value - m.n) < 0.005;
+                    return (
+                        <button
+                            key={m.name}
+                            type="button"
+                            onClick={() => onSelect(m.n)}
+                            className="px-2.5 py-1 text-xs rounded-md transition"
+                            style={active ? {
+                                background: 'rgba(56, 189, 248, 0.18)',
+                                border: '1px solid rgba(56, 189, 248, 0.7)',
+                                color: '#7dd3fc'
+                            } : {
+                                background: 'rgba(30, 41, 59, 0.6)',
+                                border: '1px solid rgba(148, 163, 184, 0.2)',
+                                color: '#cbd5e1'
+                            }}
+                        >
+                            {m.name}
+                        </button>
+                    );
+                })}
+            </div>
+        );
+
+        const ControlsView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle, showReflected, setShowReflected }) => {
             const theta1Rad = incidentAngle * (Math.PI / 180);
             const sinTheta2 = (n1 / n2) * Math.sin(theta1Rad);
             const isTIR = Math.abs(sinTheta2) > 1;
@@ -163,24 +347,42 @@
                             displayPrecision={1}
                             suffix="°"
                         />
-                        <Slider
-                            id="n2-slider"
-                            label={<>Brytningsindex block (<i>n</i>₂)</>}
-                            min={1.00}
-                            max={2.50}
-                            step={0.01}
-                            value={n2}
-                            onChange={(e) => setN2(parseFloat(e.target.value))}
-                        />
-                        <Slider
-                            id="n1-slider"
-                            label={<>Brytningsindex medium 1 (<i>n</i>₁)</>}
-                            min={1.00}
-                            max={2.50}
-                            step={0.01}
-                            value={n1}
-                            onChange={(e) => setN1(parseFloat(e.target.value))}
-                        />
+                        <div className="flex flex-col gap-2">
+                            <Slider
+                                id="n1-slider"
+                                label={<>Brytningsindex medium 1 (<i>n</i>₁)</>}
+                                min={1.00}
+                                max={2.50}
+                                step={0.01}
+                                value={n1}
+                                onChange={(e) => setN1(parseFloat(e.target.value))}
+                            />
+                            <MaterialButtons value={n1} onSelect={setN1} />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <Slider
+                                id="n2-slider"
+                                label={<>Brytningsindex block (<i>n</i>₂)</>}
+                                min={1.00}
+                                max={2.50}
+                                step={0.01}
+                                value={n2}
+                                onChange={(e) => setN2(parseFloat(e.target.value))}
+                            />
+                            <MaterialButtons value={n2} onSelect={setN2} />
+                        </div>
+
+                        <label htmlFor="show-reflected" className="flex items-center gap-3 cursor-pointer select-none pt-1">
+                            <input
+                                id="show-reflected"
+                                type="checkbox"
+                                checked={showReflected}
+                                onChange={(e) => setShowReflected(e.target.checked)}
+                                className="w-4 h-4 cursor-pointer"
+                                style={{ accentColor: '#38bdf8' }}
+                            />
+                            <span className="text-sm text-slate-300">Visa reflekterade strålar</span>
+                        </label>
                     </div>
 
                     <div className="mt-4 pt-6" style={{ borderTop: '1px solid rgba(56, 189, 248, 0.2)' }}>
@@ -215,9 +417,38 @@
             );
         };
 
-        const SimulationView = ({ n1, n2, incidentAngle, setIncidentAngle }) => {
+        const SimulationView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle, showReflected }) => {
             const svgRef = useRef(null);
+            const sceneWrapRef = useRef(null);
             const [isDragging, setIsDragging] = useState(false);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+
+            useEffect(() => {
+                const handler = () => {
+                    setIsFullscreen(
+                        document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current
+                    );
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+                if (isFs) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }
+            };
 
             const VIEWBOX_WIDTH = 800;
             const VIEWBOX_HEIGHT = 450;
@@ -256,10 +487,25 @@
                     };
                 }
 
-                return { p1, p2, p3, p4, theta1Rad, theta2Rad, isTIR };
+                // Reflekterad stråle vid övre gränsytan (partiell reflektion, tillbaka in i medium 1)
+                const pR = {
+                    x: ENTRY_X - RAY_LENGTH * Math.sin(theta1Rad),
+                    y: BLOCK_Y - RAY_LENGTH * Math.cos(theta1Rad)
+                };
+
+                // Reflekterad stråle vid undre gränsytan (partiell reflektion, tillbaka in i medium 2)
+                let pR2 = null;
+                if (!isTIR) {
+                    pR2 = {
+                        x: p3.x + RAY_LENGTH * Math.sin(theta2Rad),
+                        y: p3.y - RAY_LENGTH * Math.cos(theta2Rad)
+                    };
+                }
+
+                return { p1, p2, p3, p4, pR, pR2, theta1Rad, theta2Rad, isTIR };
             }, [incidentAngle, n1, n2]);
 
-            const { p1, p2, p3, p4, theta1Rad, theta2Rad, isTIR } = calculations;
+            const { p1, p2, p3, p4, pR, pR2, theta1Rad, theta2Rad, isTIR } = calculations;
 
             const handleInteraction = useCallback((e) => {
                 if (!svgRef.current) return;
@@ -342,8 +588,8 @@
             };
 
             return (
-                <div className="w-full h-full rounded-xl overflow-hidden"
-                    style={{ background: 'rgba(15, 23, 42, 0.5)', border: '1px solid rgba(56, 189, 248, 0.15)', borderRadius: '16px' }}
+                <div className="scene-wrap"
+                    ref={sceneWrapRef}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseUp}
                     onMouseMove={handleMouseMove}
@@ -354,7 +600,8 @@
                     <svg
                         ref={svgRef}
                         viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
-                        className="w-full h-full cursor-pointer"
+                        preserveAspectRatio="xMidYMid meet"
+                        className="cursor-pointer"
                         onMouseDown={handleMouseDown}
                         onTouchStart={handleTouchStart}
                     >
@@ -368,12 +615,21 @@
                                 markerHeight="4"
                                 orient="auto"
                             >
-                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24" />
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#39ff14" />
                             </marker>
                             <linearGradient id="blockGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" style={{stopColor: 'rgba(56, 189, 248, 0.12)'}} />
                                 <stop offset="100%" style={{stopColor: 'rgba(30, 64, 120, 0.18)'}} />
                             </linearGradient>
+                            <filter id="laserGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="4" result="blur1"/>
+                                <feGaussianBlur stdDeviation="8" in="SourceGraphic" result="blur2"/>
+                                <feMerge>
+                                    <feMergeNode in="blur2"/>
+                                    <feMergeNode in="blur1"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
                         </defs>
 
                         {/* Bakgrundsruta - övre medium */}
@@ -402,11 +658,21 @@
                         <line x1={p2.x} y1="0" x2={p2.x} y2={VIEWBOX_HEIGHT} stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />
                         {!isTIR && <line x1={p3.x} y1={BLOCK_Y} x2={p3.x} y2={VIEWBOX_HEIGHT} stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />}
 
-                        {/* Ljusstrålar */}
-                        <g stroke="#fbbf24" strokeWidth="3" strokeLinecap="round">
-                            <line x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} />
-                            <line x1={p2.x} y1={p2.y} x2={p3.x} y2={p3.y} />
-                            {!isTIR && <line x1={p3.x} y1={p3.y} x2={p4.x} y2={p4.y} />}
+                        {/* Ljusstrålar - grön laser med glow */}
+                        <g filter="url(#laserGlow)">
+                            <g stroke="#39ff14" strokeWidth="3" strokeLinecap="round">
+                                <line x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} />
+                                <line x1={p2.x} y1={p2.y} x2={p3.x} y2={p3.y} />
+                                {!isTIR && <line x1={p3.x} y1={p3.y} x2={p4.x} y2={p4.y} />}
+                            </g>
+
+                            {/* Reflekterade strålar (streckade, partiell reflektion) */}
+                            {showReflected && !isTIR && (
+                                <g stroke="#39ff14" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="8,5" opacity="0.7">
+                                    <line x1={p2.x} y1={p2.y} x2={pR.x} y2={pR.y} />
+                                    {pR2 && <line x1={p3.x} y1={p3.y} x2={pR2.x} y2={pR2.y} />}
+                                </g>
+                            )}
                         </g>
 
                         {/* Pilar på strålar */}
@@ -418,7 +684,7 @@
                                 const dy1 = p2.y - p1.y;
                                 const len1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
                                 const arrowLen = 1;
-                                return <line x1={mid1x} y1={mid1y} x2={mid1x + (dx1 / len1) * arrowLen} y2={mid1y + (dy1 / len1) * arrowLen} stroke="#fbbf24" strokeWidth="3" markerEnd="url(#arrow)" />;
+                                return <line x1={mid1x} y1={mid1y} x2={mid1x + (dx1 / len1) * arrowLen} y2={mid1y + (dy1 / len1) * arrowLen} stroke="#39ff14" strokeWidth="3" markerEnd="url(#arrow)" />;
                             })()}
                             {(() => {
                                 const mid2x = (p2.x + p3.x) / 2;
@@ -427,7 +693,7 @@
                                 const dy2 = p3.y - p2.y;
                                 const len2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
                                 const arrowLen = 1;
-                                return <line x1={mid2x} y1={mid2y} x2={mid2x + (dx2 / len2) * arrowLen} y2={mid2y + (dy2 / len2) * arrowLen} stroke="#fbbf24" strokeWidth="3" markerEnd="url(#arrow)" />;
+                                return <line x1={mid2x} y1={mid2y} x2={mid2x + (dx2 / len2) * arrowLen} y2={mid2y + (dy2 / len2) * arrowLen} stroke="#39ff14" strokeWidth="3" markerEnd="url(#arrow)" />;
                             })()}
                             {!isTIR && (() => {
                                 const mid3x = (p3.x + p4.x) / 2;
@@ -436,7 +702,25 @@
                                 const dy3 = p4.y - p3.y;
                                 const len3 = Math.sqrt(dx3 * dx3 + dy3 * dy3);
                                 const arrowLen = 1;
-                                return <line x1={mid3x} y1={mid3y} x2={mid3x + (dx3 / len3) * arrowLen} y2={mid3y + (dy3 / len3) * arrowLen} stroke="#fbbf24" strokeWidth="3" markerEnd="url(#arrow)" />;
+                                return <line x1={mid3x} y1={mid3y} x2={mid3x + (dx3 / len3) * arrowLen} y2={mid3y + (dy3 / len3) * arrowLen} stroke="#39ff14" strokeWidth="3" markerEnd="url(#arrow)" />;
+                            })()}
+                            {showReflected && !isTIR && (() => {
+                                const midRx = (p2.x + pR.x) / 2;
+                                const midRy = (p2.y + pR.y) / 2;
+                                const dxR = pR.x - p2.x;
+                                const dyR = pR.y - p2.y;
+                                const lenR = Math.sqrt(dxR * dxR + dyR * dyR);
+                                const arrowLen = 1;
+                                return <line x1={midRx} y1={midRy} x2={midRx + (dxR / lenR) * arrowLen} y2={midRy + (dyR / lenR) * arrowLen} stroke="#39ff14" strokeWidth="2.5" opacity="0.7" markerEnd="url(#arrow)" />;
+                            })()}
+                            {showReflected && !isTIR && pR2 && (() => {
+                                const midR2x = (p3.x + pR2.x) / 2;
+                                const midR2y = (p3.y + pR2.y) / 2;
+                                const dxR2 = pR2.x - p3.x;
+                                const dyR2 = pR2.y - p3.y;
+                                const lenR2 = Math.sqrt(dxR2 * dxR2 + dyR2 * dyR2);
+                                const arrowLen = 1;
+                                return <line x1={midR2x} y1={midR2y} x2={midR2x + (dxR2 / lenR2) * arrowLen} y2={midR2y + (dyR2 / lenR2) * arrowLen} stroke="#39ff14" strokeWidth="2.5" opacity="0.7" markerEnd="url(#arrow)" />;
                             })()}
                         </g>
 
@@ -501,6 +785,78 @@
                         )}
 
                     </svg>
+
+                    {/* Flytande kontrollpanel - fungerar både i normalt läge och fullskärm */}
+                    <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                        <div className="fs-row">
+                            <span className="fs-label">Infallsvinkel <em style={{fontStyle: 'italic'}}>i</em><sub>1</sub></span>
+                            <input
+                                type="range"
+                                style={{ flex: 1 }}
+                                min={-89.9}
+                                max={89.9}
+                                step={0.1}
+                                value={incidentAngle}
+                                onChange={e => setIncidentAngle(parseFloat(e.target.value))}
+                            />
+                            <span className="fs-value">{incidentAngle.toFixed(1).replace('.', ',')}°</span>
+                        </div>
+                        <div className="fs-row">
+                            <span className="fs-label">Medium 1 <em style={{fontStyle: 'italic'}}>n</em><sub>1</sub></span>
+                            <div className="fs-materials" style={{ flex: 1 }}>
+                                {MATERIALS.map(m => (
+                                    <button key={m.name}
+                                        type="button"
+                                        className={`fs-mat-btn ${Math.abs(n1 - m.n) < 0.005 ? 'active' : ''}`}
+                                        onClick={() => setN1(m.n)}>
+                                        {m.name}
+                                    </button>
+                                ))}
+                            </div>
+                            <span className="fs-value">{n1.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                        <div className="fs-row">
+                            <span className="fs-label">Medium 2 <em style={{fontStyle: 'italic'}}>n</em><sub>2</sub></span>
+                            <div className="fs-materials" style={{ flex: 1 }}>
+                                {MATERIALS.map(m => (
+                                    <button key={m.name}
+                                        type="button"
+                                        className={`fs-mat-btn ${Math.abs(n2 - m.n) < 0.005 ? 'active' : ''}`}
+                                        onClick={() => setN2(m.n)}>
+                                        {m.name}
+                                    </button>
+                                ))}
+                            </div>
+                            <span className="fs-value">{n2.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                    </div>
+
+                    <button
+                        className="fs-toggle-handle"
+                        onClick={() => setControlsOpen(o => !o)}
+                        title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                        aria-label={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                        aria-expanded={controlsOpen}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                             style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                        <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                    </button>
+
+                    <button className="fs-btn" onClick={toggleFullscreen}
+                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                        {isFullscreen ? (
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                            </svg>
+                        ) : (
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                            </svg>
+                        )}
+                    </button>
                 </div>
             );
         };
@@ -509,6 +865,7 @@
             const [n1, setN1] = useState(1.0);
             const [n2, setN2] = useState(1.52);
             const [incidentAngle, setIncidentAngle] = useState(-40);
+            const [showReflected, setShowReflected] = useState(true);
 
             return (
                 <div className="min-h-screen dark-container flex flex-col" style={{ fontFamily: 'Poppins, sans-serif' }}>
@@ -531,14 +888,19 @@
                                 setN2={setN2}
                                 incidentAngle={incidentAngle}
                                 setIncidentAngle={setIncidentAngle}
+                                showReflected={showReflected}
+                                setShowReflected={setShowReflected}
                             />
                         </div>
                         <div className="flex-grow lg:w-2/3 xl:w-3/4 min-h-[400px] lg:min-h-0">
                             <SimulationView
                                 n1={n1}
+                                setN1={setN1}
                                 n2={n2}
+                                setN2={setN2}
                                 incidentAngle={incidentAngle}
                                 setIncidentAngle={setIncidentAngle}
+                                showReflected={showReflected}
                             />
                         </div>
                     </main>

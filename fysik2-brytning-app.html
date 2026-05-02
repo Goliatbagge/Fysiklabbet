@@ -80,8 +80,7 @@
             background: rgba(15, 23, 42, 0.5);
             border: 1px solid rgba(56, 189, 248, 0.15);
             width: 100%;
-            height: 100%;
-            min-height: 400px;
+            aspect-ratio: 16 / 9;
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -104,7 +103,7 @@
         .fs-btn {
             position: absolute;
             top: 14px;
-            right: 14px;
+            left: 14px;
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -320,7 +319,7 @@
             </div>
         );
 
-        const ControlsView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle, showReflected, setShowReflected }) => {
+        const ControlsView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle, showReflected, setShowReflected, showAngles, setShowAngles, angleDisplay, setAngleDisplay, laserColor, setLaserColor }) => {
             const theta1Rad = incidentAngle * (Math.PI / 180);
             const sinTheta2 = (n1 / n2) * Math.sin(theta1Rad);
             const isTIR = Math.abs(sinTheta2) > 1;
@@ -383,21 +382,81 @@
                             />
                             <span className="text-sm text-slate-300">Visa reflekterade strålar</span>
                         </label>
-                    </div>
 
-                    <div className="mt-4 pt-6" style={{ borderTop: '1px solid rgba(56, 189, 248, 0.2)' }}>
-                        <h2 className="text-xl font-semibold text-cyan-400 mb-4">Snells lag</h2>
-                        <div className="rounded-lg p-4 text-center"
-                             style={{ background: 'rgba(14, 165, 233, 0.08)', border: '1px solid rgba(56, 189, 248, 0.2)' }}>
-                            <p className="text-lg text-cyan-300">
-                                <span style={{fontStyle: 'italic'}}>n</span>
-                                <sub>1</sub> sin <span style={{fontStyle: 'italic'}}>i</span> = <span style={{fontStyle: 'italic'}}>n</span>
-                                <sub>2</sub> sin <span style={{fontStyle: 'italic'}}>b</span>
-                            </p>
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="show-angles" className="flex items-center gap-3 cursor-pointer select-none">
+                                <input
+                                    id="show-angles"
+                                    type="checkbox"
+                                    checked={showAngles}
+                                    onChange={(e) => setShowAngles(e.target.checked)}
+                                    className="w-4 h-4 cursor-pointer"
+                                    style={{ accentColor: '#38bdf8' }}
+                                />
+                                <span className="text-sm text-slate-300">Visa vinklar</span>
+                            </label>
+                            {showAngles && (
+                                <div className="flex flex-col gap-1.5 ml-7">
+                                    <label className="flex items-center gap-2 cursor-pointer select-none">
+                                        <input
+                                            type="radio"
+                                            name="angle-display"
+                                            value="labels"
+                                            checked={angleDisplay === 'labels'}
+                                            onChange={() => setAngleDisplay('labels')}
+                                            className="w-4 h-4 cursor-pointer"
+                                            style={{ accentColor: '#38bdf8' }}
+                                        />
+                                        <span className="text-sm text-slate-300">Beteckningar</span>
+                                    </label>
+                                    <label className="flex items-center gap-2 cursor-pointer select-none">
+                                        <input
+                                            type="radio"
+                                            name="angle-display"
+                                            value="values"
+                                            checked={angleDisplay === 'values'}
+                                            onChange={() => setAngleDisplay('values')}
+                                            className="w-4 h-4 cursor-pointer"
+                                            style={{ accentColor: '#38bdf8' }}
+                                        />
+                                        <span className="text-sm text-slate-300">Värden</span>
+                                    </label>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="pt-1">
+                            <span className="text-sm text-slate-400 block mb-2">Laserfärg</span>
+                            <div className="flex gap-4">
+                                <label className="flex items-center gap-2 cursor-pointer select-none">
+                                    <input
+                                        type="radio"
+                                        name="laser-color"
+                                        value="green"
+                                        checked={laserColor === 'green'}
+                                        onChange={() => setLaserColor('green')}
+                                        className="w-4 h-4 cursor-pointer"
+                                        style={{ accentColor: '#22c55e' }}
+                                    />
+                                    <span className="text-sm text-slate-300">Grön</span>
+                                </label>
+                                <label className="flex items-center gap-2 cursor-pointer select-none">
+                                    <input
+                                        type="radio"
+                                        name="laser-color"
+                                        value="red"
+                                        checked={laserColor === 'red'}
+                                        onChange={() => setLaserColor('red')}
+                                        className="w-4 h-4 cursor-pointer"
+                                        style={{ accentColor: '#ef4444' }}
+                                    />
+                                    <span className="text-sm text-slate-300">Röd</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="mt-2 space-y-3">
+                    <div className="mt-4 pt-6 space-y-3" style={{ borderTop: '1px solid rgba(56, 189, 248, 0.2)' }}>
                         <div className="flex justify-between items-center p-3 rounded-lg"
                              style={{ background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(148, 163, 184, 0.15)' }}>
                             <span className="text-slate-300">Infallsvinkel (<i>i</i><sub>1</sub>):</span>
@@ -417,12 +476,17 @@
             );
         };
 
-        const SimulationView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle, showReflected }) => {
+        const SimulationView = ({ n1, setN1, n2, setN2, incidentAngle, setIncidentAngle, showReflected, showAngles, setShowAngles, angleDisplay, setAngleDisplay, laserColor, setLaserColor }) => {
             const svgRef = useRef(null);
             const sceneWrapRef = useRef(null);
             const [isDragging, setIsDragging] = useState(false);
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
+
+            const isRedLaser = laserColor === 'red';
+            const rayColor = isRedLaser ? '#ff1f3d' : '#39ff14';
+            const apertureCenterColor = isRedLaser ? '#ffd5d5' : '#bbffaa';
+            const glowEdgeColor = isRedLaser ? '#ff1f3d' : '#39ff14';
 
             useEffect(() => {
                 const handler = () => {
@@ -456,6 +520,9 @@
             const BLOCK_HEIGHT = 200;
             const ENTRY_X = VIEWBOX_WIDTH / 2;
             const RAY_LENGTH = 175;
+            const PEN_DIST = 95;
+            const PEN_BODY_LEN = 84;
+            const PEN_BODY_H = 14;
 
             const calculations = useMemo(() => {
                 const theta1Rad = incidentAngle * (Math.PI / 180);
@@ -463,9 +530,9 @@
                 const isTIR = n1 > n2 && Math.abs(sinTheta2) > 1;
                 const theta2Rad = isTIR ? 0 : -Math.asin(sinTheta2);
 
-                const p1 = {
-                    x: ENTRY_X + RAY_LENGTH * Math.sin(theta1Rad),
-                    y: BLOCK_Y - RAY_LENGTH * Math.cos(theta1Rad)
+                const penTip = {
+                    x: ENTRY_X + PEN_DIST * Math.sin(theta1Rad),
+                    y: BLOCK_Y - PEN_DIST * Math.cos(theta1Rad)
                 };
                 const p2 = { x: ENTRY_X, y: BLOCK_Y };
 
@@ -502,16 +569,22 @@
                     };
                 }
 
-                return { p1, p2, p3, p4, pR, pR2, theta1Rad, theta2Rad, isTIR };
+                return { penTip, p2, p3, p4, pR, pR2, theta1Rad, theta2Rad, isTIR };
             }, [incidentAngle, n1, n2]);
 
-            const { p1, p2, p3, p4, pR, pR2, theta1Rad, theta2Rad, isTIR } = calculations;
+            const { penTip, p2, p3, p4, pR, pR2, theta1Rad, theta2Rad, isTIR } = calculations;
+
+            const theta1Deg = Math.abs(incidentAngle);
+            const theta2Deg = isTIR ? 0 : Math.abs(theta2Rad * 180 / Math.PI);
+            const showAngleValues = angleDisplay === 'values';
+            const fmtDeg = (d) => d.toFixed(1).replace('.', ',');
+            const getMediumLabel = (n, fallback) => {
+                const mat = MATERIALS.find(m => Math.abs(n - m.n) < 0.005);
+                return mat ? mat.name : fallback;
+            };
 
             const handleInteraction = useCallback((e) => {
                 if (!svgRef.current) return;
-
-                const svg = svgRef.current;
-                const rect = svg.getBoundingClientRect();
 
                 let clientX, clientY;
                 if (e.touches) {
@@ -522,16 +595,20 @@
                     clientY = e.clientY;
                 }
 
-                const x = (clientX - rect.left) * (VIEWBOX_WIDTH / rect.width);
-                const y = (clientY - rect.top) * (VIEWBOX_HEIGHT / rect.height);
+                const svg = svgRef.current;
+                const ctm = svg.getScreenCTM();
+                if (!ctm) return;
+                const pt = svg.createSVGPoint();
+                pt.x = clientX;
+                pt.y = clientY;
+                const svgP = pt.matrixTransform(ctm.inverse());
 
-                const dx = x - p2.x;
-                const dy = y - p2.y;
+                const dx = svgP.x - p2.x;
+                let dy = svgP.y - p2.y;
+                if (dy >= 0) dy = -0.01;
 
-                if (dy >= 0) return;
-
-                let angleRad = Math.atan(dx / -dy);
-                let angleDeg = angleRad * (180 / Math.PI);
+                const angleRad = Math.atan2(dx, -dy);
+                const angleDeg = angleRad * (180 / Math.PI);
 
                 const clampedAngle = Math.max(-89.9, Math.min(89.9, angleDeg));
                 setIncidentAngle(clampedAngle);
@@ -615,12 +692,23 @@
                                 markerHeight="4"
                                 orient="auto"
                             >
-                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#39ff14" />
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill={rayColor} />
                             </marker>
                             <linearGradient id="blockGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" style={{stopColor: 'rgba(56, 189, 248, 0.12)'}} />
                                 <stop offset="100%" style={{stopColor: 'rgba(30, 64, 120, 0.18)'}} />
                             </linearGradient>
+                            <linearGradient id="penBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="#64748b"/>
+                                <stop offset="35%" stopColor="#334155"/>
+                                <stop offset="55%" stopColor="#1e293b"/>
+                                <stop offset="100%" stopColor="#020617"/>
+                            </linearGradient>
+                            <radialGradient id="penTipGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stopColor={apertureCenterColor} stopOpacity="1"/>
+                                <stop offset="60%" stopColor={glowEdgeColor} stopOpacity="0.9"/>
+                                <stop offset="100%" stopColor={glowEdgeColor} stopOpacity="0"/>
+                            </radialGradient>
                             <filter id="laserGlow" x="-50%" y="-50%" width="200%" height="200%">
                                 <feGaussianBlur stdDeviation="4" result="blur1"/>
                                 <feGaussianBlur stdDeviation="8" in="SourceGraphic" result="blur2"/>
@@ -643,32 +731,32 @@
                         <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT} fill="rgb(10, 15, 30)"/>
 
                         {/* Medium-texter */}
-                        <text x="20" y="40" fill="#7dd3fc" fontSize="24" fontWeight="500" fontFamily="Poppins, sans-serif">
-                            Medium 1 (<tspan fontStyle="italic">n</tspan>
+                        <text x="20" y="85" fill="#7dd3fc" fontSize="24" fontWeight="500" fontFamily="Poppins, sans-serif">
+                            {getMediumLabel(n1, 'Medium 1')} (<tspan fontStyle="italic">n</tspan>
                             <tspan fontSize="16" dy="4">1</tspan>
                             <tspan dy="-4"> = {n1.toFixed(2).replace('.', ',')}</tspan>)
                         </text>
                         <text x="20" y={BLOCK_Y + 40} fill="#94a3b8" fontSize="24" fontWeight="500" fontFamily="Poppins, sans-serif">
-                            Medium 2 (<tspan fontStyle="italic">n</tspan>
+                            {getMediumLabel(n2, 'Medium 2')} (<tspan fontStyle="italic">n</tspan>
                             <tspan fontSize="16" dy="4">2</tspan>
                             <tspan dy="-4"> = {n2.toFixed(2).replace('.', ',')}</tspan>)
                         </text>
 
                         {/* Normallinjer (streckade) */}
-                        <line x1={p2.x} y1="0" x2={p2.x} y2={VIEWBOX_HEIGHT} stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />
-                        {!isTIR && <line x1={p3.x} y1={BLOCK_Y} x2={p3.x} y2={VIEWBOX_HEIGHT} stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />}
+                        {showAngles && <line x1={p2.x} y1="0" x2={p2.x} y2={VIEWBOX_HEIGHT} stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />}
+                        {showAngles && !isTIR && <line x1={p3.x} y1={BLOCK_Y} x2={p3.x} y2={VIEWBOX_HEIGHT} stroke="#475569" strokeWidth="2" strokeDasharray="5,5" />}
 
                         {/* Ljusstrålar - grön laser med glow */}
                         <g filter="url(#laserGlow)">
-                            <g stroke="#39ff14" strokeWidth="3" strokeLinecap="round">
-                                <line x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} />
+                            <g stroke={rayColor} strokeWidth="3" strokeLinecap="round">
+                                <line x1={penTip.x} y1={penTip.y} x2={p2.x} y2={p2.y} />
                                 <line x1={p2.x} y1={p2.y} x2={p3.x} y2={p3.y} />
                                 {!isTIR && <line x1={p3.x} y1={p3.y} x2={p4.x} y2={p4.y} />}
                             </g>
 
                             {/* Reflekterade strålar (streckade, partiell reflektion) */}
                             {showReflected && !isTIR && (
-                                <g stroke="#39ff14" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="8,5" opacity="0.7">
+                                <g stroke={rayColor} strokeWidth="2.5" strokeLinecap="round" strokeDasharray="8,5" opacity="0.4">
                                     <line x1={p2.x} y1={p2.y} x2={pR.x} y2={pR.y} />
                                     {pR2 && <line x1={p3.x} y1={p3.y} x2={pR2.x} y2={pR2.y} />}
                                 </g>
@@ -678,13 +766,13 @@
                         {/* Pilar på strålar */}
                         <g>
                             {(() => {
-                                const mid1x = (p1.x + p2.x) / 2;
-                                const mid1y = (p1.y + p2.y) / 2;
-                                const dx1 = p2.x - p1.x;
-                                const dy1 = p2.y - p1.y;
+                                const mid1x = (penTip.x + p2.x) / 2;
+                                const mid1y = (penTip.y + p2.y) / 2;
+                                const dx1 = p2.x - penTip.x;
+                                const dy1 = p2.y - penTip.y;
                                 const len1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
                                 const arrowLen = 1;
-                                return <line x1={mid1x} y1={mid1y} x2={mid1x + (dx1 / len1) * arrowLen} y2={mid1y + (dy1 / len1) * arrowLen} stroke="#39ff14" strokeWidth="3" markerEnd="url(#arrow)" />;
+                                return <line x1={mid1x} y1={mid1y} x2={mid1x + (dx1 / len1) * arrowLen} y2={mid1y + (dy1 / len1) * arrowLen} stroke={rayColor} strokeWidth="3" markerEnd="url(#arrow)" />;
                             })()}
                             {(() => {
                                 const mid2x = (p2.x + p3.x) / 2;
@@ -693,7 +781,7 @@
                                 const dy2 = p3.y - p2.y;
                                 const len2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
                                 const arrowLen = 1;
-                                return <line x1={mid2x} y1={mid2y} x2={mid2x + (dx2 / len2) * arrowLen} y2={mid2y + (dy2 / len2) * arrowLen} stroke="#39ff14" strokeWidth="3" markerEnd="url(#arrow)" />;
+                                return <line x1={mid2x} y1={mid2y} x2={mid2x + (dx2 / len2) * arrowLen} y2={mid2y + (dy2 / len2) * arrowLen} stroke={rayColor} strokeWidth="3" markerEnd="url(#arrow)" />;
                             })()}
                             {!isTIR && (() => {
                                 const mid3x = (p3.x + p4.x) / 2;
@@ -702,7 +790,7 @@
                                 const dy3 = p4.y - p3.y;
                                 const len3 = Math.sqrt(dx3 * dx3 + dy3 * dy3);
                                 const arrowLen = 1;
-                                return <line x1={mid3x} y1={mid3y} x2={mid3x + (dx3 / len3) * arrowLen} y2={mid3y + (dy3 / len3) * arrowLen} stroke="#39ff14" strokeWidth="3" markerEnd="url(#arrow)" />;
+                                return <line x1={mid3x} y1={mid3y} x2={mid3x + (dx3 / len3) * arrowLen} y2={mid3y + (dy3 / len3) * arrowLen} stroke={rayColor} strokeWidth="3" markerEnd="url(#arrow)" />;
                             })()}
                             {showReflected && !isTIR && (() => {
                                 const midRx = (p2.x + pR.x) / 2;
@@ -711,7 +799,7 @@
                                 const dyR = pR.y - p2.y;
                                 const lenR = Math.sqrt(dxR * dxR + dyR * dyR);
                                 const arrowLen = 1;
-                                return <line x1={midRx} y1={midRy} x2={midRx + (dxR / lenR) * arrowLen} y2={midRy + (dyR / lenR) * arrowLen} stroke="#39ff14" strokeWidth="2.5" opacity="0.7" markerEnd="url(#arrow)" />;
+                                return <line x1={midRx} y1={midRy} x2={midRx + (dxR / lenR) * arrowLen} y2={midRy + (dyR / lenR) * arrowLen} stroke={rayColor} strokeWidth="2.5" opacity="0.4" markerEnd="url(#arrow)" />;
                             })()}
                             {showReflected && !isTIR && pR2 && (() => {
                                 const midR2x = (p3.x + pR2.x) / 2;
@@ -720,52 +808,155 @@
                                 const dyR2 = pR2.y - p3.y;
                                 const lenR2 = Math.sqrt(dxR2 * dxR2 + dyR2 * dyR2);
                                 const arrowLen = 1;
-                                return <line x1={midR2x} y1={midR2y} x2={midR2x + (dxR2 / lenR2) * arrowLen} y2={midR2y + (dyR2 / lenR2) * arrowLen} stroke="#39ff14" strokeWidth="2.5" opacity="0.7" markerEnd="url(#arrow)" />;
+                                return <line x1={midR2x} y1={midR2y} x2={midR2x + (dxR2 / lenR2) * arrowLen} y2={midR2y + (dyR2 / lenR2) * arrowLen} stroke={rayColor} strokeWidth="2.5" opacity="0.4" markerEnd="url(#arrow)" />;
                             })()}
                         </g>
+
+                        {/* Laserpenna - sitter vid penTip och pekar mot p2 */}
+                        {(() => {
+                            const angleDeg = 90 + incidentAngle;
+                            const L = PEN_BODY_LEN;
+                            const H = PEN_BODY_H;
+                            const capLen = 6;
+                            const bodyLen = L - capLen;
+                            return (
+                                <g transform={`translate(${penTip.x} ${penTip.y}) rotate(${angleDeg})`}>
+                                    {/* Visuella element - klick passerar igenom till SVG-drag */}
+                                    <g style={{ pointerEvents: 'none' }}>
+                                        {/* Mjukt halo runt aperturen (laserkällan) */}
+                                        <circle cx={0} cy={0} r={9} fill="url(#penTipGlow)"/>
+                                        {/* Pennans huvudkropp */}
+                                        <rect x={-L} y={-H/2} width={bodyLen} height={H}
+                                              fill="url(#penBodyGrad)" stroke="#020617" strokeWidth="0.8" rx="3" ry="3"/>
+                                        {/* Främre kapsel (där lasern kommer ut) */}
+                                        <rect x={-capLen} y={-H/2 - 1.2} width={capLen} height={H + 2.4}
+                                              fill="#0f172a" stroke="#020617" strokeWidth="0.8" rx="1.6" ry="1.6"/>
+                                        {/* Aperturen (källan) */}
+                                        <circle cx={-1.5} cy={0} r={2.4} fill={apertureCenterColor}/>
+                                        <circle cx={-1.5} cy={0} r={1.4} fill="#ffffff"/>
+                                        {/* Subtil ljusstrimma längs ovansidan för metallisk känsla */}
+                                        <line x1={-L + 4} y1={-H/2 + 2} x2={-capLen - 3} y2={-H/2 + 2}
+                                              stroke="rgba(203, 213, 225, 0.45)" strokeWidth="0.8" strokeLinecap="round"/>
+                                    </g>
+                                    {/* Grön laserknapp på baksidan av pennan */}
+                                    {(() => {
+                                        const cx = -L + 7;
+                                        const cy = 0;
+                                        const r = 2.5;
+                                        const active = !isRedLaser;
+                                        return (
+                                            <g style={{ cursor: 'pointer' }}
+                                               onClick={(e) => { e.stopPropagation(); setLaserColor('green'); }}
+                                               onMouseDown={(e) => e.stopPropagation()}
+                                               onTouchStart={(e) => e.stopPropagation()}>
+                                                {/* Träffyta */}
+                                                <circle cx={cx} cy={cy} r={6} fill="rgba(0,0,0,0.001)"/>
+                                                {/* Bas/kant */}
+                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#04140a"/>
+                                                {/* Knappens framsida */}
+                                                <circle cx={cx} cy={cy} r={r} fill={active ? '#22c55e' : '#14532d'}/>
+                                                {/* Glow när aktiv */}
+                                                {active && <circle cx={cx} cy={cy} r={r + 1.4} fill="none" stroke="#22c55e" strokeWidth="0.4" opacity="0.7"/>}
+                                                {/* Inre skugga */}
+                                                <circle cx={cx} cy={cy} r={r} fill="none"
+                                                        stroke={active ? '#166534' : '#022c22'} strokeWidth="0.4"/>
+                                                {/* Ljusstrimma */}
+                                                <ellipse cx={cx - 0.7} cy={cy - 0.7} rx={0.8} ry={0.5}
+                                                         fill={active ? 'rgba(220,255,220,0.8)' : 'rgba(160,200,160,0.35)'}/>
+                                            </g>
+                                        );
+                                    })()}
+                                    {/* Röd laserknapp på baksidan av pennan */}
+                                    {(() => {
+                                        const cx = -L + 14;
+                                        const cy = 0;
+                                        const r = 2.5;
+                                        const active = isRedLaser;
+                                        return (
+                                            <g style={{ cursor: 'pointer' }}
+                                               onClick={(e) => { e.stopPropagation(); setLaserColor('red'); }}
+                                               onMouseDown={(e) => e.stopPropagation()}
+                                               onTouchStart={(e) => e.stopPropagation()}>
+                                                {/* Träffyta */}
+                                                <circle cx={cx} cy={cy} r={6} fill="rgba(0,0,0,0.001)"/>
+                                                {/* Bas/kant */}
+                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#1f0709"/>
+                                                {/* Knappens framsida */}
+                                                <circle cx={cx} cy={cy} r={r} fill={active ? '#ef4444' : '#450a0a'}/>
+                                                {/* Glow när aktiv */}
+                                                {active && <circle cx={cx} cy={cy} r={r + 1.4} fill="none" stroke="#ef4444" strokeWidth="0.4" opacity="0.7"/>}
+                                                {/* Inre skugga */}
+                                                <circle cx={cx} cy={cy} r={r} fill="none"
+                                                        stroke={active ? '#7f1d1d' : '#1c0606'} strokeWidth="0.4"/>
+                                                {/* Ljusstrimma */}
+                                                <ellipse cx={cx - 0.7} cy={cy - 0.7} rx={0.8} ry={0.5}
+                                                         fill={active ? 'rgba(255,220,220,0.8)' : 'rgba(200,160,160,0.35)'}/>
+                                            </g>
+                                        );
+                                    })()}
+                                </g>
+                            );
+                        })()}
 
                         {/* TIR-etikett */}
                         {isTIR && <text x={p2.x + 15} y={p2.y - 40} fill="#ef4444" fontSize="18" fontWeight="bold" fontFamily="Poppins, sans-serif">Total intern reflektion</text>}
 
                         {/* Vinkelbågar - övre gränsyta */}
-                        <g>
+                        {showAngles && <g>
                             <path d={getArcPath(p2.x, p2.y, 40, 0, theta1Rad)} stroke="#0ea5e9" strokeWidth="2" fill="none"/>
-                            <text x={p2.x + 50 * Math.sin(theta1Rad/2)} y={p2.y - 50 * Math.cos(theta1Rad/2)} fill="#0ea5e9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
-                                i<tspan fontSize="12" dy="4">1</tspan>
+                            <text x={p2.x + 55 * Math.sin(theta1Rad/2)} y={p2.y - 55 * Math.cos(theta1Rad/2)} fill="#0ea5e9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                {showAngleValues
+                                    ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta1Deg)}°</tspan>
+                                    : <><tspan>i</tspan><tspan fontSize="12" dy="4">1</tspan></>
+                                }
                             </text>
 
                             {isTIR ? (
                                 <g>
                                     <path d={getArcPath(p2.x, p2.y, 60, 0, -theta1Rad)} stroke="#ec4899" strokeWidth="2" fill="none"/>
-                                    <text x={p2.x + 70 * Math.sin(-theta1Rad/2)} y={p2.y - 70 * Math.cos(-theta1Rad/2)} fill="#ec4899" fontSize="18" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">i'</text>
+                                    <text x={p2.x + 75 * Math.sin(-theta1Rad/2)} y={p2.y - 75 * Math.cos(-theta1Rad/2)} fill="#ec4899" fontSize="18" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                        {showAngleValues
+                                            ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta1Deg)}°</tspan>
+                                            : "i'"
+                                        }
+                                    </text>
                                 </g>
                             ) : (
                                 <g>
                                     <path d={getDownwardArcPath(p2.x, p2.y, 40, 0, theta2Rad)} stroke="#8b5cf6" strokeWidth="2" fill="none" />
-                                    <text x={p2.x + 55 * Math.sin(theta2Rad/2)} y={p2.y + 55 * Math.cos(theta2Rad/2)} fill="#8b5cf6" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
-                                        b<tspan fontSize="12" dy="4">1</tspan>
+                                    <text x={p2.x + 60 * Math.sin(theta2Rad/2)} y={p2.y + 60 * Math.cos(theta2Rad/2)} fill="#8b5cf6" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                        {showAngleValues
+                                            ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta2Deg)}°</tspan>
+                                            : <><tspan>b</tspan><tspan fontSize="12" dy="4">1</tspan></>
+                                        }
                                     </text>
                                 </g>
                             )}
-                        </g>
+                        </g>}
 
                         {/* Vinkelbågar - nedre gränsyta */}
-                        {!isTIR && (
+                        {showAngles && !isTIR && (
                             <g>
                                 <path d={getArcPath(p3.x, p3.y, 40, 0, -theta2Rad)} stroke="#8b5cf6" strokeWidth="2" fill="none"/>
-                                <text x={p3.x - 50 * Math.sin(theta2Rad/2)} y={p3.y - 50 * Math.cos(theta2Rad/2)} fill="#8b5cf6" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
-                                    i<tspan fontSize="12" dy="4">2</tspan>
+                                <text x={p3.x - 55 * Math.sin(theta2Rad/2)} y={p3.y - 55 * Math.cos(theta2Rad/2)} fill="#8b5cf6" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                    {showAngleValues
+                                        ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta2Deg)}°</tspan>
+                                        : <><tspan>i</tspan><tspan fontSize="12" dy="4">2</tspan></>
+                                    }
                                 </text>
 
                                 <path d={getDownwardArcPath(p3.x, p3.y, 40, 0, -theta1Rad)} stroke="#0ea5e9" strokeWidth="2" fill="none" />
-                                <text x={p3.x - 55 * Math.sin(theta1Rad/2)} y={p3.y + 55 * Math.cos(theta1Rad/2)} fill="#0ea5e9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
-                                    b<tspan fontSize="12" dy="4">2</tspan>
+                                <text x={p3.x - 60 * Math.sin(theta1Rad/2)} y={p3.y + 60 * Math.cos(theta1Rad/2)} fill="#0ea5e9" fontSize="16" fontStyle="italic" textAnchor="middle" fontFamily="Poppins, sans-serif">
+                                    {showAngleValues
+                                        ? <tspan fontSize="14" fontStyle="normal">{fmtDeg(theta1Deg)}°</tspan>
+                                        : <><tspan>b</tspan><tspan fontSize="12" dy="4">2</tspan></>
+                                    }
                                 </text>
                             </g>
                         )}
 
                         {/* Vinkelsamband-rutan */}
-                        {!isTIR && (
+                        {showAngles && !isTIR && (
                             <g>
                                 <rect x={VIEWBOX_WIDTH - 170} y="15" width="155" height="70"
                                       fill="rgba(10, 20, 40, 0.85)"
@@ -786,8 +977,8 @@
 
                     </svg>
 
-                    {/* Flytande kontrollpanel - fungerar både i normalt läge och fullskärm */}
-                    <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                    {/* Flytande kontrollpanel - visas endast i fullskärmsläge */}
+                    {isFullscreen && <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
                         <div className="fs-row">
                             <span className="fs-label">Infallsvinkel <em style={{fontStyle: 'italic'}}>i</em><sub>1</sub></span>
                             <input
@@ -829,9 +1020,56 @@
                             </div>
                             <span className="fs-value">{n2.toFixed(2).replace('.', ',')}</span>
                         </div>
-                    </div>
+                        <div className="fs-row">
+                            <span className="fs-label">Laserfärg</span>
+                            <div style={{ flex: 1, display: 'flex', gap: 16 }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                    <input type="radio" name="fs-laser-color" value="green"
+                                        checked={laserColor === 'green'}
+                                        onChange={() => setLaserColor('green')}
+                                        style={{ accentColor: '#22c55e', cursor: 'pointer' }}/>
+                                    Grön
+                                </label>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                    <input type="radio" name="fs-laser-color" value="red"
+                                        checked={laserColor === 'red'}
+                                        onChange={() => setLaserColor('red')}
+                                        style={{ accentColor: '#ef4444', cursor: 'pointer' }}/>
+                                    Röd
+                                </label>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem', marginLeft: 'auto' }}>
+                                    <input type="checkbox"
+                                        checked={showAngles}
+                                        onChange={(e) => setShowAngles(e.target.checked)}
+                                        style={{ accentColor: '#38bdf8', cursor: 'pointer', width: 14, height: 14 }}/>
+                                    Visa vinklar
+                                </label>
+                            </div>
+                        </div>
+                        {showAngles && (
+                            <div className="fs-row">
+                                <span className="fs-label">Vinkelvisning</span>
+                                <div style={{ flex: 1, display: 'flex', gap: 16 }}>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                        <input type="radio" name="fs-angle-display" value="labels"
+                                            checked={angleDisplay === 'labels'}
+                                            onChange={() => setAngleDisplay('labels')}
+                                            style={{ accentColor: '#38bdf8', cursor: 'pointer' }}/>
+                                        Beteckningar
+                                    </label>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                        <input type="radio" name="fs-angle-display" value="values"
+                                            checked={angleDisplay === 'values'}
+                                            onChange={() => setAngleDisplay('values')}
+                                            style={{ accentColor: '#38bdf8', cursor: 'pointer' }}/>
+                                        Värden
+                                    </label>
+                                </div>
+                            </div>
+                        )}
+                    </div>}
 
-                    <button
+                    {isFullscreen && <button
                         className="fs-toggle-handle"
                         onClick={() => setControlsOpen(o => !o)}
                         title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
@@ -843,7 +1081,7 @@
                             <path d="M6 9l6 6 6-6"/>
                         </svg>
                         <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
-                    </button>
+                    </button>}
 
                     <button className="fs-btn" onClick={toggleFullscreen}
                             title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
@@ -865,7 +1103,10 @@
             const [n1, setN1] = useState(1.0);
             const [n2, setN2] = useState(1.52);
             const [incidentAngle, setIncidentAngle] = useState(-40);
-            const [showReflected, setShowReflected] = useState(true);
+            const [showReflected, setShowReflected] = useState(false);
+            const [showAngles, setShowAngles] = useState(false);
+            const [angleDisplay, setAngleDisplay] = useState('labels');
+            const [laserColor, setLaserColor] = useState('green');
 
             return (
                 <div className="min-h-screen dark-container flex flex-col" style={{ fontFamily: 'Poppins, sans-serif' }}>
@@ -876,11 +1117,53 @@
                         <header className="mb-6">
                             <h1 className="text-2xl sm:text-3xl font-bold text-slate-100 glow-text">Brytningslagen</h1>
                             <p className="text-slate-400 mt-1 text-sm sm:text-base">Utforska ljusets brytning vid gränsytan mellan två medier.</p>
+                            <div className="mt-6 flex flex-row flex-wrap items-stretch gap-6 text-cyan-300" style={{fontFamily: 'Poppins, sans-serif'}}>
+                                <div className="flex items-end gap-3 flex-wrap px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/40">
+                                    <div style={{textAlign:'center'}}>
+                                        <div className="text-xs text-cyan-400/60 font-semibold mb-1">Brytningsindex medium 1</div>
+                                        <div className="text-2xl font-bold"><em>n</em><sub>1</sub></div>
+                                    </div>
+                                    <div className="text-2xl font-bold text-slate-400">⋅</div>
+                                    <div className="text-2xl font-bold text-slate-300">sin</div>
+                                    <div style={{textAlign:'center'}}>
+                                        <div className="text-xs text-cyan-400/60 font-semibold mb-1">Infallsvinkel</div>
+                                        <div className="text-2xl font-bold"><em>i</em></div>
+                                    </div>
+                                    <div className="text-xl text-slate-500">=</div>
+                                    <div style={{textAlign:'center'}}>
+                                        <div className="text-xs text-cyan-400/60 font-semibold mb-1">Brytningsindex medium 2</div>
+                                        <div className="text-2xl font-bold"><em>n</em><sub>2</sub></div>
+                                    </div>
+                                    <div className="text-2xl font-bold text-slate-400">⋅</div>
+                                    <div className="text-2xl font-bold text-slate-300">sin</div>
+                                    <div style={{textAlign:'center'}}>
+                                        <div className="text-xs text-cyan-400/60 font-semibold mb-1">Brytningsvinkel</div>
+                                        <div className="text-2xl font-bold"><em>b</em></div>
+                                    </div>
+                                </div>
+                            </div>
                         </header>
                     </div>
 
                     <main className="flex-grow flex flex-col lg:flex-row px-4 sm:px-6 pb-6 gap-6 max-w-7xl mx-auto w-full">
-                        <div className="lg:w-1/3 xl:w-1/4 flex-shrink-0">
+                        <div className="flex-grow lg:w-2/3 xl:w-3/4 min-h-[400px] lg:min-h-0 order-1 lg:order-1">
+                            <SimulationView
+                                n1={n1}
+                                setN1={setN1}
+                                n2={n2}
+                                setN2={setN2}
+                                incidentAngle={incidentAngle}
+                                setIncidentAngle={setIncidentAngle}
+                                showReflected={showReflected}
+                                showAngles={showAngles}
+                                setShowAngles={setShowAngles}
+                                angleDisplay={angleDisplay}
+                                setAngleDisplay={setAngleDisplay}
+                                laserColor={laserColor}
+                                setLaserColor={setLaserColor}
+                            />
+                        </div>
+                        <div className="lg:w-1/3 xl:w-1/4 flex-shrink-0 order-2 lg:order-2">
                             <ControlsView
                                 n1={n1}
                                 setN1={setN1}
@@ -890,17 +1173,12 @@
                                 setIncidentAngle={setIncidentAngle}
                                 showReflected={showReflected}
                                 setShowReflected={setShowReflected}
-                            />
-                        </div>
-                        <div className="flex-grow lg:w-2/3 xl:w-3/4 min-h-[400px] lg:min-h-0">
-                            <SimulationView
-                                n1={n1}
-                                setN1={setN1}
-                                n2={n2}
-                                setN2={setN2}
-                                incidentAngle={incidentAngle}
-                                setIncidentAngle={setIncidentAngle}
-                                showReflected={showReflected}
+                                showAngles={showAngles}
+                                setShowAngles={setShowAngles}
+                                angleDisplay={angleDisplay}
+                                setAngleDisplay={setAngleDisplay}
+                                laserColor={laserColor}
+                                setLaserColor={setLaserColor}
                             />
                         </div>
                     </main>

@@ -146,6 +146,31 @@ const toggleFullscreen = () => {
 };
 ```
 
+### Inga överlappande objekt
+
+**UI-element får aldrig ligga ovanpå varandra.** Alla synliga objekt — knappar,
+SVG-etiketter, paneler, formelrutor, ikoner, vinkelbågar, m.m. — ska ha sina
+egna utrymmen och inte täcka eller skymma något annat objekt.
+
+Vanliga fall att kontrollera:
+
+1. **Fullskärmsknappen i ett hörn** — kontrollera att inga SVG-etiketter (t.ex.
+   "Medium 1") börjar i samma hörn. Flytta etiketten åt höger eller nedåt så
+   att den klarar knappen även på smala skärmar (typiskt `x ≥ 70` viewBox-
+   units om knappen sitter i top-left med `left: 14px; width: 40px`).
+2. **Flytande paneler vs visualisering** — den flytande kontrollpanelen
+   (`.fs-controls`) i fullskärmsläget får inte täcka det som eleven faktiskt
+   vill se (t.ex. strålgång, partikelbana). Använd toggle-knappen så
+   användaren kan dölja panelen.
+3. **Etiketter och bågar** — vinkeletiketter (i₁, b₁, …) får inte hamna
+   ovanpå strålarna eller varandra. Använd större radie för etikettens
+   placering om värden ska visas inline.
+4. **Formelkort vs sidopanel** — om en formel finns i headern ska den inte
+   också upprepas i sidopanelen.
+
+I tveksamma fall: testa simuleringen i normalt läge OCH fullskärmsläge på både
+bred och smal skärm innan du markerar arbetet som klart.
+
 ### Typografi och variabler
 
 - **Teckensnitt**: Använd Poppins för text i canvas och UI-element
@@ -180,6 +205,8 @@ ctx.fillText(' = 5,0 N', x + 10, y);  // Värde med enhet
 3. **Enheter alltid med värden** — om formeln visas med insatta numeriska värden ska varje värde ha sin SI-enhet. Skriv `5,0 kg` och `0,005 m³`, inte `5,0` och `0,005`. Slutresultatet ska också ha enhet (t.ex. `1 000 kg/m³`).
 4. **Variabler i kursiv, enheter rakt** (se Typografi-avsnittet ovan).
 5. **Konstanter har också benämning** — t.ex. *G* (gravitationskonstanten), *k* (Coulombs konstant), σ (Stefan–Boltzmanns konstant). Skriv aldrig bara symbolen utan att i närheten också ange vad den heter och dess värde med enhet.
+6. **Gångertecken (·) skrivs alltid ut** — använd alltid ett tydligt multiplikationstecken (`⋅`, U+22C5) mellan faktorer i en formel. Skriv `n₁ · sin i`, inte `n₁ sin i`. Skriv `F = G · m₁ · m₂ / r²`, inte `F = G m₁ m₂ / r²`. Detta gör formlerna entydiga och lättare att läsa, särskilt när variabelnamnen står tätt. Undantag: implicit multiplikation inom funktionsargument är OK (t.ex. `sin i` betyder sin tillämpat på *i*, inte sin gånger *i*).
+7. **Operatorer i nivå med variabler** — i formelkort där varje variabel har en beskrivande etikett ovanför sig ska operatorer (`=`, `·`, `sin`, `+`, `−`) ligga i nivå med variablerna, inte centrerade vertikalt mellan etikett och variabel. Använd `items-end` istället för `items-center` på flex-containern, så att operatorerna och variablernas baslinjer hamnar i samma horisontella linje. Etiketterna får då flyta ovanför variablerna utan att operatorerna förskjuts uppåt.
 
 Mönster att följa (se densitetssimuleringen för referensimplementation):
 
@@ -194,6 +221,29 @@ Mönster att följa (se densitetssimuleringen för referensimplementation):
 Implementera bråk i React/JSX med stackad layout (täljare och nämnare i kolumn med `border-top` som divisionsstreck). I canvas: rita en horisontell linje mellan numerator och denominator istället för att skriva ut `/`.
 
 **Introduktionstext (header/ingress):** Om formeln är central för simuleringen ska den lyftas ut ur löptexten till en egen formelruta direkt under ingressen, med raka bråkstreck och definierade beteckningar. Skriv inte hela formeln inbäddad i ingressmeningen — där räcker det att hänvisa till "formeln nedan" eller "Newtons gravitationslag".
+
+**Formelkort högst upp på sidan:** När formeln är central för simuleringen (t.ex. Snells lag i brytning, *E*ₙ i energinivåer, *F* = *G m*₁*m*₂ / *r*² i gravitation) ska den ligga som ett tydligt formelkort i headern, direkt under ingressparagrafen — inte gömd i sidopanelen. Varje beteckning får en kort beskrivning med ord direkt över sig. Använd dubblettlös placering: ligger formeln i headern ska den inte också upprepas i sidopanelen.
+
+Referensimplementation: `fysik2-energinivaer.html` (se formelkortet i headern). Mönstret:
+
+```jsx
+<header className="mb-6">
+    <h1>...</h1>
+    <p>Ingresstext...</p>
+    <div className="mt-6 flex flex-row flex-wrap items-stretch gap-6 text-cyan-300">
+        <div className="flex items-center gap-3 flex-wrap px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/40">
+            <div style={{textAlign:'center'}}>
+                <div className="text-xs text-cyan-400/60 font-semibold mb-1">Beskrivning</div>
+                <div className="text-2xl font-bold"><em>X</em></div>
+            </div>
+            <div className="text-xl text-slate-500">=</div>
+            {/* ... fler termer ... */}
+        </div>
+    </div>
+</header>
+```
+
+För bråk: stackad layout med `borderTop:'2px solid currentColor'` mellan täljare och nämnare (se formel 2 i `fysik2-energinivaer.html`).
 
 ### Decimaltalsformatering
 

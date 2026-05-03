@@ -78,6 +78,39 @@ Alla simuleringar följer samma struktur:
 5. React-komponenter: Simulation, Controls, Results, Explanation
 6. Footer
 
+### Standardlayout: visualisering + sidopanel (icke-fullskärmsläge)
+
+I normalt (icke-fullskärm) läge ska varje simulering följa denna layout:
+
+1. **Visualiseringen** ligger i ett block till vänster (på smala skärmar:
+   överst). Den får ta så stor yta som möjligt utan att tränga ut sidopanelen.
+2. **Reglagen** (sliders, knappar, materialval, lägen, resultatpaneler,
+   förklaringar) ligger i ett **block till höger om visualiseringen** — inte
+   inne i scenen. På mobila/smala skärmar flyter sidopanelen automatiskt ner
+   under visualiseringen.
+3. Fullskärmsknappen sitter alltid inne i scenen (även i icke-fullskärm).
+
+Mönster för layout (huvudregel, samma för alla simuleringar):
+
+```jsx
+<main className="flex-grow flex flex-col lg:flex-row px-4 sm:px-6 pb-6 gap-6 max-w-7xl mx-auto w-full">
+    {/* Visualisering */}
+    <div className="flex-grow lg:w-2/3 xl:w-3/4 min-h-[400px] order-1">
+        <SimulationView ... />
+    </div>
+    {/* Sidopanel med reglage */}
+    <div className="lg:w-1/3 xl:w-1/4 flex-shrink-0 order-2">
+        <ControlsView ... />
+    </div>
+</main>
+```
+
+**Anti-mönster:** att enbart visa en flytande kontrollpanel inne i scenen i
+icke-fullskärmsläget (utan sidopanel) — då blir reglagen otillgängliga och
+scenen "trångbodd". Den flytande panelen är ENDAST för fullskärmsläget.
+
+Referensimplementation: `fysik2-brytning-app.html`, `fysik2-fotoelektrisk-effekt.html`.
+
 ### Fullskärmsläge och integrerade reglage
 
 **Varje simulering ska ha ett fullskärmsläge** där visualiseringen kan ta upp hela

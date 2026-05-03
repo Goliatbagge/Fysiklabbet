@@ -613,6 +613,11 @@
 
             const { penTip, p2, p3, p4, pR, pR2, theta1Rad, theta2Rad, isTIR } = calculations;
 
+            // Materialberoende opacitet: luft (n=1) → nästan osynlig medium-effekt,
+            // glas/diamant → tydlig och briljant. Skalar specular och kropp gemensamt.
+            const glassOpacity = Math.min(1.0, Math.max(0.18, (n2 - 1) * 1.05 + 0.18));
+            const medium1Opacity = Math.min(1.0, Math.max(0.10, (n1 - 1) * 1.05 + 0.10));
+
             const theta1Deg = Math.abs(incidentAngle);
             const theta2Deg = isTIR ? 0 : Math.abs(theta2Rad * 180 / Math.PI);
             const showAngleValues = angleDisplay === 'values';
@@ -733,10 +738,73 @@
                             >
                                 <path d="M 0 0 L 10 5 L 0 10 z" fill={rayColor} />
                             </marker>
-                            <linearGradient id="blockGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style={{stopColor: 'rgba(56, 189, 248, 0.12)'}} />
-                                <stop offset="100%" style={{stopColor: 'rgba(30, 64, 120, 0.18)'}} />
+                            {/* Glaskropp - vertikal djupgradient (ljusare vid kanterna, Fresnel-känsla) */}
+                            <linearGradient id="glassBodyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="rgba(155, 215, 255, 0.20)"/>
+                                <stop offset="18%" stopColor="rgba(90, 160, 220, 0.07)"/>
+                                <stop offset="50%" stopColor="rgba(35, 75, 130, 0.05)"/>
+                                <stop offset="82%" stopColor="rgba(90, 160, 220, 0.07)"/>
+                                <stop offset="100%" stopColor="rgba(155, 215, 255, 0.18)"/>
                             </linearGradient>
+                            {/* Diagonal sheen - ljusvariation över glaset */}
+                            <linearGradient id="glassSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="rgba(186, 230, 253, 0)"/>
+                                <stop offset="35%" stopColor="rgba(186, 230, 253, 0.06)"/>
+                                <stop offset="55%" stopColor="rgba(255, 255, 255, 0.04)"/>
+                                <stop offset="80%" stopColor="rgba(186, 230, 253, 0.03)"/>
+                                <stop offset="100%" stopColor="rgba(186, 230, 253, 0)"/>
+                            </linearGradient>
+                            {/* Specular highlight vid övre kant - ljust band som tonas ut nedåt */}
+                            <linearGradient id="topEdgeSpecular" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="rgba(224, 242, 254, 0.6)"/>
+                                <stop offset="35%" stopColor="rgba(125, 211, 252, 0.10)"/>
+                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                            </linearGradient>
+                            {/* Specular highlight vid undre kant - ljust band som tonas ut uppåt */}
+                            <linearGradient id="bottomEdgeSpecular" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stopColor="rgba(224, 242, 254, 0.55)"/>
+                                <stop offset="35%" stopColor="rgba(125, 211, 252, 0.10)"/>
+                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                            </linearGradient>
+                            {/* Mikrotextur för polerad glasyta */}
+                            <filter id="glassNoise" x="0%" y="0%" width="100%" height="100%">
+                                <feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="2" seed="11" stitchTiles="stitch"/>
+                                <feColorMatrix values="0 0 0 0 0.78
+                                                       0 0 0 0 0.88
+                                                       0 0 0 0 1
+                                                       0 0 0 0.05 0"/>
+                            </filter>
+                            {/* Medium 1 (övre region) - tonas mörkare upptill, ljusare nära gränsytan */}
+                            <linearGradient id="medium1UpperGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="rgba(155, 215, 255, 0.10)"/>
+                                <stop offset="50%" stopColor="rgba(60, 110, 180, 0.04)"/>
+                                <stop offset="100%" stopColor="rgba(155, 215, 255, 0.20)"/>
+                            </linearGradient>
+                            {/* Medium 1 (nedre region, tre-skiktsläge) - inverterad */}
+                            <linearGradient id="medium1LowerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="rgba(155, 215, 255, 0.20)"/>
+                                <stop offset="50%" stopColor="rgba(60, 110, 180, 0.04)"/>
+                                <stop offset="100%" stopColor="rgba(155, 215, 255, 0.10)"/>
+                            </linearGradient>
+                            {/* Medium 1 specular vid gränsytan ovanifrån (fading uppåt från BLOCK_Y) */}
+                            <linearGradient id="medium1BottomSpecular" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" stopColor="rgba(224, 242, 254, 0.45)"/>
+                                <stop offset="40%" stopColor="rgba(125, 211, 252, 0.09)"/>
+                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                            </linearGradient>
+                            {/* Medium 1 specular vid undre gränsytan (fading nedåt) */}
+                            <linearGradient id="medium1TopSpecular" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="rgba(224, 242, 254, 0.45)"/>
+                                <stop offset="40%" stopColor="rgba(125, 211, 252, 0.09)"/>
+                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                            </linearGradient>
+                            {/* Glint vid laserns interaktion med glasytan */}
+                            <radialGradient id="glassSparkle" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stopColor="rgba(255, 255, 255, 1)"/>
+                                <stop offset="18%" stopColor="rgba(255, 255, 255, 0.7)"/>
+                                <stop offset="45%" stopColor="rgba(186, 230, 253, 0.25)"/>
+                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                            </radialGradient>
                             <linearGradient id="penBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" stopColor="#64748b"/>
                                 <stop offset="35%" stopColor="#334155"/>
@@ -761,13 +829,60 @@
 
                         {/* Bakgrundsruta - övre medium */}
                         <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y} fill="rgb(10, 15, 30)"/>
-                        {/* Block/glaset - medium 2 */}
-                        <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height={effectiveBlockHeight} fill="url(#blockGradient)"/>
-                        {/* Kant på blocket */}
-                        <line x1="0" y1={BLOCK_Y} x2={VIEWBOX_WIDTH} y2={BLOCK_Y} stroke="rgba(56, 189, 248, 0.25)" strokeWidth="1"/>
-                        {!isTwoLayer && <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT} stroke="rgba(56, 189, 248, 0.25)" strokeWidth="1"/>}
                         {/* Bakgrundsruta - nedre medium (endast i tre-skikts-läget) */}
                         {!isTwoLayer && <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT} fill="rgb(10, 15, 30)"/>}
+
+                        {/* === MEDIUM 1 - SKIKTAD FÖR AUTENTISK MATERIALKÄNSLA === */}
+                        <g opacity={medium1Opacity}>
+                            {/* Övre region - bas: vertikal djupgradient */}
+                            <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y} fill="url(#medium1UpperGradient)"/>
+                            {/* Mikrotextur */}
+                            <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y}
+                                  filter="url(#glassNoise)" opacity="0.45"/>
+                            {/* Diagonal sheen */}
+                            <rect x="0" y="0" width={VIEWBOX_WIDTH} height={BLOCK_Y} fill="url(#glassSheen)"/>
+                            {/* Specular band vid gränsytan (fading uppåt) */}
+                            <rect x="0" y={BLOCK_Y - 24} width={VIEWBOX_WIDTH} height="24" fill="url(#medium1BottomSpecular)"/>
+
+                            {/* Nedre region - endast tre-skiktsläge */}
+                            {!isTwoLayer && <>
+                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT} fill="url(#medium1LowerGradient)"/>
+                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT}
+                                      filter="url(#glassNoise)" opacity="0.45"/>
+                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height={VIEWBOX_HEIGHT - BLOCK_Y - BLOCK_HEIGHT} fill="url(#glassSheen)"/>
+                                {/* Specular band vid undre gränsytan (fading nedåt) */}
+                                <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT} width={VIEWBOX_WIDTH} height="24" fill="url(#medium1TopSpecular)"/>
+                            </>}
+                        </g>
+
+                        {/* === GLASKROPP - SKIKTAD FÖR AUTENTISK GLASKÄNSLA === */}
+                        <g opacity={glassOpacity}>
+                            {/* Bas: vertikal djupgradient (Fresnel-känsla med ljusare kanter) */}
+                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height={effectiveBlockHeight} fill="url(#glassBodyGradient)"/>
+
+                            {/* Mikrotextur - polerad glasyta */}
+                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height={effectiveBlockHeight}
+                                  filter="url(#glassNoise)" opacity="0.55"/>
+
+                            {/* Diagonal sheen - fångat ljus över glaset */}
+                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height={effectiveBlockHeight} fill="url(#glassSheen)"/>
+
+                            {/* Specular band vid övre kant */}
+                            <rect x="0" y={BLOCK_Y} width={VIEWBOX_WIDTH} height="24" fill="url(#topEdgeSpecular)"/>
+
+                            {/* Specular band vid undre kant (endast tre-skiktsläge) */}
+                            {!isTwoLayer && <rect x="0" y={BLOCK_Y + BLOCK_HEIGHT - 24} width={VIEWBOX_WIDTH} height="24" fill="url(#bottomEdgeSpecular)"/>}
+
+                            {/* Övre kant - ljus specular-linje (polerad yta) */}
+                            <line x1="0" y1={BLOCK_Y} x2={VIEWBOX_WIDTH} y2={BLOCK_Y} stroke="rgba(224, 242, 254, 0.95)" strokeWidth="1.6"/>
+                            <line x1="0" y1={BLOCK_Y + 1.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + 1.4} stroke="rgba(125, 211, 252, 0.5)" strokeWidth="0.7"/>
+
+                            {/* Undre kant - ljus specular-linje (polerad yta) */}
+                            {!isTwoLayer && <>
+                                <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT} stroke="rgba(224, 242, 254, 0.95)" strokeWidth="1.6"/>
+                                <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT - 1.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT - 1.4} stroke="rgba(125, 211, 252, 0.5)" strokeWidth="0.7"/>
+                            </>}
+                        </g>
 
                         {/* Medium-texter */}
                         <text x="20" y="85" fill="#7dd3fc" fontSize="24" fontWeight="500" fontFamily="Poppins, sans-serif">
@@ -800,6 +915,19 @@
                                     {pR2 && <line x1={p3.x} y1={p3.y} x2={pR2.x} y2={pR2.y} />}
                                 </g>
                             )}
+                        </g>
+
+                        {/* Glints/sparkles där lasern träffar och lämnar glasytan */}
+                        <g style={{ pointerEvents: 'none' }} opacity={glassOpacity}>
+                            {/* Övre yta - alltid en träffpunkt (även vid TIR) */}
+                            <circle cx={p2.x} cy={p2.y} r={20} fill="url(#glassSparkle)"/>
+                            <circle cx={p2.x} cy={p2.y} r={4.5} fill="rgba(255, 255, 255, 0.9)"/>
+
+                            {/* Undre yta - endast i tre-skiktsläge utan TIR */}
+                            {!isTIR && !isTwoLayer && <>
+                                <circle cx={p3.x} cy={p3.y} r={20} fill="url(#glassSparkle)"/>
+                                <circle cx={p3.x} cy={p3.y} r={4.5} fill="rgba(255, 255, 255, 0.9)"/>
+                            </>}
                         </g>
 
                         {/* Pilar på strålar */}

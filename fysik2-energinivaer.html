@@ -1120,6 +1120,7 @@
                                 } else {
                                     s.phase = 'idle';
                                     setIsAnimating(false);
+                                    setCanReset(true);
                                 }
                             }
                         } else if (s.phase === 'photonOut') {
@@ -1490,30 +1491,33 @@
                                         </div>
                                     </div>
                                     <div className="w-px h-8 bg-slate-700"></div>
-                                    <button
-                                        onClick={startTransition}
-                                        disabled={isAnimating || initialN === finalN}
-                                        className="action-btn action-btn-primary"
-                                    >
-                                        {mode === 'emission' ? '▶ Deexcitera' : '▶ Excitera'}
-                                    </button>
-                                    <button
-                                        onClick={startIonization}
-                                        disabled={isAnimating}
-                                        className="action-btn"
-                                        title="Flytta elektronen till n=∞"
-                                    >
-                                        ⚡ Jonisera
-                                    </button>
-                                    {canReset && (
+                                    {canReset ? (
                                         <button
                                             onClick={handleReset}
                                             disabled={isAnimating}
-                                            className="action-btn"
+                                            className="action-btn action-btn-primary"
                                             title="Återställ elektronen till startnivån"
                                         >
                                             ↺ Återställ
                                         </button>
+                                    ) : (
+                                        <>
+                                            <button
+                                                onClick={startTransition}
+                                                disabled={isAnimating || initialN === finalN}
+                                                className="action-btn action-btn-primary"
+                                            >
+                                                {mode === 'emission' ? '▶ Deexcitera' : '▶ Excitera'}
+                                            </button>
+                                            <button
+                                                onClick={startIonization}
+                                                disabled={isAnimating}
+                                                className="action-btn"
+                                                title="Flytta elektronen till n=∞"
+                                            >
+                                                ⚡ Jonisera
+                                            </button>
+                                        </>
                                     )}
                                 </div>
                             )}
@@ -1545,30 +1549,33 @@
                                             </div>
                                         </div>
                                         <div className="flex flex-wrap gap-2">
-                                            <button
-                                                onClick={startTransition}
-                                                disabled={isAnimating || initialN === finalN}
-                                                className="action-btn action-btn-primary"
-                                            >
-                                                {mode === 'emission' ? '▶ Deexcitera' : '▶ Excitera'}
-                                            </button>
-                                            <button
-                                                onClick={startIonization}
-                                                disabled={isAnimating}
-                                                className="action-btn"
-                                                title="Flytta elektronen till n=∞"
-                                            >
-                                                ⚡ Jonisera
-                                            </button>
-                                            {canReset && (
+                                            {canReset ? (
                                                 <button
                                                     onClick={handleReset}
                                                     disabled={isAnimating}
-                                                    className="action-btn"
+                                                    className="action-btn action-btn-primary"
                                                     title="Återställ elektronen till startnivån"
                                                 >
                                                     ↺ Återställ
                                                 </button>
+                                            ) : (
+                                                <>
+                                                    <button
+                                                        onClick={startTransition}
+                                                        disabled={isAnimating || initialN === finalN}
+                                                        className="action-btn action-btn-primary"
+                                                    >
+                                                        {mode === 'emission' ? '▶ Deexcitera' : '▶ Excitera'}
+                                                    </button>
+                                                    <button
+                                                        onClick={startIonization}
+                                                        disabled={isAnimating}
+                                                        className="action-btn"
+                                                        title="Flytta elektronen till n=∞"
+                                                    >
+                                                        ⚡ Jonisera
+                                                    </button>
+                                                </>
                                             )}
                                         </div>
                                     </div>

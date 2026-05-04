@@ -1025,6 +1025,7 @@
             const [showAllSeries, setShowAllSeries] = useState(false);
             const [displayInfo, setDisplayInfo] = useState({ ni: 3, nf: 2 });
             const [isAnimating, setIsAnimating] = useState(false);
+            const [canReset, setCanReset] = useState(false);
             const [atomHoverN, setAtomHoverN] = useState(null);
             const [diagramHoverN, setDiagramHoverN] = useState(null);
 
@@ -1126,6 +1127,7 @@
                             if (elapsed >= 1400) {
                                 s.phase = 'idle';
                                 setIsAnimating(false);
+                                setCanReset(true);
                             }
                         } else if (s.phase === 'ionizing') {
                             s.ionProgress = Math.min(1, elapsed / 1300);
@@ -1133,6 +1135,7 @@
                                 s.phase = 'idle';
                                 s.currentN = 1; // återställ till grundtillstånd
                                 setIsAnimating(false);
+                                setCanReset(true);
                             }
                         }
                     }
@@ -1181,6 +1184,7 @@
                 s.transitionProgress = 0;
                 s.photonProgress = 0;
                 setIsAnimating(true);
+                setCanReset(false);
             }, [initialN, finalN, mode, isAnimating]);
 
             const startIonization = useCallback(() => {
@@ -1201,7 +1205,22 @@
                 s.ionProgress = 0;
                 setDisplayInfo({ ni: initialN, nf: Infinity });
                 setIsAnimating(true);
+                setCanReset(false);
             }, [initialN, isAnimating]);
+
+            const handleReset = useCallback(() => {
+                if (isAnimating) return;
+                const s = stateRef.current;
+                s.currentN = initialN;
+                s.phase = 'idle';
+                s.transitionFrom = initialN;
+                s.transitionTo = finalN;
+                s.transitionProgress = 0;
+                s.photonProgress = 0;
+                s.ionProgress = 0;
+                setDisplayInfo({ ni: initialN, nf: finalN });
+                setCanReset(false);
+            }, [initialN, finalN, isAnimating]);
 
             const handleInitialSelect = (n) => {
                 if (isAnimating) return;
@@ -1218,6 +1237,7 @@
                     setDisplayInfo({ ni: n, nf: finalN });
                 }
                 stateRef.current.currentN = n;
+                setCanReset(false);
             };
 
             const handleFinalSelect = (n) => {
@@ -1231,6 +1251,7 @@
                 }
                 setFinalN(n);
                 setDisplayInfo({ ni: initialN, nf: n });
+                setCanReset(false);
             };
 
             const applyPreset = (ni, nf) => {
@@ -1241,6 +1262,7 @@
                 setFinalN(nf);
                 setDisplayInfo({ ni, nf });
                 stateRef.current.currentN = ni;
+                setCanReset(false);
             };
 
             const setModeSafe = (m) => {
@@ -1262,6 +1284,7 @@
                     setDisplayInfo({ ni, nf });
                     stateRef.current.currentN = ni;
                 }
+                setCanReset(false);
             };
 
             const isFinalDisabled = (n) => {
@@ -1435,10 +1458,19 @@
                             ref={fullscreenRef}
                             className={`grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 ${isFullscreen ? 'p-6 bg-slate-950 overflow-auto' : ''}`}
                         >
-                            {/* Övre kontrollrad: läge + actionknappar */}
-                            <div className="lg:col-span-12 glass-card p-4">
-                                <div className="flex flex-wrap items-center gap-4 justify-between">
-                                    <div className="flex items-center gap-3 flex-wrap">
+                            {/* Flytande kontrollpanel i fullskärm: läge + actionknappar */}
+                            {isFullscreen && (
+                                <div
+                                    className="flex flex-wrap items-center gap-3 bg-slate-900/90 backdrop-blur-md border border-cyan-500/40 rounded-xl px-4 py-3 shadow-2xl"
+                                    style={{
+                                        position: 'fixed',
+                                        bottom: '24px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        zIndex: 50,
+                                    }}
+                                >
+                                    <div className="flex items-center gap-2">
                                         <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Läge</label>
                                         <div className="mode-toggle">
                                             <button
@@ -1457,69 +1489,90 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="flex flex-wrap gap-3">
+                                    <div className="w-px h-8 bg-slate-700"></div>
+                                    <button
+                                        onClick={startTransition}
+                                        disabled={isAnimating || initialN === finalN}
+                                        className="action-btn action-btn-primary"
+                                    >
+                                        {mode === 'emission' ? '▶ Deexcitera' : '▶ Excitera'}
+                                    </button>
+                                    <button
+                                        onClick={startIonization}
+                                        disabled={isAnimating}
+                                        className="action-btn"
+                                        title="Flytta elektronen till n=∞"
+                                    >
+                                        ⚡ Jonisera
+                                    </button>
+                                    {canReset && (
                                         <button
-                                            onClick={startTransition}
-                                            disabled={isAnimating || initialN === finalN}
-                                            className="action-btn action-btn-primary"
-                                        >
-                                            {mode === 'emission' ? '▶ Deexcitera' : '▶ Excitera'}
-                                        </button>
-                                        <button
-                                            onClick={startIonization}
+                                            onClick={handleReset}
                                             disabled={isAnimating}
                                             className="action-btn"
-                                            title="Flytta elektronen till n=∞"
+                                            title="Återställ elektronen till startnivån"
                                         >
-                                            ⚡ Jonisera
+                                            ↺ Återställ
                                         </button>
-                                    </div>
+                                    )}
                                 </div>
-                            </div>
+                            )}
 
                             <div className="lg:col-span-7 glass-card p-5">
                                 <div className="flex items-center justify-between mb-3">
                                     <h2 className="text-lg font-semibold text-slate-200">Bohrs atommodell</h2>
-                                    <span className="text-xs text-slate-500">Klicka på ett skal eller välj nedan</span>
+                                    <span className="text-xs text-slate-500">Klicka på ett skal i atomen</span>
                                 </div>
-                                <div className="mb-3 flex flex-wrap gap-3">
-                                    <div className="flex-1 min-w-[260px] rounded-xl border border-purple-500/30 bg-purple-500/5 p-3">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <span className="w-3 h-3 rounded-full bg-purple-500 inline-block"></span>
-                                            <label className="text-sm font-semibold text-purple-300">Startnivå (<em>n</em><sub>i</sub>)</label>
-                                        </div>
-                                        <div className="flex flex-wrap gap-2">
-                                            {SHELLS.map(n => (
+                                {!isFullscreen && (
+                                    <div className="mb-3 flex flex-wrap items-center gap-3 justify-between">
+                                        <div className="flex items-center gap-3 flex-wrap">
+                                            <label className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Läge</label>
+                                            <div className="mode-toggle">
                                                 <button
-                                                    key={`i-${n}`}
-                                                    onClick={() => handleInitialSelect(n)}
+                                                    onClick={() => setModeSafe('emission')}
                                                     disabled={isAnimating}
-                                                    className={`level-btn ${initialN === n ? 'active-initial' : ''}`}
+                                                    className={mode === 'emission' ? 'active-emission' : ''}
                                                 >
-                                                    <em>n</em>={n}
+                                                    ↓ Emission
                                                 </button>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <div className="flex-1 min-w-[260px] rounded-xl border border-sky-500/30 bg-sky-500/5 p-3">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <span className="w-3 h-3 rounded-full bg-sky-500 inline-block"></span>
-                                            <label className="text-sm font-semibold text-sky-300">Slutnivå (<em>n</em><sub>f</sub>)</label>
+                                                <button
+                                                    onClick={() => setModeSafe('absorption')}
+                                                    disabled={isAnimating}
+                                                    className={mode === 'absorption' ? 'active-absorption' : ''}
+                                                >
+                                                    ↑ Absorption
+                                                </button>
+                                            </div>
                                         </div>
                                         <div className="flex flex-wrap gap-2">
-                                            {SHELLS.map(n => (
+                                            <button
+                                                onClick={startTransition}
+                                                disabled={isAnimating || initialN === finalN}
+                                                className="action-btn action-btn-primary"
+                                            >
+                                                {mode === 'emission' ? '▶ Deexcitera' : '▶ Excitera'}
+                                            </button>
+                                            <button
+                                                onClick={startIonization}
+                                                disabled={isAnimating}
+                                                className="action-btn"
+                                                title="Flytta elektronen till n=∞"
+                                            >
+                                                ⚡ Jonisera
+                                            </button>
+                                            {canReset && (
                                                 <button
-                                                    key={`f-${n}`}
-                                                    onClick={() => handleFinalSelect(n)}
-                                                    disabled={isAnimating || isFinalDisabled(n)}
-                                                    className={`level-btn ${finalN === n ? 'active-final' : ''}`}
+                                                    onClick={handleReset}
+                                                    disabled={isAnimating}
+                                                    className="action-btn"
+                                                    title="Återställ elektronen till startnivån"
                                                 >
-                                                    <em>n</em>={n}
+                                                    ↺ Återställ
                                                 </button>
-                                            ))}
+                                            )}
                                         </div>
                                     </div>
-                                </div>
+                                )}
                                 <div className="canvas-wrap">
                                     <button
                                         onClick={toggleFullscreen}
@@ -1533,6 +1586,46 @@
                                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
                                         )}
                                     </button>
+                                    <div className="absolute top-3 left-16 right-3 z-10 flex flex-wrap gap-2 pointer-events-none">
+                                        <div className="flex-1 min-w-[230px] rounded-lg border border-purple-500/40 bg-slate-900/85 backdrop-blur-sm p-2 pointer-events-auto">
+                                            <div className="flex items-center gap-2 mb-1.5">
+                                                <span className="w-2 h-2 rounded-full bg-purple-500 inline-block"></span>
+                                                <label className="text-xs font-semibold text-purple-300">Startnivå (<em>n</em><sub>i</sub>)</label>
+                                            </div>
+                                            <div className="flex flex-wrap gap-1">
+                                                {SHELLS.map(n => (
+                                                    <button
+                                                        key={`i-${n}`}
+                                                        onClick={() => handleInitialSelect(n)}
+                                                        disabled={isAnimating}
+                                                        className={`level-btn ${initialN === n ? 'active-initial' : ''}`}
+                                                        style={{padding: '0.3rem 0.55rem', fontSize: '0.78rem', minWidth: '34px'}}
+                                                    >
+                                                        <em>n</em>={n}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className="flex-1 min-w-[230px] rounded-lg border border-sky-500/40 bg-slate-900/85 backdrop-blur-sm p-2 pointer-events-auto">
+                                            <div className="flex items-center gap-2 mb-1.5">
+                                                <span className="w-2 h-2 rounded-full bg-sky-500 inline-block"></span>
+                                                <label className="text-xs font-semibold text-sky-300">Slutnivå (<em>n</em><sub>f</sub>)</label>
+                                            </div>
+                                            <div className="flex flex-wrap gap-1">
+                                                {SHELLS.map(n => (
+                                                    <button
+                                                        key={`f-${n}`}
+                                                        onClick={() => handleFinalSelect(n)}
+                                                        disabled={isAnimating || isFinalDisabled(n)}
+                                                        className={`level-btn ${finalN === n ? 'active-final' : ''}`}
+                                                        style={{padding: '0.3rem 0.55rem', fontSize: '0.78rem', minWidth: '34px'}}
+                                                    >
+                                                        <em>n</em>={n}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
                                     <canvas
                                         ref={atomCanvasRef}
                                         width={640}

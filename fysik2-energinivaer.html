@@ -400,9 +400,9 @@
                     ctx.lineWidth = 1.5;
                     ctx.setLineDash([]);
                 } else {
-                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.18)';
-                    ctx.lineWidth = 1;
-                    ctx.setLineDash([4, 5]);
+                    ctx.strokeStyle = 'rgba(203, 213, 225, 0.55)';
+                    ctx.lineWidth = 1.5;
+                    ctx.setLineDash([5, 5]);
                 }
                 ctx.stroke();
                 ctx.setLineDash([]);
@@ -413,7 +413,7 @@
                 const ly = cy + Math.sin(la) * r;
                 ctx.fillStyle = isCurrent ? '#c084fc'
                                : isTo ? '#38bdf8'
-                               : 'rgba(148, 163, 184, 0.55)';
+                               : 'rgba(203, 213, 225, 0.85)';
                 ctx.textBaseline = 'middle';
                 drawMixedText(ctx, [
                     { text: 'n', italic: true },

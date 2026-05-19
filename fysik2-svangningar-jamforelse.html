@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jämförelse av svängningar - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -21,10 +25,10 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
         input[type="range"] {
             -webkit-appearance: none;
@@ -41,7 +45,7 @@
             border-radius: 50%;
             background: linear-gradient(135deg, #38bdf8, #0ea5e9);
             cursor: pointer;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 12px rgba(200, 50, 74, 0.6);
         }
         input[type="range"]::-moz-range-thumb {
             width: 18px;
@@ -50,45 +54,37 @@
             background: linear-gradient(135deg, #38bdf8, #0ea5e9);
             cursor: pointer;
             border: none;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 12px rgba(200, 50, 74, 0.6);
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <main class="dark-container min-h-screen">
         <div id="root"></div>
@@ -147,7 +143,7 @@
             return (
                 <svg viewBox="0 0 200 300" className="w-full h-full">
                     {/* Bakgrund */}
-                    <rect x="0" y="0" width="200" height="300" fill="#050510" rx="8" />
+                    <rect x="0" y="0" width="200" height="300" fill="#f3eee4" rx="8" />
 
                     {/* Tak */}
                     <rect x="60" y="20" width="80" height="10" fill="#475569" rx="2" />
@@ -156,7 +152,7 @@
                     <path
                         d={springPath}
                         fill="none"
-                        stroke="#38bdf8"
+                        stroke="#0f1620"
                         strokeWidth="3"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -175,7 +171,7 @@
                     <line x1="60" y1={centerY} x2="140" y2={centerY} stroke="#22c55e" strokeWidth="1" strokeDasharray="5 5" opacity="0.5" />
 
                     {/* Etikett */}
-                    <text x="100" y="285" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="Poppins">
+                    <text x="100" y="285" fill="#5a6170" fontSize="12" textAnchor="middle" fontFamily="Poppins">
                         Harmonisk svängning
                     </text>
                 </svg>
@@ -198,7 +194,7 @@
             return (
                 <svg viewBox="0 0 200 300" className="w-full h-full">
                     {/* Bakgrund */}
-                    <rect x="0" y="0" width="200" height="300" fill="#050510" rx="8" />
+                    <rect x="0" y="0" width="200" height="300" fill="#f3eee4" rx="8" />
 
                     {/* Tak */}
                     <rect x="60" y="20" width="80" height="10" fill="#475569" rx="2" />
@@ -212,7 +208,7 @@
                         y1={pivotY}
                         x2={bobX}
                         y2={bobY}
-                        stroke="#38bdf8"
+                        stroke="#0f1620"
                         strokeWidth="3"
                         strokeLinecap="round"
                     />
@@ -230,7 +226,7 @@
                     <line x1={pivotX} y1={pivotY} x2={pivotX} y2={pivotY + length} stroke="#22c55e" strokeWidth="1" strokeDasharray="5 5" opacity="0.5" />
 
                     {/* Etikett */}
-                    <text x="100" y="285" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="Poppins">
+                    <text x="100" y="285" fill="#5a6170" fontSize="12" textAnchor="middle" fontFamily="Poppins">
                         Plan pendel
                     </text>
                 </svg>
@@ -268,7 +264,7 @@
             return (
                 <svg viewBox="0 0 200 300" className="w-full h-full">
                     {/* Bakgrund */}
-                    <rect x="0" y="0" width="200" height="300" fill="#050510" rx="8" />
+                    <rect x="0" y="0" width="200" height="300" fill="#f3eee4" rx="8" />
 
                     {/* Tak */}
                     <rect x="60" y="20" width="80" height="10" fill="#475569" rx="2" />
@@ -307,7 +303,7 @@
                                 y1={pivotY}
                                 x2={bobX}
                                 y2={bobY}
-                                stroke="#38bdf8"
+                                stroke="#0f1620"
                                 strokeWidth="2"
                                 strokeLinecap="round"
                                 opacity="0.7"
@@ -323,7 +319,7 @@
                                 y1={pivotY}
                                 x2={bobX}
                                 y2={bobY}
-                                stroke="#38bdf8"
+                                stroke="#0f1620"
                                 strokeWidth="3"
                                 strokeLinecap="round"
                             />
@@ -342,7 +338,7 @@
                     <line x1={pivotX} y1={pivotY} x2={pivotX} y2={pivotY + length} stroke="#22c55e" strokeWidth="1" strokeDasharray="3 3" opacity="0.3" />
 
                     {/* Etikett */}
-                    <text x="100" y="285" fill="#94a3b8" fontSize="12" textAnchor="middle" fontFamily="Poppins">
+                    <text x="100" y="285" fill="#5a6170" fontSize="12" textAnchor="middle" fontFamily="Poppins">
                         Konisk pendel
                     </text>
                 </svg>

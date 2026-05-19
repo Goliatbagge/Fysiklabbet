@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Värmeflöde - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -22,7 +26,7 @@
     </script>
     <style>
       body {
-        background: #0a0a1a;
+        background: var(--lab-bg);
         font-family: 'Poppins', sans-serif;
       }
 
@@ -33,42 +37,41 @@
       .glass-card {
         background: rgba(15, 23, 42, 0.8);
         backdrop-filter: blur(12px);
-        border: 1px solid rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(200, 50, 74, 0.15);
         border-radius: 16px;
       }
 
       .glow-text {
-        text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
       }
 
       /* Simulation container – mörk ram utan comic-kant */
       .sim-wrapper {
-        background: rgba(2, 6, 23, 0.9);
-        border: 1px solid rgba(56, 189, 248, 0.12);
-        border-radius: 12px;
+        background: var(--lab-bg);
+        border: 1px solid var(--lab-line-strong);
+        border-radius: 4px;
         overflow: hidden;
       }
 
       /* Overlay-labels ovanpå SVG */
       .overlay-label {
-        background: rgba(15, 23, 42, 0.85);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(56, 189, 248, 0.2);
-        border-radius: 10px;
+        background: var(--lab-bg-panel);
+        border: 1px solid var(--lab-line-strong);
+        border-radius: 4px;
+        color: var(--lab-ink);
       }
 
       /* Status-rad */
       .status-bar {
-        background: rgba(15, 23, 42, 0.8);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(56, 189, 248, 0.15);
-        border-radius: 16px;
+        background: var(--lab-bg-panel);
+        border: 1px solid var(--lab-line-strong);
+        border-radius: 4px;
       }
 
       /* Info-ruta */
       .info-box {
-        background: rgba(14, 165, 233, 0.08);
-        border: 1px solid rgba(56, 189, 248, 0.2);
+        background: rgba(200, 50, 74, 0.08);
+        border: 1px solid rgba(200, 50, 74, 0.2);
         border-radius: 10px;
       }
 
@@ -90,7 +93,7 @@
         background: #38bdf8;
         cursor: pointer;
         transition: all 0.2s;
-        box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+        box-shadow: 0 0 8px rgba(200, 50, 74, 0.5);
       }
 
       input[type="range"]::-moz-range-thumb {
@@ -101,12 +104,12 @@
         cursor: pointer;
         transition: all 0.2s;
         border: none;
-        box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+        box-shadow: 0 0 8px rgba(200, 50, 74, 0.5);
       }
 
       input[type="range"]::-webkit-slider-thumb:hover {
         background: #7dd3fc;
-        box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
+        box-shadow: 0 0 14px rgba(200, 50, 74, 0.7);
       }
 
       /* Mörk checkbox – identisk med tyngdfaktor-sidan */
@@ -115,7 +118,7 @@
         -webkit-appearance: none;
         width: 18px;
         height: 18px;
-        border: 1.5px solid rgba(56, 189, 248, 0.4);
+        border: 1.5px solid rgba(200, 50, 74, 0.4);
         border-radius: 4px;
         background: rgba(15, 23, 42, 0.8);
         cursor: pointer;
@@ -125,8 +128,8 @@
       }
 
       .dark-checkbox:checked {
-        background: rgba(56, 189, 248, 0.25);
-        border-color: rgba(56, 189, 248, 0.8);
+        background: rgba(200, 50, 74, 0.25);
+        border-color: rgba(200, 50, 74, 0.8);
       }
 
       .dark-checkbox:checked::after {
@@ -143,7 +146,7 @@
       }
 
       .dark-checkbox:hover {
-        border-color: rgba(56, 189, 248, 0.7);
+        border-color: rgba(200, 50, 74, 0.7);
       }
 
       /* Radio-knappar */
@@ -265,17 +268,18 @@
         const netRightArrowX = 430 + (60 * netScale);
 
         let sensationText = "NEUTRALT";
-        let sensationColorClass = "text-slate-400";
-        let sensationBgStyle = { background: 'rgba(100, 116, 139, 0.2)', border: '1px solid rgba(100, 116, 139, 0.3)' };
+        let sensationColorClass = "";
+        let sensationTextStyle = { color: '#0f1620' };
+        let sensationBgStyle = { background: '#ffffff', border: '1px solid rgba(15, 22, 32, 0.25)' };
 
         if (envTemp < humanTemp) {
           sensationText = "KALLT";
-          sensationColorClass = "text-blue-400";
-          sensationBgStyle = { background: 'rgba(59, 130, 246, 0.15)', border: '1px solid rgba(59, 130, 246, 0.3)' };
+          sensationTextStyle = { color: '#1e3a8a' };
+          sensationBgStyle = { background: '#ffffff', border: '1px solid rgba(30, 58, 138, 0.4)' };
         } else if (envTemp > humanTemp) {
           sensationText = "VARMT";
-          sensationColorClass = "text-red-400";
-          sensationBgStyle = { background: 'rgba(239, 68, 68, 0.15)', border: '1px solid rgba(239, 68, 68, 0.3)' };
+          sensationTextStyle = { color: '#c8324a' };
+          sensationBgStyle = { background: '#ffffff', border: '1px solid rgba(200, 50, 74, 0.4)' };
         }
 
         return React.createElement('div', {
@@ -302,38 +306,38 @@
                 React.createElement('path', {
                   d: "M 40 0 L 0 0 0 40",
                   fill: "none",
-                  stroke: "rgba(56, 189, 248, 0.04)",
+                  stroke: "rgba(200, 50, 74, 0.04)",
                   strokeWidth: "1"
                 })
               )
             ),
             React.createElement('rect', { x: "0", y: "0", width: "800", height: "400", fill: "url(#grid)" }),
 
-            // Golv – mörkare
+            // Golv – ljus papper-ton
             React.createElement('rect', { x: "0", y: "350", width: "800", height: "50",
               fill: "url(#floorGrad)" }),
             React.createElement('defs', null,
               React.createElement('linearGradient', { id: "floorGrad", x1: "0", y1: "0", x2: "0", y2: "1" },
-                React.createElement('stop', { offset: "0%", stopColor: "#1e293b" }),
-                React.createElement('stop', { offset: "100%", stopColor: "#0f172a" })
+                React.createElement('stop', { offset: "0%", stopColor: "#d4c9b1" }),
+                React.createElement('stop', { offset: "100%", stopColor: "#bfb398" })
               )
             ),
             React.createElement('line', {
               x1: "0", y1: "350", x2: "800", y2: "350",
-              stroke: "rgba(56, 189, 248, 0.15)", strokeWidth: "1"
+              stroke: "rgba(15, 22, 32, 0.2)", strokeWidth: "1"
             }),
             // Golvlinjer – subtila
-            React.createElement('line', { x1: "100", y1: "350", x2: "50", y2: "400", stroke: "rgba(56, 189, 248, 0.07)", strokeWidth: "1" }),
-            React.createElement('line', { x1: "250", y1: "350", x2: "220", y2: "400", stroke: "rgba(56, 189, 248, 0.07)", strokeWidth: "1" }),
-            React.createElement('line', { x1: "400", y1: "350", x2: "400", y2: "400", stroke: "rgba(56, 189, 248, 0.07)", strokeWidth: "1" }),
-            React.createElement('line', { x1: "550", y1: "350", x2: "580", y2: "400", stroke: "rgba(56, 189, 248, 0.07)", strokeWidth: "1" }),
-            React.createElement('line', { x1: "700", y1: "350", x2: "750", y2: "400", stroke: "rgba(56, 189, 248, 0.07)", strokeWidth: "1" }),
+            React.createElement('line', { x1: "100", y1: "350", x2: "50", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
+            React.createElement('line', { x1: "250", y1: "350", x2: "220", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
+            React.createElement('line', { x1: "400", y1: "350", x2: "400", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
+            React.createElement('line', { x1: "550", y1: "350", x2: "580", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
+            React.createElement('line', { x1: "700", y1: "350", x2: "750", y2: "400", stroke: "rgba(15, 22, 32, 0.12)", strokeWidth: "1" }),
 
-            // Vägg – subtil
+            // Vägg – ljus papper-ton bakgrund
             React.createElement('rect', { x: "0", y: "330", width: "800", height: "20",
-              fill: "rgba(30, 41, 59, 0.5)" }),
+              fill: "rgba(212, 201, 177, 0.5)" }),
             React.createElement('line', { x1: "0", y1: "330", x2: "800", y2: "330",
-              stroke: "rgba(56, 189, 248, 0.08)", strokeWidth: "1" }),
+              stroke: "rgba(15, 22, 32, 0.15)", strokeWidth: "1" }),
 
             // Plant
             React.createElement('g', { transform: `translate(${LEFT_X}, 260)` },
@@ -430,8 +434,8 @@
               ...sensationBgStyle
             }
           },
-            React.createElement('strong', { className: "block text-slate-300 mb-1 text-xs" }, "Du upplever det"),
-            React.createElement('div', { className: `text-2xl font-bold ${sensationColorClass}` }, sensationText)
+            React.createElement('strong', { className: "block mb-1 text-xs", style: { color: '#5a6170' } }, "Du upplever det"),
+            React.createElement('div', { className: 'text-2xl font-bold', style: sensationTextStyle }, sensationText)
           )
         );
       };
@@ -497,7 +501,7 @@
                           ? '#ef4444'
                           : '#22c55e',
                         boxShadow: envTemp < HUMAN_TEMP_K
-                          ? '0 0 8px rgba(59, 130, 246, 0.6)'
+                          ? '0 0 8px rgba(200, 50, 74, 0.6)'
                           : envTemp > HUMAN_TEMP_K
                           ? '0 0 8px rgba(239, 68, 68, 0.6)'
                           : '0 0 8px rgba(34, 197, 94, 0.6)'
@@ -520,7 +524,7 @@
               },
                 React.createElement('h2', {
                   className: "text-xl font-bold mb-6 flex items-center gap-2 text-slate-100",
-                  style: { borderBottom: '1px solid rgba(56, 189, 248, 0.15)', paddingBottom: '0.75rem' }
+                  style: { borderBottom: '1px solid rgba(200, 50, 74, 0.15)', paddingBottom: '0.75rem' }
                 },
                   React.createElement(MoveHorizontal, { className: "w-5 h-5 text-cyan-400", style: { flexShrink: 0 } }),
                   "Inställningar"
@@ -666,41 +670,33 @@
       root.render(React.createElement(React.StrictMode, null, React.createElement(App)));
     </script>
   </head>
-  <body class="bg-slate-950 text-slate-100 antialiased">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+  <body class="antialiased lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
       <script src="feedback.js" defer></script>

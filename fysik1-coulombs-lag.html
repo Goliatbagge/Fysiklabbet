@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -21,15 +25,15 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
         .glass-card-light {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.28);
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
         .slider-custom {
             -webkit-appearance: none;
@@ -47,7 +51,7 @@
             border-radius: 50%;
             background: #f8fafc;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 10px rgba(200, 50, 74, 0.5);
         }
         .slider-custom::-moz-range-thumb {
             width: 20px;
@@ -56,7 +60,7 @@
             background: #f8fafc;
             cursor: pointer;
             border: none;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 10px rgba(200, 50, 74, 0.5);
         }
         .formula-box {
             font-family: 'Times New Roman', serif;
@@ -64,41 +68,33 @@
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -460,7 +456,7 @@
                 const { width, height } = canvas;
 
                 // Rensa canvas
-                ctx.fillStyle = '#050510';
+                ctx.fillStyle = '#f3eee4';
                 ctx.fillRect(0, 0, width, height);
 
                 // Bakgrundseffekt
@@ -471,7 +467,7 @@
                 ctx.fillRect(0, 0, width, height);
 
                 // Rutnät (subtilt)
-                ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                ctx.strokeStyle = 'rgba(200, 50, 74, 0.1)';
                 ctx.lineWidth = 1;
                 for (let x = 0; x < width; x += PIXELS_PER_CM) {
                     ctx.beginPath();
@@ -560,7 +556,7 @@
                 const drawCharge = (x, y, charge, radius, labelVar, labelValue) => {
                     const isPositive = charge > 0;
                     const color = isPositive ? '#ef4444' : '#38bdf8';
-                    const glowColor = isPositive ? 'rgba(239, 68, 68, 0.6)' : 'rgba(56, 189, 248, 0.6)';
+                    const glowColor = isPositive ? 'rgba(239, 68, 68, 0.6)' : 'rgba(200, 50, 74, 0.6)';
 
                     // Glöd
                     ctx.shadowBlur = 25;
@@ -584,7 +580,7 @@
                     ctx.shadowBlur = 0;
 
                     // Plus eller minus tecken - storlek anpassas efter radien
-                    ctx.fillStyle = '#ffffff';
+                    ctx.fillStyle = '#0f1620';
                     const fontSize = Math.max(16, Math.min(32, radius * 0.7));
                     ctx.font = `bold ${fontSize}px Poppins, sans-serif`;
                     ctx.textAlign = 'center';
@@ -611,7 +607,7 @@
                     ctx.fillText(labelVar, startX, y + radius + 14);
 
                     // Värde (normal)
-                    ctx.fillStyle = '#cbd5e1';
+                    ctx.fillStyle = '#0f1620';
                     ctx.font = '18px Poppins, sans-serif';
                     ctx.fillText(' = ' + labelValue, startX + varWidth, y + radius + 14);
                 };
@@ -621,7 +617,7 @@
 
                 // Rita avståndslinje
                 ctx.setLineDash([5, 5]);
-                ctx.strokeStyle = 'rgba(148, 163, 184, 0.5)';
+                ctx.strokeStyle = 'rgba(15, 22, 32, 0.70)';
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(pos1.x, pos1.y);
@@ -640,7 +636,7 @@
                 ctx.font = 'italic 17px Poppins, sans-serif';
                 ctx.fillText('r', midX - 35, midY - 12);
                 // Värde i normal stil
-                ctx.fillStyle = '#cbd5e1';
+                ctx.fillStyle = '#0f1620';
                 ctx.font = '17px Poppins, sans-serif';
                 ctx.fillText(` = ${formatNumber(distCm, 1)} cm`, midX + 5, midY - 12);
 

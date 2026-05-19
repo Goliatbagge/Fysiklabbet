@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Växelströmsgenerator - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -20,10 +24,10 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
 
         #three-canvas-container {
@@ -136,16 +140,16 @@
         .play-btn-secondary {
             background: rgba(30,41,59,0.9);
             color: #94a3b8;
-            border: 1px solid rgba(56,189,248,0.2);
+            border: 1px solid rgba(200, 50, 74, 0.2);
         }
         .play-btn-secondary:hover {
             color: #38bdf8;
-            border-color: rgba(56,189,248,0.5);
+            border-color: rgba(200, 50, 74, 0.5);
         }
 
         .formula-box {
-            background: rgba(56, 189, 248, 0.07);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: rgba(200, 50, 74, 0.07);
+            border: 1px solid rgba(200, 50, 74, 0.2);
             border-radius: 10px;
             padding: 0.8rem 1.1rem;
             font-size: 0.95rem;
@@ -154,46 +158,38 @@
 
         .section-divider {
             border: none;
-            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            border-top: 1px solid rgba(200, 50, 74, 0.1);
             margin: 1rem 0;
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <main class="container" style="max-width:1300px; margin:0 auto; padding: 1.5rem 1rem 3rem;">
         <div class="breadcrumb" style="margin-bottom:1rem;">
@@ -201,8 +197,8 @@
         </div>
 
         <section style="margin-bottom:1.5rem;">
-            <h1 class="section-title glow-text" style="font-size:1.8rem; font-weight:700; color:#e2e8f0; margin-bottom:0.5rem;">Växelströmsgenerator</h1>
-            <p style="color:#94a3b8; max-width:720px; line-height:1.7;">
+            <h1 class="section-title glow-text" style="font-size:1.8rem; font-weight:700; color:var(--lab-ink); margin-bottom:0.5rem;">Växelströmsgenerator</h1>
+            <p style="color:var(--lab-ink-muted); max-width:720px; line-height:1.7;">
                 Utforska hur en roterande spole i ett magnetfält alstrar en sinusformad växelspänning.
                 Faradays induktionslag förklarar principen bakom all storskalig elproduktion.
             </p>
@@ -258,7 +254,7 @@
             this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             this.renderer.shadowMap.enabled = true;
             this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            this.renderer.setClearColor(0x060918, 1);
+            this.renderer.setClearColor(0xf3eee4, 1);
             const w = this.container.clientWidth || 700;
             const h = this.container.clientHeight || 500;
             this.renderer.setSize(w, h);
@@ -807,7 +803,7 @@
         const gH = H - padT - padB;
 
         const axisColor = '#38bdf8';
-        const gridColor = 'rgba(56,189,248,0.08)';
+        const gridColor = 'rgba(200, 50, 74, 0.08)';
 
         // Grid & axes
         ctx.strokeStyle = gridColor;
@@ -837,7 +833,7 @@
         ctx.stroke();
 
         // Y labels
-        ctx.fillStyle = '#94a3b8';
+        ctx.fillStyle = '#0f1620';
         ctx.font = '11px Poppins, sans-serif';
         ctx.textAlign = 'right';
         const topVal = emkMax > 0 ? emkMax : 1;
@@ -854,7 +850,7 @@
         // Draw sine curve from history
         const n = history.length;
         ctx.beginPath();
-        ctx.strokeStyle = '#38bdf8';
+        ctx.strokeStyle = '#0f1620';
         ctx.lineWidth = 2;
         ctx.shadowColor = '#38bdf8';
         ctx.shadowBlur = 4;
@@ -1010,10 +1006,10 @@
                         {/* EMK graph */}
                         <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem' }}>
                             <div style={{ marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <span style={{ fontSize: '0.8rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--lab-ink-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                                     EMK vs tid
                                 </span>
-                                <span style={{ fontSize: '0.75rem', color: '#38bdf8', fontFamily: 'monospace' }}>
+                                <span style={{ fontSize: '0.75rem', color: '#c8324a', fontFamily: 'monospace' }}>
                                     &epsilon;(t) = NBA&omega;&middot;sin(&omega;t)
                                 </span>
                             </div>
@@ -1042,17 +1038,17 @@
 
                         {/* Sliders */}
                         <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
-                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8', marginBottom: '0.2rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--lab-ink-muted)', marginBottom: '0.2rem' }}>
                                 Parametrar
                             </h3>
 
                             {/* Speed */}
                             <div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-                                    <label style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                                    <label style={{ fontSize: '0.82rem', color: 'var(--lab-ink-soft)' }}>
                                         Rotationshastighet
                                     </label>
-                                    <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', fontFamily: 'monospace' }}>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#c8324a', fontFamily: 'monospace' }}>
                                         {formatNum(speed, 1)} varv/s
                                     </span>
                                 </div>
@@ -1067,7 +1063,7 @@
                             {/* B */}
                             <div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-                                    <label style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                                    <label style={{ fontSize: '0.82rem', color: 'var(--lab-ink-soft)' }}>
                                         Magnetfält <em>B</em>
                                     </label>
                                     <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#4ade80', fontFamily: 'monospace' }}>
@@ -1086,7 +1082,7 @@
                             {/* Area */}
                             <div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-                                    <label style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                                    <label style={{ fontSize: '0.82rem', color: 'var(--lab-ink-soft)' }}>
                                         Slingans area <em>A</em>
                                     </label>
                                     <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#c084fc', fontFamily: 'monospace' }}>
@@ -1105,7 +1101,7 @@
                             {/* Turns */}
                             <div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3rem' }}>
-                                    <label style={{ fontSize: '0.82rem', color: '#cbd5e1' }}>
+                                    <label style={{ fontSize: '0.82rem', color: 'var(--lab-ink-soft)' }}>
                                         Antal varv <em>N</em>
                                     </label>
                                     <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#fbbf24', fontFamily: 'monospace' }}>
@@ -1124,31 +1120,31 @@
 
                         {/* Checkboxes */}
                         <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem' }}>
-                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8', marginBottom: '0.7rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--lab-ink-muted)', marginBottom: '0.7rem' }}>
                                 Visa vektorer
                             </h3>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: '#e2e8f0', minHeight: '44px' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: 'var(--lab-ink)', minHeight: '44px' }}>
                                     <input type="checkbox" checked={showB} onChange={e => setShowB(e.target.checked)} aria-label="Visa magnetfält B" />
                                     <span style={{ color: '#4ade80', fontWeight: '600' }}>B</span>
-                                    <span style={{ color: '#94a3b8' }}>Magnetfält (grönt)</span>
+                                    <span style={{ color: 'var(--lab-ink-muted)' }}>Magnetfält (grönt)</span>
                                 </label>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: '#e2e8f0', minHeight: '44px' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: 'var(--lab-ink)', minHeight: '44px' }}>
                                     <input type="checkbox" checked={showF} onChange={e => setShowF(e.target.checked)} aria-label="Visa kraft F" />
                                     <span style={{ color: '#fde047', fontWeight: '600' }}>F</span>
-                                    <span style={{ color: '#94a3b8' }}>Kraft på ledare (gult)</span>
+                                    <span style={{ color: 'var(--lab-ink-muted)' }}>Kraft på ledare (gult)</span>
                                 </label>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: '#e2e8f0', minHeight: '44px' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', fontSize: '0.88rem', color: 'var(--lab-ink)', minHeight: '44px' }}>
                                     <input type="checkbox" checked={showI} onChange={e => setShowI(e.target.checked)} aria-label="Visa ström I" />
                                     <span style={{ color: '#fb923c', fontWeight: '600' }}>I</span>
-                                    <span style={{ color: '#94a3b8' }}>Strömriktning (orange)</span>
+                                    <span style={{ color: 'var(--lab-ink-muted)' }}>Strömriktning (orange)</span>
                                 </label>
                             </div>
                         </div>
 
                         {/* Results */}
                         <div className="glass-card" style={{ borderRadius: '12px', padding: '1rem' }}>
-                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94a3b8', marginBottom: '0.8rem' }}>
+                            <h3 style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--lab-ink-muted)', marginBottom: '0.8rem' }}>
                                 Aktuella värden
                             </h3>
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.7rem' }}>
@@ -1191,25 +1187,25 @@
 
                 {/* Explanation */}
                 <div className="glass-card" style={{ borderRadius: '12px', padding: '1.5rem', marginTop: '1.5rem' }}>
-                    <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#e2e8f0', marginBottom: '1rem' }}>
+                    <h2 style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--lab-ink)', marginBottom: '1rem' }}>
                         Hur fungerar en växelströmsgenerator?
                     </h2>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.2rem', marginBottom: '1.2rem' }}>
                         <div>
-                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', marginBottom: '0.4rem' }}>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#c8324a', marginBottom: '0.4rem' }}>
                                 Faradays induktionslag
                             </h3>
-                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.7' }}>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
                                 En roterande spole i ett magnetfält genererar en EMK (elektromotorisk kraft)
                                 eftersom det magnetiska flödet &Phi; = BA&middot;cos(&theta;) varierar med tid.
                                 Enligt Faradays lag: <em>&epsilon;</em> = &minus;N d&Phi;/dt
                             </p>
                         </div>
                         <div>
-                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', marginBottom: '0.4rem' }}>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#c8324a', marginBottom: '0.4rem' }}>
                                 Sinusformad växelspänning
                             </h3>
-                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.7' }}>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
                                 När slingan roterar med konstant vinkelhastighet &omega; = 2&pi;<em>f</em> fås:
                                 <br />
                                 <em>&epsilon;</em>(t) = NBA&omega;&middot;sin(&omega;t)
@@ -1219,10 +1215,10 @@
                             </p>
                         </div>
                         <div>
-                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', marginBottom: '0.4rem' }}>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#c8324a', marginBottom: '0.4rem' }}>
                                 Kraft och strömriktning
                             </h3>
-                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.7' }}>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
                                 Kraften på en ström&shy;förande ledare i magnetfält ges av
                                 Lorentzkraften: <em>F</em> = <em>I</em>(<em>L</em> &times; <em>B</em>).
                                 Strömmen byter riktning varje halvvarv via slipringar och borstar,
@@ -1231,10 +1227,10 @@
                             </p>
                         </div>
                         <div>
-                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#38bdf8', marginBottom: '0.4rem' }}>
+                            <h3 style={{ fontSize: '0.9rem', fontWeight: '600', color: '#c8324a', marginBottom: '0.4rem' }}>
                                 Tillämpningar
                             </h3>
-                            <p style={{ fontSize: '0.85rem', color: '#94a3b8', lineHeight: '1.7' }}>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
                                 Principen används i alla kraftverk &mdash; vattenkraft, vindkraft,
                                 kärnkraft och värmekraft roterar en generator med exakt detta upplägg,
                                 men med tusentals varv och starka elektromagneter.

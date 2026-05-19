@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avsnitt — Fysiklabbet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+</head>
+<body class="laborans">
+    <div id="root"></div>
+
+    <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" data-presets="react">
+        const { useState, useEffect, useMemo, useRef } = React;
+        const K = window.KATALOG;
+        const KF = window.KATALOG_FLAT;
+        const TEORI = window.TEORI || {};
+
+        // --- Skydda math-block från marked (annars äts \; \, \! upp och
+        // semikolonet blir kvar som synlig text).
+        function protectMath(md) {
+            const tokens = [];
+            md = md.replace(/\$\$([\s\S]+?)\$\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(/\$([^\n$]+?)\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            return { md, tokens };
+        }
+        function restoreMath(html, tokens) {
+            return html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+        }
+
+        // --- Konvertera Unicode-superscript (⁻²⁷, ³⁰, …) till <sup>-27</sup>.
+        // ¹²³ kommer från Latin-1 Supplement, ⁰⁴-⁹ från Superscripts-blocket;
+        // i många fonter renderas de olika och hamnar på olika höjd. Genom
+        // att lägga dem i ett <sup> med ASCII-siffror får vi konsekvent
+        // typografi. Körs efter protectMath, så KaTeX-uttryck rörs inte.
+        const SUP_MAP = {
+            '⁻': '-', '⁺': '+',
+            '⁰': '0', '¹': '1', '²': '2', '³': '3',
+            '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7',
+            '⁸': '8', '⁹': '9',
+            '⁽': '(', '⁾': ')', 'ⁿ': 'n',
+        };
+        const SUP_RE = /[⁻⁺⁰¹²³⁴-⁹⁽⁾ⁿ]+/g;
+        function preprocessSuperscripts(md) {
+            return md.replace(SUP_RE, (run) => {
+                let ascii = '';
+                for (const ch of run) ascii += (SUP_MAP[ch] || ch);
+                return '<sup>' + ascii + '</sup>';
+            });
+        }
+
+        // --- Markdown-preprocessor: gruppera deluppgifter (a/b/c/d-frågor).
+        // Två eller fler konsekutiva rader på formen **a) ... ?** läggs i en
+        // grid (.lab-deluppgifter) — c) under a), d) under b).
+        function preprocessSubproblems(md) {
+            const lines = md.split('\n');
+            const isSub = (l) => /^\*\*[a-d]\)\s+.+\*\*\s*$/i.test(l);
+            const out = [];
+            let i = 0;
+            while (i < lines.length) {
+                if (isSub(lines[i])) {
+                    const group = [];
+                    let j = i;
+                    while (j < lines.length && isSub(lines[j])) {
+                        group.push(lines[j]);
+                        j++;
+                    }
+                    if (group.length >= 2) {
+                        out.push('<div class="lab-deluppgifter">');
+                        out.push('');
+                        for (const g of group) {
+                            out.push(g);
+                            out.push('');
+                        }
+                        out.push('</div>');
+                        out.push('');
+                        i = j;
+                        continue;
+                    }
+                }
+                out.push(lines[i]);
+                i++;
+            }
+            return out.join('\n');
+        }
+
+        // --- Mät-och-bryt: efter KaTeX renderat formler kontrollerar vi om
+        // de spiller över. Om så är fallet bryter vi vid en top-level = i
+        // taget och renderar om — repeat tills den ryms. Skala som fallback.
+        function findTopLevelEquals(latex) {
+            const positions = [];
+            let depth = 0;
+            for (let i = 0; i < latex.length; i++) {
+                const ch = latex[i];
+                if (ch === '\\') { i++; continue; }
+                if (ch === '{') depth++;
+                else if (ch === '}') depth--;
+                else if (ch === '=' && depth === 0) positions.push(i);
+            }
+            return positions;
+        }
+
+        function buildAligned(latex, breakPositions) {
+            const segs = [];
+            let prev = 0;
+            for (const pos of breakPositions) {
+                segs.push(latex.slice(prev, pos).trim());
+                prev = pos + 1;
+            }
+            segs.push(latex.slice(prev).trim());
+            const lines = [segs[0] + ' &= ' + segs[1]];
+            for (let i = 2; i < segs.length; i++) lines.push('&= ' + segs[i]);
+            return '\\begin{aligned}\n' + lines.join(' \\\\\n') + '\n\\end{aligned}';
+        }
+
+        function dispOverflows(disp) {
+            const avail = disp.clientWidth;
+            if (avail === 0) return false;
+            const inner = disp.querySelector('.katex');
+            const natural = inner
+                ? Math.max(disp.scrollWidth, inner.scrollWidth, inner.offsetWidth)
+                : disp.scrollWidth;
+            return natural > avail + 0.5;
+        }
+
+        function renderDisplayMath(latex) {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = window.katex.renderToString(latex, {
+                displayMode: true,
+                throwOnError: false,
+            });
+            return wrapper.firstElementChild;
+        }
+
+        function scaleDownDisplay(disp) {
+            const inner = disp.querySelector('.katex');
+            if (!inner) return;
+            const avail = disp.clientWidth;
+            const natural = Math.max(disp.scrollWidth, inner.scrollWidth, inner.offsetWidth);
+            if (avail === 0 || natural <= avail + 0.5) return;
+            const scale = avail / natural;
+            inner.style.transformOrigin = 'center top';
+            inner.style.transform = 'scale(' + scale + ')';
+            disp.style.height = Math.ceil(inner.offsetHeight * scale) + 'px';
+        }
+
+        function fitMathDisplays(root) {
+            if (!root || !window.katex) return;
+            const displays = Array.from(root.querySelectorAll('.katex-display'));
+            displays.forEach((disp) => {
+                disp.style.height = '';
+                const inner0 = disp.querySelector('.katex');
+                if (inner0) {
+                    inner0.style.transform = '';
+                    inner0.style.transformOrigin = '';
+                }
+                if (!dispOverflows(disp)) return;
+                const ann = disp.querySelector('annotation[encoding="application/x-tex"]');
+                const orig = ann ? ann.textContent : null;
+                let current = disp;
+                if (orig) {
+                    const eqs = findTopLevelEquals(orig);
+                    for (let n = 2; n <= eqs.length; n++) {
+                        const broken = buildAligned(orig, eqs.slice(0, n));
+                        const newDisp = renderDisplayMath(broken);
+                        current.replaceWith(newDisp);
+                        current = newDisp;
+                        if (!dispOverflows(current)) break;
+                    }
+                }
+                if (dispOverflows(current)) scaleDownDisplay(current);
+            });
+        }
+
+        // --- Markdown-preprocessor: ::: typ "Titel" ... ::: → HTML-blockruta
+        // Hanterar nästlade ::: bild ... ::: inuti t.ex. ::: kuriosa ... :::.
+        function preprocessBlocks(md) {
+            const lines = md.split('\n');
+            const out = [];
+            const stack = [];
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
+                const close = line.match(/^:::\s*$/);
+
+                if (open) {
+                    const [, type, title] = open;
+                    stack.push(type.toLowerCase());
+                    out.push('<div class="lab-block lab-block-' + type.toLowerCase() + '">');
+                    if (title) {
+                        out.push('<div class="lab-block-title">' + escapeHtml(title) + '</div>');
+                    }
+                    out.push('');
+                } else if (close && stack.length > 0) {
+                    stack.pop();
+                    out.push('');
+                    out.push('</div>');
+                } else {
+                    out.push(line);
+                }
+            }
+            return out.join('\n');
+        }
+
+        function escapeHtml(s) {
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        // Konfigurera marked
+        marked.setOptions({ gfm: true, breaks: false });
+
+        // Hämta id från URL — använder hash (#fy1-2.3) eftersom file:// strippar query strings.
+        function getId() {
+            const hash = window.location.hash.replace(/^#/, '').trim();
+            if (hash) return hash;
+            // Fallback för http(s) — om någon delar en ?id-länk
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        // Slå upp avsnitt i katalogen
+        function findSection(id) {
+            // id-format: fy1-2.3, fy2-3.4, ...
+            const m = id && id.match(/^fy([12])-(\d+\.\d+)$/);
+            if (!m) return null;
+            const course = m[1] === '1' ? 'Fysik 1' : 'Fysik 2';
+            const num = m[2];
+            return KF.find(s => s.course === course && s.num === num) || null;
+        }
+
+        // Frontmatter-parser (enkel YAML utan beroenden)
+        function parseFrontmatter(md) {
+            if (!md.startsWith('---\n')) return { fm: {}, body: md };
+            const end = md.indexOf('\n---\n', 4);
+            if (end === -1) return { fm: {}, body: md };
+            const block = md.slice(4, end);
+            const fm = {};
+            for (const line of block.split('\n')) {
+                const m = line.match(/^([a-zA-Z]+):\s*(.*)$/);
+                if (m) {
+                    let v = m[2].trim();
+                    if (v.startsWith("'") && v.endsWith("'")) v = v.slice(1, -1);
+                    if (v.startsWith('"') && v.endsWith('"')) v = v.slice(1, -1);
+                    fm[m[1]] = v;
+                }
+            }
+            return { fm, body: md.slice(end + 5) };
+        }
+
+        function Topbar() {
+            return (
+                <div className="lab-topbar">
+                    <div className="lab-topbar-inner">
+                        <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+                    </div>
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <div className="lab-header">
+                    <div className="lab-header-inner">
+                        <a className="lab-logo" href="index.html">
+                            <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                                <g fill="none" stroke="currentColor" strokeWidth="1">
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" />
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                                </g>
+                                <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                            </svg>
+                            <span className="lab-logo-text">Fysiklabbet</span>
+                        </a>
+                        <nav className="lab-nav" aria-label="Huvudnavigation">
+                            <a href="index.html">Start</a>
+                            <a href="om.html">Om</a>
+                            <a href="kontakt.html">Kontakt</a>
+                        </nav>
+                    </div>
+                </div>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="lab-section lab-footer">
+                    <span>© 2026 FYSIKLABBET</span>
+                    <span>SKAPAD FÖR GYMNASIEELEVER</span>
+                </footer>
+            );
+        }
+
+        function Article({ id }) {
+            const meta = findSection(id);
+            const raw = TEORI[id];
+            const containerRef = useRef(null);
+
+            const { fm, html } = useMemo(() => {
+                if (!raw) return { fm: {}, html: null };
+                const { fm, body } = parseFrontmatter(raw);
+                const { md, tokens } = protectMath(body);
+                let processed = preprocessSuperscripts(md);
+                processed = preprocessSubproblems(processed);
+                processed = preprocessBlocks(processed);
+                const html = restoreMath(marked.parse(processed), tokens);
+                return { fm, html };
+            }, [raw]);
+
+            useEffect(() => {
+                if (!containerRef.current || !html) return;
+                renderMathInElement(containerRef.current, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                    ],
+                    throwOnError: false,
+                });
+                const root = containerRef.current;
+                const fit = () => fitMathDisplays(root);
+                let cancelled = false;
+                const safeFit = () => { if (!cancelled) fit(); };
+                const raf1 = requestAnimationFrame(safeFit);
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(safeFit);
+                }
+                const tid = setTimeout(safeFit, 250);
+                window.addEventListener('resize', fit);
+                return () => {
+                    cancelled = true;
+                    cancelAnimationFrame(raf1);
+                    clearTimeout(tid);
+                    window.removeEventListener('resize', fit);
+                };
+            }, [html]);
+
+            if (!meta) {
+                return (
+                    <div className="lab-article">
+                        <div className="lab-article-missing">
+                            <div className="lab-article-missing-title">
+                                Avsnittet hittades inte
+                            </div>
+                            <p>
+                                Vi kunde inte hitta något avsnitt med id <code>{id}</code>.
+                                {' '}<a href="index.html" style={{ color: 'var(--lab-accent)' }}>
+                                Gå till startsidan →
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                );
+            }
+
+            // meta hittades men teori saknas — visa en "kommer snart"-vy med simulering
+            if (!raw) {
+                const chapterLabel = (meta.chapter || '').toUpperCase();
+                const courseHash = meta.course === 'Fysik 2' ? 'fy2' : 'fy1';
+                return (
+                    <article className="lab-article">
+                        <a className="lab-article-back" href={`katalog.html#${courseHash}`}>
+                            ← Tillbaka till {meta.course}
+                        </a>
+                        <div className="lab-article-meta">
+                            {meta.course.toUpperCase()}
+                            {' · '}
+                            KAPITEL {meta.chapterNumber} · {chapterLabel}
+                            {' · '}
+                            AVSNITT {meta.num}
+                        </div>
+                        <h1 className="lab-article-title">
+                            <span className="lab-article-title-num">{meta.num}</span>
+                            {meta.title}
+                        </h1>
+                        {meta.description && (
+                            <p className="lab-article-sub">{meta.description}</p>
+                        )}
+                        {meta.href && (
+                            <div className="lab-article-sim">
+                                <span className="lab-article-sim-label">Interaktiv simulering</span>
+                                <span className="lab-article-sim-spacer" />
+                                <a href={meta.href}>Öppna simulering →</a>
+                            </div>
+                        )}
+                        <div className="lab-block lab-block-bild" style={{ marginTop: 32 }}>
+                            <em>Teorigenomgång kommer snart.</em>
+                        </div>
+                    </article>
+                );
+            }
+
+            const courseSlug = meta.course.toLowerCase().replace(' ', '');
+            const chapterLabel = (fm.chapter || meta.chapter || '').toUpperCase();
+            const courseHash = meta.course === 'Fysik 2' ? 'fy2' : 'fy1';
+
+            return (
+                <article className="lab-article">
+                    <a className="lab-article-back" href={`katalog.html#${courseHash}`}>
+                        ← Tillbaka till {meta.course}
+                    </a>
+
+                    <div className="lab-article-meta">
+                        {meta.course.toUpperCase()}
+                        {' · '}
+                        KAPITEL {meta.chapterNumber} · {chapterLabel}
+                        {' · '}
+                        AVSNITT {meta.num}
+                    </div>
+
+                    <h1 className="lab-article-title">
+                        <span className="lab-article-title-num">{meta.num}</span>
+                        {fm.title || meta.title}
+                    </h1>
+
+                    {meta.description && (
+                        <p className="lab-article-sub">{meta.description}</p>
+                    )}
+
+                    {meta.href && (
+                        <div className="lab-article-sim">
+                            <span className="lab-article-sim-label">Interaktiv simulering</span>
+                            <span className="lab-article-sim-spacer" />
+                            <a href={meta.href}>Öppna simulering →</a>
+                        </div>
+                    )}
+
+                    <div className="lab-article-body"
+                        ref={containerRef}
+                        dangerouslySetInnerHTML={{ __html: html }} />
+                </article>
+            );
+        }
+
+        function App() {
+            const [id, setId] = useState(getId());
+            useEffect(() => {
+                const onHash = () => setId(getId());
+                window.addEventListener('hashchange', onHash);
+                return () => window.removeEventListener('hashchange', onHash);
+            }, []);
+            return (
+                <div className="lab-page">
+                    <Topbar />
+                    <Header />
+                    <Article id={id} />
+                    <Footer />
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+
+    <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+</body>
+</html>

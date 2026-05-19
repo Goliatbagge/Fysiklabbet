@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan pendel - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -32,11 +36,11 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
 
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
 
         #canvas-container {
@@ -58,7 +62,7 @@
             width: 100%;
         }
         input[type="range"]::-webkit-slider-runnable-track {
-            background: rgba(148, 163, 184, 0.25);
+            background: rgba(15, 22, 32, 0.35);
             border-radius: 4px;
             height: 6px;
         }
@@ -74,10 +78,10 @@
         }
         input[type="range"]::-webkit-slider-thumb:hover {
             background: #7dd3fc;
-            box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 8px rgba(200, 50, 74, 0.5);
         }
         input[type="range"]::-moz-range-track {
-            background: rgba(148, 163, 184, 0.25);
+            background: rgba(15, 22, 32, 0.35);
             border-radius: 4px;
             height: 6px;
             border: none;
@@ -93,7 +97,7 @@
         }
         input[type="range"]::-moz-range-thumb:hover {
             background: #7dd3fc;
-            box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 8px rgba(200, 50, 74, 0.5);
         }
         input[type="range"]:disabled {
             opacity: 0.4;
@@ -114,7 +118,7 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             border-radius: 0.5rem;
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.28);
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(8px);
             color: #e2e8f0;
@@ -124,7 +128,7 @@
         }
         .canvas-btn:hover:not(:disabled) {
             background: rgba(30, 41, 59, 0.95);
-            border-color: rgba(56, 189, 248, 0.35);
+            border-color: rgba(200, 50, 74, 0.35);
         }
         .canvas-btn:disabled {
             opacity: 0.45;
@@ -147,12 +151,12 @@
             border-color: rgba(248, 113, 113, 0.6);
         }
         .canvas-btn-cyan {
-            border-color: rgba(56, 189, 248, 0.35);
+            border-color: rgba(200, 50, 74, 0.35);
             color: #38bdf8;
         }
         .canvas-btn-cyan:hover:not(:disabled) {
-            background: rgba(56, 189, 248, 0.12);
-            border-color: rgba(56, 189, 248, 0.6);
+            background: rgba(200, 50, 74, 0.12);
+            border-color: rgba(200, 50, 74, 0.6);
         }
         .canvas-btn-yellow {
             border-color: rgba(234, 179, 8, 0.4);
@@ -168,49 +172,41 @@
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <main class="min-h-screen w-full dark-container text-slate-100 flex flex-col lg:flex-row">
-        <div id="canvas-container" class="flex-grow min-h-[600px] w-full lg:w-1/2 relative" style="background: #0a0f1e;">
+        <div id="canvas-container" class="flex-grow min-h-[600px] w-full lg:w-1/2 relative" style="background: var(--lab-bg);">
             <div class="absolute top-4 left-4 z-10 p-2">
                 <div class="breadcrumb mb-2" style="font-size: 0.75rem;">
                     <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik 2</a> / Plan pendel
                 </div>
-                <h1 class="text-2xl md:text-4xl font-bold tracking-tight" style="background: linear-gradient(90deg, #38bdf8, #7dd3fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));">Plan pendel (matematisk)</h1>
+                <h1 class="text-2xl md:text-4xl font-bold tracking-tight" style="background: linear-gradient(90deg, #38bdf8, #7dd3fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(200, 50, 74, 0.4));">Plan pendel (matematisk)</h1>
             </div>
             <div id="simulation-controls" class="absolute top-4 right-4 flex flex-col gap-3 z-10">
                 <div class="flex gap-3">
@@ -228,7 +224,7 @@
         </div>
         <div class="w-full lg:w-1/2 p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto"
              id="controls-container"
-             style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border-left: 1px solid rgba(56, 189, 248, 0.15);">
+             style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border-left: 1px solid rgba(200, 50, 74, 0.15);">
         </div>
     </main>
 
@@ -277,7 +273,7 @@
         // Three.js setup
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x0a0f1e);
+        scene.background = new THREE.Color(0xf3eee4);
 
         const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
         camera.position.set(0, 1.5, 5.0);
@@ -475,7 +471,7 @@
                 canvas.width = 128;
                 canvas.height = 64;
                 const context = canvas.getContext('2d');
-                context.fillStyle = '#38bdf8';
+                context.fillStyle = '#0f1620';
                 context.font = 'Bold 28px Poppins, Arial, sans-serif';
                 context.textAlign = 'center';
                 context.textBaseline = 'middle';
@@ -657,13 +653,13 @@
 
             const controlsHTML = `
                 <div class="space-y-6">
-                    <h2 class="text-xl font-bold text-slate-100 pb-2" style="border-bottom: 2px solid rgba(56, 189, 248, 0.4);">Kontrollpanel</h2>
+                    <h2 class="text-xl font-bold text-slate-100 pb-2" style="border-bottom: 2px solid rgba(200, 50, 74, 0.4);">Kontrollpanel</h2>
 
                     <div class="w-full">
                         <div class="flex justify-between items-center mb-1">
                             <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Trådlängd (<em>l</em>)</label>
                             <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                  style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
+                                  style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                 ${params.length.toFixed(2).replace('.', ',')} m
                             </span>
                         </div>
@@ -675,7 +671,7 @@
                             <div class="flex justify-between items-center mb-1">
                                 <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Tyngdfaktor (<em>g</em>)</label>
                                 <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                      style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
+                                      style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                     ${params.gravity.toFixed(2).replace('.', ',')} m/s²
                                 </span>
                             </div>
@@ -690,8 +686,8 @@
                                         <div class="flex flex-col items-center">
                                             <button data-gravity="${body.gravity}" class="celestial-button p-1 rounded-full transition-all duration-200 focus:outline-none ${!isIdle ? 'opacity-40 cursor-not-allowed' : 'hover:scale-105'}"
                                                 style="${isSelected
-                                                    ? 'background: rgba(56, 189, 248, 0.15); box-shadow: 0 0 0 2px #38bdf8, 0 0 12px rgba(56, 189, 248, 0.3); outline-offset: 2px;'
-                                                    : 'background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(148, 163, 184, 0.15);;'}"
+                                                    ? 'background: rgba(200, 50, 74, 0.15); box-shadow: 0 0 0 2px #38bdf8, 0 0 12px rgba(200, 50, 74, 0.3); outline-offset: 2px;'
+                                                    : 'background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(15, 22, 32, 0.21);;'}"
                                                 ${!isIdle ? 'disabled' : ''} title="${body.name} (g = ${body.gravity.toFixed(2).replace('.', ',')} m/s²)">
                                                 <div class="w-10 h-10 rounded-full" style="background-image: ${body.gradient}"></div>
                                             </button>
@@ -707,7 +703,7 @@
                         <div class="flex justify-between items-center mb-1">
                             <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Massa (<em>m</em>)</label>
                             <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                  style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
+                                  style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                 ${(params.mass * 1000).toFixed(0)} g
                             </span>
                         </div>
@@ -718,7 +714,7 @@
                         <div class="flex justify-between items-center mb-1">
                             <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Startvinkel (<em>θ</em>)</label>
                             <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                  style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
+                                  style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                 ${Math.round(params.initialAngle)}°
                             </span>
                         </div>
@@ -729,7 +725,7 @@
                         <div class="flex justify-between items-center mb-1">
                             <label class="text-sm font-medium ${isIdle ? 'text-slate-300' : 'text-slate-500'}">Dämpning</label>
                             <span class="text-sm font-mono px-2 py-0.5 rounded font-semibold ${isIdle ? 'text-cyan-300' : 'text-slate-500'}"
-                                  style="${isIdle ? 'background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
+                                  style="${isIdle ? 'background: rgba(200, 50, 74, 0.12); border: 1px solid rgba(200, 50, 74, 0.2);' : 'background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(71, 85, 105, 0.3);'}">
                                 ${params.damping.toFixed(2).replace('.', ',')}
                             </span>
                         </div>
@@ -737,7 +733,7 @@
                     </div>
 
                     <div class="p-4 rounded-lg text-center space-y-2"
-                         style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(56, 189, 248, 0.2);">
+                         style="background: rgba(200, 50, 74, 0.08); border: 1px solid rgba(200, 50, 74, 0.2);">
                         <h3 class="text-lg font-semibold text-cyan-300">Mätning</h3>
                         ${simulationState === 'idle' ? '<p class="text-sm text-slate-300">Dra pendeln och släpp för att starta.</p>' : ''}
                         ${simulationState === 'running' && !waitingForTurningPoint && !timingActive ? '<p class="text-sm text-slate-300">Tryck på "Ta tiden" för att mäta perioden.</p>' : ''}
@@ -752,7 +748,7 @@
                             </div>
                         ` : ''}
                         ${measuredPeriod !== null && !timingActive ? `
-                            <div class="pt-3" style="border-top: 1px solid rgba(56, 189, 248, 0.2);">
+                            <div class="pt-3" style="border-top: 1px solid rgba(200, 50, 74, 0.2);">
                                 <p class="text-sm text-slate-300">Uppmätt period (<em>T</em>)</p>
                                 <p class="text-3xl font-mono font-bold" style="color: #4ade80;">${measuredPeriod.toFixed(3).replace('.', ',')} s</p>
                             </div>
@@ -763,23 +759,23 @@
                         <button id="start-button" ${!isIdle || params.initialAngle < 0.5 ? 'disabled' : ''}
                             class="px-6 py-2 font-semibold text-slate-900 rounded-lg transition-all duration-200 focus:outline-none w-32"
                             style="${!isIdle || params.initialAngle < 0.5
-                                ? 'background: rgba(56, 189, 248, 0.25); color: rgba(148, 163, 184, 0.5); cursor: not-allowed; border: 1px solid rgba(56, 189, 248, 0.15);'
-                                : 'background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #0f172a; cursor: pointer; border: none; box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);'}">
+                                ? 'background: rgba(200, 50, 74, 0.25); color: rgba(15, 22, 32, 0.70); cursor: not-allowed; border: 1px solid rgba(200, 50, 74, 0.15);'
+                                : 'background: linear-gradient(135deg, #38bdf8, #0ea5e9); color: #0f172a; cursor: pointer; border: none; box-shadow: 0 0 16px rgba(200, 50, 74, 0.3);'}">
                             Starta
                         </button>
                         <button id="reset-button"
                             class="px-6 py-2 font-semibold text-slate-300 rounded-lg transition-all duration-200 focus:outline-none w-32"
-                            style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(148, 163, 184, 0.2); cursor: pointer;">
+                            style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(15, 22, 32, 0.28); cursor: pointer;">
                             Återställ
                         </button>
                     </div>
                 </div>
 
-                <div class="space-y-4 p-6 rounded-lg" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.12);">
-                    <h2 class="text-xl font-bold text-slate-100 pb-2" style="border-bottom: 2px solid rgba(56, 189, 248, 0.4);">Information</h2>
+                <div class="space-y-4 p-6 rounded-lg" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(200, 50, 74, 0.12);">
+                    <h2 class="text-xl font-bold text-slate-100 pb-2" style="border-bottom: 2px solid rgba(200, 50, 74, 0.4);">Information</h2>
                     <div class="text-center">
                         <p class="text-sm text-slate-300">Beräknad period (<em>T</em>)</p>
-                        <p class="text-4xl font-mono font-bold my-2 period-display" style="color: #38bdf8; text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);">${period.toFixed(3).replace('.', ',')} s</p>
+                        <p class="text-4xl font-mono font-bold my-2 period-display" style="color: #38bdf8; text-shadow: 0 0 12px rgba(200, 50, 74, 0.4);">${period.toFixed(3).replace('.', ',')} s</p>
                         <p class="text-sm font-mono text-slate-400">T = 2π · √(<em>l</em>/<em>g</em>)</p>
                     </div>
                     <div class="pt-4 text-sm text-slate-200 leading-relaxed space-y-2">

@@ -32,3 +32,9 @@ desktop.ini
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Tempfiler från Claude-sessioner
+tmpclaude-*
+
+# PDF-källor (transkriberade till data/teori/)
+Genomgångar/

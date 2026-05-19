@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strålnings genomtränglighet - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -16,25 +20,25 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
         .glass-card-light {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.28);
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
         .btn-primary {
             background: linear-gradient(135deg, #0ea5e9, #38bdf8);
             color: #0a0a1a;
             font-weight: 700;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+            box-shadow: 0 0 20px rgba(200, 50, 74, 0.35);
             transition: all 0.25s ease;
         }
         .btn-primary:hover {
-            box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 35px rgba(200, 50, 74, 0.6);
             transform: translateY(-1px);
         }
         .btn-primary:active {
@@ -42,15 +46,15 @@
         }
         .btn-secondary {
             background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            border: 1px solid rgba(15, 22, 32, 0.42);
             color: #94a3b8;
             font-weight: 600;
             transition: all 0.25s ease;
         }
         .btn-secondary:hover {
-            border-color: rgba(56, 189, 248, 0.4);
+            border-color: rgba(200, 50, 74, 0.4);
             color: #38bdf8;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 15px rgba(200, 50, 74, 0.15);
         }
         .tab-btn {
             padding: 0.5rem 1.2rem;
@@ -58,7 +62,7 @@
             font-family: 'Poppins', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.28);
             background: rgba(15, 23, 42, 0.6);
             color: #94a3b8;
             cursor: pointer;
@@ -67,13 +71,13 @@
         }
         .tab-btn:hover {
             color: #e2e8f0;
-            border-color: rgba(56, 189, 248, 0.3);
+            border-color: rgba(200, 50, 74, 0.3);
         }
         .tab-btn.active {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: rgba(56, 189, 248, 0.55);
+            background: rgba(200, 50, 74, 0.15);
+            border-color: rgba(200, 50, 74, 0.55);
             color: #38bdf8;
-            box-shadow: 0 0 18px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 18px rgba(200, 50, 74, 0.2);
         }
         canvas {
             display: block;
@@ -81,7 +85,7 @@
         }
         .equation-box {
             background: rgba(15, 23, 42, 0.9);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            border: 1px solid rgba(200, 50, 74, 0.2);
             border-radius: 0.75rem;
             padding: 1rem 1.5rem;
             font-family: 'Poppins', sans-serif;
@@ -102,7 +106,7 @@
         .breadcrumb a:hover { text-decoration: underline; }
         .explanation-box {
             background: rgba(15, 23, 42, 0.75);
-            border-left: 3px solid rgba(56, 189, 248, 0.5);
+            border-left: 3px solid rgba(200, 50, 74, 0.5);
             border-radius: 0 0.5rem 0.5rem 0;
             padding: 0.85rem 1.1rem;
             font-size: 0.9rem;
@@ -111,7 +115,7 @@
         }
         .gm-display {
             font-family: 'Courier New', monospace;
-            background: #0a1a0a;
+            background: var(--lab-bg);
             border: 2px solid #22c55e;
             border-radius: 0.5rem;
             color: #22c55e;
@@ -127,7 +131,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            border: 1px solid rgba(15, 22, 32, 0.42);
             background: rgba(15, 23, 42, 0.7);
             color: #94a3b8;
         }
@@ -145,51 +149,43 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            border: 1px solid rgba(15, 22, 32, 0.42);
             background: rgba(30, 41, 59, 0.8);
             color: #94a3b8;
         }
         .reset-btn:hover {
-            border-color: rgba(56, 189, 248, 0.4);
+            border-color: rgba(200, 50, 74, 0.4);
             color: #38bdf8;
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -242,7 +238,7 @@
         const BARRIER_STYLE = {
             none:      { label: 'Inget hinder',    color: null,      width: 0 },
             textile:   { label: 'Textil',           color: '#78716c', width: 14 },
-            aluminum:  { label: 'Tunn aluminium',   color: '#94a3b8', width: 20 },
+            aluminum:  { label: 'Tunn aluminium',   color: '#a3a3a3', width: 20 },
             thinlead:  { label: 'Tunn bly',         color: '#475569', width: 26 },
             thicklead: { label: 'Tjock bly',        color: '#334155', width: 100 },
         };
@@ -272,8 +268,8 @@
             // Bakgrund
             ctx.clearRect(0, 0, W, H);
             const bg = ctx.createLinearGradient(0, 0, 0, H);
-            bg.addColorStop(0, '#0f172a');
-            bg.addColorStop(1, '#0c1322');
+            bg.addColorStop(0, '#f3eee4');
+            bg.addColorStop(1, '#f3eee4');
             ctx.fillStyle = bg;
             ctx.roundRect(0, 0, W, H, 12);
             ctx.fill();
@@ -322,7 +318,7 @@
 
                 // Etikett ovanför hindret
                 ctx.font = `bold ${Math.max(10, W * 0.022)}px Poppins, sans-serif`;
-                ctx.fillStyle = '#e2e8f0';
+                ctx.fillStyle = '#0f1620';
                 ctx.textAlign = 'center';
                 ctx.fillText(bs.label, barrierCX, bTop - 10);
             }
@@ -392,7 +388,7 @@
                 // Tom spets (inget preparat)
                 ctx.beginPath();
                 ctx.arc(tipX, srcY, tipR, 0, Math.PI * 2);
-                ctx.fillStyle = '#1e293b';
+                ctx.fillStyle = '#0f1620';
                 ctx.fill();
                 ctx.strokeStyle = '#475569';
                 ctx.lineWidth = 1.5;
@@ -411,7 +407,7 @@
 
             // Etikett under staven
             ctx.font = `${Math.max(9, W * 0.02)}px Poppins, sans-serif`;
-            ctx.fillStyle = '#94a3b8';
+            ctx.fillStyle = '#0f1620';
             ctx.textAlign = 'center';
             ctx.fillText('Preparat', (stavLeft + tipX) / 2, srcY + stavH + 20);
 
@@ -424,7 +420,7 @@
             const gmGrad = ctx.createLinearGradient(gmLeft, 0, gmRight, 0);
             gmGrad.addColorStop(0, '#334155');
             gmGrad.addColorStop(0.3, '#475569');
-            gmGrad.addColorStop(1, '#1e293b');
+            gmGrad.addColorStop(1, '#f3eee4');
             ctx.beginPath();
             ctx.roundRect(gmLeft, gmTop, gmW, gmH, 6);
             ctx.fillStyle = gmGrad;
@@ -436,7 +432,7 @@
             // Fönster (känslig yta mot strålningen)
             ctx.beginPath();
             ctx.rect(gmLeft, gmTop + gmH * 0.2, 5, gmH * 0.6);
-            ctx.fillStyle = '#94a3b8';
+            ctx.fillStyle = '#0f1620';
             ctx.fill();
 
             // Flash-effekt vid registrering
@@ -452,7 +448,7 @@
 
             // GM-etikett
             ctx.font = `bold ${Math.max(9, W * 0.02)}px Poppins, sans-serif`;
-            ctx.fillStyle = '#94a3b8';
+            ctx.fillStyle = '#0f1620';
             ctx.textAlign = 'center';
             ctx.fillText('GM-rör', gmMid, gmTop - 10);
 
@@ -530,7 +526,7 @@
                     // Vit kärna
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, gr, 0, Math.PI * 2);
-                    ctx.fillStyle = '#ffffff';
+                    ctx.fillStyle = '#0f1620';
                     ctx.fill();
                 }
             }
@@ -958,11 +954,11 @@
                                     title={soundOn ? 'Stäng av ljud' : 'Sätt på ljud'}
                                     style={{
                                         position: 'absolute', top: '0.75rem', right: '0.75rem', zIndex: 10,
-                                        background: soundOn ? 'rgba(56,189,248,0.15)' : 'rgba(30,41,59,0.7)',
-                                        border: soundOn ? '1px solid rgba(56,189,248,0.4)' : '1px solid rgba(148,163,184,0.25)',
+                                        background: soundOn ? 'rgba(200, 50, 74, 0.15)' : 'rgba(30,41,59,0.7)',
+                                        border: soundOn ? '1px solid rgba(200, 50, 74, 0.4)' : '1px solid rgba(15, 22, 32, 0.35)',
                                         borderRadius: '0.5rem', padding: '0.4rem 0.5rem',
                                         cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1,
-                                        color: soundOn ? '#38bdf8' : '#64748b',
+                                        color: soundOn ? '#0f1620' : '#64748b',
                                         transition: 'all 0.2s ease',
                                     }}
                                 >
@@ -973,10 +969,10 @@
                                         position: 'absolute', top: '0.75rem', left: '0.75rem', zIndex: 10,
                                         display: 'flex', alignItems: 'center', gap: '0.4rem',
                                         background: 'rgba(30,41,59,0.8)',
-                                        border: '1px solid rgba(148,163,184,0.25)',
+                                        border: '1px solid rgba(15, 22, 32, 0.35)',
                                         borderRadius: '0.5rem', padding: '0.35rem 0.6rem',
                                         cursor: 'pointer', fontSize: '0.8rem',
-                                        color: '#94a3b8', userSelect: 'none',
+                                        color: 'var(--lab-ink-muted)', userSelect: 'none',
                                     }}
                                 >
                                     <input
@@ -1124,7 +1120,7 @@
                                         <tr>
                                             <th style={{ textAlign: 'left', color: '#64748b', padding: '4px 8px', fontWeight: 600 }}>Strålning</th>
                                             {Object.entries(barrierLabels).filter(([k]) => k !== 'none').map(([k, l]) => (
-                                                <th key={k} style={{ color: '#94a3b8', padding: '4px 8px', fontWeight: 600, textAlign: 'center' }}>{l}</th>
+                                                <th key={k} style={{ color: 'var(--lab-ink-muted)', padding: '4px 8px', fontWeight: 600, textAlign: 'center' }}>{l}</th>
                                             ))}
                                         </tr>
                                     </thead>

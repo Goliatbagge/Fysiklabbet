@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wiens förskjutningslag - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -76,23 +80,27 @@
             align-items: center;
             gap: 10px;
             padding: 10px 14px;
-            border-radius: 10px;
-            border: 1.5px solid rgba(56, 189, 248, 0.2);
-            background: rgba(15, 23, 42, 0.55);
+            border-radius: 4px;
+            border: 1px solid var(--lab-line-strong);
+            background: var(--lab-bg);
             cursor: pointer;
             transition: all 0.18s ease;
             font-family: 'Poppins', sans-serif;
             text-align: left;
+            color: var(--lab-ink);
         }
         .preset-btn:hover {
-            border-color: rgba(56, 189, 248, 0.5);
-            background: rgba(15, 23, 42, 0.8);
+            border-color: var(--lab-ink);
             transform: translateY(-1px);
         }
         .preset-btn.active {
-            border-color: #38bdf8;
-            background: rgba(56, 189, 248, 0.12);
-            box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+            border-color: var(--lab-ink);
+            background: var(--lab-ink);
+            color: var(--lab-bg);
+        }
+        .preset-btn.active .preset-name,
+        .preset-btn.active .preset-temp {
+            color: var(--lab-bg);
         }
         .preset-icon {
             font-size: 1.4rem;
@@ -100,13 +108,13 @@
         }
         .preset-name {
             font-size: 0.82rem;
-            color: #e2e8f0;
+            color: var(--lab-ink);
             font-weight: 600;
             line-height: 1.2;
         }
         .preset-temp {
             font-size: 0.7rem;
-            color: #94a3b8;
+            color: var(--lab-ink-muted);
             margin-top: 2px;
         }
 
@@ -127,10 +135,10 @@
                 #dbeafe 75%,
                 #93c5fd 86%,
                 #3b82f6 100%);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            border: 1px solid var(--lab-line-strong);
             outline: none;
             cursor: pointer;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
         }
         .temp-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -138,11 +146,10 @@
             width: 26px;
             height: 26px;
             border-radius: 50%;
-            background: #e2e8f0;
-            border: 2.5px solid #38bdf8;
+            background: var(--lab-bg);
+            border: 2.5px solid var(--lab-accent);
             cursor: grab;
-            box-shadow: 0 0 14px rgba(56, 189, 248, 0.7),
-                        0 2px 4px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             transition: transform 0.1s;
         }
         .temp-slider::-webkit-slider-thumb:hover {
@@ -156,8 +163,8 @@
             width: 22px;
             height: 22px;
             border-radius: 50%;
-            background: #e2e8f0;
-            border: 2.5px solid #38bdf8;
+            background: var(--lab-bg);
+            border: 2.5px solid var(--lab-accent);
             cursor: grab;
             box-shadow: 0 0 14px rgba(56, 189, 248, 0.7);
         }
@@ -225,42 +232,34 @@
         ::-webkit-scrollbar-thumb:hover { background: rgba(56,189,248,0.45); }
     </style>
 </head>
-<body class="bg-slate-950">
+<body class="bg-slate-950 lab-sim">
 
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="index.html" class="logo">
-            <span class="logo-icon">⚛️</span>
-            <span class="logo-text">Fysiklabbet</span>
-        </a>
-        <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
     </div>
-</nav>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
 <div class="page-wrapper">
     <div style="max-width:1100px;margin:0 auto;padding:28px 20px 60px;">
@@ -841,9 +840,9 @@ function WienSim() {
 
                 {/* Temperaturreglage direkt under grafen */}
                 <div style={{marginTop:'18px',padding:'16px 18px',
-                    background:'rgba(15,23,42,0.55)',
-                    border:'1px solid rgba(56,189,248,0.18)',
-                    borderRadius:'12px'}}>
+                    background:'var(--lab-bg)',
+                    border:'1px solid var(--lab-line-strong)',
+                    borderRadius:'4px'}}>
                     <div style={{display:'flex',alignItems:'center',gap:'14px',marginBottom:'14px',flexWrap:'wrap'}}>
                         <div className="color-swatch" style={{
                             background: bbColor.hex,
@@ -851,21 +850,21 @@ function WienSim() {
                         }}/>
                         <div style={{flex:'1 1 auto',minWidth:0}}>
                             <div style={{display:'flex',alignItems:'baseline',gap:'6px',flexWrap:'wrap'}}>
-                                <span style={{fontSize:'0.72rem',fontWeight:600,color:'#64748b',
+                                <span style={{fontSize:'0.72rem',fontWeight:600,color:'var(--lab-ink-muted)',
                                     textTransform:'uppercase',letterSpacing:'0.07em',marginRight:'4px'}}>
                                     Temperatur
                                 </span>
-                                <span style={{fontSize:'1.8rem',fontWeight:700,color:'#e2e8f0',
+                                <span style={{fontSize:'1.8rem',fontWeight:700,color:'var(--lab-ink)',
                                     fontVariantNumeric:'tabular-nums',lineHeight:1}}>
                                     {T}
                                 </span>
-                                <span style={{fontSize:'0.95rem',color:'#94a3b8'}}>K</span>
-                                <span style={{fontSize:'0.85rem',color:'#64748b',marginLeft:'4px',
+                                <span style={{fontSize:'0.95rem',color:'var(--lab-ink)'}}>K</span>
+                                <span style={{fontSize:'0.85rem',color:'var(--lab-ink-muted)',marginLeft:'4px',
                                     fontVariantNumeric:'tabular-nums'}}>
                                     ({Math.round(T - 273.15)} °C)
                                 </span>
                             </div>
-                            <div style={{fontSize:'0.72rem',color:'#94a3b8',marginTop:'2px'}}>
+                            <div style={{fontSize:'0.78rem',color:'var(--lab-ink-soft)',marginTop:'2px'}}>
                                 {blackbodyDescription(T)}
                             </div>
                         </div>
@@ -880,7 +879,7 @@ function WienSim() {
                         onChange={e => setT(+e.target.value)}
                     />
                     <div style={{display:'flex',justifyContent:'space-between',
-                        fontSize:'0.68rem',color:'#475569',marginTop:'8px',
+                        fontSize:'0.72rem',color:'var(--lab-ink-muted)',marginTop:'8px',
                         fontFamily:"'Poppins',sans-serif"}}>
                         <span>{T_MIN} K</span>
                         <span>{T_MAX} K</span>
@@ -889,10 +888,10 @@ function WienSim() {
 
                 {/* Snabbval — ligger i samma kort så att de syns även i fullskärm */}
                 <div style={{marginTop:'14px',padding:'14px 18px',
-                    background:'rgba(15,23,42,0.55)',
-                    border:'1px solid rgba(56,189,248,0.18)',
-                    borderRadius:'12px'}}>
-                    <div style={{fontSize:'0.72rem',fontWeight:600,color:'#64748b',
+                    background:'var(--lab-bg)',
+                    border:'1px solid var(--lab-line-strong)',
+                    borderRadius:'4px'}}>
+                    <div style={{fontSize:'0.72rem',fontWeight:600,color:'var(--lab-ink-muted)',
                         textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:'10px'}}>
                         Snabbval
                     </div>

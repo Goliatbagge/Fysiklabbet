@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tyngdfaktorn på jorden - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -43,31 +47,31 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(15, 23, 42, 0.88);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: var(--lab-bg);
+            border: 1px solid var(--lab-line-strong);
             padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.08);
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
             min-width: 210px;
+            color: var(--lab-ink);
         }
 
         .instruction-panel {
             position: absolute;
             bottom: 20px;
             left: 20px;
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            background: var(--lab-bg);
+            border: 1px solid var(--lab-line-strong);
             padding: 15px 18px;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
             max-width: 300px;
+            color: var(--lab-ink);
         }
 
         .panel-divider {
             border: none;
-            border-top: 1px solid rgba(56, 189, 248, 0.15);
+            border-top: 1px solid var(--lab-line-strong);
             margin: 12px 0;
         }
 
@@ -77,18 +81,18 @@
             -webkit-appearance: none;
             width: 16px;
             height: 16px;
-            border: 1.5px solid rgba(56, 189, 248, 0.4);
-            border-radius: 4px;
-            background: rgba(15, 23, 42, 0.8);
+            border: 1.5px solid var(--lab-line-strong);
+            border-radius: 3px;
+            background: #fff;
             cursor: pointer;
             position: relative;
             flex-shrink: 0;
-            transition: all 0.2s;
+            transition: all 0.15s;
         }
 
         .dark-checkbox:checked {
-            background: rgba(56, 189, 248, 0.25);
-            border-color: rgba(56, 189, 248, 0.8);
+            background: var(--lab-ink);
+            border-color: var(--lab-ink);
         }
 
         .dark-checkbox:checked::after {
@@ -98,14 +102,14 @@
             top: 1px;
             width: 5px;
             height: 9px;
-            border: 2px solid #38bdf8;
+            border: 2px solid var(--lab-bg);
             border-top: none;
             border-left: none;
             transform: rotate(45deg);
         }
 
         .dark-checkbox:hover {
-            border-color: rgba(56, 189, 248, 0.7);
+            border-color: var(--lab-ink);
         }
 
         canvas {
@@ -135,41 +139,33 @@
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -469,7 +465,7 @@
                 <div
                     className="min-h-screen"
                     style={{
-                        background: 'linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%)',
+                        background: 'transparent',
                         fontFamily: 'Poppins, sans-serif',
                         paddingBottom: '0'
                     }}
@@ -489,12 +485,12 @@
                                 className="font-black tracking-tight glow-text mb-3"
                                 style={{
                                     fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-                                    color: '#e2e8f0'
+                                    color: 'var(--lab-ink)'
                                 }}
                             >
                                 Tyngdfaktorn på jorden
                             </h1>
-                            <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: '1.7' }}>
+                            <p style={{ color: 'var(--lab-ink-muted)', fontSize: '1.05rem', lineHeight: '1.7' }}>
                                 Tyngdaccelerationen (<em>g</em>) varierar på jorden beroende på var du befinner dig.
                                 Vid ekvatorn är den lägst (cirka 9,78 m/s²) och vid polerna högst (cirka 9,83 m/s²).
                                 Detta beror på jordens rotation och att jorden är något tillplattad vid polerna.
@@ -505,7 +501,7 @@
                         <div className="rounded-2xl p-6 md:p-8 mb-8 glass-card">
                             <h2
                                 className="font-bold mb-5"
-                                style={{ fontSize: '1.4rem', color: '#e2e8f0' }}
+                                style={{ fontSize: '1.4rem', color: 'var(--lab-ink)' }}
                             >
                                 Interaktiv jordglob
                             </h2>
@@ -516,30 +512,30 @@
                                 <div className="info-panel">
                                     <h3
                                         className="font-bold mb-3"
-                                        style={{ color: '#38bdf8', fontSize: '1rem', letterSpacing: '0.02em' }}
+                                        style={{ color: 'var(--lab-ink)', fontSize: '1rem', letterSpacing: '0.02em' }}
                                     >
                                         Matning
                                     </h3>
                                     {gravity ? (
                                         <>
                                             <div className="mb-3">
-                                                <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '2px' }}>Latitud</p>
-                                                <p style={{ fontSize: '1.25rem', fontWeight: '700', color: '#38bdf8' }}>{clickedPoint.latitude}°</p>
+                                                <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '2px' }}>Latitud</p>
+                                                <p style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--lab-ink)' }}>{clickedPoint.latitude}°</p>
                                             </div>
                                             <div className="mb-3">
-                                                <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '2px' }}>Longitud</p>
-                                                <p style={{ fontSize: '1.25rem', fontWeight: '700', color: '#38bdf8' }}>{clickedPoint.longitude}°</p>
+                                                <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '2px' }}>Longitud</p>
+                                                <p style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--lab-ink)' }}>{clickedPoint.longitude}°</p>
                                             </div>
                                             <hr className="panel-divider" />
                                             <div>
-                                                <p style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '4px' }}>Tyngdfaktor (<em>g</em>)</p>
-                                                <p style={{ fontSize: '1.4rem', fontWeight: '700', color: '#facc15', textShadow: '0 0 12px rgba(250, 204, 21, 0.4)' }}>
+                                                <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '4px' }}>Tyngdfaktor (<em>g</em>)</p>
+                                                <p style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--lab-accent)' }}>
                                                     <em>g</em> = {gravity} m/s²
                                                 </p>
                                             </div>
                                         </>
                                     ) : (
-                                        <p style={{ color: '#64748b', fontSize: '0.85rem' }}>
+                                        <p style={{ color: 'var(--lab-ink-muted)', fontSize: '0.85rem' }}>
                                             Klicka på jordklotet för att mata <em>g</em>-värdet
                                         </p>
                                     )}
@@ -553,7 +549,7 @@
                                                 className="dark-checkbox"
                                                 aria-label="Visa ekvatorn"
                                             />
-                                            <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Visa ekvatorn</span>
+                                            <span style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)' }}>Visa ekvatorn</span>
                                         </label>
                                         <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                                             <input
@@ -563,7 +559,7 @@
                                                 className="dark-checkbox"
                                                 aria-label="Visa polerna"
                                             />
-                                            <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>Visa polerna</span>
+                                            <span style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)' }}>Visa polerna</span>
                                         </label>
                                     </div>
                                 </div>
@@ -572,15 +568,15 @@
                                 <div className="instruction-panel">
                                     <h3
                                         className="font-bold mb-2"
-                                        style={{ fontSize: '0.85rem', color: '#38bdf8' }}
+                                        style={{ fontSize: '0.85rem', color: 'var(--lab-ink)' }}
                                     >
                                         Instruktioner
                                     </h3>
-                                    <ul style={{ fontSize: '0.82rem', color: '#94a3b8', display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', padding: 0, margin: 0 }}>
-                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: '#38bdf8' }}>•</span> Dra för att rotera jorden</li>
-                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: '#38bdf8' }}>•</span> Scrolla för att zooma in/ut</li>
-                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: '#38bdf8' }}>•</span> Klicka för att mata <em>g</em>-värdet</li>
-                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: '#ff66ff' }}>•</span> Rosa kryss visar vald plats</li>
+                                    <ul style={{ fontSize: '0.82rem', color: 'var(--lab-ink-muted)', display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Dra för att rotera jorden</li>
+                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Scrolla för att zooma in/ut</li>
+                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Klicka för att mata <em>g</em>-värdet</li>
+                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Rosa kryss visar vald plats</li>
                                     </ul>
                                 </div>
 
@@ -591,7 +587,7 @@
                         <div className="rounded-2xl p-6 md:p-8 mb-8 glass-card">
                             <h2
                                 className="font-bold mb-5"
-                                style={{ fontSize: '1.4rem', color: '#e2e8f0' }}
+                                style={{ fontSize: '1.4rem', color: 'var(--lab-ink)' }}
                             >
                                 Varför varierar <em>g</em>?
                             </h2>
@@ -600,11 +596,11 @@
                                 <div>
                                     <h3
                                         className="font-bold mb-2"
-                                        style={{ fontSize: '1.05rem', color: '#7dd3fc' }}
+                                        style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}
                                     >
                                         1. Jordens rotation
                                     </h3>
-                                    <p style={{ color: '#94a3b8', lineHeight: '1.7' }}>
+                                    <p style={{ color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
                                         Vid ekvatorn roterar jorden snabbast, vilket skapar en centrifugalkraft som motverkar
                                         gravitationen. Detta gör att <em>g</em> blir lägre där.
                                     </p>
@@ -613,11 +609,11 @@
                                 <div>
                                     <h3
                                         className="font-bold mb-2"
-                                        style={{ fontSize: '1.05rem', color: '#7dd3fc' }}
+                                        style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}
                                     >
                                         2. Jordens form
                                     </h3>
-                                    <p style={{ color: '#94a3b8', lineHeight: '1.7' }}>
+                                    <p style={{ color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
                                         Jorden är inte perfekt sfärisk utan något tillplattad vid polerna. Vid ekvatorn är
                                         du längre från jordens centrum, vilket också bidrar till ett lägre <em>g</em>-värde.
                                     </p>
@@ -626,17 +622,18 @@
                                 <div
                                     className="rounded-xl p-5"
                                     style={{
-                                        background: 'rgba(14, 165, 233, 0.08)',
-                                        border: '1px solid rgba(56, 189, 248, 0.2)'
+                                        background: 'var(--lab-bg)',
+                                        border: '1px solid var(--lab-line-strong)',
+                                        borderLeft: '4px solid var(--lab-accent)'
                                     }}
                                 >
                                     <h3
                                         className="font-bold mb-2"
-                                        style={{ fontSize: '1.05rem', color: '#38bdf8' }}
+                                        style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}
                                     >
                                         Intressant fakta
                                     </h3>
-                                    <p style={{ color: '#94a3b8', lineHeight: '1.7' }}>
+                                    <p style={{ color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
                                         Om du väger 70 kg i Stockholm (<em>g</em> ≈ 9,82 m/s²) skulle du väga cirka 250 gram mindre
                                         vid ekvatorn (<em>g</em> ≈ 9,78 m/s²)!
                                     </p>

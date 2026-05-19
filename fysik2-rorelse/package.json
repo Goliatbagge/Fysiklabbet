@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "postbuild": "node fix-laborans-css.js",
     "preview": "vite preview"
   },
   "dependencies": {

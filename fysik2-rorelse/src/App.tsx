@@ -336,7 +336,7 @@ const App: React.FC = () => {
         <span style={{ margin: '0 0.25rem' }}>Rörelse och Krafter</span>
       </div>
 
-      <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#0f172a' }}>
+      <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#ffffff' }}>
         <main className="flex-grow flex flex-col lg:flex-row items-stretch">
           <div className="flex-grow flex flex-col items-center justify-start p-4 lg:p-6">
             <h1 className="text-2xl md:text-3xl font-bold text-cyan-400 mb-6">Snett kast</h1>

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hastighet-tid-diagram - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -36,41 +40,33 @@
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="bg-gray-50 lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -299,7 +295,7 @@
                                     <svg width={svgWidth} height={svgHeight} className="border-2 border-gray-200 rounded-lg bg-white">
                                         <defs>
                                             <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                                <polygon points="0 0, 10 3, 0 6" fill="#000" />
+                                                <polygon points="0 0, 10 3, 0 6" fill="#f3eee4" />
                                             </marker>
                                         </defs>
 
@@ -333,7 +329,7 @@
                                             y1={scaleY(0)}
                                             x2={svgWidth - padding + 10}
                                             y2={scaleY(0)}
-                                            stroke="#000"
+                                            stroke="#f3eee4"
                                             strokeWidth="2"
                                             markerEnd="url(#arrowhead)"
                                         />
@@ -342,7 +338,7 @@
                                             y1={svgHeight - padding}
                                             x2={padding}
                                             y2={padding - 10}
-                                            stroke="#000"
+                                            stroke="#f3eee4"
                                             strokeWidth="2"
                                             markerEnd="url(#arrowhead)"
                                         />
@@ -374,7 +370,7 @@
                                         ))}
 
                                         {/* Axis titles */}
-                                        <text x={svgWidth / 2} y={svgHeight - 10} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#333">
+                                        <text x={svgWidth / 2} y={svgHeight - 10} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#f3eee4">
                                             Tid (s)
                                         </text>
                                         <text
@@ -383,7 +379,7 @@
                                             textAnchor="middle"
                                             fontSize="16"
                                             fontWeight="bold"
-                                            fill="#333"
+                                            fill="#f3eee4"
                                             transform={`rotate(-90, 20, ${svgHeight / 2})`}
                                         >
                                             Hastighet (m/s)

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dubbelspaltexperimentet - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -16,17 +20,17 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
             border-radius: 16px;
         }
         .glass-card-inner {
             background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(200, 50, 74, 0.1);
             border-radius: 12px;
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
         .page-wrapper {
             background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
@@ -34,7 +38,7 @@
         }
         .sim-canvas {
             border-radius: 12px;
-            border: 1px solid rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(200, 50, 74, 0.12);
         }
         .eye-btn {
             transition: all 0.3s ease;
@@ -49,12 +53,12 @@
             border-color: rgba(239, 68, 68, 0.6);
         }
         .eye-btn.not-observing {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 20px rgba(200, 50, 74, 0.3);
+            border-color: rgba(200, 50, 74, 0.4);
         }
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 8px rgba(56, 189, 248, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+            0%, 100% { box-shadow: 0 0 8px rgba(200, 50, 74, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(200, 50, 74, 0.6); }
         }
         .fire-btn {
             animation: pulse-glow 2s ease-in-out infinite;
@@ -78,57 +82,49 @@
         }
     </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div class="page-wrapper" style="padding-top: 80px;">
         <main class="container" style="max-width: 1100px; margin: 0 auto; padding: 2rem 1rem;">
             <!-- Breadcrumb -->
             <nav style="margin-bottom: 1.5rem;">
-                <span style="color: #94a3b8; font-family: Poppins, sans-serif; font-size: 0.9rem;">
+                <span style="color: var(--lab-ink-muted); font-family: Poppins, sans-serif; font-size: 0.9rem;">
                     <a href="index.html" style="color: #38bdf8; text-decoration: none;">Hem</a> /
                     <a href="fysik2.html" style="color: #38bdf8; text-decoration: none;">Fysik 2</a> /
                     Dubbelspaltexperimentet
                 </span>
             </nav>
 
-            <h1 class="glow-text" style="font-family: Poppins, sans-serif; font-size: 2.2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem;">
+            <h1 class="glow-text" style="font-family: Poppins, sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--lab-ink); margin-bottom: 0.5rem;">
                 Dubbelspaltexperimentet
             </h1>
-            <p style="font-family: Poppins, sans-serif; color: #94a3b8; font-size: 1.05rem; margin-bottom: 2rem; max-width: 750px; line-height: 1.6;">
+            <p style="font-family: Poppins, sans-serif; color: var(--lab-ink-muted); font-size: 1.05rem; margin-bottom: 2rem; max-width: 750px; line-height: 1.6;">
                 Ett av kvantfysikens mest berömda experiment. Skjut elektroner mot en dubbelspalt och se hur de bildar
                 ett interferensmönster &mdash; om ingen observerar dem. Aktivera observatören och se hur mönstret försvinner!
             </p>
@@ -348,7 +344,7 @@
                             hitsRef.current.push({ y: hitY, observed: false, xOff: (Math.random() - 0.5) * 2 });
                             sctx.beginPath();
                             sctx.arc(screenX, hitY, 1.5, 0, Math.PI * 2);
-                            sctx.fillStyle = 'rgba(56, 189, 248, 0.7)';
+                            sctx.fillStyle = 'rgba(200, 50, 74, 0.7)';
                             sctx.fill();
                             setElectronCount(prev => prev + 1);
                             if (drawScreenViewRef.current) drawScreenViewRef.current();
@@ -374,9 +370,9 @@
 
                     // Background
                     const bgGrad = ctx.createLinearGradient(0, 0, W, 0);
-                    bgGrad.addColorStop(0, '#0a0a1a');
-                    bgGrad.addColorStop(0.35, '#0d1526');
-                    bgGrad.addColorStop(1, '#0a1020');
+                    bgGrad.addColorStop(0, '#f3eee4');
+                    bgGrad.addColorStop(0.35, '#f3eee4');
+                    bgGrad.addColorStop(1, '#f3eee4');
                     ctx.fillStyle = bgGrad;
                     ctx.fillRect(0, 0, W, H);
 
@@ -404,8 +400,9 @@
                     ctx.textAlign = 'center';
                     ctx.fillText('Dubbelspalt', slitWallX, H - 10);
 
-                    // Draw detection screen background
-                    ctx.fillStyle = '#1e293b';
+                    // Draw detection screen background — ska vara svart (papper-anpassning gäller inte här,
+                    // skärmen är där elektroner ackumuleras och måste ha mörk yta för synlighet)
+                    ctx.fillStyle = '#0a0f1e'; // keep-dark
                     ctx.fillRect(screenX - 2, H * (1 - SCREEN_HEIGHT_FRACTION) / 2, 4, H * SCREEN_HEIGHT_FRACTION);
                     ctx.strokeStyle = '#334155';
                     ctx.lineWidth = 1;
@@ -518,7 +515,7 @@
                             ctx.fill();
                             ctx.beginPath();
                             ctx.arc(e.x, e.y, 6, 0, Math.PI * 2);
-                            ctx.fillStyle = e.observed ? 'rgba(248, 113, 113, 0.2)' : 'rgba(56, 189, 248, 0.2)';
+                            ctx.fillStyle = e.observed ? 'rgba(248, 113, 113, 0.2)' : 'rgba(200, 50, 74, 0.2)';
                             ctx.fill();
                         }
                     }
@@ -537,7 +534,7 @@
                             sctx.arc(screenX, hit.y, 1.5, 0, Math.PI * 2);
                             sctx.fillStyle = hit.observed
                                 ? 'rgba(248, 113, 113, 0.7)'
-                                : 'rgba(56, 189, 248, 0.7)';
+                                : 'rgba(200, 50, 74, 0.7)';
                             sctx.fill();
                         }
                         if (drawScreenViewRef.current) drawScreenViewRef.current();
@@ -571,7 +568,7 @@
                             const by = screenTop + b * binH;
                             ctx.fillStyle = phaseRef.current === 'observing'
                                 ? 'rgba(248, 113, 113, 0.4)'
-                                : 'rgba(56, 189, 248, 0.4)';
+                                : 'rgba(200, 50, 74, 0.4)';
                             ctx.fillRect(histX, by, barW, binH - 1);
                         }
                     }
@@ -607,12 +604,12 @@
                             const cw = curtainW;
                             // Main fabric
                             const grad = ctx.createLinearGradient(startX, 0, startX + dir * cw, 0);
-                            grad.addColorStop(0, '#8c1414');
+                            grad.addColorStop(0, '#f3eee4');
                             grad.addColorStop(0.3, '#b41e1e');
-                            grad.addColorStop(0.5, '#780f0f');
+                            grad.addColorStop(0.5, '#f3eee4');
                             grad.addColorStop(0.7, '#a01919');
-                            grad.addColorStop(0.85, '#640c0c');
-                            grad.addColorStop(1, '#500a0a');
+                            grad.addColorStop(0.85, '#f3eee4');
+                            grad.addColorStop(1, '#f3eee4');
                             ctx.fillStyle = grad;
                             ctx.fillRect(
                                 dir > 0 ? startX : startX - cw,
@@ -782,12 +779,13 @@
                 svCanvas.height = h;
                 const ctx = svCanvas.getContext('2d');
 
-                // Black background
-                ctx.fillStyle = '#050510';
+                // Black background — detector-skärmen ska vara svart för synlighet
+                // av accumulerande elektronträffar (oavsett papper-tema runtomkring)
+                ctx.fillStyle = '#0a0f1e'; // keep-dark
                 ctx.fillRect(0, 0, w, h);
 
                 // Subtle border
-                ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+                ctx.strokeStyle = 'rgba(200, 50, 74, 0.18)';
                 ctx.lineWidth = 1;
                 ctx.strokeRect(0, 0, w, h);
 
@@ -894,17 +892,17 @@
                         <div style={{ width: '180px', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <p style={{
                                 fontFamily: 'Poppins, sans-serif',
-                                color: '#94a3b8',
+                                color: 'var(--lab-ink-muted)',
                                 fontSize: '0.8rem',
                                 textAlign: 'center',
                                 marginBottom: '6px'
                             }}>
                                 Skärm framifrån
                             </p>
-                            <div className="glass-card-inner" style={{ padding: '6px', borderRadius: '10px', width: '100%', flex: 1 }}>
+                            <div style={{ padding: '6px', borderRadius: '10px', width: '100%', flex: 1, background: 'transparent', border: '1px solid var(--lab-line-strong)' }}>
                                 <canvas
                                     ref={screenViewCanvasRef}
-                                    style={{ width: '100%', height: '100%', display: 'block', borderRadius: '6px' }}
+                                    style={{ width: '100%', height: '100%', display: 'block', borderRadius: '6px', background: 'transparent' }}
                                 />
                             </div>
                         </div>
@@ -914,7 +912,7 @@
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         {/* Observation / phase control */}
                         <div className="glass-card p-4 flex flex-col items-center justify-center">
-                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-muted)', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
                                 Observatör vid spalten
                             </p>
                             {phase === 'observing' ? (
@@ -950,7 +948,7 @@
                                     className="px-6 py-3 rounded-xl text-lg font-semibold"
                                     style={{
                                         fontFamily: 'Poppins, sans-serif',
-                                        background: 'rgba(56, 189, 248, 0.05)',
+                                        background: 'rgba(200, 50, 74, 0.05)',
                                         color: '#64748b',
                                         border: '2px solid rgba(100, 116, 139, 0.2)',
                                         textAlign: 'center'
@@ -970,7 +968,7 @@
 
                         {/* Fire controls - only in observing mode */}
                         <div className="glass-card p-4 flex flex-col items-center justify-center">
-                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-muted)', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
                                 {phase === 'observing' ? 'Skjut elektroner (med observation)' : 'Elektrontakt'}
                             </p>
                             {phase === 'observing' && (
@@ -980,10 +978,10 @@
                                         className="px-5 py-2 rounded-lg font-semibold"
                                         style={{
                                             fontFamily: 'Poppins, sans-serif',
-                                            background: autoFire ? 'rgba(34, 197, 94, 0.15)' : 'rgba(56, 189, 248, 0.15)',
-                                            color: autoFire ? '#22c55e' : '#38bdf8',
+                                            background: autoFire ? 'rgba(34, 197, 94, 0.15)' : 'rgba(200, 50, 74, 0.15)',
+                                            color: autoFire ? '#22c55e' : '#0f1620',
                                             border: '1px solid',
-                                            borderColor: autoFire ? 'rgba(34, 197, 94, 0.3)' : 'rgba(56, 189, 248, 0.3)',
+                                            borderColor: autoFire ? 'rgba(34, 197, 94, 0.3)' : 'rgba(200, 50, 74, 0.3)',
                                             fontSize: '0.9rem',
                                             transition: 'all 0.3s'
                                         }}
@@ -999,10 +997,10 @@
                                         className="px-5 py-2 rounded-lg font-semibold"
                                         style={{
                                             fontFamily: 'Poppins, sans-serif',
-                                            background: phase === 'firing-hidden' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(56, 189, 248, 0.15)',
-                                            color: phase === 'firing-hidden' ? '#22c55e' : '#38bdf8',
+                                            background: phase === 'firing-hidden' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(200, 50, 74, 0.15)',
+                                            color: phase === 'firing-hidden' ? '#22c55e' : '#0f1620',
                                             border: '1px solid',
-                                            borderColor: phase === 'firing-hidden' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(56, 189, 248, 0.3)',
+                                            borderColor: phase === 'firing-hidden' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(200, 50, 74, 0.3)',
                                             fontSize: '0.9rem',
                                             transition: 'all 0.3s'
                                         }}
@@ -1021,7 +1019,7 @@
                                     onChange={(e) => setFireRate(parseInt(e.target.value))}
                                     style={{ flex: 1, accentColor: '#38bdf8' }}
                                 />
-                                <span style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.75rem', minWidth: '35px' }}>
+                                <span style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-muted)', fontSize: '0.75rem', minWidth: '35px' }}>
                                     {fireRate}/s
                                 </span>
                             </div>
@@ -1029,10 +1027,10 @@
 
                         {/* Stats */}
                         <div className="glass-card p-4 flex flex-col items-center justify-center">
-                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-muted)', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
                                 Antal träffar
                             </p>
-                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '2rem', fontWeight: '700' }}>
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink)', fontSize: '2rem', fontWeight: '700' }}>
                                 {formatNumber(electronCount)}
                             </p>
                             {(phase === 'observing' || phase === 'revealing') && (
@@ -1042,7 +1040,7 @@
                                     style={{
                                         fontFamily: 'Poppins, sans-serif',
                                         background: 'rgba(100, 116, 139, 0.15)',
-                                        color: '#94a3b8',
+                                        color: 'var(--lab-ink-muted)',
                                         border: '1px solid rgba(100, 116, 139, 0.2)',
                                         fontSize: '0.8rem',
                                         cursor: 'pointer',
@@ -1057,18 +1055,18 @@
 
                     {/* Explanation */}
                     <div className="glass-card p-6">
-                        <h3 style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '1.2rem', fontWeight: '600', marginBottom: '1rem' }}>
+                        <h3 style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink)', fontSize: '1.2rem', fontWeight: '600', marginBottom: '1rem' }}>
                             Vad händer här?
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="glass-card-inner p-4">
-                                <h4 style={{ fontFamily: 'Poppins, sans-serif', color: '#38bdf8', fontSize: '0.95rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                                <h4 style={{ fontFamily: 'Poppins, sans-serif', color: '#c8324a', fontSize: '0.95rem', fontWeight: '600', marginBottom: '0.5rem' }}>
                                     🔇 Utan observation
                                 </h4>
-                                <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.6' }}>
-                                    Varje elektron passerar genom <strong style={{ color: '#e2e8f0' }}>båda spalterna samtidigt</strong> som en
+                                <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-muted)', fontSize: '0.85rem', lineHeight: '1.6' }}>
+                                    Varje elektron passerar genom <strong style={{ color: 'var(--lab-ink)' }}>båda spalterna samtidigt</strong> som en
                                     sannolikhetsvåg. Vågen interfererar med sig själv och skapar ett
-                                    <strong style={{ color: '#e2e8f0' }}> interferensmönster</strong> med ljusa och mörka ränder på
+                                    <strong style={{ color: 'var(--lab-ink)' }}> interferensmönster</strong> med ljusa och mörka ränder på
                                     skärmen &mdash; precis som ljusvågor.
                                 </p>
                             </div>
@@ -1076,10 +1074,10 @@
                                 <h4 style={{ fontFamily: 'Poppins, sans-serif', color: '#f87171', fontSize: '0.95rem', fontWeight: '600', marginBottom: '0.5rem' }}>
                                     👁️ Med observation
                                 </h4>
-                                <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.6' }}>
-                                    När vi mäter vilken spalt elektronen passerar genom, <strong style={{ color: '#e2e8f0' }}>kollapsar
+                                <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-muted)', fontSize: '0.85rem', lineHeight: '1.6' }}>
+                                    När vi mäter vilken spalt elektronen passerar genom, <strong style={{ color: 'var(--lab-ink)' }}>kollapsar
                                     vågfunktionen</strong>. Elektronen beter sig nu som en klassisk partikel och passerar
-                                    genom <strong style={{ color: '#e2e8f0' }}>en av spalterna</strong>. Interferensmönstret försvinner
+                                    genom <strong style={{ color: 'var(--lab-ink)' }}>en av spalterna</strong>. Interferensmönstret försvinner
                                     och vi ser istället två ränder &mdash; en bakom varje spalt.
                                 </p>
                             </div>
@@ -1088,11 +1086,11 @@
                             <h4 style={{ fontFamily: 'Poppins, sans-serif', color: '#a78bfa', fontSize: '0.95rem', fontWeight: '600', marginBottom: '0.5rem' }}>
                                 Varför är detta märkligt?
                             </h4>
-                            <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.85rem', lineHeight: '1.6' }}>
-                                Även om vi skjuter <strong style={{ color: '#e2e8f0' }}>en elektron i taget</strong> bildas interferensmönstret
+                            <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-muted)', fontSize: '0.85rem', lineHeight: '1.6' }}>
+                                Även om vi skjuter <strong style={{ color: 'var(--lab-ink)' }}>en elektron i taget</strong> bildas interferensmönstret
                                 gradvis. Varje enskild elektron verkar "veta" om båda spalterna &mdash; trots att den är en enda partikel.
                                 Det är som om elektronen interfererar med sig själv! Detta fenomen, kallat
-                                <strong style={{ color: '#e2e8f0' }}> våg-partikeldualiteten</strong>, är en av kvantmekanikens mest
+                                <strong style={{ color: 'var(--lab-ink)' }}> våg-partikeldualiteten</strong>, är en av kvantmekanikens mest
                                 grundläggande och fascinerande egenskaper.
                             </p>
                         </div>

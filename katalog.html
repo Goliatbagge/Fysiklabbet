@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fysiklabbet — Teori, simuleringar och övningar i fysik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+</head>
+<body class="laborans">
+    <div id="root"></div>
+
+    <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" data-presets="react">
+        const { useState, useEffect, useMemo, useRef } = React;
+        const K = window.KATALOG;
+        const KF = window.KATALOG_FLAT;
+        const TEORI = window.TEORI || {};
+
+        // --- Skydda math-block ($$..$$ och $..$) från markdown-parsern.
+        // Annars tolkar marked LaTeX-escape som \; \, \! och dyl. som vanlig
+        // text, vilket gör att t.ex. \; blir ";". Vi byter ut math mot
+        // placeholders före marked och stoppar tillbaka efter.
+        function protectMath(md) {
+            const tokens = [];
+            md = md.replace(/\$\$([\s\S]+?)\$\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(/\$([^\n$]+?)\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            return { md, tokens };
+        }
+        function restoreMath(html, tokens) {
+            return html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+        }
+
+        // --- Konvertera Unicode-superscript (⁻²⁷, ³⁰, …) till <sup>-27</sup>.
+        // Skälet: tecken som ¹²³ kommer från Latin-1 Supplement, medan ⁰⁴-⁹
+        // kommer från blocket "Superscripts and Subscripts". I de flesta
+        // fonter renderas de med något olika baseline/storlek, vilket gör att
+        // siffrorna i t.ex. 10⁻²⁷ eller 10⁻³⁰ hamnar på olika höjd. Genom att
+        // göra om dem till ett <sup>-element med ASCII-siffror får vi en
+        // konsekvent rendering. Math-block ($...$, $$...$$) har redan ersatts
+        // med placeholders innan denna körs, så de påverkas inte.
+        const SUP_MAP = {
+            '⁻': '-', '⁺': '+',
+            '⁰': '0', '¹': '1', '²': '2', '³': '3',
+            '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7',
+            '⁸': '8', '⁹': '9',
+            '⁽': '(', '⁾': ')', 'ⁿ': 'n',
+        };
+        const SUP_RE = /[⁻⁺⁰¹²³⁴-⁹⁽⁾ⁿ]+/g;
+        function preprocessSuperscripts(md) {
+            return md.replace(SUP_RE, (run) => {
+                let ascii = '';
+                for (const ch of run) ascii += (SUP_MAP[ch] || ch);
+                return '<sup>' + ascii + '</sup>';
+            });
+        }
+
+        // --- Markdown-preprocessor: gruppera deluppgifter (a/b/c/d-frågor).
+        // Två eller fler konsekutiva rader på formen **a) ... ?** läggs i en
+        // grid (.lab-deluppgifter) så att de visas i två kolumner — c) under
+        // a), d) under b) — istället för att smälta ihop till en rad.
+        function preprocessSubproblems(md) {
+            const lines = md.split('\n');
+            const isSub = (l) => /^\*\*[a-d]\)\s+.+\*\*\s*$/i.test(l);
+            const out = [];
+            let i = 0;
+            while (i < lines.length) {
+                if (isSub(lines[i])) {
+                    const group = [];
+                    let j = i;
+                    while (j < lines.length && isSub(lines[j])) {
+                        group.push(lines[j]);
+                        j++;
+                    }
+                    if (group.length >= 2) {
+                        out.push('<div class="lab-deluppgifter">');
+                        out.push('');
+                        for (const g of group) {
+                            out.push(g);
+                            out.push('');
+                        }
+                        out.push('</div>');
+                        out.push('');
+                        i = j;
+                        continue;
+                    }
+                }
+                out.push(lines[i]);
+                i++;
+            }
+            return out.join('\n');
+        }
+
+        // --- Mät-och-bryt: efter KaTeX renderat formler kontrollerar vi varje
+        // .katex-display. Om en spiller över sin behållare extraherar vi
+        // original-LaTeX:n från KaTeX:s <annotation> och bryter formeln vid en
+        // top-level = i taget, renderar om, och kontrollerar på nytt — tills
+        // den ryms eller alla bryt-punkter använts. Sista utvägen: skala.
+        function findTopLevelEquals(latex) {
+            const positions = [];
+            let depth = 0;
+            for (let i = 0; i < latex.length; i++) {
+                const ch = latex[i];
+                if (ch === '\\') { i++; continue; }
+                if (ch === '{') depth++;
+                else if (ch === '}') depth--;
+                else if (ch === '=' && depth === 0) positions.push(i);
+            }
+            return positions;
+        }
+
+        function buildAligned(latex, breakPositions) {
+            const segs = [];
+            let prev = 0;
+            for (const pos of breakPositions) {
+                segs.push(latex.slice(prev, pos).trim());
+                prev = pos + 1;
+            }
+            segs.push(latex.slice(prev).trim());
+            const lines = [segs[0] + ' &= ' + segs[1]];
+            for (let i = 2; i < segs.length; i++) lines.push('&= ' + segs[i]);
+            return '\\begin{aligned}\n' + lines.join(' \\\\\n') + '\n\\end{aligned}';
+        }
+
+        function dispOverflows(disp) {
+            const avail = disp.clientWidth;
+            if (avail === 0) return false;
+            const inner = disp.querySelector('.katex');
+            const natural = inner
+                ? Math.max(disp.scrollWidth, inner.scrollWidth, inner.offsetWidth)
+                : disp.scrollWidth;
+            return natural > avail + 0.5;
+        }
+
+        function renderDisplayMath(latex) {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = window.katex.renderToString(latex, {
+                displayMode: true,
+                throwOnError: false,
+            });
+            return wrapper.firstElementChild;
+        }
+
+        function scaleDownDisplay(disp) {
+            const inner = disp.querySelector('.katex');
+            if (!inner) return;
+            const avail = disp.clientWidth;
+            const natural = Math.max(disp.scrollWidth, inner.scrollWidth, inner.offsetWidth);
+            if (avail === 0 || natural <= avail + 0.5) return;
+            const scale = avail / natural;
+            inner.style.transformOrigin = 'center top';
+            inner.style.transform = 'scale(' + scale + ')';
+            disp.style.height = Math.ceil(inner.offsetHeight * scale) + 'px';
+        }
+
+        function fitMathDisplays(root) {
+            if (!root || !window.katex) return;
+            const displays = Array.from(root.querySelectorAll('.katex-display'));
+            displays.forEach((disp) => {
+                // Återställ ev. tidigare scale-justering
+                disp.style.height = '';
+                const inner0 = disp.querySelector('.katex');
+                if (inner0) {
+                    inner0.style.transform = '';
+                    inner0.style.transformOrigin = '';
+                }
+                if (!dispOverflows(disp)) return;
+                // Plocka ut original-LaTeX från KaTeX:s annotation
+                const ann = disp.querySelector('annotation[encoding="application/x-tex"]');
+                const orig = ann ? ann.textContent : null;
+                let current = disp;
+                if (orig) {
+                    const eqs = findTopLevelEquals(orig);
+                    // Bryt vid de första n =, n=2..eqs.length. (n=1 ger samma
+                    // visuella resultat som originalet — hoppa över.)
+                    for (let n = 2; n <= eqs.length; n++) {
+                        const broken = buildAligned(orig, eqs.slice(0, n));
+                        const newDisp = renderDisplayMath(broken);
+                        current.replaceWith(newDisp);
+                        current = newDisp;
+                        if (!dispOverflows(current)) break;
+                    }
+                }
+                // Om något fortfarande sticker ut: skala som sista utväg
+                if (dispOverflows(current)) scaleDownDisplay(current);
+            });
+        }
+
+        // --- Markdown-preprocessor: ::: typ "Titel" ... ::: → HTML-blockruta
+        function preprocessBlocks(md) {
+            const lines = md.split('\n');
+            const out = [];
+            const stack = [];
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
+                const close = line.match(/^:::\s*$/);
+                if (open) {
+                    const [, type, title] = open;
+                    stack.push(type.toLowerCase());
+                    out.push('<div class="lab-block lab-block-' + type.toLowerCase() + '">');
+                    if (title) {
+                        out.push('<div class="lab-block-title">' + escapeHtml(title) + '</div>');
+                    }
+                    out.push('');
+                } else if (close && stack.length > 0) {
+                    stack.pop();
+                    out.push('');
+                    out.push('</div>');
+                } else {
+                    out.push(line);
+                }
+            }
+            return out.join('\n');
+        }
+
+        function escapeHtml(s) {
+            return String(s)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function parseFrontmatter(md) {
+            if (!md.startsWith('---\n')) return { fm: {}, body: md };
+            const end = md.indexOf('\n---\n', 4);
+            if (end === -1) return { fm: {}, body: md };
+            const block = md.slice(4, end);
+            const fm = {};
+            for (const line of block.split('\n')) {
+                const m = line.match(/^([a-zA-Z]+):\s*(.*)$/);
+                if (m) {
+                    let v = m[2].trim();
+                    if (v.startsWith("'") && v.endsWith("'")) v = v.slice(1, -1);
+                    if (v.startsWith('"') && v.endsWith('"')) v = v.slice(1, -1);
+                    fm[m[1]] = v;
+                }
+            }
+            return { fm, body: md.slice(end + 5) };
+        }
+
+        marked.setOptions({ gfm: true, breaks: false });
+
+        // id-konvention för teori-uppslag — t.ex. Fysik 1 + "2.3" → "fy1-2.3"
+        function teoriId(courseName, num) {
+            if (courseName === 'Fysik 1') return 'fy1-' + num;
+            if (courseName === 'Fysik 2') return 'fy2-' + num;
+            return null;
+        }
+
+        const normalize = (text) => text.toLowerCase()
+            .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
+            .replace(/é/g, 'e').replace(/è/g, 'e');
+
+        const HAYSTACKS = KF.map(sim =>
+            normalize([sim.title, sim.description, sim.course, sim.chapter, ...(sim.keywords || [])].join(' '))
+        );
+
+        function Topbar() {
+            return (
+                <div className="lab-topbar">
+                    <div className="lab-topbar-inner">
+                        <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+                    </div>
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <div className="lab-header">
+                    <div className="lab-header-inner">
+                        <a className="lab-logo" href="index.html">
+                            <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                                <g fill="none" stroke="currentColor" strokeWidth="1">
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" />
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                                </g>
+                                <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                            </svg>
+                            <span className="lab-logo-text">Fysiklabbet</span>
+                        </a>
+                        <nav className="lab-nav" aria-label="Huvudnavigation">
+                            <a href="index.html">Start</a>
+                            <a href="om.html">Om</a>
+                            <a href="kontakt.html">Kontakt</a>
+                        </nav>
+                    </div>
+                </div>
+            );
+        }
+
+        function Breadcrumb({ course, chapter, section }) {
+            // Hoppar över "Katalog" och "Fysik" — eftersom sidan numera bara
+            // har två ingångar (Fysik 1 / Fysik 2) börjar vi direkt med
+            // kursnamnet.
+            return (
+                <div className="lab-breadcrumb">
+                    {course ? (
+                        <span className="lab-breadcrumb-current">{course.toUpperCase()}</span>
+                    ) : (
+                        <span className="lab-breadcrumb-current">FYSIKLABBET</span>
+                    )}
+                    {chapter && (
+                        <React.Fragment>
+                            <span className="lab-breadcrumb-sep">/</span>
+                            <span className="lab-breadcrumb-current">{chapter.toUpperCase()}</span>
+                        </React.Fragment>
+                    )}
+                    {section && (
+                        <React.Fragment>
+                            <span className="lab-breadcrumb-sep">/</span>
+                            <span className="lab-breadcrumb-tail">{section}</span>
+                        </React.Fragment>
+                    )}
+                </div>
+            );
+        }
+
+        function SearchBar() {
+            const [query, setQuery] = useState('');
+            const [activeIdx, setActiveIdx] = useState(-1);
+            const [open, setOpen] = useState(false);
+            const wrapRef = useRef(null);
+
+            const matches = useMemo(() => {
+                const q = normalize(query.trim());
+                if (!q) return [];
+                const terms = q.split(/\s+/);
+                return KF.filter((_, i) => terms.every(t => HAYSTACKS[i].includes(t)));
+            }, [query]);
+
+            useEffect(() => { setActiveIdx(matches.length > 0 ? 0 : -1); }, [matches.length, query]);
+
+            useEffect(() => {
+                const onDocClick = (e) => {
+                    if (!wrapRef.current) return;
+                    if (!wrapRef.current.contains(e.target)) setOpen(false);
+                };
+                document.addEventListener('click', onDocClick);
+                return () => document.removeEventListener('click', onDocClick);
+            }, []);
+
+            const handleKey = (e) => {
+                if (!open || matches.length === 0) return;
+                if (e.key === 'ArrowDown') { e.preventDefault(); setActiveIdx((activeIdx + 1) % matches.length); }
+                else if (e.key === 'ArrowUp') { e.preventDefault(); setActiveIdx((activeIdx - 1 + matches.length) % matches.length); }
+                else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); window.location.href = matches[activeIdx].href; }
+                else if (e.key === 'Escape') { setQuery(''); setOpen(false); e.target.blur(); }
+            };
+
+            return (
+                <section className="lab-section" aria-label="Sök simulering">
+                    <div className="lab-search" ref={wrapRef}>
+                        <div className="lab-search-input-wrap">
+                            <span className="lab-search-icon" aria-hidden="true">⌕</span>
+                            <input type="text" value={query} className="lab-search-input"
+                                placeholder="sök — t.ex. coulomb, pendel, magnetfält, ljus…"
+                                autoComplete="off" aria-label="Sök på Fysiklabbet"
+                                onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+                                onFocus={() => { if (query.trim()) setOpen(true); }}
+                                onKeyDown={handleKey} />
+                            {query && (
+                                <button className="lab-search-clear" aria-label="Rensa sökning"
+                                    onClick={() => { setQuery(''); setOpen(false); }}>✕</button>
+                            )}
+                        </div>
+                        <div className={'lab-search-results' + (open && query.trim() ? ' visible' : '')} role="listbox">
+                            {open && query.trim() && matches.length === 0 && (
+                                <div className="lab-search-empty">Inga simuleringar matchar "{query}"</div>
+                            )}
+                            {open && matches.map((sim, idx) => (
+                                <a key={sim.href} href={sim.href}
+                                    className={'lab-search-result' + (idx === activeIdx ? ' active' : '')}
+                                    role="option" onMouseEnter={() => setActiveIdx(idx)}>
+                                    <span className="lab-search-result-icon">{sim.icon}</span>
+                                    <div>
+                                        <div className="lab-search-result-title">{sim.title}</div>
+                                        <div className="lab-search-result-desc">{sim.description}</div>
+                                    </div>
+                                    <div className="lab-search-result-meta">
+                                        {sim.course.toUpperCase()}<br />{sim.num}
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        function MathematicsPlaceholder() {
+            return (
+                <div className="lab-placeholder">
+                    <div className="lab-placeholder-title">Under uppbyggnad</div>
+                    <p className="lab-placeholder-text">
+                        Matematik-katalogen kommer hösten 2026. Vi planerar att täcka
+                        Matematik 1 till 4 med samma typ av interaktiva utforskningar
+                        som fysiken — i samma bibliotek.
+                    </p>
+                </div>
+            );
+        }
+
+        function CourseIntro({ courseData, courseName, chapters, onPickChapter }) {
+            const intro = courseData.intro;
+            const totalSections = chapters.reduce((sum, ch) => {
+                return sum + (courseData.chapters[ch].sections || []).length;
+            }, 0);
+            return (
+                <div className="lab-course-intro">
+                    <div className="lab-course-intro-head">
+                        <span className="lab-mono-label">
+                            {courseName.toUpperCase()} · ÖVERSIKT
+                        </span>
+                        <span className="lab-mono-label">
+                            {chapters.length} KAPITEL · {totalSections} AVSNITT
+                        </span>
+                    </div>
+                    <h2 className="lab-course-intro-title">{courseName}</h2>
+                    {intro?.tagline && (
+                        <p className="lab-course-intro-tagline">{intro.tagline}</p>
+                    )}
+                    {intro?.paragraphs?.map((p, i) => (
+                        <p key={i} className="lab-course-intro-text">{p}</p>
+                    ))}
+                    {intro?.bullets?.length > 0 && (
+                        <ul className="lab-course-intro-bullets">
+                            {intro.bullets.map((b, i) => (
+                                <li key={i}>{b}</li>
+                            ))}
+                        </ul>
+                    )}
+                    <div className="lab-course-intro-chapters">
+                        <div className="lab-mono-label" style={{ marginBottom: 14 }}>
+                            KAPITEL I KURSEN
+                        </div>
+                        <div className="lab-course-chapter-grid">
+                            {chapters.map((ch, i) => {
+                                const chapterData = courseData.chapters[ch];
+                                const secCount = (chapterData.sections || []).length;
+                                return (
+                                    <button key={ch} type="button"
+                                        className="lab-course-chapter-card"
+                                        onClick={() => onPickChapter(ch)}>
+                                        <span className="lab-course-chapter-num">
+                                            {String(chapterData.number ?? i + 1).padStart(2, '0')}
+                                        </span>
+                                        <span className="lab-course-chapter-title">{ch}</span>
+                                        <span className="lab-course-chapter-meta">
+                                            {secCount} avsnitt →
+                                        </span>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function TeoriBody({ id }) {
+            const ref = useRef(null);
+            const html = useMemo(() => {
+                const raw = TEORI[id];
+                if (!raw) return null;
+                const { body } = parseFrontmatter(raw);
+                const { md, tokens } = protectMath(body);
+                let processed = preprocessSuperscripts(md);
+                processed = preprocessSubproblems(processed);
+                processed = preprocessBlocks(processed);
+                return restoreMath(marked.parse(processed), tokens);
+            }, [id]);
+            useEffect(() => {
+                if (!ref.current || !html) return;
+                renderMathInElement(ref.current, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                    ],
+                    throwOnError: false,
+                });
+                // Skala ner long display-math; kör efter KaTeX-rendering.
+                // Måste vänta på fonts.ready — KaTeX laddar Computer Modern
+                // async och bredder är inte korrekta innan dess.
+                const root = ref.current;
+                const fit = () => fitMathDisplays(root);
+                let cancelled = false;
+                const safeFit = () => { if (!cancelled) fit(); };
+                const raf1 = requestAnimationFrame(safeFit);
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(safeFit);
+                }
+                // Köra igen efter ytterligare en tick — KaTeX-bredder kan
+                // ändras precis efter font-load.
+                const tid = setTimeout(safeFit, 250);
+                window.addEventListener('resize', fit);
+                return () => {
+                    cancelled = true;
+                    cancelAnimationFrame(raf1);
+                    clearTimeout(tid);
+                    window.removeEventListener('resize', fit);
+                };
+            }, [html]);
+            if (!html) {
+                return (
+                    <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
+                        <em>Teorigenomgång kommer snart.</em>
+                    </div>
+                );
+            }
+            return (
+                <div className="lab-article-body lab-article-body-inline"
+                    ref={ref}
+                    dangerouslySetInnerHTML={{ __html: html }} />
+            );
+        }
+
+        function Catalog({ state, setState }) {
+            const { subject, course, chapter, section } = state;
+            const subjectData = K[subject] || {};
+            const isMath = subject === 'Matematik';
+
+            const subjects = Object.keys(K);
+            const chapters = Object.keys((subjectData.courses?.[course]?.chapters) || {});
+            const sections = subjectData.courses?.[course]?.chapters?.[chapter]?.sections || [];
+            const activeSection = sections.find(s => s.num === section);
+            const chapterNumber = subjectData.courses?.[course]?.chapters?.[chapter]?.number;
+            const sectionIdx = sections.findIndex(s => s.num === section);
+
+            const tid = activeSection ? teoriId(course, activeSection.num) : null;
+            const hasTeori = tid && TEORI[tid];
+
+            // När man klickar Föregående/Nästa: byt avsnitt och scrolla högst
+            // upp i den nya genomgången så man inte hamnar längst ned.
+            const sectionContentRef = useRef(null);
+            const scrollPendingRef = useRef(false);
+            const goPrev = () => {
+                if (sectionIdx > 0) {
+                    scrollPendingRef.current = true;
+                    setState({ ...state, section: sections[sectionIdx - 1].num });
+                }
+            };
+            const goNext = () => {
+                if (sectionIdx >= 0 && sectionIdx < sections.length - 1) {
+                    scrollPendingRef.current = true;
+                    setState({ ...state, section: sections[sectionIdx + 1].num });
+                }
+            };
+
+            useEffect(() => {
+                if (!scrollPendingRef.current) return;
+                scrollPendingRef.current = false;
+                // Vänta ett frame så att den nya genomgången har renderats.
+                requestAnimationFrame(() => {
+                    const el = sectionContentRef.current;
+                    if (!el) { window.scrollTo({ top: 0 }); return; }
+                    const top = el.getBoundingClientRect().top + window.scrollY - 16;
+                    window.scrollTo({ top, behavior: 'auto' });
+                });
+            }, [section]);
+
+            return (
+                <section className="lab-section lab-catalog">
+                    {/* Nivå 1: Ämne */}
+                    <div className="lab-tabs-1">
+                        {subjects.map((s) => (
+                            <button key={s}
+                                className={'lab-tab-1' + (subject === s ? ' active' : '')}
+                                onClick={() => setState({ subject: s, course: null, chapter: null, section: null })}>
+                                <span className="lab-tab-1-num">ÄMNE</span>
+                                {s}
+                            </button>
+                        ))}
+                        <div className="lab-tabs-1-tail" />
+                    </div>
+
+                    {/* Nivå 2: Kurs */}
+                    <div className="lab-level-2">
+                        <div className="lab-mono-label" style={{ marginBottom: 12 }}>KURS</div>
+                        <div className="lab-tabs-2">
+                            {Object.keys(subjectData.courses || {}).map(c => (
+                                <button key={c}
+                                    className={'lab-tab-2' + (course === c ? ' active' : '')}
+                                    onClick={() => setState({ ...state, course: c, chapter: null, section: null })}>
+                                    {c}
+                                </button>
+                            ))}
+                        </div>
+
+                        {isMath ? (
+                            <div className="lab-level-3" style={{ paddingBottom: 24, marginBottom: 28 }}>
+                                <MathematicsPlaceholder />
+                            </div>
+                        ) : (
+                            <div className="lab-level-3">
+                                {/* Nivå 3: Kapitel */}
+                                <div className="lab-mono-label" style={{ marginBottom: 12 }}>KAPITEL</div>
+                                <div className="lab-tabs-3">
+                                    {chapters.map((ch, i) => (
+                                        <button key={ch}
+                                            className={'lab-tab-3' + (chapter === ch ? ' active' : '')}
+                                            onClick={() => setState({ ...state, chapter: ch, section: null })}>
+                                            <span className="lab-tab-3-num">{String(i + 1).padStart(2, '0')}</span>
+                                            {ch}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {!chapter ? (
+                                    /* Nivå 4 (intro): visa kursintro när inget kapitel är valt. */
+                                    <div className="lab-level-4 lab-level-4-intro">
+                                        <CourseIntro
+                                            courseData={subjectData.courses[course]}
+                                            courseName={course}
+                                            chapters={chapters}
+                                            onPickChapter={(ch) => setState({ ...state, chapter: ch, section: null })}
+                                        />
+                                    </div>
+                                ) : (
+                                /* Nivå 4: Avsnitt */
+                                <div className="lab-level-4">
+                                    <aside className="lab-sections-aside">
+                                        <div className="lab-mono-label" style={{ marginBottom: 14, paddingLeft: 4 }}>
+                                            AVSNITT
+                                        </div>
+                                        {sections.map(s => (
+                                            <button key={s.num}
+                                                className={'lab-section-item' + (section === s.num ? ' active' : '')}
+                                                onClick={() => setState({ ...state, section: s.num })}>
+                                                <span className="lab-section-item-num">{s.num}</span>
+                                                <span className="lab-section-item-title">{s.title}</span>
+                                                <span className="lab-section-item-arrow">
+                                                    {section === s.num ? '●' : '→'}
+                                                </span>
+                                            </button>
+                                        ))}
+                                        <div className="lab-sections-aside-foot" />
+                                    </aside>
+
+                                    <div className="lab-section-content" ref={sectionContentRef}>
+                                        {activeSection ? (
+                                            <React.Fragment>
+                                                <div className="lab-section-content-head">
+                                                    <span className="lab-mono-label">
+                                                        Kapitel {chapterNumber} · {(chapter || '').toUpperCase()} · Avsnitt {activeSection.num}
+                                                    </span>
+                                                    <span className="lab-mono-label">
+                                                        {sectionIdx + 1} / {sections.length}
+                                                    </span>
+                                                </div>
+                                                <h2 className="lab-section-title">
+                                                    <span className="lab-section-title-num">{activeSection.num}</span>
+                                                    {activeSection.title}
+                                                </h2>
+
+                                                <div className="lab-section-cards">
+                                                    <div className="lab-card lab-card-active">
+                                                        <div className="lab-card-tag">Läsning</div>
+                                                        <div className="lab-card-title">Teori</div>
+                                                        <div className="lab-card-meta">
+                                                            {hasTeori ? 'Genomgång' : 'Kommer snart'}
+                                                        </div>
+                                                    </div>
+                                                    {activeSection.href ? (
+                                                        <a className="lab-card lab-card-clickable" href={activeSection.href}>
+                                                            <div className="lab-card-tag">Experiment</div>
+                                                            <div className="lab-card-title">Simulering</div>
+                                                            <div className="lab-card-meta">Interaktiv</div>
+                                                        </a>
+                                                    ) : (
+                                                        <div className="lab-card lab-card-disabled">
+                                                            <div className="lab-card-tag">Experiment</div>
+                                                            <div className="lab-card-title">Simulering</div>
+                                                            <div className="lab-card-meta">Kommer snart</div>
+                                                        </div>
+                                                    )}
+                                                    <div className="lab-card lab-card-disabled">
+                                                        <div className="lab-card-tag">Räkna</div>
+                                                        <div className="lab-card-title">Övningar</div>
+                                                        <div className="lab-card-meta">Kommer snart</div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="lab-teori-nav">
+                                                    <span className="lab-mono-label">
+                                                        Avsnitt {sectionIdx + 1} av {sections.length}
+                                                    </span>
+                                                    <div className="lab-section-actions-spacer" />
+                                                    <button className="lab-btn lab-btn-quiet" type="button"
+                                                        onClick={goPrev} disabled={sectionIdx <= 0}
+                                                        style={sectionIdx <= 0 ? { opacity: 0.4, cursor: 'not-allowed' } : null}>
+                                                        ← Föregående
+                                                    </button>
+                                                    <button className="lab-btn lab-btn-quiet" type="button"
+                                                        onClick={goNext} disabled={sectionIdx >= sections.length - 1}
+                                                        style={sectionIdx >= sections.length - 1 ? { opacity: 0.4, cursor: 'not-allowed' } : null}>
+                                                        Nästa →
+                                                    </button>
+                                                </div>
+
+                                                <TeoriBody id={tid} />
+
+                                                <div className="lab-section-actions" style={{ marginTop: 32, paddingTop: 14, borderTop: '1px solid var(--lab-line)' }}>
+                                                    {activeSection.href && (
+                                                        <a className="lab-btn" href={activeSection.href}>
+                                                            Simulering →
+                                                        </a>
+                                                    )}
+                                                    <div className="lab-section-actions-spacer" />
+                                                    <button className="lab-btn lab-btn-quiet" type="button"
+                                                        onClick={goPrev} disabled={sectionIdx <= 0}
+                                                        style={sectionIdx <= 0 ? { opacity: 0.4, cursor: 'not-allowed' } : null}>
+                                                        ← Föregående
+                                                    </button>
+                                                    <button className="lab-btn lab-btn-quiet" type="button"
+                                                        onClick={goNext} disabled={sectionIdx >= sections.length - 1}
+                                                        style={sectionIdx >= sections.length - 1 ? { opacity: 0.4, cursor: 'not-allowed' } : null}>
+                                                        Nästa →
+                                                    </button>
+                                                </div>
+                                            </React.Fragment>
+                                        ) : (
+                                            <p style={{ color: 'var(--lab-ink-soft)' }}>
+                                                Välj ett avsnitt i listan till vänster.
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                                )}
+                            </div>
+                        )}
+
+                        <div style={{ height: 28 }} />
+                    </div>
+                </section>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="lab-section lab-footer">
+                    <span>© 2026 FYSIKLABBET</span>
+                    <span>SKAPAD FÖR GYMNASIEELEVER</span>
+                </footer>
+            );
+        }
+
+        // Parsea URL-parametrar och hash för djuplänkar:
+        //   katalog.html?course=Fysik+1
+        //   katalog.html#fy1            → Fysik 1, kursintro
+        //   katalog.html#fy2-3          → Fysik 2, kapitel 3 (första avsnittet)
+        //   katalog.html#fy1-2.3        → Fysik 1, kapitel 2, avsnitt 2.3
+        function parseInitialState() {
+            const subject = 'Fysik';
+            const subj = K[subject];
+            const courses = Object.keys(subj.courses);
+            const out = { subject, course: courses[0] || null, chapter: null, section: null };
+
+            const params = new URLSearchParams(window.location.search);
+            const courseParam = params.get('course');
+            if (courseParam && subj.courses[courseParam]) {
+                out.course = courseParam;
+            }
+
+            const hash = (window.location.hash || '').replace(/^#/, '');
+            const m = hash.match(/^fy([12])(?:-(\d+)(?:\.(\d+))?)?$/);
+            if (m) {
+                const courseKey = m[1] === '1' ? 'Fysik 1' : 'Fysik 2';
+                if (subj.courses[courseKey]) {
+                    out.course = courseKey;
+                    if (m[2]) {
+                        const chapNum = parseInt(m[2], 10);
+                        const chapters = subj.courses[courseKey].chapters;
+                        const chKey = Object.keys(chapters)
+                            .find(k => chapters[k].number === chapNum);
+                        if (chKey) {
+                            out.chapter = chKey;
+                            if (m[3]) {
+                                const sectionId = `${chapNum}.${m[3]}`;
+                                const sec = chapters[chKey].sections
+                                    .find(s => s.num === sectionId);
+                                if (sec) out.section = sec.num;
+                                else out.section = chapters[chKey].sections[0]?.num || null;
+                            } else {
+                                out.section = chapters[chKey].sections[0]?.num || null;
+                            }
+                        }
+                    }
+                }
+            }
+            return out;
+        }
+
+        function App() {
+            const [state, setState] = useState(parseInitialState);
+
+            // Lyssna på hash-ändringar så att klick på Fysik 1/Fysik 2 i navbar
+            // (när användaren redan är på katalog.html) uppdaterar vyn.
+            useEffect(() => {
+                const onHashChange = () => setState(parseInitialState());
+                window.addEventListener('hashchange', onHashChange);
+                return () => window.removeEventListener('hashchange', onHashChange);
+            }, []);
+
+            useEffect(() => {
+                const subj = K[state.subject];
+                if (!subj) return;
+                let { course, chapter, section } = state;
+                const courses = Object.keys(subj.courses || {});
+                if (!course || !courses.includes(course)) course = courses[0] || null;
+                // chapter och section får vara null (kursintro).
+                // Bara om chapter är satt valideras att det finns; annars lämnas null.
+                if (chapter) {
+                    const chapters = course ? Object.keys(subj.courses[course].chapters || {}) : [];
+                    if (!chapters.includes(chapter)) chapter = null;
+                }
+                if (section && chapter) {
+                    const sections = subj.courses[course].chapters[chapter].sections || [];
+                    if (!sections.find(s => s.num === section)) section = sections[0]?.num || null;
+                } else if (!chapter) {
+                    section = null;
+                }
+                if (course !== state.course || chapter !== state.chapter || section !== state.section) {
+                    setState(s => ({ ...s, course, chapter, section }));
+                }
+            }, [state.subject, state.course, state.chapter, state.section]);
+
+            return (
+                <div className="lab-page">
+                    <Topbar />
+                    <Header />
+                    <Breadcrumb {...state} />
+                    <SearchBar />
+                    <Catalog state={state} setState={setState} />
+                    <Footer />
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+
+    <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+</body>
+</html>

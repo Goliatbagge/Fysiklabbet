@@ -10,16 +10,29 @@
 const fs = require('fs');
 const path = require('path');
 
-//Required navigation HTML that should be present in all simulation files
+// Required globala element som ska finnas på ALLA simuleringar
 const REQUIRED_NAV = [
+    '<link rel="stylesheet" href="styles.css">',
+    '<script src="feedback.js"'
+];
+
+// Navigation accepteras antingen som den gamla navbar-mallen eller som
+// Laborans-headern. Verifiering kräver att MINST en variant finns helt.
+const LEGACY_NAV = [
     '<nav class="navbar">',
     '<a href="index.html" class="logo">',
     '<a href="fysik1.html" class="nav-link',
     '<a href="fysik2.html" class="nav-link',
     '<a href="om.html" class="nav-link',
     '<a href="kontakt.html" class="nav-link',
-    '<link rel="stylesheet" href="styles.css">',
-    '<script src="feedback.js"'
+];
+const LABORANS_NAV = [
+    'lab-topbar--on-sim',
+    'lab-header--on-sim',
+    '<a class="lab-logo" href="index.html">',
+    '<nav class="lab-nav"',
+    '<a href="om.html">Om</a>',
+    '<a href="kontakt.html">Kontakt</a>',
 ];
 
 // Files to check
@@ -34,7 +47,6 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-tyngdfaktor-jorden.html',
     'fysik1-influens.html',
     'fysik1-magdeburgska-halvklot.html',
-    'fysik2-magnetfalt-standalone.html',
     'fysik2-magnetisk-kraft-ledare.html',
     'fysik2-vagsimulator.html',
     'fysik2-konisk-pendel.html',
@@ -66,8 +78,9 @@ const HTML_FILES_TO_CHECK = [
     'fysik2-energinivaer.html',
     'fysik1-halveringstid.html',
     'fysik1-newtons-gravitationslag.html',
-    'om.html',
-    'kontakt.html'
+    // om.html och kontakt.html använder nu Laborans-headern (inte gamla
+    // navbar-mallen) — de testas inte med samma kontroll. Samma sak gäller
+    // index.html, katalog.html, avsnitt.html, fysik1.html, fysik2.html.
 ];
 
 let hasErrors = false;
@@ -83,24 +96,29 @@ HTML_FILES_TO_CHECK.forEach(filename => {
     }
 
     const content = fs.readFileSync(filepath, 'utf-8');
-    const missingElements = [];
+    const missingGlobal = REQUIRED_NAV.filter(el => !content.includes(el));
+    const missingLegacy = LEGACY_NAV.filter(el => !content.includes(el));
+    const missingLaborans = LABORANS_NAV.filter(el => !content.includes(el));
 
-    REQUIRED_NAV.forEach(requiredElement => {
-        if (!content.includes(requiredElement)) {
-            missingElements.push(requiredElement);
-        }
-    });
+    const hasLegacy = missingLegacy.length === 0;
+    const hasLaborans = missingLaborans.length === 0;
 
-    if (missingElements.length > 0) {
+    if (missingGlobal.length > 0 || (!hasLegacy && !hasLaborans)) {
         hasErrors = true;
         console.log(`❌ ${filename} - SAKNAR navigation!`);
-        console.log(`   Saknade element:`);
-        missingElements.forEach(elem => {
-            console.log(`   - ${elem}`);
-        });
+        if (missingGlobal.length > 0) {
+            console.log(`   Saknade globala element:`);
+            missingGlobal.forEach(elem => console.log(`   - ${elem}`));
+        }
+        if (!hasLegacy && !hasLaborans) {
+            console.log(`   Ingen av navbar-varianterna är komplett.`);
+            console.log(`   Saknat i Laborans-navbar: ${missingLaborans.join(', ')}`);
+            console.log(`   Saknat i gamla navbar: ${missingLegacy.join(', ')}`);
+        }
         console.log('');
     } else {
-        console.log(`✅ ${filename} - OK`);
+        const variant = hasLaborans ? 'Laborans' : 'gammal';
+        console.log(`✅ ${filename} - OK (${variant} navbar)`);
     }
 });
 

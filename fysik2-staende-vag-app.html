@@ -5,46 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stående våg i sträng - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
 </head>
-<body class="bg-gray-900 text-white">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -235,7 +231,7 @@
                         ))}
 
                         <g id="vibrator">
-                            <rect x="-25" y={SVG_HEIGHT / 2 + 10} width="50" height="50" rx="5" className="fill-gray-600" stroke="#2d3748" strokeWidth="2" />
+                            <rect x="-25" y={SVG_HEIGHT / 2 + 10} width="50" height="50" rx="5" className="fill-gray-600" stroke="#f3eee4" strokeWidth="2" />
                             <rect x="-10" y={SVG_HEIGHT / 2 - 20} width="20" height="35" rx="3" className="fill-gray-700" />
                             <line ref={vibratorRodRef} x1="0" y1={SVG_HEIGHT / 2 + 15} x2="0" y2={SVG_HEIGHT / 2} className="stroke-gray-400" strokeWidth="8" strokeLinecap="round" />
                         </g>
@@ -252,8 +248,8 @@
                             />
 
                             <g>
-                                <circle cx={PULLEY_CENTER_X} cy={PULLEY_CENTER_Y} r={PULLEY_RADIUS} className="fill-gray-600" stroke="#2d3748" strokeWidth="2" />
-                                <circle cx={PULLEY_CENTER_X} cy={PULLEY_CENTER_Y} r={PULLEY_RADIUS-5} className="fill-none" stroke="#2d3748" strokeWidth="1.5" strokeDasharray="3 3"/>
+                                <circle cx={PULLEY_CENTER_X} cy={PULLEY_CENTER_Y} r={PULLEY_RADIUS} className="fill-gray-600" stroke="#f3eee4" strokeWidth="2" />
+                                <circle cx={PULLEY_CENTER_X} cy={PULLEY_CENTER_Y} r={PULLEY_RADIUS-5} className="fill-none" stroke="#f3eee4" strokeWidth="1.5" strokeDasharray="3 3"/>
                                 <circle cx={PULLEY_CENTER_X} cy={PULLEY_CENTER_Y} r="4" className="fill-gray-800" />
                             </g>
 
@@ -264,7 +260,7 @@
                                 height={WEIGHT_HEIGHT}
                                 rx="4"
                                 className="fill-gray-500 transition-all duration-200"
-                                stroke="#2d3748"
+                                stroke="#f3eee4"
                                 strokeWidth="2"
                             />
                         </g>
@@ -273,12 +269,20 @@
             );
         };
 
+        // STEG C — canvas-tema (V1/V2/V3 jämförelse)
+        const CANVAS_THEMES = {
+            morkRymd:   { label: 'Mörk rymd' },
+            ljusPapper: { label: 'Ljus papper' },
+            pergament:  { label: 'Pergament' },
+        };
+
         const App = () => {
             const [frequency, setFrequency] = useState(5.0);
             const [amplitudeScale, setAmplitudeScale] = useState(1.0);
             const [length, setLength] = useState(5.0);
             const [mass, setMass] = useState(0.15);
             const [isAudioOn, setIsAudioOn] = useState(false);
+            const [canvasTheme, setCanvasTheme] = useState('morkRymd');
 
             const LINEAR_DENSITY = 0.002;
             const GRAVITY = 9.81;
@@ -403,7 +407,34 @@
                         </header>
 
                         <main className="space-y-8">
-                            <div className="bg-gray-900/50 rounded-lg p-4">
+                            {/* STEG C — experimentell tema-väljare för canvas-bakgrunden.
+                                Tas bort när du valt vilken variant som blir default. */}
+                            <div className="flex flex-wrap items-center gap-3 px-3 py-2 rounded"
+                                 style={{border:'1px solid var(--lab-line-strong)', background:'var(--lab-bg)'}}>
+                                <span className="text-xs font-semibold uppercase tracking-wide"
+                                      style={{color:'var(--lab-ink-soft)', fontFamily:'var(--lab-font-mono)'}}>
+                                    Canvas-tema (test)
+                                </span>
+                                <div className="inline-flex gap-1 rounded p-1"
+                                     style={{background:'var(--lab-bg)', border:'1px solid var(--lab-line-strong)'}}>
+                                    {Object.entries(CANVAS_THEMES).map(([key, t]) => (
+                                        <button key={key} onClick={() => setCanvasTheme(key)}
+                                                className="px-3 py-1 text-xs rounded transition-colors"
+                                                style={{
+                                                    background: canvasTheme === key ? 'var(--lab-ink)' : 'transparent',
+                                                    color: canvasTheme === key ? 'var(--lab-bg)' : 'var(--lab-ink-soft)',
+                                                    fontFamily: 'var(--lab-font-sans)',
+                                                    fontWeight: 500,
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                }}>
+                                            {t.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="wave-stage" data-theme={canvasTheme}>
                                 <WaveDisplay
                                     length={length}
                                     frequency={frequency}

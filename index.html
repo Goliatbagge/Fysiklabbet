@@ -106,8 +106,21 @@
             const matches = useMemo(() => {
                 const q = normalize(query.trim());
                 if (!q) return [];
-                const terms = q.split(/\s+/);
-                return KF.filter((_, i) => terms.every(t => HAYSTACKS[i].includes(t)));
+                const terms = q.split(/\s+/).filter(t => t.length > 0);
+                if (terms.length === 0) return [];
+                const filtered = KF.filter((_, i) => {
+                    const hay = HAYSTACKS[i] || '';
+                    return terms.every(t => hay.includes(t));
+                });
+                const out = [];
+                for (const sim of filtered) {
+                    const code = sim.course === 'Fysik 2' ? 'fy2' : 'fy1';
+                    out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
+                    if (sim.href) {
+                        out.push({ ...sim, kind: 'sim', resultHref: sim.href });
+                    }
+                }
+                return out;
             }, [query]);
 
             useEffect(() => { setActiveIdx(matches.length > 0 ? 0 : -1); }, [matches.length, query]);
@@ -125,7 +138,7 @@
                 if (!open || matches.length === 0) return;
                 if (e.key === 'ArrowDown') { e.preventDefault(); setActiveIdx((activeIdx + 1) % matches.length); }
                 else if (e.key === 'ArrowUp') { e.preventDefault(); setActiveIdx((activeIdx - 1 + matches.length) % matches.length); }
-                else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); window.location.href = matches[activeIdx].href; }
+                else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); window.location.href = matches[activeIdx].resultHref; }
                 else if (e.key === 'Escape') { setQuery(''); setOpen(false); e.target.blur(); }
             };
 
@@ -149,12 +162,19 @@
                             <div className="lab-search-empty">Inget matchar "{query}"</div>
                         )}
                         {open && matches.map((sim, idx) => (
-                            <a key={sim.href} href={sim.href}
+                            <a key={`${sim.course}-${sim.num}-${sim.kind}`} href={sim.resultHref}
                                 className={'lab-search-result' + (idx === activeIdx ? ' active' : '')}
                                 role="option" onMouseEnter={() => setActiveIdx(idx)}>
-                                <span className="lab-search-result-icon">{sim.icon}</span>
+                                <span className="lab-search-result-icon">
+                                    {sim.kind === 'teori' ? '📖' : sim.icon}
+                                </span>
                                 <div>
-                                    <div className="lab-search-result-title">{sim.title}</div>
+                                    <div className="lab-search-result-title">
+                                        <span className="lab-search-result-kind">
+                                            {sim.kind === 'teori' ? 'Teori' : 'Simulering'}
+                                        </span>
+                                        {sim.title}
+                                    </div>
                                     <div className="lab-search-result-desc">{sim.description}</div>
                                 </div>
                                 <div className="lab-search-result-meta">

@@ -746,9 +746,25 @@
                                                 </div>
                                             </React.Fragment>
                                         ) : (
-                                            <p style={{ color: 'var(--lab-ink-soft)' }}>
-                                                Välj ett avsnitt i listan till vänster.
-                                            </p>
+                                            <div className="lab-chapter-intro">
+                                                <div className="lab-section-content-head">
+                                                    <span className="lab-mono-label">
+                                                        Kapitel {chapterNumber} · {(chapter || '').toUpperCase()}
+                                                    </span>
+                                                    <span className="lab-mono-label">
+                                                        {sections.length} avsnitt
+                                                    </span>
+                                                </div>
+                                                <h2 className="lab-section-title">{chapter}</h2>
+                                                {subjectData.courses[course]?.chapters[chapter]?.intro && (
+                                                    <p className="lab-chapter-intro-text">
+                                                        {subjectData.courses[course].chapters[chapter].intro}
+                                                    </p>
+                                                )}
+                                                <p className="lab-chapter-intro-hint">
+                                                    Välj ett avsnitt i listan till vänster för att börja läsa.
+                                                </p>
+                                            </div>
                                         )}
                                     </div>
                                 </div>

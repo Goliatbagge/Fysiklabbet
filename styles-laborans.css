@@ -712,7 +712,9 @@ body.laborans a {
 .lab-tabs-3 {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    align-items: baseline;
+    column-gap: 0;
+    row-gap: 8px;
     padding-bottom: 18px;
     border-bottom: 1px solid var(--lab-line);
 }
@@ -720,32 +722,46 @@ body.laborans a {
 .lab-tab-3 {
     background: transparent;
     color: var(--lab-ink-soft);
-    border: 1px solid var(--lab-line);
-    padding: 9px 16px;
+    border: none;
+    padding: 4px 14px;
     font-size: 14px;
     font-family: var(--lab-font-sans);
     cursor: pointer;
-    border-radius: 999px;
     letter-spacing: -0.005em;
     display: inline-flex;
     align-items: baseline;
     gap: 8px;
-    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+    position: relative;
+    transition: color 0.15s ease;
+    line-height: 1.5;
 }
 
-.lab-tab-3:hover {
-    background: var(--lab-bg-panel);
-    color: var(--lab-ink);
-    border-color: var(--lab-line-strong);
-    transform: translateY(-1px);
+.lab-tab-3:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 30%;
+    bottom: 30%;
+    width: 1px;
+    background: var(--lab-line);
+    pointer-events: none;
 }
+
+.lab-tab-3:hover { color: var(--lab-ink); }
 
 .lab-tab-3.active {
-    background: var(--lab-bg-panel);
     color: var(--lab-ink);
-    border-color: var(--lab-accent);
-    box-shadow: 0 0 0 1px var(--lab-accent) inset;
     font-weight: 600;
+}
+
+.lab-tab-3.active::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: -19px;
+    height: 2px;
+    background: var(--lab-accent);
 }
 
 .lab-tab-3-num {
@@ -1780,3 +1796,24 @@ button.lab-card-disabled { pointer-events: none; }
 }
 
 .lab-term-tooltip.visible { opacity: 1; }
+
+/* Kapitel-intro (visas innan ett avsnitt har valts) */
+.lab-chapter-intro {
+    padding: 8px 0;
+}
+
+.lab-chapter-intro-text {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--lab-ink-soft);
+    margin: 8px 0 28px;
+    max-width: 64ch;
+}
+
+.lab-chapter-intro-hint {
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--lab-ink-muted);
+    margin: 0;
+}

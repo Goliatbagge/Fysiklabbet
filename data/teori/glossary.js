@@ -1,0 +1,201 @@
+// Ordlista över fysikaliska begrepp för auto-taggning i teori-avsnitten.
+// Varje post: { forms: [böjningsformer], tip: 'kort förklaring' }
+// Fysikvariabler kursiveras med *X* i tip (build.js gör om till <em>).
+//
+// Tag-skriptet (.claude/tag-glossary.js) markerar FÖRSTA förekomsten av
+// varje term i varje .md-fil med [[term|tip]]-syntax. Idempotent.
+//
+// För att lägga till nytt begrepp: skriv post nedan. För synonymer (t.ex.
+// tyngdkraft = gravitationskraft) lägg båda i samma post om de delar tip.
+// Mer specifika termer (längst) ska komma FÖRE mer allmänna (kortast)
+// så att t.ex. "tyngdacceleration" markeras före "acceleration".
+
+module.exports = [
+    // ── Rörelse och kinematik
+    { forms: ['medelacceleration', 'medelaccelerationen'],
+      tip: 'Den genomsnittliga accelerationen över ett tidsintervall: hastighetsändringen Δ*v* delat med tidsintervallet Δ*t*.' },
+    { forms: ['tyngdacceleration', 'tyngdaccelerationen'],
+      tip: 'Den acceleration ett fritt fallande föremål får av tyngdkraften, ca 9,82 m/s² vid jordens yta. Betecknas *g*.' },
+    { forms: ['acceleration', 'accelerationen'],
+      tip: 'Hur snabbt hastigheten ändras. SI-enhet m/s². En vektorstorhet.' },
+    { forms: ['medelhastighet', 'medelhastigheten'],
+      tip: 'Genomsnittlig hastighet under ett tidsintervall: sträckan Δ*s* delat med tiden Δ*t*.' },
+    { forms: ['medelfart', 'medelfarten'],
+      tip: 'Total tillryggalagd sträcka delat med total tid. Saknar riktning (skalär).' },
+    { forms: ['hastighet', 'hastigheten', 'hastigheter'],
+      tip: 'Förflyttning per tidsenhet, med riktning (vektor). SI-enhet m/s.' },
+    { forms: ['fart', 'farten'],
+      tip: 'Hastighetens storlek utan riktning (skalär). Mäts i m/s eller km/h.' },
+    { forms: ['retardation', 'retardationen'],
+      tip: 'Negativ acceleration — när ett föremåls hastighet minskar (inbromsning).' },
+    { forms: ['fritt fall', 'fria fallet'],
+      tip: 'När ett föremål faller helt utan luftmotstånd, så att endast tyngdkraften påverkar det. Alla föremål faller då lika fort oavsett massa.' },
+    { forms: ['luftmotstånd', 'luftmotståndet'],
+      tip: 'Kraften från luften som bromsar föremål i rörelse genom luften. Beror på föremålets form, storlek och hastighet.' },
+    { forms: ['begynnelsehastighet', 'begynnelsehastigheten', 'starthastighet', 'starthastigheten', 'utgångshastighet', 'utgångshastigheten'],
+      tip: 'Hastigheten vid tidpunkten *t* = 0 (när rörelsen börjar). Betecknas *v*₀.' },
+    { forms: ['förflyttning', 'förflyttningen'],
+      tip: 'Vektorn mellan start- och slutposition. Skiljer sig från sträcka, som är total väglängd.' },
+    { forms: ['sträcka', 'sträckan'],
+      tip: 'Total väglängd ett föremål rört sig. Skalär storhet, mäts i meter.' },
+
+    // ── Krafter och Newtons lagar
+    { forms: ['gravitationskraft', 'gravitationskraften'],
+      tip: 'Den kraft som verkar mellan alla massor. På jordytan kallas den tyngdkraft.' },
+    { forms: ['tyngdkraft', 'tyngdkraften'],
+      tip: 'Den kraft som jorden drar alla föremål mot sitt centrum. Tyngdkraften ger ett föremål dess vikt och är riktad rakt nedåt mot jordens medelpunkt.' },
+    { forms: ['normalkraft', 'normalkraften'],
+      tip: 'Den kraft ett underlag utövar vinkelrätt mot ett föremål som vilar på det.' },
+    { forms: ['friktion', 'friktionen', 'friktionskraft', 'friktionskraften'],
+      tip: 'Kraften som motverkar rörelse mellan två ytor i kontakt.' },
+    { forms: ['spännkraft', 'spännkraften', 'spännkrafter'],
+      tip: 'Kraften som verkar längs ett spänt rep, en lina eller en fjäder.' },
+    { forms: ['resulterande kraft', 'resulterande kraften'],
+      tip: 'Summan av alla krafter som verkar på ett föremål (vektorsumma). Ger föremålets acceleration.' },
+    { forms: ['tröghet', 'trögheten'],
+      tip: 'Ett föremåls motstånd mot förändring av sin rörelse. Större massa → större tröghet.' },
+    { forms: ['jämvikt', 'jämvikten'],
+      tip: 'När den resulterande kraften på ett föremål är noll. Föremålet är då i vila eller likformig rörelse.' },
+    { forms: ['kraft', 'kraften', 'krafter', 'krafterna'],
+      tip: 'Påverkan som kan ändra ett föremåls rörelse eller form. SI-enhet newton (N). Vektorstorhet.' },
+    { forms: ['Newtons första lag', 'tröghetslagen'],
+      tip: 'En kropp förblir i vila eller likformig rörelse om resulterande kraft är noll.' },
+    { forms: ['Newtons andra lag'],
+      tip: 'Resulterande kraft = massa × acceleration: *F* = *m* · *a*.' },
+    { forms: ['Newtons tredje lag'],
+      tip: 'Till varje kraft (aktion) finns en lika stor och motriktad kraft (reaktion).' },
+
+    // ── Storheter och vektorer
+    { forms: ['vektor', 'vektorn', 'vektorer', 'vektorerna'],
+      tip: 'En storhet med både storlek och riktning, t.ex. hastighet, kraft eller acceleration. Skiljer sig från en skalär som bara har storlek.' },
+    { forms: ['skalär', 'skalären', 'skalärer'],
+      tip: 'En storhet med bara storlek, utan riktning. T.ex. tid, massa, energi, temperatur.' },
+    { forms: ['storhet', 'storheter', 'storheten', 'storheterna'],
+      tip: 'En egenskap som kan mätas med ett tal och en enhet, t.ex. sträcka, tid, kraft.' },
+    { forms: ['SI-systemet', 'SI-enheter', 'SI-enhet', 'SI-enheten'],
+      tip: 'Internationella enhetssystemet med sju grundenheter (m, kg, s, A, K, mol, cd).' },
+
+    // ── Energi och arbete
+    { forms: ['kinetisk energi', 'rörelseenergi', 'rörelseenergin'],
+      tip: 'Energin ett föremål har på grund av sin rörelse: *E*ₖ = ½ · *m* · *v*².' },
+    { forms: ['potentiell energi', 'lägesenergi', 'lägesenergin'],
+      tip: 'Energin ett föremål har på grund av sin position i ett kraftfält, t.ex. *E*ₚ = *m* · *g* · *h* i gravitationsfält.' },
+    { forms: ['mekanisk energi', 'mekaniska energin'],
+      tip: 'Summan av rörelseenergi och lägesenergi i ett system.' },
+    { forms: ['arbete', 'arbetet'],
+      tip: 'Energi som överförs när en kraft verkar längs en sträcka: *W* = *F* · *s* · cos *α*. SI-enhet joule (J).' },
+    { forms: ['effekt', 'effekten'],
+      tip: 'Arbete eller energi per tidsenhet: *P* = *W* / *t*. SI-enhet watt (W).' },
+    { forms: ['energiprincipen', 'energins bevarande'],
+      tip: 'Energi kan varken skapas eller förstöras, bara omvandlas mellan olika former.' },
+
+    // ── Tryck och densitet
+    { forms: ['densitet', 'densiteten'],
+      tip: 'Massa per volymenhet: *ρ* = *m* / *V*. SI-enhet kg/m³. Avgör om ett föremål flyter i ett medium.' },
+    { forms: ['tryck', 'trycket'],
+      tip: 'Kraft per areaenhet: *p* = *F* / *A*. SI-enhet pascal (Pa) = N/m².' },
+    { forms: ['atmosfärstryck', 'atmosfärstrycket', 'lufttryck', 'lufttrycket'],
+      tip: 'Trycket från jordens atmosfär. Vid havsytan ca 101 325 Pa (1 atm).' },
+    { forms: ['Arkimedes princip'],
+      tip: 'Ett föremål som sänks ner i en vätska påverkas av en lyftkraft lika stor som tyngden av den undanträngda vätskan.' },
+    { forms: ['lyftkraft', 'lyftkraften'],
+      tip: 'Den uppåtriktade kraften från en vätska eller gas på ett föremål som är nedsänkt i den.' },
+
+    // ── Värme och termodynamik
+    { forms: ['temperatur', 'temperaturen'],
+      tip: 'Mått på hur snabbt atomerna/molekylerna rör sig i ett ämne. SI-enhet kelvin (K).' },
+    { forms: ['värme', 'värmen', 'värmeenergi', 'värmeenergin'],
+      tip: 'Energi som överförs mellan föremål med olika temperatur. Mäts i joule (J).' },
+    { forms: ['specifik värmekapacitet', 'specifika värmekapaciteten'],
+      tip: 'Hur mycket energi som krävs för att höja temperaturen 1 K på 1 kg av ett ämne. Enhet: J/(kg·K).' },
+    { forms: ['absoluta nollpunkten'],
+      tip: 'Den lägsta möjliga temperaturen, 0 K = −273,15 °C. Där upphör all termisk rörelse.' },
+
+    // ── Elektricitet
+    { forms: ['Coulombs lag'],
+      tip: 'Kraften mellan två punktladdningar: *F* = *k* · *Q*₁ · *Q*₂ / *r*². Avtar med kvadraten på avståndet.' },
+    { forms: ['elektrisk laddning', 'elektriska laddningen', 'elektriska laddningar'],
+      tip: 'Grundläggande egenskap hos materia, kan vara positiv eller negativ. SI-enhet coulomb (C).' },
+    { forms: ['elektriskt fält', 'elektriska fältet'],
+      tip: 'Område runt en laddning där en annan laddning påverkas av en elektrisk kraft.' },
+    { forms: ['spänning', 'spänningen'],
+      tip: 'Energiskillnad per laddning mellan två punkter. SI-enhet volt (V).' },
+    { forms: ['ström', 'strömmen'],
+      tip: 'Laddningsmängd per tidsenhet: *I* = *Q* / *t*. SI-enhet ampere (A).' },
+    { forms: ['resistans', 'resistansen'],
+      tip: 'Motstånd mot elektrisk ström. Enligt Ohms lag: *U* = *R* · *I*. SI-enhet ohm (Ω).' },
+    { forms: ['Ohms lag'],
+      tip: 'Sambandet mellan spänning, ström och resistans: *U* = *R* · *I*.' },
+    { forms: ['Kirchhoffs lagar'],
+      tip: 'Två lagar för elektriska kretsar: summan av strömmar in i en nod är noll, och summan av spänningar runt en sluten slinga är noll.' },
+
+    // ── Magnetism och elektromagnetism
+    { forms: ['magnetfält', 'magnetfältet'],
+      tip: 'Område runt en magnet eller strömförande ledare där andra magnetiska föremål påverkas av en kraft.' },
+    { forms: ['induktion', 'induktionen'],
+      tip: 'När ett varierande magnetfält genererar en elektrisk spänning i en ledare. Grunden för generatorer.' },
+    { forms: ['magnetiskt flöde', 'magnetiska flödet'],
+      tip: 'Mängden magnetfält som passerar genom en yta: *Φ* = *B* · *A* · cos *α*. SI-enhet weber (Wb).' },
+
+    // ── Vågor och optik
+    { forms: ['våglängd', 'våglängden'],
+      tip: 'Avståndet mellan två vågtoppar (eller andra likadana punkter) i en våg. Betecknas *λ*. SI-enhet meter (m).' },
+    { forms: ['frekvens', 'frekvensen'],
+      tip: 'Antal svängningar per sekund. SI-enhet hertz (Hz) = 1/s.' },
+    { forms: ['amplitud', 'amplituden'],
+      tip: 'En vågs maximala utslag från jämviktsläget.' },
+    { forms: ['period', 'perioden', 'periodtid', 'periodtiden'],
+      tip: 'Tiden för en hel svängning eller en hel vågrörelse: *T* = 1 / *f*.' },
+    { forms: ['brytning', 'brytningen'],
+      tip: 'När ljus eller andra vågor ändrar riktning vid övergången mellan två medier med olika hastighet.' },
+    { forms: ['interferens', 'interferensen'],
+      tip: 'När två vågor möts och förstärker eller släcker ut varandra beroende på fasläge.' },
+    { forms: ['diffraktion', 'diffraktionen'],
+      tip: 'När vågor böjs runt hörn eller sprids efter att ha passerat en smal öppning.' },
+    { forms: ['Snells lag'],
+      tip: 'Brytningslagen: *n*₁ · sin *i* = *n*₂ · sin *b*. Beskriver hur ljus bryts vid övergång mellan medier.' },
+
+    // ── Kärnfysik
+    { forms: ['halveringstid', 'halveringstiden'],
+      tip: 'Tiden det tar för hälften av atomkärnorna i ett radioaktivt prov att sönderfalla.' },
+    { forms: ['radioaktivitet', 'radioaktiviteten'],
+      tip: 'Spontant sönderfall av instabila atomkärnor under utsändning av strålning (α, β eller γ).' },
+    { forms: ['masstal', 'masstalet'],
+      tip: 'Det totala antalet protoner och neutroner i en atomkärna. Betecknas *A*.' },
+    { forms: ['atomnummer', 'atomnumret'],
+      tip: 'Antalet protoner i en atomkärna. Bestämmer vilket grundämne det är. Betecknas *Z*.' },
+    { forms: ['isotop', 'isotopen', 'isotoper'],
+      tip: 'Atomer av samma grundämne (samma *Z*) men med olika antal neutroner (olika *A*).' },
+    { forms: ['massdefekt', 'massdefekten'],
+      tip: 'Skillnaden mellan massan hos en atomkärna och summan av massorna hos dess byggstenar. Motsvarar bindningsenergin via *E* = *m* · *c*².' },
+    { forms: ['fission', 'fissionen', 'klyvning', 'klyvningen'],
+      tip: 'När en tung atomkärna delas i två lättare kärnor och frigör energi. Sker i kärnkraftverk.' },
+    { forms: ['fusion', 'fusionen'],
+      tip: 'När två lätta atomkärnor smälter samman till en tyngre och frigör energi. Sker i solen.' },
+
+    // ── Modern fysik
+    { forms: ['foton', 'fotonen', 'fotoner'],
+      tip: 'En kvant av elektromagnetisk strålning. Bär energi *E* = *h* · *f* där *h* är Plancks konstant.' },
+    { forms: ['fotoelektrisk effekt', 'fotoelektriska effekten'],
+      tip: 'När ljus får elektroner att frigöras från en metallyta. Förklaras av att ljus består av fotoner med energi *E* = *h* · *f*.' },
+    { forms: ['Plancks konstant', 'Plancks konstanten'],
+      tip: 'Naturkonstant *h* ≈ 6,626 · 10⁻³⁴ J·s. Förbinder en fotons energi med dess frekvens.' },
+    { forms: ['svartkroppsstrålning', 'svartkroppsstrålningen'],
+      tip: 'Den värmestrålning ett idealiskt absorberande och utsändande föremål avger, med spektrum som beror endast på temperatur.' },
+    { forms: ['Wiens förskjutningslag'],
+      tip: 'Toppvåglängden för svartkroppsstrålning är omvänt proportionell mot temperaturen: *λ*ₘₐₓ · *T* = konstant.' },
+
+    // ── Pendlar och svängningar
+    { forms: ['pendel', 'pendeln', 'pendlar'],
+      tip: 'Föremål som svänger fram och tillbaka runt ett jämviktsläge. Plan pendel: *T* = 2*π* · √(*L* / *g*).' },
+    { forms: ['harmonisk svängning', 'harmoniska svängningen'],
+      tip: 'En svängning där återställande kraften är proportionell mot utslaget från jämviktsläget.' },
+    { forms: ['centripetalkraft', 'centripetalkraften'],
+      tip: 'Den kraft som krävs för att hålla ett föremål i cirkulär rörelse, riktad mot cirkelns centrum.' },
+
+    // ── Allmänt och matematik
+    { forms: ['lutning', 'lutningen'],
+      tip: 'Hur brant en linje stiger i en graf — Δ*y* / Δ*x*. För *s-t*-graf är lutningen hastigheten.' },
+    { forms: ['konstant'],
+      tip: 'Ett värde som inte ändras. T.ex. tyngdaccelerationen *g* eller ljusets hastighet *c*.' },
+];

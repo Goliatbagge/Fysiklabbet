@@ -61,11 +61,20 @@
         };
         const SUP_RE = /[⁻⁺⁰¹²³⁴-⁹⁽⁾ⁿ]+/g;
         function preprocessSuperscripts(md) {
-            return md.replace(SUP_RE, (run) => {
+            // Skydda HTML-attributvärden (t.ex. data-tip="...m/s²...") så att
+            // ² inte konverteras till "<sup>2</sup>" som plain text i tooltip.
+            const tokens = [];
+            md = md.replace(/\b(data-tip|title|aria-label)="([^"]*)"/g, (m) => {
+                tokens.push(m);
+                return '@@ATTR' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(SUP_RE, (run) => {
                 let ascii = '';
                 for (const ch of run) ascii += (SUP_MAP[ch] || ch);
                 return '<sup>' + ascii + '</sup>';
             });
+            md = md.replace(/@@ATTR(\d+)@@/g, (_, i) => tokens[+i]);
+            return md;
         }
 
         // --- Markdown-preprocessor: gruppera deluppgifter (a/b/c/d-frågor).
@@ -478,5 +487,47 @@
     </script>
 
     <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+
+    <!-- Tooltip för fysikaliska begrepp (.lab-term med data-tip) -->
+    <script>
+    (function () {
+        let tip = null;
+        function ensureTip() {
+            if (tip) return tip;
+            tip = document.createElement('div');
+            tip.className = 'lab-term-tooltip';
+            document.body.appendChild(tip);
+            return tip;
+        }
+        function position(e) {
+            if (!tip) return;
+            const offset = 16;
+            const rect = tip.getBoundingClientRect();
+            let x = e.clientX + offset;
+            let y = e.clientY + offset;
+            if (x + rect.width > window.innerWidth - 8)  x = e.clientX - rect.width - offset;
+            if (y + rect.height > window.innerHeight - 8) y = e.clientY - rect.height - offset;
+            if (x < 8) x = 8;
+            if (y < 8) y = 8;
+            tip.style.left = x + 'px';
+            tip.style.top = y + 'px';
+        }
+        document.addEventListener('mouseover', (e) => {
+            const t = e.target.closest && e.target.closest('.lab-term');
+            if (!t) return;
+            ensureTip().innerHTML = t.dataset.tip || '';
+            tip.classList.add('visible');
+            position(e);
+        });
+        document.addEventListener('mousemove', (e) => {
+            if (tip && tip.classList.contains('visible')) position(e);
+        });
+        document.addEventListener('mouseout', (e) => {
+            const from = e.target.closest && e.target.closest('.lab-term');
+            const to = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.lab-term');
+            if (from && from !== to && tip) tip.classList.remove('visible');
+        });
+    })();
+    </script>
 </body>
 </html>

@@ -1,0 +1,1692 @@
+/*
+ * Fysiklabbet — Laborans-tema (pappersljust katalog).
+ *
+ * Används av nya katalogsidan (index.html). Existerande simuleringar
+ * fortsätter att använda styles.css (mörkt tema). När fas 2 startar och
+ * navigationen ska spridas till simuleringssidor kan vi inkludera detta
+ * stylesheet TILLSAMMANS med styles.css för att få Laborans-navbar ovan
+ * den befintliga mörka simuleringsytan.
+ *
+ * Källa för designen: design/exempel/Fliksystem Laborans.html
+ */
+
+:root {
+    /* Färgpalett — pappersljust katalog */
+    --lab-bg:          #f3eee4;  /* pappersgul bakgrund */
+    --lab-bg-raised:   #ebe4d4;  /* upphöjda paneler, fliksystem */
+    --lab-bg-panel:    #ffffff;  /* vita kort, aktiva paneler */
+    --lab-ink:         #0f1620;  /* primär text */
+    --lab-ink-soft:    #3f4a5c;  /* sekundär text */
+    --lab-ink-muted:   #8a8579;  /* mono-etiketter, breadcrumb */
+    --lab-line:        rgba(15, 22, 32, 0.12);  /* tunna linjer */
+    --lab-line-strong: rgba(15, 22, 32, 0.28);  /* tydliga linjer, flikkanter */
+    --lab-accent:      #c8324a;  /* primär accent (italic, aktiva markeringar) */
+    --lab-accent-soft: rgba(200, 50, 74, 0.10);
+    --lab-accent-2:    #1c3d6b;  /* djupblå sekundär */
+
+    /* Teckensnitt */
+    --lab-font-sans:    "DM Sans", "Söhne", -apple-system, system-ui, sans-serif;
+    --lab-font-mono:    "JetBrains Mono", ui-monospace, "Menlo", monospace;
+    --lab-font-display: "Instrument Serif", "Fraunces", "Times New Roman", serif;
+}
+
+/* Bas — endast aktivt när body har .laborans-klassen så att vi inte
+   påverkar simuleringssidor som råkar inkludera denna fil. */
+
+body.laborans {
+    margin: 0;
+    padding: 0;
+    background: var(--lab-bg);
+    color: var(--lab-ink);
+    font-family: var(--lab-font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.laborans *,
+body.laborans *::before,
+body.laborans *::after {
+    box-sizing: border-box;
+}
+
+body.laborans button {
+    font: inherit;
+}
+
+body.laborans a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Topp-band (mono small caps) */
+
+.lab-topbar {
+    background: var(--lab-ink);
+    color: var(--lab-bg);
+    padding: 8px 0;
+}
+
+.lab-topbar-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 56px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--lab-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+}
+
+/* Logotyp-rad (under topp-bandet) */
+
+.lab-header {
+    border-bottom: 2px solid var(--lab-ink);
+}
+
+.lab-header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.lab-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--lab-ink);
+    cursor: pointer;
+}
+
+.lab-logo-text {
+    font-family: var(--lab-font-display);
+    font-size: 26px;
+    letter-spacing: -0.01em;
+}
+
+.lab-nav {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+}
+
+.lab-nav a {
+    color: var(--lab-ink);
+    cursor: pointer;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+}
+
+.lab-nav a:hover,
+.lab-nav a.active {
+    border-bottom-color: var(--lab-accent);
+}
+
+/* Breadcrumb (mono) */
+
+.lab-breadcrumb {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 56px 4px;
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    color: var(--lab-ink-muted);
+    letter-spacing: 0.14em;
+}
+
+.lab-breadcrumb-sep {
+    margin: 0 8px;
+    color: var(--lab-ink-soft);
+}
+
+.lab-breadcrumb-current {
+    color: var(--lab-ink);
+}
+
+.lab-breadcrumb-tail {
+    color: var(--lab-accent);
+}
+
+/* Hero (display-rubrik) */
+
+.lab-hero {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 8px 56px 24px;
+}
+
+.lab-hero-title {
+    font-family: var(--lab-font-display);
+    font-size: 64px;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin: 0;
+}
+
+.lab-hero-title em {
+    font-style: italic;
+    color: var(--lab-accent);
+}
+
+.lab-hero-lead {
+    font-size: 15px;
+    color: var(--lab-ink-soft);
+    margin-top: 12px;
+    max-width: 620px;
+    line-height: 1.55;
+}
+
+/* Mono-etikett ("NIVÅ 1", "KAPITEL", "AVSNITT" etc.) */
+
+.lab-mono-label {
+    font-family: var(--lab-font-mono);
+    font-size: 10px;
+    color: var(--lab-ink-muted);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+/* Knappar */
+
+.lab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--lab-line-strong);
+    background: transparent;
+    color: var(--lab-ink);
+    padding: 12px 22px;
+    font-size: 14px;
+    font-family: var(--lab-font-sans);
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.lab-btn:hover {
+    background: var(--lab-bg-raised);
+}
+
+.lab-btn-primary {
+    background: var(--lab-accent);
+    color: #fff;
+    border-color: var(--lab-accent);
+    font-weight: 600;
+}
+
+.lab-btn-primary:hover {
+    background: #b22a3f;
+    border-color: #b22a3f;
+}
+
+.lab-btn-quiet {
+    border-color: var(--lab-line);
+    color: var(--lab-ink-soft);
+    padding: 12px 16px;
+    font-size: 13px;
+}
+
+/* Footer */
+
+.lab-footer {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 56px 48px;
+    border-top: 1px solid var(--lab-line);
+    color: var(--lab-ink-muted);
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 40px;
+}
+
+/* Responsiv padding på smala skärmar */
+
+@media (max-width: 720px) {
+    .lab-topbar-inner,
+    .lab-header-inner,
+    .lab-breadcrumb,
+    .lab-hero,
+    .lab-footer {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .lab-hero-title {
+        font-size: 44px;
+    }
+
+    .lab-nav {
+        gap: 18px;
+        font-size: 12px;
+    }
+
+    .lab-topbar-inner {
+        font-size: 9px;
+        gap: 12px;
+    }
+}
+
+/* =========================================================
+   Sektioner och delade komponenter
+   ========================================================= */
+
+.lab-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.lab-section {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 56px;
+}
+
+@media (max-width: 720px) {
+    .lab-section { padding: 0 24px; }
+}
+
+/* Välkomst-hero (startsidan) */
+
+.lab-welcome {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 64px 56px 32px;
+    width: 100%;
+}
+
+.lab-welcome-title {
+    font-family: var(--lab-font-display);
+    font-size: 88px;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 0;
+}
+
+.lab-welcome-title em {
+    font-style: italic;
+    color: var(--lab-accent);
+}
+
+.lab-welcome-lead {
+    font-size: 18px;
+    color: var(--lab-ink-soft);
+    margin-top: 18px;
+    max-width: 640px;
+    line-height: 1.55;
+}
+
+.lab-welcome-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+    .lab-welcome { padding: 40px 24px 24px; }
+    .lab-welcome-title { font-size: 52px; }
+}
+
+/* Katalogsidans pageheader */
+
+.lab-katalog-header {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 12px 56px 24px;
+    width: 100%;
+}
+
+.lab-katalog-title {
+    font-family: var(--lab-font-display);
+    font-size: 64px;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin: 0;
+}
+
+.lab-katalog-lead {
+    font-size: 15px;
+    color: var(--lab-ink-soft);
+    margin-top: 12px;
+    max-width: 620px;
+    line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+    .lab-katalog-header { padding: 8px 24px 20px; }
+    .lab-katalog-title { font-size: 44px; }
+}
+
+/* Söksektion */
+
+.lab-search {
+    margin: 8px auto 0;
+    position: relative;
+}
+
+.lab-search-input-wrap {
+    display: flex;
+    align-items: center;
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    padding: 0 14px;
+    transition: border-color 0.15s ease;
+}
+
+.lab-search-input-wrap:focus-within {
+    border-color: var(--lab-accent);
+}
+
+.lab-search-icon {
+    font-family: var(--lab-font-mono);
+    color: var(--lab-ink-muted);
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.lab-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 14px 0;
+    font-size: 15px;
+    font-family: var(--lab-font-sans);
+    color: var(--lab-ink);
+    outline: none;
+}
+
+.lab-search-input::placeholder {
+    color: var(--lab-ink-muted);
+    font-family: var(--lab-font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+}
+
+.lab-search-clear {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--lab-ink-muted);
+    padding: 4px 8px;
+}
+
+.lab-search-clear:hover { color: var(--lab-accent); }
+
+.lab-search-results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    max-height: 480px;
+    overflow-y: auto;
+    z-index: 20;
+    display: none;
+}
+
+.lab-search-results.visible { display: block; }
+
+.lab-search-result {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 14px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--lab-line);
+    cursor: pointer;
+    align-items: baseline;
+    transition: background 0.1s ease;
+}
+
+.lab-search-result:last-child { border-bottom: none; }
+
+.lab-search-result.active,
+.lab-search-result:hover { background: var(--lab-bg-raised); }
+
+.lab-search-result-icon { font-size: 22px; }
+
+.lab-search-result-title {
+    font-family: var(--lab-font-display);
+    font-size: 18px;
+    color: var(--lab-ink);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+}
+
+.lab-search-result-desc {
+    font-size: 13px;
+    color: var(--lab-ink-soft);
+    margin-top: 2px;
+    line-height: 1.45;
+}
+
+.lab-search-result-meta {
+    font-family: var(--lab-font-mono);
+    font-size: 10px;
+    color: var(--lab-ink-muted);
+    letter-spacing: 0.14em;
+    text-align: right;
+}
+
+.lab-search-empty {
+    padding: 16px 18px;
+    color: var(--lab-ink-muted);
+    font-size: 14px;
+}
+
+/* Senaste uppdateringar */
+
+.lab-updates {
+    margin: 56px 0 0;
+}
+
+.lab-updates-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--lab-line-strong);
+    margin-bottom: 0;
+}
+
+.lab-updates-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+}
+
+.lab-update-item {
+    padding: 18px 22px 18px 0;
+    border-right: 1px solid var(--lab-line);
+    border-bottom: 1px solid var(--lab-line);
+}
+
+/* Items efter första: lägg på vänster-padding så texten andas från
+   den vertikala avskiljarlinjen. Första item:n alignerar då fortfarande
+   med rubriken "SENASTE UPPDATERINGAR" ovanför. */
+.lab-update-item + .lab-update-item {
+    padding-left: 22px;
+}
+
+.lab-update-item:last-child { border-right: none; }
+
+.lab-update-item time {
+    font-family: var(--lab-font-mono);
+    font-size: 10px;
+    color: var(--lab-ink-muted);
+    letter-spacing: 0.14em;
+}
+
+.lab-update-item h3 {
+    font-family: var(--lab-font-display);
+    font-size: 18px;
+    font-weight: 500;
+    margin: 6px 0 4px;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+}
+
+.lab-update-item h3 a {
+    color: var(--lab-ink);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+}
+
+.lab-update-item h3 a:hover { border-bottom-color: var(--lab-accent); }
+
+.lab-update-item p {
+    font-size: 13px;
+    color: var(--lab-ink-soft);
+    line-height: 1.5;
+    margin: 0;
+}
+
+@media (max-width: 980px) {
+    .lab-updates-grid { grid-template-columns: repeat(2, 1fr); }
+    .lab-update-item:nth-child(2) { border-right: none; }
+    /* I 2-kolumn-layout är item 3 första i sin rad — den ska linjera
+       med item 1 (ingen vänster-padding). */
+    .lab-update-item:nth-child(3) { padding-left: 0; }
+}
+
+@media (max-width: 560px) {
+    .lab-updates-grid { grid-template-columns: 1fr; }
+    .lab-update-item,
+    .lab-update-item + .lab-update-item {
+        border-right: none;
+        padding-left: 0;
+    }
+}
+
+/* Katalog-fliksystem (4 nivåer) */
+
+.lab-catalog {
+    margin: 24px auto 80px;
+}
+
+.lab-tabs-1 {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    margin-bottom: -1px;
+    position: relative;
+    z-index: 4;
+}
+
+.lab-tab-1 {
+    background: var(--lab-bg-raised);
+    color: var(--lab-ink-soft);
+    border: 1px solid var(--lab-line-strong);
+    padding: 14px 28px;
+    font-size: 15px;
+    font-family: var(--lab-font-display);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lab-tab-1.active {
+    background: var(--lab-bg-panel);
+    color: var(--lab-ink);
+    border-bottom-color: var(--lab-bg-panel);
+}
+
+.lab-tab-1-num {
+    font-family: var(--lab-font-mono);
+    font-size: 10px;
+    color: var(--lab-ink-muted);
+    letter-spacing: 0.14em;
+}
+
+.lab-tabs-1-tail {
+    flex: 1;
+    border-bottom: 1px solid var(--lab-line-strong);
+    margin-bottom: 0;
+}
+
+.lab-level-2 {
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    border-top: none;
+    padding: 20px 28px 0;
+    position: relative;
+    z-index: 3;
+}
+
+.lab-tabs-2 {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: -1px;
+    border-bottom: 1px solid var(--lab-line-strong);
+    flex-wrap: wrap;
+}
+
+.lab-tab-2 {
+    background: transparent;
+    color: var(--lab-ink-soft);
+    border: 1px solid transparent;
+    border-bottom: none;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-family: var(--lab-font-sans);
+    cursor: pointer;
+    position: relative;
+    top: 1px;
+    letter-spacing: -0.005em;
+}
+
+.lab-tab-2.active {
+    background: var(--lab-bg);
+    color: var(--lab-ink);
+    border-color: var(--lab-line-strong);
+    border-bottom-color: var(--lab-bg);
+    font-weight: 600;
+}
+
+.lab-level-3 {
+    background: var(--lab-bg);
+    padding: 24px 28px 0;
+    border-left: 1px solid var(--lab-line-strong);
+    border-right: 1px solid var(--lab-line-strong);
+}
+
+.lab-tabs-3 {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 2px solid var(--lab-ink);
+}
+
+.lab-tab-3 {
+    background: transparent;
+    color: var(--lab-ink-soft);
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 12px 18px 10px;
+    font-size: 14px;
+    font-family: var(--lab-font-sans);
+    cursor: pointer;
+    margin-bottom: -2px;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.lab-tab-3.active {
+    color: var(--lab-ink);
+    border-bottom-color: var(--lab-accent);
+    font-weight: 600;
+}
+
+.lab-tab-3-num {
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    color: var(--lab-ink-muted);
+}
+
+.lab-tab-3.active .lab-tab-3-num { color: var(--lab-accent); }
+
+.lab-level-4 {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    min-height: 460px;
+}
+
+@media (max-width: 820px) {
+    .lab-level-4 { grid-template-columns: 1fr; }
+}
+
+/* Kursintro: ersätter normal 2-kolumns-layout med en full-bredd vy som
+   visas när course är vald men inget chapter ännu. */
+.lab-level-4-intro {
+    grid-template-columns: 1fr;
+    min-height: 0;
+}
+
+.lab-course-intro {
+    padding: 32px 36px 40px;
+}
+
+@media (max-width: 540px) {
+    .lab-course-intro { padding: 24px 18px 28px; }
+}
+
+.lab-course-intro-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--lab-line);
+    margin-bottom: 28px;
+}
+
+.lab-course-intro-title {
+    font-family: var(--lab-font-display);
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--lab-ink);
+    margin: 0 0 12px;
+}
+
+.lab-course-intro-tagline {
+    font-family: var(--lab-font-display);
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--lab-ink-soft);
+    margin: 0 0 24px;
+    line-height: 1.35;
+}
+
+.lab-course-intro-text {
+    color: var(--lab-ink-soft);
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0 0 14px;
+    max-width: 68ch;
+}
+
+.lab-course-intro-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 28px;
+    display: grid;
+    gap: 8px;
+}
+
+.lab-course-intro-bullets li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--lab-ink);
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: 68ch;
+}
+
+.lab-course-intro-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--lab-accent);
+    font-family: var(--lab-font-mono);
+}
+
+.lab-course-intro-chapters {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--lab-line);
+}
+
+.lab-course-chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+}
+
+.lab-course-chapter-card {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 6px;
+    padding: 16px 18px 14px;
+    background: var(--lab-bg);
+    border: 1px solid var(--lab-line);
+    color: var(--lab-ink);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 120ms ease, transform 120ms ease;
+}
+
+.lab-course-chapter-card:hover {
+    border-color: var(--lab-ink);
+    transform: translateY(-1px);
+}
+
+.lab-course-chapter-num {
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--lab-ink-muted);
+}
+
+.lab-course-chapter-card:hover .lab-course-chapter-num {
+    color: var(--lab-accent);
+}
+
+.lab-course-chapter-title {
+    font-family: var(--lab-font-display);
+    font-size: 19px;
+    line-height: 1.2;
+    color: var(--lab-ink);
+}
+
+.lab-course-chapter-meta {
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--lab-ink-muted);
+    align-self: end;
+    padding-top: 8px;
+}
+
+.lab-sections-aside {
+    border-right: 1px solid var(--lab-line-strong);
+    padding: 24px 0;
+}
+
+@media (max-width: 820px) {
+    .lab-sections-aside {
+        border-right: none;
+        border-bottom: 1px solid var(--lab-line-strong);
+    }
+}
+
+.lab-section-item {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: var(--lab-ink);
+    border: none;
+    border-top: 1px solid var(--lab-line);
+    padding: 14px 18px 14px 4px;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 48px 1fr 14px;
+    gap: 8px;
+    align-items: baseline;
+}
+
+.lab-section-item.active {
+    background: var(--lab-ink);
+    color: var(--lab-bg);
+}
+
+.lab-section-item-num {
+    font-family: var(--lab-font-mono);
+    font-size: 13px;
+    color: var(--lab-ink-muted);
+    letter-spacing: 0.04em;
+}
+
+.lab-section-item.active .lab-section-item-num { color: var(--lab-accent); }
+
+.lab-section-item-title { font-size: 14px; line-height: 1.2; }
+.lab-section-item.active .lab-section-item-title { font-weight: 600; }
+
+.lab-section-item-arrow {
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    color: var(--lab-ink-muted);
+}
+
+.lab-section-item.active .lab-section-item-arrow { color: var(--lab-accent); }
+
+.lab-sections-aside-foot { border-top: 1px solid var(--lab-line); }
+
+.lab-section-content {
+    padding: 32px 36px 36px;
+}
+
+@media (max-width: 540px) {
+    .lab-section-content { padding: 24px 18px; }
+}
+
+.lab-section-content-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+    gap: 16px;
+}
+
+.lab-section-title {
+    font-family: var(--lab-font-display);
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 4px 0 8px;
+}
+
+.lab-section-title-num {
+    color: var(--lab-accent);
+    font-style: italic;
+    margin-right: 10px;
+}
+
+@media (max-width: 540px) {
+    .lab-section-title { font-size: 38px; }
+}
+
+.lab-section-lead {
+    font-size: 16px;
+    color: var(--lab-ink-soft);
+    line-height: 1.6;
+    margin: 12px 0 28px;
+    max-width: 560px;
+}
+
+.lab-section-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+@media (max-width: 720px) {
+    .lab-section-cards { grid-template-columns: 1fr; }
+}
+
+.lab-card {
+    border: 1px solid var(--lab-line-strong);
+    padding: 16px;
+    background: var(--lab-bg-raised);
+    text-align: left;
+    color: inherit;
+    display: block;
+}
+
+button.lab-card { font: inherit; cursor: pointer; }
+
+.lab-card-clickable {
+    cursor: pointer;
+    transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+.lab-card-clickable:hover {
+    background: var(--lab-bg-panel);
+    border-color: var(--lab-ink);
+}
+
+.lab-card-clickable:active { transform: translateY(1px); }
+
+.lab-card-disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+button.lab-card-disabled { pointer-events: none; }
+
+/* Aktiv flik — Teori när man är på teori-vyn */
+.lab-card-active {
+    background: var(--lab-ink);
+    color: var(--lab-bg);
+    border-color: var(--lab-ink);
+    cursor: default;
+}
+
+.lab-card-active .lab-card-tag {
+    color: rgba(243, 238, 228, 0.55);
+}
+
+.lab-card-active .lab-card-meta {
+    color: rgba(243, 238, 228, 0.7);
+}
+
+/* Smal navigeringsrad mellan flikkort och teorin */
+.lab-teori-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 6px 0 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--lab-line);
+}
+
+.lab-card-tag {
+    font-family: var(--lab-font-mono);
+    font-size: 10px;
+    color: var(--lab-ink-muted);
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+}
+
+.lab-card-title {
+    font-family: var(--lab-font-display);
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+}
+
+.lab-card-meta {
+    font-size: 13px;
+    color: var(--lab-ink-soft);
+}
+
+.lab-section-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.lab-section-actions-spacer { flex: 1; }
+
+/* Teori-läget inom katalogen */
+.lab-teori-toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 8px 0 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--lab-line);
+}
+
+/* Inline-variant — smalare än fristående avsnittssidan eftersom sidopanelen
+   redan tar plats. Lite stramare typografi. */
+.lab-article-body-inline {
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 680px;
+}
+
+.lab-article-body-inline h2 {
+    font-family: var(--lab-font-display);
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    margin: 32px 0 14px;
+}
+
+.lab-article-body-inline h3 {
+    font-family: var(--lab-font-display);
+    font-weight: 500;
+    font-size: 20px;
+    margin: 24px 0 10px;
+}
+
+.lab-article-body-inline p { margin: 0 0 16px; }
+.lab-article-body-inline ul,
+.lab-article-body-inline ol { margin: 0 0 16px; padding-left: 24px; }
+.lab-article-body-inline li { margin-bottom: 4px; }
+.lab-article-body-inline strong { font-weight: 600; }
+.lab-article-body-inline em { font-style: italic; }
+.lab-article-body-inline a {
+    color: var(--lab-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Tabeller i teori-text — pappersgul ton, vitt reserveras för exempel */
+.lab-article-body table,
+.lab-article-body-inline table {
+    border-collapse: collapse;
+    margin: 18px 0 24px;
+    width: auto;
+    min-width: 60%;
+    background: var(--lab-bg-raised);
+    border: 1px solid var(--lab-line-strong);
+    font-size: 0.95em;
+}
+
+.lab-article-body th,
+.lab-article-body td,
+.lab-article-body-inline th,
+.lab-article-body-inline td {
+    border: 1px solid var(--lab-line);
+    padding: 8px 14px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.lab-article-body th,
+.lab-article-body-inline th {
+    background: #ddd2bd;
+    font-weight: 600;
+    border-bottom: 1px solid var(--lab-line-strong);
+}
+
+/* Tabeller inuti blockrutor — låt bakgrundsfärgen från rutan skina igenom */
+.lab-block table {
+    background: transparent;
+    margin: 14px 0;
+}
+
+.lab-block th {
+    background: rgba(15, 22, 32, 0.07);
+}
+
+/* Matematik-placeholder */
+
+.lab-placeholder {
+    text-align: center;
+    padding: 80px 24px;
+    color: var(--lab-ink-soft);
+}
+
+.lab-placeholder-title {
+    font-family: var(--lab-font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--lab-ink);
+    margin-bottom: 12px;
+}
+
+.lab-placeholder-text {
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ===========================================================
+   Avsnittssida (avsnitt.html) — teorigenomgång
+   =========================================================== */
+
+.lab-article {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 56px 80px;
+}
+
+.lab-article-meta {
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--lab-ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.lab-article-meta a {
+    color: var(--lab-accent);
+}
+
+.lab-article-meta a:hover {
+    text-decoration: underline;
+}
+
+.lab-article-title {
+    font-family: var(--lab-font-display);
+    font-weight: 400;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+}
+
+.lab-article-title-num {
+    display: inline-block;
+    font-family: var(--lab-font-mono);
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    color: var(--lab-ink-muted);
+    margin-right: 14px;
+    vertical-align: middle;
+}
+
+.lab-article-sub {
+    font-family: var(--lab-font-display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--lab-ink-soft);
+    margin: 0 0 28px;
+}
+
+.lab-article-sim {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px;
+    border: 1px solid var(--lab-line-strong);
+    background: var(--lab-bg-panel);
+    margin-bottom: 36px;
+}
+
+.lab-article-sim-label {
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--lab-ink-muted);
+    text-transform: uppercase;
+}
+
+.lab-article-sim-spacer { flex: 1; }
+
+.lab-article-sim a {
+    display: inline-block;
+    padding: 8px 18px;
+    background: var(--lab-ink);
+    color: var(--lab-bg);
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.lab-article-sim a:hover {
+    background: var(--lab-accent);
+}
+
+.lab-article-body {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--lab-ink);
+}
+
+.lab-article-body p {
+    margin: 0 0 18px;
+}
+
+.lab-article-body h2 {
+    font-family: var(--lab-font-display);
+    font-weight: 400;
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    margin: 40px 0 16px;
+}
+
+.lab-article-body h3 {
+    font-family: var(--lab-font-display);
+    font-weight: 500;
+    font-size: 22px;
+    margin: 28px 0 10px;
+}
+
+.lab-article-body strong { font-weight: 600; }
+.lab-article-body em { font-style: italic; }
+
+.lab-article-body ul,
+.lab-article-body ol {
+    margin: 0 0 18px;
+    padding-left: 24px;
+}
+
+.lab-article-body li { margin-bottom: 6px; }
+
+.lab-article-body a {
+    color: var(--lab-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Innehållsblock — färgade rutor som matchar PDF-genomgångarna */
+
+.lab-block {
+    margin: 22px 0;
+    padding: 18px 22px;
+    border-radius: 4px;
+    border: 1px solid;
+}
+
+.lab-block-title {
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.lab-block p:last-child { margin-bottom: 0; }
+.lab-block ul:last-child,
+.lab-block ol:last-child { margin-bottom: 0; }
+
+/* Formel — grön */
+.lab-block-formel {
+    background: #e8efdc;
+    border-color: #b9c89a;
+}
+.lab-block-formel .lab-block-title { color: #4a6a1f; }
+
+/* Tips — grön (samma som formel) */
+.lab-block-tips {
+    background: #e8efdc;
+    border-color: #b9c89a;
+}
+.lab-block-tips .lab-block-title { color: #4a6a1f; }
+
+/* Demo — persika */
+.lab-block-demo {
+    background: #f7e4cf;
+    border-color: #d8b48a;
+}
+.lab-block-demo .lab-block-title { color: #8a4a18; }
+
+/* Härledning — persika (samma som demo) */
+.lab-block-harledning {
+    background: #f7e4cf;
+    border-color: #d8b48a;
+}
+.lab-block-harledning .lab-block-title { color: #8a4a18; }
+
+/* Kuriosa — persika (samma som demo) */
+.lab-block-kuriosa {
+    background: #f7e4cf;
+    border-color: #d8b48a;
+}
+.lab-block-kuriosa .lab-block-title { color: #8a4a18; }
+
+/* Exempel — vit/grå */
+.lab-block-exempel {
+    background: var(--lab-bg-panel);
+    border-color: var(--lab-line-strong);
+}
+.lab-block-exempel .lab-block-title { color: var(--lab-ink); }
+
+/* Bild — streckad ram, platshållare */
+.lab-block-bild {
+    background: rgba(15, 22, 32, 0.03);
+    border-style: dashed;
+    border-color: var(--lab-line-strong);
+    text-align: center;
+    font-style: italic;
+    color: var(--lab-ink-soft);
+    padding: 28px 22px;
+}
+
+.lab-block-bild img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.lab-block-bild em {
+    font-size: 13px;
+    color: var(--lab-ink-muted);
+}
+
+/* KaTeX-styling — matcha kroppstexten */
+.lab-article-body .katex-display {
+    margin: 14px 0 !important;
+}
+
+.lab-article-body .katex {
+    font-size: 1.05em;
+}
+
+/* Långa formler skalas ned så de håller sig inom rammen istället för att
+   sidoscrolla. JS sätter transform/scale på .katex efter rendering — vi
+   måste därför tillåta att den skalade visuella höjden ligger under
+   layout-höjden, samt klippa eventuell residual-bredd. */
+.katex-display {
+    max-width: 100%;
+    overflow: hidden;
+    padding: 2px 0;
+}
+
+.lab-block,
+.lab-article-body,
+.lab-article-body-inline {
+    overflow-x: hidden;
+}
+
+/* Deluppgifter (a-, b-, c-uppgifter) i exempel — radas upp i en två-
+   kolumners-tabell så att c) ligger rakt under a) och d) under b). På
+   smala skärmar (och när texten är för lång för 2 kolumner) staplas de
+   under varandra. Spacingen ska vara stram mellan deluppgifterna men
+   ett tydligt gap före lösningen som följer. */
+.lab-deluppgifter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 32px;
+    row-gap: 4px;
+    margin: 0 0 18px;
+}
+
+.lab-deluppgifter > p {
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    .lab-deluppgifter {
+        grid-template-columns: 1fr;
+        row-gap: 2px;
+    }
+}
+
+/* Tillbaka-länk */
+.lab-article-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--lab-ink-soft);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+}
+
+.lab-article-back:hover { color: var(--lab-accent); }
+
+/* Saknat avsnitt */
+.lab-article-missing {
+    text-align: center;
+    padding: 80px 24px;
+    color: var(--lab-ink-soft);
+}
+
+.lab-article-missing-title {
+    font-family: var(--lab-font-display);
+    font-size: 36px;
+    font-style: italic;
+    color: var(--lab-ink);
+    margin-bottom: 14px;
+}
+
+@media (max-width: 720px) {
+    .lab-article { padding: 24px 20px 56px; }
+    .lab-article-title { font-size: 40px; }
+    .lab-article-sub { font-size: 18px; }
+    .lab-article-body { font-size: 16px; }
+}
+
+/* === Om-sidan och kontakt-sidan ===================================== */
+
+.lab-about-hero {
+    border-bottom: 1px solid var(--lab-line-strong);
+    padding: 36px 0 32px;
+    margin-bottom: 0;
+}
+
+.lab-about-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 36px;
+}
+
+@media (max-width: 540px) {
+    .lab-about-hero { padding: 24px 0 22px; }
+    .lab-about-hero-inner { padding: 0 18px; }
+}
+
+.lab-about-mono {
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--lab-ink-muted);
+    margin-bottom: 18px;
+    display: block;
+}
+
+.lab-about-title {
+    font-family: var(--lab-font-display);
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: var(--lab-ink);
+    margin: 0 0 14px;
+}
+
+.lab-about-title em {
+    font-style: italic;
+    color: var(--lab-accent);
+}
+
+.lab-about-tagline {
+    font-family: var(--lab-font-display);
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--lab-ink-soft);
+    margin: 0;
+    max-width: 64ch;
+    line-height: 1.4;
+}
+
+.lab-about-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 36px 56px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+}
+
+@media (max-width: 540px) {
+    .lab-about-body { padding: 24px 18px 40px; }
+}
+
+.lab-about-block {
+    padding: 28px 0;
+    border-top: 1px solid var(--lab-line);
+}
+
+.lab-about-block:first-child {
+    border-top: none;
+    padding-top: 8px;
+}
+
+.lab-about-block h2 {
+    font-family: var(--lab-font-display);
+    font-size: clamp(24px, 2.6vw, 30px);
+    font-weight: 400;
+    color: var(--lab-ink);
+    margin: 0 0 12px;
+    letter-spacing: -0.005em;
+}
+
+.lab-about-block p {
+    color: var(--lab-ink);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0 0 14px;
+    max-width: 68ch;
+}
+
+.lab-about-block p:last-child {
+    margin-bottom: 0;
+}
+
+.lab-about-block strong {
+    color: var(--lab-ink);
+    font-weight: 600;
+}
+
+.lab-about-block em {
+    font-style: italic;
+    color: var(--lab-accent);
+}
+
+.lab-pullquote {
+    font-family: var(--lab-font-display);
+    font-style: italic;
+    font-size: clamp(22px, 2.6vw, 28px);
+    line-height: 1.35;
+    color: var(--lab-ink);
+    margin: 0;
+    padding: 18px 0 22px 28px;
+    border-left: 3px solid var(--lab-accent);
+    max-width: 64ch;
+}
+
+.lab-award {
+    background: var(--lab-bg-raised);
+    border-left: 3px solid var(--lab-accent-2);
+    padding: 20px 24px;
+    margin: 18px 0 4px;
+}
+
+.lab-award p {
+    color: var(--lab-ink-soft);
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 0 0 12px;
+}
+
+.lab-award p:last-child { margin-bottom: 0; }
+
+/* === Kontakt-formulär =============================================== */
+
+.lab-form {
+    margin-top: 12px;
+    max-width: 560px;
+}
+
+.lab-form-group {
+    margin-bottom: 18px;
+}
+
+.lab-form-group label {
+    display: block;
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--lab-ink-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.lab-input,
+.lab-textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    color: var(--lab-ink);
+    font-family: var(--lab-font-sans);
+    font-size: 15px;
+    line-height: 1.4;
+    border-radius: 0;
+    transition: border-color 120ms ease, background 120ms ease;
+}
+
+.lab-input:focus,
+.lab-textarea:focus {
+    outline: none;
+    border-color: var(--lab-ink);
+    background: #fff;
+}
+
+.lab-input::placeholder,
+.lab-textarea::placeholder {
+    color: var(--lab-ink-muted);
+}
+
+.lab-textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.lab-submit {
+    appearance: none;
+    background: var(--lab-ink);
+    color: var(--lab-bg);
+    border: 1px solid var(--lab-ink);
+    padding: 12px 24px;
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+}
+
+.lab-submit:hover {
+    background: var(--lab-accent);
+    border-color: var(--lab-accent);
+    color: #fff;
+}
+
+.lab-form-success {
+    display: none;
+    padding: 24px;
+    border: 1px solid var(--lab-line-strong);
+    background: var(--lab-bg-raised);
+    margin-top: 16px;
+    max-width: 560px;
+}
+
+.lab-form-success h3 {
+    font-family: var(--lab-font-display);
+    font-size: 22px;
+    color: var(--lab-ink);
+    margin: 0 0 8px;
+}
+
+.lab-form-success p {
+    color: var(--lab-ink-soft);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}

@@ -1,0 +1,1099 @@
+/* ============================================================
+   styles-laborans-sim.css
+   ----------------------------------------------------------------
+   Gemensamma Laborans-overrides för alla simuleringssidor.
+   Bygger på CSS-variabler från styles-laborans.css (måste laddas före).
+   Aktiveras genom att sätta `class="lab-sim"` på <body>.
+   ----------------------------------------------------------------
+   Innehåller:
+     1. Body/page-bakgrund & typografi
+     2. Tailwind-färgklasser → Laborans-paletten
+     3. Vanliga simuleringsklasser (.glass-card, .canvas-wrap, .scene-wrap,
+        .mode-toggle, .action-btn, .preset-btn, .fs-controls, m.fl.)
+     4. Sliders i papper-stil
+     5. Pedagogiska accentfärger (dämpade — gul/blå/cyan/indigo)
+     6. Breadcrumb i Laborans-mono
+     7. Canvas-tema-system (.wave-stage / .canvas-wrap / .scene-wrap
+        med data-theme="morkRymd|ljusPapper|pergament")
+   ============================================================ */
+
+/* ─── 1. Body & sidans ram ─────────────────────────────────── */
+/* INVERTERAD FÄRGSCHEMA FÖR SIMULERINGAR:
+   - Body/ytter-ytan = VIT (var(--lab-bg-panel) = #ffffff)
+   - Sim-kort, paneler och visualiseringar = PAPPERSKRÄM (var(--lab-bg) = #f3eee4)
+   Detta skiljer sig från katalog/teori-sidorna där body är papper. Här blir
+   simuleringen det "varma centrumet" på en vit yta. */
+
+body.lab-sim {
+    font-family: var(--lab-font-sans);
+    color: var(--lab-ink);
+    background: var(--lab-bg-panel);
+}
+
+/* Rymd-sims: body har explicit bg-black eller bg-slate-950 (för stjärnhimmel).
+   Behåll mörk bakgrund på BODY OCH inom hela DOMen (canvas + wrappers). */
+body.lab-sim.bg-black,
+body.lab-sim.bg-slate-950,
+body.lab-sim.bg-gray-950 {
+    background: #000 !important;
+    color: #e5e7eb;
+}
+body.lab-sim.bg-slate-950 { background: #020617 !important; }
+body.lab-sim.bg-gray-950 { background: #0a0a0a !important; }
+
+/* När body är rymd-tema, inverterar vi Tailwind-overrides så
+   bg-gray-9/bg-slate-9 STANNAR mörk (cancel ut våra papper-overrides). */
+body.lab-sim.bg-black .bg-gray-900,
+body.lab-sim.bg-black .bg-slate-900,
+body.lab-sim.bg-slate-950 .bg-gray-900,
+body.lab-sim.bg-slate-950 .bg-slate-900 {
+    background: #111827 !important;
+    color: #e5e7eb !important;
+}
+body.lab-sim.bg-black .text-white,
+body.lab-sim.bg-slate-950 .text-white { color: #fff !important; }
+body.lab-sim.bg-black .text-cyan-400,
+body.lab-sim.bg-slate-950 .text-cyan-400 { color: #22d3ee !important; }
+body.lab-sim.bg-black .bg-cyan-500,
+body.lab-sim.bg-slate-950 .bg-cyan-500 { background: #06b6d4 !important; }
+
+body.lab-sim .page-wrapper {
+    background: var(--lab-bg-panel);
+    min-height: 100vh;
+    color: var(--lab-ink);
+}
+
+/* Outer wrapper som använder Tailwinds bg-gray-900/bg-slate-950 = också vit */
+body.lab-sim .min-h-screen.bg-gray-900,
+body.lab-sim .min-h-screen.bg-slate-950 {
+    background: var(--lab-bg-panel);
+    color: var(--lab-ink);
+}
+
+/* Tailwind gradient-utilities: bg-gradient-to-* från slate/sky/blue-9xx → vit */
+body.lab-sim .min-h-screen.bg-gradient-to-br,
+body.lab-sim .min-h-screen.bg-gradient-to-tr,
+body.lab-sim .min-h-screen.bg-gradient-to-r,
+body.lab-sim .min-h-screen.bg-gradient-to-l,
+body.lab-sim .min-h-screen.bg-gradient-to-b,
+body.lab-sim .bg-gradient-to-br.from-slate-900,
+body.lab-sim .bg-gradient-to-tr.from-slate-900,
+body.lab-sim .bg-gradient-to-r.from-slate-900,
+body.lab-sim [class*="bg-gradient"][class*="from-slate-9"],
+body.lab-sim [class*="bg-gradient"][class*="from-gray-9"],
+body.lab-sim [class*="bg-gradient"][class*="from-sky-9"] {
+    background: var(--lab-bg-panel) !important;
+    background-image: none !important;
+}
+
+/* Custom Tailwind-färger som ofta finns i iframe-standalone-filer:
+   ice-blue (#e0f2fe sky-100), deep-blue (#075985 sky-800), accent-orange (#f97316). */
+body.lab-sim .text-ice-blue,
+body.lab-sim .text-deep-blue { color: var(--lab-ink) !important; }
+body.lab-sim .bg-ice-blue { background: var(--lab-bg) !important; }
+body.lab-sim .bg-deep-blue { background: var(--lab-accent) !important; color: #fff !important; }
+body.lab-sim .bg-accent-orange,
+body.lab-sim .hover\:bg-orange-500:hover,
+body.lab-sim .bg-orange-500 {
+    background: var(--lab-accent) !important;
+    color: #fff !important;
+}
+body.lab-sim .text-accent-orange,
+body.lab-sim .text-orange-500,
+body.lab-sim .text-orange-400 { color: var(--lab-accent) !important; }
+body.lab-sim .border-sky-700,
+body.lab-sim .border-sky-800,
+body.lab-sim .border-sky-900 { border-color: var(--lab-line-strong) !important; }
+
+/* bg-black/X (semitransparent black, vanligt i iframe-sims) → papper */
+body.lab-sim .bg-black\/20,
+body.lab-sim .bg-black\/30,
+body.lab-sim .bg-black\/40,
+body.lab-sim .bg-black\/50 {
+    background: var(--lab-bg) !important;
+    border: 1px solid var(--lab-line-strong);
+}
+
+/* .canvas-btn-X (pendel-app m.fl.) — custom action-knappar i hörnen.
+   Standardisera till Laborans-stil. */
+body.lab-sim .canvas-btn {
+    background: var(--lab-bg) !important;
+    color: var(--lab-ink) !important;
+    border: 1px solid var(--lab-line-strong) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    font-weight: 500;
+}
+body.lab-sim .canvas-btn:hover:not(:disabled) {
+    background: var(--lab-bg-panel) !important;
+    border-color: var(--lab-ink) !important;
+}
+body.lab-sim .canvas-btn-orange,
+body.lab-sim .canvas-btn-cyan,
+body.lab-sim .canvas-btn-yellow,
+body.lab-sim .canvas-btn-green {
+    color: var(--lab-ink) !important;
+    border-color: var(--lab-line-strong) !important;
+}
+body.lab-sim .canvas-btn-red {
+    color: var(--lab-accent) !important;
+    border-color: var(--lab-accent) !important;
+}
+
+/* Pendel-app sidopanel som har inline `background: rgba(15,23,42,0.8)` —
+   den sätts via inline style så CSS-override fungerar inte. Använd ID istället. */
+body.lab-sim #controls-container {
+    background: var(--lab-bg) !important;
+    backdrop-filter: none !important;
+    border-left: 1px solid var(--lab-line-strong) !important;
+    color: var(--lab-ink) !important;
+}
+
+/* Gradient-text på h1 (linear-gradient + background-clip:text) — på papper
+   blir den osynlig. Skriv över med ink-färg. */
+body.lab-sim h1[style*="background-clip"],
+body.lab-sim h1[style*="background-clip: text"],
+body.lab-sim h1[style*="-webkit-background-clip"] {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--lab-ink) !important;
+    background-clip: unset !important;
+    color: var(--lab-ink) !important;
+    filter: none !important;
+    text-shadow: none !important;
+}
+
+/* Tailwind from-X to-X gradient stops borttas helt: alla bg-gradient containers blir flat */
+body.lab-sim [class*="bg-gradient"] {
+    background-image: none !important;
+}
+
+/* ─── 2. Tailwind-overrides ────────────────────────────────── */
+
+/* Slate/gray text → Laborans-ink */
+body.lab-sim .text-slate-100,
+body.lab-sim .text-slate-200,
+body.lab-sim .text-slate-300,
+body.lab-sim .text-gray-100,
+body.lab-sim .text-gray-200,
+body.lab-sim .text-gray-300,
+body.lab-sim .text-white { color: var(--lab-ink); }
+
+body.lab-sim .text-slate-400,
+body.lab-sim .text-gray-400 { color: var(--lab-ink-soft); }
+
+body.lab-sim .text-slate-500,
+body.lab-sim .text-slate-600,
+body.lab-sim .text-gray-500,
+body.lab-sim .text-gray-600 { color: var(--lab-ink-muted); }
+
+/* Slate/gray bakgrunder → PAPPER (cream)
+   bg-gray-9xx etc användes för dark outer wrappers — på vit body
+   blir de osynliga. Lämna .min-h-screen.bg-gray-900 vit (regel ovan),
+   men "rena" bg-gray-9xx-paneler blir papper. */
+body.lab-sim .bg-slate-950 { background: var(--lab-bg); }
+body.lab-sim .bg-gray-900 { background: var(--lab-bg-panel); }
+body.lab-sim .bg-gray-900\/50,
+body.lab-sim .bg-slate-900\/40,
+body.lab-sim .bg-slate-900\/50,
+body.lab-sim .bg-slate-900\/60 {
+    background: var(--lab-bg);
+    border: 1px solid var(--lab-line);
+}
+/* Ljusa Tailwind-bg (bg-white, bg-gray-50, bg-gray-100, bg-slate-50, bg-slate-100)
+   → PAPPER CREAM. Gäller sim-kort, info-boxar, formel-rutor m.m. som annars
+   blir för "rena vita" mot Laborans-tema. */
+body.lab-sim .bg-white,
+body.lab-sim .bg-gray-50,
+body.lab-sim .bg-gray-100,
+body.lab-sim .bg-slate-50,
+body.lab-sim .bg-slate-100 {
+    background: var(--lab-bg) !important;
+    color: var(--lab-ink);
+}
+body.lab-sim .bg-white.rounded-xl,
+body.lab-sim .bg-white.rounded-lg,
+body.lab-sim .bg-white.rounded {
+    border: 1px solid var(--lab-line-strong);
+    box-shadow: none;
+}
+/* Kort / panels (bg-gray-800) → PAPPER */
+body.lab-sim .bg-gray-800,
+body.lab-sim .bg-slate-800,
+body.lab-sim .bg-slate-800\/30,
+body.lab-sim .bg-slate-800\/40,
+body.lab-sim .bg-slate-800\/50,
+body.lab-sim .bg-slate-800\/60,
+body.lab-sim .bg-slate-800\/70,
+body.lab-sim .bg-slate-800\/80,
+body.lab-sim .bg-gray-800\/30,
+body.lab-sim .bg-gray-800\/40,
+body.lab-sim .bg-gray-800\/50,
+body.lab-sim .bg-gray-800\/60 {
+    background: var(--lab-bg) !important;
+    color: var(--lab-ink);
+    border-radius: 4px;
+    border: 1px solid var(--lab-line-strong);
+}
+/* Sub-kort (bg-gray-700) → papper med starkare linje */
+body.lab-sim .bg-gray-700,
+body.lab-sim .bg-slate-700 {
+    background: var(--lab-bg);
+    color: var(--lab-ink);
+    border: 1px solid var(--lab-line-strong);
+}
+body.lab-sim .bg-gray-600 { background: var(--lab-bg); }
+body.lab-sim .hover\:bg-gray-600:hover { background: var(--lab-bg-panel); }
+
+/* Cyan-accenter → Laborans accent-röd (med vissa undantag, se nedan) */
+body.lab-sim .bg-cyan-500 {
+    background: var(--lab-accent);
+    color: #fff;
+}
+/* Aktiva toggle-knappar med bg-cyan-500/X — på papper: ink-bg + papper-text */
+body.lab-sim .bg-cyan-500\/20,
+body.lab-sim .bg-cyan-500\/30,
+body.lab-sim .bg-cyan-500\/40,
+body.lab-sim .bg-cyan-500\/50,
+body.lab-sim .bg-cyan-400\/20,
+body.lab-sim .bg-cyan-400\/30,
+body.lab-sim .bg-sky-500\/20,
+body.lab-sim .bg-sky-500\/30 {
+    background: var(--lab-ink) !important;
+    color: var(--lab-bg) !important;
+}
+body.lab-sim .bg-cyan-500\/20 *,
+body.lab-sim .bg-cyan-500\/30 *,
+body.lab-sim .bg-cyan-400\/30 * { color: var(--lab-bg) !important; }
+/* Cyan borders → ink för "active"-knappars border-färg */
+body.lab-sim .border-cyan-400,
+body.lab-sim .border-cyan-500,
+body.lab-sim .border-sky-400,
+body.lab-sim .border-sky-500 { border-color: var(--lab-ink) !important; }
+body.lab-sim .text-cyan-300,
+body.lab-sim .text-cyan-400 { color: var(--lab-accent); }
+body.lab-sim .shadow-cyan-500\/30,
+body.lab-sim .shadow-cyan-500\/50,
+body.lab-sim .shadow-md { box-shadow: none; }
+body.lab-sim .focus\:ring-cyan-400:focus { box-shadow: 0 0 0 2px var(--lab-accent); }
+
+/* Cyan/slate-borders → neutral papperslinje */
+body.lab-sim .border-cyan-500\/20,
+body.lab-sim .border-cyan-500\/30,
+body.lab-sim .border-gray-700,
+body.lab-sim .border-slate-300 { border-color: var(--lab-line-strong); }
+
+/* ─── 3. Vanliga simuleringskomponenter ─────────────────────── */
+
+body.lab-sim .glass-card {
+    background: var(--lab-bg) !important;
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 4px;
+    backdrop-filter: none !important;
+    box-shadow: none;
+    color: var(--lab-ink);
+}
+
+/* Inner-kort (.glass-card-inner, .glass-card-light) — INRE rutor ska också
+   stå på CREAM PAPPER bg (samma som outer), med visuell separation enbart
+   via border. Användaren föredrar enhetlig pappersfärg i hela info-blocket. */
+body.lab-sim .glass-card-inner,
+body.lab-sim .glass-card-light {
+    background: var(--lab-bg) !important;
+    border: 1px solid var(--lab-line-strong) !important;
+    border-radius: 4px;
+    backdrop-filter: none !important;
+    box-shadow: none;
+    color: var(--lab-ink);
+}
+
+/* Rubriker inom .glass-card-light/.glass-card/.equation-box: ofta text-sky-400
+   eller text-cyan-400 — på papper måste de bli Laborans-accent eller ink. */
+body.lab-sim .glass-card h2,
+body.lab-sim .glass-card h3,
+body.lab-sim .glass-card h4,
+body.lab-sim .glass-card-light h2,
+body.lab-sim .glass-card-light h3,
+body.lab-sim .glass-card-light h4 {
+    color: var(--lab-ink) !important;
+    font-family: var(--lab-font-sans);
+    font-weight: 600;
+    text-shadow: none;
+}
+
+/* Många simuleringar har en egen .dark-container klass i sin <style>-block
+   med en mörk gradient. Tvinga den till transparent på papper-sidor. */
+body.lab-sim .dark-container {
+    background: transparent !important;
+    color: var(--lab-ink);
+}
+
+/* Liknande globala klasser som ofta är hårdkodade i sim-filer */
+body.lab-sim .canvas-container,
+body.lab-sim #canvas-container {
+    background: var(--lab-bg) !important;
+    border-radius: 4px;
+    border: 1px solid var(--lab-line-strong);
+}
+
+/* ─── Globala knapp-klasser som många sim-filer definierar lokalt ──── */
+/* .btn-primary är ofta blå gradient — på papper → röd accent */
+body.lab-sim .btn-primary {
+    background: var(--lab-accent) !important;
+    color: #fff !important;
+    border: 1px solid var(--lab-accent) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    font-weight: 500;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+body.lab-sim .btn-primary:hover {
+    background: #ad2b41 !important;
+    border-color: #ad2b41 !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+body.lab-sim .btn-primary:active {
+    transform: none !important;
+}
+
+/* .btn-secondary är ofta dark slate — på papper → papper med linje */
+body.lab-sim .btn-secondary {
+    background: var(--lab-bg) !important;
+    color: var(--lab-ink) !important;
+    border: 1px solid var(--lab-line-strong) !important;
+    box-shadow: none !important;
+    font-weight: 500;
+}
+body.lab-sim .btn-secondary:hover {
+    background: var(--lab-bg-panel) !important;
+    border-color: var(--lab-ink) !important;
+    color: var(--lab-ink) !important;
+    box-shadow: none !important;
+}
+
+/* .tab-btn är ofta dark slate inaktivt och cyan-glow aktivt — på papper:
+   inaktiv = subtil papper-ton, aktiv = ink-bg med papper-text (samma som
+   .mode-toggle aktiv-stil i Laborans). */
+body.lab-sim .tab-btn {
+    background: var(--lab-bg) !important;
+    color: var(--lab-ink-soft) !important;
+    border: 1px solid var(--lab-line-strong) !important;
+    box-shadow: none !important;
+}
+body.lab-sim .tab-btn:hover {
+    color: var(--lab-ink) !important;
+    border-color: var(--lab-ink) !important;
+}
+body.lab-sim .tab-btn.active {
+    background: var(--lab-ink) !important;
+    color: var(--lab-bg) !important;
+    border-color: var(--lab-ink) !important;
+    box-shadow: none !important;
+}
+
+/* .equation-box är ofta dark slate med cyan glow på papper-sidor */
+body.lab-sim .equation-box {
+    background: var(--lab-bg-panel) !important;
+    border: 1px solid var(--lab-line-strong) !important;
+    color: var(--lab-ink) !important;
+    border-radius: 4px;
+}
+
+/* .explanation-box (info-rutor i halveringstid m.fl.) — ska vara CREAM PAPPER
+   (samma som outer .glass-card) med accent vänster-kant. Matchar
+   "Einsteins förklaring"-mallen. */
+body.lab-sim .explanation-box {
+    background: var(--lab-bg) !important;
+    color: var(--lab-ink) !important;
+    border: 1px solid var(--lab-line-strong) !important;
+    border-left: 3px solid var(--lab-accent) !important;
+    border-radius: 0 4px 4px 0;
+    backdrop-filter: none !important;
+}
+body.lab-sim .explanation-box strong { color: var(--lab-ink); font-weight: 600; }
+
+/* .fs-mat-btn (brytning-app material-knappar) + andra liknande toggle-knappar
+   är ofta dark slate inaktivt och cyan-tint aktivt. På papper: papper-stil
+   för inaktiv, accent-tint för aktiv (matchar staende-vag preset-knappar). */
+body.lab-sim .fs-mat-btn,
+body.lab-sim .material-btn,
+body.lab-sim .preset-btn {
+    background: var(--lab-bg) !important;
+    border: 1px solid var(--lab-line-strong) !important;
+    color: var(--lab-ink) !important;
+    box-shadow: none !important;
+}
+body.lab-sim .fs-mat-btn:hover,
+body.lab-sim .material-btn:hover,
+body.lab-sim .preset-btn:hover {
+    background: var(--lab-bg-panel) !important;
+    border-color: var(--lab-ink) !important;
+    color: var(--lab-ink) !important;
+}
+body.lab-sim .fs-mat-btn.active,
+body.lab-sim .material-btn.active,
+body.lab-sim .preset-btn.active {
+    background: var(--lab-ink) !important;
+    border-color: var(--lab-ink) !important;
+    color: var(--lab-bg) !important;
+    box-shadow: none !important;
+}
+
+/* ─── Bredare Tailwind-overrides för accentfärger på knappar ───────── */
+/* Sky/blue button colors → red accent (matchar Laborans-temat) */
+body.lab-sim .bg-sky-400,
+body.lab-sim .bg-sky-500,
+body.lab-sim .bg-blue-400,
+body.lab-sim .bg-blue-500,
+body.lab-sim .bg-cyan-400 {
+    background: var(--lab-accent) !important;
+    color: #fff !important;
+}
+body.lab-sim .hover\:bg-sky-500:hover,
+body.lab-sim .hover\:bg-sky-600:hover,
+body.lab-sim .hover\:bg-blue-500:hover,
+body.lab-sim .hover\:bg-blue-600:hover,
+body.lab-sim .hover\:bg-cyan-500:hover {
+    background: #ad2b41 !important;
+}
+
+body.lab-sim .glow-text { text-shadow: none; }
+body.lab-sim h1.glow-text,
+body.lab-sim h1.text-cyan-400,
+body.lab-sim h1 {
+    font-family: var(--lab-font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--lab-ink);
+    text-shadow: none;
+}
+
+/* Gamla intro-rubriker från styles.css använder en ljus gradient designad
+   för mörk bakgrund — på papper blir den nästan osynlig. Tvinga papper-ink. */
+body.lab-sim .section-title {
+    background: none !important;
+    -webkit-text-fill-color: var(--lab-ink) !important;
+    color: var(--lab-ink) !important;
+    font-family: var(--lab-font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-shadow: none;
+}
+body.lab-sim .intro-text {
+    color: var(--lab-ink-soft) !important;
+    font-family: var(--lab-font-sans);
+}
+body.lab-sim .breadcrumb {
+    color: var(--lab-ink-muted) !important;
+    font-family: var(--lab-font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+body.lab-sim .breadcrumb a {
+    color: var(--lab-accent) !important;
+    text-decoration: none;
+}
+body.lab-sim .breadcrumb a:hover { text-decoration: underline; text-shadow: none; }
+/* H1/H2 med hårdkodade ljusa inline-färger (designade för mörk bakgrund) — tvinga papper-ink */
+body.lab-sim h1[style*="color:#e2e8f0"],
+body.lab-sim h1[style*="color: #e2e8f0"],
+body.lab-sim h1[style*="color:#f1f5f9"],
+body.lab-sim h1[style*="color:#fff"],
+body.lab-sim h1[style*="color:#FFF"],
+body.lab-sim h1[style*="color: #fff"],
+body.lab-sim h1[style*="color:#cbd5e1"],
+body.lab-sim h2[style*="color:#e2e8f0"],
+body.lab-sim h2[style*="color: #e2e8f0"],
+body.lab-sim h2[style*="color:#cbd5e1"],
+body.lab-sim h3[style*="color:#e2e8f0"],
+body.lab-sim h3[style*="color:#cbd5e1"] {
+    color: var(--lab-ink) !important;
+}
+/* Tonad text på papper — vanliga "subtila" ljusa inline-färger för dark mode */
+body.lab-sim p[style*="color:#94a3b8"],
+body.lab-sim span[style*="color:#94a3b8"],
+body.lab-sim div[style*="color:#94a3b8"],
+body.lab-sim p[style*="color: #94a3b8"],
+body.lab-sim span[style*="color: #94a3b8"],
+body.lab-sim div[style*="color: #94a3b8"],
+body.lab-sim p[style*="color:#cbd5e1"],
+body.lab-sim span[style*="color:#cbd5e1"],
+body.lab-sim div[style*="color:#cbd5e1"],
+body.lab-sim p[style*="color:#e2e8f0"],
+body.lab-sim span[style*="color:#e2e8f0"],
+body.lab-sim div[style*="color:#e2e8f0"] {
+    color: var(--lab-ink-soft) !important;
+}
+/* Breadcrumb-liknande länkar med hårdkodad cyan på dark — gör röda accent */
+body.lab-sim a[style*="color:#38bdf8"],
+body.lab-sim a[style*="color: #38bdf8"] {
+    color: var(--lab-accent) !important;
+}
+
+/* Mode-toggle (knapprad för läge) — Laborans-flikar */
+body.lab-sim .mode-toggle {
+    display: inline-flex;
+    background: var(--lab-bg);
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 4px;
+    padding: 3px;
+    gap: 2px;
+    flex-wrap: wrap;
+}
+body.lab-sim .mode-toggle button,
+body.lab-sim .mode-toggle-btn {
+    padding: 0.4rem 0.9rem;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--lab-ink-soft);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-family: var(--lab-font-sans);
+    transition: color 0.15s ease, background 0.15s ease;
+}
+body.lab-sim .mode-toggle button:hover:not(.active),
+body.lab-sim .mode-toggle-btn:hover:not(.active) { color: var(--lab-ink); }
+body.lab-sim .mode-toggle button.active,
+body.lab-sim .mode-toggle-btn.active {
+    background: var(--lab-ink);
+    color: var(--lab-bg);
+    box-shadow: none;
+}
+
+/* Action-knappar (Reset/Apply/Primary) */
+body.lab-sim .action-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--lab-line-strong);
+    background: var(--lab-bg);
+    color: var(--lab-ink);
+    font-weight: 500;
+    font-family: var(--lab-font-sans);
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+body.lab-sim .action-btn:hover:not(:disabled) {
+    border-color: var(--lab-ink);
+    background: var(--lab-bg-panel);
+    transform: none;
+}
+body.lab-sim .action-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+body.lab-sim .action-btn-primary {
+    background: var(--lab-accent);
+    color: #fff;
+    border-color: var(--lab-accent);
+}
+body.lab-sim .action-btn-primary:hover:not(:disabled) {
+    background: #ad2b41;
+    border-color: #ad2b41;
+    color: #fff;
+    box-shadow: none;
+}
+
+/* Preset-pills (snabbval) */
+body.lab-sim .preset-btn {
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--lab-bg);
+    border: 1px solid var(--lab-line-strong);
+    color: var(--lab-ink-soft);
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--lab-font-sans);
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+body.lab-sim .preset-btn:hover {
+    border-color: var(--lab-ink);
+    color: var(--lab-ink);
+    background: var(--lab-bg-panel);
+}
+
+/* Value-cards (resultatpaneler) */
+body.lab-sim .value-card {
+    background: var(--lab-bg);
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 4px;
+    padding: 12px 16px;
+    min-width: 0;
+}
+body.lab-sim .value-label {
+    font-size: 0.7rem;
+    color: var(--lab-ink-soft);
+    font-family: var(--lab-font-mono);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+body.lab-sim .value-number {
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: var(--lab-font-mono);
+    color: var(--lab-ink);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+body.lab-sim .value-number span.unit {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--lab-ink-soft);
+    margin-left: 3px;
+}
+body.lab-sim .value-number em { font-style: italic; }
+
+/* Data-rader */
+body.lab-sim .data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--lab-line);
+}
+body.lab-sim .data-row:last-child { border-bottom: none; }
+body.lab-sim .data-label { color: var(--lab-ink-soft); font-size: 0.88rem; }
+body.lab-sim .data-value {
+    color: var(--lab-ink);
+    font-family: var(--lab-font-mono);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Formelruta */
+body.lab-sim .formula-box {
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-family: var(--lab-font-sans);
+    color: var(--lab-ink);
+}
+
+/* Status-badges */
+body.lab-sim .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-family: var(--lab-font-sans);
+    font-weight: 500;
+    font-size: 0.92rem;
+}
+body.lab-sim .status-on {
+    background: rgba(60, 130, 70, 0.10);
+    color: #2d6a3e;
+    border: 1px solid rgba(60, 130, 70, 0.45);
+    box-shadow: none;
+}
+body.lab-sim .status-off {
+    background: rgba(15, 22, 32, 0.04);
+    color: var(--lab-ink-soft);
+    border: 1px solid var(--lab-line-strong);
+    box-shadow: none;
+}
+body.lab-sim .status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: none;
+}
+
+/* Metal/material-selector (fotoelektrisk effekt, m.fl.) */
+body.lab-sim .metal-btn {
+    background: var(--lab-bg);
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 4px;
+    color: var(--lab-ink);
+    font-family: var(--lab-font-sans);
+}
+body.lab-sim .metal-btn:hover {
+    border-color: var(--lab-ink);
+    background: var(--lab-bg-panel);
+    transform: none;
+}
+body.lab-sim .metal-btn.active {
+    border-color: var(--lab-accent);
+    background: rgba(200, 50, 74, 0.08);
+    box-shadow: none;
+    color: var(--lab-ink);
+}
+body.lab-sim .metal-symbol { color: var(--lab-ink); }
+body.lab-sim .metal-name { color: var(--lab-ink-soft); }
+body.lab-sim .metal-w { color: var(--lab-ink-muted); font-family: var(--lab-font-mono); }
+
+/* Fullskärms-flytande kontrollpanel — behåll mörk eftersom canvas ofta är mörk;
+   .scene-wrap[data-theme="ljusPapper"] kommer få ljus variant via sin egen scope. */
+body.lab-sim .fs-controls {
+    position: absolute;
+    left: 50%;
+    bottom: 62px;
+    transform: translateX(-50%);
+    width: min(820px, 92%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: rgba(15, 22, 32, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+    z-index: 25;
+    color: #e5e7eb;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+}
+body.lab-sim .fs-controls.collapsed {
+    transform: translateX(-50%) translateY(calc(100% + 40px));
+    opacity: 0;
+    pointer-events: none;
+}
+body.lab-sim .fs-toggle-handle {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: rgba(15, 22, 32, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #e5e7eb;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--lab-font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    z-index: 26;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+}
+body.lab-sim .fs-toggle-handle:hover {
+    background: rgba(40, 50, 65, 0.95);
+    border-color: rgba(255, 255, 255, 0.45);
+}
+body.lab-sim .fs-toggle-handle svg { transition: transform 0.3s ease; }
+
+/* fs-row (rad inom fs-controls) */
+body.lab-sim .fs-label { color: #e2e8f0; font-size: 0.95rem; font-weight: 500; }
+body.lab-sim .fs-value { color: #e2e8f0; font-size: 0.92rem; font-weight: 500; }
+
+/* Fullskärmsknapp (utvidga/komprimera) */
+body.lab-sim .fs-btn {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--lab-line-strong);
+    color: var(--lab-ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, background 0.15s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    z-index: 5;
+}
+body.lab-sim .fs-btn:hover { transform: scale(1.08); background: var(--lab-bg); }
+
+/* ─── 4. Sliders (papper-stil) ──────────────────────────────── */
+
+/* Tvinga papper-stil på ALLA range-inputs inom lab-sim (täcker både
+   .appearance-none och plain <input type="range"> utan klass). */
+body.lab-sim input[type="range"],
+body.lab-sim .mass-slider,
+body.lab-sim input[type="range"].appearance-none {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--lab-line-strong);
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+}
+body.lab-sim .mass-slider::-webkit-slider-thumb,
+body.lab-sim input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--lab-bg);
+    border: 2px solid var(--lab-accent);
+    cursor: grab;
+    box-shadow: none;
+}
+body.lab-sim .mass-slider::-webkit-slider-thumb:active,
+body.lab-sim input[type="range"]::-webkit-slider-thumb:active { cursor: grabbing; }
+body.lab-sim .mass-slider::-moz-range-thumb,
+body.lab-sim input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--lab-bg);
+    border: 2px solid var(--lab-accent);
+    cursor: grab;
+    box-shadow: none;
+}
+
+/* Sliders med specialfärg (våglängd m.fl. där bakgrunden är spektrum)
+   — behåll deras gradient men byt thumb och ram till Laborans */
+body.lab-sim .wl-slider {
+    border: 1px solid var(--lab-line-strong);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+    height: 10px;
+}
+body.lab-sim .wl-slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--lab-bg);
+    border: 2px solid var(--lab-ink);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+body.lab-sim .wl-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--lab-bg);
+    border: 2px solid var(--lab-ink);
+}
+
+/* Intensitetsslider (papper → ockra-gradient) */
+body.lab-sim .int-slider {
+    background: linear-gradient(to right, var(--lab-bg-panel) 0%, #a85a1a 100%);
+    border: 1px solid var(--lab-line-strong);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+    height: 10px;
+}
+body.lab-sim .int-slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--lab-bg);
+    border: 2px solid #a85a1a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+body.lab-sim .int-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--lab-bg);
+    border: 2px solid #a85a1a;
+}
+
+/* Värdebadge (font-mono + bg-gray-700-stil) */
+body.lab-sim .font-mono.bg-gray-700 {
+    background: var(--lab-bg);
+    color: var(--lab-accent);
+    border: 1px solid var(--lab-line-strong);
+    font-family: var(--lab-font-mono);
+}
+
+/* ─── 5. Pedagogiska accentfärger (dämpade) ────────────────── */
+
+/* Bränd ockra (massa, kraft) */
+body.lab-sim .text-amber-300,
+body.lab-sim .text-amber-400 { color: #a85a1a; }
+body.lab-sim .text-amber-300\/70 { color: rgba(168, 90, 26, 0.75); }
+body.lab-sim .text-amber-200\/80 { color: rgba(168, 90, 26, 0.80); }
+body.lab-sim .accent-amber-500,
+body.lab-sim .accent-orange-500 { accent-color: #a85a1a; }
+
+/* Dämpad sjöblå (massa 2, m.fl.) */
+/* Ljusblå-cyan text-färger (designade för mörk bg) — på papper blir de
+   osynliga. Användaren föredrar svart (ink) istället för röd accent för
+   text — accent reserveras för action-knappar och aktiva tabbar. */
+body.lab-sim .text-sky-300,
+body.lab-sim .text-sky-300\/70,
+body.lab-sim .text-sky-400,
+body.lab-sim .text-sky-500,
+body.lab-sim .text-blue-400,
+body.lab-sim .text-blue-500 { color: var(--lab-ink) !important; }
+body.lab-sim .text-sky-200\/80 { color: rgba(42, 90, 124, 0.80); }
+
+/* Dämpad teal (konstant, gravitations-G m.fl.) */
+body.lab-sim .text-cyan-400\/70 { color: rgba(63, 108, 102, 0.75); }
+
+/* Dämpad blålila (avstånd, indigo-variabler) */
+body.lab-sim .text-indigo-300 { color: #5e4576; }
+body.lab-sim .text-indigo-300\/70 { color: rgba(94, 69, 118, 0.75); }
+body.lab-sim .accent-indigo-500 { accent-color: #5e4576; }
+
+/* Resonans-cyan i stående våg → röd accent */
+body.lab-sim .text-cyan-400.transition-colors { color: var(--lab-accent); font-weight: 600; }
+
+/* ─── 6. Breadcrumb ────────────────────────────────────────── */
+
+body.lab-sim .breadcrumb {
+    margin-bottom: 1.5rem;
+    color: var(--lab-ink-soft);
+    font-size: 0.8rem;
+    font-family: var(--lab-font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+body.lab-sim .breadcrumb a {
+    color: var(--lab-accent);
+    text-decoration: none;
+}
+body.lab-sim .breadcrumb a:hover {
+    text-decoration: underline;
+    text-shadow: none;
+    color: var(--lab-accent);
+}
+
+/* Formel-highlight (puls vid värdeändring) */
+@keyframes lab-highlight-pulse {
+    0% { background: rgba(200, 50, 74, 0.25); }
+    100% { background: transparent; }
+}
+body.lab-sim .formula-highlight {
+    display: inline-block;
+    padding: 2px 6px;
+    margin: 0 1px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+body.lab-sim .formula-highlight.changed { animation: lab-highlight-pulse 1.0s ease-out; }
+
+/* Footer på simuleringssida */
+body.lab-sim footer.text-gray-600 {
+    color: var(--lab-ink-muted);
+    font-family: var(--lab-font-mono);
+}
+
+/* Scrollbar (subtil) */
+body.lab-sim ::-webkit-scrollbar { width: 7px; }
+body.lab-sim ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+body.lab-sim ::-webkit-scrollbar-thumb { background: var(--lab-line-strong); border-radius: 4px; }
+
+/* ============================================================
+   7. Canvas-tema-system
+   ----------------------------------------------------------------
+   Aktiveras via data-theme="morkRymd|ljusPapper|pergament" på
+   en wrapper-element (.canvas-wrap, .scene-wrap, .wave-stage).
+   CSS-variabler styr bakgrund och vissa SVG-färger.
+   För 2D canvas och Three.js: hårdkodade canvas-färger måste
+   ändras separat i JS (drawStarfield, scene.fog, etc.) — det
+   sköts av varje simulering individuellt.
+   ============================================================ */
+
+/* Canvas-wrap (2D canvas, t.ex. fysik1-newtons-gravitationslag) */
+body.lab-sim .canvas-wrap {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #02040a;
+    box-shadow: inset 0 0 0 1px var(--lab-line-strong);
+}
+body.lab-sim .canvas-wrap canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    touch-action: none;
+}
+body.lab-sim .canvas-wrap[data-theme="ljusPapper"] { background: var(--lab-bg); }
+body.lab-sim .canvas-wrap[data-theme="pergament"] { background: #1a1813; }
+
+/* Scene-wrap (Three.js, t.ex. fysik2-fotoelektrisk-effekt) */
+body.lab-sim .scene-wrap {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px var(--lab-line-strong);
+    background: radial-gradient(ellipse at 30% 20%, #1b2540 0%, #0a0f1e 55%, #05080f 100%);
+    transition: background 0.3s ease;
+}
+body.lab-sim .scene-wrap[data-theme="ljusPapper"] { background: var(--lab-bg); }
+body.lab-sim .scene-wrap[data-theme="pergament"] {
+    background: radial-gradient(ellipse at 30% 20%, #2d2519 0%, #1a1813 55%, #100e09 100%);
+}
+
+/* Scene-canvas: container för THREE.js renderer-domElement */
+body.lab-sim .scene-canvas {
+    display: block;
+    width: 100%;
+    height: 520px;
+}
+
+/* Fullscreen-overrides för scene-wrap */
+body.lab-sim .scene-wrap:fullscreen,
+body.lab-sim .scene-wrap:-webkit-full-screen {
+    border-radius: 0;
+    width: 100vw !important;
+    height: 100vh !important;
+    display: block !important;
+}
+body.lab-sim .scene-wrap:fullscreen .scene-canvas,
+body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas {
+    width: 100vw !important;
+    height: 100vh !important;
+}
+body.lab-sim .scene-wrap:fullscreen .scene-canvas > canvas,
+body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
+    width: 100vw !important;
+    height: 100vh !important;
+    display: block !important;
+}
+
+/* Wave-stage (SVG-baserad, t.ex. fysik2-staende-vag) */
+.wave-stage {
+    --wave-bg: #0a0f1e;
+    --wave-color: #38bdf8;
+    --wave-color-resonant: #67e8f9;
+    --wave-grid: rgba(148, 163, 184, 0.45);
+    --wave-vibrator: #6b7280;
+    --wave-vibrator-detail: #2d3748;
+    --wave-node: #ef4444;
+    --wave-rod: #94a3b8;
+    --wave-weight: #6b7280;
+    background: var(--wave-bg);
+    border-radius: 4px;
+    padding: 16px;
+    transition: background 0.3s ease;
+    box-shadow: inset 0 0 0 1px var(--lab-line-strong);
+}
+.wave-stage[data-theme="ljusPapper"] {
+    --wave-bg: var(--lab-bg);
+    --wave-color: #2a5a7c;
+    --wave-color-resonant: #c8324a;
+    --wave-grid: rgba(15, 22, 32, 0.22);
+    --wave-vibrator: #94a3b8;
+    --wave-vibrator-detail: rgba(15, 22, 32, 0.5);
+    --wave-node: #c8324a;
+    --wave-rod: #475569;
+    --wave-weight: #64748b;
+}
+.wave-stage[data-theme="pergament"] {
+    --wave-bg: #1a1813;
+    --wave-color: #c89a3a;
+    --wave-color-resonant: #e6b056;
+    --wave-grid: rgba(245, 230, 200, 0.22);
+    --wave-vibrator: #7a6b4d;
+    --wave-vibrator-detail: #3a2f1a;
+    --wave-node: #d4674a;
+    --wave-rod: #b8a36f;
+    --wave-weight: #7a6b4d;
+}
+
+/* SVG-färg-overrides inom .wave-stage */
+.wave-stage svg .stroke-cyan-400 { stroke: var(--wave-color-resonant); }
+.wave-stage svg .stroke-cyan-600 { stroke: var(--wave-color); }
+.wave-stage svg .stroke-gray-600 { stroke: var(--wave-grid); }
+.wave-stage svg .stroke-gray-400 { stroke: var(--wave-rod); }
+.wave-stage svg .fill-gray-500 { fill: var(--wave-weight); }
+.wave-stage svg .fill-gray-600 { fill: var(--wave-vibrator); }
+.wave-stage svg .fill-gray-700 { fill: var(--wave-vibrator-detail); }
+.wave-stage svg .fill-gray-800 { fill: var(--wave-vibrator-detail); }
+.wave-stage svg .fill-red-500 { fill: var(--wave-node); }
+.wave-stage svg [stroke="#2d3748"] { stroke: var(--wave-vibrator-detail); }

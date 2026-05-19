@@ -6,6 +6,8 @@ Interaktiva fysiksimuleringar för gymnasieelever (Fysik 1 & 2).
 
 - **Frontend**: Standalone HTML med React 18 (CDN), TailwindCSS (CDN)
 - **Språk**: Svenska, kommatecken som decimalavskiljare (5,00 inte 5.00)
+- **Tusentalsavgränsare**: hårt mellanslag (NBSP, ` `) mellan tusentalsgrupper. Exempel: "5 000" (rätt), "5000" (fel). "10 000 Pa" (rätt), "10000 Pa" (fel). Gäller alla numeriska värden i sims, formler, resultat-paneler.
+  - JS-helper: `function fmtNum(n, d) { const s = n.toFixed(d); const [intp, frac] = s.split('.'); const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); return frac !== undefined ? withSpaces + ',' + frac : withSpaces; }`
 - **Versaler**: Använd ALDRIG "title case" (engelska versalregler). På svenska skrivs endast första ordet i en mening/rubrik med stor bokstav. Exempel:
   - ✓ "Elektrostatisk induktion" (korrekt)
   - ✗ "Elektrostatisk Induktion" (fel - title case)
@@ -209,7 +211,37 @@ bred och smal skärm innan du markerar arbetet som klart.
 - **Teckensnitt**: Använd Poppins för text i canvas och UI-element
 - **Fysikaliska variabler**: Ska ALLTID skrivas med *kursiv stil* (t.ex. *F*, *Q*, *r*, *v*, *a*)
 - **Enheter**: Ska skrivas med rak stil (t.ex. N, C, m, m/s)
-- **Subscript**: Använd Unicode-subscript för index (Q₁, Q₂, v₀, etc.)
+- **Subscript**: Använd Unicode-subscript för **sifferindex** (Q₁, Q₂, v₀, etc.)
+  För **bokstavsindex** måste inline-LaTeX användas i markdown-genomgångar,
+  inte `*F*_G`-mönstret — markdown tolkar `_G` som början på en kursiv-sektion
+  och underscore-tecknet blir kvar synligt. Exempel:
+  - ✓ `$F_G$` (renderas som *F* med G som subscript)
+  - ✓ `$F_\text{drag}$` (för flerteckniga index)
+  - ✓ `$F_{N1}$` (för index med både bokstav och siffra)
+  - ✗ `*F*_G` (G blir kvar med underscore framför — fel)
+  - ✗ `*F*_drag` (samma problem)
+
+  Denna regel gäller löpande text i `data/teori/*.md`. I `$$ ... $$`-block
+  fungerar `F_G` redan korrekt eftersom math-blocken skyddas från markdown-
+  parsern (se `protectMath` i `katalog.html`/`avsnitt.html`).
+
+- **Subscript-stil i math (KaTeX)**: när indexet är en **identifierare/etikett**
+  (N, f, G, R, drag, tot, bom, …) och **inte en egen variabel**, ska det
+  renderas **rakt** (upright), inte kursivt. KaTeX gör som standard alla
+  bokstäver i math kursiva, även i subscript, vilket är fel för dessa fall.
+
+  - ✓ `F_\mathrm{N}` (rendrerar som *F* med rak N)
+  - ✓ `F_\mathrm{drag}` (rendrerar som *F* med rakt "drag")
+  - ✗ `F_N` (rendrerar som *F* med kursiv N — fel, N är ingen variabel)
+
+  Sifferindex (1, 2, 0, …) är redan upright i KaTeX som standard — lämna dem
+  som `F_1`, `F_2`, `v_0`, etc.
+
+  **Du behöver inte skriva `\mathrm{}` manuellt** i `data/teori/*.md`.
+  Build-skriptet `data/teori/build.js` har en transformfunktion
+  `uprightSubscripts()` som **automatiskt** omsluter bokstavs-subscripts med
+  `\mathrm{}` när bundeln byggs. Skriv enkelt `F_G`, `F_N`, `F_\text{drag}` —
+  build.js gör om till rätt upright-form. Siffror lämnas oförändrade.
 
 ```javascript
 // I canvas: variabel i kursiv, värde i normal stil

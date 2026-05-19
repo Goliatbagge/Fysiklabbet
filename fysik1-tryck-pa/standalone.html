@@ -49,8 +49,16 @@
   }
 }
 </script>
-</head>
-  <body class="bg-slate-900 text-white font-sans">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="../styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="../styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+  <style>
+      body.lab-sim .text-sky-100, body.lab-sim .text-sky-200, body.lab-sim .text-sky-300, body.lab-sim .text-sky-400 { color: #0f1620 !important; }
+      body.lab-sim .border-sky-700, body.lab-sim .border-sky-800 { border-color: rgba(15,22,32,0.2) !important; }
+    </style>
+  </head>
+  <body class="font-sans lab-sim">
     <div id="root"></div>
     <script type="module">
 import React, { useState, useMemo, useCallback, useRef, Suspense } from 'react';
@@ -192,7 +200,7 @@ const Loader = () => {
   return React.createElement(Text, {
     position: [0, 0, 0],
     fontSize: 0.5,
-    color: "white",
+    color: "var(--lab-ink)",
     anchorX: "center",
     anchorY: "middle"
   }, "Laddar 3D-scen...");
@@ -229,13 +237,15 @@ const Scene3D = ({ area, force, isBroken, pressure, breakingPoint }) => {
 };
 
 // SliderControl Component
+
+function fmtNum(n, d) { const s = n.toFixed(d); const [intp, frac] = s.split("."); const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0"); return frac !== undefined ? withSpaces + "," + frac : withSpaces; }
 const SliderControl = ({ label, value, min, max, step, unit, onChange, disabled }) => {
   const isArea = unit === 'm²';
-  const displayValue = isArea ? value.toFixed(2) : value.toFixed(0);
+  const displayValue = isArea ? fmtNum(value, 2) : fmtNum(value, 0);
 
   return React.createElement('div', { className: "flex flex-col gap-2" },
     React.createElement('div', { className: "flex justify-between items-baseline" },
-      React.createElement('label', { className: "font-semibold text-lg text-sky-300" }, label),
+      React.createElement('label', { className: "font-semibold text-lg text-sky-300", dangerouslySetInnerHTML: { __html: label } }),
       React.createElement('span', { className: "text-lg font-mono bg-slate-700 text-white py-1 px-3 rounded" },
         displayValue + " " + unit
       )
@@ -262,27 +272,27 @@ const InfoPanel = ({ force, area, pressure, isBroken, breakingPoint, onReset }) 
     React.createElement('h2', { className: "text-lg font-bold mb-3 text-sky-200 border-b border-sky-700 pb-2" }, "Resultat"),
     React.createElement('div', { className: "space-y-2 text-base" },
       React.createElement('p', { className: "flex justify-between" },
-        React.createElement('span', { className: "text-slate-300" }, "Tyngd (F):"),
-        React.createElement('span', { className: "font-mono" }, force.toFixed(0) + " N")
+        React.createElement('span', { className: "text-slate-300" }, React.createElement("span", { dangerouslySetInnerHTML: { __html: "Tyngd (<em>F</em>):" }})),
+        React.createElement('span', { className: "font-mono" }, fmtNum(force, 0) + " N")
       ),
       React.createElement('p', { className: "flex justify-between" },
-        React.createElement('span', { className: "text-slate-300" }, "Area (A):"),
-        React.createElement('span', { className: "font-mono" }, area.toFixed(2) + " m²")
+        React.createElement('span', { className: "text-slate-300" }, React.createElement("span", { dangerouslySetInnerHTML: { __html: "Area (<em>A</em>):" }})),
+        React.createElement('span', { className: "font-mono" }, fmtNum(area, 2) + " m²")
       ),
       React.createElement('p', { className: "flex justify-between items-baseline font-bold text-lg text-sky-100 border-t border-slate-700 pt-2" },
-        React.createElement('span', { className: "text-sky-300" }, "Tryck (p):"),
-        React.createElement('span', { className: "font-mono" }, pressure.toFixed(0) + " Pa")
+        React.createElement('span', { className: "text-sky-300" }, React.createElement("span", { dangerouslySetInnerHTML: { __html: "Tryck (<em>p</em>):" }})),
+        React.createElement('span', { className: "font-mono" }, fmtNum(pressure, 0) + " Pa")
       )
     ),
     React.createElement('div', { className: "mt-3" },
-      React.createElement('h3', { className: "font-semibold text-sky-300 mb-1 text-sm" }, "Isens Hållfasthet"),
+      React.createElement('h3', { className: "font-semibold text-sky-300 mb-1 text-sm" }, "Isens hållfasthet"),
       React.createElement('div', { className: "w-full bg-slate-700 rounded-full h-3 overflow-hidden border-2 border-slate-600" },
         React.createElement('div', {
           className: `h-full rounded-full transition-all duration-300 ${isOverLimit ? 'bg-red-500' : 'bg-cyan-400'}`,
           style: { width: `${pressurePercent}%` }
         })
       ),
-      React.createElement('div', { className: "text-xs text-slate-400 text-right mt-1" }, "Gräns: " + breakingPoint + " Pa")
+      React.createElement('div', { className: "text-xs text-slate-400 text-right mt-1" }, "Gräns: " + fmtNum(breakingPoint, 0) + " Pa")
     ),
     React.createElement('div', { className: "mt-3 text-center" },
       isBroken ?
@@ -298,7 +308,7 @@ const InfoPanel = ({ force, area, pressure, isBroken, breakingPoint, onReset }) 
     React.createElement('button', {
       onClick: onReset,
       className: "w-full mt-3 bg-accent-orange hover:bg-orange-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-orange-500/50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-    }, "Återställ Simulering")
+    }, "Återställ simulering")
   );
 };
 
@@ -327,8 +337,8 @@ const App = () => {
 
   return React.createElement('div', { className: "min-h-screen w-full bg-gradient-to-br from-slate-900 to-sky-900 flex flex-col items-center p-3 lg:p-4 font-sans" },
     React.createElement('header', { className: "w-full max-w-6xl text-center mb-2 md:mb-3" },
-      React.createElement('h1', { className: "text-2xl md:text-4xl font-bold text-ice-blue" }, "Interaktiv Trycksimulering"),
-      React.createElement('p', { className: "text-base md:text-xl text-sky-300 mt-1" }, "p = F / A")
+      React.createElement('h1', { className: "text-2xl md:text-4xl font-bold text-ice-blue" }, "Interaktiv trycksimulering"),
+      React.createElement('p', { className: "text-base md:text-xl text-sky-300 mt-1" }, React.createElement("span", { dangerouslySetInnerHTML: { __html: "<em>p</em> = <em>F</em> / <em>A</em>" }}))
     ),
     React.createElement('main', { className: "w-full max-w-6xl flex-grow flex flex-col lg:flex-row gap-4" },
       React.createElement('div', { className: "lg:w-3/5 h-[40vh] lg:h-auto rounded-xl bg-black/30 shadow-2xl overflow-hidden border border-sky-700" },
@@ -339,7 +349,7 @@ const App = () => {
           React.createElement('h2', { className: "text-lg font-bold mb-3 text-sky-200 border-b border-sky-700 pb-2" }, "Kontrollpanel"),
           React.createElement('div', { className: "space-y-4" },
             React.createElement(SliderControl, {
-              label: "Tyngd (F)",
+              label: "Tyngd (<em>F</em>)",
               value: force,
               min: MIN_FORCE,
               max: MAX_FORCE,
@@ -349,7 +359,7 @@ const App = () => {
               disabled: isBroken
             }),
             React.createElement(SliderControl, {
-              label: "Area (A)",
+              label: "Area (<em>A</em>)",
               value: area,
               min: MIN_AREA,
               max: MAX_AREA,

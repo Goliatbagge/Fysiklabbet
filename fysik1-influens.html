@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elektrisk influens - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -16,22 +20,22 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
         .glass-card-light {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.28);
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
         .btn-glow {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 20px rgba(200, 50, 74, 0.3);
             transition: all 0.3s ease;
         }
         .btn-glow:hover {
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 30px rgba(200, 50, 74, 0.5);
         }
         .contact-overlay {
             position: fixed;
@@ -46,8 +50,8 @@
         }
         .contact-banner {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border: 2px solid rgba(56, 189, 248, 0.5);
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.25), 0 0 80px rgba(56, 189, 248, 0.1);
+            border: 2px solid rgba(200, 50, 74, 0.5);
+            box-shadow: 0 0 40px rgba(200, 50, 74, 0.25), 0 0 80px rgba(200, 50, 74, 0.1);
             max-width: 460px;
             width: 90%;
         }
@@ -57,51 +61,50 @@
             100% { opacity: 1; transform: scale(1); }
         }
         .tab-button {
-            transition: all 0.3s ease;
+            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+            background: var(--lab-bg);
+            color: var(--lab-ink);
+            border-color: var(--lab-line-strong) !important;
+        }
+        .tab-button:hover:not(.active) {
+            background: var(--lab-bg-panel);
+            border-color: var(--lab-ink) !important;
         }
         .tab-button.active {
-            background: rgba(56, 189, 248, 0.2);
-            border-color: rgba(56, 189, 248, 0.5);
-            color: #38bdf8;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            background: var(--lab-ink);
+            border-color: var(--lab-ink) !important;
+            color: var(--lab-bg);
+            box-shadow: none;
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -390,7 +393,7 @@
                     const dx = state.canV * deltaTime;
                     state.canRotation += dx / CAN_RADIUS;
 
-                    ctx.fillStyle = '#050510';
+                    ctx.fillStyle = '#f3eee4';
                     ctx.fillRect(0, 0, width, height);
 
                     const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.7);
@@ -400,7 +403,7 @@
                     ctx.fillRect(0, 0, width, height);
 
                     ctx.shadowBlur = 10;
-                    ctx.shadowColor = 'rgba(56, 189, 248, 0.3)';
+                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
                     ctx.beginPath();
                     ctx.moveTo(0, floorY);
                     ctx.lineTo(width, floorY);
@@ -410,14 +413,14 @@
                     ctx.shadowBlur = 0;
 
                     const rodGradient = ctx.createLinearGradient(state.rodX - ROD_WIDTH/2, 0, state.rodX + ROD_WIDTH/2, 0);
-                    rodGradient.addColorStop(0, '#1e293b');
+                    rodGradient.addColorStop(0, '#f3eee4');
                     rodGradient.addColorStop(0.3, '#334155');
                     rodGradient.addColorStop(0.5, '#475569');
                     rodGradient.addColorStop(0.7, '#334155');
-                    rodGradient.addColorStop(1, '#1e293b');
+                    rodGradient.addColorStop(1, '#f3eee4');
 
                     ctx.shadowBlur = 15;
-                    ctx.shadowColor = 'rgba(56, 189, 248, 0.3)';
+                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
                     ctx.fillStyle = rodGradient;
                     if (ctx.roundRect) {
                         ctx.beginPath();
@@ -431,9 +434,9 @@
                     }
                     ctx.shadowBlur = 0;
 
-                    ctx.shadowBlur = 15;
-                    ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
-                    ctx.fillStyle = '#38bdf8';
+                    ctx.shadowBlur = 18;
+                    ctx.shadowColor = 'rgba(59, 130, 246, 0.95)';
+                    ctx.fillStyle = '#1e40af';
                     ctx.font = 'bold 24px sans-serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
@@ -454,19 +457,19 @@
                     gradient.addColorStop(1, '#334155');
 
                     ctx.shadowBlur = 20;
-                    ctx.shadowColor = 'rgba(56, 189, 248, 0.2)';
+                    ctx.shadowColor = 'rgba(200, 50, 74, 0.2)';
                     ctx.beginPath();
                     ctx.arc(0, 0, CAN_RADIUS, 0, Math.PI * 2);
                     ctx.fillStyle = gradient;
                     ctx.fill();
-                    ctx.strokeStyle = '#94a3b8';
+                    ctx.strokeStyle = '#0f1620';
                     ctx.lineWidth = 3;
                     ctx.stroke();
                     ctx.shadowBlur = 0;
 
                     ctx.beginPath();
                     ctx.arc(0, 0, CAN_RADIUS - 5, 0, Math.PI * 2);
-                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.42)';
                     ctx.lineWidth = 1;
                     ctx.stroke();
 
@@ -493,18 +496,18 @@
                         ctx.save();
                         ctx.translate(state.canX, canY);
                         state.electrons.forEach(p => {
-                            const outerGlow = ctx.createRadialGradient(p.currentPosition.x, p.currentPosition.y, 0, p.currentPosition.x, p.currentPosition.y, 15);
-                            outerGlow.addColorStop(0, 'rgba(56, 189, 248, 0.6)');
-                            outerGlow.addColorStop(0.5, 'rgba(14, 165, 233, 0.2)');
-                            outerGlow.addColorStop(1, 'rgba(2, 132, 199, 0)');
+                            const outerGlow = ctx.createRadialGradient(p.currentPosition.x, p.currentPosition.y, 0, p.currentPosition.x, p.currentPosition.y, 18);
+                            outerGlow.addColorStop(0, 'rgba(59, 130, 246, 0.7)');
+                            outerGlow.addColorStop(0.5, 'rgba(59, 130, 246, 0.25)');
+                            outerGlow.addColorStop(1, 'rgba(59, 130, 246, 0)');
                             ctx.beginPath();
-                            ctx.arc(p.currentPosition.x, p.currentPosition.y, 15, 0, Math.PI * 2);
+                            ctx.arc(p.currentPosition.x, p.currentPosition.y, 18, 0, Math.PI * 2);
                             ctx.fillStyle = outerGlow;
                             ctx.fill();
 
-                            ctx.shadowBlur = 12;
-                            ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
-                            ctx.fillStyle = '#38bdf8';
+                            ctx.shadowBlur = 16;
+                            ctx.shadowColor = 'rgba(59, 130, 246, 0.95)';
+                            ctx.fillStyle = '#1e40af';
                             ctx.font = 'bold 20px Arial';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -554,7 +557,7 @@
                     <canvas
                         ref={canvasRef}
                         className="block touch-none"
-                        style={{ width: '100%', height: '100%', boxShadow: '0 0 40px rgba(56, 189, 248, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.5)' }}
+                        style={{ width: '100%', height: '100%', boxShadow: '0 0 40px rgba(200, 50, 74, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.5)' }}
                     />
                 </div>
             );
@@ -579,7 +582,7 @@
                                 background: 'linear-gradient(135deg, #0ea5e9, #38bdf8)',
                                 border: 'none',
                                 cursor: 'pointer',
-                                boxShadow: '0 0 20px rgba(56, 189, 248, 0.3)'
+                                boxShadow: '0 0 20px rgba(200, 50, 74, 0.3)'
                             }}
                             onClick={onReset}
                         >
@@ -918,7 +921,7 @@
                     }
 
                     // Dark background
-                    ctx.fillStyle = '#050510';
+                    ctx.fillStyle = '#f3eee4';
                     ctx.fillRect(0, 0, width, height);
 
                     const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.7);
@@ -929,13 +932,13 @@
 
                     // Draw ceiling
                     const ceilingGradient = ctx.createLinearGradient(0, 0, 0, CEILING_HEIGHT + 30);
-                    ceilingGradient.addColorStop(0, '#1e293b');
-                    ceilingGradient.addColorStop(1, '#0f172a');
+                    ceilingGradient.addColorStop(0, '#f3eee4');
+                    ceilingGradient.addColorStop(1, '#f3eee4');
                     ctx.fillStyle = ceilingGradient;
                     ctx.fillRect(0, 0, width, CEILING_HEIGHT + 30);
 
                     ctx.shadowBlur = 10;
-                    ctx.shadowColor = 'rgba(56, 189, 248, 0.3)';
+                    ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
                     ctx.beginPath();
                     ctx.moveTo(0, CEILING_HEIGHT + 30);
                     ctx.lineTo(width, CEILING_HEIGHT + 30);
@@ -972,9 +975,10 @@
                         ctx.textBaseline = 'middle';
                         ctx.fillText('+', dipoleWidth / 4, 0);
 
-                        // Negative side (left)
-                        ctx.shadowColor = 'rgba(56, 189, 248, 0.8)';
-                        ctx.fillStyle = '#38bdf8';
+                        // Negative side (left) — glödande blå elektron
+                        ctx.shadowBlur = 14;
+                        ctx.shadowColor = 'rgba(59, 130, 246, 0.95)';
+                        ctx.fillStyle = '#1e40af';
                         ctx.fillText('−', -dipoleWidth / 4, 0);
                         ctx.shadowBlur = 0;
 
@@ -1043,7 +1047,7 @@
                     ctx.stroke();
 
                     // Eyes
-                    ctx.fillStyle = '#1e293b';
+                    ctx.fillStyle = '#0f1620';
                     ctx.beginPath();
                     ctx.ellipse(-15, -10, 6, 8, 0, 0, Math.PI * 2);
                     ctx.fill();
@@ -1052,7 +1056,7 @@
                     ctx.fill();
 
                     // Eye highlights
-                    ctx.fillStyle = '#ffffff';
+                    ctx.fillStyle = '#0f1620';
                     ctx.beginPath();
                     ctx.arc(-17, -12, 2, 0, Math.PI * 2);
                     ctx.fill();
@@ -1127,7 +1131,7 @@
                     // Balloon glow if charged
                     if (state.isCharged) {
                         ctx.shadowBlur = 30;
-                        ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
+                        ctx.shadowColor = 'rgba(200, 50, 74, 0.4)';
                     }
 
                     // Balloon gradient
@@ -1171,20 +1175,20 @@
                             const x = Math.cos(angle) * electronRadius;
                             const y = Math.sin(angle) * electronRadius;
 
-                            // Outer glow
-                            const outerGlow = ctx.createRadialGradient(x, y, 0, x, y, 12);
-                            outerGlow.addColorStop(0, 'rgba(56, 189, 248, 0.8)');
-                            outerGlow.addColorStop(0.5, 'rgba(14, 165, 233, 0.3)');
-                            outerGlow.addColorStop(1, 'rgba(2, 132, 199, 0)');
+                            // Outer glow — glödande blå
+                            const outerGlow = ctx.createRadialGradient(x, y, 0, x, y, 14);
+                            outerGlow.addColorStop(0, 'rgba(59, 130, 246, 0.85)');
+                            outerGlow.addColorStop(0.5, 'rgba(59, 130, 246, 0.35)');
+                            outerGlow.addColorStop(1, 'rgba(59, 130, 246, 0)');
                             ctx.beginPath();
-                            ctx.arc(x, y, 12, 0, Math.PI * 2);
+                            ctx.arc(x, y, 14, 0, Math.PI * 2);
                             ctx.fillStyle = outerGlow;
                             ctx.fill();
 
                             // Minus sign
-                            ctx.shadowBlur = 15;
-                            ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
-                            ctx.fillStyle = '#38bdf8';
+                            ctx.shadowBlur = 16;
+                            ctx.shadowColor = 'rgba(59, 130, 246, 0.95)';
+                            ctx.fillStyle = '#1e40af';
                             ctx.font = 'bold 16px Arial';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -1205,7 +1209,7 @@
                         instruction = 'Gnugga mer!';
                     }
 
-                    ctx.fillStyle = '#94a3b8';
+                    ctx.fillStyle = '#0f1620';
                     ctx.font = '14px sans-serif';
                     ctx.textAlign = 'left';
                     const instructionX = state.headX + HEAD_WIDTH / 2 + 40;
@@ -1243,7 +1247,7 @@
                     <canvas
                         ref={canvasRef}
                         className="block touch-none"
-                        style={{ width: '100%', height: '100%', boxShadow: '0 0 40px rgba(56, 189, 248, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.5)' }}
+                        style={{ width: '100%', height: '100%', boxShadow: '0 0 40px rgba(200, 50, 74, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.5)' }}
                     />
                 </div>
             );

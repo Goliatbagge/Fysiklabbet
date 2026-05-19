@@ -155,8 +155,8 @@ export const SimulationCanvas: React.FC<SimulationCanvasProps> = ({
     const xTickStep = getNiceStep(worldXMax - worldXMin);
     const yTickStep = getNiceStep(worldYMax - worldYMin);
 
-    // Draw grid
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+    // Draw grid (papper-tema)
+    ctx.strokeStyle = 'rgba(15, 22, 32, 0.12)';
     ctx.lineWidth = 1;
     const firstXLine = Math.floor(worldXMin / xTickStep) * xTickStep;
     for (let x = firstXLine; x < worldXMax; x += xTickStep) {
@@ -186,8 +186,8 @@ export const SimulationCanvas: React.FC<SimulationCanvasProps> = ({
 
     if (showAxes) {
       ctx.save();
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.fillStyle = 'rgba(15, 22, 32, 0.85)';
+      ctx.strokeStyle = 'rgba(15, 22, 32, 0.85)';
       ctx.lineWidth = 1;
       ctx.font = '12px Inter, sans-serif';
 
@@ -234,7 +234,7 @@ export const SimulationCanvas: React.FC<SimulationCanvasProps> = ({
 
       ctx.save();
       ctx.setLineDash([6, 6]);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.strokeStyle = 'rgba(15, 22, 32, 0.60)';
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(sx, sy);
@@ -244,7 +244,7 @@ export const SimulationCanvas: React.FC<SimulationCanvasProps> = ({
     }
 
     ctx.setLineDash([4, 4]);
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+    ctx.strokeStyle = 'rgba(15, 22, 32, 0.60)';
     ctx.lineWidth = 2;
     ctx.beginPath();
     if (trajectory.length > 0) {
@@ -318,7 +318,7 @@ export const SimulationCanvas: React.FC<SimulationCanvasProps> = ({
     }
 
     if (initialHeight > 0) {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+        ctx.fillStyle = 'rgba(15, 22, 32, 0.84)';
         ctx.fillRect(Y_AXIS_PADDING - 5, toCanvasY(initialHeight) - 2, 10, 4);
     }
 
@@ -346,7 +346,7 @@ export const SimulationCanvas: React.FC<SimulationCanvasProps> = ({
         const yBoxHeight = 24;
 
         // Draw rounded rectangle background
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
         ctx.beginPath();
         ctx.roundRect(yBoxX, yBoxY, yBoxWidth, yBoxHeight, 4);
         ctx.fill();
@@ -386,7 +386,7 @@ export const SimulationCanvas: React.FC<SimulationCanvasProps> = ({
         const xBoxHeight = 24;
 
         // Draw rounded rectangle background
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.95)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
         ctx.beginPath();
         ctx.roundRect(xBoxX, xBoxY, xBoxWidth, xBoxHeight, 4);
         ctx.fill();

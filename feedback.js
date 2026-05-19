@@ -20,78 +20,91 @@
     const FEEDBACK_ENDPOINT_AJAX = `https://formsubmit.co/ajax/${FEEDBACK_EMAIL}`;
     const CONFIRMATION_TEXT = 'Snyggt! Vi har registrerat din kraftfulla input. Acceleration mot en bättre sida påbörjad!';
 
+    // Feedback-widgetens stil matchar Laborans-paletten (pappersbakgrund,
+    // ink-svart text, accent-röd #c8324a). Vit knapp + svart border syns
+    // bra både mot Laborans pappersgula bakgrund och mot de mörka
+    // simuleringsidornas slate-bakgrund.
     const CSS = `
     .fb-btn {
         position: fixed;
         bottom: 1.75rem;
         right: 1.75rem;
-        width: 58px;
-        height: 58px;
+        width: 56px;
+        height: 56px;
         border-radius: 50%;
-        border: 1px solid rgba(56, 189, 248, 0.35);
-        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-        color: #0a1628;
-        font-size: 1.7rem;
+        border: 1px solid rgba(15, 22, 32, 0.85);
+        background: #ffffff;
+        color: #0f1620;
         cursor: pointer;
         z-index: 9998;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(56, 189, 248, 0.4);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        animation: fb-pulse 2.6s ease-in-out infinite;
-        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        transition: transform 0.18s ease, background 0.18s ease,
+                    color 0.18s ease, border-color 0.18s ease,
+                    box-shadow 0.18s ease;
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+        padding: 0;
     }
     .fb-btn:hover {
-        transform: scale(1.08);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 40px rgba(56, 189, 248, 0.75);
+        transform: translateY(-1px);
+        background: #c8324a;
+        color: #ffffff;
+        border-color: #c8324a;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
     }
-    .fb-btn:active { transform: scale(0.96); }
+    .fb-btn:active { transform: translateY(0) scale(0.98); }
     .fb-btn:focus-visible {
-        outline: 2px solid #38bdf8;
+        outline: 2px solid #c8324a;
         outline-offset: 3px;
     }
-    @keyframes fb-pulse {
-        0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 22px rgba(56, 189, 248, 0.35); }
-        50%      { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 40px rgba(56, 189, 248, 0.75); }
+    .fb-btn svg { width: 26px; height: 26px; }
+    .fb-btn .fb-bulb-glow {
+        fill: rgba(200, 50, 74, 0.16);
+        transition: fill 0.18s ease;
     }
+    .fb-btn:hover .fb-bulb-glow { fill: rgba(255, 255, 255, 0.25); }
+    .fb-btn .fb-bulb-stroke { stroke: currentColor; }
+
     .fb-tooltip {
         position: fixed;
-        bottom: 2.5rem;
+        bottom: 2.55rem;
         right: 5.5rem;
-        background: rgba(12, 18, 32, 0.95);
-        color: #e2e8f0;
-        padding: 0.5rem 0.85rem;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        font-family: 'Poppins', sans-serif;
+        background: #0f1620;
+        color: #f3eee4;
+        padding: 0.45rem 0.8rem;
+        border-radius: 2px;
+        font-size: 11px;
+        font-family: "JetBrains Mono", ui-monospace, "Menlo", monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
         white-space: nowrap;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.2s ease;
+        transition: opacity 0.18s ease;
         z-index: 9998;
-        border: 1px solid rgba(56, 189, 248, 0.2);
     }
     .fb-btn:hover + .fb-tooltip { opacity: 1; }
+
     .fb-panel {
         position: fixed;
-        bottom: 5.8rem;
+        bottom: 5.6rem;
         right: 1.75rem;
         width: 360px;
         max-width: calc(100vw - 2rem);
-        background: rgba(12, 18, 32, 0.97);
-        backdrop-filter: blur(18px);
-        border: 1px solid rgba(56, 189, 248, 0.25);
-        border-radius: 16px;
-        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(56, 189, 248, 0.15);
-        padding: 1.25rem;
-        color: #e2e8f0;
-        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #ffffff;
+        border: 1px solid rgba(15, 22, 32, 0.85);
+        border-radius: 2px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+        padding: 1.25rem 1.25rem 1.1rem;
+        color: #0f1620;
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
         z-index: 9999;
         display: none;
         opacity: 0;
-        transform: translateY(12px);
-        transition: opacity 0.22s ease, transform 0.22s ease;
+        transform: translateY(8px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .fb-panel.fb-open {
         display: block;
@@ -102,91 +115,94 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 1rem;
+        margin: 0 0 1.1rem;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid rgba(15, 22, 32, 0.12);
     }
     .fb-title {
-        font-size: 1.05rem;
-        font-weight: 600;
-        color: #e2e8f0;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        font-family: "Instrument Serif", "Times New Roman", serif;
+        font-size: 22px;
+        font-weight: 400;
+        color: #0f1620;
+        letter-spacing: -0.005em;
+        line-height: 1.05;
     }
     .fb-close {
         background: transparent;
         border: none;
-        color: #94a3b8;
-        font-size: 1.2rem;
+        color: #8a8579;
+        font-size: 18px;
         cursor: pointer;
-        padding: 0.25rem 0.55rem;
-        border-radius: 6px;
+        padding: 4px 8px;
         line-height: 1;
         font-family: inherit;
-        transition: background 0.15s ease, color 0.15s ease;
+        transition: color 0.15s ease;
     }
-    .fb-close:hover {
-        background: rgba(56, 189, 248, 0.12);
-        color: #e2e8f0;
-    }
+    .fb-close:hover { color: #c8324a; }
+
     .fb-field { margin-bottom: 0.85rem; }
     .fb-label {
         display: block;
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: #94a3b8;
-        margin-bottom: 0.35rem;
+        font-family: "JetBrains Mono", ui-monospace, "Menlo", monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #8a8579;
+        margin-bottom: 0.45rem;
     }
     .fb-optional {
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: #38bdf8;
-        background: rgba(56, 189, 248, 0.14);
-        padding: 0.12rem 0.5rem;
-        border-radius: 999px;
-        margin-left: 0.45rem;
-        vertical-align: middle;
-        letter-spacing: 0.02em;
+        font-family: "JetBrains Mono", ui-monospace, "Menlo", monospace;
+        font-size: 9px;
+        font-weight: 500;
+        color: #c8324a;
+        margin-left: 0.5rem;
+        letter-spacing: 0.06em;
+        text-transform: none;
     }
     .fb-input, .fb-textarea {
         width: 100%;
-        background: rgba(15, 23, 42, 0.7);
-        border: 1px solid rgba(148, 163, 184, 0.22);
-        border-radius: 8px;
+        background: #ffffff;
+        border: 1px solid rgba(15, 22, 32, 0.28);
+        border-radius: 0;
         padding: 0.6rem 0.75rem;
-        color: #e2e8f0;
+        color: #0f1620;
         font-family: inherit;
-        font-size: 0.95rem;
+        font-size: 14px;
+        line-height: 1.4;
         outline: none;
-        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        transition: border-color 0.15s ease, background 0.15s ease;
         box-sizing: border-box;
     }
-    .fb-input::placeholder, .fb-textarea::placeholder { color: #64748b; }
+    .fb-input::placeholder, .fb-textarea::placeholder { color: #8a8579; }
     .fb-input:focus, .fb-textarea:focus {
-        border-color: #38bdf8;
-        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
+        border-color: #0f1620;
     }
     .fb-textarea {
         resize: vertical;
-        min-height: 100px;
+        min-height: 96px;
         line-height: 1.5;
     }
     .fb-file-btn {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.5rem 0.85rem;
-        background: rgba(56, 189, 248, 0.1);
-        border: 1px dashed rgba(56, 189, 248, 0.4);
-        border-radius: 8px;
-        color: #7dd3fc;
+        padding: 0.45rem 0.85rem;
+        background: transparent;
+        border: 1px dashed rgba(15, 22, 32, 0.4);
+        border-radius: 0;
+        color: #0f1620;
         cursor: pointer;
-        font-size: 0.85rem;
-        font-weight: 500;
-        transition: background 0.15s ease, border-color 0.15s ease;
+        font-size: 12px;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        transition: background 0.15s ease, border-color 0.15s ease,
+                    color 0.15s ease;
     }
     .fb-file-btn:hover {
-        background: rgba(56, 189, 248, 0.2);
-        border-color: rgba(56, 189, 248, 0.65);
+        background: #ebe4d4;
+        border-color: #c8324a;
+        color: #c8324a;
     }
     .fb-file-input {
         position: absolute;
@@ -198,8 +214,8 @@
     .fb-file-name {
         display: inline-block;
         margin-left: 0.6rem;
-        font-size: 0.82rem;
-        color: #94a3b8;
+        font-size: 12px;
+        color: #8a8579;
         vertical-align: middle;
         max-width: 180px;
         overflow: hidden;
@@ -208,63 +224,73 @@
     }
     .fb-submit {
         width: 100%;
-        padding: 0.8rem 1rem;
-        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-        color: #0a1628;
-        border: none;
-        border-radius: 10px;
-        font-weight: 700;
-        font-size: 0.95rem;
-        font-family: inherit;
+        padding: 0.75rem 1rem;
+        background: #0f1620;
+        color: #f3eee4;
+        border: 1px solid #0f1620;
+        border-radius: 0;
+        font-family: "JetBrains Mono", ui-monospace, "Menlo", monospace;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
         cursor: pointer;
-        margin-top: 0.4rem;
-        transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+        margin-top: 0.45rem;
+        transition: background 0.15s ease, border-color 0.15s ease,
+                    color 0.15s ease;
     }
     .fb-submit:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 10px 24px rgba(56, 189, 248, 0.35);
+        background: #c8324a;
+        border-color: #c8324a;
+        color: #ffffff;
     }
     .fb-submit:disabled {
-        opacity: 0.6;
+        opacity: 0.55;
         cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
+        background: #0f1620;
+        border-color: #0f1620;
+        color: #f3eee4;
     }
     .fb-success {
         text-align: center;
-        padding: 1.5rem 0.5rem 0.75rem;
+        padding: 1.25rem 0.5rem 0.6rem;
     }
     .fb-success-icon {
-        font-size: 2.75rem;
-        margin-bottom: 0.85rem;
-        filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.55));
-        animation: fb-celebrate 0.6s ease;
+        width: 44px;
+        height: 44px;
+        margin: 0 auto 0.9rem;
+        color: #c8324a;
+        animation: fb-celebrate 0.55s ease;
     }
     @keyframes fb-celebrate {
-        0%   { transform: scale(0.4) rotate(-20deg); opacity: 0; }
-        70%  { transform: scale(1.15) rotate(8deg); opacity: 1; }
+        0%   { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+        70%  { transform: scale(1.1) rotate(4deg); opacity: 1; }
         100% { transform: scale(1) rotate(0); opacity: 1; }
     }
     .fb-success-text {
-        color: #e2e8f0;
-        font-size: 0.95rem;
-        line-height: 1.55;
+        color: #0f1620;
+        font-family: "Instrument Serif", "Times New Roman", serif;
+        font-style: italic;
+        font-size: 16px;
+        line-height: 1.5;
+        max-width: 28ch;
+        margin: 0 auto;
     }
     .fb-error {
         margin-top: 0.75rem;
-        padding: 0.65rem 0.85rem;
-        background: rgba(248, 113, 113, 0.12);
-        border: 1px solid rgba(248, 113, 113, 0.35);
-        border-radius: 8px;
-        color: #fecaca;
-        font-size: 0.85rem;
+        padding: 0.6rem 0.85rem;
+        background: rgba(200, 50, 74, 0.08);
+        border-left: 3px solid #c8324a;
+        color: #0f1620;
+        font-size: 13px;
         line-height: 1.45;
         display: none;
     }
     .fb-error.fb-error-visible { display: block; }
     @media (max-width: 480px) {
-        .fb-btn { bottom: 1rem; right: 1rem; width: 52px; height: 52px; font-size: 1.45rem; }
-        .fb-panel { bottom: 4.6rem; right: 1rem; left: 1rem; width: auto; }
+        .fb-btn { bottom: 1rem; right: 1rem; width: 50px; height: 50px; }
+        .fb-btn svg { width: 22px; height: 22px; }
+        .fb-panel { bottom: 4.5rem; right: 1rem; left: 1rem; width: auto; }
         .fb-tooltip { display: none; }
     }
     `;
@@ -273,14 +299,28 @@
     styleEl.textContent = CSS;
     document.head.appendChild(styleEl);
 
+    // SVG-glödlampa i Laborans-stil: tunna konturer (currentColor) + en
+    // fylld "glöd"-form i accent-rött bakom. Föredras framför 💡-emojin
+    // eftersom emojier renderas med systemfärger (gul/orange) som inte
+    // matchar pappers/röd-paletten.
+    const BULB_SVG = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path class="fb-bulb-glow" d="M8.2 13.5c-1.1-1.2-1.7-2.5-1.7-3.9a5.5 5.5 0 0 1 11 0c0 1.4-.6 2.7-1.7 3.9-.7.8-1.1 1.4-1.2 2H9.4c-.1-.6-.5-1.2-1.2-2Z"/>
+        <path class="fb-bulb-stroke" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M9.2 18h5.6M10 21h4M14.6 15.5c.18-.78.55-1.4 1.13-2A4.65 4.65 0 0 0 17.5 10a5.5 5.5 0 0 0-11 0c0 1 .23 2.04 1.37 3.5.58.6.95 1.22 1.13 2"/>
+    </svg>`;
+
+    const CHECK_SVG = `<svg viewBox="0 0 44 44" fill="none" aria-hidden="true" width="44" height="44">
+        <circle cx="22" cy="22" r="20" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M13 22.5l6 6 12-13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>`;
+
     const container = document.createElement('div');
     container.id = 'fb-feedback-widget';
     container.innerHTML = `
-    <button class="fb-btn" id="fb-btn" aria-label="Lämna feedback" aria-expanded="false" type="button">💡</button>
+    <button class="fb-btn" id="fb-btn" aria-label="Lämna feedback" aria-expanded="false" type="button">${BULB_SVG}</button>
     <div class="fb-tooltip" role="tooltip">Lämna feedback</div>
     <section class="fb-panel" id="fb-panel" role="dialog" aria-labelledby="fb-title" aria-hidden="true">
         <div class="fb-header">
-            <div class="fb-title" id="fb-title"><span aria-hidden="true">💡</span><span>Lämna feedback</span></div>
+            <div class="fb-title" id="fb-title">Lämna feedback</div>
             <button class="fb-close" id="fb-close" type="button" aria-label="Stäng">✕</button>
         </div>
         <form id="fb-form" action="${FEEDBACK_ENDPOINT}" method="POST" enctype="multipart/form-data">
@@ -307,11 +347,11 @@
                 <span class="fb-file-name" id="fb-file-name" aria-live="polite"></span>
             </div>
 
-            <button class="fb-submit" type="submit" id="fb-submit">Skicka feedback</button>
+            <button class="fb-submit" type="submit" id="fb-submit">Skicka feedback →</button>
             <div class="fb-error" id="fb-error" role="alert" aria-live="assertive"></div>
         </form>
         <div class="fb-success" id="fb-success" role="status" aria-live="polite" style="display:none;">
-            <div class="fb-success-icon" aria-hidden="true">⚡</div>
+            <div class="fb-success-icon" aria-hidden="true">${CHECK_SVG}</div>
             <div class="fb-success-text">${CONFIRMATION_TEXT}</div>
         </div>
     </section>
@@ -349,7 +389,7 @@
         form.style.display = 'block';
         successBox.style.display = 'none';
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Skicka feedback';
+        submitBtn.textContent = 'Skicka feedback →';
         fileName.textContent = '';
         hideError();
     }

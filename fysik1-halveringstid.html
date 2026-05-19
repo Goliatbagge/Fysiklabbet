@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halveringstid - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -16,25 +20,25 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
         .glass-card-light {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.28);
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
         .btn-primary {
             background: linear-gradient(135deg, #0ea5e9, #38bdf8);
             color: #0a0a1a;
             font-weight: 700;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+            box-shadow: 0 0 20px rgba(200, 50, 74, 0.35);
             transition: all 0.25s ease;
         }
         .btn-primary:hover {
-            box-shadow: 0 0 35px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 35px rgba(200, 50, 74, 0.6);
             transform: translateY(-1px);
         }
         .btn-primary:active {
@@ -42,15 +46,15 @@
         }
         .btn-secondary {
             background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            border: 1px solid rgba(15, 22, 32, 0.42);
             color: #94a3b8;
             font-weight: 600;
             transition: all 0.25s ease;
         }
         .btn-secondary:hover {
-            border-color: rgba(56, 189, 248, 0.4);
+            border-color: rgba(200, 50, 74, 0.4);
             color: #38bdf8;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 15px rgba(200, 50, 74, 0.15);
         }
         canvas {
             display: block;
@@ -61,7 +65,7 @@
         .breadcrumb a:hover { text-decoration: underline; }
         .explanation-box {
             background: rgba(15, 23, 42, 0.75);
-            border-left: 3px solid rgba(56, 189, 248, 0.5);
+            border-left: 3px solid rgba(200, 50, 74, 0.5);
             border-radius: 0 0.5rem 0.5rem 0;
             padding: 0.85rem 1.1rem;
             font-size: 0.9rem;
@@ -76,41 +80,33 @@
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -236,7 +232,7 @@
                 ctx.clearRect(0, 0, W, H);
 
                 // Background
-                ctx.fillStyle = '#0f172a';
+                ctx.fillStyle = '#f3eee4';
                 ctx.fillRect(0, 0, W, H);
 
                 // ─── Nuclei grid (top area) ─────────────────────
@@ -266,7 +262,7 @@
 
                 // Grid label
                 ctx.font = '600 13px Poppins, sans-serif';
-                ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = '#0f1620';
                 ctx.textAlign = 'center';
                 ctx.fillText(`${remainingCount} av ${TOTAL_NUCLEI} kärnor kvar (${formatPercent(remainingPercent)} %)`, W / 2, gridPadY + gridH + 20);
 
@@ -279,7 +275,7 @@
                 const graphHeight = graphBottom - graphTop;
 
                 // Axes
-                ctx.strokeStyle = '#38bdf8';
+                ctx.strokeStyle = '#0f1620';
                 ctx.lineWidth = 2;
 
                 // Y-axis
@@ -299,7 +295,7 @@
                 ctx.moveTo(graphLeft - 5, graphTop - 2);
                 ctx.lineTo(graphLeft, graphTop - 12);
                 ctx.lineTo(graphLeft + 5, graphTop - 2);
-                ctx.fillStyle = '#38bdf8';
+                ctx.fillStyle = '#0f1620';
                 ctx.fill();
 
                 // X-axis arrow
@@ -307,7 +303,7 @@
                 ctx.moveTo(graphRight + 2, graphBottom - 5);
                 ctx.lineTo(graphRight + 12, graphBottom);
                 ctx.lineTo(graphRight + 2, graphBottom + 5);
-                ctx.fillStyle = '#38bdf8';
+                ctx.fillStyle = '#0f1620';
                 ctx.fill();
 
                 // Y-axis labels & grid lines
@@ -319,7 +315,7 @@
                     const y = graphBottom - (val / 100) * graphHeight;
 
                     ctx.setLineDash([4, 4]);
-                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.21)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(graphLeft + 1, y);
@@ -327,7 +323,7 @@
                     ctx.stroke();
                     ctx.setLineDash([]);
 
-                    ctx.strokeStyle = '#38bdf8';
+                    ctx.strokeStyle = '#0f1620';
                     ctx.lineWidth = 2;
                     ctx.beginPath();
                     ctx.moveTo(graphLeft - 5, y);
@@ -335,7 +331,7 @@
                     ctx.stroke();
 
                     ctx.font = '12px Poppins, sans-serif';
-                    ctx.fillStyle = '#cbd5e1';
+                    ctx.fillStyle = '#0f1620';
                     ctx.fillText(formatPercent(val), graphLeft - 10, y);
                 });
 
@@ -348,7 +344,7 @@
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 ctx.font = 'italic 13px Poppins, sans-serif';
-                ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = '#0f1620';
                 ctx.fillText('Återstående mängd (%)', 0, 0);
                 ctx.restore();
 
@@ -359,7 +355,7 @@
                     const x = graphLeft + (i / HALF_LIFE_STEPS) * graphWidth;
 
                     if (i > 0) {
-                        ctx.strokeStyle = '#38bdf8';
+                        ctx.strokeStyle = '#0f1620';
                         ctx.lineWidth = 2;
                         ctx.beginPath();
                         ctx.moveTo(x, graphBottom);
@@ -367,7 +363,7 @@
                         ctx.stroke();
 
                         ctx.setLineDash([4, 4]);
-                        ctx.strokeStyle = 'rgba(148, 163, 184, 0.15)';
+                        ctx.strokeStyle = 'rgba(15, 22, 32, 0.21)';
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(x, graphTop);
@@ -377,13 +373,13 @@
                     }
 
                     ctx.font = '12px Poppins, sans-serif';
-                    ctx.fillStyle = '#cbd5e1';
+                    ctx.fillStyle = '#0f1620';
                     ctx.fillText(String(i), x, graphBottom + 8);
                 }
 
                 // X-axis title
                 ctx.font = 'italic 13px Poppins, sans-serif';
-                ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = '#0f1620';
                 ctx.textAlign = 'center';
                 ctx.fillText('Antal halveringstider', graphLeft + graphWidth / 2, graphBottom + 26);
 
@@ -425,7 +421,7 @@
 
                     if (i > 0) {
                         ctx.setLineDash([5, 5]);
-                        ctx.strokeStyle = 'rgba(203, 213, 225, 0.3)';
+                        ctx.strokeStyle = 'rgba(15, 22, 32, 0.42)';
                         ctx.lineWidth = 1;
 
                         ctx.beginPath();
@@ -443,15 +439,15 @@
 
                     ctx.beginPath();
                     ctx.arc(x, y, 6, 0, Math.PI * 2);
-                    ctx.fillStyle = '#0f172a';
+                    ctx.fillStyle = '#0f1620';
                     ctx.fill();
-                    ctx.strokeStyle = '#f8fafc';
+                    ctx.strokeStyle = '#0f1620';
                     ctx.lineWidth = 2.5;
                     ctx.stroke();
 
                     ctx.beginPath();
                     ctx.arc(x, y, 3, 0, Math.PI * 2);
-                    ctx.fillStyle = '#f8fafc';
+                    ctx.fillStyle = '#0f1620';
                     ctx.fill();
                 }
 
@@ -477,7 +473,7 @@
                                 width={700}
                                 height={520}
                                 className="w-full"
-                                style={{ background: '#0f172a' }}
+                                style={{ background: 'transparent' }}
                             />
                         </div>
 

@@ -34,8 +34,12 @@
   }
 }
     </script>
-</head>
-<body class="bg-slate-900 text-white overflow-hidden" style="margin: 0; padding: 0;">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="../styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="../styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+  </head>
+<body class="overflow-hidden lab-sim" style="margin: 0; padding: 0;">
     <div id="root"></div>
     <script type="module">
 import React, { useState, useCallback, useRef, useMemo, Suspense, useEffect } from "react";
@@ -84,7 +88,7 @@ const Magnet = ({ flipped, showLabels, fieldStrength }) => {
     showLabels && React.createElement(Text, {
       position: [-baseWidth/2 + poleWidth/2, -0.8, poleDepth/2 + 0.05],
       fontSize: 0.5,
-      color: "white",
+      color: "var(--lab-ink)",
       fontWeight: "bold",
       anchorX: "center",
       anchorY: "middle"
@@ -97,7 +101,7 @@ const Magnet = ({ flipped, showLabels, fieldStrength }) => {
     showLabels && React.createElement(Text, {
       position: [baseWidth/2 - poleWidth/2, -0.8, poleDepth/2 + 0.05],
       fontSize: 0.5,
-      color: "white",
+      color: "var(--lab-ink)",
       fontWeight: "bold",
       anchorX: "center",
       anchorY: "middle"
@@ -165,12 +169,12 @@ const SwingingConductor = ({ currentStrength, currentDirection, force, showLabel
     // Left wire
     React.createElement("mesh", { position: [-conductorLength/2, wireLength/2, 0] },
       React.createElement("cylinderGeometry", { args: [0.02, 0.02, wireLength, 8] }),
-      React.createElement("meshStandardMaterial", { color: "#94a3b8" })
+      React.createElement("meshStandardMaterial", { color: "var(--lab-ink-muted)" })
     ),
     // Right wire
     React.createElement("mesh", { position: [conductorLength/2, wireLength/2, 0] },
       React.createElement("cylinderGeometry", { args: [0.02, 0.02, wireLength, 8] }),
-      React.createElement("meshStandardMaterial", { color: "#94a3b8" })
+      React.createElement("meshStandardMaterial", { color: "var(--lab-ink-muted)" })
     ),
     // Conductor bar
     React.createElement("mesh", { position: [0, 0, 0], rotation: [0, 0, Math.PI / 2] },
@@ -295,13 +299,11 @@ const Scene = ({
     camera: { position: [6, 3, 8], fov: 50 },
     style: { width: "100%", height: "100%" }
   },
-    React.createElement("color", { attach: "background", args: ["#0f172a"] }),
-    React.createElement("ambientLight", { intensity: 0.5 }),
+    React.createElement("color", { attach: "background", args: ["#f3eee4"] }),
+    React.createElement("ambientLight", { intensity: 0.7 }),
     React.createElement("directionalLight", { position: [10, 10, 5], intensity: 1, castShadow: true }),
-    React.createElement("pointLight", { position: [-10, -10, -5], intensity: 0.5, color: "#818cf8" }),
-    React.createElement(Suspense, { fallback: null },
-      React.createElement(Stars, { radius: 100, depth: 50, count: 5000, factor: 4, saturation: 0, fade: true, speed: 1 })
-    ),
+    React.createElement("pointLight", { position: [-10, -10, -5], intensity: 0.4, color: "#c8324a" }),
+    React.createElement(Suspense, { fallback: null }),
     React.createElement("group", { position: [0, -1, 0] },
       React.createElement(Magnet, {
         flipped: magnetFlipped,

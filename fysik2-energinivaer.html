@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energinivåer - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -44,7 +48,7 @@
             padding: 0.45rem 0.7rem;
             border-radius: 8px;
             background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(148, 163, 184, 0.22);
+            border: 1px solid rgba(15, 22, 32, 0.29);
             color: #cbd5e1;
             font-family: 'Poppins', sans-serif;
             font-size: 0.88rem;
@@ -105,7 +109,7 @@
             padding: 0.4rem 0.85rem;
             border-radius: 999px;
             background: rgba(30, 41, 59, 0.55);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.26);
             color: #cbd5e1;
             font-size: 0.8rem;
             font-weight: 500;
@@ -155,7 +159,7 @@
             justify-content: space-between;
             align-items: baseline;
             padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            border-bottom: 1px solid rgba(15, 22, 32, 0.13);
         }
         .data-row:last-child { border-bottom: none; }
         .data-label { color: #94a3b8; font-size: 0.9rem; }
@@ -168,41 +172,33 @@
 
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="bg-slate-950 lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div class="page-wrapper">
         <div id="root"></div>
@@ -357,11 +353,11 @@
             const cx = W / 2;
             const cy = H / 2;
 
-            ctx.fillStyle = '#050a18';
+            ctx.fillStyle = '#f3eee4';
             ctx.fillRect(0, 0, W, H);
 
             // Rutnät (subtilt)
-            ctx.strokeStyle = 'rgba(56, 189, 248, 0.04)';
+            ctx.strokeStyle = 'rgba(15, 22, 32, 0.12)';
             ctx.lineWidth = 1;
             for (let x = 0; x < W; x += 30) {
                 ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
@@ -396,11 +392,11 @@
                     ctx.lineWidth = 2;
                     ctx.setLineDash([6, 4]);
                 } else if (isHover) {
-                    ctx.strokeStyle = 'rgba(226, 232, 240, 0.5)';
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.60)';
                     ctx.lineWidth = 1.5;
                     ctx.setLineDash([]);
                 } else {
-                    ctx.strokeStyle = 'rgba(203, 213, 225, 0.55)';
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.66)';
                     ctx.lineWidth = 1.5;
                     ctx.setLineDash([5, 5]);
                 }
@@ -413,7 +409,7 @@
                 const ly = cy + Math.sin(la) * r;
                 ctx.fillStyle = isCurrent ? '#c084fc'
                                : isTo ? '#38bdf8'
-                               : 'rgba(203, 213, 225, 0.85)';
+                               : 'rgba(15, 22, 32, 1.00)';
                 ctx.textBaseline = 'middle';
                 drawMixedText(ctx, [
                     { text: 'n', italic: true },
@@ -559,7 +555,7 @@
             ctx.beginPath();
             ctx.arc(ex, ey, 7, 0, 2 * Math.PI);
             ctx.fill();
-            ctx.fillStyle = '#dbeafe';
+            ctx.fillStyle = '#1e3a8a';
             ctx.font = 'bold 11px Poppins, sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -574,13 +570,13 @@
             ctx.textBaseline = 'alphabetic';
             const displayN = phase === 'idle' ? currentN : (phase === 'transitioning' ? state.transitionTo : state.currentN);
             const e = energyOf(displayN);
-            ctx.fillStyle = 'rgba(203, 213, 225, 0.75)';
+            ctx.fillStyle = 'rgba(15, 22, 32, 0.90)';
             drawMixedText(ctx, [
                 { text: 'Elektron i ', italic: false },
                 { text: 'n', italic: true },
                 { text: `=${displayN}`, italic: false }
             ], 14, H - 28, 11, '600', 'left');
-            ctx.fillStyle = 'rgba(148, 163, 184, 0.7)';
+            ctx.fillStyle = 'rgba(15, 22, 32, 0.91)';
             drawMixedText(ctx, [
                 { text: 'E', italic: true },
                 { text: ` = ${formatNum(e, 2)} eV`, italic: false }
@@ -699,7 +695,7 @@
             ctx.setTransform(scale, 0, 0, scale, 0, 0);
             const W = DIAG_LOGICAL_W;
             const H = DIAG_LOGICAL_H;
-            ctx.fillStyle = '#050a18';
+            ctx.fillStyle = '#f3eee4';
             ctx.fillRect(0, 0, W, H);
 
             const pad = DIAGRAM_PAD;
@@ -715,14 +711,14 @@
             ctx.fillStyle = contGrad;
             ctx.fillRect(pad.left, pad.top, plotW, y0 - pad.top);
 
-            ctx.fillStyle = 'rgba(196, 181, 253, 0.85)';
+            ctx.fillStyle = 'rgba(126, 34, 206, 0.85)';
             ctx.font = 'italic 11px Poppins, sans-serif';
             ctx.textAlign = 'left';
             ctx.textBaseline = 'top';
             ctx.fillText('Kontinuum (joniserad)', pad.left + 8, pad.top + 6);
 
             // Y-axel (bruten)
-            ctx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+            ctx.strokeStyle = 'rgba(15, 22, 32, 0.33)';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(pad.left, g.upperY0);
@@ -735,7 +731,7 @@
             ctx.save();
             ctx.translate(16, pad.top + g.plotH / 2);
             ctx.rotate(-Math.PI / 2);
-            ctx.fillStyle = 'rgba(148, 163, 184, 0.75)';
+            ctx.fillStyle = 'rgba(15, 22, 32, 0.98)';
             ctx.font = '500 11px Poppins, sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -744,7 +740,7 @@
 
             // Brott-indikator (zigzag) mellan övre och nedre regionen
             const breakMid = (g.upperY1 + g.lowerY0) / 2;
-            ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+            ctx.strokeStyle = 'rgba(15, 22, 32, 0.59)';
             ctx.lineWidth = 1.2;
             const zzSteps = 14;
             for (const zyBase of [breakMid - 5, breakMid + 4]) {
@@ -758,7 +754,7 @@
                 ctx.stroke();
             }
             // Brott-etikett
-            ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+            ctx.fillStyle = 'rgba(15, 22, 32, 0.78)';
             ctx.font = 'italic 9px Poppins, sans-serif';
             ctx.textAlign = 'left';
             ctx.textBaseline = 'middle';
@@ -815,9 +811,9 @@
                     lineColor = 'rgba(168, 85, 247, 0.5)'; lineWidth = 1.5;
                     isDashed = true;
                 } else if (isHover) {
-                    lineColor = 'rgba(226, 232, 240, 0.7)'; lineWidth = 2;
+                    lineColor = 'rgba(15, 22, 32, 0.84)'; lineWidth = 2;
                 } else {
-                    lineColor = 'rgba(226, 232, 240, 0.55)'; lineWidth = 1.5;
+                    lineColor = 'rgba(15, 22, 32, 0.66)'; lineWidth = 1.5;
                 }
 
                 if (isDashed) ctx.setLineDash([4, 3]);
@@ -832,8 +828,8 @@
                 // n-etikett (vänster): "n" kursivt, "=X" rakt
                 const nLabelColor = isFrom ? '#c084fc'
                                   : isTo ? '#38bdf8'
-                                  : isInfinity ? 'rgba(196, 181, 253, 0.9)'
-                                  : 'rgba(203, 213, 225, 0.85)';
+                                  : isInfinity ? 'rgba(126, 34, 206, 0.9)'
+                                  : 'rgba(15, 22, 32, 1.00)';
                 ctx.fillStyle = nLabelColor;
                 ctx.textBaseline = 'middle';
                 const nWeight = (isFrom || isTo) ? '600' : '400';
@@ -844,7 +840,7 @@
 
                 // Energi-etikett (höger)
                 const eLabel = isInfinity ? '0 eV' : `${formatNum(e, 2)} eV`;
-                ctx.fillStyle = 'rgba(148, 163, 184, 0.85)';
+                ctx.fillStyle = 'rgba(15, 22, 32, 1.00)';
                 ctx.font = '500 11px Poppins, sans-serif';
                 ctx.textAlign = 'left';
                 ctx.fillText(eLabel, pad.left + plotW + 6, y);
@@ -885,7 +881,7 @@
                 // ΔE-etikett ("E" kursivt)
                 const midY = (yFrom + yTo) / 2;
                 ctx.textBaseline = 'middle';
-                ctx.fillStyle = '#e2e8f0';
+                ctx.fillStyle = '#0f1620';
                 drawMixedText(ctx, [
                     { text: 'Δ', italic: false },
                     { text: 'E', italic: true },
@@ -911,7 +907,7 @@
         function drawSpectrumStrip(ctx, currentWL, showAllSeries) {
             const W = ctx.canvas.width;
             const H = ctx.canvas.height;
-            ctx.fillStyle = '#050509';
+            ctx.fillStyle = '#f3eee4';
             ctx.fillRect(0, 0, W, H);
 
             const pad = { left: 38, right: 38, top: 10, bottom: 26 };
@@ -931,12 +927,12 @@
             }
 
             // Ramar
-            ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+            ctx.strokeStyle = 'rgba(15, 22, 32, 0.39)';
             ctx.lineWidth = 1;
             ctx.strokeRect(pad.left, stripY, W - pad.left - pad.right, stripH);
 
             // Våglängds-etiketter
-            ctx.fillStyle = 'rgba(148, 163, 184, 0.8)';
+            ctx.fillStyle = 'rgba(15, 22, 32, 1.00)';
             ctx.font = '500 10px Poppins, sans-serif';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
@@ -951,16 +947,16 @@
 
             // "nm"-etikett
             ctx.textAlign = 'right';
-            ctx.fillStyle = 'rgba(148, 163, 184, 0.65)';
+            ctx.fillStyle = 'rgba(15, 22, 32, 0.85)';
             ctx.font = 'italic 10px Poppins, sans-serif';
             ctx.fillText('nm', W - 4, stripY + stripH + 6);
 
             // UV/IR-ändar
-            ctx.fillStyle = 'rgba(196, 181, 253, 0.85)';
+            ctx.fillStyle = 'rgba(126, 34, 206, 0.85)';
             ctx.font = '600 10px Poppins, sans-serif';
             ctx.textAlign = 'center';
             ctx.fillText('◄ UV', 18, stripY + stripH / 2 + 3);
-            ctx.fillStyle = 'rgba(252, 165, 165, 0.85)';
+            ctx.fillStyle = 'rgba(185, 28, 28, 0.85)';
             ctx.fillText('IR ►', W - 18, stripY + stripH / 2 + 3);
 
             // Balmer-linjer som referensmarkörer
@@ -969,14 +965,14 @@
                     const wl = HC_EV_NM / Math.abs(energyOf(2) - energyOf(upper));
                     if (wl < wlMin || wl > wlMax) continue;
                     const x = mapWL(wl);
-                    ctx.strokeStyle = 'rgba(226, 232, 240, 0.7)';
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.84)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(x, stripY);
                     ctx.lineTo(x, stripY + stripH);
                     ctx.stroke();
                     if (upper <= 6) {
-                        ctx.fillStyle = '#e2e8f0';
+                        ctx.fillStyle = '#0f1620';
                         ctx.font = '600 9px Poppins, sans-serif';
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
@@ -988,14 +984,14 @@
             // Aktuell linje
             if (isFinite(currentWL) && currentWL >= wlMin && currentWL <= wlMax) {
                 const x = mapWL(currentWL);
-                ctx.strokeStyle = '#fef2f2';
+                ctx.strokeStyle = '#0f1620';
                 ctx.lineWidth = 2.5;
                 ctx.beginPath();
                 ctx.moveTo(x, stripY - 6);
                 ctx.lineTo(x, stripY + stripH + 6);
                 ctx.stroke();
                 // Liten pil högst upp
-                ctx.fillStyle = '#fef2f2';
+                ctx.fillStyle = '#0f1620';
                 ctx.beginPath();
                 ctx.moveTo(x, stripY - 6);
                 ctx.lineTo(x - 4, stripY - 12);
@@ -1005,7 +1001,7 @@
             } else if (isFinite(currentWL)) {
                 // Utanför synligt — visa i marginalen
                 const side = currentWL < wlMin ? 'left' : 'right';
-                ctx.fillStyle = '#fef2f2';
+                ctx.fillStyle = '#0f1620';
                 ctx.font = '600 10px Poppins, sans-serif';
                 ctx.textAlign = 'center';
                 const tx = side === 'left' ? pad.left - 8 : W - pad.right + 8;
@@ -1399,39 +1395,39 @@
                                 skal med bestämda energier. När den hoppar mellan skal absorberas eller
                                 emitteras en foton med exakt den energi som motsvarar energidifferensen.
                             </p>
-                            <div className="mt-6 flex flex-row flex-wrap items-stretch gap-6 text-cyan-300" style={{fontFamily: 'Poppins, sans-serif'}}>
+                            <div className="mt-6 flex flex-row flex-wrap items-stretch gap-6" style={{fontFamily: 'Poppins, sans-serif'}}>
                                 {/* Formel 1: E_n = -13,6 eV / n² */}
                                 <div className="flex items-center gap-3 flex-wrap px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/40">
                                     <div style={{textAlign:'center'}}>
-                                        <div className="text-xs text-cyan-400/60 font-semibold mb-1">Energinivå</div>
+                                        <div className="text-xs font-semibold mb-1">Energinivå</div>
                                         <div className="text-2xl font-bold"><em>E</em><sub>n</sub></div>
                                     </div>
                                     <div className="text-xl text-slate-500">=</div>
                                     <div style={{textAlign:'center'}}>
-                                        <div className="text-xs text-cyan-400/60 font-semibold mb-1">Rydbergs energi</div>
+                                        <div className="text-xs font-semibold mb-1">Rydbergs energi</div>
                                         <div className="text-2xl font-bold">−13,6 eV</div>
                                         <div style={{borderTop:'2px solid currentColor', marginTop:'3px', paddingTop:'3px'}}>
                                             <div className="text-2xl font-bold"><em>n</em>²</div>
                                         </div>
-                                        <div className="text-xs text-cyan-400/60 font-semibold mt-1">Kvanttal</div>
+                                        <div className="text-xs font-semibold mt-1">Kvanttal</div>
                                     </div>
                                 </div>
 
                                 {/* Formel 2: ΔE = h·f = hc/λ */}
                                 <div className="flex items-center gap-3 flex-wrap px-6 py-4 rounded-xl border border-cyan-500/20 bg-slate-900/40">
                                     <div style={{textAlign:'center'}}>
-                                        <div className="text-xs text-cyan-400/60 font-semibold mb-1">Fotonenergi</div>
+                                        <div className="text-xs font-semibold mb-1">Fotonenergi</div>
                                         <div className="text-2xl font-bold">Δ<em>E</em></div>
                                     </div>
                                     <div className="text-xl text-slate-500">=</div>
                                     <div className="flex items-center gap-2">
                                         <div style={{textAlign:'center'}}>
-                                            <div className="text-xs text-cyan-400/60 font-semibold mb-1">Plancks konstant</div>
+                                            <div className="text-xs font-semibold mb-1">Plancks konstant</div>
                                             <div className="text-2xl font-bold"><em>h</em></div>
                                         </div>
                                         <div className="text-2xl font-bold text-slate-400">⋅</div>
                                         <div style={{textAlign:'center'}}>
-                                            <div className="text-xs text-cyan-400/60 font-semibold mb-1">Frekvens</div>
+                                            <div className="text-xs font-semibold mb-1">Frekvens</div>
                                             <div className="text-2xl font-bold"><em>f</em></div>
                                         </div>
                                     </div>
@@ -1441,14 +1437,14 @@
                                             <div className="text-2xl font-bold leading-none"><em>h</em></div>
                                             <div className="text-2xl font-bold text-slate-400 leading-none">⋅</div>
                                             <div style={{textAlign:'center'}}>
-                                                <div className="text-xs text-cyan-400/60 font-semibold mb-1">Ljushastighet</div>
+                                                <div className="text-xs font-semibold mb-1">Ljushastighet</div>
                                                 <div className="text-2xl font-bold leading-none"><em>c</em></div>
                                             </div>
                                         </div>
                                         <div style={{borderTop:'2px solid currentColor', marginTop:'3px', paddingTop:'3px'}}>
                                             <div className="text-2xl font-bold"><em>λ</em></div>
                                         </div>
-                                        <div className="text-xs text-cyan-400/60 font-semibold mt-1">Våglängd</div>
+                                        <div className="text-xs font-semibold mt-1">Våglängd</div>
                                     </div>
                                 </div>
                             </div>

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rörelsediagram - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -16,25 +20,25 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
         .glass-card-light {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.28);
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
         .btn-glow {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 20px rgba(200, 50, 74, 0.3);
             transition: all 0.3s ease;
         }
         .btn-glow:hover {
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 30px rgba(200, 50, 74, 0.5);
         }
         .graph-glow {
-            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+            filter: drop-shadow(0 0 6px rgba(200, 50, 74, 0.4));
         }
         /* Time slider styling */
         .time-slider {
@@ -52,12 +56,12 @@
             border-radius: 50%;
             background: linear-gradient(135deg, #38bdf8, #0ea5e9);
             cursor: pointer;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 12px rgba(200, 50, 74, 0.6);
             transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
         .time-slider::-webkit-slider-thumb:hover {
             transform: scale(1.15);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.9);
+            box-shadow: 0 0 20px rgba(200, 50, 74, 0.9);
         }
         .time-slider::-moz-range-thumb {
             width: 18px;
@@ -66,49 +70,41 @@
             background: linear-gradient(135deg, #38bdf8, #0ea5e9);
             cursor: pointer;
             border: none;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            box-shadow: 0 0 12px rgba(200, 50, 74, 0.6);
         }
         .time-slider::-moz-range-thumb:hover {
             transform: scale(1.15);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.9);
+            box-shadow: 0 0 20px rgba(200, 50, 74, 0.9);
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <main class="dark-container min-h-screen">
         <div id="root"></div>
@@ -274,7 +270,7 @@
                 const height = rect.height;
 
                 // Clear canvas
-                ctx.fillStyle = '#050510';
+                ctx.fillStyle = '#f3eee4';
                 ctx.fillRect(0, 0, width, height);
 
                 if (motionType === MOTION_TYPES.VERTICAL_THROW) {
@@ -284,7 +280,7 @@
                     const scale = (groundY - 60) / maxHeight;
 
                     // Draw subtle grid - vertical lines
-                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                    ctx.strokeStyle = 'rgba(200, 50, 74, 0.1)';
                     ctx.lineWidth = 1;
                     for (let x = 60; x < width - 20; x += 60) {
                         ctx.beginPath();
@@ -296,7 +292,7 @@
                     // Draw horizontal grid lines at each meter
                     for (let s = 0; s <= maxHeight; s += 1) {
                         const y = groundY - s * scale;
-                        ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+                        ctx.strokeStyle = 'rgba(200, 50, 74, 0.15)';
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(45, y);
@@ -305,11 +301,11 @@
                     }
 
                     // Draw ground
-                    ctx.fillStyle = '#1e3a5f';
+                    ctx.fillStyle = '#0f1620';
                     ctx.fillRect(0, groundY, width, height - groundY);
 
                     // Ground line
-                    ctx.strokeStyle = '#38bdf8';
+                    ctx.strokeStyle = '#0f1620';
                     ctx.lineWidth = 3;
                     ctx.beginPath();
                     ctx.moveTo(0, groundY);
@@ -385,7 +381,7 @@
                     // Horizontal visualization for cars
 
                     // Add subtle grid for cars
-                    ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                    ctx.strokeStyle = 'rgba(200, 50, 74, 0.1)';
                     ctx.lineWidth = 1;
                     for (let x = 0; x < width; x += 40) {
                         ctx.beginPath();
@@ -408,7 +404,7 @@
                     const scale = trackLength / maxS;
 
                     // Draw road
-                    ctx.fillStyle = '#1e293b';
+                    ctx.fillStyle = '#0f1620';
                     ctx.fillRect(0, roadY - 30, width, 60);
 
                     // Road lines
@@ -489,13 +485,13 @@
                     ctx.fill();
 
                     // Windows
-                    ctx.fillStyle = '#7dd3fc';
+                    ctx.fillStyle = '#0f1620';
                     ctx.fillRect(carX - 12, carY - carHeight/2 - 8, 8, 8);
                     ctx.fillRect(carX, carY - carHeight/2 - 8, 8, 8);
 
                     // Wheels
                     ctx.shadowBlur = 0;
-                    ctx.fillStyle = '#1e293b';
+                    ctx.fillStyle = '#0f1620';
                     ctx.beginPath();
                     ctx.arc(carX - 15, carY + carHeight/2, 6, 0, Math.PI * 2);
                     ctx.fill();
@@ -545,7 +541,7 @@
                 <canvas
                     ref={canvasRef}
                     className="rounded-xl w-full"
-                    style={{ height: '200px', boxShadow: '0 0 30px rgba(56, 189, 248, 0.1), inset 0 0 40px rgba(0, 0, 0, 0.5)' }}
+                    style={{ height: '200px', boxShadow: '0 0 30px rgba(200, 50, 74, 0.1), inset 0 0 40px rgba(0, 0, 0, 0.5)' }}
                 />
             );
         };
@@ -573,11 +569,11 @@
                 const graphHeight = height - padding.top - padding.bottom;
 
                 // Clear
-                ctx.fillStyle = '#0a0f1a';
+                ctx.fillStyle = '#f3eee4';
                 ctx.fillRect(0, 0, width, height);
 
                 // Grid
-                ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                ctx.strokeStyle = 'rgba(200, 50, 74, 0.1)';
                 ctx.lineWidth = 1;
 
                 // Calculate appropriate time step based on duration
@@ -605,7 +601,7 @@
                 }
 
                 // Axes - strong cyan color for x=0 and y=0
-                ctx.strokeStyle = '#38bdf8';
+                ctx.strokeStyle = '#0f1620';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 // Y-axis (x = 0)
@@ -636,7 +632,7 @@
                 }
 
                 // Axis labels
-                ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = '#0f1620';
                 ctx.font = '12px monospace';
                 ctx.textAlign = 'center';
 
@@ -714,7 +710,7 @@
 
                         // Inner dot
                         ctx.shadowBlur = 0;
-                        ctx.fillStyle = '#fff';
+                        ctx.fillStyle = '#0f1620';
                         ctx.beginPath();
                         ctx.arc(x, y, 3, 0, Math.PI * 2);
                         ctx.fill();
@@ -809,11 +805,11 @@
                 const timeStep = duration <= 2 ? 0.25 : (duration <= 4 ? 0.5 : 1);
 
                 // Clear
-                ctx.fillStyle = '#0a0f1a';
+                ctx.fillStyle = '#f3eee4';
                 ctx.fillRect(0, 0, width, height);
 
                 // Grid
-                ctx.strokeStyle = 'rgba(56, 189, 248, 0.1)';
+                ctx.strokeStyle = 'rgba(200, 50, 74, 0.1)';
                 ctx.lineWidth = 1;
 
                 for (let t = 0; t <= duration; t += timeStep) {
@@ -836,7 +832,7 @@
                 // Zero line (x-axis at y=0) - bright cyan
                 if (minY < 0 && maxY > 0) {
                     const zeroY = height - padding.bottom - ((0 - minY) / range) * graphHeight;
-                    ctx.strokeStyle = '#38bdf8';
+                    ctx.strokeStyle = '#0f1620';
                     ctx.lineWidth = 2;
                     ctx.beginPath();
                     ctx.moveTo(padding.left, zeroY);
@@ -845,7 +841,7 @@
                 }
 
                 // Axes - y-axis (x=0) in cyan, bottom axis in gray
-                ctx.strokeStyle = '#38bdf8';
+                ctx.strokeStyle = '#0f1620';
                 ctx.lineWidth = 2;
                 ctx.beginPath();
                 ctx.moveTo(padding.left, padding.top);
@@ -860,7 +856,7 @@
                 ctx.stroke();
 
                 // Labels
-                ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = '#0f1620';
                 ctx.font = '11px monospace';
                 ctx.textAlign = 'center';
 
@@ -896,7 +892,7 @@
                 ctx.fillStyle = color;
                 ctx.font = 'bold 13px sans-serif';
                 ctx.fillText(title, width / 2, 16);
-                ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = '#0f1620';
                 ctx.font = '11px sans-serif';
                 ctx.fillText(subtitle, width / 2, 28);
 
@@ -938,7 +934,7 @@
         // ===== COMPARISON VIEW =====
         const ComparisonView = ({ graphType, onGraphTypeChange }) => {
             const graphTypes = [
-                { key: 's', label: 's-t', fullName: 'Läge-tid', unit: 'm', color: '#38bdf8' },
+                { key: 's', label: 's-t', fullName: 'Läge-tid', unit: 'm', color: '#c8324a' },
                 { key: 'v', label: 'v-t', fullName: 'Hastighet-tid', unit: 'm/s', color: '#22c55e' },
                 { key: 'a', label: 'a-t', fullName: 'Acceleration-tid', unit: 'm/s²', color: '#f97316' }
             ];

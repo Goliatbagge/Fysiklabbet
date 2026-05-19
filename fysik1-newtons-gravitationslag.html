@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newtons gravitationslag - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -12,261 +15,35 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-        body { font-family: 'Poppins', -apple-system, sans-serif; }
-        .page-wrapper {
-            background: radial-gradient(ellipse at center, #0a1428 0%, #050810 60%, #02040a 100%);
-            min-height: 100vh;
-        }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.78);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            border-radius: 16px;
-        }
-        .glass-card-inner {
-            background: rgba(15, 23, 42, 0.55);
-            border: 1px solid rgba(56, 189, 248, 0.12);
-            border-radius: 12px;
-        }
-        .glow-text { text-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
-
-        .canvas-wrap {
-            position: relative;
-            border-radius: 14px;
-            overflow: hidden;
-            background: #02040a;
-            box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.12), 0 12px 40px rgba(0, 0, 0, 0.55);
-        }
-        .canvas-wrap canvas { display: block; width: 100%; height: auto; touch-action: none; }
-
-        .mode-toggle {
-            display: inline-flex;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 999px;
-            padding: 3px;
-            gap: 2px;
-            flex-wrap: wrap;
-        }
-        .mode-toggle button {
-            padding: 0.45rem 1rem;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #94a3b8;
-            cursor: pointer;
-            border: none;
-            background: transparent;
-            font-family: 'Poppins', sans-serif;
-            transition: all 0.15s ease;
-        }
-        .mode-toggle button:hover:not(.active) { color: #e2e8f0; }
-        .mode-toggle button.active {
-            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-            color: #0a1628;
-        }
-
-        .mass-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: linear-gradient(to right, #1e293b 0%, #38bdf8 100%);
-            outline: none;
-            cursor: pointer;
-        }
-        .mass-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #f8fafc;
-            border: 2.5px solid #38bdf8;
-            cursor: grab;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
-        }
-        .mass-slider::-webkit-slider-thumb:active { cursor: grabbing; }
-        .mass-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #f8fafc;
-            border: 2.5px solid #38bdf8;
-            cursor: grab;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
-        }
-
-        .action-btn {
-            padding: 0.55rem 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(14, 165, 233, 0.16));
-            color: #7dd3fc;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.88rem;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-        .action-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(14, 165, 233, 0.32));
-            border-color: rgba(56, 189, 248, 0.6);
-            color: #e2e8f0;
-            transform: translateY(-1px);
-        }
-        .action-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-        .action-btn-primary {
-            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-            color: #0a1628;
-            border-color: transparent;
-        }
-        .action-btn-primary:hover:not(:disabled) {
-            box-shadow: 0 8px 22px rgba(56, 189, 248, 0.45);
-            color: #0a1628;
-        }
-
-        .preset-btn {
-            padding: 0.4rem 0.85rem;
-            border-radius: 999px;
-            background: rgba(30, 41, 59, 0.55);
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            color: #cbd5e1;
-            font-size: 0.78rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            font-family: 'Poppins', sans-serif;
-        }
-        .preset-btn:hover {
-            border-color: rgba(56, 189, 248, 0.45);
-            color: #e2e8f0;
-            background: rgba(56, 189, 248, 0.06);
-        }
-
-        /* Flytande kontrollpanel i fullskärmsläge */
-        .fs-controls {
-            position: absolute;
-            left: 50%;
-            bottom: 62px;
-            transform: translateX(-50%);
-            width: min(820px, 92%);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 14px 18px;
-            border-radius: 14px;
-            background: rgba(10, 15, 30, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(56, 189, 248, 0.28);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
-            z-index: 25;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
-        }
-        .fs-controls.collapsed {
-            transform: translateX(-50%) translateY(calc(100% + 40px));
-            opacity: 0;
-            pointer-events: none;
-        }
-        .fs-toggle-handle {
-            position: absolute;
-            left: 50%;
-            bottom: 14px;
-            transform: translateX(-50%);
-            padding: 8px 16px;
-            border-radius: 10px;
-            background: rgba(10, 15, 30, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(56, 189, 248, 0.35);
-            color: #cbd5e1;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            z-index: 26;
-            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-            white-space: nowrap;
-        }
-        .fs-toggle-handle:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: rgba(56, 189, 248, 0.65);
-            color: #e0f2fe;
-        }
-        .fs-toggle-handle svg {
-            transition: transform 0.3s ease;
-        }
-
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-        }
-        .data-row:last-child { border-bottom: none; }
-        .data-label { color: #94a3b8; font-size: 0.88rem; }
-        .data-value { color: #e2e8f0; font-family: 'Poppins', sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; }
-
-        /* Formel-highlight */
-        @keyframes highlight-pulse {
-            0% { background: rgba(251, 191, 36, 0.55); }
-            100% { background: transparent; }
-        }
-        .formula-highlight {
-            display: inline-block;
-            padding: 2px 6px;
-            margin: 0 1px;
-            border-radius: 6px;
-            transition: background 0.2s;
-        }
-        .formula-highlight.changed {
-            animation: highlight-pulse 1.0s ease-out;
-        }
-
-    </style>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">')</script>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div class="page-wrapper">
         <div id="root"></div>
@@ -402,20 +179,53 @@
             return arr;
         })();
 
-        function drawStarfield(ctx, W, H) {
-            ctx.fillStyle = '#020308';
+        // STEG C — canvas-bakgrundsteman som användaren kan jämföra.
+        // Sol/planeter/krafter rör vi inte (i detta steg) — vi visar bara
+        // hur olika bakgrunder mot Laborans-chrome känns.
+        const CANVAS_THEMES = {
+            morkRymd: {
+                label: 'Mörk rymd',
+                bg: '#020308',
+                nebula: 'rgba(56, 189, 248, 0.05)',
+                starColor: '226, 232, 240',
+                showStars: true,
+                showNebula: true,
+            },
+            ljusPapper: {
+                label: 'Ljus papper',
+                bg: '#f3eee4',
+                nebula: null,
+                starColor: null,
+                showStars: false,
+                showNebula: false,
+            },
+            pergament: {
+                label: 'Pergament',
+                bg: '#1a1813',
+                nebula: 'rgba(168, 130, 60, 0.08)',
+                starColor: '245, 230, 200',
+                showStars: true,
+                showNebula: true,
+            },
+        };
+
+        function drawStarfield(ctx, W, H, theme = CANVAS_THEMES.morkRymd) {
+            ctx.fillStyle = theme.bg;
             ctx.fillRect(0, 0, W, H);
-            // Subtil galax-glöd
-            const g = ctx.createRadialGradient(W * 0.6, H * 0.4, 20, W * 0.6, H * 0.4, W * 0.55);
-            g.addColorStop(0, 'rgba(56, 189, 248, 0.05)');
-            g.addColorStop(1, 'rgba(0, 0, 0, 0)');
-            ctx.fillStyle = g;
-            ctx.fillRect(0, 0, W, H);
-            for (const s of STARS) {
-                ctx.fillStyle = `rgba(226, 232, 240, ${s.a})`;
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                ctx.fill();
+            if (theme.showNebula && theme.nebula) {
+                const g = ctx.createRadialGradient(W * 0.6, H * 0.4, 20, W * 0.6, H * 0.4, W * 0.55);
+                g.addColorStop(0, theme.nebula);
+                g.addColorStop(1, 'rgba(0, 0, 0, 0)');
+                ctx.fillStyle = g;
+                ctx.fillRect(0, 0, W, H);
+            }
+            if (theme.showStars && theme.starColor) {
+                for (const s of STARS) {
+                    ctx.fillStyle = `rgba(${theme.starColor}, ${s.a})`;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
             }
         }
 
@@ -857,6 +667,8 @@
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
             const [dragging, setDragging] = useState(null); // null | 1 | 2 | 'human'
+            // STEG C — experimentell canvas-tema-väljare (V1/V2/V3 jämförelse)
+            const [canvasTheme, setCanvasTheme] = useState('morkRymd');
             // Påskägg: flygande tefat. null när inaktivt; objekt med x, y, dir vid svisch
             const [ufo, setUfo] = useState(null);
             // Människa-hopp: starttidpunkt (ms) för pågående hopp, eller null
@@ -1091,7 +903,7 @@
                 const ctx = canvas.getContext('2d');
                 ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
-                drawStarfield(ctx, CANVAS_W, CANVAS_H);
+                drawStarfield(ctx, CANVAS_W, CANVAS_H, CANVAS_THEMES[canvasTheme]);
 
                 if (mode === 'manniska') {
                     drawHumanScene(ctx);
@@ -1492,6 +1304,19 @@
                             <div className="mode-toggle">
                                 <button onClick={() => setMode('statisk')} className={mode === 'statisk' ? 'active' : ''}>📍 Statisk</button>
                                 <button onClick={() => setMode('manniska')} className={mode === 'manniska' ? 'active' : ''}>🧍 Människa på jorden</button>
+                            </div>
+                        </div>
+
+                        {/* STEG C — experimentell tema-väljare för canvas-bakgrunden.
+                            Tas bort när du valt vilken variant som blir default. */}
+                        <div className="mb-4 flex flex-wrap items-center gap-3 px-3 py-2 rounded border" style={{borderColor:'var(--lab-line-strong)', background:'var(--lab-bg)'}}>
+                            <span className="text-xs font-semibold uppercase tracking-wide" style={{color:'var(--lab-ink-soft)', fontFamily:'var(--lab-font-mono)'}}>Canvas-tema (test)</span>
+                            <div className="mode-toggle">
+                                {Object.entries(CANVAS_THEMES).map(([key, t]) => (
+                                    <button key={key} onClick={() => setCanvasTheme(key)} className={canvasTheme === key ? 'active' : ''}>
+                                        {t.label}
+                                    </button>
+                                ))}
                             </div>
                         </div>
 

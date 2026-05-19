@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brytningslagen - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -22,11 +26,11 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
             border-radius: 16px;
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
 
         /* Custom slider styles */
@@ -38,12 +42,12 @@
             cursor: pointer;
         }
         input[type="range"]::-webkit-slider-runnable-track {
-            background: rgba(148, 163, 184, 0.4);
+            background: rgba(15, 22, 32, 0.56);
             border-radius: 4px;
             height: 6px;
         }
         input[type="range"]::-moz-range-track {
-            background: rgba(148, 163, 184, 0.4);
+            background: rgba(15, 22, 32, 0.56);
             border-radius: 4px;
             height: 6px;
             border: none;
@@ -70,7 +74,7 @@
         }
         input[type="range"]::-webkit-slider-thumb:hover {
             background: #7dd3fc;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 10px rgba(200, 50, 74, 0.5);
         }
 
         .scene-wrap {
@@ -78,7 +82,7 @@
             border-radius: 16px;
             overflow: hidden;
             background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
             width: 100%;
             aspect-ratio: 16 / 9;
             user-select: none;
@@ -89,7 +93,7 @@
         .scene-wrap svg text { user-select: none; -webkit-user-select: none; }
         .scene-wrap:fullscreen,
         .scene-wrap:-webkit-full-screen {
-            background: #05080f;
+            background: var(--lab-bg);
             border-radius: 0;
             width: 100vw !important;
             height: 100vh !important;
@@ -110,7 +114,7 @@
             background: rgba(15, 23, 42, 0.65);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(56, 189, 248, 0.4);
+            border: 1px solid rgba(200, 50, 74, 0.4);
             color: #38bdf8;
             cursor: pointer;
             display: flex;
@@ -120,7 +124,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.35);
             z-index: 5;
         }
-        .fs-btn:hover { transform: scale(1.08); background: rgba(56,189,248,0.18); }
+        .fs-btn:hover { transform: scale(1.08); background: rgba(200, 50, 74, 0.18); }
 
         .fs-controls {
             position: absolute;
@@ -136,7 +140,7 @@
             background: rgba(10, 15, 30, 0.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(56, 189, 248, 0.28);
+            border: 1px solid rgba(200, 50, 74, 0.28);
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
             z-index: 6;
             font-family: 'Poppins', sans-serif;
@@ -157,7 +161,7 @@
             background: rgba(10, 15, 30, 0.85);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(56, 189, 248, 0.35);
+            border: 1px solid rgba(200, 50, 74, 0.35);
             color: #cbd5e1;
             cursor: pointer;
             display: inline-flex;
@@ -171,8 +175,8 @@
             white-space: nowrap;
         }
         .fs-toggle-handle:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: rgba(56, 189, 248, 0.65);
+            background: rgba(200, 50, 74, 0.15);
+            border-color: rgba(200, 50, 74, 0.65);
             color: #e0f2fe;
         }
         .fs-toggle-handle svg {
@@ -209,55 +213,47 @@
             font-size: 0.75rem;
             border-radius: 6px;
             background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.28);
             color: #cbd5e1;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
             transition: background 0.15s ease, border-color 0.15s ease;
         }
         .fs-mat-btn.active {
-            background: rgba(56, 189, 248, 0.18);
-            border-color: rgba(56, 189, 248, 0.7);
+            background: rgba(200, 50, 74, 0.18);
+            border-color: rgba(200, 50, 74, 0.7);
             color: #7dd3fc;
         }
-        .fs-mat-btn:hover { background: rgba(56, 189, 248, 0.12); }
+        .fs-mat-btn:hover { background: rgba(200, 50, 74, 0.12); }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -303,13 +299,13 @@
                             onClick={() => onSelect(m.n)}
                             className="px-2.5 py-1 text-xs rounded-md transition"
                             style={active ? {
-                                background: 'rgba(56, 189, 248, 0.18)',
-                                border: '1px solid rgba(56, 189, 248, 0.7)',
-                                color: '#7dd3fc'
+                                background: 'rgba(200, 50, 74, 0.18)',
+                                border: '1px solid rgba(200, 50, 74, 0.7)',
+                                color: '#c8324a'
                             } : {
                                 background: 'rgba(30, 41, 59, 0.6)',
-                                border: '1px solid rgba(148, 163, 184, 0.2)',
-                                color: '#cbd5e1'
+                                border: '1px solid rgba(15, 22, 32, 0.28)',
+                                color: 'var(--lab-ink-soft)'
                             }}
                         >
                             {m.name}
@@ -486,14 +482,14 @@
                         </div>
                     </div>
 
-                    <div className="mt-4 pt-6 space-y-3" style={{ borderTop: '1px solid rgba(56, 189, 248, 0.2)' }}>
+                    <div className="mt-4 pt-6 space-y-3" style={{ borderTop: '1px solid rgba(200, 50, 74, 0.2)' }}>
                         <div className="flex justify-between items-center p-3 rounded-lg"
-                             style={{ background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(148, 163, 184, 0.15)' }}>
+                             style={{ background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(15, 22, 32, 0.21)' }}>
                             <span className="text-slate-300">Infallsvinkel (<i>i</i><sub>1</sub>):</span>
                             <span className="font-mono text-lg text-cyan-300">{incidentAngle.toFixed(1).replace('.', ',')}°</span>
                         </div>
                         <div className="flex justify-between items-center p-3 rounded-lg"
-                             style={{ background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(148, 163, 184, 0.15)' }}>
+                             style={{ background: 'rgba(30, 41, 59, 0.6)', border: '1px solid rgba(15, 22, 32, 0.21)' }}>
                             <span className="text-slate-300">Brytningsvinkel (<i>b</i><sub>1</sub>):</span>
                             {isTIR ? (
                                 <span className="font-bold text-lg text-red-400">Total intern reflektion</span>
@@ -709,7 +705,7 @@
             };
 
             return (
-                <div className="scene-wrap"
+                <div className="scene-wrap" data-theme="ljusPapper"
                     ref={sceneWrapRef}
                     onMouseUp={handleMouseUp}
                     onMouseLeave={handleMouseUp}
@@ -757,14 +753,14 @@
                             {/* Specular highlight vid övre kant - ljust band som tonas ut nedåt */}
                             <linearGradient id="topEdgeSpecular" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" stopColor="rgba(224, 242, 254, 0.6)"/>
-                                <stop offset="35%" stopColor="rgba(125, 211, 252, 0.10)"/>
-                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                                <stop offset="35%" stopColor="rgba(200, 50, 74, 0.10)"/>
+                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
                             </linearGradient>
                             {/* Specular highlight vid undre kant - ljust band som tonas ut uppåt */}
                             <linearGradient id="bottomEdgeSpecular" x1="0%" y1="100%" x2="0%" y2="0%">
                                 <stop offset="0%" stopColor="rgba(224, 242, 254, 0.55)"/>
-                                <stop offset="35%" stopColor="rgba(125, 211, 252, 0.10)"/>
-                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                                <stop offset="35%" stopColor="rgba(200, 50, 74, 0.10)"/>
+                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
                             </linearGradient>
                             {/* Mikrotextur för polerad glasyta */}
                             <filter id="glassNoise" x="0%" y="0%" width="100%" height="100%">
@@ -789,21 +785,21 @@
                             {/* Medium 1 specular vid gränsytan ovanifrån (fading uppåt från BLOCK_Y) */}
                             <linearGradient id="medium1BottomSpecular" x1="0%" y1="100%" x2="0%" y2="0%">
                                 <stop offset="0%" stopColor="rgba(224, 242, 254, 0.45)"/>
-                                <stop offset="40%" stopColor="rgba(125, 211, 252, 0.09)"/>
-                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                                <stop offset="40%" stopColor="rgba(200, 50, 74, 0.09)"/>
+                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
                             </linearGradient>
                             {/* Medium 1 specular vid undre gränsytan (fading nedåt) */}
                             <linearGradient id="medium1TopSpecular" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" stopColor="rgba(224, 242, 254, 0.45)"/>
-                                <stop offset="40%" stopColor="rgba(125, 211, 252, 0.09)"/>
-                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                                <stop offset="40%" stopColor="rgba(200, 50, 74, 0.09)"/>
+                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
                             </linearGradient>
                             {/* Glint vid laserns interaktion med glasytan */}
                             <radialGradient id="glassSparkle" cx="50%" cy="50%" r="50%">
                                 <stop offset="0%" stopColor="rgba(255, 255, 255, 1)"/>
                                 <stop offset="18%" stopColor="rgba(255, 255, 255, 0.7)"/>
                                 <stop offset="45%" stopColor="rgba(186, 230, 253, 0.25)"/>
-                                <stop offset="100%" stopColor="rgba(125, 211, 252, 0)"/>
+                                <stop offset="100%" stopColor="rgba(200, 50, 74, 0)"/>
                             </radialGradient>
                             <linearGradient id="penBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" stopColor="#64748b"/>
@@ -875,12 +871,12 @@
 
                             {/* Övre kant - ljus specular-linje (polerad yta) */}
                             <line x1="0" y1={BLOCK_Y} x2={VIEWBOX_WIDTH} y2={BLOCK_Y} stroke="rgba(224, 242, 254, 0.95)" strokeWidth="1.6"/>
-                            <line x1="0" y1={BLOCK_Y + 1.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + 1.4} stroke="rgba(125, 211, 252, 0.5)" strokeWidth="0.7"/>
+                            <line x1="0" y1={BLOCK_Y + 1.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + 1.4} stroke="rgba(200, 50, 74, 0.5)" strokeWidth="0.7"/>
 
                             {/* Undre kant - ljus specular-linje (polerad yta) */}
                             {!isTwoLayer && <>
                                 <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT} stroke="rgba(224, 242, 254, 0.95)" strokeWidth="1.6"/>
-                                <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT - 1.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT - 1.4} stroke="rgba(125, 211, 252, 0.5)" strokeWidth="0.7"/>
+                                <line x1="0" y1={BLOCK_Y + BLOCK_HEIGHT - 1.4} x2={VIEWBOX_WIDTH} y2={BLOCK_Y + BLOCK_HEIGHT - 1.4} stroke="rgba(200, 50, 74, 0.5)" strokeWidth="0.7"/>
                             </>}
                         </g>
 
@@ -890,7 +886,7 @@
                             <tspan fontSize="16" dy="4">1</tspan>
                             <tspan dy="-4"> = {n1.toFixed(2).replace('.', ',')}</tspan>)
                         </text>
-                        <text x="20" y={BLOCK_Y + 40} fill="#94a3b8" fontSize="24" fontWeight="500" fontFamily="Poppins, sans-serif">
+                        <text x="20" y={BLOCK_Y + 40} fill="#5a6170" fontSize="24" fontWeight="500" fontFamily="Poppins, sans-serif">
                             {getMediumLabel(n2, 'Medium 2')} (<tspan fontStyle="italic">n</tspan>
                             <tspan fontSize="16" dy="4">2</tspan>
                             <tspan dy="-4"> = {n2.toFixed(2).replace('.', ',')}</tspan>)
@@ -994,16 +990,16 @@
                                         <circle cx={0} cy={0} r={9} fill="url(#penTipGlow)"/>
                                         {/* Pennans huvudkropp */}
                                         <rect x={-L} y={-H/2} width={bodyLen} height={H}
-                                              fill="url(#penBodyGrad)" stroke="#020617" strokeWidth="0.8" rx="3" ry="3"/>
+                                              fill="url(#penBodyGrad)" stroke="#f3eee4" strokeWidth="0.8" rx="3" ry="3"/>
                                         {/* Främre kapsel (där lasern kommer ut) */}
                                         <rect x={-capLen} y={-H/2 - 1.2} width={capLen} height={H + 2.4}
-                                              fill="#0f172a" stroke="#020617" strokeWidth="0.8" rx="1.6" ry="1.6"/>
+                                              fill="#f3eee4" stroke="#f3eee4" strokeWidth="0.8" rx="1.6" ry="1.6"/>
                                         {/* Aperturen (källan) */}
                                         <circle cx={-1.5} cy={0} r={2.4} fill={apertureCenterColor}/>
                                         <circle cx={-1.5} cy={0} r={1.4} fill="#ffffff"/>
                                         {/* Subtil ljusstrimma längs ovansidan för metallisk känsla */}
                                         <line x1={-L + 4} y1={-H/2 + 2} x2={-capLen - 3} y2={-H/2 + 2}
-                                              stroke="rgba(203, 213, 225, 0.45)" strokeWidth="0.8" strokeLinecap="round"/>
+                                              stroke="rgba(15, 22, 32, 0.3)" strokeWidth="0.8" strokeLinecap="round"/>
                                     </g>
                                     {/* Grön laserknapp på baksidan av pennan */}
                                     {(() => {
@@ -1017,9 +1013,9 @@
                                                onMouseDown={(e) => e.stopPropagation()}
                                                onTouchStart={(e) => e.stopPropagation()}>
                                                 {/* Träffyta */}
-                                                <circle cx={cx} cy={cy} r={6} fill="rgba(0,0,0,0.001)"/>
+                                                <circle cx={cx} cy={cy} r={6} fill="#f3eee4"/>
                                                 {/* Bas/kant */}
-                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#04140a"/>
+                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#f3eee4"/>
                                                 {/* Knappens framsida */}
                                                 <circle cx={cx} cy={cy} r={r} fill={active ? '#22c55e' : '#14532d'}/>
                                                 {/* Glow när aktiv */}
@@ -1045,9 +1041,9 @@
                                                onMouseDown={(e) => e.stopPropagation()}
                                                onTouchStart={(e) => e.stopPropagation()}>
                                                 {/* Träffyta */}
-                                                <circle cx={cx} cy={cy} r={6} fill="rgba(0,0,0,0.001)"/>
+                                                <circle cx={cx} cy={cy} r={6} fill="#f3eee4"/>
                                                 {/* Bas/kant */}
-                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#1f0709"/>
+                                                <circle cx={cx} cy={cy} r={r + 0.7} fill="#f3eee4"/>
                                                 {/* Knappens framsida */}
                                                 <circle cx={cx} cy={cy} r={r} fill={active ? '#ef4444' : '#450a0a'}/>
                                                 {/* Glow när aktiv */}
@@ -1153,11 +1149,11 @@
                         {showAngles && !isTIR && !isTwoLayer && (
                             <g>
                                 <rect x={VIEWBOX_WIDTH - 170} y="15" width="155" height="70"
-                                      fill="rgba(10, 20, 40, 0.85)"
-                                      stroke="rgba(56, 189, 248, 0.4)"
+                                      fill="#f3eee4"
+                                      stroke="rgba(200, 50, 74, 0.4)"
                                       strokeWidth="1.5"
                                       rx="8"/>
-                                <text x={VIEWBOX_WIDTH - 92.5} y="38" fill="#94a3b8" fontSize="16" fontWeight="bold" textAnchor="middle" fontFamily="Poppins, sans-serif">Vinkelsamband:</text>
+                                <text x={VIEWBOX_WIDTH - 92.5} y="38" fill="#5a6170" fontSize="16" fontWeight="bold" textAnchor="middle" fontFamily="Poppins, sans-serif">Vinkelsamband:</text>
                                 <text x={VIEWBOX_WIDTH - 92.5} y="58" fill="#0ea5e9" fontSize="15" textAnchor="middle" fontFamily="Poppins, sans-serif">
                                     <tspan fontStyle="italic">i</tspan><tspan fontSize="11" dy="3">1</tspan><tspan dy="-3"> = </tspan>
                                     <tspan fontStyle="italic">b</tspan><tspan fontSize="11" dy="3">2</tspan>
@@ -1217,21 +1213,21 @@
                         <div className="fs-row">
                             <span className="fs-label">Laserfärg</span>
                             <div style={{ flex: 1, display: 'flex', gap: 16 }}>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--lab-ink-soft)', fontSize: '0.9rem' }}>
                                     <input type="radio" name="fs-laser-color" value="green"
                                         checked={laserColor === 'green'}
                                         onChange={() => setLaserColor('green')}
                                         style={{ accentColor: '#22c55e', cursor: 'pointer' }}/>
                                     Grön
                                 </label>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--lab-ink-soft)', fontSize: '0.9rem' }}>
                                     <input type="radio" name="fs-laser-color" value="red"
                                         checked={laserColor === 'red'}
                                         onChange={() => setLaserColor('red')}
                                         style={{ accentColor: '#ef4444', cursor: 'pointer' }}/>
                                     Röd
                                 </label>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem', marginLeft: 'auto' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--lab-ink-soft)', fontSize: '0.9rem', marginLeft: 'auto' }}>
                                     <input type="checkbox"
                                         checked={showAngles}
                                         onChange={(e) => setShowAngles(e.target.checked)}
@@ -1244,14 +1240,14 @@
                             <div className="fs-row">
                                 <span className="fs-label">Vinkelvisning</span>
                                 <div style={{ flex: 1, display: 'flex', gap: 16 }}>
-                                    <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--lab-ink-soft)', fontSize: '0.9rem' }}>
                                         <input type="radio" name="fs-angle-display" value="labels"
                                             checked={angleDisplay === 'labels'}
                                             onChange={() => setAngleDisplay('labels')}
                                             style={{ accentColor: '#38bdf8', cursor: 'pointer' }}/>
                                         Beteckningar
                                     </label>
-                                    <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--lab-ink-soft)', fontSize: '0.9rem' }}>
                                         <input type="radio" name="fs-angle-display" value="values"
                                             checked={angleDisplay === 'values'}
                                             onChange={() => setAngleDisplay('values')}
@@ -1264,14 +1260,14 @@
                         <div className="fs-row">
                             <span className="fs-label">Antal skikt</span>
                             <div style={{ flex: 1, display: 'flex', gap: 16 }}>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--lab-ink-soft)', fontSize: '0.9rem' }}>
                                     <input type="radio" name="fs-layer-mode" value="three"
                                         checked={layerMode === 'three'}
                                         onChange={() => setLayerMode('three')}
                                         style={{ accentColor: '#38bdf8', cursor: 'pointer' }}/>
                                     Tre (1+2+1)
                                 </label>
-                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: '#cbd5e1', fontSize: '0.9rem' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', color: 'var(--lab-ink-soft)', fontSize: '0.9rem' }}>
                                     <input type="radio" name="fs-layer-mode" value="two"
                                         checked={layerMode === 'two'}
                                         onChange={() => setLayerMode('two')}

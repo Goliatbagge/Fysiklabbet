@@ -8,6 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -19,28 +23,28 @@
         .glass-card {
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(200, 50, 74, 0.15);
         }
         .glass-card-light {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(15, 22, 32, 0.27999999999999997);
         }
         .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            text-shadow: 0 0 20px rgba(200, 50, 74, 0.5);
         }
         .btn-glow {
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 20px rgba(200, 50, 74, 0.3);
             transition: all 0.3s ease;
         }
         .btn-glow:hover {
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 30px rgba(200, 50, 74, 0.5);
         }
         .step-indicator {
             transition: all 0.3s ease;
         }
         .step-indicator.active {
-            background: rgba(56, 189, 248, 0.3);
+            background: rgba(200, 50, 74, 0.3);
             border-color: #38bdf8;
             color: #38bdf8;
         }
@@ -51,46 +55,38 @@
         }
         .step-indicator.pending {
             background: rgba(15, 23, 42, 0.5);
-            border-color: rgba(56, 189, 248, 0.15);
+            border-color: rgba(200, 50, 74, 0.15);
             color: #475569;
         }
     </style>
 </head>
-<body class="bg-slate-950">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link active">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <div id="root"></div>
 
@@ -316,7 +312,7 @@
                 const innerSpacing = (innerBottom - innerTop) / (innerRows + 1);
                 for (let r = 1; r <= innerRows; r++) {
                     const iy = innerTop + r * innerSpacing;
-                    drawArrow(ctx, innerRight, iy, innerLeft, iy, 'rgba(56, 189, 248, 0.6)', 2);
+                    drawArrow(ctx, innerRight, iy, innerLeft, iy, 'rgba(200, 50, 74, 0.6)', 2);
                 }
             }, [drawArrow]);
 
@@ -383,12 +379,7 @@
                     });
 
                     // === BACKGROUND ===
-                    ctx.fillStyle = '#050510';
-                    ctx.fillRect(0, 0, width, height);
-                    const bgGrad = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width * 0.7);
-                    bgGrad.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
-                    bgGrad.addColorStop(1, 'rgba(5, 5, 16, 0)');
-                    ctx.fillStyle = bgGrad;
+                    ctx.fillStyle = '#f3eee4';
                     ctx.fillRect(0, 0, width, height);
 
                     // === STEP 2+: EXTERNAL FIELD ===
@@ -421,9 +412,9 @@
                         ctx.fillText('+', 36, height / 2);
 
                         // − on the right (negative charge)
-                        ctx.shadowColor = 'rgba(56, 189, 248, 0.8)';
+                        ctx.shadowColor = 'rgba(200, 50, 74, 0.8)';
                         ctx.shadowBlur = 25;
-                        ctx.fillStyle = '#7dd3fc';
+                        ctx.fillStyle = '#0f1620';
                         ctx.fillText('−', width - 36, height / 2);
 
                         ctx.restore();
@@ -440,21 +431,21 @@
                     else ctx.rect(cageX, cageY, cageW, cageH);
                     ctx.fill();
 
-                    // Inner hollow
-                    ctx.fillStyle = '#0a0a1a';
+                    // Inner hollow — papper för att visa "lugnt fältfritt" inre
+                    ctx.fillStyle = '#f3eee4';
                     ctx.beginPath();
                     if (ctx.roundRect) ctx.roundRect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t, 3);
                     else ctx.rect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t);
                     ctx.fill();
 
                     // Borders
-                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.5599999999999999)';
                     ctx.lineWidth = 2;
                     ctx.beginPath();
                     if (ctx.roundRect) ctx.roundRect(cageX, cageY, cageW, cageH, 6);
                     else ctx.rect(cageX, cageY, cageW, cageH);
                     ctx.stroke();
-                    ctx.strokeStyle = 'rgba(148, 163, 184, 0.2)';
+                    ctx.strokeStyle = 'rgba(15, 22, 32, 0.27999999999999997)';
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     if (ctx.roundRect) ctx.roundRect(cageX + t, cageY + t, cageW - 2 * t, cageH - 2 * t, 3);
@@ -515,7 +506,7 @@
                         }
 
                         if (showInduced) {
-                            const indColor = 'rgba(56, 189, 248, 0.6)';
+                            const indColor = 'rgba(200, 50, 74, 0.6)';
                             for (let r = 1; r <= fieldRows; r++) {
                                 const ay = r * arrowSpacing;
                                 if (ay > innerTop && ay < innerBottom) {
@@ -572,13 +563,13 @@
                         ctx.textBaseline = 'middle';
                         const minusX = cageX + t / 2;
                         const minusY = cageY + cageH / 2;
-                        ctx.shadowColor = 'rgba(56, 189, 248, 1)';
+                        ctx.shadowColor = 'rgba(200, 50, 74, 1)';
                         ctx.shadowBlur = 30;
-                        ctx.strokeStyle = '#0a0a1a';
+                        ctx.strokeStyle = '#0f1620';
                         ctx.lineWidth = 5;
                         ctx.lineJoin = 'round';
                         ctx.strokeText('−', minusX, minusY);
-                        ctx.fillStyle = '#7dd3fc';
+                        ctx.fillStyle = '#0f1620';
                         ctx.fillText('−', minusX, minusY);
 
                         // Big plus on right wall (with outline for readability)
@@ -586,7 +577,7 @@
                         const plusY = cageY + cageH / 2;
                         ctx.shadowColor = 'rgba(239, 68, 68, 1)';
                         ctx.shadowBlur = 30;
-                        ctx.strokeStyle = '#0a0a1a';
+                        ctx.strokeStyle = '#0f1620';
                         ctx.lineWidth = 5;
                         ctx.lineJoin = 'round';
                         ctx.strokeText('+', plusX, plusY);
@@ -618,8 +609,8 @@
                         ctx.globalAlpha = smallChargeAlpha;
                         electrons.forEach(e => {
                             const glow = ctx.createRadialGradient(e.currentX, e.currentY, 0, e.currentX, e.currentY, 12);
-                            glow.addColorStop(0, 'rgba(56, 189, 248, 0.5)');
-                            glow.addColorStop(0.5, 'rgba(14, 165, 233, 0.15)');
+                            glow.addColorStop(0, 'rgba(200, 50, 74, 0.5)');
+                            glow.addColorStop(0.5, 'rgba(200, 50, 74, 0.15)');
                             glow.addColorStop(1, 'rgba(2, 132, 199, 0)');
                             ctx.beginPath();
                             ctx.arc(e.currentX, e.currentY, 12, 0, Math.PI * 2);
@@ -627,8 +618,8 @@
                             ctx.fill();
 
                             ctx.shadowBlur = 10;
-                            ctx.shadowColor = 'rgba(56, 189, 248, 0.9)';
-                            ctx.fillStyle = '#38bdf8';
+                            ctx.shadowColor = 'rgba(200, 50, 74, 0.9)';
+                            ctx.fillStyle = '#0f1620';
                             ctx.font = 'bold 14px Arial';
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
@@ -638,7 +629,7 @@
                     }
 
                     // === LABEL ===
-                    ctx.fillStyle = 'rgba(148, 163, 184, 0.6)';
+                    ctx.fillStyle = 'rgba(15, 22, 32, 0.84)';
                     ctx.font = '13px Poppins, sans-serif';
                     ctx.textAlign = 'center';
                     ctx.fillText('Metallhölje', cageX + cageW / 2, cageY - 12);
@@ -664,7 +655,7 @@
                         const indLabelW = ctx.measureText(indLabel).width;
                         ctx.fillStyle = 'rgba(10, 10, 26, 0.9)';
                         ctx.fillRect(indLabelX - indLabelW - 6, indLabelY - 11, indLabelW + 12, 22);
-                        ctx.fillStyle = 'rgba(56, 189, 248, 0.9)';
+                        ctx.fillStyle = 'rgba(200, 50, 74, 0.9)';
                         ctx.fillText(indLabel, indLabelX, indLabelY);
                     }
 
@@ -700,11 +691,11 @@
                         ctx.stroke();
 
                         // Small handle ball at bottom of stick
-                        ctx.fillStyle = '#cbd5e1';
+                        ctx.fillStyle = '#0f1620';
                         ctx.beginPath();
                         ctx.arc(px, stickBottom, 5, 0, Math.PI * 2);
                         ctx.fill();
-                        ctx.strokeStyle = '#94a3b8';
+                        ctx.strokeStyle = '#0f1620';
                         ctx.lineWidth = 1.5;
                         ctx.stroke();
 
@@ -792,7 +783,7 @@
                         // Draw each thread as a distinct, visible line
                         const segments = 24;
                         for (const f of fringeData) {
-                            ctx.strokeStyle = '#e0e0ff';
+                            ctx.strokeStyle = '#0f1620';
                             ctx.lineWidth = 1.5;
                             ctx.lineCap = 'round';
 
@@ -918,7 +909,7 @@
                         }
 
                         // Small dot at the fringe attachment point
-                        ctx.fillStyle = '#e2e8f0';
+                        ctx.fillStyle = '#0f1620';
                         ctx.beginPath();
                         ctx.arc(fringeAttachX, fringeAttachY, 4, 0, Math.PI * 2);
                         ctx.fill();
@@ -943,7 +934,7 @@
 
                     // Step 6 instruction when probe not active
                     if (currentStep === 6 && !probeRef.current.active) {
-                        ctx.fillStyle = 'rgba(148, 163, 184, 0.5)';
+                        ctx.fillStyle = 'rgba(15, 22, 32, 0.7)';
                         ctx.font = '16px Poppins, sans-serif';
                         ctx.textAlign = 'center';
                         ctx.fillText('Rör musen över simuleringen för att använda fältprovaren', width / 2, height - 30);
@@ -1050,11 +1041,11 @@
                     <div className="max-w-6xl mx-auto py-8 px-4">
                         <header className="text-center mb-8">
                             <nav style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
-                                <a href="index.html" style={{ color: '#94a3b8', textDecoration: 'none' }}>Hem</a>
+                                <a href="index.html" style={{ color: 'var(--lab-ink-muted)', textDecoration: 'none' }}>Hem</a>
                                 <span style={{ color: '#475569', margin: '0 0.5rem' }}>/</span>
-                                <a href="fysik1.html" style={{ color: '#94a3b8', textDecoration: 'none' }}>Fysik 1</a>
+                                <a href="fysik1.html" style={{ color: 'var(--lab-ink-muted)', textDecoration: 'none' }}>Fysik 1</a>
                                 <span style={{ color: '#475569', margin: '0 0.5rem' }}>/</span>
-                                <span style={{ color: '#38bdf8' }}>Faradays bur</span>
+                                <span style={{ color: '#c8324a' }}>Faradays bur</span>
                             </nav>
                             <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 tracking-tight glow-text mb-4">
                                 Faradays bur
@@ -1075,9 +1066,9 @@
                                     <button key={s} onClick={() => { setStep(s); if (s === 5) setViewMode('resultant'); }}
                                          className={`step-indicator w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold cursor-pointer hover:scale-110 transition-transform`}
                                          style={{
-                                             background: cls === 'active' ? 'rgba(56, 189, 248, 0.3)' : cls === 'done' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(15, 23, 42, 0.5)',
-                                             borderColor: cls === 'active' ? '#38bdf8' : cls === 'done' ? 'rgba(34, 197, 94, 0.5)' : 'rgba(56, 189, 248, 0.15)',
-                                             color: cls === 'active' ? '#38bdf8' : cls === 'done' ? '#4ade80' : '#475569'
+                                             background: cls === 'active' ? 'rgba(200, 50, 74, 0.3)' : cls === 'done' ? 'rgba(34, 197, 94, 0.2)' : 'rgba(15, 23, 42, 0.5)',
+                                             borderColor: cls === 'active' ? '#38bdf8' : cls === 'done' ? 'rgba(34, 197, 94, 0.5)' : 'rgba(200, 50, 74, 0.15)',
+                                             color: cls === 'active' ? '#0f1620' : cls === 'done' ? '#4ade80' : '#475569'
                                          }}>
                                         {s}
                                     </button>

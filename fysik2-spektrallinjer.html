@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spektrallinjer - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -48,29 +52,29 @@
         /* Toggle pill buttons */
         .toggle-group {
             display: inline-flex;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 999px;
-            padding: 4px;
+            background: var(--lab-bg);
+            border: 1px solid var(--lab-line-strong);
+            border-radius: 4px;
+            padding: 3px;
             gap: 2px;
         }
         .toggle-btn {
-            padding: 8px 18px;
-            border-radius: 999px;
+            padding: 6px 16px;
+            border-radius: 2px;
             font-size: 0.9rem;
             font-weight: 500;
-            color: #94a3b8;
+            color: var(--lab-ink-soft);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: color 0.15s ease, background 0.15s ease;
             border: none;
             background: transparent;
             white-space: nowrap;
         }
-        .toggle-btn:hover { color: #e2e8f0; }
+        .toggle-btn:hover { color: var(--lab-ink); }
         .toggle-btn.active {
-            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
-            color: #0a0a1a;
-            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+            background: var(--lab-ink);
+            color: var(--lab-bg);
+            box-shadow: none;
         }
 
         /* Periodic table */
@@ -84,7 +88,7 @@
             aspect-ratio: 0.82;
             border-radius: 4px;
             border: 1px solid rgba(56, 189, 248, 0.08);
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(255, 255, 255, 0.6);
             padding: 3px 2px 2px;
             display: flex;
             flex-direction: column;
@@ -96,9 +100,7 @@
             position: relative;
             min-width: 0;
         }
-        .pt-cell .pt-z {
-            font-size: clamp(0.4rem, 0.6vw, 0.55rem);
-            color: rgba(226, 232, 240, 0.55);
+        .pt-cell .pt-z { font-size: clamp(0.4rem, 0.6vw, 0.55rem); color: rgba(15, 22, 32, 0.7);
             position: absolute;
             top: 2px;
             left: 4px;
@@ -110,9 +112,7 @@
             line-height: 1;
             margin-top: auto;
         }
-        .pt-cell .pt-name {
-            font-size: clamp(0.4rem, 0.65vw, 0.55rem);
-            color: rgba(226, 232, 240, 0.75);
+        .pt-cell .pt-name { font-size: clamp(0.4rem, 0.65vw, 0.55rem); color: rgba(15, 22, 32, 0.75);
             text-align: center;
             line-height: 1.05;
             margin-top: 2px;
@@ -152,32 +152,32 @@
 
         /* Category colors */
         .cat-alkali { background: rgba(239, 68, 68, 0.18); border-color: rgba(239, 68, 68, 0.4); }
-        .cat-alkali .pt-sym { color: #fca5a5; }
+        .cat-alkali .pt-sym { color: #b91c1c; }
         .cat-alkaline { background: rgba(249, 115, 22, 0.18); border-color: rgba(249, 115, 22, 0.4); }
-        .cat-alkaline .pt-sym { color: #fdba74; }
+        .cat-alkaline .pt-sym { color: #c2410c; }
         .cat-transition { background: rgba(234, 179, 8, 0.15); border-color: rgba(234, 179, 8, 0.35); }
-        .cat-transition .pt-sym { color: #fde68a; }
+        .cat-transition .pt-sym { color: #a16207; }
         .cat-posttrans { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.35); }
-        .cat-posttrans .pt-sym { color: #6ee7b7; }
+        .cat-posttrans .pt-sym { color: #047857; }
         .cat-metalloid { background: rgba(6, 182, 212, 0.15); border-color: rgba(6, 182, 212, 0.35); }
-        .cat-metalloid .pt-sym { color: #67e8f9; }
+        .cat-metalloid .pt-sym { color: #0e7490; }
         .cat-nonmetal { background: rgba(59, 130, 246, 0.18); border-color: rgba(59, 130, 246, 0.4); }
-        .cat-nonmetal .pt-sym { color: #93c5fd; }
+        .cat-nonmetal .pt-sym { color: #1d4ed8; }
         .cat-halogen { background: rgba(139, 92, 246, 0.18); border-color: rgba(139, 92, 246, 0.4); }
-        .cat-halogen .pt-sym { color: #c4b5fd; }
+        .cat-halogen .pt-sym { color: #6d28d9; }
         .cat-noble { background: rgba(236, 72, 153, 0.18); border-color: rgba(236, 72, 153, 0.4); }
-        .cat-noble .pt-sym { color: #f9a8d4; }
+        .cat-noble .pt-sym { color: #be185d; }
         .cat-lanthanide { background: rgba(168, 85, 247, 0.18); border-color: rgba(168, 85, 247, 0.4); }
-        .cat-lanthanide .pt-sym { color: #d8b4fe; }
+        .cat-lanthanide .pt-sym { color: #7e22ce; }
         .cat-actinide { background: rgba(244, 63, 94, 0.18); border-color: rgba(244, 63, 94, 0.4); }
-        .cat-actinide .pt-sym { color: #fda4af; }
+        .cat-actinide .pt-sym { color: #be123c; }
 
         .legend {
             display: flex;
             flex-wrap: wrap;
             gap: 10px 14px;
             font-size: 0.75rem;
-            color: #94a3b8;
+            color: #0f1620;
             margin-top: 14px;
         }
         .legend-item { display: flex; align-items: center; gap: 6px; }
@@ -189,11 +189,11 @@
 
         /* Rullista */
         .element-select {
-            padding: 9px 36px 9px 14px;
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 10px;
-            color: #e2e8f0;
+            padding: 8px 36px 8px 14px;
+            background: var(--lab-bg);
+            border: 1px solid var(--lab-line-strong);
+            border-radius: 4px;
+            color: var(--lab-ink);
             font-family: inherit;
             font-size: 0.9rem;
             font-weight: 500;
@@ -201,29 +201,30 @@
             cursor: pointer;
             appearance: none;
             -webkit-appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2338bdf8'><path d='M5 8l5 5 5-5z'/></svg>");
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%230f1620'><path d='M5 8l5 5 5-5z'/></svg>");
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 16px;
-            transition: all 0.15s ease;
+            transition: border-color 0.15s ease, background 0.15s ease;
             min-width: 190px;
         }
         .element-select:hover {
-            border-color: rgba(56, 189, 248, 0.6);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+            background: var(--lab-bg-panel);
+            border-color: var(--lab-ink);
+            box-shadow: none;
         }
         .element-select:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+            border-color: var(--lab-ink);
+            box-shadow: 0 0 0 2px var(--lab-accent);
         }
         .element-select option {
-            background: #0d1526;
-            color: #e2e8f0;
+            background: var(--lab-bg-panel);
+            color: var(--lab-ink);
             padding: 6px;
         }
         .element-select optgroup {
-            background: #0a1020;
-            color: #64748b;
+            background: var(--lab-bg);
+            color: var(--lab-ink-muted);
             font-style: italic;
             font-weight: 500;
         }
@@ -233,13 +234,14 @@
             justify-content: space-between;
             align-items: baseline;
             padding: 8px 14px;
-            background: rgba(15, 23, 42, 0.5);
-            border-radius: 8px;
+            background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line);
+            border-radius: 4px;
             font-size: 0.85rem;
-            color: #94a3b8;
+            color: var(--lab-ink);
         }
-        .info-line .label { color: #64748b; font-size: 0.75rem; }
-        .info-line .value { color: #e2e8f0; font-weight: 500; }
+        .info-line .label { color: var(--lab-ink-muted); font-size: 0.75rem; }
+        .info-line .value { color: var(--lab-ink); font-weight: 500; }
         .math-var { font-style: italic; }
 
         /* Jämförelsesektion */
@@ -361,75 +363,69 @@
         .tabs {
             display: flex;
             gap: 4px;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+            border-bottom: 1px solid var(--lab-line-strong);
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
         .tab-btn {
-            padding: 12px 24px;
+            padding: 10px 22px;
             background: transparent;
             border: none;
-            color: #94a3b8;
+            border-radius: 4px 4px 0 0;
+            color: var(--lab-ink-soft);
             font-family: inherit;
             font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
             position: relative;
-            transition: color 0.18s ease;
+            transition: color 0.15s ease, background 0.15s ease;
             margin-bottom: -1px;
         }
-        .tab-btn:hover { color: #e2e8f0; }
+        .tab-btn:hover { color: var(--lab-ink); background: var(--lab-bg-panel); }
         .tab-btn.active {
-            color: #38bdf8;
+            color: var(--lab-bg);
+            background: var(--lab-ink);
         }
         .tab-btn.active::after {
             content: '';
             position: absolute;
             bottom: -1px;
-            left: 12px;
-            right: 12px;
+            left: 0;
+            right: 0;
             height: 2px;
-            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-            border-radius: 2px 2px 0 0;
-            box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+            background: var(--lab-ink);
+            border-radius: 0;
+            box-shadow: none;
         }
     </style>
 </head>
-<body class="page-wrapper">
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">⚛️</span>
-                <span class="logo-text">Fysiklabbet</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+<body class="page-wrapper lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
-    </nav>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
     <main class="container" style="max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem;">
         <nav aria-label="Brödsmulor" style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.2rem;">
@@ -1303,35 +1299,50 @@
 
                     {/* Teorikort */}
                     <div className="glass-card" style={{ padding: '1.5rem' }}>
-                        <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: '#e2e8f0', marginBottom: '0.8rem' }}>Spektrallinjer — teori</h3>
-                        <p style={{ color: '#cbd5e1', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+                        <h3 style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--lab-ink)', marginBottom: '0.8rem' }}>Spektrallinjer — teori</h3>
+                        <p style={{ color: 'var(--lab-ink)', lineHeight: 1.7, marginBottom: '0.9rem' }}>
                             Atomens elektroner kan bara befinna sig på vissa bestämda energinivåer. När en elektron
                             hoppar från en högre nivå <span className="math-var">E</span>₂ till en lägre nivå <span className="math-var">E</span>₁
                             avges en foton med energin:
                         </p>
                         <div style={{
                             textAlign: 'center',
-                            padding: '1rem',
-                            background: 'rgba(15, 23, 42, 0.6)',
-                            borderRadius: '10px',
+                            padding: '1.2rem 1rem',
+                            background: 'var(--lab-bg-panel)',
+                            border: '1px solid var(--lab-line-strong)',
+                            borderRadius: '6px',
                             fontSize: '1.2rem',
-                            color: '#38bdf8',
-                            margin: '0.5rem 0 1rem'
+                            color: 'var(--lab-ink)',
+                            margin: '0.5rem 0 1rem',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            flexWrap: 'wrap'
                         }}>
-                            <span className="math-var">E</span>ₓ = <span className="math-var">E</span>₂ − <span className="math-var">E</span>₁ = <span className="math-var">hf</span> = <span className="math-var">hc</span>/<span className="math-var">λ</span>
+                            <span><span className="math-var">E</span>ₓ</span>
+                            <span>=</span>
+                            <span><span className="math-var">E</span>₂ − <span className="math-var">E</span>₁</span>
+                            <span>=</span>
+                            <span><span className="math-var">hf</span></span>
+                            <span>=</span>
+                            <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', lineHeight: 1.1 }}>
+                                <span className="math-var" style={{ borderBottom: '1.5px solid currentColor', padding: '0 0.4em' }}>hc</span>
+                                <span className="math-var" style={{ padding: '0 0.4em' }}>λ</span>
+                            </span>
                         </div>
-                        <p style={{ color: '#cbd5e1', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+                        <p style={{ color: 'var(--lab-ink)', lineHeight: 1.7, marginBottom: '0.9rem' }}>
                             Eftersom varje grundämne har sitt unika mönster av energinivåer blir också det utsända
                             ljusets våglängder unika. Spektrumet fungerar därmed som ett fingeravtryck — astronomer
                             använder samma princip för att bestämma vad avlägsna stjärnor består av.
                         </p>
-                        <p style={{ color: '#cbd5e1', lineHeight: 1.7, marginBottom: '0.9rem' }}>
-                            <strong style={{color:'#e2e8f0'}}>Emission</strong> uppstår när heta atomer avger ljus — elektronerna är exciterade
+                        <p style={{ color: 'var(--lab-ink)', lineHeight: 1.7, marginBottom: '0.9rem' }}>
+                            <strong style={{color:'var(--lab-ink)'}}>Emission</strong> uppstår när heta atomer avger ljus — elektronerna är exciterade
                             och hoppar ner till lägre nivåer.
-                            <strong style={{color:'#e2e8f0'}}> Absorption</strong> uppstår när kallt material passeras av vitt ljus — atomerna
+                            <strong style={{color:'var(--lab-ink)'}}> Absorption</strong> uppstår när kallt material passeras av vitt ljus — atomerna
                             absorberar just de våglängder de själva kan emittera, och efterlämnar mörka linjer i spektrumet (Kirchhoffs andra lag).
                         </p>
-                        <p style={{ color: '#94a3b8', fontSize: '0.85rem', fontStyle: 'italic', marginTop: '1rem' }}>
+                        <p style={{ color: 'var(--lab-ink-soft)', fontSize: '0.85rem', fontStyle: 'italic', marginTop: '1rem' }}>
                             Tips: Jämför vätet (H) med solens absorptionsspektrum — de mörka Fraunhoferlinjerna i solens spektrum
                             är en direkt kopia av vätets (och andra ämnens) emissionslinjer. Prova också att jämföra natrium (Na)
                             och kvicksilver (Hg) — de har helt olika fingeravtryck.

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fotoelektrisk effekt - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -14,454 +17,36 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <style>
-        .page-wrapper {
-            background: linear-gradient(135deg, #0a0a1a 0%, #0d1526 50%, #0a1020 100%);
-            min-height: 100vh;
-        }
-        .glass-card {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            border-radius: 16px;
-        }
-        .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-        }
-        .scene-wrap {
-            position: relative;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255,255,255,0.05);
-            background: radial-gradient(ellipse at 30% 20%, #1b2540 0%, #0a0f1e 55%, #05080f 100%);
-        }
-        .scene-canvas {
-            display: block;
-            width: 100%;
-            height: 520px;
-        }
-        .scene-wrap:fullscreen {
-            background: #05080f;
-            border-radius: 0;
-            width: 100vw !important;
-            height: 100vh !important;
-            display: block !important;
-        }
-        .scene-wrap:-webkit-full-screen {
-            background: #05080f;
-            border-radius: 0;
-            width: 100vw !important;
-            height: 100vh !important;
-            display: block !important;
-        }
-        .scene-wrap:fullscreen .scene-canvas {
-            width: 100vw !important;
-            height: 100vh !important;
-        }
-        .scene-wrap:-webkit-full-screen .scene-canvas {
-            width: 100vw !important;
-            height: 100vh !important;
-        }
-        .scene-wrap:fullscreen .scene-canvas > canvas,
-        .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
-            width: 100vw !important;
-            height: 100vh !important;
-            display: block !important;
-        }
-
-        .fs-btn {
-            position: absolute;
-            top: 14px;
-            left: 14px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            color: #38bdf8;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.15s ease, background 0.15s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-            z-index: 5;
-        }
-        .fs-btn:hover { transform: scale(1.08); background: rgba(56,189,248,0.18); }
-
-        .fs-controls {
-            position: absolute;
-            left: 50%;
-            bottom: 62px;
-            transform: translateX(-50%);
-            width: min(820px, 92vw);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 14px 22px;
-            border-radius: 14px;
-            background: rgba(10, 15, 30, 0.82);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(56, 189, 248, 0.28);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
-            z-index: 6;
-            font-family: 'Poppins', sans-serif;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                        opacity 0.25s ease;
-        }
-        .fs-controls.collapsed {
-            transform: translateX(-50%) translateY(calc(100% + 40px));
-            opacity: 0;
-            pointer-events: none;
-        }
-        .fs-toggle-handle {
-            position: absolute;
-            left: 50%;
-            bottom: 14px;
-            transform: translateX(-50%);
-            padding: 8px 16px;
-            border-radius: 10px;
-            background: rgba(10, 15, 30, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(56, 189, 248, 0.35);
-            color: #cbd5e1;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            z-index: 7;
-            transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-            white-space: nowrap;
-        }
-        .fs-toggle-handle:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: rgba(56, 189, 248, 0.65);
-            color: #e0f2fe;
-        }
-        .fs-toggle-handle svg {
-            transition: transform 0.3s ease;
-        }
-        .fs-row {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .fs-label {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            font-weight: 600;
-            white-space: nowrap;
-            min-width: 96px;
-        }
-        .fs-value {
-            color: #e2e8f0;
-            font-size: 0.92rem;
-            font-weight: 600;
-            min-width: 80px;
-            text-align: right;
-            white-space: nowrap;
-        }
-
-        /* Value cards */
-        .value-card {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-            border-radius: 10px;
-            padding: 12px 16px;
-            min-width: 0;
-        }
-        .value-label {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-        .value-number {
-            font-size: 1.25rem;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            color: #e2e8f0;
-            white-space: nowrap;
-        }
-        .value-number span.unit {
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: #94a3b8;
-            margin-left: 3px;
-        }
-        .value-number em {
-            font-style: italic;
-            font-weight: 600;
-        }
-
-        /* Wavelength slider with spectrum */
-        .wl-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 10px;
-            border-radius: 5px;
-            background: linear-gradient(to left,
-                #6b21a8 0%,
-                #6b21a8 4%,
-                #7c3aed 12%,
-                #4338ca 18%,
-                #1d4ed8 24%,
-                #0284c7 30%,
-                #0891b2 36%,
-                #16a34a 45%,
-                #ca8a04 58%,
-                #ea580c 68%,
-                #dc2626 78%,
-                #991b1b 90%,
-                #7f1d1d 100%);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            outline: none;
-            cursor: pointer;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
-        }
-        .wl-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
-            border: 2px solid #0a0a1a;
-            cursor: grab;
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.55),
-                        0 2px 5px rgba(0, 0, 0, 0.5);
-            transition: transform 0.1s;
-        }
-        .wl-slider::-webkit-slider-thumb:hover { transform: scale(1.08); }
-        .wl-slider::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.15); }
-        .wl-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
-            border: 2px solid #0a0a1a;
-            cursor: grab;
-            box-shadow: 0 0 12px rgba(255, 255, 255, 0.55);
-        }
-
-        /* Intensity slider */
-        .int-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 100%;
-            height: 10px;
-            border-radius: 5px;
-            background: linear-gradient(to right, #1e293b 0%, #fbbf24 100%);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            outline: none;
-            cursor: pointer;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
-        }
-        .int-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #fef9c3 0%, #fbbf24 60%, #d97706 100%);
-            border: 2px solid #0a0a1a;
-            cursor: grab;
-            box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
-        }
-        .int-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #fef9c3 0%, #fbbf24 60%, #d97706 100%);
-            border: 2px solid #0a0a1a;
-            cursor: grab;
-        }
-
-        /* Metal selector */
-        .metal-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: 10px 14px;
-            border-radius: 11px;
-            border: 1.5px solid rgba(56, 189, 248, 0.18);
-            background: rgba(15, 23, 42, 0.55);
-            cursor: pointer;
-            transition: all 0.18s ease;
-            font-family: 'Poppins', sans-serif;
-            color: #cbd5e1;
-            min-width: 92px;
-        }
-        .metal-btn:hover {
-            border-color: rgba(56, 189, 248, 0.5);
-            background: rgba(15, 23, 42, 0.85);
-            transform: translateY(-1px);
-        }
-        .metal-btn.active {
-            border-color: #38bdf8;
-            background: rgba(56, 189, 248, 0.14);
-            box-shadow: 0 0 18px rgba(56, 189, 248, 0.22);
-        }
-        .metal-symbol {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #e0f2fe;
-            font-style: italic;
-        }
-        .metal-name {
-            font-size: 0.78rem;
-            color: #94a3b8;
-        }
-        .metal-w {
-            font-size: 0.7rem;
-            color: #64748b;
-            margin-top: 2px;
-        }
-
-        /* Formula box */
-        .formula-box {
-            background: rgba(56, 189, 248, 0.06);
-            border: 1px solid rgba(56, 189, 248, 0.22);
-            border-radius: 12px;
-            padding: 14px 18px;
-            font-family: 'Poppins', sans-serif;
-            color: #e2e8f0;
-        }
-
-        /* Status badge */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 999px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            font-size: 0.92rem;
-            letter-spacing: 0.01em;
-        }
-        .status-on {
-            background: rgba(34, 197, 94, 0.13);
-            color: #86efac;
-            border: 1px solid rgba(34, 197, 94, 0.4);
-            box-shadow: 0 0 18px rgba(34, 197, 94, 0.2);
-        }
-        .status-off {
-            background: rgba(148, 163, 184, 0.08);
-            color: #94a3b8;
-            border: 1px solid rgba(148, 163, 184, 0.3);
-        }
-        .status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            box-shadow: 0 0 10px currentColor;
-        }
-
-        /* Light wave description pill */
-        .band-pill {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 999px;
-            font-size: 0.72rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            border: 1px solid currentColor;
-        }
-
-        /* Visningsläge för ljus: våg ↔ fotoner */
-        .mode-toggle {
-            display: inline-flex;
-            gap: 2px;
-            background: rgba(15, 23, 42, 0.55);
-            border: 1px solid rgba(56, 189, 248, 0.22);
-            border-radius: 10px;
-            padding: 3px;
-        }
-        .mode-toggle-btn {
-            padding: 8px 14px;
-            border-radius: 7px;
-            border: none;
-            background: transparent;
-            color: #94a3b8;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            white-space: nowrap;
-        }
-        .mode-toggle-btn:hover:not(.active) { color: #cbd5e1; }
-        .mode-toggle-btn.active {
-            background: rgba(56, 189, 248, 0.18);
-            color: #e0f2fe;
-            box-shadow: 0 0 14px rgba(56, 189, 248, 0.18);
-        }
-        .mode-toggle-btn svg { opacity: 0.95; }
-
-        ::-webkit-scrollbar { width: 7px; }
-        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
-        ::-webkit-scrollbar-thumb { background: rgba(56,189,248,0.25); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(56,189,248,0.45); }
-
-        .italic-var {
-            font-style: italic;
-            font-weight: 600;
-        }
-    </style>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">')</script>
 </head>
-<body class="bg-slate-950">
+<body class="lab-sim">
 
-<nav class="navbar">
-    <div class="nav-container">
-        <a href="index.html" class="logo">
-            <span class="logo-icon">⚛️</span>
-            <span class="logo-text">Fysiklabbet</span>
-        </a>
-        <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Hem</a></li>
-                <li class="nav-dropdown">
-                    <a href="fysik1.html" class="nav-link">Fysik 1</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik1.html#rorelse" class="dropdown-link">Rörelse</a></li>
-                        <li><a href="fysik1.html#krafter" class="dropdown-link">Krafter</a></li>
-                        <li><a href="fysik1.html#densitet" class="dropdown-link">Densitet och tryck</a></li>
-                        <li><a href="fysik1.html#varme" class="dropdown-link">Värmelära</a></li>
-                        <li><a href="fysik1.html#el" class="dropdown-link">Elektricitet</a></li>
-                        <li><a href="fysik1.html#karnfysik" class="dropdown-link">Kärnfysik</a></li>
-                    </ul>
-                </li>
-                <li class="nav-dropdown">
-                    <a href="fysik2.html" class="nav-link active">Fysik 2</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="fysik2.html#rorelse" class="dropdown-link">Rörelse och krafter</a></li>
-                        <li><a href="fysik2.html#vagor" class="dropdown-link">Mekaniska vågor</a></li>
-                        <li><a href="fysik2.html#em" class="dropdown-link">Elektromagnetism</a></li>
-                        <li><a href="fysik2.html#partiklar" class="dropdown-link">Ljus som våg och partikel</a></li>
-                        <li><a href="fysik2.html#astronomi" class="dropdown-link">Astronomi</a></li>
-                    </ul>
-                </li>
-                <li><a href="om.html" class="nav-link">Om</a></li>
-                <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
-            </ul>
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
     </div>
-</nav>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
 
 <div class="page-wrapper">
     <div style="max-width:1120px;margin:0 auto;padding:28px 20px 60px;">
@@ -471,14 +56,14 @@
             <span style="margin:0 7px;">/</span>
             <a href="fysik2.html" style="color:#38bdf8;text-decoration:none;">Fysik 2</a>
             <span style="margin:0 7px;">/</span>
-            <span style="color:#94a3b8;">Fotoelektrisk effekt</span>
+            <span style="color:var(--lab-ink-muted);">Fotoelektrisk effekt</span>
         </nav>
 
         <div style="margin-bottom:28px;">
-            <h1 class="glow-text" style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:700;color:#e2e8f0;margin-bottom:8px;">
+            <h1 class="glow-text" style="font-family:'Poppins',sans-serif;font-size:2rem;font-weight:700;color:var(--lab-ink);margin-bottom:8px;">
                 Fotoelektrisk effekt
             </h1>
-            <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:#94a3b8;max-width:780px;line-height:1.65;">
+            <p style="font-family:'Poppins',sans-serif;font-size:0.97rem;color:var(--lab-ink-muted);max-width:780px;line-height:1.65;">
                 Skjut ljus mot en metallyta och undersök Einsteins fotoelektriska effekt. Dra i våglängdsreglaget
                 för att ändra fotonens energi — bara när energin överstiger metallens utträdesarbete
                 <span class="italic-var">W</span> frigörs elektroner, och ytterligare energi blir till rörelseenergi.
@@ -612,7 +197,7 @@ class PhotoelectricScene {
 
         // Scen
         this.scene = new THREE.Scene();
-        this.scene.fog = new THREE.Fog(0x080c1a, 14, 30);
+        this.scene.fog = new THREE.Fog(0xf3eee4, 14, 30);
 
         // Kamera
         this.camera = new THREE.PerspectiveCamera(38, this.width / this.height, 0.1, 100);
@@ -623,7 +208,7 @@ class PhotoelectricScene {
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         this.renderer.setSize(this.width, this.height);
-        this.renderer.setClearColor(0x000000, 0);
+        this.renderer.setClearColor(0xf3eee4, 0);
         container.appendChild(this.renderer.domElement);
 
         // OrbitControls — användaren kan rotera vyn med musen/touchen
@@ -755,7 +340,7 @@ class PhotoelectricScene {
             const ctx = canvas.getContext('2d');
             const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
             g.addColorStop(0.00, 'rgba(147, 197, 253, 1.0)');
-            g.addColorStop(0.18, 'rgba(59, 130, 246, 0.85)');
+            g.addColorStop(0.18, 'rgba(200, 50, 74, 0.85)');
             g.addColorStop(0.45, 'rgba(37, 99, 235, 0.35)');
             g.addColorStop(1.00, 'rgba(30, 64, 175, 0.0)');
             ctx.fillStyle = g;
@@ -789,7 +374,7 @@ class PhotoelectricScene {
             ctx.fill();
 
             // Ring runt cirkeln
-            ctx.strokeStyle = 'rgba(59, 130, 246, 0.9)';
+            ctx.strokeStyle = 'rgba(200, 50, 74, 0.9)';
             ctx.lineWidth = 4;
             ctx.beginPath();
             ctx.arc(cx, cy, r, 0, Math.PI * 2);
@@ -902,6 +487,18 @@ class PhotoelectricScene {
             this.photons.length = 0;
             this.photonSpawnAccumulator = 0;
         }
+    }
+
+    // STEG C — uppdatera fog-färg så 3D-objekten blandar sig med
+    // den nya CSS-bakgrunden istället för att se "klippta" ut.
+    setCanvasTheme(themeKey) {
+        const fogColors = {
+            morkRymd:    0x080c1a,
+            ljusPapper:  0xebe5d7,  // matchar --lab-bg-panel
+            pergament:   0x1a1813,
+        };
+        const c = fogColors[themeKey] ?? fogColors.morkRymd;
+        if (this.scene.fog) this.scene.fog.color.setHex(c);
     }
 
     // Hur många elektroner/sek vid full intensitet och Ek>0
@@ -1152,7 +749,7 @@ class PhotoelectricScene {
 // ══════════════════════════════════════════════════════════════════════════
 // React-komponenter
 // ══════════════════════════════════════════════════════════════════════════
-function SceneView({ wavelength, intensity, Ek, emitted, metalHex, lightMode }) {
+function SceneView({ wavelength, intensity, Ek, emitted, metalHex, lightMode, canvasTheme }) {
     const containerRef = useRef(null);
     const sceneRef = useRef(null);
 
@@ -1186,6 +783,11 @@ function SceneView({ wavelength, intensity, Ek, emitted, metalHex, lightMode }) 
         sceneRef.current.setMetalColor(metalHex);
         sceneRef.current.setVisualMode(lightMode);
     }, [wavelength, intensity, Ek, emitted, metalHex, lightMode]);
+
+    useEffect(() => {
+        if (!sceneRef.current) return;
+        sceneRef.current.setCanvasTheme(canvasTheme);
+    }, [canvasTheme]);
 
     return <div ref={containerRef} className="scene-canvas"></div>;
 }
@@ -1239,6 +841,13 @@ function MetalSelector({ metalId, onChange }) {
     );
 }
 
+// STEG C — experimentell canvas-tema-väljare (V1/V2/V3 jämförelse)
+const CANVAS_THEMES = {
+    morkRymd:   { label: 'Mörk rymd' },
+    ljusPapper: { label: 'Ljus papper' },
+    pergament:  { label: 'Pergament' },
+};
+
 function App() {
     const [wavelength, setWavelength] = useState(420);
     const [intensity, setIntensity]   = useState(10);
@@ -1246,6 +855,7 @@ function App() {
     const [lightMode, setLightMode]   = useState('wave'); // 'wave' | 'photons'
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [controlsOpen, setControlsOpen] = useState(true);
+    const [canvasTheme, setCanvasTheme] = useState('morkRymd');
     const sceneWrapRef = useRef(null);
 
     useEffect(() => {
@@ -1287,8 +897,26 @@ function App() {
 
     return (
         <div style={{ display:'flex', flexDirection:'column', gap:22 }}>
+            {/* STEG C — experimentell tema-väljare för canvas-bakgrunden.
+                Tas bort när du valt vilken variant som blir default. */}
+            <div className="flex flex-wrap items-center gap-3 px-3 py-2 rounded border"
+                 style={{borderColor:'var(--lab-line-strong)', background:'var(--lab-bg)'}}>
+                <span className="text-xs font-semibold uppercase tracking-wide"
+                      style={{color:'var(--lab-ink-soft)', fontFamily:'var(--lab-font-mono)'}}>
+                    Canvas-tema (test)
+                </span>
+                <div className="mode-toggle">
+                    {Object.entries(CANVAS_THEMES).map(([key, t]) => (
+                        <button key={key} className={'mode-toggle-btn ' + (canvasTheme === key ? 'active' : '')}
+                                onClick={() => setCanvasTheme(key)}>
+                            {t.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             {/* 3D-vy */}
-            <div className="scene-wrap" ref={sceneWrapRef}>
+            <div className="scene-wrap" ref={sceneWrapRef} data-theme={canvasTheme}>
                 <SceneView
                     wavelength={wavelength}
                     intensity={intensity}
@@ -1296,6 +924,7 @@ function App() {
                     emitted={emitted}
                     metalHex={metal.hex}
                     lightMode={lightMode}
+                    canvasTheme={canvasTheme}
                 />
                 <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
                     <div className="fs-row">
@@ -1365,7 +994,7 @@ function App() {
                 <div style={{ position:'absolute', bottom:16, left:16, zIndex:3,
                               display:'flex', alignItems:'center', gap:10,
                               background:'rgba(10,15,30,0.72)', backdropFilter:'blur(8px)',
-                              border:'1px solid rgba(56,189,248,0.25)', borderRadius:12, padding:'8px 14px' }}>
+                              border:'1px solid rgba(200, 50, 74, 0.25)', borderRadius:12, padding:'8px 14px' }}>
                     <span style={{
                         width:18, height:18, borderRadius:'50%',
                         background: wlColor,
@@ -1373,7 +1002,7 @@ function App() {
                         border: '1.5px solid rgba(255,255,255,0.35)'
                     }}></span>
                     <span className="band-pill" style={{ color: band.color }}>{band.label}</span>
-                    <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.85rem', color:'#cbd5e1' }}>
+                    <span style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.85rem', color:'var(--lab-ink-soft)' }}>
                         <em className="italic-var">λ</em> = {fmt(wavelength, 0)} nm
                     </span>
                 </div>
@@ -1388,7 +1017,7 @@ function App() {
                                   justifyContent:'space-between', gap:12 }}>
                         <div>
                             <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
-                                          color:'#94a3b8', letterSpacing:'0.05em', textTransform:'uppercase',
+                                          color:'var(--lab-ink-muted)', letterSpacing:'0.05em', textTransform:'uppercase',
                                           marginBottom:4 }}>
                                 Visa ljus som
                             </div>
@@ -1405,7 +1034,7 @@ function App() {
                     {/* Metallval */}
                     <div>
                         <div style={{ fontFamily:'Poppins,sans-serif', fontSize:'0.78rem',
-                                      color:'#94a3b8', letterSpacing:'0.05em', textTransform:'uppercase',
+                                      color:'var(--lab-ink-muted)', letterSpacing:'0.05em', textTransform:'uppercase',
                                       marginBottom:8 }}>
                             Metall
                         </div>
@@ -1450,7 +1079,7 @@ function App() {
                     </div>
                 </div>
                 <div className="value-card" style={{
-                    borderColor: emitted ? 'rgba(34,197,94,0.5)' : 'rgba(148,163,184,0.25)',
+                    borderColor: emitted ? 'rgba(34,197,94,0.5)' : 'rgba(15, 22, 32, 0.35)',
                     boxShadow: emitted ? '0 0 18px rgba(34,197,94,0.12)' : 'none'
                 }}>
                     <div className="value-label">Max rörelseenergi</div>
@@ -1460,7 +1089,7 @@ function App() {
                     </div>
                 </div>
                 <div className="value-card" style={{
-                    borderColor: emitted ? 'rgba(34,197,94,0.5)' : 'rgba(148,163,184,0.25)',
+                    borderColor: emitted ? 'rgba(34,197,94,0.5)' : 'rgba(15, 22, 32, 0.35)',
                     boxShadow: emitted ? '0 0 18px rgba(34,197,94,0.12)' : 'none'
                 }}>
                     <div className="value-label">Elektronens fart</div>
@@ -1474,10 +1103,10 @@ function App() {
             {/* Förklaringsruta */}
             <div className="glass-card" style={{ padding:24 }}>
                 <h3 style={{ fontFamily:'Poppins,sans-serif', fontWeight:700,
-                             fontSize:'1.2rem', color:'#e2e8f0', marginBottom:14 }}>
+                             fontSize:'1.2rem', color:'var(--lab-ink)', marginBottom:14 }}>
                     Einsteins förklaring (1905)
                 </h3>
-                <p style={{ fontFamily:'Poppins,sans-serif', color:'#cbd5e1',
+                <p style={{ fontFamily:'Poppins,sans-serif', color:'var(--lab-ink-soft)',
                             lineHeight:1.7, marginBottom:14 }}>
                     Ljus består av små energipaket, <strong>fotoner</strong>. Varje foton bär energin
                     <span style={{whiteSpace:'nowrap'}}> <em className="italic-var">E</em>₍foton₎ = <em className="italic-var">h·f</em> = <em className="italic-var">h·c/λ</em></span>.
@@ -1500,7 +1129,7 @@ function App() {
                                       fontSize:'0.9rem', marginBottom:6 }}>
                             Om <em className="italic-var">h·f</em> &lt; <em className="italic-var">W</em>
                         </div>
-                        <div style={{ color:'#cbd5e1', fontFamily:'Poppins,sans-serif',
+                        <div style={{ color:'var(--lab-ink-soft)', fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.88rem', lineHeight:1.55 }}>
                             Ingen elektron frigörs — oavsett hur ljusstark strålen är. En enda foton
                             har helt enkelt inte tillräckligt med energi.
@@ -1515,7 +1144,7 @@ function App() {
                                       fontSize:'0.9rem', marginBottom:6 }}>
                             Om <em className="italic-var">h·f</em> ≥ <em className="italic-var">W</em>
                         </div>
-                        <div style={{ color:'#cbd5e1', fontFamily:'Poppins,sans-serif',
+                        <div style={{ color:'var(--lab-ink-soft)', fontFamily:'Poppins,sans-serif',
                                       fontSize:'0.88rem', lineHeight:1.55 }}>
                             Elektroner frigörs direkt. Högre frekvens → mer överskottsenergi → snabbare elektroner.
                             Starkare ljus → <em>fler</em> elektroner (men inte snabbare).
@@ -1531,7 +1160,7 @@ function App() {
                                   fontWeight:600, fontSize:'0.92rem', marginBottom:6 }}>
                         💡 Klassisk fysik funkar inte här
                     </div>
-                    <div style={{ color:'#cbd5e1', fontFamily:'Poppins,sans-serif',
+                    <div style={{ color:'var(--lab-ink-soft)', fontFamily:'Poppins,sans-serif',
                                   fontSize:'0.88rem', lineHeight:1.6 }}>
                         Om ljus vore en kontinuerlig våg skulle även rött ljus kunna slå ut elektroner —
                         bara man väntade länge nog eller skruvade upp intensiteten. Experimentet visar

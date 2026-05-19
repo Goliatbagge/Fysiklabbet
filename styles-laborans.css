@@ -379,6 +379,22 @@ body.laborans a {
     position: relative;
 }
 
+/* Sökfältet placerat i lab-header-inner (mellan logo och nav).
+   Tar inte centrerad margin — flexar mellan loggan och nav-länkarna. */
+.lab-search--in-header {
+    flex: 1 1 320px;
+    max-width: 520px;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .lab-search--in-header {
+        order: 3;
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}
+
 .lab-search-input-wrap {
     display: flex;
     align-items: center;

@@ -581,20 +581,7 @@
 
             return (
                 <section className="lab-section lab-catalog">
-                    {/* Nivå 1: Ämne */}
-                    <div className="lab-tabs-1">
-                        {subjects.map((s) => (
-                            <button key={s}
-                                className={'lab-tab-1' + (subject === s ? ' active' : '')}
-                                onClick={() => setState({ subject: s, course: null, chapter: null, section: null })}>
-                                <span className="lab-tab-1-num">ÄMNE</span>
-                                {s}
-                            </button>
-                        ))}
-                        <div className="lab-tabs-1-tail" />
-                    </div>
-
-                    {/* Nivå 2: Kurs */}
+                    {/* Nivå 1: Kurs (Ämne-nivån borttagen — bara fysik finns) */}
                     <div className="lab-level-2">
                         <div className="lab-mono-label" style={{ marginBottom: 12 }}>KURS</div>
                         <div className="lab-tabs-2">

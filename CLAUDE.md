@@ -23,7 +23,9 @@ Interaktiva fysiksimuleringar för gymnasieelever (Fysik 1 & 2).
   2. **Packa hela uttrycket i math-block**: `$5{,}0\ \mathrm{m/s}$` eller `$\rho = 19{,}3\ \mathrm{g/cm^3}$`. Hela math-blocket är ett oddelbart inline-element och kan aldrig radbrytas internt. Använd detta när värdet ändå hör ihop med en formel-variabel (ρ, *F*, *E*).
 
   **Båda metoderna är OK** — välj efter vad som flyter bäst i texten. Skriv aldrig värde och enhet med bara vanligt mellanslag emellan.
-- **Variabel + värde + enhet — alltid i math-block**: När en variabel, dess värde och enhet skrivs ihop i löptext (t.ex. "Räkna med *g* = 9,82 N/kg" eller "Använd *c* = 3,0 · 10⁸ m/s") ska **hela trippeln** packas i ett math-block. Annars kan webbläsaren radbryta mellan "*g* =" och "9,82 N/kg" — en typografisk smutsfläck där eleven blir förvirrad över vad som hör ihop. Math-blocket är oddelbart och flyttas i sin helhet till nästa rad om det inte får plats.
+- **Variabel + värde + enhet — alltid i math-block**: När en variabel, dess värde och enhet skrivs ihop i löptext (t.ex. "Räkna med *g* = 9,82 N/kg" eller "Använd *c* = 3,0 · 10⁸ m/s" eller "*c* ≈ 300 000 km/s") ska **hela trippeln** packas i ett math-block. Annars kan webbläsaren radbryta mellan "*g* =" och "9,82 N/kg" — en typografisk smutsfläck där eleven blir förvirrad över vad som hör ihop. Math-blocket är oddelbart och flyttas i sin helhet till nästa rad om det inte får plats.
+
+  **Detta gäller alla jämförelseoperatorer**, inte bara `=`. Samma regel för `≈` (`\approx`), `<` (`\lt` eller `<`), `>`, `≤` (`\leq`), `≥` (`\geq`), `∝` (`\propto`), `≠` (`\neq`). Skriv aldrig "*c* ≈ 300 000 km/s" som lös text — packa allt i `$c \approx 300\,000\ \mathrm{km/s}$`. Detta gäller också introduktionstexter där en konstant nämns en passant ("Plancks konstant *h* ≈ 6,626 · 10⁻³⁴ J·s").
 
   **KRITISK fallgrop — JS-strängar kräver dubbelt backslash.** I `data/ovningar.js` (eller andra `.js`-filer där KaTeX-källan ligger i en JS-sträng/template literal) ska **alla backslash dubbleras**, annars sväljer JavaScript dem och KaTeX får råtext istället för kommandon. I `.md`-filer (`data/teori/*.md`) används enkla backslash som vanligt.
 
@@ -59,9 +61,25 @@ Interaktiva fysiksimuleringar för gymnasieelever (Fysik 1 & 2).
 # Verifiera navigation i alla filer (KÖR FÖRE COMMIT!)
 node .claude/verify-navigation.js
 
+# Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
+node data/teori/build.js
+
 # Öppna simulering i webbläsare
 start [filnamn].html
 ```
+
+## ⚠️ KRITISK: Bygg teori-bundle efter md-ändringar
+
+`data/teori/*.md` läses INTE direkt av katalog-sidan. Den läser
+`data/teori/bundle.js`, som är genererad från md-filerna av
+`data/teori/build.js`. **Efter varje ändring i en md-fil måste du köra
+`node data/teori/build.js`** — annars ser sidan fortfarande den gamla
+texten. Detta är en vanlig fälla: man fixar en typografisk detalj i
+md-filen, laddar om sidan, ser fortfarande felet, och tror att fixet inte
+fungerade — men den verkliga orsaken är att bundle.js är cachad.
+
+Det finns ingen automatisk hot-reload — bundle.js byggs bara när du
+explicit kör build.js. Lägg det som rutin efter alla md-redigeringar.
 
 ## ⚠️ KRITISK: Navigation i ALLA HTML-filer
 

@@ -1433,6 +1433,15 @@ button.lab-card-disabled { pointer-events: none; }
 /* KaTeX-styling — matcha kroppstexten */
 .lab-article-body .katex-display {
     margin: 14px 0 !important;
+    /* Vänsterställ block-formler istället för KaTeX:s default centrerade.
+       Underlättar läsning: ögat behöver inte söka runt på en ny horisontell
+       position för varje formel. Liten indrag (~1.5em) skiljer formeln
+       visuellt från kroppstexten. */
+    text-align: left !important;
+}
+.lab-article-body .katex-display > .katex {
+    text-align: left;
+    padding-left: 1.5em;
 }
 
 .lab-article-body .katex {

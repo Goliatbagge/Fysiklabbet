@@ -16,6 +16,7 @@
 
     <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/ovningar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -28,6 +29,7 @@
         const K = window.KATALOG;
         const KF = window.KATALOG_FLAT;
         const TEORI = window.TEORI || {};
+        const OVNINGAR = window.OVNINGAR || {};
 
         // --- Skydda math-block ($$..$$ och $..$) från markdown-parsern.
         // Annars tolkar marked LaTeX-escape som \; \, \! och dyl. som vanlig
@@ -566,6 +568,329 @@
             );
         }
 
+        // Renderar en markdown-sträng med samma pipeline som TeoriBody
+        // (protect math, preprocesseringar, marked, restore, KaTeX, fit).
+        function MarkdownBody({ source, className }) {
+            const ref = useRef(null);
+            const html = useMemo(() => {
+                if (!source) return null;
+                const { md, tokens } = protectMath(source);
+                let processed = preprocessSuperscripts(md);
+                processed = preprocessSubproblems(processed);
+                processed = preprocessBlocks(processed);
+                return restoreMath(marked.parse(processed), tokens);
+            }, [source]);
+            useEffect(() => {
+                if (!ref.current || !html) return;
+                renderMathInElement(ref.current, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                    ],
+                    throwOnError: false,
+                });
+                const root = ref.current;
+                const fit = () => fitMathDisplays(root);
+                let cancelled = false;
+                const safeFit = () => { if (!cancelled) fit(); };
+                requestAnimationFrame(safeFit);
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(safeFit);
+                }
+                return () => { cancelled = true; };
+            }, [html]);
+            if (!html) return null;
+            return (
+                <div className={className || 'lab-article-body lab-article-body-inline'}
+                    ref={ref}
+                    dangerouslySetInnerHTML={{ __html: html }} />
+            );
+        }
+
+        // Plocka ut bara svaret ur en lösningstext.
+        // Letar efter en rad/paragraf som börjar med "**Svar:**".
+        function extractAnswer(solution) {
+            if (!solution) return '';
+            const m = solution.match(/\*\*Svar:\*\*[\s\S]*?(?:\n\n|$)/);
+            return m ? m[0].trim() : '';
+        }
+
+        // Tolka en sträng som ett tal — accepterar både komma och punkt som
+        // decimal, mellanslag som tusentalsavgränsare, och ·10^n eller e-notation
+        // (inkl. Unicode-superscript som ⁻³, ⁹). Plockar ut första numret i texten.
+        function parseAnswerNumber(input) {
+            if (typeof input !== 'string') return NaN;
+            let s = input.trim();
+            if (!s) return NaN;
+            // Unicode-superscript → ASCII
+            const supMap = { '⁻': '-', '⁺': '+', '⁰': '0', '¹': '1', '²': '2',
+                '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9' };
+            s = s.replace(/[⁻⁺⁰¹²³⁴⁵⁶⁷⁸⁹]/g, ch => supMap[ch] || ch);
+            // Komma → punkt, ta bort mellanslag i tal
+            s = s.replace(/,/g, '.').replace(/(\d)\s+(\d)/g, '$1$2');
+            // ·10^n eller *10^n eller x10^n → e-notation
+            s = s.replace(/[·*x×]\s*10\^?(-?\d+)/g, 'e$1');
+            // Plocka första numret (med valfri e-notation)
+            const m = s.match(/-?\d+(\.\d+)?(e-?\d+)?/i);
+            if (!m) return NaN;
+            return parseFloat(m[0]);
+        }
+
+        function checkAnswer(input, expected) {
+            if (!expected || typeof expected.value !== 'number') return null;
+            const num = parseAnswerNumber(input);
+            if (isNaN(num)) return 'unparseable';
+            const tol = typeof expected.tol === 'number' ? expected.tol : 0.02;
+            const abs = Math.abs(expected.value);
+            const margin = abs > 0 ? abs * tol : Math.max(tol, 0.001);
+            return Math.abs(num - expected.value) <= margin ? 'correct' : 'wrong';
+        }
+
+        // Symboler för formaterings-popover. ·10ⁿ infogar literalt "·10^"
+        // så eleven kan skriva valfri exponent direkt efter (t.ex. "·10^-3").
+        const FORMAT_SYMBOLS = [
+            { label: '·10⁻³', insert: '·10⁻³' },
+            { label: '·10⁻⁶', insert: '·10⁻⁶' },
+            { label: '·10⁻⁹', insert: '·10⁻⁹' },
+            { label: '·10³', insert: '·10³' },
+            { label: '·10⁶', insert: '·10⁶' },
+            { label: '·10⁹', insert: '·10⁹' },
+            { label: '·10ⁿ', insert: '·10^', title: 'Skriv exponenten själv efter — t.ex. ·10^-12' },
+            { label: '²', insert: '²' },
+            { label: '³', insert: '³' },
+            { label: '⁻', insert: '⁻' },
+            { label: 'π', insert: 'π' },
+            { label: '√', insert: '√' },
+            { label: '°', insert: '°' },
+            { label: 'Δ', insert: 'Δ' },
+        ];
+
+        function Ovning({ uppgift, index, total }) {
+            const isMC = Array.isArray(uppgift.choices) && typeof uppgift.correct === 'number';
+            const [answer, setAnswer] = useState('');
+            const [selected, setSelected] = useState(null); // för flerval: index av valt alternativ
+            const [feedback, setFeedback] = useState(null); // 'correct' | 'wrong' | 'unparseable' | null
+            const [showAnswer, setShowAnswer] = useState(false);
+            const [showSolution, setShowSolution] = useState(false);
+            const [formatOpen, setFormatOpen] = useState(false);
+            const inputRef = useRef(null);
+            const answerOnly = useMemo(() => extractAnswer(uppgift.solution), [uppgift.solution]);
+            const levelLabel = uppgift.level === 1 ? 'Nivå 1 · Grundläggande'
+                             : uppgift.level === 2 ? 'Nivå 2 · Medel'
+                             : 'Nivå 3 · Avancerad';
+
+            const handleCheck = () => {
+                if (isMC) {
+                    if (selected === null) return;
+                    setFeedback(selected === uppgift.correct ? 'correct' : 'wrong');
+                    return;
+                }
+                if (!uppgift.answer) return;
+                setFeedback(checkAnswer(answer, uppgift.answer));
+            };
+            const handleChange = (e) => {
+                setAnswer(e.target.value);
+                if (feedback !== null) setFeedback(null);
+            };
+            const handleKeyDown = (e) => {
+                if (e.key === 'Enter' && uppgift.answer) {
+                    e.preventDefault();
+                    handleCheck();
+                }
+            };
+            const insertSymbol = (text) => {
+                const el = inputRef.current;
+                if (!el) return;
+                const start = el.selectionStart ?? answer.length;
+                const end = el.selectionEnd ?? answer.length;
+                const next = answer.slice(0, start) + text + answer.slice(end);
+                setAnswer(next);
+                setFeedback(null);
+                setFormatOpen(false);
+                setTimeout(() => {
+                    el.focus();
+                    const c = start + text.length;
+                    el.setSelectionRange(c, c);
+                }, 0);
+            };
+
+            const inputClass = 'lab-ovning-answer-input'
+                + (feedback === 'correct' ? ' is-correct' : '')
+                + (feedback === 'wrong' ? ' is-wrong' : '');
+
+            return (
+                <div className={`lab-ovning lab-ovning-level-${uppgift.level}`}>
+                    <div className="lab-ovning-head">
+                        <span className="lab-mono-label">{levelLabel}</span>
+                        <span className="lab-mono-label">Uppgift {index + 1} / {total}</span>
+                    </div>
+                    <MarkdownBody source={uppgift.question} className="lab-ovning-question" />
+                    {isMC ? (
+                        <div className="lab-ovning-choices">
+                            {uppgift.choices.map((choice, i) => {
+                                const isSelected = selected === i;
+                                const isCorrectChoice = i === uppgift.correct;
+                                const showResult = feedback !== null;
+                                let cls = 'lab-ovning-choice';
+                                if (isSelected) cls += ' is-selected';
+                                if (showResult && isSelected && feedback === 'correct') cls += ' is-correct';
+                                if (showResult && isSelected && feedback === 'wrong') cls += ' is-wrong';
+                                if (showResult && !isSelected && isCorrectChoice) cls += ' is-reveal';
+                                return (
+                                    <label key={i} className={cls}>
+                                        <input
+                                            type="radio"
+                                            name={`mc-${index}`}
+                                            checked={isSelected}
+                                            onChange={() => { setSelected(i); if (feedback !== null) setFeedback(null); }}
+                                        />
+                                        <span className="lab-ovning-choice-marker">{String.fromCharCode(65 + i)}</span>
+                                        <MarkdownBody source={choice} className="lab-ovning-choice-text" />
+                                    </label>
+                                );
+                            })}
+                            {feedback === 'correct' && (
+                                <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>
+                            )}
+                            {feedback === 'wrong' && (
+                                <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt — rätt alternativ är markerat</span>
+                            )}
+                        </div>
+                    ) : (
+                        <div className="lab-ovning-answer-row">
+                            <div className="lab-ovning-input-col">
+                                <div className="lab-ovning-fx-bar">
+                                    <span className="lab-ovning-answer-label">Ditt svar</span>
+                                    <div className="lab-ovning-fx-anchor">
+                                        <button
+                                            type="button"
+                                            className={'lab-ovning-fx-btn' + (formatOpen ? ' active' : '')}
+                                            onClick={() => setFormatOpen(o => !o)}
+                                            title="Specialtecken"
+                                            aria-label="Specialtecken"
+                                        >fx</button>
+                                        {formatOpen && (
+                                            <div className="lab-ovning-fx-popover" onMouseLeave={() => setFormatOpen(false)}>
+                                                <div className="lab-ovning-fx-grid">
+                                                    {FORMAT_SYMBOLS.map(sym => (
+                                                        <button key={sym.label} type="button"
+                                                            title={sym.title}
+                                                            onClick={() => insertSymbol(sym.insert)}>
+                                                            {sym.label}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="lab-ovning-input-wrap">
+                                    <input
+                                        type="text"
+                                        ref={inputRef}
+                                        className={inputClass}
+                                        value={answer}
+                                        onChange={handleChange}
+                                        onKeyDown={handleKeyDown}
+                                    />
+                                    {uppgift.answer && (
+                                        <span className="lab-ovning-unit">{uppgift.answer.unit}</span>
+                                    )}
+                                </div>
+                            </div>
+                            {feedback === 'correct' && (
+                                <span className="lab-ovning-feedback is-correct">✓ Rätt!</span>
+                            )}
+                            {feedback === 'wrong' && (
+                                <span className="lab-ovning-feedback is-wrong">✗ Inte riktigt — försök igen</span>
+                            )}
+                            {feedback === 'unparseable' && (
+                                <span className="lab-ovning-feedback is-wrong">Kunde inte tolka svaret som ett tal</span>
+                            )}
+                        </div>
+                    )}
+                    <div className="lab-ovning-buttons">
+                        {(uppgift.answer || isMC) && (
+                            <button type="button"
+                                className="lab-btn lab-btn-primary"
+                                onClick={handleCheck}
+                                disabled={isMC && selected === null}
+                            >
+                                Kontrollera
+                            </button>
+                        )}
+                        <button
+                            type="button"
+                            className="lab-btn lab-btn-quiet"
+                            onClick={() => setShowAnswer(s => !s)}
+                        >
+                            {showAnswer ? 'Dölj svar' : 'Visa svar'}
+                        </button>
+                        <button
+                            type="button"
+                            className="lab-btn lab-btn-quiet"
+                            onClick={() => setShowSolution(s => !s)}
+                        >
+                            {showSolution ? 'Dölj lösningsförslag' : 'Visa lösningsförslag'}
+                        </button>
+                    </div>
+                    {showAnswer && !showSolution && answerOnly && (
+                        <div className="lab-ovning-answer-only">
+                            <MarkdownBody source={answerOnly} />
+                        </div>
+                    )}
+                    {showSolution && (
+                        <div className="lab-ovning-solution">
+                            <div className="lab-mono-label" style={{ marginBottom: 8 }}>
+                                Lösningsförslag
+                            </div>
+                            <MarkdownBody source={uppgift.solution} />
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        function Ovningar({ id }) {
+            const list = OVNINGAR[id];
+            const [selectedLevel, setSelectedLevel] = useState(null);
+            if (!list || list.length === 0) {
+                return (
+                    <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
+                        <em>Övningar kommer snart.</em>
+                    </div>
+                );
+            }
+            const counts = { 1: 0, 2: 0, 3: 0 };
+            for (const u of list) counts[u.level] = (counts[u.level] || 0) + 1;
+            const filtered = selectedLevel === null
+                ? list
+                : list.filter(u => u.level === selectedLevel);
+            return (
+                <div className="lab-ovningar">
+                    <h3 className="lab-ovningar-heading">Övningar</h3>
+                    <div className="lab-ovningar-filter">
+                        <button type="button"
+                            className={'lab-ovningar-filter-btn' + (selectedLevel === null ? ' active' : '')}
+                            onClick={() => setSelectedLevel(null)}>
+                            Alla <span className="lab-ovningar-filter-count">{list.length}</span>
+                        </button>
+                        {[1, 2, 3].map(lvl => (
+                            <button key={lvl} type="button"
+                                className={`lab-ovningar-filter-btn lab-ovningar-filter-btn-level-${lvl}` + (selectedLevel === lvl ? ' active' : '')}
+                                disabled={counts[lvl] === 0}
+                                onClick={() => setSelectedLevel(lvl)}>
+                                Nivå {lvl} <span className="lab-ovningar-filter-count">{counts[lvl]}</span>
+                            </button>
+                        ))}
+                    </div>
+                    {filtered.map((u, i) => (
+                        <Ovning key={`${selectedLevel}-${i}`} uppgift={u} index={i} total={filtered.length} />
+                    ))}
+                </div>
+            );
+        }
+
         function Catalog({ state, setState }) {
             const { subject, course, chapter, section } = state;
             const subjectData = K[subject] || {};
@@ -580,6 +905,12 @@
 
             const tid = activeSection ? teoriId(course, activeSection.num) : null;
             const hasTeori = tid && TEORI[tid];
+            const hasOvningar = tid && OVNINGAR[tid] && OVNINGAR[tid].length > 0;
+
+            // View-tab: 'teori' eller 'ovningar' (Simulering öppnar extern länk).
+            // Nollställs till 'teori' när man byter avsnitt.
+            const [view, setView] = useState('teori');
+            useEffect(() => { setView('teori'); }, [section]);
 
             // När man klickar Föregående/Nästa: byt avsnitt och scrolla högst
             // upp i den nya genomgången så man inte hamnar längst ned.
@@ -680,13 +1011,15 @@
                                                 </h2>
 
                                                 <div className="lab-section-cards">
-                                                    <div className="lab-card lab-card-active">
+                                                    <button type="button"
+                                                        className={'lab-card ' + (view === 'teori' ? 'lab-card-active' : 'lab-card-clickable')}
+                                                        onClick={() => setView('teori')}>
                                                         <div className="lab-card-tag">Läsning</div>
                                                         <div className="lab-card-title">Teori</div>
                                                         <div className="lab-card-meta">
                                                             {hasTeori ? 'Genomgång' : 'Kommer snart'}
                                                         </div>
-                                                    </div>
+                                                    </button>
                                                     {activeSection.href ? (
                                                         <a className="lab-card lab-card-clickable" href={activeSection.href}>
                                                             <div className="lab-card-tag">Experiment</div>
@@ -700,11 +1033,21 @@
                                                             <div className="lab-card-meta">Kommer snart</div>
                                                         </div>
                                                     )}
-                                                    <div className="lab-card lab-card-disabled">
-                                                        <div className="lab-card-tag">Räkna</div>
-                                                        <div className="lab-card-title">Övningar</div>
-                                                        <div className="lab-card-meta">Kommer snart</div>
-                                                    </div>
+                                                    {hasOvningar ? (
+                                                        <button type="button"
+                                                            className={'lab-card ' + (view === 'ovningar' ? 'lab-card-active' : 'lab-card-clickable')}
+                                                            onClick={() => setView('ovningar')}>
+                                                            <div className="lab-card-tag">Räkna</div>
+                                                            <div className="lab-card-title">Övningar</div>
+                                                            <div className="lab-card-meta">{OVNINGAR[tid].length} st</div>
+                                                        </button>
+                                                    ) : (
+                                                        <div className="lab-card lab-card-disabled">
+                                                            <div className="lab-card-tag">Räkna</div>
+                                                            <div className="lab-card-title">Övningar</div>
+                                                            <div className="lab-card-meta">Kommer snart</div>
+                                                        </div>
+                                                    )}
                                                 </div>
 
                                                 <div className="lab-teori-nav">
@@ -724,7 +1067,8 @@
                                                     </button>
                                                 </div>
 
-                                                <TeoriBody id={tid} />
+                                                {view === 'teori' && <TeoriBody id={tid} />}
+                                                {view === 'ovningar' && <Ovningar id={tid} />}
 
                                                 <div className="lab-section-actions" style={{ marginTop: 32, paddingTop: 14, borderTop: '1px solid var(--lab-line)' }}>
                                                     {activeSection.href && (

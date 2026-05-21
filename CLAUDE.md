@@ -8,6 +8,43 @@ Interaktiva fysiksimuleringar för gymnasieelever (Fysik 1 & 2).
 - **Språk**: Svenska, kommatecken som decimalavskiljare (5,00 inte 5.00)
 - **Tusentalsavgränsare**: hårt mellanslag (NBSP, ` `) mellan tusentalsgrupper. Exempel: "5 000" (rätt), "5000" (fel). "10 000 Pa" (rätt), "10000 Pa" (fel). Gäller alla numeriska värden i sims, formler, resultat-paneler.
   - JS-helper: `function fmtNum(n, d) { const s = n.toFixed(d); const [intp, frac] = s.split('.'); const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); return frac !== undefined ? withSpaces + ',' + frac : withSpaces; }`
+  - **Aldrig vanligt mellanslag mellan tusentalsgrupper i löptext.** Skriver du "2 700 kg/m³" med vanligt mellanslag (U+0020) kan webbläsaren bryta raden mellan "2" och "700", så ena siffran står ensam på en rad — typografiskt fel. Använd NBSP (U+00A0). Gäller i `data/ovningar.js` (question/solution), `data/teori/*.md` och alla andra HTML-renderade texter.
+  - **Flera tusentalsgrupper i samma tal** (t.ex. "10 130 000") — *alla* mellanslagen ska vara NBSP. Det räcker inte att bara fixa den första. Mönstret är: `\d+(?:\u00A0\d{3})+` — varenda mellanslag mellan siffergrupper är NBSP.
+  - **Math-block ($...$) är immuna.** Inom KaTeX används `\,` (tunt skyddande mellanrum) som tusentalsavgränsare, t.ex. `2\,700` → "2 700" oddelbart. Inom math behövs ingen NBSP-konvertering.
+- **Mätetal + enhet — hårt mellanslag (NBSP)**: Mellan ett numeriskt värde och dess enhet ska det *alltid* vara NBSP, aldrig ett vanligt mellanslag. Annars kan webbläsaren radbryta texten mitt emellan tal och enhet — t.ex. "10,5" på en rad och "g/cm³" på nästa, vilket är typografiskt fel och svårläst.
+  - ✓ `"5,0 m/s"` (NBSP mellan 5,0 och m/s)
+  - ✓ `"130 g"` (NBSP mellan 130 och g)
+  - ✗ `"5,0 m/s"` (vanligt mellanslag — kan radbrytas)
+
+  **Två sätt att åstadkomma det:**
+
+  1. **NBSP-tecken i löptext** (i `data/teori/*.md` och i `data/ovningar.js`): klistra in NBSP-tecknet (U+00A0) direkt mellan tal och enhet. Det syns som ett vanligt mellanslag i editorn men förhindrar radbrytning. Skriv inte ` ` — det blir litterala tecken i markdown.
+
+  2. **Packa hela uttrycket i math-block**: `$5{,}0\ \mathrm{m/s}$` eller `$\rho = 19{,}3\ \mathrm{g/cm^3}$`. Hela math-blocket är ett oddelbart inline-element och kan aldrig radbrytas internt. Använd detta när värdet ändå hör ihop med en formel-variabel (ρ, *F*, *E*).
+
+  **Båda metoderna är OK** — välj efter vad som flyter bäst i texten. Skriv aldrig värde och enhet med bara vanligt mellanslag emellan.
+- **Variabel + värde + enhet — alltid i math-block**: När en variabel, dess värde och enhet skrivs ihop i löptext (t.ex. "Räkna med *g* = 9,82 N/kg" eller "Använd *c* = 3,0 · 10⁸ m/s") ska **hela trippeln** packas i ett math-block. Annars kan webbläsaren radbryta mellan "*g* =" och "9,82 N/kg" — en typografisk smutsfläck där eleven blir förvirrad över vad som hör ihop. Math-blocket är oddelbart och flyttas i sin helhet till nästa rad om det inte får plats.
+
+  **KRITISK fallgrop — JS-strängar kräver dubbelt backslash.** I `data/ovningar.js` (eller andra `.js`-filer där KaTeX-källan ligger i en JS-sträng/template literal) ska **alla backslash dubbleras**, annars sväljer JavaScript dem och KaTeX får råtext istället för kommandon. I `.md`-filer (`data/teori/*.md`) används enkla backslash som vanligt.
+
+  - I markdown-filer (`.md`):
+    - ✓ `Räkna med $g = 9{,}82\ \mathrm{N/kg}$.`
+    - ✓ `Använd $c = 3{,}0 \cdot 10^{8}\ \mathrm{m/s}$.`
+
+  - I JS-filer (`data/ovningar.js`), template literals/strängar:
+    - ✓ `` `Räkna med $g = 9{,}82\\ \\mathrm{N/kg}$.` ``
+    - ✓ `` `Använd $c = 3{,}0 \\cdot 10^{8}\\ \\mathrm{m/s}$.` ``
+    - ✗ `` `Räkna med $g = 9{,}82\ \mathrm{N/kg}$.` `` (JS dropp:ar `\m` → renderar "mathrm" som råtext)
+
+  - Anti-mönster (oavsett filtyp):
+    - ✗ `Räkna med *g* = 9,82 N/kg.` (alla tre tecknen kan radbrytas inbördes)
+    - ✗ `Räkna med *g* = 9,82 N/kg.` (NBSP räcker inte — "= 9,82" kan ändå hamna ensam på en rad om "Räkna med *g*" tar slutet av föregående rad)
+
+  Gäller framförallt **konstanter som anges i uppgiftstexten** ("Räkna med …", "Använd …"), men också inline-referenser till specifika mätvärden ("vid *t* = 5,0 s" → `$t = 5{,}0\\ \\mathrm{s}$` i JS). Gränsfallet "bara variabelnamn utan värde" (t.ex. "*t* anger tiden") räcker det med kursiv markdown.
+
+  **Generell regel**: `\` (en backslash) i markdown-källa ≡ `\\` (två backslash) i JS-sträng. Detta gäller även `\cdot`, `\frac`, `\sqrt`, `\left`, `\right`, `\sin`, `\cos`, `\alpha`, `\mathrm` osv. Titta i grannraderna när du skriver — om de använder `\\cdot` ska din också göra det.
+
+  **CSS-skydd mot radbrytning (redan på plats — rör inte):** I `styles-laborans.css` finns regeln `.katex { white-space: nowrap; }` (med undantag för `.katex-display .katex` så block-math kan radbryta som vanligt). Den garanterar att inline-math aldrig bryts mitt itu — hela formeln flyttas i sin helhet till nästa rad. Tack vare detta räcker det att packa "*g* = 9,82 N/kg" i ett math-block för att förhindra radbrytning; man behöver inte använda NBSP utöver det. **Ta inte bort den regeln** utan att samtidigt återinföra NBSP-tekniken på alla ställen där math-block används i löptext.
 - **Versaler**: Använd ALDRIG "title case" (engelska versalregler). På svenska skrivs endast första ordet i en mening/rubrik med stor bokstav. Exempel:
   - ✓ "Elektrostatisk induktion" (korrekt)
   - ✗ "Elektrostatisk Induktion" (fel - title case)
@@ -221,9 +258,18 @@ bred och smal skärm innan du markerar arbetet som klart.
   - ✗ `*F*_G` (G blir kvar med underscore framför — fel)
   - ✗ `*F*_drag` (samma problem)
 
-  Denna regel gäller löpande text i `data/teori/*.md`. I `$$ ... $$`-block
-  fungerar `F_G` redan korrekt eftersom math-blocken skyddas från markdown-
-  parsern (se `protectMath` i `katalog.html`/`avsnitt.html`).
+  Denna regel gäller löpande text i `data/teori/*.md` **och i `data/ovningar.js`**
+  (frågor, lösningar, distraktorer). I `$$ ... $$`-block fungerar `F_G` redan
+  korrekt eftersom math-blocken skyddas från markdown-parsern (se
+  `protectMath` i `katalog.html`/`avsnitt.html`).
+
+  **OBS — gäller även Unicode-tecken som ρ, σ, ε, λ, μ, π m.fl.** Skriv aldrig
+  `ρ_guld` eller `μ_s` i löptext — `_guld`/`_s` tolkas som början på en kursiv
+  sektion och underscore-tecknet blir kvar synligt. Använd alltid inline-math:
+  - ✓ `$\rho_\text{guld} = 19{,}3$ g/cm³`
+  - ✓ `$\mu_\text{s}$` (statisk friktionskoefficient)
+  - ✗ `ρ_guld = 19,3 g/cm³` (underscore-tecknet förblir synligt)
+  - ✗ `μ_s` (samma problem)
 
 - **Subscript-stil i math (KaTeX)**: när indexet är en **identifierare/etikett**
   (N, f, G, R, drag, tot, bom, …) och **inte en egen variabel**, ska det
@@ -390,6 +436,265 @@ Exempel:
 9. [ ] Testa i webbläsare
 10. [ ] Verifiera decimalformatering (komma, inte punkt)
 11. [ ] Testa att sökningen hittar simuleringen via minst ett av nyckelorden
+
+## Övningar per avsnitt
+
+Varje teori-avsnitt kan ha tillhörande övningar som visas under teori-texten
+i katalogen. Övningarna lagras i `data/ovningar.js`:
+
+```js
+window.OVNINGAR = {
+    'fy1-1.3': [
+        { level: 1, question: '<markdown>', solution: '<markdown>' },
+        ...
+    ],
+};
+```
+
+### Nivåer
+
+- **Nivå 1** — Grundläggande (E-nivå). Bara SI-omvandling och insättning i
+  en formel (eventuellt efter omformning). Exempel: omvandla minuter → timmar
+  och räkna $v = s/t$.
+- **Nivå 2** — Medel (C-nivå). Lösningen kräver kombination av två (eller
+  flera) formler i flera steg. Inte alldeles för rätt fram.
+- **Nivå 3** — Avancerad (A-nivå). Tre eller fler formler/koncept måste
+  kombineras i längre kedjor, eller så krävs trigonometri/vinklar,
+  ekvationssystem med två obekanta, algebraisk härledning av en formel,
+  modelleringsantaganden, eller ett klassiskt fall där den "uppenbara"
+  lösningsstrategin är fel (t.ex. sista sekunden av fritt fall, två
+  rörelser som möts, sant medelvärde av kvadratiskt beroende).
+
+### Kalibrering mot riktiga läromedel
+
+Det är **viktigt** att svårighetsnivåerna matchar riktiga läromedel.
+Källor som ska användas för kalibrering:
+
+1. **`Uppgifter/Fysik 1/`** — Impuls Fysik 1 uppgifter sorterade på
+   E-, C- och A-nivå (★, ★★, ★★★ i originalboken). Konsultera dessa
+   PDF-filer när du är osäker på vilken nivå en uppgift bör ha. Notera
+   genrer som passar A-nivå: möte/inhämtnings-problem, två obekanta,
+   trigonometriska vinklar, krångliga geometrier, modelleringsantaganden,
+   "den sista sekunden"-fällor, härledningsuppgifter.
+2. **`Kursprovsuppgifter/`** — frisläppta kursprov med poängsättning
+   som (E/C/A). En uppgift som ger "(2/1/0)" är på E-nivå, "(0/2/1)"
+   eller liknande där A-poäng dominerar är på A-nivå.
+
+**Du får ALDRIG kopiera uppgifter** från dessa filer — de är
+upphovsrättsskyddade. Använd dem bara för att kalibrera svårighet och
+hämta inspiration. Skapa alltid egna varianter.
+
+**Inte ens "tydligt omformulerade" varianter av samma scenario.** PDF:erna
+i `Uppgifter/` är **endast** till för att avgöra svårighetsnivå (E/C/A)
+— inte för att leverera scenarier. Om PDF:n har en akvarie-uppgift, ska
+*inte* din uppgift handla om ett akvarium. Om PDF:n har en domkraft med
+$A_1 = 3{,}5\\ \\mathrm{cm^2}$ och $A_2 = 52\\ \\mathrm{cm^2}$, ska *inte* din
+domkraft ha snarlika areor. Tänk: *vilka koncept testar PDF-uppgiften, och
+vilket helt annat scenario kan testa samma koncept?* Vattentorn istället
+för akvarie, bromsok istället för domkraft, isberg istället för båt, etc.
+Konceptet är upphovsrättsfritt — själva scenariot/inramningen är där
+risken finns både juridiskt och pedagogiskt (för att eleven kan ha löst
+den exakta uppgiften i läroboken förut).
+
+Om en uppgift du tänkt klassa som N3 i praktiken bara kräver två
+formler i tydlig följd (även om det "känns" lite trixigt eller har en
+fin pedagogisk poäng), ska den vara N2 — N3 är reserverat för uppgifter
+som *kvalitativt* sticker ut i komplexitet. Hellre ingen N3 än en
+N3 som egentligen är en lätt N2.
+
+### Antal per avsnitt
+
+Som riktlinje: **3 övningar Nivå 1 + 2 övningar Nivå 2 + 1 övning Nivå 3 = 6 st**.
+
+För korta avsnitt (få begrepp att öva på) får principen frångås — färre
+eller annan fördelning är OK.
+
+### Minst en uppgift per formel
+
+För varje **formel som introduceras i avsnittet** (det som står i en
+`::: formel`-box eller framträder som en namngiven huvudformel i teori-
+texten) ska det finnas **minst en räkneuppgift som använder just den
+formeln**. Om ett avsnitt har två formler, ska båda dyka upp i någon av
+övningarna. För formler som löses ut åt olika håll (t.ex. *s* = *v* · *t*,
+*t* = *s* / *v*) räcker det att formeln används i någon form — men det är
+bra att variera vilken variabel som söks i Nivå 1-uppgifterna.
+
+### Begreppsavsnitt (utan formler)
+
+För avsnitt som bara innehåller begrepp och beskrivningar (t.ex. en
+historisk introduktion eller naturvetenskaplig metod) ska övningarna i
+första hand skapas som **flervalsfrågor** (se nedan). De auto-rättas och
+ger eleven snabb återkoppling. Om en begreppsfråga blir krystad som
+flerval (för fyrkantiga alternativ eller orimliga distraktorer) får den
+istället göras som öppen reflektionsfråga utan auto-rättning.
+
+### Diagram ska ritas, inte beskrivas
+
+Om en uppgift hänvisar till ett rörelsediagram (*s-t*, *v-t*, *a-t*),
+energidiagram, kraft-positionsgraf eller annan figur ska diagrammet
+**ritas** som inline-SVG — aldrig beskrivas i ord ("grafen är en rät
+linje från … till …"). Eleven ska *läsa av* punkter från ett rutnät,
+vilket är en kärnkunskap i kursen.
+
+Samma princip gäller i teori-texterna under `data/teori/*.md` — om
+exemplet säger "se diagrammet" ska det finnas en faktisk graf där, inte
+en textuell beskrivning av kurvans utseende.
+
+**Verktyg**: i `data/ovningar.js` finns helpern `makeDiagram(opts)` som
+genererar konsekvent stylade SVG-diagram (rutnät, axlar med pilar,
+Poppins-typsnitt, accent-röd kurva). Anropa den från question-strängen
+med en template-literal och beskriv data via `paths` och `fills`. Se
+kommentaren ovanför funktionen för fullständigt API.
+
+**Markera inte mätpunkter med koordinatetiketter** i grafen — eleven får
+räkna rutor i rutnätet själv. Använd naturliga rutnätssteg (vart 2 s,
+vart 5 m/s, vart 10 m, vart 1 m/s² o.s.v.) och placera linjernas
+ändpunkter så att de hamnar nära rutnätskorsningar, så avläsning blir
+otvetydig.
+
+**Avslöja inte metoden i uppgiftstexten.** Om eleven ska beräkna en
+förflyttning från ett *v-t*-diagram ska det stå *"Beräkna föremålets
+förflyttning"* — inte *"Beräkna arean under grafen"* eller *"…
+(arean under grafen)"*. Att inse att arean motsvarar förflyttningen är
+en del av uppgiften. Samma sak gäller för att inse att *lutningen*
+motsvarar hastighet/acceleration, eller att en area i *a-t*-grafen
+motsvarar Δ*v*.
+
+**Markera inte arean i uppgiftens diagram.** Om uppgiften går ut på
+att eleven ska räkna ut förflyttningen som en area ska arean *inte*
+vara fylld (`fills`) i frågans diagram — då blir svaret för uppenbart.
+Visa bara kurvan/linjen. **Undantag** finns — t.ex. om uppgiften
+specifikt handlar om att jämföra två areor (positiv vs negativ
+förflyttning, två delsträckor) kan färgade fills användas för att
+markera vilka regioner som ska jämföras. Använd undantaget sparsamt.
+
+**Lösningsförslaget får (och bör) rita om diagrammet** med arean
+markerad. Då finns den pedagogiska poängen kvar — eleven har själv
+kommit på att det är arean som ska beräknas, och i lösningen får hen
+sedan en tydlig visuell bekräftelse. Anropa `makeDiagram` igen i
+solution-strängen med samma axlar/skala men nu med fyllda `fills`.
+
+### Kraftvektorer ska ritas, inte beskrivas
+
+Om en uppgift hänvisar till **kraftvektorer** — exempelvis "två krafter
+verkar vinkelrätt mot varandra", "en kraft drar i ett rep som lutar
+30° över horisontalplanet", "tre krafter i jämvikt" — ska de **ritas**
+som pilar i en figur, inte beskrivas enbart i text. Att läsa av en
+vektorbild med vinklar och beteckningar är en kärnfärdighet i mekanik
+och behövs både vid problemlösning och på prov.
+
+**Verktyg**: helpern `makeForceDiagram(opts)` i `data/ovningar.js`
+genererar inline-SVG med kraftpilar (med pilspetsar), beteckningar
+(*F*₁, *F*₂…), valfri storleksetikett (50 N), valfri kompass
+(N/S/Ö/V) och valfri kropp (liten kvadrat) som krafterna verkar på.
+Vinklar anges i grader där 0 = höger, 90 = upp, 180 = vänster.
+Strecka okända krafter med `dashed: true` och magnitud `'?'`. Se
+kommentaren ovanför funktionen för fullständigt API.
+
+**Storlek = pixellängd, inte newton.** Du anger pilens längd i pixlar
+manuellt — välj proportionellt så att en kraft som är dubbelt så stor
+också syns som dubbelt så lång pil. En tumregel är 3 px/N för krafter
+runt 30–80 N (ger pilar 90–240 px).
+
+**Beteckningen ska placeras vid PILSPETSEN, aldrig på pilens linje.**
+Helpern placerar automatiskt etiketten enligt följande regler så att
+det alltid är uppenbart vilken vektor en beteckning hör till:
+
+- **Horisontell vektor** (åt höger eller vänster): etiketten OVANFÖR
+  pilspetsen om vektorn lutar uppåt eller är rakt åt sidan, UNDER om
+  den lutar nedåt.
+- **Vertikal vektor** (uppåt eller nedåt): etiketten TILL HÖGER om
+  pilspetsen, **nära spetsen** (text-anchor="start" med ~8 px offset).
+  Inte centrerad bredvid spetsen — det ger för mycket luft mellan
+  beteckning och pil.
+- **Sned vektor**: etiketten vid spetsen, OVANFÖR om vektorn pekar
+  uppåt-något (sin > 0), UNDER om den pekar nedåt-något (sin < 0).
+
+Etiketten får **aldrig** korsa eller överlappa själva pilens linje.
+Om du skriver egna inline-SVG-figurer (utanför `makeForceDiagram`) ska
+du följa samma princip.
+
+**Avslöja inte svaret i diagrammet.** Om uppgiften går ut på att räkna
+ut riktningen eller storleken av en okänd kraft, rita den streckat med
+`magnitude: '?'` — eller utelämna den helt om det är pedagogiskt rätt.
+Aldrig visa själva svaret som en exakt pil i frågans diagram.
+
+**Vinklar ska markeras i figuren, inte beskrivas i text.** Om en uppgift
+har en figur (kraftdiagram, lutande plan, rörelsediagram, geometrisk
+skiss) och vinkeln är central för beräkningen, ska den **ritas in i
+figuren** — inte stå som en lös mening i uppgiftstexten ("Repet lutar
+30° över horisontalplanet."). Markera vinkeln med en båge mellan den
+lutande vektorn och en streckad hjälplinje (typiskt horisontalen), och
+sätt gradetiketten vid bågen.
+
+I `makeForceDiagram` finns parametern `showAngle: true` per vektor som
+automatiskt ritar streckad horisontalreferens från ankarpunkten, en
+båge och vinkeletikett. Använd valfri `angleLabel: 'α'` om du vill ha
+en symbol istället för gradtal (vid algebraiska uppgifter).
+
+```js
+{ label: 'F', magnitude: '80 N', angle: 30, length: 220, showAngle: true }
+```
+
+Om du skriver en egen inline-SVG-figur (utanför `makeForceDiagram`),
+följ samma princip: rita hjälplinjen streckat (`stroke-dasharray="5 4"`,
+färg `#8a8579`), bågen som `<path d="M r 0 A r r 0 0 0 ...">` med samma
+färg och etiketten i Poppins 14 px vid bågens mittlinje.
+
+### Flervalsfrågor
+
+Flervalsfrågor anges med fälten `choices` (array av strängar i markdown)
+och `correct` (0-indexerat index av rätt svar). Inget `answer`-fält
+behövs. Övriga fält fungerar som vanligt (level, question, solution).
+
+```js
+{
+    level: 1,
+    question: 'Vad menas med en hypotes inom naturvetenskaplig metod?',
+    choices: [
+        'Ett fenomen som inte kan förklaras.',
+        'En gissning som ska testas med experiment.',
+        'En lag som aldrig motbevisats.',
+        'En sammanfattning av flera teorier.'
+    ],
+    correct: 1,  // 0-indexerat: alternativ B är rätt
+    solution: 'En hypotes är en gissning som vi testar...'
+}
+```
+
+Riktlinjer för bra distraktorer:
+- 3 eller 4 alternativ (max 4)
+- Alla alternativ ska vara rimliga vid första anblick — undvik
+  uppenbart fel alternativ.
+- Plocka **vanliga elev-missuppfattningar** som distraktorer (t.ex.
+  "teori = osäker gissning", "medelvärdet av farterna = medelfarten").
+- Skriv inte "Inget av ovanstående" eller "Alla ovan".
+
+### Lösningsformat
+
+Lösningsförslagen ska följa samma stil som exempeluppgifterna i teori-
+texten:
+
+1. **Identifiera formeln** och lösningen ut den variabel som söks om det
+   behövs:
+   $$ v_\mathrm{m} = \frac{s}{t} \quad\Leftrightarrow\quad s = v_\mathrm{m} \cdot t $$
+
+2. **Mätvärden i bracket-block** (`\left[ \begin{array}{l} ... \end{array} \right]`)
+   efter SI-omvandling.
+
+3. **Beräkningssteg** i math-block — visa hur värdena sätts in.
+
+4. **Svar** på egen rad: `**Svar:** ...`.
+
+Eventuella pedagogiska kommentarer (klassiska elev-misstag, generaliseringar)
+läggs efter svaret som extra `**Generell slutsats:** ...`-paragraf.
+
+### Variabler
+
+Som i resten av projektet ska fysikaliska variabler skrivas kursivt: använd
+`*v*`, `*t*`, `*s*` i markdown-text (inte inom math-block — där hanterar
+KaTeX kursiveringen). I math-block används `\mathrm{}` för bokstavsindex:
+`v_\mathrm{m}`, inte `v_m`.
 
 ## CDN-länkar (standard)
 

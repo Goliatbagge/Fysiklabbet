@@ -5206,7 +5206,7 @@ $$
 
 **Svar:** Alternativ A — 101 300 Pa och 1,013 bar.
 
-**Generell slutsats:** Lufttrycket vid havsytan brukar avrundas till **1 atm = 101 325 Pa ≈ 1 bar = 100 kPa**. Skillnaden mellan atm och bar är bara ca 1 %, så man kan ofta använda dem som likvärdiga i grova uppskattningar.`,
+**Generell slutsats:** Lufttrycket vid havsytan brukar avrundas till $1\ \mathrm{atm} = 101\,325\ \mathrm{Pa} \approx 1\ \mathrm{bar} = 100\ \mathrm{kPa}$. Skillnaden mellan atm och bar är bara ca 1 %, så man kan ofta använda dem som likvärdiga i grova uppskattningar.`,
         },
         {
             level: 1,

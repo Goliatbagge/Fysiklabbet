@@ -6092,4 +6092,672 @@ $$
 **Generell slutsats:** I idealfallet (om kolvarna hade varit på samma höjd) skulle insatskraften ha varit bara $F_1 = F_\\mathrm{last} \\cdot A_1/A_2 = 14\\,730 \\cdot 5{,}0/200 \\approx 368$ N. De extra ~13 N kommer från att man måste "trycka upp" vätskan 3 m i slangen — vilket ger ett extra vätsketryck $\\rho g h \\approx 26$ kPa som multiplicerat med lilla areans 5,0 · 10⁻⁴ m² ger just 13 N.`,
         },
     ],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // fy1-6.1  Värme och temperatur
+    // Formel: T_K = T_C + 273.  Kelvin är direkt proportionell mot
+    // atomernas medelrörelseenergi — celsius är det inte.
+    // ═══════════════════════════════════════════════════════════════════
+    'fy1-6.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Omvandla temperaturen 25 °C till kelvin.`,
+            answer: { value: 298, unit: 'K', tol: 0.01 },
+            solution: `Vi använder sambandet mellan celsius och kelvin:
+
+$$ T_K = T_C + 273 $$
+
+$$ T_K = 25 + 273 = 298\\ \\mathrm{K} $$
+
+**Svar:** 298 K.`,
+        },
+        {
+            level: 1,
+            question: `På en frostig vintermorgon är det −18 °C ute. Vad motsvarar det i kelvin?`,
+            answer: { value: 255, unit: 'K', tol: 0.01 },
+            solution: `Vi använder sambandet mellan celsius och kelvin:
+
+$$ T_K = T_C + 273 = -18 + 273 = 255\\ \\mathrm{K} $$
+
+**Svar:** 255 K.
+
+**Generell slutsats:** Kelvin-värden är alltid positiva eftersom 0 K motsvarar den absoluta nollpunkten (−273 °C). Det går alltså inte att ha negativa kelvin-värden.`,
+        },
+        {
+            level: 1,
+            question: `En isbit och en aluminiumplatta ligger sida vid sida på köksbänken och har båda samma temperatur som rummet (ca 20 °C). När du lägger handen på respektive föremål känns aluminiumplattan **kallare**. Vilken är orsaken?`,
+            choices: [
+                `Aluminiumplattan har faktiskt lägre temperatur än rummet — temperaturmätare brukar visa fel på metall.`,
+                `Aluminium leder värme bättre än is, så värme strömmar snabbare från handen till aluminium.`,
+                `Aluminiumets atomer rör sig långsammare än is-atomerna trots samma temperatur.`,
+                `Aluminium "drar till sig kyla" från rummet och blir därför kallt.`,
+            ],
+            correct: 1,
+            solution: `Båda föremålen har samma temperatur. Det vi upplever som *kallt* är att värme **flödar bort från handen**. Eftersom aluminium leder värme mycket bättre än is (och betydligt bättre än plast eller trä) flödar värmen snabbare från handen till aluminiumet, och vi uppfattar det som kallare.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** "Kyla" finns inte som ett fysikaliskt fenomen — bara värmeöverföring i olika riktning. Hur kallt något känns beror lika mycket på materialets värmeledningsförmåga som på dess faktiska temperatur.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Tre kärl A, B och C innehåller olika gaser med temperaturerna 27 °C, 127 °C och 327 °C. I vilket kärl är atomernas medelrörelseenergi exakt **dubbelt** så stor som i kärl A?`,
+            choices: [
+                `Kärl B — för 127 är dubbelt så mycket som lite mer än hälften av 327.`,
+                `Kärl B — för 127 °C ÷ 27 °C ≈ 5.`,
+                `Kärl C — för det är dubbelt så hög temperatur som A i kelvinskalan.`,
+                `Inget av kärlen — ingen av temperaturerna är exakt dubbelt så hög som 27.`,
+            ],
+            correct: 2,
+            solution: `Atomernas medelrörelseenergi är proportionell mot temperaturen i **kelvin**, inte i celsius. Vi omvandlar alla tre temperaturer:
+
+$$
+\\left[ \\begin{array}{l}
+T_A = 27 + 273 = 300\\ \\mathrm{K} \\\\
+T_B = 127 + 273 = 400\\ \\mathrm{K} \\\\
+T_C = 327 + 273 = 600\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+Vi söker det kärl där $T = 2 \\cdot T_A = 2 \\cdot 300 = 600\\ \\mathrm{K}$. Det är kärl C.
+
+**Svar:** Alternativ C.
+
+**Generell slutsats:** En klassisk fälla — att tro att "dubbla celsiustemperaturen" ger dubbla rörelseenergin. Det är bara i kelvinskalan som proportionalitet gäller. Det är därför kelvin används i alla fysikaliska samband med temperatur (t.ex. ideala gaslagen).`,
+        },
+        {
+            level: 2,
+            question: `Du har en aluminiumplatta och en plastplatta som båda håller rumstemperatur 20 °C. Du lägger en isbit på vardera plattan. På vilken platta smälter isen snabbast — och varför?`,
+            choices: [
+                `Aluminiumplattan — eftersom aluminium leder värme bättre, transporterar plattan snabbare energi från rummet till isen.`,
+                `Plastplattan — eftersom plast känns varmare, är den faktiskt varmare och smälter isen snabbare.`,
+                `Båda lika snabbt — de har samma temperatur, så samma värme flödar till isen.`,
+                `Plastplattan — eftersom plast isolerar bättre håller den värmen kvar mot isen istället för att tappa den till rummet.`,
+            ],
+            correct: 0,
+            solution: `Båda plattorna har samma temperatur, men det är **värmeledningen** som avgör hur snabbt energi når isen. Aluminium leder värme mycket bättre än plast, så aluminiumplattan kan snabbt "hämta" energi från sig själv och rummet och föra över den till isen. Plasten isolerar och förser isen med energi mycket långsammare.
+
+**Svar:** Alternativ A — på aluminiumplattan.
+
+**Generell slutsats:** Att ett material *känns* kallt betyder att det leder värme effektivt. Samma egenskap som gör aluminium "kall mot handen" gör att det också smälter is snabbare. Plast känns "varm" men är en sämre värmeöverförare.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En patient har feber och kroppstemperaturen 42,2 °C. En frisk människa har 37,0 °C. Hur många procent högre medelrörelseenergi har molekylerna i patientens kropp jämfört med molekylerna i en frisk människas kropp?`,
+            answer: { value: 1.68, unit: '%', tol: 0.05 },
+            solution: `Medelrörelseenergin är proportionell mot temperaturen i **kelvin**, så vi måste först omvandla:
+
+$$
+\\left[ \\begin{array}{l}
+T_\\mathrm{frisk} = 37{,}0 + 273 = 310{,}0\\ \\mathrm{K} \\\\
+T_\\mathrm{sjuk} = 42{,}2 + 273 = 315{,}2\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+Den procentuella ökningen av medelrörelseenergin är samma som den procentuella ökningen av kelvin-temperaturen:
+
+$$
+\\frac{T_\\mathrm{sjuk} - T_\\mathrm{frisk}}{T_\\mathrm{frisk}}
+= \\frac{315{,}2 - 310{,}0}{310{,}0} \\approx 0{,}0168 = 1{,}68\\ \\%
+$$
+
+**Svar:** Ca 1,7 % högre.
+
+**Generell slutsats:** Trots att febern känns dramatisk är ökningen av molekylernas rörelseenergi mycket liten i fysikalisk mening — under 2 %. Men kroppens biokemiska processer är ändå så finkalibrerade att den lilla förändringen är tillräckligt stor för att proteiner ska börja fungera fel. Tar man fel på celsius och kelvin här ((42,2 − 37,0) / 37,0 ≈ 14 %) blir man fel med nästan en faktor 10.`,
+        },
+    ],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // fy1-6.2  Uppvärmning och avsvalning
+    // Formler: E = c · m · ΔT  och  E_avg = E_upp.  Värmetabell behövs.
+    // ═══════════════════════════════════════════════════════════════════
+    'fy1-6.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur mycket energi går åt för att värma 0,50 kg vatten från 20 °C till 90 °C? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange svaret i kJ.`,
+            answer: { value: 146, unit: 'kJ', tol: 0.02 },
+            solution: `Vi använder formeln för uppvärmning:
+
+$$ E = c \\cdot m \\cdot \\Delta T $$
+
+Mätvärden:
+
+$$
+\\left[ \\begin{array}{l}
+c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m = 0{,}50\\ \\mathrm{kg} \\\\
+\\Delta T = 90 - 20 = 70\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ E = 4{,}18 \\cdot 0{,}50 \\cdot 70 = 146{,}3\\ \\mathrm{kJ} \\approx 146\\ \\mathrm{kJ} $$
+
+**Svar:** Ca 146 kJ (eller ca 1,5 · 10⁵ J).`,
+        },
+        {
+            level: 1,
+            question: `Du tillför 18 kJ energi till 2,0 kg aluminium med starttemperaturen 25 °C. Hur varmt blir aluminiumet? Räkna med $c_\\mathrm{Al} = 0{,}90\\ \\mathrm{kJ/(kg \\cdot K)}$. Ange svaret i °C.`,
+            answer: { value: 35, unit: '°C', tol: 0.03 },
+            solution: `Vi löser ut temperaturändringen ur uppvärmningsformeln:
+
+$$ E = c \\cdot m \\cdot \\Delta T \\quad\\Leftrightarrow\\quad \\Delta T = \\frac{E}{c \\cdot m} $$
+
+Mätvärden:
+
+$$
+\\left[ \\begin{array}{l}
+E = 18\\ \\mathrm{kJ} \\\\
+c = 0{,}90\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m = 2{,}0\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ \\Delta T = \\frac{18}{0{,}90 \\cdot 2{,}0} = 10\\ \\mathrm{K} $$
+
+Sluttemperaturen är $T_2 = T_1 + \\Delta T = 25 + 10 = 35\\ ^{\\circ}\\mathrm{C}$.
+
+**Svar:** 35 °C.`,
+        },
+        {
+            level: 1,
+            question: `En vattenkokare med effekten 2,2 kW värmer 0,40 kg vatten från 20 °C till 100 °C. Hur lång tid tar uppvärmningen? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och anta att all energi från kokaren går till vattnet. Ange svaret i sekunder.`,
+            answer: { value: 60.8, unit: 's', tol: 0.03 },
+            solution: `Den energi vattnet behöver upptas är lika med den energi kokaren avger under tiden *t*. Eftersom $P = E/t$ får vi $E_\\mathrm{avg} = P \\cdot t$.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} \\quad\\Leftrightarrow\\quad P \\cdot t = c \\cdot m \\cdot \\Delta T $$
+
+Löser ut tiden:
+
+$$ t = \\frac{c \\cdot m \\cdot \\Delta T}{P} $$
+
+Mätvärden (omvandlat till SI-enheter):
+
+$$
+\\left[ \\begin{array}{l}
+c = 4\\,180\\ \\mathrm{J/(kg \\cdot K)} \\\\
+m = 0{,}40\\ \\mathrm{kg} \\\\
+\\Delta T = 100 - 20 = 80\\ \\mathrm{K} \\\\
+P = 2{,}2\\ \\mathrm{kW} = 2\\,200\\ \\mathrm{W}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{4\\,180 \\cdot 0{,}40 \\cdot 80}{2\\,200} = \\frac{133\\,760}{2\\,200} \\approx 60{,}8\\ \\mathrm{s} $$
+
+**Svar:** Ca 61 s (drygt en minut).`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Du blandar 0,30 kg vatten med temperaturen 80 °C med 0,50 kg vatten med temperaturen 20 °C i en isolerad behållare. Vilken sluttemperatur får blandningen? Bortse från energiförluster till omgivningen. Ange svaret i °C.`,
+            answer: { value: 42.5, unit: '°C', tol: 0.02 },
+            solution: `Värme flödar från varmt till kallt — varmvattnet avger energi som upptas av kallvattnet. Eftersom det är samma vätska (samma *c*) förkortas värmekapaciteten bort.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} \\quad\\Rightarrow\\quad c \\cdot m_v \\cdot \\Delta T_v = c \\cdot m_k \\cdot \\Delta T_k $$
+
+$$ m_v \\cdot (T_v - T) = m_k \\cdot (T - T_k) $$
+
+Mätvärden (om vi kallar sluttemperaturen *T*):
+
+$$
+\\left[ \\begin{array}{l}
+m_v = 0{,}30\\ \\mathrm{kg},\\quad T_v = 80\\ ^{\\circ}\\mathrm{C} \\\\
+m_k = 0{,}50\\ \\mathrm{kg},\\quad T_k = 20\\ ^{\\circ}\\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ 0{,}30 \\cdot (80 - T) = 0{,}50 \\cdot (T - 20) $$
+
+$$ 24 - 0{,}30\\,T = 0{,}50\\,T - 10 $$
+
+$$ 34 = 0{,}80\\,T \\quad\\Leftrightarrow\\quad T = \\frac{34}{0{,}80} = 42{,}5\\ ^{\\circ}\\mathrm{C} $$
+
+**Svar:** 42,5 °C ≈ 43 °C.
+
+**Generell slutsats:** Eftersom den kalla vattenmängden är större "drar" den ner sluttemperaturen mot sig själv. Sluttemperaturen är inte mittpunkten mellan 20 °C och 80 °C (50 °C), utan ligger närmare den kalla sidan eftersom det är mer kallt vatten.`,
+        },
+        {
+            level: 2,
+            question: `Du lägger en kopparbit med massan 100 g och temperaturen 200 °C i 200 g vatten som har 25 °C. Vilken blir blandningens sluttemperatur? Räkna med $c_\\mathrm{Cu} = 0{,}39\\ \\mathrm{kJ/(kg \\cdot K)}$ och $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$. Bortse från energiförluster. Ange svaret i °C.`,
+            answer: { value: 32.8, unit: '°C', tol: 0.03 },
+            solution: `Kopparbiten avger energi och avsvalnar, vattnet upptar energin och värms upp.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp} $$
+
+$$ c_\\mathrm{Cu} \\cdot m_\\mathrm{Cu} \\cdot (T_\\mathrm{Cu} - T) = c_\\mathrm{v} \\cdot m_\\mathrm{v} \\cdot (T - T_\\mathrm{v}) $$
+
+Mätvärden:
+
+$$
+\\left[ \\begin{array}{l}
+m_\\mathrm{Cu} = 0{,}100\\ \\mathrm{kg},\\quad T_\\mathrm{Cu} = 200\\ ^{\\circ}\\mathrm{C},\\quad c_\\mathrm{Cu} = 0{,}39\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m_\\mathrm{v} = 0{,}200\\ \\mathrm{kg},\\quad T_\\mathrm{v} = 25\\ ^{\\circ}\\mathrm{C},\\quad c_\\mathrm{v} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}
+\\end{array} \\right]
+$$
+
+Insättning (alla *c* i kJ/(kg·K), så *E* hamnar i kJ):
+
+$$ 0{,}39 \\cdot 0{,}100 \\cdot (200 - T) = 4{,}18 \\cdot 0{,}200 \\cdot (T - 25) $$
+
+$$ 0{,}0390 \\cdot (200 - T) = 0{,}836 \\cdot (T - 25) $$
+
+$$ 7{,}80 - 0{,}0390\\,T = 0{,}836\\,T - 20{,}9 $$
+
+$$ 28{,}7 = 0{,}875\\,T \\quad\\Leftrightarrow\\quad T \\approx 32{,}8\\ ^{\\circ}\\mathrm{C} $$
+
+**Svar:** Ca 33 °C.
+
+**Generell slutsats:** Trots att kopparbiten är 175 grader varmare än vattnet och nästan dubbelt så heta blir vattnet bara ca 8 grader varmare. Det beror på att vattnets specifika värmekapacitet är ca 11 gånger högre än kopparets — vatten "behöver" mycket mer energi för att värmas. Det är därför vatten är så bra som kylvätska, värmeöverförare i element och temperaturreglerare i havet.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En kalorimeter (isolerad behållare) är gjord av aluminium med massan 200 g. I kalorimetern finns 300 g vatten med temperaturen 20,0 °C. Du värmer ett okänt metallföremål ($m = 150\\ \\mathrm{g}$) till 200 °C och släpper det i kalorimetern. När blandningen är i jämvikt har vatten + kalorimeter + metallföremål samma temperatur, 28,5 °C. Bestäm metallens specifika värmekapacitet. Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $c_\\mathrm{Al} = 0{,}90\\ \\mathrm{kJ/(kg \\cdot K)}$. Bortse från energiförluster till omgivningen. Ange svaret i kJ/(kg·K).`,
+            answer: { value: 0.474, unit: 'kJ/(kg·K)', tol: 0.05 },
+            solution: `Metallföremålet avger energi när det kyls från 200 °C till 28,5 °C. Den avgivna energin upptas av **både** vattnet och aluminiumkalorimetern (båda värms från 20,0 °C till 28,5 °C):
+
+$$ E_\\mathrm{avg} = E_\\mathrm{upp,vatten} + E_\\mathrm{upp,kalorimeter} $$
+
+$$ c_x \\cdot m_x \\cdot \\Delta T_x = c_\\mathrm{v} \\cdot m_\\mathrm{v} \\cdot \\Delta T_\\mathrm{v} + c_\\mathrm{Al} \\cdot m_\\mathrm{Al} \\cdot \\Delta T_\\mathrm{Al} $$
+
+Vi löser ut metallens specifika värmekapacitet $c_x$:
+
+$$ c_x = \\frac{c_\\mathrm{v} \\cdot m_\\mathrm{v} \\cdot \\Delta T_\\mathrm{v} + c_\\mathrm{Al} \\cdot m_\\mathrm{Al} \\cdot \\Delta T_\\mathrm{Al}}{m_x \\cdot \\Delta T_x} $$
+
+Mätvärden:
+
+$$
+\\left[ \\begin{array}{l}
+m_\\mathrm{v} = 0{,}300\\ \\mathrm{kg},\\quad \\Delta T_\\mathrm{v} = 28{,}5 - 20{,}0 = 8{,}5\\ \\mathrm{K} \\\\
+m_\\mathrm{Al} = 0{,}200\\ \\mathrm{kg},\\quad \\Delta T_\\mathrm{Al} = 8{,}5\\ \\mathrm{K} \\\\
+m_x = 0{,}150\\ \\mathrm{kg},\\quad \\Delta T_x = 200 - 28{,}5 = 171{,}5\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ c_x = \\frac{4{,}18 \\cdot 0{,}300 \\cdot 8{,}5 + 0{,}90 \\cdot 0{,}200 \\cdot 8{,}5}{0{,}150 \\cdot 171{,}5} = \\frac{10{,}659 + 1{,}530}{25{,}725} = \\frac{12{,}189}{25{,}725} \\approx 0{,}474\\ \\mathrm{kJ/(kg \\cdot K)} $$
+
+**Svar:** Ca 0,47 kJ/(kg·K).
+
+**Generell slutsats:** Värdet 0,47 kJ/(kg·K) ligger nära järns specifika värmekapacitet (0,46 kJ/(kg·K) i tabell) — den okända metallen är alltså troligen järn. Detta är en klassisk kalorimetri-metod för att identifiera metaller. Lägg märke till hur viktigt det är att inkludera kalorimeterns egen värmeupptagning — utelämnar man den får man $c_x \\approx 0{,}414\\ \\mathrm{kJ/(kg \\cdot K)}$, vilket skulle peka mot ett helt fel material.`,
+        },
+    ],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // fy1-6.3  Faser och fasövergångar
+    // Formler: E = l_s · m (smältning/stelning), E = l_å · m (förångning).
+    // Tabellvärden: l_s,is = 334 kJ/kg, l_å,vatten = 2,26 MJ/kg,
+    //               c_is = 2,2 kJ/(kg·K), c_vatten = 4,18 kJ/(kg·K).
+    // ═══════════════════════════════════════════════════════════════════
+    'fy1-6.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur mycket energi går åt för att smälta 0,50 kg is som redan ligger vid 0 °C? Räkna med $l_s = 334\\ \\mathrm{kJ/kg}$ för is. Ange svaret i kJ.`,
+            answer: { value: 167, unit: 'kJ', tol: 0.02 },
+            solution: `Smältning är en fasövergång utan temperaturändring. Energin beräknas med:
+
+$$ E = l_s \\cdot m $$
+
+Mätvärden:
+
+$$
+\\left[ \\begin{array}{l}
+l_s = 334\\ \\mathrm{kJ/kg} \\\\
+m = 0{,}50\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ E = 334 \\cdot 0{,}50 = 167\\ \\mathrm{kJ} $$
+
+**Svar:** 167 kJ.`,
+        },
+        {
+            level: 1,
+            question: `Hur mycket energi avges när 0,20 kg vattenånga vid 100 °C kondenserar till flytande vatten vid 100 °C? Räkna med $l_å = 2{,}26\\ \\mathrm{MJ/kg}$. Ange svaret i kJ.`,
+            answer: { value: 452, unit: 'kJ', tol: 0.02 },
+            solution: `Kondensation avger samma energi som förångning kräver för samma massa. Vi använder förångningsformeln:
+
+$$ E = l_å \\cdot m $$
+
+Mätvärden:
+
+$$
+\\left[ \\begin{array}{l}
+l_å = 2{,}26\\ \\mathrm{MJ/kg} = 2\\,260\\ \\mathrm{kJ/kg} \\\\
+m = 0{,}20\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ E = 2\\,260 \\cdot 0{,}20 = 452\\ \\mathrm{kJ} $$
+
+**Svar:** 452 kJ.
+
+**Generell slutsats:** Att förånga vatten kräver mycket mer energi än att smälta is av samma massa (jämför med 167 kJ för 0,50 kg is). Det är därför det tar lång tid att koka bort vatten ur en kastrull — och varför vattenånga i hud-kontakt orsakar mycket allvarligare brännskador än kokande vatten.`,
+        },
+        {
+            level: 1,
+            question: `Vad heter fasövergången från **gas** direkt till **fast** form, utan att passera vätskeformen?`,
+            choices: [
+                `Sublimering.`,
+                `Deposition.`,
+                `Stelning.`,
+                `Kondensering.`,
+            ],
+            correct: 1,
+            solution: `De sex fasövergångarna är:
+
+- Smältning (fast → flytande)
+- Stelning (flytande → fast)
+- Förångning (flytande → gas)
+- Kondensering (gas → flytande)
+- **Sublimering** (fast → gas)
+- **Deposition** (gas → fast)
+
+**Svar:** Alternativ B — deposition.
+
+**Generell slutsats:** Frost på fönsterrutor en kall morgon bildas genom deposition — vattenånga i luften går direkt till is utan att först bli vatten. Det omvända (sublimering) ser man när torris (fast CO₂) övergår direkt till gas vid rumstemperatur.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Du tar 1,0 kg is med temperaturen −10 °C ur frysen. Hur mycket energi behövs för att (1) värma isen till 0 °C och (2) sedan smälta hela mängden? Räkna med $c_\\mathrm{is} = 2{,}2\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Ange totala energin i kJ.`,
+            answer: { value: 356, unit: 'kJ', tol: 0.02 },
+            solution: `Processen sker i två steg: uppvärmning av isen från −10 °C till 0 °C, och därefter smältning vid 0 °C.
+
+**Steg 1 — uppvärmning:**
+
+$$ E_1 = c_\\mathrm{is} \\cdot m \\cdot \\Delta T = 2{,}2 \\cdot 1{,}0 \\cdot 10 = 22\\ \\mathrm{kJ} $$
+
+**Steg 2 — smältning:**
+
+$$ E_2 = l_s \\cdot m = 334 \\cdot 1{,}0 = 334\\ \\mathrm{kJ} $$
+
+**Total energi:**
+
+$$ E = E_1 + E_2 = 22 + 334 = 356\\ \\mathrm{kJ} $$
+
+**Svar:** 356 kJ.
+
+**Generell slutsats:** Lägg märke till att smältningen kräver ca 15 gånger mer energi än uppvärmningen från −10 °C till 0 °C. Det är typiskt — fasövergångar kräver i allmänhet mycket mer energi än uppvärmning eller avsvalning över samma temperaturintervall. Det är därför is i en drink kyler så effektivt: smältningen suger åt sig stora mängder energi från drycken.`,
+        },
+        {
+            level: 2,
+            question: `Hur mycket energi krävs för att värma 200 g vatten från 20 °C och sedan förånga allt vid 100 °C? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_å = 2{,}26\\ \\mathrm{MJ/kg}$. Ange totala energin i kJ.`,
+            answer: { value: 519, unit: 'kJ', tol: 0.02 },
+            solution: `Processen sker i två steg: först uppvärmning till kokpunkten 100 °C, sedan förångning vid 100 °C.
+
+**Steg 1 — uppvärmning:**
+
+$$ E_1 = c \\cdot m \\cdot \\Delta T $$
+
+$$
+\\left[ \\begin{array}{l}
+c = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m = 0{,}200\\ \\mathrm{kg} \\\\
+\\Delta T = 100 - 20 = 80\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+$$ E_1 = 4{,}18 \\cdot 0{,}200 \\cdot 80 = 66{,}88\\ \\mathrm{kJ} $$
+
+**Steg 2 — förångning:**
+
+$$ E_2 = l_å \\cdot m = 2\\,260 \\cdot 0{,}200 = 452\\ \\mathrm{kJ} $$
+
+**Total energi:**
+
+$$ E = E_1 + E_2 = 66{,}88 + 452 \\approx 519\\ \\mathrm{kJ} $$
+
+**Svar:** Ca 519 kJ.
+
+**Generell slutsats:** Förångningen står för 87 % av den totala energin. Det är därför det går mycket fortare att värma en kastrull med vatten från 20 °C till 100 °C än att sedan koka bort vattnet — fasövergången slukar mycket mer energi än temperaturändringen.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Du häller 0,80 kg vatten med temperaturen 70 °C i en isolerad termos. Du tillsätter sedan en mängd isbitar (0 °C) tills sluttemperaturen, när all is smält, blir 25 °C. Hur många gram is behövde du? Räkna med $c_\\mathrm{vatten} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)}$ och $l_s = 334\\ \\mathrm{kJ/kg}$. Bortse från energiförluster till omgivningen. Ange svaret i gram.`,
+            answer: { value: 343, unit: 'g', tol: 0.04 },
+            solution: `Varmvattnet avger energi när det avsvalnar från 70 °C till 25 °C. Den energin upptas av isen genom **två** processer: (1) smältning av isen vid 0 °C och (2) uppvärmning av smältvattnet från 0 °C till 25 °C.
+
+$$ E_\\mathrm{avg} = E_\\mathrm{smältning} + E_\\mathrm{uppv. av smältvatten} $$
+
+$$ c_\\mathrm{v} \\cdot m_\\mathrm{v} \\cdot \\Delta T_\\mathrm{v} = l_s \\cdot m_\\mathrm{is} + c_\\mathrm{v} \\cdot m_\\mathrm{is} \\cdot \\Delta T_\\mathrm{is} $$
+
+Vi löser ut $m_\\mathrm{is}$:
+
+$$ m_\\mathrm{is} = \\frac{c_\\mathrm{v} \\cdot m_\\mathrm{v} \\cdot \\Delta T_\\mathrm{v}}{l_s + c_\\mathrm{v} \\cdot \\Delta T_\\mathrm{is}} $$
+
+Mätvärden:
+
+$$
+\\left[ \\begin{array}{l}
+c_\\mathrm{v} = 4{,}18\\ \\mathrm{kJ/(kg \\cdot K)} \\\\
+m_\\mathrm{v} = 0{,}80\\ \\mathrm{kg} \\\\
+\\Delta T_\\mathrm{v} = 70 - 25 = 45\\ \\mathrm{K} \\\\
+l_s = 334\\ \\mathrm{kJ/kg} \\\\
+\\Delta T_\\mathrm{is} = 25 - 0 = 25\\ \\mathrm{K}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ m_\\mathrm{is} = \\frac{4{,}18 \\cdot 0{,}80 \\cdot 45}{334 + 4{,}18 \\cdot 25} = \\frac{150{,}48}{334 + 104{,}5} = \\frac{150{,}48}{438{,}5} \\approx 0{,}343\\ \\mathrm{kg} $$
+
+**Svar:** Ca 343 g.
+
+**Generell slutsats:** Den klassiska fällan här är att glömma att smältvattnet i sin tur måste värmas upp från 0 °C till sluttemperaturen 25 °C. Om man bara räknar med smältenergin får man $m_\\mathrm{is} = 150{,}48/334 \\approx 0{,}450$ kg — alltså ca 30 % för mycket is. Smältvattnets uppvärmning bidrar ca 104,5 kJ/kg, vilket inte alls är försumbart jämfört med smältentalpin 334 kJ/kg.`,
+        },
+    ],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // fy1-6.4  Kroppen och värme
+    // Begreppsavsnitt: svettning (avdunstning kyler), strålning, isolering,
+    // konvektion (vind). Inga nya formler — kombinerar med 6.2 och 6.3.
+    // ═══════════════════════════════════════════════════════════════════
+    'fy1-6.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Varför kyler svettning ner kroppen när det är varmt?`,
+            choices: [
+                `Svetten i sig är kallare än kroppens temperatur och kyler huden vid kontakt.`,
+                `När svetten avdunstar tas energi från huden, vilket sänker dess temperatur.`,
+                `Svetten innehåller salter som kemiskt reagerar och absorberar värme.`,
+                `Svetten reflekterar solens infraröda strålning och hindrar uppvärmning.`,
+            ],
+            correct: 1,
+            solution: `Avdunstning är en fasövergång från vätska till gas och kräver energi (förångningsentalpin). Den energin tas från det den fuktar — alltså huden. Resultatet är att hudens temperatur sjunker.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Samma fysikaliska princip förklarar varför man fryser när man kommer ut ur duschen, varför man håller dryckesflaskor svala med en blöt trasa runt om, och varför hundar flåsar (de svettas inte, så de använder andningsluften till att avdunsta vatten från tungan).`,
+        },
+        {
+            level: 1,
+            question: `En människokropp i vila avger värme till omgivningen med ungefär samma effekt som ett litet element — vilken effekt rör det sig om?`,
+            choices: [
+                `Ca 10 W.`,
+                `Ca 100 W.`,
+                `Ca 1 000 W.`,
+                `Ca 10 000 W.`,
+            ],
+            correct: 1,
+            solution: `En människokropp i vila avger ca **100 W** värme genom strålning, konvektion och avdunstning från hud och luftvägar.
+
+**Svar:** Alternativ B — ca 100 W.
+
+**Generell slutsats:** Det är därför ett klassrum med 30 elever blir varmt även utan att elementen är på — 30 personer ger en sammanlagd uppvärmningseffekt på ca 3 000 W, motsvarande tre starka element. Många moderna passivhus utnyttjar detta för att minska behovet av aktiv uppvärmning.`,
+        },
+        {
+            level: 1,
+            question: `En människokropp i vila avger ca 100 W värme. Hur mycket energi avger man under 8 timmars sömn? Ange svaret i MJ.`,
+            answer: { value: 2.88, unit: 'MJ', tol: 0.02 },
+            solution: `Energi är effekt gånger tid:
+
+$$ E = P \\cdot t $$
+
+Mätvärden (med tiden i SI-enheter):
+
+$$
+\\left[ \\begin{array}{l}
+P = 100\\ \\mathrm{W} \\\\
+t = 8\\ \\mathrm{h} = 8 \\cdot 3\\,600\\ \\mathrm{s} = 28\\,800\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ E = 100 \\cdot 28\\,800 = 2\\,880\\,000\\ \\mathrm{J} = 2{,}88\\ \\mathrm{MJ} $$
+
+**Svar:** 2,88 MJ.
+
+**Generell slutsats:** Det motsvarar ungefär energin i 100 g choklad (ca 2,5 MJ) eller fyra bananer. Det är därför vi behöver äta — kroppen måste ständigt fylla på energi för att kompensera för värmeavgivningen.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en bastu är lufttemperaturen 80 °C. När du blåser kraftigt på din arm där upplever du det **inte** som svalt, utan som extremt **varmt**. Varför?`,
+            choices: [
+                `Bastuluft är torrare och leder värme bättre än vanlig luft.`,
+                `Den varma luften river bort den 30-gradiga luften nära huden och ersätter den med 80-gradig luft, så värme strömmar **till** huden istället för från den.`,
+                `Hög temperatur stänger av nervändarna som annars skulle uppfatta värme — så endast tryckkänslan kvarstår.`,
+                `Vid hög lufttemperatur slutar svett att avdunsta, vilket gör att kylningen försvinner.`,
+            ],
+            correct: 1,
+            solution: `Värme flödar alltid från varmt till kallt. När du blåser hårt på armen ute (med 20 °C luft) river du bort den varma luften nära huden och ersätter den med kall — då flödar värme **från** armen, och du upplever det som kallt. I bastun gör du tvärtom: du river bort den 30-gradiga luften nära huden och ersätter den med 80-gradig — då flödar värme **till** armen och du upplever det som varmt.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Det är inte luftrörelsen i sig som avgör om man känner varmt eller kallt — det är **temperaturskillnaden** mellan din hud och den nya luften. Samma fenomen förklarar varför fläktar inte hjälper i extrem hetta (och ibland gör det värre om luften är varmare än huden).`,
+        },
+        {
+            level: 2,
+            question: `Anta att hela värmeavgivningen från en vilande människa (effekt 100 W under ett dygn) skulle ske enbart genom att svett **förångas** från huden. Hur mycket vatten i kg skulle behöva svettas och förångas under dygnet? Räkna med $l_å = 2{,}26\\ \\mathrm{MJ/kg}$ för vatten vid hudtemperatur.`,
+            answer: { value: 3.82, unit: 'kg', tol: 0.03 },
+            solution: `Först räknar vi ut den totala energin som avges under ett dygn:
+
+$$ E = P \\cdot t = 100 \\cdot 24 \\cdot 3\\,600 = 8\\,640\\,000\\ \\mathrm{J} = 8{,}64\\ \\mathrm{MJ} $$
+
+Om all denna energi ska gå åt till att förånga vatten gäller:
+
+$$ E = l_å \\cdot m \\quad\\Leftrightarrow\\quad m = \\frac{E}{l_å} $$
+
+Mätvärden:
+
+$$
+\\left[ \\begin{array}{l}
+E = 8{,}64\\ \\mathrm{MJ} \\\\
+l_å = 2{,}26\\ \\mathrm{MJ/kg}
+\\end{array} \\right]
+$$
+
+$$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
+
+**Svar:** Ca 3,8 kg vatten.
+
+**Generell slutsats:** I verkligheten svettar man inte så mycket vid normal aktivitet (ca 0,5–1 kg per dygn) — det mesta av värmen avges genom **strålning** och **konvektion** till omgivande luft. Men vid extrem hetta eller hård fysisk ansträngning, när omgivningen är varmare än huden, blir svettning den enda effektiva avkylningsmekanismen — och då kan svettmängden närma sig flera kg per dag.`,
+        },
+    ],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // fy1-6.5  Termodynamikens fyra huvudsatser
+    // Begreppsavsnitt utan formler. Flerval om huvudsatserna 0–3.
+    // ═══════════════════════════════════════════════════════════════════
+    'fy1-6.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken av termodynamikens huvudsatser säger att **energi inte kan skapas eller förstöras, bara omvandlas**?`,
+            choices: [
+                `Nollte huvudsatsen.`,
+                `Första huvudsatsen.`,
+                `Andra huvudsatsen.`,
+                `Tredje huvudsatsen.`,
+            ],
+            correct: 1,
+            solution: `**Första huvudsatsen** är energiprincipen: energi kan varken skapas eller förstöras, bara omvandlas mellan olika energiformer (rörelseenergi, lägesenergi, värme, kemisk energi osv.).
+
+**Svar:** Alternativ B — första huvudsatsen.
+
+**Generell slutsats:** Första huvudsatsen är fundamentet för all energiräkning i fysiken. Den utesluter "evighetsmaskiner av första slaget" — maskiner som skulle skapa energi från ingenting.`,
+        },
+        {
+            level: 1,
+            question: `Vilken huvudsats förklarar varför värme **aldrig av sig själv** flödar från ett kallt föremål till ett varmare föremål?`,
+            choices: [
+                `Nollte huvudsatsen.`,
+                `Första huvudsatsen.`,
+                `Andra huvudsatsen.`,
+                `Tredje huvudsatsen.`,
+            ],
+            correct: 2,
+            solution: `**Andra huvudsatsen** säger att värme alltid flödar från varmt till kallt — aldrig spontant åt andra hållet. För att flytta värme från kallt till varmt (som i ett kylskåp eller en värmepump) krävs **arbete** från en yttre energikälla.
+
+**Svar:** Alternativ C — andra huvudsatsen.
+
+**Generell slutsats:** Detta är vad som gör att tiden känns ha en riktning i termodynamiska processer — vi ser aldrig en söndertrasad kopp "lägga ihop sig själv", och kall mjölk värms inte spontant upp i kylen. Andra huvudsatsen är intimt kopplad till begreppet **entropi** (oordning), som ni stöter på i Fysik 2.`,
+        },
+        {
+            level: 1,
+            question: `Vid vilken temperatur upphör enligt **tredje huvudsatsen** alla processer i ett system?`,
+            choices: [
+                `Vid 0 °C — vattnets fryspunkt.`,
+                `Vid 0 K — den absoluta nollpunkten.`,
+                `Vid −100 °C — där alla vanliga gaser kondenserar.`,
+                `Vid kosmiska bakgrundsstrålningens temperatur (2,7 K).`,
+            ],
+            correct: 1,
+            solution: `**Tredje huvudsatsen** säger att alla processer upphör vid **absoluta nollpunkten** (0 K = −273,15 °C). Där har atomerna teoretiskt sett ingen rörelse alls. I praktiken kan man komma godtyckligt nära 0 K, men aldrig riktigt nå dit.
+
+**Svar:** Alternativ B — vid 0 K.
+
+**Generell slutsats:** I moderna laboratorier har man nått temperaturer på under en miljarddels kelvin (10⁻⁹ K) — kallare än något annat någonstans i det observerbara universum. Det är en konsekvens av tredje huvudsatsen att 0 K inte kan nås i ett ändligt antal steg, men man kan komma så nära man vill.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Du tar ut en kall läskburk (4 °C) ur kylen och ställer den på köksbordet, där rumsluften är 22 °C. Efter ett tag har läskburken samma temperatur som rummet. Vilken huvudsats beskriver mest direkt denna utjämning?`,
+            choices: [
+                `Nollte huvudsatsen — två system i kontakt utbyter energi tills de når jämvikt (samma temperatur).`,
+                `Första huvudsatsen — energin från rummet blir lika stor som energin i läskburken.`,
+                `Andra huvudsatsen — värme flödar från kallt till varmt.`,
+                `Tredje huvudsatsen — utjämningen är bara möjlig om båda systemen ligger ovanför 0 K.`,
+            ],
+            correct: 0,
+            solution: `**Nollte huvudsatsen** säger att två system i kontakt utbyter energi tills de når **termisk jämvikt** — det vill säga samma temperatur. Det är vad som händer med läskburken: värme flödar från den varmare rumsluften till den kallare burken tills temperaturerna är lika.
+
+**Svar:** Alternativ A — nollte huvudsatsen.
+
+**Generell slutsats:** Andra huvudsatsen är också relevant (den bestämmer **riktningen** på värmeflödet — från varmt till kallt), men det är nollte huvudsatsen som specifikt säger att utjämningen alltid sker fullt ut. Det är på grund av nollte huvudsatsen som termometrar fungerar: termometern och föremålet utbyter energi tills de har samma temperatur, och termometern visar då föremålets temperatur.`,
+        },
+        {
+            level: 2,
+            question: `En uppfinnare påstår att hen byggt en maskin som värmer ett rum genom att enbart föra över värme från den kalla utomhusluften, **utan att tillföra någon elektrisk eller annan extern energi**. Maskinen ska alltså jobba helt av sig själv, utan kraftkälla. Vilken av huvudsatserna gör denna uppfinning omöjlig?`,
+            choices: [
+                `Nollte huvudsatsen.`,
+                `Första huvudsatsen.`,
+                `Andra huvudsatsen.`,
+                `Tredje huvudsatsen.`,
+            ],
+            correct: 2,
+            solution: `Värme flödar av sig själv bara från varmt till kallt — aldrig tvärtom. Att överföra värme från en kallare till en varmare plats kräver alltid att man tillför arbete (t.ex. el till en kompressor i en värmepump). Det är **andra huvudsatsen** som gör en sådan här "passiv värmepump utan kraftkälla" omöjlig.
+
+**Svar:** Alternativ C — andra huvudsatsen.
+
+**Generell slutsats:** Riktiga värmepumpar och kylskåp bryter inte mot andra huvudsatsen — de förbrukar elektrisk energi för att "tvinga" värme att gå från kallt till varmt. En vanlig värmepump kan dock leverera 3–4 gånger så mycket värmeenergi till rummet som den drar el från väggen — eftersom resten kommer från uteluften. Det är fortfarande inte gratis, men det är effektivt.`,
+        },
+    ],
 };

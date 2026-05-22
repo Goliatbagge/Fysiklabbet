@@ -41,6 +41,9 @@ Interaktiva fysiksimuleringar för gymnasieelever (Fysik 1 & 2).
   - Anti-mönster (oavsett filtyp):
     - ✗ `Räkna med *g* = 9,82 N/kg.` (alla tre tecknen kan radbrytas inbördes)
     - ✗ `Räkna med *g* = 9,82 N/kg.` (NBSP räcker inte — "= 9,82" kan ändå hamna ensam på en rad om "Räkna med *g*" tar slutet av föregående rad)
+    - ✗ `ett metallföremål (m = 150 g)` — **variabeln är inte ens kursiv**. Råtext-bokstäver som `m`, `V`, `F`, `c`, `t` ser ut som vanliga ord och förlorar all visuell signal om att det är en fysikalisk storhet. **Skriv aldrig ett blankt `m = …` i löptext utan vare sig kursiv-markdown eller math-block.** Rätt form: `ett metallföremål ($m = 150\\ \\mathrm{g}$)` i JS-sträng eller `ett metallföremål ($m = 150\ \mathrm{g}$)` i md-fil.
+
+  **Varningssignal — granska din egen text:** När du beskriver ett föremål eller scenario med dess storheter inom parentes — exempelvis "(*m* = …)", "(*V* = …)", "(*L* = …)", "(*c* = …)", "(*t* = …)" — ska du **alltid stanna upp** och packa hela parentesen i ett math-block. Det här är det vanligaste stället där reflexen sviker, eftersom parentesen "känns" som en parantetisk kommentar snarare än en fysik-uppgift. Den är fortfarande en variabel-värde-enhet-trippel och regeln gäller fullt ut.
 
   Gäller framförallt **konstanter som anges i uppgiftstexten** ("Räkna med …", "Använd …"), men också inline-referenser till specifika mätvärden ("vid *t* = 5,0 s" → `$t = 5{,}0\\ \\mathrm{s}$` i JS). Gränsfallet "bara variabelnamn utan värde" (t.ex. "*t* anger tiden") räcker det med kursiv markdown.
 

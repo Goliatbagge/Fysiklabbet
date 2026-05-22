@@ -23,6 +23,20 @@ Interaktiva fysiksimuleringar för gymnasieelever (Fysik 1 & 2).
   2. **Packa hela uttrycket i math-block**: `$5{,}0\ \mathrm{m/s}$` eller `$\rho = 19{,}3\ \mathrm{g/cm^3}$`. Hela math-blocket är ett oddelbart inline-element och kan aldrig radbrytas internt. Använd detta när värdet ändå hör ihop med en formel-variabel (ρ, *F*, *E*).
 
   **Båda metoderna är OK** — välj efter vad som flyter bäst i texten. Skriv aldrig värde och enhet med bara vanligt mellanslag emellan.
+
+  **Gäller också °C, °K, °F och alla andra grad-baserade enheter.** "100 °C" med vanligt mellanslag mellan "100" och "°C" kan radbrytas — "100" hamnar då på en rad och "°C" på nästa. Skriv `100 °C` i JS-filer (NBSP-tecken direkt mellan siffran och `°`) eller `$100\ ^{\circ}\mathrm{C}$` i math-block. Detsamma gäller exempelvis "180°" (vinklar), "5 %" (procent), "3 st" (styck).
+
+  **Checklista före commit i `data/ovningar.js` och `data/teori/*.md`** — sök efter följande mönster och kontrollera att mellanslaget mellan siffra och enhet är NBSP (U+00A0), inte vanligt mellanslag (U+0020):
+
+  - Temperaturer: `\d+ °C`, `\d+ °K`, `\d+ K`
+  - SI-bas: `\d+ m`, `\d+ kg`, `\d+ s`, `\d+ A`, `\d+ mol`
+  - Prefixade: `\d+ kJ`, `\d+ MJ`, `\d+ kW`, `\d+ MPa`, `\d+ kPa`, `\d+ kHz`
+  - Vanliga: `\d+ N`, `\d+ J`, `\d+ W`, `\d+ V`, `\d+ Pa`, `\d+ Hz`, `\d+ Bq`, `\d+ eV`, `\d+ bar`, `\d+ atm`
+  - Volym/distans: `\d+ cm`, `\d+ mm`, `\d+ km`, `\d+ l`, `\d+ dl`, `\d+ ml`, `\d+ liter`
+  - Tid: `\d+ ms`, `\d+ min`, `\d+ h`
+  - Övrigt: `\d+ %`, `\d+ rad`, `\d+ st`, `\d+ °` (vinkel utan C/K)
+
+  Snabb fix i Node.js (efter ett större tillägg) — gör `(\d) (enhet)` → `\1 \2` enbart i text utanför `$...$`-block. Eftersom NBSP är osynligt i editorn är det lätt att tro att "det ser rätt ut" trots att man har vanligt mellanslag — verifiera alltid med teckenkod (charCode 160 = NBSP, charCode 32 = vanligt).
 - **Variabel + värde + enhet — alltid i math-block**: När en variabel, dess värde och enhet skrivs ihop i löptext (t.ex. "Räkna med *g* = 9,82 N/kg" eller "Använd *c* = 3,0 · 10⁸ m/s" eller "*c* ≈ 300 000 km/s") ska **hela trippeln** packas i ett math-block. Annars kan webbläsaren radbryta mellan "*g* =" och "9,82 N/kg" — en typografisk smutsfläck där eleven blir förvirrad över vad som hör ihop. Math-blocket är oddelbart och flyttas i sin helhet till nästa rad om det inte får plats.
 
   **Detta gäller alla jämförelseoperatorer**, inte bara `=`. Samma regel för `≈` (`\approx`), `<` (`\lt` eller `<`), `>`, `≤` (`\leq`), `≥` (`\geq`), `∝` (`\propto`), `≠` (`\neq`). Skriv aldrig "*c* ≈ 300 000 km/s" som lös text — packa allt i `$c \approx 300\,000\ \mathrm{km/s}$`. Detta gäller också introduktionstexter där en konstant nämns en passant ("Plancks konstant *h* ≈ 6,626 · 10⁻³⁴ J·s").

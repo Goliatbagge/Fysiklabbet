@@ -519,6 +519,312 @@ function makeHydraulicPress(opts) {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="max-width:${Math.round(W)}px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">${body}</svg>`;
 }
 
+// ── Kopplingsschema (makeCircuit) ────────────────────────────────────
+//
+// Renderar ett kopplingsschema som inline-SVG i svensk lärobokstil
+// (IEC-symboler: resistor = rektangel, batteri = lång+kort streck,
+// lampa = cirkel med kryss, voltmeter/amperemeter = V/A i cirkel).
+//
+// Kretsen är en rektangel. Komponenter sitter på topp-ledningen i
+// serie (vänster → höger). Batteriet sitter mitt på underledningen.
+// En av komponenterna i serien kan vara av typen 'parallel' med en
+// lista av branches — varje branch är en lista av komponenter som
+// ritas som en parallell-gren stackad nedanför topp-ledningen.
+//
+//   opts = {
+//     width?,                         // total bredd, default beräknas från innehåll
+//     source: {                       // spänningskälla på underledningen (mitten)
+//       label?, value?                // 'U' / '12 V' → "U = 12 V"
+//     },
+//     components: [
+//       { type: 'resistor',  label?, value? },     // R₁ = 10 Ω
+//       { type: 'bulb',      label?, value? },     // L₁
+//       { type: 'switch',    open?: true },        // strömbrytare
+//       { type: 'ammeter',   label?: 'A' },        // i serie
+//       { type: 'voltmeter', label?: 'V' },        // direkt på ledningen (sällan)
+//       { type: 'parallel', branches: [
+//         [ { type: 'bulb', label: 'L_1' } ],
+//         [ { type: 'resistor', label: 'R_2', value: '5 Ω' } ]
+//       ]}
+//     ]
+//   }
+//
+// Begränsning: max ETT parallel-element i components-arrayen. För mer
+// komplexa topologier (Kirchhoff-bryggor) krävs egen inline-SVG.
+
+function makeCircuit(opts) {
+    // segW väljs efter krets-topologi:
+    //   - Ren seriekrets: 72 px → kompakt, lagom luft mellan komponenter
+    //   - Med parallel-sektion: 88 px → mer luft så förgreningsnoderna
+    //     inte ligger trångt mot intilliggande seriekomponenter
+    // (Sätts efter att parallel-sektionen detekterats nedan.)
+    const padX = 26;
+    const padTop = 38;
+    const padBot = 50;
+    const branchGapY = 58;
+    const stroke = '#0f1620';
+    const wireW = 1.8;
+
+    // Label-formatering. Variabler (U, R, I, Q, F) renderas kursivt.
+    // Etiketter som identifierar enskilda komponenter (L för lampa,
+    // A för amperemeter, V för voltmeter) är INTE fysikaliska
+    // variabler — de står rakt. Vilken konvention som gäller bestäms
+    // per komponenttyp i UPRIGHT_LABEL nedan.
+    const subs = { '0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉' };
+    const UPRIGHT_LABEL = { bulb: true, ammeter: true, voltmeter: true, switch: true };
+    function fmtVar(s, upright) {
+        const italicOpen = upright ? '' : '<tspan font-style="italic">';
+        const italicClose = upright ? '' : '</tspan>';
+        const m = s.match(/^([A-Za-zα-ωΑ-Ω])_(\w+)$/);
+        if (m) {
+            const letter = m[1], sub = m[2];
+            if (/^\d+$/.test(sub)) {
+                const ssub = sub.split('').map(c => subs[c] || c).join('');
+                return `${italicOpen}${letter}${italicClose}${ssub}`;
+            }
+            return `${italicOpen}${letter}${italicClose}<tspan baseline-shift="sub" font-size="0.72em">${sub}</tspan>`;
+        }
+        if (/^[A-Za-z]$/.test(s)) return `${italicOpen}${s}${italicClose}`;
+        return s;
+    }
+    function fmtLabel(c, upright) {
+        if (!c) return '';
+        const lbl = c.label ? fmtVar(c.label, upright) : '';
+        const val = c.value || '';
+        if (lbl && val) return `${lbl} = ${val}`;
+        return lbl || val;
+    }
+
+    // Symbol-rendering — varje funktion ritar centrerad på (x, y).
+    // Symboler är 36 px breda och fyllda med vitt för att maska över
+    // topp-ledningens linje som dras under.
+    function symResistor(x, y) {
+        return `<rect x="${x - 20}" y="${y - 8}" width="40" height="16" fill="#fff" stroke="${stroke}" stroke-width="${wireW}"/>`;
+    }
+    function symBulb(x, y) {
+        const r = 12;
+        const d = r * 0.707;
+        return `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${stroke}" stroke-width="${wireW}"/>` +
+               `<line x1="${x - d}" y1="${y - d}" x2="${x + d}" y2="${y + d}" stroke="${stroke}" stroke-width="${wireW}"/>` +
+               `<line x1="${x - d}" y1="${y + d}" x2="${x + d}" y2="${y - d}" stroke="${stroke}" stroke-width="${wireW}"/>`;
+    }
+    function symSwitch(x, y, open) {
+        const d = 2.5;
+        const ly = open ? y - 12 : y;
+        return `<rect x="${x - 16}" y="${y - 14}" width="32" height="${open ? 18 : 6}" fill="#fff" stroke="none"/>` +
+               `<circle cx="${x - 12}" cy="${y}" r="${d}" fill="${stroke}"/>` +
+               `<circle cx="${x + 12}" cy="${y}" r="${d}" fill="${stroke}"/>` +
+               `<line x1="${x - 12}" y1="${y}" x2="${x + 12}" y2="${ly}" stroke="${stroke}" stroke-width="${wireW}"/>`;
+    }
+    function symMeter(x, y, letter) {
+        const r = 13;
+        return `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${stroke}" stroke-width="${wireW}"/>` +
+               `<text x="${x}" y="${y + 5}" font-size="15" font-weight="600" fill="${stroke}" text-anchor="middle">${letter}</text>`;
+    }
+    // Batteri-strecken sitter vid x ± batGapH (gap = batGapH * 2 mellan dem).
+    // Underledningen ska BRYTAS i detta gap — batteriet är visuellt ett gap
+    // i strömkretsen (IEC-standard). Underledningen ritas i två segment
+    // som slutar/börjar vid streckens position.
+    const batGapH = 4;
+    function symBatteryH(x, y) {
+        return `<line x1="${x - batGapH}" y1="${y - 14}" x2="${x - batGapH}" y2="${y + 14}" stroke="${stroke}" stroke-width="2.6"/>` +
+               `<line x1="${x + batGapH}" y1="${y - 8}" x2="${x + batGapH}" y2="${y + 8}" stroke="${stroke}" stroke-width="2.6"/>`;
+    }
+    function drawComp(c, x, y) {
+        switch (c.type) {
+            case 'resistor':  return symResistor(x, y);
+            case 'bulb':      return symBulb(x, y);
+            case 'switch':    return symSwitch(x, y, c.open);
+            case 'ammeter':   return symMeter(x, y, 'A');
+            case 'voltmeter': return symMeter(x, y, 'V');
+            default:          return '';
+        }
+    }
+    function drawDot(x, y) {
+        return `<circle cx="${x}" cy="${y}" r="2.6" fill="${stroke}"/>`;
+    }
+    function drawWire(x1, y1, x2, y2) {
+        return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" stroke-width="${wireW}" stroke-linecap="square"/>`;
+    }
+    function drawText(x, y, t, anchor) {
+        return `<text x="${x}" y="${y}" font-size="16" fill="${stroke}" text-anchor="${anchor || 'middle'}">${t}</text>`;
+    }
+
+    // Layout: hitta ev. parallel-sektion
+    const comps = opts.components || [];
+    let pIdx = -1, nBr = 1, maxBrLen = 1;
+    for (let i = 0; i < comps.length; i++) {
+        if (comps[i].type === 'parallel') {
+            pIdx = i;
+            nBr = comps[i].branches.length;
+            for (const br of comps[i].branches) maxBrLen = Math.max(maxBrLen, br.length);
+            break;
+        }
+    }
+    const segW = pIdx >= 0 ? 88 : 72;  // bredare slotbredd när parallel-zon finns
+    const before = pIdx >= 0 ? pIdx : comps.length;
+    const after = pIdx >= 0 ? comps.length - 1 - pIdx : 0;
+    const pSlots = pIdx >= 0 ? maxBrLen : 0;
+    const totalSlots = before + pSlots + after;
+
+    // Halv-bredd för komponenttyper (utan parallel-inset).
+    function halfWBase(c) {
+        if (!c) return 0;
+        switch (c.type) {
+            case 'parallel': return segW / 2;
+            case 'resistor': return 20;
+            case 'bulb': return 12;
+            case 'switch': return 16;
+            case 'ammeter':
+            case 'voltmeter': return 14;
+            default: return 20;
+        }
+    }
+
+    // Parallel-zonens "naturliga" bredd bestäms av den bredaste grenen
+    // (antalet komponenter × inre slotbredd + kantmarginal). Om slot-
+    // bredden för parallel-zonen (pSlots × segW) är bredare än naturlig,
+    // krympas parallel-zonen så luften vid kanterna blir lika med inre.
+    const branchSegW = 60;
+    const branchEdgeMargin = 36;
+    let parallelInset = 0;
+    if (pIdx >= 0) {
+        let maxBranchInnerW = 0;
+        for (const br of comps[pIdx].branches) {
+            if (br.length === 0) continue;
+            const firstHalf = halfWBase(br[0]);
+            const lastHalf = halfWBase(br[br.length - 1]);
+            const inner = (br.length - 1) * branchSegW + firstHalf + lastHalf;
+            maxBranchInnerW = Math.max(maxBranchInnerW, inner);
+        }
+        const parallelNaturalW = maxBranchInnerW + 2 * branchEdgeMargin;
+        const slotPW = pSlots * segW;
+        parallelInset = Math.max(0, (slotPW - parallelNaturalW) / 2);
+    }
+
+    // W krymps med 2*parallelInset eftersom parallel-zonen blir smalare.
+    const W = opts.width != null ? opts.width : Math.max(300, padX * 2 + totalSlots * segW + 56 - 2 * parallelInset);
+    const topY = padTop;
+    const botY = padTop + 110 + (nBr - 1) * branchGapY;
+    const H = botY + padBot;
+    const railLeft = padX + 4;
+    const railRight = W - padX - 4;
+
+    // halfW för bounding-box-centrering. Parallel-elementets effektiva
+    // halv-bredd är efter inset-krympningen.
+    function halfW(c) {
+        if (c && c.type === 'parallel') return segW / 2 - parallelInset;
+        return halfWBase(c);
+    }
+
+    // Slot-positioner längs topp-ledningen — startX väljs så att kretsens
+    // content-bounding-box (yttersta vänsterkant till yttersta högerkant)
+    // centreras över railLeft–railRight, inte komponenternas geometriska
+    // centroider. Annars hamnar parallel-sektionens förgreningsnoder
+    // ojämnt fördelade mot ramen.
+    const totalCompW = totalSlots > 1 ? (totalSlots - 1) * segW : 0;
+    const leftHalf = halfW(comps[0]);
+    const rightHalf = halfW(comps[comps.length - 1]);
+    const startX = (railLeft + railRight - totalCompW + leftHalf - rightHalf) / 2;
+    // Komponenter EFTER parallel-zonen (sista slot pIdx+pSlots-1) skiftar
+    // åt vänster med 2*parallelInset eftersom parallel-zonen tog mindre
+    // plats än sin slot-allokering. OBS: pStartX/pEndX själva använder
+    // sx(before) och sx(before+pSlots-1) — de är INOM parallel-zonen och
+    // ska INTE skiftas, annars kollapsar parallel-zonen dubbelt.
+    const sx = i => {
+        let pos = startX + i * segW;
+        if (pIdx >= 0 && i > pIdx + pSlots - 1) pos -= 2 * parallelInset;
+        return pos;
+    };
+
+    let body = '';
+
+    // Batteriets x-position behövs i förväg så underledningen kan brytas
+    // i gapet mellan + och − strecket.
+    const hasSource = !!opts.source;
+    const bx = hasSource ? W / 2 : null;
+
+    // 1. Yttre ram: topp, botten (bryts vid batteriet), vänster, höger
+    body += drawWire(railLeft, topY, railRight, topY);
+    if (hasSource) {
+        body += drawWire(railLeft, botY, bx - batGapH, botY);
+        body += drawWire(bx + batGapH, botY, railRight, botY);
+    } else {
+        body += drawWire(railLeft, botY, railRight, botY);
+    }
+    body += drawWire(railLeft, topY, railLeft, botY);
+    body += drawWire(railRight, topY, railRight, botY);
+
+    // 2. Seriekomponenter före parallel-sektionen (topp-ledning)
+    for (let i = 0; i < before; i++) {
+        const x = sx(i);
+        body += drawComp(comps[i], x, topY);
+        const lbl = fmtLabel(comps[i], UPRIGHT_LABEL[comps[i].type]);
+        if (lbl) body += drawText(x, topY - 16, lbl);
+    }
+
+    // 3. Parallel-sektion
+    if (pIdx >= 0) {
+        const par = comps[pIdx];
+        // pStartX/pEndX dras in med parallelInset så förgreningsnoderna
+        // hamnar precis vid branchEdgeMargin från första/sista komponent
+        // i den bredaste grenen.
+        const pStartX = sx(before) - segW / 2 + parallelInset;
+        const pEndX = sx(before + pSlots - 1) + segW / 2 - parallelInset;
+        for (let bi = 0; bi < nBr; bi++) {
+            const branch = par.branches[bi];
+            const by = bi === 0 ? topY : topY + branchGapY * bi;
+            if (bi > 0) {
+                // Vertikala anslutningar från topp-ledningen ner till denna gren
+                body += drawWire(pStartX, topY, pStartX, by);
+                body += drawWire(pEndX, topY, pEndX, by);
+                // Horisontell ledning för denna gren
+                body += drawWire(pStartX, by, pEndX, by);
+                if (bi === 1) {
+                    body += drawDot(pStartX, topY);
+                    body += drawDot(pEndX, topY);
+                }
+            }
+            // Rita branch-komponenter med fast inre slot-bredd (60 px),
+            // centrerat över parallel-bredden. Annars sprids komponenterna
+            // ut över hela parallel-bredden vilket ger glesa "tomma" rader.
+            const branchSegW = 60;
+            const branchCenterX = (pStartX + pEndX) / 2;
+            const firstBranchX = branchCenterX - (branch.length - 1) * branchSegW / 2;
+            for (let j = 0; j < branch.length; j++) {
+                const cx = firstBranchX + j * branchSegW;
+                body += drawComp(branch[j], cx, by);
+                const lbl = fmtLabel(branch[j], UPRIGHT_LABEL[branch[j].type]);
+                if (lbl) {
+                    if (bi === 0) body += drawText(cx, by - 16, lbl);
+                    else body += drawText(cx, by + 26, lbl);
+                }
+            }
+        }
+    }
+
+    // 4. Seriekomponenter efter parallel-sektionen
+    if (after > 0) {
+        for (let i = 0; i < after; i++) {
+            const x = sx(before + pSlots + i);
+            const c = comps[pIdx + 1 + i];
+            body += drawComp(c, x, topY);
+            const lbl = fmtLabel(c, UPRIGHT_LABEL[c.type]);
+            if (lbl) body += drawText(x, topY - 16, lbl);
+        }
+    }
+
+    // 5. Batteri mitt på underledningen (bx är förberäknad ovan).
+    // Batterietiketten är typiskt 'U' eller 'U = 12 V' — variabel → kursiv.
+    if (hasSource) {
+        body += symBatteryH(bx, botY);
+        const lbl = fmtLabel(opts.source, false);
+        if (lbl) body += drawText(bx, botY + 34, lbl);
+    }
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="max-width:${W}px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">${body}</svg>`;
+}
+
 window.OVNINGAR = {
     'fy1-1.3': [
         // ── Nivå 1 (E) ───────────────────────────────────────────────
@@ -6758,6 +7064,209 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
 **Svar:** Alternativ C — andra huvudsatsen.
 
 **Generell slutsats:** Riktiga värmepumpar och kylskåp bryter inte mot andra huvudsatsen — de förbrukar elektrisk energi för att "tvinga" värme att gå från kallt till varmt. En vanlig värmepump kan dock leverera 3–4 gånger så mycket värmeenergi till rummet som den drar el från väggen — eftersom resten kommer från uteluften. Det är fortfarande inte gratis, men det är effektivt.`,
+        },
+    ],
+
+    'fy1-7.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken typ av koppling visas i schemat?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'bulb', label: 'L_1' },
+        { type: 'bulb', label: 'L_2' },
+        { type: 'bulb', label: 'L_3' },
+    ],
+})}`,
+            choices: [
+                `Seriekoppling.`,
+                `Parallellkoppling.`,
+                `Blandkoppling.`,
+                `Kortslutning.`,
+            ],
+            correct: 0,
+            solution: `Alla tre lampor sitter på rad i samma ledning — det finns bara **en väg** för strömmen att gå. Det är definitionen av en **seriekoppling**.
+
+**Svar:** Alternativ A — seriekoppling.
+
+**Generell slutsats:** Skulle någon av de tre lamporna gå sönder bryts hela kretsen och alla tre lampor slocknar. Det är en av seriekopplingens viktiga egenskaper — och en av anledningarna till att gamla julgransljus var så frustrerande: en trasig lampa släckte hela slingan.`,
+        },
+        {
+            level: 1,
+            question: `I schemat nedan vill du mäta strömmen genom lampan. Var ska amperemetern kopplas in?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'bulb', label: 'L_1' },
+    ],
+})}`,
+            choices: [
+                `I serie med lampan (på samma ledning som lampan).`,
+                `Parallellt med lampan (kopplad över lampan).`,
+                `Direkt över batteriets poler.`,
+                `Det spelar ingen roll var i kretsen den sitter.`,
+            ],
+            correct: 0,
+            solution: `En amperemeter mäter strömmen som går **genom** sig själv. För att mäta strömmen genom lampan måste exakt den strömmen passera även amperemetern — alltså ska den kopplas **i serie** med lampan:
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'ammeter', label: 'A' },
+        { type: 'bulb', label: 'L_1' },
+    ],
+})}
+
+För att amperemetern inte ska påverka strömmen i kretsen ska den ha **låg resistans**.
+
+**Svar:** Alternativ A — i serie med lampan.
+
+**Generell slutsats:** Voltmeter och amperemeter är spegelvända: amperemetern kopplas i serie och ska ha låg resistans, voltmetern parallellt och ska ha hög resistans. Båda mätarna är konstruerade för att störa kretsen så lite som möjligt.`,
+        },
+        {
+            level: 1,
+            question: `Tre lampor är seriekopplade till ett batteri med spänningen $U = 9{,}0\\ \\mathrm{V}$. Över lampa 1 mäter du spänningen $U_1 = 2{,}5\\ \\mathrm{V}$ och över lampa 2 spänningen $U_2 = 3{,}0\\ \\mathrm{V}$. Hur stor är spänningen $U_3$ över lampa 3?
+
+${makeCircuit({
+    source: { label: 'U', value: '9,0 V' },
+    components: [
+        { type: 'bulb', label: 'L_1' },
+        { type: 'bulb', label: 'L_2' },
+        { type: 'bulb', label: 'L_3' },
+    ],
+})}`,
+            answer: { value: 3.5, unit: 'V' },
+            solution: `I en seriekoppling delas batterispänningen upp på lamporna:
+
+$$ U = U_1 + U_2 + U_3 $$
+
+Lös ut $U_3$:
+
+$$ U_3 = U - U_1 - U_2 $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 9{,}0\\ \\mathrm{V} \\\\
+U_1 = 2{,}5\\ \\mathrm{V} \\\\
+U_2 = 3{,}0\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U_3 = 9{,}0 - 2{,}5 - 3{,}0 = 3{,}5\\ \\mathrm{V} $$
+
+**Svar:** $U_3 = 3{,}5\\ \\mathrm{V}$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I kretsen nedan delar strömmen från batteriet upp sig i två parallella grenar med resistorerna $R_1$ och $R_2$. Strömmen genom $R_1$ är $I_1 = 0{,}40\\ \\mathrm{A}$ och strömmen genom $R_2$ är $I_2 = 0{,}30\\ \\mathrm{A}$. Hur stor är strömmen $I_3$ genom $R_3$?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', label: 'R_3' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_1' }],
+            [{ type: 'resistor', label: 'R_2' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 0.70, unit: 'A' },
+            solution: `Vid en förgreningspunkt gäller **Kirchhoffs första lag**: summan av strömmarna som går in i en punkt är lika med summan av strömmarna som går ut.
+
+I den vänstra noden samlas strömmarna $I_1$ och $I_2$ från grenarna och fortsätter som $I_3$ genom $R_3$:
+
+$$ I_3 = I_1 + I_2 $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+I_1 = 0{,}40\\ \\mathrm{A} \\\\
+I_2 = 0{,}30\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ I_3 = 0{,}40 + 0{,}30 = 0{,}70\\ \\mathrm{A} $$
+
+**Svar:** $I_3 = 0{,}70\\ \\mathrm{A}$.
+
+**Generell slutsats:** Eftersom $R_3$ sitter i serie med hela parallellsektionen passerar **all** ström från batteriet genom $R_3$. Det är samma ström som batteriet levererar — Kirchhoffs första lag är bara ett sätt att uttrycka att laddning inte kan försvinna eller skapas i en förgrening.`,
+        },
+        {
+            level: 2,
+            question: `I kretsen nedan är tre lampor parallellkopplade till ett batteri. Vad händer med lampa 1 och lampa 2 om lampa 3 går sönder?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'bulb', label: 'L_1' }],
+        [{ type: 'bulb', label: 'L_2' }],
+        [{ type: 'bulb', label: 'L_3' }],
+    ] }],
+})}`,
+            choices: [
+                `De slocknar också, eftersom hela kretsen bryts.`,
+                `De lyser oförändrat, eftersom de fortfarande är direkt anslutna till batteriet.`,
+                `De lyser svagare, eftersom strömmen från batteriet minskar.`,
+                `De lyser starkare, eftersom strömmen som gick genom lampa 3 omfördelas.`,
+            ],
+            correct: 1,
+            solution: `Varje gren i en parallellkoppling är **direkt ansluten** mellan batteriets poler. Spänningen över varje lampa är därför densamma som batterispänningen *U*, oavsett vad som händer i de andra grenarna.
+
+När lampa 3 går sönder bryts enbart den grenens ledning. Lampornas 1 och 2 spänning och resistans är oförändrade, så enligt Ohms lag är även strömmen genom dem oförändrad — de **lyser exakt som förut**.
+
+**Svar:** Alternativ B — de lyser oförändrat.
+
+**Generell slutsats:** Detta är den fundamentala skillnaden mot seriekoppling, där en trasig lampa släcker hela kretsen. Eluttagen i ett hem är parallellkopplade just därför — om en lampa går sönder ska inte hela rummets belysning slockna. Den totala strömmen från batteriet minskar dock, eftersom en gren har försvunnit.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Fyra likadana lampor är kopplade enligt schemat: lampa 1 sitter ensam i den övre grenen, lamporna 2, 3 och 4 sitter i serie i den undre grenen. Båda grenarna är direkt kopplade mellan batteriets poler.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'bulb', label: 'L_1' }],
+        [{ type: 'bulb', label: 'L_2' }, { type: 'bulb', label: 'L_3' }, { type: 'bulb', label: 'L_4' }],
+    ] }],
+})}
+
+**a)** Vilken eller vilka lampor lyser starkast?
+
+**b)** Vilken eller vilka lampor lyser svagast?
+
+**c)** Lampa 3 går sönder. Vad händer med lampa 1?`,
+            solution: `**a)** Lamporna är likadana — varje lampa har samma resistans *R*. Eftersom båda grenarna är parallella ligger samma spänning *U* över dem.
+
+Övre grenen har bara lampa 1: total resistans *R*, ström $I_1 = U/R$.
+
+Undre grenen har tre lampor i serie: total resistans $3R$, ström $I_{2{-}4} = U/(3R) = I_1/3$.
+
+Lampa 1 får alltså tre gånger så stark ström som lamporna 2, 3 och 4. Eftersom likadana lampor lyser starkare ju starkare ström de får, lyser **lampa 1 starkast**.
+
+**Svar a):** Lampa 1.
+
+**b)** Lamporna 2, 3 och 4 sitter i samma gren och har samma ström — de lyser lika starkt. Den strömmen är en tredjedel av lampa 1:s ström, så de lyser **svagast tillsammans**.
+
+**Svar b):** Lamporna 2, 3 och 4 (alla lika svagt).
+
+**c)** När lampa 3 går sönder bryts hela den undre grenen — ingen ström kan längre gå genom lamporna 2, 3 och 4. Den övre grenen påverkas inte: lampa 1 sitter fortfarande direkt mellan batteriets poler och får samma spänning som tidigare. Strömmen genom lampa 1 är därför oförändrad, och **lampa 1 lyser exakt som förut**.
+
+**Svar c):** Lampa 1 lyser oförändrat.
+
+**Generell slutsats:** Parallella grenar är oberoende av varandra — det som händer i en gren påverkar inte spänningen över de andra. Om en gren bryts försvinner bara den grenens bidrag till totalströmmen, men de övriga grenarna fortsätter som om inget hänt. Det är därför parallellkoppling är så vanlig i elnät: man vill inte att en trasig komponent ska påverka resten.`,
         },
     ],
 };

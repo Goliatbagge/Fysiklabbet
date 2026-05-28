@@ -31,6 +31,63 @@ tydlig följd (även om det "känns" lite trixigt), ska den vara N2 — N3 är
 reserverat för uppgifter som *kvalitativt* sticker ut i komplexitet. Hellre
 ingen N3 än en N3 som egentligen är en lätt N2.
 
+## ⚠️ Vad gör en uppgift till Nivå 3 (LÄS DETTA — vanligt fel)
+
+**Den vanligaste miss-kalibreringen är att skriva N3 som egentligen är N2.**
+En *lång linjär kedja* av insättningar (räkna ut A, sätt in i B, sätt in i C,
+svara) är **N2 — inte N3** oavsett hur många steg den har. "Tre formler i
+följd" räcker INTE för N3.
+
+En uppgift är Nivå 3 om den uppfyller **minst ett** av följande (verifierat
+mot `Uppgifter/Fysik 1/Uppgifter Impuls 1 A-nivå Nivå 3.pdf`, ellära s. 346–347):
+
+1. **Ekvationssystem / obekant som inte kan lösas direkt.** Två obekanta,
+   andragradsekvation, eller en storhet som bara kan fås genom att ställa
+   upp och lösa ekvationer (ej ren insättning). *Ex: känd summa + produkt
+   av två resistanser → andragradsekvation.*
+2. **Icke-uppenbar struktur som måste genomskådas först.** Bryggkoppling
+   (potential mellan två spänningsdelares mittpunkter — serie/parallell-
+   förenkling fungerar INTE), flerbatterislinga (två emf i samma slinga,
+   Kirchhoffs spänningslag), nollpunkt (var blir kraften/fältet noll).
+   *Ex 9101, 9104, 9105, 9106.*
+3. **Klassisk fälla** där den naiva metoden ger fel svar. *Ex: en tråd som
+   sträcks dubbelt så lång — arean halveras (volymen konstant) så R fyrdubblas;
+   projektilrörelse i tvärfält; sista sekunden av fritt fall.*
+4. **≥3 olika konceptområden kombineras** (inte tre formler ur *samma*
+   område). *Ex 998: inre resistans + R=ρl/A + effekt + värme mcΔT. Ex:
+   värmeelement → P=U²/R → E=Pt → mcΔT.*
+5. **Resonemang / bevis / "visa att" / design utan färdig mall.** *Ex 9106
+   "visa att ingen ström går genom motståndet" (balansvillkor), 9103 "koppla
+   5 motstånd så att R_tot = 125 Ω", härledning av en formel.*
+6. **Proportionalitets-/kvotresonemang där obekanta måste strykas.** Bilda
+   kvot *innan* insättning så att gemensamma okända faktorer försvinner.
+   *Ex: elektron vs proton genom samma spänning → v ∝ 1/√m; sten kastad med
+   4v₀ → höjd (h ∝ v²).*
+
+**Demoterings-testet:** Fråga "kan en elev lösa detta genom att identifiera
+formlerna och sätta in i tur och ordning, utan att fundera på *strukturen*?"
+Är svaret ja → det är N2. N3 ska kräva en *insikt* (genomskåda strukturen,
+ställa upp ekvationssystem, se fällan, stryka obekanta) innan räkningen ens
+kan börja.
+
+**⚠️ Beräkningssvårighet räknas INTE som N3.** Eleverna har digitala
+hjälpmedel (CAS/grafräknare), så det är *rutin* att logaritmera fram en
+obekant ur en exponent, invertera en funktion, eller lösa en andragrads-
+ekvation numeriskt. En uppgift vars enda svårighet är sådan räkning är **N2,
+inte N3** — t.ex. "bestäm halveringstiden ur två aktiviteter" (lös ut
+exponenten med log) är N2. Det som lyfter till N3 är den *konceptuella/
+strukturella insikten som krävs för att ställa upp problemet*, inte hur
+jobbig algebran/aritmetiken blir efteråt. (Andragradsekvationen i 7.7 är N3
+för att *insikten* "summa + produkt → rötter till $x^2-Sx+P=0$" är poängen —
+inte för att lösa ekvationen.) Genuint avancerat inom t.ex. kärnfysik är
+flerstegs-korsdomän som *aktivitet → antal kärnor → vägbar massa* (via
+Avogadro) eller dos-från-källa-beräkningar — inte att invertera
+sönderfallslagen.
+
+A-nivå-genrer i hela PDF:n: bryggkretsar och flerbatterikretsar, två obekanta,
+trigonometrisk vektoruppdelning i 2D (x-led/y-led var för sig), nollpunkts-
+problem, modellering/uppskattning ("hur många …"), härledningar, fällor.
+
 ## Kalibrering mot riktiga läromedel
 
 Svårighetsnivåerna ska matcha riktiga läromedel:
@@ -55,6 +112,58 @@ kan testa samma koncept?* Vattentorn istället för akvarie, bromsok istället
 för domkraft, isberg istället för båt. Konceptet är upphovsrättsfritt —
 själva scenariot/inramningen är där risken finns både juridiskt och
 pedagogiskt.
+
+### Kalibrering Fysik 2 (`Uppgifter/Fysik 2/`)
+
+Tre PDF:er — `Nivå 1.pdf` (★☆☆), `Nivå 2.pdf` (★★☆), `Nivå 3.pdf` (★★★) —
+med exempel på respektive nivå för Fysik 2 (Impuls Fysik 2). **Grundprincipen
+är densamma som för Fysik 1** (se "Vad gör en uppgift till Nivå 3" ovan):
+N3 = konceptuell/strukturell insikt, INTE beräkningstyngd; digitala hjälpmedel
+gör log/andragrad/inversering rutin. Men *genrerna* skiljer sig p.g.a.
+innehållet. Konkretiserat för Fysik 2:
+
+- **Nivå 1 (E):** En formel, direkt insättning (ev. efter omvandling eller
+  omformning). T.ex. $\omega = 2\pi/T$, $F = mv^2/r$ (med km/h → m/s),
+  $M = F\cdot l$, $v = f\lambda$, pendelns/fjäderns period, $I = P/A$,
+  decibel ur formel, $\mathbb{E} = U/d$, $F = BIl$. Även ren begrepps-
+  identifikation (centripetalkraftens riktning, "vilka påståenden stämmer").
+
+- **Nivå 2 (C):** 2–3 formler/steg i följd; inte självklart vilka. T.ex.
+  centripetalacceleration på ekvatorn ($T \to \omega \to a$), kaströrelse
+  "klarar han ravinen?" (jämför falltid och horisontell sträcka),
+  momentjämvikt "välter plankan?", växelströmsreaktans + ström,
+  fältsuperposition från två ledare, induktion ur flödesgraf,
+  Stefan–Boltzmann-effekt, gitter-våglängder, doppler, svävning, stående
+  våg i rör. **En *kort/standard* härledning är N2** (t.ex. visa att
+  kastbanan är en parabel är ★★☆ i boken — inte ★★★).
+
+- **Nivå 3 (A):** kräver en *insikt/struktur* innan räkningen. Fysik 2-genrer:
+  - **Jämviktssystem med moment OCH kraft samtidigt:** stege mot vägg utan
+    väggfriktion, bom/lykta i wire med vinkel, flaggstång (flera ekvationer).
+  - **Kombinera ≥2 huvudprinciper:** gravitation + cirkelrörelse
+    (geostationär satellit, "hur snabb rotation kastar av föremål"), energi +
+    cirkeldynamik (pendel-maxvinkel innan tråd brister), accelererad laddning
+    + cirkelbana (*e/m*-bestämning), hastighetsväljare + avböjning
+    (masspektrometer → jonmassa).
+  - **Kaströrelse med extra villkor:** nå precis över nätet/staketet, kast
+    från höjd (andragradare i tiden), två kastvinklar med förklaring.
+  - **Avläsa LUTNING/area på en KRÖKT graf:** flöde→inducerad spänning
+    (lutning på krökt flödesgraf), RL-strömgraf, pendelns trådkraft-graf.
+  - **Kvot-/proportionalitetsresonemang där obekanta stryks:** fjäder med ny
+    massa *och* ny konstant *och* ny utdragning, motions-EMK ∝ falltid,
+    kulstöt på månen.
+  - **Flerlags-kedjor i modern fysik:** svartkropp (Wien + Stefan–Boltzmann +
+    invers kvadrat / strålningsjämvikt), foton + utträdesarbete + de Broglie,
+    parbildning + annihilation upprepad, röntgen + Bragg.
+  - **Icke-triviala härledningar:** konisk pendels periodtid, banklutnings-
+    vinkel, inducerad spänning som funktion av tiden.
+  - **"Fälla"/insiktsvillkor:** svävningarnas återkomst (123 snabba = 122
+    långsamma svängningar), maxvinkel innan brott.
+
+  Nytt jämfört med Fysik 1: cirkelrörelse-*dynamik*, samtidig moment+kraft-
+  jämvikt, fältkombinationer (masspektrometer, *e/m*), våginterferens-
+  geometri och svartkropps-kedjor. Och: en kort härledning kan vara N2 i
+  Fysik 2 (parabelbanan) — det är härledningens *komplexitet* som avgör.
 
 ## Antal per avsnitt
 
@@ -149,6 +258,15 @@ blandkoppling, mätarplacering, Kirchhoff-resonemang — ska schemat
 till tre lampor på rad"). Att läsa av ett kopplingsschema är en
 kärnfärdighet i kursen och en obligatorisk del av nationella prov.
 
+> **⚠️ Gäller även potentialvandring, bryggkopplingar och flerbatteri-
+> kretsar.** Frestelsen att beskriva dessa i text (eftersom de är svårare
+> att rita) är just där det blir fel. En potentialvandringsuppgift utan
+> schema med jordning och utsatta nodbeteckningar (A, B, C, P, Q) är inte
+> komplett — eleven ska *läsa av* var jordningen sitter och vandra i den
+> ritade kretsen. Använd `makeBridge(opts)` för bryggor/potentialvandring
+> (stödjer jordningssymbol och nodetiketter); se kommentaren ovanför den
+> funktionen i `data/ovningar.js`.
+
 **Verktyg**: helpern `makeCircuit(opts)` i `data/ovningar.js` genererar
 kopplingsscheman i svensk lärobokstil (IEC-symboler). Komponenter:
 resistor (rektangel), glödlampa (cirkel med kryss), batteri (lång + kort
@@ -241,6 +359,64 @@ layoutkrav. För kretsar utan parallellsektion blir resultatet typiskt
 2. Ledning genom batteri — ledningen ritas obruten under batteriet, så
    det ser ut som strömmen "kortsluter" själva batteriet. Bryt ledningen
    exakt i gapet mellan + och − strecket.
+
+## Figurer ska ritas, inte beskrivas (mekanikscener)
+
+> **⚠️ HUVUDREGEL.** En uppgift om en *rumslig eller geometrisk* uppställning
+> — sned kast, hävstång/kraftmoment, tippande kropp, cirkelrörelse, lutning,
+> pendel, gunga, loop — ska ha en **figur som illustrerar problemet**, inte
+> bara en textbeskrivning. Att läsa av en figur (vinklar, avstånd, riktningar,
+> krafter) är en kärnfärdighet och en obligatorisk del av nationella prov.
+> Lägg in figuren där det är möjligt; hoppa bara över rent numeriska
+> uppgifter utan rumsligt innehåll (t.ex. "$f = 1/T$, beräkna *T*").
+
+**Verktyg** (inline-SVG-helpers i `data/ovningar.js`, samma pappersstil som
+`makeForceDiagram`). Anropas från question/solution-strängarna med
+`${...}`-interpolation — det är vanlig JS, så **ingen** backslash-dubbling
+(helpers genererar SVG, inte KaTeX):
+
+| Helper | Scen | Avsnitt |
+| --- | --- | --- |
+| `makeProjectile` | kaströrelse: parabel, vinkel, mur/torn (`kind: 'angle'`/`'horizontal'`) | 1.6 |
+| `makeConicalPendulum` | konisk pendel: tråd, vinkel, banradie, höjd, krafter | 1.5, 1.8 |
+| `makeLever` | hävstång/gungbräda/överhäng på kil eller kant, laster + mått | 1.1, 1.2 |
+| `makeTippingBox` | tippande/vältande rätblock med tyngd, tryckkraft, friktion | 1.2 |
+| `makeTorqueArm` | kraftmoment-arm/skiftnyckel med vinkel och hävarm | 1.1 |
+| `makeCircularPath` | cirkelbana ovanifrån: radie, tangentfart, centripetalpil | 1.3, 1.4 |
+| `makeCrest` | backkrön (sidvy) med *N* och *F*_G | 1.4 |
+| `makeBankedCurve` | doserad kurva (tvärsnitt) med vinkel och kraftuppdelning | 1.4 |
+| `makeLoop` | vertikal loop med vagn, radie, krafter i toppen | 1.7 |
+| `makeSwing` | gunga/pendel: svängbåge, utgångsvinkel, fallhöjd, krafter | 1.7 |
+| `makeLadder` | stege mot vägg med vinkel och (i lösningen) krafter | 1.1 |
+| `makeClock` | analog urtavla (tim-/minutvisare) | 1.3 |
+
+Se kommentaren ovanför varje funktion för fullständigt API.
+
+**Avslöja aldrig svaret i figuren.** Är en vinkel/kraft/sträcka det sökta
+ska den ritas med ett **symboliskt** värde (`'α'`, `'?'`, `'d = ?'`) eller
+med en *annan* (icke-svars-)vinkel — aldrig med facit-värdet utsatt.
+Exempel: doseringsvinkeln (svar $30^\circ$) ritas som `α` vid en godtycklig
+lutning; stegens kraftbild ritas **utan** krafter i frågan och **med** i
+lösningen (eleven ska själv identifiera krafterna).
+
+**Krafter i fråga kontra lösning.** När poängen är att *genomskåda* vilka
+krafter som verkar (stege, dosering) → rita scenen utan kraftpilar i frågan
+och lägg den kraftannoterade versionen i lösningsförslaget. När krafterna är
+given uppställning (backkrön, gunga i lägsta punkten) får de visas i frågan.
+
+**Etiketter får inte ligga på linjer eller andra figurdelar.** Värden och
+beteckningar (mått, krafter, vinklar) ska offsettas **vinkelrätt ut** från
+den linje/arm/kropp de hör till — aldrig placeras ovanpå den. Den vita halon
+bakom text (`sceneText`) är ett *skyddsnät* för oundvikliga korsningar med
+*tunna* hjälplinjer, inte en ursäkt för att lägga text på en tjock arm, balk
+eller kontur. Var särskilt försiktig med **diagonala** armar/stegar/trådar:
+en enkel lodrät offset hamnar då mitt på linjen — offsetta i stället längs
+linjens normal (`(-sin θ, -cos θ)`-riktningen).
+
+**Granska renderingen.** SVG:erna sanity-testas inte av byggsteget. Öppna
+`katalog.html` (eller en tillfällig preview-sida som anropar helpers) och
+kontrollera att inget överlappar, att etiketter är läsbara och att geometrin
+stämmer — på både bred och smal skärm.
 
 ## Flervalsfrågor
 

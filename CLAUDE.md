@@ -141,6 +141,16 @@ math. Rätt: `($m = 150\ \mathrm{g}$)` i md, `($m = 150\\ \\mathrm{g}$)` i JS.
 Stanna alltid upp vid "(*m* = …)", "(*V* = …)", "(*t* = …)"-mönster och
 pakka hela parentesen i math-block.
 
+4. **Öppningsparentes direkt före inline-formel** — `($q_e = …$)`. KaTeX
+   renderar formeln som inline-block, så webbläsaren får bryta raden mellan
+   `(` och formeln → `(` blir ensam kvar i radslutet. **Detta hanteras numera
+   automatiskt** av `restoreMath()` i `katalog.html`, som limmar ihop `(` med
+   den efterföljande inline-formeln i en `.math-paren`-nowrap-span (CSS i
+   `styles-laborans.css`). Du behöver alltså *inte* göra något särskilt i
+   md/JS — men **rör inte** den regeln eller CSS-klassen utan att förstå
+   detta. Skriver du rå inline-HTML/SVG (utanför markdown-pipelinen) gäller
+   inte automatiken: lägg då parentesen *inuti* formeln, `$(q_e = …$`.
+
 ### JS-strängar: dubbla alla backslash
 
 I `data/ovningar.js` (och andra `.js`-filer där KaTeX-källa ligger i
@@ -338,6 +348,14 @@ Se [`OVNINGAR.md`](OVNINGAR.md) för komplett guide:
 - Nivåer N1/N2/N3 och kalibrering mot Impuls Fysik 1 / kursprov
 - Antal per avsnitt (3 + 2 + 1) och formel-täckning
 - Diagram-helper `makeDiagram` och kraftvektor-helper `makeForceDiagram`
+- **Figurer ska ritas, inte beskrivas** — uppgifter med rumslig/geometrisk
+  uppställning (kast, hävstång, cirkelrörelse, lutning, pendel, loop) ska ha
+  en illustrerande figur. Mekanik-helpers: `makeProjectile`,
+  `makeConicalPendulum`, `makeLever`, `makeTippingBox`, `makeTorqueArm`,
+  `makeCircularPath`, `makeCrest`, `makeBankedCurve`, `makeLoop`, `makeSwing`,
+  `makeLadder`, `makeClock`. Avslöja aldrig svaret i figuren. Etiketter
+  (värden/beteckningar) får aldrig ligga på linjer/figurdelar — offsetta
+  vinkelrätt ut. Granska alltid renderingen (skärmbild) före klart.
 - Flervalsformat (`choices` + `correct`)
 - Lösningsmall (formel → bracket → beräkning → svar)
 

@@ -688,6 +688,7 @@ function makeCircuit(opts) {
     const branchSegW = 60;
     const branchEdgeMargin = 36;
     let parallelInset = 0;
+    let parallelNaturalW = 0;
     if (pIdx >= 0) {
         let maxBranchInnerW = 0;
         for (const br of comps[pIdx].branches) {
@@ -697,18 +698,38 @@ function makeCircuit(opts) {
             const inner = (br.length - 1) * branchSegW + firstHalf + lastHalf;
             maxBranchInnerW = Math.max(maxBranchInnerW, inner);
         }
-        const parallelNaturalW = maxBranchInnerW + 2 * branchEdgeMargin;
+        parallelNaturalW = maxBranchInnerW + 2 * branchEdgeMargin;
         const slotPW = pSlots * segW;
         parallelInset = Math.max(0, (slotPW - parallelNaturalW) / 2);
     }
 
+    // Ren parallellkrets (inga seriekomponenter före/efter parallell-zonen):
+    // ramens sidoräls ska sammanfalla med parallell-sektionens noder, så att
+    // batteriet sitter DIREKT i bottenledningen mellan grenarna — inga döda
+    // ledningsslingor ut mot ramkanten. Kretsar med seriekomponenter (t.ex.
+    // R₃ i serie med en parallellkoppling) behåller den bredare ramen.
+    const isPureParallel = pIdx >= 0 && before === 0 && after === 0;
+
     // W krymps med 2*parallelInset eftersom parallel-zonen blir smalare.
-    const W = opts.width != null ? opts.width : Math.max(300, padX * 2 + totalSlots * segW + 56 - 2 * parallelInset);
+    let W = opts.width != null ? opts.width : Math.max(300, padX * 2 + totalSlots * segW + 56 - 2 * parallelInset);
     const topY = padTop;
-    const botY = padTop + 110 + (nBr - 1) * branchGapY;
+    // botY: i parallellkretsar ska luften ner till batteriledningen vara
+    // lika stor som mellanrummet mellan grenarna (branchGapY) — annars blir
+    // det onödigt mycket "luft" under understa grenen. Ren seriekrets (ingen
+    // parallel-sektion) behåller sin tidigare rektangelhöjd (110 px).
+    const botY = pIdx >= 0
+        ? padTop + nBr * branchGapY
+        : padTop + 110;
     const H = botY + padBot;
-    const railLeft = padX + 4;
-    const railRight = W - padX - 4;
+    let railLeft = padX + 4;
+    let railRight = W - padX - 4;
+    if (isPureParallel) {
+        // Räls = parallell-sektionens noder. Bredden = grenarnas naturliga
+        // bredd (komponenter + branchEdgeMargin på var sida). Batteriet
+        // hamnar i mitten (bx = W/2) precis mellan rälsarna.
+        railRight = railLeft + parallelNaturalW;
+        W = railRight + padX + 4;
+    }
 
     // halfW för bounding-box-centrering. Parallel-elementets effektiva
     // halv-bredd är efter inset-krympningen.
@@ -769,8 +790,9 @@ function makeCircuit(opts) {
         // pStartX/pEndX dras in med parallelInset så förgreningsnoderna
         // hamnar precis vid branchEdgeMargin från första/sista komponent
         // i den bredaste grenen.
-        const pStartX = sx(before) - segW / 2 + parallelInset;
-        const pEndX = sx(before + pSlots - 1) + segW / 2 - parallelInset;
+        let pStartX = sx(before) - segW / 2 + parallelInset;
+        let pEndX = sx(before + pSlots - 1) + segW / 2 - parallelInset;
+        if (isPureParallel) { pStartX = railLeft; pEndX = railRight; }
         for (let bi = 0; bi < nBr; bi++) {
             const branch = par.branches[bi];
             const by = bi === 0 ? topY : topY + branchGapY * bi;
@@ -823,6 +845,926 @@ function makeCircuit(opts) {
     }
 
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="max-width:${W}px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">${body}</svg>`;
+}
+
+// makeBridge(opts) — ritar en bryggkoppling (Wheatstone-stil) i samma
+// lärobokstil som makeCircuit. Två spänningsdelargrenar mellan vänster nod
+// (A = hela vänsterrälsen) och höger nod (B = högerrälsen), med ett batteri
+// över dem på toppledningen. Mittnoderna P (övre grenen) och Q (undre grenen)
+// märks ut med punkt + bokstav. Använd för potentialvandring, "potential/
+// spänning mellan P och Q" och bryggproblem — där serie/parallell-förenkling
+// INTE räcker.
+//
+// opts = {
+//   source: { label:'U', value:'12 V' },                       // batteri på toppen
+//   upper:  [ {type:'resistor',label:'R_1',value:'25 Ω'}, {…R_2} ],  // gren A–P–B
+//   lower:  [ {…R_3}, {…R_4} ],                                 // gren A–Q–B
+//   bridge: {type:'resistor'|'voltmeter'|'wire', …} | null,     // mellan P och Q
+//   pLabel: 'P', qLabel: 'Q',
+//   ground: 'A' | 'B' | null,    // jordningssymbol (0 V) i nedre vänster/höger hörn
+//   width: number                // valfri (default 330)
+// }
+function makeBridge(opts) {
+    const stroke = '#0f1620';
+    const wireW = 1.8;
+    const batGapH = 4;
+    const subs = { '0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉' };
+    const UPRIGHT = { bulb: true, ammeter: true, voltmeter: true, switch: true };
+    function fmtVar(s, upright) {
+        const io = upright ? '' : '<tspan font-style="italic">';
+        const ic = upright ? '' : '</tspan>';
+        const m = s.match(/^([A-Za-zα-ωΑ-Ω])_(\w+)$/);
+        if (m) {
+            const letter = m[1], sub = m[2];
+            if (/^\d+$/.test(sub)) return `${io}${letter}${ic}${sub.split('').map(c => subs[c] || c).join('')}`;
+            return `${io}${letter}${ic}<tspan baseline-shift="sub" font-size="0.72em">${sub}</tspan>`;
+        }
+        if (/^[A-Za-z]$/.test(s)) return `${io}${s}${ic}`;
+        return s;
+    }
+    function fmtLabel(c, upright) {
+        if (!c) return '';
+        const lbl = c.label ? fmtVar(c.label, upright) : '';
+        const val = c.value || '';
+        if (lbl && val) return `${lbl} = ${val}`;
+        return lbl || val;
+    }
+    function symResistor(x, y)  { return `<rect x="${x - 20}" y="${y - 8}" width="40" height="16" fill="#fff" stroke="${stroke}" stroke-width="${wireW}"/>`; }
+    function symResistorV(x, y) { return `<rect x="${x - 8}" y="${y - 20}" width="16" height="40" fill="#fff" stroke="${stroke}" stroke-width="${wireW}"/>`; }
+    function symBulb(x, y) { const r = 12, d = r * 0.707; return `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${stroke}" stroke-width="${wireW}"/><line x1="${x - d}" y1="${y - d}" x2="${x + d}" y2="${y + d}" stroke="${stroke}" stroke-width="${wireW}"/><line x1="${x - d}" y1="${y + d}" x2="${x + d}" y2="${y - d}" stroke="${stroke}" stroke-width="${wireW}"/>`; }
+    function symMeter(x, y, letter) { const r = 13; return `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" stroke="${stroke}" stroke-width="${wireW}"/><text x="${x}" y="${y + 5}" font-size="15" font-weight="600" fill="${stroke}" text-anchor="middle">${letter}</text>`; }
+    function symBatteryH(x, y) { return `<line x1="${x - batGapH}" y1="${y - 14}" x2="${x - batGapH}" y2="${y + 14}" stroke="${stroke}" stroke-width="2.6"/><line x1="${x + batGapH}" y1="${y - 8}" x2="${x + batGapH}" y2="${y + 8}" stroke="${stroke}" stroke-width="2.6"/>`; }
+    function wire(x1, y1, x2, y2) { return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${stroke}" stroke-width="${wireW}" stroke-linecap="square"/>`; }
+    function dot(x, y) { return `<circle cx="${x}" cy="${y}" r="2.6" fill="${stroke}"/>`; }
+    function text(x, y, t, anchor) { return `<text x="${x}" y="${y}" font-size="16" fill="${stroke}" text-anchor="${anchor || 'middle'}">${t}</text>`; }
+    function gnd(x, y) {
+        return wire(x, y, x, y + 14) +
+               `<line x1="${x - 11}" y1="${y + 14}" x2="${x + 11}" y2="${y + 14}" stroke="${stroke}" stroke-width="${wireW}"/>` +
+               `<line x1="${x - 7}" y1="${y + 18}" x2="${x + 7}" y2="${y + 18}" stroke="${stroke}" stroke-width="${wireW}"/>` +
+               `<line x1="${x - 3}" y1="${y + 22}" x2="${x + 3}" y2="${y + 22}" stroke="${stroke}" stroke-width="${wireW}"/>`;
+    }
+    function drawComp(c, x, y, vertical) {
+        if (!c) return '';
+        switch (c.type) {
+            case 'resistor':  return vertical ? symResistorV(x, y) : symResistor(x, y);
+            case 'bulb':      return symBulb(x, y);
+            case 'ammeter':   return symMeter(x, y, 'A');
+            case 'voltmeter': return symMeter(x, y, 'V');
+            default:          return '';
+        }
+    }
+
+    const W = opts.width != null ? opts.width : 330;
+    const xL = 46, xR = W - 46, xM = (xL + xR) / 2;
+    const yT = 42, yU = 104, yLo = 176;
+    const grd = opts.ground || null;
+    const H = yLo + (grd ? 56 : 40);
+
+    let b = '';
+    // Vänster- och högerräls (noderna A respektive B)
+    b += wire(xL, yT, xL, yLo);
+    b += wire(xR, yT, xR, yLo);
+    // Toppledning med batteri
+    if (opts.source) {
+        b += wire(xL, yT, xM - batGapH, yT);
+        b += wire(xM + batGapH, yT, xR, yT);
+        b += symBatteryH(xM, yT);
+        const lbl = fmtLabel(opts.source, false);
+        if (lbl) b += text(xM, yT - 16, lbl);
+    } else {
+        b += wire(xL, yT, xR, yT);
+    }
+    // Övre grenen (A–P–B) och undre grenen (A–Q–B, sammanfaller med nedre kant)
+    b += wire(xL, yU, xR, yU);
+    b += wire(xL, yLo, xR, yLo);
+    const xU0 = (xL + xM) / 2, xU1 = (xM + xR) / 2;
+    const u = opts.upper || [], lo = opts.lower || [];
+    if (u[0]) { b += drawComp(u[0], xU0, yU); const l = fmtLabel(u[0], UPRIGHT[u[0].type]); if (l) b += text(xU0, yU - 15, l); }
+    if (u[1]) { b += drawComp(u[1], xU1, yU); const l = fmtLabel(u[1], UPRIGHT[u[1].type]); if (l) b += text(xU1, yU - 15, l); }
+    if (lo[0]) { b += drawComp(lo[0], xU0, yLo); const l = fmtLabel(lo[0], UPRIGHT[lo[0].type]); if (l) b += text(xU0, yLo + 26, l); }
+    if (lo[1]) { b += drawComp(lo[1], xU1, yLo); const l = fmtLabel(lo[1], UPRIGHT[lo[1].type]); if (l) b += text(xU1, yLo + 26, l); }
+    // Bryggan mellan P och Q (valfri komponent; saknas = öppen, t.ex. ideal voltmeter)
+    if (opts.bridge) {
+        b += wire(xM, yU, xM, yLo);
+        const mid = (yU + yLo) / 2;
+        b += drawComp(opts.bridge, xM, mid, true);
+        const l = fmtLabel(opts.bridge, UPRIGHT[opts.bridge.type]);
+        if (l) b += text(xM + 22, mid + 5, l, 'start');
+    }
+    // Mittnoderna P och Q
+    b += dot(xM, yU) + dot(xM, yLo);
+    b += text(xM - 11, yU - 9, opts.pLabel || 'P', 'end');
+    b += text(xM - 11, yLo + 18, opts.qLabel || 'Q', 'end');
+    // Jordning (0 V)
+    if (grd === 'A') { b += gnd(xL, yLo); b += text(xL, yLo + 48, '0 V'); }
+    else if (grd === 'B') { b += gnd(xR, yLo); b += text(xR, yLo + 48, '0 V'); }
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" style="max-width:${W}px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">${b}</svg>`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  MEKANIK-FIGURER (Fysik 2, kapitel 1)
+//
+//  Inline-SVG-helpers som ILLUSTRERAR mekanikuppgifter: kaströrelse,
+//  kraftmoment/hävstång, tippande kroppar, cirkulär rörelse, konisk
+//  pendel, gunga och loop. Samma pappersstil som makeForceDiagram:
+//  vit botten, bläck #0f1620, accent-röd #c8324a för krafter/hastighet,
+//  grå #8a8579 för hjälp- och måttlinjer, Poppins. ALDRIG title case.
+//
+//  REGEL: en uppgift om en rumslig/geometrisk uppställning (kast, kurva,
+//  hävstång, lutning, pendel) ska ha en figur — beskriv den inte bara i
+//  text. Avslöja aldrig svaret i figuren (okänd vinkel/kraft ritas inte
+//  ut med sitt värde). Se OVNINGAR.md, "Figurer ska ritas, inte beskrivas".
+//
+//  ⚠️ ETIKETTER FÅR INTE LIGGA PÅ LINJER/FIGURDELAR. Värden och
+//  beteckningar offsettas vinkelrätt UT från den arm/balk/linje de hör
+//  till — aldrig ovanpå den. Den vita halon (sceneText) är ett skyddsnät
+//  för korsningar med TUNNA hjälplinjer, inte en ursäkt att lägga text på
+//  en tjock arm/kontur. Se särskilt upp med diagonala armar/stegar där en
+//  enkel lodrät offset annars hamnar mitt på linjen.
+// ═══════════════════════════════════════════════════════════════════
+
+const SCENE_INK = '#0f1620';
+const SCENE_ACCENT = '#c8324a';
+const SCENE_MUTED = '#8a8579';
+const SCENE_BLUE = '#1c3d6b';
+const SCENE_SUBS = { '0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉' };
+
+function sceneWrap(W, H, body) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${(+W).toFixed(1)} ${(+H).toFixed(1)}" style="max-width:${Math.round(W)}px;width:100%;height:auto;display:block;margin:16px auto;background:#fff;border:1px solid rgba(15,22,32,0.12);border-radius:6px;font-family:Poppins,sans-serif">${body}</svg>`;
+}
+
+// Kursiv variabel + subscript: 'F_G' → kursiv F + rak nedsänkt G,
+// 'v_0' → v₀, 'mg' → kursivt. Enheter/tal lämnas orörda.
+function sceneVar(s) {
+    s = String(s);
+    const m = s.match(/^([A-Za-zα-ωΑ-Ω])_(\w+)$/);
+    if (m) {
+        const letter = m[1], sub = m[2];
+        if (/^\d+$/.test(sub)) return `<tspan font-style="italic">${letter}</tspan>${sub.split('').map(c => SCENE_SUBS[c] || c).join('')}`;
+        return `<tspan font-style="italic">${letter}</tspan><tspan baseline-shift="sub" font-size="0.72em">${sub}</tspan>`;
+    }
+    if (/^[A-Za-zα-ωΑ-Ω]+$/.test(s)) return `<tspan font-style="italic">${s}</tspan>`;
+    return s;
+}
+
+// Hela etiketten: variabeldelen före ' = ' kursiveras, resten (värde +
+// enhet) lämnas rak. 'F_G = 25 N' → kursiv F, sub G, " = 25 N".
+function sceneQty(s) {
+    s = String(s);
+    const i = s.indexOf(' = ');
+    if (i >= 0) return sceneVar(s.slice(0, i)) + ' = ' + s.slice(i + 3);
+    return sceneVar(s);
+}
+
+function sceneText(x, y, t, o) {
+    o = o || {};
+    // Vit halo bakom texten (paint-order: stroke) så etiketter alltid är
+    // läsbara även när de ligger över en linje/kurva. Stäng av med halo:false.
+    const halo = o.halo === false ? '' : ` stroke="#fff" stroke-width="3" stroke-linejoin="round" paint-order="stroke"`;
+    return `<text x="${(+x).toFixed(1)}" y="${(+y).toFixed(1)}" font-family="Poppins,sans-serif" font-size="${o.size || 14}" fill="${o.color || SCENE_INK}" text-anchor="${o.anchor || 'middle'}" dominant-baseline="${o.baseline || 'middle'}"${o.weight ? ` font-weight="${o.weight}"` : ''}${halo}>${t}</text>`;
+}
+
+// Pil från (x1,y1) till (x2,y2). o.color, o.width, o.dash, o.head.
+function sceneArrow(x1, y1, x2, y2, o) {
+    o = o || {};
+    const color = o.color || SCENE_ACCENT;
+    const w = o.width || 2.4;
+    const dash = o.dash ? ` stroke-dasharray="${o.dash}"` : '';
+    const ang = Math.atan2(y2 - y1, x2 - x1);
+    const head = o.head || 9;
+    const hx1 = x2 - head * Math.cos(ang - Math.PI / 7);
+    const hy1 = y2 - head * Math.sin(ang - Math.PI / 7);
+    const hx2 = x2 - head * Math.cos(ang + Math.PI / 7);
+    const hy2 = y2 - head * Math.sin(ang + Math.PI / 7);
+    return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${color}" stroke-width="${w}"${dash} stroke-linecap="round"/>` +
+           `<polygon points="${x2.toFixed(1)},${y2.toFixed(1)} ${hx1.toFixed(1)},${hy1.toFixed(1)} ${hx2.toFixed(1)},${hy2.toFixed(1)}" fill="${color}"/>`;
+}
+
+// Måttlinje med dubbelpil (grå) + etikett. Vid lodräta mått roteras
+// etiketten 90° så den får plats i smalt utrymme.
+function sceneDim(x1, y1, x2, y2, label, o) {
+    o = o || {};
+    const color = SCENE_MUTED, head = 6;
+    const ang = Math.atan2(y2 - y1, x2 - x1);
+    function hd(x, y, a) {
+        const a1 = a - Math.PI / 7, a2 = a + Math.PI / 7;
+        return `<polygon points="${x.toFixed(1)},${y.toFixed(1)} ${(x - head*Math.cos(a1)).toFixed(1)},${(y - head*Math.sin(a1)).toFixed(1)} ${(x - head*Math.cos(a2)).toFixed(1)},${(y - head*Math.sin(a2)).toFixed(1)}" fill="${color}"/>`;
+    }
+    let s = `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${color}" stroke-width="1.3"/>`;
+    s += hd(x1, y1, ang + Math.PI) + hd(x2, y2, ang);
+    const vertical = Math.abs(y2 - y1) > Math.abs(x2 - x1);
+    if (vertical && o.rotate !== false) {
+        const lx = (x1 + x2) / 2 + (o.offX != null ? o.offX : -7);
+        const ly = (y1 + y2) / 2;
+        s += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" transform="rotate(-90 ${lx.toFixed(1)} ${ly.toFixed(1)})" font-family="Poppins,sans-serif" font-size="13" fill="${color}" text-anchor="middle" dominant-baseline="middle" stroke="#fff" stroke-width="3" stroke-linejoin="round" paint-order="stroke">${label}</text>`;
+    } else {
+        const mx = (x1 + x2) / 2 + (o.offX || 0);
+        const my = (y1 + y2) / 2 + (o.offY != null ? o.offY : -7);
+        s += sceneText(mx, my, label, { color, size: 13 });
+    }
+    return s;
+}
+
+// Skraffad marklinje från x0 till x1 på höjd y (mark nedanför).
+function sceneGround(x0, x1, y) {
+    let s = `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="${SCENE_INK}" stroke-width="1.6"/>`;
+    for (let xs = x0 + 6; xs < x1; xs += 12) {
+        s += `<line x1="${xs}" y1="${y}" x2="${xs - 7}" y2="${y + 8}" stroke="${SCENE_INK}" stroke-width="1"/>`;
+    }
+    return s;
+}
+
+// Vinkelbåge med etikett kring (cx,cy), radie r, från a0 till a1 (rad,
+// SVG-konvention med y nedåt). Grå hjälpfärg.
+function sceneAngleArc(cx, cy, r, a0, a1, label) {
+    const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
+    const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+    const large = Math.abs(a1 - a0) > Math.PI ? 1 : 0;
+    const sweep = a1 > a0 ? 1 : 0;
+    let s = `<path d="M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${r} ${r} 0 ${large} ${sweep} ${x1.toFixed(1)} ${y1.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.4" fill="none"/>`;
+    const am = (a0 + a1) / 2, lr = r + 13;
+    if (label) s += sceneText(cx + lr * Math.cos(am), cy + lr * Math.sin(am), label, { color: SCENE_MUTED, size: 13 });
+    return s;
+}
+
+// ── Kaströrelse (makeProjectile) ─────────────────────────────────────
+//
+// Ritar en kastbana (parabel) i pappersstil. Två lägen:
+//   kind: 'angle'      — sned kast från marken med given utgångsvinkel.
+//   kind: 'horizontal' — vågrätt kast från plattform/klippa/torn.
+//
+//   opts = {
+//     width,                 // default 480
+//     kind,                  // 'angle' | 'horizontal'
+//     // --- kind 'angle' ---
+//     angle,                 // utgångsvinkel i grader
+//     v0Label,               // 'v_0 = 18 m/s' (variabeln kursiveras)
+//     apex,                  // true → markera stighöjd (streckad lodlinje)
+//     apexLabel,             // default 'y_max'
+//     rangeLabel,            // måttlinje under hela kastvidden (t.ex. 'x_max')
+//     wall: { atFracX, hFrac, label },  // hinder: andel av kastvidd / av stighöjd
+//     // --- kind 'horizontal' ---
+//     platformH,             // klippans/tornets höjd i px (default 150)
+//     heightLabel,           // 'h = 10 m' (lodrät måttlinje vänster)
+//     distLabel,             // 'x = ?' (vågrät måttlinje längs marken)
+//     objLabel,              // valfri etikett vid startpunkten
+//   }
+function makeProjectile(opts) {
+    const W = opts.width || 480;
+    const padR = 40;
+    let body = '';
+
+    if (opts.kind === 'horizontal') {
+        const platformH = opts.platformH || 150;
+        const topY = 34;
+        const cliffLeft = 58, cliffRight = 108;
+        const R = W - cliffRight - padR - 10;
+        const groundY = topY + platformH;
+        const H = groundY + 46;
+        // klippa/torn
+        body += `<rect x="${cliffLeft}" y="${topY}" width="${cliffRight - cliffLeft}" height="${platformH}" fill="rgba(15,22,32,0.06)" stroke="${SCENE_INK}" stroke-width="1.6"/>`;
+        body += sceneGround(36, W - padR, groundY);
+        // kastbana y = topY + platformH * t²
+        let d = '';
+        const N = 30;
+        for (let i = 0; i <= N; i++) {
+            const t = i / N, x = cliffRight + R * t, y = topY + platformH * t * t;
+            d += (i === 0 ? 'M ' : 'L ') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+        }
+        body += `<path d="${d.trim()}" stroke="${SCENE_ACCENT}" stroke-width="2.2" fill="none" stroke-dasharray="6 4"/>`;
+        // startpunkt + vågrät hastighetspil
+        body += `<circle cx="${cliffRight}" cy="${topY}" r="6" fill="${SCENE_INK}"/>`;
+        body += sceneArrow(cliffRight, topY, cliffRight + 54, topY, { color: SCENE_ACCENT });
+        if (opts.v0Label) body += sceneText(cliffRight + 58, topY - 11, sceneQty(opts.v0Label), { color: SCENE_ACCENT, anchor: 'start', size: 15 });
+        if (opts.objLabel) body += sceneText(cliffRight - 4, topY - 14, opts.objLabel, { anchor: 'end', size: 12 });
+        // nedslag
+        const landX = cliffRight + R;
+        body += `<circle cx="${landX.toFixed(1)}" cy="${groundY}" r="3.5" fill="${SCENE_ACCENT}"/>`;
+        // höjdmått (lodrätt) vänster om klippan
+        if (opts.heightLabel) {
+            const hx = 44;
+            body += `<line x1="${hx - 2}" y1="${topY}" x2="${cliffLeft}" y2="${topY}" stroke="${SCENE_MUTED}" stroke-width="1" stroke-dasharray="4 3"/>`;
+            body += sceneDim(hx, topY, hx, groundY, opts.heightLabel, {});
+        }
+        // avståndsmått (vågrätt) längs marken
+        if (opts.distLabel) {
+            const dy = groundY + 24;
+            body += `<line x1="${cliffRight}" y1="${groundY}" x2="${cliffRight}" y2="${dy + 4}" stroke="${SCENE_MUTED}" stroke-width="0.8" stroke-dasharray="3 3"/>`;
+            body += `<line x1="${landX.toFixed(1)}" y1="${groundY}" x2="${landX.toFixed(1)}" y2="${dy + 4}" stroke="${SCENE_MUTED}" stroke-width="0.8" stroke-dasharray="3 3"/>`;
+            body += sceneDim(cliffRight, dy, landX, dy, opts.distLabel, {});
+        }
+        return sceneWrap(W, H, body);
+    }
+
+    // kind 'angle'
+    const padL = 46;
+    const angle = opts.angle != null ? opts.angle : 35;
+    const aRad = angle * Math.PI / 180;
+    const R = W - padL - padR;
+    let Hpx = R * Math.tan(aRad) / 4;
+    Hpx = Math.max(40, Math.min(170, Hpx));
+    const padTtop = 36;
+    const groundY = padTtop + Hpx;
+    const H = groundY + 48;
+    const launchX = padL, landX = padL + R;
+    // bana
+    let d = '';
+    const N = 40;
+    for (let i = 0; i <= N; i++) {
+        const t = i / N, x = padL + R * t, y = groundY - 4 * Hpx * t * (1 - t);
+        d += (i === 0 ? 'M ' : 'L ') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+    }
+    body += sceneGround(padL - 8, landX + 28, groundY);
+    body += `<path d="${d.trim()}" stroke="${SCENE_ACCENT}" stroke-width="2.2" fill="none" stroke-dasharray="6 4"/>`;
+    // hinder/mur
+    if (opts.wall) {
+        const wx = padL + R * opts.wall.atFracX;
+        const wallTop = groundY - (opts.wall.hFrac || 0.4) * Hpx;
+        body += `<rect x="${(wx - 5).toFixed(1)}" y="${wallTop.toFixed(1)}" width="10" height="${(groundY - wallTop).toFixed(1)}" fill="rgba(15,22,32,0.10)" stroke="${SCENE_INK}" stroke-width="1.4"/>`;
+        if (opts.wall.label) body += sceneText(wx, wallTop - 9, sceneQty(opts.wall.label), { size: 12, color: SCENE_INK });
+    }
+    // hastighetspil + vinkelbåge vid utgång
+    body += sceneArrow(launchX, groundY, launchX + 62 * Math.cos(aRad), groundY - 62 * Math.sin(aRad), { color: SCENE_ACCENT });
+    body += sceneAngleArc(launchX, groundY, 28, 0, -aRad, opts.angleLabel || (angle + '°'));
+    if (opts.v0Label) {
+        const lx = launchX + 62 * Math.cos(aRad) + 6, ly = groundY - 62 * Math.sin(aRad) - 8;
+        body += sceneText(lx, ly, sceneQty(opts.v0Label), { color: SCENE_ACCENT, anchor: 'start', size: 15 });
+    }
+    body += `<circle cx="${launchX}" cy="${groundY}" r="5" fill="${SCENE_INK}"/>`;
+    body += `<circle cx="${landX.toFixed(1)}" cy="${groundY}" r="3.5" fill="${SCENE_ACCENT}"/>`;
+    // stighöjd
+    if (opts.apex) {
+        const apX = padL + R / 2, apY = padTtop;
+        body += `<line x1="${apX.toFixed(1)}" y1="${apY}" x2="${apX.toFixed(1)}" y2="${groundY}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="5 4"/>`;
+        body += `<circle cx="${apX.toFixed(1)}" cy="${apY}" r="3" fill="${SCENE_ACCENT}"/>`;
+        body += sceneText(apX + 7, (apY + groundY) / 2, sceneQty(opts.apexLabel || 'y_max'), { color: SCENE_MUTED, anchor: 'start', size: 13 });
+    }
+    // kastvidd
+    if (opts.rangeLabel) {
+        const dy = groundY + 26;
+        body += sceneDim(launchX, dy, landX, dy, sceneQty(opts.rangeLabel), {});
+    }
+    return sceneWrap(W, H, body);
+}
+
+// ── Konisk pendel (makeConicalPendulum) ──────────────────────────────
+//
+// Sidvy av konisk pendel: tak, tråd i vinkel, kula som sveper i cirkel
+// (ritad som ellips, bakre halvan streckad). Visar valfritt trådlängd l,
+// vinkel, banradie r, höjd h under fästet och krafter (F_S längs tråden,
+// F_G nedåt).
+//
+//   opts = {
+//     width,                 // default 420
+//     angle,                 // trådens vinkel mot vertikalen (grader)
+//     stringLen,             // trådlängd i px (default 175)
+//     angleLabel,            // default '${angle}°'; sätt null för att dölja
+//     lLabel,                // 'l = 1,5 m' längs tråden
+//     rLabel,                // 'r = ...' (ritar streckad banradie)
+//     hLabel,                // 'h = ...' (höjd under fästet, längs lodlinjen)
+//     massLabel,             // text vid kulan (t.ex. 'm')
+//     forces,                // true → rita F_S längs tråden + F_G nedåt
+//   }
+function makeConicalPendulum(opts) {
+    const W = opts.width || 420;
+    const angle = opts.angle != null ? opts.angle : 30;
+    const aRad = angle * Math.PI / 180;
+    const Lpx = opts.stringLen || 175;
+    const cx = W * 0.45;
+    const pivotY = 30;
+    const ballX = cx + Lpx * Math.sin(aRad);
+    const ballY = pivotY + Lpx * Math.cos(aRad);
+    const rx = Lpx * Math.sin(aRad), ry = Math.max(10, rx * 0.26);
+    const H = ballY + ry + (opts.forces ? 74 : 40);
+    let body = '';
+    // tak
+    body += `<line x1="${cx - 74}" y1="${pivotY}" x2="${cx + 74}" y2="${pivotY}" stroke="${SCENE_INK}" stroke-width="1.6"/>`;
+    for (let xs = cx - 68; xs < cx + 74; xs += 12) body += `<line x1="${xs}" y1="${pivotY}" x2="${xs - 7}" y2="${pivotY - 8}" stroke="${SCENE_INK}" stroke-width="1"/>`;
+    // lodlinje (streckad) = höjden h
+    body += `<line x1="${cx}" y1="${pivotY}" x2="${cx}" y2="${ballY.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="5 4"/>`;
+    // cirkelbana som ellips: bakre (övre) halvan streckad, främre (nedre) hel
+    body += `<path d="M ${(cx - rx).toFixed(1)} ${ballY.toFixed(1)} A ${rx.toFixed(1)} ${ry.toFixed(1)} 0 0 0 ${(cx + rx).toFixed(1)} ${ballY.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.3" fill="none" stroke-dasharray="5 4"/>`;
+    body += `<path d="M ${(cx - rx).toFixed(1)} ${ballY.toFixed(1)} A ${rx.toFixed(1)} ${ry.toFixed(1)} 0 0 1 ${(cx + rx).toFixed(1)} ${ballY.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.3" fill="none"/>`;
+    // banradie (streckad) + etikett
+    if (opts.rLabel) {
+        body += `<line x1="${cx}" y1="${ballY.toFixed(1)}" x2="${ballX.toFixed(1)}" y2="${ballY.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="4 3"/>`;
+        body += sceneText((cx + ballX) / 2, ballY + 14, sceneQty(opts.rLabel), { color: SCENE_MUTED, size: 13 });
+    }
+    // tråd
+    body += `<line x1="${cx}" y1="${pivotY}" x2="${ballX.toFixed(1)}" y2="${ballY.toFixed(1)}" stroke="${SCENE_INK}" stroke-width="1.6"/>`;
+    body += `<circle cx="${cx}" cy="${pivotY}" r="3" fill="${SCENE_INK}"/>`;
+    // vinkel
+    if (opts.angleLabel !== null) {
+        const strAng = Math.atan2(Math.cos(aRad), Math.sin(aRad));
+        body += sceneAngleArc(cx, pivotY, 30, strAng, Math.PI / 2, opts.angleLabel || (angle + '°'));
+    }
+    // trådlängd (en bit nedanför mitten längs tråden)
+    if (opts.lLabel) { const t = 0.58; body += sceneText(cx + (ballX - cx) * t - 9, pivotY + (ballY - pivotY) * t, sceneQty(opts.lLabel), { color: SCENE_INK, anchor: 'end', size: 13 }); }
+    // höjd h (en bit ovanför mitten längs lodlinjen, så den inte krockar med l)
+    if (opts.hLabel) { const t = 0.42; body += sceneText(cx - 8, pivotY + (ballY - pivotY) * t, sceneQty(opts.hLabel), { color: SCENE_MUTED, anchor: 'end', size: 13 }); }
+    // kula
+    body += `<circle cx="${ballX.toFixed(1)}" cy="${ballY.toFixed(1)}" r="9" fill="${SCENE_INK}"/>`;
+    if (opts.massLabel) body += sceneText(ballX + 15, ballY, sceneVar(opts.massLabel), { anchor: 'start' });
+    // krafter
+    if (opts.forces) {
+        const tdx = cx - ballX, tdy = pivotY - ballY, tm = Math.hypot(tdx, tdy), tl = 54;
+        body += sceneArrow(ballX, ballY, ballX + tdx / tm * tl, ballY + tdy / tm * tl, { color: SCENE_ACCENT });
+        body += sceneText(ballX + tdx / tm * tl - 6, ballY + tdy / tm * tl - 9, sceneVar('F_S'), { color: SCENE_ACCENT, anchor: 'end' });
+        body += sceneArrow(ballX, ballY, ballX, ballY + 52, { color: SCENE_ACCENT });
+        body += sceneText(ballX + 9, ballY + 52, sceneVar('F_G'), { color: SCENE_ACCENT, anchor: 'start' });
+    }
+    return sceneWrap(W, H, body);
+}
+
+// ── Hävstång / gungbräda / överhäng (makeLever) ──────────────────────
+//
+// Vågrät balk på stöd (kil eller kant) med laster (hängande vikter eller
+// kraftpilar), tyngdpunkt och måttlinjer.
+//
+//   opts = {
+//     width,                 // default 460
+//     pivot: { posFrac, type },  // stöd: 'wedge' (kil) | 'edge' (kant/brygga)
+//     loads: [ { posFrac, label, kind, up } ],  // kind: 'weight'|'force'
+//     cog: { posFrac, label },   // tyngdpunkt (nedåtpil)
+//     dims: [ { fromFrac, toFrac, label, row } ],  // måttlinjer ovanför balken
+//   }
+function makeLever(opts) {
+    const W = opts.width || 460;
+    const padL = 38, padR = 38;
+    const beamY = 78;
+    const x0 = padL, x1 = W - padR, span = x1 - x0;
+    const frac = f => x0 + span * f;
+    const beamTh = 10, beamBottom = beamY + beamTh / 2;
+    const piv = opts.pivot || { posFrac: 0.5, type: 'wedge' };
+    const pivX = frac(piv.posFrac);
+    let body = '', H = beamBottom + 80;
+
+    if (piv.type === 'edge') {
+        const blockLeft = x0 - 6, blockH = 48, blockTop = beamBottom;
+        body += `<rect x="${blockLeft}" y="${blockTop}" width="${(pivX - blockLeft).toFixed(1)}" height="${blockH}" fill="rgba(15,22,32,0.06)" stroke="${SCENE_INK}" stroke-width="1.4"/>`;
+        body += sceneGround(blockLeft, pivX, blockTop + blockH);
+        body += `<circle cx="${pivX.toFixed(1)}" cy="${beamBottom}" r="2.6" fill="${SCENE_INK}"/>`;
+        H = blockTop + blockH + 30;
+    } else {
+        const tw = 16, th = 22;
+        body += `<polygon points="${pivX.toFixed(1)},${beamBottom} ${(pivX - tw).toFixed(1)},${beamBottom + th} ${(pivX + tw).toFixed(1)},${beamBottom + th}" fill="rgba(15,22,32,0.06)" stroke="${SCENE_INK}" stroke-width="1.4"/>`;
+        body += sceneGround(pivX - tw - 14, pivX + tw + 14, beamBottom + th);
+        H = beamBottom + th + 34;
+    }
+    // balk
+    body += `<rect x="${x0}" y="${beamY - beamTh / 2}" width="${span}" height="${beamTh}" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.6" rx="2"/>`;
+    // tyngdpunkt
+    if (opts.cog) {
+        const cgX = frac(opts.cog.posFrac);
+        body += `<circle cx="${cgX.toFixed(1)}" cy="${beamY}" r="3" fill="${SCENE_INK}"/>`;
+        body += sceneArrow(cgX, beamY + 5, cgX, beamY + 46, { color: SCENE_ACCENT });
+        if (opts.cog.label) body += sceneText(cgX + 8, beamY + 46, sceneQty(opts.cog.label), { color: SCENE_ACCENT, anchor: 'start', size: 13 });
+        H = Math.max(H, beamY + 70);
+    }
+    // laster
+    for (const ld of (opts.loads || [])) {
+        const lx = frac(ld.posFrac);
+        if (ld.kind === 'force') {
+            const dir = ld.up ? -1 : 1, y1f = beamY - dir * 6;
+            body += sceneArrow(lx, y1f, lx, y1f + dir * 44, { color: SCENE_ACCENT });
+            if (ld.label) body += sceneText(lx + 9, y1f + dir * 44, sceneQty(ld.label), { color: SCENE_ACCENT, anchor: 'start', size: 13 });
+            H = Math.max(H, beamY + 74);
+        } else {
+            const bw = 30, bh = 22, topY = beamBottom;
+            body += `<line x1="${lx.toFixed(1)}" y1="${topY}" x2="${lx.toFixed(1)}" y2="${topY + 12}" stroke="${SCENE_INK}" stroke-width="1.3"/>`;
+            body += `<rect x="${(lx - bw / 2).toFixed(1)}" y="${topY + 12}" width="${bw}" height="${bh}" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.4" rx="2"/>`;
+            if (ld.label) body += sceneText(lx, topY + 12 + bh / 2, ld.label, { size: 11 });
+            H = Math.max(H, topY + 12 + bh + 30);
+        }
+    }
+    // måttlinjer ovanför balken
+    for (const dm of (opts.dims || [])) {
+        const ax = frac(dm.fromFrac), bx = frac(dm.toFrac);
+        const yy = beamY - 30 - (dm.row || 0) * 20;
+        body += `<line x1="${ax.toFixed(1)}" y1="${yy}" x2="${ax.toFixed(1)}" y2="${beamY - 6}" stroke="${SCENE_MUTED}" stroke-width="0.8" stroke-dasharray="3 3"/>`;
+        body += `<line x1="${bx.toFixed(1)}" y1="${yy}" x2="${bx.toFixed(1)}" y2="${beamY - 6}" stroke="${SCENE_MUTED}" stroke-width="0.8" stroke-dasharray="3 3"/>`;
+        body += sceneDim(ax, yy, bx, yy, sceneQty(dm.label), {});
+    }
+    return sceneWrap(W, H, body);
+}
+
+// ── Tippande/vältande kropp (makeTippingBox) ─────────────────────────
+//
+// Rätblock på mark. Visar tyngdpunkt + tyngdkraft, valfri vågrät
+// tryckkraft högst upp, friktion vid basen, mått på bredd/höjd och en
+// rotationspil kring vältkanten. Kan ritas upprätt (tilt 0) eller lutad.
+//
+//   opts = {
+//     boxW, boxH,            // px-mått (boxH > boxW = hög/smal)
+//     tilt,                  // graders lutning kring nedre högra hörnet (default 0)
+//     weightLabel,           // default 'F_G'
+//     push: { label },       // vågrät tryckkraft; pilspetsen träffar övre vänstra hörnet
+//     friction,              // true → friktionspil vid basen (pekar vänster)
+//     wLabel, hLabel,        // måttetiketter för bredd/höjd
+//     tipArrow,              // true → krökt pil kring vältkanten
+//     gravityLine,           // true → streckad lodlinje från tyngdpunkt till mark
+//   }
+function makeTippingBox(opts) {
+    const bw = opts.boxW || 84, bh = opts.boxH || 120;
+    const tilt = opts.tilt || 0, t = tilt * Math.PI / 180;
+    const c = Math.cos(t), s = Math.sin(t);
+    const R = (x, y) => [x * c - y * s, x * s + y * c];     // medurs kring pivot (nedre höger)
+    const LR = R(0, 0), LL = R(-bw, 0), UL = R(-bw, -bh), UR = R(0, -bh), COG = R(-bw / 2, -bh / 2);
+    const wlen = 46;
+    const pts = [LR, LL, UL, UR, COG, [COG[0], 0], [COG[0], COG[1] + wlen]];
+    let pushStart = null, pushEnd = null, fricStart = null, fricEnd = null;
+    if (opts.push) { pushEnd = [UL[0], UL[1]]; pushStart = [UL[0] - 56, UL[1]]; pts.push(pushStart, [pushStart[0] - 14, pushStart[1] - 14]); }
+    if (opts.friction) { fricStart = [(LL[0] + LR[0]) / 2, -7]; fricEnd = [fricStart[0] - 52, -7]; pts.push(fricEnd, [fricEnd[0] - 24, -7]); }
+    let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+    for (const p of pts) { minX = Math.min(minX, p[0]); maxX = Math.max(maxX, p[0]); minY = Math.min(minY, p[1]); maxY = Math.max(maxY, p[1]); }
+    const padX = 54, padTop = 36, padBot = 40;
+    const offX = padX - minX, offY = padTop - minY;
+    const W = (maxX - minX) + padX * 2, H = (maxY - minY) + padTop + padBot;
+    const T = p => [p[0] + offX, p[1] + offY];
+    const groundY = offY;
+    const lr = T(LR), ll = T(LL), ul = T(UL), ur = T(UR), cg = T(COG);
+    let body = '';
+    body += sceneGround(8, W - 8, groundY);
+    // lådan
+    body += `<polygon points="${lr[0].toFixed(1)},${lr[1].toFixed(1)} ${ll[0].toFixed(1)},${ll[1].toFixed(1)} ${ul[0].toFixed(1)},${ul[1].toFixed(1)} ${ur[0].toFixed(1)},${ur[1].toFixed(1)}" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.8"/>`;
+    // lodlinje från tyngdpunkt
+    if (opts.gravityLine) body += `<line x1="${cg[0].toFixed(1)}" y1="${cg[1].toFixed(1)}" x2="${cg[0].toFixed(1)}" y2="${groundY}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="5 4"/>`;
+    // tyngdpunkt + tyngdkraft
+    body += `<circle cx="${cg[0].toFixed(1)}" cy="${cg[1].toFixed(1)}" r="3.2" fill="${SCENE_INK}"/>`;
+    body += sceneArrow(cg[0], cg[1], cg[0], cg[1] + wlen, { color: SCENE_ACCENT });
+    body += sceneText(cg[0] + 9, cg[1] + wlen, sceneVar(opts.weightLabel || 'F_G'), { color: SCENE_ACCENT, anchor: 'start' });
+    // vältkant (pivot, nedre höger)
+    body += `<circle cx="${lr[0].toFixed(1)}" cy="${lr[1].toFixed(1)}" r="3.4" fill="${SCENE_ACCENT}"/>`;
+    // tryckkraft
+    if (opts.push) { const ps = T(pushStart), pe = T(pushEnd); body += sceneArrow(ps[0], ps[1], pe[0], pe[1], { color: SCENE_ACCENT }); if (opts.push.label) body += sceneText(ps[0], ps[1] - 11, sceneQty(opts.push.label), { color: SCENE_ACCENT, anchor: 'middle', size: 14 }); }
+    // friktion
+    if (opts.friction) { const fs = T(fricStart), fe = T(fricEnd); body += sceneArrow(fs[0], fs[1] - 1, fe[0], fe[1] - 1, { color: SCENE_ACCENT }); body += sceneText(fe[0] - 6, fe[1] - 11, sceneVar('F_f'), { color: SCENE_ACCENT, anchor: 'end' }); }
+    // rotationspil kring vältkanten
+    if (opts.tipArrow) {
+        const r0 = 26;
+        body += `<path d="M ${(lr[0] - r0).toFixed(1)} ${(lr[1] - 6).toFixed(1)} A ${r0} ${r0} 0 0 1 ${(lr[0] - 4).toFixed(1)} ${(lr[1] - r0 - 2).toFixed(1)}" stroke="${SCENE_BLUE}" stroke-width="1.8" fill="none"/>`;
+        body += `<polygon points="${(lr[0] - 4).toFixed(1)},${(lr[1] - r0 - 2).toFixed(1)} ${(lr[0] - 11).toFixed(1)},${(lr[1] - r0 + 3).toFixed(1)} ${(lr[0] + 3).toFixed(1)},${(lr[1] - r0 + 1).toFixed(1)}" fill="${SCENE_BLUE}"/>`;
+    }
+    // mått: bredd (under basen) och höjd (vänster sida) — bara upprätt
+    if (opts.wLabel && tilt === 0) { const dy = groundY + 22; body += sceneDim(ll[0], dy, lr[0], dy, sceneQty(opts.wLabel), {}); }
+    if (opts.hLabel && tilt === 0) { const dx = ul[0] - 16; body += sceneDim(dx, ul[1], dx, ll[1], sceneQty(opts.hLabel), {}); }
+    return sceneWrap(W, H, body);
+}
+
+// ── Kraftmoment-arm / skiftnyckel (makeTorqueArm) ────────────────────
+//
+// Vridpunkt (mutter/gångjärn) med en styv arm i given vinkel och en
+// kraft i armens ände. Valfri streckad vågrät hävarm (utan värde).
+//
+//   opts = {
+//     width,                 // default 360
+//     armAngle,              // armens vinkel över horisontalplanet (grader)
+//     armLen,                // px (default 200)
+//     armLabel,              // 'l = 0,18 m' längs armen
+//     force: { angle, label, len },  // kraft i änden; angle: 0=höger,90=upp,-90=ned
+//     pivotLabel,            // text under vridpunkten
+//     leverHint,             // true → streckad lodlinje från änden till hävarmsnivå
+//   }
+function makeTorqueArm(opts) {
+    const W = opts.width || 360;
+    const armLen = opts.armLen || 200;
+    const armAngle = opts.armAngle || 0;
+    const aRad = armAngle * Math.PI / 180;
+    const f = opts.force || { angle: -90, len: 64, label: 'F' };
+    const fLen = f.len || 64;
+    const fRad = (f.angle != null ? f.angle : -90) * Math.PI / 180;
+    // lokalt: vridpunkt i origo, arm uppåt-höger (y nedåt → -sin)
+    const ex = armLen * Math.cos(aRad), ey = -armLen * Math.sin(aRad);
+    const fex = ex + fLen * Math.cos(fRad), fey = ey - fLen * Math.sin(fRad);
+    // arm-längd-etiketten offsettas VINKELRÄTT ut från armen (uppåt/åt sidan)
+    // så den aldrig hamnar ovanpå den tjocka armlinjen.
+    const labOff = 18, lblX = ex / 2 - Math.sin(aRad) * labOff, lblY = ey / 2 - Math.cos(aRad) * labOff;
+    const lblW = opts.armLabel ? String(opts.armLabel).length * 6.5 : 0;
+    const pts = [[0, 0], [ex, ey], [fex, fey], [fex + 40, fey], [ex, 0], [lblX - lblW / 2, lblY], [lblX + lblW / 2, lblY]];
+    let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+    for (const p of pts) { minX = Math.min(minX, p[0]); maxX = Math.max(maxX, p[0]); minY = Math.min(minY, p[1]); maxY = Math.max(maxY, p[1]); }
+    const padX = 44, padY = 40;
+    const offX = padX - minX, offY = padY - minY;
+    const Wv = Math.max(W, (maxX - minX) + padX * 2), Hv = (maxY - minY) + padY * 2;
+    const px = offX, py = offY, exA = ex + offX, eyA = ey + offY, fexA = fex + offX, feyA = fey + offY;
+    let body = '';
+    // streckad hävarmshjälp (lodrät) från änden ned till vridpunktens nivå
+    if (opts.leverHint) {
+        body += `<line x1="${exA.toFixed(1)}" y1="${eyA.toFixed(1)}" x2="${exA.toFixed(1)}" y2="${py.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.2" stroke-dasharray="5 4"/>`;
+        body += `<line x1="${px.toFixed(1)}" y1="${py.toFixed(1)}" x2="${exA.toFixed(1)}" y2="${py.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.2" stroke-dasharray="5 4"/>`;
+    }
+    // arm
+    body += `<line x1="${px.toFixed(1)}" y1="${py.toFixed(1)}" x2="${exA.toFixed(1)}" y2="${eyA.toFixed(1)}" stroke="${SCENE_INK}" stroke-width="7" stroke-linecap="round"/>`;
+    // vinkelbåge
+    if (armAngle > 0) body += sceneAngleArc(px, py, 32, 0, -aRad, opts.angleLabel || (armAngle + '°'));
+    // vridpunkt
+    body += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="6" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="2"/>`;
+    body += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="2" fill="${SCENE_INK}"/>`;
+    if (opts.pivotLabel) body += sceneText(px, py + 18, opts.pivotLabel, { size: 12 });
+    // arm-längd (vinkelrätt offsettad — aldrig på armlinjen)
+    if (opts.armLabel) body += sceneText(lblX + offX, lblY + offY, sceneQty(opts.armLabel), { color: SCENE_INK, size: 13 });
+    // kraft
+    body += sceneArrow(exA, eyA, fexA, feyA, { color: SCENE_ACCENT });
+    if (f.label) { const aN = ((f.angle % 360) + 360) % 360; const isV = (aN >= 45 && aN < 135) || (aN >= 225 && aN < 315); body += sceneText(fexA + (isV ? 8 : 0), feyA + (isV ? 0 : (Math.sin(fRad) >= 0 ? -10 : 14)), sceneQty(f.label), { color: SCENE_ACCENT, anchor: isV ? 'start' : 'middle', size: 14 }); }
+    return sceneWrap(Wv, Hv, body);
+}
+
+// ── Cirkelbana ovanifrån (makeCircularPath) ──────────────────────────
+//
+// Topvy av en cirkulär bana med ett föremål (bil eller punkt), banradie,
+// tangentiell hastighet och valfri centripetalpil mot centrum.
+//
+//   opts = {
+//     width, height,         // default 320 × 300
+//     r,                     // banradie i px (default 110)
+//     angleDeg,              // föremålets vinkelläge (0=höger, 90=topp)
+//     radiusLabel, vLabel,   // 'r = 50 m', 'v = 20 m/s'
+//     showFc, fcLabel,       // centripetalpil mot centrum (t.ex. 'a_C', 'F_C')
+//     point,                 // true → rita punkt i stället för bil
+//     objLabel,              // valfri etikett vid föremålet
+//   }
+function makeCircularPath(opts) {
+    const r = opts.r || 110;
+    const a = (opts.angleDeg != null ? opts.angleDeg : 0) * Math.PI / 180;
+    // centrum i origo; objektet vid vinkeln a (0 = höger, 90 = topp)
+    const ox = r * Math.cos(a), oy = -r * Math.sin(a);
+    const tang = a + Math.PI / 2;
+    const vlen = opts.vLen || 56;
+    const vx = ox + vlen * Math.cos(tang), vy = oy - vlen * Math.sin(tang);
+    let fcx = null, fcy = null;
+    if (opts.showFc) { fcx = ox + (0 - ox) * 0.36; fcy = oy + (0 - oy) * 0.36; }
+    // grov etikettbredd (utan taggar) för att räkna viewBox så inget klipps
+    const estW = s => String(s).replace(/<[^>]+>/g, '').length * 7.2 + 8;
+    const pts = [[-r, 0], [r, 0], [0, -r], [0, r], [ox, oy], [vx, vy]];
+    if (fcx != null) pts.push([fcx, fcy]);
+    if (opts.vLabel) { const w = estW(opts.vLabel); pts.push([vx + 6 + w, vy - 8], [vx + 6, vy - 8]); }
+    if (opts.radiusLabel) { const w = estW(opts.radiusLabel); pts.push([ox / 2 - w / 2, oy / 2 - 9], [ox / 2 + w / 2, oy / 2 - 9]); }
+    if (opts.showFc && opts.fcLabel !== false) { const w = estW(opts.fcLabel || 'F_C'); pts.push([(ox + fcx) / 2 + 10 + w, (oy + fcy) / 2 + 2]); }
+    if (opts.objLabel) { const w = estW(opts.objLabel); pts.push([ox - w / 2, oy - 24], [ox + w / 2, oy - 24]); }
+    let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+    for (const p of pts) { minX = Math.min(minX, p[0]); maxX = Math.max(maxX, p[0]); minY = Math.min(minY, p[1]); maxY = Math.max(maxY, p[1]); }
+    const pad = 18;
+    const offX = pad - minX, offY = pad - minY;
+    const W = (maxX - minX) + pad * 2, H = (maxY - minY) + pad * 2;
+    const cx = offX, cy = offY;
+    const OX = ox + offX, OY = oy + offY, VX = vx + offX, VY = vy + offY;
+    let body = '';
+    body += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}" fill="none" stroke="${SCENE_MUTED}" stroke-width="2"${opts.dashTrack ? ' stroke-dasharray="7 6"' : ''}/>`;
+    body += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="3" fill="${SCENE_INK}"/>`;
+    body += `<line x1="${cx.toFixed(1)}" y1="${cy.toFixed(1)}" x2="${OX.toFixed(1)}" y2="${OY.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="4 3"/>`;
+    if (opts.radiusLabel) body += sceneText((cx + OX) / 2, (cy + OY) / 2 - 9, sceneQty(opts.radiusLabel), { color: SCENE_MUTED, size: 13 });
+    if (opts.showFc) {
+        const FX = OX + (cx - OX) * 0.36, FY = OY + (cy - OY) * 0.36;
+        body += sceneArrow(OX, OY, FX, FY, { color: SCENE_ACCENT });
+        if (opts.fcLabel !== false) body += sceneText((OX + FX) / 2 + 10, (OY + FY) / 2 + 2, sceneVar(opts.fcLabel || 'F_C'), { color: SCENE_ACCENT, anchor: 'start', size: 14 });
+    }
+    if (opts.point) body += `<circle cx="${OX.toFixed(1)}" cy="${OY.toFixed(1)}" r="6" fill="${SCENE_INK}"/>`;
+    else body += `<g transform="translate(${OX.toFixed(1)},${OY.toFixed(1)}) rotate(${(-tang * 180 / Math.PI).toFixed(1)})"><rect x="-17" y="-9" width="34" height="18" rx="3" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.5"/><line x1="6" y1="-9" x2="6" y2="9" stroke="${SCENE_INK}" stroke-width="1"/></g>`;
+    body += sceneArrow(OX, OY, VX, VY, { color: SCENE_BLUE });
+    if (opts.vLabel) body += sceneText(VX + 6, VY - 8, sceneQty(opts.vLabel), { color: SCENE_BLUE, anchor: 'start', size: 14 });
+    if (opts.objLabel) body += sceneText(OX, OY - 24, opts.objLabel, { size: 12 });
+    return sceneWrap(W, H, body);
+}
+
+// ── Backkrön (makeCrest) ─────────────────────────────────────────────
+//
+// Sidvy av ett konvext backkrön med en bil i högsta punkten, streckad
+// krökningsradie till centrum nedanför, samt krafterna N (upp) och F_G
+// (ned). Valfri tangentiell hastighet.
+//
+//   opts = { width, r, rLabel, vLabel, forces (default true) }
+function makeCrest(opts) {
+    const W = opts.width || 360;
+    const r = opts.r || 150;
+    const cx = W / 2, topY = (opts.forces === false) ? 46 : 74, cy = topY + r;
+    const half = Math.min(0.72, (W / 2 - 26) / r);
+    const aL = -Math.PI / 2 - half, aR = -Math.PI / 2 + half;
+    let body = '';
+    const lx = cx + r * Math.cos(aL), ly = cy + r * Math.sin(aL);
+    const rx = cx + r * Math.cos(aR), ry = cy + r * Math.sin(aR);
+    body += `<path d="M ${lx.toFixed(1)} ${ly.toFixed(1)} A ${r} ${r} 0 0 1 ${rx.toFixed(1)} ${ry.toFixed(1)}" stroke="${SCENE_INK}" stroke-width="2.2" fill="none"/>`;
+    // krökningsradie (streckad) nedre delen + centrumpunkt
+    body += `<line x1="${cx}" y1="${topY + 30}" x2="${cx}" y2="${cy.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="5 4"/>`;
+    body += `<circle cx="${cx}" cy="${cy.toFixed(1)}" r="2.6" fill="${SCENE_MUTED}"/>`;
+    if (opts.rLabel) body += sceneText(cx + 8, (topY + cy) / 2 + 12, sceneQty(opts.rLabel), { color: SCENE_MUTED, anchor: 'start', size: 13 });
+    // bil
+    body += `<g transform="translate(${cx},${topY})"><rect x="-20" y="-13" width="40" height="13" rx="3" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.5"/><circle cx="-11" cy="0" r="4" fill="${SCENE_INK}"/><circle cx="11" cy="0" r="4" fill="${SCENE_INK}"/></g>`;
+    const fy = topY - 8;
+    if (opts.forces !== false) {
+        body += sceneArrow(cx, fy, cx, fy - 48, { color: SCENE_ACCENT });
+        body += sceneText(cx + 9, fy - 48, sceneVar('N'), { color: SCENE_ACCENT, anchor: 'start' });
+        body += sceneArrow(cx, fy, cx, fy + 50, { color: SCENE_ACCENT });
+        body += sceneText(cx + 9, fy + 50, sceneVar('F_G'), { color: SCENE_ACCENT, anchor: 'start' });
+    }
+    if (opts.vLabel) {
+        body += sceneArrow(cx, fy, cx + 58, fy, { color: SCENE_BLUE });
+        body += sceneText(cx + 62, fy - 9, sceneQty(opts.vLabel), { color: SCENE_BLUE, anchor: 'start', size: 13 });
+    }
+    return sceneWrap(W, topY + r + 28, body);
+}
+
+// ── Doserad (bankad) kurva (makeBankedCurve) ─────────────────────────
+//
+// Tvärsnitt av en doserad vägbana som lutar vinkeln α, med en bil på
+// banan, normalkraft N vinkelrätt mot banan, F_G nedåt och streckad
+// horisontalreferens. Valfri pil "mot centrum".
+//
+//   opts = { width, height, angle, angleLabel, forces (default true), showCenter }
+function makeBankedCurve(opts) {
+    const W = opts.width || 380, H = opts.height || 240;
+    const ang = opts.angle != null ? opts.angle : 25;
+    const aRad = ang * Math.PI / 180;
+    const padL = 42, padR = 40;
+    const baseY = H - 56;
+    const x0 = padL + 8, y0 = baseY;
+    const roadLen = W - padL - padR - 16;
+    const x1 = x0 + roadLen * Math.cos(aRad), y1 = y0 - roadLen * Math.sin(aRad);
+    let body = '';
+    body += `<polygon points="${x0},${y0} ${x1.toFixed(1)},${y1.toFixed(1)} ${x1.toFixed(1)},${y0}" fill="rgba(15,22,32,0.05)" stroke="none"/>`;
+    body += `<line x1="${x0}" y1="${y0}" x2="${x1.toFixed(1)}" y2="${y0}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="5 4"/>`;
+    body += `<line x1="${x0}" y1="${y0}" x2="${x1.toFixed(1)}" y2="${y1.toFixed(1)}" stroke="${SCENE_INK}" stroke-width="2.2"/>`;
+    body += sceneAngleArc(x0, y0, 36, 0, -aRad, opts.angleLabel || (ang + '°'));
+    const t = 0.62;
+    const carCx = x0 + (x1 - x0) * t, carCy = y0 + (y1 - y0) * t;
+    body += `<g transform="translate(${carCx.toFixed(1)},${carCy.toFixed(1)}) rotate(${(-ang).toFixed(1)})"><rect x="-22" y="-16" width="44" height="16" rx="3" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.5"/><circle cx="-12" cy="0" r="4.5" fill="${SCENE_INK}"/><circle cx="12" cy="0" r="4.5" fill="${SCENE_INK}"/></g>`;
+    const cmx = carCx - 8 * Math.sin(aRad), cmy = carCy - 8 * Math.cos(aRad) - 8;
+    if (opts.forces !== false) {
+        const nx = cmx + (-Math.sin(aRad)) * 56, ny = cmy + (-Math.cos(aRad)) * 56;
+        body += sceneArrow(cmx, cmy, nx, ny, { color: SCENE_ACCENT });
+        body += sceneText(nx - 6, ny - 9, sceneVar('N'), { color: SCENE_ACCENT, anchor: 'end' });
+        body += sceneArrow(cmx, cmy, cmx, cmy + 54, { color: SCENE_ACCENT });
+        body += sceneText(cmx + 9, cmy + 54, sceneVar('F_G'), { color: SCENE_ACCENT, anchor: 'start' });
+    }
+    if (opts.showCenter) {
+        body += sceneArrow(x0 + 52, y0 + 26, x0, y0 + 26, { color: SCENE_BLUE, width: 2 });
+        body += sceneText(x0 + 56, y0 + 26, 'mot centrum', { color: SCENE_BLUE, anchor: 'start', size: 12 });
+    }
+    return sceneWrap(W, H, body);
+}
+
+// ── Vertikal loop (makeLoop) ─────────────────────────────────────────
+//
+// Berg- och dalbane-loop (cirkel) med vagn i toppen och/eller botten,
+// streckad radie, valfria krafter i toppen (F_G ned) och fart-pil.
+//
+//   opts = {
+//     width, r,              // default 300, 92
+//     rLabel,                // 'r = 4,0 m'
+//     cartTop, cartBottom,   // visa vagn i topp/botten (botten default true)
+//     topForces,             // F_G nedåt i toppen
+//     vTop,                  // fart-etikett i toppen (vågrät pil)
+//     heightLabel,           // lodrätt mått för loopens höjd (2r)
+//   }
+function makeLoop(opts) {
+    const W = opts.width || 300;
+    const r = opts.r || 92;
+    const cx = W / 2, topY = 36, cy = topY + r, groundY = cy + r;
+    let body = '';
+    body += sceneGround(28, W - 28, groundY);
+    body += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${SCENE_INK}" stroke-width="2.4"/>`;
+    body += `<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${topY}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="5 4"/>`;
+    body += `<circle cx="${cx}" cy="${cy}" r="2.6" fill="${SCENE_MUTED}"/>`;
+    if (opts.rLabel) body += sceneText(cx + 8, (topY + cy) / 2, sceneQty(opts.rLabel), { color: SCENE_MUTED, anchor: 'start', size: 13 });
+    const cart = (x, y, flip) => `<g transform="translate(${x},${y})"><rect x="-18" y="${flip ? 0 : -13}" width="36" height="13" rx="2" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.5"/></g>`;
+    if (opts.cartTop) {
+        body += cart(cx, topY, true);
+        if (opts.topForces) { body += sceneArrow(cx, topY + 14, cx, topY + 14 + 46, { color: SCENE_ACCENT }); body += sceneText(cx + 9, topY + 14 + 46, sceneVar('F_G'), { color: SCENE_ACCENT, anchor: 'start' }); }
+        if (opts.vTop) { body += sceneArrow(cx, topY - 2, cx - 54, topY - 2, { color: SCENE_BLUE }); body += sceneText(cx - 58, topY - 12, sceneQty(opts.vTop), { color: SCENE_BLUE, anchor: 'end', size: 13 }); }
+    }
+    if (opts.cartBottom !== false) body += cart(cx, groundY, false);
+    if (opts.heightLabel) {
+        const dx = cx - r - 16;
+        body += `<line x1="${dx - 4}" y1="${topY}" x2="${cx}" y2="${topY}" stroke="${SCENE_MUTED}" stroke-width="0.8" stroke-dasharray="3 3"/>`;
+        body += `<line x1="${dx - 4}" y1="${groundY}" x2="${cx}" y2="${groundY}" stroke="${SCENE_MUTED}" stroke-width="0.8" stroke-dasharray="3 3"/>`;
+        body += sceneDim(dx, topY, dx, groundY, sceneQty(opts.heightLabel), {});
+    }
+    return sceneWrap(W, groundY + 34, body);
+}
+
+// ── Gunga / pendel (makeSwing) ───────────────────────────────────────
+//
+// Pendel/gunga: fäste i tak, rep till lägsta punkten, streckad svängbåge.
+// Valfritt utgångsläge i vinkel, fallhöjd h och krafter i lägsta punkten
+// (F_S uppåt längs repet, F_G nedåt).
+//
+//   opts = {
+//     width, ropeLen,        // default 360, 175
+//     angle,                 // utgångsvinkel mot lodlinjen (grader, åt vänster)
+//     angleLabel,            // default '${angle}°'; sätt null för att dölja vinkeln
+//     hLabel,                // fallhöjd (lodrätt mått)
+//     ropeLabel,             // 'l = 4,0 m' längs repet
+//     forces,                // F_S upp + F_G ned i lägsta punkten
+//   }
+function makeSwing(opts) {
+    const W = opts.width || 360;
+    const Lpx = opts.ropeLen || 175;
+    const cx = W * 0.52, pivotY = 26, lowY = pivotY + Lpx;
+    const hasAngle = opts.angle != null;
+    const ang = hasAngle ? opts.angle : 0;
+    const aRad = ang * Math.PI / 180;
+    const relX = cx - Lpx * Math.sin(aRad), relY = pivotY + Lpx * Math.cos(aRad);
+    let body = '';
+    // tak
+    body += `<line x1="${cx - 70}" y1="${pivotY}" x2="${cx + 70}" y2="${pivotY}" stroke="${SCENE_INK}" stroke-width="1.6"/>`;
+    for (let xs = cx - 64; xs < cx + 70; xs += 12) body += `<line x1="${xs}" y1="${pivotY}" x2="${xs - 7}" y2="${pivotY - 8}" stroke="${SCENE_INK}" stroke-width="1"/>`;
+    body += `<circle cx="${cx}" cy="${pivotY}" r="3" fill="${SCENE_INK}"/>`;
+    // svängbåge (streckad)
+    if (hasAngle) body += `<path d="M ${relX.toFixed(1)} ${relY.toFixed(1)} A ${Lpx} ${Lpx} 0 0 1 ${(cx + Lpx * Math.sin(aRad)).toFixed(1)} ${relY.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.3" fill="none" stroke-dasharray="5 4"/>`;
+    // utgångsläge: streckat rep + kula
+    if (hasAngle) {
+        body += `<line x1="${cx}" y1="${pivotY}" x2="${relX.toFixed(1)}" y2="${relY.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.4" stroke-dasharray="5 4"/>`;
+        body += `<circle cx="${relX.toFixed(1)}" cy="${relY.toFixed(1)}" r="8" fill="none" stroke="${SCENE_INK}" stroke-width="1.4"/>`;
+        if (opts.angleLabel !== null) { const rdir = Math.atan2(relY - pivotY, relX - cx); body += sceneAngleArc(cx, pivotY, 30, rdir, Math.PI / 2, opts.angleLabel || (ang + '°')); }
+    }
+    // rep till lägsta punkten + kula
+    body += `<line x1="${cx}" y1="${pivotY}" x2="${cx}" y2="${lowY}" stroke="${SCENE_INK}" stroke-width="1.6"/>`;
+    body += `<circle cx="${cx}" cy="${lowY}" r="9" fill="${SCENE_INK}"/>`;
+    if (opts.ropeLabel) body += sceneText(cx - 9, (pivotY + lowY) / 2, sceneQty(opts.ropeLabel), { color: SCENE_INK, anchor: 'end', size: 13 });
+    // fallhöjd
+    if (opts.hLabel && hasAngle) {
+        const hx = Math.min(relX, cx) - 26;
+        body += `<line x1="${relX.toFixed(1)}" y1="${relY.toFixed(1)}" x2="${hx - 4}" y2="${relY.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1" stroke-dasharray="4 3"/>`;
+        body += `<line x1="${cx}" y1="${lowY}" x2="${hx - 4}" y2="${lowY}" stroke="${SCENE_MUTED}" stroke-width="1" stroke-dasharray="4 3"/>`;
+        body += sceneDim(hx, relY, hx, lowY, sceneQty(opts.hLabel), {});
+    }
+    // krafter i lägsta punkten
+    if (opts.forces) {
+        body += sceneArrow(cx, lowY - 5, cx, lowY - 5 - 54, { color: SCENE_ACCENT });
+        body += sceneText(cx + 9, lowY - 5 - 54, sceneVar('F_S'), { color: SCENE_ACCENT, anchor: 'start' });
+        body += sceneArrow(cx, lowY + 5, cx, lowY + 5 + 50, { color: SCENE_ACCENT });
+        body += sceneText(cx + 9, lowY + 5 + 50, sceneVar('F_G'), { color: SCENE_ACCENT, anchor: 'start' });
+    }
+    return sceneWrap(W, lowY + (opts.forces ? 72 : 30), body);
+}
+
+// ── Stege mot vägg (makeLadder) ──────────────────────────────────────
+//
+// Stege lutad mot en lodrät vägg, med vinkel mot marken och valfria
+// krafter (F_G i mitten, N_mark + F_f vid foten, N_vägg vid toppen).
+// Rita UTAN krafter i frågan (eleven ska själv identifiera dem) och MED
+// krafter i lösningen.
+//
+//   opts = { width, angle, ladderLen, lenLabel, angleLabel, forces (default false) }
+function makeLadder(opts) {
+    const W = opts.width || 360;
+    const ang = opts.angle != null ? opts.angle : 65;
+    const aRad = ang * Math.PI / 180;
+    const Lpx = opts.ladderLen || 220;
+    const padB = 38;
+    const footX = 54;
+    const topX = footX + Lpx * Math.cos(aRad);
+    const groundY = Lpx * Math.sin(aRad) + 50;
+    const topY = groundY - Lpx * Math.sin(aRad);
+    let body = '';
+    // vägg (lodrät) med skraffering åt höger
+    body += `<line x1="${topX.toFixed(1)}" y1="${topY - 18}" x2="${topX.toFixed(1)}" y2="${groundY}" stroke="${SCENE_INK}" stroke-width="2"/>`;
+    for (let ys = topY - 10; ys < groundY; ys += 12) body += `<line x1="${topX.toFixed(1)}" y1="${ys}" x2="${(topX + 8).toFixed(1)}" y2="${ys - 7}" stroke="${SCENE_INK}" stroke-width="1"/>`;
+    // mark
+    body += sceneGround(footX - 30, topX + 6, groundY);
+    // stege
+    body += `<line x1="${footX}" y1="${groundY}" x2="${topX.toFixed(1)}" y2="${topY.toFixed(1)}" stroke="${SCENE_INK}" stroke-width="3.5" stroke-linecap="round"/>`;
+    // vinkel vid foten
+    body += sceneAngleArc(footX, groundY, 34, 0, -aRad, opts.angleLabel || (ang + '°'));
+    // längd
+    if (opts.lenLabel) { const mx = (footX + topX) / 2, my = (groundY + topY) / 2, o = 18; body += sceneText(mx - Math.sin(aRad) * o, my - Math.cos(aRad) * o, sceneQty(opts.lenLabel), { color: SCENE_INK, anchor: 'end', size: 13 }); }
+    // krafter
+    if (opts.forces) {
+        const midX = (footX + topX) / 2, midY = (groundY + topY) / 2;
+        body += sceneArrow(midX, midY, midX, midY + 50, { color: SCENE_ACCENT });
+        body += sceneText(midX + 9, midY + 50, sceneVar('F_G'), { color: SCENE_ACCENT, anchor: 'start' });
+        body += sceneArrow(footX, groundY, footX, groundY - 52, { color: SCENE_ACCENT });
+        body += sceneText(footX - 9, groundY - 52, sceneVar('N_mark'), { color: SCENE_ACCENT, anchor: 'end' });
+        body += sceneArrow(footX, groundY, footX + 50, groundY, { color: SCENE_ACCENT });
+        body += sceneText(footX + 54, groundY - 9, sceneVar('F_f'), { color: SCENE_ACCENT, anchor: 'start' });
+        body += sceneArrow(topX, topY, topX - 50, topY, { color: SCENE_ACCENT });
+        body += sceneText(topX - 54, topY - 9, sceneVar('N_vägg'), { color: SCENE_ACCENT, anchor: 'end' });
+    }
+    return sceneWrap(W, groundY + padB, body);
+}
+
+// ── Urtavla (makeClock) ──────────────────────────────────────────────
+//
+// Enkel analog urtavla med tim- och minutvisare. Vinklar i grader
+// medurs från 12-läget (0 = rakt upp).
+//
+//   opts = { size, hour, minute }   // grader medurs; 12:00 → hour 0, minute 0
+function makeClock(opts) {
+    const sz = opts.size || 150, c = sz / 2, R = c - 10;
+    const hand = (deg, len, w) => {
+        const a = (deg - 90) * Math.PI / 180;
+        return `<line x1="${c}" y1="${c}" x2="${(c + len * Math.cos(a)).toFixed(1)}" y2="${(c + len * Math.sin(a)).toFixed(1)}" stroke="${SCENE_INK}" stroke-width="${w}" stroke-linecap="round"/>`;
+    };
+    let body = `<circle cx="${c}" cy="${c}" r="${R}" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="2"/>`;
+    for (let i = 0; i < 12; i++) {
+        const a = (i * 30 - 90) * Math.PI / 180;
+        const r1 = R - 4, r2 = R - (i % 3 === 0 ? 11 : 7);
+        body += `<line x1="${(c + r1 * Math.cos(a)).toFixed(1)}" y1="${(c + r1 * Math.sin(a)).toFixed(1)}" x2="${(c + r2 * Math.cos(a)).toFixed(1)}" y2="${(c + r2 * Math.sin(a)).toFixed(1)}" stroke="${SCENE_INK}" stroke-width="${i % 3 === 0 ? 2 : 1}"/>`;
+    }
+    body += hand(opts.hour || 0, R * 0.52, 3.4);
+    body += hand(opts.minute || 0, R * 0.78, 2.2);
+    body += `<circle cx="${c}" cy="${c}" r="3" fill="${SCENE_ACCENT}"/>`;
+    return sceneWrap(sz, sz, body);
 }
 
 window.OVNINGAR = {
@@ -7267,6 +8209,3821 @@ Lampa 1 får alltså tre gånger så stark ström som lamporna 2, 3 och 4. Efter
 **Svar c):** Lampa 1 lyser oförändrat.
 
 **Generell slutsats:** Parallella grenar är oberoende av varandra — det som händer i en gren påverkar inte spänningen över de andra. Om en gren bryts försvinner bara den grenens bidrag till totalströmmen, men de övriga grenarna fortsätter som om inget hänt. Det är därför parallellkoppling är så vanlig i elnät: man vill inte att en trasig komponent ska påverka resten.`,
+        },
+    ],
+
+    'fy1-7.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Stav A är negativt laddad och stav B är positivt laddad. Vad händer när de närmas varandra?`,
+            choices: [
+                `De attraherar varandra (dras mot varandra).`,
+                `De repellerar varandra (stöts ifrån varandra).`,
+                `Ingen kraft uppstår eftersom laddningarna tar ut varandra.`,
+                `De repellerar först och attraherar sedan.`,
+            ],
+            correct: 0,
+            solution: `Stavarna har **olika** tecken på sin laddning (en negativ, en positiv). Olika laddningar drar mot varandra med en attraherande kraft.
+
+**Svar:** Alternativ A — de attraherar varandra.
+
+**Generell slutsats:** Lika laddning repellerar, olika laddning attraherar. Det är samma regel som för magneter (lika poler stöts ifrån) — men här handlar det om elektrisk laddning, inte magnetism.`,
+        },
+        {
+            level: 1,
+            question: `Vilket påstående om ledare och isolatorer är korrekt?`,
+            choices: [
+                `I en ledare rör sig ledningselektronerna lätt genom materialet.`,
+                `I en isolator rör sig elektronerna lätt genom materialet.`,
+                `I en ledare sitter alla elektroner hårt bundna till atomerna.`,
+                `En halvledare leder alltid ström bättre än en metall.`,
+            ],
+            correct: 0,
+            solution: `I en **ledare** (t.ex. metall) finns ledningselektroner som rör sig lätt genom materialet — därför leder ledare ström bra. I en **isolator** (glas, plast, trä) är elektronerna hårt bundna och rör sig inte lätt.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** En **halvledare** (kisel, selen) är ett mellanting — isolator vid låg temperatur, ledare vid hög. Den leder alltså *inte* alltid bättre än en metall.`,
+        },
+        {
+            level: 1,
+            question: `En liten plastkula är negativt laddad med $Q = 4{,}0\\ \\mathrm{nC}$. Hur många överskottselektroner har kulan? Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 2.5e10, unit: 'st' },
+            solution: `Antalet överskottselektroner *n* fås genom att dividera kulans laddning *Q* med elektronens laddning $q_e$:
+
+$$ n = \\frac{Q}{q_e} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q = 4{,}0\\ \\mathrm{nC} = 4{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ n = \\frac{4{,}0 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{-19}} = 2{,}50 \\cdot 10^{10}\\ \\text{st} $$
+
+**Svar:** Kulan har cirka $2{,}5 \\cdot 10^{10}$ överskottselektroner (25 miljarder).`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två lika stora metallkulor har laddningarna $Q_1 = +6{,}0\\ \\mathrm{nC}$ och $Q_2 = -2{,}0\\ \\mathrm{nC}$. Kulorna får vidröra varandra och skiljs sedan åt. Hur stor laddning har varje kula efteråt?`,
+            answer: { value: 2.0, unit: 'nC' },
+            solution: `När två **lika stora** ledande kulor vidrör varandra fördelar sig den sammanlagda laddningen jämnt mellan dem. Varje kula får då medelvärdet av de ursprungliga laddningarna:
+
+$$ Q = \\frac{Q_1 + Q_2}{2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q_1 = +6{,}0\\ \\mathrm{nC} \\\\
+Q_2 = -2{,}0\\ \\mathrm{nC}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ Q = \\frac{+6{,}0 + (-2{,}0)}{2} = \\frac{+4{,}0}{2} = +2{,}0\\ \\mathrm{nC} $$
+
+**Svar:** Varje kula har laddningen $+2{,}0\\ \\mathrm{nC}$ efteråt.
+
+**Generell slutsats:** Den totala laddningen bevaras ($+4{,}0\\ \\mathrm{nC}$ före och efter) — laddning kan inte skapas eller förstöras, bara omfördelas. Jämn fördelning gäller bara när kulorna är lika stora.`,
+        },
+        {
+            level: 2,
+            question: `En ballong gnuggas mot håret och får då ett överskott på $3{,}0 \\cdot 10^{10}$ elektroner. Hur stor laddning får ballongen? Svara i nC. Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 4.8, unit: 'nC' },
+            solution: `Laddningen *Q* är antalet överskottselektroner *n* multiplicerat med elektronens laddning $q_e$:
+
+$$ Q = n \\cdot q_e $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+n = 3{,}0 \\cdot 10^{10}\\ \\text{st} \\\\
+q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ Q = 3{,}0 \\cdot 10^{10} \\cdot 1{,}602 \\cdot 10^{-19} = 4{,}806 \\cdot 10^{-9}\\ \\mathrm{C} \\approx 4{,}8\\ \\mathrm{nC} $$
+
+**Svar:** Ballongens laddning är ungefär $-4{,}8\\ \\mathrm{nC}$ (negativ, eftersom det är ett överskott av elektroner).
+
+**Generell slutsats:** Detta är omvändningen av $n = Q/q_e$. Tecknet på laddningen avgörs av om föremålet har överskott (negativ) eller underskott (positiv) av elektroner.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två lika stora metallkulor har laddningarna $Q_1 = +5{,}0\\ \\mathrm{nC}$ och $Q_2 = -3{,}0\\ \\mathrm{nC}$. De får vidröra varandra och skiljs sedan åt. Hur många elektroner har då flyttat från den ena kulan till den andra? Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 2.5e10, unit: 'st' },
+            solution: `Först bestämmer vi sluttillståndet. Lika stora ledande kulor delar laddningen jämnt:
+
+$$ Q = \\frac{Q_1 + Q_2}{2} = \\frac{+5{,}0 + (-3{,}0)}{2} = +1{,}0\\ \\mathrm{nC} $$
+
+Båda kulorna har alltså $+1{,}0\\ \\mathrm{nC}$ efteråt. Nu ser vi hur mycket varje kula ändrades:
+
+$$
+\\left[ \\begin{array}{l}
+\\text{Kula 1: } +5{,}0 \\to +1{,}0\\ \\mathrm{nC} \\quad (\\text{blev } 4{,}0\\ \\mathrm{nC}\\ \\text{mer negativ}) \\\\
+\\text{Kula 2: } -3{,}0 \\to +1{,}0\\ \\mathrm{nC} \\quad (\\text{blev } 4{,}0\\ \\mathrm{nC}\\ \\text{mer positiv})
+\\end{array} \\right]
+$$
+
+Kula 1 blev mer negativ → den **tog emot** elektroner. Kula 2 blev mer positiv → den **lämnade ifrån sig** elektroner. Den laddning som flyttades motsvarar $\\Delta Q = 4{,}0\\ \\mathrm{nC}$. Antalet elektroner är då
+
+$$ n = \\frac{\\Delta Q}{q_e} = \\frac{4{,}0 \\cdot 10^{-9}}{1{,}602 \\cdot 10^{-19}} = 2{,}50 \\cdot 10^{10}\\ \\text{st} $$
+
+**Svar:** Cirka $2{,}5 \\cdot 10^{10}$ elektroner flyttade från kula 2 till kula 1.
+
+**Generell slutsats:** Det är *elektroner* som rör sig, aldrig protoner. En kula blir mindre positiv genom att ta emot elektroner, inte genom att "skicka iväg" positiv laddning. Att räkna ut den flyttade laddningen $\\Delta Q$ — inte sluttillståndet — är nyckeln.`,
+        },
+        {
+            level: 3,
+            question: `Två små kulor med laddningarna $Q_1$ och $Q_2$ hänger på avståndet $10\\ \\mathrm{cm}$ från varandra och **attraherar** varandra med kraften $14{,}4\\ \\mathrm{\\mu N}$. Kulorna får sedan vidröra varandra och placeras åter på $10\\ \\mathrm{cm}$ avstånd — nu **repellerar** de varandra med kraften $8{,}1\\ \\mathrm{\\mu N}$. Bestäm de ursprungliga laddningarna $Q_1$ och $Q_2$. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)`,
+            solution: `Detta går inte att lösa med ren insättning — vi måste ställa upp två samband och lösa ett ekvationssystem.
+
+**Efter beröringen** delar de två lika stora kulorna laddningen jämnt, så var och en får $\\dfrac{Q_1 + Q_2}{2}$. Att de nu repellerar med $8{,}1\\ \\mathrm{\\mu N}$ ger via Coulombs lag
+
+$$ F_2 = k \\cdot \\frac{\\left(\\frac{Q_1+Q_2}{2}\\right)^2}{r^2} \\quad\\Rightarrow\\quad \\frac{Q_1+Q_2}{2} = \\sqrt{\\frac{F_2 \\cdot r^2}{k}} = \\sqrt{\\frac{8{,}1 \\cdot 10^{-6} \\cdot 0{,}10^2}{8{,}99 \\cdot 10^9}} = 3{,}0 \\cdot 10^{-9}\\ \\mathrm{C} $$
+
+**Summan** blir alltså $Q_1 + Q_2 = 6{,}0\\ \\mathrm{nC}$.
+
+**Före beröringen** attraherade kulorna varandra → laddningarna hade *olika* tecken, så produkten $Q_1 \\cdot Q_2$ är negativ. Coulombs lag ger produktens storlek:
+
+$$ F_1 = k \\cdot \\frac{|Q_1 \\cdot Q_2|}{r^2} \\quad\\Rightarrow\\quad |Q_1 \\cdot Q_2| = \\frac{F_1 \\cdot r^2}{k} = \\frac{14{,}4 \\cdot 10^{-6} \\cdot 0{,}10^2}{8{,}99 \\cdot 10^9} = 1{,}6 \\cdot 10^{-17}\\ \\mathrm{C^2} = 16\\ (\\mathrm{nC})^2 $$
+
+Eftersom tecknen är olika: $Q_1 \\cdot Q_2 = -16\\ (\\mathrm{nC})^2$.
+
+**Ekvationssystemet** (i nC) har alltså summan $6$ och produkten $-16$. Talen $Q_1$ och $Q_2$ är rötter till
+
+$$ x^2 - 6x - 16 = 0 \\quad\\Rightarrow\\quad x = \\frac{6 \\pm \\sqrt{36 + 64}}{2} = \\frac{6 \\pm 10}{2} $$
+
+vilket ger $x = 8$ eller $x = -2$.
+
+**Svar:** Laddningarna var $+8{,}0\\ \\mathrm{nC}$ och $-2{,}0\\ \\mathrm{nC}$.
+
+**Generell slutsats:** Det avgörande är att läsa av *tecknet* ur kraftriktningen (attraktion → produkt negativ, repulsion → produkt positiv) och att inse att beröringen ger medelladdningen. Då blir summa och produkt kända, och laddningarna är rötterna till $x^2 - (\\text{summa})x + (\\text{produkt}) = 0$.`,
+        },
+    ],
+
+    'fy1-7.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Två små laddade kulor har laddningarna $Q_1 = 8{,}0\\ \\mathrm{nC}$ och $Q_2 = 5{,}0\\ \\mathrm{nC}$ och placeras $20\\ \\mathrm{cm}$ från varandra. Hur stor är den elektriska kraften mellan dem? Coulombs konstant är $k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$.`,
+            answer: { value: 9.0, unit: 'μN' },
+            solution: `Vi ställer upp Coulombs lag:
+
+$$ F = k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} $$
+
+Mätvärden (laddningar och avstånd i SI-enheter):
+$$
+\\left[ \\begin{array}{l}
+Q_1 = 8{,}0\\ \\mathrm{nC} = 8{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+Q_2 = 5{,}0\\ \\mathrm{nC} = 5{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+r = 20\\ \\mathrm{cm} = 0{,}20\\ \\mathrm{m} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ F = 8{,}99 \\cdot 10^9 \\cdot \\frac{8{,}0 \\cdot 10^{-9} \\cdot 5{,}0 \\cdot 10^{-9}}{0{,}20^2} = 8{,}99 \\cdot 10^{-6}\\ \\mathrm{N} \\approx 9{,}0\\ \\mathrm{\\mu N} $$
+
+**Svar:** Kraften är ungefär $9{,}0\\ \\mathrm{\\mu N}$.
+
+**Generell slutsats:** Glöm inte att omvandla nC till C ($10^{-9}$) och cm till m innan insättning — en av de vanligaste felkällorna i Coulomb-uppgifter är enheter som inte omvandlats.`,
+        },
+        {
+            level: 1,
+            question: `Två laddningar $Q_1 = 2{,}0\\ \\mathrm{nC}$ och $Q_2 = 5{,}0\\ \\mathrm{nC}$ påverkar varandra med kraften $F = 9{,}0\\ \\mathrm{\\mu N}$. Hur långt från varandra befinner de sig? Svara i cm.`,
+            answer: { value: 10, unit: 'cm' },
+            solution: `Vi utgår från Coulombs lag och löser ut avståndet *r*:
+
+$$ F = k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} \\quad\\Leftrightarrow\\quad r = \\sqrt{\\frac{k \\cdot Q_1 \\cdot Q_2}{F}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q_1 = 2{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+Q_2 = 5{,}0 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+F = 9{,}0\\ \\mathrm{\\mu N} = 9{,}0 \\cdot 10^{-6}\\ \\mathrm{N} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ r = \\sqrt{\\frac{8{,}99 \\cdot 10^9 \\cdot 2{,}0 \\cdot 10^{-9} \\cdot 5{,}0 \\cdot 10^{-9}}{9{,}0 \\cdot 10^{-6}}} = 0{,}10\\ \\mathrm{m} = 10\\ \\mathrm{cm} $$
+
+**Svar:** Avståndet är ungefär $10\\ \\mathrm{cm}$.
+
+**Generell slutsats:** Eftersom avståndet står i kvadrat i nämnaren måste vi dra roten ur till slut. Att lösa ut *r* är ett vanligt extra steg jämfört med att bara räkna ut kraften direkt.`,
+        },
+        {
+            level: 1,
+            question: `Laddningen $Q_1 = 2\\ \\mathrm{nC}$ och laddningen $Q_2 = 8\\ \\mathrm{nC}$ påverkar varandra elektriskt. Vad gäller för krafterna på de två laddningarna?`,
+            choices: [
+                `Kraften är fyra gånger så stor på $Q_2$, eftersom den laddningen är fyra gånger så stor.`,
+                `Kraften är lika stor på båda laddningarna, men riktad åt motsatt håll.`,
+                `Kraften är större på $Q_1$, eftersom den är mindre och därför lättare att påverka.`,
+                `Det går inte att avgöra utan att veta avståndet mellan dem.`,
+            ],
+            correct: 1,
+            solution: `Enligt **Newtons tredje lag** är kraften som $Q_1$ utövar på $Q_2$ exakt lika stor som kraften $Q_2$ utövar på $Q_1$ — fast åt motsatt håll. Det spelar ingen roll att den ena laddningen är större.
+
+Det syns också direkt i Coulombs lag: i uttrycket $F = k \\cdot Q_1 \\cdot Q_2 / r^2$ ingår *båda* laddningarna i samma produkt, så det blir ett och samma kraftvärde för paret.
+
+**Svar:** Alternativ B — lika stor kraft på båda, motsatt riktad.
+
+**Generell slutsats:** Samma princip som i gravitationen: jorden drar i dig med samma kraft som du drar i jorden, trots den enorma masskillnaden. En större laddning ger inte en större kraft på "den andra parten".`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två laddade kulor påverkar varandra med en viss elektrisk kraft. Avståndet mellan dem fördubblas samtidigt som den ena kulans laddning tredubblas. Hur många gånger så stor blir den nya kraften jämfört med den ursprungliga?`,
+            answer: { value: 0.75, unit: 'gånger' },
+            solution: `Vi saknar mätvärden och löser uppgiften generellt. Den ursprungliga kraften är
+
+$$ F_1 = k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} $$
+
+Den ena laddningen tredubblas ($Q_1 \\to 3Q_1$) och avståndet fördubblas ($r \\to 2r$). Den nya kraften blir
+
+$$ F_2 = k \\cdot \\frac{(3 Q_1) \\cdot Q_2}{(2r)^2} = k \\cdot \\frac{3 \\cdot Q_1 \\cdot Q_2}{4 r^2} = \\frac{3}{4} \\cdot k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} = \\frac{3}{4} F_1 $$
+
+**Svar:** Kraften blir $\\tfrac{3}{4} = 0{,}75$ gånger så stor (alltså mindre än förut).
+
+**Generell slutsats:** Laddningen ökar kraften linjärt (faktor 3), men avståndet slår igenom i kvadrat (faktor $2^2 = 4$ i nämnaren). Avståndets kvadratiska beroende "vinner" här, så kraften minskar trots att laddningen ökade.`,
+        },
+        {
+            level: 2,
+            question: `En liten kula med massan $m = 0{,}50\\ \\mathrm{g}$ och laddningen $Q_1 = 30\\ \\mathrm{nC}$ befinner sig $5{,}0\\ \\mathrm{cm}$ från en fast laddning $Q_2 = 40\\ \\mathrm{nC}$. Vilken acceleration får den rörliga kulan i det ögonblicket? Bortse från tyngdkraften.`,
+            answer: { value: 8.6, unit: 'm/s²' },
+            solution: `Vi beräknar först den elektriska kraften med Coulombs lag:
+
+$$ F = k \\cdot \\frac{Q_1 \\cdot Q_2}{r^2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q_1 = 30 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+Q_2 = 40 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+r = 5{,}0\\ \\mathrm{cm} = 0{,}050\\ \\mathrm{m} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+$$ F = 8{,}99 \\cdot 10^9 \\cdot \\frac{30 \\cdot 10^{-9} \\cdot 40 \\cdot 10^{-9}}{0{,}050^2} = 4{,}32 \\cdot 10^{-3}\\ \\mathrm{N} $$
+
+Accelerationen fås ur **Newtons andra lag** $F = m \\cdot a$, löst för *a*:
+
+$$ a = \\frac{F}{m} = \\frac{4{,}32 \\cdot 10^{-3}}{0{,}50 \\cdot 10^{-3}} = 8{,}6\\ \\mathrm{m/s^2} $$
+
+**Svar:** Kulan får accelerationen ungefär $8{,}6\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Den elektriska kraften driver rörelsen, men accelerationen beror också på massan. Glöm inte att massan i gram måste bli kilogram ($0{,}50\\ \\mathrm{g} = 0{,}50 \\cdot 10^{-3}\\ \\mathrm{kg}$).`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Tre laddningar sitter på en rät linje. I mitten sitter $Q_2 = +4{,}0\\ \\mathrm{nC}$. På avståndet $2{,}0\\ \\mathrm{cm}$ till vänster om den sitter $Q_1 = +6{,}0\\ \\mathrm{nC}$, och på avståndet $3{,}0\\ \\mathrm{cm}$ till höger sitter $Q_3 = -5{,}0\\ \\mathrm{nC}$. Bestäm storleken på den resulterande elektriska kraften på mittladdningen $Q_2$.`,
+            answer: { value: 740, unit: 'μN' },
+            solution: `Mittladdningen $Q_2$ påverkas av två krafter — en från varje grannladdning. Vi bestämmer storlek och riktning för var och en.
+
+**Kraften från $Q_1$ (till vänster):** $Q_1$ och $Q_2$ är båda positiva → de repellerar. $Q_2$ knuffas alltså **åt höger**, bort från $Q_1$.
+
+$$ F_1 = k \\cdot \\frac{Q_1 \\cdot Q_2}{r_1^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{6{,}0 \\cdot 10^{-9} \\cdot 4{,}0 \\cdot 10^{-9}}{0{,}020^2} = 5{,}39 \\cdot 10^{-4}\\ \\mathrm{N} $$
+
+**Kraften från $Q_3$ (till höger):** $Q_2$ är positiv och $Q_3$ negativ → de attraherar. $Q_2$ dras alltså **åt höger**, mot $Q_3$.
+
+$$ F_3 = k \\cdot \\frac{Q_2 \\cdot Q_3}{r_3^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{4{,}0 \\cdot 10^{-9} \\cdot 5{,}0 \\cdot 10^{-9}}{0{,}030^2} = 2{,}00 \\cdot 10^{-4}\\ \\mathrm{N} $$
+
+Båda krafterna pekar **åt samma håll** (åt höger), så den resulterande kraften är summan:
+
+$$ F = F_1 + F_3 = 5{,}39 \\cdot 10^{-4} + 2{,}00 \\cdot 10^{-4} = 7{,}39 \\cdot 10^{-4}\\ \\mathrm{N} \\approx 740\\ \\mathrm{\\mu N} $$
+
+**Svar:** Den resulterande kraften är ungefär $740\\ \\mathrm{\\mu N}$ (eller $0{,}74\\ \\mathrm{mN}$), riktad åt höger.
+
+**Generell slutsats:** I superpositionsuppgifter måste man först avgöra varje krafts *riktning* med tecken-regeln (lika repellerar, olika attraherar) och sedan addera. Här pekade båda åt samma håll och adderades. Hade de pekat åt motsatt håll skulle man istället subtraherat — och den största kraften bestämt nettoriktningen.`,
+        },
+        {
+            level: 3,
+            question: `På en rät linje sitter laddningen $Q_1 = +4{,}0\\ \\mathrm{nC}$ i origo och laddningen $Q_2 = +9{,}0\\ \\mathrm{nC}$ på avståndet $50\\ \\mathrm{cm}$ till höger. Var på linjen mellan laddningarna ska en tredje laddning placeras för att den **inte ska påverkas av någon resulterande elektrisk kraft**? Ange avståndet från $Q_1$.`,
+            answer: { value: 20, unit: 'cm' },
+            solution: `Den tredje laddningen *q* påverkas av en kraft från var och en av de andra. Nettokraften är noll där de två krafterna är **lika stora och motriktade**. Eftersom $Q_1$ och $Q_2$ båda är positiva pekar deras krafter på *q* åt motsatt håll någonstans *mellan* dem — där finns nollpunkten.
+
+Kalla avståndet från $Q_1$ till punkten *x*. Avståndet till $Q_2$ är då $(d - x)$ där $d = 50\\ \\mathrm{cm}$. Kraftjämvikt med Coulombs lag (*q* och *k* finns i båda led och stryks):
+
+$$ k \\cdot \\frac{Q_1 \\cdot q}{x^2} = k \\cdot \\frac{Q_2 \\cdot q}{(d-x)^2} \\quad\\Rightarrow\\quad \\frac{Q_1}{x^2} = \\frac{Q_2}{(d-x)^2} $$
+
+Vi kastar om och drar roten ur båda led:
+
+$$ \\frac{(d-x)^2}{x^2} = \\frac{Q_2}{Q_1} \\quad\\Rightarrow\\quad \\frac{d-x}{x} = \\sqrt{\\frac{Q_2}{Q_1}} = \\sqrt{\\frac{9{,}0}{4{,}0}} = 1{,}5 $$
+
+$$ d - x = 1{,}5x \\quad\\Rightarrow\\quad d = 2{,}5x \\quad\\Rightarrow\\quad x = \\frac{50}{2{,}5} = 20\\ \\mathrm{cm} $$
+
+**Svar:** $20\\ \\mathrm{cm}$ från den mindre laddningen ($Q_1$).
+
+**Generell slutsats:** Nollpunkten ligger *närmare den mindre laddningen* — dess svagare fält behöver kortare avstånd för att hinna ikapp den starkares. Insikten är att sätta krafterna lika och dra roten ur; laddningen *q* och konstanten *k* stryks och spelar ingen roll.`,
+        },
+    ],
+
+    'fy1-7.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En laddning på $Q = 12\\ \\mathrm{C}$ passerar ett tvärsnitt i en ledare under tiden $t = 4{,}0\\ \\mathrm{s}$. Hur stor är strömmen genom ledaren?`,
+            answer: { value: 3.0, unit: 'A' },
+            solution: `Strömmen är laddningen som passerar per tidsenhet:
+
+$$ I = \\frac{Q}{t} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q = 12\\ \\mathrm{C} \\\\
+t = 4{,}0\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ I = \\frac{12}{4{,}0} = 3{,}0\\ \\mathrm{A} $$
+
+**Svar:** Strömmen är $3{,}0\\ \\mathrm{A}$.`,
+        },
+        {
+            level: 1,
+            question: `Genom en lampa går strömmen $I = 0{,}50\\ \\mathrm{A}$ under $2{,}0$ minuter. Hur stor laddning har då passerat genom lampan? Svara i coulomb.`,
+            answer: { value: 60, unit: 'C' },
+            solution: `Vi löser ut laddningen *Q* ur formeln för ström:
+
+$$ I = \\frac{Q}{t} \\quad\\Leftrightarrow\\quad Q = I \\cdot t $$
+
+Mätvärden (tiden omvandlad till sekunder):
+$$
+\\left[ \\begin{array}{l}
+I = 0{,}50\\ \\mathrm{A} \\\\
+t = 2{,}0\\ \\mathrm{min} = 2{,}0 \\cdot 60\\ \\mathrm{s} = 120\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ Q = 0{,}50 \\cdot 120 = 60\\ \\mathrm{C} $$
+
+**Svar:** Laddningen är $60\\ \\mathrm{C}$.
+
+**Generell slutsats:** Tiden måste vara i sekunder för att svaret ska bli i coulomb. Glömmer man att omvandla minuter till sekunder blir svaret 60 gånger för litet.`,
+        },
+        {
+            level: 1,
+            question: `I kretsen nedan delar strömmen från batteriet upp sig i två grenar. Strömmen ut från batteriet är $I = 0{,}90\\ \\mathrm{A}$ och genom den vänstra grenen ($R_1$) går strömmen $I_1 = 0{,}55\\ \\mathrm{A}$. Hur stor är strömmen $I_2$ genom den högra grenen ($R_2$)?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R_1' }],
+        [{ type: 'resistor', label: 'R_2' }],
+    ] }],
+})}`,
+            answer: { value: 0.35, unit: 'A' },
+            solution: `Vid förgreningspunkten gäller **Kirchhoffs första lag**: summan av strömmarna in i punkten är lika med summan av strömmarna ut.
+
+Hela strömmen *I* från batteliet delar upp sig i $I_1$ och $I_2$:
+
+$$ I = I_1 + I_2 \\quad\\Leftrightarrow\\quad I_2 = I - I_1 $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+I = 0{,}90\\ \\mathrm{A} \\\\
+I_1 = 0{,}55\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ I_2 = 0{,}90 - 0{,}55 = 0{,}35\\ \\mathrm{A} $$
+
+**Svar:** Strömmen genom den högra grenen är $I_2 = 0{,}35\\ \\mathrm{A}$.
+
+**Generell slutsats:** Strömmen kan aldrig "försvinna" eller "fastna" i en förgrening — allt som går in måste komma ut. Grenströmmarna adderas till huvudströmmen.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett uppladdningsbart batteri är märkt $2{,}0\\ \\mathrm{Ah}$ (amperetimmar). Det driver en lampa som drar strömmen $0{,}25\\ \\mathrm{A}$. Hur länge räcker batteriet innan det är urladdat? Svara i timmar.`,
+            answer: { value: 8.0, unit: 'h' },
+            solution: `Märkningen $2{,}0\\ \\mathrm{Ah}$ betyder att batteriet kan leverera laddningen $Q = 2{,}0\\ \\mathrm{Ah}$. Vi löser ut tiden *t* ur strömformeln:
+
+$$ I = \\frac{Q}{t} \\quad\\Leftrightarrow\\quad t = \\frac{Q}{I} $$
+
+Här kan vi räkna med laddningen i Ah och strömmen i A direkt, eftersom $\\mathrm{Ah} / \\mathrm{A} = \\mathrm{h}$:
+
+$$
+\\left[ \\begin{array}{l}
+Q = 2{,}0\\ \\mathrm{Ah} \\\\
+I = 0{,}25\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{2{,}0}{0{,}25} = 8{,}0\\ \\mathrm{h} $$
+
+**Svar:** Batteriet räcker i $8{,}0$ timmar.
+
+**Generell slutsats:** Enheten amperetimme är skräddarsydd för just den här beräkningen — ett batteri på "X Ah" levererar strömmen 1 A i X timmar, eller 0,5 A i 2X timmar, osv. Man behöver inte omvandla till coulomb om både laddning (Ah) och ström (A) hålls i samma "system".`,
+        },
+        {
+            level: 2,
+            question: `Genom en ledare går strömmen $0{,}50\\ \\mathrm{A}$. Hur många elektroner passerar ett tvärsnitt i ledaren under $1{,}0\\ \\mathrm{s}$? Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 3.1e18, unit: 'st' },
+            solution: `Vi beräknar först laddningen *Q* som passerar under sekunden:
+
+$$ I = \\frac{Q}{t} \\quad\\Leftrightarrow\\quad Q = I \\cdot t = 0{,}50 \\cdot 1{,}0 = 0{,}50\\ \\mathrm{C} $$
+
+Antalet elektroner *n* fås genom att dividera laddningen med elektronens laddning $q_e$:
+
+$$ n = \\frac{Q}{q_e} $$
+
+$$
+\\left[ \\begin{array}{l}
+Q = 0{,}50\\ \\mathrm{C} \\\\
+q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ n = \\frac{0{,}50}{1{,}602 \\cdot 10^{-19}} = 3{,}12 \\cdot 10^{18}\\ \\text{st} \\approx 3{,}1 \\cdot 10^{18}\\ \\text{st} $$
+
+**Svar:** Ungefär $3{,}1 \\cdot 10^{18}$ elektroner.
+
+**Generell slutsats:** Även en ganska blygsam ström motsvarar ett enormt antal elektroner per sekund — laddningen hos en enda elektron är extremt liten.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett uppladdningsbart batteri är märkt $2{,}4\\ \\mathrm{Ah}$. Det laddas ur helt på exakt ett dygn med konstant ström. Hur många elektroner passerar i genomsnitt genom kretsen varje sekund? ($1\\ \\mathrm{Ah} = 3\\,600\\ \\mathrm{C}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
+            answer: { value: 6.2e17, unit: 'st' },
+            solution: `**Steg 1 — total laddning i coulomb.** Märkningen $2{,}4\\ \\mathrm{Ah}$ omvandlas till coulomb:
+
+$$ Q = 2{,}4\\ \\mathrm{Ah} = 2{,}4 \\cdot 3\\,600\\ \\mathrm{C} = 8\\,640\\ \\mathrm{C} $$
+
+**Steg 2 — strömmen.** Urladdningen sker under ett dygn, $t = 24 \\cdot 3\\,600\\ \\mathrm{s} = 86\\,400\\ \\mathrm{s}$. Strömmen blir
+
+$$ I = \\frac{Q}{t} = \\frac{8\\,640}{86\\,400} = 0{,}10\\ \\mathrm{A} $$
+
+**Steg 3 — elektroner per sekund.** Under en sekund passerar laddningen $Q_1 = I \\cdot t_1 = 0{,}10 \\cdot 1{,}0 = 0{,}10\\ \\mathrm{C}$. Antalet elektroner är
+
+$$ n = \\frac{Q_1}{q_e} = \\frac{0{,}10}{1{,}602 \\cdot 10^{-19}} = 6{,}24 \\cdot 10^{17}\\ \\text{st} \\approx 6{,}2 \\cdot 10^{17}\\ \\text{st} $$
+
+**Svar:** Ungefär $6{,}2 \\cdot 10^{17}$ elektroner per sekund.
+
+**Generell slutsats:** Uppgiften kopplar ihop tre samband: enhetsomvandlingen $\\mathrm{Ah} \\to \\mathrm{C}$, strömdefinitionen $I = Q/t$ och elektronräkningen $n = Q/q_e$. Den vanligaste fällan är att blanda ihop *total* laddning (hela urladdningen) med laddningen *per sekund*.`,
+        },
+        {
+            level: 3,
+            question: `Diagrammet visar strömmen genom en ledare som funktion av tiden. Bestäm den totala laddning som passerat ett tvärsnitt under de första 10 sekunderna, och hur många elektroner det motsvarar. ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)
+
+${makeDiagram({
+    xMax: 10, yMax: 2.5,
+    xTicks: [0, 2, 4, 6, 8, 10], yTicks: [0, 1, 2],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">I</tspan> (A)',
+    paths: [{ points: [[0, 0], [4, 2], [10, 2]] }],
+})}`,
+            answer: { value: 1.0e20, unit: 'st' },
+            solution: `Strömmen är *inte* konstant, så vi kan inte använda $Q = I \\cdot t$ med ett enda strömvärde. Eftersom $I = \\dfrac{Q}{t}$ motsvarar laddningen **arean under** *I-t*-grafen — precis som sträckan är arean under en *v-t*-graf.
+
+${makeDiagram({
+    xMax: 10, yMax: 2.5,
+    xTicks: [0, 2, 4, 6, 8, 10], yTicks: [0, 1, 2],
+    xLabel: '<tspan font-style="italic">t</tspan> (s)',
+    yLabel: '<tspan font-style="italic">I</tspan> (A)',
+    paths: [{ points: [[0, 0], [4, 2], [10, 2]] }],
+    fills: [
+        { points: [[0, 0], [4, 2], [4, 0]] },
+        { points: [[4, 0], [4, 2], [10, 2], [10, 0]] },
+    ],
+})}
+
+Vi delar upp arean i en triangel (0–4 s) och en rektangel (4–10 s):
+
+$$
+\\left[ \\begin{array}{l}
+\\text{Triangel: } \\tfrac{1}{2} \\cdot 4{,}0 \\cdot 2{,}0 = 4{,}0\\ \\mathrm{C} \\\\
+\\text{Rektangel: } 6{,}0 \\cdot 2{,}0 = 12\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ Q = 4{,}0 + 12 = 16\\ \\mathrm{C} $$
+
+Antalet elektroner blir sedan
+
+$$ n = \\frac{Q}{q_e} = \\frac{16}{1{,}602 \\cdot 10^{-19}} = 9{,}99 \\cdot 10^{19} \\approx 1{,}0 \\cdot 10^{20}\\ \\text{st} $$
+
+**Svar:** Laddningen är $16\\ \\mathrm{C}$, vilket motsvarar ungefär $1{,}0 \\cdot 10^{20}$ elektroner.
+
+**Generell slutsats:** Fällan är att gripa efter $Q = I \\cdot t$ — men med vilket *I*? När strömmen varierar är laddningen arean under grafen. Samma princip som att sträcka = area under *v-t*-graf och $\\Delta v$ = area under *a-t*-graf.`,
+        },
+    ],
+
+    'fy1-7.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En laddning $Q = 2{,}0\\ \\mathrm{C}$ förs genom spänningen $U = 12\\ \\mathrm{V}$. Hur stor elektrisk energi omsätts?`,
+            answer: { value: 24, unit: 'J' },
+            solution: `Sambandet mellan spänning, energi och laddning är $U = E/Q$. Vi löser ut energin *E*:
+
+$$ U = \\frac{E}{Q} \\quad\\Leftrightarrow\\quad E = Q \\cdot U $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q = 2{,}0\\ \\mathrm{C} \\\\
+U = 12\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ E = 2{,}0 \\cdot 12 = 24\\ \\mathrm{J} $$
+
+**Svar:** Den omsatta energin är $24\\ \\mathrm{J}$.`,
+        },
+        {
+            level: 1,
+            question: `När laddningen $Q = 0{,}50\\ \\mathrm{C}$ förs mellan två punkter omsätts energin $E = 6{,}0\\ \\mathrm{J}$. Hur stor är spänningen mellan punkterna?`,
+            answer: { value: 12, unit: 'V' },
+            solution: `Spänning är energi per laddning:
+
+$$ U = \\frac{E}{Q} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+E = 6{,}0\\ \\mathrm{J} \\\\
+Q = 0{,}50\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U = \\frac{6{,}0}{0{,}50} = 12\\ \\mathrm{V} $$
+
+**Svar:** Spänningen är $12\\ \\mathrm{V}$.
+
+**Generell slutsats:** Spänning kan tolkas som "energi per coulomb". $1\\ \\mathrm{V} = 1\\ \\mathrm{J/C}$ — en volt betyder att varje coulomb laddning bär med sig en joule energi.`,
+        },
+        {
+            level: 1,
+            question: `En laddning förs mellan polerna på ett $9{,}0\\ \\mathrm{V}$-batteri och energin $E = 4{,}5\\ \\mathrm{J}$ omsätts. Hur stor var laddningen?`,
+            answer: { value: 0.50, unit: 'C' },
+            solution: `Vi löser ut laddningen *Q* ur sambandet $U = E/Q$:
+
+$$ U = \\frac{E}{Q} \\quad\\Leftrightarrow\\quad Q = \\frac{E}{U} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+E = 4{,}5\\ \\mathrm{J} \\\\
+U = 9{,}0\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ Q = \\frac{4{,}5}{9{,}0} = 0{,}50\\ \\mathrm{C} $$
+
+**Svar:** Laddningen var $0{,}50\\ \\mathrm{C}$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vilken hastighet får en elektron som accelereras från vila genom spänningen $U = 200\\ \\mathrm{V}$? Elektronens massa är $m = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$ och dess laddning $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 8.4e6, unit: 'm/s' },
+            solution: `Den elektriska energin som elektronen får ($E = Q \\cdot U$) omvandlas helt till rörelseenergi ($E_k = m v^2 / 2$):
+
+$$ Q \\cdot U = \\frac{m \\cdot v^2}{2} $$
+
+Vi löser ut hastigheten *v*:
+
+$$ v = \\sqrt{\\frac{2 \\cdot Q \\cdot U}{m}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Q = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+U = 200\\ \\mathrm{V} \\\\
+m = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ v = \\sqrt{\\frac{2 \\cdot 1{,}602 \\cdot 10^{-19} \\cdot 200}{9{,}11 \\cdot 10^{-31}}} = 8{,}4 \\cdot 10^6\\ \\mathrm{m/s} $$
+
+**Svar:** Elektronen får hastigheten ungefär $8{,}4 \\cdot 10^6\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Bakom uppgiften ligger energiomvandling: elektrisk energi $\\to$ rörelseenergi. Eftersom hastigheten finns i kvadrat måste man dra roten ur till sist. Notera hur snabbt elektronen blir — flera miljoner meter per sekund redan vid blygsamma 200 V.`,
+        },
+        {
+            level: 2,
+            question: `En elektron har accelererats från vila till hastigheten $v = 3{,}0 \\cdot 10^6\\ \\mathrm{m/s}$. Genom vilken spänning har den accelererats? ($m = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
+            answer: { value: 26, unit: 'V' },
+            solution: `Vi utgår från att den elektriska energin blivit rörelseenergi och löser nu istället ut spänningen *U*:
+
+$$ Q \\cdot U = \\frac{m \\cdot v^2}{2} \\quad\\Leftrightarrow\\quad U = \\frac{m \\cdot v^2}{2 \\cdot Q} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg} \\\\
+v = 3{,}0 \\cdot 10^6\\ \\mathrm{m/s} \\\\
+Q = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U = \\frac{9{,}11 \\cdot 10^{-31} \\cdot (3{,}0 \\cdot 10^6)^2}{2 \\cdot 1{,}602 \\cdot 10^{-19}} = 25{,}6\\ \\mathrm{V} \\approx 26\\ \\mathrm{V} $$
+
+**Svar:** Elektronen har accelererats genom ungefär $26\\ \\mathrm{V}$.
+
+**Generell slutsats:** Detta är omvändningen av föregående uppgift. Glöm inte att kvadrera *hela* hastigheten inklusive tiopotensen: $(3{,}0 \\cdot 10^6)^2 = 9{,}0 \\cdot 10^{12}$.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En elektron och en proton accelereras båda från vila genom **samma** spänning. Hur många gånger så snabb blir elektronen jämfört med protonen? Elektronens massa är $m_e = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$ och protonens $m_p = 1{,}673 \\cdot 10^{-27}\\ \\mathrm{kg}$. (Partiklarna har lika stor laddning, fast med olika tecken.)`,
+            answer: { value: 43, unit: 'gånger' },
+            solution: `Eftersom partiklarna har lika stor laddning *Q* och accelereras genom samma spänning *U*, får de **lika mycket** rörelseenergi:
+
+$$ Q \\cdot U = \\frac{m \\cdot v^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{\\frac{2 \\cdot Q \\cdot U}{m}} $$
+
+Eftersom $Q$ och $U$ är desamma för båda, beror hastigheten bara på massan: $v \\propto \\dfrac{1}{\\sqrt{m}}$. Vi bildar kvoten mellan elektronens och protonens hastighet — då försvinner det gemensamma $2QU$:
+
+$$ \\frac{v_e}{v_p} = \\frac{\\sqrt{2QU / m_e}}{\\sqrt{2QU / m_p}} = \\sqrt{\\frac{m_p}{m_e}} $$
+
+Insättning:
+
+$$ \\frac{v_e}{v_p} = \\sqrt{\\frac{1{,}673 \\cdot 10^{-27}}{9{,}11 \\cdot 10^{-31}}} = \\sqrt{1\\,836} = 42{,}8\\ldots \\approx 43 $$
+
+**Svar:** Elektronen blir ungefär $43$ gånger så snabb som protonen.
+
+**Generell slutsats:** Samma energi ger inte samma hastighet — den lätta partikeln blir mycket snabbare. Tricket är att bilda kvoten *innan* man sätter in värden, så att den okända spänningen och laddningen stryks bort. Då behövs inget värde på *U* alls.`,
+        },
+    ],
+
+    'fy1-7.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En resistor med resistansen $R = 220\\ \\mathrm{\\Omega}$ genomflyts av strömmen $I = 0{,}050\\ \\mathrm{A}$. Hur stor är spänningen över resistorn?`,
+            answer: { value: 11, unit: 'V' },
+            solution: `Vi använder **Ohms lag**:
+
+$$ U = R \\cdot I $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+R = 220\\ \\mathrm{\\Omega} \\\\
+I = 0{,}050\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U = 220 \\cdot 0{,}050 = 11\\ \\mathrm{V} $$
+
+**Svar:** Spänningen är $11\\ \\mathrm{V}$.`,
+        },
+        {
+            level: 1,
+            question: `Över en lampa ligger spänningen $U = 6{,}0\\ \\mathrm{V}$ och genom den går strömmen $I = 0{,}40\\ \\mathrm{A}$. Hur stor är lampans resistans?`,
+            answer: { value: 15, unit: 'Ω' },
+            solution: `Vi löser ut resistansen *R* ur Ohms lag:
+
+$$ U = R \\cdot I \\quad\\Leftrightarrow\\quad R = \\frac{U}{I} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 6{,}0\\ \\mathrm{V} \\\\
+I = 0{,}40\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ R = \\frac{6{,}0}{0{,}40} = 15\\ \\mathrm{\\Omega} $$
+
+**Svar:** Lampans resistans är $15\\ \\mathrm{\\Omega}$.`,
+        },
+        {
+            level: 1,
+            question: `En resistor på $R = 50\\ \\mathrm{\\Omega}$ kopplas till spänningen $U = 12\\ \\mathrm{V}$. Hur stor blir strömmen genom resistorn?`,
+            answer: { value: 0.24, unit: 'A' },
+            solution: `Vi löser ut strömmen *I* ur Ohms lag:
+
+$$ U = R \\cdot I \\quad\\Leftrightarrow\\quad I = \\frac{U}{R} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 12\\ \\mathrm{V} \\\\
+R = 50\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ I = \\frac{12}{50} = 0{,}24\\ \\mathrm{A} $$
+
+**Svar:** Strömmen är $0{,}24\\ \\mathrm{A}$.
+
+**Generell slutsats:** Ohms lag kan lösas ut åt tre håll — $U = R \\cdot I$, $R = U/I$ och $I = U/R$. Vilken form du behöver beror på vad som efterfrågas.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En kopparledare är $25\\ \\mathrm{m}$ lång och har tvärsnittsarean $1{,}5\\ \\mathrm{mm^2}$. Kopparens resistivitet är $\\rho = 1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m}$. Bestäm ledarens resistans.`,
+            answer: { value: 0.28, unit: 'Ω' },
+            solution: `Resistansen i en ledare beror på resistivitet, längd och tvärsnittsarea:
+
+$$ R = \\rho \\cdot \\frac{l}{A} $$
+
+Mätvärden (arean omvandlad till m²):
+$$
+\\left[ \\begin{array}{l}
+\\rho = 1{,}7 \\cdot 10^{-8}\\ \\mathrm{\\Omega \\cdot m} \\\\
+l = 25\\ \\mathrm{m} \\\\
+A = 1{,}5\\ \\mathrm{mm^2} = 1{,}5 \\cdot 10^{-6}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ R = 1{,}7 \\cdot 10^{-8} \\cdot \\frac{25}{1{,}5 \\cdot 10^{-6}} = 0{,}283\\ \\mathrm{\\Omega} \\approx 0{,}28\\ \\mathrm{\\Omega} $$
+
+**Svar:** Ledarens resistans är ungefär $0{,}28\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** Den knepiga omvandlingen är arean: $1\\ \\mathrm{mm^2} = 10^{-6}\\ \\mathrm{m^2}$ (inte $10^{-3}$!), eftersom $\\mathrm{mm^2} = (10^{-3}\\ \\mathrm{m})^2 = 10^{-6}\\ \\mathrm{m^2}$. Koppar har låg resistivitet, därför är resistansen liten trots 25 meter ledare.`,
+        },
+        {
+            level: 2,
+            question: `En $10\\ \\mathrm{m}$ lång nikromtråd med tvärsnittsarean $0{,}20\\ \\mathrm{mm^2}$ kopplas till spänningen $1{,}5\\ \\mathrm{V}$. Hur stor ström går genom tråden? Nikromens resistivitet är $\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m}$.`,
+            answer: { value: 27, unit: 'mA' },
+            solution: `Vi beräknar först trådens resistans:
+
+$$ R = \\rho \\cdot \\frac{l}{A} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m} \\\\
+l = 10\\ \\mathrm{m} \\\\
+A = 0{,}20\\ \\mathrm{mm^2} = 0{,}20 \\cdot 10^{-6}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$ R = 1{,}1 \\cdot 10^{-6} \\cdot \\frac{10}{0{,}20 \\cdot 10^{-6}} = 55\\ \\mathrm{\\Omega} $$
+
+Sedan ger Ohms lag strömmen:
+
+$$ I = \\frac{U}{R} = \\frac{1{,}5}{55} = 0{,}0273\\ \\mathrm{A} \\approx 27\\ \\mathrm{mA} $$
+
+**Svar:** Strömmen är ungefär $27\\ \\mathrm{mA}$ (eller $0{,}027\\ \\mathrm{A}$).
+
+**Generell slutsats:** Uppgiften kräver två formler i följd: först $R = \\rho l / A$ för att hitta trådens resistans, sedan Ohms lag för strömmen. Nikrom har hög resistivitet — därför används det just i värmetrådar.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En värmetråd av nikrom ska ha resistansen $R = 24\\ \\mathrm{\\Omega}$. Tråden har en cirkulär tvärsnittsyta med diametern $d = 0{,}40\\ \\mathrm{mm}$, och nikromens resistivitet är $\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m}$. Hur lång måste tråden vara?`,
+            answer: { value: 2.7, unit: 'm' },
+            solution: `**Steg 1 — tvärsnittsarean.** Tråden är cirkulär, så arean fås ur diametern via radien $r = d/2$:
+
+$$ A = \\pi \\cdot r^2 = \\pi \\cdot \\left(\\frac{d}{2}\\right)^2 = \\pi \\cdot (0{,}20 \\cdot 10^{-3})^2 = 1{,}26 \\cdot 10^{-7}\\ \\mathrm{m^2} $$
+
+**Steg 2 — lös ut längden.** Vi utgår från formeln för resistans i ledare och löser ut *l*:
+
+$$ R = \\rho \\cdot \\frac{l}{A} \\quad\\Leftrightarrow\\quad l = \\frac{R \\cdot A}{\\rho} $$
+
+$$
+\\left[ \\begin{array}{l}
+R = 24\\ \\mathrm{\\Omega} \\\\
+A = 1{,}26 \\cdot 10^{-7}\\ \\mathrm{m^2} \\\\
+\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m}
+\\end{array} \\right]
+$$
+
+$$ l = \\frac{24 \\cdot 1{,}26 \\cdot 10^{-7}}{1{,}1 \\cdot 10^{-6}} = 2{,}74\\ \\mathrm{m} \\approx 2{,}7\\ \\mathrm{m} $$
+
+**Svar:** Tråden måste vara ungefär $2{,}7\\ \\mathrm{m}$ lång.
+
+**Generell slutsats:** Två fällor lurar här. Dels måste arean räknas ut ur *diametern* (halvera till radie först, kvadrera sedan). Dels ska $\\rho l / A = R$ lösas ut för *l*. Diametern $0{,}40\\ \\mathrm{mm}$ ger radien $0{,}20\\ \\mathrm{mm} = 0{,}20 \\cdot 10^{-3}\\ \\mathrm{m}$.`,
+        },
+        {
+            level: 3,
+            question: `En metalltråd har resistansen $R_0 = 5{,}0\\ \\mathrm{\\Omega}$. Tråden dras ut (sträcks) till **tre gånger** sin ursprungliga längd. Materialets volym är oförändrad. Hur stor blir trådens nya resistans?`,
+            answer: { value: 45, unit: 'Ω' },
+            solution: `Den naiva gissningen "tre gånger längre → tre gånger så stor resistans" är **fel** — den missar att tvärsnittsarean ändras när tråden sträcks.
+
+Volymen $V = A \\cdot l$ är konstant. När längden tredubblas ($l \\to 3l$) måste arean krympa till en tredjedel ($A \\to A/3$) för att produkten $A \\cdot l$ ska vara oförändrad.
+
+Sätt in i formeln för resistans i ledare:
+
+$$ R = \\rho \\cdot \\frac{l}{A} \\quad\\Rightarrow\\quad R_\\text{ny} = \\rho \\cdot \\frac{3l}{A/3} = 9 \\cdot \\rho \\cdot \\frac{l}{A} = 9 R_0 $$
+
+$$ R_\\text{ny} = 9 \\cdot 5{,}0 = 45\\ \\mathrm{\\Omega} $$
+
+**Svar:** Den nya resistansen är $45\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** När en tråd sträcks med konstant volym ändras resistansen med **kvadraten** på längdfaktorn: $n$ gånger längre ger $n^2$ gånger så stor resistans. Längdökningen och areaminskningen samverkar — båda höjer resistansen.`,
+        },
+    ],
+
+    'fy1-7.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Tre resistorer seriekopplas enligt schemat. Bestäm kretsens ersättningsresistans $R_\\mathrm{tot}$.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '10 Ω' },
+        { type: 'resistor', label: 'R_2', value: '15 Ω' },
+        { type: 'resistor', label: 'R_3', value: '25 Ω' },
+    ],
+})}`,
+            answer: { value: 50, unit: 'Ω' },
+            solution: `Vid **seriekoppling** är ersättningsresistansen summan av de enskilda resistanserna:
+
+$$ R_\\mathrm{tot} = R_1 + R_2 + R_3 $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+R_1 = 10\\ \\mathrm{\\Omega} \\\\
+R_2 = 15\\ \\mathrm{\\Omega} \\\\
+R_3 = 25\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ R_\\mathrm{tot} = 10 + 15 + 25 = 50\\ \\mathrm{\\Omega} $$
+
+**Svar:** Ersättningsresistansen är $50\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** I en seriekoppling blir totalresistansen alltid *större* än den största enskilda resistorn — strömmen tvingas igenom alla i tur och ordning.`,
+        },
+        {
+            level: 1,
+            question: `Två resistorer på vardera $12\\ \\mathrm{\\Omega}$ parallellkopplas enligt schemat. Bestäm ersättningsresistansen.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R_1', value: '12 Ω' }],
+        [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+    ] }],
+})}`,
+            answer: { value: 6.0, unit: 'Ω' },
+            solution: `Vid **parallellkoppling** gäller att inversen av ersättningsresistansen är summan av inverserna:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2} = \\frac{1}{12} + \\frac{1}{12} = \\frac{2}{12} = \\frac{1}{6} $$
+
+$$ R_\\mathrm{tot} = 6{,}0\\ \\mathrm{\\Omega} $$
+
+**Svar:** Ersättningsresistansen är $6{,}0\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** Två *lika* stora resistorer i parallellkoppling ger alltid halva resistansen. I parallellkoppling blir totalresistansen alltid *mindre* än den minsta grenen — strömmen får fler vägar att välja på.`,
+        },
+        {
+            level: 1,
+            question: `En $20\\ \\mathrm{\\Omega}$-resistor och en $60\\ \\mathrm{\\Omega}$-resistor parallellkopplas enligt schemat. Bestäm ersättningsresistansen.
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R_1', value: '20 Ω' }],
+        [{ type: 'resistor', label: 'R_2', value: '60 Ω' }],
+    ] }],
+})}`,
+            answer: { value: 15, unit: 'Ω' },
+            solution: `Vi använder formeln för parallellkoppling:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2} = \\frac{1}{20} + \\frac{1}{60} $$
+
+Vi sätter på gemensam nämnare (60):
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{3}{60} + \\frac{1}{60} = \\frac{4}{60} = \\frac{1}{15} $$
+
+$$ R_\\mathrm{tot} = 15\\ \\mathrm{\\Omega} $$
+
+**Svar:** Ersättningsresistansen är $15\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** Glöm inte sista steget — formeln ger $1/R_\\mathrm{tot}$, så du måste invertera till slut för att få $R_\\mathrm{tot}$. En vanlig miss är att svara $1/15\\ \\mathrm{\\Omega}$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En okänd resistor parallellkopplas med en $30\\ \\mathrm{\\Omega}$-resistor. Tillsammans ger de ersättningsresistansen $12\\ \\mathrm{\\Omega}$. Hur stor är den okända resistorn?
+
+${makeCircuit({
+    source: { label: 'U' },
+    components: [{ type: 'parallel', branches: [
+        [{ type: 'resistor', label: 'R_1', value: '30 Ω' }],
+        [{ type: 'resistor', label: 'R_2', value: '?' }],
+    ] }],
+})}`,
+            answer: { value: 20, unit: 'Ω' },
+            solution: `Vi utgår från parallellkopplingsformeln och löser ut den okända termen $1/R_2$:
+
+$$ \\frac{1}{R_\\mathrm{tot}} = \\frac{1}{R_1} + \\frac{1}{R_2} \\quad\\Leftrightarrow\\quad \\frac{1}{R_2} = \\frac{1}{R_\\mathrm{tot}} - \\frac{1}{R_1} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+R_\\mathrm{tot} = 12\\ \\mathrm{\\Omega} \\\\
+R_1 = 30\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+Insättning (gemensam nämnare 60):
+
+$$ \\frac{1}{R_2} = \\frac{1}{12} - \\frac{1}{30} = \\frac{5}{60} - \\frac{2}{60} = \\frac{3}{60} = \\frac{1}{20} $$
+
+$$ R_2 = 20\\ \\mathrm{\\Omega} $$
+
+**Svar:** Den okända resistorn är $20\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** Eftersom totalresistansen ($12\\ \\mathrm{\\Omega}$) måste vara mindre än varje enskild gren, kan vi direkt sluta oss till att den okända resistorn är större än $12\\ \\mathrm{\\Omega}$ — en bra rimlighetskontroll.`,
+        },
+        {
+            level: 2,
+            question: `Två resistorer $R_1 = 15\\ \\mathrm{\\Omega}$ och $R_2 = 45\\ \\mathrm{\\Omega}$ seriekopplas till ett batteri med spänningen $U = 12\\ \\mathrm{V}$. Hur stor ström går ut från batteriet?
+
+${makeCircuit({
+    source: { label: 'U', value: '12 V' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '15 Ω' },
+        { type: 'resistor', label: 'R_2', value: '45 Ω' },
+    ],
+})}`,
+            answer: { value: 0.20, unit: 'A' },
+            solution: `Vi beräknar först kretsens ersättningsresistans. Resistorerna sitter i serie:
+
+$$ R_\\mathrm{tot} = R_1 + R_2 = 15 + 45 = 60\\ \\mathrm{\\Omega} $$
+
+Strömmen ut från batteriet fås sedan ur Ohms lag:
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{12}{60} = 0{,}20\\ \\mathrm{A} $$
+
+**Svar:** Strömmen ut från batteriet är $0{,}20\\ \\mathrm{A}$.
+
+**Generell slutsats:** Två steg: bestäm först totalresistansen, använd sedan Ohms lag på *hela* kretsen. I en seriekoppling är denna ström dessutom densamma genom båda resistorerna.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två resistorer ger tillsammans ersättningsresistansen $40\\ \\mathrm{\\Omega}$ när de seriekopplas, men bara $7{,}5\\ \\mathrm{\\Omega}$ när de parallellkopplas. Hur stora är de två resistanserna?`,
+            solution: `Vi kallar resistanserna $R_1$ och $R_2$ och ställer upp ett ekvationssystem ur de två villkoren.
+
+**Seriekoppling:**
+$$ R_1 + R_2 = 40 \\qquad (1) $$
+
+**Parallellkoppling:** med formeln $\\dfrac{1}{R_\\mathrm{tot}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2} = \\dfrac{R_1 + R_2}{R_1 \\cdot R_2}$ får vi $R_\\mathrm{tot} = \\dfrac{R_1 \\cdot R_2}{R_1 + R_2}$, alltså
+
+$$ \\frac{R_1 \\cdot R_2}{R_1 + R_2} = 7{,}5 $$
+
+Sätt in $R_1 + R_2 = 40$ från (1):
+
+$$ \\frac{R_1 \\cdot R_2}{40} = 7{,}5 \\quad\\Leftrightarrow\\quad R_1 \\cdot R_2 = 300 \\qquad (2) $$
+
+Vi har nu summan ($40$) och produkten ($300$) av de två talen. De är rötter till andragradsekvationen
+
+$$ x^2 - 40x + 300 = 0 $$
+
+$$ x = \\frac{40 \\pm \\sqrt{40^2 - 4 \\cdot 300}}{2} = \\frac{40 \\pm \\sqrt{400}}{2} = \\frac{40 \\pm 20}{2} $$
+
+vilket ger $x = 30$ eller $x = 10$.
+
+**Svar:** Resistanserna är $10\\ \\mathrm{\\Omega}$ och $30\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** När man känner *summan* och *produkten* av två tal är de alltid rötterna till $x^2 - (\\text{summa})x + (\\text{produkt}) = 0$. Kontroll: $10 + 30 = 40$ ✓ och $\\dfrac{10 \\cdot 30}{40} = \\dfrac{300}{40} = 7{,}5$ ✓.`,
+        },
+    ],
+
+    'fy1-7.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Studera kopplingsschemat. Vilka resistorer är parallellkopplade?
+
+${makeCircuit({
+    source: { label: 'U', value: '24 V' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+        ] },
+    ],
+})}`,
+            choices: [
+                `$R_1$ och $R_2$.`,
+                `$R_2$ och $R_3$.`,
+                `$R_1$, $R_2$ och $R_3$ — alla tre.`,
+                `Inga är parallella, alla sitter i serie.`,
+            ],
+            correct: 1,
+            solution: `$R_2$ och $R_3$ sitter i två separata grenar mellan samma två förgreningspunkter — strömmen kan välja väg genom den ena *eller* den andra. Det är definitionen av en **parallellkoppling**.
+
+$R_1$ sitter däremot ensam på huvudledningen *före* förgreningen, alltså i **serie** med hela parallelldelen.
+
+**Svar:** Alternativ B — $R_2$ och $R_3$.
+
+**Generell slutsats:** Knepet är att hitta förgreningspunkterna (noderna). Komponenter mellan *samma* par av noder är parallella; komponenter som strömmen måste passera i tur och ordning är i serie.`,
+        },
+        {
+            level: 1,
+            question: `I schemat nedan sitter $R_2 = 12\\ \\mathrm{\\Omega}$ och $R_3 = 6{,}0\\ \\mathrm{\\Omega}$ parallellkopplade. Bestäm ersättningsresistansen $R_{2,3}$ för enbart parallelldelen.
+
+${makeCircuit({
+    source: { label: 'U', value: '24 V' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 4.0, unit: 'Ω' },
+            solution: `Vi använder parallellkopplingsformeln på $R_2$ och $R_3$:
+
+$$ \\frac{1}{R_{2,3}} = \\frac{1}{R_2} + \\frac{1}{R_3} = \\frac{1}{12} + \\frac{1}{6{,}0} = \\frac{1}{12} + \\frac{2}{12} = \\frac{3}{12} = \\frac{1}{4} $$
+
+$$ R_{2,3} = 4{,}0\\ \\mathrm{\\Omega} $$
+
+**Svar:** Parallelldelens ersättningsresistans är $4{,}0\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** I komplexa kretsar börjar man alltid med att "klumpa ihop" parallelldelarna till en enda ersättningsresistans. Sedan kan kretsen behandlas som en enkel seriekoppling.`,
+        },
+        {
+            level: 1,
+            question: `I samma krets har parallelldelen ($R_2$ och $R_3$) ersättningsresistansen $4{,}0\\ \\mathrm{\\Omega}$, och den sitter i serie med $R_1 = 4{,}0\\ \\mathrm{\\Omega}$. Bestäm kretsens totala resistans $R_\\mathrm{tot}$.`,
+            answer: { value: 8.0, unit: 'Ω' },
+            solution: `Parallelldelen kan nu ersättas med en enda resistor på $4{,}0\\ \\mathrm{\\Omega}$, som sitter i **serie** med $R_1$. Seriekopplade resistanser adderas:
+
+$$ R_\\mathrm{tot} = R_1 + R_{2,3} = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{\\Omega} $$
+
+**Svar:** Kretsens totala resistans är $8{,}0\\ \\mathrm{\\Omega}$.
+
+**Generell slutsats:** När parallelldelen väl är ihopklumpad blir hela kretsen en ren seriekoppling: $R_1$ i serie med ersättningsresistansen.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm huvudströmmen *I* som går ut från batteriet i kretsen nedan.
+
+${makeCircuit({
+    source: { label: 'U', value: '24 V' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 3.0, unit: 'A' },
+            solution: `**Steg 1 — parallelldelen.** Klumpa ihop $R_2$ och $R_3$:
+
+$$ \\frac{1}{R_{2,3}} = \\frac{1}{12} + \\frac{1}{6{,}0} = \\frac{3}{12} \\quad\\Rightarrow\\quad R_{2,3} = 4{,}0\\ \\mathrm{\\Omega} $$
+
+**Steg 2 — totala resistansen.** Den sitter i serie med $R_1$:
+
+$$ R_\\mathrm{tot} = R_1 + R_{2,3} = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{\\Omega} $$
+
+**Steg 3 — Ohms lag på hela kretsen.**
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{24}{8{,}0} = 3{,}0\\ \\mathrm{A} $$
+
+**Svar:** Huvudströmmen är $3{,}0\\ \\mathrm{A}$.
+
+**Generell slutsats:** Huvudströmmen är hela strömmen som går genom $R_1$ — den delar sedan upp sig mellan $R_2$ och $R_3$ i förgreningen.`,
+        },
+        {
+            level: 2,
+            question: `I kretsen nedan är huvudströmmen $I = 3{,}0\\ \\mathrm{A}$ (genom $R_1$). Bestäm spänningen $U_{2,3}$ över parallelldelen.
+
+${makeCircuit({
+    source: { label: 'U', value: '24 V' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 12, unit: 'V' },
+            solution: `Batterispänningen delas upp på $R_1$ och parallelldelen. Vi beräknar först delspänningen över $R_1$ med Ohms lag (hela huvudströmmen går genom $R_1$):
+
+$$ U_1 = R_1 \\cdot I = 4{,}0 \\cdot 3{,}0 = 12\\ \\mathrm{V} $$
+
+Resten av batterispänningen ligger över parallelldelen:
+
+$$ U_{2,3} = U - U_1 = 24 - 12 = 12\\ \\mathrm{V} $$
+
+**Svar:** Spänningen över parallelldelen är $12\\ \\mathrm{V}$.
+
+**Generell slutsats:** Spänningen "förbrukas" längs vägen. Det som inte faller över $R_1$ blir kvar över parallelldelen. Denna spänning ligger dessutom över *både* $R_2$ och $R_3$, eftersom parallellkopplade komponenter har samma spänning.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm strömmen $I_3$ genom resistorn $R_3$ i kretsen nedan.
+
+${makeCircuit({
+    source: { label: 'U', value: '24 V' },
+    components: [
+        { type: 'resistor', label: 'R_1', value: '4,0 Ω' },
+        { type: 'parallel', branches: [
+            [{ type: 'resistor', label: 'R_2', value: '12 Ω' }],
+            [{ type: 'resistor', label: 'R_3', value: '6,0 Ω' }],
+        ] },
+    ],
+})}`,
+            answer: { value: 2.0, unit: 'A' },
+            solution: `Vi måste arbeta oss fram till spänningen över $R_3$ innan vi kan få dess ström.
+
+**Steg 1 — totala resistansen.** Parallelldelen: $\\dfrac{1}{R_{2,3}} = \\dfrac{1}{12} + \\dfrac{1}{6{,}0} = \\dfrac{3}{12}$, så $R_{2,3} = 4{,}0\\ \\mathrm{\\Omega}$. I serie med $R_1$:
+
+$$ R_\\mathrm{tot} = 4{,}0 + 4{,}0 = 8{,}0\\ \\mathrm{\\Omega} $$
+
+**Steg 2 — huvudströmmen.**
+
+$$ I = \\frac{U}{R_\\mathrm{tot}} = \\frac{24}{8{,}0} = 3{,}0\\ \\mathrm{A} $$
+
+**Steg 3 — spänningen över parallelldelen.**
+
+$$ U_{2,3} = U - R_1 \\cdot I = 24 - 4{,}0 \\cdot 3{,}0 = 12\\ \\mathrm{V} $$
+
+**Steg 4 — strömmen genom $R_3$.** Denna spänning ligger över $R_3$, så Ohms lag ger
+
+$$ I_3 = \\frac{U_{2,3}}{R_3} = \\frac{12}{6{,}0} = 2{,}0\\ \\mathrm{A} $$
+
+**Svar:** Strömmen genom $R_3$ är $2{,}0\\ \\mathrm{A}$.
+
+**Generell slutsats:** Kontroll med Kirchhoffs första lag: $I_2 = U_{2,3}/R_2 = 12/12 = 1{,}0\\ \\mathrm{A}$, och $I_2 + I_3 = 1{,}0 + 2{,}0 = 3{,}0\\ \\mathrm{A} = I$ ✓. Den mindre resistorn ($R_3$) drar den större strömmen — strömmen tar helst den "lättaste" vägen.`,
+        },
+        {
+            level: 3,
+            question: `I bryggkopplingen nedan ligger spänningen $U = 12\\ \\mathrm{V}$ över kretsen. En voltmeter är inkopplad mellan punkterna P och Q. Vilken spänning visar voltmetern?
+
+${makeBridge({
+    source: { label: 'U', value: '12 V' },
+    upper: [ { type: 'resistor', label: 'R_1', value: '50 Ω' }, { type: 'resistor', label: 'R_2', value: '30 Ω' } ],
+    lower: [ { type: 'resistor', label: 'R_3', value: '15 Ω' }, { type: 'resistor', label: 'R_4', value: '60 Ω' } ],
+    bridge: { type: 'voltmeter', label: 'V' },
+})}`,
+            answer: { value: 5.1, unit: 'V' },
+            solution: `En ideal voltmeter släpper inte igenom någon ström, så de två grenarna fungerar som *oberoende spänningsdelare*. Kretsen kan **inte** förenklas med vanlig serie/parallell — vi måste bestämma potentialen i P och Q var för sig.
+
+**Övre grenen** ($R_1$ och $R_2$ i serie):
+$$ I_\\text{övre} = \\frac{U}{R_1 + R_2} = \\frac{12}{50 + 30} = 0{,}15\\ \\mathrm{A} $$
+Spänningen över $R_2$ (från P till den högra noden) är $U_{R_2} = 0{,}15 \\cdot 30 = 4{,}5\\ \\mathrm{V}$. P ligger alltså $4{,}5\\ \\mathrm{V}$ över högernoden.
+
+**Undre grenen** ($R_3$ och $R_4$ i serie):
+$$ I_\\text{undre} = \\frac{U}{R_3 + R_4} = \\frac{12}{15 + 60} = 0{,}16\\ \\mathrm{A} $$
+Spänningen över $R_4$ (från Q till högra noden) är $U_{R_4} = 0{,}16 \\cdot 60 = 9{,}6\\ \\mathrm{V}$. Q ligger $9{,}6\\ \\mathrm{V}$ över högernoden.
+
+**Spänningen mellan P och Q** är skillnaden mellan deras nivåer över den gemensamma högernoden:
+
+$$ U_{PQ} = |4{,}5 - 9{,}6| = 5{,}1\\ \\mathrm{V} $$
+
+**Svar:** Voltmetern visar $5{,}1\\ \\mathrm{V}$.
+
+**Generell slutsats:** Det här är en **bryggkoppling**. Fällan är att försöka klumpa ihop motstånden i serie/parallell — det går inte, eftersom P och Q inte är samma punkt. Behandla i stället grenarna som två separata spänningsdelare och jämför mittpunkternas potential.`,
+        },
+    ],
+
+    'fy1-7.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En apparat drar strömmen $I = 2{,}0\\ \\mathrm{A}$ vid spänningen $U = 230\\ \\mathrm{V}$. Vilken elektrisk effekt har apparaten?`,
+            answer: { value: 460, unit: 'W' },
+            solution: `Effekten fås ur sambandet
+
+$$ P = U \\cdot I $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 230\\ \\mathrm{V} \\\\
+I = 2{,}0\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ P = 230 \\cdot 2{,}0 = 460\\ \\mathrm{W} $$
+
+**Svar:** Effekten är $460\\ \\mathrm{W}$.`,
+        },
+        {
+            level: 1,
+            question: `En resistor på $R = 6{,}0\\ \\mathrm{\\Omega}$ kopplas till spänningen $U = 12\\ \\mathrm{V}$. Vilken effekt utvecklas i resistorn?`,
+            answer: { value: 24, unit: 'W' },
+            solution: `Här känner vi spänningen *U* och resistansen *R*, så vi väljer effektformeln med just dessa storheter:
+
+$$ P = \\frac{U^2}{R} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 12\\ \\mathrm{V} \\\\
+R = 6{,}0\\ \\mathrm{\\Omega}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ P = \\frac{12^2}{6{,}0} = \\frac{144}{6{,}0} = 24\\ \\mathrm{W} $$
+
+**Svar:** Effekten är $24\\ \\mathrm{W}$.
+
+**Generell slutsats:** Det finns tre effektformler — $P = U \\cdot I$, $P = R \\cdot I^2$ och $P = U^2/R$. Välj den som passar de storheter du *har*, så slipper du räkna ut mellansteg.`,
+        },
+        {
+            level: 1,
+            question: `Genom en resistor på $R = 8{,}0\\ \\mathrm{\\Omega}$ går strömmen $I = 0{,}50\\ \\mathrm{A}$. Vilken effekt utvecklas i resistorn?`,
+            answer: { value: 2.0, unit: 'W' },
+            solution: `Här känner vi resistansen *R* och strömmen *I*, så vi använder effektformeln med dessa:
+
+$$ P = R \\cdot I^2 $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+R = 8{,}0\\ \\mathrm{\\Omega} \\\\
+I = 0{,}50\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ P = 8{,}0 \\cdot 0{,}50^2 = 8{,}0 \\cdot 0{,}25 = 2{,}0\\ \\mathrm{W} $$
+
+**Svar:** Effekten är $2{,}0\\ \\mathrm{W}$.
+
+**Generell slutsats:** Glöm inte att strömmen ska kvadreras: $0{,}50^2 = 0{,}25$, inte $0{,}50$. Det är en vanlig miss.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En glödlampa är märkt $60\\ \\mathrm{W}$ och ansluts till spänningen $230\\ \\mathrm{V}$. Hur stor ström drar lampan?`,
+            answer: { value: 0.26, unit: 'A' },
+            solution: `Vi löser ut strömmen *I* ur effektformeln:
+
+$$ P = U \\cdot I \\quad\\Leftrightarrow\\quad I = \\frac{P}{U} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+P = 60\\ \\mathrm{W} \\\\
+U = 230\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ I = \\frac{60}{230} = 0{,}26\\ \\mathrm{A} $$
+
+**Svar:** Lampan drar ungefär $0{,}26\\ \\mathrm{A}$.
+
+**Generell slutsats:** "Märkeffekt" gäller vid den angivna märkspänningen. En $60\\ \\mathrm{W}$-lampa avsedd för $230\\ \\mathrm{V}$ drar alltså $0{,}26\\ \\mathrm{A}$ — kopplas den till en lägre spänning ändras både ström och effekt.`,
+        },
+        {
+            level: 2,
+            question: `En vattenkokare har effekten $2{,}0\\ \\mathrm{kW}$ och används i $5{,}0$ minuter. Hur mycket energi förbrukar den? Svara i kilojoule (kJ).`,
+            answer: { value: 600, unit: 'kJ' },
+            solution: `Effekt är energi per tid, $P = E/t$. Vi löser ut energin *E*:
+
+$$ P = \\frac{E}{t} \\quad\\Leftrightarrow\\quad E = P \\cdot t $$
+
+Mätvärden (i SI-enheter):
+$$
+\\left[ \\begin{array}{l}
+P = 2{,}0\\ \\mathrm{kW} = 2\\,000\\ \\mathrm{W} \\\\
+t = 5{,}0\\ \\mathrm{min} = 5{,}0 \\cdot 60\\ \\mathrm{s} = 300\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ E = 2\\,000 \\cdot 300 = 600\\,000\\ \\mathrm{J} = 600\\ \\mathrm{kJ} $$
+
+**Svar:** Vattenkokaren förbrukar $600\\ \\mathrm{kJ}$.
+
+**Generell slutsats:** Effekt (W) säger hur snabbt energi omsätts; energi (J) är effekt gånger tid. Både effekt och tid måste vara i SI-enheter (W och s) för att svaret ska bli i joule.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En värmeslinga av nikrom är $5{,}0\\ \\mathrm{m}$ lång och har tvärsnittsarean $0{,}50\\ \\mathrm{mm^2}$. Slingan kopplas till spänningen $230\\ \\mathrm{V}$. Vilken effekt utvecklas i slingan? Nikromens resistivitet är $\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m}$.`,
+            answer: { value: 4.8, unit: 'kW' },
+            solution: `**Steg 1 — slingans resistans.** Vi använder formeln för resistans i ledare:
+
+$$ R = \\rho \\cdot \\frac{l}{A} $$
+
+$$
+\\left[ \\begin{array}{l}
+\\rho = 1{,}1 \\cdot 10^{-6}\\ \\mathrm{\\Omega \\cdot m} \\\\
+l = 5{,}0\\ \\mathrm{m} \\\\
+A = 0{,}50\\ \\mathrm{mm^2} = 0{,}50 \\cdot 10^{-6}\\ \\mathrm{m^2}
+\\end{array} \\right]
+$$
+
+$$ R = 1{,}1 \\cdot 10^{-6} \\cdot \\frac{5{,}0}{0{,}50 \\cdot 10^{-6}} = 11\\ \\mathrm{\\Omega} $$
+
+**Steg 2 — effekten.** Nu känner vi spänningen och resistansen:
+
+$$ P = \\frac{U^2}{R} = \\frac{230^2}{11} = 4\\,809\\ \\mathrm{W} \\approx 4{,}8\\ \\mathrm{kW} $$
+
+**Svar:** Effekten är ungefär $4{,}8\\ \\mathrm{kW}$.
+
+**Generell slutsats:** Uppgiften binder ihop två kapitelavsnitt: först geometrin ($R = \\rho l / A$), sedan effekten ($P = U^2/R$). En kort, tunn nikromtråd ger lagom resistans för att utveckla stor värmeeffekt — precis principen bakom element och brödrostar.`,
+        },
+        {
+            level: 3,
+            question: `En doppvärmare med resistansen $28\\ \\mathrm{\\Omega}$ kopplas till spänningen $230\\ \\mathrm{V}$ och sänks ner i $1{,}5\\ \\mathrm{liter}$ vatten som håller $20\\ \\mathrm{°C}$. Hur lång tid tar det att värma vattnet till $100\\ \\mathrm{°C}$? Anta att all elektrisk energi går till vattnet. Vattnets specifika värmekapacitet är $c = 4{,}18 \\cdot 10^3\\ \\mathrm{J/(kg \\cdot K)}$, och $1{,}0\\ \\mathrm{liter}$ vatten väger $1{,}0\\ \\mathrm{kg}$.`,
+            answer: { value: 270, unit: 's' },
+            solution: `Tre olika samband måste kopplas ihop: elektrisk effekt, energi-per-tid och värmeenergi.
+
+**Steg 1 — doppvärmarens effekt** (vi känner *U* och *R*):
+$$ P = \\frac{U^2}{R} = \\frac{230^2}{28} = 1\\,889\\ \\mathrm{W} $$
+
+**Steg 2 — energin som krävs för att värma vattnet** ($Q = m c \\Delta T$ från värmeläran):
+$$ Q = m \\cdot c \\cdot \\Delta T = 1{,}5 \\cdot 4{,}18 \\cdot 10^3 \\cdot (100 - 20) = 5{,}02 \\cdot 10^5\\ \\mathrm{J} $$
+
+**Steg 3 — tiden.** Effekt är energi per tid, $P = E/t$, så
+$$ t = \\frac{Q}{P} = \\frac{5{,}02 \\cdot 10^5}{1\\,889} = 266\\ \\mathrm{s} \\approx 270\\ \\mathrm{s} $$
+
+**Svar:** Det tar ungefär $270\\ \\mathrm{s}$ (drygt 4 minuter).
+
+**Generell slutsats:** Uppgiften binder ihop tre olika områden — elektrisk effekt ($P = U^2/R$), energidefinitionen ($E = P t$) och värmelära ($Q = mc\\Delta T$). Bryggan mellan dem är att den elektriska energin omvandlas till värme i vattnet.`,
+        },
+    ],
+
+    'fy1-7.10': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `På en laddning $Q = 5{,}0\\ \\mathrm{nC}$ som befinner sig i ett elektriskt fält verkar den elektriska kraften $F = 2{,}0 \\cdot 10^{-4}\\ \\mathrm{N}$. Hur stark är den elektriska fältstyrkan i punkten?`,
+            answer: { value: 4.0e4, unit: 'N/C' },
+            solution: `Elektrisk fältstyrka definieras som kraft per laddningsenhet:
+
+$$ \\mathbb{E} = \\frac{F}{Q} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+F = 2{,}0 \\cdot 10^{-4}\\ \\mathrm{N} \\\\
+Q = 5{,}0\\ \\mathrm{nC} = 5{,}0 \\cdot 10^{-9}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ \\mathbb{E} = \\frac{2{,}0 \\cdot 10^{-4}}{5{,}0 \\cdot 10^{-9}} = 4{,}0 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+**Svar:** Fältstyrkan är $4{,}0 \\cdot 10^4\\ \\mathrm{N/C}$.
+
+**Generell slutsats:** Skilj på $\\mathbb{E}$ (fältstyrka, enhet N/C) och *E* (energi, enhet J). De skrivs med samma bokstav men är helt olika storheter.`,
+        },
+        {
+            level: 1,
+            question: `I ett elektriskt fält med fältstyrkan $\\mathbb{E} = 3{,}0 \\cdot 10^4\\ \\mathrm{N/C}$ placeras en laddning $Q = 2{,}0\\ \\mathrm{nC}$. Hur stor elektrisk kraft verkar på laddningen?`,
+            answer: { value: 60, unit: 'μN' },
+            solution: `Vi löser ut kraften *F* ur definitionen av fältstyrka:
+
+$$ \\mathbb{E} = \\frac{F}{Q} \\quad\\Leftrightarrow\\quad F = \\mathbb{E} \\cdot Q $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 3{,}0 \\cdot 10^4\\ \\mathrm{N/C} \\\\
+Q = 2{,}0\\ \\mathrm{nC} = 2{,}0 \\cdot 10^{-9}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ F = 3{,}0 \\cdot 10^4 \\cdot 2{,}0 \\cdot 10^{-9} = 6{,}0 \\cdot 10^{-5}\\ \\mathrm{N} = 60\\ \\mathrm{\\mu N} $$
+
+**Svar:** Kraften är $60\\ \\mathrm{\\mu N}$ (eller $6{,}0 \\cdot 10^{-5}\\ \\mathrm{N}$).
+
+**Generell slutsats:** Fältstyrkan beskriver fältet *oberoende* av vilken laddning man placerar i det. Kraften på en faktisk laddning fås först när man multiplicerar fältstyrkan med laddningen.`,
+        },
+        {
+            level: 1,
+            question: `Bestäm den elektriska fältstyrkan i en punkt $10\\ \\mathrm{cm}$ från medelpunkten på en liten kula med laddningen $Q = 15\\ \\mathrm{nC}$. Coulombs konstant är $k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$.`,
+            answer: { value: 1.3e4, unit: 'N/C', tol: 0.05 },
+            solution: `Fältstyrkan från ett laddat klot fås ur
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2} \\\\
+Q = 15\\ \\mathrm{nC} = 15 \\cdot 10^{-9}\\ \\mathrm{C} \\\\
+r = 10\\ \\mathrm{cm} = 0{,}10\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ \\mathbb{E} = 8{,}99 \\cdot 10^9 \\cdot \\frac{15 \\cdot 10^{-9}}{0{,}10^2} = 1{,}3 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+**Svar:** Fältstyrkan är ungefär $1{,}3 \\cdot 10^4\\ \\mathrm{N/C}$.
+
+**Generell slutsats:** Notera likheten med Coulombs lag — men här ingår bara *en* laddning, eftersom fältstyrkan beskriver fältet i punkten innan någon andra laddning placerats där.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Fältstyrkan $5{,}0\\ \\mathrm{cm}$ från medelpunkten på en laddad kula är $1{,}8 \\cdot 10^5\\ \\mathrm{N/C}$. Hur stor är kulans laddning?`,
+            answer: { value: 50, unit: 'nC' },
+            solution: `Vi utgår från fältstyrkan från ett klot och löser ut laddningen *Q*:
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} \\quad\\Leftrightarrow\\quad Q = \\frac{\\mathbb{E} \\cdot r^2}{k} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 1{,}8 \\cdot 10^5\\ \\mathrm{N/C} \\\\
+r = 5{,}0\\ \\mathrm{cm} = 0{,}050\\ \\mathrm{m} \\\\
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ Q = \\frac{1{,}8 \\cdot 10^5 \\cdot 0{,}050^2}{8{,}99 \\cdot 10^9} = 5{,}0 \\cdot 10^{-8}\\ \\mathrm{C} = 50\\ \\mathrm{nC} $$
+
+**Svar:** Kulans laddning är ungefär $50\\ \\mathrm{nC}$.
+
+**Generell slutsats:** Här måste man lösa ut *Q* ur formeln och komma ihåg att avståndet står i kvadrat — det är $r^2 = 0{,}050^2 = 0{,}0025$ som ska in, inte $0{,}050$.`,
+        },
+        {
+            level: 2,
+            question: `En liten kula har laddningen $Q = 20\\ \\mathrm{nC}$. I en punkt $8{,}0\\ \\mathrm{cm}$ från kulan placeras en testladdning $q = 3{,}0\\ \\mathrm{nC}$. Hur stor elektrisk kraft verkar på testladdningen?`,
+            answer: { value: 84, unit: 'μN' },
+            solution: `**Steg 1 — fältstyrkan i punkten** (från kulans laddning *Q*):
+
+$$ \\mathbb{E} = k \\cdot \\frac{Q}{r^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{20 \\cdot 10^{-9}}{0{,}080^2} = 2{,}81 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+**Steg 2 — kraften på testladdningen** (fältstyrka gånger testladdning):
+
+$$ F = \\mathbb{E} \\cdot q = 2{,}81 \\cdot 10^4 \\cdot 3{,}0 \\cdot 10^{-9} = 8{,}4 \\cdot 10^{-5}\\ \\mathrm{N} = 84\\ \\mathrm{\\mu N} $$
+
+**Svar:** Kraften på testladdningen är ungefär $84\\ \\mathrm{\\mu N}$.
+
+**Generell slutsats:** Att räkna fältstyrka först och sedan kraft ger samma svar som Coulombs lag direkt ($F = k Q q / r^2$) — men "fält-tänket" är kraftfullt när flera laddningar bidrar, eftersom man då adderar fält i stället för att para ihop alla laddningar.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två laddningar ligger på en rät linje. Punkten P ligger mellan dem. På avståndet $3{,}0\\ \\mathrm{cm}$ till vänster om P sitter $Q_1 = +9{,}0\\ \\mathrm{nC}$, och på avståndet $2{,}0\\ \\mathrm{cm}$ till höger om P sitter $Q_2 = -4{,}0\\ \\mathrm{nC}$. Bestäm den resulterande elektriska fältstyrkan i P.`,
+            answer: { value: 1.8e5, unit: 'N/C' },
+            solution: `Varje laddning ger upphov till ett fält i P. Vi bestämmer storlek och riktning för vart och ett.
+
+**Fältet från $Q_1$ (positiv, till vänster):** fältlinjer går *ut från* plus, alltså pekar fältet i P **åt höger**.
+
+$$ \\mathbb{E}_1 = k \\cdot \\frac{Q_1}{r_1^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{9{,}0 \\cdot 10^{-9}}{0{,}030^2} = 8{,}99 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+**Fältet från $Q_2$ (negativ, till höger):** fältlinjer går *in i* minus, alltså pekar fältet i P **åt höger** (mot $Q_2$).
+
+$$ \\mathbb{E}_2 = k \\cdot \\frac{Q_2}{r_2^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{4{,}0 \\cdot 10^{-9}}{0{,}020^2} = 8{,}99 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+Båda fälten pekar **åt höger**, så de adderas:
+
+$$ \\mathbb{E} = \\mathbb{E}_1 + \\mathbb{E}_2 = 8{,}99 \\cdot 10^4 + 8{,}99 \\cdot 10^4 = 1{,}8 \\cdot 10^5\\ \\mathrm{N/C} $$
+
+**Svar:** Den resulterande fältstyrkan i P är ungefär $1{,}8 \\cdot 10^5\\ \\mathrm{N/C}$, riktad åt höger (mot den negativa laddningen).
+
+**Generell slutsats:** Mellan en positiv och en negativ laddning pekar *båda* fälten åt samma håll (från plus mot minus) — därför adderas de. Att avgöra riktningen med regeln "ut från plus, in i minus" är hela poängen med superposition.`,
+        },
+        {
+            level: 3,
+            question: `Två lika stora laddningar $Q = 5{,}0\\ \\mathrm{nC}$ placeras i två hörn (A och C) av en kvadrat med sidan $4{,}0\\ \\mathrm{cm}$. Bestäm den elektriska fältstyrkans **storlek** i hörnet B, som ligger intill båda de laddade hörnen. ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$)`,
+            answer: { value: 4.0e4, unit: 'N/C' },
+            solution: `Varje laddning ger ett fält i B. Eftersom A och C är *grannhörn* till B ligger båda på avståndet $4{,}0\\ \\mathrm{cm}$ (kvadratens sida) från B, och de två fälten blir lika stora:
+
+$$ \\mathbb{E}_1 = \\mathbb{E}_2 = k \\cdot \\frac{Q}{a^2} = 8{,}99 \\cdot 10^9 \\cdot \\frac{5{,}0 \\cdot 10^{-9}}{0{,}040^2} = 2{,}81 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+**Riktningarna är vinkelräta mot varandra:** fältet från A pekar längs sidan A→B, fältet från C längs sidan C→B, och dessa två sidor möts i rät vinkel i hörnet B. Den resulterande fältstyrkan fås därför med Pythagoras sats — inte genom enkel addition:
+
+$$ \\mathbb{E} = \\sqrt{\\mathbb{E}_1^2 + \\mathbb{E}_2^2} = \\mathbb{E}_1 \\cdot \\sqrt{2} = 2{,}81 \\cdot 10^4 \\cdot \\sqrt{2} = 4{,}0 \\cdot 10^4\\ \\mathrm{N/C} $$
+
+**Svar:** Fältstyrkan i hörnet B är ungefär $4{,}0 \\cdot 10^4\\ \\mathrm{N/C}$.
+
+**Generell slutsats:** Fält (och krafter) är **vektorer** — ligger de inte längs samma linje måste de adderas geometriskt. Står de vinkelrätt blir det Pythagoras; i andra fall delar man upp i $x$- och $y$-komposanter var för sig.`,
+        },
+    ],
+
+    'fy1-7.11': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Mellan två parallella plattor på avståndet $d = 2{,}0\\ \\mathrm{cm}$ ligger spänningen $U = 100\\ \\mathrm{V}$. Hur stark är den elektriska fältstyrkan mellan plattorna?`,
+            answer: { value: 5.0e3, unit: 'V/m' },
+            solution: `Mellan två plattor är fältet homogent och fältstyrkan ges av
+
+$$ \\mathbb{E} = \\frac{U}{d} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 100\\ \\mathrm{V} \\\\
+d = 2{,}0\\ \\mathrm{cm} = 0{,}020\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ \\mathbb{E} = \\frac{100}{0{,}020} = 5{,}0 \\cdot 10^3\\ \\mathrm{V/m} $$
+
+**Svar:** Fältstyrkan är $5{,}0 \\cdot 10^3\\ \\mathrm{V/m}$.
+
+**Generell slutsats:** Mellan plattor är fältet *homogent* — lika starkt överallt. Enheten V/m är likvärdig med N/C.`,
+        },
+        {
+            level: 1,
+            question: `Fältstyrkan mellan två plattor som sitter $5{,}0\\ \\mathrm{cm}$ från varandra är $3{,}0 \\cdot 10^4\\ \\mathrm{V/m}$. Bestäm spänningen mellan plattorna. Svara i kV.`,
+            answer: { value: 1.5, unit: 'kV' },
+            solution: `Vi löser ut spänningen *U*:
+
+$$ \\mathbb{E} = \\frac{U}{d} \\quad\\Leftrightarrow\\quad U = \\mathbb{E} \\cdot d $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+\\mathbb{E} = 3{,}0 \\cdot 10^4\\ \\mathrm{V/m} \\\\
+d = 5{,}0\\ \\mathrm{cm} = 0{,}050\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U = 3{,}0 \\cdot 10^4 \\cdot 0{,}050 = 1\\,500\\ \\mathrm{V} = 1{,}5\\ \\mathrm{kV} $$
+
+**Svar:** Spänningen är $1{,}5\\ \\mathrm{kV}$ (eller $1\\,500\\ \\mathrm{V}$).`,
+        },
+        {
+            level: 1,
+            question: `Mellan två plattor ligger spänningen $U = 600\\ \\mathrm{V}$ och fältstyrkan är $2{,}0 \\cdot 10^4\\ \\mathrm{V/m}$. Hur stort är plattavståndet? Svara i cm.`,
+            answer: { value: 3.0, unit: 'cm' },
+            solution: `Vi löser ut plattavståndet *d*:
+
+$$ \\mathbb{E} = \\frac{U}{d} \\quad\\Leftrightarrow\\quad d = \\frac{U}{\\mathbb{E}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 600\\ \\mathrm{V} \\\\
+\\mathbb{E} = 2{,}0 \\cdot 10^4\\ \\mathrm{V/m}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ d = \\frac{600}{2{,}0 \\cdot 10^4} = 0{,}030\\ \\mathrm{m} = 3{,}0\\ \\mathrm{cm} $$
+
+**Svar:** Plattavståndet är $3{,}0\\ \\mathrm{cm}$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Mellan två plattor på avståndet $4{,}0\\ \\mathrm{cm}$ ligger spänningen $200\\ \\mathrm{V}$. En liten laddning $Q = 5{,}0\\ \\mathrm{nC}$ placeras i fältet mellan plattorna. Hur stor elektrisk kraft verkar på laddningen?`,
+            answer: { value: 25, unit: 'μN' },
+            solution: `**Steg 1 — fältstyrkan mellan plattorna:**
+
+$$ \\mathbb{E} = \\frac{U}{d} = \\frac{200}{0{,}040} = 5{,}0 \\cdot 10^3\\ \\mathrm{V/m} $$
+
+**Steg 2 — kraften på laddningen** (fältstyrka gånger laddning):
+
+$$ F = \\mathbb{E} \\cdot Q = 5{,}0 \\cdot 10^3 \\cdot 5{,}0 \\cdot 10^{-9} = 2{,}5 \\cdot 10^{-5}\\ \\mathrm{N} = 25\\ \\mathrm{\\mu N} $$
+
+**Svar:** Kraften på laddningen är $25\\ \\mathrm{\\mu N}$.
+
+**Generell slutsats:** I ett homogent fält är kraften lika stor *överallt* mellan plattorna — den beror inte på var laddningen befinner sig, bara på fältstyrkan och laddningen.`,
+        },
+        {
+            level: 2,
+            question: `En laddning $Q = 8{,}0\\ \\mathrm{nC}$ mellan två plattor som sitter $5{,}0\\ \\mathrm{cm}$ från varandra påverkas av den elektriska kraften $F = 1{,}2 \\cdot 10^{-4}\\ \\mathrm{N}$. Hur stor är spänningen mellan plattorna?`,
+            answer: { value: 750, unit: 'V' },
+            solution: `**Steg 1 — fältstyrkan** ur kraft och laddning:
+
+$$ \\mathbb{E} = \\frac{F}{Q} = \\frac{1{,}2 \\cdot 10^{-4}}{8{,}0 \\cdot 10^{-9}} = 1{,}5 \\cdot 10^4\\ \\mathrm{V/m} $$
+
+**Steg 2 — spänningen** ur fältstyrka och plattavstånd:
+
+$$ U = \\mathbb{E} \\cdot d = 1{,}5 \\cdot 10^4 \\cdot 0{,}050 = 750\\ \\mathrm{V} $$
+
+**Svar:** Spänningen mellan plattorna är $750\\ \\mathrm{V}$.
+
+**Generell slutsats:** Uppgiften använder två olika uttryck för samma fältstyrka: $\\mathbb{E} = F/Q$ (definitionen) och $\\mathbb{E} = U/d$ (mellan plattor). Genom att räkna ut $\\mathbb{E}$ från det ena kan man ta sig vidare till det andra.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En elektron befinner sig mellan två plattor som sitter $2{,}0\\ \\mathrm{cm}$ från varandra med spänningen $500\\ \\mathrm{V}$. Elektronen släpps från vila vid den negativa plattan. Vilken hastighet har den när den når den positiva plattan? ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, $m_e = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$)`,
+            answer: { value: 1.3e7, unit: 'm/s', tol: 0.05 },
+            solution: `Vi följer kedjan fält $\\to$ kraft $\\to$ acceleration $\\to$ hastighet.
+
+**Steg 1 — fältstyrkan:**
+$$ \\mathbb{E} = \\frac{U}{d} = \\frac{500}{0{,}020} = 2{,}5 \\cdot 10^4\\ \\mathrm{V/m} $$
+
+**Steg 2 — kraften på elektronen:**
+$$ F = \\mathbb{E} \\cdot q_e = 2{,}5 \\cdot 10^4 \\cdot 1{,}602 \\cdot 10^{-19} = 4{,}0 \\cdot 10^{-15}\\ \\mathrm{N} $$
+
+**Steg 3 — accelerationen** (Newtons andra lag):
+$$ a = \\frac{F}{m_e} = \\frac{4{,}0 \\cdot 10^{-15}}{9{,}11 \\cdot 10^{-31}} = 4{,}4 \\cdot 10^{15}\\ \\mathrm{m/s^2} $$
+
+**Steg 4 — sluthastigheten.** Elektronen accelererar likformigt sträckan $d = 0{,}020\\ \\mathrm{m}$ från vila. Med $v^2 = 2 a d$:
+
+$$ v = \\sqrt{2 a d} = \\sqrt{2 \\cdot 4{,}4 \\cdot 10^{15} \\cdot 0{,}020} = 1{,}3 \\cdot 10^7\\ \\mathrm{m/s} $$
+
+**Svar:** Elektronen når hastigheten ungefär $1{,}3 \\cdot 10^7\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Det går att kontrollera via energi: $q_e U = \\tfrac{1}{2} m_e v^2$ ger samma svar direkt, eftersom hela "fält-vägen" bara är ett annat sätt att beskriva att den elektriska energin $q_e U$ blir rörelseenergi. Den långa vägen visar *varför* det fungerar.`,
+        },
+        {
+            level: 3,
+            question: `En elektron skjuts in horisontellt med hastigheten $v_0 = 2{,}0 \\cdot 10^7\\ \\mathrm{m/s}$ mitt emellan två vågräta plattor. Plattorna är $L = 6{,}0\\ \\mathrm{cm}$ långa och sitter $d = 2{,}0\\ \\mathrm{cm}$ från varandra med spänningen $U = 80\\ \\mathrm{V}$ över sig. Hur stor blir elektronens vertikala avböjning när den lämnar plattorna? ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, $m_e = 9{,}11 \\cdot 10^{-31}\\ \\mathrm{kg}$)`,
+            answer: { value: 3.2, unit: 'mm' },
+            solution: `Det här är en **projektilrörelse**: vågrätt en konstant hastighet, lodrätt en accelererad rörelse driven av den elektriska kraften — precis som ett vågrätt kast i ett gravitationsfält. De två rörelserna behandlas var för sig.
+
+**Lodrätt — accelerationen.** Fältet mellan plattorna och kraften på elektronen:
+$$ \\mathbb{E} = \\frac{U}{d} = \\frac{80}{0{,}020} = 4\\,000\\ \\mathrm{V/m} $$
+$$ a = \\frac{F}{m_e} = \\frac{\\mathbb{E} \\cdot q_e}{m_e} = \\frac{4\\,000 \\cdot 1{,}602 \\cdot 10^{-19}}{9{,}11 \\cdot 10^{-31}} = 7{,}03 \\cdot 10^{14}\\ \\mathrm{m/s^2} $$
+
+**Vågrätt — tiden mellan plattorna** (konstant hastighet $v_0$):
+$$ t = \\frac{L}{v_0} = \\frac{0{,}060}{2{,}0 \\cdot 10^7} = 3{,}0 \\cdot 10^{-9}\\ \\mathrm{s} $$
+
+**Lodrät avböjning** under denna tid (start från vila i lodled, $y = \\tfrac{1}{2} a t^2$):
+$$ y = \\frac{1}{2} a t^2 = \\frac{1}{2} \\cdot 7{,}03 \\cdot 10^{14} \\cdot (3{,}0 \\cdot 10^{-9})^2 = 3{,}2 \\cdot 10^{-3}\\ \\mathrm{m} = 3{,}2\\ \\mathrm{mm} $$
+
+**Svar:** Avböjningen är ungefär $3{,}2\\ \\mathrm{mm}$.
+
+**Generell slutsats:** Eftersom $3{,}2\\ \\mathrm{mm} < d/2 = 10\\ \\mathrm{mm}$ hinner elektronen ut utan att träffa en platta. Nyckeln är att se rörelsen som ett kast: vågrätt och lodrätt är *oberoende*, och tiden i fältet bestäms av den vågräta rörelsen. Samma princip styr bildröret i gamla TV-apparater och bläckstråleskrivare.`,
+        },
+    ],
+
+    'fy1-7.12': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `I en krets är potentialen i punkt A $V_A = +12\\ \\mathrm{V}$ och i punkt B $V_B = -4{,}0\\ \\mathrm{V}$. Hur stor är spänningen mellan punkterna A och B?`,
+            answer: { value: 16, unit: 'V' },
+            solution: `Spänning är skillnaden i potential mellan två punkter, och kan aldrig vara negativ — därför absolutbeloppet:
+
+$$ U = |V_A - V_B| $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+V_A = +12\\ \\mathrm{V} \\\\
+V_B = -4{,}0\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U = |+12 - (-4{,}0)| = |16| = 16\\ \\mathrm{V} $$
+
+**Svar:** Spänningen mellan A och B är $16\\ \\mathrm{V}$.
+
+**Generell slutsats:** Var noga med dubbla tecknet: $12 - (-4{,}0) = 12 + 4{,}0 = 16$. Spänning är *skillnaden* i potential — två punkter kan ha helt olika potential men ändå ha en blygsam spänning emellan sig om de ligger nära varandra på "potentialskalan".`,
+        },
+        {
+            level: 1,
+            question: `Vilket av följande påståenden om elektrisk potential är korrekt?`,
+            choices: [
+                `Strömmen går från en punkt med högre potential till en punkt med lägre potential.`,
+                `Strömmen går från en punkt med lägre potential till en punkt med högre potential.`,
+                `Potentialen i en jordad punkt är alltid 230 V.`,
+                `Elektrisk potential och spänning är exakt samma storhet.`,
+            ],
+            correct: 0,
+            solution: `Strömmen går från **högre** till **lägre** potential — precis som vatten rinner från högre till lägre höjd. Potentialen är som en "elektrisk höjd".
+
+Övriga alternativ är fel: en jordad punkt har potentialen **0 V** (inte 230 V), och potential har tecken (positiv/negativ/noll) medan spänning är den icke-negativa *skillnaden* mellan två potentialer.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** Potential (*V*) är en egenskap hos en *enskild punkt* (relativt en nollnivå), medan spänning (*U*) alltid handlar om *två* punkter. Spänning $= |V_A - V_B|$.`,
+        },
+        {
+            level: 1,
+            question: `Minuspolen på ett $9{,}0\\ \\mathrm{V}$-batteri är jordad, så att den har potentialen $0\\ \\mathrm{V}$. Vilken potential har då pluspolen?`,
+            answer: { value: 9.0, unit: 'V' },
+            solution: `Vi startar i den jordade minuspolen ($V = 0$) och potentialvandrar genom batteriet **från minuspol till pluspol**. Då *ökar* potentialen med batteriets spänning:
+
+$$ V_+ = 0 + U = 0 + 9{,}0 = +9{,}0\\ \\mathrm{V} $$
+
+**Svar:** Pluspolen har potentialen $+9{,}0\\ \\mathrm{V}$.
+
+**Generell slutsats:** Att gå från minus till plus *inuti* batteriet höjer potentialen — det är batteriet som "pumpar upp" laddningarna till högre elektrisk potential.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en krets är punkt B jordad, så att $V_B = 0$. Punkt A ligger på andra sidan av en $3{,}0\\ \\mathrm{\\Omega}$-resistor som genomflyts av strömmen $4{,}0\\ \\mathrm{A}$. När man potentialvandrar från B till A går man **mot** strömmens riktning. Bestäm potentialen $V_A$.`,
+            answer: { value: 12, unit: 'V' },
+            solution: `Vi startar i den jordade punkten B ($V_B = 0$) och går till A. Att gå genom en resistor **mot** strömmen *ökar* potentialen med resistorns spänning $R \\cdot I$ (Ohms lag):
+
+$$ V_A = V_B + R \\cdot I $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+V_B = 0 \\\\
+R = 3{,}0\\ \\mathrm{\\Omega} \\\\
+I = 4{,}0\\ \\mathrm{A}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ V_A = 0 + 3{,}0 \\cdot 4{,}0 = +12\\ \\mathrm{V} $$
+
+**Svar:** Potentialen i A är $+12\\ \\mathrm{V}$.
+
+**Generell slutsats:** Tumregeln vid potentialvandring genom en resistor: går du **mot** strömmen ökar potentialen, går du **med** strömmen minskar den. Storleken på ändringen är alltid $R \\cdot I$.`,
+        },
+        {
+            level: 2,
+            question: `I en sluten krets sitter en $2{,}0\\ \\mathrm{\\Omega}$-resistor och en $4{,}0\\ \\mathrm{\\Omega}$-resistor i serie tillsammans med två batterier: ett $12\\ \\mathrm{V}$-batteri som driver strömmen och ett $3{,}0\\ \\mathrm{V}$-batteri som motverkar den. Bestäm strömmen i kretsen.`,
+            answer: { value: 1.5, unit: 'A' },
+            solution: `Vi går ett helt varv i kretsen. Enligt **Kirchhoffs andra lag** är summan av alla potentialändringar noll:
+
+$$ \\sum \\Delta V = 0 $$
+
+Längs varvet ökar potentialen med det drivande batteriet ($+12\\ \\mathrm{V}$), minskar med det motverkande batteriet ($-3{,}0\\ \\mathrm{V}$) och minskar genom de båda resistorerna (med strömmen). Detta ger
+
+$$ +12 - 3{,}0 - 2{,}0 \\cdot I - 4{,}0 \\cdot I = 0 $$
+
+$$ 9{,}0 - 6{,}0 \\, I = 0 \\quad\\Leftrightarrow\\quad I = \\frac{9{,}0}{6{,}0} = 1{,}5\\ \\mathrm{A} $$
+
+**Svar:** Strömmen i kretsen är $1{,}5\\ \\mathrm{A}$.
+
+**Generell slutsats:** När två batterier motverkar varandra är det *nettospänningen* ($12 - 3{,}0 = 9{,}0\\ \\mathrm{V}$) som driver strömmen genom den totala resistansen. Kirchhoffs andra lag ger detta automatiskt om man håller koll på tecknen.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Tre punkter A, B och C ligger längs en krets. Punkt B är jordad ($V_B = 0$). Från B till A potentialvandrar man genom en $4{,}0\\ \\mathrm{\\Omega}$-resistor **mot** strömmen $2{,}5\\ \\mathrm{A}$. Från B till C potentialvandrar man genom en $8{,}0\\ \\mathrm{\\Omega}$-resistor **med** samma ström $2{,}5\\ \\mathrm{A}$. Bestäm spänningen mellan punkt A och punkt C.`,
+            answer: { value: 30, unit: 'V' },
+            solution: `Vi bestämmer potentialen i A och C var för sig, med start i den jordade punkten B.
+
+**Potentialen i A.** Från B går man **mot** strömmen genom $4{,}0\\ \\mathrm{\\Omega}$ → potentialen *ökar* med $R \\cdot I$:
+
+$$ V_A = 0 + 4{,}0 \\cdot 2{,}5 = +10\\ \\mathrm{V} $$
+
+**Potentialen i C.** Från B går man **med** strömmen genom $8{,}0\\ \\mathrm{\\Omega}$ → potentialen *minskar* med $R \\cdot I$:
+
+$$ V_C = 0 - 8{,}0 \\cdot 2{,}5 = -20\\ \\mathrm{V} $$
+
+**Spänningen mellan A och C** är skillnaden i potential (med absolutbelopp):
+
+$$ U = |V_A - V_C| = |+10 - (-20)| = |30| = 30\\ \\mathrm{V} $$
+
+**Svar:** Spänningen mellan A och C är $30\\ \\mathrm{V}$.
+
+**Generell slutsats:** Trots att ingen *enskild* komponent har $30\\ \\mathrm{V}$ över sig, är spänningen mellan A och C ändå $30\\ \\mathrm{V}$ — de ligger på var sin sida om jordningen, en på $+10\\ \\mathrm{V}$ och en på $-20\\ \\mathrm{V}$. Det är skillnaden i potential som räknas, inte värdet hos någon enskild komponent.`,
+        },
+        {
+            level: 3,
+            question: `I kretsen nedan är den högra noden jordad ($0\\ \\mathrm{V}$). Bestäm spänningen mellan punkterna P och Q. Tips: bestäm först potentialen i P respektive Q genom att potentialvandra från jordningen.
+
+${makeBridge({
+    source: { label: 'U', value: '24 V' },
+    upper: [ { type: 'resistor', label: 'R_1', value: '20 Ω' }, { type: 'resistor', label: 'R_2', value: '40 Ω' } ],
+    lower: [ { type: 'resistor', label: 'R_3', value: '40 Ω' }, { type: 'resistor', label: 'R_4', value: '20 Ω' } ],
+    ground: 'B',
+})}`,
+            answer: { value: 8.0, unit: 'V' },
+            solution: `Den jordade högra noden har potentialen $0\\ \\mathrm{V}$. Vi potentialvandrar därifrån till P respektive Q. Båda grenarna ligger över samma batterispänning $24\\ \\mathrm{V}$.
+
+**Övre grenen** ($R_1 = 20\\ \\mathrm{\\Omega}$, $R_2 = 40\\ \\mathrm{\\Omega}$ i serie):
+$$ I_\\text{övre} = \\frac{24}{20 + 40} = 0{,}40\\ \\mathrm{A} $$
+Från jordningen (0 V) genom $R_2$ **mot** strömmen upp till P → potentialen ökar:
+$$ V_P = 0 + R_2 \\cdot I_\\text{övre} = 40 \\cdot 0{,}40 = +16\\ \\mathrm{V} $$
+
+**Undre grenen** ($R_3 = 40\\ \\mathrm{\\Omega}$, $R_4 = 20\\ \\mathrm{\\Omega}$ i serie):
+$$ I_\\text{undre} = \\frac{24}{40 + 20} = 0{,}40\\ \\mathrm{A} $$
+Från jordningen genom $R_4$ mot strömmen till Q:
+$$ V_Q = 0 + R_4 \\cdot I_\\text{undre} = 20 \\cdot 0{,}40 = +8{,}0\\ \\mathrm{V} $$
+
+**Spänningen mellan P och Q** är skillnaden i potential:
+$$ U_{PQ} = |V_P - V_Q| = |16 - 8{,}0| = 8{,}0\\ \\mathrm{V} $$
+
+**Svar:** Spänningen mellan P och Q är $8{,}0\\ \\mathrm{V}$ (P ligger på högre potential än Q).
+
+**Generell slutsats:** I en bryggkoppling har P och Q olika potential trots att grenarna ligger över *samma* spänning — det är skillnaden i hur spänningen *delas* i de två grenarna som ger spänningen mellan mittpunkterna. Potentialvandring från jordningen håller reda på tecknen.`,
+        },
+    ],
+
+    'fy1-7.13': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En Faradays bur (ett slutet metallhölje) placeras i ett yttre elektriskt fält. Vad gäller för det resulterande elektriska fältet **inuti** buren?`,
+            choices: [
+                `Fältet inuti blir starkare än det yttre fältet.`,
+                `Fältet inuti är noll — det resulterande fältet släcks ut.`,
+                `Fältet inuti är ungefär hälften av det yttre fältet.`,
+                `Fältet inuti är lika starkt som det yttre och kvarstår.`,
+            ],
+            correct: 1,
+            solution: `Inuti en Faradays bur är det resulterande elektriska fältet **noll**. Ledningselektronerna i metallen omfördelas och skapar ett eget fält som exakt tar ut det yttre fältet inne i buren.
+
+**Svar:** Alternativ B — fältet inuti är noll.
+
+**Generell slutsats:** Det är därför känslig elektronik kan skärmas av med ett metallhölje, och varför du inte får mobiltäckning i en hiss eller ett tjockt metallrum.`,
+        },
+        {
+            level: 1,
+            question: `Varför är man oftast säker inuti en bil vid åskväder?`,
+            choices: [
+                `Gummidäcken isolerar bilen från marken så att blixten inte kan nå in.`,
+                `Bilens metallkaross fungerar som en Faradays bur och håller det elektriska fältet borta från kupén.`,
+                `Bilens metall leder bort all laddning till motorn där den blir ofarlig.`,
+                `Bensinen i tanken absorberar blixtens energi.`,
+            ],
+            correct: 1,
+            solution: `Bilens metallkaross fungerar som en **Faradays bur**: laddningarna fördelar sig på karossens utsida och inuti kupén blir det resulterande fältet noll. Då går strömmen i karossen, inte genom passagerarna.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Att det skulle bero på gummidäcken är en **vanlig missuppfattning**. Däcken är på tok för tunna för att isolera mot en blixt som redan färdats kilometer genom luft — det är karossen, inte däcken, som skyddar.`,
+        },
+        {
+            level: 1,
+            question: `Var samlas överskottsladdningarna på en laddad, ihålig metallbur?`,
+            choices: [
+                `Jämnt fördelade genom hela metallmaterialet.`,
+                `På burens insida.`,
+                `På burens utsida.`,
+                `I burens geometriska mittpunkt.`,
+            ],
+            correct: 2,
+            solution: `Lika laddningar repellerar varandra och strävar därför så långt ifrån varandra som möjligt. På en ledare innebär det att överskottsladdningarna hamnar på **utsidan**.
+
+**Svar:** Alternativ C — på utsidan.
+
+**Generell slutsats:** Det är just därför inget fält uppstår inuti buren: laddningen sitter ytterst, och dess bidrag inuti tar ut varandra. Hänger man föremål på burens insida påverkas de inte, medan föremål på utsidan stöts ut av fältet.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vad menas med **spetsurladdning**?`,
+            choices: [
+                `Att laddningar koncentreras i en spetsig del av en ledare så att den lokala fältstyrkan blir så hög att luften runt spetsen laddas och en urladdning sker.`,
+                `Att en spetsig ledare alltid stöter bort blixtnedslag helt och hållet.`,
+                `Att en metallspets blir så varm av strömmen att den smälter.`,
+                `Att laddningen fördelar sig jämnt och försvinner längs en spetsig ledare.`,
+            ],
+            correct: 0,
+            solution: `Vid en spets koncentreras laddningarna, vilket gör den lokala elektriska fältstyrkan mycket hög. Blir den tillräckligt stark sker en **urladdning** till luftmolekylerna, som då laddas.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** Samma fenomen kallas också **Sankt Elmseld** och kan ses som ett svagt blått sken kring masttoppar och åskledarspetsar vid åskväder. Det är en urladdning av fotoner, inte samma sak som en åskblixt.`,
+        },
+        {
+            level: 2,
+            question: `En mobiltelefon läggs i en helt sluten metalllåda och tappar då all mottagning. Vilken förklaring stämmer bäst?`,
+            choices: [
+                `Metallen drar till sig radiovågornas energi och laddar telefonens batteri.`,
+                `Metalllådan fungerar som en Faradays bur och skärmar av de elektromagnetiska fälten utifrån.`,
+                `Metallen blir magnetisk och raderar telefonens signal.`,
+                `Telefonen stänger av sig själv eftersom det är mörkt i lådan.`,
+            ],
+            correct: 1,
+            solution: `Metalllådan är en **Faradays bur**. De elektromagnetiska fälten (radiovågorna) som bär telefonsignalen kan inte tränga in i ett slutet metallhölje, så telefonen tappar kontakten med basstationen.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Samma princip används medvetet i avskärmade rum för känsliga mätningar och i skyddspåsar för kontaktlösa bankkort. Det är fälten utifrån som stängs ute — inte något som händer *med* själva telefonen.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Hur kommer det sig, rent fysikaliskt, att det resulterande elektriska fältet inuti en Faradays bur blir noll?`,
+            choices: [
+                `Metallen absorberar det yttre fältet och omvandlar det till värme.`,
+                `Ledningselektronerna omfördelas så att burens ena sida blir negativ och den andra positiv, vilket skapar ett lika stort men motriktat fält inuti som tar ut det yttre fältet.`,
+                `Det yttre fältet kan av princip aldrig nå fram till en metallyta.`,
+                `Metallen reflekterar fältet rakt tillbaka utåt, ungefär som en spegel reflekterar ljus.`,
+            ],
+            correct: 1,
+            solution: `När det yttre fältet läggs på rör sig de fria ledningselektronerna **mot** fältet. Den ena sidan av buren får då ett elektronöverskott (blir negativ) och den andra ett underskott (blir positiv). Dessa omfördelade laddningar bygger upp ett **eget, motriktat fält** inuti buren. Omfördelningen fortsätter tills det inre fältet är *exakt lika stort* som det yttre — då tar de ut varandra och det resulterande fältet blir noll.
+
+**Svar:** Alternativ B.
+
+**Generell slutsats:** Detta sker nästan ögonblickligen (med ljusets hastighet) och kallas **influens**. Poängen är att utsläckningen inte är passiv "absorption" utan ett aktivt, självreglerande svar: ju starkare yttre fält, desto mer omfördelas laddningarna — alltid precis lagom för att nolla fältet inuti.`,
+        },
+    ],
+
+    'fy1-7.14': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Två horisontella plattor sitter $5{,}0\\ \\mathrm{mm}$ från varandra och över dem ligger spänningen $1{,}0\\ \\mathrm{kV}$. Hur stark är den elektriska fältstyrkan mellan plattorna?`,
+            answer: { value: 2.0e5, unit: 'V/m' },
+            solution: `Mellan plattorna är fältet homogent:
+
+$$ \\mathbb{E} = \\frac{U}{d} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+U = 1{,}0\\ \\mathrm{kV} = 1\\,000\\ \\mathrm{V} \\\\
+d = 5{,}0\\ \\mathrm{mm} = 5{,}0 \\cdot 10^{-3}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ \\mathbb{E} = \\frac{1\\,000}{5{,}0 \\cdot 10^{-3}} = 2{,}0 \\cdot 10^5\\ \\mathrm{V/m} $$
+
+**Svar:** Fältstyrkan är $2{,}0 \\cdot 10^5\\ \\mathrm{V/m}$.
+
+**Generell slutsats:** Det är detta fält som i Millikans försök ger oljedropparna en uppåtriktad elektrisk kraft. Glöm inte att $\\mathrm{mm} \\to \\mathrm{m}$ är faktorn $10^{-3}$.`,
+        },
+        {
+            level: 1,
+            question: `En oljedroppe svävar i jämvikt i ett elektriskt fält med fältstyrkan $\\mathbb{E} = 4{,}0 \\cdot 10^5\\ \\mathrm{V/m}$. Droppens massa är $m = 2{,}0 \\cdot 10^{-14}\\ \\mathrm{kg}$. Hur stor är droppens laddning? ($g = 9{,}82\\ \\mathrm{N/kg}$)`,
+            answer: { value: 4.9e-19, unit: 'C' },
+            solution: `Eftersom droppen svävar måste den uppåtriktade elektriska kraften vara lika stor som den nedåtriktade tyngdkraften:
+
+$$ F_\\mathrm{e} = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad Q \\cdot \\mathbb{E} = m \\cdot g $$
+
+Vi löser ut laddningen *Q*:
+
+$$ Q = \\frac{m \\cdot g}{\\mathbb{E}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 2{,}0 \\cdot 10^{-14}\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+\\mathbb{E} = 4{,}0 \\cdot 10^5\\ \\mathrm{V/m}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ Q = \\frac{2{,}0 \\cdot 10^{-14} \\cdot 9{,}82}{4{,}0 \\cdot 10^5} = 4{,}9 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Svar:** Droppens laddning är ungefär $4{,}9 \\cdot 10^{-19}\\ \\mathrm{C}$.
+
+**Generell slutsats:** Hela Millikans metod bygger på denna kraftbalans: när droppen står still vet vi att $F_\\mathrm{e} = F_\\mathrm{G}$, och då kan laddningen räknas ut.`,
+        },
+        {
+            level: 1,
+            question: `En oljedroppe i Millikans försök har laddningen $Q = 4{,}8 \\cdot 10^{-19}\\ \\mathrm{C}$. Hur många överskottselektroner har droppen? Elementarladdningen är $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 3, unit: 'st' },
+            solution: `Antalet elektroner *n* fås genom att dividera droppens laddning med elementarladdningen:
+
+$$ n = \\frac{Q}{q_e} = \\frac{4{,}8 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} = 2{,}99\\ldots \\approx 3\\ \\text{st} $$
+
+**Svar:** Droppen har $3$ överskottselektroner.
+
+**Generell slutsats:** Svaret blir (nästan) ett heltal — det var precis det Millikan upptäckte. Laddningen är alltid en hel multipel av elementarladdningen $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, aldrig något "mitt emellan".`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Mellan två horisontella plattor $4{,}0\\ \\mathrm{mm}$ från varandra läggs spänningen $1{,}5\\ \\mathrm{kV}$. En oljedroppe med massan $m = 1{,}8 \\cdot 10^{-14}\\ \\mathrm{kg}$ svävar i jämvikt mellan plattorna. Bestäm droppens laddning. ($g = 9{,}82\\ \\mathrm{N/kg}$)`,
+            answer: { value: 4.7e-19, unit: 'C' },
+            solution: `Vid jämvikt är elektrisk kraft och tyngdkraft lika stora. Med $\\mathbb{E} = U/d$ blir kraftbalansen:
+
+$$ F_\\mathrm{e} = F_\\mathrm{G} \\quad\\Leftrightarrow\\quad Q \\cdot \\frac{U}{d} = m \\cdot g $$
+
+Vi löser ut laddningen *Q*:
+
+$$ Q = \\frac{m \\cdot g \\cdot d}{U} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 1{,}8 \\cdot 10^{-14}\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+d = 4{,}0\\ \\mathrm{mm} = 4{,}0 \\cdot 10^{-3}\\ \\mathrm{m} \\\\
+U = 1{,}5\\ \\mathrm{kV} = 1\\,500\\ \\mathrm{V}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ Q = \\frac{1{,}8 \\cdot 10^{-14} \\cdot 9{,}82 \\cdot 4{,}0 \\cdot 10^{-3}}{1\\,500} = 4{,}7 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Svar:** Droppens laddning är ungefär $4{,}7 \\cdot 10^{-19}\\ \\mathrm{C}$.
+
+**Generell slutsats:** Formeln $Q = m g d / U$ är bara kraftbalansen $Q \\mathbb{E} = mg$ med $\\mathbb{E}$ utbytt mot $U/d$. Man behöver alltså inte räkna ut fältstyrkan separat — men det går lika bra att göra det i två steg.`,
+        },
+        {
+            level: 2,
+            question: `Mellan två horisontella plattor $5{,}0\\ \\mathrm{mm}$ från varandra läggs spänningen $2{,}0\\ \\mathrm{kV}$. En oljedroppe med massan $m = 1{,}3 \\cdot 10^{-14}\\ \\mathrm{kg}$ svävar i jämvikt. Hur många överskottselektroner har droppen? ($g = 9{,}82\\ \\mathrm{N/kg}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
+            answer: { value: 2, unit: 'st' },
+            solution: `**Steg 1 — droppens laddning** ur kraftbalansen $Q \\cdot U/d = m g$:
+
+$$ Q = \\frac{m \\cdot g \\cdot d}{U} = \\frac{1{,}3 \\cdot 10^{-14} \\cdot 9{,}82 \\cdot 5{,}0 \\cdot 10^{-3}}{2\\,000} = 3{,}2 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Steg 2 — antalet elektroner:**
+
+$$ n = \\frac{Q}{q_e} = \\frac{3{,}2 \\cdot 10^{-19}}{1{,}602 \\cdot 10^{-19}} = 1{,}99\\ldots \\approx 2\\ \\text{st} $$
+
+**Svar:** Droppen har $2$ överskottselektroner.
+
+**Generell slutsats:** Att svaret hamnar så nära ett heltal är inget sammanträffande — det är hela poängen med försöket. Droppens laddning *måste* vara ett helt antal elementarladdningar.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Mellan två horisontella plattor $6{,}0\\ \\mathrm{mm}$ från varandra svävar en oljedroppe med massan $m = 3{,}3 \\cdot 10^{-15}\\ \\mathrm{kg}$ i jämvikt. Droppen har 2 överskottselektroner. Vilken spänning ligger över plattorna? ($g = 9{,}82\\ \\mathrm{N/kg}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
+            answer: { value: 610, unit: 'V' },
+            solution: `**Steg 1 — droppens laddning.** Med 2 överskottselektroner är
+
+$$ Q = n \\cdot q_e = 2 \\cdot 1{,}602 \\cdot 10^{-19} = 3{,}204 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Steg 2 — kraftbalansen, löst för spänningen.** Vid jämvikt gäller $F_\\mathrm{e} = F_\\mathrm{G}$, dvs. $Q \\cdot \\dfrac{U}{d} = m \\cdot g$. Vi löser ut *U*:
+
+$$ U = \\frac{m \\cdot g \\cdot d}{Q} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 3{,}3 \\cdot 10^{-15}\\ \\mathrm{kg} \\\\
+g = 9{,}82\\ \\mathrm{N/kg} \\\\
+d = 6{,}0\\ \\mathrm{mm} = 6{,}0 \\cdot 10^{-3}\\ \\mathrm{m} \\\\
+Q = 3{,}204 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+Insättning:
+
+$$ U = \\frac{3{,}3 \\cdot 10^{-15} \\cdot 9{,}82 \\cdot 6{,}0 \\cdot 10^{-3}}{3{,}204 \\cdot 10^{-19}} = 607\\ \\mathrm{V} \\approx 610\\ \\mathrm{V} $$
+
+**Svar:** Spänningen över plattorna är ungefär $610\\ \\mathrm{V}$.
+
+**Generell slutsats:** Detta är försöket "baklänges": i stället för att mäta upp spänningen och räkna ut laddningen, utgår vi från en känd laddning (2 elektroner) och frågar vilken spänning som krävs för jämvikt. Nyckeln är att först omvandla antalet elektroner till en laddning med $Q = n \\cdot q_e$.`,
+        },
+        {
+            level: 3,
+            question: `En oljedroppe svävar i jämvikt mellan två vågräta plattor som sitter $8{,}0\\ \\mathrm{mm}$ från varandra med spänningen $5{,}0\\ \\mathrm{kV}$. Droppen har 4 överskottselektroner. Oljans densitet är $\\rho = 900\\ \\mathrm{kg/m^3}$. Bestäm oljedroppens radie. Anta att droppen är klotformad ($V = \\tfrac{4}{3}\\pi r^3$). ($q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$, $g = 9{,}82\\ \\mathrm{N/kg}$)`,
+            answer: { value: 2.2, unit: 'μm' },
+            solution: `**Steg 1 — droppens laddning** (4 elementarladdningar):
+$$ Q = 4 \\cdot q_e = 4 \\cdot 1{,}602 \\cdot 10^{-19} = 6{,}41 \\cdot 10^{-19}\\ \\mathrm{C} $$
+
+**Steg 2 — droppens massa ur jämvikten.** Vid svävning balanserar elektrisk kraft tyngdkraften, och $\\mathbb{E} = U/d$:
+$$ Q \\cdot \\frac{U}{d} = m \\cdot g \\quad\\Rightarrow\\quad m = \\frac{Q \\cdot U}{d \\cdot g} = \\frac{6{,}41 \\cdot 10^{-19} \\cdot 5\\,000}{0{,}0080 \\cdot 9{,}82} = 4{,}08 \\cdot 10^{-14}\\ \\mathrm{kg} $$
+
+**Steg 3 — radien ur massa och densitet.** Massan är densitet gånger klotvolym:
+$$ m = \\rho \\cdot \\frac{4}{3}\\pi r^3 \\quad\\Rightarrow\\quad r = \\sqrt[3]{\\frac{3m}{4\\pi\\rho}} $$
+$$ r = \\sqrt[3]{\\frac{3 \\cdot 4{,}08 \\cdot 10^{-14}}{4\\pi \\cdot 900}} = \\sqrt[3]{1{,}08 \\cdot 10^{-17}} = 2{,}2 \\cdot 10^{-6}\\ \\mathrm{m} = 2{,}2\\ \\mathrm{\\mu m} $$
+
+**Svar:** Oljedroppens radie är ungefär $2{,}2\\ \\mathrm{\\mu m}$.
+
+**Generell slutsats:** Uppgiften kombinerar Millikans jämvikt, fältet mellan plattor *och* sambandet mellan massa, densitet och klotvolym — och kräver till sist en kubikrot. Det var just genom att bestämma droppens storlek (via dess falltid) som Millikan kunde få fram massan och därmed elementarladdningen.`,
+        },
+    ],
+
+    'fy1-8.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Två rymdskepp närmar sig varandra, vardera med farten $0{,}60c$. Det ena skeppet skickar en ljuspuls mot det andra. Med vilken hastighet uppmäter det mottagande skeppet ljuspulsen?`,
+            choices: [
+                `$1{,}2c$ — skeppens farter ($0{,}60c + 0{,}60c$) adderas till ljusets.`,
+                `$c$ — ljusets hastighet är densamma oavsett hur källa och observatör rör sig.`,
+                `$1{,}6c$ — det egna skeppets fart ($0{,}60c$) adderas till ljusets ($c$).`,
+                `$0{,}60c$ — ljuset bromsas till skeppens fart.`,
+            ],
+            correct: 1,
+            solution: `Ljusets hastighet i vakuum är **alltid** $c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$, oavsett hur ljuskällan eller observatören rör sig. Det mottagande skeppet mäter alltså ljuspulsen till $c$ — varken mer eller mindre.
+
+**Svar:** Alternativ B — $c$.
+
+**Generell slutsats:** Det här är relativitetsteorins grundpostulat och bekräftades av Michelson–Morleys experiment. Hastigheter "adderas" inte på vanligt vis när ljus är inblandat — annars hade svaret blivit $1{,}2c$, vilket är fel. Just att $c$ är konstant tvingar fram tidsdilatation och längdkontraktion.`,
+        },
+        {
+            level: 1,
+            question: `En rymdfarkost rör sig förbi jorden med farten $0{,}60c$. Ett förlopp ombord tar $t_0 = 10\\ \\mathrm{s}$ (egentid). Hur lång tid tar samma förlopp sett från jorden? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
+            answer: { value: 12.5, unit: 's' },
+            solution: `Tiden sett utifrån fås ur tidsdilatationsformeln:
+
+$$ t = \\frac{t_0}{\\sqrt{1 - \\dfrac{v^2}{c^2}}} $$
+
+Här är $t_0$ egentiden (ombord) och $v = 0{,}60c$. Eftersom $v$ anges i andelar av $c$ förkortas $c$ bort:
+
+$$
+\\left[ \\begin{array}{l}
+t_0 = 10\\ \\mathrm{s} \\\\
+\\dfrac{v^2}{c^2} = (0{,}60)^2 = 0{,}36
+\\end{array} \\right]
+$$
+
+$$ t = \\frac{10}{\\sqrt{1 - 0{,}36}} = \\frac{10}{\\sqrt{0{,}64}} = \\frac{10}{0{,}80} = 12{,}5\\ \\mathrm{s} $$
+
+**Svar:** Förloppet tar $12{,}5\\ \\mathrm{s}$ sett från jorden.
+
+**Generell slutsats:** Den utomstående mäter alltid en *längre* tid ($t > t_0$) — "rörliga klockor går långsammare". Egentiden $t_0$ är den kortaste möjliga och mäts av den som följer med förloppet.`,
+        },
+        {
+            level: 1,
+            question: `Hur mycket energi motsvarar massan $1{,}0\\ \\mathrm{g}$ enligt Einsteins samband $E = m \\cdot c^2$? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
+            answer: { value: 9.0e13, unit: 'J' },
+            solution: `Vi sätter in i $E = m \\cdot c^2$:
+
+$$
+\\left[ \\begin{array}{l}
+m = 1{,}0\\ \\mathrm{g} = 1{,}0 \\cdot 10^{-3}\\ \\mathrm{kg} \\\\
+c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+$$ E = 1{,}0 \\cdot 10^{-3} \\cdot (2{,}998 \\cdot 10^8)^2 = 9{,}0 \\cdot 10^{13}\\ \\mathrm{J} $$
+
+**Svar:** Energin är ungefär $9{,}0 \\cdot 10^{13}\\ \\mathrm{J}$.
+
+**Generell slutsats:** Eftersom $c^2$ är ett enormt tal motsvarar även en pytteliten massa en gigantisk energi — $9 \\cdot 10^{13}\\ \\mathrm{J}$ räcker för att försörja ett villahushåll med el i flera tusen år. Det är denna princip som ligger bakom kärnkraft och solens energiproduktion.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En rymdfarkost är $120\\ \\mathrm{m}$ lång när den mäts i vila. Hur lång är farkosten sett från jorden när den passerar med farten $0{,}80c$? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
+            answer: { value: 72, unit: 'm' },
+            solution: `Längden i rörelsens riktning krymper enligt längdkontraktionsformeln:
+
+$$ l = l_0 \\cdot \\sqrt{1 - \\frac{v^2}{c^2}} $$
+
+där $l_0 = 120\\ \\mathrm{m}$ är vilolängden och $v = 0{,}80c$:
+
+$$
+\\left[ \\begin{array}{l}
+l_0 = 120\\ \\mathrm{m} \\\\
+\\dfrac{v^2}{c^2} = (0{,}80)^2 = 0{,}64
+\\end{array} \\right]
+$$
+
+$$ l = 120 \\cdot \\sqrt{1 - 0{,}64} = 120 \\cdot \\sqrt{0{,}36} = 120 \\cdot 0{,}60 = 72\\ \\mathrm{m} $$
+
+**Svar:** Farkosten är $72\\ \\mathrm{m}$ lång sett från jorden.
+
+**Generell slutsats:** Kontraktionen sker **bara i rörelsens riktning** — farkostens bredd och höjd är oförändrade. Den som är *ombord* mäter däremot alltid vilolängden $120\\ \\mathrm{m}$; ingen ombord märker att något krympt.`,
+        },
+        {
+            level: 2,
+            question: `En proton har vilomassan $m_0 = 1{,}67 \\cdot 10^{-27}\\ \\mathrm{kg}$. Vad blir protonens (relativistiska) massa när den accelererats till farten $0{,}80c$? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
+            answer: { value: 2.8e-27, unit: 'kg' },
+            solution: `Massan sett utifrån växer enligt
+
+$$ m = \\frac{m_0}{\\sqrt{1 - \\dfrac{v^2}{c^2}}} $$
+
+Med $v = 0{,}80c$:
+
+$$
+\\left[ \\begin{array}{l}
+m_0 = 1{,}67 \\cdot 10^{-27}\\ \\mathrm{kg} \\\\
+\\dfrac{v^2}{c^2} = (0{,}80)^2 = 0{,}64
+\\end{array} \\right]
+$$
+
+$$ m = \\frac{1{,}67 \\cdot 10^{-27}}{\\sqrt{1 - 0{,}64}} = \\frac{1{,}67 \\cdot 10^{-27}}{0{,}60} = 2{,}8 \\cdot 10^{-27}\\ \\mathrm{kg} $$
+
+**Svar:** Protonens massa blir ungefär $2{,}8 \\cdot 10^{-27}\\ \\mathrm{kg}$ — knappt dubbelt så stor som vilomassan.
+
+**Generell slutsats:** Att massan ökar med farten är just därför inget föremål med vilomassa kan nå $c$: ju närmare $c$, desto större massa och desto mer kraft krävs för att accelerera vidare — vid $v = c$ skulle massan bli oändlig. Effekten är bekräftad i partikelacceleratorer.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En myon skapas högt uppe i atmosfären och rör sig rakt nedåt mot marken med farten $0{,}995c$. Myonens medellivslängd är $t_0 = 2{,}2\\ \\mathrm{\\mu s}$ (egentid, mätt i myonens eget system). Hur långt hinner myonen i **markens** referensram innan den i genomsnitt sönderfaller? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
+            answer: { value: 6.6, unit: 'km' },
+            solution: `Det avgörande är att veta *vilken* tid som ska användas i vilken referensram — det är här de flesta går vilse.
+
+**Den naiva (felaktiga) räkningen** behandlar $2{,}2\\ \\mathrm{\\mu s}$ som om den gällde i markens system:
+
+$$ d_\\text{naiv} = v \\cdot t_0 = 0{,}995 \\cdot 2{,}998 \\cdot 10^8 \\cdot 2{,}2 \\cdot 10^{-6} \\approx 660\\ \\mathrm{m} $$
+
+Då skulle myonen aldrig nå marken (den bildas på flera kilometers höjd). Men $2{,}2\\ \\mathrm{\\mu s}$ är **egentiden** — myonens *egen* klocka. I markens system går myonens klocka långsammare, så förloppet tar längre tid:
+
+$$ t = \\frac{t_0}{\\sqrt{1 - \\dfrac{v^2}{c^2}}} = \\frac{2{,}2 \\cdot 10^{-6}}{\\sqrt{1 - 0{,}995^2}} = \\frac{2{,}2 \\cdot 10^{-6}}{\\sqrt{0{,}009975}} = \\frac{2{,}2 \\cdot 10^{-6}}{0{,}0999} = 2{,}2 \\cdot 10^{-5}\\ \\mathrm{s} $$
+
+Sträckan i markens system blir då
+
+$$ d = v \\cdot t = 0{,}995 \\cdot 2{,}998 \\cdot 10^8 \\cdot 2{,}2 \\cdot 10^{-5} \\approx 6\\,600\\ \\mathrm{m} = 6{,}6\\ \\mathrm{km} $$
+
+**Svar:** Myonen hinner ungefär $6{,}6\\ \\mathrm{km}$ — tio gånger längre än den naiva räkningen, tillräckligt för att nå marken.
+
+**Generell slutsats:** Samma resultat fås från myonens *eget* system via **längdkontraktion**: där lever myonen bara $2{,}2\\ \\mathrm{\\mu s}$, men avståndet ner till marken är kontraherat med samma faktor (cirka 10), så $6{,}6\\ \\mathrm{km}$ krymper till $\\approx 660\\ \\mathrm{m}$ som myonen hinner med. Båda referensramarna är överens om att myonen når marken — de är bara oeniga om *varför* (utdragen tid kontra hopkrympt avstånd). Att myoner från atmosfären verkligen detekteras vid marken är ett av de starkaste experimentella bevisen för relativitetsteorin.`,
+        },
+    ],
+
+    'fy1-9.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Protonerna i en atomkärna är positivt laddade och borde repellera varandra. Vilken kraft håller ändå ihop kärnan?`,
+            choices: [
+                `Den starka kärnkraften.`,
+                `Gravitationskraften mellan nukleonerna.`,
+                `Den elektromagnetiska kraften.`,
+                `Tröghetskraften från kärnans rotation.`,
+            ],
+            correct: 0,
+            solution: `Den **starka kärnkraften** (stark växelverkan) håller ihop protoner och neutroner i kärnan. Den är mycket starkare än den elektriska frånstötningen, men verkar bara på extremt korta avstånd (ungefär $10^{-15}\\ \\mathrm{m}$).
+
+**Svar:** Alternativ A — den starka kärnkraften.
+
+**Generell slutsats:** Gravitationen mellan så små massor är försvinnande svag, och den elektromagnetiska kraften *stöter isär* protonerna. Att den starka kraften bara når så kort gör att riktigt stora kärnor blir instabila och sönderfaller — där "vinner" frånstötningen på avstånd.`,
+        },
+        {
+            level: 1,
+            question: `Uran-238 har atomnumret $Z = 92$. Hur många neutroner finns i kärnan?`,
+            answer: { value: 146, unit: 'st' },
+            solution: `Masstalet *A* är det totala antalet nukleoner (protoner + neutroner), och atomnumret *Z* är antalet protoner. Antalet neutroner är skillnaden:
+
+$$ N = A - Z = 238 - 92 = 146 $$
+
+**Svar:** Kärnan har $146$ neutroner.
+
+**Generell slutsats:** I beteckningen $_{Z}^{A}\\mathrm{X}$ står masstalet uppe och atomnumret nere. Neutronantalet skrivs sällan ut — det räknas alltid som $A - Z$.`,
+        },
+        {
+            level: 1,
+            question: `Vad kännetecknar två **isotoper** av samma grundämne?`,
+            choices: [
+                `Samma antal protoner men olika antal neutroner.`,
+                `Samma antal neutroner men olika antal protoner.`,
+                `Olika antal protoner och olika antal elektroner.`,
+                `Samma masstal men olika atomnummer.`,
+            ],
+            correct: 0,
+            solution: `Isotoper av ett grundämne har **samma atomnummer** *Z* (samma antal protoner — annars vore det ett annat grundämne) men **olika masstal** *A*, eftersom de har olika antal neutroner.
+
+**Svar:** Alternativ A.
+
+**Generell slutsats:** Väte har t.ex. tre isotoper: protium ($^1\\mathrm{H}$, 0 neutroner), deuterium ($^2\\mathrm{H}$, 1 neutron) och tritium ($^3\\mathrm{H}$, 2 neutroner) — alla med $Z = 1$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En atomkärna innehåller 26 protoner och 30 neutroner. Vilket masstal har kärnan?`,
+            answer: { value: 56, unit: '' },
+            solution: `Masstalet är det totala antalet nukleoner:
+
+$$ A = (\\text{antal protoner}) + (\\text{antal neutroner}) = 26 + 30 = 56 $$
+
+**Svar:** Masstalet är $56$.
+
+**Generell slutsats:** Atomnumret $Z = 26$ avslöjar dessutom grundämnet — det är **järn** (Fe). Kärnan skrivs $_{26}^{56}\\mathrm{Fe}$. Just denna kärna är bland de mest stabila som finns.`,
+        },
+        {
+            level: 2,
+            question: `Hur stor är den totala positiva elektriska laddningen i en järnkärna, som har 26 protoner? Elementarladdningen är $1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 4.2e-18, unit: 'C' },
+            solution: `Varje proton bär en elementarladdning, så kärnans laddning är antalet protoner gånger elementarladdningen:
+
+$$ Q = Z \\cdot q_e $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+Z = 26 \\\\
+q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}
+\\end{array} \\right]
+$$
+
+$$ Q = 26 \\cdot 1{,}602 \\cdot 10^{-19} = 4{,}2 \\cdot 10^{-18}\\ \\mathrm{C} $$
+
+**Svar:** Kärnans laddning är ungefär $4{,}2 \\cdot 10^{-18}\\ \\mathrm{C}$.
+
+**Generell slutsats:** Neutronerna bidrar inte — de är oladdade. Det är atomnumret *Z* (protonantalet) som ensamt bestämmer kärnans laddning.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två protoner i en atomkärna befinner sig $2{,}0\\ \\mathrm{fm}$ ($2{,}0 \\cdot 10^{-15}\\ \\mathrm{m}$) från varandra. Hur stor är den elektriska frånstötningen mellan dem? ($k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2}$, $q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C}$)`,
+            answer: { value: 58, unit: 'N' },
+            solution: `Protonerna har båda laddningen $q_e$. Den elektriska kraften ges av Coulombs lag:
+
+$$ F = k \\cdot \\frac{q_e^2}{r^2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+k \\approx 8{,}99 \\cdot 10^9\\ \\mathrm{N \\cdot m^2 / C^2} \\\\
+q_e = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{C} \\\\
+r = 2{,}0 \\cdot 10^{-15}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ F = 8{,}99 \\cdot 10^9 \\cdot \\frac{(1{,}602 \\cdot 10^{-19})^2}{(2{,}0 \\cdot 10^{-15})^2} = 58\\ \\mathrm{N} $$
+
+**Svar:** Frånstötningen är ungefär $58\\ \\mathrm{N}$.
+
+**Generell slutsats:** Tänk på hur ofattbart stor den kraften är — $58\\ \\mathrm{N}$ (som att lyfta ett 6 kg paket) mellan **två enskilda protoner**! Just därför *måste* det finnas en ännu starkare kraft som håller ihop kärnan: den **starka kärnkraften**. Den här uppgiften visar kvantitativt varför den behövs — den elektriska frånstötningen på kärnavstånd är enorm.`,
+        },
+    ],
+
+    'fy1-9.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Kärnan i Helium-3 har massdefekten $\\Delta m = 0{,}00829\\ \\mathrm{u}$. Beräkna kärnans bindningsenergi. Svara i MeV. ($1\\ \\mathrm{u} = 931{,}49\\ \\mathrm{MeV}$)`,
+            answer: { value: 7.7, unit: 'MeV' },
+            solution: `Massdefekten motsvarar bindningsenergin. Med omvandlingsfaktorn $1\\ \\mathrm{u} = 931{,}49\\ \\mathrm{MeV}$ kan vi gå direkt från massdefekt i u till energi i MeV:
+
+$$ E = \\Delta m \\cdot 931{,}49 = 0{,}00829 \\cdot 931{,}49 = 7{,}72\\ \\mathrm{MeV} $$
+
+**Svar:** Bindningsenergin är ungefär $7{,}7\\ \\mathrm{MeV}$.
+
+**Generell slutsats:** Faktorn $931{,}49\\ \\mathrm{MeV/u}$ kommer från $E = mc^2$ tillämpat på $1\\ \\mathrm{u}$ — den sparar steget att omvandla till kg och joule när man räknar med kärnmassor.`,
+        },
+        {
+            level: 1,
+            question: `En kärnreaktion frigör energin $2{,}5\\ \\mathrm{MeV}$. Hur många joule är det? ($1\\ \\mathrm{eV} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$)`,
+            answer: { value: 4.0e-13, unit: 'J' },
+            solution: `Vi omvandlar megaelektronvolt till joule. $1\\ \\mathrm{MeV} = 10^6\\ \\mathrm{eV}$, och varje eV är $1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$:
+
+$$ E = 2{,}5 \\cdot 10^6 \\cdot 1{,}602 \\cdot 10^{-19} = 4{,}0 \\cdot 10^{-13}\\ \\mathrm{J} $$
+
+**Svar:** Energin är ungefär $4{,}0 \\cdot 10^{-13}\\ \\mathrm{J}$.
+
+**Generell slutsats:** Elektronvolt är en behändig enhet för de pyttesmå energierna hos enskilda partiklar och kärnor — joule-talet blir annars opraktiskt litet.`,
+        },
+        {
+            level: 1,
+            question: `En kärna har massdefekten $\\Delta m = 5{,}0 \\cdot 10^{-30}\\ \\mathrm{kg}$. Beräkna bindningsenergin i joule. ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
+            answer: { value: 4.5e-13, unit: 'J' },
+            solution: `Bindningsenergin fås ur Einsteins samband med massdefekten i kilogram:
+
+$$ E = \\Delta m \\cdot c^2 = 5{,}0 \\cdot 10^{-30} \\cdot (2{,}998 \\cdot 10^8)^2 = 4{,}5 \\cdot 10^{-13}\\ \\mathrm{J} $$
+
+**Svar:** Bindningsenergin är ungefär $4{,}5 \\cdot 10^{-13}\\ \\mathrm{J}$.
+
+**Generell slutsats:** Detta är samma sak som föregående uppgift fast utan genvägen — när massdefekten redan står i kg använder man $E = \\Delta m c^2$ direkt. Omvandlar man svaret till MeV får man $\\approx 2{,}8\\ \\mathrm{MeV}$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Kärnan i Helium-4 består av 2 protoner och 2 neutroner. Beräkna kärnans bindningsenergi i MeV.
+$$
+\\left[ \\begin{array}{l}
+m_\\text{proton} = 1{,}00728\\ \\mathrm{u} \\\\
+m_\\text{neutron} = 1{,}00866\\ \\mathrm{u} \\\\
+m_\\text{kärna}(\\mathrm{He}\\text{-}4) = 4{,}00150\\ \\mathrm{u} \\\\
+1\\ \\mathrm{u} = 931{,}49\\ \\mathrm{MeV}
+\\end{array} \\right]
+$$`,
+            answer: { value: 28.3, unit: 'MeV' },
+            solution: `Vi jämför massan hos de fria byggstenarna med massan hos den sammansatta kärnan.
+
+**Byggstenarnas massa:**
+$$ m_\\text{partiklar} = 2 \\cdot 1{,}00728 + 2 \\cdot 1{,}00866 = 4{,}03188\\ \\mathrm{u} $$
+
+**Massdefekten** (byggstenarna minus kärnan):
+$$ \\Delta m = m_\\text{partiklar} - m_\\text{kärna} = 4{,}03188 - 4{,}00150 = 0{,}03038\\ \\mathrm{u} $$
+
+**Bindningsenergin:**
+$$ E = \\Delta m \\cdot 931{,}49 = 0{,}03038 \\cdot 931{,}49 = 28{,}3\\ \\mathrm{MeV} $$
+
+**Svar:** Bindningsenergin är ungefär $28{,}3\\ \\mathrm{MeV}$.
+
+**Generell slutsats:** Den sammansatta kärnan väger *mindre* än sina lösa byggstenar — den "saknade" massan har blivit bindningsenergi. Det är denna energi som skulle krävas för att slita isär kärnan helt.`,
+        },
+        {
+            level: 2,
+            question: `En kärna med masstal $A = 56$ har den totala bindningsenergin $492\\ \\mathrm{MeV}$. Beräkna bindningsenergin **per nukleon**.`,
+            answer: { value: 8.8, unit: 'MeV' },
+            solution: `Bindningsenergin per nukleon är den totala bindningsenergin delad med antalet nukleoner (= masstalet):
+
+$$ \\frac{E}{A} = \\frac{492}{56} = 8{,}79\\ \\mathrm{MeV/nukleon} $$
+
+**Svar:** Bindningsenergin per nukleon är ungefär $8{,}8\\ \\mathrm{MeV/nukleon}$.
+
+**Generell slutsats:** Bindningsenergi *per nukleon* är ett bättre mått på hur stabil en kärna är än den totala bindningsenergin. Den når sitt maximum (ca $8{,}8\\ \\mathrm{MeV}$) just kring järn ($A = 56$) — därför frigör både fusion av lätta kärnor och fission av tunga kärnor energi: båda rör sig "mot järn".`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Solen strålar ut energi med effekten $P = 3{,}8 \\cdot 10^{26}\\ \\mathrm{W}$. Hur stor massa omvandlas till energi i solen varje sekund? ($c \\approx 2{,}998 \\cdot 10^8\\ \\mathrm{m/s}$)`,
+            answer: { value: 4.2e9, unit: 'kg/s' },
+            solution: `Effekt är energi per tid, så energin som strålar ut under en sekund är
+
+$$ E = P \\cdot t = 3{,}8 \\cdot 10^{26} \\cdot 1{,}0 = 3{,}8 \\cdot 10^{26}\\ \\mathrm{J} $$
+
+Den energin kommer från massa som omvandlats enligt $E = m c^2$. Vi löser ut massan:
+
+$$ m = \\frac{E}{c^2} = \\frac{3{,}8 \\cdot 10^{26}}{(2{,}998 \\cdot 10^8)^2} = 4{,}2 \\cdot 10^9\\ \\mathrm{kg} $$
+
+**Svar:** Solen omvandlar ungefär $4{,}2 \\cdot 10^9\\ \\mathrm{kg}$ massa till energi varje sekund.
+
+**Generell slutsats:** Det är drygt fyra miljoner ton i sekunden — men solen är så enormt massiv att den ändå räcker i miljarder år. Insikten är att kombinera effektdefinitionen ($P = E/t$) med massa–energi-sambandet ($E = mc^2$): massförlusten per tid blir $m/t = P/c^2$.`,
+        },
+    ],
+
+    'fy1-9.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vid vilket sönderfall sänder kärnan ut en heliumkärna ($_2^4\\mathrm{He}$)?`,
+            choices: [
+                `α-sönderfall.`,
+                `β⁻-sönderfall.`,
+                `β⁺-sönderfall.`,
+                `γ-sönderfall.`,
+            ],
+            correct: 0,
+            solution: `Vid **α-sönderfall** sänds en heliumkärna $_2^4\\mathrm{He}$ (två protoner och två neutroner) ut. Masstalet minskar då med 4 och atomnumret med 2.
+
+**Svar:** Alternativ A — α-sönderfall.
+
+**Generell slutsats:** Vid β-sönderfall sänds en elektron eller positron ut (masstalet oförändrat), och vid γ-sönderfall en foton (varken masstal eller atomnummer ändras).`,
+        },
+        {
+            level: 1,
+            question: `Polonium-210 har atomnumret $Z = 84$ och α-sönderfaller. Vilket **masstal** har dotterkärnan?`,
+            answer: { value: 206, unit: '' },
+            solution: `Vid α-sönderfall sänds $_2^4\\mathrm{He}$ ut, så masstalet minskar med 4:
+
+$$ _{84}^{210}\\mathrm{Po} \\rightarrow {_{82}^{206}}\\mathrm{Pb} + {_2^4}\\mathrm{He} $$
+
+$$ A_\\text{dotter} = 210 - 4 = 206 $$
+
+**Svar:** Dotterkärnan har masstalet $206$.
+
+**Generell slutsats:** Atomnumret minskar samtidigt med 2 ($84 \\to 82$), så dotterkärnan är bly-206. Kontrollera alltid att masstal *och* atomnummer balanserar på båda sidor om pilen.`,
+        },
+        {
+            level: 1,
+            question: `Vid ett β⁻-sönderfall omvandlas en neutron till en proton (plus en elektron och en neutrino). Hur ändras atomnumret *Z*?`,
+            choices: [
+                `Det ökar med 1.`,
+                `Det minskar med 1.`,
+                `Det minskar med 2.`,
+                `Det är oförändrat.`,
+            ],
+            correct: 0,
+            solution: `Vid β⁻-sönderfall blir en neutron en proton. Antalet protoner ökar då med 1, alltså **ökar atomnumret med 1**. Masstalet *A* är oförändrat (en nukleon byter bara typ).
+
+$$ _Z^A\\mathrm{X} \\rightarrow {_{Z+1}^{A}}\\mathrm{Y} + {_{-1}^{0}}\\mathrm{e} + \\nu $$
+
+**Svar:** Alternativ A — det ökar med 1.
+
+**Generell slutsats:** Vid β⁺-sönderfall är det tvärtom: en proton blir en neutron, så atomnumret *minskar* med 1.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Natrium-22 har atomnumret $Z = 11$ och β⁺-sönderfaller. Vilket **atomnummer** har dotterkärnan?`,
+            answer: { value: 10, unit: '' },
+            solution: `Vid β⁺-sönderfall omvandlas en proton till en neutron, så atomnumret minskar med 1 (masstalet är oförändrat):
+
+$$ _{11}^{22}\\mathrm{Na} \\rightarrow {_{10}^{22}}\\mathrm{Ne} + {_1^0}\\mathrm{e} + \\nu $$
+
+$$ Z_\\text{dotter} = 11 - 1 = 10 $$
+
+**Svar:** Dotterkärnan har atomnumret $10$ (neon).
+
+**Generell slutsats:** Kontroll av balansen: masstal $22 = 22 + 0$ ✓, atomnummer $11 = 10 + 1 + 0$ ✓ (positronen räknas som laddning $+1$). Just balanseringen är hela poängen med sönderfallsformler.`,
+        },
+        {
+            level: 2,
+            question: `Radium-226 α-sönderfaller till radon-222. Beräkna energin som frigörs vid sönderfallet. Svara i MeV.
+$$
+\\left[ \\begin{array}{l}
+m(\\mathrm{Ra}\\text{-}226) = 226{,}02541\\ \\mathrm{u} \\\\
+m(\\mathrm{Rn}\\text{-}222) = 222{,}01758\\ \\mathrm{u} \\\\
+m(\\mathrm{He}\\text{-}4) = 4{,}00260\\ \\mathrm{u} \\\\
+1\\ \\mathrm{u} = 931{,}49\\ \\mathrm{MeV}
+\\end{array} \\right]
+$$`,
+            answer: { value: 4.9, unit: 'MeV' },
+            solution: `Den frigjorda energin kommer från massdefekten — skillnaden mellan moderkärnans massa och produkternas sammanlagda massa:
+
+$$ \\Delta m = m(\\mathrm{Ra}) - \\big(m(\\mathrm{Rn}) + m(\\mathrm{He})\\big) $$
+
+$$ \\Delta m = 226{,}02541 - (222{,}01758 + 4{,}00260) = 0{,}00523\\ \\mathrm{u} $$
+
+Energin fås med omvandlingsfaktorn:
+
+$$ E = 0{,}00523 \\cdot 931{,}49 = 4{,}87\\ \\mathrm{MeV} \\approx 4{,}9\\ \\mathrm{MeV} $$
+
+**Svar:** Det frigörs ungefär $4{,}9\\ \\mathrm{MeV}$.
+
+**Generell slutsats:** Vid α- och γ-sönderfall kan man räkna med atommassorna direkt eftersom antalet elektroner balanserar (här 88 på vänster sida = 86 + 2 på höger). Vid β-sönderfall ändras elektronantalet, och då måste man vara mer noggrann med elektronmassorna.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Uran-238 ($Z = 92$) sönderfaller i en lång kedja av α- och β⁻-sönderfall och slutar till sist som den stabila kärnan bly-206 ($Z = 82$). Hur många α-sönderfall och hur många β⁻-sönderfall sker totalt i hela kedjan?`,
+            solution: `Det här går inte att lösa stegvis utan att känna varje mellansteg — i stället ställer vi upp två ekvationer, en för masstalet och en för atomnumret, och utnyttjar att bara α-sönderfall ändrar masstalet.
+
+**Masstalet** ändras bara av α-sönderfall (varje α minskar *A* med 4; β⁻ ändrar inte *A*). Total minskning:
+
+$$ \\Delta A = 238 - 206 = 32 \\quad\\Rightarrow\\quad 4 \\cdot n_\\alpha = 32 \\quad\\Rightarrow\\quad n_\\alpha = 8 $$
+
+**Atomnumret** ändras av båda: varje α minskar *Z* med 2, varje β⁻ ökar *Z* med 1. Total ändring:
+
+$$ \\Delta Z = 82 - 92 = -10 $$
+$$ -2 \\cdot n_\\alpha + 1 \\cdot n_\\beta = -10 $$
+
+Sätt in $n_\\alpha = 8$:
+
+$$ -16 + n_\\beta = -10 \\quad\\Rightarrow\\quad n_\\beta = 6 $$
+
+**Svar:** Kedjan innehåller $8$ α-sönderfall och $6$ β⁻-sönderfall.
+
+**Generell slutsats:** Nyckeln är att **frikoppla de två obekanta**: masstalet beror *bara* på antalet α, så $n_\\alpha$ kan lösas ensamt först. Därefter ger atomnumret $n_\\beta$. Detta är den verkliga sönderfallskedjan för uran-238, som via radium och radon slutar i bly.`,
+        },
+    ],
+
+    'fy1-9.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett radioaktivt preparat har aktiviteten $800\\ \\mathrm{Bq}$ och halveringstiden $8{,}0$ dagar. Hur stor är aktiviteten efter $24$ dagar?`,
+            answer: { value: 100, unit: 'Bq' },
+            solution: `Tiden $24$ dagar motsvarar $24 / 8{,}0 = 3$ halveringstider. Aktivitetslagen ger
+
+$$ A = A_0 \\cdot 0{,}5^{\\,t / T_{1/2}} = 800 \\cdot 0{,}5^{\\,24/8{,}0} = 800 \\cdot 0{,}5^{3} = 800 \\cdot 0{,}125 = 100\\ \\mathrm{Bq} $$
+
+**Svar:** Aktiviteten är $100\\ \\mathrm{Bq}$.
+
+**Generell slutsats:** Efter varje halveringstid halveras aktiviteten: $800 \\to 400 \\to 200 \\to 100$. När tiden är ett *helt* antal halveringstider kan man halvera sig fram i huvudet.`,
+        },
+        {
+            level: 1,
+            question: `En radioaktiv isotop har halveringstiden $T_{1/2} = 5{,}0\\ \\mathrm{s}$. Beräkna sönderfallskonstanten *λ*.`,
+            answer: { value: 0.14, unit: '1/s' },
+            solution: `Sönderfallskonstanten hänger ihop med halveringstiden enligt
+
+$$ \\lambda = \\frac{\\ln 2}{T_{1/2}} = \\frac{0{,}693}{5{,}0} = 0{,}14\\ \\mathrm{s^{-1}} $$
+
+**Svar:** Sönderfallskonstanten är ungefär $0{,}14\\ \\mathrm{s^{-1}}$.
+
+**Generell slutsats:** Ju kortare halveringstid, desto större sönderfallskonstant — preparatet sönderfaller snabbare. $\\ln 2 \\approx 0{,}693$.`,
+        },
+        {
+            level: 1,
+            question: `Hur stor **andel** av ett radioaktivt preparat återstår efter $4$ halveringstider? Svara i procent.`,
+            answer: { value: 6.25, unit: '%' },
+            solution: `Efter varje halveringstid återstår hälften. Efter 4 halveringstider:
+
+$$ \\frac{N}{N_0} = 0{,}5^{4} = 0{,}0625 = 6{,}25\\ \\% $$
+
+**Svar:** Ungefär $6{,}25\\ \\%$ återstår.
+
+**Generell slutsats:** Halveringarna ger $100 \\to 50 \\to 25 \\to 12{,}5 \\to 6{,}25\\ \\%$. Redan efter 10 halveringstider återstår bara en tusendel ($0{,}5^{10} \\approx 0{,}001$) — det är därför kol-14-metoden tar slut kring 50 000 år.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett preparat med Cesium-137 ($T_{1/2} = 30\\ \\mathrm{år}$) har i dag aktiviteten $2{,}0\\ \\mathrm{MBq}$. Hur stor är aktiviteten om $50$ år?`,
+            answer: { value: 0.63, unit: 'MBq' },
+            solution: `Här är tiden inte ett helt antal halveringstider, så vi använder aktivitetslagen direkt:
+
+$$ A = A_0 \\cdot 0{,}5^{\\,t / T_{1/2}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+A_0 = 2{,}0\\ \\mathrm{MBq} \\\\
+t = 50\\ \\mathrm{år} \\\\
+T_{1/2} = 30\\ \\mathrm{år}
+\\end{array} \\right]
+$$
+
+$$ A = 2{,}0 \\cdot 0{,}5^{\\,50/30} = 2{,}0 \\cdot 0{,}5^{1{,}667} = 2{,}0 \\cdot 0{,}315 = 0{,}63\\ \\mathrm{MBq} $$
+
+**Svar:** Aktiviteten är ungefär $0{,}63\\ \\mathrm{MBq}$.
+
+**Generell slutsats:** Exponenten $t/T_{1/2}$ behöver inte vara ett heltal — räknaren hanterar $0{,}5^{1{,}667}$. Tiden och halveringstiden måste dock anges i *samma* enhet (här år), annars blir exponenten fel.`,
+        },
+        {
+            level: 2,
+            question: `Ett radioaktivt preparat har aktiviteten $1{,}0 \\cdot 10^6\\ \\mathrm{Bq}$ och sönderfallskonstanten $\\lambda = 2{,}0 \\cdot 10^{-8}\\ \\mathrm{s^{-1}}$. Hur många radioaktiva kärnor innehåller preparatet?`,
+            answer: { value: 5.0e13, unit: 'st' },
+            solution: `Aktiviteten är proportionell mot antalet kärnor: $A = \\lambda \\cdot N$. Vi löser ut antalet kärnor *N*:
+
+$$ N = \\frac{A}{\\lambda} = \\frac{1{,}0 \\cdot 10^6}{2{,}0 \\cdot 10^{-8}} = 5{,}0 \\cdot 10^{13}\\ \\text{st} $$
+
+**Svar:** Preparatet innehåller ungefär $5{,}0 \\cdot 10^{13}$ radioaktiva kärnor.
+
+**Generell slutsats:** Aktiviteten ($10^6$ sönderfall per sekund) känns hög, men eftersom varje enskild kärna sönderfaller så sällan ($\\lambda$ är pyttelitet) krävs det enormt många kärnor för att ge den aktiviteten.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett radioaktivt prov har aktiviteten $5\\,000\\ \\mathrm{Bq}$. Exakt $8{,}0$ timmar senare har aktiviteten sjunkit till $1\\,400\\ \\mathrm{Bq}$. Bestäm provets halveringstid.`,
+            answer: { value: 4.4, unit: 'h' },
+            solution: `Aktivitetslagen gäller, men nu är det halveringstiden $T_{1/2}$ som är obekant och sitter i exponenten — då måste vi logaritmera.
+
+$$ A = A_0 \\cdot 0{,}5^{\\,t / T_{1/2}} \\quad\\Rightarrow\\quad \\frac{A}{A_0} = 0{,}5^{\\,t / T_{1/2}} $$
+
+Sätt in mätvärdena:
+
+$$ \\frac{1\\,400}{5\\,000} = 0{,}280 = 0{,}5^{\\,8{,}0 / T_{1/2}} $$
+
+Logaritmera båda led och använd logaritmlagen $\\lg(a^x) = x \\lg a$:
+
+$$ \\lg 0{,}280 = \\frac{8{,}0}{T_{1/2}} \\cdot \\lg 0{,}5 $$
+
+Lös ut $T_{1/2}$:
+
+$$ T_{1/2} = \\frac{8{,}0 \\cdot \\lg 0{,}5}{\\lg 0{,}280} = \\frac{8{,}0 \\cdot (-0{,}301)}{-0{,}553} = 4{,}4\\ \\mathrm{h} $$
+
+**Svar:** Halveringstiden är ungefär $4{,}4$ timmar.
+
+**Generell slutsats:** När den obekanta storheten sitter i exponenten räcker det inte med insättning — man måste logaritmera. Rimlighetskontroll: aktiviteten gick från 5000 till 1400 Bq (drygt en tredjedel kvar) på 8 timmar, vilket är knappt två halveringstider ($0{,}5^{1{,}8} \\approx 0{,}29$) — stämmer med $T_{1/2} \\approx 4{,}4\\ \\mathrm{h}$.`,
+        },
+        {
+            level: 3,
+            question: `En strålkälla av Kobolt-60 har aktiviteten $8{,}0 \\cdot 10^9\\ \\mathrm{Bq}$. Hur många **gram** Kobolt-60 innehåller källan? Kobolt-60 har halveringstiden $T_{1/2} = 5{,}27\\ \\mathrm{år}$ och molmassan $60\\ \\mathrm{g/mol}$. ($N_\\mathrm{A} = 6{,}022 \\cdot 10^{23}\\ \\mathrm{mol^{-1}}$, $1\\ \\mathrm{år} = 3{,}156 \\cdot 10^7\\ \\mathrm{s}$)`,
+            answer: { value: 1.9e-4, unit: 'g' },
+            solution: `Aktiviteten anger *sönderfall per sekund*, men frågan gäller en *massa*. Bryggan går via antalet atomkärnor: aktivitet → antal kärnor → substansmängd → massa. Det är inte ett räknesteg utan en kedja av tre samband.
+
+**Steg 1 — sönderfallskonstanten** (halveringstiden måste vara i sekunder):
+$$ T_{1/2} = 5{,}27 \\cdot 3{,}156 \\cdot 10^7 = 1{,}663 \\cdot 10^8\\ \\mathrm{s} $$
+$$ \\lambda = \\frac{\\ln 2}{T_{1/2}} = \\frac{0{,}693}{1{,}663 \\cdot 10^8} = 4{,}17 \\cdot 10^{-9}\\ \\mathrm{s^{-1}} $$
+
+**Steg 2 — antalet radioaktiva kärnor** ur $A = \\lambda N$:
+$$ N = \\frac{A}{\\lambda} = \\frac{8{,}0 \\cdot 10^9}{4{,}17 \\cdot 10^{-9}} = 1{,}92 \\cdot 10^{18}\\ \\text{kärnor} $$
+
+**Steg 3 — massan** via Avogadros tal och molmassan:
+$$ m = \\frac{N}{N_\\mathrm{A}} \\cdot M = \\frac{1{,}92 \\cdot 10^{18}}{6{,}022 \\cdot 10^{23}} \\cdot 60 = 1{,}9 \\cdot 10^{-4}\\ \\mathrm{g} $$
+
+**Svar:** Källan innehåller ungefär $1{,}9 \\cdot 10^{-4}\\ \\mathrm{g}$ (cirka $0{,}19\\ \\mathrm{mg}$) Kobolt-60.
+
+**Generell slutsats:** Det slående resultatet är hur **liten** massa som ger en så hög aktivitet — knappt en femtedels milligram sönderfaller åtta miljarder gånger i sekunden. Det avancerade ligger inte i någon enskild formel utan i att *koppla ihop* kärnfysik (aktivitet, halveringstid) med kemins substansmängd (Avogadros tal). En vanlig fälla är att glömma omvandla halveringstiden till sekunder innan $\\lambda$ beräknas.`,
+        },
+    ],
+
+    'fy1-9.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En kroppsvävnad med massan $2{,}0\\ \\mathrm{kg}$ absorberar strålningsenergin $0{,}80\\ \\mathrm{J}$. Beräkna den absorberade dosen.`,
+            answer: { value: 0.40, unit: 'Gy' },
+            solution: `Absorberad dos är absorberad energi per kilogram vävnad:
+
+$$ D = \\frac{E}{m} = \\frac{0{,}80}{2{,}0} = 0{,}40\\ \\mathrm{Gy} $$
+
+**Svar:** Den absorberade dosen är $0{,}40\\ \\mathrm{Gy}$.
+
+**Generell slutsats:** $1\\ \\mathrm{Gy} = 1\\ \\mathrm{J/kg}$. Gränsen för akut strålsjuka går vid ungefär $1\\ \\mathrm{Gy}$.`,
+        },
+        {
+            level: 1,
+            question: `En person får den absorberade dosen $0{,}20\\ \\mathrm{Gy}$ från α-strålning, som har kvalitetsfaktorn $Q = 20$. Beräkna den ekvivalenta dosen.`,
+            answer: { value: 4.0, unit: 'Sv' },
+            solution: `Den ekvivalenta dosen tar hänsyn till hur skadligt strålslaget är via kvalitetsfaktorn *Q*:
+
+$$ H = D \\cdot Q = 0{,}20 \\cdot 20 = 4{,}0\\ \\mathrm{Sv} $$
+
+**Svar:** Den ekvivalenta dosen är $4{,}0\\ \\mathrm{Sv}$.
+
+**Generell slutsats:** α-strålning är mycket skadlig *inuti* kroppen ($Q = 20$), medan β- och γ-strålning har $Q = 1$. Samma absorberade dos (Gy) ger alltså 20 gånger så stor ekvivalent dos (Sv) för α som för γ.`,
+        },
+        {
+            level: 1,
+            question: `Vilken typ av joniserande strålning har **lägst genomtränglighet** och stoppas redan av ett pappersark eller av kläder?`,
+            choices: [
+                `α-strålning.`,
+                `β-strålning.`,
+                `γ-strålning.`,
+                `Alla tre stoppas lika lätt.`,
+            ],
+            correct: 0,
+            solution: `**α-strålning** (heliumkärnor) har lägst genomtränglighet och stoppas av ett pappersark eller kläder. Den är därför relativt ofarlig *utanför* kroppen — men farlig om man andas in eller får i sig ett α-preparat, eftersom den då avger all sin energi på ett litet område.
+
+**Svar:** Alternativ A — α-strålning.
+
+**Generell slutsats:** Genomträngligheten ökar i ordningen α < β < γ. β stoppas av tunn metall, medan γ kräver tjockt bly.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En person med massan $70\\ \\mathrm{kg}$ får den absorberade dosen $2{,}0\\ \\mathrm{mGy}$. Hur mycket strålningsenergi har personen absorberat totalt?`,
+            answer: { value: 0.14, unit: 'J' },
+            solution: `Vi löser ut energin *E* ur formeln för absorberad dos:
+
+$$ D = \\frac{E}{m} \\quad\\Leftrightarrow\\quad E = D \\cdot m $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+D = 2{,}0\\ \\mathrm{mGy} = 2{,}0 \\cdot 10^{-3}\\ \\mathrm{Gy} \\\\
+m = 70\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ E = 2{,}0 \\cdot 10^{-3} \\cdot 70 = 0{,}14\\ \\mathrm{J} $$
+
+**Svar:** Personen har absorberat ungefär $0{,}14\\ \\mathrm{J}$.
+
+**Generell slutsats:** Energimängden är förvånansvärt liten i joule — strålningens fara ligger inte i värmemängden utan i att den *joniserar* och skadar DNA på molekylär nivå.`,
+        },
+        {
+            level: 2,
+            question: `En person får den ekvivalenta dosen $8{,}0\\ \\mathrm{mSv}$ från α-strålning, som har kvalitetsfaktorn $Q = 20$. Hur stor var den absorberade dosen?`,
+            answer: { value: 0.40, unit: 'mGy' },
+            solution: `Vi löser ut den absorberade dosen *D* ur formeln för ekvivalent dos:
+
+$$ H = D \\cdot Q \\quad\\Leftrightarrow\\quad D = \\frac{H}{Q} = \\frac{8{,}0\\ \\mathrm{mSv}}{20} = 0{,}40\\ \\mathrm{mGy} $$
+
+**Svar:** Den absorberade dosen var $0{,}40\\ \\mathrm{mGy}$.
+
+**Generell slutsats:** Eftersom $Q = 20$ för α räcker en liten absorberad dos (Gy) för att ge en relativt stor ekvivalent dos (Sv). Hade det varit γ-strålning ($Q = 1$) hade absorberad och ekvivalent dos haft samma mätetal.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En person (massa $60\\ \\mathrm{kg}$) får i sig ett α-preparat med aktiviteten $5\\,000\\ \\mathrm{Bq}$. Varje α-partikel har energin $5{,}0\\ \\mathrm{MeV}$, och all energi absorberas i kroppen. Hur stor **ekvivalent dos** får personen under en timme? ($Q = 20$ för α, $1\\ \\mathrm{eV} = 1{,}602 \\cdot 10^{-19}\\ \\mathrm{J}$)`,
+            answer: { value: 4.8, unit: 'μSv' },
+            solution: `Vi måste bygga oss fram från aktiviteten till en absorberad energi, sedan till dos och slutligen ekvivalent dos.
+
+**Steg 1 — antal sönderfall på en timme.** Aktiviteten är $5\\,000$ sönderfall per sekund:
+
+$$ n = A \\cdot t = 5\\,000 \\cdot 3\\,600 = 1{,}8 \\cdot 10^7\\ \\text{sönderfall} $$
+
+**Steg 2 — total absorberad energi.** Varje α-partikel bär $5{,}0\\ \\mathrm{MeV} = 5{,}0 \\cdot 10^6 \\cdot 1{,}602 \\cdot 10^{-19} = 8{,}01 \\cdot 10^{-13}\\ \\mathrm{J}$:
+
+$$ E = n \\cdot E_\\alpha = 1{,}8 \\cdot 10^7 \\cdot 8{,}01 \\cdot 10^{-13} = 1{,}44 \\cdot 10^{-5}\\ \\mathrm{J} $$
+
+**Steg 3 — absorberad dos:**
+
+$$ D = \\frac{E}{m} = \\frac{1{,}44 \\cdot 10^{-5}}{60} = 2{,}4 \\cdot 10^{-7}\\ \\mathrm{Gy} $$
+
+**Steg 4 — ekvivalent dos:**
+
+$$ H = D \\cdot Q = 2{,}4 \\cdot 10^{-7} \\cdot 20 = 4{,}8 \\cdot 10^{-6}\\ \\mathrm{Sv} = 4{,}8\\ \\mathrm{\\mu Sv} $$
+
+**Svar:** Personen får den ekvivalenta dosen ungefär $4{,}8\\ \\mathrm{\\mu Sv}$.
+
+**Generell slutsats:** Uppgiften binder ihop tre områden — aktivitet (sönderfall per sekund), energiomvandling (MeV → J) och stråldos ($D = E/m$, $H = DQ$). Det som gör α-strålning så lömsk *inuti* kroppen är just att varje partikel lämnar all sin energi i vävnaden och att $Q = 20$.`,
+        },
+    ],
+
+    'fy2-1.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En kraft på $25\\ \\mathrm{N}$ verkar vinkelrätt mot en skiftnyckel $0{,}18\\ \\mathrm{m}$ från muttern. Beräkna kraftmomentet kring muttern.
+
+${makeTorqueArm({ armAngle: 0, armLabel: 'l = 0,18 m', force: { angle: -90, label: 'F = 25 N', len: 72 }, pivotLabel: 'mutter' })}`,
+            answer: { value: 4.5, unit: 'Nm' },
+            solution: `Kraftmomentet är kraft gånger hävarm:
+
+$$ M = F \\cdot l $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+F = 25\\ \\mathrm{N} \\\\
+l = 0{,}18\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ M = 25 \\cdot 0{,}18 = 4{,}5\\ \\mathrm{Nm} $$
+
+**Svar:** Kraftmomentet är $4{,}5\\ \\mathrm{Nm}$.
+
+**Generell slutsats:** Hävarmen är det *vinkelräta* avståndet mellan kraftens riktningslinje och vridpunkten. Här verkar kraften vinkelrätt mot skaftet, så hela längden $0{,}18\\ \\mathrm{m}$ är hävarm.`,
+        },
+        {
+            level: 1,
+            question: `Hur stor kraft måste verka vinkelrätt $0{,}30\\ \\mathrm{m}$ från ett gångjärn för att ge kraftmomentet $18\\ \\mathrm{Nm}$?`,
+            answer: { value: 60, unit: 'N' },
+            solution: `Vi löser ut kraften *F* ur formeln för kraftmoment:
+
+$$ M = F \\cdot l \\quad\\Leftrightarrow\\quad F = \\frac{M}{l} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+M = 18\\ \\mathrm{Nm} \\\\
+l = 0{,}30\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ F = \\frac{18}{0{,}30} = 60\\ \\mathrm{N} $$
+
+**Svar:** Kraften måste vara $60\\ \\mathrm{N}$.
+
+**Generell slutsats:** Ju längre hävarm, desto mindre kraft krävs för samma moment — därför är det lättare att öppna en dörr långt ut från gångjärnet än nära det.`,
+        },
+        {
+            level: 1,
+            question: `Ett barn som väger $25\\ \\mathrm{kg}$ sitter $2{,}4\\ \\mathrm{m}$ från vridpunkten på en gungbräda. Hur långt från vridpunkten ska en vuxen på $75\\ \\mathrm{kg}$ sitta för att brädan ska vara i momentjämvikt?
+
+${makeLever({ pivot: { posFrac: 0.5, type: 'wedge' }, loads: [{ posFrac: 0.12, kind: 'weight', label: '25 kg' }, { posFrac: 0.64, kind: 'weight', label: '75 kg' }], dims: [{ fromFrac: 0.12, toFrac: 0.5, label: '2,4 m' }, { fromFrac: 0.5, toFrac: 0.64, label: '?', row: 1 }] })}`,
+            answer: { value: 0.80, unit: 'm' },
+            solution: `Vid momentjämvikt är momentet medurs lika med momentet moturs. Med tyngdkraften $F = m \\cdot g$ blir villkoret (tyngdfaktorn *g* finns i båda led och stryks):
+
+$$ m_\\text{barn} \\cdot l_\\text{barn} = m_\\text{vuxen} \\cdot l_\\text{vuxen} \\quad\\Leftrightarrow\\quad l_\\text{vuxen} = \\frac{m_\\text{barn} \\cdot l_\\text{barn}}{m_\\text{vuxen}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m_\\text{barn} = 25\\ \\mathrm{kg} \\\\
+l_\\text{barn} = 2{,}4\\ \\mathrm{m} \\\\
+m_\\text{vuxen} = 75\\ \\mathrm{kg}
+\\end{array} \\right]
+$$
+
+$$ l_\\text{vuxen} = \\frac{25 \\cdot 2{,}4}{75} = 0{,}80\\ \\mathrm{m} $$
+
+**Svar:** Den vuxne ska sitta $0{,}80\\ \\mathrm{m}$ från vridpunkten.
+
+**Generell slutsats:** Den tyngre måste sitta närmare vridpunkten — kortare hävarm kompenserar för större tyngd så att momenten balanserar.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En $0{,}80\\ \\mathrm{m}$ lång arm lutar $35^\\circ$ över horisontalplanet och är fäst i sin nedre ände. Vid den övre änden verkar en kraft på $120\\ \\mathrm{N}$ rakt nedåt. Beräkna kraftmomentet kring den nedre änden.
+
+${makeTorqueArm({ armAngle: 35, armLabel: 'L = 0,80 m', force: { angle: -90, label: 'F = 120 N', len: 66 }, leverHint: true })}`,
+            answer: { value: 79, unit: 'Nm' },
+            solution: `Hävarmen är **inte** armens längd, utan det vinkelräta avståndet från vridpunkten till kraftens (lodräta) riktningslinje. Det är den vågräta sträckan ut till övre änden:
+
+$$ l = L \\cdot \\cos 35^\\circ $$
+
+Kraftmomentet blir då
+
+$$ M = F \\cdot l = F \\cdot L \\cdot \\cos 35^\\circ $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+F = 120\\ \\mathrm{N} \\\\
+L = 0{,}80\\ \\mathrm{m} \\\\
+\\alpha = 35^\\circ
+\\end{array} \\right]
+$$
+
+$$ M = 120 \\cdot 0{,}80 \\cdot \\cos 35^\\circ = 79\\ \\mathrm{Nm} $$
+
+**Generell slutsats:** När kraften inte är vinkelrät mot armen måste man projicera fram den vinkelräta hävarmen med trigonometri. En lodrät kraft "ser" bara det vågräta avståndet till vridpunkten.
+
+**Svar:** Kraftmomentet är ungefär $79\\ \\mathrm{Nm}$.`,
+        },
+        {
+            level: 2,
+            question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock planka väger $12\\ \\mathrm{kg}$ och vilar på en stödpunkt $1{,}5\\ \\mathrm{m}$ från vänster ände. Var (avstånd från stödpunkten) ska en vikt på $8{,}0\\ \\mathrm{kg}$ placeras för att plankan ska vara i jämvikt?
+
+${makeLever({ pivot: { posFrac: 0.375, type: 'wedge' }, cog: { posFrac: 0.5, label: 'F_G' }, loads: [{ posFrac: 0.16, kind: 'weight', label: '8,0 kg' }], dims: [{ fromFrac: 0, toFrac: 0.375, label: '1,5 m' }, { fromFrac: 0.375, toFrac: 1, label: '2,5 m' }, { fromFrac: 0.16, toFrac: 0.375, label: 'd = ?', row: 1 }] })}`,
+            answer: { value: 0.75, unit: 'm' },
+            solution: `Plankans egen tyngd verkar i dess **tyngdpunkt**, mitt på plankan — alltså $2{,}0\\ \\mathrm{m}$ från vänster ände, vilket är $2{,}0 - 1{,}5 = 0{,}5\\ \\mathrm{m}$ till höger om stödpunkten. Det ger ett moment som vill tippa plankan åt höger.
+
+För jämvikt måste vikten placeras till **vänster** om stödpunkten och ge ett lika stort motverkande moment. Momentbalans (tyngdfaktorn *g* stryks):
+
+$$ m_\\text{vikt} \\cdot d = m_\\text{planka} \\cdot 0{,}5 $$
+
+$$ d = \\frac{m_\\text{planka} \\cdot 0{,}5}{m_\\text{vikt}} = \\frac{12 \\cdot 0{,}5}{8{,}0} = 0{,}75\\ \\mathrm{m} $$
+
+**Svar:** Vikten ska placeras $0{,}75\\ \\mathrm{m}$ från stödpunkten (på motsatt sida mot plankans tyngdpunkt).
+
+**Generell slutsats:** En jämntjock plankas hela tyngd kan tänkas verka i tyngdpunkten (mitten). Att hitta tyngdpunktens läge relativt vridpunkten är ofta första steget i momentuppgifter med utbredda kroppar.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En $5{,}0\\ \\mathrm{m}$ lång stege som väger $15\\ \\mathrm{kg}$ lutar mot en vägg med vinkeln $65^\\circ$ mot marken. Friktionen mellan stege och vägg är försumbar, men friktionen mot marken är tillräcklig för att stegen ska stå still. Hur stor är friktionskraften från marken? ($g = 9{,}82\\ \\mathrm{N/kg}$)
+
+${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m' })}`,
+            answer: { value: 34, unit: 'N' },
+            solution: `Det räcker inte med en formel — vi måste kombinera **momentjämvikt** och **kraftjämvikt** och se vilka krafter som verkar.
+
+Fyra krafter verkar på stegen: tyngdkraften $F_G = mg$ nedåt i mitten, markens normalkraft $N_\\text{mark}$ uppåt vid foten, markens friktion $F_f$ vågrätt vid foten, och väggens normalkraft $N_\\text{vägg}$ vågrätt vid toppen (väggen är friktionsfri, så den kan bara trycka vinkelrätt utåt).
+
+${makeLadder({ angle: 65, lenLabel: 'L = 5,0 m', forces: true })}
+
+**Momentjämvikt kring stegens fot** (då försvinner $N_\\text{mark}$ och *f*, som verkar i vridpunkten). Väggkraften har hävarmen $L\\sin 65^\\circ$ (höjden till toppen); tyngdkraften har hävarmen $\\tfrac{L}{2}\\cos 65^\\circ$ (vågrätt avstånd till mitten):
+
+$$ N_\\text{vägg} \\cdot L\\sin 65^\\circ = mg \\cdot \\tfrac{L}{2}\\cos 65^\\circ \\quad\\Rightarrow\\quad N_\\text{vägg} = \\frac{mg}{2\\tan 65^\\circ} $$
+
+**Kraftjämvikt i vågrätt led:** friktionen balanserar väggkraften, $F_f = N_\\text{vägg}$. Alltså
+
+$$ F_f = \\frac{mg}{2\\tan 65^\\circ} = \\frac{15 \\cdot 9{,}82}{2 \\cdot \\tan 65^\\circ} = 34\\ \\mathrm{N} $$
+
+**Svar:** Friktionskraften från marken är ungefär $34\\ \\mathrm{N}$.
+
+**Generell slutsats:** Den avgörande insikten är att *två* jämviktsvillkor måste gälla samtidigt: summan av momenten = 0 *och* summan av krafterna = 0. Genom att lägga vridpunkten vid foten försvinner två okända krafter, och momentekvationen ger väggkraften direkt — som i sin tur måste balanseras av friktionen. Stegens längd *L* stryks ur ekvationen.`,
+        },
+    ],
+
+    'fy2-1.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Var ligger tyngdpunkten hos ett homogent, symmetriskt föremål — till exempel en kub eller en jämntjock linjal?`,
+            choices: [
+                `I den geometriska mittpunkten.`,
+                `I ett av hörnen.`,
+                `Vid föremålets tyngsta yta.`,
+                `Alltid utanför själva föremålet.`,
+            ],
+            correct: 0,
+            solution: `För ett **homogent och symmetriskt** föremål ligger tyngdpunkten i den geometriska mittpunkten — det är där föremålets sammanlagda tyngd kan tänkas verka.
+
+**Svar:** Alternativ A — i den geometriska mittpunkten.
+
+**Generell slutsats:** För *ojämnt* formade föremål kan tyngdpunkten ligga utanför materialet — t.ex. mitt i hålet på en ring eller en bumerang.`,
+        },
+        {
+            level: 1,
+            question: `Ett föremål hänger upp i en punkt som ligger **ovanför** dess tyngdpunkt. Vilken typ av jämvikt råder?`,
+            choices: [
+                `Stabil jämvikt.`,
+                `Labil jämvikt.`,
+                `Indifferent jämvikt.`,
+                `Ingen jämvikt — föremålet faller.`,
+            ],
+            correct: 0,
+            solution: `När upphängningspunkten ligger **ovanför** tyngdpunkten råder **stabil jämvikt**: vid en liten störning lyfts tyngdpunkten, och föremålet pendlar tillbaka till sitt ursprungsläge.
+
+**Svar:** Alternativ A — stabil jämvikt.
+
+**Generell slutsats:** Labil jämvikt = upphängd *under* tyngdpunkten (välter vid minsta störning, t.ex. en linjal balanserad på fingret). Indifferent = upphängd *i* tyngdpunkten (stannar i vilket läge som helst, t.ex. ett hjul på sin axel).`,
+        },
+        {
+            level: 1,
+            question: `En låda är $0{,}60\\ \\mathrm{m}$ bred och $0{,}80\\ \\mathrm{m}$ hög med tyngdpunkten i mitten. Den börjar tippas åt sidan kring sin nedre kant. Vid vilken lutningsvinkel välter lådan?
+
+${makeTippingBox({ boxW: 84, boxH: 112, tipArrow: true, gravityLine: true, wLabel: '0,60 m', hLabel: '0,80 m' })}`,
+            answer: { value: 37, unit: '°' },
+            solution: `Lådan välter när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Tyngdpunkten ligger $\\tfrac{0{,}60}{2} = 0{,}30\\ \\mathrm{m}$ in från kanten (i sidled) och $\\tfrac{0{,}80}{2} = 0{,}40\\ \\mathrm{m}$ upp. Den kritiska vinkeln *v* uppfyller
+
+$$ \\tan v = \\frac{0{,}30}{0{,}40} = 0{,}75 $$
+
+$$ v = \\arctan(0{,}75) = 37^\\circ $$
+
+**Svar:** Lådan välter om den lutas mer än cirka $37^\\circ$.
+
+**Generell slutsats:** En bred och låg låda (stor bredd, liten höjd) tål större lutning innan den välter. Det är därför en racerbil byggs bred och låg medan en hög, smal bokhylla välter lätt.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett skåp väger $25\\ \\mathrm{kg}$, är $1{,}8\\ \\mathrm{m}$ högt och $0{,}50\\ \\mathrm{m}$ brett, med tyngdpunkten i mitten. Hur stor vågrät kraft måste man trycka med högst upp på skåpet för att precis börja välta det kring den främre nederkanten? ($g = 9{,}82\\ \\mathrm{N/kg}$)
+
+${makeTippingBox({ boxW: 44, boxH: 150, push: { label: 'F' }, wLabel: '0,50 m', hLabel: '1,8 m' })}`,
+            answer: { value: 34, unit: 'N' },
+            solution: `Vid vältgränsen råder momentjämvikt kring den främre nederkanten. Tryckkraften *F* verkar högst upp (hävarm = höjden $h$) och tyngdkraften $mg$ verkar i tyngdpunkten (hävarm = halva bredden $w/2$):
+
+$$ F \\cdot h = mg \\cdot \\frac{w}{2} \\quad\\Leftrightarrow\\quad F = \\frac{mg \\cdot w/2}{h} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 25\\ \\mathrm{kg},\\quad g = 9{,}82\\ \\mathrm{N/kg} \\\\
+w = 0{,}50\\ \\mathrm{m} \\;\\Rightarrow\\; w/2 = 0{,}25\\ \\mathrm{m} \\\\
+h = 1{,}8\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ F = \\frac{25 \\cdot 9{,}82 \\cdot 0{,}25}{1{,}8} = 34\\ \\mathrm{N} $$
+
+**Svar:** Det krävs en kraft på ungefär $34\\ \\mathrm{N}$.
+
+**Generell slutsats:** Ju högre upp man trycker (större hävarm) desto mindre kraft krävs. Tyngdkraftens vältmotstånd ges av halva bredden — bredare bas → svårare att välta.`,
+        },
+        {
+            level: 2,
+            question: `En $6{,}0\\ \\mathrm{m}$ lång jämntjock bräda väger $20\\ \\mathrm{kg}$ och sticker ut $2{,}0\\ \\mathrm{m}$ över en bryggkant. Hur långt ut på den utstickande delen kan en vikt på $15\\ \\mathrm{kg}$ placeras innan brädan tippar?
+
+${makeLever({ pivot: { posFrac: 0.667, type: 'edge' }, cog: { posFrac: 0.5, label: 'F_G' }, loads: [{ posFrac: 0.88, kind: 'weight', label: '15 kg' }], dims: [{ fromFrac: 0.667, toFrac: 1, label: '2,0 m' }, { fromFrac: 0.667, toFrac: 0.88, label: 'd = ?', row: 1 }] })}`,
+            answer: { value: 1.3, unit: 'm', tol: 0.03 },
+            solution: `Brädan tippar kring bryggkanten. Brädans tyngdpunkt sitter i mitten, $3{,}0\\ \\mathrm{m}$ från varje ände. Eftersom $4{,}0\\ \\mathrm{m}$ av brädan ligger på bryggan ligger tyngdpunkten $4{,}0 - 3{,}0 = 1{,}0\\ \\mathrm{m}$ **innanför** kanten. Brädans tyngd ger därför ett *kvarhållande* moment kring kanten.
+
+Vikten på den utstickande delen (avstånd *d* från kanten) ger ett *tippande* moment. Brädan tippar när momenten är lika (tyngdfaktorn *g* stryks):
+
+$$ m_\\text{vikt} \\cdot d = m_\\text{bräda} \\cdot 1{,}0 \\quad\\Leftrightarrow\\quad d = \\frac{m_\\text{bräda} \\cdot 1{,}0}{m_\\text{vikt}} = \\frac{20 \\cdot 1{,}0}{15} = 1{,}3\\ \\mathrm{m} $$
+
+**Svar:** Vikten kan placeras högst ungefär $1{,}3\\ \\mathrm{m}$ ut innan brädan tippar.
+
+**Generell slutsats:** Eftersom $1{,}3\\ \\mathrm{m} < 2{,}0\\ \\mathrm{m}$ (överhängets längd) tippar brädan innan vikten når änden. Nyckeln är att brädans egen tyngd, samlad i tyngdpunkten innanför kanten, motverkar tippningen.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En låda är ett rätblock som väger $60\\ \\mathrm{kg}$, är $0{,}80\\ \\mathrm{m}$ bred och $1{,}5\\ \\mathrm{m}$ hög, med tyngdpunkten i mitten. Friktionstalet mot golvet är $0{,}50$. Man trycker med en växande vågrät kraft högst upp på lådan. **Kommer lådan att glida eller tippa först — och vid vilken kraft sker det?** ($g = 9{,}82\\ \\mathrm{N/kg}$)
+
+${makeTippingBox({ boxW: 80, boxH: 150, push: { label: 'F' }, friction: true, wLabel: '0,80 m', hLabel: '1,5 m' })}`,
+            answer: { value: 157, unit: 'N' },
+            solution: `Insikten är att det finns **två** möjliga sätt för lådan att börja röra sig — den gör det som kräver *minst* kraft. Vi beräknar gränskraften för vardera och jämför.
+
+**Glidning** sker när tryckkraften överstiger den maximala friktionskraften:
+
+$$ F_\\text{glid} = \\mu \\cdot mg = 0{,}50 \\cdot 60 \\cdot 9{,}82 = 295\\ \\mathrm{N} $$
+
+**Tippning** kring främre nederkanten sker när tryckkraftens moment (hävarm = höjden) övervinner tyngdkraftens (hävarm = halva bredden):
+
+$$ F_\\text{tipp} \\cdot h = mg \\cdot \\frac{w}{2} \\quad\\Leftrightarrow\\quad F_\\text{tipp} = \\frac{mg \\cdot w/2}{h} = \\frac{60 \\cdot 9{,}82 \\cdot 0{,}40}{1{,}5} = 157\\ \\mathrm{N} $$
+
+Eftersom $F_\\text{tipp} = 157\\ \\mathrm{N} < F_\\text{glid} = 295\\ \\mathrm{N}$ nås tippgränsen först.
+
+**Svar:** Lådan **tippar** först, vid en kraft på ungefär $157\\ \\mathrm{N}$.
+
+**Generell slutsats:** En hög och smal låda tippar lättare än den glider; en låg och bred (eller ett högt friktionstal) glider lättare än den tippar. Man måste räkna ut *båda* gränskrafterna och jämföra — det går inte att gissa vilken som inträffar först.`,
+        },
+    ],
+
+    'fy2-1.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett hjul snurrar med frekvensen $5{,}0\\ \\mathrm{Hz}$. Beräkna periodtiden (tiden för ett varv).`,
+            answer: { value: 0.20, unit: 's' },
+            solution: `Period och frekvens är varandras invers:
+
+$$ T = \\frac{1}{f} = \\frac{1}{5{,}0} = 0{,}20\\ \\mathrm{s} $$
+
+**Svar:** Periodtiden är $0{,}20\\ \\mathrm{s}$.
+
+**Generell slutsats:** Frekvensen $5{,}0\\ \\mathrm{Hz}$ betyder 5 varv per sekund, så ett varv tar $\\tfrac{1}{5}$ sekund.`,
+        },
+        {
+            level: 1,
+            question: `En motor går med $1\\,500$ varv per minut. Beräkna vinkelhastigheten ω i rad/s.`,
+            answer: { value: 157, unit: 'rad/s' },
+            solution: `Vi omvandlar först varv per minut till frekvens (varv per sekund):
+
+$$ f = \\frac{1\\,500}{60} = 25\\ \\mathrm{Hz} $$
+
+Vinkelhastigheten är sedan
+
+$$ \\omega = 2\\pi \\cdot f = 2\\pi \\cdot 25 = 157\\ \\mathrm{rad/s} $$
+
+**Svar:** Vinkelhastigheten är ungefär $157\\ \\mathrm{rad/s}$.
+
+**Generell slutsats:** Ett varv motsvarar $2\\pi$ radianer, så vinkelhastigheten är $2\\pi$ gånger frekvensen. Glöm inte omvandlingen varv/min → Hz (dela med 60).`,
+        },
+        {
+            level: 1,
+            question: `En punkt sitter $0{,}25\\ \\mathrm{m}$ från centrum på ett hjul som roterar med vinkelhastigheten $\\omega = 12\\ \\mathrm{rad/s}$. Vilken fart har punkten?
+
+${makeCircularPath({ width: 260, height: 240, r: 92, angleDeg: 52, radiusLabel: 'r = 0,25 m', vLabel: 'v = ?', point: true, dashTrack: true })}`,
+            answer: { value: 3.0, unit: 'm/s' },
+            solution: `Farten i cirkelbanan är vinkelhastigheten gånger banradien:
+
+$$ v = \\omega \\cdot r = 12 \\cdot 0{,}25 = 3{,}0\\ \\mathrm{m/s} $$
+
+**Svar:** Farten är $3{,}0\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Alla punkter på hjulet har samma *vinkelhastighet* ω, men *farten* växer med avståndet till centrum — ytterkanten rör sig snabbast.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En LP-skiva snurrar med $45$ varv per minut. Vilken fart har en punkt $12\\ \\mathrm{cm}$ från skivans centrum?`,
+            answer: { value: 0.57, unit: 'm/s' },
+            solution: `Vi behöver vinkelhastigheten, som kräver frekvensen i Hz:
+
+$$ f = \\frac{45}{60} = 0{,}75\\ \\mathrm{Hz} \\quad\\Rightarrow\\quad \\omega = 2\\pi f = 2\\pi \\cdot 0{,}75 = 4{,}71\\ \\mathrm{rad/s} $$
+
+Farten blir sedan
+
+$$ v = \\omega \\cdot r = 4{,}71 \\cdot 0{,}12 = 0{,}57\\ \\mathrm{m/s} $$
+
+**Svar:** Farten är ungefär $0{,}57\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Kedjan är varv/min → Hz → ω → v. Alternativt kan man gå direkt via $v = \\dfrac{2\\pi r}{T}$ med $T = 1/f$.`,
+        },
+        {
+            level: 2,
+            question: `En satellit rör sig i en cirkulär bana runt jorden med farten $7{,}8\\ \\mathrm{km/s}$ och har omloppstiden $90$ minuter. Hur stor är banans radie? Svara i meter.`,
+            answer: { value: 6.7e6, unit: 'm' },
+            solution: `Farten i en cirkelbana är omkretsen delad med omloppstiden:
+
+$$ v = \\frac{2\\pi r}{T} \\quad\\Leftrightarrow\\quad r = \\frac{v \\cdot T}{2\\pi} $$
+
+Mätvärden (i SI-enheter):
+$$
+\\left[ \\begin{array}{l}
+v = 7{,}8\\ \\mathrm{km/s} = 7\\,800\\ \\mathrm{m/s} \\\\
+T = 90\\ \\mathrm{min} = 90 \\cdot 60 = 5\\,400\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ r = \\frac{7\\,800 \\cdot 5\\,400}{2\\pi} = 6{,}7 \\cdot 10^6\\ \\mathrm{m} $$
+
+**Svar:** Banradien är ungefär $6{,}7 \\cdot 10^6\\ \\mathrm{m}$ (drygt $6\\,700\\ \\mathrm{km}$).
+
+**Generell slutsats:** Det avgörande är att omvandla alla storheter till SI-enheter (km/s → m/s, min → s) innan insättning. Svaret stämmer med en låg satellitbana — jordens radie är ca $6{,}4 \\cdot 10^6\\ \\mathrm{m}$, så satelliten är några hundra km upp.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `På en analog klocka pekar minutvisaren och timvisaren åt exakt samma håll klockan 12:00. Hur lång tid tar det innan de pekar åt samma håll igen? Svara i minuter.
+
+${makeClock({ size: 150, hour: 0, minute: 0 })}`,
+            answer: { value: 65.5, unit: 'min' },
+            solution: `Det går inte att gissa "1 timme" — timvisaren har då redan flyttat sig. Vi tänker i **vinkelhastigheter** och frågar när minutvisaren har hunnit ikapp timvisaren ett helt varv.
+
+Minutvisaren går ett varv på $60\\ \\mathrm{min}$, timvisaren ett varv på $12 \\cdot 60 = 720\\ \\mathrm{min}$. Deras vinkelhastigheter (i varv per minut):
+
+$$ \\omega_\\text{min} = \\frac{1}{60}, \\qquad \\omega_\\text{tim} = \\frac{1}{720} $$
+
+Visarna pekar åt samma håll igen när minutvisaren tagit in exakt **ett helt varv** på timvisaren. Den relativa vinkelhastigheten är
+
+$$ \\omega_\\text{rel} = \\omega_\\text{min} - \\omega_\\text{tim} = \\frac{1}{60} - \\frac{1}{720} = \\frac{12 - 1}{720} = \\frac{11}{720}\\ \\text{varv/min} $$
+
+Tiden för ett helt relativt varv blir
+
+$$ t = \\frac{1\\ \\text{varv}}{\\omega_\\text{rel}} = \\frac{720}{11} = 65{,}5\\ \\mathrm{min} $$
+
+**Svar:** Det tar $\\dfrac{720}{11} \\approx 65{,}5\\ \\mathrm{min}$ (cirka $1$ h $5$ min $27$ s).
+
+**Generell slutsats:** Det här är ett "ikapp"-problem av samma slag som när två löpare på en bana möts eller hinner ikapp varandra — man arbetar med *skillnaden* i (vinkel)hastighet. Visarna möts alltså 11 gånger per 12 timmar, inte 12.`,
+        },
+    ],
+
+    'fy2-1.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En bil tar en kurva med radien $50\\ \\mathrm{m}$ i farten $20\\ \\mathrm{m/s}$. Hur stor är centripetalaccelerationen?
+
+${makeCircularPath({ r: 110, radiusLabel: 'r = 50 m', vLabel: 'v = 20 m/s', showFc: true, fcLabel: 'a_C', dashTrack: true })}`,
+            answer: { value: 8.0, unit: 'm/s²' },
+            solution: `Centripetalaccelerationen ges av
+
+$$ a_C = \\frac{v^2}{r} = \\frac{20^2}{50} = \\frac{400}{50} = 8{,}0\\ \\mathrm{m/s^2} $$
+
+**Svar:** Centripetalaccelerationen är $8{,}0\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Accelerationen är riktad **in mot** kurvans centrum, fast farten är konstant — det är riktningen på hastigheten som ändras.`,
+        },
+        {
+            level: 1,
+            question: `En boll som väger $0{,}50\\ \\mathrm{kg}$ snurrar i en cirkel med radien $1{,}2\\ \\mathrm{m}$ med farten $6{,}0\\ \\mathrm{m/s}$. Beräkna centripetalkraften.
+
+${makeCircularPath({ width: 280, height: 260, r: 100, radiusLabel: 'r = 1,2 m', vLabel: 'v = 6,0 m/s', showFc: true, fcLabel: 'F_C', point: true, dashTrack: true })}`,
+            answer: { value: 15, unit: 'N' },
+            solution: `Centripetalkraften ges av
+
+$$ F_C = \\frac{m \\cdot v^2}{r} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}50\\ \\mathrm{kg} \\\\
+v = 6{,}0\\ \\mathrm{m/s} \\\\
+r = 1{,}2\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ F_C = \\frac{0{,}50 \\cdot 6{,}0^2}{1{,}2} = \\frac{18}{1{,}2} = 15\\ \\mathrm{N} $$
+
+**Svar:** Centripetalkraften är $15\\ \\mathrm{N}$.
+
+**Generell slutsats:** Centripetalkraften är ingen egen kraft — den är resultanten av de verkliga krafterna (här spännkraften i snöret) och är alltid riktad in mot centrum.`,
+        },
+        {
+            level: 1,
+            question: `En vikt på $0{,}20\\ \\mathrm{kg}$ snurrar i en cirkel med radien $0{,}80\\ \\mathrm{m}$ och perioden $0{,}50\\ \\mathrm{s}$. Beräkna centripetalkraften.`,
+            answer: { value: 25, unit: 'N' },
+            solution: `När perioden är given används formen med *T*:
+
+$$ F_C = \\frac{4\\pi^2 \\cdot m \\cdot r}{T^2} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+m = 0{,}20\\ \\mathrm{kg} \\\\
+r = 0{,}80\\ \\mathrm{m} \\\\
+T = 0{,}50\\ \\mathrm{s}
+\\end{array} \\right]
+$$
+
+$$ F_C = \\frac{4\\pi^2 \\cdot 0{,}20 \\cdot 0{,}80}{0{,}50^2} = 25\\ \\mathrm{N} $$
+
+**Svar:** Centripetalkraften är ungefär $25\\ \\mathrm{N}$.
+
+**Generell slutsats:** $F_C = \\dfrac{mv^2}{r} = \\dfrac{4\\pi^2 m r}{T^2}$ — välj formen efter om du har farten *v* eller perioden *T*.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En bil som väger $1\\,200\\ \\mathrm{kg}$ kör över ett backkrön med krökningsradien $60\\ \\mathrm{m}$ i farten $72\\ \\mathrm{km/h}$. Hur stor är normalkraften från vägen på bilen i krönets högsta punkt? ($g = 9{,}82\\ \\mathrm{N/kg}$)
+
+${makeCrest({ r: 160, rLabel: 'r = 60 m' })}`,
+            answer: { value: 3800, unit: 'N' },
+            solution: `I krönets högsta punkt pekar centripetalkraften **nedåt** (mot krökningens centrum). Två krafter verkar: tyngdkraften $mg$ nedåt och normalkraften $N$ uppåt. Deras resultant är centripetalkraften:
+
+$$ mg - N = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad N = mg - \\frac{mv^2}{r} $$
+
+Mätvärden ($v = 72\\ \\mathrm{km/h} = 20\\ \\mathrm{m/s}$):
+$$
+\\left[ \\begin{array}{l}
+m = 1\\,200\\ \\mathrm{kg},\\quad g = 9{,}82\\ \\mathrm{N/kg} \\\\
+v = 20\\ \\mathrm{m/s},\\quad r = 60\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ N = 1\\,200 \\cdot 9{,}82 - \\frac{1\\,200 \\cdot 20^2}{60} = 11\\,784 - 8\\,000 = 3\\,800\\ \\mathrm{N} $$
+
+**Svar:** Normalkraften är ungefär $3\\,800\\ \\mathrm{N}$.
+
+**Generell slutsats:** På krönet känns bilen *lättare* ($N < mg$) eftersom en del av tyngdkraften "går åt" till att kröka banan. Kör man tillräckligt fort ($v = \\sqrt{gr}$) blir $N = 0$ och bilen lyfter.`,
+        },
+        {
+            level: 2,
+            question: `En bil kör i en plan (oluttad) kurva med radien $90\\ \\mathrm{m}$. Friktionstalet mellan däck och väg är $0{,}50$. Vilken är den högsta fart bilen kan ha utan att slira ut ur kurvan? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeCircularPath({ r: 110, radiusLabel: 'r = 90 m', vLabel: 'v = ?', showFc: true, fcLabel: 'F_f', dashTrack: true })}`,
+            answer: { value: 21, unit: 'm/s' },
+            solution: `Det är **friktionskraften** som utgör centripetalkraften och håller bilen kvar i kurvan. Vid högsta farten är friktionen maximal, $F_f = \\mu mg$:
+
+$$ F_f = \\mu mg = \\frac{mv^2}{r} $$
+
+Massan stryks. Vi löser ut farten:
+
+$$ v = \\sqrt{\\mu \\cdot g \\cdot r} = \\sqrt{0{,}50 \\cdot 9{,}82 \\cdot 90} = 21\\ \\mathrm{m/s} $$
+
+**Svar:** Högsta farten är ungefär $21\\ \\mathrm{m/s}$ (drygt $75\\ \\mathrm{km/h}$).
+
+**Generell slutsats:** Maxfarten beror *inte* på bilens massa (den stryks bort) — bara på friktionstalet och radien. Halt väglag (lågt μ) eller tvär kurva (litet *r*) sänker maxfarten.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För att bilar ska klara en kurva även på halt underlag **doseras** vägen — vägbanan lutas in mot kurvans centrum. Vilken doseringsvinkel ska en kurva med radien $110\\ \\mathrm{m}$ ha för att en bil i farten $90\\ \\mathrm{km/h}$ ska klara den helt utan friktion? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeBankedCurve({ angle: 24, angleLabel: 'α', forces: false, showCenter: true })}`,
+            answer: { value: 30, unit: '°' },
+            solution: `Utan friktion finns bara två krafter på bilen: tyngdkraften $mg$ rakt ned och normalkraften $N$ vinkelrätt mot den lutande vägbanan. Insikten är att normalkraften måste **delas upp** i komposanter — och att dess vågräta komposant ensam ska utgöra centripetalkraften.
+
+${makeBankedCurve({ angle: 24, angleLabel: 'α', forces: true })}
+
+**Vågrätt** (in mot centrum): $\\;N \\sin\\alpha = \\dfrac{mv^2}{r}$
+
+**Lodrätt** (jämvikt, bilen åker inte uppåt/nedåt): $\\;N \\cos\\alpha = mg$
+
+Dividerar vi den första ekvationen med den andra försvinner både $N$ och $m$:
+
+$$ \\frac{N\\sin\\alpha}{N\\cos\\alpha} = \\frac{mv^2/r}{mg} \\quad\\Leftrightarrow\\quad \\tan\\alpha = \\frac{v^2}{r \\cdot g} $$
+
+Mätvärden ($v = 90\\ \\mathrm{km/h} = 25\\ \\mathrm{m/s}$):
+
+$$ \\tan\\alpha = \\frac{25^2}{110 \\cdot 9{,}82} = \\frac{625}{1\\,080} = 0{,}579 \\quad\\Rightarrow\\quad \\alpha = 30^\\circ $$
+
+**Svar:** Kurvan ska doseras med ungefär $30^\\circ$.
+
+**Generell slutsats:** Den avgörande insikten är att dela upp normalkraften i komposanter och inse att den lodräta komposanten bär tyngden medan den vågräta krökar banan. Genom att dividera ekvationerna stryks både normalkraften och massan — doseringsvinkeln beror bara på fart och radie.`,
+        },
+    ],
+
+    'fy2-1.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En konisk pendel har trådlängden $1{,}5\\ \\mathrm{m}$, och tråden bildar vinkeln $25^\\circ$ mot vertikalen. Beräkna periodtiden. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeConicalPendulum({ angle: 25, lLabel: 'l = 1,5 m', massLabel: 'm' })}`,
+            answer: { value: 2.3, unit: 's' },
+            solution: `Vi använder formeln för den koniska pendelns periodtid:
+
+$$ T = 2\\pi\\sqrt{\\frac{l \\cdot \\cos\\alpha}{g}} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+l = 1{,}5\\ \\mathrm{m} \\\\
+\\alpha = 25^\\circ \\\\
+g = 9{,}82\\ \\mathrm{m/s^2}
+\\end{array} \\right]
+$$
+
+$$ T = 2\\pi\\sqrt{\\frac{1{,}5 \\cdot \\cos 25^\\circ}{9{,}82}} = 2{,}3\\ \\mathrm{s} $$
+
+**Svar:** Periodtiden är ungefär $2{,}3\\ \\mathrm{s}$.
+
+**Generell slutsats:** I en konisk pendel sveper vikten runt i en vågrät cirkel medan tråden bildar en konform. Notera att massan inte ingår i formeln.`,
+        },
+        {
+            level: 1,
+            question: `På ett nöjesfält finns en slänggunga där stolarna hänger i $6{,}0\\ \\mathrm{m}$ långa kedjor. När den snurrar bildar kedjorna vinkeln $35^\\circ$ mot vertikalen. Hur lång tid tar ett varv? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeConicalPendulum({ angle: 35, lLabel: 'l = 6,0 m' })}`,
+            answer: { value: 4.4, unit: 's' },
+            solution: `Slänggungan är en konisk pendel:
+
+$$ T = 2\\pi\\sqrt{\\frac{l \\cdot \\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{6{,}0 \\cdot \\cos 35^\\circ}{9{,}82}} = 4{,}4\\ \\mathrm{s} $$
+
+**Svar:** Ett varv tar ungefär $4{,}4\\ \\mathrm{s}$.
+
+**Generell slutsats:** Ju större vinkel (snabbare rotation), desto mindre $\\cos\\alpha$ och desto kortare periodtid — slänggungan snurrar fortare ju mer kedjorna sticker ut.`,
+        },
+        {
+            level: 1,
+            question: `En konisk pendel har periodtiden $2{,}0\\ \\mathrm{s}$. Vilken frekvens (antal varv per sekund) har rörelsen?`,
+            answer: { value: 0.50, unit: 'Hz' },
+            solution: `Frekvensen är inversen av periodtiden:
+
+$$ f = \\frac{1}{T} = \\frac{1}{2{,}0} = 0{,}50\\ \\mathrm{Hz} $$
+
+**Svar:** Frekvensen är $0{,}50\\ \\mathrm{Hz}$.
+
+**Generell slutsats:** Sambandet $f = 1/T$ gäller för all periodisk rörelse — pendlar, rotation och vågor.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En konisk pendel har trådlängden $2{,}0\\ \\mathrm{m}$ och tråden bildar vinkeln $40^\\circ$ mot vertikalen. Bestäm farten hos pendelvikten i cirkelbanan. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeConicalPendulum({ angle: 40, lLabel: 'l = 2,0 m', rLabel: 'r' })}`,
+            answer: { value: 3.3, unit: 'm/s' },
+            solution: `Vi behöver banradien *r* och periodtiden *T*, sedan $v = \\dfrac{2\\pi r}{T}$.
+
+**Banradien** är den vågräta delen av trådlängden:
+$$ r = l \\cdot \\sin\\alpha = 2{,}0 \\cdot \\sin 40^\\circ = 1{,}29\\ \\mathrm{m} $$
+
+**Periodtiden:**
+$$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{2{,}0 \\cdot \\cos 40^\\circ}{9{,}82}} = 2{,}48\\ \\mathrm{s} $$
+
+**Farten:**
+$$ v = \\frac{2\\pi r}{T} = \\frac{2\\pi \\cdot 1{,}29}{2{,}48} = 3{,}3\\ \\mathrm{m/s} $$
+
+**Svar:** Farten är ungefär $3{,}3\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Trådlängden delas upp geometriskt: $r = l\\sin\\alpha$ (vågrätt) och höjden $h = l\\cos\\alpha$ (lodrätt). Här behövdes radien för fartberäkningen.`,
+        },
+        {
+            level: 2,
+            question: `En konisk pendel med trådlängden $1{,}0\\ \\mathrm{m}$ har periodtiden $1{,}8\\ \\mathrm{s}$. Vilken vinkel bildar tråden mot vertikalen? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeConicalPendulum({ angle: 34, lLabel: 'l = 1,0 m', angleLabel: 'α' })}`,
+            answer: { value: 36, unit: '°' },
+            solution: `Vi löser ut $\\cos\\alpha$ ur periodformeln:
+
+$$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} \\quad\\Leftrightarrow\\quad \\cos\\alpha = \\frac{g \\cdot T^2}{4\\pi^2 \\cdot l} $$
+
+Mätvärden:
+$$
+\\left[ \\begin{array}{l}
+g = 9{,}82\\ \\mathrm{m/s^2} \\\\
+T = 1{,}8\\ \\mathrm{s} \\\\
+l = 1{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ \\cos\\alpha = \\frac{9{,}82 \\cdot 1{,}8^2}{4\\pi^2 \\cdot 1{,}0} = 0{,}806 \\quad\\Rightarrow\\quad \\alpha = \\arccos(0{,}806) = 36^\\circ $$
+
+**Svar:** Tråden bildar ungefär $36^\\circ$ mot vertikalen.
+
+**Generell slutsats:** Här satt den okända vinkeln inuti en cosinus. Man löser ut $\\cos\\alpha$ algebraiskt först och tar sedan $\\arccos$ — rutinmässigt med räknare.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En konisk pendel har trådlängden $1{,}5\\ \\mathrm{m}$. Vid vilken periodtid blir spännkraften i tråden **exakt dubbelt så stor** som tyngdkraften på pendelvikten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeConicalPendulum({ angle: 45, lLabel: 'l = 1,5 m', angleLabel: null, forces: true })}`,
+            answer: { value: 1.7, unit: 's', tol: 0.03 },
+            solution: `Insikten är att spännkraften $F_S$ måste delas upp i komposanter, och att den **lodräta** komposanten ensam bär upp tyngden (vikten åker varken upp eller ner):
+
+$$ F_S \\cos\\alpha = mg $$
+
+Villkoret $F_S = 2mg$ insatt ger
+
+$$ 2mg \\cdot \\cos\\alpha = mg \\quad\\Leftrightarrow\\quad \\cos\\alpha = \\frac{1}{2} \\quad\\Rightarrow\\quad \\alpha = 60^\\circ $$
+
+Massan stryks — vinkeln bestäms helt av kraftvillkoret. Nu sätter vi in $\\cos\\alpha = 0{,}5$ i periodformeln:
+
+$$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{1{,}5 \\cdot 0{,}5}{9{,}82}} = 1{,}7\\ \\mathrm{s} $$
+
+**Svar:** Vid periodtiden ungefär $1{,}7\\ \\mathrm{s}$ är spännkraften dubbelt så stor som tyngdkraften.
+
+**Generell slutsats:** Nyckeln är att kraftvillkoret ($F_S = 2mg$) via den lodräta jämvikten $F_S\\cos\\alpha = mg$ *bestämmer vinkeln* — först därefter kan periodtiden räknas ut. Massan behövdes aldrig.`,
+        },
+    ],
+
+    'fy2-1.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En boll sparkas från marken med utgångsfarten $18\\ \\mathrm{m/s}$ och vinkeln $30^\\circ$ mot horisontalplanet. Hur lång blir kastvidden? (Bortse från luftmotstånd, $g = 9{,}82\\ \\mathrm{m/s^2}$.)
+
+${makeProjectile({ kind: 'angle', angle: 30, v0Label: 'v_0 = 18 m/s', rangeLabel: 'x_max = ?' })}`,
+            answer: { value: 29, unit: 'm' },
+            solution: `Eftersom bollen startar och landar i samma höjd kan vi använda formeln för kastvidd:
+
+$$ x_{\\max} = \\frac{v_0^2 \\cdot \\sin(2\\alpha)}{g} = \\frac{18^2 \\cdot \\sin(2 \\cdot 30^\\circ)}{9{,}82} = \\frac{324 \\cdot \\sin 60^\\circ}{9{,}82} = 29\\ \\mathrm{m} $$
+
+**Svar:** Kastvidden är ungefär $29\\ \\mathrm{m}$.
+
+**Generell slutsats:** Kastvidden är störst vid $45^\\circ$ (då $\\sin 2\\alpha = 1$). Formeln gäller bara när start- och landningshöjd är desamma.`,
+        },
+        {
+            level: 1,
+            question: `Samma boll sparkas från marken med utgångsfarten $18\\ \\mathrm{m/s}$ och vinkeln $30^\\circ$. Hur hög blir bollens stighöjd (högsta punkt)? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeProjectile({ kind: 'angle', angle: 30, v0Label: 'v_0 = 18 m/s', apex: true, apexLabel: 'y_max = ?' })}`,
+            answer: { value: 8.2, unit: 'm' },
+            solution: `Stighöjden ges av
+
+$$ y_{\\max} = \\frac{v_0^2 \\cdot \\sin^2\\alpha}{2g} = \\frac{18^2 \\cdot \\sin^2 30^\\circ}{2 \\cdot 9{,}82} = \\frac{324 \\cdot 0{,}25}{19{,}64} = 8{,}2\\ \\mathrm{m} $$
+
+**Svar:** Stighöjden är ungefär $8{,}2\\ \\mathrm{m}$.
+
+**Generell slutsats:** I högsta punkten är hastigheten i *y*-led noll ($v_y = 0$); bollen rör sig då enbart vågrätt med $v_x = v_0\\cos\\alpha$.`,
+        },
+        {
+            level: 1,
+            question: `Kalle springer rakt ut från kanten på ett $10\\ \\mathrm{m}$ högt hopptorn med den vågräta farten $4{,}0\\ \\mathrm{m/s}$. Hur långt ut från tornet landar han i vattnet? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeProjectile({ kind: 'horizontal', platformH: 150, v0Label: 'v_0 = 4,0 m/s', heightLabel: 'h = 10 m', distLabel: 'x = ?', objLabel: 'Kalle' })}`,
+            answer: { value: 5.7, unit: 'm' },
+            solution: `Detta är ett vågrätt kast. Vi bestämmer först falltiden ur rörelsen i *y*-led (han startar med $v_y = 0$):
+
+$$ y = \\frac{g t^2}{2} \\quad\\Leftrightarrow\\quad t = \\sqrt{\\frac{2y}{g}} = \\sqrt{\\frac{2 \\cdot 10}{9{,}82}} = 1{,}43\\ \\mathrm{s} $$
+
+I *x*-led är farten konstant, så den vågräta sträckan blir
+
+$$ x = v_0 \\cdot t = 4{,}0 \\cdot 1{,}43 = 5{,}7\\ \\mathrm{m} $$
+
+**Svar:** Han landar ungefär $5{,}7\\ \\mathrm{m}$ ut från tornet.
+
+**Generell slutsats:** Rörelsen i *x*-led och *y*-led är oberoende av varandra. Falltiden bestäms helt av höjden — den vågräta farten påverkar bara *hur långt* han hinner under den tiden.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En boll kastas vågrätt med farten $12\\ \\mathrm{m/s}$ från höjden $8{,}0\\ \\mathrm{m}$. Med vilken fart träffar den marken? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeProjectile({ kind: 'horizontal', platformH: 140, v0Label: 'v_0 = 12 m/s', heightLabel: 'h = 8,0 m' })}`,
+            answer: { value: 17, unit: 'm/s', tol: 0.03 },
+            solution: `Sluthastigheten är resultanten av den (konstanta) vågräta farten och den (växande) lodräta farten. Vi behöver först falltiden:
+
+$$ t = \\sqrt{\\frac{2y}{g}} = \\sqrt{\\frac{2 \\cdot 8{,}0}{9{,}82}} = 1{,}28\\ \\mathrm{s} $$
+
+Hastigheterna vid nedslaget:
+$$
+\\left[ \\begin{array}{l}
+v_x = 12\\ \\mathrm{m/s}\\ (\\text{konstant}) \\\\
+v_y = g \\cdot t = 9{,}82 \\cdot 1{,}28 = 12{,}5\\ \\mathrm{m/s}
+\\end{array} \\right]
+$$
+
+Pythagoras sats ger farten:
+
+$$ v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{12^2 + 12{,}5^2} = 17\\ \\mathrm{m/s} $$
+
+**Svar:** Bollen träffar marken med ungefär $17\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Farten är hypotenusan i en triangel med komposanterna $v_x$ och $v_y$ som kateter. Den vågräta farten ($v_x$) ändras aldrig under kastet.`,
+        },
+        {
+            level: 2,
+            question: `Från en klippa $20\\ \\mathrm{m}$ över vattnet kastas en sten **vågrätt**. Stenen ska landa $15\\ \\mathrm{m}$ ut från klippans fot. Vilken utgångsfart krävs? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeProjectile({ kind: 'horizontal', platformH: 150, v0Label: 'v_0 = ?', heightLabel: 'h = 20 m', distLabel: 'x = 15 m' })}`,
+            answer: { value: 7.4, unit: 'm/s' },
+            solution: `Falltiden bestäms av höjden (rörelsen i *y*-led, $v_y = 0$ från start):
+
+$$ t = \\sqrt{\\frac{2y}{g}} = \\sqrt{\\frac{2 \\cdot 20}{9{,}82}} = 2{,}02\\ \\mathrm{s} $$
+
+Under den tiden ska stenen hinna $15\\ \\mathrm{m}$ i vågrätt led med konstant fart:
+
+$$ x = v_0 \\cdot t \\quad\\Leftrightarrow\\quad v_0 = \\frac{x}{t} = \\frac{15}{2{,}02} = 7{,}4\\ \\mathrm{m/s} $$
+
+**Svar:** Utgångsfarten måste vara ungefär $7{,}4\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Höjden bestämmer "hur lång tid stenen har på sig"; därefter ger den önskade vågräta sträckan den fart som krävs. Två oberoende rörelser kopplas ihop via den gemensamma tiden.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En fotbollsspelare sparkar bollen från marken med utgångsfarten $20\\ \\mathrm{m/s}$ och vinkeln $35^\\circ$. På avståndet $30\\ \\mathrm{m}$ står en $2{,}5\\ \\mathrm{m}$ hög mur. Hur högt över marken befinner sig bollen när den når muren — och går den över? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeProjectile({ kind: 'angle', angle: 35, v0Label: 'v_0 = 20 m/s', wall: { atFracX: 0.78, hFrac: 0.37, label: '2,5 m' } })}`,
+            answer: { value: 4.5, unit: 'm' },
+            solution: `Här går det **inte** att använda kastviddsformeln — vi måste behandla rörelsen i *x*- och *y*-led var för sig och ta reda på höjden vid en *specifik* vågrät position.
+
+**Steg 1 — tiden att nå muren** (vågrät rörelse, konstant fart):
+$$ x = v_0\\cos\\alpha \\cdot t \\;\\Leftrightarrow\\; t = \\frac{x}{v_0\\cos\\alpha} = \\frac{30}{20 \\cdot \\cos 35^\\circ} = 1{,}83\\ \\mathrm{s} $$
+
+**Steg 2 — höjden vid den tiden** (lodrät rörelse):
+$$ y = v_0\\sin\\alpha \\cdot t - \\frac{g t^2}{2} = 20\\sin 35^\\circ \\cdot 1{,}83 - \\frac{9{,}82 \\cdot 1{,}83^2}{2} $$
+$$ y = 21{,}0 - 16{,}5 = 4{,}5\\ \\mathrm{m} $$
+
+Eftersom $4{,}5\\ \\mathrm{m} > 2{,}5\\ \\mathrm{m}$ går bollen över muren med god marginal.
+
+**Svar:** Bollen är ungefär $4{,}5\\ \\mathrm{m}$ över marken vid muren och går alltså **över** den (med drygt $2\\ \\mathrm{m}$ till godo).
+
+**Generell slutsats:** Tricket är att den vågräta rörelsen ger *tiden* att nå muren, och att den tiden sedan sätts in i höjdformeln. När man frågar efter höjden vid en bestämd punkt (mur, nät, ribba) duger inga färdiga vidd-/höjdformler — man måste följa de två rörelserna separat.`,
+        },
+    ],
+
+    'fy2-1.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En gunga släpps från vila och faller så att tyngdpunkten sjunker $1{,}5\\ \\mathrm{m}$ tills den når banans lägsta punkt. Vilken fart har gungan där? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeSwing({ angle: 48, hLabel: 'h = 1,5 m', angleLabel: null })}`,
+            answer: { value: 5.4, unit: 'm/s' },
+            solution: `Vi använder energiprincipen — lägesenergin omvandlas till rörelseenergi:
+
+$$ mgh = \\frac{mv^2}{2} \\quad\\Leftrightarrow\\quad v = \\sqrt{2gh} $$
+
+Massan stryks. Insättning:
+
+$$ v = \\sqrt{2 \\cdot 9{,}82 \\cdot 1{,}5} = 5{,}4\\ \\mathrm{m/s} $$
+
+**Svar:** Farten i lägsta punkten är ungefär $5{,}4\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Farten beror bara på fallhöjden, inte på massan eller banans form (om friktion försummas). Detta är samma $v = \\sqrt{2gh}$ som för fritt fall.`,
+        },
+        {
+            level: 1,
+            question: `I lägsta punkten av en gungbana (radie $3{,}0\\ \\mathrm{m}$) rör sig en gungare som väger $60\\ \\mathrm{kg}$ med farten $5{,}0\\ \\mathrm{m/s}$. Hur stor är centripetalkraften?
+
+${makeSwing({ ropeLabel: 'r = 3,0 m', forces: true })}`,
+            answer: { value: 500, unit: 'N' },
+            solution: `Centripetalkraften ges av
+
+$$ F_C = \\frac{m v^2}{r} = \\frac{60 \\cdot 5{,}0^2}{3{,}0} = \\frac{1\\,500}{3{,}0} = 500\\ \\mathrm{N} $$
+
+**Svar:** Centripetalkraften är $500\\ \\mathrm{N}$.
+
+**Generell slutsats:** I lägsta punkten är centripetalkraften riktad **uppåt** (in mot banans centrum) och utgörs av spännkraften minus tyngdkraften.`,
+        },
+        {
+            level: 1,
+            question: `En berg- och dalbanevagn åker i en vertikal loop med radien $4{,}0\\ \\mathrm{m}$. Vilken är den minsta farten i loopens **högsta** punkt för att vagnen inte ska tappa kontakten med banan? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeLoop({ r: 92, rLabel: 'r = 4,0 m', cartTop: true, topForces: true, vTop: 'v = ?' })}`,
+            answer: { value: 6.3, unit: 'm/s' },
+            solution: `I gränsfallet är normalkraften (eller spännkraften) noll i högsta punkten, så tyngdkraften ensam utgör centripetalkraften:
+
+$$ mg = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad v = \\sqrt{gr} = \\sqrt{9{,}82 \\cdot 4{,}0} = 6{,}3\\ \\mathrm{m/s} $$
+
+**Svar:** Den minsta farten i högsta punkten är ungefär $6{,}3\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** $v = \\sqrt{gr}$ är den klassiska villkorsfarten i toppen av en loop — går vagnen långsammare faller den inåt och tappar banan.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En person som väger $70\\ \\mathrm{kg}$ gungar i en gunga med $4{,}0\\ \\mathrm{m}$ långa rep. Hon släpps från vila från en höjd $1{,}2\\ \\mathrm{m}$ över banans lägsta punkt. Hur stor är den totala spännkraften i repen i lägsta punkten? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeSwing({ angle: 40, hLabel: 'h = 1,2 m', ropeLabel: 'l = 4,0 m', angleLabel: null, forces: true })}`,
+            answer: { value: 1100, unit: 'N' },
+            solution: `Vi kombinerar **energiprincipen** (för farten) med **cirkulär rörelse** (för kraften).
+
+**Steg 1 — farten i lägsta punkten** ur energiprincipen:
+$$ v^2 = 2gh = 2 \\cdot 9{,}82 \\cdot 1{,}2 = 23{,}6\\ \\mathrm{m^2/s^2} $$
+
+**Steg 2 — krafterna i lägsta punkten.** Spännkraften $F_S$ uppåt och tyngdkraften $mg$ nedåt ger tillsammans centripetalkraften uppåt:
+$$ F_S - mg = \\frac{mv^2}{r} \\quad\\Leftrightarrow\\quad F_S = \\frac{mv^2}{r} + mg $$
+$$ F_S = \\frac{70 \\cdot 23{,}6}{4{,}0} + 70 \\cdot 9{,}82 = 412 + 687 = 1\\,100\\ \\mathrm{N} $$
+
+**Svar:** Spännkraften i lägsta punkten är ungefär $1\\,100\\ \\mathrm{N}$.
+
+**Generell slutsats:** I lägsta punkten måste repet både bära tyngden *och* kröka banan — därför är $F_S > mg$. Energiprincipen ger farten, centripetalsambandet ger kraften.`,
+        },
+        {
+            level: 2,
+            question: `En berg- och dalbana har en vertikal loop med radien $8{,}0\\ \\mathrm{m}$. Vilken minsta fart måste vagnen ha vid loopens **botten** för att precis klara hela loopen? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeLoop({ r: 88, rLabel: 'r = 8,0 m', cartTop: true, cartBottom: true, heightLabel: '2r' })}`,
+            answer: { value: 20, unit: 'm/s' },
+            solution: `Vi arbetar i två steg: villkoret i toppen ger minsta toppfarten, och energiprincipen kopplar topp och botten.
+
+**Steg 1 — minsta fart i toppen** (tyngdkraften = centripetalkraft):
+$$ v_\\text{topp}^2 = gr $$
+
+**Steg 2 — energiprincipen mellan botten och toppen.** Vagnen stiger höjden $2r$ (loopens diameter):
+$$ \\frac{v_\\text{botten}^2}{2} = \\frac{v_\\text{topp}^2}{2} + g \\cdot 2r \\quad\\Leftrightarrow\\quad v_\\text{botten}^2 = v_\\text{topp}^2 + 4gr = gr + 4gr = 5gr $$
+
+$$ v_\\text{botten} = \\sqrt{5gr} = \\sqrt{5 \\cdot 9{,}82 \\cdot 8{,}0} = 20\\ \\mathrm{m/s} $$
+
+**Svar:** Vagnen måste ha minst ungefär $20\\ \\mathrm{m/s}$ vid loopens botten.
+
+**Generell slutsats:** Det fina sambandet $v_\\text{botten} = \\sqrt{5gr}$ följer av att toppfarten ($\\sqrt{gr}$) plus energin för att lyfta vagnen $2r$ tillsammans bestämmer bottenfarten.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En pendelkula som väger $200\\ \\mathrm{g}$ hänger i en $1{,}2\\ \\mathrm{m}$ lång tråd. Kulan dras ut i sidled till vinkeln α mot lodlinjen och släpps. Tråden tål en spännkraft på högst $3{,}0\\ \\mathrm{N}$. Vilken är den största vinkeln α man kan släppa kulan ifrån utan att tråden brister? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeSwing({ angle: 42, angleLabel: 'α', ropeLabel: 'l = 1,2 m', forces: true })}`,
+            answer: { value: 43, unit: '°' },
+            solution: `Tråden är som mest belastad i banans **lägsta punkt** (där farten är störst). Där måste spännkraften både bära tyngden och kröka banan. Vi måste alltså koppla ihop **energiprincipen** (farten) med **cirkulär dynamik** (kraften) och uttrycka allt i vinkeln α.
+
+**Farten i lägsta punkten.** Kulan faller höjden $h = l(1 - \\cos\\alpha)$ från släppläget till botten. Energiprincipen ger
+$$ v^2 = 2gh = 2gl(1 - \\cos\\alpha) $$
+
+**Spännkraften i lägsta punkten.** Här gäller $F_S - mg = \\dfrac{mv^2}{r}$ med $r = l$:
+$$ F_S = mg + \\frac{m \\cdot 2gl(1-\\cos\\alpha)}{l} = mg + 2mg(1-\\cos\\alpha) = mg\\,(3 - 2\\cos\\alpha) $$
+
+Trådlängden *l* försvann. Sätt $F_S = 3{,}0\\ \\mathrm{N}$ och lös ut vinkeln ($mg = 0{,}200 \\cdot 9{,}82 = 1{,}964\\ \\mathrm{N}$):
+
+$$ 3{,}0 = 1{,}964\\,(3 - 2\\cos\\alpha) \\;\\Rightarrow\\; 3 - 2\\cos\\alpha = 1{,}527 \\;\\Rightarrow\\; \\cos\\alpha = 0{,}736 $$
+
+$$ \\alpha = \\arccos(0{,}736) = 43^\\circ $$
+
+**Svar:** Kulan kan släppas från högst ungefär $43^\\circ$ utan att tråden brister.
+
+**Generell slutsats:** Det eleganta resultatet $F_S = mg(3 - 2\\cos\\alpha)$ kombinerar tre idéer: fallhöjden uttryckt med trigonometri ($l(1-\\cos\\alpha)$), energiprincipen för farten, och kraftekvationen för cirkelrörelse i lägsta punkten. Släpps kulan rakt ut ($\\alpha = 90^\\circ$) blir $F_S = 3mg$.`,
+        },
+    ],
+
+    'fy2-1.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Med en konisk pendel kan man bestämma tyngdaccelerationen. Pendeln sveper i en cirkel $0{,}90\\ \\mathrm{m}$ under takfästet med periodtiden $1{,}9\\ \\mathrm{s}$. Vilket värde på *g* ger detta?
+
+${makeConicalPendulum({ angle: 28, hLabel: 'h = 0,90 m', angleLabel: null })}`,
+            answer: { value: 9.8, unit: 'm/s²' },
+            solution: `Den koniska pendelns g-bestämning bygger på sambandet
+
+$$ g = \\frac{4\\pi^2 \\cdot h}{T^2} $$
+
+där *h* är cirkelbanans höjd under upphängningspunkten. Insättning:
+
+$$ g = \\frac{4\\pi^2 \\cdot 0{,}90}{1{,}9^2} = 9{,}8\\ \\mathrm{m/s^2} $$
+
+**Svar:** $g \\approx 9{,}8\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Det fina med metoden är att bara höjden *h* och periodtiden *T* behövs — pendelns massa och banans radie behöver inte mätas.`,
+        },
+        {
+            level: 1,
+            question: `Hur långt under takfästet sveper en konisk pendel om periodtiden är $2{,}0\\ \\mathrm{s}$? Använd $g = 9{,}82\\ \\mathrm{m/s^2}$.
+
+${makeConicalPendulum({ angle: 30, hLabel: 'h = ?', angleLabel: null })}`,
+            answer: { value: 0.99, unit: 'm' },
+            solution: `Vi löser ut höjden *h* ur g-sambandet:
+
+$$ g = \\frac{4\\pi^2 h}{T^2} \\quad\\Leftrightarrow\\quad h = \\frac{g \\cdot T^2}{4\\pi^2} = \\frac{9{,}82 \\cdot 2{,}0^2}{4\\pi^2} = 0{,}99\\ \\mathrm{m} $$
+
+**Svar:** Cirkelbanan ligger ungefär $0{,}99\\ \\mathrm{m}$ under takfästet.
+
+**Generell slutsats:** Höjden *h* är den lodräta delen av tråden ($h = l\\cos\\alpha$), inte trådlängden — det är den som bestämmer periodtiden.`,
+        },
+        {
+            level: 1,
+            question: `En konisk pendel sveper $1{,}2\\ \\mathrm{m}$ under takfästet. Beräkna periodtiden. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeConicalPendulum({ angle: 32, hLabel: 'h = 1,2 m', angleLabel: null })}`,
+            answer: { value: 2.2, unit: 's' },
+            solution: `Eftersom höjden $h = l\\cos\\alpha$ kan periodformeln skrivas $T = 2\\pi\\sqrt{h/g}$:
+
+$$ T = 2\\pi\\sqrt{\\frac{h}{g}} = 2\\pi\\sqrt{\\frac{1{,}2}{9{,}82}} = 2{,}2\\ \\mathrm{s} $$
+
+**Svar:** Periodtiden är ungefär $2{,}2\\ \\mathrm{s}$.
+
+**Generell slutsats:** Detta är samma samband som $g = 4\\pi^2 h/T^2$, bara löst för *T* i stället för *g*.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en laboration mäter en grupp tiden för $10$ varv med en konisk pendel till $21\\ \\mathrm{s}$, och cirkelbanans höjd under fästet till $1{,}1\\ \\mathrm{m}$. Vilket värde på *g* får de?
+
+${makeConicalPendulum({ angle: 27, hLabel: 'h = 1,1 m', angleLabel: null })}`,
+            answer: { value: 9.8, unit: 'm/s²' },
+            solution: `Först bestämmer vi periodtiden (tiden för ett varv):
+
+$$ T = \\frac{21}{10} = 2{,}1\\ \\mathrm{s} $$
+
+Sedan g-sambandet:
+
+$$ g = \\frac{4\\pi^2 \\cdot h}{T^2} = \\frac{4\\pi^2 \\cdot 1{,}1}{2{,}1^2} = 9{,}8\\ \\mathrm{m/s^2} $$
+
+**Svar:** De får $g \\approx 9{,}8\\ \\mathrm{m/s^2}$ — mycket nära det sanna värdet $9{,}82\\ \\mathrm{m/s^2}$.
+
+**Generell slutsats:** Att mäta tiden för $10$ varv och dela med $10$ minskar slumpmässiga mätfel i tidtagningen — ett standardgrepp i laborationer.`,
+        },
+        {
+            level: 2,
+            question: `En konisk pendel har trådlängden $1{,}8\\ \\mathrm{m}$ och tråden bildar $40^\\circ$ mot vertikalen. Beräkna periodtiden via banans höjd. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeConicalPendulum({ angle: 40, lLabel: 'l = 1,8 m', hLabel: 'h' })}`,
+            answer: { value: 2.4, unit: 's' },
+            solution: `Cirkelbanans höjd under fästet är trådens lodräta del:
+
+$$ h = l\\cos\\alpha = 1{,}8 \\cdot \\cos 40^\\circ = 1{,}38\\ \\mathrm{m} $$
+
+Periodtiden blir
+
+$$ T = 2\\pi\\sqrt{\\frac{h}{g}} = 2\\pi\\sqrt{\\frac{1{,}38}{9{,}82}} = 2{,}4\\ \\mathrm{s} $$
+
+**Svar:** Periodtiden är ungefär $2{,}4\\ \\mathrm{s}$.
+
+**Generell slutsats:** Här kopplas geometrin ($h = l\\cos\\alpha$) ihop med periodformeln. Det ger samma svar som $T = 2\\pi\\sqrt{l\\cos\\alpha / g}$ direkt.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En konisk pendel har massan $0{,}25\\ \\mathrm{kg}$ och trådlängden $2{,}0\\ \\mathrm{m}$. När den snurrar mäts spännkraften i tråden till $2{,}8\\ \\mathrm{N}$. Bestäm pendelns periodtid. ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+
+${makeConicalPendulum({ angle: 32, lLabel: 'l = 2,0 m', angleLabel: null, forces: true })}`,
+            answer: { value: 2.7, unit: 's' },
+            solution: `Spännkraften ger oss vinkeln — och vinkeln ger oss periodtiden. Vi måste alltså först dela upp spännkraften i komposanter.
+
+**Steg 1 — vinkeln ur den lodräta jämvikten.** Spännkraftens lodräta komposant bär tyngden:
+$$ F_S \\cos\\alpha = mg \\quad\\Leftrightarrow\\quad \\cos\\alpha = \\frac{mg}{F_S} = \\frac{0{,}25 \\cdot 9{,}82}{2{,}8} = 0{,}877 $$
+
+(Det ger $\\alpha = 28{,}8^\\circ$, men vi behöver bara $\\cos\\alpha$ vidare.)
+
+**Steg 2 — periodtiden.** Banans höjd är $h = l\\cos\\alpha$, så
+$$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{2{,}0 \\cdot 0{,}877}{9{,}82}} = 2{,}7\\ \\mathrm{s} $$
+
+**Svar:** Periodtiden är ungefär $2{,}7\\ \\mathrm{s}$.
+
+**Generell slutsats:** Insikten är att den uppmätta spännkraften, via den lodräta jämvikten $F_S\\cos\\alpha = mg$, *bestämmer vinkeln* — och först därefter kan periodtiden beräknas. Att kontrollera spännkraften mot tyngdkraften ($F_S > mg$ alltid, eftersom den även måste kröka banan) är en bra rimlighetskontroll.`,
         },
     ],
 };

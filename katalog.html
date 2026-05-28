@@ -48,7 +48,14 @@
             return { md, tokens };
         }
         function restoreMath(html, tokens) {
-            return html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+            html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+            // Förhindra att en öppningsparentes hamnar ensam i radslutet före
+            // en inline-formel. KaTeX renderar formeln som inline-block, och
+            // webbläsaren får då bryta raden mellan "(" och formeln. Vi limmar
+            // ihop parentesen med den efterföljande math-rutan i en nowrap-span.
+            // Gäller bara inline-math ($…$), inte display-math ($$…$$).
+            html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
+            return html;
         }
 
         // --- Konvertera Unicode-superscript (⁻²⁷, ³⁰, …) till <sup>-27</sup>.

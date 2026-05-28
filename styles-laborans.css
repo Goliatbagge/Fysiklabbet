@@ -1456,6 +1456,11 @@ button.lab-card-disabled { pointer-events: none; }
 .katex {
     white-space: nowrap;
 }
+/* Öppningsparentes + efterföljande inline-formel limmas ihop (sätts i
+   restoreMath) så att "(" aldrig blir ensam kvar i radslutet. */
+.math-paren {
+    white-space: nowrap;
+}
 .katex-display .katex {
     white-space: normal;
 }

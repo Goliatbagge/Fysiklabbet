@@ -23,6 +23,7 @@
         const KF = window.KATALOG_FLAT;
 
         const UPDATES = [
+            { date: '2026-05-30', href: 'katalog.html#fy2-4.1', title: 'Övningar till alla räkneavsnitt', text: 'Nu finns nivåindelade övningar med facit och lösningsförslag till alla räkneavsnitt i Fysik och Fysik – fördjupning.' },
             { date: '2026-04-26', href: 'fysik1-newtons-gravitationslag.html', title: 'Newtons gravitationslag', text: 'Utforska kraften mellan två kroppar med interaktiva massor, kraftpilar och en människa på jordytan som visar tredje lagen.' },
             { date: '2026-04-24', href: 'fysik2-energinivaer.html', title: 'Energinivåer', text: 'Bohrs atommodell för väte med animerade elektronhopp, fotonemission med rätt våglängd och Lyman-, Balmer- och Paschen-serierna.' },
             { date: '2026-04-21', href: 'fysik2-spektrallinjer.html', title: 'Spektrallinjer', text: 'Utforska varje grundämnes unika fingeravtryck av ljus. Växla mellan emissions- och absorptionsspektrum och sök i periodiska systemet.' },
@@ -65,8 +66,8 @@
                         <SearchBar />
                         <nav className="lab-nav" aria-label="Huvudnavigation">
                             <a href="index.html" className="active">Start</a>
-                            <a href="katalog.html#fy1">Fysik 1</a>
-                            <a href="katalog.html#fy2">Fysik 2</a>
+                            <a href="katalog.html#fy1">Fysik</a>
+                            <a href="katalog.html#fy2">Fysik – fördjupning</a>
                             <a href="om.html">Om</a>
                             <a href="kontakt.html">Kontakt</a>
                         </nav>
@@ -82,15 +83,15 @@
                         Förstå genom att <em>utforska</em>.
                     </h1>
                     <p className="lab-welcome-lead">
-                        Teori, interaktiva simuleringar och övningar för Fysik 1 och
-                        Fysik 2 på gymnasiet — läs, utforska och förstå.
+                        Teori, interaktiva simuleringar och övningar för <strong>Fysik</strong> och{' '}
+                        <strong style={{ whiteSpace: 'nowrap' }}>Fysik – fördjupning</strong> på gymnasiet — läs, utforska och förstå.
                     </p>
                     <div className="lab-welcome-actions">
                         <a className="lab-btn lab-btn-primary" href="katalog.html#fy1">
-                            Fysik 1 →
+                            Fysik →
                         </a>
                         <a className="lab-btn lab-btn-primary" href="katalog.html#fy2">
-                            Fysik 2 →
+                            Fysik – fördjupning →
                         </a>
                     </div>
                 </section>
@@ -114,7 +115,7 @@
                 });
                 const out = [];
                 for (const sim of filtered) {
-                    const code = sim.course === 'Fysik 2' ? 'fy2' : 'fy1';
+                    const code = sim.course === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
                     out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
                     if (sim.href) {
                         out.push({ ...sim, kind: 'sim', resultHref: sim.href });
@@ -188,20 +189,63 @@
         }
 
         function Updates() {
+            const viewportRef = React.useRef(null);
+            const [atStart, setAtStart] = React.useState(true);
+            const [atEnd, setAtEnd] = React.useState(false);
+
+            // Uppdatera pilarnas av/på-läge utifrån hur långt raden är scrollad.
+            const updateArrows = React.useCallback(() => {
+                const el = viewportRef.current;
+                if (!el) return;
+                const max = el.scrollWidth - el.clientWidth;
+                setAtStart(el.scrollLeft <= 1);
+                setAtEnd(el.scrollLeft >= max - 1);
+            }, []);
+
+            React.useEffect(() => {
+                updateArrows();
+                window.addEventListener('resize', updateArrows);
+                return () => window.removeEventListener('resize', updateArrows);
+            }, [updateArrows]);
+
+            // Bläddra en hel "sida" (synlig bredd) åt vänster/höger. Webbläsaren
+            // klampar scrollLeft, så sista klicket landar snyggt vid radens slut.
+            const scrollByPage = (dir) => {
+                const el = viewportRef.current;
+                if (!el) return;
+                el.scrollBy({ left: dir * el.clientWidth, behavior: 'smooth' });
+            };
+
+            const hasOverflow = !(atStart && atEnd);
+
             return (
                 <section id="senaste" className="lab-section lab-updates">
                     <div className="lab-updates-header">
                         <span className="lab-mono-label">Senaste uppdateringar</span>
-                        <span className="lab-mono-label">APR — 2026</span>
+                        <div className="lab-updates-header-right">
+                            <span className="lab-mono-label">MAJ — 2026</span>
+                            {hasOverflow && (
+                                <div className="lab-updates-nav">
+                                    <button type="button" className="lab-updates-arrow"
+                                        onClick={() => scrollByPage(-1)} disabled={atStart}
+                                        aria-label="Visa nyare uppdateringar">‹</button>
+                                    <button type="button" className="lab-updates-arrow"
+                                        onClick={() => scrollByPage(1)} disabled={atEnd}
+                                        aria-label="Visa äldre uppdateringar">›</button>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div className="lab-updates-grid">
-                        {UPDATES.map(u => (
-                            <article key={u.href} className="lab-update-item">
-                                <time>{u.date}</time>
-                                <h3><a href={u.href}>{u.title}</a></h3>
-                                <p>{u.text}</p>
-                            </article>
-                        ))}
+                    <div className="lab-updates-viewport" ref={viewportRef} onScroll={updateArrows}>
+                        <div className="lab-updates-track">
+                            {UPDATES.map(u => (
+                                <article key={u.href} className="lab-update-item">
+                                    <time>{u.date}</time>
+                                    <h3><a href={u.href}>{u.title}</a></h3>
+                                    <p>{u.text}</p>
+                                </article>
+                            ))}
+                        </div>
                     </div>
                 </section>
             );

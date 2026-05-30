@@ -90,16 +90,19 @@ function makeDiagram(opts) {
     const xLabel = opts.xLabel || '<tspan font-style="italic">t</tspan> (s)';
     const yLabel = opts.yLabel || '<tspan font-style="italic">v</tspan> (m/s)';
     // X-label: anchor=end vid viewBox-höger så långa labels ("a (m/s²)") inte
-    // sticker ut. Y-label: tillräcklig nedflyttning så Φ/Σ/etc. inte sticker
-    // upp över viewBox-topp (regel: alla etiketter måste få plats helt inom
-    // ramen — verifieras med headless-screenshot).
+    // sticker ut. Y-label: anchor=start strax HÖGER om y-axeln (x = padL + 6)
+    // så att långa labels ("Φ (mWb)", "Σ (…)") växer inåt i diagrammet i
+    // stället för vänsterut utanför viewBox-kanten — annars kapas första
+    // glyfen (Φ är extra bred). Nedflyttning (padT − 8) håller den under
+    // viewBox-topp. Regel: alla etiketter helt inom ramen — verifieras med
+    // headless-screenshot.
     const axes =
         `<line x1="${padL}" y1="${xAxisY.toFixed(1)}" x2="${W - padR + 8}" y2="${xAxisY.toFixed(1)}" stroke="#0f1620" stroke-width="2"/>` +
         `<line x1="${padL}" y1="${H - padB}" x2="${padL}" y2="${padT - 8}" stroke="#0f1620" stroke-width="2"/>` +
         `<polygon points="${W - padR + 8},${(xAxisY - 4).toFixed(1)} ${W - padR + 16},${xAxisY.toFixed(1)} ${W - padR + 8},${(xAxisY + 4).toFixed(1)}" fill="#0f1620"/>` +
         `<polygon points="${padL - 4},${padT - 8} ${padL},${padT - 16} ${padL + 4},${padT - 8}" fill="#0f1620"/>` +
         `<text x="${W - 6}" y="${(xAxisY - 6).toFixed(1)}" font-size="14" fill="#0f1620" text-anchor="end">${xLabel}</text>` +
-        `<text x="${padL - 5}" y="${padT - 8}" font-size="14" fill="#0f1620" text-anchor="end">${yLabel}</text>`;
+        `<text x="${padL + 6}" y="${padT - 8}" font-size="14" fill="#0f1620" text-anchor="start">${yLabel}</text>`;
 
     let fillsSvg = '';
     for (const f of (opts.fills || [])) {
@@ -1645,7 +1648,7 @@ function makeBridge(opts) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  MEKANIK-FIGURER (Fysik 2, kapitel 1)
+//  MEKANIK-FIGURER (Fysik – fördjupning, kapitel 1)
 //
 //  Inline-SVG-helpers som ILLUSTRERAR mekanikuppgifter: kaströrelse,
 //  kraftmoment/hävstång, tippande kroppar, cirkulär rörelse, konisk
@@ -2458,6 +2461,180 @@ function makeClock(opts) {
     body += hand(opts.minute || 0, R * 0.78, 2.2);
     body += `<circle cx="${c}" cy="${c}" r="3" fill="${SCENE_ACCENT}"/>`;
     return sceneWrap(sz, sz, body);
+}
+
+// ── Energinivådiagram för väte (makeEnergyLevels) ────────────────────
+//
+// Ritar Bohrs energinivådiagram för väteatomen: vågräta nivålinjer vid
+// E_n = −13,6/n², energiaxel uppåt med jonisationsgränsen (0 eV) överst.
+// Nivåerna trängs naturligt ihop mot toppen (fysikaliskt korrekt).
+//
+//   opts = {
+//     levels,        // array av n-värden, default [1,2,3,4,5,6]
+//     showValues,    // true → skriv ut E_n-värdet till höger om varje nivå
+//     transition,    // { from, to } → EN nedåtpil mellan två nivåer
+//                    //   (utelämna när antalet möjliga hopp är själva svaret)
+//   }
+function makeEnergyLevels(opts) {
+    opts = opts || {};
+    const levels = opts.levels || [1, 2, 3, 4];
+    const W = 378, H = 300, padT = 30, padB = 26;
+    const axX = 64, lineR = 300;        // axel-x och nivålinjernas högerkant
+    const contBand = 20;                // litet kontinuumband överst (E ≥ 0)
+    const boundTop = padT + contBand;   // y för E = 0 (jonisationsgränsen)
+    const boundH = H - padB - boundTop;
+    const En = n => -13.6 / (n * n);
+    // √|E|-skala: sprider ut de tätt liggande övre nivåerna utan att kasta om
+    // ordningen (samma grepp som energiniva-simuleringen). Ej linjär — därför
+    // skrivs varje nivås E-värde ut, det är värdet (inte pixelläget) eleven läser.
+    const maxSqrt = Math.sqrt(13.6);
+    const yOf = E => E >= 0 ? boundTop : boundTop + boundH * Math.sqrt(-E) / maxSqrt;
+    let body = '';
+
+    // Energiaxel (uppåt) med pil och rubrik
+    body += sceneArrow(axX, H - padB, axX, padT - 4, { color: SCENE_INK, width: 1.8, head: 9 });
+    body += sceneText(axX - 4, padT - 12, sceneVar('E') + ' (eV)', { anchor: 'start', size: 13, color: SCENE_INK });
+
+    // Jonisationsgräns (0 eV) — streckad linje överst
+    body += `<line x1="${axX}" y1="${boundTop.toFixed(1)}" x2="${lineR}" y2="${boundTop.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="1.2" stroke-dasharray="5 4"/>`;
+    body += sceneText((axX + lineR) / 2 + 10, boundTop - 9, 'jonisationsgräns (0 eV)', { size: 11, color: SCENE_MUTED });
+
+    // Valfri övergångspil (ritas under nivålinjerna så pilspetsen syns)
+    if (opts.transition) {
+        const xa = axX + 140;
+        body += sceneArrow(xa, yOf(En(opts.transition.from)) - 1, xa, yOf(En(opts.transition.to)) + 1,
+            { color: SCENE_ACCENT, width: 2.2, head: 9 });
+    }
+
+    // Nivålinjer
+    for (const n of levels) {
+        const y = yOf(En(n));
+        body += `<line x1="${axX}" y1="${y.toFixed(1)}" x2="${lineR}" y2="${y.toFixed(1)}" stroke="${SCENE_INK}" stroke-width="1.8"/>`;
+        // n-etikett till vänster om axeln
+        body += sceneText(axX - 12, y, sceneQty('n = ' + n), { anchor: 'end', size: 13, color: SCENE_INK });
+        // valfritt E-värde till höger
+        if (opts.showValues) {
+            const ev = En(n).toFixed(2).replace('.', ',').replace('-', '−');
+            body += sceneText(lineR + 6, y, ev + ' eV', { anchor: 'start', size: 12, color: SCENE_MUTED, halo: false });
+        }
+    }
+    return sceneWrap(W, H, body);
+}
+
+// ── Trelagers-brytning (makeRefractionStack) ─────────────────────────
+//
+// Ett ljusstråle som bryts genom tre staplade medier (t.ex. luft → glas →
+// vatten). Visar att brytningsvinkeln i det understa mediet är oberoende av
+// mellanlagret. Ritar de tre banden, strålens knäckar vid varje gränsyta,
+// normalerna och vinklarna i och b.
+//
+//   opts = { nTop, nMid, nBot, i (grader), labelTop, labelMid, labelBot,
+//            iLabel ('40°'), bLabel ('b') }
+function makeRefractionStack(opts) {
+    const W = 300, H = 272;
+    const y1 = 100, y2 = 182;            // gränsytor
+    const P1x = 142;
+    const iDeg = opts.i, iRad = iDeg * Math.PI / 180;
+    const sinTop = Math.sin(iRad);
+    const bMid = Math.asin(opts.nTop * sinTop / opts.nMid);
+    const bBot = Math.asin(opts.nTop * sinTop / opts.nBot);
+    const P2x = P1x + (y2 - y1) * Math.tan(bMid);
+    let body = '';
+
+    // Band-bakgrunder (ljusast överst, mörkast nederst)
+    body += `<rect x="0" y="0" width="${W}" height="${y1}" fill="rgba(135,180,210,0.10)"/>`;
+    body += `<rect x="0" y="${y1}" width="${W}" height="${y2 - y1}" fill="rgba(135,180,210,0.26)"/>`;
+    body += `<rect x="0" y="${y2}" width="${W}" height="${H - y2}" fill="rgba(135,180,210,0.42)"/>`;
+    // Gränsytor
+    body += `<line x1="12" y1="${y1}" x2="${W - 12}" y2="${y1}" stroke="${SCENE_INK}" stroke-width="1.8"/>`;
+    body += `<line x1="12" y1="${y2}" x2="${W - 12}" y2="${y2}" stroke="${SCENE_INK}" stroke-width="1.8"/>`;
+    // Lageretiketter (vänster, på bakgrunden — inga linjer där)
+    body += sceneText(14, 24, opts.labelTop || 'Luft', { anchor: 'start', size: 12, color: '#3a4250' });
+    body += sceneText(14, y1 + 16, opts.labelMid || 'Glas', { anchor: 'start', size: 12, color: '#3a4250' });
+    body += sceneText(14, y2 + 16, opts.labelBot || 'Vatten', { anchor: 'start', size: 12, color: '#3a4250' });
+
+    // Normaler (streckade lodräta) vid båda gränsytorna
+    body += `<line x1="${P1x}" y1="${y1 - 34}" x2="${P1x}" y2="${y1 + 34}" stroke="${SCENE_MUTED}" stroke-width="1.2" stroke-dasharray="5 4"/>`;
+    body += `<line x1="${P2x.toFixed(1)}" y1="${y2 - 30}" x2="${P2x.toFixed(1)}" y2="${y2 + 38}" stroke="${SCENE_MUTED}" stroke-width="1.2" stroke-dasharray="5 4"/>`;
+
+    // Pilspets PÅ strålen (riktningsmarkör), byggd ur riktningen
+    function arrowHead(x, y, ang) {
+        const s = 8, wing = 4.5;
+        const bx = x - s * Math.cos(ang), by = y - s * Math.sin(ang);
+        const px = -Math.sin(ang), py = Math.cos(ang);
+        return `<polygon points="${x.toFixed(1)},${y.toFixed(1)} ${(bx + wing*px).toFixed(1)},${(by + wing*py).toFixed(1)} ${(bx - wing*px).toFixed(1)},${(by - wing*py).toFixed(1)}" fill="${SCENE_ACCENT}"/>`;
+    }
+    // Infallande stråle (luft) → P1
+    const L = 86;
+    const ax0 = P1x - L * Math.sin(iRad), ay0 = y1 - L * Math.cos(iRad);
+    body += `<line x1="${ax0.toFixed(1)}" y1="${ay0.toFixed(1)}" x2="${P1x}" y2="${y1}" stroke="${SCENE_ACCENT}" stroke-width="2.2"/>`;
+    body += arrowHead(ax0 + 0.55 * (P1x - ax0), ay0 + 0.55 * (y1 - ay0), Math.atan2(y1 - ay0, P1x - ax0));
+    // Stråle i mellanlagret P1 → P2
+    body += `<line x1="${P1x}" y1="${y1}" x2="${P2x.toFixed(1)}" y2="${y2}" stroke="${SCENE_ACCENT}" stroke-width="2.2"/>`;
+    // Stråle i understa mediet P2 → ut
+    const ex = P2x + L * Math.sin(bBot), ey = y2 + L * Math.cos(bBot);
+    body += `<line x1="${P2x.toFixed(1)}" y1="${y2}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="${SCENE_ACCENT}" stroke-width="2.2"/>`;
+    body += arrowHead(P2x + 0.6 * (ex - P2x), y2 + 0.6 * (ey - y2), Math.atan2(ey - y2, ex - P2x));
+
+    // Vinkelbågar: i (vid P1, övre vänster) och b (vid P2, undre höger)
+    const arcR = 30;
+    body += `<path d="M ${P1x} ${y1 - arcR} A ${arcR} ${arcR} 0 0 0 ${(P1x - arcR*Math.sin(iRad)).toFixed(1)} ${(y1 - arcR*Math.cos(iRad)).toFixed(1)}" stroke="${SCENE_INK}" stroke-width="1.2" fill="none"/>`;
+    body += sceneText(P1x - (arcR + 12) * Math.sin(iRad / 2), y1 - (arcR + 12) * Math.cos(iRad / 2), opts.iLabel || 'i', { size: 13, color: SCENE_INK });
+    body += `<path d="M ${P2x.toFixed(1)} ${y2 + arcR} A ${arcR} ${arcR} 0 0 0 ${(P2x + arcR*Math.sin(bBot)).toFixed(1)} ${(y2 + arcR*Math.cos(bBot)).toFixed(1)}" stroke="${SCENE_INK}" stroke-width="1.2" fill="none"/>`;
+    body += sceneText(P2x + (arcR + 12) * Math.sin(bBot / 2), y2 + (arcR + 12) * Math.cos(bBot / 2), sceneVar(opts.bLabel || 'b'), { size: 13, color: SCENE_INK });
+
+    return sceneWrap(W, H, body);
+}
+
+// ── Gitter/skärm-geometri (makeGratingScreen) ────────────────────────
+//
+// Ritar interferensgeometrin: gitter till vänster, skärm på avståndet ℓ
+// till höger, centralmax rakt fram och n:te ordningens max på höjden x
+// över centralmax. Avböjningsvinkeln α markeras vid gittret.
+//
+//   opts = {
+//     ellLabel,      // 'ℓ = 2,0 m'   (avstånd gitter→skärm)
+//     xLabel,        // 'x = 21 cm'   (centralmax→n:te max på skärmen)
+//     alphaLabel,    // default 'α'
+//     orderLabel,    // default '1:a max' (etikett vid den avböjda maxpunkten)
+//   }
+function makeGratingScreen(opts) {
+    opts = opts || {};
+    const W = 430, H = 250;
+    const gx = 78, sx = 300, cy = 165;   // gitter-x, skärm-x, optisk axel-y
+    const xPix = 92;                      // visuell höjd centralmax→1:a max
+    const topY = cy - xPix;
+    let body = '';
+
+    // Skärm (höger) och gitter (vänster) som vertikala stänger
+    body += `<line x1="${sx}" y1="58" x2="${sx}" y2="205" stroke="${SCENE_INK}" stroke-width="3"/>`;
+    body += `<line x1="${gx}" y1="120" x2="${gx}" y2="205" stroke="${SCENE_INK}" stroke-width="3"/>`;
+    // Spaltmarkeringar i gittret (vita luckor)
+    for (const sy of [140, 152, 164, 176, 188]) {
+        body += `<line x1="${gx}" y1="${sy - 1}" x2="${gx}" y2="${sy + 1}" stroke="#fff" stroke-width="3"/>`;
+    }
+    body += sceneText(gx, 110, 'gitter', { size: 12, color: SCENE_INK });
+    body += sceneText(sx, 48, 'skärm', { size: 12, color: SCENE_INK });
+
+    // Optisk axel (central stråle) — streckad — och avböjd stråle till 1:a max
+    body += `<line x1="${gx}" y1="${cy}" x2="${sx}" y2="${cy}" stroke="${SCENE_MUTED}" stroke-width="1.3" stroke-dasharray="5 4"/>`;
+    body += `<line x1="${gx}" y1="${cy}" x2="${sx}" y2="${topY}" stroke="${SCENE_ACCENT}" stroke-width="2.2"/>`;
+
+    // Maxpunkter på skärmen
+    body += `<circle cx="${sx}" cy="${cy}" r="3.5" fill="${SCENE_INK}"/>`;
+    body += `<circle cx="${sx}" cy="${topY}" r="3.5" fill="${SCENE_ACCENT}"/>`;
+    body += sceneText(sx, 224, 'centralmax', { size: 12, color: SCENE_INK });
+    body += sceneText(sx - 8, topY - 12, opts.orderLabel || '1:a max', { size: 12, color: SCENE_ACCENT });
+
+    // Avböjningsvinkel α vid gittret (mellan axeln och avböjda strålen)
+    const aRay = Math.atan2(topY - cy, sx - gx);
+    body += sceneAngleArc(gx, cy, 46, 0, aRay, opts.alphaLabel || 'α');
+
+    // Mått: ℓ längs axeln (under) och x lodrätt på skärmen (höger)
+    if (opts.ellLabel) body += sceneDim(gx, cy + 34, sx, cy + 34, opts.ellLabel);
+    if (opts.xLabel) body += sceneDim(sx + 30, cy, sx + 30, topY, opts.xLabel);
+
+    return sceneWrap(W, H, body);
 }
 
 window.OVNINGAR = {
@@ -8648,7 +8825,7 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
 
 **Svar:** Alternativ C — andra huvudsatsen.
 
-**Generell slutsats:** Detta är vad som gör att tiden känns ha en riktning i termodynamiska processer — vi ser aldrig en söndertrasad kopp "lägga ihop sig själv", och kall mjölk värms inte spontant upp i kylen. Andra huvudsatsen är intimt kopplad till begreppet **entropi** (oordning), som ni stöter på i Fysik 2.`,
+**Generell slutsats:** Detta är vad som gör att tiden känns ha en riktning i termodynamiska processer — vi ser aldrig en söndertrasad kopp "lägga ihop sig själv", och kall mjölk värms inte spontant upp i kylen. Andra huvudsatsen är intimt kopplad till begreppet **entropi** (oordning), som ni stöter på i Fysik – fördjupning.`,
         },
         {
             level: 1,
@@ -12721,7 +12898,7 @@ $$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{2{,}0 \\cdot 0
     ],
 
     // ════════════════════════════════════════════════════════════════════
-    // Fysik 2 — Kapitel 2: Mekaniska vågor
+    // Fysik – fördjupning — Kapitel 2: Mekaniska vågor
     // ════════════════════════════════════════════════════════════════════
 
     'fy2-2.1': [
@@ -14903,7 +15080,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2/3} = 340 \\cdot \\frac{3}{2} = 510\\ 
     ],
 
     // ════════════════════════════════════════════════════════════════════
-    // Fysik 2 — Kapitel 3: Elektromagnetism
+    // Fysik – fördjupning — Kapitel 3: Elektromagnetism
     // ════════════════════════════════════════════════════════════════════
 
     'fy2-3.1': [
@@ -16534,7 +16711,7 @@ $$ vB = \\frac{U}{d} \\quad\\Leftrightarrow\\quad U = v\\cdot d\\cdot B $$
 
 **Svar:** $U = v\\cdot d\\cdot B$.
 
-**Generell slutsats:** Härledningen är ett klassiskt exempel på *två fundamentala principer* som kombineras: kraftbalans (jämvikt) + elektrostatik ($\\mathbb{E} = U/d$ från Fysik 1). Att se den röda tråden mellan kurserna är en kärnkompetens på Fysik 2-nivå.`,
+**Generell slutsats:** Härledningen är ett klassiskt exempel på *två fundamentala principer* som kombineras: kraftbalans (jämvikt) + elektrostatik ($\\mathbb{E} = U/d$ från Fysik). Att se den röda tråden mellan kurserna är en kärnkompetens på Fysik – fördjupning-nivå.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
@@ -16551,6 +16728,769 @@ $$ U = v\\cdot d\\cdot B \\quad\\Leftrightarrow\\quad v = \\frac{U}{d\\cdot B} =
 **Svar:** Driftshastigheten är ungefär $1\\ \\mathrm{mm/s}$ — extremt långsam.
 
 **Generell slutsats:** Det är en av elektrofysikens mest motintuitiva resultat: även när en stor ström flyter, är *enskilda elektroners* genomsnittliga driftshastighet bara några mm/s. Strömmen kommer från det enorma *antalet* elektroner (storleksordning $10^{28}$ per kubikmeter), inte från att de rör sig snabbt. Detta förklarar också varför ljus i ett rum tänds *omedelbart* när brytaren slås på — det är inte elektronernas rörelse som "går fram" snabbt utan **det elektriska fältet** som etableras med ljusets hastighet i ledaren.`,
+        },
+    ],
+
+    // ════════════════════════════════════════════════════════════════
+    //  Kapitel 4 — Ljus som våg och partikel
+    // ════════════════════════════════════════════════════════════════
+
+    'fy2-4.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Grönt ljus har våglängden $\\lambda = 550\\ \\mathrm{nm}$. Beräkna ljusets frekvens. Räkna med $c = 2{,}998\\cdot 10^{8}\\ \\mathrm{m/s}$.`,
+            answer: { value: 5.45e14, unit: 'Hz' },
+            solution: `Sambandet mellan frekvens, ljushastighet och våglängd:
+
+$$ f = \\frac{c}{\\lambda} $$
+
+$$
+\\left[ \\begin{array}{l}
+c = 2{,}998\\cdot 10^{8}\\ \\mathrm{m/s} \\\\
+\\lambda = 550\\ \\mathrm{nm} = 550\\cdot 10^{-9}\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ f = \\frac{2{,}998\\cdot 10^{8}}{550\\cdot 10^{-9}} = 5{,}45\\cdot 10^{14}\\ \\mathrm{Hz} $$
+
+**Svar:** Frekvensen är $5{,}45\\cdot 10^{14}\\ \\mathrm{Hz}$.`,
+        },
+        {
+            level: 1,
+            question: `En liten lampa strålar ljuset $P = 60\\ \\mathrm{W}$ jämnt åt alla håll (punktkälla). Beräkna ljusintensiteten på avståndet $r = 2{,}0\\ \\mathrm{m}$ från lampan.`,
+            answer: { value: 1.19, unit: 'W/m²' },
+            solution: `Ljuset fördelas över en sfär med arean $A = 4\\pi r^2$:
+
+$$ I = \\frac{P}{4\\pi r^2} = \\frac{60}{4\\pi \\cdot (2{,}0)^2} = \\frac{60}{50{,}27} = 1{,}19\\ \\mathrm{W/m^2} $$
+
+**Svar:** Ljusintensiteten är $1{,}2\\ \\mathrm{W/m^2}$.`,
+        },
+        {
+            level: 1,
+            question: `En FM-radiosändare sänder med frekvensen $f = 100\\ \\mathrm{MHz}$. Beräkna radiovågornas våglängd.`,
+            answer: { value: 3.0, unit: 'm' },
+            solution: `Radiovågor är elektromagnetiska vågor och rör sig med ljusets hastighet. Lös ut våglängden ur $f = c/\\lambda$:
+
+$$ f = \\frac{c}{\\lambda} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{c}{f} = \\frac{2{,}998\\cdot 10^{8}}{100\\cdot 10^{6}} = 3{,}0\\ \\mathrm{m} $$
+
+**Svar:** Våglängden är $3{,}0\\ \\mathrm{m}$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En punktformig ljuskälla strålar jämnt åt alla håll. På avståndet $4{,}0\\ \\mathrm{m}$ är ljusintensiteten $1{,}5\\ \\mathrm{W/m^2}$. Beräkna ljusintensiteten på avståndet $12\\ \\mathrm{m}$.`,
+            answer: { value: 0.167, unit: 'W/m²' },
+            solution: `**Steg 1 — källans effekt.** Ur $I = P/(4\\pi r^2)$:
+
+$$ P = I_1 \\cdot 4\\pi r_1^2 = 1{,}5 \\cdot 4\\pi \\cdot (4{,}0)^2 = 302\\ \\mathrm{W} $$
+
+**Steg 2 — intensiteten på det nya avståndet.**
+
+$$ I_2 = \\frac{P}{4\\pi r_2^2} = \\frac{302}{4\\pi \\cdot (12)^2} = 0{,}167\\ \\mathrm{W/m^2} $$
+
+**Svar:** Ljusintensiteten är $0{,}17\\ \\mathrm{W/m^2}$.
+
+**Generell slutsats:** Avståndet tredubblades $(4 \\to 12\\ \\mathrm{m})$ och intensiteten blev $3^2 = 9$ gånger mindre. Intensiteten avtar med **kvadraten** på avståndet — det är hela innebörden av att energin sprids över en sfär vars area växer som $r^2$.`,
+        },
+        {
+            level: 2,
+            question: `En radiosändare strålar effekten $P = 50\\ \\mathrm{kW}$ jämnt åt alla håll. På vilket avstånd från sändaren har signalen sjunkit till intensiteten $1{,}0\\ \\mathrm{\\mu W/m^2}$?`,
+            answer: { value: 63, unit: 'km' },
+            solution: `Lös ut avståndet ur intensitetsformeln:
+
+$$ I = \\frac{P}{4\\pi r^2} \\quad\\Leftrightarrow\\quad r = \\sqrt{\\frac{P}{4\\pi I}} $$
+
+$$
+\\left[ \\begin{array}{l}
+P = 50\\ \\mathrm{kW} = 5{,}0\\cdot 10^{4}\\ \\mathrm{W} \\\\
+I = 1{,}0\\ \\mathrm{\\mu W/m^2} = 1{,}0\\cdot 10^{-6}\\ \\mathrm{W/m^2}
+\\end{array} \\right]
+$$
+
+$$ r = \\sqrt{\\frac{5{,}0\\cdot 10^{4}}{4\\pi \\cdot 1{,}0\\cdot 10^{-6}}} = \\sqrt{3{,}98\\cdot 10^{9}} = 6{,}3\\cdot 10^{4}\\ \\mathrm{m} $$
+
+**Svar:** På ungefär $63\\ \\mathrm{km}$.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två stjärnor ser **exakt lika ljusstarka** ut från jorden. Stjärna B ligger $3{,}0$ gånger så långt bort som stjärna A. Hur många gånger större är stjärna B:s utstrålade effekt jämfört med stjärna A:s?`,
+            answer: { value: 9, unit: 'ggr' },
+            solution: `**Insikten:** "lika ljusstarka från jorden" betyder att **ljusintensiteten är lika** vid jorden, $I_\\mathrm{A} = I_\\mathrm{B}$ — *inte* att effekterna är lika.
+
+Intensiteten vid jorden är $I = P/(4\\pi r^2)$. Sätt dem lika:
+
+$$ \\frac{P_\\mathrm{A}}{4\\pi r_\\mathrm{A}^2} = \\frac{P_\\mathrm{B}}{4\\pi r_\\mathrm{B}^2} $$
+
+$4\\pi$ förkortas bort. Lös ut kvoten mellan effekterna:
+
+$$ \\frac{P_\\mathrm{B}}{P_\\mathrm{A}} = \\frac{r_\\mathrm{B}^2}{r_\\mathrm{A}^2} = \\left(\\frac{r_\\mathrm{B}}{r_\\mathrm{A}}\\right)^2 = 3{,}0^2 = 9 $$
+
+**Svar:** Stjärna B strålar ut $9$ gånger mer effekt.
+
+**Generell slutsats:** Den gemensamma okända faktorn (intensiteten, och $4\\pi$) stryks när man bildar kvoten *innan* insättning. Eftersom intensiteten avtar som $1/r^2$ måste en stjärna som ligger $3\\times$ längre bort lysa $3^2 = 9\\times$ starkare för att se lika klar ut — så fungerar astronomers resonemang om *skenbar* kontra *absolut* ljusstyrka.`,
+        },
+    ],
+
+    'fy2-4.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett gitter med 500 linjer/mm belyses vinkelrätt med monokromatiskt ljus med våglängden $\\lambda = 600\\ \\mathrm{nm}$. Beräkna avböjningsvinkeln till första ordningens maximum $(n = 1)$.`,
+            answer: { value: 17.5, unit: '°' },
+            solution: `Spaltavståndet är $d = \\tfrac{1}{500}\\ \\mathrm{mm} = 2{,}0\\cdot 10^{-6}\\ \\mathrm{m}$. Gitterformeln, löst för vinkeln:
+
+$$ n\\lambda = d\\sin\\alpha_n \\quad\\Leftrightarrow\\quad \\sin\\alpha_n = \\frac{n\\lambda}{d} = \\frac{1 \\cdot 600\\cdot 10^{-9}}{2{,}0\\cdot 10^{-6}} = 0{,}300 $$
+
+$$ \\alpha_1 = \\sin^{-1}(0{,}300) = 17{,}5^\\circ $$
+
+**Svar:** Avböjningsvinkeln är $17{,}5^\\circ$.`,
+        },
+        {
+            level: 1,
+            question: `Ett gitter med 300 linjer/mm belyses med en laser. Första ordningens maximum $(n = 1)$ ligger vid vinkeln $\\alpha_1 = 11{,}0^\\circ$. Beräkna laserljusets våglängd.`,
+            answer: { value: 636, unit: 'nm' },
+            solution: `Spaltavstånd $d = \\tfrac{1}{300}\\ \\mathrm{mm} = 3{,}33\\cdot 10^{-6}\\ \\mathrm{m}$. Lös ut våglängden:
+
+$$ n\\lambda = d\\sin\\alpha_n \\quad\\Leftrightarrow\\quad \\lambda = \\frac{d\\sin\\alpha_n}{n} = \\frac{3{,}33\\cdot 10^{-6} \\cdot \\sin 11{,}0^\\circ}{1} = 6{,}36\\cdot 10^{-7}\\ \\mathrm{m} $$
+
+**Svar:** Våglängden är $636\\ \\mathrm{nm}$ (rött ljus).`,
+        },
+        {
+            level: 1,
+            question: `Monokromatiskt ljus med våglängden $\\lambda = 500\\ \\mathrm{nm}$ ger första ordningens maximum vid $14{,}0^\\circ$ efter ett gitter. Beräkna gitterkonstanten $d$ (avståndet mellan två närliggande spalter).`,
+            answer: { value: 2.07, unit: 'µm' },
+            solution: `Lös ut spaltavståndet ur gitterformeln:
+
+$$ n\\lambda = d\\sin\\alpha_n \\quad\\Leftrightarrow\\quad d = \\frac{n\\lambda}{\\sin\\alpha_n} = \\frac{1 \\cdot 500\\cdot 10^{-9}}{\\sin 14{,}0^\\circ} = 2{,}07\\cdot 10^{-6}\\ \\mathrm{m} $$
+
+**Svar:** Gitterkonstanten är $2{,}07\\ \\mathrm{\\mu m}$ (vilket motsvarar ungefär $480$ linjer/mm).`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Monokromatiskt ljus träffar ett gitter med 200 linjer/mm. På en skärm ligger första ordningens ljusmax $21\\ \\mathrm{cm}$ från centralmax. Skärmen står $2{,}0\\ \\mathrm{m}$ bakom gittret. Beräkna ljusets våglängd.
+
+${makeGratingScreen({ ellLabel: 'ℓ = 2,0 m', xLabel: 'x = 21 cm' })}`,
+            answer: { value: 522, unit: 'nm' },
+            solution: `**Steg 1 — avböjningsvinkeln ur geometrin.** Vinkeln $\\alpha$ fås ur den räta triangeln (motstående katet $x$, närliggande katet $\\ell$):
+
+$$ \\tan\\alpha = \\frac{x}{\\ell} = \\frac{0{,}21}{2{,}0} = 0{,}105 \\quad\\Rightarrow\\quad \\alpha = 5{,}99^\\circ $$
+
+**Steg 2 — våglängden ur gitterformeln.** Spaltavstånd $d = \\tfrac{1}{200}\\ \\mathrm{mm} = 5{,}0\\cdot 10^{-6}\\ \\mathrm{m}$:
+
+$$ \\lambda = \\frac{d\\sin\\alpha}{n} = \\frac{5{,}0\\cdot 10^{-6} \\cdot \\sin 5{,}99^\\circ}{1} = 5{,}22\\cdot 10^{-7}\\ \\mathrm{m} $$
+
+**Svar:** Våglängden är $522\\ \\mathrm{nm}$ (grönt ljus).
+
+**Generell slutsats:** Avböjningsvinkeln avläses inte direkt — den måste först fås ur skärmgeometrin $(\\tan\\alpha = x/\\ell)$ innan gitterformeln kan användas. Detta är standardmetoden för att mäta en okänd våglängd.`,
+        },
+        {
+            level: 2,
+            question: `Ett gitter med 500 linjer/mm belyses med en röd HeNe-laser, $\\lambda = 633\\ \\mathrm{nm}$. Vilken är den **högsta ordningen** $(n)$ som överhuvudtaget kan observeras?`,
+            answer: { value: 3, unit: '' },
+            solution: `Spaltavstånd $d = \\tfrac{1}{500}\\ \\mathrm{mm} = 2{,}0\\cdot 10^{-6}\\ \\mathrm{m}$.
+
+**Insikten:** ett maximum kan bara existera om $\\sin\\alpha_n \\leq 1$. Sätt $\\sin\\alpha_n = 1$ (gränsfallet $\\alpha = 90^\\circ$) i gitterformeln:
+
+$$ n\\lambda = d\\sin\\alpha_n \\leq d \\quad\\Leftrightarrow\\quad n \\leq \\frac{d}{\\lambda} = \\frac{2{,}0\\cdot 10^{-6}}{633\\cdot 10^{-9}} = 3{,}16 $$
+
+Eftersom $n$ måste vara ett heltal är den högsta möjliga ordningen $n = 3$.
+
+**Svar:** Högsta ordningen är $n = 3$.
+
+**Generell slutsats:** Det går inte att få hur många maxima som helst — villkoret $\\sin\\alpha \\leq 1$ sätter en övre gräns. Bråkdelen $0{,}16$ "räcker inte" till en fjärde ordning, så den kastas.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I ett gitterspektrum kan ljus av olika våglängd och ordning hamna på **exakt samma plats** (samma avböjningsvinkel). Andra ordningens linje för rött ljus med $\\lambda = 660\\ \\mathrm{nm}$ sammanfaller med en linje av kortare våglängd i tredje ordningen. Vilken våglängd har det ljuset?`,
+            answer: { value: 440, unit: 'nm' },
+            solution: `**Insikten:** "samma plats" betyder **samma vinkel** $\\alpha$, alltså samma $d\\sin\\alpha$. Eftersom $d\\sin\\alpha = n\\lambda$ för varje linje måste produkten $n\\lambda$ vara densamma för de två sammanfallande linjerna:
+
+$$ n_1 \\lambda_1 = n_2 \\lambda_2 $$
+
+Här är $n_1 = 2$, $\\lambda_1 = 660\\ \\mathrm{nm}$ och $n_2 = 3$. Både $d$ och $\\sin\\alpha$ förkortas bort:
+
+$$ \\lambda_2 = \\frac{n_1 \\lambda_1}{n_2} = \\frac{2 \\cdot 660}{3} = 440\\ \\mathrm{nm} $$
+
+**Svar:** Ljuset har våglängden $440\\ \\mathrm{nm}$ (blått/violett).
+
+**Generell slutsats:** Man behöver varken känna $d$ eller $\\alpha$ — de stryks i kvoten. Detta överlapp mellan ordningar är ett verkligt problem i spektroskopi: höga ordningar av kortvågigt ljus "förorenar" låga ordningar av långvågigt, och måste filtreras bort.`,
+        },
+    ],
+
+    'fy2-4.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En glödtråd håller temperaturen $T = 2\\,500\\ \\mathrm{K}$ och strålar som en svart kropp. Vid vilken våglängd är emittansen störst? Räkna med Wiens konstant $2{,}8978\\cdot 10^{-3}\\ \\mathrm{m\\cdot K}$.`,
+            answer: { value: 1159, unit: 'nm' },
+            solution: `Wiens förskjutningslag, löst för toppvåglängden:
+
+$$ \\lambda_\\mathrm{max}\\cdot T = 2{,}8978\\cdot 10^{-3} \\quad\\Leftrightarrow\\quad \\lambda_\\mathrm{max} = \\frac{2{,}8978\\cdot 10^{-3}}{T} = \\frac{2{,}8978\\cdot 10^{-3}}{2\\,500} = 1{,}16\\cdot 10^{-6}\\ \\mathrm{m} $$
+
+**Svar:** Toppvåglängden är ungefär $1\\,160\\ \\mathrm{nm}$ (infrarött — därför känns en glödlampa varm).`,
+        },
+        {
+            level: 1,
+            question: `En svart kropp håller temperaturen $T = 1\\,000\\ \\mathrm{K}$. Beräkna dess emittans (utstrålad effekt per kvadratmeter). Räkna med $\\sigma = 5{,}67\\cdot 10^{-8}\\ \\mathrm{W/(m^2\\cdot K^4)}$.`,
+            answer: { value: 56.7, unit: 'kW/m²' },
+            solution: `Stefan–Boltzmanns lag:
+
+$$ M = \\sigma T^4 = 5{,}67\\cdot 10^{-8} \\cdot (1\\,000)^4 = 5{,}67\\cdot 10^{-8} \\cdot 10^{12} = 5{,}67\\cdot 10^{4}\\ \\mathrm{W/m^2} $$
+
+**Svar:** Emittansen är $56{,}7\\ \\mathrm{kW/m^2}$.`,
+        },
+        {
+            level: 1,
+            question: `En svart platta med arean $A = 0{,}020\\ \\mathrm{m^2}$ har emittansen $M = 460\\ \\mathrm{W/m^2}$. Beräkna den totala effekt som plattan strålar ut.`,
+            answer: { value: 9.2, unit: 'W' },
+            solution: `Emittansen är utstrålad effekt per area, $M = P/A$. Lös ut effekten:
+
+$$ P = M \\cdot A = 460 \\cdot 0{,}020 = 9{,}2\\ \\mathrm{W} $$
+
+**Svar:** Plattan strålar ut $9{,}2\\ \\mathrm{W}$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En glödtråd kan ses som en svart kropp med temperaturen $T = 2\\,800\\ \\mathrm{K}$ och total yta $A = 8{,}0\\cdot 10^{-5}\\ \\mathrm{m^2}$. Beräkna den effekt som tråden strålar ut.`,
+            answer: { value: 279, unit: 'W' },
+            solution: `**Steg 1 — emittansen ur Stefan–Boltzmanns lag.**
+
+$$ M = \\sigma T^4 = 5{,}67\\cdot 10^{-8} \\cdot (2\\,800)^4 = 3{,}49\\cdot 10^{6}\\ \\mathrm{W/m^2} $$
+
+**Steg 2 — total effekt.** $M = P/A$ ger
+
+$$ P = M \\cdot A = 3{,}49\\cdot 10^{6} \\cdot 8{,}0\\cdot 10^{-5} = 279\\ \\mathrm{W} $$
+
+**Svar:** Glödtråden strålar ut ungefär $280\\ \\mathrm{W}$.
+
+**Generell slutsats:** Stefan–Boltzmanns lag ger effekt **per area**; för total effekt måste man multiplicera med ytan. Den fjärde potensen gör att effekten är extremt temperaturkänslig.`,
+        },
+        {
+            level: 2,
+            question: `En stjärna har sin maximala emittans vid våglängden $\\lambda_\\mathrm{max} = 480\\ \\mathrm{nm}$. Behandla stjärnan som en svart kropp och beräkna dess emittans $M$.`,
+            answer: { value: 7.53e7, unit: 'W/m²', tol: 0.04 },
+            solution: `**Steg 1 — yttemperaturen ur Wiens lag.**
+
+$$ T = \\frac{2{,}8978\\cdot 10^{-3}}{\\lambda_\\mathrm{max}} = \\frac{2{,}8978\\cdot 10^{-3}}{480\\cdot 10^{-9}} = 6\\,037\\ \\mathrm{K} $$
+
+**Steg 2 — emittansen ur Stefan–Boltzmanns lag.**
+
+$$ M = \\sigma T^4 = 5{,}67\\cdot 10^{-8} \\cdot (6\\,037)^4 = 7{,}53\\cdot 10^{7}\\ \\mathrm{W/m^2} $$
+
+**Svar:** Emittansen är ungefär $7{,}5\\cdot 10^{7}\\ \\mathrm{W/m^2}$.
+
+**Generell slutsats:** Toppvåglängden ger temperaturen (Wien), temperaturen ger emittansen (Stefan–Boltzmann). Två svartkroppslagar i kedja — färgen på en stjärna avslöjar alltså både hur het och hur intensiv den är.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två svarta kroppar har **samma yta**. Kropp A har sin toppvåglängd vid $600\\ \\mathrm{nm}$, kropp B vid $400\\ \\mathrm{nm}$. Hur många gånger större emittans har kropp B jämfört med kropp A?`,
+            answer: { value: 5.06, unit: 'ggr', tol: 0.03 },
+            solution: `**Insikten:** kombinera Wien (temperaturen) med Stefan–Boltzmann (emittansen) som *kvoter*, så att konstanterna stryks.
+
+**Temperaturkvoten ur Wiens lag** $(\\lambda_\\mathrm{max} T = \\text{konst})$ — kortare toppvåglängd betyder högre temperatur:
+
+$$ \\frac{T_\\mathrm{B}}{T_\\mathrm{A}} = \\frac{\\lambda_\\mathrm{A}}{\\lambda_\\mathrm{B}} = \\frac{600}{400} = 1{,}5 $$
+
+**Emittanskvoten ur Stefan–Boltzmann** $(M = \\sigma T^4)$ — $\\sigma$ förkortas:
+
+$$ \\frac{M_\\mathrm{B}}{M_\\mathrm{A}} = \\left(\\frac{T_\\mathrm{B}}{T_\\mathrm{A}}\\right)^4 = 1{,}5^4 = 5{,}06 $$
+
+**Svar:** Kropp B strålar ut ungefär $5{,}1$ gånger mer per kvadratmeter.
+
+**Generell slutsats:** Varken temperaturerna eller $\\sigma$ behöver räknas ut — allt sker som kvoter där de okända faktorerna försvinner. En blåare kropp (kortare $\\lambda_\\mathrm{max}$) är alltid både hetare *och* intensivare, och $T^4$-beroendet förstärker skillnaden kraftigt.`,
+        },
+    ],
+
+    'fy2-4.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Brytningsindex för diamant är $n = 2{,}42$. Beräkna ljusets hastighet i diamant. Räkna med $c = 2{,}998\\cdot 10^{8}\\ \\mathrm{m/s}$.`,
+            answer: { value: 1.24e8, unit: 'm/s' },
+            solution: `Brytningsindex $n = c/v$, löst för hastigheten i ämnet:
+
+$$ n = \\frac{c}{v} \\quad\\Leftrightarrow\\quad v = \\frac{c}{n} = \\frac{2{,}998\\cdot 10^{8}}{2{,}42} = 1{,}24\\cdot 10^{8}\\ \\mathrm{m/s} $$
+
+**Svar:** Ljusets hastighet i diamant är $1{,}24\\cdot 10^{8}\\ \\mathrm{m/s}$ (ungefär $41\\,\\%$ av hastigheten i vakuum).`,
+        },
+        {
+            level: 1,
+            question: `En ljusstråle träffar en glasyta från luft med infallsvinkeln $i = 40^\\circ$. Glasets brytningsindex är $n_2 = 1{,}52$ (luft: $n_1 = 1{,}00$). Beräkna brytningsvinkeln $b$.
+
+${makeRefraction({ i: 40, b: 25, iLabel: '40°', bLabel: 'b', medium1: 'Luft', medium2: 'Glas' })}`,
+            answer: { value: 25.0, unit: '°' },
+            solution: `Brytningslagen (Snells lag), löst för brytningsvinkeln:
+
+$$ n_1\\sin i = n_2\\sin b \\quad\\Leftrightarrow\\quad \\sin b = \\frac{n_1\\sin i}{n_2} = \\frac{1{,}00\\cdot\\sin 40^\\circ}{1{,}52} = 0{,}423 $$
+
+$$ b = \\sin^{-1}(0{,}423) = 25^\\circ $$
+
+**Svar:** Brytningsvinkeln är $25^\\circ$. Strålen bryts **mot** normalen eftersom glas är optiskt tätare än luft.`,
+        },
+        {
+            level: 1,
+            question: `En ljusstråle går från vatten $(n_1 = 1{,}33)$ upp mot ytan mot luft $(n_2 = 1{,}00)$ med infallsvinkeln $i = 30^\\circ$. Beräkna brytningsvinkeln $b$ i luften.
+
+${makeRefraction({ i: 30, b: 42, iLabel: '30°', bLabel: 'b', medium1: 'Vatten', medium2: 'Luft' })}`,
+            answer: { value: 41.7, unit: '°' },
+            solution: `Snells lag, löst för brytningsvinkeln:
+
+$$ \\sin b = \\frac{n_1\\sin i}{n_2} = \\frac{1{,}33\\cdot\\sin 30^\\circ}{1{,}00} = 1{,}33 \\cdot 0{,}500 = 0{,}665 $$
+
+$$ b = \\sin^{-1}(0{,}665) = 41{,}7^\\circ $$
+
+**Svar:** Brytningsvinkeln är ungefär $42^\\circ$. Strålen bryts **från** normalen $(b > i)$ eftersom den går från ett tätare till ett tunnare medium.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ljusets hastighet i ett glas är $v = 2{,}00\\cdot 10^{8}\\ \\mathrm{m/s}$. En stråle träffar glaset från luft med infallsvinkeln $i = 55^\\circ$. Beräkna brytningsvinkeln $b$ i glaset.
+
+${makeRefraction({ i: 55, b: 33, iLabel: '55°', bLabel: 'b', medium1: 'Luft', medium2: 'Glas' })}`,
+            answer: { value: 33.1, unit: '°' },
+            solution: `**Steg 1 — glasets brytningsindex.**
+
+$$ n_2 = \\frac{c}{v} = \\frac{2{,}998\\cdot 10^{8}}{2{,}00\\cdot 10^{8}} = 1{,}50 $$
+
+**Steg 2 — brytningsvinkeln ur Snells lag** $(n_1 = 1{,}00)$:
+
+$$ \\sin b = \\frac{n_1\\sin i}{n_2} = \\frac{\\sin 55^\\circ}{1{,}50} = 0{,}546 \\quad\\Rightarrow\\quad b = 33{,}1^\\circ $$
+
+**Svar:** Brytningsvinkeln är ungefär $33^\\circ$.
+
+**Generell slutsats:** Brytningsindexet är inte givet direkt utan måste först fås ur ljushastigheten $(n = c/v)$. Två formler i följd.`,
+        },
+        {
+            level: 2,
+            question: `En ljusstråle går från luft $(n_1 = 1{,}00)$ ner i en vätska med infallsvinkeln $i = 50^\\circ$ och bryts till brytningsvinkeln $b = 35^\\circ$. Beräkna ljusets hastighet i vätskan.
+
+${makeRefraction({ i: 50, b: 35, iLabel: '50°', bLabel: '35°', medium1: 'Luft', medium2: 'Vätska' })}`,
+            answer: { value: 2.25e8, unit: 'm/s' },
+            solution: `**Steg 1 — vätskans brytningsindex ur Snells lag.**
+
+$$ n_2 = \\frac{n_1\\sin i}{\\sin b} = \\frac{1{,}00\\cdot\\sin 50^\\circ}{\\sin 35^\\circ} = \\frac{0{,}766}{0{,}574} = 1{,}34 $$
+
+**Steg 2 — ljusets hastighet i vätskan** $(n = c/v)$:
+
+$$ v = \\frac{c}{n_2} = \\frac{2{,}998\\cdot 10^{8}}{1{,}34} = 2{,}25\\cdot 10^{8}\\ \\mathrm{m/s} $$
+
+**Svar:** Ljusets hastighet i vätskan är ungefär $2{,}25\\cdot 10^{8}\\ \\mathrm{m/s}$.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En ljusstråle går från luft $(n = 1{,}00)$ genom ett lager glas $(n = 1{,}52)$ och vidare ner i vatten $(n = 1{,}33)$. Infallsvinkeln i luften är $i = 40^\\circ$. Bestäm brytningsvinkeln $b$ i vattnet — och förklara varför glasets brytningsindex inte påverkar svaret.
+
+${makeRefractionStack({ nTop: 1.00, nMid: 1.52, nBot: 1.33, i: 40, labelTop: 'Luft', labelMid: 'Glas', labelBot: 'Vatten', iLabel: '40°', bLabel: 'b' })}`,
+            answer: { value: 28.9, unit: '°' },
+            solution: `**Insikten:** tillämpa Snells lag vid *varje* gränsyta och kedja ihop dem.
+
+Vid luft–glas: $\\;n_\\mathrm{luft}\\sin i = n_\\mathrm{glas}\\sin b_\\mathrm{glas}$
+
+Vid glas–vatten: $\\;n_\\mathrm{glas}\\sin b_\\mathrm{glas} = n_\\mathrm{vatten}\\sin b$
+
+Den mellersta produkten $n_\\mathrm{glas}\\sin b_\\mathrm{glas}$ är **gemensam** för båda likheterna. Den kan därför elimineras helt:
+
+$$ n_\\mathrm{luft}\\sin i = n_\\mathrm{vatten}\\sin b $$
+
+Glaslagret har försvunnit ur ekvationen! Lös ut $b$:
+
+$$ \\sin b = \\frac{n_\\mathrm{luft}\\sin i}{n_\\mathrm{vatten}} = \\frac{1{,}00\\cdot\\sin 40^\\circ}{1{,}33} = 0{,}483 \\quad\\Rightarrow\\quad b = 28{,}9^\\circ $$
+
+**Svar:** Brytningsvinkeln i vattnet är ungefär $28{,}9^\\circ$ — exakt samma som om glaset inte hade funnits där.
+
+**Generell slutsats:** Slutvinkeln i vattnet beror bara på det **första** och det **sista** mediet. Ett mellanliggande planparallellt lager (oavsett brytningsindex) förskjuter strålen i sidled men ändrar inte dess riktning. Att genomskåda att mellanlagret stryks är hela poängen.`,
+        },
+    ],
+
+    'fy2-4.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna energin hos en foton med våglängden $\\lambda = 500\\ \\mathrm{nm}$. Svara i elektronvolt. Räkna med $h = 6{,}626\\cdot 10^{-34}\\ \\mathrm{Js}$, $c = 2{,}998\\cdot 10^{8}\\ \\mathrm{m/s}$ och $1\\ \\mathrm{eV} = 1{,}602\\cdot 10^{-19}\\ \\mathrm{J}$.`,
+            answer: { value: 2.48, unit: 'eV' },
+            solution: `Fotonens energi:
+
+$$ E = \\frac{hc}{\\lambda} = \\frac{6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 10^{8}}{500\\cdot 10^{-9}} = 3{,}97\\cdot 10^{-19}\\ \\mathrm{J} $$
+
+Omvandla till elektronvolt:
+
+$$ E = \\frac{3{,}97\\cdot 10^{-19}}{1{,}602\\cdot 10^{-19}} = 2{,}48\\ \\mathrm{eV} $$
+
+**Svar:** Fotonens energi är $2{,}48\\ \\mathrm{eV}$.`,
+        },
+        {
+            level: 1,
+            question: `Beräkna rörelsemängden hos en foton med våglängden $\\lambda = 400\\ \\mathrm{nm}$.`,
+            answer: { value: 1.66e-27, unit: 'kg·m/s' },
+            solution: `Fotonens rörelsemängd:
+
+$$ p = \\frac{h}{\\lambda} = \\frac{6{,}626\\cdot 10^{-34}}{400\\cdot 10^{-9}} = 1{,}66\\cdot 10^{-27}\\ \\mathrm{kg\\cdot m/s} $$
+
+**Svar:** Rörelsemängden är $1{,}66\\cdot 10^{-27}\\ \\mathrm{kg\\cdot m/s}$. Trots att fotonen saknar massa har den rörelsemängd.`,
+        },
+        {
+            level: 1,
+            question: `En foton med energin $4{,}0\\ \\mathrm{eV}$ träffar en metallyta vars utträdesarbete är $W_\\mathrm{u} = 2{,}3\\ \\mathrm{eV}$. Beräkna rörelseenergin hos den elektron som slås loss.`,
+            answer: { value: 1.7, unit: 'eV' },
+            solution: `Den fotoelektriska ekvationen, löst för elektronens rörelseenergi:
+
+$$ hf = W_\\mathrm{u} + E_\\mathrm{k} \\quad\\Leftrightarrow\\quad E_\\mathrm{k} = hf - W_\\mathrm{u} = 4{,}0 - 2{,}3 = 1{,}7\\ \\mathrm{eV} $$
+
+**Svar:** Elektronens rörelseenergi är $1{,}7\\ \\mathrm{eV}$.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ljus med våglängden $\\lambda = 400\\ \\mathrm{nm}$ träffar en metallyta med utträdesarbetet $W_\\mathrm{u} = 2{,}0\\ \\mathrm{eV}$. Beräkna hastigheten hos den utslagna elektronen. Elektronens massa är $m = 9{,}11\\cdot 10^{-31}\\ \\mathrm{kg}$.`,
+            answer: { value: 6.22e5, unit: 'm/s', tol: 0.03 },
+            solution: `**Steg 1 — fotonens energi.**
+
+$$ E = \\frac{hc}{\\lambda} = \\frac{6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 10^{8}}{400\\cdot 10^{-9}} = 4{,}97\\cdot 10^{-19}\\ \\mathrm{J} = 3{,}10\\ \\mathrm{eV} $$
+
+**Steg 2 — elektronens rörelseenergi.**
+
+$$ E_\\mathrm{k} = hf - W_\\mathrm{u} = 3{,}10 - 2{,}0 = 1{,}10\\ \\mathrm{eV} = 1{,}76\\cdot 10^{-19}\\ \\mathrm{J} $$
+
+**Steg 3 — elektronens hastighet** ur $E_\\mathrm{k} = \\tfrac{mv^2}{2}$:
+
+$$ v = \\sqrt{\\frac{2E_\\mathrm{k}}{m}} = \\sqrt{\\frac{2\\cdot 1{,}76\\cdot 10^{-19}}{9{,}11\\cdot 10^{-31}}} = 6{,}22\\cdot 10^{5}\\ \\mathrm{m/s} $$
+
+**Svar:** Elektronens hastighet är ungefär $6{,}2\\cdot 10^{5}\\ \\mathrm{m/s}$.
+
+**Generell slutsats:** Tre steg — fotonens energi, överskottsenergin efter utträdesarbetet, och slutligen hastigheten. Glöm inte att omvandla eV till joule innan rörelseenergiformeln.`,
+        },
+        {
+            level: 2,
+            question: `En metall har utträdesarbetet $W_\\mathrm{u} = 2{,}3\\ \\mathrm{eV}$. Vilken är den **längsta** våglängd (gränsvåglängden) som precis kan slå loss elektroner ur metallen?`,
+            answer: { value: 539, unit: 'nm' },
+            solution: `**Insikten:** vid gränsvåglängden är elektronens rörelseenergi precis noll $(E_\\mathrm{k} = 0)$ — fotonen har då exakt nog energi för att frigöra elektronen, inget mer. Då gäller $hf = W_\\mathrm{u}$, alltså:
+
+$$ \\frac{hc}{\\lambda} = W_\\mathrm{u} \\quad\\Leftrightarrow\\quad \\lambda = \\frac{hc}{W_\\mathrm{u}} $$
+
+$$
+\\left[ \\begin{array}{l}
+hc = 6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 10^{8} = 1{,}986\\cdot 10^{-25}\\ \\mathrm{Jm} \\\\
+W_\\mathrm{u} = 2{,}3\\ \\mathrm{eV} = 2{,}3\\cdot 1{,}602\\cdot 10^{-19} = 3{,}68\\cdot 10^{-19}\\ \\mathrm{J}
+\\end{array} \\right]
+$$
+
+$$ \\lambda = \\frac{1{,}986\\cdot 10^{-25}}{3{,}68\\cdot 10^{-19}} = 5{,}39\\cdot 10^{-7}\\ \\mathrm{m} $$
+
+**Svar:** Gränsvåglängden är $539\\ \\mathrm{nm}$. Ljus med *längre* våglängd (lägre energi) kan inte slå loss några elektroner — oavsett hur starkt det lyser.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I ett experiment belyses samma metall med två olika våglängder. Med $\\lambda_1 = 400\\ \\mathrm{nm}$ får de utslagna elektronerna rörelseenergin $1{,}10\\ \\mathrm{eV}$, med $\\lambda_2 = 300\\ \\mathrm{nm}$ blir rörelseenergin $2{,}13\\ \\mathrm{eV}$. Bestäm **Plancks konstant** enbart ur dessa mätdata.`,
+            answer: { value: 6.6e-34, unit: 'Js', tol: 0.04 },
+            solution: `**Insikten:** ställ upp den fotoelektriska ekvationen för *båda* mätningarna och **eliminera det okända utträdesarbetet** genom att subtrahera dem.
+
+$$ hf_1 = W_\\mathrm{u} + E_{\\mathrm{k},1} \\qquad hf_2 = W_\\mathrm{u} + E_{\\mathrm{k},2} $$
+
+Subtraktion stryker $W_\\mathrm{u}$:
+
+$$ h(f_2 - f_1) = E_{\\mathrm{k},2} - E_{\\mathrm{k},1} \\quad\\Leftrightarrow\\quad h = \\frac{E_{\\mathrm{k},2} - E_{\\mathrm{k},1}}{f_2 - f_1} $$
+
+Frekvenserna $(f = c/\\lambda)$:
+
+$$ f_1 = \\frac{2{,}998\\cdot 10^{8}}{400\\cdot 10^{-9}} = 7{,}50\\cdot 10^{14}\\ \\mathrm{Hz}, \\qquad f_2 = \\frac{2{,}998\\cdot 10^{8}}{300\\cdot 10^{-9}} = 9{,}99\\cdot 10^{14}\\ \\mathrm{Hz} $$
+
+Energiskillnaden $(2{,}13 - 1{,}10 = 1{,}03\\ \\mathrm{eV} = 1{,}65\\cdot 10^{-19}\\ \\mathrm{J})$:
+
+$$ h = \\frac{1{,}65\\cdot 10^{-19}}{(9{,}99 - 7{,}50)\\cdot 10^{14}} = \\frac{1{,}65\\cdot 10^{-19}}{2{,}50\\cdot 10^{14}} = 6{,}6\\cdot 10^{-34}\\ \\mathrm{Js} $$
+
+**Svar:** Plancks konstant blir ungefär $6{,}6\\cdot 10^{-34}\\ \\mathrm{Js}$ — nära tabellvärdet $6{,}626\\cdot 10^{-34}\\ \\mathrm{Js}$.
+
+**Generell slutsats:** Genom att mäta vid två våglängder slipper man känna utträdesarbetet — det stryks i differensen. Lutningen i en graf av $E_\\mathrm{k}$ mot $f$ *är* Plancks konstant; det var precis så Millikan bekräftade Einsteins teori. (Utträdesarbetet fås sedan ur en av ekvationerna: $W_\\mathrm{u} = hf_1 - E_{\\mathrm{k},1} = 2{,}0\\ \\mathrm{eV}$.)`,
+        },
+    ],
+
+    'fy2-4.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna de Broglie-våglängden för en elektron som rör sig med hastigheten $v = 1{,}0\\cdot 10^{6}\\ \\mathrm{m/s}$. Elektronens massa är $m = 9{,}11\\cdot 10^{-31}\\ \\mathrm{kg}$, och $h = 6{,}626\\cdot 10^{-34}\\ \\mathrm{Js}$.`,
+            answer: { value: 727, unit: 'pm' },
+            solution: `de Broglie-våglängden:
+
+$$ \\lambda = \\frac{h}{mv} = \\frac{6{,}626\\cdot 10^{-34}}{9{,}11\\cdot 10^{-31}\\cdot 1{,}0\\cdot 10^{6}} = 7{,}27\\cdot 10^{-10}\\ \\mathrm{m} $$
+
+**Svar:** de Broglie-våglängden är $7{,}27\\cdot 10^{-10}\\ \\mathrm{m} = 727\\ \\mathrm{pm}$ (av samma storleksordning som atomavstånd — därför märks elektronens vågnatur).`,
+        },
+        {
+            level: 1,
+            question: `En boll med massan $m = 0{,}10\\ \\mathrm{kg}$ kastas med hastigheten $v = 20\\ \\mathrm{m/s}$. Beräkna bollens de Broglie-våglängd.`,
+            answer: { value: 3.31e-34, unit: 'm', tol: 0.03 },
+            solution: `de Broglie-våglängden gäller för *alla* föremål, även makroskopiska:
+
+$$ \\lambda = \\frac{h}{mv} = \\frac{6{,}626\\cdot 10^{-34}}{0{,}10\\cdot 20} = 3{,}31\\cdot 10^{-34}\\ \\mathrm{m} $$
+
+**Svar:** Bollens de Broglie-våglängd är $3{,}3\\cdot 10^{-34}\\ \\mathrm{m}$ — ofattbart mycket mindre än bollen själv (och än en atomkärna). Därför uppvisar bollen **inga** mätbara vågegenskaper, och klassisk mekanik gäller.`,
+        },
+        {
+            level: 1,
+            question: `En neutron har de Broglie-våglängden $\\lambda = 0{,}10\\ \\mathrm{nm}$. Beräkna neutronens hastighet. Neutronens massa är $m = 1{,}675\\cdot 10^{-27}\\ \\mathrm{kg}$.`,
+            answer: { value: 3960, unit: 'm/s' },
+            solution: `Lös ut hastigheten ur de Broglie-formeln:
+
+$$ \\lambda = \\frac{h}{mv} \\quad\\Leftrightarrow\\quad v = \\frac{h}{m\\lambda} = \\frac{6{,}626\\cdot 10^{-34}}{1{,}675\\cdot 10^{-27}\\cdot 0{,}10\\cdot 10^{-9}} = 3{,}96\\cdot 10^{3}\\ \\mathrm{m/s} $$
+
+**Svar:** Neutronens hastighet är ungefär $3\\,960\\ \\mathrm{m/s}$. Långsamma ("termiska") neutroner används just därför att deras våglängd matchar atomavstånd i kristaller.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En elektron accelereras från vila genom spänningen $U = 100\\ \\mathrm{V}$. Beräkna elektronens de Broglie-våglängd. Räkna med $m = 9{,}11\\cdot 10^{-31}\\ \\mathrm{kg}$ och $Q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 123, unit: 'pm' },
+            solution: `**Steg 1 — elektronens hastighet** ur energiomvandlingen elektrisk energi $\\to$ rörelseenergi $(QU = \\tfrac{mv^2}{2})$:
+
+$$ v = \\sqrt{\\frac{2QU}{m}} = \\sqrt{\\frac{2\\cdot 1{,}602\\cdot 10^{-19}\\cdot 100}{9{,}11\\cdot 10^{-31}}} = 5{,}93\\cdot 10^{6}\\ \\mathrm{m/s} $$
+
+**Steg 2 — de Broglie-våglängden.**
+
+$$ \\lambda = \\frac{h}{mv} = \\frac{6{,}626\\cdot 10^{-34}}{9{,}11\\cdot 10^{-31}\\cdot 5{,}93\\cdot 10^{6}} = 1{,}23\\cdot 10^{-10}\\ \\mathrm{m} $$
+
+**Svar:** de Broglie-våglängden är ungefär $123\\ \\mathrm{pm}$.
+
+**Generell slutsats:** Spänningen ger hastigheten (energiomvandling), hastigheten ger våglängden (de Broglie). Det är så ett elektronmikroskop fungerar — högre spänning ger kortare våglängd och därmed bättre upplösning.`,
+        },
+        {
+            level: 2,
+            question: `En proton accelereras från vila genom spänningen $U = 1{,}0\\ \\mathrm{kV}$. Beräkna protonens de Broglie-våglängd. Protonens massa är $m = 1{,}673\\cdot 10^{-27}\\ \\mathrm{kg}$ och dess laddning $Q = 1{,}602\\cdot 10^{-19}\\ \\mathrm{C}$.`,
+            answer: { value: 0.905, unit: 'pm', tol: 0.03 },
+            solution: `**Steg 1 — protonens hastighet** ur $QU = \\tfrac{mv^2}{2}$:
+
+$$ v = \\sqrt{\\frac{2QU}{m}} = \\sqrt{\\frac{2\\cdot 1{,}602\\cdot 10^{-19}\\cdot 1\\,000}{1{,}673\\cdot 10^{-27}}} = 4{,}38\\cdot 10^{5}\\ \\mathrm{m/s} $$
+
+**Steg 2 — de Broglie-våglängden.**
+
+$$ \\lambda = \\frac{h}{mv} = \\frac{6{,}626\\cdot 10^{-34}}{1{,}673\\cdot 10^{-27}\\cdot 4{,}38\\cdot 10^{5}} = 9{,}05\\cdot 10^{-13}\\ \\mathrm{m} $$
+
+**Svar:** Protonens de Broglie-våglängd är ungefär $0{,}905\\ \\mathrm{pm}$ — mycket kortare än elektronens vid samma spänning, eftersom protonen är så mycket tyngre.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En elektron och en proton accelereras båda från vila genom **samma** spänning $U$. Visa att de Broglie-våglängden kan skrivas $\\lambda = \\dfrac{h}{\\sqrt{2mQU}}$, och bestäm hur många gånger längre elektronens våglängd är än protonens. Räkna med $m_\\mathrm{p}/m_\\mathrm{e} = 1\\,836$.`,
+            answer: { value: 42.9, unit: 'ggr', tol: 0.03 },
+            solution: `**Härledning.** Hastigheten ur energiomvandlingen $(QU = \\tfrac{mv^2}{2})$ är $v = \\sqrt{2QU/m}$. Sätt in i $\\lambda = h/(mv)$:
+
+$$ \\lambda = \\frac{h}{m\\sqrt{\\dfrac{2QU}{m}}} = \\frac{h}{\\sqrt{m^2\\cdot \\dfrac{2QU}{m}}} = \\frac{h}{\\sqrt{2mQU}} \\quad\\text{vsv.} $$
+
+**Insikten:** elektron och proton har samma laddningsstorlek $Q$ och samma $U$ — de stryks i kvoten. Kvar blir bara massberoendet $\\lambda \\propto 1/\\sqrt{m}$:
+
+$$ \\frac{\\lambda_\\mathrm{e}}{\\lambda_\\mathrm{p}} = \\sqrt{\\frac{m_\\mathrm{p}}{m_\\mathrm{e}}} = \\sqrt{1\\,836} = 42{,}8 $$
+
+**Svar:** Elektronens de Broglie-våglängd är ungefär $43$ gånger längre än protonens.
+
+**Generell slutsats:** Allt utom massförhållandet förkortas bort. Den lättare partikeln får alltid den längre våglängden vid samma accelerationsspänning — ett rent kvotresonemang där $h$, $Q$ och $U$ aldrig behöver sättas in.`,
+        },
+    ],
+
+    'fy2-4.7': [
+        // ── Nivå 1 (E) — begreppsfrågor (flerval) ────────────────────
+        {
+            level: 1,
+            question: `Vilken av följande ljuskällor ger ett **kontinuerligt spektrum** (alla våglängder)?`,
+            choices: [
+                'Ett neonrör.',
+                'En glödlampa med glödtråd.',
+                'En natriumlampa (gatubelysning).',
+                'Ett väteurladdningsrör.'
+            ],
+            correct: 1,
+            solution: `En glödtråd som hettas upp sänder ut **alla** våglängder — ett kontinuerligt spektrum som vi uppfattar som vitt. De övriga är förtunnade atomära gaser som bara sänder ut **vissa** väldefinierade våglängder (diskret spektrum / linjespektrum).
+
+**Svar:** En glödlampa med glödtråd.`,
+        },
+        {
+            level: 1,
+            question: `Vad kännetecknar ett **emissionsspektrum** (linjespektrum) från en atomär gas?`,
+            choices: [
+                'Alla våglängder sänds ut lika starkt.',
+                'Inga våglängder alls sänds ut.',
+                'Endast vissa väldefinierade våglängder sänds ut.',
+                'Endast en enda våglängd kan någonsin sändas ut.'
+            ],
+            correct: 2,
+            solution: `Ljuset från enskilda atomer uppstår när elektroner hoppar mellan bestämda energinivåer. Bara de våglängder som motsvarar dessa hopp sänds ut, så spektrumet består av skilda **linjer** mot mörk bakgrund — inte ett enda streck (en gas har flera möjliga hopp) och inte alla färger.
+
+**Svar:** Endast vissa väldefinierade våglängder sänds ut.`,
+        },
+        {
+            level: 1,
+            question: `Hur syns det i ett **absorptionsspektrum** att en gas har tagit upp ljus av vissa våglängder?`,
+            choices: [
+                'Som extra ljusa färgade linjer mot svart bakgrund.',
+                'Som en allmän förstärkning av alla färger.',
+                'Som mörka (svarta) linjer i ett annars kontinuerligt färgband.',
+                'Hela spektrumet blir helt svart.'
+            ],
+            correct: 2,
+            solution: `När vitt ljus passerar en gas absorberar gasen exakt de våglängder den annars skulle sända ut. Dessa saknas sedan i det genomsläppta ljuset och syns som **mörka linjer** i det kontinuerliga spektrumet.
+
+**Svar:** Som mörka (svarta) linjer i ett annars kontinuerligt färgband.`,
+        },
+
+        // ── Nivå 2 (C) — begreppsfrågor (flerval) ────────────────────
+        {
+            level: 2,
+            question: `I solljusets spektrum finns mörka linjer vid **exakt samma våglängder** som väte sänder ut i sitt emissionsspektrum. Vilken slutsats är riktig?`,
+            choices: [
+                'Solen saknar väte helt.',
+                'Vätet i solen är kallare än $0\\ \\mathrm{K}$.',
+                'Solljuset innehåller inget rött ljus.',
+                'Det finns väte i solens (yttre) atmosfär.'
+            ],
+            correct: 3,
+            solution: `Atomer absorberar samma våglängder som de sänder ut. De mörka linjerna betyder att väte i solens svalare ytteratmosfär har absorberat just dessa våglängder ur det kontinuerliga ljuset från den heta ytan. Spektrallinjer fungerar som ett **fingeravtryck** för grundämnen.
+
+**Svar:** Det finns väte i solens atmosfär.`,
+        },
+        {
+            level: 2,
+            question: `Varför kan en atom **bara absorbera** ljus med samma våglängder som den själv kan sända ut?`,
+            choices: [
+                'Atomen absorberar i själva verket all strålning men råkar bara sända ut vissa färger.',
+                'En foton tas bara upp om dess energi exakt motsvarar skillnaden mellan två av atomens energinivåer — samma hopp som ger emission.',
+                'Absorption och emission är helt oberoende fenomen utan samband.',
+                'Atomen kan ta upp vilken våglängd som helst men sänder bara ut de starkaste.'
+            ],
+            correct: 1,
+            solution: `Energinivåerna i atomen är bestämda. En elektron kan bara lyftas (exciteras) om fotonens energi $hf$ **exakt** matchar ett tillåtet energihopp $E_n - E_m$. Precis samma hopp, taget baklänges, ger emission av samma våglängd — därför sammanfaller absorptions- och emissionslinjerna.
+
+**Svar:** En foton tas bara upp om dess energi exakt motsvarar ett energihopp i atomen.`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vätgas belyses och ljuset skickas genom ett gitter med 600 linjer/mm. En av vätets spektrallinjer ger första ordningens maximum vid vinkeln $23{,}2^\\circ$. Beräkna linjens våglängd och avgör vilken **serie** (Lyman, Balmer eller Paschen) övergången tillhör.`,
+            answer: { value: 657, unit: 'nm' },
+            solution: `**Steg 1 — våglängden ur gitterformeln.** Spaltavstånd $d = \\tfrac{1}{600}\\ \\mathrm{mm} = 1{,}667\\cdot 10^{-6}\\ \\mathrm{m}$:
+
+$$ \\lambda = \\frac{d\\sin\\alpha_1}{n} = \\frac{1{,}667\\cdot 10^{-6}\\cdot\\sin 23{,}2^\\circ}{1} = 6{,}57\\cdot 10^{-7}\\ \\mathrm{m} $$
+
+**Steg 2 — vilken serie?** Våglängden $657\\ \\mathrm{nm}$ ligger i det **synliga** (rött) området. Spektrallinjer i synligt ljus från väte tillhör **Balmer-serien** (övergångar som slutar i $n = 2$). Detta är den berömda röda $\\mathrm{H}_\\alpha$-linjen (övergången $n = 3 \\to n = 2$).
+
+**Svar:** Våglängden är ungefär $657\\ \\mathrm{nm}$ och linjen tillhör **Balmer-serien**.
+
+**Generell slutsats:** Gittret översätter en avböjningsvinkel till en våglängd, och våglängden avslöjar både grundämnet och vilken elektronövergång (serie) som gett upphov till ljuset. Så fungerar spektroskopi i praktiken — från vinkel till atomstruktur.`,
+        },
+    ],
+
+    'fy2-4.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Väteatomens energinivåer ges av $E_n = -\\dfrac{13{,}6}{n^2}\\ \\mathrm{eV}$. Beräkna energin på nivå $n = 4$.`,
+            answer: { value: -0.85, unit: 'eV' },
+            solution: `Sätt in $n = 4$:
+
+$$ E_4 = -\\frac{13{,}6}{4^2} = -\\frac{13{,}6}{16} = -0{,}85\\ \\mathrm{eV} $$
+
+**Svar:** $E_4 = -0{,}85\\ \\mathrm{eV}$. Det negativa värdet betyder att elektronen är **bunden** till kärnan (jonisationsgränsen är vald till $0\\ \\mathrm{eV}$).`,
+        },
+        {
+            level: 1,
+            question: `En elektron i en väteatom faller från nivå $n = 3\\ (E_3 = -1{,}51\\ \\mathrm{eV})$ till nivå $n = 2\\ (E_2 = -3{,}40\\ \\mathrm{eV})$. Beräkna energin hos den utsända fotonen.`,
+            answer: { value: 1.89, unit: 'eV' },
+            solution: `Fotonens energi är skillnaden mellan de två nivåerna:
+
+$$ hf = E_3 - E_2 = (-1{,}51) - (-3{,}40) = 1{,}89\\ \\mathrm{eV} $$
+
+**Svar:** Fotonens energi är $1{,}89\\ \\mathrm{eV}$.`,
+        },
+        {
+            level: 1,
+            question: `Hur mycket energi krävs för att jonisera en väteatom som befinner sig i tillståndet $n = 2\\ (E_2 = -3{,}40\\ \\mathrm{eV})$? (Jonisationsgränsen ligger vid $E = 0$.)`,
+            answer: { value: 3.40, unit: 'eV' },
+            solution: `Jonisering innebär att elektronen lyfts ända upp till $E = 0$:
+
+$$ \\Delta E = E_\\infty - E_2 = 0 - (-3{,}40) = 3{,}40\\ \\mathrm{eV} $$
+
+**Svar:** Det krävs $3{,}40\\ \\mathrm{eV}$. (Från grundtillståndet $n = 1$ skulle det däremot krävas hela $13{,}6\\ \\mathrm{eV}$.)`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En väteatom deexciteras från $n = 4$ till $n = 2$. Beräkna våglängden på det utsända ljuset och ange färg.
+
+${makeEnergyLevels({ showValues: true, transition: { from: 4, to: 2 } })}`,
+            answer: { value: 486, unit: 'nm' },
+            solution: `**Steg 1 — fotonens energi** (läs av nivåerna i diagrammet):
+
+$$ E = E_4 - E_2 = (-0{,}85) - (-3{,}40) = 2{,}55\\ \\mathrm{eV} = 2{,}55\\cdot 1{,}602\\cdot 10^{-19} = 4{,}09\\cdot 10^{-19}\\ \\mathrm{J} $$
+
+**Steg 2 — våglängden** ur $E = hc/\\lambda$:
+
+$$ \\lambda = \\frac{hc}{E} = \\frac{6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 10^{8}}{4{,}09\\cdot 10^{-19}} = 4{,}86\\cdot 10^{-7}\\ \\mathrm{m} $$
+
+**Svar:** Våglängden är $486\\ \\mathrm{nm}$ — **blågrönt** ljus. (Detta är $\\mathrm{H}_\\beta$-linjen i Balmer-serien.)
+
+**Generell slutsats:** Nivåskillnaden ger fotonens energi, energin ger våglängden. Glöm inte att omvandla eV till joule innan $E = hc/\\lambda$ används.`,
+        },
+        {
+            level: 2,
+            question: `En väteatom sänder ut ultraviolett ljus med våglängden $\\lambda = 102{,}6\\ \\mathrm{nm}$. Använd energinivåerna nedan och avgör **mellan vilka nivåer** övergången skedde. (Svara med den övre nivåns $n$.)
+
+${makeEnergyLevels({ showValues: true })}`,
+            answer: { value: 3, unit: '' },
+            solution: `**Steg 1 — fotonens energi.**
+
+$$ E = \\frac{hc}{\\lambda} = \\frac{6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 10^{8}}{102{,}6\\cdot 10^{-9}} = 1{,}936\\cdot 10^{-18}\\ \\mathrm{J} = 12{,}09\\ \\mathrm{eV} $$
+
+**Steg 2 — matcha mot nivåerna.** Vilket hopp ger $12{,}09\\ \\mathrm{eV}$? Eftersom det är UV-ljus med hög energi måste det sluta i grundtillståndet $(n = 1,\\ E_1 = -13{,}6\\ \\mathrm{eV})$. Pröva $n = 3 \\to n = 1$:
+
+$$ E_3 - E_1 = (-1{,}51) - (-13{,}6) = 12{,}09\\ \\mathrm{eV} \\;\\checkmark $$
+
+**Svar:** Övergången skedde från $n = 3$ till $n = 1$ (en linje i Lyman-serien).
+
+**Generell slutsats:** Man räknar baklänges — fotonens energi jämförs med nivåskillnaderna tills den matchar. UV-linjer från väte tillhör Lyman-serien (slutar i $n = 1$); synliga linjer tillhör Balmer-serien (slutar i $n = 2$).`,
+        },
+
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En väteatom exciteras till $n = 4$. När den deexciteras kan den ta olika "vägar" ner. Hur många **olika våglängder** kan atomen totalt sända ut, och vilken är den **kortaste** av dem?
+
+${makeEnergyLevels({ levels: [1, 2, 3, 4], showValues: true })}`,
+            answer: { value: 97, unit: 'nm' },
+            solution: `**Insikten:** elektronen kan falla till valfri lägre nivå, även i flera steg. Varje *par* av nivåer ger en egen våglängd. Räkna alla möjliga hopp neråt från $n = 4$:
+
+$$ 4\\to3,\\quad 4\\to2,\\quad 4\\to1,\\quad 3\\to2,\\quad 3\\to1,\\quad 2\\to1 $$
+
+Det blir **6 olika våglängder**.
+
+**Kortaste våglängden** motsvarar det **största energihoppet** $(\\lambda = hc/E$, så störst $E$ ger minst $\\lambda)$. Det största hoppet är $4 \\to 1$:
+
+$$ E = E_4 - E_1 = (-0{,}85) - (-13{,}6) = 12{,}75\\ \\mathrm{eV} = 2{,}043\\cdot 10^{-18}\\ \\mathrm{J} $$
+
+$$ \\lambda = \\frac{hc}{E} = \\frac{6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 10^{8}}{2{,}043\\cdot 10^{-18}} = 9{,}7\\cdot 10^{-8}\\ \\mathrm{m} $$
+
+**Svar:** Atomen kan sända ut **6 olika våglängder**, och den kortaste är ungefär $97\\ \\mathrm{nm}$ (UV, övergången $4 \\to 1$).
+
+**Generell slutsats:** Antalet möjliga linjer från nivå $n$ är antalet sätt att välja två nivåer, alltså $\\binom{n}{2}$ — här $\\binom{4}{2} = 6$. Den kortaste våglängden kommer alltid från det djupaste fallet (störst energiskillnad), den längsta från det grundaste $(4 \\to 3)$.`,
         },
     ],
 };

@@ -256,7 +256,7 @@
             // id-format: fy1-2.3, fy2-3.4, ...
             const m = id && id.match(/^fy([12])-(\d+\.\d+)$/);
             if (!m) return null;
-            const course = m[1] === '1' ? 'Fysik 1' : 'Fysik 2';
+            const course = m[1] === '1' ? 'Fysik' : 'Fysik – fördjupning';
             const num = m[2];
             return KF.find(s => s.course === course && s.num === num) || null;
         }
@@ -307,8 +307,8 @@
                         </a>
                         <nav className="lab-nav" aria-label="Huvudnavigation">
                             <a href="index.html">Start</a>
-                            <a href="katalog.html#fy1">Fysik 1</a>
-                            <a href="katalog.html#fy2">Fysik 2</a>
+                            <a href="katalog.html#fy1">Fysik</a>
+                            <a href="katalog.html#fy2">Fysik – fördjupning</a>
                             <a href="om.html">Om</a>
                             <a href="kontakt.html">Kontakt</a>
                         </nav>
@@ -390,7 +390,7 @@
             // meta hittades men teori saknas — visa en "kommer snart"-vy med simulering
             if (!raw) {
                 const chapterLabel = (meta.chapter || '').toUpperCase();
-                const courseHash = meta.course === 'Fysik 2' ? 'fy2' : 'fy1';
+                const courseHash = meta.course === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
                 return (
                     <article className="lab-article">
                         <a className="lab-article-back" href={`katalog.html#${courseHash}`}>
@@ -426,7 +426,7 @@
 
             const courseSlug = meta.course.toLowerCase().replace(' ', '');
             const chapterLabel = (fm.chapter || meta.chapter || '').toUpperCase();
-            const courseHash = meta.course === 'Fysik 2' ? 'fy2' : 'fy1';
+            const courseHash = meta.course === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
 
             return (
                 <article className="lab-article">

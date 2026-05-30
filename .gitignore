@@ -38,6 +38,7 @@ tmpclaude-*
 
 # Headless Chrome-profiler + skärmdumps/previews (figurgranskning)
 .chrome-*/
+.shot-*/
 .shots/
 figur-preview.html
 

@@ -101,6 +101,36 @@ ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor 
   strömmen *I*, resistansen *R*)? Då är det variabel → kursiv. Är det
   ett *namn* på ett objekt (Lampa, Amperemeter)? Då är det etikett → rakt.
 
+- **Variabler i inline-SVG-figurer**: kursiveringen gäller även i
+  `<text>`-element i SVG, inte bara i markdown och KaTeX. Bokstaven i
+  ett SVG-tal som "*v*₁ = 3,0 m/s" eller "*λ*₂ = 8,0 m" måste vara
+  kursiv — wrappa den i `<tspan font-style="italic">v</tspan>₁ = 3,0 m/s`.
+  SVG ärver inte `font-style` från omgivande HTML/CSS, så utan
+  uttryckligt `font-style="italic"` (på `<text>` eller `<tspan>`) renderas
+  variabeln rakt. Vanligaste fällan: man skriver in Unicode-subscript
+  direkt i strängen (`λ₁`, `v₁`) och glömmer att kursivera bokstaven.
+  Granska alltid figuren genom en skärmdump och kontrollera att varje
+  variabel ser ut som "*v*", inte "v".
+
+  **ALDRIG `font-style="italic"` på ett helt `<text>`-element som
+  innehåller `= värde enhet`** — då blir mätetalet och enheten också
+  kursiverade ("*I* = *4,0 A*" istället för "*I* = 4,0 A"). Detta är
+  den vanligaste figurbuggen. Två säkra mönster:
+
+  1. **Använd helpern `sceneQty(label)`** (eller `sceneVar(label)` för
+     ren variabel utan värde). Den finns i `data/ovningar.js` och
+     kursiverar bara variabeldelen före `' = '`. Använd den i alla
+     figur-helpers (`makeBField`, `makeRefraction`, `makeForceDiagram`
+     m.fl. gör det redan).
+  2. **Skriv `<tspan>` manuellt** i rå-SVG: lägg italic på `<tspan>`,
+     **inte** på `<text>`:
+     ```html
+     <!-- RÄTT -->
+     <text font-size="13"><tspan font-style="italic">I</tspan> = 4,0 A</text>
+     <!-- FEL -->
+     <text font-size="13" font-style="italic">I = 4,0 A</text>
+     ```
+
 ### Subscript
 
 - **Sifferindex**: Unicode (Q₁, Q₂, v₀) eller `F_1` i math-block.
@@ -277,6 +307,32 @@ ingressparagrafen — inte gömd i sidopanelen, och inte inbäddad i
 ingresstextens löptext med snedstreck. Referensimpl:
 `fysik2-energinivaer.html`.
 
+### Vektorpilar: hastighet vs kraft
+
+**Hastighetsvektorer startar vid objektets KANT, inte vid tyngdpunkten.**
+En *v*-pil (eller komposant *v*ₓ/*v*ᵧ) ritas så att dess bakkant ligger på
+objektets rand i pilens riktning. Aldrig inifrån objektet. Gäller både
+inline-SVG-figurer (övningar) och canvas/SVG-renderade simuleringar.
+
+**Kraftvektorer startar däremot i angreppspunkten** (typiskt CM för
+tyngd-/normalkraft, kontaktpunkten för friktion/normal mot underlag).
+Kraftpilens *bas* får alltså ligga inuti kroppen — det är hela poängen
+med en angreppspunkt.
+
+Hur du applicerar i kod:
+
+- För ett objekt med radie *r* och pil i riktning **û**: starta vid
+  `(cx + r·ûₓ, cy + r·ûᵧ)`, inte `(cx, cy)`. (För SVG y-axeln: byt tecken
+  på *y*-komponenten.)
+- För rektangulära objekt (bilar, vagnar): använd halv-bredden längs
+  pilens riktning som offset.
+
+Helpers som redan följer regeln: `makeBField`, `makeProjectile`,
+`makeCircularPath`, `makeCrest`, `makeLoop` (i `data/ovningar.js`).
+Skriver du en ny helper eller ny canvas-sim med v-pilar måste du själv
+implementera kant-offseten. **Granska alltid skärmdump** och verifiera
+att hastighetspilen kommer från kanten, inte mitten.
+
 ### Diagramkonventioner (svensk fysik/matte-standard)
 
 1. **Axelfärg**: x-axel (y=0) och y-axel (x=0) ljusblå/cyan (`#38bdf8`).
@@ -284,12 +340,57 @@ ingresstextens löptext med snedstreck. Referensimpl:
    längst ned i diagrammet.
 3. **Symmetrisk skala** om negativa värden visas (-12 till +12, inte
    -12 till +2).
+4. **Axeletiketter måste få plats INOM viewBox/ramen.** Vanlig fälla:
+   en x-label "t (s)" eller "a (m/s²)" placeras inline efter pilspetsen
+   med `text-anchor="start"` på en *x*-position så nära viewBox-höger
+   att texten sticker ut till höger. Eller en y-label med en stor
+   bokstav (Φ, Σ, β) placeras med en *y*-position så nära viewBox-topp
+   att glyfens topp sticker över. **Använd `text-anchor="end"`** med
+   *x* nära men inom högerkant (`x = W - 6`), och placera y-label
+   **tillräckligt nedanför** topp-kanten (`y = padT - 8`, inte
+   `padT - 18`) så att stora glyfer ryms.
 
 ```javascript
 const xAxisLabelY = (minY < 0 && maxY > 0)
     ? height - padding.bottom - ((0 - minY) / range) * graphHeight + 16
     : height - padding.bottom + 16;
 ```
+
+### Skärmdumpsverifiering av figurer
+
+Innan du markerar en figur (diagram, scen, SVG-helper-output) som klar:
+**generera en PNG-skärmdump via headless Chrome och inspektera den
+visuellt.** SVG-källan kan se rätt ut samtidigt som rendering visar att
+texter sticker utanför ramen, ligger på linjer, eller överlappar
+varandra.
+
+```powershell
+# Skapa förhandsvisning (.html i .shots/)
+# Skjut sedan en skärmdump:
+& "C:\Program Files\Google\Chrome\Application\chrome.exe" `
+  --headless=new --disable-gpu --hide-scrollbars `
+  --window-size=900,1200 `
+  --screenshot="C:\claude\Fysiklabbet\.shots\name.png" `
+  "http://localhost:8000/.shots/name.html"
+```
+
+Vid varje skärmdumpsgranskning, kontrollera **systematiskt**:
+
+1. **Inga texter sticker ut över ramen** (varken viewBox-kant eller en
+   `<rect>`/`<svg border>`). Gäller särskilt:
+   - X-axelns label vid högerkant.
+   - Y-axelns label vid övre kant (Φ, β, Σ är extra höga glyfer).
+   - Tick-labels längst ute (t.ex. "10" på y=10 längst upp).
+2. **Inga texter på linjer eller andra figurdelar** (regeln finns
+   utförligt i `OVNINGAR.md`). Speciellt: wire-/laddningsetiketter i
+   scener med parallella fältlinjer måste hamna *mellan* linjer.
+3. **Inga texter överlappar varandra.**
+4. **Vektorpilar från objektkant, inte från CM** (för hastighet) — se
+   regel ovan.
+5. **Fältlinjepilar i samma kolumn/rad** (vinkelrätt mot fältriktningen)
+   och **homogen täthet** mellan parallella fältlinjer.
+
+Markera först som klart när skärmdumpen passerar alla fem kontroller.
 
 ## Fysikämnen
 

@@ -36,6 +36,11 @@ desktop.ini
 # Tempfiler från Claude-sessioner
 tmpclaude-*
 
+# Headless Chrome-profiler + skärmdumps/previews (figurgranskning)
+.chrome-*/
+.shots/
+figur-preview.html
+
 # PDF-källor (transkriberade till data/teori/)
 Genomgångar/
 

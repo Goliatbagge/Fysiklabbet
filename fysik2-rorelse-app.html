@@ -395,10 +395,16 @@ function SimulationCanvas({
             ctx.font = "16px 'Poppins', sans-serif";
             const vec_scale = VECTOR_SCALE * zoom;
 
-            if (showV) {
+            // Hastighetsvektorer startar vid bollens kant (radie 8), inte i CM.
+            const BALL_R = 8;
+            const vSpeed = Math.hypot(velocity.vx, velocity.vy);
+            if (showV && vSpeed > 1e-6) {
+                const ux = velocity.vx / vSpeed, uy = velocity.vy / vSpeed;
+                const startX = projX + ux * BALL_R;
+                const startY = projY - uy * BALL_R;
                 const endVx = projX + velocity.vx * vec_scale;
                 const endVy = projY - velocity.vy * vec_scale;
-                drawArrow(ctx, projX, projY, endVx, endVy, '#f472b6');
+                drawArrow(ctx, startX, startY, endVx, endVy, '#f472b6');
                 ctx.fillStyle = '#f472b6';
                 ctx.textAlign = velocity.vx >= 0 ? 'left' : 'right';
                 ctx.textBaseline = velocity.vy >= 0 ? 'bottom' : 'top';
@@ -406,18 +412,20 @@ function SimulationCanvas({
                 const offsetY = velocity.vy >= 0 ? -8 : 8;
                 ctx.fillText('v', endVx + offsetX, endVy + offsetY);
             }
-            if (showVx) {
+            if (showVx && Math.abs(velocity.vx) > 1e-6) {
+                const sxx = projX + Math.sign(velocity.vx) * BALL_R;
                 const endX = projX + velocity.vx * vec_scale;
-                drawArrow(ctx, projX, projY, endX, projY, '#facc15');
+                drawArrow(ctx, sxx, projY, endX, projY, '#facc15');
                 ctx.fillStyle = '#facc15';
                 ctx.textAlign = velocity.vx >= 0 ? 'left' : 'right';
                 ctx.textBaseline = 'bottom';
                 const offsetX = velocity.vx >= 0 ? 5 : -5;
                 ctx.fillText('v\u2093', endX + offsetX, projY - 5);
             }
-            if (showVy) {
+            if (showVy && Math.abs(velocity.vy) > 1e-6) {
+                const syy = projY - Math.sign(velocity.vy) * BALL_R;
                 const endY = projY - velocity.vy * vec_scale;
-                drawArrow(ctx, projX, projY, projX, endY, '#a78bfa');
+                drawArrow(ctx, projX, syy, projX, endY, '#a78bfa');
                 ctx.fillStyle = '#a78bfa';
                 ctx.textAlign = 'left';
                 ctx.textBaseline = velocity.vy >= 0 ? 'bottom' : 'top';

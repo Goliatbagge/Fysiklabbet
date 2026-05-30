@@ -214,6 +214,29 @@ finns den pedagogiska poängen kvar och eleven får visuell bekräftelse.
 Anropa `makeDiagram` igen i solution-strängen med samma axlar/skala men
 fyllda `fills`.
 
+### Periodisk rörelse → alltid en sinuskurva
+
+Varje uppgift om **harmonisk svängning**, fjäderpendel, plan pendel eller
+annan periodisk rörelse ska visa svängningen som en *y*(*t*)-graf — aldrig
+bara beskrivas i text eller med formeln $y = A\sin(\omega t)$. Värden som
+$\omega = 15\ \mathrm{rad/s}$ eller $A = 5{,}0\ \mathrm{cm}$ i frågetexten
+gör inte figuren överflödig; tvärtom är det då eleven har störst nytta av
+att *se* vad värdena betyder visuellt.
+
+**Verktyg**: `makeOscillation(opts)` i `data/ovningar.js` ritar sinuskurvan
+med valfria amplitud-mått (`showAmplitude`), periodmått (`showPeriod`),
+markerad tidpunkt (`markT`) och egen y-axelindelning (`yTicks` — sätt
+egna ticks i avläsningsuppgifter så amplituden inte ligger exakt på en
+axeltick). Två samtidiga svängningar (typiska för N3-kvotresonemang)
+byggs med `makeDiagram` direkt — anropa funktionen med två `paths`,
+en heldragen och en streckad.
+
+**Avläsningsuppgifter:** låt eleven *läsa av* från grafen i stället för
+att slå in i en formel. *"Vad är amplituden?"* med en y(t)-graf och utan
+markerat A-mått är en bättre N1-uppgift än samma fråga med formeln
+$y = A\sin(\omega t)$ utskriven — den första testar grafläsning, den andra
+testar bara mönsterigenkänning.
+
 ## Kraftvektorer ska ritas, inte beskrivas
 
 Om en uppgift hänvisar till kraftvektorer ska de **ritas** som pilar i en
@@ -370,6 +393,32 @@ layoutkrav. För kretsar utan parallellsektion blir resultatet typiskt
 > Lägg in figuren där det är möjligt; hoppa bara över rent numeriska
 > uppgifter utan rumsligt innehåll (t.ex. "$f = 1/T$, beräkna *T*").
 
+**⚠ Stanna upp och fråga: ser uppgiften ut som något?** Innan du publicerar
+en ny uppgift, fråga dig om uppgiftens scen har en *visuell representation*.
+Använd den här mappningstabellen som checklista:
+
+| Uppgiften nämner … | Då ska figuren visa … | Helper |
+| --- | --- | --- |
+| harmonisk svängning, fjäderpendel, plan pendel, periodisk rörelse | en sinuskurva $y(t)$ | `makeOscillation` |
+| kaströrelse, projektil, skott från höjd | parabel + höjd/vidd-mått | `makeProjectile` |
+| moment, hävstång, gungbräda, balk på stöd | hävarm + laster + stöd | `makeLever`, `makeTorqueArm` |
+| cirkelrörelse, satellit, karusell | cirkelbana + tangentfart + centripetalpil | `makeCircularPath` |
+| lutande väg, doserad kurva, banklutning | lutning + bil + krafter | `makeBankedCurve` |
+| stege mot vägg, balk i wire | sned stång + (i lösning) krafter | `makeLadder` |
+| pendel, gunga, svängbåge | repupphängning + svängbåge | `makeSwing` |
+| backkrön, kulle | konvex båge + krafter | `makeCrest` |
+| vertikal loop (bergochdalbana) | cirkel + vagn i topp/botten | `makeLoop` |
+| tippande/vältande kropp | låda med kantpivot + tyngdpunkt | `makeTippingBox` |
+| krets, koppling, mätarplacering | kopplingsschema | `makeCircuit`, `makeBridge` |
+| krafter på en kropp utan rumslig kontext | vektorpilar från gemensam punkt | `makeForceDiagram` |
+| *s*-*t*-, *v*-*t*-, *a*-*t*-graf, energidiagram | linjediagram med rutnät | `makeDiagram` |
+
+Att värden som $\omega = 15\ \mathrm{rad/s}$, $A = 4{,}0\ \mathrm{cm}$ eller
+$L = 5{,}0\ \mathrm{m}$ står utskrivna i frågetexten gör **inte** figuren
+överflödig. Det är just då en illustration av vad värdena *betyder visuellt*
+är värdefullast — den binder ihop algebran med fenomenet och bygger
+intuition som blir bortrationaliserad om uppgiften bara är text.
+
 **Verktyg** (inline-SVG-helpers i `data/ovningar.js`, samma pappersstil som
 `makeForceDiagram`). Anropas från question/solution-strängarna med
 `${...}`-interpolation — det är vanlig JS, så **ingen** backslash-dubbling
@@ -412,6 +461,286 @@ bakom text (`sceneText`) är ett *skyddsnät* för oundvikliga korsningar med
 eller kontur. Var särskilt försiktig med **diagonala** armar/stegar/trådar:
 en enkel lodrät offset hamnar då mitt på linjen — offsetta i stället längs
 linjens normal (`(-sin θ, -cos θ)`-riktningen).
+
+> **Specialfall: scener med parallella fältlinjer.** När du placerar en
+> etikett (ström-, laddnings-, massa-text) intill ett objekt i en scen med
+> *parallella fältlinjer*, kontrollera att etikettens baslinje hamnar
+> **mellan** två närliggande fältlinjer — inte ovanpå någon av dem. För
+> horisontellt fält: höj etiketten med ≈ halva fältlinjeavståndet (typiskt
+> 14 px) ovanför objektets *cy*. För vertikalt fält: skjut etiketten i
+> sidled till mitt emellan två linjer. **Kontrollera alltid med en
+> skärmdump (headless Chrome → PNG) innan klart** — det räcker inte att
+> det ser bra ut i SVG-källan. Helpern `makeBField` beräknar offseten
+> automatiskt från `fieldLineSpacing`; gör likadant i nya helpers.
+
+**Homogena fält → jämn täthet OCH symmetri kring objektet.** Ett homogent
+fält (B, E, gravitations-, vatten-) avbildas alltid med **konstant
+avstånd** mellan parallella fältlinjer. Tätare linjer betyder starkare
+fält, så varierande avstånd i en homogen scen är fysikaliskt missvisande
+och estetiskt fult.
+
+När ett centralt objekt (ledare/partikel/laddning) finns i scenen måste
+fältlinjerna dessutom vara **symmetriska kring objektet**: lika många
+linjer ovanför som nedanför (för horisontellt fält) eller till vänster
+som till höger (för vertikalt fält). Annars ser objektet ut att sitta
+"snett" i fältet och man kan misstolka det som att fältet är starkare på
+ena sidan.
+
+Den vanligaste fällan är att man först fördelar N linjer jämnt över
+höjden och *sedan* snäpper en linje till objektets centrum — då bryts
+både jämnheten (snäppta linjen rycks ur takten) och symmetrin (eftersom
+objektet ofta inte ligger i geometriska mitten av rit-området). Rätt
+mönster: beräkna `halfSpan = min(anchor − lo, hi − anchor)` och lägg
+*n* linjer på vardera sida om ankaret med konstant `spacing`, där *n*
+och `spacing` väljs så att `n · spacing ≤ halfSpan` (krymp spacingen om
+*n* < 2 så du alltid får minst 2 linjer per sida). Totalt 2*n + 1 linjer,
+jämnt fördelade kring ankaret.
+
+Helpern `makeBField` använder funktionen
+`uniformPositions(lo, hi, anchor, targetSpacing)` för detta; skriver du
+en egen parallell-fält-helper måste du följa samma princip.
+
+**Pilspetsar på parallella fältlinjer ska ligga i en rät linje
+vinkelrätt mot fältriktningen.** För ett homogent fält ritar man flera
+parallella fältlinjer (B-, E-, vatten-, gravitations-). Varje linje får
+*en* pilspets, och **alla spetsar ska ligga i samma kolumn** (för
+horisontellt fält) eller **samma rad** (för vertikalt fält). Annars läser
+ögat scenen som ett oordnat virrvarr av enskilda pilar istället för ett
+sammanhängande riktat fält.
+
+Om en linje *bryts* runt ett centralt objekt (ledare/partikel/laddning) —
+för att linjen annars skulle korsa objektets symbol — placeras spetsen
+**på objektets uppströmssida** (sidan fältet *kommer ifrån*), inte
+nedströms. För ett fält åt höger: alla spetsar till vänster om objektet.
+För ett fält uppåt: alla spetsar under objektet. Detta gör att den brutna
+linjens spets ligger i samma kolumn/rad som alla andra linjers spetsar,
+utan att hamna inuti gapet kring objektet. Helpern `makeBField` följer
+redan regeln; skriver du en egen parallell-fält-helper måste du
+implementera samma snäppning.
+
+**Inga onödiga identifieraretiketter på ensamma objekt.** Om figuren bara
+innehåller *ett* exemplar av en sorts objekt — en laddning, en ledare, en
+massa, ett block — ska du **inte** etikettera den med variabelsymbolen
+(`q`, `m`, `I`, …). Värdet och symbolen finns redan i frågetexten och
+illustrationens enda objekt är otvetydigt det som åsyftas. En etikett som
+"q" intill den enda laddningen tillför bara visuellt brus och konkurrerar
+med viktigare etiketter (*v*, *B*, *r*). Skriv ut symbolen **bara** när
+flera objekt av samma slag måste särskiljas (`q_1` och `q_2`, `m_1` och
+`m_2`, `R_1` och `R_2`). Värden (t.ex. "*m* = 2,0 kg" i en figur) följer
+samma regel — utelämna när texten redan ger värdet och objektet är ensamt
+i scenen.
+
+**Hastighetsvektorer startar vid objektets KANT, inte vid tyngdpunkten.**
+En *v*-pil tecknas alltid utgående från objektets rand i pilens riktning
+— aldrig inifrån objektet. Detta är fysikkonvention (hastighet är en
+egenskap hos hela kroppen, men vektorn ritas som om den lämnar ytan i
+färdriktningen). Skiljer sig från **kraftvektorer**, där angreppspunkten
+ligger i tyngdpunkten (CM) och pilen *får* starta inuti kroppen — det är
+hela poängen med en angreppspunkt. Helpers i `data/ovningar.js`
+(`makeBField`, `makeProjectile`, `makeCircularPath`, `makeCrest`,
+`makeLoop`) tillämpar redan denna offset. Skriver du en *ny* hastighets-
+eller hastighetskomposant-pil (manuellt i en HTML-sim eller en ny helper)
+måste du själv förskjuta startpunkten med objektets radie/halv-bredd
+längs vektor-riktningen — annars ser kanten av pilen ut att komma från
+mitten av kroppen.
+
+**Pilspetsar på ljus-/vågstrålar sitter PÅ strålen som riktningsmarkör,
+inte vid änden.** I optikens och vågläran *avslutas inte* en stråle vid
+pilspetsen — strålen fortsätter förbi och slutar geometriskt vid den punkt
+som scenen kräver (gränsyta, lyssnare, fokus). Pilspetsen är en
+riktningsmarkör som sätts *på* strålen, typiskt vid 50–60 % av strålens
+längd. Det skiljer sig från *kraft-pilar* (där pilspetsen markerar
+kraftens angreppspunkt eller slut).
+
+Två separata fällor som ofta blandas ihop:
+
+1. **Var sitter pilspetsen?** För ljus-/vågstrålar: vid `t ≈ 0,55` längs
+   linjen från `(x_start, y_start)` till `(x_slut, y_slut)`. Strålen ritas
+   hela vägen, pilspetsen läggs över strålen som överlagring. Vid en
+   gränsyta där flera strålar möts: spetsen för varje stråle ska ligga på
+   sin egen stråle, *inte* vid mötespunkten.
+2. **Åt vilket håll pekar pilspetsen?** Spetsen ska peka i strålens
+   färdriktning — alltså längs `(x_slut - x_start, y_slut - y_start)`.
+   Rotation av en "schablon-polygon" är felbenäget eftersom den initial-
+   riktningen (uppåt, nedåt, åt höger?) lätt blandas ihop med rotations-
+   tecknet i SVG (positiv vinkel = medurs eftersom y växer nedåt).
+
+**Rekommenderat mönster (bygger pilspetsen från riktningen, inte via rotation):**
+
+```js
+function arrowHead(x, y, angleRad, color) {
+    const size = 8, wing = 4.5;
+    const bx = x - size * Math.cos(angleRad);          // bas-mittpunkt bakåt
+    const by = y - size * Math.sin(angleRad);
+    const px = -Math.sin(angleRad), py = Math.cos(angleRad); // vinkelrätt
+    const w1x = bx + wing * px, w1y = by + wing * py;
+    const w2x = bx - wing * px, w2y = by - wing * py;
+    return `<polygon points="${x},${y} ${w1x},${w1y} ${w2x},${w2y}" fill="${color}"/>`;
+}
+
+// Anropas så här för en ljusstråle från (x1,y1) till (x2,y2):
+const t = 0.55;
+const px = x1 + t*(x2 - x1), py = y1 + t*(y2 - y1);
+const ang = Math.atan2(y2 - y1, x2 - x1);
+svg += arrowHead(px, py, ang);
+```
+
+Pilspetsen sätter sig automatiskt på rätt plats med rätt riktning oavsett
+SVG:s y-flip.
+
+**Undantag — kraftvektorer.** För kraft-/hastighetspilar (`makeForceDiagram`,
+`sceneArrow`) ska spetsen *avsluta* pilen — där sitter den vid pilens
+slutpunkt. Konventionen är annorlunda eftersom själva pilen *är* vektorn,
+inte ett spår genom rummet.
+
+**Granskning:** efter rendering, kontrollera via skärmdump att (1) varje
+pilspets sitter någonstans *mitt på* sin stråle (eller vid pilens slut för
+kraftvektorer), och (2) spetsen pekar i den riktning du *läser* strålen
+— om infallsstrålen ska "komma in" från övre vänster ska spetsen vara
+riktad mot höger-ner, inte vänster-upp.
+
+**Alla etiketter måste rymmas inom figurens viewBox.** En etikett som
+hamnar utanför viewBox klipps i renderingen och blir helt eller delvis
+osynlig. Vanliga fällor:
+
+- **Avståndsmått till vänster om en lodrät linje** (t.ex. `AB = 4,0 m`
+  vid AB-linjens mittpunkt) sträcker sig vänsterut med `text-anchor="end"`
+  och kan hamna i negativ x-koordinat om padX är för liten. Lösning:
+  rotera måttet -90° så texten läses längs linjen (klassisk
+  teknisk-ritnings-stil) — texten upptar då bara textHöjden i x-led
+  istället för hela textbredden.
+- **Etiketter till höger om en punkt nära viewBox högerkant** (t.ex.
+  "lyssnare (L)") klipps när skalfaktorn skjuter punkten för långt
+  åt höger. Lösning: **reservera plats i skalfaktorn för etikett-bredden**.
+  Exempel: `scale = Math.min((W - 2*padX - lyssTextRoom) / dBL, ...)`
+  där `lyssTextRoom ≈ 90` ger plats för en standard-etikett efter punkten.
+- **Etiketter ovanför en punkt nära viewBox överkant** (t.ex. textRows
+  som "källa" + ett värde) kan hamna ovan y = 0. Lösning: öka padY eller
+  begränsa skala även i y-led.
+
+**Kontrollrutin (obligatorisk):**
+
+1. Bygg figuren och rendera via testsida (t.ex. `.shots/<figur>-test.html`).
+2. Skärmdump med `chrome --headless --screenshot` i flera vinkel-/skala-fall.
+3. Granska skärmdumpen — varje etikett ska vara **helt synlig** och inte
+   röra någon viewBox-kant.
+4. Vid klippning: justera scale-formeln (reservera textbredd), padding
+   (`padX`, `padY`), eller etikettens orientering (rotera, ändra anchor).
+
+Skala-formler i helpers ska *alltid* räkna med att etiketter sticker ut
+utanför sina punkter, inte bara att grafiken själv ryms.
+
+**Kända vinkelvärden i figurer skrivs *bara med värdet* — inte "i = 30°".**
+För vinklar gäller en specifik konvention: när vinkelmåttet ritas vid sin
+båge inne i figuren ska bara *värdet* stå där (t.ex. `'30°'`, inte
+`'i = 30°'`). Variabelnamnet (*i*, *b*, α, θ) framgår redan av sammanhanget
+— bågen markerar vilken vinkel det är, och frågetexten introducerar
+variabelnamnet. Att skriva ut "i = 30°" tar 5–6 gånger så mycket
+typografisk plats som "30°" och tvingar etiketten ut från bågen, ofta
+rakt på en stråle eller annan linje. Detta gäller alla figurer som ritar
+vinklar (`makeRefraction`, men även andra mekanikscener med vinkelmått).
+
+✓ `iLabel: '30°'`, `bLabel: '45°'`
+✗ `iLabel: 'i = 30°'`, `bLabel: 'b = 45°'`
+
+Undantag: **okända vinklar** följer den allmänna regeln nedan (bara
+variabelnamnet, ingen "= ?").
+
+**Vinkelmått placeras VID bågen, inte utanför strålen.** Etiketten ska
+sitta i mellanrummet mellan normalen och strålen, där bågen ritas. Den
+ska inte vara skuffad ut i ett "tomt" område utanför strålen, även om
+det är mer plats där — det bryter den geometriska kopplingen mellan
+båge och vinkelvärde. Helpern ska räkna ut en **adaptiv radie** så att
+texten får plats vid bågen utan att skära strålen: utrymmet växer som
+$R\cdot\sin(i/2)/\cos(i)$, så vid små vinklar behövs större $R$ för att
+samma text ska få plats.
+
+**Okända variabler i figurer skrivs *bara med variabelnamnet*, inte
+som "X = ?".** I uppgiftens figur räcker det att variabeln som ska
+beräknas är *namngiven* — själva frågetecknet är överflödigt och tar
+typografisk plats som ofta kolliderar med strålar, linjer eller andra
+etiketter. Det här gäller varje hjälpars `xxxLabel`-parameter, inte bara
+brytningsfigurer.
+
+Konkret:
+
+- ✓ `iLabel: 'i'`, `bLabel: 'b'`, `vLabel: 'v'`, `dALLabel: 'AL'`, `hLabel: 'h'`
+- ✗ `iLabel: 'i = ?'`, `vLabel: 'v = ?'`, `hLabel: 'h = ?'`
+
+Skillnaden är inte bara estetisk — "v = ?" är ungefär 5–6 gånger så bred
+som bara "v" (~35 px vs ~6 px). När etiketten ska placeras nära en sned
+stråle eller i en trång vinkelbåge blir den breda versionen oundvikligen
+upptryckt på strålen själv, vilket vi vill undvika (se reglerna om
+etiketters placering).
+
+**Kända värden** skrivs däremot ut fullständigt: `iLabel: 'i = 30°'`,
+`hLabel: 'h = 1,6 m'`. Skillnaden är pedagogisk — kända värden är *data*
+som eleven ska använda, okända är *frågor* som eleven ska besvara.
+
+**Etiketter får inte överlappa varandra — kontrollera ALLTID via skärmdump.**
+I figurer med flera textelement (källa, lyssnare, värde-mått, beteckning,
+medium-namn) är det lätt hänt att två etiketter placeras på samma
+`y`-koordinat eller mycket nära varandra. Då hamnar de **ovanpå varandra**
+i renderingen, även om deras `text-anchor` skiljer sig (`"start"` vs
+`"middle"` vs `"end"`) — bokstäverna ritas ut alldeles intill samma punkt
+och blir oläsliga.
+
+Vanliga kollisionsmönster:
+
+- **Värde-mått på en linje** + **storhets-etikett under samma punkt** —
+  t.ex. `r = 5,0 m` mitt på avståndslinjen och `P = 8,0 W` strax under
+  källan, båda på samma höjd.
+- **Två mått-etiketter** för olika sträckor som råkar passera samma
+  *y*-rad.
+- **Komponent-namn** (källa, lyssnare, A, B) som hamnar på den linje där
+  ett värde ska visas.
+
+**Kontrollrutin (obligatorisk innan figuren anses klar):**
+
+1. Öppna sidan i webbläsaren och ta en skärmdump av figuren.
+2. Granska skärmdumpen — varje etikett ska vara **separat** och **läsbar**
+   utan att överlappa någon annan text eller linje.
+3. Om något överlappar — flytta etiketten lodrätt med minst $14$ px
+   (en textrad) eller vågrätt med minst $30$ px. Det räcker oftast med
+   att skifta `y` ner till `130` eller upp till `78` istället för en
+   $115$-höjd som krockar med linjens y=$100$.
+
+Tumregel för layout: håll **olika storheter** på olika *y*-rader, inte
+bara olika `text-anchor`. Två etiketter på samma rad är oftast en bugg
+även om de teoretiskt borde rymmas — typografin tar mer plats än man
+tror.
+
+**Streckade banor måste kröka åt rätt håll.** Hjälplinjer som visar en
+*bana* (pendelns svängbåge, en kastbana, en cirkelrörelses spår) ska
+följa den fysik figuren beskriver — kröker den åt fel håll blir figuren
+direkt missvisande. Vanliga fällor:
+
+- **SVG arc sweep-flag**: `A rx ry 0 large sweep x y`. För en pendelbåge
+  som ska gå *nedåt genom lägsta punkten* (från utgångsläge ner till
+  lodlinjen och upp på andra sidan) — sweep-flag = 0. För en *övre*
+  båge (t.ex. ett krön sett underifrån) — sweep-flag = 1. När du är
+  osäker: prova båda och titta på resultatet, ändra `large-arc-flag` om
+  bågen blir för stor/liten.
+- **Kastbanor**: en parabel ska peka konkav *nedåt* (öppningen ned) —
+  tyngdkraften kröker banan mot marken, inte mot himlen.
+- **Cirkelbanor sett uppifrån**: streckad cirkel ska ligga i banans plan,
+  inte ovanför/under.
+
+Verifiera *alltid* en sådan bana mot fysiken **innan** du anser figuren
+klar — öppna sidan, ta en skärmbild och kontrollera att banan börjar och
+slutar på rätt punkter OCH kröker åt rätt håll däremellan.
+
+**Fysisk kontakt: hjul tangerar ytan, går aldrig genom den.** Fordon
+(bil, vagn, gunga, hjul, kärra) ska sitta så att hjulens *botten* ligger
+**på** vägbanan/marken — inte sänkta så att halva hjulet hamnar under
+ytan. Konkret i SVG: när bilen byggs i en lokal grupp där `y=0` är
+vägbanan ska hjulens centrum ligga vid `cy = -r`, och chassi-botten vid
+`y = -r` (chassi placeras *ovanför* hjul-centrum, inte på det). Samma
+princip gäller alla figurer där kropp möter yta: foten på en stege,
+botten på en låda, en boll som vilar på marken — kontaktpunkten ska
+ligga *på* ytan, varken över eller under. Granska alltid en skärmbild
+innan du anser figuren klar; det här är en av de vanligaste och mest
+synliga grafikbuggarna.
 
 **Granska renderingen.** SVG:erna sanity-testas inte av byggsteget. Öppna
 `katalog.html` (eller en tillfällig preview-sida som anropar helpers) och

@@ -20,12 +20,12 @@ window.KATALOG = {
   'Fysik': {
     label: 'Fysik',
     courses: {
-      'Fysik 1': {
-        label: 'Fysik 1',
+      'Fysik': {
+        label: 'Fysik',
         intro: {
-          tagline: 'Den grundläggande kursen i fysik på gymnasiet.',
+          tagline: 'Det grundläggande ämnet i fysik på gymnasiet.',
           paragraphs: [
-            'Fysik 1 introducerar de stora idéerna som hela klassisk fysik vilar på: rörelse, krafter, energi och tryck. Vi börjar med att lära oss SI-systemet och hur man arbetar vetenskapligt, och bygger vidare mot Newtons lagar, värmelära, elektriska kretsar och kärnfysikens grunder.',
+            'Fysik introducerar de stora idéerna som hela klassisk fysik vilar på: rörelse, krafter, energi och tryck. Vi börjar med att lära oss SI-systemet och hur man arbetar vetenskapligt, och bygger vidare mot Newtons lagar, värmelära, elektriska kretsar och kärnfysikens grunder.',
             'Fokus ligger på att förstå sambanden bakom formlerna — varför något händer, inte bara hur man räknar. Varje kapitel följs av övningsavsnitt med exempel och simuleringar.',
           ],
           bullets: [
@@ -35,7 +35,7 @@ window.KATALOG = {
           ],
         },
         chapters: {
-          'Introduktion och grunder': {
+          'Introduktion': {
             number: 1,
             intro: 'Vad fysik handlar om och hur vi mäter världen runt oss. Du lär dig det vetenskapliga arbetssättet, SI-systemets enheter och prefix, samt får möta de första rörelsebegreppen medelfart och densitet.',
             sections: [
@@ -154,13 +154,13 @@ window.KATALOG = {
           },
         },
       },
-      'Fysik 2': {
-        label: 'Fysik 2',
+      'Fysik – fördjupning': {
+        label: 'Fysik – fördjupning',
         intro: {
-          tagline: 'Fördjupningskursen som tar dig in i kvant- och relativitetsfysiken.',
+          tagline: 'Fördjupningsämnet som tar dig in i kvant- och relativitetsfysiken.',
           paragraphs: [
-            'Fysik 2 bygger vidare på Fysik 1 och tar sig an svängningar, vågor, elektromagnetism och den moderna fysik som omformade vår världsbild på 1900-talet. Vi börjar med cirkulär rörelse och kaströrelse, fortsätter till ljudvågor och stående vågor, och möter sedan magnetiska fält, induktion och generatorer.',
-            'Sista delen av kursen handlar om ljus som både våg och partikel: brytning, diffraktion, fotoelektrisk effekt, Bohrs atommodell och spektrallinjer — grunden för dagens kvantfysik.',
+            'Fysik – fördjupning bygger vidare på Fysik och tar sig an svängningar, vågor, elektromagnetism och den moderna fysik som omformade vår världsbild på 1900-talet. Vi börjar med cirkulär rörelse och kaströrelse, fortsätter till ljudvågor och stående vågor, och möter sedan magnetiska fält, induktion och generatorer.',
+            'Sista delen av ämnet handlar om ljus som både våg och partikel: brytning, diffraktion, fotoelektrisk effekt, Bohrs atommodell och spektrallinjer — grunden för dagens kvantfysik.',
           ],
           bullets: [
             'Du lär dig: cirkulär rörelse, vågor och elektromagnetism',

@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <!-- OpenDyslexic — dyslexivänligt typsnitt (toggle på teori-sidorna) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5/400.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5/700.css">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
 </head>
@@ -276,10 +279,10 @@
 
         marked.setOptions({ gfm: true, breaks: false });
 
-        // id-konvention för teori-uppslag — t.ex. Fysik 1 + "2.3" → "fy1-2.3"
+        // id-konvention för teori-uppslag — t.ex. Fysik + "2.3" → "fy1-2.3"
         function teoriId(courseName, num) {
-            if (courseName === 'Fysik 1') return 'fy1-' + num;
-            if (courseName === 'Fysik 2') return 'fy2-' + num;
+            if (courseName === 'Fysik') return 'fy1-' + num;
+            if (courseName === 'Fysik – fördjupning') return 'fy2-' + num;
             return null;
         }
 
@@ -319,8 +322,8 @@
                         <SearchBar />
                         <nav className="lab-nav" aria-label="Huvudnavigation">
                             <a href="index.html">Start</a>
-                            <a href="katalog.html#fy1">Fysik 1</a>
-                            <a href="katalog.html#fy2">Fysik 2</a>
+                            <a href="katalog.html#fy1">Fysik</a>
+                            <a href="katalog.html#fy2">Fysik – fördjupning</a>
                             <a href="om.html">Om</a>
                             <a href="kontakt.html">Kontakt</a>
                         </nav>
@@ -331,7 +334,7 @@
 
         function Breadcrumb({ course, chapter, section }) {
             // Hoppar över "Katalog" och "Fysik" — eftersom sidan numera bara
-            // har två ingångar (Fysik 1 / Fysik 2) börjar vi direkt med
+            // har två ingångar (Fysik / Fysik – fördjupning) börjar vi direkt med
             // kursnamnet.
             return (
                 <div className="lab-breadcrumb">
@@ -375,7 +378,7 @@
                 // en teori-länk (alltid) och en simulering-länk (om href finns).
                 const out = [];
                 for (const sim of filtered) {
-                    const code = sim.course === 'Fysik 2' ? 'fy2' : 'fy1';
+                    const code = sim.course === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
                     out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
                     if (sim.href) {
                         out.push({ ...sim, kind: 'sim', resultHref: sim.href });
@@ -492,7 +495,7 @@
                     )}
                     <div className="lab-course-intro-chapters">
                         <div className="lab-mono-label" style={{ marginBottom: 14 }}>
-                            KAPITEL I KURSEN
+                            KAPITEL I ÄMNET
                         </div>
                         <div className="lab-course-chapter-grid">
                             {chapters.map((ch, i) => {
@@ -518,7 +521,60 @@
             );
         }
 
-        function TeoriBody({ id }) {
+        // ── Bionic reading ──────────────────────────────────────────
+        // Fetmarkerar början ("fixeringspunkten") av varje ord i teori-
+        // texten som lässtöd. Spannen läggs ALLTID in; på/av styrs sedan
+        // av klassen .bionic-on på behållaren (ren CSS-växling — ingen ny
+        // DOM-vandring vid varje toggling). Hoppar över KaTeX, kod och
+        // rubriker så att matematik/formler aldrig påverkas.
+        function bionicFixLen(n) {
+            if (n <= 3) return 1;
+            if (n <= 6) return 2;
+            if (n <= 9) return 3;
+            return Math.ceil(n * 0.4);
+        }
+        function applyBionic(root) {
+            if (!root || root.querySelector('.lab-bionic')) return; // redan gjort
+            const SKIP = { SCRIPT: 1, STYLE: 1, CODE: 1, PRE: 1, H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1 };
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    if (!node.nodeValue || !/\S/.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+                    for (let p = node.parentElement; p && p !== root; p = p.parentElement) {
+                        if (SKIP[p.tagName]) return NodeFilter.FILTER_REJECT;
+                        const c = p.classList;
+                        if (c && (c.contains('katex') || c.contains('katex-display'))) return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            const nodes = [];
+            for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+            const wordRe = /\p{L}[\p{L}\p{M}'’\-]*/gu;
+            for (const tn of nodes) {
+                const text = tn.nodeValue;
+                wordRe.lastIndex = 0;
+                if (!wordRe.test(text)) continue;
+                wordRe.lastIndex = 0;
+                const frag = document.createDocumentFragment();
+                let last = 0, m;
+                while ((m = wordRe.exec(text))) {
+                    const word = m[0], start = m.index;
+                    if (start > last) frag.appendChild(document.createTextNode(text.slice(last, start)));
+                    let k = bionicFixLen(word.length);
+                    if (word.length > 1) k = Math.min(k, word.length - 1);
+                    const span = document.createElement('span');
+                    span.className = 'lab-bionic';
+                    span.textContent = word.slice(0, k);
+                    frag.appendChild(span);
+                    if (k < word.length) frag.appendChild(document.createTextNode(word.slice(k)));
+                    last = start + word.length;
+                }
+                if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+                tn.parentNode.replaceChild(frag, tn);
+            }
+        }
+
+        function TeoriBody({ id, bionic, dyslexia }) {
             const ref = useRef(null);
             const html = useMemo(() => {
                 const raw = TEORI[id];
@@ -539,6 +595,9 @@
                     ],
                     throwOnError: false,
                 });
+                // Lägg in bionic-spann EFTER KaTeX (så .katex kan hoppas över).
+                // Synlighet styrs sedan av .bionic-on-klassen via CSS.
+                applyBionic(ref.current);
                 // Skala ner long display-math; kör efter KaTeX-rendering.
                 // Måste vänta på fonts.ready — KaTeX laddar Computer Modern
                 // async och bredder är inte korrekta innan dess.
@@ -569,7 +628,7 @@
                 );
             }
             return (
-                <div className="lab-article-body lab-article-body-inline"
+                <div className={'lab-article-body lab-article-body-inline' + (bionic ? ' bionic-on' : '') + (dyslexia ? ' dyslexia-on' : '')}
                     ref={ref}
                     dangerouslySetInnerHTML={{ __html: html }} />
             );
@@ -919,6 +978,22 @@
             const [view, setView] = useState('teori');
             useEffect(() => { setView('teori'); }, [section]);
 
+            // Bionisk läsning (lässtöd) — på/av sparas mellan besök.
+            const [bionic, setBionic] = useState(() => {
+                try { return localStorage.getItem('fy-bionic') === '1'; } catch (e) { return false; }
+            });
+            useEffect(() => {
+                try { localStorage.setItem('fy-bionic', bionic ? '1' : '0'); } catch (e) {}
+            }, [bionic]);
+
+            // Dyslexivänligt typsnitt (OpenDyslexic) — på/av sparas mellan besök.
+            const [dyslexia, setDyslexia] = useState(() => {
+                try { return localStorage.getItem('fy-dyslexia') === '1'; } catch (e) { return false; }
+            });
+            useEffect(() => {
+                try { localStorage.setItem('fy-dyslexia', dyslexia ? '1' : '0'); } catch (e) {}
+            }, [dyslexia]);
+
             // När man klickar Föregående/Nästa: byt avsnitt och scrolla högst
             // upp i den nya genomgången så man inte hamnar längst ned.
             const sectionContentRef = useRef(null);
@@ -950,7 +1025,7 @@
 
             return (
                 <section className="lab-section lab-catalog">
-                    {/* Kurs-nivån borttagen — Fysik 1/2 finns i headern */}
+                    {/* Kurs-nivån borttagen — Fysik/2 finns i headern */}
                     {isMath ? (
                         <div className="lab-level-3" style={{ paddingBottom: 24, marginBottom: 28 }}>
                             <MathematicsPlaceholder />
@@ -1074,7 +1149,27 @@
                                                     </button>
                                                 </div>
 
-                                                {view === 'teori' && <TeoriBody id={tid} />}
+                                                {view === 'teori' && (
+                                                    <div className="lab-bionic-bar">
+                                                        <button type="button"
+                                                            className={'lab-bionic-toggle' + (bionic ? ' is-on' : '')}
+                                                            onClick={() => setBionic(b => !b)}
+                                                            aria-pressed={bionic}
+                                                            title="Bionisk läsning — fetmarkerar början av varje ord som lässtöd">
+                                                            <span className="lab-bionic-knob" />
+                                                            <span><b>Bio</b>nisk <b>läs</b>ning</span>
+                                                        </button>
+                                                        <button type="button"
+                                                            className={'lab-bionic-toggle' + (dyslexia ? ' is-on' : '')}
+                                                            onClick={() => setDyslexia(d => !d)}
+                                                            aria-pressed={dyslexia}
+                                                            title="Dyslexivänligt typsnitt (OpenDyslexic) — anpassat för läsare med dyslexi">
+                                                            <span className="lab-bionic-knob" />
+                                                            <span className="lab-dys-label">Dyslexivänligt</span>
+                                                        </button>
+                                                    </div>
+                                                )}
+                                                {view === 'teori' && <TeoriBody id={tid} bionic={bionic} dyslexia={dyslexia} />}
                                                 {view === 'ovningar' && <Ovningar id={tid} />}
 
                                                 <div className="lab-section-actions" style={{ marginTop: 32, paddingTop: 14, borderTop: '1px solid var(--lab-line)' }}>
@@ -1139,9 +1234,9 @@
 
         // Parsea URL-parametrar och hash för djuplänkar:
         //   katalog.html?course=Fysik+1
-        //   katalog.html#fy1            → Fysik 1, kursintro
-        //   katalog.html#fy2-3          → Fysik 2, kapitel 3 (första avsnittet)
-        //   katalog.html#fy1-2.3        → Fysik 1, kapitel 2, avsnitt 2.3
+        //   katalog.html#fy1            → Fysik, kursintro
+        //   katalog.html#fy2-3          → Fysik – fördjupning, kapitel 3 (första avsnittet)
+        //   katalog.html#fy1-2.3        → Fysik, kapitel 2, avsnitt 2.3
         function parseInitialState() {
             const subject = 'Fysik';
             const subj = K[subject];
@@ -1157,7 +1252,7 @@
             const hash = (window.location.hash || '').replace(/^#/, '');
             const m = hash.match(/^fy([12])(?:-(\d+)(?:\.(\d+))?)?$/);
             if (m) {
-                const courseKey = m[1] === '1' ? 'Fysik 1' : 'Fysik 2';
+                const courseKey = m[1] === '1' ? 'Fysik' : 'Fysik – fördjupning';
                 if (subj.courses[courseKey]) {
                     out.course = courseKey;
                     if (m[2]) {
@@ -1186,7 +1281,7 @@
         function App() {
             const [state, setState] = useState(parseInitialState);
 
-            // Lyssna på hash-ändringar så att klick på Fysik 1/Fysik 2 i navbar
+            // Lyssna på hash-ändringar så att klick på Fysik/Fysik – fördjupning i navbar
             // (när användaren redan är på katalog.html) uppdaterar vyn.
             useEffect(() => {
                 const onHashChange = () => setState(parseInitialState());

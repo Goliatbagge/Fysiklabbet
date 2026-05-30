@@ -210,6 +210,34 @@ function fmtNum(n, d) {
 }
 ```
 
+### Deluppgifter (a, b, c …) i frågor
+
+När en frågestam fortsätter i punkter a), b), c) … som **bygger vidare på
+stammen** (t.ex. "Vad är SI-enheten för a) hastighet, b) volym?") ska
+deluppgifterna stå på **ny rad** efter stammen — inte inbäddade i samma
+mening. Lägg en hård radbrytning **`<br>`** direkt före "a)". Markdown-
+pipelinen kör `marked` med `breaks: false` (se `katalog.html`), så ett
+vanligt radslut räcker *inte* — det måste vara `<br>` (eller två avslutande
+blanksteg).
+
+Deluppgifterna *flödar* sedan som löptext på nästa rad: korta alternativ
+(`a) hastighet b) volym`) ryms bredvid varandra; om de inte får plats
+bryter nästa deluppgift automatiskt till egen rad. Skriv dem alltså som
+vanlig text efter brytningen — inte tvunget en per rad.
+
+**Inget komma mellan deluppgifterna.** Skilj dem i stället åt med en
+tab-liknande lucka **`&emsp;&emsp;`** (två em-blanksteg, ≈ 2 em) så de får
+luft i sidled. Ett vanligt tabbtecken ger ingen synlig bredd i HTML.
+
+- ✓ `**Vad är SI-enheten för<br>a) hastighet&emsp;&emsp;b) volym?**`
+- ✗ `**Vad är SI-enheten för a) hastighet, b) volym?**`
+
+Gäller både teori-exemplens frågor (`::: exempel` i `data/teori/*.md`) och
+`question`-strängarna i `data/ovningar.js`. **Undantag:** när a)/b) är
+inflätade som separata satser mitt i en mening ("Vilken a) acceleration får
+vikterna, b) spännkraft …?"), eller redan är en uppräknad lista av korta
+alternativ — då behålls inline-formen.
+
 ## Simuleringsmönster
 
 Alla simuleringar följer samma struktur:

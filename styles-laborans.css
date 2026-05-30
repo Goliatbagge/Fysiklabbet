@@ -1552,6 +1552,58 @@ button.lab-card-disabled { pointer-events: none; }
     color: var(--lab-ink-muted);
 }
 
+/* ── Formelrutans layout (variabellista bredvid eller under formeln) ──
+   Byggs av buildFormelLayouts(); fitFormel() växlar till .is-stacked när
+   formel + lista inte får plats bredvid varandra. */
+.formel-layout {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+.formel-cell { flex: 0 0 auto; max-width: 100%; }
+/* I sida-vid-sida-läge ska cellen anta formelns naturliga bredd (inte
+   begränsas av KaTeX max-width:100% / overflow:hidden). I stacklat läge
+   gäller standardbeteendet så breda formler kan skalas/klippas som vanligt. */
+.formel-layout:not(.is-stacked) .formel-cell .katex-display {
+    max-width: none;
+    overflow: visible;
+}
+.formel-rule {
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: 1px;
+    background: var(--lab-line-strong);
+}
+.formel-layout .vardef-stack {
+    flex: 0 1 auto;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.formel-layout .vardef-stack li { margin: 0; line-height: 1.55; }
+.formel-layout:not(.is-stacked) .vardef-stack li { white-space: nowrap; }
+
+/* Prosaförklaring (när variablerna förklaras i en mening i stället för en
+   punktlista) — tar resterande bredd och radbryter normalt. */
+.formel-layout .vardef-prose { flex: 1 1 auto; min-width: 0; margin: 0; }
+
+/* Variabelsymbolen (allt före "=") i KaTeX-typsnittet så att listans t.ex.
+   M, λ, Δt matchar formelns. Texten efter "=" behåller brödtypsnittet.
+   Färdig KaTeX i symbolen behåller sina egna fontar (mer specifikt). */
+.vardef-stack .vardef-sym {
+    font-family: 'KaTeX_Math', 'KaTeX_Main', 'Cambria Math', serif;
+    font-style: italic;
+}
+
+/* Fallback: lista under formeln med horisontell avskiljare */
+.formel-layout.is-stacked { display: block; }
+.formel-layout.is-stacked .formel-rule {
+    width: auto;
+    height: 1px;
+    align-self: auto;
+    margin: 14px 0;
+}
+
 /* KaTeX-styling — matcha kroppstexten */
 .lab-article-body .katex-display {
     margin: 14px 0 !important;

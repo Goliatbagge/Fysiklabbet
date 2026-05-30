@@ -574,6 +574,106 @@
             }
         }
 
+        // ── Formelrutans layout ─────────────────────────────────────
+        // Variabellistan placeras till HÖGER om formeln med en vertikal
+        // avskiljare. Får formel + lista inte plats bredvid varandra staplas
+        // listan UNDER formeln med en horisontell avskiljare (fitFormel
+        // mäter och växlar automatiskt). "där" tas bort och punktlistan görs
+        // om till en staplad lista utan punkter.
+        // Sätt variabelsymbolen (allt FÖRE "=") i en .vardef-sym-span så att
+        // den kan ges samma typsnitt som formlerna (KaTeX). Hanterar alla
+        // skrivsätt: <em>M</em>, Δ<em>t</em>, bar grekisk bokstav (λ, ω),
+        // <em>v</em>₀ och färdig KaTeX ($\mathbb{E}$). Texten efter "=" rörs ej.
+        function styleVardefSymbols(list) {
+            for (const li of Array.from(list.children)) {
+                if (li.tagName !== 'LI') continue;
+                if (li.querySelector('.vardef-sym')) continue;            // redan gjort
+                if (li.textContent.indexOf('=') < 0) continue;           // ingen variabeldef
+                const sym = document.createElement('span');
+                sym.className = 'vardef-sym';
+                for (const node of Array.from(li.childNodes)) {
+                    if (node.nodeType === 3) {                            // textnod
+                        const txt = node.nodeValue;
+                        const idx = txt.indexOf('=');
+                        if (idx >= 0) {
+                            const before = txt.slice(0, idx);
+                            if (before) sym.appendChild(document.createTextNode(before));
+                            node.nodeValue = txt.slice(idx);              // "=" och efter stannar kvar
+                            li.insertBefore(sym, node);
+                            break;
+                        }
+                        sym.appendChild(node);                            // hela noden före "=" → in i sym
+                    } else {
+                        sym.appendChild(node);                            // element (em/katex) före "=" → in i sym
+                    }
+                }
+            }
+        }
+        function buildFormelLayouts(root) {
+            if (!root) return;
+            root.querySelectorAll('.lab-block-formel').forEach(box => {
+                if (box.querySelector('.formel-layout')) return;          // redan byggd
+                if (!box.querySelector('.katex-display, .katex')) return;
+                // Förklaringen till höger: i första hand en punktlista <ul>,
+                // annars ett stycke som börjar med "där" (prosaförklaring).
+                let right = box.querySelector('ul');
+                let isProse = false;
+                if (!right) {
+                    right = Array.from(box.children).find(
+                        el => el.tagName === 'P' && /^där\b/i.test(el.textContent.trim()));
+                    isProse = !!right;
+                }
+                if (!right) return;                                       // ingen variabelförklaring → lämna
+                const cell = document.createElement('div');
+                cell.className = 'formel-cell';
+                for (const el of Array.from(box.children)) {
+                    if (el.classList && el.classList.contains('lab-block-title')) continue;
+                    if (el === right) continue;
+                    if (el.tagName === 'P' && el.textContent.trim().toLowerCase() === 'där') { el.remove(); continue; }
+                    cell.appendChild(el);                                 // flytta in formelinnehållet
+                }
+                if (isProse) {
+                    const f = right.firstChild;                          // ta bort ledande "där "
+                    if (f && f.nodeType === 3) f.nodeValue = f.nodeValue.replace(/^\s*där\s+/i, '');
+                    right.classList.add('vardef-prose');
+                } else {
+                    right.classList.add('vardef-stack');
+                    styleVardefSymbols(right);
+                }
+                const rule = document.createElement('div');
+                rule.className = 'formel-rule';
+                const layout = document.createElement('div');
+                layout.className = 'formel-layout';
+                layout.appendChild(cell);
+                layout.appendChild(rule);
+                layout.appendChild(right);
+                box.appendChild(layout);
+            });
+        }
+        function fitFormel(root) {
+            if (!root) return;
+            root.querySelectorAll('.formel-layout').forEach(layout => {
+                const cell = layout.querySelector('.formel-cell');
+                const list = layout.querySelector('.vardef-stack');
+                const prose = layout.querySelector('.vardef-prose');
+                if (!cell || (!list && !prose)) return;
+                layout.classList.remove('is-stacked');                   // mät i sida-vid-sida-läge
+                const fW = cell.offsetWidth;                             // formelns naturliga bredd (ignorerar scale-transform)
+                const avail = layout.clientWidth;
+                // 28 px gap på var sida om linjen + 1 px linje + liten buffert
+                let stack;
+                if (list) {
+                    let lW = 0;
+                    for (const li of list.children) lW = Math.max(lW, li.scrollWidth);
+                    stack = (fW + lW + 57 > avail - 6);
+                } else {
+                    // prosaförklaring (wrappar): stacka om kvarvarande bredd blir för smal
+                    stack = (avail - fW - 57 < 240);
+                }
+                if (stack) layout.classList.add('is-stacked');
+            });
+        }
+
         function TeoriBody({ id, bionic, dyslexia }) {
             const ref = useRef(null);
             const html = useMemo(() => {
@@ -595,14 +695,20 @@
                     ],
                     throwOnError: false,
                 });
+                // Bygg om formelrutorna (variabellista bredvid/under formeln)
+                // FÖRE bionic — annars delar bionic upp "där"-textnoden och
+                // borttagningen av "där" i prosaförklaringar missar.
+                buildFormelLayouts(ref.current);
                 // Lägg in bionic-spann EFTER KaTeX (så .katex kan hoppas över).
                 // Synlighet styrs sedan av .bionic-on-klassen via CSS.
                 applyBionic(ref.current);
                 // Skala ner long display-math; kör efter KaTeX-rendering.
                 // Måste vänta på fonts.ready — KaTeX laddar Computer Modern
-                // async och bredder är inte korrekta innan dess.
+                // async och bredder är inte korrekta innan dess. fitFormel
+                // körs före fitMathDisplays så att formelcellen hunnit få sin
+                // bredd innan eventuell nedskalning av breda formler.
                 const root = ref.current;
-                const fit = () => fitMathDisplays(root);
+                const fit = () => { fitFormel(root); fitMathDisplays(root); };
                 let cancelled = false;
                 const safeFit = () => { if (!cancelled) fit(); };
                 const raf1 = requestAnimationFrame(safeFit);

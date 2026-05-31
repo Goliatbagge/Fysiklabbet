@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konisk pendel - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        /* Embed-läge: dölj sajt-nav när simen körs i en wrapper-iframe */
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        /* Glidare i laborans-accent */
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        /* Formel-etiketter (beteckningar ovanför/under symboler) */
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 17px; }
+        .fden { border-top: 2px solid var(--lab-ink); margin-top: 3px; padding-top: 3px;
+                color: var(--lab-ink); font-size: 17px; }
+
+        /* Scen-wrapper + fullskärm */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 520px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(200, 50, 74, 0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.10);
+            user-select: none;
+            background: #eef0ee;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap canvas { display: block; }
+
+        .scene-hint {
+            position: absolute; bottom: 8px; left: 10px; z-index: 5;
+            font-size: 11px; color: var(--lab-ink-muted, #5a6170);
+            background: rgba(243,238,228,0.7); padding: 3px 8px; border-radius: 6px;
+            pointer-events: none;
+        }
+
+        /* Knappar */
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .accordion-head {
+            cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600;
+        }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="katalog.html#fy1">Fysik</a>
+                <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        const fmt = (num, decimals = 2) => {
+            if (!isFinite(num)) return '∞';
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Färger för kraftvektorer (mättade för läsbarhet mot ljus scen)
+        const COL = {
+            tension:   '#b8860b', // spännkraft T – mörk guld
+            gravity:   '#c8324a', // tyngdkraft mg – accent-röd
+            vert:      '#0e7490', // T·cosθ – teal
+            horiz:     '#c2410c', // T·sinθ – bränd orange
+            centripetal:'#7c3aed' // nettokraft/centripetal – lila
+        };
+
+        // ── Reglage ──────────────────────────────────────────────
+        const Slider = ({ label, sub, value, min, max, step, unit, onChange, decimals = 1 }) => (
+            <div className="p-3 rounded-xl glass-card mb-3">
+                <div className="flex justify-between items-baseline mb-2">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>
+                        {fmt(value, decimals)} <span style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                <div className="flex justify-between mt-1 text-xs font-mono" style={{ color: 'var(--lab-ink-muted)' }}>
+                    <span>{fmt(min, min % 1 !== 0 ? 1 : 0)} {unit}</span>
+                    <span>{fmt(max, max % 1 !== 0 ? 1 : 0)} {unit}</span>
+                </div>
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        const ForceToggle = ({ checked, onChange, color, label }) => (
+            <label className="flex items-center gap-2 py-1 cursor-pointer text-sm" style={{ color: 'var(--lab-ink)' }}>
+                <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)}
+                       className="w-4 h-4" style={{ accentColor: 'var(--lab-accent)' }} />
+                <span style={{ display: 'inline-block', width: 14, height: 4, borderRadius: 2, background: color }}></span>
+                <span dangerouslySetInnerHTML={{ __html: label }} />
+            </label>
+        );
+
+        // ── θ–ω-graf (pedagogiskt guldkorn) ──────────────────────
+        const ThetaOmegaGraph = ({ L, g, omega }) => {
+            const W = 300, H = 150, padL = 34, padB = 24, padT = 10, padR = 10;
+            const omegaMin = Math.sqrt(g / L);
+            const omegaMax = 8;
+            const pts = [];
+            for (let i = 0; i <= 80; i++) {
+                const w = omegaMin + (omegaMax - omegaMin) * (i / 80);
+                const c = g / (w * w * L);
+                const th = c <= 1 ? Math.acos(c) * 180 / Math.PI : 0;
+                const x = padL + (w / omegaMax) * (W - padL - padR);
+                const y = (H - padB) - (th / 90) * (H - padB - padT);
+                pts.push([x, y]);
+            }
+            const path = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+            const curC = g / (omega * omega * L);
+            const curTheta = curC <= 1 ? Math.acos(curC) * 180 / Math.PI : 0;
+            const cx = padL + (Math.min(omega, omegaMax) / omegaMax) * (W - padL - padR);
+            const cy = (H - padB) - (curTheta / 90) * (H - padB - padT);
+            return (
+                <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto' }}>
+                    {/* axlar */}
+                    <line x1={padL} y1={padT} x2={padL} y2={H - padB} stroke="#38bdf8" strokeWidth="1" />
+                    <line x1={padL} y1={H - padB} x2={W - padR} y2={H - padB} stroke="#38bdf8" strokeWidth="1" />
+                    {/* 90°-asymptot */}
+                    <line x1={padL} y1={padT} x2={W - padR} y2={padT} stroke="rgba(15,22,32,0.25)" strokeWidth="1" strokeDasharray="3 3" />
+                    <text x={W - padR} y={padT + 11} textAnchor="end" fontSize="9" fill="var(--lab-ink-muted)">90° (nås aldrig)</text>
+                    {/* kurva */}
+                    <path d={path} fill="none" stroke="var(--lab-accent)" strokeWidth="2" />
+                    {/* nuvarande punkt */}
+                    {curTheta > 0 && <circle cx={cx} cy={cy} r="4" fill="var(--lab-ink)" />}
+                    {/* etiketter */}
+                    <text x={padL - 6} y={padT + 4} textAnchor="end" fontSize="9" fill="var(--lab-ink-muted)" fontStyle="italic">α</text>
+                    <text x={W - padR} y={H - padB + 14} textAnchor="end" fontSize="9" fill="var(--lab-ink-muted)">ω (rad/s)</text>
+                </svg>
+            );
+        };
+
+        // ── 3D-scenen ────────────────────────────────────────────
+        const PendulumScene = ({ stateRef }) => {
+            const mountRef = useRef(null);
+            const wrapRef = useRef(null);
+
+            useEffect(() => {
+                const mount = mountRef.current;
+                const width = mount.clientWidth;
+                const height = mount.clientHeight;
+
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xeef0ee);
+
+                const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+                camera.position.set(2.6, 1.0, 3.4);
+
+                const renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(width, height);
+                mount.appendChild(renderer.domElement);
+
+                const controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.08;
+                controls.target.set(0, -1.1, 0);
+                controls.minDistance = 1.5;
+                controls.maxDistance = 9;
+
+                // ljus
+                scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+                const dir = new THREE.DirectionalLight(0xffffff, 0.55);
+                dir.position.set(3, 6, 4);
+                scene.add(dir);
+
+                // golvruta
+                const grid = new THREE.GridHelper(6, 24, 0xc8324a, 0xcfc8ba);
+                grid.position.y = -2.4;
+                grid.material.opacity = 0.35;
+                grid.material.transparent = true;
+                scene.add(grid);
+
+                // takfäste (vid pivot y=0)
+                const ceiling = new THREE.Mesh(
+                    new THREE.BoxGeometry(1.1, 0.08, 1.1),
+                    new THREE.MeshStandardMaterial({ color: 0x9aa1ab, metalness: 0.3, roughness: 0.7 })
+                );
+                ceiling.position.y = 0.04;
+                scene.add(ceiling);
+                const pivotDot = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.04, 16, 16),
+                    new THREE.MeshStandardMaterial({ color: 0x0f1620 })
+                );
+                scene.add(pivotDot);
+
+                // lodlinje (streckad) från pivot rakt ned
+                const axisMat = new THREE.LineDashedMaterial({ color: 0x0f1620, dashSize: 0.08, gapSize: 0.06, opacity: 0.5, transparent: true });
+                const axisGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(0,-2,0)]);
+                const axisLine = new THREE.Line(axisGeo, axisMat);
+                axisLine.computeLineDistances();
+                scene.add(axisLine);
+
+                // cirkelbana (horisontell ring)
+                const circleMat = new THREE.LineBasicMaterial({ color: 0x0e7490, transparent: true, opacity: 0.7 });
+                const circleGeo = new THREE.BufferGeometry();
+                const circleLine = new THREE.LineLoop(circleGeo, circleMat);
+                scene.add(circleLine);
+
+                // snöre
+                const stringMat = new THREE.LineBasicMaterial({ color: 0x0f1620 });
+                const stringGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(0,-1,0)]);
+                const stringLine = new THREE.Line(stringGeo, stringMat);
+                scene.add(stringLine);
+
+                // massa
+                const bob = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.12, 32, 32),
+                    new THREE.MeshStandardMaterial({ color: 0x0f1620, metalness: 0.2, roughness: 0.5 })
+                );
+                scene.add(bob);
+
+                // textetikett-hjälpare (sprite). Tar segment så att variabler kan
+                // vara kursiva medan "sin"/"cos" och nedsänkta index är raka.
+                // seg: { t: text, i: kursiv?, sub: nedsänkt? }
+                const makeLabel = (segments, hex) => {
+                    const cv = document.createElement('canvas');
+                    cv.width = 380; cv.height = 112;
+                    const ctx = cv.getContext('2d');
+                    const BASE = 52, SUBSZ = 34, SUBDY = 12;
+                    const fontFor = (seg) => (seg.i ? 'italic ' : '') + '600 ' +
+                        (seg.sub ? SUBSZ : BASE) + 'px Poppins, sans-serif';
+                    let total = 0;
+                    segments.forEach(seg => { ctx.font = fontFor(seg); total += ctx.measureText(seg.t).width; });
+                    let x = (cv.width - total) / 2;
+                    const cy = cv.height / 2;
+                    ctx.fillStyle = hex;
+                    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+                    segments.forEach(seg => {
+                        ctx.font = fontFor(seg);
+                        ctx.fillText(seg.t, x, cy + (seg.sub ? SUBDY : 0));
+                        x += ctx.measureText(seg.t).width;
+                    });
+                    const tex = new THREE.CanvasTexture(cv);
+                    tex.anisotropy = 4;
+                    const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true }));
+                    spr.scale.set(cv.width * 0.00215, cv.height * 0.00215, 1);
+                    return spr;
+                };
+
+                // kraftpilar (ArrowHelper) + etiketter
+                const mkArrow = (hex) => {
+                    const a = new THREE.ArrowHelper(new THREE.Vector3(0,-1,0), new THREE.Vector3(), 1, hex, 0.12, 0.07);
+                    scene.add(a); return a;
+                };
+                const arrows = {
+                    gravity: mkArrow(COL.gravity),
+                    tension: mkArrow(COL.tension),
+                    vert: mkArrow(COL.vert),
+                    horiz: mkArrow(COL.horiz),
+                    centripetal: mkArrow(COL.centripetal)
+                };
+                const labels = {
+                    gravity: makeLabel([{t:'F',i:true},{t:'G',sub:true}], COL.gravity),
+                    tension: makeLabel([{t:'F',i:true},{t:'s',sub:true}], COL.tension),
+                    vert: makeLabel([{t:'F',i:true},{t:'s',sub:true},{t:' cos ',i:false},{t:'α',i:true}], COL.vert),
+                    horiz: makeLabel([{t:'F',i:true},{t:'s',sub:true},{t:' sin ',i:false},{t:'α',i:true}], COL.horiz),
+                    centripetal: makeLabel([{t:'F',i:true},{t:'c',sub:true}], COL.centripetal)
+                };
+                Object.values(labels).forEach(l => scene.add(l));
+
+                const FORCE_SCALE = 0.10; // scen-enheter per newton
+                let phase = 0;
+                let last = performance.now();
+                let raf;
+
+                const setArrow = (arrow, label, dir, len, from, show, labelText) => {
+                    arrow.visible = show && len > 0.001;
+                    label.visible = arrow.visible;
+                    if (!arrow.visible) return;
+                    const d = dir.clone().normalize();
+                    arrow.position.copy(from);
+                    arrow.setDirection(d);
+                    arrow.setLength(len, Math.min(0.13, len*0.28), Math.min(0.08, len*0.18));
+                    label.position.copy(from).addScaledVector(d, len + 0.18);
+                };
+
+                const animate = () => {
+                    raf = requestAnimationFrame(animate);
+                    const now = performance.now();
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+                    const s = stateRef.current;
+                    const { L, m, omega, g, showForces, paused } = s;
+
+                    const omegaMin = Math.sqrt(g / L);
+                    let theta = 0;
+                    const c = g / (omega * omega * L);
+                    if (omega > omegaMin && c < 1) theta = Math.acos(c);
+                    const r = L * Math.sin(theta);
+                    const h = L * Math.cos(theta);
+
+                    if (!paused && theta > 0) phase += omega * dt;
+                    const px = r * Math.cos(phase);
+                    const pz = r * Math.sin(phase);
+                    const bobPos = new THREE.Vector3(px, -h, pz);
+                    bob.position.copy(bobPos);
+
+                    // snöre
+                    stringLine.geometry.setFromPoints([new THREE.Vector3(0,0,0), bobPos]);
+                    // lodlinje längd
+                    axisLine.geometry.setFromPoints([new THREE.Vector3(0,0,0), new THREE.Vector3(0,-h,0)]);
+                    axisLine.computeLineDistances();
+                    // cirkel
+                    const seg = 64; const cpts = [];
+                    for (let i = 0; i < seg; i++) {
+                        const a = (i / seg) * Math.PI * 2;
+                        cpts.push(new THREE.Vector3(r*Math.cos(a), -h, r*Math.sin(a)));
+                    }
+                    circleLine.geometry.setFromPoints(cpts);
+                    circleLine.visible = theta > 0;
+
+                    // krafter
+                    const mg = m * g;
+                    const tension = theta > 0 ? mg / Math.cos(theta) : mg;
+                    const toPivot = new THREE.Vector3(0,0,0).sub(bobPos); // mass→pivot
+                    const toCenter = new THREE.Vector3(-px, 0, -pz);      // horisontellt mot axeln
+                    setArrow(arrows.gravity, labels.gravity, new THREE.Vector3(0,-1,0), mg*FORCE_SCALE, bobPos, showForces.gravity, 'mg');
+                    setArrow(arrows.tension, labels.tension, toPivot, tension*FORCE_SCALE, bobPos, showForces.tension, 'T');
+                    setArrow(arrows.vert, labels.vert, new THREE.Vector3(0,1,0), tension*Math.cos(theta)*FORCE_SCALE, bobPos, showForces.components && theta>0, 'Tcos');
+                    setArrow(arrows.horiz, labels.horiz, toCenter, tension*Math.sin(theta)*FORCE_SCALE, bobPos, showForces.components && theta>0, 'Tsin');
+                    setArrow(arrows.centripetal, labels.centripetal, toCenter, tension*Math.sin(theta)*FORCE_SCALE, bobPos, showForces.centripetal && theta>0, 'F');
+
+                    controls.update();
+                    renderer.render(scene, camera);
+                };
+                animate();
+
+                const onResize = () => {
+                    const w = mount.clientWidth, hh = mount.clientHeight;
+                    camera.aspect = w / hh; camera.updateProjectionMatrix();
+                    renderer.setSize(w, hh);
+                };
+                window.addEventListener('resize', onResize);
+                const ro = new ResizeObserver(onResize);
+                ro.observe(mount);
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    window.removeEventListener('resize', onResize);
+                    ro.disconnect();
+                    renderer.dispose();
+                    mount.removeChild(renderer.domElement);
+                };
+            }, []);
+
+            const goFs = () => {
+                const el = wrapRef.current;
+                if (!document.fullscreenElement) (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                else document.exitFullscreen();
+            };
+
+            return (
+                <div className="scene-wrap" ref={wrapRef}>
+                    <div ref={mountRef} style={{ width: '100%', height: '100%' }}></div>
+                    <button className="fs-btn" onClick={goFs} title="Fullskärm" aria-label="Fullskärm">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                        </svg>
+                    </button>
+                    <div className="scene-hint">Dra för att rotera · scrolla för att zooma</div>
+                </div>
+            );
+        };
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [L, setL] = useState(1.0);
+            const [m, setM] = useState(0.5);
+            const [omega, setOmega] = useState(3.5);
+            const [g, setG] = useState(9.82);
+            const [paused, setPaused] = useState(false);
+            const [showForces, setShowForces] = useState({
+                gravity: true, tension: true, components: false, centripetal: false
+            });
+
+            const stateRef = useRef({ L, m, omega, g, showForces, paused });
+            useEffect(() => { stateRef.current = { L, m, omega, g, showForces, paused }; },
+                      [L, m, omega, g, showForces, paused]);
+
+            // beräknade storheter
+            const d = useMemo(() => {
+                const omegaMin = Math.sqrt(g / L);
+                const c = g / (omega * omega * L);
+                const spinning = omega > omegaMin && c < 1;
+                const theta = spinning ? Math.acos(c) : 0;
+                const r = L * Math.sin(theta);
+                const h = L * Math.cos(theta);
+                const v = omega * r;
+                const period = 2 * Math.PI * Math.sqrt(h / g);
+                const tension = spinning ? (m * g) / Math.cos(theta) : m * g;
+                const planPeriod = 2 * Math.PI * Math.sqrt(L / g);
+                return { omegaMin, spinning, theta: theta * 180 / Math.PI, r, h, v, period, tension, mg: m*g, planPeriod };
+            }, [L, m, omega, g]);
+
+            const tf = (k) => setShowForces(s => ({ ...s, [k]: !s[k] }));
+
+            const Readout = ({ label, value, unit, accent }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: accent ? 'var(--lab-accent)' : 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik – fördjupning</a> / Konisk pendel
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Konisk pendel</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 760 }}>
+                            En massa snurrar i en vågrät cirkel medan snöret sveper ut en kon. Snöret kan
+                            aldrig bli vågrätt. Utforska hur vinkeln <em>α</em>, perioden och spännkraften
+                            beror på vinkelhastigheten <em>ω</em> — och upptäck att massan inte påverkar vinkeln.
+                        </p>
+
+                        {/* formelkort */}
+                        <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-10 gap-y-4"
+                             style={{ fontFamily: 'Poppins, sans-serif' }}>
+                            {/* cos α = g / (ω²·l) */}
+                            <div className="flex items-center gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Konvinkel</div>
+                                    <div className="fnum">cos&thinsp;<em>α</em></div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink-muted)', fontSize: '17px' }}>=</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Tyngdfaktor</div>
+                                    <div className="fnum"><em>g</em></div>
+                                    <div className="fden"><em>ω</em>²&thinsp;⋅&thinsp;<em>l</em></div>
+                                    <div className="flbl mt-1">Vinkelhast.² · längd</div>
+                                </div>
+                            </div>
+
+                            {/* T_period = 2π√(l·cos α / g) */}
+                            <div className="flex items-center gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Omloppstid</div>
+                                    <div className="fnum"><em>T</em><sub>period</sub></div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink-muted)', fontSize: '17px' }}>=</span>
+                                <span style={{ color: 'var(--lab-ink)', fontSize: '17px' }}>2π&thinsp;√(</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Snörlängd · cosinus</div>
+                                    <div className="fnum"><em>l</em>&thinsp;cos&thinsp;<em>α</em></div>
+                                    <div className="fden"><em>g</em></div>
+                                    <div className="flbl mt-1">Tyngdfaktor</div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink)', fontSize: '17px' }}>)</span>
+                            </div>
+
+                            {/* F_s = F_G / cos α */}
+                            <div className="flex items-center gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Spännkraft</div>
+                                    <div className="fnum"><em>F</em><sub>s</sub></div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink-muted)', fontSize: '17px' }}>=</span>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Tyngdkraft</div>
+                                    <div className="fnum"><em>F</em><sub>G</sub></div>
+                                    <div className="fden">cos&thinsp;<em>α</em></div>
+                                    <div className="flbl mt-1">Konvinkel</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <PendulumScene stateRef={stateRef} />
+                                {!d.spinning && (
+                                    <div className="mt-3 p-3 rounded-lg text-sm" style={{ background: 'var(--lab-bg)', borderLeft: '3px solid var(--lab-accent)', color: 'var(--lab-ink-soft)' }}>
+                                        <strong>Pendeln hänger rakt ned.</strong> Vinkelhastigheten är för låg —
+                                        det krävs <em>ω</em> &gt; <em>ω</em><sub>min</sub> = √(<em>g</em>/<em>l</em>) ≈ {fmt(d.omegaMin)} rad/s
+                                        för att massan ska lyfta och börja gå i cirkel.
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <Slider label="Vinkelhastighet (<em>ω</em>)" sub="<em>ω</em> styr systemet — vinkeln <em>α</em> ställer in sig själv."
+                                        value={omega} min={0} max={8} step={0.1} unit="rad/s" onChange={setOmega} />
+                                <Slider label="Snörlängd (<em>l</em>)" value={L} min={0.3} max={2.0} step={0.05} unit="m" onChange={setL} decimals={2} />
+                                <Slider label="Massa (<em>m</em>)" sub="Testa: ändra massan — vad händer med vinkeln och perioden?"
+                                        value={m} min={0.1} max={2.0} step={0.1} unit="kg" onChange={setM} decimals={2} />
+                                <Slider label="Tyngdfaktor (<em>g</em>)" value={g} min={1.6} max={9.82} step={0.01} unit="N/kg" onChange={setG} decimals={2} />
+
+                                <div className="flex gap-2 mb-4">
+                                    <button className={`btn-toggle flex-1 ${!paused ? 'active' : ''}`} onClick={() => setPaused(false)}>▶ Spela</button>
+                                    <button className={`btn-toggle flex-1 ${paused ? 'active' : ''}`} onClick={() => setPaused(true)}>❚❚ Pausa</button>
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-4">
+                                    <h3 className="font-bold text-sm mb-1" style={{ color: 'var(--lab-ink)' }}>Visa krafter</h3>
+                                    <ForceToggle checked={showForces.gravity} onChange={() => tf('gravity')} color={COL.gravity} label="Tyngdkraft <em>F</em><sub>G</sub>" />
+                                    <ForceToggle checked={showForces.tension} onChange={() => tf('tension')} color={COL.tension} label="Spännkraft <em>F</em><sub>s</sub> (längs snöret)" />
+                                    <ForceToggle checked={showForces.components} onChange={() => tf('components')} color={COL.vert} label="Komposanter <em>F</em><sub>s</sub>cos<em>α</em> &amp; <em>F</em><sub>s</sub>sin<em>α</em>" />
+                                    <ForceToggle checked={showForces.centripetal} onChange={() => tf('centripetal')} color={COL.centripetal} label="Nettokraft <em>F</em><sub>c</sub> (centripetal)" />
+                                </div>
+
+                                <div className="glass-card rounded-xl p-3 mb-4">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Beräknade värden</h3>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Konvinkel <em>α</em>" value={fmt(d.theta, 1)} unit="°" accent />
+                                        <Readout label="Radie <em>r</em>" value={fmt(d.r)} unit="m" />
+                                        <Readout label="Höjd <em>h</em>" value={fmt(d.h)} unit="m" />
+                                        <Readout label="Banfart <em>v</em>" value={fmt(d.v)} unit="m/s" />
+                                        <Readout label="Omloppstid <em>T</em><sub>period</sub>" value={fmt(d.period, 3)} unit="s" accent />
+                                        <Readout label="Spännkraft <em>F</em><sub>s</sub>" value={fmt(d.tension)} unit="N" />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(14,116,144,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        Lodrät jämvikt: <em>F</em><sub>s</sub>cos<em>α</em> = {fmt(d.tension*Math.cos(d.theta*Math.PI/180))} N
+                                        &nbsp;=&nbsp; <em>F</em><sub>G</sub> = {fmt(d.mg)} N ✓
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-2 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>📈 Vinkeln mot vinkelhastigheten</h3>
+                                <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Kurvan visar <em>α</em> = arccos(<em>g</em>/(<em>ω</em>²<em>l</em>)). När <em>ω</em> ökar
+                                    närmar sig <em>α</em> 90° men når det aldrig — det skulle kräva oändlig spännkraft.
+                                </p>
+                                <ThetaOmegaGraph L={L} g={g} omega={omega} />
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>💡 Oberoende av massan</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Eftersom <em>T</em><sub>period</sub> = 2π√(<em>h</em>/<em>g</em>) och <em>h</em> = <em>l</em>cos<em>α</em>
+                                    inte innehåller massan, är omloppstiden <strong>oberoende av massan</strong> — precis som
+                                    för en vanlig pendel. Dra i mass-reglaget och se att <em>α</em> och <em>T</em><sub>period</sub>
+                                    inte ändras (men spännkraften gör det!).
+                                </p>
+                                <div className="mt-3 p-2 rounded-lg text-sm" style={{ background: 'var(--lab-bg)', border: '1px dashed var(--lab-line-strong)', color: 'var(--lab-ink-soft)' }}>
+                                    Gränsfall <em>α</em> → 0: <em>T</em><sub>period</sub> → 2π√(<em>l</em>/<em>g</em>) = {fmt(d.planPeriod, 3)} s
+                                    — samma som en <strong>plan pendel</strong> med längden <em>l</em>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>⚠️ Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Centrifugalkraften drar utåt."</strong> I markens (inertial)system finns bara två krafter: spännkraften och tyngdkraften. Centrifugalkraft är en skenkraft som bara dyker upp om man räknar i det roterande systemet.</li>
+                                <li><strong>"Spännkraften är lika med <em>F</em><sub>G</sub>."</strong> Nej — <em>F</em><sub>s</sub> = <em>F</em><sub>G</sub>/cos<em>α</em> är alltid <strong>större</strong> än <em>F</em><sub>G</sub> när <em>α</em> &gt; 0, eftersom snöret också måste ge den horisontella centripetalkraften.</li>
+                                <li><strong>"Tyngre massa ger större vinkel."</strong> Massan påverkar inte <em>α</em> alls — bara <em>ω</em> och <em>l</em> gör det. Tyngre massa ökar däremot spännkraften.</li>
+                            </ul>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>⚙️ Verklig tillämpning: centrifugalregulatorn</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                James Watt använde 1788 en centrifugalregulator (governor) för att styra ångmaskiner:
+                                två koniska pendlar kopplade till ångventilen. När maskinen gick för fort ökade <em>ω</em>,
+                                vinkeln <em>α</em> blev större och vikterna lyftes — vilket strypte ångtillförseln och saktade ned
+                                maskinen. Exakt den fysik du ser här, omsatt till automatisk reglering.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+</body>
+</html>

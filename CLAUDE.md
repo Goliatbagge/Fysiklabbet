@@ -277,6 +277,29 @@ Varje sim ska ha fullskärmsläge. Krav på mönstret:
 1. Scen-wrapper (`.scene-wrap`) med `position: relative` och
    `:fullscreen`/`:-webkit-full-screen` som sätter `100vw/100vh`.
 2. Fullskärmsknapp (`.fs-btn`) i ett hörn → `el.requestFullscreen()`.
+   **Använd ALLTID klassen `fs-btn`** — den är globalt stylad i
+   `styles-laborans-sim.css` till en cirkulär ikon-knapp (40 px, vit
+   cirkel, ink-ikon, uppe till vänster). **Definiera ALDRIG en egen lokal
+   `.fs-btn`-CSS** och lägg **ingen text** i knappen — bara expandera/
+   komprimera-ikon-SVG:n (annars spiller texten ut under cirkeln och varje
+   sim ser olika ut). Exakt mönster (kopiera från
+   `fysik2-fotoelektrisk-effekt.html` eller `fysik2-konisk-pendel-app.html`):
+   ```jsx
+   <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+           title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+     {isFullscreen ? (
+       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+         <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+       </svg>
+     ) : (
+       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+         <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+       </svg>
+     )}
+   </button>
+   ```
 3. Flytande kontrollpanel (`.fs-controls`) absolut positionerad,
    innehållande de viktigaste reglagen.
 4. Visa/dölj-knapp (`.fs-toggle-handle`) — användaren kan minimera panelen.

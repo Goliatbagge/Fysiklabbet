@@ -18,16 +18,15 @@
    ============================================================ */
 
 /* ─── 1. Body & sidans ram ─────────────────────────────────── */
-/* INVERTERAD FÄRGSCHEMA FÖR SIMULERINGAR:
-   - Body/ytter-ytan = VIT (var(--lab-bg-panel) = #ffffff)
-   - Sim-kort, paneler och visualiseringar = PAPPERSKRÄM (var(--lab-bg) = #f3eee4)
-   Detta skiljer sig från katalog/teori-sidorna där body är papper. Här blir
-   simuleringen det "varma centrumet" på en vit yta. */
+/* FÄRGSCHEMA FÖR SIMULERINGAR (cream-dominerat, matchar katalog/teori):
+   - Body/ytter-ytan = PAPPERSKRÄM (var(--lab-bg) = #f3eee4)
+   - Sim-kort, paneler och visualiseringar = samma kräm, avgränsade med ramar
+   Hela sajten har nu cream som genomgående bakgrund. */
 
 body.lab-sim {
     font-family: var(--lab-font-sans);
     color: var(--lab-ink);
-    background: var(--lab-bg-panel);
+    background: var(--lab-bg);
 }
 
 /* Rymd-sims: body har explicit bg-black eller bg-slate-950 (för stjärnhimmel).
@@ -58,19 +57,19 @@ body.lab-sim.bg-black .bg-cyan-500,
 body.lab-sim.bg-slate-950 .bg-cyan-500 { background: #06b6d4 !important; }
 
 body.lab-sim .page-wrapper {
-    background: var(--lab-bg-panel);
+    background: var(--lab-bg);
     min-height: 100vh;
     color: var(--lab-ink);
 }
 
-/* Outer wrapper som använder Tailwinds bg-gray-900/bg-slate-950 = också vit */
+/* Outer wrapper som använder Tailwinds bg-gray-900/bg-slate-950 = också kräm */
 body.lab-sim .min-h-screen.bg-gray-900,
 body.lab-sim .min-h-screen.bg-slate-950 {
-    background: var(--lab-bg-panel);
+    background: var(--lab-bg);
     color: var(--lab-ink);
 }
 
-/* Tailwind gradient-utilities: bg-gradient-to-* från slate/sky/blue-9xx → vit */
+/* Tailwind gradient-utilities: bg-gradient-to-* från slate/sky/blue-9xx → kräm */
 body.lab-sim .min-h-screen.bg-gradient-to-br,
 body.lab-sim .min-h-screen.bg-gradient-to-tr,
 body.lab-sim .min-h-screen.bg-gradient-to-r,
@@ -82,7 +81,7 @@ body.lab-sim .bg-gradient-to-r.from-slate-900,
 body.lab-sim [class*="bg-gradient"][class*="from-slate-9"],
 body.lab-sim [class*="bg-gradient"][class*="from-gray-9"],
 body.lab-sim [class*="bg-gradient"][class*="from-sky-9"] {
-    background: var(--lab-bg-panel) !important;
+    background: var(--lab-bg) !important;
     background-image: none !important;
 }
 

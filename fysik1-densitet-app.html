@@ -39,13 +39,13 @@
         .tab-button.active-explore {
             background: rgba(200, 50, 74, 0.2);
             border-color: rgba(200, 50, 74, 0.5);
-            color: #38bdf8;
+            color: #0f1620;
             box-shadow: 0 0 20px rgba(200, 50, 74, 0.2);
         }
         .tab-button.active-buoyancy {
             background: rgba(200, 50, 74, 0.2);
             border-color: rgba(200, 50, 74, 0.5);
-            color: #60a5fa;
+            color: #0f1620;
             box-shadow: 0 0 20px rgba(200, 50, 74, 0.2);
         }
 
@@ -179,11 +179,13 @@
           { name: 'Guld', density: 19300, color: 'bg-yellow-400 border-yellow-600', dotColor: 'bg-yellow-700' },
         ];
 
-        const MAX_VOLUME_LITERS = 10;
-        const MIN_VOLUME_LITERS = 1;
-        const MAX_MASS_KG = 200;
-        const MIN_MASS_KG = 0.1;
-        const WATER_DENSITY = 1000;
+        // Volym i cm³: minsta kuben ~3 cm sida (≈30 cm³, förenklat),
+        // största skalenligt utifrån den. Massa i gram.
+        const MIN_VOLUME_CM3 = 30;
+        const MAX_VOLUME_CM3 = 4700;
+        const MAX_MASS_G = 100000;
+        const MIN_MASS_G = 1;
+        const WATER_DENSITY = 1000;   // kg/m³ (SI), används för flytlogik
 
         // Pre-generate random positions for atoms (separate sets per face)
         const MAX_DOTS = 1000;
@@ -198,6 +200,13 @@
         const STATIC_ATOM_POSITIONS_RIGHT = Array.from({ length: MAX_DOTS }).map(() => ({
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 100}%`,
+        }));
+        // Volymetriska atomer: fördelade i hela kubens volym (x, y, djup)
+        // depth: 0 = bakre väggen, 1 = främre väggen
+        const STATIC_ATOM_3D = Array.from({ length: MAX_DOTS }).map(() => ({
+          x: Math.random(),
+          y: Math.random(),
+          depth: Math.random(),
         }));
 
         // SliderControl Component
@@ -233,8 +242,17 @@
         const DEFAULT_DOT_COLOR = 'bg-slate-500';
 
         const CubeVisualizer = React.memo(({ volume, mass, density, mode, selectedMaterialName }) => {
-          const baseSize = 80;
-          const sideLength = baseSize * Math.pow(volume, 1/3);
+          // Kubens visuella sida är ÄKTA proportionell mot den fysiska sidan
+          // (∝ ∛V): minsta kuben (MIN_VOLUME_CM3) blir en liten tärning,
+          // största (MAX_VOLUME_CM3) fyller plattan. Volym i cm³.
+          const MIN_SIDE = 32;
+          const sideLength = MIN_SIDE * Math.pow(volume / MIN_VOLUME_CM3, 1/3);
+          // Vågen har FAST storlek, dimensionerad efter den största kuben.
+          const maxSide = MIN_SIDE * Math.pow(MAX_VOLUME_CM3 / MIN_VOLUME_CM3, 1/3);
+          const SCALE_W = maxSide * 1.22;   // plattans bredd – största kuben får precis plats
+          const SCALE_DP = maxSide * 1.16;  // plattans djup
+          const SCALE_HH = 34;              // våghusets höjd
+          const SCALE_TOP = 232;            // fast vertikal placering i scenen
 
           const selectedMaterial = selectedMaterialName
             ? MATERIALS.find(m => m.name === selectedMaterialName)
@@ -243,8 +261,10 @@
           const cubeColor = selectedMaterial ? selectedMaterial.color : DEFAULT_CUBE_COLOR;
           const dotColor = selectedMaterial ? selectedMaterial.dotColor : DEFAULT_DOT_COLOR;
 
-          const numDots = Math.min(Math.floor(density * 0.02), 400);
-          const activeDots = STATIC_ATOM_POSITIONS.slice(0, numDots);
+          const numDots = Math.min(Math.floor(density * 0.045), 700);
+          const activeDots = STATIC_ATOM_3D.slice(0, numDots);
+          // Inset så att atomerna håller sig en bit innanför kubens väggar
+          const ATOM_INSET = 0.08;
 
           const NEUTRAL_TOLERANCE = 0.5; // kg/m³ – krymper floating-point-glapp kring 1000
           const isNeutralBuoyant = Math.abs(density - WATER_DENSITY) < NEUTRAL_TOLERANCE;
@@ -267,7 +287,9 @@
             // Extra offset för att 3D-rotationen gör att hörnen sticker ut ~20px
             buoyancyTop = Math.max(waterSurfaceY, containerHeight - bottomThickness - sideLength + 20);
           }
-          const exploreTop = (400 - sideLength) / 2;
+          // Kuben vilar på den fasta vågplattan: underkanten hamnar på samma
+          // nivå oavsett kubstorlek → currentTop härleds ur SCALE_TOP.
+          const exploreTop = SCALE_TOP + 6 - sideLength;
           const exploreLeft = (400 - sideLength) / 2;
 
           const currentTop = mode === 'BUOYANCY' ? buoyancyTop : exploreTop;
@@ -275,10 +297,7 @@
 
           return (
             <div className="relative w-[400px] h-[400px] rounded-xl overflow-hidden shadow-inner"
-                 style={{ background: 'rgba(2, 6, 23, 0.9)', border: '1px solid rgba(200, 50, 74, 0.12)', perspective: '800px' }}>
-              <div className="absolute inset-0 opacity-5 pointer-events-none"
-                   style={{ backgroundImage: 'linear-gradient(rgba(200, 50, 74, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(200, 50, 74, 0.5) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
-              </div>
+                 style={{ background: '#f3eee4', border: '1px solid rgba(200, 50, 74, 0.18)', perspective: '800px' }}>
 
               {mode === 'BUOYANCY' && (
                 <>
@@ -321,8 +340,78 @@
                 </>
               )}
 
+              {/* Digital våg – kuben vilar på vågplattan (endast densitets-läget) */}
+              {mode === 'EXPLORE' && (() => {
+                const W = SCALE_W;            // fast plattbredd
+                const Dp = SCALE_DP;          // fast plattdjup
+                const Hh = SCALE_HH;          // våghusets höjd
+                const scaleLeft = (400 - W) / 2;
+                const scaleTop = SCALE_TOP;
+                const grams = mass;
+                return (
+                  <div className="absolute transition-all duration-300 ease-out"
+                       style={{ width: `${W}px`, height: `${Hh}px`,
+                                transform: `translate(${scaleLeft}px, ${scaleTop}px)`,
+                                transformStyle: 'preserve-3d', zIndex: 6 }}>
+                    <div style={{ width: '100%', height: '100%', position: 'relative',
+                                  transformStyle: 'preserve-3d',
+                                  transform: 'rotateX(-20deg) rotateY(-30deg)' }}>
+                      {/* Höger sida (mörk graphite) */}
+                      <div className="absolute" style={{
+                        width: `${Dp}px`, height: `${Hh}px`, left: `${(W - Dp) / 2}px`, top: 0,
+                        transform: `rotateY(90deg) translateZ(${W / 2}px)`,
+                        background: 'linear-gradient(180deg, #2a2f37 0%, #14171c 100%)',
+                        borderRadius: '3px', backfaceVisibility: 'hidden' }} />
+                      {/* Bakkant (svag, för djup) */}
+                      <div className="absolute" style={{
+                        width: `${W}px`, height: `${Hh}px`, left: 0, top: 0,
+                        transform: `translateZ(${-Dp / 2}px)`,
+                        background: '#0e1115', backfaceVisibility: 'hidden' }} />
+                      {/* Vågplatta (borstad metall) – ytan kuben står på */}
+                      <div className="absolute" style={{
+                        width: `${W}px`, height: `${Dp}px`, left: 0, top: `${(Hh - Dp) / 2}px`,
+                        transform: `rotateX(90deg) translateZ(${Hh / 2}px)`,
+                        background: 'linear-gradient(135deg, #e9edf2 0%, #b9c1cc 45%, #d6dce3 60%, #a7b0bc 100%)',
+                        borderRadius: '6px',
+                        boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.5), inset 0 0 14px rgba(60,70,85,0.35)',
+                        backfaceVisibility: 'hidden' }}>
+                        {/* borstad-metall-streck */}
+                        <div className="absolute inset-1 opacity-30" style={{ borderRadius: '5px',
+                          backgroundImage: 'repeating-linear-gradient(90deg, rgba(120,130,145,0.4) 0px, rgba(120,130,145,0.4) 1px, transparent 1px, transparent 4px)' }} />
+                      </div>
+                      {/* Framsida (våghus + display) */}
+                      <div className="absolute inset-0" style={{
+                        transform: `translateZ(${Dp / 2}px)`,
+                        background: 'linear-gradient(180deg, #3b414b 0%, #23272e 55%, #1a1d23 100%)',
+                        borderRadius: '4px',
+                        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.12)',
+                        backfaceVisibility: 'hidden',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        {/* LCD-display */}
+                        <div style={{
+                          minWidth: '62%', padding: '2px 8px',
+                          background: 'linear-gradient(180deg, #07261c 0%, #04130e 100%)',
+                          border: '1px solid rgba(0,0,0,0.6)',
+                          borderRadius: '4px',
+                          boxShadow: 'inset 0 0 6px rgba(0,0,0,0.7), 0 0 4px rgba(80,255,170,0.15)',
+                          textAlign: 'center', whiteSpace: 'nowrap' }}>
+                          <span style={{
+                            fontFamily: "'Courier New', monospace", fontWeight: 700,
+                            fontSize: `${Math.max(10, Math.min(15, W * 0.11))}px`,
+                            letterSpacing: '0.5px',
+                            color: '#7CFFB2',
+                            textShadow: '0 0 5px rgba(124,255,178,0.8)' }}>
+                            {formatNum(grams)} g
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+
               <div
-                className="absolute transition-all duration-300 ease-out"
+                className={`absolute ${mode === 'BUOYANCY' ? 'transition-transform duration-300 ease-out' : ''}`}
                 style={{
                   width: `${sideLength}px`,
                   height: `${sideLength}px`,
@@ -335,33 +424,10 @@
               >
                 {/* 3D cube with CSS transforms */}
                 <div style={{ width: '100%', height: '100%', position: 'relative', transformStyle: 'preserve-3d', transform: 'rotateX(-20deg) rotateY(-30deg)' }}>
-                  {/* Front face */}
-                  <div className={`absolute inset-0 ${cubeColor} overflow-hidden`}
-                       style={{ transform: `translateZ(${sideLength/2}px)`, borderWidth: '2px', backfaceVisibility: 'hidden' }}>
-                    {activeDots.map((dot, i) => (
-                      <div key={`f${i}`} className={`absolute w-1.5 h-1.5 rounded-full opacity-70 ${dotColor}`}
-                           style={{ left: dot.left, top: dot.top }} />
-                    ))}
-                  </div>
-                  {/* Top face */}
-                  <div className={`absolute ${cubeColor} overflow-hidden`}
-                       style={{ width: `${sideLength}px`, height: `${sideLength}px`, transform: `rotateX(90deg) translateZ(${sideLength/2}px)`, borderWidth: '2px', backfaceVisibility: 'hidden', filter: 'brightness(1.2)' }}>
-                    {STATIC_ATOM_POSITIONS_TOP.slice(0, numDots).map((dot, i) => (
-                      <div key={`t${i}`} className={`absolute w-1.5 h-1.5 rounded-full opacity-70 ${dotColor}`}
-                           style={{ left: dot.left, top: dot.top }} />
-                    ))}
-                  </div>
-                  {/* Right face */}
-                  <div className={`absolute ${cubeColor} overflow-hidden`}
-                       style={{ width: `${sideLength}px`, height: `${sideLength}px`, transform: `rotateY(90deg) translateZ(${sideLength/2}px)`, borderWidth: '2px', backfaceVisibility: 'hidden', filter: 'brightness(0.8)' }}>
-                    {STATIC_ATOM_POSITIONS_RIGHT.slice(0, numDots).map((dot, i) => (
-                      <div key={`r${i}`} className={`absolute w-1.5 h-1.5 rounded-full opacity-70 ${dotColor}`}
-                           style={{ left: dot.left, top: dot.top }} />
-                    ))}
-                  </div>
+                  {/* Bakre/dolda ytor – ogenomskinliga så volymen syns mot dem */}
                   {/* Back face */}
                   <div className={`absolute inset-0 ${cubeColor}`}
-                       style={{ transform: `translateZ(${-sideLength/2}px) rotateY(180deg)`, borderWidth: '2px', backfaceVisibility: 'hidden' }}>
+                       style={{ transform: `translateZ(${-sideLength/2}px) rotateY(180deg)`, borderWidth: '2px', backfaceVisibility: 'hidden', filter: 'brightness(0.7)' }}>
                   </div>
                   {/* Left face */}
                   <div className={`absolute ${cubeColor}`}
@@ -371,13 +437,41 @@
                   <div className={`absolute ${cubeColor}`}
                        style={{ width: `${sideLength}px`, height: `${sideLength}px`, transform: `rotateX(-90deg) translateZ(${sideLength/2}px)`, borderWidth: '2px', backfaceVisibility: 'hidden', filter: 'brightness(0.7)' }}>
                   </div>
-                </div>
-                {/* Label */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-                     <span className="px-2 py-0.5 rounded text-xs font-bold text-white backdrop-blur-sm"
-                           style={{ background: 'rgba(0,0,0,0.6)' }}>
-                       {formatNum(mass, 1)} kg
-                     </span>
+
+                  {/* Volymetriska atomer – fördelade på olika djup i hela kuben.
+                      De bakre tonas ner (djupdimmer) → tydlig 3D-känsla. */}
+                  {activeDots.map((dot, i) => {
+                    const x = ATOM_INSET + dot.x * (1 - 2 * ATOM_INSET);
+                    const y = ATOM_INSET + dot.y * (1 - 2 * ATOM_INSET);
+                    const z = (dot.depth - 0.5) * sideLength * (1 - 2 * ATOM_INSET);
+                    const op = 0.22 + 0.6 * dot.depth;       // främre ljusare
+                    const sc = 0.7 + 0.45 * dot.depth;       // främre lite större
+                    return (
+                      <div key={`v${i}`}
+                           className={`absolute rounded-full ${dotColor}`}
+                           style={{
+                             left: `${x * 100}%`, top: `${y * 100}%`,
+                             width: '6px', height: '6px',
+                             marginLeft: '-3px', marginTop: '-3px',
+                             opacity: op,
+                             transform: `translateZ(${z}px) scale(${sc})`,
+                           }} />
+                    );
+                  })}
+
+                  {/* Främre/sidoytor – translucenta skal så att volymen syns igenom */}
+                  {/* Right face */}
+                  <div className={`absolute ${cubeColor}`}
+                       style={{ width: `${sideLength}px`, height: `${sideLength}px`, transform: `rotateY(90deg) translateZ(${sideLength/2}px)`, borderWidth: '2px', backfaceVisibility: 'hidden', filter: 'brightness(0.8)', opacity: 0.4 }}>
+                  </div>
+                  {/* Top face */}
+                  <div className={`absolute ${cubeColor}`}
+                       style={{ width: `${sideLength}px`, height: `${sideLength}px`, transform: `rotateX(90deg) translateZ(${sideLength/2}px)`, borderWidth: '2px', backfaceVisibility: 'hidden', filter: 'brightness(1.2)', opacity: 0.4 }}>
+                  </div>
+                  {/* Front face */}
+                  <div className={`absolute inset-0 ${cubeColor}`}
+                       style={{ transform: `translateZ(${sideLength/2}px)`, borderWidth: '2px', backfaceVisibility: 'hidden', opacity: 0.32 }}>
+                  </div>
                 </div>
               </div>
 
@@ -387,12 +481,14 @@
 
         // Main App Component
         const App = () => {
-          const [mass, setMass] = useState(5.0);
-          const [volume, setVolume] = useState(5.0);
+          const [mass, setMass] = useState(1000);     // gram
+          const [volume, setVolume] = useState(1000);  // cm³
           const [mode, setMode] = useState('EXPLORE');
           const [selectedMaterialName, setSelectedMaterialName] = useState(null);
 
-          const density = (mass / (volume * 0.001));
+          // mass i g, volume i cm³ → densitet i g/cm³, och i SI (kg/m³).
+          const densityGcm3 = mass / volume;       // g/cm³
+          const density = densityGcm3 * 1000;       // kg/m³ (SI)
 
           const handleVolumeChange = (newVolume) => {
             setVolume(newVolume);
@@ -405,12 +501,13 @@
           };
 
           const handleDensityChange = (newDensity) => {
-            let newMass = newDensity * volume * 0.001;
+            // newDensity i kg/m³ → massa i g = ρ_kgm3 · V_cm3 / 1000
+            let newMass = newDensity * volume / 1000;
 
-            if (newMass > MAX_MASS_KG) {
-              newMass = MAX_MASS_KG;
-            } else if (newMass < MIN_MASS_KG) {
-              newMass = MIN_MASS_KG;
+            if (newMass > MAX_MASS_G) {
+              newMass = MAX_MASS_G;
+            } else if (newMass < MIN_MASS_G) {
+              newMass = MIN_MASS_G;
             }
 
             setMass(newMass);
@@ -418,17 +515,18 @@
           };
 
           const selectMaterial = (material) => {
+            // material.density i kg/m³ → massa i g = ρ_kgm3 · V_cm3 / 1000
             setSelectedMaterialName(material.name);
-            let newMass = material.density * volume * 0.001;
+            let newMass = material.density * volume / 1000;
 
-            if (newMass > MAX_MASS_KG) {
-                newMass = MAX_MASS_KG;
-                const newVolume = (newMass / material.density) * 1000;
-                setVolume(Math.max(MIN_VOLUME_LITERS, Math.min(newVolume, MAX_VOLUME_LITERS)));
-            } else if (newMass < MIN_MASS_KG) {
-                newMass = MIN_MASS_KG;
-                const newVolume = (newMass / material.density) * 1000;
-                setVolume(Math.max(MIN_VOLUME_LITERS, Math.min(newVolume, MAX_VOLUME_LITERS)));
+            if (newMass > MAX_MASS_G) {
+                newMass = MAX_MASS_G;
+                const newVolume = newMass * 1000 / material.density;
+                setVolume(Math.max(MIN_VOLUME_CM3, Math.min(newVolume, MAX_VOLUME_CM3)));
+            } else if (newMass < MIN_MASS_G) {
+                newMass = MIN_MASS_G;
+                const newVolume = newMass * 1000 / material.density;
+                setVolume(Math.max(MIN_VOLUME_CM3, Math.min(newVolume, MAX_VOLUME_CM3)));
             }
             setMass(newMass);
           };
@@ -449,24 +547,28 @@
                   </h1>
                   <div className="mt-3 flex items-center gap-3 text-cyan-300 flex-wrap" style={{fontFamily: 'Poppins, sans-serif'}}>
                     <div style={{textAlign: 'center'}}>
-                      <div className="text-xs text-cyan-400/60 font-semibold mb-1">Densitet</div>
+                      <div className="text-xs text-cyan-700 font-semibold mb-1">Densitet</div>
                       <div className="text-2xl font-bold"><em>ρ</em></div>
                     </div>
                     <div className="text-xl text-slate-500">=</div>
                     <div style={{textAlign: 'center'}}>
-                      <div className="text-xs text-cyan-400/60 font-semibold mb-1">Massa</div>
+                      <div className="text-xs text-cyan-700 font-semibold mb-1">Massa</div>
                       <div className="text-2xl font-bold"><em>m</em></div>
                       <div style={{borderTop: '2px solid currentColor', marginTop: '3px', paddingTop: '3px'}}>
                         <div className="text-2xl font-bold"><em>V</em></div>
                       </div>
-                      <div className="text-xs text-cyan-400/60 font-semibold mt-1">Volym</div>
+                      <div className="text-xs text-cyan-700 font-semibold mt-1">Volym</div>
                     </div>
                     <div className="text-xl text-slate-500">=</div>
                     <div style={{textAlign: 'center'}}>
-                      <div className="text-lg font-mono">{formatNum(mass, 1)} kg</div>
+                      <div className="text-lg font-mono">{formatNum(mass, 0)} g</div>
                       <div style={{borderTop: '2px solid currentColor', marginTop: '3px', paddingTop: '3px'}}>
-                        <div className="text-lg font-mono">{formatNum(volume * 0.001, 3)} m³</div>
+                        <div className="text-lg font-mono">{formatNum(volume, 0)} cm³</div>
                       </div>
+                    </div>
+                    <div className="text-xl text-slate-500">=</div>
+                    <div className="text-2xl font-bold font-mono text-yellow-400" style={{textShadow: '0 0 15px rgba(250, 204, 21, 0.4)'}}>
+                      {formatNum(densityGcm3, 2)} g/cm³
                     </div>
                     <div className="text-xl text-slate-500">=</div>
                     <div className="text-2xl font-bold font-mono text-yellow-400" style={{textShadow: '0 0 15px rgba(250, 204, 21, 0.4)'}}>
@@ -525,7 +627,8 @@
                          </button>
                        ))}
                      </div>
-                     <div className="p-6 flex justify-center items-center">
+                     <div className="p-6 flex justify-center items-center"
+                          style={{ backgroundImage: 'linear-gradient(rgba(200, 50, 74, 0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(200, 50, 74, 0.18) 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
                        <CubeVisualizer
                           mass={mass}
                           volume={volume}
@@ -545,23 +648,25 @@
                     <SliderControl
                       label="Massa"
                       value={mass}
-                      min={MIN_MASS_KG}
-                      max={MAX_MASS_KG}
-                      step={0.1}
-                      unit="kg"
+                      min={MIN_MASS_G}
+                      max={MAX_MASS_G}
+                      step={1}
+                      unit="g"
                       onChange={handleMassChange}
                       colorClass="emerald"
+                      decimals={0}
                     />
 
                     <SliderControl
                       label="Volym"
                       value={volume}
-                      min={MIN_VOLUME_LITERS}
-                      max={MAX_VOLUME_LITERS}
-                      step={0.1}
-                      unit="L"
+                      min={MIN_VOLUME_CM3}
+                      max={MAX_VOLUME_CM3}
+                      step={10}
+                      unit="cm³"
                       onChange={handleVolumeChange}
                       colorClass="purple"
+                      decimals={0}
                     />
 
                     <SliderControl

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyngdfaktorn på jorden - Fysiklabbet</title>
+    <title>Acceleration och fritt fall - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
@@ -13,8 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
@@ -24,25 +24,123 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        .dark-container { background: transparent; }
+
+        /* Paper-kort (delas av skalet + båda simuleringarna) */
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+
+        /* ── Lägesflikar (Fritt fall i vakuum / Tyngdfaktorn på jorden) ── */
+        .tab-button {
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            background: transparent;
+            color: var(--lab-ink-soft, #3a4151);
+            border-color: transparent;
+        }
+        .tab-button.active {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+            box-shadow: none;
+        }
+        .tab-button:hover:not(.active) {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        /* ── Scen-wrapper + fullskärm (vakuum-simuleringen) ── */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 580px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(200, 50, 74, 0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.10);
+            user-select: none;
+            background: #f6f2ea;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 8px; left: 10px; z-index: 5;
+            font-size: 11px; color: var(--lab-ink-muted, #5a6170);
+            background: rgba(246,242,234,0.78); padding: 3px 8px; border-radius: 6px;
+            pointer-events: none;
+        }
+
+        /* On-scene visningsval (uppe till höger) */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .btn-toggle { width: 100%; font-size: 13px; padding: 7px 10px; }
+
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        /* Knappar */
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active):not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-toggle:disabled { opacity: 0.45; cursor: default; }
+        .btn-primary {
+            background: var(--lab-accent, #c8324a); color: #fff;
+            border: 1px solid var(--lab-accent, #c8324a);
+            border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-primary:hover:not(:disabled) { filter: brightness(1.06); }
+        .btn-primary:disabled { opacity: 0.45; cursor: default; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+
+        /* ── Globsimuleringen (Tyngdfaktorn på jorden) ── */
         #canvas-container {
             width: 100%;
-            height: 600px;
+            height: 560px;
             position: relative;
             background: linear-gradient(to bottom, #000428, #004e92);
             border-radius: 12px;
             overflow: hidden;
         }
-
-        .glass-card {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(56, 189, 248, 0.15);
-        }
-
-        .glow-text {
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-        }
-
         .info-panel {
             position: absolute;
             top: 20px;
@@ -50,12 +148,11 @@
             background: var(--lab-bg);
             border: 1px solid var(--lab-line-strong);
             padding: 20px;
-            border-radius: 4px;
+            border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
             min-width: 210px;
             color: var(--lab-ink);
         }
-
         .instruction-panel {
             position: absolute;
             bottom: 20px;
@@ -63,84 +160,44 @@
             background: var(--lab-bg);
             border: 1px solid var(--lab-line-strong);
             padding: 15px 18px;
-            border-radius: 4px;
+            border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
             max-width: 300px;
             color: var(--lab-ink);
         }
-
-        .panel-divider {
-            border: none;
-            border-top: 1px solid var(--lab-line-strong);
-            margin: 12px 0;
-        }
-
-        /* Custom checkbox */
+        .panel-divider { border: none; border-top: 1px solid var(--lab-line-strong); margin: 12px 0; }
         .dark-checkbox {
-            appearance: none;
-            -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
+            appearance: none; -webkit-appearance: none;
+            width: 16px; height: 16px;
             border: 1.5px solid var(--lab-line-strong);
-            border-radius: 3px;
-            background: #fff;
-            cursor: pointer;
-            position: relative;
-            flex-shrink: 0;
-            transition: all 0.15s;
+            border-radius: 3px; background: #fff; cursor: pointer;
+            position: relative; flex-shrink: 0; transition: all 0.15s;
         }
-
-        .dark-checkbox:checked {
-            background: var(--lab-ink);
-            border-color: var(--lab-ink);
-        }
-
+        .dark-checkbox:checked { background: var(--lab-ink); border-color: var(--lab-ink); }
         .dark-checkbox:checked::after {
-            content: '';
-            position: absolute;
-            left: 4px;
-            top: 1px;
-            width: 5px;
-            height: 9px;
-            border: 2px solid var(--lab-bg);
-            border-top: none;
-            border-left: none;
-            transform: rotate(45deg);
+            content: ''; position: absolute; left: 4px; top: 1px;
+            width: 5px; height: 9px; border: 2px solid var(--lab-bg);
+            border-top: none; border-left: none; transform: rotate(45deg);
         }
-
-        .dark-checkbox:hover {
-            border-color: var(--lab-ink);
-        }
-
-        canvas {
-            cursor: grab;
-        }
-
-        canvas:active {
-            cursor: grabbing;
-        }
+        .dark-checkbox:hover { border-color: var(--lab-ink); }
+        #canvas-container canvas { cursor: grab; }
+        #canvas-container canvas:active { cursor: grabbing; }
 
         @media (max-width: 768px) {
-            #canvas-container {
-                height: 420px;
-            }
-            .info-panel {
-                top: 10px;
-                right: 10px;
-                min-width: 170px;
-                padding: 14px;
-            }
-            .instruction-panel {
-                bottom: 10px;
-                left: 10px;
-                max-width: 220px;
-                padding: 12px;
-            }
+            #canvas-container { height: 420px; }
+            .info-panel { top: 10px; right: 10px; min-width: 170px; padding: 14px; }
+            .instruction-panel { bottom: 10px; left: 10px; max-width: 220px; padding: 12px; }
+        }
+
+        /* Vakuumpumpens kolv pumpar när luft sugs ut */
+        @keyframes pumpStroke {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
         }
     </style>
 </head>
 <body class="lab-sim">
-        <div class="lab-topbar lab-topbar--on-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
         <div class="lab-topbar-inner">
             <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
         </div>
@@ -172,9 +229,568 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect, useRef, useMemo, useCallback } = React;
 
-        function GravitySimulation() {
+        const fmt2 = (n) => (isFinite(n) ? n.toFixed(2).replace('.', ',') : '–');
+
+        /* ════════════════════════════════════════════════════════════
+           SIMULERING 1 — Fritt fall i vakuum (två glasrör)
+           ════════════════════════════════════════════════════════════ */
+
+        // Scengeometri (SVG-koordinater)
+        const VBW = 720, VBH = 580;
+        const T1X = 248, T2X = 472;          // rörens mitt-x (rosenblad / mynt)
+        const HW = 46;                        // rörets halva ytterbredd
+        const IW = 33;                        // rörets halva innerbredd
+        const TUBE_TOP = 58, TUBE_BOT = 486;  // rörets ytter-topp/-botten
+        const CY = (TUBE_TOP + TUBE_BOT) / 2; // rörens mitt (rotationscentrum vid vändning)
+        const Y_BOT = 446;                    // föremålets vilo-/landningsläge (mitt)
+        const Y_TOP = 2 * CY - Y_BOT;         // toppläge efter vändning (speglat → inget hopp)
+
+        // Fysik (px, sekunder)
+        const G = 980;                        // tyngdacceleration i px/s²
+        const K_PETAL = 13.0;                 // luftmotståndskonstant, rosenblad (stor)
+        const K_COIN = 0.7;                   // luftmotståndskonstant, mynt (liten)
+        const FLIP_DUR = 900;                 // vändningens längd (ms)
+
+        const initMotion = () => ({
+            phase: 'rest', sY: 1, t: 0,
+            petal: { y: Y_BOT, v: 0, landed: false, tLand: null },
+            coin:  { y: Y_BOT, v: 0, landed: false, tLand: null },
+        });
+
+        // Luftmolekyler – fasta pseudoslumpade positioner inom varje rör
+        const makeMolecules = (cx) => {
+            const pts = [];
+            let seed = cx * 7.13;
+            const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+            for (let i = 0; i < 26; i++) {
+                pts.push({
+                    x: cx - IW + 5 + rnd() * (2 * IW - 10),
+                    y: TUBE_TOP + 24 + rnd() * (TUBE_BOT - TUBE_TOP - 48),
+                    r: 1.7 + rnd() * 1.6,
+                });
+            }
+            return pts;
+        };
+
+        // ── Föremåls-grafik ──────────────────────────────────────
+        const Petal = ({ x, y, rot }) => (
+            <g transform={`translate(${x} ${y}) rotate(${rot})`}>
+                <path d="M0,-17 C 12,-12 13,8 0,18 C -13,8 -12,-12 0,-17 Z"
+                      fill="url(#petalGrad)" stroke="#9a203a" strokeWidth="1.1" />
+                <path d="M0,-14 L0,15" stroke="#9a203a" strokeWidth="1" opacity="0.45" />
+                <path d="M0,-4 L6,-1 M0,3 L6,7" stroke="#9a203a" strokeWidth="0.8" opacity="0.35" fill="none" />
+            </g>
+        );
+
+        const Coin = ({ x, y }) => (
+            <g transform={`translate(${x} ${y})`}>
+                <ellipse cx="0" cy="0" rx="17" ry="17" fill="url(#coinGrad)" stroke="#8a6209" strokeWidth="2" />
+                <circle r="12.5" fill="none" stroke="#a9790c" strokeWidth="1.2" opacity="0.6" />
+                <text x="0" y="5.5" textAnchor="middle" fontSize="15" fontWeight="700"
+                      fill="#8a6209" style={{ fontFamily: 'Poppins, sans-serif' }}>kr</text>
+            </g>
+        );
+
+        // ── Tryckmätare (manometer) ──────────────────────────────
+        const Gauge = ({ air, cx, cy }) => {
+            const R = 44;
+            // air 0 → pekar vänster (vakuum), air 1 → pekar höger (1 atm)
+            const a = Math.PI - air * Math.PI;
+            const nx = cx + (R - 8) * Math.cos(a);
+            const ny = cy - (R - 8) * Math.sin(a);
+            const ticks = [];
+            for (let i = 0; i <= 8; i++) {
+                const ta = Math.PI - (i / 8) * Math.PI;
+                const r1 = R, r2 = R - 6;
+                ticks.push(<line key={i}
+                    x1={cx + r1 * Math.cos(ta)} y1={cy - r1 * Math.sin(ta)}
+                    x2={cx + r2 * Math.cos(ta)} y2={cy - r2 * Math.sin(ta)}
+                    stroke="#5a6170" strokeWidth="1.4" />);
+            }
+            return (
+                <g style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <rect x={cx - R - 10} y={cy - R - 12} width={2 * R + 20} height={R + 40} rx="10"
+                          fill="rgba(246,242,234,0.92)" stroke="var(--lab-line-strong)" />
+                    <path d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy}`}
+                          fill="none" stroke="#cdbfa8" strokeWidth="6" strokeLinecap="round" />
+                    {ticks}
+                    <line x1={cx} y1={cy} x2={nx} y2={ny} stroke="#c8324a" strokeWidth="3" strokeLinecap="round" />
+                    <circle cx={cx} cy={cy} r="4.5" fill="#0f1620" />
+                    <text x={cx - R + 2} y={cy + 16} fontSize="9" fill="#5a6170">vakuum</text>
+                    <text x={cx + R - 2} y={cy + 16} fontSize="9" textAnchor="end" fill="#5a6170">1 atm</text>
+                    <text x={cx} y={cy - R - 1} textAnchor="middle" fontSize="13" fontWeight="700" fill="#0f1620">
+                        {Math.round(air * 100)} % luft
+                    </text>
+                </g>
+            );
+        };
+
+        // ── Ett glasrör med innehåll ─────────────────────────────
+        const Tube = ({ cx, kind, obj, motion, air, mols, show }) => {
+            // Innehållets vändning: skala i y kring CY (sY: 1 → −1). Speglar
+            // bottenläget till toppläget utan att föremålet far ut åt sidan.
+            const sY = motion.sY;
+            const contentTf = `matrix(1,0,0,${sY},0,${(CY * (1 - sY)).toFixed(2)})`;
+
+            const t = motion.t;
+            const falling = motion.phase === 'fall';
+            // Rosenbladet fladdrar i sidled och roterar — proportionellt mot luftmängd
+            const xoff = kind === 'petal' && falling ? air * 15 * Math.sin(t * 6.3 + 0.4) : 0;
+            const rot = kind === 'petal' ? (falling ? air * 24 * Math.sin(t * 5.1) : 0) : 0;
+
+            const ox = cx + xoff;
+            const oy = obj.y;
+
+            // hastighetspil (under fall) — startar vid föremålets nederkant, pekar nedåt
+            const objR = 18;
+            const vLen = Math.min(72, obj.v * 0.085);
+            const showVel = show.vel && falling && !obj.landed && vLen > 4;
+
+            const visMols = Math.round(air * mols.length);
+
+            // mätstreck (symmetriska kring CY → sömlös vändning, men syns röra sig vid flip)
+            const ticks = [30, 70, 110, 150, 190].flatMap((d, i) => [
+                <line key={'tu' + i} x1={cx + HW - 16} y1={CY - d} x2={cx + HW - 6} y2={CY - d} stroke="rgba(15,22,32,0.20)" strokeWidth="1.6" />,
+                <line key={'td' + i} x1={cx + HW - 16} y1={CY + d} x2={cx + HW - 6} y2={CY + d} stroke="rgba(15,22,32,0.20)" strokeWidth="1.6" />,
+            ]);
+
+            return (
+                <g>
+                    {/* HELA röret (glas + proppar + mätstreck + innehåll) vänds vid sY.
+                        Glaset är symmetriskt kring CY, så snäppet tillbaka (sY: −1 → 1)
+                        efter vändningen är osynligt — men själva vändningsrörelsen syns. */}
+                    <g transform={contentTf}>
+                        {/* glasröret */}
+                        <rect x={cx - HW} y={TUBE_TOP} width={2 * HW} height={TUBE_BOT - TUBE_TOP} rx={HW}
+                              fill="url(#glassGrad)" stroke="rgba(15,22,32,0.30)" strokeWidth="2" />
+                        {/* glasreflex */}
+                        <rect x={cx - HW + 9} y={TUBE_TOP + 14} width="7" height={TUBE_BOT - TUBE_TOP - 28} rx="3.5"
+                              fill="#ffffff" opacity="0.5" />
+                        {/* gummiproppar i båda ändar (identiska → symmetri) */}
+                        <rect x={cx - HW + 4} y={TUBE_TOP - 8} width={2 * HW - 8} height="20" rx="6" fill="#3a3128" />
+                        <rect x={cx - HW + 4} y={TUBE_BOT - 12} width={2 * HW - 8} height="20" rx="6" fill="#3a3128" />
+                        {ticks}
+                        {/* luftmolekyler */}
+                        {show.particles && mols.slice(0, visMols).map((m, i) => (
+                            <circle key={i} cx={m.x} cy={m.y} r={m.r} fill="#7b8493" opacity="0.5" />
+                        ))}
+                        {/* föremål */}
+                        {kind === 'petal'
+                            ? <Petal x={ox} y={oy} rot={rot} />
+                            : <Coin x={ox} y={oy} />}
+                    </g>
+
+                    {/* hastighetspil (i statisk ram, under fall) */}
+                    {showVel && (
+                        <g>
+                            <line x1={cx} y1={oy + objR} x2={cx} y2={oy + objR + vLen}
+                                  stroke="#c8324a" strokeWidth="3.5" strokeLinecap="round" />
+                            <path d={`M ${cx} ${oy + objR + vLen + 6} L ${cx - 5} ${oy + objR + vLen - 4} L ${cx + 5} ${oy + objR + vLen - 4} Z`}
+                                  fill="#c8324a" />
+                        </g>
+                    )}
+
+                    {/* etikett under stativplattan */}
+                    <text x={cx} y={TUBE_BOT + 42} textAnchor="middle" fontSize="15" fontWeight="700"
+                          fill="var(--lab-ink)" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                        {kind === 'petal' ? 'Rosenblad' : 'Mynt'}
+                    </text>
+
+                    {/* stoppur under etiketten */}
+                    {show.timer && (
+                        <text x={cx} y={TUBE_BOT + 64} textAnchor="middle" fontSize="14" fontWeight="600"
+                              fill={obj.landed ? '#c8324a' : 'var(--lab-ink-muted)'}
+                              style={{ fontFamily: 'var(--lab-font-mono, monospace)' }}>
+                            {fmt2(obj.landed ? obj.tLand : (falling ? t : 0))} s
+                        </text>
+                    )}
+                </g>
+            );
+        };
+
+        // ── Scenen ───────────────────────────────────────────────
+        const VacuumScene = ({ motion, air, show, pumping, svgRef }) => {
+            const molsP = useMemo(() => makeMolecules(T1X), []);
+            const molsC = useMemo(() => makeMolecules(T2X), []);
+
+            const landed = motion.phase === 'landed';
+            const vacuum = air < 0.06;
+            let verdict = null;
+            if (landed) {
+                verdict = vacuum
+                    ? 'I vakuum föll de lika fort — samma tyngdacceleration g!'
+                    : (air > 0.4
+                        ? 'Luftmotståndet bromsar det lätta rosenbladet kraftigt.'
+                        : 'Mindre luft → mindre skillnad. Pumpa ut allt!');
+            }
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <defs>
+                        <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0" stopColor="#dfeaf0" stopOpacity="0.55" />
+                            <stop offset="0.5" stopColor="#eef5f8" stopOpacity="0.18" />
+                            <stop offset="1" stopColor="#cdd9e0" stopOpacity="0.5" />
+                        </linearGradient>
+                        <radialGradient id="petalGrad" cx="0.4" cy="0.3" r="0.8">
+                            <stop offset="0" stopColor="#f48aa0" />
+                            <stop offset="0.6" stopColor="#e0556f" />
+                            <stop offset="1" stopColor="#c8324a" />
+                        </radialGradient>
+                        <radialGradient id="coinGrad" cx="0.38" cy="0.3" r="0.75">
+                            <stop offset="0" stopColor="#fbe89a" />
+                            <stop offset="0.55" stopColor="#e8c24a" />
+                            <stop offset="1" stopColor="#c79412" />
+                        </radialGradient>
+                    </defs>
+
+                    {/* stativ: topp-tvärbalk + bottenplatta */}
+                    <rect x="150" y="38" width="420" height="14" rx="5" fill="#cdbb97" stroke="#a8946f" strokeWidth="1.2" />
+                    <rect x="120" y={TUBE_BOT} width="480" height="20" rx="6" fill="#cdbb97" stroke="#a8946f" strokeWidth="1.2" />
+                    <rect x="150" y={TUBE_BOT + 20} width="44" height="12" rx="3" fill="#b9a679" />
+                    <rect x="526" y={TUBE_BOT + 20} width="44" height="12" rx="3" fill="#b9a679" />
+
+                    {/* vakuumpump (mellan rören, på basplattan) + slangar.
+                        Slangarna kopplas loss (tonas bort) medan rören vänds och faller. */}
+                    <g style={{ transition: 'opacity 0.3s ease', opacity: (motion.phase === 'flip' || motion.phase === 'fall') ? 0 : 0.75 }}>
+                        <path d={`M ${T1X + HW} ${TUBE_BOT - 12} Q 318 ${TUBE_BOT - 6} 332 ${TUBE_BOT - 18}`} fill="none"
+                              stroke="#6b7280" strokeWidth="4" />
+                        <path d={`M ${T2X - HW} ${TUBE_BOT - 12} Q 402 ${TUBE_BOT - 6} 388 ${TUBE_BOT - 18}`} fill="none"
+                              stroke="#6b7280" strokeWidth="4" />
+                    </g>
+                    <g style={pumping ? { animation: 'pumpStroke 0.6s ease-in-out infinite' } : null}>
+                        <rect x="357" y="430" width="6" height="28" fill="#6b7280" />
+                        <rect x="346" y="424" width="28" height="8" rx="3" fill="#374151" />
+                    </g>
+                    <rect x="332" y="456" width="56" height="30" rx="5" fill="#9aa3af" stroke="#6b7280" strokeWidth="1.5" />
+                    <text x="360" y="476" textAnchor="middle" fontSize="9" fontWeight="700" fill="#1f2937">PUMP</text>
+
+                    {/* tryckmätare (mellan rörens toppar) */}
+                    <Gauge air={air} cx={360} cy={150} />
+
+                    {/* glasrören */}
+                    <Tube cx={T1X} kind="petal" obj={motion.petal} motion={motion} air={air} mols={molsP} show={show} />
+                    <Tube cx={T2X} kind="coin"  obj={motion.coin}  motion={motion} air={air} mols={molsC} show={show} />
+
+                    {/* statusbanner / slutsats (topp) */}
+                    <g>
+                        <rect x="128" y="6" width="464" height="28" rx="8"
+                              fill={landed && vacuum ? 'rgba(200,50,74,0.10)' : 'rgba(246,242,234,0.88)'}
+                              stroke={landed ? '#c8324a' : 'var(--lab-line-strong)'} strokeWidth="1.2" />
+                        <text x="360" y="25" textAnchor="middle" fontSize="13.5"
+                              fontWeight={landed ? 700 : 600}
+                              fill={landed ? '#c8324a' : 'var(--lab-ink-muted)'}>
+                            {verdict ? verdict : (vacuum ? 'Rören är tömda på luft' : 'Rören innehåller luft')}
+                        </text>
+                    </g>
+                </svg>
+            );
+        };
+
+        const VacuumSim = () => {
+            const [air, setAir] = useState(1);
+            const airRef = useRef(1);
+            const [motion, setMotion] = useState(initMotion);
+            const mRef = useRef(motion);
+            const [pumping, setPumping] = useState(false);
+            const [show, setShow] = useState({ timer: true, vel: false, particles: true });
+
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const flipStartRef = useRef(0);
+            const fallStartRef = useRef(0);
+            const airRafRef = useRef(null);
+
+            const apply = (next) => { mRef.current = next; setMotion(next); };
+            const setAirBoth = (v) => { airRef.current = v; setAir(v); };
+
+            // ── Animationsloop (vändning + fall) ──────────────────
+            useEffect(() => {
+                if (motion.phase !== 'flip' && motion.phase !== 'fall') return;
+                let raf;
+                let prev = performance.now();
+                const tick = (now) => {
+                    const cur = mRef.current;
+                    let dt = (now - prev) / 1000; prev = now;
+                    if (dt > 0.04) dt = 0.04;
+
+                    if (cur.phase === 'flip') {
+                        const k = Math.min((now - flipStartRef.current) / FLIP_DUR, 1);
+                        if (k >= 1) {
+                            fallStartRef.current = now;
+                            apply({
+                                phase: 'fall', sY: 1, t: 0,
+                                petal: { y: Y_TOP, v: 0, landed: false, tLand: null },
+                                coin:  { y: Y_TOP, v: 0, landed: false, tLand: null },
+                            });
+                            return; // effekten startar om i fall-läge
+                        }
+                        apply({ ...cur, sY: Math.cos(Math.PI * k) });
+                        raf = requestAnimationFrame(tick);
+                        return;
+                    }
+
+                    // fall
+                    const a = airRef.current;
+                    const stepObj = (o, K) => {
+                        if (o.landed) return o;
+                        let v = o.v, y = o.y;
+                        const acc = G - K * a * v;
+                        v += acc * dt; y += v * dt;
+                        if (y >= Y_BOT)
+                            return { y: Y_BOT, v: 0, landed: true, tLand: (now - fallStartRef.current) / 1000 };
+                        return { y, v, landed: false, tLand: null };
+                    };
+                    const petal = stepObj(cur.petal, K_PETAL);
+                    const coin = stepObj(cur.coin, K_COIN);
+                    const t = (now - fallStartRef.current) / 1000;
+                    const phase = petal.landed && coin.landed ? 'landed' : 'fall';
+                    apply({ phase, sY: 1, t, petal, coin });
+                    if (phase === 'fall') raf = requestAnimationFrame(tick);
+                };
+                raf = requestAnimationFrame(tick);
+                return () => cancelAnimationFrame(raf);
+            }, [motion.phase]);
+
+            // ── Luftanimering (pump) ──────────────────────────────
+            const animateAir = useCallback((target, dur) => {
+                if (airRafRef.current) cancelAnimationFrame(airRafRef.current);
+                const start = performance.now();
+                const from = airRef.current;
+                setPumping(target < from);
+                const step = (now) => {
+                    const k = Math.min((now - start) / dur, 1);
+                    const val = from + (target - from) * k;
+                    setAirBoth(val);
+                    if (k < 1) airRafRef.current = requestAnimationFrame(step);
+                    else setPumping(false);
+                };
+                airRafRef.current = requestAnimationFrame(step);
+            }, []);
+
+            useEffect(() => () => { if (airRafRef.current) cancelAnimationFrame(airRafRef.current); }, []);
+
+            // ── Fullskärm ─────────────────────────────────────────
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── Åtgärder ──────────────────────────────────────────
+            const busy = motion.phase === 'flip' || motion.phase === 'fall';
+            const doFlip = () => {
+                if (busy) return;
+                flipStartRef.current = performance.now();
+                apply({
+                    phase: 'flip', sY: 1, t: 0,
+                    petal: { y: Y_BOT, v: 0, landed: false, tLand: null },
+                    coin:  { y: Y_BOT, v: 0, landed: false, tLand: null },
+                });
+            };
+            const reset = () => {
+                if (airRafRef.current) cancelAnimationFrame(airRafRef.current);
+                apply(initMotion());
+            };
+            const pumpOut = () => animateAir(0, 2600);
+            const letAirIn = () => animateAir(1, 1500);
+            const tShow = (k) => setShow((s) => ({ ...s, [k]: !s[k] }));
+
+            const SceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.timer} onChange={() => tShow('timer')} /><span>Stoppur</span></label>
+                    <label><input type="checkbox" checked={show.particles} onChange={() => tShow('particles')} /><span>Luftpartiklar</span></label>
+                    <label><input type="checkbox" checked={show.vel} onChange={() => tShow('vel')} /><span>Hastighetspilar</span></label>
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-primary" onClick={doFlip} disabled={busy}>Vänd rören &amp; släpp</button>
+                            <button className="btn-toggle" onClick={pumpOut} disabled={pumping}>Pumpa ut luften</button>
+                            <button className="btn-toggle" onClick={letAirIn} disabled={pumping}>Släpp in luft</button>
+                            <button className="btn-toggle" onClick={reset} disabled={busy}>↻ Återställ</button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            const Readout = ({ label, value, accent }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{label}</div>
+                    <div className="font-mono font-bold text-base" style={{ color: accent ? 'var(--lab-accent)' : 'var(--lab-ink)' }}>{value}</div>
+                </div>
+            );
+
+            const pT = motion.petal.landed ? motion.petal.tLand : (motion.phase === 'fall' ? motion.t : 0);
+            const cT = motion.coin.landed ? motion.coin.tLand : (motion.phase === 'fall' ? motion.t : 0);
+
+            return (
+                <React.Fragment>
+                    {/* formelkort */}
+                    <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-10 gap-y-3">
+                        <div className="flex items-center gap-3">
+                            <span style={{ fontSize: 18, color: 'var(--lab-ink)' }}>
+                                I vakuum: <em>a</em> = <em>g</em>
+                            </span>
+                            <span className="text-sm" style={{ color: 'var(--lab-ink-muted)' }}>
+                                — samma acceleration för alla föremål, oavsett massa
+                            </span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <span style={{ fontSize: 18, color: 'var(--lab-ink)' }}>
+                                Med luft: <em>a</em> = <em>g</em> − <em>F</em><sub>luft</sub>∕<em>m</em>
+                            </span>
+                            <span className="text-sm" style={{ color: 'var(--lab-ink-muted)' }}>
+                                — luftmotståndet bromsar lätta, stora föremål mest
+                            </span>
+                        </div>
+                    </div>
+
+                    <main className="flex flex-col lg:flex-row gap-6">
+                        {/* Scen */}
+                        <div className="lg:w-3/5 order-1">
+                            <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                <VacuumScene motion={motion} air={air} show={show} pumping={pumping} svgRef={svgRef} />
+                                <SceneToggles />
+
+                                {isFullscreen && (
+                                    <React.Fragment>
+                                        <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                            <div className="fs-row">
+                                                <span className="fs-label" style={{ minWidth: 150 }}>Mängd luft i rören</span>
+                                                <input type="range" min="0" max="100" step="1" value={Math.round(air * 100)}
+                                                       onChange={(e) => { if (airRafRef.current) cancelAnimationFrame(airRafRef.current); setAirBoth(parseFloat(e.target.value) / 100); }} />
+                                                <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{Math.round(air * 100)} %</span>
+                                            </div>
+                                        </div>
+                                        <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}
+                                                title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'} aria-expanded={controlsOpen}>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                 style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                <path d="M6 9l6 6 6-6" />
+                                            </svg>
+                                            <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                        </button>
+                                    </React.Fragment>
+                                )}
+
+                                <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                    {isFullscreen ? (
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                        </svg>
+                                    ) : (
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                        </svg>
+                                    )}
+                                </button>
+                                <div className="scene-hint">Vänd rören, jämför fallen — pumpa sedan ut luften och vänd igen</div>
+                            </div>
+                        </div>
+
+                        {/* Kontroller */}
+                        <div className="lg:w-2/5 order-2">
+                            <div className="glass-card rounded-xl p-4 mb-3">
+                                <h3 className="font-bold text-sm mb-3" style={{ color: 'var(--lab-ink)' }}>1. Vänd rören</h3>
+                                <button className="btn-primary w-full mb-2" onClick={doFlip} disabled={busy}>
+                                    Vänd rören &amp; släpp
+                                </button>
+                                <button className="btn-toggle w-full" onClick={reset} disabled={busy}>↻ Återställ</button>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4 mb-3">
+                                <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>2. Vakuumpump</h3>
+                                <div className="flex items-center gap-2 mb-3">
+                                    <span className="text-xs flex-shrink-0" style={{ minWidth: 92, color: 'var(--lab-ink-soft)' }}>Mängd luft</span>
+                                    <input type="range" min="0" max="100" step="1" value={Math.round(air * 100)}
+                                           onChange={(e) => { if (airRafRef.current) cancelAnimationFrame(airRafRef.current); setAirBoth(parseFloat(e.target.value) / 100); }}
+                                           className="flex-1 cursor-pointer" />
+                                    <span className="font-mono font-semibold text-sm flex-shrink-0" style={{ minWidth: 44, textAlign: 'right', color: 'var(--lab-accent)' }}>{Math.round(air * 100)} %</span>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button className="btn-toggle flex-1" onClick={pumpOut} disabled={pumping}>Pumpa ut luften</button>
+                                    <button className="btn-toggle flex-1" onClick={letAirIn} disabled={pumping}>Släpp in luft</button>
+                                </div>
+                            </div>
+
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Falltid</h3>
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Readout label="Rosenblad" value={fmt2(pT) + ' s'} accent={motion.petal.landed} />
+                                    <Readout label="Mynt" value={fmt2(cT) + ' s'} accent={motion.coin.landed} />
+                                </div>
+                                {motion.phase === 'landed' && (
+                                    <p className="text-sm mt-3" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        {air < 0.06
+                                            ? <span><strong>Lika falltid!</strong> Utan luftmotstånd har båda accelerationen <em>a</em> = <em>g</em>.</span>
+                                            : <span>Skillnad i falltid beror på <strong>luftmotståndet</strong> — det märks mest på det lätta rosenbladet.</span>}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    </main>
+
+                    {/* Pedagogiska sektioner */}
+                    <div className="grid md:grid-cols-2 gap-4 mt-6">
+                        <div className="glass-card rounded-xl p-4">
+                            <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>🍃 Varför faller de olika fort i luft?</h3>
+                            <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                Luften bromsar ett fallande föremål med en kraft (<em>luftmotstånd</em>) som ökar
+                                med farten och med föremålets yta. Rosenbladet är lätt och har stor yta — luftmotståndet
+                                blir snabbt lika stort som tyngdkraften, och bladet faller med nästan konstant, låg fart.
+                                Myntet är tungt och litet, så luftmotståndet betyder nästan ingenting.
+                            </p>
+                        </div>
+                        <div className="glass-card rounded-xl p-4">
+                            <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>🌑 Utan luft faller allt lika fort</h3>
+                            <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                Tar man bort luften försvinner luftmotståndet. Då verkar bara tyngdkraften, och
+                                accelerationen blir <em>a</em> = <em>g</em> ≈ 9,82 m/s² för <strong>alla</strong> föremål, oavsett
+                                massa och form. Astronauten David Scott visade detta på månen 1971 genom att släppa
+                                en hammare och en fjäder samtidigt — de landade samtidigt.
+                            </p>
+                        </div>
+                    </div>
+
+                    <details className="glass-card rounded-xl p-4 mt-4">
+                        <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                            <span>⚠️ Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                        </summary>
+                        <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                            <li><strong>"Tunga föremål faller snabbare än lätta."</strong> Nej — i vakuum faller de lika fort. I vardagen ser det olika ut bara på grund av luftmotståndet.</li>
+                            <li><strong>"Luftmotståndet beror bara på massan."</strong> Nej — det beror på fart, yta och form. Ett lätt föremål med stor yta (blad, fjäder) bromsas mest.</li>
+                            <li><strong>"I vakuum är föremålet tyngdlöst."</strong> Nej — tyngdkraften finns kvar (det är därför de faller). Det är bara luftmotståndet som är borta.</li>
+                        </ul>
+                    </details>
+                </React.Fragment>
+            );
+        };
+
+        /* ════════════════════════════════════════════════════════════
+           SIMULERING 2 — Tyngdfaktorn på jorden (interaktiv jordglob)
+           ════════════════════════════════════════════════════════════ */
+        function GlobeBody() {
             const containerRef = useRef(null);
             const [clickedPoint, setClickedPoint] = useState(null);
             const [gravity, setGravity] = useState(null);
@@ -186,20 +802,16 @@
 
             useEffect(() => {
                 if (!containerRef.current) return;
-
-                // Wait for DOM to be fully rendered
                 requestAnimationFrame(() => {
                     if (!containerRef.current) return;
 
-                    // Scene setup
                     const scene = new THREE.Scene();
                     sceneRef.current = scene;
 
                     const camera = new THREE.PerspectiveCamera(
                         75,
                         containerRef.current.clientWidth / containerRef.current.clientHeight,
-                        0.1,
-                        1000
+                        0.1, 1000
                     );
                     camera.position.set(0, 0, 1.9);
                     camera.lookAt(0, 0, 0);
@@ -208,208 +820,114 @@
                     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
                     containerRef.current.appendChild(renderer.domElement);
 
-                    // Add stars
                     const starsGeometry = new THREE.BufferGeometry();
                     const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.02 });
                     const starsVertices = [];
                     for (let i = 0; i < 1000; i++) {
-                        const x = (Math.random() - 0.5) * 50;
-                        const y = (Math.random() - 0.5) * 50;
-                        const z = (Math.random() - 0.5) * 50;
-                        starsVertices.push(x, y, z);
+                        starsVertices.push((Math.random() - 0.5) * 50, (Math.random() - 0.5) * 50, (Math.random() - 0.5) * 50);
                     }
                     starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
-                    const stars = new THREE.Points(starsGeometry, starsMaterial);
-                    scene.add(stars);
+                    scene.add(new THREE.Points(starsGeometry, starsMaterial));
 
-                    // Earth sphere
                     const geometry = new THREE.SphereGeometry(1, 64, 64);
-
-                    // Create texture loader
                     const textureLoader = new THREE.TextureLoader();
-
-                    // Load Earth texture
                     const earthTexture = textureLoader.load(
                         'https://unpkg.com/three-globe@2.24.9/example/img/earth-blue-marble.jpg',
-                        () => {
-                            renderer.render(scene, camera);
-                        }
+                        () => { renderer.render(scene, camera); }
                     );
-
-                    const material = new THREE.MeshPhongMaterial({
-                        map: earthTexture,
-                        shininess: 5
-                    });
-
+                    const material = new THREE.MeshPhongMaterial({ map: earthTexture, shininess: 5 });
                     const earth = new THREE.Mesh(geometry, material);
                     earth.position.set(0, 0, 0);
-                    // Rotate to show Europe/Africa in center
                     earth.rotation.y = Math.PI;
 
-                    // Equator line (add to earth before adding earth to scene)
                     const equatorPoints = [];
                     const equatorSegments = 128;
-                    const equatorRadius = 1.01; // Slightly larger than Earth radius
+                    const equatorRadius = 1.01;
                     for (let i = 0; i <= equatorSegments; i++) {
                         const angle = (i / equatorSegments) * Math.PI * 2;
-                        equatorPoints.push(new THREE.Vector3(
-                            Math.cos(angle) * equatorRadius,
-                            0,
-                            Math.sin(angle) * equatorRadius
-                        ));
+                        equatorPoints.push(new THREE.Vector3(Math.cos(angle) * equatorRadius, 0, Math.sin(angle) * equatorRadius));
                     }
                     const equatorGeometry = new THREE.BufferGeometry().setFromPoints(equatorPoints);
-                    const equatorMaterial = new THREE.LineBasicMaterial({
-                        color: 0xffff00,
-                        linewidth: 2,
-                        transparent: true,
-                        opacity: 0.8
-                    });
+                    const equatorMaterial = new THREE.LineBasicMaterial({ color: 0xffff00, linewidth: 2, transparent: true, opacity: 0.8 });
                     const equatorLine = new THREE.LineLoop(equatorGeometry, equatorMaterial);
                     equatorLineRef.current = equatorLine;
-                    earth.add(equatorLine); // Add to earth instead of scene
+                    earth.add(equatorLine);
 
-                    // Pole markers
                     const polesGroup = new THREE.Group();
-
-                    // North pole marker (flat disc)
                     const poleGeometry = new THREE.CircleGeometry(0.06, 32);
                     const poleMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
                     const northPole = new THREE.Mesh(poleGeometry, poleMaterial);
                     northPole.position.set(0, 1.01, 0);
                     northPole.rotation.x = -Math.PI / 2;
                     polesGroup.add(northPole);
-
-                    // South pole marker (flat disc)
                     const southPole = new THREE.Mesh(poleGeometry, poleMaterial);
                     southPole.position.set(0, -1.01, 0);
                     southPole.rotation.x = Math.PI / 2;
                     polesGroup.add(southPole);
-
                     polesRef.current = polesGroup;
                     earth.add(polesGroup);
 
                     scene.add(earth);
 
-                    // Lighting
-                    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-                    scene.add(ambientLight);
-
+                    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
                     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
                     directionalLight.position.set(5, 3, 5);
                     scene.add(directionalLight);
 
-                    // Marker for clicked point
                     let marker = null;
-
-                    // Mouse controls
-                    let isDragging = false;
-                    let hasDragged = false;
+                    let isDragging = false, hasDragged = false;
                     let previousMousePosition = { x: 0, y: 0 };
 
-                    const onMouseDown = (e) => {
-                        isDragging = true;
-                        hasDragged = false;
-                        previousMousePosition = { x: e.clientX, y: e.clientY };
-                    };
-
+                    const onMouseDown = (e) => { isDragging = true; hasDragged = false; previousMousePosition = { x: e.clientX, y: e.clientY }; };
                     const onMouseMove = (e) => {
                         if (isDragging) {
                             const deltaX = e.clientX - previousMousePosition.x;
                             const deltaY = e.clientY - previousMousePosition.y;
-
-                            if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) {
-                                hasDragged = true;
-                            }
-
+                            if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) hasDragged = true;
                             earth.rotation.y += deltaX * 0.005;
                             earth.rotation.x += deltaY * 0.005;
-
                             previousMousePosition = { x: e.clientX, y: e.clientY };
                         }
                     };
-
-                    const onMouseUp = () => {
-                        isDragging = false;
-                    };
-
+                    const onMouseUp = () => { isDragging = false; };
                     const onWheel = (e) => {
                         e.preventDefault();
-
-                        // Zoom in/out by adjusting camera position
-                        const zoomSpeed = 0.1;
                         const delta = e.deltaY > 0 ? 1 : -1;
-
-                        camera.position.z += delta * zoomSpeed;
-
-                        // Limit zoom range (min 1.5, max 5)
+                        camera.position.z += delta * 0.1;
                         camera.position.z = Math.max(1.5, Math.min(5, camera.position.z));
                     };
-
                     const onClick = (e) => {
                         if (hasDragged) return;
-
                         const rect = renderer.domElement.getBoundingClientRect();
                         const mouse = new THREE.Vector2();
                         mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
                         mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-
                         const raycaster = new THREE.Raycaster();
                         raycaster.setFromCamera(mouse, camera);
-
                         const intersects = raycaster.intersectObject(earth);
-
                         if (intersects.length > 0) {
                             const point = intersects[0].point;
-
-                            // Convert world coordinates to earth's local coordinates
                             const localPoint = earth.worldToLocal(point.clone());
-
-                            // Calculate latitude from the local point
-                            const radius = 1;
-                            const latitude = Math.asin(localPoint.y / radius) * (180 / Math.PI);
-
-                            // Calculate gravity based on latitude
-                            // Formula: g = 9.78 + 0.05 * sin²(φ)
-                            // Equator (0°): 9.78 m/s², Poles (±90°): 9.83 m/s²
+                            const latitude = Math.asin(localPoint.y / 1) * (180 / Math.PI);
                             const latRad = latitude * (Math.PI / 180);
                             const g = 9.78 + 0.05 * Math.pow(Math.sin(latRad), 2);
-
                             setGravity(g.toFixed(2).replace('.', ','));
                             setClickedPoint({
                                 latitude: latitude.toFixed(1).replace('.', ','),
-                                longitude: (Math.atan2(localPoint.x, localPoint.z) * (180 / Math.PI)).toFixed(1).replace('.', ',')
+                                longitude: (Math.atan2(localPoint.x, localPoint.z) * (180 / Math.PI)).toFixed(1).replace('.', ','),
                             });
-
-                            // Remove old marker
-                            if (marker) {
-                                earth.remove(marker);
-                            }
-
-                            // Add new marker (yellow X-cross using boxes)
+                            if (marker) earth.remove(marker);
                             const markerGroup = new THREE.Group();
                             const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xff66ff });
-                            const markerSize = 0.045;
-                            const thickness = 0.01;
-
-                            // First diagonal bar
-                            const bar1Geometry = new THREE.BoxGeometry(markerSize, thickness, thickness);
-                            const bar1 = new THREE.Mesh(bar1Geometry, markerMaterial);
-                            bar1.rotation.z = Math.PI / 4; // 45 degrees
+                            const bar1 = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.01, 0.01), markerMaterial);
+                            bar1.rotation.z = Math.PI / 4;
                             markerGroup.add(bar1);
-
-                            // Second diagonal bar
-                            const bar2Geometry = new THREE.BoxGeometry(markerSize, thickness, thickness);
-                            const bar2 = new THREE.Mesh(bar2Geometry, markerMaterial);
-                            bar2.rotation.z = -Math.PI / 4; // -45 degrees
+                            const bar2 = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.01, 0.01), markerMaterial);
+                            bar2.rotation.z = -Math.PI / 4;
                             markerGroup.add(bar2);
-
-                            // Position marker in earth's local space, slightly above surface
                             const surfacePoint = localPoint.clone().normalize().multiplyScalar(1.02);
                             markerGroup.position.copy(surfacePoint);
-                            // Orient the marker to face outward from the earth surface
                             markerGroup.lookAt(surfacePoint.clone().multiplyScalar(2));
-
                             marker = markerGroup;
                             earth.add(marker);
                         }
@@ -421,22 +939,17 @@
                     renderer.domElement.addEventListener('click', onClick);
                     renderer.domElement.addEventListener('wheel', onWheel);
 
-                    // Animation loop
-                    const animate = () => {
-                        requestAnimationFrame(animate);
-                        renderer.render(scene, camera);
-                    };
+                    const animate = () => { requestAnimationFrame(animate); renderer.render(scene, camera); };
                     animate();
 
-                    // Handle resize
                     const handleResize = () => {
+                        if (!containerRef.current) return;
                         camera.aspect = containerRef.current.clientWidth / containerRef.current.clientHeight;
                         camera.updateProjectionMatrix();
                         renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
                     };
                     window.addEventListener('resize', handleResize);
 
-                    // Cleanup
                     return () => {
                         window.removeEventListener('resize', handleResize);
                         renderer.domElement.removeEventListener('mousedown', onMouseDown);
@@ -449,204 +962,135 @@
                 });
             }, []);
 
-            // Toggle equator visibility
-            useEffect(() => {
-                if (equatorLineRef.current) {
-                    equatorLineRef.current.visible = showEquator;
-                }
-            }, [showEquator]);
-
-            // Toggle poles visibility
-            useEffect(() => {
-                if (polesRef.current) {
-                    polesRef.current.visible = showPoles;
-                }
-            }, [showPoles]);
+            useEffect(() => { if (equatorLineRef.current) equatorLineRef.current.visible = showEquator; }, [showEquator]);
+            useEffect(() => { if (polesRef.current) polesRef.current.visible = showPoles; }, [showPoles]);
 
             return (
-                <div
-                    className="min-h-screen"
-                    style={{
-                        background: 'transparent',
-                        fontFamily: 'Poppins, sans-serif',
-                        paddingBottom: '0'
-                    }}
-                >
-                    <div className="max-w-6xl mx-auto px-4 md:px-8" style={{ paddingTop: '2rem' }}>
-
-                        {/* Breadcrumb */}
-                        <div className="breadcrumb mb-6">
-                            <a href="index.html">Hem</a> / <a href="fysik1.html">Fysik</a> / Tyngdfaktorn på jorden
-                        </div>
-
-                        {/* Header */}
-                        <div
-                            className="rounded-2xl p-6 md:p-8 mb-8 glass-card"
-                        >
-                            <h1
-                                className="font-black tracking-tight glow-text mb-3"
-                                style={{
-                                    fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-                                    color: 'var(--lab-ink)'
-                                }}
-                            >
-                                Tyngdfaktorn på jorden
-                            </h1>
-                            <p style={{ color: 'var(--lab-ink-muted)', fontSize: '1.05rem', lineHeight: '1.7' }}>
-                                Tyngdaccelerationen (<em>g</em>) varierar på jorden beroende på var du befinner dig.
-                                Vid ekvatorn är den lägst (cirka 9,78 m/s²) och vid polerna högst (cirka 9,83 m/s²).
-                                Detta beror på jordens rotation och att jorden är något tillplattad vid polerna.
-                            </p>
-                        </div>
-
-                        {/* Globe section */}
-                        <div className="rounded-2xl p-6 md:p-8 mb-8 glass-card">
-                            <h2
-                                className="font-bold mb-5"
-                                style={{ fontSize: '1.4rem', color: 'var(--lab-ink)' }}
-                            >
-                                Interaktiv jordglob
-                            </h2>
-
-                            <div ref={containerRef} id="canvas-container">
-
-                                {/* Info panel */}
-                                <div className="info-panel">
-                                    <h3
-                                        className="font-bold mb-3"
-                                        style={{ color: 'var(--lab-ink)', fontSize: '1rem', letterSpacing: '0.02em' }}
-                                    >
-                                        Matning
-                                    </h3>
-                                    {gravity ? (
-                                        <>
-                                            <div className="mb-3">
-                                                <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '2px' }}>Latitud</p>
-                                                <p style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--lab-ink)' }}>{clickedPoint.latitude}°</p>
-                                            </div>
-                                            <div className="mb-3">
-                                                <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '2px' }}>Longitud</p>
-                                                <p style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--lab-ink)' }}>{clickedPoint.longitude}°</p>
-                                            </div>
-                                            <hr className="panel-divider" />
-                                            <div>
-                                                <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '4px' }}>Tyngdfaktor (<em>g</em>)</p>
-                                                <p style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--lab-accent)' }}>
-                                                    <em>g</em> = {gravity} m/s²
-                                                </p>
-                                            </div>
-                                        </>
-                                    ) : (
-                                        <p style={{ color: 'var(--lab-ink-muted)', fontSize: '0.85rem' }}>
-                                            Klicka på jordklotet för att mata <em>g</em>-värdet
-                                        </p>
-                                    )}
-                                    <hr className="panel-divider" />
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                                            <input
-                                                type="checkbox"
-                                                checked={showEquator}
-                                                onChange={(e) => setShowEquator(e.target.checked)}
-                                                className="dark-checkbox"
-                                                aria-label="Visa ekvatorn"
-                                            />
-                                            <span style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)' }}>Visa ekvatorn</span>
-                                        </label>
-                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                                            <input
-                                                type="checkbox"
-                                                checked={showPoles}
-                                                onChange={(e) => setShowPoles(e.target.checked)}
-                                                className="dark-checkbox"
-                                                aria-label="Visa polerna"
-                                            />
-                                            <span style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)' }}>Visa polerna</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                {/* Instruction panel */}
-                                <div className="instruction-panel">
-                                    <h3
-                                        className="font-bold mb-2"
-                                        style={{ fontSize: '0.85rem', color: 'var(--lab-ink)' }}
-                                    >
-                                        Instruktioner
-                                    </h3>
-                                    <ul style={{ fontSize: '0.82rem', color: 'var(--lab-ink-muted)', display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', padding: 0, margin: 0 }}>
-                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Dra för att rotera jorden</li>
-                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Scrolla för att zooma in/ut</li>
-                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Klicka för att mata <em>g</em>-värdet</li>
-                                        <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Rosa kryss visar vald plats</li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        {/* Explanation section */}
-                        <div className="rounded-2xl p-6 md:p-8 mb-8 glass-card">
-                            <h2
-                                className="font-bold mb-5"
-                                style={{ fontSize: '1.4rem', color: 'var(--lab-ink)' }}
-                            >
-                                Varför varierar <em>g</em>?
-                            </h2>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-
-                                <div>
-                                    <h3
-                                        className="font-bold mb-2"
-                                        style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}
-                                    >
-                                        1. Jordens rotation
-                                    </h3>
-                                    <p style={{ color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
-                                        Vid ekvatorn roterar jorden snabbast, vilket skapar en centrifugalkraft som motverkar
-                                        gravitationen. Detta gör att <em>g</em> blir lägre där.
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <h3
-                                        className="font-bold mb-2"
-                                        style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}
-                                    >
-                                        2. Jordens form
-                                    </h3>
-                                    <p style={{ color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
-                                        Jorden är inte perfekt sfärisk utan något tillplattad vid polerna. Vid ekvatorn är
-                                        du längre från jordens centrum, vilket också bidrar till ett lägre <em>g</em>-värde.
-                                    </p>
-                                </div>
-
-                                <div
-                                    className="rounded-xl p-5"
-                                    style={{
-                                        background: 'var(--lab-bg)',
-                                        border: '1px solid var(--lab-line-strong)',
-                                        borderLeft: '4px solid var(--lab-accent)'
-                                    }}
-                                >
-                                    <h3
-                                        className="font-bold mb-2"
-                                        style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}
-                                    >
-                                        Intressant fakta
-                                    </h3>
-                                    <p style={{ color: 'var(--lab-ink-muted)', lineHeight: '1.7' }}>
-                                        Om du väger 70 kg i Stockholm (<em>g</em> ≈ 9,82 m/s²) skulle du väga cirka 250 gram mindre
-                                        vid ekvatorn (<em>g</em> ≈ 9,78 m/s²)!
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-
+                <React.Fragment>
+                    <div className="rounded-2xl p-6 md:p-8 mb-6 glass-card">
+                        <p style={{ color: 'var(--lab-ink-soft)', fontSize: '1.02rem', lineHeight: '1.7' }}>
+                            Tyngdaccelerationen (<em>g</em>) är inte exakt samma överallt på jorden. Vid ekvatorn är den
+                            lägst (cirka 9,78 m/s²) och vid polerna högst (cirka 9,83 m/s²). Det beror på jordens
+                            rotation och att jorden är något tillplattad vid polerna. Klicka på jordklotet för att
+                            mäta <em>g</em> där.
+                        </p>
                     </div>
 
-                    {/* Footer */}
+                    <div className="rounded-2xl p-6 md:p-8 mb-6 glass-card">
+                        <div ref={containerRef} id="canvas-container">
+                            <div className="info-panel">
+                                <h3 className="font-bold mb-3" style={{ color: 'var(--lab-ink)', fontSize: '1rem', letterSpacing: '0.02em' }}>Mätning</h3>
+                                {gravity ? (
+                                    <React.Fragment>
+                                        <div className="mb-3">
+                                            <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '2px' }}>Latitud</p>
+                                            <p style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--lab-ink)' }}>{clickedPoint.latitude}°</p>
+                                        </div>
+                                        <div className="mb-3">
+                                            <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '2px' }}>Longitud</p>
+                                            <p style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--lab-ink)' }}>{clickedPoint.longitude}°</p>
+                                        </div>
+                                        <hr className="panel-divider" />
+                                        <div>
+                                            <p style={{ fontSize: '0.75rem', color: 'var(--lab-ink-muted)', marginBottom: '4px' }}>Tyngdfaktor (<em>g</em>)</p>
+                                            <p style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--lab-accent)' }}><em>g</em> = {gravity} m/s²</p>
+                                        </div>
+                                    </React.Fragment>
+                                ) : (
+                                    <p style={{ color: 'var(--lab-ink-muted)', fontSize: '0.85rem' }}>Klicka på jordklotet för att mäta <em>g</em>-värdet</p>
+                                )}
+                                <hr className="panel-divider" />
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                                        <input type="checkbox" checked={showEquator} onChange={(e) => setShowEquator(e.target.checked)} className="dark-checkbox" aria-label="Visa ekvatorn" />
+                                        <span style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)' }}>Visa ekvatorn</span>
+                                    </label>
+                                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                                        <input type="checkbox" checked={showPoles} onChange={(e) => setShowPoles(e.target.checked)} className="dark-checkbox" aria-label="Visa polerna" />
+                                        <span style={{ fontSize: '0.85rem', color: 'var(--lab-ink-muted)' }}>Visa polerna</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="instruction-panel">
+                                <h3 className="font-bold mb-2" style={{ fontSize: '0.85rem', color: 'var(--lab-ink)' }}>Instruktioner</h3>
+                                <ul style={{ fontSize: '0.82rem', color: 'var(--lab-ink-muted)', display: 'flex', flexDirection: 'column', gap: '4px', listStyle: 'none', padding: 0, margin: 0 }}>
+                                    <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Dra för att rotera jorden</li>
+                                    <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Scrolla för att zooma in/ut</li>
+                                    <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Klicka för att mäta <em>g</em>-värdet</li>
+                                    <li style={{ display: 'flex', gap: '6px' }}><span style={{ color: 'var(--lab-accent)' }}>•</span> Rosa kryss visar vald plats</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="rounded-2xl p-6 md:p-8 glass-card">
+                        <h3 className="font-bold mb-5" style={{ fontSize: '1.4rem', color: 'var(--lab-ink)' }}>Varför varierar <em>g</em>?</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                            <div>
+                                <h4 className="font-bold mb-2" style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}>1. Jordens rotation</h4>
+                                <p style={{ color: 'var(--lab-ink-soft)', lineHeight: '1.7' }}>
+                                    Vid ekvatorn roterar jorden snabbast, vilket skapar en centrifugaleffekt som motverkar
+                                    gravitationen. Det gör att <em>g</em> blir lägre där.
+                                </p>
+                            </div>
+                            <div>
+                                <h4 className="font-bold mb-2" style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}>2. Jordens form</h4>
+                                <p style={{ color: 'var(--lab-ink-soft)', lineHeight: '1.7' }}>
+                                    Jorden är inte perfekt sfärisk utan något tillplattad vid polerna. Vid ekvatorn är
+                                    du längre från jordens centrum, vilket också bidrar till ett lägre <em>g</em>-värde.
+                                </p>
+                            </div>
+                            <div className="rounded-xl p-5" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)', borderLeft: '4px solid var(--lab-accent)' }}>
+                                <h4 className="font-bold mb-2" style={{ fontSize: '1.05rem', color: 'var(--lab-ink)' }}>Intressant fakta</h4>
+                                <p style={{ color: 'var(--lab-ink-soft)', lineHeight: '1.7' }}>
+                                    Om du väger 70 kg i Stockholm (<em>g</em> ≈ 9,82 m/s²) skulle du väga cirka 250 gram mindre
+                                    vid ekvatorn (<em>g</em> ≈ 9,78 m/s²)!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </React.Fragment>
+            );
+        }
+
+        /* ════════════════════════════════════════════════════════════
+           SKAL — gemensamt huvud + flikar mellan de två simuleringarna
+           ════════════════════════════════════════════════════════════ */
+        const App = () => {
+            const [tab, setTab] = useState(
+                new URLSearchParams(location.search).get('sim') === 'globe' ? 'globe' : 'vacuum'
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik</a> / Acceleration och fritt fall
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>
+                            Acceleration och fritt fall
+                        </h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 800 }}>
+                            Acceleration är hur snabbt farten ändras. Vid fritt fall är accelerationen tyngdfaktorn
+                            <em> g</em>. Utforska två sidor av samma sak: hur luftmotståndet får olika föremål att
+                            falla olika fort — och att alla föremål faller lika fort utan luft — samt hur
+                            tyngdfaktorn <em>g</em> varierar över jordklotet.
+                        </p>
+
+                        {/* Lägesflikar */}
+                        <div className="inline-flex p-1 gap-1 mb-6" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)', borderRadius: '8px' }}>
+                            <button onClick={() => setTab('vacuum')} className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${tab === 'vacuum' ? 'active' : ''}`}>
+                                Fritt fall i vakuum
+                            </button>
+                            <button onClick={() => setTab('globe')} className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${tab === 'globe' ? 'active' : ''}`}>
+                                Tyngdfaktorn på jorden
+                            </button>
+                        </div>
+
+                        {tab === 'vacuum' ? <VacuumSim /> : <GlobeBody />}
+                    </div>
+
                     <footer className="footer">
                         <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
                             Fysiklabbet &mdash; Interaktiva simuleringar för gymnasiefysik
@@ -654,10 +1098,9 @@
                     </footer>
                 </div>
             );
-        }
+        };
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<GravitySimulation />);
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
     </script>
     <script src="feedback.js" defer></script>
     <script src="data/katalog.js"></script>

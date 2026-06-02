@@ -38,6 +38,37 @@
             font-weight: bold;
             color: #92400e;
         }
+
+        /* ── Scen-wrapper + fullskärm (grafen) ── */
+        .scene-wrap { aspect-ratio: 7 / 4; user-select: none; }
+        /* Bara den DIREKTA scen-svg:n ska fylla wrappern (inte ikon-svg:n i .fs-btn). */
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; }
+
+        /* Visningsval-ruta uppe till höger på scenytan (typ av rörelse + lutning) */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 240px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+
+        /* Reglage-rad inom fullskärms-dropdown */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
     </style>
 </head>
 <body class="bg-gray-50 lab-sim">
@@ -73,19 +104,105 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         const DistanceTimeSimulation = () => {
             const [motionType, setMotionType] = useState('constant-velocity');
             const [s0, setS0] = useState(0); // Initial position (m)
             const [velocity, setVelocity] = useState(5); // Velocity (m/s)
             const [showSlope, setShowSlope] = useState(false);
+            const [showKValue, setShowKValue] = useState(false); // Visa k-värdet (lutningen) vid tangenten
             const [tangentTime, setTangentTime] = useState(5); // Time for tangent point
+
+            // Fullskärm
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const sceneWrapRef = useRef(null);
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // Dra tangeringspunkten med musen/fingret
+            const svgRef = useRef(null);
+            const draggingRef = useRef(false);
+            const [isDragging, setIsDragging] = useState(false);
+
+            const clientToTime = (clientX, clientY) => {
+                const svg = svgRef.current;
+                if (!svg || !svg.getScreenCTM) return null;
+                const ctm = svg.getScreenCTM();
+                if (!ctm) return null;
+                const pt = svg.createSVGPoint();
+                pt.x = clientX; pt.y = clientY;
+                const loc = pt.matrixTransform(ctm.inverse());
+                // Invertera scaleX: t = (x − padding) / graphWidth · FIXED_MAX_TIME
+                let t = ((loc.x - padding) / graphWidth) * FIXED_MAX_TIME;
+                t = Math.round(t * 10) / 10; // steglöst (0,1 s) — matchar 1-decimals visning
+                return Math.max(0, Math.min(FIXED_MAX_TIME, t));
+            };
+
+            const startTangentDrag = (e) => {
+                draggingRef.current = true;
+                setIsDragging(true);
+                const t = clientToTime(e.clientX, e.clientY);
+                if (t !== null) setTangentTime(t);
+                e.preventDefault();
+            };
+
+            useEffect(() => {
+                const move = (e) => {
+                    if (!draggingRef.current) return;
+                    const t = clientToTime(e.clientX, e.clientY);
+                    if (t !== null) setTangentTime(t);
+                };
+                const up = () => {
+                    if (!draggingRef.current) return;
+                    draggingRef.current = false;
+                    setIsDragging(false);
+                };
+                window.addEventListener('pointermove', move);
+                window.addEventListener('pointerup', up);
+                return () => {
+                    window.removeEventListener('pointermove', move);
+                    window.removeEventListener('pointerup', up);
+                };
+            }, []);
 
             // Helper function to format numbers with comma as decimal separator (Swedish standard)
             const formatNumber = (num, decimals = 1) => {
                 return num.toFixed(decimals).replace('.', ',');
             };
+            // en decimal för värden — men exakt 0 skrivs utan decimal ("0")
+            const fmt = (num) => {
+                const s = formatNumber(num, 1);
+                return (s === '0,0' || s === '-0,0') ? '0' : s;
+            };
+
+            // Kursiv variabel (HTML)
+            const V = ({ children }) => <em>{children}</em>;
+            // Bråk med rakt divisionsstreck (HTML) – täljare över nämnare
+            const Frac = ({ num, den }) => (
+                <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', verticalAlign: 'middle', margin: '0 0.3em' }}>
+                    <span style={{ padding: '0 0.45em', lineHeight: 1.15 }}>{num}</span>
+                    <span style={{ borderTop: '1.6px solid currentColor', padding: '0 0.45em', lineHeight: 1.25, width: '100%', textAlign: 'center' }}>{den}</span>
+                </span>
+            );
 
             // Calculate position at time t
             const getPosition = (t) => {
@@ -142,11 +259,17 @@
             const minS = FIXED_MIN_S;
             const maxS = FIXED_MAX_S;
 
-            // Y-axis values with fixed step
-            const sStep = 20;
+            // Y-axis values: jämna 50-steg (-150 … 0 … 150) för lättläst rutnät
+            const sStep = 50;
             const yAxisValues = [];
             for (let s = minS; s <= maxS; s += sStep) {
                 yAxisValues.push(s);
+            }
+            // X-axel: rutnät och etiketter var 2:e sekund (0, 2, … 20)
+            const tStep = 2;
+            const xAxisValues = [];
+            for (let t = 0; t <= FIXED_MAX_TIME; t += tStep) {
+                xAxisValues.push(t);
             }
 
             // Scale functions with fixed ranges
@@ -169,6 +292,18 @@
             const velocityAtTangent = getVelocityAtTime(tangentTime);
             const positionAtTangent = getPosition(tangentTime);
 
+            // Δs/Δt-triangel på tangenten (samma två punkter används i grafen och i uträkningen).
+            // Fönstret ligger till vänster om tangeringspunkten; klamras in mot vänsterkanten.
+            const TRI_DT = 4;
+            let triTb = tangentTime;
+            let triTa = tangentTime - TRI_DT;
+            if (triTa < 0) { triTa = 0; triTb = TRI_DT; }
+            const tangentLineS = (tau) => positionAtTangent + velocityAtTangent * (tau - tangentTime);
+            const triSa = tangentLineS(triTa);
+            const triSb = tangentLineS(triTb);
+            const triDt = triTb - triTa;
+            const triDs = triSb - triSa;
+
             return (
                 <div className="min-h-screen bg-gray-50 py-8 px-4">
                     <div className="max-w-7xl mx-auto">
@@ -186,22 +321,23 @@
                                 {/* Graph */}
                                 <div className="bg-white rounded-xl shadow-lg p-6">
                                     <h2 className="text-2xl font-bold mb-4 text-gray-800">Sträcka-tid-graf</h2>
-                                    <svg width={svgWidth} height={svgHeight} className="border-2 border-gray-200 rounded-lg bg-white">
+                                    <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <svg ref={svgRef} viewBox={`0 0 ${svgWidth} ${svgHeight}`} preserveAspectRatio="xMidYMid meet" className="bg-white">
                                         <defs>
                                             <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                                <polygon points="0 0, 10 3, 0 6" fill="#f3eee4" />
+                                                <polygon points="0 0, 10 3, 0 6" fill="#38bdf8" />
                                             </marker>
                                         </defs>
 
                                         {/* Grid lines */}
-                                        {[...Array(21)].map((_, i) => (
+                                        {xAxisValues.map((t, i) => (
                                             <line
                                                 key={`grid-x-${i}`}
-                                                x1={scaleX(i)}
+                                                x1={scaleX(t)}
                                                 y1={padding}
-                                                x2={scaleX(i)}
+                                                x2={scaleX(t)}
                                                 y2={svgHeight - padding}
-                                                stroke="#e5e7eb"
+                                                stroke="#a7b0bd"
                                                 strokeWidth="1"
                                             />
                                         ))}
@@ -212,18 +348,18 @@
                                                 y1={scaleY(s)}
                                                 x2={svgWidth - padding}
                                                 y2={scaleY(s)}
-                                                stroke="#e5e7eb"
+                                                stroke="#a7b0bd"
                                                 strokeWidth="1"
                                             />
                                         ))}
 
-                                        {/* Axes with arrows */}
+                                        {/* Axes with arrows (cyan, svensk diagramkonvention) */}
                                         <line
                                             x1={padding}
                                             y1={scaleY(0)}
                                             x2={svgWidth - padding + 10}
                                             y2={scaleY(0)}
-                                            stroke="#f3eee4"
+                                            stroke="#38bdf8"
                                             strokeWidth="2"
                                             markerEnd="url(#arrowhead)"
                                         />
@@ -232,22 +368,22 @@
                                             y1={svgHeight - padding}
                                             x2={padding}
                                             y2={padding - 10}
-                                            stroke="#f3eee4"
+                                            stroke="#38bdf8"
                                             strokeWidth="2"
                                             markerEnd="url(#arrowhead)"
                                         />
 
                                         {/* Axis labels */}
-                                        {[...Array(21)].map((_, i) => (
+                                        {xAxisValues.map((t, i) => (
                                             <text
                                                 key={`label-x-${i}`}
-                                                x={scaleX(i)}
+                                                x={scaleX(t)}
                                                 y={scaleY(0) + 20}
                                                 textAnchor="middle"
                                                 fontSize="12"
                                                 fill="#666"
                                             >
-                                                {i}
+                                                {t}
                                             </text>
                                         ))}
                                         {yAxisValues.map((s, i) => (
@@ -264,7 +400,7 @@
                                         ))}
 
                                         {/* Axis titles */}
-                                        <text x={svgWidth / 2} y={svgHeight - 10} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#f3eee4">
+                                        <text x={svgWidth / 2} y={svgHeight - 10} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#334155">
                                             Tid (s)
                                         </text>
                                         <text
@@ -273,7 +409,7 @@
                                             textAnchor="middle"
                                             fontSize="16"
                                             fontWeight="bold"
-                                            fill="#f3eee4"
+                                            fill="#334155"
                                             transform={`rotate(-90, 20, ${svgHeight / 2})`}
                                         >
                                             Sträcka (m)
@@ -324,7 +460,7 @@
                                                     fill="#10b981"
                                                     fontWeight="bold"
                                                 >
-                                                    Δt = 4 s
+                                                    Δ<tspan fontStyle="italic">t</tspan> = 4,0 s
                                                 </text>
                                                 <text
                                                     x={scaleX(6) + 35}
@@ -334,8 +470,20 @@
                                                     fill="#10b981"
                                                     fontWeight="bold"
                                                 >
-                                                    Δs = {formatNumber(getPosition(6) - getPosition(2))} m
+                                                    Δ<tspan fontStyle="italic">s</tspan> = {fmt(getPosition(6) - getPosition(2))} m
                                                 </text>
+                                                {showKValue && (
+                                                    <text
+                                                        x={(scaleX(2) + scaleX(6)) / 2 - 6}
+                                                        y={(scaleY(getPosition(2)) + scaleY(getPosition(6))) / 2 - 14}
+                                                        textAnchor="end"
+                                                        fontSize="15"
+                                                        fill="#10b981"
+                                                        fontWeight="bold"
+                                                    >
+                                                        <tspan fontStyle="italic">k</tspan> = {fmt(avgSlope)} m/s
+                                                    </text>
+                                                )}
                                             </>
                                         )}
 
@@ -364,13 +512,24 @@
                                                                 strokeWidth="3"
                                                                 strokeDasharray="8,4"
                                                             />
+                                                            {/* Stor osynlig greppyta för enklare drag */}
                                                             <circle
                                                                 cx={scaleX(t)}
                                                                 cy={scaleY(s)}
-                                                                r="6"
+                                                                r="18"
+                                                                fill="transparent"
+                                                                style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+                                                                onPointerDown={startTangentDrag}
+                                                            />
+                                                            <circle
+                                                                cx={scaleX(t)}
+                                                                cy={scaleY(s)}
+                                                                r={isDragging ? 8 : 6}
                                                                 fill="#2563eb"
                                                                 stroke="#fff"
                                                                 strokeWidth="2"
+                                                                style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+                                                                onPointerDown={startTangentDrag}
                                                             />
                                                             <text
                                                                 x={scaleX(t) + 15}
@@ -378,9 +537,72 @@
                                                                 fontSize="14"
                                                                 fill="#2563eb"
                                                                 fontWeight="bold"
+                                                                style={{ pointerEvents: 'none' }}
                                                             >
-                                                                Tangent vid t={t}s
+                                                                Tangent vid <tspan fontStyle="italic">t</tspan> = {fmt(t)} s
                                                             </text>
+                                                            {showKValue && (() => {
+                                                                // Full uträkning av k med raka divisionsstreck (Frac via foreignObject).
+                                                                // Boxen ligger till höger om tangeringspunkten när den får plats där;
+                                                                // annars uppe till vänster (ovanför tangenten, fritt från triangeln
+                                                                // som ritas under tangenten).
+                                                                const boxW = 235, boxH = 50;
+                                                                // Δs-etiketten ligger till höger om benet vid positiv lutning – ge då
+                                                                // k-uträkningen extra avstånd så den inte krockar med Δs-etiketten.
+                                                                const gap = (velocityAtTangent >= 0) ? 108 : 16;
+                                                                const fitsRight = scaleX(t) + gap + boxW <= svgWidth - 4;
+                                                                const bx = fitsRight
+                                                                    ? scaleX(t) + gap
+                                                                    : Math.max(padding + 4, scaleX(t) - 14 - boxW);
+                                                                const by = fitsRight
+                                                                    ? Math.max(padding + 4, Math.min(scaleY(s) + 8, svgHeight - boxH))
+                                                                    : Math.max(padding + 4, scaleY(s) - 8 - boxH);
+                                                                return (
+                                                                    <foreignObject x={bx} y={by} width={boxW} height={boxH} style={{ overflow: 'visible' }}>
+                                                                        <div xmlns="http://www.w3.org/1999/xhtml" style={{ display: 'flex', alignItems: 'center', justifyContent: fitsRight ? 'flex-start' : 'flex-end', gap: '0.3em', color: '#2563eb', fontWeight: 'bold', fontSize: '14px', lineHeight: 1.1, whiteSpace: 'nowrap' }}>
+                                                                            <em>k</em> <span>=</span>
+                                                                            <Frac num={<>Δ<em>s</em></>} den={<>Δ<em>t</em></>} /> <span>=</span>
+                                                                            <Frac num={<>{fmt(triDs)} m</>} den={<>{fmt(triDt)} s</>} /> <span>=</span>
+                                                                            <span>{fmt(v)} m/s</span>
+                                                                        </div>
+                                                                    </foreignObject>
+                                                                );
+                                                            })()}
+
+                                                            {/* Δs/Δt-triangel på tangenten (visas med k-värdet).
+                                                                Horisontella Δt-benet ritas UNDER tangenten (vid lägsta s-värdet),
+                                                                vertikala Δs-benet vid den ände som har högsta s-värdet. */}
+                                                            {showKValue && (() => {
+                                                                const lowS = Math.min(triSa, triSb);
+                                                                const highS = Math.max(triSa, triSb);
+                                                                const horizY = scaleY(lowS);    // horisontella benet (Δt) – under tangenten
+                                                                const vertX = (triSa >= triSb) ? scaleX(triTa) : scaleX(triTb); // vid högsta s
+                                                                const triColor = '#0e7c66';
+                                                                // Δs-etiketten placeras UTANFÖR triangeln, bredvid det vertikala benet:
+                                                                // för positiv lutning ligger benet vid punkten (höger ände) → etikett till
+                                                                // höger; för negativ lutning ligger benet vid vänster ände → etikett till vänster.
+                                                                const dsRight = velocityAtTangent >= 0;
+                                                                return (
+                                                                    <>
+                                                                        {/* Vertikalt ben (Δs) */}
+                                                                        <line x1={vertX} y1={scaleY(lowS)} x2={vertX} y2={scaleY(highS)}
+                                                                              stroke={triColor} strokeWidth="2" />
+                                                                        {/* Horisontellt ben (Δt) – under tangenten */}
+                                                                        <line x1={scaleX(triTa)} y1={horizY} x2={scaleX(triTb)} y2={horizY}
+                                                                              stroke={triColor} strokeWidth="2" />
+                                                                        {/* Δs-etikett (utanför benet) */}
+                                                                        <text x={dsRight ? vertX + 8 : vertX - 8} y={(scaleY(lowS) + scaleY(highS)) / 2 + 5}
+                                                                              textAnchor={dsRight ? 'start' : 'end'} fontSize="14" fill={triColor} fontWeight="bold">
+                                                                            Δ<tspan fontStyle="italic">s</tspan> = {fmt(triDs)} m
+                                                                        </text>
+                                                                        {/* Δt-etikett (under horisontella benet) */}
+                                                                        <text x={(scaleX(triTa) + scaleX(triTb)) / 2} y={horizY + 20}
+                                                                              textAnchor="middle" fontSize="14" fill={triColor} fontWeight="bold">
+                                                                            Δ<tspan fontStyle="italic">t</tspan> = {fmt(triDt)} s
+                                                                        </text>
+                                                                    </>
+                                                                );
+                                                            })()}
                                                         </>
                                                     );
                                                 })()}
@@ -388,17 +610,95 @@
                                         )}
                                     </svg>
 
+                                    {/* Visningsval uppe till höger (endast fullskärm) */}
+                                    {isFullscreen && (
+                                        <div className="scene-toggles">
+                                            <div className="st-title">Typ av rörelse</div>
+                                            {[['constant-velocity', 'Konstant hastighet'], ['accelerating', 'Accelererande rörelse'], ['decelerating', 'Retarderande rörelse']].map(([m, lbl]) => (
+                                                <label key={m}>
+                                                    <input type="radio" name="motionTypeFs" checked={motionType === m} onChange={() => setMotionType(m)} />
+                                                    <span>{lbl}</span>
+                                                </label>
+                                            ))}
+                                            <div className="st-title mt">Visa</div>
+                                            <label>
+                                                <input type="checkbox" checked={showSlope} onChange={(e) => setShowSlope(e.target.checked)} />
+                                                <span>Lutning (hastighet)</span>
+                                            </label>
+                                            {showSlope && (
+                                                <label>
+                                                    <input type="checkbox" checked={showKValue} onChange={(e) => setShowKValue(e.target.checked)} />
+                                                    <span>k-värde (lutning)</span>
+                                                </label>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* Fullskärm: glidare i hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <div className="fs-row">
+                                                    <span className="fs-label" style={{ minWidth: 150 }}>Startsträcka (<em>s</em>₀)</span>
+                                                    <input type="range" min="-20" max="30" step="1" value={s0}
+                                                           onChange={(e) => setS0(parseFloat(e.target.value))} />
+                                                    <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{fmt(s0)} m</span>
+                                                </div>
+                                                <div className="fs-row">
+                                                    <span className="fs-label" style={{ minWidth: 150 }}>
+                                                        {motionType === 'constant-velocity' ? <>Hastighet (<em>v</em>)</> : <>Starthastighet (<em>v</em>₀)</>}
+                                                    </span>
+                                                    <input type="range" min="-10" max="10" step="1" value={velocity}
+                                                           onChange={(e) => setVelocity(parseFloat(e.target.value))} />
+                                                    <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{fmt(velocity)} m/s</span>
+                                                </div>
+                                                {showSlope && (
+                                                    <div className="fs-row">
+                                                        <span className="fs-label" style={{ minWidth: 150 }}>Tangeringspunkt (<em>t</em>)</span>
+                                                        <input type="range" min="0" max="20" step="1" value={tangentTime}
+                                                               onChange={(e) => setTangentTime(parseFloat(e.target.value))} />
+                                                        <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{fmt(tangentTime)} s</span>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'} aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6" />
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    {/* Fullskärmsknapp (kanonisk ikon, uppe till vänster) */}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                    </div>
+
                                     {/* Status display */}
                                     <div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
-                                        <h3 className="font-bold text-lg mb-2 text-blue-900">📊 Aktuell status vid t = {tangentTime} s:</h3>
+                                        <h3 className="font-bold text-lg mb-2 text-blue-900">📊 Aktuell status vid <em>t</em> = {fmt(tangentTime)} s:</h3>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
                                                 <span className="text-gray-600">Sträcka:</span>
-                                                <span className="ml-2 font-bold text-xl text-blue-600">{formatNumber(positionAtTangent, 2)} m</span>
+                                                <span className="ml-2 font-bold text-xl text-blue-600">{fmt(positionAtTangent)} m</span>
                                             </div>
                                             <div>
                                                 <span className="text-gray-600">Hastighet:</span>
-                                                <span className="ml-2 font-bold text-xl text-green-600">{formatNumber(velocityAtTangent, 2)} m/s</span>
+                                                <span className="ml-2 font-bold text-xl text-green-600">{fmt(velocityAtTangent)} m/s</span>
                                             </div>
                                         </div>
                                         <p className="mt-2 text-sm text-gray-700">
@@ -415,38 +715,50 @@
                                 {showSlope && (
                                     <div className="bg-green-50 rounded-xl shadow-lg p-6 border-2 border-green-200">
                                         <h2 className="text-2xl font-bold mb-4 text-green-900">📐 Lutningsanalys (Hastighet)</h2>
-                                        <div className="formula-box bg-gradient-to-r from-green-500 to-emerald-600">
-                                            v = Δs / Δt = k-värde
+                                        <div className="formula-box bg-gradient-to-r from-green-500 to-emerald-600" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4em' }}>
+                                            <em>v</em> <span>=</span> <Frac num={<>Δ<em>s</em></>} den={<>Δ<em>t</em></>} /> <span>=</span> <span><em>k</em>-värde</span>
                                         </div>
                                         <div className="calc-step">
                                             <p className="font-semibold mb-2">Beräkning av lutning:</p>
                                             {motionType === 'constant-velocity' && (
                                                 <>
-                                                    <p>Lutning k = (s₂ - s₁) / (t₂ - t₁)</p>
-                                                    <p>k = ({formatNumber(getPosition(6))} - {formatNumber(getPosition(2))}) / (6 - 2)</p>
-                                                    <p>k = {formatNumber(getPosition(6) - getPosition(2))} / 4</p>
-                                                    <p className="mt-2"><span className="highlight-value">Hastighet v = {formatNumber(avgSlope, 2)} m/s</span></p>
+                                                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.35em', flexWrap: 'wrap' }}>
+                                                        Lutning <em>k</em> = <Frac num={<><em>s</em>₂ − <em>s</em>₁</>} den={<><em>t</em>₂ − <em>t</em>₁</>} />
+                                                    </p>
+                                                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.35em', flexWrap: 'wrap' }}>
+                                                        <em>k</em> = <Frac num={<>{fmt(getPosition(6))} − {fmt(getPosition(2))}</>} den={<>6,0 − 2,0</>} />
+                                                    </p>
+                                                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.35em', flexWrap: 'wrap' }}>
+                                                        <em>k</em> = <Frac num={fmt(getPosition(6) - getPosition(2))} den="4,0" />
+                                                    </p>
+                                                    <p className="mt-2"><span className="highlight-value">Hastighet <em>v</em> = {fmt(avgSlope)} m/s</span></p>
                                                 </>
                                             )}
-                                            {motionType === 'accelerating' && (
+                                            {motionType !== 'constant-velocity' && (
                                                 <>
-                                                    <p>För kurvig graf använder vi tangentens lutning vid t={tangentTime}s:</p>
-                                                    <p className="mt-2"><span className="highlight-value">Momentanhastighet v({tangentTime}s) = {formatNumber(velocityAtTangent, 2)} m/s</span></p>
-                                                    <p className="text-sm text-gray-600 mt-2">Hastigheten ökar med tiden (acceleration)</p>
-                                                </>
-                                            )}
-                                            {motionType === 'decelerating' && (
-                                                <>
-                                                    <p>För kurvig graf använder vi tangentens lutning vid t={tangentTime}s:</p>
-                                                    <p className="mt-2"><span className="highlight-value">Momentanhastighet v({tangentTime}s) = {formatNumber(velocityAtTangent, 2)} m/s</span></p>
-                                                    <p className="text-sm text-gray-600 mt-2">Hastigheten minskar med tiden (retardation)</p>
+                                                    <p>För kurvig graf använder vi tangentens lutning vid <em>t</em> = {fmt(tangentTime)} s:</p>
+                                                    {showKValue && (
+                                                        <>
+                                                            <p className="text-sm text-gray-600 mt-2 mb-1">Vi läser av två punkter på tangenten och bildar en lutningstriangel:</p>
+                                                            <p style={{ display: 'flex', alignItems: 'center', gap: '0.35em', flexWrap: 'wrap' }}>
+                                                                Lutning <em>k</em> = <Frac num={<>Δ<em>s</em></>} den={<>Δ<em>t</em></>} />
+                                                            </p>
+                                                            <p style={{ display: 'flex', alignItems: 'center', gap: '0.35em', flexWrap: 'wrap' }}>
+                                                                <em>k</em> = <Frac num={<>{fmt(triDs)} m</>} den={<>{fmt(triDt)} s</>} />
+                                                            </p>
+                                                        </>
+                                                    )}
+                                                    <p className="mt-2"><span className="highlight-value">Momentanhastighet <em>v</em>({fmt(tangentTime)} s) = {fmt(velocityAtTangent)} m/s</span></p>
+                                                    <p className="text-sm text-gray-600 mt-2">
+                                                        {motionType === 'accelerating' ? 'Hastigheten ökar med tiden (acceleration)' : 'Hastigheten minskar med tiden (retardation)'}
+                                                    </p>
                                                 </>
                                             )}
                                         </div>
                                         <div className="mt-4 p-4 bg-white rounded border-l-4 border-green-500">
                                             <p className="font-semibold text-green-900">💡 Fysikalisk tolkning:</p>
                                             <p className="text-gray-700">
-                                                Lutningen på en s-t-graf visar <strong>hastigheten</strong>.
+                                                Lutningen på en <em>s</em>-<em>t</em>-graf visar <strong>hastigheten</strong>.
                                                 {motionType === 'constant-velocity' && " En konstant lutning betyder konstant hastighet."}
                                                 {motionType === 'accelerating' && " En ökande lutning (uppåtböjd kurva) betyder att hastigheten ökar."}
                                                 {motionType === 'decelerating' && " En minskande lutning (nedåtböjd kurva) betyder att hastigheten minskar."}
@@ -460,7 +772,7 @@
                             <div className="space-y-6">
                                 {/* Motion Type */}
                                 <div className="bg-white rounded-xl shadow-lg p-6">
-                                    <h3 className="text-xl font-bold mb-4 text-gray-800">🎯 Typ av rörelse</h3>
+                                    <h3 className="text-xl font-bold mb-4 text-gray-800">Typ av rörelse</h3>
                                     <div className="space-y-3">
                                         <label className={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition ${motionType === 'constant-velocity' ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
                                             <input
@@ -505,8 +817,8 @@
                                     {/* Initial position */}
                                     <div className="mb-6">
                                         <div className="flex justify-between items-center mb-2">
-                                            <label className="font-semibold text-gray-700">Startsträcka (s₀)</label>
-                                            <span className="text-lg font-bold text-blue-600">{s0} m</span>
+                                            <label className="font-semibold text-gray-700">Startsträcka (<em>s</em>₀)</label>
+                                            <span className="text-lg font-bold text-blue-600">{fmt(s0)} m</span>
                                         </div>
                                         <input
                                             type="range"
@@ -518,8 +830,8 @@
                                             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                                         />
                                         <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                            <span>-20 m</span>
-                                            <span>30 m</span>
+                                            <span>−20,0 m</span>
+                                            <span>30,0 m</span>
                                         </div>
                                     </div>
 
@@ -527,9 +839,9 @@
                                     <div className="mb-6">
                                         <div className="flex justify-between items-center mb-2">
                                             <label className="font-semibold text-gray-700">
-                                                {motionType === 'constant-velocity' ? 'Hastighet (v)' : 'Starthastighet (v₀)'}
+                                                {motionType === 'constant-velocity' ? <>Hastighet (<em>v</em>)</> : <>Starthastighet (<em>v</em>₀)</>}
                                             </label>
-                                            <span className="text-lg font-bold text-green-600">{velocity} m/s</span>
+                                            <span className="text-lg font-bold text-green-600">{fmt(velocity)} m/s</span>
                                         </div>
                                         <input
                                             type="range"
@@ -541,8 +853,8 @@
                                             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                                         />
                                         <div className="flex justify-between text-xs text-gray-500 mt-1">
-                                            <span>-10 m/s</span>
-                                            <span>10 m/s</span>
+                                            <span>−10,0 m/s</span>
+                                            <span>10,0 m/s</span>
                                         </div>
                                     </div>
                                 </div>
@@ -561,12 +873,25 @@
                                         <span className="ml-3 font-medium">Visa lutning (hastighet)</span>
                                     </label>
 
+                                    {/* k-värde (lutningen) på grafen */}
+                                    {showSlope && (
+                                        <label className="flex items-center mb-4 cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                checked={showKValue}
+                                                onChange={(e) => setShowKValue(e.target.checked)}
+                                                className="w-5 h-5 text-green-600"
+                                            />
+                                            <span className="ml-3 font-medium">Visa k-värde (lutning)</span>
+                                        </label>
+                                    )}
+
                                     {/* Tangent time slider */}
                                     {showSlope && (
                                         <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
                                             <div className="flex justify-between items-center mb-2">
                                                 <label className="text-sm font-medium text-green-900">Tangeringspunkt</label>
-                                                <span className="font-bold text-green-700">t = {tangentTime} s</span>
+                                                <span className="font-bold text-green-700"><em>t</em> = {fmt(tangentTime)} s</span>
                                             </div>
                                             <input
                                                 type="range"
@@ -579,7 +904,7 @@
                                             />
                                             <div className="flex justify-between text-xs text-gray-500 mt-1">
                                                 <span>0 s</span>
-                                                <span>20 s</span>
+                                                <span>20,0 s</span>
                                             </div>
                                         </div>
                                     )}
@@ -591,16 +916,18 @@
                                     <div className="space-y-3 text-sm">
                                         <div className="bg-white p-3 rounded shadow">
                                             <p className="font-bold text-purple-800">Sträcka vid konstant hastighet:</p>
-                                            <p className="font-mono mt-1">s(t) = s₀ + v·t</p>
-                                            <p className="text-xs text-gray-600 mt-1">s₀ = {s0} m, v = {velocity} m/s</p>
+                                            <p className="font-mono mt-1"><em>s</em>(<em>t</em>) = <em>s</em>₀ + <em>v</em>⋅<em>t</em></p>
+                                            <p className="text-xs text-gray-600 mt-1"><em>s</em>₀ = {fmt(s0)} m, <em>v</em> = {fmt(velocity)} m/s</p>
                                         </div>
                                         <div className="bg-white p-3 rounded shadow">
                                             <p className="font-bold text-purple-800">Hastighet från lutning:</p>
-                                            <p className="font-mono mt-1">v = Δs / Δt</p>
+                                            <p className="font-mono mt-1" style={{ display: 'flex', alignItems: 'center', gap: '0.35em' }}>
+                                                <em>v</em> = <Frac num={<>Δ<em>s</em></>} den={<>Δ<em>t</em></>} />
+                                            </p>
                                         </div>
                                         <div className="bg-white p-3 rounded shadow">
                                             <p className="font-bold text-purple-800">Med acceleration:</p>
-                                            <p className="font-mono mt-1">s(t) = s₀ + v₀·t + ½·a·t²</p>
+                                            <p className="font-mono mt-1"><em>s</em>(<em>t</em>) = <em>s</em>₀ + <em>v</em>₀⋅<em>t</em> + ½⋅<em>a</em>⋅<em>t</em>²</p>
                                         </div>
                                     </div>
                                 </div>
@@ -609,11 +936,11 @@
                                 <div className="bg-amber-50 rounded-xl shadow-lg p-6 border-2 border-amber-200">
                                     <h3 className="text-xl font-bold mb-3 text-amber-900">💡 Kom ihåg!</h3>
                                     <ul className="space-y-2 text-sm text-amber-900">
-                                        <li>✓ <strong>Lutning</strong> på s-t-graf = <strong>Hastighet</strong></li>
+                                        <li>✓ <strong>Lutning</strong> på <em>s</em>-<em>t</em>-graf = <strong>Hastighet</strong></li>
                                         <li>✓ Rät linje = konstant hastighet</li>
                                         <li>✓ Uppåtböjd kurva = ökande hastighet (acceleration)</li>
                                         <li>✓ Nedåtböjd kurva = minskande hastighet (retardation)</li>
-                                        <li>✓ Horisontell linje = stillastående (v = 0)</li>
+                                        <li>✓ Horisontell linje = stillastående (<em>v</em> = 0)</li>
                                         <li>✓ Brantare lutning = högre hastighet</li>
                                     </ul>
                                 </div>

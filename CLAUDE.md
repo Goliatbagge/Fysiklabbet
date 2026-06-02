@@ -272,12 +272,45 @@ Referensimpl: `fysik2-brytning-app.html`, `fysik2-fotoelektrisk-effekt.html`.
 
 ### Fullskärmsläge
 
-Varje sim ska ha fullskärmsläge. Krav på mönstret:
+Varje sim ska ha fullskärmsläge. **All interaktion måste vara möjlig även i
+fullskärm** — fullskärm får aldrig bli ett "titta-men-rör-inte"-läge.
+
+⚠️ **PLACERINGSREGEL (gäller ALLA simuleringar):** I fullskärm placeras
+reglagen efter typ, så att de inte skymmer scenen:
+
+- **Glidare/reglage (och sifferfält) → en hopfällbar panel (dropdown) i
+  scenens UNDERKANT** (`.fs-controls` + `.fs-toggle-handle`). Användaren kan
+  fälla ihop den med "Dölj reglage".
+- **Kryssrutor och radioknappar (visningsval, lägesval) → en ruta UPPE TILL
+  HÖGER** på scenytan (`.scene-toggles`). Denna ruta visas i både normalt
+  läge och fullskärm.
+- Fullskärmsknappen (`.fs-btn`) sitter uppe till vänster.
+
+Så: kontinuerliga värden nere, diskreta val uppe till höger, fullskärm uppe
+till vänster — inga överlapp. Referensimpl: `fysik2-konisk-pendel-app.html`,
+`fysik1-vektoraddition-app.html`.
+
+Krav på mönstret:
 
 1. Scen-wrapper (`.scene-wrap`) med `position: relative` och
    `:fullscreen`/`:-webkit-full-screen` som sätter `100vw/100vh`.
+   **För SVG-/HTML-scener (inte THREE.js):** `body.lab-sim .scene-wrap` har
+   som standard en MÖRK gradient-bakgrund. En ljus pappersscen kräver
+   attributet `data-theme="ljusPapper"` på scen-wrappern
+   (`<div className="scene-wrap" data-theme="ljusPapper">`) — annars blir
+   bakgrunden marinblå och dina mörka pilar/etiketter syns knappt. Gäller
+   även i fullskärm. THREE.js-sims slipper detta eftersom canvasen fyller
+   wrappern med sin egen `scene.background`.
+   ⚠️ **Scope `width:100%`-regeln till DIREKTA scen-svg:n.** En regel som
+   `.scene-wrap svg { width:100%; height:100% }` träffar **även ikon-svg:n
+   inne i `.fs-btn`** och blåser upp den från 18 px till hela 40 px-cirkeln —
+   kanterna spiller utanför cirkeln och fullskärmsikonen ser fel ut jämfört
+   med övriga sims. Använd barnselektorn `.scene-wrap > svg { width:100% }`
+   så att bara scenens egen svg fylls, inte knapparnas ikoner.
 2. Fullskärmsknapp (`.fs-btn`) i ett hörn → `el.requestFullscreen()`.
-   **Använd ALLTID klassen `fs-btn`** — den är globalt stylad i
+   **Ikonen ska vara IDENTISK på alla simuleringar** — exakt samma som på
+   `fysik2-fotoelektrisk-effekt.html` (referens). Hitta ALDRIG på en egen
+   fullskärmsikon. **Använd ALLTID klassen `fs-btn`** — den är globalt stylad i
    `styles-laborans-sim.css` till en cirkulär ikon-knapp (40 px, vit
    cirkel, ink-ikon, uppe till vänster). **Definiera ALDRIG en egen lokal
    `.fs-btn`-CSS** och lägg **ingen text** i knappen — bara expandera/

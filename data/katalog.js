@@ -49,7 +49,7 @@ window.KATALOG = {
             number: 2,
             intro: 'Hur saker rör sig — sträcka, hastighet och acceleration. Vi lär oss tolka rörelsediagram och formulera sambanden mellan dem, från konstant hastighet till accelererad rörelse och fritt fall.',
             sections: [
-              { num: '2.1', title: 'Vektoraddition', description: 'Att addera krafter och hastigheter geometriskt och komponentvis.', href: null, icon: '➡️', keywords: ['vektor','vektoraddition','komposant','kraft','geometri'] },
+              { num: '2.1', title: 'Vektoraddition', description: 'Addera två hastighetsvektorer geometriskt — med triangel- eller parallellogrammetoden. Dra i pilspetsarna.', href: 'fysik1-vektoraddition-app.html', icon: '➡️', keywords: ['vektor','vektoraddition','komposant','resultant','triangelmetoden','parallellogrammetoden','hastighet','geometri','riktning','fart'] },
               { num: '2.2', title: 'Sträcka-tid-diagram', description: 'Att läsa sträcka och hastighet ur ett s-t-diagram.', href: 'fysik1-stracka-tid-app.html', icon: '📈', keywords: ['rörelse','kinematik','sträcka','tid','diagram','graf','hastighet'] },
               { num: '2.3', title: 'Acceleration och fritt fall', description: 'Definition av acceleration och tyngdaccelerationen g.', href: 'fysik1-tyngdfaktor-jorden.html', icon: '🌍', keywords: ['rörelse','acceleration','fritt fall','g','tyngdacceleration','gravitation'] },
               { num: '2.4', title: 'Hastighet-tid-diagram', description: 'Att läsa acceleration och tillryggalagd sträcka ur ett v-t-diagram.', href: 'fysik1-hastighet-tid-app.html', icon: '📉', keywords: ['rörelse','kinematik','hastighet','tid','diagram','graf','acceleration'] },

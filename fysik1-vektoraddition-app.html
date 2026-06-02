@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vektoraddition - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        /* Formel-etiketter */
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 17px; }
+        .fden { border-top: 2px solid var(--lab-ink); margin-top: 3px; padding-top: 3px;
+                color: var(--lab-ink); font-size: 17px; }
+
+        /* Scen-wrapper + fullskärm */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(200, 50, 74, 0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.10);
+            user-select: none;
+            background: #f6f2ea;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        /* OBS: bara den DIREKTA scen-svg:n ska fylla wrappern. Utan '>' träffar
+           regeln även ikon-svg:n inne i .fs-btn och blåser upp den till 40 px
+           (kanterna spiller utanför cirkeln). */
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 8px; left: 10px; z-index: 5;
+            font-size: 11px; color: var(--lab-ink-muted, #5a6170);
+            background: rgba(246,242,234,0.78); padding: 3px 8px; border-radius: 6px;
+            pointer-events: none;
+        }
+
+        /* On-scene rutor (uppe till höger): metodval + visningsval */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 220px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+
+        /* Reglage-rad inom fullskärms-dropdown */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+        /* Återställ/Spela om i scen-rutan (endast fullskärm) */
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .btn-toggle { width: 100%; font-size: 13px; padding: 7px 10px; }
+
+        /* Knappar */
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        /* Sifferfält */
+        .num-input {
+            width: 64px; padding: 5px 8px; border-radius: 7px;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            font-family: var(--lab-font-mono, monospace); font-size: 14px; font-weight: 600;
+            text-align: right;
+        }
+        .num-input:focus { outline: none; border-color: var(--lab-accent, #c8324a); }
+
+        .accordion-head {
+            cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600;
+        }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="katalog.html#fy1">Fysik</a>
+                <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Färger
+        const COL = {
+            v1:   '#c8324a', // accent-röd
+            v2:   '#0e7490', // teal
+            res:  '#7c3aed', // lila — resultant
+            comp: '#b45309', // bränd amber — komposanter
+            ghost:'#94a3b8'  // grå — hjälplinjer / parallellförflyttning
+        };
+
+        // Scengeometri (velocitetsplan)
+        const VBW = 760, VBH = 640;
+        const ORG = { x: 360, y: 335 };
+        const SCALE = 15;           // px per (m/s)
+        const MAG_MIN = 0.5, MAG_MAX = 12;
+
+        const toSvg = (vx, vy) => ({ x: ORG.x + vx * SCALE, y: ORG.y - vy * SCALE });
+        const comp = (v) => ({
+            x: v.mag * Math.cos(v.angle * Math.PI / 180),
+            y: v.mag * Math.sin(v.angle * Math.PI / 180)
+        });
+
+        // ── SVG-pil (linje + pilspets) ───────────────────────────
+        const Arrow = ({ x1, y1, x2, y2, color, width = 4, dashed = false, opacity = 1, head = 15 }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 0.5) return null;
+            const hw = 0.42; // halv öppningsvinkel på pilspetsen
+            // pilspetsens basmitt (linjen slutar här så spetsen inte blir trubbig)
+            const bx = x2 - head * 0.82 * Math.cos(ang);
+            const by = y2 - head * 0.82 * Math.sin(ang);
+            const pL = [x2 - head * Math.cos(ang - hw), y2 - head * Math.sin(ang - hw)];
+            const pR = [x2 - head * Math.cos(ang + hw), y2 - head * Math.sin(ang + hw)];
+            return (
+                <g opacity={opacity}>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="round" strokeDasharray={dashed ? '8 7' : 'none'} />
+                    <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color} />
+                </g>
+            );
+        };
+
+        // ── Reglage ──────────────────────────────────────────────
+        const Slider = ({ label, value, min, max, step, unit, onChange, decimals = 1, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 64, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+
+        const FsSlider = ({ label, value, min, max, step, unit, onChange, decimals = 1 }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 150 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 78, textAlign: 'right' }}>
+                    {fmt(value, decimals)} {unit}
+                </span>
+            </div>
+        );
+
+        // Sifferfält som accepterar både komma och punkt
+        const NumberField = ({ value, min, max, step, onChange, unit }) => {
+            const [txt, setTxt] = useState(fmt(value, 1));
+            useEffect(() => { setTxt(fmt(value, 1)); }, [value]);
+            const commit = () => {
+                let v = parseFloat(txt.replace(',', '.'));
+                if (isNaN(v)) { setTxt(fmt(value, 1)); return; }
+                v = Math.max(min, Math.min(max, v));
+                v = Math.round(v / step) * step;
+                onChange(parseFloat(v.toFixed(1)));
+            };
+            return (
+                <span className="flex items-center gap-1 flex-shrink-0">
+                    <input className="num-input" type="text" inputMode="decimal" value={txt}
+                           onChange={(e) => setTxt(e.target.value)} onBlur={commit}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.target.blur(); }} />
+                    <span className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                </span>
+            );
+        };
+
+        // ── Scen ─────────────────────────────────────────────────
+        const Scene = ({ v1, v2, method, p, show, onDrag, svgRef, dragId }) => {
+            const c1 = comp(v1), c2 = comp(v2);
+            const cr = { x: c1.x + c2.x, y: c1.y + c2.y };
+            const resMag = Math.hypot(cr.x, cr.y);
+            let resAng = Math.atan2(cr.y, cr.x) * 180 / Math.PI; if (resAng < 0) resAng += 360;
+
+            const O = toSvg(0, 0);
+            const T1 = toSvg(c1.x, c1.y);          // v1:s spets
+            const T2 = toSvg(c2.x, c2.y);          // v2:s spets
+            const TR = toSvg(cr.x, cr.y);          // resultantens spets
+
+            // animationsfaser
+            const ph1 = Math.min(p / 0.55, 1);
+            const ph2 = Math.max(0, Math.min((p - 0.55) / 0.45, 1));
+
+            // rutnät
+            const gridLines = [];
+            if (show.grid) {
+                for (let k = -26; k <= 50; k++) {
+                    const x = ORG.x + k * SCALE;
+                    if (x >= 6 && x <= VBW - 6)
+                        gridLines.push(<line key={'gx' + k} x1={x} y1={6} x2={x} y2={VBH - 6}
+                            stroke="rgba(15,22,32,0.06)" strokeWidth="1" />);
+                    const y = ORG.y + k * SCALE;
+                    if (y >= 6 && y <= VBH - 6)
+                        gridLines.push(<line key={'gy' + k} x1={6} y1={y} x2={VBW - 6} y2={y}
+                            stroke="rgba(15,22,32,0.06)" strokeWidth="1" />);
+                }
+            }
+
+            // vinkelbåge (math CCW, svg y-flip)
+            const arcPath = (r, a) => {
+                const N = 28; let d = '';
+                for (let i = 0; i <= N; i++) {
+                    const t = (a * i / N) * Math.PI / 180;
+                    d += (i ? 'L' : 'M') + (ORG.x + r * Math.cos(t)).toFixed(1) + ' ' + (ORG.y - r * Math.sin(t)).toFixed(1) + ' ';
+                }
+                return d;
+            };
+            const angLabelPos = (r, a) => {
+                const t = (a / 2) * Math.PI / 180;
+                return { x: ORG.x + (r + 16) * Math.cos(t), y: ORG.y - (r + 16) * Math.sin(t) };
+            };
+
+            // etikett en bit längs en pil, vinkelrätt offset åt en bestämd sida (sign ±1)
+            const perpLabel = (Pa, Pb, frac, dist, sign) => {
+                const mx = Pa.x + (Pb.x - Pa.x) * frac, my = Pa.y + (Pb.y - Pa.y) * frac;
+                const dx = Pb.x - Pa.x, dy = Pb.y - Pa.y;
+                const len = Math.hypot(dx, dy) || 1;
+                return { x: mx + (-dy / len) * dist * sign, y: my + (dx / len) * dist * sign };
+            };
+
+            // triangelmetoden: en vektor parallellförflyttas till den andras spets.
+            //  'triangle'  (2 → 1): v2 glider upp till v1:s spets (v1 ligger kvar)
+            //  'triangle2' (1 → 2): v1 glider upp till v2:s spets (v2 ligger kvar)
+            const isTri = method === 'triangle' || method === 'triangle2';
+            const triGlideTo = method === 'triangle2' ? T2 : T1;            // bas glider hit
+            const triMoved = method === 'triangle2'                          // den förflyttades komposant
+                ? { x: T1.x - O.x, y: T1.y - O.y }
+                : { x: T2.x - O.x, y: T2.y - O.y };
+            const triColor = method === 'triangle2' ? COL.v1 : COL.v2;
+            // Drar man i BASvektorn (den som ligger kvar i origo) ska den förflyttade
+            // vektorn inte hänga med — lossa den tillbaka till origo så den står still.
+            const triBaseId = method === 'triangle2' ? 'v2' : 'v1';
+            const glideF = (isTri && dragId === triBaseId) ? 0 : ph1;
+            const triBase = { x: O.x + (triGlideTo.x - O.x) * glideF, y: O.y + (triGlideTo.y - O.y) * glideF };
+            const triTip = { x: triBase.x + triMoved.x, y: triBase.y + triMoved.y };
+
+            // resultant under animation
+            const growTo = (P, ph) => ({ x: O.x + (P.x - O.x) * ph, y: O.y + (P.y - O.y) * ph });
+
+            // v1-etiketten under pilen, v2-etiketten åt sidan (höger i triangelläget,
+            // annars vänster), resultantens etikett ovanför diagonalen.
+            const lblV1 = method === 'triangle2'
+                ? perpLabel(triBase, triTip, 0.5, 24, 1)
+                : perpLabel(O, T1, 0.5, 24, 1);
+            const lblV2 = method === 'triangle'
+                ? perpLabel(triBase, triTip, 0.5, 24, 1)
+                : perpLabel(O, T2, 0.5, 24, -1);
+            const lblRes = perpLabel(O, TR, 0.66, 26, -1);
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     onPointerMove={onDrag.move} onPointerUp={onDrag.end} onPointerLeave={onDrag.end}
+                     style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    {gridLines}
+
+                    {/* axlar (ljusblå, svensk diagramkonvention) */}
+                    {show.axes && (
+                        <g>
+                            <line x1={6} y1={ORG.y} x2={VBW - 6} y2={ORG.y} stroke="#38bdf8" strokeWidth="1.5" />
+                            <line x1={ORG.x} y1={6} x2={ORG.x} y2={VBH - 6} stroke="#38bdf8" strokeWidth="1.5" />
+                            {/* pilspetsar: x-axeln åt höger, y-axeln uppåt */}
+                            <path d={`M${VBW - 6},${ORG.y} L${VBW - 16},${ORG.y - 5} L${VBW - 16},${ORG.y + 5} Z`} fill="#38bdf8" />
+                            <path d={`M${ORG.x},6 L${ORG.x - 5},16 L${ORG.x + 5},16 Z`} fill="#38bdf8" />
+                            <text x={VBW - 10} y={ORG.y - 8} textAnchor="end" fontSize="13" fill="#0e7490">
+                                <tspan fontStyle="italic">v</tspan><tspan fontSize="9" dy="3">x</tspan><tspan dy="-3"> (m/s)</tspan>
+                            </text>
+                            <text x={ORG.x + 8} y={18} fontSize="13" fill="#0e7490">
+                                <tspan fontStyle="italic">v</tspan><tspan fontSize="9" dy="3">y</tspan><tspan dy="-3"> (m/s)</tspan>
+                            </text>
+                            {/* skalmarkering: 5 m/s ut längs vardera axeln */}
+                            <text x={ORG.x + SCALE * 5} y={ORG.y + 17} textAnchor="middle" fontSize="10" fill="var(--lab-ink-muted)">5</text>
+                            <text x={ORG.x - 10} y={ORG.y - SCALE * 5 + 4} textAnchor="end" fontSize="10" fill="var(--lab-ink-muted)">5</text>
+                        </g>
+                    )}
+
+                    {/* vinklar (hoppa över ~0° så ingen etikett klistras på axeln) */}
+                    {show.angles && (
+                        <g>
+                            {v1.angle > 3 && v1.angle < 357 && <React.Fragment>
+                                <path d={arcPath(40, v1.angle)} fill="none" stroke={COL.v1} strokeWidth="1.5" opacity="0.7" />
+                                <text {...angLabelPos(40, v1.angle)} textAnchor="middle" fontSize="12" fill={COL.v1}>{Math.round(v1.angle)}°</text>
+                            </React.Fragment>}
+                            {v2.angle > 3 && v2.angle < 357 && <React.Fragment>
+                                <path d={arcPath(58, v2.angle)} fill="none" stroke={COL.v2} strokeWidth="1.5" opacity="0.7" />
+                                <text {...angLabelPos(62, v2.angle)} textAnchor="middle" fontSize="12" fill={COL.v2}>{Math.round(v2.angle)}°</text>
+                            </React.Fragment>}
+                        </g>
+                    )}
+
+                    {/* komposanter av resultanten — streckad rätvinklad triangel
+                        till resultantens spets (värdena står i sidopanelen) */}
+                    {show.comps && (
+                        <g opacity="0.92">
+                            <line x1={O.x} y1={O.y} x2={TR.x} y2={O.y} stroke={COL.comp} strokeWidth="2.5" strokeDasharray="6 5" />
+                            <line x1={TR.x} y1={O.y} x2={TR.x} y2={TR.y} stroke={COL.comp} strokeWidth="2.5" strokeDasharray="6 5" />
+                            <circle cx={TR.x} cy={TR.y} r="3.5" fill="none" stroke={COL.comp} strokeWidth="2" />
+                        </g>
+                    )}
+
+                    {/* ── Parallellogrammetoden ── */}
+                    {method === 'parallelogram' && (
+                        <g>
+                            {/* kompletterande sidor (kopior) växer fram i fas 1 */}
+                            <Arrow x1={T1.x} y1={T1.y}
+                                   x2={T1.x + (T2.x - O.x) * ph1} y2={T1.y + (T2.y - O.y) * ph1}
+                                   color={COL.ghost} width={3} dashed opacity={0.95} head={12} />
+                            <Arrow x1={T2.x} y1={T2.y}
+                                   x2={T2.x + (T1.x - O.x) * ph1} y2={T2.y + (T1.y - O.y) * ph1}
+                                   color={COL.ghost} width={3} dashed opacity={0.95} head={12} />
+                        </g>
+                    )}
+
+                    {/* ── Triangelmetoden: hjälplinje för parallellförflyttning ── */}
+                    {isTri && (
+                        <line x1={O.x} y1={O.y} x2={triGlideTo.x} y2={triGlideTo.y}
+                              stroke={COL.ghost} strokeWidth="1.5" strokeDasharray="3 5" opacity={ph1 < 1 ? 0.6 : 0} />
+                    )}
+
+                    {/* v1 — i 'triangle2' (1 → 2) glider den upp till v2:s spets, annars kvar i origo */}
+                    {method === 'triangle2' ? (
+                        <Arrow x1={triBase.x} y1={triBase.y} x2={triTip.x} y2={triTip.y} color={COL.v1} width={5} />
+                    ) : (
+                        <Arrow x1={O.x} y1={O.y} x2={T1.x} y2={T1.y} color={COL.v1} width={5} />
+                    )}
+                    {show.values && (
+                        <text x={lblV1.x} y={lblV1.y} textAnchor="middle" fontSize="14" fontWeight="700" fill={COL.v1}>
+                            <tspan fontStyle="italic">v</tspan>₁ = {fmt(v1.mag)} m/s
+                        </text>
+                    )}
+
+                    {/* v2 — i 'triangle' (2 → 1) glider den upp till v1:s spets, annars kvar i origo */}
+                    {method === 'triangle' ? (
+                        <Arrow x1={triBase.x} y1={triBase.y} x2={triTip.x} y2={triTip.y} color={COL.v2} width={5} />
+                    ) : (
+                        <Arrow x1={O.x} y1={O.y} x2={T2.x} y2={T2.y} color={COL.v2} width={5} />
+                    )}
+                    {show.values && (
+                        <text x={lblV2.x} y={lblV2.y}
+                              textAnchor="middle" fontSize="14" fontWeight="700" fill={COL.v2}>
+                            <tspan fontStyle="italic">v</tspan>₂ = {fmt(v2.mag)} m/s
+                        </text>
+                    )}
+
+                    {/* resultant (växer fram i fas 2) */}
+                    {method !== 'none' && ph2 > 0 && (() => {
+                        const tip = growTo(TR, ph2);
+                        return (
+                            <g>
+                                <Arrow x1={O.x} y1={O.y} x2={tip.x} y2={tip.y} color={COL.res} width={5.5} head={17} />
+                                {ph2 > 0.55 && show.values && (
+                                    <text x={lblRes.x} y={lblRes.y} textAnchor="middle" fontSize="14" fontWeight="700" fill={COL.res}>
+                                        <tspan fontStyle="italic">v</tspan><tspan fontSize="9" dy="3">res</tspan><tspan dy="-3"> = {fmt(resMag)} m/s</tspan>
+                                    </text>
+                                )}
+                            </g>
+                        );
+                    })()}
+
+                    {/* origo */}
+                    <circle cx={O.x} cy={O.y} r="4" fill="var(--lab-ink)" />
+
+                    {/* osynliga drag-handtag på pilspetsarna (ringen visas inte, men spetsen går att dra).
+                        Handtaget måste sitta på den SYNLIGA pilspetsen: i triangelmetoden förflyttas
+                        en av vektorerna, så dess spets ligger då vid triTip, inte vid T1/T2. Annars
+                        hamnar t.ex. v2:s handtag kvar vid origo medan pilen ritas vid v1:s spets,
+                        och man råkar gripa fel vektor. */}
+                    {(() => {
+                        const h1 = method === 'triangle2' ? triTip : T1;  // v1:s synliga spets
+                        const h2 = method === 'triangle' ? triTip : T2;   // v2:s synliga spets
+                        return (
+                            <g>
+                                <circle cx={h1.x} cy={h1.y} r="14" fill="transparent" stroke="none"
+                                        style={{ cursor: 'grab' }} onPointerDown={(e) => onDrag.start(e, 'v1')} />
+                                <circle cx={h2.x} cy={h2.y} r="14" fill="transparent" stroke="none"
+                                        style={{ cursor: 'grab' }} onPointerDown={(e) => onDrag.start(e, 'v2')} />
+                            </g>
+                        );
+                    })()}
+                </svg>
+            );
+        };
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [v1, setV1] = useState({ mag: 5.0, angle: 0 });
+            const [v2, setV2] = useState({ mag: 4.0, angle: 90 });
+            const [method, setMethod] = useState('triangle');
+            const [p, setP] = useState(0);
+            const [show, setShow] = useState({ grid: true, angles: false, comps: false, axes: true, values: true });
+
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const rafRef = useRef(null);
+            const dragRef = useRef(null);
+            const [dragId, setDragId] = useState(null);  // vilken vektor som dras just nu (för render)
+
+            // beräknade storheter
+            const d = useMemo(() => {
+                const c1 = comp(v1), c2 = comp(v2);
+                const x = c1.x + c2.x, y = c1.y + c2.y;
+                const mag = Math.hypot(x, y);
+                let ang = Math.atan2(y, x) * 180 / Math.PI; if (ang < 0) ang += 360;
+                return { c1, c2, x, y, mag, ang };
+            }, [v1, v2]);
+
+            // animation vid metodbyte
+            const runAnim = useCallback(() => {
+                if (rafRef.current) cancelAnimationFrame(rafRef.current);
+                const start = performance.now(), dur = 1700;
+                const step = (t) => {
+                    const pr = Math.min((t - start) / dur, 1);
+                    setP(pr);
+                    if (pr < 1) rafRef.current = requestAnimationFrame(step);
+                };
+                rafRef.current = requestAnimationFrame(step);
+            }, []);
+
+            // Att välja en metod ARMERAR scenen (visar startläget, p=0) men spelar
+            // inte animeringen — den startas med "Starta"-knappen.
+            useEffect(() => {
+                if (method === 'none') { setP(1); return; }
+                setP(0);
+                return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+            }, [method]);
+
+            // fullskärm
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // dra i pilspets → sätter både fart och riktning
+            const applyDrag = (e) => {
+                const id = dragRef.current;
+                if (!id) return;
+                const svg = svgRef.current;
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                const loc = pt.matrixTransform(svg.getScreenCTM().inverse());
+                let vx = (loc.x - ORG.x) / SCALE;
+                let vy = (ORG.y - loc.y) / SCALE;
+                // I triangelmetoden ritas en vektor förskjuten till den andras spets.
+                // Räkna bort basförskjutningen (den andra vektorns komposant, skalad med
+                // animationsfasen) så att man drar i den SYNLIGA spetsen utan hopp — och
+                // utan att råka påverka den andra vektorn.
+                const ph1 = Math.min(p / 0.55, 1);
+                if (id === 'v2' && method === 'triangle') { vx -= d.c1.x * ph1; vy -= d.c1.y * ph1; }
+                if (id === 'v1' && method === 'triangle2') { vx -= d.c2.x * ph1; vy -= d.c2.y * ph1; }
+                let mag = Math.hypot(vx, vy);
+                let ang = Math.atan2(vy, vx) * 180 / Math.PI; if (ang < 0) ang += 360;
+                mag = Math.max(MAG_MIN, Math.min(MAG_MAX, Math.round(mag * 10) / 10));
+                ang = Math.round(ang);
+                (id === 'v1' ? setV1 : setV2)({ mag, angle: ang });
+            };
+            const drag = {
+                start: (e, id) => {
+                    e.preventDefault();
+                    dragRef.current = id;
+                    setDragId(id);
+                    // Behåll metodvyn: dragningen är basförskjuten (se applyDrag), så
+                    // konstruktionen byggs om live medan man drar i spetsen.
+                    try { e.target.setPointerCapture(e.pointerId); } catch (err) {}
+                },
+                move: (e) => { if (dragRef.current) applyDrag(e); },
+                end: () => { dragRef.current = null; setDragId(null); }
+            };
+
+            const tShow = (k) => setShow((s) => ({ ...s, [k]: !s[k] }));
+            const chooseMethod = (m) => setMethod((cur) => (cur === m ? m : m)); // alltid sätt (effekten kör om)
+            const replay = () => { if (method !== 'none') runAnim(); };
+
+            // Starta/Återställ-knappen: armerad metod → "Starta" (spelar), klar
+            // animering → "Återställ" (nollställer till «visa båda vektorerna»).
+            const animDone = method !== 'none' && p >= 1;
+            const startResetLabel = animDone ? 'Återställ' : 'Starta';
+            const startResetDisabled = method === 'none';
+            const onStartReset = () => {
+                if (animDone) setMethod('none');
+                else if (method !== 'none') runAnim();
+            };
+
+            const Readout = ({ label, value, unit, accent }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: accent ? 'var(--lab-accent)' : 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            // de tre kryssrutorna + metod-radioknappar i scenens hörn
+            const SceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Metod</div>
+                    {[['triangle', 'Triangelmetoden 2 → 1'], ['triangle2', 'Triangelmetoden 1 → 2'], ['parallelogram', 'Parallellogrammetoden']].map(([m, lbl]) => (
+                        <label key={m}>
+                            <input type="radio" name="method" checked={method === m} onChange={() => setMethod(m)} />
+                            <span>{lbl}</span>
+                        </label>
+                    ))}
+                    <div className="st-title mt">Visa</div>
+                    <label>
+                        <input type="checkbox" checked={show.grid} onChange={() => tShow('grid')} />
+                        <span>Rutnät</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={show.angles} onChange={() => tShow('angles')} />
+                        <span>Vinklar</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={show.axes} onChange={() => tShow('axes')} />
+                        <span>Koordinataxlar</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={show.values} onChange={() => tShow('values')} />
+                        <span>Värden</span>
+                    </label>
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={onStartReset} disabled={startResetDisabled}
+                                    style={{ opacity: startResetDisabled ? 0.45 : 1 }}>
+                                {startResetLabel}
+                            </button>
+                            <button className="btn-toggle" onClick={replay} disabled={method === 'none'}
+                                    style={{ opacity: method === 'none' ? 0.45 : 1 }}>
+                                ↻ Spela om
+                            </button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik</a> / Vektoraddition
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Vektoraddition</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 780 }}>
+                            Lägg ihop två hastighetsvektorer på en yta. Ställ in varje vektors fart och riktning — med
+                            reglage, sifferfält eller genom att dra i pilspetsen — och addera dem geometriskt på två sätt:
+                            med <strong>triangelmetoden</strong> eller <strong>parallellogrammetoden</strong>. Båda ger samma
+                            resulterande vektor <em>v</em><sub>res</sub>.
+                        </p>
+
+                        {/* formelkort: komponentvis addition */}
+                        <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-end gap-x-10 gap-y-4">
+                            <div className="flex items-end gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Resultantens x-led</div>
+                                    <div className="fnum"><em>v</em><sub>res,x</sub></div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink-muted)', fontSize: 17 }}>=</span>
+                                <div className="fnum"><em>v</em><sub>1x</sub> + <em>v</em><sub>2x</sub></div>
+                            </div>
+                            <div className="flex items-end gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Resultantens y-led</div>
+                                    <div className="fnum"><em>v</em><sub>res,y</sub></div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink-muted)', fontSize: 17 }}>=</span>
+                                <div className="fnum"><em>v</em><sub>1y</sub> + <em>v</em><sub>2y</sub></div>
+                            </div>
+                            <div className="flex items-end gap-3">
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="flbl mb-1">Resultantens belopp</div>
+                                    <div className="fnum">|<em>v</em><sub>res</sub>|</div>
+                                </div>
+                                <span style={{ color: 'var(--lab-ink-muted)', fontSize: 17 }}>=</span>
+                                <div className="fnum">√(<em>v</em><sub>res,x</sub>² + <em>v</em><sub>res,y</sub>²)</div>
+                            </div>
+                        </div>
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <Scene v1={v1} v2={v2} method={method} p={p} show={show} onDrag={drag} svgRef={svgRef} dragId={dragId} />
+
+                                    <SceneToggles />
+
+                                    {/* Fullskärm: flytande dropdown med reglagen i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Vektor 1 — fart" value={v1.mag} min={MAG_MIN} max={MAG_MAX} step={0.1}
+                                                          unit="m/s" onChange={(x) => setV1((s) => ({ ...s, mag: x }))} />
+                                                <FsSlider label="Vektor 1 — riktning" value={v1.angle} min={0} max={360} step={1}
+                                                          unit="°" decimals={0} onChange={(x) => setV1((s) => ({ ...s, angle: x }))} />
+                                                <FsSlider label="Vektor 2 — fart" value={v2.mag} min={MAG_MIN} max={MAG_MAX} step={0.1}
+                                                          unit="m/s" onChange={(x) => setV2((s) => ({ ...s, mag: x }))} />
+                                                <FsSlider label="Vektor 2 — riktning" value={v2.angle} min={0} max={360} step={1}
+                                                          unit="°" decimals={0} onChange={(x) => setV2((s) => ({ ...s, angle: x }))} />
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'} aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6" />
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                    <div className="scene-hint">Dra i en pilspets för att ändra fart och riktning</div>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                {/* Vektor 1 */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span style={{ display: 'inline-block', width: 16, height: 5, borderRadius: 3, background: COL.v1 }}></span>
+                                        <h3 className="font-bold text-sm" style={{ color: 'var(--lab-ink)' }}>Vektor 1 (<em>v</em>₁)</h3>
+                                    </div>
+                                    <Slider label="Fart" value={v1.mag} min={MAG_MIN} max={MAG_MAX} step={0.1} onChange={(x) => setV1((s) => ({ ...s, mag: x }))}>
+                                        <NumberField value={v1.mag} min={MAG_MIN} max={MAG_MAX} step={0.1} unit="m/s" onChange={(x) => setV1((s) => ({ ...s, mag: x }))} />
+                                    </Slider>
+                                    <Slider label="Riktning" value={v1.angle} min={0} max={360} step={1} onChange={(x) => setV1((s) => ({ ...s, angle: x }))}>
+                                        <span className="font-mono font-semibold text-sm flex-shrink-0" style={{ minWidth: 52, textAlign: 'right', color: 'var(--lab-accent)' }}>{Math.round(v1.angle)}°</span>
+                                    </Slider>
+                                </div>
+
+                                {/* Vektor 2 */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span style={{ display: 'inline-block', width: 16, height: 5, borderRadius: 3, background: COL.v2 }}></span>
+                                        <h3 className="font-bold text-sm" style={{ color: 'var(--lab-ink)' }}>Vektor 2 (<em>v</em>₂)</h3>
+                                    </div>
+                                    <Slider label="Fart" value={v2.mag} min={MAG_MIN} max={MAG_MAX} step={0.1} onChange={(x) => setV2((s) => ({ ...s, mag: x }))}>
+                                        <NumberField value={v2.mag} min={MAG_MIN} max={MAG_MAX} step={0.1} unit="m/s" onChange={(x) => setV2((s) => ({ ...s, mag: x }))} />
+                                    </Slider>
+                                    <Slider label="Riktning" value={v2.angle} min={0} max={360} step={1} onChange={(x) => setV2((s) => ({ ...s, angle: x }))}>
+                                        <span className="font-mono font-semibold text-sm flex-shrink-0" style={{ minWidth: 52, textAlign: 'right', color: 'var(--lab-accent)' }}>{Math.round(v2.angle)}°</span>
+                                    </Slider>
+                                </div>
+
+                                {/* Metodknappar */}
+                                <div className="mb-3">
+                                    <div className="flbl mb-2">Simulera additionen</div>
+                                    <div className="flex flex-col gap-2">
+                                        <button className={`btn-toggle ${method === 'triangle' ? 'active' : ''}`} onClick={() => setMethod('triangle')}>
+                                            Triangelmetoden 2 → 1
+                                        </button>
+                                        <button className={`btn-toggle ${method === 'triangle2' ? 'active' : ''}`} onClick={() => setMethod('triangle2')}>
+                                            Triangelmetoden 1 → 2
+                                        </button>
+                                        <button className={`btn-toggle ${method === 'parallelogram' ? 'active' : ''}`} onClick={() => setMethod('parallelogram')}>
+                                            Parallellogrammetoden
+                                        </button>
+                                        <div className="flex gap-2">
+                                            <button className="btn-toggle flex-1" onClick={onStartReset} disabled={startResetDisabled}
+                                                    style={{ opacity: startResetDisabled ? 0.45 : 1 }}>
+                                                {startResetLabel}
+                                            </button>
+                                            <button className="btn-toggle flex-1" onClick={replay} disabled={method === 'none'}
+                                                    style={{ opacity: method === 'none' ? 0.45 : 1 }}>
+                                                ↻ Spela om
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Resultat */}
+                                <div className="glass-card rounded-xl p-3">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>Resulterande vektor</h3>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Belopp |<em>v</em><sub>res</sub>|" value={fmt(d.mag)} unit="m/s" accent />
+                                        <Readout label="Riktning" value={fmt(d.ang, 0)} unit="°" accent />
+                                        <Readout label="<em>v</em><sub>res,x</sub>" value={fmt(d.x)} unit="m/s" />
+                                        <Readout label="<em>v</em><sub>res,y</sub>" value={fmt(d.y)} unit="m/s" />
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-2 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>📐 Triangelmetoden</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Parallellförflytta den ena vektorn så att dess <strong>start</strong> hamnar i den andras
+                                    <strong> spets</strong> (svans-mot-spets). Den resulterande vektorn går då från den första
+                                    vektorns start till den förflyttades spets — den <em>sluter triangeln</em>.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>▱ Parallellogrammetoden</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Låt båda vektorerna utgå från <strong>samma startpunkt</strong> och rita en parallellogram
+                                    med dem som sidor. Resultanten är då <strong>diagonalen</strong> från den gemensamma
+                                    startpunkten. Samma svar som triangelmetoden — bara ett annat sätt att rita.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>⚠️ Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Beloppen adderas: |<em>v</em><sub>res</sub>| = <em>v</em>₁ + <em>v</em>₂."</strong> Bara om vektorerna pekar åt exakt samma håll. Pekar de åt olika håll blir resultanten kortare — testa två motriktade vektorer.</li>
+                                <li><strong>"Det spelar roll vilken vektor man flyttar."</strong> Nej — <em>v</em>₁ + <em>v</em>₂ = <em>v</em>₂ + <em>v</em>₁. Triangel- och parallellogrammetoden ger alltid samma resultant.</li>
+                                <li><strong>"Vinkeln för resultanten är medelvärdet av de två vinklarna."</strong> Nej — riktningen beror på <em>båda</em> vektorernas längd. En lång och en kort vektor ger en resultant nära den långas riktning.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

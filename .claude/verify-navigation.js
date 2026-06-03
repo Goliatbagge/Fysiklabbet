@@ -38,6 +38,7 @@ const LABORANS_NAV = [
 // Files to check
 const HTML_FILES_TO_CHECK = [
     'fysik1-hastighet-tid-app.html',
+    'fysik1-acceleration-tid-app.html',
     'fysik1-stracka-tid-app.html',
     'fysik1-varme-app.html',
     'fysik1-densitet-app.html',
@@ -80,6 +81,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-halveringstid.html',
     'fysik1-newtons-gravitationslag.html',
     'fysik1-vektoraddition-app.html',
+    'fysik1-newtons-forsta-app.html',
     // om.html och kontakt.html använder nu Laborans-headern (inte gamla
     // navbar-mallen) — de testas inte med samma kontroll. Samma sak gäller
     // index.html, katalog.html, avsnitt.html, fysik1.html, fysik2.html.

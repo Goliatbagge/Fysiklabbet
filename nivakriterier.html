@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>Fysiklabbet — Nivåkriterier E / C / A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+:root {
+    --paper: #faf6ea;
+    --ink: #1a1d24;
+    --ink-soft: #2e3340;
+    --muted: #5a6172;
+    --muted-2: #8a8f9c;
+    --rule: #d8d1bd;
+    --rule-soft: #ece5d0;
+    --accent: #b53029;
+    --accent-soft: #c95a52;
+    --c-level: #c98a1a;
+    --a-level: #7a3c8f;
+    --e-level: #2e7a4a;
+    --tag-bg: #efe9d4;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Poppins', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    padding: 60px 24px;
+    background-image:
+        radial-gradient(rgba(60,50,30,0.04) 1px, transparent 1px),
+        radial-gradient(rgba(60,50,30,0.025) 1px, transparent 1px);
+    background-size: 40px 40px, 13px 13px;
+    background-position: 0 0, 20px 20px;
+}
+.wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 56px 64px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(60,50,30,0.05), 0 18px 50px -28px rgba(60,50,30,0.25);
+}
+h1 {
+    font-family: 'Poppins', serif;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 1.15;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.01em;
+}
+.subtitle {
+    color: var(--muted);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 36px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 18px;
+}
+h2 {
+    font-weight: 600;
+    font-size: 22px;
+    margin: 44px 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+h2 .tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+h2.e .tag { background: rgba(46,122,74,0.13); color: var(--e-level); }
+h2.c .tag { background: rgba(201,138,26,0.15); color: var(--c-level); }
+h2.a .tag { background: rgba(122,60,143,0.13); color: var(--a-level); }
+h2 .stars { color: var(--muted-2); font-size: 16px; letter-spacing: 0.05em; margin-left: auto; }
+h3 {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 24px 0 6px 0;
+    color: var(--ink-soft);
+}
+p { margin: 8px 0 12px 0; }
+ul, ol { margin: 8px 0 14px 0; padding-left: 22px; }
+li { margin: 4px 0; }
+li::marker { color: var(--muted-2); }
+strong { font-weight: 600; color: var(--ink); }
+em { font-style: italic; }
+code, .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 13px;
+    background: rgba(60,50,30,0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+.lede {
+    font-size: 15.5px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+}
+.callout {
+    background: rgba(181,48,41,0.05);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    margin: 22px 0;
+    border-radius: 0 4px 4px 0;
+}
+.callout strong { color: var(--accent); }
+.criteria-list {
+    counter-reset: crit;
+    list-style: none;
+    padding-left: 0;
+}
+.criteria-list > li {
+    counter-increment: crit;
+    padding: 10px 0 10px 38px;
+    position: relative;
+    border-top: 1px dashed var(--rule-soft);
+}
+.criteria-list > li:first-child { border-top: none; }
+.criteria-list > li::before {
+    content: counter(crit);
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.example {
+    color: var(--muted);
+    font-size: 14.5px;
+    font-style: italic;
+    margin-top: 4px;
+    padding-left: 14px;
+    border-left: 2px solid var(--rule);
+}
+.example strong { color: var(--ink-soft); font-style: normal; }
+.section-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 48px 0 0 0;
+}
+.test-box {
+    background: rgba(46,122,74,0.06);
+    border: 1px solid rgba(46,122,74,0.25);
+    padding: 18px 22px;
+    border-radius: 6px;
+    margin: 24px 0;
+}
+.test-box h3 { margin-top: 0; color: var(--e-level); }
+.test-box.warn {
+    background: rgba(181,48,41,0.05);
+    border-color: rgba(181,48,41,0.25);
+}
+.test-box.warn h3 { color: var(--accent); }
+footer {
+    margin-top: 60px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted-2);
+    font-size: 13px;
+    text-align: center;
+}
+footer a { color: var(--muted); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+.katex { font-size: 1em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Nivåkriterier — E, C och A</h1>
+<div class="subtitle">Fysiklabbet · Kursoberoende ramverk för Fysik och Fysik – fördjupning · Referens vid uppgiftsförfattande</div>
+
+<p class="lede">
+Det här dokumentet sammanfattar vad som lyfter en uppgift från E (Nivå 1) till
+C (Nivå 2) till A (Nivå 3). Kriterierna gäller <strong>båda fysikkurser</strong>
+— de är destillerade ur frisläppta kursprov. <em>Genrerna</em> skiljer sig mellan kurserna; <em>principen</em>
+gör det inte.
+</p>
+
+<p>
+Grundtanken: nivån avgörs av <strong>vilken sorts tänkande</strong> uppgiften
+kräver, inte av hur många siffror eller hur jobbig algebran är. En lång räknekedja
+är inte automatiskt A — och en kort men listig uppgift kan absolut vara A.
+</p>
+
+<h2 class="e"><span class="tag">Nivå 1 · E</span> Grundläggande<span class="stars">★ ☆ ☆</span></h2>
+
+<p class="lede">
+Eleven identifierar <em>en</em> formel och sätter in givna värden. Inga val,
+inga subtila tolkningar, ingen kedja.
+</p>
+
+<h3>Karakteristik</h3>
+<ul>
+<li><strong>En formel räcker</strong> — direkt insättning, eventuellt efter SI-omvandling (km/h → m/s, minuter → sekunder) eller en enkel omformning ($v = s/t \Rightarrow t = s/v$).</li>
+<li><strong>Standardprocedur</strong>: läs av variabler i frågan, slå upp formeln, sätt in, svara.</li>
+<li><strong>Begreppsidentifikation</strong>: peka ut riktning, namnge fenomen, välja sant påstående bland flera.</li>
+<li><strong>Direktavläsning</strong> av graf eller diagram: en koordinat, en konstant lutning, en period.</li>
+</ul>
+
+<h3>Typiska exempel (båda kurser)</h3>
+<div class="example">
+<strong>F1:</strong> <em>Beräkna densiteten för ett block med massa $150\text{ g}$ och volym $50\text{ cm}^3$.</em><br>
+<strong>F1:</strong> <em>En bil kör i $90\text{ km/h}$ i $20\text{ minuter}$. Hur långt har den åkt?</em><br>
+<strong>F2:</strong> <em>Beräkna vinkelhastigheten för en propeller med periodtiden $0{,}040\text{ s}$.</em><br>
+<strong>F2:</strong> <em>En ledare med längden $0{,}30\text{ m}$ för strömmen $4{,}0\text{ A}$ i ett magnetfält $B = 0{,}15\text{ T}$. Beräkna kraften.</em>
+</div>
+
+<hr class="section-rule">
+
+<h2 class="c"><span class="tag">Nivå 2 · C</span> Medel<span class="stars">★ ★ ☆</span></h2>
+
+<p class="lede">
+Eleven måste välja <em>vilka</em> 2–3 formler som behövs och koppla samman dem
+i en linjär kedja. Ingen formel är dold — men följden är inte självklar från
+ord-för-ord-läsning av frågan.
+</p>
+
+<h3>Karakteristik</h3>
+<ul>
+<li><strong>2–3 formler i följd</strong>: storheter mellankopplas, men kedjan är rak ($T \to \omega \to a_\text{c}$; $P \to E \to \Delta T$; $f \to \lambda \to v$).</li>
+<li><strong>Identifikationsmoment</strong> — vilka formler? — men ingen strukturell genomskådning krävs.</li>
+<li><strong>Enklare omformning</strong> av en formel innan insättning (lösa ut en variabel ur kvadratiskt eller exponentiellt uttryck).</li>
+<li><strong>Standardmodellering</strong> där förenklingen är uppenbar (luftmotstånd försummas, friktionsfri yta, perfekt isolerad kalorimeter).</li>
+<li><strong>Kort, standard härledning</strong> — t.ex. visa att kastbanan är en parabel, eller härleda $v^2 = u^2 + 2as$ från konstant acceleration.</li>
+<li><strong>Avläsning som kräver lutning eller area</strong> på en <em>rak</em> graf (inte krökt).</li>
+</ul>
+
+<h3>Typiska exempel</h3>
+<div class="example">
+<strong>F1:</strong> <em>En låda dras med konstant fart över ett underlag. Friktionstalet är $0{,}30$ och massan $25\text{ kg}$. Hur stor är dragkraften?</em> ($mg \to F_\text{N} \to F_\text{f}$)<br>
+<strong>F1:</strong> <em>Hur mycket vatten kan en kokplatta med effekten $1{,}5\text{ kW}$ värma från $20\,°\text{C}$ till $80\,°\text{C}$ under $5{,}0\text{ minuter}$?</em> ($P \cdot t \to E \to \Delta T$)<br>
+<strong>F2:</strong> <em>Klarar en motorcyklist att hoppa över bäcken?</em> (kasta horisontellt → falltid ur höjd → räckvidd jämförs med bäckens bredd)<br>
+<strong>F2:</strong> <em>Beräkna centripetalaccelerationen för en punkt på ekvatorn.</em> ($T = 24\text{ h} \to \omega \to a_\text{c} = \omega^2 R$)
+</div>
+
+<hr class="section-rule">
+
+<h2 class="a"><span class="tag">Nivå 3 · A</span> Avancerad<span class="stars">★ ★ ★</span></h2>
+
+<p class="lede">
+Uppgiften kräver en <strong>insikt eller strukturell genomskådning</strong>
+<em>innan</em> räkningen kan börja. Det räcker inte att veta formelboken — eleven
+måste se <em>hur problemet ska ställas upp</em>.
+</p>
+
+<p>
+En uppgift når Nivå 3 om den uppfyller <strong>minst ett</strong> av följande
+sex kriterier:
+</p>
+
+<ol class="criteria-list">
+
+<li>
+<strong>Ekvationssystem eller obekant som inte kan lösas direkt.</strong>
+Två obekanta, andragradsekvation, eller en storhet som bara kan fås genom att
+ställa upp och lösa ekvationer (inte ren insättning).
+<div class="example">
+<strong>F1:</strong> Känd summa och produkt av två resistanser → andragradsekvation $x^2 - Sx + P = 0$.<br>
+<strong>F2:</strong> Stege mot vägg utan väggfriktion → kombinerad moment- och kraftjämvikt, två ekvationer.
+</div>
+</li>
+
+<li>
+<strong>Icke-uppenbar struktur som måste genomskådas först.</strong>
+Den naiva förenklingen (serie/parallell, "vanlig" jämvikt, vanlig superposition)
+fungerar inte — eleven måste själv se vilken princip som gäller.
+<div class="example">
+<strong>F1:</strong> Bryggkoppling (potential mellan två spänningsdelares mittpunkter), flerbatterislinga (två emf, Kirchhoffs spänningslag), nollpunkt för fält/kraft.<br>
+<strong>F2:</strong> Masspektrometer (hastighetsväljare + magnetisk avböjning), $e/m$-bestämning, geostationär satellit (gravitation + cirkelrörelse <em>samtidigt</em>).
+</div>
+</li>
+
+<li>
+<strong>Klassisk fälla där den naiva metoden ger fel svar.</strong>
+Uppgiften är konstruerad så att en förstaintuition leder rätt in i en återvändsgränd.
+Att <em>se</em> fällan är hela poängen.
+<div class="example">
+<strong>F1:</strong> Tråd sträcks till dubbla längden → arean halveras (volymen konstant) → $R$ fyrdubblas; "sista sekunden av fritt fall"; två rörelser som möts.<br>
+<strong>F2:</strong> Svävningar — efter $n$ snabba svängningar har den långsammare gjort $n-1$ (insikten att fasförskjutningen växer till ett helt varv); pendel-maxvinkel innan tråden brister; båt över flod (vinklad fartvektor).
+</div>
+</li>
+
+<li>
+<strong>Minst tre koncept från <em>olika</em> områden kombineras.</strong>
+Tre formler ur <em>samma</em> område räknas inte — det är fortfarande C. Det
+är gränsöverskridandet som lyfter nivån.
+<div class="example">
+<strong>F1:</strong> Inre resistans + $R = \rho l/A$ + effekt $P = UI$ + uppvärmning $mc\Delta T$ — fyra olika ellära/värme-principer i kedja.<br>
+<strong>F2:</strong> Svartkropp (Wien + Stefan–Boltzmann + invers kvadrat-lag), fotoelektrisk effekt (foton + utträdesarbete + de Broglie).
+</div>
+</li>
+
+<li>
+<strong>Resonemang, bevis, "visa att" eller design utan färdig mall.</strong>
+Uppgiften har inget givet talsvar — eleven ska argumentera, härleda eller
+konstruera. Kräver att eleven själv väljer angreppssätt.
+<div class="example">
+<strong>F1:</strong> "Visa att ingen ström går genom mittmotståndet" (balansvillkor); "koppla fem motstånd så att $R_\text{tot} = 125\ \Omega$" (designuppgift).<br>
+<strong>F2:</strong> Härled koniska pendelns periodtid; bevisa banklutningens vinkelformel; visa att två kastvinklar ger samma räckvidd.
+</div>
+</li>
+
+<li>
+<strong>Proportionalitets-/kvotresonemang där obekanta måste strykas.</strong>
+Eleven bildar kvoten <em>innan</em> insättning så att gemensamma okända faktorer
+försvinner. Att <em>tänka i kvoter</em> är insikten.
+<div class="example">
+<strong>F1:</strong> Elektron vs proton genom samma spänning → $v \propto 1/\sqrt{m}$; sten kastad med $4v_0$ → $h \propto v^2$.<br>
+<strong>F2:</strong> Fjäder med ny massa <em>och</em> ny konstant <em>och</em> ny utdragning → bilda kvoten av perioderna; motions-EMK $\propto$ falltid.
+</div>
+</li>
+
+</ol>
+
+<hr class="section-rule">
+
+<h2 style="margin-top: 36px;">Avgränsande tester</h2>
+
+<p>
+Två snabbtest som hjälper när du tvekar mellan nivåer. Båda är konstruerade
+för att <em>demotera</em> uppgifter som är felklassade — vanligaste felet är
+att skriva C som A.
+</p>
+
+<div class="test-box">
+<h3>Demoterings-testet (C eller A?)</h3>
+<p>
+Fråga dig: <strong>"Kan en elev lösa det här genom att identifiera formlerna
+och sätta in dem i tur och ordning — utan att fundera på <em>strukturen</em>?"</strong>
+</p>
+<p style="margin-bottom: 0;">
+Är svaret ja → det är <strong>Nivå 2 (C)</strong>, oavsett hur många formler kedjan har.
+A-nivå ska kräva en <em>insikt</em> (genomskåda strukturen, ställa upp ett ekvations-
+system, se fällan, bilda kvoten) <em>innan</em> räkningen ens kan börja.
+</p>
+</div>
+
+<div class="test-box warn">
+<h3>⚠ Beräkningssvårighet räknas <em>inte</em> som A</h3>
+<p>
+Eleverna har digitala hjälpmedel (CAS, grafräknare). Det är <em>rutin</em> att
+logaritmera fram en exponent, invertera en funktion eller lösa en andragrads-
+ekvation numeriskt.
+</p>
+<p style="margin-bottom: 0;">
+Det som lyfter en uppgift till A är den <strong>konceptuella eller strukturella
+insikten som krävs för att ställa upp problemet</strong> — inte hur jobbig algebran
+eller aritmetiken blir efteråt. "Bestäm halveringstiden ur två aktiviteter"
+(lös ut exponenten med logaritm) är <strong>C</strong>, inte A.
+</p>
+</div>
+
+<hr class="section-rule">
+
+<h2 style="margin-top: 36px;">Klassiska felklassningar</h2>
+
+<ul>
+<li><strong>Lång linjär kedja som klassats som A.</strong> Tre eller fyra formler i rad är fortfarande C om strukturen är uppenbar. <em>Antalet steg</em> är inte avgörande — det är <em>typen</em> av tänkande.</li>
+<li><strong>Kort härledning som klassats som A.</strong> "Visa att kastbanan är en parabel" är C — det är en standardhärledning som följer ur två givna rörelseekvationer. A-härledningar kräver att eleven själv väljer princip (energi vs Newton vs moment).</li>
+<li><strong>Trigonometri-uppgift som klassats som A.</strong> Vektoruppdelning i x- och y-led <em>är</em> C så länge geometrin är given. Den blir A först när eleven själv måste hitta den relevanta vinkeln eller kombinera vektorerna med en annan princip.</li>
+<li><strong>"Krånglig" uppgift som klassats som A.</strong> Om kruxet bara är att frågan är luddigt formulerad eller har många siffror — det är fortfarande C. A kräver matematisk eller konceptuell tyngd, inte ordvitsning.</li>
+</ul>
+
+<hr class="section-rule">
+
+<h2 style="margin-top: 36px;">Sammanfattning i en rad</h2>
+
+<table style="width:100%; border-collapse:collapse; margin-top: 16px; font-size: 14.5px;">
+<thead>
+<tr style="border-bottom: 2px solid var(--ink);">
+<th style="text-align:left; padding: 10px 8px;">Nivå</th>
+<th style="text-align:left; padding: 10px 8px;">Krävs av eleven</th>
+<th style="text-align:left; padding: 10px 8px;">Antal steg</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom: 1px solid var(--rule);">
+<td style="padding: 10px 8px;"><strong style="color:var(--e-level)">E · N1</strong></td>
+<td style="padding: 10px 8px;">Identifiera <em>en</em> formel; sätt in.</td>
+<td style="padding: 10px 8px;">1</td>
+</tr>
+<tr style="border-bottom: 1px solid var(--rule);">
+<td style="padding: 10px 8px;"><strong style="color:var(--c-level)">C · N2</strong></td>
+<td style="padding: 10px 8px;">Välj och kedja 2–3 formler; linjärt flöde.</td>
+<td style="padding: 10px 8px;">2–3</td>
+</tr>
+<tr>
+<td style="padding: 10px 8px;"><strong style="color:var(--a-level)">A · N3</strong></td>
+<td style="padding: 10px 8px;">Insikt först, räkning sen: ekvationssystem, fälla, ≥3 områden, härledning, kvotresonemang.</td>
+<td style="padding: 10px 8px;">Variabelt</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+        ],
+        throwOnError: false
+    });
+});
+</script>
+</body>
+</html>

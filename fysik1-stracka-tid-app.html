@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sträcka-tid-diagram - Fysiklabbet</title>
+    <title>Läge-tid-diagram - Fysiklabbet</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
@@ -309,9 +309,9 @@
                     <div className="max-w-7xl mx-auto">
                         {/* Header */}
                         <div className="text-center mb-8">
-                            <h1 className="text-5xl font-bold text-gray-900 mb-4">Sträcka-tid-diagram</h1>
+                            <h1 className="text-5xl font-bold text-gray-900 mb-4">Läge-tid-diagram</h1>
                             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                                Utforska hur sträcka förändras över tid. Lär dig tolka grafer och beräkna hastighet från lutning!
+                                Utforska hur läget förändras över tid. Lär dig tolka grafer och beräkna hastighet från lutning!
                             </p>
                         </div>
 
@@ -320,7 +320,7 @@
                             <div className="lg:col-span-2 space-y-6">
                                 {/* Graph */}
                                 <div className="bg-white rounded-xl shadow-lg p-6">
-                                    <h2 className="text-2xl font-bold mb-4 text-gray-800">Sträcka-tid-graf</h2>
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-800">Läge-tid-graf</h2>
                                     <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <svg ref={svgRef} viewBox={`0 0 ${svgWidth} ${svgHeight}`} preserveAspectRatio="xMidYMid meet" className="bg-white">
                                         <defs>
@@ -412,7 +412,7 @@
                                             fill="#334155"
                                             transform={`rotate(-90, 20, ${svgHeight / 2})`}
                                         >
-                                            Sträcka (m)
+                                            Läge (m)
                                         </text>
 
                                         {/* Main graph line */}
@@ -532,11 +532,12 @@
                                                                 onPointerDown={startTangentDrag}
                                                             />
                                                             <text
-                                                                x={scaleX(t) + 15}
-                                                                y={scaleY(s) - 10}
+                                                                x={scaleX(t) - 14}
+                                                                y={scaleY(s) - 18}
                                                                 fontSize="14"
                                                                 fill="#2563eb"
                                                                 fontWeight="bold"
+                                                                textAnchor="end"
                                                                 style={{ pointerEvents: 'none' }}
                                                             >
                                                                 Tangent vid <tspan fontStyle="italic">t</tspan> = {fmt(t)} s
@@ -639,7 +640,7 @@
                                         <React.Fragment>
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
                                                 <div className="fs-row">
-                                                    <span className="fs-label" style={{ minWidth: 150 }}>Startsträcka (<em>s</em>₀)</span>
+                                                    <span className="fs-label" style={{ minWidth: 150 }}>Startläge (<em>s</em>₀)</span>
                                                     <input type="range" min="-20" max="30" step="1" value={s0}
                                                            onChange={(e) => setS0(parseFloat(e.target.value))} />
                                                     <span className="fs-value" style={{ minWidth: 70, textAlign: 'right' }}>{fmt(s0)} m</span>
@@ -693,7 +694,7 @@
                                         <h3 className="font-bold text-lg mb-2 text-blue-900">📊 Aktuell status vid <em>t</em> = {fmt(tangentTime)} s:</h3>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
-                                                <span className="text-gray-600">Sträcka:</span>
+                                                <span className="text-gray-600">Läge:</span>
                                                 <span className="ml-2 font-bold text-xl text-blue-600">{fmt(positionAtTangent)} m</span>
                                             </div>
                                             <div>
@@ -817,7 +818,7 @@
                                     {/* Initial position */}
                                     <div className="mb-6">
                                         <div className="flex justify-between items-center mb-2">
-                                            <label className="font-semibold text-gray-700">Startsträcka (<em>s</em>₀)</label>
+                                            <label className="font-semibold text-gray-700">Startläge (<em>s</em>₀)</label>
                                             <span className="text-lg font-bold text-blue-600">{fmt(s0)} m</span>
                                         </div>
                                         <input
@@ -870,7 +871,7 @@
                                             onChange={(e) => setShowSlope(e.target.checked)}
                                             className="w-5 h-5 text-green-600"
                                         />
-                                        <span className="ml-3 font-medium">Visa lutning (hastighet)</span>
+                                        <span className="ml-3 font-medium">Visa tangent</span>
                                     </label>
 
                                     {/* k-värde (lutningen) på grafen */}
@@ -915,7 +916,7 @@
                                     <h3 className="text-xl font-bold mb-4 text-purple-900">📚 Formelsamling</h3>
                                     <div className="space-y-3 text-sm">
                                         <div className="bg-white p-3 rounded shadow">
-                                            <p className="font-bold text-purple-800">Sträcka vid konstant hastighet:</p>
+                                            <p className="font-bold text-purple-800">Läge vid konstant hastighet:</p>
                                             <p className="font-mono mt-1"><em>s</em>(<em>t</em>) = <em>s</em>₀ + <em>v</em>⋅<em>t</em></p>
                                             <p className="text-xs text-gray-600 mt-1"><em>s</em>₀ = {fmt(s0)} m, <em>v</em> = {fmt(velocity)} m/s</p>
                                         </div>

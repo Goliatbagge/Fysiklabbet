@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceleration-tid-diagram - Fysiklabbet</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+        .calc-step {
+            background: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-radius: 0.25rem;
+        }
+        .highlight-value {
+            background: #fef3c7;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            color: #92400e;
+        }
+
+        /* ── Scen-wrapper + fullskärm (grafen) ── */
+        .scene-wrap { aspect-ratio: 7 / 5; user-select: none; }
+        /* Bara den DIREKTA scen-svg:n ska fylla wrappern (inte ikon-svg:n i .fs-btn). */
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; }
+
+        /* Visningsval-ruta uppe till höger på scenytan (typ av rörelse + area) */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 250px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+
+        /* Reglage-rad inom fullskärms-dropdown */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+    </style>
+</head>
+<body class="bg-gray-50 lab-sim">
+        <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g fill="none" stroke="currentColor" stroke-width="1">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
+                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="katalog.html#fy1">Fysik</a>
+                <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        const AccelerationTimeSimulation = () => {
+            // 'constant' = konstant acceleration (horisontell linje)
+            // 'linear'   = linjärt föränderlig acceleration (lutande linje, kan korsa noll)
+            // 'two-phase'= två faser: acceleration följt av inbromsning
+            const [accelType, setAccelType] = useState('constant');
+            const [aStart, setAStart] = useState(3);   // acceleration (konstant) / startvärde (linjär) / fas 1 (två faser)
+            const [aSecond, setASecond] = useState(-3); // slutvärde (linjär) / fas 2 (två faser)
+            const [phaseTime, setPhaseTime] = useState(5); // brytpunkt (två faser)
+            const [v0, setV0] = useState(0);           // starthastighet
+            const [showArea, setShowArea] = useState(true);
+            const [areaStart, setAreaStart] = useState(0);
+            const [areaEnd, setAreaEnd] = useState(10);
+
+            // Fullskärm
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const sceneWrapRef = useRef(null);
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // Helper function to format numbers with comma as decimal separator (Swedish standard)
+            const formatNumber = (num, decimals = 1) => {
+                return num.toFixed(decimals).replace('.', ',');
+            };
+            // en decimal för värden — men exakt 0 skrivs utan decimal ("0")
+            const fmt = (num) => {
+                const s = formatNumber(num, 1);
+                return (s === '0,0' || s === '-0,0') ? '0' : s;
+            };
+
+            // Kursiv variabel (HTML)
+            const V = ({ children }) => <em>{children}</em>;
+            // Bråk med rakt divisionsstreck (HTML) – täljare över nämnare
+            const Frac = ({ num, den }) => (
+                <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', verticalAlign: 'middle', margin: '0 0.3em' }}>
+                    <span style={{ padding: '0 0.45em', lineHeight: 1.15 }}>{num}</span>
+                    <span style={{ borderTop: '1.6px solid currentColor', padding: '0 0.45em', lineHeight: 1.25, width: '100%', textAlign: 'center' }}>{den}</span>
+                </span>
+            );
+
+            // SVG parameters
+            const svgWidth = 700;
+            const svgHeight = 400;
+            const padding = 60;
+            const topBand = 100; // band ovanför diagrammet där bilen rör sig
+            const graphWidth = svgWidth - 2 * padding;
+            const graphHeight = svgHeight - 2 * padding;
+
+            // Fast skala för pedagogisk tydlighet
+            const FIXED_MAX_TIME = 10;     // alltid 0–10 s
+            const FIXED_MAX_A = 10;        // alltid −10 … +10 m/s²
+            const FIXED_MIN_A = -10;
+
+            const minA = FIXED_MIN_A;
+            const maxA = FIXED_MAX_A;
+
+            // Acceleration vid tid t (m/s²)
+            const getAcceleration = (t) => {
+                switch (accelType) {
+                    case 'constant':
+                        return aStart;
+                    case 'linear':
+                        return aStart + (aSecond - aStart) * (t / FIXED_MAX_TIME);
+                    case 'two-phase':
+                        return t < phaseTime ? aStart : aSecond;
+                    default:
+                        return aStart;
+                }
+            };
+
+            // Y-axel: jämna 2-steg (−10 … 0 … 10)
+            const aStep = 2;
+            const yAxisValues = [];
+            for (let a = minA; a <= maxA; a += aStep) {
+                yAxisValues.push(a);
+            }
+            // X-axel: rutnät och etiketter var sekund (0 … 10)
+            const tStep = 1;
+            const xAxisValues = [];
+            for (let t = 0; t <= FIXED_MAX_TIME; t += tStep) {
+                xAxisValues.push(t);
+            }
+
+            // Skalfunktioner
+            const scaleX = (t) => padding + (t / FIXED_MAX_TIME) * graphWidth;
+            const scaleY = (a) => svgHeight - padding - ((a - minA) / (maxA - minA)) * graphHeight;
+
+            // Graf-path
+            const generatePath = () => {
+                if (accelType === 'two-phase') {
+                    // Två horisontella segment med ett vertikalt hopp vid brytpunkten
+                    const x0 = scaleX(0), xb = scaleX(phaseTime), xe = scaleX(FIXED_MAX_TIME);
+                    const y1 = scaleY(aStart), y2 = scaleY(aSecond);
+                    return `M ${x0},${y1} L ${xb},${y1} L ${xb},${y2} L ${xe},${y2}`;
+                }
+                const points = [];
+                const steps = 100;
+                for (let i = 0; i <= steps; i++) {
+                    const t = (i / steps) * FIXED_MAX_TIME;
+                    points.push(`${scaleX(t)},${scaleY(getAcceleration(t))}`);
+                }
+                return `M ${points.join(' L ')}`;
+            };
+
+            // Integrera acceleration över [t0, t1] — EXAKT för de tre graftyperna.
+            // net  = hastighetsändring Δv (positiv area − negativ area)
+            // pos  = sammanlagd area ovanför t-axeln (magnitud)
+            // neg  = sammanlagd area under t-axeln (magnitud)
+            const integrate = (t0, t1) => {
+                let net = 0, pos = 0, neg = 0;
+                const addConst = (c, w) => {
+                    net += c * w;
+                    if (c >= 0) pos += c * w; else neg += -c * w;
+                };
+                // En linjär bit a1→a2 över bredden w; delas exakt vid ev. nollställe.
+                const addLinear = (a1, a2, w) => {
+                    const seg = (a1 + a2) / 2 * w;
+                    net += seg;
+                    if (a1 >= 0 && a2 >= 0) pos += seg;
+                    else if (a1 <= 0 && a2 <= 0) neg += -seg;
+                    else {
+                        const wc = w * Math.abs(a1) / (Math.abs(a1) + Math.abs(a2)); // bredd till nollstället
+                        const s1 = a1 / 2 * wc;
+                        const s2 = a2 / 2 * (w - wc);
+                        if (a1 > 0) { pos += s1; neg += -s2; }
+                        else { neg += -s1; pos += s2; }
+                    }
+                };
+                if (accelType === 'constant') {
+                    addConst(aStart, t1 - t0);
+                } else if (accelType === 'linear') {
+                    addLinear(getAcceleration(t0), getAcceleration(t1), t1 - t0);
+                } else { // two-phase: styckvis konstant, dela exakt vid brytpunkten
+                    const b = phaseTime;
+                    if (t1 <= b) addConst(aStart, t1 - t0);
+                    else if (t0 >= b) addConst(aSecond, t1 - t0);
+                    else { addConst(aStart, b - t0); addConst(aSecond, t1 - b); }
+                }
+                return { net, pos, neg };
+            };
+
+            // Area-polygoner (delade i positiv/negativ del, med korrekt klippning vid t-axeln)
+            const generateAreaPolygons = () => {
+                const steps = 240;
+                const positiveSegments = [];
+                const negativeSegments = [];
+                const y0 = scaleY(0);
+                const pushSeg = (arr, x1, yy1, x2, yy2) =>
+                    arr.push(`${x1},${y0} ${x1},${yy1} ${x2},${yy2} ${x2},${y0}`);
+                for (let i = 0; i < steps; i++) {
+                    const ta = areaStart + (i / steps) * (areaEnd - areaStart);
+                    const tb = areaStart + ((i + 1) / steps) * (areaEnd - areaStart);
+                    const a1 = getAcceleration(ta);
+                    const a2 = getAcceleration(tb);
+                    if (a1 >= 0 && a2 >= 0) {
+                        pushSeg(positiveSegments, scaleX(ta), scaleY(a1), scaleX(tb), scaleY(a2));
+                    } else if (a1 <= 0 && a2 <= 0) {
+                        pushSeg(negativeSegments, scaleX(ta), scaleY(a1), scaleX(tb), scaleY(a2));
+                    } else {
+                        const tc = ta + (tb - ta) * Math.abs(a1) / (Math.abs(a1) + Math.abs(a2));
+                        const xc = scaleX(tc);
+                        if (a1 > 0) {
+                            pushSeg(positiveSegments, scaleX(ta), scaleY(a1), xc, y0);
+                            pushSeg(negativeSegments, xc, y0, scaleX(tb), scaleY(a2));
+                        } else {
+                            pushSeg(negativeSegments, scaleX(ta), scaleY(a1), xc, y0);
+                            pushSeg(positiveSegments, xc, y0, scaleX(tb), scaleY(a2));
+                        }
+                    }
+                }
+                return { positiveSegments, negativeSegments };
+            };
+
+            // Dra area-gränserna (start/slut) med musen/fingret
+            const svgRef = useRef(null);
+            const draggingRef = useRef(null); // 'start' | 'end' | null
+            const [dragging, setDragging] = useState(null);
+
+            const clientToTime = (clientX) => {
+                const svg = svgRef.current;
+                if (!svg || !svg.getScreenCTM) return null;
+                const ctm = svg.getScreenCTM();
+                if (!ctm) return null;
+                const pt = svg.createSVGPoint();
+                pt.x = clientX; pt.y = 0;
+                const loc = pt.matrixTransform(ctm.inverse());
+                let t = ((loc.x - padding) / graphWidth) * FIXED_MAX_TIME;
+                t = Math.round(t * 2) / 2; // halvsekundssteg
+                return Math.max(0, Math.min(FIXED_MAX_TIME, t));
+            };
+            const startBoundaryDrag = (which) => (e) => {
+                draggingRef.current = which;
+                setDragging(which);
+                e.preventDefault();
+                e.stopPropagation();
+            };
+            useEffect(() => {
+                const move = (e) => {
+                    if (!draggingRef.current) return;
+                    const t = clientToTime(e.clientX);
+                    if (t === null) return;
+                    if (draggingRef.current === 'start') {
+                        setAreaStart(Math.min(t, areaEnd - 0.5));
+                    } else {
+                        setAreaEnd(Math.max(t, areaStart + 0.5));
+                    }
+                };
+                const up = () => {
+                    if (!draggingRef.current) return;
+                    draggingRef.current = null;
+                    setDragging(null);
+                };
+                window.addEventListener('pointermove', move);
+                window.addEventListener('pointerup', up);
+                return () => {
+                    window.removeEventListener('pointermove', move);
+                    window.removeEventListener('pointerup', up);
+                };
+            }, [areaStart, areaEnd]);
+
+            // ── Rörelsesimulering: ett objekt som rör sig som grafen beskriver ──
+            // Hastigheten är v(t) = v₀ + arean under a-t-grafen fram till t,
+            // och läget x(t) = integralen av hastigheten. Vi förberäknar en
+            // tabell över (t, v, x) och interpolerar under uppspelningen.
+            const [isPlaying, setIsPlaying] = useState(false);
+            const [simTime, setSimTime] = useState(0);
+            const simTimeRef = useRef(0);
+            const rafRef = useRef(null);
+            const lastTsRef = useRef(null);
+
+            const motion = useMemo(() => {
+                const N = 400;
+                const dt = FIXED_MAX_TIME / N;
+                const arr = [{ t: 0, v: v0, x: 0 }];
+                let x = 0, vPrev = v0;
+                for (let i = 1; i <= N; i++) {
+                    const tb = i * dt;
+                    const v = v0 + integrate(0, tb).net; // exakt hastighet (area upp till tb)
+                    x += (vPrev + v) / 2 * dt;            // läge via trapets av hastigheten
+                    vPrev = v;
+                    arr.push({ t: tb, v, x });
+                }
+                let xMin = Infinity, xMax = -Infinity;
+                for (const p of arr) { if (p.x < xMin) xMin = p.x; if (p.x > xMax) xMax = p.x; }
+                return { arr, xMin: Math.min(xMin, 0), xMax: Math.max(xMax, 0) };
+            }, [accelType, aStart, aSecond, phaseTime, v0]);
+
+            const sampleAt = (t) => {
+                const arr = motion.arr;
+                const N = arr.length - 1;
+                const f = Math.max(0, Math.min(N, (t / FIXED_MAX_TIME) * N));
+                const i = Math.floor(f);
+                if (i >= N) return arr[N];
+                const frac = f - i, a = arr[i], b = arr[i + 1];
+                return { t, v: a.v + (b.v - a.v) * frac, x: a.x + (b.x - a.x) * frac };
+            };
+
+            useEffect(() => {
+                if (!isPlaying) return;
+                const SIM_PER_SEC = 1.0; // sim-sekunder per realsekund (realtid: 1 s ≈ 1 s)
+                const tick = (ts) => {
+                    if (lastTsRef.current == null) lastTsRef.current = ts;
+                    const dts = (ts - lastTsRef.current) / 1000;
+                    lastTsRef.current = ts;
+                    const next = simTimeRef.current + dts * SIM_PER_SEC;
+                    if (next >= FIXED_MAX_TIME) {
+                        simTimeRef.current = FIXED_MAX_TIME;
+                        setSimTime(FIXED_MAX_TIME);
+                        setIsPlaying(false);
+                        return;
+                    }
+                    simTimeRef.current = next;
+                    setSimTime(next);
+                    rafRef.current = requestAnimationFrame(tick);
+                };
+                rafRef.current = requestAnimationFrame(tick);
+                return () => { cancelAnimationFrame(rafRef.current); lastTsRef.current = null; };
+            }, [isPlaying]);
+
+            const togglePlay = () => {
+                if (isPlaying) { setIsPlaying(false); return; }
+                if (simTimeRef.current >= FIXED_MAX_TIME - 0.001) { simTimeRef.current = 0; setSimTime(0); }
+                setIsPlaying(true);
+            };
+            const resetSim = () => { setIsPlaying(false); simTimeRef.current = 0; setSimTime(0); };
+            const scrub = (t) => { setIsPlaying(false); simTimeRef.current = t; setSimTime(t); };
+
+            // Beräkningar
+            const area = integrate(areaStart, areaEnd);          // över valt intervall
+            const deltaV = area.net;                              // hastighetsändring Δv
+            const vAtStart = v0 + integrate(0, areaStart).net;    // hastighet vid intervallets start
+            const vAtEnd = v0 + integrate(0, areaEnd).net;        // hastighet vid intervallets slut
+            const areaPolygons = generateAreaPolygons();
+
+            // Aktuell tidpunkt i rörelsen (driver bilen + punkten på grafen)
+            const cur = sampleAt(simTime);
+            const curA = getAcceleration(simTime);
+            // FAST skala för rörelsebanan (meter → pixlar). Viktigt: en auto-skalning
+            // som anpassar banan efter rörelsens storlek skulle dölja accelerationen —
+            // x(t)/x_max blir t²/T², oberoende av a, så alla rörelser ser likadana ut.
+            // Med fast skala rör sig bilen synligt längre/snabbare vid högre acceleration.
+            // x = 0 ligger i mitten; vid hög acceleration åker bilen ur bild (den
+            // stannar INTE vid kanten — det skulle se ut som a = 0). Halva banan
+            // motsvarar FULL_SCALE_M så att vanliga accelerationer ändå ryms.
+            const trackPad = padding;
+            const trackW = svgWidth - 2 * padding;
+            const FULL_SCALE_M = 250;     // halva banans bredd motsvarar 250 m
+            const CENTER_FRAC = 0.5;      // x = 0 i mitten
+            const PPM = (trackW * (1 - CENTER_FRAC)) / FULL_SCALE_M; // pixlar per meter
+            const worldToScreen = (xm) => trackPad + CENTER_FRAC * trackW + xm * PPM;
+            const startX = worldToScreen(0);
+            const carX = worldToScreen(cur.x); // ingen klampning — bilen får åka ur bild
+            const carVisible = carX >= trackPad - 20 && carX <= trackPad + trackW + 20;
+
+            // Geometriskt "snyggt" uttryck för konstant acceleration (rektangel)
+            const widthT = areaEnd - areaStart;
+            const aConst = aStart; // gäller vid 'constant'
+
+            const x0px = scaleX(0);
+            const y0px = scaleY(0);
+
+            return (
+                <div className="min-h-screen bg-gray-50 py-8 px-4">
+                    <div className="max-w-7xl mx-auto">
+                        {/* Header */}
+                        <div className="text-center mb-8">
+                            <h1 className="text-5xl font-bold text-gray-900 mb-4">Acceleration-tid-diagram</h1>
+                            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                                Utforska hur accelerationen förändras över tid. Lär dig att <strong>arean mellan grafen och tidsaxeln ger hastighetsändringen</strong> — area under axeln räknas som negativ.
+                            </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            {/* Main Graph Area */}
+                            <div className="lg:col-span-2 space-y-6">
+                                {/* Graph */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-800">Acceleration-tid-graf</h2>
+                                    <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <svg ref={svgRef} viewBox={`0 ${-topBand} ${svgWidth} ${svgHeight + topBand}`} preserveAspectRatio="xMidYMid meet" className="bg-white">
+                                        <defs>
+                                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                                <polygon points="0 0, 10 3, 0 6" fill="#38bdf8" />
+                                            </marker>
+                                        </defs>
+
+                                        {/* ── Rörelsebana ovanför diagrammet (syns även i fullskärm) ── */}
+                                        <g>
+                                            <rect x={trackPad - 16} y={-54} width={trackW + 32} height="32" rx="6" fill="#374151" />
+                                            <line x1={trackPad - 16} y1={-38} x2={trackPad + trackW + 16} y2={-38} stroke="#fbbf24" strokeWidth="2.5" strokeDasharray="14,12" />
+                                            {/* avståndslinjal (m) — fast skala gör accelerationen synlig */}
+                                            {[-250, -200, -150, -100, -50, 50, 100, 150, 200, 250].map((m) => {
+                                                const x = worldToScreen(m);
+                                                if (x < trackPad - 2 || x > trackPad + trackW + 2) return null;
+                                                return (
+                                                    <g key={`tick-${m}`}>
+                                                        <line x1={x} y1={-22} x2={x} y2={-16} stroke="#9aa6b2" strokeWidth="1" />
+                                                        <text x={x} y={-5} textAnchor="middle" fontSize="9" fill="#9aa6b2">{m < 0 ? '−' + Math.abs(m) : m} m</text>
+                                                    </g>
+                                                );
+                                            })}
+                                            {/* startmarkering (x = 0) */}
+                                            <line x1={startX} y1={-70} x2={startX} y2={-14} stroke="#10b981" strokeWidth="2" strokeDasharray="4,3" />
+                                            <text x={startX} y={-76} textAnchor="middle" fontSize="12" fill="#059669" fontWeight="bold">start (<tspan fontStyle="italic">x</tspan> = 0)</text>
+                                            {/* bil + riktningspil — döljs när bilen åkt ur bild */}
+                                            {carVisible && (
+                                                <>
+                                                    {Math.abs(cur.v) > 0.05 && (
+                                                        <text x={carX + (cur.v >= 0 ? 32 : -32)} y={-60} textAnchor="middle" fontSize="18" fill="#1d4ed8" fontWeight="bold">{cur.v >= 0 ? '→' : '←'}</text>
+                                                    )}
+                                                    {/* 🚗 pekar vänster i typsnittet → spegelvänd när den kör åt höger */}
+                                                    <g transform={`translate(${carX}, 0)`}>
+                                                        <text x="0" y={-24} textAnchor="middle" fontSize="36"
+                                                              transform={cur.v >= 0 ? 'scale(-1,1)' : undefined}
+                                                              style={{ userSelect: 'none' }}>🚗</text>
+                                                    </g>
+                                                </>
+                                            )}
+                                        </g>
+
+                                        {/* Grid lines */}
+                                        {xAxisValues.map((t, i) => (
+                                            <line key={`grid-x-${i}`} x1={scaleX(t)} y1={padding} x2={scaleX(t)} y2={svgHeight - padding} stroke="#a7b0bd" strokeWidth="1" />
+                                        ))}
+                                        {yAxisValues.map((a, i) => (
+                                            <line key={`grid-y-${i}`} x1={padding} y1={scaleY(a)} x2={svgWidth - padding} y2={scaleY(a)} stroke="#a7b0bd" strokeWidth="1" />
+                                        ))}
+
+                                        {/* Area under/over curve — visas under linjen */}
+                                        {showArea && (
+                                            <>
+                                                {areaPolygons.positiveSegments.map((points, i) => (
+                                                    <polygon key={`pos-${i}`} points={points} fill="rgba(34, 197, 94, 0.32)" stroke="none" />
+                                                ))}
+                                                {areaPolygons.negativeSegments.map((points, i) => (
+                                                    <polygon key={`neg-${i}`} points={points} fill="rgba(239, 68, 68, 0.32)" stroke="none" />
+                                                ))}
+                                                {/* Lodräta gränslinjer för intervallet */}
+                                                {[areaStart, areaEnd].map((t, i) => (
+                                                    <line key={`bound-${i}`} x1={scaleX(t)} y1={padding} x2={scaleX(t)} y2={svgHeight - padding}
+                                                          stroke="#1d4ed8" strokeWidth="1.5" strokeDasharray="4,4" />
+                                                ))}
+                                            </>
+                                        )}
+
+                                        {/* Axes with arrows (cyan, svensk diagramkonvention) */}
+                                        <line x1={padding} y1={scaleY(0)} x2={svgWidth - padding + 10} y2={scaleY(0)} stroke="#38bdf8" strokeWidth="2" markerEnd="url(#arrowhead)" />
+                                        <line x1={padding} y1={svgHeight - padding} x2={padding} y2={padding - 10} stroke="#38bdf8" strokeWidth="2" markerEnd="url(#arrowhead)" />
+
+                                        {/* Axis labels */}
+                                        {xAxisValues.map((t, i) => (
+                                            <text key={`label-x-${i}`} x={scaleX(t)} y={scaleY(0) + 20} textAnchor="middle" fontSize="12" fill="#666">{t}</text>
+                                        ))}
+                                        {yAxisValues.map((a, i) => (
+                                            a !== 0 && <text key={`label-y-${i}`} x={padding - 10} y={scaleY(a) + 5} textAnchor="end" fontSize="12" fill="#666">{a}</text>
+                                        ))}
+
+                                        {/* Axis titles */}
+                                        <text x={svgWidth / 2} y={svgHeight - 10} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#334155">
+                                            Tid (s)
+                                        </text>
+                                        <text x={20} y={svgHeight / 2} textAnchor="middle" fontSize="16" fontWeight="bold" fill="#334155"
+                                              transform={`rotate(-90, 20, ${svgHeight / 2})`}>
+                                            Acceleration (m/s²)
+                                        </text>
+
+                                        {/* Δv-etikett i den dominerande arean */}
+                                        {showArea && Math.abs(deltaV) > 0.05 && (
+                                            <text x={(scaleX(areaStart) + scaleX(areaEnd)) / 2}
+                                                  y={scaleY(0) + (deltaV >= 0 ? -10 : 22)}
+                                                  textAnchor="middle" fontSize="15" fontWeight="bold"
+                                                  fill={deltaV >= 0 ? '#15803d' : '#b91c1c'}
+                                                  style={{ pointerEvents: 'none' }}>
+                                                Δ<tspan fontStyle="italic">v</tspan> = {fmt(deltaV)} m/s
+                                            </text>
+                                        )}
+
+                                        {/* Main graph line */}
+                                        <path d={generatePath()} fill="none" stroke="#ef4444" strokeWidth="3" />
+
+                                        {/* Playhead — markerar bilens aktuella tidpunkt på grafen */}
+                                        <line x1={scaleX(simTime)} y1={padding} x2={scaleX(simTime)} y2={svgHeight - padding}
+                                              stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="3,3" />
+                                        <circle cx={scaleX(simTime)} cy={scaleY(curA)} r="6.5" fill="#f59e0b" stroke="#fff" strokeWidth="2" />
+
+                                        {/* Dragbara gränshandtag (på t-axeln) */}
+                                        {showArea && [['start', areaStart], ['end', areaEnd]].map(([which, t]) => (
+                                            <g key={`handle-${which}`}>
+                                                <circle cx={scaleX(t)} cy={y0px} r="16" fill="transparent"
+                                                        style={{ cursor: dragging ? 'grabbing' : 'ew-resize' }}
+                                                        onPointerDown={startBoundaryDrag(which)} />
+                                                <circle cx={scaleX(t)} cy={y0px} r={dragging === which ? 8 : 6}
+                                                        fill="#1d4ed8" stroke="#fff" strokeWidth="2"
+                                                        style={{ cursor: dragging ? 'grabbing' : 'ew-resize' }}
+                                                        onPointerDown={startBoundaryDrag(which)} />
+                                            </g>
+                                        ))}
+                                    </svg>
+
+                                    {/* Visningsval uppe till höger (endast fullskärm) */}
+                                    {isFullscreen && (
+                                        <div className="scene-toggles">
+                                            <div className="st-title">Typ av acceleration</div>
+                                            {[['constant', 'Konstant acceleration'], ['linear', 'Linjärt föränderlig'], ['two-phase', 'Acceleration + inbromsning']].map(([m, lbl]) => (
+                                                <label key={m}>
+                                                    <input type="radio" name="accelTypeFs" checked={accelType === m} onChange={() => setAccelType(m)} />
+                                                    <span>{lbl}</span>
+                                                </label>
+                                            ))}
+                                            <div className="st-title mt">Visa</div>
+                                            <label>
+                                                <input type="checkbox" checked={showArea} onChange={(e) => setShowArea(e.target.checked)} />
+                                                <span>Area (hastighetsändring)</span>
+                                            </label>
+                                            <div className="st-title mt">Rörelse</div>
+                                            <div style={{ display: 'flex', gap: '6px', marginTop: '2px' }}>
+                                                <button onClick={togglePlay}
+                                                        style={{ padding: '5px 10px', borderRadius: '6px', fontWeight: 600, color: '#fff', background: isPlaying ? '#f59e0b' : '#16a34a', border: 'none', cursor: 'pointer', flex: 1 }}>
+                                                    {isPlaying ? '⏸ Pausa' : '▶ Spela'}
+                                                </button>
+                                                <button onClick={resetSim}
+                                                        style={{ padding: '5px 10px', borderRadius: '6px', fontWeight: 600, color: '#0f1620', background: 'rgba(15,22,32,0.10)', border: 'none', cursor: 'pointer', flex: 1 }}>
+                                                    ↺ Återställ
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Fullskärm: glidare i hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <div className="fs-row">
+                                                    <span className="fs-label" style={{ minWidth: 90 }}>Tid (<em>t</em>)</span>
+                                                    <input type="range" min="0" max={FIXED_MAX_TIME} step="0.1" value={simTime}
+                                                           onChange={(e) => scrub(parseFloat(e.target.value))} />
+                                                    <span className="fs-value" style={{ minWidth: 150, textAlign: 'right' }}>
+                                                        <em>t</em> = {fmt(simTime)} s · <em>v</em> = {fmt(cur.v)} m/s
+                                                    </span>
+                                                </div>
+                                                <div className="fs-row">
+                                                    <span className="fs-label" style={{ minWidth: 170 }}>
+                                                        {accelType === 'linear' ? <>Start-acceleration (<em>a</em>₀)</> : accelType === 'two-phase' ? <>Acceleration fas 1 (<em>a</em>₁)</> : <>Acceleration (<em>a</em>)</>}
+                                                    </span>
+                                                    <input type="range" min="-8" max="8" step="0.5" value={aStart}
+                                                           onChange={(e) => setAStart(parseFloat(e.target.value))} />
+                                                    <span className="fs-value" style={{ minWidth: 80, textAlign: 'right' }}>{fmt(aStart)} m/s²</span>
+                                                </div>
+                                                {accelType !== 'constant' && (
+                                                    <div className="fs-row">
+                                                        <span className="fs-label" style={{ minWidth: 170 }}>
+                                                            {accelType === 'linear' ? <>Slut-acceleration (<em>a</em>₁)</> : <>Acceleration fas 2 (<em>a</em>₂)</>}
+                                                        </span>
+                                                        <input type="range" min="-8" max="8" step="0.5" value={aSecond}
+                                                               onChange={(e) => setASecond(parseFloat(e.target.value))} />
+                                                        <span className="fs-value" style={{ minWidth: 80, textAlign: 'right' }}>{fmt(aSecond)} m/s²</span>
+                                                    </div>
+                                                )}
+                                                {accelType === 'two-phase' && (
+                                                    <div className="fs-row">
+                                                        <span className="fs-label" style={{ minWidth: 170 }}>Brytpunkt (<em>t</em>)</span>
+                                                        <input type="range" min="1" max="9" step="0.5" value={phaseTime}
+                                                               onChange={(e) => setPhaseTime(parseFloat(e.target.value))} />
+                                                        <span className="fs-value" style={{ minWidth: 80, textAlign: 'right' }}>{fmt(phaseTime)} s</span>
+                                                    </div>
+                                                )}
+                                                <div className="fs-row">
+                                                    <span className="fs-label" style={{ minWidth: 170 }}>Intervall: start</span>
+                                                    <input type="range" min="0" max={FIXED_MAX_TIME - 0.5} step="0.5" value={areaStart}
+                                                           onChange={(e) => { const val = parseFloat(e.target.value); setAreaStart(Math.min(val, areaEnd - 0.5)); }} />
+                                                    <span className="fs-value" style={{ minWidth: 80, textAlign: 'right' }}>{fmt(areaStart)} s</span>
+                                                </div>
+                                                <div className="fs-row">
+                                                    <span className="fs-label" style={{ minWidth: 170 }}>Intervall: slut</span>
+                                                    <input type="range" min="0.5" max={FIXED_MAX_TIME} step="0.5" value={areaEnd}
+                                                           onChange={(e) => { const val = parseFloat(e.target.value); setAreaEnd(Math.max(val, areaStart + 0.5)); }} />
+                                                    <span className="fs-value" style={{ minWidth: 80, textAlign: 'right' }}>{fmt(areaEnd)} s</span>
+                                                </div>
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'} aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6" />
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    {/* Fullskärmsknapp (kanonisk ikon, uppe till vänster) */}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                    </div>
+
+                                    {/* Status display */}
+                                    <div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                                        <h3 className="font-bold text-lg mb-2 text-blue-900">📊 Resultat över intervallet <em>t</em> = {fmt(areaStart)} s till {fmt(areaEnd)} s:</h3>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <span className="text-gray-600">Hastighetsändring:</span>
+                                                <span className="ml-2 font-bold text-xl text-blue-600">Δ<em>v</em> = {fmt(deltaV)} m/s</span>
+                                            </div>
+                                            <div>
+                                                <span className="text-gray-600">Sluthastighet:</span>
+                                                <span className="ml-2 font-bold text-xl text-green-600"><em>v</em> = {fmt(vAtEnd)} m/s</span>
+                                            </div>
+                                        </div>
+                                        <p className="mt-2 text-sm text-gray-700">
+                                            {deltaV > 0.05 && "🚀 Sammanlagt ökar hastigheten (mer area ovanför axeln)"}
+                                            {deltaV < -0.05 && "🛑 Sammanlagt minskar hastigheten (mer area under axeln)"}
+                                            {Math.abs(deltaV) <= 0.05 && "⚖️ Lika mycket area ovanför och under axeln — hastigheten är oförändrad"}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Rörelsekontroller (bilen visas ovanför diagrammet) */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+                                        <h2 className="text-2xl font-bold text-gray-800">🚗 Rörelse</h2>
+                                        <div className="flex items-center gap-2">
+                                            <button onClick={togglePlay}
+                                                    className={`px-4 py-2 rounded-lg font-semibold text-white shadow transition ${isPlaying ? 'bg-amber-500 hover:bg-amber-600' : 'bg-green-600 hover:bg-green-700'}`}>
+                                                {isPlaying ? '⏸ Pausa' : '▶ Spela upp'}
+                                            </button>
+                                            <button onClick={resetSim}
+                                                    className="px-4 py-2 rounded-lg font-semibold bg-gray-200 hover:bg-gray-300 text-gray-700 shadow transition">
+                                                ↺ Återställ
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {/* live-avläsning */}
+                                    <div className="grid grid-cols-3 gap-2 mt-3 text-center">
+                                        <div className="bg-amber-50 rounded-lg p-2 border border-amber-200">
+                                            <div className="text-xs text-gray-500">Tid</div>
+                                            <div className="font-bold text-amber-700"><em>t</em> = {fmt(simTime)} s</div>
+                                        </div>
+                                        <div className="bg-green-50 rounded-lg p-2 border border-green-200">
+                                            <div className="text-xs text-gray-500">Hastighet</div>
+                                            <div className="font-bold text-green-700"><em>v</em> = {fmt(cur.v)} m/s</div>
+                                        </div>
+                                        <div className="bg-blue-50 rounded-lg p-2 border border-blue-200">
+                                            <div className="text-xs text-gray-500">Läge</div>
+                                            <div className="font-bold text-blue-700"><em>x</em> = {fmt(cur.x)} m</div>
+                                        </div>
+                                    </div>
+
+                                    {/* tidsreglage (scrubber) */}
+                                    <div className="mt-4">
+                                        <input type="range" min="0" max={FIXED_MAX_TIME} step="0.1" value={simTime}
+                                               onChange={(e) => scrub(parseFloat(e.target.value))}
+                                               className="w-full h-2 bg-amber-200 rounded-lg appearance-none cursor-pointer" />
+                                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                            <span>0 s</span><span>{FIXED_MAX_TIME} s</span>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-sm text-gray-600 mt-3">
+                                        Bilen ovanför diagrammet kör så som grafen beskriver. Den <span className="font-semibold" style={{ color: '#f59e0b' }}>orangea punkten</span> markerar bilens aktuella tidpunkt på grafen — arean upp till den punkten är hastighetsändringen, och därför ändrar bilen sin fart precis så.
+                                    </p>
+                                </div>
+
+                                {/* Area Analysis */}
+                                {showArea && (
+                                    <div className="bg-blue-50 rounded-xl shadow-lg p-6 border-2 border-blue-200">
+                                        <h2 className="text-2xl font-bold mb-4 text-blue-900">📏 Areaanalys: hastighetsändring</h2>
+
+                                        {/* Färgkodning */}
+                                        <div className="mb-4 p-3 bg-white rounded-lg border border-gray-200">
+                                            <p className="font-semibold mb-2 text-sm">Färgkodning:</p>
+                                            <div className="flex gap-4 text-sm flex-wrap">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="w-6 h-4 bg-green-500 bg-opacity-30 border border-green-500"></div>
+                                                    <span>Positiv area (<em>a</em> &gt; 0) → ökar <em>v</em></span>
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <div className="w-6 h-4 bg-red-500 bg-opacity-30 border border-red-500"></div>
+                                                    <span>Negativ area (<em>a</em> &lt; 0) → minskar <em>v</em></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="formula-box bg-gradient-to-r from-blue-500 to-cyan-600" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4em', flexWrap: 'wrap' }}>
+                                            Δ<em>v</em> <span>=</span> positiv area <span>−</span> negativ area
+                                        </div>
+
+                                        {/* Beräkningar */}
+                                        <div className="calc-step">
+                                            <p className="font-semibold mb-3 text-lg">📊 Beräkningar (<em>t</em> = {fmt(areaStart)} s till {fmt(areaEnd)} s):</p>
+
+                                            {area.pos > 0.05 && (
+                                                <p className="mb-1">🟢 Positiv area: <span className="font-mono font-bold text-green-700">+{fmt(area.pos)} m/s</span></p>
+                                            )}
+                                            {area.neg > 0.05 && (
+                                                <p className="mb-1">🔴 Negativ area: <span className="font-mono font-bold text-red-700">−{fmt(area.neg)} m/s</span></p>
+                                            )}
+
+                                            {accelType === 'constant' && Math.abs(aConst) > 0.001 && (
+                                                <div className="mt-3 mb-1">
+                                                    <p className="text-sm text-gray-600 mb-1">Rektangelarea (höjd × bredd):</p>
+                                                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.35em', flexWrap: 'wrap' }}>
+                                                        Δ<em>v</em> = <em>a</em> ⋅ Δ<em>t</em> = {fmt(aConst)} m/s² ⋅ {fmt(widthT)} s = <span className="font-bold">{fmt(deltaV)} m/s</span>
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                            <div className="mt-4 pt-4 border-t-2 border-blue-300">
+                                                <p className="text-lg mb-2"><strong>Hastighetsändring:</strong></p>
+                                                <p className="text-2xl mb-1">
+                                                    <span className="highlight-value bg-blue-100">Δ<em>v</em> = {fmt(deltaV)} m/s</span>
+                                                </p>
+                                                <p className="text-sm text-gray-600 mb-4">
+                                                    {deltaV > 0.05 && "→ Hastigheten har ökat över intervallet"}
+                                                    {deltaV < -0.05 && "← Hastigheten har minskat över intervallet"}
+                                                    {Math.abs(deltaV) <= 0.05 && "○ Hastigheten är oförändrad — positiv och negativ area tar ut varandra"}
+                                                </p>
+
+                                                <p className="text-lg mb-2"><strong>Hastighet före och efter:</strong></p>
+                                                <p style={{ display: 'flex', alignItems: 'center', gap: '0.35em', flexWrap: 'wrap' }}>
+                                                    <em>v</em>(start) = {fmt(vAtStart)} m/s &nbsp;→&nbsp; <em>v</em>(slut) = <em>v</em>(start) + Δ<em>v</em> = <span className="highlight-value bg-green-100">{fmt(vAtEnd)} m/s</span>
+                                                </p>
+                                                <p className="text-xs text-gray-500 mt-1">(med starthastighet <em>v</em>₀ = {fmt(v0)} m/s vid <em>t</em> = 0)</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="mt-4 p-4 bg-white rounded border-l-4 border-blue-500">
+                                            <p className="font-semibold text-blue-900 mb-2">💡 Viktigt att förstå:</p>
+                                            <ul className="text-sm text-gray-700 space-y-1 list-disc pl-5">
+                                                <li>Arean mellan <em>a</em>-<em>t</em>-grafen och tidsaxeln ger <strong>hastighetsändringen</strong> Δ<em>v</em>.</li>
+                                                <li>Area <strong>ovanför</strong> tidsaxeln (<em>a</em> &gt; 0) räknas <strong>positiv</strong> — hastigheten ökar.</li>
+                                                <li>Area <strong>under</strong> tidsaxeln (<em>a</em> &lt; 0) räknas <strong>negativ</strong> — hastigheten minskar.</li>
+                                                <li>Δ<em>v</em> är skillnaden mellan dem, inte den totala arean.</li>
+                                                {area.pos > 0.05 && area.neg > 0.05 && (
+                                                    <li className="font-bold text-blue-800">⚠️ Här finns både positiv och negativ area — de delvis tar ut varandra.</li>
+                                                )}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Controls */}
+                            <div className="space-y-6">
+                                {/* Accel Type */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <h3 className="text-xl font-bold mb-4 text-gray-800">Typ av acceleration</h3>
+                                    <div className="space-y-3">
+                                        {[['constant', 'Konstant acceleration'], ['linear', 'Linjärt föränderlig'], ['two-phase', 'Acceleration + inbromsning']].map(([m, lbl]) => (
+                                            <label key={m} className={`flex items-center p-3 rounded-lg border-2 cursor-pointer transition ${accelType === m ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`}>
+                                                <input type="radio" name="accelType" value={m} checked={accelType === m}
+                                                       onChange={(e) => setAccelType(e.target.value)} className="w-5 h-5" />
+                                                <span className="ml-3 font-medium">{lbl}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Parameters */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <h3 className="text-xl font-bold mb-4 text-gray-800">⚙️ Parametrar</h3>
+
+                                    {/* aStart */}
+                                    <div className="mb-6">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <label className="font-semibold text-gray-700">
+                                                {accelType === 'linear' ? <>Start-acceleration (<em>a</em>₀)</> : accelType === 'two-phase' ? <>Acceleration fas 1 (<em>a</em>₁)</> : <>Acceleration (<em>a</em>)</>}
+                                            </label>
+                                            <span className="text-lg font-bold text-blue-600">{fmt(aStart)} m/s²</span>
+                                        </div>
+                                        <input type="range" min="-8" max="8" step="0.5" value={aStart}
+                                               onChange={(e) => setAStart(parseFloat(e.target.value))}
+                                               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                            <span>−8,0 m/s²</span><span>8,0 m/s²</span>
+                                        </div>
+                                    </div>
+
+                                    {/* aSecond */}
+                                    {accelType !== 'constant' && (
+                                        <div className="mb-6">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label className="font-semibold text-gray-700">
+                                                    {accelType === 'linear' ? <>Slut-acceleration (<em>a</em>₁)</> : <>Acceleration fas 2 (<em>a</em>₂)</>}
+                                                </label>
+                                                <span className="text-lg font-bold text-blue-600">{fmt(aSecond)} m/s²</span>
+                                            </div>
+                                            <input type="range" min="-8" max="8" step="0.5" value={aSecond}
+                                                   onChange={(e) => setASecond(parseFloat(e.target.value))}
+                                                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                                            <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                                <span>−8,0 m/s²</span><span>8,0 m/s²</span>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* phaseTime */}
+                                    {accelType === 'two-phase' && (
+                                        <div className="mb-6">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <label className="font-semibold text-gray-700">Brytpunkt (<em>t</em>)</label>
+                                                <span className="text-lg font-bold text-purple-600">{fmt(phaseTime)} s</span>
+                                            </div>
+                                            <input type="range" min="1" max="9" step="0.5" value={phaseTime}
+                                                   onChange={(e) => setPhaseTime(parseFloat(e.target.value))}
+                                                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                                            <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                                <span>1,0 s</span><span>9,0 s</span>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* v0 */}
+                                    <div className="mb-2">
+                                        <div className="flex justify-between items-center mb-2">
+                                            <label className="font-semibold text-gray-700">Starthastighet (<em>v</em>₀)</label>
+                                            <span className="text-lg font-bold text-green-600">{fmt(v0)} m/s</span>
+                                        </div>
+                                        <input type="range" min="-10" max="20" step="1" value={v0}
+                                               onChange={(e) => setV0(parseFloat(e.target.value))}
+                                               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+                                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                                            <span>−10,0 m/s</span><span>20,0 m/s</span>
+                                        </div>
+                                        <p className="text-xs text-gray-500 mt-1">Påverkar bara sluthastigheten, inte arean.</p>
+                                    </div>
+                                </div>
+
+                                {/* Display options */}
+                                <div className="bg-white rounded-xl shadow-lg p-6">
+                                    <h3 className="text-xl font-bold mb-4 text-gray-800">👁️ Visningsalternativ</h3>
+
+                                    <label className="flex items-center mb-4 cursor-pointer">
+                                        <input type="checkbox" checked={showArea} onChange={(e) => setShowArea(e.target.checked)} className="w-5 h-5 text-blue-600" />
+                                        <span className="ml-3 font-medium">Visa area (hastighetsändring)</span>
+                                    </label>
+
+                                    {showArea && (
+                                        <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                                            <p className="font-semibold mb-3 text-blue-900">Tidsintervall för area:</p>
+                                            <p className="text-xs text-gray-600 mb-3">Tips: du kan också dra de blå punkterna på tidsaxeln.</p>
+
+                                            <div className="mb-4">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <label className="text-sm font-medium">Starttid</label>
+                                                    <span className="font-bold text-blue-600">{fmt(areaStart)} s</span>
+                                                </div>
+                                                <input type="range" min="0" max={FIXED_MAX_TIME - 0.5} step="0.5" value={areaStart}
+                                                       onChange={(e) => { const val = parseFloat(e.target.value); setAreaStart(Math.min(val, areaEnd - 0.5)); }}
+                                                       className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer" />
+                                            </div>
+
+                                            <div>
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <label className="text-sm font-medium">Sluttid</label>
+                                                    <span className="font-bold text-blue-600">{fmt(areaEnd)} s</span>
+                                                </div>
+                                                <input type="range" min="0.5" max={FIXED_MAX_TIME} step="0.5" value={areaEnd}
+                                                       onChange={(e) => { const val = parseFloat(e.target.value); setAreaEnd(Math.max(val, areaStart + 0.5)); }}
+                                                       className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer" />
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Formulas */}
+                                <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 border-2 border-purple-200">
+                                    <h3 className="text-xl font-bold mb-4 text-purple-900">📚 Formelsamling</h3>
+                                    <div className="space-y-3 text-sm">
+                                        <div className="bg-white p-3 rounded shadow">
+                                            <p className="font-bold text-purple-800">Hastighetsändring från area:</p>
+                                            <p className="font-mono mt-1">Δ<em>v</em> = area mellan <em>a</em>-<em>t</em>-grafen och <em>t</em>-axeln</p>
+                                            <p className="text-xs text-gray-600 mt-1">area under axeln räknas negativ</p>
+                                        </div>
+                                        <div className="bg-white p-3 rounded shadow">
+                                            <p className="font-bold text-purple-800">Vid konstant acceleration:</p>
+                                            <p className="font-mono mt-1">Δ<em>v</em> = <em>a</em>⋅Δ<em>t</em></p>
+                                        </div>
+                                        <div className="bg-white p-3 rounded shadow">
+                                            <p className="font-bold text-purple-800">Sluthastighet:</p>
+                                            <p className="font-mono mt-1"><em>v</em> = <em>v</em>₀ + Δ<em>v</em></p>
+                                        </div>
+                                        <div className="bg-white p-3 rounded shadow">
+                                            <p className="font-bold text-purple-800">Allmänt (integral):</p>
+                                            <p className="font-mono mt-1">Δ<em>v</em> = ∫ <em>a</em>(<em>t</em>) d<em>t</em></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Info box */}
+                                <div className="bg-amber-50 rounded-xl shadow-lg p-6 border-2 border-amber-200">
+                                    <h3 className="text-xl font-bold mb-3 text-amber-900">💡 Kom ihåg!</h3>
+                                    <ul className="space-y-2 text-sm text-amber-900">
+                                        <li>✓ <strong>Area</strong> under <em>a</em>-<em>t</em>-graf = <strong>Hastighetsändring</strong> Δ<em>v</em></li>
+                                        <li>✓ Area <strong>ovanför</strong> tidsaxeln är positiv (<em>v</em> ökar)</li>
+                                        <li>✓ Area <strong>under</strong> tidsaxeln är negativ (<em>v</em> minskar)</li>
+                                        <li>✓ Δ<em>v</em> = positiv area − negativ area</li>
+                                        <li>✓ Horisontell linje = konstant acceleration → rektangelarea</li>
+                                        <li>✓ <em>v</em> = <em>v</em>₀ + Δ<em>v</em></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<AccelerationTimeSimulation />, document.getElementById('root'));
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

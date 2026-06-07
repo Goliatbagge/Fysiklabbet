@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Fysiklabbet">
+  <!-- Laborans-bricka: papper med tunn bläckram så märket håller mot vita flikar -->
+  <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="7" fill="#f3eee4"
+        stroke="#0f1620" stroke-opacity="0.18" stroke-width="1.5"/>
+  <!-- Förfinad atom: EN lutad omloppsbana -->
+  <g transform="rotate(-24 16 16)">
+    <ellipse cx="16" cy="16" rx="11" ry="4.4" fill="none" stroke="#0f1620" stroke-width="1.7"/>
+    <!-- elektron, på banan -->
+    <circle cx="23.36" cy="12.73" r="2" fill="#c8324a"/>
+  </g>
+  <!-- kärna, röd accent -->
+  <circle cx="16" cy="16" r="3" fill="#c8324a"/>
+</svg>

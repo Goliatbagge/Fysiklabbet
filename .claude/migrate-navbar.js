@@ -25,12 +25,11 @@ const NEW_NAVBAR = `    <div class="lab-topbar lab-topbar--on-sim">
         <div class="lab-header-inner">
             <a class="lab-logo" href="index.html">
                 <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
-                    <g fill="none" stroke="currentColor" stroke-width="1">
-                        <ellipse cx="18" cy="18" rx="15" ry="6" />
-                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(60 18 18)" />
-                        <ellipse cx="18" cy="18" rx="15" ry="6" transform="rotate(120 18 18)" />
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
                     </g>
-                    <circle cx="18" cy="18" r="2.5" fill="var(--lab-accent)" />
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
                 </svg>
                 <span class="lab-logo-text">Fysiklabbet</span>
             </a>

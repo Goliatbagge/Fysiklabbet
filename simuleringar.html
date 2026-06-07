@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simuleringar — Fysiklabbet</title>
+    <meta name="description" content="Alla interaktiva fysiksimuleringar på Fysiklabbet, samlade och kategoriserade efter kurs och område.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Simuleringar — Fysiklabbet">
+    <meta property="og:description" content="Alla interaktiva fysiksimuleringar på Fysiklabbet, samlade och kategoriserade efter kurs och område.">
+    <meta property="og:url" content="https://fysiklabbet.se/simuleringar.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <style>
+        /* ── Sidan Simuleringar ────────────────────────────────────── */
+        .sim-hero { max-width: 1280px; margin: 0 auto; padding: 56px 56px 8px; width: 100%; }
+        .sim-hero-title {
+            font-family: var(--lab-font-display);
+            font-size: clamp(40px, 6vw, 64px);
+            line-height: 1.02;
+            letter-spacing: -0.01em;
+            color: var(--lab-ink);
+            margin: 10px 0 14px;
+        }
+        .sim-hero-lead {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--lab-ink-soft);
+            max-width: 60ch;
+        }
+
+        /* Kursband — avdelare med kursnamn och antal */
+        .sim-course { margin-top: 30px; }
+        .sim-course-band {
+            display: flex; align-items: baseline; justify-content: space-between;
+            gap: 16px; flex-wrap: wrap;
+            padding-bottom: 12px; margin-bottom: 26px;
+            border-bottom: 2px solid var(--lab-line-strong);
+        }
+        .sim-course-name {
+            font-family: var(--lab-font-display);
+            font-size: 30px; color: var(--lab-ink); letter-spacing: -0.01em;
+        }
+
+        /* Område */
+        .sim-area { margin-bottom: 28px; }
+        .sim-area-head {
+            display: flex; align-items: baseline; gap: 12px; margin-bottom: 2px;
+        }
+        .sim-area-num {
+            font-family: var(--lab-font-mono); font-size: 11px;
+            color: var(--lab-ink-muted); letter-spacing: 0.12em;
+        }
+        .sim-area-name {
+            font-size: 16px; font-weight: 600; color: var(--lab-ink);
+            letter-spacing: -0.005em;
+        }
+
+        /* Enkel lista */
+        .sim-list { border-top: 1px solid var(--lab-line); }
+        .sim-row {
+            display: flex; align-items: baseline; gap: 18px;
+            padding: 10px 4px 10px 0;
+            border-bottom: 1px solid var(--lab-line);
+            text-decoration: none; color: var(--lab-ink);
+        }
+        .sim-row-num {
+            flex: 0 0 auto; min-width: 42px;
+            font-family: var(--lab-font-mono); font-size: 12px;
+            color: var(--lab-ink-muted); letter-spacing: 0.04em;
+        }
+        .sim-row-body { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+        .sim-row-title { font-size: 15px; font-weight: 600; transition: color 110ms ease; }
+        .sim-row-desc { font-size: 13px; color: var(--lab-ink-muted); font-weight: 400; }
+        .sim-row:hover .sim-row-title {
+            color: var(--lab-accent);
+            text-decoration: underline; text-underline-offset: 3px;
+        }
+        .sim-row:hover .sim-row-num { color: var(--lab-accent); }
+
+        @media (max-width: 640px) {
+            .sim-hero { padding: 40px 22px 8px; }
+            .lab-section { padding: 0 22px; }
+        }
+    </style>
+</head>
+<body class="laborans">
+    <div id="root"></div>
+
+    <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/simuleringar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" data-presets="react">
+        const { useState, useEffect, useMemo, useRef } = React;
+        const K = window.KATALOG;
+        const KF = window.KATALOG_FLAT;
+        const SIM_NAMES = window.SIM_NAMES || {};
+
+        // En teorisektion (med href) → en eller flera listposter, namngivna
+        // efter vad simuleringen visar. Saknas namn används avsnittstiteln.
+        function simEntries(section) {
+            const v = SIM_NAMES[section.href];
+            const items = v == null ? [section.title] : (Array.isArray(v) ? v : [v]);
+            return items.map(it => (typeof it === 'string')
+                ? { name: it, desc: section.description, href: section.href, num: section.num }
+                : { name: it.name, desc: it.desc || section.description, href: it.href || section.href, num: section.num });
+        }
+
+        const normalize = (text) => text.toLowerCase()
+            .replace(/å/g, 'a').replace(/ä/g, 'a').replace(/ö/g, 'o')
+            .replace(/é/g, 'e').replace(/è/g, 'e');
+
+        const HAYSTACKS = KF.map(sim =>
+            normalize([sim.title, sim.description, sim.course, sim.chapter, ...(sim.keywords || [])].join(' '))
+        );
+
+        function Topbar() {
+            return (
+                <div className="lab-topbar">
+                    <div className="lab-topbar-inner">
+                        <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+                    </div>
+                </div>
+            );
+        }
+
+        function SearchBar() {
+            const [query, setQuery] = useState('');
+            const [activeIdx, setActiveIdx] = useState(-1);
+            const [open, setOpen] = useState(false);
+            const wrapRef = useRef(null);
+
+            const matches = useMemo(() => {
+                const q = normalize(query.trim());
+                if (!q) return [];
+                const terms = q.split(/\s+/).filter(t => t.length > 0);
+                if (terms.length === 0) return [];
+                const filtered = KF.filter((_, i) => {
+                    const hay = HAYSTACKS[i] || '';
+                    return terms.every(t => hay.includes(t));
+                });
+                const out = [];
+                for (const sim of filtered) {
+                    const code = sim.course === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
+                    out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
+                    if (sim.href) {
+                        out.push({ ...sim, kind: 'sim', resultHref: sim.href });
+                    }
+                }
+                return out;
+            }, [query]);
+
+            useEffect(() => { setActiveIdx(matches.length > 0 ? 0 : -1); }, [matches.length, query]);
+
+            useEffect(() => {
+                const onDocClick = (e) => {
+                    if (!wrapRef.current) return;
+                    if (!wrapRef.current.contains(e.target)) setOpen(false);
+                };
+                document.addEventListener('click', onDocClick);
+                return () => document.removeEventListener('click', onDocClick);
+            }, []);
+
+            const handleKey = (e) => {
+                if (!open || matches.length === 0) return;
+                if (e.key === 'ArrowDown') { e.preventDefault(); setActiveIdx((activeIdx + 1) % matches.length); }
+                else if (e.key === 'ArrowUp') { e.preventDefault(); setActiveIdx((activeIdx - 1 + matches.length) % matches.length); }
+                else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); window.location.href = matches[activeIdx].resultHref; }
+                else if (e.key === 'Escape') { setQuery(''); setOpen(false); e.target.blur(); }
+            };
+
+            return (
+                <div className="lab-search lab-search--in-header" ref={wrapRef}>
+                    <div className="lab-search-input-wrap">
+                        <span className="lab-search-icon" aria-hidden="true">⌕</span>
+                        <input type="text" value={query} className="lab-search-input"
+                            placeholder="sök — t.ex. coulomb, pendel, magnetfält, ljus…"
+                            autoComplete="off" aria-label="Sök på Fysiklabbet"
+                            onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+                            onFocus={() => { if (query.trim()) setOpen(true); }}
+                            onKeyDown={handleKey} />
+                        {query && (
+                            <button className="lab-search-clear" aria-label="Rensa sökning"
+                                onClick={() => { setQuery(''); setOpen(false); }}>✕</button>
+                        )}
+                    </div>
+                    <div className={'lab-search-results' + (open && query.trim() ? ' visible' : '')} role="listbox">
+                        {open && query.trim() && matches.length === 0 && (
+                            <div className="lab-search-empty">Inget matchar "{query}"</div>
+                        )}
+                        {open && matches.map((sim, idx) => (
+                            <a key={`${sim.course}-${sim.num}-${sim.kind}`} href={sim.resultHref}
+                                className={'lab-search-result' + (idx === activeIdx ? ' active' : '')}
+                                role="option" onMouseEnter={() => setActiveIdx(idx)}>
+                                <span className="lab-search-result-icon">
+                                    {sim.kind === 'teori' ? '📖' : sim.icon}
+                                </span>
+                                <div>
+                                    <div className="lab-search-result-title">
+                                        <span className="lab-search-result-kind">
+                                            {sim.kind === 'teori' ? 'Teori' : 'Simulering'}
+                                        </span>
+                                        {sim.title}
+                                    </div>
+                                    <div className="lab-search-result-desc">{sim.description}</div>
+                                </div>
+                                <div className="lab-search-result-meta">
+                                    {sim.course.toUpperCase()}<br />{sim.num}
+                                </div>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <div className="lab-header">
+                    <div className="lab-header-inner">
+                        <a className="lab-logo" href="index.html">
+                            <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                                <g transform="rotate(-24 18 18)">
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                                    <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                                </g>
+                                <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                            </svg>
+                            <span className="lab-logo-text">Fysiklabbet</span>
+                        </a>
+                        <SearchBar />
+                        <nav className="lab-nav" aria-label="Huvudnavigation">
+                            <a href="index.html">Start</a>
+                            <a href="katalog.html#fy1">Fysik</a>
+                            <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                            <a href="simuleringar.html" className="active">Simuleringar</a>
+                            <a href="om.html">Om</a>
+                            <a href="kontakt.html">Kontakt</a>
+                        </nav>
+                    </div>
+                </div>
+            );
+        }
+
+        // Bygg en lista per kurs: områden (kapitel) i teori-ordning, var och en
+        // med sina simuleringar (avsnitt med href). En simulering som återkommer
+        // under flera avsnitt visas bara vid sin FÖRSTA förekomst i kursen.
+        function buildCourse(courseName) {
+            const course = K['Fysik'].courses[courseName];
+            const seen = new Set();
+            const areas = [];
+            for (const chapterName in course.chapters) {
+                const chapter = course.chapters[chapterName];
+                const sims = [];
+                for (const s of (chapter.sections || [])) {
+                    if (!s.href || seen.has(s.href)) continue;
+                    seen.add(s.href);
+                    sims.push(...simEntries(s));
+                }
+                if (sims.length) areas.push({ name: chapterName, number: chapter.number, sims });
+            }
+            const total = areas.reduce((n, a) => n + a.sims.length, 0);
+            return { areas, total };
+        }
+
+        function SimCatalog() {
+            const courseOrder = ['Fysik', 'Fysik – fördjupning'];
+            const courses = courseOrder.map(name => ({ name, ...buildCourse(name) }));
+            const grandTotal = courses.reduce((n, c) => n + c.total, 0);
+
+            return (
+                <React.Fragment>
+                    <div className="sim-hero">
+                        <span className="lab-mono-label">Alla simuleringar · {grandTotal} st</span>
+                        <h1 className="sim-hero-title">Simuleringar</h1>
+                        <p className="sim-hero-lead">
+                            Alla interaktiva simuleringar samlade på ett ställe — ordnade efter
+                            kurs och område, i samma följd som de dyker upp i teorin. Klicka på
+                            en rad för att öppna simuleringen.
+                        </p>
+                    </div>
+
+                    {courses.map(course => {
+                        const code = course.name === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
+                        return (
+                            <section className="lab-section sim-course" id={code} key={course.name}>
+                                <div className="sim-course-band">
+                                    <span className="sim-course-name">{course.name}</span>
+                                    <span className="lab-mono-label">{course.total} simuleringar</span>
+                                </div>
+                                {course.areas.map(area => (
+                                    <div className="sim-area" key={area.name}>
+                                        <div className="sim-area-head">
+                                            <span className="sim-area-num">
+                                                {String(area.number).padStart(2, '0')}
+                                            </span>
+                                            <span className="sim-area-name">{area.name}</span>
+                                        </div>
+                                        <div className="sim-list">
+                                            {area.sims.map(s => (
+                                                <a className="sim-row" href={s.href} key={s.href + '|' + s.name}>
+                                                    <span className="sim-row-num">{s.num}</span>
+                                                    <span className="sim-row-body">
+                                                        <span className="sim-row-title">{s.name}</span>
+                                                        <span className="sim-row-desc">{s.desc}</span>
+                                                    </span>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </section>
+                        );
+                    })}
+                </React.Fragment>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="lab-section lab-footer">
+                    <span>© 2026 FYSIKLABBET</span>
+                    <span>SKAPAD FÖR GYMNASIEELEVER</span>
+                </footer>
+            );
+        }
+
+        function App() {
+            return (
+                <div className="lab-page">
+                    <Topbar />
+                    <Header />
+                    <SimCatalog />
+                    <Footer />
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+
+    <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+</body>
+</html>

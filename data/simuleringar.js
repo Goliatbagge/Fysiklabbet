@@ -31,6 +31,7 @@ window.SIM_NAMES = {
   'fysik1-acceleration-tid-app.html': 'Acceleration-tid-diagram',
   'fysik1-rorelsediagram.html': 'Rörelsediagram',
   'fysik1-newtons-forsta-app.html': 'Newtons första lag',
+  'fysik1-newtons-andra-app.html': 'Newtons andra lag',
   'fysik1-newtons-tredje-app.html': 'Newtons tredje lag',
   'fysik1-newtons-gravitationslag.html': 'Newtons gravitationslag',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',

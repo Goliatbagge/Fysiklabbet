@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newtons andra lag - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        /* Formel-etiketter */
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        /* Scen-wrapper + fullskärm */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        /* Bara den DIREKTA scen-svg:n ska fylla wrappern (inte ikon-svg i .fs-btn). */
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        /* On-scene ruta uppe till höger: visningsval (kryssrutor) */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .btn-toggle { width: 100%; font-size: 13px; padding: 7px 10px; }
+
+        /* Reglage-rad inom fullskärms-dropdown */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        /* Knappar */
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        .accordion-head {
+            cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600;
+        }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <a href="katalog.html#fy1">Fysik</a>
+                <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            return num.toFixed(decimals).replace('.', ',');
+        };
+
+        // Scengeometri
+        const VBW = 900, VBH = 560;
+        const CX = 450;
+        const FLOOR_Y = 452;          // golvets ovankant
+        const WHEEL_R = 22;
+        const WHEEL_CY = FLOOR_Y - WHEEL_R;
+        const DECK_TOP = 398;         // kärrans flak (ovansida)
+        const PXPM = 26;              // px per meter (golvets skrollhastighet)
+
+        // Fysik
+        const M_CART = 1.0;           // kärrans massa (kg)
+        const VMAX = 25;              // begränsa farten för rimlig animation
+
+        const COL = {
+            f: '#0284c7',  // blå — pålagd kraft
+            a: '#e0701a',  // orange — acceleration
+            chock: '#9333ea', // lila — kraft från bromsklossen
+            ink: '#0f1620',
+        };
+
+        // ── SVG-pil (vit kontur → läsbar mot valfri bakgrund) ─────
+        const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 18, opacity = 1 }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 0.5) return null;
+            const hw = 0.42;
+            const bx = x2 - head * 0.82 * Math.cos(ang);
+            const by = y2 - head * 0.82 * Math.sin(ang);
+            const pL = [x2 - head * Math.cos(ang - hw), y2 - head * Math.sin(ang - hw)];
+            const pR = [x2 - head * Math.cos(ang + hw), y2 - head * Math.sin(ang + hw)];
+            const headPts = `${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`;
+            return (
+                <g opacity={opacity}>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke="#ffffff" strokeWidth={width + 2.2} strokeLinecap="round" />
+                    <polygon points={headPts} fill="#ffffff" stroke="#ffffff" strokeWidth="2.2" strokeLinejoin="round" />
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width} strokeLinecap="round" />
+                    <polygon points={headPts} fill={color} />
+                </g>
+            );
+        };
+
+        const Tag = ({ x, y, color, size = 15, anchor = 'middle', weight = 700, children }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
+                  style={{ paintOrder: 'stroke' }} stroke="#ffffff" strokeWidth="4" strokeLinejoin="round">
+                {children}
+            </text>
+        );
+
+        // ── Reglage ──────────────────────────────────────────────
+        const Slider = ({ label, value, min, max, step, onChange, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 92, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+
+        const FsSlider = ({ label, value, min, max, step, unit, onChange, decimals = 1 }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 120 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 76, textAlign: 'right' }}>
+                    {fmt(value, decimals)} {unit}
+                </span>
+            </div>
+        );
+
+        // ── Digital hastighetsmätare (sitter på objektet) ─────────
+        const Speedo = ({ cx, cy, v }) => {
+            const moving = Math.abs(v) > 0.05;
+            const dir = v > 0.05 ? '▶' : v < -0.05 ? '◀' : '•';
+            return (
+                <g>
+                    <line x1={cx} y1={cy + 22} x2={cx} y2={cy + 34} stroke="#11161f" strokeWidth="3" />
+                    <rect x={cx - 52} y={cy - 24} width="104" height="48" rx="8" fill="#11161f" stroke="#05080d" strokeWidth="2" />
+                    <rect x={cx - 47} y={cy - 19} width="94" height="38" rx="5" fill="#0a0f17" />
+                    <text x={cx - 38} y={cy + 2} textAnchor="middle" fontSize="13"
+                          fill={moving ? '#ffd166' : '#5a6573'}>{dir}</text>
+                    <text x={cx + 6} y={cy + 4} textAnchor="middle" fontSize="22" fontWeight="600"
+                          fontFamily="'JetBrains Mono', monospace" fill="#ffd166">{fmt(Math.abs(v), 1)}</text>
+                    <text x={cx + 6} y={cy + 17} textAnchor="middle" fontSize="9"
+                          fontFamily="'JetBrains Mono', monospace" fill="#aeb8c4" letterSpacing="0.08em">m/s</text>
+                </g>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCEN
+        // ════════════════════════════════════════════════════════
+        const CartScene = ({ scroll, cartOff, v, massObj, forceMag, forceDir, show, svgRef }) => {
+            const mTot = M_CART + massObj;
+            const appliedF = forceDir !== 0 ? forceMag : 0;
+            const Fres = appliedF;                      // resulterande kraft (enda horisontella kraften)
+            const aMag = Fres / mTot;
+
+            // Vagnens mitt — förskjuts (cartOff) när den drar ifrån kameran och lämnar bild.
+            const cartCX = CX + cartOff;
+
+            // objektets storlek växer med massan
+            const s = 46 + (massObj - 1) * 4;
+            const objTop = DECK_TOP - s;
+
+            // hjulrotation (rullar utan att slira) — total sträcka = kameraskroll + vagnens egen förskjutning
+            const wheelAng = ((scroll + cartOff) / WHEEL_R) * 180 / Math.PI;
+
+            // golvmarkeringar som skrollar (visar rörelsen)
+            const gap = 70;
+            const marks = [];
+            for (let i = -1; i < VBW / gap + 2; i++) {
+                const x = i * gap - (((scroll % gap) + gap) % gap);
+                marks.push(<rect key={'m' + i} x={x} y={FLOOR_Y + 16} width="30" height="6" rx="3" fill="#b9ad97" opacity="0.9" />);
+            }
+
+            // pillängder
+            const Lf = appliedF > 0 ? 50 + appliedF * 5 : 0;  // min synlig längd, växer med kraften
+            const La = Math.min(aMag * 26, 160);
+            const fLabelX = cartCX + forceDir * Math.max(Lf + 10, 104); // etikett förbi kärran
+
+            const F_Y = DECK_TOP + 8;     // kraftpilens höjd (genom flaket)
+            const A_Y = 214;              // accelerationspilens höjd (ovanför objektet)
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid slice"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#d9cfb9" />
+                            <stop offset="100%" stopColor="#cabfa6" />
+                        </linearGradient>
+                        <linearGradient id="deck" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#9aa0a9" />
+                            <stop offset="100%" stopColor="#767c86" />
+                        </linearGradient>
+                        <linearGradient id="crate" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#d2a25c" />
+                            <stop offset="100%" stopColor="#b9863f" />
+                        </linearGradient>
+                    </defs>
+
+                    {/* bakgrund: vägg + golv */}
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#wall)" />
+                    <rect x="0" y={FLOOR_Y} width={VBW} height={VBH - FLOOR_Y} fill="url(#floor)" />
+                    <rect x="0" y={FLOOR_Y} width={VBW} height="3" fill="#a89c84" />
+                    {marks}
+
+                    {/* Resulterande kraft — utskriven ovanför vagnen */}
+                    <Tag x={cartCX} y={72} color={COL.ink} size={19}>
+                        <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">R</tspan><tspan dy="-4"> = {fmt(Fres, 1)} N</tspan>
+                    </Tag>
+
+                    {/* ── KÄRRAN (golvet skrollar; vid hög fart drar vagnen ifrån via cartOff) ── */}
+                    <g transform={`translate(${cartCX}, 0)`}>
+                        {/* skugga */}
+                        <ellipse cx="0" cy={FLOOR_Y + 6} rx="120" ry="9" fill="rgba(15,22,32,0.16)" />
+
+                        {/* objektet på flaket */}
+                        <g>
+                            <rect x={-s / 2} y={objTop} width={s} height={s} rx="5"
+                                  fill="url(#crate)" stroke="#8a5f24" strokeWidth="2.5" />
+                            <line x1={-s / 2 + 4} y1={objTop + 7} x2={s / 2 - 4} y2={objTop + 7}
+                                  stroke="#8a5f24" strokeWidth="1.5" opacity="0.5" />
+                            <Tag x="0" y={objTop + s / 2 + 6} color="#3a2a10" size={s > 60 ? 17 : 14}>
+                                <tspan fontStyle="italic">m</tspan> = {fmt(massObj, 1)} kg
+                            </Tag>
+                        </g>
+
+                        {/* flak */}
+                        <rect x="-96" y={DECK_TOP} width="192" height="16" rx="4" fill="url(#deck)" stroke="#5b606a" strokeWidth="2" />
+                        <rect x="-96" y={DECK_TOP} width="192" height="5" rx="2" fill="#aeb4bd" opacity="0.7" />
+                        {/* flak-kanter (liten list så objektet "ligger" på kärran) */}
+                        <rect x="-96" y={DECK_TOP - 6} width="6" height="8" rx="2" fill="#6b7079" />
+                        <rect x="90" y={DECK_TOP - 6} width="6" height="8" rx="2" fill="#6b7079" />
+
+                        {/* hjul */}
+                        {[-58, 58].map((wx) => (
+                            <g key={'w' + wx} transform={`translate(${wx}, ${WHEEL_CY})`}>
+                                <circle r={WHEEL_R} fill="#1b1e24" stroke="#0d0f12" strokeWidth="3" />
+                                <circle r={WHEEL_R - 4} fill="none" stroke="#2c313a" strokeWidth="3" />
+                                <g transform={`rotate(${wheelAng})`}>
+                                    <circle r="8" fill="#c8ccd4" />
+                                    <circle r="3" fill="#7b8290" />
+                                    {[0, 60, 120, 180, 240, 300].map((ang) => (
+                                        <rect key={ang} x="-1.8" y="-8" width="3.6" height="7" rx="1.4"
+                                              fill="#9aa1ad" transform={`rotate(${ang})`} />
+                                    ))}
+                                </g>
+                            </g>
+                        ))}
+                    </g>
+
+                    {/* ── KRAFT (pålagd på kärran) ── */}
+                    {show.forces && appliedF > 0 && (
+                        <g>
+                            <Arrow x1={cartCX} y1={F_Y} x2={cartCX + forceDir * Lf} y2={F_Y} color={COL.f} width={7} head={20} />
+                            <circle cx={cartCX} cy={F_Y} r="4.5" fill={COL.f} stroke="#ffffff" strokeWidth="1.5" />
+                            <Tag x={fLabelX} y={F_Y - 8} color={COL.f} size={15} anchor={forceDir > 0 ? 'start' : 'end'}>
+                                <tspan fontStyle="italic">F</tspan> = {fmt(forceMag, 1)} N
+                            </Tag>
+                        </g>
+                    )}
+
+                    {/* ── ACCELERATION ── */}
+                    {show.accel && (
+                        aMag > 0.001 ? (
+                            <g>
+                                <Arrow x1={cartCX} y1={A_Y} x2={cartCX + forceDir * La} y2={A_Y} color={COL.a} width={6} head={18} />
+                                <Tag x={cartCX + forceDir * (La / 2)} y={A_Y - 14} color={COL.a} size={15}>
+                                    <tspan fontStyle="italic">a</tspan> = {fmt(aMag)} m/s²
+                                </Tag>
+                            </g>
+                        ) : (
+                            <Tag x={cartCX} y={A_Y} color="var(--lab-ink-muted)" size={14}>
+                                <tspan fontStyle="italic">a</tspan> = 0 — konstant fart
+                            </Tag>
+                        )
+                    )}
+
+                    {/* digital hastighetsmätare på objektet */}
+                    <Speedo cx={cartCX} cy={objTop - 30} v={v} />
+                </svg>
+            );
+        };
+
+        // ── Formelkort: F_R = m · a  ⟺  a = F_R / m = värden = resultat ──
+        // Mönster enligt CLAUDE.md (densiteten är referens): varje variabel får
+        // sitt NAMN som etikett över symbolen. F_R = den RESULTERANDE kraften.
+        // ALLT ligger på EN items-center-rad så att operatorer (=, ·, ⟺), bråk
+        // och variabler hamnar på samma mittlinje (ingen del högre/lägre).
+        // Variabel med ord-etikett ovanför. En osynlig spacer-etikett UNDER
+        // symbolen (lika hög som etiketten) centrerar själva symbolen i rutan,
+        // så att den linjerar med bråkens mittlinje på items-center-raden.
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        // Bråk med rakt divisionsstreck (täljare över nämnare).
+        const Frac = ({ top, bottom, size = 19 }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15, fontSize: size }}>
+                <span style={{ padding: '0 8px 3px' }}>{top}</span>
+                <span style={{ padding: '3px 8px 0', borderTop: '2px solid currentColor', alignSelf: 'stretch', textAlign: 'center' }}>{bottom}</span>
+            </div>
+        );
+        const FormulaCard = ({ Fres, m, a }) => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Resulterande kraft"><em>F</em><sub>R</sub></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Massa"><em>m</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Acceleration"><em>a</em></Vbl>
+                <span className="fnum" style={{ margin: '0 4px' }}>⟺</span>
+                <span className="fnum"><em>a</em> =</span>
+                <Frac top={<span><em>F</em><sub>R</sub></span>} bottom={<em>m</em>} />
+                <span className="fnum">=</span>
+                <Frac top={`${fmt(Fres, 1)} N`} bottom={`${fmt(m, 1)} kg`} size={15} />
+                <span className="fnum">=</span>
+                <span className="fnum">{fmt(a)} m/s²</span>
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [massObj, setMassObj] = useState(3);     // objektets massa (kg)
+            const [force, setForce] = useState(0);         // pålagd kraft, signerad (−20 N vänster … +20 N höger)
+            const [running, setRunning] = useState(true);
+            const [v, setV] = useState(0);
+            const [scroll, setScroll] = useState(0);
+            const [cartOff, setCartOff] = useState(0);     // vagnens offset när den drar ifrån kameran
+            const [show, setShow] = useState({ forces: true, accel: true });
+
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const rafRef = useRef(null);
+            const lastRef = useRef(null);
+            const vRef = useRef(0);
+            const cartOffRef = useRef(0);
+
+            const mTot = M_CART + massObj;
+            const forceDir = Math.sign(force);                  // -1 vänster, 0, +1 höger
+            const appliedF = Math.abs(force);                   // den pålagda kraftens storlek
+            const Fres = appliedF;                              // resulterande kraft (enda horisontella kraften)
+            const aMag = Fres / mTot;
+
+            // animationsloop — kraften driver rörelsen direkt (a → v → golvskroll)
+            useEffect(() => {
+                if (!running) { lastRef.current = null; return; }
+                const step = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const a = force / (M_CART + massObj);
+                    let nv = vRef.current + a * dt;
+                    if (nv > 999) nv = 999;
+                    if (nv < -999) nv = -999;   // säkerhetsgräns mot orimliga tal
+                    vRef.current = nv;
+                    setV(nv);
+                    // Kameran följer vagnen upp till sin pan-gräns (VMAX). Går vagnen
+                    // fortare drar den ifrån (cartOff växer) och försvinner ur bild —
+                    // farten fortsätter öka. Naturligt slut när vagnen är helt ute.
+                    const camV = Math.max(-VMAX, Math.min(VMAX, nv));
+                    setScroll((sc) => sc + camV * PXPM * dt);
+                    cartOffRef.current += (nv - camV) * PXPM * dt;
+                    setCartOff(cartOffRef.current);
+                    if (Math.abs(cartOffRef.current) > VBW / 2 + 160) {
+                        setRunning(false);
+                        return;
+                    }
+                    rafRef.current = requestAnimationFrame(step);
+                };
+                rafRef.current = requestAnimationFrame(step);
+                return () => cancelAnimationFrame(rafRef.current);
+            }, [running, force, massObj]);
+
+            // fullskärm
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
+            // Börja om: ställ tillbaka kärran i vila i bildens mitt. Finns en kraft
+            // kvar börjar den genast accelerera igen.
+            const reset = () => { vRef.current = 0; setV(0); setScroll(0); cartOffRef.current = 0; setCartOff(0); setRunning(true); };
+
+            // Primärknapp: pausar/fortsätter rörelsen (kraften driver den direkt).
+            const primaryLabel = running ? '⏸ Pausa' : '▶ Fortsätt';
+            const primaryAction = () => setRunning((r) => !r);
+
+            // Visningsval (kryssrutor) uppe till höger — i BÅDE normalt läge och
+            // fullskärm. Anropas som funktion {sceneToggles()} (inte <SceneToggles/>)
+            // så att noderna inte monteras om varje bildruta (≈60 fps).
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label>
+                        <input type="checkbox" checked={show.forces} onChange={() => tShow('forces')} />
+                        <span>Visa krafter</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={show.accel} onChange={() => tShow('accel')} />
+                        <span>Visa acceleration</span>
+                    </label>
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
+                            <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik</a> / Newtons andra lag
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Newtons andra lag</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            En <strong>kraft</strong> ger en kropp en <strong>acceleration</strong> i kraftens riktning. Ju större
+                            massa, desto trögare är kroppen att sätta i rörelse. Lägg på en kraft på kärran åt vänster eller
+                            höger, ändra objektets massa och se hur accelerationen — och därmed farten — ändras.
+                        </p>
+
+                        <FormulaCard Fres={Fres} m={mTot} a={aMag} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <CartScene scroll={scroll} cartOff={cartOff} v={v} massObj={massObj} forceMag={appliedF}
+                                               forceDir={forceDir} show={show} svgRef={svgRef} />
+
+                                    <div className="scene-hint">Luftmotstånd och friktionskrafter försummas.</div>
+
+                                    {/* Visningsval uppe till höger (normalt + fullskärm) */}
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: flytande reglage i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Objektets massa" value={massObj} min={1} max={10} step={0.5}
+                                                          unit="kg" decimals={1} onChange={setMassObj} />
+                                                <FsSlider label="Kraft (− vänster / + höger)" value={force} min={-20} max={20} step={1}
+                                                          unit="N" decimals={1} onChange={setForce} />
+                                                <div className="fs-row" style={{ justifyContent: 'center', gap: 14, marginTop: 8 }}>
+                                                    <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
+                                                    <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
+                                                </div>
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'} aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6" />
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                {/* Reglage */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Objektets massa <em>m</em>" value={massObj} min={1} max={10} step={0.5} onChange={setMassObj}>
+                                        <span className="font-mono font-semibold text-sm flex-shrink-0"
+                                              style={{ minWidth: 64, textAlign: 'right', color: 'var(--lab-accent)' }}>
+                                            {fmt(massObj, 1)} kg
+                                        </span>
+                                    </Slider>
+                                    <Slider label="Kraft <em>F</em> (◀ vänster / höger ▶)" value={force} min={-20} max={20} step={1} onChange={setForce}>
+                                        <span className="font-mono font-semibold text-sm flex-shrink-0"
+                                              style={{ minWidth: 70, textAlign: 'right', color: 'var(--lab-accent)' }}>
+                                            {force === 0 ? '0,0 N' : (force < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force), 1) + ' N'}
+                                        </span>
+                                    </Slider>
+                                </div>
+
+                                {/* Styrning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Styrning</div>
+                                    <div className="flex gap-2">
+                                        <button className="btn-toggle flex-1" onClick={primaryAction}>{primaryLabel}</button>
+                                        <button className="btn-toggle flex-1" onClick={reset}>↻ Börja om</button>
+                                    </div>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="grid grid-cols-3 gap-2 text-center">
+                                        <div>
+                                            <div style={{ color: COL.f, fontWeight: 700, fontSize: 18 }}>{fmt(Fres, 1)} N</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>resulterande <em>F</em><sub>R</sub></div>
+                                        </div>
+                                        <div>
+                                            <div style={{ color: COL.a, fontWeight: 700, fontSize: 18 }}>{fmt(aMag)} m/s²</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>accel. <em>a</em></div>
+                                        </div>
+                                        <div>
+                                            <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 18 }}>{fmt(Math.abs(v))} m/s</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>fart <em>v</em></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Info */}
+                                <div className="glass-card rounded-xl p-4">
+                                    <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
+                                        Så hänger det ihop
+                                    </h3>
+                                    <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Accelerationen är konstant så länge kraften ligger på — farten ökar då jämnt. Tar du
+                                        bort kraften (<em>F</em><sub>R</sub> = 0) blir accelerationen noll och kärran rullar vidare med
+                                        <em> konstant</em> fart (Newtons första lag). Lägg kraften åt motsatt håll mot rörelsen
+                                        för att bromsa.
+                                    </p>
+                                    <p className="text-sm mt-2 pt-2" style={{ color: 'var(--lab-ink-soft)', borderTop: '1px solid var(--lab-line)' }}>
+                                        💡 Luftmotstånd och friktionskrafter försummas, så den pålagda kraften är den enda
+                                        horisontella kraften på systemet (kärra + objekt).
+                                    </p>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>⚖️ Kraft och massa</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Dubbelt så stor kraft ger dubbelt så stor acceleration. Dubbelt så stor massa ger
+                                    hälften så stor acceleration. Sambandet är <em>a</em> = <em>F</em><sub>R</sub> / <em>m</em>,
+                                    där <em>F</em><sub>R</sub> är den resulterande kraften.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>➡️ Riktning</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Accelerationen pekar alltid åt samma håll som den resulterande kraften. Pekar kraften
+                                    mot rörelsen bromsas kroppen in, byter riktning och accelererar åt andra hållet.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>🧭 Enheten newton</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    1 N är den kraft som ger massan 1 kg accelerationen 1 m/s². Alltså
+                                    1 N = 1 kg·m/s² — det följer direkt ur <em>F</em><sub>R</sub> = <em>m</em> · <em>a</em>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>⚠️ Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Kraft ger fart.”</strong> Nej — en kraft ger <em>acceleration</em>, alltså en
+                                    <em> ändring</em> av farten. En konstant kraft ger ständigt ökande fart, inte en konstant fart.</li>
+                                <li><strong>”Ingen kraft betyder att kroppen stannar.”</strong> Nej — utan resulterande kraft
+                                    fortsätter kroppen med konstant fart (Newtons första lag). Här rullar kärran vidare när du tar bort kraften.</li>
+                                <li><strong>”Tunga föremål accelererar lika lätt som lätta.”</strong> Nej — vid samma kraft får
+                                    det tyngre föremålet mindre acceleration, eftersom <em>a</em> = <em>F</em><sub>R</sub> / <em>m</em>.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

@@ -84,7 +84,8 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-newtons-forsta-app.html',
     // om.html och kontakt.html använder nu Laborans-headern (inte gamla
     // navbar-mallen) — de testas inte med samma kontroll. Samma sak gäller
-    // index.html, katalog.html, avsnitt.html, fysik1.html, fysik2.html.
+    // index.html, katalog.html, avsnitt.html, simuleringar.html, fysik1.html,
+    // fysik2.html.
 ];
 
 let hasErrors = false;

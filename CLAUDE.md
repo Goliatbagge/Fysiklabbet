@@ -361,8 +361,18 @@ Gäller överallt formler visas (ingress, header, paneler, förklaringar):
 
 1. **Raka divisionsstreck** — aldrig `/` mellan täljare och nämnare.
    Snedstreck endast i sammansatta enheter (`m/s`, `kg/m³`).
-2. **Definiera beteckningar** — varje variabel får beskrivande etikett
-   (ord) ovanför/under, eller i intilliggande lista.
+2. **Definiera beteckningar med ord-etikett ovanför/under variabeln**
+   (OBLIGATORISKT, inte valfritt). Varje variabel i formelkortet får sitt
+   *namn* satt som en liten etikett **direkt ovanför täljaren och under
+   nämnaren** (och ovanför/intill resultatvariabeln) — t.ex. MASSA över
+   *m*, VOLYM under *V*, RESULTERANDE KRAFT över *F*_R. Exakt som i
+   densitets- och Newtons andra lag-korten. Det räcker INTE att bara skriva
+   `a = F/m = värde` med symbolerna — varje symbol ska ha sitt ord.
+   En intilliggande lista (`där …`) är endast nödfallsutväg när utrymmet är
+   för trångt; förstahandsvalet är alltid etikett över/under. **Gäller även
+   React/JSX-formelkort i headern**, inte bara canvas/densitet — använd
+   `.flbl`-spann över/under variabel-spannen. Vanlig fälla: man bygger ett
+   snabbt JSX-bråk `a = F/m` utan ord-etiketter — det är fel.
 3. **Insatta värden har SI-enheter** — `5,0 kg`, inte bara `5,0`.
 4. **Variabler kursiv, enheter rakt** (se Typografi).
 5. **Multiplikationstecken `⋅` (U+22C5) skrivs alltid ut** mellan faktorer
@@ -372,6 +382,26 @@ Gäller överallt formler visas (ingress, header, paneler, förklaringar):
    ovanför variablerna: använd `items-end` (inte `items-center`) på
    flex-containern så att `=`, `·`, `sin`, `+`, `−` ligger på variablernas
    baslinje.
+7. **Vertikal linjering i fleruttrycks-formler (OBLIGATORISKT)** — när ett
+   formelkort har flera former på rad (t.ex.
+   `F_R = m · a  ⟺  a = F_R/m = värden = resultat`) eller **blandar
+   variabler-med-ord-etikett och bråk**, ska ALLA delar ligga på *samma
+   mittlinje*. Operatorer (`=`, `·`, `⟺`, `⟹`), bråk och variabler får
+   aldrig hamna högre eller lägre än varandra. Lägg hela formeln på **EN
+   `items-center`-rad** (inte separata grupper med olika alignment).
+   ⚠️ Vanligaste fällan: en variabel med ord-etikett *ovanför* (utan
+   motvikt under) trycks ned **under** bråkens mittlinje, så vänsterledet
+   hamnar lägre än högerledet. Lös det med en **osynlig spacer-etikett
+   under symbolen** (lika hög som etiketten) så att symbolen centreras i
+   sin ruta:
+   ```jsx
+   <div className="flex flex-col items-center">
+     <span className="flbl">Massa</span>
+     <span className="fnum"><em>m</em></span>
+     <span className="flbl" aria-hidden="true" style={{visibility:'hidden'}}>Massa</span>
+   </div>
+   ```
+   Referensimpl: `fysik1-newtons-andra-app.html` (`Vbl`/`Frac`-helpers).
 
 Mönster (densitetssimuleringen är referens):
 
@@ -389,7 +419,8 @@ täljare och nämnare. I canvas: rita en horisontell linje, inte `/`.
 **Central formel ska ligga i formelkort i headern**, direkt under
 ingressparagrafen — inte gömd i sidopanelen, och inte inbäddad i
 ingresstextens löptext med snedstreck. Referensimpl:
-`fysik2-energinivaer.html`.
+`fysik2-energinivaer.html`, `fysik1-densitet-app.html` (etiketter över/under)
+och `fysik1-newtons-andra-app.html` (etiketter + *F*_R för resulterande kraft).
 
 ### Vektorpilar: hastighet vs kraft
 
@@ -473,8 +504,12 @@ Vid varje skärmdumpsgranskning, kontrollera **systematiskt**:
    regel ovan.
 5. **Fältlinjepilar i samma kolumn/rad** (vinkelrätt mot fältriktningen)
    och **homogen täthet** mellan parallella fältlinjer.
+6. **Formelkort linjerat på en mittlinje** — alla led, operatorer (`=`,
+   `·`, `⟺`, `⟹`) och bråk ligger på samma nivå; inget högerled hamnar
+   högre/lägre än vänsterledet, och varje variabel har sin ord-etikett
+   över/under (se Formelpresentation punkt 2 och 7).
 
-Markera först som klart när skärmdumpen passerar alla fem kontroller.
+Markera först som klart när skärmdumpen passerar alla sex kontroller.
 
 ## Fysikämnen
 

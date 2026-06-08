@@ -112,6 +112,26 @@
             border-color: var(--lab-ink, #0f1620);
         }
 
+        /* ── Lägesflikar (Utan / Med luftmotstånd) ───────────────── */
+        .tab-button {
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            background: transparent;
+            color: var(--lab-ink-soft, #3a4151);
+            border-color: transparent;
+        }
+        .tab-button.active-explore,
+        .tab-button.active-buoyancy {
+            background: var(--lab-ink, #0f1620);
+            border-color: var(--lab-ink, #0f1620);
+            color: var(--lab-bg, #f3eee4);
+            box-shadow: none;
+        }
+        .tab-button:hover:not(.active-explore):not(.active-buoyancy) {
+            color: var(--lab-ink, #0f1620);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg-panel, #ffffff);
+        }
+
         .accordion-head {
             cursor: pointer; display: flex; justify-content: space-between;
             align-items: center; font-weight: 600;
@@ -159,6 +179,8 @@
             if (!isFinite(num)) return '–';
             return num.toFixed(decimals).replace('.', ',');
         };
+        // Signerad term till resultant-uttrycket: negativa krafter i parentes.
+        const fmtTerm = (n) => n < 0 ? `(−${fmt(Math.abs(n), 1)} N)` : `${fmt(n, 1)} N`;
 
         // Scengeometri
         const VBW = 900, VBH = 560;
@@ -172,13 +194,41 @@
         // Fysik
         const M_CART = 1.0;           // kärrans massa (kg)
         const VMAX = 25;              // begränsa farten för rimlig animation
+        // Luftmotstånd: F_luft = DRAG_K · v (proportionell mot farten, motriktad
+        // rörelsen). DRAG_K vald så att vid v = VMAX (25 m/s) ger den 40 N — lika
+        // med den maximala pålagda kraften (20 N + 20 N) → resulterande kraft 0
+        // och konstant fart (terminalfart).
+        const DRAG_K = (2 * 20) / VMAX;   // = 1,6 N per (m/s)
 
         const COL = {
-            f: '#0284c7',  // blå — pålagd kraft
+            f: '#0284c7',  // blå — kraft F₁
+            f2: '#0d9488', // teal — kraft F₂
             a: '#e0701a',  // orange — acceleration
+            air: '#8b3a9e', // lila — luftmotstånd
             chock: '#9333ea', // lila — kraft från bromsklossen
             ink: '#0f1620',
         };
+
+        // Deterministisk hash (0..1) — driver kollisionspartiklarnas positioner.
+        const hash = (n) => {
+            let h = (n * 2654435761) >>> 0;
+            h ^= h >>> 15; h = (h * 2246822519) >>> 0; h ^= h >>> 13;
+            return (h >>> 0) / 4294967296;
+        };
+
+        // Luftpartiklar — fasta (deterministiska) startpositioner som strömmar
+        // förbi kärran och visualiserar luften i luftmotståndsläget.
+        const AIR_PARTICLES = (() => {
+            let seed = 1337;
+            const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+            return Array.from({ length: 70 }, () => ({
+                x: rnd() * VBW,
+                y: 60 + rnd() * 376,        // över scenluften, ovanför golvet
+                spd: 0.8 + rnd() * 0.5,     // parallax-variation
+                r: 1.5 + rnd() * 1.1,       // liten variation i prickstorlek
+                op: 0.18 + rnd() * 0.26,
+            }));
+        })();
 
         // ── SVG-pil (vit kontur → läsbar mot valfri bakgrund) ─────
         const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 18, opacity = 1 }) => {
@@ -253,11 +303,12 @@
         // ════════════════════════════════════════════════════════
         //  SCEN
         // ════════════════════════════════════════════════════════
-        const CartScene = ({ scroll, cartOff, v, massObj, forceMag, forceDir, show, svgRef }) => {
+        const CartScene = ({ scroll, cartOff, v, massObj, f1, f2, fair, airMode, show, svgRef }) => {
             const mTot = M_CART + massObj;
-            const appliedF = forceDir !== 0 ? forceMag : 0;
-            const Fres = appliedF;                      // resulterande kraft (enda horisontella kraften)
-            const aMag = Fres / mTot;
+            const Fres = f1 + f2 + fair;                // resulterande kraft (inkl. luftmotstånd)
+            const forceDir = Math.sign(Fres);           // -1 vänster, 0, +1 höger
+            const appliedF = Math.abs(Fres);            // resulterande kraftens storlek
+            const aMag = appliedF / mTot;
 
             // Vagnens mitt — förskjuts (cartOff) när den drar ifrån kameran och lämnar bild.
             const cartCX = CX + cartOff;
@@ -277,13 +328,54 @@
                 marks.push(<rect key={'m' + i} x={x} y={FLOOR_Y + 16} width="30" height="6" rx="3" fill="#b9ad97" opacity="0.9" />);
             }
 
-            // pillängder
-            const Lf = appliedF > 0 ? 50 + appliedF * 5 : 0;  // min synlig längd, växer med kraften
+            // accelerationspilens längd
             const La = Math.min(aMag * 26, 160);
-            const fLabelX = cartCX + forceDir * Math.max(Lf + 10, 104); // etikett förbi kärran
 
-            const F_Y = DECK_TOP + 8;     // kraftpilens höjd (genom flaket)
+            const F1_Y = DECK_TOP - 6;    // F₁-pilen (övre, strax ovanför flaket)
+            const F2_Y = DECK_TOP + 16;   // F₂-pilen (nedre, vid flakets underkant)
+            const AIR_Y = 280;            // luftmotståndspilen (ovanför objektet)
             const A_Y = 214;              // accelerationspilens höjd (ovanför objektet)
+
+            // En enskild kraftpil från kärrans mitt. Längden växer med kraftens
+            // storlek (kapas för mycket stora krafter); etiketten hamnar förbi
+            // kärran (åt pilens håll).
+            const forceArrow = (fi, y, color, sub) => {
+                if (!(Math.abs(fi) > 0.05)) return null;
+                const dir = Math.sign(fi);
+                const L = Math.min(44 + Math.abs(fi) * 5, 160);
+                const labelX = cartCX + dir * Math.max(L + 12, 108);
+                return (
+                    <g>
+                        <Arrow x1={cartCX} y1={y} x2={cartCX + dir * L} y2={y} color={color} width={6} head={18} />
+                        <circle cx={cartCX} cy={y} r="4.5" fill={color} stroke="#ffffff" strokeWidth="1.5" />
+                        <Tag x={labelX} y={y - 7} color={color} size={14} anchor={dir > 0 ? 'start' : 'end'}>
+                            <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">{sub}</tspan><tspan dy="-3"> = {fmt(Math.abs(fi), 1)} N</tspan>
+                        </Tag>
+                    </g>
+                );
+            };
+
+            // Krascheffekter PÅ lådans/kärrans framkant (inte framför den). Luft-
+            // fältet i övrigt är jämnt fördelat; här markeras bara träffarna.
+            // Antalet (nCrash) och takten växer med farten → fler kollisioner =
+            // större luftmotstånd. Allt är deterministiska funktioner av scroll.
+            const speedAbs = Math.abs(v);
+            const cartDir = Math.sign(v) || 1;
+            const crateHalf = s / 2;
+            // kärrans frontprofil: lådans kant högt upp, flakets kant längre ned.
+            const frontEdgeAt = (yy) =>
+                (yy >= objTop && yy <= DECK_TOP) ? cartCX + cartDir * crateHalf
+                                                 : cartCX + cartDir * 92;
+            const nCrash = (airMode && show.airParticles && speedAbs > 0.4)
+                ? Math.round(Math.min(speedAbs * 0.62, 14)) : 0;
+            const crashes = [];
+            for (let i = 0; i < nCrash; i++) {
+                const t = scroll * 0.05 + i * 1.73;
+                const cycle = Math.floor(t);
+                const op = Math.sin((t - cycle) * Math.PI);      // tonar in/ut över livscykeln
+                const yy = objTop + hash(i * 5 + cycle) * (FLOOR_Y - 8 - objTop);
+                crashes.push({ x: frontEdgeAt(yy), y: yy, op, key: i });
+            }
 
             return (
                 <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid slice"
@@ -313,9 +405,19 @@
                     <rect x="0" y={FLOOR_Y} width={VBW} height="3" fill="#a89c84" />
                     {marks}
 
+                    {/* luftpartiklar — prickar som driver baklänges relativt kärran */}
+                    {airMode && show.airParticles && (
+                        <g>
+                            {AIR_PARTICLES.map((p, i) => {
+                                const x = (((p.x - scroll * p.spd) % VBW) + VBW) % VBW;
+                                return <circle key={'air' + i} cx={x} cy={p.y} r={p.r} fill="#6b7280" opacity={p.op} />;
+                            })}
+                        </g>
+                    )}
+
                     {/* Resulterande kraft — utskriven ovanför vagnen */}
                     <Tag x={cartCX} y={72} color={COL.ink} size={19}>
-                        <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">R</tspan><tspan dy="-4"> = {fmt(Fres, 1)} N</tspan>
+                        <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">R</tspan><tspan dy="-4"> = {fmt(appliedF, 1)} N</tspan>
                     </Tag>
 
                     {/* ── KÄRRAN (golvet skrollar; vid hög fart drar vagnen ifrån via cartOff) ── */}
@@ -358,14 +460,12 @@
                         ))}
                     </g>
 
-                    {/* ── KRAFT (pålagd på kärran) ── */}
-                    {show.forces && appliedF > 0 && (
+                    {/* ── KRAFTER (krafterna på kärran, summan = F_R) ── */}
+                    {show.forces && (
                         <g>
-                            <Arrow x1={cartCX} y1={F_Y} x2={cartCX + forceDir * Lf} y2={F_Y} color={COL.f} width={7} head={20} />
-                            <circle cx={cartCX} cy={F_Y} r="4.5" fill={COL.f} stroke="#ffffff" strokeWidth="1.5" />
-                            <Tag x={fLabelX} y={F_Y - 8} color={COL.f} size={15} anchor={forceDir > 0 ? 'start' : 'end'}>
-                                <tspan fontStyle="italic">F</tspan> = {fmt(forceMag, 1)} N
-                            </Tag>
+                            {forceArrow(f1, F1_Y, COL.f, '1')}
+                            {forceArrow(f2, F2_Y, COL.f2, '2')}
+                            {airMode && forceArrow(fair, AIR_Y, COL.air, 'luft')}
                         </g>
                     )}
 
@@ -387,6 +487,22 @@
 
                     {/* digital hastighetsmätare på objektet */}
                     <Speedo cx={cartCX} cy={objTop - 30} v={v} />
+
+                    {/* krascheffekter PÅ kärrans framkant (samma neutrala färg) */}
+                    {nCrash > 0 && (
+                        <g>
+                            {crashes.map((c) => (
+                                <g key={'cr' + c.key} opacity={c.op}>
+                                    {[-1, -0.4, 0.4, 1].map((a, j) => (
+                                        <line key={j} x1={c.x} y1={c.y}
+                                              x2={c.x + cartDir * 3} y2={c.y + a * 6}
+                                              stroke="#5a6370" strokeWidth="1.5" strokeLinecap="round" />
+                                    ))}
+                                    <circle cx={c.x} cy={c.y} r={1.4 + 1.6 * c.op} fill="#5a6370" />
+                                </g>
+                            ))}
+                        </g>
+                    )}
                 </svg>
             );
         };
@@ -433,12 +549,14 @@
         // ── Huvudapp ─────────────────────────────────────────────
         const App = () => {
             const [massObj, setMassObj] = useState(3);     // objektets massa (kg)
-            const [force, setForce] = useState(0);         // pålagd kraft, signerad (−20 N vänster … +20 N höger)
+            const [force1, setForce1] = useState(0);       // kraft F₁, signerad (−20 N vänster … +20 N höger)
+            const [force2, setForce2] = useState(0);       // kraft F₂, signerad
+            const [airMode, setAirMode] = useState(false); // false = idealt, true = med luftmotstånd
             const [running, setRunning] = useState(true);
             const [v, setV] = useState(0);
             const [scroll, setScroll] = useState(0);
             const [cartOff, setCartOff] = useState(0);     // vagnens offset när den drar ifrån kameran
-            const [show, setShow] = useState({ forces: true, accel: true });
+            const [show, setShow] = useState({ forces: true, accel: true, airParticles: true });
 
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
@@ -450,10 +568,12 @@
             const cartOffRef = useRef(0);
 
             const mTot = M_CART + massObj;
-            const forceDir = Math.sign(force);                  // -1 vänster, 0, +1 höger
-            const appliedF = Math.abs(force);                   // den pålagda kraftens storlek
-            const Fres = appliedF;                              // resulterande kraft (enda horisontella kraften)
-            const aMag = Fres / mTot;
+            const Fapplied = force1 + force2;                   // summan av de pålagda krafterna
+            const Fair = airMode ? -DRAG_K * v : 0;             // luftmotstånd, motriktat farten
+            const Fres = Fapplied + Fair;                       // resulterande kraft (signerad)
+            const forceDir = Math.sign(Fres);                   // -1 vänster, 0, +1 höger
+            const appliedF = Math.abs(Fres);                    // resulterande kraftens storlek
+            const aMag = appliedF / mTot;
 
             // animationsloop — kraften driver rörelsen direkt (a → v → golvskroll)
             useEffect(() => {
@@ -462,7 +582,8 @@
                     if (lastRef.current == null) lastRef.current = ts;
                     const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
                     lastRef.current = ts;
-                    const a = force / (M_CART + massObj);
+                    const drag = airMode ? -DRAG_K * vRef.current : 0;
+                    const a = (force1 + force2 + drag) / (M_CART + massObj);
                     let nv = vRef.current + a * dt;
                     if (nv > 999) nv = 999;
                     if (nv < -999) nv = -999;   // säkerhetsgräns mot orimliga tal
@@ -483,7 +604,7 @@
                 };
                 rafRef.current = requestAnimationFrame(step);
                 return () => cancelAnimationFrame(rafRef.current);
-            }, [running, force, massObj]);
+            }, [running, force1, force2, massObj, airMode]);
 
             // fullskärm
             useEffect(() => {
@@ -507,9 +628,13 @@
             };
 
             const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
-            // Börja om: ställ tillbaka kärran i vila i bildens mitt. Finns en kraft
-            // kvar börjar den genast accelerera igen.
-            const reset = () => { vRef.current = 0; setV(0); setScroll(0); cartOffRef.current = 0; setCartOff(0); setRunning(true); };
+            // Nollställ enbart rörelsen (kärran tillbaka i vila i bildens mitt).
+            const resetMotion = () => { vRef.current = 0; setV(0); setScroll(0); cartOffRef.current = 0; setCartOff(0); setRunning(true); };
+            // Börja om: nollställ rörelsen OCH båda kraftreglagen (F₁ = F₂ = 0).
+            const reset = () => { resetMotion(); setForce1(0); setForce2(0); };
+            // Byt läge (utan/med luftmotstånd) och starta om rörelsen från vila
+            // så att jämförelsen blir ren. Kraftreglagen behålls.
+            const switchMode = (air) => { if (air === airMode) return; setAirMode(air); resetMotion(); };
 
             // Primärknapp: pausar/fortsätter rörelsen (kraften driver den direkt).
             const primaryLabel = running ? '⏸ Pausa' : '▶ Fortsätt';
@@ -529,6 +654,12 @@
                         <input type="checkbox" checked={show.accel} onChange={() => tShow('accel')} />
                         <span>Visa acceleration</span>
                     </label>
+                    {airMode && (
+                        <label>
+                            <input type="checkbox" checked={show.airParticles} onChange={() => tShow('airParticles')} />
+                            <span>Visa luftpartiklar</span>
+                        </label>
+                    )}
                     {isFullscreen && (
                         <div className="st-actions">
                             <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
@@ -544,11 +675,29 @@
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
                             <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik</a> / Newtons andra lag
                         </div>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Newtons andra lag</h1>
+                        <div className="flex flex-wrap items-start justify-between gap-4">
+                            <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Newtons andra lag</h1>
+                            <div className="p-1 flex gap-1 flex-shrink-0"
+                                 style={{ background: 'var(--lab-bg, #f3eee4)', border: '1px solid var(--lab-line-strong, rgba(15,22,32,0.28))', borderRadius: '6px' }}>
+                                <button onClick={() => switchMode(false)}
+                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${!airMode ? 'active-explore' : ''}`}>
+                                    Utan luftmotstånd
+                                </button>
+                                <button onClick={() => switchMode(true)}
+                                        className={`tab-button px-4 py-2 rounded text-sm font-semibold border ${airMode ? 'active-buoyancy' : ''}`}>
+                                    Med luftmotstånd
+                                </button>
+                            </div>
+                        </div>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
                             En <strong>kraft</strong> ger en kropp en <strong>acceleration</strong> i kraftens riktning. Ju större
-                            massa, desto trögare är kroppen att sätta i rörelse. Lägg på en kraft på kärran åt vänster eller
-                            höger, ändra objektets massa och se hur accelerationen — och därmed farten — ändras.
+                            massa, desto trögare är kroppen att sätta i rörelse. Lägg på <strong>två krafter</strong> <em>F</em><sub>1</sub>
+                            och <em>F</em><sub>2</sub> på kärran — åt vänster eller höger — och se hur de tillsammans ger den
+                            <strong> resulterande kraften</strong> <em>F</em><sub>R</sub>, som bestämmer accelerationen och farten.
+                            {airMode
+                                ? <span> I läget <strong>med luftmotstånd</strong> tillkommer en bromsande kraft <em>F</em><sub>luft</sub> som
+                                    växer med farten — till slut tar den ut den pålagda kraften och kärran håller <strong>konstant fart</strong>.</span>
+                                : <span> Slå på <strong>luftmotstånd</strong> för att se hur farten i stället planar ut mot en terminalfart.</span>}
                         </p>
 
                         <FormulaCard Fres={Fres} m={mTot} a={aMag} />
@@ -557,10 +706,13 @@
                             {/* Scen */}
                             <div className="lg:w-3/5 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    <CartScene scroll={scroll} cartOff={cartOff} v={v} massObj={massObj} forceMag={appliedF}
-                                               forceDir={forceDir} show={show} svgRef={svgRef} />
+                                    <CartScene scroll={scroll} cartOff={cartOff} v={v} massObj={massObj}
+                                               f1={force1} f2={force2} fair={Fair} airMode={airMode}
+                                               show={show} svgRef={svgRef} />
 
-                                    <div className="scene-hint">Luftmotstånd och friktionskrafter försummas.</div>
+                                    <div className="scene-hint">
+                                        {airMode ? 'Luftmotståndet ökar med farten. Friktion försummas.' : 'Luftmotstånd och friktionskrafter försummas.'}
+                                    </div>
 
                                     {/* Visningsval uppe till höger (normalt + fullskärm) */}
                                     {sceneToggles()}
@@ -571,8 +723,10 @@
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
                                                 <FsSlider label="Objektets massa" value={massObj} min={1} max={10} step={0.5}
                                                           unit="kg" decimals={1} onChange={setMassObj} />
-                                                <FsSlider label="Kraft (− vänster / + höger)" value={force} min={-20} max={20} step={1}
-                                                          unit="N" decimals={1} onChange={setForce} />
+                                                <FsSlider label="Kraft <em>F</em>&#8321; (− v / + h)" value={force1} min={-20} max={20} step={1}
+                                                          unit="N" decimals={1} onChange={setForce1} />
+                                                <FsSlider label="Kraft <em>F</em>&#8322; (− v / + h)" value={force2} min={-20} max={20} step={1}
+                                                          unit="N" decimals={1} onChange={setForce2} />
                                                 <div className="fs-row" style={{ justifyContent: 'center', gap: 14, marginTop: 8 }}>
                                                     <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
                                                     <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
@@ -615,10 +769,16 @@
                                             {fmt(massObj, 1)} kg
                                         </span>
                                     </Slider>
-                                    <Slider label="Kraft <em>F</em> (◀ vänster / höger ▶)" value={force} min={-20} max={20} step={1} onChange={setForce}>
+                                    <Slider label="Kraft <em>F</em>&#8321; (◀ vänster / höger ▶)" value={force1} min={-20} max={20} step={1} onChange={setForce1}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
-                                              style={{ minWidth: 70, textAlign: 'right', color: 'var(--lab-accent)' }}>
-                                            {force === 0 ? '0,0 N' : (force < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force), 1) + ' N'}
+                                              style={{ minWidth: 70, textAlign: 'right', color: COL.f }}>
+                                            {force1 === 0 ? '0,0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'}
+                                        </span>
+                                    </Slider>
+                                    <Slider label="Kraft <em>F</em>&#8322; (◀ vänster / höger ▶)" value={force2} min={-20} max={20} step={1} onChange={setForce2}>
+                                        <span className="font-mono font-semibold text-sm flex-shrink-0"
+                                              style={{ minWidth: 70, textAlign: 'right', color: COL.f2 }}>
+                                            {force2 === 0 ? '0,0 N' : (force2 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force2), 1) + ' N'}
                                         </span>
                                     </Slider>
                                 </div>
@@ -635,6 +795,15 @@
                                 {/* Avläsning */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <div className="flbl mb-2">Avläsning</div>
+                                    <div className="text-center text-sm mb-3 pb-3"
+                                         style={{ borderBottom: '1px solid var(--lab-line)', color: 'var(--lab-ink-soft)' }}>
+                                        <em>F</em><sub>R</sub> = <em>F</em><sub>1</sub> + <em>F</em><sub>2</sub>
+                                        {airMode && <span> + <em>F</em><sub>luft</sub></span>} ={' '}
+                                        <span style={{ color: COL.f, fontWeight: 600 }}>{fmtTerm(force1)}</span> +{' '}
+                                        <span style={{ color: COL.f2, fontWeight: 600 }}>{fmtTerm(force2)}</span>
+                                        {airMode && <span> + <span style={{ color: COL.air, fontWeight: 600 }}>{fmtTerm(Fair)}</span></span>} ={' '}
+                                        <strong style={{ color: 'var(--lab-ink)' }}>{fmt(Fres, 1)} N</strong>
+                                    </div>
                                     <div className="grid grid-cols-3 gap-2 text-center">
                                         <div>
                                             <div style={{ color: COL.f, fontWeight: 700, fontSize: 18 }}>{fmt(Fres, 1)} N</div>
@@ -656,15 +825,27 @@
                                     <h3 className="font-bold text-sm mb-2" style={{ color: 'var(--lab-ink)' }}>
                                         Så hänger det ihop
                                     </h3>
-                                    <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                        Accelerationen är konstant så länge kraften ligger på — farten ökar då jämnt. Tar du
-                                        bort kraften (<em>F</em><sub>R</sub> = 0) blir accelerationen noll och kärran rullar vidare med
-                                        <em> konstant</em> fart (Newtons första lag). Lägg kraften åt motsatt håll mot rörelsen
-                                        för att bromsa.
-                                    </p>
+                                    {airMode ? (
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            Luftmotståndet <em>F</em><sub>luft</sub> = <em>k</em> · <em>v</em> växer med farten och är
+                                            riktat mot rörelsen. Allteftersom farten ökar minskar den resulterande kraften, tills
+                                            luftmotståndet precis tar ut den pålagda kraften (<em>F</em><sub>R</sub> = 0). Då är
+                                            accelerationen noll och kärran håller en <em>konstant</em> <strong>terminalfart</strong>.
+                                        </p>
+                                    ) : (
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            Accelerationen är konstant så länge kraften ligger på — farten ökar då jämnt. Tar du
+                                            bort kraften (<em>F</em><sub>R</sub> = 0) blir accelerationen noll och kärran rullar vidare med
+                                            <em> konstant</em> fart (Newtons första lag). Lägg kraften åt motsatt håll mot rörelsen
+                                            för att bromsa.
+                                        </p>
+                                    )}
                                     <p className="text-sm mt-2 pt-2" style={{ color: 'var(--lab-ink-soft)', borderTop: '1px solid var(--lab-line)' }}>
-                                        💡 Luftmotstånd och friktionskrafter försummas, så den pålagda kraften är den enda
-                                        horisontella kraften på systemet (kärra + objekt).
+                                        {airMode
+                                            ? <span>💡 Proportionalitetskonstanten är <em>k</em> = 1,6 N per m/s. Vid 25 m/s ger
+                                                luftmotståndet 40 N — lika med den största pålagda kraften. Friktion försummas.</span>
+                                            : <span>💡 Luftmotstånd och friktionskrafter försummas, så den pålagda kraften är den enda
+                                                horisontella kraften på systemet (kärra + objekt).</span>}
                                     </p>
                                 </div>
                             </div>

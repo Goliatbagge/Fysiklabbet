@@ -209,13 +209,6 @@
             ink: '#0f1620',
         };
 
-        // Deterministisk hash (0..1) — driver kollisionspartiklarnas positioner.
-        const hash = (n) => {
-            let h = (n * 2654435761) >>> 0;
-            h ^= h >>> 15; h = (h * 2246822519) >>> 0; h ^= h >>> 13;
-            return (h >>> 0) / 4294967296;
-        };
-
         // Luftpartiklar — fasta (deterministiska) startpositioner som strömmar
         // förbi kärran och visualiserar luften i luftmotståndsläget.
         const AIR_PARTICLES = (() => {
@@ -355,26 +348,42 @@
                 );
             };
 
-            // Krascheffekter PÅ lådans/kärrans framkant (inte framför den). Luft-
-            // fältet i övrigt är jämnt fördelat; här markeras bara träffarna.
-            // Antalet (nCrash) och takten växer med farten → fler kollisioner =
-            // större luftmotstånd. Allt är deterministiska funktioner av scroll.
+            // Träffeffekter ("smatter") — visas ENDAST när en faktiskt utritad
+            // luftpartikel når kärrans frontyta, och ritas PÅ ytan: lådans kant,
+            // flakets kant eller hjulets rundning. En träff upptäcks när
+            // partikelns x just passerat frontprofilen vid dess y, och tonar ut
+            // medan partikeln fortsätter in bakom kärran. Allt är deterministiska
+            // funktioner av scroll → träfftakten växer naturligt med farten.
             const speedAbs = Math.abs(v);
             const cartDir = Math.sign(v) || 1;
             const crateHalf = s / 2;
-            // kärrans frontprofil: lådans kant högt upp, flakets kant längre ned.
-            const frontEdgeAt = (yy) =>
-                (yy >= objTop && yy <= DECK_TOP) ? cartCX + cartDir * crateHalf
-                                                 : cartCX + cartDir * 92;
-            const nCrash = (airMode && show.airParticles && speedAbs > 0.4)
-                ? Math.round(Math.min(speedAbs * 0.62, 14)) : 0;
-            const crashes = [];
-            for (let i = 0; i < nCrash; i++) {
-                const t = scroll * 0.05 + i * 1.73;
-                const cycle = Math.floor(t);
-                const op = Math.sin((t - cycle) * Math.PI);      // tonar in/ut över livscykeln
-                const yy = objTop + hash(i * 5 + cycle) * (FLOOR_Y - 8 - objTop);
-                crashes.push({ x: frontEdgeAt(yy), y: yy, op, key: i });
+            const HIT_DEPTH = 24;   // px bakom ytan som träffen syns (uttoning)
+            // Frontprofil vid höjden yy: halvbredd från kärrans mitt + ytnormal.
+            // null = ingen yta på den höjden (partikeln passerar fritt).
+            const frontProfileAt = (yy) => {
+                if (yy >= objTop && yy <= DECK_TOP)
+                    return { hw: crateHalf, nx: cartDir, ny: 0 };       // lådans kant
+                if (yy > DECK_TOP && yy <= DECK_TOP + 16)
+                    return { hw: 96, nx: cartDir, ny: 0 };              // flakets kant
+                const dy = yy - WHEEL_CY;
+                if (Math.abs(dy) <= WHEEL_R) {                          // hjulets rundning
+                    const w = Math.sqrt(WHEEL_R * WHEEL_R - dy * dy);
+                    return { hw: 58 + w, nx: cartDir * (w / WHEEL_R), ny: dy / WHEEL_R };
+                }
+                return null;
+            };
+            const hits = [];
+            if (airMode && show.airParticles && speedAbs > 0.4) {
+                AIR_PARTICLES.forEach((p, i) => {
+                    const prof = frontProfileAt(p.y);
+                    if (!prof) return;
+                    const x = (((p.x - scroll * p.spd) % VBW) + VBW) % VBW;
+                    const xSurf = cartCX + cartDir * prof.hw;
+                    const depth = cartDir * (xSurf - x);   // >0 = partikeln har passerat ytan
+                    if (depth <= 0 || depth > HIT_DEPTH) return;
+                    hits.push({ x: xSurf, y: p.y, nx: prof.nx, ny: prof.ny,
+                                op: 1 - depth / HIT_DEPTH, key: i });
+                });
             }
 
             return (
@@ -488,19 +497,25 @@
                     {/* digital hastighetsmätare på objektet */}
                     <Speedo cx={cartCX} cy={objTop - 30} v={v} />
 
-                    {/* krascheffekter PÅ kärrans framkant (samma neutrala färg) */}
-                    {nCrash > 0 && (
+                    {/* träffeffekter PÅ kärrans frontyta — en per faktisk partikelträff.
+                        Sprayen riktas längs ytnormalen (utåt från hjulets rundning,
+                        horisontellt från låd-/flakkant). */}
+                    {hits.length > 0 && (
                         <g>
-                            {crashes.map((c) => (
-                                <g key={'cr' + c.key} opacity={c.op}>
-                                    {[-1, -0.4, 0.4, 1].map((a, j) => (
-                                        <line key={j} x1={c.x} y1={c.y}
-                                              x2={c.x + cartDir * 3} y2={c.y + a * 6}
-                                              stroke="#5a6370" strokeWidth="1.5" strokeLinecap="round" />
-                                    ))}
-                                    <circle cx={c.x} cy={c.y} r={1.4 + 1.6 * c.op} fill="#5a6370" />
-                                </g>
-                            ))}
+                            {hits.map((h) => {
+                                const tx = -h.ny, ty = h.nx;   // tangentriktning (⊥ normalen)
+                                return (
+                                    <g key={'hit' + h.key} opacity={h.op}>
+                                        {[-1, -0.4, 0.4, 1].map((a, j) => (
+                                            <line key={j} x1={h.x} y1={h.y}
+                                                  x2={h.x + h.nx * 3 + tx * a * 6}
+                                                  y2={h.y + h.ny * 3 + ty * a * 6}
+                                                  stroke="#5a6370" strokeWidth="1.5" strokeLinecap="round" />
+                                        ))}
+                                        <circle cx={h.x} cy={h.y} r={1.4 + 1.6 * h.op} fill="#5a6370" />
+                                    </g>
+                                );
+                            })}
                         </g>
                     )}
                 </svg>

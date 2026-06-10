@@ -201,7 +201,7 @@
         const DRAG_K = (2 * 20) / VMAX;   // = 1,6 N per (m/s)
 
         const COL = {
-            f: '#0284c7',  // blå — kraft F₁
+            f: '#0284c7',  // blå — drivkraft F₁ (motorn, via vänstra däcket)
             f2: '#0d9488', // teal — kraft F₂
             a: '#e0701a',  // orange — acceleration
             air: '#8b3a9e', // lila — luftmotstånd
@@ -324,24 +324,27 @@
             // accelerationspilens längd
             const La = Math.min(aMag * 26, 160);
 
-            const F1_Y = DECK_TOP - 6;    // F₁-pilen (övre, strax ovanför flaket)
-            const F2_Y = DECK_TOP + 16;   // F₂-pilen (nedre, vid flakets underkant)
+            const DRIVE_X = -58;          // drivande (vänstra) hjulet, rel. kärrans mitt
+            const F1_Y = FLOOR_Y;         // F₁ (drivkraften) angriper i däckets kontaktyta mot marken
+            const F2_Y = DECK_TOP + 16;   // F₂-pilen (vid flakets underkant)
             const AIR_Y = 280;            // luftmotståndspilen (ovanför objektet)
             const A_Y = 214;              // accelerationspilens höjd (ovanför objektet)
 
-            // En enskild kraftpil från kärrans mitt. Längden växer med kraftens
+            // En enskild kraftpil. Angreppspunkten x0 är kärrans mitt om inget
+            // annat anges (drivkraften F₁ angriper i stället i kontaktytan
+            // mellan det drivande däcket och marken). Längden växer med kraftens
             // storlek (kapas för mycket stora krafter); etiketten hamnar förbi
-            // kärran (åt pilens håll).
-            const forceArrow = (fi, y, color, sub) => {
+            // kärran (åt pilens håll), labelDY flyttar den över/under pilen.
+            const forceArrow = (fi, y, color, sub, x0 = cartCX, labelDY = -7) => {
                 if (!(Math.abs(fi) > 0.05)) return null;
                 const dir = Math.sign(fi);
                 const L = Math.min(44 + Math.abs(fi) * 5, 160);
-                const labelX = cartCX + dir * Math.max(L + 12, 108);
+                const labelX = x0 + dir * Math.max(L + 12, 108);
                 return (
                     <g>
-                        <Arrow x1={cartCX} y1={y} x2={cartCX + dir * L} y2={y} color={color} width={6} head={18} />
-                        <circle cx={cartCX} cy={y} r="4.5" fill={color} stroke="#ffffff" strokeWidth="1.5" />
-                        <Tag x={labelX} y={y - 7} color={color} size={14} anchor={dir > 0 ? 'start' : 'end'}>
+                        <Arrow x1={x0} y1={y} x2={x0 + dir * L} y2={y} color={color} width={6} head={18} />
+                        <circle cx={x0} cy={y} r="4.5" fill={color} stroke="#ffffff" strokeWidth="1.5" />
+                        <Tag x={labelX} y={y + labelDY} color={color} size={14} anchor={dir > 0 ? 'start' : 'end'}>
                             <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">{sub}</tspan><tspan dy="-3"> = {fmt(Math.abs(fi), 1)} N</tspan>
                         </Tag>
                     </g>
@@ -453,7 +456,7 @@
                         <rect x="90" y={DECK_TOP - 6} width="6" height="8" rx="2" fill="#6b7079" />
 
                         {/* hjul */}
-                        {[-58, 58].map((wx) => (
+                        {[DRIVE_X, -DRIVE_X].map((wx) => (
                             <g key={'w' + wx} transform={`translate(${wx}, ${WHEEL_CY})`}>
                                 <circle r={WHEEL_R} fill="#1b1e24" stroke="#0d0f12" strokeWidth="3" />
                                 <circle r={WHEEL_R - 4} fill="none" stroke="#2c313a" strokeWidth="3" />
@@ -467,12 +470,27 @@
                                 </g>
                             </g>
                         ))}
+
+                        {/* motor under flaket — driver vänstra hjulet via rem till navet */}
+                        <g>
+                            <line x1={-32} y1={WHEEL_CY - 5} x2={DRIVE_X} y2={WHEEL_CY - 7} stroke="#2c2f35" strokeWidth="2.5" />
+                            <line x1={-32} y1={WHEEL_CY + 5} x2={DRIVE_X} y2={WHEEL_CY + 7} stroke="#2c2f35" strokeWidth="2.5" />
+                            <circle cx={DRIVE_X} cy={WHEEL_CY} r="7" fill="none" stroke="#2c2f35" strokeWidth="2.5" />
+                            <rect x="-36" y={DECK_TOP + 18} width="32" height="26" rx="4" fill="#4a4f58" stroke="#23262c" strokeWidth="2" />
+                            <text x="-15" y={DECK_TOP + 35} textAnchor="middle" fontSize="11" fontWeight="700"
+                                  fill="#e9edf3" fontFamily="'DM Sans', sans-serif">M</text>
+                            {/* remskiva — roterar växlad mot hjulet (radie 22 → 5) */}
+                            <g transform={`translate(-32, ${WHEEL_CY}) rotate(${wheelAng * WHEEL_R / 5})`}>
+                                <circle r="5" fill="#c8ccd4" stroke="#23262c" strokeWidth="1.5" />
+                                <line x1="0" y1="0" x2="0" y2="-3.2" stroke="#5b606a" strokeWidth="1.6" />
+                            </g>
+                        </g>
                     </g>
 
                     {/* ── KRAFTER (krafterna på kärran, summan = F_R) ── */}
                     {show.forces && (
                         <g>
-                            {forceArrow(f1, F1_Y, COL.f, '1')}
+                            {forceArrow(f1, F1_Y, COL.f, '1', cartCX + DRIVE_X, 36)}
                             {forceArrow(f2, F2_Y, COL.f2, '2')}
                             {airMode && forceArrow(fair, AIR_Y, COL.air, 'luft')}
                         </g>
@@ -706,8 +724,10 @@
                         </div>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
                             En <strong>kraft</strong> ger en kropp en <strong>acceleration</strong> i kraftens riktning. Ju större
-                            massa, desto trögare är kroppen att sätta i rörelse. Lägg på <strong>två krafter</strong> <em>F</em><sub>1</sub>
-                            och <em>F</em><sub>2</sub> på kärran — åt vänster eller höger — och se hur de tillsammans ger den
+                            massa, desto trögare är kroppen att sätta i rörelse. Kärran drivs av en liten <strong>motor</strong> på
+                            det vänstra hjulet — drivkraften <em>F</em><sub>1</sub> angriper därför i kontaktytan mellan däcket
+                            och marken. Lägg på <em>F</em><sub>1</sub> och en extra kraft <em>F</em><sub>2</sub> — åt vänster eller
+                            höger — och se hur de tillsammans ger den
                             <strong> resulterande kraften</strong> <em>F</em><sub>R</sub>, som bestämmer accelerationen och farten.
                             {airMode
                                 ? <span> I läget <strong>med luftmotstånd</strong> tillkommer en bromsande kraft <em>F</em><sub>luft</sub> som
@@ -738,7 +758,7 @@
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
                                                 <FsSlider label="Objektets massa" value={massObj} min={1} max={10} step={0.5}
                                                           unit="kg" decimals={1} onChange={setMassObj} />
-                                                <FsSlider label="Kraft <em>F</em>&#8321; (− v / + h)" value={force1} min={-20} max={20} step={1}
+                                                <FsSlider label="Drivkraft <em>F</em>&#8321; (− v / + h)" value={force1} min={-20} max={20} step={1}
                                                           unit="N" decimals={1} onChange={setForce1} />
                                                 <FsSlider label="Kraft <em>F</em>&#8322; (− v / + h)" value={force2} min={-20} max={20} step={1}
                                                           unit="N" decimals={1} onChange={setForce2} />
@@ -784,7 +804,7 @@
                                             {fmt(massObj, 1)} kg
                                         </span>
                                     </Slider>
-                                    <Slider label="Kraft <em>F</em>&#8321; (◀ vänster / höger ▶)" value={force1} min={-20} max={20} step={1} onChange={setForce1}>
+                                    <Slider label="Drivkraft <em>F</em>&#8321; (◀ vänster / höger ▶)" value={force1} min={-20} max={20} step={1} onChange={setForce1}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
                                               style={{ minWidth: 70, textAlign: 'right', color: COL.f }}>
                                             {force1 === 0 ? '0,0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'}

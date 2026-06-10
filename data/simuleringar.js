@@ -34,6 +34,7 @@ window.SIM_NAMES = {
   'fysik1-newtons-andra-app.html': 'Newtons andra lag',
   'fysik1-newtons-tredje-app.html': 'Newtons tredje lag',
   'fysik1-newtons-gravitationslag.html': 'Newtons gravitationslag',
+  'fysik1-berg-och-dalbana.html': 'Berg- och dalbana (energiprincipen)',
   'fysik1-tryck-pa-app.html': 'Tryck och tryckkraft',
   'fysik1-magdeburgska-halvklot.html': 'Magdeburgska halvkloten',
   'fysik1-arkimedes.html': 'Arkimedes princip',

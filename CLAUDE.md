@@ -355,6 +355,29 @@ Vanliga fällor:
 - Vinkeletiketter (i₁, b₁) hamnar på strålarna → större etikettradie.
 - Formel i headern upprepas i sidopanelen → välj en plats, inte båda.
 
+### Ingen vit kontur runt text på ljusa scenbakgrunder
+
+På "Laborans papper"-scener (ljus vägg-/golvgradient, t.ex. `#f7f2e8` →
+`#ece3d2`) får SVG-textetiketter **aldrig** en tjock vit `stroke`
+(`stroke="#ffffff"` + `paintOrder: 'stroke'`). Mot en redan ljus botten gör
+konturen ingen nytta — den lägger bara en suddig vit gloria runt texten och
+gör den svårare att läsa, inte lättare.
+
+- ✓ Mörk/mättad textfärg (bläck, eller komponentens egen kraft-/
+  accelerationsfärg) räcker för kontrast mot papper — ingen kontur alls.
+- ✓ Behövs ändå separation, t.ex. när en etikett kan korsa rörliga
+  figurdelar (skrollande golvmarkeringar, luftpartiklar): lägg en **mycket
+  diskret halo i scenens egen papperston** (t.ex. `#f3eee4`,
+  `strokeWidth: 3`) — inte vitt, och inte tjockare än nödvändigt.
+- ✓ Hellre flytta etiketten till en lugn yta än att lösa kollisionen med
+  kontur.
+- ✗ `stroke="#ffffff" strokeWidth="4"` på text mot ljus bakgrund.
+
+Samma princip gäller pilkonturer (`Arrow`-komponenter): på ljus bakgrund
+räcker pilens egen färg. En tunn bläckfärgad kantlinje
+(`rgba(15,22,32,0.18)`) kan användas enbart där pilen korsar andra
+figurdelar (kärra, hjul) för lite separation — aldrig en tjock vit kontur.
+
 ### Formelpresentation
 
 Gäller överallt formler visas (ingress, header, paneler, förklaringar):

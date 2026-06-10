@@ -222,7 +222,9 @@
             }));
         })();
 
-        // ── SVG-pil (vit kontur → läsbar mot valfri bakgrund) ─────
+        // ── SVG-pil — mot den ljusa papperscenen behövs ingen vit
+        // kontur; färgen syns gott mot vägg/golv. En tunn bläckfärgad
+        // kantlinje ger ändå lite separation där pilen korsar kärran/hjulen.
         const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 18, opacity = 1 }) => {
             const ang = Math.atan2(y2 - y1, x2 - x1);
             const len = Math.hypot(x2 - x1, y2 - y1);
@@ -235,17 +237,21 @@
             const headPts = `${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`;
             return (
                 <g opacity={opacity}>
-                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke="#ffffff" strokeWidth={width + 2.2} strokeLinecap="round" />
-                    <polygon points={headPts} fill="#ffffff" stroke="#ffffff" strokeWidth="2.2" strokeLinejoin="round" />
                     <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width} strokeLinecap="round" />
-                    <polygon points={headPts} fill={color} />
+                    <polygon points={headPts} fill={color} stroke="rgba(15,22,32,0.18)" strokeWidth="1" strokeLinejoin="round" />
                 </g>
             );
         };
 
-        const Tag = ({ x, y, color, size = 15, anchor = 'middle', weight = 700, children }) => (
+        // ── SVG-textetikett — på den ljusa papperscenen räcker den
+        // mörka/mättade textfärgen för god kontrast, så ingen kontur
+        // ritas som standard (en tjock vit gloria blir bara suddig på
+        // ljus botten). Sätt `halo` där etiketten kan korsa rörliga
+        // figurdelar (golvmarkeringar, luftpartiklar) — då ritas en
+        // mycket diskret halo i scenens egen papperston bakom texten.
+        const Tag = ({ x, y, color, size = 15, anchor = 'middle', weight = 700, halo = false, children }) => (
             <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
-                  style={{ paintOrder: 'stroke' }} stroke="#ffffff" strokeWidth="4" strokeLinejoin="round">
+                  {...(halo ? { style: { paintOrder: 'stroke' }, stroke: '#f3eee4', strokeWidth: '3', strokeLinejoin: 'round' } : {})}>
                 {children}
             </text>
         );
@@ -333,7 +339,9 @@
             // mellan det drivande däcket och marken). Längden växer med kraftens
             // storlek (kapas för mycket stora krafter); etiketten hamnar förbi
             // kärran (åt pilens håll), labelDY flyttar den över/under pilen.
-            const forceArrow = (fi, y, color, sub, x0 = cartCX, labelDY = -7) => {
+            // `halo` sätts för etiketter som kan korsa golvmarkeringar/
+            // luftpartiklar (F₁ resp. F_luft) — diskret papperston bakom texten.
+            const forceArrow = (fi, y, color, sub, x0 = cartCX, labelDY = -7, halo = false) => {
                 if (!(Math.abs(fi) > 0.05)) return null;
                 const dir = Math.sign(fi);
                 const L = Math.min(44 + Math.abs(fi) * 5, 160);
@@ -341,8 +349,8 @@
                 return (
                     <g>
                         <Arrow x1={x0} y1={y} x2={x0 + dir * L} y2={y} color={color} width={6} head={18} />
-                        <circle cx={x0} cy={y} r="4.5" fill={color} stroke="#ffffff" strokeWidth="1.5" />
-                        <Tag x={labelX} y={y + labelDY} color={color} size={14} anchor={dir > 0 ? 'start' : 'end'}>
+                        <circle cx={x0} cy={y} r="4.5" fill={color} stroke="#f3eee4" strokeWidth="1.5" />
+                        <Tag x={labelX} y={y + labelDY} color={color} size={14} anchor={dir > 0 ? 'start' : 'end'} halo={halo}>
                             <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">{sub}</tspan><tspan dy="-3"> = {fmt(Math.abs(fi), 1)} N</tspan>
                         </Tag>
                     </g>
@@ -488,8 +496,8 @@
                     {/* ── KRAFTER (krafterna på kärran, summan = F_R) ── */}
                     {show.forces && (
                         <g>
-                            {forceArrow(f1, F1_Y, COL.f, '1', cartCX + DRIVE_X, 36)}
-                            {airMode && forceArrow(fair, AIR_Y, COL.air, 'luft')}
+                            {forceArrow(f1, F1_Y, COL.f, '1', cartCX + DRIVE_X, 36, true)}
+                            {airMode && forceArrow(fair, AIR_Y, COL.air, 'luft', cartCX, -7, true)}
                         </g>
                     )}
 

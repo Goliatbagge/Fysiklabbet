@@ -788,6 +788,228 @@
             );
         }
 
+        // ── Presentationsläge ───────────────────────────────────────
+        // Fullskärms-genomgång av ett teoriavsnitt, som ett bildspel:
+        // läraren klickar fram ett stycke/block i taget. Exempel-rutor
+        // stegas dessutom rad för rad (formel → insättning → svar).
+        // Tangenter: → ↓ Space Enter = nästa · ← ↑ = föregående ·
+        // Home/End = början/slutet · Esc = avsluta.
+        function buildPresSteps(root) {
+            const steps = [];
+            const blocks = [];
+            for (const el of Array.from(root.children)) {
+                // H1 dubblerar titelbilden — hoppa över.
+                if (el.tagName === 'H1') { el.classList.add('pres-skip'); continue; }
+                if (el.classList.contains('lab-block-exempel')) {
+                    const subs = Array.from(el.children)
+                        .filter(c => !c.classList.contains('lab-block-title'));
+                    if (subs.length > 1) {
+                        el.classList.add('pres-block');
+                        blocks.push(el);
+                        for (const c of subs) {
+                            c.classList.add('pres-sub');
+                            steps.push({ el: c, block: el });
+                        }
+                        continue;
+                    }
+                }
+                el.classList.add('pres-item');
+                steps.push({ el, block: null });
+            }
+            return { steps, blocks };
+        }
+
+        function PresentationMode({ id, num, title, chapter, chapterNumber, course, onClose }) {
+            const overlayRef = useRef(null);
+            const bodyRef = useRef(null);
+            const stepsRef = useRef([]);
+            const blocksRef = useRef([]);
+            const totalRef = useRef(0);
+            const chromeTimer = useRef(null);
+            const [step, setStep] = useState(0);     // 0 = titelbild
+            const [total, setTotal] = useState(0);
+            const [ready, setReady] = useState(false);
+            const [chrome, setChrome] = useState(true);
+
+            const html = useMemo(() => {
+                const raw = TEORI[id];
+                if (!raw) return null;
+                const { body } = parseFrontmatter(raw);
+                const { md, tokens } = protectMath(body);
+                let processed = preprocessSuperscripts(md);
+                processed = preprocessSubproblems(processed);
+                processed = preprocessBlocks(processed);
+                return restoreMath(marked.parse(processed), tokens);
+            }, [id]);
+
+            const next = () => setStep(s => Math.min(s + 1, totalRef.current));
+            const prev = () => setStep(s => Math.max(s - 1, 0));
+
+            // Fullskärm + lås sidans egen scroll under presentationen.
+            // Vi fullskärmar dokumentroten (inte overlayen) så att tooltips
+            // (som appendas på <body>) fortsätter fungera.
+            useEffect(() => {
+                const el = document.documentElement;
+                if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+                const onFs = () => { if (!document.fullscreenElement) onClose(); };
+                document.addEventListener('fullscreenchange', onFs);
+                const prevOverflow = document.body.style.overflow;
+                document.body.style.overflow = 'hidden';
+                // Gömmer bl.a. feedback-lampan (z-index 9998) under presentationen.
+                document.body.classList.add('lab-pres-active');
+                return () => {
+                    document.removeEventListener('fullscreenchange', onFs);
+                    document.body.style.overflow = prevOverflow;
+                    document.body.classList.remove('lab-pres-active');
+                    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+                };
+            }, []);
+
+            // Tangentbordsnavigering
+            useEffect(() => {
+                const onKey = (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown'
+                        || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); next(); }
+                    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'
+                        || e.key === 'Backspace') { e.preventDefault(); prev(); }
+                    else if (e.key === 'Home') { e.preventDefault(); setStep(0); }
+                    else if (e.key === 'End') { e.preventDefault(); setStep(totalRef.current); }
+                    // Esc lämnar fullskärm → fullscreenchange stänger. Men om
+                    // fullskärm aldrig beviljades måste Esc stänga direkt.
+                    else if (e.key === 'Escape' && !document.fullscreenElement) onClose();
+                };
+                window.addEventListener('keydown', onKey);
+                return () => window.removeEventListener('keydown', onKey);
+            }, []);
+
+            // Bygg stegen: KaTeX → formellayout → stegindelning.
+            useEffect(() => {
+                const root = bodyRef.current;
+                if (!root || !html) return;
+                renderMathInElement(root, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                    ],
+                    throwOnError: false,
+                });
+                buildFormelLayouts(root);
+                const { steps, blocks } = buildPresSteps(root);
+                stepsRef.current = steps;
+                blocksRef.current = blocks;
+                totalRef.current = steps.length;
+                setTotal(steps.length);
+                setStep(0);
+                setReady(true);
+                const fit = () => { fitFormel(root); fitMathDisplays(root); };
+                if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+                window.addEventListener('resize', fit);
+                return () => window.removeEventListener('resize', fit);
+            }, [html]);
+
+            // Applicera aktuellt steg: visa/dim-klasser + mjuk autoscroll.
+            useEffect(() => {
+                if (!ready) return;
+                const steps = stepsRef.current;
+                steps.forEach((st, i) => {
+                    st.el.classList.toggle('is-on', i < step);
+                    st.el.classList.toggle('is-current', i === step - 1);
+                });
+                blocksRef.current.forEach(b => {
+                    let anyOn = false, anyCur = false;
+                    for (const c of b.children) {
+                        if (!c.classList.contains('pres-sub')) continue;
+                        if (c.classList.contains('is-on')) anyOn = true;
+                        if (c.classList.contains('is-current')) anyCur = true;
+                    }
+                    b.classList.toggle('is-on', anyOn);
+                    b.classList.toggle('is-current', anyCur);
+                });
+                // Nyvisade formler kan behöva mätas om (gömda element har bredd 0).
+                const root = bodyRef.current;
+                if (root) { fitFormel(root); fitMathDisplays(root); }
+                const overlay = overlayRef.current;
+                if (!overlay) return;
+                const raf = requestAnimationFrame(() => {
+                    if (step === 0) { overlay.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+                    const st = steps[step - 1];
+                    if (!st) return;
+                    // Första delsteget i en exempel-ruta: skrolla till rutans
+                    // ram (med titel), inte bara den första raden.
+                    let target = st.el;
+                    if (st.block) {
+                        const before = steps[step - 2];
+                        if (!before || before.block !== st.block) target = st.block;
+                    }
+                    const r = target.getBoundingClientRect();
+                    const oh = overlay.clientHeight;
+                    const top = (r.height > oh * 0.62)
+                        ? overlay.scrollTop + r.top - oh * 0.10
+                        : overlay.scrollTop + r.top - (oh - r.height) / 2;
+                    overlay.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+                });
+                return () => cancelAnimationFrame(raf);
+            }, [step, ready]);
+
+            // Nedre listen göms efter en stunds musinaktivitet (som i bildspel).
+            const pokeChrome = () => {
+                setChrome(true);
+                clearTimeout(chromeTimer.current);
+                chromeTimer.current = setTimeout(() => setChrome(false), 2800);
+            };
+            useEffect(() => { pokeChrome(); return () => clearTimeout(chromeTimer.current); }, []);
+
+            const onStageClick = (e) => {
+                if (e.target.closest('button, a')) return;
+                const sel = window.getSelection && window.getSelection();
+                if (sel && sel.toString()) return;   // markerar text — bläddra inte
+                next();
+            };
+
+            return (
+                <div className={'lab-pres' + (chrome ? ' chrome-on' : '')
+                        + (step === 0 ? ' at-title' : '') + (ready ? ' is-ready' : '')}
+                    ref={overlayRef} onMouseMove={pokeChrome} onClick={onStageClick}
+                    role="dialog" aria-label={'Presentationsläge: ' + title}>
+                    <div className="lab-pres-progress" aria-hidden="true">
+                        <div style={{ width: (total > 0 ? (step / total) * 100 : 0) + '%' }} />
+                    </div>
+                    <div className="lab-pres-stage">
+                        <div className="lab-pres-title">
+                            <span className="lab-mono-label">
+                                {(course || '').toUpperCase()} · KAPITEL {chapterNumber} — {(chapter || '').toUpperCase()} · AVSNITT {num}
+                            </span>
+                            <h1>{title}</h1>
+                            <span className="lab-pres-rule" aria-hidden="true" />
+                            <div className="lab-pres-hint">
+                                Klicka — eller tryck <kbd>→</kbd> — för nästa stycke · <kbd>Esc</kbd> avslutar
+                            </div>
+                        </div>
+                        {html ? (
+                            <div className="lab-article-body lab-pres-body" ref={bodyRef}
+                                dangerouslySetInnerHTML={{ __html: html }} />
+                        ) : (
+                            <p className="lab-pres-empty">Teorigenomgång saknas för det här avsnittet.</p>
+                        )}
+                    </div>
+                    <div className="lab-pres-bar" onClick={(e) => e.stopPropagation()}>
+                        <span className="lab-mono-label lab-pres-counter">
+                            {step === 0 ? 'TITELBILD' : `STEG ${step} / ${total}`}
+                        </span>
+                        <div className="lab-pres-bar-btns">
+                            <button type="button" onClick={prev} disabled={step === 0}
+                                aria-label="Föregående steg">←</button>
+                            <button type="button" onClick={next} disabled={step >= total}
+                                aria-label="Nästa steg">→</button>
+                        </div>
+                        <button type="button" className="lab-pres-exit" onClick={onClose}>
+                            Avsluta · Esc
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
         // Plocka ut bara svaret ur en lösningstext.
         // Letar efter en rad/paragraf som börjar med "**Svar:**".
         function extractAnswer(solution) {
@@ -1110,6 +1332,9 @@
                 try { localStorage.setItem('fy-dyslexia', dyslexia ? '1' : '0'); } catch (e) {}
             }, [dyslexia]);
 
+            // Presentationsläge (fullskärmsbildspel av teorin)
+            const [presenting, setPresenting] = useState(false);
+
             // När man klickar Föregående/Nästa: byt avsnitt och scrolla högst
             // upp i den nya genomgången så man inte hamnar längst ned.
             const sectionContentRef = useRef(null);
@@ -1283,9 +1508,35 @@
                                                             <span className="lab-bionic-knob" />
                                                             <span className="lab-dys-label">Dyslexivänligt</span>
                                                         </button>
+                                                        {hasTeori && (
+                                                            <button type="button" className="lab-pres-launch"
+                                                                onClick={() => setPresenting(true)}
+                                                                title="Presentationsläge — visa genomgången i fullskärm och klicka fram ett stycke i taget">
+                                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" strokeWidth="2"
+                                                                    strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                                                    <path d="M2 4h20" />
+                                                                    <rect x="4" y="4" width="16" height="11" rx="1" />
+                                                                    <path d="M10.5 7.6l4 2.15-4 2.15z" fill="currentColor" stroke="none" />
+                                                                    <path d="M12 15v3" />
+                                                                    <path d="M8.5 21l3.5-3 3.5 3" />
+                                                                </svg>
+                                                                Presentationsläge
+                                                            </button>
+                                                        )}
                                                     </div>
                                                 )}
                                                 {view === 'teori' && <TeoriBody id={tid} bionic={bionic} dyslexia={dyslexia} />}
+                                                {presenting && activeSection && (
+                                                    <PresentationMode
+                                                        id={tid}
+                                                        num={activeSection.num}
+                                                        title={activeSection.title}
+                                                        chapter={chapter}
+                                                        chapterNumber={chapterNumber}
+                                                        course={course}
+                                                        onClose={() => setPresenting(false)} />
+                                                )}
                                                 {view === 'ovningar' && <Ovningar id={tid} />}
 
                                                 <div className="lab-section-actions" style={{ marginTop: 32, paddingTop: 14, borderTop: '1px solid var(--lab-line)' }}>

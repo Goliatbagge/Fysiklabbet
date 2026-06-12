@@ -128,6 +128,88 @@ body.laborans a {
     border-bottom-color: var(--lab-accent);
 }
 
+/* Dropdown i huvudnavigationen ("Ämnen") — öppnas på hover och
+   tangentbordsfokus (:focus-within), ingen JS behövs. */
+
+.lab-nav-dd {
+    position: relative;
+}
+
+.lab-nav-dd-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid transparent;
+    padding: 4px 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: var(--lab-ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.lab-nav-dd-caret {
+    transition: transform 0.15s ease;
+}
+
+.lab-nav-dd:hover .lab-nav-dd-trigger,
+.lab-nav-dd:focus-within .lab-nav-dd-trigger {
+    border-bottom-color: var(--lab-accent);
+}
+
+.lab-nav-dd:hover .lab-nav-dd-caret,
+.lab-nav-dd:focus-within .lab-nav-dd-caret {
+    transform: rotate(180deg);
+}
+
+.lab-nav-dd-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    min-width: 190px;
+    padding: 6px 0;
+    background: var(--lab-bg-panel);
+    border: 1px solid var(--lab-line-strong);
+    box-shadow: 0 12px 28px rgba(15, 22, 32, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+    z-index: 60;
+}
+
+/* Osynlig brygga över glappet mellan trigger och meny så hovern hålls kvar */
+.lab-nav-dd-menu::before {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: 0;
+    right: 0;
+    height: 9px;
+}
+
+.lab-nav-dd:hover .lab-nav-dd-menu,
+.lab-nav-dd:focus-within .lab-nav-dd-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.lab-nav .lab-nav-dd-menu a {
+    display: block;
+    padding: 9px 16px;
+    border-bottom: none;
+    white-space: nowrap;
+}
+
+.lab-nav .lab-nav-dd-menu a:hover {
+    background: var(--lab-bg-raised);
+    border-bottom-color: transparent;
+}
+
 /* Breadcrumb (mono) */
 
 .lab-breadcrumb {

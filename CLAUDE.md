@@ -21,6 +21,10 @@ node data/teori/build.js
 
 # Öppna simulering i webbläsare
 start [filnamn].html
+
+# Lokal utvecklingsserver (cache avstängd — använd ALLTID denna, inte
+# `python -m http.server` som låter webbläsaren cacha gamla filer)
+python .claude/dev-server.py 8000
 ```
 
 ## ⚠️ KRITISK: Bygg teori-bundle efter md-ändringar

@@ -2300,7 +2300,7 @@ function makeBankedCurve(opts) {
 
 // ── Vertikal loop (makeLoop) ─────────────────────────────────────────
 //
-// Berg- och dalbane-loop (cirkel) med vagn i toppen och/eller botten,
+// Berg-och-dalbane-loop (cirkel) med vagn i toppen och/eller botten,
 // streckad radie, valfria krafter i toppen (F_G ned) och fart-pil.
 //
 //   opts = {
@@ -12706,7 +12706,7 @@ $$ F_C = \\frac{m v^2}{r} = \\frac{60 \\cdot 5{,}0^2}{3{,}0} = \\frac{1\\,500}{3
         },
         {
             level: 1,
-            question: `En berg- och dalbanevagn åker i en vertikal loop med radien $4{,}0\\ \\mathrm{m}$. Vilken är den minsta farten i loopens **högsta** punkt för att vagnen inte ska tappa kontakten med banan? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+            question: `En berg-och-dalbanevagn åker i en vertikal loop med radien $4{,}0\\ \\mathrm{m}$. Vilken är den minsta farten i loopens **högsta** punkt för att vagnen inte ska tappa kontakten med banan? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
 ${makeLoop({ r: 92, rLabel: 'r = 4,0 m', cartTop: true, topForces: true, vTop: 'v' })}`,
             answer: { value: 6.3, unit: 'm/s' },
@@ -12741,7 +12741,7 @@ $$ F_S = \\frac{70 \\cdot 23{,}6}{4{,}0} + 70 \\cdot 9{,}82 = 412 + 687 = 1\\,10
         },
         {
             level: 2,
-            question: `En berg- och dalbana har en vertikal loop med radien $8{,}0\\ \\mathrm{m}$. Vilken minsta fart måste vagnen ha vid loopens **botten** för att precis klara hela loopen? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
+            question: `En berg-och-dalbana har en vertikal loop med radien $8{,}0\\ \\mathrm{m}$. Vilken minsta fart måste vagnen ha vid loopens **botten** för att precis klara hela loopen? ($g = 9{,}82\\ \\mathrm{m/s^2}$)
 
 ${makeLoop({ r: 88, rLabel: 'r = 8,0 m', cartTop: true, cartBottom: true, heightLabel: '2r' })}`,
             answer: { value: 20, unit: 'm/s' },
@@ -16547,7 +16547,7 @@ Faktiskt korrigerar jag: $0{,}050^2 = 0{,}0025$, $0{,}064^2 = 0{,}004096$, produ
 **Exempel:**
 - En aluminiumpendel som svänger genom ett magnetfält bromsas av virvelströmmar.
 - En **induktionshäll** värmer en stekpannas botten genom virvelströmmar.
-- **Magnetbromsar** på berg- och dalbanor använder virvelströmmar för säker inbromsning.`,
+- **Magnetbromsar** på berg-och-dalbanor använder virvelströmmar för säker inbromsning.`,
         },
         {
             level: 1,

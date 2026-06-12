@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berg- och dalbana - Fysiklabbet</title>
+    <title>Berg-och-dalbana - Fysiklabbet</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
     <meta property="og:type" content="website">
@@ -152,8 +152,16 @@
             </a>
             <nav class="lab-nav" aria-label="Huvudnavigation">
                 <a href="index.html">Start</a>
-                <a href="katalog.html#fy1">Fysik</a>
-                <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämnen
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik</a>
+                        <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                    </div>
+                </div>
                 <a href="simuleringar.html">Simuleringar</a>
                 <a href="om.html">Om</a>
                 <a href="kontakt.html">Kontakt</a>
@@ -847,13 +855,13 @@
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     <div className="max-w-6xl mx-auto pt-6">
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
-                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik</a> / Berg- och dalbana
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik</a> / Berg-och-dalbana
                         </div>
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>
-                            Berg- och dalbana
+                            Berg-och-dalbana
                         </h1>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
-                            I en berg- och dalbana utan friktion bevaras den <strong>mekaniska energin</strong>:
+                            I en berg-och-dalbana utan friktion bevaras den <strong>mekaniska energin</strong>:
                             på väg ner omvandlas <strong>lägesenergi</strong> till <strong>rörelseenergi</strong>, och på
                             väg upp sker det omvända. Ställ in banans pucklar och dalar, släpp vagnen från toppen av
                             puckel 1 utan begynnelsefart och följ energierna, farten och accelerationen i realtid.

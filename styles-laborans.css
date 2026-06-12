@@ -2434,17 +2434,16 @@ button.lab-card-disabled { pointer-events: none; }
 .lab-pres-launch {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
     margin-left: auto;
     border: 1px solid var(--lab-line-strong);
     background: transparent;
     border-radius: 999px;
-    padding: 6px 14px;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    flex-shrink: 0;
     cursor: pointer;
-    font-family: var(--lab-font-mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
     color: var(--lab-ink-soft);
     transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }

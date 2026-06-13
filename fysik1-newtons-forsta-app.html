@@ -193,6 +193,16 @@
         // F_luft = k·v² med k = m·g/v_t² → vid v = v_t blir F_luft = F_G
         const fAirOf = (vv) => F_G_DIVER * (vv / V_T) * (vv / V_T);
 
+        // Bilens fysik: drivkraft (sätts med knappar) mot kvadratiskt luftmotstånd.
+        // Vid konstant fart gäller F_driv = F_luft = K_CAR·v². K vald så att
+        // 600 N drivkraft ger 14 m/s (som i ursprungsläget).
+        const K_CAR = 600 / (14 * 14);     // ≈ 3,06 N·s²/m²
+        const M_CAR = 300;                 // tröghet (kg) — litet värde → jämvikt nås snabbt
+        const F_STEP = 500;                // N per knapptryck (Öka/Minska fart)
+        const F_MAX_CAR = 3000;            // max drivkraft (≈ 31 m/s)
+        const fAirCar = (vv) => K_CAR * vv * vv;
+        const carVeq = (F) => Math.sqrt(Math.max(0, F) / K_CAR);   // jämviktsfart för given drivkraft
+
         // Sax-pekare över snöret (vit kontur + mörk sax → syns mot både himmel
         // och moln; en muspekar-ikon är ett legitimt undantag från vit-kontur-regeln)
         const SCISSORS_CURSOR = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%23ffffff' stroke-width='4'%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Cline x1='20' y1='4' x2='8.12' y2='15.88'/%3E%3Cline x1='14.47' y1='14.48' x2='20' y2='20'/%3E%3Cline x1='8.12' y1='8.12' x2='12' y2='12'/%3E%3C/g%3E%3Cg stroke='%23111111' stroke-width='1.8'%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Cline x1='20' y1='4' x2='8.12' y2='15.88'/%3E%3Cline x1='14.47' y1='14.48' x2='20' y2='20'/%3E%3Cline x1='8.12' y1='8.12' x2='12' y2='12'/%3E%3C/g%3E%3C/svg%3E\") 15 15, pointer";
@@ -377,7 +387,7 @@
         };
 
         // ── Bil ─────────────────────────────────────────────────
-        const CarScene = ({ scroll, v, drive, show }) => {
+        const CarScene = ({ scroll, v, drive, show, fDrive, fAir }) => {
             const clouds = useMemo(() => {
                 const r = mulberry(11), arr = [];
                 for (let i = 0; i < 5; i++) arr.push({ x: r() * (VBW + 200), y: 40 + r() * 120, s: 0.7 + r() * 0.7 });
@@ -506,12 +516,9 @@
                             <rect x="-135" y="0" width="6" height="13" rx="2" fill="#e0524a" stroke="#a8201c" strokeWidth="1" />
                         </g>
 
-                        {/* hjul (roterar). Drivhjulet markeras med en färgad ring. */}
+                        {/* hjul (roterar) */}
                         {[REAR_X, FRONT_X].map((wx, wi) => (
                             <g key={'w' + wi} transform={`translate(${wx}, ${wheelY})`}>
-                                {show.forces && wx === drivenWX && (
-                                    <circle r={wheelR + 5} fill="none" stroke={COL.driv} strokeWidth="3" opacity="0.9" />
-                                )}
                                 <circle r={wheelR} fill="#1b1e24" stroke="#0d0f12" strokeWidth="3" />
                                 <circle r={wheelR - 4} fill="none" stroke="#2c313a" strokeWidth="3" />
                                 <g transform={`rotate(${wheelAng})`}>
@@ -533,7 +540,10 @@
                           riktat bakåt (mot färdriktningen) med pilspetsen in mot vindrutan.
                           Lika långa pilar. */}
                     {show.forces && (() => {
-                        const L = 118;
+                        // pillängd ∝ kraft (samma skala för båda → längden går att jämföra):
+                        // drivkraft > luftmotstånd under acceleration, lika långa vid konstant fart
+                        const fLen = (F) => Math.min(165, F * 0.072);
+                        const driveL = fLen(fDrive), airL = fLen(fAir);
                         const driveX = CX + drivenWX;     // drivhjulets kontaktpunkt (x)
                         const yDrive = wheelY + wheelR - 6; // strax ovanför kontaktytan
                         const yAir = wheelY - 60;           // vindrutans framkant (där överdelen börjar)
@@ -541,27 +551,50 @@
                         return (
                             <g>
                                 {/* drivkraft framåt från drivhjulet */}
-                                <Arrow x1={driveX} y1={yDrive} x2={driveX + L} y2={yDrive} color={COL.driv} width={7} head={20} />
+                                {driveL > 1 && <Arrow x1={driveX} y1={yDrive} x2={driveX + driveL} y2={yDrive} color={COL.driv} width={7} head={20} />}
                                 <circle cx={driveX} cy={yDrive} r="4.5" fill={COL.driv} stroke="#ffffff" strokeWidth="1.5" />
                                 {/* etikett under pilen, på vägen — undviker kollision med karossen ovanför */}
-                                <Tag x={driveX + L / 2} y={yDrive + 17} color={COL.driv} size={15}>Drivkraft 600 N</Tag>
+                                <Tag x={driveX + Math.max(driveL, 60) / 2} y={yDrive + 17} color={COL.driv} size={15}>Drivkraft {fmt(fDrive, 0)} N</Tag>
                                 {/* luftmotstånd: bakåtriktad pil med spetsen vid vindrutans framkant */}
-                                <Arrow x1={airTip + L} y1={yAir} x2={airTip} y2={yAir} color={COL.luft} width={7} head={20} />
-                                {/* etikett ovanför pilen, i den ljusa himlen — undviker kollision med röd kaross */}
-                                <Tag x={CX + 102} y={yAir - 25} color={COL.luft} size={15}>Luftmotstånd 600 N</Tag>
+                                {airL > 1 && <Arrow x1={airTip + airL} y1={yAir} x2={airTip} y2={yAir} color={COL.luft} width={7} head={20} />}
+                                {/* etikett centrerad ovanför luftmotståndspilen (som de andra),
+                                    men i gapet UNDER resultantpilen (F_R) så de inte krockar. Vid
+                                    låg fart (kort pil) hålls den ändå en bit ut åt höger så att
+                                    texten inte hamnar på bilen. */}
+                                <Tag x={airTip + Math.max(airL, 168) / 2} y={yAir - 12} color={COL.luft} size={15}>Luftmotstånd {fmt(fAir, 0)} N</Tag>
                             </g>
                         );
                     })()}
 
-                    {/* hastighetsvektor */}
-                    {show.velocity && (
-                        <g>
-                            <Arrow x1={CX} y1={wheelY - 110} x2={CX + 70 + v * 1.4} y2={wheelY - 110} color={COL.v} width={6} head={17} />
-                            <Tag x={CX + 40 + v * 0.7} y={wheelY - 120} color={COL.v} size={16}>
-                                <tspan fontStyle="italic">v</tspan> = {fmt(v)} m/s
-                            </Tag>
-                        </g>
-                    )}
+                    {/* resulterande kraft (netto framåt = drivkraft − luftmotstånd).
+                        Framåt under acceleration, noll vid konstant fart. */}
+                    {show.res && (() => {
+                        const net = fDrive - fAir;
+                        const L = Math.min(165, Math.abs(net) * 0.072);
+                        const dir = net >= 0 ? 1 : -1;
+                        const yR = wheelY - 95;
+                        return (
+                            <g>
+                                {L > 1 && <Arrow x1={CX} y1={yR} x2={CX + dir * L} y2={yR} color={COL.res} width={7} head={20} />}
+                                <Tag x={L > 1 ? CX + dir * L / 2 : CX} y={yR - 12} color={COL.res} size={15}>
+                                    <tspan fontStyle="italic">F</tspan><tspan fontSize="11" dy="3">R</tspan><tspan dy="-3"> = {fmt(Math.abs(net), 0)} N</tspan>
+                                </Tag>
+                            </g>
+                        );
+                    })()}
+
+                    {/* hastighetsvektor — proportionell mot farten (ingen pil vid v = 0) */}
+                    {show.velocity && (() => {
+                        const vLen = Math.min(150, v * 3.2);
+                        return (
+                            <g>
+                                <Arrow x1={CX} y1={wheelY - 132} x2={CX + vLen} y2={wheelY - 132} color={COL.v} width={6} head={17} />
+                                <Tag x={CX + vLen / 2} y={wheelY - 142} color={COL.v} size={16}>
+                                    <tspan fontStyle="italic">v</tspan> = {fmt(v)} m/s
+                                </Tag>
+                            </g>
+                        );
+                    })()}
                 </g>
             );
         };
@@ -783,7 +816,6 @@
                                     )}
                                     {show.res && (
                                         <g>
-                                            <circle cx={rx} cy={cmY} r="5" fill="none" stroke={COL.res} strokeWidth="2.5" />
                                             <circle cx={rx} cy={cmY} r="4" fill={COL.res} />
                                             <Tag x={rx + 20} y={cmY - 12} anchor="end" color={COL.res} size={14}>
                                                 <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">R</tspan><tspan dy="-3"> = 0 N</tspan>
@@ -814,9 +846,7 @@
                                 )}
                                 {show.res && (
                                     <g>
-                                        {resLen > 1
-                                            ? <Arrow x1={rx} y1={cmY} x2={rx} y2={cmY + resLen} color={COL.res} width={7} head={20} />
-                                            : <circle cx={rx} cy={cmY} r="5" fill="none" stroke={COL.res} strokeWidth="2.5" />}
+                                        {resLen > 1 && <Arrow x1={rx} y1={cmY} x2={rx} y2={cmY + resLen} color={COL.res} width={7} head={20} />}
                                         <Tag x={rx + 20} y={cmY - 12} anchor="end" color={COL.res} size={14}>
                                             <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">R</tspan><tspan dy="-3"> = {fmt(fRes, 0)} N</tspan>
                                         </Tag>
@@ -842,11 +872,11 @@
         };
 
         // ── Scen-väljare ─────────────────────────────────────────
-        const Scene = ({ scenario, scroll, v, drive, show, cut, fAir, fGrav, onCut, clock, stringUp, svgRef }) => (
+        const Scene = ({ scenario, scroll, v, drive, show, cut, fAir, fGrav, onCut, clock, stringUp, carFdrive, carFAir, svgRef }) => (
             <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid slice"
                  style={{ fontFamily: 'Poppins, sans-serif' }}>
                 {scenario === 'space' && <SpaceScene scroll={scroll} v={v} show={show} />}
-                {scenario === 'car' && <CarScene scroll={scroll} v={v} drive={drive} show={show} />}
+                {scenario === 'car' && <CarScene scroll={scroll} v={v} drive={drive} show={show} fDrive={carFdrive} fAir={carFAir} />}
                 {scenario === 'diver' && <DiverScene scroll={scroll} v={v} cut={cut} fAir={fAir} fGrav={fGrav} show={show} onCut={onCut} clock={clock} stringUp={stringUp} />}
             </svg>
         );
@@ -879,6 +909,15 @@
             const cutRef = useRef(false); cutRef.current = cut;
             const diverVRef = useRef(0);
 
+            // Bilen: startar i vila. Drivkraften glider mjukt mot ett målvärde
+            // (gaspådrag) som ställs med knapparna — inte ett momentant hopp.
+            const [carV, setCarV] = useState(0);
+            const [carFdrive, setCarFdrive] = useState(0);     // faktisk drivkraft (animeras)
+            const [carFtarget, setCarFtarget] = useState(0);   // mål satt med knapparna
+            const carVRef = useRef(0);
+            const carFdriveRef = useRef(0); carFdriveRef.current = carFdrive;
+            const carFtargetRef = useRef(0); carFtargetRef.current = carFtarget;
+
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
             const sceneWrapRef = useRef(null);
@@ -905,6 +944,23 @@
                             setDiverV(vv);
                             setScroll((s) => s + vv * PXPM * dt);
                         }
+                    } else if (scenario === 'car') {
+                        // drivkraften glider mjukt mot målvärdet (gaspådrag), inte ett hopp
+                        let F = carFdriveRef.current;
+                        const tgt = carFtargetRef.current, RAMP = 900;   // N/s
+                        if (F < tgt) F = Math.min(tgt, F + RAMP * dt);
+                        else if (F > tgt) F = Math.max(tgt, F - RAMP * dt);
+                        carFdriveRef.current = F;
+                        setCarFdrive(F);
+                        // a = (F_driv − F_luft)/m. Drivkraft > luftmotstånd → accelererar;
+                        // luftmotståndet växer ∝ v² tills det är lika med drivkraften →
+                        // ny konstant fart (jämvikt).
+                        let vv = carVRef.current;
+                        const a = (F - K_CAR * vv * vv) / M_CAR;
+                        vv = Math.max(0, vv + a * dt);
+                        carVRef.current = vv;
+                        setCarV(vv);
+                        setScroll((s) => s + vv * PXPM * dt);
                     } else {
                         setScroll((s) => s + v * PXPM * dt);
                     }
@@ -914,10 +970,11 @@
                 return () => cancelAnimationFrame(rafRef.current);
             }, [running, v, scenario]);
 
-            // Återställ hopparen till hängande läge när scenariot byts
+            // Återställ scenariot till sitt utgångsläge när man byter
             useEffect(() => {
                 setScroll(0);
                 if (scenario === 'diver') { setCut(false); setDiverV(0); diverVRef.current = 0; }
+                if (scenario === 'car') { setCarV(0); carVRef.current = 0; setCarFdrive(0); setCarFtarget(0); }
             }, [scenario]);
 
             // fullskärm
@@ -946,12 +1003,17 @@
                 setScroll(0);
                 // återhäng hopparen i snöret
                 setCut(false); setDiverV(0); diverVRef.current = 0;
+                // återställ bilen till vila
+                setCarV(0); carVRef.current = 0; setCarFdrive(0); setCarFtarget(0);
             };
             // klipp av snöret → hopparen börjar falla
             const cutString = () => { diverVRef.current = 0; setDiverV(0); setCut(true); setRunning(true); };
+            // bilen: öka/minska MÅL-drivkraften (faktisk kraft glider dit i loopen)
+            const carFaster = () => { setRunning(true); setCarFtarget((t) => Math.min(F_MAX_CAR, t + F_STEP)); };
+            const carSlower = () => { setRunning(true); setCarFtarget((t) => Math.max(0, t - F_STEP)); };
 
-            // scenens fart (hopparen: fysikfart; övriga: glidaren) + luftmotstånd
-            const sceneV = scenario === 'diver' ? diverV : v;
+            // scenens fart: hopparen + bilen har fysikfart, rymden glidaren
+            const sceneV = scenario === 'diver' ? diverV : scenario === 'car' ? carV : v;
             const diverFAir = fAirOf(diverV);
 
             // Primärknappen: när hopparen hänger i snöret startar den fallet
@@ -992,10 +1054,18 @@
                             </label>
                         </React.Fragment>
                     ) : (
-                        <label>
-                            <input type="checkbox" checked={show.forces} onChange={() => tShow('forces')} />
-                            <span>Krafter</span>
-                        </label>
+                        <React.Fragment>
+                            <label>
+                                <input type="checkbox" checked={show.forces} onChange={() => tShow('forces')} />
+                                <span>Kraftpilar</span>
+                            </label>
+                            {scenario === 'car' && (
+                                <label>
+                                    <input type="checkbox" checked={show.res} onChange={() => tShow('res')} />
+                                    <span>Resulterande kraft</span>
+                                </label>
+                            )}
+                        </React.Fragment>
                     )}
                     <label>
                         <input type="checkbox" checked={show.velocity} onChange={() => tShow('velocity')} />
@@ -1020,6 +1090,15 @@
                             </label>
                         </React.Fragment>
                     )}
+                    {scenario === 'car' && (
+                        <div className="st-actions">
+                            <div style={{ fontSize: 13, textAlign: 'center', color: 'var(--lab-ink)' }}>
+                                Drivkraft <strong>{fmt(carFdrive, 0)} N</strong>
+                            </div>
+                            <button className="btn-toggle" onClick={carSlower}>− Minska fart</button>
+                            <button className="btn-toggle" onClick={carFaster}>+ Öka fart</button>
+                        </div>
+                    )}
                     {isFullscreen && (
                         <div className="st-actions">
                             <button className="btn-toggle" onClick={playAction}>{playLabel}</button>
@@ -1036,7 +1115,7 @@
                 },
                 car: {
                     title: 'Bilen — krafterna tar ut varandra',
-                    text: 'Drivkraften är friktionen som vägen utövar på drivhjulet, medan luftmotståndet bromsar bakåt. När de är lika stora blir resultanten noll, och bilen rullar vidare med konstant fart. Bilen står stilla i bild — det är världen som rusar förbi.',
+                    text: 'Drivkraften är friktionen som vägen utövar på drivhjulet, medan luftmotståndet bromsar bakåt och växer med farten (∝ v²). Öka drivkraften: en stund är den större än luftmotståndet och bilen accelererar — tills luftmotståndet vuxit ikapp. Då är resultanten noll igen och bilen håller en ny, högre konstant fart. Högre fart kräver alltså större drivkraft. Bilen står stilla i bild — det är världen som rusar förbi.',
                     note: 'Drivkraften angriper vid drivhjulet (fram eller bak) men pekar FRAMÅT i båda fallen — bakhjulsdrift "skjuter" alltså inte mer än framhjulsdrift "drar". Motorn vrider hjulet bakåt mot vägen, och vägen svarar med att skjuta hjulet framåt (Newtons tredje lag).',
                 },
                 diver: {
@@ -1078,7 +1157,8 @@
                                 <div className="scene-wrap" ref={sceneWrapRef}>
                                     <Scene scenario={scenario} scroll={scroll} v={sceneV} drive={drive} show={show}
                                            cut={cut} fAir={diverFAir} fGrav={F_G_DIVER} onCut={cutString}
-                                           clock={clock} stringUp={cut ? scroll : 0} svgRef={svgRef} />
+                                           clock={clock} stringUp={cut ? scroll : 0}
+                                           carFdrive={carFdrive} carFAir={fAirCar(carV)} svgRef={svgRef} />
 
                                     <div className="sf-badge">
                                         {scenario === 'diver'
@@ -1086,7 +1166,13 @@
                                                     : diverV >= V_T - 0.5
                                                         ? <span>Gränshastighet — <em>F</em><sub>R</sub> = 0 → konstant fart</span>
                                                         : 'Luftmotståndet växer med farten …')
-                                            : <span><em>F</em><sub>R</sub> = 0 → konstant fart</span>}
+                                            : scenario === 'car'
+                                                ? (Math.abs(carFdrive - fAirCar(carV)) < 12
+                                                    ? <span><em>F</em><sub>R</sub> = 0 → konstant fart</span>
+                                                    : carFdrive > fAirCar(carV)
+                                                        ? 'Drivkraft > luftmotstånd → bilen accelererar'
+                                                        : 'Luftmotstånd > drivkraft → bilen bromsar in')
+                                                : <span><em>F</em><sub>R</sub> = 0 → konstant fart</span>}
                                     </div>
 
                                     {/* On-scene-panelen (scenario + visa) behövs bara i fullskärm —
@@ -1094,10 +1180,9 @@
                                     {isFullscreen && sceneToggles()}
 
                                     {/* Fullskärm: flytande dropdown med GLIDARE i underkant.
-                                        Start/Börja om ligger BARA i panelen uppe till höger
-                                        (sceneToggles) — aldrig dubblerat här. Hopparen saknar
-                                        glidare → ingen nedre panel alls. */}
-                                    {isFullscreen && scenario !== 'diver' && (
+                                        Bara rymdscenen har en glidare → övriga scenarier (bil,
+                                        hoppare) har sina reglage uppe till höger, ingen nedre panel. */}
+                                    {isFullscreen && scenario === 'space' && (
                                         <React.Fragment>
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
                                                 <FsSlider label="Fart" value={v} min={0} max={40} step={1}
@@ -1159,6 +1244,26 @@
                                                 <span className="font-mono font-semibold" style={{ color: 'var(--lab-accent)' }}>{fmt(diverV, 1)} m/s</span>
                                             </div>
                                         </React.Fragment>
+                                    ) : scenario === 'car' ? (
+                                        <React.Fragment>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                                Ändra <strong>drivkraften</strong>. Ökar du den blir drivkraften större än
+                                                luftmotståndet en stund (bilen accelererar) tills luftmotståndet vuxit ikapp
+                                                — då hålls en ny, högre konstant fart.
+                                            </p>
+                                            <div className="flex items-center justify-between text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                                <span>Drivkraft</span>
+                                                <span className="font-mono font-semibold" style={{ color: COL.driv }}>{fmt(carFdrive, 0)} N</span>
+                                            </div>
+                                            <div className="flex items-center justify-between mb-2 text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                                <span>Fart <em>v</em></span>
+                                                <span className="font-mono font-semibold" style={{ color: 'var(--lab-accent)' }}>{fmt(carV, 1)} m/s</span>
+                                            </div>
+                                            <div className="flex gap-2">
+                                                <button className="btn-toggle flex-1" onClick={carSlower}>− Minska fart</button>
+                                                <button className="btn-toggle flex-1" onClick={carFaster}>+ Öka fart</button>
+                                            </div>
+                                        </React.Fragment>
                                     ) : (
                                         <Slider label="Fart" value={v} min={0} max={40} step={1} onChange={setV}>
                                             <span className="font-mono font-semibold text-sm flex-shrink-0"
@@ -1195,11 +1300,20 @@
                                             </label>
                                         </React.Fragment>
                                     ) : (
-                                        <label className="flex items-center gap-2 mb-1 cursor-pointer text-sm" style={{ color: 'var(--lab-ink)' }}>
-                                            <input type="checkbox" checked={show.forces} onChange={() => tShow('forces')}
-                                                   style={{ width: 16, height: 16, accentColor: 'var(--lab-accent)' }} />
-                                            Kraftpilar
-                                        </label>
+                                        <React.Fragment>
+                                            <label className="flex items-center gap-2 mb-1 cursor-pointer text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                                <input type="checkbox" checked={show.forces} onChange={() => tShow('forces')}
+                                                       style={{ width: 16, height: 16, accentColor: 'var(--lab-accent)' }} />
+                                                Kraftpilar
+                                            </label>
+                                            {scenario === 'car' && (
+                                                <label className="flex items-center gap-2 mb-1 cursor-pointer text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                                    <input type="checkbox" checked={show.res} onChange={() => tShow('res')}
+                                                           style={{ width: 16, height: 16, accentColor: 'var(--lab-accent)' }} />
+                                                    Resulterande kraft
+                                                </label>
+                                            )}
+                                        </React.Fragment>
                                     )}
                                     <label className="flex items-center gap-2 mb-1 cursor-pointer text-sm" style={{ color: 'var(--lab-ink)' }}>
                                         <input type="checkbox" checked={show.velocity} onChange={() => tShow('velocity')}

@@ -215,7 +215,7 @@
         const G = 9.82;
         const M_TOT = 200;            // vagn + person (kg) — energierna
         const M_P = 70;               // personen (kg) — krafterna på personen
-        const START_X = 6.6;          // strax bortom puckel 1:s krön (krönet har lutning 0)
+        const START_X = 6.6;          // strax bortom topp 1:s krön (krönet har lutning 0)
         const T_WIN = 12;             // diagrammens tidsfönster (s)
         const EMAX_KJ = 40;           // energiaxelns tak: m·g·20 m ≈ 39,3 kJ
         const VMAX_G = 20;            // hastighetsaxel ±20 m/s
@@ -241,7 +241,7 @@
         // lutning (dy/dx) och andraderivata för krökning.
         const buildPts = (h1, d1, h2, d2) => [
             // Efter dal 2 planar banan ut (samma höjd som d2) och går rakt
-            // ut ur bild — ingen tredje puckel.
+            // ut ur bild — ingen tredje topp.
             [0, h1 - 2], [6, h1], [20, d1], [34, h2], [46, d2], [WORLD_W, d2],
         ];
         const trackInfo = (pts, x) => {
@@ -383,7 +383,7 @@
             const resDir = resMag > 1 ? [resW[0] / resMag, -resW[1] / resMag] : [0, 0];
 
             // "meet" (inte "slice"): hela banan måste alltid synas —
-            // slice beskär puckel 1 och startvagnen vid smala fönster.
+            // slice beskär topp 1 och startvagnen vid smala fönster.
             return (
                 <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
                      style={{ fontFamily: "'DM Sans', sans-serif", overflow: 'visible' }}>
@@ -855,7 +855,7 @@
                 return p.matrixTransform(ctm.inverse()).x / PXM;
             };
             // Förberäkna vagnens FÖRSTA passage från ordinarie start (vila vid
-            // krönet av puckel 1) tills den vänder eller rullar ut ur bild till
+            // krönet av topp 1) tills den vänder eller rullar ut ur bild till
             // höger. Ger en monoton x→tid-tabell så att dragning kan "scrubba"
             // simuleringen: diagrammet visar exakt hur det sett ut när vagnen
             // nådde den hållna positionen.
@@ -1038,9 +1038,9 @@
 
             const sliderRows = (compact) => {
                 const defs = [
-                    ['Puckel 1 — höjd', h1, 8, 20, setHeight(setH1)],
+                    ['Topp 1 — höjd', h1, 8, 20, setHeight(setH1)],
                     ['Dal 1 — höjd', d1, 0, 6, setHeight(setD1)],
-                    ['Puckel 2 — höjd', h2, 6, 20, setHeight(setH2)],
+                    ['Topp 2 — höjd', h2, 6, 20, setHeight(setH2)],
                     ['Dal 2 — höjd', d2, 0, 6, setHeight(setD2)],
                 ];
                 return defs.map(([label, val, min, max, set]) => compact ? (
@@ -1068,9 +1068,9 @@
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
                             I en berg-och-dalbana utan friktion bevaras den <strong>mekaniska energin</strong>:
                             på väg ner omvandlas <strong>lägesenergi</strong> till <strong>rörelseenergi</strong>, och på
-                            väg upp sker det omvända. Ställ in banans pucklar och dalar, släpp vagnen från toppen av
-                            puckel 1 utan begynnelsefart och följ energierna, farten och accelerationen i realtid.
-                            Vad händer om puckel 2 är <em>högre</em> än puckel 1?
+                            väg upp sker det omvända. Ställ in banans toppar och dalar, släpp vagnen från topp 1
+                            utan begynnelsefart och följ energierna, farten och accelerationen i realtid.
+                            Vad händer om topp 2 är <em>högre</em> än topp 1?
                         </p>
 
                         <FormulaCard ep={epNow} ek={ekNow} />
@@ -1256,7 +1256,7 @@
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                     Ur <em>m</em> · <em>g</em> · <em>h</em>₁ = <em>m</em> · <em>g</em> · <em>h</em> + <em>m</em> · <em>v</em>² / 2
                                     följer att farten på höjden <em>h</em> är samma oavsett banans form — och oberoende
-                                    av massan! Är puckel 2 högre än puckel 1 räcker energin inte över: vagnen vänder.
+                                    av massan! Är topp 2 högre än topp 1 räcker energin inte över: vagnen vänder.
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
@@ -1276,8 +1276,8 @@
                             <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
                                 <li><strong>”Energin förbrukas under färden.”</strong> Nej — utan friktion omvandlas den bara
                                     mellan läges- och rörelseenergi. Summan <em>E</em><sub>p</sub> + <em>E</em><sub>k</sub> är konstant.</li>
-                                <li><strong>”Vagnen klarar alltid nästa puckel om den har fart.”</strong> Nej — den kommer bara
-                                    upp till den höjd där hela energin åter är lägesenergi. Är puckel 2 högre än starthöjden vänder vagnen.</li>
+                                <li><strong>”Vagnen klarar alltid nästa topp om den har fart.”</strong> Nej — den kommer bara
+                                    upp till den höjd där hela energin åter är lägesenergi. Är topp 2 högre än starthöjden vänder vagnen.</li>
                                 <li><strong>”En brantare backe ger högre fart längst ner.”</strong> Nej — utan friktion bestäms
                                     farten bara av höjdskillnaden, inte av hur brant eller lång banan är.</li>
                             </ul>

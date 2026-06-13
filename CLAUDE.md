@@ -16,6 +16,10 @@ Interaktiva fysiksimuleringar för gymnasieelever (Fysik 1 & 2).
 # Verifiera navigation i alla filer (KÖR FÖRE COMMIT!)
 node .claude/verify-navigation.js
 
+# Verifiera att inga vita konturer/halor finns runt etiketter/pilar på
+# ljusa scenbakgrunder (KÖR FÖRE COMMIT!)
+node .claude/verify-no-white-outline.js
+
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
@@ -149,6 +153,17 @@ ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor 
   skriv enkelt `F_G`, `F_\text{drag}`. Siffror lämnas oförändrade.
 - I `data/ovningar.js` finns ingen sådan transform — där måste du själv
   skriva `F_\\mathrm{G}` (med dubbelt backslash, se nedan).
+
+### Standardbeteckningar för krafter
+
+- **Tyngdkraften betecknas ALLTID `F_G` med STORT `G`** — aldrig `F_g`
+  (litet g). Litet `g` är *tyngdfaktorn* (9,82 N/kg), en helt annan storhet;
+  använder man `F_g` blandar man ihop kraften med faktorn. Gäller överallt:
+  md-teori, `data/ovningar.js`, KaTeX, JSX-formelkort, canvas- och
+  SVG-etiketter (`<tspan>G</tspan>`, inte `g`). `G` är en upright
+  etikett-subscript (se ovan), så `F_\mathrm{G}` i ovningar.js / rå-KaTeX.
+- Övriga vedertagna kraftbeteckningar: normalkraft `F_N`, spännkraft `F_S`,
+  friktionskraft `F_f`, resulterande kraft `F_R`, elektrisk kraft `F_e`.
 
 ### Hårt mellanslag (NBSP) i löptext
 
@@ -359,28 +374,54 @@ Vanliga fällor:
 - Vinkeletiketter (i₁, b₁) hamnar på strålarna → större etikettradie.
 - Formel i headern upprepas i sidopanelen → välj en plats, inte båda.
 
-### Ingen vit kontur runt text på ljusa scenbakgrunder
+### ⛔ FÖRBJUDET: vit kontur/halo runt text och pilar på ljus scenbakgrund
 
-På "Laborans papper"-scener (ljus vägg-/golvgradient, t.ex. `#f7f2e8` →
-`#ece3d2`) får SVG-textetiketter **aldrig** en tjock vit `stroke`
-(`stroke="#ffffff"` + `paintOrder: 'stroke'`). Mot en redan ljus botten gör
-konturen ingen nytta — den lägger bara en suddig vit gloria runt texten och
-gör den svårare att läsa, inte lättare.
+**Detta är ett ÅTERKOMMANDE fel som upprepade gånger har påpekats och rättats
+— gör det INTE igen.** På ljusa scenbakgrunder (t.ex. "Laborans papper"
+`#f7f2e8` → `#ece3d2`, men även ljus himmel/mark i andra scener) får SVG-
+textetiketter och pilar **ALDRIG** en vit eller nästan-vit kontur/halo:
 
-- ✓ Mörk/mättad textfärg (bläck, eller komponentens egen kraft-/
-  accelerationsfärg) räcker för kontrast mot papper — ingen kontur alls.
-- ✓ Behövs ändå separation, t.ex. när en etikett kan korsa rörliga
-  figurdelar (skrollande golvmarkeringar, luftpartiklar): lägg en **mycket
-  diskret halo i scenens egen papperston** (t.ex. `#f3eee4`,
-  `strokeWidth: 3`) — inte vitt, och inte tjockare än nödvändigt.
-- ✓ Hellre flytta etiketten till en lugn yta än att lösa kollisionen med
-  kontur.
-- ✗ `stroke="#ffffff" strokeWidth="4"` på text mot ljus bakgrund.
+- ✗ `stroke="#ffffff"` / `stroke="#fff"` / `stroke="white"` på `<text>`,
+  `<tspan>`, `<line>` eller `<polygon>` som utgör en etikett/pil
+- ✗ `paintOrder: 'stroke'` (eller `paint-order: stroke`) kombinerat med vit
+  `stroke`
+- ✗ `WebkitTextStroke` eller `text-shadow` i vitt/ljust
+
+Mot en redan ljus botten gör konturen ingen nytta — den lägger bara en
+suddig vit gloria runt texten/pilen och gör den **svårare** att läsa, inte
+lättare. Körs `node .claude/verify-no-white-outline.js` (se "Kommandon")
+före varje commit för att fånga detta maskinellt.
+
+Lösning, i prioritetsordning:
+
+1. **Mörk/mättad textfärg** (bläck, eller komponentens egen kraft-/
+   accelerationsfärg) räcker för kontrast mot ljus bakgrund — **ingen
+   kontur alls**. Förstahandsvalet, nästan alltid rätt.
+2. **OBS – även en ljus papperston-halo läses som vit gloria.** På en
+   pappers-*gradient* (`#f7f2e8` → `#ece3d2`) är `#f3eee4` ljusare än botten
+   i nedre halvan av scenen, så en `#f3eee4`-halo syns där som en suddig vit
+   ring runt texten — exakt det fel användaren upprepat påpekar. Använd
+   **ingen halo som standard**, ens i papperston. Endast om en etikett
+   faktiskt korsar rörliga figurdelar (skrollande golvmarkeringar,
+   luftpartiklar) och punkt 3 inte räcker: lägg en *ultratunn* halo
+   (`strokeWidth 2`) i tonen för den **lokala** bakgrunden just där etiketten
+   sitter (inte en generell ljus ton) — och granska i skärmdump att den inte
+   ser vit ut. Vid minsta tveksamhet: ta bort halon.
+3. **Hellre flytta etiketten till en lugn yta** än att lösa en kollision
+   (etikett ovanpå figur/objekt) med kontur. En etikett som hamnar ovanpå
+   t.ex. en röd bil löses genom att flytta etiketten till himlen/vägen ovan/
+   under pilen — inte genom att lägga en kontur runt den.
 
 Samma princip gäller pilkonturer (`Arrow`-komponenter): på ljus bakgrund
 räcker pilens egen färg. En tunn bläckfärgad kantlinje
 (`rgba(15,22,32,0.18)`) kan användas enbart där pilen korsar andra
 figurdelar (kärra, hjul) för lite separation — aldrig en tjock vit kontur.
+
+**Undantag (legitima vita konturer, INTE detta fel):** vita ikon-strokes på
+*mörka* knappar/scener (t.ex. `.fs-btn`-fullskärmsikonen, ljud-knappen,
+muspekar-cursors), eller dekorativa effekter på riktigt mörka ytor (t.ex.
+en grön LED-display). Avgör alltid utifrån den FAKTISKA bakgrunden bakom
+elementet — inte filens generella tema.
 
 ### Formelpresentation
 
@@ -535,8 +576,12 @@ Vid varje skärmdumpsgranskning, kontrollera **systematiskt**:
    `·`, `⟺`, `⟹`) och bråk ligger på samma nivå; inget högerled hamnar
    högre/lägre än vänsterledet, och varje variabel har sin ord-etikett
    över/under (se Formelpresentation punkt 2 och 7).
+7. **Ingen vit kontur/halo runt etiketter eller pilar på ljus
+   scenbakgrund** — kontrollera att texter och pilar inte har en suddig vit
+   gloria runt sig (se "⛔ FÖRBJUDET: vit kontur/halo..." ovan). Kör även
+   `node .claude/verify-no-white-outline.js`.
 
-Markera först som klart när skärmdumpen passerar alla sex kontroller.
+Markera först som klart när skärmdumpen passerar alla sju kontroller.
 
 ## Fysikämnen
 
@@ -588,6 +633,8 @@ Varje ny simulering MÅSTE få lämpliga `keywords`:
 9. [ ] Testa i webbläsare (normalt OCH fullskärm, bred OCH smal skärm)
 10. [ ] Verifiera decimalformatering (komma, inte punkt)
 11. [ ] Testa att sökningen hittar simuleringen via minst ett nyckelord
+12. [ ] Kör `node .claude/verify-no-white-outline.js` — inga vita konturer/
+    halor runt etiketter eller pilar på ljus scenbakgrund
 
 ## Övningar
 

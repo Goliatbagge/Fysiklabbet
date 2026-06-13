@@ -583,7 +583,7 @@
                                         {/* Playhead — markerar bilens aktuella tidpunkt på grafen */}
                                         <line x1={scaleX(simTime)} y1={padding} x2={scaleX(simTime)} y2={svgHeight - padding}
                                               stroke="#f59e0b" strokeWidth="1.5" strokeDasharray="3,3" />
-                                        <circle cx={scaleX(simTime)} cy={scaleY(curA)} r="6.5" fill="#f59e0b" stroke="#fff" strokeWidth="2" />
+                                        <circle cx={scaleX(simTime)} cy={scaleY(curA)} r="6.5" fill="#f59e0b" />
 
                                         {/* Dragbara gränshandtag (på t-axeln) */}
                                         {showArea && [['start', areaStart], ['end', areaEnd]].map(([which, t]) => (
@@ -592,7 +592,7 @@
                                                         style={{ cursor: dragging ? 'grabbing' : 'ew-resize' }}
                                                         onPointerDown={startBoundaryDrag(which)} />
                                                 <circle cx={scaleX(t)} cy={y0px} r={dragging === which ? 8 : 6}
-                                                        fill="#1d4ed8" stroke="#fff" strokeWidth="2"
+                                                        fill="#1d4ed8"
                                                         style={{ cursor: dragging ? 'grabbing' : 'ew-resize' }}
                                                         onPointerDown={startBoundaryDrag(which)} />
                                             </g>

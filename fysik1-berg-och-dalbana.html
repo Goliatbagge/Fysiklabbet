@@ -102,6 +102,32 @@
         .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
         .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
 
+        /* Fullskärm: högerkolumn (visningsval + hopfällbara diagram) */
+        .fs-right {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
+            max-height: calc(100% - 28px); max-width: min(42vw, 420px);
+        }
+        .fs-right .scene-toggles--static { position: static; top: auto; right: auto; width: 100%; }
+        .fs-graphs {
+            width: 100%;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 8px 11px 10px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            overflow-y: auto;
+        }
+        .fs-graphs-head {
+            display: flex; align-items: center; justify-content: space-between; gap: 8px;
+            width: 100%; background: none; border: none; cursor: pointer; padding: 0;
+            font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600;
+        }
+        .fs-graph-box { margin-top: 7px; }
+        .fs-graph-title { font-size: 12px; font-weight: 600; color: var(--lab-ink, #0f1620); margin-bottom: 2px; }
+        .fs-graph-canvas { width: 100%; height: 140px; display: block; }
+
         /* Knappar */
         .btn-toggle {
             background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
@@ -116,7 +142,7 @@
         }
 
         /* Diagramkort */
-        .graph-canvas { width: 100%; height: 260px; display: block; }
+        .graph-canvas { width: 100%; height: 210px; display: block; }
         .graph-legend label {
             display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
             font-size: 13px;
@@ -214,7 +240,9 @@
         // lutning noll, däremellan cosinus-form. Returnerar höjd,
         // lutning (dy/dx) och andraderivata för krökning.
         const buildPts = (h1, d1, h2, d2) => [
-            [0, h1 - 2], [6, h1], [20, d1], [34, h2], [46, d2], [WORLD_W, h1 + 3],
+            // Efter dal 2 planar banan ut (samma höjd som d2) och går rakt
+            // ut ur bild — ingen tredje puckel.
+            [0, h1 - 2], [6, h1], [20, d1], [34, h2], [46, d2], [WORLD_W, d2],
         ];
         const trackInfo = (pts, x) => {
             if (x <= pts[0][0]) x = pts[0][0] + 1e-9;
@@ -301,7 +329,7 @@
         // ════════════════════════════════════════════════════════
         //  SCEN
         // ════════════════════════════════════════════════════════
-        const CoasterScene = ({ pts, x, v, showForces, forceMode, svgRef, heights }) => {
+        const CoasterScene = ({ pts, x, v, showForces, forceMode, svgRef, heights, onCartDown, dragging }) => {
             const inf = trackInfo(pts, x);
             const sx = x * PXM;
             const sy = GROUND_Y - inf.y * PXM;
@@ -310,7 +338,10 @@
             // Banprofil + fackverk (memo via förälderns pts-memo räcker inte
             // här — bygg strängar direkt, billigt vid 60 fps med ~240 punkter)
             let trackD = '';
-            for (let X = 0; X <= WORLD_W + 1e-6; X += 0.25) {
+            // ritas en bit förbi högerkanten (banan planar ut) så vagnen har
+            // räls under sig ända tills den rullat ut ur bild
+            const TRACK_END = VBW / PXM + 6;
+            for (let X = 0; X <= TRACK_END + 1e-6; X += 0.25) {
                 const yy = trackInfo(pts, X).y;
                 trackD += (trackD ? ' L' : 'M') + (X * PXM).toFixed(1) + ' ' + (GROUND_Y - yy * PXM).toFixed(1);
             }
@@ -374,10 +405,8 @@
                     <rect x="-1200" y={GROUND_Y} width={VBW + 2400} height={VBH - GROUND_Y + 700} fill="url(#floor)" />
                     <rect x="-1200" y={GROUND_Y} width={VBW + 2400} height="3" fill="#a89c84" />
 
-                    {/* fackverk + bana (dubbel räls) */}
+                    {/* fackverk + bana */}
                     {posts}
-                    <path d={trackD} fill="none" stroke="rgba(15,22,32,0.35)" strokeWidth="2"
-                          transform="translate(0 5)" />
                     <path d={trackD} fill="none" stroke="#2c2f35" strokeWidth="3" />
 
                     {/* höjdmarkeringar (streckad linje + mått under marken) */}
@@ -386,14 +415,19 @@
                             <line x1={mx * PXM} y1={GROUND_Y} x2={mx * PXM} y2={GROUND_Y - mh * PXM + 4}
                                   stroke="rgba(15,22,32,0.30)" strokeWidth="1.5" strokeDasharray="5 5" />
                             <Tag x={mx * PXM + 7} y={GROUND_Y - Math.max(mh, 1.6) * PXM / 2 + 4}
-                                 color={COL.inkSoft} size={13} weight={600} anchor="start" halo>
+                                 color={COL.inkSoft} size={13} weight={600} anchor="start">
                                 {fmt(mh, 1)}{' '}m
                             </Tag>
                         </g>
                     ))}
 
-                    {/* ── VAGN MED PERSON (roterad med banans lutning) ── */}
-                    <g transform={`translate(${sx} ${sy}) rotate(${angDeg}) scale(1.3)`}>
+                    {/* ── VAGN MED PERSON (roterad med banans lutning) ──
+                        Greppbar: dra för att placera vagnen var som helst. ── */}
+                    <g transform={`translate(${sx} ${sy}) rotate(${angDeg}) scale(1.3)`}
+                       onPointerDown={onCartDown}
+                       style={{ cursor: dragging ? 'grabbing' : 'grab', touchAction: 'none' }}>
+                        {/* osynlig greppyta för enklare drag */}
+                        <circle cx="0" cy="-20" r="32" fill="transparent" />
                         {/* person (ritas före vagnskorgen så benen döljs i korgen) */}
                         <rect x="-4" y="-31" width="13" height="18" rx="5.5" fill="#8a5f24" />
                         <circle cx="2.5" cy="-36" r="5.5" fill="#e3b27a" stroke="#8a5f24" strokeWidth="1.2" />
@@ -415,8 +449,8 @@
                             {/* tyngdkraften från CM, rakt nedåt */}
                             <Arrow x1={cm[0]} y1={cm[1]} x2={cm[0]} y2={cm[1] + fLen(W)} color={COL.fg} width={5} />
                             <circle cx={cm[0]} cy={cm[1]} r="3.5" fill={COL.fg} stroke="#f3eee4" strokeWidth="1.2" />
-                            <Tag x={clX(cm[0])} y={clY(cm[1] + fLen(W) + 18)} color={COL.fg} halo>
-                                <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">g</tspan><tspan dy="-3"> = {kN(W)}</tspan>
+                            <Tag x={clX(cm[0])} y={clY(cm[1] + fLen(W) + 18)} color={COL.fg}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">G</tspan><tspan dy="-3"> = {kN(W)}</tspan>
                             </Tag>
                             {/* normalkraften från sätet, längs banans normal */}
                             {Nmag > 2 && (
@@ -427,7 +461,7 @@
                                     <circle cx={seat[0]} cy={seat[1]} r="3.5" fill={COL.fn} stroke="#f3eee4" strokeWidth="1.2" />
                                     <Tag x={clX(seat[0] + nSvg[0] * (fLen(Nmag) + 16))}
                                          y={clY(seat[1] + nSvg[1] * (fLen(Nmag) + 16) - 4)}
-                                         color={COL.fn} halo>
+                                         color={COL.fn}>
                                         <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">N</tspan><tspan dy="-3"> = {kN(Nmag)}</tspan>
                                     </Tag>
                                 </g>
@@ -442,7 +476,7 @@
                             <circle cx={cm[0]} cy={cm[1]} r="3.5" fill={COL.fres} stroke="#f3eee4" strokeWidth="1.2" />
                             <Tag x={clX(cm[0] + resDir[0] * (resLen + 16))}
                                  y={clY(cm[1] + resDir[1] * (resLen + 16) - 4)}
-                                 color={COL.fres} halo>
+                                 color={COL.fres}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">res</tspan><tspan dy="-3"> = {kN(resMag)}</tspan>
                             </Tag>
                         </g>
@@ -508,6 +542,10 @@
 
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
+            const [graphsOpen, setGraphsOpen] = useState(true);   // fullskärm: diagrampanel
+            const [dragging, setDragging] = useState(false);
+            const dragXRef = useRef(START_X);
+            const firstPassRef = useRef([]);   // förberäknad bana (scrubbning)
             const sceneWrapRef = useRef(null);
             const svgRef = useRef(null);
             const rafRef = useRef(null);
@@ -516,6 +554,8 @@
             const samplesRef = useRef([]);
             const energyCvRef = useRef(null);
             const motionCvRef = useRef(null);
+            const fsEnergyCvRef = useRef(null);   // fullskärms-diagram
+            const fsMotionCvRef = useRef(null);
             const showGRef = useRef(showG);
             showGRef.current = showG;
 
@@ -557,6 +597,26 @@
                 }
                 if (started) ctx.stroke();
             };
+            // Beteckning vid kurvans HÖGRA ände (sista samplet) så att man lätt
+            // ser vilken kurva som är vilken. `main` kursivt (variabel),
+            // `sub` rakt (etikett-index). Hålls inom canvasen.
+            const drawEndLabel = (ctx, W, samples, key, color, X, Y, main, sub) => {
+                if (!samples.length) return;
+                const s = samples[samples.length - 1];
+                const py = Y(s[key]);
+                ctx.fillStyle = color;
+                ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
+                ctx.font = 'italic 600 13px "DM Sans", sans-serif';
+                const mw = ctx.measureText(main).width;
+                const sw = sub ? 6 : 0;
+                const px = Math.min(X(s.t) + 7, W - mw - sw - 3);
+                ctx.fillText(main, px, py);
+                if (sub) {
+                    ctx.font = '600 10px "DM Sans", sans-serif';
+                    ctx.fillText(sub, px + mw + 0.5, py + 4);
+                }
+                ctx.textBaseline = 'alphabetic';
+            };
             const xTicks = (ctx, X, t0, t1, yBase, maxX) => {
                 ctx.fillStyle = COL.inkSoft; ctx.font = '11px "DM Sans", sans-serif';
                 ctx.textAlign = 'center';
@@ -575,8 +635,8 @@
                 ctx.fillText(' (s)', W - 25, y);
             };
 
-            const drawEnergy = () => {
-                const s = setupCtx(energyCvRef.current);
+            const drawEnergyTo = (cv) => {
+                const s = setupCtx(cv);
                 if (!s) return;
                 const { ctx, W, H } = s;
                 const padL = 46, padR = 12, padT = 22, padB = 32;
@@ -607,10 +667,13 @@
                 const sh = showGRef.current;
                 if (sh.ep) drawCurve(ctx, samples, 'ep', COL.ep, X, Y);
                 if (sh.ek) drawCurve(ctx, samples, 'ek', COL.ek, X, Y);
+                if (sh.ep) drawEndLabel(ctx, W, samples, 'ep', COL.ep, X, Y, 'E', 'p');
+                if (sh.ek) drawEndLabel(ctx, W, samples, 'ek', COL.ek, X, Y, 'E', 'k');
             };
+            const drawEnergy = () => { drawEnergyTo(energyCvRef.current); drawEnergyTo(fsEnergyCvRef.current); };
 
-            const drawMotion = () => {
-                const s = setupCtx(motionCvRef.current);
+            const drawMotionTo = (cv) => {
+                const s = setupCtx(cv);
                 if (!s) return;
                 const { ctx, W, H } = s;
                 const padL = 46, padR = 46, padT = 22, padB = 16;
@@ -653,7 +716,10 @@
                 const sh = showGRef.current;
                 if (sh.v) drawCurve(ctx, samples, 'v', COL.v, X, Yv);
                 if (sh.a) drawCurve(ctx, samples, 'a', COL.a, X, Ya);
+                if (sh.v) drawEndLabel(ctx, W, samples, 'v', COL.v, X, Yv, 'v');
+                if (sh.a) drawEndLabel(ctx, W, samples, 'a', COL.a, X, Ya, 'a');
             };
+            const drawMotion = () => { drawMotionTo(motionCvRef.current); drawMotionTo(fsMotionCvRef.current); };
 
             // ── Animationsloop ───────────────────────────────────
             useEffect(() => {
@@ -672,7 +738,8 @@
                         v += -G * inf.dy / c * sdt;       // tangentiell acceleration
                         x += v / c * sdt;
                         if (x < 0.4) { x = 0.4; v = 0; }
-                        if (x > WORLD_W - 0.4) { x = WORLD_W - 0.4; v = 0; }
+                        // ingen högervägg: efter sista delen planar banan ut och
+                        // vagnen får rulla rakt ut ur bild till höger
                         // energirenormalisering: |v| exakt ur energiprincipen
                         const yy = trackInfo(P, x).y;
                         const vm = Math.sqrt(Math.max(0, 2 * G * (S.h0 - yy)));
@@ -692,6 +759,8 @@
                     while (arr.length && arr[0].t < S.t - T_WIN - 0.5) arr.shift();
                     setView({ x, v, t: S.t });
                     drawAll();
+                    // vagnen har lämnat scenen till höger → stanna loopen
+                    if (x > VBW / PXM + 5) { setRunning(false); return; }
                     rafRef.current = requestAnimationFrame(step);
                 };
                 rafRef.current = requestAnimationFrame(step);
@@ -700,6 +769,8 @@
 
             // Rita om diagrammen när kryssrutor växlas eller fönstret ändrar storlek
             useEffect(() => { drawAll(); }, [showG]);
+            // Rita om när fullskärm/diagrampanel mountar (nya canvas-element)
+            useEffect(() => { requestAnimationFrame(drawAll); }, [isFullscreen, graphsOpen]);
             useEffect(() => {
                 drawAll();
                 const onR = () => drawAll();
@@ -770,6 +841,102 @@
                 else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
             };
 
+            // ── Dra vagnen för att placera den (ögonblicksbild) ──
+            // Grepp pausar rörelsen; medan man drar följer vagnen banan
+            // under pekaren; vid släpp ligger vagnen still i vila där
+            // (v = 0). "Fortsätt" släpper den sedan fritt därifrån.
+            const clientToWorldX = (clientX, clientY) => {
+                const svg = svgRef.current;
+                if (!svg || !svg.getScreenCTM) return null;
+                const ctm = svg.getScreenCTM();
+                if (!ctm) return null;
+                const p = svg.createSVGPoint();
+                p.x = clientX; p.y = clientY;
+                return p.matrixTransform(ctm.inverse()).x / PXM;
+            };
+            // Förberäkna vagnens FÖRSTA passage från ordinarie start (vila vid
+            // krönet av puckel 1) tills den vänder eller rullar ut ur bild till
+            // höger. Ger en monoton x→tid-tabell så att dragning kan "scrubba"
+            // simuleringen: diagrammet visar exakt hur det sett ut när vagnen
+            // nådde den hållna positionen.
+            const buildFirstPass = (P) => {
+                const h0 = trackInfo(P, START_X).y;
+                let x = START_X, v = 0, t = 0, prevX = x, lastT = -1;
+                const out = [];
+                const push = () => {
+                    const inf = trackInfo(P, x);
+                    const c = Math.sqrt(1 + inf.dy * inf.dy);
+                    out.push({ t, x, ek: 0.5 * M_TOT * v * v / 1000,
+                               ep: M_TOT * G * inf.y / 1000, v: Math.abs(v), a: -G * inf.dy / c });
+                    lastT = t;
+                };
+                push();
+                const sdt = 1 / 240, cap = 240 * 120;   // tak: 120 s
+                for (let i = 0; i < cap; i++) {
+                    const inf = trackInfo(P, x);
+                    const c = Math.sqrt(1 + inf.dy * inf.dy);
+                    v += -G * inf.dy / c * sdt;
+                    x += v / c * sdt;
+                    const yy = trackInfo(P, x).y;
+                    v = (v < 0 ? -1 : 1) * Math.sqrt(Math.max(0, 2 * G * (h0 - yy)));
+                    t += sdt;
+                    if (x > VBW / PXM + 5) { push(); break; }   // ut ur bild
+                    if (x <= prevX) { push(); break; }          // vände → vändpunkt
+                    prevX = x;
+                    if (t - lastT >= 1 / 60) push();
+                }
+                return out;
+            };
+
+            const onCartDown = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setRunning(false);
+                firstPassRef.current = buildFirstPass(ptsRef.current);
+                dragXRef.current = simRef.current.x;
+                setDragging(true);
+            };
+            useEffect(() => {
+                if (!dragging) return;
+                const fp = firstPassRef.current;
+                const h0 = trackInfo(ptsRef.current, START_X).y;
+                const maxX = fp.length ? fp[fp.length - 1].x : WORLD_W - 0.4;
+                // Visa banan så som den sett ut när vagnen nådde position cx:
+                // sätt diagram-samples = banans samples t.o.m. cx, och frys
+                // tiden vid den tidpunkten. (x är monoton under första passagen.)
+                const scrubTo = (cx) => {
+                    let idx = 0;
+                    while (idx < fp.length - 1 && fp[idx + 1].x <= cx) idx++;
+                    const s = fp[idx];
+                    samplesRef.current = fp.slice(0, idx + 1);
+                    simRef.current = { x: cx, v: s ? s.v : 0, t: s ? s.t : 0, h0 };
+                    setView({ x: cx, v: s ? s.v : 0, t: s ? s.t : 0 });
+                    requestAnimationFrame(drawAll);
+                };
+                const move = (e) => {
+                    const wx = clientToWorldX(e.clientX, e.clientY);
+                    if (wx == null) return;
+                    // begränsa till banans faktiska räckvidd (start → vändpunkt)
+                    const cx = Math.max(START_X, Math.min(maxX, wx));
+                    dragXRef.current = cx;
+                    scrubTo(cx);
+                };
+                const up = () => {
+                    // släpper i det frysta läget; samples + tid står kvar.
+                    // "Fortsätt" rullar vidare sömlöst på samma bana.
+                    scrubTo(dragXRef.current);
+                    setDragging(false);
+                    setStarted(true);
+                    setRunning(false);
+                };
+                window.addEventListener('pointermove', move);
+                window.addEventListener('pointerup', up);
+                return () => {
+                    window.removeEventListener('pointermove', move);
+                    window.removeEventListener('pointerup', up);
+                };
+            }, [dragging]);
+
             // ── Styrning ─────────────────────────────────────────
             const start = () => {
                 samplesRef.current = [];
@@ -801,8 +968,10 @@
 
             // Visningsval (kryssruta + radio) uppe till höger — anropas som
             // funktion {sceneToggles()} så noderna inte remountar varje frame.
-            const sceneToggles = () => (
-                <div className="scene-toggles">
+            // `stacked` = ligger i fullskärmens högerkolumn (statiskt flöde,
+            // inte egen absolut positionering).
+            const sceneToggles = (stacked) => (
+                <div className={'scene-toggles' + (stacked ? ' scene-toggles--static' : '')}>
                     <div className="st-title">Visa</div>
                     <label>
                         <input type="checkbox" checked={showForces} onChange={() => setShowForces((f) => !f)} />
@@ -827,6 +996,42 @@
                             <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
                             <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
                         </div>
+                    )}
+                </div>
+            );
+
+            // Hopfällbar diagrampanel i fullskärmens högerkolumn — så att
+            // energi- och rörelsediagrammen kan följas även i fullskärm.
+            const fsGraphsPanel = () => (
+                <div className="fs-graphs">
+                    <button className="fs-graphs-head" onClick={() => setGraphsOpen((o) => !o)}
+                            aria-expanded={graphsOpen} title={graphsOpen ? 'Dölj diagram' : 'Visa diagram'}>
+                        <span>Diagram</span>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                             style={{ transform: graphsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                            <path d="M6 9l6 6 6-6" />
+                        </svg>
+                    </button>
+                    {graphsOpen && (
+                        <React.Fragment>
+                            <div className="fs-graph-box">
+                                <div className="fs-graph-title">
+                                    Energi–tid&ensp;
+                                    <span style={{ color: COL.ek }}><em>E</em><sub>k</sub></span>{' '}
+                                    <span style={{ color: COL.ep }}><em>E</em><sub>p</sub></span>
+                                </div>
+                                <canvas ref={fsEnergyCvRef} className="fs-graph-canvas" />
+                            </div>
+                            <div className="fs-graph-box">
+                                <div className="fs-graph-title">
+                                    Fart &amp; acceleration&ensp;
+                                    <span style={{ color: COL.v }}><em>v</em></span>{' '}
+                                    <span style={{ color: COL.a }}><em>a</em></span>
+                                </div>
+                                <canvas ref={fsMotionCvRef} className="fs-graph-canvas" />
+                            </div>
+                        </React.Fragment>
                     )}
                 </div>
             );
@@ -876,23 +1081,27 @@
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <CoasterScene pts={pts} x={view.x} v={view.v}
                                                   showForces={showForces} forceMode={forceMode}
-                                                  svgRef={svgRef} heights={[h1, d1, h2, d2]} />
+                                                  svgRef={svgRef} heights={[h1, d1, h2, d2]}
+                                                  onCartDown={onCartDown} dragging={dragging} />
 
                                     <div className="scene-hint">
                                         Friktion och luftmotstånd försummas — mekaniska energin bevaras.
                                     </div>
 
-                                    {sceneToggles()}
+                                    {/* Uppe till höger: i normalläge bara visningsval; i
+                                        fullskärm en kolumn med visningsval + hopfällbara diagram */}
+                                    {isFullscreen ? (
+                                        <div className="fs-right">
+                                            {sceneToggles(true)}
+                                            {fsGraphsPanel()}
+                                        </div>
+                                    ) : sceneToggles(false)}
 
                                     {/* Fullskärm: flytande reglage i underkant */}
                                     {isFullscreen && (
                                         <React.Fragment>
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
                                                 {sliderRows(true)}
-                                                <div className="fs-row" style={{ justifyContent: 'center', gap: 14, marginTop: 8 }}>
-                                                    <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
-                                                    <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
-                                                </div>
                                             </div>
                                             <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}
                                                     title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'} aria-expanded={controlsOpen}>
@@ -918,6 +1127,51 @@
                                             </svg>
                                         )}
                                     </button>
+                                </div>
+
+                                {/* Realtidsdiagram — direkt under scenen så scen och
+                                    diagram syns samtidigt utan att skrolla */}
+                                <div className="grid sm:grid-cols-2 gap-4 mt-4">
+                                    <div className="glass-card rounded-xl p-4">
+                                        <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+                                            <h3 className="font-bold text-sm" style={{ color: 'var(--lab-ink)' }}>Energi–tid</h3>
+                                            <div className="graph-legend flex gap-4">
+                                                <label>
+                                                    <input type="checkbox" checked={showG.ek} onChange={() => tShowG('ek')}
+                                                           style={{ accentColor: COL.ek }} />
+                                                    <span style={{ color: COL.ek, fontWeight: 600 }}><em>E</em><sub>k</sub> rörelseenergi</span>
+                                                </label>
+                                                <label>
+                                                    <input type="checkbox" checked={showG.ep} onChange={() => tShowG('ep')}
+                                                           style={{ accentColor: COL.ep }} />
+                                                    <span style={{ color: COL.ep, fontWeight: 600 }}><em>E</em><sub>p</sub> lägesenergi</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <canvas ref={energyCvRef} className="graph-canvas" />
+                                    </div>
+                                    <div className="glass-card rounded-xl p-4">
+                                        <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
+                                            <h3 className="font-bold text-sm" style={{ color: 'var(--lab-ink)' }}>Hastighet och acceleration–tid</h3>
+                                            <div className="graph-legend flex gap-4">
+                                                <label>
+                                                    <input type="checkbox" checked={showG.v} onChange={() => tShowG('v')}
+                                                           style={{ accentColor: COL.v }} />
+                                                    <span style={{ color: COL.v, fontWeight: 600 }}><em>v</em> hastighet</span>
+                                                </label>
+                                                <label>
+                                                    <input type="checkbox" checked={showG.a} onChange={() => tShowG('a')}
+                                                           style={{ accentColor: COL.a }} />
+                                                    <span style={{ color: COL.a, fontWeight: 600 }}><em>a</em> acceleration</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <canvas ref={motionCvRef} className="graph-canvas" />
+                                        <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                            <em>v</em> och <em>a</em> räknas längs banan (positiv riktning åt höger);
+                                            accelerationen är ändringen av farten, <em>a</em> = Δ<em>v</em> / Δ<em>t</em>.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -971,6 +1225,12 @@
                                         därför att farten bara beror på <em>höjdskillnaden</em> — inte på banans form. Når
                                         vagnen en punkt där hela energin är lägesenergi vänder den och rullar tillbaka.
                                     </p>
+                                    <p className="text-sm mt-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        🖐️ <strong>Dra vagnen</strong> längs banan för att stega genom förloppet.
+                                        Diagrammen visar exakt hur de sett ut när vagnen rullat dit från starten —
+                                        drar du framåt fylls de på, drar du bakåt suddas de ut från höger.
+                                        Släpp för att frysa läget och klicka <em>Fortsätt</em> för att rulla vidare därifrån.
+                                    </p>
                                     <p className="text-sm mt-2 pt-2" style={{ color: 'var(--lab-ink-soft)', borderTop: '1px solid var(--lab-line)' }}>
                                         💡 Vagn med person väger <em>m</em> = 200 kg. Kraftpilarna visar krafterna
                                         på <em>personen</em> (70 kg): i dalarna trycker sätet uppåt med mer än tyngdkraften
@@ -980,50 +1240,6 @@
                                 </div>
                             </div>
                         </main>
-
-                        {/* Realtidsdiagram */}
-                        <div className="grid md:grid-cols-2 gap-4 mt-6">
-                            <div className="glass-card rounded-xl p-4">
-                                <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
-                                    <h3 className="font-bold text-sm" style={{ color: 'var(--lab-ink)' }}>Energi–tid</h3>
-                                    <div className="graph-legend flex gap-4">
-                                        <label>
-                                            <input type="checkbox" checked={showG.ek} onChange={() => tShowG('ek')}
-                                                   style={{ accentColor: COL.ek }} />
-                                            <span style={{ color: COL.ek, fontWeight: 600 }}><em>E</em><sub>k</sub> rörelseenergi</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" checked={showG.ep} onChange={() => tShowG('ep')}
-                                                   style={{ accentColor: COL.ep }} />
-                                            <span style={{ color: COL.ep, fontWeight: 600 }}><em>E</em><sub>p</sub> lägesenergi</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <canvas ref={energyCvRef} className="graph-canvas" />
-                            </div>
-                            <div className="glass-card rounded-xl p-4">
-                                <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
-                                    <h3 className="font-bold text-sm" style={{ color: 'var(--lab-ink)' }}>Hastighet och acceleration–tid</h3>
-                                    <div className="graph-legend flex gap-4">
-                                        <label>
-                                            <input type="checkbox" checked={showG.v} onChange={() => tShowG('v')}
-                                                   style={{ accentColor: COL.v }} />
-                                            <span style={{ color: COL.v, fontWeight: 600 }}><em>v</em> hastighet</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" checked={showG.a} onChange={() => tShowG('a')}
-                                                   style={{ accentColor: COL.a }} />
-                                            <span style={{ color: COL.a, fontWeight: 600 }}><em>a</em> acceleration</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <canvas ref={motionCvRef} className="graph-canvas" />
-                                <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
-                                    <em>v</em> och <em>a</em> räknas längs banan (positiv riktning åt höger);
-                                    accelerationen är ändringen av farten, <em>a</em> = Δ<em>v</em> / Δ<em>t</em>.
-                                </p>
-                            </div>
-                        </div>
 
                         {/* Pedagogiska sektioner */}
                         <div className="grid md:grid-cols-3 gap-4 mt-6">

@@ -212,21 +212,17 @@
             const headPts = `${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`;
             return (
                 <g opacity={opacity}>
-                    {/* tunn vit kontur under pilen — skaftet slutar vid spetsens bas (bx),
-                        så ingen vit "blob" sticker ut bortom pilspetsen */}
-                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke="#ffffff" strokeWidth={width + 2.2} strokeLinecap="round" />
-                    <polygon points={headPts} fill="#ffffff" stroke="#ffffff" strokeWidth="2.2" strokeLinejoin="round" />
-                    {/* själva pilen ovanpå konturen */}
+                    {/* pilens egen mättade färg räcker mot scenens ljusa himmel/kullar —
+                        ingen vit kontur (ger bara en suddig vit gloria) */}
                     <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width} strokeLinecap="round" />
                     <polygon points={headPts} fill={color} />
                 </g>
             );
         };
 
-        // Etikett med vit kontur (paint-order stroke) → läsbar på valfri bakgrund
+        // Etikett i mättad färg — ingen vit kontur (suddig gloria mot ljus himmel/kullar)
         const Tag = ({ x, y, color, size = 15, anchor = 'middle', weight = 700, children }) => (
-            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}
-                  style={{ paintOrder: 'stroke' }} stroke="#ffffff" strokeWidth="4" strokeLinejoin="round">
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}>
                 {children}
             </text>
         );
@@ -356,9 +352,9 @@
                         </g>
                     )}
 
-                    {/* krafttext */}
+                    {/* krafttext — ljus text mot den mörka rymdbakgrunden */}
                     {show.forces && (
-                        <Tag x={CX} y={500} color="#0f1620" size={16}>Inga krafter verkar — <tspan fontStyle="italic">F</tspan><tspan fontSize="11" dy="3">R</tspan><tspan dy="-3"> = 0</tspan></Tag>
+                        <Tag x={CX} y={500} color="#e8edf6" size={16}>Inga krafter verkar — <tspan fontStyle="italic">F</tspan><tspan fontSize="11" dy="3">R</tspan><tspan dy="-3"> = 0</tspan></Tag>
                     )}
                 </g>
             );
@@ -531,10 +527,12 @@
                                 {/* drivkraft framåt från drivhjulet */}
                                 <Arrow x1={driveX} y1={yDrive} x2={driveX + L} y2={yDrive} color={COL.driv} width={7} head={20} />
                                 <circle cx={driveX} cy={yDrive} r="4.5" fill={COL.driv} stroke="#ffffff" strokeWidth="1.5" />
-                                <Tag x={driveX + L / 2} y={yDrive - 13} color={COL.driv} size={15}>Drivkraft 600 N</Tag>
+                                {/* etikett under pilen, på vägen — undviker kollision med karossen ovanför */}
+                                <Tag x={driveX + L / 2} y={yDrive + 17} color={COL.driv} size={15}>Drivkraft 600 N</Tag>
                                 {/* luftmotstånd: bakåtriktad pil med spetsen vid vindrutans framkant */}
                                 <Arrow x1={airTip + L} y1={yAir} x2={airTip} y2={yAir} color={COL.luft} width={7} head={20} />
-                                <Tag x={CX + 102} y={yAir + 18} color={COL.luft} size={15}>Luftmotstånd 600 N</Tag>
+                                {/* etikett ovanför pilen, i den ljusa himlen — undviker kollision med röd kaross */}
+                                <Tag x={CX + 102} y={yAir - 25} color={COL.luft} size={15}>Luftmotstånd 600 N</Tag>
                             </g>
                         );
                     })()}

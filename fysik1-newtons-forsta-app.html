@@ -175,7 +175,9 @@
 
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';
-            return num.toFixed(decimals).replace('.', ',');
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';   // exakt noll skrivs utan decimaler (0, inte 0,0)
+            return s.replace('.', ',');
         };
 
         // Scengeometri
@@ -202,6 +204,7 @@
             luft:   '#dc2626', // röd — luftmotstånd
             tyngd:  '#9333ea', // lila — tyngdkraft
             res:    '#ea580c', // orange — resulterande kraft
+            span:   '#0284c7', // blå — spännkraft (snöret, hängande läge)
         };
 
         // ── Seedad RNG (för stjärnor/moln, beräknas en gång) ──────
@@ -743,16 +746,58 @@
                         </React.Fragment>
                     )}
 
-                    {/* ── KRAFTER (visas efter klippet): gemensam angreppspunkt i
-                          tyngdpunkten. Tyngdkraften är konstant; luftmotståndspilen
-                          växer med farten (∝ v²) tills den når tyngdkraften vid v_t. ── */}
-                    {cut && (show.luft || show.tyngd || show.res) && (() => {
-                        const cmX = CX + 2, cmY = dy + 4;   // hopparens tyngdpunkt
+                    {/* ── KRAFTER (fungerar både hängande och i fritt fall).
+                          Hängande: tyngdkraft ned + lika stor spännkraft upp → F_R = 0.
+                          Fallande: tyngd konstant, luftmotstånd växer ∝ v² mot v_t.
+                          Tyngdpunkten (angreppspunkt) följer den dinglande kroppen. ── */}
+                    {(show.luft || show.tyngd || show.res) && (() => {
+                        const rad = swayDeg * Math.PI / 180;
+                        const baseDy = (dy + 4) - hingeY;
+                        const cmX = sx - baseDy * Math.sin(rad);   // tyngdpunkt (följer dinglingen)
+                        const cmY = hingeY + baseDy * Math.cos(rad);
                         const gravLen = 130;
+                        const rx = cmX - 104;                      // resultant tydligt till vänster om kroppen
+                        const cmMark = (
+                            <g>
+                                <circle cx={cmX} cy={cmY} r="5" fill="#ffffff" stroke="#0f1620" strokeWidth="1.6" />
+                                <circle cx={cmX} cy={cmY} r="1.8" fill="#0f1620" />
+                            </g>
+                        );
+                        if (!cut) {
+                            // HÄNGANDE i snöret: tyngd ned, lika stor spännkraft upp
+                            return (
+                                <g>
+                                    {show.luft && (
+                                        <g>
+                                            <Arrow x1={cmX} y1={cmY} x2={cmX} y2={cmY - gravLen} color={COL.span} width={7} head={20} />
+                                            <Tag x={cmX} y={cmY - gravLen - 12} color={COL.span} size={14}>
+                                                Spännkraft {fmt(fGrav, 0)} N
+                                            </Tag>
+                                        </g>
+                                    )}
+                                    {show.tyngd && (
+                                        <g>
+                                            <Arrow x1={cmX} y1={cmY} x2={cmX} y2={cmY + gravLen} color={COL.tyngd} width={7} head={20} />
+                                            <Tag x={cmX} y={cmY + gravLen + 22} color={COL.tyngd} size={14}>Tyngdkraft {fmt(fGrav, 0)} N</Tag>
+                                        </g>
+                                    )}
+                                    {show.res && (
+                                        <g>
+                                            <circle cx={rx} cy={cmY} r="5" fill="none" stroke={COL.res} strokeWidth="2.5" />
+                                            <circle cx={rx} cy={cmY} r="4" fill={COL.res} />
+                                            <Tag x={rx + 20} y={cmY - 12} anchor="end" color={COL.res} size={14}>
+                                                <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">R</tspan><tspan dy="-3"> = 0 N</tspan>
+                                            </Tag>
+                                        </g>
+                                    )}
+                                    {cmMark}
+                                </g>
+                            );
+                        }
+                        // FALLANDE
                         const airLen = gravLen * Math.min(1, fAir / fGrav);
-                        const fRes = Math.max(0, fGrav - fAir);   // nettokraft nedåt
+                        const fRes = Math.max(0, fGrav - fAir);
                         const resLen = gravLen * Math.min(1, fRes / fGrav);
-                        const rx = cmX - 66;                       // resultant ritas vid sidan
                         return (
                             <g>
                                 {show.luft && airLen > 1 && (
@@ -767,27 +812,24 @@
                                         <Tag x={cmX} y={cmY + gravLen + 22} color={COL.tyngd} size={14}>Tyngdkraft {fmt(fGrav, 0)} N</Tag>
                                     </g>
                                 )}
-                                {/* resulterande kraft (nedåt, minskar mot 0 vid gränshastighet) */}
                                 {show.res && (
                                     <g>
                                         {resLen > 1
                                             ? <Arrow x1={rx} y1={cmY} x2={rx} y2={cmY + resLen} color={COL.res} width={7} head={20} />
                                             : <circle cx={rx} cy={cmY} r="5" fill="none" stroke={COL.res} strokeWidth="2.5" />}
-                                        <Tag x={rx} y={cmY - 12} color={COL.res} size={14}>
+                                        <Tag x={rx + 20} y={cmY - 12} anchor="end" color={COL.res} size={14}>
                                             <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">R</tspan><tspan dy="-3"> = {fmt(fRes, 0)} N</tspan>
                                         </Tag>
                                         <circle cx={rx} cy={cmY} r="4" fill={COL.res} />
                                     </g>
                                 )}
-                                {/* tyngdpunktsmarkör (gemensam angreppspunkt) */}
-                                <circle cx={cmX} cy={cmY} r="5" fill="#ffffff" stroke="#0f1620" strokeWidth="1.6" />
-                                <circle cx={cmX} cy={cmY} r="1.8" fill="#0f1620" />
+                                {cmMark}
                             </g>
                         );
                     })()}
 
-                    {/* hastighetsvektor nedåt — från hopparens nedre kant; växer med farten */}
-                    {cut && show.velocity && (
+                    {/* hastighetsvektor nedåt — växer med farten; v = 0 visas även hängande */}
+                    {show.velocity && (
                         <g>
                             <Arrow x1={CX + 95} y1={dy + 30} x2={CX + 95} y2={dy + 30 + Math.min(150, v * 2.2)} color={COL.v} width={6} head={17} />
                             <Tag x={CX + 104} y={dy + 8} anchor="start" color={COL.v} size={16}>
@@ -942,7 +984,7 @@
                             </label>
                             <label>
                                 <input type="checkbox" checked={show.luft} onChange={() => tShow('luft')} />
-                                <span>Luftmotstånd</span>
+                                <span>{cut ? 'Luftmotstånd' : 'Spännkraft'}</span>
                             </label>
                             <label>
                                 <input type="checkbox" checked={show.res} onChange={() => tShow('res')} />
@@ -1051,18 +1093,15 @@
                                         i normalläge finns samma reglage i sidopanelen. */}
                                     {isFullscreen && sceneToggles()}
 
-                                    {/* Fullskärm: flytande dropdown med reglagen i underkant */}
-                                    {isFullscreen && (
+                                    {/* Fullskärm: flytande dropdown med GLIDARE i underkant.
+                                        Start/Börja om ligger BARA i panelen uppe till höger
+                                        (sceneToggles) — aldrig dubblerat här. Hopparen saknar
+                                        glidare → ingen nedre panel alls. */}
+                                    {isFullscreen && scenario !== 'diver' && (
                                         <React.Fragment>
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
-                                                {scenario !== 'diver' && (
-                                                    <FsSlider label="Fart" value={v} min={0} max={40} step={1}
-                                                              unit="m/s" decimals={0} onChange={setV} />
-                                                )}
-                                                <div className="fs-row" style={{ justifyContent: 'center', gap: 14 }}>
-                                                    <button className="btn-toggle" onClick={playAction}>{playLabel}</button>
-                                                    <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
-                                                </div>
+                                                <FsSlider label="Fart" value={v} min={0} max={40} step={1}
+                                                          unit="m/s" decimals={0} onChange={setV} />
                                             </div>
                                             <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}
                                                     title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'} aria-expanded={controlsOpen}>
@@ -1147,7 +1186,7 @@
                                             <label className="flex items-center gap-2 mb-1 cursor-pointer text-sm" style={{ color: 'var(--lab-ink)' }}>
                                                 <input type="checkbox" checked={show.luft} onChange={() => tShow('luft')}
                                                        style={{ width: 16, height: 16, accentColor: 'var(--lab-accent)' }} />
-                                                Luftmotstånd
+                                                {cut ? 'Luftmotstånd' : 'Spännkraft'}
                                             </label>
                                             <label className="flex items-center gap-2 mb-1 cursor-pointer text-sm" style={{ color: 'var(--lab-ink)' }}>
                                                 <input type="checkbox" checked={show.res} onChange={() => tShow('res')}

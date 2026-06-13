@@ -215,14 +215,27 @@ Gäller alla KaTeX-kommandon: `\\cdot`, `\\frac`, `\\sqrt`, `\\left`,
 
 ### Decimalformatering
 
+**Exakt noll skrivs ALLTID utan decimaler** — `0`, aldrig `0,0`, `0,00`,
+`-0,0` osv. Gäller överallt värden visas (avläsningar, etiketter i scen/
+canvas/SVG, diagram, formelkort, övningar). Ett värde som *avrundas* till
+noll (t.ex. 0,03 m/s vid en decimal) räknas också som noll och skrivs `0`.
+Decimalsiffror på en nolla ser ut som onödigt brus. Varje sifferformaterare
+i projektet måste hantera detta (lägg `if (parseFloat(s) === 0) return '0';`
+direkt efter `toFixed`):
+
 ```javascript
-const formatNumber = (num, decimals = 2) => num.toFixed(decimals).replace('.', ',');
+const formatNumber = (num, decimals = 2) => {
+    const s = num.toFixed(decimals);
+    if (parseFloat(s) === 0) return '0';        // exakt/avrundat noll → "0"
+    return s.replace('.', ',');
+};
 ```
 
 Tusentalsavgränsare-helper (NBSP):
 ```javascript
 function fmtNum(n, d) {
     const s = n.toFixed(d);
+    if (parseFloat(s) === 0) return '0';        // exakt/avrundat noll → "0"
     const [intp, frac] = s.split('.');
     const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     return frac !== undefined ? withSpaces + ',' + frac : withSpaces;
@@ -303,11 +316,23 @@ reglagen efter typ, så att de inte skymmer scenen:
 - **Kryssrutor och radioknappar (visningsval, lägesval) → en ruta UPPE TILL
   HÖGER** på scenytan (`.scene-toggles`). Denna ruta visas i både normalt
   läge och fullskärm.
+- **Start/Paus/Börja om (styrknappar) → BARA i rutan uppe till höger**
+  (`.scene-toggles` `.st-actions`), tillsammans med visningsvalen.
 - Fullskärmsknappen (`.fs-btn`) sitter uppe till vänster.
 
-Så: kontinuerliga värden nere, diskreta val uppe till höger, fullskärm uppe
-till vänster — inga överlapp. Referensimpl: `fysik2-konisk-pendel-app.html`,
-`fysik1-vektoraddition-app.html`.
+⛔ **VARJE reglage får finnas på EXAKT ETT ställe i fullskärm — aldrig
+dubblerat.** Återkommande misstag: Start/Börja om läggs *både* i den nedre
+panelen (`.fs-controls`) *och* uppe till höger (`.st-actions`), så samma
+knappar syns två gånger. Styrknapparna hör hemma uppe till höger; den nedre
+panelen innehåller **bara glidare/sifferfält**. Har ett scenario inga
+glidare (t.ex. fallskärmshopparen) ska den nedre panelen och dess
+"Dölj reglage"-handtag **inte renderas alls** — annars blir den en tom låda
+eller en dubblettlåda för knappar. Kontrollera alltid i fullskärm att inget
+reglage förekommer på två platser.
+
+Så: kontinuerliga värden (glidare) nere, diskreta val + styrknappar uppe
+till höger, fullskärm uppe till vänster — inga överlapp, inga dubbletter.
+Referensimpl: `fysik2-konisk-pendel-app.html`, `fysik1-vektoraddition-app.html`.
 
 Krav på mönstret:
 

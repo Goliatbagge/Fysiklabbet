@@ -183,12 +183,25 @@
         const CX = 450, CY = 290;
         const PXPM = 13;           // px per meter (skrollhastighet)
 
+        // Fallskärmshopparens fysik (frifall med kvadratiskt luftmotstånd)
+        const G = 9.82;            // tyngdacceleration (m/s²)
+        const V_T = 53;            // gränshastighet (m/s) — där luftmotstånd = tyngd
+        const M_DIVER = 80;        // hopparens massa (kg)
+        const F_G_DIVER = M_DIVER * G;                          // tyngdkraft ≈ 786 N
+        // F_luft = k·v² med k = m·g/v_t² → vid v = v_t blir F_luft = F_G
+        const fAirOf = (vv) => F_G_DIVER * (vv / V_T) * (vv / V_T);
+
+        // Sax-pekare över snöret (vit kontur + mörk sax → syns mot både himmel
+        // och moln; en muspekar-ikon är ett legitimt undantag från vit-kontur-regeln)
+        const SCISSORS_CURSOR = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%23ffffff' stroke-width='4'%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Cline x1='20' y1='4' x2='8.12' y2='15.88'/%3E%3Cline x1='14.47' y1='14.48' x2='20' y2='20'/%3E%3Cline x1='8.12' y1='8.12' x2='12' y2='12'/%3E%3C/g%3E%3Cg stroke='%23111111' stroke-width='1.8'%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Cline x1='20' y1='4' x2='8.12' y2='15.88'/%3E%3Cline x1='14.47' y1='14.48' x2='20' y2='20'/%3E%3Cline x1='8.12' y1='8.12' x2='12' y2='12'/%3E%3C/g%3E%3C/svg%3E\") 15 15, pointer";
+
         // Färger för krafter
         const COL = {
             v:      '#16a34a', // grön — hastighet
             driv:   '#0284c7', // blå — drivande/friktion framåt
             luft:   '#dc2626', // röd — luftmotstånd
             tyngd:  '#9333ea', // lila — tyngdkraft
+            res:    '#ea580c', // orange — resulterande kraft
         };
 
         // ── Seedad RNG (för stjärnor/moln, beräknas en gång) ──────
@@ -551,7 +564,7 @@
         };
 
         // ── Fallskärmshoppare ───────────────────────────────────
-        const DiverScene = ({ scroll, v, show }) => {
+        const DiverScene = ({ scroll, v, cut, fAir, fGrav, show, onCut, clock, stringUp }) => {
             const clouds = useMemo(() => {
                 const r = mulberry(91), arr = [];
                 for (let i = 0; i < 8; i++) arr.push({ x: 60 + r() * (VBW - 120), y: r() * (VBH + 200), s: 0.6 + r() * 0.9, op: 0.7 + r() * 0.3 });
@@ -565,6 +578,72 @@
 
             const range = VBH + 240;
             const dy = CY + 4; // hopparens centrum
+            const sx = CX + 2, knotY = dy - 22, hingeY = -2;   // snörets fäste / topp (taket)
+            const swayDeg = !cut ? 3.5 * Math.sin(clock * 1.1) : 0;   // försiktig dingling i snöret
+
+            // 🥚 Påskägg: väntar man (klipper inte snöret) flyger en knasig
+            // fiskmås förbi med jämna mellanrum — flaxar frenetiskt, tunga ute
+            // och solglasögon på.
+            const gullCycle = ((clock - 5) % 15 + 15) % 15;          // 15 s-period, börjar efter 5 s
+            const gullVisible = !cut && clock > 5 && gullCycle < 6;   // 6 s flygtur
+            const gullDir = Math.floor((clock - 5) / 15) % 2 === 0 ? 1 : -1;  // växlar håll varje flygtur
+            const gullProg = gullCycle / 6;                          // 0 → 1 längs flygriktningen
+            const gullX = gullDir === 1
+                ? -140 + gullProg * (VBW + 280)                       // vänster → höger
+                : (VBW + 140) - gullProg * (VBW + 280);              // höger → vänster
+            const gullY = 100 + Math.sin(gullProg * Math.PI * 4) * 26;   // vågig flygbana
+
+            // Hopparens kropp — återanvänds både hängande (i snöret) och i fritt fall
+            const diverBody = (
+                <g transform={`translate(${CX}, ${dy})`}>
+                    {(() => {
+                        // fladder bara under fritt fall (när snöret är avklippt)
+                        const w = cut ? Math.sin(scroll / 22) * 2.5 : 0;
+                        const SUIT = '#e0852f', SUIT_D = '#b5651d', BLUE = '#2d6fb0', BLUE_D = '#235a92';
+                        return (
+                            <g strokeLinejoin="round" strokeLinecap="round">
+                                {/* BORTRE ARM (bakom bålen, mörkare) — sträcker sig framåt-nedåt */}
+                                <path d="M 15,-4 Q 36,5 50,1" fill="none" stroke={SUIT_D} strokeWidth="9" />
+                                <circle cx="50" cy="1" r="5" fill="#d99a6a" />
+                                {/* BORTRE BEN (bakom bålen) — böjt knä, fot upp bakåt */}
+                                <path d="M -15,5 Q -38,12 -44,-2" fill="none" stroke={BLUE_D} strokeWidth="9" />
+
+                                {/* BÅL (mage nedåt, rygg uppåt — slank båge) */}
+                                <path d="M -26,2 Q 2,15 28,-2" fill="none" stroke={SUIT} strokeWidth="22" />
+                                {/* magkontur (nedre, ljusare) */}
+                                <path d="M -20,10 Q 2,22 24,7" fill="none" stroke={SUIT_D} strokeWidth="2" opacity="0.5" />
+
+                                {/* FALLSKÄRMSRIGG på ryggen (ovansidan) + sele */}
+                                <g transform="rotate(-7 2 -8)">
+                                    <rect x="-13" y="-20" width="28" height="16" rx="5" fill="#39455a" stroke="#232c3b" strokeWidth="2" />
+                                    <line x1="-13" y1="-12" x2="15" y2="-12" stroke="#232c3b" strokeWidth="1.8" />
+                                    <circle cx="2" cy="-12" r="2.3" fill="#c43d2f" />
+                                </g>
+                                {/* axelrem som löper ner mot magen */}
+                                <path d="M 16,-6 Q 13,6 6,13" fill="none" stroke="#4a3a22" strokeWidth="3.5" />
+
+                                {/* NÄRMRE BEN (framför) — lår nedåt-bakåt, underben böjt upp (fot upp) */}
+                                <path d="M -15,8 Q -40,19 -48,3" fill="none" stroke={SUIT} strokeWidth="12" />
+                                <path d={`M -48,3 Q -54,-10 ${-47 + w},${-21 + w}`} fill="none" stroke={BLUE} strokeWidth="10" />
+                                <ellipse cx={-46 + w} cy={-23 + w} rx="9" ry="5.5" fill="#2b2f36" transform={`rotate(-55 ${-46 + w} ${-23 + w})`} />
+
+                                {/* NÄRMRE ARM (framför) — sträcker sig framåt-nedåt mot huvudet, böjd armbåge */}
+                                <path d="M 19,3 Q 39,14 53,11" fill="none" stroke={SUIT} strokeWidth="11" />
+                                <path d={`M 53,11 Q 63,7 ${65 + w},0`} fill="none" stroke={BLUE} strokeWidth="9" />
+                                <circle cx={65 + w} cy="-1" r="6" fill="#f0b27a" />
+
+                                {/* HUVUD i profil + hjälm (åt höger, blickar framåt-nedåt) */}
+                                <circle cx="40" cy="-10" r="12" fill="#f0b27a" />
+                                {/* hjälm täcker hjässa + bakhuvud */}
+                                <path d="M 28,-10 A 12 12 0 0 1 51,-13 L 49,-7 A 12 12 0 0 0 29,-5 Z" fill="#c43d2f" />
+                                <path d="M 28,-12 A 12 12 0 0 1 40,-22 L 40,-10 Z" fill="#c43d2f" />
+                                {/* glasögon på framsidan */}
+                                <rect x="44" y="-11" width="7.5" height="6" rx="2" fill="#2a3a52" transform="rotate(12 48 -8)" />
+                            </g>
+                        );
+                    })()}
+                </g>
+            );
 
             return (
                 <g>
@@ -577,11 +656,13 @@
                     </defs>
                     <rect x="0" y="0" width={VBW} height={VBH} fill="url(#diverSky)" />
 
-                    {/* moln rusar uppåt (fallkänsla) */}
+                    {/* moln rusar uppåt (fallkänsla) och sveper mycket långsamt åt höger */}
                     {clouds.map((c, i) => {
                         const y = ((c.y - scroll) % range + range) % range - 120;
+                        const xr = VBW + 220;
+                        const x = ((c.x + clock * 7) % xr + xr) % xr - 110;
                         return (
-                            <g key={'c' + i} transform={`translate(${c.x}, ${y}) scale(${c.s})`} opacity={c.op}>
+                            <g key={'c' + i} transform={`translate(${x}, ${y}) scale(${c.s})`} opacity={c.op}>
                                 <ellipse cx="0" cy="0" rx="46" ry="24" fill="#ffffff" />
                                 <ellipse cx="36" cy="8" rx="34" ry="19" fill="#ffffff" />
                                 <ellipse cx="-36" cy="8" rx="30" ry="17" fill="#ffffff" />
@@ -597,72 +678,105 @@
                                      stroke="#ffffff" strokeWidth="2.5" opacity={v > 1 ? s.op : 0} strokeLinecap="round" />;
                     })}
 
-                    {/* ── HOPPAREN (centrerad, frifall i PROFIL — mage nedåt, rygg/rigg uppåt,
-                          huvudet åt höger och fötterna åt vänster, kroppen i båge) ── */}
-                    <g transform={`translate(${CX}, ${dy})`}>
-                        {(() => {
-                            const w = Math.sin(scroll / 22) * 2.5;   // lätt fladder i extremiteterna
-                            const SUIT = '#e0852f', SUIT_D = '#b5651d', BLUE = '#2d6fb0', BLUE_D = '#235a92';
-                            return (
-                                <g strokeLinejoin="round" strokeLinecap="round">
-                                    {/* BORTRE ARM (bakom bålen, mörkare) — sträcker sig framåt-nedåt */}
-                                    <path d="M 15,-4 Q 36,5 50,1" fill="none" stroke={SUIT_D} strokeWidth="9" />
-                                    <circle cx="50" cy="1" r="5" fill="#d99a6a" />
-                                    {/* BORTRE BEN (bakom bålen) — böjt knä, fot upp bakåt */}
-                                    <path d="M -15,5 Q -38,12 -44,-2" fill="none" stroke={BLUE_D} strokeWidth="9" />
+                    {/* 🥚 KNASIG FISKMÅS (påskägg) — flaxar frenetiskt, tunga ute, solglasögon */}
+                    {gullVisible && (() => {
+                        const flap = Math.sin(clock * 26);          // frenetiskt vingslag
+                        const wing = flap * 40;                     // vingvinkel (grader)
+                        const bob = flap * 3;                       // kroppen guppar med slagen
+                        return (
+                            <g transform={`translate(${gullX}, ${gullY + bob}) scale(${gullDir * 0.78}, 0.78)`}>
+                                {/* BORTRE VINGE (bakom kroppen) */}
+                                <path d="M -2,-3 Q -24,-30 -44,-22 Q -22,-9 -2,-3 Z"
+                                      fill="#d7dde6" stroke="#b7c0cc" strokeWidth="1.5"
+                                      transform={`rotate(${-wing} -2 -3)`} />
+                                {/* STJÄRT */}
+                                <path d="M -18,-2 L -34,-9 L -31,3 Z" fill="#eef2f6" stroke="#cfd6df" strokeWidth="1.2" />
+                                {/* KROPP */}
+                                <ellipse cx="0" cy="0" rx="20" ry="12" fill="#ffffff" stroke="#cfd6df" strokeWidth="1.5" />
+                                {/* BEN som dinglar */}
+                                <line x1="-3" y1="11" x2="-5" y2="23" stroke="#f2a02c" strokeWidth="2" strokeLinecap="round" />
+                                <line x1="4" y1="11" x2="6" y2="23" stroke="#f2a02c" strokeWidth="2" strokeLinecap="round" />
+                                <path d="M -5,23 l -4,2 M -5,23 l 1,3" stroke="#f2a02c" strokeWidth="1.6" strokeLinecap="round" />
+                                <path d="M 6,23 l 4,2 M 6,23 l -1,3" stroke="#f2a02c" strokeWidth="1.6" strokeLinecap="round" />
+                                {/* HUVUD (åt höger) */}
+                                <circle cx="18" cy="-7" r="9" fill="#ffffff" stroke="#cfd6df" strokeWidth="1.5" />
+                                {/* NÄBB vidöppen */}
+                                <path d="M 26,-9 L 45,-13 L 27,-6 Z" fill="#f2a02c" stroke="#cf821a" strokeWidth="1" strokeLinejoin="round" />
+                                <path d="M 27,-3 L 43,0 L 26,-1 Z" fill="#e08a1e" stroke="#cf821a" strokeWidth="1" strokeLinejoin="round" />
+                                {/* TUNGA som hänger ut (kort) */}
+                                <path d="M 29,-4 Q 35,-2 37,3 Q 33,0 29,-1 Z" fill="#e0506a" stroke="#c43d5a" strokeWidth="0.8" strokeLinejoin="round" />
+                                {/* SOLGLASÖGON */}
+                                <rect x="10" y="-13" width="9.5" height="7.5" rx="2.5" fill="#15181d" />
+                                <rect x="19.5" y="-13" width="9.5" height="7.5" rx="2.5" fill="#15181d" />
+                                <line x1="6" y1="-12" x2="10" y2="-11" stroke="#15181d" strokeWidth="2" strokeLinecap="round" />
+                                <rect x="11.5" y="-12" width="3.5" height="2" rx="1" fill="#6b7480" opacity="0.85" />
+                                {/* NÄRMRE VINGE (framför kroppen) */}
+                                <path d="M 2,-3 Q -18,-36 -40,-28 Q -16,-11 2,-3 Z"
+                                      fill="#ffffff" stroke="#cfd6df" strokeWidth="1.5"
+                                      transform={`rotate(${wing} 2 -3)`} />
+                            </g>
+                        );
+                    })()}
 
-                                    {/* BÅL (mage nedåt, rygg uppåt — slank båge) */}
-                                    <path d="M -26,2 Q 2,15 28,-2" fill="none" stroke={SUIT} strokeWidth="22" />
-                                    {/* magkontur (nedre, ljusare) */}
-                                    <path d="M -20,10 Q 2,22 24,7" fill="none" stroke={SUIT_D} strokeWidth="2" opacity="0.5" />
-
-                                    {/* FALLSKÄRMSRIGG på ryggen (ovansidan) + sele */}
-                                    <g transform="rotate(-7 2 -8)">
-                                        <rect x="-13" y="-20" width="28" height="16" rx="5" fill="#39455a" stroke="#232c3b" strokeWidth="2" />
-                                        <line x1="-13" y1="-12" x2="15" y2="-12" stroke="#232c3b" strokeWidth="1.8" />
-                                        <circle cx="2" cy="-12" r="2.3" fill="#c43d2f" />
-                                    </g>
-                                    {/* axelrem som löper ner mot magen */}
-                                    <path d="M 16,-6 Q 13,6 6,13" fill="none" stroke="#4a3a22" strokeWidth="3.5" />
-
-                                    {/* NÄRMRE BEN (framför) — lår nedåt-bakåt, underben böjt upp (fot upp) */}
-                                    <path d="M -15,8 Q -40,19 -48,3" fill="none" stroke={SUIT} strokeWidth="12" />
-                                    <path d={`M -48,3 Q -54,-10 ${-47 + w},${-21 + w}`} fill="none" stroke={BLUE} strokeWidth="10" />
-                                    <ellipse cx={-46 + w} cy={-23 + w} rx="9" ry="5.5" fill="#2b2f36" transform={`rotate(-55 ${-46 + w} ${-23 + w})`} />
-
-                                    {/* NÄRMRE ARM (framför) — sträcker sig framåt-nedåt mot huvudet, böjd armbåge */}
-                                    <path d="M 19,3 Q 39,14 53,11" fill="none" stroke={SUIT} strokeWidth="11" />
-                                    <path d={`M 53,11 Q 63,7 ${65 + w},0`} fill="none" stroke={BLUE} strokeWidth="9" />
-                                    <circle cx={65 + w} cy="-1" r="6" fill="#f0b27a" />
-
-                                    {/* HUVUD i profil + hjälm (åt höger, blickar framåt-nedåt) */}
-                                    <circle cx="40" cy="-10" r="12" fill="#f0b27a" />
-                                    {/* hjälm täcker hjässa + bakhuvud */}
-                                    <path d="M 28,-10 A 12 12 0 0 1 51,-13 L 49,-7 A 12 12 0 0 0 29,-5 Z" fill="#c43d2f" />
-                                    <path d="M 28,-12 A 12 12 0 0 1 40,-22 L 40,-10 Z" fill="#c43d2f" />
-                                    {/* glasögon på framsidan */}
-                                    <rect x="44" y="-11" width="7.5" height="6" rx="2" fill="#2a3a52" transform="rotate(12 48 -8)" />
+                    {/* ── SNÖRE + HOPPARE ──
+                          Hängande: snöret och hopparen dinglar försiktigt som en pendel
+                          kring fästet i taket. Avklippt: snöret hänger kvar uppe och
+                          glider ur bild uppåt medan hopparen faller. ── */}
+                    {!cut ? (
+                        <g transform={`rotate(${swayDeg} ${sx} ${hingeY})`}>
+                            <line x1={sx} y1={hingeY} x2={sx} y2={knotY} stroke="#7a6a45" strokeWidth="2.5" />
+                            <circle cx={sx} cy={knotY} r="3.5" fill="#7a6a45" />
+                            <line x1={sx} y1={hingeY} x2={sx} y2={knotY} stroke="transparent" strokeWidth="24"
+                                  style={{ cursor: SCISSORS_CURSOR }}
+                                  onPointerDown={(e) => { e.preventDefault(); e.stopPropagation(); onCut(); }} />
+                            {diverBody}
+                        </g>
+                    ) : (
+                        <React.Fragment>
+                            {(knotY - stringUp) > -20 && (
+                                <g>
+                                    <line x1={sx} y1={hingeY - stringUp} x2={sx} y2={knotY - stringUp} stroke="#7a6a45" strokeWidth="2.5" />
+                                    <circle cx={sx} cy={knotY - stringUp} r="3.5" fill="#7a6a45" />
                                 </g>
-                            );
-                        })()}
-                    </g>
+                            )}
+                            {diverBody}
+                        </React.Fragment>
+                    )}
 
-                    {/* ── KRAFTER: båda med gemensam angreppspunkt i hopparens tyngdpunkt
-                          (CM), tail-mot-tail. Tyngdkraft och luftmotstånd har egna kryssrutor. ── */}
-                    {(show.luft || show.tyngd) && (() => {
+                    {/* ── KRAFTER (visas efter klippet): gemensam angreppspunkt i
+                          tyngdpunkten. Tyngdkraften är konstant; luftmotståndspilen
+                          växer med farten (∝ v²) tills den når tyngdkraften vid v_t. ── */}
+                    {cut && (show.luft || show.tyngd || show.res) && (() => {
                         const cmX = CX + 2, cmY = dy + 4;   // hopparens tyngdpunkt
+                        const gravLen = 130;
+                        const airLen = gravLen * Math.min(1, fAir / fGrav);
+                        const fRes = Math.max(0, fGrav - fAir);   // nettokraft nedåt
+                        const resLen = gravLen * Math.min(1, fRes / fGrav);
+                        const rx = cmX - 66;                       // resultant ritas vid sidan
                         return (
                             <g>
-                                {show.luft && (
+                                {show.luft && airLen > 1 && (
                                     <g>
-                                        <Arrow x1={cmX} y1={cmY} x2={cmX} y2={cmY - 130} color={COL.luft} width={7} head={20} />
-                                        <Tag x={cmX} y={cmY - 142} color={COL.luft} size={14}>Luftmotstånd 786 N</Tag>
+                                        <Arrow x1={cmX} y1={cmY} x2={cmX} y2={cmY - airLen} color={COL.luft} width={7} head={20} />
+                                        <Tag x={cmX} y={cmY - airLen - 12} color={COL.luft} size={14}>Luftmotstånd {fmt(fAir, 0)} N</Tag>
                                     </g>
                                 )}
                                 {show.tyngd && (
                                     <g>
-                                        <Arrow x1={cmX} y1={cmY} x2={cmX} y2={cmY + 130} color={COL.tyngd} width={7} head={20} />
-                                        <Tag x={cmX} y={cmY + 152} color={COL.tyngd} size={14}>Tyngdkraft 786 N</Tag>
+                                        <Arrow x1={cmX} y1={cmY} x2={cmX} y2={cmY + gravLen} color={COL.tyngd} width={7} head={20} />
+                                        <Tag x={cmX} y={cmY + gravLen + 22} color={COL.tyngd} size={14}>Tyngdkraft {fmt(fGrav, 0)} N</Tag>
+                                    </g>
+                                )}
+                                {/* resulterande kraft (nedåt, minskar mot 0 vid gränshastighet) */}
+                                {show.res && (
+                                    <g>
+                                        {resLen > 1
+                                            ? <Arrow x1={rx} y1={cmY} x2={rx} y2={cmY + resLen} color={COL.res} width={7} head={20} />
+                                            : <circle cx={rx} cy={cmY} r="5" fill="none" stroke={COL.res} strokeWidth="2.5" />}
+                                        <Tag x={rx} y={cmY - 12} color={COL.res} size={14}>
+                                            <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">R</tspan><tspan dy="-3"> = {fmt(fRes, 0)} N</tspan>
+                                        </Tag>
+                                        <circle cx={rx} cy={cmY} r="4" fill={COL.res} />
                                     </g>
                                 )}
                                 {/* tyngdpunktsmarkör (gemensam angreppspunkt) */}
@@ -672,10 +786,10 @@
                         );
                     })()}
 
-                    {/* hastighetsvektor nedåt — från hopparens nedre kant i rörelseriktningen */}
-                    {show.velocity && (
+                    {/* hastighetsvektor nedåt — från hopparens nedre kant; växer med farten */}
+                    {cut && show.velocity && (
                         <g>
-                            <Arrow x1={CX + 95} y1={dy + 30} x2={CX + 95} y2={dy + 30 + (60 + v * 1.2)} color={COL.v} width={6} head={17} />
+                            <Arrow x1={CX + 95} y1={dy + 30} x2={CX + 95} y2={dy + 30 + Math.min(150, v * 2.2)} color={COL.v} width={6} head={17} />
                             <Tag x={CX + 104} y={dy + 8} anchor="start" color={COL.v} size={16}>
                                 <tspan fontStyle="italic">v</tspan> = {fmt(v)} m/s
                             </Tag>
@@ -686,12 +800,12 @@
         };
 
         // ── Scen-väljare ─────────────────────────────────────────
-        const Scene = ({ scenario, scroll, v, drive, show, svgRef }) => (
+        const Scene = ({ scenario, scroll, v, drive, show, cut, fAir, fGrav, onCut, clock, stringUp, svgRef }) => (
             <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid slice"
                  style={{ fontFamily: 'Poppins, sans-serif' }}>
                 {scenario === 'space' && <SpaceScene scroll={scroll} v={v} show={show} />}
                 {scenario === 'car' && <CarScene scroll={scroll} v={v} drive={drive} show={show} />}
-                {scenario === 'diver' && <DiverScene scroll={scroll} v={v} show={show} />}
+                {scenario === 'diver' && <DiverScene scroll={scroll} v={v} cut={cut} fAir={fAir} fGrav={fGrav} show={show} onCut={onCut} clock={clock} stringUp={stringUp} />}
             </svg>
         );
 
@@ -714,7 +828,14 @@
             });
             const [running, setRunning] = useState(true);
             const [scroll, setScroll] = useState(0);
-            const [show, setShow] = useState({ forces: true, tyngd: true, luft: true, velocity: true, path: true });
+            const [show, setShow] = useState({ forces: true, tyngd: true, luft: true, res: false, velocity: true, path: true });
+
+            // Fallskärmshopparen: hänger i snöre (cut=false) → klipps → faller
+            const [cut, setCut] = useState(false);
+            const [diverV, setDiverV] = useState(0);     // hopparens fart (m/s)
+            const [clock, setClock] = useState(0);       // löpande tid (dingling + molndrift)
+            const cutRef = useRef(false); cutRef.current = cut;
+            const diverVRef = useRef(0);
 
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
@@ -730,12 +851,32 @@
                     if (lastRef.current == null) lastRef.current = ts;
                     const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
                     lastRef.current = ts;
-                    setScroll((s) => s + v * PXPM * dt);
+                    setClock((c) => c + dt);   // driver dingling + molndrift även i vila
+                    if (scenario === 'diver') {
+                        // Frifall med kvadratiskt luftmotstånd: a = g·(1 − (v/v_t)²).
+                        // Farten ökar och närmar sig gränshastigheten v_t asymptotiskt.
+                        if (cutRef.current) {
+                            let vv = diverVRef.current;
+                            const a = G * (1 - (vv / V_T) * (vv / V_T));
+                            vv = Math.min(V_T, vv + a * dt);
+                            diverVRef.current = vv;
+                            setDiverV(vv);
+                            setScroll((s) => s + vv * PXPM * dt);
+                        }
+                    } else {
+                        setScroll((s) => s + v * PXPM * dt);
+                    }
                     rafRef.current = requestAnimationFrame(step);
                 };
                 rafRef.current = requestAnimationFrame(step);
                 return () => cancelAnimationFrame(rafRef.current);
-            }, [running, v]);
+            }, [running, v, scenario]);
+
+            // Återställ hopparen till hängande läge när scenariot byts
+            useEffect(() => {
+                setScroll(0);
+                if (scenario === 'diver') { setCut(false); setDiverV(0); diverVRef.current = 0; }
+            }, [scenario]);
 
             // fullskärm
             useEffect(() => {
@@ -759,7 +900,23 @@
             };
 
             const tShow = (k) => setShow((s) => ({ ...s, [k]: !s[k] }));
-            const reset = () => { setScroll(0); };
+            const reset = () => {
+                setScroll(0);
+                // återhäng hopparen i snöret
+                setCut(false); setDiverV(0); diverVRef.current = 0;
+            };
+            // klipp av snöret → hopparen börjar falla
+            const cutString = () => { diverVRef.current = 0; setDiverV(0); setCut(true); setRunning(true); };
+
+            // scenens fart (hopparen: fysikfart; övriga: glidaren) + luftmotstånd
+            const sceneV = scenario === 'diver' ? diverV : v;
+            const diverFAir = fAirOf(diverV);
+
+            // Primärknappen: när hopparen hänger i snöret startar den fallet
+            // (klipper snöret) och visar "✂ Starta"; annars Pausa/Starta.
+            const diverHanging = scenario === 'diver' && !cut;
+            const playLabel = diverHanging ? '✂ Starta' : (running ? '⏸ Pausa' : '▶ Starta');
+            const playAction = diverHanging ? cutString : () => setRunning((r) => !r);
 
             // SceneToggles (uppe till höger, både normalt och fullskärm).
             // OBS: anropas som funktion ({sceneToggles()}) — INTE som <SceneToggles/> —
@@ -786,6 +943,10 @@
                             <label>
                                 <input type="checkbox" checked={show.luft} onChange={() => tShow('luft')} />
                                 <span>Luftmotstånd</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" checked={show.res} onChange={() => tShow('res')} />
+                                <span>Resulterande kraft</span>
                             </label>
                         </React.Fragment>
                     ) : (
@@ -819,9 +980,7 @@
                     )}
                     {isFullscreen && (
                         <div className="st-actions">
-                            <button className="btn-toggle" onClick={() => setRunning((r) => !r)}>
-                                {running ? '⏸ Pausa' : '▶ Starta'}
-                            </button>
+                            <button className="btn-toggle" onClick={playAction}>{playLabel}</button>
                             <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
                         </div>
                     )}
@@ -840,7 +999,8 @@
                 },
                 diver: {
                     title: 'Fallskärmshopparen — gränshastighet',
-                    text: 'Tyngdkraften drar nedåt och luftmotståndet bromsar uppåt. Ju fortare hopparen faller, desto större blir luftmotståndet — tills det är precis lika stort som tyngdkraften. Då är resultanten noll och farten blir konstant: gränshastigheten.',
+                    text: 'Klipp av snöret så börjar hopparen falla. Allra först är farten noll och luftmotståndet noll — bara tyngdkraften verkar, så hon accelererar. Ju fortare hon faller, desto större blir luftmotståndet (det växer med farten i kvadrat). Till slut, vid gränshastigheten 53 m/s, är luftmotståndet precis lika stort som tyngdkraften: resultanten blir noll och farten konstant.',
+                    note: 'Accelerationen avtar hela tiden under fallet — den är störst i början (då bara tyngdkraften verkar) och går mot noll när farten närmar sig gränshastigheten. Farten ökar alltså snabbt först och planar sedan ut.',
                 },
             };
 
@@ -874,9 +1034,18 @@
                             {/* Scen */}
                             <div className="lg:w-3/5 order-1">
                                 <div className="scene-wrap" ref={sceneWrapRef}>
-                                    <Scene scenario={scenario} scroll={scroll} v={v} drive={drive} show={show} svgRef={svgRef} />
+                                    <Scene scenario={scenario} scroll={scroll} v={sceneV} drive={drive} show={show}
+                                           cut={cut} fAir={diverFAir} fGrav={F_G_DIVER} onCut={cutString}
+                                           clock={clock} stringUp={cut ? scroll : 0} svgRef={svgRef} />
 
-                                    <div className="sf-badge"><em>F</em><sub>R</sub> = 0 → konstant fart</div>
+                                    <div className="sf-badge">
+                                        {scenario === 'diver'
+                                            ? (!cut ? '✂ Klicka på snöret för att släppa hopparen'
+                                                    : diverV >= V_T - 0.5
+                                                        ? <span>Gränshastighet — <em>F</em><sub>R</sub> = 0 → konstant fart</span>
+                                                        : 'Luftmotståndet växer med farten …')
+                                            : <span><em>F</em><sub>R</sub> = 0 → konstant fart</span>}
+                                    </div>
 
                                     {/* On-scene-panelen (scenario + visa) behövs bara i fullskärm —
                                         i normalläge finns samma reglage i sidopanelen. */}
@@ -886,12 +1055,12 @@
                                     {isFullscreen && (
                                         <React.Fragment>
                                             <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
-                                                <FsSlider label="Fart" value={v} min={0} max={40} step={1}
-                                                          unit="m/s" decimals={0} onChange={setV} />
+                                                {scenario !== 'diver' && (
+                                                    <FsSlider label="Fart" value={v} min={0} max={40} step={1}
+                                                              unit="m/s" decimals={0} onChange={setV} />
+                                                )}
                                                 <div className="fs-row" style={{ justifyContent: 'center', gap: 14 }}>
-                                                    <button className="btn-toggle" onClick={() => setRunning((r) => !r)}>
-                                                        {running ? '⏸ Pausa' : '▶ Starta'}
-                                                    </button>
+                                                    <button className="btn-toggle" onClick={playAction}>{playLabel}</button>
                                                     <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
                                                 </div>
                                             </div>
@@ -939,16 +1108,28 @@
 
                                 {/* Reglage */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
-                                    <Slider label="Fart" value={v} min={0} max={40} step={1} onChange={setV}>
-                                        <span className="font-mono font-semibold text-sm flex-shrink-0"
-                                              style={{ minWidth: 64, textAlign: 'right', color: 'var(--lab-accent)' }}>
-                                            {fmt(v, 0)} m/s
-                                        </span>
-                                    </Slider>
+                                    {scenario === 'diver' ? (
+                                        <React.Fragment>
+                                            <p className="text-sm mb-2" style={{ color: 'var(--lab-ink-soft)' }}>
+                                                ✂ Klicka på <strong>snöret</strong> i scenen för att klippa av det — hopparen
+                                                faller med ökande fart tills luftmotståndet är lika stort som tyngdkraften
+                                                vid gränshastigheten {fmt(V_T, 0)} m/s.
+                                            </p>
+                                            <div className="flex items-center justify-between mb-2 text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                                <span>Fart <em>v</em></span>
+                                                <span className="font-mono font-semibold" style={{ color: 'var(--lab-accent)' }}>{fmt(diverV, 1)} m/s</span>
+                                            </div>
+                                        </React.Fragment>
+                                    ) : (
+                                        <Slider label="Fart" value={v} min={0} max={40} step={1} onChange={setV}>
+                                            <span className="font-mono font-semibold text-sm flex-shrink-0"
+                                                  style={{ minWidth: 64, textAlign: 'right', color: 'var(--lab-accent)' }}>
+                                                {fmt(v, 0)} m/s
+                                            </span>
+                                        </Slider>
+                                    )}
                                     <div className="flex gap-2 mt-2">
-                                        <button className="btn-toggle flex-1" onClick={() => setRunning((r) => !r)}>
-                                            {running ? '⏸ Pausa' : '▶ Starta'}
-                                        </button>
+                                        <button className="btn-toggle flex-1" onClick={playAction}>{playLabel}</button>
                                         <button className="btn-toggle flex-1" onClick={reset}>↻ Börja om</button>
                                     </div>
                                 </div>
@@ -967,6 +1148,11 @@
                                                 <input type="checkbox" checked={show.luft} onChange={() => tShow('luft')}
                                                        style={{ width: 16, height: 16, accentColor: 'var(--lab-accent)' }} />
                                                 Luftmotstånd
+                                            </label>
+                                            <label className="flex items-center gap-2 mb-1 cursor-pointer text-sm" style={{ color: 'var(--lab-ink)' }}>
+                                                <input type="checkbox" checked={show.res} onChange={() => tShow('res')}
+                                                       style={{ width: 16, height: 16, accentColor: 'var(--lab-accent)' }} />
+                                                Resulterande kraft
                                             </label>
                                         </React.Fragment>
                                     ) : (

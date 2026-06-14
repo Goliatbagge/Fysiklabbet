@@ -684,7 +684,7 @@
             const canvasRef = useRef(null);
             const fullscreenRef = useRef(null);
             const [isFullscreen, setIsFullscreen] = useState(false);
-            const [controlsOpen, setControlsOpen] = useState(true);
+            const [controlsOpen, setControlsOpen] = useState(false);
             const [dragging, setDragging] = useState(null); // null | 1 | 2 | 'human'
             // STEG C — experimentell canvas-tema-väljare (V1/V2/V3 jämförelse)
             const [canvasTheme, setCanvasTheme] = useState('morkRymd');

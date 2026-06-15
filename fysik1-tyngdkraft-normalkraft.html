@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyngdkraft och normalkraft - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        /* Scenytan (fullskärms-mål) — ljus pappersbakgrund */
+        .stage {
+            position: relative;
+            background: linear-gradient(180deg, #f7f2e8 0%, #ece3d2 100%);
+            border: 1px solid rgba(15,22,32,0.18);
+            border-radius: 14px;
+            padding: 64px 18px 18px;   /* topp-strip åt fullskärmsknappen så den ej krockar med första rubriken */
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+        }
+        .stage:fullscreen, .stage:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+            display: flex; align-items: center; justify-content: center;
+            overflow: auto;
+        }
+        .stage:fullscreen .panel-grid, .stage:-webkit-full-screen .panel-grid {
+            width: min(1100px, 94vw);
+        }
+
+        .rt-toggle {
+            position: absolute; top: 16px; right: 18px; z-index: 5;
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #fbf7ee; border: 1px solid rgba(15,22,32,0.18);
+            border-radius: 999px; padding: 6px 13px;
+            font-size: 13px; font-weight: 600; color: var(--lab-ink, #0f1620);
+            cursor: pointer; box-shadow: 0 1px 4px rgba(15,22,32,0.08);
+            user-select: none;
+        }
+        .rt-toggle input { accent-color: #15803d; width: 15px; height: 15px; cursor: pointer; margin: 0; }
+
+        .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 760px) { .panel-grid { grid-template-columns: 1fr; } }
+
+        .panel {
+            background: #fbf7ee;
+            border: 1px solid rgba(15,22,32,0.16);
+            border-radius: 12px;
+            padding: 12px 14px 14px;
+            display: flex; flex-direction: column;
+            box-shadow: 0 1px 4px rgba(15,22,32,0.06);
+        }
+        .panel-title {
+            font-weight: 700; color: var(--lab-ink, #0f1620); font-size: 15px;
+            margin-bottom: 4px; display: flex; align-items: center; gap: 7px;
+        }
+        .panel-svg svg { width: 100%; height: auto; display: block; }
+        .panel-readout {
+            display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 8px 0 6px;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .panel-readout .ro-val { font-weight: 700; font-variant-numeric: tabular-nums; }
+        .panel-slider { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
+        .panel-slider .ps-label {
+            font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600;
+            min-width: 92px; flex-shrink: 0;
+        }
+        .panel-slider input[type="range"] { flex: 1; cursor: pointer; }
+
+        .accordion-head {
+            cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600;
+        }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+
+        const fmt = (num, decimals = 0) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        };
+
+        // Färger för krafter
+        const COL = {
+            tyngd: '#7c3aed', // lila — tyngdkraft
+            push:  '#0284c7', // blå — pålagd kraft (hand / lyftkraft)
+            norm:  '#15803d', // grön — normalkraft (balanserar)
+            ink:   '#0f1620',
+        };
+
+        const DEG = Math.PI / 180;
+        const ALPHA = 30;                 // lutande planets vinkel
+        const COSA = Math.cos(ALPHA * DEG);
+
+        // Pillängd (px) som funktion av kraft (N). Klampad så pilen aldrig
+        // blir kortare än en synlig stump.
+        const scale = (F, ref, lmax) => Math.max(7, (F / ref) * lmax);
+
+        // ── SVG-pil (mättad färg, ingen vit kontur på ljus bakgrund) ──
+        const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 15, dash = false, opacity = 1 }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 1) return null;
+            const hw = 0.42;
+            const bx = x2 - head * 0.82 * Math.cos(ang);
+            const by = y2 - head * 0.82 * Math.sin(ang);
+            const pL = [x2 - head * Math.cos(ang - hw), y2 - head * Math.sin(ang - hw)];
+            const pR = [x2 - head * Math.cos(ang + hw), y2 - head * Math.sin(ang + hw)];
+            return (
+                <g opacity={opacity}>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="round" strokeDasharray={dash ? '6 5' : undefined} />
+                    <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color} />
+                </g>
+            );
+        };
+
+        // Kraftbeteckning F_sub (F kursiv, index upprätt) — symbol utan värde.
+        const FLabel = ({ x, y, sub, color, anchor = 'middle', size = 15 }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={700} fill={color}>
+                <tspan fontStyle="italic">F</tspan>
+                <tspan fontSize={size * 0.72} dy={size * 0.22}>{sub}</tspan>
+            </text>
+        );
+
+        // Markmönster (snedstreck) under en vågrät linje
+        const Hatch = ({ x0, x1, y, n = 14, len = 9, color = 'rgba(15,22,32,0.40)' }) => {
+            const items = [];
+            const step = (x1 - x0) / n;
+            for (let i = 0; i <= n; i++) {
+                const xx = x0 + i * step;
+                items.push(<line key={i} x1={xx} y1={y} x2={xx - len} y2={y + len} stroke={color} strokeWidth="1.5" />);
+            }
+            return <g>{items}</g>;
+        };
+
+        // Liten kvadrat som markerar den räta vinkeln mellan en yta (d1) och
+        // normalkraften (d2). d1/d2 är enhetsvektorer ut från hörnpunkten (x,y).
+        const RightAngle = ({ x, y, d1, d2, size = 11, color = 'rgba(15,22,32,0.78)' }) => {
+            const a = { x: x + d1.x * size, y: y + d1.y * size };
+            const c = { x: x + (d1.x + d2.x) * size, y: y + (d1.y + d2.y) * size };
+            const b = { x: x + d2.x * size, y: y + d2.y * size };
+            return <polyline points={`${a.x},${a.y} ${c.x},${c.y} ${b.x},${b.y}`}
+                             fill="none" stroke={color} strokeWidth="1.7"
+                             strokeLinejoin="round" strokeLinecap="round" />;
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  FYRA SMÅ SCENER (viewBox 0 0 300 260)
+        // ════════════════════════════════════════════════════════
+        const REF_KG = 1000, LMAX_FLOOR = 58, LMAX_INCL = 76;
+        const REF_HAND = 600, LMAX_HAND = 72;
+        const REF_LYFT = 50, LMAX_LYFT = 70;
+        const BALLOON_FG = 12;            // ballongens (konstanta) tyngd, N
+
+        // 1 ── Låda på golv ──────────────────────────────────────
+        const FloorScene = ({ F, rt }) => {
+            const L = scale(F, REF_KG, LMAX_FLOOR);
+            const floorY = 196, boxW = 78, boxH = 48, cx = 150, boxTop = floorY - boxH;
+            const cmY = boxTop + boxH / 2;
+            return (
+                <svg viewBox="0 0 300 260">
+                    <line x1="26" y1={floorY} x2="274" y2={floorY} stroke={COL.ink} strokeWidth="3" strokeLinecap="round" />
+                    <Hatch x0="36" x1="264" y={floorY} />
+                    <rect x={cx - boxW / 2} y={boxTop} width={boxW} height={boxH} rx="5"
+                          fill="#d9b382" stroke={COL.ink} strokeWidth="2" />
+                    {/* Tyngdkraft — från tyngdpunkten, rakt ned */}
+                    <Arrow x1={cx} y1={cmY} x2={cx} y2={cmY + L} color={COL.tyngd} />
+                    <circle cx={cx} cy={cmY} r="2.6" fill={COL.ink} />
+                    <FLabel x={cx + 12} y={cmY + L} sub="G" color={COL.tyngd} anchor="start" />
+                    {/* Normalkraft — från kontaktpunkten, rakt upp (sidoförskjuten för läsbarhet) */}
+                    <Arrow x1={cx - 17} y1={floorY} x2={cx - 17} y2={floorY - L} color={COL.norm} />
+                    <FLabel x={cx - 17} y={floorY - L - 7} sub="N" color={COL.norm} />
+                    {rt && <RightAngle x={cx - 17} y={floorY} d1={{ x: -1, y: 0 }} d2={{ x: 0, y: -1 }} />}
+                </svg>
+            );
+        };
+
+        // 2 ── Låda på lutande plan ───────────────────────────────
+        const InclineScene = ({ F, rt }) => {
+            const Lg = scale(F, REF_KG, LMAX_INCL);
+            const Ln = Lg * COSA;                       // F_G · cos α  (= F_N)
+            const Lp = Lg * Math.sin(ALPHA * DEG);      // F_G · sin α  (längs planet)
+            // Triangel: A (lågt vänster) → B (lågt höger) → topp (höger uppe)
+            const A = { x: 34, y: 206 }, Bx = 264;
+            const H = (Bx - A.x) * Math.tan(ALPHA * DEG);
+            const top = { x: Bx, y: A.y - H };
+            // Ytans riktning (uppför, mot höger) och utåtnormal (upp-vänster)
+            const u = { x: Math.cos(ALPHA * DEG), y: -Math.sin(ALPHA * DEG) };
+            const nout = { x: -Math.sin(ALPHA * DEG), y: -Math.cos(ALPHA * DEG) };
+            const nin = { x: Math.sin(ALPHA * DEG), y: Math.cos(ALPHA * DEG) };
+            // Kontaktpunkt P på hypotenusan, lådans tyngdpunkt C ovanför ytan
+            const t = 0.42;
+            const P = { x: A.x + (Bx - A.x) * t, y: A.y + (top.y - A.y) * t };
+            const half = 22;
+            const C = { x: P.x + nout.x * half, y: P.y + nout.y * half };
+            // Komposanternas och tyngdkraftens spetsar (parallellogram med F_G som diagonal)
+            const gTip = { x: C.x, y: C.y + Lg };
+            const perpTip = { x: C.x + nin.x * Ln, y: C.y + nin.y * Ln };
+            const parTip = { x: C.x - u.x * Lp, y: C.y - u.y * Lp };
+            return (
+                <svg viewBox="0 0 300 260">
+                    <polygon points={`${A.x},${A.y} ${Bx},${A.y} ${top.x},${top.y}`}
+                             fill="#cdbb98" stroke={COL.ink} strokeWidth="2" strokeLinejoin="round" />
+                    <Hatch x0={A.x + 6} x1={Bx} y={A.y} n="13" />
+                    {/* vinkelmarkering vid A */}
+                    <path d={`M ${A.x + 34} ${A.y} A 34 34 0 0 0 ${A.x + 34 * u.x} ${A.y + 34 * u.y}`}
+                          fill="none" stroke={COL.ink} strokeWidth="1.4" />
+                    <text x={A.x + 41} y={A.y - 9} fontSize="13" fontWeight="600" fill={COL.ink}>{ALPHA}°</text>
+                    {/* lådan, roterad längs planet */}
+                    <g transform={`rotate(${-ALPHA} ${C.x} ${C.y})`}>
+                        <rect x={C.x - 28} y={C.y - half} width="56" height={half * 2} rx="4"
+                              fill="#d9b382" stroke={COL.ink} strokeWidth="2" />
+                    </g>
+                    {/* parallellogram-guider som visar F_G:s uppdelning */}
+                    <line x1={perpTip.x} y1={perpTip.y} x2={gTip.x} y2={gTip.y} stroke={COL.tyngd} strokeWidth="1.2" strokeDasharray="3 4" opacity="0.4" />
+                    <line x1={parTip.x} y1={parTip.y} x2={gTip.x} y2={gTip.y} stroke={COL.tyngd} strokeWidth="1.2" strokeDasharray="3 4" opacity="0.4" />
+                    {/* komposant längs planet, F_G · sin α (streckad) */}
+                    <Arrow x1={C.x} y1={C.y} x2={parTip.x} y2={parTip.y} color={COL.tyngd} width={4} head={11} dash opacity={0.9} />
+                    {/* komposant vinkelrät mot planet, F_G · cos α — lika lång som F_N (streckad) */}
+                    <Arrow x1={C.x} y1={C.y} x2={perpTip.x} y2={perpTip.y} color={COL.tyngd} width={4} head={11} dash opacity={0.9} />
+                    {/* Tyngdkraft — från tyngdpunkten, rakt nedåt (heldragen) */}
+                    <Arrow x1={C.x} y1={C.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} />
+                    <circle cx={C.x} cy={C.y} r="2.6" fill={COL.ink} />
+                    <FLabel x={gTip.x + 11} y={gTip.y - 1} sub="G" color={COL.tyngd} anchor="start" />
+                    {/* Normalkraft — vinkelrät ut från ytan. Ritas från lådans tyngdpunkt C,
+                         dvs samma utgångspunkt som den vinkelräta tyngdkomposanten men åt motsatt
+                         håll, så att F_N och F_G·cos α blir EXAKT lika långa och speglar varandra
+                         (annars ser komposanten kortare ut, trots att de är lika stora). */}
+                    <Arrow x1={C.x} y1={C.y} x2={C.x + nout.x * Ln} y2={C.y + nout.y * Ln} color={COL.norm} />
+                    <FLabel x={C.x + nout.x * (Ln + 14)} y={C.y + nout.y * (Ln + 14) + 4} sub="N" color={COL.norm} anchor="end" />
+                    {/* rät vinkel mellan planet (u) och normalen (nout) vid kontaktpunkten P */}
+                    {rt && <RightAngle x={P.x} y={P.y} d1={u} d2={nout} />}
+                </svg>
+            );
+        };
+
+        // 3 ── Hand mot vägg (slank sidoprofil: handflatan platt mot väggen,
+        //      fingrarna pekar uppåt längs väggen, tummen sticker upp på närsidan,
+        //      underarmen kommer in förkortad från nedre vänster) ──
+        const WallScene = ({ F, rt }) => {
+            const L = scale(F, REF_HAND, LMAX_HAND);
+            const wallX = 214;
+            const skin = '#e7b489', skin2 = '#efc09b';
+            // En bok ligger mot väggen; handen trycker handflatan platt mot bokens framsida.
+            const bookW = 18, bookX = wallX - bookW;   // bokens framsida (vänster) vid bookX
+            const xW = bookX;                // handens kant ligger an mot bokens framsida
+            // Underarm + hand i en sammanhängande, slank silhuett (vi ser handen från sidan,
+            // därför smal). Höger kant följer boken rakt; baksidan (vänster) är svagt konvex.
+            const handBack = `M ${xW} 60
+                Q ${xW - 8} 50, ${xW - 23} 56
+                C ${xW - 31} 86, ${xW - 33} 118, ${xW - 30} 146
+                C ${xW - 53} 162, ${xW - 95} 176, 72 196
+                L 46 212
+                C 40 220, 46 230, 58 231
+                C 112 224, 170 210, ${xW - 13} 188
+                C ${xW - 3} 180, ${xW} 172, ${xW} 160
+                L ${xW} 60 Z`;
+            // Knogveck på handryggen (svaga bläcklinjer)
+            const creases = [80, 104, 128].map((yy) => `M ${xW - 29} ${yy} q 6 4 10 2`);
+            // Bokens sidor (pappersedge mot handen, rygg mot väggen) + bladlinjer
+            const pageLines = [bookX + 3.5, bookX + 6.5, bookX + 9.5];
+            return (
+                <svg viewBox="0 0 300 260">
+                    {/* vägg till höger */}
+                    <rect x={wallX} y="14" width="52" height="232" fill="#c8bda3" stroke={COL.ink} strokeWidth="2" />
+                    {[52, 92, 132, 172, 212].map((yy) => (
+                        <line key={yy} x1={wallX} y1={yy} x2={wallX + 52} y2={yy} stroke="rgba(15,22,32,0.16)" strokeWidth="1.1" />
+                    ))}
+                    {/* bok mot väggen (rygg åt höger mot väggen, bladkant åt vänster mot handen) */}
+                    <rect x={bookX} y="44" width={bookW} height="166" rx="2" fill="#efe6d2" stroke={COL.ink} strokeWidth="2.4" strokeLinejoin="round" />
+                    <rect x={bookX + bookW - 7} y="44" width="7" height="166" fill="#9c6b3f" />
+                    <line x1={bookX + bookW - 7} y1="44" x2={bookX + bookW - 7} y2="210" stroke={COL.ink} strokeWidth="1.6" />
+                    <g stroke="rgba(15,22,32,0.30)" strokeWidth="1">
+                        {pageLines.map((px, i) => <line key={i} x1={px} y1="48" x2={px} y2="206" />)}
+                    </g>
+                    {/* underarm + hand (ovanpå boken → handflatan döljer bokens kant = kontakt) */}
+                    <path d={handBack} fill={skin2} stroke={COL.ink} strokeWidth="2" strokeLinejoin="round" />
+                    {/* knogveck */}
+                    <g fill="none" stroke="rgba(15,22,32,0.25)" strokeWidth="1.3" strokeLinecap="round">
+                        {creases.map((d, i) => <path key={i} d={d} />)}
+                    </g>
+                    {/* Handkraft — angreppspunkt vid kontaktytan handflata–bok (bokens
+                         framsida), pekar in mot boken (åt höger). Övre nivån. */}
+                    <Arrow x1={bookX} y1="104" x2={bookX + L} y2="104" color={COL.push} />
+                    <text x={bookX - 8} y="98" textAnchor="end" fontSize="13" fontWeight="700" fill={COL.push}>Handkraft</text>
+                    {/* Normalkraft — angreppspunkt vid kontaktytan vägg–bok (bokens baksida),
+                         pekar in mot boken (åt vänster). Nedre nivån. */}
+                    <Arrow x1={wallX} y1="150" x2={wallX - L} y2="150" color={COL.norm} />
+                    <FLabel x={wallX - L - 6} y="155" sub="N" color={COL.norm} anchor="end" />
+                    {/* rät vinkel mellan väggen (lodrät) och normalkraften (vågrät) vid kontaktytan */}
+                    {rt && <RightAngle x={wallX} y={150} d1={{ x: 0, y: -1 }} d2={{ x: -1, y: 0 }} />}
+                </svg>
+            );
+        };
+
+        // 4 ── Heliumballong mot tak ──────────────────────────────
+        //   Lyftkraft (upp) > Tyngdkraft (ned). Skillnaden pressar ballongen mot
+        //   taket, så normalkraften F_N = F_L − F_G.
+        const CeilingScene = ({ F, rt }) => {
+            const FL = F;                          // lyftkraft (reglaget)
+            const FG = BALLOON_FG;                 // ballongens tyngd (konstant)
+            const FN = Math.max(0, FL - FG);       // normalkraft = lyft − tyngd
+            const Ll = scale(FL, REF_LYFT, LMAX_LYFT);
+            const Lg = scale(FG, REF_LYFT, LMAX_LYFT);
+            const Ln = scale(FN, REF_LYFT, LMAX_LYFT);
+            const ceilY = 52, cx = 150, rx = 42, ry = 48;
+            const by = ceilY + ry - 1;       // toppen knappt 1 px in i taket → bara lätt tillplattad
+            const bot = by + ry;
+            const liftX = cx - 26, gravX = cx + 2, normX = cx + 28;
+            const topY = ceilY + 8;          // strax under taket (kontaktnära)
+            return (
+                <svg viewBox="0 0 300 260">
+                    {/* snöre */}
+                    <path d={`M ${cx} ${bot - 2} Q ${cx + 12} ${bot + 24} ${cx - 6} ${bot + 48}`}
+                          fill="none" stroke={COL.ink} strokeWidth="1.4" opacity="0.7" />
+                    {/* ballong (ritas först — taket täcker toppen så den ser tillplattad ut) */}
+                    <ellipse cx={cx} cy={by} rx={rx} ry={ry} fill="#ef8d84" stroke={COL.ink} strokeWidth="2" />
+                    <ellipse cx={cx - 15} cy={by - 14} rx="10" ry="15" fill="rgba(255,255,255,0.4)" />
+                    <polygon points={`${cx - 6},${bot - 3} ${cx + 6},${bot - 3} ${cx},${bot + 6}`} fill="#ef8d84" stroke={COL.ink} strokeWidth="1.5" />
+                    {/* tak (täcker ballongens topp → inget mellanrum) */}
+                    <rect x="20" y="20" width="260" height={ceilY - 20} fill="#c8bda3" stroke={COL.ink} strokeWidth="2" />
+                    {/* rät vinkel mellan taket (vågrätt) och normalkraften (lodrät ned) */}
+                    {rt && <RightAngle x={normX} y={ceilY} d1={{ x: -1, y: 0 }} d2={{ x: 0, y: 1 }} />}
+                    {/* Lyftkraft — buren uppåt av heliumet (verkar på ballongen) */}
+                    <Arrow x1={liftX} y1={topY + Ll} x2={liftX} y2={topY} color={COL.push} />
+                    <text x={cx - rx - 4} y={topY + Ll / 2 + 4} textAnchor="end" fontSize="13" fontWeight="700" fill={COL.push}>Lyftkraft</text>
+                    {/* Tyngdkraft — nedåt från tyngdpunkten */}
+                    <circle cx={gravX} cy={by} r="2.4" fill={COL.ink} />
+                    <Arrow x1={gravX} y1={by} x2={gravX} y2={by + Lg} color={COL.tyngd} />
+                    <FLabel x={gravX - 9} y={by + Lg + 1} sub="G" color={COL.tyngd} anchor="end" />
+                    {/* Normalkraft — taket trycker ballongen nedåt (= F_L − F_G) */}
+                    <Arrow x1={normX} y1={topY} x2={normX} y2={topY + Ln} color={COL.norm} />
+                    <FLabel x={cx + rx + 4} y={topY + Ln / 2 + 4} sub="N" color={COL.norm} anchor="start" />
+                </svg>
+            );
+        };
+
+        // ── Ett rutnätskort ───────────────────────────────────────
+        const Panel = ({ title, scene, driveLabel, driveSub, driveCol, driveVal, normVal, normNote, extra,
+                         sliderLabel, value, min, max, step, onChange }) => (
+            <div className="panel">
+                <div className="panel-title"><span>{title}</span></div>
+                <div className="panel-svg">{scene}</div>
+                <div className="panel-readout">
+                    <span style={{ color: driveCol }}>
+                        {driveLabel} <em>F</em>{driveSub ? <sub>{driveSub}</sub> : null} = <span className="ro-val">{fmt(driveVal)} N</span>
+                    </span>
+                    {extra ? extra : null}
+                    <span style={{ color: COL.norm }}>
+                        Normalkraft <em>F</em><sub>N</sub> = <span className="ro-val">{fmt(normVal)} N</span>
+                        {normNote ? <span style={{ color: 'var(--lab-ink-muted)', fontWeight: 400 }}> {normNote}</span> : null}
+                    </span>
+                </div>
+                <div className="panel-slider">
+                    <span className="ps-label">{sliderLabel}</span>
+                    <input type="range" min={min} max={max} step={step} value={value}
+                           onChange={(e) => onChange(parseFloat(e.target.value))} />
+                    <span className="ro-val" style={{ minWidth: 56, textAlign: 'right', color: driveCol }}>{fmt(value)} N</span>
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const [fFloor, setFFloor] = useState(500);
+            const [fIncline, setFIncline] = useState(700);
+            const [fHand, setFHand] = useState(250);
+            const [fBalloon, setFBalloon] = useState(30);
+            const [showRightAngle, setShowRightAngle] = useState(false);
+
+            const stageRef = useRef(null);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            useEffect(() => {
+                const onFs = () => setIsFullscreen(!!(document.fullscreenElement || document.webkitFullscreenElement));
+                document.addEventListener('fullscreenchange', onFs);
+                document.addEventListener('webkitfullscreenchange', onFs);
+                return () => {
+                    document.removeEventListener('fullscreenchange', onFs);
+                    document.removeEventListener('webkitfullscreenchange', onFs);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = stageRef.current;
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                } else {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                }
+            };
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Tyngdkraft och normalkraft
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Tyngdkraft och normalkraft</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Så fort två ytor är i kontakt och trycks mot varandra uppstår en <strong>normalkraft</strong> —
+                            en kraft <em>vinkelrät</em> (normal) mot ytan som hindrar föremålen från att tränga in i varandra.
+                            Normalkraften anpassar sig: den blir precis så stor som krävs för att balansera den kraft som
+                            pressar ytorna ihop. Dra i reglagen under varje ruta och se hur normalkraften alltid följer med.
+                        </p>
+
+                        {/* principkort */}
+                        <div className="glass-card rounded-xl p-4 mb-6" style={{ color: 'var(--lab-ink)' }}>
+                            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+                                <span className="fnum">
+                                    <em>F</em><sub>N</sub> ⟂ kontaktytan
+                                </span>
+                                <span className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Vågrätt underlag: <em>F</em><sub>N</sub> = <em>F</em><sub>G</sub>
+                                    <span style={{ margin: '0 10px', color: 'var(--lab-ink-muted)' }}>·</span>
+                                    Lutande plan: <em>F</em><sub>N</sub> = <em>F</em><sub>G</sub> · cos <em>α</em>
+                                    <span style={{ margin: '0 10px', color: 'var(--lab-ink-muted)' }}>·</span>
+                                    Mot vägg/tak: <em>F</em><sub>N</sub> = den pålagda kraften
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* scenrutnät (fullskärms-mål) */}
+                        <div className="stage" ref={stageRef}>
+                            <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                    title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                {isFullscreen ? (
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                    </svg>
+                                ) : (
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                    </svg>
+                                )}
+                            </button>
+
+                            <label className="rt-toggle" title="Visa rät vinkel mellan ytan och normalkraften">
+                                <input type="checkbox" checked={showRightAngle}
+                                       onChange={(e) => setShowRightAngle(e.target.checked)} />
+                                <span>Visa rät vinkel</span>
+                            </label>
+
+                            <div className="panel-grid">
+                                <Panel title="Låda på golv"
+                                       scene={<FloorScene F={fFloor} rt={showRightAngle} />}
+                                       driveLabel="Tyngdkraft" driveSub="G" driveCol={COL.tyngd} driveVal={fFloor}
+                                       normVal={fFloor}
+                                       sliderLabel="Tyngdkraft" value={fFloor} min={100} max={1000} step={10} onChange={setFFloor} />
+
+                                <Panel title="Låda på lutande plan"
+                                       scene={<InclineScene F={fIncline} rt={showRightAngle} />}
+                                       driveLabel="Tyngdkraft" driveSub="G" driveCol={COL.tyngd} driveVal={fIncline}
+                                       normVal={fIncline * COSA} normNote={<span>(= <em>F</em><sub>G</sub> · cos {ALPHA}°)</span>}
+                                       sliderLabel="Tyngdkraft" value={fIncline} min={100} max={1000} step={10} onChange={setFIncline} />
+
+                                <Panel title="Bok trycks mot vägg"
+                                       scene={<WallScene F={fHand} rt={showRightAngle} />}
+                                       driveLabel="Handkraft" driveSub="" driveCol={COL.push} driveVal={fHand}
+                                       normVal={fHand}
+                                       sliderLabel="Tryckkraft" value={fHand} min={50} max={600} step={5} onChange={setFHand} />
+
+                                <Panel title="Heliumballong mot tak"
+                                       scene={<CeilingScene F={fBalloon} rt={showRightAngle} />}
+                                       driveLabel="Lyftkraft" driveSub="L" driveCol={COL.push} driveVal={fBalloon}
+                                       extra={<span style={{ color: COL.tyngd }}>Tyngdkraft <em>F</em><sub>G</sub> = <span className="ro-val">{fmt(BALLOON_FG)} N</span></span>}
+                                       normVal={fBalloon - BALLOON_FG} normNote={<span>(= <em>F</em><sub>L</sub> − <em>F</em><sub>G</sub>)</span>}
+                                       sliderLabel="Lyftkraft" value={fBalloon} min={15} max={50} step={1} onChange={setFBalloon} />
+                            </div>
+                        </div>
+
+                        <p className="text-sm mt-3" style={{ color: 'var(--lab-ink-muted)' }}>
+                            Normalkraften (grön) pekar alltid <em>ut</em> från ytan, vinkelrätt mot den — uppåt från golvet,
+                            snett ut från det lutande planet, vågrätt från väggen och <em>nedåt</em> från taket.
+                        </p>
+
+                        {/* förklaring */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-8">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Alltid vinkelrät mot ytan</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Normalkraften står per definition <em>normalt</em> (vinkelrätt) mot kontaktytan, oavsett hur
+                                    ytan är vänd. Mot ett vågrätt golv pekar den rakt upp, mot ett lutande plan snett ut, och
+                                    mot ett tak rakt ned.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Den anpassar sig</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Normalkraften har inget eget fast värde — den blir precis så stor som behövs för att hålla
+                                    jämvikt vinkelrätt mot ytan. Trycker du hårdare mot väggen, trycker väggen lika hårt tillbaka.
+                                    På det lutande planet balanserar den bara tyngdkraftens vinkelräta komposant <em>F</em><sub>G</sub> · cos <em>α</em>.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Kontaktkraft</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Normalkraften är en <em>kontaktkraft</em>: den finns bara så länge ytorna rör vid varandra.
+                                    Den är reaktionen (Newtons tredje lag) på att föremålet trycker mot ytan — lika stor och
+                                    motriktad.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Normalkraften är alltid lika med tyngdkraften.”</strong> Nej — det gäller bara på ett
+                                    vågrätt underlag utan andra lodräta krafter. På ett lutande plan är <em>F</em><sub>N</sub> = <em>F</em><sub>G</sub> · cos <em>α</em>,
+                                    och mot en vägg eller ett tak bestäms den av den kraft som pressar (handkraften, tryckkraften), inte av tyngden.</li>
+                                <li><strong>”Normalkraften pekar alltid uppåt.”</strong> Nej — den pekar vinkelrätt <em>ut</em> från
+                                    ytan. Mot ett tak pekar den nedåt, mot en lodrät vägg vågrätt.</li>
+                                <li><strong>”Normalkraften finns hela tiden.”</strong> Nej — den uppstår bara vid kontakt. Lyfter du
+                                    handen från väggen försvinner den direkt.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+</body>
+</html>

@@ -44,7 +44,7 @@
     }
     if (!found) return;
 
-    const n = found.courseKey === 'Fysik' ? '1' : '2';
+    const n = found.courseKey === 'Fysik nivå 1' ? '1' : '2';
     const base = 'katalog.html#fy' + n + '-' + found.sec.num;
 
     // Stilar (laborans-tema, samma look som katalogens kort).

@@ -32,7 +32,10 @@
       "Bash(git log:*)",
       "Bash(git merge:*)",
       "Bash(cmd.exe /c start \"\" \"C:\\\\claude\\\\Fysiklabbet\\\\fysik1-massdefekt.html\")",
-      "Bash(explorer.exe \"C:\\\\claude\\\\Fysiklabbet\\\\fysik1-massdefekt.html\")"
+      "Bash(explorer.exe \"C:\\\\claude\\\\Fysiklabbet\\\\fysik1-massdefekt.html\")",
+      "Read(//c/Users/sam_s/.claude/**)",
+      "Read(//c/Users/sam_s/.claude//**)",
+      "Bash(powershell -NoProfile -Command '$s=\\(New-Object -ComObject WScript.Shell\\).CreateShortcut\\('\\\\''C:\\\\Users\\\\sam_s\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\Start Menu\\\\Programs\\\\Startup\\\\Fysiklabbet - Claude.lnk'\\\\''\\); '\\\\''Target: '\\\\''+$s.TargetPath; '\\\\''Args: '\\\\''+$s.Arguments; '\\\\''WorkDir: '\\\\''+$s.WorkingDirectory')"
     ],
     "deny": [],
     "ask": []

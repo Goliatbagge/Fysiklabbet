@@ -18,7 +18,7 @@
 // Saknas en href här används avsnittets titel som reserv.
 
 window.SIM_NAMES = {
-  // ── Fysik ────────────────────────────────────────────────────────
+  // ── Fysik nivå 1 ────────────────────────────────────────────────────────
   'fysik1-enhetskollen.html': 'Enhetskollen',
   'fysik1-densitet-app.html': 'Densitet',
   'fysik1-vektoraddition-app.html': 'Vektoraddition',
@@ -52,7 +52,7 @@ window.SIM_NAMES = {
   'fysik1-halveringstid.html': 'Halveringstid',
   'fysik1-stralning-genomtranglighet.html': 'Strålningens genomtränglighet',
 
-  // ── Fysik – fördjupning ──────────────────────────────────────────
+  // ── Fysik nivå 2 ──────────────────────────────────────────
   'fysik2-konisk-pendel.html': 'Konisk pendel',
   'fysik2-rorelse-app.html': 'Snett kast',
   'fysik2-svangningar-jamforelse.html': 'Jämförelse av svängningar',

@@ -1648,7 +1648,7 @@ function makeBridge(opts) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  MEKANIK-FIGURER (Fysik – fördjupning, kapitel 1)
+//  MEKANIK-FIGURER (Fysik nivå 2, kapitel 1)
 //
 //  Inline-SVG-helpers som ILLUSTRERAR mekanikuppgifter: kaströrelse,
 //  kraftmoment/hävstång, tippande kroppar, cirkulär rörelse, konisk
@@ -8825,7 +8825,7 @@ $$ m = \\frac{8{,}64}{2{,}26} \\approx 3{,}82\\ \\mathrm{kg} $$
 
 **Svar:** Alternativ C — andra huvudsatsen.
 
-**Generell slutsats:** Detta är vad som gör att tiden känns ha en riktning i termodynamiska processer — vi ser aldrig en söndertrasad kopp "lägga ihop sig själv", och kall mjölk värms inte spontant upp i kylen. Andra huvudsatsen är intimt kopplad till begreppet **entropi** (oordning), som ni stöter på i Fysik – fördjupning.`,
+**Generell slutsats:** Detta är vad som gör att tiden känns ha en riktning i termodynamiska processer — vi ser aldrig en söndertrasad kopp "lägga ihop sig själv", och kall mjölk värms inte spontant upp i kylen. Andra huvudsatsen är intimt kopplad till begreppet **entropi** (oordning), som ni stöter på i Fysik nivå 2.`,
         },
         {
             level: 1,
@@ -12898,7 +12898,7 @@ $$ T = 2\\pi\\sqrt{\\frac{l\\cos\\alpha}{g}} = 2\\pi\\sqrt{\\frac{2{,}0 \\cdot 0
     ],
 
     // ════════════════════════════════════════════════════════════════════
-    // Fysik – fördjupning — Kapitel 2: Mekaniska vågor
+    // Fysik nivå 2 — Kapitel 2: Mekaniska vågor
     // ════════════════════════════════════════════════════════════════════
 
     'fy2-2.1': [
@@ -15080,7 +15080,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2/3} = 340 \\cdot \\frac{3}{2} = 510\\ 
     ],
 
     // ════════════════════════════════════════════════════════════════════
-    // Fysik – fördjupning — Kapitel 3: Elektromagnetism
+    // Fysik nivå 2 — Kapitel 3: Elektromagnetism
     // ════════════════════════════════════════════════════════════════════
 
     'fy2-3.1': [
@@ -16405,7 +16405,7 @@ $$ I = \\frac{P}{U} = \\frac{50\\cdot 10^6}{400\\cdot 10^3} = 125\\ \\mathrm{A} 
 
 $$ P_\\text{förlust} = I^2\\cdot R = 125^2 \\cdot 5{,}0 = 78\\,125\\ \\mathrm{W} \\approx 78\\ \\mathrm{kW} $$
 
-**Steg 3 — jämför med $20\\ \\mathrm{kV}$.** Vid $20\\ \\mathrm{kV}$ blir strömmen $I' = 50\\cdot 10^6/20\\cdot 10^3 = 2\\,500\\ \\mathrm{A}$ — 20 gånger så stor. Effektförlusten blir:
+**Steg 3 — jämför med $20\\ \\mathrm{kV}$.** Vid $20\\ \\mathrm{kV}$ blir strömmen $I' = 50\\cdot 10^6/20\\cdot 10^3 = 2\\,500\\ \\mathrm{A}$, 20 gånger så stor. Effektförlusten blir:
 
 $$ P'_\\text{förlust} = (2\\,500)^2 \\cdot 5{,}0 = 31{,}25\\ \\mathrm{MW} $$
 
@@ -16711,7 +16711,7 @@ $$ vB = \\frac{U}{d} \\quad\\Leftrightarrow\\quad U = v\\cdot d\\cdot B $$
 
 **Svar:** $U = v\\cdot d\\cdot B$.
 
-**Generell slutsats:** Härledningen är ett klassiskt exempel på *två fundamentala principer* som kombineras: kraftbalans (jämvikt) + elektrostatik ($\\mathbb{E} = U/d$ från Fysik). Att se den röda tråden mellan kurserna är en kärnkompetens på Fysik – fördjupning-nivå.`,
+**Generell slutsats:** Härledningen är ett klassiskt exempel på *två fundamentala principer* som kombineras: kraftbalans (jämvikt) + elektrostatik ($\\mathbb{E} = U/d$ från Fysik nivå 1). Att se den röda tråden mellan kurserna är en kärnkompetens på Fysik nivå 2-nivå.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────

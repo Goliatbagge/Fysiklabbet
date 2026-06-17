@@ -87,6 +87,28 @@ fysiklabbet/
 
 ## Typografi (master)
 
+### ⛔ FÖRBJUDET: emojis och dekorativa piktogram
+
+**Emojis är strikt förbjudna överallt — i simuleringar, katalog, teori,
+övningar, knappar, rubriker, kort och löptext. Inga undantag.** Färgglada
+piktogram (📦, 🪨, 🚀, ⚛️, ⚠️, ✋, 🎈, ↕️, ✅, 🔍 osv.) får aldrig
+användas som ikoner, rubrikprydnader eller blickfång. De ser
+oprofessionella ut och "skriker AI" — exakt motsatsen till den sobra
+laborationsestetiken sidan ska ha. Detta gäller även emoji-varianten av
+symboler (med `U+FE0F` variation selector) och dingbat-emoji (☀️, ⭐, ✔️).
+
+Ersätt i stället med:
+- **Ingenting** — en ren textrubrik utan prydnad är förstahandsvalet.
+- **Inline-SVG-ikoner** med `currentColor` (samma stil som `fs-btn`,
+  logotypen, nav-pilarna) när en ikon verkligen behövs.
+
+**Legitima undantag (INTE emoji):** matematiska och typografiska tecken som
+→ ⟶ ⟂ · × ≈ ≤ ≥ ∝ ⟺ ⟹ ± ∑ √ ° ′ ″, pilar i formler/figurer, samt
+grekiska bokstäver. Dessa är inte emoji utan riktig notation och ska
+användas där de hör hemma. Tumregel: om tecknet bär matematisk/typografisk
+betydelse i sammanhanget → behåll; om det bara är en färgglad dekoration →
+ta bort.
+
 ### Versaler
 ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor bokstav.
 - ✓ "Elektrostatisk induktion"  ✗ "Elektrostatisk Induktion"
@@ -540,6 +562,47 @@ Helpers som redan följer regeln: `makeBField`, `makeProjectile`,
 Skriver du en ny helper eller ny canvas-sim med v-pilar måste du själv
 implementera kant-offseten. **Granska alltid skärmdump** och verifiera
 att hastighetspilen kommer från kanten, inte mitten.
+
+### Kraftfigurer: angreppspunkt, komposanter, kontakt och etiketter
+
+Detta avsnitt samlar fel som **upprepade gånger** har behövt rättas i
+kraftdiagram (låda, hand mot vägg, ballong mot tak, lutande plan). Granska
+ALLTID en skärmdump mot dessa punkter innan en kraftfigur räknas som klar —
+de ska inte behöva påpekas av användaren:
+
+1. **Kraftpilen måste synligt utgå FRÅN den kropp den verkar på.** En
+   normalkraft på en hand/ballong/låda ska ha sin svans i kontaktpunkten på
+   *det objektet* och sitt skaft/sin spets tydligt **över objektet** — aldrig
+   svävande bredvid eller liggande på den *andra* ytan (väggen/taket). Fälla:
+   `F_N` ritad en bit nedanför handen eller uppe vid taket → ser ut att verka
+   på fel kropp. Lägg pilen så att huvudet pekar in i/ligger på objektet.
+2. **Tyngdkraften `F_G` ritas ALLTID från tyngdpunkten** (kroppens mitt),
+   aldrig sidoförskjuten. Markera tyngdpunkten med en liten ifylld prick
+   (`<circle r="2.6">`) vid pilens svans. Behöver `F_N` särskiljas från `F_G`
+   på vågrätt underlag → förskjut **`F_N`** i sidled, inte `F_G`.
+3. **Vid komposantuppdelning: rita ALLA relevanta komposanter.** På lutande
+   plan ska *både* den vinkelräta (`F_G · cos α`) *och* den parallella
+   (`F_G · sin α`) komposanten ritas — streckade, som en parallellogram där
+   `F_G` är diagonalen (rita de två kompletterande sidorna som svaga
+   streckade guider). En komposant som fysikaliskt är lika med en annan
+   ritad vektor (`F_⊥ = F_N`) **måste ritas exakt lika lång** — annars
+   klagar användaren att "den ena ser kortare ut". Gör figuren stor nog
+   (höj `LMAX`/standardvärdet) så pilarna inte trasslar ihop sig till en
+   klump vid små krafter.
+4. **Etiketter får ALDRIG ligga på en färgad/mönstrad bakgrund** (tegelvägg,
+   ballong, planets fyllning) — de blir svårlästa. Flytta etiketten ut till
+   den lugna pappersytan precis utanför objektet (`text-anchor="end"`/
+   `"start"` så den hamnar bredvid, inte på, mönstret). Detta är samma
+   princip som no-white-halo-regeln: **lösningen är att flytta etiketten,
+   inte att lägga en kontur/halo bakom den.**
+5. **Objekt som "trycker mot / ligger mot / mot" en yta måste faktiskt
+   nudda ytan** — inget mellanrum. Fejka tillplattad kontakt med z-ordning:
+   rita objektet först och ytan (taket/väggen) *ovanpå*, så objektets kant
+   göms och ser intryckt ut.
+6. **Igenkännbara verkliga objekt (hand, kropp, fordon) ritas med omsorg**
+   värdig en modern, inspirerande sida — inte som grova klumpar. Bygg t.ex.
+   en hand av handflata + separata fingrar + tumme + en subtil veck-linje,
+   inte två rundade rektanglar. Vid minsta tvekan: använd `grafik`-agenten.
 
 ### Diagramkonventioner (svensk fysik/matte-standard)
 

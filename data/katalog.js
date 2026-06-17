@@ -20,12 +20,12 @@ window.KATALOG = {
   'Fysik': {
     label: 'Fysik',
     courses: {
-      'Fysik': {
-        label: 'Fysik',
+      'Fysik nivå 1': {
+        label: 'Fysik nivå 1',
         intro: {
           tagline: 'Det grundläggande ämnet i fysik på gymnasiet.',
           paragraphs: [
-            'Fysik introducerar de stora idéerna som hela klassisk fysik vilar på: rörelse, krafter, energi och tryck. Vi börjar med att lära oss SI-systemet och hur man arbetar vetenskapligt, och bygger vidare mot Newtons lagar, värmelära, elektriska kretsar och kärnfysikens grunder.',
+            'Fysik nivå 1 introducerar de stora idéerna som hela klassisk fysik vilar på: rörelse, krafter, energi och tryck. Vi börjar med att lära oss SI-systemet och hur man arbetar vetenskapligt, och bygger vidare mot Newtons lagar, värmelära, elektriska kretsar och kärnfysikens grunder.',
             'Fokus ligger på att förstå sambanden bakom formlerna — varför något händer, inte bara hur man räknar. Varje kapitel följs av övningsavsnitt med exempel och simuleringar.',
           ],
           bullets: [
@@ -66,7 +66,7 @@ window.KATALOG = {
               { num: '3.1', title: 'Kraft och Newtons första lag', description: 'Tröghet — en kropp förblir i vila eller likformig rörelse om resulterande kraft är noll. Tre scenarier: rymden, en bil och en fallskärmshoppare.', href: 'fysik1-newtons-forsta-app.html', icon: '⚖️', keywords: ['krafter','newton','första lagen','tröghetslagen','tröghet','jämvikt','resulterande kraft','konstant hastighet','likformig rörelse','luftmotstånd','gränshastighet','fallskärm','mekanik'] },
               { num: '3.2', title: 'Newtons andra lag', description: 'F = m · a — lägg en kraft på en kärra och se accelerationen. Ändra objektets massa och kraftens storlek.', href: 'fysik1-newtons-andra-app.html', icon: '➡️', keywords: ['krafter','newton','andra lagen','kraft','massa','acceleration','f=ma','kärra','vagn','resulterande kraft','dynamik','mekanik','hastighetsmätare'] },
               { num: '3.3', title: 'Newtons tredje lag', description: 'Aktion och reaktion — navigera med brandsläckare i rymden.', href: 'fysik1-newtons-tredje-app.html', icon: '🚀', keywords: ['krafter','newton','tredje lagen','aktion','reaktion','rymd','raket','impuls','mekanik'] },
-              { num: '3.4', title: 'Tyngdkraft och normalkraft', description: 'Tyngdkraften på jordytan och normalkraften från ett underlag.', href: 'fysik1-tyngdfaktor-jorden.html', icon: '🪨', keywords: ['krafter','tyngdkraft','normalkraft','underlag','jämvikt'] },
+              { num: '3.4', title: 'Tyngdkraft och normalkraft', description: 'Fyra situationer sida vid sida — låda på golv, låda på lutande plan, hand mot vägg och ballong mot tak. Dra i reglagen och se hur normalkraften alltid står vinkelrätt mot ytan och balanserar den pålagda kraften.', href: 'fysik1-tyngdkraft-normalkraft.html', icon: '🪨', keywords: ['krafter','tyngdkraft','normalkraft','underlag','jämvikt','kontaktkraft','lutande plan','vägg','tak','vinkelrät','komposant','newtons tredje lag','mekanik'] },
               { num: '3.5', title: 'Gravitationslagen', description: 'Kraften mellan två massor — F = G · m₁ · m₂ / r².', href: 'fysik1-newtons-gravitationslag.html', icon: '🪐', keywords: ['krafter','mekanik','newton','gravitation','gravitationslag','tyngdkraft','planet','stjärna','invers kvadratlag','massa','avstånd','rymd','astronomi'] },
               { num: '3.6', title: 'Friktion', description: 'Statisk och dynamisk friktion mellan ytor.', href: null, icon: '🧱', keywords: ['krafter','friktion','statisk','dynamisk','ytor'] },
               { num: '3.7', title: 'Lutande plan', description: 'Krafter och rörelse på ett lutande plan.', href: null, icon: '📐', keywords: ['krafter','lutande plan','tyngdkraft','komposant'] },
@@ -154,12 +154,12 @@ window.KATALOG = {
           },
         },
       },
-      'Fysik – fördjupning': {
-        label: 'Fysik – fördjupning',
+      'Fysik nivå 2': {
+        label: 'Fysik nivå 2',
         intro: {
           tagline: 'Fördjupningsämnet som tar dig in i kvant- och relativitetsfysiken.',
           paragraphs: [
-            'Fysik – fördjupning bygger vidare på Fysik och tar sig an svängningar, vågor, elektromagnetism och den moderna fysik som omformade vår världsbild på 1900-talet. Vi börjar med cirkulär rörelse och kaströrelse, fortsätter till ljudvågor och stående vågor, och möter sedan magnetiska fält, induktion och generatorer.',
+            'Fysik nivå 2 bygger vidare på Fysik nivå 1 och tar sig an svängningar, vågor, elektromagnetism och den moderna fysik som omformade vår världsbild på 1900-talet. Vi börjar med cirkulär rörelse och kaströrelse, fortsätter till ljudvågor och stående vågor, och möter sedan magnetiska fält, induktion och generatorer.',
             'Sista delen av ämnet handlar om ljus som både våg och partikel: brytning, diffraktion, fotoelektrisk effekt, Bohrs atommodell och spektrallinjer — grunden för dagens kvantfysik.',
           ],
           bullets: [

@@ -290,8 +290,8 @@
 
         // id-konvention för teori-uppslag — t.ex. Fysik + "2.3" → "fy1-2.3"
         function teoriId(courseName, num) {
-            if (courseName === 'Fysik') return 'fy1-' + num;
-            if (courseName === 'Fysik – fördjupning') return 'fy2-' + num;
+            if (courseName === 'Fysik nivå 1') return 'fy1-' + num;
+            if (courseName === 'Fysik nivå 2') return 'fy2-' + num;
             return null;
         }
 
@@ -336,8 +336,8 @@
                                     <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
                                 </button>
                                 <div className="lab-nav-dd-menu">
-                                    <a href="katalog.html#fy1">Fysik</a>
-                                    <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                                    <a href="katalog.html#fy1">Fysik nivå 1</a>
+                                    <a href="katalog.html#fy2">Fysik nivå 2</a>
                                 </div>
                             </div>
                             <a href="simuleringar.html">Simuleringar</a>
@@ -351,7 +351,7 @@
 
         function Breadcrumb({ course, chapter, section }) {
             // Hoppar över "Katalog" och "Fysik" — eftersom sidan numera bara
-            // har två ingångar (Fysik / Fysik – fördjupning) börjar vi direkt med
+            // har två ingångar (Fysik / Fysik nivå 2) börjar vi direkt med
             // kursnamnet.
             return (
                 <div className="lab-breadcrumb">
@@ -395,7 +395,7 @@
                 // en teori-länk (alltid) och en simulering-länk (om href finns).
                 const out = [];
                 for (const sim of filtered) {
-                    const code = sim.course === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
+                    const code = sim.course === 'Fysik nivå 2' ? 'fy2' : 'fy1';
                     out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
                     if (sim.href) {
                         out.push({ ...sim, kind: 'sim', resultHref: sim.href });
@@ -1610,7 +1610,7 @@
         // Parsea URL-parametrar och hash för djuplänkar:
         //   katalog.html?course=Fysik+1
         //   katalog.html#fy1            → Fysik, kursintro
-        //   katalog.html#fy2-3          → Fysik – fördjupning, kapitel 3 (första avsnittet)
+        //   katalog.html#fy2-3          → Fysik nivå 2, kapitel 3 (första avsnittet)
         //   katalog.html#fy1-2.3        → Fysik, kapitel 2, avsnitt 2.3
         function parseInitialState() {
             const subject = 'Fysik';
@@ -1628,7 +1628,7 @@
             const m = hash.match(/^fy([12])(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar))?$/);
             if (m && m[4]) out.view = m[4];
             if (m) {
-                const courseKey = m[1] === '1' ? 'Fysik' : 'Fysik – fördjupning';
+                const courseKey = m[1] === '1' ? 'Fysik nivå 1' : 'Fysik nivå 2';
                 if (subj.courses[courseKey]) {
                     out.course = courseKey;
                     if (m[2]) {
@@ -1657,7 +1657,7 @@
         function App() {
             const [state, setState] = useState(parseInitialState);
 
-            // Lyssna på hash-ändringar så att klick på Fysik/Fysik – fördjupning i navbar
+            // Lyssna på hash-ändringar så att klick på Fysik/Fysik nivå 2 i navbar
             // (när användaren redan är på katalog.html) uppdaterar vyn.
             useEffect(() => {
                 const onHashChange = () => setState(parseInitialState());

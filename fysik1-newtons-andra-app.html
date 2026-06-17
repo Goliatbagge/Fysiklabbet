@@ -79,6 +79,8 @@
             box-shadow: 0 2px 8px rgba(15,22,32,0.12);
             max-width: 230px;
         }
+        .scene-wrap:fullscreen .scene-toggles,
+        .scene-wrap:-webkit-full-screen .scene-toggles { width: 250px; max-width: 250px; }
         .scene-toggles .st-title {
             font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
             color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
@@ -89,6 +91,19 @@
             font-size: 13px; color: var(--lab-ink, #0f1620);
         }
         .scene-toggles input { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+        /* Glidare inne i verktygsrutan (visas i fullskärm) */
+        .scene-toggles .st-slider { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+        .scene-toggles .st-slider-top {
+            display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+            font-size: 12px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles .st-slider-top .v {
+            font-weight: 600; color: var(--lab-accent, #c8324a);
+            font-family: 'JetBrains Mono', monospace; white-space: nowrap;
+        }
+        .scene-toggles .st-slider input[type="range"] {
+            width: 100%; height: auto; accent-color: var(--lab-accent, #c8324a); cursor: pointer; flex-shrink: 1;
+        }
         .scene-toggles .st-actions {
             display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
             padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
@@ -167,8 +182,8 @@
                         <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
                     </button>
                     <div class="lab-nav-dd-menu">
-                        <a href="katalog.html#fy1">Fysik</a>
-                        <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
                     </div>
                 </div>
                 <a href="simuleringar.html">Simuleringar</a>
@@ -185,7 +200,9 @@
 
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';
-            return num.toFixed(decimals).replace('.', ',');
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';     // exakt/avrundat noll → "0"
+            return s.replace('.', ',');
         };
         // Signerad term till resultant-uttrycket: negativa krafter i parentes.
         const fmtTerm = (n) => n < 0 ? `(−${fmt(Math.abs(n), 1)} N)` : `${fmt(n, 1)} N`;
@@ -209,8 +226,11 @@
         const DRAG_K = 20 / VMAX;   // = 0,8 N per (m/s)
 
         const COL = {
-            f: '#0284c7',  // blå — drivkraft F₁ (motorn, via vänstra däcket)
+            f: '#0284c7',  // blå — drivkraft F₁ (vänstra motorn)
+            f2: '#0d9488', // teal — drivkraft F₂ (högra motorn)
+            res: '#c8324a', // crimson — resulterande kraft F_R
             a: '#e0701a',  // orange — acceleration
+            v: '#16a34a',  // grön — hastighet
             air: '#8b3a9e', // lila — luftmotstånd
             chock: '#9333ea', // lila — kraft från bromsklossen
             ink: '#0f1620',
@@ -287,31 +307,24 @@
             </div>
         );
 
-        // ── Digital hastighetsmätare (sitter på objektet) ─────────
-        const Speedo = ({ cx, cy, v }) => {
-            const moving = Math.abs(v) > 0.05;
-            const dir = v > 0.05 ? '▶' : v < -0.05 ? '◀' : '•';
-            return (
-                <g>
-                    <line x1={cx} y1={cy + 22} x2={cx} y2={cy + 34} stroke="#11161f" strokeWidth="3" />
-                    <rect x={cx - 52} y={cy - 24} width="104" height="48" rx="8" fill="#11161f" stroke="#05080d" strokeWidth="2" />
-                    <rect x={cx - 47} y={cy - 19} width="94" height="38" rx="5" fill="#0a0f17" />
-                    <text x={cx - 38} y={cy + 2} textAnchor="middle" fontSize="13"
-                          fill={moving ? '#ffd166' : '#5a6573'}>{dir}</text>
-                    <text x={cx + 6} y={cy + 4} textAnchor="middle" fontSize="22" fontWeight="600"
-                          fontFamily="'JetBrains Mono', monospace" fill="#ffd166">{fmt(Math.abs(v), 1)}</text>
-                    <text x={cx + 6} y={cy + 17} textAnchor="middle" fontSize="9"
-                          fontFamily="'JetBrains Mono', monospace" fill="#aeb8c4" letterSpacing="0.08em">m/s</text>
-                </g>
-            );
-        };
+        // Kompakt glidare för verktygsrutan (label + värde på en rad, glidaren under).
+        const StSlider = ({ label, value, min, max, step, onChange, display }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span className="v">{display}</span>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
 
         // ════════════════════════════════════════════════════════
         //  SCEN
         // ════════════════════════════════════════════════════════
-        const CartScene = ({ scroll, cartOff, v, massObj, f1, fair, airMode, show, svgRef }) => {
+        const CartScene = ({ scroll, cartOff, v, massObj, f1, f2, fair, airMode, show, svgRef }) => {
             const mTot = M_CART + massObj;
-            const Fres = f1 + fair;                     // resulterande kraft (inkl. luftmotstånd)
+            const Fres = f1 + f2 + fair;                // resulterande kraft (F₁ + F₂ + luftmotstånd)
             const forceDir = Math.sign(Fres);           // -1 vänster, 0, +1 höger
             const appliedF = Math.abs(Fres);            // resulterande kraftens storlek
             const aMag = appliedF / mTot;
@@ -334,32 +347,78 @@
                 marks.push(<rect key={'m' + i} x={x} y={FLOOR_Y + 16} width="30" height="6" rx="3" fill="#b9ad97" opacity="0.9" />);
             }
 
-            // accelerationspilens längd
-            const La = Math.min(aMag * 26, 160);
+            // accelerationspilens längd (kapad så att spetsen aldrig når
+            // visningsrutan uppe till höger)
+            const La = Math.min(aMag * 22, 120);
 
-            const DRIVE_X = -58;          // drivande (vänstra) hjulet, rel. kärrans mitt
-            const F1_Y = FLOOR_Y;         // F₁ (drivkraften) angriper i däckets kontaktyta mot marken
-            const AIR_Y = 280;            // luftmotståndspilen (ovanför objektet)
-            const A_Y = 214;              // accelerationspilens höjd (ovanför objektet)
+            const DRIVE_X = -58;          // vänstra hjulet, rel. kärrans mitt (−DRIVE_X = höger)
+            // Drivkrafterna angriper i kontaktytan mellan hjul och mark: F₁ vid
+            // vänster hjul (golvlinjen), F₂ vid höger hjul men en bit längre ner så
+            // att de två pilarna aldrig krockar. Resulterande kraft och acceleration
+            // ritas ovanför kärran.
+            const A_Y  = 150;             // acceleration (överst, centrerad etikett)
+            const FR_Y = 196;             // resulterande kraft F_R
+            const AIR_Y = 240;            // luftmotstånd F_luft
+            const F1_Y = FLOOR_Y;         // F₁ — vänster hjuls kontaktyta mot marken
+            const F2_Y = FLOOR_Y + 42;    // F₂ — höger hjul, lite längre ner
 
-            // En enskild kraftpil. Angreppspunkten x0 är kärrans mitt om inget
-            // annat anges (drivkraften F₁ angriper i stället i kontaktytan
-            // mellan det drivande däcket och marken). Längden växer med kraftens
-            // storlek (kapas för mycket stora krafter); etiketten hamnar förbi
-            // kärran (åt pilens håll), labelDY flyttar den över/under pilen.
-            // `halo` sätts för etiketter som kan korsa golvmarkeringar/
-            // luftpartiklar (F₁ resp. F_luft) — diskret papperston bakom texten.
-            const forceArrow = (fi, y, color, sub, x0 = cartCX, labelDY = -7, halo = false) => {
+            // En enskild vågrät kraftpil. Angreppspunkten x0 är kärrans mitt om inget
+            // annat anges. Längden är proportionell mot kraftens storlek (kapad för
+            // mycket stora krafter). Etiketten hamnar strax TILL HÖGER om pilspetsen
+            // (i pilens riktning), i nivå med pilen, så att den hör tydligt ihop med
+            // sin vektor. `clearCart` håller etiketten utanför kärran/hjulen för de
+            // krafter vars pilspets kan hamna under vagnen (F₁, F₂).
+            const forceArrow = (fi, y, color, sub, { x0 = cartCX, labelDY = -9, clearCart = false } = {}) => {
                 if (!(Math.abs(fi) > 0.05)) return null;
                 const dir = Math.sign(fi);
-                const L = Math.min(44 + Math.abs(fi) * 5, 160);
-                const labelX = x0 + dir * Math.max(L + 12, 108);
+                const L = Math.min(Math.abs(fi) * 6.5, 165);
+                const tipX = x0 + dir * L;
+                let labelX = tipX + dir * 14;
+                if (clearCart) labelX = dir > 0 ? Math.max(labelX, cartCX + 88) : Math.min(labelX, cartCX - 88);
                 return (
                     <g>
-                        <Arrow x1={x0} y1={y} x2={x0 + dir * L} y2={y} color={color} width={6} head={18} />
+                        <Arrow x1={x0} y1={y} x2={tipX} y2={y} color={color} width={6} head={18} />
                         <circle cx={x0} cy={y} r="4.5" fill={color} stroke="#f3eee4" strokeWidth="1.5" />
-                        <Tag x={labelX} y={y + labelDY} color={color} size={14} anchor={dir > 0 ? 'start' : 'end'} halo={halo}>
+                        <Tag x={labelX} y={y + labelDY} color={color} size={14} anchor={dir > 0 ? 'start' : 'end'}>
                             <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">{sub}</tspan><tspan dy="-3"> = {fmt(Math.abs(fi), 1)} N</tspan>
+                        </Tag>
+                    </g>
+                );
+            };
+
+            // En motor som driver hjulet vid sign·58 (sign −1 = vänster, +1 = höger).
+            const motorG = (sign) => {
+                const wx = sign * 58, px = sign * 32, boxX = sign < 0 ? -36 : 4;
+                return (
+                    <g>
+                        <line x1={px} y1={WHEEL_CY - 5} x2={wx} y2={WHEEL_CY - 7} stroke="#2c2f35" strokeWidth="2.5" />
+                        <line x1={px} y1={WHEEL_CY + 5} x2={wx} y2={WHEEL_CY + 7} stroke="#2c2f35" strokeWidth="2.5" />
+                        <circle cx={wx} cy={WHEEL_CY} r="7" fill="none" stroke="#2c2f35" strokeWidth="2.5" />
+                        <rect x={boxX} y={DECK_TOP + 18} width="32" height="26" rx="4" fill="#4a4f58" stroke="#23262c" strokeWidth="2" />
+                        <text x={boxX + 17} y={DECK_TOP + 35} textAnchor="middle" fontSize="11" fontWeight="700"
+                              fill="#e9edf3" fontFamily="'DM Sans', sans-serif">M</text>
+                        <g transform={`translate(${px}, ${WHEEL_CY}) rotate(${wheelAng * WHEEL_R / 5})`}>
+                            <circle r="5" fill="#c8ccd4" stroke="#23262c" strokeWidth="1.5" />
+                            <line x1="0" y1="0" x2="0" y2="-3.2" stroke="#5b606a" strokeWidth="1.6" />
+                        </g>
+                    </g>
+                );
+            };
+
+            // Hastighetsvektor — startar vid lådans KANT i rörelseriktningen (inte
+            // i mitten) och växer med farten. Etiketten hamnar bortom pilspetsen.
+            const velocityArrow = () => {
+                if (!(Math.abs(v) > 0.05)) return null;
+                const dir = Math.sign(v);
+                const yc = objTop + s / 2;            // lådans vertikala mitt
+                const x0 = cartCX + dir * (s / 2);    // lådans kant i rörelseriktningen
+                const Lv = Math.max(14, Math.min(Math.abs(v) * 4.5, 140));
+                const labelX = x0 + dir * (Lv + 10);
+                return (
+                    <g>
+                        <Arrow x1={x0} y1={yc} x2={x0 + dir * Lv} y2={yc} color={COL.v} width={6} head={18} />
+                        <Tag x={labelX} y={yc - 11} color={COL.v} size={14} anchor={dir > 0 ? 'start' : 'end'}>
+                            <tspan fontStyle="italic">v</tspan> = {fmt(Math.abs(v), 1)} m/s
                         </Tag>
                     </g>
                 );
@@ -485,29 +544,24 @@
                             </g>
                         ))}
 
-                        {/* motor under flaket — driver vänstra hjulet via rem till navet */}
-                        <g>
-                            <line x1={-32} y1={WHEEL_CY - 5} x2={DRIVE_X} y2={WHEEL_CY - 7} stroke="#2c2f35" strokeWidth="2.5" />
-                            <line x1={-32} y1={WHEEL_CY + 5} x2={DRIVE_X} y2={WHEEL_CY + 7} stroke="#2c2f35" strokeWidth="2.5" />
-                            <circle cx={DRIVE_X} cy={WHEEL_CY} r="7" fill="none" stroke="#2c2f35" strokeWidth="2.5" />
-                            <rect x="-36" y={DECK_TOP + 18} width="32" height="26" rx="4" fill="#4a4f58" stroke="#23262c" strokeWidth="2" />
-                            <text x="-15" y={DECK_TOP + 35} textAnchor="middle" fontSize="11" fontWeight="700"
-                                  fill="#e9edf3" fontFamily="'DM Sans', sans-serif">M</text>
-                            {/* remskiva — roterar växlad mot hjulet (radie 22 → 5) */}
-                            <g transform={`translate(-32, ${WHEEL_CY}) rotate(${wheelAng * WHEEL_R / 5})`}>
-                                <circle r="5" fill="#c8ccd4" stroke="#23262c" strokeWidth="1.5" />
-                                <line x1="0" y1="0" x2="0" y2="-3.2" stroke="#5b606a" strokeWidth="1.6" />
-                            </g>
-                        </g>
+                        {/* två motorer under flaket — en driver vänstra hjulet (F₁),
+                            en driver högra hjulet (F₂), var och en via rem till navet */}
+                        {motorG(-1)}
+                        {motorG(1)}
                     </g>
 
-                    {/* ── KRAFTER (krafterna på kärran, summan = F_R) ── */}
+                    {/* ── KRAFTER ── F₁ vid vänster hjuls kontaktyta, F₂ vid höger
+                        hjul en bit längre ner, F_luft ovanför kärran ── */}
                     {show.forces && (
                         <g>
-                            {forceArrow(f1, F1_Y, COL.f, '1', cartCX + DRIVE_X, 36, true)}
-                            {airMode && forceArrow(fair, AIR_Y, COL.air, 'luft', cartCX, -7, true)}
+                            {forceArrow(f1, F1_Y, COL.f, '1', { x0: cartCX + DRIVE_X, labelDY: 4, clearCart: true })}
+                            {forceArrow(f2, F2_Y, COL.f2, '2', { x0: cartCX - DRIVE_X, labelDY: 4, clearCart: true })}
+                            {airMode && forceArrow(fair, AIR_Y, COL.air, 'luft')}
                         </g>
                     )}
+
+                    {/* ── RESULTERANDE KRAFT F_R (summan av krafterna) ── */}
+                    {show.resultant && forceArrow(Fres, FR_Y, COL.res, 'R')}
 
                     {/* ── ACCELERATION ── */}
                     {show.accel && (
@@ -520,13 +574,13 @@
                             </g>
                         ) : (
                             <Tag x={cartCX} y={A_Y} color="var(--lab-ink-muted)" size={14}>
-                                <tspan fontStyle="italic">a</tspan> = 0 — konstant fart
+                                <tspan fontStyle="italic">a</tspan> = 0 ⟺ konstant fart (eller i vila)
                             </Tag>
                         )
                     )}
 
-                    {/* digital hastighetsmätare på objektet */}
-                    <Speedo cx={cartCX} cy={objTop - 30} v={v} />
+                    {/* hastighetsvektor från lådans kant */}
+                    {show.velocity && velocityArrow()}
 
                     {/* träffeffekter PÅ kärrans frontyta — en per faktisk partikelträff.
                         Sprayen riktas längs ytnormalen (utåt från hjulets rundning,
@@ -595,16 +649,16 @@
         // ── Huvudapp ─────────────────────────────────────────────
         const App = () => {
             const [massObj, setMassObj] = useState(3);     // objektets massa (kg)
-            const [force1, setForce1] = useState(0);       // drivkraft F₁, signerad (−20 N vänster … +20 N höger)
+            const [force1, setForce1] = useState(0);       // drivkraft F₁ (vänster motor), signerad −20 … +20 N
+            const [force2, setForce2] = useState(0);       // drivkraft F₂ (höger motor), signerad −20 … +20 N
             const [airMode, setAirMode] = useState(false); // false = idealt, true = med luftmotstånd
             const [running, setRunning] = useState(true);
             const [v, setV] = useState(0);
             const [scroll, setScroll] = useState(0);
             const [cartOff, setCartOff] = useState(0);     // vagnens offset när den drar ifrån kameran
-            const [show, setShow] = useState({ forces: true, accel: true, airParticles: true });
+            const [show, setShow] = useState({ forces: true, resultant: true, accel: true, velocity: true, airParticles: true });
 
             const [isFullscreen, setIsFullscreen] = useState(false);
-            const [controlsOpen, setControlsOpen] = useState(false);
             const sceneWrapRef = useRef(null);
             const svgRef = useRef(null);
             const rafRef = useRef(null);
@@ -613,7 +667,7 @@
             const cartOffRef = useRef(0);
 
             const mTot = M_CART + massObj;
-            const Fapplied = force1;                            // den pålagda drivkraften
+            const Fapplied = force1 + force2;                   // summan av de pålagda drivkrafterna
             const Fair = airMode ? -DRAG_K * v : 0;             // luftmotstånd, motriktat farten
             const Fres = Fapplied + Fair;                       // resulterande kraft (signerad)
             const forceDir = Math.sign(Fres);                   // -1 vänster, 0, +1 höger
@@ -628,7 +682,7 @@
                     const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
                     lastRef.current = ts;
                     const drag = airMode ? -DRAG_K * vRef.current : 0;
-                    const a = (force1 + drag) / (M_CART + massObj);
+                    const a = (force1 + force2 + drag) / (M_CART + massObj);
                     let nv = vRef.current + a * dt;
                     if (nv > 999) nv = 999;
                     if (nv < -999) nv = -999;   // säkerhetsgräns mot orimliga tal
@@ -649,7 +703,7 @@
                 };
                 rafRef.current = requestAnimationFrame(step);
                 return () => cancelAnimationFrame(rafRef.current);
-            }, [running, force1, massObj, airMode]);
+            }, [running, force1, force2, massObj, airMode]);
 
             // fullskärm
             useEffect(() => {
@@ -675,8 +729,8 @@
             const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
             // Nollställ enbart rörelsen (kärran tillbaka i vila i bildens mitt).
             const resetMotion = () => { vRef.current = 0; setV(0); setScroll(0); cartOffRef.current = 0; setCartOff(0); setRunning(true); };
-            // Börja om: nollställ rörelsen OCH kraftreglaget (F₁ = 0).
-            const reset = () => { resetMotion(); setForce1(0); };
+            // Börja om: nollställ rörelsen OCH båda kraftreglagen (F₁ = F₂ = 0).
+            const reset = () => { resetMotion(); setForce1(0); setForce2(0); };
             // Byt läge (utan/med luftmotstånd) och starta om rörelsen från vila
             // så att jämförelsen blir ren. Kraftreglaget behålls.
             const switchMode = (air) => { if (air === airMode) return; setAirMode(air); resetMotion(); };
@@ -696,8 +750,16 @@
                         <span>Visa krafter</span>
                     </label>
                     <label>
+                        <input type="checkbox" checked={show.resultant} onChange={() => tShow('resultant')} />
+                        <span>Visa resulterande kraft</span>
+                    </label>
+                    <label>
                         <input type="checkbox" checked={show.accel} onChange={() => tShow('accel')} />
                         <span>Visa acceleration</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={show.velocity} onChange={() => tShow('velocity')} />
+                        <span>Visa hastighet</span>
                     </label>
                     {airMode && (
                         <label>
@@ -705,11 +767,23 @@
                             <span>Visa luftpartiklar</span>
                         </label>
                     )}
+                    {/* I fullskärm bor glidarna i verktygsrutan (sidopanelen syns inte då). */}
                     {isFullscreen && (
-                        <div className="st-actions">
-                            <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
-                            <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
-                        </div>
+                        <React.Fragment>
+                            <div className="st-title mt">Reglage</div>
+                            <StSlider label="Objektets massa" value={massObj} min={1} max={10} step={0.5}
+                                      onChange={setMassObj} display={`${fmt(massObj, 1)} kg`} />
+                            <StSlider label="Drivkraft <em>F</em>&#8321;" value={force1} min={-20} max={20} step={1}
+                                      onChange={setForce1}
+                                      display={force1 === 0 ? '0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'} />
+                            <StSlider label="Drivkraft <em>F</em>&#8322;" value={force2} min={-20} max={20} step={1}
+                                      onChange={setForce2}
+                                      display={force2 === 0 ? '0 N' : (force2 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force2), 1) + ' N'} />
+                            <div className="st-actions">
+                                <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
+                                <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
+                            </div>
+                        </React.Fragment>
                     )}
                 </div>
             );
@@ -718,7 +792,7 @@
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     <div className="max-w-6xl mx-auto pt-6">
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
-                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik</a> / Newtons andra lag
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Newtons andra lag
                         </div>
                         <div className="flex flex-wrap items-start justify-between gap-4">
                             <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Newtons andra lag</h1>
@@ -736,10 +810,10 @@
                         </div>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
                             En <strong>kraft</strong> ger en kropp en <strong>acceleration</strong> i kraftens riktning. Ju större
-                            massa, desto trögare är kroppen att sätta i rörelse. Kärran drivs av en liten <strong>motor</strong> på
-                            det vänstra hjulet — drivkraften <em>F</em><sub>1</sub> angriper därför i kontaktytan mellan däcket
-                            och marken. Ställ in drivkraften — åt vänster eller höger — och se hur den
-                            <strong> resulterande kraften</strong> <em>F</em><sub>R</sub> bestämmer accelerationen och farten.
+                            massa, desto trögare är kroppen att sätta i rörelse. Kärran drivs av <strong>två motorer</strong> — en
+                            på vänster hjul (drivkraft <em>F</em><sub>1</sub>) och en på höger hjul (drivkraft <em>F</em><sub>2</sub>).
+                            Ställ in varje kraft åt vänster eller höger och se hur de <strong>adderas</strong> (eller tar ut varandra)
+                            till en <strong>resulterande kraft</strong> <em>F</em><sub>R</sub> som bestämmer accelerationen och farten.
                             {airMode
                                 ? <span> I läget <strong>med luftmotstånd</strong> tillkommer en bromsande kraft <em>F</em><sub>luft</sub> som
                                     växer med farten — till slut tar den ut den pålagda kraften och kärran håller <strong>konstant fart</strong>.</span>
@@ -753,40 +827,15 @@
                             <div className="lg:w-3/5 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <CartScene scroll={scroll} cartOff={cartOff} v={v} massObj={massObj}
-                                               f1={force1} fair={Fair} airMode={airMode}
+                                               f1={force1} f2={force2} fair={Fair} airMode={airMode}
                                                show={show} svgRef={svgRef} />
 
                                     <div className="scene-hint">
                                         {airMode ? 'Luftmotståndet ökar med farten. Friktion försummas.' : 'Luftmotstånd och friktionskrafter försummas.'}
                                     </div>
 
-                                    {/* Visningsval uppe till höger (normalt + fullskärm) */}
+                                    {/* Visningsval + glidare uppe till höger (glidarna bara i fullskärm) */}
                                     {sceneToggles()}
-
-                                    {/* Fullskärm: flytande reglage i underkant */}
-                                    {isFullscreen && (
-                                        <React.Fragment>
-                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
-                                                <FsSlider label="Objektets massa" value={massObj} min={1} max={10} step={0.5}
-                                                          unit="kg" decimals={1} onChange={setMassObj} />
-                                                <FsSlider label="Drivkraft <em>F</em>&#8321; (− v / + h)" value={force1} min={-20} max={20} step={1}
-                                                          unit="N" decimals={1} onChange={setForce1} />
-                                                <div className="fs-row" style={{ justifyContent: 'center', gap: 14, marginTop: 8 }}>
-                                                    <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
-                                                    <button className="btn-toggle" onClick={reset}>↻ Börja om</button>
-                                                </div>
-                                            </div>
-                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}
-                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'} aria-expanded={controlsOpen}>
-                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
-                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
-                                                    <path d="M6 9l6 6 6-6" />
-                                                </svg>
-                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
-                                            </button>
-                                        </React.Fragment>
-                                    )}
 
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
                                             title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
@@ -816,7 +865,13 @@
                                     <Slider label="Drivkraft <em>F</em>&#8321; (◀ vänster / höger ▶)" value={force1} min={-20} max={20} step={1} onChange={setForce1}>
                                         <span className="font-mono font-semibold text-sm flex-shrink-0"
                                               style={{ minWidth: 70, textAlign: 'right', color: COL.f }}>
-                                            {force1 === 0 ? '0,0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'}
+                                            {force1 === 0 ? '0 N' : (force1 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force1), 1) + ' N'}
+                                        </span>
+                                    </Slider>
+                                    <Slider label="Drivkraft <em>F</em>&#8322; (◀ vänster / höger ▶)" value={force2} min={-20} max={20} step={1} onChange={setForce2}>
+                                        <span className="font-mono font-semibold text-sm flex-shrink-0"
+                                              style={{ minWidth: 70, textAlign: 'right', color: COL.f2 }}>
+                                            {force2 === 0 ? '0 N' : (force2 < 0 ? '◀ ' : '▶ ') + fmt(Math.abs(force2), 1) + ' N'}
                                         </span>
                                     </Slider>
                                 </div>
@@ -835,9 +890,10 @@
                                     <div className="flbl mb-2">Avläsning</div>
                                     <div className="text-center text-sm mb-3 pb-3"
                                          style={{ borderBottom: '1px solid var(--lab-line)', color: 'var(--lab-ink-soft)' }}>
-                                        <em>F</em><sub>R</sub> = <em>F</em><sub>1</sub>
+                                        <em>F</em><sub>R</sub> = <em>F</em><sub>1</sub> + <em>F</em><sub>2</sub>
                                         {airMode && <span> + <em>F</em><sub>luft</sub></span>} ={' '}
                                         <span style={{ color: COL.f, fontWeight: 600 }}>{fmtTerm(force1)}</span>
+                                        {' + '}<span style={{ color: COL.f2, fontWeight: 600 }}>{fmtTerm(force2)}</span>
                                         {airMode && <span> + <span style={{ color: COL.air, fontWeight: 600 }}>{fmtTerm(Fair)}</span></span>} ={' '}
                                         <strong style={{ color: 'var(--lab-ink)' }}>{fmt(Fres, 1)} N</strong>
                                     </div>

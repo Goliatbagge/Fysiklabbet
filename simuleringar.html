@@ -155,7 +155,7 @@
                 });
                 const out = [];
                 for (const sim of filtered) {
-                    const code = sim.course === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
+                    const code = sim.course === 'Fysik nivå 2' ? 'fy2' : 'fy1';
                     out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
                     if (sim.href) {
                         out.push({ ...sim, kind: 'sim', resultHref: sim.href });
@@ -251,8 +251,8 @@
                                     <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
                                 </button>
                                 <div className="lab-nav-dd-menu">
-                                    <a href="katalog.html#fy1">Fysik</a>
-                                    <a href="katalog.html#fy2">Fysik – fördjupning</a>
+                                    <a href="katalog.html#fy1">Fysik nivå 1</a>
+                                    <a href="katalog.html#fy2">Fysik nivå 2</a>
                                 </div>
                             </div>
                             <a href="simuleringar.html" className="active">Simuleringar</a>
@@ -286,7 +286,7 @@
         }
 
         function SimCatalog() {
-            const courseOrder = ['Fysik', 'Fysik – fördjupning'];
+            const courseOrder = ['Fysik nivå 1', 'Fysik nivå 2'];
             const courses = courseOrder.map(name => ({ name, ...buildCourse(name) }));
             const grandTotal = courses.reduce((n, c) => n + c.total, 0);
 
@@ -303,7 +303,7 @@
                     </div>
 
                     {courses.map(course => {
-                        const code = course.name === 'Fysik – fördjupning' ? 'fy2' : 'fy1';
+                        const code = course.name === 'Fysik nivå 2' ? 'fy2' : 'fy1';
                         return (
                             <section className="lab-section sim-course" id={code} key={course.name}>
                                 <div className="sim-course-band">

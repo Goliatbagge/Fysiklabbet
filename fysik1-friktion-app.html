@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friktion - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        /* Formel-etiketter */
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        /* Scen-wrapper + fullskärm */
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        /* On-scene ruta uppe till höger: visningsval + styrning */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 240px;
+        }
+        .scene-wrap:fullscreen .scene-toggles,
+        .scene-wrap:-webkit-full-screen .scene-toggles { width: 260px; max-width: 260px; }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input { width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+        .scene-toggles .st-slider { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+        .scene-toggles .st-slider-top {
+            display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+            font-size: 12px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles .st-slider-top .v {
+            font-weight: 600; color: var(--lab-accent, #c8324a);
+            font-family: 'JetBrains Mono', monospace; white-space: nowrap;
+        }
+        .scene-toggles .st-slider input[type="range"] {
+            width: 100%; height: auto; accent-color: var(--lab-accent, #c8324a); cursor: pointer; flex-shrink: 1;
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .btn-toggle { width: 100%; font-size: 13px; padding: 7px 10px; }
+        .scene-toggles .st-mat { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+        .scene-toggles .st-mat button {
+            font-size: 11px; padding: 3px 7px; border-radius: 6px; cursor: pointer;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles .st-mat button.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        /* Knappar */
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        /* Materialväljare (sidopanel) */
+        .mat-btn {
+            display: flex; flex-direction: column; align-items: flex-start;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border-radius: 8px; padding: 7px 10px; cursor: pointer; text-align: left;
+            transition: all 0.15s ease;
+        }
+        .mat-btn:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .mat-btn.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .mat-btn .mu { font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.85; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head {
+            cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600;
+        }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const G = 9.82;                 // tyngdfaktorn (N/kg)
+        const FDRAG_MAX = 300;          // reglagets maxvärde (N)
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';     // exakt/avrundat noll → "0"
+            return s.replace('.', ',');
+        };
+
+        // Materialpar → friktionstal μ. Värdena följer teorins tabell (avsnitt
+        // 3.6) plus ett par vardagsnära exempel. Alla är ungefärliga (ca).
+        const MATERIALS = [
+            { id: 'gummi', label: 'Gummi mot asfalt (torr)', mu: 0.80, floor: '#3b3a3c', floor2: '#2a292b', deck: '#8a8d92' },
+            { id: 'tra',   label: 'Trä mot trä',       mu: 0.25, floor: '#caa66a', floor2: '#b48d4f', deck: '#c79a55' },
+            { id: 'is',    label: 'Is mot is',         mu: 0.05, floor: '#cfe7f2', floor2: '#aed4e8', deck: '#bcdcec' },
+            { id: 'stalIs',label: 'Stål mot is',       mu: 0.01, floor: '#cfe7f2', floor2: '#aed4e8', deck: '#c3c7cd' },
+            { id: 'kardborre', label: 'Kardborreband', mu: 1.30, floor: '#7a8a5c', floor2: '#62734a', deck: '#8a9a6a' },
+        ];
+
+        const COL = {
+            drag: '#0284c7',   // blå — pålagd (dragande) kraft
+            frik: '#e0701a',   // orange — friktionskraft
+            norm: '#0d9488',   // teal — normalkraft
+            tyngd: '#c8324a',  // crimson — tyngdkraft
+            res: '#7c3aed',    // violett — resulterande kraft
+            ink: '#0f1620',
+        };
+
+        // ── SVG-pil — mot ljus papperscen behövs ingen vit kontur. ──
+        const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 18, opacity = 1 }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 0.5) return null;
+            const hw = 0.42;
+            const bx = x2 - head * 0.82 * Math.cos(ang);
+            const by = y2 - head * 0.82 * Math.sin(ang);
+            const pL = [x2 - head * Math.cos(ang - hw), y2 - head * Math.sin(ang - hw)];
+            const pR = [x2 - head * Math.cos(ang + hw), y2 - head * Math.sin(ang + hw)];
+            const headPts = `${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`;
+            return (
+                <g opacity={opacity}>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width} strokeLinecap="round" />
+                    <polygon points={headPts} fill={color} stroke="rgba(15,22,32,0.18)" strokeWidth="1" strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // ── SVG-textetikett — mörk färg räcker mot ljus botten, ingen halo. ──
+        const Tag = ({ x, y, color, size = 15, anchor = 'middle', weight = 700, children }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}>
+                {children}
+            </text>
+        );
+
+        // ── Reglage (sidopanel) ──
+        const Slider = ({ label, value, min, max, step, onChange, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 110, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+
+        // Kompakt glidare för verktygsrutan (fullskärm).
+        const StSlider = ({ label, value, min, max, step, onChange, display }) => (
+            <div className="st-slider">
+                <div className="st-slider-top">
+                    <span dangerouslySetInnerHTML={{ __html: label }} />
+                    <span className="v">{display}</span>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+            </div>
+        );
+
+        // ════════════════════════════════════════════════════════
+        //  SCEN — låda på golv
+        // ════════════════════════════════════════════════════════
+        const VBW = 900, VBH = 560;
+        const BX = 350;                 // lådans mitt (x)
+        const FLOOR_Y = 412;            // golvets ovankant
+
+        const BoxScene = ({ scroll, v, m, mat, Fdrag, Ff, Fmax, FN, sliding, atLimit, show, svgRef }) => {
+            const mu = mat.mu;
+            const Fres = Fdrag - Ff;                // signerad (höger +); negativ = retardation
+            const a = Fres / m;
+            const resDir = Fres >= 0 ? 1 : -1;      // pilens riktning
+
+            // lådans storlek växer med massan
+            const BS = 60 + (m - 1) * 3.0;          // m 1..20 → 60..117
+            const objTop = FLOOR_Y - BS;
+            const midY = objTop + BS / 2;
+
+            // kraftpilars längd (px) — horisontell skala
+            const hLen = (f) => (f <= 0.05 ? 0 : Math.max(15, Math.min(f * 0.78, 232)));
+
+            // golvmarkeringar som skrollar på materialbandet (visar glidningen)
+            const FLOOR_BAND = 26;          // tjocklek på det färgade golvbandet
+            const gap = 76;
+            const marks = [];
+            for (let i = -1; i < VBW / gap + 2; i++) {
+                const x = i * gap - (((scroll % gap) + gap) % gap);
+                marks.push(<rect key={'m' + i} x={x} y={FLOOR_Y + 9} width="34" height="6" rx="3" fill="rgba(15,22,32,0.22)" />);
+            }
+
+            // Kardborre-ytor: en rad små krokar längs en yta. dir = -1 (upp, golvet),
+            // +1 (ned, lådans undersida). scrollPx skrollar krokarna med rörelsen.
+            const velcro = (x0, x1, baseY, dir, scrollPx, keyPrefix) => {
+                const step = 8, H = 7, out = [];
+                let i = 0;
+                for (let x = x0; x <= x1; x += step, i++) {
+                    const sx = x - (((scrollPx % step) + step) % step);
+                    const hk = (i % 2 === 0) ? 2.6 : -2.6;          // krokar växlar håll
+                    const tipY = baseY + dir * H;
+                    const d = `M ${sx} ${baseY} L ${sx} ${tipY} q 0 ${dir * 2.4} ${hk} ${dir * 2.4}`;
+                    out.push(<path key={keyPrefix + i} d={d} fill="none" stroke="#39431f"
+                                   strokeWidth="1.4" strokeLinecap="round" opacity="0.85" />);
+                }
+                return out;
+            };
+            const isVelcro = mat.id === 'kardborre';
+
+            // Horisontella krafter ritas i navhöjd (midY) så att drag och friktion
+            // tydligt blir lika långa och motriktade. Drag vid höger kant, friktion
+            // vid vänster kant.
+            const dragX0 = BX + BS / 2;
+            const dragTip = dragX0 + hLen(Fdrag);
+            // Friktion verkar i KONTAKTYTAN — angreppspunkt i lådans nedre vänstra
+            // hörn (vid golvlinjen), pekar åt vänster.
+            const frikX0 = BX - BS / 2;
+            const frikY = FLOOR_Y - 4;
+            const frikTip = frikX0 - hLen(Ff);
+
+            // Vertikala krafter (N upp, G ned) — lika långa (F_N = F_G på vågrätt
+            // golv). Längden väljs så att pilarna alltid sträcker sig UTANFÖR lådan:
+            // N ovanför lådans tak, G nedanför golvlinjen — så att etiketterna hamnar
+            // på lugn pappersyta, aldrig på lådan eller golvbandet.
+            const Lv = Math.min(Math.max(FN * 0.5, BS + 22), 156);
+            const normX = BX - BS * 0.30;
+
+            // Resulterande kraft (vid glidning), högt ovanför lådan (klart över
+            // normalkraftens spets och etikett).
+            const resL = hLen(Math.abs(Fres));
+            const resY = objTop - 78;
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="floorG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor={mat.floor} />
+                            <stop offset="100%" stopColor={mat.floor2} />
+                        </linearGradient>
+                        <linearGradient id="boxG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#d2a25c" />
+                            <stop offset="100%" stopColor="#b9863f" />
+                        </linearGradient>
+                    </defs>
+
+                    {/* bakgrund: vägg (paper) — fyller hela scenen, även under golvet */}
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#wall)" />
+                    {/* golv: tunt materialband + kraftig linje. Under bandet är paper,
+                        så tyngdkraftspilen och dess etikett får plats på lugn yta. */}
+                    <rect x="0" y={FLOOR_Y} width={VBW} height={FLOOR_BAND} fill="url(#floorG)" />
+                    <rect x="0" y={FLOOR_Y} width={VBW} height="3" fill="rgba(15,22,32,0.42)" />
+                    {marks}
+                    {/* kardborre: krokar som sticker upp ur golvet (skrollar med rörelsen) */}
+                    {isVelcro && <g>{velcro(-8, VBW + 8, FLOOR_Y, -1, scroll, 'vf')}</g>}
+
+                    {/* materialetikett (lugn yta nere till vänster, ej på figurdelar) */}
+                    <Tag x={20} y={FLOOR_Y + FLOOR_BAND + 26} color="rgba(15,22,32,0.66)" size={14} anchor="start" weight={600}>
+                        {mat.label} · <tspan fontStyle="italic">μ</tspan> = {fmt(mu, 2)}
+                    </Tag>
+
+                    {/* tillståndstext överst */}
+                    <Tag x={BX} y={52} color={sliding ? COL.res : (atLimit ? COL.frik : 'rgba(15,22,32,0.7)')} size={17}>
+                        {sliding ? 'Lådan glider — glidfriktion'
+                                 : (atLimit ? 'På gränsen — maximal friktion' : 'I vila — statisk friktion')}
+                    </Tag>
+
+                    {/* ── LÅDAN ── */}
+                    <g>
+                        {/* skugga */}
+                        <ellipse cx={BX} cy={FLOOR_Y + 5} rx={BS * 0.62} ry="8" fill="rgba(15,22,32,0.16)" />
+                        {/* kropp */}
+                        <rect x={BX - BS / 2} y={objTop} width={BS} height={BS} rx="6"
+                              fill="url(#boxG)" stroke="#8a5f24" strokeWidth="2.5" />
+                        {/* träribbor */}
+                        <line x1={BX - BS / 2 + 5} y1={objTop + 9} x2={BX + BS / 2 - 5} y2={objTop + 9}
+                              stroke="#8a5f24" strokeWidth="1.5" opacity="0.45" />
+                        <line x1={BX - BS / 2 + 5} y1={objTop + BS - 9} x2={BX + BS / 2 - 5} y2={objTop + BS - 9}
+                              stroke="#8a5f24" strokeWidth="1.5" opacity="0.45" />
+                        {/* kardborre: krokar på lådans undersida (griper ned i golvet) */}
+                        {isVelcro && velcro(BX - BS / 2 + 4, BX + BS / 2 - 4, FLOOR_Y, 1, 0, 'vb')}
+                        <Tag x={BX + BS / 2 - 7} y={objTop + 19} color="#3a2a10" size={BS > 86 ? 16 : 13} anchor="end">
+                            <tspan fontStyle="italic">m</tspan> = {fmt(m, 1)} kg
+                        </Tag>
+                    </g>
+
+                    {/* ── NORMALKRAFT & TYNGDKRAFT (valbara) ── lika långa (balanserar) */}
+                    {show.vertical && (
+                        <g>
+                            {/* normalkraft uppåt från kontaktytan, spets ovanför lådan */}
+                            <Arrow x1={normX} y1={FLOOR_Y} x2={normX} y2={FLOOR_Y - Lv} color={COL.norm} width={5} head={15} />
+                            <circle cx={normX} cy={FLOOR_Y} r="4" fill={COL.norm} />
+                            <Tag x={normX} y={FLOOR_Y - Lv - 8} color={COL.norm} size={13}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">N</tspan>
+                                <tspan dy="-3"> = {fmt(FN)} N</tspan>
+                            </Tag>
+                            {/* tyngdkraft nedåt från tyngdpunkten, spets nedanför golvlinjen */}
+                            <Arrow x1={BX} y1={midY} x2={BX} y2={midY + Lv} color={COL.tyngd} width={5} head={15} />
+                            <circle cx={BX} cy={midY} r="3" fill={COL.tyngd} />
+                            <Tag x={BX + 11} y={midY + Lv + 1} color={COL.tyngd} size={13} anchor="start">
+                                <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">G</tspan>
+                                <tspan dy="-3"> = {fmt(FN)} N</tspan>
+                            </Tag>
+                        </g>
+                    )}
+
+                    {/* ── FRIKTIONSKRAFT (åt vänster, i kontaktytan — nedre vänstra hörnet) ── */}
+                    {Ff > 0.05 && (
+                        <g>
+                            <Arrow x1={frikX0} y1={frikY} x2={frikTip} y2={frikY} color={COL.frik} width={6} head={18} />
+                            <circle cx={frikX0} cy={frikY} r="4.5" fill={COL.frik} />
+                            <Tag x={frikTip - 12} y={frikY - 9} color={COL.frik} size={14} anchor="end">
+                                <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">f</tspan>
+                                <tspan dy="-3"> = {fmt(Ff)} N</tspan>
+                            </Tag>
+                        </g>
+                    )}
+
+                    {/* ── DRIVKRAFT (åt höger, från lådans kant) ── */}
+                    {Fdrag > 0.05 && (
+                        <g>
+                            <Arrow x1={dragX0} y1={midY} x2={dragTip} y2={midY} color={COL.drag} width={6} head={18} />
+                            <circle cx={dragX0} cy={midY} r="4.5" fill={COL.drag} />
+                            <Tag x={dragTip + 12} y={midY - 10} color={COL.drag} size={14} anchor="start">
+                                <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">drag</tspan>
+                                <tspan dy="-3"> = {fmt(Fdrag)} N</tspan>
+                            </Tag>
+                        </g>
+                    )}
+
+                    {/* ── RESULTERANDE KRAFT ── riktad pil (åt höger = accelererar,
+                        åt vänster = retarderar när dragkraften sänkts under glidning) */}
+                    {show.resultant && Math.abs(Fres) > 0.05 && (
+                        <g>
+                            <Arrow x1={BX} y1={resY} x2={BX + resDir * resL} y2={resY} color={COL.res} width={6} head={18} />
+                            <Tag x={BX + resDir * (resL + 12)} y={resY - 9} color={COL.res} size={14} anchor={resDir > 0 ? 'start' : 'end'}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="3" fontSize="10">R</tspan>
+                                <tspan dy="-3"> = {fmt(Math.abs(Fres))} N {resDir > 0 ? '(åt höger)' : '(åt vänster)'}</tspan>
+                            </Tag>
+                        </g>
+                    )}
+                </svg>
+            );
+        };
+
+        // ── Live-diagram: friktionskraft mot pålagd kraft ──
+        // Visar att friktionen växer (F_f = F_drag) tills den når maxvärdet
+        // μ·F_N, sedan börjar lådan glida och friktionen är konstant.
+        const FrictionGraph = ({ Fdrag, Ff, Fmax }) => {
+            const W = 320, H = 212, padL = 44, padR = 14, padT = 14, padB = 34;
+            const gw = W - padL - padR, gh = H - padT - padB;
+            const xMax = FDRAG_MAX;
+            const yMax = Math.max(Fmax * 1.35, 12);
+            const px = (fx) => padL + (fx / xMax) * gw;
+            const py = (fy) => padT + gh - (fy / yMax) * gh;
+
+            // kurvan: y = x upp till Fmax, sedan vågrät vid Fmax
+            const kneeX = Math.min(Fmax, xMax);
+            return (
+                <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto', fontFamily: "'DM Sans', sans-serif" }}>
+                    {/* axlar */}
+                    <line x1={padL} y1={py(0)} x2={W - padR} y2={py(0)} stroke="#38bdf8" strokeWidth="1.6" />
+                    <line x1={padL} y1={py(0)} x2={padL} y2={padT} stroke="#38bdf8" strokeWidth="1.6" />
+                    {/* gränslinje μ·F_N */}
+                    <line x1={padL} y1={py(Fmax)} x2={W - padR} y2={py(Fmax)}
+                          stroke="rgba(224,112,26,0.5)" strokeWidth="1.4" strokeDasharray="5 4" />
+                    <text x={W - padR} y={py(Fmax) - 5} textAnchor="end" fontSize="11" fill={COL.frik} fontWeight="600">
+                        μ·<tspan fontStyle="italic">F</tspan><tspan dy="2" fontSize="9">N</tspan>
+                        <tspan dy="-2"> = {fmt(Fmax)} N</tspan>
+                    </text>
+                    {/* kurvan */}
+                    <line x1={px(0)} y1={py(0)} x2={px(kneeX)} y2={py(kneeX)} stroke={COL.frik} strokeWidth="2.6" strokeLinecap="round" />
+                    {kneeX < xMax && (
+                        <line x1={px(kneeX)} y1={py(Fmax)} x2={px(xMax)} y2={py(Fmax)} stroke={COL.frik} strokeWidth="2.6" strokeLinecap="round" />
+                    )}
+                    {/* knät — punkten där lådan börjar glida */}
+                    {kneeX < xMax && (
+                        <g>
+                            <circle cx={px(kneeX)} cy={py(Fmax)} r="4" fill="none" stroke={COL.frik} strokeWidth="1.6" />
+                            <text x={px(kneeX) + 6} y={py(Fmax) + 14} fontSize="10.5" fill={COL.frik} fontWeight="600">börjar glida</text>
+                        </g>
+                    )}
+                    {/* aktuell punkt */}
+                    <line x1={px(Fdrag)} y1={py(0)} x2={px(Fdrag)} y2={py(Ff)} stroke="rgba(15,22,32,0.28)" strokeWidth="1" strokeDasharray="3 3" />
+                    <circle cx={px(Fdrag)} cy={py(Ff)} r="5.5" fill={COL.drag} stroke="rgba(15,22,32,0.35)" strokeWidth="1.2" />
+                    {/* axeletiketter (inom ramen) */}
+                    <text x={padL + gw / 2} y={H - 7} textAnchor="middle" fontSize="11.5" fill="var(--lab-ink-soft)">
+                        pålagd kraft <tspan fontStyle="italic">F</tspan><tspan dy="2" fontSize="9">drag</tspan><tspan dy="-2"> (N)</tspan>
+                    </text>
+                    <text x={padL - 6} y={padT + 2} textAnchor="end" fontSize="11.5" fill="var(--lab-ink-soft)">
+                        <tspan fontStyle="italic">F</tspan><tspan dy="2" fontSize="9">f</tspan><tspan dy="-2"> (N)</tspan>
+                    </text>
+                </svg>
+            );
+        };
+
+        // ── Formelkort: F_f = μ · F_N = värden ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const FormulaCard = ({ mu, FN, Fmax }) => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-2" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Maximal friktion"><em>F</em><sub>f,max</sub></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Friktionstal"><em>μ</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Normalkraft"><em>F</em><sub>N</sub></Vbl>
+                <span className="fnum">=</span>
+                <span className="fnum">{fmt(mu, 2)} · {fmt(FN)} N</span>
+                <span className="fnum">=</span>
+                <span className="fnum" style={{ fontWeight: 700 }}>{fmt(Fmax)} N</span>
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [m, setM] = useState(5);              // lådans massa (kg)
+            const [matId, setMatId] = useState('tra');  // materialpar
+            const [Fdrag, setFdrag] = useState(8);      // pålagd dragkraft (N) — liten start visar statisk friktion
+            const [running, setRunning] = useState(true);
+            const [v, setV] = useState(0);              // fart (m/s)
+            const [scroll, setScroll] = useState(0);
+            const [show, setShow] = useState({ vertical: false, resultant: true });
+
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const rafRef = useRef(null);
+            const lastRef = useRef(null);
+            const vRef = useRef(0);
+
+            const mat = MATERIALS.find((x) => x.id === matId) || MATERIALS[1];
+            const FN = m * G;                  // normalkraft = tyngdkraft på vågrätt golv
+            const Fmax = mat.mu * FN;          // maximal statisk friktion = glidfriktion
+            const sliding = v > 0.001;
+            // Aktuell friktionskraft: vid glidning = Fmax (dynamisk), annars motverkar
+            // den dragkraften exakt (statisk), upp till Fmax.
+            const Ff = sliding ? Fmax : Math.min(Fdrag, Fmax);
+            const atLimit = !sliding && Fdrag > 0 && Fdrag >= Fmax - 0.05;
+            // Resulterande kraft (rörelseriktningen = höger positiv). Vid glidning
+            // med F_drag < μ·F_N blir den NEGATIV → lådan retarderar. I vila är den 0
+            // (friktionen balanserar dragkraften exakt).
+            const Fres = Fdrag - Ff;
+            const aMag = Fres / m;
+
+            // animationsloop — integrerar farten enligt Newtons andra lag.
+            useEffect(() => {
+                if (!running) { lastRef.current = null; return; }
+                const step = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+
+                    const fn = m * G;
+                    const fmax = mat.mu * fn;
+                    let nv = vRef.current;
+                    if (nv <= 0.001) {
+                        // i vila: börjar glida först när dragkraften överstiger Fmax
+                        if (Fdrag > fmax + 0.001) {
+                            const a = (Fdrag - fmax) / m;
+                            nv = a * dt;
+                        } else {
+                            nv = 0;
+                        }
+                    } else {
+                        // glider: dynamisk friktion (= fmax) motverkar rörelsen
+                        const a = (Fdrag - fmax) / m;
+                        nv = nv + a * dt;
+                        if (nv < 0) nv = 0;     // stannar (kan inte friktionsdrivas bakåt)
+                    }
+                    if (nv > 60) nv = 60;       // rimlig animationsgräns
+                    vRef.current = nv;
+                    setV(nv);
+                    setScroll((sc) => sc + nv * 26 * dt);
+                    rafRef.current = requestAnimationFrame(step);
+                };
+                rafRef.current = requestAnimationFrame(step);
+                return () => cancelAnimationFrame(rafRef.current);
+            }, [running, Fdrag, m, matId]);
+
+            // fullskärm
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
+            const reset = () => { vRef.current = 0; setV(0); setScroll(0); setFdrag(0); setRunning(true); };
+
+            const primaryLabel = running ? 'Pausa' : 'Fortsätt';
+            const primaryAction = () => setRunning((r) => !r);
+
+            // Visningsval + materialväljare + styrning uppe till höger.
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label>
+                        <input type="checkbox" checked={show.vertical} onChange={() => tShow('vertical')} />
+                        <span>Normalkraft &amp; tyngdkraft</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={show.resultant} onChange={() => tShow('resultant')} />
+                        <span>Resulterande kraft</span>
+                    </label>
+                    {isFullscreen && (
+                        <React.Fragment>
+                            <div className="st-title mt">Material (μ)</div>
+                            <div className="st-mat">
+                                {MATERIALS.map((x) => (
+                                    <button key={x.id} className={matId === x.id ? 'active' : ''}
+                                            onClick={() => { setMatId(x.id); reset(); }}>
+                                        {x.label}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="st-title mt">Reglage</div>
+                            <StSlider label="Lådans massa" value={m} min={1} max={20} step={0.5}
+                                      onChange={setM} display={`${fmt(m, 1)} kg`} />
+                            <StSlider label="Dragkraft <em>F</em><sub>drag</sub>" value={Fdrag} min={0} max={FDRAG_MAX} step={1}
+                                      onChange={setFdrag} display={`${fmt(Fdrag)} N`} />
+                            <div className="st-actions">
+                                <button className="btn-toggle" onClick={primaryAction}>{primaryLabel}</button>
+                                <button className="btn-toggle" onClick={reset}>Börja om</button>
+                            </div>
+                        </React.Fragment>
+                    )}
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Friktion
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Friktion</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            <strong>Friktionskraften</strong> <em>F</em><sub>f</sub> motverkar rörelse mellan två ytor i kontakt.
+                            När du drar i lådan svarar friktionen med en <strong>lika stor, motriktad</strong> kraft — lådan
+                            står still (<strong>statisk friktion</strong>). Friktionen kan dock bara växa upp till ett maxvärde,
+                            <em> F</em><sub>f,max</sub> = <em>μ</em> · <em>F</em><sub>N</sub>. När dragkraften överstiger det
+                            börjar lådan <strong>glida</strong>, och den resulterande kraften ger en acceleration enligt
+                            Newtons andra lag. Byt material för att se hur friktionstalet <em>μ</em> ändrar allt.
+                        </p>
+
+                        <FormulaCard mu={mat.mu} FN={FN} Fmax={Fmax} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <BoxScene scroll={scroll} v={v} m={m} mat={mat} Fdrag={Fdrag} Ff={Ff}
+                                              Fmax={Fmax} FN={FN} sliding={sliding} atLimit={atLimit}
+                                              show={show} svgRef={svgRef} />
+
+                                    <div className="scene-hint">
+                                        Dra i reglaget <em>F</em><sub>drag</sub> och se när lådan släpper. Luftmotstånd försummas.
+                                    </div>
+
+                                    {sceneToggles()}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                {/* Material */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Material — friktionstal <em>μ</em></div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {MATERIALS.map((x) => (
+                                            <button key={x.id} className={`mat-btn ${matId === x.id ? 'active' : ''}`}
+                                                    onClick={() => { setMatId(x.id); reset(); }}>
+                                                <span style={{ fontSize: 13, fontWeight: 600 }}>{x.label}</span>
+                                                <span className="mu"><em>μ</em> = {fmt(x.mu, 2)}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Reglage */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Lådans massa <em>m</em>" value={m} min={1} max={20} step={0.5} onChange={setM}>
+                                        <span className="font-mono font-semibold text-sm flex-shrink-0"
+                                              style={{ minWidth: 64, textAlign: 'right', color: 'var(--lab-accent)' }}>
+                                            {fmt(m, 1)} kg
+                                        </span>
+                                    </Slider>
+                                    <Slider label="Dragkraft <em>F</em><sub>drag</sub>" value={Fdrag} min={0} max={FDRAG_MAX} step={1} onChange={setFdrag}>
+                                        <span className="font-mono font-semibold text-sm flex-shrink-0"
+                                              style={{ minWidth: 64, textAlign: 'right', color: COL.drag }}>
+                                            {fmt(Fdrag)} N
+                                        </span>
+                                    </Slider>
+                                    <div className="flex gap-2 mt-2">
+                                        <button className="btn-toggle flex-1" onClick={primaryAction}>{primaryLabel}</button>
+                                        <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="grid grid-cols-4 gap-2 text-center">
+                                        <div>
+                                            <div style={{ color: COL.norm, fontWeight: 700, fontSize: 17 }}>{fmt(FN)} N</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>normalkraft <em>F</em><sub>N</sub></div>
+                                        </div>
+                                        <div>
+                                            <div style={{ color: COL.frik, fontWeight: 700, fontSize: 17 }}>{fmt(Fmax)} N</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>max friktion <em>μ</em>·<em>F</em><sub>N</sub></div>
+                                        </div>
+                                        <div>
+                                            <div style={{ color: COL.frik, fontWeight: 700, fontSize: 17 }}>{fmt(Ff)} N</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>friktion <em>F</em><sub>f</sub> nu</div>
+                                        </div>
+                                        <div>
+                                            <div style={{ color: COL.res, fontWeight: 700, fontSize: 17 }}>{fmt(Fres)} N</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>resulterande <em>F</em><sub>R</sub></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Diagram */}
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-1">Friktion mot pålagd kraft</div>
+                                    <FrictionGraph Fdrag={Fdrag} Ff={Ff} Fmax={Fmax} />
+                                    <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        Friktionen följer dragkraften (<em>F</em><sub>f</sub> = <em>F</em><sub>drag</sub>) tills den
+                                        når <em>μ</em>·<em>F</em><sub>N</sub>. Därefter glider lådan och friktionen är konstant.
+                                    </p>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Statisk friktion</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Så länge lådan står still ställer friktionen in sig precis lika stor som dragkraften, fast
+                                    motriktad — den resulterande kraften är noll. Friktionen är alltså inte ett fast värde, utan
+                                    växer med dragkraften upp till sitt maximum.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Glidfriktion</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    När dragkraften överstiger <em>μ</em>·<em>F</em><sub>N</sub> släpper lådan och glider. Då är
+                                    friktionen konstant (<em>F</em><sub>f</sub> = <em>μ</em>·<em>F</em><sub>N</sub>), och överskottet
+                                    <em> F</em><sub>R</sub> = <em>F</em><sub>drag</sub> − <em>F</em><sub>f</sub> ger accelerationen
+                                    <em> a</em> = <em>F</em><sub>R</sub> / <em>m</em>.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Friktionstalet <em>μ</em></h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    <em>μ</em> beror på vilka material som glider mot varandra och saknar enhet. Stål mot is har
+                                    mycket lågt <em>μ</em> (skridskor!), medan kardborreband har <em>μ</em> &gt; 1. Större <em>μ</em>
+                                    betyder att det krävs större kraft för att få lådan att glida.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Friktionen är alltid <em>μ</em>·<em>F</em><sub>N</sub>.”</strong> Nej — det är
+                                    <em> maxvärdet</em>. När lådan står still är friktionen precis lika stor som dragkraften och
+                                    kan vara mycket mindre än maxvärdet.</li>
+                                <li><strong>”Tyngre föremål har större friktionstal.”</strong> Nej — <em>μ</em> beror bara på
+                                    materialen. Däremot ökar den maximala friktionen med massan, eftersom normalkraften
+                                    <em> F</em><sub>N</sub> = <em>m</em>·<em>g</em> blir större.</li>
+                                <li><strong>”Friktion finns bara när något rör sig.”</strong> Nej — den statiska friktionen
+                                    verkar även på föremål i vila och är just det som hindrar dem från att börja glida.</li>
+                                <li><strong>”Större kontaktyta ger mer friktion.”</strong> Nej — i modellen <em>F</em><sub>f</sub> =
+                                    <em> μ</em>·<em>F</em><sub>N</sub> ingår bara normalkraften och friktionstalet, inte kontaktytans
+                                    storlek. En låda ger lika stor friktion oavsett vilken sida den ligger på.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

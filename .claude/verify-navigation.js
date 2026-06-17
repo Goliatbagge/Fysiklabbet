@@ -84,6 +84,7 @@ const HTML_FILES_TO_CHECK = [
     'fysik1-newtons-forsta-app.html',
     'fysik1-newtons-andra-app.html',
     'fysik1-tyngdkraft-normalkraft.html',
+    'fysik1-friktion-app.html',
     'fysik1-berg-och-dalbana.html',
     // om.html och kontakt.html använder nu Laborans-headern (inte gamla
     // navbar-mallen) — de testas inte med samma kontroll. Samma sak gäller

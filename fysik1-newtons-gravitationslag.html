@@ -198,31 +198,13 @@
             return arr;
         })();
 
-        // STEG C — canvas-bakgrundsteman som användaren kan jämföra.
-        // Sol/planeter/krafter rör vi inte (i detta steg) — vi visar bara
-        // hur olika bakgrunder mot Laborans-chrome känns.
+        // Canvas-bakgrund: mörk rymd (stjärnfält + svag nebulosa).
         const CANVAS_THEMES = {
             morkRymd: {
                 label: 'Mörk rymd',
                 bg: '#020308',
                 nebula: 'rgba(56, 189, 248, 0.05)',
                 starColor: '226, 232, 240',
-                showStars: true,
-                showNebula: true,
-            },
-            ljusPapper: {
-                label: 'Ljus papper',
-                bg: '#f3eee4',
-                nebula: null,
-                starColor: null,
-                showStars: false,
-                showNebula: false,
-            },
-            pergament: {
-                label: 'Pergament',
-                bg: '#1a1813',
-                nebula: 'rgba(168, 130, 60, 0.08)',
-                starColor: '245, 230, 200',
                 showStars: true,
                 showNebula: true,
             },
@@ -686,8 +668,6 @@
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(false);
             const [dragging, setDragging] = useState(null); // null | 1 | 2 | 'human'
-            // STEG C — experimentell canvas-tema-väljare (V1/V2/V3 jämförelse)
-            const [canvasTheme, setCanvasTheme] = useState('morkRymd');
             // Påskägg: flygande tefat. null när inaktivt; objekt med x, y, dir vid svisch
             const [ufo, setUfo] = useState(null);
             // Människa-hopp: starttidpunkt (ms) för pågående hopp, eller null
@@ -922,7 +902,7 @@
                 const ctx = canvas.getContext('2d');
                 ctx.setTransform(scale, 0, 0, scale, 0, 0);
 
-                drawStarfield(ctx, CANVAS_W, CANVAS_H, CANVAS_THEMES[canvasTheme]);
+                drawStarfield(ctx, CANVAS_W, CANVAS_H, CANVAS_THEMES.morkRymd);
 
                 if (mode === 'manniska') {
                     drawHumanScene(ctx);
@@ -1323,19 +1303,6 @@
                             <div className="mode-toggle">
                                 <button onClick={() => setMode('statisk')} className={mode === 'statisk' ? 'active' : ''}>📍 Statisk</button>
                                 <button onClick={() => setMode('manniska')} className={mode === 'manniska' ? 'active' : ''}>🧍 Människa på jorden</button>
-                            </div>
-                        </div>
-
-                        {/* STEG C — experimentell tema-väljare för canvas-bakgrunden.
-                            Tas bort när du valt vilken variant som blir default. */}
-                        <div className="mb-4 flex flex-wrap items-center gap-3 px-3 py-2 rounded border" style={{borderColor:'var(--lab-line-strong)', background:'var(--lab-bg)'}}>
-                            <span className="text-xs font-semibold uppercase tracking-wide" style={{color:'var(--lab-ink-soft)', fontFamily:'var(--lab-font-mono)'}}>Canvas-tema (test)</span>
-                            <div className="mode-toggle">
-                                {Object.entries(CANVAS_THEMES).map(([key, t]) => (
-                                    <button key={key} onClick={() => setCanvasTheme(key)} className={canvasTheme === key ? 'active' : ''}>
-                                        {t.label}
-                                    </button>
-                                ))}
                             </div>
                         </div>
 

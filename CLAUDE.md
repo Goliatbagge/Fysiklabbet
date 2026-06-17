@@ -684,7 +684,19 @@ Se [`OVNINGAR.md`](OVNINGAR.md) för komplett guide:
 <script src="https://cdn.tailwindcss.com"></script>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
 ```
+
+⚠️ **Babel-versionen MÅSTE vara pinnad (`@7.29.7`) — av-pinna ALDRIG.**
+En opinnad länk (`@babel/standalone/babel.min.js`) hämtar senaste, och
+Babel 8 bytte React-presetens standard till "automatic runtime" som
+injicerar `import { jsx } from "react/jsx-runtime"` överst i den
+kompilerade koden. Eftersom våra appar körs som klassiskt
+`<script type="text/babel">` (inte module) kraschar varje sida då med
+`Uncaught SyntaxError: ... Cannot use import statement outside a module`
+och renderar blankt. Projektet använder UMD-globaler (React/ReactDOM via
+`<script>`), inte ES-moduler, så vi behöver den klassiska runtimen som
+Babel 7 har som standard. Lägg ALDRIG till nya HTML-filer med den opinnade
+länken.
 
 För 3D: `<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>`

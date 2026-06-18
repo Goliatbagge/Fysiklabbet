@@ -20,6 +20,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- OpenDyslexic — dyslexivänligt typsnitt (toggle i artikelvyn) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5/400.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/opendyslexic@5/700.css">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <style>
@@ -187,6 +190,21 @@
         .article-research strong { color: var(--lab-ink); font-weight: 600; }
         .article-research a { color: var(--lab-accent); text-decoration: underline; text-underline-offset: 2px; }
 
+        /* Lässtöd: bionisk läsning + dyslexivänligt typsnitt i artikelvyn.
+           Switch-stilen (.lab-bionic-bar/.lab-bionic-toggle/.lab-bionic-knob)
+           och bionic-fetstilen (.lab-bionic/.bionic-on) kommer från
+           styles-laborans.css — samma som på teorisidorna. Här scopas bara
+           OpenDyslexic-typsnittet till nyhetsartikelns brödtext. */
+        .article .lab-bionic-bar { margin: 4px 0 24px; }
+        .article-body.dyslexia-on,
+        .article-body.dyslexia-on h2,
+        .article-body.dyslexia-on .article-quote p,
+        .article-body.dyslexia-on .article-fact-title,
+        .article-body.dyslexia-on cite {
+            font-family: 'OpenDyslexic', 'DM Sans', system-ui, sans-serif;
+        }
+        .article-body.dyslexia-on { letter-spacing: 0.01em; }
+
         @media (max-width: 880px) {
             .news-featured { grid-template-columns: 1fr; gap: 20px; }
             .news-grid { grid-template-columns: repeat(2, 1fr); }
@@ -216,6 +234,56 @@
                 'augusti','september','oktober','november','december'];
             const [y, m, d] = iso.split('-').map(Number);
             return `${d} ${months[m - 1]} ${y}`;
+        }
+
+        // ── Bionisk läsning ─────────────────────────────────────────
+        // Fetmarkerar början ("fixeringspunkten") av varje ord som lässtöd.
+        // Spannen läggs ALLTID in i DOM:en; på/av styrs sedan av klassen
+        // .bionic-on på behållaren (ren CSS-växling). Hoppar över rubriker,
+        // kod och script. Samma algoritm som teorisidorna i katalog.html.
+        function bionicFixLen(n) {
+            if (n <= 3) return 1;
+            if (n <= 6) return 2;
+            if (n <= 9) return 3;
+            return Math.ceil(n * 0.4);
+        }
+        function applyBionic(root) {
+            if (!root || root.querySelector('.lab-bionic')) return; // redan gjort
+            const SKIP = { SCRIPT: 1, STYLE: 1, CODE: 1, PRE: 1, H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1 };
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    if (!node.nodeValue || !/\S/.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+                    for (let p = node.parentElement; p && p !== root; p = p.parentElement) {
+                        if (SKIP[p.tagName]) return NodeFilter.FILTER_REJECT;
+                    }
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+            });
+            const nodes = [];
+            for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+            const wordRe = /\p{L}[\p{L}\p{M}'’\-]*/gu;
+            for (const tn of nodes) {
+                const text = tn.nodeValue;
+                wordRe.lastIndex = 0;
+                if (!wordRe.test(text)) continue;
+                wordRe.lastIndex = 0;
+                const frag = document.createDocumentFragment();
+                let last = 0, m;
+                while ((m = wordRe.exec(text))) {
+                    const word = m[0], start = m.index;
+                    if (start > last) frag.appendChild(document.createTextNode(text.slice(last, start)));
+                    let k = bionicFixLen(word.length);
+                    if (word.length > 1) k = Math.min(k, word.length - 1);
+                    const span = document.createElement('span');
+                    span.className = 'lab-bionic';
+                    span.textContent = word.slice(0, k);
+                    frag.appendChild(span);
+                    if (k < word.length) frag.appendChild(document.createTextNode(word.slice(k)));
+                    last = start + word.length;
+                }
+                if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+                tn.parentNode.replaceChild(frag, tn);
+            }
         }
 
         function Topbar() {
@@ -365,6 +433,23 @@
         }
 
         function ArticleView({ a }) {
+            const bodyRef = React.useRef(null);
+            // Lässtöd: minns valen mellan besök (samma nycklar som teorisidorna).
+            const [bionic, setBionic] = React.useState(() => {
+                try { return localStorage.getItem('fy-bionic') === '1'; } catch (e) { return false; }
+            });
+            const [dyslexia, setDyslexia] = React.useState(() => {
+                try { return localStorage.getItem('fy-dyslexia') === '1'; } catch (e) { return false; }
+            });
+            React.useEffect(() => {
+                try { localStorage.setItem('fy-bionic', bionic ? '1' : '0'); } catch (e) {}
+            }, [bionic]);
+            React.useEffect(() => {
+                try { localStorage.setItem('fy-dyslexia', dyslexia ? '1' : '0'); } catch (e) {}
+            }, [dyslexia]);
+            // Lägg in bionic-spannen en gång när artikeln monterats.
+            React.useEffect(() => { applyBionic(bodyRef.current); }, [a]);
+
             return (
                 <article className="article">
                     <a className="article-back" href="nyheter.html">← Alla nyheter</a>
@@ -377,7 +462,27 @@
                         {a.imageCredit && <figcaption>{a.imageCredit}</figcaption>}
                     </figure>
 
-                    <div className="article-body">
+                    <div className="lab-bionic-bar">
+                        <button type="button"
+                            className={'lab-bionic-toggle' + (bionic ? ' is-on' : '')}
+                            onClick={() => setBionic(b => !b)}
+                            aria-pressed={bionic}
+                            title="Bionisk läsning — fetmarkerar början av varje ord som lässtöd">
+                            <span className="lab-bionic-knob" />
+                            <span><b>Bio</b>nisk <b>läs</b>ning</span>
+                        </button>
+                        <button type="button"
+                            className={'lab-bionic-toggle' + (dyslexia ? ' is-on' : '')}
+                            onClick={() => setDyslexia(d => !d)}
+                            aria-pressed={dyslexia}
+                            title="Dyslexivänligt typsnitt (OpenDyslexic) — anpassat för läsare med dyslexi">
+                            <span className="lab-bionic-knob" />
+                            <span className="lab-dys-label">Dyslexivänligt</span>
+                        </button>
+                    </div>
+
+                    <div ref={bodyRef}
+                         className={'article-body' + (bionic ? ' bionic-on' : '') + (dyslexia ? ' dyslexia-on' : '')}>
                         {a.body.map((b, i) => <Block b={b} key={i} />)}
                     </div>
 

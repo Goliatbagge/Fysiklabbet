@@ -35,7 +35,8 @@
       "Bash(explorer.exe \"C:\\\\claude\\\\Fysiklabbet\\\\fysik1-massdefekt.html\")",
       "Read(//c/Users/sam_s/.claude/**)",
       "Read(//c/Users/sam_s/.claude//**)",
-      "Bash(powershell -NoProfile -Command '$s=\\(New-Object -ComObject WScript.Shell\\).CreateShortcut\\('\\\\''C:\\\\Users\\\\sam_s\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\Start Menu\\\\Programs\\\\Startup\\\\Fysiklabbet - Claude.lnk'\\\\''\\); '\\\\''Target: '\\\\''+$s.TargetPath; '\\\\''Args: '\\\\''+$s.Arguments; '\\\\''WorkDir: '\\\\''+$s.WorkingDirectory')"
+      "Bash(powershell -NoProfile -Command '$s=\\(New-Object -ComObject WScript.Shell\\).CreateShortcut\\('\\\\''C:\\\\Users\\\\sam_s\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\Start Menu\\\\Programs\\\\Startup\\\\Fysiklabbet - Claude.lnk'\\\\''\\); '\\\\''Target: '\\\\''+$s.TargetPath; '\\\\''Args: '\\\\''+$s.Arguments; '\\\\''WorkDir: '\\\\''+$s.WorkingDirectory')",
+      "PowerShell(node .claude/verify-navigation.js; Write-Output \"=== white-outline ===\"; node .claude/verify-no-white-outline.js)"
     ],
     "deny": [],
     "ask": []

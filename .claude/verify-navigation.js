@@ -37,6 +37,7 @@ const LABORANS_NAV = [
 
 // Files to check
 const HTML_FILES_TO_CHECK = [
+    'fysik1-lutande-plan-app.html',
     'fysik1-hastighet-tid-app.html',
     'fysik1-acceleration-tid-app.html',
     'fysik1-stracka-tid-app.html',

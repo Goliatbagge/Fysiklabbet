@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nyheter — Fysiklabbet</title>
+    <meta name="description" content="Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:title" content="Nyheter — Fysiklabbet">
+    <meta property="og:description" content="Dagliga fysiknyheter, populärvetenskapligt skrivna på svenska — från forskningsfronten till klassrummet.">
+    <meta property="og:url" content="https://fysiklabbet.se/nyheter.html">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <style>
+        /* ── Sidan Nyheter ─────────────────────────────────────────── */
+        .news-hero { max-width: 1100px; margin: 0 auto; padding: 56px 56px 4px; width: 100%; }
+        .news-hero-title {
+            font-family: var(--lab-font-display);
+            font-size: clamp(40px, 6vw, 64px);
+            line-height: 1.02; letter-spacing: -0.01em;
+            color: var(--lab-ink); margin: 10px 0 14px;
+        }
+        .news-hero-title em { font-style: italic; color: var(--lab-accent); }
+        .news-hero-lead {
+            font-size: 17px; line-height: 1.6;
+            color: var(--lab-ink-soft); max-width: 62ch;
+        }
+
+        .news-wrap { max-width: 1100px; margin: 0 auto; padding: 8px 56px 24px; width: 100%; }
+
+        /* Utvald (senaste) artikel */
+        .news-featured {
+            display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px;
+            align-items: center;
+            margin: 26px 0 14px; padding-bottom: 38px;
+            border-bottom: 2px solid var(--lab-line-strong);
+            text-decoration: none; color: var(--lab-ink);
+        }
+        .news-featured-media {
+            position: relative; border-radius: 4px; overflow: hidden;
+            border: 1px solid var(--lab-line-strong);
+            background: var(--lab-bg-raised); aspect-ratio: 16 / 9;
+        }
+        .news-featured-media img { width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 600ms cubic-bezier(.2,.7,.2,1); }
+        .news-featured:hover .news-featured-media img { transform: scale(1.03); }
+        .news-featured-flag {
+            position: absolute; top: 12px; left: 12px;
+            font-family: var(--lab-font-mono); font-size: 10px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: #fff; background: var(--lab-accent);
+            padding: 5px 9px; border-radius: 2px;
+        }
+        .news-meta-row {
+            display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.06em;
+            color: var(--lab-ink-muted); text-transform: uppercase; margin-bottom: 14px;
+        }
+        .news-meta-cat { color: var(--lab-accent); }
+        .news-meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--lab-ink-muted); }
+        .news-featured-title {
+            font-family: var(--lab-font-display);
+            font-size: clamp(28px, 3.4vw, 40px); line-height: 1.08;
+            letter-spacing: -0.01em; color: var(--lab-ink); margin: 0 0 14px;
+        }
+        .news-featured:hover .news-featured-title { color: var(--lab-accent); }
+        .news-featured-deck { font-size: 16px; line-height: 1.6; color: var(--lab-ink-soft); margin: 0 0 16px; }
+        .news-readmore {
+            font-family: var(--lab-font-mono); font-size: 12px; letter-spacing: 0.04em;
+            color: var(--lab-ink); border-bottom: 2px solid var(--lab-accent);
+            padding-bottom: 2px; align-self: flex-start;
+        }
+
+        /* Rutnät med övriga artiklar */
+        .news-grid-head {
+            display: flex; justify-content: space-between; align-items: baseline;
+            margin: 30px 0 18px;
+        }
+        .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+        .news-card { text-decoration: none; color: var(--lab-ink); display: flex; flex-direction: column; }
+        .news-card-media {
+            border-radius: 4px; overflow: hidden; border: 1px solid var(--lab-line-strong);
+            background: var(--lab-bg-raised); aspect-ratio: 16 / 10; margin-bottom: 13px;
+        }
+        .news-card-media img { width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 500ms cubic-bezier(.2,.7,.2,1); }
+        .news-card:hover .news-card-media img { transform: scale(1.04); }
+        .news-card-title {
+            font-family: var(--lab-font-display); font-size: 21px; line-height: 1.12;
+            margin: 4px 0 8px; color: var(--lab-ink);
+        }
+        .news-card:hover .news-card-title { color: var(--lab-accent); }
+        .news-card-deck { font-size: 13.5px; line-height: 1.55; color: var(--lab-ink-soft); }
+
+        .news-empty {
+            margin-top: 14px; font-size: 15px; color: var(--lab-ink-soft);
+            padding: 22px; border: 1px dashed var(--lab-line-strong); border-radius: 4px;
+            background: var(--lab-bg-raised);
+        }
+
+        /* ── Artikelvy ─────────────────────────────────────────────── */
+        .article { max-width: 760px; margin: 0 auto; padding: 40px 28px 20px; width: 100%; }
+        .article-back {
+            font-family: var(--lab-font-mono); font-size: 12px; letter-spacing: 0.04em;
+            color: var(--lab-ink-muted); text-decoration: none; display: inline-block; margin-bottom: 26px;
+        }
+        .article-back:hover { color: var(--lab-accent); }
+        .article-title {
+            font-family: var(--lab-font-display); font-size: clamp(32px, 5vw, 52px);
+            line-height: 1.06; letter-spacing: -0.01em; color: var(--lab-ink); margin: 12px 0 18px;
+        }
+        .article-deck {
+            font-size: 19px; line-height: 1.55; color: var(--lab-ink-soft);
+            font-style: italic; margin: 0 0 26px;
+            padding-left: 18px; border-left: 3px solid var(--lab-accent);
+        }
+        figure.article-figure { margin: 0 0 12px; }
+        figure.article-figure img {
+            width: 100%; display: block; border-radius: 4px;
+            border: 1px solid var(--lab-line-strong);
+        }
+        figure.article-figure figcaption {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.03em;
+            color: var(--lab-ink-muted); margin-top: 8px; text-align: right;
+        }
+        .article-body { margin-top: 26px; }
+        .article-body p {
+            font-size: 17.5px; line-height: 1.72; color: var(--lab-ink); margin: 0 0 20px;
+        }
+        .article-body p a { color: var(--lab-accent); text-decoration: underline; text-underline-offset: 2px; }
+        .article-body h2 {
+            font-family: var(--lab-font-display); font-size: 27px; line-height: 1.15;
+            color: var(--lab-ink); margin: 34px 0 14px; letter-spacing: -0.005em;
+        }
+        .article-quote {
+            margin: 30px 0; padding: 4px 0 4px 22px; border-left: 4px solid var(--lab-accent);
+        }
+        .article-quote p {
+            font-family: var(--lab-font-display); font-size: 25px; line-height: 1.3;
+            color: var(--lab-ink); font-style: italic; margin: 0 0 8px;
+        }
+        .article-quote cite {
+            font-family: var(--lab-font-mono); font-size: 11.5px; letter-spacing: 0.06em;
+            color: var(--lab-ink-muted); font-style: normal; text-transform: uppercase;
+        }
+        .article-fact {
+            margin: 30px 0; padding: 22px 24px; border-radius: 5px;
+            background: var(--lab-bg-panel); border: 1px solid var(--lab-line-strong);
+            box-shadow: 0 1px 0 var(--lab-line);
+        }
+        .article-fact-title {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--lab-accent); margin-bottom: 12px;
+        }
+        .article-fact ul { margin: 0; padding-left: 20px; }
+        .article-fact li { font-size: 15.5px; line-height: 1.6; color: var(--lab-ink-soft); margin-bottom: 9px; }
+        .article-fact li:last-child { margin-bottom: 0; }
+
+        .article-sources {
+            margin: 38px 0 10px; padding-top: 22px; border-top: 2px solid var(--lab-line-strong);
+        }
+        .article-sources-label {
+            font-family: var(--lab-font-mono); font-size: 11px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--lab-ink-muted); margin-bottom: 12px;
+        }
+        .article-sources-list { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+        .article-source-pill {
+            font-family: var(--lab-font-mono); font-size: 12px; letter-spacing: 0.02em;
+            color: var(--lab-ink); text-decoration: none;
+            border: 1px solid var(--lab-line-strong); border-radius: 999px; padding: 6px 13px;
+        }
+        .article-source-pill:hover { border-color: var(--lab-accent); color: var(--lab-accent); }
+        .article-research {
+            font-size: 14px; line-height: 1.55; color: var(--lab-ink-soft);
+            background: var(--lab-bg-raised); border-radius: 5px; padding: 15px 17px;
+        }
+        .article-research strong { color: var(--lab-ink); font-weight: 600; }
+        .article-research a { color: var(--lab-accent); text-decoration: underline; text-underline-offset: 2px; }
+
+        @media (max-width: 880px) {
+            .news-featured { grid-template-columns: 1fr; gap: 20px; }
+            .news-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .news-hero { padding: 40px 22px 4px; }
+            .news-wrap { padding: 8px 22px 24px; }
+            .news-grid { grid-template-columns: 1fr; }
+            .article { padding: 28px 20px 20px; }
+            .lab-section { padding: 0 22px; }
+        }
+    </style>
+</head>
+<body class="laborans">
+    <div id="root"></div>
+
+    <script>document.write('<scr' + 'ipt src="data/nyheter.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+
+    <script type="text/babel" data-presets="react">
+        const NYHETER = (window.NYHETER || []).slice();
+
+        function formatDate(iso) {
+            const months = ['januari','februari','mars','april','maj','juni','juli',
+                'augusti','september','oktober','november','december'];
+            const [y, m, d] = iso.split('-').map(Number);
+            return `${d} ${months[m - 1]} ${y}`;
+        }
+
+        function Topbar() {
+            return (
+                <div className="lab-topbar">
+                    <div className="lab-topbar-inner">
+                        <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+                    </div>
+                </div>
+            );
+        }
+
+        function Header() {
+            return (
+                <div className="lab-header">
+                    <div className="lab-header-inner">
+                        <a className="lab-logo" href="index.html">
+                            <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                                <g transform="rotate(-24 18 18)">
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" strokeWidth="1.4" />
+                                    <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                                </g>
+                                <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                            </svg>
+                            <span className="lab-logo-text">Fysiklabbet</span>
+                        </a>
+                        <nav className="lab-nav" aria-label="Huvudnavigation">
+                            <a href="index.html">Start</a>
+                            <div className="lab-nav-dd">
+                                <button type="button" className="lab-nav-dd-trigger" aria-haspopup="true">
+                                    Ämne
+                                    <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                                </button>
+                                <div className="lab-nav-dd-menu">
+                                    <a href="katalog.html#fy1">Fysik nivå 1</a>
+                                    <a href="katalog.html#fy2">Fysik nivå 2</a>
+                                </div>
+                            </div>
+                            <a href="simuleringar.html">Simuleringar</a>
+                            <a href="nyheter.html" className="active">Nyheter</a>
+                            <a href="om.html">Om</a>
+                            <a href="kontakt.html">Kontakt</a>
+                        </nav>
+                    </div>
+                </div>
+            );
+        }
+
+        function Footer() {
+            return (
+                <footer className="lab-section lab-footer">
+                    <span>© 2026 FYSIKLABBET</span>
+                    <span>SKAPAD FÖR GYMNASIEELEVER</span>
+                </footer>
+            );
+        }
+
+        function MetaRow({ a }) {
+            return (
+                <div className="news-meta-row">
+                    <span className="news-meta-cat">{a.category}</span>
+                    <span className="news-meta-dot" />
+                    <span>{formatDate(a.date)}</span>
+                    {a.readingTime && <React.Fragment>
+                        <span className="news-meta-dot" />
+                        <span>{a.readingTime}</span>
+                    </React.Fragment>}
+                </div>
+            );
+        }
+
+        function ListView() {
+            const [featured, ...rest] = NYHETER;
+            return (
+                <React.Fragment>
+                    <div className="news-hero">
+                        <span className="lab-mono-label">Nyheter · en ny varje dag</span>
+                        <h1 className="news-hero-title">Fysik­nyheter</h1>
+                        <p className="news-hero-lead">
+                            Det senaste från forskningsfronten — neutriner, svarta hål,
+                            kvantdatorer och allt däremellan — sammanfattat på svenska och
+                            skrivet för att vara lätt att ta till sig. Källa anges alltid, och
+                            där det går länkar vi direkt till originalforskningen.
+                        </p>
+                    </div>
+
+                    <div className="news-wrap">
+                        {!featured && (
+                            <div className="news-empty">Inga nyheter publicerade ännu — kom tillbaka snart!</div>
+                        )}
+
+                        {featured && (
+                            <a className="news-featured" href={`?id=${featured.id}`}>
+                                <div className="news-featured-media">
+                                    <span className="news-featured-flag">Senaste nytt</span>
+                                    <img src={featured.image} alt={featured.imageAlt} loading="eager" />
+                                </div>
+                                <div className="news-featured-text">
+                                    <MetaRow a={featured} />
+                                    <h2 className="news-featured-title">{featured.title}</h2>
+                                    <p className="news-featured-deck">{featured.deck}</p>
+                                    <span className="news-readmore">Läs hela →</span>
+                                </div>
+                            </a>
+                        )}
+
+                        {rest.length > 0 && (
+                            <React.Fragment>
+                                <div className="news-grid-head">
+                                    <span className="lab-mono-label">Tidigare nyheter</span>
+                                    <span className="lab-mono-label">{rest.length} st</span>
+                                </div>
+                                <div className="news-grid">
+                                    {rest.map(a => (
+                                        <a className="news-card" href={`?id=${a.id}`} key={a.id}>
+                                            <div className="news-card-media">
+                                                <img src={a.image} alt={a.imageAlt} loading="lazy" />
+                                            </div>
+                                            <MetaRow a={a} />
+                                            <h3 className="news-card-title">{a.title}</h3>
+                                            <p className="news-card-deck">{a.deck}</p>
+                                        </a>
+                                    ))}
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
+                </React.Fragment>
+            );
+        }
+
+        function Block({ b }) {
+            if (b.type === 'h2') return <h2>{b.text}</h2>;
+            if (b.type === 'quote') return (
+                <blockquote className="article-quote">
+                    <p dangerouslySetInnerHTML={{ __html: b.html }} />
+                    {b.cite && <cite>{b.cite}</cite>}
+                </blockquote>
+            );
+            if (b.type === 'fact') return (
+                <div className="article-fact">
+                    <div className="article-fact-title">{b.title}</div>
+                    <ul>{b.items.map((it, i) => <li key={i} dangerouslySetInnerHTML={{ __html: it }} />)}</ul>
+                </div>
+            );
+            return <p dangerouslySetInnerHTML={{ __html: b.html }} />;
+        }
+
+        function ArticleView({ a }) {
+            return (
+                <article className="article">
+                    <a className="article-back" href="nyheter.html">← Alla nyheter</a>
+                    <MetaRow a={a} />
+                    <h1 className="article-title">{a.title}</h1>
+                    <p className="article-deck">{a.deck}</p>
+
+                    <figure className="article-figure">
+                        <img src={a.image} alt={a.imageAlt} />
+                        {a.imageCredit && <figcaption>{a.imageCredit}</figcaption>}
+                    </figure>
+
+                    <div className="article-body">
+                        {a.body.map((b, i) => <Block b={b} key={i} />)}
+                    </div>
+
+                    <div className="article-sources">
+                        <div className="article-sources-label">Källor</div>
+                        <div className="article-sources-list">
+                            {a.sources.map((s, i) => (
+                                <a className="article-source-pill" href={s.url}
+                                   target="_blank" rel="noopener noreferrer" key={i}>{s.name} ↗</a>
+                            ))}
+                        </div>
+                        {a.research && (
+                            <p className="article-research">
+                                <strong>Originalforskningen:</strong>{' '}
+                                <a href={a.research.url} target="_blank" rel="noopener noreferrer">
+                                    {a.research.citation}
+                                </a>
+                            </p>
+                        )}
+                    </div>
+                </article>
+            );
+        }
+
+        function App() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const article = id ? NYHETER.find(a => a.id === id) : null;
+
+            React.useEffect(() => {
+                document.title = article
+                    ? `${article.title} — Fysiklabbet`
+                    : 'Nyheter — Fysiklabbet';
+            }, [article]);
+
+            return (
+                <div className="lab-page">
+                    <Topbar />
+                    <Header />
+                    {article ? <ArticleView a={article} /> : <ListView />}
+                    <Footer />
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+
+    <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+</body>
+</html>

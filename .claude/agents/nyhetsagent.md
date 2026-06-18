@@ -126,6 +126,18 @@ Varje artikel ska ha **minst en bild**.
    en illustration vars ursprung framgår av `imageCredit`. (Hänvisningar i texten är
    ok ENBART om bilden är ett verifierat äkta foto/diagram med känd källa.)
 
+## Podd (valfritt, manuellt steg)
+
+Varje artikel kan ha en poddspelare (ljudöversikt/"djupdykning") högst upp.
+Den **skapas manuellt av en människa** i NotebookLM — det är alltså INTE något
+du som agent gör eller behöver göra. Du ska aldrig påstå att en podd finns, och
+aldrig sätta `audio`-fältet själv. Spelaren dyker upp automatiskt om någon lägger
+en ljudfil i artikelns mapp `nyheter/podd/<id>/`. Se `nyheter/podd/README.md`.
+
+**Gör så här när du skapar en ny artikel:** skapa även en tom mapp
+`nyheter/podd/<id>/` med en `.gitkeep`-fil i, så att den finns redo att lägga en
+ljudfil i (även från mobilen). Lägg ALDRIG en ljudfil där själv.
+
 ## Datafält (sammanfattning)
 
 Se den utförliga kommentaren överst i `data/nyheter.js`. Varje artikel:

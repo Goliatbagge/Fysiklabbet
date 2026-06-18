@@ -137,6 +137,27 @@
         }
         .article-ai-note svg { flex: 0 0 auto; margin-top: 1px; }
         .article-ai-note strong { color: var(--lab-ink-soft); font-weight: 600; }
+        /* Poddspelare (ljudöversikt) — visas bara om en ljudfil finns */
+        .article-podcast {
+            margin: 0 0 24px; padding: 15px 18px;
+            border: 1px solid var(--lab-line-strong); border-radius: 8px;
+            background: var(--lab-bg-panel); box-shadow: 0 1px 0 var(--lab-line);
+        }
+        .article-podcast-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .article-podcast-icon {
+            flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--lab-accent-soft); color: var(--lab-accent);
+        }
+        .article-podcast-title {
+            font-family: var(--lab-font-display); font-size: 19px; line-height: 1.1;
+            color: var(--lab-ink);
+        }
+        .article-podcast-sub {
+            font-family: var(--lab-font-mono); font-size: 10px; letter-spacing: 0.07em;
+            text-transform: uppercase; color: var(--lab-ink-muted); margin-top: 3px;
+        }
+        .article-podcast-audio { width: 100%; height: 40px; accent-color: var(--lab-accent); }
         figure.article-figure { margin: 0 0 12px; }
         figure.article-figure img {
             width: 100%; display: block; border-radius: 4px;
@@ -442,6 +463,82 @@
             return <p dangerouslySetInnerHTML={{ __html: b.html }} />;
         }
 
+        // Poddspelare: visar en spelare om det finns en ljudfil för artikeln.
+        // Enklaste sättet att lägga till en podd (även från mobilen): lägg
+        // ljudfilen — med VILKET namn som helst — i artikelns egen mapp
+        // nyheter/podd/<id>/. Spelaren frågar GitHubs API vad som ligger där
+        // och hittar ljudfilen automatiskt; ingen omdöpning behövs.
+        // Fallback-ordning: explicit a.audio → mappen via API → enskild fil
+        // nyheter/podd/<id>.(m4a|mp3|wav|ogg).
+        const PODD_REPO = 'Goliatbagge/Fysiklabbet';
+        const PODD_EXT = ['m4a', 'mp3', 'wav', 'ogg', 'aac', 'opus'];
+        const isAudioFile = (name) => {
+            const m = (name || '').toLowerCase().match(/\.([a-z0-9]+)$/);
+            return !!m && PODD_EXT.includes(m[1]);
+        };
+        function ArticlePodcast({ a }) {
+            const [src, setSrc] = React.useState(null);
+            React.useEffect(() => {
+                let alive = true;
+                const head = async (u) => {
+                    try { return (await fetch(u, { method: 'HEAD' })).ok; } catch (e) { return false; }
+                };
+                (async () => {
+                    // 1) Explicit angiven ljudfil i data/nyheter.js
+                    if (a.audio) {
+                        if (await head(a.audio) && alive) setSrc(a.audio);
+                        return;
+                    }
+                    // 2) Artikelns egen mapp via GitHubs contents-API
+                    try {
+                        const api = `https://api.github.com/repos/${PODD_REPO}/contents/nyheter/podd/${a.id}?ref=main`;
+                        const r = await fetch(api, { headers: { 'Accept': 'application/vnd.github+json' } });
+                        if (r.ok) {
+                            const items = await r.json();
+                            if (Array.isArray(items)) {
+                                const audio = items
+                                    .filter(it => it.type === 'file' && isAudioFile(it.name))
+                                    .sort((x, y) => (y.size || 0) - (x.size || 0))[0]; // störst = sannolikt podden
+                                if (alive) setSrc(audio ? audio.download_url : null);
+                                return; // mappen fanns → svaret är bestämt
+                            }
+                        }
+                    } catch (e) { /* faller vidare till enskild fil nedan */ }
+                    // 3) Enskild fil nyheter/podd/<id>.<ext> (äldre konvention)
+                    for (const ext of ['m4a', 'mp3', 'wav', 'ogg']) {
+                        const u = `nyheter/podd/${a.id}.${ext}`;
+                        if (await head(u)) { if (alive) setSrc(u); return; }
+                    }
+                    if (alive) setSrc(null);
+                })();
+                return () => { alive = false; };
+            }, [a.id]);
+
+            if (!src) return null;
+            return (
+                <div className="article-podcast">
+                    <div className="article-podcast-head">
+                        <span className="article-podcast-icon">
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <rect x="9" y="2" width="6" height="11" rx="3" />
+                                <path d="M5 10a7 7 0 0 0 14 0" />
+                                <line x1="12" y1="17" x2="12" y2="22" />
+                                <line x1="8" y1="22" x2="16" y2="22" />
+                            </svg>
+                        </span>
+                        <div>
+                            <div className="article-podcast-title">Lyssna: djupdykning</div>
+                            <div className="article-podcast-sub">Ljudöversikt skapad i NotebookLM</div>
+                        </div>
+                    </div>
+                    <audio className="article-podcast-audio" controls preload="none" src={src}>
+                        Din webbläsare kan inte spela upp ljudet.
+                    </audio>
+                </div>
+            );
+        }
+
         function ArticleView({ a }) {
             const bodyRef = React.useRef(null);
             // Lässtöd: minns valen mellan besök (samma nycklar som teorisidorna).
@@ -466,6 +563,8 @@
                     <MetaRow a={a} />
                     <h1 className="article-title">{a.title}</h1>
                     <p className="article-deck">{a.deck}</p>
+
+                    <ArticlePodcast a={a} />
 
                     <div className="article-ai-note">
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"

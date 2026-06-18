@@ -20,6 +20,10 @@
  *   tags      – array med nyckelord (gemener)
  *   sources   – array av { name, url } (nyhetskällor, ALLTID minst en)
  *   research  – { citation, url } direktlänk till originalforskningen (om möjlig), annars null
+ *   audio     – (valfritt) sökväg till en poddfil. Utelämnas oftast: lägg bara
+ *               ljudfilen (valfritt namn) i artikelns mapp nyheter/podd/<id>/
+ *               så hittar spelaren den via GitHubs API. Se
+ *               nyheter/podd/README.md för det manuella NotebookLM-flödet.
  *   body      – array av block:
  *                 { type: 'p',    html: '…' }   stycke (inline-HTML: <em>, <a>, &nbsp; ok)
  *                 { type: 'h2',   text: '…' }   mellanrubrik

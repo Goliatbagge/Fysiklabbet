@@ -25,11 +25,62 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <style>
+        /* ── Senaste nyheten (teaser på startsidan) ────────────────── */
+        .home-news { margin-top: 6px; }
+        .home-news-card {
+            display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: stretch;
+            text-decoration: none; color: var(--lab-ink);
+            border: 1px solid var(--lab-line-strong); border-radius: 6px; overflow: hidden;
+            background: var(--lab-bg-panel);
+            transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+        }
+        .home-news-card:hover {
+            border-color: var(--lab-accent);
+            box-shadow: 0 6px 22px rgba(15, 22, 32, 0.08);
+            transform: translateY(-2px);
+        }
+        .home-news-media { position: relative; overflow: hidden; background: var(--lab-bg-raised); min-height: 190px; }
+        .home-news-media img { width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 600ms cubic-bezier(.2,.7,.2,1); }
+        .home-news-card:hover .home-news-media img { transform: scale(1.04); }
+        .home-news-flag {
+            position: absolute; top: 12px; left: 12px;
+            font-family: var(--lab-font-mono); font-size: 9.5px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: #fff; background: var(--lab-accent);
+            padding: 5px 9px; border-radius: 2px;
+        }
+        .home-news-text { padding: 22px 26px 22px 0; display: flex; flex-direction: column; justify-content: center; }
+        .home-news-meta {
+            display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+            font-family: var(--lab-font-mono); font-size: 10.5px; letter-spacing: 0.06em;
+            color: var(--lab-ink-muted); text-transform: uppercase; margin-bottom: 10px;
+        }
+        .home-news-meta .cat { color: var(--lab-accent); }
+        .home-news-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--lab-ink-muted); }
+        .home-news-title {
+            font-family: var(--lab-font-display); font-size: clamp(22px, 2.6vw, 30px);
+            line-height: 1.1; letter-spacing: -0.01em; color: var(--lab-ink); margin: 0 0 9px;
+        }
+        .home-news-card:hover .home-news-title { color: var(--lab-accent); }
+        .home-news-deck { font-size: 14.5px; line-height: 1.55; color: var(--lab-ink-soft); margin: 0 0 14px; }
+        .home-news-more {
+            font-family: var(--lab-font-mono); font-size: 12px; letter-spacing: 0.04em;
+            color: var(--lab-ink); border-bottom: 2px solid var(--lab-accent);
+            padding-bottom: 2px; align-self: flex-start;
+        }
+        @media (max-width: 720px) {
+            .home-news-card { grid-template-columns: 1fr; }
+            .home-news-media { min-height: 0; aspect-ratio: 16 / 9; }
+            .home-news-text { padding: 20px 22px; }
+        }
+    </style>
 </head>
 <body class="laborans">
     <div id="root"></div>
 
     <script src="data/katalog.js"></script>
+    <script>document.write('<scr' + 'ipt src="data/nyheter.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
@@ -37,6 +88,14 @@
     <script type="text/babel" data-presets="react">
         const { useState, useEffect, useMemo, useRef } = React;
         const KF = window.KATALOG_FLAT;
+        const NYHETER = window.NYHETER || [];
+
+        const MONTHS_SV = ['januari','februari','mars','april','maj','juni','juli',
+            'augusti','september','oktober','november','december'];
+        const formatNewsDate = (iso) => {
+            const [y, m, d] = iso.split('-').map(Number);
+            return `${d} ${MONTHS_SV[m - 1]} ${y}`;
+        };
 
         const UPDATES = [
             { date: '2026-06-17', href: 'fysik1-friktion-app.html', title: 'Friktion', text: 'En låda på ett golv: dra i kraftreglaget och se hur friktionen växer lika stor och motriktad — tills lådan släpper och börjar glida enligt Newtons andra lag. Byt material (trä, gummi, is, kardborre) för att se hur friktionstalet ändrar allt, med ett live-diagram över friktion mot pålagd kraft.' },
@@ -92,6 +151,7 @@
                                 </div>
                             </div>
                             <a href="simuleringar.html">Simuleringar</a>
+                            <a href="nyheter.html">Nyheter</a>
                             <a href="om.html">Om</a>
                             <a href="kontakt.html">Kontakt</a>
                         </nav>
@@ -212,6 +272,38 @@
             );
         }
 
+        function NewsTeaser() {
+            const latest = NYHETER[0];
+            if (!latest) return null;
+            return (
+                <section className="lab-section home-news">
+                    <div className="lab-updates-header">
+                        <span className="lab-mono-label">Senaste nyheten</span>
+                        <a className="lab-mono-label" href="nyheter.html"
+                           style={{ textDecoration: 'none', color: 'var(--lab-accent)' }}>
+                            Alla nyheter →
+                        </a>
+                    </div>
+                    <a className="home-news-card" href={`nyheter.html?id=${latest.id}`}>
+                        <div className="home-news-media">
+                            <span className="home-news-flag">Senaste nytt</span>
+                            <img src={latest.image} alt={latest.imageAlt} loading="lazy" />
+                        </div>
+                        <div className="home-news-text">
+                            <div className="home-news-meta">
+                                <span className="cat">{latest.category}</span>
+                                <span className="dot" />
+                                <span>{formatNewsDate(latest.date)}</span>
+                            </div>
+                            <h3 className="home-news-title">{latest.title}</h3>
+                            <p className="home-news-deck">{latest.deck}</p>
+                            <span className="home-news-more">Läs nyheten →</span>
+                        </div>
+                    </a>
+                </section>
+            );
+        }
+
         function Updates() {
             const viewportRef = React.useRef(null);
             const [atStart, setAtStart] = React.useState(true);
@@ -290,6 +382,7 @@
                     <Topbar />
                     <Header />
                     <WelcomeHero />
+                    <NewsTeaser />
                     <Updates />
                     <Footer />
                 </div>

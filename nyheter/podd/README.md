@@ -2,10 +2,10 @@
 
 Varje nyhetsartikel kan ha en **poddspelare högst upp** — en "djupdykning"
 (ljudöversikt) som skapas manuellt i **NotebookLM**. Spelaren dyker upp
-automatiskt så fort en ljudfil ligger i artikelns mapp här. Ingen ändring i
-`data/nyheter.js` behövs, och **du behöver inte döpa om filen**.
+automatiskt så fort en ljudfil för artikeln ligger i den här mappen. Ingen
+ändring i `data/nyheter.js` behövs.
 
-## Så lägger du till en podd (funkar bra från mobilen)
+## Så lägger du till en podd
 
 1. **Öppna [NotebookLM](https://notebooklm.google.com/)** och skapa en ny notebook.
 2. **Lägg in artikelns källor** — länkarna under "Källor" i artikeln, plus gärna
@@ -13,28 +13,30 @@ automatiskt så fort en ljudfil ligger i artikelns mapp här. Ingen ändring i
 3. **Skapa en ljudöversikt** → formatet **Djupdykning**, språk **svenska**,
    längd **standard**.
 4. **Ladda ner** ljudfilen.
-5. **Lägg filen i artikelns mapp** här under `nyheter/podd/`. Varje artikel har
-   en egen mapp som heter artikelns `id` (samma som i webbadressen `?id=…`).
-   Lägg bara filen där — **namnet spelar ingen roll**.
+5. **Lägg filen i den här mappen** (`nyheter/podd/`) och döp den till artikelns
+   `id` (samma sträng som i webbadressen `?id=…` och i `id:`-fältet i
+   `data/nyheter.js`). Behåll filändelsen.
    - Exempel: artikeln `?id=2026-06-18-juno-neutrinodetektor`
-     → lägg filen i `nyheter/podd/2026-06-18-juno-neutrinodetektor/`
+     → filen `nyheter/podd/2026-06-18-juno-neutrinodetektor.m4a`
 6. **Klart.** Ladda om artikelsidan — poddspelaren visas högst upp.
 
-## Hur hittar spelaren rätt fil?
+> **Enklast:** skicka bara ljudfilen till assistenten (Claude Code) i en session,
+> så sköts namnsättning, komprimering och placering automatiskt. Det är så den
+> första podden (JUNO) lades upp.
 
-Sidan frågar GitHubs API vilka filer som ligger i artikelns mapp och väljer
-ljudfilen automatiskt (`.m4a`, `.mp3`, `.wav`, `.ogg`, `.aac` eller `.opus`).
-Ligger det flera ljudfiler i mappen väljs den största. `.gitkeep` och andra
-icke-ljudfiler ignoreras.
+## Format och storlek
 
-> Eftersom det är GitHubs API som läser mappen måste filen vara **pushad till
-> GitHub** för att synas på den publika sajten. Laddar du upp via GitHub-appen
-> eller github.com på mobilen sköts det automatiskt när du committar uppladdningen.
+Spelaren hittar automatiskt filer med ändelsen **`.m4a`, `.mp3`, `.wav`,
+`.ogg`, `.aac`** eller **`.opus`**.
 
-## Filstorlek
-
-**Komprimera gärna till `.m4a` eller `.mp3`.** En okomprimerad `.wav` kan bli
-stor (tiotals MB) och göra sidan långsam. Några MB räcker gott för tal.
+- **Komprimera gärna till en liten `.m4a`/`.mp3`.** NotebookLM-filer är ofta
+  stereo i hög bithastighet (tiotals MB). Tal räcker gott med **mono ~64 kbps**,
+  vilket krymper filen till några MB. Med ffmpeg:
+  ```
+  ffmpeg -i in.m4a -ac 1 -c:a aac -b:a 64k -movflags +faststart ut.m4a
+  ```
+- Ligger filen någon annanstans eller heter den något annat kan du sätta ett
+  explicit `audio`-fält på artikeln i `data/nyheter.js`.
 
 ## Transparens
 

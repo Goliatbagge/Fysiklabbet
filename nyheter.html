@@ -464,50 +464,22 @@
         }
 
         // Poddspelare: visar en spelare om det finns en ljudfil för artikeln.
-        // Enklaste sättet att lägga till en podd (även från mobilen): lägg
-        // ljudfilen — med VILKET namn som helst — i artikelns egen mapp
-        // nyheter/podd/<id>/. Spelaren frågar GitHubs API vad som ligger där
-        // och hittar ljudfilen automatiskt; ingen omdöpning behövs.
-        // Fallback-ordning: explicit a.audio → mappen via API → enskild fil
-        // nyheter/podd/<id>.(m4a|mp3|wav|ogg).
-        const PODD_REPO = 'Goliatbagge/Fysiklabbet';
-        const PODD_EXT = ['m4a', 'mp3', 'wav', 'ogg', 'aac', 'opus'];
-        const isAudioFile = (name) => {
-            const m = (name || '').toLowerCase().match(/\.([a-z0-9]+)$/);
-            return !!m && PODD_EXT.includes(m[1]);
-        };
+        // Lägg ljudfilen som nyheter/podd/<id>.<ext> (m4a/mp3/…), så hittar
+        // spelaren den automatiskt — ingen ändring i data/nyheter.js behövs.
+        // Ett explicit a.audio-fält går att sätta om filen ligger annorstädes.
         function ArticlePodcast({ a }) {
             const [src, setSrc] = React.useState(null);
             React.useEffect(() => {
                 let alive = true;
-                const head = async (u) => {
-                    try { return (await fetch(u, { method: 'HEAD' })).ok; } catch (e) { return false; }
-                };
+                const candidates = a.audio
+                    ? [a.audio]
+                    : ['m4a', 'mp3', 'wav', 'ogg', 'aac', 'opus'].map(ext => `nyheter/podd/${a.id}.${ext}`);
                 (async () => {
-                    // 1) Explicit angiven ljudfil i data/nyheter.js
-                    if (a.audio) {
-                        if (await head(a.audio) && alive) setSrc(a.audio);
-                        return;
-                    }
-                    // 2) Artikelns egen mapp via GitHubs contents-API
-                    try {
-                        const api = `https://api.github.com/repos/${PODD_REPO}/contents/nyheter/podd/${a.id}?ref=main`;
-                        const r = await fetch(api, { headers: { 'Accept': 'application/vnd.github+json' } });
-                        if (r.ok) {
-                            const items = await r.json();
-                            if (Array.isArray(items)) {
-                                const audio = items
-                                    .filter(it => it.type === 'file' && isAudioFile(it.name))
-                                    .sort((x, y) => (y.size || 0) - (x.size || 0))[0]; // störst = sannolikt podden
-                                if (alive) setSrc(audio ? audio.download_url : null);
-                                return; // mappen fanns → svaret är bestämt
-                            }
-                        }
-                    } catch (e) { /* faller vidare till enskild fil nedan */ }
-                    // 3) Enskild fil nyheter/podd/<id>.<ext> (äldre konvention)
-                    for (const ext of ['m4a', 'mp3', 'wav', 'ogg']) {
-                        const u = `nyheter/podd/${a.id}.${ext}`;
-                        if (await head(u)) { if (alive) setSrc(u); return; }
+                    for (const c of candidates) {
+                        try {
+                            const r = await fetch(c, { method: 'HEAD' });
+                            if (r.ok) { if (alive) setSrc(c); return; }
+                        } catch (e) { /* nästa kandidat */ }
                     }
                     if (alive) setSrc(null);
                 })();

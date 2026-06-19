@@ -12,7 +12,8 @@ Format per post:
 
 ## Kö
 
-_(tom — kön fylls på när agenten hittar fler starka nyheter än den hinner publicera)_
+- **En döende stjärna kan skapa ett nytt universum i stället för ett svart hål** — forskare vid Goethe-universitetet i Frankfurt visar en dynamisk lösning för hur gravastjärnor kan bildas ur kollapsande materia; berör gravitationsfysik och kosmologi (Fysik 2). Källa: https://www.sciencedaily.com/releases/2026/06/260614011846.htm. Publicerad i Physical Review D. (tillagd 2026-06-19)
+- **Kvantgivare löser centralt problem i jakten på mörk materia och gravitationsvågor** — Imperial College London visar att två atominterferometrar kan eliminera brus och mäta vid kvantfysikens grundläggande gräns; koppling till gravitationsvågor och mörk materia. Källa: https://phys.org/news/2026-06-quantum-sensor-major-obstacle-dark.html. Publicerad i Nature. (tillagd 2026-06-19)
 
 ## Reservuppslag vid nyhetstorka (tidlösa)
 

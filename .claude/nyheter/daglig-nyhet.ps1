@@ -31,8 +31,10 @@ function HasTodayArticle {
 
 function Invoke-Native {
     # Kor en native exe, loggar all output, kastar inte pa stderr.
-    param([string]$Exe, [string[]]$Args)
-    & $Exe @Args 2>&1 | ForEach-Object { Log $_ }
+    # OBS: parametern far INTE heta $Args ($Args ar en reserverad automatisk
+    # variabel i PowerShell -> splattingen blir tom och inga argument skickas).
+    param([string]$Exe, [string[]]$Arguments)
+    & $Exe @Arguments 2>&1 | ForEach-Object { Log $_ }
 }
 
 Set-Location $Repo

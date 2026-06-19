@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-06-19 | `2026-06-19-kvantsammanflatning-kristall` | En kristall du kan hålla i handen är kvantsammanflätad | Phys.org / TU Wien / Nature Physics |
 | 2026-06-18 | `2026-06-18-juno-neutrinodetektor` | Världens skarpaste neutrinoöga öppnas — 700 meter under jorden | ScienceDaily / CAS / Nature |
 | 2026-06-17 | `2026-06-17-supraledning-nanoytor` | Knöligt underlag lurar supraledaren att tåla mer | ScienceDaily / Nature Communications |
 | 2026-06-16 | `2026-06-16-schrodingers-katt` | Schrödingers katt får en ny, ännu konstigare släkting | ScienceDaily / Oxford / PRX |

@@ -603,6 +603,25 @@ de ska inte behöva påpekas av användaren:
    värdig en modern, inspirerande sida — inte som grova klumpar. Bygg t.ex.
    en hand av handflata + separata fingrar + tumme + en subtil veck-linje,
    inte två rundade rektanglar. Vid minsta tvekan: använd `grafik`-agenten.
+7. **Kraftvektorns etikett (beteckning + värde) STARTAR vid pilens SPETS
+   och löper utåt i fri yta — aldrig ovanpå objektet pilen verkar på.**
+   Lägg etiketten en bit bortom pilspetsen i pilens riktning (med
+   `text-anchor="start"`/`"end"` så texten flödar *bort* från objektet, inte
+   in över det) och lyft den till en lugn pappers-/himmelsyta. Detta är
+   återkommande påpekat: en kort kraftpil (liten kraft) får en spets som
+   hamnar nära kroppen → en `anchor="middle"`-etikett breder då ut sig över
+   kroppen. Fäst alltid etiketten vid spetsen, inte vid mitten. Gäller alla
+   kraftpilar (även korta friktions-/normalpilar). Referensimpl:
+   `fysik1-lutande-plan-app.html` (friktionsetiketten).
+8. **En kraftpil som ligger MOT/PÅ ett objekt med liknande färg får en tunn
+   MÖRK kantlinje för separation — aldrig att den smälter in.** Vanlig fälla:
+   orange friktionspil på en orangebrun låda → pilen försvinner. Lägg en
+   smal bläckfärgad casing (`rgba(15,22,32,0.5–0.55)`, skaft `width+3.5`,
+   huvud-stroke `~2`) under den färgade pilen — INTE en vit halo (det är
+   förbjudet, se no-white-outline-regeln). Skala dessutom pilhuvudet efter
+   skaftlängden för korta pilar (`head = max(12, min(20, Lf·0.95))`) så att
+   en liten kraft inte blir ett rent pilhuvud utan synligt skaft. Mönstret
+   finns som `edge`-flaggan på `Arrow` i `fysik1-lutande-plan-app.html`.
 
 ### Diagramkonventioner (svensk fysik/matte-standard)
 

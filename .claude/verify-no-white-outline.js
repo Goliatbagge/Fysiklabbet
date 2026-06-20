@@ -47,6 +47,12 @@ const WHITELIST = {
     'fysik1-newtons-tredje-app.html': [
         'className="w-8 h-8"',
     ],
+    // Drag-handtag vid plantoppen: vit ikon/kontur på en MÖRK kontrollcirkel
+    // (fill={COL.ink}) — samma konvention som fs-btn, inte en halo på papper.
+    'fysik1-lutande-plan-app.html': [
+        'stroke="#fff" strokeWidth="1.5"',     // ring runt mörk handtagscirkel
+        '<g stroke="#fff" strokeWidth="2" strokeLinecap="round"', // vit upp/ned-pil-ikon i handtaget
+    ],
 };
 
 // Hämta alla *.html-filer direkt i projektroten (inte undermappar som

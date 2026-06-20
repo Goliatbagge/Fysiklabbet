@@ -42,6 +42,36 @@
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
         .fnum { color: var(--lab-ink); font-size: 19px; }
 
+        /* Editerbar inmatningsruta bredvid glidarna — fritt värde (kan gå
+           utanför glidarnas intervall). */
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 76px; }
+        .num-in { width: 48px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* Info-ruta uppe till vänster i scenen (massa) — flyttad ut ur figuren
+           så den inte hamnar bakom kraftvektorerna. */
+        .scene-info {
+            position: absolute; top: 62px; left: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 16px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
         .scene-wrap {
             position: relative;
             width: 100%;
@@ -189,6 +219,12 @@
             if (parseFloat(s) === 0) return '0';
             return s.replace('.', ',');
         };
+        // Vinkel: visa heltal utan decimal, men en decimal om man skrivit in t.ex. 30,5.
+        const fmtDeg = (a) => {
+            if (!isFinite(a)) return '–';
+            if (Math.abs(a - Math.round(a)) < 0.05) return String(Math.round(a));
+            return fmt(a, 1);
+        };
 
         const COL = {
             tyngd: '#c8324a',  // crimson — tyngdkraft & dess komposanter
@@ -243,15 +279,6 @@
                              strokeLinejoin="round" strokeLinecap="round" />;
         };
 
-        // Markmönster (snedstreck) under en vågrät linje
-        const Hatch = ({ x0, x1, y, step = 22, len = 9, color = 'rgba(15,22,32,0.34)' }) => {
-            const items = [];
-            for (let x = x0; x <= x1; x += step) {
-                items.push(<line key={x} x1={x} y1={y} x2={x - len} y2={y + len} stroke={color} strokeWidth="1.5" />);
-            }
-            return <g>{items}</g>;
-        };
-
         const Slider = ({ label, value, min, max, step, onChange, children }) => (
             <div className="flex items-center gap-2 mb-2">
                 <span className="text-xs flex-shrink-0" style={{ minWidth: 118, color: 'var(--lab-ink-soft)' }}
@@ -263,16 +290,45 @@
             </div>
         );
 
-        const StSlider = ({ label, value, min, max, step, onChange, display }) => (
+        const StSlider = ({ label, value, min, max, step, onChange, valueNode }) => (
             <div className="st-slider">
                 <div className="st-slider-top">
                     <span dangerouslySetInnerHTML={{ __html: label }} />
-                    <span className="v">{display}</span>
+                    {valueNode}
                 </div>
                 <input type="range" min={min} max={max} step={step} value={value}
                        onChange={(e) => onChange(parseFloat(e.target.value))} />
             </div>
         );
+
+        // Editerbar inmatningsruta — godtagit värde behöver INTE ligga inom
+        // glidarens intervall. min/max här är bara fysiska skyddsgränser
+        // (t.ex. vinkel 0–90°, massa > 0). Skriv in med komma eller punkt.
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').trim();
+                if (norm === '' || norm === '-' || norm === '.' || norm === '-.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
 
         // ════════════════════════════════════════════════════════
         //  SCEN — lutande plan
@@ -292,21 +348,32 @@
         // inbördes jämförbara där det spelar roll.
         const lenF = (F) => (F <= 0.1 ? 0 : Math.max(13, Math.min(F * kF, 172)));
 
-        const PlaneScene = ({ alpha, m, mu, mode, tCur, sliding, atLimit, FG, FN, Fpar, Ff, aPhys, show, svgRef }) => {
+        const PlaneScene = ({ alpha, m, mu, mode, tCur, sliding, atLimit, FG, FN, Fpar, Ff, aPhys, show, svgRef, dragging, drag, flipped }) => {
             const aRad = alpha * DEG;
             const sinA = Math.sin(aRad), cosA = Math.cos(aRad);
-            const A = { x: AX, y: GROUND_Y };
-            const u = { x: cosA, y: -sinA };          // uppför planet (mot höger)
-            const nout = { x: -sinA, y: -cosA };      // utåtnormal (upp-vänster)
-            const nin = { x: sinA, y: cosA };         // inåt (ned i planet)
-            const dn = { x: -cosA, y: sinA };         // nedför planet (ned-vänster)
+            // flip = -1 speglar scenen i x-led: foten flyttas till höger och
+            // planet lutar nedåt åt höger i stället för åt vänster. Alla
+            // x-komponenter i riktningsvektorerna multipliceras med flip.
+            const flip = flipped ? -1 : 1;
+            // I spegelläge ligger den höga kanten (toppens fotpunkt B) till vänster.
+            // För att den ska hamna nära vänsterkanten (och inte lämna tom yta)
+            // läggs foten A dynamiskt så att B alltid pinnas vid x = AX. Toppvertexen
+            // (drag-handtaget) hamnar då också vid x = AX. I normalläge ligger foten
+            // fast vid AX som vanligt.
+            const A = { x: flipped ? AX + LHYP * cosA : AX, y: GROUND_Y };
+            const u = { x: cosA * flip, y: -sinA };   // uppför planet
+            const nout = { x: -sinA * flip, y: -cosA }; // utåtnormal
+            const nin = { x: sinA * flip, y: cosA };  // inåt (ned i planet)
+            const dn = { x: -cosA * flip, y: sinA };  // nedför planet
             const top = { x: A.x + LHYP * u.x, y: A.y + LHYP * u.y };
-            const Bx = A.x + LHYP * cosA;             // toppens fotpunkt
+            const Bx = A.x + LHYP * cosA * flip;      // toppens fotpunkt
             const B = { x: Bx, y: GROUND_Y };
 
-            // objektets storlek
-            const HALF = 42 + (m - 1) * 1.3;          // halv längd längs planet
-            const HH = 52 + (m - 1) * 1.1;            // höjd
+            // objektets storlek — visuell storlek capas vid stora massor (fritt
+            // inmatade värden kan vara mycket stora) så lådan inte spränger scenen.
+            const mViz = Math.min(m, 14);
+            const HALF = 42 + (mViz - 1) * 1.3;       // halv längd längs planet
+            const HH = 52 + (mViz - 1) * 1.1;         // höjd
             // kontaktpunkt (basens mitt) på hypotenusan, och tyngdpunkt C
             const S = { x: A.x + tCur * LHYP * u.x, y: A.y + tCur * LHYP * u.y };
             const C = { x: S.x + nout.x * (HH / 2), y: S.y + nout.y * (HH / 2) };
@@ -319,11 +386,30 @@
             const gTip = { x: C.x, y: C.y + Lg };                       // F_G rakt ned
             const perpTip = { x: C.x + nin.x * Ln, y: C.y + nin.y * Ln };   // F_G·cosα (ned i planet)
             const parTip = { x: C.x + dn.x * Lp, y: C.y + dn.y * Lp };      // F_G·sinα (nedför)
-            const normTip = { x: C.x + nout.x * Ln, y: C.y + nout.y * Ln }; // F_N (ut, lika lång som perp)
+            const normTip = { x: S.x + nout.x * Ln, y: S.y + nout.y * Ln }; // F_N (från ytan, lika lång som perp)
 
-            // vinkelbåge vid A
+            // vinkelbåge vid A — flyttas dynamiskt utåt om lådan skymmer foten
+            // (liten vinkel + låda nere vid foten) så att bågen och "α = ..."
+            // alltid går att läsa av. Bågens vertex ligger kvar i A; en större
+            // radie placerar både båge och etikett bortom lådans övre kant.
             const R = 40;
-            const arc = `M ${A.x + R} ${A.y} A ${R} ${R} 0 0 0 ${A.x + R * u.x} ${A.y + R * u.y}`;
+            const sNear = tCur * LHYP - HALF;          // lådans nedre kant (avstånd från A längs planet)
+            const sFar = tCur * LHYP + HALF;           // lådans övre kant
+            const boxAtFoot = sNear < R + 26;          // lådan skymmer foten
+            // Bågen skjuts dynamiskt åt höger när vinkeln MINSKAR. Öppningen mellan
+            // mark och plan vid bågens spets är ≈ Rang·sin α; genom att låta
+            // Rang ∝ 1/sin α hålls öppningen ungefär konstant (minGap), så att
+            // "α = ..." alltid får plats i kilen och inte hamnar ovanpå planlinjen.
+            // Vid lådan-vid-foten hålls bågen dessutom bortom lådans övre kant.
+            const minGap = 34;                         // önskad lodrät öppning (px) för läsbarhet
+            const Rread = alpha > 0.5 ? minGap / Math.sin(aRad) : R;
+            const boxClear = boxAtFoot ? sFar + 26 : 0;
+            const Rang = Math.min(Math.max(R, boxClear, Rread), LHYP * 0.72);
+            const arcEnd = { x: A.x + Rang * u.x, y: A.y + Rang * u.y };
+            const arc = `M ${A.x + Rang * flip} ${A.y} A ${Rang} ${Rang} 0 0 ${flipped ? 1 : 0} ${arcEnd.x} ${arcEnd.y}`;
+            // Etiketten sitter omedelbart till HÖGER om bågen, inne i den öppna
+            // kilen mellan mark och plan, så att "α = ..." tydligt hör ihop med bågen.
+            const angLbl = { x: A.x + flip * (Rang + 13), y: A.y - 8 };
 
             const stateText = mode === 'vagn'
                 ? (alpha < 0.5 ? 'Vågrätt — vagnen står still' : 'Vagnen rullar fritt nedför — ingen friktion')
@@ -362,21 +448,21 @@
                     {/* lutande planet (triangel) */}
                     <polygon points={`${A.x},${A.y} ${B.x},${B.y} ${top.x},${top.y}`}
                              fill="url(#planeG)" stroke={COL.ink} strokeWidth="2.5" strokeLinejoin="round" />
-                    {/* mark + snedstreck under marken */}
+                    {/* marklinje (inga snedstreck) */}
                     <line x1="30" y1={GROUND_Y} x2={VBW - 20} y2={GROUND_Y} stroke={COL.ink} strokeWidth="3" strokeLinecap="round" />
-                    <Hatch x0="44" x1={VBW - 28} y={GROUND_Y} />
 
                     {/* vinkel α vid foten */}
                     <path d={arc} fill="none" stroke={COL.ink} strokeWidth="1.6" />
-                    <text x={A.x + R + 13} y={A.y - 13} fontSize="22" fontWeight="700" fill={COL.ink}>
-                        <tspan fontStyle="italic">α</tspan> = {fmt(alpha, 0)}°
+                    <text x={angLbl.x} y={angLbl.y} fontSize="22" fontWeight="700" fill={COL.ink}
+                          textAnchor={flipped ? 'end' : 'start'}>
+                        <tspan fontStyle="italic">α</tspan> = {fmtDeg(alpha)}°
                     </text>
 
                     {/* tillståndstext överst */}
                     <Tag x={VBW / 2} y={40} color={stateCol} size={21}>{stateText}</Tag>
 
                     {/* ── OBJEKTET (roterat längs planet) ── */}
-                    <g transform={`rotate(${-alpha} ${C.x} ${C.y})`}>
+                    <g transform={`rotate(${flipped ? alpha : -alpha} ${C.x} ${C.y})`}>
                         {mode === 'lada' ? (
                             <g>
                                 <rect x={C.x - HALF} y={C.y - HH / 2} width={HALF * 2} height={HH} rx="6"
@@ -396,10 +482,6 @@
                                 <circle cx={C.x + HALF - wheelR - 3} cy={wy} r="2.6" fill="#c9ced6" />
                             </g>
                         )}
-                        <text x={C.x} y={C.y + 6} textAnchor="middle" fontSize={HALF > 60 ? 20 : 18}
-                              fontWeight="700" fill={mode === 'lada' ? '#3a2a10' : '#eaf2fb'}>
-                            <tspan fontStyle="italic">m</tspan> = {fmt(m, 1)} kg
-                        </text>
                     </g>
 
                     {/* ── TYNGDKRAFT (diagonal) — visas med krafter ELLER komposanter ── */}
@@ -415,7 +497,7 @@
                             {/* När komposanterna visas är F_G diagonalen — ingen etikett
                                  (annars krockar den med F_2). Bara i ren kraftvy får den värde. */}
                             {!show.components && (
-                                <Tag x={gTip.x + 13} y={gTip.y + 5} color={COL.tyngd} size={18} anchor="start">
+                                <Tag x={gTip.x + flip * 13} y={gTip.y + 5} color={COL.tyngd} size={18} anchor={flipped ? 'end' : 'start'}>
                                     <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">G</tspan>
                                     <tspan dy="-4"> = {fmt(FG)} N</tspan>
                                 </Tag>
@@ -435,12 +517,12 @@
                             <Arrow x1={C.x} y1={C.y} x2={parTip.x} y2={parTip.y} color={COL.tyngd} width={6} head={18} />
                             <Arrow x1={C.x} y1={C.y} x2={perpTip.x} y2={perpTip.y} color={COL.tyngd} width={6} head={18} />
                             {/* F_1 (parallell komposant, nedför) — etikett nedanför pilspetsen, till vänster */}
-                            <Tag x={parTip.x - 8} y={parTip.y + 20} color={COL.tyngd} size={17} anchor="end">
+                            <Tag x={parTip.x - flip * 8} y={parTip.y + 20} color={COL.tyngd} size={17} anchor={flipped ? 'start' : 'end'}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">1</tspan>
                                 <tspan dy="-4"> = {fmt(Fpar)} N</tspan>
                             </Tag>
                             {/* F_2 (vinkelrät komposant, in i planet) — etikett till höger om pilspetsen */}
-                            <Tag x={perpTip.x + 11} y={perpTip.y + 6} color={COL.tyngd} size={17} anchor="start">
+                            <Tag x={perpTip.x + flip * 11} y={perpTip.y + 6} color={COL.tyngd} size={17} anchor={flipped ? 'end' : 'start'}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">2</tspan>
                                 <tspan dy="-4"> = {fmt(FN)} N</tspan>
                             </Tag>
@@ -450,13 +532,14 @@
                     {/* ── NORMALKRAFT & FRIKTION ── */}
                     {show.forces && (
                         <g>
-                            {/* Normalkraft — ut från ytan, lika lång som vinkelräta komposanten */}
-                            <Arrow x1={C.x} y1={C.y} x2={normTip.x} y2={normTip.y} color={COL.norm} />
-                            <Tag x={normTip.x + nout.x * 14} y={normTip.y + nout.y * 14 + 5} color={COL.norm} size={18} anchor="end">
+                            {/* Normalkraft — utgår från kontaktytan (S) mellan kloss och plan,
+                                 lika lång som vinkelräta komposanten */}
+                            <Arrow x1={S.x} y1={S.y} x2={normTip.x} y2={normTip.y} color={COL.norm} />
+                            <circle cx={S.x} cy={S.y} r="3" fill={COL.norm} />
+                            <Tag x={normTip.x + nout.x * 14} y={normTip.y + nout.y * 14 + 5} color={COL.norm} size={18} anchor={flipped ? 'start' : 'end'}>
                                 <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">N</tspan>
                                 <tspan dy="-4"> = {fmt(FN)} N</tspan>
                             </Tag>
-                            <RightAngle x={S.x} y={S.y} d1={u} d2={nout} />
                             {/* Friktionskraft — uppför planet, med angreppspunkt i lådans
                                  NEDRE HÖGRA HÖRN (uppför-änden av baskanten). Då hamnar pilen
                                  i fri yta uppför planet, utan att tränga ihop sig i mitten. */}
@@ -472,7 +555,7 @@
                                         <circle cx={cR.x} cy={cR.y} r="5" fill={COL.frik} stroke="rgba(15,22,32,0.5)" strokeWidth="1" />
                                         {/* Etiketten STARTAR vid pilspetsen och löper utåt (uppför,
                                              åt höger) i fri yta — aldrig ovanpå lådan. */}
-                                        <Tag x={ft.x + u.x * 8 + 9} y={ft.y + u.y * 8 - 4} color={COL.frik} size={17} anchor="start">
+                                        <Tag x={ft.x + (boxAtFoot ? nout.x * 24 + flip * 4 : u.x * 8 + flip * 9)} y={ft.y + (boxAtFoot ? nout.y * 24 - 2 : u.y * 8 - 4)} color={COL.frik} size={17} anchor={flipped ? 'end' : 'start'}>
                                             <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">f</tspan>
                                             <tspan dy="-4"> = {fmt(Ff)} N</tspan>
                                         </Tag>
@@ -490,12 +573,32 @@
                         return (
                             <g>
                                 <Arrow x1={a0.x} y1={a0.y} x2={a1.x} y2={a1.y} color={COL.acc} width={7} head={20} />
-                                <Tag x={a1.x + dn.x * 4 - 4} y={a1.y + dn.y * 4 - 11} color={COL.acc} size={18} anchor="end">
+                                <Tag x={a1.x + dn.x * 4 - flip * 4} y={a1.y + dn.y * 4 - 11} color={COL.acc} size={18} anchor={flipped ? 'start' : 'end'}>
                                     <tspan fontStyle="italic">a</tspan> = {fmt(aPhys, 2)} m/s²
                                 </Tag>
                             </g>
                         );
                     })()}
+
+                    {/* ── DRAG-HANDTAG vid plantoppen — dra upp/ned för att ändra α ──
+                         Mörk kontroll med vit ikon (samma konvention som fs-btn);
+                         vit stroke är tillåten på mörk yta, inte en halo på papper. */}
+                    <g style={{ cursor: dragging ? 'grabbing' : 'grab' }}
+                       onPointerDown={drag.down} onPointerMove={drag.move}
+                       onPointerUp={drag.up} onPointerCancel={drag.up}>
+                        {/* generös, osynlig träffyta */}
+                        <circle cx={top.x} cy={top.y} r="28" fill="transparent" />
+                        {/* synligt handtag */}
+                        <circle cx={top.x} cy={top.y} r="13" fill={COL.ink}
+                                stroke="#fff" strokeWidth="1.5"
+                                opacity={dragging ? 1 : 0.9} />
+                        <g stroke="#fff" strokeWidth="2" strokeLinecap="round"
+                           strokeLinejoin="round" fill="none">
+                            <line x1={top.x} y1={top.y - 7.5} x2={top.x} y2={top.y + 7.5} />
+                            <polyline points={`${top.x - 4},${top.y - 4} ${top.x},${top.y - 7.5} ${top.x + 4},${top.y - 4}`} />
+                            <polyline points={`${top.x - 4},${top.y + 4} ${top.x},${top.y + 7.5} ${top.x + 4},${top.y + 4}`} />
+                        </g>
+                    </g>
                 </svg>
             );
         };
@@ -504,8 +607,11 @@
         const AngleGraph = ({ alpha, m, mu, mode, FG }) => {
             const W = 320, H = 210, padL = 42, padR = 14, padT = 14, padB = 34;
             const gw = W - padL - padR, gh = H - padT - padB;
+            // x-axeln växer om vinkeln skrivs in större än glidarens max, så
+            // att den aktuella punkten alltid ryms i diagrammet.
+            const axMax = Math.max(ALPHA_MAX, Math.ceil(alpha));
             const yMax = Math.max(FG * 1.05, 12);
-            const px = (deg) => padL + (deg / ALPHA_MAX) * gw;
+            const px = (deg) => padL + (deg / axMax) * gw;
             const py = (f) => padT + gh - (f / yMax) * gh;
 
             const par = (deg) => FG * Math.sin(deg * DEG);
@@ -514,13 +620,13 @@
             const N = 48;
             const parPts = [], fmaxPts = [];
             for (let i = 0; i <= N; i++) {
-                const deg = (i / N) * ALPHA_MAX;
+                const deg = (i / N) * axMax;
                 parPts.push(`${px(deg)},${py(par(deg))}`);
                 fmaxPts.push(`${px(deg)},${py(fmax(deg))}`);
             }
             // tröskel: tan α = μ
             const thr = Math.atan(mu) / DEG;
-            const showThr = mode === 'lada' && thr <= ALPHA_MAX;
+            const showThr = mode === 'lada' && thr <= axMax;
 
             return (
                 <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'auto', fontFamily: "'DM Sans', sans-serif" }}>
@@ -570,7 +676,7 @@
                 <span className="fnum">·</span>
                 <Vbl label="sin lutningsvinkel">sin <em>α</em></Vbl>
                 <span className="fnum">=</span>
-                <span className="fnum">{fmt(m, 1)} · 9,82 · sin {fmt(alpha, 0)}°</span>
+                <span className="fnum">{fmt(m, 1)} · 9,82 · sin {fmtDeg(alpha)}°</span>
                 <span className="fnum">=</span>
                 <span className="fnum" style={{ fontWeight: 700 }}>{fmt(Fpar)} N</span>
             </div>
@@ -589,6 +695,8 @@
             const [v, setV] = useState(0);              // fart längs planet (px/s, internt)
 
             const [isFullscreen, setIsFullscreen] = useState(false);
+            const [dragging, setDragging] = useState(false);
+            const [flipped, setFlipped] = useState(false);   // spegelvänd scen
             const sceneWrapRef = useRef(null);
             const svgRef = useRef(null);
             const rafRef = useRef(null);
@@ -597,7 +705,7 @@
             const tRef = useRef(0.66);
 
             const T0 = 0.66;
-            const HALF0 = 30 + (m - 1) * 1.1;
+            const HALF0 = 30 + (Math.min(m, 14) - 1) * 1.1;
             const tFoot = (HALF0 + 10) / LHYP;          // stannar strax före foten
 
             const aRad = alpha * DEG;
@@ -637,7 +745,7 @@
                     }
                     if (nv > 1400) nv = 1400;
                     let nt = tRef.current - (nv / LHYP) * dt;
-                    const footT = (30 + (m - 1) * 1.1 + 10) / LHYP;
+                    const footT = (30 + (Math.min(m, 14) - 1) * 1.1 + 10) / LHYP;
                     if (nt <= footT) { nt = footT; nv = 0; }
                     vRef.current = nv; tRef.current = nt;
                     setV(nv); setTCur(nt);
@@ -668,6 +776,44 @@
                 else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
             };
 
+            // ── Dra plantoppen → räkna om lutningsvinkeln ──
+            // Vinkeln är riktningen från foten (A) till muspekaren; håll den i
+            // [0, 90] och avrunda till hela grader. Foten ligger till höger när
+            // scenen är spegelvänd, så x-riktningen mäts mot planets insida.
+            const pointToAlpha = (clientX, clientY) => {
+                const svg = svgRef.current;
+                if (!svg) return;
+                const ctm = svg.getScreenCTM();
+                if (!ctm) return;
+                const pt = svg.createSVGPoint();
+                pt.x = clientX; pt.y = clientY;
+                const loc = pt.matrixTransform(ctm.inverse());
+                const dy = GROUND_Y - loc.y;                     // uppåt positiv
+                let ang;
+                if (flipped) {
+                    // Toppvertexen är pinnad vid x = AX och rör sig vertikalt;
+                    // höjden över marken ger vinkeln direkt.
+                    ang = Math.asin(Math.max(0, Math.min(1, dy / LHYP))) / DEG;
+                } else {
+                    ang = Math.atan2(dy, loc.x - AX) / DEG;
+                }
+                ang = Math.max(0, Math.min(90, Math.round(ang)));
+                setAlpha(ang);
+            };
+            const drag = {
+                down: (e) => {
+                    e.preventDefault();
+                    setDragging(true);
+                    e.currentTarget.setPointerCapture?.(e.pointerId);
+                    pointToAlpha(e.clientX, e.clientY);
+                },
+                move: (e) => { if (dragging) pointToAlpha(e.clientX, e.clientY); },
+                up: (e) => {
+                    setDragging(false);
+                    e.currentTarget.releasePointerCapture?.(e.pointerId);
+                },
+            };
+
             const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
             const resetPos = () => { vRef.current = 0; tRef.current = T0; setV(0); setTCur(T0); };
             const reset = () => { resetPos(); setRunning(true); };
@@ -684,13 +830,18 @@
                     <div className="st-title mt">Objekt</div>
                     <label><input type="radio" name="mode" checked={mode === 'lada'} onChange={() => setModeReset('lada')} /><span>Låda (med friktion)</span></label>
                     <label><input type="radio" name="mode" checked={mode === 'vagn'} onChange={() => setModeReset('vagn')} /><span>Vagn (utan friktion)</span></label>
+                    <div className="st-title mt">Vy</div>
+                    <label><input type="checkbox" checked={flipped} onChange={() => setFlipped((f) => !f)} /><span>Spegelvänd</span></label>
                     {isFullscreen && (
                         <React.Fragment>
                             <div className="st-title mt">Reglage</div>
-                            <StSlider label="Lutningsvinkel <em>α</em>" value={alpha} min={0} max={ALPHA_MAX} step={1} onChange={setAlpha} display={`${fmt(alpha, 0)}°`} />
-                            <StSlider label="Massa <em>m</em>" value={m} min={1} max={12} step={0.5} onChange={setM} display={`${fmt(m, 1)} kg`} />
+                            <StSlider label="Lutningsvinkel <em>α</em>" value={alpha} min={0} max={ALPHA_MAX} step={1} onChange={setAlpha}
+                                      valueNode={<NumInput value={alpha} min={0} max={90} fmtFn={fmtDeg} unit="°" onCommit={setAlpha} />} />
+                            <StSlider label="Massa <em>m</em>" value={m} min={1} max={12} step={0.5} onChange={setM}
+                                      valueNode={<NumInput value={m} min={0.1} max={null} fmtFn={(v) => fmt(v, 1)} unit="kg" onCommit={setM} />} />
                             {mode === 'lada' && (
-                                <StSlider label="Friktionstal <em>μ</em>" value={mu} min={0} max={1} step={0.01} onChange={setMu} display={fmt(mu, 2)} />
+                                <StSlider label="Friktionstal <em>μ</em>" value={mu} min={0} max={1} step={0.01} onChange={setMu}
+                                          valueNode={<NumInput value={mu} min={0} max={null} fmtFn={(v) => fmt(v, 2)} color={COL.frik} onCommit={setMu} />} />
                             )}
                             <div className="st-actions">
                                 <button className="btn-toggle" onClick={() => setRunning((r) => !r)}>{primaryLabel}</button>
@@ -726,9 +877,14 @@
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
                                     <PlaneScene alpha={alpha} m={m} mu={mu} mode={mode} tCur={tCur}
                                                 sliding={sliding} atLimit={atLimit} FG={FG} FN={FN}
-                                                Fpar={Fpar} Ff={Ff} aPhys={aPhys} show={show} svgRef={svgRef} />
+                                                Fpar={Fpar} Ff={Ff} aPhys={aPhys} show={show} svgRef={svgRef}
+                                                dragging={dragging} drag={drag} flipped={flipped} />
+                                    <div className="scene-info">
+                                        <span className="si-lbl">Massa</span>
+                                        <span className="si-val"><span style={{ fontStyle: 'italic' }}>m</span> = {fmt(m, 1)} kg</span>
+                                    </div>
                                     <div className="scene-hint">
-                                        Öka <em>α</em> tills <em>F</em><sub>1</sub> &gt; <em>μ</em>·<em>F</em><sub>N</sub> — då börjar lådan glida. Luftmotstånd försummas.
+                                        Dra det översta hörnet för att ändra lutningen <em>α</em>. Luftmotstånd försummas.
                                     </div>
                                     {sceneToggles()}
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
@@ -764,14 +920,14 @@
                                 {/* Reglage */}
                                 <div className="glass-card rounded-xl p-3 mb-3">
                                     <Slider label="Lutningsvinkel <em>α</em>" value={alpha} min={0} max={ALPHA_MAX} step={1} onChange={setAlpha}>
-                                        <span className="font-mono font-semibold text-sm flex-shrink-0" style={{ minWidth: 60, textAlign: 'right', color: 'var(--lab-accent)' }}>{fmt(alpha, 0)}°</span>
+                                        <NumInput value={alpha} min={0} max={90} fmtFn={fmtDeg} unit="°" onCommit={setAlpha} />
                                     </Slider>
                                     <Slider label="Massa <em>m</em>" value={m} min={1} max={12} step={0.5} onChange={setM}>
-                                        <span className="font-mono font-semibold text-sm flex-shrink-0" style={{ minWidth: 60, textAlign: 'right', color: 'var(--lab-accent)' }}>{fmt(m, 1)} kg</span>
+                                        <NumInput value={m} min={0.1} max={null} fmtFn={(v) => fmt(v, 1)} unit="kg" onCommit={setM} />
                                     </Slider>
                                     {mode === 'lada' && (
                                         <Slider label="Friktionstal <em>μ</em>" value={mu} min={0} max={1} step={0.01} onChange={setMu}>
-                                            <span className="font-mono font-semibold text-sm flex-shrink-0" style={{ minWidth: 60, textAlign: 'right', color: COL.frik }}>{fmt(mu, 2)}</span>
+                                            <NumInput value={mu} min={0} max={null} fmtFn={(v) => fmt(v, 2)} color={COL.frik} onCommit={setMu} />
                                         </Slider>
                                     )}
                                     <div className="flex gap-2 mt-2">

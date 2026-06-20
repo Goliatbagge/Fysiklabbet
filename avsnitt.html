@@ -272,6 +272,9 @@
 
         // Frontmatter-parser (enkel YAML utan beroenden)
         function parseFrontmatter(md) {
+            // Normalisera radslut — annars läcker frontmattern in i body på
+            // CRLF-poster (då '---\r\n' inte matchar '---\n').
+            md = md.replace(/\r\n/g, '\n');
             if (!md.startsWith('---\n')) return { fm: {}, body: md };
             const end = md.indexOf('\n---\n', 4);
             if (end === -1) return { fm: {}, body: md };

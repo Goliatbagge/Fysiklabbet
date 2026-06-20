@@ -31,6 +31,57 @@
  */
 window.NYHETER = [
   {
+    id: "2026-06-20-gravastjarna-miniuniversum",
+    date: "2026-06-20",
+    title: "En döende stjärna kan föda ett helt nytt universum",
+    deck: "Två fysiker i Frankfurt har för första gången visat hur en kollapsande jättestjärna kan bli något annat än ett svart hål — en så kallad gravastjärna, fylld med mörk energi och med ett expanderande miniuniversum i sitt inre.",
+    category: "Astrofysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-06-20-gravastjarna-miniuniversum.jpg",
+    imageAlt: "En massiv stjärna som kollapsar inåt med glödande orange yttre lager, medan en lysande blå sfär med spiralgalaxer expanderar i dess centrum — en illustration av ett miniuniversum som föds inne i stjärnan.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["astrofysik", "gravitationsfysik", "svarta hål", "gravastjärnor", "mörk energi", "allmän relativitetsteori", "kosmologi"],
+    sources: [
+      { name: "ScienceDaily", url: "https://www.sciencedaily.com/releases/2026/06/260614011846.htm" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-06-collapsing-stars-spawn-mini-universes.html" },
+      { name: "Goethe-Universität Frankfurt", url: "https://www.uni-frankfurt.de/en/newsroom/meldungen/pressemitteilungen/2026/urknall-im-innern-eines-sterns-wie-ein-gravastern-entsteht" }
+    ],
+    research: {
+      citation: "D. Jampolski & L. Rezzolla, “Formation of gravastars”, Physical Review D 113 (2026)",
+      url: "https://doi.org/10.1103/c6lw-nx7k"
+    },
+    body: [
+      { type: "p", html: "När en massiv stjärna har bränt sitt sista kärnbränsle finns ingen kraft kvar att stå emot gravitationen. Stjärnan kollapsar. Standardsvaret i läroböckerna: den bildar ett svart hål, ett objekt så kompakt att inte ens ljus kan undkomma, med en singularitet i centrum där alla kända fysikaliska lagar slutar gälla. Men tänk om det finns en annan utgång?" },
+      { type: "p", html: "Två teoretiska fysiker vid Goethe-universitetet i Frankfurt — doktoranden Daniel Jampolski och professor Luciano Rezzolla — har hittat den första <strong>dynamiska lösningen</strong> till Einsteins fältekvationer som beskriver hur en kollapsande stjärna kan bli något helt annat: en <em>gravastjärna</em>. Resultatet publicerades i <em>Physical Review D</em> den 11&nbsp;juni 2026." },
+
+      { type: "h2", text: "Ett svart hål utan svart hål" },
+      { type: "p", html: "Begreppet gravastjärna (från engelskans <em>gravastar</em>, gravitational vacuum star) föreslogs redan 2001 av fysikerna Pawel Mazur och Emil Mottola. Idén: ett ultrakompakt objekt som utifrån ser nästan identiskt ut med ett svart hål — lika massivt, lika kompakt — men som saknar de två egenskaper som gör svarta hål så besvärliga för fysiken." },
+      { type: "p", html: "För det första har en gravastjärna ingen <strong>singularitet</strong>, den punkt där densiteten formellt blir oändlig och ekvationerna sprängs. För det andra saknar den en <strong>händelsehorisont</strong>, den osynliga gräns varifrån ingenting kan återvända. I stället är gravastjärnans inre fyllt med mörk energi — samma mystiska kraft som driver universums accelererande expansion — och den energin utövar ett utåtriktat tryck som stabiliserar strukturen." },
+      { type: "p", html: "Problemet var att ingen kunde visa <em>hur</em> en gravastjärna faktiskt skulle uppstå ur en kollapsande stjärna. Alla tidigare lösningar var statiska — de beskrev färdiga gravastjärnor men inte processen som skapar dem. Det är ungefär som att visa en bild på ett färdigbakat bröd utan att ha receptet." },
+
+      { type: "h2", text: "Urknall inuti en stjärna" },
+      { type: "p", html: "Jampolski hittade receptet under sitt examensarbete. Hans lösning beskriver ett häpnadsväckande scenario: när stjärnan har kollapsat nästan till den punkt där ett svart hål skulle bildas, uppstår ett embryonalt miniuniversum i den komprimerade materien. Det miniuniversumet genomgår sin egen urknall — en expansion driven av mörk energi som trycker utåt och motverkar gravitationens inåtriktade drag." },
+      { type: "quote", html: "Urknallen i det framväxande universumet kan utvecklas först när stjärnan redan har kollapsat nästan till den punkt där den skulle bli ett svart hål.", cite: "Daniel Jampolski, Goethe-universitetet" },
+      { type: "p", html: "Resultatet är en jämvikt: expansionen balanserar kollapsen, och singulariteten bildas aldrig. Kvar står en stabil gravastjärna — ett objekt som för en utomstående observatör ser ut precis som ett svart hål, men som i sitt inre rymmer en helt annan fysik." },
+
+      { type: "h2", text: "Varför hatar fysiker singulariteter?" },
+      { type: "p", html: "Singulariteter är fysikens motsvarighet till ett felmeddelande. De signalerar att våra teorier når sin gräns — att vi saknar en pusselbit. De flesta fysiker tror att singulariteter egentligen inte existerar i naturen utan är en artefakt av att den allmänna relativitetsteorin inte räcker hela vägen. En teori som förutsäger oändligheter har sannolikt ett hål. Gravastjärnan erbjuder en elegant utväg: den behåller det som gör svarta hål så fascinerande — den extrema kompaktheten — men undviker den punkt där fysiken kraschar." },
+      { type: "p", html: "Rezzolla betonar att forskningen handlar om att hålla dörren öppen: "Det är avgörande att behålla ett opartiskt förhållningssätt till det vi inte vet, och utforska både den vedertagna visdomen och de mer exotiska tolkningarna."" },
+
+      { type: "h2", text: "Kan vi någonsin avgöra skillnaden?" },
+      { type: "p", html: "Om en gravastjärna ser ut precis som ett svart hål utifrån, hur ska vi då veta vilken sorts objekt vi observerar? Svaret kan ligga i <strong>gravitationsvågor</strong>. När två ultrakompakta objekt kolliderar och smälter samman vibrerar det sammanslagna objektet — ett fenomen som kallas ringning. Ringningens frekvenser beror på objektets inre struktur. Ett svart hål ringer på ett sätt, en gravastjärna på ett annat. Dessutom saknar en gravastjärna händelsehorisont, vilket betyder att gravitationsvågor kan studsa mot dess yta och skapa svaga <strong>ekon</strong> — en signal som LIGO och framtida detektorer aktivt letar efter." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "En gravastjärna har ingen händelsehorisont — till skillnad från ett svart hål kan ljus i princip undkomma från precis utanför dess yta.",
+        "Begreppet föreslogs 2001 av Pawel Mazur och Emil Mottola, men det saknades en förklaring av hur en gravastjärna faktiskt kunde bildas — tills nu.",
+        "Ordet gravastar är en förkortning av gravitational vacuum star (gravitationell vakuumstjärna).",
+        "Forskningen gjordes av Daniel Jampolski som en del av hans examensarbete — ett exempel på att banbrytande teoretisk fysik kan komma tidigt i karriären."
+      ]},
+      { type: "p", html: "Gravitation, svarta hål och allmän relativitetsteori hör hemma i Fysik&nbsp;2. Oavsett om framtida observationer bekräftar gravastjärnor eller inte, påminner upptäckten om att Einsteins ekvationer fortfarande kan överraska oss — mer än hundra år efter att de skrevs." }
+    ]
+  },
+
+  {
     id: "2026-06-19-kvantsammanflatning-kristall",
     date: "2026-06-19",
     title: "En kristall du kan hålla i handen är kvantsammanflätad",

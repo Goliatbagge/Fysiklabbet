@@ -1,6 +1,6 @@
 ---
 name: nyhetsagent
-description: Skapar Fysiklabbets dagliga fysiknyhet. Använd när en ny nyhet ska publiceras, kön ska fyllas på, eller nyhetssidan ska uppdateras. Letar nyheter på Phys.org, Physics Magazine (APS), Physics World (IOP), Quanta Magazine och ScienceDaily, väljer den mest relevanta, skriver en populärvetenskaplig artikel på svenska och lägger till den i data/nyheter.js.
+description: Skapar Fysiklabbets dagliga fysiknyhet. Använd när en ny nyhet ska publiceras, kön ska fyllas på, eller nyhetssidan ska uppdateras. Letar nyheter på Phys.org, Physics Magazine (APS), Physics World (IOP), Quanta Magazine, ScienceDaily och Nature, väljer den mest relevanta, skriver en populärvetenskaplig artikel på svenska och lägger till den i data/nyheter.js.
 model: sonnet
 ---
 
@@ -57,11 +57,12 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
 - **Physics World (IOP)**: https://physicsworld.com/
 - **Quanta Magazine — Physics**: https://www.quantamagazine.org/physics/
 - **ScienceDaily — Physics**: https://www.sciencedaily.com/news/matter_energy/physics/
+- **Nature**: https://www.nature.com/nature/articles
 
 Använd WebSearch/WebFetch. **Korsläs** gärna nyheten mot fler än en källa och mot
 originalpublikationen innan du skriver — siffror och namn måste stämma.
 
-**De fem källorna ovan är utgångspunkten för att HITTA dagens nyhet — inte en gräns
+**De sex källorna ovan är utgångspunkten för att HITTA dagens nyhet — inte en gräns
 för var du får läsa.** När du väl valt en nyhet får (och bör) du söka vidare fritt på
 andra sidor för att fördjupa dig: universitetens och labbens egna pressmeddelanden,
 originaltidskriften (Nature, Science, PRL, arXiv …), NASA/ESA/CERN, andra

@@ -244,6 +244,7 @@ window.KATALOG = {
               { num: '5.1', title: 'Månens faser', description: 'Månens position i banan ger de olika månfaserna.', href: 'fysik2-manens-faser.html', icon: '🌙', keywords: ['astronomi','måne','faser','omloppsbana','jorden','sol','3d'] },
               { num: '5.2', title: 'Solens färg', description: 'Rayleighspridning — varför solen skiftar färg över dagen.', href: 'fysik2-solens-farg.html', icon: '🌅', keywords: ['vågor','optik','sol','rayleigh','spridning','atmosfär','färg','ljus','himmel','solnedgång'] },
               { num: '5.3', title: 'Svarta hål', description: 'Flykthastighet, händelsehorisont och Schwarzschildradien.', href: null, icon: '🕳️', keywords: ['astronomi','svart hål','svarta hål','händelsehorisont','schwarzschild','flykthastighet','gravitation','singularitet','supernova','neutronstjärna','relativitet','gravitationsvågor'] },
+              { num: '5.4', title: 'Stjärnbildning', description: 'Från gasmoln till stjärna — gravitation mot tryck, fusion tänds.', href: null, icon: '✦', keywords: ['astronomi','stjärna','stjärnbildning','protostjärna','molekylmoln','gravitation','fusion','huvudserien','gasmoln','supernova','stjärnstoft','tryck'] },
             ],
           },
         },

@@ -1634,6 +1634,37 @@ button.lab-card-disabled { pointer-events: none; }
     color: var(--lab-ink-muted);
 }
 
+/* Figur — riktig konstruerad SVG-figur (ersätter platshållartexten).
+   Ingen streckad ram: figuren står direkt på pappret med ink-färg
+   (currentColor) så den ärver temat. */
+.lab-block-figur {
+    border: none;
+    background: transparent;
+    padding: 14px 8px;
+    text-align: center;
+    color: var(--lab-ink);
+}
+.lab-block-figur > svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+.lab-block-figur .lab-block-title {
+    color: var(--lab-ink-soft);
+    margin-bottom: 14px;
+}
+/* Kort bildtext under figuren. */
+.lab-block-figur .lab-figur-cap,
+.lab-block-figur p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--lab-ink-muted);
+    font-style: italic;
+    margin: 12px auto 0;
+    max-width: 46ch;
+}
+
 /* ── Formelrutans layout (variabellista bredvid eller under formeln) ──
    Byggs av buildFormelLayouts(); fitFormel() växlar till .is-stacked när
    formel + lista inte får plats bredvid varandra. */

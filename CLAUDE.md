@@ -20,6 +20,10 @@ node .claude/verify-navigation.js
 # ljusa scenbakgrunder (KÖR FÖRE COMMIT!)
 node .claude/verify-no-white-outline.js
 
+# Verifiera att teori-figurer (::: figur) har tät viewBox utan tom "luft"
+# i kanterna (KÖR FÖRE COMMIT!)
+node .claude/verify-figur-bounds.js
+
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
@@ -67,6 +71,45 @@ auto-reload; lägg det som rutin efter md-redigeringar.
 3. **Uppdatera** `.claude/verify-navigation.js` — lägg till filnamnet i `HTML_FILES_TO_CHECK`
 
 4. Direkt före `</body>`: `<script src="feedback.js" defer></script>` (feedback-widget)
+
+## ⚠️ KRITISK: Synka beteckningar och kurs med teorigenomgången
+
+**Innan du skapar (eller ändrar) en simulering MÅSTE du läsa motsvarande
+teorigenomgång i `data/teori/*.md` och använda EXAKT samma beteckningar,
+enheter och formelskrivning.** Simuleringen, katalogen och övningarna ska
+spegla genomgången — inte en egen variant. Detta är ett ÅTERKOMMANDE fel:
+en sim byggdes med egna beteckningar som inte stämde med elevernas
+genomgång, vilket förvirrar.
+
+**Originalgenomgångarna finns som PDF i `Genomgångar/Fysik 1/` och
+`Genomgångar/Fysik 2/`.** När du bygger figurer (eller simuleringar) ska du
+öppna motsvarande PDF (läs med Read, `pages`-param) och **efterlikna dess
+figurer** — perspektiv, vilka objekt som ritas, etiketter. Kapitelnumren i
+PDF-filnamnen skiljer sig från md-filerna → mappa via `title:`, inte numret
+(ex: md `fy1-3.2` "Newtons andra lag" = PDF `Fy 1 4.02 Newtons andra
+lag.pdf`). Projektet att ersätta `::: bild`-platshållare med riktiga
+inline-SVG-figurer styrs av `.claude/figurer-plan.md`.
+
+Gör så här, varje gång:
+
+1. **Hitta avsnittet.** Sök i `data/teori/` efter ämnet (t.ex.
+   `grep -rin "kraftmoment" data/teori/`). Filnamnet avslöjar kursen:
+   `fy1-*.md` → Fysik 1, `fy2-*.md` → Fysik 2. **Lägg simuleringen i samma
+   kurs som genomgången** (filnamn `fysikN-…`, breadcrumb, katalog-`#fyN`,
+   och länka den i rätt katalog-avsnitt i `data/katalog.js`). Ett ämne du
+   tror är Fysik 1 kan ligga i Fysik 2 i denna kursplan — kontrollera
+   alltid, gissa aldrig.
+2. **Kopiera beteckningarna exakt.** Variabelbokstäver, index och enheter
+   ska vara identiska med genomgången. Exempel som redan bitit:
+   - Hävarm betecknas **`l`** (kursiv), aldrig `r`. Kraftmoment: `M = F · l`.
+   - Enheten skrivs som i genomgången (t.ex. **`Nm`**, inte `N·m`, för
+     kraftmoment).
+   - Krafter följer master-konventionen (`F_G` med stort G osv.).
+3. **Spegla formeln.** Samma uppställning (`M = F · l`), samma ord-etiketter
+   och samma enhetsskrivning i formelkort, scen-etiketter, avläsningar,
+   katalogtext och uppdateringsrutan.
+4. **Vid minsta avvikelse mellan din sim och genomgången → rätta sim:en**,
+   inte genomgången (om inte användaren uttryckligen ber om motsatsen).
 
 ## Projektstruktur
 
@@ -548,6 +591,12 @@ inline-SVG-figurer (övningar) och canvas/SVG-renderade simuleringar.
 tyngd-/normalkraft, kontaktpunkten för friktion/normal mot underlag).
 Kraftpilens *bas* får alltså ligga inuti kroppen — det är hela poängen
 med en angreppspunkt.
+
+**Friktion mot underlag: angreppspunkten ligger i kroppens BAKKANT** (den
+kant som är "bak" sett i rörelse-/dragriktningen), inte i mitten. Puttas en
+låda åt höger → `F_f` pekar åt vänster med *svansen på lådans vänsterkant*
+(vid bottenhörnet) och pilen sticker ut åt vänster utanför lådan. Detta är
+ett uttryckligt önskemål från användaren.
 
 Hur du applicerar i kod:
 

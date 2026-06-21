@@ -269,6 +269,9 @@
         }
 
         function parseFrontmatter(md) {
+            // Normalisera radslut först — en CRLF-sparad md-fil (`---\r\n`)
+            // matchar annars inte och hela YAML-blocket läcker ut som text.
+            md = md.replace(/\r\n?/g, '\n');
             if (!md.startsWith('---\n')) return { fm: {}, body: md };
             const end = md.indexOf('\n---\n', 4);
             if (end === -1) return { fm: {}, body: md };

@@ -1,0 +1,5 @@
+# Teori-md läses som råtext av data/teori/build.js och frontmatter strippas
+# med `md.startsWith('---\n')`. CRLF-radslut (`---\r\n`) matchar inte → hela
+# YAML-blocket läcker ut som synlig text på teorisidan. Tvinga LF på md-filer
+# så att en Windows-editor inte återinför CRLF.
+*.md text eol=lf

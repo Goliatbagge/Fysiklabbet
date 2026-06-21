@@ -569,6 +569,9 @@
                     if (!node.nodeValue || !/\S/.test(node.nodeValue)) return NodeFilter.FILTER_REJECT;
                     for (let p = node.parentElement; p && p !== root; p = p.parentElement) {
                         if (SKIP[p.tagName]) return NodeFilter.FILTER_REJECT;
+                        // Hoppa över inline-SVG-figurer: ett <span> är ogiltigt
+                        // inuti SVG <text> och får bokstäverna att försvinna.
+                        if (p.namespaceURI === 'http://www.w3.org/2000/svg') return NodeFilter.FILTER_REJECT;
                         const c = p.classList;
                         if (c && (c.contains('katex') || c.contains('katex-display'))) return NodeFilter.FILTER_REJECT;
                     }

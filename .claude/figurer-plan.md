@@ -31,6 +31,10 @@ Status totalt: **222 figur-block i 69 filer.** Pilot klar (fy1-3.2).
   renderas i SVG-text).
 - CSS: `.lab-block-figur` i `styles-laborans.css` (ren, centrerad, bildtext
   via `<p>`/`.lab-figur-cap`).
+- `katalog.html` `applyBionic`: hoppar över SVG-namespace. **Kritiskt** —
+  annars injiceras `<span class="lab-bionic">` i SVG `<text>` (ogiltigt →
+  bokstäver försvinner, "F = 50 N" blev "= 50"). Körs ALLTID, oavsett om
+  bionic-toggeln är på. Etiketter ska alltså alltid renderas korrekt nu.
 
 ### Regler för SVG-källan (följ exakt — annars korrumperas figuren)
 - **Inga tomrader inuti `<svg>…</svg>`** (marked skulle bryta HTML-blocket).

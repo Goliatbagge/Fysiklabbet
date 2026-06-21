@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kraftmoment – Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        /* Editerbar inmatningsruta bredvid glidarna — fritt värde (kan gå
+           utanför glidarnas intervall). */
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 72px; }
+        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 540px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .btn-add {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-ink, #0f1620);
+            border-radius: 8px; padding: 9px 14px; font-weight: 600; cursor: pointer;
+            width: 100%; transition: all 0.15s ease;
+        }
+        .btn-add:hover { opacity: 0.88; }
+        .btn-add:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* ── Massrad i kontrollpanelen ── */
+        .mass-row { border: 1px solid var(--lab-line, rgba(15,22,32,0.16));
+            border-radius: 10px; padding: 9px 10px; margin-bottom: 9px;
+            background: rgba(255,255,255,0.35); }
+        .mass-row-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+        .mass-chip { width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+            color: #fff; font-size: 12px; font-weight: 700; display: flex;
+            align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; }
+        .mass-name { font-size: 14px; color: var(--lab-ink); font-weight: 600; flex-grow: 1; }
+        .mass-side { font-size: 11px; color: var(--lab-ink-muted); font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.04em; }
+        .mass-del { width: 24px; height: 24px; border-radius: 6px; cursor: pointer;
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink-soft);
+            font-size: 16px; line-height: 1; display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0; }
+        .mass-del:hover { border-color: var(--lab-accent); color: var(--lab-accent); }
+        .mass-ctl { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .mass-ctl .mass-lbl { font-size: 11px; color: var(--lab-ink-soft);
+            min-width: 64px; flex-shrink: 0; }
+        .mass-ctl input[type="range"] { flex: 1; cursor: pointer; min-width: 40px; }
+
+        /* Fullskärm: ljus pappersvariant på den nedre flytande panelen
+           (annars är .fs-controls mörk per default). */
+        .scene-wrap[data-theme="ljusPapper"] .fs-controls {
+            background: rgba(246,242,234,0.97); color: var(--lab-ink);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+            max-height: 46vh; overflow-y: auto; gap: 0;
+        }
+        .scene-wrap[data-theme="ljusPapper"] .fs-controls .mass-row { background: rgba(255,255,255,0.5); }
+        .scene-wrap[data-theme="ljusPapper"] .fs-toggle-handle {
+            background: rgba(246,242,234,0.97); color: var(--lab-ink);
+            border-color: var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .fs-controls .fs-mass-title { font-size: 11px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted); font-weight: 600;
+            margin-bottom: 8px; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Nyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const G = 9.82;                 // tyngdfaktorn (N/kg)
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        };
+        // Position med tecken (− vänster, + höger). Exakt noll → "0".
+        const fmtX = (num) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(2);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        const COL = {
+            tyngd: '#c8324a',  // crimson — tyngdkraft F_G
+            arm:   '#0d9488',  // teal — hävarm
+            ink:   '#0f1620',
+            ok:    '#0d7a52',  // jämvikt (grön)
+        };
+        const PALETTE = ['#c8324a', '#2563eb', '#0d9488', '#e0701a', '#7c3aed', '#b45309'];
+
+        // ── SVG-pil — mot ljus papperscen behövs ingen vit kontur. ──
+        const Arrow = ({ x1, y1, x2, y2, color, width = 6, head = 18, dash = false, opacity = 1 }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 0.5) return null;
+            const hw = 0.42;
+            const bx = x2 - head * 0.82 * Math.cos(ang);
+            const by = y2 - head * 0.82 * Math.sin(ang);
+            const pL = [x2 - head * Math.cos(ang - hw), y2 - head * Math.sin(ang - hw)];
+            const pR = [x2 - head * Math.cos(ang + hw), y2 - head * Math.sin(ang + hw)];
+            return (
+                <g opacity={opacity}>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="round" strokeDasharray={dash ? '7 6' : undefined} />
+                    <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color}
+                             stroke="rgba(15,22,32,0.18)" strokeWidth="1" strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        const Tag = ({ x, y, color, size = 15, anchor = 'middle', weight = 700, children }) => (
+            <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}>
+                {children}
+            </text>
+        );
+
+        const Slider = ({ value, min, max, step, onChange }) => (
+            <input type="range" min={min} max={max} step={step} value={value}
+                   onChange={(e) => onChange(parseFloat(e.target.value))} />
+        );
+
+        // Editerbar inmatningsruta — godtaget värde behöver INTE ligga inom
+        // glidarens intervall. min/max är bara fysiska skyddsgränser.
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').replace('−', '-').trim();
+                if (norm === '' || norm === '-' || norm === '.' || norm === '-.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  Geometri
+        // ════════════════════════════════════════════════════════
+        const VBW = 860, VBH = 520;
+        const PX = 430, PY = 296;          // vridpunkt (vågens mittpunkt)
+        const GROUND_Y = 430;
+        const PXM = 108;                   // px per meter längs brädan
+        const HALF_M = 3;                  // brädans halva längd (m)
+        const HALF_PX = HALF_M * PXM;      // 324 px
+        const BEAM_T = 16;                 // brädans tjocklek (px)
+        const THETA_MAX = 21 * Math.PI / 180;
+        const S_SCALE = 3;                 // kg·m som ger maximal lutning
+        const kF = 1.4;                    // px per N (tyngdkraftspil)
+        const lenF = (F) => Math.max(16, Math.min(F * kF, 150));
+
+        const massHW = (m) => 15 + Math.min(m, 10) * 1.6;
+        const massHH = (m) => 24 + Math.min(m, 10) * 2.4;
+
+        // ── Scenen: gungbräda ──
+        const SeesawScene = ({ masses, theta, balanced, leanRight, show, svgRef,
+                               draggingId, massDown, massMove, massUp }) => {
+            const cosT = Math.cos(theta), sinT = Math.sin(theta);
+            const deg = theta * 180 / Math.PI;
+            // riktning längs brädan (mot höger ände) och uppåtnormal
+            const nUp = { x: sinT, y: -cosT };
+
+            const beamPoint = (x) => ({ x: PX + x * PXM * cosT, y: PY + x * PXM * sinT });
+
+            // förberäkna varje massas geometri
+            const items = masses.map((mass, i) => {
+                const bp = beamPoint(mass.x);
+                const hw = massHW(mass.m), hh = massHH(mass.m);
+                const off = BEAM_T / 2 + hh / 2 + 2;
+                const cx = bp.x + nUp.x * off, cy = bp.y + nUp.y * off;
+                const F = mass.m * G;
+                const arm = mass.x * cosT;       // hävarm (m), tecken: + höger
+                return { mass, i, bp, hw, hh, cx, cy, F, arm };
+            });
+
+            const statusText = balanced
+                ? 'Jämvikt — gungbrädan är i balans'
+                : 'Gungbrädan lutar åt ' + (leanRight ? 'höger' : 'vänster');
+            const statusCol = balanced ? COL.ok : 'rgba(15,22,32,0.72)';
+
+            return (
+                <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="beamG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#caa46a" />
+                            <stop offset="100%" stopColor="#b4894a" />
+                        </linearGradient>
+                        <linearGradient id="pivotG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#4a5160" />
+                            <stop offset="100%" stopColor="#2b303b" />
+                        </linearGradient>
+                    </defs>
+
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#skyG)" />
+
+                    {/* status överst */}
+                    <Tag x={VBW / 2} y={38} color={statusCol} size={21}>{statusText}</Tag>
+
+                    {/* mark */}
+                    <line x1="30" y1={GROUND_Y} x2={VBW - 20} y2={GROUND_Y}
+                          stroke={COL.ink} strokeWidth="3" strokeLinecap="round" />
+
+                    {/* lodrät referenslinje genom vridpunkten (hävarmar mäts härifrån) */}
+                    {show.arms && (
+                        <line x1={PX} y1={PY - 6} x2={PX} y2={GROUND_Y}
+                              stroke="rgba(13,148,136,0.5)" strokeWidth="1.4" strokeDasharray="4 5" />
+                    )}
+
+                    {/* hävarmar — staplade måttlinjer under vridpunkten */}
+                    {show.arms && items.map(({ mass, i, bp, arm }) => {
+                        if (Math.abs(arm) < 0.02) return null;
+                        const yA = PY + 18 + i * 16;
+                        const xEnd = PX + arm * PXM;
+                        const anchor = arm >= 0 ? 'start' : 'end';
+                        const lx = xEnd + (arm >= 0 ? 6 : -6);
+                        return (
+                            <g key={'arm' + mass.id}>
+                                {/* lodrät stickare från brädans kontaktpunkt ned till måttlinjen */}
+                                <line x1={xEnd} y1={bp.y} x2={xEnd} y2={yA}
+                                      stroke="rgba(13,148,136,0.45)" strokeWidth="1.2" strokeDasharray="3 4" />
+                                {/* måttlinje med ändpilar */}
+                                <Arrow x1={PX} y1={yA} x2={xEnd} y2={yA} color={COL.arm} width={2.4} head={9} />
+                                <Arrow x1={xEnd} y1={yA} x2={PX} y2={yA} color={COL.arm} width={2.4} head={9} />
+                                <Tag x={lx} y={yA - 5} color={COL.arm} size={13} anchor={anchor}>
+                                    <tspan fontStyle="italic">r</tspan>
+                                    <tspan dy="3" fontSize="10">{i + 1}</tspan>
+                                    <tspan dy="-3"> = {fmt(Math.abs(arm), 2)} m</tspan>
+                                </Tag>
+                            </g>
+                        );
+                    })}
+
+                    {/* fundament + vridpunkt (triangel) */}
+                    <polygon points={`${PX - 38},${GROUND_Y} ${PX + 38},${GROUND_Y} ${PX},${PY + 4}`}
+                             fill="url(#pivotG)" stroke="#1b1f27" strokeWidth="2" strokeLinejoin="round" />
+
+                    {/* brädan (roterar kring vridpunkten) */}
+                    <g transform={`rotate(${deg} ${PX} ${PY})`}>
+                        <rect x={PX - HALF_PX} y={PY - BEAM_T / 2} width={HALF_PX * 2} height={BEAM_T}
+                              rx="6" fill="url(#beamG)" stroke="#7c5a2a" strokeWidth="2.5" />
+                        {/* mittmarkering */}
+                        <line x1={PX} y1={PY - BEAM_T / 2} x2={PX} y2={PY + BEAM_T / 2}
+                              stroke="#7c5a2a" strokeWidth="1.4" opacity="0.6" />
+                        {/* ändknoppar */}
+                        <circle cx={PX - HALF_PX} cy={PY} r="5" fill="#7c5a2a" />
+                        <circle cx={PX + HALF_PX} cy={PY} r="5" fill="#7c5a2a" />
+                    </g>
+                    {/* navet */}
+                    <circle cx={PX} cy={PY} r="6.5" fill="#e9e3d4" stroke="#1b1f27" strokeWidth="2" />
+
+                    {/* massorna (vikter ovanpå brädan) */}
+                    {items.map(({ mass, i, cx, cy, hw, hh }) => (
+                        <g key={'box' + mass.id}
+                           style={{ cursor: draggingId === mass.id ? 'grabbing' : 'grab' }}
+                           onPointerDown={(e) => massDown(e, mass.id)}
+                           onPointerMove={massMove} onPointerUp={massUp} onPointerCancel={massUp}>
+                            <g transform={`rotate(${deg} ${cx} ${cy})`}>
+                                {/* osynlig, generös träffyta */}
+                                <rect x={cx - hw - 8} y={cy - hh / 2 - 8} width={(hw + 8) * 2} height={hh + 16}
+                                      fill="transparent" />
+                                <rect x={cx - hw} y={cy - hh / 2} width={hw * 2} height={hh} rx="5"
+                                      fill={mass.color} stroke="rgba(15,22,32,0.45)" strokeWidth="2" />
+                                {/* handtag-bygel */}
+                                <path d={`M ${cx - hw * 0.5} ${cy - hh / 2} q 0 -8 ${hw * 0.5} -8 q ${hw * 0.5} 0 ${hw * 0.5} 8`}
+                                      fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="2.4" />
+                                <text x={cx} y={cy + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff">{i + 1}</text>
+                            </g>
+                        </g>
+                    ))}
+
+                    {/* massetiketter (ovanför vikten, på lugn yta) */}
+                    {items.map(({ mass, i, cx, cy, hh }) => (
+                        <Tag key={'ml' + mass.id} x={cx} y={cy - hh / 2 - 12} color={COL.ink} size={14} anchor="middle">
+                            <tspan fontStyle="italic">m</tspan>
+                            <tspan dy="3" fontSize="10">{i + 1}</tspan>
+                            <tspan dy="-3"> = {fmt(mass.m, 1)} kg</tspan>
+                        </Tag>
+                    ))}
+
+                    {/* tyngdkrafter (rakt ned från varje vikt) */}
+                    {show.forces && items.map(({ mass, i, cx, cy, hh, F }) => {
+                        const y0 = cy + hh / 2 - 2;
+                        const L = lenF(F);
+                        const y1 = y0 + L;
+                        const anchor = mass.x >= 0 ? 'start' : 'end';
+                        const lx = cx + (mass.x >= 0 ? 9 : -9);
+                        return (
+                            <g key={'fg' + mass.id}>
+                                <Arrow x1={cx} y1={y0} x2={cx} y2={y1} color={COL.tyngd} width={6} head={17} />
+                                <Tag x={lx} y={y1 - 3} color={COL.tyngd} size={13} anchor={anchor}>
+                                    <tspan fontStyle="italic">F</tspan>
+                                    <tspan dy="3" fontSize="10">G</tspan>
+                                    <tspan dy="-3"> = {fmt(F)} N</tspan>
+                                </Tag>
+                            </g>
+                        );
+                    })}
+                </svg>
+            );
+        };
+
+        // ── Formelkort M = F · r ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-3 flex flex-wrap items-center gap-x-3 gap-y-2" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Kraftmoment"><em>M</em></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Kraft (tyngd)"><em>F</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Hävarm"><em>r</em></Vbl>
+                <span className="fnum" style={{ fontSize: 14, color: 'var(--lab-ink-soft)' }}>
+                    &nbsp;&nbsp;[ N·m = N · m ]
+                </span>
+            </div>
+        );
+
+        // ── Jämviktskort: ΣM moturs jämfört med ΣM medurs ──
+        const BalanceCard = ({ mLeft, mRight, balanced }) => {
+            const op = balanced ? '=' : (mLeft > mRight ? '>' : '<');
+            const opCol = balanced ? COL.ok : 'var(--lab-accent)';
+            return (
+                <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+                     style={{ color: 'var(--lab-ink)' }}>
+                    <div className="flex flex-col items-center">
+                        <span className="flbl">Moment moturs (vänster)</span>
+                        <span className="fnum" style={{ fontWeight: 700 }}>{fmt(mLeft)} N·m</span>
+                    </div>
+                    <span className="fnum" style={{ fontSize: 26, fontWeight: 700, color: opCol }}>{op}</span>
+                    <div className="flex flex-col items-center">
+                        <span className="flbl">Moment medurs (höger)</span>
+                        <span className="fnum" style={{ fontWeight: 700 }}>{fmt(mRight)} N·m</span>
+                    </div>
+                    <span className="px-3 py-1 rounded-full text-sm font-semibold"
+                          style={{ background: balanced ? 'rgba(13,122,82,0.14)' : 'rgba(200,50,74,0.12)',
+                                   color: balanced ? COL.ok : 'var(--lab-accent)' }}>
+                        {balanced ? 'Jämvikt' : 'Ingen jämvikt'}
+                    </span>
+                </div>
+            );
+        };
+
+        // ── En massrad (glidare + inmatning) — används i sidopanel och fullskärm ──
+        const MassRow = ({ mass, idx, onM, onX, onRemove, canRemove }) => (
+            <div className="mass-row">
+                <div className="mass-row-head">
+                    <span className="mass-chip" style={{ background: mass.color }}>{idx + 1}</span>
+                    <span className="mass-name"><em>m</em><sub>{idx + 1}</sub></span>
+                    <span className="mass-side">{mass.x < -0.02 ? 'vänster' : mass.x > 0.02 ? 'höger' : 'mitten'}</span>
+                    {canRemove && <button className="mass-del" onClick={onRemove} title="Ta bort vikten" aria-label="Ta bort vikten">×</button>}
+                </div>
+                <div className="mass-ctl">
+                    <span className="mass-lbl">Massa</span>
+                    <Slider value={Math.min(mass.m, 10)} min={0.5} max={10} step={0.1} onChange={onM} />
+                    <NumInput value={mass.m} min={0.01} max={null} fmtFn={(v) => fmt(v, 1)} unit="kg" onCommit={onM} />
+                </div>
+                <div className="mass-ctl">
+                    <span className="mass-lbl">Placering</span>
+                    <Slider value={Math.max(-2.5, Math.min(2.5, mass.x))} min={-2.5} max={2.5} step={0.05} onChange={onX} />
+                    <NumInput value={mass.x} min={-HALF_M} max={HALF_M} fmtFn={fmtX} unit="m"
+                              color="#2563eb" onCommit={onX} />
+                </div>
+            </div>
+        );
+
+        let UID = 100;
+        const mk = (m, x, ci) => ({ id: ++UID, m, x, color: PALETTE[ci % PALETTE.length] });
+        const defaults = () => [mk(3, -1.5, 0), mk(2, 1.5, 1)];
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [masses, setMasses] = useState(defaults);
+            const [show, setShow] = useState({ forces: true, arms: false });
+            const [theta, setTheta] = useState(0);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const [draggingId, setDraggingId] = useState(null);
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const rafRef = useRef(null);
+            const lastRef = useRef(null);
+            const thetaRef = useRef(0);
+            const targetRef = useRef(0);
+            const draggingIdRef = useRef(null);
+            const massesRef = useRef(masses);
+            massesRef.current = masses;
+
+            // ── Fysik: kraftmoment ──
+            const cosT = Math.cos(theta);
+            let mLeft = 0, mRight = 0;
+            masses.forEach((ms) => {
+                const arm = ms.x * cosT;            // hävarm (m)
+                const M = ms.m * G * Math.abs(arm); // momentets storlek (N·m)
+                if (arm > 0) mRight += M;
+                else if (arm < 0) mLeft += M;
+            });
+            const balanced = Math.abs(mLeft - mRight) < 0.4;
+            const leanRight = mRight > mLeft;
+
+            // jämviktsfaktor (oberoende av lutning) → mållutning
+            const S = masses.reduce((a, ms) => a + ms.m * ms.x, 0);   // kg·m
+            const frac = Math.max(-1, Math.min(1, S / S_SCALE));
+            targetRef.current = frac * THETA_MAX;
+
+            // animationsloop — brädan strävar mot mållutningen i realtid
+            useEffect(() => {
+                const step = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+                    const k = Math.min(1, dt * 7);
+                    const nt = thetaRef.current + (targetRef.current - thetaRef.current) * k;
+                    if (Math.abs(nt - thetaRef.current) > 1e-4) { thetaRef.current = nt; setTheta(nt); }
+                    else thetaRef.current = nt;
+                    rafRef.current = requestAnimationFrame(step);
+                };
+                rafRef.current = requestAnimationFrame(step);
+                return () => cancelAnimationFrame(rafRef.current);
+            }, []);
+
+            // fullskärm
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            // ── uppdatera massor ──
+            const setM = (id, m) => setMasses((ms) => ms.map((x) => x.id === id ? { ...x, m } : x));
+            const setX = (id, x) => setMasses((ms) => ms.map((y) => y.id === id ? { ...y, x } : y));
+            const removeMass = (id) => setMasses((ms) => ms.length > 1 ? ms.filter((x) => x.id !== id) : ms);
+            const addMass = () => setMasses((ms) => {
+                if (ms.length >= 6) return ms;
+                // lägg ny vikt på den lättare sidan, en bit ut
+                const side = mRight >= mLeft ? -1 : 1;
+                return [...ms, mk(2, side * 1.2, ms.length)];
+            });
+            const reset = () => setMasses(defaults());
+
+            // ── dra en vikt längs brädan ──
+            const localPt = (clientX, clientY) => {
+                const svg = svgRef.current;
+                if (!svg) return null;
+                const ctm = svg.getScreenCTM();
+                if (!ctm) return null;
+                const pt = svg.createSVGPoint();
+                pt.x = clientX; pt.y = clientY;
+                return pt.matrixTransform(ctm.inverse());
+            };
+            const moveTo = (e) => {
+                const id = draggingIdRef.current;
+                if (id == null) return;
+                const loc = localPt(e.clientX, e.clientY);
+                if (!loc) return;
+                const cT = Math.cos(thetaRef.current), sT = Math.sin(thetaRef.current);
+                // projicera på brädans riktning (mot höger ände)
+                let x = ((loc.x - PX) * cT + (loc.y - PY) * sT) / PXM;
+                x = Math.max(-HALF_M, Math.min(HALF_M, Math.round(x * 20) / 20));
+                setX(id, x);
+            };
+            const massDown = (e, id) => {
+                e.preventDefault(); e.stopPropagation();
+                draggingIdRef.current = id; setDraggingId(id);
+                e.currentTarget.setPointerCapture?.(e.pointerId);
+                moveTo(e);
+            };
+            const massMove = (e) => { if (draggingIdRef.current != null) moveTo(e); };
+            const massUp = (e) => {
+                draggingIdRef.current = null; setDraggingId(null);
+                e.currentTarget.releasePointerCapture?.(e.pointerId);
+            };
+
+            const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
+
+            // masslista (återanvänds i sidopanel + fullskärm)
+            const massList = () => masses.map((mass, i) => (
+                <MassRow key={mass.id} mass={mass} idx={i}
+                         onM={(v) => setM(mass.id, v)} onX={(v) => setX(mass.id, v)}
+                         onRemove={() => removeMass(mass.id)} canRemove={masses.length > 1} />
+            ));
+
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.forces} onChange={() => tShow('forces')} /><span>Krafter (tyngdkraft)</span></label>
+                    <label><input type="checkbox" checked={show.arms} onChange={() => tShow('arms')} /><span>Hävarmar</span></label>
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={addMass} disabled={masses.length >= 6}>Lägg till vikt</button>
+                            <button className="btn-toggle" onClick={reset}>Börja om</button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Kraftmoment
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Kraftmoment</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            En kraft kan få något att <strong>vrida sig</strong>. Hur kraftigt vridet blir beror både på
+                            kraftens storlek och på <strong>hävarmen</strong> — det vinkelräta avståndet från vridpunkten
+                            till kraftens verkningslinje. Produkten kallas <strong>kraftmoment</strong>,
+                            <em> M</em> = <em>F</em> · <em>r</em>. Gungbrädan är i <strong>jämvikt</strong> när momentet
+                            moturs är lika stort som momentet medurs. Placera vikterna, dra i dem och få brädan i balans.
+                        </p>
+
+                        <FormulaCard />
+                        <BalanceCard mLeft={mLeft} mRight={mRight} balanced={balanced} />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    <SeesawScene masses={masses} theta={theta} balanced={balanced}
+                                                 leanRight={leanRight} show={show} svgRef={svgRef}
+                                                 draggingId={draggingId} massDown={massDown}
+                                                 massMove={massMove} massUp={massUp} />
+                                    <div className="scene-hint">
+                                        Dra en vikt i sidled för att flytta den. Brädan svarar direkt.
+                                    </div>
+                                    {sceneToggles()}
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+
+                                    {/* fullskärm: glidare i hopfällbar nedre panel */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <div className="fs-mass-title">Vikter — massa och placering</div>
+                                                {massList()}
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen((o) => !o)}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(180deg)' : 'none' }}>
+                                                    <path d="M6 9l6 6 6-6" />
+                                                </svg>
+                                                {controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                {/* Vikter */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flbl">Vikter på brädan</div>
+                                        <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{masses.length} / 6</div>
+                                    </div>
+                                    {massList()}
+                                    <button className="btn-add" onClick={addMass} disabled={masses.length >= 6}>+ Lägg till vikt</button>
+                                </div>
+
+                                {/* Visningsval */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Visa i scenen</div>
+                                    <div className="flex flex-wrap gap-2">
+                                        <button className={`btn-toggle ${show.forces ? 'active' : ''}`} onClick={() => tShow('forces')}>Krafter</button>
+                                        <button className={`btn-toggle ${show.arms ? 'active' : ''}`} onClick={() => tShow('arms')}>Hävarmar</button>
+                                        <button className="btn-toggle" onClick={reset}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                {/* Avläsning per vikt */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Kraftmoment per vikt</div>
+                                    <div className="space-y-1">
+                                        {masses.map((ms, i) => {
+                                            const arm = ms.x * cosT;
+                                            const M = ms.m * G * Math.abs(arm);
+                                            const sida = arm > 0.02 ? 'medurs' : arm < -0.02 ? 'moturs' : '—';
+                                            return (
+                                                <div key={ms.id} className="flex items-center justify-between text-sm"
+                                                     style={{ color: 'var(--lab-ink-soft)' }}>
+                                                    <span className="flex items-center gap-2">
+                                                        <span className="mass-chip" style={{ background: ms.color, width: 17, height: 17, fontSize: 11 }}>{i + 1}</span>
+                                                        <span>{fmt(ms.m, 1)} kg · {fmt(Math.abs(arm), 2)} m</span>
+                                                    </span>
+                                                    <span style={{ fontWeight: 700, color: 'var(--lab-ink)' }}>
+                                                        {fmt(M)} N·m <span style={{ fontWeight: 400, color: 'var(--lab-ink-muted)' }}>{sida}</span>
+                                                    </span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                    <div className="grid grid-cols-3 gap-2 text-center mt-3 pt-3"
+                                         style={{ borderTop: '1px solid var(--lab-line)' }}>
+                                        <div>
+                                            <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--lab-ink)' }}>{fmt(mLeft)}</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>moturs (N·m)</div>
+                                        </div>
+                                        <div>
+                                            <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--lab-ink)' }}>{fmt(mRight)}</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>medurs (N·m)</div>
+                                        </div>
+                                        <div>
+                                            <div style={{ fontWeight: 700, fontSize: 16, color: balanced ? COL.ok : 'var(--lab-accent)' }}>
+                                                {balanced ? '0' : fmt(Math.abs(mRight - mLeft))}
+                                            </div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>skillnad</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vad är kraftmoment?</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Kraftmomentet <em>M</em> = <em>F</em> · <em>r</em> mäter en krafts förmåga att vrida.
+                                    En liten kraft långt ut på brädan kan ge lika stort moment som en stor kraft nära
+                                    vridpunkten. Enheten är newtonmeter (N·m).
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Hävarmen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Hävarmen <em>r</em> är det <em>vinkelräta</em> avståndet från vridpunkten till kraftens
+                                    verkningslinje. Tyngdkraften pekar rakt ned, så hävarmen är det vågräta avståndet ut
+                                    till vikten. När brädan lutar krymper hävarmen något (<em>r</em> = <em>x</em> · cos <em>α</em>).
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Jämvikt</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Brädan är i jämvikt när summan av momenten moturs är lika med summan medurs:
+                                    Σ<em>M</em><sub>moturs</sub> = Σ<em>M</em><sub>medurs</sub>. Då roterar den inte, oavsett
+                                    hur många vikter du lägger på.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Lika tunga vikter balanserar alltid.”</strong> Nej — det är momentet som ska vara lika,
+                                    inte massan. En lätt vikt långt ut kan balansera en tung vikt nära mitten.</li>
+                                <li><strong>”Det är bara massan som räknas.”</strong> Nej — både kraften (<em>F</em> = <em>m</em>·<em>g</em>)
+                                    och hävarmen (<em>r</em>) ingår. Dubbla avståndet ger dubbelt moment.</li>
+                                <li><strong>”En vikt mitt på brädan väger inget.”</strong> Den väger lika mycket, men eftersom
+                                    hävarmen är noll blir dess moment noll — den kan varken tippa brädan åt höger eller vänster.</li>
+                                <li><strong>”Hävarmen är avståndet längs brädan.”</strong> När brädan lutar är hävarmen det
+                                    <em> vågräta</em> avståndet, alltså lite kortare än sträckan längs den lutande brädan.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

@@ -53,6 +53,12 @@ Status totalt: **222 figur-block i 69 filer.** Pilot klar (fy1-3.2).
   casing (`#0f1620`, opacity ~0.5) under den färgade pilen — aldrig vit.
 - **Exakt noll skrivs `0`** (inga `0,0`). Komma som decimaltecken.
 - Sätt `font-family="Poppins, system-ui, sans-serif"` på `<svg>`.
+- **TÄT viewBox — ingen "luft".** viewBoxen ska tätt omsluta figurinnehållet,
+  ingen tom marginal i topp/botten/sidor. Figuren skalas till behållarens
+  bredd, så ett tomt band i viewBoxen blir ett stort glapp mot texten. Sätt
+  `viewBox="minX minY bredd höjd"` efter innehållets faktiska bounding-box
+  (några få px marginal räcker). Kör `node .claude/verify-figur-bounds.js`
+  som fångar för stora marginaler maskinellt.
 - **Synka beteckningar med genomgångens text** (samma fil): `F_G` (stort G),
   `F_N`, `F_S`, `F_f`, hävarm `l`, enhet `Nm` osv. Subscript-etikett (G, N,
   f) ritas upright; storhets-subscript kursivt.

@@ -53,6 +53,15 @@ Status totalt: **222 figur-block i 69 filer.** Pilot klar (fy1-3.2).
   casing (`#0f1620`, opacity ~0.5) under den färgade pilen — aldrig vit.
 - **Exakt noll skrivs `0`** (inga `0,0`). Komma som decimaltecken.
 - Sätt `font-family="Poppins, system-ui, sans-serif"` på `<svg>`.
+- **NATURLIG SKALA — text lika stor som brödtexten (16 px).** Sätt
+  `width`/`height` på `<svg>` lika med viewBox-måtten (t.ex.
+  `viewBox="38 74 420 136" width="420" height="136"`). Då renderas figuren
+  1:1 (1 viewBox-enhet = 1 px) i stället för att sträckas till spaltbredden,
+  och `font-size="16"` blir 16 px = brödtextens storlek. Tumregel: text/
+  beteckningar/värden i figuren ska vara **samma storlek som uppgiftstexten**
+  (16 px); subscript får vara mindre (~12). På smal skärm krymper figuren
+  via `max-width:100%`. `verify-figur-bounds.js` flaggar saknad/felaktig
+  width/height och etiketter > 17 px.
 - **TÄT viewBox — ingen "luft".** viewBoxen ska tätt omsluta figurinnehållet,
   ingen tom marginal i topp/botten/sidor. Figuren skalas till behållarens
   bredd, så ett tomt band i viewBoxen blir ett stort glapp mot texten. Sätt

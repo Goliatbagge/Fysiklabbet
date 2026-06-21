@@ -7,7 +7,13 @@
 //      ungefärlig bounding-box av geometrin (line, rect, circle/ellipse,
 //      polygon/polyline, path, text-ankarpunkter) jämförs med viewBoxen.
 //
-//  (2) PLACERING — en figur i en ::: exempel-ruta får aldrig ligga sist
+//  (2) SKALA — figuren ska renderas i naturlig storlek (1 viewBox-enhet =
+//      1 CSS-px) så att texten/beteckningarna i figuren är lika stora som
+//      brödtexten (16 px). Kräver width/height = viewBox-måtten på <svg>
+//      (annars sträcks SVG:n till spaltbredden → texten blir för stor) och
+//      att ingen etikett har font-size > 17.
+//
+//  (3) PLACERING — en figur i en ::: exempel-ruta får aldrig ligga sist
 //      (efter deluppgifterna). Den ska komma efter uppgiftens inledande
 //      stycke men FÖRE deluppgifterna a) b) c) … Frågorna ska stå sist.
 //
@@ -74,7 +80,7 @@ function bboxOfSvgBody(body) {
     return { minX, minY, maxX, maxY };
 }
 
-let problems = 0, figures = 0;
+let problems = 0, figures = 0, sizeProblems = 0;
 for (const f of files) {
     const raw = fs.readFileSync(path.join(dir, f), 'utf-8').replace(/\r\n?/g, '\n');
     const reFig = /::: figur\n([\s\S]*?)\n:::/g;
@@ -84,7 +90,8 @@ for (const f of files) {
         const block = fm[1];
         const svg = block.match(/<svg\b([^>]*)>([\s\S]*?)<\/svg>/);
         if (!svg) continue;
-        const vb = nums(attr(svg[0], 'viewBox') || '');
+        const openTag = '<svg ' + svg[1] + '>'; // bara öppningstaggen (inte barnen)
+        const vb = nums(attr(openTag, 'viewBox') || '');
         if (vb.length !== 4) continue;
         figures++;
         const [vx, vy, vw, vh] = vb;
@@ -109,6 +116,28 @@ for (const f of files) {
             console.log(`  ✗ ${f} figur #${idx}: för stor marginal (${flagged.join(', ')}) ` +
                 `— viewBox ${vx} ${vy} ${vw} ${vh}, innehåll ` +
                 `x[${bb.minX.toFixed(0)},${bb.maxX.toFixed(0)}] y[${bb.minY.toFixed(0)},${bb.maxY.toFixed(0)}]`);
+        }
+
+        // (3) Skala: figuren ska renderas i naturlig storlek (1 viewBox-enhet
+        // = 1 CSS-px) så att text-storleken matchar brödtexten (16 px). Det
+        // kräver width/height = viewBox-måtten (annars sträcks SVG:n till
+        // spaltbredden och texten blir för stor), och att ingen etikett är
+        // större än brödtexten.
+        const wAttr = parseFloat(attr(openTag, 'width'));
+        const hAttr = parseFloat(attr(openTag, 'height'));
+        if (!(Math.abs(wAttr - vw) <= 1 && Math.abs(hAttr - vh) <= 1)) {
+            sizeProblems++;
+            console.log(`  ✗ ${f} figur #${idx}: saknar/felaktig width/height ` +
+                `(width="${isFinite(wAttr) ? wAttr : ''}" height="${isFinite(hAttr) ? hAttr : ''}" ` +
+                `mot viewBox ${vw}×${vh}). Sätt width/height = viewBox-måtten så figuren renderas 1:1.`);
+        }
+        const fsizes = (svg[2].match(/font-size="\d+(?:\.\d+)?"/g) || [])
+            .map(s => parseFloat(s.match(/[\d.]+/)[0]));
+        const maxFs = fsizes.length ? Math.max(...fsizes) : 0;
+        if (maxFs > 17) {
+            sizeProblems++;
+            console.log(`  ✗ ${f} figur #${idx}: text-storlek ${maxFs}px > brödtext (16px). ` +
+                `Etiketter ska vara ~16px (samma storlek som uppgiftstexten).`);
         }
     }
 }
@@ -146,11 +175,12 @@ for (const f of files) {
     }
 }
 
-const total = problems + placementProblems;
+const total = problems + sizeProblems + placementProblems;
 if (total) {
     if (problems) console.log(`\n${problems} figur(er) med för mycket tom marginal — beskär viewBoxen tätt runt innehållet.`);
+    if (sizeProblems) console.log(`\n${sizeProblems} figur(er) med fel skala/text-storlek — sätt width/height = viewBox och text ~16px.`);
     if (placementProblems) console.log(`\n${placementProblems} figur(er) felplacerad(e) — figur i exempel ska stå före deluppgifterna.`);
     process.exit(1);
 } else {
-    console.log(`OK — ${figures} figur(er) granskade: tät viewBox + korrekt placering.`);
+    console.log(`OK — ${figures} figur(er) granskade: tät viewBox + naturlig skala + korrekt placering.`);
 }

@@ -230,6 +230,13 @@
             if (parseFloat(s) === 0) return '0';
             return s.replace('.', ',').replace('-', '−');
         };
+        // Kraftmoment med tecken (+ moturs, − medurs). Exakt/avrundat noll → "0".
+        const fmtSigned = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = fmt(Math.abs(num), decimals);
+            if (s === '0') return '0';
+            return (num < 0 ? '−' : '+') + s;
+        };
 
         const COL = {
             tyngd: '#c8324a',  // crimson — tyngdkraft F_G
@@ -302,14 +309,22 @@
         //  Geometri
         // ════════════════════════════════════════════════════════
         const VBW = 860, VBH = 520;
-        const PX = 430, PY = 296;          // vridpunkt (vågens mittpunkt)
+        const PX = 430, PY = 336;          // vridpunkt (lågt stöd — nedre änden når marken)
         const GROUND_Y = 430;
         const PXM = 108;                   // px per meter längs brädan
         const HALF_M = 3;                  // brädans halva längd (m)
         const HALF_PX = HALF_M * PXM;      // 324 px
         const BEAM_T = 16;                 // brädans tjocklek (px)
-        const THETA_MAX = 21 * Math.PI / 180;
-        const S_SCALE = 3;                 // kg·m som ger maximal lutning
+        // Maxlutning = den vinkel där brädans nedre ände precis vilar mot marken.
+        const THETA_GROUND = Math.asin((GROUND_Y - PY - BEAM_T / 2) / HALF_PX);
+        // ── Rotationsdynamik (gungbrädan svänger som i verkligheten) ──
+        // I·θ'' = M_last − C·sinθ − b·θ'   (M_last = netto kraftmoment).
+        // Återförande termen C·sinθ ger en liten "flytzon" mycket nära jämvikt;
+        // vid större obalans överskrids markvinkeln och brädan vilar mot marken.
+        const REST_C = 22;                 // återförande vridmoment (Nm/rad) — brädans egenstabilitet
+        const DAMP_B = 10;                 // dämpning (Nm per rad/s)
+        const INERTIA0 = 1.1;              // grundtröghet
+        const INERTIA_M = 0.22;            // tröghetstillskott per kg total massa
         const kF = 1.4;                    // px per N (tyngdkraftspil)
         const lenF = (F) => Math.max(16, Math.min(F * kF, 150));
 
@@ -334,12 +349,38 @@
                 const cx = bp.x + nUp.x * off, cy = bp.y + nUp.y * off;
                 const F = mass.m * G;
                 const arm = mass.x * cosT;       // hävarm (m), tecken: + höger
-                return { mass, i, bp, hw, hh, cx, cy, F, arm };
+                // Kraftmoment med tecken: + = moturs (vänster), − = medurs (höger)
+                const Mi = -(mass.m * G * arm);
+                return { mass, i, bp, hw, hh, cx, cy, F, arm, Mi };
             });
+            const Mtot = items.reduce((a, it) => a + it.Mi, 0);
 
+            // ── byggstenar till kraftmoment-uträkningen (visas ovanför brädan) ──
+            const nM = items.length;
+            const fsSym = nM <= 4 ? 17 : 15;
+            const fsNum = nM <= 3 ? 15.5 : nM <= 4 ? 14 : 12.5;
+            const symbolic = [<tspan key="Me" fontStyle="italic">M</tspan>, <tspan key="eq"> = </tspan>];
+            items.forEach((it, i) => {
+                if (i > 0) symbolic.push(<tspan key={'p' + i}> + </tspan>);
+                symbolic.push(<tspan key={'sM' + i} fontStyle="italic" fill={it.mass.color}>M</tspan>);
+                symbolic.push(<tspan key={'sS' + i} dy="4" fontSize={fsSym * 0.62} fontWeight="700" fill={it.mass.color}>{i + 1}</tspan>);
+                symbolic.push(<tspan key={'sR' + i} dy="-4"> </tspan>);
+            });
+            const numeric = [<tspan key="ne"> = </tspan>];
+            items.forEach((it, i) => {
+                if (i > 0) numeric.push(<tspan key={'np' + i}> + </tspan>);
+                numeric.push(<tspan key={'nv' + i} fill={it.mass.color} fontWeight="600">({fmtSigned(it.Mi)})</tspan>);
+            });
+            numeric.push(<tspan key="neq"> = </tspan>);
+            numeric.push(<tspan key="ntot" fontWeight="700">{fmtSigned(Mtot)} Nm</tspan>);
+
+            const onGround = Math.abs(theta) > THETA_GROUND - 0.012;
+            const side = leanRight ? 'höger' : 'vänster';
             const statusText = balanced
                 ? 'Jämvikt — gungbrädan är i balans'
-                : 'Gungbrädan lutar åt ' + (leanRight ? 'höger' : 'vänster');
+                : onGround
+                    ? 'Gungbrädan vilar mot marken åt ' + side
+                    : 'Gungbrädan lutar åt ' + side;
             const statusCol = balanced ? COL.ok : 'rgba(15,22,32,0.72)';
 
             return (
@@ -365,6 +406,22 @@
                     {/* status överst */}
                     <Tag x={VBW / 2} y={38} color={statusCol} size={21}>{statusText}</Tag>
 
+                    {/* sammanlagt kraftmoment med uträkning (ovanför brädan) */}
+                    {show.moment && (
+                        <g>
+                            <text x={VBW / 2} y={64} textAnchor="middle" fontSize={fsSym} fill={COL.ink}>
+                                {symbolic}
+                            </text>
+                            <text x={VBW / 2} y={64 + fsSym + 7} textAnchor="middle" fontSize={fsNum} fill={COL.ink}>
+                                {numeric}
+                            </text>
+                            <text x={VBW / 2} y={64 + fsSym + fsNum + 21} textAnchor="middle" fontSize="11.5"
+                                  fill="var(--lab-ink-muted, #5a6170)">
+                                positivt värde = moturs&nbsp;&nbsp;·&nbsp;&nbsp;negativt värde = medurs
+                            </text>
+                        </g>
+                    )}
+
                     {/* mark */}
                     <line x1="30" y1={GROUND_Y} x2={VBW - 20} y2={GROUND_Y}
                           stroke={COL.ink} strokeWidth="3" strokeLinecap="round" />
@@ -378,7 +435,7 @@
                     {/* hävarmar — staplade måttlinjer under vridpunkten */}
                     {show.arms && items.map(({ mass, i, bp, arm }) => {
                         if (Math.abs(arm) < 0.02) return null;
-                        const yA = PY + 18 + i * 16;
+                        const yA = PY + 14 + i * 13;
                         const xEnd = PX + arm * PXM;
                         const anchor = arm >= 0 ? 'start' : 'end';
                         const lx = xEnd + (arm >= 0 ? 6 : -6);
@@ -391,7 +448,7 @@
                                 <Arrow x1={PX} y1={yA} x2={xEnd} y2={yA} color={COL.arm} width={2.4} head={9} />
                                 <Arrow x1={xEnd} y1={yA} x2={PX} y2={yA} color={COL.arm} width={2.4} head={9} />
                                 <Tag x={lx} y={yA - 5} color={COL.arm} size={13} anchor={anchor}>
-                                    <tspan fontStyle="italic">r</tspan>
+                                    <tspan fontStyle="italic">l</tspan>
                                     <tspan dy="3" fontSize="10">{i + 1}</tspan>
                                     <tspan dy="-3"> = {fmt(Math.abs(arm), 2)} m</tspan>
                                 </Tag>
@@ -468,7 +525,7 @@
             );
         };
 
-        // ── Formelkort M = F · r ──
+        // ── Formelkort M = F · l ──
         const Vbl = ({ label, children }) => (
             <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
                 <span className="flbl">{label}</span>
@@ -482,9 +539,9 @@
                 <span className="fnum">=</span>
                 <Vbl label="Kraft (tyngd)"><em>F</em></Vbl>
                 <span className="fnum">·</span>
-                <Vbl label="Hävarm"><em>r</em></Vbl>
+                <Vbl label="Hävarm"><em>l</em></Vbl>
                 <span className="fnum" style={{ fontSize: 14, color: 'var(--lab-ink-soft)' }}>
-                    &nbsp;&nbsp;[ N·m = N · m ]
+                    &nbsp;&nbsp;[ Nm = N · m ]
                 </span>
             </div>
         );
@@ -498,12 +555,12 @@
                      style={{ color: 'var(--lab-ink)' }}>
                     <div className="flex flex-col items-center">
                         <span className="flbl">Moment moturs (vänster)</span>
-                        <span className="fnum" style={{ fontWeight: 700 }}>{fmt(mLeft)} N·m</span>
+                        <span className="fnum" style={{ fontWeight: 700 }}>{fmt(mLeft)} Nm</span>
                     </div>
                     <span className="fnum" style={{ fontSize: 26, fontWeight: 700, color: opCol }}>{op}</span>
                     <div className="flex flex-col items-center">
                         <span className="flbl">Moment medurs (höger)</span>
-                        <span className="fnum" style={{ fontWeight: 700 }}>{fmt(mRight)} N·m</span>
+                        <span className="fnum" style={{ fontWeight: 700 }}>{fmt(mRight)} Nm</span>
                     </div>
                     <span className="px-3 py-1 rounded-full text-sm font-semibold"
                           style={{ background: balanced ? 'rgba(13,122,82,0.14)' : 'rgba(200,50,74,0.12)',
@@ -544,7 +601,7 @@
         // ── Huvudapp ─────────────────────────────────────────────
         const App = () => {
             const [masses, setMasses] = useState(defaults);
-            const [show, setShow] = useState({ forces: true, arms: false });
+            const [show, setShow] = useState({ forces: true, arms: false, moment: false });
             const [theta, setTheta] = useState(0);
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
@@ -555,7 +612,7 @@
             const rafRef = useRef(null);
             const lastRef = useRef(null);
             const thetaRef = useRef(0);
-            const targetRef = useRef(0);
+            const omegaRef = useRef(0);
             const draggingIdRef = useRef(null);
             const massesRef = useRef(masses);
             massesRef.current = masses;
@@ -572,21 +629,33 @@
             const balanced = Math.abs(mLeft - mRight) < 0.4;
             const leanRight = mRight > mLeft;
 
-            // jämviktsfaktor (oberoende av lutning) → mållutning
-            const S = masses.reduce((a, ms) => a + ms.m * ms.x, 0);   // kg·m
-            const frac = Math.max(-1, Math.min(1, S / S_SCALE));
-            targetRef.current = frac * THETA_MAX;
-
-            // animationsloop — brädan strävar mot mållutningen i realtid
+            // animationsloop — riktig rotationsdynamik: större kraftmoment ger
+            // snabbare vridning, och nedre änden stoppas av marken.
             useEffect(() => {
                 const step = (ts) => {
                     if (lastRef.current == null) lastRef.current = ts;
-                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    let dt = (ts - lastRef.current) / 1000;
                     lastRef.current = ts;
-                    const k = Math.min(1, dt * 7);
-                    const nt = thetaRef.current + (targetRef.current - thetaRef.current) * k;
-                    if (Math.abs(nt - thetaRef.current) > 1e-4) { thetaRef.current = nt; setTheta(nt); }
-                    else thetaRef.current = nt;
+                    if (dt > 0.05) dt = 0.05;          // hoppa inte vid flikbyte
+
+                    let S = 0, mTot = 0;
+                    for (const w of massesRef.current) { S += w.m * w.x; mTot += w.m; }
+
+                    const prev = thetaRef.current;
+                    let th = prev, om = omegaRef.current;
+                    const I = INERTIA0 + INERTIA_M * mTot;
+                    const Mload = G * Math.cos(th) * S;            // netto kraftmoment (Nm), + = medurs
+                    const aa = (Mload - REST_C * Math.sin(th) - DAMP_B * om) / I;
+                    om += aa * dt;
+                    if (om > 8) om = 8; else if (om < -8) om = -8;
+                    th += om * dt;
+                    // marken stoppar den nedre änden
+                    if (th > THETA_GROUND) { th = THETA_GROUND; if (om > 0) om = 0; }
+                    else if (th < -THETA_GROUND) { th = -THETA_GROUND; if (om < 0) om = 0; }
+
+                    omegaRef.current = om;
+                    thetaRef.current = th;
+                    if (Math.abs(th - prev) > 1e-5 || Math.abs(om) > 1e-4) setTheta(th);
                     rafRef.current = requestAnimationFrame(step);
                 };
                 rafRef.current = requestAnimationFrame(step);
@@ -673,6 +742,7 @@
                     <div className="st-title">Visa</div>
                     <label><input type="checkbox" checked={show.forces} onChange={() => tShow('forces')} /><span>Krafter (tyngdkraft)</span></label>
                     <label><input type="checkbox" checked={show.arms} onChange={() => tShow('arms')} /><span>Hävarmar</span></label>
+                    <label><input type="checkbox" checked={show.moment} onChange={() => tShow('moment')} /><span>Kraftmoment</span></label>
                     {isFullscreen && (
                         <div className="st-actions">
                             <button className="btn-toggle" onClick={addMass} disabled={masses.length >= 6}>Lägg till vikt</button>
@@ -686,14 +756,14 @@
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                     <div className="max-w-6xl mx-auto pt-6">
                         <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
-                            <a href="index.html">Hem</a> / <a href="katalog.html#fy1">Fysik nivå 1</a> / Kraftmoment
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Kraftmoment
                         </div>
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Kraftmoment</h1>
                         <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
                             En kraft kan få något att <strong>vrida sig</strong>. Hur kraftigt vridet blir beror både på
                             kraftens storlek och på <strong>hävarmen</strong> — det vinkelräta avståndet från vridpunkten
                             till kraftens verkningslinje. Produkten kallas <strong>kraftmoment</strong>,
-                            <em> M</em> = <em>F</em> · <em>r</em>. Gungbrädan är i <strong>jämvikt</strong> när momentet
+                            <em> M</em> = <em>F</em> · <em>l</em>. Gungbrädan är i <strong>jämvikt</strong> när momentet
                             moturs är lika stort som momentet medurs. Placera vikterna, dra i dem och få brädan i balans.
                         </p>
 
@@ -763,6 +833,7 @@
                                     <div className="flex flex-wrap gap-2">
                                         <button className={`btn-toggle ${show.forces ? 'active' : ''}`} onClick={() => tShow('forces')}>Krafter</button>
                                         <button className={`btn-toggle ${show.arms ? 'active' : ''}`} onClick={() => tShow('arms')}>Hävarmar</button>
+                                        <button className={`btn-toggle ${show.moment ? 'active' : ''}`} onClick={() => tShow('moment')}>Kraftmoment</button>
                                         <button className="btn-toggle" onClick={reset}>Börja om</button>
                                     </div>
                                 </div>
@@ -783,7 +854,7 @@
                                                         <span>{fmt(ms.m, 1)} kg · {fmt(Math.abs(arm), 2)} m</span>
                                                     </span>
                                                     <span style={{ fontWeight: 700, color: 'var(--lab-ink)' }}>
-                                                        {fmt(M)} N·m <span style={{ fontWeight: 400, color: 'var(--lab-ink-muted)' }}>{sida}</span>
+                                                        {fmt(M)} Nm <span style={{ fontWeight: 400, color: 'var(--lab-ink-muted)' }}>{sida}</span>
                                                     </span>
                                                 </div>
                                             );
@@ -793,11 +864,11 @@
                                          style={{ borderTop: '1px solid var(--lab-line)' }}>
                                         <div>
                                             <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--lab-ink)' }}>{fmt(mLeft)}</div>
-                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>moturs (N·m)</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>moturs (Nm)</div>
                                         </div>
                                         <div>
                                             <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--lab-ink)' }}>{fmt(mRight)}</div>
-                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>medurs (N·m)</div>
+                                            <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>medurs (Nm)</div>
                                         </div>
                                         <div>
                                             <div style={{ fontWeight: 700, fontSize: 16, color: balanced ? COL.ok : 'var(--lab-accent)' }}>
@@ -815,17 +886,17 @@
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Vad är kraftmoment?</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Kraftmomentet <em>M</em> = <em>F</em> · <em>r</em> mäter en krafts förmåga att vrida.
+                                    Kraftmomentet <em>M</em> = <em>F</em> · <em>l</em> mäter en krafts förmåga att vrida.
                                     En liten kraft långt ut på brädan kan ge lika stort moment som en stor kraft nära
-                                    vridpunkten. Enheten är newtonmeter (N·m).
+                                    vridpunkten. Enheten är newtonmeter (Nm).
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
                                 <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Hävarmen</h3>
                                 <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
-                                    Hävarmen <em>r</em> är det <em>vinkelräta</em> avståndet från vridpunkten till kraftens
+                                    Hävarmen <em>l</em> är det <em>vinkelräta</em> avståndet från vridpunkten till kraftens
                                     verkningslinje. Tyngdkraften pekar rakt ned, så hävarmen är det vågräta avståndet ut
-                                    till vikten. När brädan lutar krymper hävarmen något (<em>r</em> = <em>x</em> · cos <em>α</em>).
+                                    till vikten. När brädan lutar krymper hävarmen något (<em>l</em> = <em>x</em> · cos <em>α</em>).
                                 </p>
                             </div>
                             <div className="glass-card rounded-xl p-4">
@@ -846,7 +917,7 @@
                                 <li><strong>”Lika tunga vikter balanserar alltid.”</strong> Nej — det är momentet som ska vara lika,
                                     inte massan. En lätt vikt långt ut kan balansera en tung vikt nära mitten.</li>
                                 <li><strong>”Det är bara massan som räknas.”</strong> Nej — både kraften (<em>F</em> = <em>m</em>·<em>g</em>)
-                                    och hävarmen (<em>r</em>) ingår. Dubbla avståndet ger dubbelt moment.</li>
+                                    och hävarmen (<em>l</em>) ingår. Dubbla avståndet ger dubbelt moment.</li>
                                 <li><strong>”En vikt mitt på brädan väger inget.”</strong> Den väger lika mycket, men eftersom
                                     hävarmen är noll blir dess moment noll — den kan varken tippa brädan åt höger eller vänster.</li>
                                 <li><strong>”Hävarmen är avståndet längs brädan.”</strong> När brädan lutar är hävarmen det

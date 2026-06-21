@@ -70,10 +70,9 @@ window.KATALOG = {
               { num: '3.5', title: 'Gravitationslagen', description: 'Kraften mellan två massor — F = G · m₁ · m₂ / r².', href: 'fysik1-newtons-gravitationslag.html', icon: '🪐', keywords: ['krafter','mekanik','newton','gravitation','gravitationslag','tyngdkraft','planet','stjärna','invers kvadratlag','massa','avstånd','rymd','astronomi'] },
               { num: '3.6', title: 'Friktion', description: 'Statisk och dynamisk friktion mellan ytor.', href: 'fysik1-friktion-app.html', icon: '🧱', keywords: ['krafter','friktion','statisk','dynamisk','ytor','friktionstal','my','normalkraft','glidning','material'] },
               { num: '3.7', title: 'Lutande plan', description: 'Låda (med friktion) och vagn (utan friktion) på ett lutande plan. Justera vinkel, massa och friktionstal, dela upp tyngdkraften i komposanter och se när lådan börjar glida.', href: 'fysik1-lutande-plan-app.html', icon: '📐', keywords: ['krafter','lutande plan','tyngdkraft','komposant','friktion','friktionstal','normalkraft','acceleration','newtons andra lag','glidning','vagn','låda','mekanik'] },
-              { num: '3.8', title: 'Kraftmoment', description: 'En gungbräda i jämvikt. Placera flera vikter, dra i dem och justera massa och placering med glidare eller exakta värden. Visa tyngdkrafter och hävarmar och se när momentet moturs balanserar momentet medurs (M = F · r).', href: 'fysik1-kraftmoment-app.html', icon: '⚖️', keywords: ['krafter','kraftmoment','vridmoment','moment','hävarm','hävstång','gungbräda','jämvikt','vridning','torque','statik','vågrät','balans','mekanik'] },
-              { num: '3.9', title: 'Sneda spännkrafter', description: 'Exempel med spännkrafter i flera riktningar.', href: null, icon: '🪢', keywords: ['krafter','spännkraft','exempel','jämvikt'] },
-              { num: '3.10', title: 'Accelerationens riktning', description: 'Att avgöra åt vilket håll accelerationen pekar.', href: null, icon: '↗️', keywords: ['krafter','acceleration','riktning','vektor'] },
-              { num: '3.11', title: 'Trissor', description: 'Krafter och rörelse i system med trissor och linor.', href: null, icon: '⚙️', keywords: ['krafter','trissa','remskiva','mekanik'] },
+              { num: '3.8', title: 'Sneda spännkrafter', description: 'Exempel med spännkrafter i flera riktningar.', href: null, icon: '🪢', keywords: ['krafter','spännkraft','exempel','jämvikt'] },
+              { num: '3.9', title: 'Accelerationens riktning', description: 'Att avgöra åt vilket håll accelerationen pekar.', href: null, icon: '↗️', keywords: ['krafter','acceleration','riktning','vektor'] },
+              { num: '3.10', title: 'Trissor', description: 'Krafter och rörelse i system med trissor och linor.', href: null, icon: '⚙️', keywords: ['krafter','trissa','remskiva','mekanik'] },
             ],
           },
           'Energi': {
@@ -174,7 +173,7 @@ window.KATALOG = {
             number: 1,
             intro: 'Vi tar rörelseläran vidare till cirkulär rörelse, kaströrelse och kraftmoment. Du lär dig om centripetalkraft, vinkelhastighet, konisk pendel och hur du analyserar krökta rörelser.',
             sections: [
-              { num: '1.1', title: 'Kraftmoment', description: 'Vridmoment kring en axel — M = F · l.', href: null, icon: '🔧', keywords: ['krafter','moment','vridmoment','hävarm','jämvikt'] },
+              { num: '1.1', title: 'Kraftmoment', description: 'En gungbräda i jämvikt. Placera flera vikter, dra i dem och justera massa och placering med glidare eller exakta värden. Visa tyngdkrafter och hävarmar och se när momentet moturs balanserar momentet medurs (M = F · l).', href: 'fysik2-kraftmoment-app.html', icon: '🔧', keywords: ['krafter','kraftmoment','vridmoment','moment','hävarm','hävstång','gungbräda','jämvikt','vridning','torque','statik','vågrät','balans','mekanik'] },
               { num: '1.2', title: 'Mer kraftmoment', description: 'Fördjupade exempel på vridmoment och jämvikt.', href: null, icon: '⚖️', keywords: ['krafter','moment','vridmoment','exempel','jämvikt'] },
               { num: '1.3', title: 'Period, frekvens, radianer och vinkelhastighet', description: 'Grunderna för cirkulär rörelse — ω och T.', href: null, icon: '🌀', keywords: ['rörelse','cirkulär','period','frekvens','radian','vinkelhastighet','omega'] },
               { num: '1.4', title: 'Cirkulär rörelse', description: 'Centripetalkraft och centripetalacceleration i jämn cirkelrörelse.', href: null, icon: '🔄', keywords: ['rörelse','cirkulär','centripetal','vinkelhastighet','kraft'] },

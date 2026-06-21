@@ -1,12 +1,15 @@
 #!/usr/bin/env node
-// Kontrollerar att inline-SVG-figurer (::: figur) i data/teori/*.md har en
-// viewBox som TÄTT omsluter figurinnehållet — ingen onödig "luft" i kanterna
-// (särskilt toppen/botten), eftersom figuren skalas till behållarens bredd
-// och en tom band i viewBoxen då blir ett stort visuellt glapp mot texten.
+// Kontrollerar inline-SVG-figurer (::: figur) i data/teori/*.md:
 //
-// Heuristik: beräknar en ungefärlig bounding-box av geometrin (line, rect,
-// circle/ellipse, polygon/polyline, path, samt text-ankarpunkter) och varnar
-// om marginalen mellan innehållet och viewBox-kanten är för stor.
+//  (1) TÄT viewBox — ingen onödig "luft" i kanterna (särskilt topp/botten),
+//      eftersom figuren skalas till behållarens bredd och ett tomt band i
+//      viewBoxen då blir ett stort visuellt glapp mot texten. Heuristik:
+//      ungefärlig bounding-box av geometrin (line, rect, circle/ellipse,
+//      polygon/polyline, path, text-ankarpunkter) jämförs med viewBoxen.
+//
+//  (2) PLACERING — en figur i en ::: exempel-ruta får aldrig ligga sist
+//      (efter deluppgifterna). Den ska komma efter uppgiftens inledande
+//      stycke men FÖRE deluppgifterna a) b) c) … Frågorna ska stå sist.
 //
 // Kör: node .claude/verify-figur-bounds.js
 
@@ -110,9 +113,44 @@ for (const f of files) {
     }
 }
 
-if (problems) {
-    console.log(`\n${problems} figur(er) med för mycket tom marginal. Beskär viewBoxen tätt runt innehållet.`);
+// --- (2) Placering: figur i ::: exempel måste komma före deluppgifterna.
+let placementProblems = 0;
+for (const f of files) {
+    const lines = fs.readFileSync(path.join(dir, f), 'utf-8').replace(/\r\n?/g, '\n').split('\n');
+    const stack = [];
+    let ctx = null; // { start, fig, sub } radnummer (0-baserat), -1 = saknas
+    const evaluate = () => {
+        if (ctx && ctx.fig >= 0 && ctx.sub >= 0 && ctx.fig > ctx.sub) {
+            placementProblems++;
+            console.log(`  ✗ ${f} (rad ${ctx.start + 1}): figur ligger EFTER deluppgift ` +
+                `(figur rad ${ctx.fig + 1}, första deluppgift rad ${ctx.sub + 1}). ` +
+                `Flytta figuren före a)/b)/…`);
+        }
+        ctx = null;
+    };
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"[^"]*")?\s*$/i);
+        const close = /^:::\s*$/.test(line);
+        if (open) {
+            const type = open[1].toLowerCase();
+            if (type === 'exempel') ctx = { start: i, fig: -1, sub: -1 };
+            else if (type === 'figur' && ctx && ctx.fig < 0) ctx.fig = i;
+            stack.push(type);
+        } else if (close) {
+            const popped = stack.pop();
+            if (popped === 'exempel') evaluate();
+        } else if (ctx && ctx.sub < 0 && /^\*\*[a-d]\)/.test(line)) {
+            ctx.sub = i;
+        }
+    }
+}
+
+const total = problems + placementProblems;
+if (total) {
+    if (problems) console.log(`\n${problems} figur(er) med för mycket tom marginal — beskär viewBoxen tätt runt innehållet.`);
+    if (placementProblems) console.log(`\n${placementProblems} figur(er) felplacerad(e) — figur i exempel ska stå före deluppgifterna.`);
     process.exit(1);
 } else {
-    console.log(`OK — ${figures} figur(er) granskade, alla har tät viewBox.`);
+    console.log(`OK — ${figures} figur(er) granskade: tät viewBox + korrekt placering.`);
 }

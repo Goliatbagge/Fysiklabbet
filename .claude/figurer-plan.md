@@ -86,6 +86,13 @@ rektanglar:
   höger `#bcd4ec`, kontur `#4f7197` 1,6 px. Djupvektor ca (44, −30).
 - Färdig SVG-källa finns i `data/teori/fy1-3.2.md` — kopiera och anpassa.
 
+### Placering i exempel (VIKTIG regel)
+En figur i en `::: exempel`-ruta får **aldrig ligga sist** (efter
+deluppgifterna). Ordningen ska vara: **inledande stycke (uppgiftsstammen)
+→ figur → deluppgifter a) b) c) …** Frågorna ska stå sist (precis före
+lösningen). `node .claude/verify-figur-bounds.js` flaggar figur som ligger
+efter första deluppgiften.
+
 ### Friktionskraftens angreppspunkt (VIKTIG regel)
 Friktion mot underlag ritas med **angreppspunkten i kroppens BAKKANT**
 (den kant som är "bak" sett i rörelse-/dragriktningen). Puttas lådan åt

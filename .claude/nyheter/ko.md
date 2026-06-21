@@ -12,7 +12,8 @@ Format per post:
 
 ## Kö
 
-- **Kvantgivare löser centralt problem i jakten på mörk materia och gravitationsvågor** — Imperial College London visar att två atominterferometrar kan eliminera brus och mäta vid kvantfysikens grundläggande gräns; koppling till gravitationsvågor och mörk materia. Källa: https://phys.org/news/2026-06-quantum-sensor-major-obstacle-dark.html. Publicerad i Nature. (tillagd 2026-06-19)
+- **Einsteins "största tabbe" kan äntligen ha en förklaring — kvantgravitation skyddar den kosmologiska konstanten** — forskare visar att rumtidens form kan skydda den kosmologiska konstanten från kvantfluktuationer; koppling till mörk energi, allmän relativitetsteori och kvantgravitation. Källa: https://www.sciencedaily.com/releases/2026/06/ (ScienceDaily, 19 juni 2026). Ämne: kosmologi. (tillagd 2026-06-21)
+- **Superfluid av ljus: små objekt rör sig mot strömmen** — forskare observerar partiklar som rör sig "uppströms" i en superfluid av ljus, ovanlig vätskefysik. Källa: https://phys.org/physics-news/ (Phys.org, 19 juni 2026). Ämne: kvantoptik/vätskefysik. (tillagd 2026-06-21)
 
 ## Reservuppslag vid nyhetstorka (tidlösa)
 

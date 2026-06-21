@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-06-21 | `2026-06-21-kvantgivare-mork-materia` | Ny kvantgivare öppnar ett fönster mot mörk materia och gravitationsvågor | Phys.org / Imperial College London / Nature |
 | 2026-06-20 | `2026-06-20-gravastjarna-miniuniversum` | En döende stjärna kan föda ett helt nytt universum | ScienceDaily / Phys.org / Goethe-Universität / Physical Review D |
 | 2026-06-19 | `2026-06-19-kvantsammanflatning-kristall` | En kristall du kan hålla i handen är kvantsammanflätad | Phys.org / TU Wien / Nature Physics |
 | 2026-06-18 | `2026-06-18-juno-neutrinodetektor` | Världens skarpaste neutrinoöga öppnas — 700 meter under jorden | ScienceDaily / CAS / Nature |

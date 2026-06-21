@@ -31,6 +31,52 @@
  */
 window.NYHETER = [
   {
+    id: "2026-06-21-kvantgivare-mork-materia",
+    date: "2026-06-21",
+    title: "Ny kvantgivare öppnar ett fönster mot mörk materia och gravitationsvågor",
+    deck: "Forskare vid Imperial College London har byggt en prototyp som visar att två atominterferometrar kan eliminera brus och mäta vid kvantfysikens absoluta gräns. Tekniken kan bli nyckeln till att upptäcka mörk materia och gravitationsvågor i ett frekvensband som dagens detektorer inte når.",
+    category: "Kvantfysik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-21-kvantgivare-mork-materia.jpg",
+    imageAlt: "Illustration av en atominterferometer i ett fysiklaboratorium, med två vertikala vakuumkammare som innehåller lysande moln av ultrakalla atomer, sammankopplade av gröna laserstrålar på ett optiskt bord.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kvantfysik", "atomfysik", "gravitationsvågor", "mörk materia", "interferometri", "kvantgivare", "partikelfysik", "astronomi"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-06-quantum-sensor-major-obstacle-dark.html" },
+      { name: "Imperial College London", url: "https://www.imperial.ac.uk/news/articles/natural-sciences/physics/2026/new-quantum-experiment-overcomes-major-obstacle-in-search-for-dark-matter-and-gravitational-waves/" },
+      { name: "Nature", url: "https://www.nature.com/articles/s41586-026-10617-1" }
+    ],
+    research: {
+      citation: "C. F. A. Baynham m.fl., “A prototype differential atom interferometer for fundamental physics”, Nature (2026)",
+      url: "https://doi.org/10.1038/s41586-026-10617-1"
+    },
+    body: [
+      { type: "p", html: "Ungefär 85&nbsp;procent av all materia i universum är osynlig. Den syns inte i teleskop, den lyser inte — men den drar i galaxer med sin gravitation och håller ihop kosmiska strukturer som annars borde flyga isär. Fysiker kallar den <strong>mörk materia</strong>, och trots årtionden av sökande har ingen fångat en enda partikel av den. Nu har ett brittiskt forskarlag tagit ett viktigt steg mot en helt ny typ av detektor." },
+
+      { type: "h2", text: "Atomer som mätinstrument" },
+      { type: "p", html: "Experimentet, publicerat i <em>Nature</em> den 17&nbsp;juni 2026, bygger på en teknik som kallas <strong>atominterferometri</strong>. Principen påminner om det klassiska dubbelspaltexperimentet: precis som ljusvågor kan delas och sedan föras samman för att bilda interferensmönster, kan även atomer behandlas som vågor. En laser delar ett moln av ultrakalla strontium-87-atomer i två delar, låter dem färdas längs olika vägar och sammanför dem igen. Den minsta förändring i atomernas rörelse — orsakad av till exempel en passerande gravitationsvåg eller en växelverkan med en mörk-materia-partikel — lämnar ett mätbart avtryck i interferensmönstret." },
+      { type: "p", html: "Problemet är att lasern själv introducerar brus. Dess fasfluktuationer är så stora att de dränker den svaga signalen man letar efter. Det är ungefär som att försöka höra en viskning på en rockkonsert." },
+
+      { type: "h2", text: "Två interferometrar slår ut bruset" },
+      { type: "p", html: "Lösningen som forskargruppen vid Imperial College London demonstrerar är elegant: de använder <em>två</em> atominterferometrar, åtskilda i rummet men belysta av <strong>samma</strong> laser. Laserbruset påverkar båda interferometrarna lika — det är gemensamt — medan en verklig signal (från gravitationsvågor eller mörk materia) ger upphov till en liten skillnad mellan de två mätningarna. Genom att jämföra resultaten tar det gemensamma bruset ut sig, och kvar blir bara signalen." },
+      { type: "p", html: "I sin tabletop-prototyp injicerade forskarna avsiktligt kraftigt extrabrus för att simulera förhållandena i framtida kilometerslånga detektorer. Varje enskild interferometer överväldigades av bruset — men när de två mätningarna jämfördes kunde en tydlig signal fortfarande utvinnas. Systemet nådde den så kallade <strong>standardkvantgränsen</strong> (SQL) — den fundamentala undre gränsen för mätosäkerhet som kvantmekaniken tillåter." },
+      { type: "quote", html: "Vi har tagit några av de mest precisa instrument som någonsin byggts — atomklockor och atominterferometrar — och visat att de kan användas för att öppna helt nya fönster mot universums osynliga delar.", cite: "Richard Hobson, Imperial College London" },
+
+      { type: "h2", text: "Jakt på det ohörbara" },
+      { type: "p", html: "Gravitationsvågsdetektorer som LIGO och Virgo lyssnar i frekvensområdet ovanför cirka 10&nbsp;Hz. Den planerade rymddetektorn LISA ska täcka frekvenser under 0,1&nbsp;Hz. Mellan dessa band — det så kallade <strong>mellanbandet</strong> runt 0,01–1&nbsp;Hz — finns ett gap där inget befintligt instrument är känsligt. Här kan gravitationsvågor från svarta hål i det tidiga universum gömma sig, och här kan signaler från ultralättviktiga mörk-materia-kandidater dyka upp." },
+      { type: "p", html: "Det är precis detta gap som atominterferometrar av nästa generation siktar på att fylla. Prototypen vid Imperial College ingår i <strong>AION</strong>-samarbetet (<em>Atom Interferometer Observatory and Network</em>), som förenar åtta brittiska universitet och laboratorier. Planen är att skala upp tekniken stegvis: först en 10-metersversion, sedan en 100-metersanläggning som ska stå klar i början av 2030-talet. Parallellt driver Fermilab i USA det besläktade MAGIS-projektet, och vid CERN diskuteras en ännu längre version kallad AICE." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Mörk materia utgör cirka 85&nbsp;% av universums totala massa, men har aldrig observerats direkt — vi vet att den finns bara genom dess gravitationella påverkan på synlig materia.",
+        "Atominterferometri utnyttjar att atomer beter sig som vågor (vågpartikeldualiteten) — samma kvantmekaniska princip som dubbelspaltexperimentet.",
+        "Strontium-87 valdes för att det har en extremt smal optisk klockövergång — samma egenskap som gör det till grunden i världens bästa atomklockor.",
+        "AION-samarbetets långsiktiga mål är en 100&nbsp;meter lång atominterferometer — men redan den nuvarande tabletop-prototypen har bevisat att grundprincipen fungerar."
+      ]},
+      { type: "p", html: "Atominterferometri, kvantmekanik och gravitationsvågor knyter an till flera områden i gymnasiefysiken — från vågrörelselära och interferens i Fysik&nbsp;1 till modern fysik och kvantfysik i Fysik&nbsp;2. Resultatet visar att kvantmekaniken inte bara beskriver den lilla världen: den kan bli vårt skarpaste verktyg för att lyssna på universums mest svårfångade signaler." }
+    ]
+  },
+
+  {
     id: "2026-06-20-gravastjarna-miniuniversum",
     date: "2026-06-20",
     title: "En döende stjärna kan föda ett helt nytt universum",

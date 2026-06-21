@@ -6,7 +6,42 @@
 (riktiga foton, fotorealism, komplexa 3D-scener) lämnas som `::: bild`-text
 tills vidare — vi löser dem på annat sätt senare.
 
-Status totalt: **222 figur-block i 69 filer.** Pilot klar (fy1-3.2).
+Status totalt: **222 figur-block i 69 filer.** Mall/pilot helt klar (fy1-3.2).
+
+---
+
+## ▶ NÄSTA STEG (start här nästa session) — uppdat. 2026-06-21
+
+**Var vi står:** Infrastrukturen är klar och committad. fy1-3.2 är den
+godkända **mallen** — den uppfyller alla regler användaren gett:
+3D-låda efter PDF, friktion i bakkanten, ordning stam→figur→deluppgifter,
+tät viewBox, text i brödtextstorlek (16 px). Tre maskinella grindar finns
+(`verify-no-white-outline`, `verify-figur-bounds` [viewBox-luft + skala +
+placering]).
+
+**Gör härnäst:** Bygg resten av kapitlet **Krafter (fy1-3.x)** —
+kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
+1. `fy1-3.4` Tyngdkraft och normalkraft (vikt på bord: `F_N` upp, `F_G` ned)
+   — enklast efter lådan. PDF: `Fy 1 4.04 Tyngdkraft och normalkraft.pdf`.
+2. `fy1-3.3` Newtons tredje lag (hand mot vägg, äpple/jord, dragkamp).
+   PDF: `Fy 1 4.03 Newtons tredje lag.pdf`.
+3. `fy1-3.6`, `fy1-3.7` (lutande plan), `fy1-3.1` (komposanter),
+   `fy1-3.8`, `fy1-3.9`, `fy1-3.10`.
+
+**Arbetsgång per figur (checklista):**
+1. Öppna motsvarande PDF i `Genomgångar/Fysik 1/` (mappa via `title:`) och
+   titta på figuren. 2. Byt `::: bild`→`::: figur`, skriv inline-SVG som
+   efterliknar PDF:en (3D-objekt, perspektivgolv, kraftbeteckningar `F_G`
+   stort G, `F_N`, `F_f`…). 3. `width`/`height` = viewBox, text 16 px,
+   tät viewBox, figur före deluppgifterna. 4. `node data/teori/build.js`.
+   5. Skärmdump (mall `.shots/figtest.html` eller djuplänk
+   `localhost:8000/katalog.html#fy1-3.4`) + granska. 6. Kör
+   `node .claude/verify-figur-bounds.js` och `verify-no-white-outline.js`.
+   7. Committa per kapitel (användaren vill ha löpande commits).
+
+**Obs about CLAUDE.md:** mina figurregler ligger även i CLAUDE.md men den
+filen har användarens egen WIP ostagead → jag har INTE committat CLAUDE.md.
+Reglerna är säkrade här i planen + i minnet oavsett.
 
 ---
 

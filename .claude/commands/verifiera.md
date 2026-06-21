@@ -10,6 +10,13 @@ Kör navigationsverifieringen:
 node .claude/verify-navigation.js
 ```
 
+### 1b. Teori-figurer (inline-SVG)
+Kör figur-kontrollerna (vita konturer + tät viewBox utan "luft"):
+```bash
+node .claude/verify-no-white-outline.js
+node .claude/verify-figur-bounds.js
+```
+
 ### 2. HTML-validering
 Kontrollera alla HTML-filer för:
 - `lang="sv"` på `<html>`

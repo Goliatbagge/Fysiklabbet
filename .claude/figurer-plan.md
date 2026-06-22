@@ -21,8 +21,9 @@ placering]).
 
 **Gör härnäst:** Bygg resten av kapitlet **Krafter (fy1-3.x)** —
 kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
-1. `fy1-3.4` Tyngdkraft och normalkraft (vikt på bord: `F_N` upp, `F_G` ned)
-   — enklast efter lådan. PDF: `Fy 1 4.04 Tyngdkraft och normalkraft.pdf`.
+1. ~~`fy1-3.4` Tyngdkraft och normalkraft~~ — **KLAR (2026-06-22).** 3 figurer:
+   vikt på bord (`F_N` upp/`F_G` ned), låda på lutande plan + föremål mot vägg
+   (egen figur var, med bildtext), bom med motvikt i exempel.
 2. `fy1-3.3` Newtons tredje lag (hand mot vägg, äpple/jord, dragkamp).
    PDF: `Fy 1 4.03 Newtons tredje lag.pdf`.
 3. `fy1-3.6`, `fy1-3.7` (lutande plan), `fy1-3.1` (komposanter),
@@ -88,6 +89,15 @@ Reglerna är säkrade här i planen + i minnet oavsett.
   casing (`#0f1620`, opacity ~0.5) under den färgade pilen — aldrig vit.
 - **Exakt noll skrivs `0`** (inga `0,0`). Komma som decimaltecken.
 - Sätt `font-family="Poppins, system-ui, sans-serif"` på `<svg>`.
+- **⚠️ GLYF-KLIPP VID TOPP-/BOTTENKANT (verify fångar INTE detta).**
+  `verify-figur-bounds.js` mäter bara textens *ankarpunkt* (`x`/`y`), inte
+  glyfens faktiska utsträckning. En etikett vars baslinje ligger för nära
+  viewBoxens överkant får sin versal-topp (Poppins-versal ≈ 11–12 px ovanför
+  baslinjen) **avskuren** — t.ex. ett kursivt `F` reduceras till en
+  apostrof-liknande stump bredvid `N` ("ʹN"). Verify säger ändå OK eftersom
+  ankarpunkten ligger innanför. **Regel:** håll en etikett-baslinje minst
+  ~12 px under viewBoxens överkant (och ~4 px över underkanten för
+  nedstaplar). Granska alltid en *inzoomad* skärmdump av varje etikett.
 - **NATURLIG SKALA — text lika stor som brödtexten (16 px).** Sätt
   `width`/`height` på `<svg>` lika med viewBox-måtten (t.ex.
   `viewBox="38 74 420 136" width="420" height="136"`). Då renderas figuren
@@ -192,7 +202,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [ ] fy1-2.1 (3 vektoraddition) · fy1-2.2 (5 grafer) · fy1-2.3 (1 ellips-jord)
 - [ ] fy1-2.4 (2 v-t) · fy1-2.5 (1 a-t) · fy1-2.6 (1 v-t)
 - [x] **fy1-3.2 (1 låda) — KLAR (pilot)**
-- [ ] fy1-3.1 (2 kvar: komposanter) · fy1-3.3 (kraftpar, influens) · fy1-3.4 (3 normalkraft)
+- [ ] fy1-3.1 (2 kvar: komposanter) · fy1-3.3 (kraftpar, influens) · [x] **fy1-3.4 (3 normalkraft) — KLAR**
 - [ ] fy1-3.6 (4) · fy1-3.7 (5 lutande plan) · fy1-3.8 (1 spännkraft) · fy1-3.9 (5 hissar/kast) · fy1-3.10 (2 trissa)
 - [ ] fy1-4.1 (1) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd)
 - [ ] fy1-5.2 (1) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik)

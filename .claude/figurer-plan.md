@@ -62,8 +62,15 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    astronaut-foton kvar som SKIP).
    - Verktygsändring: `verify-figur-bounds.js` placeringsregel hoppar nu över
      exempel med FLERA figurer (en skiss per deluppgift är legitimt).
-9. **NÄSTA:** mekanik i Fysik 2 (fy2-1.x moment/cirkel/pendel) eller
-   rörelse-graferna (fy1-2.x). Se progress-listan nedan.
+9. ~~`fy1-2.4` Hastighet-tid-diagram~~ — **KLAR (2026-06-22).** 2 v-t-diagram:
+   bilen på parkeringen (trappstegslinje 16→6→0) och rät linje (0,10)→(10,−10)
+   med skuggade areor A₁/A₂. Byggda med ny återanvändbar graf-generator
+   `.shots/gen_graph.js` (cyan axlar, rutnät, box- eller pil-stil, areor).
+   `.shots` är gitignored → generatorn finns kvar lokalt mellan sessioner.
+   PDF: `Fy 1 3.04 Hastighet-tid-diagram.pdf`.
+10. **NÄSTA (rörelse-grafer, fy1-2.x):** `fy1-2.5` (1 a-t), `fy1-2.6` (1 v-t),
+   `fy1-2.2` (5 s-t/grafer), `fy1-2.1` (3 vektoraddition), `fy1-2.3` (1 ellips).
+   Återanvänd `.shots/gen_graph.js`.
 
 **Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
 krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte
@@ -283,7 +290,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 
 ### Fysik 1
 - [ ] fy1-2.1 (3 vektoraddition) · fy1-2.2 (5 grafer) · fy1-2.3 (1 ellips-jord)
-- [ ] fy1-2.4 (2 v-t) · fy1-2.5 (1 a-t) · fy1-2.6 (1 v-t)
+- [x] **fy1-2.4 (2 v-t) KLAR (2026-06-22)** · fy1-2.5 (1 a-t) · fy1-2.6 (1 v-t)
 - [x] **fy1-3.2 (1 låda) — KLAR (pilot)**
 - [x] **fy1-3.1 (2 komposanter — dynamometer-foto SKIP) KLAR (2026-06-22)** · [x] **fy1-3.3 (kraftpar/dragkamp/bil — 7 fig) KLAR** · [x] **fy1-3.4 (3 normalkraft) — KLAR**
 - [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · [x] **fy1-3.7 (5 lutande plan) KLAR (2026-06-22)** · [x] **fy1-3.8 (1 sneda spännkrafter, parallellogram-konstruktion) KLAR (2026-06-22)** · [x] **fy1-3.9 (5 hissar/kast) KLAR (2026-06-22)** · [x] **fy1-3.10 (2 trissa) KLAR (2026-06-22)**

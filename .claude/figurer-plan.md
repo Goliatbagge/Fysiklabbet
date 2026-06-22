@@ -88,9 +88,11 @@ Reglerna är säkrade här i planen + i minnet oavsett.
 - **Normalkraftens angreppspunkt ligger i KONTAKTYTAN** (påpekat 2026-06-22).
   `F_N`-pilens svans sitter där kropparna möts — för en vikt på vågrätt
   underlag vid lådans **undersida**, och pilen pekar uppåt *genom* kroppen.
-  ALDRIG svansen uppe på/i mitten av kroppen. Markera angreppspunkten med en
-  liten prick (`<circle r="2.6">`). Samma princip som friktion (kontaktytan,
-  bakkanten) — bara tyngdkraften `F_G` utgår från tyngdpunkten/CM.
+  ALDRIG svansen uppe på/i mitten av kroppen. Samma princip som friktion
+  (kontaktytan, bakkanten) — bara tyngdkraften `F_G` utgår från tyngdpunkten/CM.
+- **Angreppspunkts-prick (`<circle r="2.6">`) ENDAST för `F_G`** (markerar
+  tyngdpunkten). `F_N`, `F_f`, `F_S`, applicerad `F` m.fl. får ingen prick —
+  bara pilen. (Påpekat 2026-06-22.)
 - **SKAFTET SLUTAR VID PILHUVUDETS BAS — inte vid spetsen** (påpekat
   2026-06-22). Ritar du pilen som `<line>` + `<polygon>`-huvud: sätt linjens
   ändpunkt vid huvudets *bakkant* (basens mittpunkt), inte vid spetsen.

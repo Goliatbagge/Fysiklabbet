@@ -43,8 +43,11 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    parallellogram-konstruktion på rutigt papper (F_G ned, lika lång streckad
    resultant upp, två repriktningar, spännkrafterna F_S1/F_S2 som komposanter).
    Avsnittet är WIP-författarnoteringar men figuren är ren och drawable.
-6. **NÄSTA:** `fy1-3.1` (komposanter), `fy1-3.9` (hissar/kast),
-   `fy1-3.10` (trissa).
+6. ~~`fy1-3.1` Kraft och Newtons första lag~~ — **KLAR (2026-06-22).** 2 figurer:
+   komposantuppdelning (F blå diagonal + Fₓ/Fᵧ streckade längs axlar + α på
+   rutnät), och 25°-kraft­triangel (F = 20 N hypotenusa, Fᵧ motstående katet
+   streckad, rät vinkel). Dynamometer-fotot [1] kvar som `::: bild` (SKIP).
+7. **NÄSTA:** `fy1-3.9` (5 hissar/kast), `fy1-3.10` (2 trissa).
 
 **Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
 krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte
@@ -266,7 +269,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [ ] fy1-2.1 (3 vektoraddition) · fy1-2.2 (5 grafer) · fy1-2.3 (1 ellips-jord)
 - [ ] fy1-2.4 (2 v-t) · fy1-2.5 (1 a-t) · fy1-2.6 (1 v-t)
 - [x] **fy1-3.2 (1 låda) — KLAR (pilot)**
-- [ ] fy1-3.1 (2 kvar: komposanter) · [x] **fy1-3.3 (kraftpar/dragkamp/bil — 7 fig) KLAR** · [x] **fy1-3.4 (3 normalkraft) — KLAR**
+- [x] **fy1-3.1 (2 komposanter — dynamometer-foto SKIP) KLAR (2026-06-22)** · [x] **fy1-3.3 (kraftpar/dragkamp/bil — 7 fig) KLAR** · [x] **fy1-3.4 (3 normalkraft) — KLAR**
 - [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · [x] **fy1-3.7 (5 lutande plan) KLAR (2026-06-22)** · [x] **fy1-3.8 (1 sneda spännkrafter, parallellogram-konstruktion) KLAR (2026-06-22)** · fy1-3.9 (5 hissar/kast) · fy1-3.10 (2 trissa)
 - [ ] fy1-4.1 (1) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd)
 - [ ] fy1-5.2 (1) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik)

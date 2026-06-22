@@ -101,6 +101,11 @@ Reglerna är säkrade här i planen + i minnet oavsett.
   liten tagg framför. Ex: spets i `(x, t)`, huvudhöjd 9 px ⇒ basen vid
   `y = t+9` (uppåtpil) ⇒ `<line … y2="t+9">`, `<polygon points="x-6,t+9 x,t x+6,t+9">`.
   (Lutande-plan-figuren i fy1-3.4 gjorde redan rätt — kopiera det mönstret.)
+- **Kraftpilens skaft: `stroke-linecap="butt"`, ALDRIG `"round"`** (påpekat
+  2026-06-22). En rund ände buktar ut en halv linjebredd *bakom* svansen, så
+  pilen ser ut att starta bakom/under angreppsytan. `butt` ⇒ linjen slutar
+  exakt vid angreppspunkten. Gäller även mörk casing-linje. Mark-/hatch-
+  linjer får ha runda ändar.
 - **SKALENLIGA KRAFTVEKTORER (viktig princip — påpekad av användaren).**
   En kraftpils *längd* ska vara proportionell mot kraftens belopp. Det
   räcker INTE att rita alla pilar "lagom långa".

@@ -85,6 +85,12 @@ Reglerna är säkrade här i planen + i minnet oavsett.
   utåt i fri yta (`text-anchor="start"`/`"end"`), aldrig in över objektet.
 - **Kraftpil** utgår från angreppspunkten (får ligga inne i kroppen);
   **hastighetspil** utgår från objektets kant.
+- **Normalkraftens angreppspunkt ligger i KONTAKTYTAN** (påpekat 2026-06-22).
+  `F_N`-pilens svans sitter där kropparna möts — för en vikt på vågrätt
+  underlag vid lådans **undersida**, och pilen pekar uppåt *genom* kroppen.
+  ALDRIG svansen uppe på/i mitten av kroppen. Markera angreppspunkten med en
+  liten prick (`<circle r="2.6">`). Samma princip som friktion (kontaktytan,
+  bakkanten) — bara tyngdkraften `F_G` utgår från tyngdpunkten/CM.
 - **SKAFTET SLUTAR VID PILHUVUDETS BAS — inte vid spetsen** (påpekat
   2026-06-22). Ritar du pilen som `<line>` + `<polygon>`-huvud: sätt linjens
   ändpunkt vid huvudets *bakkant* (basens mittpunkt), inte vid spetsen.

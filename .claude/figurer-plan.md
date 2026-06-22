@@ -52,7 +52,18 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    frikropp av 1 kg-vikten (F_S upp > F_G1 ned). PDF: `Fy 1 4.10 Trissor.pdf`.
    OBS: frikroppsfiguren behövde sido-etiketter + vw=72 för att klara
    verify-figur-bounds (text-bredd mäts inte → topp-etikett klipps annars).
-8. **NÄSTA:** `fy1-3.9` (5 hissar/kast) — sista i kapitel Krafter.
+8. ~~`fy1-3.9` Accelerationens riktning~~ — **KLAR (2026-06-22).** 5 figurer:
+   bollkast rakt upp (person + streckad bana + bollar med skalenliga
+   hastighetspilar 6→0→−6 m/s, talen i bildtext), och fyra hiss-triptyker
+   (A/B/C med passagerare + hastighetspilar upp/ner). Hiss-figurerna
+   genererades med `.shots/gen_elev.js` (delad mall, auto-tight viewBox).
+   PDF: `Fy 1 4.09 Accelerationens riktning.pdf`.
+   **KAPITEL KRAFTER (fy1-3.x) NU KOMPLETT** (3.1–3.10; dynamometer- och
+   astronaut-foton kvar som SKIP).
+   - Verktygsändring: `verify-figur-bounds.js` placeringsregel hoppar nu över
+     exempel med FLERA figurer (en skiss per deluppgift är legitimt).
+9. **NÄSTA:** mekanik i Fysik 2 (fy2-1.x moment/cirkel/pendel) eller
+   rörelse-graferna (fy1-2.x). Se progress-listan nedan.
 
 **Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
 krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte
@@ -275,7 +286,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [ ] fy1-2.4 (2 v-t) · fy1-2.5 (1 a-t) · fy1-2.6 (1 v-t)
 - [x] **fy1-3.2 (1 låda) — KLAR (pilot)**
 - [x] **fy1-3.1 (2 komposanter — dynamometer-foto SKIP) KLAR (2026-06-22)** · [x] **fy1-3.3 (kraftpar/dragkamp/bil — 7 fig) KLAR** · [x] **fy1-3.4 (3 normalkraft) — KLAR**
-- [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · [x] **fy1-3.7 (5 lutande plan) KLAR (2026-06-22)** · [x] **fy1-3.8 (1 sneda spännkrafter, parallellogram-konstruktion) KLAR (2026-06-22)** · fy1-3.9 (5 hissar/kast) · [x] **fy1-3.10 (2 trissa) KLAR (2026-06-22)**
+- [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · [x] **fy1-3.7 (5 lutande plan) KLAR (2026-06-22)** · [x] **fy1-3.8 (1 sneda spännkrafter, parallellogram-konstruktion) KLAR (2026-06-22)** · [x] **fy1-3.9 (5 hissar/kast) KLAR (2026-06-22)** · [x] **fy1-3.10 (2 trissa) KLAR (2026-06-22)**
 - [ ] fy1-4.1 (1) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd)
 - [ ] fy1-5.2 (1) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik)
 - [ ] fy1-6.3 (2 fasdiagram/värme)

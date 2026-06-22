@@ -149,7 +149,10 @@ for (const f of files) {
     const stack = [];
     let ctx = null; // { start, fig, sub } radnummer (0-baserat), -1 = saknas
     const evaluate = () => {
-        if (ctx && ctx.fig >= 0 && ctx.sub >= 0 && ctx.fig > ctx.sub) {
+        // Undantag: ett exempel med FLERA figurer har en skiss per deluppgift
+        // (a/b/c/d) — då ligger figurerna med rätta efter respektive deluppgift.
+        // Regeln gäller bara enstaka problem-illustrationsfigur.
+        if (ctx && ctx.figCount === 1 && ctx.fig >= 0 && ctx.sub >= 0 && ctx.fig > ctx.sub) {
             placementProblems++;
             console.log(`  ✗ ${f} (rad ${ctx.start + 1}): figur ligger EFTER deluppgift ` +
                 `(figur rad ${ctx.fig + 1}, första deluppgift rad ${ctx.sub + 1}). ` +
@@ -163,8 +166,8 @@ for (const f of files) {
         const close = /^:::\s*$/.test(line);
         if (open) {
             const type = open[1].toLowerCase();
-            if (type === 'exempel') ctx = { start: i, fig: -1, sub: -1 };
-            else if (type === 'figur' && ctx && ctx.fig < 0) ctx.fig = i;
+            if (type === 'exempel') ctx = { start: i, fig: -1, sub: -1, figCount: 0 };
+            else if (type === 'figur' && ctx) { if (ctx.fig < 0) ctx.fig = i; ctx.figCount++; }
             stack.push(type);
         } else if (close) {
             const popped = stack.pop();

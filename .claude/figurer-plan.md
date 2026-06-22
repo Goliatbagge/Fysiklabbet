@@ -24,10 +24,24 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
 1. ~~`fy1-3.4` Tyngdkraft och normalkraft~~ — **KLAR (2026-06-22).** 3 figurer:
    vikt på bord (`F_N` upp/`F_G` ned), låda på lutande plan + föremål mot vägg
    (egen figur var, med bildtext), bom med motvikt i exempel.
-2. `fy1-3.3` Newtons tredje lag (hand mot vägg, äpple/jord, dragkamp).
-   PDF: `Fy 1 4.03 Newtons tredje lag.pdf`.
-3. `fy1-3.6`, `fy1-3.7` (lutande plan), `fy1-3.1` (komposanter),
+2. ~~`fy1-3.3` Newtons tredje lag~~ — **KLAR (2026-06-22).** 7 figurer:
+   hand mot vägg (kraft/motkraft, färgkodade pilar + bildtext), vikt på bord
+   (jämvikt), jorden/månen (3 kg vs 1 kg, lika krafter), äpple/jordklot
+   (0,80 N action/reaktion), dragkamp felaktig (600/400 N) + korrekt
+   (`F_A=F_B`, `K_A>K_B`), bil med magnet. Astronaut-fotot kvar som `::: bild`
+   (SKIP-listan). PDF: `Fy 1 4.03 Newtons tredje lag.pdf`.
+3. **NÄSTA:** `fy1-3.6`, `fy1-3.7` (lutande plan), `fy1-3.1` (komposanter),
    `fy1-3.8`, `fy1-3.9`, `fy1-3.10`.
+
+**Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
+krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte
+text-*bredd* → tomt band mellan geometri och viewBox-kant flaggas). Lösningar:
+(a) flytta beskrivningen till en **bildtext** (`<p>` efter `</svg>`) och
+färgkoda pilarna i stället; (b) centrera korta etiketter inom geometrins
+x-spann; (c) gör geometrin (t.ex. jordklotet) bred nog att nå etikettens
+ytterkant. **Använd ABSOLUTA path-koordinater** (`C`/`L`, inte relativa
+`c`/`q`) — bounds-skriptet läser varje talpar i `d` som en absolut punkt, så
+relativa kontrollpunkter ger falska bbox-larm.
 
 **Arbetsgång per figur (checklista):**
 1. Öppna motsvarande PDF i `Genomgångar/Fysik 1/` (mappa via `title:`) och
@@ -239,7 +253,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [ ] fy1-2.1 (3 vektoraddition) · fy1-2.2 (5 grafer) · fy1-2.3 (1 ellips-jord)
 - [ ] fy1-2.4 (2 v-t) · fy1-2.5 (1 a-t) · fy1-2.6 (1 v-t)
 - [x] **fy1-3.2 (1 låda) — KLAR (pilot)**
-- [ ] fy1-3.1 (2 kvar: komposanter) · fy1-3.3 (kraftpar, influens) · [x] **fy1-3.4 (3 normalkraft) — KLAR**
+- [ ] fy1-3.1 (2 kvar: komposanter) · [x] **fy1-3.3 (kraftpar/dragkamp/bil — 7 fig) KLAR** · [x] **fy1-3.4 (3 normalkraft) — KLAR**
 - [ ] fy1-3.6 (4) · fy1-3.7 (5 lutande plan) · fy1-3.8 (1 spännkraft) · fy1-3.9 (5 hissar/kast) · fy1-3.10 (2 trissa)
 - [ ] fy1-4.1 (1) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd)
 - [ ] fy1-5.2 (1) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik)

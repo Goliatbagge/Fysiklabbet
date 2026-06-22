@@ -85,6 +85,14 @@ Reglerna är säkrade här i planen + i minnet oavsett.
   utåt i fri yta (`text-anchor="start"`/`"end"`), aldrig in över objektet.
 - **Kraftpil** utgår från angreppspunkten (får ligga inne i kroppen);
   **hastighetspil** utgår från objektets kant.
+- **SKAFTET SLUTAR VID PILHUVUDETS BAS — inte vid spetsen** (påpekat
+  2026-06-22). Ritar du pilen som `<line>` + `<polygon>`-huvud: sätt linjens
+  ändpunkt vid huvudets *bakkant* (basens mittpunkt), inte vid spetsen.
+  Annars sticker linjens rundade ände (`stroke-linecap="round"`,
+  halv-linjebredd ≈ 1,8 px) ut **förbi** spetsen och pilen ser ut att ha en
+  liten tagg framför. Ex: spets i `(x, t)`, huvudhöjd 9 px ⇒ basen vid
+  `y = t+9` (uppåtpil) ⇒ `<line … y2="t+9">`, `<polygon points="x-6,t+9 x,t x+6,t+9">`.
+  (Lutande-plan-figuren i fy1-3.4 gjorde redan rätt — kopiera det mönstret.)
 - **SKALENLIGA KRAFTVEKTORER (viktig princip — påpekad av användaren).**
   En kraftpils *längd* ska vara proportionell mot kraftens belopp. Det
   räcker INTE att rita alla pilar "lagom långa".

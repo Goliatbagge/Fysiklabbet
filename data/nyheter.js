@@ -31,6 +31,53 @@
  */
 window.NYHETER = [
   {
+    id: "2026-06-22-kosmologiska-konstanten",
+    date: "2026-06-22",
+    title: "Einsteins ”största tabbe” kan äntligen ha en förklaring",
+    deck: "Fysiker vid Brown University visar att rumtidens matematiska form kan skydda den kosmologiska konstanten från kvantfluktuationer — med samma mekanism som gör kvanthalleffekten så exakt. Resultatet kan vara ett steg mot att lösa det största gapet mellan teori och observation i hela fysikens historia.",
+    category: "Kosmologi",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-22-kosmologiska-konstanten.jpg",
+    imageAlt: "Illustration av rumtidens krökning visualiserad som ett böjt, lysande rutnät med galaxer utspridda över ytan, mot en djupblå rymdbakgrund.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kosmologi", "kvantgravitation", "kosmologiska konstanten", "mörk energi", "einstein", "kvanthalleffekten", "topologi", "relativitetsteori"],
+    sources: [
+      { name: "ScienceDaily", url: "https://www.sciencedaily.com/releases/2026/06/260619020516.htm" },
+      { name: "Brown University", url: "https://www.brown.edu/news/2026-04-20/cosmological-constant-problem" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-05-quantum-gravity-cosmological-constant-similar.html" }
+    ],
+    research: {
+      citation: "S. Alexander, H. Bernardo, A. Hui, ”Cosmological Constant from Quantum Gravitational θ Vacua and the Gravitational Hall Effect”, Physical Review Letters 136, 151501 (2026)",
+      url: "https://doi.org/10.1103/rzz5-p4f4"
+    },
+    body: [
+      { type: "p", html: "År 1917 lade Albert Einstein till en extra term i sina ekvationer för allmän relativitetsteori. Han kallade den den <strong>kosmologiska konstanten</strong>, och dess enda uppgift var att hålla universum stillastående — precis som de flesta fysiker på den tiden antog att det var. Tolv år senare visade Edwin Hubble att galaxerna rör sig bort från oss: universum expanderar. Einstein strök sin konstant och ska enligt legenden ha kallat den sitt ”största misstag”." },
+      { type: "p", html: "Men historien tog en ny vändning 1998, när två forskargrupper oberoende av varandra upptäckte att universums expansion <em>accelererar</em>. Något drev isär galaxerna allt snabbare. Plötsligt behövdes Einsteins kosmologiska konstant igen — fast nu som ett mått på den mystiska <strong>mörk energi</strong> som utgör ungefär 68&nbsp;% av universums totala energiinnehåll." },
+
+      { type: "h2", text: "Fysikens största sifferproblem" },
+      { type: "p", html: "Här börjar det riktiga huvudbrottet. Kvantfältteori — den teori som beskriver partiklar och krafter på den minsta skalan — förutsäger att det tomma rummet kryllar av fluktuationer som borde ge den kosmologiska konstanten ett enormt värde. Hur enormt? Ungefär 10<sup>120</sup>&nbsp;gånger större än vad astronomerna faktiskt observerar. Det är en etta följd av 120&nbsp;nollor, och diskrepansen brukar beskrivas som den största kvantitativa felslutningen i teorifysikens historia." },
+      { type: "p", html: "Trots årtionden av försök har ingen kunnat förklara varför det observerade värdet är så litet. Standardfysiken saknar helt enkelt en mekanism som kan skydda konstanten från alla de kvantfluktuationer som borde blåsa upp den." },
+
+      { type: "h2", text: "Topologiskt skydd — som kvanthalleffekten" },
+      { type: "p", html: "Nu presenterar tre fysiker vid Brown University — Stephon Alexander, Heliudson Bernardo och Aaron Hui — ett möjligt svar. I en artikel publicerad i <em>Physical Review Letters</em> visar de att inom ett specifikt kvantgravitationstillstånd, det så kallade <strong>Chern–Simons–Kodama-tillståndet</strong> (CSK), blir den kosmologiska konstanten <em>topologiskt skyddad</em>." },
+      { type: "p", html: "Topologi handlar om matematiska egenskaper som inte ändras när man böjer eller sträcker ett objekt — tänk att en munk och en kaffekopp båda har ett hål och därför är topologiskt likvärdiga. I kvanthalleffekten, som upptäcktes på 1980-talet, leder denna typ av topologiskt skydd till att en elektrisk ledningsförmåga låses fast vid exakta värden, oavsett hur smutsigt eller ofullkomligt materialet är. Det är en av de mest precisa mätningar som överhuvudtaget finns inom fysiken." },
+      { type: "p", html: "Forskargruppen visar att samma matematiska struktur kan gälla för rumtiden själv. Precis som topologin i kvanthalleffekten låser ledningsförmågan, kan rumtidens topologi låsa den kosmologiska konstanten vid diskreta, kvantiserade värden — och därmed göra den immun mot de kvantfluktuationer som annars borde förstöra den." },
+      { type: "quote", html: "Alla kvantperturbationer som borde blåsa upp den kosmologiska konstantens värde görs overksamma av denna topologi.", cite: "Stephon Alexander, Brown University" },
+
+      { type: "h2", text: "Långt kvar till hela svaret" },
+      { type: "p", html: "Resultatet är teoretiskt — det finns ännu inget experiment som direkt testar mekanismen. Forskarna betonar själva att ”det riktiga arbetet ligger i detaljerna” och att mycket återstår innan man kan visa att just detta tillstånd verkligen beskriver vårt universum. Men idén att topologin hos rumtiden kan spela samma roll för den kosmologiska konstanten som den spelar för kvanthalleffekten öppnar en helt ny infallsvinkel på ett problem som trotsat fysikerna i över ett halvsekel." },
+      { type: "p", html: "Studien knyter samman två av fysikens stora pelare — allmän relativitetsteori och kvantmekanik — på ett sätt som kopplar till flera områden i gymnasiefysiken: gravitationslära, energi i Fysik&nbsp;1, och modern fysik med kvantmekanik i Fysik&nbsp;2." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Den kosmologiska konstanten betecknas med det grekiska tecknet Λ (lambda) och har enheten m<sup>−2</sup>. Den beskriver energitätheten i det tomma rummet.",
+        "Kvanthalleffekten gav Klaus von Klitzing Nobelpriset i fysik 1985. Ledningsförmågan kvantiseras i exakta steg — så precisa att de numera definierar enheten ohm.",
+        "Mörk energi utgör cirka 68&nbsp;% av universums energiinnehåll, mörk materia 27&nbsp;% och vanlig materia bara ungefär 5&nbsp;%. Vi vet fortfarande inte vad mörk energi egentligen är.",
+        "Einsteins ekvationer för allmän relativitetsteori publicerades 1915 och förutsade bland annat gravitationsvågor, svarta hål och universums expansion — samtliga bekräftade genom observationer."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-06-21-kvantgivare-mork-materia",
     date: "2026-06-21",
     title: "Ny kvantgivare öppnar ett fönster mot mörk materia och gravitationsvågor",

@@ -85,6 +85,22 @@ Reglerna är säkrade här i planen + i minnet oavsett.
   utåt i fri yta (`text-anchor="start"`/`"end"`), aldrig in över objektet.
 - **Kraftpil** utgår från angreppspunkten (får ligga inne i kroppen);
   **hastighetspil** utgår från objektets kant.
+- **SKALENLIGA KRAFTVEKTORER (viktig princip — påpekad av användaren).**
+  En kraftpils *längd* ska vara proportionell mot kraftens belopp. Det
+  räcker INTE att rita alla pilar "lagom långa".
+  - Lika stora krafter ritas **exakt lika långa** (t.ex. jämvikt
+    `F_N = F_G` på vågrätt underlag, eller `F_N = F` mot vägg).
+  - En kraft som är dubbelt så stor ritas **dubbelt så lång**; hälften så
+    stor → hälften så lång.
+  - En resulterande/summa-vektor ritas **lika lång som komposanternas
+    längder tillsammans** (t.ex. bom: `F_N = F_Gbom + F_Gvikt` ⇒ `F_N`-pilen
+    lika lång som `F_Gbom`- och `F_Gvikt`-pilarna staplade; och `F_Gvikt`
+    dubbelt så lång som `F_Gbom` eftersom 24 kg = 2 · 12 kg).
+  - Praktiskt: räkna ut beloppen, välj en *skala* (px per N) som gör att
+    alla pilar får plats, och sätt varje pils längd = belopp · skala. Håll
+    pilhuvudet i samma storlek på alla pilar — det är skaftets/totallängden
+    som bär informationen.
+  Gäller även komposanter (`F_G·sinα` vs `F_G·cosα` vs `F_G`).
 - **Ingen vit kontur/halo** på ljus bakgrund. På färgad yta: tunn MÖRK
   casing (`#0f1620`, opacity ~0.5) under den färgade pilen — aldrig vit.
 - **Exakt noll skrivs `0`** (inga `0,0`). Komma som decimaltecken.

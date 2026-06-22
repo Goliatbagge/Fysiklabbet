@@ -33,8 +33,14 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
 3. ~~`fy1-3.6` Friktion~~ — **KLAR (2026-06-22).** 4 figurer: kloss i fyra
    lägen (drag/friktion skalenligt), bokhylla (`F_R = F_drag − F_f`), bil
    (`F_N1+F_N2 = F_G`, `F_putt=F_f`), person som går (F₁/F₂ action-reaktion).
-4. **NÄSTA:** `fy1-3.7` (lutande plan), `fy1-3.1` (komposanter),
-   `fy1-3.8`, `fy1-3.9`, `fy1-3.10`.
+4. ~~`fy1-3.7` Lutande plan~~ — **KLAR (2026-06-22).** 5 figurer:
+   komposanter (två rutnät: F + F_x/F_y med α), låda på plan (F_N/F_f/F_G +
+   komposanter F₁/F₂ skalenligt, F_N=F₂, F_f=F₁), härledning vinklar
+   (v, x, 90°−v + räta vinklar), exempel 1 (34°), exempel 2 (36°, F_f<F₁ +
+   F_R nedför planet). Återanvänd lutande-plan-geometrin (A(60,175),
+   hyp 210 px, α=34°-geometri) mellan fig 2/3/4/5. PDF: `Fy 1 4.07 Lutande plan.pdf`.
+5. **NÄSTA:** `fy1-3.1` (komposanter), `fy1-3.8` (spännkraft),
+   `fy1-3.9` (hissar/kast), `fy1-3.10` (trissa).
 
 **Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
 krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte
@@ -257,7 +263,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [ ] fy1-2.4 (2 v-t) · fy1-2.5 (1 a-t) · fy1-2.6 (1 v-t)
 - [x] **fy1-3.2 (1 låda) — KLAR (pilot)**
 - [ ] fy1-3.1 (2 kvar: komposanter) · [x] **fy1-3.3 (kraftpar/dragkamp/bil — 7 fig) KLAR** · [x] **fy1-3.4 (3 normalkraft) — KLAR**
-- [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · fy1-3.7 (5 lutande plan) · fy1-3.8 (1 spännkraft) · fy1-3.9 (5 hissar/kast) · fy1-3.10 (2 trissa)
+- [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · [x] **fy1-3.7 (5 lutande plan) KLAR (2026-06-22)** · fy1-3.8 (1 spännkraft) · fy1-3.9 (5 hissar/kast) · fy1-3.10 (2 trissa)
 - [ ] fy1-4.1 (1) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd)
 - [ ] fy1-5.2 (1) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik)
 - [ ] fy1-6.3 (2 fasdiagram/värme)

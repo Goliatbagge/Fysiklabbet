@@ -68,9 +68,35 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    `.shots/gen_graph.js` (cyan axlar, rutnät, box- eller pil-stil, areor).
    `.shots` är gitignored → generatorn finns kvar lokalt mellan sessioner.
    PDF: `Fy 1 3.04 Hastighet-tid-diagram.pdf`.
-10. **NÄSTA (rörelse-grafer, fy1-2.x):** `fy1-2.5` (1 a-t), `fy1-2.6` (1 v-t),
-   `fy1-2.2` (5 s-t/grafer), `fy1-2.1` (3 vektoraddition), `fy1-2.3` (1 ellips).
-   Återanvänd `.shots/gen_graph.js`.
+10. ~~**rörelse-grafer, fy1-2.x**~~ — **KLART (2026-06-23).** `fy1-2.5` (1 a-t
+   med area A), `fy1-2.6` (1 generell v-t-härledning, rektangel+triangel),
+   `fy1-2.2` (5: sekant/tangent-koncept, Ex1 rät linje + Δs/Δt, Ex2 Adam &
+   Bertil, Ex3 böjd kurva + tangent), `fy1-2.1` (3: triangel 4+3→5, David
+   över floden, vektoraddition parallellförflyttning), `fy1-2.3` (1 jord-
+   ellips polradie/ekvatorialradie). **KAPITEL RÖRELSE (fy1-2.x) NU
+   KOMPLETT** (2.1–2.6; 2.7 GeoGebra-skärmdump kvar som SKIP).
+   - `.shots/gen_graph.js` utökad: `dots` + `texts` (datakoordinater) och
+     `labelDecimals:{x,y}` för fixerade decimaler på axeletiketter.
+   - `.shots/gen_vec.js`-mönster (i g21.js): återanvändbar `arrow()`-helper
+     (butt-cap, skalenligt huvud) för vektorfigurer.
+11. **NÄSTA:** mekanik forts. — `fy1-4.1` (1), `fy1-4.4` (1 kast), `fy1-4.7`
+   (1 F-t), `fy1-4.8` (1 rörelsemängd); därefter tryck/lyftkraft `fy1-5.x`.
+
+**Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
+radbrytning. Bygger man figur-txt med `{ echo "::: figur"; cat fil.svg;
+echo ":::"; }` hamnar då `</svg>:::` på SAMMA rad → figur-fencen saknar
+`\n:::` och build/katalog-parsern blir fel. Lägg ALLTID en `\n` efter svg:n
+(`printf '\n:::\n'` eller skriv svg-filen med trailing newline). Grep
+`</svg>:::` i md efter splice för att fånga det.
+
+**Lärdom (2026-06-23, kantetiketter & verify-figur-bounds):** en etikett i
+fri yta vid figurens vänster/höger-kant ska ankras vid sin YTTRE textkant
+(`text-anchor="end"` för högeretikett, `"start"` för vänsteretikett) så att
+ankarpunkten (det enda skriptet mäter) ligger där texten faktiskt slutar.
+Annars antingen falsklarm (luft mellan geometri och ankaret) eller klippning
+(om man beskär till ankaret klipps textbredden utanför). För TOPP-etiketter:
+glyfens versalhöjd ≈ 11 px över baslinjen — håll `vy` ≤ baslinje−11 OCH
+top-marginal ≤ tröskeln (0,06·vh, min 10); välj `vh` så att båda ryms.
 
 **Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
 krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte
@@ -289,8 +315,8 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 ## Progress per kapitel (bocka av filen när ALLA dess drawable-figurer är klara)
 
 ### Fysik 1
-- [ ] fy1-2.1 (3 vektoraddition) · fy1-2.2 (5 grafer) · fy1-2.3 (1 ellips-jord)
-- [x] **fy1-2.4 (2 v-t) KLAR (2026-06-22)** · fy1-2.5 (1 a-t) · fy1-2.6 (1 v-t)
+- [x] **fy1-2.1 (3 vektoraddition) KLAR (2026-06-23)** · [x] **fy1-2.2 (5 grafer) KLAR (2026-06-23)** · [x] **fy1-2.3 (1 ellips-jord) KLAR (2026-06-23)**
+- [x] **fy1-2.4 (2 v-t) KLAR (2026-06-22)** · [x] **fy1-2.5 (1 a-t) KLAR (2026-06-23)** · [x] **fy1-2.6 (1 v-t) KLAR (2026-06-23)** — KAPITEL RÖRELSE KOMPLETT (2.7 GeoGebra SKIP)
 - [x] **fy1-3.2 (1 låda) — KLAR (pilot)**
 - [x] **fy1-3.1 (2 komposanter — dynamometer-foto SKIP) KLAR (2026-06-22)** · [x] **fy1-3.3 (kraftpar/dragkamp/bil — 7 fig) KLAR** · [x] **fy1-3.4 (3 normalkraft) — KLAR**
 - [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · [x] **fy1-3.7 (5 lutande plan) KLAR (2026-06-22)** · [x] **fy1-3.8 (1 sneda spännkrafter, parallellogram-konstruktion) KLAR (2026-06-22)** · [x] **fy1-3.9 (5 hissar/kast) KLAR (2026-06-22)** · [x] **fy1-3.10 (2 trissa) KLAR (2026-06-22)**

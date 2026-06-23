@@ -31,6 +31,54 @@
  */
 window.NYHETER = [
   {
+    id: "2026-06-23-superfluid-ljus",
+    date: "2026-06-23",
+    title: "Små objekt simmar uppströms i en superfluid av ljus",
+    deck: "Forskare har fått ett litet hinder att röra sig mot strömmen i en strömmande superfluid gjord av ljus. Hemligheten: virvelpar som slungas bakåt ger en rekyl framåt — ungefär som en bläckfisk som sprutar sig genom vattnet.",
+    category: "Kvantoptik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-23-superfluid-ljus.jpg",
+    imageAlt: "Illustration av en mörk sfär i en strömmande ljusfluid, omgiven av virvelmönster som bildas i kölvattnet.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kvantoptik", "superfluid", "vätskefysik", "kvantfysik", "virvlar", "ljus", "vågpartikeldualitet", "modern fysik"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-06-tiny-superfluid.html" },
+      { name: "arXiv (preprint)", url: "https://arxiv.org/abs/2512.09028" }
+    ],
+    research: {
+      citation: "M. Baker-Rasooli, T. Aladjidi, T. D. Ferreira, A. Bramati, M. Albert, P.-É. Larré, Q. Glorieux, “Swimming against a superfluid flow: Self-propulsion via vortex-antivortex shedding in a quantum fluid of light”, Physical Review Letters (2026)",
+      url: "https://doi.org/10.1103/ndj1-1j89"
+    },
+    body: [
+      { type: "p", html: "Tänk dig att du släpper en kork i en ström. Den flyter med, självklart. Men vad händer om korken plötsligt börjar paddla <em>uppströms</em> — helt av sig själv, utan motor eller segel? I en vanlig vätska vore det absurt, men i en <strong>superfluid av ljus</strong> har ett internationellt forskarlag nu observerat exakt det fenomenet." },
+
+      { type: "h2", text: "Ljus som flödar utan friktion" },
+      { type: "p", html: "En superfluid är ett tillstånd där partiklar rör sig helt utan friktion. Det mest kända exemplet är flytande helium nedkylt till nära den absoluta nollpunkten (−273,15&nbsp;°C), som kan klättra uppför väggarna på ett kärl. Men superfluider kan även skapas av <em>ljus</em>. Forskarna lät en laserstråle passera genom en varm gas av rubidium-87-atomer. Nära vissa optiska resonanser börjar fotonerna i strålen växelverka med varandra via atomerna — och ljuset börjar uppföra sig som en tvådimensionell kvantfluid som flödar utan motstånd." },
+      { type: "p", html: "Nyckelbegreppet är den <strong>kritiska hastigheten</strong>, formulerad av den sovjetiske fysikern Lev Landau på 1940-talet. Så länge superfluiden rör sig förbi ett hinder långsammare än denna tröskel, flödar den runt hindret utan att tappa energi — noll friktion, noll motstånd. Men överskrids den kritiska hastigheten bryts superfluiditeten och det bildas virvlar i vätskan." },
+
+      { type: "h2", text: "Virvelpar som raketmotor" },
+      { type: "p", html: "Det var just i detta överkritiska område som överraskningen dök upp. Forskarna vid Sorbonne-universitetet, universitetet i Porto, Côte d&rsquo;Azur-universitetet och Paris-Saclay-universitetet placerade ett litet, rörligt hinder i ljusfluiden med hjälp av en andra laserstråle som lokalt ändrade gasens brytningsindex. När flödet överskred den kritiska hastigheten började hindret inte bara stanna — det rörde sig <em>mot</em> strömmen." },
+      { type: "p", html: "Mekanismen visade sig vara kvantiserade <strong>virvelpar</strong>. I hindrets kölvatten bildas par av virvlar som snurrar åt motsatt håll (en virvel och en antivirvel). Varje gång ett sådant par slungas nedströms får hindret en rekyl uppströms — precis som en raket som kastar ut avgaser bakåt för att driva sig framåt. Effekten är periodisk: par efter par skjuts ut, och den sammanlagda impulsen driver hindret stadigt mot strömmen." },
+      { type: "quote", html: "Det här djupt kontraintuitiva fenomenet ändrade helt vårt fokus. Det som skulle vara en standardverifiering av den kritiska hastigheten blev en fascinerande undersökning av uppströmssimning.", cite: "Pierre-Élie Larré, Paris-Saclay-universitetet" },
+
+      { type: "h2", text: "En bläckfisk i kvantvärlden" },
+      { type: "p", html: "Forskarna jämför mekanismen med hur biologiska organismer kan utnyttja turbulens i sitt kölvatten för att spara energi — som en fisk som surfar på virvlarna bakom sin kompis, eller en bläckfisk som sprutar vatten bakåt för framdrivning. Skillnaden är att hindret i ljusfluiden gör det <em>passivt</em>: det behöver ingen egen energikälla utan exploaterar kvantfluidens inneboende dynamik." },
+      { type: "p", html: "Resultatet binder samman tre forskningsfält som sällan möts: <strong>kvanthydrodynamik</strong> (hur kvantvätskor flödar), <strong>klassisk fluiddynamik</strong> (virvlar och turbulens i vardagliga vätskor) och <strong>aktiv materia</strong> (självdrivna partiklar, som bakterier som simmar). Att samma princip — framdrivning via virvelutsändning — dyker upp i alla tre världarna antyder att den är djupt fundamental." },
+
+      { type: "h2", text: "Mot självstyrande ljuskomponenter" },
+      { type: "p", html: "På sikt kan upptäckten leda till praktiska tillämpningar. Forskarna pekar på möjligheten att bygga små ljusdrivna optiska komponenter som navigerar genom optiska kretsar utan extern styrning — självgående partiklar i ljusets kvantfluid. Det kan bli relevant för framtidens kvantteknologi och optiska datorer." },
+      { type: "p", html: "Studien, publicerad i <em>Physical Review Letters</em>, berör flera områden i gymnasiefysiken: superfluiditet och fasövergångar knyter an till <strong>termodynamik</strong>, virvelbildning hör till <strong>vätskefysik</strong>, och ljusets vågbeteende i ett ickelinjärt medium är en gren av <strong>modern fysik och kvantoptik</strong>." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Superfluiditet upptäcktes 1937 i flytande helium-4 vid temperaturer under 2,17&nbsp;K (−270,98&nbsp;°C). Pyotr Kapitsa fick Nobelpriset i fysik 1978 för sin forskning om fenomenet.",
+        "Ljus beter sig vanligtvis inte som en vätska — fotoner växelverkar normalt inte med varandra. Men i speciella medier, som rubidiumånga, kan foton–foton-interaktioner uppstå och skapa kollektiva fenomen.",
+        "Landaus kritiska hastighet kan jämföras med ljudhastigheten i en gas: under den hastigheten kan inget störa vätskan, över den uppstår \"stötvågor\" i form av virvlar.",
+        "Virvel–antivirvelpar i superfluider är kvantiserade — varje virvel bär exakt en enhet av cirkulationskvantum, till skillnad från virvlar i vanligt vatten som kan ha vilken styrka som helst."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-06-22-kosmologiska-konstanten",
     date: "2026-06-22",
     title: "Einsteins ”största tabbe” kan äntligen ha en förklaring",

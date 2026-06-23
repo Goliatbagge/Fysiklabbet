@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-06-23 | `2026-06-23-superfluid-ljus` | Små objekt simmar uppströms i en superfluid av ljus | Phys.org / arXiv / PRL |
 | 2026-06-22 | `2026-06-22-kosmologiska-konstanten` | Einsteins "största tabbe" kan äntligen ha en förklaring | ScienceDaily / Brown University / Phys.org / PRL |
 | 2026-06-21 | `2026-06-21-kvantgivare-mork-materia` | Ny kvantgivare öppnar ett fönster mot mörk materia och gravitationsvågor | Phys.org / Imperial College London / Nature |
 | 2026-06-20 | `2026-06-20-gravastjarna-miniuniversum` | En döende stjärna kan föda ett helt nytt universum | ScienceDaily / Phys.org / Goethe-Universität / Physical Review D |

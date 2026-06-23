@@ -12,7 +12,7 @@ Format per post:
 
 ## Kö
 
-- **Superfluid av ljus: små objekt rör sig mot strömmen** — forskare observerar partiklar som rör sig "uppströms" i en superfluid av ljus, ovanlig vätskefysik. Källa: https://phys.org/physics-news/ (Phys.org, 19 juni 2026). Ämne: kvantoptik/vätskefysik. (tillagd 2026-06-21)
+
 
 ## Reservuppslag vid nyhetstorka (tidlösa)
 

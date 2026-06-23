@@ -135,6 +135,24 @@ Dra lärdom; dessa ska inte upprepas:
    i blindo. (Brände en hel iterationsrunda på detta.)
 6. **Granska alltid en INZOOMAD skärmdump** (`--force-device-scale-factor=4`)
    av punkter/tangenter/etiketter — fel på några få px syns inte i översikt.
+7. **AXELETIKETT-KONVENTION (obligatorisk på alla koordinataxlar med pilspets,
+   granskat 2026-06-23).** Beteckning och enhet placeras SEPARAT vid pilspetsen:
+   - **Beteckningen** (storhetssymbol, KURSIV) står BREDVID spetsen: variabeln
+     **till vänster** om y-pilens spets och **ovanför** x-pilens spets.
+   - **Enheten** (RAK, **UTAN parentes**) står på motsatt sida: **till höger**
+     om y-spetsen och **under** x-spetsen.
+   - Alltså INTE den gamla stilen `v (m/s)` / `t (s)` i ett block, utan
+     `v` + `m/s` resp. `t` + `s` på var sin sida om spetsen.
+   - **Tickvärdet vid själva pilspetsen skrivs INTE ut** (ger plats åt
+     etiketten) — `gen_graph.js` utelämnar det automatiskt i `style:'arrows'`.
+   - Är spetsvärdet relevant för uppgiften (t.ex. starthastigheten 10): **förläng
+     axeln ett snäpp** (sätt `ymax`/`xmax` ett steg ovanför det relevanta
+     värdet) så att värdet kan visas med pilspetsen ovanför. Se till att
+     översta ticken har ~0,7 steg luft till spetsen så beteckningen inte
+     trängs (fy1-2.4 fig2: yRange [-12,12], visar 10).
+   - I `gen_graph.js`: skicka `xVar/xUnit/yVar/yUnit` (inte `xTitle/yTitle`).
+     Enheten får innehålla `<tspan dy>` för exponent (m/s² = `m/s<tspan
+     dy="-4" font-size="9">2</tspan>`).
 
 **Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
 krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte

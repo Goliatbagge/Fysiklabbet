@@ -98,6 +98,44 @@ Annars antingen falsklarm (luft mellan geometri och ankaret) eller klippning
 glyfens versalhöjd ≈ 11 px över baslinjen — håll `vy` ≤ baslinje−11 OCH
 top-marginal ≤ tröskeln (0,06·vh, min 10); välj `vh` så att båda ryms.
 
+## ⚠️ DIAGRAM-CHECKLISTA (läs FÖRE varje nytt diagram — granskat 2026-06-23)
+
+Användaren granskade fy1-2.2 och hittade fyra fel som ALLA var undvikbara.
+Dra lärdom; dessa ska inte upprepas:
+
+1. **viewBox MÅSTE rymma textens BREDD och HÖJD, inte bara ankarpunkten.**
+   `verify-figur-bounds.js` mäter bara text-*ankaret* → en viewBox som
+   beskärs till ankaret KLIPPER glyferna utan att skriptet varnar. Symptom
+   som redan inträffat: y-axelns tal `10 20 … 60` (ankrade `end`) fick
+   vänstersiffran bortklippt och visade bara **"0 0 0"**; en diagramrubrik
+   fick överkanten kapad. **Lösning (gjord):** `gen_graph.js` beräknar nu
+   viewBoxen AUTOMATISKT inkl. uppskattad textbredd (`len·fs·0,56`),
+   versalhöjd (`0,74·fs`) och nedstapel (`0,24·fs`). **Sätt ALDRIG viewBox/
+   width/height för hand på en `makeGraph`-figur** — lita på auto-fit.
+   Behöver en figur extra topp-utrymme (t.ex. rubrik som blir översta
+   elementet) kan `pad` sänkas (t.ex. `pad: 2`) så bounds-tröskeln (0,06·vh)
+   inte överskrids.
+2. **Punkter PÅ en kurva måste BERÄKNAS från kurvfunktionen, inte ögonmåttas.**
+   Sampla kurvan som en polyline `f(t)` och placera prickar/sekant/tangent på
+   sampelparametrar → garanterat på kurvan. En **sekant** går genom TVÅ
+   kurvpunkter; en **tangent** snuddar EN kurvpunkt med lutning = lokala
+   derivatan (`(f(t+h)−f(t−h))`). Eyeballade punkter hamnade "liite ovanför".
+3. **Pedagogiska "slå en sekant/tangent"-grafer ska vara KURVOR, inte räta
+   linjer.** Adam & Bertil ritades först som räta linjer → hela poängen (att
+   approximera med en sekant) försvann. Rita oregelbundna kurvor; behåll bara
+   de avläsningspunkter uppgiften använder exakt (Bertils ändpunkter (0,6)
+   och (25,0)).
+4. **Etikettens sida styrs av kurvans konkavitet.** En konkav (nedåtböjd)
+   kurva ligger UNDER sin tangent och ÖVER sin sekantkorda → lägg
+   tangent-etiketten OVANFÖR linjen, sekant-etiketten UNDER. Lyft etiketten
+   från linjen med en vinkelrät offset så den hamnar i fri yta.
+5. **Förhandsvisnings-HTML cachar den inbäddade SVG:n.** Bygg om
+   `.shots/figtestNN.html` (cat:a in den nya svg-filen) EFTER varje
+   regenerering — annars visar skärmdumpen den gamla figuren och du "fixar"
+   i blindo. (Brände en hel iterationsrunda på detta.)
+6. **Granska alltid en INZOOMAD skärmdump** (`--force-device-scale-factor=4`)
+   av punkter/tangenter/etiketter — fel på några få px syns inte i översikt.
+
 **Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
 krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte
 text-*bredd* → tomt band mellan geometri och viewBox-kant flaggas). Lösningar:

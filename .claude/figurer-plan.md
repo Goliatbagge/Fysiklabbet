@@ -79,8 +79,29 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
      `labelDecimals:{x,y}` för fixerade decimaler på axeletiketter.
    - `.shots/gen_vec.js`-mönster (i g21.js): återanvändbar `arrow()`-helper
      (butt-cap, skalenligt huvud) för vektorfigurer.
-11. **NÄSTA:** mekanik forts. — `fy1-4.1` (1), `fy1-4.4` (1 kast), `fy1-4.7`
-   (1 F-t), `fy1-4.8` (1 rörelsemängd); därefter tryck/lyftkraft `fy1-5.x`.
+11. ~~**energi-kapitlet, fy1-4.x**~~ — **KLART (2026-06-23).** `fy1-4.1`
+   (Hosni-vagn: F snett med komposanter F₁/F₂, vinkel v, sträcka s, blå kärra
+   på hjul), `fy1-4.4` (klippkast: parabelbana via sampelpunkter, h₁-dimension,
+   läge 1/2-prickar, v₁/v₂ maroon-pilar, vågig havsyta), `fy1-4.7` (F-t-graf
+   via `gen_graph.js`: skuggad trapets-area, streckade delare vid t=3/7,
+   A/B/C-etiketter), `fy1-4.8` (rörelsemängd före/efter: två-panels
+   stick-figurer, v-pilar maroon, massetiketter). **KAPITEL ENERGI NU
+   KOMPLETT** (4.1–4.9; inga foton/SKIP). Lärdom: velocity-figurer i detta
+   kapitel använder maroon `#9c2f3a` (matchar PDF:ernas röda v-pilar).
+   `gen48.js` = ny stick-figur-generator.
+12. ~~**tryck/lyftkraft, fy1-5.x**~~ — **KLART (2026-06-23).** `fy1-5.2`
+   (fyra bassänger med olika form, dykare på samma djup + streckad djuplinje +
+   h-mått, generator `gen52.js`), `fy1-5.4` (kub i vätska med 4 röda
+   tryckkraftspilar + grön F₀ resultant; flyter/sjunker två-panels med
+   F_lyft/F_tyngd skalenligt), `fy1-5.5` (Algot-barn håller röd ballong,
+   kraftkolumn F_L/F_G/F_S skalenligt F_L=F_G+F_S), `fy1-5.7` (hydraulisk
+   domkraft med bil; U-rör med kolvar A₁/A₂, F₁/F₂, p₁=p₂). **KAPITEL TRYCK
+   NU KOMPLETT** (5.1–5.7; inga foton/SKIP). Lärdomar: edge-etiketter ankras
+   vid sin YTTRE textkant (vänster→start, höger→end) så verify-ankaret = glyfens
+   kant; `p₁ = p₂` i SVG byggs med `<tspan dy="3">`/`<tspan dy="-3">` för att
+   återställa baslinjen efter subscript.
+13. **NÄSTA:** värme `fy1-6.3` (2 fasdiagram/värme); därefter ellära
+   `fy1-7.x` (laddning/influens, ström, kopplingsscheman, fältlinjer).
 
 **Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
 radbrytning. Bygger man figur-txt med `{ echo "::: figur"; cat fil.svg;
@@ -377,8 +398,8 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [x] **fy1-3.2 (1 låda) — KLAR (pilot)**
 - [x] **fy1-3.1 (2 komposanter — dynamometer-foto SKIP) KLAR (2026-06-22)** · [x] **fy1-3.3 (kraftpar/dragkamp/bil — 7 fig) KLAR** · [x] **fy1-3.4 (3 normalkraft) — KLAR**
 - [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · [x] **fy1-3.7 (5 lutande plan) KLAR (2026-06-22)** · [x] **fy1-3.8 (1 sneda spännkrafter, parallellogram-konstruktion) KLAR (2026-06-22)** · [x] **fy1-3.9 (5 hissar/kast) KLAR (2026-06-22)** · [x] **fy1-3.10 (2 trissa) KLAR (2026-06-22)**
-- [ ] fy1-4.1 (1) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd)
-- [ ] fy1-5.2 (1) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik)
+- [x] **fy1-4.1 (1 vagn) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd) KLAR (2026-06-23)** — KAPITEL ENERGI KOMPLETT
+- [x] **fy1-5.2 (1 bassänger) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik) KLAR (2026-06-23)** — KAPITEL TRYCK KOMPLETT
 - [ ] fy1-6.3 (2 fasdiagram/värme)
 - [ ] fy1-7.1 (3 laddning/influens) · fy1-7.3 (3 ström) · fy1-7.6 (4 kopplingsscheman)
 - [ ] fy1-7.8 (1 schema) · fy1-7.10/7.11/7.12/7.13/7.14 (fältlinjer/plattor)

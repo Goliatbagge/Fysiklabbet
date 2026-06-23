@@ -176,6 +176,30 @@ Dra lärdom; dessa ska inte upprepas:
      Enheten får innehålla `<tspan dy>` för exponent (m/s² = `m/s<tspan
      dy="-4" font-size="9">2</tspan>`).
 
+**Lärdom (2026-06-23, användarens granskningsrunda fy1-4.x/5.x):** sex fel
+påpekades — ALLA undvikbara, dra lärdom:
+1. **Vinkelbeteckning står på UTSIDAN av vinkelbågen** — längs bisektrisen,
+   längre från vertex än bågens radie (bågen mellan vertex och etiketten),
+   ALDRIG innanför bågen. (fy1-4.1: `v` flyttades från radie ~0 till ~38 px
+   längs bisektrisen.)
+2. **Text får ALDRIG nudda en kurva/bana.** En läges-/punktetikett vid en
+   kurva (t.ex. "Läge 2" på en kastbana) placeras tydligt vid SIDAN om kurvan
+   med ankaret vid glyfens YTTRE kant (`text-anchor="end"` för en etikett som
+   ska ligga till höger om kurvan, så glyfens vänsterkant hamnar strax till
+   höger om kurvan). Lika viktigt i diagram: area-/deletiketter (A/B/C) måste
+   ha luft till grafens linjer — håll ≥ 6–8 px från närmaste linje (fy1-4.7:
+   `C` flyttades vänster så bokstaven inte nuddade den nedåtgående linjen).
+3. **Resulterande kraft betecknas `F_R`, ALDRIG `F_0`.** (fy1-5.4.)
+4. **Föremål mot ljus pappersbakgrund får INTE vara vita** — ett vitt föremål
+   smälter in i pappret. Använd grått (`#aeb4bc` fyllning, `#7c828c` kontur)
+   för t.ex. ett sjunkande föremål. (Vit reserveras för föremål mot mörk/blå
+   yta, t.ex. en flytande planka i vatten är OK ljusgrå.)
+5. **Visar scenen människor i en specifik kontext (rullskridskor, skidor,
+   dykare) — rita kontextrekvisitan**, inte generiska figurer. Och **variera
+   storleken efter fysiken**: större massa → längre/större figur (fy1-4.8:
+   Boel 85 kg ritades 10 % längre än Agnes 60 kg, båda med rullskridskor
+   = sula + två hjul under varje fot).
+
 **Lärdom (2026-06-22, fy1-3.3):** Långa beskrivande etiketter i fri yta
 krockar med `verify-figur-bounds` (skriptet mäter text-*ankarpunkt*, inte
 text-*bredd* → tomt band mellan geometri och viewBox-kant flaggas). Lösningar:

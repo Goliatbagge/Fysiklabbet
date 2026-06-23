@@ -138,9 +138,10 @@ Dra lärdom; dessa ska inte upprepas:
 7. **AXELETIKETT-KONVENTION (obligatorisk på alla koordinataxlar med pilspets,
    granskat 2026-06-23).** Beteckning och enhet placeras SEPARAT vid pilspetsen:
    - **Beteckningen** (storhetssymbol, KURSIV) står BREDVID spetsen: variabeln
-     **till vänster** om y-pilens spets och **ovanför** x-pilens spets.
-   - **Enheten** (RAK, **UTAN parentes**) står på motsatt sida: **till höger**
+     **till HÖGER** om y-pilens spets och **ovanför** x-pilens spets.
+   - **Enheten** (RAK, **UTAN parentes**) står på motsatt sida: **till VÄNSTER**
      om y-spetsen och **under** x-spetsen.
+     (Korrigerat 2026-06-23: y-axeln har storhet till höger, enhet till vänster.)
    - Alltså INTE den gamla stilen `v (m/s)` / `t (s)` i ett block, utan
      `v` + `m/s` resp. `t` + `s` på var sin sida om spetsen.
    - **Tickvärdet vid själva pilspetsen skrivs INTE ut** (ger plats åt

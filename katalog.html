@@ -521,30 +521,6 @@
                             ))}
                         </ul>
                     )}
-                    <div className="lab-course-intro-chapters">
-                        <div className="lab-mono-label" style={{ marginBottom: 14 }}>
-                            KAPITEL I ÄMNET
-                        </div>
-                        <div className="lab-course-chapter-grid">
-                            {chapters.map((ch, i) => {
-                                const chapterData = courseData.chapters[ch];
-                                const secCount = (chapterData.sections || []).length;
-                                return (
-                                    <button key={ch} type="button"
-                                        className="lab-course-chapter-card"
-                                        onClick={() => onPickChapter(ch)}>
-                                        <span className="lab-course-chapter-num">
-                                            {String(chapterData.number ?? i + 1).padStart(2, '0')}
-                                        </span>
-                                        <span className="lab-course-chapter-title">{ch}</span>
-                                        <span className="lab-course-chapter-meta">
-                                            {secCount} avsnitt →
-                                        </span>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </div>
                 </div>
             );
         }
@@ -1615,7 +1591,7 @@
         function Footer() {
             return (
                 <footer className="lab-section lab-footer">
-                    <span>© 2026 FYSIKLABBET</span>
+                    <span>© 2025 FYSIKLABBET</span>
                     <span>SKAPAD FÖR GYMNASIEELEVER</span>
                 </footer>
             );

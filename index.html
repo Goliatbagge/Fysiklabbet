@@ -161,14 +161,26 @@
         }
 
         function WelcomeHero() {
+            const latest = NYHETER[0];
             return (
                 <section className="lab-welcome">
+                    {latest && (
+                        <a className="lab-welcome-eyebrow" href={`nyheter.html?id=${latest.id}`}>
+                            <span className="we-tag">
+                                <span className="we-dot" aria-hidden="true" />
+                                Senaste fysiknyheten
+                            </span>
+                            <span className="we-title">{latest.title}</span>
+                            <span className="we-arrow" aria-hidden="true">→</span>
+                        </a>
+                    )}
                     <h1 className="lab-welcome-title">
                         Förstå genom att <em>utforska</em>.
                     </h1>
                     <p className="lab-welcome-lead">
                         Teori, interaktiva simuleringar och övningar för <strong>Fysik nivå 1</strong> och{' '}
-                        <strong style={{ whiteSpace: 'nowrap' }}>Fysik nivå 2</strong> på gymnasiet — läs, utforska och förstå.
+                        <strong style={{ whiteSpace: 'nowrap' }}>Fysik nivå 2</strong> på gymnasiet — plus{' '}
+                        <a href="nyheter.html" style={{ color: 'var(--lab-accent)', textDecoration: 'none', fontWeight: 600 }}>dagliga fysiknyheter</a>. Läs, utforska och förstå.
                     </p>
                     <div className="lab-welcome-actions">
                         <a className="lab-btn lab-btn-primary" href="katalog.html#fy1">
@@ -370,7 +382,7 @@
         function Footer() {
             return (
                 <footer className="lab-section lab-footer">
-                    <span>© 2026 FYSIKLABBET</span>
+                    <span>© 2025 FYSIKLABBET</span>
                     <span>SKAPAD FÖR GYMNASIEELEVER</span>
                 </footer>
             );

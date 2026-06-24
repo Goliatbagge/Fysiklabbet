@@ -62,6 +62,17 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
 Använd WebSearch/WebFetch. **Korsläs** gärna nyheten mot fler än en källa och mot
 originalpublikationen innan du skriver — siffror och namn måste stämma.
 
+### Källbank (växer över tid — lägg till bra fynd själv)
+
+Trovärdiga källor som upptäckts under researchen och är värda att återkomma till.
+Hittar du en ny pålitlig fysiknyhetskälla (institutionellt pressrum, etablerad
+vetenskapsredaktion, ämnestidskrift) — lägg till den här med en rad om vad den är bra för.
+
+- **NIST — News**: https://www.nist.gov/news-events/news — institutionellt pressrum, hög trovärdighet; bra för metrologi, optiska klockor, lasrar, kvantmätning.
+- **EurekAlert! (AAAS)**: https://www.eurekalert.org/ — aggregerar universitets/labbs pressmeddelanden med länk till originalstudien; bra för att hitta primärkällan.
+- **IEEE Spectrum**: https://spectrum.ieee.org/ — teknik/tillämpad fysik (lasrar, kvantteknik, halvledare).
+- **Optica — Optics & Photonics News (OPN)**: https://www.optica-opn.org/ — optik och fotonik, bra fördjupning i ljus/laser-nyheter.
+
 **De sex källorna ovan är utgångspunkten för att HITTA dagens nyhet — inte en gräns
 för var du får läsa.** När du väl valt en nyhet får (och bör) du söka vidare fritt på
 andra sidor för att fördjupa dig: universitetens och labbens egna pressmeddelanden,
@@ -100,11 +111,20 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
 
 Varje artikel ska ha **minst en bild**.
 
-1. **Leta open source-bild först.** Sök efter en ren, snygg bild som hör till
-   nyheten eller passar den mycket väl. Tillåtna källor: Wikimedia Commons, NASA/ESA,
-   forskningslabbens egna pressbilder med fri licens, CC0/CC-BY. **Krav:** ingen
-   vattenstämpel, inget filnamn/text inbränt i bilden, inga fula JPEG-artefakter.
-   Ange korrekt **bildkälla och licens** i `imageCredit`.
+1. **Leta efter en RIKTIG forskningsbild först — och ansträng dig på riktigt.**
+   Finns det ett äkta foto, en figur eller en pressbild från själva forskningen
+   som är fri att använda → föredra ALLTID den framför en AI-genererad bild. En
+   verklig bild av apparaten/upptäckten/forskarna ger artikeln mer trovärdighet och
+   värde än en illustration. Kolla därför aktivt:
+   - **Originalpublikationen och dess pressmeddelande** (universitetets/labbets
+     pressrum, EurekAlert!, journalens pressmaterial) — där ligger ofta en pressbild
+     med uttalad fri licens (CC-BY) eller "free for editorial/press use".
+   - **Institutionella bildbanker:** Wikimedia Commons, NASA/ESA/CERN, NIST m.fl.
+   **Krav:** licensen måste tillåta användning (CC0/CC-BY/uttalad pressanvändning),
+   ingen vattenstämpel, inget filnamn/text inbränt i bilden, inga fula JPEG-artefakter.
+   Ladda ner bilden till `nyheter/bilder/<id>.<ext>` och ange korrekt **bildkälla,
+   upphovsperson och licens** i `imageCredit` (t.ex. `"Foto: NTU Singapore (CC&nbsp;BY&nbsp;4.0)"`).
+   Generera bara en egen bild om du inte hittar en lämplig, fritt användbar riktig bild.
 2. **Annars: generera en egen bild** med Gemini-bildgeneratorn
    (skill `gemini-imagegen`, kör scriptet med projektets system-Python — se nedan).
    Beskriv en ren, professionell, redaktionell illustration **utan text, utan

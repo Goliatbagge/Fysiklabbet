@@ -389,6 +389,64 @@ body.laborans a {
     width: 100%;
 }
 
+.lab-welcome-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 22px;
+    padding: 7px 14px 7px 12px;
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 999px;
+    background: var(--lab-bg-panel);
+    max-width: 100%;
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.lab-welcome-eyebrow:hover {
+    border-color: var(--lab-accent);
+    box-shadow: 0 4px 16px rgba(15, 22, 32, 0.07);
+    transform: translateY(-1px);
+}
+.lab-welcome-eyebrow .we-tag {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--lab-font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lab-accent);
+}
+.lab-welcome-eyebrow .we-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--lab-accent);
+    box-shadow: 0 0 0 0 var(--lab-accent);
+    animation: we-pulse 2s ease-out infinite;
+}
+@keyframes we-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(200, 50, 74, 0.45); }
+    70%  { box-shadow: 0 0 0 7px rgba(200, 50, 74, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(200, 50, 74, 0); }
+}
+.lab-welcome-eyebrow .we-title {
+    font-size: 13px;
+    color: var(--lab-ink-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+.lab-welcome-eyebrow:hover .we-title { color: var(--lab-ink); }
+.lab-welcome-eyebrow .we-arrow {
+    flex-shrink: 0;
+    font-family: var(--lab-font-mono);
+    color: var(--lab-ink-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+    .lab-welcome-eyebrow .we-dot { animation: none; }
+}
+
 .lab-welcome-title {
     font-family: var(--lab-font-display);
     font-size: 88px;

@@ -246,6 +246,23 @@ Tre fall där radbrytning måste förhindras:
 3. **Variabel + värde + enhet**: ALLTID math-block — `$g = 9{,}82\ \mathrm{N/kg}$`.
    Gäller alla operatorer: `=`, `≈` (`\approx`), `<`, `>`, `≤` (`\leq`),
    `≥`, `∝` (`\propto`), `≠`.
+4. **Hela relationen i ETT math-block** — en relation mellan storheter
+   (t.ex. `F_f = F_drag`, `F_N = F_G`) skrivs som **ett** sammanhållet
+   math-block `$F_f = F_\text{drag}$`, ALDRIG som två separata inline-math
+   med operatorn utanför (`$F_f$ = $F_\text{drag}$`). I det senare fallet är
+   ` = ` vanlig löptext och webbläsaren får bryta raden vid operatorn, så
+   `F_drag` hamnar på nästa rad. Math-blocket har `white-space: nowrap` och
+   håller ihop hela uttrycket. Återkommande fel (påpekat 2026-06-22).
+5. **ALDRIG markdown-kursiv variabel följt av värde** (`*t*₁ = 0 min`,
+   `*t* = 5,0 s`) i löptext eller frågestam — använd math-block
+   (`$t_1 = 0\ \mathrm{min}$`, `$t = 5{,}0\ \mathrm{s}$`). Markdown-formen
+   bryter raden mellan beteckning och värde (` = värde` är vanlig löptext),
+   och **inuti en fet `::: exempel`-stam** (`**…**`) kolliderar dessutom
+   asteriskerna i `*t*` med fet-asteriskerna `**` så att hela frågan
+   renderas kursiv med en lös `*` i kanten. **Det får ALDRIG ske en
+   radbrytning mellan beteckning, likhetstecken och värde** — pakka alltid
+   `beteckning = värde [enhet]` i ett math-block. Återkommande fel
+   (påpekat 2026-06-23).
 
 Math-block ($...$) är immuna mot NBSP-behov — inom KaTeX används `\,`
 som tunt skyddande tusentalsavgränsare (`2\,700`).
@@ -587,10 +604,34 @@ En *v*-pil (eller komposant *v*ₓ/*v*ᵧ) ritas så att dess bakkant ligger på
 objektets rand i pilens riktning. Aldrig inifrån objektet. Gäller både
 inline-SVG-figurer (övningar) och canvas/SVG-renderade simuleringar.
 
-**Kraftvektorer startar däremot i angreppspunkten** (typiskt CM för
-tyngd-/normalkraft, kontaktpunkten för friktion/normal mot underlag).
-Kraftpilens *bas* får alltså ligga inuti kroppen — det är hela poängen
-med en angreppspunkt.
+**Kraftvektorer startar däremot i angreppspunkten:**
+- **Tyngdkraft `F_G`** — i tyngdpunkten (CM).
+- **Normalkraft `F_N`** — i **KONTAKTYTAN** (där kropparna möts), aldrig uppe
+  på kroppen. En vikt på ett vågrätt bord → `F_N`-pilens *svans* sitter vid
+  lådans **undersida** (kontaktytan mot bordet) och pilen pekar uppåt
+  *genom* kroppen. Rita ALDRIG `F_N` med svansen i toppen eller mitten av
+  kroppen. (Uttryckligt önskemål, påpekat 2026-06-22.)
+- **Friktion `F_f`** — i kontaktytan, i kroppens bakkant (se nedan).
+
+Kraftpilens *bas* får alltså ligga inuti/under kroppen — det är hela poängen
+med en angreppspunkt. **Markera angreppspunkten med en prick
+(`<circle r="2.6">`) ENDAST för tyngdkraften `F_G`** (för att tydliggöra
+tyngdpunkten). Övriga krafter (`F_N`, `F_f`, `F_S`, applicerad `F` …) får
+INGEN prick — bara pilen.
+
+**Pilens skaft ska sluta vid pilhuvudets BAS, inte vid spetsen.** Ritas
+pilen som `<line>` + `<polygon>`-huvud (i SVG-figurer) måste linjens
+ändpunkt ligga vid huvudets bakkant, inte vid spetsen — annars sticker
+linjens rundade ände ut förbi spetsen som en liten tagg. Ex: spets
+`(x, t)`, huvudhöjd 9 px ⇒ `<line … y2="t+9">` och
+`<polygon points="x-6,t+9 x,t x+6,t+9">`. Återkommande påpekat.
+
+**Kraftpilens skaft ska ha `stroke-linecap="butt"`, ALDRIG `"round"`.** En
+rund linjeände buktar ut en halv linjebredd **bakom** svansen (angrepps-
+punkten), så pilen ser ut att starta bakom/under kontaktytan i stället för
+exakt på den. Med `butt` slutar linjen precis vid angreppspunkten. (Gäller
+även en ev. mörk casing-linje under pilen.) Dekorativa linjer (mark,
+hatch) får däremot gärna ha runda ändar. Påpekat 2026-06-22.
 
 **Friktion mot underlag: angreppspunkten ligger i kroppens BAKKANT** (den
 kant som är "bak" sett i rörelse-/dragriktningen), inte i mitten. Puttas en
@@ -629,15 +670,26 @@ de ska inte behöva påpekas av användaren:
    aldrig sidoförskjuten. Markera tyngdpunkten med en liten ifylld prick
    (`<circle r="2.6">`) vid pilens svans. Behöver `F_N` särskiljas från `F_G`
    på vågrätt underlag → förskjut **`F_N`** i sidled, inte `F_G`.
-3. **Vid komposantuppdelning: rita ALLA relevanta komposanter.** På lutande
-   plan ska *både* den vinkelräta (`F_G · cos α`) *och* den parallella
-   (`F_G · sin α`) komposanten ritas — streckade, som en parallellogram där
-   `F_G` är diagonalen (rita de två kompletterande sidorna som svaga
-   streckade guider). En komposant som fysikaliskt är lika med en annan
-   ritad vektor (`F_⊥ = F_N`) **måste ritas exakt lika lång** — annars
-   klagar användaren att "den ena ser kortare ut". Gör figuren stor nog
-   (höj `LMAX`/standardvärdet) så pilarna inte trasslar ihop sig till en
-   klump vid små krafter.
+3. **SKALENLIGA KRAFTVEKTORER — pilens längd ∝ kraftens belopp (viktig
+   princip, upprepat påpekad).** Rita ALDRIG alla kraftpilar "lagom långa".
+   Räkna ut beloppen, välj en skala (px per N) som rymmer alla pilar, och
+   sätt varje pils längd = belopp · skala. Pilhuvudet hålls lika stort på
+   alla pilar — det är skaftets/totallängden som bär informationen.
+   - **Lika stora krafter ritas exakt lika långa** (jämvikt `F_N = F_G` på
+     vågrätt underlag; `F_N = F` mot vägg; en komposant `F_⊥ = F_N`). Annars
+     klagar användaren att "den ena ser kortare ut".
+   - **Dubbelt så stor kraft → dubbelt så lång pil** (24 kg-vikt ger pil
+     dubbelt så lång som 12 kg-vikt).
+   - **Resulterande/summa-vektor ritas lika lång som komposanterna
+     tillsammans** (bom: `F_N = F_Gbom + F_Gvikt` ⇒ `F_N`-pilen lika lång som
+     `F_Gbom`- och `F_Gvikt`-pilarna staplade).
+   - **Vid komposantuppdelning: rita ALLA relevanta komposanter.** På lutande
+     plan ska *både* den vinkelräta (`F_G · cos α`) *och* den parallella
+     (`F_G · sin α`) komposanten ritas — streckade, som en parallellogram där
+     `F_G` är diagonalen (rita de två kompletterande sidorna som svaga
+     streckade guider).
+   Gör figuren stor nog (höj `LMAX`/standardvärdet) så pilarna inte trasslar
+   ihop sig till en klump vid små krafter.
 4. **Etiketter får ALDRIG ligga på en färgad/mönstrad bakgrund** (tegelvägg,
    ballong, planets fyllning) — de blir svårlästa. Flytta etiketten ut till
    den lugna pappersytan precis utanför objektet (`text-anchor="end"`/

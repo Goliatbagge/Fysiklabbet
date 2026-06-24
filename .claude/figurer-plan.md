@@ -108,9 +108,32 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    tunna guide-pilar #6f93b8 + tvåradiga etiketter). PDF: `Kopia av Fy 1 7.03
    Faser och fasövergångar.pdf`. Lärdom: NBSP före °C (0 °C) gör exakt
    Edit-matchning omöjlig → splica via radnummer i python i stället.
-14. **NÄSTA:** ellära `fy1-7.x` (laddning/influens, ström, kopplingsscheman,
-   fältlinjer). OBS resten av värme-kapitlet (fy1-6.x) har inga fler
-   `::: bild`-block utom 6.3 — kolla med grep innan.
+14. ~~ellära `fy1-7.x`~~ — **KLART (2026-06-24). KAPITEL ELLÄRA KOMPLETT.**
+   17 figurer över 6 filer:
+   - `fy1-7.1` (3): laddade kulor som pendlar (repulsion/neutral/attraktion),
+     influens i ledare (oladdat vs negativ stav), influens isolator (dipoler)
+     vs ledare (fria elektroner). `gen71.js`.
+   - `fy1-7.3` (3): elektronflöde (ledare+batteri, röd strömpil vs blå
+     elektronpil), Kirchhoff (4 strömmar I1+I2=I3+I4), T-förgrening. `gen73.js`.
+   - `fy1-7.6` (4 + symboltabell): amperemeter serie, voltmeter parallellt,
+     serie- och parallellkoppling. Symboltabell P15–P22 → inline-symboler.
+     **Återanvändbart symbolbibliotek `gen76.js`** (lamp/meter/batteryH/wire/
+     resistor/switch). Detta är grundmallen för alla framtida kretsscheman.
+   - `fy1-7.8` (1): komplex koppling R1 i serie med parallell R2/R3. `gen78.js`.
+   - `fy1-7.10` (1): tre fältlinjemönster (+/−/dipol). `gen710.js`.
+   - `fy1-7.11` (1): homogent fält mellan plattor 2D+3D. `gen711.js`.
+   - `fy1-7.12` (1): analogi laddning-i-fält vs massa-i-gravfält. `gen712.js`.
+   - `fy1-7.13` (1): Faradays bur i 3 steg. `gen713.js`.
+   - `fy1-7.14` (1): Millikans oljedroppe i jämvikt. `gen714.js`.
+   Färgkonvention etablerad: **röd = +, blå = −, grön = neutral**; kretsar i
+   currentColor (ink). Lärdomar: (a) topp-etikett med versal (U/R/I) à 16px
+   spräcker 10px-marginalströskeln → använd 14px för topp-etiketter; (b) 𝔼
+   (blackboard-E, U+1D53C) renderas fint i Poppins-fallback; (c) tabellceller
+   hade U+0001-styrtecken runt P-platshållarna → matcha inkl. dem.
+15. **NÄSTA:** kvar i fy1 (drawable): `fy1-8.1` (1, relativitet?) och
+   `fy1-9.1` (2, atom). Resten av fy1 är SKIP (foton/GeoGebra: 1.4, 2.7, 3.1,
+   3.3). Sedan hela **Fysik 2** (fy2-*.md) — börja med mekanik fy2-1.x
+   (moment/cirkelrörelse/pendlar), de liknar fy1-3-mallarna mest.
 
 **Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
 radbrytning. Bygger man figur-txt med `{ echo "::: figur"; cat fil.svg;
@@ -434,8 +457,8 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [x] **fy1-4.1 (1 vagn) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd) KLAR (2026-06-23)** — KAPITEL ENERGI KOMPLETT
 - [x] **fy1-5.2 (1 bassänger) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik) KLAR (2026-06-23)** — KAPITEL TRYCK KOMPLETT
 - [x] **fy1-6.3 (2: fascykel + värmediagram) KLAR (2026-06-24)** — KAPITEL VÄRME (enda bild-blocket)
-- [ ] fy1-7.1 (3 laddning/influens) · fy1-7.3 (3 ström) · fy1-7.6 (4 kopplingsscheman)
-- [ ] fy1-7.8 (1 schema) · fy1-7.10/7.11/7.12/7.13/7.14 (fältlinjer/plattor)
+- [x] **fy1-7.1 (3 laddning/influens) · fy1-7.3 (3 ström) · fy1-7.6 (4 koppling + symboltabell) KLAR (2026-06-24)**
+- [x] **fy1-7.8 (1 schema) · fy1-7.10/7.11/7.12/7.13/7.14 (fältlinjer/plattor, 6 fig) KLAR (2026-06-24)** — KAPITEL ELLÄRA KOMPLETT
 - [ ] fy1-8.1 (1) · fy1-9.1 (2 atom)
 
 ### Fysik 2

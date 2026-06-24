@@ -100,8 +100,17 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    vid sin YTTRE textkant (vänster→start, höger→end) så verify-ankaret = glyfens
    kant; `p₁ = p₂` i SVG byggs med `<tspan dy="3">`/`<tspan dy="-3">` för att
    återställa baslinjen efter subscript.
-13. **NÄSTA:** värme `fy1-6.3` (2 fasdiagram/värme); därefter ellära
-   `fy1-7.x` (laddning/influens, ström, kopplingsscheman, fältlinjer).
+13. ~~värme `fy1-6.3`~~ — **KLAR (2026-06-24).** 2 figurer: fascykel
+   (Fast/Flytande/Gas med iskub/droppe/moln + sex böjda övergångspilar,
+   stora sublimering/deposition-bågar + små smältning/stelning/förångning/
+   kondensering, generator `gen63.js` med `arc()`-helper för Bézier-pilhuvuden)
+   och värmediagram (cyan axlar, blå trappkurva med två platåer vid 0/100 °C,
+   tunna guide-pilar #6f93b8 + tvåradiga etiketter). PDF: `Kopia av Fy 1 7.03
+   Faser och fasövergångar.pdf`. Lärdom: NBSP före °C (0 °C) gör exakt
+   Edit-matchning omöjlig → splica via radnummer i python i stället.
+14. **NÄSTA:** ellära `fy1-7.x` (laddning/influens, ström, kopplingsscheman,
+   fältlinjer). OBS resten av värme-kapitlet (fy1-6.x) har inga fler
+   `::: bild`-block utom 6.3 — kolla med grep innan.
 
 **Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
 radbrytning. Bygger man figur-txt med `{ echo "::: figur"; cat fil.svg;
@@ -424,7 +433,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [x] **fy1-3.6 (4 friktion: kloss/bokhylla/bil/gång) KLAR (2026-06-22)** · [x] **fy1-3.7 (5 lutande plan) KLAR (2026-06-22)** · [x] **fy1-3.8 (1 sneda spännkrafter, parallellogram-konstruktion) KLAR (2026-06-22)** · [x] **fy1-3.9 (5 hissar/kast) KLAR (2026-06-22)** · [x] **fy1-3.10 (2 trissa) KLAR (2026-06-22)**
 - [x] **fy1-4.1 (1 vagn) · fy1-4.4 (1 kast) · fy1-4.7 (1 F-t) · fy1-4.8 (1 rörelsemängd) KLAR (2026-06-23)** — KAPITEL ENERGI KOMPLETT
 - [x] **fy1-5.2 (1 bassänger) · fy1-5.4 (2 lyftkraft) · fy1-5.5 (1 ballong) · fy1-5.7 (2 hydraulik) KLAR (2026-06-23)** — KAPITEL TRYCK KOMPLETT
-- [ ] fy1-6.3 (2 fasdiagram/värme)
+- [x] **fy1-6.3 (2: fascykel + värmediagram) KLAR (2026-06-24)** — KAPITEL VÄRME (enda bild-blocket)
 - [ ] fy1-7.1 (3 laddning/influens) · fy1-7.3 (3 ström) · fy1-7.6 (4 kopplingsscheman)
 - [ ] fy1-7.8 (1 schema) · fy1-7.10/7.11/7.12/7.13/7.14 (fältlinjer/plattor)
 - [ ] fy1-8.1 (1) · fy1-9.1 (2 atom)

@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-06-24 | `2026-06-24-optiska-skyrmioner` | 200 år gammalt ljusexperiment skapar virvlande mönster som kan revolutionera datorminnen | Phys.org / NTU Singapore / Optica |
 | 2026-06-23 | `2026-06-23-superfluid-ljus` | Små objekt simmar uppströms i en superfluid av ljus | Phys.org / arXiv / PRL |
 | 2026-06-22 | `2026-06-22-kosmologiska-konstanten` | Einsteins "största tabbe" kan äntligen ha en förklaring | ScienceDaily / Brown University / Phys.org / PRL |
 | 2026-06-21 | `2026-06-21-kvantgivare-mork-materia` | Ny kvantgivare öppnar ett fönster mot mörk materia och gravitationsvågor | Phys.org / Imperial College London / Nature |

@@ -135,7 +135,7 @@ const NYHETER_ALL = [
       url: "https://doi.org/10.1364/optica.591175"
     },
     body: [
-      { type: "p", html: "Hur bygger man en klocka som är så noggrann att den inte tappar en sekund på miljarder år? Svaret börjar inte med kugghjul utan med <strong>ljus</strong> — och med en laser som håller sin ton extremt stabil. Forskare vid brittiska <strong>National Physical Laboratory</strong> har nu satt rekord: en laser så stabil att dess frekvens bara vacklar med ungefär <strong>4 × 10⁻¹⁷</strong> — fyra delar på hundra biljarder." },
+      { type: "p", html: "Hur bygger man en klocka som är så noggrann att den inte tappar en sekund på miljarder år? Svaret börjar inte med kugghjul utan med <strong>ljus</strong> — och med en laser som håller sin ton extremt stabil. Forskare vid brittiska <strong>National Physical Laboratory</strong> har nu satt rekord: en laser så stabil att dess frekvens bara vacklar med ungefär <strong>4 × 10<sup>−17</sup></strong> — fyra delar på hundra biljarder." },
 
       { type: "h2", text: "Lasern är klockans pendel" },
       { type: "p", html: "Ett <strong>optiskt atomur</strong> fungerar genom att en laser ställs in mot atomernas naturliga svängningar, ungefär som man stämmer en gitarrsträng mot en stämgaffel. Atomerna håller takten, men det är lasern som räknar svängningarna — och därför kan klockan aldrig bli stabilare än lasern själv. För att stabilisera lasern låser man den till en <strong>optisk kavitet</strong>: två speglar med en exakt bestämd sträcka emellan, där ljuset studsar fram och tillbaka och bildar en <strong>stående våg</strong>. Avståndet mellan speglarna måste hållas otroligt konstant — minsta lilla skälvning förskjuter tonen." },

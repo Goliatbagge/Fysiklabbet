@@ -31,6 +31,56 @@
  */
 window.NYHETER = [
   {
+    id: "2026-06-25-asteroid-1997-nc1",
+    date: "2026-06-25",
+    title: "Kilometerstor asteroid sveper förbi jorden i helgen — närmast på 400 år",
+    deck: "Den potentiellt farliga asteroiden 152637 (1997 NC1) passerar jorden lördag den 27 juni på 2,56 miljoner kilometers avstånd. Det är dess närmaste besök sedan före år 1600 — men det är ingen fara: den missar oss med nästan sju gånger avståndet till månen.",
+    category: "Astronomi",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-25-asteroid-1997-nc1.jpg",
+    imageAlt: "Illustration av en mörk, oregelbunden asteroid som passerar förbi jorden mot en stjärnbeströdd rymdbakgrund.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["astronomi", "asteroid", "jordnära objekt", "neo", "gravitation", "omloppsbana", "kepler", "planetärt försvar", "rymden"],
+    sources: [
+      { name: "NASA/JPL Goldstone-radar (DSS)", url: "https://echo.jpl.nasa.gov/asteroids/1997nc1.2026.goldstone.planning.html" },
+      { name: "The Virtual Telescope Project", url: "https://www.virtualtelescope.eu/2026/03/24/potentially-hazardous-asteroid-152637-1997-nc1-close-encounter-online-observation-27-june-2026/" },
+      { name: "Space Reference", url: "https://www.spacereference.org/asteroid/152637-1997-nc1" }
+    ],
+    research: {
+      citation: "NASA/JPL Center for Near-Earth Object Studies (CNEOS), Small-Body Database: 152637 (1997 NC1)",
+      url: "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=152637"
+    },
+    body: [
+      { type: "p", html: "Lördagen den 27 juni får jorden ett ovanligt närgånget besök. Asteroiden <strong>152637 (1997&nbsp;NC1)</strong> — ett stenblock nästan en kilometer i diameter — passerar oss på bara 2,56&nbsp;miljoner kilometers avstånd. Det låter mycket, men i astronomiska mått är det ett snävt förbiflyg: det är det närmaste den här asteroiden har varit jorden sedan <em>före år 1600</em>, så långt tillbaka som man hittills kunnat räkna ut dess bana." },
+
+      { type: "h2", text: "Nära — men fullständigt ofarligt" },
+      { type: "p", html: "Det första man bör veta är att det inte finns någon som helst kollisionsrisk. Asteroiden missar jorden med ungefär <strong>6,7 gånger avståndet till månen</strong> (månen ligger i snitt 384&nbsp;000&nbsp;km bort). Astronomer har följt 1997&nbsp;NC1 sedan den upptäcktes den 5&nbsp;juli 1997 och kan förutsäga dess bana med stor precision många hundra år framåt och bakåt i tiden." },
+      { type: "quote", html: "Mötet är nära, men säkert — det finns inga risker alls för vår planet. Ett liknande närmande av en asteroid av den här storleken inträffar i genomsnitt vart tionde år.", cite: "The Virtual Telescope Project" },
+      { type: "p", html: "Närmast är asteroiden klockan 13.16 svensk tid på lördagen. Då rör den sig förbi oss med en relativ hastighet på nästan 9&nbsp;km/s — drygt 32&nbsp;000&nbsp;km/h. Nästa lika nära passage dröjer ända till år 2133." },
+
+      { type: "h2", text: "Varför kallas den ”potentiellt farlig”?" },
+      { type: "p", html: "1997&nbsp;NC1 är klassad som en <strong>potentiellt farlig asteroid</strong> (på engelska <em>potentially hazardous asteroid</em>, PHA). Det låter dramatiskt, men beteckningen är en ren bokföringsregel, inte en varning för en nära förestående krock. En asteroid får stämpeln om den uppfyller två villkor: den ska vara större än ungefär 140&nbsp;meter, och dess bana ska kunna föra den närmare jorden än 0,05&nbsp;astronomiska enheter (cirka 7,5&nbsp;miljoner kilometer) någon gång." },
+      { type: "p", html: "Med sina knappt 900&nbsp;meter klarar 1997&nbsp;NC1 båda kriterierna med marginal. Klassningen betyder helt enkelt att det är ett objekt värt att hålla noga koll på under lång tid — inte att en kollision är på gång." },
+
+      { type: "h2", text: "En asteroid som lever innanför jordens bana" },
+      { type: "p", html: "1997&nbsp;NC1 tillhör <strong>Aten-gruppen</strong> av jordnära asteroider. Det är en familj vars omloppsbanor till största delen ligger <em>innanför</em> jordens bana, närmare solen. Asteroiden varvar solen på bara 294&nbsp;dygn — alltså snabbare än jordens år — på ett medelavstånd av 0,86&nbsp;astronomiska enheter. Banan är samtidigt så pass tillplattad (elliptisk) att den ibland korsar jordens bana, och det är då de här mötena kan ske." },
+      { type: "p", html: "Att ett så här stort objekt passerar relativt nära är ett guldläge för forskarna. NASA planerar att studsa radarvågor mot asteroiden med <strong>Goldstone-radarn</strong> i Kaliforniens öken: en 34-metersantenn skickar ut en radarsignal (7&nbsp;190&nbsp;MHz) och en annan antenn fångar upp ekot. Ur ekot kan man läsa av asteroidens form, storlek och rotation — som en sorts radarfotografering av en himlakropp 2,5&nbsp;miljoner kilometer bort." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Asteroidens bana är ett rent skolexempel på <strong>gravitation och Keplers lagar</strong> (Fysik&nbsp;1 och Fysik&nbsp;2). Det är solens dragningskraft, beskriven av Newtons gravitationslag, som tvingar in asteroiden i en elliptisk bana — precis som planeterna. Keplers tredje lag binder ihop banans storlek med omloppstiden: ju närmare solen en kropp i snitt ligger, desto kortare blir dess ”år”. Att 1997&nbsp;NC1:s omloppstid är 294&nbsp;dygn — kortare än jordens 365 — följer direkt av att dess bana är mindre än jordens." },
+      { type: "p", html: "Och själva förbiflygningen illustrerar ett knep från <strong>rörelseläran</strong>: det som spelar roll för hur nära två kroppar möts är inte deras hastigheter var för sig, utan deras <em>relativa</em> hastighet och riktning. Jorden och asteroiden rör sig båda i tiotals km/s runt solen, men det är skillnaden mellan deras rörelser som avgör hur snabbt asteroiden tycks svepa förbi oss." },
+
+      { type: "fact", title: "Asteroiden i siffror", items: [
+        "Diameter: ungefär 0,9 km (uppskattningar spänner mellan 0,7 och 1,6 km).",
+        "Närmaste avstånd: 2,56 miljoner km = 6,7 månavstånd, lördag 27 juni 2026.",
+        "Relativ hastighet vid passagen: nästan 9 km/s (ca 32 000 km/h).",
+        "Omloppstid runt solen: 294 dygn — kortare än jordens år.",
+        "Upptäckt: 5 juli 1997. Nästa lika nära passage: år 2133."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-06-24-optiska-skyrmioner",
     date: "2026-06-24",
     title: "200 år gammalt ljusexperiment skapar virvlande mönster som kan revolutionera datorminnen",

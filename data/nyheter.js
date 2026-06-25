@@ -29,7 +29,174 @@
  *                 { type: 'quote',html: '…', cite: '…' }
  *                 { type: 'fact', title: '…', items: ['…', …] }   faktaruta
  */
-window.NYHETER = [
+const NYHETER_ALL = [
+  {
+    id: "2026-06-30-citronplanet-av-kol",
+    date: "2026-06-30",
+    title: "Webb-teleskopet hittar en citronformad planet med atmosfär av rent kol",
+    deck: "Runt en snurrande neutronstjärna har James Webb-teleskopet upptäckt en värld som ingen teori kan förklara: en Jupiterstor planet deformerad till en citron, insvept i sotmoln och kanske med en kärna av diamant.",
+    category: "Astrofysik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-30-citronplanet-av-kol.jpg",
+    imageAlt: "Illustration av en citronformad, mörk planet med sotiga moln som kretsar tätt kring en blåskimrande pulsar i rymden.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["astrofysik", "exoplanet", "james webb", "pulsar", "neutronstjärna", "spektroskopi", "tidvattenkrafter", "kol", "astronomi"],
+    sources: [
+      { name: "NASA Science (Webb)", url: "https://science.nasa.gov/missions/webb/nasas-webb-observes-exoplanet-whose-composition-defies-explanation/" },
+      { name: "University of Chicago", url: "https://news.uchicago.edu/story/nasas-webb-telescope-finds-bizarre-atmosphere-lemon-shaped-exoplanet" }
+    ],
+    research: {
+      citation: "M. Zhang et al., “A Carbon-rich Atmosphere on the Pulsar Planet PSR J2322−2650b”, The Astrophysical Journal Letters (2025)",
+      url: "https://science.nasa.gov/missions/webb/nasas-webb-observes-exoplanet-whose-composition-defies-explanation/"
+    },
+    body: [
+      { type: "p", html: "Ibland hittar astronomerna något så märkligt att de själva tappar hakan. Så blev det när NASA:s <strong>James Webb-teleskop</strong> riktades mot planeten <strong>PSR&nbsp;J2322−2650b</strong>: en Jupiterstor värld med en atmosfär gjord av nästan rent kol, kläckt i sotmoln och kanske med diamanter i sitt inre. Ingen känd teori förklarar hur en sådan planet kan finnas." },
+
+      { type: "h2", text: "En planet i en dödsstjärnas grepp" },
+      { type: "p", html: "Planeten kretsar inte kring en vanlig stjärna utan kring en <strong>pulsar</strong> — en snabbt roterande neutronstjärna, resten av en utbränd jättestjärna som kollapsat till en stadsstor klump av extremt tät materia. Planeten ligger oerhört nära sin pulsar och rusar runt den på bara 7,8&nbsp;timmar. Den enorma tyngdkraften drar och tänjer planeten så att den inte är rund utan formad som en <em>citron</em> — samma sorts tidvattenkraft som får jordens hav att stiga och sjunka, fast hejdlöst mycket starkare." },
+
+      { type: "h2", text: "En atmosfär som inte borde finnas" },
+      { type: "p", html: "Det verkligt häpnadsväckande är vad atmosfären består av. När Webb delade upp planetens ljus i ett spektrum saknades de molekyler man brukar se på heta jätteplaneter — vatten, koldioxid, metan. I stället dök <strong>molekylärt kol</strong> upp: kedjor av två och tre kolatomer (C₂ och C₃) som bara kan dominera när syre och kväve är så gott som helt borta. En sådan kolrik atmosfär har aldrig setts på någon av de cirka 150 planeter forskarna hittills kartlagt." },
+      { type: "quote", html: "Det var en fullständig överraskning. Jag minns att vår gemensamma reaktion när vi fick ner datan var: ”Vad i hela friden är det här?”", cite: "Peter Gao, Carnegie Earth and Planets Laboratory" },
+      { type: "p", html: "Atmosfären är dessutom fylld av <strong>sotmoln</strong>, och djupt inne i planeten kan kolet under det enorma trycket pressas samman till <strong>diamant</strong>. En planet av sot och ädelstenar, format som en citron, runt en stjärnas lik — det låter som science fiction, men det är en verklig värld i vår galax." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Upptäckten bygger på <strong>spektroskopi</strong> — att läsa av vilka ämnen som finns i en atmosfär genom de mörka absorptionslinjer de lämnar i ljuset. Det är samma princip som i Fysik&nbsp;nivå&nbsp;2:s avsnitt om spektra och energinivåer: varje grundämne har sitt eget fingeravtryck i ljuset. Planetens citronform är ren <strong>gravitation och tidvattenkrafter</strong> (Fysik&nbsp;nivå&nbsp;1), och att kol kan bli diamant djupt inne är ett exempel på hur <strong>tryck och temperatur</strong> styr ett ämnes faser." },
+
+      { type: "fact", title: "Planeten i korthet", items: [
+        "Namn: PSR J2322−2650b — en planet med ungefär Jupiters massa.",
+        "Kretsar kring en pulsar (neutronstjärna) på bara 7,8 timmar.",
+        "Atmosfär av molekylärt kol (C₂ och C₃) — aldrig tidigare sett på en exoplanet.",
+        "Tidvattenkrafterna tänjer ut planeten till en citronform.",
+        "Sotmoln i atmosfären och möjligen diamant i det inre."
+      ]}
+    ]
+  },
+
+  {
+    id: "2026-06-29-enkelriktat-ljud",
+    date: "2026-06-29",
+    title: "Forskare bygger en ”enkelriktad gata” för ljudets minsta byggstenar",
+    deck: "Tre fysiker vid japanska RIKEN har visat hur kvantiserade ljudpaket — fononer — kan fås att synkronisera bara åt ett håll. Knepet är tåligt mot brus och kan göra framtidens kvantdatorer mer pålitliga.",
+    category: "Kvantfysik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-29-enkelriktat-ljud.jpg",
+    imageAlt: "Abstrakt illustration av vibrationsvågor som rör sig åt ett håll genom ett rutmönstrat kristallgitter, med en spärr som blockerar motsatt riktning.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kvantfysik", "fononer", "ljud", "vågor", "synkronisering", "kvantdator", "akustik", "modern fysik"],
+    sources: [
+      { name: "RIKEN", url: "https://www.riken.jp/en/news_pubs/research_news/rr/20260424_1/index.html" },
+      { name: "ScienceDaily", url: "https://www.sciencedaily.com/releases/2026/06/260611024619.htm" }
+    ],
+    research: {
+      citation: "F. Nori, A. Miranowicz, D.-G. Lai, “Nonreciprocal quantum synchronization”, Nature Communications (2026)",
+      url: "https://www.riken.jp/en/news_pubs/research_news/rr/20260424_1/index.html"
+    },
+    body: [
+      { type: "p", html: "Redan 1665 låg den nederländske fysikern Christiaan Huygens sjuk i sängen och lade märke till något konstigt: två pendelur som hängde på samma vägg ställde efter ett tag in sig i exakt motfas, helt av sig själva. Det var den första beskrivningen av <strong>synkronisering</strong> — fenomenet att svängande system som kopplas ihop faller i takt. Nu har forskare lyckats få fenomenet att fungera <em>bara åt ett håll</em>." },
+
+      { type: "h2", text: "Vad är en fonon?" },
+      { type: "p", html: "På samma sätt som ljus kommer i små energipaket — <em>fotoner</em> — kommer vibrationer och ljud i kvantiserade paket som kallas <strong>fononer</strong>. När atomerna i ett fast material svänger fram och tillbaka kan man beskriva svängningarna som en svärm av fononer. De bär ljud, värme och vibrationer genom materialet, och i pyttesmå mekaniska kvantsystem kan enstaka fononer styras nästan en i taget." },
+
+      { type: "h2", text: "Synkronisering med en spärr" },
+      { type: "p", html: "Vanligtvis är synkronisering en <em>ömsesidig</em> historia: påverkar A på B, så påverkar B också A. Forskarna vid RIKEN:s center för kvantdatorer — Franco Nori, Adam Miranowicz och Deng-Gao Lai — har i stället konstruerat ett system där fononerna synkroniseras när ljus eller ett magnetfält läggs på <strong>från ett håll</strong>, men inte när det läggs på från motsatt håll. Det fungerar som en enkelriktad gata, eller som en <strong>diod</strong> i en elektrisk krets: signalen släpps fram åt ett håll och stoppas åt det andra." },
+      { type: "p", html: "Det smarta är att metoden är ovanligt <strong>robust</strong>. Den fortsätter att fungera även när komponenterna har småfel från tillverkningen eller störs av brus från omgivningen — precis de problem som annars brukar sänka känsliga kvantknep i praktiken." },
+
+      { type: "h2", text: "Varför spelar det roll?" },
+      { type: "p", html: "Kvantdatorer behöver komponenter som leder information åt ett bestämt håll utan att eko och störningar studsar tillbaka och förstör de ömtåliga kvanttillstånden. Sådana enkelriktade komponenter finns redan för ljus och mikrovågor, men de kräver ofta skrymmande magneter. En robust, enkelriktad fonon-synkronisering skulle kunna bli en byggsten i mer pålitliga och lättare skalbara kvantdatorer." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Synkronisering hör hemma i läran om <strong>svängningar och resonans</strong> (Fysik&nbsp;nivå&nbsp;2). Huygens pendelur, en gunga som man pumpar i takt och två högtalare som hamnar i fas är alla samma grundfenomen. Fononerna knyter dessutom an till <strong>vågor</strong> och till den moderna fysikens idé att även ljud och vibrationer ytterst är kvantiserade — byggda av odelbara paket, precis som ljuset." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Christiaan Huygens kallade pendelurens samspel för en ”udda sympati” när han upptäckte det 1665.",
+        "En fonon är till ljud och vibrationer vad en foton är till ljus — det minsta möjliga ”paketet” av svängningsenergi.",
+        "Att något bara fungerar åt ett håll kallas ickeömsesidighet (engelska nonreciprocity) och är samma princip som gör en diod till en envägsventil för ström."
+      ]}
+    ]
+  },
+
+  {
+    id: "2026-06-28-superstabil-laser",
+    date: "2026-06-28",
+    title: "Superstabil laser vid rumstemperatur ska göra framtidens atomur ännu exaktare",
+    deck: "Brittiska forskare har byggt en laser vars frekvens knappt vacklar alls — utan att behöva kylas till nära absoluta nollpunkten. Den banar väg för nästa generations atomur och en ny definition av sekunden.",
+    category: "Metrologi",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-28-superstabil-laser.jpg",
+    imageAlt: "Illustration av en röd laserstråle som studsar mellan två speglar i en lång optisk kavitet och bildar ett stående vågmönster.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["metrologi", "laser", "optik", "atomur", "tidmätning", "optisk kavitet", "stående våg", "si-enheter", "precision"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-06-room-temperature-laser-stability-cm.html" }
+    ],
+    research: {
+      citation: "National Physical Laboratory (NPL) m.fl., “Room-temperature optical reference cavity with 4×10⁻¹⁷ fractional instability”, Optica (2026)",
+      url: "https://doi.org/10.1364/optica.591175"
+    },
+    body: [
+      { type: "p", html: "Hur bygger man en klocka som är så noggrann att den inte tappar en sekund på miljarder år? Svaret börjar inte med kugghjul utan med <strong>ljus</strong> — och med en laser som håller sin ton extremt stabil. Forskare vid brittiska <strong>National Physical Laboratory</strong> har nu satt rekord: en laser så stabil att dess frekvens bara vacklar med ungefär <strong>4 × 10⁻¹⁷</strong> — fyra delar på hundra biljarder." },
+
+      { type: "h2", text: "Lasern är klockans pendel" },
+      { type: "p", html: "Ett <strong>optiskt atomur</strong> fungerar genom att en laser ställs in mot atomernas naturliga svängningar, ungefär som man stämmer en gitarrsträng mot en stämgaffel. Atomerna håller takten, men det är lasern som räknar svängningarna — och därför kan klockan aldrig bli stabilare än lasern själv. För att stabilisera lasern låser man den till en <strong>optisk kavitet</strong>: två speglar med en exakt bestämd sträcka emellan, där ljuset studsar fram och tillbaka och bildar en <strong>stående våg</strong>. Avståndet mellan speglarna måste hållas otroligt konstant — minsta lilla skälvning förskjuter tonen." },
+
+      { type: "h2", text: "Slipper kylas till absoluta nollpunkten" },
+      { type: "p", html: "Hittills har den allra högsta stabiliteten krävt att kaviteten kyls ner med skrymmande kryogena system, nära absoluta nollpunkten, för att hejda värmens småskakningar. Det nya rekordet sattes i stället med en 68&nbsp;cm lång kavitet vid <strong>vanlig rumstemperatur</strong>. Det gör tekniken enklare, billigare och möjlig att flytta ut ur de mest specialiserade laboratorierna." },
+
+      { type: "h2", text: "Mot en ny sekund" },
+      { type: "p", html: "Sedan 1967 definieras en sekund utifrån mikrovågssvängningar i cesiumatomer. Optiska atomur, som räknar ljusets mycket snabbare svängningar, är på väg att bli omkring hundra gånger noggrannare — så pass att forskarvärlden planerar att <strong>omdefiniera sekunden</strong> med dem. En stabilare laser låter ett sådant ur nå sin fulla precision snabbare. För att ge en känsla för stabiliteten: ett ur som höll den här takten skulle inte gå mer än någon enstaka sekund fel under universums hela ålder på 13,8&nbsp;miljarder år." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Kaviteten är ett praktexempel på <strong>stående vågor</strong> (Fysik&nbsp;nivå&nbsp;2): precis som en gitarrsträng eller en orgelpipa bara svänger med vissa toner som passar in mellan ändpunkterna, ”passar” bara vissa ljusvågor in mellan speglarna. Nyheten knyter också an till <strong>frekvens och periodtid</strong> och till hur vi över huvud taget definierar tid — ett tema som leder vidare till relativitetsteorin, där tidens gång inte ens är densamma överallt." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Ett optiskt atomur är så känsligt att det tickar olika fort om man lyfter det någon decimeter — högre upp i jordens gravitationsfält går tiden mätbart fortare, precis som Einstein förutsade.",
+        "Sekunden har definierats av cesiumatomer sedan 1967. Snart kan den i stället definieras av optiska atomur.",
+        "I en optisk kavitet studsar ljuset fram och tillbaka tusentals gånger och bildar en stående våg — samma fysik som tonerna på en gitarrsträng, fast med ljus i stället för en sträng."
+      ]}
+    ]
+  },
+
+  {
+    id: "2026-06-27-kallaste-platsen-i-rymden",
+    date: "2026-06-27",
+    title: "På en av rymdens kallaste platser skapar NASA en femte form av materia",
+    deck: "Ombord på rymdstationen, i ett labb stort som ett kylskåp, kyler NASA atomer till bara en hårsmån över absoluta nollpunkten — och har efter en uppgradering skapat de största kvantmolnen någonsin i omloppsbana.",
+    category: "Termodynamik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-27-kallaste-platsen-i-rymden.jpg",
+    imageAlt: "Illustration av ett blåskimrande, lysande kvantmoln av ultrakalla atomer som svävar fritt inuti en teknisk apparat ombord på rymdstationen.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["termodynamik", "absoluta nollpunkten", "bose-einstein-kondensat", "kvantfysik", "materievågor", "rymden", "iss", "kylning"],
+    sources: [
+      { name: "NASA / JPL", url: "https://www.jpl.nasa.gov/news/nasas-quantum-lab-aboard-space-station-gets-chilly-upgrade/" },
+      { name: "ScienceDaily", url: "https://www.sciencedaily.com/releases/2026/06/260622091507.htm" }
+    ],
+    research: null,
+    body: [
+      { type: "p", html: "I skolan får man lära sig tre former av materia — fast, flytande och gas — och kanske en fjärde: plasma. Men det finns en <strong>femte</strong>, som bara uppstår på de allra kallaste platserna i universum. Just nu tillverkas den ombord på Internationella rymdstationen, i ett instrument som NASA styr på distans från jorden." },
+
+      { type: "h2", text: "Den femte formen av materia" },
+      { type: "p", html: "När en gas av atomer kyls till nästan <strong>absoluta nollpunkten</strong> (−273,15&nbsp;°C, den lägsta tänkbara temperaturen) händer något märkligt: atomerna tappar nästan all sin rörelse och smälter samman till ett enda, gemensamt kvanttillstånd. De slutar bete sig som många små kulor och börjar uppföra sig som en enda stor <strong>materievåg</strong>. Tillståndet kallas ett <strong>Bose–Einstein-kondensat</strong> och förutsades av Albert Einstein och Satyendra Nath Bose redan på 1920-talet — men kunde framställas först 1995." },
+
+      { type: "h2", text: "Ett kylskåp i omloppsbana" },
+      { type: "p", html: "NASA:s <strong>Cold Atom Lab</strong> är ungefär lika stort som ett litet kylskåp och kyler sina atomer till under −237&nbsp;°C, alltså bara någon hårsmån över absoluta nollpunkten. I april 2026 kom en ny modul upp till stationen, och astronauten Jessica Meir installerade uppgraderingen i maj. En omkonstruerad <strong>magnetfälla</strong> kan nu forma kvantmolnen på nya sätt, och labbet skapar enligt NASA de största Bose–Einstein-kondensaten det någonsin gjort — uppåt fem gånger större än tidigare." },
+      { type: "quote", html: "Vid de allra kallaste temperaturerna beter sig materia helt annorlunda än något vi någonsin upplevt.", cite: "Jason Williams, projektforskare för Cold Atom Lab, NASA/JPL" },
+
+      { type: "h2", text: "Varför just i rymden?" },
+      { type: "p", html: "På jorden faller de iskalla atommolnen snabbt ner på grund av tyngdkraften, och experimentet är över på ett ögonblick. I rymdstationens <strong>tyngdlöshet</strong> svävar molnen i stället fritt och kan studeras mycket längre — flera sekunder i stället för bråkdelar — och kylas till ännu lägre temperaturer. Det ger forskarna en unik chans att undersöka kvantfysik och att göra extremt noggranna mätningar av tid, gravitation och rörelse." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Nyheten knyter ihop två delar av kursen. <strong>Värmeläran</strong> (Fysik&nbsp;nivå&nbsp;1) handlar om temperatur som ett mått på partiklarnas rörelse — ju kallare, desto stillare atomer, ända ner till absoluta nollpunkten där rörelsen är som minst. <strong>Moderna fysiken</strong> (Fysik&nbsp;nivå&nbsp;2) förklarar varför atomer vid den gränsen börjar uppträda som vågor: varje partikel har en våglängd, och när atomerna kyls blir vågorna så stora att de överlappar och flyter ihop till ett enda kvanttillstånd." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Absoluta nollpunkten, −273,15 °C (0 kelvin), är den lägsta temperatur som kan finnas — där är partiklarnas rörelse som allra minst.",
+        "Cold Atom Lab är ungefär lika stort som ett litet kylskåp och styrs på distans från NASA:s laboratorium på jorden.",
+        "I tyngdlöshet faller inte de kalla atomerna ner, så de kan studeras i sekunder i stället för bråkdelar av en sekund — en jättefördel jämfört med labb på jorden."
+      ]}
+    ]
+  },
+
   {
     id: "2026-06-25-asteroid-1997-nc1",
     date: "2026-06-25",
@@ -665,3 +832,26 @@ window.NYHETER = [
     ]
   }
 ];
+
+/*
+ * Datumgrind (schemalagd publicering).
+ * Artiklar med ett FRAMTIDA datum ligger redan i listan men visas inte
+ * förrän deras datum har inträffat enligt besökarens lokala klocka. Det gör
+ * att man kan förbereda flera dagars nyheter i förväg, committa/pusha dem en
+ * gång, och låta var och en "aktiveras" automatiskt på sitt datum — utan att
+ * något behöver köras lokalt (sidan ligger statiskt på GitHub Pages).
+ *
+ * window.NYHETER       = endast publicerade artiklar (det konsumenterna läser)
+ * window.NYHETER_ALL   = hela listan inkl. framtida (för verktyg/förhandsvisning)
+ */
+(function () {
+  function todayISO() {
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+  }
+  const today = todayISO();
+  window.NYHETER_ALL = NYHETER_ALL;
+  // date-strängar är ISO (ÅÅÅÅ-MM-DD) → lexikografisk jämförelse = kronologisk
+  window.NYHETER = NYHETER_ALL.filter((a) => a.date <= today);
+})();

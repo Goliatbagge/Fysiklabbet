@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-06-25 | `2026-06-25-asteroid-1997-nc1` | Kilometerstor asteroid sveper förbi jorden i helgen — närmast på 400 år | NASA/JPL Goldstone / Virtual Telescope Project / Space Reference |
 | 2026-06-24 | `2026-06-24-optiska-skyrmioner` | 200 år gammalt ljusexperiment skapar virvlande mönster som kan revolutionera datorminnen | Phys.org / NTU Singapore / Optica |
 | 2026-06-23 | `2026-06-23-superfluid-ljus` | Små objekt simmar uppströms i en superfluid av ljus | Phys.org / arXiv / PRL |
 | 2026-06-22 | `2026-06-22-kosmologiska-konstanten` | Einsteins "största tabbe" kan äntligen ha en förklaring | ScienceDaily / Brown University / Phys.org / PRL |

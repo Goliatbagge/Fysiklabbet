@@ -219,6 +219,30 @@ ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor 
 - I `data/ovningar.js` finns ingen sådan transform — där måste du själv
   skriva `F_\\mathrm{G}` (med dubbelt backslash, se nedan).
 
+### Exponenter och tiopotenser
+
+**Använd ALDRIG Unicode-superscript-tecken (⁻, ¹, ², ⁷, ⁰ …) för exponenter
+i löptext.** De ligger i olika teckensnittsglyfer med olika storlek och
+baslinje, så `10⁻¹⁷` renderas ojämnt — minustecknet och siffrorna får olika
+höjd och "hoppar". Extra synligt i fet/stor text. Återkommande fel (påpekat
+2026-06-25).
+
+Skriv i stället exponenten med riktig markup:
+
+- **I HTML-kontext** (t.ex. `body`-strängar i `data/nyheter.js`, rå inline-SVG/
+  HTML): `10<sup>−17</sup>`. Använd **äkta minustecken** `−` (U+2212) i
+  exponenten, inte bindestreck `-`.
+- **I markdown-/KaTeX-kontext** (`data/teori/*.md`, `data/ovningar.js`):
+  math-block — `$10^{-17}$` (md) / `$10^{-17}$` med `\\` vid ev. kommandon (JS).
+- **Sifferindex (subscript) i ren text** får använda Unicode (Q₁, v₀) — se
+  Subscript ovan. Det är exponenter (superscript) som ALDRIG ska vara Unicode.
+
+**Undantag — ren textkontext utan HTML/KaTeX-rendering:** där taggar visas
+bokstavligen (t.ex. `research.citation` i `data/nyheter.js`, som renderas som
+React-textbarn utan `dangerouslySetInnerHTML`) går varken `<sup>` eller
+math-block. Skriv då `10^-17` (caret) eller behåll Unicode som nödlösning —
+men välj alltid `<sup>`/math-block så fort kontexten faktiskt renderar dem.
+
 ### Standardbeteckningar för krafter
 
 - **Tyngdkraften betecknas ALLTID `F_G` med STORT `G`** — aldrig `F_g`

@@ -198,6 +198,53 @@ const NYHETER_ALL = [
   },
 
   {
+    id: "2026-06-26-laser-i-mankrater",
+    date: "2026-06-26",
+    title: "Världens stabilaste laser kan byggas i en kolsvart månkrater — för att ge månen en egen tid",
+    deck: "I de eviga skuggorna vid månens sydpol, där det är runt 50 kelvin kallt, vill den amerikanske fysikern Jun Ye placera en optisk kavitet av kisel. Den skulle kunna bli grunden för det första atomuret på en annan himlakropp — och för en gemensam måntid.",
+    category: "Metrologi",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-06-26-laser-i-mankrater.jpg",
+    imageAlt: "Illustration av en laserapparat nere i en kolsvart, isig krater vid månens sydpol, med en smal stråle riktad uppåt mot rymden och jorden synlig vid horisonten.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["metrologi", "laser", "optik", "atomur", "tidmätning", "optisk kavitet", "stående våg", "månen", "relativitetsteori", "navigation", "astronomi"],
+    sources: [
+      { name: "NIST", url: "https://www.nist.gov/news-events/news/2026/05/shooting-moon-ultrastable-lasers-dark-craters-could-enable-lunar-navigation" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-05-dark-lunar-craters-host-ultrastable.html" }
+    ],
+    research: {
+      citation: "Z. Z. Hu, J. Ye m.fl., ”Lunar silicon cavity”, Proceedings of the National Academy of Sciences (2026)",
+      url: "https://www.pnas.org/doi/10.1073/pnas.2604438123"
+    },
+    body: [
+      { type: "p", html: "Snart ska människor åter sätta sin fot på månen, och då uppstår en oväntad fråga: <em>vad är klockan</em> där uppe? För att rovers, landare och satelliter ska kunna navigera och prata med varandra behöver månen en egen, exakt tid. Nu föreslår fysikern <strong>Jun Ye</strong> och hans kollegor en uppseendeväckande lösning — att bygga världens mest stabila laser nere i en av månens kolsvarta, evigt skuggade kratrar." },
+
+      { type: "h2", text: "Varför behöver månen en egen klocka?" },
+      { type: "p", html: "Tiden går faktiskt inte lika fort på månen som på jorden. Enligt <strong>Einsteins relativitetsteori</strong> påverkas en klockas gång av både fart och tyngdkraft, och eftersom månen har svagare gravitation tickar en klocka där uppe en aning fortare — ungefär <strong>56 miljondels sekund per dygn</strong> snabbare än på jorden. Det låter försumbart, men för ett navigationssystem av GPS-typ, där ljuset hinner färdas 300&nbsp;meter på en miljondels sekund, blir felet snabbt ohållbart. Därför arbetar rymdorganisationerna på en gemensam <strong>måntid</strong> — och en sådan tidsskala kräver i slutänden ett atomur på plats." },
+
+      { type: "h2", text: "Den kallaste och mörkaste platsen" },
+      { type: "p", html: "Vid månens sydpol finns kratrar vars botten <strong>aldrig</strong> nås av solljus. I dessa ”permanent skuggade områden” är det bland det kallaste man känner till i hela solsystemet — bara runt <strong>50&nbsp;kelvin</strong> (omkring −223&nbsp;°C). Eftersom det varken finns sol, luft eller markskakningar att störas av, kan en apparat dessutom stråla bort sin egen restvärme rätt ut i rymden och passivt kylas ända ner till omkring <strong>16&nbsp;kelvin</strong>. Just vid den temperaturen slutar kisel att krympa och utvidgas när temperaturen vacklar lite — en idealisk byggsten för något som måste hålla exakt mått." },
+
+      { type: "h2", text: "En laser låst till en kristall av kisel" },
+      { type: "p", html: "Hjärtat i förslaget är en <strong>optisk kavitet</strong>: ett block av kisel med en spegel i var ände. Ljuset studsar fram och tillbaka mellan speglarna och bildar en <strong>stående våg</strong>, och bara ljusvågor som passar exakt mellan speglarna förstärks. En vanlig laser ”låses” sedan till kaviteten så att dess färg — dess frekvens — blir extremt stabil. Eftersom avståndet mellan speglarna knappt rör sig i den iskalla, orörliga kratern, skulle resultatet kunna bli <strong>den stabilaste laser som någonsin byggts</strong>, betydligt bättre än de bästa på jorden." },
+      { type: "quote", html: "Så fort jag förstod vad de permanent skuggade områdena kan erbjuda kände jag att det vore den mest ideala miljön för en superstabil laser.", cite: "Jun Ye, NIST och JILA" },
+
+      { type: "h2", text: "Vad man skulle kunna göra med den" },
+      { type: "p", html: "En sådan laser är inte bara en kuriositet. Den skulle kunna bli motorn i det <strong>första optiska atomuret på en annan himlakropp</strong> och därmed ge månen en master­klocka att synkronisera allt efter. Den öppnar för ett <strong>GPS-liknande navigationssystem</strong> för farkoster på månytan, för att mäta avstånd mellan satelliter med oerhörd precision, och — kopplad ihop med instrument på jorden — för att bygga jättelika teleskop, jaga <strong>gravitationsvågor</strong> och testa relativitetsteorin ännu skarpare." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Förslaget binder ihop flera delar av kursen. Att kisel slutar utvidgas vid en viss temperatur hör till <strong>värmeläran</strong> och materialens <strong>längdutvidgning</strong> (Fysik&nbsp;nivå&nbsp;1). Kaviteten är ett rent exempel på <strong>stående vågor</strong> (Fysik&nbsp;nivå&nbsp;2) — precis som en gitarrsträng bara klingar med vissa toner ”passar” bara vissa ljusvågor in mellan speglarna. Och att en klocka går olika fort beroende på var den befinner sig är själva kärnan i <strong>relativitetsteorin</strong>: tiden är inte densamma överallt." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Månens evigt skuggade kratrar hör till de kallaste platserna i solsystemet, omkring 50 kelvin — kallare än Plutos yta.",
+        "En klocka på månen går ungefär 56 miljondels sekund per dygn fortare än en klocka på jorden, eftersom tyngdkraften är svagare där.",
+        "Kisel har en temperatur (kring 16 kelvin) där det varken utvidgas eller krymper när temperaturen ändras en aning — perfekt för en kavitet som måste hålla exakt längd.",
+        "Förslaget kommer från samma forskargrupp som byggt några av världens noggrannaste atomur på jorden."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-06-25-asteroid-1997-nc1",
     date: "2026-06-25",
     title: "Kilometerstor asteroid sveper förbi jorden i helgen — närmast på 400 år",

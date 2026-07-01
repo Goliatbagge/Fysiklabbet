@@ -27,6 +27,11 @@ node .claude/verify-figur-bounds.js
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
+# Bygg per-artikel-OG-sidor efter ändringar i data/nyheter.js (KÖR FÖRE COMMIT!)
+# Genererar nyheter/dela/<id>.html med rätt og:*-taggar för korrekt
+# delningsförhandsvisning (Facebook/X/LinkedIn) — delningsknapparna pekar dit
+node data/build-nyheter-og.js
+
 # Öppna simulering i webbläsare
 start [filnamn].html
 

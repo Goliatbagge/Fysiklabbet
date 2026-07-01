@@ -41,12 +41,19 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
 6. **Lägg till artikeln** överst i `window.NYHETER`-arrayen i `data/nyheter.js`
    (nyast först). Följ exakt fältformatet som dokumenteras i toppen av den filen.
 
-7. **Uppdatera minnet:**
+7. **Bygg delnings-OG-sidorna:** kör `node data/build-nyheter-og.js`. Det
+   genererar en per-artikel-OG-sida (`nyheter/dela/<id>.html`) med artikelns
+   egna og:*-taggar, så att förhandsvisningen på Facebook/X/LinkedIn m.fl.
+   visar rätt bild och rubrik. **Måste köras efter varje ändring i
+   `data/nyheter.js`** (som teori-bundeln) — annars saknar den nya artikeln
+   sin delningssida och committa/pusha lämnar den ogenererad.
+
+8. **Uppdatera minnet:**
    - Lägg en rad i `.claude/nyheter/publicerat.md` (datum, id, titel, källa).
    - Ta bort den publicerade posten ur `ko.md` om den kom därifrån; lägg ev. nya
      uppslag du hittade men inte använde i `ko.md`.
 
-8. **Verifiera:** kör `node .claude/verify-navigation.js` (nyheter.html ska vara
+9. **Verifiera:** kör `node .claude/verify-navigation.js` (nyheter.html ska vara
    intakt) och öppna `nyheter.html` + `nyheter.html?id=<nytt-id>` i en
    skärmdump för att se att artikeln och bilden renderar snyggt.
 

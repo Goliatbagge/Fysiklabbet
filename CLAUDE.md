@@ -768,6 +768,33 @@ de ska inte behöva påpekas av användaren:
    en liten kraft inte blir ett rent pilhuvud utan synligt skaft. Mönstret
    finns som `edge`-flaggan på `Arrow` i `fysik1-lutande-plan-app.html`.
 
+### Måttsättning av hävarm och avstånd (måttlinje i FRI yta)
+
+**En markerad hävarm (eller annat måttsatt avstånd) ska ALLTID vara lättläst
+och får ALDRIG ligga ovanpå ett annat objekt (mark, sten, kropp, kärra …)
+som försvårar läsningen** (uttryckligt önskemål 2026-07-01). Rita den som en
+riktig **måttlinje**, inte som en lös streckad linje på golvet:
+
+1. **Måttlinje med dubbelpil** (pilhuvud i båda ändar) placerad i **fri
+   yta bredvid/under figuren**, förskjuten ut från objekten. Aldrig ovanpå
+   marken/stenen/kroppen.
+2. **Projektionslinjer** (tunna streckade) från de två punkterna avståndet
+   mäts mellan (t.ex. vridpunkten och kraftens riktningslinje) ut till
+   måttlinjen. Kraftens **riktningslinje** ritas gärna som en streckad
+   förlängning så måttet tydligt utgår från den.
+3. **Etiketten** (`l`, `l_P`, `0,25 m` …) mitt på måttlinjen, i fri yta
+   (ovanför/under/vid sidan), aldrig på ett objekt. Variabel kursiv, mätetal
+   och enhet rakt.
+4. **Hävarmen är kraftens vinkelräta avstånd till vridpunkten** — måttet ska
+   ha den riktningen (t.ex. en lodrät kraft ⇒ hävarmen är det **vågräta**
+   avståndet, `l = 1{,}0\cos 45^\circ`), inte parallellt med kraften.
+5. Behöver figuren vändas för att en vinkel-/måttetikett ska hamna i fri yta
+   (t.ex. spegla så stenen hamnar på motsatt sida om vinkelbågen) — gör det;
+   följ genomgångens PDF-orientering när den redan är fri.
+
+Referensimpl: `fy2-1.1.md` (skiftnyckel 0,25 m, spett `l`, gungbräda
+`l_P`/`l_B`) — generator-helper `dimHead(pt,dir)` i scratchpad-generatorerna.
+
 ### Diagramkonventioner (svensk fysik/matte-standard)
 
 1. **Axelfärg**: x-axel (y=0) och y-axel (x=0) ljusblå/cyan (`#38bdf8`).

@@ -481,6 +481,12 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
     i `styles-laborans.css` (variabler behåller kursiv via `<tspan
     font-style="italic">`). **Granska alltid en KATALOG-skärmdump** — bugget
     syns INTE i isolerad SVG-förhandsvisning. Dokumenterat i CLAUDE.md.
+  - **Lärdom (måttsätt hävarm i fri yta, 2026-07-01 — REGEL i CLAUDE.md):**
+    en markerad hävarm/avstånd ritas som en MÅTTLINJE med dubbelpil +
+    projektionslinjer i FRI yta, aldrig ovanpå mark/sten/kropp. Riktningen =
+    kraftens vinkelräta avstånd (lodrät kraft ⇒ vågrät hävarm). Vänd figuren
+    om en vinkel-/måttetikett annars hamnar på ett objekt (spett: sten till
+    vänster ⇒ 45° fri till höger). Helper `dimHead(pt,dir)` i generatorerna.
   - **Lärdom (kraftriktning ↔ rotationsriktning, 2026-07-01):** en kraftpil
     måste peka så att den ger den rotationsriktning uppgiften anger. fy2-1.1
     Ex1: svaret är "moturs" → 34 N-pilen ska peka snett NEDÅT HÖGER (inte

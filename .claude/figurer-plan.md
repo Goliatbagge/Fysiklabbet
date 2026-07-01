@@ -471,7 +471,12 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [x] **fy1-8.1 (1 relativitet: sol/jordbana/ljusstrålar) · fy1-9.1 (2 atom: helium + excitation) KLAR (2026-07-01)** — KAPITEL RELATIVITET + KÄRNFYSIK KOMPLETT. **HELA FYSIK 1 KLAR (drawable).**
 
 ### Fysik 2
-- [ ] fy2-1.1 (4 moment/gungbräda) · fy2-1.2 (1 kvar: bokhylla) · fy2-1.3 (3 cirkel) · fy2-1.4 (2)
+- [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [ ] fy2-1.2 (1 kvar: bokhylla) · fy2-1.3 (3 cirkel) · fy2-1.4 (2)
+  - Generator `gen_fy2_11.js`/`gen_fy2_11b.js` (scratchpad): `arrow()`, `hexagon()`,
+    `person(cx,seatY,scale,shirt,label,flip)` sittande figur (spegelbar), skiftnyckel
+    (ring-/öppen ände + skaft), hand-grepp (fist roterad till skaftvinkeln). Blå
+    kraftpil #2563c9 (projektkonvention, INTE PDF:ens röda/magenta). Kraftmoment
+    `M = F · l`, hävarm `l`, enhet Nm — synkat med genomgången.
 - [ ] fy2-1.5 (1 konisk) · fy2-1.6 (2 kast) · fy2-1.7 (3 gunga) · fy2-1.8 (1 konisk)
 - [ ] fy2-2.1..2.14 (vågor, fjäder, pendel, stående våg, pipor, interferens — många, mestadels drawable)
 - [ ] fy2-3.1..3.14 (magnetism, fältlinjer, induktion — mestadels drawable schematiskt)

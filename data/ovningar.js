@@ -15007,7 +15007,7 @@ $$ BL = 3{,}0\\ \\mathrm{m} $$
 
 $$ AL = \\sqrt{AB^2 + BL^2} = \\sqrt{4{,}0^2 + 3{,}0^2} = \\sqrt{25} = 5{,}0\\ \\mathrm{m} $$
 
-(Pythagoras-triplet 3-4-5.)
+(Pythagoreisk trippel 3-4-5.)
 
 **Steg 3 — vägskillnad.**
 
@@ -15017,7 +15017,7 @@ Vägskillnaden är **två hela våglängder**, alltså konstruktiv interferens: 
 
 **Svar:** Lyssnaren står på 2:a maxlinjen (svar: $n = 2$).
 
-**Generell slutsats:** Pythagoras-trianglar som 3-4-5 och 5-12-13 ger snygga heltals-vägskillnader och är vanliga i geometriska interferensuppgifter.`,
+**Generell slutsats:** Pythagoreiska trianglar som 3-4-5 och 5-12-13 ger snygga heltals-vägskillnader och är vanliga i geometriska interferensuppgifter.`,
         },
         {
             level: 2,
@@ -15059,7 +15059,7 @@ ${makeTwoSourceGeo({ dAB: 5.0, dBL: 12.0, dABLabel: 'AB = 5,0 m', dBLLabel: 'BL 
 
 $$ AL = \\sqrt{AB^2 + BL^2} = \\sqrt{5{,}0^2 + 12{,}0^2} = \\sqrt{25 + 144} = \\sqrt{169} = 13{,}0\\ \\mathrm{m} $$
 
-(Pythagoras-triplet 5-12-13.)
+(Pythagoreisk trippel 5-12-13.)
 
 $$ \\Delta s = AL - BL = 13{,}0 - 12{,}0 = 1{,}0\\ \\mathrm{m} $$
 

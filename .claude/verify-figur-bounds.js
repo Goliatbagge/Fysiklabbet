@@ -74,13 +74,47 @@ function bboxOfSvgBody(body) {
             const d = nums(attr(m[0], 'd') || '');
             for (let i = 0; i + 1 < d.length; i += 2) add(d[i], d[i + 1]);
         } else if (tag === 'text') {
-            add(+attr(m[0], 'x'), +attr(m[0], 'y'));
+            // Text är ingen punkt: glyferna sträcker sig UPP över baslinjen
+            // (≈0,8 em) och en bit NER (≈0,28 em). Modellera det så att
+            // utrymmet en topp-/bottenetikett verkligen upptar inte räknas
+            // som tom marginal (annars motsäger margin- och clip-checken
+            // varandra vid en etikett nära kanten).
+            const x = +attr(m[0], 'x'), y = +attr(m[0], 'y');
+            const fs = parseFloat(attr(m[0], 'font-size')) || 16;
+            add(x, y - fs * 0.8);
+            add(x, y + fs * 0.28);
         }
     }
     return { minX, minY, maxX, maxY };
 }
 
-let problems = 0, figures = 0, sizeProblems = 0;
+// Text-only bounding-box för avklippnings-kollen. Geometri (särskilt <path>)
+// kan inte parsas exakt av number-heuristiken (fantom-punkter i 0,0), så för
+// clip-checken litar vi BARA på text — det är etiketter ("80 kg") som i
+// praktiken klipps mot kanten. Text inuti en transform-grupp (t.ex. speglade
+// figurdelar) hoppas över, eftersom koordinaterna då inte är i viewBox-rummet.
+function textBboxOfSvgBody(body) {
+    // Nolla ut innehållet i alla transformerade grupper så deras text ignoreras.
+    const cleaned = body.replace(/<g\b[^>]*transform\s*=[^>]*>[\s\S]*?<\/g>/g, '');
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    const reText = /<text\b([^>]*)>/g;
+    let m;
+    while ((m = reText.exec(cleaned))) {
+        if (/transform\s*=/.test(m[1])) continue; // egen transform → hoppa
+        const x = +attr(m[0], 'x'), y = +attr(m[0], 'y');
+        const fs = parseFloat(attr(m[0], 'font-size')) || 16;
+        if (!isFinite(x) || !isFinite(y)) continue;
+        if (x < minX) minX = x; if (x > maxX) maxX = x;
+        const top = y - fs * 0.8, bot = y + fs * 0.28;
+        if (top < minY) minY = top; if (bot > maxY) maxY = bot;
+    }
+    return { minX, minY, maxX, maxY };
+}
+
+let problems = 0, figures = 0, sizeProblems = 0, clipProblems = 0;
+// Innehåll som sticker UT över viewBox-kanten klipps bort i renderingen.
+// Tolerans i px för konturer/strokes som får spilla en aning utanför.
+const CLIP_TOL = 3;
 for (const f of files) {
     const raw = fs.readFileSync(path.join(dir, f), 'utf-8').replace(/\r\n?/g, '\n');
     const reFig = /::: figur\n([\s\S]*?)\n:::/g;
@@ -116,6 +150,26 @@ for (const f of files) {
             console.log(`  ✗ ${f} figur #${idx}: för stor marginal (${flagged.join(', ')}) ` +
                 `— viewBox ${vx} ${vy} ${vw} ${vh}, innehåll ` +
                 `x[${bb.minX.toFixed(0)},${bb.maxX.toFixed(0)}] y[${bb.minY.toFixed(0)},${bb.maxY.toFixed(0)}]`);
+        }
+
+        // Avklippt TEXT: en etikett vars glyfer sträcker sig över topp-/
+        // nederkanten klipps bort (t.ex. "80 kg" i gungbräde-figuren). Vi
+        // kontrollerar bara VERTIKALT och bara text — font-metriken ger en
+        // pålitlig höjd, medan text-bredd (okänd, beror på text-anchor) och
+        // <path>-geometri inte kan mätas exakt av number-heuristiken.
+        const tb = textBboxOfSvgBody(svg[2]);
+        if (isFinite(tb.minY)) {
+            const overTop = vy - tb.minY;
+            const overBot = tb.maxY - (vy + vh);
+            const clipped = [];
+            if (overTop > CLIP_TOL) clipped.push(`top=${overTop.toFixed(0)}px`);
+            if (overBot > CLIP_TOL) clipped.push(`bottom=${overBot.toFixed(0)}px`);
+            if (clipped.length) {
+                clipProblems++;
+                console.log(`  ✗ ${f} figur #${idx}: text AVKLIPPT utanför viewBox (${clipped.join(', ')}) ` +
+                    `— viewBox ${vx} ${vy} ${vw} ${vh}, text y[${tb.minY.toFixed(0)},${tb.maxY.toFixed(0)}]. ` +
+                    `Utöka viewBoxen (och width/height) uppåt/nedåt.`);
+            }
         }
 
         // (3) Skala: figuren ska renderas i naturlig storlek (1 viewBox-enhet
@@ -178,12 +232,13 @@ for (const f of files) {
     }
 }
 
-const total = problems + sizeProblems + placementProblems;
+const total = problems + sizeProblems + placementProblems + clipProblems;
 if (total) {
     if (problems) console.log(`\n${problems} figur(er) med för mycket tom marginal — beskär viewBoxen tätt runt innehållet.`);
+    if (clipProblems) console.log(`\n${clipProblems} figur(er) med avklippt innehåll — utöka viewBoxen så inget sticker utanför kanten.`);
     if (sizeProblems) console.log(`\n${sizeProblems} figur(er) med fel skala/text-storlek — sätt width/height = viewBox och text ~16px.`);
     if (placementProblems) console.log(`\n${placementProblems} figur(er) felplacerad(e) — figur i exempel ska stå före deluppgifterna.`);
     process.exit(1);
 } else {
-    console.log(`OK — ${figures} figur(er) granskade: tät viewBox + naturlig skala + korrekt placering.`);
+    console.log(`OK — ${figures} figur(er) granskade: tät viewBox + inget avklippt + naturlig skala + korrekt placering.`);
 }

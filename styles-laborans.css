@@ -1702,12 +1702,20 @@ button.lab-card-disabled { pointer-events: none; }
     text-align: center;
     color: var(--lab-ink);
 }
-.lab-block-figur > svg {
+.lab-block-figur > svg,
+.lab-block-figur p > svg {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
 }
+/* marked lindar <svg> i en <p>, och .lab-block-figur p är kursiv (bildtext-
+   stil) → SVG-texten ÄRVER kursiv stil (font-style är en ärvd egenskap).
+   Tvinga upright så att mätetal och enheter i figurer INTE blir kursiva.
+   Variabler kursiveras alltid explicit med <tspan font-style="italic">
+   (presentationsattribut vinner över denna regel). */
+.lab-block-figur svg,
+.lab-block-figur svg text { font-style: normal; }
 .lab-block-figur .lab-block-title {
     color: var(--lab-ink-soft);
     margin-bottom: 14px;

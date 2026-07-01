@@ -473,6 +473,18 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 ### Fysik 2
 - [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [x] **fy2-1.2 (1: bokhylla vältpunkt; hammar-foto SKIP) KLAR** · [x] **fy2-1.3 (3: 1 rad-sektor, tangentiell v, LP-skiva) KLAR (2026-07-01)** · [x] **fy2-1.4 (2: centripetal v/a_C, vertikal cirkel F_G/F_S övre+nedre) KLAR (2026-07-01)**
 - [ ] fy2-1.5 (1 konisk) · fy2-1.6 (2 kast) · fy2-1.7 (3 gunga) · fy2-1.8 (1 konisk) — NÄSTA. Generatorer: `gen_fy2_14.js` (centripetal/vertikal cirkel), `gen_fy2_1213.js` (cirklar/rotation).
+  - **Lärdom (kursiv-arv i katalogen, 2026-07-01 — VIKTIG):** teori-figurernas
+    SVG-text ÄRVER `font-style: italic` (marked lindar `<svg>` i `<p>`, och
+    `.lab-block-figur p` är kursiv för bildtexter) → **mätetal och enheter blir
+    kursiva i katalogen** trots att källan inte kursiverar dem. Fixat GLOBALT
+    med `.lab-block-figur svg, .lab-block-figur svg text { font-style: normal }`
+    i `styles-laborans.css` (variabler behåller kursiv via `<tspan
+    font-style="italic">`). **Granska alltid en KATALOG-skärmdump** — bugget
+    syns INTE i isolerad SVG-förhandsvisning. Dokumenterat i CLAUDE.md.
+  - **Lärdom (kraftriktning ↔ rotationsriktning, 2026-07-01):** en kraftpil
+    måste peka så att den ger den rotationsriktning uppgiften anger. fy2-1.1
+    Ex1: svaret är "moturs" → 34 N-pilen ska peka snett NEDÅT HÖGER (inte
+    uppåt vänster). Räkna momentets tecken kring vridpunkten, gissa inte pilen.
   - **Lärdom (rotation & arc, 2026-07-01):** `verify-figur-bounds.js` läser INTE
     `transform="rotate()"` (mäter råa lokala koordinater) → baka in rotationen i
     koordinaterna (rotera hörn själv, rita `<polygon>`). Och SVG-`A`-bågkommandot

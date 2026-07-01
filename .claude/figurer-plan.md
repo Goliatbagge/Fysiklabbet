@@ -130,9 +130,18 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    spräcker 10px-marginalströskeln → använd 14px för topp-etiketter; (b) 𝔼
    (blackboard-E, U+1D53C) renderas fint i Poppins-fallback; (c) tabellceller
    hade U+0001-styrtecken runt P-platshållarna → matcha inkl. dem.
-15. **NÄSTA:** kvar i fy1 (drawable): `fy1-8.1` (1, relativitet?) och
-   `fy1-9.1` (2, atom). Resten av fy1 är SKIP (foton/GeoGebra: 1.4, 2.7, 3.1,
-   3.3). Sedan hela **Fysik 2** (fy2-*.md) — börja med mekanik fy2-1.x
+15. ~~kvar i fy1 (drawable): `fy1-8.1` + `fy1-9.1`~~ — **KLART (2026-07-01).**
+   `fy1-8.1` (1: Michelson–Morley, sol med korona + jord på streckad bana +
+   två ljusstrålar c vänster/höger + v-pil), `fy1-9.1` (2: heliumatom med
+   kärna [2 röda p+, 2 vita n] + elektronskal + teckenförklaring; samt
+   excitation/deexcitation-triptyk — två paneler med 6 skal, energinivåer
+   0–13,32 eV, röd hopp-pil, cyan foton-våg). PDF: `Fy 1 10.01
+   Relativitetsteori.pdf`, `Fy 1 11.01 Atomkärnan.pdf`. **HELA FYSIK 1 NU
+   KLAR** (drawable-figurer). Kvar i fy1 = bara SKIP-foton/GeoGebra (1.4, 2.7,
+   3.1, 3.3). Lärdom: legend-etiketter vid höger kant ankras `text-anchor="end"`
+   vid textens YTTRE kant (skriptet mäter inte textbredd → vänsterankrad text
+   ger falsk "för stor högermarginal").
+16. **NÄSTA:** hela **Fysik 2** (fy2-*.md) — börja med mekanik fy2-1.x
    (moment/cirkelrörelse/pendlar), de liknar fy1-3-mallarna mest.
 
 **Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
@@ -459,7 +468,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [x] **fy1-6.3 (2: fascykel + värmediagram) KLAR (2026-06-24)** — KAPITEL VÄRME (enda bild-blocket)
 - [x] **fy1-7.1 (3 laddning/influens) · fy1-7.3 (3 ström) · fy1-7.6 (4 koppling + symboltabell) KLAR (2026-06-24)**
 - [x] **fy1-7.8 (1 schema) · fy1-7.10/7.11/7.12/7.13/7.14 (fältlinjer/plattor, 6 fig) KLAR (2026-06-24)** — KAPITEL ELLÄRA KOMPLETT
-- [ ] fy1-8.1 (1) · fy1-9.1 (2 atom)
+- [x] **fy1-8.1 (1 relativitet: sol/jordbana/ljusstrålar) · fy1-9.1 (2 atom: helium + excitation) KLAR (2026-07-01)** — KAPITEL RELATIVITET + KÄRNFYSIK KOMPLETT. **HELA FYSIK 1 KLAR (drawable).**
 
 ### Fysik 2
 - [ ] fy2-1.1 (4 moment/gungbräda) · fy2-1.2 (1 kvar: bokhylla) · fy2-1.3 (3 cirkel) · fy2-1.4 (2)

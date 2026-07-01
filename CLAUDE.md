@@ -214,10 +214,13 @@ ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor 
   (bildtext-stil) → SVG-texten ärver `font-style: italic`, så **mätetal och
   enheter blir kursiva** trots att källan inte kursiverar dem (påpekat
   2026-07-01: "34 N" och "0,25 m" renderades kursivt). Detta neutraliseras
-  globalt av regeln `.lab-block-figur svg, .lab-block-figur svg text {
-  font-style: normal }` i `styles-laborans.css` — **rör inte den regeln.**
-  Variabler kursiveras fortfarande via `<tspan font-style="italic">`
-  (presentationsattribut vinner över regeln). Granska alltid en
+  globalt av regeln `.lab-block-figur svg { font-style: normal }` i
+  `styles-laborans.css` — **rör inte den regeln.** Regeln sitter ENBART på
+  `svg`-roten (inte på `text`), så det ärvda kursiv-värdet slås ut medan
+  variabler som är explicit kursiva via `<tspan font-style="italic">` (eller
+  ett helt `<text font-style="italic">` för en ren variabel) BEHÅLLER sin
+  kursivering — presentationsattribut på `<text>`/`<tspan>` vinner över det
+  ärvda värdet. Granska alltid en
   katalog-skärmdump (inte bara isolerad SVG) — kursiv-arvet syns bara i
   katalog-kontexten.
 

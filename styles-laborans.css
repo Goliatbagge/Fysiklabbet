@@ -1713,9 +1713,8 @@ button.lab-card-disabled { pointer-events: none; }
    stil) → SVG-texten ÄRVER kursiv stil (font-style är en ärvd egenskap).
    Tvinga upright så att mätetal och enheter i figurer INTE blir kursiva.
    Variabler kursiveras alltid explicit med <tspan font-style="italic">
-   (presentationsattribut vinner över denna regel). */
-.lab-block-figur svg,
-.lab-block-figur svg text { font-style: normal; }
+   (presentationsattribut på <text>/<tspan> vinner över detta ärvda värde). */
+.lab-block-figur svg { font-style: normal; }
 .lab-block-figur .lab-block-title {
     color: var(--lab-ink-soft);
     margin-bottom: 14px;

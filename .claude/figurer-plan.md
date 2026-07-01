@@ -141,8 +141,11 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    3.1, 3.3). Lärdom: legend-etiketter vid höger kant ankras `text-anchor="end"`
    vid textens YTTRE kant (skriptet mäter inte textbredd → vänsterankrad text
    ger falsk "för stor högermarginal").
-16. **NÄSTA:** hela **Fysik 2** (fy2-*.md) — börja med mekanik fy2-1.x
-   (moment/cirkelrörelse/pendlar), de liknar fy1-3-mallarna mest.
+16. ~~mekanik fy2-1.x (moment/cirkelrörelse/pendlar)~~ — **KLART (2026-07-01).**
+   fy2-1.1..1.4 klara sedan tidigare; fy2-1.5–1.8 klara nu (konisk pendel,
+   kaströrelse/kastparabel, fatala gungan, flygande kossan). **KAPITEL 1 KOMPLETT.**
+17. **NÄSTA:** fy2-2.x (vågor, fjäder, pendel, stående våg, pipor, interferens) —
+   mestadels drawable; sedan fy2-3.x (magnetism), 4.x (EM/kvant), 5.x (astronomi).
 
 **Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
 radbrytning. Bygger man figur-txt med `{ echo "::: figur"; cat fil.svg;
@@ -472,7 +475,26 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 
 ### Fysik 2
 - [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [x] **fy2-1.2 (1: bokhylla vältpunkt; hammar-foto SKIP) KLAR** · [x] **fy2-1.3 (3: 1 rad-sektor, tangentiell v, LP-skiva) KLAR (2026-07-01)** · [x] **fy2-1.4 (2: centripetal v/a_C, vertikal cirkel F_G/F_S övre+nedre) KLAR (2026-07-01)**
-- [ ] fy2-1.5 (1 konisk) · fy2-1.6 (2 kast) · fy2-1.7 (3 gunga) · fy2-1.8 (1 konisk) — NÄSTA. Generatorer: `gen_fy2_14.js` (centripetal/vertikal cirkel), `gen_fy2_1213.js` (cirklar/rotation).
+- [x] **fy2-1.5 (1 konisk pendel: snöre + ellipsbana + α + F_G/F_S) · fy2-1.6
+  (2: kastparabel med 5 stationer [v_0x röd, v_y röd, v blå, θ/α/β] + v-triangel)
+  · fy2-1.7 (3: svängbåge med gungande person + 1,0 m-mått, kraftdiagram lägsta
+  läget [F_S=F_C+F_G skalenligt], kraftdiagram översta läget [F_C=F_G]) · fy2-1.8
+  (1 konisk pendel med kraftuppdelning F_Sy/F_Sx + likformiga trianglar h/r)
+  KLAR (2026-07-01).** Generatorer i scratchpad: `gen_fy2_15.js`, `gen_fy2_16.js`,
+  `gen_fy2_17.js`, `gen_fy2_18.js` (delad `arrow()` butt-cap + skalenligt huvud,
+  `arcPts()` polyline-bågar, `swinger()` sittande person, `vlabel()` v+subscript).
+  **KAPITEL 1 MEKANIK (fy2-1.x) NU KOMPLETT** (1.1–1.8; hammar-foto 1.2 SKIP).
+  Färgkonvention fy2-1.x: kraft = blå #2563c9, hastighetskomposant = röd #c0392b,
+  resultanthastighet = blå #2563c9, cyan axlar #38bdf8.
+  - **Lärdom (höger-kant-etikett & verify, 2026-07-01):** verify-figur-bounds mäter
+    text-ANKARET (inte glyfbredden) för vänster/höger-marginal. En bred etikett i fri
+    yta vid höger kant (t.ex. `F_Sy`, `F_G`) ankrad `text-anchor="start"` ger ett
+    ankare långt innanför glyfens högerkant → skriptet ser "för stor högermarginal"
+    fastän glyfen fyller ut. FIX: ankra höger-kant-etiketter `text-anchor="end"` vid
+    den önskade YTTRE kanten (texten flödar inåt/vänster, bort från kanten). Då blir
+    ankaret = glyfkanten och marginalen mäts rätt. Samma som dokumenterat för graf-
+    axlar. Gäller alla figurer med breda subscript-etiketter mot höger kant.
+- [ ] fy2-2.1..2.14 (vågor, fjäder, pendel, stående våg, pipor, interferens) — NÄSTA.
   - **Lärdom (kursiv-arv i katalogen, 2026-07-01 — VIKTIG):** teori-figurernas
     SVG-text ÄRVER `font-style: italic` (marked lindar `<svg>` i `<p>`, och
     `.lab-block-figur p` är kursiv för bildtexter) → **mätetal och enheter blir

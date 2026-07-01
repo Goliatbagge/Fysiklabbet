@@ -209,6 +209,18 @@ ALDRIG title case på svenska — endast första ordet i mening/rubrik med stor 
      <text font-size="13" font-style="italic">I = 4,0 A</text>
      ```
 
+  **⚠️ Teori-figurer (`::: figur` i `data/teori`) ÄRVER kursiv stil.**
+  `marked` lindar `<svg>` i ett `<p>`, och `.lab-block-figur p` är kursiv
+  (bildtext-stil) → SVG-texten ärver `font-style: italic`, så **mätetal och
+  enheter blir kursiva** trots att källan inte kursiverar dem (påpekat
+  2026-07-01: "34 N" och "0,25 m" renderades kursivt). Detta neutraliseras
+  globalt av regeln `.lab-block-figur svg, .lab-block-figur svg text {
+  font-style: normal }` i `styles-laborans.css` — **rör inte den regeln.**
+  Variabler kursiveras fortfarande via `<tspan font-style="italic">`
+  (presentationsattribut vinner över regeln). Granska alltid en
+  katalog-skärmdump (inte bara isolerad SVG) — kursiv-arvet syns bara i
+  katalog-kontexten.
+
 ### Subscript
 
 - **Sifferindex**: Unicode (Q₁, Q₂, v₀) eller `F_1` i math-block.

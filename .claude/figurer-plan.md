@@ -506,9 +506,15 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
   koord!), `tree()`, superpositions-`seqFrame()`, graf-grid. Vågkonvention:
   läge/summa blå #2563c9, hastighet grön #3f8f4a el. blå, acceleration/komponent
   röd #c0392b, tangentiell komposant orange #d9832a, cyan axlar #38bdf8.
-  **KVAR i fy2-2.x:** 2.9 (5 stående våg sträng), 2.10 (5 pipor), 2.11 (1
-  intensitet), 2.12 (2 doppler), 2.13 (4 brytning), 2.14 (6 diffraktion/
-  interferens) — NÄSTA.
+  KLART OCKSÅ (2026-07-01): fy2-2.9 (5 stående våg sträng — `standing()`-lober),
+  fy2-2.10 (5 pipor — `pipe()` med randvillkor buk/nod), fy2-2.11 (1 sfär),
+  fy2-2.12 (2: hörselområde-diagram + doppler-ambulans), fy2-2.13 (4: cirkulär/
+  plan våg, reflexion, brytning, brytande havsvåg), fy2-2.14 (6: enkelspalt,
+  dubbelspalt, tvåkälls-interferens P/Q, vägskillnadslinjer A/B, rum med
+  högtalare, triangel A-B-D). **HELA KAPITEL 2 (fy2-2.x) NU KOMPLETT.**
+  Generatorer: `gen_fy2_29.js`, `gen_fy2_210.js`, `gen_fy2_1112.js`,
+  `gen_fy2_213.js`, `gen_fy2_214.js`.
+- [ ] fy2-3.1..3.14 (magnetism, fältlinjer, induktion) — NÄSTA.
   - **Lärdom (kursiv-arv i katalogen, 2026-07-01 — VIKTIG):** teori-figurernas
     SVG-text ÄRVER `font-style: italic` (marked lindar `<svg>` i `<p>`, och
     `.lab-block-figur p` är kursiv för bildtexter) → **mätetal och enheter blir

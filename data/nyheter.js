@@ -31,6 +31,51 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-01-grafen-supraledning",
+    date: "2026-07-01",
+    title: "Grafit döljer fyra supraledande tillstånd — och magnetfält gör dem starkare",
+    deck: "MIT-forskargrupp har hittat fyra distinkta former av supraledning i ett grafen-arrangemang som förekommer naturligt i grafit. Det mest häpnadsväckande: tre av tillstånden trotsar starka magnetfält och förstärks av dem, trots att magnetfält normalt dödar supraledning.",
+    category: "Modern fysik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-01-grafen-supraledning.jpg",
+    imageAlt: "Grafisk illustration av tre supraledande tillstånd i romboedrisk pentalagers grafen — tre varianter av elektronparning visualiseras i rött, grönt och blått som Cooperpar flödar utan motstånd.",
+    imageCredit: "Illustration: Amy Pan, RLE/MIT (CC&nbsp;BY-NC-ND)",
+    tags: ["supraledning", "grafen", "grafit", "magnetfält", "modern fysik", "kondenserade materiens fysik", "materialfysik", "kvantfysik", "cooperpar"],
+    sources: [
+      { name: "MIT News", url: "https://news.mit.edu/2026/graphene-can-hold-multiple-states-of-superconductivity-0629" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-06-graphene-multiple-states-superconductivity.html" }
+    ],
+    research: {
+      citation: "J. Seo, A. A. Cotten, S. Ye et al., “Family of magnetic field-boosted superconductors in rhombohedral graphene”, Nature (2026)",
+      url: "https://doi.org/10.1038/s41586-026-10815-x"
+    },
+    body: [
+      { type: "p", html: "Grafiten i en blyertspenna — det svarta, mjuka mineralet som lämnar spår på papper — innehåller ett av materialfysikens senaste under. MIT-forskargruppen ledd av Long Ju har hittat fyra separata former av supraledning i ett ovanligt lager-arrangemang av grafen som förekommer naturligt i grafit. Det mest häpnadsväckande: tre av tillstånden överlever kraftiga magnetfält och förstärks av dem, trots att magnetfält normalt dödar supraledning." },
+
+      { type: "h2", text: "Grafen och grafit — ett atomlager skiljer dem åt" },
+      { type: "p", html: "Grafen är ett enda lager kolatomer i ett hexagonalt mönster, likt en vaxkaka. Staplas tusentals sådana lager på varandra uppstår grafit — trots namnet innehåller blyertspennans “blyerts” inte ett gram bly, bara kol. I de allra flesta prover staplas lagren i en vanlig AB-ordning (Bernal-stappling). Men i grafit finns även en mer ovanlig variant: romboedrisk stappling, där varje nytt lager förskjuts lite mer åt sidan, som stegen på en spiraltrappa. Det är i just fyra eller fem sådana trappstegsstaplade lager — romboedrisk pentalagers grafen — som MIT-teamet nu gjort sina fynd." },
+      { type: "quote", html: "“Folk kanske antar att det här är ett enkelt, ointressant kolmaterial.”", cite: "Long Ju, associerad professor i fysik, MIT" },
+
+      { type: "h2", text: "Magnetfältet förstärker i stället för att döda" },
+      { type: "p", html: "Supraledning uppstår när elektroner vid extremt låga temperaturer bildar par — Cooperpar — och rör sig igenom materialet utan motstånd alls. Normalt har supraledare en akilleshäl: magnetfält sliter sönder elektronparen och bryter supraledningen, en effekt känd som Pauligränsen. I Long Jus experiment riktades magnetfält på upp till 9&nbsp;tesla vinkelrätt mot grafen-skiktet — ungefär 180&nbsp;000 gånger jordens magnetfält. I stället för att kollapsa hände det motsatta: den kritiska temperaturen ökade från 55&nbsp;millikelvin till ungefär 90&nbsp;millikelvin, och materialet klarade 50–60&nbsp;procent mer ström innan supraledningen bröt samman. För att sätta temperaturen i perspektiv: 55&nbsp;millikelvin är 0,055&nbsp;kelvin ovanför den absoluta nollpunkten (−273&nbsp;°C) — det är lika kallt som chipen i de mest avancerade kvantdatorerna." },
+      { type: "p", html: "Förklaringen tros ligga i att elektronparen i dessa tillstånd bildas med sina spinn parallella i stället för antiparallella — ett ovanligt arrangemang kallat triplett-parning. Det gör att magnetfältet, som normalt sliter sönder paren, i stället tenderar att stabilisera dem. “Ur ett grundläggande fysikperspektiv är det väldigt exotiskt att ett magnetfält inte dödar supraledningen”, säger Ju." },
+
+      { type: "h2", text: "Fyra tillstånd som väljs med ett spänningsreglage" },
+      { type: "p", html: "De fyra supraledande tillstånden inträder vid olika elektrontätheter i materialet, och tätheten styrs via elektroder med ett spänningsreglage. Forskarna kan bokstavligen “byta kanal” bland tillstånden. Junseok Seo, en av de ledande forskarstudentsförfattarna, sammanfattar: “Vi kan styra det enklaste av alla kemiska ämnen — kol — och strukturellt förändra det.” Att ett och samma material kan hysa fyra varianter av supraledning är i sig exceptionellt; de flesta kända supraledare har bara en. Fundet öppnar möjligheten att en dag designa supraledare med specifika egenskaper på beställning, utan att behöva byta material." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Supraledning hör hemma i <strong>Fysik&nbsp;nivå&nbsp;2</strong>:s moderna fysik: fenomenet att elektrisk resistans sjunker till exakt noll nedan en kritisk temperatur. Magnetfältets roll knyter an till <strong>elektromagnetism</strong>. Att magnetfält kan förstärka snarare än döda supraledning berör begreppet spinn — det kvantmekaniska tillståndet hos elektroner som Fysik&nbsp;nivå&nbsp;2 tangerar i avsnittet om modern fysik. Materialet ger dessutom en elegant länk till kolatomens bindningsegenskaper och kristallstrukturer, teman som återkommer i kemi och materialteknik." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Grafen — ett enda atomlager av kol — är ett av de starkaste material som finns trots att det är bara en atom tjockt. Grafenforskarna Andre Geim och Konstantin Novoselov fick nobelpriset i fysik 2010.",
+        "Romboedrisk stappling (ABC-stappling) är sällsynt i naturlig grafit, där den vanligare AB-staplningen dominerar. Att hitta och isolera just de romboedriska bitarna kräver stor precision.",
+        "Pauligränsen är det magnetfält vid vilket ett supraledande material normalt kollapsar. MIT-experimentet överstiger denna gräns med tiofaldig marginal.",
+        "Supraledning i grafen-system fick sin start med “magiska vinkeln” 2018, då MIT-forskargrupper visade att två lätt vridna grafenlager mot varandra ger upphov till supraledning — i samma forskningstradition som det nu aktuella arbetet."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-06-30-citronplanet-av-kol",
     date: "2026-06-30",
     title: "Webb-teleskopet hittar en citronformad planet med atmosfär av rent kol",

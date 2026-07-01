@@ -5,7 +5,9 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-01 | `2026-07-01-grafen-supraledning` | Grafit döljer fyra supraledande tillstånd — och magnetfält gör dem starkare | MIT News / Phys.org / Nature |
 | 2026-06-30 | `2026-06-30-citronplanet-av-kol` | Webb-teleskopet hittar en citronformad planet med atmosfär av rent kol | NASA Webb / UChicago / ApJL |
+| 2026-06-26 | `2026-06-26-laser-i-mankrater` | En ultrastabil laser i en mörk månkrater kan bli Månens masterklocka | NIST / PNAS / Phys.org |
 | 2026-06-29 | `2026-06-29-enkelriktat-ljud` | Forskare bygger en ”enkelriktad gata” för ljudets minsta byggstenar | RIKEN / ScienceDaily / Nature Communications |
 | 2026-06-28 | `2026-06-28-superstabil-laser` | Superstabil laser vid rumstemperatur ska göra framtidens atomur ännu exaktare | Phys.org / NPL / Optica |
 | 2026-06-27 | `2026-06-27-kallaste-platsen-i-rymden` | På en av rymdens kallaste platser skapar NASA en femte form av materia | NASA/JPL / ScienceDaily |

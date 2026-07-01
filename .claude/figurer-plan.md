@@ -471,7 +471,8 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [x] **fy1-8.1 (1 relativitet: sol/jordbana/ljusstrålar) · fy1-9.1 (2 atom: helium + excitation) KLAR (2026-07-01)** — KAPITEL RELATIVITET + KÄRNFYSIK KOMPLETT. **HELA FYSIK 1 KLAR (drawable).**
 
 ### Fysik 2
-- [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [x] **fy2-1.2 (1: bokhylla vältpunkt; hammar-foto SKIP) KLAR** · [x] **fy2-1.3 (3: 1 rad-sektor, tangentiell v, LP-skiva) KLAR (2026-07-01)** · [ ] fy2-1.4 (2)
+- [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [x] **fy2-1.2 (1: bokhylla vältpunkt; hammar-foto SKIP) KLAR** · [x] **fy2-1.3 (3: 1 rad-sektor, tangentiell v, LP-skiva) KLAR (2026-07-01)** · [x] **fy2-1.4 (2: centripetal v/a_C, vertikal cirkel F_G/F_S övre+nedre) KLAR (2026-07-01)**
+- [ ] fy2-1.5 (1 konisk) · fy2-1.6 (2 kast) · fy2-1.7 (3 gunga) · fy2-1.8 (1 konisk) — NÄSTA. Generatorer: `gen_fy2_14.js` (centripetal/vertikal cirkel), `gen_fy2_1213.js` (cirklar/rotation).
   - **Lärdom (rotation & arc, 2026-07-01):** `verify-figur-bounds.js` läser INTE
     `transform="rotate()"` (mäter råa lokala koordinater) → baka in rotationen i
     koordinaterna (rotera hörn själv, rita `<polygon>`). Och SVG-`A`-bågkommandot
@@ -484,7 +485,6 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
     (ring-/öppen ände + skaft), hand-grepp (fist roterad till skaftvinkeln). Blå
     kraftpil #2563c9 (projektkonvention, INTE PDF:ens röda/magenta). Kraftmoment
     `M = F · l`, hävarm `l`, enhet Nm — synkat med genomgången.
-- [ ] fy2-1.5 (1 konisk) · fy2-1.6 (2 kast) · fy2-1.7 (3 gunga) · fy2-1.8 (1 konisk)
 - [ ] fy2-2.1..2.14 (vågor, fjäder, pendel, stående våg, pipor, interferens — många, mestadels drawable)
 - [ ] fy2-3.1..3.14 (magnetism, fältlinjer, induktion — mestadels drawable schematiskt)
 - [ ] fy2-4.1..4.8 (EM-vågor, spektrum, fotoelektrisk, energinivåer)

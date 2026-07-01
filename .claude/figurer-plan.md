@@ -471,7 +471,14 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
 - [x] **fy1-8.1 (1 relativitet: sol/jordbana/ljusstrålar) · fy1-9.1 (2 atom: helium + excitation) KLAR (2026-07-01)** — KAPITEL RELATIVITET + KÄRNFYSIK KOMPLETT. **HELA FYSIK 1 KLAR (drawable).**
 
 ### Fysik 2
-- [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [ ] fy2-1.2 (1 kvar: bokhylla) · fy2-1.3 (3 cirkel) · fy2-1.4 (2)
+- [x] **fy2-1.1 (4: skiftnyckel F_A/F_B, hand+34 N, spett 45°, gungbräda pappa/barn) KLAR (2026-07-01)** · [x] **fy2-1.2 (1: bokhylla vältpunkt; hammar-foto SKIP) KLAR** · [x] **fy2-1.3 (3: 1 rad-sektor, tangentiell v, LP-skiva) KLAR (2026-07-01)** · [ ] fy2-1.4 (2)
+  - **Lärdom (rotation & arc, 2026-07-01):** `verify-figur-bounds.js` läser INTE
+    `transform="rotate()"` (mäter råa lokala koordinater) → baka in rotationen i
+    koordinaterna (rotera hörn själv, rita `<polygon>`). Och SVG-`A`-bågkommandot
+    förorenar bounds-parsern (läser rx/ry/flaggor som punkter, ger falsk (0,0)) →
+    sampla bågar som `<polyline>`/`<polygon>` i stället (helper `arcPts`). Etikett
+    vid vänster/höger kant ankras vid YTTRE textkanten (start=vänster, end=höger)
+    så ankaret = glyfkanten. `gen_fy2_1213.js`.
   - Generator `gen_fy2_11.js`/`gen_fy2_11b.js` (scratchpad): `arrow()`, `hexagon()`,
     `person(cx,seatY,scale,shirt,label,flip)` sittande figur (spegelbar), skiftnyckel
     (ring-/öppen ände + skaft), hand-grepp (fist roterad till skaftvinkeln). Blå

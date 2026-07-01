@@ -494,7 +494,21 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
     den önskade YTTRE kanten (texten flödar inåt/vänster, bort från kanten). Då blir
     ankaret = glyfkanten och marginalen mäts rätt. Samma som dokumenterat för graf-
     axlar. Gäller alla figurer med breda subscript-etiketter mot höger kant.
-- [ ] fy2-2.1..2.14 (vågor, fjäder, pendel, stående våg, pipor, interferens) — NÄSTA.
+- [~] fy2-2.x (vågor, fjäder, pendel, stående våg, pipor, interferens) — PÅGÅR.
+  KLART (2026-07-01): fy2-2.1 (3: fjäder+Δl, F_R-panel, v/a-paneler), fy2-2.2
+  (2: F–Δl-triangel, dämpad svängning), fy2-2.3 (2: hjul-projektion y=A·sinα,
+  y/v/a-kurvor), fy2-2.5 (2: pendel-cirkelbåge, kraftuppdelning F_S/F_1/F_2),
+  fy2-2.7 (7: puls/våg-illustrationer, transversell/longitudinell, våglängd/
+  amplitud, punkter a–m), fy2-2.8 (12: reflexion fast/lös ände, transmission
+  ×2, superposition 4-steg + sekvens t=0–7). **2.4 och 2.6 saknar figurer.**
+  Generatorer i scratchpad: `gen_fy2_2[12357].js`, `gen_fy2_28.js`. Helpers:
+  `spring()`, `coilTrans/coilLong()` (slinky), `person()`, `hand()` (absoluta
+  koord!), `tree()`, superpositions-`seqFrame()`, graf-grid. Vågkonvention:
+  läge/summa blå #2563c9, hastighet grön #3f8f4a el. blå, acceleration/komponent
+  röd #c0392b, tangentiell komposant orange #d9832a, cyan axlar #38bdf8.
+  **KVAR i fy2-2.x:** 2.9 (5 stående våg sträng), 2.10 (5 pipor), 2.11 (1
+  intensitet), 2.12 (2 doppler), 2.13 (4 brytning), 2.14 (6 diffraktion/
+  interferens) — NÄSTA.
   - **Lärdom (kursiv-arv i katalogen, 2026-07-01 — VIKTIG):** teori-figurernas
     SVG-text ÄRVER `font-style: italic` (marked lindar `<svg>` i `<p>`, och
     `.lab-block-figur p` är kursiv för bildtexter) → **mätetal och enheter blir

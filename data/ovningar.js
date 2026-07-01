@@ -15017,7 +15017,7 @@ Vägskillnaden är **två hela våglängder**, alltså konstruktiv interferens: 
 
 **Svar:** Lyssnaren står på 2:a maxlinjen (svar: $n = 2$).
 
-**Generell slutsats:** Pytagoras-trianglar som 3-4-5 och 5-12-13 ger snygga heltals-vägskillnader och är vanliga i geometriska interferensuppgifter.`,
+**Generell slutsats:** Pythagoras-trianglar som 3-4-5 och 5-12-13 ger snygga heltals-vägskillnader och är vanliga i geometriska interferensuppgifter.`,
         },
         {
             level: 2,
@@ -15043,7 +15043,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2{,}0} = 170\\ \\mathrm{Hz} $$
 
 **Svar:** Tonens frekvens är $170\\ \\mathrm{Hz}$.
 
-**Generell slutsats:** Samma struktur som N2#1 (Pytagoras + interferens) men där frekvensen är okänd istället för linje-ordning. Att kunna växla mellan dessa är typiskt för C-nivå.`,
+**Generell slutsats:** Samma struktur som N2#1 (Pythagoras + interferens) men där frekvensen är okänd istället för linje-ordning. Att kunna växla mellan dessa är typiskt för C-nivå.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
@@ -15059,7 +15059,7 @@ ${makeTwoSourceGeo({ dAB: 5.0, dBL: 12.0, dABLabel: 'AB = 5,0 m', dBLLabel: 'BL 
 
 $$ AL = \\sqrt{AB^2 + BL^2} = \\sqrt{5{,}0^2 + 12{,}0^2} = \\sqrt{25 + 144} = \\sqrt{169} = 13{,}0\\ \\mathrm{m} $$
 
-(Pytagoras-triplet 5-12-13.)
+(Pythagoras-triplet 5-12-13.)
 
 $$ \\Delta s = AL - BL = 13{,}0 - 12{,}0 = 1{,}0\\ \\mathrm{m} $$
 
@@ -15075,7 +15075,7 @@ $$ f = \\frac{v}{\\lambda} = \\frac{340}{2/3} = 340 \\cdot \\frac{3}{2} = 510\\ 
 
 **Svar:** Tonens frekvens är $510\\ \\mathrm{Hz}$.
 
-**Generell slutsats:** För att lösa interferensuppgifter behöver man (1) en geometrisk del för att hitta $\\Delta s$ (här Pytagoras), (2) rätt villkor för max/nod (heltal $\\lambda$ vs halvtal $\\lambda$), och (3) $v = f\\lambda$ för att binda ihop. Den klassiska fällan är att blanda ihop nodlinje-numreringen — kom ihåg att 0:e nodlinjen har $\\Delta s = \\lambda/2$, 1:a nodlinjen har $3\\lambda/2$, och så vidare.`,
+**Generell slutsats:** För att lösa interferensuppgifter behöver man (1) en geometrisk del för att hitta $\\Delta s$ (här Pythagoras), (2) rätt villkor för max/nod (heltal $\\lambda$ vs halvtal $\\lambda$), och (3) $v = f\\lambda$ för att binda ihop. Den klassiska fällan är att blanda ihop nodlinje-numreringen — kom ihåg att 0:e nodlinjen har $\\Delta s = \\lambda/2$, 1:a nodlinjen har $3\\lambda/2$, och så vidare.`,
         },
     ],
 

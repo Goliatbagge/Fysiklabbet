@@ -37,6 +37,7 @@ const LABORANS_NAV = [
 
 // Files to check
 const HTML_FILES_TO_CHECK = [
+    'fysik2-vinkelhastighet-app.html',
     'fysik2-hookes-lag-app.html',
     'fysik2-cirkular-rorelse-app.html',
     'fysik2-kraftmoment-app.html',

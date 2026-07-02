@@ -57,6 +57,17 @@ lärare. Kvalitet och korrekthet går alltid före tempo.
    intakt) och öppna `nyheter.html` + `nyheter.html?id=<nytt-id>` i en
    skärmdump för att se att artikeln och bilden renderar snyggt.
 
+10. **Committa och pusha automatiskt — fråga ALDRIG först.** När artikeln är
+    granskad (redaktionell korrektur + faktakoll av citat, se nedan) och
+    verifieringen är grön: committa och pusha nyheten direkt, utan att invänta
+    användarens godkännande. Användaren gör eventuella justeringar i efterhand.
+    Committa **bara nyhetsfilerna** — `data/nyheter.js`, bilden i
+    `nyheter/bilder/`, de genererade `nyheter/dela/*.html`, samt
+    `.claude/nyheter/publicerat.md` och `ko.md`. Lämna orelaterade ändringar
+    (t.ex. `.claude/settings.local.json`, sim-kod) utanför committen.
+    Detta är den enda ändringstyp i projektet som pushas utan att fråga —
+    allt annat committas/pushas fortfarande bara på begäran.
+
 ## Källor (kontrollera dessa)
 
 - **Phys.org — Physics News**: https://phys.org/physics-news/

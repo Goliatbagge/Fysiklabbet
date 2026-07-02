@@ -165,9 +165,49 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
    - Kraftriktningar dubbelkollade med högerhandsregeln (elektron = motsatt
      strömriktning); virvelströmmars rotationsriktning härledd via Lenz
      (vänster virvel moturs / höger medurs när plattan rör sig åt höger).
-18. **NÄSTA:** fy2-4.x (EM-vågor, spektrum, fotoelektrisk, energinivåer) —
-   se SKIP-listan (4.2 laserfoton, 4.3 sol/måne-foton, 4.6 elektronmönster);
-   sedan fy2-5.x (astronomi: parallax, månfaser, blå himmel, svart hål).
+18. ~~fy2-4.x ljus som våg och partikel~~ — **KLART (2026-07-02). KAPITEL 4
+   KOMPLETT** (4.1–4.8; SKIP kvar = 4.2 laserfoton ×2, 4.3 sol/måne-foton,
+   4.6 träffmönster-foto). 20 figurer över 8 filer:
+   - 4.1 (3): EM-våg med E/B-lober i perspektiv, spektrum-färgband med
+     jämna tiopotens-ticks + ritade ink-ikoner + roterad UV-etikett,
+     inverskvadratlagen (projektionsrutnät d=1/2/3 från punktkälla).
+     Även tabellfix: U+0001-platshållare P17–P19 → `&lt; 0,01` / `&gt; 1`.
+   - 4.2 (2): enkelspalt med halvcirkelvågfronter + skärm med ljusband +
+     sinc²-intensitetskurva (±λ/d-ticks); dubbelspalt-geometri (A/B, d, ℓ,
+     x, α, blå/röd stråle). Laserfoton SKIP.
+   - 4.3 (1): Planck-spektralkurvor 100–10 000 K, log-log med beräknade
+     kurvor (fysikaliskt korrekta), synligt-band, 5 777 K orange/300 K röd.
+   - 4.4 (2): bruten penna i vattenglas (X/Y, öga, EN stråle + streckad
+     förlängning — flera strålar går inte att få geometriskt ärliga mot
+     ett enda öga), strålgång luft→glas (normal, i/r/b-bågar).
+   - 4.5 (2): fotoelektrisk trepanels (röd/grön/blå vågor mot metallplatta,
+     elektroner med fartstreck från plattans yta via hitPlate-intersektion),
+     Comptonspridning (E₁/p₁ → E₂/p₂ + elektron, α/β) — Compton-gränsfallet
+     från SKIP-listan löst.
+   - 4.6 (1): dubbelspaltexperiment (elektronkanon, vågpaket, lutade
+     plattor, interferensband). Träffmönster-foto SKIP.
+   - 4.7 (7): våglängd→färg-helper (Bruton) i `gen_fy2_47.js`; kontinuerligt
+     band, väte/neon-emission, Hg/He/H-referenspaneler (väte ritad med
+     RIKTIGA Balmer-linjer, inte PDF:ns röd/gul/grön), emission vs
+     absorption (samma x-mappning → linjerna linjerar), mörk uppkomst-
+     triptyk (ljuskälla/gasmoln), solspektrum-kurva (Planck 5777 K skalad
+     + gaussiska dippar, väte-656-annotation).
+   - 4.8 (2): Bohr-atom (nivå 1/2, deexcitationspil, foton-våg),
+     energinivådiagram väte (linjär E-skala, staplade kantetiketter med
+     tunna ledare, Balmer-pilar i sina spektralfärger).
+   Generatorer: `.shots/gen_fy2_4[1-8].js`. Lärdomar:
+   - Read-verktyget saknar pdftoppm i PATH → konvertera själv med MiKTeX:s
+     `pdftoppm.exe -png -r 80` till scratchpad och läs PNG:erna.
+   - Etikett ovanpå ljust färgband (rainbow) = förbjudet även när bandet är
+     blekt — flytta etiketten utanför bandet (4.3 "1 000 K", 4.1 "10 000 K").
+   - Vinkeletikett i smal vinkel (α mellan streckad och stråle): lägg den
+     längre ut längs bisektrisen (r≈90 vid ~13°-vinkel) så den går fri från
+     båda linjerna.
+   - Roterad text (`transform="rotate(-90 x y)"`) är OK för verify så länge
+     ankaret ligger väl innanför viewBox (skriptet läser råa koordinater).
+19. **NÄSTA:** fy2-5.x astronomi (5.1–5.6: parallax, månfaser, blå himmel,
+   stjärnbildning, svart hål) — se SKIP (5.1 kosmiska nätet). Därefter är
+   ALLA kapitel klara; kvar = ev. gränsfall (fy2-3.2/3.4 3-fingerhand).
 
 **Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
 radbrytning. Bygger man figur-txt med `{ echo "::: figur"; cat fil.svg;
@@ -567,8 +607,8 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
     (ring-/öppen ände + skaft), hand-grepp (fist roterad till skaftvinkeln). Blå
     kraftpil #2563c9 (projektkonvention, INTE PDF:ens röda/magenta). Kraftmoment
     `M = F · l`, hävarm `l`, enhet Nm — synkat med genomgången.
-- [ ] fy2-4.1..4.8 (EM-vågor, spektrum, fotoelektrisk, energinivåer) — NÄSTA
-- [ ] fy2-5.1..5.6 (astronomi: parallax, månfaser, blå himmel, svart hål)
+- [x] **fy2-4.1..4.8 (EM-vågor, diffraktion, svartkropp, brytning, fotoelektrisk, dualitet, spektrallinjer, Bohr) KLART (2026-07-02)** — KAPITEL 4 KOMPLETT (20 figurer; SKIP: 4.2 laserfoton, 4.3 sol/måne-foton, 4.6 träffmönster-foto). Se punkt 18.
+- [ ] fy2-5.1..5.6 (astronomi: parallax, månfaser, blå himmel, svart hål) — NÄSTA
 
 **Tips:** börja med mekanik-kraftdiagrammen (fy1-3.x, fy2-1.x) — de är
 mest värdefulla och mest lika pilotmallen. Återanvänd hjälp-mönster

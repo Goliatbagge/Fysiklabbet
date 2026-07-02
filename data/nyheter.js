@@ -31,6 +31,50 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-02-lhc-stanger-av",
+    date: "2026-07-02",
+    title: "Världens största partikelaccelerator stängs av i fyra år — ska komma tillbaka tio gånger starkare",
+    deck: "Efter arton år av protonkrockar och en Higgsupptäckt som gav Nobelpriset har CERN stängt av Large Hadron Collider för sin tredje stora ombyggnad. När maskinen startar igen 2030 ska den ge upp till tio gånger fler kollisioner i jakten på mörk materia och ny fysik.",
+    category: "Partikelfysik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-02-lhc-stanger-av.jpg",
+    imageAlt: "Tekniker i hjälm och varselväst arbetar i en av CERN:s underjordiska hallar bland kranar, stora kryogena rör och blå elskåp under ombyggnaden av Large Hadron Collider.",
+    imageCredit: "Foto: CERN",
+    tags: ["partikelfysik", "cern", "lhc", "higgspartikeln", "standardmodellen", "mörk materia", "magnetfält", "modern fysik", "partikelaccelerator", "cirkulär rörelse"],
+    sources: [
+      { name: "CERN (pressmeddelande)", url: "https://home.cern/cern-bids-farewell-to-the-lhc-and-enters-long-shutdown-3/" },
+      { name: "Physics World", url: "https://physicsworld.com/a/cern-says-large-hadron-collider-has-exceeded-every-expectation-as-it-shuts-down-ahead-of-major-upgrade/" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-06-world-largest-particle-smasher-halts.html" }
+    ],
+    research: null,
+    body: [
+      { type: "p", html: "Lördagen den 27&nbsp;juni klockan 06:00 dumpade operatörerna vid CERN de sista protonstrålarna i Large Hadron Collider (LHC) — världens största partikelaccelerator. Efter arton år av kollisioner, en Higgspartikel och ett Nobelpris går maskinen nu in i sin tredje stora ombyggnadspaus: fyra års renovering innan den vaknar upp 2030 som en kraftfullare version, High-Luminosity LHC (HL-LHC)." },
+
+      { type: "h2", text: "En 27 kilometer lång ring under jorden" },
+      { type: "p", html: "LHC är en 27&nbsp;kilometer lång cirkulär tunnel omkring 100&nbsp;meter under gränsen mellan Schweiz och Frankrike. Där drivs protoner runt av fler än 9&nbsp;000 supraledande magneter, kylda till 1,9&nbsp;K (−271&nbsp;°C) — kallare än den kosmiska bakgrundsstrålningen ute i rymden (2,7&nbsp;K). Vid full fart hinner protonerna 11&nbsp;245 varv i sekunden i 99,9999991&nbsp;% av ljusets hastighet, tvingade i sin cirkelbana av de starka magnetfälten." },
+      { type: "quote", html: "”LHC har överträffat varje förväntan. I nästan två decennier har den omformat vår förståelse av universum.”", cite: "Oliver Brüning, CERN:s direktör för acceleratorer och teknik" },
+
+      { type: "h2", text: "Från kollision till Nobelpris" },
+      { type: "p", html: "Den 4&nbsp;juli 2012 meddelade experimenten ATLAS och CMS att de hittat Higgspartikeln — beviset för den mekanism som ger andra partiklar massa. Fyndet gav Peter Higgs och François Englert Nobelpriset i fysik redan året efter. Sedan starten 2008 har LHC dessutom bidragit till upptäckten av fler än 85 nya hadroner — sammansatta partiklar av kvarkar — och satt allt tätare gränser för var ny, okänd fysik skulle kunna gömma sig." },
+
+      { type: "h2", text: "Fyra år för tio gånger fler kollisioner" },
+      { type: "p", html: "Under ombyggnaden, kallad <em>Long Shutdown 3</em>, ska cirka 1,2&nbsp;kilometer av acceleratorns magneter och annan utrustning plockas bort och ersättas. Notan landar på ungefär 1,2&nbsp;miljarder schweizerfranc (cirka 1,5&nbsp;miljarder dollar). Målet är att öka <em>luminositeten</em> — ett mått på hur många kollisioner som sker per sekund — med upp till tio gånger. Vid varje möte mellan de tätt packade protonbuntarna sker i dag omkring 60&nbsp;kollisioner samtidigt; efter ombyggnaden väntas det bli 140–200, och detektorerna måste då hantera fler än 5&nbsp;miljarder växelverkningar i sekunden." },
+      { type: "quote", html: "”Det här är ett mycket viktigt ögonblick. Från och med måndagen går vi in i en ny fas.”", cite: "Markus Zerlauth, projektchef för HL-LHC" },
+      { type: "p", html: "Delar av injektorkedjan — de mindre acceleratorer som förbereder protonerna innan de skickas in i LHC-ringen — börjar tas i drift igen redan från 2028. Men det är först 2030 som själva LHC-ringen vaknar till liv igen, nu som HL-LHC, för att köra i ungefär ett decennium. Med tio gånger fler kollisioner räknar forskarna med att kunna producera omkring 380&nbsp;miljoner Higgspartiklar, jämfört med 55&nbsp;miljoner hittills — data nog för att mäta Higgspartikelns egenskaper med långt större precision och söka efter tecken på mörk materia, som utgör ungefär 27&nbsp;procent av universums innehåll." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Att hålla protonerna på sin cirkelbana är ett läroboksexempel på <strong>Fysik&nbsp;nivå&nbsp;2</strong>: en laddad partikel som rör sig genom ett magnetfält påverkas av Lorentzkraften, <em>F</em> = <em>q</em> · <em>v</em> × <em>B</em>, riktad vinkelrätt mot både rörelsen och fältet — precis den kraft som får en laddad partikel att svänga in i en cirkelbana i stället för att fortsätta rakt fram (avsnittet om laddade partiklar i magnetfält). Kollisionerna själva, där rörelseenergi omvandlas till nya partiklars massa, bygger på Einsteins samband mellan energi och massa, <em>E</em> = <em>m</em><em>c</em><sup>2</sup> — grunden för den moderna fysik som avslutar kursen." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Protonerna i LHC hinner 11&nbsp;245 varv runt ringen varje sekund — i 99,9999991&nbsp;% av ljusets hastighet.",
+        "Vid 1,9&nbsp;K (−271&nbsp;°C) är LHC:s magneter kallare än rymden mellan galaxerna, där den kosmiska bakgrundsstrålningen håller 2,7&nbsp;K.",
+        "Higgspartikeln, som ger andra partiklar massa, upptäcktes den 4&nbsp;juli 2012 — nästan exakt fjorton år före dagens stängning.",
+        "Nästa gång LHC krockar protoner på allvar är 2030. Fram till dess pågår ombyggnaden dygnet runt, med tusentals tekniker och forskare inblandade."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-01-grafen-supraledning",
     date: "2026-07-01",
     title: "Grafit döljer fyra supraledande tillstånd — och magnetfält gör dem starkare",

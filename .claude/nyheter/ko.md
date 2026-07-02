@@ -12,7 +12,23 @@ Format per post:
 
 ## Kö
 
-*(Tom — inga inplanerade uppslag för tillfället. Se Reservuppslag vid nyhetstorka nedan.)*
+*(Tom just nu — se nedan för två fynd från 2026-07-02 som inte användes.)*
+
+## Fynd som inte användes (2026-07-02) — kan tas upp senare
+
+- **Diamant-kvantsensor kan avslöja altermagneter** — en ny sensor (kväve-vakans-
+  defekt i diamant) som teoretiskt kan avgöra om ett material är en "altermagnet",
+  en nyupptäckt magnetismtyp mellan ferro- och antiferromagnetism. Bra materialfysik/
+  kvantsensor-vinkel, men vänta ett tag — vi har haft flera kvantsensor-/
+  kvantdefekt-nyheter senaste veckorna (kvantgivare mot mörk materia 2026-06-21).
+  Källor: https://phys.org/news/2026-05-diamond-quantum-sensor-reveal-elusive.html ,
+  publicerad i Physical Review Letters (2026). (tillagd 2026-07-02)
+- **Laser som virvlar som en strömvirvel i plasma** — forskare undersöker om en
+  högintensiv laser med orbital rörelsemängdsmoment (twisted/OAM-laser) kan ge nya
+  plasmafenomen. Optik/vågor-vinkel, men vi har haft många laser-nyheter senaste
+  veckorna (superstabil laser 2026-06-28, laser i månkrater 2026-06-26) — spara
+  till det svalnat. Källa: phys.org (sök "twisted laser plasma OAM 2026").
+  (tillagd 2026-07-02)
 
 ## Reservuppslag vid nyhetstorka (tidlösa)
 

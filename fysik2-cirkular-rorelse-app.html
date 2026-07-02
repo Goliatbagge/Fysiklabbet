@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cirkulär rörelse - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
+                    flex-shrink: 0; justify-content: flex-end; min-width: 76px; }
+        .num-in { width: 52px; padding: 2px 6px; border-radius: 6px;
+                  border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+                  background: var(--lab-bg, #f3eee4);
+                  font-family: 'JetBrains Mono', monospace; font-weight: 600;
+                  font-size: 13px; text-align: right; }
+        .num-in:focus { outline: none; border-color: var(--lab-accent, #c8324a);
+                        box-shadow: 0 0 0 2px rgba(200,50,74,0.15); }
+        .num-unit { font-size: 12px; color: var(--lab-ink-soft, #5a6170);
+                    font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        .scene-info {
+            position: absolute; top: 62px; left: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles label.st-sub { padding-left: 21px; font-size: 12.5px; }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        /* Reglage-rad inom fullskärms-dropdownen (underkant) */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+        .mode-seg { display: flex; gap: 0; border-radius: 9px; overflow: hidden;
+                    border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28)); }
+        .mode-seg button {
+            flex: 1; padding: 9px 10px; font-weight: 600; cursor: pointer; font-size: 13.5px;
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620); border: none;
+            border-right: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        .mode-seg button:last-child { border-right: none; }
+        .mode-seg button.active { background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4); }
+        .mode-seg button .sub { display: block; font-size: 11px; font-weight: 400; opacity: 0.8; }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Nyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const G = 9.82;                     // tyngdfaktorn (N/kg)
+        const DEG = Math.PI / 180;
+
+        // ── Cirkelbana (ovanifrån): glidarintervall ──
+        const VMIN = 2, VMAX = 15;          // banhastighet (m/s)
+        const RMIN = 5, RMAX = 25;          // banradie (m)
+        const MMIN = 500, MMAX = 2000;      // massa (kg)
+
+        // ── Loop: fasta parametrar ──
+        const RL = 8.0;                     // loopens radie (m)
+        const ML = 1000;                    // bilens massa i loopen (kg)
+        const V0MIN = 8, V0MAX = 24;        // fart längst ned (m/s)
+        const VCRIT = Math.sqrt(5 * G * RL);        // gränsfart längst ned
+        const VTOP_MIN = Math.sqrt(G * RL);         // gränsfart i toppen
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',');
+        };
+        // Tusentalsavgränsare med hårt mellanslag (NBSP) — för krafter i N.
+        const fmtNum = (n, d = 0) => {
+            if (!isFinite(n)) return '–';
+            const s = n.toFixed(d);
+            if (parseFloat(s) === 0) return '0';
+            const [intp, frac] = s.split('.');
+            const withSpaces = intp.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+            return frac !== undefined ? withSpaces + ',' + frac : withSpaces;
+        };
+
+        const COL = {
+            fart:  '#2563c9',  // blå — hastighet v (samma som teorifigurerna)
+            acc:   '#7c3aed',  // violett — centripetalacceleration a_C
+            fc:    '#b8860b',  // mörk guld — centripetalkraften F_C
+            res:   '#0f1620',  // bläck — resulterande kraften F_R (vektorsumman)
+            frik:  '#e0701a',  // orange — friktionskraft F_f
+            tyngd: '#c8324a',  // crimson — tyngdkraft F_G
+            norm:  '#0d9488',  // teal — normalkraft F_N
+            ink:   '#0f1620',
+        };
+
+        // ── SVG-pil — mot ljus papperscen behövs ingen vit kontur. edge=true
+        // ger en tunn mörk kantlinje där pilen ligger mot en figurdel. ──
+        const Arrow = ({ x1, y1, x2, y2, color, width = 7, head = 20, opacity = 1, edge = false }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 0.5) return null;
+            const hw = 0.42;
+            const hd = Math.max(11, Math.min(head, len * 0.9));
+            const bx = x2 - hd * 0.82 * Math.cos(ang);
+            const by = y2 - hd * 0.82 * Math.sin(ang);
+            const pL = [x2 - hd * Math.cos(ang - hw), y2 - hd * Math.sin(ang - hw)];
+            const pR = [x2 - hd * Math.cos(ang + hw), y2 - hd * Math.sin(ang + hw)];
+            const edgeCol = 'rgba(15,22,32,0.55)';
+            return (
+                <g opacity={opacity}>
+                    {edge && (
+                        <line x1={x1} y1={y1} x2={bx} y2={by} stroke={edgeCol}
+                              strokeWidth={width + 3.5} strokeLinecap="butt" />
+                    )}
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" />
+                    <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color}
+                             stroke={edge ? edgeCol : 'rgba(15,22,32,0.18)'} strokeWidth={edge ? 2 : 1} strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Etikett vid pilspets: placeras ett stycke BORTOM spetsen i pilens
+        // riktning, med anchor så texten flödar ut i fri yta.
+        const tipLabel = (tip, dir, extra = 15) => {
+            const x = tip.x + dir.x * extra, y = tip.y + dir.y * extra;
+            const anchor = dir.x > 0.35 ? 'start' : (dir.x < -0.35 ? 'end' : 'middle');
+            const dy = dir.y > 0.35 ? 15 : (dir.y < -0.35 ? -5 : 5);
+            return { x, y: y + dy, anchor };
+        };
+
+        const Slider = ({ label, value, min, max, step, onChange, children }) => (
+            <div className="flex items-center gap-2 mb-2">
+                <span className="text-xs flex-shrink-0" style={{ minWidth: 110, color: 'var(--lab-ink-soft)' }}
+                      dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="flex-1 cursor-pointer" />
+                {children}
+            </div>
+        );
+
+        // Kompakt reglage-rad för fullskärms-dropdownen i underkant
+        const FsSlider = ({ label, value, min, max, step, onChange, valueNode }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 148 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                {valueNode}
+            </div>
+        );
+
+        const NumInput = ({ value, min, max, onCommit, fmtFn, unit, color = 'var(--lab-accent, #c8324a)' }) => {
+            const [txt, setTxt] = useState(() => fmtFn(value));
+            const [editing, setEditing] = useState(false);
+            useEffect(() => { if (!editing) setTxt(fmtFn(value)); }, [value, editing]);
+            const commit = (raw) => {
+                const norm = raw.replace(',', '.').trim();
+                if (norm === '' || norm === '-' || norm === '.' || norm === '-.') return;
+                let n = parseFloat(norm);
+                if (!isFinite(n)) return;
+                if (min != null && n < min) n = min;
+                if (max != null && n > max) n = max;
+                onCommit(n);
+            };
+            return (
+                <span className="num-wrap">
+                    <input className="num-in" type="text" inputMode="decimal" value={txt}
+                           style={{ color }} aria-label="Skriv in värde"
+                           onFocus={() => setEditing(true)}
+                           onChange={(e) => { setTxt(e.target.value); commit(e.target.value); }}
+                           onBlur={() => { setEditing(false); setTxt(fmtFn(value)); }}
+                           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur(); }} />
+                    {unit && <span className="num-unit">{unit}</span>}
+                </span>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCEN 1 — bil i cirkelbana, sedd ovanifrån
+        // ════════════════════════════════════════════════════════
+        const VBW = 820, VBH = 540;
+        // centrum förskjutet åt vänster så banan går fri från visa-panelen
+        // uppe till höger
+        const CX = 360, CY = 278;
+
+        // px per meter varierar med radien så banan alltid fyller scenen lagom
+        const rToPx = (r) => Math.max(76, Math.min(205, 70 + r * 5.4));
+
+        // Bil sedd ovanifrån — lokala koordinater: +x = framåt, origo i bilens mitt
+        const CarTop = () => (
+            <g>
+                <rect x="-25" y="-13" width="50" height="26" rx="7"
+                      fill="url(#carG)" stroke="#2c5a86" strokeWidth="2" />
+                {/* vindruta (fram) och bakruta */}
+                <path d="M 8,-10 L 15,-7 L 15,7 L 8,10 Z" fill="#c7d6e4" stroke="#2c5a86" strokeWidth="1.2" />
+                <path d="M -12,-10 L -17,-8 L -17,8 L -12,10 Z" fill="#c7d6e4" stroke="#2c5a86" strokeWidth="1.2" />
+                {/* tak */}
+                <rect x="-12" y="-9" width="20" height="18" rx="4" fill="#6fa8d6" stroke="#2c5a86" strokeWidth="1.2" />
+                {/* strålkastare */}
+                <rect x="22" y="-10" width="2.6" height="5" rx="1" fill="#f0e6c8" />
+                <rect x="22" y="5" width="2.6" height="5" rx="1" fill="#f0e6c8" />
+            </g>
+        );
+
+        const CircleScene = ({ phase, v, m, r, show, forceView }) => {
+            const rPx = rToPx(r);
+            const cosP = Math.cos(phase), sinP = Math.sin(phase);
+            const P = { x: CX + rPx * cosP, y: CY - rPx * sinP };      // bilens mitt (motsols)
+            const t = { x: -sinP, y: -cosP };                          // tangent (rörelseriktning)
+            const inward = { x: -cosP, y: sinP };                      // in mot centrum
+
+            const aC = v * v / r;
+            const FC = m * aC;
+
+            // pillängder — kraftpilen får aldrig nå förbi centrum
+            const capF = Math.min(200, rPx - 28);
+            const LF = FC <= 0.5 ? 0 : Math.max(14, Math.min(FC * 0.02, capF));
+            const capA = Math.min(170, rPx - 40);
+            const LA = aC <= 0.02 ? 0 : Math.max(13, Math.min(aC * 8, capA));
+            const LV = Math.max(14, Math.min(v * 7, 150));
+
+            const rotDeg = -(90 + phase / DEG);
+
+            // kraftpil: från bilens mitt (kontaktytan däck–väg sedd ovanifrån) mot
+            // centrum. Etiketten läggs vinkelrätt ut på LEDANDE sidan (+t) så den
+            // aldrig hamnar på den kolinjära radien.
+            const fTip = { x: P.x + inward.x * LF, y: P.y + inward.y * LF };
+            const fl = tipLabel(fTip, t, 14);
+            // a_C-pil: parallellförskjuten bakåt längs tangenten så den inte
+            // ligger ovanpå kraftpilen/radien; etiketten flödar vidare INÅT
+            // förbi spetsen — cirkelns inre är alltid fri yta
+            const aOff = 34;
+            const aStart = { x: P.x - t.x * aOff, y: P.y - t.y * aOff };
+            const aTip = { x: aStart.x + inward.x * LA, y: aStart.y + inward.y * LA };
+            // extra knuff åt släpsidan så etiketten inte tangerar kraftpilen
+            const al = tipLabel({ x: aTip.x - t.x * 10, y: aTip.y - t.y * 10 }, inward, 14);
+            // v-pil: från bilens FRAMKANT (objektets rand i pilens riktning)
+            const vStart = { x: P.x + t.x * 26, y: P.y + t.y * 26 };
+            const vTip = { x: vStart.x + t.x * LV, y: vStart.y + t.y * LV };
+            const vl = tipLabel(vTip, t);
+            // radie-etikett: bara ett kursivt r intill linjen (som i teori-
+            // figurerna) — värdet står i Avläsning. Håller etiketten fri från
+            // väg, pilar och a_C-etikett vid alla vinklar.
+            const rMid = { x: CX + rPx * 0.45 * cosP, y: CY - rPx * 0.45 * sinP };
+            const rl = tipLabel(rMid, t, 10);
+
+            const showF = show.forces && forceView === 'verkliga';
+            const showFc = show.forces && forceView === 'centripetal';
+            // sedd ovanifrån är resultanten = friktionskraften (F_N och F_G tar
+            // ut varandra lodrätt) — samma pil, i rollen som F_R
+            const showFr = show.forces && forceView === 'resultant';
+
+            return (
+                <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="wallG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="carG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#5b9bd1" />
+                            <stop offset="100%" stopColor="#3f7cb4" />
+                        </linearGradient>
+                    </defs>
+
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#wallG)" />
+
+                    {/* vägbana (ring) */}
+                    <circle cx={CX} cy={CY} r={rPx} fill="none" stroke="#8f959e" strokeWidth="40" />
+                    <circle cx={CX} cy={CY} r={rPx + 20} fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="1.6" />
+                    <circle cx={CX} cy={CY} r={rPx - 20} fill="none" stroke="rgba(15,22,32,0.45)" strokeWidth="1.6" />
+                    <circle cx={CX} cy={CY} r={rPx} fill="none" stroke="#ece5d2" strokeWidth="2.4"
+                            strokeDasharray="16 14" opacity="0.85" />
+
+                    {/* centrum */}
+                    <circle cx={CX} cy={CY} r="3.4" fill={COL.ink} />
+
+                    {/* radie */}
+                    {show.radius && (
+                        <g>
+                            <line x1={CX} y1={CY} x2={P.x} y2={P.y} stroke={COL.ink}
+                                  strokeWidth="1.7" strokeDasharray="6 5" opacity="0.75" />
+                            <text x={rl.x} y={rl.y} textAnchor={rl.anchor} fontSize="18" fontWeight="700" fill={COL.ink}>
+                                <tspan fontStyle="italic">r</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* tillståndstext — centrerad över scenens vänstra del så den
+                        inte hamnar bakom visa-panelen uppe till höger */}
+                    <text x="290" y={40} textAnchor="middle" fontSize="19" fontWeight="700" fill="rgba(15,22,32,0.7)">
+                        Konstant fart — men hastigheten byter riktning
+                    </text>
+
+                    {/* bilen */}
+                    <g transform={`translate(${P.x} ${P.y}) rotate(${rotDeg})`}>
+                        <CarTop />
+                    </g>
+
+                    {/* friktionskraft (den verkliga kraften) — angriper i kontakt-
+                        ytan däck–väg, som ovanifrån ligger under bilen */}
+                    {showF && LF > 0 && (
+                        <g>
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.frik} edge />
+                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.frik}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">f</tspan>
+                                <tspan dy="-4"> = {fmtNum(FC)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* centripetalkraften */}
+                    {showFc && LF > 0 && (
+                        <g>
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.fc} edge />
+                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.fc}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">C</tspan>
+                                <tspan dy="-4"> = {fmtNum(FC)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* resulterande kraften — vid konstant fart är F_R = F_C */}
+                    {showFr && LF > 0 && (
+                        <g>
+                            <Arrow x1={P.x} y1={P.y} x2={fTip.x} y2={fTip.y} color={COL.res} />
+                            <text x={fl.x} y={fl.y} textAnchor={fl.anchor} fontSize="17" fontWeight="700" fill={COL.res}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="13">R</tspan>
+                                <tspan dy="-4"> = {fmtNum(FC)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* centripetalacceleration — parallellförskjuten från kraftpilen */}
+                    {show.accel && LA > 0 && (
+                        <g>
+                            <Arrow x1={aStart.x} y1={aStart.y} x2={aTip.x} y2={aTip.y} color={COL.acc} width={6} head={17} />
+                            <text x={al.x} y={al.y} textAnchor={al.anchor} fontSize="16" fontWeight="700" fill={COL.acc}>
+                                <tspan fontStyle="italic">a</tspan><tspan dy="4" fontSize="12">C</tspan>
+                                <tspan dy="-4"> = {fmt(aC, 1)} m/s²</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* hastighet — startar vid bilens framkant, tangentiellt */}
+                    {show.vel && (
+                        <g>
+                            <Arrow x1={vStart.x} y1={vStart.y} x2={vTip.x} y2={vTip.y} color={COL.fart} width={6.5} head={18} />
+                            <text x={vl.x} y={vl.y} textAnchor={vl.anchor} fontSize="17" fontWeight="700" fill={COL.fart}>
+                                <tspan fontStyle="italic">v</tspan> = {fmt(v, 1)} m/s
+                            </text>
+                        </g>
+                    )}
+                </svg>
+            );
+        };
+
+        // ════════════════════════════════════════════════════════
+        //  SCEN 2 — bil i loop (sedd från sidan)
+        // ════════════════════════════════════════════════════════
+        const LCX = 360, LCY = 250, LRPX = 178;
+        const PXM = LRPX / RL;                    // px per meter
+        const GROUND_Y = LCY + LRPX + 8;
+
+        // Bil sedd från sidan — lokala koordinater: kontaktpunkt i (0,0),
+        // +x = framåt, −y = upp (in mot loopens centrum vid botten)
+        const CarSide = () => (
+            <g>
+                {/* kaross */}
+                <path d="M -27,-9 L -24,-17 L -10,-19 L -6,-26 L 12,-26 L 18,-18 L 27,-15 L 28,-9 Q 28,-6 24,-6 L -23,-6 Q -27,-6 -27,-9 Z"
+                      fill="url(#carSG)" stroke="#2c5a86" strokeWidth="2" strokeLinejoin="round" />
+                {/* ruta */}
+                <path d="M -4,-24 L 10,-24 L 14,-18 L -7,-18 Z" fill="#c7d6e4" stroke="#2c5a86" strokeWidth="1.2" />
+                {/* hjul */}
+                <circle cx="-16" cy="-5.5" r="5.5" fill="#2b2f36" stroke="#15181d" strokeWidth="1.6" />
+                <circle cx="16" cy="-5.5" r="5.5" fill="#2b2f36" stroke="#15181d" strokeWidth="1.6" />
+                <circle cx="-16" cy="-5.5" r="1.8" fill="#c9ced6" />
+                <circle cx="16" cy="-5.5" r="1.8" fill="#c9ced6" />
+            </g>
+        );
+
+        const kFL = 0.003;                        // px per N (kraftpilar, loop)
+        const lenFL = (F) => (F <= 1 ? 0 : Math.min(F * kFL, 250));
+
+        const LoopScene = ({ ls, v0, show, forceView }) => {
+            // ls: { st, th, dir, x, y, vx, vy, detach, trace }  (px där inget annat anges)
+            const th = ls.th;
+            const onTrack = ls.st === 'track';
+            const failed = ls.st === 'failed';
+
+            // position + riktningar på banan (θ från loopens botten, medsols i scenen)
+            const pos = onTrack
+                ? { x: LCX + LRPX * Math.sin(th), y: LCY + LRPX * Math.cos(th) }
+                : { x: ls.x, y: ls.y };
+            const inward = { x: -Math.sin(th), y: -Math.cos(th) };     // mot centrum
+            const tdir = { x: Math.cos(th), y: -Math.sin(th) };        // rörelseriktning (θ växer)
+
+            // fart ur energiprincipen
+            const v2 = Math.max(0, v0 * v0 - 2 * G * RL * (1 - Math.cos(th)));
+            const vmag = onTrack ? Math.sqrt(v2) : Math.hypot(ls.vx, ls.vy) / PXM;
+            const N = onTrack ? Math.max(0, ML * (v2 / RL + G * Math.cos(th))) : 0;
+            const FG = ML * G;
+            const FCnow = onTrack ? ML * v2 / RL : 0;
+
+            const LN = lenFL(N), LG = lenFL(FG), LFC = lenFL(FCnow);
+            const LV = Math.max(0, Math.min(vmag * 5.5, 140));
+            const LA = Math.max(0, Math.min((onTrack ? v2 / RL : 0) * 2.0, 150));
+
+            // krafternas geometri. Radiella pilar (F_N, F_C) och radien är
+            // kolinjära — deras etiketter läggs vinkelrätt ut på LEDANDE sidan,
+            // a_C-etiketten på SLÄPANDE sidan, så inget hamnar på linjerna.
+            const cm = { x: pos.x + inward.x * 14, y: pos.y + inward.y * 14 };  // tyngdpunkt (mitt i karossen)
+            const gTip = { x: cm.x, y: cm.y + LG };
+            const gl = { x: gTip.x + 12, y: gTip.y + 16, anchor: 'start' };     // bredvid, ej på radiella linjer
+            const nTip = { x: pos.x + inward.x * LN, y: pos.y + inward.y * LN };
+            const nl = tipLabel(nTip, tdir, 14);
+            const fcTip = { x: cm.x + inward.x * LFC, y: cm.y + inward.y * LFC };
+            const fcl = tipLabel(fcTip, tdir, 14);
+            const aOff = 30;
+            const aStart = { x: pos.x - tdir.x * aOff + inward.x * 6, y: pos.y - tdir.y * aOff + inward.y * 6 };
+            const aTip = { x: aStart.x + inward.x * LA, y: aStart.y + inward.y * LA };
+            const al = tipLabel(aTip, { x: -tdir.x, y: -tdir.y }, 12);
+            const vel = onTrack
+                ? { x: tdir.x * (ls.dir >= 0 ? 1 : -1), y: tdir.y * (ls.dir >= 0 ? 1 : -1) }
+                : (() => { const L = Math.hypot(ls.vx, ls.vy) || 1; return { x: ls.vx / L, y: ls.vy / L }; })();
+            const vStart = { x: cm.x + vel.x * 30, y: cm.y + vel.y * 30 };
+            const vTip = { x: vStart.x + vel.x * LV, y: vStart.y + vel.y * LV };
+            const vl = tipLabel(vTip, vel);
+
+            // radie-etikett — vinkelrätt förskjuten, ankrad bort från linjen
+            const rMid = { x: LCX + LRPX * 0.55 * Math.sin(th), y: LCY + LRPX * 0.55 * Math.cos(th) };
+            const rl = tipLabel(rMid, tdir, 12);
+
+            const showF = show.forces && forceView === 'verkliga';
+            const showFc = show.forces && forceView === 'centripetal';
+            const showFr = show.forces && forceView === 'resultant';
+
+            // resulterande kraften = vektorsumman av F_N och F_G. På banan har
+            // den både en radiell del (centripetal) och en tangentiell del
+            // (farten ändras) — i luften är den bara tyngdkraften.
+            const frVec = { x: N * inward.x, y: N * inward.y + FG };
+            const frMag = Math.hypot(frVec.x, frVec.y);
+            const frU = frMag > 1 ? { x: frVec.x / frMag, y: frVec.y / frMag } : { x: 0, y: 1 };
+            const frLen = lenFL(frMag);
+            const frTip = { x: cm.x + frU.x * frLen, y: cm.y + frU.y * frLen };
+            const frl = tipLabel(frTip, frU);
+
+            // statusrad
+            let stateText, stateCol;
+            if (ls.st === 'ballistic' || failed) {
+                stateText = 'Normalkraften blev 0 — bilen släpper och faller fritt!';
+                stateCol = COL.tyngd;
+            } else if (v0 < Math.sqrt(2 * G * RL) - 0.005) {
+                stateText = 'För låg fart — bilen rullar fram och tillbaka';
+                stateCol = 'rgba(15,22,32,0.7)';
+            } else if (v0 < VCRIT - 0.05) {
+                stateText = 'För låg fart — bilen släpper där normalkraften blir 0';
+                stateCol = COL.frik;
+            } else if (v0 < VCRIT + 0.05) {
+                stateText = 'Precis på gränsen — i toppen är normalkraften 0';
+                stateCol = COL.fc;
+            } else {
+                stateText = 'Bilen klarar loopen — normalkraft från vägen hela varvet';
+                stateCol = COL.norm;
+            }
+
+            return (
+                <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                     style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <defs>
+                        <linearGradient id="wallG2" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#f7f2e8" />
+                            <stop offset="100%" stopColor="#ece3d2" />
+                        </linearGradient>
+                        <linearGradient id="carSG" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#5b9bd1" />
+                            <stop offset="100%" stopColor="#3f7cb4" />
+                        </linearGradient>
+                    </defs>
+
+                    <rect x="0" y="0" width={VBW} height={VBH} fill="url(#wallG2)" />
+
+                    {/* mark + tillfartsväg */}
+                    <line x1="24" y1={GROUND_Y} x2={VBW - 24} y2={GROUND_Y} stroke={COL.ink} strokeWidth="3" strokeLinecap="round" />
+
+                    {/* loopbanan (ring) */}
+                    <circle cx={LCX} cy={LCY} r={LRPX + 5} fill="none" stroke="#8f959e" strokeWidth="10" />
+                    <circle cx={LCX} cy={LCY} r={LRPX + 10.5} fill="none" stroke="rgba(15,22,32,0.5)" strokeWidth="1.6" />
+                    <circle cx={LCX} cy={LCY} r={LRPX} fill="none" stroke="rgba(15,22,32,0.5)" strokeWidth="1.4" />
+
+                    {/* centrum */}
+                    <circle cx={LCX} cy={LCY} r="3.4" fill={COL.ink} />
+
+                    {/* radie — bara medan bilen är på banan */}
+                    {show.radius && onTrack && (
+                        <g>
+                            <line x1={LCX} y1={LCY} x2={pos.x} y2={pos.y} stroke={COL.ink}
+                                  strokeWidth="1.7" strokeDasharray="6 5" opacity="0.75" />
+                            <text x={rl.x} y={rl.y} textAnchor={rl.anchor} fontSize="17" fontWeight="700" fill={COL.ink}>
+                                <tspan fontStyle="italic">r</tspan> = {fmt(RL, 1)} m
+                            </text>
+                        </g>
+                    )}
+
+                    {/* fallbana + släpp-punkt */}
+                    {ls.trace.length > 1 && (
+                        <polyline points={ls.trace.map(p => `${p.x},${p.y}`).join(' ')} fill="none"
+                                  stroke="rgba(15,22,32,0.4)" strokeWidth="2" strokeDasharray="4 5" />
+                    )}
+                    {ls.detach && (
+                        <g>
+                            <circle cx={ls.detach.x} cy={ls.detach.y} r="7" fill="none"
+                                    stroke={COL.tyngd} strokeWidth="2" strokeDasharray="3 3" />
+                            <text x={ls.detach.x + ls.detach.lx} y={ls.detach.y + ls.detach.ly}
+                                  textAnchor={ls.detach.anchor} fontSize="15" fontWeight="700" fill={COL.tyngd}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="11">N</tspan>
+                                <tspan dy="-4"> = 0 här</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* tillståndstext — vänsterställd yta, fri från visa-panelen */}
+                    <text x="290" y={38} textAnchor="middle" fontSize="19" fontWeight="700" fill={stateCol}>
+                        {stateText}
+                    </text>
+
+                    {/* bilen */}
+                    <g transform={`translate(${pos.x} ${pos.y}) rotate(${-(onTrack ? th : ls.rot) / DEG})`}>
+                        <CarSide />
+                    </g>
+
+                    {/* verkliga krafter: tyngdkraft + normalkraft */}
+                    {showF && (
+                        <g>
+                            {/* F_G — från tyngdpunkten, alltid rakt ned, med CM-prick */}
+                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} edge />
+                            <circle cx={cm.x} cy={cm.y} r="2.8" fill={COL.tyngd} />
+                            <text x={gl.x} y={gl.y} textAnchor={gl.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">G</tspan>
+                                <tspan dy="-4"> = {fmtNum(FG)} N</tspan>
+                            </text>
+                            {/* F_N — från kontaktytan däck–väg, in mot centrum */}
+                            {onTrack && LN > 0.5 && (
+                                <g>
+                                    <Arrow x1={pos.x} y1={pos.y} x2={nTip.x} y2={nTip.y} color={COL.norm} edge />
+                                    <text x={nl.x} y={nl.y} textAnchor={nl.anchor} fontSize="16" fontWeight="700" fill={COL.norm}>
+                                        <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">N</tspan>
+                                        <tspan dy="-4"> = {fmtNum(N)} N</tspan>
+                                    </text>
+                                </g>
+                            )}
+                        </g>
+                    )}
+
+                    {/* centripetalkraften (resultanten) */}
+                    {showFc && onTrack && LFC > 0.5 && (
+                        <g>
+                            <Arrow x1={cm.x} y1={cm.y} x2={fcTip.x} y2={fcTip.y} color={COL.fc} edge />
+                            <text x={fcl.x} y={fcl.y} textAnchor={fcl.anchor} fontSize="16" fontWeight="700" fill={COL.fc}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">C</tspan>
+                                <tspan dy="-4"> = {fmtNum(FCnow)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+                    {showFc && !onTrack && (
+                        <g>
+                            <Arrow x1={cm.x} y1={cm.y} x2={gTip.x} y2={gTip.y} color={COL.tyngd} edge />
+                            <circle cx={cm.x} cy={cm.y} r="2.8" fill={COL.tyngd} />
+                            <text x={gl.x} y={gl.y} textAnchor={gl.anchor} fontSize="16" fontWeight="700" fill={COL.tyngd}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">G</tspan>
+                                <tspan dy="-4"> = {fmtNum(FG)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* resulterande kraften F_R = F_N + F_G (vektorsumma). På banan
+                        lutar den mot rörelseriktningen utom i topp- och bottenläget;
+                        i luften är den = tyngdkraften. */}
+                    {showFr && frLen > 0.5 && (
+                        <g>
+                            <Arrow x1={cm.x} y1={cm.y} x2={frTip.x} y2={frTip.y} color={COL.res} />
+                            <text x={frl.x} y={frl.y} textAnchor={frl.anchor} fontSize="16" fontWeight="700" fill={COL.res}>
+                                <tspan fontStyle="italic">F</tspan><tspan dy="4" fontSize="12">R</tspan>
+                                <tspan dy="-4"> = {fmtNum(frMag)} N</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* centripetalacceleration */}
+                    {show.accel && onTrack && LA > 0.5 && (
+                        <g>
+                            <Arrow x1={aStart.x} y1={aStart.y} x2={aTip.x} y2={aTip.y} color={COL.acc} width={6} head={17} />
+                            <text x={al.x} y={al.y} textAnchor={al.anchor} fontSize="15" fontWeight="700" fill={COL.acc}>
+                                <tspan fontStyle="italic">a</tspan><tspan dy="4" fontSize="11">C</tspan>
+                                <tspan dy="-4"> = {fmt(onTrack ? v2 / RL : 0, 1)} m/s²</tspan>
+                            </text>
+                        </g>
+                    )}
+
+                    {/* hastighet */}
+                    {show.vel && LV > 2 && (
+                        <g>
+                            <Arrow x1={vStart.x} y1={vStart.y} x2={vTip.x} y2={vTip.y} color={COL.fart} width={6.5} head={18} />
+                            <text x={vl.x} y={vl.y} textAnchor={vl.anchor} fontSize="16" fontWeight="700" fill={COL.fart}>
+                                <tspan fontStyle="italic">v</tspan> = {fmt(vmag, 1)} m/s
+                            </text>
+                        </g>
+                    )}
+                </svg>
+            );
+        };
+
+        // ── Formelkort med ord-etiketter ──
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+        const Frac = ({ topLabel, top, bottomLabel, bottom }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{topLabel}</span>
+                <span className="fnum">{top}</span>
+                {/* nämnaren sträcks över kolumnens fulla bredd så att
+                    bråkstrecket täcker hela täljaren */}
+                <span className="fnum" style={{ alignSelf: 'stretch', textAlign: 'center',
+                                                borderTop: '2px solid currentColor', paddingTop: 3, marginTop: 3 }}>{bottom}</span>
+                <span className="flbl">{bottomLabel}</span>
+            </div>
+        );
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Centripetalkraft"><em>F</em><sub>C</sub></Vbl>
+                <span className="fnum">=</span>
+                <Frac topLabel="Massa · fart²" top={<span><em>m</em>&thinsp;·&thinsp;<em>v</em>²</span>}
+                      bottomLabel="Banradie" bottom={<em>r</em>} />
+                <span className="fnum" style={{ margin: '0 14px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <Vbl label="Centripetalacc."><em>a</em><sub>C</sub></Vbl>
+                <span className="fnum">=</span>
+                <Frac topLabel="Fart²" top={<span><em>v</em>²</span>}
+                      bottomLabel="Banradie" bottom={<em>r</em>} />
+                <span className="fnum">=</span>
+                <Vbl label="Vinkelhast.² · radie"><em>ω</em>²&thinsp;·&thinsp;<em>r</em></Vbl>
+                <span className="fnum" style={{ margin: '0 14px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <Vbl label="Banfart"><em>v</em></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Vinkelhastighet"><em>ω</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Banradie"><em>r</em></Vbl>
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            // Länkbara lägen: ?situation=loop, ?visa=krafter,hastighet,acc,radie,
+            // ?kraftvy=centripetal — praktiskt för läraren som vill länka en vy.
+            const [mode, setMode] = useState(() =>
+                new URLSearchParams(location.search).get('situation') === 'loop' ? 'loop' : 'cirkel');
+            const [running, setRunning] = useState(true);
+            const [show, setShow] = useState(() => {
+                const visa = (new URLSearchParams(location.search).get('visa') || '').split(',').filter(Boolean);
+                if (!visa.length) return { forces: true, vel: true, accel: false, radius: false };
+                return { forces: visa.includes('krafter'), vel: visa.includes('hastighet'),
+                         accel: visa.includes('acc') || visa.includes('acceleration'),
+                         radius: visa.includes('radie') };
+            });
+            const [forceView, setForceView] = useState(() => {
+                const kv = new URLSearchParams(location.search).get('kraftvy');
+                return kv === 'centripetal' || kv === 'resultant' ? kv : 'verkliga';
+            });
+
+            // cirkelbana
+            const [v, setV] = useState(8);        // banhastighet (m/s)
+            const [m, setM] = useState(1000);     // massa (kg)
+            const [r, setR] = useState(12);       // banradie (m)
+            const [phase, setPhase] = useState(() => {
+                const f = parseFloat(new URLSearchParams(location.search).get('fas'));
+                return isFinite(f) ? f : Math.PI / 2;
+            });
+
+            // loop
+            const [v0, setV0] = useState(21);     // fart längst ned (m/s)
+            const loopRef = useRef(null);
+            const [, setTick] = useState(0);
+
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const sceneWrapRef = useRef(null);
+            const lastRef = useRef(null);
+
+            const w = v / r;                       // vinkelhastighet (rad/s)
+            const aC = v * v / r;
+            const FC = m * aC;
+            const T = 2 * Math.PI * r / v;
+
+            const resetLoop = () => {
+                loopRef.current = { st: 'track', th: 0, dir: 1, x: 0, y: 0, vx: 0, vy: 0,
+                                    rot: 0, detach: null, trace: [], failT: 0, bT: 0 };
+            };
+            if (!loopRef.current) resetLoop();
+
+            useEffect(() => { resetLoop(); setTick(t => t + 1); }, [v0, mode]);
+
+            // animationsloop
+            useEffect(() => {
+                if (!running) { lastRef.current = null; return; }
+                let raf;
+                const step = (ts) => {
+                    if (lastRef.current == null) lastRef.current = ts;
+                    const dt = Math.min((ts - lastRef.current) / 1000, 0.05);
+                    lastRef.current = ts;
+
+                    if (mode === 'cirkel') {
+                        setPhase(p => p + (v / r) * dt);
+                    } else {
+                        const ls = loopRef.current;
+                        if (ls.st === 'track') {
+                            // fart ur energiprincipen (exakt, ingen drift)
+                            const v2 = v0 * v0 - 2 * G * RL * (1 - Math.cos(ls.th));
+                            if (v2 <= 0.0005) {
+                                ls.dir = -ls.dir;                       // vändläge — rulla tillbaka
+                                ls.th += ls.dir * 0.002;
+                            } else {
+                                const vmag = Math.sqrt(v2);
+                                ls.th += ls.dir * (vmag / RL) * dt;
+                                // släpper bilen? (övre halvan: krävd centripetalkraft > vad
+                                // tyngdkraftens komposant kan ge när F_N = 0)
+                                const c = Math.cos(ls.th);
+                                if (c < 0 && (v2 / RL + G * c) <= 0) {
+                                    ls.st = 'ballistic';
+                                    const sn = Math.sin(ls.th);
+                                    ls.x = LCX + LRPX * sn; ls.y = LCY + LRPX * c;
+                                    const sp = Math.sqrt(Math.max(0, v2)) * PXM;
+                                    ls.vx = Math.cos(ls.th) * sp * ls.dir;
+                                    ls.vy = -Math.sin(ls.th) * sp * ls.dir;
+                                    ls.rot = ls.th;
+                                    ls.detach = { x: ls.x, y: ls.y,
+                                                  lx: sn >= 0 ? 14 : -14, ly: c < 0 ? -10 : 18,
+                                                  anchor: sn >= 0 ? 'start' : 'end' };
+                                    ls.trace = [{ x: ls.x, y: ls.y }];
+                                }
+                            }
+                        } else if (ls.st === 'ballistic') {
+                            ls.vy += G * PXM * dt;
+                            ls.x += ls.vx * dt;
+                            ls.y += ls.vy * dt;
+                            ls.bT += dt;
+                            if (ls.trace.length === 0 ||
+                                Math.hypot(ls.x - ls.trace[ls.trace.length - 1].x, ls.y - ls.trace[ls.trace.length - 1].y) > 7)
+                                ls.trace.push({ x: ls.x, y: ls.y });
+                            // Bilen släpper PÅ cirkeln (radialfart 0) och faller inåt.
+                            // Banan räknas som träffad först när bilen åter når ringen
+                            // MED radialfart utåt — annars triggar kraschen direkt i
+                            // släppögonblicket.
+                            const dc = Math.hypot(ls.x - LCX, ls.y - LCY);
+                            const vr = ((ls.x - LCX) * ls.vx + (ls.y - LCY) * ls.vy) / (dc || 1);
+                            if ((dc >= LRPX - 3 && vr > 0 && ls.bT > 0.15) || ls.y >= GROUND_Y - 10) ls.st = 'failed';
+                        } else if (ls.st === 'failed') {
+                            ls.failT += dt;
+                            if (ls.failT > 2.4) resetLoop();
+                        }
+                        setTick(t => t + 1);
+                    }
+                    raf = requestAnimationFrame(step);
+                };
+                raf = requestAnimationFrame(step);
+                return () => cancelAnimationFrame(raf);
+            }, [running, mode, v, r, v0]);
+
+            // fullskärm
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
+            const reset = () => {
+                if (mode === 'cirkel') setPhase(Math.PI / 2);
+                else { resetLoop(); setTick(t => t + 1); }
+                setRunning(true);
+                lastRef.current = null;
+            };
+            const setModeReset = (mo) => { setMode(mo); setRunning(true); lastRef.current = null; };
+
+            // aktuella loopvärden (för avläsning)
+            const ls = loopRef.current;
+            const lv2 = Math.max(0, v0 * v0 - 2 * G * RL * (1 - Math.cos(ls.th)));
+            const lN = ls.st === 'track' ? Math.max(0, ML * (lv2 / RL + G * Math.cos(ls.th))) : 0;
+            const lvNow = ls.st === 'track' ? Math.sqrt(lv2) : Math.hypot(ls.vx, ls.vy) / PXM;
+            const lh = ls.st === 'track' ? RL * (1 - Math.cos(ls.th)) : (GROUND_Y - 10 - ls.y) / PXM;
+            const vTop2 = v0 * v0 - 4 * G * RL;
+            const nTop = vTop2 >= 0 ? ML * (vTop2 / RL - G) : NaN;   // F_N i toppen (kan vara < 0 = klarar inte)
+
+            const primaryLabel = running ? 'Pausa' : 'Fortsätt';
+
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.forces} onChange={() => tShow('forces')} /><span>Krafter</span></label>
+                    {show.forces && (
+                        <React.Fragment>
+                            <label className="st-sub">
+                                <input type="radio" name="fview" checked={forceView === 'verkliga'} onChange={() => setForceView('verkliga')} />
+                                {mode === 'cirkel'
+                                    ? <span className="st-swatch" style={{ background: COL.frik }}></span>
+                                    : <span style={{ display: 'inline-flex', gap: 2, flexShrink: 0 }}>
+                                          <span className="st-swatch" style={{ background: COL.tyngd }}></span>
+                                          <span className="st-swatch" style={{ background: COL.norm }}></span>
+                                      </span>}
+                                <span>Verkliga krafter</span>
+                            </label>
+                            <label className="st-sub">
+                                <input type="radio" name="fview" checked={forceView === 'resultant'} onChange={() => setForceView('resultant')} />
+                                <span className="st-swatch" style={{ background: COL.res }}></span>
+                                <span>Resulterande kraft <em>F</em><sub>R</sub></span>
+                            </label>
+                            <label className="st-sub">
+                                <input type="radio" name="fview" checked={forceView === 'centripetal'} onChange={() => setForceView('centripetal')} />
+                                <span className="st-swatch" style={{ background: COL.fc }}></span>
+                                <span>Centripetalkraft <em>F</em><sub>C</sub></span>
+                            </label>
+                        </React.Fragment>
+                    )}
+                    <label><input type="checkbox" checked={show.vel} onChange={() => tShow('vel')} />
+                        <span className="st-swatch" style={{ background: COL.fart }}></span>
+                        <span>Hastighet <em>v</em></span></label>
+                    <label><input type="checkbox" checked={show.accel} onChange={() => tShow('accel')} />
+                        <span className="st-swatch" style={{ background: COL.acc }}></span>
+                        <span>Centripetalacc. <em>a</em><sub>C</sub></span></label>
+                    <label><input type="checkbox" checked={show.radius} onChange={() => tShow('radius')} />
+                        <span className="st-swatch" style={{ background: 'rgba(15,22,32,0.6)' }}></span>
+                        <span>Radie <em>r</em></span></label>
+                    <div className="st-title mt">Situation</div>
+                    <label><input type="radio" name="mode" checked={mode === 'cirkel'} onChange={() => setModeReset('cirkel')} /><span>Cirkelbana (ovanifrån)</span></label>
+                    <label><input type="radio" name="mode" checked={mode === 'loop'} onChange={() => setModeReset('loop')} /><span>Loop (från sidan)</span></label>
+                    {/* Styrknappar visas här BARA i fullskärm — i normalläget finns
+                        de i sidopanelen (aldrig dubblerade). */}
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={() => setRunning((rr) => !rr)}>{primaryLabel}</button>
+                            <button className="btn-toggle" onClick={reset}>Börja om</button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Cirkulär rörelse
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Cirkulär rörelse</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            En kropp i cirkelbana påverkas av en resulterande kraft som ständigt pekar in mot
+                            cirkelns medelpunkt — <strong>centripetalkraften</strong> <em>F</em><sub>C</sub>. Den är
+                            ingen egen kraft, utan utgörs av de verkliga krafter som råkar verka: för bilen på den
+                            cirkulära vägen är det <strong>friktionskraften</strong> från vägbanan, och i loopen
+                            är det <strong>normalkraften</strong> och <strong>tyngdkraften</strong> tillsammans.
+                            Växla mellan att visa de verkliga krafterna och resultanten, och undersök gränsfarten
+                            där bilen precis klarar loopen.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {mode === 'cirkel'
+                                        ? <CircleScene phase={phase} v={v} m={m} r={r} show={show} forceView={forceView} />
+                                        : <LoopScene ls={ls} v0={v0} show={show} forceView={forceView} />}
+
+                                    <div className="scene-hint">
+                                        {mode === 'cirkel'
+                                            ? 'Bilen håller konstant fart. Krafterna sedda ovanifrån.'
+                                            : 'Friktion och luftmotstånd försummas — farten följer energiprincipen.'}
+                                    </div>
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                {mode === 'cirkel' ? (
+                                                    <React.Fragment>
+                                                        <FsSlider label="Banhastighet (<em>v</em>)" value={v} min={VMIN} max={VMAX} step={0.1}
+                                                                  onChange={setV}
+                                                                  valueNode={<NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />} />
+                                                        <FsSlider label="Vinkelhastighet (<em>ω</em>)" value={w} min={VMIN / r} max={VMAX / r} step={0.005}
+                                                                  onChange={(nw) => setV(nw * r)}
+                                                                  valueNode={<NumInput value={w} min={0.01} max={null} fmtFn={(x) => fmt(x, 2)} unit="rad/s" onCommit={(nw) => setV(nw * r)} />} />
+                                                        <FsSlider label="Massa (<em>m</em>)" value={m} min={MMIN} max={MMAX} step={50}
+                                                                  onChange={setM}
+                                                                  valueNode={<NumInput value={m} min={1} max={null} fmtFn={(x) => fmt(x, 0)} unit="kg" onCommit={setM} />} />
+                                                        <FsSlider label="Banradie (<em>r</em>)" value={r} min={RMIN} max={RMAX} step={0.5}
+                                                                  onChange={setR}
+                                                                  valueNode={<NumInput value={r} min={1} max={null} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setR} />} />
+                                                    </React.Fragment>
+                                                ) : (
+                                                    <FsSlider label="Fart längst ned (<em>v</em>₀)" value={v0} min={V0MIN} max={V0MAX} step={0.1}
+                                                              onChange={setV0}
+                                                              valueNode={<NumInput value={v0} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV0} />} />
+                                                )}
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                {/* Situationsväljare */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Situation</div>
+                                    <div className="mode-seg">
+                                        <button className={mode === 'cirkel' ? 'active' : ''} onClick={() => setModeReset('cirkel')}>
+                                            Cirkelbana<span className="sub">bil ovanifrån</span>
+                                        </button>
+                                        <button className={mode === 'loop' ? 'active' : ''} onClick={() => setModeReset('loop')}>
+                                            Loop<span className="sub">bil från sidan</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Reglage */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    {mode === 'cirkel' ? (
+                                        <React.Fragment>
+                                            <Slider label="Banhastighet <em>v</em>" value={v} min={VMIN} max={VMAX} step={0.1} onChange={setV}>
+                                                <NumInput value={v} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV} />
+                                            </Slider>
+                                            <Slider label="Vinkelhastighet <em>ω</em>" value={w} min={VMIN / r} max={VMAX / r} step={0.005}
+                                                    onChange={(nw) => setV(nw * r)}>
+                                                <NumInput value={w} min={0.01} max={null} fmtFn={(x) => fmt(x, 2)} unit="rad/s" onCommit={(nw) => setV(nw * r)} />
+                                            </Slider>
+                                            <Slider label="Massa <em>m</em>" value={m} min={MMIN} max={MMAX} step={50} onChange={setM}>
+                                                <NumInput value={m} min={1} max={null} fmtFn={(x) => fmt(x, 0)} unit="kg" onCommit={setM} />
+                                            </Slider>
+                                            <Slider label="Banradie <em>r</em>" value={r} min={RMIN} max={RMAX} step={0.5} onChange={setR}>
+                                                <NumInput value={r} min={1} max={null} fmtFn={(x) => fmt(x, 1)} unit="m" onCommit={setR} />
+                                            </Slider>
+                                            <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                                <em>v</em> och <em>ω</em> är kopplade: <em>v</em> = <em>ω</em>&thinsp;·&thinsp;<em>r</em>.
+                                                Ändras radien behåller bilen sin fart, så <em>ω</em> ändras.
+                                            </p>
+                                        </React.Fragment>
+                                    ) : (
+                                        <React.Fragment>
+                                            <Slider label="Fart längst ned <em>v</em>₀" value={v0} min={V0MIN} max={V0MAX} step={0.1} onChange={setV0}>
+                                                <NumInput value={v0} min={0.5} max={null} fmtFn={(x) => fmt(x, 1)} unit="m/s" onCommit={setV0} />
+                                            </Slider>
+                                            <p className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}>
+                                                Loopens radie är <em>r</em> = {fmt(RL, 1)}&nbsp;m och bilens massa {fmtNum(ML)}&nbsp;kg.
+                                                Gränsfarten längst ned är √(5&thinsp;·&thinsp;<em>g</em>&thinsp;·&thinsp;<em>r</em>) ≈ {fmt(VCRIT, 1)}&nbsp;m/s.
+                                            </p>
+                                        </React.Fragment>
+                                    )}
+                                    <div className="flex gap-2 mt-2">
+                                        <button className="btn-toggle flex-1" onClick={() => setRunning((rr) => !rr)}>{primaryLabel}</button>
+                                        <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    {mode === 'cirkel' ? (
+                                        <div className="grid grid-cols-2 gap-2 text-center">
+                                            <div>
+                                                <div style={{ color: COL.acc, fontWeight: 700, fontSize: 16 }}>{fmt(aC, 1)} m/s²</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>centripetalacc. <em>a</em><sub>C</sub></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: forceView === 'centripetal' ? COL.fc : COL.frik, fontWeight: 700, fontSize: 16 }}>{fmtNum(FC)} N</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>centripetalkraft <em>F</em><sub>C</sub></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(w, 2)} rad/s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>vinkelhastighet <em>ω</em></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(T, 1)} s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>omloppstid <em>T</em></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(1 / T, 2)} Hz</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>frekvens <em>f</em></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{fmt(r, 1)} m</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>banradie <em>r</em></div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="grid grid-cols-2 gap-2 text-center">
+                                            <div>
+                                                <div style={{ color: COL.fart, fontWeight: 700, fontSize: 16 }}>{fmt(lvNow, 1)} m/s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>fart just nu <em>v</em></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: COL.norm, fontWeight: 700, fontSize: 16 }}>{ls.st === 'track' ? fmtNum(lN) + ' N' : '0 N'}</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>normalkraft just nu <em>F</em><sub>N</sub></div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-ink)', fontWeight: 700, fontSize: 16 }}>{isFinite(nTop) && nTop >= 0 ? fmtNum(nTop) + ' N' : '–'}</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}><em>F</em><sub>N</sub> i toppen</div>
+                                            </div>
+                                            <div>
+                                                <div style={{ color: 'var(--lab-accent)', fontWeight: 700, fontSize: 16 }}>{fmt(VCRIT, 1)} m/s</div>
+                                                <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }}>gränsfart längst ned</div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Kraftinsikt */}
+                                {mode === 'cirkel' ? (
+                                    <div className="glass-card rounded-xl p-3">
+                                        <div className="flbl mb-1">Vad utgör centripetalkraften?</div>
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            Sedd ovanifrån är det <span style={{ color: COL.frik, fontWeight: 600 }}>friktionskraften</span> mellan
+                                            däcken och vägbanan som pekar in mot centrum. Den är alltså inte en extra kraft —
+                                            väljer du <span style={{ color: COL.fc, fontWeight: 600 }}>centripetalkraft</span> ser du samma
+                                            pil igen, nu i rollen som resultant: <em>F</em><sub>C</sub> = <em>F</em><sub>f</sub>.
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="glass-card rounded-xl p-3">
+                                        <div className="flbl mb-1">Gränsfarten i toppen</div>
+                                        <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                            I toppen pekar både <span style={{ color: COL.norm, fontWeight: 600 }}><em>F</em><sub>N</sub></span> och{' '}
+                                            <span style={{ color: COL.tyngd, fontWeight: 600 }}><em>F</em><sub>G</sub></span> nedåt, mot centrum:
+                                            <em> F</em><sub>N</sub> + <em>F</em><sub>G</sub> = <em>F</em><sub>C</sub>. I gränsfallet är{' '}
+                                            <em>F</em><sub>N</sub> = 0, så <em>m</em>&thinsp;·&thinsp;<em>g</em> = <em>m</em>&thinsp;·&thinsp;<em>v</em>²/<em>r</em>
+                                            {' '}vilket ger farten √(<em>g</em>&thinsp;·&thinsp;<em>r</em>) ≈ {fmt(VTOP_MIN, 1)}&nbsp;m/s i toppen —
+                                            och med energiprincipen √(5&thinsp;·&thinsp;<em>g</em>&thinsp;·&thinsp;<em>r</em>) ≈ {fmt(VCRIT, 1)}&nbsp;m/s längst ned.
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Ingen egen kraft</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Centripetalkraften är en <strong>resultant</strong> av de krafter som verkar på kroppen —
+                                    spännkraft i ett snöre, friktionskraft, normalkraft eller tyngdkraft. Rita aldrig in
+                                    <em> F</em><sub>C</sub> som en extra pil bredvid de verkliga krafterna: den <em>är</em> deras summa.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Konstant fart — ändå acceleration</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Farten är konstant, men hastigheten är en vektor och byter riktning hela tiden. Kroppen
+                                    accelererar därför ständigt in mot centrum med <em>a</em><sub>C</sub> = <em>v</em>²/<em>r</em>.
+                                    Enligt Newtons första lag skulle kroppen annars fortsätta rakt fram, tangentiellt.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Normalkraften varierar i loopen</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Längst ned är farten störst och <em>F</em><sub>N</sub> = <em>m</em>·<em>v</em>²/<em>r</em> + <em>m</em>·<em>g</em> —
+                                    normalkraften är som störst. I toppen är farten minst och
+                                    <em> F</em><sub>N</sub> = <em>m</em>·<em>v</em>²/<em>r</em> − <em>m</em>·<em>g</em>. Blir den 0 har bilen nått
+                                    gränsfarten; under den släpper bilen från banan.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>”Det finns en centrifugalkraft som drar utåt.”</strong> Centrifugalkraften är en
+                                    imaginär kraft — en upplevelse i det roterande systemet. Sett utifrån vill kroppen bara
+                                    fortsätta rakt fram (tröghet, Newtons första lag); det som känns som en kraft utåt är att
+                                    banan kröker in under dig.</li>
+                                <li><strong>”Konstant fart betyder ingen acceleration.”</strong> Nej — acceleration är hastighetens
+                                    <em> ändring</em>, och riktningen ändras hela tiden i en cirkelbana. Därför krävs en resulterande
+                                    kraft trots att farten är konstant.</li>
+                                <li><strong>”Centripetalkraften är en extra kraft i kraftfiguren.”</strong> Nej — den är summan av de
+                                    verkliga krafterna. I loopens topp gäller <em>F</em><sub>N</sub> + <em>F</em><sub>G</sub> = <em>F</em><sub>C</sub>,
+                                    i botten <em>F</em><sub>N</sub> − <em>F</em><sub>G</sub> = <em>F</em><sub>C</sub>.</li>
+                                <li><strong>”Om något slungas ut ur en cirkelbana åker det rakt ut från centrum.”</strong> Nej — det
+                                    fortsätter <em>tangentiellt</em>, i den riktning hastigheten hade i släppögonblicket. Precis som
+                                    bilen som släpper i loopen: den fortsätter i sin tangentriktning och faller sedan som en projektil.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

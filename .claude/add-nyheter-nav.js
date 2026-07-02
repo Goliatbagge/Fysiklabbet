@@ -10,7 +10,7 @@ for (const f of files) {
   if (s.includes('href="nyheter.html"')) continue; // already has it
   if (!re.test(s)) continue;
   s = s.replace(re, (m, simLine, indent, omOpen) =>
-    `${simLine}${indent}<a href="nyheter.html">Nyheter</a>\n${indent}${omOpen}`);
+    `${simLine}${indent}<a href="nyheter.html">Fysiknyheter</a>\n${indent}${omOpen}`);
   fs.writeFileSync(p, s);
   changed.push(f);
 }

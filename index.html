@@ -151,7 +151,7 @@
                                 </div>
                             </div>
                             <a href="simuleringar.html">Simuleringar</a>
-                            <a href="nyheter.html">Nyheter</a>
+                            <a href="nyheter.html">Fysiknyheter</a>
                             <a href="om.html">Om</a>
                             <a href="kontakt.html">Kontakt</a>
                         </nav>
@@ -161,19 +161,8 @@
         }
 
         function WelcomeHero() {
-            const latest = NYHETER[0];
             return (
                 <section className="lab-welcome">
-                    {latest && (
-                        <a className="lab-welcome-eyebrow" href={`nyheter.html?id=${latest.id}`}>
-                            <span className="we-tag">
-                                <span className="we-dot" aria-hidden="true" />
-                                Senaste fysiknyheten
-                            </span>
-                            <span className="we-title">{latest.title}</span>
-                            <span className="we-arrow" aria-hidden="true">→</span>
-                        </a>
-                    )}
                     <h1 className="lab-welcome-title">
                         Förstå genom att <em>utforska</em>.
                     </h1>

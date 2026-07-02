@@ -31,6 +31,73 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-02-cern-specialartikel",
+    date: "2026-07-02",
+    title: "Inne i CERN: sju decennier av partiklar, Nobelpris och en och annan mård",
+    deck: "Från ett fredsprojekt i krigets skugga till Higgspartikeln och World Wide Web — och en och annan bagett, mård och rädsla för svarta hål på vägen. Följ med på en resa genom sjuttio år vid världens största fysiklaboratorium.",
+    category: "Fördjupning",
+    readingTime: "13 min",
+    image: "nyheter/bilder/2026-07-02-cern-special.jpg",
+    imageAlt: "Flygbild över CERN:s huvudanläggning i Meyrin på gränsen mellan Schweiz och Frankrike — ett stort område med forskningsbyggnader och verkstäder omgivet av åkrar, med den runda träkupolen Globen synlig till höger.",
+    imageCredit: "Foto: Bernd Gross / Wikimedia Commons (CC0)",
+    tags: ["cern", "partikelfysik", "lhc", "higgspartikeln", "standardmodellen", "antimateria", "world wide web", "historia", "modern fysik", "nobelpris", "specialartikel"],
+    sources: [
+      { name: "CERN — Vår historia", url: "https://home.cern/about/who-we-are/our-history/" },
+      { name: "CERN — Webbens födelse", url: "https://home.cern/science/computing/birth-web" },
+      { name: "Wikipedia — CERN", url: "https://en.wikipedia.org/wiki/CERN" }
+    ],
+    research: null,
+    body: [
+      { type: "p", html: "Djupt under vetefälten på gränsen mellan Schweiz och Frankrike ligger världens största maskin. I en 27&nbsp;kilometer lång ringtunnel jagar protoner varandra i nästan ljusets hastighet för att krocka och — för ett ögonblick — återskapa förhållanden som rådde en bråkdels sekund efter Big Bang. Ovanpå, i en labyrint av kontor, verkstäder och hallar, arbetar tusentals forskare från hela världen. Det här är CERN, och dess historia är på många sätt också berättelsen om den moderna fysiken." },
+
+      { type: "h2", text: "Ett laboratorium byggt för fred" },
+      { type: "p", html: "CERN föddes ur andra världskrigets ruiner. Europas fysiker hade skingrats, många hade flytt till USA, och en handfull framsynta forskare — bland dem italienaren Edoardo Amaldi och fransmannen Louis de Broglie — drömde om ett gemensamt europeiskt laboratorium som både kunde hejda kompetensflykten och ena en sönderslagen kontinent kring fredlig grundforskning. Den 29&nbsp;september 1954 trädde konventionen i kraft sedan tolv länder ratificerat den, och organisationen var ett faktum." },
+      { type: "p", html: "Namnet bär spår av sitt ursprung. Bokstäverna <strong>CERN</strong> kommer från det provisoriska rådets franska namn, <em>Conseil Européen pour la Recherche Nucléaire</em> — Europeiska rådet för kärnforskning. När rådet upplöstes och den permanenta organisationen bildades bytte den namn till <em>Europeiska organisationen för kärnforskning</em>, men den inarbetade förkortningen fick leva kvar. Laboratoriet förlades till Meyrin, en förort strax nordväst om Genève, där anläggningen än i dag breder ut sig på båda sidor om landsgränsen." },
+      { type: "p", html: "Den förste generaldirektören blev schweizaren <em>Felix Bloch</em>, Nobelpristagare 1952, som lade grundstenen till laboratoriet sommaren 1955. I dag har CERN ett tjugotal medlemsländer och sysselsätter omkring 2&nbsp;700 anställda. Dit reser dessutom drygt 12&nbsp;000 gästforskare — i CERN-jargong kallade <em>users</em> — från institutioner i fler än 80 länder. Det gör CERN till ett av de mest internationella ställen som finns; i lunchmatsalen blandas dussintals språk." },
+
+      { type: "h2", text: "Sverige var med från början" },
+      { type: "p", html: "Sverige är inget bihang till CERN, utan ett av de <strong>tolv grundarländerna</strong> från 1954 — tillsammans med Belgien, Danmark, Frankrike, Grekland, Italien, Jugoslavien, Nederländerna, Norge, Schweiz, Storbritannien och Västtyskland. Svenska forskare, ingenjörer och studenter har sedan dess varit djupt inblandade i experimenten, och svensk industri har levererat teknik till acceleratorerna. För en svensk gymnasieelev som drömmer om partikelfysik är CERN alltså inte en avlägsen utländsk institution, utan ett laboratorium som Sverige har varit med och byggt och betalat i över sjuttio år." },
+
+      { type: "h2", text: "En kedja av allt större maskiner" },
+      { type: "p", html: "LHC kom inte från ingenstans. Den är den senaste länken i en kedja av allt kraftfullare acceleratorer, där varje ny maskin ofta återanvänder den föregående som en första knuff åt partiklarna. Det började med <em>synkrocyklotronen</em> 1957, CERN:s första accelerator, följd av <em>protonsynkrotronen</em> (PS) som 1959 en kort tid var världens energirikaste maskin. År 1971 byggde CERN <em>Intersecting Storage Rings</em> — världens första krockare, där två partikelstrålar möttes rakt framifrån — och 1976 kom den stora <em>SPS</em> (Super Proton Synchrotron)." },
+      { type: "p", html: "Innan LHC grävdes den 27&nbsp;kilometer långa ringtunneln ut för <em>LEP</em> (Large Electron-Positron Collider), som från 1989 till 2000 krockade elektroner mot sina antipartiklar, positroner. Det är samma tunnel som LHC använder i dag: när LEP monterades ner flyttade man in de supraledande magneter som styr protonerna. Varje protonstråle i LHC får först fart i den gamla PS:en och SPS:en innan den skickas in i den stora ringen — sju decenniers acceleratorbygge som samarbetar." },
+
+      { type: "h2", text: "Upptäckterna som formade fysiken" },
+      { type: "p", html: "CERN:s maskiner har gång på gång skrivit om läroböckerna. Redan 1973 såg bubbelkammaren <em>Gargamelle</em> de första spåren av <em>neutrala strömmar</em> — en förutsägelse från teorin som förenar elektromagnetism och den svaga kärnkraften. Tio år senare, 1983, fångade experimenten UA1 och UA2 de tunga <em>W-</em> och <em>Z-partiklarna</em>, som bär den svaga kraften. Upptäckten gav Carlo Rubbia och Simon van der Meer Nobelpriset redan året efter; van der Meers metod att ”kyla” och packa ihop antipartikelstrålar var det som gjorde bragden möjlig." },
+      { type: "p", html: "När LEP tändes 1989 kunde forskarna, genom att mäta Z-partikelns sönderfall, visa något förbluffande: det finns exakt <strong>tre</strong> lätta neutrinoslag i naturen, inte fyra eller fem. Det talet — mätt till 2,984&nbsp;±&nbsp;0,008 — betyder att materiens byggstenar kommer i just tre ”familjer”. CERN har också varit antimateriens främsta hemvist: de allra första antiväteatomerna skapades här 1995, och 2010 lyckades <em>ALPHA</em>-experimentet för första gången fånga och hålla kvar antiväte i en magnetfälla länge nog för att studera det." },
+      { type: "p", html: "Men den mest kända upptäckten kom den <strong>4&nbsp;juli 2012</strong>. Då meddelade experimenten ATLAS och CMS att de funnit <em>Higgspartikeln</em> vid en massa på ungefär 125&nbsp;GeV — den sista saknade pusselbiten i standardmodellen och beviset för mekanismen som ger andra partiklar massa. Året efter delade Peter Higgs och François Englert Nobelpriset. Sedan dess har LHC fortsatt överraska: 2015 hittade LHCb-experimentet <em>pentakvarkar</em> (partiklar av fem kvarkar), och 2023 visade ALPHA att antimateria faller <em>nedåt</em> i tyngdkraftsfältet precis som vanlig materia — ett svar på en fråga fysikerna grubblat på i årtionden." },
+      { type: "quote", html: "”Som lekman skulle jag säga: jag tror att vi har den. Håller ni med?”", cite: "Rolf-Dieter Heuer, CERN:s dåvarande generaldirektör, när Higgsupptäckten tillkännagavs den 4 juli 2012" },
+
+      { type: "h2", text: "Och så uppfanns webben på köpet" },
+      { type: "p", html: "Ett av CERN:s mest omvälvande bidrag har ingenting med partiklar att göra. I mars 1989 skrev en brittisk mjukvaruingenjör vid namn <strong>Tim Berners-Lee</strong> ett förslag om hur laboratoriets forskare skulle kunna dela dokument mellan sina datorer. Hans chef klottrade i marginalen: <em>”Vague but exciting”</em> — vagt men spännande. Ur det förslaget växte <strong>World Wide Web</strong>." },
+      { type: "p", html: "Berners-Lee byggde den första webbläsaren, den första webbservern och de första webbsidorna på en dator på CERN. Världens första webbplats, <em>info.cern.ch</em>, gick i luften i december 1990 och beskrev själva webbprojektet. Det avgörande beslutet kom den 30&nbsp;april 1993: CERN släppte webbtekniken fri, helt utan avgifter, i det som kallas <em>public domain</em>. Att koden gjordes gratis för alla att använda och bygga vidare på är en av de främsta anledningarna till att webben exploderade och blev vår tids kanske viktigaste uppfinning. Nästa gång du öppnar en webbläsare kan du alltså tacka ett fysiklaboratorium." },
+
+      { type: "h2", text: "När allt nästan tog slut innan det börjat" },
+      { type: "p", html: "Den 10&nbsp;september 2008 var en global mediehändelse. För första gången skickades en protonstråle hela vägen runt LHC-ringen, och tidningar över hela världen rapporterade om jättemaskinen. Sedan, bara nio dagar senare, small det. En dålig lödfog i en elektrisk koppling mellan två magneter gav upphov till en ljusbåge som slet upp heliumkylningen. Omkring sex ton flytande helium läckte ut explosivt, 53 supraledande magneter skadades och tunneln sotades ner." },
+      { type: "p", html: "Reparationen — och ett helt nytt skyddssystem för att förhindra att det upprepades — tog över ett år. LHC kom inte igång på riktigt förrän den 20&nbsp;november 2009. Det var ett rejält bakslag, men också en läxa i ödmjukhet: en maskin med nästan tiotusen magneter kylda till −271&nbsp;°C tål inga slarviga lödfogar." },
+
+      { type: "h2", text: "Neutrinerna som verkade springa fortare än ljuset" },
+      { type: "p", html: "Hösten 2011 skakades fysikvärlden av ett omöjligt resultat. Experimentet <em>OPERA</em> hade skickat neutriner 730&nbsp;kilometer rakt genom berggrunden från CERN till laboratoriet Gran Sasso i Italien — och de tycktes komma fram omkring 60&nbsp;nanosekunder för tidigt, alltså snabbare än ljuset. Om det stämde skulle Einsteins relativitetsteori, en av fysikens grundpelare, vara i gungning." },
+      { type: "p", html: "Men OPERA-forskarna ropade aldrig ”vi har slagit Einstein”. Tvärtom: de kunde inte hitta felet själva, så de lade fram mätningen offentligt och bad hela världen att granska den. Och felet fanns där. En fiberoptisk kabel till en klocka satt inte ordentligt fastskruvad, vilket förvanskade tidmätningen. När kabeln väl dragits åt — och ett annat experiment, ICARUS, gjort en oberoende mätning — visade det sig att neutrinerna höll sig prydligt under ljushastigheten. I juni 2012 var saken avgjord. Ingenting hade sprungit fortare än ljuset, men fysiken hade visat upp sig från sin bästa sida: ett uppseendeväckande påstående, offentlig granskning och en ärlig rättelse." },
+
+      { type: "h2", text: "En bagett, en mård och rädslan för svarta hål" },
+      { type: "p", html: "CERN:s historia rymmer också sådant som får forskarna att skratta i efterhand. I november 2009 tappade en fågel — troligen en uggla — en bit bagett rakt ner på ett utomhusställverk. Brödet orsakade en kortslutning som störde kylningen till en del av magneterna. Ryktet växte snabbt till att ett franskbröd nästan sänkt världens dyraste maskin, men sanningen är mer beskedlig: LHC stod stilla utan stråle just då, allt var åter i ordning inom några timmar och ingen skada skedde. Fågeln kom undan — utan sin lunch." },
+      { type: "p", html: "Värre gick det för de <em>stenmårdar</em> som 2016 tog sig in på anläggningen. Vid ett tillfälle klättrade en mård upp på en transformator på 66&nbsp;000&nbsp;volt och slog ut acceleratorn i ungefär en vecka; senare samma år kortslöt en ung mård strömmen till ALICE-experimentet. Djuret överlevde inte — men fick ett oväntat efterliv: dess kvarlevor visas i dag på ett naturhistoriskt museum i Rotterdam, i en utställning om djur som mött sitt öde på minnesvärda sätt." },
+      { type: "p", html: "Allvarligast av allt var kanske rädslan bland allmänheten. Inför starten 2008 spreds farhågan att LHC skulle skapa ett litet svart hål som slukade jorden. Två män lämnade till och med in en stämning i USA för att stoppa maskinen, och några forskare fick ta emot hotmejl. CERN:s säkerhetsgrupp visade lugnt varför det var ofarligt: kosmisk strålning med långt högre energi träffar jorden, solen och månen oavbrutet sedan miljarder år tillbaka, utan att några katastrofala svarta hål har bildats. LHC startade. Jorden finns kvar." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Bakom all denna storslagenhet ligger fysik du möter redan på gymnasiet. Att hålla protonerna kvar i sin cirkelbana är ett läroboksexempel från <strong>Fysik&nbsp;nivå&nbsp;2</strong>: en laddad partikel som far genom ett magnetfält känner <em>Lorentzkraften</em>, <em>F</em> = <em>q</em> · <em>v</em> × <em>B</em>, riktad vinkelrätt mot både farten och fältet. Det är precis den kraften som tvingar in partikeln i en cirkel i stället för att låta den fortsätta rakt fram — samma princip som i simuleringen om laddade partiklar i magnetfält. Själva krockarna, där rörelseenergi blir till nya partiklars massa, vilar på Einsteins samband mellan energi och massa, <em>E</em> = <em>mc</em><sup>2</sup>. CERN är, kort sagt, gymnasiefysiken uppskruvad till max." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Higgsupptäckten presenterades 2012 i typsnittet Comic Sans. På Twitter blev ”Comic Sans” snabbt ett större samtalsämne än själva partikeln.",
+        "Smeknamnet ”gudspartikeln” kommer från en boktitel. Författaren ville egentligen kalla Higgspartikeln ”the goddamn particle” — den förbaskade partikeln, för att den var så svår att hitta — men förlaget ändrade det.",
+        "CERN tillverkar antimateria på riktigt, precis som i Dan Browns <em>Änglar och demoner</em> — men bara några miljarddels gram. Att samla ihop ett enda gram skulle ta miljarder år.",
+        "När CERN 1993 släppte webbtekniken fri och gratis lade laboratoriet grunden till hela det internet vi använder i dag."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-02-lhc-stanger-av",
     date: "2026-07-02",
     title: "Världens största partikelaccelerator stängs av i fyra år — ska komma tillbaka tio gånger starkare",

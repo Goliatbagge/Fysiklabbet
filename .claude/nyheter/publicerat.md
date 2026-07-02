@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-02 | `2026-07-02-cern-specialartikel` | Inne i CERN: sju decennier av partiklar, Nobelpris och en och annan mård | Specialartikel — CERN (Vår historia/Webbens födelse) / Wikipedia (faktakollad) |
 | 2026-07-02 | `2026-07-02-lhc-stanger-av` | Världens största partikelaccelerator stängs av i fyra år — ska komma tillbaka tio gånger starkare | CERN (pressmeddelande) / Physics World / Phys.org |
 | 2026-07-01 | `2026-07-01-grafen-supraledning` | Grafit döljer fyra supraledande tillstånd — och magnetfält gör dem starkare | MIT News / Phys.org / Nature |
 | 2026-06-30 | `2026-06-30-citronplanet-av-kol` | Webb-teleskopet hittar en citronformad planet med atmosfär av rent kol | NASA Webb / UChicago / ApJL |

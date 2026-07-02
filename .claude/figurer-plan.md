@@ -205,9 +205,34 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
      båda linjerna.
    - Roterad text (`transform="rotate(-90 x y)"`) är OK för verify så länge
      ankaret ligger väl innanför viewBox (skriptet läser råa koordinater).
-19. **NÄSTA:** fy2-5.x astronomi (5.1–5.6: parallax, månfaser, blå himmel,
-   stjärnbildning, svart hål) — se SKIP (5.1 kosmiska nätet). Därefter är
-   ALLA kapitel klara; kvar = ev. gränsfall (fy2-3.2/3.4 3-fingerhand).
+19. ~~fy2-5.x astronomi~~ — **KLART (2026-07-02). KAPITEL 5 KOMPLETT —
+   OCH DÄRMED ÄR ALLA DRAWABLE-FIGURER I HELA PROJEKTET KLARA.**
+   8 figurer över 6 filer (ingen PDF finns för kapitel 5 — byggda från
+   md-beskrivningarna): 5.1 solsystemet schematiskt (sol + 8 planeter med
+   Saturnusring/Jupiterband, streckad jordbana, 8-minuters-annotation;
+   kosmiska nätet SKIP), 5.2 parallax (triangel med bakgrundsstjärnor +
+   jordbana-inset jan/juli 2 AU; exempeltriangel 1 AU/r/p), 5.3 månens
+   faser (8 halvbelysta månar runt jorden med dag/natt-sida, solstrålar,
+   fasnamn), 5.4 Rayleighspridning (molekyler + blå spridningspilar +
+   betraktare; hög sol vs horisontsol med välvd jord + atmosfärbåge),
+   5.5 svart hål (singularitet, händelsehorisont, vit r_s-pil, tre
+   strålar: oböjd/böjd/inspiral), 5.6 stjärnbildning (molekylmoln →
+   kollaps med inåtpilar → protostjärna med samplad skiv-ellips).
+   Generatorer: `gen_fy2_51/52/53/54/556.js`. Lärdomar:
+   - Jordkalott + atmosfärbåge: håll bågspannet smalt (±30° kring 270°)
+     och stäng fyllnadspolygonen med egna hörn — breda bågar från två
+     paneler överlappar varandra och ger självskärande fyllning.
+   - Kollaps-pilar: hoppa över 0°/180° när panelen har övergångspilar i
+     samma höjdled — annars ser inåtpil + övergångspil ut som dubbletter.
+
+**PROJEKTSTATUS: alla 222 ursprungliga figur-block är åtgärdade utom
+SKIP-listan (foton/GeoGebra/fotorealism) och gränsfallen nedan.
+Kvarvarande möjliga uppföljningar:**
+- Gränsfall: högerhandsregeln med 3 fingrar (fy2-3.2 [2], fy2-3.4 [1]) —
+  via `grafik`-agenten; 3D-växelströmsgeneratorn (fy2-3.10); kosmiska
+  nätet (fy2-5.1) som stiliserad trådstruktur.
+- SKIP-foton kan ersättas med riktiga CC-licensierade foton (jfr
+  nyheternas bildpolicy) om användaren vill.
 
 **Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
 radbrytning. Bygger man figur-txt med `{ echo "::: figur"; cat fil.svg;
@@ -608,7 +633,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
     kraftpil #2563c9 (projektkonvention, INTE PDF:ens röda/magenta). Kraftmoment
     `M = F · l`, hävarm `l`, enhet Nm — synkat med genomgången.
 - [x] **fy2-4.1..4.8 (EM-vågor, diffraktion, svartkropp, brytning, fotoelektrisk, dualitet, spektrallinjer, Bohr) KLART (2026-07-02)** — KAPITEL 4 KOMPLETT (20 figurer; SKIP: 4.2 laserfoton, 4.3 sol/måne-foton, 4.6 träffmönster-foto). Se punkt 18.
-- [ ] fy2-5.1..5.6 (astronomi: parallax, månfaser, blå himmel, svart hål) — NÄSTA
+- [x] **fy2-5.1..5.6 (astronomi) KLART (2026-07-02)** — KAPITEL 5 KOMPLETT (8 figurer; SKIP: 5.1 kosmiska nätet). **HELA PROJEKTET KLART (drawable).** Se punkt 19.
 
 **Tips:** börja med mekanik-kraftdiagrammen (fy1-3.x, fy2-1.x) — de är
 mest värdefulla och mest lika pilotmallen. Återanvänd hjälp-mönster

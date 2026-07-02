@@ -224,6 +224,11 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
      paneler överlappar varandra och ger självskärande fyllning.
    - Kollaps-pilar: hoppa över 0°/180° när panelen har övergångspilar i
      samma höjdled — annars ser inåtpil + övergångspil ut som dubbletter.
+   - **Figurens färger får ALDRIG motsäga dess egen text/etikett** (påpekat
+     2026-07-02): panelen "solen ser vit ut" ritades först med GUL sol.
+     Säger etiketten en färg → rita den färgen. Vitt objekt mot papper är
+     OK när vitheten ÄR poängen — ge det en diskret varmgrå kontur
+     (#aca489) för separation (jfr regeln om vita föremål på papper).
 
 **PROJEKTSTATUS: alla 222 ursprungliga figur-block är åtgärdade utom
 SKIP-listan (foton/GeoGebra/fotorealism) och gränsfallen nedan.

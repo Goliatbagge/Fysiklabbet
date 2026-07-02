@@ -59,6 +59,17 @@ body.laborans a {
     text-decoration: none;
 }
 
+/* Header-/navigationslänkar får ALDRIG vara understrukna — även på sidor
+   utan body.laborans och utan Tailwind-preflight (t.ex. body.lab-sim-
+   wrappers som fysik2-konisk-pendel.html). Utan denna reset visar
+   webbläsaren sin standardunderstrykning i toppmenyn. */
+.lab-topbar a,
+.lab-header a,
+.lab-nav a,
+.lab-logo {
+    text-decoration: none;
+}
+
 /* Topp-band (mono small caps) */
 
 .lab-topbar {

@@ -487,6 +487,31 @@ body.laborans a {
     flex-wrap: wrap;
 }
 
+/* Hero-logotypen till höger om texten. mix-blend-mode: multiply låter
+   bildens egen pappersvita bakgrund smälta in i sidbakgrunden utan skarv. */
+.lab-welcome-inner {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+.lab-welcome-text { flex: 1 1 auto; min-width: 0; }
+.lab-welcome-art {
+    flex: 0 1 400px;
+    min-width: 0;
+}
+.lab-welcome-art img {
+    display: block;
+    width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+    user-select: none;
+    pointer-events: none;
+}
+
+@media (max-width: 960px) {
+    .lab-welcome-art { display: none; }
+}
+
 @media (max-width: 720px) {
     .lab-welcome { padding: 40px 24px 24px; }
     .lab-welcome-title { font-size: 52px; }

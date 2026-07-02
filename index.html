@@ -163,21 +163,28 @@
         function WelcomeHero() {
             return (
                 <section className="lab-welcome">
-                    <h1 className="lab-welcome-title">
-                        Förstå genom att <em>utforska</em>.
-                    </h1>
-                    <p className="lab-welcome-lead">
-                        Teori, interaktiva simuleringar och övningar för <strong>Fysik nivå 1</strong> och{' '}
-                        <strong style={{ whiteSpace: 'nowrap' }}>Fysik nivå 2</strong> på gymnasiet — plus{' '}
-                        <a href="nyheter.html" style={{ color: 'var(--lab-accent)', textDecoration: 'none', fontWeight: 600 }}>dagliga fysiknyheter</a>. Läs, utforska och förstå.
-                    </p>
-                    <div className="lab-welcome-actions">
-                        <a className="lab-btn lab-btn-primary" href="katalog.html#fy1">
-                            Fysik nivå 1 →
-                        </a>
-                        <a className="lab-btn lab-btn-primary" href="katalog.html#fy2">
-                            Fysik nivå 2 →
-                        </a>
+                    <div className="lab-welcome-inner">
+                        <div className="lab-welcome-text">
+                            <h1 className="lab-welcome-title">
+                                Förstå genom att <em>utforska</em>.
+                            </h1>
+                            <p className="lab-welcome-lead">
+                                Teori, interaktiva simuleringar och övningar för <strong>Fysik nivå 1</strong> och{' '}
+                                <strong style={{ whiteSpace: 'nowrap' }}>Fysik nivå 2</strong> på gymnasiet — plus{' '}
+                                <a href="nyheter.html" style={{ color: 'var(--lab-accent)', textDecoration: 'none', fontWeight: 600 }}>dagliga fysiknyheter</a>. Läs, utforska och förstå.
+                            </p>
+                            <div className="lab-welcome-actions">
+                                <a className="lab-btn lab-btn-primary" href="katalog.html#fy1">
+                                    Fysik nivå 1 →
+                                </a>
+                                <a className="lab-btn lab-btn-primary" href="katalog.html#fy2">
+                                    Fysik nivå 2 →
+                                </a>
+                            </div>
+                        </div>
+                        <div className="lab-welcome-art" aria-hidden="true">
+                            <img src="bilder/herologotyp-hero.png" alt="" />
+                        </div>
                     </div>
                 </section>
             );

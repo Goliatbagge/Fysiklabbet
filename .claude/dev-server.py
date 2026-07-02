@@ -24,4 +24,6 @@ class NoCacheHandler(SimpleHTTPRequestHandler):
 
 if __name__ == '__main__':
     print(f'Serverar {ROOT} på http://localhost:{PORT} (cache avstängd)')
-    ThreadingHTTPServer(('', PORT), NoCacheHandler).serve_forever()
+    # Lyssna endast på localhost — annars exponeras hela projektmappen
+    # för alla på samma nätverk.
+    ThreadingHTTPServer(('127.0.0.1', PORT), NoCacheHandler).serve_forever()

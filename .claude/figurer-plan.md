@@ -144,8 +144,30 @@ kraftdiagrammen, mest värdefulla och närmast mallen. Ordning att ta dem:
 16. ~~mekanik fy2-1.x (moment/cirkelrörelse/pendlar)~~ — **KLART (2026-07-01).**
    fy2-1.1..1.4 klara sedan tidigare; fy2-1.5–1.8 klara nu (konisk pendel,
    kaströrelse/kastparabel, fatala gungan, flygande kossan). **KAPITEL 1 KOMPLETT.**
-17. **NÄSTA:** fy2-2.x (vågor, fjäder, pendel, stående våg, pipor, interferens) —
-   mestadels drawable; sedan fy2-3.x (magnetism), 4.x (EM/kvant), 5.x (astronomi).
+17. ~~fy2-3.x magnetism~~ — **KLART (2026-07-02). KAPITEL 3 ELEKTROMAGNETISM
+   KOMPLETT** (3.1–3.14; enda SKIP = 3D-växelströmsgeneratorn i 3.10).
+   30 figurer över 14 filer: 3.1 (poler/delad magnet/dipolfält), 3.2 (Ørsted-
+   kompass, tumregel-hand, ut/in-cirklar, ex1 + inline-tabellsymboler ⊙/⊗),
+   3.3 (slinga 3D+sidovy, solenoid, spol-tumregel), 3.4 (trefingerhand,
+   elektron i kryssfält ±F), 3.5 (resulterande fält 3-panel, ex1 a/b,
+   parallella ledare ±F), 3.6 (jord-stavmagnet, deklination, inklination,
+   5 platser, ex1-komposanter), 3.7 (ledare i kryssfält, kraftjämvikt, ex1),
+   3.8 (glidräls, magnet+slinga a/b + svar med I), 3.9 (flöde genom area,
+   Δs-svep, Φ–t-trapets via gen_graph), 3.10 (roterande slinga sidovy),
+   3.11 (transformator, laptop-laddare), 3.12 (hastighetsväljare,
+   masspektrometer halvcirkel), 3.13 (virvelströmmar Lenz), 3.14 (Hall).
+   Generatorer: `.shots/gen_fy2_3*.js`. Lärdomar:
+   - md-filerna har CRLF → splice-regex med `\r?\n`, annars NO MATCH.
+   - `::: exempel` med a)/b)-rader FÖRE `::: bild`-blocket → flytta
+     deluppgiftsraderna till EFTER figuren vid splice (verify placeringsregel).
+   - Etiketter i kryssfält: hoppa över kryss i etikettens cell (skip-set)
+     eller lägg etiketten mitt emellan krysskolumner.
+   - Kraftriktningar dubbelkollade med högerhandsregeln (elektron = motsatt
+     strömriktning); virvelströmmars rotationsriktning härledd via Lenz
+     (vänster virvel moturs / höger medurs när plattan rör sig åt höger).
+18. **NÄSTA:** fy2-4.x (EM-vågor, spektrum, fotoelektrisk, energinivåer) —
+   se SKIP-listan (4.2 laserfoton, 4.3 sol/måne-foton, 4.6 elektronmönster);
+   sedan fy2-5.x (astronomi: parallax, månfaser, blå himmel, svart hål).
 
 **Lärdom (2026-06-23):** node `fs.writeFileSync` skriver INTE avslutande
 radbrytning. Bygger man figur-txt med `{ echo "::: figur"; cat fil.svg;
@@ -514,7 +536,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
   högtalare, triangel A-B-D). **HELA KAPITEL 2 (fy2-2.x) NU KOMPLETT.**
   Generatorer: `gen_fy2_29.js`, `gen_fy2_210.js`, `gen_fy2_1112.js`,
   `gen_fy2_213.js`, `gen_fy2_214.js`.
-- [ ] fy2-3.1..3.14 (magnetism, fältlinjer, induktion) — NÄSTA.
+- [x] **fy2-3.1..3.14 (magnetism, fältlinjer, induktion) KLART (2026-07-02)** — KAPITEL 3 KOMPLETT (30 figurer; 3.10 3D-generator SKIP). Se punkt 17 ovan.
   - **Lärdom (kursiv-arv i katalogen, 2026-07-01 — VIKTIG):** teori-figurernas
     SVG-text ÄRVER `font-style: italic` (marked lindar `<svg>` i `<p>`, och
     `.lab-block-figur p` är kursiv för bildtexter) → **mätetal och enheter blir
@@ -545,9 +567,7 @@ spektra (fy2-4.7 — ritas som färgade linjer, fullt görbart), stjärnbildning
     (ring-/öppen ände + skaft), hand-grepp (fist roterad till skaftvinkeln). Blå
     kraftpil #2563c9 (projektkonvention, INTE PDF:ens röda/magenta). Kraftmoment
     `M = F · l`, hävarm `l`, enhet Nm — synkat med genomgången.
-- [ ] fy2-2.1..2.14 (vågor, fjäder, pendel, stående våg, pipor, interferens — många, mestadels drawable)
-- [ ] fy2-3.1..3.14 (magnetism, fältlinjer, induktion — mestadels drawable schematiskt)
-- [ ] fy2-4.1..4.8 (EM-vågor, spektrum, fotoelektrisk, energinivåer)
+- [ ] fy2-4.1..4.8 (EM-vågor, spektrum, fotoelektrisk, energinivåer) — NÄSTA
 - [ ] fy2-5.1..5.6 (astronomi: parallax, månfaser, blå himmel, svart hål)
 
 **Tips:** börja med mekanik-kraftdiagrammen (fy1-3.x, fy2-1.x) — de är

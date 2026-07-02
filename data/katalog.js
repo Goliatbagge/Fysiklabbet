@@ -187,7 +187,7 @@ window.KATALOG = {
             number: 2,
             intro: 'Från svängande fjädrar till stående vågor och resonans i strängar och rör. Vi möter Hookes lag, harmoniska svängningar, ljudvågor, dopplereffekten och hur vågor bryts, böjs och möts.',
             sections: [
-              { num: '2.1', title: 'Hookes lag', description: 'Kraften från en fjäder — F = k · x.', href: null, icon: '🪀', keywords: ['vågor','svängning','hooke','fjäder','kraft','kraftkonstant'] },
+              { num: '2.1', title: 'Hookes lag', description: 'En vikt i en spiralfjäder. Ställ in belastande kraft och fjäderkonstant, dra vikten ur jämviktsläget och släpp — visa fjäderkraft, resulterande kraft, hastighet, acceleration och jämviktsläge, med odämpad eller dämpad svängning (F = k · Δl, F_R = −k · y).', href: 'fysik2-hookes-lag-app.html', icon: '🪀', keywords: ['vågor','svängning','hooke','hookes lag','fjäder','fjäderkonstant','kraft','kraftkonstant','elongation','jämviktsläge','amplitud','harmonisk','dämpad','dynamometer','förlängning','fjäderkraft','mekanik'] },
               { num: '2.2', title: 'Energi i fjäder', description: 'Elastisk energi i en sträckt eller hoptryckt fjäder.', href: null, icon: '⚡', keywords: ['vågor','svängning','fjäder','energi','elastisk'] },
               { num: '2.3', title: 'Harmonisk svängning', description: 'Sinusrörelse, amplitud, period och frekvens.', href: 'fysik2-svangningar-jamforelse.html', icon: '〰️', keywords: ['vågor','svängning','harmonisk','amplitud','period','frekvens','sinus'] },
               { num: '2.4', title: 'Svängningstid i fjäder', description: 'T = 2π · √(m / k) — fjäderpendel.', href: null, icon: '⏱️', keywords: ['vågor','svängning','fjäder','period','svängningstid'] },

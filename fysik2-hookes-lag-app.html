@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hookes lag - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 252px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-title.mt { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        /* Reglage-rad inom fullskärms-dropdownen (underkant) */
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Nyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        const G = 9.82;                      // tyngdfaktorn (N/kg)
+
+        // ── Glidarintervall ──
+        const FMIN = 1, FMAX = 10;           // belastande kraft F (N)
+        const KMIN = 15, KMAX = 100;         // fjäderkonstant k (N/m)
+
+        // ── Scen-geometri (viewBox-koordinater) ──
+        const VBW = 820, VBH = 540;
+        const SX = 300;                      // fjäderns lodräta axel
+        const CEIL = 46;                     // takets y
+        const PXM = 200;                     // pixlar per meter
+        const L0 = 0.35;                     // fjäderns olastade längd (m)
+        const NATY = CEIL + L0 * PXM;        // fjäderänden utan last
+        const HOOK_TOP = 88;                 // övre gräns för viktens topp (px)
+        const HOOK_BOT = 448;                // undre gräns för viktens underkant (px)
+        const ZETA = 0.06;                   // dämpningsgrad vid dämpad svängning
+
+        // Lodräta "filer" så att pilarna inte ligger på varandra
+        const LANE_FR = SX - 45;             // resulterande kraft
+        const LANE_V  = SX + 72;             // hastighet
+        const LANE_A  = SX + 116;            // acceleration
+        const DIM_X   = SX - 100;            // måttlinje för Δl
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        const COL = {
+            fjader: '#0d9488',  // teal — fjäderkraften
+            tyngd:  '#c8324a',  // crimson — tyngdkraften F_G
+            res:    '#0f1620',  // bläck — resulterande kraften F_R
+            fart:   '#2563c9',  // blå — hastighet v (samma som teorifigurerna)
+            acc:    '#7c3aed',  // violett — acceleration a
+            ink:    '#0f1620',
+            vikt:   '#6ba3d6',  // viktens fyllning (samma blå som teorifigurerna)
+            viktK:  '#2f6db0',  // viktens kontur
+            spring: '#7c828c',  // fjäderns gråton
+        };
+
+        // ── SVG-pil — mot ljus papperscen behövs ingen vit kontur ──
+        const Arrow = ({ x1, y1, x2, y2, color, width = 7, head = 18, opacity = 1 }) => {
+            const ang = Math.atan2(y2 - y1, x2 - x1);
+            const len = Math.hypot(x2 - x1, y2 - y1);
+            if (len < 3) return null;
+            const hw = 0.42;
+            const hd = Math.max(10, Math.min(head, len * 0.9));
+            const bx = x2 - hd * 0.82 * Math.cos(ang);
+            const by = y2 - hd * 0.82 * Math.sin(ang);
+            const pL = [x2 - hd * Math.cos(ang - hw), y2 - hd * Math.sin(ang - hw)];
+            const pR = [x2 - hd * Math.cos(ang + hw), y2 - hd * Math.sin(ang + hw)];
+            return (
+                <g opacity={opacity}>
+                    <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={width}
+                          strokeLinecap="butt" />
+                    <polygon points={`${x2},${y2} ${pL[0]},${pL[1]} ${pR[0]},${pR[1]}`} fill={color}
+                             stroke="rgba(15,22,32,0.18)" strokeWidth="1" strokeLinejoin="round" />
+                </g>
+            );
+        };
+
+        // Fjäder som polyline: rak stump — sicksack — rak stump
+        const springPoints = (x, y1, y2, coilW) => {
+            const len = y2 - y1;
+            const straight = Math.min(10, len * 0.08);
+            const inner = len - 2 * straight;
+            const segs = 12;
+            const pts = [[x, y1], [x, y1 + straight]];
+            for (let i = 1; i <= segs; i++) {
+                const yy = y1 + straight + inner * (i - 0.5) / segs;
+                pts.push([x + (i % 2 ? coilW : -coilW), yy]);
+            }
+            pts.push([x, y2 - straight], [x, y2]);
+            return pts.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+        };
+
+        const Slider = ({ label, sub, value, min, max, step, unit, onChange, decimals = 1 }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>
+                        {fmt(value, decimals)} <span style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                <div className="flex justify-between mt-1 text-xs font-mono" style={{ color: 'var(--lab-ink-muted)' }}>
+                    <span>{fmt(min, 0)} {unit}</span>
+                    <span>{fmt(max, 0)} {unit}</span>
+                </div>
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        // Kompakt reglage-rad för fullskärms-dropdownen i underkant
+        const FsSlider = ({ label, value, min, max, step, unit, onChange, decimals = 1 }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 148 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 82, textAlign: 'right' }}>
+                    {fmt(value, decimals)} {unit}
+                </span>
+            </div>
+        );
+
+        // Formelkort-hjälpare: variabel med ord-etikett ovanför (+ osynlig
+        // spacer under så symbolen centreras på radens mittlinje)
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-4 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <Vbl label="Kraft"><em>F</em></Vbl>
+                <span className="fnum">=</span>
+                <Vbl label="Fjäderkonstant"><em>k</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Förlängning">Δ<em>l</em></Vbl>
+                <span className="fnum" style={{ margin: '0 14px', color: 'var(--lab-ink-muted)' }}>|</span>
+                <Vbl label="Resulterande kraft"><em>F</em><sub>R</sub></Vbl>
+                <span className="fnum">=</span>
+                <span className="fnum">−</span>
+                <Vbl label="Fjäderkonstant"><em>k</em></Vbl>
+                <span className="fnum">·</span>
+                <Vbl label="Elongation"><em>y</em></Vbl>
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const [F, setF] = useState(5.0);         // belastande kraft (N)
+            const [k, setK] = useState(25);          // fjäderkonstant (N/m)
+            const [damped, setDamped] = useState(false);
+            const [running, setRunning] = useState(true);
+            const [show, setShow] = useState({
+                fjader: true, tyngd: true, res: false, vel: false, acc: false,
+                eq: true, dl: true,
+            });
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const [, setTick] = useState(0);
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const yRef = useRef(0);                  // elongation (m), positiv UPPÅT
+            const vRef = useRef(0);                  // hastighet (m/s), positiv uppåt
+            const aLockRef = useRef(0);              // amplitud som styr pil-skalorna
+            const dragRef = useRef({ on: false, off: 0 });
+            const pRef = useRef({});
+
+            // ── Härledda storheter ──
+            const m = F / G;                         // massa (kg): F = F_G = m·g
+            const om = Math.sqrt(k / m);             // vinkelfrekvens (rad/s)
+            const dl0 = F / k;                       // förlängning i jämviktsläget (m)
+            const scale = 0.85 + 0.35 * (F - FMIN) / (FMAX - FMIN);
+            const WW = 64 * scale, WH = 50 * scale;  // viktens bredd/höjd (px)
+            const eqHook = CEIL + (L0 + dl0) * PXM;  // viktens topp i jämviktsläget
+            const aMaxPx = Math.max(12, Math.min(eqHook - HOOK_TOP, HOOK_BOT - WH - eqHook));
+            const aMax = aMaxPx / PXM;               // största tillåtna |y| (m)
+
+            // klipp elongationen om reglage-ändring gjort utrymmet mindre
+            if (Math.abs(yRef.current) > aMax) {
+                yRef.current = Math.sign(yRef.current) * aMax;
+                vRef.current = 0;
+            }
+
+            pRef.current = { F, k, m, om, damped, running, eqHook, aMax };
+
+            // ── Fysikloop (rAF) ──
+            useEffect(() => {
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+                    const p = pRef.current;
+                    if (p.running && !dragRef.current.on) {
+                        const b = p.damped ? 2 * ZETA * Math.sqrt(p.k * p.m) : 0;
+                        const steps = Math.min(60, Math.max(1, Math.ceil(p.om * dt / 0.04)));
+                        const h = dt / steps;
+                        for (let i = 0; i < steps; i++) {
+                            vRef.current += ((-p.k * yRef.current - b * vRef.current) / p.m) * h;
+                            yRef.current += vRef.current * h;
+                        }
+                        if (Math.abs(yRef.current) > p.aMax) {
+                            yRef.current = Math.sign(yRef.current) * p.aMax;
+                            vRef.current = 0;
+                        }
+                        if (p.damped) {
+                            const env = Math.hypot(yRef.current, vRef.current / p.om);
+                            if (env < 0.0015) { yRef.current = 0; vRef.current = 0; }
+                        }
+                    }
+                    setTick(t => t + 1);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            // ── Dra i vikten ──
+            const svgY = (e) => {
+                const svg = svgRef.current;
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                return pt.matrixTransform(svg.getScreenCTM().inverse()).y;
+            };
+            const onWeightDown = (e) => {
+                e.preventDefault();
+                const p = pRef.current;
+                const hookNow = p.eqHook - yRef.current * PXM;
+                dragRef.current = { on: true, off: svgY(e) - hookNow };
+                vRef.current = 0;
+            };
+            useEffect(() => {
+                const move = (e) => {
+                    if (!dragRef.current.on) return;
+                    const p = pRef.current;
+                    const hook = Math.max(p.eqHook - p.aMax * PXM,
+                                  Math.min(p.eqHook + p.aMax * PXM, svgY(e) - dragRef.current.off));
+                    yRef.current = (p.eqHook - hook) / PXM;
+                    vRef.current = 0;
+                    aLockRef.current = Math.abs(yRef.current);
+                };
+                const up = () => { dragRef.current.on = false; };
+                window.addEventListener('pointermove', move);
+                window.addEventListener('pointerup', up);
+                return () => {
+                    window.removeEventListener('pointermove', move);
+                    window.removeEventListener('pointerup', up);
+                };
+            }, []);
+
+            // uppdatera pil-skalornas amplitud när reglagen ändras
+            useEffect(() => {
+                aLockRef.current = Math.hypot(yRef.current, vRef.current / om);
+            }, [F, k]);
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
+            const reset = () => {
+                yRef.current = 0; vRef.current = 0; aLockRef.current = 0;
+                setRunning(true);
+            };
+
+            // ── Aktuellt tillstånd ──
+            const y = yRef.current;
+            const v = vRef.current;
+            const dlNow = dl0 - y;                   // aktuell förlängning (m)
+            const Ffj = k * dlNow;                   // fjäderkraften, positiv uppåt (N)
+            const FR = -k * y;                       // resulterande kraften, positiv uppåt (N)
+            const a = FR / m;                        // acceleration, positiv uppåt (m/s²)
+
+            const hookY = eqHook - y * PXM;          // viktens topp (px)
+            const cy = hookY + WH / 2;               // viktens mittpunkt (px)
+            const eqCY = eqHook + WH / 2;            // jämviktslägets mittlinje (px)
+
+            // ── Pil-skalor (gemensam kraftskala; fryses under fri svängning).
+            // Skalan begränsas så att fjäderkraftpilens spets (som är som
+            // störst i det nedersta vändläget) aldrig når upp till taket. ──
+            const aLock = aLockRef.current;
+            const fMaxCycle = F + k * aLock;                     // största kraft under cykeln (N)
+            const S  = Math.min(110, eqHook + aLock * PXM - 70) / fMaxCycle;  // px per N
+            const Sv = 95 / Math.max(om * aLock, 0.03);          // px per m/s
+            const Sa = 95 / Math.max(om * om * aLock, 0.1);      // px per m/s²
+
+            const coilW = 15 + 12 * (k - KMIN) / (KMAX - KMIN);
+            const primaryLabel = running ? 'Pausa' : 'Fortsätt';
+
+            // Etikett vid pilspets i pilens riktning (upp → ovanför, ned → under)
+            const tipY = (baseY, len, up) => up ? baseY - len - 10 : baseY + len + 18;
+
+            // ── Kryssrutor + radioknappar (uppe till höger på scenen) ──
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Visa</div>
+                    <label><input type="checkbox" checked={show.fjader} onChange={() => tShow('fjader')} />
+                        <span className="st-swatch" style={{ background: COL.fjader }}></span>
+                        <span>Fjäderkraft <em>F</em><sub>fjäder</sub></span></label>
+                    <label><input type="checkbox" checked={show.tyngd} onChange={() => tShow('tyngd')} />
+                        <span className="st-swatch" style={{ background: COL.tyngd }}></span>
+                        <span>Tyngdkraft <em>F</em><sub>G</sub></span></label>
+                    <label><input type="checkbox" checked={show.res} onChange={() => tShow('res')} />
+                        <span className="st-swatch" style={{ background: COL.res }}></span>
+                        <span>Resulterande kraft <em>F</em><sub>R</sub></span></label>
+                    <label><input type="checkbox" checked={show.vel} onChange={() => tShow('vel')} />
+                        <span className="st-swatch" style={{ background: COL.fart }}></span>
+                        <span>Hastighet <em>v</em></span></label>
+                    <label><input type="checkbox" checked={show.acc} onChange={() => tShow('acc')} />
+                        <span className="st-swatch" style={{ background: COL.acc }}></span>
+                        <span>Acceleration <em>a</em></span></label>
+                    <label><input type="checkbox" checked={show.eq} onChange={() => tShow('eq')} />
+                        <span className="st-swatch" style={{ background: 'rgba(15,22,32,0.45)' }}></span>
+                        <span>Jämviktsläge (<em>y</em> = 0)</span></label>
+                    <label><input type="checkbox" checked={show.dl} onChange={() => tShow('dl')} />
+                        <span className="st-swatch" style={{ background: 'rgba(15,22,32,0.45)' }}></span>
+                        <span>Förlängning Δ<em>l</em></span></label>
+                    <div className="st-title mt">Svängning</div>
+                    <label><input type="radio" name="damp" checked={!damped} onChange={() => setDamped(false)} />
+                        <span>Odämpad (harmonisk)</span></label>
+                    <label><input type="radio" name="damp" checked={damped} onChange={() => setDamped(true)} />
+                        <span>Dämpad</span></label>
+                    {/* Styrknappar visas här BARA i fullskärm — i normalläget finns
+                        de i sidopanelen (aldrig dubblerade). */}
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{primaryLabel}</button>
+                            <button className="btn-toggle" onClick={reset}>Börja om</button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            // ── Scenen ──
+            const scene = () => {
+                const ceilHatch = [];
+                for (let x = 214; x <= 386; x += 12) {
+                    ceilHatch.push(<line key={x} x1={x} y1={CEIL} x2={x - 8} y2={CEIL - 8}
+                                         stroke={COL.ink} strokeWidth="1" strokeLinecap="round" />);
+                }
+                const lenFG = F * S;
+                const lenFj = Math.abs(Ffj) * S;
+                const fjUp = Ffj >= 0;
+                const lenFR = Math.abs(FR) * S;
+                const frUp = FR > 0;
+                const lenV = Math.abs(v) * Sv;
+                const vUp = v > 0;
+                const vTail = vUp ? hookY : hookY + WH;    // från viktens kant i rörelseriktningen
+                const lenA = Math.abs(a) * Sa;
+                const aUp = a > 0;
+                const showDim = show.dl && (hookY - NATY) > 10;
+                const dimMid = (NATY + hookY) / 2;
+
+                return (
+                    <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                         fontFamily="Poppins, sans-serif">
+                        <defs>
+                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#f7f2e8" />
+                                <stop offset="1" stopColor="#ece3d2" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+
+                        {/* Tak med snedstreck */}
+                        <line x1="210" y1={CEIL} x2="390" y2={CEIL} stroke={COL.ink} strokeWidth="2.2" />
+                        {ceilHatch}
+
+                        {/* Jämviktsläget */}
+                        {show.eq && (
+                            <g>
+                                <line x1="90" y1={eqCY} x2="540" y2={eqCY}
+                                      stroke="rgba(15,22,32,0.45)" strokeWidth="1.2" strokeDasharray="6 5" />
+                                <text x="92" y={eqCY + 17} fontSize="13" fill="var(--lab-ink-muted, #5a6170)">
+                                    Jämviktsläge (<tspan fontStyle="italic">y</tspan> = 0)
+                                </text>
+                            </g>
+                        )}
+
+                        {/* Olastad fjäderände + måttlinje för Δl */}
+                        {showDim && (
+                            <g>
+                                <line x1="197" y1={NATY} x2="345" y2={NATY}
+                                      stroke="rgba(15,22,32,0.35)" strokeWidth="1" strokeDasharray="4 4" />
+                                <line x1={SX - WW / 2 - 4} y1={hookY} x2="197" y2={hookY}
+                                      stroke="rgba(15,22,32,0.35)" strokeWidth="1" strokeDasharray="4 4" />
+                                {(hookY - NATY) > 30 ? (
+                                    <g>
+                                        <line x1={DIM_X + 5} y1={NATY + 8} x2={DIM_X + 5} y2={hookY - 8}
+                                              stroke={COL.ink} strokeWidth="1.4" strokeLinecap="butt" />
+                                        <polygon points={`${DIM_X + 5 - 3.4},${NATY + 8} ${DIM_X + 5},${NATY} ${DIM_X + 5 + 3.4},${NATY + 8}`} fill={COL.ink} />
+                                        <polygon points={`${DIM_X + 5 - 3.4},${hookY - 8} ${DIM_X + 5},${hookY} ${DIM_X + 5 + 3.4},${hookY - 8}`} fill={COL.ink} />
+                                    </g>
+                                ) : (
+                                    <line x1={DIM_X + 5} y1={NATY} x2={DIM_X + 5} y2={hookY}
+                                          stroke={COL.ink} strokeWidth="1.4" strokeLinecap="butt" />
+                                )}
+                                <text x={DIM_X - 3} y={dimMid + 5} textAnchor="end" fontSize="14" fill={COL.ink}>
+                                    Δ<tspan fontStyle="italic">l</tspan> = {fmt(dlNow, 2)} m
+                                </text>
+                            </g>
+                        )}
+
+                        {/* Fjäder + fäste */}
+                        <polyline points={springPoints(SX, CEIL, hookY, coilW)} fill="none"
+                                  stroke={COL.spring} strokeWidth={1.8 + 1.2 * (k - KMIN) / (KMAX - KMIN)}
+                                  strokeLinejoin="round" />
+                        <circle cx={SX} cy={CEIL} r="3" fill={COL.ink} />
+
+                        {/* Vikten (dra i den) */}
+                        <g onPointerDown={onWeightDown}
+                           style={{ cursor: dragRef.current.on ? 'grabbing' : 'grab' }}>
+                            <rect x={SX - WW / 2 - 8} y={hookY - 8} width={WW + 16} height={WH + 16}
+                                  fill="transparent" />
+                            <rect x={SX - WW / 2} y={hookY} width={WW} height={WH} rx="6"
+                                  fill={COL.vikt} stroke={COL.viktK} strokeWidth="2" />
+                            <line x1={SX - WW / 2 + 8} y1={hookY + 8} x2={SX + WW / 2 - 8} y2={hookY + 8}
+                                  stroke="rgba(255,255,255,0.45)" strokeWidth="2" strokeLinecap="round" />
+                        </g>
+
+                        {/* Tyngdkraften F_G — från tyngdpunkten, med CM-prick */}
+                        {show.tyngd && (
+                            <g>
+                                <Arrow x1={SX} y1={cy} x2={SX} y2={cy + lenFG} color={COL.tyngd} />
+                                <circle cx={SX} cy={cy} r="2.6" fill={COL.tyngd} />
+                                <text x={SX + 12} y={cy + lenFG + 5} textAnchor="start" fontSize="14" fill={COL.tyngd}>
+                                    <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">G</tspan>
+                                </text>
+                            </g>
+                        )}
+
+                        {/* Fjäderkraften — angriper i viktens topp (fästpunkten) */}
+                        {show.fjader && lenFj > 3 && (
+                            <g>
+                                <Arrow x1={SX} y1={hookY} x2={SX} y2={fjUp ? hookY - lenFj : hookY + lenFj}
+                                       color={COL.fjader} />
+                                <text x={SX - 33} y={fjUp ? hookY - lenFj + 5 : hookY - 8}
+                                      textAnchor="end" fontSize="14" fill={COL.fjader}>
+                                    <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">fjäder</tspan>
+                                </text>
+                            </g>
+                        )}
+
+                        {/* Resulterande kraften F_R — egen fil till vänster */}
+                        {show.res && lenFR > 3 && (
+                            <g>
+                                <Arrow x1={LANE_FR} y1={cy} x2={LANE_FR} y2={frUp ? cy - lenFR : cy + lenFR}
+                                       color={COL.res} />
+                                <text x={LANE_FR} y={tipY(cy, lenFR, frUp)} textAnchor="middle"
+                                      fontSize="14" fill={COL.res}>
+                                    <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">R</tspan>
+                                </text>
+                            </g>
+                        )}
+                        {show.res && lenFR <= 3 && Math.abs(y) < 0.004 && (
+                            <text x={LANE_FR - 18} y={cy - 12} textAnchor="middle" fontSize="13" fill={COL.res}>
+                                <tspan fontStyle="italic">F</tspan><tspan fontSize="9" dy="3">R</tspan><tspan dy="-3"> = 0</tspan>
+                            </text>
+                        )}
+
+                        {/* Hastigheten v — från viktens kant i rörelseriktningen */}
+                        {show.vel && lenV > 3 && (
+                            <g>
+                                <Arrow x1={LANE_V} y1={vTail} x2={LANE_V} y2={vUp ? vTail - lenV : vTail + lenV}
+                                       color={COL.fart} />
+                                <text x={LANE_V} y={tipY(vTail, lenV, vUp)} textAnchor="middle"
+                                      fontSize="14" fontStyle="italic" fill={COL.fart}>v</text>
+                            </g>
+                        )}
+
+                        {/* Accelerationen a — egen fil längst till höger */}
+                        {show.acc && lenA > 3 && (
+                            <g>
+                                <Arrow x1={LANE_A} y1={cy} x2={LANE_A} y2={aUp ? cy - lenA : cy + lenA}
+                                       color={COL.acc} />
+                                <text x={LANE_A} y={tipY(cy, lenA, aUp)} textAnchor="middle"
+                                      fontSize="14" fontStyle="italic" fill={COL.acc}>a</text>
+                            </g>
+                        )}
+                    </svg>
+                );
+            };
+
+            const Readout = ({ label, value, unit, color }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Hookes lag
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Hookes lag</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            En vikt hänger i en spiralfjäder. Ju större kraft <em>F</em> som belastar fjädern,
+                            desto större blir förlängningen Δ<em>l</em> — det är <strong>Hookes lag</strong>.
+                            Ta tag i vikten, dra den ur jämviktsläget och släpp, så börjar den svänga.
+                            Visa krafterna, hastigheten och accelerationen och se att den resulterande
+                            kraften alltid är riktad mot jämviktsläget.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {scene()}
+
+                                    <div className="scene-info">
+                                        <span className="si-lbl">Elongation <em style={{ textTransform: 'none' }}>y</em></span>
+                                        <span className="si-val">{fmt(y, 2)} m</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Förlängning Δ<em style={{ textTransform: 'none' }}>l</em></span>
+                                        <span className="si-val">{fmt(dlNow, 2)} m</span>
+                                    </div>
+
+                                    <div className="scene-hint">Ta tag i vikten, dra och släpp — den börjar svänga</div>
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Belastande kraft (<em>F</em>)" value={F}
+                                                          min={FMIN} max={FMAX} step={0.1} unit="N" onChange={setF} />
+                                                <FsSlider label="Fjäderkonstant (<em>k</em>)" value={k}
+                                                          min={KMIN} max={KMAX} step={1} unit="N/m" onChange={setK} decimals={0} />
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Belastande kraft (<em>F</em>)"
+                                            sub={`Vikten belastar fjädern med sin tyngd, <em>F</em>&nbsp;=&nbsp;<em>F</em><sub>G</sub>&nbsp;=&nbsp;<em>m</em>&thinsp;·&thinsp;<em>g</em>, så viktens massa är <em>m</em>&nbsp;=&nbsp;${fmt(m, 2)}&nbsp;kg.`}
+                                            value={F} min={FMIN} max={FMAX} step={0.1} unit="N" onChange={setF} />
+                                    <Slider label="Fjäderkonstant (<em>k</em>)"
+                                            sub="Ett mått på hur &quot;hård&quot; fjädern är — ju större <em>k</em>, desto mer kraft krävs för att dra ut den."
+                                            value={k} min={KMIN} max={KMAX} step={1} unit="N/m" onChange={setK} decimals={0} />
+                                    <div className="flex gap-2 mt-1">
+                                        <button className="btn-toggle flex-1" onClick={() => setRunning(r => !r)}>{primaryLabel}</button>
+                                        <button className="btn-toggle flex-1" onClick={reset}>Börja om</button>
+                                    </div>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning (positiv riktning: uppåt)</div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Elongation <em>y</em>" value={fmt(y, 2)} unit="m" />
+                                        <Readout label="Förlängning Δ<em>l</em>" value={fmt(dlNow, 2)} unit="m" />
+                                        <Readout label="Fjäderkraft <em>F</em><sub>fjäder</sub>" value={fmt(Ffj, 1)} unit="N" color={COL.fjader} />
+                                        <Readout label="Resulterande kraft <em>F</em><sub>R</sub>" value={fmt(FR, 1)} unit="N" />
+                                        <Readout label="Hastighet <em>v</em>" value={fmt(v, 2)} unit="m/s" color={COL.fart} />
+                                        <Readout label="Acceleration <em>a</em>" value={fmt(a, 1)} unit="m/s²" color={COL.acc} />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        I jämviktsläget: <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>fjäder</sub> = <em>F</em><sub>G</sub> = {fmt(F, 1)}&nbsp;N</span>
+                                        {' '}och <span style={{ whiteSpace: 'nowrap' }}>Δ<em>l</em> = <em>F</em>/<em>k</em> = {fmt(dl0, 2)}&nbsp;m</span>.
+                                    </div>
+                                </div>
+
+                                {/* Kraftinsikt */}
+                                <div className="glass-card rounded-xl p-3">
+                                    <div className="flbl mb-1">Två krafter — en resultant</div>
+                                    <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                        På vikten verkar <span style={{ color: COL.fjader, fontWeight: 600 }}>fjäderkraften</span> uppåt
+                                        och <span style={{ color: COL.tyngd, fontWeight: 600 }}>tyngdkraften</span> nedåt. Tillsammans
+                                        bildar de den <strong>resulterande kraften</strong> <em>F</em><sub>R</sub> = −<em>k</em>&thinsp;·&thinsp;<em>y</em>,
+                                        som alltid pekar mot jämviktsläget — minustecknet betyder att kraften har motsatt
+                                        riktning mot elongationen.
+                                    </p>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Jämviktsläget</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    När vikten hänger i vila är tyngdkraften lika stor som fjäderkraften — den
+                                    resulterande kraften är 0. Ur förlängningen kan vi bestämma tyngden på det som
+                                    hänger i fjädern: <em>F</em> = <em>k</em>&thinsp;·&thinsp;Δ<em>l</em>. Det är den
+                                    principen en <strong>dynamometer</strong> bygger på, som används för att mäta krafter.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Elongationen har tecken</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Viktens läge i förhållande till jämviktsläget betecknas <em>y</em> och kallas
+                                    <strong> elongation</strong>: <em>y</em> &lt; 0 betyder att vikten är under jämviktsläget,
+                                    <em> y</em> &gt; 0 att den är över. Avståndet mellan ett vändläge och jämviktsläget
+                                    kallas <strong>amplitud</strong>.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Fart och acceleration</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Farten är som störst i <strong>jämviktsläget</strong> — där finns ingen resulterande
+                                    kraft som bromsar — och 0 i vändlägena. Accelerationen <em>a</em> = <em>F</em><sub>R</sub>/<em>m</em> är
+                                    tvärtom som störst i <strong>vändlägena</strong> (där resultanten är som störst)
+                                    och 0 i jämviktsläget. Slå på pilarna för <em>v</em> och <em>a</em> och jämför!
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Dämpad eller harmonisk svängning?</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                I verkligheten minskar amplituden och vikten stannar till slut — en sådan avtagande
+                                svängning kallas <strong>dämpad svängning</strong> och beror på energiförluster i form
+                                av värme i fjädern. Tar vi bort energiförlusterna fortsätter vikten att pendla
+                                oförändrat mellan samma vändlägen, med oförändrad amplitud — en
+                                <strong> harmonisk svängning</strong>. I uppgifter bortser vi från energiförluster,
+                                om inte annat anges. Växla mellan lägena med radioknapparna uppe till höger i scenen.
+                            </p>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Fjäderkraften är alltid lika med tyngdkraften."</strong> Det gäller bara i jämviktsläget. Under svängningen varierar fjäderkraften med förlängningen (<em>F</em><sub>fjäder</sub> = <em>k</em>&thinsp;·&thinsp;Δ<em>l</em>) — det är just skillnaden mot tyngdkraften som ger resultanten <em>F</em><sub>R</sub> = −<em>k</em>&thinsp;·&thinsp;<em>y</em>.</li>
+                                <li><strong>"Accelerationen är störst där farten är störst."</strong> Tvärtom: i jämviktsläget är farten maximal men accelerationen 0, och i vändlägena är farten 0 men accelerationen maximal.</li>
+                                <li><strong>"Elongationen mäts från fjäderns olastade läge."</strong> Nej — <em>y</em> mäts från <strong>jämviktsläget</strong> (där vikten hänger i vila). Förlängningen Δ<em>l</em> mäts däremot från fjäderns olastade längd.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

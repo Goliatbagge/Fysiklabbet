@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Induktion och inducerad spänning - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 262px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-group { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // ── Glidarintervall ──
+        const VMINS = 10, VMAXS = 200;       // hastighet v (cm/s)
+        const BMIN = 0.2, BMAX = 2.0;        // flödestäthet B (mT)
+        const LMIN = 10, LMAX = 40;          // ledarens längd l (cm)
+
+        // ── Scen-geometri (viewBox-koordinater) ──
+        const VBW = 820, VBH = 540;
+        const RX = 380;                      // ledarens mittpunkt i sidled (px)
+        const YTOP = 140, YBOT = 425;        // ledarens rörelseområde (px)
+        const MS = 2.2;                      // px per (cm/s) — rörelseskala
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        // ems med lämpligt prefix (teorin räknar i mV)
+        const fmtE = (e) => {
+            const mV = e * 1e3;
+            if (mV >= 0.1) return `${fmt(mV, 2)} mV`;
+            const uV = e * 1e6;
+            return `${fmt(uV, uV < 10 ? 1 : 0)} µV`;
+        };
+
+        const COL = {
+            ink:   '#1f2530',
+            falt:  '#c0392b',    // fältsymboler (röda, som teorifigurerna)
+            fm:    '#2563c9',    // magnetiska kraften Fm (blå, som teorifigurerna)
+            fe:    '#3f8f4a',    // elektriska kraften Fe (grön, som teorifigurerna)
+            stav:  '#d7dbe0',
+            stavK: '#5d646e',
+        };
+
+        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        const FsSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 150 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 90, textAlign: 'right' }}>{valueText}</span>
+            </div>
+        );
+
+        // Formelkort-hjälpare (samma mönster som fysik2-svangningstid-app)
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-6 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex items-center gap-x-3">
+                    <Vbl label="Inducerad spänning"><em>e</em></Vbl>
+                    <span className="fnum">=</span>
+                    <Vbl label="Ledarens längd"><em>l</em></Vbl>
+                    <span className="fnum">·</span>
+                    <Vbl label="Hastighet"><em>v</em></Vbl>
+                    <span className="fnum">·</span>
+                    <Vbl label="Flödestäthet"><em>B</em></Vbl>
+                </div>
+                <div className="flex items-center gap-x-2" style={{ color: 'var(--lab-ink-muted)', fontSize: 13 }}>
+                    <span>gäller när <em>l</em>, <em>v</em> och <em>B</em> är vinkelräta mot varandra</span>
+                </div>
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const q = new URLSearchParams(location.search);
+            const [v, setV] = useState(isFinite(parseFloat(q.get('v'))) ? parseFloat(q.get('v')) : 80);
+            const [Bmt, setBmt] = useState(isFinite(parseFloat(q.get('b'))) ? parseFloat(q.get('b')) : 0.85);
+            const [lcm, setLcm] = useState(isFinite(parseFloat(q.get('l'))) ? parseFloat(q.get('l')) : 20);
+            const [bIn, setBIn] = useState(q.get('falt') !== 'ut');
+            const [running, setRunning] = useState(true);
+            const [show, setShow] = useState({ krafter: true, laddningar: true });
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const [, setTick] = useState(0);
+
+            const sceneWrapRef = useRef(null);
+            const svgRef = useRef(null);
+            const stateRef = useRef({ py: 220, dir: 1, vAct: 0, dragging: false, lastY: 0, lastMove: 0 });
+            const pRef = useRef({});
+
+            pRef.current = { running, v };
+
+            // ── Animationsloop ──
+            useEffect(() => {
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+                    const p = pRef.current;
+                    const st = stateRef.current;
+                    if (st.dragging) {
+                        // mätt hastighet avtar om pekaren står stilla
+                        if (now - st.lastMove > 80) st.vAct *= Math.pow(0.0005, dt);
+                        if (Math.abs(st.vAct) < 0.5) st.vAct = 0;
+                    } else if (p.running) {
+                        st.py += st.dir * p.v * MS * dt;
+                        if (st.py > YBOT) { st.py = YBOT; st.dir = -1; }
+                        if (st.py < YTOP) { st.py = YTOP; st.dir = 1; }
+                        st.vAct = st.dir * p.v;
+                    } else {
+                        st.vAct = 0;
+                    }
+                    setTick(t => t + 1);
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            // ── Dra i ledaren ──
+            const svgY = (e) => {
+                const svg = svgRef.current;
+                const pt = svg.createSVGPoint();
+                pt.x = e.clientX; pt.y = e.clientY;
+                return pt.matrixTransform(svg.getScreenCTM().inverse()).y;
+            };
+            const onRodDown = (e) => {
+                e.preventDefault();
+                const st = stateRef.current;
+                st.dragging = true;
+                st.lastY = svgY(e);
+                st.lastMove = performance.now();
+            };
+            useEffect(() => {
+                const move = (e) => {
+                    const st = stateRef.current;
+                    if (!st.dragging) return;
+                    const y = svgY(e);
+                    const now = performance.now();
+                    const dt = Math.max((now - st.lastMove) / 1000, 1e-3);
+                    const newPy = Math.max(YTOP, Math.min(YBOT, st.py + (y - st.lastY)));
+                    const vInst = (newPy - st.py) / dt / MS;      // cm/s
+                    st.vAct = 0.6 * st.vAct + 0.4 * Math.max(-260, Math.min(260, vInst));
+                    st.py = newPy;
+                    st.lastY = y;
+                    st.lastMove = now;
+                };
+                const up = () => {
+                    const st = stateRef.current;
+                    if (!st.dragging) return;
+                    st.dragging = false;
+                    st.vAct = 0;
+                    st.dir = st.py > (YTOP + YBOT) / 2 ? -1 : 1;
+                };
+                window.addEventListener('pointermove', move);
+                window.addEventListener('pointerup', up);
+                return () => {
+                    window.removeEventListener('pointermove', move);
+                    window.removeEventListener('pointerup', up);
+                };
+            }, []);
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
+            // Exempel 1 i teorigenomgången: 20 cm, 80 cm/s, 0,85 mT ⟹ e ≈ 0,14 mV
+            const setExample1 = () => { setLcm(20); setV(80); setBmt(0.85); setBIn(true); setRunning(true); };
+
+            // ── Härledda storheter (exakt enligt genomgången) ──
+            const st = stateRef.current;
+            const vAct = st.vAct;                       // cm/s (med tecken)
+            const e = (lcm / 100) * (Math.abs(vAct) / 100) * (Bmt / 1000);   // V
+            const moving = Math.abs(vAct) > 2;
+            // B in i planet + ledaren rör sig nedåt ⟹ elektronerna trycks åt vänster
+            const negLeft = (vAct > 0 ? 1 : -1) * (bIn ? 1 : -1) > 0;
+
+            // ── Fältsymboler ──
+            const fieldSymbols = useMemo(() => {
+                const els = [];
+                const SP = 58;
+                for (let gx = 44; gx <= VBW - 20; gx += SP) {
+                    for (let gy = 44; gy <= VBH - 20; gy += SP) {
+                        if (bIn) {
+                            els.push(<line key={`a${gx}-${gy}`} x1={gx - 5.5} y1={gy - 5.5} x2={gx + 5.5} y2={gy + 5.5}
+                                           stroke={COL.falt} strokeWidth="1.8" strokeLinecap="round" />);
+                            els.push(<line key={`b${gx}-${gy}`} x1={gx + 5.5} y1={gy - 5.5} x2={gx - 5.5} y2={gy + 5.5}
+                                           stroke={COL.falt} strokeWidth="1.8" strokeLinecap="round" />);
+                        } else {
+                            els.push(<circle key={`c${gx}-${gy}`} cx={gx} cy={gy} r="5.5" fill="none"
+                                             stroke={COL.falt} strokeWidth="1.6" />);
+                            els.push(<circle key={`d${gx}-${gy}`} cx={gx} cy={gy} r="1.7" fill={COL.falt} />);
+                        }
+                    }
+                }
+                return els;
+            }, [bIn]);
+
+            // ── Scenen ──
+            const scene = () => {
+                const els = [];
+                const hw = lcm * 5;                     // ledarens halvbredd (10 px/cm)
+                const py = st.py;
+
+                els.push(<g key="falt" opacity="0.55">{fieldSymbols}</g>);
+                els.push(<text key="blbl" x={76} y={34} textAnchor="start" fontSize="15" fill={COL.falt}>
+                    <tspan fontStyle="italic">B</tspan> = {fmt(Bmt, 2)} mT {bIn ? '(in i planet)' : '(ut ur planet)'}
+                </text>);
+
+                // ledaren (dra i den!)
+                els.push(
+                    <g key="stav" onPointerDown={onRodDown}
+                       style={{ cursor: st.dragging ? 'grabbing' : 'grab' }}>
+                        <rect x={RX - hw - 8} y={py - 22} width={2 * hw + 16} height={44} fill="transparent" />
+                        <rect x={RX - hw} y={py - 9} width={2 * hw} height={18} rx="5"
+                              fill={COL.stav} stroke={COL.stavK} strokeWidth="1.6" />
+                        <text x={RX - hw - 13} y={py + 5} textAnchor="end" fontSize="15" fill={COL.ink}
+                              style={{ pointerEvents: 'none' }}>C</text>
+                        <text x={RX + hw + 13} y={py + 5} textAnchor="start" fontSize="15" fill={COL.ink}
+                              style={{ pointerEvents: 'none' }}>D</text>
+                    </g>
+                );
+
+                // laddningarna vid ändarna (bara när ledaren rör sig)
+                if (show.laddningar && moving) {
+                    const nx = negLeft ? -1 : 1;
+                    const chEls = [];
+                    [14, 32].forEach((off, k) => {
+                        chEls.push(<text key={'n' + k} x={RX + nx * (hw - off)} y={py + 5.5} textAnchor="middle"
+                                         fontSize="16" fontWeight="600" fill={COL.fm}>−</text>);
+                        chEls.push(<text key={'p' + k} x={RX - nx * (hw - off)} y={py + 5.5} textAnchor="middle"
+                                         fontSize="15" fontWeight="600" fill={COL.falt}>+</text>);
+                    });
+                    els.push(<g key="laddn" style={{ pointerEvents: 'none' }}>{chEls}</g>);
+                }
+
+                // krafterna på en ledningselektron
+                if (show.krafter) {
+                    const ex = RX + hw * 0.3;
+                    const kEls = [];
+                    kEls.push(<circle key="el" cx={ex} cy={py} r="8" fill="#f7f2e8" stroke={COL.fm} strokeWidth="1.7" />);
+                    kEls.push(<line key="els" x1={ex - 4} y1={py} x2={ex + 4} y2={py} stroke={COL.fm} strokeWidth="1.7" />);
+                    if (moving) {
+                        const fd = negLeft ? -1 : 1;                       // Fm mot den negativa änden
+                        const Lm = 16 + 0.24 * Math.abs(vAct) * Bmt;
+                        // magnetisk kraft Fm
+                        const m0 = ex + fd * 8, m1 = m0 + fd * (Lm - 9);
+                        kEls.push(<line key="fml" x1={m0} y1={py} x2={m1} y2={py} stroke={COL.fm} strokeWidth="2.2" strokeLinecap="butt" />);
+                        kEls.push(<polygon key="fmh" points={`${m1 + fd * 9},${py} ${m1},${py - 4.5} ${m1},${py + 4.5}`} fill={COL.fm} />);
+                        kEls.push(<text key="fmt" x={(m0 + m1 + fd * 9) / 2} y={py - 14} textAnchor="middle" fontSize="14" fill={COL.fm}>
+                            <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">m</tspan>
+                        </text>);
+                        // elektrisk kraft Fe (lika stor, motriktad — kraftjämvikt)
+                        const e0 = ex - fd * 8, e1 = e0 - fd * (Lm - 9);
+                        kEls.push(<line key="fel" x1={e0} y1={py} x2={e1} y2={py} stroke={COL.fe} strokeWidth="2.2" strokeLinecap="butt" />);
+                        kEls.push(<polygon key="feh" points={`${e1 - fd * 9},${py} ${e1},${py - 4.5} ${e1},${py + 4.5}`} fill={COL.fe} />);
+                        kEls.push(<text key="fet" x={(e0 + e1 - fd * 9) / 2} y={py - 14} textAnchor="middle" fontSize="14" fill={COL.fe}>
+                            <tspan fontStyle="italic">F</tspan><tspan fontSize="10" dy="3">e</tspan>
+                        </text>);
+                    }
+                    els.push(<g key="krafter" style={{ pointerEvents: 'none' }}>{kEls}</g>);
+                }
+
+                // hastighetspilen v (från ledarens kant i rörelseriktningen)
+                if (moving) {
+                    const vd = vAct > 0 ? 1 : -1;
+                    const vx = RX - hw * 0.42;
+                    const Lv = 12 + 0.32 * Math.abs(vAct);
+                    const v0 = py + vd * 9, v1 = v0 + vd * (Lv - 9);
+                    els.push(
+                        <g key="vpil" style={{ pointerEvents: 'none' }}>
+                            <line x1={vx} y1={v0} x2={vx} y2={v1} stroke={COL.ink} strokeWidth="2.4" strokeLinecap="butt" />
+                            <polygon points={`${vx},${v1 + vd * 9} ${vx - 5},${v1} ${vx + 5},${v1}`} fill={COL.ink} />
+                            <text x={vx + 14} y={v1 + vd * 9 + (vd > 0 ? 2 : 8)} textAnchor="start" fontSize="15" fill={COL.ink}>
+                                <tspan fontStyle="italic">v</tspan>
+                            </text>
+                        </g>
+                    );
+                }
+
+                return (
+                    <svg ref={svgRef} viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                         fontFamily="Poppins, sans-serif">
+                        <defs>
+                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#f7f2e8" />
+                                <stop offset="1" stopColor="#ece3d2" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+                        {els}
+                    </svg>
+                );
+            };
+
+            // ── Kryssrutor och lägesval (uppe till höger på scenen) ──
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Magnetfältet <em style={{ textTransform: 'none' }}>B</em></div>
+                    <label><input type="radio" name="falt" checked={bIn} onChange={() => setBIn(true)} />
+                        <span>In i planet (kryss)</span></label>
+                    <label><input type="radio" name="falt" checked={!bIn} onChange={() => setBIn(false)} />
+                        <span>Ut ur planet (prickar)</span></label>
+                    <div className="st-title st-group">Visa</div>
+                    <label><input type="checkbox" checked={show.krafter} onChange={() => tShow('krafter')} />
+                        <span className="st-swatch" style={{ background: COL.fm }}></span>
+                        <span>Krafterna på en elektron</span></label>
+                    <label><input type="checkbox" checked={show.laddningar} onChange={() => tShow('laddningar')} />
+                        <span className="st-swatch" style={{ background: COL.falt }}></span>
+                        <span>Laddningarna vid ändarna</span></label>
+                    {/* Styrknappen visas här BARA i fullskärm — i normalläget finns
+                        den i sidopanelen (aldrig dubblerad). */}
+                    {isFullscreen && (
+                        <div className="st-actions">
+                            <button className="btn-toggle" onClick={() => setRunning(r => !r)}>{running ? 'Pausa' : 'Starta'}</button>
+                        </div>
+                    )}
+                </div>
+            );
+
+            const Readout = ({ label, value, unit, color }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Induktion och inducerad spänning
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Induktion och inducerad spänning</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            När en ledare rör sig i ett magnetfält påverkas ledningselektronerna av en magnetisk
+                            kraft som knuffar dem mot ena änden — det uppstår en <strong>inducerad
+                            spänning</strong> (<strong>ems</strong>), <em>e</em>, mellan ledarens ändar. Dra i
+                            ledaren själv eller låt den röra sig automatiskt, och se att spänningen bara finns
+                            <strong> medan ledaren rör sig</strong>. Vid vändningarna byter polariteten håll!
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {scene()}
+
+                                    <div className="scene-info">
+                                        <span className="si-lbl">Inducerad spänning <em style={{ textTransform: 'none' }}>e</em></span>
+                                        <span className="si-val">{moving ? fmtE(e) : '0 V'}</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Hastighet <em style={{ textTransform: 'none' }}>v</em></span>
+                                        <span className="si-val">{fmt(Math.abs(vAct), 0)} cm/s</span>
+                                    </div>
+
+                                    <div className="scene-hint">Ta tag i ledaren och dra den upp och ner</div>
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Hastighet (<em>v</em>)" value={v}
+                                                          min={VMINS} max={VMAXS} step={5} onChange={setV}
+                                                          valueText={`${fmt(v, 0)} cm/s`} />
+                                                <FsSlider label="Flödestäthet (<em>B</em>)" value={Bmt}
+                                                          min={BMIN} max={BMAX} step={0.05} onChange={setBmt}
+                                                          valueText={`${fmt(Bmt, 2)} mT`} />
+                                                <FsSlider label="Ledarens längd (<em>l</em>)" value={lcm}
+                                                          min={LMIN} max={LMAX} step={1} onChange={setLcm}
+                                                          valueText={`${fmt(lcm, 0)} cm`} />
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Hastighet (<em>v</em>)"
+                                            sub="Fortare rörelse ⟹ större inducerad spänning (<em>e</em> ∝ <em>v</em>)."
+                                            value={v} min={VMINS} max={VMAXS} step={5} onChange={setV}
+                                            valueText={`${fmt(v, 0)} cm/s`} />
+                                    <Slider label="Flödestäthet (<em>B</em>)"
+                                            sub="Starkare fält ⟹ större inducerad spänning."
+                                            value={Bmt} min={BMIN} max={BMAX} step={0.05} onChange={setBmt}
+                                            valueText={`${fmt(Bmt, 2)} mT`} />
+                                    <Slider label="Ledarens längd (<em>l</em>)"
+                                            sub="Längre ledare ⟹ större inducerad spänning."
+                                            value={lcm} min={LMIN} max={LMAX} step={1} onChange={setLcm}
+                                            valueText={`${fmt(lcm, 0)} cm`} />
+                                    <div className="flex gap-2 mt-1">
+                                        <button className="btn-toggle flex-1" onClick={() => setRunning(r => !r)}>{running ? 'Pausa' : 'Starta'}</button>
+                                    </div>
+                                </div>
+
+                                {/* Live-beräkning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Beräkning av inducerad spänning</div>
+                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2"
+                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
+                                        <span><em>e</em></span>
+                                        <span>=</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}><em>l</em> · <em>v</em> · <em>B</em></span>
+                                        <span>=</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}>{fmt(lcm / 100, 2)} m</span>
+                                        <span>·</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}>{fmt(Math.abs(vAct) / 100, 2)} m/s</span>
+                                        <span>·</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}>{fmt(Bmt, 2)}·10<sup>−3</sup> T</span>
+                                        <span>=</span>
+                                        <span className="font-bold" style={{ color: 'var(--lab-accent)', whiteSpace: 'nowrap' }}>{moving ? fmtE(e) : '0 V'}</span>
+                                    </div>
+                                    <div className="text-xs mt-2" style={{ color: 'var(--lab-ink-muted)' }}>
+                                        Beräkningen använder ledarens hastighet just nu — pausa eller håll
+                                        ledaren stilla så blir spänningen 0.
+                                    </div>
+                                    <button className="btn-toggle w-full mt-3 text-sm" onClick={setExample1}
+                                            title="l = 20 cm, v = 80 cm/s, B = 0,85 mT">
+                                        Exempel 1 ur teorin (20 cm, 80 cm/s, 0,85 mT)
+                                    </button>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Inducerad spänning <em>e</em>" value={moving ? fmtE(e) : '0 V'} unit="" color="var(--lab-accent)" />
+                                        <Readout label="Hastighet just nu" value={fmt(Math.abs(vAct), 0)} unit="cm/s" />
+                                        <Readout label="Flödestäthet <em>B</em>" value={fmt(Bmt, 2)} unit="mT" />
+                                        <Readout label="Ledarens längd <em>l</em>" value={fmt(lcm, 0)} unit="cm" />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        Testa: dra ledaren nedåt och titta på laddningarna — dra den sedan uppåt.
+                                        Plus- och minusändarna byter plats, precis som galvanometerns utslag byter
+                                        håll i demonstrationen.
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Rörelse krävs</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    En ström induceras <strong>endast då magnet och ledare rör sig i förhållande
+                                    till varandra</strong>. Står ledaren stilla i fältet händer ingenting — prova
+                                    att pausa eller hålla ledaren stilla i simuleringen och se att spänningen blir 0.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Varför laddas ändarna upp?</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    När ledaren rör sig följer ledningselektronerna med — laddningar som rör sig i
+                                    ett magnetfält påverkas av den magnetiska
+                                    kraften <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>m</sub></span> (högerhandsregeln;
+                                    kom ihåg att elektronernas rörelse motsvarar en ström åt motsatt håll).
+                                    Elektronerna samlas i ena änden, som blir negativ, medan den andra änden blir positiv.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Kraftjämvikt</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Laddningsuppdelningen skapar ett elektriskt fält i ledaren som ger en
+                                    motriktad elektrisk kraft <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>e</sub></span> på
+                                    elektronerna. Nästan omedelbart blir <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>e</sub> = <em>F</em><sub>m</sub></span> —
+                                    kraftjämvikt — och laddningsvandringen upphör. Det är i det läget spänningen
+                                    är <span style={{ whiteSpace: 'nowrap' }}><em>e</em> = <em>l</em> · <em>v</em> · <em>B</em></span>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Varför just e = l · v · B?</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                Vid kraftjämvikt är <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>e</sub> = <em>F</em><sub>m</sub></span>,
+                                alltså <span style={{ whiteSpace: 'nowrap' }}><em>q</em> · 𝔼 = <em>q</em> · <em>v</em> · <em>B</em></span> där 𝔼
+                                är den elektriska fältstyrkan i ledaren. Laddningen förkortas bort:
+                                <span style={{ whiteSpace: 'nowrap' }}> 𝔼 = <em>v</em> · <em>B</em></span>. Fältstyrkan i ledaren
+                                är spänningen per längd, <span style={{ whiteSpace: 'nowrap' }}>𝔼 = <em>e</em>/<em>l</em></span> —
+                                och löser vi ut <em>e</em> får
+                                vi <span style={{ whiteSpace: 'nowrap' }}><em>e</em> = <em>l</em> · <em>v</em> · <em>B</em></span>.
+                                Formeln gäller när <em>l</em>, <em>v</em> och <em>B</em> är vinkelräta mot varandra.
+                            </p>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Det räcker att ledaren är i ett starkt magnetfält."</strong> Nej — utan relativ rörelse induceras ingen spänning alls. En magnet som ligger stilla i en spole ger inget utslag på galvanometern.</li>
+                                <li><strong>"Det spelar ingen roll åt vilket håll ledaren rör sig."</strong> Riktningen avgör polariteten: byter rörelsen håll byter plus- och minusändarna plats. Rör sig ledaren längs sin egen riktning induceras ingen spänning alls (elektronerna trycks då inte tvärs över ledaren).</li>
+                                <li><strong>"Den inducerade spänningen växer så länge ledaren rör sig."</strong> Nej — kraftjämvikten ställer in sig nästan omedelbart, och vid konstant fart är spänningen konstant: <em>e</em> = <em>l</em> · <em>v</em> · <em>B</em>.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

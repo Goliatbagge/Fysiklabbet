@@ -12,7 +12,17 @@ Format per post:
 
 ## Kö
 
-*(Tom just nu — se nedan för två fynd från 2026-07-02 som inte användes.)*
+- **En solstorm är på väg mot jorden — norrsken möjligt i sommarnatten** — ett
+  X1,1-flare från solfläcksgruppen AR4479 (30 juni, 20:50 UTC) slungade ut en
+  CME som NOAA SWPC väntar ska ge en G2-storm (måttlig) den 3–4 juli, med
+  ytterligare stormmoln på väg fram till 6 juli. Utmärkt vinkel för Fysik 2
+  (jordmagnetiska fältet + energinivåer/spektrallinjer: aurorafärger uppstår
+  när laddade partiklar exciterar syre/kväve i atmosfären). Kolla färska
+  siffror igen innan publicering — händelsen utvecklas dag för dag. Källor:
+  https://www.space.com/stargazing/auroras/sun-fires-off-10-solar-flares-in-24-hours-as-multiple-earth-bound-cmes-raise-northern-lights-hopes-for-july-4-weekend ,
+  https://watchers.news/2026/07/01/x1-1-solar-flare-produces-earth-directed-cme-g2-geomagnetic-storm-watch-issued-for-july-3/ ,
+  NOAA SWPC (swpc.noaa.gov). (tillagd 2026-07-03 — research klar, artikel
+  inte skriven eftersom dagens nyhet redan var publicerad när detta upptäcktes)
 
 ## Fynd som inte användes (2026-07-03) — kan tas upp senare
 

@@ -25,6 +25,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
     <style>
         html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
@@ -71,6 +72,15 @@
             width: 100vw; height: 100vh; border-radius: 0;
         }
         .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        .scene-wrap > canvas { display: block; touch-action: none; cursor: grab; }
+        .scene-wrap > canvas:active { cursor: grabbing; }
+
+        .scene-hint {
+            position: absolute; bottom: 10px; left: 12px; z-index: 5;
+            font-size: 12px; color: #e9edf3;
+            background: rgba(15,22,32,0.80); padding: 4px 11px; border-radius: 7px;
+            pointer-events: none; font-weight: 500;
+        }
 
         .scene-toggles {
             position: absolute; top: 14px; right: 14px; z-index: 6;
@@ -188,7 +198,76 @@
             ink:   '#1f2530',
             falt:  '#c0392b',    // fältlinjer (röda, som teorifigurerna)
             kraft: '#2563c9',    // kraften F (blå, som teorifigurerna)
-            pol:   '#5d646e',    // magnetpoler (grå, som teorifigurerna)
+            npol:  '#c0392b',    // nordpolen (röd)
+            spol:  '#ffffff',    // sydpolen (vit)
+            koppar:'#b5743a',    // ledaren (koppar)
+        };
+
+        // ── THREE-hjälpare (3D-vyn) ─────────────────────────────
+        const disposeGroup = (g) => {
+            g.traverse((o) => {
+                if (o.geometry) o.geometry.dispose();
+                if (o.material) (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => {
+                    if (m.map) m.map.dispose();
+                    m.dispose();
+                });
+            });
+            g.clear();
+        };
+
+        // Textetikett som sprite (kursiva variabler via canvas-font)
+        const textSprite = (parts, h = 0.42) => {
+            const c = document.createElement('canvas');
+            const ctx = c.getContext('2d');
+            const FS = 64, PAD = 14;
+            const fontFor = (p) => `${p.italic ? 'italic ' : ''}${p.weight || 600} ${FS}px Poppins, sans-serif`;
+            let w = 0;
+            parts.forEach((p) => { ctx.font = fontFor(p); w += ctx.measureText(p.t).width; });
+            c.width = Math.max(2, Math.ceil(w) + PAD * 2);
+            c.height = FS + PAD * 2;
+            let x = PAD;
+            parts.forEach((p) => {
+                ctx.font = fontFor(p);
+                ctx.fillStyle = p.color;
+                ctx.textBaseline = 'middle';
+                ctx.fillText(p.t, x, c.height / 2 + 2);
+                x += ctx.measureText(p.t).width;
+            });
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter;
+            const spr = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
+            spr.scale.set(h * c.width / c.height, h, 1);
+            spr.renderOrder = 10;
+            return spr;
+        };
+
+        // Kon (pilspets) orienterad längs en riktningsvektor
+        const cone = (dir, pos, len, rad, color, opacity = 1) => {
+            const m = new THREE.Mesh(
+                new THREE.ConeGeometry(rad, len, 14),
+                new THREE.MeshStandardMaterial({ color, transparent: opacity < 1, opacity, roughness: 0.6 })
+            );
+            m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+            m.position.copy(pos);
+            return m;
+        };
+
+        // Poltextur: bokstaven N/S på polens framsida/baksida (N röd, S vit)
+        const poleTexture = (letter) => {
+            const isN = letter === 'N';
+            const c = document.createElement('canvas');
+            c.width = 64; c.height = 560;
+            const ctx = c.getContext('2d');
+            ctx.fillStyle = isN ? COL.npol : COL.spol;
+            ctx.fillRect(0, 0, c.width, c.height);
+            ctx.fillStyle = isN ? '#ffffff' : COL.npol;
+            ctx.font = '600 44px Poppins, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(letter, c.width / 2, c.height / 2);
+            const tex = new THREE.CanvasTexture(c);
+            tex.minFilter = THREE.LinearFilter;
+            return tex;
         };
 
         const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
@@ -250,10 +329,20 @@
             const [ut, setUt] = useState(q.get('strom') !== 'in');     // ström ut ur planet
             const [hoger, setHoger] = useState(q.get('falt') !== 'v'); // fält åt höger
             const [show, setShow] = useState({ res: q.get('res') === '1', kraft: true });
+            const [view, setView] = useState(q.get('vy') === '3d' ? '3d' : '2d');
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [controlsOpen, setControlsOpen] = useState(true);
+            const [fontsReady, setFontsReady] = useState(0);
 
             const sceneWrapRef = useRef(null);
+            const threeRef = useRef(null);
+            const pRef = useRef({});
+
+            // rita om text-sprites när Poppins laddats (annars fallback-typsnitt)
+            useEffect(() => {
+                if (document.fonts && document.fonts.ready)
+                    document.fonts.ready.then(() => setFontsReady(1));
+            }, []);
 
             // ── Härledda storheter (exakt enligt genomgången) ──
             const l = lmm / 1000;                // ledarens längd (m)
@@ -262,6 +351,272 @@
             const sOut = ut ? 1 : -1;
             // I ut ur planet + B åt höger ⟹ kraften uppåt (högerhandsregeln)
             const fUp = sOut * dirB > 0;
+
+            pRef.current = { I, sOut };
+
+            // ── THREE-scenen (3D-vyn): initieras när vyn växlas till 3D ──
+            useEffect(() => {
+                const wrap = sceneWrapRef.current;
+                if (view !== '3d' || !wrap || !window.THREE) return;
+
+                const renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                renderer.setSize(wrap.clientWidth, wrap.clientHeight);
+                wrap.insertBefore(renderer.domElement, wrap.firstChild);
+
+                const scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xf3eee4);   // Laborans-papper
+
+                const camera = new THREE.PerspectiveCamera(45, wrap.clientWidth / wrap.clientHeight, 0.1, 100);
+
+                scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+                const key = new THREE.DirectionalLight(0xffffff, 0.85);
+                key.position.set(4, 6, 5);
+                scene.add(key);
+                const fill = new THREE.DirectionalLight(0xffe9d0, 0.25);
+                fill.position.set(-5, -2, -4);
+                scene.add(fill);
+
+                const groups = {
+                    poler: new THREE.Group(), falt: new THREE.Group(),
+                    ledare: new THREE.Group(), kraft: new THREE.Group(), matt: new THREE.Group(),
+                };
+                Object.values(groups).forEach((g) => scene.add(g));
+
+                const T = {
+                    renderer, scene, camera, groups,
+                    dots: [], wireLen: 1,
+                    az: 0.55, pol: 1.18, radius: 9.5,
+                };
+                threeRef.current = T;
+
+                const updateCam = () => {
+                    camera.position.set(
+                        T.radius * Math.sin(T.pol) * Math.sin(T.az),
+                        T.radius * Math.cos(T.pol),
+                        T.radius * Math.sin(T.pol) * Math.cos(T.az)
+                    );
+                    camera.lookAt(0, 0, 0);
+                };
+                updateCam();
+
+                // ── Rotera med musen / fingret, zooma med scrollhjulet ──
+                const el = renderer.domElement;
+                let dragging = false, px = 0, py = 0;
+                const onDown = (e) => { dragging = true; px = e.clientX; py = e.clientY; el.setPointerCapture(e.pointerId); };
+                const onMove = (e) => {
+                    if (!dragging) return;
+                    T.az -= (e.clientX - px) * 0.006;
+                    T.pol = Math.max(0.15, Math.min(Math.PI - 0.15, T.pol - (e.clientY - py) * 0.006));
+                    px = e.clientX; py = e.clientY;
+                    updateCam();
+                };
+                const onUp = (e) => { dragging = false; try { el.releasePointerCapture(e.pointerId); } catch (err) {} };
+                const onWheel = (e) => {
+                    e.preventDefault();
+                    T.radius = Math.max(4, Math.min(16, T.radius * (1 + e.deltaY * 0.001)));
+                    updateCam();
+                };
+                el.addEventListener('pointerdown', onDown);
+                el.addEventListener('pointermove', onMove);
+                el.addEventListener('pointerup', onUp);
+                el.addEventListener('pointercancel', onUp);
+                el.addEventListener('wheel', onWheel, { passive: false });
+
+                // ── Storleksändring (inkl. fullskärm) ──
+                const ro = new ResizeObserver(() => {
+                    const w = wrap.clientWidth, h = wrap.clientHeight;
+                    if (!w || !h) return;
+                    renderer.setSize(w, h);
+                    camera.aspect = w / h;
+                    camera.updateProjectionMatrix();
+                });
+                ro.observe(wrap);
+
+                // ── Animationsloop: laddningarna vandrar längs ledaren ──
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+                    const p = pRef.current;
+                    if (T.dots.length) {
+                        const speed = (0.9 + 0.5 * p.I) / T.wireLen;   // konstant fart längs ledaren
+                        T.dots.forEach((d) => {
+                            d.u = (d.u + p.sOut * speed * dt + 1) % 1;
+                            d.mesh.position.z = (d.u - 0.5) * T.wireLen;
+                        });
+                    }
+                    renderer.render(scene, camera);
+                };
+                raf = requestAnimationFrame(loop);
+
+                return () => {
+                    cancelAnimationFrame(raf);
+                    ro.disconnect();
+                    el.removeEventListener('pointerdown', onDown);
+                    el.removeEventListener('pointermove', onMove);
+                    el.removeEventListener('pointerup', onUp);
+                    el.removeEventListener('pointercancel', onUp);
+                    el.removeEventListener('wheel', onWheel);
+                    Object.values(groups).forEach(disposeGroup);
+                    renderer.dispose();
+                    if (el.parentNode) el.parentNode.removeChild(el);
+                    threeRef.current = null;
+                };
+            }, [view]);
+
+            // ── Bygg om 3D-scenen när parametrarna ändras ──
+            useEffect(() => {
+                const T = threeRef.current;
+                if (!T) return;
+                const { poler, falt, ledare, kraft, matt } = T.groups;
+                Object.values(T.groups).forEach(disposeGroup);
+                T.dots = [];
+
+                const GAP = 3.2;                                      // polernas innerytor vid x = ±GAP
+                const D = 1.2 + 2.4 * (lmm - LMIN) / (LMAX - LMIN);   // fältområdets djup ∝ l
+                const Lw = D + 2.8;                                   // ledarens längd i scenen
+                T.wireLen = Lw;
+
+                // ── Polerna N och S (bokstaven på fram- och baksidan) ──
+                const leftIsN = dirB > 0;
+                [-1, 1].forEach((s) => {
+                    const letter = (s < 0) === leftIsN ? 'N' : 'S';
+                    const plain = new THREE.MeshStandardMaterial({ color: letter === 'N' ? COL.npol : COL.spol, roughness: 0.7 });
+                    const faced = new THREE.MeshStandardMaterial({ map: poleTexture(letter), roughness: 0.7 });
+                    const box = new THREE.Mesh(
+                        new THREE.BoxGeometry(0.5, 4.4, D),
+                        [plain, plain, plain, plain, faced, faced]
+                    );
+                    box.position.set(s * (GAP + 0.25), 0, 0);
+                    poler.add(box);
+                });
+
+                // ── Fältlinjer: raka eller resulterande (superposition med ledarens fält) ──
+                const ys = [-1.75, -1.05, -0.35, 0.35, 1.05, 1.75];
+                const zs = [-(D / 2 - 0.25), 0, D / 2 - 0.25];
+                const faltMat = new THREE.MeshStandardMaterial({ color: COL.falt, roughness: 0.7 });
+                if (!show.res) {
+                    ys.forEach((y) => zs.forEach((z) => {
+                        const cyl = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 2 * GAP, 8), faltMat);
+                        cyl.rotation.z = Math.PI / 2;
+                        cyl.position.set(0, y, z);
+                        falt.add(cyl);
+                        [-1.7, 1.5].forEach((ax) => {
+                            falt.add(cone(new THREE.Vector3(dirB, 0, 0),
+                                new THREE.Vector3(dirB > 0 ? ax : -ax, y, z), 0.2, 0.06, COL.falt));
+                        });
+                    }));
+                } else {
+                    // samma strömlinjer som i 2D-vyn — fältet är oberoende av z,
+                    // så en integrerad kurva per starthöjd ritas i flera z-plan
+                    const bend = Math.min(2, 1.6 * (I / IMAX) / Math.max(B, 0.12));
+                    const S = 1.05 * bend;
+                    ys.forEach((y0) => {
+                        const pts2 = [];
+                        let x = dirB > 0 ? -GAP : GAP, y = y0;
+                        for (let k = 0; k < 400; k++) {
+                            pts2.push([x, y]);
+                            const r2 = x * x + y * y + 0.09;
+                            const bx = dirB - sOut * S * y / r2;
+                            const by = sOut * S * x / r2;
+                            const m = Math.hypot(bx, by) || 1;
+                            x += 0.065 * bx / m; y += 0.065 * by / m;
+                            if (Math.abs(x) > GAP + 0.05 || Math.abs(y) > 2.1) { pts2.push([x, y]); break; }
+                        }
+                        zs.forEach((z) => {
+                            const v3 = pts2.map((p) => new THREE.Vector3(p[0], p[1], z));
+                            const curve = new THREE.CatmullRomCurve3(v3);
+                            const tube = new THREE.Mesh(
+                                new THREE.TubeGeometry(curve, Math.min(300, v3.length * 2), 0.016, 6), faltMat);
+                            falt.add(tube);
+                            [0.3, 0.72].forEach((frac) => {
+                                const i = Math.max(1, Math.floor(pts2.length * frac));
+                                if (i >= pts2.length) return;
+                                const [x1, y1] = pts2[i - 1], [x2, y2] = pts2[i];
+                                falt.add(cone(new THREE.Vector3(x2 - x1, y2 - y1, 0),
+                                    new THREE.Vector3(x2, y2, z), 0.2, 0.06, COL.falt));
+                            });
+                        });
+                    });
+                }
+                const bSpr = textSprite([{ t: 'B', italic: true, color: COL.falt }], 0.46);
+                bSpr.position.set(-dirB * 1.0, 2.35, D / 2 + 0.35);
+                falt.add(bSpr);
+
+                // ── Ledaren (koppar) med strömriktningspilar och vandrande laddningar ──
+                const wireMesh = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.09, 0.09, Lw, 16),
+                    new THREE.MeshStandardMaterial({ color: COL.koppar, metalness: 0.35, roughness: 0.45 })
+                );
+                wireMesh.rotation.x = Math.PI / 2;
+                ledare.add(wireMesh);
+                for (let k = 0; k < 4; k++) {
+                    const z = -Lw / 2 + (k + 0.5) * Lw / 4;
+                    ledare.add(cone(new THREE.Vector3(0, 0, sOut), new THREE.Vector3(0, 0, z), 0.26, 0.13, COL.ink));
+                }
+                const dotGeo = new THREE.SphereGeometry(0.105, 12, 12);
+                const dotMat = new THREE.MeshBasicMaterial({ color: COL.ink });
+                for (let k = 0; k < 8; k++) {
+                    const mesh = new THREE.Mesh(dotGeo, dotMat);
+                    const u = k / 8;
+                    mesh.position.set(0, 0, (u - 0.5) * Lw);
+                    ledare.add(mesh);
+                    T.dots.push({ u, mesh });
+                }
+                const iSpr = textSprite([
+                    { t: 'I', italic: true, color: COL.ink },
+                    { t: ` = ${fmt(I, 1)} A`, color: COL.ink },
+                ], 0.38);
+                iSpr.position.set(0.15, -0.5, Lw / 2 + 0.5);
+                ledare.add(iSpr);
+
+                // ── Kraften F (skalenlig: samma längdmappning som 2D-vyn) ──
+                const Lf = 2.5 * F / (F + 0.35) + 0.18;
+                const head = Math.max(0.16, Math.min(0.3, Lf * 0.5));
+                const dirY = fUp ? 1 : -1;
+                const y0 = dirY * 0.14;
+                const shaftLen = Math.max(0.02, Lf - head);
+                const shaft = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.045, 0.045, shaftLen, 10),
+                    new THREE.MeshStandardMaterial({ color: COL.kraft, roughness: 0.5 })
+                );
+                shaft.position.set(0, y0 + dirY * shaftLen / 2, 0);
+                kraft.add(shaft);
+                kraft.add(cone(new THREE.Vector3(0, dirY, 0),
+                    new THREE.Vector3(0, y0 + dirY * (shaftLen + head / 2), 0), head, 0.11, COL.kraft));
+                const fSpr = textSprite([{ t: 'F', italic: true, color: COL.kraft }], 0.44);
+                fSpr.position.set(0.35, y0 + dirY * (Lf + 0.18), 0);
+                kraft.add(fSpr);
+
+                // ── Måttlinje för l (dubbelpil i fri yta under ledaren) ──
+                const my = -2.6;
+                const dashMat = new THREE.LineDashedMaterial({ color: COL.ink, dashSize: 0.1, gapSize: 0.07, transparent: true, opacity: 0.8 });
+                [-1, 1].forEach((s) => {
+                    const ln = new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+                        new THREE.Vector3(0, -0.16, s * D / 2), new THREE.Vector3(0, my - 0.06, s * D / 2)]), dashMat);
+                    ln.computeLineDistances();
+                    matt.add(ln);
+                });
+                matt.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+                    new THREE.Vector3(0, my, -D / 2 + 0.12), new THREE.Vector3(0, my, D / 2 - 0.12)]),
+                    new THREE.LineBasicMaterial({ color: COL.ink })));
+                matt.add(cone(new THREE.Vector3(0, 0, -1), new THREE.Vector3(0, my, -D / 2 + 0.07), 0.14, 0.045, COL.ink));
+                matt.add(cone(new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, my, D / 2 - 0.07), 0.14, 0.045, COL.ink));
+                const lSpr = textSprite([
+                    { t: 'l', italic: true, color: COL.ink },
+                    { t: ` = ${fmt(lmm, 0)} mm`, color: COL.ink },
+                ], 0.34);
+                lSpr.position.set(0, my - 0.32, 0);
+                matt.add(lSpr);
+            }, [view, B, I, lmm, ut, hoger, show.res, fontsReady]);
+
+            // ── Visa/dölj kraften i 3D-vyn ──
+            useEffect(() => {
+                const T = threeRef.current;
+                if (T) T.groups.kraft.visible = show.kraft;
+            }, [show.kraft, view]);
 
             // ── Fullskärm ──
             useEffect(() => {
@@ -327,12 +682,16 @@
                 // magnetpoler (N och S, som teorifiguren)
                 const leftPole = dirB > 0 ? 'N' : 'S';
                 const rightPole = dirB > 0 ? 'S' : 'N';
+                const poleFill = (p) => p === 'N' ? COL.npol : COL.spol;
+                const poleText = (p) => p === 'N' ? '#ffffff' : COL.npol;
                 els.push(
                     <g key="poler">
-                        <rect x="66" y="120" width="38" height="300" fill={COL.pol} />
-                        <rect x="716" y="120" width="38" height="300" fill={COL.pol} />
-                        <text x="85" y="278" textAnchor="middle" fontSize="17" fontWeight="600" fill="#ffffff">{leftPole}</text>
-                        <text x="735" y="278" textAnchor="middle" fontSize="17" fontWeight="600" fill="#ffffff">{rightPole}</text>
+                        <rect x="66" y="120" width="38" height="300" fill={poleFill(leftPole)}
+                              stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                        <rect x="716" y="120" width="38" height="300" fill={poleFill(rightPole)}
+                              stroke="rgba(15,22,32,0.5)" strokeWidth="1.2" />
+                        <text x="85" y="278" textAnchor="middle" fontSize="17" fontWeight="600" fill={poleText(leftPole)}>{leftPole}</text>
+                        <text x="735" y="278" textAnchor="middle" fontSize="17" fontWeight="600" fill={poleText(rightPole)}>{rightPole}</text>
                     </g>
                 );
 
@@ -424,11 +783,16 @@
             // ── Kryssrutor och lägesval (uppe till höger på scenen) ──
             const sceneToggles = () => (
                 <div className="scene-toggles">
-                    <div className="st-title">Strömmen <em style={{ textTransform: 'none' }}>I</em></div>
+                    <div className="st-title">Vy</div>
+                    <label><input type="radio" name="vy" checked={view === '2d'} onChange={() => setView('2d')} />
+                        <span>2D — tvärsnitt</span></label>
+                    <label><input type="radio" name="vy" checked={view === '3d'} onChange={() => setView('3d')} />
+                        <span>3D — hela ledaren</span></label>
+                    <div className="st-title st-group">Strömmen <em style={{ textTransform: 'none' }}>I</em></div>
                     <label><input type="radio" name="strom" checked={ut} onChange={() => setUt(true)} />
-                        <span>Ut ur planet (prick)</span></label>
+                        <span>{view === '3d' ? 'Mot dig (ut ur planet)' : 'Ut ur planet (prick)'}</span></label>
                     <label><input type="radio" name="strom" checked={!ut} onChange={() => setUt(false)} />
-                        <span>In i planet (kryss)</span></label>
+                        <span>{view === '3d' ? 'Bort från dig (in i planet)' : 'In i planet (kryss)'}</span></label>
                     <div className="st-title st-group">Magnetfältet <em style={{ textTransform: 'none' }}>B</em></div>
                     <label><input type="radio" name="falt" checked={hoger} onChange={() => setHoger(true)} />
                         <span>Åt höger (N till vänster)</span></label>
@@ -466,7 +830,8 @@
                             kraften <span style={{ whiteSpace: 'nowrap' }}><em>F</em> = <em>B</em> · <em>I</em> · <em>l</em></span>,
                             vars riktning ges av högerhandsregeln. Byt strömriktning och fältriktning och se kraften
                             vända — och slå på "Resulterande fältet" för att se varför: fältet blir tätare på ena
-                            sidan av ledaren och glesare på den andra.
+                            sidan av ledaren och glesare på den andra. Växla till 3D-vyn för att se hela ledaren
+                            mellan polerna och rotera scenen fritt.
                         </p>
 
                         <FormulaCard />
@@ -475,7 +840,10 @@
                             {/* Scen */}
                             <div className="lg:w-3/5 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    {scene()}
+                                    {view === '2d' && scene()}
+                                    {view === '3d' && (
+                                        <div className="scene-hint">Dra för att rotera — scrolla för att zooma</div>
+                                    )}
 
                                     <div className="scene-info">
                                         <span className="si-lbl">Kraft <em style={{ textTransform: 'none' }}>F</em></span>

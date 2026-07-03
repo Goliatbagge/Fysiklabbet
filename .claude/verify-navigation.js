@@ -37,6 +37,14 @@ const LABORANS_NAV = [
 
 // Files to check
 const HTML_FILES_TO_CHECK = [
+    'fysik2-ledare-magnetfalt-app.html',
+    'fysik2-induktion-app.html',
+    'fysik2-lenz-lag-app.html',
+    'fysik2-magnetfalt-spole-app.html',
+    'fysik2-laddade-partiklar-app.html',
+    'fysik2-pulser-vagor-app.html',
+    'fysik2-pipor-app.html',
+    'fysik2-ljudniva-app.html',
     'fysik2-svangningstid-app.html',
     'fysik2-vinkelhastighet-app.html',
     'fysik2-hookes-lag-app.html',

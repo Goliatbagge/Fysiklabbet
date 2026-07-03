@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strömförande ledare i magnetfält - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 262px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-group { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // ── Glidarintervall ──
+        const BMIN = 0.1, BMAX = 2.0;        // flödestäthet B (T)
+        const IMIN = 0.1, IMAX = 5.0;        // ström I (A)
+        const LMIN = 5, LMAX = 100;          // ledarens längd l (mm)
+
+        // ── Scen-geometri (viewBox-koordinater) ──
+        const VBW = 820, VBH = 540;
+        const WX = 410, WY = 272;            // ledarens tvärsnitt (px)
+        const PX0 = 106, PX1 = 714;          // fältområdets kanter (px)
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        // kraft med lämpligt prefix
+        const fmtF = (F) => {
+            if (F >= 1) return `${fmt(F, 2)} N`;
+            if (F >= 1e-3) { const m = F * 1e3; return `${fmt(m, m < 10 ? 1 : 0)} mN`; }
+            const u = F * 1e6; return `${fmt(u, u < 10 ? 1 : 0)} µN`;
+        };
+
+        const COL = {
+            ink:   '#1f2530',
+            falt:  '#c0392b',    // fältlinjer (röda, som teorifigurerna)
+            kraft: '#2563c9',    // kraften F (blå, som teorifigurerna)
+            pol:   '#5d646e',    // magnetpoler (grå, som teorifigurerna)
+        };
+
+        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        const FsSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 150 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 90, textAlign: 'right' }}>{valueText}</span>
+            </div>
+        );
+
+        // Formelkort-hjälpare (samma mönster som fysik2-svangningstid-app)
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-6 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex items-center gap-x-3">
+                    <Vbl label="Kraft på ledaren"><em>F</em></Vbl>
+                    <span className="fnum">=</span>
+                    <Vbl label="Flödestäthet"><em>B</em></Vbl>
+                    <span className="fnum">·</span>
+                    <Vbl label="Ström"><em>I</em></Vbl>
+                    <span className="fnum">·</span>
+                    <Vbl label="Ledarens längd"><em>l</em></Vbl>
+                </div>
+                <div className="flex items-center gap-x-2" style={{ color: 'var(--lab-ink-muted)', fontSize: 13 }}>
+                    <span><em>B</em> vinkelrätt mot ledaren</span>
+                </div>
+            </div>
+        );
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        const App = () => {
+            const q = new URLSearchParams(location.search);
+            const [B, setB] = useState(isFinite(parseFloat(q.get('b'))) ? parseFloat(q.get('b')) : 1.4);
+            const [I, setI] = useState(isFinite(parseFloat(q.get('i'))) ? parseFloat(q.get('i')) : 2.2);
+            const [lmm, setLmm] = useState(isFinite(parseFloat(q.get('l'))) ? parseFloat(q.get('l')) : 25);
+            const [ut, setUt] = useState(q.get('strom') !== 'in');     // ström ut ur planet
+            const [hoger, setHoger] = useState(q.get('falt') !== 'v'); // fält åt höger
+            const [show, setShow] = useState({ res: q.get('res') === '1', kraft: true });
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+
+            const sceneWrapRef = useRef(null);
+
+            // ── Härledda storheter (exakt enligt genomgången) ──
+            const l = lmm / 1000;                // ledarens längd (m)
+            const F = B * I * l;                 // kraft på ledaren (N)
+            const dirB = hoger ? 1 : -1;
+            const sOut = ut ? 1 : -1;
+            // I ut ur planet + B åt höger ⟹ kraften uppåt (högerhandsregeln)
+            const fUp = sOut * dirB > 0;
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
+            // Exempel 2 i teorigenomgången: 2,2 A, 25 mm, B = 1,4 T ⟹ F ≈ 77 mN (~75 mN)
+            const setExample2 = () => { setB(1.4); setI(2.2); setLmm(25); setUt(true); setHoger(true); };
+
+            // ── Fältlinjer: raka eller resulterande (superposition med ledarens fält) ──
+            const fieldLines = useMemo(() => {
+                const ys = [155, 188, 221, 254, 287, 320, 353, 386];
+                const lines = [];
+                if (!show.res) {
+                    ys.forEach((y) => {
+                        const pts = [[dirB > 0 ? PX0 : PX1, y], [dirB > 0 ? PX1 : PX0, y]];
+                        lines.push({ pts, straight: true, y });
+                    });
+                    return lines;
+                }
+                // styrkan i ledarens eget fält relativt det homogena (schematisk skala)
+                const bend = Math.min(2, 1.6 * (I / IMAX) / Math.max(B, 0.12));
+                const S = 100 * bend;
+                ys.forEach((y0) => {
+                    const pts = [];
+                    let x = dirB > 0 ? PX0 : PX1, y = y0;
+                    for (let k = 0; k < 420; k++) {
+                        pts.push([x, y]);
+                        const dx = x - WX, dy = y - WY;
+                        const r2 = dx * dx + dy * dy + 800;
+                        let bx = dirB + sOut * S * dy / r2;
+                        let by = -sOut * S * dx / r2;
+                        const m = Math.hypot(bx, by) || 1;
+                        x += 6 * bx / m; y += 6 * by / m;
+                        if (x > PX1 + 4 || x < PX0 - 4 || y < 96 || y > 468) { pts.push([x, y]); break; }
+                    }
+                    lines.push({ pts, straight: false, y: y0 });
+                });
+                return lines;
+            }, [show.res, dirB, sOut, I, B]);
+
+            // ── Scenen ──
+            const scene = () => {
+                const els = [];
+
+                // magnetpoler (N och S, som teorifiguren)
+                const leftPole = dirB > 0 ? 'N' : 'S';
+                const rightPole = dirB > 0 ? 'S' : 'N';
+                els.push(
+                    <g key="poler">
+                        <rect x="66" y="120" width="38" height="300" fill={COL.pol} />
+                        <rect x="716" y="120" width="38" height="300" fill={COL.pol} />
+                        <text x="85" y="278" textAnchor="middle" fontSize="17" fontWeight="600" fill="#ffffff">{leftPole}</text>
+                        <text x="735" y="278" textAnchor="middle" fontSize="17" fontWeight="600" fill="#ffffff">{rightPole}</text>
+                    </g>
+                );
+
+                // fältlinjer
+                const fEls = [];
+                fieldLines.forEach((ln, li) => {
+                    if (ln.straight) {
+                        fEls.push(<line key={'l' + li} x1={PX0} y1={ln.y} x2={PX1} y2={ln.y}
+                                        stroke={COL.falt} strokeWidth="1.6" strokeLinecap="butt" />);
+                        [240, 560].forEach((ax, ai) => {
+                            fEls.push(<polygon key={`h${li}-${ai}`}
+                                               points={dirB > 0
+                                                   ? `${ax + 9},${ln.y} ${ax},${ln.y - 4.5} ${ax},${ln.y + 4.5}`
+                                                   : `${ax - 9},${ln.y} ${ax},${ln.y - 4.5} ${ax},${ln.y + 4.5}`}
+                                               fill={COL.falt} />);
+                        });
+                    } else {
+                        fEls.push(<polyline key={'l' + li}
+                                            points={ln.pts.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ')}
+                                            fill="none" stroke={COL.falt} strokeWidth="1.6" />);
+                        [0.3, 0.72].forEach((frac, ai) => {
+                            const i = Math.max(1, Math.floor(ln.pts.length * frac));
+                            if (i >= ln.pts.length) return;
+                            const [x1p, y1p] = ln.pts[i - 1], [x2p, y2p] = ln.pts[i];
+                            const dxv = x2p - x1p, dyv = y2p - y1p;
+                            const m = Math.hypot(dxv, dyv) || 1;
+                            const ux = dxv / m, uy = dyv / m;
+                            const tip = [x2p + ux * 9, y2p + uy * 9];
+                            fEls.push(<polygon key={`h${li}-${ai}`}
+                                               points={`${tip[0]},${tip[1]} ${x2p - uy * 4.5},${y2p + ux * 4.5} ${x2p + uy * 4.5},${y2p - ux * 4.5}`}
+                                               fill={COL.falt} />);
+                        });
+                    }
+                });
+                els.push(<g key="falt">{fEls}</g>);
+                els.push(<text key="blbl" x={140} y={138} textAnchor="middle" fontSize="16" fill={COL.falt}>
+                    <tspan fontStyle="italic">B</tspan>
+                </text>);
+
+                // kraften F (från ledarens kant, längd växer med F)
+                if (show.kraft) {
+                    const Lf = 240 * F / (F + 0.35) + 16;
+                    const head = Math.max(10, Math.min(16, Lf * 0.5));
+                    const y0 = fUp ? WY - 15 : WY + 15;
+                    const tip = fUp ? y0 - Lf : y0 + Lf;
+                    const base = fUp ? tip + head : tip - head;
+                    els.push(
+                        <g key="kraft">
+                            <line x1={WX} y1={y0} x2={WX} y2={base} stroke={COL.kraft} strokeWidth="3" strokeLinecap="butt" />
+                            <polygon points={`${WX},${tip} ${WX - 6},${base} ${WX + 6},${base}`} fill={COL.kraft} />
+                            <text x={WX + 15} y={tip + (fUp ? 6 : 2)} textAnchor="start" fontSize="16" fill={COL.kraft}>
+                                <tspan fontStyle="italic">F</tspan>
+                            </text>
+                        </g>
+                    );
+                }
+
+                // ledaren (tvärsnitt med prick eller kryss, som teorifigurerna)
+                els.push(
+                    <g key="ledare">
+                        <circle cx={WX} cy={WY} r="13" fill="#f7f2e8" stroke={COL.ink} strokeWidth="1.8" />
+                        {ut
+                            ? <circle cx={WX} cy={WY} r="3.4" fill={COL.ink} />
+                            : <g>
+                                <line x1={WX - 7} y1={WY - 7} x2={WX + 7} y2={WY + 7} stroke={COL.ink} strokeWidth="1.8" />
+                                <line x1={WX + 7} y1={WY - 7} x2={WX - 7} y2={WY + 7} stroke={COL.ink} strokeWidth="1.8" />
+                              </g>}
+                        <text x={WX} y={500} textAnchor="middle" fontSize="12.5" fill="var(--lab-ink-muted, #5a6170)">
+                            {ut ? 'strömmen ut ur planet (prick)' : 'strömmen in i planet (kryss)'}
+                        </text>
+                    </g>
+                );
+
+                return (
+                    <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                         fontFamily="Poppins, sans-serif">
+                        <defs>
+                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#f7f2e8" />
+                                <stop offset="1" stopColor="#ece3d2" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+                        {els}
+                    </svg>
+                );
+            };
+
+            // ── Kryssrutor och lägesval (uppe till höger på scenen) ──
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Strömmen <em style={{ textTransform: 'none' }}>I</em></div>
+                    <label><input type="radio" name="strom" checked={ut} onChange={() => setUt(true)} />
+                        <span>Ut ur planet (prick)</span></label>
+                    <label><input type="radio" name="strom" checked={!ut} onChange={() => setUt(false)} />
+                        <span>In i planet (kryss)</span></label>
+                    <div className="st-title st-group">Magnetfältet <em style={{ textTransform: 'none' }}>B</em></div>
+                    <label><input type="radio" name="falt" checked={hoger} onChange={() => setHoger(true)} />
+                        <span>Åt höger (N till vänster)</span></label>
+                    <label><input type="radio" name="falt" checked={!hoger} onChange={() => setHoger(false)} />
+                        <span>Åt vänster (N till höger)</span></label>
+                    <div className="st-title st-group">Visa</div>
+                    <label><input type="checkbox" checked={show.kraft} onChange={() => tShow('kraft')} />
+                        <span className="st-swatch" style={{ background: COL.kraft }}></span>
+                        <span>Kraften <em>F</em></span></label>
+                    <label><input type="checkbox" checked={show.res} onChange={() => tShow('res')} />
+                        <span className="st-swatch" style={{ background: COL.falt }}></span>
+                        <span>Resulterande fältet</span></label>
+                </div>
+            );
+
+            const Readout = ({ label, value, unit, color }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Strömförande ledare i magnetfält
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Strömförande ledare i magnetfält</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            En ledare med strömmen <em>I</em> ligger vinkelrätt mot magnetfältet mellan en nordpol
+                            och en sydpol — du ser ledarens tvärsnitt. Ledaren påverkas av
+                            kraften <span style={{ whiteSpace: 'nowrap' }}><em>F</em> = <em>B</em> · <em>I</em> · <em>l</em></span>,
+                            vars riktning ges av högerhandsregeln. Byt strömriktning och fältriktning och se kraften
+                            vända — och slå på "Resulterande fältet" för att se varför: fältet blir tätare på ena
+                            sidan av ledaren och glesare på den andra.
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {scene()}
+
+                                    <div className="scene-info">
+                                        <span className="si-lbl">Kraft <em style={{ textTransform: 'none' }}>F</em></span>
+                                        <span className="si-val">{fmtF(F)}</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Riktning</span>
+                                        <span className="si-val" style={{ fontSize: 13 }}>{fUp ? 'uppåt' : 'nedåt'}</span>
+                                    </div>
+
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Flödestäthet (<em>B</em>)" value={B}
+                                                          min={BMIN} max={BMAX} step={0.05} onChange={setB}
+                                                          valueText={`${fmt(B, 2)} T`} />
+                                                <FsSlider label="Ström (<em>I</em>)" value={I}
+                                                          min={IMIN} max={IMAX} step={0.1} onChange={setI}
+                                                          valueText={`${fmt(I, 1)} A`} />
+                                                <FsSlider label="Ledarens längd (<em>l</em>)" value={lmm}
+                                                          min={LMIN} max={LMAX} step={5} onChange={setLmm}
+                                                          valueText={`${fmt(lmm, 0)} mm`} />
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Flödestäthet (<em>B</em>)"
+                                            sub="Starkare fält ⟹ större kraft (<em>F</em> ∝ <em>B</em>)."
+                                            value={B} min={BMIN} max={BMAX} step={0.05} onChange={setB}
+                                            valueText={`${fmt(B, 2)} T`} />
+                                    <Slider label="Ström (<em>I</em>)"
+                                            sub="Större ström ⟹ större kraft (<em>F</em> ∝ <em>I</em>)."
+                                            value={I} min={IMIN} max={IMAX} step={0.1} onChange={setI}
+                                            valueText={`${fmt(I, 1)} A`} />
+                                    <Slider label="Ledarens längd (<em>l</em>)"
+                                            sub="Längden av den del av ledaren som är inne i fältet (vinkelrätt mot planet)."
+                                            value={lmm} min={LMIN} max={LMAX} step={5} onChange={setLmm}
+                                            valueText={`${fmt(lmm, 0)} mm`} />
+                                </div>
+
+                                {/* Live-beräkning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Beräkning av kraften</div>
+                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-2"
+                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
+                                        <span><em>F</em></span>
+                                        <span>=</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}><em>B</em> · <em>I</em> · <em>l</em></span>
+                                        <span>=</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}>{fmt(B, 2)} T</span>
+                                        <span>·</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}>{fmt(I, 1)} A</span>
+                                        <span>·</span>
+                                        <span style={{ whiteSpace: 'nowrap' }}>{fmt(l, 3)} m</span>
+                                        <span>=</span>
+                                        <span className="font-bold" style={{ color: 'var(--lab-accent)', whiteSpace: 'nowrap' }}>{fmtF(F)}</span>
+                                    </div>
+                                    <button className="btn-toggle w-full mt-3 text-sm" onClick={setExample2}
+                                            title="B = 1,4 T (beräknat i exemplet), I = 2,2 A, l = 25 mm ⟹ F ≈ 77 mN">
+                                        Exempel 2 ur teorin (1,4 T, 2,2 A, 25 mm)
+                                    </button>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Kraft <em>F</em>" value={fmtF(F)} unit="" color="var(--lab-accent)" />
+                                        <Readout label="Kraftens riktning" value={fUp ? 'uppåt' : 'nedåt'} unit="" />
+                                        <Readout label="Flödestäthet <em>B</em>" value={fmt(B, 2)} unit="T" />
+                                        <Readout label="Ström <em>I</em>" value={fmt(I, 1)} unit="A" />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        Testa högerhandsregeln: tummen i strömmens riktning (ut ur/in i planet),
+                                        pekfingret i fältets riktning — långfingret ger kraftens riktning. Byt
+                                        sedan strömriktning i scenen och kontrollera att kraften vänder.
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Högerhandsregeln</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Samma högerhandsregel som för laddningar: <strong>tummen</strong> är
+                                    strömriktningen <em>I</em>, <strong>pekfingret</strong> magnetfältet <em>B</em> och
+                                    <strong> långfingret</strong> kraften <em>F</em>. I en strömförande ledare är det
+                                    de många ledningselektronernas magnetiska krafter som tillsammans ger kraften
+                                    på hela ledaren.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Det resulterande fältet</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Ledaren befinner sig i två magnetfält samtidigt: det homogena fältet mellan
+                                    polerna och sitt eget cirkulära fält. På ena sidan av ledaren samverkar fälten
+                                    (tätare fältlinjer), på den andra motverkar de varandra (glesare). Kraften går
+                                    åt det håll där det resulterande fältet är som <strong>svagast</strong> — det
+                                    starka fältet "puttar" ledaren.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Två parallella ledare</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Två strömförande ledare påverkar varandra, eftersom den ena ligger i den andras
+                                    magnetfält: <span style={{ whiteSpace: 'nowrap' }}><em>F</em> = <em>k</em> · <em>I</em><sub>1</sub> · <em>I</em><sub>2</sub> · <em>l</em>/<em>d</em></span> med <span style={{ whiteSpace: 'nowrap' }}><em>k</em> = 2,0 · 10<sup>−7</sup> T·m/A</span>.
+                                    Strömmar åt <strong>samma håll</strong> ger en attraherande kraft, motriktade
+                                    strömmar en repellerande.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Var kommer formeln ifrån?</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <p className="mt-3 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                Den magnetiska kraften på en enskild laddning
+                                är <span style={{ whiteSpace: 'nowrap' }}><em>F</em> = <em>q</em> · <em>v</em> · <em>B</em></span>.
+                                Under tiden Δ<em>t</em> passerar laddningen <span style={{ whiteSpace: 'nowrap' }}><em>Q</em> = <em>I</em> · Δ<em>t</em></span> en
+                                sträcka <em>l</em> av ledaren, med hastigheten <span style={{ whiteSpace: 'nowrap' }}><em>v</em> = <em>l</em>/Δ<em>t</em></span>.
+                                Sätter vi in detta får
+                                vi <span style={{ whiteSpace: 'nowrap' }}><em>F</em> = <em>I</em> · Δ<em>t</em> · (<em>l</em>/Δ<em>t</em>) · <em>B</em> = <em>B</em> · <em>I</em> · <em>l</em></span> —
+                                tidsintervallet förkortas bort och kvar står kraften på hela ledarstycket.
+                            </p>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Kraften pekar längs fältlinjerna."</strong> Nej — kraften är vinkelrät både mot fältet och mot strömmen. Det är därför den pekar uppåt eller nedåt i scenen fast fältet går i sidled.</li>
+                                <li><strong>"Ledaren måste röra sig för att påverkas."</strong> Nej — ledaren ligger stilla. Det räcker att laddningarna <em>inuti</em> den rör sig, alltså att det går en ström.</li>
+                                <li><strong>"En ledare parallell med fältet påverkas också."</strong> Nej — då är strömmens riktning och fältets riktning inte vinkelräta, och kraften blir noll. Formeln <em>F</em> = <em>B</em> · <em>I</em> · <em>l</em> gäller när <em>B</em> är vinkelrät mot ledaren.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

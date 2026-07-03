@@ -14,6 +14,27 @@ Format per post:
 
 *(Tom just nu — se nedan för två fynd från 2026-07-02 som inte användes.)*
 
+## Fynd som inte användes (2026-07-03) — kan tas upp senare
+
+- **Kvantgravitationstester kan lura oss att tro på överlagring där det bara
+  är vanlig rumtid** — forskare vid Kyushu University, University of Waterloo
+  och Stockholms universitet visar att många föreslagna experiment som ska
+  avslöja "kvantgravitation" har en likvärdig klassisk tolkning (kallad
+  "Relativity of Spacetime Superpositions"): samma resultat kan förklaras med
+  vanliga partiklar i vanlig rumtid. Teoretisk men begriplig
+  gränssnitts-vinkel mellan allmän relativitetsteori och kvantmekanik —
+  kräver en pedagogisk vinkling för gymnasienivå. Källa:
+  https://phys.org/news/2026-07-quantum-gravity-ordinary-spacetime-superposition.html
+  (tillagd 2026-07-03)
+- **Tredje kända galaxen helt utan mörk materia** — Keck Observatory har
+  hittat NGC 1052-DF9 (kallad DF9), som tillsammans med DF2 och DF4 bildar en
+  rak kedja av dvärggalaxer utan mörk materia, sannolikt bildade i en våldsam
+  galaxkrock. Bra mörk materia-vinkel för Fysik 2, men redan cirka tre veckor
+  gammal (publicerad 2026-06-16) — använd bara om inget färskare dyker upp.
+  Källor: https://keckobservatory.org/df9/ ,
+  https://phys.org/news/2026-06-charm-row-faint-galaxies-dark.html
+  (tillagd 2026-07-03)
+
 ## Fynd som inte användes (2026-07-02) — kan tas upp senare
 
 - **Diamant-kvantsensor kan avslöja altermagneter** — en ny sensor (kväve-vakans-

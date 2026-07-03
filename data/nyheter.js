@@ -31,6 +31,53 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-03-vintergatans-spiralarmar",
+    date: "2026-07-03",
+    title: "Ekon av röntgenljus visar att Vintergatans yttre spiralarmar ligger längre bort än vi trott",
+    deck: "Genom att mäta hur ringar av spritt röntgenljus från tre enorma stjärnexplosioner har vuxit över tid har astronomer räknat fram de mest exakta avstånden hittills till Vintergatans yttersta spiralarmar. Två av dem visar sig ligga upp till tio procent längre bort än man trott.",
+    category: "Astronomi",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-03-vintergatans-spiralarmar.jpg",
+    imageAlt: "Schematisk illustration av en gammablixts röntgenljus som når ett rymdteleskop dels direkt via en rak linje, dels efter att ha spridits i ett stoftmoln längs en böjd, prickad linje, med svaga ekoringar kring blixtens position nära teleskopet.",
+    imageCredit: "Illustration: Fysiklabbet",
+    tags: ["astronomi", "vintergatan", "gammablixt", "röntgenstrålning", "elektromagnetiska vågor", "ljus", "avståndsmätning", "interstellärt stoft", "spiralarmar", "rymden"],
+    sources: [
+      { name: "NASA — Chandra X-ray Observatory (pressmeddelande)", url: "https://chandra.si.edu/press/26_releases/press_070126.html" },
+      { name: "ESA — XMM-Newton", url: "https://www.esa.int/Science_Exploration/Space_Science/XMM-Newton/XMM-Newton_helps_revise_distance_to_outer_spiral_arms" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-xmm-newton-chandra-distance-milky.html" }
+    ],
+    research: { citation: "B. Vaia et al., ”Accurate distances of the Galactic spiral arms from dust-scattered X-ray emission of gamma-ray bursts”, Astronomy & Astrophysics (2026)", url: "https://www.aanda.org/articles/aa/full_html/2026/06/aa57431-25/aa57431-25.html" },
+    body: [
+      { type: "p", html: "När en av universums mäktigaste explosioner briserar slocknar den för blotta ögat på någon minut — men dess röntgenljus fortsätter att studsa runt bland Vintergatans stoftmoln i veckor efteråt. Genom att följa de svaga ringar av spritt röntgenljus som denna eftersläpning skapar har ett internationellt forskarlag nu mätt de mest exakta avstånden hittills till några av galaxens yttersta spiralarmar. Två av dem visar sig ligga upp till 10&nbsp;% längre bort än man trott." },
+
+      { type: "h2", text: "En gammablixt lyser upp stoftet" },
+      { type: "p", html: "Källan till ljuset är en gammablixt (på engelska <em>gamma-ray burst</em>, GRB) — en av universums mest energirika händelser, som uppstår när en massiv stjärna kollapsar eller två neutronstjärnor smälter samman. Blixten sänder ut en flodvåg av röntgenstrålning, elektromagnetisk vågrörelse precis som synligt ljus men med mycket kortare våglängd. Det mesta av strålningen når jorden i en rak linje. En liten del studsar i stället mot damm- och stoftmoln mellan stjärnorna och tar en omväg innan den anländer." },
+
+      { type: "h2", text: "Ett eko av röntgenljus" },
+      { type: "p", html: "Omvägen tar tid — på samma sätt som ekot av ett rop kommer efter det direkta ljudet. Ju längre bort ett stoftmoln ligger längs synlinjen, desto längre blir omvägen och desto senare anländer det spridda ljuset. Eftersom fotonerna sprids åt alla håll bildar de en ring runt gammablixtens position på himlen — en ring som sakta växer i takt med att allt mer avböjt ljus hinner fram. Genom att mäta hur snabbt ringen sväller, och kombinera det med ljusets kända hastighet <em>c</em>&nbsp;≈&nbsp;2,998&nbsp;⋅&nbsp;10<sup>8</sup>&nbsp;m/s, kan avståndet till stoftmolnet räknas fram med ren geometri — utan några antaganden om hur galaxen roterar." },
+
+      { type: "h2", text: "Tre blixtar, en kartläggning" },
+      { type: "p", html: "Forskarna, ledda av doktoranden Beatrice Vaia vid IUSS Pavia och universitetet i Trento i Italien, kombinerade röntgenbilder från både ESA:s rymdteleskop XMM-Newton och NASA:s Chandra av tre gammablixtar: GRB&nbsp;031203 (2003), GRB&nbsp;160623A (2016) och den enormt ljusstarka GRB&nbsp;221009A (2022) — en blixt så kraftfull att den fått smeknamnet <em>the BOAT</em>, ”Brightest Of All Time”, den starkaste som någonsin registrerats. Ringarna i röntgenbilderna gick att koppla till stoftmoln i tre av Vintergatans spiralarmar: Perseusarmen, Yttre armen och Yttre Scutum–Centaurus-armen." },
+
+      { type: "quote", html: "”Det här är ett mycket direkt sätt att mäta avstånden till Vintergatans spiralarmar exakt — en metod som enbart bygger på geometri.”", cite: "Beatrice Vaia, IUSS Pavia och universitetet i Trento, försteförfattare till studien" },
+
+      { type: "p", html: "De flesta tidigare avståndsmätningar bygger i stället på antaganden om hur Vintergatan roterar, påpekar Vaia — antaganden som blir alltmer osäkra ju längre ut mot galaxens utkant man kommer." },
+
+      { type: "h2", text: "Vintergatan lite större än väntat" },
+      { type: "p", html: "Resultatet: avståndet till Perseusarmen stämde väl med tidigare uppskattningar, men både Yttre armen och Yttre Scutum–Centaurus-armen — två av de mest avlägsna kända strukturerna i vår egen galax, på bortre sidan av den galaktiska kärnan — visade sig ligga upp till 10&nbsp;% längre bort än man trott. Det låter som en liten justering, men i en galax som är omkring 100&nbsp;000 ljusår i diameter motsvarar tio procent tusentals ljusår." },
+
+      { type: "h2", text: "Koppling till fysiken" },
+      { type: "p", html: "Metoden bygger på samma princip som all avståndsmätning med vågor: en känd hastighet, en uppmätt tidsfördröjning och lite geometri — precis det sambandet mellan hastighet, tid och sträcka som beskrivs i genomgången om <strong>elektromagnetiska vågor och ljus</strong> i Fysik nivå&nbsp;2, fast här tillämpat på röntgenstrålning i stället för synligt ljus, och på tusentals ljusår i stället för meter." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "GRB 221009A, ”the BOAT”, var så kraftfull att den mättade instrument på flera rymdteleskop. Den kom från en döende stjärna i en galax cirka 2,4 miljarder ljusår bort — men dess röntgeneko syntes ändå tydligt genom vår egen galaxs stoftmoln, bara några tusen ljusår från solen.",
+        "Röntgenstrålning har våglängder på ungefär 0,01–10 nanometer, hundratusentals gånger kortare än synligt ljus — därför krävs särskilda rymdteleskop som XMM-Newton och Chandra för att fånga den.",
+        "Solen sitter inte i någon av Vintergatans stora spiralarmar utan i en mindre ”sporre” kallad Orionarmen, mellan de större Sagittarius- och Perseusarmarna."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-02-cern-specialartikel",
     date: "2026-07-02",
     title: "Inne i CERN: sju decennier av partiklar, Nobelpris och en och annan mård",

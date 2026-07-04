@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hastighetsväljare och masspektrometer - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 262px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-group { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // ── Glidarintervall ──
+        const EMIN = 40, EMAX = 250;           // elektriskt fält (kV/m)
+        const BMIN = 0.08, BMAX = 0.40;        // flödestäthet B (T)
+
+        // ── Partiklar (massa i kg, laddning i C) ──
+        const QE = 1.602e-19, U_KG = 1.6605e-27;
+        const PARTICLES = {
+            elektron: { label: 'Elektron',     m: 9.109e-31,  q: -QE,     color: '#2563c9', sign: '−' },
+            proton:   { label: 'Proton',       m: 1.6726e-27, q: QE,      color: '#c0392b', sign: '+' },
+            deuteron: { label: 'Deuteron',     m: 3.3436e-27, q: QE,      color: '#b5743a', sign: '+' },
+            alfa:     { label: 'Alfapartikel', m: 6.6447e-27, q: 2 * QE,  color: '#7b3fa0', sign: '+' },
+        };
+
+        // ── Scen-geometri (viewBox-koordinater) ──
+        const VBW = 820, VBH = 540;
+        const BEAMY = 270;                     // strålens mittlinje
+        const PL = { x0: 100, x1: 360, gap: 61 };  // plattorna (inre yta ±gap)
+        const WALLX = 400, WALLW = 9;          // skärmen med hålet
+        const HOLE = 12;                       // hålets halvhöjd
+        const V0PX = 150;                      // skärmfart för u = 1 (px/s)
+        const CDEFL = 260;                     // avlänkning i väljaren (px/s²)
+
+        // referens för skalan: r ritas som 58 px för protonen vid E0, B0
+        const E0 = 1.0e5, B0 = 0.25;
+        const rPhys = (p, E, B) => p.m * (E / B) / (Math.abs(p.q) * B);
+        const PXM_ION = 58 / rPhys(PARTICLES.proton, E0, B0);
+        const PXM_EL = 58 / rPhys(PARTICLES.elektron, E0, B0);
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+        // tiopotensform: [mantissa, exponent]
+        const sci = (x) => {
+            if (x === 0) return [0, 0];
+            const e = Math.floor(Math.log10(Math.abs(x)));
+            return [x / Math.pow(10, e), e];
+        };
+        const Sci = ({ v, d = 1, unit }) => {
+            const [m, e] = sci(v);
+            return <span style={{ whiteSpace: 'nowrap' }}>{fmt(m, d)} · 10<sup>{e < 0 ? '−' + (-e) : e}</sup>{unit ? ' ' + unit : ''}</span>;
+        };
+        const fmtLen = (m) => {
+            if (m >= 1) return `${fmt(m, 2)} m`;
+            if (m >= 0.01) return `${fmt(m * 100, 1)} cm`;
+            if (m >= 1e-3) return `${fmt(m * 1e3, 1)} mm`;
+            const u = m * 1e6; return `${fmt(u, u < 10 ? 1 : 0)} µm`;
+        };
+
+        const COL = {
+            ink:  '#1f2530',
+            falt: '#c0392b',     // B-kryssen (röda, som teorifigurerna)
+            fe:   '#3f8f4a',     // elektriska kraften (grön, som teorifiguren)
+            fm:   '#2563c9',     // magnetiska kraften (blå, som teorifiguren)
+            bana: '#2563c9',     // banradien (blå, som teorifiguren)
+            plus: '#c0392b',
+            minus:'#2563c9',
+        };
+
+        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        const FsSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 170 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 100, textAlign: 'right' }}>{valueText}</span>
+            </div>
+        );
+
+        // Bråk med vågrätt divisionsstreck (aldrig snedstreck)
+        const Frac = ({ top, bot, size = 14 }) => (
+            <div className="inline-flex flex-col items-center align-middle" style={{ lineHeight: 1.15, verticalAlign: 'middle' }}>
+                <span style={{ color: 'inherit', fontSize: size, padding: '0 6px' }}>{top}</span>
+                <span style={{ alignSelf: 'stretch', borderTop: '2px solid currentColor' }} />
+                <span style={{ color: 'inherit', fontSize: size, padding: '0 6px' }}>{bot}</span>
+            </div>
+        );
+        // Bråk med ord-etikett över täljaren och under nämnaren
+        const LFrac = ({ topLbl, top, botLbl, bot }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.15 }}>
+                <span className="flbl">{topLbl}</span>
+                <span className="fnum" style={{ padding: '0 7px' }}>{top}</span>
+                <span style={{ alignSelf: 'stretch', borderTop: '2px solid currentColor', color: 'var(--lab-ink)' }} />
+                <span className="fnum" style={{ padding: '0 7px' }}>{bot}</span>
+                <span className="flbl">{botLbl}</span>
+            </div>
+        );
+        const Vbl = ({ label, children }) => (
+            <div className="flex flex-col items-center" style={{ lineHeight: 1.1 }}>
+                <span className="flbl">{label}</span>
+                <span className="fnum">{children}</span>
+                <span className="flbl" aria-hidden="true" style={{ visibility: 'hidden' }}>{label}</span>
+            </div>
+        );
+
+        const FormulaCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-8 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+                <div className="flex items-center gap-x-3">
+                    <Vbl label="Hastighet"><em>v</em></Vbl>
+                    <span className="fnum">=</span>
+                    <LFrac topLbl="Elektriskt fält" top={<span>𝔼</span>}
+                           botLbl="Flödestäthet" bot={<span><em>B</em></span>} />
+                </div>
+                <div className="flex items-center gap-x-3">
+                    <Vbl label="Massa"><em>m</em></Vbl>
+                    <span className="fnum">=</span>
+                    <LFrac topLbl="Laddning · flödestäthet · radie"
+                           top={<span><em>q</em> · <em>B</em> · <em>r</em></span>}
+                           botLbl="Hastighet" bot={<span><em>v</em></span>} />
+                </div>
+                <div style={{ color: 'var(--lab-ink-muted)', fontSize: 13 }}>
+                    väljaren: <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>e</sub> = <em>F</em><sub>m</sub></span> — spektrometern: <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>m</sub> = <em>F</em><sub>c</sub></span>
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const q = new URLSearchParams(location.search);
+            const [Ekv, setEkv] = useState(isFinite(parseFloat(q.get('e'))) ? parseFloat(q.get('e')) : 100);  // kV/m
+            const [B, setB] = useState(isFinite(parseFloat(q.get('b'))) ? parseFloat(q.get('b')) : 0.25);
+            const [ptype, setPtype] = useState(PARTICLES[q.get('p')] ? q.get('p') : 'proton');
+            const [show, setShow] = useState({ krafter: true, radie: false });
+            const [running, setRunning] = useState(true);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const [, setTick] = useState(0);
+
+            const sceneWrapRef = useRef(null);
+            const stateRef = useRef({ parts: [], splats: [], hits: [], emitT: 0, emitIdx: 0 });
+            const pRef = useRef({});
+
+            const E = Ekv * 1000;                     // V/m
+            const part = PARTICLES[ptype];
+            const vSel = E / B;                       // utvald hastighet (m/s)
+            const rM = part.m * vSel / (Math.abs(part.q) * B);   // banradie (m)
+            const pxm = ptype === 'elektron' ? PXM_EL : PXM_ION;
+            const rPx = rM * pxm;
+            const mCalc = Math.abs(part.q) * B * rM / vSel;      // = partikelns massa
+
+            pRef.current = { running, E, B, part, ptype, rPx };
+
+            // ── Animationsloop ──
+            useEffect(() => {
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    const dt = Math.min((now - last) / 1000, 0.05);
+                    last = now;
+                    const p = pRef.current;
+                    const st = stateRef.current;
+                    if (p.running) {
+                        // skjut ut en ny partikel med jämna mellanrum; varannan har "rätt" fart
+                        st.emitT -= dt;
+                        if (st.emitT <= 0 && st.parts.length < 14) {
+                            st.emitT = 0.85;
+                            const SPEEDS = [1, 0.72, 1, 1.3, 1, 0.85, 1, 1.16];
+                            const u = SPEEDS[st.emitIdx % SPEEDS.length];
+                            st.emitIdx++;
+                            st.parts.push({
+                                x: 86, y: BEAMY, vy: 0, u, mode: 'sel',
+                                type: p.ptype, neg: p.part.q < 0, r: 0, ang: 0, trail: [],
+                            });
+                        }
+                        st.parts.forEach(pa => {
+                            if (pa.mode === 'sel') {
+                                pa.x += V0PX * pa.u * dt;
+                                if (pa.x > PL.x0 && pa.x < PL.x1) {
+                                    // för snabb ⟹ magnetiska kraften vinner
+                                    pa.vy += CDEFL * (pa.u - 1) * (pa.neg ? 1 : -1) * dt;
+                                }
+                                pa.y += pa.vy * dt;
+                                if (Math.abs(pa.y - BEAMY) >= PL.gap && pa.x > PL.x0 && pa.x < PL.x1) {
+                                    // träffar en platta
+                                    pa.mode = 'done';
+                                    st.splats.push({ x: pa.x, y: pa.y > BEAMY ? BEAMY + PL.gap : BEAMY - PL.gap, age: 0, c: PARTICLES[pa.type].color });
+                                } else if (pa.x >= WALLX - 4) {
+                                    if (Math.abs(pa.y - BEAMY) <= HOLE - 3) {
+                                        // genom hålet — in i spektrometern
+                                        pa.mode = 'spec';
+                                        pa.y = BEAMY; pa.x = WALLX + WALLW;
+                                        pa.r = p.rPx; pa.ang = 0;
+                                    } else {
+                                        pa.mode = 'done';
+                                        st.splats.push({ x: WALLX - 3, y: pa.y, age: 0, c: PARTICLES[pa.type].color });
+                                    }
+                                }
+                            } else if (pa.mode === 'spec') {
+                                const w = V0PX * pa.u / Math.max(pa.r, 8);
+                                pa.ang = Math.min(pa.ang + w * dt, Math.PI);
+                                const cx = WALLX + WALLW, cy = BEAMY + (pa.neg ? pa.r : -pa.r);
+                                pa.x = cx + pa.r * Math.sin(pa.ang);
+                                pa.y = pa.neg ? cy - pa.r * Math.cos(pa.ang) : cy + pa.r * Math.cos(pa.ang);
+                                if (pa.ang >= Math.PI) {
+                                    pa.mode = 'done';
+                                    const yh = pa.neg ? BEAMY + 2 * pa.r : BEAMY - 2 * pa.r;
+                                    if (yh > 20 && yh < 520) st.hits.push({ y: yh, age: 0, c: PARTICLES[pa.type].color });
+                                }
+                                if (pa.x > VBW + 20 || pa.y < -30 || pa.y > VBH + 30) pa.mode = 'done';
+                            }
+                            if (pa.mode !== 'done') {
+                                pa.trail.push([pa.x, pa.y]);
+                                if (pa.trail.length > 90) pa.trail.shift();
+                            }
+                        });
+                        st.parts = st.parts.filter(pa => pa.mode !== 'done');
+                        st.splats.forEach(sp => sp.age += dt);
+                        st.splats = st.splats.filter(sp => sp.age < 2.2);
+                        st.hits.forEach(h => h.age += dt);
+                        st.hits = st.hits.slice(-14);
+                        setTick(t => t + 1);
+                    }
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
+            const reset = () => {
+                stateRef.current.parts = [];
+                stateRef.current.splats = [];
+                stateRef.current.hits = [];
+                stateRef.current.emitT = 0;
+                setTick(t => t + 1);
+            };
+            const changeParticle = (key) => { setPtype(key); reset(); };
+
+            const cross = (x, y, key, size = 4.5) => (
+                <g key={key}>
+                    <line x1={x - size} y1={y - size} x2={x + size} y2={y + size}
+                          stroke={COL.falt} strokeWidth="1.6" strokeLinecap="round" />
+                    <line x1={x + size} y1={y - size} x2={x - size} y2={y + size}
+                          stroke={COL.falt} strokeWidth="1.6" strokeLinecap="round" />
+                </g>
+            );
+
+            // pil med skaft som slutar vid pilhuvudets bas
+            const arrow = (x1, y1, x2, y2, color, key, w = 2.2, head = 8) => {
+                const dx = x2 - x1, dy = y2 - y1;
+                const L = Math.hypot(dx, dy) || 1;
+                const ux = dx / L, uy = dy / L;
+                const bx = x2 - ux * head, by = y2 - uy * head;
+                return (
+                    <g key={key}>
+                        <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={w} strokeLinecap="butt" />
+                        <polygon points={`${x2},${y2} ${bx - uy * head * 0.5},${by + ux * head * 0.5} ${bx + uy * head * 0.5},${by - ux * head * 0.5}`}
+                                 fill={color} />
+                    </g>
+                );
+            };
+
+            // ── Scenen ──
+            const scene = () => {
+                const st = stateRef.current;
+                const els = [];
+
+                // partikelkälla
+                els.push(
+                    <g key="kanon">
+                        <rect x="14" y={BEAMY - 24} width="56" height="48" rx="6"
+                              fill="#c9ced4" stroke="#5d646e" strokeWidth="1.4" />
+                        <rect x="70" y={BEAMY - 9} width="16" height="18"
+                              fill="#8d939c" stroke="#5d646e" strokeWidth="1.2" />
+                        <text x="42" y={BEAMY + 52} textAnchor="middle" fontSize="12" fill="var(--lab-ink-muted, #5a6170)">
+                            {ptype === 'elektron' ? 'elektronkanon' : 'jonkälla'}
+                        </text>
+                    </g>
+                );
+
+                // plattorna med + överst och − underst (E-fältet pekar nedåt)
+                els.push(
+                    <g key="plattor">
+                        <rect x={PL.x0} y={BEAMY - PL.gap - 9} width={PL.x1 - PL.x0} height="9" fill="#6b7178" />
+                        <rect x={PL.x0} y={BEAMY + PL.gap} width={PL.x1 - PL.x0} height="9" fill="#6b7178" />
+                        {[120, 175, 230, 285, 340].map(x => (
+                            <text key={'p' + x} x={x} y={BEAMY - PL.gap - 15} textAnchor="middle"
+                                  fontSize="14" fontWeight="600" fill={COL.plus}>+</text>
+                        ))}
+                        {[120, 175, 230, 285, 340].map(x => (
+                            <text key={'m' + x} x={x} y={BEAMY + PL.gap + 28} textAnchor="middle"
+                                  fontSize="16" fontWeight="600" fill={COL.minus}>−</text>
+                        ))}
+                    </g>
+                );
+
+                // B-kryss i väljaren + etikett
+                els.push(
+                    <g key="bsel">
+                        {cross(150, BEAMY - 33, 'c1')}{cross(330, BEAMY - 33, 'c2')}
+                        {cross(150, BEAMY + 33, 'c3')}{cross(330, BEAMY + 33, 'c4')}
+                        <text x="368" y={BEAMY - 30} textAnchor="start" fontSize="13" fill={COL.falt}>
+                            <tspan fontStyle="italic">B</tspan>
+                        </text>
+                    </g>
+                );
+
+                // skärmen med hål + fotografisk plåt
+                els.push(
+                    <g key="vagg">
+                        <rect x={WALLX} y="20" width={WALLW} height={BEAMY - HOLE - 20} fill="#6b7178" />
+                        <rect x={WALLX} y={BEAMY + HOLE} width={WALLW} height={520 - BEAMY - HOLE} fill="#6b7178" />
+                        <rect x={WALLX + WALLW} y="24" width="8" height={BEAMY - HOLE - 28} fill="#3a3f47" />
+                        <rect x={WALLX + WALLW} y={BEAMY + HOLE + 4} width="8" height={516 - BEAMY - HOLE - 4} fill="#3a3f47" />
+                        <text x={WALLX + 26} y="40" textAnchor="start" fontSize="12" fill="var(--lab-ink-muted, #5a6170)">fotografisk plåt</text>
+                    </g>
+                );
+
+                // B-kryss i spektrometern + etikett
+                els.push(
+                    <g key="bspec">
+                        {[[455, 100], [530, 100], [455, 200], [530, 200], [455, 340], [530, 340],
+                          [455, 440], [530, 440], [620, 440], [700, 440], [620, 340]].map((c, i) => cross(c[0], c[1], 'sc' + i))}
+                        <text x="488" y="156" textAnchor="middle" fontSize="13" fill={COL.falt}>
+                            <tspan fontStyle="italic">B</tspan>
+                        </text>
+                    </g>
+                );
+
+                // förutsagd cirkelbana + mått
+                if (show.radie && rPx > 14) {
+                    const neg = part.q < 0;
+                    const cy = neg ? BEAMY + rPx : BEAMY - rPx;
+                    const cx = WALLX + WALLW;
+                    els.push(
+                        <g key="bana">
+                            <circle cx={cx} cy={cy} r={rPx} fill="none" stroke={COL.bana}
+                                    strokeWidth="1.3" strokeDasharray="6 5" opacity="0.75" />
+                            <circle cx={cx} cy={cy} r="2.4" fill={COL.bana} />
+                            <line x1={cx} y1={cy} x2={cx + rPx * 0.707} y2={cy + (neg ? -1 : 1) * rPx * 0.707}
+                                  stroke={COL.bana} strokeWidth="1.3" />
+                            <text x={cx + rPx * 0.42 + 10} y={cy + (neg ? -1 : 1) * rPx * 0.42 + (neg ? -6 : 14)}
+                                  textAnchor="start" fontSize="13" fill={COL.bana}>
+                                <tspan fontStyle="italic">r</tspan>
+                            </text>
+                            {rPx >= 34 && rPx <= 122 && (() => {
+                                // måttlinje 2r med pilhuvuden i båda ändar, i fri yta höger om plåten
+                                const mx = cx + 22;
+                                const yEnd = neg ? BEAMY + 2 * rPx : BEAMY - 2 * rPx;
+                                const s = neg ? 1 : -1;   // riktning från hålet mot träffen
+                                return (
+                                    <g key="2r">
+                                        <line x1={mx} y1={BEAMY + s * 8} x2={mx} y2={yEnd - s * 8}
+                                              stroke={COL.ink} strokeWidth="1.2" strokeLinecap="butt" />
+                                        <polygon points={`${mx},${BEAMY} ${mx - 4},${BEAMY + s * 8} ${mx + 4},${BEAMY + s * 8}`} fill={COL.ink} />
+                                        <polygon points={`${mx},${yEnd} ${mx - 4},${yEnd - s * 8} ${mx + 4},${yEnd - s * 8}`} fill={COL.ink} />
+                                        <text x={mx + 8} y={(BEAMY + yEnd) / 2 + 4}
+                                              textAnchor="start" fontSize="13" fill={COL.ink}>2<tspan fontStyle="italic">r</tspan></text>
+                                    </g>
+                                );
+                            })()}
+                        </g>
+                    );
+                }
+
+                // partikelspår
+                st.parts.forEach((pa, i) => {
+                    if (pa.trail.length > 1) {
+                        els.push(<polyline key={'tr' + i}
+                                           points={pa.trail.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ')}
+                                           fill="none" stroke={PARTICLES[pa.type].color} strokeWidth="1.4" opacity="0.30" />);
+                    }
+                });
+
+                // partiklarna med ev. kraft- och hastighetspilar
+                st.parts.forEach((pa, i) => {
+                    const pc = PARTICLES[pa.type];
+                    els.push(
+                        <g key={'pa' + i}>
+                            <circle cx={pa.x} cy={pa.y} r="7.5" fill="#f7f2e8" stroke={pc.color} strokeWidth="1.7" />
+                            {pc.q > 0 ? (
+                                <g stroke={pc.color} strokeWidth="1.7">
+                                    <line x1={pa.x - 3.8} y1={pa.y} x2={pa.x + 3.8} y2={pa.y} />
+                                    <line x1={pa.x} y1={pa.y - 3.8} x2={pa.x} y2={pa.y + 3.8} />
+                                </g>
+                            ) : (
+                                <line x1={pa.x - 3.8} y1={pa.y} x2={pa.x + 3.8} y2={pa.y} stroke={pc.color} strokeWidth="1.7" />
+                            )}
+                        </g>
+                    );
+                    if (show.krafter && pa.mode === 'sel' && pa.x > PL.x0 && pa.x < PL.x1) {
+                        // F_e (elektrisk) och F_m (magnetisk) drar åt varsitt håll.
+                        // Beloppen: F_m är u gånger F_e (F_m = q·v·B, F_e = q·E).
+                        const Le = 30, Lm = 30 * pa.u;
+                        const feDir = pa.neg ? -1 : 1;    // elektron: F_e uppåt (skärm-y negativ)
+                        const fmDir = -feDir;
+                        const feTip = pa.y + feDir * (7.5 + Le);
+                        const fmTip = pa.y + fmDir * (7.5 + Lm);
+                        els.push(arrow(pa.x, pa.y + feDir * 7.5, pa.x, feTip, COL.fe, 'fe' + i));
+                        els.push(arrow(pa.x, pa.y + fmDir * 7.5, pa.x, fmTip, COL.fm, 'fm' + i));
+                        els.push(
+                            <text key={'fel' + i} x={pa.x + 11} y={feTip + (feDir < 0 ? 2 : 8)} textAnchor="start" fontSize="12" fill={COL.fe}>
+                                <tspan fontStyle="italic">F</tspan><tspan fontSize="9" dy="2">e</tspan>
+                            </text>
+                        );
+                        els.push(
+                            <text key={'fml' + i} x={pa.x + 11} y={fmTip + (fmDir < 0 ? 2 : 8)} textAnchor="start" fontSize="12" fill={COL.fm}>
+                                <tspan fontStyle="italic">F</tspan><tspan fontSize="9" dy="2">m</tspan>
+                            </text>
+                        );
+                    }
+                    if (show.krafter && pa.mode !== 'done') {
+                        // hastighetspilen från partikelns kant i rörelseriktningen
+                        let ux = 1, uy = 0;
+                        if (pa.mode === 'spec') {
+                            const a = pa.ang, negp = pa.neg;
+                            ux = Math.cos(a); uy = negp ? Math.sin(a) : -Math.sin(a);
+                        }
+                        const L = 22 * pa.u;
+                        const x0 = pa.x + ux * 7.5, y0 = pa.y + uy * 7.5;
+                        els.push(arrow(x0, y0, x0 + ux * L, y0 + uy * L, COL.ink, 'v' + i, 2, 7));
+                    }
+                });
+
+                // nedslag på plattor/vägg och träffar på fotografiska plåten
+                st.splats.forEach((sp, i) => {
+                    els.push(<circle key={'sp' + i} cx={sp.x} cy={sp.y} r="3.2" fill={sp.c}
+                                     opacity={Math.max(0, 1 - sp.age / 2.2)} />);
+                });
+                st.hits.forEach((h, i) => {
+                    els.push(<circle key={'h' + i} cx={WALLX + WALLW + 4} cy={h.y} r="3.4" fill="#f3eee4" />);
+                });
+
+                // skalstock (spektrometerns skala)
+                const scaleLen = 100 / pxm;
+                els.push(
+                    <g key="skala">
+                        <line x1="120" y1="514" x2="220" y2="514" stroke={COL.ink} strokeWidth="1.4" />
+                        <line x1="120" y1="509" x2="120" y2="519" stroke={COL.ink} strokeWidth="1.4" />
+                        <line x1="220" y1="509" x2="220" y2="519" stroke={COL.ink} strokeWidth="1.4" />
+                        <text x="170" y="504" textAnchor="middle" fontSize="12" fill={COL.ink}>{fmtLen(scaleLen)}</text>
+                        <text x="232" y="518" textAnchor="start" fontSize="11" fill="var(--lab-ink-muted, #5a6170)">skala i spektrometern</text>
+                    </g>
+                );
+
+                return (
+                    <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                         fontFamily="Poppins, sans-serif">
+                        <defs>
+                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#f7f2e8" />
+                                <stop offset="1" stopColor="#ece3d2" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+                        {els}
+                    </svg>
+                );
+            };
+
+            // ── Kryssrutor, partikelval och styrknappar (uppe till höger) ──
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Partikel</div>
+                    {Object.entries(PARTICLES).map(([key, p]) => (
+                        <label key={key}>
+                            <input type="radio" name="partikel" checked={ptype === key} onChange={() => changeParticle(key)} />
+                            <span className="st-swatch" style={{ background: p.color }}></span>
+                            <span>{p.label} ({p.sign === '−' ? '−e' : key === 'alfa' ? '+2e' : '+e'})</span>
+                        </label>
+                    ))}
+                    <div className="st-title st-group">Visa</div>
+                    <label><input type="checkbox" checked={show.krafter} onChange={() => tShow('krafter')} />
+                        <span>Krafterna och hastigheten</span></label>
+                    <label><input type="checkbox" checked={show.radie} onChange={() => tShow('radie')} />
+                        <span className="st-swatch" style={{ background: COL.bana }}></span>
+                        <span>Banradien <em>r</em></span></label>
+                    <div className="st-actions">
+                        <button className={`btn-toggle ${running ? '' : 'active'}`}
+                                onClick={() => setRunning(r => !r)}>
+                            {running ? 'Pausa' : 'Fortsätt'}
+                        </button>
+                        <button className="btn-toggle" onClick={reset}>Börja om</button>
+                    </div>
+                </div>
+            );
+
+            const Readout = ({ label, value, unit, color }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            const massU = mCalc / U_KG;
+            const massText = massU >= 0.5
+                ? `${fmt(massU, 1)} u`
+                : null;
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Hastighetsväljare och masspektrometer
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Hastighetsväljare och masspektrometer</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            Laddade partiklar skjuts in mellan två laddade plattor, där ett elektriskt
+                            fält 𝔼 och ett magnetiskt fält <em>B</em> drar åt varsitt håll. Bara partiklar med
+                            exakt hastigheten <span style={{ whiteSpace: 'nowrap' }}><em>v</em> = 𝔼/<em>B</em></span> går
+                            rakt fram genom hålet — resten sorteras bort. På andra sidan finns bara magnetfältet
+                            kvar: partikeln böjs i en halvcirkel och träffar en fotografisk plåt. Ur
+                            banradien <em>r</em> kan partikeln <strong>vägas</strong>!
+                        </p>
+
+                        <FormulaCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {scene()}
+
+                                    <div className="scene-info">
+                                        <span className="si-lbl">Utvald hastighet <em style={{ textTransform: 'none' }}>v</em></span>
+                                        <span className="si-val"><Sci v={vSel} unit="m/s" /></span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Banradie <em style={{ textTransform: 'none' }}>r</em></span>
+                                        <span className="si-val">{fmtLen(rM)}</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Uppmätt massa <em style={{ textTransform: 'none' }}>m</em></span>
+                                        <span className="si-val" style={{ fontSize: 13 }}>
+                                            {massText ? massText : <Sci v={mCalc} d={2} unit="kg" />}
+                                        </span>
+                                    </div>
+
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Elektriskt fält (𝔼)" value={Ekv}
+                                                          min={EMIN} max={EMAX} step={5} onChange={setEkv}
+                                                          valueText={`${fmt(Ekv, 0)} kV/m`} />
+                                                <FsSlider label="Flödestäthet (<em>B</em>)" value={B}
+                                                          min={BMIN} max={BMAX} step={0.01} onChange={setB}
+                                                          valueText={`${fmt(B, 2)} T`} />
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Elektriskt fält (𝔼)"
+                                            sub="Starkare 𝔼 ⟹ högre utvald hastighet (<em>v</em> ∝ 𝔼)."
+                                            value={Ekv} min={EMIN} max={EMAX} step={5} onChange={setEkv}
+                                            valueText={`${fmt(Ekv, 0)} kV/m`} />
+                                    <Slider label="Flödestäthet (<em>B</em>)"
+                                            sub="Starkare <em>B</em> ⟹ lägre utvald hastighet och mindre banradie."
+                                            value={B} min={BMIN} max={BMAX} step={0.01} onChange={setB}
+                                            valueText={`${fmt(B, 2)} T`} />
+                                </div>
+
+                                {/* Live-beräkning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Beräkning</div>
+                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-2"
+                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
+                                        <span><em>v</em></span>
+                                        <span>=</span>
+                                        <Frac top={<span>𝔼</span>} bot={<span><em>B</em></span>} />
+                                        <span>=</span>
+                                        <Frac top={<Sci v={E} d={1} unit="V/m" />}
+                                              bot={<span style={{ whiteSpace: 'nowrap' }}>{fmt(B, 2)} T</span>} />
+                                        <span>=</span>
+                                        <span className="font-bold" style={{ color: 'var(--lab-accent)' }}><Sci v={vSel} unit="m/s" /></span>
+                                    </div>
+                                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1"
+                                         style={{ color: 'var(--lab-ink)', fontSize: 15 }}>
+                                        <span><em>m</em></span>
+                                        <span>=</span>
+                                        <Frac top={<span style={{ whiteSpace: 'nowrap' }}><em>q</em> · <em>B</em> · <em>r</em></span>}
+                                              bot={<span><em>v</em></span>} />
+                                        <span>=</span>
+                                        <span className="font-bold" style={{ color: 'var(--lab-accent)' }}>
+                                            {massText ? massText : <Sci v={mCalc} d={2} unit="kg" />}
+                                        </span>
+                                        <span style={{ color: 'var(--lab-ink-muted)', fontSize: 13 }}>
+                                            (spektrometern "väger" partikeln)
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Utvald hastighet <em>v</em>" value={<Sci v={vSel} unit="" />} unit="m/s" color="var(--lab-accent)" />
+                                        <Readout label="Banradie <em>r</em>" value={fmtLen(rM)} unit="" />
+                                        <Readout label="Elektriskt fält 𝔼" value={<Sci v={E} unit="" />} unit="V/m" />
+                                        <Readout label="Flödestäthet <em>B</em>" value={fmt(B, 2)} unit="T" />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        Titta på partiklarna i väljaren: de för snabba böjs av åt magnetkraftens
+                                        håll (<em>F</em><sub>m</sub> = <em>q</em> · <em>v</em> · <em>B</em> växer med farten), de för
+                                        långsamma åt elkraftens håll. Bara de med <em>v</em> = 𝔼/<em>B</em> går rakt.
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Så väljs hastigheten</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    I väljaren verkar två krafter på partikeln: den elektriska
+                                    kraften <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>e</sub> = <em>q</em> · 𝔼</span> och
+                                    den magnetiska kraften <span style={{ whiteSpace: 'nowrap' }}><em>F</em><sub>m</sub> = <em>q</em> · <em>v</em> · <em>B</em></span>,
+                                    riktade åt varsitt håll. De är exakt lika stora
+                                    när <span style={{ whiteSpace: 'nowrap' }}><em>q</em> · 𝔼 = <em>q</em> · <em>v</em> · <em>B</em></span>,
+                                    alltså när <span style={{ whiteSpace: 'nowrap' }}><em>v</em> = 𝔼/<em>B</em></span>. Laddningen <em>q</em> förkortas
+                                    bort — väljaren fungerar likadant för alla laddade partiklar.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Så vägs partikeln</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Efter hålet finns bara magnetfältet kvar. Den magnetiska kraften är alltid
+                                    vinkelrät mot rörelsen och blir en
+                                    centripetalkraft: <span style={{ whiteSpace: 'nowrap' }}><em>q</em> · <em>v</em> · <em>B</em> = <em>m</em> · <em>v</em>²/<em>r</em></span>.
+                                    Den fotografiska plåten registrerar träffen på avståndet 2<em>r</em> från
+                                    hålet — och med känt <em>v</em> ger det
+                                    massan <span style={{ whiteSpace: 'nowrap' }}><em>m</em> = <em>q</em> · <em>B</em> · <em>r</em>/<em>v</em></span>.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Deuteron eller alfapartikel?</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    Prova deuteronen (massan 2 u, laddningen +e) och alfapartikeln (massan 4 u,
+                                    laddningen +2e): de får <strong>samma banradie</strong>! Radien beror på
+                                    kvoten <em>m</em>/<em>q</em>, inte på massan ensam. En masspektrometer mäter
+                                    alltså egentligen massa per laddning — därför behöver man veta partikelns
+                                    laddning för att få fram massan.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Snabbare partiklar böjs mer i magnetfältet."</strong> Tvärtom — banradien <em>r</em> = <em>m</em> · <em>v</em>/(<em>q</em> · <em>B</em>) växer med farten. En snabbare partikel går i en <em>större</em> cirkel.</li>
+                                <li><strong>"Hastighetsväljaren ger partiklarna rätt fart."</strong> Nej — den ändrar inte farten på dem som passerar, den <em>sorterar bort</em> alla som inte redan har farten <em>v</em> = 𝔼/<em>B</em>. De krockar med plattorna.</li>
+                                <li><strong>"Magnetkraften bromsar partikeln i spektrometern."</strong> Nej — kraften är alltid vinkelrät mot hastigheten och uträttar inget arbete. Farten är konstant; bara riktningen ändras.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+{
+ "id": "fy2-4.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1a8070793523bdf29ac7ab286139e1e116729561",
+ "dur": 473.49,
+ "segments": [
+  {
+   "t": "Svartkroppsstrålning",
+   "s": 0.1,
+   "e": 2.52
+  },
+  {
+   "t": "Hur mycket av den infallande strålningen som ett föremål absorberar (tar upp) avgörs av dess absorptionsförmåga.",
+   "s": 2.48,
+   "e": 10.01
+  },
+  {
+   "t": "Ett föremål som absorberar all infallande strålning kallas absolut svart.",
+   "s": 10.01,
+   "e": 15.68
+  },
+  {
+   "t": "Demonstration — Absorptionsförmåga",
+   "s": 15.68,
+   "e": 18.94
+  },
+  {
+   "t": "Två bägare, en matt svartfärgad och en blank silverfärgad, utsätts för samma strålning från en värmelampa.",
+   "s": 18.94,
+   "e": 26.12
+  },
+  {
+   "t": "Ytan på den svarta bägaren får en högre temperatur eftersom den absorberar mer energi.",
+   "s": 26.12,
+   "e": 32.11
+  },
+  {
+   "t": "Hur mycket strålning ett föremål strålar ut (emitterar) avgörs av dess strålningsförmåga eller emissionsförmåga.",
+   "s": 32.11,
+   "e": 39.95
+  },
+  {
+   "t": "Ett föremål med stor absorptionsförmåga har också stor strålningsförmåga (jämför med värmeledningsförmåga: metaller med god värmeledningsförmåga både tar upp och ger ifrån sig värme snabbt).",
+   "s": 39.95,
+   "e": 51.75
+  },
+  {
+   "t": "En matt mörk yta både strålar och absorberar mer än en ljus blank yta.",
+   "s": 51.75,
+   "e": 57.29
+  },
+  {
+   "t": "Demonstration — Strålningsförmåga",
+   "s": 57.29,
+   "e": 60.54
+  },
+  {
+   "t": "Två bägare, en matt svartfärgad och en blank silverfärgad, fylls med lika mycket hett vatten av samma temperatur.",
+   "s": 60.54,
+   "e": 68.04
+  },
+  {
+   "t": "Temperaturen hos vattnet i den svarta bägaren sjunker fortare, vilket beror på att den svarta bägaren sänder ut mer strålning.",
+   "s": 68.04,
+   "e": 75.74
+  },
+  {
+   "t": "En absolut svart kropp som strålar skickar ut svartkroppsstrålning.",
+   "s": 75.74,
+   "e": 80.75
+  },
+  {
+   "t": "Absolut svarta kroppar har en utstrålning som enbart beror på temperaturen och ytans storlek.",
+   "s": 80.75,
+   "e": 87.26
+  },
+  {
+   "t": "Utstrålningen kallas emittans.",
+   "s": 87.26,
+   "e": 90.4
+  },
+  {
+   "t": "Emittans betecknas M och har enheten W/m i kvadrat (jämför med ljusintensitet).",
+   "s": 90.4,
+   "e": 97.49
+  },
+  {
+   "t": "Emittans",
+   "s": 97.49,
+   "e": 99.45
+  },
+  {
+   "t": "kraftmomentet M är lika med effekten P delat med arean A",
+   "s": 99.45,
+   "e": 104.34
+  },
+  {
+   "t": "där",
+   "s": 104.34,
+   "e": 105.81
+  },
+  {
+   "t": "M är lika med emittans (W/m i kvadrat)",
+   "s": 105.81,
+   "e": 110.7
+  },
+  {
+   "t": "P är lika med utstrålad effekt (watt)",
+   "s": 110.7,
+   "e": 114.66
+  },
+  {
+   "t": "A är lika med area (m i kvadrat)",
+   "s": 114.66,
+   "e": 118.31
+  },
+  {
+   "t": "Demonstration — Solljusets utsända våglängder",
+   "s": 118.31,
+   "e": 122.49
+  },
+  {
+   "t": "Vi kopplar in en digital spektrometer och undersöker vilka våglängder som solen sänder ut mest av.",
+   "s": 122.49,
+   "e": 129.18
+  },
+  {
+   "t": "Vilken våglängd som den utstrålade strålningen får beror på temperaturen enligt diagrammet nedan:",
+   "s": 129.18,
+   "e": 140.18
+  },
+  {
+   "t": "Spektralkurvor för en svart kropp vid olika temperaturer (logaritmiska axlar).",
+   "s": 129.18,
+   "e": 140.18
+  },
+  {
+   "t": "Ju högre temperatur, desto större emittans och desto kortare toppvåglängd.",
+   "s": 140.18,
+   "e": 145.51
+  },
+  {
+   "t": "Solens kurva (5 777 kelvin) toppar mitt i det synliga spektrumet.",
+   "s": 145.51,
+   "e": 151.88
+  },
+  {
+   "t": "Vi ser att emittansen ökar då temperaturen ökar.",
+   "s": 151.88,
+   "e": 156.24
+  },
+  {
+   "t": "Vi ser också att maxpunkten för våglängden minskar då temperaturen ökar.",
+   "s": 156.24,
+   "e": 161.65
+  },
+  {
+   "t": "Vid varje temperatur är emittansen störst för en viss våglängd.",
+   "s": 161.65,
+   "e": 166.29
+  },
+  {
+   "t": "Den våglängd som det sänds ut maximalt av bestäms av Wiens förskjutningslag.",
+   "s": 166.29,
+   "e": 171.71
+  },
+  {
+   "t": "Wiens förskjutningslag",
+   "s": 171.71,
+   "e": 174.3
+  },
+  {
+   "t": "våglängden lambda massan m accelerationen a x gånger periodtiden T är lika med 2,8978 gånger 10 upphöjt till minus 3 meter\\cdotK",
+   "s": 174.3,
+   "e": 185.64
+  },
+  {
+   "t": "där",
+   "s": 185.64,
+   "e": 187.12
+  },
+  {
+   "t": "våglängden lambda massan m accelerationen a x är lika med våglängd med störst emittans/utstrålning (meter)",
+   "s": 187.12,
+   "e": 195.41
+  },
+  {
+   "t": "T är lika med temperatur (kelvin)",
+   "s": 195.41,
+   "e": 199.0
+  },
+  {
+   "t": "Emittansen hos en svart kropp beror också av föremålets temperatur enligt Stefan–Boltzmanns lag.",
+   "s": 199.0,
+   "e": 205.76
+  },
+  {
+   "t": "Stefan–Boltzmanns lag",
+   "s": 205.76,
+   "e": 208.71
+  },
+  {
+   "t": "kraftmomentet M är lika med sigma gånger periodtiden T upphöjt till 4",
+   "s": 208.71,
+   "e": 214.36
+  },
+  {
+   "t": "där",
+   "s": 214.36,
+   "e": 215.84
+  },
+  {
+   "t": "M är lika med emittans (W/m i kvadrat)",
+   "s": 215.84,
+   "e": 220.76
+  },
+  {
+   "t": "σ är lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m i kvadrat·K upphöjt till 4) (Stefan–Boltzmanns konstant)",
+   "s": 220.76,
+   "e": 231.3
+  },
+  {
+   "t": "T är lika med temperatur (kelvin)",
+   "s": 231.3,
+   "e": 234.93
+  },
+  {
+   "t": "Exempel 1 — Yttemperatur hos en exoplanet",
+   "s": 234.93,
+   "e": 239.15
+  },
+  {
+   "t": "Bestäm yttemperaturen hos en exoplanet som strålar med emittansen 1,5 kilowatt/m i kvadrat.",
+   "s": 239.15,
+   "e": 246.66
+  },
+  {
+   "t": "Anta att exoplaneten strålar som en svart kropp.",
+   "s": 246.66,
+   "e": 250.93
+  },
+  {
+   "t": "Svara i °C.",
+   "s": 250.93,
+   "e": 253.53
+  },
+  {
+   "t": "Vi ställer upp Stefan–Boltzmanns lag och löser ut temperaturen T.",
+   "s": 253.53,
+   "e": 266.57
+  },
+  {
+   "t": "kraftmomentet M är lika med sigma gånger periodtiden T upphöjt till 4 vilket är ekvivalent med att T är lika med 4:e roten ur M delat med sigma",
+   "s": 253.53,
+   "e": 266.57
+  },
+  {
+   "t": "kraftmomentet M är lika med 1,5 kilowatt per kvadratmeter som är lika med 1 500 watt per kvadratmeter sigma som är lika med 5,67 gånger 10 upphöjt till minus 8 watt per (m^2\\cdotK^4)",
+   "s": 266.57,
+   "e": 282.91
+  },
+  {
+   "t": "periodtiden T är lika med 4:e roten ur 1 500 delat med 5,67 gånger 10 upphöjt till minus 8 som är lika med 403,298 ldots kelvin som är ungefär lika med 403 kelvin som är ungefär lika med 403 minus 273 ^\\circC som är lika med 130 ^\\circC",
+   "s": 282.91,
+   "e": 306.36
+  },
+  {
+   "t": "Svar: 130 grader Celsius",
+   "s": 306.36,
+   "e": 310.12
+  },
+  {
+   "t": "Exempel 2 — Solens maximala våglängd",
+   "s": 310.12,
+   "e": 313.94
+  },
+  {
+   "t": "Solen kan ses som en svart kropp.",
+   "s": 313.94,
+   "e": 317.21
+  },
+  {
+   "t": "Temperaturen på solens yta är ca 5 800 kelvin.",
+   "s": 317.33,
+   "e": 322.51
+  },
+  {
+   "t": "a) Vid vilken våglängd har solen sin maximala intensitet?",
+   "s": 322.46,
+   "e": 327.54
+  },
+  {
+   "t": "b) Vilken typ av strålning motsvarar det?",
+   "s": 327.54,
+   "e": 331.49
+  },
+  {
+   "t": "a) Vi ställer upp Wiens förskjutningslag och löser ut våglängden.",
+   "s": 331.49,
+   "e": 336.43
+  },
+  {
+   "t": "våglängden lambda massan m accelerationen a x gånger periodtiden T är lika med 2,8978 gånger 10 upphöjt till minus 3 vilket är ekvivalent med att lambda m a x är lika med 2,8978 gånger 10 upphöjt till minus 3 delat med T",
+   "s": 336.43,
+   "e": 355.39
+  },
+  {
+   "t": "periodtiden T är lika med 5 800 kelvin",
+   "s": 336.43,
+   "e": 355.39
+  },
+  {
+   "t": "våglängden lambda massan m accelerationen a x är lika med 2,8978 gånger 10 upphöjt till minus 3 delat med 5 800 som är lika med 4,996 ldots gånger 10 upphöjt till minus 7 meter som är ungefär lika med 5,00 gånger 10 upphöjt till minus 7 meter som är lika med 500 nanometer",
+   "s": 355.39,
+   "e": 375.59
+  },
+  {
+   "t": "Svar: 500 nanometer",
+   "s": 375.59,
+   "e": 378.88
+  },
+  {
+   "t": "b) Vi läser av våglängden 500 nanometer i tabellen för det elektromagnetiska spektrumet (se avsnitt 4.1): 500 nanometer ligger på gränsen mellan blå (435–500 nanometer) och cyan (500–520 nanometer).",
+   "s": 378.88,
+   "e": 396.14
+  },
+  {
+   "t": "Svar: Blå/cyan (blågrönt ljus)",
+   "s": 396.14,
+   "e": 400.82
+  },
+  {
+   "t": "Solens färg",
+   "s": 400.82,
+   "e": 403.03
+  },
+  {
+   "t": "Solens maximala emittans sker alltså, enligt exemplet ovan, vid blågrönt ljus!",
+   "s": 403.03,
+   "e": 409.28
+  },
+  {
+   "t": "Varför ser solen då inte blågrön ut?",
+   "s": 409.28,
+   "e": 412.97
+  },
+  {
+   "t": "Jo, solen emitterar även våglängder kring blågrönt och dessa våglängder tillsammans bildar vit.",
+   "s": 412.97,
+   "e": 420.09
+  },
+  {
+   "t": "Varför ser solen då gul ut på himlen?",
+   "s": 420.09,
+   "e": 423.66
+  },
+  {
+   "t": "Det har att göra med hur solljuset bryts i vår atmosfär.",
+   "s": 423.66,
+   "e": 427.91
+  },
+  {
+   "t": "Den kan ju även se röd ut vid solnedgång när solljuset passerar en ännu större del av jordens atmosfär.",
+   "s": 427.91,
+   "e": 434.91
+  },
+  {
+   "t": "Men solen är alltså \"egentligen\" vit sedd utanför jordens atmosfär.",
+   "s": 434.91,
+   "e": 439.78
+  },
+  {
+   "t": "När solen står som högst upp på himlen ser den också mer vit ut.",
+   "s": 439.78,
+   "e": 444.38
+  },
+  {
+   "t": "Figur: tre bilder bredvid varandra. ekvation 1 Solen sedd från rymdstationen ISS — en bländande vit punkt mot rymdens svärta. ekvation 2 Solen högt över ett ökenlandskap — fortfarande nästan vit. ekvation 3 Tidsförlopp av månen som går ner över Maldiverna: månen ändrar färg från vit (högst upp) genom gul, orange och slutligen mörkröd (nära horisonten), eftersom ljuset passerar allt mer atmosfär.",
+   "s": 444.38,
+   "e": 473.49
+  }
+ ]
+}

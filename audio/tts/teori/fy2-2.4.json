@@ -1,0 +1,268 @@
+{
+ "id": "fy2-2.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4e93720710b80d82d191f15d65a7cf48869cce55",
+ "dur": 290.55,
+ "segments": [
+  {
+   "t": "Svängningstid i fjäder",
+   "s": 0.1,
+   "e": 2.91
+  },
+  {
+   "t": "Hur lång tid en svängning tar (perioden) beror enbart på massan hos det svängande föremålet och på fjäderkonstanten.",
+   "s": 2.86,
+   "e": 10.55
+  },
+  {
+   "t": "Perioden beror inte på svängningens amplitud.",
+   "s": 10.55,
+   "e": 14.4
+  },
+  {
+   "t": "Periodtid för vikt i fjäder",
+   "s": 14.4,
+   "e": 17.39
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur massan m delat med k",
+   "s": 17.39,
+   "e": 22.62
+  },
+  {
+   "t": "där",
+   "s": 22.62,
+   "e": 24.1
+  },
+  {
+   "t": "T är lika med periodtid (sekunder) — tid för en hel svängning",
+   "s": 24.1,
+   "e": 29.35
+  },
+  {
+   "t": "m är lika med viktens massa (kilogram)",
+   "s": 29.35,
+   "e": 33.11
+  },
+  {
+   "t": "k är lika med fjäderkonstant (N/m)",
+   "s": 33.11,
+   "e": 37.35
+  },
+  {
+   "t": "Härledning — Periodtid för vikt i fjäder",
+   "s": 37.35,
+   "e": 41.15
+  },
+  {
+   "t": "Vi löser ut periodtiden T från formeln för vinkelhastighet omega är lika med 2 pi delat med periodtiden T :",
+   "s": 41.15,
+   "e": 52.52
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi delat med omega, ekvation 1",
+   "s": 41.15,
+   "e": 52.52
+  },
+  {
+   "t": "Vi behöver nu ett uttryck för vinkelhastigheten ω.",
+   "s": 52.52,
+   "e": 56.59
+  },
+  {
+   "t": "Den resulterande kraften i en fjädersvängning ger en acceleration enligt Newtons andra lag:",
+   "s": 56.59,
+   "e": 67.46
+  },
+  {
+   "t": "F resistansen R är lika med massan m gånger accelerationen a, ekvation 2",
+   "s": 56.59,
+   "e": 67.46
+  },
+  {
+   "t": "Accelerationen i varje läge i en harmonisk svängning är accelerationen a är lika med minus omega i kvadrat gånger y .",
+   "s": 67.46,
+   "e": 75.44
+  },
+  {
+   "t": "Detta i ekvation 2 ger",
+   "s": 75.44,
+   "e": 78.67
+  },
+  {
+   "t": "F resistansen R är lika med massan m gånger parentesen minus omega i kvadrat gånger y slut parentes som är lika med minus m gånger omega i kvadrat gånger y, ekvation 3",
+   "s": 78.67,
+   "e": 90.06
+  },
+  {
+   "t": "Sedan tidigare har vi också att den resulterande kraften i varje läge är",
+   "s": 90.06,
+   "e": 95.4
+  },
+  {
+   "t": "F resistansen R är lika med minus k gånger y, ekvation 4",
+   "s": 95.4,
+   "e": 100.84
+  },
+  {
+   "t": "Vi sätter ekvation 3 och ekvation 4 lika:",
+   "s": 100.84,
+   "e": 109.69
+  },
+  {
+   "t": "minus massan m gånger omega i kvadrat gånger y är lika med minus k gånger y",
+   "s": 100.84,
+   "e": 109.69
+  },
+  {
+   "t": "Vi dividerar båda led med minus y och löser ut ω.",
+   "s": 109.69,
+   "e": 123.16
+  },
+  {
+   "t": "massan m gånger omega i kvadrat är lika med k vilket är ekvivalent med att omega är lika med roten ur k delat med m",
+   "s": 109.69,
+   "e": 123.16
+  },
+  {
+   "t": "(den negativa lösningen bortses från)",
+   "s": 109.69,
+   "e": 123.16
+  },
+  {
+   "t": "Insättning av omega är lika med roten ur k delat med massan m i ekvation 1 ger",
+   "s": 123.16,
+   "e": 129.47
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi delat med roten ur k delat med massan m som är lika med 2 pi gånger roten ur m delat med k",
+   "s": 129.47,
+   "e": 140.75
+  },
+  {
+   "t": "vsv.",
+   "s": 129.47,
+   "e": 140.75
+  },
+  {
+   "t": "Exempel 1 — Periodtid för 100-gramsvikt",
+   "s": 129.47,
+   "e": 140.75
+  },
+  {
+   "t": "En 100-gramsvikt hängs i en fjäder som då förlängs 9,0 centimeter.",
+   "s": 140.75,
+   "e": 146.46
+  },
+  {
+   "t": "Den dras ner ytterligare 5,0 centimeter och släpps.",
+   "s": 146.46,
+   "e": 150.97
+  },
+  {
+   "t": "Bestäm periodtiden.",
+   "s": 150.97,
+   "e": 153.54
+  },
+  {
+   "t": "Vi ställer upp formeln för periodtiden.",
+   "s": 153.54,
+   "e": 156.9
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur massan m delat med k, ekvation 1",
+   "s": 156.9,
+   "e": 163.19
+  },
+  {
+   "t": "Vi behöver först fjäderkonstanten k.",
+   "s": 163.19,
+   "e": 166.62
+  },
+  {
+   "t": "Med Hookes lag:",
+   "s": 166.62,
+   "e": 175.68
+  },
+  {
+   "t": "kraften F är lika med k gånger delta hävarmen l vilket är ekvivalent med att k är lika med F delat med delta l",
+   "s": 166.62,
+   "e": 175.68
+  },
+  {
+   "t": "kraften F är lika med massan m gånger tyngdfaktorn g som är lika med 0,100 gånger 9,82 som är lika med 0,982 newton delta hävarmen l som är lika med 9,0 centimeter som är lika med 0,090 meter",
+   "s": 175.68,
+   "e": 190.57
+  },
+  {
+   "t": "k är lika med 0,982 delat med 0,090 som är lika med 10,911 ldots newton per meter",
+   "s": 190.57,
+   "e": 199.18
+  },
+  {
+   "t": "Insättning av massan m är lika med 0,100 kilogram och k är lika med 10,911 ldots N/m i ekvation 1 ger",
+   "s": 199.18,
+   "e": 208.54
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur 0,100 delat med 10,911 ldots som är lika med 0,601 ldots sekund som är ungefär lika med 0,60 sekund",
+   "s": 208.54,
+   "e": 220.76
+  },
+  {
+   "t": "Svar: 0,60 sekunder",
+   "s": 220.76,
+   "e": 224.4
+  },
+  {
+   "t": "Exempel 2 — Vilken massa ger önskad period?",
+   "s": 224.4,
+   "e": 228.35
+  },
+  {
+   "t": "En fjäder har fjäderkonstanten 0,14 kilonewton/m.",
+   "s": 228.35,
+   "e": 233.79
+  },
+  {
+   "t": "Hur stor massa ska den belastas med för att svängningstiden ska bli 0,20 sekunder?",
+   "s": 233.79,
+   "e": 239.72
+  },
+  {
+   "t": "Vi ställer upp formeln för perioden och löser ut massan m.",
+   "s": 239.72,
+   "e": 247.75
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur massan m delat med k",
+   "s": 239.72,
+   "e": 247.75
+  },
+  {
+   "t": "Vi kvadrerar båda led för att få bort rottecknet och löser ut m.",
+   "s": 247.75,
+   "e": 262.16
+  },
+  {
+   "t": "periodtiden T i kvadrat är lika med 4 pi i kvadrat gånger massan m delat med k vilket är ekvivalent med att m är lika med T i kvadrat gånger k delat med 4 pi i kvadrat",
+   "s": 247.75,
+   "e": 262.16
+  },
+  {
+   "t": "periodtiden T är lika med 0,20 sekund k som är lika med 0,14 kilonewton per meter som är lika med 140 newton per meter",
+   "s": 262.16,
+   "e": 271.52
+  },
+  {
+   "t": "massan m är lika med 0,20 i kvadrat gånger 140 delat med 4 pi i kvadrat som är lika med 0,141 ldots kilogram som är ungefär lika med 0,14 kilogram som är lika med 140 gram",
+   "s": 271.52,
+   "e": 285.43
+  },
+  {
+   "t": "Svar: 0,14 kilogram (140 gram)",
+   "s": 285.43,
+   "e": 290.55
+  }
+ ]
+}

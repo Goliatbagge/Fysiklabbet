@@ -1,0 +1,268 @@
+{
+ "id": "fy1-4.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "042d3f9ce6eb5d5331bcf7c27035a1e137ea4669",
+ "dur": 330.78,
+ "segments": [
+  {
+   "t": "Verkningsgrad",
+   "s": 0.1,
+   "e": 2.34
+  },
+  {
+   "t": "Introduktion — Verkningsgrad",
+   "s": 2.29,
+   "e": 5.19
+  },
+  {
+   "t": "Varför blir gamla glödlampor varma och inte LED-lampor?",
+   "s": 5.19,
+   "e": 9.36
+  },
+  {
+   "t": "90 procent av energin som vi betalar för i gamla glödlampor kommer ut i en frekvens som vi inte kan se och är totalt värdelös.",
+   "s": 9.36,
+   "e": 17.62
+  },
+  {
+   "t": "Vilken frekvens sänder de ut så mycket av då?",
+   "s": 17.62,
+   "e": 21.59
+  },
+  {
+   "t": "Jo, infrarött som vi inte kan se, men upplever som varmt.",
+   "s": 21.59,
+   "e": 26.6
+  },
+  {
+   "t": "Vad LED-lampor gör är att de tar all energi som vi behöver och vill ha i en glödlampa och lägger nästan allt av den i det synliga ljusspektrumet.",
+   "s": 26.6,
+   "e": 34.99
+  },
+  {
+   "t": "Då behöver den inte 60 watt utan bara 3–5 watt eftersom all energi går till synligt ljus!",
+   "s": 34.99,
+   "e": 41.83
+  },
+  {
+   "t": "LED-lampor använder sin energi mer effektivt och har en högre verkningsgrad än glödlampor.",
+   "s": 41.83,
+   "e": 48.04
+  },
+  {
+   "t": "En apparat kan inte avge mer energi än den tar emot (annars skulle vi kunna skapa energi).",
+   "s": 48.04,
+   "e": 54.54
+  },
+  {
+   "t": "Däremot kan energi \"förloras\" till andra energiformer som vi inte kan utnyttja.",
+   "s": 54.54,
+   "e": 60.19
+  },
+  {
+   "t": "Effektiviteten hos en apparat kallas verkningsgrad, betecknas η (lilla grekiska bokstaven \"eta\"), är ett tal mellan 0 och 1 och saknar enhet.",
+   "s": 60.19,
+   "e": 69.79
+  },
+  {
+   "t": "Verkningsgraden anger hur stor andel (hur många procent) av den energi som tillförs som blir nyttig energi.",
+   "s": 69.79,
+   "e": 77.2
+  },
+  {
+   "t": "Om man har en apparat med verkningsgraden 0,50 är lika med 50 procent betyder det att den kan omvandla hälften av den tillförda energin, så att den gör något nyttigt.",
+   "s": 77.2,
+   "e": 87.42
+  },
+  {
+   "t": "Om den har verkningsgraden 0 är lika med 0 procent gör den ingen nytta alls och om den har verkningsgraden 1 är lika med 100 procent omvandlar den all tillförd energi till nyttig energi.",
+   "s": 87.42,
+   "e": 98.34
+  },
+  {
+   "t": "Den energi som inte blir nyttig går oftast förlorad som värme.",
+   "s": 98.34,
+   "e": 102.96
+  },
+  {
+   "t": "Verkningsgrad",
+   "s": 102.96,
+   "e": 105.21
+  },
+  {
+   "t": "eta är lika med E n delat med E tiden t eller eta som är lika med P n delat med P t",
+   "s": 105.21,
+   "e": 111.64
+  },
+  {
+   "t": "där",
+   "s": 111.64,
+   "e": 113.1
+  },
+  {
+   "t": "η är lika med verkningsgrad, 0 ≤ η ≤ 1",
+   "s": 113.1,
+   "e": 116.69
+  },
+  {
+   "t": "E n är lika med nyttig energi",
+   "s": 116.69,
+   "e": 120.09
+  },
+  {
+   "t": "E tiden t är lika med tillförd energi",
+   "s": 120.09,
+   "e": 123.75
+  },
+  {
+   "t": "P n är lika med nyttig effekt",
+   "s": 123.75,
+   "e": 127.08
+  },
+  {
+   "t": "P tiden t är lika med tillförd effekt",
+   "s": 127.08,
+   "e": 130.8
+  },
+  {
+   "t": "Exempel på verkningsgrader:",
+   "s": 130.8,
+   "e": 137.18
+  },
+  {
+   "t": "Exempel 1 — Verkningsgrad hos en motor (E)",
+   "s": 130.8,
+   "e": 137.18
+  },
+  {
+   "t": "Bestäm verkningsgraden hos en motor om vi tillför den energin 252 kilojoule och får ut 88 kilojoule i rörelseenergi.",
+   "s": 137.18,
+   "e": 146.01
+  },
+  {
+   "t": "eta är lika med E n delat med E tiden t",
+   "s": 146.01,
+   "e": 154.79
+  },
+  {
+   "t": "E n är lika med 88 kilojoule E tiden t som är lika med 252 kilojoule",
+   "s": 146.01,
+   "e": 154.79
+  },
+  {
+   "t": "eta är lika med 88 delat med 252 som är lika med 0,349 ldots som är ungefär lika med 0,35 som är lika med 35 procent",
+   "s": 154.79,
+   "e": 165.71
+  },
+  {
+   "t": "Svar: 0,35 eller 35 procent",
+   "s": 165.71,
+   "e": 170.25
+  },
+  {
+   "t": "Exempel 2 — Hissens verkningsgrad (coulomb)",
+   "s": 170.25,
+   "e": 174.47
+  },
+  {
+   "t": "En hiss som lyfter 220 kilogram till höjden 15 meter förbrukar energin 43 kilojoule.",
+   "s": 174.47,
+   "e": 181.71
+  },
+  {
+   "t": "Bestäm hissens verkningsgrad.",
+   "s": 181.71,
+   "e": 184.72
+  },
+  {
+   "t": "eta är lika med E n delat med E tiden t",
+   "s": 184.72,
+   "e": 188.76
+  },
+  {
+   "t": "Den nyttiga energin är den som går åt för att lyfta hissen 15 meter och ge den lägesenergi.",
+   "s": 188.76,
+   "e": 195.01
+  },
+  {
+   "t": "E n är lika med delta E trycket p som är lika med massan m gånger tyngdfaktorn g gånger höjden h som är lika med 220 gånger 9,82 gånger 15 som är lika med 32 406 joule E tiden t som är lika med 43 kilojoule som är lika med 43 gånger 10 i kubik joule som är lika med 43 000 joule",
+   "s": 195.01,
+   "e": 214.65
+  },
+  {
+   "t": "eta är lika med 32 406 delat med 43 000 som är lika med 0,753 ldots som är ungefär lika med 0,75 som är lika med 75 procent",
+   "s": 214.65,
+   "e": 226.46
+  },
+  {
+   "t": "Svar: 0,75 eller 75 procent",
+   "s": 226.46,
+   "e": 230.89
+  },
+  {
+   "t": "Exempel 3 — Kraftverkets effekt (ampere)",
+   "s": 230.89,
+   "e": 235.1
+  },
+  {
+   "t": "Ett kraftverk har en fallhöjd på 107 meter.",
+   "s": 235.1,
+   "e": 239.46
+  },
+  {
+   "t": "Varje sekund passerar 275 ton vatten turbinerna.",
+   "s": 239.46,
+   "e": 244.32
+  },
+  {
+   "t": "Turbinernas verkningsgrad är 0,92.",
+   "s": 244.32,
+   "e": 248.28
+  },
+  {
+   "t": "Hur stor effekt kan kraftverket leverera?",
+   "s": 248.28,
+   "e": 252.0
+  },
+  {
+   "t": "Vi ställer upp formeln för verkningsgrad och löser ut den nyttiga effekten P n .",
+   "s": 252.0,
+   "e": 257.59
+  },
+  {
+   "t": "eta är lika med P n delat med P tiden t vilket är ekvivalent med att P n är lika med eta gånger P t",
+   "s": 257.59,
+   "e": 265.16
+  },
+  {
+   "t": "På tiden t är lika med 1 sekund tillförs energin från lägesenergin hos 275 ton vatten, dvs.",
+   "s": 265.16,
+   "e": 288.02
+  },
+  {
+   "t": "E tiden t är lika med massan m gånger tyngdfaktorn g gånger höjden h som är lika med 275 000 kilogram gånger 9,82 newton per kilogram gånger 107 meter som är lika med 2,889 ldots gånger 10 upphöjt till 8 joule",
+   "s": 265.16,
+   "e": 288.02
+  },
+  {
+   "t": "P tiden t är lika med E t delat med t som är lika med 2,889 ldots gånger 10 upphöjt till 8 joule delat med 1 sekund som är lika med 2,889 ldots gånger 10 upphöjt till 8 watt",
+   "s": 288.02,
+   "e": 301.32
+  },
+  {
+   "t": "Med η är lika med 0,92 ger detta",
+   "s": 301.32,
+   "e": 305.09
+  },
+  {
+   "t": "P n är lika med 0,92 gånger 2,889 ldots gånger 10 upphöjt till 8 som är lika med 2,658 ldots gånger 10 upphöjt till 8 watt som är ungefär lika med 2,7 gånger 10 upphöjt till 8 watt som är lika med 0,27 gigawatt",
+   "s": 305.09,
+   "e": 324.37
+  },
+  {
+   "t": "Svar: 2,7 gånger 10 upphöjt till 8 watt eller 0,27 gigawatt",
+   "s": 324.32,
+   "e": 330.78
+  }
+ ]
+}

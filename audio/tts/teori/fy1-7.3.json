@@ -1,0 +1,328 @@
+{
+ "id": "fy1-7.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5d82d4c335184a39f1414ae7733db51b5a98c3b0",
+ "dur": 352.51,
+ "segments": [
+  {
+   "t": "Elektrisk ström",
+   "s": 0.1,
+   "e": 2.45
+  },
+  {
+   "t": "Ordkunskap — Elektrodynamik och elektrostatik",
+   "s": 2.4,
+   "e": 6.67
+  },
+  {
+   "t": "Läran om laddningar i vila kallas elektrostatik.",
+   "s": 6.67,
+   "e": 11.12
+  },
+  {
+   "t": "Läran om laddningar i rörelse, som vi nu ska studera, kallas elektrodynamik.",
+   "s": 11.12,
+   "e": 17.19
+  },
+  {
+   "t": "Den laddning, oftast i form av elektroner, som passerar en tvärsnittsyta på en viss tid kallas elektrisk ström, betecknas I och har SI-enheten A (ampere).",
+   "s": 17.19,
+   "e": 27.9
+  },
+  {
+   "t": "För att få ström krävs alltså rörliga laddningar och ett elektriskt fält som får dem i rörelse.",
+   "s": 27.9,
+   "e": 33.85
+  },
+  {
+   "t": "Ett elektriskt fält fås genom att koppla en ledare till en spänningskälla, till exempel ett batteri, som genererar fältet i ledaren.",
+   "s": 33.85,
+   "e": 41.92
+  },
+  {
+   "t": "Strömmens riktning definieras i samma riktning som det elektriska fältet, som i sin tur definieras från plus till minus (detta beroende på att det i tidiga experiment användes positiva vätekärnor som rörde sig från plus till minus).",
+   "s": 41.92,
+   "e": 55.67
+  },
+  {
+   "t": "Detta medför att strömmens riktning är motsatt elektronernas riktning.",
+   "s": 55.67,
+   "e": 60.7
+  },
+  {
+   "t": "Strömmens riktning ritas alltså från pluspol till minuspol.",
+   "s": 60.7,
+   "e": 65.46
+  },
+  {
+   "t": "Elektrisk ström",
+   "s": 65.46,
+   "e": 67.78
+  },
+  {
+   "t": "strömmen I är lika med laddningen Q delat med tiden t",
+   "s": 67.78,
+   "e": 72.22
+  },
+  {
+   "t": "där",
+   "s": 72.22,
+   "e": 73.69
+  },
+  {
+   "t": "I är lika med ström (ampere)",
+   "s": 73.69,
+   "e": 76.65
+  },
+  {
+   "t": "Q är lika med laddning (coulomb)",
+   "s": 76.65,
+   "e": 80.04
+  },
+  {
+   "t": "t är lika med tid (sekunder)",
+   "s": 80.04,
+   "e": 83.31
+  },
+  {
+   "t": "Elektronerna (blå) rör sig från minus till plus.",
+   "s": 83.31,
+   "e": 87.67
+  },
+  {
+   "t": "Strömmens riktning (röd) definieras tvärtom — från plus till minus.",
+   "s": 87.67,
+   "e": 93.16
+  },
+  {
+   "t": "Elektroners hastighet",
+   "s": 93.16,
+   "e": 95.97
+  },
+  {
+   "t": "Elektronernas drifthastighet är ca 0,1 millimeter/s (långsam), men det elektriska fältet utbreder sig med ljusets hastighet och sätter fart på alla elektronerna nästan samtidigt.",
+   "s": 95.97,
+   "e": 108.46
+  },
+  {
+   "t": "Laddningen som finns i ett batteri är ofta angiven i Ah (amperetimmar).",
+   "s": 108.46,
+   "e": 113.86
+  },
+  {
+   "t": "Det kan därför vara bra att kunna växla mellan Ah och SI-enheten C (coulomb).",
+   "s": 113.86,
+   "e": 119.56
+  },
+  {
+   "t": "Andra enheter för laddning",
+   "s": 119.56,
+   "e": 122.4
+  },
+  {
+   "t": "1 As (amperesekund) är lika med 1 coulomb",
+   "s": 122.4,
+   "e": 126.6
+  },
+  {
+   "t": "1 Ah (amperetimme) är lika med 3 600 coulomb (OBS!",
+   "s": 126.6,
+   "e": 132.14
+  },
+  {
+   "t": "Finns inte med i formelbladet.)",
+   "s": 132.14,
+   "e": 135.4
+  },
+  {
+   "t": "Enheter för laddning",
+   "s": 135.4,
+   "e": 138.04
+  },
+  {
+   "t": "Sedan tidigare har vi att SI-enheten för laddning är C (coulomb).",
+   "s": 138.04,
+   "e": 143.18
+  },
+  {
+   "t": "Om vi löser ut laddningen Q från formeln för elektrisk ström får vi",
+   "s": 143.18,
+   "e": 148.26
+  },
+  {
+   "t": "laddningen Q är lika med strömmen I gånger tiden t",
+   "s": 148.26,
+   "e": 152.49
+  },
+  {
+   "t": "Om vi gör en enhetsanalys ser vi att laddning uttryckt i grundenheter är",
+   "s": 152.49,
+   "e": 157.72
+  },
+  {
+   "t": "laddningen Q är lika med strömmen I gånger tiden t som är lika med 1 ampere gånger 1 sekund som är lika med 1 As som är lika med 1 coulomb",
+   "s": 157.72,
+   "e": 166.14
+  },
+  {
+   "t": "Så 1 As (amperesekund) är lika med 1 coulomb.",
+   "s": 166.14,
+   "e": 170.72
+  },
+  {
+   "t": "Om vi vill göra om laddningen i Ah till C gör vi nedanstående omvandling.",
+   "s": 170.72,
+   "e": 175.74
+  },
+  {
+   "t": "1 Ah är lika med 1 ampere gånger 1 timme som är lika med 1 ampere gånger 3 600 sekund som är lika med 3 600 As som är lika med 3 600 coulomb",
+   "s": 175.74,
+   "e": 186.85
+  },
+  {
+   "t": "Så 1 Ah är lika med 3 600 coulomb.",
+   "s": 186.85,
+   "e": 191.19
+  },
+  {
+   "t": "Strömmar kan aldrig \"fastna\" i en krets, utan har ett jämnt flöde in och ut från en punkt, vilket sammanfattas i Kirchhoffs första lag.",
+   "s": 191.19,
+   "e": 199.75
+  },
+  {
+   "t": "Kirchhoffs första lag",
+   "s": 199.75,
+   "e": 202.24
+  },
+  {
+   "t": "Summan av alla strömmar in i en punkt är lika stor som summan av alla strömmar ut från samma punkt.",
+   "s": 202.24,
+   "e": 208.62
+  },
+  {
+   "t": "sum I i n är lika med sum I u tiden t",
+   "s": 208.62,
+   "e": 212.9
+  },
+  {
+   "t": "I en förgreningspunkt är summan av strömmarna in lika med summan ut.",
+   "s": 212.9,
+   "e": 218.09
+  },
+  {
+   "t": "En ledare där all ström går kallas för huvudledning.",
+   "s": 218.09,
+   "e": 222.31
+  },
+  {
+   "t": "En ledare som har förgrenats från en huvudledning kallas grenledning.",
+   "s": 222.31,
+   "e": 227.36
+  },
+  {
+   "t": "Ström och farlighet",
+   "s": 227.36,
+   "e": 229.9
+  },
+  {
+   "t": "Exempel 1 — Antal elektroner per sekund",
+   "s": 229.9,
+   "e": 233.9
+  },
+  {
+   "t": "Hur många elektroner passerar ett tvärsnitt varje sekund vid strömmen 0,24 ampere?",
+   "s": 233.9,
+   "e": 240.1
+  },
+  {
+   "t": "Vi börjar med att beräkna den totala laddningen som passerar varje sekund.",
+   "s": 240.1,
+   "e": 245.21
+  },
+  {
+   "t": "strömmen I är lika med laddningen Q delat med tiden t vilket är ekvivalent med att Q är lika med I gånger t",
+   "s": 245.21,
+   "e": 257.23
+  },
+  {
+   "t": "strömmen I är lika med 0,24 ampere tiden t som är lika med 1,00 sekund",
+   "s": 245.21,
+   "e": 257.23
+  },
+  {
+   "t": "laddningen Q är lika med 0,24 gånger 1,00 som är lika med 0,24 coulomb",
+   "s": 257.23,
+   "e": 264.56
+  },
+  {
+   "t": "Antalet elektroner n fås genom att dividera den totala laddningen Q med laddningen hos en elektron q e .",
+   "s": 264.56,
+   "e": 271.8
+  },
+  {
+   "t": "n är lika med laddningen Q delat med q e",
+   "s": 271.8,
+   "e": 282.8
+  },
+  {
+   "t": "laddningen Q är lika med 0,24 coulomb q e som är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb",
+   "s": 271.8,
+   "e": 282.8
+  },
+  {
+   "t": "n är lika med 0,24 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 1,498 ldots gånger 10 upphöjt till 18 st som är ungefär lika med 1,5 gånger 10 upphöjt till 18 st",
+   "s": 282.8,
+   "e": 302.06
+  },
+  {
+   "t": "Svar: 1,5 gånger 10 upphöjt till 18 st",
+   "s": 282.8,
+   "e": 302.06
+  },
+  {
+   "t": "Exempel 2 — Kirchhoffs första lag",
+   "s": 282.8,
+   "e": 302.06
+  },
+  {
+   "t": "Bestäm I två om I ett är lika med 0,25 ampere och I tre är lika med 0,08 ampere.",
+   "s": 302.06,
+   "e": 310.77
+  },
+  {
+   "t": "I ett in från vänster, I två ut åt höger, I tre ned i knutpunkten.",
+   "s": 310.72,
+   "e": 316.57
+  },
+  {
+   "t": "Summan av de ingående strömmarna till punkten ska vara lika med summan av de utgående strömmarna från punkten enligt Kirchhoffs första lag.",
+   "s": 316.57,
+   "e": 324.73
+  },
+  {
+   "t": "Vi ställer upp det sambandet och löser ut strömmen I två .",
+   "s": 324.73,
+   "e": 329.09
+  },
+  {
+   "t": "I ett är lika med I två plus I tre vilket är ekvivalent med att I två är lika med I ett minus I tre",
+   "s": 329.09,
+   "e": 336.14
+  },
+  {
+   "t": "I ett är lika med 0,25 ampere I tre som är lika med 0,08 ampere",
+   "s": 336.14,
+   "e": 342.47
+  },
+  {
+   "t": "I två är lika med 0,25 minus 0,08 som är lika med 0,17 ampere",
+   "s": 342.47,
+   "e": 349.13
+  },
+  {
+   "t": "Svar: 0,17 ampere",
+   "s": 349.13,
+   "e": 352.51
+  }
+ ]
+}

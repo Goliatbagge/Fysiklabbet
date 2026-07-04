@@ -1,0 +1,173 @@
+{
+ "id": "fy2-3.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8d03553497743f5d5ce8b309baa4235ab85a8639",
+ "dur": 185.0,
+ "segments": [
+  {
+   "t": "Magnetfält i spole",
+   "s": 0.1,
+   "e": 2.7
+  },
+  {
+   "t": "Sedan tidigare har vi konstaterat att det bildas ett magnetiskt fält runt en strömförande ledare, och vi har räknat på fältet från en lång rak ledare.",
+   "s": 2.65,
+   "e": 11.71
+  },
+  {
+   "t": "Om vi formar en ledare till en cirkel bildas en slinga.",
+   "s": 11.71,
+   "e": 16.01
+  },
+  {
+   "t": "Magnetfältet från slingans olika delar samverkar och skapar ett starkare magnetfält inuti slingan.",
+   "s": 16.01,
+   "e": 22.66
+  },
+  {
+   "t": "Vänster: varje del av ledaren ger ett uppåtriktat fält inuti slingan.",
+   "s": 22.66,
+   "e": 28.21
+  },
+  {
+   "t": "Höger: slingan sedd rakt från sidan.",
+   "s": 28.21,
+   "e": 31.84
+  },
+  {
+   "t": "Om vi sätter ihop flera slingor bildar vi en spole, och inuti den uppstår ett ännu starkare magnetfält.",
+   "s": 31.84,
+   "e": 38.96
+  },
+  {
+   "t": "Om vi konstruerar spolen så att den blir lång och rak kallas den solenoid.",
+   "s": 38.96,
+   "e": 44.19
+  },
+  {
+   "t": "Inuti en lång rak spole betraktas magnetfältet som homogent — lika stort överallt.",
+   "s": 44.19,
+   "e": 50.59
+  },
+  {
+   "t": "Flera slingor bildar en spole.",
+   "s": 50.59,
+   "e": 53.66
+  },
+  {
+   "t": "Inuti spolen är fältet homogent.",
+   "s": 53.66,
+   "e": 57.14
+  },
+  {
+   "t": "Tumregeln för spole",
+   "s": 57.14,
+   "e": 59.56
+  },
+  {
+   "t": "Det magnetiska fältets riktning genom en spole bestäms enklast med ytterligare en tumregel.",
+   "s": 59.56,
+   "e": 65.75
+  },
+  {
+   "t": "Vi låter fingrarna på högerhanden motsvara strömmens riktning runt spolen.",
+   "s": 65.75,
+   "e": 71.15
+  },
+  {
+   "t": "Tummen ger då riktningen på det magnetiska fältet.",
+   "s": 71.15,
+   "e": 75.01
+  },
+  {
+   "t": "Fingrarna motsvarar strömriktningen och tummen magnetfältets riktning.",
+   "s": 75.01,
+   "e": 80.09
+  },
+  {
+   "t": "Magnetisk flödestäthet i lång rak spole (solenoid)",
+   "s": 80.09,
+   "e": 85.12
+  },
+  {
+   "t": "B är lika med my noll gånger n gånger strömmen I delat med hävarmen l",
+   "s": 85.12,
+   "e": 90.35
+  },
+  {
+   "t": "där",
+   "s": 90.35,
+   "e": 91.86
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet (tesla)",
+   "s": 91.86,
+   "e": 96.41
+  },
+  {
+   "t": "my noll är lika med permeabiliteten i vakuum ( 4 pi gånger 10 upphöjt till minus 7 tesla·m/A)",
+   "s": 96.41,
+   "e": 104.74
+  },
+  {
+   "t": "n är lika med varvtal (antal varv i spolen)",
+   "s": 104.74,
+   "e": 108.96
+  },
+  {
+   "t": "I är lika med ström genom spolen (ampere)",
+   "s": 108.96,
+   "e": 112.81
+  },
+  {
+   "t": "l är lika med spolens längd (meter)",
+   "s": 112.81,
+   "e": 116.44
+  },
+  {
+   "t": "När vi låter en ström gå genom en spole bildas alltså ett magnetfält på samma sätt som runt en stavmagnet — vi har skapat en elektromagnet.",
+   "s": 116.44,
+   "e": 124.92
+  },
+  {
+   "t": "Elektromagneter har fördelen att man kan justera storlek och riktning på fältet genom att reglera strömmen.",
+   "s": 124.92,
+   "e": 131.74
+  },
+  {
+   "t": "Nackdelen är att den kräver energi.",
+   "s": 131.74,
+   "e": 135.21
+  },
+  {
+   "t": "Exempel 1 — Magnetisk flödestäthet i en spole",
+   "s": 135.21,
+   "e": 139.69
+  },
+  {
+   "t": "Beräkna den magnetiska flödestätheten i en 600-varvsspole som är 7,5 centimeter lång, om vi ger den strömmen 1,5 ampere.",
+   "s": 139.69,
+   "e": 148.79
+  },
+  {
+   "t": "B är lika med my noll gånger n gånger strömmen I delat med hävarmen l",
+   "s": 148.79,
+   "e": 167.18
+  },
+  {
+   "t": "my noll är lika med 4 pi gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere n som är lika med 600 strömmen I som är lika med 1,5 ampere hävarmen l som är lika med 7,5 centimeter som är lika med 0,075 meter",
+   "s": 148.79,
+   "e": 167.18
+  },
+  {
+   "t": "B är lika med 4 pi gånger 10 upphöjt till minus 7 gånger 600 gånger 1,5 delat med 0,075 som är lika med 0,0150 ldots tesla som är ungefär lika med 0,015 tesla som är lika med 15 mT",
+   "s": 167.18,
+   "e": 182.05
+  },
+  {
+   "t": "Svar: 15 mT",
+   "s": 182.05,
+   "e": 185.0
+  }
+ ]
+}

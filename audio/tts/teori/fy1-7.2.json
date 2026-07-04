@@ -1,0 +1,268 @@
+{
+ "id": "fy1-7.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "3d5129b56ca1ef8ccbb6bee640b180ac514c056a",
+ "dur": 352.33,
+ "segments": [
+  {
+   "t": "Krafter mellan laddningar och Coulombs lag",
+   "s": 0.1,
+   "e": 3.64
+  },
+  {
+   "t": "Den elektriska kraften som två laddade föremål påverkar varandra med beräknas med Coulombs lag.",
+   "s": 3.59,
+   "e": 10.01
+  },
+  {
+   "t": "Ju större laddningar och ju kortare avstånd mellan dem desto större kraft.",
+   "s": 10.01,
+   "e": 14.99
+  },
+  {
+   "t": "OBS!",
+   "s": 14.99,
+   "e": 16.56
+  },
+  {
+   "t": "Om två laddade föremål påverkar varandra, så är den elektriska kraften lika stor på båda föremålen, men med olika riktning enligt Newtons tredje lag.",
+   "s": 16.56,
+   "e": 26.06
+  },
+  {
+   "t": "Detta gäller även om den ena laddningen skulle vara större än den andra. (Jämför med Newtons gravitationslag: jordklotet drar ner dig med en viss kraft och du drar upp jorden med samma kraft, trots att ni har olika massor.)",
+   "s": 26.06,
+   "e": 40.6
+  },
+  {
+   "t": "Coulombs lag",
+   "s": 40.6,
+   "e": 42.67
+  },
+  {
+   "t": "kraften F är lika med k gånger | Q ett | gånger | Q två | delat med r i kvadrat",
+   "s": 42.67,
+   "e": 48.6
+  },
+  {
+   "t": "där",
+   "s": 48.6,
+   "e": 50.08
+  },
+  {
+   "t": "F är lika med elektrisk kraft (newton)",
+   "s": 50.08,
+   "e": 54.09
+  },
+  {
+   "t": "k är lika med Coulombs konstant är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton·m i kvadrat/C i kvadrat",
+   "s": 54.09,
+   "e": 63.91
+  },
+  {
+   "t": "| Q ett | , | Q två | är lika med laddning 1 respektive laddning 2 (coulomb) — bortse från tecken",
+   "s": 63.91,
+   "e": 71.08
+  },
+  {
+   "t": "r är lika med avstånd mellan laddning 1 och laddning 2 (meter)",
+   "s": 71.08,
+   "e": 76.16
+  },
+  {
+   "t": "Kom ihåg: elementarladdningen är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb.",
+   "s": 76.16,
+   "e": 83.81
+  },
+  {
+   "t": "Vackra likheter",
+   "s": 83.81,
+   "e": 86.21
+  },
+  {
+   "t": "Det finns vackra likheter mellan Newtons gravitationslag och Coulombs lag.",
+   "s": 86.21,
+   "e": 91.42
+  },
+  {
+   "t": "Newtons gravitationslag har formen kraften F är lika med G gånger m ett m två delat med avståndet d i kvadrat och Coulombs lag har formen kraften F är lika med k gånger q ett q två delat med r i kvadrat — samma struktur, fast med massor respektive laddningar.",
+   "s": 91.42,
+   "e": 108.03
+  },
+  {
+   "t": "Tips från coachen #1",
+   "s": 108.03,
+   "e": 111.35
+  },
+  {
+   "t": "Vid beräkningar av den elektriska kraften F, så strunta i att sätta in laddningarnas tecken.",
+   "s": 111.35,
+   "e": 117.53
+  },
+  {
+   "t": "Om du ska bestämma kraftens riktning, så resonera utifrån laddningarnas tecken.",
+   "s": 117.53,
+   "e": 123.22
+  },
+  {
+   "t": "Lika tecken repellerar (stöter ifrån varandra) och olika tecken attraherar (dras mot varandra).",
+   "s": 123.22,
+   "e": 130.39
+  },
+  {
+   "t": "Tips från coachen #2",
+   "s": 130.39,
+   "e": 133.72
+  },
+  {
+   "t": "Ofta räknar vi med elektronens laddning, 1,602 gånger 10 upphöjt till minus 19 coulomb.",
+   "s": 133.72,
+   "e": 140.99
+  },
+  {
+   "t": "För att slippa skriva in det på räknaren varje gång kan vi lagra värdet i en variabel på räknaren.",
+   "s": 140.99,
+   "e": 147.11
+  },
+  {
+   "t": "Om vi lagrar värdet i t.ex. variabeln E (som i elektron), behöver vi bara slå \"E\" på räknaren för att använda värdet.",
+   "s": 147.11,
+   "e": 155.15
+  },
+  {
+   "t": "Exempel 1 — Två kulor 30 centimeter från varandra",
+   "s": 155.15,
+   "e": 159.8
+  },
+  {
+   "t": "Två kulor med laddningarna −5,0 nC respektive +3,0 nC placeras 30 centimeter från varandra.",
+   "s": 159.8,
+   "e": 168.01
+  },
+  {
+   "t": "Bestäm kraft och riktning på kulan som är",
+   "s": 168.01,
+   "e": 171.64
+  },
+  {
+   "t": "a) negativ",
+   "s": 171.64,
+   "e": 173.91
+  },
+  {
+   "t": "b) positiv",
+   "s": 173.91,
+   "e": 176.25
+  },
+  {
+   "t": "a) Vi ställer upp Coulombs lag.",
+   "s": 176.25,
+   "e": 179.41
+  },
+  {
+   "t": "kraften F är lika med k gånger Q ett gånger Q två delat med r i kvadrat",
+   "s": 179.41,
+   "e": 185.4
+  },
+  {
+   "t": "Q ett är lika med 5,0 nC som är lika med 5,0 gånger 10 upphöjt till minus 9 coulomb Q två som är lika med 3,0 nC som är lika med 3,0 gånger 10 upphöjt till minus 9 coulomb r som är lika med 30 centimeter som är lika med 0,30 meter k som är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton\\cdotm i kvadrat per coulomb i kvadrat",
+   "s": 185.4,
+   "e": 209.62
+  },
+  {
+   "t": "kraften F är lika med 8,99 gånger 10 upphöjt till 9 gånger 5,0 gånger 10 upphöjt till minus 9 gånger 3,0 gånger 10 upphöjt till minus 9 delat med 0,30 i kvadrat som är lika med 1,498 ldots gånger 10 upphöjt till minus 6 newton som är ungefär lika med 1,5 µN",
+   "s": 209.62,
+   "e": 229.0
+  },
+  {
+   "t": "Eftersom laddningarna har olika tecken kommer den negativa laddningen att dras åt den positiva laddningen.",
+   "s": 229.0,
+   "e": 235.59
+  },
+  {
+   "t": "Svar: 1,5 μN åt den positiva laddningen.",
+   "s": 235.59,
+   "e": 240.15
+  },
+  {
+   "t": "b) Enligt Newtons tredje lag kommer kraften på den positiva laddningen att bli densamma, men riktad åt den negativa laddningen.",
+   "s": 240.15,
+   "e": 248.47
+  },
+  {
+   "t": "Svar: 1,5 μN åt den negativa laddningen.",
+   "s": 248.47,
+   "e": 252.97
+  },
+  {
+   "t": "Exempel 2 — Hur ändras kraften?",
+   "s": 252.97,
+   "e": 256.24
+  },
+  {
+   "t": "Två laddade kulor påverkar varandra med en viss elektrisk kraft.",
+   "s": 256.24,
+   "e": 261.19
+  },
+  {
+   "t": "Hur förändras kraften om avståndet mellan kulorna halveras och laddningen hos den ena kulan fördubblas?",
+   "s": 261.19,
+   "e": 267.98
+  },
+  {
+   "t": "Vi saknar mätvärden, så vi löser uppgiften generellt.",
+   "s": 267.98,
+   "e": 272.64
+  },
+  {
+   "t": "Anta att laddningarna från början är Q ett och Q två och avståndet r.",
+   "s": 272.64,
+   "e": 277.98
+  },
+  {
+   "t": "Då gäller att den elektriska kraften från början F ett är",
+   "s": 277.98,
+   "e": 282.76
+  },
+  {
+   "t": "F ett är lika med k gånger Q ett gånger Q två delat med r i kvadrat",
+   "s": 282.76,
+   "e": 288.56
+  },
+  {
+   "t": "Om laddningen hos den ena kulan fördubblas gäller att Q ett fördubblas och blir parentesen 2 Q ett slut parentes .",
+   "s": 288.56,
+   "e": 296.12
+  },
+  {
+   "t": "Om avståndet halveras gäller att r halveras och blir r delat med 2 .",
+   "s": 296.12,
+   "e": 302.99
+  },
+  {
+   "t": "Vi beräknar den nya kraften F två genom att sätta in dessa uttryck i Coulombs lag och förenkla.",
+   "s": 302.94,
+   "e": 309.17
+  },
+  {
+   "t": "F två är lika med k gånger parentesen 2 Q ett slut parentes gånger Q två delat med parentesen r delat med 2 slut parentes i kvadrat som är lika med k gånger 2 gånger Q ett gånger Q två delat med r i kvadrat delat med 4 som är lika med k gånger 4 gånger 2 gånger Q ett gånger Q två delat med r i kvadrat som är lika med k gånger 8 gånger Q ett gånger Q två delat med r i kvadrat",
+   "s": 309.17,
+   "e": 333.93
+  },
+  {
+   "t": "Så F ett är lika med k gånger Q ett Q två delat med r i kvadrat och F två är lika med k gånger 8 gånger Q ett Q två delat med r i kvadrat .",
+   "s": 333.93,
+   "e": 343.85
+  },
+  {
+   "t": "Vi ser alltså att kraften efteråt F två blir 8 gånger så stor.",
+   "s": 343.85,
+   "e": 348.89
+  },
+  {
+   "t": "Svar: Den blir 8 gånger större.",
+   "s": 348.89,
+   "e": 352.33
+  }
+ ]
+}

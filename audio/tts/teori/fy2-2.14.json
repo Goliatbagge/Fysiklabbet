@@ -1,0 +1,303 @@
+{
+ "id": "fy2-2.14",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b326e9e0562cd86e95f28f63339f37c90b8ca75d",
+ "dur": 353.72,
+ "segments": [
+  {
+   "t": "Diffraktion och interferens",
+   "s": 0.1,
+   "e": 3.09
+  },
+  {
+   "t": "Diffraktion",
+   "s": 3.04,
+   "e": 5.04
+  },
+  {
+   "t": "Att vågor som möter ett hinder med en öppning böjs av vid kanterna kallas diffraktion.",
+   "s": 5.04,
+   "e": 10.55
+  },
+  {
+   "t": "Interferens",
+   "s": 10.55,
+   "e": 12.65
+  },
+  {
+   "t": "Att vågor påverkar varandra när de kolliderar kallas interferens.",
+   "s": 12.65,
+   "e": 17.65
+  },
+  {
+   "t": "Det uppstår till exempel när en våg möter ett hinder med flera öppningar.",
+   "s": 17.65,
+   "e": 22.64
+  },
+  {
+   "t": "Stråk (linjer) vid interferens där vågornas amplitud är 0 — det vill säga där vågpartiklarna är helt stilla — kallas nodlinjer.",
+   "s": 22.64,
+   "e": 31.29
+  },
+  {
+   "t": "På nodlinjer möts vågor i motfas (en vågtopp från ena öppningen möter alltid en vågdal från den andra).",
+   "s": 31.29,
+   "e": 38.7
+  },
+  {
+   "t": "Att två vågor tar ut varandra enligt superpositionsprincipen kallas destruktiv interferens.",
+   "s": 38.7,
+   "e": 45.3
+  },
+  {
+   "t": "Linjer mitt emellan nodlinjerna, där vågorna förstärker varandra maximalt, kallas maximilinjer.",
+   "s": 45.3,
+   "e": 52.0
+  },
+  {
+   "t": "Att två vågor förstärker varandra kallas konstruktiv interferens.",
+   "s": 52.0,
+   "e": 57.17
+  },
+  {
+   "t": "Demonstration — Lyssna efter nod- och maximilinjer",
+   "s": 57.17,
+   "e": 61.34
+  },
+  {
+   "t": "Koppla två högtalare i fas med långa labbsladdar till en tongenerator och ställ dem brett isär på ett bord, riktade ut mot klassrummet.",
+   "s": 61.34,
+   "e": 69.69
+  },
+  {
+   "t": "Starta en ton på ca 480 hertz och gå från den ena väggen tvärs över klassrummet till den andra.",
+   "s": 69.69,
+   "e": 76.44
+  },
+  {
+   "t": "Lyssna efter tysta punkter (nodlinjer) och extra ljudliga punkter (maximilinjer).",
+   "s": 76.44,
+   "e": 83.06
+  },
+  {
+   "t": "Vägskillnad på max- och nodlinjer",
+   "s": 83.06,
+   "e": 86.3
+  },
+  {
+   "t": "Vägskillnaden mellan en punkt på en",
+   "s": 86.3,
+   "e": 89.74
+  },
+  {
+   "t": "nodlinje till respektive öppning är ett halvt antal våglängder: våglängden lambda delat med 2, 3 lambda delat med 2, 5 lambda delat med 2, ldots (vågorna träffas i motfas).",
+   "s": 89.74,
+   "e": 102.16
+  },
+  {
+   "t": "maximilinje till respektive öppning är ett helt antal våglängder: 0, våglängden lambda, 2 lambda, 3 lambda, ldots (vågorna träffas i fas).",
+   "s": 102.16,
+   "e": 113.53
+  },
+  {
+   "t": "Konstruktiv interferens (på maximilinjer)",
+   "s": 113.53,
+   "e": 117.58
+  },
+  {
+   "t": "delta sträckan s är lika med n gånger våglängden lambda",
+   "s": 117.58,
+   "e": 122.15
+  },
+  {
+   "t": "där",
+   "s": 122.15,
+   "e": 123.62
+  },
+  {
+   "t": "Δs är lika med vägskillnad (meter)",
+   "s": 123.62,
+   "e": 127.2
+  },
+  {
+   "t": "n är lika med maximilinjens ordningsnummer (0, 1, 2, …)",
+   "s": 127.2,
+   "e": 132.97
+  },
+  {
+   "t": "λ är lika med våglängd (meter)",
+   "s": 132.97,
+   "e": 136.21
+  },
+  {
+   "t": "Destruktiv interferens (på nodlinjer)",
+   "s": 136.21,
+   "e": 140.05
+  },
+  {
+   "t": "delta sträckan s är lika med parentesen n plus 1 delat med 2 slut parentes gånger våglängden lambda",
+   "s": 140.05,
+   "e": 147.69
+  },
+  {
+   "t": "där",
+   "s": 147.69,
+   "e": 149.2
+  },
+  {
+   "t": "Δs är lika med vägskillnad (meter)",
+   "s": 149.2,
+   "e": 152.79
+  },
+  {
+   "t": "n är lika med nodlinjens ordningsnummer (0, 1, 2, …)",
+   "s": 152.79,
+   "e": 158.35
+  },
+  {
+   "t": "λ är lika med våglängd (meter)",
+   "s": 158.35,
+   "e": 161.6
+  },
+  {
+   "t": "Exempel 1 — Två högtalare och första tysta punkten",
+   "s": 161.6,
+   "e": 165.95
+  },
+  {
+   "t": "Två högtalare A och B står 12 meter från en vägg och skickar ut en ton i fas.",
+   "s": 165.95,
+   "e": 172.12
+  },
+  {
+   "t": "Se figur.",
+   "s": 172.12,
+   "e": 174.18
+  },
+  {
+   "t": "När vi går från punkten C (på mittlinjen mellan A och B) till punkten E minskar ljudstyrkan för att nå ett minimum vid D (mitt emot högtalare B).",
+   "s": 174.18,
+   "e": 184.39
+  },
+  {
+   "t": "Därefter ökar ljudstyrkan när vi fortsätter gå från D mot E.",
+   "s": 184.39,
+   "e": 189.75
+  },
+  {
+   "t": "Vilken frekvens hade tonen som sändes ut från högtalarna?",
+   "s": 189.75,
+   "e": 194.35
+  },
+  {
+   "t": "Vi löser ut frekvensen från formeln för våghastighet hastigheten v är lika med frekvensen f gånger våglängden lambda :",
+   "s": 194.35,
+   "e": 206.82
+  },
+  {
+   "t": "frekvensen f är lika med hastigheten v delat med våglängden lambda, ekvation 1",
+   "s": 194.35,
+   "e": 206.82
+  },
+  {
+   "t": "hastigheten v är lika med 340 meter per sekund parentesen ljudetshastighetiluft slut parentes våglängden lambda som är lika med ?",
+   "s": 206.82,
+   "e": 216.32
+  },
+  {
+   "t": "Vi måste bestämma våglängden λ.",
+   "s": 216.32,
+   "e": 219.18
+  },
+  {
+   "t": "Vid C (mitt emellan A och B) är vi på 0:e maximilinjen.",
+   "s": 219.18,
+   "e": 224.43
+  },
+  {
+   "t": "När vi kommer till D når vi vårt första minimum — då är vi på 0:e nodlinjen och har destruktiv interferens.",
+   "s": 224.43,
+   "e": 231.84
+  },
+  {
+   "t": "Vi ställer upp formeln för destruktiv interferens och löser ut λ:",
+   "s": 231.84,
+   "e": 248.1
+  },
+  {
+   "t": "delta sträckan s är lika med parentesen n plus 1 delat med 2 slut parentes gånger våglängden lambda vilket är ekvivalent med att lambda är lika med delta s delat med n plus 1 delat med 2, ekvation 2",
+   "s": 231.84,
+   "e": 248.1
+  },
+  {
+   "t": "delta sträckan s är lika med ? n som är lika med 0 parentesen viärpå0:enodlinjen slut parentes",
+   "s": 248.1,
+   "e": 256.81
+  },
+  {
+   "t": "Vi måste bestämma Δs.",
+   "s": 256.81,
+   "e": 259.4
+  },
+  {
+   "t": "För vägskillnaden gäller",
+   "s": 259.4,
+   "e": 262.11
+  },
+  {
+   "t": "delta sträckan s är lika med arean A D minus B D, ekvation 3",
+   "s": 262.11,
+   "e": 269.06
+  },
+  {
+   "t": "Med Pythagoras sats: arean A D i kvadrat är lika med A B i kvadrat plus B D i kvadrat .",
+   "s": 269.06,
+   "e": 277.65
+  },
+  {
+   "t": "Eftersom C är mitt mellan A och B och CD är lika med 3,2 meter gäller arean A B är lika med 2 gånger 3,2 som är lika med 6,4 meter.",
+   "s": 277.65,
+   "e": 288.46
+  },
+  {
+   "t": "arean A D är lika med roten ur A B i kvadrat plus B D i kvadrat som är lika med roten ur 6,4 i kvadrat plus 12 i kvadrat som är lika med 13,6 meter B D som är lika med 12 meter",
+   "s": 288.46,
+   "e": 303.18
+  },
+  {
+   "t": "Insättning i ekvation 3 ger",
+   "s": 303.18,
+   "e": 306.56
+  },
+  {
+   "t": "delta sträckan s är lika med parentesen 13,6 minus 12 slut parentes meter som är lika med 1,6 meter",
+   "s": 306.56,
+   "e": 316.75
+  },
+  {
+   "t": "Insättning av delta sträckan s är lika med 1,6 meter och n är lika med 0 i ekvation 2 ger",
+   "s": 316.7,
+   "e": 323.75
+  },
+  {
+   "t": "våglängden lambda är lika med 1,6 delat med 0 plus 1 delat med 2 som är lika med 3,2 meter",
+   "s": 323.75,
+   "e": 331.42
+  },
+  {
+   "t": "Insättning av våglängden lambda är lika med 3,2 meter och hastigheten v är lika med 340 meter per sekund i ekvation 1 ger",
+   "s": 331.42,
+   "e": 340.73
+  },
+  {
+   "t": "frekvensen f är lika med 340 delat med 3,2 som är lika med 106,25 hertz som är ungefär lika med 110 hertz",
+   "s": 340.73,
+   "e": 350.47
+  },
+  {
+   "t": "Svar: 110 hertz",
+   "s": 350.47,
+   "e": 353.72
+  }
+ ]
+}

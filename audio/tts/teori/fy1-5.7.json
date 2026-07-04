@@ -1,0 +1,113 @@
+{
+ "id": "fy1-5.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f82251d5af9d01984e18a310932549798f5ca543",
+ "dur": 127.66,
+ "segments": [
+  {
+   "t": "Pascals princip",
+   "s": 0.1,
+   "e": 2.56
+  },
+  {
+   "t": "En yttre kraft på en vätska orsakar en tryckökning som fortplantas i hela vätskan (på grund av att det är svårt att pressa ihop en vätska).",
+   "s": 2.51,
+   "e": 11.06
+  },
+  {
+   "t": "Detta gör att man kan förstärka krafter och utnyttjas i hydrauliska domkrafter.",
+   "s": 11.06,
+   "e": 16.6
+  },
+  {
+   "t": "En tryckökning i ena änden p ett av en hydraulisk domkraft fortplantas i hela vätskan så att tryckökningen i andra änden p två blir lika stor.",
+   "s": 16.6,
+   "e": 25.88
+  },
+  {
+   "t": "p ett är lika med p två så F ett delat med A ett som är lika med F två delat med A två",
+   "s": 25.88,
+   "e": 32.41
+  },
+  {
+   "t": "Pascals princip",
+   "s": 32.41,
+   "e": 34.83
+  },
+  {
+   "t": "F ett delat med A ett är lika med F två delat med A två",
+   "s": 34.83,
+   "e": 39.7
+  },
+  {
+   "t": "där",
+   "s": 39.7,
+   "e": 41.16
+  },
+  {
+   "t": "F ett , F två är lika med krafterna på respektive kolv (newton)",
+   "s": 41.16,
+   "e": 46.89
+  },
+  {
+   "t": "A ett , A två är lika med areorna hos respektive kolv (samma enhet)",
+   "s": 46.89,
+   "e": 53.3
+  },
+  {
+   "t": "Exempel 1 — Hydraulisk domkraft",
+   "s": 53.3,
+   "e": 56.85
+  },
+  {
+   "t": "Du trycker med kraften 0,10 kilonewton på en 0,50 decimeter i kvadrat stor platta i en hydraulisk domkraft.",
+   "s": 56.85,
+   "e": 65.12
+  },
+  {
+   "t": "Hur stor tyngd klarar domkraften av att lyfta i den andra änden om plattan där är 100 decimeter i kvadrat?",
+   "s": 65.12,
+   "e": 72.26
+  },
+  {
+   "t": "Pascals princip säger",
+   "s": 72.26,
+   "e": 75.05
+  },
+  {
+   "t": "F ett delat med A ett är lika med F två delat med A två",
+   "s": 75.05,
+   "e": 79.84
+  },
+  {
+   "t": "Vi löser ut F två .",
+   "s": 79.84,
+   "e": 82.72
+  },
+  {
+   "t": "F två är lika med F ett gånger A två delat med A ett",
+   "s": 82.72,
+   "e": 87.59
+  },
+  {
+   "t": "F ett är lika med 0,10 kilonewton som är lika med 100 newton A ett som är lika med 0,50 decimeter i kvadrat A två som är lika med 100 decimeter i kvadrat",
+   "s": 87.59,
+   "e": 99.08
+  },
+  {
+   "t": "Vi behöver, i detta fall, inte ange areorna i SI-enheter utan det räcker att de har samma enhet för att svaret ska bli i newton.",
+   "s": 99.08,
+   "e": 107.6
+  },
+  {
+   "t": "F två är lika med 100 gånger 100 delat med 0,50 som är lika med 20 000 newton som är lika med 20 kilonewton",
+   "s": 107.6,
+   "e": 116.45
+  },
+  {
+   "t": "Svar: 20 kilonewton. (Du trycker med en kraft som motsvarar tyngden hos 10 kilogram och kan lyfta med en kraft som motsvarar tyngden hos 2 ton!)",
+   "s": 116.45,
+   "e": 127.66
+  }
+ ]
+}

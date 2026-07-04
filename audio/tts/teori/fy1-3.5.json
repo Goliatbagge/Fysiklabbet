@@ -1,0 +1,208 @@
+{
+ "id": "fy1-3.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "dc5b658190fb3e2516bd4ad14aa7af65d904c188",
+ "dur": 275.54,
+ "segments": [
+  {
+   "t": "Gravitationslagen",
+   "s": 0.1,
+   "e": 2.52
+  },
+  {
+   "t": "Två föremål med massa påverkar varandra med en ömsesidig attraktiv gravitationskraft.",
+   "s": 2.48,
+   "e": 8.65
+  },
+  {
+   "t": "Ju större massor och ju kortare avstånd desto större kraft.",
+   "s": 8.65,
+   "e": 12.97
+  },
+  {
+   "t": "Detta samband kallas Newtons gravitationslag.",
+   "s": 12.97,
+   "e": 16.96
+  },
+  {
+   "t": "Newtons gravitationslag",
+   "s": 16.96,
+   "e": 19.76
+  },
+  {
+   "t": "F G är lika med G gånger m ett gånger m två delat med r i kvadrat",
+   "s": 19.76,
+   "e": 25.59
+  },
+  {
+   "t": "där",
+   "s": 25.59,
+   "e": 27.06
+  },
+  {
+   "t": "F G är lika med gravitationskraft (newton)",
+   "s": 27.06,
+   "e": 31.52
+  },
+  {
+   "t": "G är lika med gravitationskonstanten (6,67 gånger 10 upphöjt till minus 11 Nm i kvadrat/kg i kvadrat)",
+   "s": 31.52,
+   "e": 40.96
+  },
+  {
+   "t": "m ett är lika med massa hos föremål 1 (kilogram)",
+   "s": 40.96,
+   "e": 45.74
+  },
+  {
+   "t": "m två är lika med massa hos föremål 2 (kilogram)",
+   "s": 45.74,
+   "e": 50.42
+  },
+  {
+   "t": "r är lika med avståndet mellan föremålens tyngdpunkter (meter)",
+   "s": 50.42,
+   "e": 55.51
+  },
+  {
+   "t": "I Fysik nivå 2 kommer vi att härleda Newtons gravitationslag med hjälp av formeln för centripetalkraft.",
+   "s": 55.51,
+   "e": 62.48
+  },
+  {
+   "t": "Exempel 1 — Gravitationskraft mellan kompisar",
+   "s": 62.48,
+   "e": 66.76
+  },
+  {
+   "t": "Du och en kompis sitter 1,0 meter ifrån varandra och väger båda 60 kilogram.",
+   "s": 66.76,
+   "e": 72.66
+  },
+  {
+   "t": "a) Med hur stor gravitationskraft påverkar ni varandra?",
+   "s": 72.66,
+   "e": 77.31
+  },
+  {
+   "t": "b) Är kraften kännbar?",
+   "s": 77.31,
+   "e": 80.17
+  },
+  {
+   "t": "a) Vi ställer upp Newtons gravitationslag.",
+   "s": 80.17,
+   "e": 84.05
+  },
+  {
+   "t": "F G är lika med G gånger m ett gånger m två delat med r i kvadrat",
+   "s": 84.05,
+   "e": 89.88
+  },
+  {
+   "t": "G är lika med 6,67 gånger 10 upphöjt till minus 11 Nm i kvadrat per kilogram i kvadrat m ett som är lika med 60 kilogram m två som är lika med 60 kilogram r som är lika med 1,00 meter",
+   "s": 89.88,
+   "e": 103.56
+  },
+  {
+   "t": "F G är lika med 6,67 gånger 10 upphöjt till minus 11 gånger 60 gånger 60 delat med 1,00 i kvadrat som är lika med 2,4 gånger 10 upphöjt till minus 7 newton",
+   "s": 103.56,
+   "e": 116.24
+  },
+  {
+   "t": "Svar: 2,4 gånger 10 upphöjt till minus 7 newton",
+   "s": 116.24,
+   "e": 121.58
+  },
+  {
+   "t": "b) För att undersöka om kraften är kännbar undersöker vi vilken massa som motsvarar denna tyngd.",
+   "s": 121.58,
+   "e": 128.36
+  },
+  {
+   "t": "Vi ställer upp formeln för tyngdkraft och löser ut massan m.",
+   "s": 128.36,
+   "e": 145.56
+  },
+  {
+   "t": "F G är lika med massan m gånger tyngdfaktorn g vilket är ekvivalent med att m är lika med F G delat med g",
+   "s": 128.36,
+   "e": 145.56
+  },
+  {
+   "t": "F G är lika med 2,4 gånger 10 upphöjt till minus 7 newton tyngdfaktorn g som är ungefär lika med 10 newton per kilogram",
+   "s": 128.36,
+   "e": 145.56
+  },
+  {
+   "t": "massan m är ungefär lika med 2,4 gånger 10 upphöjt till minus 7 delat med 10 som är lika med 2,4 gånger 10 upphöjt till minus 8 kilogram som är lika med 2,4 gånger 10 upphöjt till minus 5 gram som är lika med 2,4 gånger 10 upphöjt till minus 2 mg som är lika med 0,024 mg",
+   "s": 145.56,
+   "e": 164.56
+  },
+  {
+   "t": "Kraften motsvarar alltså tyngden hos massan 0,024 mg och är alltså inte kännbar.",
+   "s": 164.56,
+   "e": 171.05
+  },
+  {
+   "t": "Svar: Nej",
+   "s": 171.05,
+   "e": 173.32
+  },
+  {
+   "t": "Exempel 2 — Tyngdfaktorn vid jordytan",
+   "s": 173.32,
+   "e": 177.2
+  },
+  {
+   "t": "Bestäm tyngdfaktorn g vid jordytan med hjälp av Newtons gravitationslag och astronomiska data.",
+   "s": 177.2,
+   "e": 183.7
+  },
+  {
+   "t": "Vi har en godtycklig massa hos ett föremål på jordytan m och jordens massa mⱼ.",
+   "s": 183.7,
+   "e": 189.51
+  },
+  {
+   "t": "Tyngdkraften på massan kan då tecknas på två sätt:",
+   "s": 189.51,
+   "e": 200.18
+  },
+  {
+   "t": "F G är lika med massan m gånger tyngdfaktorn g och F G som är lika med G gånger m gånger m j delat med r i kvadrat",
+   "s": 189.51,
+   "e": 200.18
+  },
+  {
+   "t": "Vi sätter dessa lika och dividerar båda led med m för att lösa ut tyngdfaktorn g.",
+   "s": 200.18,
+   "e": 214.68
+  },
+  {
+   "t": "massan m gånger tyngdfaktorn g är lika med G gånger m gånger m j delat med r i kvadrat vilket är ekvivalent med att g är lika med G gånger m j delat med r i kvadrat",
+   "s": 200.18,
+   "e": 214.68
+  },
+  {
+   "t": "G är lika med 6,67 gånger 10 upphöjt till minus 11 Nm i kvadrat per kilogram i kvadrat m j som är lika med 5,972 gånger 10 upphöjt till 24 kilogram parentesen jordensmassa,fråntabell slut parentes r som är lika med 6 378 kilometer som är lika med 6 378 gånger 10 i kubik meter parentesen jordensradie,fråntabell slut parentes",
+   "s": 214.68,
+   "e": 240.68
+  },
+  {
+   "t": "tyngdfaktorn g är lika med 6,67 gånger 10 upphöjt till minus 11 gånger 5,972 gånger 10 upphöjt till 24 delat med parentesen 6 378 gånger 10 i kubik slut parentes i kvadrat som är lika med 9,792 ldots newton per kilogram som är ungefär lika med 9,8 newton per kilogram",
+   "s": 240.68,
+   "e": 262.23
+  },
+  {
+   "t": "Svar: 9,8 newton per kilogram",
+   "s": 262.23,
+   "e": 266.34
+  },
+  {
+   "t": "Från exempel 2 ser vi alltså att Newtons gravitationslag förklarar varför tyngdfaktorn på jorden är just 9,82 newton per kilogram!",
+   "s": 266.34,
+   "e": 275.54
+  }
+ ]
+}

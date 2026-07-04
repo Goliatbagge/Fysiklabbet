@@ -1,0 +1,353 @@
+{
+ "id": "fy1-9.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "2e33627e8d91b1979af490207c1685dc32a78899",
+ "dur": 398.03,
+ "segments": [
+  {
+   "t": "Stråldoser",
+   "s": 0.1,
+   "e": 2.26
+  },
+  {
+   "t": "Vid stark strålning kommer atomer i våra kroppar att joniseras.",
+   "s": 2.21,
+   "e": 7.0
+  },
+  {
+   "t": "Detta leder till att cellernas arvsmassa, DNA-molekylen, skadas.",
+   "s": 7.0,
+   "e": 12.46
+  },
+  {
+   "t": "Blir skadan tillräckligt stor kan enzymer inte reparera molekylen och då kan cellen dö eller sluta dela sig.",
+   "s": 12.46,
+   "e": 19.15
+  },
+  {
+   "t": "Men strålningen kan även ändra DNA-molekylen så att den får nya egenskaper när den delar sig och då får vi en mutation.",
+   "s": 19.15,
+   "e": 26.57
+  },
+  {
+   "t": "För det mesta är mutationer dåliga, men ibland ger de nya egenskaper som är fördelaktiga och förs då vidare till nästa generation.",
+   "s": 26.57,
+   "e": 34.65
+  },
+  {
+   "t": "I vissa fall ger DNA-skadan även upphov till att cellen delar sig okontrollerat och vi får då en cancercell.",
+   "s": 34.65,
+   "e": 41.4
+  },
+  {
+   "t": "Om man utsätts för stark strålning är symtomen illamående, kräkningar och yrsel.",
+   "s": 41.4,
+   "e": 47.27
+  },
+  {
+   "t": "Mängden strålning kallas stråldos och den används t.ex. för att veta hur stor risken är för skador vid bestrålning.",
+   "s": 47.27,
+   "e": 54.61
+  },
+  {
+   "t": "Hur mycket strålningsenergi som absorberas per kilogram kroppsvävnad kallas absorberad dos, betecknas D och har enheten Gy (gray).",
+   "s": 54.61,
+   "e": 64.42
+  },
+  {
+   "t": "Absorberad dos",
+   "s": 64.42,
+   "e": 66.83
+  },
+  {
+   "t": "D är lika med energin E delat med massan m",
+   "s": 66.83,
+   "e": 71.0
+  },
+  {
+   "t": "där",
+   "s": 71.0,
+   "e": 72.5
+  },
+  {
+   "t": "D är lika med absorberad dos (Gy alternativt J/kg)",
+   "s": 72.5,
+   "e": 78.53
+  },
+  {
+   "t": "E är lika med strålningens energi (joule)",
+   "s": 78.53,
+   "e": 82.45
+  },
+  {
+   "t": "m är lika med bestrålad massa (kilogram)",
+   "s": 82.45,
+   "e": 86.4
+  },
+  {
+   "t": "Gränsen för akut strålningssjuka går vid 1 Gy.",
+   "s": 86.4,
+   "e": 90.6
+  },
+  {
+   "t": "Genomtränglighet",
+   "s": 90.6,
+   "e": 93.06
+  },
+  {
+   "t": "Olika radioaktiva preparat har olika genomtränglighet.",
+   "s": 93.06,
+   "e": 97.91
+  },
+  {
+   "t": "Vi undersöker hur papp, plast, tunn metall och bly hindrar de olika strålningarna. α-strålning stoppas med tunn pappskiva. β-strålning stoppas inte av tunn pappskiva, men av tunn metall. γ-strålning stoppas inte av tunn metall, men av ett tjockt lager bly.",
+   "s": 97.91,
+   "e": 117.34
+  },
+  {
+   "t": "Olika strålslag har olika genomtränglighet.",
+   "s": 117.34,
+   "e": 121.64
+  },
+  {
+   "t": "Genomträngligheten och hur mycket strålningen växelverkar med materia gör dem farliga på olika sätt.",
+   "s": 121.64,
+   "e": 128.11
+  },
+  {
+   "t": "Alfastrålning: Med sina relativt stora heliumkärnor gör den mycket skada om man har den nära huden eller inuti kroppen eftersom den avger all sin energi på ett litet område och skadar vävnaden där mycket.",
+   "s": 128.11,
+   "e": 140.2
+  },
+  {
+   "t": "Vid inandning av t.ex. radon gör den stor skada på inre organ.",
+   "s": 140.2,
+   "e": 145.39
+  },
+  {
+   "t": "Däremot har den en låg genomtränglighet och hindras lätt av andra material, t.ex. kläder, så utanför kroppen är den relativt ofarlig.",
+   "s": 145.39,
+   "e": 154.68
+  },
+  {
+   "t": "Betastrålning: De utsända elektronerna/positronerna är små partiklar och gör inte samma skada på kroppens molekyler som alfastrålningen.",
+   "s": 154.68,
+   "e": 163.99
+  },
+  {
+   "t": "Däremot har de större genomtränglighet än alfapartikeln, kommer längre in i kroppen och är därför svårare att skydda sig mot.",
+   "s": 163.99,
+   "e": 171.64
+  },
+  {
+   "t": "Kläder stoppar dem inte, men tunn metall.",
+   "s": 171.64,
+   "e": 175.3
+  },
+  {
+   "t": "Gammastrålning: Fotonerna är extremt små partiklar med ännu högre genomtränglighet än betastrålningen.",
+   "s": 175.3,
+   "e": 182.43
+  },
+  {
+   "t": "Den är mycket svår att stoppa och det krävs tjocka metaller med hög densitet, t.ex. bly, för att hindra dem.",
+   "s": 182.43,
+   "e": 189.43
+  },
+  {
+   "t": "Den sprider dock sin energi över ett större område och gör inte lika mycket lokal skada.",
+   "s": 189.43,
+   "e": 195.01
+  },
+  {
+   "t": "I stora doser kan gammastrålning vara livsfarlig, men normalt utsätts vi inte för starka gammakällor.",
+   "s": 195.01,
+   "e": 201.99
+  },
+  {
+   "t": "Stråldoser där vi tar hänsyn till strålslaget kallas ekvivalent dos, betecknas H och har enheten Sv (sievert) efter den svenske fysikern Rolf Sievert som var aktiv på 1920-talet.",
+   "s": 201.99,
+   "e": 214.45
+  },
+  {
+   "t": "Skadligheten hos en stråltyp ställs i relation till gammastrålning och kallas kvalitetsfaktor.",
+   "s": 214.45,
+   "e": 220.95
+  },
+  {
+   "t": "Kvalitetsfaktor har beteckningen Q och saknar enhet.",
+   "s": 220.95,
+   "e": 225.4
+  },
+  {
+   "t": "För gammastrålning gäller alltså Q är lika med 1.",
+   "s": 225.4,
+   "e": 229.7
+  },
+  {
+   "t": "För alfastrålning, som är mer skadlig, gäller Q är lika med 20 och för betastrålning Q är lika med 1.",
+   "s": 229.7,
+   "e": 237.34
+  },
+  {
+   "t": "Ekvivalent dos",
+   "s": 237.34,
+   "e": 239.71
+  },
+  {
+   "t": "H är lika med D gånger laddningen Q",
+   "s": 239.71,
+   "e": 243.66
+  },
+  {
+   "t": "där",
+   "s": 243.66,
+   "e": 245.18
+  },
+  {
+   "t": "H är lika med ekvivalent stråldos (Sv)",
+   "s": 245.18,
+   "e": 249.38
+  },
+  {
+   "t": "D är lika med absorberad dos (Gy)",
+   "s": 249.38,
+   "e": 253.66
+  },
+  {
+   "t": "Q är lika med kvalitetsfaktor",
+   "s": 253.66,
+   "e": 256.86
+  },
+  {
+   "t": "Gränsvärdet för strålning mot huden ligger vid 50 mSv/år.",
+   "s": 256.86,
+   "e": 262.36
+  },
+  {
+   "t": "Strålkällor",
+   "s": 262.36,
+   "e": 264.48
+  },
+  {
+   "t": "Varifrån strålningen kommer kallas strålkälla.",
+   "s": 264.48,
+   "e": 268.38
+  },
+  {
+   "t": "Vi utsätts för många typer av strålkällor, t.ex.",
+   "s": 268.38,
+   "e": 276.69
+  },
+  {
+   "t": "markstrålning från naturligt förekommande uran och kalium i berggrunden",
+   "s": 268.38,
+   "e": 276.69
+  },
+  {
+   "t": "kosmisk bakgrundsstrålning från t.ex. supernovor, neutronstjärnor och svarta hål.",
+   "s": 276.69,
+   "e": 283.0
+  },
+  {
+   "t": "Blir starkare ju högre upp i atmosfären man kommer.",
+   "s": 283.0,
+   "e": 287.0
+  },
+  {
+   "t": "strålning från medicinska undersökningar, t.ex. vid röntgen.",
+   "s": 287.0,
+   "e": 292.16
+  },
+  {
+   "t": "strålning inifrån våra egna kroppar från kalium-40 (från mat) och kol-14 (från luften).",
+   "s": 292.16,
+   "e": 301.24
+  },
+  {
+   "t": "radon i inomhusluft från byggnadsmaterial.",
+   "s": 301.19,
+   "e": 305.32
+  },
+  {
+   "t": "spridning från kärnkraftsavfall och kärnvapen.",
+   "s": 305.32,
+   "e": 309.18
+  },
+  {
+   "t": "Exempel 1 — Person utsatt för α-strålning",
+   "s": 309.18,
+   "e": 313.04
+  },
+  {
+   "t": "En person med massan 75 kilogram utsätts för α-strålning och får den absorberade dosen 0,50 mGy.",
+   "s": 313.04,
+   "e": 320.3
+  },
+  {
+   "t": "Bestäm",
+   "s": 320.3,
+   "e": 322.0
+  },
+  {
+   "t": "a) energin som den absorberade strålningen innehåller.",
+   "s": 322.0,
+   "e": 326.54
+  },
+  {
+   "t": "b) den ekvivalenta stråldosen.",
+   "s": 326.54,
+   "e": 330.29
+  },
+  {
+   "t": "a) Vi löser ut energin E ur formeln för absorberad dos.",
+   "s": 330.29,
+   "e": 335.53
+  },
+  {
+   "t": "D är lika med energin E delat med massan m vilket är ekvivalent med att E är lika med D gånger m",
+   "s": 335.53,
+   "e": 351.68
+  },
+  {
+   "t": "D är lika med 0,50 mGy som är lika med 0,50 gånger 10 upphöjt till minus 3 Gy massan m som är lika med 75 kilogram",
+   "s": 335.53,
+   "e": 351.68
+  },
+  {
+   "t": "energin E är lika med 0,50 gånger 10 upphöjt till minus 3 gånger 75 som är lika med 0,0375 joule som är ungefär lika med 0,038 joule som är lika med 38 mJ",
+   "s": 351.68,
+   "e": 364.42
+  },
+  {
+   "t": "Svar: 38 mJ",
+   "s": 364.42,
+   "e": 367.47
+  },
+  {
+   "t": "b) Vi ställer upp formeln för ekvivalent dos.",
+   "s": 367.47,
+   "e": 371.67
+  },
+  {
+   "t": "H är lika med D gånger laddningen Q",
+   "s": 371.67,
+   "e": 385.65
+  },
+  {
+   "t": "D är lika med 0,50 mGy som är lika med 0,50 gånger 10 upphöjt till minus 3 Gy laddningen Q som är lika med 20 parentesen slåsuppitabell slut parentes",
+   "s": 371.67,
+   "e": 385.65
+  },
+  {
+   "t": "H är lika med 0,50 gånger 10 upphöjt till minus 3 gånger 20 som är lika med 0,010 Sv som är lika med 10 mSv",
+   "s": 385.65,
+   "e": 394.83
+  },
+  {
+   "t": "Svar: 10 mSv",
+   "s": 394.83,
+   "e": 398.03
+  }
+ ]
+}

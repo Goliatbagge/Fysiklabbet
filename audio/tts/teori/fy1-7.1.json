@@ -1,0 +1,523 @@
+{
+ "id": "fy1-7.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "2987a23d1859157f2adba306bec7ef1f7330a06d",
+ "dur": 520.86,
+ "segments": [
+  {
+   "t": "Laddning och influens",
+   "s": 0.1,
+   "e": 2.89
+  },
+  {
+   "t": "Det som ger elektrisk laddning är elektroner som är negativt laddade och protoner som är positivt laddade.",
+   "s": 2.84,
+   "e": 9.4
+  },
+  {
+   "t": "Hur stort överskott eller underskott av elektroner ett föremål har kallas laddning.",
+   "s": 9.4,
+   "e": 15.09
+  },
+  {
+   "t": "Krafter mellan laddningar",
+   "s": 15.09,
+   "e": 17.79
+  },
+  {
+   "t": "Krafter mellan laddningar",
+   "s": 17.79,
+   "e": 20.43
+  },
+  {
+   "t": "Vi laddar en glasstav positiv och placerar på en kompasställning.",
+   "s": 20.43,
+   "e": 25.0
+  },
+  {
+   "t": "Därefter laddar vi en ebonitstav negativ och närmar och glasstaven.",
+   "s": 25.0,
+   "e": 30.09
+  },
+  {
+   "t": "Vi ser att de dras mot varandra.",
+   "s": 30.09,
+   "e": 33.24
+  },
+  {
+   "t": "Vi byter därefter ut den positivt laddade glasstaven mot en negativt laddad ebonitstav.",
+   "s": 33.24,
+   "e": 39.49
+  },
+  {
+   "t": "Vi närmar oss den med en annan negativt laddad ebonitstav.",
+   "s": 39.49,
+   "e": 44.1
+  },
+  {
+   "t": "Vi ser att de stöts bort från varandra.",
+   "s": 44.1,
+   "e": 47.51
+  },
+  {
+   "t": "Föremål med",
+   "s": 47.51,
+   "e": 49.73
+  },
+  {
+   "t": "olika laddning påverkar varandra med en kraft som drar dem mot varandra.",
+   "s": 49.73,
+   "e": 54.7
+  },
+  {
+   "t": "När krafter dras mot varandra kallas de för attraherande.",
+   "s": 54.7,
+   "e": 58.99
+  },
+  {
+   "t": "lika laddning påverkar varandra med en kraft som stöter dem från varandra.",
+   "s": 58.99,
+   "e": 63.98
+  },
+  {
+   "t": "När krafter stöter ifrån varandra kallas de för repellerande.",
+   "s": 63.98,
+   "e": 68.54
+  },
+  {
+   "t": "Lika laddning repellerar, olika laddning attraherar.",
+   "s": 68.54,
+   "e": 73.0
+  },
+  {
+   "t": "Vid neutral laddning uppstår ingen elektrisk kraft alls.",
+   "s": 73.0,
+   "e": 77.58
+  },
+  {
+   "t": "I ett material är protonerna mer fasta i sina positioner jämfört med de lättrörliga elektronerna.",
+   "s": 77.58,
+   "e": 84.2
+  },
+  {
+   "t": "Det är alltså framför allt elektronerna som avgör vilken laddning ett föremål har.",
+   "s": 84.2,
+   "e": 89.69
+  },
+  {
+   "t": "Elektroner som transporteras i ett material kallas ledningselektroner.",
+   "s": 89.69,
+   "e": 95.08
+  },
+  {
+   "t": "Ett",
+   "s": 95.08,
+   "e": 96.56
+  },
+  {
+   "t": "överskott av elektroner leder till en negativ laddning",
+   "s": 96.56,
+   "e": 100.85
+  },
+  {
+   "t": "underskott av elektroner leder till en positiv laddning",
+   "s": 100.85,
+   "e": 105.24
+  },
+  {
+   "t": "lika stort antal elektroner som protoner leder till en neutral laddning (nettoladdning saknas)",
+   "s": 105.24,
+   "e": 112.09
+  },
+  {
+   "t": "Ledare och isolatorer",
+   "s": 112.09,
+   "e": 115.01
+  },
+  {
+   "t": "Elektronledning",
+   "s": 115.01,
+   "e": 117.25
+  },
+  {
+   "t": "Vi lägger en metallstav på en bägare.",
+   "s": 117.25,
+   "e": 120.56
+  },
+  {
+   "t": "Vi hänger en aluminiumkula i en tråd så att den vidrör ena änden av metallstaven.",
+   "s": 120.56,
+   "e": 126.4
+  },
+  {
+   "t": "Vi laddar sedan metallstaven och ser att kulan stöts bort.",
+   "s": 126.4,
+   "e": 130.94
+  },
+  {
+   "t": "Elektroner har transporterats genom metallstaven till kulan.",
+   "s": 130.94,
+   "e": 135.66
+  },
+  {
+   "t": "Vi byter ut metallstaven mot ett sugrör i plast och upprepar försöket.",
+   "s": 135.66,
+   "e": 140.93
+  },
+  {
+   "t": "När vi laddar sugröret händer inget med kulan.",
+   "s": 140.93,
+   "e": 145.0
+  },
+  {
+   "t": "Elektroner transporteras inte genom sugröret.",
+   "s": 145.0,
+   "e": 149.2
+  },
+  {
+   "t": "Olika material leder laddningar olika lätt.",
+   "s": 149.2,
+   "e": 153.16
+  },
+  {
+   "t": "Material delas in i tre olika kategorier beroende på hur lätt de leder elektroner.",
+   "s": 153.16,
+   "e": 159.12
+  },
+  {
+   "t": "Ledare: Elektroner rör sig lätt i materialet.",
+   "s": 159.12,
+   "e": 163.47
+  },
+  {
+   "t": "Exempel: metaller och saltlösningar.",
+   "s": 163.47,
+   "e": 167.1
+  },
+  {
+   "t": "Isolatorer: Saknar elektroner som rör sig lätt på grund av att de är hårt bundna till atomerna.",
+   "s": 167.1,
+   "e": 173.54
+  },
+  {
+   "t": "Exempel: glas, plast och trä.",
+   "s": 173.54,
+   "e": 177.1
+  },
+  {
+   "t": "Halvledare: Har båda egenskaper.",
+   "s": 177.1,
+   "e": 180.66
+  },
+  {
+   "t": "Är isolatorer vid låga temperaturer och ledare vid höga.",
+   "s": 180.66,
+   "e": 185.38
+  },
+  {
+   "t": "Exempel: kisel och selen.",
+   "s": 185.38,
+   "e": 188.64
+  },
+  {
+   "t": "Bandgeneratorn",
+   "s": 188.64,
+   "e": 191.03
+  },
+  {
+   "t": "Vi lägger oladdade aluminiumformar på en oladdad bandgenerator som vi därefter laddar negativ.",
+   "s": 191.03,
+   "e": 197.62
+  },
+  {
+   "t": "Vi ser att aluminiumformarna flyger iväg.",
+   "s": 197.62,
+   "e": 201.54
+  },
+  {
+   "t": "Det beror på att överskottselektroner från bandgeneratorns kula överförs till aluminiumformarna (som är goda ledare).",
+   "s": 201.54,
+   "e": 209.45
+  },
+  {
+   "t": "Då blir både bandgeneratorns kula och aluminiumformarna negativt laddade och de repellerar!",
+   "s": 209.45,
+   "e": 215.88
+  },
+  {
+   "t": "Influens",
+   "s": 215.88,
+   "e": 217.89
+  },
+  {
+   "t": "Krafter mellan neutrala föremål och laddningar",
+   "s": 217.89,
+   "e": 221.81
+  },
+  {
+   "t": "Vi närmar oss en oladdad",
+   "s": 221.81,
+   "e": 224.65
+  },
+  {
+   "t": "pappersbit med en negativt laddad plastkam.",
+   "s": 224.65,
+   "e": 228.4
+  },
+  {
+   "t": "Den neutrala pappersbiten attraheras av kammen.",
+   "s": 228.4,
+   "e": 232.51
+  },
+  {
+   "t": "vattenstråle med en negativt laddad ebonitstav.",
+   "s": 232.51,
+   "e": 236.46
+  },
+  {
+   "t": "Den neutrala vattenstrålen böjs av mot staven.",
+   "s": 236.46,
+   "e": 240.55
+  },
+  {
+   "t": "aluminiumburk med en laddad ebonitstav.",
+   "s": 240.55,
+   "e": 244.22
+  },
+  {
+   "t": "Den neutrala aluminiumburken börjar rulla mot staven.",
+   "s": 244.22,
+   "e": 248.62
+  },
+  {
+   "t": "Trots att ett föremål är neutralt kan det uppstå elektriskt attraherande krafter.",
+   "s": 248.62,
+   "e": 254.28
+  },
+  {
+   "t": "Det beror på att laddningar i ett neutralt föremål omfördelas när man närmar sig det med ett laddat föremål.",
+   "s": 254.28,
+   "e": 260.76
+  },
+  {
+   "t": "En omfördelning av laddningar på grund av ett yttre elektriskt fält kallas influens.",
+   "s": 260.76,
+   "e": 266.79
+  },
+  {
+   "t": "Influens i neutral ledare",
+   "s": 266.79,
+   "e": 269.89
+  },
+  {
+   "t": "I en ledare rör sig elektronerna lätt i föremålet medan protonerna är fasta i sina positioner.",
+   "s": 269.89,
+   "e": 276.5
+  },
+  {
+   "t": "När vi närmar oss en neutral ledare med en negativt laddad stav från höger kommer elektroner att repelleras åt vänster.",
+   "s": 276.5,
+   "e": 284.16
+  },
+  {
+   "t": "Den högra änden får då ett underskott av elektroner, blir positivt laddad och en attraherande kraft uppstår mellan den positiva änden och den negativa staven.",
+   "s": 284.16,
+   "e": 293.86
+  },
+  {
+   "t": "Vänster: oladdat.",
+   "s": 293.86,
+   "e": 296.64
+  },
+  {
+   "t": "Höger: en negativ stav nära ledaren tränger elektronerna åt vänster — högeränden blir positiv och attraheras.",
+   "s": 296.64,
+   "e": 304.52
+  },
+  {
+   "t": "Repulsionskraften vid influens är mindre än attraktionskraften eftersom de repellerande laddningarna befinner sig längre bort än de attraherande laddningarna.",
+   "s": 304.52,
+   "e": 315.23
+  },
+  {
+   "t": "Influens i neutral isolator",
+   "s": 315.18,
+   "e": 318.44
+  },
+  {
+   "t": "Även i isolerande material som papper eller vatten, utan elektroner som kan röra sig lätt, kan influens uppstå.",
+   "s": 318.44,
+   "e": 326.32
+  },
+  {
+   "t": "Detta beror på att de är uppbyggda av molekylära dipoler som kan vrida sig och på så vis få en attraherande kraft mellan deras ena pol och det laddade föremålet.",
+   "s": 326.32,
+   "e": 335.63
+  },
+  {
+   "t": "Skillnad mellan influens i isolator (vänster) och i ledare (höger).",
+   "s": 335.63,
+   "e": 341.68
+  },
+  {
+   "t": "Laddningsmätning",
+   "s": 341.68,
+   "e": 343.98
+  },
+  {
+   "t": "Laddning betecknas Q (för stora laddningar) eller q (för små/enstaka laddningar) och har enheten C (coulomb).",
+   "s": 343.98,
+   "e": 352.79
+  },
+  {
+   "t": "En elektron har laddningen −1,602 gånger 10 upphöjt till minus 19 coulomb.",
+   "s": 352.79,
+   "e": 359.59
+  },
+  {
+   "t": "Protonen har samma laddning, fast positiv.",
+   "s": 359.59,
+   "e": 363.43
+  },
+  {
+   "t": "Laddningar byggs alltså upp av ett visst antal elektron-/protonladdningar.",
+   "s": 363.43,
+   "e": 369.09
+  },
+  {
+   "t": "Därför kallas laddningen 1,602 gånger 10 upphöjt till minus 19 coulomb för elementarladdning (den minsta laddningsenheten).",
+   "s": 369.09,
+   "e": 378.42
+  },
+  {
+   "t": "I atomen finns också neutronen.",
+   "s": 378.42,
+   "e": 381.87
+  },
+  {
+   "t": "Denna har laddningen 0 coulomb och är alltså neutral, därav sitt namn.",
+   "s": 381.87,
+   "e": 386.99
+  },
+  {
+   "t": "De \"extra\" elektroner ett laddat föremål har (så många fler elektroner än protoner föremålet har) kallas överskottselektroner.",
+   "s": 386.99,
+   "e": 395.53
+  },
+  {
+   "t": "På grund av att lika tecken på laddningar repellerar varandra, så strävar laddningar efter att fördela sig jämnt.",
+   "s": 395.53,
+   "e": 402.38
+  },
+  {
+   "t": "Konserveringslag för laddningar",
+   "s": 402.38,
+   "e": 405.42
+  },
+  {
+   "t": "1.",
+   "s": 405.42,
+   "e": 410.46
+  },
+  {
+   "t": "Laddningar kan inte skapas eller förstöras, bara omfördelas.",
+   "s": 405.42,
+   "e": 410.46
+  },
+  {
+   "t": "2.",
+   "s": 410.46,
+   "e": 415.07
+  },
+  {
+   "t": "Den totala laddningen i ett slutet system är konstant.",
+   "s": 410.46,
+   "e": 415.07
+  },
+  {
+   "t": "Exempel 1 — Metallkulor som vidrör varandra",
+   "s": 415.07,
+   "e": 419.26
+  },
+  {
+   "t": "En metallkula med laddningen +5,0 nC vidrör en lika stor metallkula med laddningen −3,0 nC.",
+   "s": 419.26,
+   "e": 427.17
+  },
+  {
+   "t": "Hur",
+   "s": 427.17,
+   "e": 428.66
+  },
+  {
+   "t": "a) många överskottselektroner har den negativa kulan?",
+   "s": 428.66,
+   "e": 433.52
+  },
+  {
+   "t": "b) stor blir deras slutgiltiga laddning?",
+   "s": 433.52,
+   "e": 437.47
+  },
+  {
+   "t": "a) Vi dividerar den totala laddningen Q med laddningen hos elektron q e för att få antalet elektroner n.",
+   "s": 437.47,
+   "e": 444.94
+  },
+  {
+   "t": "För att underlätta beräkningen struntar vi i att räkna med tecken på laddningen.",
+   "s": 444.94,
+   "e": 450.11
+  },
+  {
+   "t": "n är lika med laddningen Q delat med q e",
+   "s": 450.11,
+   "e": 464.09
+  },
+  {
+   "t": "laddningen Q är lika med 3,0 nC som är lika med 3,0 gånger 10 upphöjt till minus 9 coulomb q e som är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb",
+   "s": 450.11,
+   "e": 464.09
+  },
+  {
+   "t": "n är lika med 3,0 gånger 10 upphöjt till minus 9 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 1,872 ldots gånger 10 upphöjt till 10 st",
+   "s": 464.09,
+   "e": 481.26
+  },
+  {
+   "t": "Svar: 1,9 gånger 10 upphöjt till 10 eller 19 miljarder (många!)",
+   "s": 464.09,
+   "e": 481.26
+  },
+  {
+   "t": "b) Eftersom båda kulor är lika stora och ledande kommer laddningarna att fördela sig jämnt mellan dem.",
+   "s": 481.26,
+   "e": 488.18
+  },
+  {
+   "t": "Deras slutgiltiga laddning Q fås genom medelvärdet av deras ursprungliga laddning.",
+   "s": 488.18,
+   "e": 494.03
+  },
+  {
+   "t": "laddningen Q är lika med Q ett plus Q två delat med 2",
+   "s": 494.03,
+   "e": 498.86
+  },
+  {
+   "t": "Q ett är lika med plus 5,0 nC Q två som är lika med minus 3,0 nC",
+   "s": 498.86,
+   "e": 505.43
+  },
+  {
+   "t": "laddningen Q är lika med plus 5,0 plus parentesen minus 3,0 slut parentes delat med 2 som är lika med plus 2,0 delat med 2 som är lika med plus 1,0 nC",
+   "s": 505.43,
+   "e": 517.27
+  },
+  {
+   "t": "Svar: +1,0 nC",
+   "s": 517.27,
+   "e": 520.86
+  }
+ ]
+}

@@ -1,0 +1,428 @@
+{
+ "id": "fy2-3.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5d49134d4ccbaa3f930eb37328523602586dcbad",
+ "dur": 501.84,
+ "segments": [
+  {
+   "t": "Växelströmsgenerator",
+   "s": 0.1,
+   "e": 2.9
+  },
+  {
+   "t": "En spänning vars storlek och polaritet (riktning) varieras periodiskt kallas växelspänning.",
+   "s": 2.85,
+   "e": 9.66
+  },
+  {
+   "t": "En källa som alstrar växelspänning kallas växelströmsgenerator.",
+   "s": 9.66,
+   "e": 14.65
+  },
+  {
+   "t": "Vi tittar på principen för en enkel växelströmsgenerator.",
+   "s": 14.65,
+   "e": 19.32
+  },
+  {
+   "t": "Vi låter en slinga rotera i ett magnetfält med konstant fart.",
+   "s": 19.32,
+   "e": 24.01
+  },
+  {
+   "t": "Figur: en växelströmsgenerator i 3D-perspektiv.",
+   "s": 24.01,
+   "e": 28.82
+  },
+  {
+   "t": "En rektangulär slinga roterar mellan polerna på en hästskoformad permanentmagnet (N-pol upptill, S-pol nedtill).",
+   "s": 28.82,
+   "e": 37.06
+  },
+  {
+   "t": "Magnetfältets flödeslinjer går vertikalt nedåt mellan polerna.",
+   "s": 37.06,
+   "e": 41.84
+  },
+  {
+   "t": "Slingans ändar är kopplade via släpringar och borstar till en yttre krets med ett motstånd R och en voltmeter.",
+   "s": 41.84,
+   "e": 48.83
+  },
+  {
+   "t": "Bredvid scenen visas en oscilloskop-graf över den inducerade spänningen V som funktion av tiden t — en sinusformad växelspänning.",
+   "s": 48.83,
+   "e": 57.27
+  },
+  {
+   "t": "Eftersom flödet genom slingan ständigt ändras (då den vinkelräta arean ändras) induceras en spänning i den, enligt induktionslagen e är lika med minus avståndet d Phi delat med d tiden t .",
+   "s": 57.27,
+   "e": 70.51
+  },
+  {
+   "t": "Vi kan med högerhandsregeln även konstatera att strömmen (och spänningen) kommer att växla riktning under rotationen.",
+   "s": 70.51,
+   "e": 77.9
+  },
+  {
+   "t": "Värden på ström eller spänning vid en viss tidpunkt i en växelströmskrets kallas för momentana värden och betecknas med små bokstäver: u för momentanspänning och i för momentanström.",
+   "s": 77.9,
+   "e": 89.04
+  },
+  {
+   "t": "Maximala momentana värden på ström eller spänning i en växelströmskrets kallas för toppvärden och betecknas med ^ (cirkumflex): û för toppspänning och î för toppström. û och î utläses \"u-topp\" respektive \"i-topp\".",
+   "s": 89.04,
+   "e": 103.83
+  },
+  {
+   "t": "Momentanspänning och momentanström i växelströmsgenerator",
+   "s": 103.83,
+   "e": 108.59
+  },
+  {
+   "t": "u är lika med hat u gånger sinus parentesen omega tiden t slut parentes",
+   "s": 108.59,
+   "e": 114.66
+  },
+  {
+   "t": "i är lika med hat imath gånger sinus parentesen omega tiden t slut parentes",
+   "s": 114.66,
+   "e": 120.97
+  },
+  {
+   "t": "där",
+   "s": 120.97,
+   "e": 122.47
+  },
+  {
+   "t": "u är lika med momentanspänning (volt)",
+   "s": 122.47,
+   "e": 126.41
+  },
+  {
+   "t": "û är lika med toppspänning (volt)",
+   "s": 126.41,
+   "e": 129.96
+  },
+  {
+   "t": "i är lika med momentanström (ampere)",
+   "s": 129.96,
+   "e": 133.66
+  },
+  {
+   "t": "î är lika med toppström (ampere)",
+   "s": 133.66,
+   "e": 136.91
+  },
+  {
+   "t": "ω är lika med vinkelhastighet (rad/s)",
+   "s": 136.91,
+   "e": 141.54
+  },
+  {
+   "t": "t är lika med tid (sekunder)",
+   "s": 141.54,
+   "e": 144.81
+  },
+  {
+   "t": "Istället för vinkelhastighet anges ofta växelströmmar med en frekvens uttryckt i Hz som anger hur många gånger strömmen växlar riktning varje sekund.",
+   "s": 144.81,
+   "e": 153.97
+  },
+  {
+   "t": "Kom ihåg sambandet mellan vinkelhastighet och frekvens respektive periodtid.",
+   "s": 153.97,
+   "e": 159.61
+  },
+  {
+   "t": "Vinkelhastighet",
+   "s": 159.61,
+   "e": 162.07
+  },
+  {
+   "t": "omega är lika med 2 pi delat med periodtiden T som är lika med 2 pi gånger frekvensen f",
+   "s": 162.07,
+   "e": 168.61
+  },
+  {
+   "t": "där",
+   "s": 168.61,
+   "e": 170.09
+  },
+  {
+   "t": "ω är lika med vinkelhastighet (rad/s)",
+   "s": 170.09,
+   "e": 174.72
+  },
+  {
+   "t": "T är lika med periodtid (sekunder)",
+   "s": 174.72,
+   "e": 178.44
+  },
+  {
+   "t": "f är lika med frekvens (hertz)",
+   "s": 178.44,
+   "e": 181.91
+  },
+  {
+   "t": "Härledning — Momentanspänning och momentanström i växelströmsgenerator",
+   "s": 181.91,
+   "e": 187.4
+  },
+  {
+   "t": "Vi tittar på en slinga som roterar i ett magnetfält rakt från sidan:",
+   "s": 187.4,
+   "e": 200.96
+  },
+  {
+   "t": "Det magnetiska flödet Φ är maximalt då slingan ligger horisontellt och är vinkelrät mot flödeslinjerna eftersom arean A mot flödeslinjerna då är maximal.",
+   "s": 187.4,
+   "e": 200.96
+  },
+  {
+   "t": "Den vinkelräta arean A \\perp beror på vinkeln α som den vrids mot horisontalplanet enligt",
+   "s": 200.96,
+   "e": 208.12
+  },
+  {
+   "t": "Phi är lika med B gånger A \\perp som är lika med B gånger arean A gånger cosinus alfa, ekvation 1",
+   "s": 208.12,
+   "e": 216.61
+  },
+  {
+   "t": "Sedan tidigare har vi",
+   "s": 216.61,
+   "e": 219.36
+  },
+  {
+   "t": "omega är lika med alfa delat med tiden t vilket är ekvivalent med att alfa är lika med omega t",
+   "s": 219.36,
+   "e": 227.91
+  },
+  {
+   "t": "α är lika med ωt i ekvation 1 ger",
+   "s": 219.36,
+   "e": 227.91
+  },
+  {
+   "t": "Phi är lika med B gånger arean A gånger cosinus parentesen omega tiden t slut parentes",
+   "s": 227.91,
+   "e": 235.01
+  },
+  {
+   "t": "eller med flödet skrivet som en funktion av tiden",
+   "s": 235.01,
+   "e": 239.04
+  },
+  {
+   "t": "Phi parentesen tiden t slut parentes är lika med B gånger arean A gånger cosinus parentesen omega t slut parentes",
+   "s": 239.04,
+   "e": 247.96
+  },
+  {
+   "t": "Enligt induktionslagen är den inducerade spänningen vid en viss tidpunkt",
+   "s": 247.96,
+   "e": 253.24
+  },
+  {
+   "t": "e är lika med minus avståndet d Phi delat med d tiden t som är lika med minus Phi ' parentesen t slut parentes",
+   "s": 253.24,
+   "e": 262.32
+  },
+  {
+   "t": "Sedan tidigare har vi Phi parentesen tiden t slut parentes är lika med B gånger arean A gånger cosinus parentesen omega t slut parentes .",
+   "s": 262.32,
+   "e": 272.29
+  },
+  {
+   "t": "Vi deriverar funktionen och får",
+   "s": 272.29,
+   "e": 275.62
+  },
+  {
+   "t": "e är lika med minus Phi ' parentesen tiden t slut parentes som är lika med minus bigl parentesen minus B gånger arean A gånger omega gånger sinus parentesen omega t slut parentes bigr slut parentes som är lika med B gånger A gånger omega gånger sinus parentesen omega t slut parentes, ekvation 2",
+   "s": 275.62,
+   "e": 294.48
+  },
+  {
+   "t": "Eftersom minus 1 är mindre än eller lika med sinus parentesen omega tiden t slut parentes är mindre än eller lika med 1 , fås den maximala spänningen ê då sinus parentesen omega tiden t slut parentes är lika med 1 , så",
+   "s": 294.48,
+   "e": 310.38
+  },
+  {
+   "t": "hat e är lika med B gånger arean A gånger omega",
+   "s": 310.33,
+   "e": 314.9
+  },
+  {
+   "t": "Insättning av hat e är lika med B gånger arean A gånger omega i ekvation 2 ger",
+   "s": 314.9,
+   "e": 321.21
+  },
+  {
+   "t": "e är lika med hat e gånger sinus parentesen omega tiden t slut parentes",
+   "s": 321.21,
+   "e": 327.36
+  },
+  {
+   "t": "Växelspänningen vid en viss tidpunkt u i en generator kan alltså skrivas",
+   "s": 327.36,
+   "e": 332.81
+  },
+  {
+   "t": "u är lika med hat u gånger sinus parentesen omega tiden t slut parentes vilket skulle visas",
+   "s": 332.81,
+   "e": 339.88
+  },
+  {
+   "t": "Ström och spänning har samma tidsvinklar (när spänningen är maximal är även strömmen maximal) enligt Ohms lag spänningen U är lika med resistansen R gånger strömmen I , så momentanströmmen i kan skrivas",
+   "s": 339.88,
+   "e": 352.26
+  },
+  {
+   "t": "i är lika med hat imath gånger sinus parentesen omega tiden t slut parentes vilket skulle visas",
+   "s": 352.26,
+   "e": 359.6
+  },
+  {
+   "t": "Vid växelström har vi varierande spänning och ström.",
+   "s": 359.6,
+   "e": 363.76
+  },
+  {
+   "t": "Dessa kan ges ett medelvärde som kallas effektivvärde och betecknas med stora bokstäver: U för spänning och I för ström.",
+   "s": 363.76,
+   "e": 371.64
+  },
+  {
+   "t": "Effektivvärden vid växelström",
+   "s": 371.64,
+   "e": 374.74
+  },
+  {
+   "t": "spänningen U är lika med hat u delat med roten ur 2",
+   "s": 374.74,
+   "e": 379.49
+  },
+  {
+   "t": "strömmen I är lika med hat imath delat med roten ur 2",
+   "s": 379.49,
+   "e": 384.23
+  },
+  {
+   "t": "där",
+   "s": 384.23,
+   "e": 385.69
+  },
+  {
+   "t": "U är lika med effektiv spänning (volt)",
+   "s": 385.69,
+   "e": 389.56
+  },
+  {
+   "t": "û är lika med toppspänning (volt)",
+   "s": 389.56,
+   "e": 393.11
+  },
+  {
+   "t": "I är lika med effektiv ström (ampere)",
+   "s": 393.11,
+   "e": 396.66
+  },
+  {
+   "t": "î är lika med toppström (ampere)",
+   "s": 396.66,
+   "e": 399.9
+  },
+  {
+   "t": "Svenska elnätet",
+   "s": 399.9,
+   "e": 402.49
+  },
+  {
+   "t": "Det svenska elnätet har nätspänningen (effektiva spänningen) 230 volt och frekvensen 50 hertz.",
+   "s": 402.49,
+   "e": 409.88
+  },
+  {
+   "t": "Exempel 1 — Amerikanska elnätet",
+   "s": 409.88,
+   "e": 413.51
+  },
+  {
+   "t": "USA har nätspänningen 110 volt med frekvensen 60 hertz.",
+   "s": 413.51,
+   "e": 419.06
+  },
+  {
+   "t": "Teckna ett uttryck för hur spänningen varierar med tiden i ett amerikanskt elnät.",
+   "s": 419.06,
+   "e": 424.65
+  },
+  {
+   "t": "Vi ställer upp formeln för momentanspänning och ska därefter bestämma toppspänningen û och vinkelhastigheten ω.",
+   "s": 424.65,
+   "e": 436.58
+  },
+  {
+   "t": "u är lika med hat u gånger sinus parentesen omega tiden t slut parentes, ekvation 1",
+   "s": 424.65,
+   "e": 436.58
+  },
+  {
+   "t": "Vi börjar med att bestämma toppspänningen û.",
+   "s": 436.58,
+   "e": 449.54
+  },
+  {
+   "t": "spänningen U är lika med hat u delat med roten ur 2 vilket är ekvivalent med att hat u är lika med roten ur 2 gånger U",
+   "s": 436.58,
+   "e": 449.54
+  },
+  {
+   "t": "Insättning av U är lika med 110 volt ger",
+   "s": 436.58,
+   "e": 449.54
+  },
+  {
+   "t": "hat u är lika med roten ur 2 gånger 110 som är lika med 155,563 ldots volt som är ungefär lika med 156 volt",
+   "s": 449.54,
+   "e": 460.53
+  },
+  {
+   "t": "Vi bestämmer sedan vinkelhastigheten ω.",
+   "s": 460.53,
+   "e": 466.46
+  },
+  {
+   "t": "omega är lika med 2 pi gånger frekvensen f",
+   "s": 460.53,
+   "e": 466.46
+  },
+  {
+   "t": "Insättning av f är lika med 60 hertz ger",
+   "s": 466.46,
+   "e": 470.36
+  },
+  {
+   "t": "omega är lika med 2 pi gånger 60 som är lika med 120 pi rad per sekund",
+   "s": 470.36,
+   "e": 476.49
+  },
+  {
+   "t": "Insättning av hat u är lika med 156 volt och omega är lika med 120 pi rad/s i ekvation 1 ger",
+   "s": 476.49,
+   "e": 485.41
+  },
+  {
+   "t": "u är lika med 156 gånger sinus parentesen 120 pi gånger tiden t slut parentes",
+   "s": 485.41,
+   "e": 493.21
+  },
+  {
+   "t": "Svar: u är lika med 156 gånger sinus parentesen 120 pi gånger tiden t slut parentes",
+   "s": 493.21,
+   "e": 501.84
+  }
+ ]
+}

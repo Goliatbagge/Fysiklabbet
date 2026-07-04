@@ -1,0 +1,198 @@
+{
+ "id": "fy1-2.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "50518b24c6c5361c7c44a692b840d9fecb9f9c8a",
+ "dur": 262.39,
+ "segments": [
+  {
+   "t": "Lösa ekvationssystem i GeoGebra",
+   "s": 0.1,
+   "e": 3.64
+  },
+  {
+   "t": "Vissa uppgifter på högre nivå ger oss två obekanta storheter där ingen kan beräknas direkt.",
+   "s": 3.59,
+   "e": 10.0
+  },
+  {
+   "t": "Då får vi ställa upp två ekvationer och bilda ett ekvationssystem.",
+   "s": 10.0,
+   "e": 14.76
+  },
+  {
+   "t": "Om ekvationssystemet blir avancerat kan vi lösa det i GeoGebra istället för algebraiskt (t.ex. med substitutions- eller additionsmetoden).",
+   "s": 14.76,
+   "e": 24.56
+  },
+  {
+   "t": "Exempel 1 — Bil som accelererar 400 meter",
+   "s": 24.56,
+   "e": 29.15
+  },
+  {
+   "t": "En bil kör med konstant hastighet 15 meter per sekund för att sedan öka hastigheten med konstant acceleration.",
+   "s": 29.15,
+   "e": 36.34
+  },
+  {
+   "t": "Under accelerationen rör sig bilen 400 meter och får då hastigheten 28 meter per sekund.",
+   "s": 36.34,
+   "e": 43.02
+  },
+  {
+   "t": "Vilken var bilens acceleration?",
+   "s": 43.02,
+   "e": 46.26
+  },
+  {
+   "t": "Vi ställer upp formeln för sträcka vid konstant acceleration och löser ut accelerationen a.",
+   "s": 46.26,
+   "e": 57.92
+  },
+  {
+   "t": "sträckan s är lika med v noll gånger tiden t plus accelerationen a gånger t i kvadrat delat med 2",
+   "s": 46.26,
+   "e": 57.92
+  },
+  {
+   "t": "Vi multiplicerar båda led med 2 och löser ut termen a gånger t i kvadrat.",
+   "s": 57.92,
+   "e": 63.8
+  },
+  {
+   "t": "2 sträckan s är lika med 2 v noll gånger tiden t plus accelerationen a gånger t i kvadrat vilket är ekvivalent med att a gånger t i kvadrat är lika med 2 sekunder minus 2 v noll gånger t",
+   "s": 63.8,
+   "e": 76.42
+  },
+  {
+   "t": "Vi löser ut a genom att dividera båda led med t i kvadrat.",
+   "s": 76.42,
+   "e": 81.29
+  },
+  {
+   "t": "accelerationen a är lika med 2 sträckan s delat med tiden t i kvadrat minus 2 v noll delat med t",
+   "s": 81.29,
+   "e": 93.8
+  },
+  {
+   "t": "Insättning av s är lika med 400 meter och v noll är lika med 15 meter per sekund ger",
+   "s": 81.29,
+   "e": 93.8
+  },
+  {
+   "t": "accelerationen a är lika med 2 gånger 400 delat med tiden t i kvadrat minus 2 gånger 15 delat med t",
+   "s": 93.8,
+   "e": 107.9
+  },
+  {
+   "t": "accelerationen a är lika med 800 delat med tiden t i kvadrat minus 30 delat med t, ekvation 1",
+   "s": 93.8,
+   "e": 107.9
+  },
+  {
+   "t": "Vi har nu en ekvation med två okända variabler, a och t.",
+   "s": 107.9,
+   "e": 112.7
+  },
+  {
+   "t": "Vi kan inte bestämma accelerationen med formeln accelerationen a är lika med delta hastigheten v delat med delta tiden t eftersom vi inte har tiden för accelerationen Δt.",
+   "s": 112.7,
+   "e": 122.89
+  },
+  {
+   "t": "Vi behöver en ekvation till.",
+   "s": 122.89,
+   "e": 125.84
+  },
+  {
+   "t": "Vi ställer upp formeln för hastighet vid konstant acceleration,",
+   "s": 125.84,
+   "e": 130.76
+  },
+  {
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t",
+   "s": 130.76,
+   "e": 142.14
+  },
+  {
+   "t": "Insättning av v är lika med 28 meter per sekund, v noll är lika med 15 meter per sekund ger",
+   "s": 130.76,
+   "e": 142.14
+  },
+  {
+   "t": "28 är lika med 15 plus accelerationen a gånger tiden t, ekvation 2",
+   "s": 142.14,
+   "e": 148.6
+  },
+  {
+   "t": "Vi får återigen en ekvation med de två obekanta variablerna, a och t.",
+   "s": 148.6,
+   "e": 154.25
+  },
+  {
+   "t": "Eftersom vi har två ekvationer med två obekanta kan vi nu lösa ekvationerna genom att ställa upp ett ekvationssystem av ekvation ekvation 1 och ekvation 2.",
+   "s": 154.25,
+   "e": 163.84
+  },
+  {
+   "t": "accelerationen a är lika med 800 delat med tiden t i kvadrat minus 30 delat med t 28 som är lika med 15 plus a gånger t",
+   "s": 163.84,
+   "e": 172.95
+  },
+  {
+   "t": "Detta ekvationssystem är ganska omständligt att lösa algebraiskt, så vi använder GeoGebra.",
+   "s": 172.95,
+   "e": 179.62
+  },
+  {
+   "t": "Vi skriver om ekvationssystemet med variablerna x och y för att lättare kunna skriva in det i GeoGebra.",
+   "s": 179.62,
+   "e": 186.39
+  },
+  {
+   "t": "Vi sätter a är lika med x och t är lika med y, vilket ger ekvationssystemet",
+   "s": 186.39,
+   "e": 192.3
+  },
+  {
+   "t": "x är lika med 800 delat med y i kvadrat minus 30 delat med y 28 som är lika med 15 plus x gånger y",
+   "s": 192.3,
+   "e": 200.69
+  },
+  {
+   "t": "Vi skriver in ekvationerna i GeoGebra och klickar sedan på menyn \"Tre punkter\" till höger om ekvation 2 och väljer Lös.",
+   "s": 200.69,
+   "e": 208.28
+  },
+  {
+   "t": "GeoGebra-skärm: två ekvationer inskrivna (Ekv1: x är lika med 800/y i kvadrat − 30/y, Ekv2: 28 är lika med 15 + x·y) och menyalternativet \"Lös\" valt.",
+   "s": 208.28,
+   "e": 223.43
+  },
+  {
+   "t": "Vi får lösningarna",
+   "s": 223.43,
+   "e": 226.0
+  },
+  {
+   "t": "ell ett är lika med L\\ddotos parentesen { Ekv1,Ekv2 } slut parentes som är lika med parentesen x som är lika med 559 delat med 800, y som är lika med 800 delat med 43 slut parentes",
+   "s": 226.0,
+   "e": 241.9
+  },
+  {
+   "t": "Vi ser nu att",
+   "s": 241.9,
+   "e": 244.24
+  },
+  {
+   "t": "accelerationen a är lika med x som är lika med 559 delat med 800 som är lika med 0,69875 meter per sekund i kvadrat som är ungefär lika med 0,70 meter per sekund i kvadrat",
+   "s": 244.24,
+   "e": 257.85
+  },
+  {
+   "t": "Svar: 0,70 meter per sekund i kvadrat",
+   "s": 257.85,
+   "e": 262.39
+  }
+ ]
+}

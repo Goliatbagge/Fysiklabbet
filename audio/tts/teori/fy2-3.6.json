@@ -1,0 +1,258 @@
+{
+ "id": "fy2-3.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "6d00eeacd99ee0abe9409209de9a9d4cfe05b492",
+ "dur": 39.91,
+ "segments": [
+  {
+   "t": "Det jordmagnetiska fältet",
+   "s": 0.1,
+   "e": 3.04
+  },
+  {
+   "t": "Vi har tidigare sett att laddningar i rörelse ger upphov till ett magnetfält.",
+   "s": 2.99,
+   "e": 8.2
+  },
+  {
+   "t": "I jordens inre finns, på grund av högt tryck, smält metall full med laddningar som virvlar och bildar det jordmagnetiska fältet.",
+   "s": 8.2,
+   "e": 16.61
+  },
+  {
+   "t": "Det är detta fält som gör att kompassnålar ställer in sig mot norr.",
+   "s": 16.61,
+   "e": 21.35
+  },
+  {
+   "t": "Jordklotet fungerar alltså ungefär som en stavmagnet.",
+   "s": 21.35,
+   "e": 25.75
+  },
+  {
+   "t": "Demonstration — Kompassnål",
+   "s": 25.75,
+   "e": 28.65
+  },
+  {
+   "t": "Vi håller en stavmagnet intill en stor \"kompassnål\".",
+   "s": 28.65,
+   "e": 32.96
+  },
+  {
+   "t": "Vi ser att kompassnålens nordpol (röd) ställer in sig mot stavmagnetens sydpol (vit).",
+   "s": 32.96,
+   "e": 39.91
+  },
+  {
+   "t": "Eftersom kompassernas nordändar ställer in sig mot väderstrecket norr är jordklotets norra magnetiska pol i själva verket en magnetisk sydpol!",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Jordklotets norra magnetiska pol är i själva verket en magnetisk sydpol.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Deklination",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Den norra magnetiska polen ligger inte vid den geografiska nordpolen utan i norra Kanada.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "De magnetiska polerna ändrar sig över lång tid och rör sig cirka 0,5 grader västerut på 10 år.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Avvikelsen i vinkel mellan den norra magnetiska polen och den geografiska nordpolen kallas deklination, och navigatörer justerar sina kompasser efter denna avvikelse.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Vinkeln α mellan magnetisk och geografisk nordriktning kallas deklination.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Polskifte",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "De magnetiska polerna rör ständigt på sig och kan helt byta plats med varandra.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Detta sker i genomsnitt varje 200 000–300 000 år.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Senast var det 786 000 år sedan.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Inklination",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Det jordmagnetiska fältet är på det norra halvklotet riktat ner mot marken.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "På det södra halvklotet är det riktat upp från marken.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Vinkeln som det jordmagnetiska fältet har mot marknivån kallas inklination.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Den del av det magnetiska fältet som drar kompassnålen åt norr är det jordmagnetiska fältets horisontalkomposant B j höjden h .",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "En del av fältet vill också dra kompassnålar ner mot marken — det är det jordmagnetiska fältets vertikalkomposant B j hastigheten v .",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Inklination på olika platser",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Magnetiska nordpolen: i är lika med 90 grader (fältet pekar rakt ner).",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Sverige (norra halvklotet): i är ungefär lika med 71 grader (fältet pekar snett ner mot norr).",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Vid ekvatorn: i är lika med 0 grader (fältet är horisontellt, parallellt med marken).",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Australien (södra halvklotet): i är negativ; fältet pekar snett uppåt mot norr.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Magnetiska sydpolen: i är lika med −90 grader (fältet pekar rakt upp ur marken).",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Det jordmagnetiska fältet och strålning",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Jordens magnetfält skyddar oss från laddade partiklar från t.ex. solen.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Vid polerna är skyddet sämre, eftersom magnetfältets riktning där är parallellt med laddningarnas rörelse och då inte ändrar partiklarnas bana.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Partiklarna joniserar då atomer i luften och vi ser norrsken (eller sydsken på södra halvklotet).",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Norrsken uppstår genom att syre i atmosfären exciteras av elektronerna från solstormar.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "När syreatomerna sedan deexciteras (återgår till normaltillstånd) sänder de ut grönt ljus.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Exempel 1 — Jordmagnetiska fältets horisontalkomposant",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "En kompassnål befinner sig 3,0 centimeter rakt under en ledare som är orienterad i nord–syd-riktning.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "När strömmen slås på till 2,6 ampere vrider sig kompassnålen 44 grader åt väster.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Bestäm det jordmagnetiska fältets horisontalkomposant B j höjden h .",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Vi ritar en skiss av kompassnålen sedd uppifrån.",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Vi utnyttjar trigonometri och löser ut B j höjden h .",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "tangens alfa är lika med B delat med B j höjden h vilket är ekvivalent med att B j h är lika med B delat med tangens alfa, ekvation 1",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Beräkna B från ledaren:",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "B är lika med k gånger strömmen I delat med avståndet d som är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere gånger 2,6 ampere delat med 0,030 meter som är lika med 1,733 ldots gånger 10 upphöjt till minus 5 tesla",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "B är lika med 1,733 ldots gånger 10 upphöjt till minus 5 tesla alfa som är lika med 44 grader",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "Insättning i ekvation 1 ger",
+   "s": 39.91,
+   "e": 39.91
+  },
+  {
+   "t": "B j höjden h är lika med 1,733 ldots gånger 10 upphöjt till minus 5 delat med tangens 44 grader som är lika med 1,794 ldots gånger 10 upphöjt till minus 5 tesla som är ungefär lika med 1,8 gånger 10 upphöjt till minus 5 tesla som är lika med 18 µT",
+   "s": 0.1,
+   "e": 6.4
+  },
+  {
+   "t": "Svar: 18 μT",
+   "s": 0.1,
+   "e": 6.4
+  }
+ ]
+}

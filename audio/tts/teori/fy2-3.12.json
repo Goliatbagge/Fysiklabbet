@@ -1,0 +1,228 @@
+{
+ "id": "fy2-3.12",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "68641d3499882b8e4608e0f53df3c452452e63e5",
+ "dur": 252.05,
+ "segments": [
+  {
+   "t": "Hastighetsväljare och masspektrometer",
+   "s": 0.1,
+   "e": 3.42
+  },
+  {
+   "t": "Hastighetsväljare",
+   "s": 3.38,
+   "e": 5.65
+  },
+  {
+   "t": "En anordning för att filtrera ut laddade partiklar med bestämda hastigheter kallas hastighetsväljare.",
+   "s": 5.65,
+   "e": 11.96
+  },
+  {
+   "t": "Hastighet i hastighetsväljare",
+   "s": 11.96,
+   "e": 14.99
+  },
+  {
+   "t": "hastigheten v är lika med mathbb energin E delat med B",
+   "s": 14.99,
+   "e": 19.77
+  },
+  {
+   "t": "där",
+   "s": 19.77,
+   "e": 21.25
+  },
+  {
+   "t": "v är lika med hastighet på partikel (meter per sekund)",
+   "s": 21.25,
+   "e": 25.85
+  },
+  {
+   "t": "mathbb energin E är lika med elektriskt fält (V/m)",
+   "s": 25.85,
+   "e": 31.43
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet (tesla)",
+   "s": 31.43,
+   "e": 36.01
+  },
+  {
+   "t": "Endast elektroner med hastigheten hastigheten v är lika med mathbb energin E delat med B kommer att passera genom hastighetsväljaren.",
+   "s": 36.01,
+   "e": 44.59
+  },
+  {
+   "t": "Genom att reglera det elektriska fältet mathbb energin E och den magnetiska flödestätheten B kan vi filtrera ut partiklar med bestämda hastigheter!",
+   "s": 44.59,
+   "e": 53.94
+  },
+  {
+   "t": "Härledning — Hastighet i hastighetsväljare",
+   "s": 53.94,
+   "e": 57.69
+  },
+  {
+   "t": "Elektroner skjuts från en elektronkanon och accelereras av en accelerationsspänning U till en hastighet v.",
+   "s": 57.69,
+   "e": 64.78
+  },
+  {
+   "t": "Elektronerna passerar två elektriskt laddade parallella plattor som genererar ett nedåtriktat elektriskt fält mathbb energin E som i sin tur befinner sig i ett vinkelrätt homogent magnetiskt fält B riktat in i planet enligt figuren nedan.",
+   "s": 64.78,
+   "e": 78.83
+  },
+  {
+   "t": "För elektroner som passerar rätlinjigt genom ett hål i en skärm på andra sidan gäller att den uppåtriktade elektriska kraften F e är lika stor som den nedåtriktade magnetiska kraften F massan m .",
+   "s": 78.83,
+   "e": 90.46
+  },
+  {
+   "t": "Då gäller",
+   "s": 90.46,
+   "e": 92.41
+  },
+  {
+   "t": "F e är lika med F massan m",
+   "s": 92.41,
+   "e": 95.61
+  },
+  {
+   "t": "Från tidigare teori har vi F e är lika med q gånger mathbb energin E och F massan m är lika med q gånger hastigheten v gånger B vilket ger",
+   "s": 95.61,
+   "e": 105.11
+  },
+  {
+   "t": "q gånger mathbb energin E är lika med q gånger hastigheten v gånger B",
+   "s": 105.11,
+   "e": 111.16
+  },
+  {
+   "t": "Vi dividerar båda led med q och löser sedan ut hastigheten v.",
+   "s": 111.16,
+   "e": 116.1
+  },
+  {
+   "t": "mathbb energin E är lika med hastigheten v gånger B vilket är ekvivalent med att v är lika med mathbb E delat med B vilket skulle visas",
+   "s": 116.1,
+   "e": 125.38
+  },
+  {
+   "t": "Masspektrometer",
+   "s": 125.38,
+   "e": 127.59
+  },
+  {
+   "t": "En hastighetsväljare som används för att bestämma massan hos okända (laddade) partiklar kallas masspektrometer.",
+   "s": 127.59,
+   "e": 134.89
+  },
+  {
+   "t": "Massan med masspektrometer",
+   "s": 134.89,
+   "e": 137.88
+  },
+  {
+   "t": "massan m är lika med q gånger B gånger r delat med hastigheten v",
+   "s": 137.88,
+   "e": 143.29
+  },
+  {
+   "t": "där",
+   "s": 143.29,
+   "e": 144.8
+  },
+  {
+   "t": "m är lika med partikelns massa (kilogram)",
+   "s": 144.8,
+   "e": 148.68
+  },
+  {
+   "t": "q är lika med partikelns laddning (coulomb)",
+   "s": 148.68,
+   "e": 152.62
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet (tesla)",
+   "s": 152.62,
+   "e": 157.2
+  },
+  {
+   "t": "r är lika med krökningsradie (meter)",
+   "s": 157.2,
+   "e": 161.05
+  },
+  {
+   "t": "v är lika med partikelns hastighet (meter per sekund)",
+   "s": 161.05,
+   "e": 165.76
+  },
+  {
+   "t": "Eftersom hastigheten v enkelt kan bestämmas med en hastighetsväljare kan vi alltså på detta sätt enkelt väga laddade partiklar!",
+   "s": 165.76,
+   "e": 173.29
+  },
+  {
+   "t": "Härledning — Massan med masspektrometer",
+   "s": 173.29,
+   "e": 177.0
+  },
+  {
+   "t": "Efter att hastighetsväljaren har filtrerat ut partiklar med en bestämd hastighet, så låter vi dem lämna det elektriska fältet och de kommer då enbart att påverkas av ett magnetiskt fält.",
+   "s": 177.0,
+   "e": 187.65
+  },
+  {
+   "t": "Den magnetiska kraften på partikeln kommer då att utgöra en centripetalkraft (precis som när elektronstrålen kröktes av i elektronröret då vi bestämde elektronens massa).",
+   "s": 187.65,
+   "e": 198.8
+  },
+  {
+   "t": "Om man placerar en fotografisk plåt där den lämnar det elektriska fältet så kan den registrera var partikeln träffar någonstans och utifrån det kan man bestämma partikelns banradie.",
+   "s": 198.8,
+   "e": 209.12
+  },
+  {
+   "t": "Se figur nedan.",
+   "s": 209.12,
+   "e": 211.68
+  },
+  {
+   "t": "Den magnetiska kraften F massan m utgör en centripetalkraft F c så",
+   "s": 211.68,
+   "e": 217.62
+  },
+  {
+   "t": "F massan m är lika med F c",
+   "s": 217.62,
+   "e": 220.82
+  },
+  {
+   "t": "Från tidigare teori har vi F massan m är lika med q gånger hastigheten v gånger B och F c är lika med massan m gånger hastigheten v i kvadrat delat med r .",
+   "s": 220.82,
+   "e": 230.64
+  },
+  {
+   "t": "Detta ger",
+   "s": 230.64,
+   "e": 232.65
+  },
+  {
+   "t": "q gånger hastigheten v gånger B är lika med massan m gånger v i kvadrat delat med r",
+   "s": 232.65,
+   "e": 239.07
+  },
+  {
+   "t": "Vi dividerar båda led med v och löser ut massan m.",
+   "s": 239.07,
+   "e": 252.05
+  },
+  {
+   "t": "q gånger B är lika med massan m gånger hastigheten v delat med r vilket är ekvivalent med att m är lika med q gånger B gånger r delat med v vilket skulle visas",
+   "s": 239.07,
+   "e": 252.05
+  }
+ ]
+}

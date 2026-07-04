@@ -1,0 +1,118 @@
+{
+ "id": "fy1-6.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4fbae2a53c618e2524dab5c5a21208bb20b21c29",
+ "dur": 123.64,
+ "segments": [
+  {
+   "t": "Kroppen och värme",
+   "s": 0.1,
+   "e": 2.41
+  },
+  {
+   "t": "Kroppen i värme",
+   "s": 2.36,
+   "e": 4.64
+  },
+  {
+   "t": "Normal kroppstemperatur är 37 grader Celsius och denna temperatur är viktig för kroppen att hålla för att den ska fungera.",
+   "s": 4.64,
+   "e": 12.31
+  },
+  {
+   "t": "Vid stor ansträngning eller höga temperaturer måste alltså kroppen kyla ner sig på något sätt.",
+   "s": 12.31,
+   "e": 18.4
+  },
+  {
+   "t": "Det gör vi genom svettning.",
+   "s": 18.4,
+   "e": 21.06
+  },
+  {
+   "t": "När huden utsöndrar svett kommer svetten att avdunsta och avdunstning kräver energi som tas från huden som då kyls ner.",
+   "s": 21.06,
+   "e": 28.93
+  },
+  {
+   "t": "Att avdunstning kyler ner kroppen känner vi även när vi går ur duschen och börjar frysa, särskilt om vi skulle gå ut ur badrummet!",
+   "s": 28.93,
+   "e": 36.91
+  },
+  {
+   "t": "Kroppen i kyla",
+   "s": 36.91,
+   "e": 39.29
+  },
+  {
+   "t": "Kroppen strålar värme.",
+   "s": 39.29,
+   "e": 41.85
+  },
+  {
+   "t": "En människokropp i vila är som ett element med effekten 100 watt.",
+   "s": 41.85,
+   "e": 46.84
+  },
+  {
+   "t": "Värmen vi strålar försvinner till den omgivande luften, eftersom den (oftast) är kallare än hudens temperatur som är cirka 30 grader Celsius, och vi \"kyls ner\".",
+   "s": 46.84,
+   "e": 57.38
+  },
+  {
+   "t": "Detta förhindrar vi genom att ta på oss kläder.",
+   "s": 57.38,
+   "e": 61.25
+  },
+  {
+   "t": "Kläder, särskilt tjocka, isolerar bra och håller kvar värmen mot kroppen och vi håller oss varma även när det är kallt i luften.",
+   "s": 61.25,
+   "e": 69.31
+  },
+  {
+   "t": "Evolutionärt har vi tidigare haft päls som rest på sig när det blivit kallt för att isolera bättre.",
+   "s": 69.31,
+   "e": 75.56
+  },
+  {
+   "t": "En rest av detta har vi kvar när vi i kyla får \"gåshud\", en knottrig yta på huden.",
+   "s": 75.56,
+   "e": 81.47
+  },
+  {
+   "t": "Om vi inte har kläder att värma oss med så börjar vi skaka.",
+   "s": 81.47,
+   "e": 85.59
+  },
+  {
+   "t": "Kemisk energi i kroppen blir till rörelseenergi som omvandlas till värme.",
+   "s": 85.59,
+   "e": 90.99
+  },
+  {
+   "t": "25 procent av rörelsen blir värme på grund av vår \"låga\" verkningsgrad.",
+   "s": 90.99,
+   "e": 96.42
+  },
+  {
+   "t": "Om det blåser upplever vi det också kallare.",
+   "s": 96.42,
+   "e": 99.9
+  },
+  {
+   "t": "Det gör vi på grund av att den uppvärmda luften nära våra kroppar blåser bort och ersätts med kallare luft som kyler ner våra kroppar.",
+   "s": 99.9,
+   "e": 107.55
+  },
+  {
+   "t": "Om vi befinner oss i en bastu med en lufttemperatur på 80 grader Celsius och blåser kraftigt på kroppen upplever vi det dock som väldigt varmt!",
+   "s": 107.55,
+   "e": 116.14
+  },
+  {
+   "t": "Det beror på att vi ersätter den 30-gradiga luften nära vår hud med 80-gradig luft som då istället värmer våra kroppar.",
+   "s": 116.14,
+   "e": 123.64
+  }
+ ]
+}

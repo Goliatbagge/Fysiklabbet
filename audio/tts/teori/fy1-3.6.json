@@ -1,0 +1,298 @@
+{
+ "id": "fy1-3.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "cf714e62ca3d821cc0491a5e8faab230ec4faa3a",
+ "dur": 399.13,
+ "segments": [
+  {
+   "t": "Friktion",
+   "s": 0.1,
+   "e": 2.0
+  },
+  {
+   "t": "Den kraft som strävar efter att motverka rörelsen mellan två ytor i kontakt med varandra kallas friktion eller friktionskraft, betecknas F frekvensen f och har precis som alla krafter SI-enheten N (newton).",
+   "s": 1.95,
+   "e": 14.59
+  },
+  {
+   "t": "Exempel på friktionskrafter är när",
+   "s": 14.59,
+   "e": 18.1
+  },
+  {
+   "t": "du gnuggar händerna (du känner friktionsvärmen)",
+   "s": 18.1,
+   "e": 22.19
+  },
+  {
+   "t": "en bil rullar eller bromsar (friktion mellan däck/väg och mellan bromskloss och bromsskivor)",
+   "s": 22.19,
+   "e": 29.35
+  },
+  {
+   "t": "du skjuvar något över ett golv",
+   "s": 29.35,
+   "e": 32.44
+  },
+  {
+   "t": "du går (friktion mellan sko/golv som gör att vi kommer framåt)",
+   "s": 32.44,
+   "e": 38.11
+  },
+  {
+   "t": "När du går knuffar foten marken bakåt ( F ett ) och marken knuffar dig framåt med en lika stor, motriktad friktionskraft ( F frekvensen f ) — Newtons tredje lag i praktiken.",
+   "s": 38.11,
+   "e": 49.7
+  },
+  {
+   "t": "Friktionens storlek beror på normalkraften (kraften mellan ytorna), ytornas material och hur de ser ut (ojämnheter även på mikroskopisk nivå avgör).",
+   "s": 49.7,
+   "e": 60.62
+  },
+  {
+   "t": "Hur stor andel av normalkraften som utgör friktionskraft kallas friktionstal, betecknas μ (lilla grekiska bokstaven \"my\"), saknar enhet och anges i decimalform eller i procentform. μ är lika med 0 (0 procent) betyder ingen friktion och μ är lika med 1 (100 procent) betyder att friktionskraften är lika stor som normalkraften.",
+   "s": 60.62,
+   "e": 82.66
+  },
+  {
+   "t": "Dra en kloss",
+   "s": 82.66,
+   "e": 84.9
+  },
+  {
+   "t": "Vi drar en kloss över ett bord med en dynamometer.",
+   "s": 84.9,
+   "e": 88.86
+  },
+  {
+   "t": "Vi kallar dragkraften F avståndet d r accelerationen a tyngdfaktorn g och friktionskraften F frekvensen f .",
+   "s": 88.86,
+   "e": 97.5
+  },
+  {
+   "t": "F avståndet d r accelerationen a tyngdfaktorn g är lika med 0 newton (kloss i vila).",
+   "s": 97.5,
+   "e": 105.16
+  },
+  {
+   "t": "Vi drar med en liten kraft i dynamometern, men klossen är fortfarande i vila.",
+   "s": 105.16,
+   "e": 110.96
+  },
+  {
+   "t": "En motriktad kraft är precis lika stor.",
+   "s": 110.96,
+   "e": 114.69
+  },
+  {
+   "t": "Detta är friktionskraften!",
+   "s": 114.69,
+   "e": 117.54
+  },
+  {
+   "t": "Vid vila: F frekvensen f är lika med F avståndet d r accelerationen a tyngdfaktorn g .",
+   "s": 117.54,
+   "e": 124.97
+  },
+  {
+   "t": "F avståndet d r accelerationen a tyngdfaktorn g ökas så att klossen precis börjar glida med konstant hastighet.",
+   "s": 124.97,
+   "e": 133.57
+  },
+  {
+   "t": "I detta läge är friktionskraften maximal.",
+   "s": 133.57,
+   "e": 137.4
+  },
+  {
+   "t": "Vid konstant hastighet: F frekvensen f är lika med F avståndet d r accelerationen a tyngdfaktorn g .",
+   "s": 137.4,
+   "e": 145.43
+  },
+  {
+   "t": "F avståndet d r accelerationen a tyngdfaktorn g ökas ytterligare så att klossen börjar accelerera med konstant acceleration.",
+   "s": 145.43,
+   "e": 154.51
+  },
+  {
+   "t": "I detta läge är den resulterande kraften åt höger.",
+   "s": 154.51,
+   "e": 158.72
+  },
+  {
+   "t": "Vid acceleration: F frekvensen f är mindre än F avståndet d r accelerationen a tyngdfaktorn g .",
+   "s": 158.72,
+   "e": 166.68
+  },
+  {
+   "t": "Klossen i de fyra lägena.",
+   "s": 166.68,
+   "e": 169.6
+  },
+  {
+   "t": "Blå pil visar dragkraften, orange pil friktionskraften.",
+   "s": 169.6,
+   "e": 174.43
+  },
+  {
+   "t": "Pilarnas längd visar hur stora krafterna är: i läge 2 och 3 är de lika stora, i läge 4 är dragkraften störst.",
+   "s": 174.43,
+   "e": 182.5
+  },
+  {
+   "t": "Friktionskraft",
+   "s": 182.5,
+   "e": 184.78
+  },
+  {
+   "t": "F frekvensen f är lika med my gånger F N",
+   "s": 184.78,
+   "e": 189.01
+  },
+  {
+   "t": "där",
+   "s": 189.01,
+   "e": 190.49
+  },
+  {
+   "t": "F frekvensen f är lika med friktionskraft (newton)",
+   "s": 190.49,
+   "e": 195.29
+  },
+  {
+   "t": "μ är lika med friktionstal (saknar enhet)",
+   "s": 195.29,
+   "e": 199.32
+  },
+  {
+   "t": "F N är lika med normalkraft (newton)",
+   "s": 199.32,
+   "e": 203.61
+  },
+  {
+   "t": "Exempel 1 — Anna och Per puttar bilen",
+   "s": 203.61,
+   "e": 207.1
+  },
+  {
+   "t": "Anna och Per ska skjuta på en 1 200 kilogram tung bil på plant underlag.",
+   "s": 207.1,
+   "e": 213.14
+  },
+  {
+   "t": "Anta att friktionstalet är 0,70 då handbromsen råkar vara i.",
+   "s": 213.14,
+   "e": 218.56
+  },
+  {
+   "t": "Vilken kraft måste de minst putta med?",
+   "s": 218.56,
+   "e": 221.91
+  },
+  {
+   "t": "Vi ritar kraftsituationen.",
+   "s": 221.91,
+   "e": 224.85
+  },
+  {
+   "t": "I gränsfallet är puttkraften lika stor som friktionskraften, så dessa vektorer ska vara lika långa.",
+   "s": 224.85,
+   "e": 231.47
+  },
+  {
+   "t": "Eftersom bilen är i vila gäller också att normalkrafterna F N 1 och F N 2 uppåt tillsammans är lika stora som tyngdkraften F G nedåt.",
+   "s": 231.47,
+   "e": 240.84
+  },
+  {
+   "t": "F trycket p u tiden t t är lika med F frekvensen f som är lika med my gånger F N",
+   "s": 240.84,
+   "e": 261.62
+  },
+  {
+   "t": "my är lika med 0,70 F N som är lika med F N 1 plus F N 2 som är lika med F G som är lika med massan m gånger tyngdfaktorn g som är lika med 1 200 kilogram gånger 9,82 newton per kilogram som är lika med 11 784 newton",
+   "s": 240.84,
+   "e": 261.62
+  },
+  {
+   "t": "F trycket p u tiden t t är lika med 0,70 gånger 11 784 som är lika med 8 248,8 newton som är ungefär lika med 8 200 newton som är lika med 8,2 kilonewton",
+   "s": 261.62,
+   "e": 275.96
+  },
+  {
+   "t": "Svar: 8,2 kilonewton",
+   "s": 275.96,
+   "e": 279.52
+  },
+  {
+   "t": "Exempel 2 — Bokhylla med friktion",
+   "s": 279.52,
+   "e": 282.91
+  },
+  {
+   "t": "En bokhylla med massan 50 kilogram dras med kraften 325 newton och får då accelerationen 4,0 meter per sekund i kvadrat.",
+   "s": 282.91,
+   "e": 292.19
+  },
+  {
+   "t": "Bestäma) friktionskraften b) friktionstalet.",
+   "s": 292.19,
+   "e": 296.79
+  },
+  {
+   "t": "a) Vi kan inte beräkna friktionskraften med formeln för friktionskraft då vi inte vet friktionstalet.",
+   "s": 296.79,
+   "e": 303.73
+  },
+  {
+   "t": "Vi ställer istället upp en ekvation mellan krafterna och löser ut friktionskraften F frekvensen f .",
+   "s": 303.73,
+   "e": 310.5
+  },
+  {
+   "t": "F resistansen R är lika med F avståndet d r accelerationen a tyngdfaktorn g minus F frekvensen f vilket är ekvivalent med att F f är lika med F d r a g minus F R",
+   "s": 310.5,
+   "e": 339.55
+  },
+  {
+   "t": "F avståndet d r accelerationen a tyngdfaktorn g är lika med 325 newton F resistansen R som är lika med massan m gånger a som är lika med 50 kilogram gånger 4,0 meter per sekund i kvadrat som är lika med 200 newton",
+   "s": 316.68,
+   "e": 339.55
+  },
+  {
+   "t": "F frekvensen f är lika med 325 minus 200 som är lika med 125 newton som är ungefär lika med 130 newton som är lika med 0,13 kilonewton",
+   "s": 339.5,
+   "e": 351.05
+  },
+  {
+   "t": "Svar: 0,13 kilonewton eller 130 newton",
+   "s": 351.05,
+   "e": 356.35
+  },
+  {
+   "t": "b) Vi ställer upp formeln för friktion och löser ut friktionstalet.",
+   "s": 356.35,
+   "e": 361.48
+  },
+  {
+   "t": "F frekvensen f är lika med my gånger F N vilket är ekvivalent med att my är lika med F f delat med F N",
+   "s": 361.48,
+   "e": 369.12
+  },
+  {
+   "t": "F frekvensen f är lika med 125 newton parentesen frånföregåendeuppgift slut parentes F N som är lika med F G som är lika med massan m gånger tyngdfaktorn g som är lika med 50 kilogram gånger 9,82 newton per kilogram som är lika med 491 newton",
+   "s": 369.12,
+   "e": 386.33
+  },
+  {
+   "t": "my är lika med 125 delat med 491 som är lika med 0,254 ldots som är ungefär lika med 0,25",
+   "s": 386.33,
+   "e": 395.92
+  },
+  {
+   "t": "Svar: 0,25",
+   "s": 395.92,
+   "e": 399.13
+  }
+ ]
+}

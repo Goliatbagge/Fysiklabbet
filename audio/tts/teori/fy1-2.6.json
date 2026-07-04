@@ -1,0 +1,408 @@
+{
+ "id": "fy1-2.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a107d323a51d8a95cc010488014062a49359dc0b",
+ "dur": 504.23,
+ "segments": [
+  {
+   "t": "Rörelse med konstant acceleration",
+   "s": 0.1,
+   "e": 3.52
+  },
+  {
+   "t": "Om något ändrar sin hastighet i jämn takt har det en konstant acceleration eller utför en likformigt accelererad rörelse.",
+   "s": 3.48,
+   "e": 11.07
+  },
+  {
+   "t": "Hastighet och förflyttning vid konstant acceleration",
+   "s": 11.07,
+   "e": 15.31
+  },
+  {
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t",
+   "s": 15.31,
+   "e": 28.89
+  },
+  {
+   "t": "sträckan s är lika med parentesen s noll slut parentes plus v noll gånger tiden t plus accelerationen a gånger t i kvadrat delat med 2",
+   "s": 15.31,
+   "e": 28.89
+  },
+  {
+   "t": "där",
+   "s": 28.89,
+   "e": 30.4
+  },
+  {
+   "t": "v är lika med hastighet (meter per sekund)",
+   "s": 30.4,
+   "e": 34.51
+  },
+  {
+   "t": "v noll är lika med begynnelse-/start-/utgångshastighet (meter per sekund)",
+   "s": 34.51,
+   "e": 41.48
+  },
+  {
+   "t": "a är lika med acceleration (m/s i kvadrat)",
+   "s": 41.48,
+   "e": 46.4
+  },
+  {
+   "t": "t är lika med tid (sekunder)",
+   "s": 46.4,
+   "e": 49.7
+  },
+  {
+   "t": "s är lika med förflyttning (meter)",
+   "s": 49.7,
+   "e": 53.25
+  },
+  {
+   "t": "s noll är lika med start-/utgångsläge (meter)",
+   "s": 53.25,
+   "e": 58.15
+  },
+  {
+   "t": "Härledning — Hastighet vid konstant acceleration",
+   "s": 58.15,
+   "e": 62.44
+  },
+  {
+   "t": "Sedan tidigare vet vi för konstant acceleration att",
+   "s": 62.44,
+   "e": 67.04
+  },
+  {
+   "t": "accelerationen a är lika med delta hastigheten v delat med delta tiden t",
+   "s": 67.04,
+   "e": 75.16
+  },
+  {
+   "t": "Löser vi ut hastighetsändringen Δv får vi",
+   "s": 67.04,
+   "e": 75.16
+  },
+  {
+   "t": "delta hastigheten v är lika med accelerationen a gånger delta tiden t",
+   "s": 75.16,
+   "e": 80.79
+  },
+  {
+   "t": "Om vi har en utgångs-/begynnelsehastighet v noll vid tidpunkten t är lika med 0, så får vi lägga till den för att få den slutliga hastigheten, dvs.",
+   "s": 80.79,
+   "e": 95.08
+  },
+  {
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t vsv",
+   "s": 80.79,
+   "e": 95.08
+  },
+  {
+   "t": "Härledning — Förflyttning vid konstant acceleration",
+   "s": 95.08,
+   "e": 99.21
+  },
+  {
+   "t": "Sedan tidigare har vi konstaterat att arean under en v-t-graf motsvarar förflyttningen.",
+   "s": 99.21,
+   "e": 105.42
+  },
+  {
+   "t": "Vi ritar en generell v-t-graf över en rörelse med utgångshastigheten v noll och konstant acceleration.",
+   "s": 105.42,
+   "e": 112.55
+  },
+  {
+   "t": "Från grafen får vi förflyttningen som",
+   "s": 112.55,
+   "e": 115.9
+  },
+  {
+   "t": "delta sträckan s är lika med rektangelarean plus triangelarean",
+   "s": 115.9,
+   "e": 121.2
+  },
+  {
+   "t": "Rektangelarean är lika med basen gånger höjden som är lika med tiden t gånger v noll som är lika med v noll gånger t Triangelarean som är lika med basen gånger höjden delat med 2 som är lika med t gånger delta hastigheten v delat med 2 som är lika med delta v gånger t delat med 2 som är lika med accelerationen a gånger t gånger t delat med 2 som är lika med a gånger t i kvadrat delat med 2",
+   "s": 121.2,
+   "e": 143.99
+  },
+  {
+   "t": "delta sträckan s är lika med v noll gånger tiden t plus accelerationen a gånger t i kvadrat delat med 2 vsv",
+   "s": 143.99,
+   "e": 152.18
+  },
+  {
+   "t": "Tre specialfall",
+   "s": 152.18,
+   "e": 154.5
+  },
+  {
+   "t": "Tre specialfall",
+   "s": 154.5,
+   "e": 156.78
+  },
+  {
+   "t": "Inbromsning — s i formeln kan anges som läge (med tecken) OCH sträcka (utan tecken).",
+   "s": 156.78,
+   "e": 163.45
+  },
+  {
+   "t": "Viktigt att räkna med tecken om rörelsen i något skede gör en inbromsning, till exempel vid kast uppåt.",
+   "s": 163.45,
+   "e": 170.39
+  },
+  {
+   "t": "Utan starthastighet — vid acceleration utan begynnelsehastighet gäller v noll är lika med 0.",
+   "s": 170.39,
+   "e": 177.31
+  },
+  {
+   "t": "De förenklade formlerna blir då",
+   "s": 177.31,
+   "e": 180.4
+  },
+  {
+   "t": "hastigheten v är lika med accelerationen a gånger tiden t respektive sträckan s som är lika med a gånger t i kvadrat delat med 2",
+   "s": 180.4,
+   "e": 189.21
+  },
+  {
+   "t": "Fritt fall — vid fritt fall gäller accelerationen a är lika med minus tyngdfaktorn g där tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat .",
+   "s": 189.21,
+   "e": 199.41
+  },
+  {
+   "t": "Formlerna för hastighet och förflyttning vid fritt fall blir då",
+   "s": 199.41,
+   "e": 203.9
+  },
+  {
+   "t": "hastigheten v är lika med v noll minus tyngdfaktorn g gånger tiden t respektive sträckan s som är lika med v noll gånger t minus g gånger t i kvadrat delat med 2",
+   "s": 203.9,
+   "e": 214.89
+  },
+  {
+   "t": "Medelhastighet vid konstant acceleration",
+   "s": 214.89,
+   "e": 218.72
+  },
+  {
+   "t": "v massan m är lika med v noll plus hastigheten v delat med 2",
+   "s": 218.72,
+   "e": 224.09
+  },
+  {
+   "t": "där",
+   "s": 224.09,
+   "e": 225.57
+  },
+  {
+   "t": "vₘ är lika med medelhastighet",
+   "s": 225.57,
+   "e": 228.88
+  },
+  {
+   "t": "v noll är lika med begynnelsehastighet",
+   "s": 228.88,
+   "e": 232.69
+  },
+  {
+   "t": "v är lika med sluthastighet",
+   "s": 232.69,
+   "e": 235.9
+  },
+  {
+   "t": "Redovisa lösningar",
+   "s": 235.9,
+   "e": 238.56
+  },
+  {
+   "t": "När vi löser vissa uppgifter kan det nu uppstå andragradsekvationer.",
+   "s": 238.56,
+   "e": 243.44
+  },
+  {
+   "t": "Om ekvationerna är svåra att lösa algebraiskt går det utmärkt att lösa dem grafiskt (med grafer och skärningspunkter) eller med CAS-funktionen i GeoGebra.",
+   "s": 243.44,
+   "e": 253.15
+  },
+  {
+   "t": "Redovisa dock alltid vad du gör i din lösning!",
+   "s": 253.15,
+   "e": 257.15
+  },
+  {
+   "t": "\"Jag löser ekvationen … med CAS och får …\"",
+   "s": 257.15,
+   "e": 260.95
+  },
+  {
+   "t": "\"Jag löser ekvationen grafiskt genom att rita … och får skärningarna …\"",
+   "s": 260.95,
+   "e": 265.94
+  },
+  {
+   "t": "Exempel 1 — Bilen som kör om",
+   "s": 265.94,
+   "e": 269.24
+  },
+  {
+   "t": "En bil med hastigheten 18 meter per sekund ska göra en omkörning och ökar farten med den konstanta accelerationen 2,0 meter per sekund i kvadrat.",
+   "s": 269.24,
+   "e": 278.8
+  },
+  {
+   "t": "a) Vad är bilens hastighet efter 3,0 sekunder?",
+   "s": 278.8,
+   "e": 283.41
+  },
+  {
+   "t": "b) Hur lång sträcka har den kört under denna tid?",
+   "s": 283.41,
+   "e": 287.65
+  },
+  {
+   "t": "c) Efter 3,0 sekunder blir föraren tvungen att avbryta omkörningen och bromsa ner till hastigheten 16 meter per sekund.",
+   "s": 287.65,
+   "e": 297.88
+  },
+  {
+   "t": "Vilken tid tar det om retardationen är 4,0 meter per sekund i kvadrat?",
+   "s": 297.83,
+   "e": 303.5
+  },
+  {
+   "t": "a) Vi ställer upp formeln för hastighet vid konstant acceleration.",
+   "s": 303.5,
+   "e": 308.59
+  },
+  {
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t",
+   "s": 308.59,
+   "e": 322.17
+  },
+  {
+   "t": "v noll är lika med 18 meter per sekund accelerationen a som är lika med 2,0 meter per sekund i kvadrat tiden t som är lika med 3,0 sekund",
+   "s": 308.59,
+   "e": 322.17
+  },
+  {
+   "t": "hastigheten v är lika med 18 plus 2,0 gånger 3,0 som är lika med 18 plus 6 som är lika med 24 meter per sekund",
+   "s": 322.17,
+   "e": 331.17
+  },
+  {
+   "t": "Svar: 24 meter per sekund",
+   "s": 331.17,
+   "e": 334.84
+  },
+  {
+   "t": "b) Vi ställer upp formeln för sträcka vid konstant acceleration.",
+   "s": 334.84,
+   "e": 339.79
+  },
+  {
+   "t": "sträckan s är lika med v noll gånger tiden t plus accelerationen a gånger t i kvadrat delat med 2",
+   "s": 339.79,
+   "e": 347.23
+  },
+  {
+   "t": "Insättning av samma värden som i a-uppgiften ger",
+   "s": 347.23,
+   "e": 351.28
+  },
+  {
+   "t": "sträckan s är lika med 18 gånger 3,0 plus 2,0 gånger 3,0 i kvadrat delat med 2 som är lika med 54 plus 18 delat med 2 som är lika med 54 plus 9 som är lika med 63 meter",
+   "s": 351.28,
+   "e": 364.88
+  },
+  {
+   "t": "Svar: 63 meter",
+   "s": 364.88,
+   "e": 367.98
+  },
+  {
+   "t": "c) Vi ställer upp formeln för hastighet vid konstant acceleration och löser ut tiden t.",
+   "s": 367.98,
+   "e": 399.19
+  },
+  {
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t vilket är ekvivalent med att t är lika med v minus v noll delat med a",
+   "s": 367.98,
+   "e": 399.19
+  },
+  {
+   "t": "hastigheten v är lika med 16 meter per sekund v noll som är lika med 24 meter per sekund parentesen hastighetenvid3,0senligta-uppgiften slut parentes accelerationen a som är lika med minus 4,0 meter per sekund i kvadrat parentesen minustecken—negativacceleration slut parentes",
+   "s": 367.98,
+   "e": 401.33
+  },
+  {
+   "t": "tiden t är lika med 16 minus 24 delat med minus 4,0 som är lika med minus 8,0 delat med minus 4,0 som är lika med 2,0 sekund",
+   "s": 401.33,
+   "e": 411.92
+  },
+  {
+   "t": "Svar: 2,0 sekunder",
+   "s": 411.92,
+   "e": 415.23
+  },
+  {
+   "t": "Exempel 2 — Bestäm din reaktionstid",
+   "s": 415.23,
+   "e": 418.83
+  },
+  {
+   "t": "Låt din kompis hålla upp en linjal lodrätt medan du håller din tumme och pekfinger så att överkanten på dina fingrar är vid linjalens nollmarkering.",
+   "s": 418.83,
+   "e": 427.67
+  },
+  {
+   "t": "När kompisen släpper ska du nypa ihop fingrarna så fort som möjligt.",
+   "s": 427.67,
+   "e": 432.35
+  },
+  {
+   "t": "Läs av på linjalen var överkanten på dina fingrar hamnade.",
+   "s": 432.35,
+   "e": 437.08
+  },
+  {
+   "t": "Räkna sedan ut din reaktionstid.",
+   "s": 437.08,
+   "e": 440.28
+  },
+  {
+   "t": "Linjalen faller med den konstanta accelerationen g är lika med 9,82 meter per sekund i kvadrat och vi får en fallsträcka som vi läser av vid fingrarna. (Eftersom vi tittar på sträckan behöver vi inte bry oss om minustecken.) Vi ställer upp formeln för sträcka vid konstant acceleration och löser ut tiden t.",
+   "s": 440.28,
+   "e": 460.49
+  },
+  {
+   "t": "Eftersom v noll är lika med 0 kan den termen uteslutas, så",
+   "s": 460.49,
+   "e": 465.59
+  },
+  {
+   "t": "sträckan s är lika med tyngdfaktorn g gånger tiden t i kvadrat delat med 2 vilket är ekvivalent med att t är lika med roten ur 2 gånger s delat med g",
+   "s": 465.59,
+   "e": 475.65
+  },
+  {
+   "t": "Om du till exempel skulle få dina fingrar vid 12,0 centimeter gäller s är lika med 12,0 centimeter = 0,120 meter och g är lika med 9,82 meter per sekund i kvadrat, vilket ger reaktionstiden",
+   "s": 475.65,
+   "e": 490.3
+  },
+  {
+   "t": "tiden t är lika med roten ur 2 gånger 0,120 delat med 9,82 som är lika med 0,1563 ldots sekund",
+   "s": 490.3,
+   "e": 499.8
+  },
+  {
+   "t": "Svar: 0,156 sekunder",
+   "s": 499.8,
+   "e": 504.23
+  }
+ ]
+}

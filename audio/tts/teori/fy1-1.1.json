@@ -1,0 +1,88 @@
+{
+ "id": "fy1-1.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1d62c0bf833c2bde6598d9b971fbd395412dfcc4",
+ "dur": 87.5,
+ "segments": [
+  {
+   "t": "Fysik som ämne — introduktion",
+   "s": 0.1,
+   "e": 3.26
+  },
+  {
+   "t": "Ordet \"fysik\" kommer från grekiskans \"physikos\" som betyder natur.",
+   "s": 3.21,
+   "e": 8.19
+  },
+  {
+   "t": "Fysikens uppgift är att försöka beskriva materias uppbyggnad och vilka lagar som styr materian.",
+   "s": 8.19,
+   "e": 14.47
+  },
+  {
+   "t": "Fysiken försöker beskriva hur något sker, men det innebär inte nödvändigtvis att vi vet varför.",
+   "s": 14.47,
+   "e": 21.01
+  },
+  {
+   "t": "Inom fysiken använder vi den naturvetenskapliga metoden för att få mer kunskap om naturen.",
+   "s": 21.01,
+   "e": 27.46
+  },
+  {
+   "t": "Den naturvetenskapliga metoden består av flera steg:",
+   "s": 27.46,
+   "e": 34.08
+  },
+  {
+   "t": "Observation — vi ser hur något beter sig.",
+   "s": 27.46,
+   "e": 34.08
+  },
+  {
+   "t": "Hypotes — vi gissar hur vi skulle kunna förklara observationen.",
+   "s": 34.08,
+   "e": 38.84
+  },
+  {
+   "t": "Hypotesprövning — vi testar vår hypotes, oftast med experiment.",
+   "s": 38.84,
+   "e": 44.04
+  },
+  {
+   "t": "Lagar och teorier — om experimenten stödjer vår hypotes.",
+   "s": 44.04,
+   "e": 49.01
+  },
+  {
+   "t": "Om en hypotes har genomgått flera experiment utan att motbevisas övergår hypotesen till att bli en lag.",
+   "s": 49.01,
+   "e": 56.19
+  },
+  {
+   "t": "Flera lagar tillsammans bildar en teori.",
+   "s": 56.19,
+   "e": 59.92
+  },
+  {
+   "t": "Teori betyder något annat i fysiken",
+   "s": 59.92,
+   "e": 63.48
+  },
+  {
+   "t": "I vardagligt tal används ordet \"teori\" om något som är väldigt osäkert, något som är en gissning.",
+   "s": 63.48,
+   "e": 69.6
+  },
+  {
+   "t": "Men en fysikalisk eller naturvetenskaplig teori är, tvärtom, väldigt säker eftersom den testats noggrant och aldrig motbevisats.",
+   "s": 69.6,
+   "e": 78.65
+  },
+  {
+   "t": "Verkliga fenomen kan vara svåra att beskriva exakt i detalj, men man kan då skapa modeller som tillräckligt bra stämmer överens med det vi observerar.",
+   "s": 78.65,
+   "e": 87.5
+  }
+ ]
+}

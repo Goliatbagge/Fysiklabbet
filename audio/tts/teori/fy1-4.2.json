@@ -1,0 +1,218 @@
+{
+ "id": "fy1-4.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "44a288fefa6a9ee5b4da9e8fc04dea1ebe898723",
+ "dur": 227.2,
+ "segments": [
+  {
+   "t": "Lägesenergi",
+   "s": 0.1,
+   "e": 2.41
+  },
+  {
+   "t": "Energi som inte syns utan \"lagras\" i föremål, som i en hoptryckt spiralfjäder eller i ett spänt gummiband, kallas potentiell energi.",
+   "s": 2.36,
+   "e": 11.32
+  },
+  {
+   "t": "Energi som lagras på grund av ökad höjd kallas lägesenergi.",
+   "s": 11.32,
+   "e": 16.29
+  },
+  {
+   "t": "Lägesenergi är en typ av potentiell energi, betecknas E trycket p och har, precis som alla energiformer, SI-enheten J (joule).",
+   "s": 16.29,
+   "e": 25.99
+  },
+  {
+   "t": "Lägesenergin beror alltså endast på förändring i höjdled (vertikal led eller y-led).",
+   "s": 25.99,
+   "e": 32.76
+  },
+  {
+   "t": "Höjden avgörs av var man sätter nollnivån.",
+   "s": 32.76,
+   "e": 36.58
+  },
+  {
+   "t": "Nollnivån är en referenspunkt där lägesenergin sätts till 0 och kan sättas var som helst, men sätts oftast \"längst ner\" i systemet (till exempel golvet/marken).",
+   "s": 36.58,
+   "e": 47.34
+  },
+  {
+   "t": "Om ett föremål befinner sig under nollnivån kan den alltså få ett negativt värde.",
+   "s": 47.34,
+   "e": 52.66
+  },
+  {
+   "t": "Energi i verklig mening kan dock aldrig vara negativ.",
+   "s": 52.66,
+   "e": 56.91
+  },
+  {
+   "t": "Det är tyngdpunktens läge som anger höjden över nollnivån.",
+   "s": 56.91,
+   "e": 61.42
+  },
+  {
+   "t": "Exempelvis har en bok som står upp på högkant mer lägesenergi än om den ligger platt.",
+   "s": 61.42,
+   "e": 67.42
+  },
+  {
+   "t": "För att lyfta ett föremål en viss sträcka krävs en kraft.",
+   "s": 67.42,
+   "e": 71.84
+  },
+  {
+   "t": "Vi uträttar då ett arbete eftersom arbete är lika med kraft gånger sträcka.",
+   "s": 71.84,
+   "e": 77.25
+  },
+  {
+   "t": "Det är detta arbete som leder till en höjning av lägesenergin.",
+   "s": 77.25,
+   "e": 81.88
+  },
+  {
+   "t": "Lägesenergi",
+   "s": 81.88,
+   "e": 84.16
+  },
+  {
+   "t": "E trycket p är lika med massan m gånger tyngdfaktorn g gånger höjden h",
+   "s": 84.16,
+   "e": 89.55
+  },
+  {
+   "t": "där",
+   "s": 89.55,
+   "e": 91.05
+  },
+  {
+   "t": "E trycket p är lika med lägesenergi (joule)",
+   "s": 91.05,
+   "e": 95.26
+  },
+  {
+   "t": "m är lika med föremålets massa (kilogram)",
+   "s": 95.26,
+   "e": 99.33
+  },
+  {
+   "t": "g är lika med tyngdfaktor (newton per kilogram) (9,82 newton per kilogram i Sverige)",
+   "s": 99.33,
+   "e": 106.83
+  },
+  {
+   "t": "h är lika med höjd över nollnivån (meter)",
+   "s": 106.83,
+   "e": 110.89
+  },
+  {
+   "t": "Härledning — Lägesenergi",
+   "s": 110.89,
+   "e": 113.86
+  },
+  {
+   "t": "Lägesenergin ges av det arbete som vi uträttar när vi lyfter ett föremål, så",
+   "s": 113.86,
+   "e": 119.79
+  },
+  {
+   "t": "E trycket p är lika med arbetet W som är lika med F sträckan s gånger s",
+   "s": 119.79,
+   "e": 125.7
+  },
+  {
+   "t": "Den kraft vi måste ta i med motsvarar föremålets tyngd, så F sträckan s är lika med m gånger g.",
+   "s": 125.7,
+   "e": 136.9
+  },
+  {
+   "t": "Sträckan vi lyfter föremålet ger en viss höjd, så s är lika med h.",
+   "s": 125.7,
+   "e": 136.9
+  },
+  {
+   "t": "Insättning ger",
+   "s": 125.7,
+   "e": 136.9
+  },
+  {
+   "t": "E trycket p är lika med massan m gånger tyngdfaktorn g gånger höjden h vilket skulle visas",
+   "s": 136.9,
+   "e": 143.34
+  },
+  {
+   "t": "Lägesenergi och arbete",
+   "s": 143.34,
+   "e": 146.34
+  },
+  {
+   "t": "Om en höjdändring sker utan friktion motsvarar arbetet W ändringen av lägesenergi Δ E trycket p .",
+   "s": 146.34,
+   "e": 153.66
+  },
+  {
+   "t": "arbetet W är lika med delta E trycket p",
+   "s": 153.66,
+   "e": 159.94
+  },
+  {
+   "t": "Exempel 1 — Vagn upp på lutande plan",
+   "s": 153.66,
+   "e": 159.94
+  },
+  {
+   "t": "Du drar en vagn 5,0 meter uppför ett lutande plan med lutningsvinkeln 30 grader, så att den hamnar 2,5 meter över utgångshöjden.",
+   "s": 159.94,
+   "e": 169.12
+  },
+  {
+   "t": "Vagnen väger 32 kilogram.",
+   "s": 169.12,
+   "e": 172.34
+  },
+  {
+   "t": "Vilket arbete uträttar du om vagnen rullar friktionsfritt?",
+   "s": 172.34,
+   "e": 176.97
+  },
+  {
+   "t": "Tänk: Till vilken eller vilka energiformer omvandlas arbetet?",
+   "s": 176.97,
+   "e": 182.2
+  },
+  {
+   "t": "Svar: Endast till lägesenergi E trycket p (att vagnen rullar friktionsfritt medför att vi inte får någon friktionsvärme).",
+   "s": 182.2,
+   "e": 190.89
+  },
+  {
+   "t": "Arbetet W ger alltså ökningen av lägesenergi.",
+   "s": 190.89,
+   "e": 195.34
+  },
+  {
+   "t": "arbetet W är lika med E trycket p som är lika med massan m gånger tyngdfaktorn g gånger höjden h",
+   "s": 195.34,
+   "e": 210.18
+  },
+  {
+   "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter",
+   "s": 195.34,
+   "e": 210.18
+  },
+  {
+   "t": "arbetet W är lika med 32 gånger 9,82 gånger 2,5 som är lika med 785,6 Nm som är ungefär lika med 790 Nm som är lika med 0,79 kNm",
+   "s": 210.18,
+   "e": 223.18
+  },
+  {
+   "t": "Svar: 0,79 kilojoule",
+   "s": 223.18,
+   "e": 227.2
+  }
+ ]
+}

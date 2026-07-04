@@ -1,0 +1,218 @@
+{
+ "id": "fy2-1.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "169e8cd02fd804ce6e4290cced682b740becba57",
+ "dur": 236.05,
+ "segments": [
+  {
+   "t": "Räkneexempel — Den flygande kossan",
+   "s": 0.1,
+   "e": 3.56
+  },
+  {
+   "t": "Detta är ett klassiskt laborationsexempel där vi bestämmer jordens tyngdacceleration g med hjälp av en konisk pendel.",
+   "s": 3.51,
+   "e": 10.94
+  },
+  {
+   "t": "Uppställning",
+   "s": 10.94,
+   "e": 12.86
+  },
+  {
+   "t": "Vi hänger upp en kossa i ett snöre i taket och låter den flyga i en cirkelbana (så som kossor gör).",
+   "s": 12.86,
+   "e": 19.43
+  },
+  {
+   "t": "Kossan flyger i en cirkelbana med radien r och höjden h under upphängningspunkten.",
+   "s": 19.43,
+   "e": 25.11
+  },
+  {
+   "t": "Härledning",
+   "s": 25.11,
+   "e": 27.05
+  },
+  {
+   "t": "Vilka krafter verkar på kossan?",
+   "s": 27.05,
+   "e": 30.15
+  },
+  {
+   "t": "Tyngdkraften F G är lika med massan m gånger tyngdfaktorn g nedåt",
+   "s": 30.15,
+   "e": 35.52
+  },
+  {
+   "t": "Spännkraften F S längs snöret",
+   "s": 35.52,
+   "e": 39.33
+  },
+  {
+   "t": "Den kraft som är riktad in mot cirkelbanans centrum är spännkraftens komposant i x-led, F S x .",
+   "s": 39.33,
+   "e": 46.65
+  },
+  {
+   "t": "Det är alltså denna som utgör centripetalkraften.",
+   "s": 46.65,
+   "e": 50.48
+  },
+  {
+   "t": "F C är lika med F S x, ekvation 1",
+   "s": 50.48,
+   "e": 55.02
+  },
+  {
+   "t": "Uttrycket för banfart hastigheten v är lika med 2 pi gånger r delat med periodtiden T insatt i F C är lika med massan m gånger hastigheten v i kvadrat delat med r ger",
+   "s": 55.02,
+   "e": 65.97
+  },
+  {
+   "t": "F C är lika med 4 pi i kvadrat gånger massan m gånger r delat med periodtiden T i kvadrat, ekvation 2",
+   "s": 65.97,
+   "e": 74.35
+  },
+  {
+   "t": "Vi ska nu bestämma ett uttryck för F S x .",
+   "s": 74.35,
+   "e": 78.55
+  },
+  {
+   "t": "Tittar vi på figuren ser vi att vi har två likformiga trianglar — en större (med kateterna h och r, hypotenusan snöret) och en mindre (med kateterna F S y och F S x , hypotenusan F S ).",
+   "s": 78.55,
+   "e": 92.03
+  },
+  {
+   "t": "De är likformiga eftersom båda har en rät vinkel och en gemensam vinkel.",
+   "s": 92.03,
+   "e": 97.31
+  },
+  {
+   "t": "Sidförhållandena ger",
+   "s": 97.31,
+   "e": 99.97
+  },
+  {
+   "t": "F S y delat med höjden h är lika med F S x delat med r",
+   "s": 99.97,
+   "e": 105.16
+  },
+  {
+   "t": "Eftersom kossan inte har någon acceleration i y-led (kraftjämvikt i y-led) måste spännkraften i y-led F S y uppåt vara lika stor som tyngdkraften F G nedåt:",
+   "s": 105.16,
+   "e": 121.67
+  },
+  {
+   "t": "F S y är lika med F G som är lika med massan m gånger tyngdfaktorn g",
+   "s": 105.16,
+   "e": 121.67
+  },
+  {
+   "t": "Insättning i sidförhållandet ger",
+   "s": 105.16,
+   "e": 121.67
+  },
+  {
+   "t": "massan m gånger tyngdfaktorn g delat med höjden h är lika med F S x delat med r vilket är ekvivalent med att F S x är lika med m gånger g gånger r delat med h, ekvation 3",
+   "s": 121.67,
+   "e": 133.26
+  },
+  {
+   "t": "Insättning av ekvation 2 och ekvation 3 i ekvation 1 ger",
+   "s": 133.26,
+   "e": 138.59
+  },
+  {
+   "t": "4 pi i kvadrat gånger massan m gånger r delat med periodtiden T i kvadrat är lika med m gånger tyngdfaktorn g gånger r delat med höjden h",
+   "s": 138.59,
+   "e": 148.26
+  },
+  {
+   "t": "Vi dividerar med m och r i båda led och löser ut g.",
+   "s": 148.26,
+   "e": 163.41
+  },
+  {
+   "t": "4 pi i kvadrat delat med periodtiden T i kvadrat är lika med tyngdfaktorn g delat med höjden h vilket är ekvivalent med att g är lika med 4 pi i kvadrat gånger h delat med T i kvadrat",
+   "s": 148.26,
+   "e": 163.41
+  },
+  {
+   "t": "Tyngdacceleration med konisk pendel",
+   "s": 163.41,
+   "e": 166.81
+  },
+  {
+   "t": "tyngdfaktorn g är lika med 4 pi i kvadrat gånger höjden h delat med periodtiden T i kvadrat",
+   "s": 166.81,
+   "e": 173.91
+  },
+  {
+   "t": "där",
+   "s": 173.91,
+   "e": 175.39
+  },
+  {
+   "t": "g är lika med tyngdacceleration (m/s i kvadrat)",
+   "s": 175.39,
+   "e": 180.64
+  },
+  {
+   "t": "h är lika med höjden under upphängningspunkten (meter)",
+   "s": 180.64,
+   "e": 185.1
+  },
+  {
+   "t": "T är lika med periodtid för ett varv (sekunder)",
+   "s": 185.1,
+   "e": 189.36
+  },
+  {
+   "t": "För att bestämma jordens tyngdacceleration behöver vi alltså endast ta reda på banans höjd h och periodtiden T.",
+   "s": 189.36,
+   "e": 200.19
+  },
+  {
+   "t": "Märk att massan m och radien r försvann ur ekvationen — vi behöver inte mäta dem.",
+   "s": 189.36,
+   "e": 200.19
+  },
+  {
+   "t": "Mätuppgift",
+   "s": 200.19,
+   "e": 202.34
+  },
+  {
+   "t": "Mu kör vi! — Mät och räkna ut g",
+   "s": 202.34,
+   "e": 214.12
+  },
+  {
+   "t": "Mät tiden för 10 varv och dela med 10 för att få periodtiden T.",
+   "s": 204.38,
+   "e": 214.12
+  },
+  {
+   "t": "Mät sedan höjden h från cirkelbanans plan upp till takfästet.",
+   "s": 204.38,
+   "e": 214.12
+  },
+  {
+   "t": "Teoretiskt värde: g är lika med 9,82 meter per sekund i kvadrat i Sverige.",
+   "s": 214.12,
+   "e": 220.61
+  },
+  {
+   "t": "Hur nära det teoretiska värdet kom ni?",
+   "s": 220.61,
+   "e": 224.14
+  },
+  {
+   "t": "Vad kan ha orsakat eventuella avvikelser? (Snöret är inte exakt rakt, kossan rör sig inte i en perfekt cirkel, mätfel i tid och höjd, m.m.)",
+   "s": 224.14,
+   "e": 236.05
+  }
+ ]
+}

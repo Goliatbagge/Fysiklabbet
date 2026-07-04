@@ -1,0 +1,468 @@
+{
+ "id": "fy1-8.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "56d8fe6ae1432f37a633f9eb6e7c2a4e5d554a4a",
+ "dur": 574.24,
+ "segments": [
+  {
+   "t": "Relativitetsteori",
+   "s": 0.1,
+   "e": 2.79
+  },
+  {
+   "t": "Ljushastigheten i vakuum är alltid densamma ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund ) oavsett hur observatör och ljuskälla rör sig i förhållande till varandra.",
+   "s": 2.74,
+   "e": 15.39
+  },
+  {
+   "t": "Michelson och Morleys experiment",
+   "s": 15.39,
+   "e": 18.66
+  },
+  {
+   "t": "Att ljusets hastighet i ett medium är konstant oavsett hur ljuskällan rör sig bevisades av Michelson och Morley i ett experiment 1887 som involverade jordens rörelse och speglar.",
+   "s": 18.66,
+   "e": 30.1
+  },
+  {
+   "t": "Ljus skickades i två motsatta riktningar parallellt med jordens bana runt solen.",
+   "s": 30.1,
+   "e": 35.67
+  },
+  {
+   "t": "Jorden rör sig i rymden med farten hastigheten v är ungefär lika med 30 kilometer per sekund .",
+   "s": 35.67,
+   "e": 42.27
+  },
+  {
+   "t": "Ljusets hastighet i vakuum är c är ungefär lika med 300 000 kilometer per sekund .",
+   "s": 42.27,
+   "e": 48.73
+  },
+  {
+   "t": "Om ljuset hade betett sig enligt klassisk fysik skulle ljus som skickas med jordens rörelse få hastigheten c plus hastigheten v är ungefär lika med 300 030 kilometer per sekund .",
+   "s": 48.73,
+   "e": 60.29
+  },
+  {
+   "t": "Ljus som skickas mot jordens rörelse skulle få hastigheten c minus hastigheten v är ungefär lika med 299 970 kilometer per sekund .",
+   "s": 60.29,
+   "e": 70.5
+  },
+  {
+   "t": "Inget av dessa alternativ stämde i experimentet.",
+   "s": 70.5,
+   "e": 74.85
+  },
+  {
+   "t": "I båda fall blev ljusets sammanlagda hastighet oförändrad, det vill säga c är ungefär lika med 300 000 kilometer per sekund !",
+   "s": 74.85,
+   "e": 83.3
+  },
+  {
+   "t": "Detta gick emot det förväntade resultatet och har kallats \"det mest berömda misslyckade experimentet genom tiderna\".",
+   "s": 83.3,
+   "e": 90.51
+  },
+  {
+   "t": "Relativistiska effekter",
+   "s": 90.51,
+   "e": 93.39
+  },
+  {
+   "t": "Tre effekter som ljusets konstanta hastighet medför är att ju närmare ljusets hastighet ett objekt kommer desto",
+   "s": 93.39,
+   "e": 100.49
+  },
+  {
+   "t": "långsammare går tiden för objektet (tidsdilatation) — \"ju fortare du rör dig i rummet desto långsammare rör du dig i tiden\"",
+   "s": 100.49,
+   "e": 108.6
+  },
+  {
+   "t": "kortare i rörelsens riktning blir objektet (längdkontraktion)",
+   "s": 108.6,
+   "e": 113.61
+  },
+  {
+   "t": "större blir objektets massa (relativistisk massa).",
+   "s": 113.61,
+   "e": 118.06
+  },
+  {
+   "t": "Tidsdilatation",
+   "s": 118.06,
+   "e": 120.35
+  },
+  {
+   "t": "tiden t är lika med t noll delat med roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat",
+   "s": 120.35,
+   "e": 128.21
+  },
+  {
+   "t": "där",
+   "s": 128.21,
+   "e": 129.69
+  },
+  {
+   "t": "t noll är lika med tiden för ett förlopp inifrån ett rörelsesystem, egentid (sekunder)",
+   "s": 129.69,
+   "e": 136.54
+  },
+  {
+   "t": "t är lika med tiden för samma förlopp sett utifrån rörelsesystemet (sekunder)",
+   "s": 136.54,
+   "e": 142.62
+  },
+  {
+   "t": "v är lika med rörelsesystemets hastighet (meter per sekund)",
+   "s": 142.62,
+   "e": 147.85
+  },
+  {
+   "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )",
+   "s": 147.85,
+   "e": 156.55
+  },
+  {
+   "t": "Tidsdilatationen är en verklig effekt som man måste ta hänsyn till till exempel när man synkroniserar GPS-satelliters klockor med våra klockor vid jordytan.",
+   "s": 156.55,
+   "e": 166.19
+  },
+  {
+   "t": "Längdkontraktion",
+   "s": 166.19,
+   "e": 168.55
+  },
+  {
+   "t": "hävarmen l är lika med l noll gånger roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat",
+   "s": 168.55,
+   "e": 176.21
+  },
+  {
+   "t": "där",
+   "s": 176.21,
+   "e": 177.72
+  },
+  {
+   "t": "l noll är lika med längden i rörelsens riktning inifrån ett rörelsesystem (meter)",
+   "s": 177.72,
+   "e": 184.11
+  },
+  {
+   "t": "l är lika med längden i rörelsens riktning sett utifrån rörelsesystemet (meter)",
+   "s": 184.11,
+   "e": 190.38
+  },
+  {
+   "t": "v är lika med rörelsesystemets hastighet (meter per sekund)",
+   "s": 190.38,
+   "e": 195.59
+  },
+  {
+   "t": "c är lika med ljusets hastighet i vakuum (2,998 gånger 10 upphöjt till 8 meter per sekund)",
+   "s": 195.59,
+   "e": 203.85
+  },
+  {
+   "t": "Relativistisk massa",
+   "s": 203.85,
+   "e": 206.44
+  },
+  {
+   "t": "massan m är lika med m noll delat med roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat",
+   "s": 206.44,
+   "e": 214.12
+  },
+  {
+   "t": "där",
+   "s": 214.12,
+   "e": 215.64
+  },
+  {
+   "t": "m noll är lika med massan inifrån ett rörelsesystem (kilogram)",
+   "s": 215.64,
+   "e": 221.0
+  },
+  {
+   "t": "m är lika med massan sett utifrån rörelsesystemet (kilogram)",
+   "s": 221.0,
+   "e": 226.4
+  },
+  {
+   "t": "v är lika med rörelsesystemets hastighet (meter per sekund)",
+   "s": 226.4,
+   "e": 231.64
+  },
+  {
+   "t": "c är lika med ljusets hastighet (2,998 gånger 10 upphöjt till 8 meter per sekund)",
+   "s": 231.64,
+   "e": 239.43
+  },
+  {
+   "t": "Att massan ökar vid höga hastigheter har man kunnat bevisa med partikelacceleratorer.",
+   "s": 239.43,
+   "e": 245.25
+  },
+  {
+   "t": "Tidsdilatation",
+   "s": 245.25,
+   "e": 247.45
+  },
+  {
+   "t": "Vi tänker oss en lampa som skickar ut ljus (en foton) från innertaket i en buss som rör sig med konstant hastighet v.",
+   "s": 247.45,
+   "e": 255.14
+  },
+  {
+   "t": "Alice ser förloppet inifrån bussen.",
+   "s": 255.14,
+   "e": 258.57
+  },
+  {
+   "t": "Bianca ser förloppet utanför bussen.",
+   "s": 258.57,
+   "e": 261.98
+  },
+  {
+   "t": "Sträckan x (Alices vy) är hastigheten c multiplicerat med tiden som Alice upplever, t noll , det tar för fotonen att lämna lampan och nå golvet, det vill säga x är lika med c gånger t noll .",
+   "s": 261.98,
+   "e": 274.66
+  },
+  {
+   "t": "Sträckan y (Biancas vy) är hastigheten c multiplicerat med tiden som Bianca upplever, t, det tar för fotonen att lämna lampan och nå golvet, det vill säga y är lika med c gånger tiden t .",
+   "s": 274.66,
+   "e": 287.25
+  },
+  {
+   "t": "Eftersom bussen rörde sig med farten v under tiden t, hamnar fotonen hastigheten v gånger tiden t längre fram än lampan låg.",
+   "s": 287.25,
+   "e": 295.31
+  },
+  {
+   "t": "Dessa sträckor ger en rätvinklig triangel med kateterna x och hastigheten v gånger tiden t samt hypotenusan y.",
+   "s": 295.31,
+   "e": 306.33
+  },
+  {
+   "t": "Pythagoras sats ger",
+   "s": 299.09,
+   "e": 306.33
+  },
+  {
+   "t": "y i kvadrat är lika med x i kvadrat plus parentesen hastigheten v tiden t slut parentes i kvadrat",
+   "s": 306.28,
+   "e": 314.17
+  },
+  {
+   "t": "parentesen c gånger tiden t slut parentes i kvadrat är lika med parentesen c gånger t noll slut parentes i kvadrat plus parentesen hastigheten v gånger t slut parentes i kvadrat",
+   "s": 314.17,
+   "e": 326.39
+  },
+  {
+   "t": "c i kvadrat gånger tiden t i kvadrat minus hastigheten v i kvadrat gånger t i kvadrat är lika med c i kvadrat gånger t noll i kvadrat",
+   "s": 326.39,
+   "e": 336.07
+  },
+  {
+   "t": "tiden t i kvadrat parentesen c i kvadrat minus hastigheten v i kvadrat slut parentes är lika med c i kvadrat gånger t noll i kvadrat",
+   "s": 336.07,
+   "e": 346.19
+  },
+  {
+   "t": "tiden t i kvadrat är lika med c i kvadrat gånger t noll i kvadrat delat med c i kvadrat minus hastigheten v i kvadrat",
+   "s": 346.19,
+   "e": 354.92
+  },
+  {
+   "t": "Förkortar HL med c i kvadrat :",
+   "s": 354.92,
+   "e": 372.19
+  },
+  {
+   "t": "tiden t i kvadrat är lika med t noll i kvadrat delat med 1 minus hastigheten v i kvadrat delat med c i kvadrat vilket är ekvivalent med att t är lika med t noll delat med roten ur 1 minus v i kvadrat delat med c i kvadrat vilket skulle visas",
+   "s": 354.92,
+   "e": 372.19
+  },
+  {
+   "t": "Einstein visade också att \"massa är energi\" i en av världens mest kända formler.",
+   "s": 372.19,
+   "e": 377.77
+  },
+  {
+   "t": "Energi hos massa",
+   "s": 377.77,
+   "e": 380.34
+  },
+  {
+   "t": "energin E är lika med massan m gånger c i kvadrat",
+   "s": 380.34,
+   "e": 384.87
+  },
+  {
+   "t": "där",
+   "s": 384.87,
+   "e": 386.34
+  },
+  {
+   "t": "E är lika med energi (joule)",
+   "s": 386.34,
+   "e": 389.62
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 389.62,
+   "e": 392.97
+  },
+  {
+   "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )",
+   "s": 392.97,
+   "e": 401.68
+  },
+  {
+   "t": "Eftersom ljusets hastighet är ett väldigt stort tal innebär det att något med liten massa innehåller stora mängder energi.",
+   "s": 401.68,
+   "e": 408.95
+  },
+  {
+   "t": "Exempel 1 — Rymdskepp med strålkastare",
+   "s": 408.95,
+   "e": 412.74
+  },
+  {
+   "t": "Ett rymdskepp rör sig i 70 procent av ljusets hastighet samtidigt som det slår på strålkastarna (som sitter på både fram- och baksidan av rymdskeppet).",
+   "s": 412.74,
+   "e": 422.19
+  },
+  {
+   "t": "Med vilken hastighet kommer ljuset att träffa dig om rymdskeppet rör sig",
+   "s": 422.19,
+   "e": 427.39
+  },
+  {
+   "t": "a) mot dig?",
+   "s": 427.39,
+   "e": 429.58
+  },
+  {
+   "t": "b) från dig?",
+   "s": 429.58,
+   "e": 431.88
+  },
+  {
+   "t": "a) Ljusets hastighet är konstant.",
+   "s": 431.88,
+   "e": 435.49
+  },
+  {
+   "t": "Ljuset kommer alltså att träffa dig med ljusets hastighet c.",
+   "s": 435.49,
+   "e": 443.64
+  },
+  {
+   "t": "Svar: c",
+   "s": 435.49,
+   "e": 443.64
+  },
+  {
+   "t": "b) Återigen spelar rymdskeppets rörelse ingen roll.",
+   "s": 435.49,
+   "e": 443.64
+  },
+  {
+   "t": "Ljuset kommer att träffa dig med ljusets hastighet c.",
+   "s": 443.64,
+   "e": 451.85
+  },
+  {
+   "t": "Svar: c",
+   "s": 443.64,
+   "e": 451.85
+  },
+  {
+   "t": "Exempel 2 — Buss i 87 procent av ljusets hastighet",
+   "s": 443.64,
+   "e": 451.85
+  },
+  {
+   "t": "En buss rör sig i 87 procent av ljusets hastighet.",
+   "s": 451.85,
+   "e": 456.33
+  },
+  {
+   "t": "Vad blir sambandet mellan tiden för en passagerare inuti bussen och tiden för en observatör utanför bussen?",
+   "s": 456.33,
+   "e": 463.12
+  },
+  {
+   "t": "Vi ställer upp formeln för tidsdilatation",
+   "s": 463.12,
+   "e": 466.69
+  },
+  {
+   "t": "tiden t är lika med t noll delat med roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat",
+   "s": 466.69,
+   "e": 474.57
+  },
+  {
+   "t": "Kom ihåg: t noll är lika med \"passagerarens klocka\" och tiden t är lika med \"observatörens klocka\".",
+   "s": 474.57,
+   "e": 481.42
+  },
+  {
+   "t": "Insättning av hastigheten v är lika med 0,87 c ger",
+   "s": 481.42,
+   "e": 486.48
+  },
+  {
+   "t": "tiden t är lika med t noll delat med roten ur 1 minus parentesen 0,87 c slut parentes i kvadrat delat med c i kvadrat som är lika med t noll delat med roten ur 1 minus 0,87 i kvadrat som är lika med t noll delat med roten ur 0,2431 som är lika med t noll delat med 0,493 ldots som är lika med 2,028 ldots gånger t noll",
+   "s": 486.48,
+   "e": 511.12
+  },
+  {
+   "t": "Det vill säga tiden t är ungefär lika med 2 gånger t noll .",
+   "s": 511.12,
+   "e": 515.73
+  },
+  {
+   "t": "Detta innebär att tiden tickar dubbelt så fort för observatören jämfört med passageraren.",
+   "s": 515.73,
+   "e": 521.82
+  },
+  {
+   "t": "Observatören kommer att åldras två år under ett år för passageraren!",
+   "s": 521.82,
+   "e": 526.94
+  },
+  {
+   "t": "Svar: tiden t är ungefär lika med 2 gånger t noll",
+   "s": 526.94,
+   "e": 531.7
+  },
+  {
+   "t": "Tid i gravitationsfält",
+   "s": 531.7,
+   "e": 534.63
+  },
+  {
+   "t": "Dina fötter åldras en gnutta långsammare än ditt huvud.",
+   "s": 534.63,
+   "e": 539.02
+  },
+  {
+   "t": "Ditt huvud befinner sig nämligen, när du står eller sitter, 1–1,5 meter högre upp i jordens gravitationsfält och märker därför av en gravitation som är aningen svagare.",
+   "s": 539.02,
+   "e": 549.62
+  },
+  {
+   "t": "Som Einstein visade teoretiskt i sin allmänna relativitetsteori, och som vi sedan experimentellt kunnat fastslå genom att studera GPS-satelliters atomklockor, flyter tiden långsammare i ett starkt gravitationsfält än i ett svagt.",
+   "s": 549.62,
+   "e": 563.68
+  },
+  {
+   "t": "Rent praktiskt är effekten liten här nere vid jordytan, eftersom ditt huvud åldras ca 90 miljarddelar av en sekund mer än dina fötter under en 79-årig livstid.",
+   "s": 563.68,
+   "e": 574.24
+  }
+ ]
+}

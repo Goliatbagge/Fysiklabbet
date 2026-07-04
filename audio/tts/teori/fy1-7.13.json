@@ -1,0 +1,128 @@
+{
+ "id": "fy1-7.13",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "709f000b9551446b250ab57ffb18fdd75538c01f",
+ "dur": 160.84,
+ "segments": [
+  {
+   "t": "Faradays bur",
+   "s": 0.1,
+   "e": 2.31
+  },
+  {
+   "t": "Om vi lägger ett elektriskt fält över en metallbur kommer ledningselektroner att röra sig mot fältet.",
+   "s": 2.26,
+   "e": 8.74
+  },
+  {
+   "t": "Om vi till exempel lägger ett högerriktat fält genom buren rör sig ledningselektroner åt vänster och den vänstra delen av buren blir negativt laddad medan den högra delen blir positivt laddad.",
+   "s": 8.74,
+   "e": 19.71
+  },
+  {
+   "t": "Inuti buren bildas då ögonblickligen (med ljusets hastighet) ett motriktat fält till det yttre elektriska fältet (fältlinjer går från burens positiva sida till dess negativa, åt vänster i figuren) som är lika stort.",
+   "s": 19.71,
+   "e": 33.36
+  },
+  {
+   "t": "Inuti buren finns alltså inget resulterande elektriskt fält!",
+   "s": 33.36,
+   "e": 38.17
+  },
+  {
+   "t": "Ett sådant metallhölje som släcker ut elektriska fält kallas Faradays bur.",
+   "s": 38.17,
+   "e": 43.8
+  },
+  {
+   "t": "Ett yttre högerriktat fält läggs på.",
+   "s": 43.8,
+   "e": 47.27
+  },
+  {
+   "t": "2) Elektroner samlas till vänster (−) och högersidan blir positiv (+), vilket skapar ett motriktat fält inuti.",
+   "s": 47.27,
+   "e": 55.52
+  },
+  {
+   "t": "3) Det resulterande fältet inuti buren blir noll.",
+   "s": 55.52,
+   "e": 60.11
+  },
+  {
+   "t": "Att inga elektriska fält bildas inuti metallkonstruktioner är anledningen till att vi ofta är säkra i en bil vid åskväder då bilens kaross fungerar som Faradays bur — inte på grund av isolerande gummidäck, vilket är en vanlig missuppfattning.",
+   "s": 60.11,
+   "e": 73.8
+  },
+  {
+   "t": "Faradays bur",
+   "s": 73.8,
+   "e": 76.01
+  },
+  {
+   "t": "Om vi hänger pappersremsor eller metallkulor över kanten på en metallbur och sedan laddar buren ser vi att föremålen påverkas starkt av fältet på utsidan av buren där de står rakt ut, men hänger opåverkat rakt ner på insidan.",
+   "s": 76.01,
+   "e": 89.08
+  },
+  {
+   "t": "Överskottsladdningarna i buren repellerar varandra och samlas på utsidan av buren.",
+   "s": 89.08,
+   "e": 94.91
+  },
+  {
+   "t": "Detta leder till att inget fält bildas inuti buren.",
+   "s": 94.91,
+   "e": 99.26
+  },
+  {
+   "t": "Spetsurladdning",
+   "s": 99.26,
+   "e": 101.58
+  },
+  {
+   "t": "Om man laddar en spetsig ledare koncentreras laddningar i spetsen så att den lokala elektriska fältstyrkan blir så stark att det sker en urladdning från spetsen till luftmolekylerna som då laddas.",
+   "s": 101.58,
+   "e": 112.53
+  },
+  {
+   "t": "Denna typ av urladdningar kallas spetsurladdning.",
+   "s": 112.53,
+   "e": 116.55
+  },
+  {
+   "t": "Luftmolekylerna och spetsarna repellerar då varandra och \"propellern\" börjar snurra.",
+   "s": 116.55,
+   "e": 122.09
+  },
+  {
+   "t": "Spetsurladdning eller Sankt Elmseld",
+   "s": 122.09,
+   "e": 125.51
+  },
+  {
+   "t": "Spetsurladdning kallas också Sankt Elmseld och kan uppstå i spetsiga åskledare, masttoppar och liknande vid t.ex. åskväder när den lokala elektriska fältstyrkan är hög.",
+   "s": 125.51,
+   "e": 136.24
+  },
+  {
+   "t": "I mörker syns den som ett svagt blått lysande utåtriktat ljussken vid spetsarna på dessa föremål.",
+   "s": 136.24,
+   "e": 142.74
+  },
+  {
+   "t": "Det är alltså inte samma sak som åska.",
+   "s": 142.74,
+   "e": 146.03
+  },
+  {
+   "t": "Till skillnad från en åskblixt, som framför allt är en urladdning av elektroner, är Sankt Elmseld en urladdning av fotoner (ljuspartiklar).",
+   "s": 146.03,
+   "e": 155.06
+  },
+  {
+   "t": "Den är alltså tämligen ljudlös (svagt surrande ljud) jämfört med en åskblixt.",
+   "s": 155.06,
+   "e": 160.84
+  }
+ ]
+}

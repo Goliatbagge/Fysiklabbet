@@ -1,0 +1,333 @@
+{
+ "id": "fy2-2.11",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7acbd658f14cbcb5b16dc530875ba973f8c4c86f",
+ "dur": 382.65,
+ "segments": [
+  {
+   "t": "Ljudstyrka",
+   "s": 0.1,
+   "e": 2.11
+  },
+  {
+   "t": "Hur starkt ett ljud är — \"volymen\" — kallas ljudstyrka och motsvarar svängningens amplitud.",
+   "s": 2.06,
+   "e": 7.96
+  },
+  {
+   "t": "Ljudstyrka kan definieras på två sätt: ljudintensitet och ljudnivå.",
+   "s": 7.96,
+   "e": 13.54
+  },
+  {
+   "t": "Den energi som vågen transporterar per sekund genom tvärsnittsarean 1 meter i kvadrat kallas ljudintensitet, betecknas I och har SI-enheten W/m i kvadrat.",
+   "s": 13.54,
+   "e": 24.86
+  },
+  {
+   "t": "Ljudintensitet",
+   "s": 24.86,
+   "e": 27.39
+  },
+  {
+   "t": "strömmen I är lika med effekten P delat med arean A",
+   "s": 27.39,
+   "e": 32.12
+  },
+  {
+   "t": "där",
+   "s": 32.12,
+   "e": 33.6
+  },
+  {
+   "t": "I är lika med ljudintensitet (W/m i kvadrat)",
+   "s": 33.6,
+   "e": 38.86
+  },
+  {
+   "t": "P är lika med effekt (watt)",
+   "s": 38.86,
+   "e": 42.17
+  },
+  {
+   "t": "A är lika med area (m i kvadrat)",
+   "s": 42.17,
+   "e": 45.83
+  },
+  {
+   "t": "Om ljudet sänds ut likformigt i alla riktningar motsvaras arean A av ytan hos en sfär (ett klot).",
+   "s": 45.83,
+   "e": 53.31
+  },
+  {
+   "t": "Sfärens area beräknas med formeln arean A är lika med 4 pi gånger r i kvadrat , där r är sfärens radie.",
+   "s": 53.31,
+   "e": 61.05
+  },
+  {
+   "t": "Ljudintensitet från punktformig källa",
+   "s": 61.05,
+   "e": 64.72
+  },
+  {
+   "t": "strömmen I är lika med effekten P delat med 4 pi gånger r i kvadrat",
+   "s": 64.72,
+   "e": 70.24
+  },
+  {
+   "t": "där",
+   "s": 70.24,
+   "e": 71.71
+  },
+  {
+   "t": "I är lika med intensitet (W/m i kvadrat)",
+   "s": 71.71,
+   "e": 76.85
+  },
+  {
+   "t": "P är lika med utsänd effekt (watt)",
+   "s": 76.85,
+   "e": 80.64
+  },
+  {
+   "t": "r är lika med avstånd till punktkällan (meter)",
+   "s": 80.64,
+   "e": 84.79
+  },
+  {
+   "t": "Det mänskliga örat hör ner till 10 upphöjt till minus 12 watt/m i kvadrat, och smärtgränsen (då ljud övergår till smärta) går vid 1 watt/m i kvadrat.",
+   "s": 84.79,
+   "e": 95.38
+  },
+  {
+   "t": "För att värdena på ljudstyrkan inte ska bestå av så små tal — och för att den bättre ska stämma överens med upplevelsen av ljudstyrkan — infördes begreppet ljudnivå som betecknas L och har enheten dB (decibel), där 0 dB motsvarar hörbarhetsgränsen.",
+   "s": 95.38,
+   "e": 110.1
+  },
+  {
+   "t": "Ljudnivå",
+   "s": 110.1,
+   "e": 112.21
+  },
+  {
+   "t": "L är lika med 10 gånger logaritmen av parentesen strömmen I delat med I noll slut parentes",
+   "s": 112.21,
+   "e": 118.97
+  },
+  {
+   "t": "där",
+   "s": 118.97,
+   "e": 120.49
+  },
+  {
+   "t": "L är lika med ljudnivå (dB)",
+   "s": 120.49,
+   "e": 123.89
+  },
+  {
+   "t": "I är lika med ljudintensitet (W/m i kvadrat)",
+   "s": 123.89,
+   "e": 129.24
+  },
+  {
+   "t": "I noll är lika med 10 upphöjt till minus 12 watt/m i kvadrat (hörbarhetsgränsen)",
+   "s": 129.24,
+   "e": 136.11
+  },
+  {
+   "t": "lg står för \"10-logaritmen\" (matematik)",
+   "s": 136.11,
+   "e": 140.3
+  },
+  {
+   "t": "Decibelskalan är logaritmisk",
+   "s": 140.3,
+   "e": 143.6
+  },
+  {
+   "t": "En ökning med ungefär 3 dB ( 10 gånger logaritmen av 2 är ungefär lika med 3 ) motsvarar en fördubbling av ljudintensiteten.",
+   "s": 143.6,
+   "e": 152.36
+  },
+  {
+   "t": "Ljudnivån 13 dB är alltså dubbelt så stark/energirik jämfört med 10 dB.",
+   "s": 152.36,
+   "e": 158.88
+  },
+  {
+   "t": "En differens på 30 dB motsvarar 10 fördubblingar — alltså en ökning som är 2 upphöjt till 10 är lika med 1 024 gånger större.",
+   "s": 158.88,
+   "e": 167.81
+  },
+  {
+   "t": "Ljudnivån 40 dB är alltså inte 4 gånger så stark som 10 dB, utan över 1 000 gånger starkare!",
+   "s": 167.81,
+   "e": 175.24
+  },
+  {
+   "t": "Det mänskliga örat hör ner till 0 dB och smärtgränsen går vid 130 dB.",
+   "s": 175.24,
+   "e": 180.99
+  },
+  {
+   "t": "Ljudnivåer i vår omvärld",
+   "s": 180.99,
+   "e": 183.97
+  },
+  {
+   "t": "Demonstration — Ljudnivån i klassrummet",
+   "s": 183.97,
+   "e": 187.69
+  },
+  {
+   "t": "Starta en decibelmätare och undersök ljudnivån i klassrummet.",
+   "s": 187.69,
+   "e": 192.69
+  },
+  {
+   "t": "Försök att få det så tyst som möjligt!",
+   "s": 192.69,
+   "e": 195.96
+  },
+  {
+   "t": "Hur tysta vi än är blir det inte lägre än ca 30 dB!",
+   "s": 195.96,
+   "e": 200.49
+  },
+  {
+   "t": "Exempel 1 — Ljudintensitet och ljudnivå 10 meter från ljudkälla",
+   "s": 200.49,
+   "e": 205.9
+  },
+  {
+   "t": "Du står 10 meter från en ljudkälla som utstrålar effekten 5,0 watt jämnt fördelat i alla riktningar.",
+   "s": 205.9,
+   "e": 213.07
+  },
+  {
+   "t": "Bestäm",
+   "s": 213.07,
+   "e": 214.79
+  },
+  {
+   "t": "a) ljudintensiteten",
+   "s": 214.79,
+   "e": 217.61
+  },
+  {
+   "t": "b) ljudnivån",
+   "s": 217.61,
+   "e": 220.18
+  },
+  {
+   "t": "a) Vi ställer upp formeln för ljudintensitet.",
+   "s": 220.18,
+   "e": 224.29
+  },
+  {
+   "t": "strömmen I är lika med effekten P delat med arean A",
+   "s": 224.29,
+   "e": 242.96
+  },
+  {
+   "t": "effekten P är lika med 5,0 watt arean A som är lika med 4 pi gånger r i kvadrat som är lika med 4 pi gånger parentesen 10 meter slut parentes i kvadrat som är lika med 1 256,637 ldots kvadratmeter",
+   "s": 224.29,
+   "e": 242.96
+  },
+  {
+   "t": "strömmen I är lika med 5,0 delat med 1 256,637 ldots som är lika med 0,00397 ldots watt per kvadratmeter som är ungefär lika med 0,0040 watt per kvadratmeter som är lika med 4,0 mW per kvadratmeter",
+   "s": 242.96,
+   "e": 260.9
+  },
+  {
+   "t": "Svar: 4,0 mW/m i kvadrat",
+   "s": 260.9,
+   "e": 266.01
+  },
+  {
+   "t": "b) Vi ställer upp formeln för ljudnivå.",
+   "s": 266.01,
+   "e": 269.71
+  },
+  {
+   "t": "L är lika med 10 gånger logaritmen av parentesen strömmen I delat med I noll slut parentes",
+   "s": 269.71,
+   "e": 276.52
+  },
+  {
+   "t": "strömmen I är lika med 0,00397 ldots watt per kvadratmeter parentesen fråna-uppgiften slut parentes I noll som är lika med 10 upphöjt till minus 12 watt per kvadratmeter parentesen konstant slut parentes",
+   "s": 276.52,
+   "e": 290.59
+  },
+  {
+   "t": "L är lika med 10 gånger logaritmen av parentesen 0,00397 ldots delat med 10 upphöjt till minus 12 slut parentes som är lika med 95,997 ldots dB som är ungefär lika med 96 dB",
+   "s": 290.59,
+   "e": 304.9
+  },
+  {
+   "t": "Svar: 96 dB",
+   "s": 304.9,
+   "e": 307.99
+  },
+  {
+   "t": "Exempel 2 — Ljudintensitet vid 93 dB",
+   "s": 307.99,
+   "e": 312.41
+  },
+  {
+   "t": "Världens starkaste snarkning uppmättes till 93 dB.",
+   "s": 312.41,
+   "e": 317.18
+  },
+  {
+   "t": "Hur stor ljudintensitet motsvarar det?",
+   "s": 317.18,
+   "e": 320.75
+  },
+  {
+   "t": "Vi ställer upp formeln för ljudnivå och löser ut ljudintensiteten I.",
+   "s": 320.75,
+   "e": 328.52
+  },
+  {
+   "t": "L är lika med 10 gånger logaritmen av parentesen strömmen I delat med I noll slut parentes",
+   "s": 320.75,
+   "e": 332.77
+  },
+  {
+   "t": "Dividera båda led med 10:",
+   "s": 332.72,
+   "e": 341.37
+  },
+  {
+   "t": "L delat med 10 är lika med logaritmen av parentesen strömmen I delat med I noll slut parentes",
+   "s": 332.72,
+   "e": 341.37
+  },
+  {
+   "t": "Skriv om på potensform och lös ut I:",
+   "s": 341.37,
+   "e": 353.56
+  },
+  {
+   "t": "10 upphöjt till L delat med 10 är lika med strömmen I delat med I noll vilket är ekvivalent med att I är lika med I noll gånger 10 upphöjt till L delat med 10",
+   "s": 341.37,
+   "e": 353.56
+  },
+  {
+   "t": "I noll är lika med 10 upphöjt till minus 12 watt per kvadratmeter L som är lika med 93 dB",
+   "s": 353.56,
+   "e": 360.57
+  },
+  {
+   "t": "strömmen I är lika med 10 upphöjt till minus 12 gånger 10 upphöjt till 93 delat med 10 som är lika med 0,00199 ldots watt per kvadratmeter som är ungefär lika med 0,0020 watt per kvadratmeter som är lika med 2,0 mW per kvadratmeter",
+   "s": 360.57,
+   "e": 377.54
+  },
+  {
+   "t": "Svar: 2,0 mW/m i kvadrat",
+   "s": 377.54,
+   "e": 382.65
+  }
+ ]
+}

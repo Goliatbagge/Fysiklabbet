@@ -1,0 +1,343 @@
+{
+ "id": "fy2-1.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b3c4fe562ac0089aa65977b146aea3105bf40ee6",
+ "dur": 347.62,
+ "segments": [
+  {
+   "t": "Kraftmoment",
+   "s": 0.1,
+   "e": 2.25
+  },
+  {
+   "t": "Introduktion — Kraftmoment",
+   "s": 2.2,
+   "e": 5.19
+  },
+  {
+   "t": "Du ska lossa på en mutter som har fastnat med hjälp av en skiftnyckel.",
+   "s": 5.19,
+   "e": 9.89
+  },
+  {
+   "t": "Du tar i med en kraft, men spelar det någon roll om du håller skiftnyckeln i A eller B?",
+   "s": 9.89,
+   "e": 15.96
+  },
+  {
+   "t": "För att utföra en vridande rörelse krävs en kraft som beror på avståndet till vridningspunkten.",
+   "s": 15.96,
+   "e": 22.07
+  },
+  {
+   "t": "Vridningspunkten är den axel som ett föremål vrider sig runt när det roterar.",
+   "s": 22.07,
+   "e": 27.31
+  },
+  {
+   "t": "Om du öppnar en dörr kommer gångjärnen att utgöra vridningspunkten och om du lossar en mutter med en skiftnyckel kommer centrum av muttern att utgöra vridningspunkten.",
+   "s": 27.31,
+   "e": 36.48
+  },
+  {
+   "t": "Avståndet till vridningspunkten kallas hävarm.",
+   "s": 36.48,
+   "e": 40.55
+  },
+  {
+   "t": "Hävarmen är det vinkelräta avståndet eller det kortaste avståndet mellan kraftens riktningslinje och vridningspunkten.",
+   "s": 40.55,
+   "e": 47.85
+  },
+  {
+   "t": "En krafts vridande förmåga kallas kraftmoment eller vridmoment.",
+   "s": 47.85,
+   "e": 52.88
+  },
+  {
+   "t": "Kraftmoment betecknas M och har SI-enheten Nm.",
+   "s": 52.88,
+   "e": 60.65
+  },
+  {
+   "t": "Ju större kraft och ju längre hävarm, desto större blir vridmomentet.",
+   "s": 52.88,
+   "e": 60.65
+  },
+  {
+   "t": "En kraft med riktning genom vridpunkten har hävarmen 0 och ger därmed inget kraftmoment.",
+   "s": 60.65,
+   "e": 66.65
+  },
+  {
+   "t": "Kraftmoment (vridmoment)",
+   "s": 66.65,
+   "e": 70.0
+  },
+  {
+   "t": "kraftmomentet M är lika med kraften F gånger hävarmen l",
+   "s": 70.0,
+   "e": 74.85
+  },
+  {
+   "t": "där",
+   "s": 74.85,
+   "e": 76.33
+  },
+  {
+   "t": "M är lika med kraftmoment (Nm)",
+   "s": 76.33,
+   "e": 79.99
+  },
+  {
+   "t": "F är lika med kraft (newton)",
+   "s": 79.99,
+   "e": 83.49
+  },
+  {
+   "t": "l är lika med hävarmen (meter)",
+   "s": 83.49,
+   "e": 86.94
+  },
+  {
+   "t": "Rotationsriktningen anges antingen med \"medurs\"/\"moturs\" eller med tecken.",
+   "s": 86.94,
+   "e": 92.64
+  },
+  {
+   "t": "Ett positivt kraftmoment motsvarar en vridning moturs och ett negativt kraftmoment motsvarar en vridning medurs.",
+   "s": 92.64,
+   "e": 100.45
+  },
+  {
+   "t": "Exempel 1 — Skiftnyckel (E)",
+   "s": 100.45,
+   "e": 103.91
+  },
+  {
+   "t": "Beräkna kraftmomentet då en kraft på 34 newton verkar vinkelrätt mot en skiftnyckel 0,25 meter från muttern.",
+   "s": 103.91,
+   "e": 112.22
+  },
+  {
+   "t": "Vi ställer upp formeln för kraftmoment.",
+   "s": 112.22,
+   "e": 115.64
+  },
+  {
+   "t": "kraftmomentet M är lika med kraften F gånger hävarmen l",
+   "s": 115.64,
+   "e": 125.2
+  },
+  {
+   "t": "kraften F är lika med 34 newton hävarmen l som är lika med 0,25 meter",
+   "s": 115.64,
+   "e": 125.2
+  },
+  {
+   "t": "kraftmomentet M är lika med 34 gånger 0,25 som är lika med 8,5 Nm",
+   "s": 125.2,
+   "e": 136.25
+  },
+  {
+   "t": "Svar: 8,5 Nm moturs (eller +8,5 Nm)",
+   "s": 125.2,
+   "e": 136.25
+  },
+  {
+   "t": "Exempel 2 — Spett mot sten (coulomb)",
+   "s": 136.25,
+   "e": 140.28
+  },
+  {
+   "t": "Ett spett på 1,0 meter vilar mot en sten med vinkeln 45 grader mot marken.",
+   "s": 140.28,
+   "e": 146.45
+  },
+  {
+   "t": "En kraft på 800 newton verkar lodrätt nedåt vid spettets övre ände.",
+   "s": 146.45,
+   "e": 151.91
+  },
+  {
+   "t": "Beräkna kraftmomentet kring stenens nederkant.",
+   "s": 151.91,
+   "e": 156.04
+  },
+  {
+   "t": "Vi ställer återigen upp formeln för kraftmoment.",
+   "s": 156.04,
+   "e": 160.05
+  },
+  {
+   "t": "kraftmomentet M är lika med kraften F gånger hävarmen l",
+   "s": 160.05,
+   "e": 172.04
+  },
+  {
+   "t": "Hävarmen är i detta fall inte 1,0 meter, utan sträckan från vridningspunkten till punkten där kraftens riktningslinje träffar markytan.",
+   "s": 160.05,
+   "e": 172.04
+  },
+  {
+   "t": "Den bildar en rätvinklig triangel, så vi beräknar hävarmen l med hjälp av trigonometri.",
+   "s": 172.04,
+   "e": 178.34
+  },
+  {
+   "t": "kraften F är lika med 800 newton cosinus 45 grader som är lika med hävarmen l delat med 1,0 vilket är ekvivalent med att l är lika med 1,0 gånger cosinus 45 grader som är lika med 0,707 ldots meter",
+   "s": 178.34,
+   "e": 192.82
+  },
+  {
+   "t": "kraftmomentet M är lika med 800 gånger 0,707 ldots som är lika med 565,685 ldots Nm som är ungefär lika med 570 Nm som är lika med 0,57 kNm",
+   "s": 192.82,
+   "e": 206.65
+  },
+  {
+   "t": "Svar: 0,57 kNm",
+   "s": 206.65,
+   "e": 210.53
+  },
+  {
+   "t": "Momentjämvikt",
+   "s": 210.53,
+   "e": 212.88
+  },
+  {
+   "t": "När kraftmomentet moturs är lika stort som kraftmomentet medurs sker ingen vridning och då råder momentjämvikt.",
+   "s": 212.88,
+   "e": 220.59
+  },
+  {
+   "t": "Fysik i vardagen — Momentjämvikt",
+   "s": 220.59,
+   "e": 224.18
+  },
+  {
+   "t": "När vi gungar gungbräda blir det problem om den ena personen väger mer än den andra.",
+   "s": 224.18,
+   "e": 229.69
+  },
+  {
+   "t": "Den tyngre personen trycker ner brädan och den lättare fastnar uppe i luften.",
+   "s": 229.69,
+   "e": 234.62
+  },
+  {
+   "t": "Om den tyngre personen flyttar längre in på gungbrädan kommer båda till slut att vara i luften — momentjämvikt har uppnåtts!",
+   "s": 234.62,
+   "e": 241.71
+  },
+  {
+   "t": "Momentlagen",
+   "s": 241.71,
+   "e": 243.93
+  },
+  {
+   "t": "Vid momentjämvikt gäller",
+   "s": 243.93,
+   "e": 246.88
+  },
+  {
+   "t": "M ett är lika med M två",
+   "s": 246.88,
+   "e": 249.93
+  },
+  {
+   "t": "där",
+   "s": 249.93,
+   "e": 251.38
+  },
+  {
+   "t": "M ett är lika med kraftmomentet/kraftmomenten moturs",
+   "s": 251.38,
+   "e": 256.81
+  },
+  {
+   "t": "M två är lika med kraftmomentet/kraftmomenten medurs",
+   "s": 256.81,
+   "e": 262.15
+  },
+  {
+   "t": "Exempel 3 — Pappa och barn på gungbräda (E)",
+   "s": 262.15,
+   "e": 266.54
+  },
+  {
+   "t": "En pappa som väger 80 kilogram ska gunga gungbräda med sitt barn som väger 30 kilogram.",
+   "s": 266.54,
+   "e": 272.56
+  },
+  {
+   "t": "Barnet sitter 2,0 meter från vridningspunkten.",
+   "s": 272.56,
+   "e": 276.88
+  },
+  {
+   "t": "Hur långt från vridningspunkten ska pappa sitta för att de ska uppnå momentjämvikt?",
+   "s": 276.88,
+   "e": 282.3
+  },
+  {
+   "t": "Vid momentjämvikt gäller",
+   "s": 282.3,
+   "e": 285.34
+  },
+  {
+   "t": "M ett är lika med M två",
+   "s": 285.34,
+   "e": 288.3
+  },
+  {
+   "t": "Vi kallar pappans tyngd för F effekten P och barnets tyngd för F B .",
+   "s": 288.3,
+   "e": 293.43
+  },
+  {
+   "t": "Detta ger",
+   "s": 293.43,
+   "e": 295.4
+  },
+  {
+   "t": "F effekten P gånger l P är lika med F B gånger l B",
+   "s": 295.4,
+   "e": 304.1
+  },
+  {
+   "t": "Tyngdkraften kraften F är lika med massan m gånger tyngdfaktorn g ger",
+   "s": 295.4,
+   "e": 304.1
+  },
+  {
+   "t": "m effekten P gånger tyngdfaktorn g gånger l P är lika med m B gånger g gånger l B",
+   "s": 304.1,
+   "e": 310.73
+  },
+  {
+   "t": "Vi dividerar båda led med g och löser sedan ut pappans hävarm l effekten P .",
+   "s": 310.73,
+   "e": 318.37
+  },
+  {
+   "t": "m effekten P gånger l P är lika med m B gånger l B vilket är ekvivalent med att l P är lika med m B gånger l B delat med m P",
+   "s": 318.31,
+   "e": 333.39
+  },
+  {
+   "t": "m B är lika med 30 kilogram l B som är lika med 2,0 meter m effekten P som är lika med 80 kilogram",
+   "s": 318.31,
+   "e": 333.39
+  },
+  {
+   "t": "l effekten P är lika med 30 gånger 2,0 delat med 80 som är lika med 60 delat med 80 som är lika med 0,75 meter",
+   "s": 333.39,
+   "e": 342.33
+  },
+  {
+   "t": "Svar: Pappa ska sitta 0,75 meter från vridningspunkten.",
+   "s": 342.33,
+   "e": 347.62
+  }
+ ]
+}

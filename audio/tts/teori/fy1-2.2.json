@@ -1,0 +1,253 @@
+{
+ "id": "fy1-2.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f26af8f8ef4712ebbb1bbf91137155a03dc3962f",
+ "dur": 323.98,
+ "segments": [
+  {
+   "t": "Medelhastighet, momentanhastighet och läge-tid-diagram",
+   "s": 0.1,
+   "e": 4.95
+  },
+  {
+   "t": "Ett föremåls genomsnittliga hastighet kallas medelhastighet.",
+   "s": 4.9,
+   "e": 9.76
+  },
+  {
+   "t": "Ett föremåls exakta hastighet vid en tidpunkt kallas momentanhastighet.",
+   "s": 9.76,
+   "e": 15.39
+  },
+  {
+   "t": "Kom ihåg att hastighet är en vektor.",
+   "s": 15.39,
+   "e": 18.68
+  },
+  {
+   "t": "Medelhastighet",
+   "s": 18.68,
+   "e": 21.02
+  },
+  {
+   "t": "v massan m är lika med delta sträckan s delat med delta tiden t parentesen som är lika med s två minus s ett delat med t två minus t ett slut parentes",
+   "s": 21.02,
+   "e": 31.74
+  },
+  {
+   "t": "där",
+   "s": 31.74,
+   "e": 33.25
+  },
+  {
+   "t": "Δs är lika med förflyttning (meter)",
+   "s": 33.25,
+   "e": 36.79
+  },
+  {
+   "t": "Δt är lika med tid (sekunder)",
+   "s": 36.79,
+   "e": 40.11
+  },
+  {
+   "t": "vₘ är lika med medelhastighet (meter per sekund)",
+   "s": 40.11,
+   "e": 44.66
+  },
+  {
+   "t": "Ett diagram med läge på y-axeln och tid på x-axeln kallas läge-tid-diagram eller s-t-diagram.",
+   "s": 44.66,
+   "e": 51.2
+  },
+  {
+   "t": "En hastighet som inte förändras kallas konstant hastighet.",
+   "s": 51.2,
+   "e": 55.91
+  },
+  {
+   "t": "Vid konstant hastighet kommer grafen i ett s-t-diagram att bli en rät linje.",
+   "s": 55.91,
+   "e": 61.52
+  },
+  {
+   "t": "Linjens lutning motsvarar hastigheten och ju brantare lutning desto högre hastighet.",
+   "s": 61.52,
+   "e": 67.4
+  },
+  {
+   "t": "I ett s-t-diagram motsvaras …",
+   "s": 67.4,
+   "e": 75.78
+  },
+  {
+   "t": "… medelhastigheten i ett visst intervall av medellutningen i samma intervall eller sekantens lutning.",
+   "s": 67.4,
+   "e": 75.78
+  },
+  {
+   "t": "… momentanhastigheten av lutningen i en punkt eller tangentens lutning.",
+   "s": 75.78,
+   "e": 80.86
+  },
+  {
+   "t": "Oavsett om vi ska beräkna en medelhastighet, konstant hastighet eller momentanhastighet utifrån ett s-t-diagram, så görs det genom att beräkna lutningen hos någon form av linje.",
+   "s": 80.86,
+   "e": 92.08
+  },
+  {
+   "t": "Linjens lutning bestäms genom att välja två valfria punkter (t ett, s ett) och (t två, s två) på linjen och sätta in i",
+   "s": 92.08,
+   "e": 118.62
+  },
+  {
+   "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett (jämförmed k som är lika med delta y delat med delta x som är lika med y två minus y ett delat med x två minus x ett frånmatematiken)",
+   "s": 92.08,
+   "e": 118.62
+  },
+  {
+   "t": "Exempel 1 — Avläsning av konstant hastighet",
+   "s": 118.62,
+   "e": 122.99
+  },
+  {
+   "t": "Beräkna den konstanta hastigheten som åskådliggörs i grafen nedan utifrån de markerade punkterna.",
+   "s": 122.99,
+   "e": 129.54
+  },
+  {
+   "t": "Den konstanta hastigheten motsvaras av linjens lutning.",
+   "s": 129.54,
+   "e": 134.1
+  },
+  {
+   "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t",
+   "s": 134.1,
+   "e": 154.35
+  },
+  {
+   "t": "delta sträckan s är lika med parentesen 0,72 minus 0,22 slut parentes meter som är lika med 0,50 meter delta tiden t som är lika med parentesen 0,50 minus 0,15 slut parentes sekund som är lika med 0,35 sekund",
+   "s": 134.1,
+   "e": 154.35
+  },
+  {
+   "t": "hastigheten v är lika med 0,50 delat med 0,35 som är lika med 1,428 ldots meter per sekund som är ungefär lika med 1,4 meter per sekund",
+   "s": 154.35,
+   "e": 165.69
+  },
+  {
+   "t": "Svar: 1,4 meter per sekund",
+   "s": 165.69,
+   "e": 169.44
+  },
+  {
+   "t": "Exempel 2 — Adam och Bertil cyklar",
+   "s": 169.44,
+   "e": 173.18
+  },
+  {
+   "t": "Adam cyklar hemifrån till affären samtidigt som Bertil cyklar från affären hem enligt nedanstående graf.",
+   "s": 173.18,
+   "e": 179.93
+  },
+  {
+   "t": "Vad är Bertils medelhastighet mellan t ett är lika med 0 minut och t två är lika med 25 minut ?",
+   "s": 179.93,
+   "e": 186.89
+  },
+  {
+   "t": "Vi ställer upp formeln för medelhastighet.",
+   "s": 186.89,
+   "e": 190.51
+  },
+  {
+   "t": "v massan m är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett",
+   "s": 190.51,
+   "e": 199.51
+  },
+  {
+   "t": "Vi läser av koordinaterna på den orange grafen vid t ett är lika med 0 minut och t två är lika med 25 minut och får (0, 6) och (25, 0), vilket ger",
+   "s": 199.51,
+   "e": 211.49
+  },
+  {
+   "t": "t ett är lika med 0 t två som är lika med 25 minut som är lika med 25 gånger 60 sekund som är lika med 1 500 sekund s ett som är lika med 6 kilometer som är lika med 6 000 meter s två som är lika med 0",
+   "s": 211.49,
+   "e": 225.74
+  },
+  {
+   "t": "v massan m är lika med s två minus s ett delat med t två minus t ett som är lika med 0 minus 6 000 delat med 1 500 minus 0 som är lika med minus 6 000 delat med 1 500 som är lika med minus 4,0 meter per sekund",
+   "s": 225.74,
+   "e": 241.82
+  },
+  {
+   "t": "Svar: −4,0 meter per sekund (OBS!",
+   "s": 241.82,
+   "e": 246.28
+  },
+  {
+   "t": "Minustecknet anger att riktningen är \"tillbaka\".)",
+   "s": 246.28,
+   "e": 250.06
+  },
+  {
+   "t": "Exempel 3 — Cecilias momentanhastighet",
+   "s": 250.06,
+   "e": 254.2
+  },
+  {
+   "t": "Cecilia springer enligt nedanstående s-t-graf.",
+   "s": 254.2,
+   "e": 258.32
+  },
+  {
+   "t": "Bestäm hennes momentanhastighet vid tiden t är lika med 5,0 sekund .",
+   "s": 258.32,
+   "e": 263.82
+  },
+  {
+   "t": "Tangentens lutning där tiden t är lika med 5,0 sekund ger hennes momentanhastighet.",
+   "s": 263.82,
+   "e": 270.32
+  },
+  {
+   "t": "Vi slår en tangent i punkten där tiden t är lika med 5,0 sekund .",
+   "s": 270.32,
+   "e": 275.61
+  },
+  {
+   "t": "Tangenten ska luta lika mycket som grafen gör i den punkten (\"snudda\" grafen).",
+   "s": 275.61,
+   "e": 281.4
+  },
+  {
+   "t": "Vi väljer två valfria punkter på tangenten (den orange linjen) och sätter in i formeln",
+   "s": 281.4,
+   "e": 287.51
+  },
+  {
+   "t": "hastigheten v är lika med s två minus s ett delat med t två minus t ett",
+   "s": 287.51,
+   "e": 293.98
+  },
+  {
+   "t": "Vi väljer till exempel punkterna (2, 20) och (8, 50), vilket ger värdena",
+   "s": 293.98,
+   "e": 301.12
+  },
+  {
+   "t": "t ett är lika med 2 sekund t två som är lika med 8 sekund s ett som är lika med 20 meter s två som är lika med 50 meter",
+   "s": 301.12,
+   "e": 311.63
+  },
+  {
+   "t": "hastigheten v är lika med 50 minus 20 delat med 8 minus 2 som är lika med 30 delat med 6 som är lika med 5 meter per sekund",
+   "s": 311.58,
+   "e": 320.73
+  },
+  {
+   "t": "Svar: 5 meter per sekund",
+   "s": 320.73,
+   "e": 323.98
+  }
+ ]
+}

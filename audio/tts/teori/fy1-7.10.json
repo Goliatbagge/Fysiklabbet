@@ -1,0 +1,343 @@
+{
+ "id": "fy1-7.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "abc981a8331fee680ca7ac97a67fe75ab858cc76",
+ "dur": 464.04,
+ "segments": [
+  {
+   "t": "Elektriska fält och elektrisk fältstyrka",
+   "s": 0.1,
+   "e": 3.74
+  },
+  {
+   "t": "Elektriska fält",
+   "s": 3.69,
+   "e": 5.97
+  },
+  {
+   "t": "En egenskap i rummet som gör att laddningar påverkas av en elektrisk kraft kallas elektriskt fält.",
+   "s": 5.97,
+   "e": 12.47
+  },
+  {
+   "t": "Fältet ritas med fältlinjer och är i samma riktning som kraften på en liten positiv laddning. (\"Liten\", för att den inte ska påverka fältet. \"Positiv laddning\", för att de ursprungliga experimenten utfördes med positiva vätekärnor och fältet definierades då i samma riktning som kraften på dem.)",
+   "s": 12.47,
+   "e": 32.24
+  },
+  {
+   "t": "Det betyder att fältlinjer alltid ritas \"ut från plus\" och \"in i minus\".",
+   "s": 32.24,
+   "e": 37.64
+  },
+  {
+   "t": "Laddningars rörelse",
+   "s": 37.64,
+   "e": 40.24
+  },
+  {
+   "t": "Ju tätare det är mellan fältlinjerna desto starkare är fältet.",
+   "s": 40.24,
+   "e": 44.81
+  },
+  {
+   "t": "Fältlinjer är alltid riktade rätvinkligt in eller ut från laddningens yta.",
+   "s": 44.81,
+   "e": 50.2
+  },
+  {
+   "t": "Vänster: fältlinjer ut från en positiv laddning.",
+   "s": 50.2,
+   "e": 54.45
+  },
+  {
+   "t": "Mitten: in mot en negativ laddning.",
+   "s": 54.45,
+   "e": 58.01
+  },
+  {
+   "t": "Höger: linjerna böjs av mellan en positiv och en negativ laddning.",
+   "s": 58.01,
+   "e": 63.2
+  },
+  {
+   "t": "Elektrisk fältstyrka",
+   "s": 63.2,
+   "e": 65.81
+  },
+  {
+   "t": "Hur starkt ett elektriskt fält är kallas elektrisk fältstyrka.",
+   "s": 65.81,
+   "e": 70.59
+  },
+  {
+   "t": "Elektrisk fältstyrka betecknas mathbb energin E och har enheten N/C (newton per coulomb).",
+   "s": 70.59,
+   "e": 78.3
+  },
+  {
+   "t": "OBS!",
+   "s": 78.3,
+   "e": 79.92
+  },
+  {
+   "t": "Skilj på mathbb energin E (fältstyrka) och E (energi).",
+   "s": 79.92,
+   "e": 85.7
+  },
+  {
+   "t": "Elektrisk fältstyrka definieras som den kraft som verkar per laddningsenhet.",
+   "s": 85.7,
+   "e": 91.42
+  },
+  {
+   "t": "Elektrisk fältstyrka (definition)",
+   "s": 91.42,
+   "e": 94.91
+  },
+  {
+   "t": "mathbb energin E är lika med kraften F delat med laddningen Q",
+   "s": 94.91,
+   "e": 100.1
+  },
+  {
+   "t": "där",
+   "s": 100.1,
+   "e": 101.61
+  },
+  {
+   "t": "mathbb energin E är lika med elektrisk fältstyrka (N/C)",
+   "s": 101.61,
+   "e": 107.47
+  },
+  {
+   "t": "F är lika med elektrisk kraft på laddning i elektriskt fält (newton)",
+   "s": 107.47,
+   "e": 112.95
+  },
+  {
+   "t": "Q är lika med laddningens storlek (coulomb)",
+   "s": 112.95,
+   "e": 116.86
+  },
+  {
+   "t": "Fältstyrka från klot",
+   "s": 116.86,
+   "e": 119.69
+  },
+  {
+   "t": "Vi laddar metallklotet i bandgeneratorn.",
+   "s": 119.69,
+   "e": 123.4
+  },
+  {
+   "t": "När vi kommer tillräckligt nära med det lilla metallklotet så sker en urladdning.",
+   "s": 123.4,
+   "e": 128.71
+  },
+  {
+   "t": "Det elektriska fältet är starkare ju närmare det laddade klotet vi är!",
+   "s": 128.71,
+   "e": 133.75
+  },
+  {
+   "t": "Det elektriska fältet blir svagare ju längre bort från ett laddat klot man befinner sig.",
+   "s": 133.75,
+   "e": 139.56
+  },
+  {
+   "t": "Elektrisk fältstyrka från laddat klot",
+   "s": 139.56,
+   "e": 143.05
+  },
+  {
+   "t": "mathbb energin E är lika med k gånger laddningen Q delat med r i kvadrat",
+   "s": 143.05,
+   "e": 148.76
+  },
+  {
+   "t": "där",
+   "s": 148.76,
+   "e": 150.28
+  },
+  {
+   "t": "mathbb energin E är lika med elektrisk fältstyrka (N/C eller V/m)",
+   "s": 150.28,
+   "e": 157.54
+  },
+  {
+   "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton·m i kvadrat/C i kvadrat (Coulombs konstant)",
+   "s": 157.54,
+   "e": 166.69
+  },
+  {
+   "t": "Q är lika med klotets laddning (coulomb) — anges utan tecken",
+   "s": 166.69,
+   "e": 172.1
+  },
+  {
+   "t": "r är lika med avstånd till klotets medelpunkt (meter)",
+   "s": 172.1,
+   "e": 176.78
+  },
+  {
+   "t": "Elektrisk fältstyrka från laddat klot",
+   "s": 176.78,
+   "e": 180.26
+  },
+  {
+   "t": "Vi tänker oss en liten laddning q som befinner sig i ett elektriskt fält från en större laddning Q.",
+   "s": 180.26,
+   "e": 186.49
+  },
+  {
+   "t": "Att laddningen är liten gör att dess påverkan på fältet är försumbar.",
+   "s": 186.49,
+   "e": 191.4
+  },
+  {
+   "t": "Den elektriska fältstyrkan som partikeln befinner sig i är enligt definitionen",
+   "s": 191.4,
+   "e": 197.12
+  },
+  {
+   "t": "mathbb energin E är lika med kraften F delat med q, ekvation 1",
+   "s": 197.12,
+   "e": 203.05
+  },
+  {
+   "t": "Kraften F mellan dessa laddningar kan uttryckas med Coulombs lag kraften F är lika med k gånger Q ett Q två delat med r i kvadrat , så",
+   "s": 203.05,
+   "e": 212.31
+  },
+  {
+   "t": "kraften F är lika med k gånger q gånger laddningen Q delat med r i kvadrat",
+   "s": 212.31,
+   "e": 218.1
+  },
+  {
+   "t": "Insättning av detta i ekvation 1 ger",
+   "s": 218.1,
+   "e": 221.88
+  },
+  {
+   "t": "mathbb energin E är lika med k gånger q gånger laddningen Q delat med r i kvadrat delat med q som är lika med k gånger q gånger Q delat med q gånger r i kvadrat som är lika med k gånger Q delat med r i kvadrat som är lika med k gånger Q delat med r i kvadrat vilket skulle visas",
+   "s": 221.88,
+   "e": 238.21
+  },
+  {
+   "t": "Exempel 1 — Fältstyrka 12 centimeter från kula",
+   "s": 238.21,
+   "e": 242.59
+  },
+  {
+   "t": "Bestäm fältstyrkan i en punkt 12 centimeter från en kulas medelpunkt med laddningen 20 nC.",
+   "s": 242.59,
+   "e": 249.16
+  },
+  {
+   "t": "Vi ställer upp formeln för elektrisk fältstyrka från laddat klot.",
+   "s": 249.16,
+   "e": 253.96
+  },
+  {
+   "t": "mathbb energin E är lika med k gånger laddningen Q delat med r i kvadrat",
+   "s": 253.96,
+   "e": 259.71
+  },
+  {
+   "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton\\cdotm i kvadrat per coulomb i kvadrat laddningen Q som är lika med 20 nC som är lika med 20 gånger 10 upphöjt till minus 9 coulomb r som är lika med 12 centimeter som är lika med 0,12 meter",
+   "s": 259.71,
+   "e": 276.35
+  },
+  {
+   "t": "mathbb energin E är lika med 8,99 gånger 10 upphöjt till 9 gånger 20 gånger 10 upphöjt till minus 9 delat med 0,12 i kvadrat som är lika med 12 486,111 ldots newton per coulomb som är ungefär lika med 12 000 newton per coulomb som är lika med 12 kilonewton per coulomb",
+   "s": 276.35,
+   "e": 295.7
+  },
+  {
+   "t": "Svar: 12 kilonewton/C eller 12 000 newton/C",
+   "s": 295.7,
+   "e": 306.81
+  },
+  {
+   "t": "Exempel 2 — Resulterande fält i punkt P",
+   "s": 295.7,
+   "e": 306.81
+  },
+  {
+   "t": "Bestäm den elektriska fältstyrkan i punkten P i figuren nedan.",
+   "s": 295.7,
+   "e": 309.5
+  },
+  {
+   "t": "Punkten P ligger mellan två laddningar: Q ett är lika med minus 8,0 nC till vänster (2,0 centimeter från P) och Q två är lika med plus 6,0 nC till höger (5,0 centimeter från P).",
+   "s": 309.45,
+   "e": 323.3
+  },
+  {
+   "t": "Det uppstår ett fält från laddningen till vänster och ett fält från laddningen till höger.",
+   "s": 323.3,
+   "e": 328.61
+  },
+  {
+   "t": "Det resulterande fältet fås genom att lägga ihop dessa fält.",
+   "s": 328.61,
+   "e": 333.41
+  },
+  {
+   "t": "Fältet från laddningen till vänster är",
+   "s": 333.41,
+   "e": 336.81
+  },
+  {
+   "t": "mathbb energin E ett är lika med k gånger Q ett delat med r ett i kvadrat",
+   "s": 336.81,
+   "e": 343.0
+  },
+  {
+   "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton\\cdotm i kvadrat per coulomb i kvadrat Q ett som är lika med 8,0 nC som är lika med 8,0 gånger 10 upphöjt till minus 9 coulomb r ett som är lika med 2,0 centimeter som är lika med 0,020 meter",
+   "s": 343.0,
+   "e": 361.21
+  },
+  {
+   "t": "mathbb energin E ett är lika med 8,99 gånger 10 upphöjt till 9 gånger 8,0 gånger 10 upphöjt till minus 9 delat med 0,020 i kvadrat som är lika med 179 800 newton per coulomb parentesen åtvänsteriPdåfältgårINIminus slut parentes",
+   "s": 361.21,
+   "e": 379.55
+  },
+  {
+   "t": "På motsvarande sätt räknar vi ut fältet från laddningen till höger som",
+   "s": 379.55,
+   "e": 384.55
+  },
+  {
+   "t": "mathbb energin E två är lika med k gånger Q två delat med r två i kvadrat",
+   "s": 384.55,
+   "e": 390.66
+  },
+  {
+   "t": "k är lika med 8,99 gånger 10 upphöjt till 9 newton\\cdotm i kvadrat per coulomb i kvadrat Q två som är lika med 6,0 nC som är lika med 6,0 gånger 10 upphöjt till minus 9 coulomb r två som är lika med 5,0 centimeter som är lika med 0,050 meter",
+   "s": 390.66,
+   "e": 408.89
+  },
+  {
+   "t": "mathbb energin E två är lika med 8,99 gånger 10 upphöjt till 9 gånger 6,0 gånger 10 upphöjt till minus 9 delat med 0,050 i kvadrat som är lika med 21 576 newton per coulomb parentesen åtvänsteriPdåfältgårUTFRÅNplus slut parentes",
+   "s": 408.89,
+   "e": 427.13
+  },
+  {
+   "t": "Båda fälten verkar i samma riktning (åt vänster), så det sammanlagda fältet mathbb energin E fås genom att lägga ihop dessa.",
+   "s": 427.13,
+   "e": 435.56
+  },
+  {
+   "t": "mathbb energin E är lika med mathbb E ett plus mathbb E två som är lika med 179 800 plus 21 576 som är lika med 201 376 newton per coulomb som är ungefär lika med 200 000 newton per coulomb som är lika med 0,20 MN per coulomb åtvänster",
+   "s": 435.56,
+   "e": 455.55
+  },
+  {
+   "t": "Svar: 0,20 MN/C eller 2,0 gånger 10 upphöjt till 5 newton/C åt vänster.",
+   "s": 455.55,
+   "e": 464.04
+  }
+ ]
+}

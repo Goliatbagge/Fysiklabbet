@@ -1,0 +1,298 @@
+{
+ "id": "fy2-3.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "39d222930e1cf0b9e066409df3da347681e79f32",
+ "dur": 379.11,
+ "segments": [
+  {
+   "t": "Magnetfält kring lång rak ledare",
+   "s": 0.1,
+   "e": 3.41
+  },
+  {
+   "t": "Historik — Ørsteds försök",
+   "s": 3.36,
+   "e": 6.46
+  },
+  {
+   "t": "Den danske fysikern Hans Christian Ørsted (1800-tal) upptäckte av en slump att det uppstod ett magnetfält kring en strömförande ledare.",
+   "s": 6.46,
+   "e": 15.28
+  },
+  {
+   "t": "När en kompassnål placerades nära en strömförande ledare uppstod nedanstående situation.",
+   "s": 15.28,
+   "e": 21.61
+  },
+  {
+   "t": "Kompassnålen länkas av från nord till väst när strömmen slås på.",
+   "s": 21.61,
+   "e": 26.55
+  },
+  {
+   "t": "En elektrisk ström i en ledare ger upphov till ett magnetfält runt ledaren.",
+   "s": 26.55,
+   "e": 31.84
+  },
+  {
+   "t": "Om strömriktningen ändras, ändras också magnetfältets riktning.",
+   "s": 31.84,
+   "e": 36.75
+  },
+  {
+   "t": "Tumregeln (högerhandsregeln)",
+   "s": 36.75,
+   "e": 40.19
+  },
+  {
+   "t": "Riktningen på magnetfältet kan bestämmas med högerhandstumregeln.",
+   "s": 40.19,
+   "e": 45.09
+  },
+  {
+   "t": "Högerhandens tumme motsvarar strömmens riktning, och fingrarna motsvarar magnetfältets riktning.",
+   "s": 45.09,
+   "e": 51.51
+  },
+  {
+   "t": "OBS!",
+   "s": 51.51,
+   "e": 53.12
+  },
+  {
+   "t": "Endast högerhanden kan användas.",
+   "s": 53.12,
+   "e": 56.29
+  },
+  {
+   "t": "Notation för vektorer in/ut ur planet",
+   "s": 56.29,
+   "e": 60.8
+  },
+  {
+   "t": "Ibland ritas ledare vinkelrätt in eller ut från ett plan.",
+   "s": 60.8,
+   "e": 65.25
+  },
+  {
+   "t": "Tänk dig markeringarna som en pil som skjuts: pricken (\"pilspetsen\") skjuts mot dig och krysset (\"fjädrarna i bak på en pil\") skjuts från dig.",
+   "s": 65.25,
+   "e": 74.91
+  },
+  {
+   "t": "Ström ut ur planet ger ett moturs riktat fält (vänster); ström in i planet ger ett medurs riktat fält (höger).",
+   "s": 74.91,
+   "e": 83.6
+  },
+  {
+   "t": "Magnetisk flödestäthet",
+   "s": 83.6,
+   "e": 86.6
+  },
+  {
+   "t": "Magnetfältets styrka kallas magnetisk flödestäthet, betecknas B och har SI-enheten T (tesla).",
+   "s": 86.6,
+   "e": 94.16
+  },
+  {
+   "t": "1 tesla är ett mycket starkt magnetfält.",
+   "s": 94.16,
+   "e": 97.78
+  },
+  {
+   "t": "1 tesla definieras som det fält som krävs för att ge laddningen 1 coulomb som rör sig 1 meter per sekund vinkelrätt mot ett magnetfält den magnetiska kraften 1 newton.",
+   "s": 97.78,
+   "e": 107.92
+  },
+  {
+   "t": "Mer om magnetiska krafter på elektriska laddningar kommer längre fram i ämnet.",
+   "s": 107.92,
+   "e": 113.42
+  },
+  {
+   "t": "Olika magnetfälts styrkor",
+   "s": 113.42,
+   "e": 116.6
+  },
+  {
+   "t": "Magnetfält runt lång rak ledare",
+   "s": 116.6,
+   "e": 119.94
+  },
+  {
+   "t": "B är lika med k gånger strömmen I delat med avståndet d",
+   "s": 119.94,
+   "e": 124.95
+  },
+  {
+   "t": "där",
+   "s": 124.95,
+   "e": 126.46
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet (tesla)",
+   "s": 126.46,
+   "e": 131.05
+  },
+  {
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla·m/A (en konstant som gäller för vakuum och luft)",
+   "s": 131.05,
+   "e": 139.36
+  },
+  {
+   "t": "I är lika med strömmen genom ledaren (ampere)",
+   "s": 139.36,
+   "e": 143.35
+  },
+  {
+   "t": "d är lika med avståndet från ledaren (meter)",
+   "s": 143.35,
+   "e": 147.89
+  },
+  {
+   "t": "Skrivsättet k är lika med my delat med 2 pi används ibland i förlagets lösningsförslag.",
+   "s": 147.89,
+   "e": 154.31
+  },
+  {
+   "t": "Vi använder bara k.",
+   "s": 154.31,
+   "e": 159.44
+  },
+  {
+   "t": "Exempel 1 — Magnetfältet i tre punkter",
+   "s": 154.31,
+   "e": 159.44
+  },
+  {
+   "t": "Beräkna den magnetiska flödestätheten och fältets riktning i punkterna P, Q och R.",
+   "s": 159.44,
+   "e": 170.41
+  },
+  {
+   "t": "a) Tumregeln ger att riktningen på fältet i punkten P blir rakt ut från planet.",
+   "s": 159.44,
+   "e": 170.41
+  },
+  {
+   "t": "Vi beräknar fältstyrkan.",
+   "s": 170.41,
+   "e": 173.24
+  },
+  {
+   "t": "B är lika med k gånger strömmen I delat med avståndet d",
+   "s": 173.24,
+   "e": 178.24
+  },
+  {
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere strömmen I som är lika med 1,2 ampere avståndet d som är lika med 1,5 centimeter som är lika med 0,015 meter",
+   "s": 178.24,
+   "e": 192.01
+  },
+  {
+   "t": "B är lika med 2 gånger 10 upphöjt till minus 7 gånger 1,2 delat med 0,015 som är lika med 1,6 gånger 10 upphöjt till minus 5 tesla som är lika med 16 µT",
+   "s": 192.01,
+   "e": 209.8
+  },
+  {
+   "t": "Svar: 16 μT (eller 1,6 gånger 10 upphöjt till minus 5 tesla) rakt ut från planet.",
+   "s": 192.01,
+   "e": 209.8
+  },
+  {
+   "t": "b) Tumregeln ger att riktningen på fältet i punkten Q blir NO (snett uppåt höger).",
+   "s": 209.8,
+   "e": 216.45
+  },
+  {
+   "t": "Vi beräknar fältstyrkan.",
+   "s": 216.45,
+   "e": 219.29
+  },
+  {
+   "t": "B är lika med k gånger strömmen I delat med avståndet d",
+   "s": 219.29,
+   "e": 224.28
+  },
+  {
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere strömmen I som är lika med 2,2 ampere avståndet d som är lika med 2,0 centimeter som är lika med 0,020 meter",
+   "s": 224.28,
+   "e": 237.94
+  },
+  {
+   "t": "B är lika med 2 gånger 10 upphöjt till minus 7 gånger 2,2 delat med 0,020 som är lika med 2,2 gånger 10 upphöjt till minus 5 tesla som är lika med 22 µT",
+   "s": 237.94,
+   "e": 252.7
+  },
+  {
+   "t": "Svar: 22 μT NO (snett uppåt höger).",
+   "s": 237.94,
+   "e": 252.7
+  },
+  {
+   "t": "c) Vi beräknar fältet från var och en av ledarna för sig och lägger sedan ihop dem.",
+   "s": 252.7,
+   "e": 258.69
+  },
+  {
+   "t": "Fältet från ledaren till vänster (ström ut) blir enligt tumregeln uppåtriktat vid R.",
+   "s": 258.69,
+   "e": 274.39
+  },
+  {
+   "t": "B hastigheten v ä n sträckan s tiden t e r är lika med k gånger I v ä n s t e r delat med d v ä n s t e r",
+   "s": 258.69,
+   "e": 274.39
+  },
+  {
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere I hastigheten v ä n sträckan s tiden t e r som är lika med 3,2 ampere d v ä n s t e r som är lika med 2,9 centimeter som är lika med 0,029 meter",
+   "s": 274.39,
+   "e": 292.11
+  },
+  {
+   "t": "B hastigheten v ä n sträckan s tiden t e r är lika med 2 gånger 10 upphöjt till minus 7 gånger 3,2 delat med 0,029 som är lika med 2,206 ldots gånger 10 upphöjt till minus 5 tesla som är ungefär lika med 22,1 µT uppåt",
+   "s": 292.11,
+   "e": 310.71
+  },
+  {
+   "t": "Fältet från ledaren till höger (ström in) blir enligt tumregeln också uppåtriktat vid R.",
+   "s": 310.66,
+   "e": 340.17
+  },
+  {
+   "t": "B höjden h ö tyngdfaktorn g e r är lika med k gånger I h ö g e r delat med d h ö g e r",
+   "s": 310.66,
+   "e": 340.17
+  },
+  {
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere I höjden h ö tyngdfaktorn g e r som är lika med 1,2 ampere d h ö g e r som är lika med 3,3 centimeter som är lika med 0,033 meter",
+   "s": 310.66,
+   "e": 340.17
+  },
+  {
+   "t": "B höjden h ö tyngdfaktorn g e r är lika med 2 gånger 10 upphöjt till minus 7 gånger 1,2 delat med 0,033 som är lika med 7,272 ldots gånger 10 upphöjt till minus 6 tesla som är ungefär lika med 7,3 µT uppåt",
+   "s": 340.17,
+   "e": 356.08
+  },
+  {
+   "t": "Eftersom båda fält verkar uppåt samverkar de.",
+   "s": 356.08,
+   "e": 360.18
+  },
+  {
+   "t": "Det totala fältet fås genom att addera fältstyrkorna.",
+   "s": 360.18,
+   "e": 364.53
+  },
+  {
+   "t": "B är lika med B hastigheten v ä n sträckan s tiden t e r plus B höjden h ö tyngdfaktorn g e r som är lika med 22,1 plus 7,3 som är lika med 29,4 µT",
+   "s": 364.53,
+   "e": 379.11
+  },
+  {
+   "t": "Svar: 29 μT uppåt",
+   "s": 364.53,
+   "e": 379.11
+  }
+ ]
+}

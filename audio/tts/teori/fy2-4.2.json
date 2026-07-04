@@ -1,0 +1,268 @@
+{
+ "id": "fy2-4.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8b0ae1672c8955adba692956ca51544c3e501497",
+ "dur": 320.29,
+ "segments": [
+  {
+   "t": "Diffraktion och interferens",
+   "s": 0.1,
+   "e": 3.09
+  },
+  {
+   "t": "Demonstration — Ljusets våglängder",
+   "s": 3.04,
+   "e": 6.49
+  },
+  {
+   "t": "Vi använder en digital spektrometer för att analysera våglängderna hos olika ljus.",
+   "s": 6.49,
+   "e": 12.39
+  },
+  {
+   "t": "Vi ser att dagsljuset från solen innehåller alla våglängder i det synliga spektrumet och att ljuset från en UV-lampa bara innehåller vissa våglängder.",
+   "s": 12.39,
+   "e": 21.41
+  },
+  {
+   "t": "Ljus av blandade våglängder (från exempelvis solen, glödlampor, LED-lampor och lysrör) kallas icke-koherent.",
+   "s": 21.41,
+   "e": 30.01
+  },
+  {
+   "t": "Ljus av samma våglängd och i fas (från exempelvis laser) kallas koherent.",
+   "s": 30.01,
+   "e": 36.01
+  },
+  {
+   "t": "Ljus av samma våglängd, men inte nödvändigtvis i fas, kallas monokromatiskt (grekiska: mono = en, chroma är lika med färg).",
+   "s": 36.01,
+   "e": 46.45
+  },
+  {
+   "t": "Eftersom ljus är en våg kommer koherent ljus att bete sig på liknande sätt som vattenvågor eller ljudvågor.",
+   "s": 46.45,
+   "e": 53.73
+  },
+  {
+   "t": "Om vi låter ljusvågor passera en enkelspalt (en smal springa) kommer det, precis som för vattenvågor, att bli krökningseffekter vid kanterna, så kallad diffraktion.",
+   "s": 53.73,
+   "e": 64.29
+  },
+  {
+   "t": "Ju smalare spalt desto större krökning.",
+   "s": 64.29,
+   "e": 67.75
+  },
+  {
+   "t": "Diffraktion för ljus: bakom spalten sprider sig ljuset som halvcirkelformade vågfronter, och på skärmen bildas ett diffraktionsmönster med ett starkt centralt maximum och svagare sidomaxima.",
+   "s": 67.75,
+   "e": 79.25
+  },
+  {
+   "t": "Om vi skickar koherent ljus genom en dubbelspalt (två smala springor) kan vi räkna på interferens precis som med ljud- eller vattenvågor.",
+   "s": 79.25,
+   "e": 88.08
+  },
+  {
+   "t": "Demonstration — Diffraktion och interferens från dubbelspalt",
+   "s": 88.08,
+   "e": 92.92
+  },
+  {
+   "t": "Vi belyser en dubbelspalt med röd laser.",
+   "s": 92.92,
+   "e": 96.76
+  },
+  {
+   "t": "Vi ser att ljuset sprids och ger nodlinjer (ljusminima), precis som vattenvågor.",
+   "s": 96.76,
+   "e": 103.01
+  },
+  {
+   "t": "Ljuset beter sig alltså som en våg!",
+   "s": 103.01,
+   "e": 106.36
+  },
+  {
+   "t": "De ljusaste områdena är ljusmaxima och de mörka är ljusminima.",
+   "s": 106.36,
+   "e": 111.25
+  },
+  {
+   "t": "Figur: foto av interferensmönstret från en dubbelspalt belyst med röd laser.",
+   "s": 111.25,
+   "e": 117.72
+  },
+  {
+   "t": "På en skärm syns en serie skarpa röda prickar i en horisontell rad, där den centrala maximi-punkten är mest ljusstark och intensiteten avtar mot sidorna.",
+   "s": 117.72,
+   "e": 127.41
+  },
+  {
+   "t": "För att göra interferensmönstret ännu tydligare, med tydligare ljusmaxima, används hinder med ännu fler spalter, ett så kallat gitter.",
+   "s": 127.41,
+   "e": 136.35
+  },
+  {
+   "t": "Avståndet mellan varje spalt kallas gitterkonstant.",
+   "s": 136.35,
+   "e": 140.74
+  },
+  {
+   "t": "Demonstration — Diffraktion och interferens från gitter",
+   "s": 140.74,
+   "e": 145.24
+  },
+  {
+   "t": "Vi belyser ett gitter med en röd laser och projicerar mot en vägg.",
+   "s": 145.24,
+   "e": 150.03
+  },
+  {
+   "t": "Vi ser tydliga ljusmaxima!",
+   "s": 150.03,
+   "e": 152.85
+  },
+  {
+   "t": "Figur: foto av interferensmönstret från ett gitter belyst med röd laser.",
+   "s": 152.85,
+   "e": 158.97
+  },
+  {
+   "t": "På väggen syns en horisontell rad av väl separerade röda prickar, där den centrala är klart starkast och de yttre minskar i ljusstyrka.",
+   "s": 158.97,
+   "e": 167.65
+  },
+  {
+   "t": "För att beräkna i vilka riktningar ljuset förstärks används gitterformeln.",
+   "s": 167.65,
+   "e": 172.78
+  },
+  {
+   "t": "Gitterformeln",
+   "s": 172.78,
+   "e": 174.9
+  },
+  {
+   "t": "n gånger våglängden lambda är lika med avståndet d gånger sinus alfa n",
+   "s": 174.9,
+   "e": 181.16
+  },
+  {
+   "t": "där",
+   "s": 181.16,
+   "e": 182.68
+  },
+  {
+   "t": "n är lika med maximilinjens ordning",
+   "s": 182.68,
+   "e": 186.09
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 186.09,
+   "e": 189.81
+  },
+  {
+   "t": "d är lika med spaltavstånd (avstånd mellan närliggande spalter eller gitterkonstant) (meter)",
+   "s": 189.81,
+   "e": 197.35
+  },
+  {
+   "t": "alfa n är lika med avböjningsvinkel till n:te ordningens maximum (grader)",
+   "s": 197.35,
+   "e": 203.22
+  },
+  {
+   "t": "Dubbelspalt med spaltavståndet d.",
+   "s": 203.22,
+   "e": 207.01
+  },
+  {
+   "t": "Första ordningens maximum hamnar på avståndet x från centralmax på skärmen, i riktningen som bildar avböjningsvinkeln α.",
+   "s": 207.01,
+   "e": 216.43
+  },
+  {
+   "t": "Härledning — Gitterformeln",
+   "s": 207.01,
+   "e": 216.43
+  },
+  {
+   "t": "Härledning av gitterformeln visas i klassrummet (se medföljande videoreferens).",
+   "s": 216.43,
+   "e": 222.9
+  },
+  {
+   "t": "Exempel 1 — Bestäm ljusets våglängd och färg",
+   "s": 222.9,
+   "e": 227.12
+  },
+  {
+   "t": "Ett gitter med 120 spalter/mm belyses med monokromatiskt ljus i fas.",
+   "s": 227.12,
+   "e": 234.06
+  },
+  {
+   "t": "Avböjningsvinkeln till andra ordningens maximum är 9,4 grader.",
+   "s": 234.06,
+   "e": 239.21
+  },
+  {
+   "t": "Bestäm ljusets",
+   "s": 239.21,
+   "e": 241.47
+  },
+  {
+   "t": "a) våglängd",
+   "s": 241.47,
+   "e": 243.75
+  },
+  {
+   "t": "b) färg",
+   "s": 243.75,
+   "e": 245.78
+  },
+  {
+   "t": "a) Vi ställer upp gitterformeln och löser ut våglängden λ.",
+   "s": 245.78,
+   "e": 274.05
+  },
+  {
+   "t": "n gånger våglängden lambda är lika med avståndet d gånger sinus alfa n vilket är ekvivalent med att lambda är lika med d gånger sinus alfa n delat med n",
+   "s": 245.78,
+   "e": 274.05
+  },
+  {
+   "t": "avståndet d är lika med 1 delat med 120 millimeter som är lika med 1 delat med 120 gånger 10 upphöjt till minus 3 meter alfa två som är lika med 9,4 grader n som är lika med 2 parentesen andraordningen slut parentes",
+   "s": 245.78,
+   "e": 274.05
+  },
+  {
+   "t": "våglängden lambda är lika med 1 delat med 120 gånger 10 upphöjt till minus 3 gånger sinus 9,4 grader delat med 2 som är lika med 6,805 ldots gånger 10 upphöjt till minus 7 meter som är ungefär lika med 6,81 gånger 10 upphöjt till minus 7 meter som är lika med 681 nanometer",
+   "s": 274.05,
+   "e": 293.29
+  },
+  {
+   "t": "Svar: 681 nanometer",
+   "s": 293.29,
+   "e": 298.72
+  },
+  {
+   "t": "b) Vi tittar efter våglängden 681 nanometer i tabellen för det elektromagnetiska spektrumet (se avsnitt 4.1).",
+   "s": 298.67,
+   "e": 308.14
+  },
+  {
+   "t": "Vi ser att ljus med våglängden 681 nanometer ligger i det röda spektrumet (625 nanometer – 740 nanometer).",
+   "s": 308.14,
+   "e": 317.82
+  },
+  {
+   "t": "Svar: Rött",
+   "s": 317.82,
+   "e": 320.29
+  }
+ ]
+}

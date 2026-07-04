@@ -1,0 +1,458 @@
+{
+ "id": "fy2-1.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "37851db3e0849e5747b78c5f70ed29435b381433",
+ "dur": 539.67,
+ "segments": [
+  {
+   "t": "Cirkulär rörelse",
+   "s": 0.1,
+   "e": 2.65
+  },
+  {
+   "t": "Om en kropp rör sig i en cirkelbana utför den en cirkulär rörelse.",
+   "s": 2.6,
+   "e": 7.56
+  },
+  {
+   "t": "Varför behövs en kraft i cirkulär rörelse?",
+   "s": 7.56,
+   "e": 11.43
+  },
+  {
+   "t": "Newtons första lag (tröghetslagen) säger att en kropp fortsätter rakt fram med konstant hastighet om det inte finns någon resulterande kraft.",
+   "s": 11.43,
+   "e": 20.24
+  },
+  {
+   "t": "Men i en cirkulär rörelse kröks banan.",
+   "s": 20.24,
+   "e": 24.09
+  },
+  {
+   "t": "Alltså måste det finnas en avböjande resulterande kraft!",
+   "s": 24.09,
+   "e": 28.59
+  },
+  {
+   "t": "Vid cirkulär rörelse med konstant fart påverkas kroppen av en resulterande kraft som ständigt är riktad in mot cirkelbanans medelpunkt.",
+   "s": 28.59,
+   "e": 37.29
+  },
+  {
+   "t": "Denna kraft kallas centripetalkraft F C och ger upphov till en centripetal- acceleration a C .",
+   "s": 37.29,
+   "e": 44.19
+  },
+  {
+   "t": "OBS — centripetalkraften är inte en egen kraft",
+   "s": 44.19,
+   "e": 48.42
+  },
+  {
+   "t": "Centripetalkraft är inte en egen kraft, utan är en resultant av den eller de krafter som tillsammans verkar på ett föremål i en cirkelbana.",
+   "s": 48.42,
+   "e": 57.5
+  },
+  {
+   "t": "Centripetalkraften kan utgöras av spännkraft i ett snöre, friktionskraft, normalkraft, tyngdkraft och så vidare.",
+   "s": 57.5,
+   "e": 66.11
+  },
+  {
+   "t": "Centripetalacceleration",
+   "s": 66.11,
+   "e": 68.92
+  },
+  {
+   "t": "a C är lika med hastigheten v i kvadrat delat med r som är lika med omega i kvadrat gånger r",
+   "s": 68.92,
+   "e": 75.72
+  },
+  {
+   "t": "där",
+   "s": 75.72,
+   "e": 77.2
+  },
+  {
+   "t": "a C är lika med centripetalacceleration (m/s i kvadrat)",
+   "s": 77.2,
+   "e": 83.1
+  },
+  {
+   "t": "v är lika med fart i rörelsens riktning (meter per sekund)",
+   "s": 83.1,
+   "e": 88.05
+  },
+  {
+   "t": "r är lika med banradie (meter)",
+   "s": 88.05,
+   "e": 91.46
+  },
+  {
+   "t": "ω är lika med vinkelhastighet (rad/s)",
+   "s": 91.46,
+   "e": 96.11
+  },
+  {
+   "t": "Centripetalkraft",
+   "s": 96.11,
+   "e": 98.64
+  },
+  {
+   "t": "F C är lika med massan m gånger hastigheten v i kvadrat delat med r som är lika med 4 pi i kvadrat gånger m gånger r delat med periodtiden T i kvadrat",
+   "s": 98.64,
+   "e": 109.2
+  },
+  {
+   "t": "där",
+   "s": 109.2,
+   "e": 110.69
+  },
+  {
+   "t": "F C är lika med centripetalkraft (newton)",
+   "s": 110.69,
+   "e": 115.11
+  },
+  {
+   "t": "m är lika med massan på det som utför rörelsen (kilogram)",
+   "s": 115.11,
+   "e": 119.91
+  },
+  {
+   "t": "v är lika med fart i rörelsens riktning (meter per sekund)",
+   "s": 119.91,
+   "e": 124.86
+  },
+  {
+   "t": "r är lika med banradie (meter)",
+   "s": 124.86,
+   "e": 128.28
+  },
+  {
+   "t": "T är lika med period (sekunder)",
+   "s": 128.28,
+   "e": 131.78
+  },
+  {
+   "t": "Härledning #1 — Centripetalkraft",
+   "s": 131.78,
+   "e": 135.72
+  },
+  {
+   "t": "Vid acceleration har vi en resulterande kraft.",
+   "s": 135.72,
+   "e": 139.78
+  },
+  {
+   "t": "Enligt Newtons andra lag gäller",
+   "s": 139.78,
+   "e": 142.91
+  },
+  {
+   "t": "F resistansen R är lika med massan m gånger accelerationen a, ekvation 1",
+   "s": 142.91,
+   "e": 149.22
+  },
+  {
+   "t": "Insättning av F resistansen R är lika med F C och centripetalaccelerationen accelerationen a är lika med a C som är lika med hastigheten v i kvadrat delat med r i ekvation 1 ger",
+   "s": 149.22,
+   "e": 160.93
+  },
+  {
+   "t": "F C är lika med massan m gånger hastigheten v i kvadrat delat med r som är lika med m gånger v i kvadrat delat med r",
+   "s": 160.93,
+   "e": 172.74
+  },
+  {
+   "t": "vsv.",
+   "s": 160.93,
+   "e": 172.74
+  },
+  {
+   "t": "Härledning #2 — Centripetalkraft med period",
+   "s": 160.93,
+   "e": 172.74
+  },
+  {
+   "t": "Sedan tidigare har vi att banfarten hastigheten v är lika med 2 pi gånger r delat med periodtiden T .",
+   "s": 172.74,
+   "e": 179.64
+  },
+  {
+   "t": "Detta i F C är lika med massan m gånger hastigheten v i kvadrat delat med r ger",
+   "s": 179.64,
+   "e": 186.2
+  },
+  {
+   "t": "F C är lika med massan m gånger parentesen 2 pi gånger r delat med periodtiden T slut parentes i kvadrat delat med r som är lika med m gånger 4 pi i kvadrat gånger r i kvadrat delat med T i kvadrat delat med r som är lika med m gånger 4 pi i kvadrat gånger r delat med T i kvadrat som är lika med 4 pi i kvadrat gånger m gånger r delat med T i kvadrat",
+   "s": 186.2,
+   "e": 207.9
+  },
+  {
+   "t": "vsv.",
+   "s": 207.9,
+   "e": 210.95
+  },
+  {
+   "t": "Centrifugalkraft",
+   "s": 207.9,
+   "e": 210.95
+  },
+  {
+   "t": "Centrifugalkraft är en imaginär kraft (en kraft som inte finns) som beskriver upplevelsen hos någon i ett roterande system.",
+   "s": 210.95,
+   "e": 219.59
+  },
+  {
+   "t": "Om vi till exempel sitter i en bil som svänger åt vänster känns det som att vi påverkas av en kraft åt höger, utåt från banan.",
+   "s": 219.59,
+   "e": 227.46
+  },
+  {
+   "t": "Det är en konsekvens av att vi egentligen vill fortsätta rakt fram i banan på grund av vår tröghet (Newtons första lag).",
+   "s": 227.46,
+   "e": 235.43
+  },
+  {
+   "t": "När bilen då kröker åt vänster upplever vi det som att vi, relativt bilen, \"vill röra\" oss åt höger.",
+   "s": 235.43,
+   "e": 242.46
+  },
+  {
+   "t": "Sett från ett referenssystem utanför bilen \"vill vi\" bara fortsätta rakt fram, tangentiellt med banans riktning.",
+   "s": 242.46,
+   "e": 249.85
+  },
+  {
+   "t": "Demonstration — Centrifug",
+   "s": 249.85,
+   "e": 252.8
+  },
+  {
+   "t": "Vi lägger en blöt tvättsvamp i en centrifug.",
+   "s": 252.8,
+   "e": 256.74
+  },
+  {
+   "t": "Vi roterar centrifugen och undersöker hur vattendropparna slungas ut.",
+   "s": 256.74,
+   "e": 261.86
+  },
+  {
+   "t": "Vi ser att vattendropparna inte rör sig ut från banan, utan tangentiellt i rörelsens riktning, precis som Newtons första lag säger.",
+   "s": 261.86,
+   "e": 270.38
+  },
+  {
+   "t": "Demonstration — Tomtebloss",
+   "s": 270.38,
+   "e": 273.27
+  },
+  {
+   "t": "Vi fäster ett tomtebloss på en skruvdragare och tänder på.",
+   "s": 273.27,
+   "e": 277.62
+  },
+  {
+   "t": "När vi startar skruvdragaren roterar tomteblosset och vi undersöker hur gnistorna rör sig.",
+   "s": 277.62,
+   "e": 283.68
+  },
+  {
+   "t": "Vi ser att gnistorna inte rör sig ut från banan, utan tangentiellt i rörelsens riktning.",
+   "s": 283.68,
+   "e": 289.96
+  },
+  {
+   "t": "Exempel 1 — Vikt i ett snöre, vertikal cirkel",
+   "s": 289.96,
+   "e": 294.55
+  },
+  {
+   "t": "En fysiklärare snurrar en 200-gramsvikt i ett snöre som är 80 centimeter långt i en vertikal cirkel.",
+   "s": 294.55,
+   "e": 303.4
+  },
+  {
+   "t": "Bestäm centripetalkraften på vikten och spännkraften i snöret i",
+   "s": 303.35,
+   "e": 312.52
+  },
+  {
+   "t": "a) övre läget om vikten rör sig med 6,0 meter per sekund,",
+   "s": 303.35,
+   "e": 312.52
+  },
+  {
+   "t": "b) nedre läget om vikten rör sig med 14 meter per sekund,",
+   "s": 312.52,
+   "e": 318.03
+  },
+  {
+   "t": "c) bestäm den minsta farten som vikten måste ha i det övre läget för att snöret inte ska slakna.",
+   "s": 318.03,
+   "e": 325.02
+  },
+  {
+   "t": "a) Vi börjar med att beräkna centripetalkraften.",
+   "s": 325.02,
+   "e": 329.26
+  },
+  {
+   "t": "F C är lika med massan m gånger hastigheten v i kvadrat delat med r",
+   "s": 329.26,
+   "e": 345.32
+  },
+  {
+   "t": "massan m är lika med 200 gram som är lika med 0,200 kilogram hastigheten v som är lika med 6,0 meter per sekund r som är lika med 80 centimeter som är lika med 0,80 meter",
+   "s": 329.26,
+   "e": 345.32
+  },
+  {
+   "t": "F C är lika med 0,200 gånger 6,0 i kvadrat delat med 0,80 som är lika med 9,0 newton",
+   "s": 345.32,
+   "e": 353.7
+  },
+  {
+   "t": "Vilka krafter verkar på vikten i det övre vändläget?",
+   "s": 353.7,
+   "e": 357.8
+  },
+  {
+   "t": "Vi har tyngdkraft F G nedåt och en spännkraft F S nedåt.",
+   "s": 357.8,
+   "e": 362.8
+  },
+  {
+   "t": "Tillsammans utgör de centripetalkraften.",
+   "s": 362.8,
+   "e": 366.38
+  },
+  {
+   "t": "Vi ställer upp en kraftekvation och löser ut spännkraften F S .",
+   "s": 366.38,
+   "e": 371.46
+  },
+  {
+   "t": "F S plus F G är lika med F C vilket är ekvivalent med att F S är lika med F C minus F G",
+   "s": 371.46,
+   "e": 389.21
+  },
+  {
+   "t": "F C är lika med 9,0 newton F G som är lika med massan m gånger tyngdfaktorn g som är lika med 0,200 gånger 9,82 som är lika med 1,964 newton",
+   "s": 371.46,
+   "e": 389.21
+  },
+  {
+   "t": "F S är lika med 9,0 minus 1,964 som är lika med 7,036 newton som är ungefär lika med 7,0 newton",
+   "s": 389.21,
+   "e": 399.13
+  },
+  {
+   "t": "Svar: 9,0 newton (centripetalkraft) respektive 7,0 newton (spännkraft).",
+   "s": 399.13,
+   "e": 406.83
+  },
+  {
+   "t": "b) Vi börjar återigen med att beräkna centripetalkraften.",
+   "s": 406.83,
+   "e": 411.55
+  },
+  {
+   "t": "F C är lika med massan m gånger hastigheten v i kvadrat delat med r",
+   "s": 411.55,
+   "e": 424.02
+  },
+  {
+   "t": "massan m är lika med 0,200 kilogram hastigheten v som är lika med 14 meter per sekund r som är lika med 0,80 meter",
+   "s": 411.55,
+   "e": 424.02
+  },
+  {
+   "t": "F C är lika med 0,200 gånger 14 i kvadrat delat med 0,80 som är lika med 49 newton",
+   "s": 424.02,
+   "e": 431.92
+  },
+  {
+   "t": "Vilka krafter verkar på vikten i det nedre vändläget?",
+   "s": 431.92,
+   "e": 436.02
+  },
+  {
+   "t": "Tyngdkraften F G nedåt och spännkraften F S uppåt.",
+   "s": 436.02,
+   "e": 440.86
+  },
+  {
+   "t": "Tillsammans utgör de centripetalkraften (riktad uppåt mot centrum).",
+   "s": 440.86,
+   "e": 446.28
+  },
+  {
+   "t": "F S minus F G är lika med F C vilket är ekvivalent med att F S är lika med F C plus F G",
+   "s": 446.28,
+   "e": 462.43
+  },
+  {
+   "t": "F S är lika med 49 plus 1,964 som är lika med 50,964 newton som är ungefär lika med 51 newton",
+   "s": 446.28,
+   "e": 462.43
+  },
+  {
+   "t": "Svar: 49 newton (centripetalkraft) respektive 51 newton (spännkraft).",
+   "s": 462.43,
+   "e": 469.92
+  },
+  {
+   "t": "c) I gränsfallet där vikten precis klarar av att gå ett varv är spännkraften F S är lika med 0 i det övre vändläget.",
+   "s": 469.92,
+   "e": 478.35
+  },
+  {
+   "t": "Ekvationen från (a) ger då",
+   "s": 478.35,
+   "e": 481.68
+  },
+  {
+   "t": "F G är lika med F C",
+   "s": 481.68,
+   "e": 484.65
+  },
+  {
+   "t": "Med F G är lika med massan m gånger tyngdfaktorn g och F C är lika med massan m gånger hastigheten v i kvadrat delat med r får vi",
+   "s": 484.65,
+   "e": 493.15
+  },
+  {
+   "t": "massan m gånger tyngdfaktorn g är lika med m gånger hastigheten v i kvadrat delat med r",
+   "s": 493.15,
+   "e": 499.57
+  },
+  {
+   "t": "Vi dividerar båda led med m och löser ut farten v.",
+   "s": 499.57,
+   "e": 503.9
+  },
+  {
+   "t": "tyngdfaktorn g är lika med hastigheten v i kvadrat delat med r vilket är ekvivalent med att v i kvadrat är lika med g gånger r vilket är ekvivalent med att v är lika med roten ur g gånger r",
+   "s": 503.9,
+   "e": 521.62
+  },
+  {
+   "t": "tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat r som är lika med 0,80 meter",
+   "s": 503.9,
+   "e": 521.62
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 9,82 gånger 0,80 som är lika med roten ur 7,856 som är lika med 2,803 ldots meter per sekund som är ungefär lika med 2,8 meter per sekund",
+   "s": 521.62,
+   "e": 535.85
+  },
+  {
+   "t": "Svar: 2,8 meter per sekund",
+   "s": 535.85,
+   "e": 539.67
+  }
+ ]
+}

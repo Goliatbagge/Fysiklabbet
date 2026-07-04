@@ -1,0 +1,363 @@
+{
+ "id": "fy1-7.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "6f15964ce07d4ae9fbb463fa984965c4ce8ba2fd",
+ "dur": 327.63,
+ "segments": [
+  {
+   "t": "Kopplingsscheman, serie- och parallellkoppling",
+   "s": 0.1,
+   "e": 4.08
+  },
+  {
+   "t": "Kopplingsscheman",
+   "s": 4.03,
+   "e": 6.21
+  },
+  {
+   "t": "Ett förenklat diagram som visar hur elektriska komponenter är kopplade kallas kopplingsschema.",
+   "s": 6.21,
+   "e": 12.53
+  },
+  {
+   "t": "Olika elektriska komponenter ritas med olika symboler.",
+   "s": 12.53,
+   "e": 17.43
+  },
+  {
+   "t": "Amperemeter",
+   "s": 17.43,
+   "e": 19.48
+  },
+  {
+   "t": "En strömmätare kallas amperemeter.",
+   "s": 19.48,
+   "e": 22.91
+  },
+  {
+   "t": "Strömmen som går genom komponenten man ska mäta måste också passera amperemetern.",
+   "s": 22.91,
+   "e": 28.49
+  },
+  {
+   "t": "Amperemetern kopplas alltså i serie med komponenten.",
+   "s": 28.49,
+   "e": 32.58
+  },
+  {
+   "t": "För att amperemetern inte ska påverka strömmen genom komponenten ska den ha låg resistans.",
+   "s": 32.58,
+   "e": 38.66
+  },
+  {
+   "t": "Amperemetern (ampere) sitter i serie med lampan.",
+   "s": 38.66,
+   "e": 42.73
+  },
+  {
+   "t": "Voltmeter",
+   "s": 42.73,
+   "e": 44.79
+  },
+  {
+   "t": "En spänningsmätare kallas voltmeter.",
+   "s": 44.79,
+   "e": 48.15
+  },
+  {
+   "t": "Spänningen mäts mellan två punkter.",
+   "s": 48.15,
+   "e": 51.38
+  },
+  {
+   "t": "Man säger att man mäter spänning över en komponent.",
+   "s": 51.38,
+   "e": 55.39
+  },
+  {
+   "t": "Voltmetern kopplas alltså parallellt med komponenten.",
+   "s": 55.39,
+   "e": 59.65
+  },
+  {
+   "t": "För att voltmetern inte ska påverka strömmen genom komponenten ska den ha hög resistans.",
+   "s": 59.65,
+   "e": 65.67
+  },
+  {
+   "t": "Voltmetern (volt) kopplas parallellt över lampan, mellan punkterna A och B.",
+   "s": 65.67,
+   "e": 72.66
+  },
+  {
+   "t": "Seriekoppling",
+   "s": 65.67,
+   "e": 72.66
+  },
+  {
+   "t": "Att koppla komponenter \"på rad\" kallas seriekoppling.",
+   "s": 72.66,
+   "e": 76.71
+  },
+  {
+   "t": "Tre seriekopplade lampor.",
+   "s": 76.71,
+   "e": 79.44
+  },
+  {
+   "t": "Batteriets spänning U fördelas som delspänningar U ett, U två, U tre över lamporna.",
+   "s": 79.44,
+   "e": 86.33
+  },
+  {
+   "t": "Eftersom strömmen bara kan gå en väg är strömmen samma genom varje lampa.",
+   "s": 86.33,
+   "e": 91.35
+  },
+  {
+   "t": "Spänningen från batteriet betecknas U.",
+   "s": 91.35,
+   "e": 99.21
+  },
+  {
+   "t": "Delspänningarna över varje lampa betecknas U ett , U två och U tre .",
+   "s": 91.35,
+   "e": 99.21
+  },
+  {
+   "t": "Summan av delspänningarna är lika med den totala spänningen från batteriet.",
+   "s": 99.21,
+   "e": 104.51
+  },
+  {
+   "t": "spänningen U är lika med U ett plus U två plus U tre",
+   "s": 104.51,
+   "e": 109.49
+  },
+  {
+   "t": "Skulle en lampa gå sönder bryts hela kretsen och alla lampor slocknar.",
+   "s": 109.49,
+   "e": 114.36
+  },
+  {
+   "t": "Parallellkoppling",
+   "s": 114.36,
+   "e": 116.44
+  },
+  {
+   "t": "Att koppla komponenter \"över varandra\" kallas parallellkoppling.",
+   "s": 116.44,
+   "e": 120.88
+  },
+  {
+   "t": "Tre parallellkopplade lampor.",
+   "s": 120.88,
+   "e": 123.7
+  },
+  {
+   "t": "Den totala strömmen I delar upp sig i delströmmarna I ett, I två, I tre genom grenarna.",
+   "s": 123.7,
+   "e": 130.29
+  },
+  {
+   "t": "Alla lampor är kopplade direkt till batteriet och får därför samma spänning.",
+   "s": 130.29,
+   "e": 135.39
+  },
+  {
+   "t": "Strömmen ut från batteriet betecknas I.",
+   "s": 135.39,
+   "e": 139.11
+  },
+  {
+   "t": "Den delar sedan upp sig i de olika förgreningarna.",
+   "s": 139.11,
+   "e": 143.24
+  },
+  {
+   "t": "Delströmmarna genom varje lampa betecknas I ett , I två , I tre .",
+   "s": 143.24,
+   "e": 148.53
+  },
+  {
+   "t": "Summan av delströmmarna är lika med den totala strömmen ut från batteriet (enligt Kirchhoffs första lag).",
+   "s": 148.53,
+   "e": 155.65
+  },
+  {
+   "t": "strömmen I är lika med I ett plus I två plus I tre",
+   "s": 155.65,
+   "e": 160.21
+  },
+  {
+   "t": "Skulle en lampa gå sönder kan strömmen ändå passera övriga lampor (som då kommer att lysa oförändrat).",
+   "s": 160.21,
+   "e": 167.12
+  },
+  {
+   "t": "Starkast lysande lampor",
+   "s": 167.12,
+   "e": 170.03
+  },
+  {
+   "t": "Om vi har likadana lampor gäller att den lampan som får störst ström lyser starkast.",
+   "s": 170.03,
+   "e": 175.59
+  },
+  {
+   "t": "Exempel 1 — Koppla in en till lampa",
+   "s": 175.59,
+   "e": 179.14
+  },
+  {
+   "t": "En lampa kopplas till ett batteri enligt figuren.",
+   "s": 179.14,
+   "e": 182.97
+  },
+  {
+   "t": "En likadan lampa kopplas till kretsen.",
+   "s": 182.97,
+   "e": 186.45
+  },
+  {
+   "t": "Kommer den första lampan att lysa starkare, svagare eller oförändrat om den nya lampan kopplas",
+   "s": 186.45,
+   "e": 193.06
+  },
+  {
+   "t": "a) i serie?",
+   "s": 193.06,
+   "e": 195.45
+  },
+  {
+   "t": "b) parallellt?",
+   "s": 195.45,
+   "e": 197.93
+  },
+  {
+   "t": "a) Vi ritar upp det nya kopplingsschemat med ytterligare en lampa i serie.",
+   "s": 197.93,
+   "e": 203.4
+  },
+  {
+   "t": "Eftersom lamporna är seriekopplade måste all ström gå genom båda lampor.",
+   "s": 203.4,
+   "e": 208.55
+  },
+  {
+   "t": "Det ger en dubbelt så stor resistans och därmed en hälften så stark ström i kretsen och genom den första lampan.",
+   "s": 208.55,
+   "e": 215.35
+  },
+  {
+   "t": "Den första lampan kommer alltså att lysa svagare.",
+   "s": 215.35,
+   "e": 219.3
+  },
+  {
+   "t": "Svar: Svagare",
+   "s": 219.3,
+   "e": 221.8
+  },
+  {
+   "t": "b) Vi ritar återigen upp det nya kopplingsschemat med ytterligare en lampa parallellkopplad.",
+   "s": 221.8,
+   "e": 228.35
+  },
+  {
+   "t": "Varje lampa är kopplad direkt till batteriet, vilket innebär att de får samma spänning som batteriet.",
+   "s": 228.35,
+   "e": 235.04
+  },
+  {
+   "t": "Det innebär att spänningen över den första lampan kommer att bli densamma som innan.",
+   "s": 235.04,
+   "e": 240.2
+  },
+  {
+   "t": "Eftersom spänningen över lampan och lampans resistans är oförändrade måste strömmen bli densamma enligt Ohms lag.",
+   "s": 240.2,
+   "e": 247.51
+  },
+  {
+   "t": "Den första lampan kommer alltså att lysa oförändrat.",
+   "s": 247.51,
+   "e": 251.66
+  },
+  {
+   "t": "Svar: Oförändrat",
+   "s": 251.66,
+   "e": 254.43
+  },
+  {
+   "t": "Exempel 2 — Fyra lampor i blandkoppling",
+   "s": 254.43,
+   "e": 258.2
+  },
+  {
+   "t": "Fyra likadana lampor kopplas enligt kretsen: lampa 1 sitter i serie med en parallellkoppling där den övre grenen innehåller lampa 2 och den undre grenen innehåller lampa 3 och 4 i serie.",
+   "s": 258.2,
+   "e": 269.38
+  },
+  {
+   "t": "Vilken eller vilka lampor lyser",
+   "s": 269.38,
+   "e": 272.51
+  },
+  {
+   "t": "a) starkast?",
+   "s": 272.51,
+   "e": 274.91
+  },
+  {
+   "t": "b) svagast?",
+   "s": 274.91,
+   "e": 277.44
+  },
+  {
+   "t": "a) Den lampa som lyser starkast är den som får starkast ström.",
+   "s": 277.44,
+   "e": 282.46
+  },
+  {
+   "t": "Strömmen ut från batteriet förgrenar sig till den övre delen med lampa 2 och till den undre delen med lampa 3 och 4 för att sedan gå ihop igen innan den går genom lampa 1.",
+   "s": 282.46,
+   "e": 292.77
+  },
+  {
+   "t": "Lampa 1 får alltså störst ström och lyser starkast.",
+   "s": 292.77,
+   "e": 297.19
+  },
+  {
+   "t": "Svar: Lampa 1",
+   "s": 297.19,
+   "e": 299.99
+  },
+  {
+   "t": "b) Den lampa som lyser svagast är den som får svagast ström.",
+   "s": 299.99,
+   "e": 306.79
+  },
+  {
+   "t": "Strömmen är som lägst i förgreningarna.",
+   "s": 306.74,
+   "e": 310.36
+  },
+  {
+   "t": "Eftersom förgreningen med lampa 3 och 4 har störst resistans (två lampor ger mer resistans än en lampa) kommer strömmen vara lägst genom denna förgrening.",
+   "s": 310.36,
+   "e": 320.07
+  },
+  {
+   "t": "Alltså kommer lampa 3 och 4 att lysa svagast.",
+   "s": 320.07,
+   "e": 324.39
+  },
+  {
+   "t": "Svar: Lampa 3 och 4",
+   "s": 324.39,
+   "e": 327.63
+  }
+ ]
+}

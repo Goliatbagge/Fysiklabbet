@@ -1,0 +1,363 @@
+{
+ "id": "fy2-5.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "fc21cfcc3f69701a6ddc3804704c9b7d97871e48",
+ "dur": 444.45,
+ "segments": [
+  {
+   "t": "Svarta hål",
+   "s": 0.1,
+   "e": 2.25
+  },
+  {
+   "t": "Ett svart hål är ett område i rymden där massan är så hårt hoppackad att gravitationen blir extrem — så stark att ingenting, inte ens ljus, kan ta sig ut när det väl kommit innanför en viss gräns.",
+   "s": 2.2,
+   "e": 13.55
+  },
+  {
+   "t": "Det är därför det ser svart ut: ingen strålning når oss därifrån.",
+   "s": 13.55,
+   "e": 18.18
+  },
+  {
+   "t": "Trots namnet är ett svart hål inte ett \"hål\" i tomma rymden, utan tvärtom en plats med oerhört mycket massa på mycket liten volym.",
+   "s": 18.18,
+   "e": 26.52
+  },
+  {
+   "t": "För att förstå hur detta är möjligt börjar vi med en idé du redan känner till — flykthastigheten.",
+   "s": 26.52,
+   "e": 32.48
+  },
+  {
+   "t": "Flykthastighet",
+   "s": 32.48,
+   "e": 34.77
+  },
+  {
+   "t": "För att lämna en himlakropp måste ett föremål kastas iväg så snabbt att gravitationen aldrig hinner bromsa det till stillastående.",
+   "s": 34.77,
+   "e": 42.48
+  },
+  {
+   "t": "Den minsta sådana farten kallas flykthastighet.",
+   "s": 42.48,
+   "e": 46.67
+  },
+  {
+   "t": "Sätter man rörelseenergin lika med det arbete gravitationen kan göra på vägen ut, får man:",
+   "s": 46.67,
+   "e": 54.23
+  },
+  {
+   "t": "Flykthastighet",
+   "s": 46.67,
+   "e": 54.23
+  },
+  {
+   "t": "v frekvensen f är lika med roten ur 2 G kraftmomentet M delat med r",
+   "s": 54.23,
+   "e": 60.34
+  },
+  {
+   "t": "där",
+   "s": 60.34,
+   "e": 61.84
+  },
+  {
+   "t": "v frekvensen f är lika med flykthastigheten (meter per sekund)",
+   "s": 61.84,
+   "e": 67.01
+  },
+  {
+   "t": "G är lika med gravitationskonstanten, 6,67 gånger 10 upphöjt till minus 11 newton\\cdotm i kvadrat per kilogram i kvadrat",
+   "s": 67.01,
+   "e": 77.41
+  },
+  {
+   "t": "M är lika med himlakroppens massa (kilogram)",
+   "s": 77.41,
+   "e": 81.62
+  },
+  {
+   "t": "r är lika med avståndet från centrum (meter)",
+   "s": 81.62,
+   "e": 85.71
+  },
+  {
+   "t": "Lägg märke till att flykthastigheten ökar ju större massan M är, och ju mindre radien r är.",
+   "s": 85.71,
+   "e": 92.03
+  },
+  {
+   "t": "Pressar man ihop samma massa till en mindre kula stiger flykthastigheten.",
+   "s": 92.03,
+   "e": 97.25
+  },
+  {
+   "t": "Frågan blir då: vad händer om man packar massan så tätt att flykthastigheten når ända upp till ljushastigheten c?",
+   "s": 97.25,
+   "e": 104.86
+  },
+  {
+   "t": "Händelsehorisonten och Schwarzschildradien",
+   "s": 104.86,
+   "e": 108.53
+  },
+  {
+   "t": "Om flykthastigheten blir lika stor som ljusets hastighet c kan inte ens ljus undkomma.",
+   "s": 108.53,
+   "e": 114.33
+  },
+  {
+   "t": "Sätter vi v frekvensen f är lika med c och löser ut radien får vi det avstånd innanför vilket ingenting kan fly — Schwarzschildradien:",
+   "s": 114.33,
+   "e": 124.14
+  },
+  {
+   "t": "Schwarzschildradien",
+   "s": 114.33,
+   "e": 124.14
+  },
+  {
+   "t": "c är lika med roten ur 2 G kraftmomentet M delat med r sträckan s Longrightarrow r s som är lika med 2 G M delat med c i kvadrat",
+   "s": 124.14,
+   "e": 133.95
+  },
+  {
+   "t": "där",
+   "s": 133.95,
+   "e": 135.45
+  },
+  {
+   "t": "r sträckan s är lika med Schwarzschildradien (meter)",
+   "s": 135.45,
+   "e": 139.94
+  },
+  {
+   "t": "G är lika med gravitationskonstanten, 6,67 gånger 10 upphöjt till minus 11 newton\\cdotm i kvadrat per kilogram i kvadrat",
+   "s": 139.94,
+   "e": 150.3
+  },
+  {
+   "t": "M är lika med det svarta hålets massa (kilogram)",
+   "s": 150.3,
+   "e": 154.53
+  },
+  {
+   "t": "c är lika med ljushastigheten, 3,00 gånger 10 upphöjt till 8 meter per sekund",
+   "s": 154.53,
+   "e": 161.24
+  },
+  {
+   "t": "Den klotformiga ytan på avståndet r sträckan s från centrum kallas händelsehorisont.",
+   "s": 161.24,
+   "e": 167.57
+  },
+  {
+   "t": "Den är inte någon fast yta man kan ta på — det är en gräns för information.",
+   "s": 167.57,
+   "e": 172.31
+  },
+  {
+   "t": "Allt som passerar in genom händelsehorisonten är för alltid avskuret från resten av universum.",
+   "s": 172.31,
+   "e": 178.8
+  },
+  {
+   "t": "Det är därför vi aldrig kan se in i ett svart hål; vi kan bara observera vad som händer utanför horisonten.",
+   "s": 178.8,
+   "e": 185.69
+  },
+  {
+   "t": "Ett svart hål i genomskärning.",
+   "s": 185.69,
+   "e": 188.56
+  },
+  {
+   "t": "Ljus som passerar långt från hålet går rakt fram, ljus som passerar nära böjs kraftigt av gravitationen, och ljus innanför händelsehorisonten (radien r sträckan s ) kommer aldrig ut.",
+   "s": 188.56,
+   "e": 200.3
+  },
+  {
+   "t": "Exempel — Hur litet blir solen som svart hål?",
+   "s": 200.3,
+   "e": 204.2
+  },
+  {
+   "t": "Beräkna Schwarzschildradien för ett svart hål med samma massa som solen.",
+   "s": 204.2,
+   "e": 209.38
+  },
+  {
+   "t": "Vi använder formeln för Schwarzschildradien.",
+   "s": 209.38,
+   "e": 213.22
+  },
+  {
+   "t": "r sträckan s är lika med 2 G kraftmomentet M delat med c i kvadrat",
+   "s": 213.22,
+   "e": 219.12
+  },
+  {
+   "t": "G är lika med 6,67 gånger 10 upphöjt till minus 11 newton\\cdotm i kvadrat per kilogram i kvadrat kraftmomentet M som är lika med 1,99 gånger 10 upphöjt till 30 kilogram c som är lika med 3,00 gånger 10 upphöjt till 8 meter per sekund",
+   "s": 219.12,
+   "e": 236.56
+  },
+  {
+   "t": "r sträckan s är lika med 2 gånger 6,67 gånger 10 upphöjt till minus 11 gånger 1,99 gånger 10 upphöjt till 30 delat med parentesen 3,00 gånger 10 upphöjt till 8 slut parentes i kvadrat som är ungefär lika med 2,9 gånger 10 i kubik meter",
+   "s": 236.56,
+   "e": 254.32
+  },
+  {
+   "t": "Svar: Cirka 3,0 kilometer.",
+   "s": 254.32,
+   "e": 258.05
+  },
+  {
+   "t": "Hela solens massa — drygt 1,99 gånger 10 upphöjt till 30 kilogram — skulle alltså rymmas innanför en händelsehorisont stor som en mindre stad.",
+   "s": 258.05,
+   "e": 267.56
+  },
+  {
+   "t": "Hur svarta hål bildas",
+   "s": 267.56,
+   "e": 270.27
+  },
+  {
+   "t": "De flesta svarta hål vi känner till bildas när en mycket tung stjärna dör.",
+   "s": 270.27,
+   "e": 275.06
+  },
+  {
+   "t": "Så länge en stjärna lyser håller strålningstrycket från fusionen i kärnan emot gravitationen och stjärnan behåller sin storlek.",
+   "s": 275.06,
+   "e": 283.1
+  },
+  {
+   "t": "När bränslet tar slut upphör trycket — och gravitationen vinner.",
+   "s": 283.1,
+   "e": 289.51
+  },
+  {
+   "t": "För stjärnor lättare än ungefär 8 solmassor slutar det med en vit dvärg.",
+   "s": 289.46,
+   "e": 294.68
+  },
+  {
+   "t": "För tyngre stjärnor kollapsar kärnan blixtsnabbt i en supernova, och det som blir kvar i mitten blir antingen en neutronstjärna eller — om resten är tillräckligt tung — ett svart hål.",
+   "s": 294.68,
+   "e": 304.79
+  },
+  {
+   "t": "Det finns ingen känd kraft som kan stoppa kollapsen när resten är tung nog.",
+   "s": 304.79,
+   "e": 309.94
+  },
+  {
+   "t": "Materien pressas ihop mot en enda punkt med oändlig täthet, en singularitet, omgiven av sin händelsehorisont.",
+   "s": 309.94,
+   "e": 318.26
+  },
+  {
+   "t": "Olika typer av svarta hål",
+   "s": 318.26,
+   "e": 321.21
+  },
+  {
+   "t": "I mitten av vår egen galax, Vintergatan, finns ett supermassivt svart hål kallat Sagittarius A* med en massa på ungefär 4 miljoner solmassor.",
+   "s": 321.21,
+   "e": 331.24
+  },
+  {
+   "t": "Hur sådana jättar har hunnit bli så tunga är fortfarande en öppen forskningsfråga.",
+   "s": 331.24,
+   "e": 336.89
+  },
+  {
+   "t": "Hur ser man något osynligt?",
+   "s": 336.89,
+   "e": 339.81
+  },
+  {
+   "t": "Ett svart hål sänder självt inte ut något ljus — ändå kan astronomer hitta dem på flera sätt:",
+   "s": 339.81,
+   "e": 351.26
+  },
+  {
+   "t": "Materia som faller in virvlar först i en het, snabbt roterande ackretionsskiva runt hålet.",
+   "s": 339.81,
+   "e": 351.26
+  },
+  {
+   "t": "Friktionen hettar upp gasen så kraftigt att den lyser i röntgenstrålning innan den passerar horisonten.",
+   "s": 351.26,
+   "e": 357.98
+  },
+  {
+   "t": "Stjärnors banor.",
+   "s": 357.98,
+   "e": 360.28
+  },
+  {
+   "t": "Genom att följa hur stjärnor nära galaxens mitt rör sig kan man räkna ut massan hos det osynliga föremål de kretsar kring — det var så Sagittarius A* kartlades.",
+   "s": 360.28,
+   "e": 370.33
+  },
+  {
+   "t": "Gravitationsvågor.",
+   "s": 370.33,
+   "e": 372.81
+  },
+  {
+   "t": "När två svarta hål smälter samman skickas krusningar i själva rumtiden ut genom universum.",
+   "s": 372.81,
+   "e": 379.06
+  },
+  {
+   "t": "De detekterades första gången av LIGO år 2015 och bekräftade direkt att svarta hål existerar.",
+   "s": 379.06,
+   "e": 386.15
+  },
+  {
+   "t": "Den första bilden av ett svart hål",
+   "s": 386.15,
+   "e": 389.23
+  },
+  {
+   "t": "År 2019 publicerade samarbetet Event Horizon Telescope den första \"bilden\" av ett svart hål — det supermassiva hålet i galaxen M87.",
+   "s": 389.23,
+   "e": 398.61
+  },
+  {
+   "t": "Den visar inte hålet i sig (det är svart) utan den glödande ackretionsskivan runt det, format som en ljus ring kring en mörk skugga.",
+   "s": 398.61,
+   "e": 406.98
+  },
+  {
+   "t": "Teleskopet bestod av radioteleskop spridda över hela jorden, sammankopplade så att de tillsammans fungerade som ett teleskop stort som hela planeten.",
+   "s": 406.98,
+   "e": 416.4
+  },
+  {
+   "t": "Tiden saktar in vid horisonten",
+   "s": 416.4,
+   "e": 419.51
+  },
+  {
+   "t": "Enligt Einsteins allmänna relativitetsteori går tiden långsammare där gravitationen är starkare.",
+   "s": 419.51,
+   "e": 425.94
+  },
+  {
+   "t": "För en avlägsen betraktare tycks ett föremål som faller in mot ett svart hål röra sig allt långsammare ju närmare horisonten det kommer — och tycks aldrig riktigt passera den, samtidigt som dess ljus blir alltmer rödförskjutet och slocknar.",
+   "s": 425.94,
+   "e": 438.75
+  },
+  {
+   "t": "För föremålet självt passerar däremot tiden helt normalt, och det faller rakt in.",
+   "s": 438.75,
+   "e": 444.45
+  }
+ ]
+}

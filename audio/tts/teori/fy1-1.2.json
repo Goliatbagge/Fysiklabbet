@@ -1,0 +1,288 @@
+{
+ "id": "fy1-1.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d8111653709392c767aca9fa2460fb6b8aa0e676",
+ "dur": 283.31,
+ "segments": [
+  {
+   "t": "Storheter, enheter och prefix",
+   "s": 0.1,
+   "e": 3.71
+  },
+  {
+   "t": "Storheter och enheter",
+   "s": 3.66,
+   "e": 6.67
+  },
+  {
+   "t": "En egenskap som kan mätas kallas storhet.",
+   "s": 6.67,
+   "e": 10.71
+  },
+  {
+   "t": "Det numeriska värdet som storheten anges med kallas mätetal.",
+   "s": 10.71,
+   "e": 15.35
+  },
+  {
+   "t": "Måttstorleken som mätetalet anges i kallas enhet.",
+   "s": 15.35,
+   "e": 19.79
+  },
+  {
+   "t": "Meningen \"sträckan är 2 500 meter\" innehåller storheten sträcka, mätetalet 2 500 och enheten meter.",
+   "s": 19.79,
+   "e": 28.25
+  },
+  {
+   "t": "Storheter brukar tilldelas en symbol som används i formler.",
+   "s": 28.25,
+   "e": 33.08
+  },
+  {
+   "t": "Exempelvis betecknas ofta sträcka med s, kraft med F och hastighet med v.",
+   "s": 33.08,
+   "e": 38.85
+  },
+  {
+   "t": "Man får använda andra beteckningar, men det underlättar att använda de allmänt vedertagna.",
+   "s": 38.85,
+   "e": 45.05
+  },
+  {
+   "t": "Det kan finnas olika enheter för samma storhet.",
+   "s": 45.05,
+   "e": 49.09
+  },
+  {
+   "t": "Sträcka kan anges i t.ex. meter, centimeter, mil, inch, ljusår, fjärdingsväg med mera.",
+   "s": 49.09,
+   "e": 57.42
+  },
+  {
+   "t": "Därför har man infört internationella SI-enheter.",
+   "s": 57.42,
+   "e": 61.54
+  },
+  {
+   "t": "Om vi räknar med SI-enheter i formler, kommer svaret alltid att också bli i en SI-enhet.",
+   "s": 61.54,
+   "e": 67.71
+  },
+  {
+   "t": "SI-enheterna bygger på sju stycken grundenheter.",
+   "s": 67.71,
+   "e": 71.66
+  },
+  {
+   "t": "Alla andra enheter kan konstrueras med hjälp av dessa grundenheter.",
+   "s": 71.66,
+   "e": 76.74
+  },
+  {
+   "t": "Exempel 1 — SI-enhet för hastighet och volym",
+   "s": 76.74,
+   "e": 81.04
+  },
+  {
+   "t": "Vad är SI-enheten föra) hastighet b) volym?",
+   "s": 81.04,
+   "e": 85.61
+  },
+  {
+   "t": "a) Hastighet beräknas som sträcka / tid.",
+   "s": 85.61,
+   "e": 90.1
+  },
+  {
+   "t": "Eftersom SI-enheten för sträcka är meter och SI-enheten för tid är sekund blir SI-enheten för hastighet",
+   "s": 90.1,
+   "e": 97.22
+  },
+  {
+   "t": "sträcka delat med tid är lika med meter delat med sekund som är lika med meter delat med sekund som är lika med meter per sekund",
+   "s": 97.22,
+   "e": 104.94
+  },
+  {
+   "t": "Svar: m/s",
+   "s": 104.94,
+   "e": 111.65
+  },
+  {
+   "t": "b) Volym beräknas utifrån sträcka i tre dimensioner.",
+   "s": 104.94,
+   "e": 111.65
+  },
+  {
+   "t": "Eftersom SI-enheten för sträcka är meter blir SI-enheten för volym",
+   "s": 111.65,
+   "e": 117.01
+  },
+  {
+   "t": "sträcka gånger sträcka gånger sträcka är lika med meter gånger meter gånger meter som är lika med kubikmeter",
+   "s": 117.01,
+   "e": 124.31
+  },
+  {
+   "t": "Svar: m i kubik",
+   "s": 124.31,
+   "e": 127.19
+  },
+  {
+   "t": "OBS 1 — Avrundning",
+   "s": 127.19,
+   "e": 129.86
+  },
+  {
+   "t": "Mätetal är viktiga.",
+   "s": 129.86,
+   "e": 132.35
+  },
+  {
+   "t": "Avrunda inte förrän i slutet av en uppgift, annars kan felet bli stort!",
+   "s": 132.35,
+   "e": 137.85
+  },
+  {
+   "t": "OBS 2 — Värdesiffror",
+   "s": 137.85,
+   "e": 140.54
+  },
+  {
+   "t": "Tänk på att svara med korrekt antal värdesiffror eller gällande siffror.",
+   "s": 140.54,
+   "e": 145.44
+  },
+  {
+   "t": "Lathund — Att lösa fysikuppgifter",
+   "s": 145.44,
+   "e": 148.89
+  },
+  {
+   "t": "En lathund för hur man kan lösa fysikuppgifter på ett strukturerat sätt finns i ämnesmaterialet.",
+   "s": 148.89,
+   "e": 155.46
+  },
+  {
+   "t": "Exempel 2 — Svetlanas medelfart",
+   "s": 155.46,
+   "e": 158.94
+  },
+  {
+   "t": "Svetlana springer 56 meter på 7,12 sekunder.",
+   "s": 158.94,
+   "e": 163.8
+  },
+  {
+   "t": "Vilken är hennes medelfart?",
+   "s": 163.8,
+   "e": 166.74
+  },
+  {
+   "t": "Vi ställer upp formeln för medelfart.",
+   "s": 166.74,
+   "e": 170.01
+  },
+  {
+   "t": "v massan m är lika med sträckan s delat med tiden t",
+   "s": 170.01,
+   "e": 178.68
+  },
+  {
+   "t": "sträckan s är lika med 56 meter tiden t som är lika med 7,12 sekund",
+   "s": 170.01,
+   "e": 178.68
+  },
+  {
+   "t": "v massan m är lika med 56 meter delat med 7,12 sekund som är lika med 7,865 ldots meter per sekund",
+   "s": 178.68,
+   "e": 187.54
+  },
+  {
+   "t": "Mätetalet 56 har två värdesiffror och mätetalet 7,12 har tre värdesiffror, alltså ska vi avrunda till två värdesiffror (minsta antalet värdesiffror).",
+   "s": 187.54,
+   "e": 198.11
+  },
+  {
+   "t": "v massan m är lika med 7,865 ldots meter per sekund som är ungefär lika med 7,9 meter per sekund",
+   "s": 198.11,
+   "e": 206.51
+  },
+  {
+   "t": "Svar: 7,9 meter per sekund",
+   "s": 206.51,
+   "e": 210.41
+  },
+  {
+   "t": "Prefix och tiopotenser",
+   "s": 210.41,
+   "e": 213.29
+  },
+  {
+   "t": "Prefix och tiopotenser används ofta för att underlätta att skriva sitt svar (särskilt om det är stora eller små tal).",
+   "s": 213.29,
+   "e": 221.21
+  },
+  {
+   "t": "De vanligaste prefixen finns i tabellen nedan.",
+   "s": 221.21,
+   "e": 225.1
+  },
+  {
+   "t": "Exempel 3 — Grundpotensform och prefix",
+   "s": 225.1,
+   "e": 228.93
+  },
+  {
+   "t": "Skriv 0,000 002 4 metera) i grundpotensform b) med prefix.",
+   "s": 228.93,
+   "e": 235.9
+  },
+  {
+   "t": "a) I grundpotensform ska den första faktorn vara ett tal mellan 1 och 10.",
+   "s": 235.9,
+   "e": 241.68
+  },
+  {
+   "t": "I detta fall blir den 2,4.",
+   "s": 241.68,
+   "e": 244.93
+  },
+  {
+   "t": "För små tal, mindre än 1, ges tiopotensens exponent av antalet nollor innan den första siffran som inte är 0, med ett minustecken.",
+   "s": 244.93,
+   "e": 253.95
+  },
+  {
+   "t": "I detta fall har vi 6 nollor i början av talet, så exponenten blir −6.",
+   "s": 253.95,
+   "e": 259.55
+  },
+  {
+   "t": "Svar: 2,4 gånger 10 upphöjt till minus 6 meter",
+   "s": 259.55,
+   "e": 264.9
+  },
+  {
+   "t": "b) Vi tittar på talet i grundpotensform och studerar tiopotensen.",
+   "s": 264.9,
+   "e": 270.32
+  },
+  {
+   "t": "Tiopotensen 10 upphöjt till minus 6 har prefixet μ (mikro).",
+   "s": 270.32,
+   "e": 275.85
+  },
+  {
+   "t": "Vi byter ut tiopotensen mot sitt prefix.",
+   "s": 275.85,
+   "e": 279.8
+  },
+  {
+   "t": "Svar: 2,4 μm",
+   "s": 279.8,
+   "e": 283.31
+  }
+ ]
+}

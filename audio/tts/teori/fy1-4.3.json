@@ -1,0 +1,223 @@
+{
+ "id": "fy1-4.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "714a02128ec101caf525c466e82b668cac93be89",
+ "dur": 271.84,
+ "segments": [
+  {
+   "t": "Rörelseenergi",
+   "s": 0.1,
+   "e": 2.45
+  },
+  {
+   "t": "Den energi som ett objekt har på grund av sin rörelse kallas rörelseenergi eller kinetisk energi, betecknas E k och har SI-enheten J (joule), precis som alla energiformer.",
+   "s": 2.4,
+   "e": 13.82
+  },
+  {
+   "t": "Hur stor rörelseenergin är beror på massan och hastigheten.",
+   "s": 13.82,
+   "e": 18.59
+  },
+  {
+   "t": "Ju större massa och ju högre hastighet desto högre rörelseenergi.",
+   "s": 18.59,
+   "e": 23.51
+  },
+  {
+   "t": "Rörelseenergi (kinetisk energi)",
+   "s": 23.51,
+   "e": 27.36
+  },
+  {
+   "t": "E k är lika med massan m gånger hastigheten v i kvadrat delat med 2",
+   "s": 27.36,
+   "e": 32.96
+  },
+  {
+   "t": "där",
+   "s": 32.96,
+   "e": 34.44
+  },
+  {
+   "t": "E k är lika med rörelseenergi (joule)",
+   "s": 34.44,
+   "e": 38.46
+  },
+  {
+   "t": "m är lika med föremålets massa (kilogram)",
+   "s": 38.46,
+   "e": 42.52
+  },
+  {
+   "t": "v är lika med föremålets hastighet (meter per sekund)",
+   "s": 42.52,
+   "e": 47.33
+  },
+  {
+   "t": "Härledning — Rörelseenergi",
+   "s": 47.33,
+   "e": 50.36
+  },
+  {
+   "t": "Ökningen av rörelseenergi är lika stor som det arbete som krävdes för att få rörelsen, så",
+   "s": 50.36,
+   "e": 56.98
+  },
+  {
+   "t": "E k är lika med arbetet W som är lika med F sträckan s gånger s, ekvation 1",
+   "s": 56.98,
+   "e": 63.64
+  },
+  {
+   "t": "Eftersom vi ska öka en hastighet krävs en viss accelererande kraft.",
+   "s": 63.64,
+   "e": 68.74
+  },
+  {
+   "t": "Denna kraft är enligt Newtons andra lag",
+   "s": 68.74,
+   "e": 72.3
+  },
+  {
+   "t": "F sträckan s är lika med massan m gånger accelerationen a, ekvation 2",
+   "s": 72.3,
+   "e": 78.26
+  },
+  {
+   "t": "Sträckan s vid konstant acceleration har vi sedan tidigare beräknat enligt",
+   "s": 78.26,
+   "e": 83.99
+  },
+  {
+   "t": "sträckan s är lika med accelerationen a gånger tiden t i kvadrat delat med 2 parentesen om v noll som är lika med 0 slut parentes, ekvation 3",
+   "s": 83.99,
+   "e": 94.22
+  },
+  {
+   "t": "Insättning av ekvation 2 och ekvation 3 i ekvation 1 ger",
+   "s": 94.22,
+   "e": 99.46
+  },
+  {
+   "t": "E k är lika med F sträckan s gånger s som är lika med massan m gånger accelerationen a gånger a gånger tiden t i kvadrat delat med 2 som är lika med m gånger a i kvadrat gånger t i kvadrat delat med 2 som är lika med m gånger parentesen a gånger t slut parentes i kvadrat delat med 2, ekvation 4",
+   "s": 99.46,
+   "e": 117.96
+  },
+  {
+   "t": "Vid konstant acceleration gäller v är lika med a gånger t.",
+   "s": 117.96,
+   "e": 122.65
+  },
+  {
+   "t": "Detta medför att v i kvadrat är lika med (a gånger t) i kvadrat.",
+   "s": 122.65,
+   "e": 128.18
+  },
+  {
+   "t": "Insättning av (a gånger t) i kvadrat är lika med v i kvadrat i ekvation 4 ger",
+   "s": 128.18,
+   "e": 135.01
+  },
+  {
+   "t": "E k är lika med massan m gånger hastigheten v i kvadrat delat med 2 vilket skulle visas",
+   "s": 135.01,
+   "e": 141.66
+  },
+  {
+   "t": "Exempel 1 — Bilens rörelseenergi",
+   "s": 141.66,
+   "e": 145.49
+  },
+  {
+   "t": "En bil väger 1,2 ton och har hastigheten 72 kilometer i timmen.",
+   "s": 145.49,
+   "e": 151.1
+  },
+  {
+   "t": "Hur stor är dess rörelseenergi?",
+   "s": 151.1,
+   "e": 154.3
+  },
+  {
+   "t": "E k är lika med massan m gånger hastigheten v i kvadrat delat med 2",
+   "s": 154.3,
+   "e": 159.84
+  },
+  {
+   "t": "massan m är lika med 1,2 ton som är lika med 1 200 kilogram hastigheten v som är lika med 72 kilometer per timme som är lika med 72 delat med 3,6 meter per sekund som är lika med 20 meter per sekund",
+   "s": 159.84,
+   "e": 173.72
+  },
+  {
+   "t": "E k är lika med 1 200 gånger 20 i kvadrat delat med 2 som är lika med 240 000 joule som är lika med 0,24 megajoule",
+   "s": 173.72,
+   "e": 183.75
+  },
+  {
+   "t": "Svar: 0,24 megajoule",
+   "s": 183.75,
+   "e": 187.59
+  },
+  {
+   "t": "Exempel 2 — Bromsande cyklist",
+   "s": 187.59,
+   "e": 190.9
+  },
+  {
+   "t": "En cyklist med cykel väger 85 kilogram och bromsar på plan mark från 10 meter per sekund till 7,0 meter per sekund på 30 meter.",
+   "s": 190.9,
+   "e": 199.99
+  },
+  {
+   "t": "Hur stor var medelbromskraften?",
+   "s": 199.99,
+   "e": 203.16
+  },
+  {
+   "t": "Det bromsande arbetet W ger upphov till minskningen av rörelseenergi Δ E k , så",
+   "s": 203.16,
+   "e": 209.55
+  },
+  {
+   "t": "arbetet W är lika med delta E k",
+   "s": 209.55,
+   "e": 220.11
+  },
+  {
+   "t": "Insättning av arbetet W är lika med F sträckan s gånger s och delta E k är lika med E kefter minus E kföre ger",
+   "s": 209.55,
+   "e": 220.11
+  },
+  {
+   "t": "F sträckan s gånger s är lika med E kefter minus E kföre",
+   "s": 220.11,
+   "e": 225.07
+  },
+  {
+   "t": "Vi löser ut medelbromskraften F sträckan s .",
+   "s": 225.07,
+   "e": 229.45
+  },
+  {
+   "t": "F sträckan s är lika med E kefter minus E kföre delat med s",
+   "s": 229.45,
+   "e": 234.64
+  },
+  {
+   "t": "E kefter är lika med massan m gånger v två i kvadrat delat med 2 som är lika med 85 gånger 10 i kvadrat delat med 2 som är lika med 4 250 joule E kföre som är lika med m gånger v ett i kvadrat delat med 2 som är lika med 85 gånger 7,0 i kvadrat delat med 2 som är lika med 2 082,5 joule sträckan s som är lika med 30 meter",
+   "s": 234.64,
+   "e": 257.25
+  },
+  {
+   "t": "F sträckan s är lika med 4 250 minus 2 082,5 delat med 30 som är lika med 72,25 newton som är ungefär lika med 72 newton",
+   "s": 257.25,
+   "e": 268.8
+  },
+  {
+   "t": "Svar: 72 newton",
+   "s": 268.8,
+   "e": 271.84
+  }
+ ]
+}

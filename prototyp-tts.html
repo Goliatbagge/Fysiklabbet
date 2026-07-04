@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototyp: uppläsning med talsyntes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <link rel="stylesheet" href="styles-laborans.css">
+    <style>
+        body.laborans { padding: 0; }
+        .proto-wrap {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 24px 28px 80px;
+        }
+        .proto-head {
+            border-bottom: 2px solid rgba(15, 22, 32, 0.85);
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+        }
+        .proto-head h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 30px;
+            font-weight: 400;
+            margin: 0 0 4px;
+        }
+        .proto-head p { margin: 0; opacity: 0.75; font-size: 14px; }
+
+        .proto-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px 22px;
+            align-items: flex-end;
+            background: rgba(15, 22, 32, 0.04);
+            border: 1px solid rgba(15, 22, 32, 0.14);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            font-size: 14px;
+        }
+        .proto-controls label.fld {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 11.5px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+        .proto-controls select, .proto-controls input[type="range"] {
+            font: inherit;
+            font-size: 14px;
+            text-transform: none;
+            letter-spacing: 0;
+            padding: 6px 8px;
+            border: 1px solid rgba(15, 22, 32, 0.3);
+            border-radius: 7px;
+            background: #fffdf8;
+            color: inherit;
+            max-width: 340px;
+        }
+        .proto-controls .chk {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 14px;
+            padding-bottom: 6px;
+            cursor: pointer;
+        }
+        .proto-btns { display: flex; gap: 8px; }
+        .proto-btns button {
+            font: inherit;
+            font-size: 14.5px;
+            font-weight: 600;
+            padding: 9px 18px;
+            border-radius: 8px;
+            border: 1.5px solid rgba(15, 22, 32, 0.85);
+            background: #fffdf8;
+            color: #0f1620;
+            cursor: pointer;
+        }
+        .proto-btns button.primary { background: #0f1620; color: #f7f2e8; }
+        .proto-btns button:disabled { opacity: 0.4; cursor: default; }
+
+        .proto-cols {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 400px;
+            gap: 26px;
+            align-items: start;
+        }
+        @media (max-width: 980px) { .proto-cols { grid-template-columns: 1fr; } }
+
+        .proto-article {
+            background: linear-gradient(180deg, #fbf8f1, #f5efe2);
+            border: 1px solid rgba(15, 22, 32, 0.14);
+            border-radius: 12px;
+            padding: 26px 30px 34px;
+        }
+
+        /* Markering av blocket som läses upp */
+        .tts-current {
+            background: rgba(214, 158, 46, 0.22);
+            outline: 2px solid rgba(214, 158, 46, 0.65);
+            outline-offset: 3px;
+            border-radius: 4px;
+            transition: background 0.25s ease;
+        }
+
+        /* Uppläsningstext-panelen */
+        .proto-transcript {
+            position: sticky;
+            top: 16px;
+            background: #fffdf8;
+            border: 1px solid rgba(15, 22, 32, 0.16);
+            border-radius: 12px;
+            max-height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+        .proto-transcript h2 {
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin: 0;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(15, 22, 32, 0.12);
+        }
+        .proto-transcript ol {
+            margin: 0;
+            padding: 8px 0;
+            list-style: none;
+            overflow-y: auto;
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+        .proto-transcript li {
+            padding: 7px 16px 7px 38px;
+            position: relative;
+            cursor: pointer;
+            border-bottom: 1px dashed rgba(15, 22, 32, 0.08);
+        }
+        .proto-transcript li::before {
+            content: attr(data-n);
+            position: absolute;
+            left: 14px;
+            top: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            opacity: 0.45;
+        }
+        .proto-transcript li:hover { background: rgba(15, 22, 32, 0.05); }
+        .proto-transcript li.formula { font-style: italic; }
+        .proto-transcript li.now {
+            background: rgba(214, 158, 46, 0.22);
+            font-weight: 600;
+        }
+        .proto-note { font-size: 12.5px; opacity: 0.65; padding: 10px 16px; border-top: 1px solid rgba(15,22,32,0.1); margin: 0; }
+        .proto-hidden { display: none; }
+    </style>
+</head>
+<body class="laborans">
+    <div class="proto-wrap">
+        <div class="proto-head">
+            <h1>Prototyp: uppläsning med talsyntes</h1>
+            <p>Testar Web Speech API med svensk röst och egen formeluppläsning (LaTeX → svenska). Klicka på en rad i uppläsningstexten för att börja läsa därifrån.</p>
+        </div>
+
+        <div class="proto-controls">
+            <label class="fld">Teoriavsnitt
+                <select id="sectionSel"></select>
+            </label>
+            <label class="fld">Röst
+                <select id="voiceSel"></select>
+            </label>
+            <label class="fld">Hastighet: <span id="rateVal">1,0</span>
+                <input type="range" id="rateSel" min="0.6" max="1.4" step="0.05" value="1">
+            </label>
+            <label class="chk"><input type="checkbox" id="namesChk" checked> Säg storhetsnamn ("effekten P")</label>
+            <label class="chk"><input type="checkbox" id="transChk" checked> Visa uppläsningstext</label>
+            <div class="proto-btns">
+                <button id="playBtn" class="primary">Läs upp</button>
+                <button id="pauseBtn" disabled>Paus</button>
+                <button id="stopBtn" disabled>Stoppa</button>
+            </div>
+        </div>
+
+        <div class="proto-cols">
+            <article class="proto-article lab-article-body" id="article"></article>
+            <aside class="proto-transcript" id="transcript">
+                <h2>Uppläsningstext (det som skickas till rösten)</h2>
+                <ol id="transcriptList"></ol>
+                <p class="proto-note" id="voiceNote"></p>
+            </aside>
+        </div>
+    </div>
+
+    <script src="data/teori/bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="prototyp-tts.js"></script>
+    <script>
+    (function () {
+        'use strict';
+        const TEORI = window.TEORI || {};
+        const T = window.TTSPROTO;
+
+        // ---------- Markdown-pipeline (samma som katalog.html, förenklad) ----------
+
+        function protectMath(md) {
+            const tokens = [];
+            md = md.replace(/\$\$([\s\S]+?)\$\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(/\$([^\n$]+?)\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            return { md, tokens };
+        }
+        function restoreMath(html, tokens) {
+            return html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+        }
+
+        const SUP_MAP = {
+            '⁻': '-', '⁺': '+', '⁰': '0', '¹': '1', '²': '2', '³': '3',
+            '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9',
+            '⁽': '(', '⁾': ')', 'ⁿ': 'n',
+        };
+        const SUP_RE = /[⁻⁺⁰¹²³⁴-⁹⁽⁾ⁿ]+/g;
+        function preprocessSuperscripts(md) {
+            const tokens = [];
+            md = md.replace(/<svg[\s\S]*?<\/svg>/g, (m) => {
+                tokens.push(m);
+                return '@@ATTR' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(/\b(data-tip|title|aria-label)="([^"]*)"/g, (m) => {
+                tokens.push(m);
+                return '@@ATTR' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(SUP_RE, (run) => {
+                let ascii = '';
+                for (const ch of run) ascii += (SUP_MAP[ch] || ch);
+                return '<sup>' + ascii + '</sup>';
+            });
+            return md.replace(/@@ATTR(\d+)@@/g, (_, i) => tokens[+i]);
+        }
+
+        function escapeHtml(s) {
+            return String(s)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function preprocessBlocks(md) {
+            const lines = md.split('\n');
+            const out = [];
+            const stack = [];
+            for (const line of lines) {
+                const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
+                const close = line.match(/^:::\s*$/);
+                if (open) {
+                    const type = open[1].toLowerCase();
+                    stack.push(type);
+                    out.push('<div class="lab-block lab-block-' + type + '">');
+                    if (open[2]) out.push('<div class="lab-block-title">' + escapeHtml(open[2]) + '</div>');
+                    out.push('');
+                } else if (close && stack.length > 0) {
+                    stack.pop();
+                    out.push('');
+                    out.push('</div>');
+                } else {
+                    out.push(line);
+                }
+            }
+            return out.join('\n');
+        }
+
+        function parseFrontmatter(md) {
+            md = md.replace(/\r\n?/g, '\n');
+            if (!md.startsWith('---\n')) return { fm: {}, body: md };
+            const end = md.indexOf('\n---\n', 4);
+            if (end === -1) return { fm: {}, body: md };
+            const fm = {};
+            for (const line of md.slice(4, end).split('\n')) {
+                const m = line.match(/^([a-zA-Z]+):\s*(.*)$/);
+                if (m) {
+                    let v = m[2].trim();
+                    if ((v.startsWith("'") && v.endsWith("'")) || (v.startsWith('"') && v.endsWith('"'))) {
+                        v = v.slice(1, -1);
+                    }
+                    fm[m[1]] = v;
+                }
+            }
+            return { fm, body: md.slice(end + 5) };
+        }
+
+        marked.setOptions({ gfm: true, breaks: false });
+
+        function renderSection(id) {
+            const raw = TEORI[id];
+            if (!raw) return;
+            const { body } = parseFrontmatter(raw);
+            const { md, tokens } = protectMath(body);
+            let processed = preprocessSuperscripts(md);
+            processed = preprocessBlocks(processed);
+            const html = restoreMath(marked.parse(processed), tokens);
+            const article = document.getElementById('article');
+            article.innerHTML = html;
+            renderMathInElement(article, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                ],
+                throwOnError: false,
+            });
+        }
+
+        // ---------- UI ----------
+
+        const $ = (id) => document.getElementById(id);
+        const sectionSel = $('sectionSel'), voiceSel = $('voiceSel'),
+              rateSel = $('rateSel'), rateVal = $('rateVal'),
+              namesChk = $('namesChk'), transChk = $('transChk'),
+              playBtn = $('playBtn'), pauseBtn = $('pauseBtn'), stopBtn = $('stopBtn'),
+              transcriptEl = $('transcript'), listEl = $('transcriptList');
+
+        // Avsnittsväljare — alla teoriuppslag ur bundeln
+        const sections = Object.keys(TEORI).map((id) => {
+            const { fm } = parseFrontmatter(TEORI[id]);
+            return { id, label: (fm.section || id) + ' — ' + (fm.title || id) + '  (' + (fm.course || '') + ')' };
+        }).sort((a, b) => a.id.localeCompare(b.id, 'sv', { numeric: true }));
+        sections.forEach((s) => {
+            const o = document.createElement('option');
+            o.value = s.id;
+            o.textContent = s.label;
+            sectionSel.appendChild(o);
+        });
+        sectionSel.value = TEORI['fy1-7.9'] ? 'fy1-7.9' : sections[0].id;
+
+        const reader = new T.Upplasare({ onChange: updateUi });
+
+        function updateUi() {
+            playBtn.disabled = reader.playing && !reader.paused;
+            pauseBtn.disabled = !reader.playing;
+            pauseBtn.textContent = reader.paused ? 'Fortsätt' : 'Paus';
+            stopBtn.disabled = !reader.playing && reader.index < 0;
+            // markera aktuell rad i transkriptet
+            Array.from(listEl.children).forEach((li, i) => {
+                li.classList.toggle('now', reader.playing && i === reader.currentIndex);
+            });
+            const now = listEl.querySelector('li.now');
+            if (now) now.scrollIntoView({ block: 'nearest' });
+        }
+
+        function rebuild() {
+            const items = reader.build($('article'), { names: namesChk.checked });
+            listEl.innerHTML = '';
+            items.forEach((item, i) => {
+                const li = document.createElement('li');
+                li.textContent = item.text;
+                li.setAttribute('data-n', i + 1);
+                if (item.isFormula) li.classList.add('formula');
+                li.addEventListener('click', () => reader.play(i));
+                listEl.appendChild(li);
+            });
+        }
+
+        function loadSection() {
+            reader.stop();
+            renderSection(sectionSel.value);
+            rebuild();
+        }
+
+        // Röster — svenska först
+        function populateVoices() {
+            const voices = window.speechSynthesis.getVoices();
+            const sv = voices.filter((v) => v.lang && v.lang.toLowerCase().startsWith('sv'));
+            const list = sv.length ? sv : voices;
+            voiceSel.innerHTML = '';
+            list.forEach((v) => {
+                const o = document.createElement('option');
+                o.value = v.name;
+                o.textContent = v.name + ' (' + v.lang + ')' + (v.localService ? '' : ' — online');
+                voiceSel.appendChild(o);
+            });
+            $('voiceNote').textContent = sv.length
+                ? (sv.length === 1 ? 'En svensk röst hittades i din webbläsare.'
+                                   : sv.length + ' svenska röster hittades i din webbläsare.')
+                  + ' Rösten avgör hur naturligt det låter — prova gärna även i Edge, som har fler naturliga svenska röster.'
+                : 'Inga svenska röster hittades — visar alla. Prova gärna i Edge, som har naturliga svenska röster.';
+            syncVoice();
+        }
+        function syncVoice() {
+            const voices = window.speechSynthesis.getVoices();
+            reader.voice = voices.find((v) => v.name === voiceSel.value) || null;
+        }
+        populateVoices();
+        if ('onvoiceschanged' in window.speechSynthesis) {
+            window.speechSynthesis.onvoiceschanged = populateVoices;
+        }
+
+        // Händelser
+        sectionSel.addEventListener('change', loadSection);
+        voiceSel.addEventListener('change', syncVoice);
+        rateSel.addEventListener('input', () => {
+            reader.rate = parseFloat(rateSel.value);
+            rateVal.textContent = reader.rate.toFixed(2).replace('.', ',').replace(/,?0+$/, '') || '1';
+        });
+        namesChk.addEventListener('change', () => { reader.stop(); rebuild(); });
+        transChk.addEventListener('change', () => {
+            transcriptEl.classList.toggle('proto-hidden', !transChk.checked);
+        });
+        playBtn.addEventListener('click', () => {
+            if (reader.paused) reader.resume();
+            else reader.play(reader.index >= 0 ? reader.index : 0);
+        });
+        pauseBtn.addEventListener('click', () => {
+            if (reader.paused) reader.resume(); else reader.pause();
+        });
+        stopBtn.addEventListener('click', () => reader.stop());
+
+        loadSection();
+    })();
+    </script>
+</body>
+</html>

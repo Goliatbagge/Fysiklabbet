@@ -1,0 +1,213 @@
+{
+ "id": "2026-06-18-juno-neutrinodetektor",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "3355202a507de4be5e051f6d0c0cf34a643a17d5",
+ "dur": 330.23,
+ "segments": [
+  {
+   "t": "Världens skarpaste neutrinoöga öppnas — 700 meter under jorden.",
+   "s": 0.1,
+   "e": 5.59
+  },
+  {
+   "t": "I en jättelik glaskula fylld med 20 000 ton genomskinlig vätska, djupt under södra Kina, har neutrinoobservatoriet JUNO gjort sina första mätningar.",
+   "s": 5.54,
+   "e": 15.5
+  },
+  {
+   "t": "På bara 59 dagar slog det alla tidigare experiment tillsammans.",
+   "s": 15.5,
+   "e": 20.54
+  },
+  {
+   "t": "Just medan du läser den här meningen susar omkring hundra biljoner neutriner rakt genom din tumnagel.",
+   "s": 20.54,
+   "e": 27.14
+  },
+  {
+   "t": "De bryr sig inte det minsta om dig — eller om jorden, för den delen.",
+   "s": 27.14,
+   "e": 31.68
+  },
+  {
+   "t": "De allra flesta passerar tvärs igenom hela planeten utan att ens nudda en enda atom.",
+   "s": 31.68,
+   "e": 37.58
+  },
+  {
+   "t": "Neutrinen är universums mest asociala partikel, och just därför en av de allra svåraste att studera.",
+   "s": 37.58,
+   "e": 44.8
+  },
+  {
+   "t": "Men nu har fysikerna fått ett osedvanligt skarpt verktyg.",
+   "s": 44.8,
+   "e": 49.4
+  },
+  {
+   "t": "Den 10 juni 2026 publicerade Nature de första resultaten från JUNO — Jiangmen Underground Neutrino Observatory — ett gigantiskt detektorbygge 700 meter under marken i södra Kina.",
+   "s": 49.4,
+   "e": 61.54
+  },
+  {
+   "t": "Och redan med sina första veckors data har det ställt sig i främsta ledet bland världens neutrinoexperiment.",
+   "s": 61.54,
+   "e": 68.31
+  },
+  {
+   "t": "En glaskula stor som ett tolvvåningshus.",
+   "s": 68.31,
+   "e": 72.06
+  },
+  {
+   "t": "Hjärtat i JUNO är en genomskinlig akrylsfär med 35,4 meters diameter — ungefär lika hög som ett tolvvåningshus — fylld med 20 000 ton specialvätska.",
+   "s": 72.06,
+   "e": 82.45
+  },
+  {
+   "t": "Vätskan är en så kallad scintillator: den lyser till med en svag ljusblixt i samma stund som en neutrino råkar krocka med den.",
+   "s": 82.45,
+   "e": 90.54
+  },
+  {
+   "t": "Sfären hänger inuti en stålkonstruktion på 41,1 meter och är i sin tur nedsänkt i en 44 meter djup vattenbassäng som skärmar av störande strålning från omgivningen.",
+   "s": 90.54,
+   "e": 101.28
+  },
+  {
+   "t": "För att fånga de ytterst svaga ljusblixtarna stirrar nästan 45 000 ljuskänsliga ”ögon” in mot vätskan: omkring 20 000 stora och 25 600 mindre så kallade fotomultiplikatorer, som kan förstärka en handfull ljuspartiklar till en mätbar elektrisk signal.",
+   "s": 101.28,
+   "e": 117.46
+  },
+  {
+   "t": "Att bygga något så enormt och samtidigt så rent från radioaktiva föroreningar är en bedrift i sig — minsta lilla bakgrundsstrålning skulle annars dränka signalen.",
+   "s": 117.46,
+   "e": 126.78
+  },
+  {
+   "t": "Nobelpristagaren Arthur McDonald konstaterar att JUNO ”uppnått exceptionell radioaktiv renhet, energiupplösning och stabilitet”.",
+   "s": 126.78,
+   "e": 135.74
+  },
+  {
+   "t": "Partiklar som byter skepnad.",
+   "s": 135.74,
+   "e": 138.69
+  },
+  {
+   "t": "Neutriner finns i tre ”smaker”: elektron-, myon- och tauneutrino.",
+   "s": 138.69,
+   "e": 144.32
+  },
+  {
+   "t": "Det märkliga är att en neutrino kan byta smak medan den färdas — den startar som den ena sorten och kan anlända som en annan.",
+   "s": 144.32,
+   "e": 152.14
+  },
+  {
+   "t": "Fenomenet kallas neutrinooscillation, och det var själva upptäckten av att neutriner oscillerar som visade att de faktiskt har en (om än pytteliten) massa.",
+   "s": 152.14,
+   "e": 161.97
+  },
+  {
+   "t": "Den insikten belönades med Nobelpriset i fysik 2015 — som delades av just Arthur McDonald, mannen bakom citatet ovan.",
+   "s": 161.97,
+   "e": 170.95
+  },
+  {
+   "t": "JUNO mäter hur antineutriner från närliggande kärnkraftverk oscillerar på sin väg till detektorn.",
+   "s": 170.95,
+   "e": 177.71
+  },
+  {
+   "t": "Reaktorerna sprutar ut ett jämnt flöde av antineutriner, och genom att räkna hur många som tycks ”försvinna” (alltså byta smak) vid olika energier kan forskarna kartlägga oscillationen i detalj.",
+   "s": 177.71,
+   "e": 189.51
+  },
+  {
+   "t": "Med bara 59 dagars data — insamlade mellan 26 augusti och 2 november 2025 — bestämde man två av oscillationens nyckeltal med en skärpa som är 1,6 gånger bättre än alla tidigare experiment under flera decennier tillsammans.",
+   "s": 189.51,
+   "e": 204.05
+  },
+  {
+   "t": "Inte illa för ett experiment som knappt hunnit värma upp.",
+   "s": 204.05,
+   "e": 208.35
+  },
+  {
+   "t": "Det här första resultatet markerar gryningen för nästa era av precisa mätningar av neutrinooscillation.",
+   "s": 208.35,
+   "e": 215.57
+  },
+  {
+   "t": "Varför bryr vi oss om de här spökpartiklarna.",
+   "s": 215.57,
+   "e": 219.28
+  },
+  {
+   "t": "JUNO:s stora mål är att lösa neutrinernas massordning: vilken av de tre neutrinerna som är lättast och vilken som är tyngst. Det låter som en parentes, men svaret är en pusselbit i några av fysikens största frågor — bland annat varför universum består av materia snarare än antimateria.",
+   "s": 219.28,
+   "e": 237.36
+  },
+  {
+   "t": "Hade materia och antimateria bildats i exakt lika delar vid Big Bang skulle de ha utplånat varandra fullständigt, och varken stjärnor eller vi skulle finnas.",
+   "s": 237.36,
+   "e": 246.9
+  },
+  {
+   "t": "Något måste ha gett materien ett pyttelitet övertag, och neutrinerna är bland huvudmisstänkta.",
+   "s": 246.9,
+   "e": 253.2
+  },
+  {
+   "t": "Och JUNO ska göra långt mer än så.",
+   "s": 253.2,
+   "e": 256.39
+  },
+  {
+   "t": "Samma detektor kommer att fånga neutriner från solen, från jordens inre, från atmosfären — och, om vi har tur, från en exploderande stjärna någonstans i vår galax.",
+   "s": 256.39,
+   "e": 268.83
+  },
+  {
+   "t": "En enda närbelägen supernova skulle på några sekunder ge fler neutriner än experimentet annars samlar in på flera år.",
+   "s": 268.78,
+   "e": 276.69
+  },
+  {
+   "t": "Den som vill vara med och titta får hålla utkik: nästa skörd av resultat väntas redan sommaren 2026.",
+   "s": 276.69,
+   "e": 284.25
+  },
+  {
+   "t": "Visste du.",
+   "s": 284.25,
+   "e": 286.1
+  },
+  {
+   "t": "Cirka 100 biljoner neutriner från solen passerar genom din kropp varje sekund — dygnet runt, året om.",
+   "s": 286.1,
+   "e": 293.53
+  },
+  {
+   "t": "En neutrino kan flyga genom ett ljusår av bly och ändå ha god chans att komma ut på andra sidan.",
+   "s": 293.53,
+   "e": 299.8
+  },
+  {
+   "t": "Neutrinen föreslogs redan 1930 av Wolfgang Pauli, som kallade den ”en desperat utväg” — men det dröjde 26 år innan någon lyckades fånga en.",
+   "s": 299.8,
+   "e": 309.66
+  },
+  {
+   "t": "Upptäckten att neutriner oscillerar — och alltså har massa — gav Takaaki Kajita och Arthur McDonald Nobelpriset i fysik 2015.",
+   "s": 309.66,
+   "e": 318.61
+  },
+  {
+   "t": "Neutriner och standardmodellen hör hemma i den moderna fysiken i Fysik 2 — och energinivåer, fotoner och atomkärnor som du möter där är samma värld som JUNO utforskar på allra minsta skala.",
+   "s": 318.61,
+   "e": 330.23
+  }
+ ]
+}

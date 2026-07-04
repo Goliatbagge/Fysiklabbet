@@ -1,0 +1,298 @@
+{
+ "id": "fy2-5.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "3da11fa16b13e46abc82231c2cd336b7cb3f3db2",
+ "dur": 348.54,
+ "segments": [
+  {
+   "t": "Universums struktur",
+   "s": 0.1,
+   "e": 2.79
+  },
+  {
+   "t": "Universum är uppbyggt i nivåer, lite som lådor inuti lådor.",
+   "s": 2.74,
+   "e": 7.84
+  },
+  {
+   "t": "Vår jord ligger i ett solsystem, solsystemet är en pytteliten del av en galax, galaxen tillhör en galaxgrupp, och grupperna sitter ihop i väldiga superhopar.",
+   "s": 7.84,
+   "e": 18.1
+  },
+  {
+   "t": "För att förstå astronomi måste man hålla isär dessa nivåer — och framför allt få en känsla för hur olika stora de är.",
+   "s": 18.1,
+   "e": 25.27
+  },
+  {
+   "t": "Vanligaste missförståndet: solsystem ≠ galax",
+   "s": 25.27,
+   "e": 29.5
+  },
+  {
+   "t": "Ett solsystem är en stjärna med dess planeter.",
+   "s": 29.5,
+   "e": 33.21
+  },
+  {
+   "t": "En galax är hundratals miljarder stjärnor — och nästan alla de stjärnorna har egna solsystem.",
+   "s": 33.21,
+   "e": 39.26
+  },
+  {
+   "t": "Vårt solsystem är alltså en enda av ofattbart många prickar i Vintergatan.",
+   "s": 39.26,
+   "e": 44.75
+  },
+  {
+   "t": "Att säga \"solsystemet\" när man menar \"galaxen\" är som att säga \"huset\" när man menar \"hela landet\".",
+   "s": 44.75,
+   "e": 50.91
+  },
+  {
+   "t": "Avstånd mäts i ljusår",
+   "s": 50.91,
+   "e": 53.81
+  },
+  {
+   "t": "På jorden räcker meter och kilometer.",
+   "s": 53.81,
+   "e": 57.24
+  },
+  {
+   "t": "I rymden blir talen så stora att vi byter enhet till ljusår — sträckan ljuset hinner på ett år.",
+   "s": 57.24,
+   "e": 63.79
+  },
+  {
+   "t": "Ett ljusår",
+   "s": 63.79,
+   "e": 65.91
+  },
+  {
+   "t": "1 ljusår är lika med c gånger tiden t som är lika med 3,00 gånger 10 upphöjt till 8 meter delat med sekund gånger 1 år som är ungefär lika med 9,5 gånger 10 upphöjt till 15 meter",
+   "s": 65.91,
+   "e": 78.4
+  },
+  {
+   "t": "där",
+   "s": 78.4,
+   "e": 79.91
+  },
+  {
+   "t": "c är lika med ljushastigheten, 3,00 gånger 10 upphöjt till 8 meter per sekund",
+   "s": 79.91,
+   "e": 86.56
+  },
+  {
+   "t": "t är lika med ett år är ungefär lika med 3,16 gånger 10 upphöjt till 7 sekund",
+   "s": 86.56,
+   "e": 93.09
+  },
+  {
+   "t": "Ett ljusår är alltså nästan 10 biljoner kilometer.",
+   "s": 93.09,
+   "e": 97.49
+  },
+  {
+   "t": "Eftersom ljuset tar tid på sig betyder det också att vi ser allt avlägset som det såg ut förr: solens ljus är 8 minuter gammalt när det når oss, och en galax 2 miljoner ljusår bort ser vi som den såg ut för 2 miljoner år sedan.",
+   "s": 97.49,
+   "e": 110.33
+  },
+  {
+   "t": "Nivå 1: Solsystemet",
+   "s": 110.33,
+   "e": 113.64
+  },
+  {
+   "t": "Vårt solsystem består av solen i mitten och allt som hålls fast av dess gravitation: åtta planeter, deras månar, dvärgplaneter, asteroider och kometer.",
+   "s": 113.64,
+   "e": 123.92
+  },
+  {
+   "t": "Solen innehåller över 99,8 procent av hela solsystemets massa — planeterna är bara smulor i jämförelse.",
+   "s": 123.92,
+   "e": 131.94
+  },
+  {
+   "t": "Solsystemet schematiskt (inte skalenligt).",
+   "s": 131.94,
+   "e": 136.22
+  },
+  {
+   "t": "Ljuset från solen tar 8 minuter till jorden och drygt 4 timmar ut till Neptunus.",
+   "s": 136.22,
+   "e": 142.26
+  },
+  {
+   "t": "Hela solsystemet är ungefär 0,001 ljusår brett — litet med astronomiska mått.",
+   "s": 142.26,
+   "e": 149.22
+  },
+  {
+   "t": "Nivå 2: Vintergatan",
+   "s": 149.22,
+   "e": 152.24
+  },
+  {
+   "t": "Vårt solsystem är en av uppskattningsvis 200–400 miljarder stjärnor i vår galax, Vintergatan.",
+   "s": 152.24,
+   "e": 159.75
+  },
+  {
+   "t": "En galax är en jättelik, gravitationsbunden virvel av stjärnor, gas och stoft.",
+   "s": 159.75,
+   "e": 166.15
+  },
+  {
+   "t": "Vintergatan är en spiralgalax, ungefär 100 000 ljusår i diameter.",
+   "s": 166.15,
+   "e": 172.09
+  },
+  {
+   "t": "Solen ligger inte i mitten, utan ute i en av spiralarmarna, omkring 27 000 ljusår från centrum.",
+   "s": 172.09,
+   "e": 179.57
+  },
+  {
+   "t": "Solen tar cirka 230 miljoner år på sig att åka ett helt varv runt galaxens mitt — ett galaktiskt år.",
+   "s": 179.57,
+   "e": 187.09
+  },
+  {
+   "t": "I mitten av Vintergatan finns ett supermassivt svart hål, Sagittarius A* (se avsnitt 5.5).",
+   "s": 187.09,
+   "e": 195.06
+  },
+  {
+   "t": "Känn skillnaden i skala",
+   "s": 195.06,
+   "e": 197.75
+  },
+  {
+   "t": "Solsystemet är ungefär 0,001 ljusår brett.",
+   "s": 197.75,
+   "e": 202.79
+  },
+  {
+   "t": "Vintergatan är 100 000 ljusår bred.",
+   "s": 202.79,
+   "e": 206.71
+  },
+  {
+   "t": "Galaxen är alltså omkring hundra miljoner gånger större än solsystemet.",
+   "s": 206.71,
+   "e": 211.93
+  },
+  {
+   "t": "Skulle solsystemet krympas till storleken av ett mynt, vore Vintergatan fortfarande stor som hela Sverige.",
+   "s": 211.93,
+   "e": 218.82
+  },
+  {
+   "t": "Nivå 3: Lokala galaxgruppen",
+   "s": 218.82,
+   "e": 222.36
+  },
+  {
+   "t": "Galaxer hänger ihop i grupper.",
+   "s": 222.36,
+   "e": 225.5
+  },
+  {
+   "t": "Vintergatan tillhör Lokala gruppen — en samling av drygt 50 galaxer inom ett område på ungefär 10 miljoner ljusår.",
+   "s": 225.5,
+   "e": 233.36
+  },
+  {
+   "t": "De två tyngsta medlemmarna är Vintergatan och Andromedagalaxen, som ligger cirka 2,5 miljoner ljusår bort.",
+   "s": 233.36,
+   "e": 240.99
+  },
+  {
+   "t": "Resten är mest små dvärggalaxer som kretsar kring de två stora.",
+   "s": 240.99,
+   "e": 246.01
+  },
+  {
+   "t": "Andromeda och Vintergatan närmar sig varandra och kommer att smälta samman om ungefär 4–5 miljarder år.",
+   "s": 246.01,
+   "e": 253.24
+  },
+  {
+   "t": "Nivå 4: Superhopar och den storskaliga strukturen",
+   "s": 253.24,
+   "e": 258.01
+  },
+  {
+   "t": "Galaxgrupper och större galaxhopar sitter i sin tur ihop i ännu större strukturer som kallas superhopar.",
+   "s": 258.01,
+   "e": 264.8
+  },
+  {
+   "t": "Lokala gruppen är en utkant av superhopen Laniakea, som rymmer omkring 100 000 galaxer och sträcker sig över cirka 500 miljoner ljusår.",
+   "s": 264.8,
+   "e": 274.4
+  },
+  {
+   "t": "På den allra största skalan är galaxerna inte jämnt utspridda.",
+   "s": 274.4,
+   "e": 278.91
+  },
+  {
+   "t": "De ligger längs trådar och väggar med enorma nästan tomma bubblor (voids) emellan — ett mönster som kallas det kosmiska nätet och liknar en gigantisk tvättsvamp eller ett spindelnät.",
+   "s": 278.91,
+   "e": 289.99
+  },
+  {
+   "t": "Figur: det kosmiska nätet.",
+   "s": 289.99,
+   "e": 293.16
+  },
+  {
+   "t": "Ljusa trådar och knutpunkter av galaxer bildar ett nätverk genom en mörk bakgrund, med stora svarta tomrum (voids) mellan trådarna.",
+   "s": 293.16,
+   "e": 303.98
+  },
+  {
+   "t": "En liten inringad punkt märkt \"Lokala gruppen\" sitter på en av trådarna för att visa var vi befinner oss.",
+   "s": 303.93,
+   "e": 310.43
+  },
+  {
+   "t": "Hela stegen — en känsla för skala",
+   "s": 310.43,
+   "e": 313.76
+  },
+  {
+   "t": "Varje steg i tabellen är tusentals gånger större än det föregående.",
+   "s": 313.76,
+   "e": 318.68
+  },
+  {
+   "t": "Det är just dessa hopp som gör astronomins skalor så svåra att greppa — och så fascinerande.",
+   "s": 318.68,
+   "e": 324.49
+  },
+  {
+   "t": "Jorden som ett sandkorn",
+   "s": 324.49,
+   "e": 327.15
+  },
+  {
+   "t": "Krymper vi solen till en prick stor som punkten i slutet av denna mening, så ligger jorden ungefär en decimeter bort, och hela solsystemet får plats på ett skrivbord.",
+   "s": 327.15,
+   "e": 337.02
+  },
+  {
+   "t": "På samma skala skulle närmaste grannstjärna ligga flera kilometer bort — och Vintergatan vore lika bred som månens avstånd från jorden.",
+   "s": 337.02,
+   "e": 344.91
+  },
+  {
+   "t": "Mellan stjärnorna är rymden nästan helt tom.",
+   "s": 344.91,
+   "e": 348.54
+  }
+ ]
+}

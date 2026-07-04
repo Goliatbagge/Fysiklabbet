@@ -1,0 +1,338 @@
+{
+ "id": "fy1-6.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0b6c2effa0e601192bf4f0f8c3ffa27d67d660cd",
+ "dur": 480.72,
+ "segments": [
+  {
+   "t": "Faser och fasövergångar",
+   "s": 0.1,
+   "e": 3.09
+  },
+  {
+   "t": "Alla ämnen kan vara i tre olika tillstånd: fast, flytande och gas.",
+   "s": 3.04,
+   "e": 8.62
+  },
+  {
+   "t": "Dessa tillstånd kallas faser eller aggregationstillstånd.",
+   "s": 8.62,
+   "e": 13.12
+  },
+  {
+   "t": "Övergångarna mellan olika faser har olika namn — lär dig dessa!",
+   "s": 13.12,
+   "e": 17.85
+  },
+  {
+   "t": "De tre faserna och de sex fasövergångarna mellan dem.",
+   "s": 17.85,
+   "e": 22.15
+  },
+  {
+   "t": "Smältning och stelning",
+   "s": 22.15,
+   "e": 24.77
+  },
+  {
+   "t": "Det går åt energi att smälta ett ämne, men ingen temperaturändring sker.",
+   "s": 24.77,
+   "e": 30.14
+  },
+  {
+   "t": "Energi går istället åt för att bryta kemiska bindningar.",
+   "s": 30.14,
+   "e": 34.42
+  },
+  {
+   "t": "Det som avgör hur mycket energi som går åt för att smälta ett ämne är massan och vilket ämne vi har.",
+   "s": 34.42,
+   "e": 40.66
+  },
+  {
+   "t": "Hur mycket energi som går åt för att smälta 1 kilogram av ett ämne kallas specifik smältentalpi eller smältentalpitet, betecknas l sträckan s och har SI-enheten J/kg (joule per kilogram).",
+   "s": 40.66,
+   "e": 53.24
+  },
+  {
+   "t": "Den specifika smältentalpin varierar mellan olika ämnen och slås upp i värmetabell.",
+   "s": 53.24,
+   "e": 59.21
+  },
+  {
+   "t": "Samma energi som upptas vid smältning avges vid stelning.",
+   "s": 59.21,
+   "e": 63.99
+  },
+  {
+   "t": "Energi för smältning och stelning",
+   "s": 63.99,
+   "e": 67.24
+  },
+  {
+   "t": "energin E är lika med l sträckan s gånger massan m",
+   "s": 67.24,
+   "e": 71.99
+  },
+  {
+   "t": "där",
+   "s": 71.99,
+   "e": 73.47
+  },
+  {
+   "t": "E är lika med smältenergi (joule)",
+   "s": 73.47,
+   "e": 77.06
+  },
+  {
+   "t": "l sträckan s är lika med specifik smältentalpi (J/kg) — slås upp i tabell",
+   "s": 77.06,
+   "e": 83.85
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 83.85,
+   "e": 87.21
+  },
+  {
+   "t": "Specifik smältentalpi för is är 334 kilojoule/kg (även om det i tabellen står för is med temperaturen −4 grader Celsius, så kan vi räkna med att det gäller för all is).",
+   "s": 87.21,
+   "e": 99.67
+  },
+  {
+   "t": "Förångning och kondensation",
+   "s": 99.67,
+   "e": 102.56
+  },
+  {
+   "t": "Det går åt energi att förånga ett ämne, men ingen temperaturändring sker.",
+   "s": 102.56,
+   "e": 107.95
+  },
+  {
+   "t": "Energi går istället åt för att slita loss molekyler från vätskan.",
+   "s": 107.95,
+   "e": 112.84
+  },
+  {
+   "t": "Precis som vid smältning är det massan och vilket ämne vi har som avgör hur mycket energi som går åt för förångningen.",
+   "s": 112.84,
+   "e": 120.21
+  },
+  {
+   "t": "Hur mycket energi som går åt för att förånga 1 kilogram av ett ämne kallas specifik ångbildningsentalpi eller ångbildningsentalpitet, betecknas l å och har SI-enheten J/kg (joule per kilogram).",
+   "s": 120.21,
+   "e": 132.93
+  },
+  {
+   "t": "Precis som för specifik smältentalpi så varierar den för olika ämnen och slås upp i tabell.",
+   "s": 132.93,
+   "e": 139.39
+  },
+  {
+   "t": "Energi för förångning/kondensation",
+   "s": 139.39,
+   "e": 143.4
+  },
+  {
+   "t": "energin E är lika med l å gånger massan m",
+   "s": 143.4,
+   "e": 147.55
+  },
+  {
+   "t": "där",
+   "s": 147.55,
+   "e": 149.01
+  },
+  {
+   "t": "E är lika med förångningsenergi (joule)",
+   "s": 149.01,
+   "e": 152.9
+  },
+  {
+   "t": "l å är lika med specifik ångbildningsentalpi (J/kg) — slås upp i tabell",
+   "s": 152.9,
+   "e": 159.54
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 159.54,
+   "e": 162.89
+  },
+  {
+   "t": "Samma energi som upptas vid förångning avges vid kondensation.",
+   "s": 162.89,
+   "e": 167.96
+  },
+  {
+   "t": "Specifik ångbildningsentalpi för vatten är 2,26 megajoule/kg (observera i tabellen att ångbildningsentalpitet har ett annat prefix än övriga entalpiteter).",
+   "s": 167.96,
+   "e": 179.65
+  },
+  {
+   "t": "Spräcka en vattenballong med ljus?",
+   "s": 179.65,
+   "e": 182.95
+  },
+  {
+   "t": "Vi fyller en ballong med vatten och placerar den över en ljuslåga.",
+   "s": 182.95,
+   "e": 187.57
+  },
+  {
+   "t": "Gummi smälter vid cirka 200 grader Celsius och ljuslågan är cirka 1 000 grader Celsius.",
+   "s": 187.57,
+   "e": 194.31
+  },
+  {
+   "t": "Trots den heta ljuslågan så spräcks inte ballongen.",
+   "s": 194.31,
+   "e": 198.36
+  },
+  {
+   "t": "Det beror på att temperaturen på vattnet i ballongen aldrig kommer att överstiga 100 grader Celsius och därför kommer att kyla ned gummit och hålla det under sin smältgräns.",
+   "s": 198.36,
+   "e": 208.01
+  },
+  {
+   "t": "När vi tillför energi till minusgradig is stiger temperaturen först. Vid 0 grader Celsius blir kurvan horisontell under smältningen, och vid 100 grader Celsius horisontell igen under förångningen — temperaturen ändras alltså inte vid en fasövergång.",
+   "s": 208.01,
+   "e": 224.69
+  },
+  {
+   "t": "Exempel 1 — Smälta tenn",
+   "s": 224.69,
+   "e": 227.61
+  },
+  {
+   "t": "Hur mycket energi krävs för att smälta 50 gram tenn med temperaturen 20 grader Celsius?",
+   "s": 227.61,
+   "e": 233.86
+  },
+  {
+   "t": "För att smälta tennet krävs först energi för uppvärmning E u och sedan energi för smältning E sträckan s .",
+   "s": 233.86,
+   "e": 241.07
+  },
+  {
+   "t": "Vi ställer upp den totala energin E som summan av dessa.",
+   "s": 241.07,
+   "e": 245.69
+  },
+  {
+   "t": "energin E är lika med E u plus E sträckan s som är lika med c gånger massan m gånger delta periodtiden T plus l s gånger m",
+   "s": 245.69,
+   "e": 255.22
+  },
+  {
+   "t": "För att veta hur stor uppvärmning delta periodtiden T som krävs behöver vi ta reda på tenns smältpunkt.",
+   "s": 255.22,
+   "e": 262.01
+  },
+  {
+   "t": "Vi slår upp den i tabell och ser att den är 232 grader Celsius.",
+   "s": 262.01,
+   "e": 267.48
+  },
+  {
+   "t": "c är lika med 0,23 kilojoule per (kg\\cdotK) parentesen spec.värmekap.förtenn slut parentes massan m som är lika med 50 gram som är lika med 0,050 kilogram delta periodtiden T som är lika med 232 minus 20 som är lika med 212 kelvin l sträckan s som är lika med 59 kilojoule per kilogram parentesen spec.smältentalpiförtenn slut parentes",
+   "s": 267.48,
+   "e": 294.21
+  },
+  {
+   "t": "Observera att vi anger entalpiteterna i kJ, så energin i svaret kommer att få enheten kJ.",
+   "s": 294.21,
+   "e": 302.99
+  },
+  {
+   "t": "energin E är lika med 0,23 gånger 0,050 gånger 212 plus 59 gånger 0,050 som är lika med 5,388 kilojoule som är ungefär lika med 5,4 kilojoule",
+   "s": 302.94,
+   "e": 316.88
+  },
+  {
+   "t": "Svar: 5,4 kilojoule",
+   "s": 316.88,
+   "e": 320.41
+  },
+  {
+   "t": "Exempel 2 — Varmvatten i is",
+   "s": 320.41,
+   "e": 323.87
+  },
+  {
+   "t": "Du häller i 1,0 liter 56-gradigt vatten i en hink med 2,0 kilogram is med temperaturen −8 grader Celsius.",
+   "s": 323.87,
+   "e": 332.57
+  },
+  {
+   "t": "Hur mycket is kommer att smälta av vattnet?",
+   "s": 332.57,
+   "e": 335.95
+  },
+  {
+   "t": "E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p, ekvation 1",
+   "s": 335.95,
+   "e": 343.44
+  },
+  {
+   "t": "Varmvattnet avger energin E accelerationen a hastigheten v tyngdfaktorn g och kommer att avsvalna ( c hastigheten v gånger m v gånger delta T v ).",
+   "s": 343.44,
+   "e": 354.12
+  },
+  {
+   "t": "Isen upptar energin E u trycket p p och kommer att uppvärmas ( c i sträckan s gånger m i s gånger delta T i s ) och delvis smälta ( l sträckan s gånger m s massan m ä hävarmen l tiden t i s ).",
+   "s": 354.12,
+   "e": 368.51
+  },
+  {
+   "t": "Massan på den is som smälter kallar vi alltså m sträckan s massan m ä hävarmen l tiden t i s och det är denna som söks.",
+   "s": 368.51,
+   "e": 376.76
+  },
+  {
+   "t": "Insättning i ekvation 1 ger",
+   "s": 376.76,
+   "e": 380.08
+  },
+  {
+   "t": "c hastigheten v gånger m v gånger delta T v är lika med c i sträckan s gånger m i s gånger delta T i s plus l s gånger m s massan m ä hävarmen l tiden t i s",
+   "s": 380.08,
+   "e": 392.76
+  },
+  {
+   "t": "Vi löser ut m sträckan s massan m ä hävarmen l tiden t i s och får",
+   "s": 392.76,
+   "e": 399.0
+  },
+  {
+   "t": "m sträckan s massan m ä hävarmen l tiden t i s är lika med c hastigheten v gånger m v gånger delta T v minus c i s gånger m i s gånger delta T i s delat med l s",
+   "s": 399.0,
+   "e": 412.02
+  },
+  {
+   "t": "Eftersom en del av isen kommer att smälta kommer blandningens sluttemperatur (vatten + is) att vara 0 grader Celsius.",
+   "s": 412.02,
+   "e": 420.05
+  },
+  {
+   "t": "Denna sluttemperatur använder vi för att bestämma delta periodtiden T för vattnet och isen.",
+   "s": 420.05,
+   "e": 426.44
+  },
+  {
+   "t": "c hastigheten v är lika med 4,18 kilojoule per (kg\\cdotK) m v som är lika med 1,0 kilogram delta T v som är lika med 56 minus 0 som är lika med 56 kelvin c i sträckan s som är lika med 2,2 kilojoule per (kg\\cdotK) m i s som är lika med 2,0 kilogram delta T i s som är lika med 0 minus parentesen minus 8 slut parentes som är lika med 8 kelvin l s som är lika med 334 kilojoule per kilogram",
+   "s": 426.44,
+   "e": 458.77
+  },
+  {
+   "t": "m sträckan s massan m ä hävarmen l tiden t i s är lika med 4,18 gånger 1,0 gånger 56 minus 2,2 gånger 2,0 gånger 8 delat med 334 som är lika med 0,595 ldots kilogram som är ungefär lika med 0,60 kilogram",
+   "s": 458.77,
+   "e": 477.07
+  },
+  {
+   "t": "Svar: 0,60 kilogram",
+   "s": 477.07,
+   "e": 480.72
+  }
+ ]
+}

@@ -1,0 +1,158 @@
+{
+ "id": "fy1-4.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7990dc6a305c0d6f178da20390b5cd404bfb2c1a",
+ "dur": 201.5,
+ "segments": [
+  {
+   "t": "Arbete med friktion",
+   "s": 0.1,
+   "e": 2.69
+  },
+  {
+   "t": "När ett arbete uträttas med friktion kommer arbetet som friktionskraften uträttar att bli friktionsvärme.",
+   "s": 2.64,
+   "e": 9.55
+  },
+  {
+   "t": "Friktionsvärme",
+   "s": 9.55,
+   "e": 11.72
+  },
+  {
+   "t": "E hastigheten v är lika med F frekvensen f gånger sträckan s",
+   "s": 11.72,
+   "e": 16.88
+  },
+  {
+   "t": "där",
+   "s": 16.88,
+   "e": 18.39
+  },
+  {
+   "t": "E hastigheten v är lika med friktionsvärme (J eller Nm)",
+   "s": 18.39,
+   "e": 23.8
+  },
+  {
+   "t": "F frekvensen f är lika med friktionskraft (newton)",
+   "s": 23.8,
+   "e": 28.59
+  },
+  {
+   "t": "s är lika med sträcka (meter)",
+   "s": 28.59,
+   "e": 31.9
+  },
+  {
+   "t": "Om en höjdändring sker, beräknas arbetet olika beroende på om det är friktion eller inte.",
+   "s": 31.9,
+   "e": 38.19
+  },
+  {
+   "t": "Lägesenergi och arbete",
+   "s": 38.19,
+   "e": 41.19
+  },
+  {
+   "t": "Om en höjdändring sker",
+   "s": 41.19,
+   "e": 43.79
+  },
+  {
+   "t": "utan friktion motsvarar arbetet W ändringen av lägesenergi Δ E trycket p : arbetet W är lika med delta E trycket p",
+   "s": 43.79,
+   "e": 52.84
+  },
+  {
+   "t": "med friktion motsvarar arbetet \"ändringen av lägesenergi\" + \"friktionsvärme\" E hastigheten v : arbetet W är lika med delta E trycket p plus E hastigheten v",
+   "s": 52.84,
+   "e": 63.89
+  },
+  {
+   "t": "Exempel 1 — Vagn upp på lutande plan med friktion (ampere)",
+   "s": 63.89,
+   "e": 68.67
+  },
+  {
+   "t": "Du drar en vagn 5,0 meter uppför ett lutande plan med lutningsvinkeln 30 grader, så att den hamnar 2,5 meter över utgångshöjden.",
+   "s": 68.67,
+   "e": 77.9
+  },
+  {
+   "t": "Vagnen väger 32 kilogram.",
+   "s": 77.9,
+   "e": 81.11
+  },
+  {
+   "t": "Vilket arbete uträttar du om vagnen glider med friktionstalet 0,35?",
+   "s": 81.11,
+   "e": 87.0
+  },
+  {
+   "t": "Tänk: Till vilken eller vilka energiformer omvandlas arbetet?",
+   "s": 87.0,
+   "e": 92.26
+  },
+  {
+   "t": "I detta fall bildas både lägesenergi E trycket p och värmeenergi E hastigheten v .",
+   "s": 92.26,
+   "e": 98.65
+  },
+  {
+   "t": "Värmeenergin ges av arbetet som friktionskraften uträttar.",
+   "s": 98.65,
+   "e": 103.76
+  },
+  {
+   "t": "Arbetet ger alltså ökning av lägesenergi E trycket p samt värmeenergi E hastigheten v .",
+   "s": 103.76,
+   "e": 110.56
+  },
+  {
+   "t": "arbetet W är lika med E trycket p plus E hastigheten v",
+   "s": 110.56,
+   "e": 115.66
+  },
+  {
+   "t": "Insättning av E trycket p är lika med massan m gånger tyngdfaktorn g gånger höjden h och E hastigheten v är lika med F frekvensen f gånger sträckan s ger",
+   "s": 115.66,
+   "e": 125.49
+  },
+  {
+   "t": "arbetet W är lika med massan m gånger tyngdfaktorn g gånger höjden h plus F frekvensen f gånger sträckan s",
+   "s": 125.49,
+   "e": 133.62
+  },
+  {
+   "t": "Vi har alla värden utom friktionskraften F frekvensen f .",
+   "s": 133.62,
+   "e": 138.6
+  },
+  {
+   "t": "Med F frekvensen f är lika med my gånger F N får vi",
+   "s": 138.6,
+   "e": 143.39
+  },
+  {
+   "t": "arbetet W är lika med massan m gånger tyngdfaktorn g gånger höjden h plus my gånger F N gånger sträckan s",
+   "s": 143.39,
+   "e": 151.51
+  },
+  {
+   "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter my som är lika med 0,35 F N som är lika med F två som är lika med m gånger g gånger cosinus alfa som är lika med 32 gånger 9,82 gånger cosinus 30 grader som är lika med 272,139 ldots newton sträckan s som är lika med 5,0 meter",
+   "s": 151.51,
+   "e": 178.15
+  },
+  {
+   "t": "arbetet W är lika med 32 gånger 9,82 gånger 2,5 plus 0,35 gånger 272,139 ldots gånger 5,0 som är lika med 1 261,844 ldots Nm som är ungefär lika med 1 300 Nm som är lika med 1,3 kNm",
+   "s": 178.15,
+   "e": 198.18
+  },
+  {
+   "t": "Svar: 1,3 kNm",
+   "s": 198.18,
+   "e": 201.5
+  }
+ ]
+}

@@ -1,0 +1,338 @@
+{
+ "id": "fy1-3.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7e7777d02881ca1adf7ea7c3a1330cbe08eeba66",
+ "dur": 441.6,
+ "segments": [
+  {
+   "t": "Lutande plan",
+   "s": 0.1,
+   "e": 2.3
+  },
+  {
+   "t": "Kom ihåg — Komposanter",
+   "s": 2.25,
+   "e": 4.92
+  },
+  {
+   "t": "På samma sätt som att flera krafter kan ersättas med en enda kraft (kraftresultanten), så kan vi dela upp en kraft i flera krafter.",
+   "s": 4.92,
+   "e": 13.1
+  },
+  {
+   "t": "Flera krafter som ersätter en enda kraft kallas komposanter.",
+   "s": 13.1,
+   "e": 17.82
+  },
+  {
+   "t": "När vi gör en komposantuppdelning ersätter komposanterna den ursprungliga kraftvektorn som då stryks.",
+   "s": 17.82,
+   "e": 24.55
+  },
+  {
+   "t": "Hur stora komposanterna är kan vi beräkna med rätvinkliga trianglar och trigonometri.",
+   "s": 24.55,
+   "e": 30.24
+  },
+  {
+   "t": "cosinus alfa är lika med F x delat med kraften F vilket är ekvivalent med att F x är lika med F gånger cosinus alfa",
+   "s": 30.24,
+   "e": 38.73
+  },
+  {
+   "t": "sinus alfa är lika med F y delat med kraften F vilket är ekvivalent med att F y är lika med F gånger sinus alfa",
+   "s": 38.73,
+   "e": 46.92
+  },
+  {
+   "t": "Ett plan som lutar i förhållande till horisontalplanet (vågräta planet) kallas lutande plan.",
+   "s": 46.92,
+   "e": 53.74
+  },
+  {
+   "t": "När något befinner sig på ett lutande plan underlättar det att dela upp tyngdkraften i en komposant nedför planet och en komposant vinkelrätt mot planet.",
+   "s": 53.74,
+   "e": 62.67
+  },
+  {
+   "t": "Vinkeln som uppstår mellan tyngdkraften F G och tyngdkraftens komposant vinkelrät mot planet F två är, på grund av likformighet, lika stor som planets lutningsvinkel α.",
+   "s": 62.67,
+   "e": 79.34
+  },
+  {
+   "t": "Tyngdkraften delas upp i en komposant F ett nedför planet och en komposant F två vinkelrätt mot planet.",
+   "s": 62.67,
+   "e": 79.34
+  },
+  {
+   "t": "Normalkraften F N är lika lång som F två och friktionskraften F frekvensen f lika lång som F ett.",
+   "s": 79.34,
+   "e": 86.84
+  },
+  {
+   "t": "Rita komposanter i lutande plan",
+   "s": 86.84,
+   "e": 90.2
+  },
+  {
+   "t": "Rita tyngdkraften med en lång vektor.",
+   "s": 90.2,
+   "e": 93.51
+  },
+  {
+   "t": "Strecka riktningar parallellt och vinkelrätt mot planet.",
+   "s": 93.51,
+   "e": 97.81
+  },
+  {
+   "t": "Ta fram komposanterna.",
+   "s": 97.81,
+   "e": 100.21
+  },
+  {
+   "t": "Rita eventuell friktionskraft och normalkraft.",
+   "s": 100.21,
+   "e": 104.47
+  },
+  {
+   "t": "Från figuren ser vi också att normalkraften F N är lika stor som tyngdkraftens komposant vinkelrät mot planet F två.",
+   "s": 104.47,
+   "e": 112.69
+  },
+  {
+   "t": "Om föremålet är i vila eller glider med konstant hastighet kommer friktionskraften F frekvensen f att vara lika stor som tyngdkraftens komposant nedför planet F ett då kraftresultanten är lika med 0.",
+   "s": 112.69,
+   "e": 125.19
+  },
+  {
+   "t": "Lutande plan",
+   "s": 125.19,
+   "e": 127.38
+  },
+  {
+   "t": "F ett är lika med massan m gånger tyngdfaktorn g gånger sinus alfa",
+   "s": 127.38,
+   "e": 132.94
+  },
+  {
+   "t": "F två är lika med massan m gånger tyngdfaktorn g gånger cosinus alfa",
+   "s": 132.94,
+   "e": 138.54
+  },
+  {
+   "t": "där",
+   "s": 138.54,
+   "e": 140.01
+  },
+  {
+   "t": "F ett är lika med tyngdkraftens komposant nedför planet (newton)",
+   "s": 140.01,
+   "e": 145.51
+  },
+  {
+   "t": "F två är lika med tyngdkraftens komposant vinkelrätt mot planet (newton)",
+   "s": 145.51,
+   "e": 151.5
+  },
+  {
+   "t": "m är lika med föremålets massa (kilogram)",
+   "s": 151.5,
+   "e": 155.59
+  },
+  {
+   "t": "g är lika med tyngdfaktor (newton per kilogram) (9,82 newton per kilogram i Sverige)",
+   "s": 155.59,
+   "e": 163.12
+  },
+  {
+   "t": "α är lika med planets vinkel mot horisontalplanet",
+   "s": 163.12,
+   "e": 167.28
+  },
+  {
+   "t": "Härledning — Vinklarna i lutande plan",
+   "s": 167.28,
+   "e": 170.79
+  },
+  {
+   "t": "Varför är vinkeln mellan tyngdkraften och tyngdkraftens komposant vinkelrätt mot planet lika stor som planets lutningsvinkel mot horisontalplanet?",
+   "s": 170.79,
+   "e": 180.01
+  },
+  {
+   "t": "Vi kallar planets lutningsvinkel för v och vinkeln mellan tyngdkraften och tyngdkraftens komposant vinkelrät mot planet för x.",
+   "s": 180.01,
+   "e": 188.45
+  },
+  {
+   "t": "Vi vill visa att dessa alltid är lika, dvs. x är lika med v.",
+   "s": 188.45,
+   "e": 193.6
+  },
+  {
+   "t": "Vinkeln mellan planet och tyngdkraften kan vi, med hjälp av att vinkelsumman i en triangel är 180 grader, bestämma till 180 grader − 90 grader − v är lika med 90 grader − v.",
+   "s": 193.6,
+   "e": 204.95
+  },
+  {
+   "t": "Detta ger",
+   "s": 204.95,
+   "e": 206.95
+  },
+  {
+   "t": "x plus parentesen 90 grader minus hastigheten v slut parentes är lika med 90 grader parentesen tillsammansbildardeenrätvinkel slut parentes",
+   "s": 206.95,
+   "e": 216.61
+  },
+  {
+   "t": "x plus 90 grader minus hastigheten v är lika med 90 grader",
+   "s": 216.61,
+   "e": 221.96
+  },
+  {
+   "t": "Vi subtraherar 90 grader från båda led och löser ut x.",
+   "s": 221.96,
+   "e": 232.68
+  },
+  {
+   "t": "x minus hastigheten v är lika med 0 vilket är ekvivalent med att x är lika med v vilket skulle visas",
+   "s": 221.96,
+   "e": 232.68
+  },
+  {
+   "t": "Exempel 1 — Konstant hastighet nedför 34 grader-plan",
+   "s": 232.68,
+   "e": 237.72
+  },
+  {
+   "t": "En låda med massan 0,30 kilogram glider med konstant hastighet nedför ett lutande plan med vinkeln 34 grader mot horisontalplanet.",
+   "s": 237.72,
+   "e": 247.01
+  },
+  {
+   "t": "Beräkna a) normalkraften, b) friktionskraften.",
+   "s": 247.01,
+   "e": 251.93
+  },
+  {
+   "t": "a) Vi skissar en figur, ritar alla krafter och delar upp tyngdkraften i två komposanter: F ett nedför planet och F två vinkelrätt mot planet.",
+   "s": 251.93,
+   "e": 261.76
+  },
+  {
+   "t": "Normalkraften F N är lika stor som F två ger",
+   "s": 261.76,
+   "e": 266.24
+  },
+  {
+   "t": "F N är lika med F två som är lika med massan m gånger tyngdfaktorn g gånger cosinus alfa som är lika med 0,30 kilogram gånger 9,82 newton per kilogram gånger cosinus 34 grader som är lika med 2,442 ldots newton som är ungefär lika med 2,4 newton",
+   "s": 266.24,
+   "e": 284.07
+  },
+  {
+   "t": "Svar: 2,4 newton",
+   "s": 284.07,
+   "e": 287.44
+  },
+  {
+   "t": "b) Eftersom lådan glider med konstant hastighet nedför planet måste friktionskraften F frekvensen f vara lika stor som kraften nedför planet F ett.",
+   "s": 287.44,
+   "e": 299.51
+  },
+  {
+   "t": "F frekvensen f är lika med F ett som är lika med massan m gånger tyngdfaktorn g gånger sinus alfa som är lika med 0,30 kilogram gånger 9,82 newton per kilogram gånger sinus 34 grader som är lika med 1,647 ldots newton som är ungefär lika med 1,6 newton",
+   "s": 299.46,
+   "e": 317.2
+  },
+  {
+   "t": "Svar: 1,6 newton",
+   "s": 317.2,
+   "e": 320.39
+  },
+  {
+   "t": "Exempel 2 — Elviras låda accelererar",
+   "s": 320.39,
+   "e": 324.26
+  },
+  {
+   "t": "Elvira placerar en låda med massan 7,5 kilogram på ett plan som lutar 36 grader.",
+   "s": 324.26,
+   "e": 330.92
+  },
+  {
+   "t": "Friktionstalet mellan lådan och planet är 0,42.",
+   "s": 330.92,
+   "e": 335.71
+  },
+  {
+   "t": "Bestäm lådans acceleration.",
+   "s": 335.71,
+   "e": 338.74
+  },
+  {
+   "t": "Vi skissar en figur och ritar alla krafter.",
+   "s": 338.74,
+   "e": 342.5
+  },
+  {
+   "t": "Eftersom lådan accelererar ska friktionskraften F frekvensen f vara mindre än kraften nedför planet F ett.",
+   "s": 342.5,
+   "e": 350.26
+  },
+  {
+   "t": "Lådans acceleration beror på den resulterande kraften.",
+   "s": 350.26,
+   "e": 354.6
+  },
+  {
+   "t": "Vi löser ut accelerationen från Newtons andra lag.",
+   "s": 354.6,
+   "e": 358.96
+  },
+  {
+   "t": "F resistansen R är lika med massan m gånger accelerationen a vilket är ekvivalent med att a är lika med F R delat med m",
+   "s": 358.96,
+   "e": 367.19
+  },
+  {
+   "t": "Vi behöver bestämma den resulterande kraften F resistansen R .",
+   "s": 367.19,
+   "e": 372.15
+  },
+  {
+   "t": "Från figuren får vi",
+   "s": 372.15,
+   "e": 374.8
+  },
+  {
+   "t": "F resistansen R är lika med F ett minus F frekvensen f",
+   "s": 374.8,
+   "e": 380.05
+  },
+  {
+   "t": "F ett är lika med massan m gånger tyngdfaktorn g gånger sinus alfa som är lika med 7,5 kilogram gånger 9,82 newton per kilogram gånger sinus 36 grader som är lika med 43,290 ldots newton F frekvensen f som är lika med my gånger F N som är lika med my gånger F två som är lika med my gånger m gånger g gånger cosinus alfa som är lika med 0,42 gånger 7,5 gånger 9,82 gånger cosinus 36 grader som är lika med 25,025 ldots newton",
+   "s": 380.05,
+   "e": 410.84
+  },
+  {
+   "t": "F resistansen R är lika med 43,290 ldots minus 25,025 ldots som är lika med 18,265 ldots newton",
+   "s": 410.84,
+   "e": 421.4
+  },
+  {
+   "t": "Insättning ger",
+   "s": 421.4,
+   "e": 423.66
+  },
+  {
+   "t": "accelerationen a är lika med 18,265 ldots delat med 7,5 som är lika med 2,435 ldots meter per sekund i kvadrat som är ungefär lika med 2,4 meter per sekund i kvadrat",
+   "s": 423.66,
+   "e": 437.16
+  },
+  {
+   "t": "Svar: 2,4 meter per sekund i kvadrat",
+   "s": 437.16,
+   "e": 441.6
+  }
+ ]
+}

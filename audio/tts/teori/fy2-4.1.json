@@ -1,0 +1,343 @@
+{
+ "id": "fy2-4.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1bf492e4acb1c156920962e2b902a34d21fe700d",
+ "dur": 415.77,
+ "segments": [
+  {
+   "t": "Elektromagnetiska vågor och ljusintensitet",
+   "s": 0.1,
+   "e": 4.14
+  },
+  {
+   "t": "Ljus eller elektromagnetisk strålning som utbreder sig med ljusets hastighet kan ses som elektromagnetiska vågor.",
+   "s": 4.09,
+   "e": 11.86
+  },
+  {
+   "t": "Ljusets hastighet betecknas c och är ungefär 2,998 gånger 10 upphöjt till 8 meter per sekund, alltså nästan 30 000 mil/s.",
+   "s": 11.86,
+   "e": 24.59
+  },
+  {
+   "t": "Illustration över en elektromagnetisk våg.",
+   "s": 11.86,
+   "e": 24.59
+  },
+  {
+   "t": "Det elektriska och det magnetiska fältet svänger i fas, vinkelrätt mot varandra och mot utbredningsriktningen.",
+   "s": 24.59,
+   "e": 31.64
+  },
+  {
+   "t": "Det som avgör vilken egenskap den elektromagnetiska vågen får är dess våglängd λ (eller frekvens f).",
+   "s": 31.64,
+   "e": 38.98
+  },
+  {
+   "t": "Ju kortare våglängd desto högre energi får ljuset.",
+   "s": 38.98,
+   "e": 43.24
+  },
+  {
+   "t": "Synligt ljus har våglängder mellan 400 nanometer (violett) och 700 nanometer (rött).",
+   "s": 43.24,
+   "e": 50.66
+  },
+  {
+   "t": "Infrarött, mikrovågor och radiovågor har längre våglängder (och lägre energi) än synligt ljus.",
+   "s": 50.66,
+   "e": 57.89
+  },
+  {
+   "t": "Ultraviolett, röntgenstrålning och radioaktiv strålning har kortare våglängder (och högre energi) än synligt ljus och är därför farligare.",
+   "s": 57.89,
+   "e": 66.85
+  },
+  {
+   "t": "Det elektromagnetiska spektrumet.",
+   "s": 66.85,
+   "e": 70.36
+  },
+  {
+   "t": "Skalan anger våglängden i meter — åt höger blir våglängden kortare och frekvensen (och energin) högre.",
+   "s": 70.36,
+   "e": 77.64
+  },
+  {
+   "t": "Ungefärliga våglängder för det elektromagnetiska spektrumet",
+   "s": 77.64,
+   "e": 82.41
+  },
+  {
+   "t": "Ljusets frekvens",
+   "s": 82.41,
+   "e": 84.88
+  },
+  {
+   "t": "frekvensen f är lika med c delat med våglängden lambda",
+   "s": 84.88,
+   "e": 89.46
+  },
+  {
+   "t": "där",
+   "s": 89.46,
+   "e": 90.94
+  },
+  {
+   "t": "f är lika med ljusets frekvens (hertz)",
+   "s": 90.94,
+   "e": 94.72
+  },
+  {
+   "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund i vakuum)",
+   "s": 94.72,
+   "e": 103.99
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 103.99,
+   "e": 107.74
+  },
+  {
+   "t": "Härledning — Ljusets frekvens",
+   "s": 107.74,
+   "e": 110.96
+  },
+  {
+   "t": "Vi har tidigare i ämnet härlett formeln för vågutbredningshastighet som",
+   "s": 110.96,
+   "e": 116.11
+  },
+  {
+   "t": "hastigheten v är lika med frekvensen f gånger våglängden lambda",
+   "s": 116.11,
+   "e": 121.29
+  },
+  {
+   "t": "Insättning av ljusets hastighet v är lika med c ger",
+   "s": 121.29,
+   "e": 125.78
+  },
+  {
+   "t": "c är lika med frekvensen f gånger våglängden lambda vilket är ekvivalent med att f är lika med c delat med lambda vilket skulle visas",
+   "s": 125.78,
+   "e": 134.32
+  },
+  {
+   "t": "Ljusintensitet",
+   "s": 134.32,
+   "e": 136.95
+  },
+  {
+   "t": "Hur stark den elektromagnetiska vågen är kallas ljusintensitet och definieras på samma sätt som för ljud: den energi som träffar en yta varje sekund (där energi per sekund är samma sak som effekt).",
+   "s": 136.95,
+   "e": 149.46
+  },
+  {
+   "t": "Ljus som sprids från en punktformig källa sprider sin energi i alla riktningar på en sfärisk yta med arean arean A är lika med 4 pi gånger r i kvadrat (även det, precis som för ljud).",
+   "s": 149.46,
+   "e": 161.22
+  },
+  {
+   "t": "Ljusintensitet (definition)",
+   "s": 161.22,
+   "e": 164.74
+  },
+  {
+   "t": "strömmen I är lika med effekten P delat med arean A som är lika med P delat med 4 pi gånger r i kvadrat",
+   "s": 164.74,
+   "e": 172.38
+  },
+  {
+   "t": "där",
+   "s": 172.38,
+   "e": 173.89
+  },
+  {
+   "t": "I är lika med ljusintensitet (W/m i kvadrat)",
+   "s": 173.89,
+   "e": 179.21
+  },
+  {
+   "t": "P är lika med effekt (watt)",
+   "s": 179.21,
+   "e": 182.53
+  },
+  {
+   "t": "A är lika med area som träffas (m i kvadrat)",
+   "s": 182.53,
+   "e": 186.94
+  },
+  {
+   "t": "r är lika med avstånd till punktkällan (meter)",
+   "s": 186.94,
+   "e": 191.07
+  },
+  {
+   "t": "Intensiteten minskar med kvadraten på avståndet eftersom arean som ljuset fördelas på ökar kvadratiskt med avståndet.",
+   "s": 191.07,
+   "e": 199.09
+  },
+  {
+   "t": "Ljusintensiteten motsvarar den elektromagnetiska vågens amplitud (vågens \"höjd\") och kan ses som \"ljudvolymen\" på ljuset.",
+   "s": 199.09,
+   "e": 207.51
+  },
+  {
+   "t": "Hög ljusintensitet motsvarar ett starkt ljus.",
+   "s": 207.51,
+   "e": 211.89
+  },
+  {
+   "t": "Exempel 1 — Ficklampans utstrålade effekt",
+   "s": 211.89,
+   "e": 216.11
+  },
+  {
+   "t": "En ficklampa lyser på en vägg så att det bildas en ljus cirkel med arean 30 centimeter i kvadrat med ljusintensiteten 500 watt/m i kvadrat.",
+   "s": 216.11,
+   "e": 225.89
+  },
+  {
+   "t": "Bestäm ficklampans utstrålade ljuseffekt.",
+   "s": 225.89,
+   "e": 229.62
+  },
+  {
+   "t": "Vi ställer upp formeln för ljusintensitet och löser ut effekten P.",
+   "s": 229.62,
+   "e": 249.18
+  },
+  {
+   "t": "strömmen I är lika med effekten P delat med arean A vilket är ekvivalent med att P är lika med I gånger A",
+   "s": 229.62,
+   "e": 249.18
+  },
+  {
+   "t": "strömmen I är lika med 500 watt per kvadratmeter arean A som är lika med 30 kvadratcentimeter som är lika med 30 gånger 10 upphöjt till minus 4 kvadratmeter",
+   "s": 229.62,
+   "e": 249.18
+  },
+  {
+   "t": "effekten P är lika med 500 gånger 30 gånger 10 upphöjt till minus 4 som är lika med 1,5 watt",
+   "s": 249.18,
+   "e": 256.9
+  },
+  {
+   "t": "Svar: 1,5 watt",
+   "s": 256.9,
+   "e": 259.91
+  },
+  {
+   "t": "Exempel 2 — Solens intensitet vid jorden",
+   "s": 259.91,
+   "e": 263.99
+  },
+  {
+   "t": "Solen strålar med effekten 3,9 gånger 10 upphöjt till 26 watt.",
+   "s": 263.99,
+   "e": 269.8
+  },
+  {
+   "t": "Vilken blir ljusintensiteten på avståndet 149,6 gånger 10 upphöjt till 6 kilometer (medelavståndet från jorden till solen)?",
+   "s": 269.8,
+   "e": 279.89
+  },
+  {
+   "t": "Solen strålar i alla riktningar och beter sig alltså som en punktformig källa.",
+   "s": 279.89,
+   "e": 285.23
+  },
+  {
+   "t": "strömmen I är lika med effekten P delat med 4 pi gånger r i kvadrat",
+   "s": 285.23,
+   "e": 290.75
+  },
+  {
+   "t": "effekten P är lika med 3,9 gånger 10 upphöjt till 26 watt r som är lika med 149,6 gånger 10 upphöjt till 6 kilometer som är lika med 149,6 gånger 10 upphöjt till 9 meter",
+   "s": 290.75,
+   "e": 306.85
+  },
+  {
+   "t": "strömmen I är lika med 3,9 gånger 10 upphöjt till 26 delat med 4 pi gånger parentesen 149,6 gånger 10 upphöjt till 9 slut parentes i kvadrat som är lika med 1 386,728 ldots watt per kvadratmeter som är ungefär lika med 1 400 watt per kvadratmeter som är lika med 1,4 kilowatt per kvadratmeter",
+   "s": 306.8,
+   "e": 330.73
+  },
+  {
+   "t": "Svar: 1,4 kilowatt/m i kvadrat",
+   "s": 330.73,
+   "e": 335.44
+  },
+  {
+   "t": "Ljusets hastighet — exakt!",
+   "s": 335.44,
+   "e": 338.54
+  },
+  {
+   "t": "Är det möjligt att veta ljusets hastighet exakt?",
+   "s": 338.54,
+   "e": 342.42
+  },
+  {
+   "t": "Svaret är ja.",
+   "s": 342.42,
+   "e": 344.78
+  },
+  {
+   "t": "Vi vet faktiskt ljusets exakta hastighet.",
+   "s": 344.78,
+   "e": 348.63
+  },
+  {
+   "t": "Ljusets hastighet är exakt 299 792 458 meter per sekund.",
+   "s": 348.63,
+   "e": 356.95
+  },
+  {
+   "t": "Inte ungefär — exakt!",
+   "s": 356.95,
+   "e": 359.74
+  },
+  {
+   "t": "Hur kan det vara så?",
+   "s": 359.74,
+   "e": 362.03
+  },
+  {
+   "t": "Det beror på att 1 meter definieras som den sträcka som ljuset färdas på 1 delat med 299 792 458 sekund.",
+   "s": 362.03,
+   "e": 372.49
+  },
+  {
+   "t": "Vi ställer upp formeln för konstant hastighet och räknar på ljusets hastighet v är lika med c.",
+   "s": 372.49,
+   "e": 389.04
+  },
+  {
+   "t": "c är lika med sträckan s delat med tiden t",
+   "s": 372.49,
+   "e": 389.04
+  },
+  {
+   "t": "sträckan s är lika med 1 meter tiden t som är lika med 1 delat med 299 792 458 sekund",
+   "s": 372.49,
+   "e": 389.04
+  },
+  {
+   "t": "c är lika med 1 delat med 1 delat med 299 792 458 som är lika med 299 792 458 meter per sekund",
+   "s": 389.04,
+   "e": 403.14
+  },
+  {
+   "t": "Inga avrundningar har gjorts någonstans.",
+   "s": 403.14,
+   "e": 406.64
+  },
+  {
+   "t": "Ljusets hastighet är alltså exakt lika med 299 792 458 meter per sekund.",
+   "s": 406.64,
+   "e": 415.77
+  }
+ ]
+}

@@ -1,0 +1,298 @@
+{
+ "id": "fy2-2.13",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5e6e65052052e03ed3af6c5f84c7f5bb31d1a8a7",
+ "dur": 358.59,
+ "segments": [
+  {
+   "t": "Vattenvågor och brytningslagen",
+   "s": 0.1,
+   "e": 3.29
+  },
+  {
+   "t": "Vattenvågor kan ha olika utseenden.",
+   "s": 3.24,
+   "e": 6.81
+  },
+  {
+   "t": "Vågor som bildas av",
+   "s": 6.81,
+   "e": 9.46
+  },
+  {
+   "t": "linjära vågfronter kallas plana vågor",
+   "s": 9.46,
+   "e": 13.12
+  },
+  {
+   "t": "cirkulära vågfronter kallas cirkulära vågor.",
+   "s": 13.12,
+   "e": 17.3
+  },
+  {
+   "t": "Cirkulära vågor alstras när vi har en punktformig vågkälla (en punkt som doppas ner i vattnet) och ger pulser som rör sig radiellt (i samma riktning som radien) utåt.",
+   "s": 17.3,
+   "e": 27.91
+  },
+  {
+   "t": "Alla delar av en våg rör sig med samma hastighet vinkelrätt mot vågfronten.",
+   "s": 27.91,
+   "e": 33.39
+  },
+  {
+   "t": "I periodiska vågor (vågor som alstras med konstant frekvens) är avståndet mellan två närliggande vågfronter en våglängd λ.",
+   "s": 33.39,
+   "e": 42.26
+  },
+  {
+   "t": "Reflexion",
+   "s": 33.39,
+   "e": 42.26
+  },
+  {
+   "t": "När vågor stöter på ett hinder och reflekteras är infallsvinkeln lika stor som reflexionsvinkeln.",
+   "s": 42.26,
+   "e": 48.91
+  },
+  {
+   "t": "Vinklarna mäts mellan vågens rörelseriktning och den reflekterande ytans normal — en linje med rät vinkel (90 grader) mot ytans plan.",
+   "s": 48.91,
+   "e": 57.75
+  },
+  {
+   "t": "Reflexionslagen",
+   "s": 57.75,
+   "e": 60.19
+  },
+  {
+   "t": "i är lika med r",
+   "s": 60.19,
+   "e": 62.54
+  },
+  {
+   "t": "där",
+   "s": 62.54,
+   "e": 64.0
+  },
+  {
+   "t": "i är lika med infallsvinkel",
+   "s": 64.0,
+   "e": 66.92
+  },
+  {
+   "t": "r är lika med reflexionsvinkel",
+   "s": 66.92,
+   "e": 70.15
+  },
+  {
+   "t": "Vinklarna mäts mellan vågens rörelseriktning och normalen (linjen som ligger vinkelrätt mot reflexionsytan).",
+   "s": 70.15,
+   "e": 77.66
+  },
+  {
+   "t": "Refraktion",
+   "s": 77.66,
+   "e": 79.76
+  },
+  {
+   "t": "Att vattenvågor ändrar riktning (\"bryts\") när de kommer in över ett annat djup kallas refraktion.",
+   "s": 79.76,
+   "e": 86.41
+  },
+  {
+   "t": "Brytning av vattenvågor",
+   "s": 86.41,
+   "e": 89.29
+  },
+  {
+   "t": "Vågor som går från",
+   "s": 89.29,
+   "e": 91.86
+  },
+  {
+   "t": "djupare vatten till grundare bryts mot (närmare) normalen och får minskad våglängd och våghastighet",
+   "s": 91.86,
+   "e": 99.16
+  },
+  {
+   "t": "grundare vatten till djupare bryts från normalen och får ökad våglängd och våghastighet.",
+   "s": 99.16,
+   "e": 105.16
+  },
+  {
+   "t": "I båda fall är frekvensen konstant.",
+   "s": 105.16,
+   "e": 108.53
+  },
+  {
+   "t": "Brytningslagen",
+   "s": 108.53,
+   "e": 110.84
+  },
+  {
+   "t": "sinus i delat med sinus b är lika med v ett delat med v två som är lika med våglängden lambda ett delat med lambda två",
+   "s": 110.84,
+   "e": 118.81
+  },
+  {
+   "t": "där",
+   "s": 118.81,
+   "e": 120.31
+  },
+  {
+   "t": "i, b är lika med infallsvinkel respektive brytningsvinkel",
+   "s": 120.31,
+   "e": 125.22
+  },
+  {
+   "t": "v ett, v två är lika med hastighet i medium 1 respektive medium 2",
+   "s": 125.22,
+   "e": 131.26
+  },
+  {
+   "t": "våglängden lambda ett, lambda två är lika med våglängd i medium 1 respektive medium 2",
+   "s": 131.26,
+   "e": 137.82
+  },
+  {
+   "t": "Härledning — Brytningslagen",
+   "s": 137.82,
+   "e": 140.84
+  },
+  {
+   "t": "Sedan tidigare vet vi att en vågs hastighet kan beräknas som hastigheten v är lika med frekvensen f gånger våglängden lambda .",
+   "s": 140.84,
+   "e": 148.9
+  },
+  {
+   "t": "För det djupa vattnet gäller alltså att v ett är lika med frekvensen f gånger våglängden lambda ett och för det grunda vattnet att v två är lika med frekvensen f gånger våglängden lambda två (samma frekvens f i båda fall).",
+   "s": 148.9,
+   "e": 161.5
+  },
+  {
+   "t": "Förhållandet mellan hastigheterna kan alltså skrivas",
+   "s": 161.5,
+   "e": 165.57
+  },
+  {
+   "t": "v ett delat med v två är lika med frekvensen f gånger våglängden lambda ett delat med f gånger lambda två som är lika med lambda ett delat med lambda två dvs. v ett delat med v två som är lika med lambda ett delat med lambda två",
+   "s": 165.57,
+   "e": 178.88
+  },
+  {
+   "t": "Vi kan även visa att v ett delat med v två är lika med sinus i delat med sinus b (en geometrisk härledning av detta finns i läroboken).",
+   "s": 178.88,
+   "e": 188.19
+  },
+  {
+   "t": "Refraktion och havsvågor",
+   "s": 188.19,
+   "e": 191.06
+  },
+  {
+   "t": "En konsekvens av refraktionen är att även när det blåser längs med en strand kommer vågorna ändå in nästan vinkelrätt mot stranden, eftersom vågfronterna bryts in då vattnet blir grundare nära stranden.",
+   "s": 191.06,
+   "e": 202.31
+  },
+  {
+   "t": "En mer allvarlig följd är att vågornas lägre hastighet vid stranden gör att vågor som kommer bakifrån med högre hastighet \"trycker på\" vågen framför, och en vågkam bildas.",
+   "s": 202.31,
+   "e": 212.16
+  },
+  {
+   "t": "Är vågen tillräckligt stor bildas en \"jättevåg\" — en tsunami.",
+   "s": 212.16,
+   "e": 216.61
+  },
+  {
+   "t": "Tsunamin 2004 dödade över 200 000 människor i bl.a. Thailand och Indonesien, en av de värsta naturkatastroferna i modern tid.",
+   "s": 216.61,
+   "e": 226.18
+  },
+  {
+   "t": "Tsunamin vid Japans kust 2011 ledde till kärnkraftsolyckan i Fukushima — jordskalvet slog ut elnätet, och tsunamin slog därefter ut reservgeneratorerna för reaktorernas kylning.",
+   "s": 226.18,
+   "e": 237.76
+  },
+  {
+   "t": "Exempel 1 — Brytning från djupt till grunt vatten",
+   "s": 237.76,
+   "e": 242.06
+  },
+  {
+   "t": "En våg med våglängden 15 meter och hastigheten 8,0 meter per sekund träffar en gräns mot grundare vatten med infallsvinkeln 40 grader och bromsas då in och får våglängden 10 meter.",
+   "s": 242.06,
+   "e": 253.99
+  },
+  {
+   "t": "Bestäm",
+   "s": 253.99,
+   "e": 255.69
+  },
+  {
+   "t": "a) brytningsvinkeln",
+   "s": 255.69,
+   "e": 258.41
+  },
+  {
+   "t": "b) vågornas frekvens i det grunda vattnet",
+   "s": 258.41,
+   "e": 262.35
+  },
+  {
+   "t": "a) Vi ställer upp brytningslagen med vinklar/våglängder och löser ut brytningsvinkeln b.",
+   "s": 262.35,
+   "e": 280.02
+  },
+  {
+   "t": "sinus i delat med sinus b är lika med våglängden lambda ett delat med lambda två vilket är ekvivalent med att sinus b är lika med lambda två gånger sinus i delat med lambda ett vilket är ekvivalent med att b är lika med sinus upphöjt till minus 1 parentesen lambda två gånger sinus i delat med lambda ett slut parentes",
+   "s": 262.35,
+   "e": 288.31
+  },
+  {
+   "t": "våglängden lambda två är lika med 10 meter i som är lika med 40 grader lambda ett som är lika med 15 meter",
+   "s": 288.25,
+   "e": 295.74
+  },
+  {
+   "t": "b är lika med sinus upphöjt till minus 1 parentesen 10 gånger sinus 40 grader delat med 15 slut parentes som är lika med 25,373 ldots grader som är ungefär lika med 25 grader",
+   "s": 295.74,
+   "e": 308.9
+  },
+  {
+   "t": "Svar: 25 grader",
+   "s": 308.9,
+   "e": 311.98
+  },
+  {
+   "t": "b) Vi ställer upp formeln för våghastighet och löser ut frekvensen f.",
+   "s": 311.98,
+   "e": 317.39
+  },
+  {
+   "t": "hastigheten v är lika med frekvensen f gånger våglängden lambda vilket är ekvivalent med att f är lika med v delat med lambda",
+   "s": 317.39,
+   "e": 325.49
+  },
+  {
+   "t": "Vi saknar hastigheten v i det grunda vattnet, men eftersom frekvensen är konstant kan vi räkna på frekvensen i det djupa vattnet.",
+   "s": 325.49,
+   "e": 333.77
+  },
+  {
+   "t": "hastigheten v är lika med 8,0 meter per sekund våglängden lambda som är lika med 15 meter",
+   "s": 333.77,
+   "e": 340.86
+  },
+  {
+   "t": "f tyngdfaktorn g r u n tiden t är lika med f avståndet d j u trycket p t som är lika med 8,0 delat med 15 som är lika med 0,533 ldots hertz som är ungefär lika med 0,53 hertz",
+   "s": 340.86,
+   "e": 354.9
+  },
+  {
+   "t": "Svar: 0,53 hertz",
+   "s": 354.9,
+   "e": 358.59
+  }
+ ]
+}

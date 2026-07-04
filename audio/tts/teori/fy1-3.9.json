@@ -1,0 +1,208 @@
+{
+ "id": "fy1-3.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "907b4f24b7e1088a6151aa418a0a4934ffcd396c",
+ "dur": 206.29,
+ "segments": [
+  {
+   "t": "Exempel — Accelerationens riktning",
+   "s": 0.1,
+   "e": 3.49
+  },
+  {
+   "t": "Att avgöra accelerationens riktning, det vill säga om den är positiv eller negativ, kan vara lurigt och gå emot vår magkänsla.",
+   "s": 3.44,
+   "e": 11.95
+  },
+  {
+   "t": "Avgörande för att bestämma accelerationens tecken är att ange hastigheter som vektorer (med tecken).",
+   "s": 11.95,
+   "e": 18.71
+  },
+  {
+   "t": "Exempel 1 — Boll rakt upp",
+   "s": 18.71,
+   "e": 21.94
+  },
+  {
+   "t": "Vi kastar en boll rakt upp enligt figuren nedan.",
+   "s": 21.94,
+   "e": 25.84
+  },
+  {
+   "t": "Vi har definierat positiv riktning uppåt.",
+   "s": 25.84,
+   "e": 29.68
+  },
+  {
+   "t": "Talen anger bollens hastighet i m/s (positiv riktning uppåt).",
+   "s": 29.68,
+   "e": 35.58
+  },
+  {
+   "t": "Hastigheten minskar hela tiden — från 6 meter per sekund på väg upp, via 0 i vändläget, till −6 meter per sekund på väg ner.",
+   "s": 35.58,
+   "e": 44.64
+  },
+  {
+   "t": "Bestäm a) accelerationens tecken, b) accelerationen.",
+   "s": 44.64,
+   "e": 49.8
+  },
+  {
+   "t": "a) Under hela kastet (såväl på väg upp, i vändläget som på väg ner), så minskar hastigheten lika mycket för varje tidsenhet.",
+   "s": 49.8,
+   "e": 58.61
+  },
+  {
+   "t": "Accelerationen är alltså konstant och densamma vid varje tidpunkt.",
+   "s": 58.61,
+   "e": 63.52
+  },
+  {
+   "t": "Eftersom hastigheten minskar (från 6 meter per sekund till 0 till −6 meter per sekund) är accelerationen negativ.",
+   "s": 63.52,
+   "e": 71.47
+  },
+  {
+   "t": "Svar: Negativ",
+   "s": 71.47,
+   "e": 74.06
+  },
+  {
+   "t": "b) Accelerationen är tyngdaccelerationen som vi vet har storleken 9,82 meter per sekund i kvadrat i Sverige.",
+   "s": 74.06,
+   "e": 82.58
+  },
+  {
+   "t": "Eftersom vi har definierat positiv riktning uppåt blir den alltså negativ.",
+   "s": 82.58,
+   "e": 87.86
+  },
+  {
+   "t": "Svar: −9,82 meter per sekund i kvadrat",
+   "s": 87.86,
+   "e": 92.83
+  },
+  {
+   "t": "Exempel 2 — Hissens acceleration",
+   "s": 92.83,
+   "e": 96.36
+  },
+  {
+   "t": "Vi åker hiss.",
+   "s": 96.36,
+   "e": 98.58
+  },
+  {
+   "t": "Bestäm accelerationens tecken (positiv, negativ eller noll) när vi:",
+   "s": 98.58,
+   "e": 106.78
+  },
+  {
+   "t": "a) ökar farten på väg upp,",
+   "s": 98.58,
+   "e": 106.78
+  },
+  {
+   "t": "b) bromsar in farten på väg upp,",
+   "s": 106.78,
+   "e": 110.8
+  },
+  {
+   "t": "c) ökar farten på väg ner,",
+   "s": 110.8,
+   "e": 114.6
+  },
+  {
+   "t": "d) bromsar in farten på väg ner.",
+   "s": 114.6,
+   "e": 118.3
+  },
+  {
+   "t": "Vi definierar positiv riktning uppåt i alla deluppgifter.",
+   "s": 118.3,
+   "e": 122.96
+  },
+  {
+   "t": "a) Vi skissar figurer på när farten ökar uppåt och skriver in exempel på olika hastigheter.",
+   "s": 122.96,
+   "e": 129.64
+  },
+  {
+   "t": "Vi ser att hastigheten ökar (från 0 till 1 meter per sekund till 2 meter per sekund).",
+   "s": 129.64,
+   "e": 136.24
+  },
+  {
+   "t": "Accelerationen är alltså positiv.",
+   "s": 136.24,
+   "e": 139.46
+  },
+  {
+   "t": "Svar: Positiv",
+   "s": 139.46,
+   "e": 141.81
+  },
+  {
+   "t": "b) Vi skissar på motsvarande sätt när hissen bromsar in på väg upp.",
+   "s": 141.81,
+   "e": 147.19
+  },
+  {
+   "t": "Vi ser att hastigheten minskar (från 2 meter per sekund till 1 meter per sekund till 0).",
+   "s": 147.19,
+   "e": 153.74
+  },
+  {
+   "t": "Accelerationen är alltså negativ.",
+   "s": 153.74,
+   "e": 156.96
+  },
+  {
+   "t": "Svar: Negativ",
+   "s": 156.96,
+   "e": 159.5
+  },
+  {
+   "t": "c) Vi skissar en ny figur för ökningen av farten på väg ner.",
+   "s": 159.5,
+   "e": 164.79
+  },
+  {
+   "t": "Vi ser att hastigheten minskar (!) (från 0 till −1 meter per sekund till −2 meter per sekund).",
+   "s": 164.79,
+   "e": 172.91
+  },
+  {
+   "t": "Accelerationen är alltså negativ. (Farten ökar, men hastigheten minskar!)",
+   "s": 172.91,
+   "e": 180.36
+  },
+  {
+   "t": "Svar: Negativ",
+   "s": 180.36,
+   "e": 182.93
+  },
+  {
+   "t": "d) Till sist skissar vi nya figurer för inbromsningen på väg ner.",
+   "s": 182.93,
+   "e": 188.39
+  },
+  {
+   "t": "Vi ser att hastigheten ökar (!) (från −2 meter per sekund till −1 meter per sekund till 0).",
+   "s": 188.39,
+   "e": 196.46
+  },
+  {
+   "t": "Accelerationen är alltså positiv. (Farten minskar, men hastigheten ökar!)",
+   "s": 196.46,
+   "e": 203.88
+  },
+  {
+   "t": "Svar: Positiv",
+   "s": 203.88,
+   "e": 206.29
+  }
+ ]
+}

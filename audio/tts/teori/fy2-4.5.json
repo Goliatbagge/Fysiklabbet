@@ -1,0 +1,513 @@
+{
+ "id": "fy2-4.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "50a133f0f819377dac5024ad9af3992474f06bfb",
+ "dur": 690.82,
+ "segments": [
+  {
+   "t": "Fotoelektrisk effekt",
+   "s": 0.1,
+   "e": 2.91
+  },
+  {
+   "t": "Demonstration — Fotoelektrisk effekt",
+   "s": 2.86,
+   "e": 6.45
+  },
+  {
+   "t": "En rengjord zinkplatta sätts fast i ett elektroskop.",
+   "s": 6.45,
+   "e": 10.71
+  },
+  {
+   "t": "Elektroskopet laddas negativt med en ebonitstav.",
+   "s": 10.71,
+   "e": 14.94
+  },
+  {
+   "t": "Vi belyser plattan med olika typer av ljus: infrarött ljus och synligt ljus från t.ex. ficklampa och laserljus.",
+   "s": 14.94,
+   "e": 22.68
+  },
+  {
+   "t": "Inget händer trots att starkt (energirikt) ljus träffar plattan.",
+   "s": 22.68,
+   "e": 27.94
+  },
+  {
+   "t": "Vi belyser till sist plattan med ultraviolett ljus (UV-ljus).",
+   "s": 27.94,
+   "e": 33.3
+  },
+  {
+   "t": "Plattan laddas nu ur, vilket betyder att ljuset slår bort elektroner från metallplattan.",
+   "s": 33.3,
+   "e": 39.66
+  },
+  {
+   "t": "Detta är den fotoelektriska effekten!",
+   "s": 39.66,
+   "e": 43.25
+  },
+  {
+   "t": "Urladdningen från UV-ljuset hindras om vi håller en glasskiva emellan.",
+   "s": 43.25,
+   "e": 48.41
+  },
+  {
+   "t": "Glas absorberar alltså ljus med den energin.",
+   "s": 48.41,
+   "e": 52.4
+  },
+  {
+   "t": "Det är därför du inte blir solbränd genom en glasruta!",
+   "s": 52.4,
+   "e": 56.64
+  },
+  {
+   "t": "Metaller har lättrörliga elektroner.",
+   "s": 56.64,
+   "e": 60.12
+  },
+  {
+   "t": "Om de ges tillräckligt mycket energi kommer de kunna lämna ytan.",
+   "s": 60.12,
+   "e": 64.67
+  },
+  {
+   "t": "När ljus träffar en metall kan elektroner från metallens yta slås loss från ytan om ljusets energi är tillräcklig.",
+   "s": 64.67,
+   "e": 72.44
+  },
+  {
+   "t": "Detta fenomen kallas fotoelektrisk effekt och förklarades av Albert Einstein år 1905.",
+   "s": 72.44,
+   "e": 79.42
+  },
+  {
+   "t": "Rött ljus (lång våglängd, låg fotonenergi) slår inte ut några elektroner.",
+   "s": 79.42,
+   "e": 85.81
+  },
+  {
+   "t": "Grönt ljus lossar elektroner från ytan, och blått ljus (ännu högre fotonenergi) ger de frigjorda elektronerna högre rörelseenergi.",
+   "s": 85.81,
+   "e": 94.92
+  },
+  {
+   "t": "Detta fenomen kan inte beskrivas genom vågrörelse (då borde starkt synligt ljus med högre energi än UV-ljuset också kunnat slå ut elektronerna).",
+   "s": 94.92,
+   "e": 104.58
+  },
+  {
+   "t": "Vi ser istället ljuset som en partikel, ett vågpaket av energi, en ljuspartikel som kallas foton.",
+   "s": 104.58,
+   "e": 111.78
+  },
+  {
+   "t": "Fotonens energi",
+   "s": 111.78,
+   "e": 114.22
+  },
+  {
+   "t": "energin E är lika med höjden h gånger c delat med våglängden lambda som är lika med h gånger frekvensen f",
+   "s": 114.22,
+   "e": 121.62
+  },
+  {
+   "t": "där",
+   "s": 121.62,
+   "e": 123.14
+  },
+  {
+   "t": "E är lika med ljusets energi (joule)",
+   "s": 123.14,
+   "e": 126.83
+  },
+  {
+   "t": "h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js (Plancks konstant)",
+   "s": 126.83,
+   "e": 134.99
+  },
+  {
+   "t": "c är lika med ljusets hastighet (meter per sekund)",
+   "s": 134.99,
+   "e": 139.55
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 139.55,
+   "e": 143.29
+  },
+  {
+   "t": "f är lika med ljusets frekvens (hertz)",
+   "s": 143.29,
+   "e": 147.15
+  },
+  {
+   "t": "Omvandling mellan elektronvolt och joule",
+   "s": 147.15,
+   "e": 150.99
+  },
+  {
+   "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule",
+   "s": 150.99,
+   "e": 157.68
+  },
+  {
+   "t": "1 joule är lika med 1 delat med 1,602 gånger 10 upphöjt till minus 19 elektronvolt",
+   "s": 157.68,
+   "e": 165.18
+  },
+  {
+   "t": "Energin hos enskilda fotoner är mycket låg, så enheten eV (elektronvolt) används ofta för dessa små energier (precis som i kärnfysiken i förra ämnet).",
+   "s": 165.18,
+   "e": 176.32
+  },
+  {
+   "t": "Den amerikanske fysikern Arthur Compton bevisade 1923 att ljus beter sig som partiklar och har rörelsemängd precis som biljardbollar som krockar.",
+   "s": 176.32,
+   "e": 186.25
+  },
+  {
+   "t": "Han sköt fotoner mot elektroner och vid stöten bevarades den totala rörelsemängden (och rörelseenergin) precis som vid en fullkomligt elastisk stöt (liknande två metallkulor som kolliderar).",
+   "s": 186.25,
+   "e": 198.65
+  },
+  {
+   "t": "Fotonen fick efter kollisionen en lägre energi och därmed större våglängd.",
+   "s": 198.65,
+   "e": 204.11
+  },
+  {
+   "t": "Fotonen beter sig vid krockar med andra partiklar precis som biljardbollar som krockar och har därför rörelsemängd.",
+   "s": 204.11,
+   "e": 211.31
+  },
+  {
+   "t": "Eftersom fotonen saknar massa kan vi inte beräkna dess rörelsemängd som i klassisk fysik.",
+   "s": 211.31,
+   "e": 217.47
+  },
+  {
+   "t": "Comptonspridning: fotonen krockar med en elektron i vila och fortsätter med lägre energi (längre våglängd) i vinkeln α, medan elektronen får rörelseenergin höjden h f ett minus h f två och åker iväg i vinkeln β.",
+   "s": 217.47,
+   "e": 232.75
+  },
+  {
+   "t": "Rörelsemängden bevaras.",
+   "s": 217.47,
+   "e": 232.75
+  },
+  {
+   "t": "Fotonens rörelsemängd",
+   "s": 232.75,
+   "e": 235.57
+  },
+  {
+   "t": "trycket p är lika med höjden h delat med våglängden lambda som är lika med h gånger frekvensen f delat med c",
+   "s": 235.57,
+   "e": 243.09
+  },
+  {
+   "t": "där",
+   "s": 243.09,
+   "e": 244.57
+  },
+  {
+   "t": "p är lika med fotonens rörelsemängd (kg·m/s)",
+   "s": 244.57,
+   "e": 250.09
+  },
+  {
+   "t": "h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js (Plancks konstant)",
+   "s": 250.09,
+   "e": 258.26
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 258.26,
+   "e": 261.99
+  },
+  {
+   "t": "f är lika med ljusets frekvens (hertz)",
+   "s": 261.99,
+   "e": 265.85
+  },
+  {
+   "t": "c är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund (ljusets hastighet i vakuum)",
+   "s": 265.85,
+   "e": 274.68
+  },
+  {
+   "t": "Klassisk rörelsemängd",
+   "s": 274.68,
+   "e": 277.34
+  },
+  {
+   "t": "trycket p är lika med massan m gånger hastigheten v",
+   "s": 277.34,
+   "e": 281.64
+  },
+  {
+   "t": "där",
+   "s": 281.64,
+   "e": 283.11
+  },
+  {
+   "t": "p är lika med rörelsemängd (kg·m/s)",
+   "s": 283.11,
+   "e": 288.16
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 288.16,
+   "e": 291.51
+  },
+  {
+   "t": "v är lika med hastighet (meter per sekund)",
+   "s": 291.51,
+   "e": 295.65
+  },
+  {
+   "t": "Oavsett om fotonen kolliderar eller absorberas, så gäller att rörelsemängden bevaras.",
+   "s": 295.65,
+   "e": 302.06
+  },
+  {
+   "t": "Den energi som krävs för att en elektron ska lämna ytan kallas utträdesarbete eller utträdesenergi.",
+   "s": 302.06,
+   "e": 309.18
+  },
+  {
+   "t": "Om fotonens energi är större än utträdesenergin kommer elektroner att lämna ytan.",
+   "s": 309.18,
+   "e": 317.07
+  },
+  {
+   "t": "Eventuell överskottsenergi från fotonen blir till rörelseenergi hos elektronen.",
+   "s": 317.02,
+   "e": 322.96
+  },
+  {
+   "t": "Fotoelektrisk effekt",
+   "s": 322.96,
+   "e": 325.77
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med W u plus E k",
+   "s": 325.77,
+   "e": 331.1
+  },
+  {
+   "t": "där",
+   "s": 331.1,
+   "e": 332.57
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med fotonens energi (joule)",
+   "s": 332.57,
+   "e": 337.96
+  },
+  {
+   "t": "h är lika med 6,626 gånger 10 upphöjt till minus 34 Js (Plancks konstant)",
+   "s": 337.96,
+   "e": 345.7
+  },
+  {
+   "t": "f är lika med ljusets frekvens (hertz)",
+   "s": 345.7,
+   "e": 349.53
+  },
+  {
+   "t": "W u är lika med utträdesarbete/utträdesenergi (joule) (slås upp i tabell)",
+   "s": 349.53,
+   "e": 357.08
+  },
+  {
+   "t": "E k är lika med elektronens rörelseenergi (joule)",
+   "s": 357.08,
+   "e": 361.85
+  },
+  {
+   "t": "Exempel 1 — Elektronens hastighet vid laserljus",
+   "s": 361.85,
+   "e": 366.3
+  },
+  {
+   "t": "En metallyta belyses av en laser med våglängden 633 nanometer som slår ut en elektron.",
+   "s": 366.3,
+   "e": 373.6
+  },
+  {
+   "t": "Utträdesenergin för metallen är 1,82 elektronvolt.",
+   "s": 373.6,
+   "e": 378.91
+  },
+  {
+   "t": "a) Hur stor energi har en foton hos lasern?",
+   "s": 378.91,
+   "e": 383.07
+  },
+  {
+   "t": "Svara i elektronvolt.",
+   "s": 383.07,
+   "e": 386.16
+  },
+  {
+   "t": "b) Vilken hastighet får elektronen som lämnar ytan?",
+   "s": 386.16,
+   "e": 390.86
+  },
+  {
+   "t": "a) Vi ställer upp formeln för fotonens energi.",
+   "s": 390.86,
+   "e": 394.93
+  },
+  {
+   "t": "energin E är lika med höjden h gånger c delat med våglängden lambda",
+   "s": 394.93,
+   "e": 400.45
+  },
+  {
+   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund våglängden lambda som är lika med 633 nanometer som är lika med 633 gånger 10 upphöjt till minus 9 meter",
+   "s": 400.45,
+   "e": 419.2
+  },
+  {
+   "t": "energin E är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 633 gånger 10 upphöjt till minus 9 som är lika med 3,138 ldots gånger 10 upphöjt till minus 19 joule",
+   "s": 419.2,
+   "e": 437.18
+  },
+  {
+   "t": "Vi omvandlar till eV genom att dividera med mätetalet för elektronens laddning 1,602 gånger 10 upphöjt till minus 19 .",
+   "s": 437.18,
+   "e": 446.07
+  },
+  {
+   "t": "energin E är lika med 3,138 ldots gånger 10 upphöjt till minus 19 delat med 1,602 gånger 10 upphöjt till minus 19 elektronvolt som är lika med 1,958 ldots elektronvolt som är ungefär lika med 1,96 elektronvolt",
+   "s": 446.07,
+   "e": 463.6
+  },
+  {
+   "t": "Svar: 1,96 elektronvolt",
+   "s": 463.6,
+   "e": 467.72
+  },
+  {
+   "t": "b) Vi börjar med att beräkna elektronens rörelseenergi E k .",
+   "s": 467.72,
+   "e": 473.18
+  },
+  {
+   "t": "Vi löser ut E k från formeln för fotoelektrisk effekt.",
+   "s": 473.18,
+   "e": 478.17
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med W u plus E k vilket är ekvivalent med att E k är lika med h gånger f minus W u",
+   "s": 478.17,
+   "e": 498.51
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med 1,958 ldots elektronvolt parentesen fotonensenergi,fråna-uppgiften slut parentes W u som är lika med 1,82 elektronvolt",
+   "s": 478.17,
+   "e": 498.51
+  },
+  {
+   "t": "E k är lika med 1,958 ldots minus 1,82 som är lika med 0,138 ldots elektronvolt",
+   "s": 498.51,
+   "e": 507.78
+  },
+  {
+   "t": "Vi bestämmer nu elektronens hastighet v.",
+   "s": 507.78,
+   "e": 511.57
+  },
+  {
+   "t": "Vi löser ut v från formeln för rörelseenergi.",
+   "s": 511.57,
+   "e": 515.92
+  },
+  {
+   "t": "E k är lika med massan m gånger hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v är lika med roten ur 2 gånger E k delat med m",
+   "s": 515.92,
+   "e": 526.12
+  },
+  {
+   "t": "E k är lika med 0,138 ldots elektronvolt som är lika med 0,138 ldots gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 2,225 ldots gånger 10 upphöjt till minus 20 joule massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronensmassa,slåsuppitabell slut parentes",
+   "s": 526.12,
+   "e": 550.63
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 2 gånger 2,225 ldots gånger 10 upphöjt till minus 20 delat med 9,11 gånger 10 upphöjt till minus 31 som är lika med 221 039,772 ldots meter per sekund som är ungefär lika med 2,21 gånger 10 upphöjt till 5 meter per sekund som är lika med 0,221 Mm per sekund",
+   "s": 550.63,
+   "e": 575.05
+  },
+  {
+   "t": "Svar: 0,221 Mm/s",
+   "s": 575.05,
+   "e": 583.02
+  },
+  {
+   "t": "Exempel 2 — Foton absorberas av en kväveatom",
+   "s": 575.05,
+   "e": 583.02
+  },
+  {
+   "t": "En foton med våglängden 450 nanometer absorberas av en kväve-14-atom i vila med massan 14,003074 u.",
+   "s": 583.02,
+   "e": 593.16
+  },
+  {
+   "t": "Vilken fart får atomen?",
+   "s": 593.16,
+   "e": 596.01
+  },
+  {
+   "t": "Rörelsemängden bevaras.",
+   "s": 596.01,
+   "e": 598.86
+  },
+  {
+   "t": "p frekvensen f ö r e är lika med p e f tiden t e r",
+   "s": 598.86,
+   "e": 616.35
+  },
+  {
+   "t": "p frekvensen f ö r e är lika med fotonens rörelsemängd är lika med höjden h delat med våglängden lambda och p e frekvensen f tiden t e r är lika med kväveatomens rörelsemängd är lika med massan m gånger hastigheten v ger",
+   "s": 598.86,
+   "e": 616.35
+  },
+  {
+   "t": "höjden h delat med våglängden lambda är lika med massan m gånger hastigheten v",
+   "s": 616.35,
+   "e": 622.08
+  },
+  {
+   "t": "Vi löser ut atomens hastighet v och får",
+   "s": 622.08,
+   "e": 626.13
+  },
+  {
+   "t": "hastigheten v är lika med höjden h delat med våglängden lambda gånger massan m",
+   "s": 626.13,
+   "e": 645.1
+  },
+  {
+   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js våglängden lambda som är lika med 450 nanometer som är lika med 450 gånger 10 upphöjt till minus 9 meter massan m som är lika med 14,003074 u som är lika med 14,003074 gånger 1,66 gånger 10 upphöjt till minus 27 kilogram som är lika med 2,324 ldots gånger 10 upphöjt till minus 26 kilogram",
+   "s": 626.13,
+   "e": 660.99
+  },
+  {
+   "t": "hastigheten v är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 450 gånger 10 upphöjt till minus 9 gånger 2,324 ldots gånger 10 upphöjt till minus 26 som är lika med 0,06334 ldots meter per sekund som är ungefär lika med 0,0633 meter per sekund som är lika med 6,33 centimeter per sekund",
+   "s": 660.94,
+   "e": 686.02
+  },
+  {
+   "t": "Svar: 6,33 centimeter/s",
+   "s": 686.02,
+   "e": 690.82
+  }
+ ]
+}

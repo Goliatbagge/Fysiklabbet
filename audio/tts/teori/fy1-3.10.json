@@ -1,0 +1,138 @@
+{
+ "id": "fy1-3.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a4dfb4ccbab059c082d59ff9d6e43c6bae93783d",
+ "dur": 179.21,
+ "segments": [
+  {
+   "t": "Exempel — Trissor",
+   "s": 0.1,
+   "e": 2.65
+  },
+  {
+   "t": "Ett hjul med kanter som en tråd/lina/rep löper runt kallas trissa.",
+   "s": 2.6,
+   "e": 8.81
+  },
+  {
+   "t": "Om inte annat anges, så anses en trissa snurra utan friktionskrafter.",
+   "s": 8.81,
+   "e": 14.29
+  },
+  {
+   "t": "Kom ihåg",
+   "s": 14.29,
+   "e": 16.32
+  },
+  {
+   "t": "Spännkraften i ett snöre är lika stor i hela snöret och i dess fästpunkter.",
+   "s": 16.32,
+   "e": 21.84
+  },
+  {
+   "t": "Exempel 1 — Två trissor med vikter 1,0 kilogram och 3,0 kilogram",
+   "s": 21.84,
+   "e": 27.86
+  },
+  {
+   "t": "Två trissor med vikter på 1,0 kilogram respektive 3,0 kilogram monteras på ett bord enligt nedanstående figur.",
+   "s": 27.86,
+   "e": 36.35
+  },
+  {
+   "t": "Vilken a) acceleration får vikterna, b) spännkraft blir det i snöret?",
+   "s": 36.35,
+   "e": 42.27
+  },
+  {
+   "t": "a) Accelerationen bestäms av Newtons andra lag.",
+   "s": 42.27,
+   "e": 46.71
+  },
+  {
+   "t": "F resistansen R är lika med massan m gånger accelerationen a vilket är ekvivalent med att a är lika med F R delat med m",
+   "s": 46.71,
+   "e": 54.94
+  },
+  {
+   "t": "Vi tittar först på hela systemet.",
+   "s": 54.94,
+   "e": 58.14
+  },
+  {
+   "t": "Tyngden från 3-kilosvikten F G 3 drar åt höger och tyngden från 1-kilosvikten F G 1 drar åt vänster, så",
+   "s": 58.14,
+   "e": 66.51
+  },
+  {
+   "t": "F resistansen R är lika med F G 3 minus F G 1 som är lika med m tre gånger tyngdfaktorn g minus m ett gånger g som är lika med 3,0 gånger 9,82 minus 1,0 gånger 9,82 som är lika med 19,64 newton",
+   "s": 66.51,
+   "e": 82.19
+  },
+  {
+   "t": "Massan på hela systemet m tiden t o t ges av",
+   "s": 82.19,
+   "e": 86.89
+  },
+  {
+   "t": "m tiden t o t är lika med m tre plus m ett som är lika med 3,0 plus 1,0 som är lika med 4,0 kilogram",
+   "s": 86.89,
+   "e": 95.74
+  },
+  {
+   "t": "Insättning ger",
+   "s": 95.74,
+   "e": 97.96
+  },
+  {
+   "t": "accelerationen a är lika med 19,64 delat med 4,0 som är lika med 4,91 meter per sekund i kvadrat som är ungefär lika med 4,9 meter per sekund i kvadrat",
+   "s": 97.96,
+   "e": 110.15
+  },
+  {
+   "t": "Svar: 4,9 meter per sekund i kvadrat",
+   "s": 110.15,
+   "e": 114.65
+  },
+  {
+   "t": "b) För att bestämma kraften i snöret tittar vi på en av vikterna, t.ex. 1-kilosvikten.",
+   "s": 114.65,
+   "e": 121.38
+  },
+  {
+   "t": "Vi ritar ut krafterna på vikten.",
+   "s": 121.38,
+   "e": 124.49
+  },
+  {
+   "t": "Eftersom den kommer att accelerera uppåt måste spännkraften i snöret uppåt vara större än tyngdkraften nedåt.",
+   "s": 124.49,
+   "e": 131.69
+  },
+  {
+   "t": "Vi tecknar ett uttryck för den resulterande kraften och löser ut spännkraften.",
+   "s": 131.69,
+   "e": 137.16
+  },
+  {
+   "t": "F resistansen R är lika med F S minus F G 1 vilket är ekvivalent med att F S är lika med F R plus F G 1",
+   "s": 137.16,
+   "e": 146.12
+  },
+  {
+   "t": "F resistansen R är lika med m ett gånger accelerationen a som är lika med 1,0 gånger 4,91 som är lika med 4,91 newton parentesen OBS!Endastmassanpå1-kilosvikten slut parentes F G 1 som är lika med m ett gånger tyngdfaktorn g som är lika med 1,0 gånger 9,82 som är lika med 9,82 newton",
+   "s": 146.12,
+   "e": 167.15
+  },
+  {
+   "t": "F S är lika med 4,91 plus 9,82 som är lika med 14,73 newton som är ungefär lika med 15 newton",
+   "s": 167.15,
+   "e": 176.25
+  },
+  {
+   "t": "Svar: 15 newton",
+   "s": 176.25,
+   "e": 179.21
+  }
+ ]
+}

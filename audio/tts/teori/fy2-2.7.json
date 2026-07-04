@@ -1,0 +1,268 @@
+{
+ "id": "fy2-2.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "2289e2b76ba466e1960cd120f8e300ae1dbfafbc",
+ "dur": 269.56,
+ "segments": [
+  {
+   "t": "Pulser, vågor och utbredningshastighet",
+   "s": 0.1,
+   "e": 4.24
+  },
+  {
+   "t": "Pulser och vågor",
+   "s": 4.19,
+   "e": 6.59
+  },
+  {
+   "t": "Demonstration — Puls och våg",
+   "s": 6.59,
+   "e": 9.79
+  },
+  {
+   "t": "Vi studerar en puls i en vågställning.",
+   "s": 9.79,
+   "e": 13.15
+  },
+  {
+   "t": "Pulsen rör sig uppåt/nedåt medan delarna rör sig vinkelrätt mot vågrörelsen, alltså höger/vänster.",
+   "s": 13.15,
+   "e": 20.88
+  },
+  {
+   "t": "En sådan våg kallas transversell.",
+   "s": 20.88,
+   "e": 24.23
+  },
+  {
+   "t": "En enstaka svängning i ett medium kallas puls.",
+   "s": 24.23,
+   "e": 28.09
+  },
+  {
+   "t": "Om flera pulser skickas iväg med en viss frekvens bildas en våg.",
+   "s": 28.09,
+   "e": 33.01
+  },
+  {
+   "t": "En våg där vågtoppar rör sig i en viss riktning kallas för en fortskridande våg.",
+   "s": 33.01,
+   "e": 38.54
+  },
+  {
+   "t": "En våg medför inte någon förflyttning av materia i vågens rörelseriktning.",
+   "s": 38.54,
+   "e": 43.92
+  },
+  {
+   "t": "Däremot resulterar den i en energitransport.",
+   "s": 43.92,
+   "e": 48.06
+  },
+  {
+   "t": "Exempelvis transporterar ljudvågor energi i form av ljud och ljusvågor transporterar energi i form av strålning.",
+   "s": 48.06,
+   "e": 55.8
+  },
+  {
+   "t": "Transversella och longitudinella vågor",
+   "s": 55.8,
+   "e": 59.25
+  },
+  {
+   "t": "Det finns två typer av pulser/vågor: transversella och longitudinella.",
+   "s": 59.25,
+   "e": 64.89
+  },
+  {
+   "t": "Det som skiljer dem åt är utbredningssättet.",
+   "s": 64.89,
+   "e": 68.45
+  },
+  {
+   "t": "En våg där varje del av vågen rör sig vinkelrätt mot vågens utbredningsriktning kallas transversell våg, och då fortplantas pulsen som ett vågberg.",
+   "s": 68.45,
+   "e": 77.79
+  },
+  {
+   "t": "Ett exempel på transversella vågor är vågor i strängar.",
+   "s": 77.79,
+   "e": 82.29
+  },
+  {
+   "t": "En våg där varje del av vågen rör sig i samma längdriktning som vågens utbredningsriktning kallas longitudinell våg, och då fortplantas pulsen som en förtätning efterföljd av en förtunning.",
+   "s": 82.29,
+   "e": 93.31
+  },
+  {
+   "t": "Ett exempel på longitudinella vågor är ljudvågor, vilka består av förtätningar och förtunningar av luften (tryckskillnader).",
+   "s": 93.31,
+   "e": 101.83
+  },
+  {
+   "t": "Fler typer av vågor",
+   "s": 101.83,
+   "e": 104.61
+  },
+  {
+   "t": "Vattenvågor rör sig som en kombination av en transversell våg och longitudinell våg.",
+   "s": 104.61,
+   "e": 110.41
+  },
+  {
+   "t": "En partikel i en vattenvåg rör sig i en cirkelbana.",
+   "s": 110.41,
+   "e": 114.75
+  },
+  {
+   "t": "Ett föremål som flyter på vattenytan rör sig alltså inte med vågen, utan guppar bara runt i en vertikal cirkelbana.",
+   "s": 114.75,
+   "e": 122.28
+  },
+  {
+   "t": "Rayleigh-vågor är ytterligare en sorts våg som rör sig som en kombination av transversell och longitudinell våg.",
+   "s": 122.28,
+   "e": 129.29
+  },
+  {
+   "t": "De uppstår i fasta material, t.ex. i marken vid jordbävningar.",
+   "s": 129.29,
+   "e": 134.66
+  },
+  {
+   "t": "Våglängd, amplitud och fas",
+   "s": 134.66,
+   "e": 138.0
+  },
+  {
+   "t": "Svängningens \"styrka\" kallas amplitud och motsvaras av det kortaste avståndet från jämviktsläget till ett maximum.",
+   "s": 138.0,
+   "e": 145.31
+  },
+  {
+   "t": "Två punkter på en våg som i ett ögonblick befinner sig i motsvarande läge svänger i fas.",
+   "s": 145.31,
+   "e": 151.57
+  },
+  {
+   "t": "Två punkter på en våg som i ett ögonblick befinner sig i helt motsatt läge svänger i motfas.",
+   "s": 151.57,
+   "e": 158.1
+  },
+  {
+   "t": "Utbredningshastighet",
+   "s": 158.1,
+   "e": 160.74
+  },
+  {
+   "t": "Tiden det tar för en del av vågen att utföra en hel svängning kallas periodtid och betecknas T.",
+   "s": 160.74,
+   "e": 174.1
+  },
+  {
+   "t": "Sträckan som en våg rör sig under en period kallas våglängd, betecknas λ (lilla lambda) och har SI-enheten m (meter).",
+   "s": 160.74,
+   "e": 174.1
+  },
+  {
+   "t": "En våglängd kan alltså avläsas som avståndet från ett maximum (vågberg) till nästa maximum.",
+   "s": 174.1,
+   "e": 180.65
+  },
+  {
+   "t": "Antalet svängningar en våg gör per sekund kallas frekvens, betecknas f och har enheten Hz.",
+   "s": 180.65,
+   "e": 189.05
+  },
+  {
+   "t": "Utbredningshastighet hos våg",
+   "s": 180.65,
+   "e": 189.05
+  },
+  {
+   "t": "hastigheten v är lika med våglängden lambda delat med periodtiden T som är lika med frekvensen f gånger lambda",
+   "s": 189.05,
+   "e": 196.5
+  },
+  {
+   "t": "där",
+   "s": 196.5,
+   "e": 198.01
+  },
+  {
+   "t": "v är lika med vågens utbredningshastighet (meter per sekund)",
+   "s": 198.01,
+   "e": 203.18
+  },
+  {
+   "t": "λ är lika med våglängd (meter)",
+   "s": 203.18,
+   "e": 206.41
+  },
+  {
+   "t": "T är lika med periodtid (sekunder)",
+   "s": 206.41,
+   "e": 210.14
+  },
+  {
+   "t": "f är lika med frekvens (hertz)",
+   "s": 210.14,
+   "e": 213.62
+  },
+  {
+   "t": "Härledning — Utbredningshastighet hos våg",
+   "s": 213.62,
+   "e": 217.47
+  },
+  {
+   "t": "Vi ställer upp formeln för hastighet.",
+   "s": 217.47,
+   "e": 220.6
+  },
+  {
+   "t": "hastigheten v är lika med sträckan s delat med tiden t, ekvation 1",
+   "s": 220.6,
+   "e": 226.32
+  },
+  {
+   "t": "En våg rör sig sträckan λ (en våglängd) på tiden T (en periodtid).",
+   "s": 226.32,
+   "e": 232.15
+  },
+  {
+   "t": "Insättning av sträckan s är lika med våglängden lambda och tiden t är lika med periodtiden T i ekvation 1 ger",
+   "s": 232.15,
+   "e": 239.84
+  },
+  {
+   "t": "hastigheten v är lika med våglängden lambda delat med periodtiden T, ekvation 2",
+   "s": 239.84,
+   "e": 246.3
+  },
+  {
+   "t": "vsv.",
+   "s": 246.3,
+   "e": 248.18
+  },
+  {
+   "t": "Sedan tidigare vet vi att periodtiden T är lika med 1 delat med frekvensen f .",
+   "s": 248.18,
+   "e": 253.81
+  },
+  {
+   "t": "Insättning av periodtiden T är lika med 1 delat med frekvensen f i ekvation 2 ger",
+   "s": 253.81,
+   "e": 260.32
+  },
+  {
+   "t": "hastigheten v är lika med våglängden lambda delat med 1 delat med frekvensen f som är lika med f gånger lambda",
+   "s": 260.32,
+   "e": 267.68
+  },
+  {
+   "t": "vsv.",
+   "s": 267.68,
+   "e": 269.56
+  }
+ ]
+}

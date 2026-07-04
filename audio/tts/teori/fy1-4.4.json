@@ -1,0 +1,413 @@
+{
+ "id": "fy1-4.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "31543465d3a3a81abd273c194cbcfbfc2f656e33",
+ "dur": 469.33,
+ "segments": [
+  {
+   "t": "Energiprincipen",
+   "s": 0.1,
+   "e": 2.65
+  },
+  {
+   "t": "Vi har tidigare konstaterat att energi finns i olika former: elektrisk energi, värmeenergi, rörelseenergi, lägesenergi med flera.",
+   "s": 2.6,
+   "e": 12.09
+  },
+  {
+   "t": "Eulers disk",
+   "s": 12.09,
+   "e": 14.24
+  },
+  {
+   "t": "Vi ställer en tjock metalldisk (så kallad \"Eulers disk\") på högkant och snurrar den.",
+   "s": 14.24,
+   "e": 20.02
+  },
+  {
+   "t": "Det den förlorar i lägesenergi övergår till rörelseenergi.",
+   "s": 20.02,
+   "e": 24.9
+  },
+  {
+   "t": "Eftersom friktionen är extremt låg sker omvandlingen långsamt.",
+   "s": 24.9,
+   "e": 29.82
+  },
+  {
+   "t": "Vi hör hur hastigheten på den ökar ju längre ner tyngdpunkten kommer.",
+   "s": 29.82,
+   "e": 34.69
+  },
+  {
+   "t": "Energiprincipen",
+   "s": 34.69,
+   "e": 37.21
+  },
+  {
+   "t": "Energi kan vare sig skapas eller förstöras — bara omvandlas från en form till en annan.",
+   "s": 37.21,
+   "e": 43.0
+  },
+  {
+   "t": "Energiprincipen är en av fysikens grundstenar.",
+   "s": 43.0,
+   "e": 47.3
+  },
+  {
+   "t": "Den innebär att den totala energin i ett slutet system (ett system där ingen energi kan läcka ut) är konstant.",
+   "s": 47.3,
+   "e": 54.79
+  },
+  {
+   "t": "Inom mekaniken har vi två grundläggande energiformer: potentiell energi och kinetisk energi.",
+   "s": 54.79,
+   "e": 61.5
+  },
+  {
+   "t": "Summan av potentiell energi E trycket p och kinetisk energi E k vid en viss tidpunkt kallas mekanisk energi som betecknas E massan m .",
+   "s": 61.5,
+   "e": 70.66
+  },
+  {
+   "t": "Mekanisk energi",
+   "s": 70.66,
+   "e": 73.1
+  },
+  {
+   "t": "E massan m är lika med E trycket p plus E k",
+   "s": 73.1,
+   "e": 77.41
+  },
+  {
+   "t": "där",
+   "s": 77.41,
+   "e": 78.88
+  },
+  {
+   "t": "E massan m är lika med mekanisk energi",
+   "s": 78.88,
+   "e": 82.58
+  },
+  {
+   "t": "E trycket p är lika med potentiell energi",
+   "s": 82.58,
+   "e": 86.42
+  },
+  {
+   "t": "E k är lika med rörelseenergi",
+   "s": 86.42,
+   "e": 89.75
+  },
+  {
+   "t": "Bevarandet av mekanisk energi",
+   "s": 89.75,
+   "e": 93.04
+  },
+  {
+   "t": "Utan energiförluster gäller",
+   "s": 93.04,
+   "e": 96.14
+  },
+  {
+   "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2",
+   "s": 96.14,
+   "e": 101.94
+  },
+  {
+   "t": "där",
+   "s": 101.94,
+   "e": 103.41
+  },
+  {
+   "t": "E trycket p 1 är lika med lägesenergi vid tidpunkt 1",
+   "s": 103.41,
+   "e": 108.08
+  },
+  {
+   "t": "E k 1 är lika med rörelseenergi vid tidpunkt 1",
+   "s": 108.08,
+   "e": 112.6
+  },
+  {
+   "t": "E trycket p 2 är lika med lägesenergi vid tidpunkt 2",
+   "s": 112.6,
+   "e": 117.25
+  },
+  {
+   "t": "E k 2 är lika med rörelseenergi vid tidpunkt 2",
+   "s": 117.25,
+   "e": 121.67
+  },
+  {
+   "t": "Om vi har ett system utan friktionsvärme eller energiförluster är den mekaniska energin konstant vid olika tidpunkter.",
+   "s": 121.67,
+   "e": 129.51
+  },
+  {
+   "t": "Om vi har ett system med friktionsvärme kan värmeenergin E hastigheten v beräknas antingen som skillnaden i mekanisk energi mellan två tidpunkter eller som det arbete som friktionskraften uträttar.",
+   "s": 129.51,
+   "e": 141.36
+  },
+  {
+   "t": "Värmeenergi / friktionsvärme",
+   "s": 141.36,
+   "e": 145.12
+  },
+  {
+   "t": "E hastigheten v är lika med delta E massan m alternativt E v som är lika med F frekvensen f gånger sträckan s",
+   "s": 145.12,
+   "e": 153.19
+  },
+  {
+   "t": "där",
+   "s": 153.19,
+   "e": 154.7
+  },
+  {
+   "t": "E hastigheten v är lika med värmeenergi / friktionsvärme (joule)",
+   "s": 154.7,
+   "e": 160.76
+  },
+  {
+   "t": "delta E massan m är lika med skillnad i mekanisk energi (joule)",
+   "s": 160.76,
+   "e": 166.14
+  },
+  {
+   "t": "F frekvensen f är lika med friktionskraft (newton)",
+   "s": 166.14,
+   "e": 170.96
+  },
+  {
+   "t": "s är lika med sträcka (meter)",
+   "s": 170.96,
+   "e": 174.3
+  },
+  {
+   "t": "Exempel 1 — Brachiosaurus kräks",
+   "s": 174.3,
+   "e": 177.88
+  },
+  {
+   "t": "En 14 meter hög Brachiosaurus kräks.",
+   "s": 177.88,
+   "e": 181.68
+  },
+  {
+   "t": "Med vilken fart kommer spyan slå i marken?",
+   "s": 181.68,
+   "e": 185.41
+  },
+  {
+   "t": "Vi bortser från luftmotståndet och utgår från att spyans utgångshastighet är 0.",
+   "s": 185.41,
+   "e": 191.3
+  },
+  {
+   "t": "Energiprincipen ger",
+   "s": 191.3,
+   "e": 194.07
+  },
+  {
+   "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2",
+   "s": 194.07,
+   "e": 199.76
+  },
+  {
+   "t": "Vi sätter nollnivån vid marken.",
+   "s": 199.76,
+   "e": 202.91
+  },
+  {
+   "t": "Då gäller",
+   "s": 202.91,
+   "e": 204.85
+  },
+  {
+   "t": "massan m gånger tyngdfaktorn g gånger höjden h plus 0 är lika med 0 plus m gånger hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att m gånger g gånger h är lika med m gånger v i kvadrat delat med 2",
+   "s": 204.85,
+   "e": 218.25
+  },
+  {
+   "t": "Dividerar båda led med m och löser sedan ut hastigheten v.",
+   "s": 218.25,
+   "e": 223.01
+  },
+  {
+   "t": "tyngdfaktorn g gånger höjden h är lika med hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v i kvadrat är lika med 2 gånger g gånger h vilket är ekvivalent med att v är lika med roten ur 2 gånger g gånger h",
+   "s": 223.01,
+   "e": 237.07
+  },
+  {
+   "t": "Lägg märke till att massan inte spelar roll för hur fort spyan slår i marken!",
+   "s": 237.07,
+   "e": 242.3
+  },
+  {
+   "t": "tyngdfaktorn g är lika med 9,82 newton per kilogram höjden h som är lika med 14 meter",
+   "s": 242.3,
+   "e": 249.43
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 2 gånger 9,82 gånger 14 som är lika med roten ur 274,96 som är ungefär lika med 16,58 meter per sekund",
+   "s": 249.43,
+   "e": 261.6
+  },
+  {
+   "t": "Svar: 17 meter per sekund (eller ca 60 kilometer i timmen!)",
+   "s": 261.6,
+   "e": 267.31
+  },
+  {
+   "t": "Exempel 2 — Sten från klippan",
+   "s": 267.31,
+   "e": 270.76
+  },
+  {
+   "t": "Du står på en klippa och kastar en sten snett uppåt med farten 14 meter per sekund från en punkt 12 meter över havet.",
+   "s": 270.76,
+   "e": 278.48
+  },
+  {
+   "t": "Med vilken fart kommer den att slå i vattenytan?",
+   "s": 278.48,
+   "e": 282.48
+  },
+  {
+   "t": "Luftmotståndet kan försummas.",
+   "s": 282.48,
+   "e": 285.61
+  },
+  {
+   "t": "Vi sätter nollnivån vid havsytan.",
+   "s": 285.61,
+   "e": 288.96
+  },
+  {
+   "t": "Energiprincipen ger",
+   "s": 288.96,
+   "e": 291.7
+  },
+  {
+   "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2",
+   "s": 291.7,
+   "e": 297.44
+  },
+  {
+   "t": "massan m tyngdfaktorn g h ett plus m v ett i kvadrat delat med 2 är lika med 0 plus m v två i kvadrat delat med 2",
+   "s": 297.44,
+   "e": 306.29
+  },
+  {
+   "t": "Eftersom varje term innehåller m, så dividerar vi med m i båda led.",
+   "s": 306.29,
+   "e": 311.62
+  },
+  {
+   "t": "tyngdfaktorn g h ett plus v ett i kvadrat delat med 2 är lika med v två i kvadrat delat med 2",
+   "s": 311.62,
+   "e": 318.94
+  },
+  {
+   "t": "Vi multiplicerar båda led med 2 för att få bort nämnarna och löser därefter ut v två .",
+   "s": 318.94,
+   "e": 327.13
+  },
+  {
+   "t": "2 tyngdfaktorn g h ett plus v ett i kvadrat är lika med v två i kvadrat vilket är ekvivalent med att v två är lika med roten ur 2 gram h ett plus v ett i kvadrat",
+   "s": 327.08,
+   "e": 338.28
+  },
+  {
+   "t": "tyngdfaktorn g är lika med 9,82 newton per kilogram h ett som är lika med 12 meter v ett som är lika med 14 meter per sekund",
+   "s": 338.28,
+   "e": 347.53
+  },
+  {
+   "t": "v två är lika med roten ur 2 gånger 9,82 gånger 12 plus 14 i kvadrat som är lika med roten ur 431,68 som är lika med 20,776 ldots meter per sekund som är ungefär lika med 21 meter per sekund",
+   "s": 347.53,
+   "e": 363.32
+  },
+  {
+   "t": "Svar: 21 meter per sekund",
+   "s": 363.32,
+   "e": 366.93
+  },
+  {
+   "t": "Exempel 3 — Eddie i backen",
+   "s": 366.93,
+   "e": 370.17
+  },
+  {
+   "t": "Eddie med sin cykel väger 82 kilogram.",
+   "s": 370.17,
+   "e": 373.9
+  },
+  {
+   "t": "Han passerar ett backkrön med farten 10 meter per sekund.",
+   "s": 373.9,
+   "e": 378.41
+  },
+  {
+   "t": "Backen är 20 meter hög.",
+   "s": 378.41,
+   "e": 381.33
+  },
+  {
+   "t": "Farten längst ner är 19 meter per sekund.",
+   "s": 381.33,
+   "e": 385.16
+  },
+  {
+   "t": "Hur mycket energi har blivit friktionsvärme?",
+   "s": 385.16,
+   "e": 388.78
+  },
+  {
+   "t": "Vi kallar friktionsvärmen E hastigheten v .",
+   "s": 388.78,
+   "e": 392.75
+  },
+  {
+   "t": "Energiprincipen ger",
+   "s": 392.75,
+   "e": 395.51
+  },
+  {
+   "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 plus E hastigheten v",
+   "s": 395.51,
+   "e": 402.51
+  },
+  {
+   "t": "massan m tyngdfaktorn g höjden h plus m v ett i kvadrat delat med 2 är lika med 0 plus m v två i kvadrat delat med 2 plus E hastigheten v",
+   "s": 402.51,
+   "e": 412.75
+  },
+  {
+   "t": "Vi löser ut E hastigheten v",
+   "s": 412.75,
+   "e": 416.25
+  },
+  {
+   "t": "E hastigheten v är lika med massan m tyngdfaktorn g höjden h plus m v ett i kvadrat delat med 2 minus m v två i kvadrat delat med 2",
+   "s": 416.25,
+   "e": 426.31
+  },
+  {
+   "t": "massan m är lika med 82 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 20 meter v ett som är lika med 10 meter per sekund v två som är lika med 19 meter per sekund",
+   "s": 426.31,
+   "e": 439.98
+  },
+  {
+   "t": "E hastigheten v är lika med 82 gånger 9,82 gånger 20 plus 82 gånger 10 i kvadrat delat med 2 minus 82 gånger 19 i kvadrat delat med 2 som är lika med 16 104,8 plus 4 100 minus 14 801 som är lika med 5 403,8 joule som är ungefär lika med 5 400 joule som är lika med 5,4 kilojoule",
+   "s": 439.98,
+   "e": 465.83
+  },
+  {
+   "t": "Svar: 5,4 kilojoule",
+   "s": 465.83,
+   "e": 469.33
+  }
+ ]
+}

@@ -32,6 +32,13 @@ node data/teori/build.js
 # delningsförhandsvisning (Facebook/X/LinkedIn) — delningsknapparna pekar dit
 node data/build-nyheter-og.js
 
+# Uppläsning (talsyntes): bygg om manus + ljud efter ändringar i
+# data/teori/*.md, data/nyheter.js eller data/tts/manus-lib.js.
+# Kräver dev-servern på port 8000 och Python 3.12 med edge-tts.
+# Inkrementellt — bara dokument vars manus ändrats genereras om.
+node data/tts/build-manus.js
+python data/tts/generate-audio.py
+
 # Öppna simulering i webbläsare
 start [filnamn].html
 

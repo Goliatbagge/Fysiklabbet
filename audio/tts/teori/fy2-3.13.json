@@ -1,0 +1,163 @@
+{
+ "id": "fy2-3.13",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "756197ea8d0b77c3e8b034b606bc461e406ef0af",
+ "dur": 159.75,
+ "segments": [
+  {
+   "t": "Virvelströmmar",
+   "s": 0.1,
+   "e": 2.34
+  },
+  {
+   "t": "Demonstration — Virvelström i pendel",
+   "s": 2.29,
+   "e": 5.8
+  },
+  {
+   "t": "Vi låter en aluminiumpendel svänga fram och tillbaka.",
+   "s": 5.8,
+   "e": 10.11
+  },
+  {
+   "t": "Därefter lägger vi på ett magnetfält som pendeln ska röra sig genom.",
+   "s": 10.11,
+   "e": 14.95
+  },
+  {
+   "t": "Pendeln stannar av!",
+   "s": 14.95,
+   "e": 17.27
+  },
+  {
+   "t": "Vi byter ut pendeln mot en annan med spår.",
+   "s": 17.27,
+   "e": 20.93
+  },
+  {
+   "t": "Den bromsande effekten blir mindre.",
+   "s": 20.93,
+   "e": 24.1
+  },
+  {
+   "t": "Förklaring: När metallpendeln rör sig i magnetfältet induceras strömmar.",
+   "s": 24.1,
+   "e": 29.9
+  },
+  {
+   "t": "Enligt Lenz lag har strömmarna sådan riktning att pendelrörelsen motverkas.",
+   "s": 29.9,
+   "e": 35.35
+  },
+  {
+   "t": "Virvelströmmarna skapar magnetfält som motverkar plattans rörelse.",
+   "s": 35.35,
+   "e": 40.58
+  },
+  {
+   "t": "I figuren ovan kommer den inducerade strömmen att ge en kraft åt vänster (motverka rörelsen).",
+   "s": 40.58,
+   "e": 47.5
+  },
+  {
+   "t": "Strömmarna som befinner sig i magnetfältet (som är riktat in i planet) blir alltså enligt högerhandsregeln uppåtriktade.",
+   "s": 47.5,
+   "e": 55.27
+  },
+  {
+   "t": "Utanför magnetfältet kan strömmarna röra sig fritt och bildar \"virvlar\", så kallade virvelströmmar.",
+   "s": 55.27,
+   "e": 62.04
+  },
+  {
+   "t": "När vi byter ut pendeln mot en annan med spår kan inte virvelströmmarna virvla lika fritt och därför blir den bromsande effekten då mindre.",
+   "s": 62.04,
+   "e": 70.08
+  },
+  {
+   "t": "Cirkulerande strömmar som enligt Lenz lag motverkar orsaken till dess uppkomst (alltså motverkar rörelse eller ändring av magnetfält) kallas virvelströmmar.",
+   "s": 70.08,
+   "e": 80.04
+  },
+  {
+   "t": "Önskade och oönskade virvelströmmar",
+   "s": 80.04,
+   "e": 83.64
+  },
+  {
+   "t": "Önskade virvelströmmar utnyttjas i:",
+   "s": 83.64,
+   "e": 91.46
+  },
+  {
+   "t": "induktionsspisar (värmer kokkärlets botten genom virvelströmmar),",
+   "s": 83.64,
+   "e": 91.46
+  },
+  {
+   "t": "magnetbromsar vid till exempel \"fritt fall\" på nöjesparker.",
+   "s": 91.46,
+   "e": 95.78
+  },
+  {
+   "t": "Oönskade virvelströmmar finns i växelströmsapparater och ger oönskad värme.",
+   "s": 95.78,
+   "e": 101.19
+  },
+  {
+   "t": "Så fungerar en induktionshäll",
+   "s": 101.19,
+   "e": 104.36
+  },
+  {
+   "t": "Växelström genom en kopparspole i hällen skapar ett växlande magnetfält.",
+   "s": 104.36,
+   "e": 109.66
+  },
+  {
+   "t": "Vägguttagets 50 hertz räcker inte — frekvensen ökas först nästan 1 000 gånger, till närmare 50 kilohertz.",
+   "s": 109.66,
+   "e": 117.42
+  },
+  {
+   "t": "En kastrull ställs på hällen.",
+   "s": 117.42,
+   "e": 120.3
+  },
+  {
+   "t": "Svängningarna i magnetfält inducerar elektriska virvelströmmar i kokkärlets botten.",
+   "s": 120.3,
+   "e": 126.38
+  },
+  {
+   "t": "För att det ska fungera måste metallen \"känna av\" svängningarna — alltså vara magnetisk.",
+   "s": 126.38,
+   "e": 131.8
+  },
+  {
+   "t": "På grund av den så kallade skinneffekten koncentreras virvel­ strömmarna till ett tunt skikt nära metallens yta.",
+   "s": 131.8,
+   "e": 138.61
+  },
+  {
+   "t": "Då ökar det elektriska motståndet, vilket leder till värmeutveckling.",
+   "s": 138.61,
+   "e": 143.79
+  },
+  {
+   "t": "Magnetisk hysteres, ett slags magnetisk tröghet, bidrar också.",
+   "s": 143.79,
+   "e": 149.38
+  },
+  {
+   "t": "Med varje svängning i fältet förändras kokkärlets magnetisering.",
+   "s": 149.38,
+   "e": 154.21
+  },
+  {
+   "t": "Eftersom materialet har en viss tröghet alstrar denna snabba förändring värme.",
+   "s": 154.21,
+   "e": 159.75
+  }
+ ]
+}

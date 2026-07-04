@@ -1,0 +1,263 @@
+{
+ "id": "fy2-2.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7fdef14bb8e7e48f85da58f5498e9a3c935b5b25",
+ "dur": 314.64,
+ "segments": [
+  {
+   "t": "Plan pendel",
+   "s": 0.1,
+   "e": 2.23
+  },
+  {
+   "t": "En kropp som svänger i vertikalplanet utefter en cirkelbåge kallas plan pendel.",
+   "s": 2.17,
+   "e": 7.85
+  },
+  {
+   "t": "Det kan till exempel vara en kula som pendlar fram och tillbaka i ett snöre.",
+   "s": 7.85,
+   "e": 12.88
+  },
+  {
+   "t": "Om vi försummar snörets massa kallas denna idealiserade pendel för matematisk pendel.",
+   "s": 12.88,
+   "e": 18.9
+  },
+  {
+   "t": "Periodtid för matematisk pendel vid små utslag",
+   "s": 18.9,
+   "e": 23.15
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur hävarmen l delat med tyngdfaktorn g",
+   "s": 23.15,
+   "e": 29.27
+  },
+  {
+   "t": "där",
+   "s": 29.27,
+   "e": 30.75
+  },
+  {
+   "t": "T är lika med periodtid (sekunder)",
+   "s": 30.75,
+   "e": 34.42
+  },
+  {
+   "t": "l är lika med pendellängd (meter)",
+   "s": 34.42,
+   "e": 37.92
+  },
+  {
+   "t": "g är lika med tyngdacceleration (m/s i kvadrat) (9,82 meter per sekund i kvadrat i Sverige)",
+   "s": 37.92,
+   "e": 46.36
+  },
+  {
+   "t": "Pendellängden räknas från fästpunkten till den pendlande kroppens tyngdpunkt.",
+   "s": 46.36,
+   "e": 51.65
+  },
+  {
+   "t": "Svängningstiden på en viss plats avgörs alltså enbart av pendellängden — den är oberoende av massan på det som svänger.",
+   "s": 51.65,
+   "e": 59.24
+  },
+  {
+   "t": "Begränsningar för formeln",
+   "s": 59.24,
+   "e": 61.92
+  },
+  {
+   "t": "Formeln gäller bara om:",
+   "s": 61.92,
+   "e": 67.64
+  },
+  {
+   "t": "Snörets massa är försumbar jämfört med kroppens massa. (Annars måste man räkna med tröghetsmomentet.)",
+   "s": 61.92,
+   "e": 71.5
+  },
+  {
+   "t": "Utslagsvinkeln är liten.",
+   "s": 71.5,
+   "e": 74.39
+  },
+  {
+   "t": "Vid 23 grader blir felet ca 1 procent, vid 45 grader ca 4 procent och växer sedan kraftigt.",
+   "s": 74.39,
+   "e": 81.89
+  },
+  {
+   "t": "Pendelrörelsen upphör då också att vara harmonisk.",
+   "s": 81.89,
+   "e": 85.99
+  },
+  {
+   "t": "Härledning — Periodtid i matematisk pendel",
+   "s": 85.99,
+   "e": 89.91
+  },
+  {
+   "t": "Vi tittar på en ögonblicksbild av en pendel med massan m och längden l.",
+   "s": 89.91,
+   "e": 98.69
+  },
+  {
+   "t": "Cirkelbågen från lodlinjen till pendelkulans läge betecknas y.",
+   "s": 89.91,
+   "e": 98.69
+  },
+  {
+   "t": "De krafter som verkar på pendelkulan är spännkraften F S från snöret och tyngden mg.",
+   "s": 98.69,
+   "e": 105.38
+  },
+  {
+   "t": "Luftmotståndet försummas.",
+   "s": 105.38,
+   "e": 108.33
+  },
+  {
+   "t": "Vi ersätter tyngdkraften med två komposanter: en i snörets riktning och en längs tangenten till cirkelbågen.",
+   "s": 108.33,
+   "e": 115.6
+  },
+  {
+   "t": "Krafterna i snörets riktning är vinkelräta mot rörelseriktningen och påverkar därför inte rörelsen.",
+   "s": 115.6,
+   "e": 122.53
+  },
+  {
+   "t": "Rörelsen längs banan bestäms bara av den tangentiella komposanten F ett .",
+   "s": 122.53,
+   "e": 128.35
+  },
+  {
+   "t": "Ur de två likformiga trianglarna i figuren får vi",
+   "s": 128.35,
+   "e": 132.4
+  },
+  {
+   "t": "F ett delat med massan m tyngdfaktorn g är lika med avståndet d delat med hävarmen l vilket är ekvivalent med att F ett är lika med m g gånger d delat med l, ekvation 1",
+   "s": 132.4,
+   "e": 144.99
+  },
+  {
+   "t": "Om svängningens amplitud är mycket mindre än pendellängden l blir vinkeln α liten, och sträckan d blir nästan lika lång som bågen y.",
+   "s": 144.99,
+   "e": 171.11
+  },
+  {
+   "t": "Kontroll vid α är lika med 10 grader:",
+   "s": 144.99,
+   "e": 171.11
+  },
+  {
+   "t": "avståndet d är lika med hävarmen l gånger sinus 10 grader som är ungefär lika med 0,174 gånger l y som är lika med 10 grader delat med 360 grader gånger 2 pi gånger l som är ungefär lika med 0,175 gånger l",
+   "s": 144.99,
+   "e": 171.11
+  },
+  {
+   "t": "Vi ser att d och y nästan blir identiska.",
+   "s": 171.11,
+   "e": 175.25
+  },
+  {
+   "t": "Vid små utslag kan vi därför ersätta d med y i ekvation 1:",
+   "s": 175.25,
+   "e": 187.21
+  },
+  {
+   "t": "F ett är lika med massan m tyngdfaktorn g gånger y delat med hävarmen l som är lika med m g delat med l gånger y",
+   "s": 175.25,
+   "e": 187.21
+  },
+  {
+   "t": "Under dessa förhållanden är den återförande kraften F ett proportionell mot y — precis som i en fjädersvängning.",
+   "s": 187.21,
+   "e": 194.32
+  },
+  {
+   "t": "Proportionalitetskonstanten massan m tyngdfaktorn g delat med hävarmen l spelar samma roll som fjäderkonstanten k.",
+   "s": 194.32,
+   "e": 202.06
+  },
+  {
+   "t": "I uttrycket periodtiden T är lika med 2 pi roten ur massan m delat med k för fjädersvängningar ersätter vi k med massan m tyngdfaktorn g delat med hävarmen l och får",
+   "s": 202.06,
+   "e": 212.97
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur massan m gånger hävarmen l delat med m gånger tyngdfaktorn g som är lika med 2 pi roten ur l delat med g",
+   "s": 212.97,
+   "e": 224.69
+  },
+  {
+   "t": "vsv.",
+   "s": 212.97,
+   "e": 224.69
+  },
+  {
+   "t": "Exempel 1 — Sekundpendeln",
+   "s": 212.97,
+   "e": 224.69
+  },
+  {
+   "t": "Hur lång är en \"sekundpendel\" — en pendel där tiden att gå från det ena vändläget till det andra är 1,00 sekund?",
+   "s": 224.69,
+   "e": 231.82
+  },
+  {
+   "t": "Vi ställer upp formeln för periodtid, kvadrerar båda led och löser ut pendellängden l.",
+   "s": 231.82,
+   "e": 252.41
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur hävarmen l delat med tyngdfaktorn g vilket är ekvivalent med att T i kvadrat är lika med 4 pi i kvadrat gånger l delat med g vilket är ekvivalent med att l är lika med T i kvadrat gånger g delat med 4 pi i kvadrat",
+   "s": 231.82,
+   "e": 252.41
+  },
+  {
+   "t": "periodtiden T är lika med 2,00 sekund tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
+   "s": 252.41,
+   "e": 260.93
+  },
+  {
+   "t": "(Tiden 1,00 sekunder från ena vändläget till det andra motsvarar en halv periodtid, så T är lika med 2,00 sekunder.)",
+   "s": 260.93,
+   "e": 270.1
+  },
+  {
+   "t": "hävarmen l är lika med 2,00 i kvadrat gånger 9,82 delat med 4 pi i kvadrat som är lika med 0,9949 ldots meter som är ungefär lika med 0,995 meter som är lika med 99,5 centimeter",
+   "s": 270.1,
+   "e": 285.39
+  },
+  {
+   "t": "Svar: 99,5 centimeter",
+   "s": 285.39,
+   "e": 289.39
+  },
+  {
+   "t": "Definitionen av 1 meter",
+   "s": 289.54,
+   "e": 292.48
+  },
+  {
+   "t": "På 1500-talet använde man pendellängden hos en sekundpendel som definition för 1 meter, men man upptäckte att inte samma längd gällde vid ekvatorn.",
+   "s": 292.43,
+   "e": 301.68
+  },
+  {
+   "t": "Varför?",
+   "s": 301.68,
+   "e": 303.48
+  },
+  {
+   "t": "Svar: Tyngdaccelerationen g är lite lägre vid ekvatorn på grund av jordklotets tillplattning, så tiden för en pendling blir lite längre där — och pendeln behöver vara kortare för att hålla samma period.",
+   "s": 303.48,
+   "e": 314.64
+  }
+ ]
+}

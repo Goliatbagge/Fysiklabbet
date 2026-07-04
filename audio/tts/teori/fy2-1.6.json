@@ -1,0 +1,623 @@
+{
+ "id": "fy2-1.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "96aa8a171d3f6e37dde48a93f5247ecfd71dfe91",
+ "dur": 755.04,
+ "segments": [
+  {
+   "t": "Kaströrelse",
+   "s": 0.1,
+   "e": 2.15
+  },
+  {
+   "t": "Demonstration — Kast med tennisboll och ballong",
+   "s": 2.1,
+   "e": 5.96
+  },
+  {
+   "t": "Vi kastar en tennisboll och en ballong.",
+   "s": 5.96,
+   "e": 9.31
+  },
+  {
+   "t": "Tennisbollen följer en bågformad bana som är symmetrisk.",
+   "s": 9.31,
+   "e": 13.76
+  },
+  {
+   "t": "Ballongen påbörjar en bågformad bana, men faller sedan rakt ned.",
+   "s": 13.76,
+   "e": 18.69
+  },
+  {
+   "t": "När vi räknar på kaströrelser med formlerna i denna genomgång bortser vi från luftmotstånd.",
+   "s": 18.69,
+   "e": 24.76
+  },
+  {
+   "t": "De fungerar alltså bra på tennisbollar, men inte på ballonger.",
+   "s": 24.76,
+   "e": 29.61
+  },
+  {
+   "t": "När något kastas eller skjuts i en bågformad bana kallas det kaströrelse.",
+   "s": 29.61,
+   "e": 34.98
+  },
+  {
+   "t": "Om vi bortser från luftmotstånd kommer banan att beskriva en kastparabel som är symmetrisk kring sin högsta punkt.",
+   "s": 34.98,
+   "e": 42.1
+  },
+  {
+   "t": "Om vi är på jorden styrs kastbanans utseende av två variabler: utgångshastigheten v noll och vinkeln mot horisontalplanet α — också kallad elevationsvinkel.",
+   "s": 42.1,
+   "e": 51.83
+  },
+  {
+   "t": "För att underlätta beräkningarna delar vi upp rörelsen i två delar: en i x-led och en i y-led.",
+   "s": 51.83,
+   "e": 58.79
+  },
+  {
+   "t": "Om vi bortser från luftmotståndet är hastigheten i x-led konstant, medan accelerationen i y-led är a är lika med −g.",
+   "s": 58.79,
+   "e": 67.24
+  },
+  {
+   "t": "Lägg märke till att hastighetsvektorn i x-led ( v 0 x ) är densamma under hela rörelsen.",
+   "s": 67.24,
+   "e": 73.91
+  },
+  {
+   "t": "Hastighetsvektorn i y-led ( v y ) ändras kontinuerligt på grund av tyngdaccelerationen.",
+   "s": 73.91,
+   "e": 80.47
+  },
+  {
+   "t": "Den resulterande hastighetsvektorn v är resultanten av dessa två.",
+   "s": 80.47,
+   "e": 85.56
+  },
+  {
+   "t": "Kaströrelse i x- och y-led",
+   "s": 85.56,
+   "e": 88.8
+  },
+  {
+   "t": "I x-led ( a x är lika med 0 ):",
+   "s": 88.8,
+   "e": 96.05
+  },
+  {
+   "t": "v x är lika med v noll gånger cosinus alfa",
+   "s": 88.8,
+   "e": 96.05
+  },
+  {
+   "t": "x är lika med v noll gånger cosinus alfa gånger tiden t",
+   "s": 96.05,
+   "e": 101.26
+  },
+  {
+   "t": "I y-led ( a y är lika med minus tyngdfaktorn g ):",
+   "s": 101.26,
+   "e": 117.69
+  },
+  {
+   "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t",
+   "s": 101.26,
+   "e": 117.69
+  },
+  {
+   "t": "y är lika med v noll gånger sinus alfa gånger tiden t minus tyngdfaktorn g gånger t i kvadrat delat med 2",
+   "s": 101.26,
+   "e": 117.69
+  },
+  {
+   "t": "Fart i kaströrelsen:",
+   "s": 117.69,
+   "e": 125.53
+  },
+  {
+   "t": "hastigheten v är lika med roten ur v x i kvadrat plus v y i kvadrat",
+   "s": 117.69,
+   "e": 125.53
+  },
+  {
+   "t": "där",
+   "s": 125.53,
+   "e": 127.04
+  },
+  {
+   "t": "a x, y är lika med acceleration i x-/y-led (m/s i kvadrat)",
+   "s": 127.04,
+   "e": 134.65
+  },
+  {
+   "t": "v x, y är lika med hastighet i x-/y-led (meter per sekund)",
+   "s": 134.65,
+   "e": 141.28
+  },
+  {
+   "t": "x, y är lika med läge i x-/y-led (meter)",
+   "s": 141.28,
+   "e": 146.8
+  },
+  {
+   "t": "v noll är lika med utgångshastighet (meter per sekund)",
+   "s": 146.8,
+   "e": 151.64
+  },
+  {
+   "t": "α är lika med vinkel mot horisontalplanet",
+   "s": 151.64,
+   "e": 155.49
+  },
+  {
+   "t": "t är lika med tid (sekunder)",
+   "s": 155.49,
+   "e": 158.75
+  },
+  {
+   "t": "v är lika med fart i kaströrelse (meter per sekund)",
+   "s": 158.75,
+   "e": 163.45
+  },
+  {
+   "t": "Härledning — Kaströrelse i x- och y-led",
+   "s": 163.45,
+   "e": 167.41
+  },
+  {
+   "t": "Vi börjar med att repetera några formler för rörelse från Fysik nivå 1:",
+   "s": 167.41,
+   "e": 178.4
+  },
+  {
+   "t": "Vid konstant hastighet:",
+   "s": 167.41,
+   "e": 178.4
+  },
+  {
+   "t": "sträckan s är lika med hastigheten v gånger tiden t, ekvation 1",
+   "s": 167.41,
+   "e": 178.4
+  },
+  {
+   "t": "Vid konstant acceleration:",
+   "s": 178.4,
+   "e": 186.81
+  },
+  {
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t, ekvation 2",
+   "s": 178.4,
+   "e": 186.81
+  },
+  {
+   "t": "sträckan s är lika med v noll gånger tiden t plus accelerationen a gånger t i kvadrat delat med 2, ekvation 3",
+   "s": 186.81,
+   "e": 195.46
+  },
+  {
+   "t": "I x-led: Inga krafter verkar (eftersom vi bortser från luftmotstånd), vilket betyder att accelerationen är a x är lika med 0 .",
+   "s": 195.46,
+   "e": 204.04
+  },
+  {
+   "t": "Då är hastigheten i x-led konstant.",
+   "s": 204.04,
+   "e": 207.78
+  },
+  {
+   "t": "Med trigonometri i Figur 1 ser vi att",
+   "s": 207.78,
+   "e": 211.6
+  },
+  {
+   "t": "v x är lika med v 0 x som är lika med v noll gånger cosinus alfa",
+   "s": 211.6,
+   "e": 217.78
+  },
+  {
+   "t": "Läget i x-led skrivs x och fås genom att multiplicera den konstanta hastigheten med tiden, enligt formel ekvation 1:",
+   "s": 217.78,
+   "e": 231.46
+  },
+  {
+   "t": "x är lika med v x gånger tiden t som är lika med v noll gånger cosinus alfa gånger t",
+   "s": 217.78,
+   "e": 231.46
+  },
+  {
+   "t": "I y-led: Endast tyngdkraften verkar.",
+   "s": 231.46,
+   "e": 235.51
+  },
+  {
+   "t": "Den ger upphov till en tyngdacceleration vars storlek på jorden är tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat .",
+   "s": 235.51,
+   "e": 244.62
+  },
+  {
+   "t": "Om vi definierar positiv riktning uppåt är accelerationen a y är lika med minus tyngdfaktorn g .",
+   "s": 244.62,
+   "e": 252.03
+  },
+  {
+   "t": "Eftersom accelerationen är konstant varierar hastigheten i y-led med tiden enligt formel ekvation 2.",
+   "s": 252.03,
+   "e": 259.09
+  },
+  {
+   "t": "Utgångshastigheten i y-led är v 0 y är lika med v noll gånger sinus alfa , vilket ger",
+   "s": 259.09,
+   "e": 266.07
+  },
+  {
+   "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t",
+   "s": 266.07,
+   "e": 284.52
+  },
+  {
+   "t": "Läget i y-led fås från formel ekvation 3 med accelerationen a är lika med minus tyngdfaktorn g :",
+   "s": 266.07,
+   "e": 284.52
+  },
+  {
+   "t": "y är lika med v noll gånger sinus alfa gånger tiden t minus tyngdfaktorn g gånger t i kvadrat delat med 2",
+   "s": 266.07,
+   "e": 284.52
+  },
+  {
+   "t": "vsv.",
+   "s": 284.52,
+   "e": 288.46
+  },
+  {
+   "t": "Härledning — Fart i kaströrelse",
+   "s": 284.52,
+   "e": 288.46
+  },
+  {
+   "t": "Vi studerar den rätvinkliga triangel som bildas av komposanterna v x och v y tillsammans med resultanten v.",
+   "s": 288.46,
+   "e": 296.36
+  },
+  {
+   "t": "Pythagoras sats ger",
+   "s": 296.36,
+   "e": 299.16
+  },
+  {
+   "t": "hastigheten v i kvadrat är lika med v x i kvadrat plus v y i kvadrat vilket är ekvivalent med att v är lika med roten ur v x i kvadrat plus v y i kvadrat",
+   "s": 299.16,
+   "e": 312.48
+  },
+  {
+   "t": "vsv.",
+   "s": 312.43,
+   "e": 314.28
+  },
+  {
+   "t": "Hur lång en kaströrelse är kallas kastvidd.",
+   "s": 314.28,
+   "e": 318.14
+  },
+  {
+   "t": "Högsta höjden i en kaströrelse kallas stighöjd.",
+   "s": 318.14,
+   "e": 322.2
+  },
+  {
+   "t": "Kastvidd och stighöjd",
+   "s": 322.2,
+   "e": 324.84
+  },
+  {
+   "t": "x \\max är lika med v noll i kvadrat gånger sinus parentesen 2 alfa slut parentes delat med tyngdfaktorn g parentesen upphöjt till * slut parentes",
+   "s": 324.84,
+   "e": 336.38
+  },
+  {
+   "t": "y \\max är lika med v noll i kvadrat gånger sinus i kvadrat parentesen alfa slut parentes delat med 2 tyngdfaktorn g",
+   "s": 336.38,
+   "e": 346.0
+  },
+  {
+   "t": "där",
+   "s": 346.0,
+   "e": 347.52
+  },
+  {
+   "t": "x \\max är lika med kastvidd (meter) — förutsatt att rörelsen startar och slutar i samma horisontalplan",
+   "s": 347.52,
+   "e": 355.97
+  },
+  {
+   "t": "y \\max är lika med stighöjd (meter)",
+   "s": 355.97,
+   "e": 360.86
+  },
+  {
+   "t": "v noll är lika med utgångshastighet (meter per sekund)",
+   "s": 360.86,
+   "e": 365.69
+  },
+  {
+   "t": "α är lika med elevationsvinkel",
+   "s": 365.69,
+   "e": 368.7
+  },
+  {
+   "t": "g är lika med tyngdacceleration (m/s i kvadrat) (≈ 9,82 meter per sekund i kvadrat i Sverige)",
+   "s": 368.7,
+   "e": 377.13
+  },
+  {
+   "t": "Exempel 1 — Elin sparkar en boll",
+   "s": 377.13,
+   "e": 380.48
+  },
+  {
+   "t": "Elin sparkar en boll med hastigheten 15 meter per sekund och vinkeln 50 grader mot marken.",
+   "s": 380.48,
+   "e": 386.81
+  },
+  {
+   "t": "a) Efter hur lång tid når den sin högsta höjd?",
+   "s": 386.81,
+   "e": 390.92
+  },
+  {
+   "t": "b) Bestäm maximala höjden.",
+   "s": 390.92,
+   "e": 394.25
+  },
+  {
+   "t": "c) Hur lång blir sparken?",
+   "s": 394.25,
+   "e": 397.43
+  },
+  {
+   "t": "d) Med vilken fart slår den i marken?",
+   "s": 397.43,
+   "e": 401.44
+  },
+  {
+   "t": "a) Vi utnyttjar att hastigheten i y-led v y i högsta punkten är 0.",
+   "s": 401.44,
+   "e": 407.38
+  },
+  {
+   "t": "Vi ställer upp formeln för hastigheten i y-led och löser ut tiden t.",
+   "s": 407.38,
+   "e": 422.31
+  },
+  {
+   "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t vilket är ekvivalent med att t är lika med v noll gånger sinus alfa minus v y delat med g",
+   "s": 407.38,
+   "e": 422.31
+  },
+  {
+   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader v y som är lika med 0 tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
+   "s": 422.31,
+   "e": 433.23
+  },
+  {
+   "t": "tiden t är lika med 15 gånger sinus 50 grader minus 0 delat med 9,82 som är lika med 1,170 ldots sekund som är ungefär lika med 1,2 sekund",
+   "s": 433.23,
+   "e": 444.56
+  },
+  {
+   "t": "Svar: 1,2 sekunder",
+   "s": 444.56,
+   "e": 447.74
+  },
+  {
+   "t": "b) Vi använder formeln för stighöjd.",
+   "s": 447.74,
+   "e": 451.62
+  },
+  {
+   "t": "y \\max är lika med v noll i kvadrat gånger sinus i kvadrat parentesen alfa slut parentes delat med 2 tyngdfaktorn g",
+   "s": 451.62,
+   "e": 469.03
+  },
+  {
+   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
+   "s": 451.62,
+   "e": 469.03
+  },
+  {
+   "t": "y \\max är lika med 15 i kvadrat gånger sinus i kvadrat parentesen 50 grader slut parentes delat med 2 gånger 9,82 som är lika med 6,722 ldots meter som är ungefär lika med 6,7 meter",
+   "s": 469.03,
+   "e": 484.14
+  },
+  {
+   "t": "Svar: 6,7 meter",
+   "s": 484.14,
+   "e": 487.38
+  },
+  {
+   "t": "c) Eftersom bollen startar och slutar i samma horisontalplan, kan vi använda formeln för kastvidd.",
+   "s": 487.38,
+   "e": 494.43
+  },
+  {
+   "t": "x \\max är lika med v noll i kvadrat gånger sinus parentesen 2 alfa slut parentes delat med tyngdfaktorn g som är lika med 15 i kvadrat gånger sinus parentesen 2 gånger 50 grader slut parentes delat med 9,82 som är lika med 22,564 ldots meter som är ungefär lika med 23 meter",
+   "s": 494.43,
+   "e": 514.47
+  },
+  {
+   "t": "Svar: 23 meter",
+   "s": 514.47,
+   "e": 517.43
+  },
+  {
+   "t": "d) Vi ställer upp formeln för fart i kaströrelse.",
+   "s": 517.43,
+   "e": 521.74
+  },
+  {
+   "t": "hastigheten v är lika med roten ur v x i kvadrat plus v y i kvadrat, ekvation 1",
+   "s": 521.74,
+   "e": 528.99
+  },
+  {
+   "t": "Eftersom bollen når sin högsta höjd efter 1,170… sekunder slår den i marken efter dubbla tiden, dvs. tiden t är lika med 2 gånger 1,170 ldots som är lika med 2,340 ldots s.",
+   "s": 528.99,
+   "e": 543.08
+  },
+  {
+   "t": "Vi bestämmer v x och v y vid nedslaget.",
+   "s": 543.08,
+   "e": 547.37
+  },
+  {
+   "t": "v noll är lika med 15 meter per sekund alfa som är lika med 50 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat tiden t som är lika med 2,340 ldots sekund",
+   "s": 547.37,
+   "e": 559.96
+  },
+  {
+   "t": "v x är lika med v noll gånger cosinus alfa som är lika med 15 gånger cosinus 50 grader som är lika med 9,641 ldots meter per sekund",
+   "s": 559.96,
+   "e": 570.63
+  },
+  {
+   "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t som är lika med 15 gånger sinus 50 grader minus 9,82 gånger 2,340 ldots som är lika med minus 11,488 ldots meter per sekund",
+   "s": 570.63,
+   "e": 586.71
+  },
+  {
+   "t": "Insättning i ekvation 1:",
+   "s": 586.71,
+   "e": 606.46
+  },
+  {
+   "t": "hastigheten v är lika med roten ur parentesen 9,641 ldots slut parentes i kvadrat plus parentesen minus 11,488 ldots slut parentes i kvadrat som är lika med 14,997 ldots meter per sekund som är ungefär lika med 15 meter per sekund",
+   "s": 586.71,
+   "e": 606.46
+  },
+  {
+   "t": "Svar: 15 meter per sekund",
+   "s": 606.46,
+   "e": 609.9
+  },
+  {
+   "t": "Observation — symmetri kring kastparabeln",
+   "s": 609.9,
+   "e": 613.68
+  },
+  {
+   "t": "Bollen slår i marken med samma fart som den hade vid utkastet (15 meter per sekund).",
+   "s": 613.68,
+   "e": 619.92
+  },
+  {
+   "t": "När något startar och slutar i samma horisontalplan är sluthastigheten lika stor som starthastigheten.",
+   "s": 619.92,
+   "e": 626.93
+  },
+  {
+   "t": "Detta är värt att tänka på vid t.ex. \"ceremonial gunfires\" — skott som skjuts rakt upp i luften kommer att landa med samma fart som de avlossades.",
+   "s": 626.93,
+   "e": 637.39
+  },
+  {
+   "t": "Exempel 2 — Kast från höjd",
+   "s": 637.34,
+   "e": 640.59
+  },
+  {
+   "t": "En liten boll kastas med utgångshastigheten 25 meter per sekund och vinkeln 40 grader.",
+   "s": 640.59,
+   "e": 646.97
+  },
+  {
+   "t": "Bollen släpps vid höjden 1,6 meter.",
+   "s": 646.97,
+   "e": 650.75
+  },
+  {
+   "t": "Hur långt blir kastet?",
+   "s": 650.75,
+   "e": 653.46
+  },
+  {
+   "t": "Vi ställer upp formeln för läge i x-led.",
+   "s": 653.46,
+   "e": 657.04
+  },
+  {
+   "t": "x är lika med v noll gånger cosinus alfa gånger tiden t, ekvation 1",
+   "s": 657.04,
+   "e": 663.19
+  },
+  {
+   "t": "Vi behöver tiden det tar för bollen att landa.",
+   "s": 663.19,
+   "e": 666.97
+  },
+  {
+   "t": "Om vi sätter origo vid kastets utgångshöjd, slår bollen i marken då y är lika med −1,6 meter.",
+   "s": 666.97,
+   "e": 674.14
+  },
+  {
+   "t": "Vi ställer upp formeln för bollens läge i y-led och löser ekvationen.",
+   "s": 674.14,
+   "e": 679.11
+  },
+  {
+   "t": "y är lika med v noll gånger sinus alfa gånger tiden t minus tyngdfaktorn g gånger t i kvadrat delat med 2",
+   "s": 679.11,
+   "e": 687.14
+  },
+  {
+   "t": "y är lika med minus 1,6 meter v noll som är lika med 25 meter per sekund alfa som är lika med 40 grader tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
+   "s": 687.14,
+   "e": 698.96
+  },
+  {
+   "t": "minus 1,6 är lika med 25 gånger sinus 40 grader gånger tiden t minus 9,82 gånger t i kvadrat delat med 2",
+   "s": 698.96,
+   "e": 708.5
+  },
+  {
+   "t": "Detta är en andragradsekvation.",
+   "s": 708.5,
+   "e": 711.74
+  },
+  {
+   "t": "Vi kan lösa den med pq-formeln, men det går lika bra med ett tekniskt hjälpmedel (t.ex. Geogebras CAS-läge).",
+   "s": 711.74,
+   "e": 719.6
+  },
+  {
+   "t": "Lösningarna är tiden t är ungefär lika med minus 0,097 sekunder och tiden t är ungefär lika med 3,369 sekunder.",
+   "s": 719.6,
+   "e": 729.1
+  },
+  {
+   "t": "Vi bortser från den negativa lösningen.",
+   "s": 729.1,
+   "e": 732.57
+  },
+  {
+   "t": "Insättning av tiden t är lika med 3,369 ldots s i ekvation 1 ger",
+   "s": 732.57,
+   "e": 739.57
+  },
+  {
+   "t": "x är lika med 25 gånger cosinus 40 grader gånger 3,369 ldots som är lika med 64,530 ldots meter som är ungefär lika med 65 meter",
+   "s": 739.57,
+   "e": 751.85
+  },
+  {
+   "t": "Svar: 65 meter",
+   "s": 751.85,
+   "e": 755.04
+  }
+ ]
+}

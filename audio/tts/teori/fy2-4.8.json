@@ -1,0 +1,258 @@
+{
+ "id": "fy2-4.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a444e78dd193047b15617945be29378140fb48ed",
+ "dur": 438.77,
+ "segments": [
+  {
+   "t": "Bohrs atommodell och energinivåer",
+   "s": 0.1,
+   "e": 3.58
+  },
+  {
+   "t": "Enligt Bohrs atommodell befinner sig elektroner i banor som representerar olika energitillstånd och det är dessa som ger det unika spektrumet för ett grundämne.",
+   "s": 3.52,
+   "e": 12.97
+  },
+  {
+   "t": "När en elektron deexciteras (byter till en bana med lägre energi) emitteras (sänds det ut) en foton med en energi som motsvarar minskningen i elektronens lägesenergi.",
+   "s": 12.97,
+   "e": 24.32
+  },
+  {
+   "t": "När elektronen faller från nivå 2 till nivå 1 sänds en foton ut med en energi som motsvarar skillnaden mellan nivåerna.",
+   "s": 24.32,
+   "e": 32.27
+  },
+  {
+   "t": "Energi vid kvantsprång",
+   "s": 32.27,
+   "e": 34.95
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med E n minus E massan m",
+   "s": 34.95,
+   "e": 41.08
+  },
+  {
+   "t": "alternativt",
+   "s": 34.95,
+   "e": 41.08
+  },
+  {
+   "t": "höjden h gånger c delat med våglängden lambda är lika med E n minus E massan m",
+   "s": 41.08,
+   "e": 47.62
+  },
+  {
+   "t": "där",
+   "s": 47.62,
+   "e": 49.12
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med h gånger c delat med våglängden lambda är lika med energi hos utsänd foton (joule)",
+   "s": 49.12,
+   "e": 57.75
+  },
+  {
+   "t": "h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js (Plancks konstant)",
+   "s": 57.75,
+   "e": 65.9
+  },
+  {
+   "t": "f är lika med ljusets frekvens (hertz)",
+   "s": 65.9,
+   "e": 69.74
+  },
+  {
+   "t": "c är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund (ljusets hastighet i vakuum)",
+   "s": 69.74,
+   "e": 78.56
+  },
+  {
+   "t": "E n är lika med energin på den högre energinivån (joule)",
+   "s": 78.56,
+   "e": 83.86
+  },
+  {
+   "t": "E massan m är lika med energin på den lägre energinivån (joule)",
+   "s": 83.86,
+   "e": 89.26
+  },
+  {
+   "t": "Atomens lägsta energitillstånd, då elektronen befinner sig i den innersta tillåtna banan närmast kärnan, kallas grundtillstånd.",
+   "s": 89.26,
+   "e": 97.79
+  },
+  {
+   "t": "Om elektronen absorberar energin och exciteras (lägger sig på en bana ovanför grundtillståndet) kallas det för ett exciterat tillstånd.",
+   "s": 97.79,
+   "e": 106.59
+  },
+  {
+   "t": "Den energi som krävs för att frigöra en elektron helt från kärnan kallas jonisationsenergi.",
+   "s": 106.59,
+   "e": 113.33
+  },
+  {
+   "t": "För väteatomen är jonisationsenergin 13,6 elektronvolt ovanför grundtillståndet.",
+   "s": 113.33,
+   "e": 120.33
+  },
+  {
+   "t": "Dessa tillstånd åskådliggörs i energinivådiagram där jonisationsgränsen är vald till nollnivå för atomens energi.",
+   "s": 120.33,
+   "e": 128.39
+  },
+  {
+   "t": "Alla energitillstånd där elektronen är bunden till kärnan får då negativa värden.",
+   "s": 128.39,
+   "e": 134.01
+  },
+  {
+   "t": "Väteatomens energinivåer",
+   "s": 134.01,
+   "e": 137.1
+  },
+  {
+   "t": "E n är ungefär lika med minus 13,6 delat med n i kvadrat elektronvolt",
+   "s": 137.1,
+   "e": 143.65
+  },
+  {
+   "t": "där",
+   "s": 143.65,
+   "e": 145.16
+  },
+  {
+   "t": "E n är lika med energi vid energinivå n",
+   "s": 145.16,
+   "e": 157.07
+  },
+  {
+   "t": "n är lika med energinivå (n är lika med 1 motsvarar grundtillståndet, n är lika med 2 första exciterade tillståndet osv.)",
+   "s": 145.16,
+   "e": 157.07
+  },
+  {
+   "t": "Energinivådiagram för väte.",
+   "s": 157.07,
+   "e": 160.15
+  },
+  {
+   "t": "Lyman-serien slutar på n är lika med 1 (UV), Balmer-serien på n är lika med 2 (synligt ljus — pilarna är ritade i sina spektralfärger) och Paschen-serien på n är lika med 3 (IR).",
+   "s": 160.15,
+   "e": 172.85
+  },
+  {
+   "t": "Exempel 1 — Utsänt ljus när väte deexciteras från n är lika med 3",
+   "s": 172.85,
+   "e": 178.5
+  },
+  {
+   "t": "En elektron i en väteatom exciteras till energinivå 3 för att sedan deexciteras.",
+   "s": 178.5,
+   "e": 184.79
+  },
+  {
+   "t": "Använd energinivådiagrammet ovan och avgör:",
+   "s": 184.79,
+   "e": 192.94
+  },
+  {
+   "t": "a) vilken av linjerna som ger kortast våglängd på det utsända ljuset",
+   "s": 184.79,
+   "e": 192.94
+  },
+  {
+   "t": "b) vilka våglängder som är möjliga att sända ut.",
+   "s": 192.94,
+   "e": 197.3
+  },
+  {
+   "t": "a) Linjen som motsvarar det största energimässiga hoppet kommer också att sända ut det ljus som har störst energi och därmed kortast våglängd, alltså linjen från n är lika med 3 till n är lika med 1.",
+   "s": 197.3,
+   "e": 209.59
+  },
+  {
+   "t": "Svar: Linjen som går från energinivå 3 till energinivå 1.",
+   "s": 209.59,
+   "e": 215.14
+  },
+  {
+   "t": "b) Vi löser ut våglängden λ från formeln för fotonens energi",
+   "s": 215.14,
+   "e": 220.21
+  },
+  {
+   "t": "energin E är lika med höjden h gånger c delat med våglängden lambda vilket är ekvivalent med att lambda är lika med h gånger c delat med E",
+   "s": 220.21,
+   "e": 229.45
+  },
+  {
+   "t": "Vi behöver bestämma energin E hos den utsända fotonen med formeln för energi vid olika kvantsprång energin E är lika med E n minus E massan m .",
+   "s": 229.45,
+   "e": 239.15
+  },
+  {
+   "t": "Två kombinationer av hopp är möjliga: från nivå 3 direkt till nivå 1 (en foton) respektive från nivå 3 till nivå 2 och sedan vidare från nivå 2 till nivå 1 (två fotoner).",
+   "s": 239.15,
+   "e": 251.41
+  },
+  {
+   "t": "Vi läser av energinivåerna från diagrammet ovan.",
+   "s": 251.41,
+   "e": 256.0
+  },
+  {
+   "t": "Hopp 3 ger 1:",
+   "s": 256.0,
+   "e": 292.99
+  },
+  {
+   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E ett som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 13,6 slut parentes som är lika med 12,09 elektronvolt som är lika med 12,09 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,936 ldots gånger 10 upphöjt till minus 18 joule",
+   "s": 256.0,
+   "e": 292.99
+  },
+  {
+   "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 1,936 ldots gånger 10 upphöjt till minus 18 som är lika med 1,0256 ldots gånger 10 upphöjt till minus 7 meter som är ungefär lika med 103 nanometer",
+   "s": 292.99,
+   "e": 316.16
+  },
+  {
+   "t": "Hopp 3 ger 2:",
+   "s": 316.11,
+   "e": 351.77
+  },
+  {
+   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E tre minus E två som är lika med parentesen minus 1,51 slut parentes minus parentesen minus 3,40 slut parentes som är lika med 1,89 elektronvolt som är lika med 1,89 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 3,027 ldots gånger 10 upphöjt till minus 19 joule",
+   "s": 316.11,
+   "e": 351.77
+  },
+  {
+   "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 3,027 ldots gånger 10 upphöjt till minus 19 som är lika med 6,5608 ldots gånger 10 upphöjt till minus 7 meter som är ungefär lika med 656 nanometer",
+   "s": 351.77,
+   "e": 373.0
+  },
+  {
+   "t": "Hopp 2 ger 1:",
+   "s": 373.0,
+   "e": 407.32
+  },
+  {
+   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund energin E som är lika med E två minus E ett som är lika med minus 3,40 minus parentesen minus 13,6 slut parentes som är lika med 10,2 elektronvolt som är lika med 10,2 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 1,634 ldots gånger 10 upphöjt till minus 18 joule",
+   "s": 373.0,
+   "e": 407.32
+  },
+  {
+   "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 1,634 ldots gånger 10 upphöjt till minus 18 som är lika med 1,215 ldots gånger 10 upphöjt till minus 7 meter som är ungefär lika med 122 nanometer",
+   "s": 407.32,
+   "e": 428.57
+  },
+  {
+   "t": "Svar: 103 nanometer (UV) eller 656 nanometer (synligt rött) och 122 nanometer (UV).",
+   "s": 428.57,
+   "e": 438.77
+  }
+ ]
+}

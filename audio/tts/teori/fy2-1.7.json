@@ -1,0 +1,198 @@
+{
+ "id": "fy2-1.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d15dc2c9faddf49629f189fcb24591a2444e2f21",
+ "dur": 270.88,
+ "segments": [
+  {
+   "t": "Räkneexempel — Den fatala gungan",
+   "s": 0.1,
+   "e": 3.55
+  },
+  {
+   "t": "Detta är ett klassiskt räkneexempel som kombinerar cirkulär rörelse (centripetalkraft, spännkraft) med energiprincipen (omvandling mellan lägesenergi och rörelseenergi).",
+   "s": 3.5,
+   "e": 15.53
+  },
+  {
+   "t": "Den fatala gungan",
+   "s": 15.53,
+   "e": 18.01
+  },
+  {
+   "t": "En person som gungar släpps med tyngdpunkten 1,0 meter ovanför tyngdpunkten i lägsta delen av banan.",
+   "s": 18.01,
+   "e": 25.06
+  },
+  {
+   "t": "Banradien är 2,5 meter och massan hos person och gungsits tillsammans är 80 kilogram.",
+   "s": 25.06,
+   "e": 31.61
+  },
+  {
+   "t": "a) Bestäm sträckkraften i repet i den lägsta delen av banan.",
+   "s": 31.61,
+   "e": 36.62
+  },
+  {
+   "t": "b) Anta att vi puttar gungan så att den åker runt ett helt varv.",
+   "s": 36.62,
+   "e": 41.9
+  },
+  {
+   "t": "Räkna ut minsta hastigheten i det övre läget om repet inte ska slakna.",
+   "s": 41.9,
+   "e": 47.42
+  },
+  {
+   "t": "a) Gungan utgör en del av en cirkelrörelse, vilket medför att det längst ner i banan finns en centripetalkraft uppåt, in mot centrum.",
+   "s": 47.42,
+   "e": 56.39
+  },
+  {
+   "t": "I banans lägsta punkt verkar två krafter på gungsitsen: en tyngdkraft F G nedåt och en spännkraft i repet F S uppåt.",
+   "s": 56.39,
+   "e": 64.83
+  },
+  {
+   "t": "Centripetalkraften F C är resultanten av dessa två krafter.",
+   "s": 64.83,
+   "e": 69.88
+  },
+  {
+   "t": "Eftersom centripetalkraften är riktad in mot centrum måste F S är större än F G .",
+   "s": 69.88,
+   "e": 76.17
+  },
+  {
+   "t": "Vi ställer upp sambandet mellan krafterna och löser ut F S .",
+   "s": 76.17,
+   "e": 80.96
+  },
+  {
+   "t": "F C är lika med F S minus F G vilket är ekvivalent med att F S är lika med F C plus F G",
+   "s": 80.96,
+   "e": 95.75
+  },
+  {
+   "t": "Insättning av F C är lika med massan m hastigheten v i kvadrat delat med r och F G är lika med massan m gånger tyngdfaktorn g ger",
+   "s": 80.96,
+   "e": 95.75
+  },
+  {
+   "t": "F S är lika med massan m hastigheten v i kvadrat delat med r plus m gånger tyngdfaktorn g, ekvation 1",
+   "s": 95.75,
+   "e": 103.69
+  },
+  {
+   "t": "Vi behöver beräkna hastigheten v i nedersta delen av banan.",
+   "s": 103.69,
+   "e": 108.35
+  },
+  {
+   "t": "Vi gör det med energiprincipen — lägesenergin E trycket p omvandlas till rörelseenergi E k .",
+   "s": 108.35,
+   "e": 115.33
+  },
+  {
+   "t": "E trycket p är lika med E k vilket är ekvivalent med att massan m gånger tyngdfaktorn g gånger höjden h är lika med m gånger hastigheten v i kvadrat delat med 2",
+   "s": 115.33,
+   "e": 125.59
+  },
+  {
+   "t": "Vi dividerar båda led med m och löser ut hastigheten v.",
+   "s": 125.59,
+   "e": 130.2
+  },
+  {
+   "t": "tyngdfaktorn g gånger höjden h är lika med hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v i kvadrat är lika med 2 gånger g gånger h vilket är ekvivalent med att v är lika med roten ur 2 gånger g gånger h",
+   "s": 130.2,
+   "e": 154.34
+  },
+  {
+   "t": "Insättning av tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat och höjden h är lika med 1,0 meter (tyngdpunkten \"faller\" 1,0 meter) ger",
+   "s": 130.2,
+   "e": 154.34
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 2 gånger 9,82 gånger 1,0 som är lika med 4,431 ldots meter per sekund",
+   "s": 154.34,
+   "e": 164.11
+  },
+  {
+   "t": "Nu kan vi beräkna spännkraften F S .",
+   "s": 164.11,
+   "e": 167.97
+  },
+  {
+   "t": "massan m är lika med 80 kilogram hastigheten v som är lika med 4,431 ldots meter per sekund r som är lika med 2,5 meter tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
+   "s": 167.97,
+   "e": 181.51
+  },
+  {
+   "t": "i ekvation 1 ger",
+   "s": 181.51,
+   "e": 184.31
+  },
+  {
+   "t": "F S är lika med 80 gånger 4,431 ldots i kvadrat delat med 2,5 plus 80 gånger 9,82 som är lika med 1414,08 newton som är ungefär lika med 1 400 newton som är lika med 1,4 kilonewton",
+   "s": 184.31,
+   "e": 201.11
+  },
+  {
+   "t": "Svar: 1,4 kilonewton",
+   "s": 201.11,
+   "e": 204.6
+  },
+  {
+   "t": "b) Vi ritar krafterna i översta läget.",
+   "s": 204.6,
+   "e": 208.62
+  },
+  {
+   "t": "I gränsfallet när repet precis slaknar är spännkraften F S är lika med 0 och endast tyngdkraften F G verkar.",
+   "s": 208.62,
+   "e": 216.51
+  },
+  {
+   "t": "Centripetalkraften utgörs alltså endast av tyngdkraften.",
+   "s": 216.51,
+   "e": 221.16
+  },
+  {
+   "t": "Detta ger",
+   "s": 221.16,
+   "e": 223.14
+  },
+  {
+   "t": "F C är lika med F G vilket är ekvivalent med att massan m gånger hastigheten v i kvadrat delat med r är lika med m gånger tyngdfaktorn g",
+   "s": 223.14,
+   "e": 232.32
+  },
+  {
+   "t": "Vi dividerar båda led med m och löser ut hastigheten v.",
+   "s": 232.32,
+   "e": 236.94
+  },
+  {
+   "t": "hastigheten v i kvadrat delat med r är lika med tyngdfaktorn g vilket är ekvivalent med att v i kvadrat är lika med g gånger r vilket är ekvivalent med att v är lika med roten ur g gånger r",
+   "s": 236.94,
+   "e": 254.93
+  },
+  {
+   "t": "tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat r som är lika med 2,5 meter",
+   "s": 236.94,
+   "e": 254.93
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 9,82 gånger 2,5 som är lika med 4,954 ldots meter per sekund som är ungefär lika med 5,0 meter per sekund",
+   "s": 254.93,
+   "e": 267.11
+  },
+  {
+   "t": "Svar: 5,0 meter per sekund",
+   "s": 267.11,
+   "e": 270.88
+  }
+ ]
+}

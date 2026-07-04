@@ -1,0 +1,343 @@
+{
+ "id": "fy1-4.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a5ca7caf8428201b646558118a30bead0874c007",
+ "dur": 344.79,
+ "segments": [
+  {
+   "t": "Energi och arbete",
+   "s": 0.1,
+   "e": 2.75
+  },
+  {
+   "t": "Energi",
+   "s": 2.7,
+   "e": 4.49
+  },
+  {
+   "t": "Potential att ge rörelse kallas energi, betecknas E och har SI-enheten J (joule).",
+   "s": 4.49,
+   "e": 11.21
+  },
+  {
+   "t": "Energi kan uppträda i olika former, till exempel:",
+   "s": 11.21,
+   "e": 18.66
+  },
+  {
+   "t": "värmeenergi (vid förbränning eller vid friktion)",
+   "s": 11.21,
+   "e": 18.66
+  },
+  {
+   "t": "strålningsenergi (från solen)",
+   "s": 18.66,
+   "e": 22.11
+  },
+  {
+   "t": "elektrisk energi (elektroner som rör sig)",
+   "s": 22.11,
+   "e": 26.18
+  },
+  {
+   "t": "rörelseenergi (bil som kör, vind eller vatten som forsar)",
+   "s": 26.18,
+   "e": 31.65
+  },
+  {
+   "t": "lägesenergi (energi som lagras med ökad höjd)",
+   "s": 31.65,
+   "e": 36.33
+  },
+  {
+   "t": "kemisk energi (i maten vi äter, bränslen eller processer i batterier)",
+   "s": 36.33,
+   "e": 42.41
+  },
+  {
+   "t": "kärnenergi (energi lagrad i atomer)",
+   "s": 42.41,
+   "e": 46.6
+  },
+  {
+   "t": "Energi kan omvandlas från en form till en annan.",
+   "s": 46.6,
+   "e": 50.62
+  },
+  {
+   "t": "Arbete",
+   "s": 50.62,
+   "e": 52.39
+  },
+  {
+   "t": "Den energi som omvandlas när en kraft orsakar en förflyttning kallas arbete, betecknas W (från engelskans \"work\") och har SI-enheten Nm (newtonmeter) eller J (joule).",
+   "s": 52.39,
+   "e": 64.72
+  },
+  {
+   "t": "Ett arbete kräver att vi utsätter ett föremål för en kraft som ger en förflyttning i kraftens riktning.",
+   "s": 64.72,
+   "e": 71.21
+  },
+  {
+   "t": "Även om arbete har samma enhet som energi, så är det inte en energiform utan snarare en process där energin ändras från en form till en annan.",
+   "s": 71.21,
+   "e": 80.44
+  },
+  {
+   "t": "Arbete",
+   "s": 80.44,
+   "e": 82.28
+  },
+  {
+   "t": "arbetet W är lika med F sträckan s gånger s",
+   "s": 82.28,
+   "e": 86.9
+  },
+  {
+   "t": "där",
+   "s": 86.9,
+   "e": 88.38
+  },
+  {
+   "t": "W är lika med arbete (Nm eller J)",
+   "s": 88.38,
+   "e": 92.54
+  },
+  {
+   "t": "F sträckan s är lika med kraften i rörelsens riktning (newton)",
+   "s": 92.54,
+   "e": 97.85
+  },
+  {
+   "t": "s är lika med sträckan (meter)",
+   "s": 97.85,
+   "e": 101.28
+  },
+  {
+   "t": "Fundera — Arbete",
+   "s": 101.28,
+   "e": 103.83
+  },
+  {
+   "t": "När uträttar du störst arbete: om du lyfter en 1-kilosvikt 2 meter upp eller en 2-kilosvikt 1 meter upp?",
+   "s": 103.83,
+   "e": 111.34
+  },
+  {
+   "t": "Svaret är att arbetet är lika stort.",
+   "s": 111.34,
+   "e": 114.95
+  },
+  {
+   "t": "Det är lättare att lyfta 1 kilogram, men sträckan är längre.",
+   "s": 114.95,
+   "e": 119.42
+  },
+  {
+   "t": "Hur stort det uträttade arbetet är beror alltså på hur stor kraft du behöver ta i med och hur lång sträcka du förflyttar föremålet.",
+   "s": 119.42,
+   "e": 127.33
+  },
+  {
+   "t": "Exempel 1 — Energiomvandlingar",
+   "s": 127.33,
+   "e": 130.64
+  },
+  {
+   "t": "Beskriv vilka energiomvandlingar som sker då du a) skjuter en låda över golvet, b) trycker på en knapp så en lampa tänds.",
+   "s": 130.64,
+   "e": 138.79
+  },
+  {
+   "t": "a) Kemisk energi i dina muskler omvandlas och blir rörelseenergi (lådan rör på sig) och värmeenergi (det blir friktionsvärme mot golvet).",
+   "s": 138.79,
+   "e": 148.97
+  },
+  {
+   "t": "Svar: Kemisk energi ger rörelseenergi + värmeenergi",
+   "s": 148.97,
+   "e": 154.43
+  },
+  {
+   "t": "b) När du slår på knappen omvandlas elektrisk energi inuti lampan till strålningsenergi (ljus) och värmeenergi.",
+   "s": 154.43,
+   "e": 162.9
+  },
+  {
+   "t": "Observera att det inte är kemisk energi i dina fingrar som omvandlas till elektrisk energi.",
+   "s": 162.9,
+   "e": 169.07
+  },
+  {
+   "t": "Den kemiska energin går endast åt till att fysiskt ändra knappens position.",
+   "s": 169.07,
+   "e": 174.55
+  },
+  {
+   "t": "Svar: Elektrisk energi ger strålningsenergi (ljus) + värmeenergi",
+   "s": 174.55,
+   "e": 181.16
+  },
+  {
+   "t": "Exempel 2 — Sanna puttar en parkbänk",
+   "s": 181.16,
+   "e": 184.72
+  },
+  {
+   "t": "Sanna puttar en parkbänk 3,0 meter framåt med kraften 240 newton.",
+   "s": 184.72,
+   "e": 190.84
+  },
+  {
+   "t": "Vilket arbete uträttar hon?",
+   "s": 190.84,
+   "e": 193.82
+  },
+  {
+   "t": "Vi skriver formeln för arbete.",
+   "s": 193.82,
+   "e": 196.8
+  },
+  {
+   "t": "arbetet W är lika med F sträckan s gånger s",
+   "s": 196.8,
+   "e": 205.79
+  },
+  {
+   "t": "F sträckan s är lika med 240 newton s som är lika med 3,0 meter",
+   "s": 196.8,
+   "e": 205.79
+  },
+  {
+   "t": "arbetet W är lika med 240 gånger 3,0 som är lika med 720 Nm",
+   "s": 205.79,
+   "e": 216.64
+  },
+  {
+   "t": "Svar: 720 Nm",
+   "s": 205.79,
+   "e": 216.64
+  },
+  {
+   "t": "Exempel 3 — Hosni drar en vagn snett",
+   "s": 205.79,
+   "e": 216.64
+  },
+  {
+   "t": "Hosni drar en vagn 100 meter med kraften F är lika med 35 newton snett uppåt höger med vinkeln v är lika med 26 grader mot horisontalplanet.",
+   "s": 216.64,
+   "e": 226.84
+  },
+  {
+   "t": "Hur stort arbete uträttar han?",
+   "s": 226.84,
+   "e": 229.94
+  },
+  {
+   "t": "Vi skriver formeln för arbete.",
+   "s": 229.94,
+   "e": 232.95
+  },
+  {
+   "t": "arbetet W är lika med F sträckan s gånger s",
+   "s": 232.95,
+   "e": 239.59
+  },
+  {
+   "t": "Vagnens rörelseriktning är åt höger.",
+   "s": 232.95,
+   "e": 239.59
+  },
+  {
+   "t": "Därför är det endast kraftkomposanten åt höger F två som ger upphov till ett arbete och den kraft som motsvarar F sträckan s .",
+   "s": 239.59,
+   "e": 247.9
+  },
+  {
+   "t": "Vi beräknar F två med trigonometri.",
+   "s": 247.9,
+   "e": 251.54
+  },
+  {
+   "t": "F sträckan s är lika med F två som är lika med kraften F gånger cosinus hastigheten v som är lika med 35 newton gånger cosinus 26 grader som är lika med 31,457 ldots newton s som är lika med 100 meter",
+   "s": 251.54,
+   "e": 266.19
+  },
+  {
+   "t": "arbetet W är lika med 31,457 ldots gånger 100 som är lika med 3 145,779 ldots Nm som är ungefär lika med 3 100 Nm som är lika med 3,1 kNm",
+   "s": 266.19,
+   "e": 281.06
+  },
+  {
+   "t": "Svar: 3,1 kNm",
+   "s": 281.06,
+   "e": 284.45
+  },
+  {
+   "t": "Exempel 3 — Martin bär lådan",
+   "s": 284.45,
+   "e": 287.77
+  },
+  {
+   "t": "Martin går med en låda 30 meter åt höger med konstant hastighet.",
+   "s": 287.77,
+   "e": 292.65
+  },
+  {
+   "t": "Han håller upp den med den uppåtriktade kraften 180 newton.",
+   "s": 292.65,
+   "e": 297.52
+  },
+  {
+   "t": "Hur stort arbete uträttar han?",
+   "s": 297.52,
+   "e": 300.57
+  },
+  {
+   "t": "Vi skriver formeln för arbete.",
+   "s": 300.57,
+   "e": 303.57
+  },
+  {
+   "t": "arbetet W är lika med F sträckan s gånger s",
+   "s": 303.57,
+   "e": 310.51
+  },
+  {
+   "t": "Rörelsens riktning är åt höger med konstant fart.",
+   "s": 303.57,
+   "e": 310.51
+  },
+  {
+   "t": "Om vi bortser från luftmotståndet är alltså kraften i rörelsens riktning F sträckan s är lika med 0!",
+   "s": 310.51,
+   "e": 317.26
+  },
+  {
+   "t": "Martin tar visserligen i med en kraft uppåt, för att hålla uppe lådan, men ingen rörelse sker i den riktningen.",
+   "s": 317.26,
+   "e": 324.56
+  },
+  {
+   "t": "Att kraften i rörelsens riktning är 0 innebär att också arbetet blir lika med 0.",
+   "s": 324.72,
+   "e": 330.57
+  },
+  {
+   "t": "F sträckan s är lika med 0 sekunder som är lika med 30 meter",
+   "s": 330.52,
+   "e": 335.37
+  },
+  {
+   "t": "arbetet W är lika med 0 gånger 30 som är lika med 0",
+   "s": 335.37,
+   "e": 340.12
+  },
+  {
+   "t": "Svar: Inget arbete uträttas (0 Nm).",
+   "s": 340.12,
+   "e": 344.79
+  }
+ ]
+}

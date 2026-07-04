@@ -1,0 +1,93 @@
+{
+ "id": "fy1-3.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5dc1fe6b493a9876a3ba4be72161ada02d4d94fd",
+ "dur": 88.35,
+ "segments": [
+  {
+   "t": "Exempel — Sneda spännkrafter",
+   "s": 0.1,
+   "e": 3.24
+  },
+  {
+   "t": "OBS — avsnittet är ännu ej klart",
+   "s": 3.19,
+   "e": 6.74
+  },
+  {
+   "t": "Detta avsnitt är under utveckling.",
+   "s": 6.74,
+   "e": 9.89
+  },
+  {
+   "t": "Innehållet nedan är författarens arbetsanteckningar.",
+   "s": 9.89,
+   "e": 13.97
+  },
+  {
+   "t": "Lägg till en \"exempelgenomgång\" här med sneda spännkrafter, typ uppgift 462, 485, 487 eller 490 för att visa hur man delar upp komposanterna och att de uppåtriktade komposanterna övervinner en tyngdkraft.",
+   "s": 13.97,
+   "e": 29.21
+  },
+  {
+   "t": "Skissteknik för sneda spännkrafter",
+   "s": 29.21,
+   "e": 32.51
+  },
+  {
+   "t": "När man ritar skissen så rita först en tyngdkraft nedåt.",
+   "s": 32.51,
+   "e": 36.92
+  },
+  {
+   "t": "Dra sedan en streckad linje på halva tyngdkraftens sträcka OVANFÖR föremålet.",
+   "s": 36.92,
+   "e": 43.0
+  },
+  {
+   "t": "Då får vi en \"höjd\" som båda komposanterna ska ha.",
+   "s": 43.0,
+   "e": 47.02
+  },
+  {
+   "t": "Lös resten med trigonometri.",
+   "s": 47.02,
+   "e": 50.14
+  },
+  {
+   "t": "Detta motsvarar A-nivå.",
+   "s": 50.14,
+   "e": 53.08
+  },
+  {
+   "t": "Asymmetriskt fall",
+   "s": 53.08,
+   "e": 55.44
+  },
+  {
+   "t": "Om det inte är symmetriskt, så dra en streckad uppåtriktad kraftvektor som är lika stor som tyngdkraften nedåt.",
+   "s": 55.44,
+   "e": 62.64
+  },
+  {
+   "t": "Lägg sedan en linjal parallellt med en av riktningarna och förskjut den till den går genom spetsen på den streckade kraftvektorn.",
+   "s": 62.64,
+   "e": 70.06
+  },
+  {
+   "t": "Strecka nu en ny linje från spetsen till spännkraftens riktning.",
+   "s": 70.06,
+   "e": 74.8
+  },
+  {
+   "t": "Kraftvektorn i riktningen fås som vektorn med start i utgångspunkten till där den streckade linjen skär riktningen.",
+   "s": 74.8,
+   "e": 81.58
+  },
+  {
+   "t": "Gör motsvarande som i punkt 1 fast med den andra riktningen för att få motsvarigheten i den andra riktningen.",
+   "s": 81.58,
+   "e": 88.35
+  }
+ ]
+}

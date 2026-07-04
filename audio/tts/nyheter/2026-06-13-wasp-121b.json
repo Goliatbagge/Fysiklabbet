@@ -1,0 +1,123 @@
+{
+ "id": "2026-06-13-wasp-121b",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d1cf535c59f69349cfcd655d1ba8f3ed1aaaec74",
+ "dur": 171.57,
+ "segments": [
+  {
+   "t": "En planet med två helt olika skymningar.",
+   "s": 0.1,
+   "e": 3.85
+  },
+  {
+   "t": "Rymdteleskopet James Webb har studerat den glödheta jätteplaneten WASP-121b och upptäckt att dess morgon- och kvällssida ser helt olika ut — med vindar som släpar värme runt klotet och vatten som slits isär av hettan.",
+   "s": 3.8,
+   "e": 16.77
+  },
+  {
+   "t": "WASP-121b är en så kallad het jupiter: en gasjätte som ligger så nära sin stjärna att ett ”år” bara är drygt ett dygn långt.",
+   "s": 16.77,
+   "e": 25.41
+  },
+  {
+   "t": "Den är dessutom bunden så att samma sida alltid vetter mot stjärnan — evig dag på den ena halvan, evig natt på den andra.",
+   "s": 25.41,
+   "e": 32.69
+  },
+  {
+   "t": "Planeten ligger omkring 880 ljusår bort och hör till de mest extrema världar vi känner till.",
+   "s": 32.69,
+   "e": 39.14
+  },
+  {
+   "t": "Morgon och kväll — men inte som hemma.",
+   "s": 39.14,
+   "e": 42.59
+  },
+  {
+   "t": "När Webb analyserade ljuset som silade genom planetens atmosfär såg forskarna att gränsen mellan dag och natt inte är symmetrisk.",
+   "s": 42.59,
+   "e": 50.84
+  },
+  {
+   "t": "Kvällssidan är hetare och mer uppblåst än morgonsidan, eftersom kraftiga vindar bär med sig värme österut från den ständigt solbelysta dagsidan.",
+   "s": 50.84,
+   "e": 59.98
+  },
+  {
+   "t": "På kvällssidan syntes också en starkare signal av kolmonoxid, medan det på den svalare morgonsidan fanns tecken på moln av — bokstavligen — mineraler.",
+   "s": 59.98,
+   "e": 69.33
+  },
+  {
+   "t": "På dagsidan är hettan så våldsam att vattenmolekyler slits isär i sina beståndsdelar.",
+   "s": 69.33,
+   "e": 75.64
+  },
+  {
+   "t": "Skillnaden mellan de två sidorna är dramatisk: enligt mätningarna skiljer det uppemot tusen grader mellan morgon och kväll.",
+   "s": 75.64,
+   "e": 83.19
+  },
+  {
+   "t": "Att över huvud taget kunna skilja på morgon och kväll hos en planet flera hundra ljusår bort hade varit ren science fiction för bara ett decennium sedan.",
+   "s": 83.19,
+   "e": 91.89
+  },
+  {
+   "t": "Hur ser man en planet man inte ens kan se.",
+   "s": 91.89,
+   "e": 95.6
+  },
+  {
+   "t": "Webb tittar inte rakt på planeten — den är alldeles för ljussvag intill sin bländande stjärna.",
+   "s": 95.6,
+   "e": 101.34
+  },
+  {
+   "t": "I stället mäter teleskopet hur stjärnans ljus färgas när det passerar genom planetens atmosfär på väg mot oss.",
+   "s": 101.34,
+   "e": 108.59
+  },
+  {
+   "t": "Olika ämnen suger åt sig olika våglängder, och ur det mönstret kan forskarna läsa av vad atmosfären innehåller — en sorts kosmisk fingeravtrycksanalys som kallas spektroskopi.",
+   "s": 108.59,
+   "e": 119.06
+  },
+  {
+   "t": "Knepet den här gången var att utnyttja att planeten hinner vrida sig en aning medan den glider in framför och bakom stjärnan.",
+   "s": 119.06,
+   "e": 126.72
+  },
+  {
+   "t": "Då avtecknar sig morgon- och kvällssidans atmosfär var för sig i ljuset, och forskarna kunde kartlägga de två gränszonerna separat — ett slags ”rotationstransit”.",
+   "s": 126.72,
+   "e": 136.54
+  },
+  {
+   "t": "Visste du.",
+   "s": 136.54,
+   "e": 138.39
+  },
+  {
+   "t": "WASP-121b är så het att den glöder — temperaturen på dagsidan når flera tusen grader.",
+   "s": 138.39,
+   "e": 145.0
+  },
+  {
+   "t": "Eftersom planeten alltid vänder samma sida mot stjärnan har den evig dag på ena halvan och evig natt på den andra, precis som månen alltid vänder samma sida mot jorden.",
+   "s": 145.0,
+   "e": 154.61
+  },
+  {
+   "t": "Metoden att läsa av ett ämnes ljus-fingeravtryck är samma princip som avslöjar vilka grundämnen en avlägsen stjärna består av.",
+   "s": 154.61,
+   "e": 162.8
+  },
+  {
+   "t": "Hur ljus och våglängder avslöjar vilka ämnen som finns kan du utforska i Fysiklabbets simuleringar om spektrallinjer och emissionsspektrum.",
+   "s": 162.8,
+   "e": 171.57
+  }
+ ]
+}

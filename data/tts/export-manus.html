@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>TTS-manusexport</title>
+    <!--
+        Byggverktyg (körs headless av data/tts/build-manus.js — inte en
+        publik sida). Renderar varje teoriavsnitt med samma pipeline som
+        katalog.html (marked + KaTeX) och extraherar uppläsningsmanuset
+        med data/tts/manus-lib.js. Resultatet läggs som JSON i pre-elementet
+        "out" och plockas upp via --dump-dom.
+    -->
+</head>
+<body>
+    <div id="stage" style="position:absolute; left:-99999px; top:0; width:900px;"></div>
+    <pre id="out"></pre>
+
+    <script src="../teori/bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="manus-lib.js"></script>
+    <script>
+    (function () {
+        'use strict';
+        const TEORI = window.TEORI || {};
+        const T = window.TTSMANUS;
+
+        // ---------- Markdown-pipeline (spegel av katalog.html) ----------
+
+        function protectMath(md) {
+            const tokens = [];
+            md = md.replace(/\$\$([\s\S]+?)\$\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(/\$([^\n$]+?)\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            return { md, tokens };
+        }
+        function restoreMath(html, tokens) {
+            return html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+        }
+
+        const SUP_MAP = {
+            '⁻': '-', '⁺': '+', '⁰': '0', '¹': '1', '²': '2', '³': '3',
+            '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9',
+            '⁽': '(', '⁾': ')', 'ⁿ': 'n',
+        };
+        const SUP_RE = /[⁻⁺⁰¹²³⁴-⁹⁽⁾ⁿ]+/g;
+        function preprocessSuperscripts(md) {
+            const tokens = [];
+            md = md.replace(/<svg[\s\S]*?<\/svg>/g, (m) => {
+                tokens.push(m);
+                return '@@ATTR' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(/\b(data-tip|title|aria-label)="([^"]*)"/g, (m) => {
+                tokens.push(m);
+                return '@@ATTR' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(SUP_RE, (run) => {
+                let ascii = '';
+                for (const ch of run) ascii += (SUP_MAP[ch] || ch);
+                return '<sup>' + ascii + '</sup>';
+            });
+            return md.replace(/@@ATTR(\d+)@@/g, (_, i) => tokens[+i]);
+        }
+
+        function escapeHtml(s) {
+            return String(s)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function preprocessBlocks(md) {
+            const lines = md.split('\n');
+            const out = [];
+            const stack = [];
+            for (const line of lines) {
+                const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
+                const close = line.match(/^:::\s*$/);
+                if (open) {
+                    const type = open[1].toLowerCase();
+                    stack.push(type);
+                    out.push('<div class="lab-block lab-block-' + type + '">');
+                    if (open[2]) out.push('<div class="lab-block-title">' + escapeHtml(open[2]) + '</div>');
+                    out.push('');
+                } else if (close && stack.length > 0) {
+                    stack.pop();
+                    out.push('');
+                    out.push('</div>');
+                } else {
+                    out.push(line);
+                }
+            }
+            return out.join('\n');
+        }
+
+        function preprocessSubproblems(md) {
+            const lines = md.split('\n');
+            const isSub = (l) => /^\*\*[a-d]\)\s+.+\*\*\s*$/i.test(l);
+            const out = [];
+            let i = 0;
+            while (i < lines.length) {
+                if (isSub(lines[i])) {
+                    const group = [];
+                    let j = i;
+                    while (j < lines.length && isSub(lines[j])) {
+                        group.push(lines[j]);
+                        j++;
+                    }
+                    if (group.length >= 2) {
+                        out.push('<div class="lab-deluppgifter">');
+                        out.push('');
+                        for (const g of group) {
+                            out.push(g);
+                            out.push('');
+                        }
+                        out.push('</div>');
+                        out.push('');
+                        i = j;
+                        continue;
+                    }
+                }
+                out.push(lines[i]);
+                i++;
+            }
+            return out.join('\n');
+        }
+
+        function parseFrontmatter(md) {
+            md = md.replace(/\r\n?/g, '\n');
+            if (!md.startsWith('---\n')) return { fm: {}, body: md };
+            const end = md.indexOf('\n---\n', 4);
+            if (end === -1) return { fm: {}, body: md };
+            const fm = {};
+            for (const line of md.slice(4, end).split('\n')) {
+                const m = line.match(/^([a-zA-Z]+):\s*(.*)$/);
+                if (m) {
+                    let v = m[2].trim();
+                    if ((v.startsWith("'") && v.endsWith("'")) || (v.startsWith('"') && v.endsWith('"'))) {
+                        v = v.slice(1, -1);
+                    }
+                    fm[m[1]] = v;
+                }
+            }
+            return { fm, body: md.slice(end + 5) };
+        }
+
+        marked.setOptions({ gfm: true, breaks: false });
+
+        // ---------- Export ----------
+
+        const stage = document.getElementById('stage');
+        const ids = Object.keys(TEORI).sort((a, b) => a.localeCompare(b, 'sv', { numeric: true }));
+        const docs = [];
+        let i = 0;
+
+        function renderOne(id) {
+            const { fm, body } = parseFrontmatter(TEORI[id]);
+            const { md, tokens } = protectMath(body);
+            let processed = preprocessSuperscripts(md);
+            processed = preprocessSubproblems(processed);
+            processed = preprocessBlocks(processed);
+            stage.innerHTML = restoreMath(marked.parse(processed), tokens);
+            renderMathInElement(stage, {
+                delimiters: [
+                    { left: '$$', right: '$$', display: true },
+                    { left: '$', right: '$', display: false },
+                ],
+                throwOnError: false,
+            });
+            const segs = T.extractSegments(stage, { names: true });
+            return {
+                id,
+                title: fm.title || id,
+                course: fm.course || '',
+                segments: segs.map((s) => ({ t: s.text })),
+            };
+        }
+
+        function step() {
+            const t0 = Date.now();
+            // Batcha tills ~200 ms förflutit, lämna sedan tillbaka tråden
+            while (i < ids.length && Date.now() - t0 < 200) {
+                try {
+                    docs.push(renderOne(ids[i]));
+                } catch (e) {
+                    docs.push({ id: ids[i], error: String(e), segments: [] });
+                }
+                i++;
+            }
+            if (i < ids.length) { setTimeout(step, 0); return; }
+            document.getElementById('out').textContent = JSON.stringify(docs);
+            document.title = 'MANUS-KLAR';
+        }
+
+        window.addEventListener('load', () => setTimeout(step, 0));
+    })();
+    </script>
+</body>
+</html>

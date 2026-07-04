@@ -1,0 +1,133 @@
+{
+ "id": "fy2-5.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7b09844d84cd4c159a8b037b4045bb6849740801",
+ "dur": 41.35,
+ "segments": [
+  {
+   "t": "Månens faser",
+   "s": 0.1,
+   "e": 2.42
+  },
+  {
+   "t": "Månen kretsar runt jorden med en period på cirka 29,5 dygn (en synodisk månad).",
+   "s": 2.38,
+   "e": 9.05
+  },
+  {
+   "t": "Eftersom månen inte har eget ljus ser vi bara den del som belyses av solen.",
+   "s": 9.05,
+   "e": 14.68
+  },
+  {
+   "t": "Beroende på var i sin bana månen befinner sig sett från jorden uppfattar vi olika delar av månens belysta sida — detta ger upphov till månens faser.",
+   "s": 14.68,
+   "e": 23.57
+  },
+  {
+   "t": "Jord–månsystemet ovanifrån.",
+   "s": 23.57,
+   "e": 26.99
+  },
+  {
+   "t": "Halvan av månen som vetter mot solen är alltid belyst — hur stor del av den belysta halvan vi ser från jorden beror på var i banan månen befinner sig.",
+   "s": 26.99,
+   "e": 35.8
+  },
+  {
+   "t": "De åtta huvudfaserna",
+   "s": 35.8,
+   "e": 38.51
+  },
+  {
+   "t": "Växande och avtagande",
+   "s": 38.51,
+   "e": 41.35
+  },
+  {
+   "t": "Under den växande (tilltagande) fasen — från nymåne till fullmåne — växer den belysta delen från höger.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Under den avtagande fasen — från fullmåne till nymåne — minskar ljuset från höger så att månen lyser mer åt vänster.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Detta gäller sett från norra halvklotet; på södra halvklotet är riktningen omvänd.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Minnesregel för växande/avtagande",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "På norra halvklotet:",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Ser månen ut som ett D (ljus höger sida) — den är växande mot fullmåne.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Ser månen ut som ett C (ljus vänster sida) — den är avtagande mot nymåne.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "På södra halvklotet är det omvänt: ett C betyder växande, ett D avtagande.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Skillnaden mellan synodisk och siderisk månad",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Månen tar 27,3 dygn att gå ett varv kring jorden mätt mot fixstjärnorna (en siderisk månad).",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Men eftersom jorden under samma tid har förflyttat sig en bit längs sin bana runt solen, måste månen gå lite mer än ett helt varv för att åter hamna i samma position relativt solen och jorden.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Därför är den synodiska månaden (från nymåne till nymåne) längre: 29,5 dygn.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Förmörkelser",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Om månen, jorden och solen ligger exakt på en rät linje sker en förmörkelse:",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Solförmörkelse — vid nymåne, när månen ligger mellan jorden och solen och kastar sin skugga på jorden.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Månförmörkelse — vid fullmåne, när jorden ligger mellan solen och månen och månen passerar in i jordens skugga.",
+   "s": 41.35,
+   "e": 41.35
+  },
+  {
+   "t": "Förmörkelser sker inte varje måncykel eftersom månens bana lutar ca 5 grader mot jordens bana kring solen — månen ligger oftast lite ovanför eller under linjen sol–jord.",
+   "s": 41.35,
+   "e": 41.35
+  }
+ ]
+}

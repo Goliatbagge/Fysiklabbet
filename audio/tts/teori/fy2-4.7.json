@@ -1,0 +1,168 @@
+{
+ "id": "fy2-4.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "6d872edc98b3df27a2fd10beb315aa00463e6432",
+ "dur": 207.66,
+ "segments": [
+  {
+   "t": "Spektrallinjer",
+   "s": 0.1,
+   "e": 2.34
+  },
+  {
+   "t": "Det finns olika sorters lampor och skillnaden mellan dessa är hur ljuset uppkommit.",
+   "s": 2.29,
+   "e": 7.58
+  },
+  {
+   "t": "I glödlampor hettas en glödtråd upp och avger på så sätt ljus med alla våglängder, ett kontinuerligt spektrum.",
+   "s": 7.58,
+   "e": 14.62
+  },
+  {
+   "t": "Sådant ljus uppfattar vi som vitt.",
+   "s": 14.62,
+   "e": 18.01
+  },
+  {
+   "t": "Ett kontinuerligt spektrum med alla våglängder, som sänds ut från t.ex. glödlampor.",
+   "s": 18.01,
+   "e": 24.14
+  },
+  {
+   "t": "Neonljus (skyltar), natriumljus (vägbelysning) och kvicksilverljus (solarium) uppkommer av förtunnade atomära gaser, det vill säga gaser med få gasmolekyler per volymenhet som endast innehåller en typ av atom.",
+   "s": 24.14,
+   "e": 39.11
+  },
+  {
+   "t": "Dessa gaser tillförs energi via elektrisk urladdning och ljuset kommer då från de enskilda atomerna i gasen när elektroner deexciteras och sänder ut ljus.",
+   "s": 39.11,
+   "e": 48.95
+  },
+  {
+   "t": "Detta ljus innehåller endast vissa väl definierade våglängder, så kallat diskret spektrum eller emissionsspektrum.",
+   "s": 48.95,
+   "e": 56.48
+  },
+  {
+   "t": "Vilka dessa våglängder är beror på hur elektronerna hoppar mellan energinivåerna i atomen i Bohrs atommodell.",
+   "s": 56.48,
+   "e": 63.73
+  },
+  {
+   "t": "Varje grundämne har sitt unika karaktäristiska spektrum, vilket blir som ett slags fingeravtryck där man kan identifiera grundämnen genom att titta på vilket ljus som sänds ut.",
+   "s": 63.73,
+   "e": 74.28
+  },
+  {
+   "t": "Emissionsspektrum för väte.",
+   "s": 74.28,
+   "e": 77.21
+  },
+  {
+   "t": "Emissionsspektrum för neon.",
+   "s": 77.21,
+   "e": 80.12
+  },
+  {
+   "t": "Det samlade intrycket blir rött ljus, som vi känner igen från t.ex. skyltar utanför biografer.",
+   "s": 80.12,
+   "e": 86.67
+  },
+  {
+   "t": "Demonstration — Spektralkikare",
+   "s": 86.67,
+   "e": 89.8
+  },
+  {
+   "t": "Vi tittar genom en \"spektralkikare\" på en glödlampa och ser hur det vita ljuset delar upp sig i de olika våglängderna.",
+   "s": 89.8,
+   "e": 97.05
+  },
+  {
+   "t": "Vi tittar därefter genom kikaren på ljuset från ett lysrör i taket.",
+   "s": 97.05,
+   "e": 102.33
+  },
+  {
+   "t": "Vi ser att ljuset från lysröret inte innehåller alla våglängder utan enbart vissa.",
+   "s": 102.33,
+   "e": 108.25
+  },
+  {
+   "t": "Kan vi avgöra vilken av nedanstående gaser som lysröret innehåller genom att titta på spektrallinjerna?",
+   "s": 108.25,
+   "e": 115.12
+  },
+  {
+   "t": "Om man istället vill titta på det ljus som atomerna absorberar (fångar upp) får man göra en annan uppställning.",
+   "s": 115.12,
+   "e": 122.12
+  },
+  {
+   "t": "Då belyser man en atomär gas med en ljuskälla som innehåller alla våglängder (till exempel en glödlampa).",
+   "s": 122.12,
+   "e": 129.69
+  },
+  {
+   "t": "Det ljus som har passerat gasen låter man sedan passera ett diffraktionsgitter som bryter upp ljuset i sina beståndsdelar och låter det träffa en skärm.",
+   "s": 129.69,
+   "e": 138.46
+  },
+  {
+   "t": "Ur försöket fås ett kontinuerligt spektrum med svarta spektrallinjer, det vill säga för dessa våglängder har gasen absorberat ljuset.",
+   "s": 138.46,
+   "e": 147.09
+  },
+  {
+   "t": "Ett sådant spektrum kallas absorptionsspektrum.",
+   "s": 147.09,
+   "e": 151.07
+  },
+  {
+   "t": "Emissionsspektrum (överst) och absorptionsspektrum (nederst) för väte.",
+   "s": 151.07,
+   "e": 157.25
+  },
+  {
+   "t": "De svarta linjerna ligger vid exakt samma våglängder som emissionslinjerna.",
+   "s": 157.25,
+   "e": 162.34
+  },
+  {
+   "t": "Vi ser att de svarta linjerna i absorptionsspektrumet sammanfaller med linjerna i emissionsspektrumet.",
+   "s": 162.34,
+   "e": 169.0
+  },
+  {
+   "t": "Det betyder att atomer enbart kan absorbera ljus (fotoner) av samma våglängd som de sänder ut.",
+   "s": 169.0,
+   "e": 176.0
+  },
+  {
+   "t": "Hur de olika spektrumen uppstår: kontinuerligt spektrum, absorptionsspektrum och emissionsspektrum.",
+   "s": 176.0,
+   "e": 182.94
+  },
+  {
+   "t": "Ljuset som vi ser från solen är ett absorptionsspektrum.",
+   "s": 182.94,
+   "e": 187.4
+  },
+  {
+   "t": "Studerar vi ljuset från solen finns mörka linjer vid rött som exakt överensstämmer med spektrallinjerna för väte.",
+   "s": 187.4,
+   "e": 194.56
+  },
+  {
+   "t": "Vi vet alltså att det finns väte i solens atmosfär!",
+   "s": 194.56,
+   "e": 198.84
+  },
+  {
+   "t": "Ett solspektrum. ”Dippen” vid 656 nanometer (rött) indikerar väte i solens atmosfär.",
+   "s": 198.84,
+   "e": 207.66
+  }
+ ]
+}

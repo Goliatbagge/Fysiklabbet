@@ -1,0 +1,273 @@
+{
+ "id": "fy1-7.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "938c73ac448b7243e09cede57992f49d9a1a7938",
+ "dur": 292.31,
+ "segments": [
+  {
+   "t": "Resistans och Ohms lag",
+   "s": 0.1,
+   "e": 2.99
+  },
+  {
+   "t": "Motståndet mot ledningselektronernas rörelse i en krets kallas resistans, betecknas R och har SI-enheten Ω (ohm).",
+   "s": 2.94,
+   "e": 11.05
+  },
+  {
+   "t": "Introduktion — Resistans och liknelsen med pilbågen",
+   "s": 11.05,
+   "e": 15.5
+  },
+  {
+   "t": "Vi har tidigare gjort en liknelse med en pilbåge där spänningen i linan motsvarar den elektriska spänningen och pilens hastighet den elektriska strömmen.",
+   "s": 15.5,
+   "e": 24.32
+  },
+  {
+   "t": "Resistansen skulle här motsvara luftmotståndet.",
+   "s": 24.32,
+   "e": 28.36
+  },
+  {
+   "t": "Skulle vi skjuta pilen under vattnet skulle motståndet bli högre och pilen (strömmen) skulle gå långsammare, trots att vi har samma spänning i bågen.",
+   "s": 28.36,
+   "e": 37.7
+  },
+  {
+   "t": "Ju större resistansen är desto lägre blir strömmen.",
+   "s": 37.7,
+   "e": 41.7
+  },
+  {
+   "t": "Detta samband kallas Ohms lag.",
+   "s": 41.7,
+   "e": 44.81
+  },
+  {
+   "t": "Ohms lag",
+   "s": 44.81,
+   "e": 46.64
+  },
+  {
+   "t": "spänningen U är lika med resistansen R gånger strömmen I",
+   "s": 46.64,
+   "e": 51.54
+  },
+  {
+   "t": "där",
+   "s": 51.54,
+   "e": 53.01
+  },
+  {
+   "t": "U är lika med spänning (volt)",
+   "s": 53.01,
+   "e": 56.33
+  },
+  {
+   "t": "R är lika med resistans (ohm)",
+   "s": 56.33,
+   "e": 59.73
+  },
+  {
+   "t": "I är lika med ström (ampere)",
+   "s": 59.73,
+   "e": 62.75
+  },
+  {
+   "t": "En elektrisk komponent vars enda egenskap är att ge motstånd kallas resistor.",
+   "s": 62.75,
+   "e": 68.39
+  },
+  {
+   "t": "Med hjälp av resistorer kan man reglera strömstyrkan i en krets.",
+   "s": 68.39,
+   "e": 73.19
+  },
+  {
+   "t": "Exempel 1 — Skyddande resistans",
+   "s": 73.19,
+   "e": 76.56
+  },
+  {
+   "t": "En komponent drivs av spänningen 1,5 volt.",
+   "s": 76.56,
+   "e": 80.66
+  },
+  {
+   "t": "Den klarar maximalt av strömmen 0,12 milliampere.",
+   "s": 80.66,
+   "e": 85.29
+  },
+  {
+   "t": "Vilken resistans måste kretsen minst ha för att komponenten ska hålla?",
+   "s": 85.29,
+   "e": 90.25
+  },
+  {
+   "t": "Vi ställer upp Ohms lag och löser ut resistansen R.",
+   "s": 90.25,
+   "e": 108.08
+  },
+  {
+   "t": "spänningen U är lika med resistansen R gånger strömmen I vilket är ekvivalent med att R är lika med U delat med I",
+   "s": 90.25,
+   "e": 108.08
+  },
+  {
+   "t": "spänningen U är lika med 1,5 volt strömmen I som är lika med 0,12 milliampere som är lika med 0,12 gånger 10 upphöjt till minus 3 ampere",
+   "s": 90.25,
+   "e": 108.08
+  },
+  {
+   "t": "resistansen R är lika med 1,5 delat med 0,12 gånger 10 upphöjt till minus 3 som är lika med 12 500 ohm som är ungefär lika med 13 000 ohm som är lika med 13 kiloohm",
+   "s": 108.08,
+   "e": 120.14
+  },
+  {
+   "t": "Svar: 13 kiloohm eller 13 000 ohm",
+   "s": 120.14,
+   "e": 124.31
+  },
+  {
+   "t": "Resistans i ledare",
+   "s": 124.31,
+   "e": 126.91
+  },
+  {
+   "t": "Även i själva ledaren finns en liten resistans.",
+   "s": 126.91,
+   "e": 130.88
+  },
+  {
+   "t": "Ju längre ledaren är desto större blir resistansen eftersom fler atomer i ledaren hindrar elektronernas rörelse.",
+   "s": 130.88,
+   "e": 138.22
+  },
+  {
+   "t": "Ökad längd ger ökad resistans.",
+   "s": 138.22,
+   "e": 141.61
+  },
+  {
+   "t": "Ju tjockare ledare desto fler elektroner kan passera ett tvärsnitt, vilket vid samma spänning ger ökad ström.",
+   "s": 141.61,
+   "e": 148.55
+  },
+  {
+   "t": "Ökad tvärsnittsarea ger lägre resistans.",
+   "s": 148.55,
+   "e": 152.59
+  },
+  {
+   "t": "De flesta ledare har ett cirkulärt tvärsnitt och tvärsnittsarean motsvarar då cirkelns area.",
+   "s": 152.59,
+   "e": 159.0
+  },
+  {
+   "t": "Kom ihåg: cirkelns area arean A är lika med pi gånger r i kvadrat .",
+   "s": 159.0,
+   "e": 164.49
+  },
+  {
+   "t": "Till sist spelar även ledarens material och temperatur roll.",
+   "s": 164.49,
+   "e": 168.94
+  },
+  {
+   "t": "Vissa material leder ström bättre än andra beroende på hur de ser ut atomärt.",
+   "s": 168.94,
+   "e": 174.6
+  },
+  {
+   "t": "Ju högre temperatur i ledaren desto högre blir resistansen eftersom atomerna i materialet rör sig mer och hindrar elektroner i större utsträckning.",
+   "s": 174.6,
+   "e": 183.62
+  },
+  {
+   "t": "Materialegenskaper som påverkar resistansen kallas resistivitet, betecknas ρ (grekiska bokstaven \"rho\"), är olika för olika ämnen och kan slås upp i tabell.",
+   "s": 183.62,
+   "e": 194.12
+  },
+  {
+   "t": "Den har enheten Ω·m (ohmmeter).",
+   "s": 194.12,
+   "e": 197.76
+  },
+  {
+   "t": "Resistans i ledare",
+   "s": 197.76,
+   "e": 200.38
+  },
+  {
+   "t": "resistansen R är lika med densiteten rho gånger hävarmen l delat med arean A",
+   "s": 200.38,
+   "e": 206.66
+  },
+  {
+   "t": "där",
+   "s": 206.66,
+   "e": 208.18
+  },
+  {
+   "t": "R är lika med resistans i ledare (ohm)",
+   "s": 208.18,
+   "e": 212.05
+  },
+  {
+   "t": "ρ är lika med resistivitet (Ω·m)",
+   "s": 212.05,
+   "e": 215.81
+  },
+  {
+   "t": "l är lika med ledarens längd (meter)",
+   "s": 215.81,
+   "e": 219.45
+  },
+  {
+   "t": "A är lika med ledarens tvärsnittsarea (m i kvadrat)",
+   "s": 219.45,
+   "e": 224.11
+  },
+  {
+   "t": "Exempel 2 — Aluminiumledare",
+   "s": 224.11,
+   "e": 227.41
+  },
+  {
+   "t": "En 2,0 meter lång ledare av aluminium har tvärsnittsarean 0,15 centimeter i kvadrat.",
+   "s": 227.41,
+   "e": 234.78
+  },
+  {
+   "t": "Bestäm resistansen i ledaren.",
+   "s": 234.78,
+   "e": 237.88
+  },
+  {
+   "t": "Vi ställer upp formeln för resistans i ledare.",
+   "s": 237.88,
+   "e": 241.64
+  },
+  {
+   "t": "resistansen R är lika med densiteten rho gånger hävarmen l delat med arean A",
+   "s": 241.64,
+   "e": 248.04
+  },
+  {
+   "t": "densiteten rho är lika med 0,027 µΩ\\cdotm som är lika med 0,027 gånger 10 upphöjt till minus 6 ohm\\cdotm parentesen tabell slut parentes hävarmen l som är lika med 2,0 meter arean A som är lika med 0,15 kvadratcentimeter som är lika med 0,15 gånger 10 upphöjt till minus 4 kvadratmeter",
+   "s": 248.04,
+   "e": 283.62
+  },
+  {
+   "t": "resistansen R är lika med 0,027 gånger 10 upphöjt till minus 6 gånger 2,0 delat med 0,15 gånger 10 upphöjt till minus 4 som är lika med 0,0036 ohm som är lika med 3,6 meterΩ",
+   "s": 248.04,
+   "e": 283.62
+  },
+  {
+   "t": "Svar: 3,6 meterΩ eller 3,6 gånger 10 upphöjt till minus 3 ohm eller 0,0036 ohm",
+   "s": 283.62,
+   "e": 292.31
+  }
+ ]
+}

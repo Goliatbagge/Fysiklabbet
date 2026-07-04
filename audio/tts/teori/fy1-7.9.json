@@ -1,0 +1,313 @@
+{
+ "id": "fy1-7.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "9b8c97ae7e82cbc6de48bdc5863387ee193495cf",
+ "dur": 312.94,
+ "segments": [
+  {
+   "t": "Elektrisk effekt",
+   "s": 0.1,
+   "e": 2.58
+  },
+  {
+   "t": "I en resistor omvandlas energi (och blir till värme).",
+   "s": 2.52,
+   "e": 7.1
+  },
+  {
+   "t": "Den elektriska energi som omvandlas per tidsenhet kallas elektrisk effekt.",
+   "s": 7.1,
+   "e": 12.95
+  },
+  {
+   "t": "Elektrisk effekt",
+   "s": 12.95,
+   "e": 15.44
+  },
+  {
+   "t": "effekten P är lika med spänningen U gånger strömmen I",
+   "s": 15.44,
+   "e": 23.2
+  },
+  {
+   "t": "effekten P är lika med resistansen R gånger strömmen I i kvadrat",
+   "s": 15.44,
+   "e": 23.2
+  },
+  {
+   "t": "effekten P är lika med spänningen U i kvadrat delat med resistansen R",
+   "s": 23.2,
+   "e": 28.8
+  },
+  {
+   "t": "där",
+   "s": 28.8,
+   "e": 30.27
+  },
+  {
+   "t": "P är lika med elektrisk effekt (watt)",
+   "s": 30.27,
+   "e": 34.14
+  },
+  {
+   "t": "U är lika med spänning över komponent (volt)",
+   "s": 34.14,
+   "e": 38.42
+  },
+  {
+   "t": "I är lika med ström genom komponent (ampere)",
+   "s": 38.42,
+   "e": 42.49
+  },
+  {
+   "t": "R är lika med resistans i komponent (ohm)",
+   "s": 42.49,
+   "e": 46.61
+  },
+  {
+   "t": "Elektrisk effekt",
+   "s": 46.61,
+   "e": 49.09
+  },
+  {
+   "t": "För härledningen kommer vi att använda några tidigare samband.",
+   "s": 49.09,
+   "e": 53.31
+  },
+  {
+   "t": "Elektrisk energi: spänningen U är lika med energin E delat med laddningen Q vilket är ekvivalent med att E är lika med Q gånger U ekvation 1",
+   "s": 53.31,
+   "e": 62.98
+  },
+  {
+   "t": "Laddning: strömmen I är lika med laddningen Q delat med tiden t vilket är ekvivalent med att Q är lika med I gånger t ekvation 2",
+   "s": 62.98,
+   "e": 71.9
+  },
+  {
+   "t": "Ohms lag: spänningen U är lika med resistansen R gånger strömmen I ekvation 3",
+   "s": 71.9,
+   "e": 78.19
+  },
+  {
+   "t": "Ohms lag: strömmen I är lika med spänningen U delat med resistansen R ekvation 4",
+   "s": 78.19,
+   "e": 84.85
+  },
+  {
+   "t": "Vi vet sedan tidigare att effekt definieras som den energi som omvandlas varje sekund.",
+   "s": 84.85,
+   "e": 91.2
+  },
+  {
+   "t": "effekten P är lika med energin E delat med tiden t, ekvation 5",
+   "s": 91.2,
+   "e": 96.75
+  },
+  {
+   "t": "ekvation 1 i ekvation 5 ger",
+   "s": 96.75,
+   "e": 100.47
+  },
+  {
+   "t": "effekten P är lika med laddningen Q gånger spänningen U delat med tiden t, ekvation 6",
+   "s": 100.47,
+   "e": 107.15
+  },
+  {
+   "t": "ekvation 2 i ekvation 6 ger",
+   "s": 107.15,
+   "e": 110.83
+  },
+  {
+   "t": "effekten P är lika med strömmen I gånger tiden t gånger spänningen U delat med t som är lika med I gånger U som är lika med U gånger I vilket skulle visas",
+   "s": 110.83,
+   "e": 120.28
+  },
+  {
+   "t": "Vi har nu visat att effekten P är lika med spänningen U gånger strömmen I ekvation 7.",
+   "s": 120.28,
+   "e": 126.36
+  },
+  {
+   "t": "ekvation 3 i ekvation 7 ger",
+   "s": 126.36,
+   "e": 129.9
+  },
+  {
+   "t": "effekten P är lika med resistansen R gånger strömmen I gånger I som är lika med R gånger I i kvadrat vilket skulle visas",
+   "s": 129.9,
+   "e": 137.99
+  },
+  {
+   "t": "ekvation 4 i ekvation 7 ger",
+   "s": 137.99,
+   "e": 141.56
+  },
+  {
+   "t": "effekten P är lika med spänningen U gånger U delat med resistansen R som är lika med U i kvadrat delat med R vilket skulle visas",
+   "s": 141.56,
+   "e": 150.04
+  },
+  {
+   "t": "Ibland ska effekten i sladdar/ledare/glödtrådar bestämmas.",
+   "s": 150.04,
+   "e": 155.75
+  },
+  {
+   "t": "Kom då ihåg formeln för resistans i ledare.",
+   "s": 155.75,
+   "e": 159.7
+  },
+  {
+   "t": "Resistans i ledare",
+   "s": 159.7,
+   "e": 162.26
+  },
+  {
+   "t": "resistansen R är lika med densiteten rho gånger hävarmen l delat med arean A",
+   "s": 162.26,
+   "e": 168.46
+  },
+  {
+   "t": "där",
+   "s": 168.46,
+   "e": 169.97
+  },
+  {
+   "t": "R är lika med resistans i ledare (ohm)",
+   "s": 169.97,
+   "e": 173.85
+  },
+  {
+   "t": "ρ är lika med resistivitet (Ω·m)",
+   "s": 173.85,
+   "e": 177.61
+  },
+  {
+   "t": "l är lika med ledarens längd (meter)",
+   "s": 177.61,
+   "e": 181.25
+  },
+  {
+   "t": "A är lika med ledarens tvärsnittsarea (m i kvadrat)",
+   "s": 181.25,
+   "e": 185.9
+  },
+  {
+   "t": "Hemuppgift — Wattjakt",
+   "s": 185.9,
+   "e": 188.69
+  },
+  {
+   "t": "Leta upp olika elektriska apparater i ditt hem, till exempel vattenkokare, hårtork, mikrovågsugn eller mobilladdare.",
+   "s": 188.69,
+   "e": 197.07
+  },
+  {
+   "t": "Hitta apparatens typskylt (ofta ett klistermärke på undersidan eller baksidan av apparaten).",
+   "s": 197.07,
+   "e": 204.0
+  },
+  {
+   "t": "Leta efter ett värde som slutar på W (watt).",
+   "s": 204.0,
+   "e": 208.41
+  },
+  {
+   "t": "Hitta den apparat som har allra högst effekt.",
+   "s": 208.41,
+   "e": 212.12
+  },
+  {
+   "t": "Skriv ner apparatens namn, dess watt-tal och ta med till nästa lektion.",
+   "s": 212.12,
+   "e": 217.11
+  },
+  {
+   "t": "Exempel 1 — LED-lampa",
+   "s": 217.11,
+   "e": 220.03
+  },
+  {
+   "t": "En LED-lampa med effekten 5,0 watt drivs av två 1,5 volt-batterier.",
+   "s": 220.03,
+   "e": 226.26
+  },
+  {
+   "t": "Hur stor ström går genom lampan?",
+   "s": 226.26,
+   "e": 229.34
+  },
+  {
+   "t": "Vi ställer upp formeln för elektrisk effekt och löser ut strömmen I.",
+   "s": 229.34,
+   "e": 239.79
+  },
+  {
+   "t": "effekten P är lika med spänningen U gånger strömmen I vilket är ekvivalent med att I är lika med P delat med U",
+   "s": 229.34,
+   "e": 239.79
+  },
+  {
+   "t": "effekten P är lika med 5,0 watt spänningen U som är lika med parentesen 1,5 plus 1,5 slut parentes volt som är lika med 3,0 volt parentesen seriekoppladebatterieradderas slut parentes",
+   "s": 239.79,
+   "e": 253.05
+  },
+  {
+   "t": "strömmen I är lika med 5,0 delat med 3,0 som är lika med 1,666 ldots ampere som är ungefär lika med 1,7 ampere",
+   "s": 253.05,
+   "e": 262.7
+  },
+  {
+   "t": "Svar: 1,7 ampere",
+   "s": 262.7,
+   "e": 265.79
+  },
+  {
+   "t": "Exempel 2 — Värmeelement",
+   "s": 265.79,
+   "e": 268.98
+  },
+  {
+   "t": "Vilken effekt utvecklas i ett värmeelement med resistansen 50 ohm som kopplas till spänningen 230 volt?",
+   "s": 268.98,
+   "e": 276.76
+  },
+  {
+   "t": "Vi ska bestämma effekten.",
+   "s": 276.76,
+   "e": 279.43
+  },
+  {
+   "t": "I uppgiften har vi resistansen R och spänningen U.",
+   "s": 279.43,
+   "e": 283.71
+  },
+  {
+   "t": "Vi väljer då att använda formeln",
+   "s": 283.71,
+   "e": 286.8
+  },
+  {
+   "t": "effekten P är lika med spänningen U i kvadrat delat med resistansen R",
+   "s": 286.8,
+   "e": 296.66
+  },
+  {
+   "t": "spänningen U är lika med 230 volt resistansen R som är lika med 50 ohm",
+   "s": 286.8,
+   "e": 296.66
+  },
+  {
+   "t": "effekten P är lika med 230 i kvadrat delat med 50 som är lika med 1 058 watt som är ungefär lika med 1 100 watt som är lika med 1,1 kilowatt",
+   "s": 296.66,
+   "e": 307.95
+  },
+  {
+   "t": "Svar: 1,1 kilowatt eller 1 100 watt",
+   "s": 307.95,
+   "e": 312.94
+  }
+ ]
+}

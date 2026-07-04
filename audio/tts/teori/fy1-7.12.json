@@ -1,0 +1,403 @@
+{
+ "id": "fy1-7.12",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "2e1c2a9553995f0afba6aa56621d8fbebaed21d6",
+ "dur": 454.63,
+ "segments": [
+  {
+   "t": "Elektrisk potential",
+   "s": 0.1,
+   "e": 2.69
+  },
+  {
+   "t": "Elektriska fält och gravitationsfält har stora likheter.",
+   "s": 2.64,
+   "e": 7.14
+  },
+  {
+   "t": "Gravitationsfält påverkar massor i fältets riktning medan elektriska fält påverkar laddningar i fältets riktning.",
+   "s": 7.14,
+   "e": 14.7
+  },
+  {
+   "t": "När vi tidigare i ämnet pratade om lägesenergi kom vi fram till att vi kunde öka ett föremåls lägesenergi, potentiella energi, genom att lyfta ett föremål mot gravitationsfältets riktning.",
+   "s": 14.7,
+   "e": 25.84
+  },
+  {
+   "t": "Släpper vi föremålet faller det och potentiell energi omvandlas till rörelseenergi.",
+   "s": 25.84,
+   "e": 31.74
+  },
+  {
+   "t": "Detsamma gäller för elektriska fält!",
+   "s": 31.74,
+   "e": 35.04
+  },
+  {
+   "t": "Vi kan öka ett föremåls \"elektriska lägesenergi\" genom att flytta en laddning mot det elektriska fältets kraftriktning.",
+   "s": 35.04,
+   "e": 42.05
+  },
+  {
+   "t": "Släpper vi föremålet \"faller\" det och elektrisk lägesenergi omvandlas till rörelseenergi.",
+   "s": 42.05,
+   "e": 48.27
+  },
+  {
+   "t": "En laddning \"faller\" i ett elektriskt fält (vänster) på samma sätt som en massa faller i ett gravitationsfält (höger).",
+   "s": 48.27,
+   "e": 56.34
+  },
+  {
+   "t": "Den \"elektriska lägesenergin\" kallas elektrisk potential, betecknas V och har, precis som spänning, enheten V (volt).",
+   "s": 56.34,
+   "e": 65.67
+  },
+  {
+   "t": "Till skillnad från spänning har potential tecken (positiv, negativ eller noll).",
+   "s": 65.67,
+   "e": 71.76
+  },
+  {
+   "t": "Ström går från en punkt med högre potential till en punkt med lägre potential.",
+   "s": 71.76,
+   "e": 77.26
+  },
+  {
+   "t": "Precis som att mekanisk lägesenergi inte går att bestämma utan en nollnivå, går det inte att bestämma elektrisk potential utan en nollnivå.",
+   "s": 77.26,
+   "e": 86.01
+  },
+  {
+   "t": "Nollnivån i en elektrisk krets kallas jordning och där är potentialen 0 volt.",
+   "s": 86.01,
+   "e": 91.94
+  },
+  {
+   "t": "I kopplingsscheman markeras jordning med en jordningssymbol (tre horisontella streck under varandra som smalnar av nedåt).",
+   "s": 91.94,
+   "e": 100.1
+  },
+  {
+   "t": "Om flera jordningar finns i en krets motsvarar det att koppla en ledare mellan jordningspunkterna.",
+   "s": 100.1,
+   "e": 106.06
+  },
+  {
+   "t": "En jordning är en ledare som ansluts till marken på jorden (därav namnet).",
+   "s": 106.06,
+   "e": 111.64
+  },
+  {
+   "t": "Eftersom jordklotet kan ses som en stor ledare är spänningen mellan olika jordade punkter 0.",
+   "s": 111.64,
+   "e": 117.84
+  },
+  {
+   "t": "En jordad ledare får samma potential som jordklotet.",
+   "s": 117.84,
+   "e": 122.14
+  },
+  {
+   "t": "Den gör att oönskade laddningar/ström leds bort från kretsen och ner i marken.",
+   "s": 122.14,
+   "e": 128.0
+  },
+  {
+   "t": "Detta är bra ur säkerhetssynpunkt då till exempel ett elfel skulle kunna göra att höljet på en ojordad brödrost blir strömförande.",
+   "s": 128.0,
+   "e": 135.97
+  },
+  {
+   "t": "Om höljet är jordat kommer strömmen vid ett elfel istället att gå ner i marken.",
+   "s": 135.97,
+   "e": 141.49
+  },
+  {
+   "t": "Bestämma potential i en punkt (potentialvandring)",
+   "s": 141.49,
+   "e": 145.78
+  },
+  {
+   "t": "Potentialen i en punkt bestäms genom att starta i en jordad del av kretsen där potentialen är 0.",
+   "s": 145.78,
+   "e": 152.54
+  },
+  {
+   "t": "Sedan \"potentialvandrar\" man från jordningen till punkten vars potential ska bestämmas.",
+   "s": 152.54,
+   "e": 158.5
+  },
+  {
+   "t": "Potentialen ändras när vi går genom batterier och resistorer enligt nedan.",
+   "s": 158.5,
+   "e": 164.1
+  },
+  {
+   "t": "Potentialändringar vid potentialvandring",
+   "s": 164.1,
+   "e": 167.68
+  },
+  {
+   "t": "Eftersom potential motsvarar \"elektrisk lägesenergi\" medför det att om vi potentialvandrar ett helt varv i en krets, så måste summan av alla potentialändringar vara 0 (eftersom potentialen måste vara densamma i punkten både före och efter vandringen).",
+   "s": 167.68,
+   "e": 182.65
+  },
+  {
+   "t": "Denna princip kallas Kirchhoffs andra lag.",
+   "s": 182.65,
+   "e": 186.36
+  },
+  {
+   "t": "Kirchhoffs andra lag",
+   "s": 186.36,
+   "e": 188.79
+  },
+  {
+   "t": "Summan av alla potentialändringar i en sluten krets är noll.",
+   "s": 188.79,
+   "e": 193.6
+  },
+  {
+   "t": "sum delta volymen V är lika med 0",
+   "s": 193.6,
+   "e": 197.18
+  },
+  {
+   "t": "Spänning är skillnad i potential och kan inte vara negativ.",
+   "s": 197.18,
+   "e": 201.55
+  },
+  {
+   "t": "Om skillnaden i potential till exempel skulle bli (−3,0) V är spänningen 3,0 volt.",
+   "s": 201.55,
+   "e": 208.76
+  },
+  {
+   "t": "Matematiskt kan detta skrivas med absolutbelopp |…|.",
+   "s": 208.76,
+   "e": 213.09
+  },
+  {
+   "t": "Då skriver vi |−3,0| är lika med 3,0.",
+   "s": 213.09,
+   "e": 217.4
+  },
+  {
+   "t": "Man kan alltså tänka att absolutbelopp \"tar bort minustecken\".",
+   "s": 217.4,
+   "e": 222.22
+  },
+  {
+   "t": "Spänning mellan två punkter",
+   "s": 222.22,
+   "e": 225.16
+  },
+  {
+   "t": "spänningen U är lika med | V arean A minus V B |",
+   "s": 225.16,
+   "e": 229.97
+  },
+  {
+   "t": "där",
+   "s": 229.97,
+   "e": 231.45
+  },
+  {
+   "t": "U är lika med spänning mellan punkt A och punkt B (volt)",
+   "s": 231.45,
+   "e": 236.22
+  },
+  {
+   "t": "V arean A , V B är lika med potential i punkt A respektive i punkt B (volt)",
+   "s": 236.22,
+   "e": 243.4
+  },
+  {
+   "t": "|…| står för absolutbeloppet.",
+   "s": 243.4,
+   "e": 246.49
+  },
+  {
+   "t": "Om V arean A minus V B blir negativt ska minustecknet tas bort.",
+   "s": 246.49,
+   "e": 252.16
+  },
+  {
+   "t": "Exempel 1 — Tre punkter i en krets",
+   "s": 252.16,
+   "e": 255.86
+  },
+  {
+   "t": "Betrakta en krets med ett 40 volt-batteri som driver en ström på 5,0 ampere genom en seriekoppling av en 6,0 ohm-resistor (mellan C och B) och en 2,0 ohm-resistor (mellan B och A).",
+   "s": 255.86,
+   "e": 269.0
+  },
+  {
+   "t": "Punkten B är jordad.",
+   "s": 269.0,
+   "e": 271.65
+  },
+  {
+   "t": "Bestäm",
+   "s": 271.65,
+   "e": 273.34
+  },
+  {
+   "t": "a) potentialen i punkterna A, B respektive C.",
+   "s": 273.34,
+   "e": 284.91
+  },
+  {
+   "t": "b) spänningen mellan punkt A och punkt C.",
+   "s": 273.34,
+   "e": 284.91
+  },
+  {
+   "t": "a) Vi börjar med att bestämma potentialen i punkt A, det vill säga V arean A .",
+   "s": 273.34,
+   "e": 284.91
+  },
+  {
+   "t": "Vi startar i den jordade punkten B där potentialen är 0 och går sedan genom 2,0 ohm-resistorn mot strömmen som är 5,0 ampere.",
+   "s": 284.91,
+   "e": 295.63
+  },
+  {
+   "t": "V arean A är lika med 0 plus R 2\\Omega gånger strömmen I som är lika med 0 plus 2,0 gånger 5,0 som är lika med plus 10 volt",
+   "s": 295.58,
+   "e": 306.16
+  },
+  {
+   "t": "Vi bestämmer sedan potentialen i punkt B.",
+   "s": 306.16,
+   "e": 309.91
+  },
+  {
+   "t": "Den är 0 då den är jordad.",
+   "s": 309.91,
+   "e": 312.99
+  },
+  {
+   "t": "V B är lika med 0",
+   "s": 312.99,
+   "e": 315.75
+  },
+  {
+   "t": "Till sist bestämmer vi potentialen i punkt C genom att vandra från punkten B genom 6,0 ohm-resistorn med strömmen som är 5,0 ampere.",
+   "s": 315.75,
+   "e": 324.56
+  },
+  {
+   "t": "V C är lika med 0 minus R 6\\Omega gånger strömmen I som är lika med 0 minus 6,0 gånger 5,0 som är lika med minus 30 volt",
+   "s": 324.56,
+   "e": 335.3
+  },
+  {
+   "t": "Svar: V arean A är lika med plus 10 volt och V B är lika med 0 och V C är lika med minus 30 volt.",
+   "s": 335.3,
+   "e": 343.39
+  },
+  {
+   "t": "b) Spänningen är skillnaden i potential mellan punkterna A och C.",
+   "s": 343.39,
+   "e": 356.18
+  },
+  {
+   "t": "spänningen U är lika med | V C minus V arean A | som är lika med | minus 30 minus 10 | som är lika med | minus 40 | som är lika med 40 volt",
+   "s": 343.39,
+   "e": 356.18
+  },
+  {
+   "t": "Svar: 40 volt",
+   "s": 356.18,
+   "e": 359.03
+  },
+  {
+   "t": "Exempel 2 — Punkt vid batteri",
+   "s": 359.03,
+   "e": 362.34
+  },
+  {
+   "t": "Bestäm potentialen i punkten P som ligger vid pluspolen på ett 9,0 volt-batteri vars minuspol är jordad.",
+   "s": 362.34,
+   "e": 369.75
+  },
+  {
+   "t": "Vi startar i den jordade punkten där potentialen är 0 volt och går sedan genom batteriet från minuspol till pluspol.",
+   "s": 369.75,
+   "e": 377.45
+  },
+  {
+   "t": "Potentialen ökar då med batteriets spänning.",
+   "s": 377.45,
+   "e": 381.28
+  },
+  {
+   "t": "V effekten P är lika med 0 plus 9,0 volt som är lika med plus 9,0 volt",
+   "s": 381.28,
+   "e": 388.01
+  },
+  {
+   "t": "Svar: +9,0 volt",
+   "s": 388.01,
+   "e": 391.6
+  },
+  {
+   "t": "Exempel 3 — Ström med Kirchhoffs andra lag",
+   "s": 391.6,
+   "e": 395.65
+  },
+  {
+   "t": "Bestäm strömmen i en krets med en 4,0 ohm-resistor och en 6,0 ohm-resistor i serie med ett 15 volt-batteri och ett 5,0 volt-batteri (kopplade så att 15 volt driver strömmen och 5 volt motverkar den).",
+   "s": 395.65,
+   "e": 409.19
+  },
+  {
+   "t": "Vi startar i en valfri punkt och går ett varv i kretsen.",
+   "s": 409.19,
+   "e": 413.54
+  },
+  {
+   "t": "Summan av alla potentialändringar är 0 enligt Kirchhoffs andra lag.",
+   "s": 413.54,
+   "e": 418.66
+  },
+  {
+   "t": "Vi startar till exempel i en punkt till vänster om 15 volt-batteriets pluspol och går ett varv moturs.",
+   "s": 418.66,
+   "e": 425.55
+  },
+  {
+   "t": "Detta ger",
+   "s": 425.55,
+   "e": 427.53
+  },
+  {
+   "t": "minus R fyra gånger strömmen I minus U fem minus R sex gånger I plus U ett fem är lika med 0",
+   "s": 427.53,
+   "e": 434.94
+  },
+  {
+   "t": "Insättning av värdena ger",
+   "s": 434.94,
+   "e": 437.83
+  },
+  {
+   "t": "minus 4 strömmen I minus 5 minus 6 I plus 15 är lika med 0",
+   "s": 437.83,
+   "e": 443.46
+  },
+  {
+   "t": "minus 10 strömmen I plus 10 är lika med 0 vilket är ekvivalent med att I är lika med 10 delat med 10 som är lika med 1 ampere",
+   "s": 443.46,
+   "e": 451.89
+  },
+  {
+   "t": "Svar: 1 ampere",
+   "s": 451.89,
+   "e": 454.63
+  }
+ ]
+}

@@ -1,0 +1,123 @@
+{
+ "id": "fy2-3.14",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b31c67c62b3bfaa4999af7b629f618be39ebff3e",
+ "dur": 135.1,
+ "segments": [
+  {
+   "t": "Magnetfältsmätare och Halleffekt",
+   "s": 0.1,
+   "e": 3.38
+  },
+  {
+   "t": "För att mäta magnetisk flödestäthet används en magnetfältsmätare eller Halleffektsensor.",
+   "s": 3.33,
+   "e": 9.51
+  },
+  {
+   "t": "I änden av mätaren finns en tunn ledande platta med bredden d som en känd ström I går genom.",
+   "s": 9.51,
+   "e": 15.99
+  },
+  {
+   "t": "Den placeras vinkelrätt mot magnetfältet, se figur.",
+   "s": 15.99,
+   "e": 20.71
+  },
+  {
+   "t": "En ström genom plattan innebär att vi har elektroner som rör sig i ett magnetfält.",
+   "s": 20.71,
+   "e": 26.56
+  },
+  {
+   "t": "Elektronerna påverkas då av en magnetisk kraft F massan m som i figuren blir vänsterriktad.",
+   "s": 26.56,
+   "e": 33.1
+  },
+  {
+   "t": "Den vänstra delen av plattan blir då negativt laddad, den högra positivt laddad och en högerriktad elektrisk kraft F e bildas.",
+   "s": 33.1,
+   "e": 41.48
+  },
+  {
+   "t": "När jämvikt uppnåtts mellan den magnetiska och elektriska kraften bildas en viss spänning U över plattans kanter.",
+   "s": 41.48,
+   "e": 49.04
+  },
+  {
+   "t": "Att en strömförande ledare får en spänning vinkelrät mot strömriktningen kallas Halleffekt och spänningen kallas ibland Hallspänning.",
+   "s": 49.04,
+   "e": 56.81
+  },
+  {
+   "t": "Härledning — Hallspänning",
+   "s": 56.81,
+   "e": 59.6
+  },
+  {
+   "t": "När jämvikt uppnåtts mellan den magnetiska och elektriska kraften gäller",
+   "s": 59.6,
+   "e": 64.69
+  },
+  {
+   "t": "F massan m är lika med F e",
+   "s": 64.69,
+   "e": 78.89
+  },
+  {
+   "t": "F massan m är lika med q gånger hastigheten v gånger B och F e är lika med q gånger mathbb energin E (där mathbb energin E är elektrisk fältstyrka, från Fysik nivå 1) ger",
+   "s": 64.69,
+   "e": 78.89
+  },
+  {
+   "t": "q gånger hastigheten v gånger B är lika med q gånger mathbb energin E",
+   "s": 78.89,
+   "e": 84.79
+  },
+  {
+   "t": "Vi dividerar båda led med q.",
+   "s": 84.79,
+   "e": 97.11
+  },
+  {
+   "t": "hastigheten v gånger B är lika med mathbb energin E",
+   "s": 84.79,
+   "e": 97.11
+  },
+  {
+   "t": "mathbb energin E är lika med spänningen U delat med avståndet d (från Fysik nivå 1) ger",
+   "s": 84.79,
+   "e": 97.11
+  },
+  {
+   "t": "hastigheten v gånger B är lika med spänningen U delat med avståndet d",
+   "s": 97.11,
+   "e": 103.04
+  },
+  {
+   "t": "Vi löser ut Hallspänningen U och får",
+   "s": 103.04,
+   "e": 106.71
+  },
+  {
+   "t": "spänningen U är lika med hastigheten v gånger avståndet d gånger B",
+   "s": 106.71,
+   "e": 112.84
+  },
+  {
+   "t": "Eftersom både v (elektronernas hastighet) och d är konstant, så beror Hallspänningen U direkt på den magnetiska flödestätheten B som då kan bestämmas.",
+   "s": 112.84,
+   "e": 123.4
+  },
+  {
+   "t": "Magnetfältsmätaren räknar alltså ut den magnetiska flödestätheten med formeln",
+   "s": 123.4,
+   "e": 129.2
+  },
+  {
+   "t": "B är lika med spänningen U delat med hastigheten v gånger avståndet d",
+   "s": 129.2,
+   "e": 135.1
+  }
+ ]
+}

@@ -1,0 +1,458 @@
+{
+ "id": "fy1-9.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "78fac6e48dc8a80ce101c8ba0e600d3fb504c9fa",
+ "dur": 533.72,
+ "segments": [
+  {
+   "t": "Aktivitet och halveringstid",
+   "s": 0.1,
+   "e": 3.06
+  },
+  {
+   "t": "Antalet sönderfall per sekund som radioaktivt material har kallas aktivitet, betecknas A och har enheten Bq (becquerel) som alltså står för \"sönderfall per sekund\".",
+   "s": 3.01,
+   "e": 13.71
+  },
+  {
+   "t": "Aktivitet",
+   "s": 13.71,
+   "e": 15.74
+  },
+  {
+   "t": "Vi undersöker aktiviteten hos tre radioaktiva preparat och några andra föremål (till exempel självlysande klockor och mobil) med en geigermätare.",
+   "s": 15.74,
+   "e": 25.05
+  },
+  {
+   "t": "Varje sönderfall registreras med ett pip och i en räknare.",
+   "s": 25.05,
+   "e": 29.51
+  },
+  {
+   "t": "Vi märker att aktiviteten för vissa preparat och föremål är högre än hos andra.",
+   "s": 29.51,
+   "e": 35.33
+  },
+  {
+   "t": "Vi noterar också att aktiviteten minskar med avståndet till preparatet.",
+   "s": 35.33,
+   "e": 40.79
+  },
+  {
+   "t": "Aktiviteten är proportionell mot antalet atomkärnor N.",
+   "s": 40.79,
+   "e": 47.74
+  },
+  {
+   "t": "Ju fler atomkärnor desto större aktivitet.",
+   "s": 40.79,
+   "e": 47.74
+  },
+  {
+   "t": "Proportionalitetskonstanten kallas sönderfallskonstant, betecknas λ (lilla lambda) och är olika för olika ämnen.",
+   "s": 47.74,
+   "e": 55.8
+  },
+  {
+   "t": "Ju högre värde på λ desto snabbare sönderfaller ett ämne.",
+   "s": 55.8,
+   "e": 60.1
+  },
+  {
+   "t": "Aktivitet",
+   "s": 60.1,
+   "e": 62.09
+  },
+  {
+   "t": "arean A är lika med våglängden lambda gånger N",
+   "s": 62.09,
+   "e": 66.78
+  },
+  {
+   "t": "där",
+   "s": 66.78,
+   "e": 68.25
+  },
+  {
+   "t": "A är lika med aktivitet (Bq)",
+   "s": 68.25,
+   "e": 71.78
+  },
+  {
+   "t": "λ är lika med sönderfallskonstant (1/s eller s upphöjt till minus 1)",
+   "s": 71.78,
+   "e": 78.15
+  },
+  {
+   "t": "N är lika med antal atomkärnor",
+   "s": 78.15,
+   "e": 81.45
+  },
+  {
+   "t": "Den tid det tar för hälften av atomkärnorna att sönderfalla kallas halveringstid.",
+   "s": 81.45,
+   "e": 87.2
+  },
+  {
+   "t": "Sönderfallskonstanten beror direkt av ämnets halveringstid.",
+   "s": 87.2,
+   "e": 92.01
+  },
+  {
+   "t": "Sönderfallskonstanten",
+   "s": 92.01,
+   "e": 94.6
+  },
+  {
+   "t": "våglängden lambda är lika med naturliga logaritmen av 2 delat med T 1 delat med 2",
+   "s": 94.6,
+   "e": 101.05
+  },
+  {
+   "t": "där",
+   "s": 101.05,
+   "e": 102.53
+  },
+  {
+   "t": "λ är lika med sönderfallskonstanten (1/s)",
+   "s": 102.53,
+   "e": 107.15
+  },
+  {
+   "t": "T 1 delat med 2 är lika med halveringstid (sekunder)",
+   "s": 107.15,
+   "e": 111.97
+  },
+  {
+   "t": "Sönderfallskonstanten (överkurs)",
+   "s": 111.97,
+   "e": 115.75
+  },
+  {
+   "t": "Vi vet att ett radioaktivt preparat sönderfaller med en viss halveringstid T och alltså avtar exponentiellt.",
+   "s": 115.75,
+   "e": 122.89
+  },
+  {
+   "t": "En generell exponentialfunktion kan skrivas y är lika med C gånger accelerationen a upphöjt till x eller y är lika med C gånger e upphöjt till k x ekvation 1.",
+   "s": 122.89,
+   "e": 133.4
+  },
+  {
+   "t": "Vid tillämpningar om förändringar med tid står y för värdet efter tiden x med startvärdet C.",
+   "s": 133.4,
+   "e": 139.57
+  },
+  {
+   "t": "I detta fall låter vi värdet y stå för en mängd N.",
+   "s": 139.57,
+   "e": 146.44
+  },
+  {
+   "t": "Startvärdet C är mängden från början som vi kallar N noll .",
+   "s": 139.57,
+   "e": 146.44
+  },
+  {
+   "t": "Tiden kallar vi t.",
+   "s": 146.44,
+   "e": 152.45
+  },
+  {
+   "t": "Konstanten k i exponenten motsvarar sönderfallskonstanten λ.",
+   "s": 146.44,
+   "e": 152.45
+  },
+  {
+   "t": "Eftersom vi vet att det är en exponentiellt avtagande funktion måste exponenten vara negativ.",
+   "s": 152.45,
+   "e": 158.61
+  },
+  {
+   "t": "Insättning ger",
+   "s": 158.61,
+   "e": 160.86
+  },
+  {
+   "t": "N är lika med N noll gånger e upphöjt till minus våglängden lambda tiden t",
+   "s": 160.86,
+   "e": 166.53
+  },
+  {
+   "t": "Vid tiden t är lika med T (en halveringstid) återstår hälften av preparatet, dvs. N noll delat med 2 .",
+   "s": 166.53,
+   "e": 174.68
+  },
+  {
+   "t": "Insättning ger",
+   "s": 174.68,
+   "e": 176.93
+  },
+  {
+   "t": "N noll delat med 2 är lika med N noll gånger e upphöjt till minus våglängden lambda periodtiden T",
+   "s": 176.93,
+   "e": 185.39
+  },
+  {
+   "t": "Dividerar båda led med N noll .",
+   "s": 176.93,
+   "e": 185.39
+  },
+  {
+   "t": "1 delat med 2 är lika med e upphöjt till minus våglängden lambda periodtiden T",
+   "s": 185.39,
+   "e": 215.32
+  },
+  {
+   "t": "Logaritmerar båda led, använder logaritmlagar och löser ut λ:",
+   "s": 185.39,
+   "e": 215.32
+  },
+  {
+   "t": "naturliga logaritmen av parentesen 1 delat med 2 slut parentes är lika med minus våglängden lambda periodtiden T vilket är ekvivalent med att minus naturliga logaritmen av 2 är lika med minus lambda T vilket är ekvivalent med att lambda är lika med naturliga logaritmen av 2 delat med T som är lika med naturliga logaritmen av 2 delat med T 1 delat med 2 vilket skulle visas",
+   "s": 185.39,
+   "e": 217.9
+  },
+  {
+   "t": "I ett radioaktivt material avtar aktiviteten med tiden eftersom mängden av det minskar vid sönderfall.",
+   "s": 217.9,
+   "e": 224.4
+  },
+  {
+   "t": "Aktivitetslagen",
+   "s": 224.4,
+   "e": 226.72
+  },
+  {
+   "t": "arean A är lika med A noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2",
+   "s": 226.72,
+   "e": 233.94
+  },
+  {
+   "t": "där",
+   "s": 233.94,
+   "e": 235.43
+  },
+  {
+   "t": "A är lika med aktivitet efter tiden t (Bq)",
+   "s": 235.43,
+   "e": 239.74
+  },
+  {
+   "t": "A noll är lika med aktivitet vid t är lika med 0 (Bq)",
+   "s": 239.74,
+   "e": 244.79
+  },
+  {
+   "t": "t är lika med tid (valfri tidsenhet, men samma enhet som halveringstiden T 1 delat med 2 )",
+   "s": 244.79,
+   "e": 252.26
+  },
+  {
+   "t": "T 1 delat med 2 är lika med halveringstid",
+   "s": 252.26,
+   "e": 256.25
+  },
+  {
+   "t": "I ett radioaktivt material avtar även antalet kärnor med tiden på precis motsvarande sätt som aktiviteten.",
+   "s": 256.25,
+   "e": 263.5
+  },
+  {
+   "t": "Sönderfallslagen",
+   "s": 263.5,
+   "e": 265.95
+  },
+  {
+   "t": "N är lika med N noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2",
+   "s": 265.95,
+   "e": 272.61
+  },
+  {
+   "t": "där",
+   "s": 272.61,
+   "e": 274.12
+  },
+  {
+   "t": "N är lika med antalet kärnor efter tiden t",
+   "s": 274.12,
+   "e": 280.61
+  },
+  {
+   "t": "N noll är lika med antalet kärnor vid t är lika med 0",
+   "s": 274.12,
+   "e": 280.61
+  },
+  {
+   "t": "t är lika med tid (valfri tidsenhet, men samma enhet som halveringstiden T 1 delat med 2 )",
+   "s": 280.61,
+   "e": 288.09
+  },
+  {
+   "t": "T 1 delat med 2 är lika med halveringstid",
+   "s": 288.09,
+   "e": 292.1
+  },
+  {
+   "t": "Kol-14-metoden",
+   "s": 292.1,
+   "e": 294.94
+  },
+  {
+   "t": "Den radioaktiva isotopen Kol-14 bildas i atmosfären då kosmisk strålning frigör neutroner som i sin tur omvandlar kväve i luften till Kol-14.",
+   "s": 294.94,
+   "e": 306.62
+  },
+  {
+   "t": "Kol-14 reagerar med syre i luften och bildar koldioxid som tas upp av växter och djur när de andas eller äter växter.",
+   "s": 306.57,
+   "e": 314.55
+  },
+  {
+   "t": "Alla levande varelser innehåller alltså en ganska konstant mängd Kol-14.",
+   "s": 314.55,
+   "e": 320.12
+  },
+  {
+   "t": "När de dör upphör upptaget av Kol-14 och halten minskar.",
+   "s": 320.12,
+   "e": 324.8
+  },
+  {
+   "t": "Att använda halten av Kol-14 för att tidsbestämma material som varit levande, t.ex. trä eller skelett, kallas kol-14-metoden.",
+   "s": 324.8,
+   "e": 333.96
+  },
+  {
+   "t": "Efter 10 halveringar återstår endast 1 promille ( 0,5 upphöjt till 10 är ungefär lika med 0,001 ), så kol-14-metoden passar för dateringar upp till 5 730 gånger 10 är ungefär lika med 50 000 år.",
+   "s": 333.96,
+   "e": 348.91
+  },
+  {
+   "t": "Exempel 1 — Aktivitet av Cs-137 om 10 år",
+   "s": 348.91,
+   "e": 354.34
+  },
+  {
+   "t": "Ett preparat med Cs-137 har en aktivitet på 0,25 MBq.",
+   "s": 354.34,
+   "e": 360.59
+  },
+  {
+   "t": "Vad är aktiviteten om 10 år?",
+   "s": 360.59,
+   "e": 363.97
+  },
+  {
+   "t": "arean A är lika med A noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2",
+   "s": 363.97,
+   "e": 371.3
+  },
+  {
+   "t": "A noll är lika med 0,25 MBq som är lika med 0,25 gånger 10 upphöjt till 6 Bq tiden t som är lika med 10 år T 1 delat med 2 som är lika med 30,08 år parentesen tabell slut parentes",
+   "s": 371.3,
+   "e": 385.5
+  },
+  {
+   "t": "arean A är lika med 0,25 gånger 10 upphöjt till 6 gånger 0,5 upphöjt till 10 delat med 30,08 som är lika med 198 547,099 ldots Bq som är ungefär lika med 200 000 Bq som är lika med 0,20 MBq",
+   "s": 385.5,
+   "e": 408.92
+  },
+  {
+   "t": "Svar: 0,20 MBq",
+   "s": 385.5,
+   "e": 408.92
+  },
+  {
+   "t": "Exempel 2 — Brandvarnare med Am-241",
+   "s": 385.5,
+   "e": 408.92
+  },
+  {
+   "t": "En brandvarnare av vanlig typ innehåller Am-241.",
+   "s": 408.92,
+   "e": 413.97
+  },
+  {
+   "t": "Bestäm hur stor andel av preparatet som återstår efter 100 år.",
+   "s": 413.97,
+   "e": 418.96
+  },
+  {
+   "t": "N är lika med N noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2",
+   "s": 418.96,
+   "e": 425.59
+  },
+  {
+   "t": "tiden t är lika med 100 år T 1 delat med 2 som är lika med 432,6 år parentesen tabell slut parentes",
+   "s": 425.59,
+   "e": 434.92
+  },
+  {
+   "t": "N är lika med N noll gånger 0,5 upphöjt till 100 delat med 432,6 som är lika med N noll gånger 0,8519 ldots som är ungefär lika med N noll gånger 0,85",
+   "s": 434.92,
+   "e": 448.01
+  },
+  {
+   "t": "Svar: Ca 85 procent återstår.",
+   "s": 448.01,
+   "e": 451.97
+  },
+  {
+   "t": "Exempel 3 — Skeppsvrak (kol-14-datering)",
+   "s": 451.97,
+   "e": 456.79
+  },
+  {
+   "t": "En dykare hittar ett skeppsvrak vars halt av Kol-14 är 83,2 procent av den normala.",
+   "s": 456.79,
+   "e": 463.56
+  },
+  {
+   "t": "Hur gammalt är vraket?",
+   "s": 463.56,
+   "e": 466.2
+  },
+  {
+   "t": "N är lika med N noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2",
+   "s": 466.2,
+   "e": 472.87
+  },
+  {
+   "t": "N är lika med 0,832 gånger N noll T 1 delat med 2 som är lika med 5 730 år parentesen tabell slut parentes",
+   "s": 472.87,
+   "e": 483.26
+  },
+  {
+   "t": "0,832 gånger N noll är lika med N noll gånger 0,5 upphöjt till tiden t delat med 5730 vilket är ekvivalent med att 0,832 är lika med 0,5 upphöjt till t delat med 5730",
+   "s": 483.26,
+   "e": 499.4
+  },
+  {
+   "t": "Logaritmerar båda led och tillämpar logaritmlagarna:",
+   "s": 499.4,
+   "e": 511.2
+  },
+  {
+   "t": "logaritmen av 0,832 är lika med tiden t delat med 5 730 gånger logaritmen av 0,5",
+   "s": 499.4,
+   "e": 511.2
+  },
+  {
+   "t": "Vi löser ut t och får",
+   "s": 511.2,
+   "e": 514.24
+  },
+  {
+   "t": "tiden t är lika med 5 730 gånger logaritmen av 0,832 delat med logaritmen av 0,5 som är lika med 1 520,424 ldots år som är ungefär lika med 1 520 år",
+   "s": 514.24,
+   "e": 529.81
+  },
+  {
+   "t": "Svar: 1 520 år",
+   "s": 529.81,
+   "e": 533.72
+  }
+ ]
+}

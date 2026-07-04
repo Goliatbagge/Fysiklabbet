@@ -1,0 +1,318 @@
+{
+ "id": "fy1-2.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4920a30d8c1d40ae46e52647db48b6229001b857",
+ "dur": 329.36,
+ "segments": [
+  {
+   "t": "Torricellis ekvation",
+   "s": 0.1,
+   "e": 2.64
+  },
+  {
+   "t": "OBS — avsnittet är ännu ej klart",
+   "s": 2.59,
+   "e": 6.12
+  },
+  {
+   "t": "Detta avsnitt är under utveckling.",
+   "s": 6.12,
+   "e": 9.28
+  },
+  {
+   "t": "Innehållet nedan är ett första utkast.",
+   "s": 9.28,
+   "e": 12.75
+  },
+  {
+   "t": "Hittills när vi har löst problem med konstant acceleration — tänk en bil som bromsar in, eller en boll vi kastar rakt upp — har vi använt de här två formlerna:",
+   "s": 12.75,
+   "e": 31.26
+  },
+  {
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t",
+   "s": 12.75,
+   "e": 31.26
+  },
+  {
+   "t": "sträckan s är lika med v noll gånger tiden t plus 1 delat med 2 accelerationen a gånger t i kvadrat",
+   "s": 12.75,
+   "e": 31.26
+  },
+  {
+   "t": "De fungerar jättebra.",
+   "s": 31.26,
+   "e": 33.89
+  },
+  {
+   "t": "Men ni har säkert märkt att vi väldigt ofta måste använda båda två för att lösa ett enda problem.",
+   "s": 33.89,
+   "e": 39.92
+  },
+  {
+   "t": "Till exempel: \"Hur lång sträcka s behöver en bil för att bromsa från 20 meter per sekund till 0 meter per sekund med accelerationen −5 meter per sekund i kvadrat?\"",
+   "s": 39.92,
+   "e": 50.45
+  },
+  {
+   "t": "Om vi tittar på formel 2 för att hitta sträckan s, ser vi att vi behöver veta tiden t.",
+   "s": 50.45,
+   "e": 56.38
+  },
+  {
+   "t": "Den har vi inte.",
+   "s": 56.38,
+   "e": 58.73
+  },
+  {
+   "t": "Så då måste vi först gå till formel 1, lösa ut tiden t, och sedan stoppa in det värdet i formel 2.",
+   "s": 58.73,
+   "e": 65.4
+  },
+  {
+   "t": "Det fungerar, men det är två steg.",
+   "s": 65.4,
+   "e": 68.71
+  },
+  {
+   "t": "Det tar tid, och det finns fler ställen att göra slarvfel på.",
+   "s": 68.71,
+   "e": 73.17
+  },
+  {
+   "t": "Tänk om det fanns en genväg?",
+   "s": 73.17,
+   "e": 76.03
+  },
+  {
+   "t": "En \"elegant\" formel som helt enkelt hoppar över tiden?",
+   "s": 76.03,
+   "e": 80.16
+  },
+  {
+   "t": "Det är precis vad vi ska titta på i dag.",
+   "s": 80.16,
+   "e": 83.56
+  },
+  {
+   "t": "Vi ska härleda och börja använda en av de mest kraftfulla genvägarna i rörelseläran: Torricellis ekvation.",
+   "s": 83.56,
+   "e": 90.96
+  },
+  {
+   "t": "Torricellis ekvation",
+   "s": 90.96,
+   "e": 93.51
+  },
+  {
+   "t": "hastigheten v i kvadrat minus v noll i kvadrat är lika med 2 accelerationen a sträckan s",
+   "s": 93.51,
+   "e": 100.5
+  },
+  {
+   "t": "där",
+   "s": 100.5,
+   "e": 102.01
+  },
+  {
+   "t": "v är lika med sluthastighet (meter per sekund)",
+   "s": 102.01,
+   "e": 106.49
+  },
+  {
+   "t": "v noll är lika med begynnelsehastighet (meter per sekund)",
+   "s": 106.49,
+   "e": 111.61
+  },
+  {
+   "t": "a är lika med acceleration (m/s i kvadrat)",
+   "s": 111.61,
+   "e": 116.51
+  },
+  {
+   "t": "s är lika med förflyttning (meter)",
+   "s": 116.51,
+   "e": 120.05
+  },
+  {
+   "t": "Den här ekvationen kallas ibland för \"den tidlösa ekvationen\", och det är precis vad den är.",
+   "s": 120.05,
+   "e": 126.08
+  },
+  {
+   "t": "Den ger oss ett direkt samband mellan:",
+   "s": 126.08,
+   "e": 131.07
+  },
+  {
+   "t": "v (sluthastigheten)",
+   "s": 126.08,
+   "e": 131.07
+  },
+  {
+   "t": "v noll (begynnelsehastigheten)",
+   "s": 131.07,
+   "e": 134.54
+  },
+  {
+   "t": "a (accelerationen)",
+   "s": 134.54,
+   "e": 137.22
+  },
+  {
+   "t": "s (förflyttningen)",
+   "s": 137.22,
+   "e": 139.8
+  },
+  {
+   "t": "…utan att vi överhuvudtaget behöver bry oss om hur lång tid (t) rörelsen tog.",
+   "s": 139.8,
+   "e": 145.99
+  },
+  {
+   "t": "Om vi går tillbaka till vårt bilproblem: Vi vet v noll ekvation 20, v ekvation 0, och a (−5).",
+   "s": 145.99,
+   "e": 153.8
+  },
+  {
+   "t": "Vi söker s.",
+   "s": 153.8,
+   "e": 156.0
+  },
+  {
+   "t": "Med Torricellis ekvation kan vi lösa det i ett enda steg, istället för två.",
+   "s": 156.0,
+   "e": 161.39
+  },
+  {
+   "t": "Den enda regeln — och den är exakt samma som för de andra formlerna — är att den bara fungerar om accelerationen a är konstant.",
+   "s": 161.39,
+   "e": 168.75
+  },
+  {
+   "t": "Härledning",
+   "s": 168.75,
+   "e": 170.79
+  },
+  {
+   "t": "Torricellis ekvation, som korrekt skrivs hastigheten v i kvadrat minus v noll i kvadrat är lika med 2 accelerationen a sträckan s , härleds direkt från de andra rörelseekvationerna ( hastigheten v är lika med v noll plus accelerationen a tiden t och sträckan s är lika med v noll tiden t plus 1 delat med 2 accelerationen a t i kvadrat ) genom att eliminera tiden t.",
+   "s": 170.79,
+   "e": 193.03
+  },
+  {
+   "t": "Eftersom dessa ekvationer i sig kräver konstant acceleration, gäller samma sak för Torricellis.",
+   "s": 193.03,
+   "e": 199.49
+  },
+  {
+   "t": "Viktiga detaljer att komma ihåg",
+   "s": 199.49,
+   "e": 202.56
+  },
+  {
+   "t": "Även om den alltid är tillämpbar vid konstant acceleration, finns det ett par vanliga \"fällor\" eller viktiga nyanser att tänka på när man använder den.",
+   "s": 202.56,
+   "e": 210.93
+  },
+  {
+   "t": "1. s är förflyttning, inte sträcka",
+   "s": 210.93,
+   "e": 214.5
+  },
+  {
+   "t": "Förflyttning (sekunder): nettoförändringen i position (en vektor).",
+   "s": 214.5,
+   "e": 220.19
+  },
+  {
+   "t": "Om du kastar en boll rakt upp och fångar den på samma höjd är din totala förflyttning s är lika med 0.",
+   "s": 220.19,
+   "e": 226.49
+  },
+  {
+   "t": "Sträcka: den totala väg du har rört dig (en skalar).",
+   "s": 226.49,
+   "e": 231.12
+  },
+  {
+   "t": "I bollexemplet är sträckan 2 gånger max-höjden.",
+   "s": 231.12,
+   "e": 235.19
+  },
+  {
+   "t": "Torricellis ekvation använder förflyttning.",
+   "s": 235.19,
+   "e": 238.9
+  },
+  {
+   "t": "Om s är lika med 0 i bollexemplet ger ekvationen hastigheten v i kvadrat minus v noll i kvadrat är lika med 0 , vilket korrekt säger att sluthastigheten v har samma fart som v noll, bara motsatt riktning.",
+   "s": 238.9,
+   "e": 251.46
+  },
+  {
+   "t": "2.",
+   "s": 251.46,
+   "e": 254.66
+  },
+  {
+   "t": "En dimension i taget",
+   "s": 251.46,
+   "e": 254.66
+  },
+  {
+   "t": "Ekvationen hanterar rörelse i en enda dimension (t.ex. bara x-led eller bara y-led).",
+   "s": 254.66,
+   "e": 261.64
+  },
+  {
+   "t": "Vid kaströrelser (två dimensioner) måste du dela upp problemet.",
+   "s": 261.64,
+   "e": 266.74
+  },
+  {
+   "t": "Du kan använda ekvationen för den vertikala rörelsen (med a y är lika med minus tyngdfaktorn g ) och separat för den horisontella rörelsen (ofta med a x är lika med 0 ).",
+   "s": 266.74,
+   "e": 277.59
+  },
+  {
+   "t": "När är den INTE tillämpbar?",
+   "s": 277.59,
+   "e": 280.39
+  },
+  {
+   "t": "Ekvationen fallerar så fort accelerationen inte är konstant.",
+   "s": 280.39,
+   "e": 285.02
+  },
+  {
+   "t": "Exempel:",
+   "s": 285.02,
+   "e": 291.21
+  },
+  {
+   "t": "Luftmotstånd — kraften (och därmed accelerationen) beror på hastigheten.",
+   "s": 285.02,
+   "e": 293.43
+  },
+  {
+   "t": "Fjäderkraft — kraften (och därmed accelerationen) beror på positionen ( kraften F är lika med minus k x ).",
+   "s": 293.38,
+   "e": 301.83
+  },
+  {
+   "t": "Cirkelrörelse — även vid konstant fart i en cirkel ändrar accelerationsvektorn ständigt riktning (den är inte konstant).",
+   "s": 301.83,
+   "e": 309.94
+  },
+  {
+   "t": "I dessa fall måste man istället använda kalkyl (integration) för att lösa problemet.",
+   "s": 309.94,
+   "e": 315.94
+  },
+  {
+   "t": "Sammanfattningsvis: ekvationen är själva definitionen av vad som händer vid konstant acceleration, och dess stora fördel är att den relaterar hastighet, acceleration och förflyttning utan att man behöver veta tiden (t).",
+   "s": 315.94,
+   "e": 329.36
+  }
+ ]
+}

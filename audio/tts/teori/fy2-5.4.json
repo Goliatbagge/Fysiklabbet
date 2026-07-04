@@ -1,0 +1,238 @@
+{
+ "id": "fy2-5.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "dd27eb9bbfaba0d140f84598efc590664c876a47",
+ "dur": 51.98,
+ "segments": [
+  {
+   "t": "Solens färg",
+   "s": 0.1,
+   "e": 2.31
+  },
+  {
+   "t": "Varför är solen vit mitt på dagen men glödande röd vid solnedgång?",
+   "s": 2.26,
+   "e": 7.33
+  },
+  {
+   "t": "Och varför är himlen blå?",
+   "s": 7.33,
+   "e": 9.93
+  },
+  {
+   "t": "Båda fenomenen har samma orsak — Rayleighspridning av solljus i jordens atmosfär.",
+   "s": 9.93,
+   "e": 15.85
+  },
+  {
+   "t": "Solens \"egentliga\" färg",
+   "s": 15.85,
+   "e": 18.61
+  },
+  {
+   "t": "Solens yta håller en temperatur kring 5 800 kelvin och strålar i mycket god approximation som en svart kropp (se avsnitt 4.3).",
+   "s": 18.61,
+   "e": 28.51
+  },
+  {
+   "t": "Enligt Wiens förskjutningslag har solens spektrum sitt maximum vid ungefär 500 nanometer — mitt i det synliga området, mellan blå och grön (cyan).",
+   "s": 28.51,
+   "e": 38.34
+  },
+  {
+   "t": "Eftersom solen samtidigt sänder ut alla våglängder i det synliga spektrumet uppfattas ljuset som vitt när vi tittar på det utanför atmosfären (till exempel från rymdstationen ISS).",
+   "s": 38.34,
+   "e": 49.59
+  },
+  {
+   "t": "Rayleighspridning",
+   "s": 49.59,
+   "e": 51.98
+  },
+  {
+   "t": "När solljuset passerar genom jordens atmosfär krockar fotonerna med luftens molekyler (mest kväve och syre).",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Korta våglängder (blått ljus) sprids mycket mer än långa våglängder (rött ljus).",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Sannolikheten för att en foton sprids är ungefär proportionell mot 1 delat med våglängden lambda upphöjt till 4 :",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Rayleighspridningens våglängdsberoende",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "sigma är proportionell mot 1 delat med våglängden lambda upphöjt till 4",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "där",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "σ är lika med sannolikheten/intensiteten för spridning",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Eftersom λ förekommer i fjärde potens blir spridningen mycket olika för olika färger:",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Hur mycket sprids ljuset?",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Violett ljus ( våglängden lambda är ungefär lika med 400 nanometer) sprids ungefär 10 gånger mer än rött ljus ( våglängden lambda är ungefär lika med 700 nanometer), eftersom parentesen 700 delat med 400 slut parentes upphöjt till 4 är ungefär lika med 9,4 .",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Blått ljus ( våglängden lambda är ungefär lika med 450 nanometer) sprids ungefär 6 gånger mer än rött ljus.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Därför är himlen blå",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Det blå ljuset som sprids ur den direkta solstrålen måste ta vägen någonstans — det når oss från hela himlen istället för från solen.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Det är därför vi ser en blå himmel åt nästan alla håll dagtid.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Att vi inte ser violett (som sprids ännu mer) beror på att solen sänder ut mindre violett ljus från början, och att våra ögon är mer känsliga för blått.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Gasmolekylerna sprider den blå delen av solljuset åt alla håll — därför ser himlen blå ut åt vilket håll vi än tittar, medan ljuset direkt från solen blir något varmare i tonen.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Därför blir solen röd vid solnedgång",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "När solen står högt på himlen passerar ljuset genom ungefär en luftmassa atmosfär.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Då sprids ett måttligt antal blå fotoner ur den direkta strålen — inte tillräckligt för att märkbart färga solen.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "När solen närmar sig horisonten måste ljuset däremot korsa mycket mer luft — upp till cirka 38 luftmassor!",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "På så lång väg sprids nästan allt blått och mycket av det gröna bort, medan det röda ljuset slipper igenom.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Den direkta solstrålen blir då orange, röd eller mörkröd — och samma sak händer med månen nära horisonten.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Vid horisonten passerar solljuset mångdubbelt mer atmosfär än när solen står högt — det blå ljuset hinner spridas bort och solen ser röd ut.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Hur färgen beräknas",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "I simuleringen utgår vi från solens spektrum approximerat som svartkroppsstrålning vid 5 778 kelvin.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "För varje våglängd i intervallet 380–720 nanometer beräknas hur stor andel som överlever atmosfären:",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "periodtiden T parentesen våglängden lambda slut parentes är lika med e upphöjt till minus tau parentesen lambda slut parentes gånger kraftmomentet M",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "där tau parentesen våglängden lambda slut parentes är proportionell mot 1 delat med lambda upphöjt till 4 är atmosfärens optiska tjocklek och M är luftmassan (1 vid zenit, upp till ca 38 vid horisonten).",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Det filtrerade spektrumet integreras sedan mot ögats CIE 1931-färgmatchningsfunktioner för att få den färg som vi faktiskt skulle se.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Resultatet är solens verkliga färg — inte en artistisk tolkning.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Varför inte alltid lika röd solnedgång?",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Färgen vid solnedgång beror också på:",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Stoft och vattendroppar i luften — fler partiklar ger djupare rött.",
+   "s": 51.98,
+   "e": 51.98
+  },
+  {
+   "t": "Vulkanutbrott — kan ge spektakulärt röda solnedgångar i månader efteråt, eftersom stoft kastas upp i höga lager av atmosfären.",
+   "s": 0.1,
+   "e": 8.88
+  },
+  {
+   "t": "Luftföroreningar och dimma — kan både förstärka och dämpa färgen.",
+   "s": 8.82,
+   "e": 13.66
+  },
+  {
+   "t": "På höga berg, där atmosfären är tunnare, är solen vitare även när den står lågt.",
+   "s": 13.66,
+   "e": 19.68
+  }
+ ]
+}

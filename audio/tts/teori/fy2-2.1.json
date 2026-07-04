@@ -1,0 +1,358 @@
+{
+ "id": "fy2-2.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "be70ccf0c11d21358ac92b2ded5ea07fe6440252",
+ "dur": 373.63,
+ "segments": [
+  {
+   "t": "Hookes lag",
+   "s": 0.1,
+   "e": 2.12
+  },
+  {
+   "t": "Om en spiralfjäder belastas med olika vikter kommer den att förlängas.",
+   "s": 2.08,
+   "e": 7.09
+  },
+  {
+   "t": "Ju större kraft F som belastar fjädern, desto större blir förlängningen Δl.",
+   "s": 7.09,
+   "e": 15.86
+  },
+  {
+   "t": "Fjäderkraften uppåt blir lika stor eftersom kraftjämvikt uppstår.",
+   "s": 7.09,
+   "e": 15.86
+  },
+  {
+   "t": "Kraften är proportionell mot förlängningen med en viss proportionalitets- konstant k.",
+   "s": 15.86,
+   "e": 21.76
+  },
+  {
+   "t": "Denna konstant kallas fjäderkonstant och är ett mått på hur \"hård\" fjädern är.",
+   "s": 21.76,
+   "e": 26.77
+  },
+  {
+   "t": "Ju större fjäderkonstant desto mer kraft krävs för att dra ut fjädern.",
+   "s": 26.77,
+   "e": 31.85
+  },
+  {
+   "t": "Sambandet mellan kraften och fjäderförlängningen kallas Hookes lag.",
+   "s": 31.85,
+   "e": 36.7
+  },
+  {
+   "t": "Hookes lag",
+   "s": 36.7,
+   "e": 38.69
+  },
+  {
+   "t": "kraften F är lika med k gånger delta hävarmen l",
+   "s": 38.69,
+   "e": 43.06
+  },
+  {
+   "t": "där",
+   "s": 43.06,
+   "e": 44.52
+  },
+  {
+   "t": "F är lika med kraft som belastar fjäder eller kraft från fjäder (newton)",
+   "s": 44.52,
+   "e": 50.29
+  },
+  {
+   "t": "k är lika med fjäderkonstant (N/m)",
+   "s": 50.29,
+   "e": 54.48
+  },
+  {
+   "t": "Δl är lika med fjäderns förlängning (meter)",
+   "s": 54.48,
+   "e": 58.36
+  },
+  {
+   "t": "Utifrån förlängningen kan vi alltså bestämma tyngden på det vi hänger i fjädern.",
+   "s": 58.36,
+   "e": 63.55
+  },
+  {
+   "t": "Det är denna princip som en dynamometer bygger på.",
+   "s": 63.55,
+   "e": 67.55
+  },
+  {
+   "t": "Kraft i fjäder",
+   "s": 67.55,
+   "e": 69.85
+  },
+  {
+   "t": "Det är två krafter som verkar på en vikt som hänger i en fjäder: fjäderkraften uppåt samt tyngdkraften nedåt.",
+   "s": 69.85,
+   "e": 77.05
+  },
+  {
+   "t": "Tillsammans bildar de den resulterande kraften.",
+   "s": 77.05,
+   "e": 80.86
+  },
+  {
+   "t": "När vikten hänger i vila är tyngdkraften lika stor som fjäderkraften.",
+   "s": 80.86,
+   "e": 85.91
+  },
+  {
+   "t": "Detta läge kallas jämviktsläget och där är den resulterande kraften 0.",
+   "s": 85.91,
+   "e": 91.19
+  },
+  {
+   "t": "Om vi tar tag i vikten och drar den nedåt ändrar vi läget i förhållande till jämviktsläget.",
+   "s": 91.19,
+   "e": 97.22
+  },
+  {
+   "t": "Viktens läge i förhållande till jämviktsläget betecknas y och kallas elongation.",
+   "s": 97.22,
+   "e": 103.1
+  },
+  {
+   "t": "Elongation",
+   "s": 103.1,
+   "e": 105.11
+  },
+  {
+   "t": "y < 0 (negativ): vikten är under jämviktsläget",
+   "s": 105.11,
+   "e": 110.09
+  },
+  {
+   "t": "y > 0 (positiv): vikten är över jämviktsläget",
+   "s": 110.09,
+   "e": 114.99
+  },
+  {
+   "t": "y är lika med 0: vikten är i jämviktsläget",
+   "s": 114.99,
+   "e": 119.29
+  },
+  {
+   "t": "Om vi släpper vikten efter att vi dragit den nedåt börjar den pendla upp och ned kring jämviktsläget.",
+   "s": 119.29,
+   "e": 125.53
+  },
+  {
+   "t": "Avståndet mellan ett vändläge och jämviktsläget kallas amplitud.",
+   "s": 125.53,
+   "e": 130.65
+  },
+  {
+   "t": "Amplituden minskar och vikten stannar till slut.",
+   "s": 130.65,
+   "e": 134.65
+  },
+  {
+   "t": "En sådan avtagande svängning kallas dämpad svängning.",
+   "s": 134.65,
+   "e": 138.8
+  },
+  {
+   "t": "Den beror på energiförluster i form av värme i fjädern.",
+   "s": 138.8,
+   "e": 143.45
+  },
+  {
+   "t": "Om vi tar bort energiförlusterna skulle fjädern fortsätta pendla oförändrat mellan samma vändlägen — med oförändrad amplitud.",
+   "s": 143.45,
+   "e": 151.14
+  },
+  {
+   "t": "En sådan svängning kallas harmonisk svängning.",
+   "s": 151.14,
+   "e": 155.0
+  },
+  {
+   "t": "I uppgifter bortser vi från energiförluster, om inte annat anges.",
+   "s": 155.0,
+   "e": 160.1
+  },
+  {
+   "t": "Resulterande kraft på en vikt i fjäder",
+   "s": 160.1,
+   "e": 163.66
+  },
+  {
+   "t": "När en vikt pendlar i en fjäder är den resulterande kraften F resistansen R alltid riktad mot jämviktsläget.",
+   "s": 163.66,
+   "e": 170.97
+  },
+  {
+   "t": "Resulterande kraft på vikt i fjäder",
+   "s": 170.97,
+   "e": 174.39
+  },
+  {
+   "t": "F resistansen R är lika med minus k gånger y",
+   "s": 174.39,
+   "e": 178.7
+  },
+  {
+   "t": "där",
+   "s": 178.7,
+   "e": 180.18
+  },
+  {
+   "t": "F resistansen R är lika med resulterande kraft (newton)",
+   "s": 180.18,
+   "e": 185.49
+  },
+  {
+   "t": "k är lika med fjäderkonstant (N/m)",
+   "s": 185.49,
+   "e": 189.7
+  },
+  {
+   "t": "y är lika med elongationen (meter)",
+   "s": 189.7,
+   "e": 193.41
+  },
+  {
+   "t": "Minustecknet anger att kraften har motsatt riktning mot elongationen — den är alltid riktad mot jämviktsläget.",
+   "s": 193.41,
+   "e": 200.47
+  },
+  {
+   "t": "Fart och acceleration i fjädersvängning",
+   "s": 200.47,
+   "e": 204.05
+  },
+  {
+   "t": "Utifrån formeln F resistansen R är lika med minus k gånger y kan vi också säga något om hastigheten och accelerationen i olika delar av rörelsen.",
+   "s": 204.05,
+   "e": 213.65
+  },
+  {
+   "t": "Farten är som störst i jämviktsläget eftersom det där inte finns någon resulterande kraft som bromsar rörelsen.",
+   "s": 213.65,
+   "e": 220.91
+  },
+  {
+   "t": "Farten är 0 i vändpunkterna eftersom vikten stannar där.",
+   "s": 220.91,
+   "e": 225.28
+  },
+  {
+   "t": "Enligt Newtons andra lag är accelerationen a är lika med F resistansen R delat med massan m .",
+   "s": 225.28,
+   "e": 232.15
+  },
+  {
+   "t": "Eftersom massan är konstant är accelerationen som störst i vändpunkterna (där resultanten är som störst) och 0 i jämviktsläget.",
+   "s": 232.15,
+   "e": 240.93
+  },
+  {
+   "t": "Översikt — fart och acceleration",
+   "s": 240.93,
+   "e": 244.35
+  },
+  {
+   "t": "Exempel 1 — Vikt i fjäder",
+   "s": 244.35,
+   "e": 247.55
+  },
+  {
+   "t": "En vikt med massan 250 gram hängs i en fjäder som då förlängs 8,0 centimeter.",
+   "s": 247.55,
+   "e": 254.15
+  },
+  {
+   "t": "Du drar sedan ner vikten 5,0 centimeter och släpper.",
+   "s": 254.15,
+   "e": 258.81
+  },
+  {
+   "t": "a) Bestäm fjäderkonstanten.",
+   "s": 258.81,
+   "e": 261.99
+  },
+  {
+   "t": "b) Hur stor är accelerationen i släppögonblicket?",
+   "s": 261.99,
+   "e": 266.41
+  },
+  {
+   "t": "a) Vi ställer upp Hookes lag och löser ut fjäderkonstanten k.",
+   "s": 266.41,
+   "e": 278.73
+  },
+  {
+   "t": "kraften F är lika med k gånger delta hävarmen l vilket är ekvivalent med att k är lika med F delat med delta l, ekvation 1",
+   "s": 266.41,
+   "e": 278.73
+  },
+  {
+   "t": "kraften F är lika med massan m gånger tyngdfaktorn g som är lika med 0,250 gånger 9,82 som är lika med 2,455 newton delta hävarmen l som är lika med 8,0 centimeter som är lika med 0,080 meter",
+   "s": 278.73,
+   "e": 294.01
+  },
+  {
+   "t": "k är lika med 2,455 delat med 0,080 som är lika med 30,6875 newton per meter",
+   "s": 294.01,
+   "e": 302.62
+  },
+  {
+   "t": "Svar: 31 newton/m",
+   "s": 302.74,
+   "e": 318.05
+  },
+  {
+   "t": "b) Vi ställer upp Newtons andra lag och löser ut accelerationen a.",
+   "s": 302.74,
+   "e": 318.05
+  },
+  {
+   "t": "F resistansen R är lika med massan m gånger accelerationen a vilket är ekvivalent med att a är lika med F R delat med m, ekvation 1",
+   "s": 302.74,
+   "e": 318.05
+  },
+  {
+   "t": "Vi beräknar den resulterande kraften F resistansen R med F resistansen R är lika med minus k gånger y .",
+   "s": 318.0,
+   "e": 325.53
+  },
+  {
+   "t": "k är lika med 30,6875 newton per meter y som är lika med minus 5,0 centimeter som är lika med minus 0,050 meter",
+   "s": 325.53,
+   "e": 335.33
+  },
+  {
+   "t": "F resistansen R är lika med minus 30,6875 gånger parentesen minus 0,050 slut parentes som är lika med 1,534 ldots newton",
+   "s": 335.33,
+   "e": 346.81
+  },
+  {
+   "t": "(positivt värde anger att kraften är riktad uppåt — mot jämviktsläget).",
+   "s": 346.81,
+   "e": 352.15
+  },
+  {
+   "t": "Insättning i ekvation 1 ger",
+   "s": 352.15,
+   "e": 355.49
+  },
+  {
+   "t": "accelerationen a är lika med 1,534 ldots delat med 0,250 som är lika med 6,1375 meter per sekund i kvadrat som är ungefär lika med 6,1 meter per sekund i kvadrat",
+   "s": 355.49,
+   "e": 369.18
+  },
+  {
+   "t": "Svar: 6,1 meter per sekund i kvadrat",
+   "s": 369.18,
+   "e": 373.63
+  }
+ ]
+}

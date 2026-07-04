@@ -1,0 +1,268 @@
+{
+ "id": "fy2-3.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f77608c92a6eaa4af17b76061c83e28aebe2ef00",
+ "dur": 318.74,
+ "segments": [
+  {
+   "t": "Induktion och inducerad spänning (ems)",
+   "s": 0.1,
+   "e": 4.42
+  },
+  {
+   "t": "Vi har tidigare visat att laddningar som rör sig i ett magnetfält påverkas av en magnetisk kraft.",
+   "s": 4.38,
+   "e": 11.07
+  },
+  {
+   "t": "Denna princip gör att vi kan alstra en ström genom att en ledare rör sig i ett magnetfält!",
+   "s": 11.07,
+   "e": 17.1
+  },
+  {
+   "t": "Att alstra strömmar med hjälp av magnetfält kallas induktion.",
+   "s": 17.1,
+   "e": 21.73
+  },
+  {
+   "t": "Demonstration — Spole + galvanometer + stavmagnet",
+   "s": 21.73,
+   "e": 26.54
+  },
+  {
+   "t": "Vi kopplar en galvanometer (känslig amperemeter) till en spole och undersöker hur vi kan skapa strömmar med en magnet.",
+   "s": 26.54,
+   "e": 34.46
+  },
+  {
+   "t": "En ström bildas endast då magnet och spole rör sig i förhållande till varandra.",
+   "s": 34.46,
+   "e": 39.83
+  },
+  {
+   "t": "För att förstå principen tänker vi oss en ledare som dras i ett magnetfält.",
+   "s": 39.83,
+   "e": 45.19
+  },
+  {
+   "t": "När vi drar ledaren nedåt rör sig ledningselektronerna i magnetfältet.",
+   "s": 45.19,
+   "e": 50.3
+  },
+  {
+   "t": "Med högerhandsregeln ser vi att den magnetiska kraften F massan m på elektronerna blir åt vänster (kom ihåg: när elektroner rör sig nedåt motsvarar det en ström uppåt).",
+   "s": 50.3,
+   "e": 61.42
+  },
+  {
+   "t": "När elektroner dras åt vänster blir den vänstra änden av ledaren negativt laddad.",
+   "s": 61.42,
+   "e": 67.31
+  },
+  {
+   "t": "Den högra änden får ett underskott av elektroner och blir positivt laddad — det uppstår alltså en spänning mellan ledarens ändar.",
+   "s": 67.31,
+   "e": 74.96
+  },
+  {
+   "t": "En spänning som uppstår när en ledare rör sig i ett magnetfält kallas inducerad spänning eller ems (elektromotorisk spänning), betecknas e och har precis som spänning SI-enheten V (volt).",
+   "s": 74.96,
+   "e": 87.55
+  },
+  {
+   "t": "Den inducerade spänningen ger en motriktad elektrisk kraft F e på elektronerna.",
+   "s": 87.55,
+   "e": 93.54
+  },
+  {
+   "t": "När den elektriska kraften blir lika stor som den magnetiska kraften (det sker fort), gäller F e är lika med F massan m och elektronrörelsen upphör eftersom kraftjämvikt uppstår.",
+   "s": 93.54,
+   "e": 104.65
+  },
+  {
+   "t": "Induktionslagen (för rak ledare)",
+   "s": 104.65,
+   "e": 108.2
+  },
+  {
+   "t": "Om l, v och B är vinkelräta mot varandra gäller",
+   "s": 108.2,
+   "e": 112.91
+  },
+  {
+   "t": "e är lika med hävarmen l gånger hastigheten v gånger B",
+   "s": 112.91,
+   "e": 118.01
+  },
+  {
+   "t": "där",
+   "s": 118.01,
+   "e": 119.49
+  },
+  {
+   "t": "e är lika med inducerad spänning (volt)",
+   "s": 119.49,
+   "e": 123.53
+  },
+  {
+   "t": "l är lika med ledarens längd (meter)",
+   "s": 123.53,
+   "e": 127.15
+  },
+  {
+   "t": "v är lika med ledarens hastighet (meter per sekund)",
+   "s": 127.15,
+   "e": 131.75
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet (tesla)",
+   "s": 131.75,
+   "e": 136.36
+  },
+  {
+   "t": "Härledning — Induktionslagen",
+   "s": 136.36,
+   "e": 139.41
+  },
+  {
+   "t": "Vi utgår från ledaren som dras med konstant hastighet v.",
+   "s": 139.41,
+   "e": 143.97
+  },
+  {
+   "t": "Vid kraftjämvikt gäller",
+   "s": 143.97,
+   "e": 146.76
+  },
+  {
+   "t": "F e är lika med F massan m, ekvation 1",
+   "s": 146.76,
+   "e": 151.15
+  },
+  {
+   "t": "Från tidigare ämne har vi att F e är lika med q gånger mathbb energin E , där mathbb energin E är den elektriska fältstyrkan, och från tidigare avsnitt i detta ämne att F massan m är lika med q gånger hastigheten v gånger B (där q står för elektronladdningen).",
+   "s": 151.15,
+   "e": 167.45
+  },
+  {
+   "t": "Insättning i ekvation 1 ger",
+   "s": 167.45,
+   "e": 170.75
+  },
+  {
+   "t": "q gånger mathbb energin E är lika med q gånger hastigheten v gånger B",
+   "s": 170.75,
+   "e": 182.31
+  },
+  {
+   "t": "Dividera båda led med q:",
+   "s": 170.75,
+   "e": 182.31
+  },
+  {
+   "t": "mathbb energin E är lika med hastigheten v gånger B, ekvation 2",
+   "s": 170.75,
+   "e": 182.31
+  },
+  {
+   "t": "Från tidigare ämne har vi också att den elektriska fältstyrkan mathbb energin E är lika med spänningen U delat med avståndet d .",
+   "s": 182.31,
+   "e": 191.06
+  },
+  {
+   "t": "Spänningen U motsvarar den inducerade spänningen e, och avståndet d mellan polerna motsvarar ledarens längd l.",
+   "s": 191.06,
+   "e": 199.55
+  },
+  {
+   "t": "Det innebär att mathbb energin E är lika med e delat med hävarmen l .",
+   "s": 199.55,
+   "e": 204.88
+  },
+  {
+   "t": "Insättning i ekvation 2 ger",
+   "s": 204.88,
+   "e": 208.25
+  },
+  {
+   "t": "e delat med hävarmen l är lika med hastigheten v gånger B",
+   "s": 208.25,
+   "e": 213.19
+  },
+  {
+   "t": "Vi löser ut den inducerade spänningen e och får",
+   "s": 213.19,
+   "e": 217.51
+  },
+  {
+   "t": "e är lika med hävarmen l gånger hastigheten v gånger B",
+   "s": 217.51,
+   "e": 225.31
+  },
+  {
+   "t": "vsv.",
+   "s": 217.51,
+   "e": 225.31
+  },
+  {
+   "t": "Exempel 1 — Inducerad spänning i två fall",
+   "s": 217.51,
+   "e": 225.31
+  },
+  {
+   "t": "En 20 centimeter lång ledare rör sig med hastigheten 80 centimeter/s i magnetfältet 0,85 mT.",
+   "s": 225.31,
+   "e": 233.88
+  },
+  {
+   "t": "Hur stor ems (spänning) induceras mellan ledarens ändar C och D i varje fall?",
+   "s": 233.88,
+   "e": 240.93
+  },
+  {
+   "t": "a) Fältets riktning är in/ut (vinkelrätt mot planet), ledarens riktning är vänster/höger och hastighetens riktning är upp/ner.",
+   "s": 240.93,
+   "e": 251.38
+  },
+  {
+   "t": "Alla tre är vinkelräta mot varandra, så en ems induceras.",
+   "s": 251.38,
+   "e": 256.48
+  },
+  {
+   "t": "e är lika med hävarmen l gånger hastigheten v gånger B",
+   "s": 256.48,
+   "e": 276.1
+  },
+  {
+   "t": "hävarmen l är lika med 20 centimeter som är lika med 0,20 meter hastigheten v som är lika med 80 centimeter per sekund som är lika med 0,80 meter per sekund B som är lika med 0,85 mT som är lika med 0,85 gånger 10 upphöjt till minus 3 tesla",
+   "s": 256.48,
+   "e": 276.1
+  },
+  {
+   "t": "e är lika med 0,20 gånger 0,80 gånger 0,85 gånger 10 upphöjt till minus 3 som är lika med 1,36 gånger 10 upphöjt till minus 4 volt som är lika med 0,136 millivolt som är ungefär lika med 0,14 millivolt",
+   "s": 276.1,
+   "e": 292.68
+  },
+  {
+   "t": "Svar: 0,14 millivolt",
+   "s": 292.68,
+   "e": 296.4
+  },
+  {
+   "t": "b) Fältets riktning är in/ut, ledarens riktning är vänster/höger och hastighetens riktning är också vänster/höger.",
+   "s": 296.4,
+   "e": 307.25
+  },
+  {
+   "t": "Eftersom ledarens riktning och hastighetens riktning är densamma rör sig elektronerna längs ledaren och inte tvärs över — ingen ems induceras.",
+   "s": 307.2,
+   "e": 315.89
+  },
+  {
+   "t": "Svar: 0 volt",
+   "s": 315.89,
+   "e": 318.74
+  }
+ ]
+}

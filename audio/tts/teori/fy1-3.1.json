@@ -1,0 +1,283 @@
+{
+ "id": "fy1-3.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "9384936734d0a149bf95cbe6ff355e886055ca49",
+ "dur": 342.15,
+ "segments": [
+  {
+   "t": "Kraft och Newtons första lag",
+   "s": 0.1,
+   "e": 3.11
+  },
+  {
+   "t": "Förmågan att deformera eller ändra en kropps rörelse kallas kraft, betecknas F (från engelskans \"force\"), har SI-enheten N (newton) och är en vektor.",
+   "s": 3.06,
+   "e": 13.6
+  },
+  {
+   "t": "Det finns flera sorters krafter, till exempel magnetisk kraft (stavmagnet), elektrisk kraft (ballong i tak), tryckkraft (dykning) och gravitationskraft (jordens dragningskraft).",
+   "s": 13.6,
+   "e": 26.61
+  },
+  {
+   "t": "För att mäta kraft kan man använda en dynamometer.",
+   "s": 26.61,
+   "e": 30.69
+  },
+  {
+   "t": "Foto: en dynamometer — en fjäderbalans med en skala.",
+   "s": 30.69,
+   "e": 35.42
+  },
+  {
+   "t": "Ett föremål kan påverkas av två eller flera krafter.",
+   "s": 35.42,
+   "e": 39.75
+  },
+  {
+   "t": "En kraft som motsvarar den sammanlagda verkan av flera krafter kallas kraftresultant eller resulterande kraft och betecknas F resistansen R .",
+   "s": 39.75,
+   "e": 49.01
+  },
+  {
+   "t": "Om kraftresultanten är noll säger vi att det råder kraftjämvikt.",
+   "s": 49.01,
+   "e": 53.88
+  },
+  {
+   "t": "En kraft kan också delas upp i flera krafter med specifika riktningar och dessa kallas då komposanter.",
+   "s": 53.88,
+   "e": 60.23
+  },
+  {
+   "t": "Introduktion — Newtons första lag",
+   "s": 60.23,
+   "e": 63.55
+  },
+  {
+   "t": "Om en bil kör i 90 kilometer i timmen och vi släpper gasen, så kommer den att bromsa in.",
+   "s": 63.55,
+   "e": 69.46
+  },
+  {
+   "t": "Varför då?",
+   "s": 69.46,
+   "e": 71.45
+  },
+  {
+   "t": "Jo, på grund av luftmotstånd och friktionskrafter.",
+   "s": 71.45,
+   "e": 75.62
+  },
+  {
+   "t": "Men om vi inte skulle ha några krafter som verkar på bilen, vad skulle hända då?",
+   "s": 75.62,
+   "e": 80.85
+  },
+  {
+   "t": "Den skulle fortsätta sin rörelse i samma riktning.",
+   "s": 80.85,
+   "e": 84.74
+  },
+  {
+   "t": "Detta är kärnan i Newtons första lag!",
+   "s": 84.74,
+   "e": 88.29
+  },
+  {
+   "t": "Om kraftresultanten på ett föremål är 0 kommer dess rörelse inte att ändras.",
+   "s": 88.29,
+   "e": 93.71
+  },
+  {
+   "t": "Det kommer alltså att förbli i vila eller förbli i rörelse med konstant hastighet.",
+   "s": 93.71,
+   "e": 99.21
+  },
+  {
+   "t": "Newtons första lag (tröghetslagen)",
+   "s": 99.21,
+   "e": 102.91
+  },
+  {
+   "t": "Om kraftresultanten på ett föremål är noll, befinner sig föremålet antingen i vila eller rör sig med konstant hastighet (i en rätlinjig bana).",
+   "s": 102.91,
+   "e": 112.09
+  },
+  {
+   "t": "Fundera — Hur kan kraftresultanten vara 0 när något rör på sig?",
+   "s": 112.09,
+   "e": 117.09
+  },
+  {
+   "t": "Tänk dig följande: En fallskärmshoppare som hoppar ut från ett flygplan påverkas i början nästan enbart av tyngdkraften.",
+   "s": 117.09,
+   "e": 125.03
+  },
+  {
+   "t": "Vi har då en resulterande kraft neråt och hen accelererar ner mot marken.",
+   "s": 125.03,
+   "e": 130.38
+  },
+  {
+   "t": "Ju högre hastigheten blir desto mer ökar dock luftmotståndet.",
+   "s": 130.38,
+   "e": 135.09
+  },
+  {
+   "t": "Till slut är hastigheten så stor att luftmotståndet är lika stort som tyngdkraften (men motriktad).",
+   "s": 135.09,
+   "e": 142.1
+  },
+  {
+   "t": "Vi har då en resulterande kraft på 0 newton.",
+   "s": 142.1,
+   "e": 146.12
+  },
+  {
+   "t": "Men befinner sig fallskärmshopparen i vila?",
+   "s": 146.12,
+   "e": 149.71
+  },
+  {
+   "t": "Knappast. Men i konstant hastighet! (En fallskärmshoppare når sällan mer än drygt 200 kilometer i timmen oavsett hur långt hen faller.)",
+   "s": 149.71,
+   "e": 161.49
+  },
+  {
+   "t": "Exempel 1 — Resulterande kraft i tre fall",
+   "s": 161.49,
+   "e": 165.56
+  },
+  {
+   "t": "*Två krafter har storleken F ett är lika med 15 newton och F två är lika med 25 newton.",
+   "s": 165.56,
+   "e": 172.86
+  },
+  {
+   "t": "Bestäm resultanten om de verkar a) åt samma håll, b) åt motsatt håll, c) vinkelrätt mot varandra.*",
+   "s": 172.86,
+   "e": 181.53
+  },
+  {
+   "t": "a) Krafterna samverkar så den resulterande kraften Fᴿ blir",
+   "s": 181.53,
+   "e": 186.6
+  },
+  {
+   "t": "F resistansen R är lika med F ett plus F två som är lika med 15 plus 25 som är lika med 40 newton",
+   "s": 186.6,
+   "e": 194.11
+  },
+  {
+   "t": "Svar: 40 newton i samma riktning som F ett och F två.",
+   "s": 194.11,
+   "e": 199.28
+  },
+  {
+   "t": "b) Krafterna motverkar varandra, så den resulterande kraften Fᴿ blir",
+   "s": 199.28,
+   "e": 205.11
+  },
+  {
+   "t": "F resistansen R är lika med F två minus F ett som är lika med 25 minus 15 som är lika med 10 newton",
+   "s": 205.11,
+   "e": 213.05
+  },
+  {
+   "t": "Svar: 10 newton i samma riktning som den största kraften.",
+   "s": 213.05,
+   "e": 217.82
+  },
+  {
+   "t": "c) Resultanten Fᴿ utgör hypotenusan i en rätvinklig krafttriangel där F ett och F två är kateter.",
+   "s": 217.82,
+   "e": 225.69
+  },
+  {
+   "t": "Den kan då beräknas med Pythagoras sats.",
+   "s": 225.69,
+   "e": 229.61
+  },
+  {
+   "t": "F resistansen R i kvadrat är lika med F ett i kvadrat plus F två i kvadrat vilket är ekvivalent med att F R är lika med roten ur F ett i kvadrat plus F två i kvadrat",
+   "s": 229.61,
+   "e": 241.46
+  },
+  {
+   "t": "F ett är lika med 15 newton F två som är lika med 25 newton",
+   "s": 241.46,
+   "e": 246.86
+  },
+  {
+   "t": "F resistansen R är lika med roten ur 15 i kvadrat plus 25 i kvadrat som är lika med roten ur 850 som är lika med 29,154 ldots som är ungefär lika med 29 newton",
+   "s": 246.86,
+   "e": 260.21
+  },
+  {
+   "t": "Svar: 29 newton",
+   "s": 260.21,
+   "e": 263.34
+  },
+  {
+   "t": "Exempel 2 — Komposant i y-led",
+   "s": 263.34,
+   "e": 266.99
+  },
+  {
+   "t": "En kraft på 20 newton verkar i riktning 25 grader mot horisontalplanet.",
+   "s": 266.99,
+   "e": 272.62
+  },
+  {
+   "t": "Hur stor del av denna kraft verkar i y-led, det vill säga bestäm kraftens komposant i y-led, F y .",
+   "s": 272.62,
+   "e": 279.65
+  },
+  {
+   "t": "Vi har återigen en rätvinklig krafttriangel, men denna gång bara storleken hos en av krafterna.",
+   "s": 279.65,
+   "e": 286.32
+  },
+  {
+   "t": "Vi kan då inte använda oss av Pythagoras sats utan får använda oss av trigonometri.",
+   "s": 286.32,
+   "e": 292.2
+  },
+  {
+   "t": "Kom ihåg — trigonometri i rätvinklig triangel",
+   "s": 292.2,
+   "e": 296.3
+  },
+  {
+   "t": "sinus hastigheten v är lika med accelerationen a delat med c, cosinus v som är lika med b delat med c, tangens v som är lika med a delat med b",
+   "s": 296.3,
+   "e": 308.11
+  },
+  {
+   "t": "där a är motstående katet, b är närliggande katet och c är hypotenusan till vinkeln v.",
+   "s": 308.06,
+   "e": 314.91
+  },
+  {
+   "t": "Om vi tittar på figuren i uppgiften så har vi hypotenusan och ska beräkna den motstående kateten, F y .",
+   "s": 314.91,
+   "e": 321.91
+  },
+  {
+   "t": "Vi använder då sinus för vinkeln.",
+   "s": 321.91,
+   "e": 325.31
+  },
+  {
+   "t": "sinus 25 grader är lika med F y delat med 20 vilket är ekvivalent med att F y är lika med 20 sinus 25 grader som är lika med 8,452 ldots som är ungefär lika med 8,5 newton",
+   "s": 325.31,
+   "e": 338.71
+  },
+  {
+   "t": "Svar: 8,5 newton",
+   "s": 338.71,
+   "e": 342.15
+  }
+ ]
+}

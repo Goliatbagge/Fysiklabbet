@@ -1,0 +1,168 @@
+{
+ "id": "fy1-7.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0f819b4d5f888a2bb4fd78f77041e55054acade1",
+ "dur": 196.81,
+ "segments": [
+  {
+   "t": "Spänning",
+   "s": 0.1,
+   "e": 2.09
+  },
+  {
+   "t": "Introduktion — Spänning",
+   "s": 2.04,
+   "e": 4.7
+  },
+  {
+   "t": "Ju mer man spänner en pilbåge, desto snabbare kommer pilen att flyga iväg.",
+   "s": 4.7,
+   "e": 10.0
+  },
+  {
+   "t": "Spänningen i pilbågen avgör hastigheten hos pilen.",
+   "s": 10.0,
+   "e": 14.51
+  },
+  {
+   "t": "Motsvarande gäller för spänningen i en krets!",
+   "s": 14.51,
+   "e": 18.24
+  },
+  {
+   "t": "Ju högre spänning vi har i en krets desto starkare blir strömmen.",
+   "s": 18.24,
+   "e": 22.81
+  },
+  {
+   "t": "Spänningen i en elektrisk krets motsvarar alltså spänningen i pilbågen medan strömstyrkan motsvarar pilens hastighet.",
+   "s": 22.81,
+   "e": 30.9
+  },
+  {
+   "t": "\"Trycket\" som driver elektronerna att röra sig mellan två punkter i en elektrisk krets kallas spänning, betecknas U och har SI-enheten V (volt).",
+   "s": 30.9,
+   "e": 40.52
+  },
+  {
+   "t": "Man kan likna det vid trycket i en vattenledning.",
+   "s": 40.52,
+   "e": 44.27
+  },
+  {
+   "t": "Utan tryck står vattnet stilla.",
+   "s": 44.27,
+   "e": 47.33
+  },
+  {
+   "t": "På samma sätt krävs en skillnad i elektrisk laddning mellan två punkter för att elektronerna ska börja röra på sig.",
+   "s": 47.33,
+   "e": 54.05
+  },
+  {
+   "t": "Spänning mäts mellan två punkter.",
+   "s": 54.05,
+   "e": 57.25
+  },
+  {
+   "t": "En spänning kan skapas mellan till exempel ett batteris pluspol och minuspol.",
+   "s": 57.25,
+   "e": 62.73
+  },
+  {
+   "t": "En negativ laddning har högre potentiell energi vid minuspolen än vid pluspolen eftersom den \"dras mot\" pluspolen.",
+   "s": 62.73,
+   "e": 70.05
+  },
+  {
+   "t": "Hur mycket potentiell energi E den har vid minuspolen beror på hur stark spänningen U är och hur stor laddningen Q.",
+   "s": 70.05,
+   "e": 77.49
+  },
+  {
+   "t": "Detta är definitionen för spänning.",
+   "s": 77.49,
+   "e": 80.83
+  },
+  {
+   "t": "Spänning och elektrisk energi",
+   "s": 80.83,
+   "e": 83.95
+  },
+  {
+   "t": "spänningen U är lika med energin E delat med laddningen Q vilket är ekvivalent med att E är lika med Q gånger U",
+   "s": 83.95,
+   "e": 91.65
+  },
+  {
+   "t": "där",
+   "s": 91.65,
+   "e": 93.16
+  },
+  {
+   "t": "U är lika med spänning mellan två punkter (volt)",
+   "s": 93.16,
+   "e": 97.44
+  },
+  {
+   "t": "E är lika med skillnad i elektrisk (potentiell) energi mellan dessa två punkter, elektrisk energi (joule)",
+   "s": 97.44,
+   "e": 105.38
+  },
+  {
+   "t": "Q är lika med laddning (coulomb)",
+   "s": 105.38,
+   "e": 108.76
+  },
+  {
+   "t": "Spänningen i ett vanligt eluttag i Sverige är 230 volt.",
+   "s": 108.76,
+   "e": 113.84
+  },
+  {
+   "t": "Exempel 1 — Accelererad elektron",
+   "s": 113.84,
+   "e": 117.36
+  },
+  {
+   "t": "Vilken hastighet får en elektron som accelereras av spänningen 1,5 volt?",
+   "s": 117.36,
+   "e": 123.38
+  },
+  {
+   "t": "Elektrisk energi ( energin E är lika med laddningen Q gånger spänningen U ) omvandlas och blir till rörelseenergi ( E k är lika med massan m hastigheten v i kvadrat delat med 2 ), dvs.",
+   "s": 123.38,
+   "e": 140.9
+  },
+  {
+   "t": "laddningen Q gånger spänningen U är lika med massan m gånger hastigheten v i kvadrat delat med 2",
+   "s": 123.38,
+   "e": 140.9
+  },
+  {
+   "t": "Vi löser ut hastigheten v och får",
+   "s": 140.9,
+   "e": 144.53
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 2 gånger laddningen Q gånger spänningen U delat med massan m",
+   "s": 144.53,
+   "e": 165.41
+  },
+  {
+   "t": "q är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb spänningen U som är lika med 1,5 volt massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronensmassa,slåsuppitabell slut parentes",
+   "s": 144.53,
+   "e": 165.41
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 2 gånger 1,602 gånger 10 upphöjt till minus 19 gånger 1,5 delat med 9,11 gånger 10 upphöjt till minus 31 som är lika med 726 327,846 ldots meter per sekund som är ungefär lika med 730 000 meter per sekund som är lika med 0,73 Mm per sekund",
+   "s": 165.41,
+   "e": 189.72
+  },
+  {
+   "t": "Svar: 0,73 Mm/s eller 730 000 meter per sekund",
+   "s": 189.72,
+   "e": 196.81
+  }
+ ]
+}

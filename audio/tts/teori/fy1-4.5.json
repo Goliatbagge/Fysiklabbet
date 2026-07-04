@@ -1,0 +1,303 @@
+{
+ "id": "fy1-4.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "2d422fba906cf2222681b4cf0c1e3d5be3c46ede",
+ "dur": 383.77,
+ "segments": [
+  {
+   "t": "Effekt",
+   "s": 0.1,
+   "e": 1.82
+  },
+  {
+   "t": "Introduktion — Effekt",
+   "s": 1.77,
+   "e": 4.41
+  },
+  {
+   "t": "Om du går upp för en trappa uträttar du ett visst arbete eftersom du ökar din lägesenergi.",
+   "s": 4.41,
+   "e": 10.38
+  },
+  {
+   "t": "Om du springer upp för trappan uträttas samma arbete eftersom du ökar din lägesenergi lika mycket i båda fall.",
+   "s": 10.38,
+   "e": 17.49
+  },
+  {
+   "t": "Däremot sker arbetet fortare när du springer (och därför upplevs det också jobbigare).",
+   "s": 17.49,
+   "e": 23.4
+  },
+  {
+   "t": "Den energi som omvandlas (eller det arbete som uträttas) per tidsenhet kallas effekt, betecknas P (från engelskans \"power\") och har SI-enheten W (watt).",
+   "s": 23.4,
+   "e": 34.86
+  },
+  {
+   "t": "Ju snabbare en energiomvandling sker desto större blir effekten.",
+   "s": 34.86,
+   "e": 39.69
+  },
+  {
+   "t": "Effekt",
+   "s": 39.69,
+   "e": 41.44
+  },
+  {
+   "t": "effekten P är lika med delta energin E delat med delta tiden t eller P som är lika med arbetet W delat med delta t",
+   "s": 41.44,
+   "e": 49.89
+  },
+  {
+   "t": "där",
+   "s": 49.89,
+   "e": 51.4
+  },
+  {
+   "t": "P är lika med effekt (W eller J/s)",
+   "s": 51.4,
+   "e": 56.23
+  },
+  {
+   "t": "ΔE är lika med omvandlad energi (J eller Ws)",
+   "s": 56.23,
+   "e": 61.41
+  },
+  {
+   "t": "Δt är lika med tiden för energiomvandlingen (sekunder)",
+   "s": 61.41,
+   "e": 66.04
+  },
+  {
+   "t": "W är lika med arbete (Nm eller J)",
+   "s": 66.04,
+   "e": 70.25
+  },
+  {
+   "t": "Lägg märke till att vi kan uttrycka enheterna W och J med alternativa enheter.",
+   "s": 70.25,
+   "e": 76.05
+  },
+  {
+   "t": "Alternativa enheter för energi och effekt",
+   "s": 76.05,
+   "e": 80.12
+  },
+  {
+   "t": "1 watt är lika med 1 joule per sekund och 1 joule som är lika med 1 Ws",
+   "s": 80.12,
+   "e": 87.36
+  },
+  {
+   "t": "Exempel 1 — Emilia i trappan",
+   "s": 80.12,
+   "e": 87.36
+  },
+  {
+   "t": "Emilia som väger 60 kilogram tar sig upp för en 4,0 meter hög trappa.",
+   "s": 87.36,
+   "e": 93.16
+  },
+  {
+   "t": "Hur stor effekt utvecklar hon när hon a) går upp för trappan på 10 sekunder, b) springer upp för trappan på 2,5 sekunder?",
+   "s": 93.16,
+   "e": 101.74
+  },
+  {
+   "t": "a) Vi ställer upp formeln för effekt.",
+   "s": 101.74,
+   "e": 105.28
+  },
+  {
+   "t": "effekten P är lika med delta energin E delat med delta tiden t",
+   "s": 105.28,
+   "e": 114.16
+  },
+  {
+   "t": "Energiomvandlingen ΔE är samma sak som ökningen av lägesenergi.",
+   "s": 105.28,
+   "e": 114.16
+  },
+  {
+   "t": "delta energin E är lika med massan m gånger tyngdfaktorn g gånger delta höjden h som är lika med 60 kilogram gånger 9,82 newton per kilogram gånger 4,0 meter som är lika med 2 356,8 joule delta tiden t som är lika med 10 sekund",
+   "s": 114.16,
+   "e": 131.09
+  },
+  {
+   "t": "effekten P är lika med 2 356,8 delat med 10 som är lika med 235,68 watt som är ungefär lika med 240 watt som är lika med 0,24 kilowatt",
+   "s": 131.09,
+   "e": 144.18
+  },
+  {
+   "t": "Svar: 0,24 kilowatt",
+   "s": 144.18,
+   "e": 148.03
+  },
+  {
+   "t": "b) Energiomvandlingen ΔE är densamma som i a-uppgiften, det vill säga 2 356,8 joule.",
+   "s": 148.03,
+   "e": 156.2
+  },
+  {
+   "t": "delta energin E är lika med 2 356,8 joule delta tiden t som är lika med 2,5 sekund",
+   "s": 156.2,
+   "e": 164.59
+  },
+  {
+   "t": "effekten P är lika med 2 356,8 delat med 2,5 som är lika med 942,72 watt som är ungefär lika med 940 watt som är lika med 0,94 kilowatt",
+   "s": 164.59,
+   "e": 178.11
+  },
+  {
+   "t": "Svar: 0,94 kilowatt (fyra gånger så hög effekt eftersom det gick på en fjärdedel av tiden)",
+   "s": 178.11,
+   "e": 185.81
+  },
+  {
+   "t": "Kilowattimmar",
+   "s": 185.81,
+   "e": 187.95
+  },
+  {
+   "t": "Energiförbrukning mäts ofta i kWh (kilowattimmar) och energipris i kr/kWh (kronor per kilowattimme).",
+   "s": 187.95,
+   "e": 197.65
+  },
+  {
+   "t": "Vi tar reda på hur många joule som 1 kilowattimmar motsvarar med enhetsanalys.",
+   "s": 197.65,
+   "e": 203.14
+  },
+  {
+   "t": "Kom ihåg att 1 Ws är lika med 1 joule enligt definitionen för effekt, så vi börjar med att göra om kWh till Ws för att sedan gå över till J.",
+   "s": 203.14,
+   "e": 226.45
+  },
+  {
+   "t": "1 kilowattimme är lika med 1 000 watt gånger 1 timme som är lika med 1 000 watt gånger 3 600 sekund som är lika med 3 600 000 Ws som är lika med 3,6 gånger 10 upphöjt till 6 joule",
+   "s": 203.14,
+   "e": 226.45
+  },
+  {
+   "t": "Omvandling mellan kilowattimmar och joule",
+   "s": 226.45,
+   "e": 230.0
+  },
+  {
+   "t": "1 kilowattimme är lika med 3,6 gånger 10 upphöjt till 6 joule",
+   "s": 230.0,
+   "e": 235.39
+  },
+  {
+   "t": "1 joule är lika med 1 delat med 3,6 gånger 10 upphöjt till 6 kilowattimme",
+   "s": 235.39,
+   "e": 241.66
+  },
+  {
+   "t": "Exempel 2 — Glömd glödlampa",
+   "s": 241.66,
+   "e": 245.0
+  },
+  {
+   "t": "Du glömmer att släcka en 8,5 watt-glödlampa.",
+   "s": 245.0,
+   "e": 249.22
+  },
+  {
+   "t": "a) Hur mycket energi omvandlar den om den lyser oavbrutet i två dygn?",
+   "s": 249.22,
+   "e": 254.8
+  },
+  {
+   "t": "b) Vad kostar energiförbrukningen om priset är 1,50 kr/kWh?",
+   "s": 254.8,
+   "e": 261.76
+  },
+  {
+   "t": "a) Vi ställer upp formeln för effekt och löser ut energin som omvandlas ΔE.",
+   "s": 261.76,
+   "e": 267.43
+  },
+  {
+   "t": "effekten P är lika med delta energin E delat med delta tiden t vilket är ekvivalent med att delta E är lika med P gånger delta t",
+   "s": 267.43,
+   "e": 289.15
+  },
+  {
+   "t": "effekten P är lika med 8,5 watt delta tiden t som är lika med 2,0 d som är lika med 48 timme som är lika med 48 gånger 3 600 sekund som är lika med 172 800 sekund",
+   "s": 267.43,
+   "e": 289.15
+  },
+  {
+   "t": "delta energin E är lika med 8,5 gånger 172 800 som är lika med 1 468 800 joule som är ungefär lika med 1 500 000 joule som är lika med 1,5 megajoule",
+   "s": 289.15,
+   "e": 303.77
+  },
+  {
+   "t": "Svar: 1,5 megajoule",
+   "s": 303.77,
+   "e": 307.23
+  },
+  {
+   "t": "b) Vi gör om energiförbrukningen till kWh.",
+   "s": 307.23,
+   "e": 311.96
+  },
+  {
+   "t": "Omvandlingsfaktorn mellan kWh och J är 3,6 gånger 10 upphöjt till 6.",
+   "s": 311.96,
+   "e": 318.64
+  },
+  {
+   "t": "När vi gör om från J till kWh ska vi dividera med omvandlingsfaktorn.",
+   "s": 318.64,
+   "e": 324.29
+  },
+  {
+   "t": "1 468 800 joule är lika med 1 468 800 delat med 3,6 gånger 10 upphöjt till 6 kilowattimme som är lika med 0,408 kilowattimme",
+   "s": 324.29,
+   "e": 339.77
+  },
+  {
+   "t": "Eftersom 1 kilowattimmar kostar 1,50 kr blir den totala kostnaden",
+   "s": 339.72,
+   "e": 345.32
+  },
+  {
+   "t": "1,50 kr per kilowattimme gånger 0,408 kilowattimme är lika med 0,612 kr som är ungefär lika med 0,61 kr",
+   "s": 345.32,
+   "e": 358.12
+  },
+  {
+   "t": "Svar: 0,61 kr eller 61 öre",
+   "s": 345.32,
+   "e": 358.12
+  },
+  {
+   "t": "Effekt i elektriska apparater",
+   "s": 358.12,
+   "e": 361.39
+  },
+  {
+   "t": "För att spara energi och pengar är det bra att undvika att använda apparater med hög effekt, särskilt när elpriset är högt (om man har ett rörligt elpris).",
+   "s": 361.39,
+   "e": 370.79
+  },
+  {
+   "t": "Generellt gäller att apparater som utvecklar mycket värme ger en hög energiförbrukning.",
+   "s": 370.79,
+   "e": 376.66
+  },
+  {
+   "t": "Gå hem och hitta den apparat hemma som har störst effekt!",
+   "s": 376.66,
+   "e": 380.89
+  },
+  {
+   "t": "Hur många watt är den märkt med?",
+   "s": 380.89,
+   "e": 383.77
+  }
+ ]
+}

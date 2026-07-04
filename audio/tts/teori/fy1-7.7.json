@@ -1,0 +1,268 @@
+{
+ "id": "fy1-7.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d8b4c13ab39e9a360bd3bd166e933579788f9107",
+ "dur": 309.1,
+ "segments": [
+  {
+   "t": "Total resistans och ersättningsresistans",
+   "s": 0.1,
+   "e": 4.05
+  },
+  {
+   "t": "Den sammanlagda resistansen i en krets kallas total resistans och avgör hur stark ström som batteriet skickar ut.",
+   "s": 4.0,
+   "e": 11.31
+  },
+  {
+   "t": "Om vi har flera resistorer i en krets får vi den totala resistansen genom att ersätta resistanserna från resistorerna R ett , R två , R tre , … med en enda resistans R tiden t o t eller R.",
+   "s": 11.31,
+   "e": 23.65
+  },
+  {
+   "t": "När vi ersätter två eller flera resistanser med en enda resistans kallas denna ersättningsresistans.",
+   "s": 23.65,
+   "e": 30.26
+  },
+  {
+   "t": "Hur stor ersättningsresistansen blir beror på om resistorerna kopplas i serie eller parallellt.",
+   "s": 30.26,
+   "e": 36.88
+  },
+  {
+   "t": "Ersättningsresistans",
+   "s": 36.88,
+   "e": 39.61
+  },
+  {
+   "t": "Seriekoppling av resistorer:",
+   "s": 39.61,
+   "e": 46.58
+  },
+  {
+   "t": "R tiden t o t är lika med R ett plus R två plus ldots",
+   "s": 39.61,
+   "e": 46.58
+  },
+  {
+   "t": "Parallellkoppling av resistorer:",
+   "s": 46.58,
+   "e": 55.35
+  },
+  {
+   "t": "1 delat med R tiden t o t är lika med 1 delat med R ett plus 1 delat med R två plus ldots",
+   "s": 46.58,
+   "e": 55.35
+  },
+  {
+   "t": "där",
+   "s": 55.35,
+   "e": 56.85
+  },
+  {
+   "t": "R tiden t o t är lika med ersättningsresistans (ohm)",
+   "s": 56.85,
+   "e": 61.77
+  },
+  {
+   "t": "R ett , R två , … är lika med resistans 1, resistans 2, … (ohm)",
+   "s": 61.77,
+   "e": 69.36
+  },
+  {
+   "t": "Ersättningsresistans vid seriekoppling",
+   "s": 69.36,
+   "e": 72.91
+  },
+  {
+   "t": "Vi ritar ett kopplingsschema med två resistorer kopplade i serie.",
+   "s": 72.91,
+   "e": 77.91
+  },
+  {
+   "t": "De ska ersättas med en enda resistor R.",
+   "s": 77.91,
+   "e": 81.64
+  },
+  {
+   "t": "Sedan tidigare vet vi att delspänningarna över varje resistor U ett och U två tillsammans är lika stora som spänningen från batteriet U, dvs.",
+   "s": 81.64,
+   "e": 93.31
+  },
+  {
+   "t": "spänningen U är lika med U ett plus U två",
+   "s": 81.64,
+   "e": 93.31
+  },
+  {
+   "t": "Från Ohms lag har vi att spänningen U är lika med resistansen R gånger strömmen I , vilket insatt i ekvationen ovan ger",
+   "s": 93.31,
+   "e": 101.55
+  },
+  {
+   "t": "R tiden t o t gånger strömmen I är lika med R ett gånger I plus R två gånger I",
+   "s": 101.55,
+   "e": 108.03
+  },
+  {
+   "t": "Eftersom strömmen är lika stor genom alla komponenter i en seriekoppling kan vi dividera båda led med I och få",
+   "s": 108.03,
+   "e": 115.25
+  },
+  {
+   "t": "R tiden t o t är lika med R ett plus R två",
+   "s": 115.25,
+   "e": 119.86
+  },
+  {
+   "t": "Vi ser alltså att för en seriekoppling är ersättningsresistansen summan av resistansen hos resistorerna. vsv.",
+   "s": 119.86,
+   "e": 128.86
+  },
+  {
+   "t": "Ersättningsresistans vid parallellkoppling",
+   "s": 128.86,
+   "e": 132.6
+  },
+  {
+   "t": "Vi ritar ett kopplingsschema med två resistorer kopplade parallellt.",
+   "s": 132.6,
+   "e": 137.61
+  },
+  {
+   "t": "De ska ersättas med en enda resistor R.",
+   "s": 137.61,
+   "e": 141.34
+  },
+  {
+   "t": "Sedan tidigare vet vi att delströmmarna i varje grenledning I ett och I två tillsammans är lika stora som strömmen som går ut från batteriet (i huvudledningen), dvs.",
+   "s": 141.34,
+   "e": 153.6
+  },
+  {
+   "t": "strömmen I är lika med I ett plus I två",
+   "s": 141.34,
+   "e": 153.6
+  },
+  {
+   "t": "Från Ohms lag har vi att strömmen I är lika med spänningen U delat med resistansen R , vilket insatt i ekvationen ovan ger",
+   "s": 153.6,
+   "e": 161.88
+  },
+  {
+   "t": "spänningen U delat med R tiden t o t är lika med U delat med R ett plus U delat med R två",
+   "s": 161.88,
+   "e": 168.74
+  },
+  {
+   "t": "Eftersom spänningen är lika stor över alla komponenter som kopplas över ett batteri kan vi dividera båda led med U och få",
+   "s": 168.74,
+   "e": 176.51
+  },
+  {
+   "t": "1 delat med R tiden t o t är lika med 1 delat med R ett plus 1 delat med R två",
+   "s": 176.51,
+   "e": 183.0
+  },
+  {
+   "t": "Vi ser alltså att för en parallellkoppling är inversen av ersättningsresistansen summan av inverserna för resistansen hos resistorerna. vsv.",
+   "s": 183.0,
+   "e": 193.36
+  },
+  {
+   "t": "Exempel 1 — Två resistorer (20 ohm och 30 ohm)",
+   "s": 193.36,
+   "e": 198.57
+  },
+  {
+   "t": "Vi kopplar två resistorer på 20 ohm och 30 ohm till ett batteri med spänningen 9,0 volt.",
+   "s": 198.57,
+   "e": 205.56
+  },
+  {
+   "t": "Bestäm strömmen som går ut från batteriet om resistorerna",
+   "s": 205.56,
+   "e": 209.96
+  },
+  {
+   "t": "a) seriekopplas",
+   "s": 209.96,
+   "e": 212.59
+  },
+  {
+   "t": "b) parallellkopplas",
+   "s": 212.59,
+   "e": 215.38
+  },
+  {
+   "t": "a) Vi löser ut strömmen I från Ohms lag.",
+   "s": 215.38,
+   "e": 219.38
+  },
+  {
+   "t": "spänningen U är lika med resistansen R gånger strömmen I vilket är ekvivalent med att I är lika med U delat med R, ekvation 1",
+   "s": 219.38,
+   "e": 228.29
+  },
+  {
+   "t": "spänningen U är lika med 9,0 volt resistansen R som är lika med R ett plus R två som är lika med 20 plus 30 som är lika med 50 ohm parentesen seriekoppling slut parentes",
+   "s": 228.29,
+   "e": 240.19
+  },
+  {
+   "t": "strömmen I är lika med 9,0 delat med 50 som är lika med 0,18 ampere",
+   "s": 240.19,
+   "e": 246.56
+  },
+  {
+   "t": "Svar: 0,18 ampere",
+   "s": 246.56,
+   "e": 249.95
+  },
+  {
+   "t": "b) Vi löser återigen ut strömmen I från Ohms lag och får",
+   "s": 249.95,
+   "e": 255.05
+  },
+  {
+   "t": "strömmen I är lika med spänningen U delat med resistansen R, ekvation 1",
+   "s": 255.05,
+   "e": 261.21
+  },
+  {
+   "t": "Vi beräknar först den totala resistansen R i kretsen.",
+   "s": 261.21,
+   "e": 265.89
+  },
+  {
+   "t": "Vi sätter in R ett är lika med 20 ohm och R två är lika med 30 ohm i formeln för parallellkoppling av resistorer:",
+   "s": 265.89,
+   "e": 283.24
+  },
+  {
+   "t": "1 delat med resistansen R är lika med 1 delat med R ett plus 1 delat med R två som är lika med 1 delat med 20 plus 1 delat med 30 som är lika med 0,0833 ldots",
+   "s": 265.89,
+   "e": 283.24
+  },
+  {
+   "t": "resistansen R är lika med 1 delat med 0,0833 ldots som är lika med 12 ohm",
+   "s": 283.24,
+   "e": 289.89
+  },
+  {
+   "t": "Insättning av spänningen U är lika med 9,0 volt och resistansen R är lika med 12 ohm i ekvation 1 ger",
+   "s": 289.89,
+   "e": 297.61
+  },
+  {
+   "t": "strömmen I är lika med 9,0 delat med 12 som är lika med 0,75 ampere",
+   "s": 297.61,
+   "e": 305.55
+  },
+  {
+   "t": "Svar: 0,75 ampere",
+   "s": 305.5,
+   "e": 309.1
+  }
+ ]
+}

@@ -1,0 +1,223 @@
+{
+ "id": "fy2-3.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f33801772f89f7493d8d3871ed0a6ce0b17522c9",
+ "dur": 245.3,
+ "segments": [
+  {
+   "t": "Laddade partiklar i magnetfält",
+   "s": 0.1,
+   "e": 3.34
+  },
+  {
+   "t": "Vi har tidigare sett från Ørsteds försök att laddningar som rör sig (strömförande ledare) påverkar magneter, t.ex. kompassnålar, med en kraft.",
+   "s": 3.29,
+   "e": 13.16
+  },
+  {
+   "t": "Enligt Newtons tredje lag om kraft och motkraft måste även omvändningen gälla: ett magnetfält påverkar laddningar som rör sig med en lika stor, men motriktad kraft.",
+   "s": 13.16,
+   "e": 23.59
+  },
+  {
+   "t": "Magnetfält påverkar laddningar som rör sig med en magnetisk kraft.",
+   "s": 23.59,
+   "e": 28.59
+  },
+  {
+   "t": "Kraftens riktning bestäms med högerhandsregeln.",
+   "s": 28.59,
+   "e": 32.42
+  },
+  {
+   "t": "Om man håller upp högerhanden och bildar 90 grader mellan tummen, pekfingret och långfingret, så motsvarar:",
+   "s": 32.42,
+   "e": 48.95
+  },
+  {
+   "t": "tummen strömriktningen I",
+   "s": 32.42,
+   "e": 48.95
+  },
+  {
+   "t": "pekfingret magnetfältets riktning B",
+   "s": 32.42,
+   "e": 48.95
+  },
+  {
+   "t": "långfingret kraftens riktning F",
+   "s": 32.42,
+   "e": 48.95
+  },
+  {
+   "t": "Tummen är strömmen, pekfingret magnetfältet och långfingret kraften.",
+   "s": 32.42,
+   "e": 48.95
+  },
+  {
+   "t": "Kom ihåg-regel — tre fingrar",
+   "s": 48.95,
+   "e": 52.16
+  },
+  {
+   "t": "Tummen är strömmen (rimmar nästan)",
+   "s": 52.16,
+   "e": 55.75
+  },
+  {
+   "t": "\"Bang-fingret\" är B (magnetfältet)",
+   "s": 55.75,
+   "e": 59.56
+  },
+  {
+   "t": "Fulfingret är F (kraften)",
+   "s": 59.56,
+   "e": 62.95
+  },
+  {
+   "t": "Om laddningen som rör sig är",
+   "s": 62.95,
+   "e": 65.75
+  },
+  {
+   "t": "negativ är strömmens riktning motsatt laddningens riktning",
+   "s": 65.75,
+   "e": 70.24
+  },
+  {
+   "t": "positiv är strömmens riktning densamma som laddningens riktning.",
+   "s": 70.24,
+   "e": 74.83
+  },
+  {
+   "t": "Demonstration — Avlänkning av elektroner i ett oscilloskop",
+   "s": 74.83,
+   "e": 79.59
+  },
+  {
+   "t": "Vi startar ett oscilloskop som skjuter elektroner mot en fluorescerande skärm och undersöker hur elektronstrålen avlänkas (böjs av) när vi närmar oss den med en magnet.",
+   "s": 79.59,
+   "e": 90.25
+  },
+  {
+   "t": "Fungerar högerhandsregeln?",
+   "s": 90.25,
+   "e": 93.26
+  },
+  {
+   "t": "Ju större laddning, ju fortare laddningen rör sig och ju starkare magnetfält vinkelrätt mot laddningens rörelse — desto starkare blir kraften på varje enskild laddning.",
+   "s": 93.26,
+   "e": 102.81
+  },
+  {
+   "t": "Kom ihåg: elementarladdningen för elektroner och protoner är q är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb.",
+   "s": 102.81,
+   "e": 112.65
+  },
+  {
+   "t": "Magnetisk kraft på laddad partikel i magnetfält",
+   "s": 112.65,
+   "e": 116.83
+  },
+  {
+   "t": "kraften F är lika med q gånger hastigheten v gånger B",
+   "s": 116.83,
+   "e": 121.66
+  },
+  {
+   "t": "där",
+   "s": 121.66,
+   "e": 123.12
+  },
+  {
+   "t": "F är lika med magnetisk kraft på laddningen (newton)",
+   "s": 123.12,
+   "e": 127.66
+  },
+  {
+   "t": "q är lika med laddningens storlek (coulomb)",
+   "s": 127.66,
+   "e": 131.57
+  },
+  {
+   "t": "v är lika med laddningens hastighet (meter per sekund)",
+   "s": 131.57,
+   "e": 136.24
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet vinkelrätt mot laddningens rörelse (tesla)",
+   "s": 136.24,
+   "e": 142.66
+  },
+  {
+   "t": "Härledningen av formeln för magnetisk kraft på laddad partikel i magnetfält kräver relativitetsteori och Lorentztransformationer, vilket faller utanför ramen för detta ämne.",
+   "s": 142.66,
+   "e": 153.41
+  },
+  {
+   "t": "Exempel 1 — Magnetisk kraft på en elektron",
+   "s": 153.41,
+   "e": 157.61
+  },
+  {
+   "t": "Bestäm den magnetiska kraftens storlek och riktning på elektronen i figuren.",
+   "s": 157.61,
+   "e": 163.16
+  },
+  {
+   "t": "Elektronen rör sig med hastigheten 2,4 Mm/s och den magnetiska flödestätheten är 0,080 tesla.",
+   "s": 163.16,
+   "e": 171.74
+  },
+  {
+   "t": "Vi ställer upp formeln för magnetisk kraft på laddning.",
+   "s": 171.74,
+   "e": 175.85
+  },
+  {
+   "t": "kraften F är lika med q gånger hastigheten v gånger B",
+   "s": 175.85,
+   "e": 194.22
+  },
+  {
+   "t": "q är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb hastigheten v som är lika med 2,4 Mm per sekund som är lika med 2,4 gånger 10 upphöjt till 6 meter per sekund B som är lika med 0,080 tesla",
+   "s": 175.85,
+   "e": 194.22
+  },
+  {
+   "t": "kraften F är lika med 1,602 gånger 10 upphöjt till minus 19 gånger 2,4 gånger 10 upphöjt till 6 gånger 0,080 som är lika med 3,076 gånger 10 upphöjt till minus 14 newton som är ungefär lika med 3,1 gånger 10 upphöjt till minus 14 newton som är lika med 31 fN",
+   "s": 194.22,
+   "e": 213.39
+  },
+  {
+   "t": "Riktningen bestäms av högerhandsregeln.",
+   "s": 213.39,
+   "e": 216.85
+  },
+  {
+   "t": "Tummen är strömriktningen, pekfingret magnetfältets riktning, långfingret kraftens riktning.",
+   "s": 216.85,
+   "e": 223.65
+  },
+  {
+   "t": "Eftersom elektronen (negativ) åker nedåt är strömriktningen motriktad — uppåt.",
+   "s": 223.65,
+   "e": 229.9
+  },
+  {
+   "t": "Magnetfältets riktning är in i planet.",
+   "s": 229.9,
+   "e": 233.57
+  },
+  {
+   "t": "Högerhandsregeln ger då att kraften blir vänsterriktad.",
+   "s": 233.57,
+   "e": 237.86
+  },
+  {
+   "t": "Svar: 3,1 gånger 10 upphöjt till minus 14 newton (eller 31 fN) åt vänster.",
+   "s": 237.86,
+   "e": 245.3
+  }
+ ]
+}

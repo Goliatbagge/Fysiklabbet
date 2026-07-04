@@ -1,0 +1,268 @@
+{
+ "id": "fy1-9.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8640be23a5af5c5e17b42594bc9ce39cf43a4b44",
+ "dur": 280.18,
+ "segments": [
+  {
+   "t": "Atomkärnan",
+   "s": 0.1,
+   "e": 2.25
+  },
+  {
+   "t": "Atomen eller nukliden består av en kärna som består av protoner (p) och neutroner (n) samt elektroner (e upphöjt till minus ) kring kärnan.",
+   "s": 2.2,
+   "e": 12.54
+  },
+  {
+   "t": "Protoner, neutroner och elektroner kallas elementarpartiklar.",
+   "s": 12.54,
+   "e": 17.85
+  },
+  {
+   "t": "De partiklar som finns i kärnan (protoner och neutroner) kallas kärnpartiklar eller nukleoner.",
+   "s": 17.85,
+   "e": 24.75
+  },
+  {
+   "t": "Enligt Bohrs atommodell så befinner sig elektronerna i olika \"skal\" på bestämda avstånd från kärnan.",
+   "s": 24.75,
+   "e": 31.48
+  },
+  {
+   "t": "En heliumatom där elektronerna finns i ett elektronskal.",
+   "s": 31.48,
+   "e": 36.35
+  },
+  {
+   "t": "I skalet närmast kärnan har elektronen lägst energitillstånd.",
+   "s": 36.35,
+   "e": 41.14
+  },
+  {
+   "t": "Om vi tillför elektronen tillräckligt med energi kan den exciteras och hoppa ut till en bana med högre energitillstånd.",
+   "s": 41.14,
+   "e": 48.44
+  },
+  {
+   "t": "Efter ett tag kommer elektronen att hoppa tillbaka till sitt grundtillstånd och deexciteras.",
+   "s": 48.44,
+   "e": 54.35
+  },
+  {
+   "t": "Då frigörs motsvarande energi i form av en foton (mer om det nästa genomgång).",
+   "s": 54.35,
+   "e": 60.55
+  },
+  {
+   "t": "Elementarpartiklarnas massor är mycket små.",
+   "s": 60.55,
+   "e": 64.21
+  },
+  {
+   "t": "Som enhet för små massor används atommassenheten 1 u är lika med 1,66054 gånger 10 upphöjt till minus 27 kilogram, vilken ungefär motsvarar massan hos en proton eller neutron.",
+   "s": 64.21,
+   "e": 77.45
+  },
+  {
+   "t": "Om det inte finns någon mer fundamental kraft än gravitationskraft och elektromagnetisk kraft borde protonerna i atomkärnan repellera varandra.",
+   "s": 77.45,
+   "e": 86.65
+  },
+  {
+   "t": "Det finns alltså en starkare kraft som håller ihop dem.",
+   "s": 86.65,
+   "e": 90.71
+  },
+  {
+   "t": "Kraften som håller ihop kärnpartiklarna kallas starka kärnkraften, starka kraften eller stark växelverkan och verkar endast på korta avstånd (ungefär 10 upphöjt till minus 15 meter).",
+   "s": 90.71,
+   "e": 102.36
+  },
+  {
+   "t": "Det innebär att stora atomkärnor med många kärnpartiklar kan bli instabila och sönderfalla (radioaktivitet).",
+   "s": 102.36,
+   "e": 109.83
+  },
+  {
+   "t": "Atomkärnans sammansättning",
+   "s": 109.83,
+   "e": 112.89
+  },
+  {
+   "t": "En kärnas sammansättning skrivs Z upphöjt till arean A X där",
+   "s": 112.89,
+   "e": 118.1
+  },
+  {
+   "t": "X är lika med den kemiska beteckningen för grundämnet",
+   "s": 118.1,
+   "e": 122.4
+  },
+  {
+   "t": "A är lika med masstalet.",
+   "s": 122.4,
+   "e": 125.12
+  },
+  {
+   "t": "Anger antalet nukleoner (p och n) i kärnan.",
+   "s": 125.12,
+   "e": 129.47
+  },
+  {
+   "t": "Anger ungefär kärnans massa i u.",
+   "s": 129.47,
+   "e": 134.71
+  },
+  {
+   "t": "Z är lika med atomnumret.",
+   "s": 129.47,
+   "e": 134.71
+  },
+  {
+   "t": "Anger antalet protoner (p) i kärnan.",
+   "s": 134.71,
+   "e": 138.54
+  },
+  {
+   "t": "Anger även antalet e upphöjt till minus i atomen och kärnans positiva laddning.",
+   "s": 138.54,
+   "e": 144.41
+  },
+  {
+   "t": "Atomer med fler eller färre elektroner än protoner (och därmed har laddning) kallas jon.",
+   "s": 144.41,
+   "e": 150.61
+  },
+  {
+   "t": "Atomer av samma grundämne, men med olika antal neutroner, kallas isotoper (från grekiskan iso är lika med samma och top är lika med plats; de har samma plats i det periodiska systemet).",
+   "s": 150.61,
+   "e": 162.91
+  },
+  {
+   "t": "Exempel 1 — Rita modell av kärnor",
+   "s": 162.91,
+   "e": 166.49
+  },
+  {
+   "t": "Rita en modell av kärnorna",
+   "s": 166.49,
+   "e": 169.43
+  },
+  {
+   "t": "a) ett upphöjt till 1 H b) ett i kvadrat H c) upphöjt till 4He d) Beryllium-9",
+   "s": 169.43,
+   "e": 178.14
+  },
+  {
+   "t": "a) ett upphöjt till 1 H .",
+   "s": 178.14,
+   "e": 181.39
+  },
+  {
+   "t": "Talet nere till vänster anger att kärnan ska ha 1 proton.",
+   "s": 181.39,
+   "e": 185.79
+  },
+  {
+   "t": "Talet uppe till vänster anger att antalet protoner OCH neutroner ska vara 1.",
+   "s": 185.79,
+   "e": 191.35
+  },
+  {
+   "t": "Alltså finns inga neutroner i kärnan.",
+   "s": 191.35,
+   "e": 194.81
+  },
+  {
+   "t": "Man kan få fram antalet neutroner i kärnan genom att subtrahera masstalet (talet \"där uppe\") med atomnumret (talet \"där nere\"): (1 − 1) är lika med 0 neutroner.",
+   "s": 194.81,
+   "e": 205.64
+  },
+  {
+   "t": "Svar: En proton (+).",
+   "s": 205.64,
+   "e": 209.25
+  },
+  {
+   "t": "b) ett i kvadrat H .",
+   "s": 209.25,
+   "e": 212.38
+  },
+  {
+   "t": "Antalet protoner är 1.",
+   "s": 212.38,
+   "e": 215.32
+  },
+  {
+   "t": "Antalet neutroner är (2 − 1) är lika med 1.",
+   "s": 215.32,
+   "e": 220.01
+  },
+  {
+   "t": "Svar: En proton (+) och en neutron.",
+   "s": 220.01,
+   "e": 224.31
+  },
+  {
+   "t": "c) upphöjt till 4He.",
+   "s": 224.31,
+   "e": 227.56
+  },
+  {
+   "t": "I den här beteckningen har inte atomnumret skrivits ut.",
+   "s": 227.56,
+   "e": 231.94
+  },
+  {
+   "t": "Då får vi kontrollera det i en grundämnestabell: He står för helium med atomnummer 2.",
+   "s": 231.94,
+   "e": 237.93
+  },
+  {
+   "t": "Kärnan har alltså 2 protoner.",
+   "s": 237.93,
+   "e": 241.01
+  },
+  {
+   "t": "Antalet neutroner är (4 − 2) är lika med 2.",
+   "s": 241.01,
+   "e": 245.6
+  },
+  {
+   "t": "Svar: Två protoner (+) och två neutroner.",
+   "s": 245.6,
+   "e": 250.39
+  },
+  {
+   "t": "d) Beryllium-9.",
+   "s": 250.39,
+   "e": 253.72
+  },
+  {
+   "t": "Detta är ytterligare ett sätt att skriva atomkärnor på.",
+   "s": 253.72,
+   "e": 258.07
+  },
+  {
+   "t": "Vi ser att grundämnet är beryllium och 9 står för masstalet, dvs. det totala antalet protoner och neutroner.",
+   "s": 258.07,
+   "e": 266.02
+  },
+  {
+   "t": "Beryllium har atomnummer 4.",
+   "s": 266.02,
+   "e": 269.4
+  },
+  {
+   "t": "Kärnan har alltså 4 protoner och (9 − 4) är lika med 5 neutroner.",
+   "s": 269.4,
+   "e": 275.27
+  },
+  {
+   "t": "Svar: Fyra protoner (+) och fem neutroner.",
+   "s": 275.27,
+   "e": 280.18
+  }
+ ]
+}

@@ -1,0 +1,288 @@
+{
+ "id": "fy2-2.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "755e26b639e2e8c6ff6f0f095557909af540745d",
+ "dur": 324.68,
+ "segments": [
+  {
+   "t": "Energi i fjäder",
+   "s": 0.1,
+   "e": 2.6
+  },
+  {
+   "t": "En vikt som pendlar upp och ned i en spiralfjäder (även kallad elastisk pendel) växlar mellan potentiell energi (energi lagrad i fjädern) och rörelseenergi.",
+   "s": 2.55,
+   "e": 13.03
+  },
+  {
+   "t": "Summan av den potentiella energin och rörelseenergin vid en tidpunkt kallas fjäderns totala energi eller svängningsenergi.",
+   "s": 13.03,
+   "e": 21.16
+  },
+  {
+   "t": "Om vi bortser från energiförluster, till exempel i form av värme, är fjäderns totala energi konstant.",
+   "s": 21.16,
+   "e": 28.29
+  },
+  {
+   "t": "Var sitter energin?",
+   "s": 28.29,
+   "e": 30.84
+  },
+  {
+   "t": "Vändlägena — den potentiella energin är som störst, rörelseenergin är 0 (vikten står still ett ögonblick).",
+   "s": 30.84,
+   "e": 38.86
+  },
+  {
+   "t": "Jämviktsläget — den potentiella energin är 0, rörelseenergin är som störst.",
+   "s": 38.86,
+   "e": 45.17
+  },
+  {
+   "t": "Fjäderns totala (mekaniska) energi",
+   "s": 45.17,
+   "e": 49.25
+  },
+  {
+   "t": "energin E är lika med k gånger arean A i kvadrat delat med 2",
+   "s": 49.25,
+   "e": 54.7
+  },
+  {
+   "t": "där",
+   "s": 54.7,
+   "e": 56.17
+  },
+  {
+   "t": "E är lika med fjäderns totala energi (joule)",
+   "s": 56.17,
+   "e": 60.3
+  },
+  {
+   "t": "k är lika med fjäderkonstant (N/m)",
+   "s": 60.3,
+   "e": 64.5
+  },
+  {
+   "t": "A är lika med svängningens amplitud (meter)",
+   "s": 64.5,
+   "e": 68.56
+  },
+  {
+   "t": "Härledning — Fjäderns totala energi",
+   "s": 68.56,
+   "e": 72.12
+  },
+  {
+   "t": "Vi studerar en vikt i fjäder som vi drar ned och släpper i ett vändläge.",
+   "s": 72.12,
+   "e": 77.25
+  },
+  {
+   "t": "I släppögonblicket är hela fjäderns totala energi E potentiell energi E trycket p :",
+   "s": 77.25,
+   "e": 86.84
+  },
+  {
+   "t": "energin E är lika med E trycket p, ekvation 1",
+   "s": 77.25,
+   "e": 86.84
+  },
+  {
+   "t": "Den potentiella energin E trycket p motsvarar det arbete som tillförts för att dra ut fjädern.",
+   "s": 86.84,
+   "e": 93.41
+  },
+  {
+   "t": "Sedan tidigare har vi att",
+   "s": 93.41,
+   "e": 96.34
+  },
+  {
+   "t": "arbete är lika med kraft gånger sträcka",
+   "s": 96.34,
+   "e": 99.95
+  },
+  {
+   "t": "Kraften F vi tar i med är dock inte konstant — den ökar proportionellt med förlängningen enligt Hookes lag.",
+   "s": 99.95,
+   "e": 106.75
+  },
+  {
+   "t": "Eftersom arbete är lika med kraft gånger sträcka motsvaras arbetet av arean mellan grafen och x-axeln.",
+   "s": 106.75,
+   "e": 114.08
+  },
+  {
+   "t": "Arean bildar en triangel.",
+   "s": 114.08,
+   "e": 116.97
+  },
+  {
+   "t": "Basen i triangeln är så långt vi drar ut fjädern — svängningens amplitud A.",
+   "s": 116.97,
+   "e": 127.39
+  },
+  {
+   "t": "Höjden är den största kraft vi tar i med, vilken är k gånger arean A (från Hookes lag).",
+   "s": 116.97,
+   "e": 127.39
+  },
+  {
+   "t": "energin E är lika med E trycket p som är lika med arbetet som är lika med triangelarean som är lika med basen gånger höjden delat med 2 som är lika med arean A gånger parentesen k gånger A slut parentes delat med 2 som är lika med k gånger A i kvadrat delat med 2",
+   "s": 127.39,
+   "e": 143.25
+  },
+  {
+   "t": "vsv.",
+   "s": 143.25,
+   "e": 148.1
+  },
+  {
+   "t": "Exempel 1 — Potentiell energi i olika lägen",
+   "s": 143.25,
+   "e": 148.1
+  },
+  {
+   "t": "En fjäder med fjäderkonstanten 45 newton/m dras ut 20 centimeter.",
+   "s": 148.1,
+   "e": 154.49
+  },
+  {
+   "t": "Bestäm den potentiella energin i fjädern i",
+   "s": 154.49,
+   "e": 160.03
+  },
+  {
+   "t": "a) vändläget längst ner",
+   "s": 154.49,
+   "e": 160.03
+  },
+  {
+   "t": "b) vändläget högst upp",
+   "s": 160.03,
+   "e": 163.19
+  },
+  {
+   "t": "c) jämviktsläget",
+   "s": 163.19,
+   "e": 166.1
+  },
+  {
+   "t": "a) I vändlägena utgör fjäderns totala energi enbart potentiell energi.",
+   "s": 166.1,
+   "e": 172.1
+  },
+  {
+   "t": "Den potentiella energin är där samma som fjäderns totala energi.",
+   "s": 172.1,
+   "e": 177.15
+  },
+  {
+   "t": "energin E är lika med k gånger arean A i kvadrat delat med 2",
+   "s": 177.15,
+   "e": 182.55
+  },
+  {
+   "t": "k är lika med 45 newton per meter arean A som är lika med 20 centimeter som är lika med 0,20 meter",
+   "s": 182.55,
+   "e": 190.34
+  },
+  {
+   "t": "energin E är lika med 45 gånger 0,20 i kvadrat delat med 2 som är lika med 0,90 joule",
+   "s": 190.34,
+   "e": 197.97
+  },
+  {
+   "t": "Svar: 0,90 joule",
+   "s": 197.97,
+   "e": 201.26
+  },
+  {
+   "t": "b) Oavsett vilket vändläge vi undersöker är den potentiella energin densamma.",
+   "s": 201.26,
+   "e": 207.39
+  },
+  {
+   "t": "Svar: 0,90 joule",
+   "s": 207.39,
+   "e": 210.69
+  },
+  {
+   "t": "c) I jämviktsläget utgör fjäderns totala energi enbart rörelseenergi.",
+   "s": 210.69,
+   "e": 216.96
+  },
+  {
+   "t": "Den potentiella energin där är 0.",
+   "s": 216.96,
+   "e": 220.38
+  },
+  {
+   "t": "Svar: 0",
+   "s": 220.38,
+   "e": 225.65
+  },
+  {
+   "t": "Exempel 2 — Energiförlust i en dämpad svängning",
+   "s": 220.38,
+   "e": 225.65
+  },
+  {
+   "t": "En spiralfjäder med fjäderkonstanten 28 kilonewton/m utför en dämpad svängning.",
+   "s": 225.65,
+   "e": 232.28
+  },
+  {
+   "t": "Amplituden i det första övre vändläget är 5,0 centimeter och i det andra övre vändläget 2,5 centimeter.",
+   "s": 232.28,
+   "e": 240.16
+  },
+  {
+   "t": "Hur mycket energi blir till värme under den första svängningen?",
+   "s": 240.16,
+   "e": 244.45
+  },
+  {
+   "t": "Skillnaden i total mekanisk energi mellan vändlägena motsvarar värmeenergin.",
+   "s": 244.45,
+   "e": 250.5
+  },
+  {
+   "t": "Vi beräknar fjäderns totala mekaniska energi i första övre vändläget E ett respektive andra övre vändläget E två .",
+   "s": 250.5,
+   "e": 258.75
+  },
+  {
+   "t": "k är lika med 28 kilonewton per meter som är lika med 28 gånger 10 i kubik newton per meter A ett som är lika med 5,0 centimeter som är lika med 0,050 meter A två som är lika med 2,5 centimeter som är lika med 0,025 meter",
+   "s": 258.75,
+   "e": 274.73
+  },
+  {
+   "t": "E ett är lika med k gånger A ett i kvadrat delat med 2 som är lika med 28 gånger 10 i kubik gånger parentesen 0,050 slut parentes i kvadrat delat med 2 som är lika med 35 joule",
+   "s": 274.73,
+   "e": 287.91
+  },
+  {
+   "t": "E två är lika med k gånger A två i kvadrat delat med 2 som är lika med 28 gånger 10 i kubik gånger parentesen 0,025 slut parentes i kvadrat delat med 2 som är lika med 8,75 joule",
+   "s": 287.91,
+   "e": 301.31
+  },
+  {
+   "t": "Skillnaden — minskningen av mekanisk energi — motsvarar värmeenergin.",
+   "s": 301.31,
+   "e": 306.79
+  },
+  {
+   "t": "E hastigheten v ä r massan m e är lika med delta energin E som är lika med E ett minus E två som är lika med 35 minus 8,75 som är lika med 26,25 joule som är ungefär lika med 26 joule",
+   "s": 306.79,
+   "e": 321.93
+  },
+  {
+   "t": "Svar: 26 joule",
+   "s": 321.88,
+   "e": 324.68
+  }
+ ]
+}

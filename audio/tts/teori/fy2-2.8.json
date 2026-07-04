@@ -1,0 +1,193 @@
+{
+ "id": "fy2-2.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5e74d66fb7b507079797fd6e7b9697a8579d9990",
+ "dur": 210.86,
+ "segments": [
+  {
+   "t": "Reflexion, transmission och superposition",
+   "s": 0.1,
+   "e": 4.2
+  },
+  {
+   "t": "Reflexion",
+   "s": 4.15,
+   "e": 6.21
+  },
+  {
+   "t": "När en våg studsar tillbaka uppstår reflexion.",
+   "s": 6.21,
+   "e": 10.19
+  },
+  {
+   "t": "Då vi ropar i en stor sal hörs ett eko.",
+   "s": 10.19,
+   "e": 13.91
+  },
+  {
+   "t": "En havsvåg kastas tillbaka då den når klipporna.",
+   "s": 13.91,
+   "e": 17.94
+  },
+  {
+   "t": "Båda dessa är exempel på vågor som reflekteras.",
+   "s": 17.94,
+   "e": 22.2
+  },
+  {
+   "t": "Reflexion i transversell våg",
+   "s": 22.2,
+   "e": 25.32
+  },
+  {
+   "t": "I en transversell våg som reflekteras mot en",
+   "s": 25.32,
+   "e": 29.41
+  },
+  {
+   "t": "fast ände kommer ett vågberg tillbaka som en vågdal",
+   "s": 29.41,
+   "e": 33.6
+  },
+  {
+   "t": "lös ände kommer ett vågberg tillbaka som ett vågberg.",
+   "s": 33.6,
+   "e": 37.76
+  },
+  {
+   "t": "Transmission",
+   "s": 37.76,
+   "e": 39.76
+  },
+  {
+   "t": "När en våg överförs till ett annat medium sker en transmission.",
+   "s": 39.76,
+   "e": 44.41
+  },
+  {
+   "t": "Om en puls möter ett annat elastiskt medium både reflekteras och transmitteras (överförs) pulsen.",
+   "s": 44.41,
+   "e": 51.76
+  },
+  {
+   "t": "En puls från ett tätare medium som möter ett tunnare medium (exempelvis en tung fjäder som sitter ihop med en lätt fjäder) transmitteras förlängd och reflekteras rättvänd.",
+   "s": 51.76,
+   "e": 62.24
+  },
+  {
+   "t": "En puls från ett tunnare medium som möter ett tätare medium transmitteras förkortad och reflekteras omvänd.",
+   "s": 62.24,
+   "e": 69.21
+  },
+  {
+   "t": "Superposition",
+   "s": 69.21,
+   "e": 71.62
+  },
+  {
+   "t": "När två pulser möts sker en överlagring eller en superposition.",
+   "s": 71.62,
+   "e": 76.6
+  },
+  {
+   "t": "För att få den resulterande pulsens utseende vid mötet kan man använda sig av superpositionsprincipen.",
+   "s": 76.6,
+   "e": 83.44
+  },
+  {
+   "t": "En partikels elongation (läge i y-led) i mediet då pulserna möts fås i varje ögonblick som summan av elongationerna i respektive puls.",
+   "s": 83.44,
+   "e": 92.91
+  },
+  {
+   "t": "Brusreducering",
+   "s": 92.91,
+   "e": 95.35
+  },
+  {
+   "t": "Brusreducerande hörlurar använder sig av en extern mikrofon som tar in det omgivande ljudet, och en elektronisk krets i hörluren skapar en motsvarande våg fast omvänd som sänds i hörluren.",
+   "s": 95.35,
+   "e": 107.12
+  },
+  {
+   "t": "Summan av de två ljudvågorna tar ut varandra enligt superpositionsprincipen, och blir \"noll\" — vilket vi då uppfattar som tystnad.",
+   "s": 107.12,
+   "e": 115.29
+  },
+  {
+   "t": "Aktiv brusreducering tar bort alla frekvenser, så att man kan sitta på bussen utan att bli störd av trafikljud eller grannen som pratar bredvid.",
+   "s": 115.29,
+   "e": 124.1
+  },
+  {
+   "t": "Adaptiv brusreducering plockar enbart bort vissa frekvenser och kan t.ex. släppa igenom röster eller ljud från bilar nära dig.",
+   "s": 124.1,
+   "e": 132.19
+  },
+  {
+   "t": "Exempel 1 — Två pulser möts på ett snöre",
+   "s": 132.19,
+   "e": 136.21
+  },
+  {
+   "t": "Två pulser på ett snöre möts enligt figuren nedan.",
+   "s": 136.21,
+   "e": 140.46
+  },
+  {
+   "t": "Rita snörets utseende vid tidpunkterna t är lika med 1, 2, 3, 4, 5, 6 och 7 sekunder.",
+   "s": 140.46,
+   "e": 149.2
+  },
+  {
+   "t": "I varje ögonblick ritar vi de båda pulserna på sina nya positioner och adderar elongationerna (superpositionsprincipen).",
+   "s": 149.2,
+   "e": 157.44
+  },
+  {
+   "t": "a) t är lika med 1 sekunder: pulserna har flyttat sig 1 ruta var mot varandra men möts ännu inte.",
+   "s": 157.44,
+   "e": 164.54
+  },
+  {
+   "t": "b) t är lika med 2 sekunder: pulserna har just nått varandra.",
+   "s": 164.54,
+   "e": 169.81
+  },
+  {
+   "t": "c) t är lika med 3 sekunder: pulserna börjar överlappa.",
+   "s": 169.81,
+   "e": 174.9
+  },
+  {
+   "t": "Den resulterande höjden är summan av de båda pulsernas värden i varje punkt.",
+   "s": 174.9,
+   "e": 180.5
+  },
+  {
+   "t": "d) t är lika med 4 sekunder: pulserna överlappar maximalt.",
+   "s": 180.5,
+   "e": 186.31
+  },
+  {
+   "t": "Höjden är som störst där de båda pulserna är som högst samtidigt.",
+   "s": 186.31,
+   "e": 191.28
+  },
+  {
+   "t": "e) t är lika med 5 sekunder: pulserna fortsätter genom varandra; överlappningen minskar.",
+   "s": 191.28,
+   "e": 198.21
+  },
+  {
+   "t": "f) t är lika med 6 sekunder: pulserna har precis lämnat varandra.",
+   "s": 198.21,
+   "e": 203.96
+  },
+  {
+   "t": "g) t är lika med 7 sekunder: pulserna fortsätter oförändrade i sina ursprungliga riktningar.",
+   "s": 203.96,
+   "e": 210.86
+  }
+ ]
+}

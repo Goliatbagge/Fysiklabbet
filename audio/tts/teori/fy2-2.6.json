@@ -1,0 +1,188 @@
+{
+ "id": "fy2-2.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a83159d6ccce5789b3ba8d9232d9d3a3a1e51fca",
+ "dur": 175.86,
+ "segments": [
+  {
+   "t": "Resonans",
+   "s": 0.1,
+   "e": 2.16
+  },
+  {
+   "t": "Om man låter ett system vara, efter att det har satts i svängning, utför det en fri svängning.",
+   "s": 2.11,
+   "e": 7.75
+  },
+  {
+   "t": "Den fria svängningens frekvens kallas egenfrekvens.",
+   "s": 7.75,
+   "e": 12.21
+  },
+  {
+   "t": "Motsatsen till fri svängning är tvungen svängning, där ett system svänger med en viss frekvens som ges av en yttre periodisk kraft.",
+   "s": 12.21,
+   "e": 20.61
+  },
+  {
+   "t": "Så fungerar t.ex. en vanlig elektrodynamisk högtalare — ett pappersmembran fästs på en spole som tvingas vibrera med en viss frekvens.",
+   "s": 20.61,
+   "e": 29.29
+  },
+  {
+   "t": "Spolen är rörlig i ett fast magnetfält, och strömändringar i spolen gör att läget ändras.",
+   "s": 29.29,
+   "e": 35.88
+  },
+  {
+   "t": "Egenfrekvens",
+   "s": 35.88,
+   "e": 38.16
+  },
+  {
+   "t": "frekvensen f är lika med 1 delat med periodtiden T",
+   "s": 38.16,
+   "e": 42.56
+  },
+  {
+   "t": "där",
+   "s": 42.56,
+   "e": 44.04
+  },
+  {
+   "t": "f är lika med egenfrekvens (hertz)",
+   "s": 44.04,
+   "e": 47.7
+  },
+  {
+   "t": "T är lika med periodtid (sekunder)",
+   "s": 47.7,
+   "e": 51.42
+  },
+  {
+   "t": "Exempel på egenfrekvenser är de ljudfrekvenser som uppstår då man dunkar i en vägg eller klingar i ett glas.",
+   "s": 51.42,
+   "e": 58.48
+  },
+  {
+   "t": "Egenfrekvensen för en vägg är låg och det är därför bastoner hörs bra genom väggar (till grannarnas förtret).",
+   "s": 58.48,
+   "e": 65.55
+  },
+  {
+   "t": "Resonans",
+   "s": 65.55,
+   "e": 67.61
+  },
+  {
+   "t": "Om man tillför energi till en svängning vid rätt tidpunkt med samma frekvens som egenfrekvensen ökar svängningens amplitud mer och mer.",
+   "s": 67.61,
+   "e": 75.95
+  },
+  {
+   "t": "Denna förstärkning av svängningen kallas resonans.",
+   "s": 75.95,
+   "e": 80.09
+  },
+  {
+   "t": "Exempel på resonans",
+   "s": 80.09,
+   "e": 82.8
+  },
+  {
+   "t": "Några exempel på resonansfenomen:",
+   "s": 82.8,
+   "e": 88.94
+  },
+  {
+   "t": "gitarrens resonanslåda som förstärker ljudet",
+   "s": 82.8,
+   "e": 88.94
+  },
+  {
+   "t": "en gunga som puttas på när den precis har vänt och är på väg ner",
+   "s": 88.94,
+   "e": 93.54
+  },
+  {
+   "t": "basljud som går genom en vägg",
+   "s": 93.54,
+   "e": 96.6
+  },
+  {
+   "t": "ett vinglas som spricker när det utsätts för starkt ljud",
+   "s": 96.6,
+   "e": 100.81
+  },
+  {
+   "t": "lösa delar i en bil som börjar skaka vid en viss hastighet",
+   "s": 100.81,
+   "e": 105.45
+  },
+  {
+   "t": "\"frysande\" lyktstolpar som vibrerar i vinden",
+   "s": 105.45,
+   "e": 109.35
+  },
+  {
+   "t": "kollapsen av Tacoma Bridge (1940) — vinden satte bron i resonans och den slets sönder",
+   "s": 109.35,
+   "e": 116.44
+  },
+  {
+   "t": "markresonans som får helikoptrar att slitas itu (kan undvikas genom att lyfta från marken)",
+   "s": 116.44,
+   "e": 123.38
+  },
+  {
+   "t": "Exempel 1 — Gitarrsträngens egenfrekvens",
+   "s": 123.38,
+   "e": 127.33
+  },
+  {
+   "t": "En gitarrsträng som svänger fritt utför 100 svängningar på 1,22 sekunder.",
+   "s": 127.33,
+   "e": 133.39
+  },
+  {
+   "t": "Vilken är strängens egenfrekvens?",
+   "s": 133.39,
+   "e": 136.68
+  },
+  {
+   "t": "Vi ställer upp formeln för egenfrekvens.",
+   "s": 136.68,
+   "e": 140.14
+  },
+  {
+   "t": "frekvensen f är lika med 1 delat med periodtiden T, ekvation 1",
+   "s": 140.14,
+   "e": 145.74
+  },
+  {
+   "t": "Strängen utför 100 svängningar på 1,22 sekunder, så periodtiden är",
+   "s": 145.74,
+   "e": 151.82
+  },
+  {
+   "t": "periodtiden T är lika med 1,22 sekund delat med 100 som är lika med 0,0122 sekund",
+   "s": 151.82,
+   "e": 159.82
+  },
+  {
+   "t": "Insättning i ekvation 1 ger",
+   "s": 159.82,
+   "e": 163.09
+  },
+  {
+   "t": "frekvensen f är lika med 1 delat med 0,0122 som är lika med 81,967 ldots hertz som är ungefär lika med 82 hertz",
+   "s": 163.09,
+   "e": 172.94
+  },
+  {
+   "t": "Svar: 82 hertz",
+   "s": 172.94,
+   "e": 175.86
+  }
+ ]
+}

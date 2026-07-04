@@ -1,0 +1,133 @@
+{
+ "id": "fy1-5.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "668d52d26bc3b7e2b66bbaf68581f9e500c80a7b",
+ "dur": 180.0,
+ "segments": [
+  {
+   "t": "Tryck och tryckkraft",
+   "s": 0.1,
+   "e": 2.54
+  },
+  {
+   "t": "En kraft som uppstår när två föremål har kontakt med varandra kallas tryckkraft, betecknas F och har enheten N (newton).",
+   "s": 2.49,
+   "e": 11.03
+  },
+  {
+   "t": "Tryckkraften per areaenhet kallas tryck, betecknas p (från engelskans \"pressure\") och har enheten Pa (pascal) eller N/m i kvadrat (newton per kvadratmeter).",
+   "s": 11.03,
+   "e": 23.14
+  },
+  {
+   "t": "Tryckkraft och tryck är alltså olika saker!",
+   "s": 23.14,
+   "e": 26.75
+  },
+  {
+   "t": "När du går i djup lössnö påverkar du snön med en tryckkraft som motsvaras av din tyngd och du sjunker ner i snön.",
+   "s": 26.75,
+   "e": 33.75
+  },
+  {
+   "t": "Om du istället tar på dig skidor så sjunker du inte ner i snön trots att din tyngd och tryckkraft är lika stor.",
+   "s": 33.75,
+   "e": 40.55
+  },
+  {
+   "t": "Det beror på att tryckkraften fördelas på en större area och att trycket då blir lägre.",
+   "s": 40.55,
+   "e": 46.14
+  },
+  {
+   "t": "Tryck mellan fasta kroppar",
+   "s": 46.14,
+   "e": 48.85
+  },
+  {
+   "t": "trycket p är lika med kraften F delat med arean A",
+   "s": 48.85,
+   "e": 53.39
+  },
+  {
+   "t": "där",
+   "s": 53.39,
+   "e": 54.85
+  },
+  {
+   "t": "p är lika med tryck (Pa eller N/m i kvadrat)",
+   "s": 54.85,
+   "e": 59.6
+  },
+  {
+   "t": "F är lika med tryckkraft (newton)",
+   "s": 59.6,
+   "e": 63.25
+  },
+  {
+   "t": "A är lika med arean som tryckkraften verkar på (m i kvadrat)",
+   "s": 63.25,
+   "e": 68.46
+  },
+  {
+   "t": "Exempel 1 — Damen vs pansarvagnen",
+   "s": 68.46,
+   "e": 72.54
+  },
+  {
+   "t": "Vad orsakar störst tryck: en 60-kilos dam som trampar med sin tyngd på en stilettklack med arean 1,0 centimeter i kvadrat eller en stridsvagn på 60 ton med en total larvfötteryta på 6,0 meter i kvadrat?",
+   "s": 72.54,
+   "e": 86.1
+  },
+  {
+   "t": "Räkna med tyngdfaktorn tyngdfaktorn g är ungefär lika med 10 newton per kilogram .",
+   "s": 86.1,
+   "e": 92.15
+  },
+  {
+   "t": "Vi beräknar först trycket från damen.",
+   "s": 92.15,
+   "e": 95.72
+  },
+  {
+   "t": "p avståndet d accelerationen a massan m är lika med F d a m delat med A d a m",
+   "s": 95.72,
+   "e": 121.89
+  },
+  {
+   "t": "F avståndet d accelerationen a massan m är lika med m d a m gånger tyngdfaktorn g som är lika med 60 gånger 10 som är lika med 600 newton A d a m som är lika med 1,0 kvadratcentimeter som är lika med 1,0 gånger 10 upphöjt till minus 4 kvadratmeter",
+   "s": 95.72,
+   "e": 121.89
+  },
+  {
+   "t": "p avståndet d accelerationen a massan m är lika med 600 delat med 1,0 gånger 10 upphöjt till minus 4 som är lika med 6 000 000 pascal som är lika med 6,0 MPa",
+   "s": 121.89,
+   "e": 134.01
+  },
+  {
+   "t": "Vi beräknar sedan trycket från pansarvagnen med massan m är lika med 60 ton är lika med 60 000 kilogram.",
+   "s": 134.01,
+   "e": 141.41
+  },
+  {
+   "t": "p trycket p accelerationen a n sträckan s a r är lika med F p a n s a r delat med A p a n s a r",
+   "s": 141.41,
+   "e": 164.18
+  },
+  {
+   "t": "F trycket p accelerationen a n sträckan s a r är lika med m p a n s a r gånger tyngdfaktorn g som är lika med 60 000 gånger 10 som är lika med 600 000 newton A p a n s a r som är lika med 6,0 kvadratmeter",
+   "s": 141.41,
+   "e": 164.18
+  },
+  {
+   "t": "p trycket p accelerationen a n sträckan s a r är lika med 600 000 delat med 6,0 som är lika med 100 000 pascal som är lika med 0,10 MPa",
+   "s": 164.18,
+   "e": 174.91
+  },
+  {
+   "t": "Svar: Damen — trycket från klacken är ca 60 gånger större!",
+   "s": 174.91,
+   "e": 180.0
+  }
+ ]
+}

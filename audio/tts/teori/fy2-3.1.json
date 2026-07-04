@@ -1,0 +1,203 @@
+{
+ "id": "fy2-3.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f74f2ba235f37e1913e02758ffd40bb19e560a9e",
+ "dur": 218.54,
+ "segments": [
+  {
+   "t": "Magnetism och magnetfält",
+   "s": 0.1,
+   "e": 3.05
+  },
+  {
+   "t": "Förmågan hos vissa metaller att dra till sig andra metallföremål kallas magnetism.",
+   "s": 3.0,
+   "e": 8.64
+  },
+  {
+   "t": "Etymologi — Magnetism",
+   "s": 8.64,
+   "e": 11.4
+  },
+  {
+   "t": "Ordet magnetism kommer från den turkiska staden Magnesia (nuvarande Manisa), där man för första gången hittade magnetiska material.",
+   "s": 11.4,
+   "e": 19.91
+  },
+  {
+   "t": "Historik — Magnetism",
+   "s": 19.91,
+   "e": 22.73
+  },
+  {
+   "t": "Kunskapen att järnhaltiga mineraler kan dra till sig andra föremål är gammal — den har funnits i 4 500 år.",
+   "s": 22.73,
+   "e": 30.26
+  },
+  {
+   "t": "Det dröjde ända till 1100-talet innan fenomenet fick stor genomslagskraft: man fann att små järnnålar alltid pekade i samma riktning och kompassen var uppfunnen!",
+   "s": 30.26,
+   "e": 40.1
+  },
+  {
+   "t": "Arabiska skepp var de första att använda dessa för att navigera till sjöss.",
+   "s": 40.1,
+   "e": 45.19
+  },
+  {
+   "t": "Teorin att jordklotet fungerar som en jättestor magnet framlades av engelsmannen William Gilbert på 1600-talet.",
+   "s": 45.19,
+   "e": 53.17
+  },
+  {
+   "t": "Han ansåg även att denna kraft höll planeterna i sin bana runt solen.",
+   "s": 53.17,
+   "e": 58.33
+  },
+  {
+   "t": "Detta är felaktigt, men det var första gången någon försökte förklara ett astronomiskt fenomen naturvetenskapligt och inte från en myt.",
+   "s": 58.33,
+   "e": 66.81
+  },
+  {
+   "t": "Precis som gravitation och elektriska krafter verkar magnetiska krafter på avstånd.",
+   "s": 66.81,
+   "e": 72.8
+  },
+  {
+   "t": "Metaller som har magnetiska egenskaper under längre tid — t.ex. kylskåpsmagneter eller stavmagneter — kallas permanentmagneter och är tillverkade av så kallade ferromagnetiska material som järn, stål och nickel.",
+   "s": 72.8,
+   "e": 85.88
+  },
+  {
+   "t": "Poler",
+   "s": 85.88,
+   "e": 87.55
+  },
+  {
+   "t": "Ändarna på en magnet kallas poler.",
+   "s": 87.55,
+   "e": 90.85
+  },
+  {
+   "t": "Den pol som ställer in sig mot norr kallas nordpol och den som ställer in sig mot söder kallas sydpol.",
+   "s": 90.85,
+   "e": 97.16
+  },
+  {
+   "t": "Nordpolen är oftast markerad röd och sydpolen vit.",
+   "s": 97.16,
+   "e": 101.69
+  },
+  {
+   "t": "Lika poler repellerar varandra och olika poler attraherar varandra (jämför med elektrisk laddning).",
+   "s": 101.69,
+   "e": 108.58
+  },
+  {
+   "t": "Demonstration — Parvisa poler",
+   "s": 108.58,
+   "e": 111.75
+  },
+  {
+   "t": "Vi tar en stavmagnet och delar den på mitten.",
+   "s": 111.75,
+   "e": 115.42
+  },
+  {
+   "t": "Vi undersöker hur den vita änden av magneten beter sig och ser att den avbrutna änden nu har blivit en pluspol (nordpol).",
+   "s": 115.42,
+   "e": 123.24
+  },
+  {
+   "t": "Då en permanentmagnet delas i mitten bildas två nya mindre magneter.",
+   "s": 123.24,
+   "e": 128.74
+  },
+  {
+   "t": "Magnetpoler uppträder alltid parvis.",
+   "s": 128.74,
+   "e": 132.44
+  },
+  {
+   "t": "Delas en magnet fås två nya, kortare magneter.",
+   "s": 132.44,
+   "e": 136.88
+  },
+  {
+   "t": "Man kan aldrig skapa en magnet med endast en pol.",
+   "s": 136.88,
+   "e": 140.76
+  },
+  {
+   "t": "Magnetfält",
+   "s": 140.76,
+   "e": 142.97
+  },
+  {
+   "t": "Demonstration — Magnetfält",
+   "s": 142.97,
+   "e": 146.0
+  },
+  {
+   "t": "Vi placerar en stavmagnet på en platta med kompassnålar.",
+   "s": 146.0,
+   "e": 150.44
+  },
+  {
+   "t": "Vi ser hur kompassnålarna riktar in sig, vilket visualiserar det magnetiska fältet och dess riktning i två dimensioner.",
+   "s": 150.44,
+   "e": 158.39
+  },
+  {
+   "t": "Vi placerar även en stavmagnet inuti en glascylinder med järnfilspån i en trögflytande vätska, vilket visualiserar det magnetiska fältet i tre dimensioner.",
+   "s": 158.39,
+   "e": 168.84
+  },
+  {
+   "t": "Kraftfältet runt en magnet kallas magnetfält.",
+   "s": 168.84,
+   "e": 173.01
+  },
+  {
+   "t": "Placeras en liten kompass i magnetfältet definieras fältets riktning i den riktning som kompassens nordända pekar åt.",
+   "s": 173.01,
+   "e": 181.07
+  },
+  {
+   "t": "Magnetfält ritas med fältlinjer som går från nordända till sydända.",
+   "s": 181.07,
+   "e": 186.14
+  },
+  {
+   "t": "Ju tätare fältlinjer, desto kraftigare magnetfält.",
+   "s": 186.14,
+   "e": 190.46
+  },
+  {
+   "t": "Magnetiska fältlinjer går ut ur nordändan och in i sydändan.",
+   "s": 190.46,
+   "e": 195.32
+  },
+  {
+   "t": "Vad är egentligen magnetism?",
+   "s": 195.32,
+   "e": 198.32
+  },
+  {
+   "t": "Det är svårt att enkelt förklara ursprunget till de magnetiska krafterna.",
+   "s": 198.32,
+   "e": 203.09
+  },
+  {
+   "t": "Magnetism kommer från en egenskap hos elektroner som kallas \"spinn\" och deras spinnkvanttal, som är en del av kvantfysiken.",
+   "s": 203.09,
+   "e": 211.0
+  },
+  {
+   "t": "Spinn ger ett slags \"magnetiskt moment\", och när dessa riktas parallellt och samverkar ger det magnetiska egenskaper.",
+   "s": 211.0,
+   "e": 218.54
+  }
+ ]
+}

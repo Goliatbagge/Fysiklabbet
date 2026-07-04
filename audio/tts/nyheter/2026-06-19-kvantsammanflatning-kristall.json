@@ -1,0 +1,248 @@
+{
+ "id": "2026-06-19-kvantsammanflatning-kristall",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "bbbd69dba119285cb48e114ccbc3cc1e3c314c70",
+ "dur": 343.23,
+ "segments": [
+  {
+   "t": "En kristall du kan hålla i handen är kvantsammanflätad.",
+   "s": 0.1,
+   "e": 4.19
+  },
+  {
+   "t": "Fysiker i Wien har för första gången mätt storskalig kvantsammanflätning i en centimeterstor kristall av en så kallad konstig metall.",
+   "s": 4.14,
+   "e": 12.14
+  },
+  {
+   "t": "Minst nio kvantobjekt agerar kollektivt inne i materialet — som en osynlig orkester utan dirigent.",
+   "s": 12.14,
+   "e": 19.25
+  },
+  {
+   "t": "Kvantsammanflätning brukar förknippas med enstaka partiklar i extremt avancerade laboratorier.",
+   "s": 19.25,
+   "e": 25.73
+  },
+  {
+   "t": "Nu visar ett internationellt forskarlag att fenomenet inte alls är begränsat till den skalan.",
+   "s": 25.73,
+   "e": 32.16
+  },
+  {
+   "t": "I en kristall av cerium, palladium och kisel — stor nog att ligga bekvämt i handflatan — har de påvisat att minst nio kvantobjekt agerar kollektivt, som om de vore ett enda sammanhängande system.",
+   "s": 32.16,
+   "e": 44.08
+  },
+  {
+   "t": "Upptäckten publicerades i Nature Physics den 16 juni 2026.",
+   "s": 44.08,
+   "e": 49.92
+  },
+  {
+   "t": "Kristallen tillhör en grupp material som fysiker kallar konstiga metaller (engelska: strange metals).",
+   "s": 49.92,
+   "e": 57.12
+  },
+  {
+   "t": "Trots namnet handlar det inte om science fiction utan om ett av kondenserade materiens hårdaste nötter — material vars elektriska egenskaper trotsar de teorier som fungerar utmärkt för vanliga metaller som koppar och guld.",
+   "s": 57.12,
+   "e": 69.97
+  },
+  {
+   "t": "Vad gör en metall konstig.",
+   "s": 69.97,
+   "e": 72.72
+  },
+  {
+   "t": "I en vanlig metall rör sig elektronerna ungefär som en gas av oberoende partiklar.",
+   "s": 72.72,
+   "e": 78.45
+  },
+  {
+   "t": "Motståndet ökar med temperaturen på ett förutsägbart sätt, och vid låga temperaturer platåar det.",
+   "s": 78.45,
+   "e": 84.85
+  },
+  {
+   "t": "Fysiker har förstått det sedan 1930-talet.",
+   "s": 84.85,
+   "e": 89.35
+  },
+  {
+   "t": "Men i konstiga metaller stiger det elektriska motståndet linjärt med temperaturen ända från nära absoluta nollpunkten, utan någon platå.",
+   "s": 89.35,
+   "e": 98.22
+  },
+  {
+   "t": "Det bryter mot standardteorin.",
+   "s": 98.22,
+   "e": 101.25
+  },
+  {
+   "t": "Ännu märkligare: flera av dessa material har en supraledande fas, där de vid tillräckligt låg temperatur plötsligt leder ström helt utan motstånd.",
+   "s": 101.25,
+   "e": 110.78
+  },
+  {
+   "t": "I över trettio år har ingen kunnat förklara beteendet fullt ut.",
+   "s": 110.78,
+   "e": 115.65
+  },
+  {
+   "t": "Kristallen som undersöktes, Ce trePd två nollSi sex, tillhör denna gåtfulla familj.",
+   "s": 115.65,
+   "e": 121.99
+  },
+  {
+   "t": "Schrödingers myrstack.",
+   "s": 121.99,
+   "e": 124.58
+  },
+  {
+   "t": "Forskargruppen vid TU Wien i Österrike, ledd av professor Silke Bühler-Paschen, tog ett nytt grepp på problemet.",
+   "s": 124.58,
+   "e": 131.9
+  },
+  {
+   "t": "I stället för att försöka sätta hela kristallen i en Schrödinger-katt-liknande superposition — vilket vore praktiskt omöjligt — ställde de en annan fråga: är kristallens beståndsdelar kollektivt kvantsammanflätade?",
+   "s": 131.9,
+   "e": 143.72
+  },
+  {
+   "t": "Bühler-Paschen liknar det vid en myrstack.",
+   "s": 143.72,
+   "e": 147.21
+  },
+  {
+   "t": "Stör man en bit av stacken reagerar inte bara de myror som sitter just där, utan hela kolonin, som om den vore en enda organism.",
+   "s": 147.21,
+   "e": 155.82
+  },
+  {
+   "t": "Samma mönster hittade forskargruppen i kristallen — fast på kvantnivå.",
+   "s": 155.82,
+   "e": 160.84
+  },
+  {
+   "t": "Doktoranden Federico Mazza genomförde experimenten vid Institut Laue-Langevin (ILL) i Grenoble, en av världens kraftfullaste neutronkällor.",
+   "s": 160.84,
+   "e": 170.72
+  },
+  {
+   "t": "Genom att bombardera kristallen med neutroner och mäta hur den svarade kunde teamet beräkna den så kallade kvantfisherinformationen — ett mått på hur känsligt ett kvantsystem reagerar på en störning.",
+   "s": 170.72,
+   "e": 181.74
+  },
+  {
+   "t": "Om partiklarna vore oberoende skulle svaret vara begränsat.",
+   "s": 181.74,
+   "e": 186.3
+  },
+  {
+   "t": "Men om de är sammanflätade reagerar hela systemet starkare än summan av sina delar.",
+   "s": 186.3,
+   "e": 192.54
+  },
+  {
+   "t": "Resultatet var tydligt.",
+   "s": 192.54,
+   "e": 195.47
+  },
+  {
+   "t": "Mazza sammanfattar: ”Analysen visar ett svar som inte kan förklaras av oberoende partiklar.",
+   "s": 195.47,
+   "e": 201.97
+  },
+  {
+   "t": "I stället agerar grupper av minst nio kvantobjekt kollektivt.” Det är direkt bevis för storskalig, så kallad multipartit, kvantsammanflätning i ett fast material man kan hålla i handen.",
+   "s": 201.97,
+   "e": 215.21
+  },
+  {
+   "t": "Ledtråden till det konstiga beteendet.",
+   "s": 215.21,
+   "e": 218.64
+  },
+  {
+   "t": "Upptäckten gör mer än att flytta gränsen för var vi kan observera kvantsammanflätning.",
+   "s": 218.64,
+   "e": 224.24
+  },
+  {
+   "t": "Den ger en direkt ledtråd till varför konstiga metaller beter sig så — konstigt.",
+   "s": 224.24,
+   "e": 229.84
+  },
+  {
+   "t": "Redan 2025 visade samma grupp, i samarbete med Rice University i USA, att strömmen genom en konstig metall flödar med ovanligt lite brus, som om elektronerna koordinerade sig sinsemellan.",
+   "s": 229.84,
+   "e": 242.43
+  },
+  {
+   "t": "Den nya studien pekar på att just sammanflätningen är mekanismen bakom den koordinationen.",
+   "s": 242.43,
+   "e": 248.79
+  },
+  {
+   "t": "Stark sammanflätning verkar vara direkt kopplad till de konstiga metallernas ovanliga beteende.",
+   "s": 248.79,
+   "e": 255.15
+  },
+  {
+   "t": "Och det finns en praktisk dimension.",
+   "s": 255.15,
+   "e": 258.18
+  },
+  {
+   "t": "Flera konstiga metaller har supraledande faser — de kan leda ström helt utan motstånd.",
+   "s": 258.18,
+   "e": 264.27
+  },
+  {
+   "t": "Att förstå sammanflätningens roll kan öppna vägen för bättre supraledare och kanske, en dag, för kvantteknologi baserad på fasta material i stället för isolerade partiklar i vakuum.",
+   "s": 264.27,
+   "e": 277.73
+  },
+  {
+   "t": "Visste du.",
+   "s": 277.68,
+   "e": 279.53
+  },
+  {
+   "t": "Kvantsammanflätning innebär att partiklar delar ett gemensamt kvanttillstånd — mäter du en partikel vet du omedelbart något om den andra, oavsett avstånd.",
+   "s": 279.53,
+   "e": 288.86
+  },
+  {
+   "t": "Kristallen som undersöktes, Ce trePd två nollSi sex, består av cerium (Ce), palladium (Pd) och kisel (Si) — grundämnen du kanske inte stöter på varje dag, men som tillsammans bildar ett av fysikens mest mystiska material.",
+   "s": 288.86,
+   "e": 304.28
+  },
+  {
+   "t": "Experimenten utfördes med neutroner vid Institut Laue-Langevin i Grenoble, Frankrike — en av världens mest intensiva neutronkällor, där forskare från över 40 länder studerar materiens innersta struktur.",
+   "s": 304.28,
+   "e": 316.95
+  },
+  {
+   "t": "Kvantfisherinformationen mäter hur känsligt ett kvantsystem reagerar på störningar.",
+   "s": 316.95,
+   "e": 322.91
+  },
+  {
+   "t": "Hög känslighet avslöjar att partiklarna inte agerar var för sig utan är sammanflätade.",
+   "s": 322.91,
+   "e": 329.13
+  },
+  {
+   "t": "Kvantsammanflätning och superposition tillhör den moderna fysiken som behandlas i Fysik 2.",
+   "s": 329.13,
+   "e": 335.39
+  },
+  {
+   "t": "Upptäckten visar att kvantvärlden inte bara finns i läroböckernas tankeexperiment — den kan gömma sig i en kristall på ditt skrivbord.",
+   "s": 335.39,
+   "e": 343.23
+  }
+ ]
+}

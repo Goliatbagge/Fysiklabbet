@@ -1,0 +1,303 @@
+{
+ "id": "fy1-4.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a06442544d70994a4f7accdae29bf5451cea00de",
+ "dur": 367.9,
+ "segments": [
+  {
+   "t": "Rörelsemängdens bevarande",
+   "s": 0.1,
+   "e": 3.02
+  },
+  {
+   "t": "Eftersom impulsen på två föremål som kolliderar är lika stor, men motriktad, kommer den resulterande impulsen i systemet att vara 0.",
+   "s": 2.98,
+   "e": 11.99
+  },
+  {
+   "t": "Eftersom impuls motsvarar förändring av rörelsemängd innebär det att förändringen av rörelsemängden i systemet också är 0.",
+   "s": 11.99,
+   "e": 20.09
+  },
+  {
+   "t": "Rörelsemängden i ett slutet system är alltså konstant.",
+   "s": 20.09,
+   "e": 24.48
+  },
+  {
+   "t": "Rörelsemängdslagen",
+   "s": 24.48,
+   "e": 26.94
+  },
+  {
+   "t": "m arean A gånger v A 0 plus m B gånger v B 0 är lika med m A gånger v A plus m B gånger v B",
+   "s": 26.94,
+   "e": 35.16
+  },
+  {
+   "t": "där",
+   "s": 35.16,
+   "e": 36.67
+  },
+  {
+   "t": "m arean A , m B är lika med massa föremål A respektive B",
+   "s": 36.67,
+   "e": 51.2
+  },
+  {
+   "t": "v arean A 0 , v B 0 är lika med begynnelsehastighet föremål A respektive B",
+   "s": 36.67,
+   "e": 51.2
+  },
+  {
+   "t": "v arean A , v B är lika med sluthastighet föremål A respektive B",
+   "s": 36.67,
+   "e": 51.2
+  },
+  {
+   "t": "En kollision där föremålen vid krocken",
+   "s": 51.2,
+   "e": 54.8
+  },
+  {
+   "t": "studsar mot varandra kallas elastisk stöt.",
+   "s": 54.8,
+   "e": 58.83
+  },
+  {
+   "t": "hakar i varandra kallas oelastisk stöt eller inelastisk stöt.",
+   "s": 58.83,
+   "e": 64.01
+  },
+  {
+   "t": "I båda dessa fall gäller rörelsemängdslagen.",
+   "s": 64.01,
+   "e": 67.8
+  },
+  {
+   "t": "Vid oelastiska stötar kan rörelsemängdslagen skrivas något förenklat.",
+   "s": 67.8,
+   "e": 73.17
+  },
+  {
+   "t": "Rörelsemängdslagen vid fullkomligt inelastisk stöt",
+   "s": 73.17,
+   "e": 77.58
+  },
+  {
+   "t": "m arean A gånger v A plus m B gånger v B är lika med parentesen m A plus m B slut parentes gånger hastigheten v",
+   "s": 77.58,
+   "e": 86.95
+  },
+  {
+   "t": "där",
+   "s": 86.95,
+   "e": 88.44
+  },
+  {
+   "t": "m arean A , m B är lika med massa föremål A respektive B",
+   "s": 88.44,
+   "e": 101.99
+  },
+  {
+   "t": "v arean A , v B är lika med begynnelsehastighet föremål A respektive B",
+   "s": 88.44,
+   "e": 101.99
+  },
+  {
+   "t": "v är lika med sluthastighet (gemensam efter stöten)",
+   "s": 88.44,
+   "e": 101.99
+  },
+  {
+   "t": "Exempel 1 — Agnes och Boel på inlines",
+   "s": 101.99,
+   "e": 105.94
+  },
+  {
+   "t": "Agnes (60 kilogram) och Boel (85 kilogram) står på inlines och knuffar iväg varandra på plan mark.",
+   "s": 105.94,
+   "e": 114.0
+  },
+  {
+   "t": "Efter knuffen har Agnes hastigheten 0,50 meter per sekund åt höger.",
+   "s": 114.0,
+   "e": 119.71
+  },
+  {
+   "t": "a) Vilken hastighet får Boel?",
+   "s": 119.71,
+   "e": 122.96
+  },
+  {
+   "t": "b) Hur stor impuls utsattes Agnes för?",
+   "s": 122.96,
+   "e": 126.9
+  },
+  {
+   "t": "c) De tryckte ifrån varandra under 0,15 sekunder.",
+   "s": 126.9,
+   "e": 132.01
+  },
+  {
+   "t": "Vilken medelkraft verkade?",
+   "s": 132.01,
+   "e": 134.99
+  },
+  {
+   "t": "a) Vi definierar positiv riktning åt höger.",
+   "s": 134.99,
+   "e": 139.32
+  },
+  {
+   "t": "Vi ställer upp rörelsemängdslagen och löser ut Boels hastighet v B .",
+   "s": 139.32,
+   "e": 144.82
+  },
+  {
+   "t": "m arean A gånger v A 0 plus m B gånger v B 0 är lika med m A gånger v A plus m B gånger v B vilket är ekvivalent med att v B är lika med m A gånger v A 0 plus m B gånger v B 0 minus m A gånger v A delat med m B",
+   "s": 144.82,
+   "e": 160.24
+  },
+  {
+   "t": "m arean A är lika med 60 kilogram v A 0 som är lika med 0 meter B som är lika med 85 kilogram v B 0 som är lika med 0 v A som är lika med 0,50 meter per sekund",
+   "s": 160.24,
+   "e": 172.4
+  },
+  {
+   "t": "v B är lika med 60 gånger 0 plus 85 gånger 0 minus 60 gånger 0,50 delat med 85 som är lika med minus 0,352 ldots meter per sekund som är ungefär lika med minus 0,35 meter per sekund",
+   "s": 172.4,
+   "e": 187.32
+  },
+  {
+   "t": "Svar: −0,35 meter per sekund eller 0,35 meter per sekund åt vänster.",
+   "s": 187.32,
+   "e": 194.54
+  },
+  {
+   "t": "b) Vi ställer upp impulslagen.",
+   "s": 194.54,
+   "e": 197.86
+  },
+  {
+   "t": "strömmen I är lika med massan m gånger delta hastigheten v",
+   "s": 197.86,
+   "e": 202.78
+  },
+  {
+   "t": "massan m är lika med 60 kilogram delta hastigheten v som är lika med v två minus v ett som är lika med parentesen 0,50 minus 0 slut parentes meter per sekund som är lika med 0,50 meter per sekund",
+   "s": 202.78,
+   "e": 216.45
+  },
+  {
+   "t": "strömmen I är lika med 60 gånger 0,50 som är lika med 30 Ns",
+   "s": 216.45,
+   "e": 232.85
+  },
+  {
+   "t": "Svar: 30 Ns",
+   "s": 216.45,
+   "e": 232.85
+  },
+  {
+   "t": "c) Vi ställer upp formeln för impuls och löser ut kraften F.",
+   "s": 216.45,
+   "e": 232.85
+  },
+  {
+   "t": "strömmen I är lika med kraften F gånger delta tiden t vilket är ekvivalent med att F är lika med I delat med delta t",
+   "s": 216.45,
+   "e": 232.85
+  },
+  {
+   "t": "strömmen I är lika med 30 Ns parentesen frånb-uppgiften slut parentes delta tiden t som är lika med 0,15 sekund",
+   "s": 232.85,
+   "e": 241.54
+  },
+  {
+   "t": "kraften F är lika med 30 delat med 0,15 som är lika med 200 newton som är lika med 0,20 kilonewton",
+   "s": 241.54,
+   "e": 249.75
+  },
+  {
+   "t": "Svar: 0,20 kilonewton eller 200 newton",
+   "s": 249.75,
+   "e": 254.68
+  },
+  {
+   "t": "Exempel 2 — Tågvagnar som hakar i varandra",
+   "s": 254.68,
+   "e": 258.84
+  },
+  {
+   "t": "Två tågvagnar kolliderar och hakar efter kollisionen i varandra.",
+   "s": 258.84,
+   "e": 263.77
+  },
+  {
+   "t": "Vagn A väger 10 ton och rör sig med hastigheten 5,0 meter per sekund åt höger.",
+   "s": 263.77,
+   "e": 270.2
+  },
+  {
+   "t": "Vagn B väger 15 ton och rör sig med hastigheten 3,0 meter per sekund åt vänster.",
+   "s": 270.2,
+   "e": 276.9
+  },
+  {
+   "t": "Bestäm deras slutgiltiga hastighet efter krocken.",
+   "s": 276.9,
+   "e": 280.98
+  },
+  {
+   "t": "Eftersom vagnarna hakar i varandra är det en oelastisk stöt.",
+   "s": 280.98,
+   "e": 285.44
+  },
+  {
+   "t": "Vi definierar positiv riktning åt höger, ställer upp rörelsemängdslagen vid fullkomligt inelastisk stöt och löser ut sluthastigheten v.",
+   "s": 285.44,
+   "e": 294.45
+  },
+  {
+   "t": "m arean A gånger v A plus m B gånger v B är lika med parentesen m A plus m B slut parentes gånger hastigheten v vilket är ekvivalent med att v är lika med m A gånger v A plus m B gånger v B delat med m A plus m B",
+   "s": 294.45,
+   "e": 311.89
+  },
+  {
+   "t": "m arean A är lika med 10 ton som är lika med 10 000 kilogram v A som är lika med 5,0 meter per sekund m B som är lika med 15 ton som är lika med 15 000 kilogram v B som är lika med minus 3,0 meter per sekund parentesen minustecken—riktningvänster slut parentes",
+   "s": 294.45,
+   "e": 327.66
+  },
+  {
+   "t": "hastigheten v är lika med 10 000 gånger 5,0 plus 15 000 gånger parentesen minus 3,0 slut parentes delat med 10 000 plus 15 000 som är lika med 0,2 meter per sekund",
+   "s": 327.61,
+   "e": 340.93
+  },
+  {
+   "t": "Svar: 0,2 meter per sekund (åt höger)",
+   "s": 340.93,
+   "e": 345.79
+  },
+  {
+   "t": "Fundera — Actionfilmer och rörelsemängd",
+   "s": 345.79,
+   "e": 349.44
+  },
+  {
+   "t": "I actionfilmer ser man ofta hur en person (ofta hjälten) stabilt och stillastående avfyrar skott mot personer som flyger flera meter bakåt när de träffas.",
+   "s": 349.44,
+   "e": 359.01
+  },
+  {
+   "t": "Är det rimligt?",
+   "s": 359.01,
+   "e": 361.14
+  },
+  {
+   "t": "Eftersom rörelsemängden bevaras ska i så fall den som avfyrade skottet flyga lika långt bakåt!",
+   "s": 361.14,
+   "e": 367.9
+  }
+ ]
+}

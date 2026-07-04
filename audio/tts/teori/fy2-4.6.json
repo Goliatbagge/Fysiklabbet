@@ -1,0 +1,458 @@
+{
+ "id": "fy2-4.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "bf3fea8fe5a40c55dd1c805cc085dee131874461",
+ "dur": 644.41,
+ "segments": [
+  {
+   "t": "Våg-partikeldualitet och de Broglie-våglängd",
+   "s": 0.1,
+   "e": 4.06
+  },
+  {
+   "t": "Ljus kan som bekant ses som både partikel och våg.",
+   "s": 4.01,
+   "e": 8.39
+  },
+  {
+   "t": "Fransmannen Louis de Broglie (1920-tal) antog att detta även kunde gälla för andra partiklar.",
+   "s": 8.39,
+   "e": 15.47
+  },
+  {
+   "t": "Alla partiklar, inte bara fotoner, har vågegenskaper.",
+   "s": 15.47,
+   "e": 20.3
+  },
+  {
+   "t": "Den våglängd som en partikel har kallas de Broglie-våglängd.",
+   "s": 20.3,
+   "e": 24.75
+  },
+  {
+   "t": "de Broglie-våglängd",
+   "s": 24.75,
+   "e": 27.24
+  },
+  {
+   "t": "våglängden lambda är lika med höjden h delat med massan m gånger hastigheten v",
+   "s": 27.24,
+   "e": 33.06
+  },
+  {
+   "t": "där",
+   "s": 33.06,
+   "e": 34.58
+  },
+  {
+   "t": "λ är lika med våglängd hos partikel (meter)",
+   "s": 34.58,
+   "e": 38.5
+  },
+  {
+   "t": "h är lika med Plancks konstant ( 6,626 gånger 10 upphöjt till minus 34 Js)",
+   "s": 38.5,
+   "e": 46.35
+  },
+  {
+   "t": "m är lika med partikelns massa (kilogram)",
+   "s": 46.35,
+   "e": 50.31
+  },
+  {
+   "t": "v är lika med partikelns hastighet (meter per sekund)",
+   "s": 50.31,
+   "e": 55.04
+  },
+  {
+   "t": "Härledning — de Broglie-våglängd",
+   "s": 55.04,
+   "e": 58.27
+  },
+  {
+   "t": "Fotonens rörelsemängd från tidigare teori är",
+   "s": 58.27,
+   "e": 62.42
+  },
+  {
+   "t": "trycket p är lika med höjden h gånger frekvensen f delat med c, ekvation 1",
+   "s": 62.42,
+   "e": 68.69
+  },
+  {
+   "t": "Från tidigare teori har vi även c är lika med frekvensen f gånger våglängden lambda och detta i ekvation 1 ger",
+   "s": 68.69,
+   "e": 76.33
+  },
+  {
+   "t": "trycket p är lika med höjden h gånger frekvensen f delat med f gånger våglängden lambda som är lika med h delat med lambda vilket är ekvivalent med att lambda är lika med h delat med p, ekvation 2",
+   "s": 76.33,
+   "e": 88.46
+  },
+  {
+   "t": "Från klassisk fysik har vi att rörelsemängd trycket p är lika med massan m gånger hastigheten v .",
+   "s": 88.46,
+   "e": 95.2
+  },
+  {
+   "t": "Insättning av detta i ekvation 2 ger",
+   "s": 95.2,
+   "e": 99.04
+  },
+  {
+   "t": "våglängden lambda är lika med höjden h delat med massan m gånger hastigheten v vilket skulle visas",
+   "s": 99.04,
+   "e": 105.95
+  },
+  {
+   "t": "Formeln innebär att alla partiklar som rör sig har en viss våglängd.",
+   "s": 105.95,
+   "e": 110.89
+  },
+  {
+   "t": "För att vågegenskaperna ska bli märkbara måste våglängden vara i samma storleksordning som partikelns storlek, vilket gäller för små partiklar som elektroner, protoner och neutroner.",
+   "s": 110.89,
+   "e": 121.67
+  },
+  {
+   "t": "Fenomenet bekräftades av experiment med elektroner tio år senare!",
+   "s": 121.67,
+   "e": 127.21
+  },
+  {
+   "t": "Elektroner sköts genom en dubbelspalt.",
+   "s": 127.21,
+   "e": 130.7
+  },
+  {
+   "t": "Bakom dubbelspalten fanns en skärm som registrerade var elektronen träffade.",
+   "s": 130.7,
+   "e": 136.11
+  },
+  {
+   "t": "Om elektroner endast hade partikelegenskaper skulle de gå antingen genom den vänstra spalten eller genom den högra spalten och bilda ett mönster med två linjer på skärmen.",
+   "s": 136.11,
+   "e": 145.9
+  },
+  {
+   "t": "Dubbelspaltexperimentet: elektroner skjuts en och en mot en dubbelspalt, och på skärmen bakom växer ett interferensmönster fram — som om varje elektron vore en våg.",
+   "s": 145.9,
+   "e": 156.51
+  },
+  {
+   "t": "Figur: foto i fem paneler (a, b, c, d, e) av hur elektronernas träffmönster på skärmen växer fram.",
+   "s": 156.51,
+   "e": 166.44
+  },
+  {
+   "t": "I panel a syns bara enstaka prickar slumpvis utspridda.",
+   "s": 166.44,
+   "e": 171.2
+  },
+  {
+   "t": "I panel b och c börjar prickarna gruppera sig i vertikala band.",
+   "s": 171.2,
+   "e": 176.16
+  },
+  {
+   "t": "I panel d och e är interferensmönstret tydligt med en serie ljusa vertikala band — precis som om elektronen vore en våg.",
+   "s": 176.16,
+   "e": 184.99
+  },
+  {
+   "t": "Det berömda dubbelspaltexperimentet.",
+   "s": 184.99,
+   "e": 188.45
+  },
+  {
+   "t": "Vi ser att ett interferensmönster uppstår, med ljusare och mörkare stråk, precis som om elektronen vore en våg!",
+   "s": 188.45,
+   "e": 196.49
+  },
+  {
+   "t": "Om man skulle skicka en elektron i taget genom öppningarna, uppstår ändå samma interferensmönster!",
+   "s": 196.49,
+   "e": 202.96
+  },
+  {
+   "t": "Det är alltså inte så att elektronerna \"knuffar undan\" varandra.",
+   "s": 202.96,
+   "e": 207.5
+  },
+  {
+   "t": "Elektronen interfererar alltså med sig själv och verkar gå genom båda öppningar samtidigt, dvs. som en våg.",
+   "s": 207.5,
+   "e": 214.81
+  },
+  {
+   "t": "Materia som består av elementarpartiklar uppvisar alltså både partikel- och vågegenskaper.",
+   "s": 214.81,
+   "e": 221.22
+  },
+  {
+   "t": "Denna dubbla egenskap kallas för våg-partikeldualitet.",
+   "s": 221.22,
+   "e": 225.82
+  },
+  {
+   "t": "Våg-partikeldualitet",
+   "s": 225.82,
+   "e": 228.6
+  },
+  {
+   "t": "Elementarpartiklar och atomer uppträder som",
+   "s": 228.6,
+   "e": 232.41
+  },
+  {
+   "t": "partiklar, till exempel när de kolliderar i en gas.",
+   "s": 232.41,
+   "e": 236.79
+  },
+  {
+   "t": "vågor i dubbelspaltexperiment — precis som ljus!",
+   "s": 236.79,
+   "e": 241.31
+  },
+  {
+   "t": "Exempel 1 — de Broglie-våglängd för en elektron",
+   "s": 241.31,
+   "e": 245.55
+  },
+  {
+   "t": "Bestäm de Broglie-våglängden för en elektron som från vila accelereras av spänningen 200 volt.",
+   "s": 245.55,
+   "e": 252.49
+  },
+  {
+   "t": "Vi ställer upp formeln för de Broglie-våglängden",
+   "s": 252.49,
+   "e": 256.24
+  },
+  {
+   "t": "våglängden lambda är lika med höjden h delat med massan m gånger hastigheten v, ekvation 1",
+   "s": 256.24,
+   "e": 263.15
+  },
+  {
+   "t": "Elektronens hastighet beräknas genom omvandlingen från elektrisk energi till rörelseenergi",
+   "s": 263.15,
+   "e": 269.6
+  },
+  {
+   "t": "E e är lika med E k vilket är ekvivalent med att laddningen Q gånger spänningen U är lika med massan m gånger hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v är lika med roten ur 2 gånger Q gånger U delat med m",
+   "s": 269.6,
+   "e": 283.88
+  },
+  {
+   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram",
+   "s": 283.88,
+   "e": 296.94
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 2 gånger laddningen Q gånger spänningen U delat med massan m som är lika med roten ur 2 gånger 1,602 gånger 10 upphöjt till minus 19 coulomb gånger 200 volt delat med 9,11 gånger 10 upphöjt till minus 31 kilogram som är lika med 8,386 ldots gånger 10 upphöjt till 6 meter per sekund",
+   "s": 296.89,
+   "e": 318.5
+  },
+  {
+   "t": "Insättning i ekvation 1 ger",
+   "s": 318.5,
+   "e": 321.77
+  },
+  {
+   "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 9,11 gånger 10 upphöjt till minus 31 gånger 8,386 ldots gånger 10 upphöjt till 6 som är lika med 8,672 ldots gånger 10 upphöjt till minus 11 meter som är ungefär lika med 8,7 gånger 10 upphöjt till minus 11 meter som är lika med 87 pm",
+   "s": 321.77,
+   "e": 346.44
+  },
+  {
+   "t": "Svar: 87 pm",
+   "s": 346.44,
+   "e": 349.36
+  },
+  {
+   "t": "Exempel 2 — Tennisbollens vågegenskaper?",
+   "s": 349.36,
+   "e": 353.34
+  },
+  {
+   "t": "Du slår en tennisboll så att den får farten 108 kilometer i timmen.",
+   "s": 353.34,
+   "e": 358.71
+  },
+  {
+   "t": "En tennisboll har diametern 6,7 centimeter och väger 58 gram.",
+   "s": 358.71,
+   "e": 364.39
+  },
+  {
+   "t": "Kommer den att uppvisa vågegenskaper?",
+   "s": 364.39,
+   "e": 367.96
+  },
+  {
+   "t": "För märkbara vågegenskaper ska de Broglie-våglängden vara i samma storleksordning (eller större) som partikeln. \"Partikeln\" i detta fall är tennisbollen.",
+   "s": 367.96,
+   "e": 378.8
+  },
+  {
+   "t": "För att tennisbollen ska uppvisa vågegenskaper ska den alltså minst ha de Broglie-våglängden 6,7 centimeter.",
+   "s": 378.8,
+   "e": 386.06
+  },
+  {
+   "t": "Vi ställer upp formeln för de Broglie-våglängden.",
+   "s": 386.06,
+   "e": 389.8
+  },
+  {
+   "t": "våglängden lambda är lika med höjden h delat med massan m gånger hastigheten v",
+   "s": 389.8,
+   "e": 395.65
+  },
+  {
+   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js massan m som är lika med 58 gram som är lika med 0,058 kilogram hastigheten v som är lika med 108 kilometer per timme som är lika med 108 delat med 3,6 meter per sekund som är lika med 30 meter per sekund",
+   "s": 395.65,
+   "e": 415.45
+  },
+  {
+   "t": "våglängden lambda är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 0,058 gånger 30 som är lika med 3,808 ldots gånger 10 upphöjt till minus 34 meter",
+   "s": 415.45,
+   "e": 429.51
+  },
+  {
+   "t": "Detta är MYCKET mindre än tennisbollens diameter 6,7 centimeter.",
+   "s": 429.51,
+   "e": 434.91
+  },
+  {
+   "t": "Svar: Nej, tennisbollen kommer inte att uppvisa vågegenskaper.",
+   "s": 434.91,
+   "e": 440.46
+  },
+  {
+   "t": "Vi ser i exemplet ovan att för makroskopiska objekt (objekt synliga för blotta ögat) är kvanteffekterna helt försumbara — därför fungerar klassisk mekanik så bra för bollar, bilar och bananer, men inte för fotoner och elektroner.",
+   "s": 440.46,
+   "e": 454.57
+  },
+  {
+   "t": "Köpenhamnstolkningen",
+   "s": 454.57,
+   "e": 457.12
+  },
+  {
+   "t": "Enligt Heisenbergs osäkerhetsprincip i kvantmekanik är det omöjligt att känna till en partikels exakta position och rörelsemängd (eller hastighet) samtidigt.",
+   "s": 457.12,
+   "e": 467.41
+  },
+  {
+   "t": "Det beror på att för att mäta en partikels position måste man använda en metod som påverkar dess rörelsemängd, och vice versa.",
+   "s": 467.41,
+   "e": 475.02
+  },
+  {
+   "t": "Om man till exempel skickar en foton mot en elektron för att mäta dess position, kommer fotonen att påverka elektronens rörelsemängd och ändra dess hastighet.",
+   "s": 475.02,
+   "e": 484.56
+  },
+  {
+   "t": "Ju mer exakt vi vet en av de två egenskaperna, desto mindre exakt kan vi veta den andra.",
+   "s": 484.56,
+   "e": 490.81
+  },
+  {
+   "t": "För att beskriva var en elektron befinner sig måste vi istället använda oss av en matematisk vågfunktion (som bestäms av Schrödingerekvationen, en differentialekvation) som representerar sannolikheten för att en partikel befinner sig på en viss position.",
+   "s": 490.81,
+   "e": 505.26
+  },
+  {
+   "t": "När man mäter en partikels position eller hastighet \"kollapsar\" vågfunktionen till en specifik position eller hastighet.",
+   "s": 505.26,
+   "e": 512.97
+  },
+  {
+   "t": "Detta innebär att partikeln inte hade en bestämd position eller hastighet innan mätningen, utan att mätningen själv påverkar partikeln och dess beteende.",
+   "s": 512.97,
+   "e": 522.19
+  },
+  {
+   "t": "Det innebär också att det inte finns någon \"objektiv verklighet\" på kvantnivå, utan endast möjligheter och sannolikheter.",
+   "s": 522.19,
+   "e": 529.65
+  },
+  {
+   "t": "Allt ovan är delar av Köpenhamnstolkningen som har fått sitt namn från Niels Bohr som verkade i Köpenhamn i början av 1900-talet.",
+   "s": 529.65,
+   "e": 537.95
+  },
+  {
+   "t": "Både Schrödingerekvationen och Heisenbergs osäkerhetsprincip är matematiska konstruktioner.",
+   "s": 537.95,
+   "e": 544.36
+  },
+  {
+   "t": "De ger dock inte en mental bild av vad som \"egentligen\" händer.",
+   "s": 544.36,
+   "e": 549.09
+  },
+  {
+   "t": "Mångvärldshypotesen (multiversum)",
+   "s": 549.09,
+   "e": 552.67
+  },
+  {
+   "t": "Mångvärldshypotesen är en alternativ tolkning av kvantmekanik som ställs i kontrast till Köpenhamnstolkningen.",
+   "s": 552.67,
+   "e": 559.84
+  },
+  {
+   "t": "Den föreslår att istället för att vågfunktionen kollapsar till en enda position eller hastighet vid mätning, så separeras universum till flera parallella verkligheter, var och en med en unik version av partikeln.",
+   "s": 559.84,
+   "e": 572.16
+  },
+  {
+   "t": "Den innebär också att allt som är möjligt på kvantnivå faktiskt händer i parallella universa.",
+   "s": 572.33,
+   "e": 578.26
+  },
+  {
+   "t": "Om det till exempel är möjligt för en partikel att vara på två olika positioner samtidigt, kommer det att finnas två parallella universa, en för varje position.",
+   "s": 578.21,
+   "e": 587.48
+  },
+  {
+   "t": "Väldigt små förändringar i universums begynnelse, till exempel en obetydlig ökning av utgångshastigheten vid Big bang skulle omöjliggöra för tyngdkraften att dra ihop lokala \"öar\" av materia för att bilda stjärnor och galaxer.",
+   "s": 587.48,
+   "e": 600.63
+  },
+  {
+   "t": "Vårt universum med stjärnor, planeter och liv är alltså otroligt osannolikt.",
+   "s": 600.63,
+   "e": 606.51
+  },
+  {
+   "t": "Mångvärldshypotesen skulle då kunna förklara, inte bara att ett sådant osannolikt universum kan finnas, utan också att det måste finnas, då alla kombinationer och kvanthändelser finns.",
+   "s": 606.51,
+   "e": 617.62
+  },
+  {
+   "t": "Det skulle alltså kunna finnas otroligt många fler universa i ett multiversum, där en otrolig majoritet inte innehåller några stjärnor, planeter eller liv alls.",
+   "s": 617.62,
+   "e": 627.61
+  },
+  {
+   "t": "Stephen Hawking stödjer denna hypotes som dock vållar debatt bland forskare.",
+   "s": 627.61,
+   "e": 632.78
+  },
+  {
+   "t": "De är oense om detta ens kan kallas en vetenskaplig hypotes då den inte är falsifierbar och därmed inte går att testa.",
+   "s": 632.78,
+   "e": 640.32
+  },
+  {
+   "t": "Vissa kallar den till och med för pseudovetenskap.",
+   "s": 640.32,
+   "e": 644.41
+  }
+ ]
+}

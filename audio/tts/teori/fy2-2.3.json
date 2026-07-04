@@ -1,0 +1,378 @@
+{
+ "id": "fy2-2.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "dbb521d39b2f1bf83660beafd860b6d7539bfb46",
+ "dur": 413.09,
+ "segments": [
+  {
+   "t": "Harmonisk svängningsrörelse",
+   "s": 0.1,
+   "e": 3.08
+  },
+  {
+   "t": "Demonstration — Harmonisk svängning",
+   "s": 3.02,
+   "e": 6.34
+  },
+  {
+   "t": "Vi sätter en fjäder i gungning samtidigt som vi projicerar ett stift på ett snurrande cykelhjul mot en vägg.",
+   "s": 6.34,
+   "e": 13.09
+  },
+  {
+   "t": "Från sidan ser stiftet på skivan ut att röra sig på samma sätt som vikten i fjädern.",
+   "s": 13.09,
+   "e": 18.98
+  },
+  {
+   "t": "En harmonisk svängning är detsamma som projektionen av en cirkulär centralrörelse på en linje!",
+   "s": 18.98,
+   "e": 25.38
+  },
+  {
+   "t": "En odämpad periodisk svängning (längs en rät linje) kallas harmonisk svängning.",
+   "s": 25.38,
+   "e": 31.4
+  },
+  {
+   "t": "Harmonisk svängning",
+   "s": 31.4,
+   "e": 33.96
+  },
+  {
+   "t": "Elongation (läge):",
+   "s": 33.96,
+   "e": 69.62
+  },
+  {
+   "t": "y är lika med arean A gånger sinus parentesen omega gånger tiden t slut parentes, y \\max som är lika med A",
+   "s": 33.96,
+   "e": 69.62
+  },
+  {
+   "t": "Hastighet:",
+   "s": 33.96,
+   "e": 69.62
+  },
+  {
+   "t": "hastigheten v är lika med omega gånger arean A gånger cosinus parentesen omega gånger tiden t slut parentes, v \\max som är lika med omega gånger A",
+   "s": 33.96,
+   "e": 69.62
+  },
+  {
+   "t": "Acceleration:",
+   "s": 33.96,
+   "e": 69.62
+  },
+  {
+   "t": "accelerationen a är lika med minus omega i kvadrat gånger arean A gånger sinus parentesen omega gånger tiden t slut parentes, a \\max som är lika med omega i kvadrat gånger A",
+   "s": 33.96,
+   "e": 69.62
+  },
+  {
+   "t": "Vinkelhastighet (för fjäderpendel):",
+   "s": 33.96,
+   "e": 75.1
+  },
+  {
+   "t": "omega är lika med roten ur k delat med massan m",
+   "s": 69.62,
+   "e": 75.1
+  },
+  {
+   "t": "där",
+   "s": 75.1,
+   "e": 76.61
+  },
+  {
+   "t": "A är lika med amplitud (meter)",
+   "s": 76.61,
+   "e": 79.96
+  },
+  {
+   "t": "ω är lika med vinkelhastighet (rad/s)",
+   "s": 79.96,
+   "e": 84.62
+  },
+  {
+   "t": "t är lika med tidpunkt efter passage av jämviktsläget uppåt (sekunder)",
+   "s": 84.62,
+   "e": 90.42
+  },
+  {
+   "t": "y är lika med elongation/läge (meter)",
+   "s": 90.42,
+   "e": 95.1
+  },
+  {
+   "t": "v är lika med hastighet (meter per sekund)",
+   "s": 95.1,
+   "e": 99.26
+  },
+  {
+   "t": "a är lika med acceleration (m/s i kvadrat)",
+   "s": 99.26,
+   "e": 104.17
+  },
+  {
+   "t": "k är lika med fjäderkonstant (N/m)",
+   "s": 104.17,
+   "e": 108.41
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 108.41,
+   "e": 111.76
+  },
+  {
+   "t": "Härledning — Formler för harmonisk svängning",
+   "s": 111.76,
+   "e": 115.66
+  },
+  {
+   "t": "En harmonisk svängning har stora likheter med cirkulär rörelse.",
+   "s": 115.66,
+   "e": 120.39
+  },
+  {
+   "t": "Vi härleder formlerna från dessa likheter.",
+   "s": 120.39,
+   "e": 123.97
+  },
+  {
+   "t": "Från figuren får vi",
+   "s": 123.97,
+   "e": 126.56
+  },
+  {
+   "t": "sinus alfa är lika med y delat med arean A vilket är ekvivalent med att y är lika med A gånger sinus alfa, ekvation 1",
+   "s": 126.56,
+   "e": 135.09
+  },
+  {
+   "t": "Vinkeln α beror av vinkelhastigheten ω och tidpunkten t enligt alfa är lika med omega gånger tiden t .",
+   "s": 135.09,
+   "e": 141.94
+  },
+  {
+   "t": "Detta i ekvation 1 ger",
+   "s": 141.94,
+   "e": 145.12
+  },
+  {
+   "t": "y är lika med arean A gånger sinus parentesen omega gånger tiden t slut parentes",
+   "s": 145.12,
+   "e": 151.9
+  },
+  {
+   "t": "vsv.",
+   "s": 151.9,
+   "e": 153.76
+  },
+  {
+   "t": "Eftersom minus 1 är mindre än eller lika med sinus parentesen omega gånger tiden t slut parentes är mindre än eller lika med 1 gäller att den maximala elongationen fås då sinus parentesen omega gånger tiden t slut parentes är lika med 1 , vilket ger y \\max är lika med arean A vsv.",
+   "s": 153.76,
+   "e": 172.18
+  },
+  {
+   "t": "Hastigheten fås med derivatan av läget:",
+   "s": 172.18,
+   "e": 183.99
+  },
+  {
+   "t": "hastigheten v är lika med y ' som är lika med omega gånger arean A gånger cosinus parentesen omega gånger tiden t slut parentes",
+   "s": 172.18,
+   "e": 183.99
+  },
+  {
+   "t": "vsv.",
+   "s": 183.99,
+   "e": 185.85
+  },
+  {
+   "t": "Den maximala hastigheten fås då cosinus parentesen omega gånger tiden t slut parentes är lika med 1 : v \\max är lika med omega gånger arean A vsv.",
+   "s": 185.85,
+   "e": 197.35
+  },
+  {
+   "t": "Accelerationen fås med derivatan av hastigheten:",
+   "s": 197.35,
+   "e": 210.89
+  },
+  {
+   "t": "accelerationen a är lika med hastigheten v ' som är lika med minus omega i kvadrat gånger arean A gånger sinus parentesen omega gånger tiden t slut parentes",
+   "s": 197.35,
+   "e": 210.89
+  },
+  {
+   "t": "vsv.",
+   "s": 210.89,
+   "e": 212.75
+  },
+  {
+   "t": "Den maximala accelerationen fås då sinus parentesen omega gånger tiden t slut parentes är lika med minus 1 : a \\max är lika med omega i kvadrat gånger arean A vsv.",
+   "s": 212.75,
+   "e": 225.1
+  },
+  {
+   "t": "Demonstration — Hastighet och acceleration i harmonisk svängning",
+   "s": 225.1,
+   "e": 230.18
+  },
+  {
+   "t": "Vi studerar en vikt i fjäder.",
+   "s": 230.18,
+   "e": 233.25
+  },
+  {
+   "t": "Positiv riktning är uppåt.",
+   "s": 233.25,
+   "e": 236.16
+  },
+  {
+   "t": "I vändlägena är hastigheten 0, men accelerationen maximal eftersom fjäderkraften är som störst där.",
+   "s": 236.16,
+   "e": 243.38
+  },
+  {
+   "t": "Accelerationen är maximalt negativ i det övre vändläget (resultanten är riktad nedåt) och maximalt positiv i det nedre vändläget (resultanten är riktad uppåt).",
+   "s": 243.38,
+   "e": 254.51
+  },
+  {
+   "t": "I jämviktsläget är hastigheten maximal medan accelerationen är 0 (fjäderkraften uppåt är lika stor som tyngdkraften nedåt).",
+   "s": 254.51,
+   "e": 263.34
+  },
+  {
+   "t": "Exempel 1 — Analys av en svängning",
+   "s": 263.34,
+   "e": 267.04
+  },
+  {
+   "t": "Elongationen y meter hos en svängningsrörelse beror av tiden t sekunder enligt",
+   "s": 267.04,
+   "e": 273.04
+  },
+  {
+   "t": "y är lika med 0,15 sinus parentesen 10 tiden t slut parentes",
+   "s": 273.04,
+   "e": 279.35
+  },
+  {
+   "t": "Bestäm:",
+   "s": 279.35,
+   "e": 282.85
+  },
+  {
+   "t": "a) amplituden,",
+   "s": 279.35,
+   "e": 282.85
+  },
+  {
+   "t": "b) svängningstiden,",
+   "s": 282.85,
+   "e": 285.9
+  },
+  {
+   "t": "c) hastigheten som funktion av t,",
+   "s": 285.9,
+   "e": 290.1
+  },
+  {
+   "t": "d) maximala farten,",
+   "s": 290.1,
+   "e": 293.48
+  },
+  {
+   "t": "e) accelerationen som funktion av t.",
+   "s": 293.48,
+   "e": 304.46
+  },
+  {
+   "t": "a) Jämförelse med y är lika med arean A sinus parentesen omega gånger tiden t slut parentes ger amplituden",
+   "s": 293.48,
+   "e": 304.46
+  },
+  {
+   "t": "arean A är lika med 0,15 meter som är lika med 15 centimeter",
+   "s": 304.46,
+   "e": 310.39
+  },
+  {
+   "t": "Svar: 15 centimeter",
+   "s": 310.39,
+   "e": 313.55
+  },
+  {
+   "t": "b) Vi löser ut periodtiden T från omega är lika med 2 pi delat med periodtiden T :",
+   "s": 313.55,
+   "e": 325.05
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi delat med omega",
+   "s": 319.54,
+   "e": 325.05
+  },
+  {
+   "t": "Jämförelse ger omega är lika med 10 rad/s, så",
+   "s": 325.0,
+   "e": 330.3
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi delat med 10 som är lika med 0,628 ldots sekund som är ungefär lika med 0,63 sekund",
+   "s": 330.3,
+   "e": 340.05
+  },
+  {
+   "t": "Svar: 0,63 sekunder",
+   "s": 340.05,
+   "e": 343.9
+  },
+  {
+   "t": "c) Hastigheten fås av derivatan av elongationen (glöm inte den inre derivatan).",
+   "s": 343.9,
+   "e": 350.89
+  },
+  {
+   "t": "hastigheten v är lika med y ' som är lika med 10 gånger 0,15 cosinus parentesen 10 tiden t slut parentes som är lika med 1,5 cosinus parentesen 10 t slut parentes",
+   "s": 350.89,
+   "e": 363.4
+  },
+  {
+   "t": "Svar: hastigheten v är lika med 1,5 cosinus parentesen 10 tiden t slut parentes m/s",
+   "s": 363.4,
+   "e": 382.98
+  },
+  {
+   "t": "d) Maximala farten fås då cosinus parentesen 10 tiden t slut parentes är lika med 1 :",
+   "s": 363.4,
+   "e": 382.98
+  },
+  {
+   "t": "v \\max är lika med 1,5 gånger 1 som är lika med 1,5 meter per sekund",
+   "s": 363.4,
+   "e": 382.98
+  },
+  {
+   "t": "Svar: 1,5 meter per sekund",
+   "s": 382.98,
+   "e": 386.71
+  },
+  {
+   "t": "e) Accelerationen fås av derivatan av hastigheten:",
+   "s": 386.71,
+   "e": 403.51
+  },
+  {
+   "t": "accelerationen a är lika med hastigheten v ' som är lika med minus 10 gånger 1,5 sinus parentesen 10 tiden t slut parentes som är lika med minus 15 sinus parentesen 10 t slut parentes",
+   "s": 386.71,
+   "e": 403.51
+  },
+  {
+   "t": "Svar: accelerationen a är lika med minus 15 sinus parentesen 10 tiden t slut parentes m/s i kvadrat",
+   "s": 403.51,
+   "e": 413.09
+  }
+ ]
+}

@@ -1,0 +1,388 @@
+{
+ "id": "fy2-3.11",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "18c8d254b023f74046dc0ef80a51525c6d8ed4e1",
+ "dur": 485.39,
+ "segments": [
+  {
+   "t": "Transformator",
+   "s": 0.1,
+   "e": 2.29
+  },
+  {
+   "t": "En elektrisk komponent som ändrar (transformerar) spänning kallas transformator.",
+   "s": 2.24,
+   "e": 8.36
+  },
+  {
+   "t": "Det är den som sitter i \"klumpen\" på till exempel laddaren till datorn eller mobilen.",
+   "s": 8.36,
+   "e": 13.7
+  },
+  {
+   "t": "Demonstration — Transformator",
+   "s": 13.7,
+   "e": 16.84
+  },
+  {
+   "t": "Vi kopplar ihop en 300-varvsspole med en 1500-varvsspole med en järnkärna som löper genom båda.",
+   "s": 16.84,
+   "e": 23.99
+  },
+  {
+   "t": "Vi lägger en spänning över den första spolen och ser att spänningen över den andra spolen blir nästan 5 gånger så stor.",
+   "s": 23.99,
+   "e": 30.91
+  },
+  {
+   "t": "Ur vägguttaget får vi en växelspänning på 230 volt.",
+   "s": 30.91,
+   "e": 35.86
+  },
+  {
+   "t": "Om vi tillverkar en dator som ska drivas med exempelvis spänningen 20 volt behöver vi transformera ner spänningen.",
+   "s": 35.86,
+   "e": 43.15
+  },
+  {
+   "t": "Inuti transformatorn finns två spolar.",
+   "s": 43.15,
+   "e": 46.94
+  },
+  {
+   "t": "Spolen som ansluts till den ingående spänningen kallas primärspole och spolen som inducerar den nya spänningen och kopplas till apparaten som ska drivas kallas sekundärspole.",
+   "s": 46.94,
+   "e": 57.09
+  },
+  {
+   "t": "Dessa är sammankopplade med en järnkärna för att öka den magnetiska flödestätheten.",
+   "s": 57.09,
+   "e": 62.98
+  },
+  {
+   "t": "Primärspolen är den som kopplas till vägguttaget som då inducerar en viss spänning e ett .",
+   "s": 62.98,
+   "e": 69.41
+  },
+  {
+   "t": "Växelströmmen genom primärspolen genererar ett varierande magnetfält genom järnkärnan.",
+   "s": 69.41,
+   "e": 75.54
+  },
+  {
+   "t": "Detta medför att ett magnetiskt flöde Φ kommer att variera genom sekundärspolen som därmed inducerar en ny spänning e två .",
+   "s": 75.54,
+   "e": 83.42
+  },
+  {
+   "t": "Vi kan alltså justera en utspänning på detta sätt!",
+   "s": 83.42,
+   "e": 87.5
+  },
+  {
+   "t": "Spänning och ström i transformator",
+   "s": 87.5,
+   "e": 90.86
+  },
+  {
+   "t": "N ett delat med N två är lika med U ett delat med U två",
+   "s": 90.86,
+   "e": 95.51
+  },
+  {
+   "t": "N ett delat med N två är lika med I två delat med I ett",
+   "s": 95.51,
+   "e": 100.31
+  },
+  {
+   "t": "där",
+   "s": 100.31,
+   "e": 101.79
+  },
+  {
+   "t": "N ett , N två är lika med antalet varv i primärspole respektive sekundärspole",
+   "s": 101.79,
+   "e": 108.19
+  },
+  {
+   "t": "U ett , U två är lika med spänning i primärspole respektive sekundärspole (volt)",
+   "s": 108.19,
+   "e": 115.31
+  },
+  {
+   "t": "I ett , I två är lika med ström i primärspole respektive sekundärspole (ampere)",
+   "s": 115.31,
+   "e": 122.21
+  },
+  {
+   "t": "Härledning — Spänning i transformator",
+   "s": 122.21,
+   "e": 125.88
+  },
+  {
+   "t": "Sedan tidigare har vi att den inducerade spänningen i en spole, när ett magnetiskt flöde varieras, ges av e är lika med minus N gånger avståndet d Phi delat med d tiden t .",
+   "s": 125.88,
+   "e": 137.71
+  },
+  {
+   "t": "Den inducerade spänningen i primärspolen e ett respektive sekundärspolen e två kan då skrivas",
+   "s": 137.71,
+   "e": 144.64
+  },
+  {
+   "t": "e ett är lika med N ett gånger avståndet d Phi delat med d tiden t respektive e två som är lika med N två gånger d Phi delat med d t",
+   "s": 144.64,
+   "e": 155.9
+  },
+  {
+   "t": "Vi ställer upp förhållandet mellan spolarnas inducerade spänningar.",
+   "s": 155.9,
+   "e": 160.61
+  },
+  {
+   "t": "e ett delat med e två är lika med N ett gånger avståndet d Phi delat med d tiden t delat med N två gånger d Phi delat med d t som är lika med N ett delat med N två",
+   "s": 160.61,
+   "e": 173.15
+  },
+  {
+   "t": "Eftersom den inre resistansen i transformatorn är liten gäller att effektivvärdena U ett är ungefär lika med e ett och U två är ungefär lika med e två , så",
+   "s": 173.15,
+   "e": 182.96
+  },
+  {
+   "t": "U ett delat med U två är lika med N ett delat med N två vilket skulle visas",
+   "s": 182.96,
+   "e": 188.89
+  },
+  {
+   "t": "Härledning — Ström i transformator",
+   "s": 188.89,
+   "e": 192.4
+  },
+  {
+   "t": "Energiprincipen gäller.",
+   "s": 192.4,
+   "e": 195.18
+  },
+  {
+   "t": "Om vi bortser från energiförluster gäller alltså att effekten (energin som omvandlas varje sekund) i primärspolen P ett måste vara samma som effekten i sekundärspolen P två .",
+   "s": 195.18,
+   "e": 206.22
+  },
+  {
+   "t": "Detta ger",
+   "s": 206.22,
+   "e": 208.24
+  },
+  {
+   "t": "P ett är lika med P två",
+   "s": 208.24,
+   "e": 211.28
+  },
+  {
+   "t": "Sedan tidigare har vi effekten P är lika med spänningen U gånger strömmen I , vilket insatt ovan ger",
+   "s": 211.28,
+   "e": 218.34
+  },
+  {
+   "t": "U ett gånger I ett är lika med U två gånger I två",
+   "s": 218.34,
+   "e": 222.86
+  },
+  {
+   "t": "Vi löser ut kvoten U ett delat med U två och får",
+   "s": 222.86,
+   "e": 227.29
+  },
+  {
+   "t": "U ett delat med U två är lika med I två delat med I ett",
+   "s": 227.29,
+   "e": 232.14
+  },
+  {
+   "t": "Från härledningen av spänning i transformator har vi U ett delat med U två är lika med N ett delat med N två .",
+   "s": 232.14,
+   "e": 239.45
+  },
+  {
+   "t": "Detta i ekvationen ovan ger",
+   "s": 239.45,
+   "e": 242.81
+  },
+  {
+   "t": "N ett delat med N två är lika med I två delat med I ett vilket skulle visas",
+   "s": 242.81,
+   "e": 248.55
+  },
+  {
+   "t": "Effekten P genom primär- och sekundärspolen är, om vi bortser från energiförluster, densamma, så vi kan inte \"skapa\" energi med transformatorer.",
+   "s": 248.55,
+   "e": 258.18
+  },
+  {
+   "t": "Eftersom effekten effekten P är lika med spänningen U gånger strömmen I gäller att strömmen minskar med samma faktor som spänningen ökar.",
+   "s": 258.18,
+   "e": 266.24
+  },
+  {
+   "t": "Om vi transformerar upp spänningen så att den blir 10 gånger så stor blir alltså strömmen samtidigt en tiondel så stor.",
+   "s": 266.24,
+   "e": 273.32
+  },
+  {
+   "t": "Hög spänning vs. låg spänning",
+   "s": 273.32,
+   "e": 278.29
+  },
+  {
+   "t": "En hög spänning med låg ström är positiv ur energisynpunkt eftersom energiförlusterna blir mindre i ledningarna när elen transporteras, men negativ ur säkerhetssynpunkt då risken för oönskade urladdningar ökar.",
+   "s": 278.29,
+   "e": 292.83
+  },
+  {
+   "t": "En låg spänning med hög ström är istället positiv ur säkerhetssynpunkt, men negativ ur energisynpunkt.",
+   "s": 292.78,
+   "e": 299.99
+  },
+  {
+   "t": "Demonstration — Jacobs stege",
+   "s": 299.99,
+   "e": 303.14
+  },
+  {
+   "t": "Vi kopplar två vertikala elektroder (\"metallpinnar\") till en transformator som ger hög spänning (farlig!).",
+   "s": 303.14,
+   "e": 311.05
+  },
+  {
+   "t": "En elektrisk båge tänds längst ner där stängerna är som närmast. Eftersom den varma luften stiger, tvingas den elektriska blixten uppåt längs stängerna.",
+   "s": 311.05,
+   "e": 321.85
+  },
+  {
+   "t": "Den ser ut att klättra steg för steg tills den når toppen, där avståndet blir för stort.",
+   "s": 321.85,
+   "e": 327.7
+  },
+  {
+   "t": "Då brister den med ett sista knäpp, för att en mikrosekund senare födas på nytt längst ner.",
+   "s": 327.7,
+   "e": 333.89
+  },
+  {
+   "t": "Förklaring: När spänningen mellan elektroderna blir tillräckligt hög upphör luften att vara en isolator och blir istället en ledare genom att atomerna joniseras och bildar ett plasma.",
+   "s": 333.89,
+   "e": 344.55
+  },
+  {
+   "t": "Ljusbågen är extremt varm (flera tusen grader).",
+   "s": 344.55,
+   "e": 349.03
+  },
+  {
+   "t": "Denna hetta värmer upp den omgivande luften, vilket minskar dess densitet.",
+   "s": 349.03,
+   "e": 354.49
+  },
+  {
+   "t": "Enligt principen om konvektion stiger den varma luften uppåt.",
+   "s": 354.49,
+   "e": 359.14
+  },
+  {
+   "t": "Eftersom plasmat i ljusbågen är lättare än den omgivande svala luften, bärs den med av den uppåtgående luftströmmen och den vandrar uppåt längs elektroderna.",
+   "s": 359.14,
+   "e": 368.57
+  },
+  {
+   "t": "Allt eftersom ljusbågen stiger, tvingas den sträcka ut sig eftersom avståndet mellan de V-formade elektroderna ökar.",
+   "s": 368.57,
+   "e": 376.55
+  },
+  {
+   "t": "Ju längre ljusbågen blir, desto högre spänning krävs för att upprätthålla strömmen genom det joniserade plasmat.",
+   "s": 376.55,
+   "e": 383.8
+  },
+  {
+   "t": "Till slut räcker inte transformatorns spänning till för att övervinna det ökade motståndet och värmeförlusterna.",
+   "s": 383.8,
+   "e": 390.78
+  },
+  {
+   "t": "Ljusbågen brister (slocknar).",
+   "s": 390.78,
+   "e": 394.07
+  },
+  {
+   "t": "När den övre ljusbågen slocknar, försvinner den belastning den utgjorde på strömkällan.",
+   "s": 394.07,
+   "e": 399.98
+  },
+  {
+   "t": "Spänningen över elektroderna stiger då omedelbart till sitt maxvärde igen.",
+   "s": 399.98,
+   "e": 405.43
+  },
+  {
+   "t": "Eftersom luften vid basen fortfarande är det kortaste avståndet (och eventuellt fortfarande är något förvärmd), sker ett nytt genombrott där, och processen börjar om.",
+   "s": 405.43,
+   "e": 415.38
+  },
+  {
+   "t": "Exempel 1 — Transformator till bärbar dator",
+   "s": 415.38,
+   "e": 419.57
+  },
+  {
+   "t": "Ge förslag på antalet varv i primär- respektive sekundärspolen i transformatorn till en bärbar dator som ska ha spänningen 20 volt.",
+   "s": 419.57,
+   "e": 428.22
+  },
+  {
+   "t": "Vi ställer upp sambandet för spänning i en transformator och löser ut antalet varv i primärspolen N ett .",
+   "s": 428.22,
+   "e": 435.34
+  },
+  {
+   "t": "U ett delat med U två är lika med N ett delat med N två vilket är ekvivalent med att N ett är lika med N två gånger U ett delat med U två",
+   "s": 435.34,
+   "e": 444.3
+  },
+  {
+   "t": "U ett är lika med 230 volt U två som är lika med 20 volt",
+   "s": 444.3,
+   "e": 449.92
+  },
+  {
+   "t": "N ett är lika med N två gånger 230 delat med 20 som är lika med N två gånger 11,5",
+   "s": 449.92,
+   "e": 457.09
+  },
+  {
+   "t": "Det betyder att antalet varv i primärspolen N ett ska vara 11,5 gånger fler än antalet varv i sekundärspolen N två .",
+   "s": 457.09,
+   "e": 465.38
+  },
+  {
+   "t": "Vi väljer exempelvis N två är lika med 100 .",
+   "s": 465.38,
+   "e": 469.7
+  },
+  {
+   "t": "Då gäller",
+   "s": 469.7,
+   "e": 471.64
+  },
+  {
+   "t": "N ett är lika med 11,5 gånger 100 som är lika med 1 150",
+   "s": 471.64,
+   "e": 478.0
+  },
+  {
+   "t": "Svar: Till exempel 1 150 varv i primärspolen och 100 varv i sekundärspolen.",
+   "s": 478.0,
+   "e": 485.39
+  }
+ ]
+}

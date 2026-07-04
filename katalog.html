@@ -747,6 +747,21 @@
             );
         }
 
+        // Uppläsningsspelare (talsyntes) för ett teoriavsnitt. Panelen
+        // renderas bara om förgenererat ljud finns (audio/tts/teori/<id>).
+        function TtsLyssna({ id }) {
+            const ref = useRef(null);
+            useEffect(() => {
+                if (!ref.current || !window.FYSIKTTS) return;
+                return window.FYSIKTTS.mount(ref.current, {
+                    kind: 'teori',
+                    id,
+                    getContainer: () => document.querySelector('.lab-article-body-inline'),
+                });
+            }, [id]);
+            return <div ref={ref} />;
+        }
+
         // Renderar en markdown-sträng med samma pipeline som TeoriBody
         // (protect math, preprocesseringar, marked, restore, KaTeX, fit).
         function MarkdownBody({ source, className }) {
@@ -1524,6 +1539,7 @@
                                                         )}
                                                     </div>
                                                 )}
+                                                {view === 'teori' && <TtsLyssna id={tid} />}
                                                 {view === 'teori' && <TeoriBody id={tid} bionic={bionic} dyslexia={dyslexia} />}
                                                 {presenting && activeSection && (
                                                     <PresentationMode
@@ -1693,6 +1709,9 @@
     </script>
 
     <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+    <!-- Uppläsning med talsyntes (manus-lib måste laddas före tts.js) -->
+    <script>document.write('<scr' + 'ipt src="data/tts/manus-lib.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="tts.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
 
     <!-- Tooltip för fysikaliska begrepp (.lab-term med data-tip) -->
     <script>

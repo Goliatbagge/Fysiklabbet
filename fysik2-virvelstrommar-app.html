@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virvelströmmar - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+        html.embed-mode .pt-6 { padding-top: 0.5rem; }
+        html.embed-mode .min-h-screen { min-height: 0 !important; }
+        .dark-container { background: transparent; }
+        .glass-card {
+            background: var(--lab-bg, #f3eee4);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+        }
+        input[type="range"] { accent-color: var(--lab-accent, #c8324a); }
+
+        .flbl { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+                color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
+        .fnum { color: var(--lab-ink); font-size: 19px; }
+
+        .scene-info {
+            position: absolute; bottom: 12px; right: 14px; z-index: 5;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 7px 12px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+        }
+        .scene-info .si-lbl { font-size: 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); font-weight: 600; }
+        .scene-info .si-val { font-size: 15px; font-weight: 700;
+            color: var(--lab-ink, #0f1620); font-family: 'JetBrains Mono', monospace; }
+
+        .scene-wrap {
+            position: relative;
+            width: 100%;
+            height: 560px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15,22,32,0.18);
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.08);
+            user-select: none;
+            background: #f3eee4;
+        }
+        .scene-wrap:fullscreen, .scene-wrap:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0;
+        }
+        .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 262px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-group { margin-top: 7px; }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="checkbox"], .scene-toggles input[type="radio"] {
+            width: 15px; height: 15px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-swatch { width: 14px; height: 4px; border-radius: 2px; flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; accent-color: var(--lab-accent, #c8324a); }
+
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 8px 14px; font-weight: 600; cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .btn-toggle:hover:not(.active) { border-color: var(--lab-accent, #c8324a); }
+        .btn-toggle.active {
+            background: var(--lab-ink, #0f1620); color: var(--lab-bg, #f3eee4);
+            border-color: var(--lab-ink, #0f1620);
+        }
+
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        .accordion-head { cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: 600; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo } = React;
+
+        // ── Glidarintervall ──
+        const BMIN = 0, BMAX = 1.2;            // flödestäthet B (T)
+        const A0MIN = 10, A0MAX = 55;          // startvinkel (grader)
+
+        // ── Scen-geometri (viewBox-koordinater) ──
+        const VBW = 820, VBH = 540;
+        const PIV = { x: 350, y: 64 };         // upphängningspunkten
+        const RC = 330;                        // avstånd pivot → plattans mitt (px)
+        const PLATE = { w: 190, h: 116 };      // aluminiumplattan
+        const FIELD = { r: 52 };               // fältområdets radie (px), mitt under pivoten
+        const FCY = PIV.y + RC;                // fältområdets centrum-y (= plattans mitt i botten)
+        const LM = 1.5;                        // pendellängd i meter (för fysiken)
+        const G = 9.82;
+        const PXM = RC / LM;                   // px per meter
+
+        const fmt = (num, decimals = 1) => {
+            if (!isFinite(num)) return '–';
+            const s = num.toFixed(decimals);
+            if (parseFloat(s) === 0) return '0';
+            return s.replace('.', ',').replace('-', '−');
+        };
+
+        const COL = {
+            ink:   '#1f2530',
+            falt:  '#c0392b',    // B-kryssen (röda, som teorifigurerna)
+            virvel:'#7b3fa0',    // virvelströmmarna (lila, som teorifiguren)
+            v:     '#3f8f4a',    // hastigheten (grön, som teorifiguren)
+            kraft: '#2563c9',    // bromsande kraften (blå)
+            alu:   '#e3e7ea',    // aluminiumplattan
+        };
+
+        const Slider = ({ label, sub, value, min, max, step, onChange, valueText }) => (
+            <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                    <label className="text-sm font-bold" style={{ color: 'var(--lab-ink)' }}
+                           dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-semibold text-sm" style={{ color: 'var(--lab-accent)' }}>{valueText}</div>
+                </div>
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))}
+                       className="w-full cursor-pointer" />
+                {sub && <div className="text-xs mt-1" style={{ color: 'var(--lab-ink-muted)' }}
+                             dangerouslySetInnerHTML={{ __html: sub }} />}
+            </div>
+        );
+
+        const FsSlider = ({ label, value, min, max, step, onChange, valueText }) => (
+            <div className="fs-row">
+                <span className="fs-label" style={{ minWidth: 160 }} dangerouslySetInnerHTML={{ __html: label }} />
+                <input type="range" min={min} max={max} step={step} value={value}
+                       onChange={(e) => onChange(parseFloat(e.target.value))} />
+                <span className="fs-value" style={{ minWidth: 80, textAlign: 'right' }}>{valueText}</span>
+            </div>
+        );
+
+        const PrincipleCard = () => (
+            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-6 gap-y-2" style={{ color: 'var(--lab-ink)' }}>
+                <div>
+                    <span className="flbl" style={{ display: 'block', marginBottom: 2 }}>Lenz lag</span>
+                    <span style={{ fontSize: 16 }}>
+                        De inducerade strömmarna får alltid en sådan riktning att de <strong>motverkar
+                        orsaken</strong> till sin uppkomst.
+                    </span>
+                </div>
+                <div style={{ color: 'var(--lab-ink-muted)', fontSize: 13, maxWidth: 340 }}>
+                    Cirkulerande strömmar som motverkar rörelse eller ändring av magnetfält
+                    kallas <strong>virvelströmmar</strong>.
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const q = new URLSearchParams(location.search);
+            const [B, setB] = useState(isFinite(parseFloat(q.get('b'))) ? parseFloat(q.get('b')) : 0.8);
+            const [a0, setA0] = useState(isFinite(parseFloat(q.get('a'))) ? parseFloat(q.get('a')) : 40);
+            const [platta, setPlatta] = useState(q.get('platta') === 'spar' ? 'spar' : 'hel');
+            const [magnetOn, setMagnetOn] = useState(q.get('magnet') !== '0');
+            const [show, setShow] = useState({ virvel: true, kraft: true, fart: true });
+            const [running, setRunning] = useState(false);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [controlsOpen, setControlsOpen] = useState(true);
+            const [, setTick] = useState(0);
+
+            const sceneWrapRef = useRef(null);
+            // pendeln släpps från vänster (negativ vinkel) — fri yta i scenen
+            const stateRef = useRef({ th: -(40 * Math.PI) / 180, w: 0, amp: 40 });
+            const pRef = useRef({});
+            pRef.current = { running, B: magnetOn ? B : 0, platta };
+
+            // ── Animationsloop: pendelns rörelseekvation ──
+            useEffect(() => {
+                let raf, last = performance.now();
+                const loop = (now) => {
+                    raf = requestAnimationFrame(loop);
+                    const dt = Math.min((now - last) / 1000, 0.04);
+                    last = now;
+                    const p = pRef.current;
+                    const st = stateRef.current;
+                    if (p.running) {
+                        // flera små steg för stabilitet
+                        const n = 4, h = dt / n;
+                        for (let i = 0; i < n; i++) {
+                            // hur stor del av plattan som är inne i fältområdet
+                            const dx = RC * Math.sin(st.th);
+                            const halfw = (PLATE.w + 2 * FIELD.r) / 2;
+                            const f = Math.max(0, 1 - Math.abs(dx) / halfw);
+                            const kType = p.platta === 'spar' ? 0.25 : 1;
+                            const cEddy = 3.2 * kType * p.B * p.B * f;
+                            const acc = -(G / LM) * Math.sin(st.th) - cEddy * st.w - 0.02 * st.w;
+                            st.w += acc * h;
+                            st.th += st.w * h;
+                        }
+                        // registrera aktuell amplitud vid vändlägena
+                        if (Math.abs(st.w) < 0.02) st.amp = Math.abs(st.th) * 180 / Math.PI;
+                        setTick(t => t + 1);
+                    }
+                };
+                raf = requestAnimationFrame(loop);
+                return () => cancelAnimationFrame(raf);
+            }, []);
+
+            // ── Fullskärm ──
+            useEffect(() => {
+                const handler = () => setIsFullscreen(
+                    document.fullscreenElement === sceneWrapRef.current ||
+                    document.webkitFullscreenElement === sceneWrapRef.current
+                );
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                if (document.fullscreenElement || document.webkitFullscreenElement)
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+            };
+
+            const tShow = (key) => setShow(sh => ({ ...sh, [key]: !sh[key] }));
+            // startvinkeln flyttar pendeln direkt när den inte svänger
+            const changeA0 = (v) => {
+                setA0(v);
+                if (!running) {
+                    stateRef.current.th = -(v * Math.PI) / 180;
+                    stateRef.current.w = 0;
+                    stateRef.current.amp = v;
+                    setTick(t => t + 1);
+                }
+            };
+            const release = () => {
+                stateRef.current.th = -(a0 * Math.PI) / 180;
+                stateRef.current.w = 0;
+                stateRef.current.amp = a0;
+                setRunning(true);
+            };
+            const reset = () => {
+                stateRef.current.th = -(a0 * Math.PI) / 180;
+                stateRef.current.w = 0;
+                stateRef.current.amp = a0;
+                setRunning(false);
+                setTick(t => t + 1);
+            };
+
+            // ── Aktuella värden ur simuleringstillståndet ──
+            const st = stateRef.current;
+            const th = st.th, w = st.w;
+            const vMS = Math.abs(w) * LM;                      // plattans fart (m/s)
+            const dx = RC * Math.sin(th);
+            const halfw = (PLATE.w + 2 * FIELD.r) / 2;
+            const overlap = Math.max(0, 1 - Math.abs(dx) / halfw);
+            const Beff = magnetOn ? B : 0;
+            const eddy = Math.min(1, 2.2 * vMS * Beff * overlap);  // virvelströmmarnas styrka (normerad)
+            const kType = platta === 'spar' ? 0.25 : 1;
+            const brakeF = 3.2 * kType * Beff * Beff * overlap * Math.abs(w);  // bromsande "kraft" (skala)
+
+            const cross = (x, y, key, size = 5) => (
+                <g key={key}>
+                    <line x1={x - size} y1={y - size} x2={x + size} y2={y + size}
+                          stroke={COL.falt} strokeWidth="1.7" strokeLinecap="round" />
+                    <line x1={x + size} y1={y - size} x2={x - size} y2={y + size}
+                          stroke={COL.falt} strokeWidth="1.7" strokeLinecap="round" />
+                </g>
+            );
+
+            // cirkelbåge med pilhuvud (virvelströmsslinga)
+            const eddyLoop = (cx, cy, r, cw, strength, key) => {
+                // cw = medurs (skärmens riktning); ritas som nästan hel cirkel med pil
+                const a0 = -0.4, a1 = 2 * Math.PI - 0.9;
+                const pts = [];
+                for (let a = a0; a <= a1; a += 0.22) {
+                    const ang = cw ? a : -a;
+                    pts.push(`${(cx + r * Math.cos(ang)).toFixed(1)},${(cy + r * Math.sin(ang)).toFixed(1)}`);
+                }
+                const aEnd = cw ? a1 : -a1;
+                const ex = cx + r * Math.cos(aEnd), ey = cy + r * Math.sin(aEnd);
+                // pilhuvudets riktning: numerisk tangent från näst sista punkten
+                const [px2, py2] = pts[pts.length - 2].split(',').map(Number);
+                const ddx = ex - px2, ddy = ey - py2;
+                const m = Math.hypot(ddx, ddy) || 1;
+                const hx = ex + (ddx / m) * 8, hy = ey + (ddy / m) * 8;
+                return (
+                    <g key={key} opacity={0.25 + 0.75 * strength}>
+                        <polyline points={pts.join(' ')} fill="none" stroke={COL.virvel}
+                                  strokeWidth={1.6 + 2.6 * strength} />
+                        <polygon points={`${hx},${hy} ${ex - (ddy / m) * 5},${ey + (ddx / m) * 5} ${ex + (ddy / m) * 5},${ey - (ddx / m) * 5}`}
+                                 fill={COL.virvel} />
+                    </g>
+                );
+            };
+
+            // pil med skaft som slutar vid pilhuvudets bas
+            const arrow = (x1, y1, x2, y2, color, key, wpx = 2.6, head = 9) => {
+                const dxa = x2 - x1, dya = y2 - y1;
+                const L = Math.hypot(dxa, dya) || 1;
+                const ux = dxa / L, uy = dya / L;
+                const bx = x2 - ux * head, by = y2 - uy * head;
+                return (
+                    <g key={key}>
+                        <line x1={x1} y1={y1} x2={bx} y2={by} stroke={color} strokeWidth={wpx} strokeLinecap="butt" />
+                        <polygon points={`${x2},${y2} ${bx - uy * head * 0.55},${by + ux * head * 0.55} ${bx + uy * head * 0.55},${by - ux * head * 0.55}`}
+                                 fill={color} />
+                    </g>
+                );
+            };
+
+            // ── Scenen ──
+            const scene = () => {
+                const els = [];
+
+                // stativ (tak-skena)
+                els.push(
+                    <g key="stativ">
+                        <line x1={PIV.x - 120} y1={PIV.y - 14} x2={PIV.x + 120} y2={PIV.y - 14}
+                              stroke="#8d939c" strokeWidth="5" strokeLinecap="round" />
+                        <circle cx={PIV.x} cy={PIV.y} r="5" fill="#5d646e" />
+                    </g>
+                );
+
+                // pendeln: stång + platta, roterad kring pivoten.
+                // SVG-rotation är medurs ⟹ negativ vinkel så att positiv θ = åt höger,
+                // samma konvention som fysikberäkningen (x = R · sin θ).
+                const deg = th * 180 / Math.PI;
+                const plateTop = FCY - PLATE.h / 2;
+                els.push(
+                    <g key="pendel" transform={`rotate(${(-deg).toFixed(3)} ${PIV.x} ${PIV.y})`}>
+                        <line x1={PIV.x} y1={PIV.y} x2={PIV.x} y2={plateTop}
+                              stroke="#5d646e" strokeWidth="4" />
+                        <rect x={PIV.x - PLATE.w / 2} y={plateTop} width={PLATE.w} height={PLATE.h} rx="6"
+                              fill={COL.alu} stroke="#7c828c" strokeWidth="1.6" />
+                        {platta === 'spar' && [1, 2, 3, 4].map(i => {
+                            const sx = PIV.x - PLATE.w / 2 + i * PLATE.w / 5;
+                            return <line key={'s' + i} x1={sx} y1={plateTop + PLATE.h}
+                                         x2={sx} y2={plateTop + 26}
+                                         stroke="#f3eee4" strokeWidth="7" strokeLinecap="round" />;
+                        })}
+                    </g>
+                );
+
+                // fältområdet (ritas ovanpå plattan, som i teorifiguren — fältet går genom plattan)
+                if (magnetOn && B > 0.01) {
+                    els.push(
+                        <g key="falt" opacity={0.35 + 0.65 * (B / BMAX)}>
+                            <circle cx={PIV.x} cy={FCY} r={FIELD.r} fill="none" stroke={COL.falt}
+                                    strokeWidth="1.4" strokeDasharray="6 5" />
+                            {cross(PIV.x - 17, FCY - 14, 'k1')}
+                            {cross(PIV.x + 17, FCY - 14, 'k2')}
+                            {cross(PIV.x - 17, FCY + 18, 'k3')}
+                            {cross(PIV.x + 17, FCY + 18, 'k4')}
+                        </g>
+                    );
+                    els.push(
+                        <text key="blbl" x={PIV.x + PLATE.w / 2 + 16} y={FCY + FIELD.r + 8} textAnchor="start"
+                              fontSize="14" fill={COL.falt}>
+                            <tspan fontStyle="italic">B</tspan>
+                        </text>
+                    );
+                    els.push(
+                        <text key="blbl2" x={PIV.x} y={FCY + PLATE.h / 2 + 34} textAnchor="middle"
+                              fontSize="12" fill="var(--lab-ink-muted, #5a6170)">
+                            elektromagnetens fält (in i planet)
+                        </text>
+                    );
+                }
+
+                // virvelströmmar (ritas oroterade vid fältområdet — plattan är där när |dx| liten)
+                if (show.virvel && eddy > 0.03 && overlap > 0.03) {
+                    const movingRight = (w * Math.cos(th)) > 0;   // plattans fart i x-led
+                    // flödet ökar framför fältområdet (i rörelseriktningen) och minskar bakom.
+                    // Lenz: slingan i fältet får uppåtriktad ström ⟹ främre slingan medurs om
+                    // rörelsen är åt höger (skärmens y pekar nedåt), bakre moturs — och tvärtom.
+                    const r0 = platta === 'spar' ? 16 : 26;
+                    const off = FIELD.r + r0 + 8;
+                    const px = PIV.x + dx;   // plattans mitt (ungefär, små vinklar)
+                    const cy = FCY;
+                    // slingorna sitter i plattan, på var sin sida om fältområdet
+                    const lead = movingRight ? PIV.x + off : PIV.x - off;
+                    const trail = movingRight ? PIV.x - off : PIV.x + off;
+                    els.push(eddyLoop(lead, cy, r0, movingRight, eddy, 'e1'));
+                    els.push(eddyLoop(trail, cy, r0, !movingRight, eddy, 'e2'));
+                    els.push(
+                        <text key="ilbl" x={trail} y={cy + r0 + 22} textAnchor="middle" fontSize="14"
+                              fill={COL.virvel} opacity={0.35 + 0.65 * eddy}>
+                            <tspan fontStyle="italic">I</tspan>
+                        </text>
+                    );
+                }
+
+                // hastighetspilen: tangentiell, från plattans kant i rörelseriktningen
+                const px = PIV.x + RC * Math.sin(th);
+                const py = PIV.y + RC * Math.cos(th);
+                const sgn = w >= 0 ? 1 : -1;
+                const ux = sgn * Math.cos(th), uy = -sgn * Math.sin(th);   // rörelseriktningen
+                if (show.fart && Math.abs(w) > 0.02) {
+                    const Lv = Math.min(110, 26 + 90 * vMS / 2.2);
+                    const x0 = px + ux * (PLATE.w / 2 + 2), y0 = py + uy * (PLATE.w / 2 + 2);
+                    els.push(arrow(x0, y0, x0 + ux * Lv, y0 + uy * Lv, COL.v, 'vpil'));
+                    els.push(
+                        <text key="vlbl" x={x0 + ux * (Lv + 13)} y={y0 + uy * (Lv + 13) + 5}
+                              textAnchor="middle" fontSize="15" fill={COL.v}>
+                            <tspan fontStyle="italic">v</tspan>
+                        </text>
+                    );
+                }
+
+                // bromsande kraften: motriktad rörelsen, från plattans motsatta kant
+                if (show.kraft && brakeF > 0.02 && Math.abs(w) > 0.02) {
+                    const Lf = Math.min(110, 14 + 130 * brakeF / (brakeF + 1.2));
+                    // förskjuten uppåt längs stången så att F- och v-pilarna inte kolliderar
+                    const fx = PIV.x + (RC - 46) * Math.sin(th), fy = PIV.y + (RC - 46) * Math.cos(th);
+                    const x0 = fx - ux * (PLATE.w / 2 + 2), y0 = fy - uy * (PLATE.w / 2 + 2);
+                    els.push(arrow(x0, y0, x0 - ux * Lf, y0 - uy * Lf, COL.kraft, 'fpil', 3));
+                    els.push(
+                        <text key="flbl" x={x0 - ux * (Lf + 13)} y={y0 - uy * (Lf + 13) + 5}
+                              textAnchor="middle" fontSize="15" fill={COL.kraft}>
+                            <tspan fontStyle="italic">F</tspan>
+                        </text>
+                    );
+                }
+
+                return (
+                    <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
+                         fontFamily="Poppins, sans-serif">
+                        <defs>
+                            <linearGradient id="paperG" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stopColor="#f7f2e8" />
+                                <stop offset="1" stopColor="#ece3d2" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width={VBW} height={VBH} fill="url(#paperG)" />
+                        {els}
+                    </svg>
+                );
+            };
+
+            // ── Kryssrutor, lägesval och styrknappar (uppe till höger) ──
+            const sceneToggles = () => (
+                <div className="scene-toggles">
+                    <div className="st-title">Pendelplatta</div>
+                    <label><input type="radio" name="platta" checked={platta === 'hel'} onChange={() => setPlatta('hel')} />
+                        <span>Hel platta</span></label>
+                    <label><input type="radio" name="platta" checked={platta === 'spar'} onChange={() => setPlatta('spar')} />
+                        <span>Platta med spår</span></label>
+                    <div className="st-title st-group">Magnetfält</div>
+                    <label><input type="checkbox" checked={magnetOn} onChange={() => setMagnetOn(m => !m)} />
+                        <span>Elektromagneten på</span></label>
+                    <div className="st-title st-group">Visa</div>
+                    <label><input type="checkbox" checked={show.virvel} onChange={() => tShow('virvel')} />
+                        <span className="st-swatch" style={{ background: COL.virvel }}></span>
+                        <span>Virvelströmmarna <em>I</em></span></label>
+                    <label><input type="checkbox" checked={show.kraft} onChange={() => tShow('kraft')} />
+                        <span className="st-swatch" style={{ background: COL.kraft }}></span>
+                        <span>Bromsande kraften <em>F</em></span></label>
+                    <label><input type="checkbox" checked={show.fart} onChange={() => tShow('fart')} />
+                        <span className="st-swatch" style={{ background: COL.v }}></span>
+                        <span>Hastigheten <em>v</em></span></label>
+                    <div className="st-actions">
+                        <button className="btn-toggle" onClick={release}>Släpp pendeln</button>
+                        <button className={`btn-toggle ${running ? '' : 'active'}`}
+                                onClick={() => setRunning(r => !r)}>
+                            {running ? 'Pausa' : 'Fortsätt'}
+                        </button>
+                        <button className="btn-toggle" onClick={reset}>Börja om</button>
+                    </div>
+                </div>
+            );
+
+            const Readout = ({ label, value, unit, color }) => (
+                <div className="p-2 rounded-lg" style={{ background: 'var(--lab-bg)', border: '1px solid var(--lab-line-strong)' }}>
+                    <div className="text-xs" style={{ color: 'var(--lab-ink-muted)' }} dangerouslySetInnerHTML={{ __html: label }} />
+                    <div className="font-mono font-bold text-sm" style={{ color: color || 'var(--lab-ink)' }}>
+                        {value} <span className="font-normal text-xs" style={{ color: 'var(--lab-ink-muted)' }}>{unit}</span>
+                    </div>
+                </div>
+            );
+
+            return (
+                <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    <div className="max-w-6xl mx-auto pt-6">
+                        <div className="breadcrumb mb-4" style={{ fontSize: 13 }}>
+                            <a href="index.html">Hem</a> / <a href="katalog.html#fy2">Fysik nivå 2</a> / Virvelströmmar
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight" style={{ color: 'var(--lab-ink)' }}>Virvelströmmar</h1>
+                        <p className="mt-2 mb-5" style={{ color: 'var(--lab-ink-soft)', maxWidth: 820 }}>
+                            En aluminiumpendel svänger fram och tillbaka genom ett magnetfält. När plattan
+                            rör sig i fältet induceras cirkulerande strömmar — <strong>virvelströmmar</strong> —
+                            som enligt Lenz lag motverkar rörelsen: pendeln bromsas in och stannar.
+                            Slå av elektromagneten och pendeln svänger fritt igen. Byt till plattan med
+                            spår och se att bromsningen blir mycket svagare.
+                        </p>
+
+                        <PrincipleCard />
+
+                        <main className="flex flex-col lg:flex-row gap-6">
+                            {/* Scen */}
+                            <div className="lg:w-3/5 order-1">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
+                                    {scene()}
+
+                                    <div className="scene-info">
+                                        <span className="si-lbl">Plattans fart <em style={{ textTransform: 'none' }}>v</em></span>
+                                        <span className="si-val">{fmt(vMS, 2)} m/s</span>
+                                        <span className="si-lbl" style={{ marginTop: 4 }}>Utslag</span>
+                                        <span className="si-val">{fmt(Math.abs(th) * 180 / Math.PI, 0)}°</span>
+                                    </div>
+
+                                    {sceneToggles()}
+
+                                    {/* Fullskärm: glidarna i en hopfällbar panel i underkant */}
+                                    {isFullscreen && (
+                                        <React.Fragment>
+                                            <div className={`fs-controls ${controlsOpen ? '' : 'collapsed'}`}>
+                                                <FsSlider label="Flödestäthet (<em>B</em>)" value={B}
+                                                          min={BMIN} max={BMAX} step={0.05} onChange={setB}
+                                                          valueText={`${fmt(B, 2)} T`} />
+                                                <FsSlider label="Startvinkel" value={a0}
+                                                          min={A0MIN} max={A0MAX} step={1} onChange={changeA0}
+                                                          valueText={`${fmt(a0, 0)}°`} />
+                                            </div>
+                                            <button className="fs-toggle-handle" onClick={() => setControlsOpen(o => !o)}
+                                                    title={controlsOpen ? 'Dölj reglage' : 'Visa reglage'}
+                                                    aria-expanded={controlsOpen}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                                                     style={{ transform: controlsOpen ? 'rotate(0deg)' : 'rotate(180deg)' }}>
+                                                    <path d="M6 9l6 6 6-6"/>
+                                                </svg>
+                                                <span>{controlsOpen ? 'Dölj reglage' : 'Reglage'}</span>
+                                            </button>
+                                        </React.Fragment>
+                                    )}
+
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3" /><path d="M15 21v-6h6" /><path d="M21 9h-6V3" /><path d="M3 15h6v6" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6" /><path d="M21 9V3h-6" /><path d="M3 15v6h6" /><path d="M21 15v6h-6" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Kontroller */}
+                            <div className="lg:w-2/5 order-2">
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <Slider label="Flödestäthet (<em>B</em>)"
+                                            sub="Bromsningen växer snabbt med fältet (dubbelt <em>B</em> ⟹ fyra gånger så stark broms)."
+                                            value={B} min={BMIN} max={BMAX} step={0.05} onChange={setB}
+                                            valueText={`${fmt(B, 2)} T`} />
+                                    <Slider label="Startvinkel"
+                                            sub="Vinkeln pendeln släpps ifrån."
+                                            value={a0} min={A0MIN} max={A0MAX} step={1} onChange={changeA0}
+                                            valueText={`${fmt(a0, 0)}°`} />
+                                </div>
+
+                                {/* Avläsning */}
+                                <div className="glass-card rounded-xl p-3 mb-3">
+                                    <div className="flbl mb-2">Avläsning</div>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        <Readout label="Plattans fart <em>v</em>" value={fmt(vMS, 2)} unit="m/s" color="var(--lab-accent)" />
+                                        <Readout label="Utslag" value={`${fmt(Math.abs(th) * 180 / Math.PI, 0)}°`} unit="" />
+                                        <Readout label="Flödestäthet <em>B</em>" value={fmt(Beff, 2)} unit="T" />
+                                        <Readout label="Platta" value={platta === 'spar' ? 'med spår' : 'hel'} unit="" />
+                                    </div>
+                                    <div className="mt-2 p-2 rounded-lg text-xs" style={{ background: 'rgba(13,148,136,0.08)', color: 'var(--lab-ink-soft)' }}>
+                                        Prova: släpp pendeln med magneten avstängd och slå på den mitt i
+                                        svängningen — pendeln fastnar nästan direkt när plattan är i fältet.
+                                        Rörelseenergin blir värme i plattan.
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+
+                        {/* Pedagogiska sektioner */}
+                        <div className="grid md:grid-cols-3 gap-4 mt-6">
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Därför bromsas pendeln</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    När plattan rör sig genom fältet ändras det magnetiska flödet genom olika
+                                    delar av plattan, och strömmar induceras. Strömmarna som befinner sig i
+                                    magnetfältet blir enligt högerhandsregeln uppåtriktade, och kraften på dem
+                                    blir <strong>motriktad rörelsen</strong>. Utanför fältet sluter sig strömmarna
+                                    fritt i "virvlar" — därav namnet virvelströmmar.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Därför hjälper spåren</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    I plattan med spår kan virvelströmmarna inte virvla lika fritt — spåren
+                                    skär av strömbanorna så att bara små strömslingor får plats. Mindre
+                                    strömmar ger mindre bromsande kraft. Samma knep används åt andra hållet i
+                                    transformatorer: järnkärnan byggs av tunna, isolerade plåtar (lameller) just
+                                    för att <em>hindra</em> oönskade virvelströmmar.
+                                </p>
+                            </div>
+                            <div className="glass-card rounded-xl p-4">
+                                <h3 className="font-bold mb-2" style={{ color: 'var(--lab-ink)' }}>Önskade och oönskade</h3>
+                                <p className="text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                    <strong>Önskade virvelströmmar</strong> utnyttjas i induktionsspisar (värmer
+                                    kokkärlets botten) och i magnetbromsar, till exempel vid "fritt fall"-åkattraktioner
+                                    på nöjesparker — bromsen fungerar utan kontakt och kan aldrig "släppa".
+                                    <strong> Oönskade virvelströmmar</strong> finns i växelströmsapparater och ger
+                                    förluster i form av värme.
+                                </p>
+                            </div>
+                        </div>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Så fungerar en induktionshäll</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ol className="mt-3 space-y-2 text-sm list-decimal pl-5" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>Växelström genom en kopparspole</strong> i hällen skapar ett växlande magnetfält. Vägguttagets 50 Hz räcker inte — frekvensen ökas först nästan 1 000 gånger, till närmare 50 kHz.</li>
+                                <li><strong>En kastrull ställs på hällen.</strong> Svängningarna i magnetfältet inducerar virvelströmmar i kokkärlets botten. För att det ska fungera måste metallen "känna av" svängningarna — alltså vara magnetisk.</li>
+                                <li>På grund av den så kallade <strong>skinneffekten</strong> koncentreras virvelströmmarna till ett tunt skikt nära metallens yta. Då ökar det elektriska motståndet, vilket leder till värmeutveckling.</li>
+                                <li><strong>Magnetisk hysteres</strong>, ett slags magnetisk tröghet, bidrar också: varje svängning i fältet ändrar kokkärlets magnetisering, och trögheten i materialet gör att den snabba förändringen alstrar värme.</li>
+                            </ol>
+                        </details>
+
+                        <details className="glass-card rounded-xl p-4 mt-4">
+                            <summary className="accordion-head" style={{ color: 'var(--lab-ink)' }}>
+                                <span>Vanliga missuppfattningar</span><span style={{ color: 'var(--lab-ink-muted)' }}>▾</span>
+                            </summary>
+                            <ul className="mt-3 space-y-2 text-sm" style={{ color: 'var(--lab-ink-soft)' }}>
+                                <li><strong>"Magneten attraherar aluminiumet."</strong> Nej — aluminium är omagnetiskt och dras inte mot en stillastående magnet. Bromskraften uppstår bara när plattan <em>rör sig</em> i fältet, och den är alltid motriktad rörelsen (åt båda hållen).</li>
+                                <li><strong>"Energin försvinner."</strong> Nej — pendelns rörelseenergi omvandlas via virvelströmmarna till värme i plattan. Det är exakt så en induktionshäll värmer kastrullen.</li>
+                                <li><strong>"Spåren gör plattan lättare, därför svänger den längre."</strong> Nej — det är inte massan som avgör, utan att spåren skär av strömbanorna så att virvelströmmarna (och därmed bromskraften) blir små.</li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+    <script src="data/katalog.js"></script>
+    <script src="section-nav.js"></script>
+</body>
+</html>

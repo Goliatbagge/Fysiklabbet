@@ -31,6 +31,47 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-04-solstorm-norrsken",
+    date: "2026-07-04",
+    title: "En kraftig solstorm har nått jorden — chans till norrsken över stora delar av Sverige i sommarnatten",
+    deck: "En ovanligt aktiv solfläcksgrupp small av med en X-klassad röntgenblixt i tisdags kväll och slungade ut ett moln av magnetiserad plasma mot jorden. Nu mäter NOAA en måttlig geomagnetisk storm som kan tänja norrskenszonen långt söderut — mitt i sommarens ljusaste nätter.",
+    category: "Rymdväder",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-04-solstorm-norrsken.jpg",
+    imageAlt: "Solen avbildad i extremt ultraviolett ljus i turkosa nyanser, med en intensivt vit ljusblixt uppe till höger som markerar utbrottet av en kraftig solflamma, samt en tunn ljusstråle som sträcker sig ner från utbrottsplatsen.",
+    imageCredit: "Foto: NASA/SDO (Solar Dynamics Observatory)",
+    tags: ["rymdväder", "norrsken", "aurora", "solstorm", "cme", "solfläck", "jordmagnetiska fältet", "magnetfält", "geomagnetisk storm", "kp-index", "elektromagnetism", "rymden"],
+    sources: [
+      { name: "NASA — Solar Cycle 25 (bloggen)", url: "https://science.nasa.gov/blogs/solar-cycle-25/2026/06/30/sun-releases-strong-flare-11/" },
+      { name: "NOAA — Space Weather Prediction Center", url: "https://www.spaceweather.gov/news/moderate-geomagnetic-storm-watch-03-july-utc" },
+      { name: "The Watchers", url: "https://watchers.news/2026/07/01/x1-1-solar-flare-produces-earth-directed-cme-g2-geomagnetic-storm-watch-issued-for-july-3/" }
+    ],
+    research: null,
+    body: [
+      { type: "p", html: "Tisdag kväll small en ovanligt aktiv solfläcksgrupp av med en kraftig röntgenblixt, och resterna av utbrottet har nu nått jorden. Natten mot lördagen den 4&nbsp;juli nådde den geomagnetiska stormen sin hittills kraftigaste fas, och ytterligare stötar väntas komma in de närmaste dygnen. Följden kan bli norrsken långt söder om sin vanliga hemvist vid polcirkeln — mitt i den ljusaste tiden på året, bara några veckor efter sommarsolståndet." },
+
+      { type: "h2", text: "En het fläck på solen small av" },
+      { type: "p", html: "Källan är den aktiva regionen AR4479, en magnetiskt djupt komplicerad solfläcksgrupp som klassas ”beta-gamma-delta” — den mest invecklade kategori en solfläcksgrupp kan få. Under ett dygn sköt den ut ett tiotal kraftiga flammor i M-klass, men klockan 20:50 UTC (22:50 svensk sommartid) small den betydligt starkare X1,1-flamman av. Flammor klassas efter styrkan hos röntgenstrålningen de sänder ut, i bokstavsordningen A, B, C, M och X, där varje steg motsvarar ungefär tio gånger mer energi — en X-flamma tillhör alltså den allra kraftigaste kategorin. Bilden ovan, tagen av NASA:s rymdteleskop Solar Dynamics Observatory i extremt ultraviolett ljus, visar den intensivt vita ljusblixten i samma ögonblick som den briserade." },
+
+      { type: "h2", text: "Ett moln av magnetiserad plasma" },
+      { type: "p", html: "Explosionen slungade också ut ett så kallat halo-CME (<em>coronal mass ejection</em>) — ett moln av flera miljarder ton magnetiserad plasma som sprids åt alla håll från solen, i det här fallet rakt mot jorden. Utbrottet syntes första gången i ett rymdteleskops koronografbilder redan klockan 21:45 UTC, och radioekon av den framrusande stötvågen användes för att uppskatta molnets hastighet till omkring 1500&nbsp;km/s — nästan 5,4 miljoner km/h." },
+      { type: "p", html: "NOAA:s rymdväderscentral (Space Weather Prediction Center, SWPC) utfärdade snabbt en varning för en måttlig geomagnetisk storm, nivå G2 på myndighetens femgradiga skala från G1 till G5. Stormen mäts med det så kallade Kp-indexet, som anger hur mycket jordens magnetfält rubbas utifrån magnetometrar över hela jordklotet. Enligt SWPC:s senaste prognos väntades Kp-värdet natten mot lördagen nå upp mot 5,67 — i övre delen av G2-intervallet — innan aktiviteten sjunker under dagen. Ytterligare två plasmamoln som slungades ut den 1–2&nbsp;juli väntas nå jorden omkring den 5&nbsp;juli, så himlen kan fortsätta röra på sig ännu några dygn." },
+
+      { type: "h2", text: "Så tänds himlen" },
+      { type: "p", html: "Norrsken uppstår när laddade partiklar från solvinden fångas in av jordens magnetfält. Nära polerna pekar fältlinjerna nästan rakt ner mot marken i stället för att böja av partiklarna åt sidan, så där kan de tränga ner i den övre atmosfären i stället för att studsa bort — samma princip som beskrivs i genomgången om det jordmagnetiska fältet i Fysik nivå&nbsp;2. På vägen ner krockar partiklarna med syre- och kväveatomer och för över energi till atomernas elektroner, som hoppar upp till högre energinivåer. När elektronerna sedan faller tillbaka sänds ljus ut med en färg som motsvarar precis det energisteget — samma mekanism som i simuleringen om Bohrs atommodell och energinivåer. Syre ger det klassiska gröna skenet på 100–250&nbsp;kilometers höjd och ett svagare rött sken högre upp, medan kväve bidrar med inslag av blått och lila i de kraftigaste stormarna." },
+
+      { type: "h2", text: "Ljusa sommarnätter i vägen" },
+      { type: "p", html: "En storm i den här klassen brukar tänja ut norrskenszonen långt söder om sin vanliga plats kring polcirkeln — under en stark G3-storm har norrsken synts så långt söderut som i amerikanska delstater som Kansas och Maryland. I Sverige skulle en lika kraftig storm i teorin kunna göra norrsken synligt långt söder om Norrland. Problemet i juli är ljuset: bara några veckor efter sommarsolståndet blir det aldrig riktigt mörkt i norra Sverige, och även längre söderut är nätterna korta. Bäst chans finns strax efter midnatt, i mörker långt från stadsljus — men de riktigt säkra korten kommer först när nätterna mörknar igen till hösten. Med solcykel 25 fortfarande nära sitt maximum lär fler tillfällen komma." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Solflammor klassas efter styrkan på röntgenstrålningen i bokstavsklasserna A, B, C, M och X, där varje bokstav motsvarar omkring tio gånger mer energi än den föregående. En X1,1-flamma ligger alltså strax över gränsen till den mest kraftfulla klassen.",
+        "G-skalan för geomagnetiska stormar går från G1 (mindre störning) till G5 (extrem storm) och motsvarar Kp-index 5 till 9.",
+        "Solcykel 25 — solens elva år långa aktivitetscykel — befinner sig fortfarande nära sitt maximum, vilket gör kraftiga flammor och stormar som denna vanligare just nu än de brukar vara."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-03-vintergatans-spiralarmar",
     date: "2026-07-03",
     title: "Ekon av röntgenljus visar att Vintergatans yttre spiralarmar ligger längre bort än vi trott",

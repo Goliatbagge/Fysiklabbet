@@ -12,17 +12,34 @@ Format per post:
 
 ## Kö
 
-- **En solstorm är på väg mot jorden — norrsken möjligt i sommarnatten** — ett
-  X1,1-flare från solfläcksgruppen AR4479 (30 juni, 20:50 UTC) slungade ut en
-  CME som NOAA SWPC väntar ska ge en G2-storm (måttlig) den 3–4 juli, med
-  ytterligare stormmoln på väg fram till 6 juli. Utmärkt vinkel för Fysik 2
-  (jordmagnetiska fältet + energinivåer/spektrallinjer: aurorafärger uppstår
-  när laddade partiklar exciterar syre/kväve i atmosfären). Kolla färska
-  siffror igen innan publicering — händelsen utvecklas dag för dag. Källor:
-  https://www.space.com/stargazing/auroras/sun-fires-off-10-solar-flares-in-24-hours-as-multiple-earth-bound-cmes-raise-northern-lights-hopes-for-july-4-weekend ,
-  https://watchers.news/2026/07/01/x1-1-solar-flare-produces-earth-directed-cme-g2-geomagnetic-storm-watch-issued-for-july-3/ ,
-  NOAA SWPC (swpc.noaa.gov). (tillagd 2026-07-03 — research klar, artikel
-  inte skriven eftersom dagens nyhet redan var publicerad när detta upptäcktes)
+(tom — se "Reservuppslag" nedan vid nyhetstorka)
+
+## Fynd som inte användes (2026-07-04) — kan tas upp senare
+
+- **Optiska fibrer under havet avslöjar tysta valars rörelser** — forskare
+  använder distribuerad akustisk sensorik (DAS), som fångar de akustiska
+  vågornas töjning av redan utlagda optiska telekomfiber på havsbotten, för
+  att lyssna av valljud (även lågfrekventa läten från "tysta" arter) över
+  hundratals kilometer. Bra våg-/akustikvinkel för Fysik 2 (mekaniska vågor,
+  interferens/dämpning i fiber), visuellt och med riktiga djur — ovanligt
+  tillgängligt. Källa: https://physicsworld.com/a/undersea-optical-fibres-detect-the-motion-of-silent-whales/
+  (Physics World, publicerad kring 2026-07-01/02). (tillagd 2026-07-04)
+- **Dynamiska svarta hål kan lyda en Hawking-liknande termodynamik med ett
+  alternativt entropimått** — ny studie i Physical Review Letters föreslår
+  ett sätt att räkna ett svart håls entropi som fungerar även för svarta hål
+  som växer/ändras (inte bara statiska), vilket kopplar allmän
+  relativitetsteori till termodynamikens andra huvudsats. Interessant
+  fördjupningsvinkel för Fysik 2 (modern fysik/kosmologi) men teoretiskt
+  tungt — kräver en ordentlig pedagogisk förenkling för gymnasienivå.
+  Källa: https://phys.org/news/2026-07-dynamic-black-holes-obey-hawking.html
+  (tillagd 2026-07-04)
+- **Magnoner som bärare av kvantinformation** — magnoner (kvantiserade
+  spinnvågor/"magnetiska vågpaket") har länge ansetts för kortlivade för
+  praktisk användning, men ny forskning visar lovande vägar att använda dem
+  i kvantteknik. Bra kvantfysik/magnetism-vinkel, men vi har publicerat
+  flera kvantfysiknyheter senaste veckorna — spara till det är läge att växla
+  ämne igen. Källa: physicsworld.com (sök "magnons quantum information
+  2026"). (tillagd 2026-07-04)
 
 ## Fynd som inte användes (2026-07-03) — kan tas upp senare
 

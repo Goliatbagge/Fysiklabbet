@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-05 | `2026-07-05-super-puff-planeter` | Två jätteplaneter visar sig vara lättare än sockervadd | NASA (TESS-uppdraget) / University of Oxford / Phys.org / MNRAS (arXiv:2606.30016) |
 | 2026-07-04 | `2026-07-04-solstorm-norrsken` | En kraftig solstorm har nått jorden — chans till norrsken över stora delar av Sverige i sommarnatten | NASA (Solar Cycle 25-bloggen) / NOAA SWPC / The Watchers |
 | 2026-07-03 | `2026-07-03-vintergatans-spiralarmar` | Ekon av röntgenljus visar att Vintergatans yttre spiralarmar ligger längre bort än vi trott | NASA (Chandra) / ESA (XMM-Newton) / Phys.org / Astronomy & Astrophysics |
 | 2026-07-02 | `2026-07-02-cern-specialartikel` | Inne i CERN: sju decennier av partiklar, Nobelpris och en och annan mård | Specialartikel — CERN (Vår historia/Webbens födelse) / Wikipedia (faktakollad) |

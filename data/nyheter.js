@@ -31,6 +31,51 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-05-super-puff-planeter",
+    date: "2026-07-05",
+    title: "Två jätteplaneter visar sig vara lättare än sockervadd",
+    deck: "Astronomer har bekräftat ett sällsynt planetpar runt stjärnan TOI-791 — nästan lika stora som Jupiter, men med en densitet ner mot en trettiofemtedel av gasjättens egen. De hör till de mest extremt uppblåsta ”super-puff”-planeterna som någonsin hittats, och ett ovanligt bra laboratorium för att förstå hur jätteplaneter föds.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-05-super-puff-planeter.jpg",
+    imageAlt: "NASA-illustration av den ljusa stjärnan TOI-791 i bakgrunden med de två jätteplaneterna TOI-791 b och c i förgrunden, avbildade som blåtonade klot mot en stjärnbeströdd rymd.",
+    imageCredit: "Illustration: NASA/Daniel Rutter",
+    tags: ["astronomi", "exoplaneter", "densitet", "gravitation", "tess", "nasa", "jupiter", "resonans", "keplers lagar", "rymden", "toi-791"],
+    sources: [
+      { name: "NASA — TESS-uppdraget (pressmeddelande)", url: "https://science.nasa.gov/missions/tess/nasas-tess-mission-reveals-the-puffiest-planets-ever-found/" },
+      { name: "University of Oxford (pressmeddelande)", url: "https://www.ox.ac.uk/news/2026-06-24-researchers-discover-pair-of-giant-super-puff-planets-lighter-than-candy-floss" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-06-super-puff-planets-lighter-candy.html" }
+    ],
+    research: { citation: "G. Dransfield et al., ”ASTEP confirmation of a pair of long-period Jupiter-sized planets with extremely low densities transiting TOI-791”, Monthly Notices of the Royal Astronomical Society (2026)", url: "https://arxiv.org/abs/2606.30016" },
+    body: [
+      { type: "p", html: "Drygt 1&nbsp;110&nbsp;ljusår bort, i den obskyra sydliga stjärnbilden Volans (”den flygande fisken”), kretsar en stjärna med två planeter som trotsar sunt förnuft. Båda är ungefär lika stora som Jupiter — men bara en bråkdel så tunga. Ny forskning, publicerad i <em>Monthly Notices of the Royal Astronomical Society</em>, visar att paret TOI-791&nbsp;b och TOI-791&nbsp;c har en densitet så låg att den ligger under sockervaddens. Det gör dem till några av de mest extremt uppblåsta ”super-puff”-planeterna som någonsin bekräftats." },
+
+      { type: "h2", text: "En planet lättare än sockervadd" },
+      { type: "p", html: "Densitet beskriver hur mycket massa som ryms i en given volym, <em>ρ</em>&nbsp;=&nbsp;<em>m</em>/<em>V</em>, och mäts vanligen i kilogram per kubikmeter eller — som här — gram per kubikcentimeter, precis som i genomgången om densitet i Fysik nivå&nbsp;1. Jorden har en snittdensitet på ungefär 5,5&nbsp;g/cm³, medan gasjätten Jupiter, byggd nästan enbart av väte och helium, ligger på 1,33&nbsp;g/cm³. TOI-791&nbsp;b och c slår båda med marginal: 0,038 respektive 0,047&nbsp;g/cm³ — lägre än de cirka 0,05&nbsp;g/cm³ som en klase sockervadd brukar väga in på. ”De här två planeterna har en densitet jämförbar med en fin klick rakskum, färskt ur burken”, konstaterar astronomen George Dransfield vid University of Oxford, som ledde studien." },
+
+      { type: "h2", text: "Jupiterstora — men nästan tomma inuti" },
+      { type: "p", html: "TOI-791&nbsp;b har en radie på 0,993&nbsp;Jupiterradier — praktiskt taget identisk storlek — men väger bara 9,5&nbsp;jordmassor, motsvarande 3,0&nbsp;% av Jupiters massa. Den yttre planeten, TOI-791&nbsp;c, är till och med något större än Jupiter (1,155&nbsp;Jupiterradier) men väger ändå bara 18,6&nbsp;jordmassor, eller 5,9&nbsp;% av Jupiters massa. Jupiter är med andra ord mellan 28 och 35 gånger tätare än sina båda uppblåsta kusiner runt TOI-791 — en stjärna av spektraltyp F7, något hetare, större och yngre än solen." },
+
+      { type: "h2", text: "En gravitationell dragkamp avslöjade vikten" },
+      { type: "p", html: "Att mäta en avlägsen planets radie är förhållandevis enkelt: NASA:s rymdteleskop TESS registrerar hur mycket stjärnans ljus dämpas när planeten passerar framför den. Massan är desto knepigare att komma åt utan att kunna väga planeten direkt. Lösningen stavas gravitation: TOI-791&nbsp;b och c befinner sig nästan exakt i en 5:3-resonans — för var femte varv den inre planeten gör runt stjärnan hinner den yttre nästan exakt tre. Den ständiga gravitationsdragningen mellan de två planeterna får deras passager framför stjärnan att komma tidigare eller senare än en enkel omloppsbana skulle förutspå, med avvikelser på upp till 50&nbsp;minuter. Genom att analysera dessa tidsavvikelser (så kallade <em>transit timing variations</em>) kunde forskarna räkna fram exakt hur tunga planeterna faktiskt är — utan ett enda vägningsinstrument i sikte." },
+
+      { type: "h2", text: "Ett teleskop i ständigt mörker" },
+      { type: "p", html: "Upptäckten började redan 2019, då den ideella satsningen Planet Hunters TESS — där tusentals volontärer letar planetsignaler i TESS offentliga data — flaggade den första svaga ljusdippen från TOI-791. Planet c dök upp i data först 2023. Men för att fånga båda planeternas fullständiga, elva timmar långa passager krävdes långa sammanhängande observationsfönster, något TESS sällan erbjuder från sin omloppsbana. Lösningen blev ASTEP, ett 0,4&nbsp;meter stort teleskop vid den franskt-italienska forskningsstationen Concordia på Antarktis inland, där flera månaders sammanhängande polarnatt gav astronomerna det mörker de behövde — tre fullständiga passager av planet b och en av planet c." },
+
+      { type: "quote", html: "”Det främsta skälet till att de här planeterna är intressanta att studera är att vi inte förväntade oss att se dem alls. De utgör ett pussel för oss att lösa om hur jätteplaneter som Jupiter — och super-puffarna — bildas.”", cite: "Jon Jenkins, NASA:s Ames Research Center" },
+
+      { type: "h2", text: "Vad göms i det uppblåsta molnet?" },
+      { type: "p", html: "Vad som exakt gör TOI-791&nbsp;b och c så extremt lätta är inte klarlagt, men en ledande hypotes pekar mot enorma atmosfärer av väte och helium, sannolikt uppblåsta redan när planeterna bildades långt ute i sitt planetsystem. Dransfield spekulerar i att molnen på nära håll sannolikt skulle se vita eller blå ut snarare än sockervaddens rosa. Färre än 40 super-puff-planeter är kända bland de nästan 6&nbsp;300 bekräftade exoplaneter som hittills hittats, och TOI-791 hör till bara fem kända system där mer än en sådan planet kretsar runt samma stjärna. ”Det här systemet är ett unikt laboratorium för att förstå hur super-puff-planeter bildas och utvecklas”, säger medförfattaren Amaury Triaud vid University of Birmingham." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "TOI-791 b och c är låsta i en sällsynt 5:3-banresonans med en så kallad superperiod på över 88&nbsp;år — tiden det tar innan mönstret av tidsavvikelser upprepar sig.",
+        "Densitetsformeln <em>ρ</em>&nbsp;=&nbsp;<em>m</em>/<em>V</em> är samma som avgör om ett föremål flyter eller sjunker i vatten — testa sambandet själv i Fysiklabbets simulering om densitet.",
+        "TESS samlade in 1&nbsp;122&nbsp;dygns observationsdata över sju år innan planeternas exakta banor och massor kunde fastställas."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-04-solstorm-norrsken",
     date: "2026-07-04",
     title: "En kraftig solstorm har nått jorden — chans till norrsken över stora delar av Sverige i sommarnatten",

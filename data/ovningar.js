@@ -2036,6 +2036,88 @@ function makeLever(opts) {
     return sceneWrap(W, H, body);
 }
 
+// ── Bräda på två bockar/stöd (makeBeamSupports) ──────────────────────
+//
+// Jämntjock bräda som vilar på två stöd (bockar). Läge längs brädan
+// anges som posFrac 0–1 (0 = vänster brädände).
+//   opts = {
+//     width,                          // default 460
+//     supports: [{ posFrac, label, pivot }],  // pivot: röd vridpunktsprick
+//     cog: { posFrac, label },        // tyngdpunkt + F_G-pil nedåt
+//     person: { posFrac, label },     // stående person ovanpå brädan
+//     dims: [{ fromFrac, toFrac, label, row }],  // måttlinjer ovanför
+//   }
+// Stödkrafter ritas medvetet INTE ut (okända krafter avslöjas inte i
+// figuren) — figuren visar geometrin + tyngdkraften.
+function makeBeamSupports(opts) {
+    const W = opts.width || 460;
+    const padL = 38, padR = 38;
+    const x0 = padL, x1 = W - padR, span = x1 - x0;
+    const frac = f => x0 + span * f;
+    const beamTh = 10;
+    const dimRows = (opts.dims || []).reduce((m, d) => Math.max(m, (d.row || 0) + 1), 0);
+    const personH = opts.person ? 56 : 0;
+    const beamY = 34 + dimRows * 20 + personH;
+    const beamBot = beamY + beamTh;
+    const bockH = 56;
+    const groundY = beamBot + bockH;
+    let body = '';
+    // mark + bockar (A-form: två ben + tvärslå)
+    body += sceneGround(x0 - 14, x1 + 14, groundY);
+    for (const s of (opts.supports || [])) {
+        const sx = frac(s.posFrac);
+        const spread = 20, barY = beamBot + bockH * 0.45;
+        const lx = sx - spread * 0.45, rx = sx + spread * 0.45;
+        body += `<line x1="${sx.toFixed(1)}" y1="${beamBot}" x2="${(sx - spread).toFixed(1)}" y2="${groundY}" stroke="${SCENE_INK}" stroke-width="2.6" stroke-linecap="round"/>`;
+        body += `<line x1="${sx.toFixed(1)}" y1="${beamBot}" x2="${(sx + spread).toFixed(1)}" y2="${groundY}" stroke="${SCENE_INK}" stroke-width="2.6" stroke-linecap="round"/>`;
+        body += `<line x1="${lx.toFixed(1)}" y1="${barY.toFixed(1)}" x2="${rx.toFixed(1)}" y2="${barY.toFixed(1)}" stroke="${SCENE_INK}" stroke-width="2" stroke-linecap="round"/>`;
+    }
+    // balk
+    body += `<rect x="${x0}" y="${beamY}" width="${span}" height="${beamTh}" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.6" rx="2"/>`;
+    // stödpunkter: prick + bokstav under balken, vid sidan av benen
+    for (const s of (opts.supports || [])) {
+        const sx = frac(s.posFrac);
+        body += `<circle cx="${sx.toFixed(1)}" cy="${beamBot}" r="${s.pivot ? 3.4 : 2.6}" fill="${s.pivot ? '#d13b2e' : SCENE_INK}"/>`;
+        if (s.label) body += sceneText(sx - 14, beamBot + 15, s.label, { size: 13, anchor: 'end' });
+    }
+    // tyngdpunkt + tyngdkraft (prick ENDAST för F_G)
+    if (opts.cog) {
+        const cx = frac(opts.cog.posFrac), cy = beamY + beamTh / 2;
+        const len = 46;
+        body += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="3" fill="${SCENE_INK}"/>`;
+        body += sceneArrow(cx, cy, cx, cy + len, { color: SCENE_ACCENT });
+        if (opts.cog.label) body += sceneText(cx + 9, cy + len - 5, sceneQty(opts.cog.label), { color: SCENE_ACCENT, anchor: 'start', size: 13 });
+    }
+    // stående person ovanpå brädan (huvud + bål + armar + ben);
+    // etiketten läggs VID SIDAN av personen så måttprojektioner inte träffar den
+    if (opts.person) {
+        const px = frac(opts.person.posFrac);
+        const footY = beamY, hipY = footY - 20, shY = footY - 38, headR = 7;
+        body += `<line x1="${(px - 6).toFixed(1)}" y1="${footY}" x2="${px.toFixed(1)}" y2="${hipY}" stroke="${SCENE_INK}" stroke-width="2.4" stroke-linecap="round"/>`;
+        body += `<line x1="${(px + 6).toFixed(1)}" y1="${footY}" x2="${px.toFixed(1)}" y2="${hipY}" stroke="${SCENE_INK}" stroke-width="2.4" stroke-linecap="round"/>`;
+        body += `<line x1="${px.toFixed(1)}" y1="${hipY}" x2="${px.toFixed(1)}" y2="${shY}" stroke="${SCENE_INK}" stroke-width="2.4" stroke-linecap="round"/>`;
+        body += `<line x1="${(px - 8).toFixed(1)}" y1="${shY + 12}" x2="${px.toFixed(1)}" y2="${shY + 2}" stroke="${SCENE_INK}" stroke-width="2" stroke-linecap="round"/>`;
+        body += `<line x1="${(px + 8).toFixed(1)}" y1="${shY + 12}" x2="${px.toFixed(1)}" y2="${shY + 2}" stroke="${SCENE_INK}" stroke-width="2" stroke-linecap="round"/>`;
+        body += `<circle cx="${px.toFixed(1)}" cy="${(shY - headR - 2).toFixed(1)}" r="${headR}" fill="#fafaf5" stroke="${SCENE_INK}" stroke-width="1.8"/>`;
+        if (opts.person.label) body += sceneText(px + 14, shY - 6, opts.person.label, { size: 13, anchor: 'start' });
+    }
+    // måttlinjer ovanför balken (och ovanför ev. person); projektionen
+    // stannar ovanför personens huvud om måttet slutar vid personen
+    const personTop = opts.person ? beamY - 55 : null;
+    const dimBase = beamY - 30 - personH;
+    for (const dm of (opts.dims || [])) {
+        const ax = frac(dm.fromFrac), bx = frac(dm.toFrac);
+        const yy = dimBase - (dm.row || 0) * 20;
+        for (const [xx, ff] of [[ax, dm.fromFrac], [bx, dm.toFrac]]) {
+            const atPerson = opts.person && Math.abs(ff - opts.person.posFrac) < 0.005;
+            const yEnd = atPerson ? personTop - 4 : beamY - 6;
+            body += `<line x1="${xx.toFixed(1)}" y1="${yy}" x2="${xx.toFixed(1)}" y2="${yEnd.toFixed(1)}" stroke="${SCENE_MUTED}" stroke-width="0.8" stroke-dasharray="3 3"/>`;
+        }
+        body += sceneDim(ax, yy, bx, yy, sceneQty(dm.label), {});
+    }
+    return sceneWrap(W, groundY + 14, body);
+}
+
 // ── Tippande/vältande kropp (makeTippingBox) ─────────────────────────
 //
 // Rätblock på mark. Visar tyngdpunkt + tyngdkraft, valfri vågrät
@@ -12059,43 +12141,83 @@ $$ F_f = \\frac{mg}{2\\tan 65^\\circ} = \\frac{15 \\cdot 9{,}82}{2 \\cdot \\tan 
         // ── Nivå 1 (E) ───────────────────────────────────────────────
         {
             level: 1,
-            question: `Var ligger tyngdpunkten hos ett homogent, symmetriskt föremål — till exempel en kub eller en jämntjock linjal?`,
+            question: `En jämntjock bräda vilar på två bockar. Brädans tyngdpunkt ligger närmare den högra bocken än den vänstra. Vilket påstående stämmer?`,
             choices: [
-                `I den geometriska mittpunkten.`,
-                `I ett av hörnen.`,
-                `Vid föremålets tyngsta yta.`,
-                `Alltid utanför själva föremålet.`,
+                `Den högra bocken trycker uppåt med större kraft än den vänstra.`,
+                `Den vänstra bocken trycker uppåt med större kraft än den högra.`,
+                `Bockarna trycker alltid med lika stora krafter.`,
+                `Hur krafterna fördelas beror inte på var tyngdpunkten ligger.`,
             ],
             correct: 0,
-            solution: `För ett **homogent och symmetriskt** föremål ligger tyngdpunkten i den geometriska mittpunkten — det är där föremålets sammanlagda tyngd kan tänkas verka.
+            solution: `Ju **närmare tyngdpunkten** en stödjande eller bärande kraft är, desto **större del av tyngden** bär den upp. Tyngdpunkten ligger närmare den högra bocken, så den bär störst del av brädans tyngd.
 
-**Svar:** Alternativ A — i den geometriska mittpunkten.
+**Svar:** Alternativ A — den högra bocken trycker uppåt med större kraft.
 
-**Generell slutsats:** För *ojämnt* formade föremål kan tyngdpunkten ligga utanför materialet — t.ex. mitt i hålet på en ring eller en bumerang.`,
+**Generell slutsats:** Det syns i momentlagen: väljer man vridningspunkten i det ena stödet får stödet nära tyngdpunkten en kort hävarm för tyngdkraften att balansera — kraften måste då vara stor. Ligger tyngdpunkten mitt emellan stöden bär de exakt hälften var.`,
         },
         {
             level: 1,
-            question: `Ett föremål hänger upp i en punkt som ligger **ovanför** dess tyngdpunkt. Vilken typ av jämvikt råder?`,
+            question: `En bräda vilar på två stöd, P och Q. Både stödkraften $F_\\mathrm{P}$ och stödkraften $F_\\mathrm{Q}$ är okända. Varför är det smart att välja vridningspunkten i P när man ställer upp momentlagen?`,
             choices: [
-                `Stabil jämvikt.`,
-                `Labil jämvikt.`,
-                `Indifferent jämvikt.`,
-                `Ingen jämvikt — föremålet faller.`,
+                `$F_\\mathrm{P}$ får då hävarmen 0 och försvinner ur ekvationen — kvar finns bara en okänd kraft.`,
+                `$F_\\mathrm{P}$ blir då lika stor som $F_\\mathrm{Q}$.`,
+                `Tyngdkraften försvinner då ur ekvationen.`,
+                `Momentlagen gäller bara om vridningspunkten ligger vid ett stöd.`,
             ],
             correct: 0,
-            solution: `När upphängningspunkten ligger **ovanför** tyngdpunkten råder **stabil jämvikt**: vid en liten störning lyfts tyngdpunkten, och föremålet pendlar tillbaka till sitt ursprungsläge.
+            solution: `När det saknas en naturlig vridningspunkt får den **väljas valfritt**. En kraft vars riktningslinje går genom vridningspunkten har hävarmen 0 och ger inget kraftmoment. Väljer vi vridningspunkten i P försvinner alltså den okända kraften $F_\\mathrm{P}$ ur momentekvationen, och $F_\\mathrm{Q}$ kan lösas ut direkt.
 
-**Svar:** Alternativ A — stabil jämvikt.
+**Svar:** Alternativ A.
 
-**Generell slutsats:** Labil jämvikt = upphängd *under* tyngdpunkten (välter vid minsta störning, t.ex. en linjal balanserad på fingret). Indifferent = upphängd *i* tyngdpunkten (stannar i vilket läge som helst, t.ex. ett hjul på sin axel).`,
+**Generell slutsats:** Två okända krafter → lägg vridningspunkten i den enas angreppspunkt och beräkna den andra. Den första kan sedan fås ur kraftjämvikt (eller ur momentlagen med den andra angreppspunkten som vridningspunkt).`,
         },
         {
             level: 1,
-            question: `En låda är $0{,}60\\ \\mathrm{m}$ bred och $0{,}80\\ \\mathrm{m}$ hög med tyngdpunkten i mitten. Den börjar tippas åt sidan kring sin nedre kant. Vid vilken lutningsvinkel välter lådan?
+            question: `En jämntjock bräda med massan $24\\ \\mathrm{kg}$ vilar på två bockar som står lika långt från brädans mitt, en på var sida. Hur stor kraft trycker varje bock uppåt med? ($g = 9{,}82\\ \\mathrm{N/kg}$)`,
+            answer: { value: 118, unit: 'N', tol: 1 },
+            solution: `Tyngdpunkten sitter mitt på brädan, lika långt från båda stöden — då bär stöden **hälften var** av tyngden.
+
+$$ F_\\mathrm{G} = m \\cdot g = 24 \\cdot 9{,}82 = 235{,}68\\ \\mathrm{N} $$
+
+$$ F = \\frac{F_\\mathrm{G}}{2} = \\frac{235{,}68}{2} = 117{,}84\\ \\mathrm{N} \\approx 118\\ \\mathrm{N} $$
+
+**Svar:** Varje bock trycker uppåt med ungefär $118\\ \\mathrm{N}$.
+
+**Generell slutsats:** Symmetri ger lika fördelning. Flyttas tyngdpunkten (eller en last) mot det ena stödet tar det stödet en större del av tyngden — ju närmare tyngdpunkten, desto större kraft.`,
+        },
+
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En $4{,}0\\ \\mathrm{m}$ lång jämntjock planka med massan $30\\ \\mathrm{kg}$ vilar på två stöd: A vid plankans vänstra ände och B $1{,}0\\ \\mathrm{m}$ från högra änden. Hur stor kraft trycker stödet B uppåt med? ($g = 9{,}82\\ \\mathrm{N/kg}$)
+
+${makeBeamSupports({ supports: [{ posFrac: 0, label: 'A' }, { posFrac: 0.75, label: 'B' }], cog: { posFrac: 0.5, label: 'F_G' }, dims: [{ fromFrac: 0, toFrac: 0.5, label: '2,0 m' }, { fromFrac: 0.75, toFrac: 1, label: '1,0 m' }] })}`,
+            answer: { value: 196, unit: 'N', tol: 2 },
+            solution: `Två okända stödkrafter — vi väljer **vridningspunkten i A** så att $F_\\mathrm{A}$ får hävarmen 0 och försvinner ur momentlagen. Kvar står tyngdkraftens moment (medurs) mot $F_\\mathrm{B}$:s moment (moturs):
+
+$$ F_\\mathrm{B} \\cdot l_\\mathrm{B} = F_\\mathrm{G} \\cdot l_\\mathrm{G} \\quad\\Leftrightarrow\\quad F_\\mathrm{B} = \\frac{F_\\mathrm{G} \\cdot l_\\mathrm{G}}{l_\\mathrm{B}} $$
+
+$$
+\\left[ \\begin{array}{l}
+F_\\mathrm{G} = m \\cdot g = 30 \\cdot 9{,}82 = 294{,}6\\ \\mathrm{N} \\\\
+l_\\mathrm{G} = 2{,}0\\ \\mathrm{m}\\ \\text{(A till tyngdpunkten mitt på plankan)} \\\\
+l_\\mathrm{B} = 4{,}0 - 1{,}0 = 3{,}0\\ \\mathrm{m}
+\\end{array} \\right]
+$$
+
+$$ F_\\mathrm{B} = \\frac{294{,}6 \\cdot 2{,}0}{3{,}0} = 196{,}4\\ \\mathrm{N} \\approx 0{,}20\\ \\mathrm{kN} $$
+
+**Svar:** Ungefär $196\\ \\mathrm{N}$ (0,20 kN).
+
+**Generell slutsats:** Kontrollera gärna med kraftjämvikt: $F_\\mathrm{A} = 294{,}6 - 196{,}4 \\approx 98\\ \\mathrm{N}$. B sitter närmare tyngdpunkten än A och bär mycket riktigt den större delen av tyngden.`,
+        },
+        {
+            level: 2,
+            question: `En låda är $0{,}60\\ \\mathrm{m}$ bred och $0{,}80\\ \\mathrm{m}$ hög med tyngdpunkten i mitten. Den tippas sakta åt sidan kring sin nedre kant. Vid vilken lutningsvinkel välter lådan?
 
 ${makeTippingBox({ boxW: 84, boxH: 112, tipArrow: true, gravityLine: true, wLabel: '0,60 m', hLabel: '0,80 m' })}`,
             answer: { value: 37, unit: '°' },
-            solution: `Lådan välter när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Tyngdpunkten ligger $\\tfrac{0{,}60}{2} = 0{,}30\\ \\mathrm{m}$ in från kanten (i sidled) och $\\tfrac{0{,}80}{2} = 0{,}40\\ \\mathrm{m}$ upp. Den kritiska vinkeln *v* uppfyller
+            solution: `Precis som i vältningsdemonstrationen välter lådan när **tyngdpunkten hamnar utanför vridningspunkten** — alltså när tyngdkraftens lodräta riktningslinje genom tyngdpunkten passerar tippkanten. Tyngdpunkten ligger $\\tfrac{0{,}60}{2} = 0{,}30\\ \\mathrm{m}$ in från kanten (i sidled) och $\\tfrac{0{,}80}{2} = 0{,}40\\ \\mathrm{m}$ upp. Den kritiska vinkeln *v* uppfyller
 
 $$ \\tan v = \\frac{0{,}30}{0{,}40} = 0{,}75 $$
 
@@ -12103,74 +12225,27 @@ $$ v = \\arctan(0{,}75) = 37^\\circ $$
 
 **Svar:** Lådan välter om den lutas mer än cirka $37^\\circ$.
 
-**Generell slutsats:** En bred och låg låda (stor bredd, liten höjd) tål större lutning innan den välter. Det är därför en racerbil byggs bred och låg medan en hög, smal bokhylla välter lätt.`,
-        },
-
-        // ── Nivå 2 (C) ───────────────────────────────────────────────
-        {
-            level: 2,
-            question: `Ett skåp väger $25\\ \\mathrm{kg}$, är $1{,}8\\ \\mathrm{m}$ högt och $0{,}50\\ \\mathrm{m}$ brett, med tyngdpunkten i mitten. Hur stor vågrät kraft måste man trycka med högst upp på skåpet för att precis börja välta det kring den främre nederkanten? ($g = 9{,}82\\ \\mathrm{N/kg}$)
-
-${makeTippingBox({ boxW: 44, boxH: 150, push: { label: 'F' }, wLabel: '0,50 m', hLabel: '1,8 m' })}`,
-            answer: { value: 34, unit: 'N' },
-            solution: `Vid vältgränsen råder momentjämvikt kring den främre nederkanten. Tryckkraften *F* verkar högst upp (hävarm = höjden $h$) och tyngdkraften $mg$ verkar i tyngdpunkten (hävarm = halva bredden $w/2$):
-
-$$ F \\cdot h = mg \\cdot \\frac{w}{2} \\quad\\Leftrightarrow\\quad F = \\frac{mg \\cdot w/2}{h} $$
-
-Mätvärden:
-$$
-\\left[ \\begin{array}{l}
-m = 25\\ \\mathrm{kg},\\quad g = 9{,}82\\ \\mathrm{N/kg} \\\\
-w = 0{,}50\\ \\mathrm{m} \\;\\Rightarrow\\; w/2 = 0{,}25\\ \\mathrm{m} \\\\
-h = 1{,}8\\ \\mathrm{m}
-\\end{array} \\right]
-$$
-
-$$ F = \\frac{25 \\cdot 9{,}82 \\cdot 0{,}25}{1{,}8} = 34\\ \\mathrm{N} $$
-
-**Svar:** Det krävs en kraft på ungefär $34\\ \\mathrm{N}$.
-
-**Generell slutsats:** Ju högre upp man trycker (större hävarm) desto mindre kraft krävs. Tyngdkraftens vältmotstånd ges av halva bredden — bredare bas → svårare att välta.`,
-        },
-        {
-            level: 2,
-            question: `En $6{,}0\\ \\mathrm{m}$ lång jämntjock bräda väger $20\\ \\mathrm{kg}$ och sticker ut $2{,}0\\ \\mathrm{m}$ över en bryggkant. Hur långt ut på den utstickande delen kan en vikt på $15\\ \\mathrm{kg}$ placeras innan brädan tippar?
-
-${makeLever({ pivot: { posFrac: 0.667, type: 'edge' }, cog: { posFrac: 0.5, label: 'F_G' }, loads: [{ posFrac: 0.88, kind: 'weight', label: '15 kg' }], dims: [{ fromFrac: 0.667, toFrac: 1, label: '2,0 m' }, { fromFrac: 0.667, toFrac: 0.88, label: 'd', row: 1 }] })}`,
-            answer: { value: 1.3, unit: 'm', tol: 0.03 },
-            solution: `Brädan tippar kring bryggkanten. Brädans tyngdpunkt sitter i mitten, $3{,}0\\ \\mathrm{m}$ från varje ände. Eftersom $4{,}0\\ \\mathrm{m}$ av brädan ligger på bryggan ligger tyngdpunkten $4{,}0 - 3{,}0 = 1{,}0\\ \\mathrm{m}$ **innanför** kanten. Brädans tyngd ger därför ett *kvarhållande* moment kring kanten.
-
-Vikten på den utstickande delen (avstånd *d* från kanten) ger ett *tippande* moment. Brädan tippar när momenten är lika (tyngdfaktorn *g* stryks):
-
-$$ m_\\text{vikt} \\cdot d = m_\\text{bräda} \\cdot 1{,}0 \\quad\\Leftrightarrow\\quad d = \\frac{m_\\text{bräda} \\cdot 1{,}0}{m_\\text{vikt}} = \\frac{20 \\cdot 1{,}0}{15} = 1{,}3\\ \\mathrm{m} $$
-
-**Svar:** Vikten kan placeras högst ungefär $1{,}3\\ \\mathrm{m}$ ut innan brädan tippar.
-
-**Generell slutsats:** Eftersom $1{,}3\\ \\mathrm{m} < 2{,}0\\ \\mathrm{m}$ (överhängets längd) tippar brädan innan vikten når änden. Nyckeln är att brädans egen tyngd, samlad i tyngdpunkten innanför kanten, motverkar tippningen.`,
+**Generell slutsats:** En bred och låg låda tål större lutning innan den välter. Så länge tyngdpunktens lodlinje träffar stödytan står föremålet stabilt — hamnar den utanför faller det.`,
         },
 
         // ── Nivå 3 (A) ───────────────────────────────────────────────
         {
             level: 3,
-            question: `En låda är ett rätblock som väger $60\\ \\mathrm{kg}$, är $0{,}80\\ \\mathrm{m}$ bred och $1{,}5\\ \\mathrm{m}$ hög, med tyngdpunkten i mitten. Friktionstalet mot golvet är $0{,}50$. Man trycker med en växande vågrät kraft högst upp på lådan. **Kommer lådan att glida eller tippa först — och vid vilken kraft sker det?** ($g = 9{,}82\\ \\mathrm{N/kg}$)
+            question: `En $6{,}0\\ \\mathrm{m}$ lång jämntjock bräda med massan $20\\ \\mathrm{kg}$ ligger på två bockar: P står $1{,}5\\ \\mathrm{m}$ från vänstra änden och Q står $2{,}0\\ \\mathrm{m}$ från högra änden. En person med massan $60\\ \\mathrm{kg}$ går sakta ut mot brädans högra ände. **Hur långt förbi stödet Q kan personen gå innan brädan börjar tippa?**
 
-${makeTippingBox({ boxW: 80, boxH: 150, push: { label: 'F' }, friction: true, wLabel: '0,80 m', hLabel: '1,5 m' })}`,
-            answer: { value: 157, unit: 'N' },
-            solution: `Insikten är att det finns **två** möjliga sätt för lådan att börja röra sig — den gör det som kräver *minst* kraft. Vi beräknar gränskraften för vardera och jämför.
+${makeBeamSupports({ width: 500, supports: [{ posFrac: 0.25, label: 'P' }, { posFrac: 0.6667, label: 'Q' }], cog: { posFrac: 0.5, label: 'F_G' }, person: { posFrac: 0.8, label: '60 kg' }, dims: [{ fromFrac: 0.6667, toFrac: 0.8, label: 'd', row: 0 }, { fromFrac: 0, toFrac: 0.25, label: '1,5 m', row: 1 }, { fromFrac: 0.25, toFrac: 0.6667, label: '2,5 m', row: 1 }, { fromFrac: 0.6667, toFrac: 1, label: '2,0 m', row: 1 }] })}`,
+            answer: { value: 0.33, unit: 'm', tol: 0.01 },
+            solution: `Insikten är vad som händer i **tippögonblicket**: brädan lyfter från stödet P, så kraften där blir noll, $F_\\mathrm{P} = 0$. Brädan vrider sig då kring Q — vi väljer alltså **Q som vridningspunkt**, och den okända stödkraften $F_\\mathrm{Q}$ går genom vridningspunkten och försvinner ur momentlagen.
 
-**Glidning** sker när tryckkraften överstiger den maximala friktionskraften:
+Kvar står två moment kring Q: personens tyngd (medurs, hävarm *d*) mot brädans tyngd (moturs). Brädans tyngdpunkt sitter mitt på brädan, $3{,}0\\ \\mathrm{m}$ från vänstra änden — alltså $4{,}0 - 3{,}0 = 1{,}0\\ \\mathrm{m}$ innanför Q. Momentlagen (tyngdfaktorn *g* stryks ur båda led):
 
-$$ F_\\text{glid} = \\mu \\cdot mg = 0{,}50 \\cdot 60 \\cdot 9{,}82 = 295\\ \\mathrm{N} $$
+$$ m_\\text{person} \\cdot d = m_\\text{bräda} \\cdot 1{,}0 $$
 
-**Tippning** kring främre nederkanten sker när tryckkraftens moment (hävarm = höjden) övervinner tyngdkraftens (hävarm = halva bredden):
+$$ d = \\frac{20 \\cdot 1{,}0}{60} = 0{,}33\\ \\mathrm{m} $$
 
-$$ F_\\text{tipp} \\cdot h = mg \\cdot \\frac{w}{2} \\quad\\Leftrightarrow\\quad F_\\text{tipp} = \\frac{mg \\cdot w/2}{h} = \\frac{60 \\cdot 9{,}82 \\cdot 0{,}40}{1{,}5} = 157\\ \\mathrm{N} $$
+**Svar:** Personen kan gå ungefär $0{,}33\\ \\mathrm{m}$ förbi Q innan brädan tippar.
 
-Eftersom $F_\\text{tipp} = 157\\ \\mathrm{N} < F_\\text{glid} = 295\\ \\mathrm{N}$ nås tippgränsen först.
-
-**Svar:** Lådan **tippar** först, vid en kraft på ungefär $157\\ \\mathrm{N}$.
-
-**Generell slutsats:** En hög och smal låda tippar lättare än den glider; en låg och bred (eller ett högt friktionstal) glider lättare än den tippar. Man måste räkna ut *båda* gränskrafterna och jämföra — det går inte att gissa vilken som inträffar först.`,
+**Generell slutsats:** Gränsen för tippning hittas alltid genom att sätta kraften vid det *andra* stödet till noll och lägga vridningspunkten i det stöd föremålet tippar kring. Jämför gärna: står personen kvar innanför Q hjälper stödet P till, och brädan ligger säkert.`,
         },
     ],
 

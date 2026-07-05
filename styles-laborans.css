@@ -2536,6 +2536,106 @@ button.lab-card-disabled { pointer-events: none; }
 .lab-ovning-feedback.is-correct { color: #4a8757; }
 .lab-ovning-feedback.is-wrong { color: var(--lab-accent); }
 
+/* ── Exit ticket (kort förhör per avsnitt) ─────────────────────── */
+.lab-exit {
+    margin-top: 8px;
+}
+
+.lab-exit-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.lab-exit-progress {
+    height: 3px;
+    background: var(--lab-line);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.lab-exit-progress > div {
+    height: 100%;
+    background: var(--lab-accent);
+    transition: width 0.25s ease;
+}
+
+/* Alternativen är <button> (inte <label> som i övningarna) —
+   nollställ knapp-utseendet så de ser ut som övningarnas val. */
+.lab-exit-choice {
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    color: var(--lab-ink);
+}
+
+.lab-exit-choice:disabled { cursor: default; }
+.lab-exit-choice.is-locked:not(.is-correct):not(.is-wrong):not(.is-reveal) {
+    opacity: 0.55;
+}
+.lab-exit-choice.is-locked:hover { background: var(--lab-bg); }
+.lab-exit-choice.is-correct:hover { background: rgba(74, 135, 87, 0.08); }
+.lab-exit-choice.is-wrong:hover { background: rgba(180, 60, 60, 0.06); }
+.lab-exit-choice.is-reveal:hover { background: rgba(74, 135, 87, 0.05); }
+
+.lab-exit-why {
+    margin: -2px 0 6px;
+    padding: 10px 16px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--lab-line);
+    background: var(--lab-bg-panel);
+}
+
+.lab-exit-why.is-wrong { border-left: 3px solid var(--lab-accent); }
+.lab-exit-why.is-right { border-left: 3px solid #4a8757; }
+
+.lab-exit-why-tag {
+    display: block;
+    font-family: var(--lab-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.lab-exit-why.is-wrong .lab-exit-why-tag { color: var(--lab-accent); }
+.lab-exit-why.is-right .lab-exit-why-tag { color: #4a8757; }
+
+.lab-exit-why-text {
+    color: var(--lab-ink);
+    line-height: 1.55;
+    font-size: 15px;
+}
+
+.lab-exit-why-text p { margin: 0; }
+
+.lab-exit-result {
+    padding: 28px 24px;
+    border: 1px solid var(--lab-line-strong);
+    border-radius: 8px;
+    background: var(--lab-bg-panel);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.lab-exit-score {
+    font-family: var(--lab-font-serif, Georgia, serif);
+    font-size: 40px;
+    line-height: 1.1;
+    color: var(--lab-ink);
+}
+
+.lab-exit-verdict {
+    color: var(--lab-ink-soft);
+    line-height: 1.55;
+    margin: 0 0 6px;
+}
+
 .lab-ovning-buttons {
     display: flex;
     gap: 8px;

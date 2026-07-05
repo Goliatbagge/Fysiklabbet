@@ -11009,170 +11009,173 @@
  },
  {
   "id": "fy2-1.2",
-  "title": "Mer kraftmoment — tyngdpunkt och jämvikt",
+  "title": "Mer kraftmoment",
   "course": "Fysik nivå 2",
   "segments": [
    {
-    "t": "Mer kraftmoment — tyngdpunkt och jämvikt"
+    "t": "Mer kraftmoment"
    },
    {
-    "t": "I förra avsnittet såg vi hur en kraft kan ge upphov till ett kraftmoment kring en vridpunkt och hur två motverkande moment kan upphäva varandra till momentjämvikt."
+    "t": "I vissa situationer med momentjämvikt saknas en naturlig vridningspunkt i problemet."
    },
    {
-    "t": "Här fördjupar vi resonemanget med hjälp av begreppen tyngdpunkt och stödyta."
+    "t": "Vridningspunkten kan dock väljas valfritt!"
    },
    {
-    "t": "Tyngdpunkt"
+    "t": "Om vi har två okända krafter som ska beräknas kan vi sätta vridningspunkten vid angreppspunkten hos den ena av krafterna för att få ut den andra — en kraft vars riktningslinje går genom vridningspunkten har hävarmen 0 och ger inget kraftmoment."
    },
    {
-    "t": "Alla föremål har en tyngdpunkt — den punkt där föremålets sammanlagda tyngd kan tänkas verka."
+    "t": "En bra tumregel: ju närmare tyngdpunkten en stödjande eller bärande kraft sitter, desto större del av tyngden bär den upp."
    },
    {
-    "t": "För homogena, symmetriska föremål (en kub, en sfär, en linjal) ligger tyngdpunkten i den geometriska mittpunkten."
+    "t": "Demonstration — Linjalens tyngdpunkt"
    },
    {
-    "t": "För ojämnt formade föremål kan tyngdpunkten ligga utanför själva materialet — till exempel mitt i öppningen på en bumerang."
+    "t": "En linjal placeras horisontellt vilande på två pekfingrar."
    },
    {
-    "t": "Hur hittar man tyngdpunkten?"
+    "t": "Vi drar sakta pekfingrarna mot varandra."
    },
    {
-    "t": "Häng upp ett platt föremål i ett snöre i en valfri punkt."
+    "t": "Eftersom pekfingret närmast linjalens tyngdpunkt ger en större normalkraft blir friktionskraften där också större."
    },
    {
-    "t": "Tyngdpunkten ligger alltid lodrätt under upphängningspunkten."
+    "t": "Då glider pekfingret längst bort från tyngdpunkten, med lägre friktion, lättare — tills det i sin tur kommer närmare tyngdpunkten och det andra pekfingret börjar glida istället."
    },
    {
-    "t": "Häng upp föremålet i en till punkt och rita lodlinjen igen — där linjerna korsar varandra ligger tyngdpunkten."
+    "t": "Detta upprepas, av sig självt, växelvis tills pekfingrarna vidrör varandra."
    },
    {
-    "t": "Tre sorters jämvikt"
+    "t": "Vi har hittat linjalens tyngdpunkt!"
    },
    {
-    "t": "När ett föremål är upphängt eller balanserat påverkas det av tyngdkraften och av en stödkraft från upphängningspunkten."
+    "t": "Exempel 1 — Bräda på två bockar (coulomb)"
    },
    {
-    "t": "Hur föremålet reagerar på en liten störning beror på var tyngdpunkten ligger i förhållande till upphängnings- eller stödpunkten."
+    "t": "En bräda väger 20 kilogram och ligger på två bockar enligt figuren nedan. a) Rita en figur med de krafter som verkar på brädan. b) Beräkna kraften på brädan från den högra bocken. c) Beräkna kraften på brädan från den vänstra bocken."
    },
    {
-    "t": "Stabil, labil och indifferent jämvikt"
+    "t": "a) Ju närmare tyngdpunkten en stödjande eller bärande kraft är, desto större del av tyngden bär den upp."
    },
    {
-    "t": "Stabil jämvikt — föremålet är upphängt över sin tyngdpunkt."
+    "t": "Eftersom tyngdpunkten ligger närmare stödet vid Q än stödet vid P kommer kraften uppåt från bocken vid Q att vara större än kraften uppåt från bocken vid P."
    },
    {
-    "t": "Vid en liten störning återgår det till sitt ursprungsläge."
+    "t": "Krafterna på brädan: stödkrafterna F effekten P och F laddningen Q uppåt vid stöden och tyngdkraften F G nedåt från tyngdpunkten mitt på brädan."
    },
    {
-    "t": "Labil jämvikt — föremålet är \"upphängt\" under sin tyngdpunkt (t.ex. en linjal som balanseras stående på fingertoppen)."
+    "t": "b) Vi ska bestämma kraften från den högra bocken, F laddningen Q ."
    },
    {
-    "t": "Vid minsta störning välter det."
+    "t": "Kraften från den vänstra bocken, F effekten P , är också okänd — men om vi väljer P som vridningspunkt utövar F effekten P inget kraftmoment, eftersom dess riktningslinje går genom vridningspunkten."
    },
    {
-    "t": "Indifferent jämvikt — föremålet är upphängt i sin tyngdpunkt (t.ex. ett hjul på sin axel)."
+    "t": "Se figur."
    },
    {
-    "t": "Det kan rotera fritt och stannar i vilket läge som helst."
+    "t": "Vridningspunkten (röd punkt) väljs i P — då får F effekten P hävarmen 0."
    },
    {
-    "t": "Demonstration — Balansera en linjal"
+    "t": "Hävarmarna l laddningen Q är lika med 2,5 meter och l G är lika med 1,5 meter mäts från P till respektive krafts riktningslinje."
    },
    {
-    "t": "Lägg en linjal vågrätt på fingertoppen och försök hålla den i balans — labil jämvikt."
+    "t": "Momentlagen ger"
    },
    {
-    "t": "Vänd nu linjalen och låt den hänga lodrätt under ett snöre fäst i mitten — stabil jämvikt."
+    "t": "M ett är lika med M två"
    },
    {
-    "t": "Hur lätt är det att rubba balansen i de två fallen?"
+    "t": "F laddningen Q gånger l Q är lika med F G gånger l G"
    },
    {
-    "t": "Stödyta — när välter ett föremål?"
+    "t": "Vi löser ut F laddningen Q och får"
    },
    {
-    "t": "För föremål som står på marken (inte är upphängda) behövs ingen tyngdpunkt ovanför för att de ska vara stabila."
+    "t": "F laddningen Q är lika med F G gånger l G delat med l Q"
    },
    {
-    "t": "Istället gäller en enkel regel:"
+    "t": "F G är lika med massan m gånger tyngdfaktorn g som är lika med 20 gånger 9,82 som är lika med 196,4 newton l G som är lika med 1,5 meter l laddningen Q som är lika med 2,5 meter"
    },
    {
-    "t": "Regel för stabilitet"
+    "t": "F laddningen Q är lika med 196,4 gånger 1,5 delat med 2,5 som är lika med 117,84 newton som är ungefär lika med 120 newton som är lika med 0,12 kilonewton"
    },
    {
-    "t": "Ett föremål är stabilt så länge tyngdkraftens lodräta riktningslinje genom tyngdpunkten faller inom föremålets stödyta."
+    "t": "Svar: 0,12 kilonewton."
    },
    {
-    "t": "Om linjen hamnar utanför stödytan, välter föremålet."
+    "t": "c) Eftersom brädan är i vila kan kraften från den vänstra bocken beräknas med kraftjämvikt: krafterna uppåt från bockarna måste tillsammans vara lika stora som tyngdkraften nedåt."
    },
    {
-    "t": "Stödytan är det område på marken som föremålets kontaktpunkter ringar in."
+    "t": "Tyngdkraften är ungefär 200 newton och kraften från den högra bocken 120 newton, så kraften från den vänstra bocken måste vara parentesen 200 minus 120 slut parentes newton är lika med 80 newton ."
    },
    {
-    "t": "Ett brett stativ med fyra ben har en stor stödyta och är därför svårt att välta; en hög, smal pelare har en liten stödyta och välter lätt."
+    "t": "Men vi beräknar den även med momentlagen, för att visa att det ger samma svar."
    },
    {
-    "t": "Demonstration — Lindansare med gaffel och mynt"
+    "t": "Med Q som vridningspunkt utövar kraften F laddningen Q från den högra bocken inget kraftmoment, eftersom dess riktningslinje går genom vridningspunkten."
    },
    {
-    "t": "En klassisk balansutmaning: stick en gaffel snett nedåt i en kork som vilar på en mynt-kant."
+    "t": "Se figur."
    },
    {
-    "t": "Med rätt placering hänger hela konstruktionen i jämvikt på myntets smala kant."
+    "t": "Vridningspunkten (röd punkt) väljs nu i Q — då får F laddningen Q hävarmen 0."
    },
    {
-    "t": "Trick: gafflarnas vikt sträcker sig långt under stödet, vilket flyttar tyngdpunkten under balanspunkten och ger systemet stabil jämvikt — det vill säga ett pendelliknande beteende som vill återgå till viloläget om man rubbar det."
+    "t": "Hävarmarna l effekten P är lika med 2,5 meter och l G är lika med 1,0 meter mäts från Q till respektive krafts riktningslinje."
    },
    {
-    "t": "::: kuriosa \"Hammare som \"trotsar gravitationen\"\" Det är möjligt att balansera en hammare nästan utanför en bordskant med hjälp av en linjal och ett snöre."
+    "t": "Momentlagen ger"
    },
    {
-    "t": "Konstruktionen flyttar systemets gemensamma tyngdpunkt så att den hamnar lodrätt under bordskanten — då ligger linjeyn genom tyngdpunkten fortfarande inom stödytan (bordet), och allt står stilla trots att det ser ut som att hammaren borde tippa ner."
+    "t": "M ett är lika med M två"
    },
    {
-    "t": "Foto: en hammare hängd snett under en bordskant med hjälp av en linjal som sticker in över bordet och ett snöre."
+    "t": "F G gånger l G är lika med F effekten P gånger l P"
    },
    {
-    "t": "Hammarens huvud pekar inåt under bordet, skaftet snett nedåt-utåt."
+    "t": "Vi löser ut F effekten P och får"
    },
    {
-    "t": "Exempel — när tyngdpunkten räddar dig"
+    "t": "F effekten P är lika med F G gånger l G delat med l P"
    },
    {
-    "t": "Exempel — Den vinklade bokhyllan (coulomb)"
+    "t": "F G är lika med 196,4 newton (sedantidigare) l G som är lika med 1,0 meter l effekten P som är lika med 2,5 meter"
    },
    {
-    "t": "En bokhylla har bredden 30 centimeter och höjden 180 centimeter."
+    "t": "F effekten P är lika med 196,4 gånger 1,0 delat med 2,5 som är lika med 78,56 newton som är ungefär lika med 80 newton"
    },
    {
-    "t": "Hyllan väger 25 kilogram."
+    "t": "Svar: 80 newton."
    },
    {
-    "t": "Tyngdpunkten ligger i hyllans geometriska mitt."
+    "t": "Demonstration — Vältning"
    },
    {
-    "t": "Hyllan börjar luta framåt."
+    "t": "Hur mycket kan man luta på något innan det välter?"
    },
    {
-    "t": "Hur långt kan den lutas innan den välter?"
+    "t": "Vi undersöker det genom att luta en kloss med en metallvisare i tyngdpunkten, som får illustrera tyngdkraftens riktning."
    },
    {
-    "t": "Hyllan välter när tyngdkraftens riktningslinje passerar hyllans främre underkant — alltså när tyngdpunkten ligger rakt över främre kanten."
+    "t": "Vi ser att när tyngdpunkten hamnar utanför vridningspunkten, så välter klossen!"
    },
    {
-    "t": "Tyngdpunktens läge: mitten — alltså 15 centimeter in från framsidan, 90 centimeter upp."
+    "t": "Överkurs — Stabilitet"
    },
    {
-    "t": "Den kritiska vinkeln v uppfyller"
+    "t": "Om ett föremåls tyngdpunkt ligger ovanför stödytan kommer det att vara stabilt och ligga still."
    },
    {
-    "t": "tangens hastigheten v är lika med 15 delat med 90 som är lika med 1 delat med 6"
+    "t": "Om tyngdpunkten ligger utanför stödytan kommer föremålet att vara i obalans och falla."
    },
    {
-    "t": "hastigheten v är lika med arctan parentesen 1 delat med 6 slut parentes som är lika med 9,462 ldots grader som är ungefär lika med 9,5 grader"
+    "t": "Stödytan är det område som föremålets kontaktpunkter mot underlaget ringar in — och det avgörande är var tyngdpunktens lodräta riktningslinje träffar marken."
    },
    {
-    "t": "Svar: Hyllan välter om den lutas mer än cirka 9,5 grader framåt."
+    "t": "Tyngdpunkten (grön punkt) är utanför stödytan (lila) och bilen kommer att falla."
+   },
+   {
+    "t": "Föraren hoppar bakåt i bilen så att tyngdpunkten hamnar ovanför stödytan — bilen blir kvar på kanten."
    }
   ]
  },

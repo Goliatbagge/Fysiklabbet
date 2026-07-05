@@ -24,6 +24,13 @@ node .claude/verify-no-white-outline.js
 # i kanterna (KÖR FÖRE COMMIT!)
 node .claude/verify-figur-bounds.js
 
+# Verifiera exit tickets efter ändringar i data/exittickets.js (KÖR FÖRE
+# COMMIT!) — syntax, täckning mot katalogen, choices/why-längder, emoji,
+# tappade KaTeX-backslash. Dataformatet dokumenteras i filens huvud;
+# why[correct] = varför rätt, övriga = varför fel; förklaringar får inte
+# börja med "Rätt!"/"Fel!" (UI:t sätter etiketterna).
+node .claude/verify-exittickets.js
+
 # Bygg teori-bundle efter ändringar i data/teori/*.md (KÖR FÖRE COMMIT!)
 node data/teori/build.js
 
@@ -55,6 +62,32 @@ du köra `node data/teori/build.js`** — annars ser sidan fortfarande gamla
 texten. Vanlig fälla: man fixar en typografisk detalj, laddar om sidan,
 ser fortfarande felet, och tror att fixet inte fungerade. Ingen
 auto-reload; lägg det som rutin efter md-redigeringar.
+
+## ⚠️ KRITISK: Uppdateringskedja när teoriinnehåll ändras
+
+**En ändring i en teorigenomgång (`data/teori/*.md`) är ALDRIG klar med bara
+md-filen.** Övningar, exit tickets och uppläsning bygger alla på genomgångens
+innehåll — ändras teorin utan att de följer med testar/uppläser sajten stoff
+som inte längre finns. Gå därför igenom hela kedjan i samma arbetspass, varje
+gång innehåll skrivs om, läggs till, tas bort eller byter titel (gäller även
+när en genomgång byggs om från en ny PDF i `Genomgångar/`):
+
+1. **Teori-bundle**: `node data/teori/build.js` (se avsnittet ovan).
+2. **Övningar** — `data/ovningar.js`, nyckel = teori-id (t.ex. `'fy2-1.2'`).
+   Uppgifterna ska spegla det NYA innehållet (3 N1 + 2 N2 + 1 N3, se
+   `OVNINGAR.md`); ta bort/ersätt uppgifter som testar borttaget stoff.
+3. **Exit tickets** — `data/exittickets.js`, samma id. Frågorna ska förhöra
+   det nya innehållet. Kör `node .claude/verify-exittickets.js`.
+4. **Uppläsning (TTS)** — `node data/tts/build-manus.js` +
+   `python data/tts/generate-audio.py` (dev-server på port 8000 krävs).
+   Inkrementellt: bara ändrade manus genereras om.
+5. **Simuleringar + katalog** — grep på avsnittets ämnesord i
+   `data/katalog.js`, `index.html` och `fysikN-*.html`: stämmer beteckningar,
+   formler och beskrivningar fortfarande med den nya genomgången?
+6. **Angränsande teoriavsnitt** — grep i `data/teori/` efter hänvisningar
+   till avsnittet ("förra avsnittet", gamla titeln, begrepp som flyttats).
+7. **Verifierare före commit**: `node .claude/verify-figur-bounds.js` och
+   `node .claude/verify-no-white-outline.js` om figurer ändrats.
 
 ## ⚠️ KRITISK: Navigation i ALLA HTML-filer
 

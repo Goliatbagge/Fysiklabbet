@@ -29,6 +29,7 @@
     <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/ovningar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/exittickets.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -42,6 +43,7 @@
         const KF = window.KATALOG_FLAT;
         const TEORI = window.TEORI || {};
         const OVNINGAR = window.OVNINGAR || {};
+        const EXITTICKETS = window.EXITTICKETS || {};
 
         // --- Skydda math-block ($$..$$ och $..$) från markdown-parsern.
         // Annars tolkar marked LaTeX-escape som \; \, \! och dyl. som vanlig
@@ -1307,6 +1309,137 @@
             );
         }
 
+        // ── Exit ticket ─────────────────────────────────────────────
+        // Kort förhör på avsnittets viktigaste grunder. En fråga i taget;
+        // eleven klickar direkt på det alternativ hen tror är rätt. Vid fel
+        // visas en förklaring till varför det valda alternativet är fel,
+        // och därefter markeras det rätta alternativet med sin förklaring.
+        function ExitTicket({ id, onStudyAgain }) {
+            const questions = EXITTICKETS[id] || [];
+            const [idx, setIdx] = useState(0);
+            const [picked, setPicked] = useState(null);  // låst val för aktuell fråga
+            const [score, setScore] = useState(0);
+            const [done, setDone] = useState(false);
+            const topRef = useRef(null);
+
+            // Nollställ när avsnittet byts.
+            useEffect(() => {
+                setIdx(0); setPicked(null); setScore(0); setDone(false);
+            }, [id]);
+
+            if (questions.length === 0) {
+                return (
+                    <div className="lab-block lab-block-bild" style={{ marginTop: 8 }}>
+                        <em>Exit ticket kommer snart för det här avsnittet.</em>
+                    </div>
+                );
+            }
+
+            const total = questions.length;
+            const q = questions[Math.min(idx, total - 1)];
+            const answered = picked !== null;
+            const isLast = idx === total - 1;
+
+            const pick = (i) => {
+                if (answered) return;
+                setPicked(i);
+                if (i === q.correct) setScore(s => s + 1);
+            };
+            const goNext = () => {
+                if (!answered) return;
+                if (isLast) { setDone(true); }
+                else { setIdx(i => i + 1); setPicked(null); }
+                requestAnimationFrame(() => {
+                    const el = topRef.current;
+                    if (!el) return;
+                    const r = el.getBoundingClientRect();
+                    if (r.top < 0) window.scrollTo({ top: r.top + window.scrollY - 16, behavior: 'auto' });
+                });
+            };
+            const restart = () => {
+                setIdx(0); setPicked(null); setScore(0); setDone(false);
+            };
+
+            if (done) {
+                const frac = score / total;
+                const verdict = frac === 1 ? 'Alla rätt — du har koll på grunderna i avsnittet!'
+                    : frac >= 0.8 ? 'Starkt! Du har koll på det mesta — titta en extra gång på det du missade.'
+                    : frac >= 0.5 ? 'En bra bit på väg. Läs gärna igenom teorin igen och gör om förhöret.'
+                    : 'Det här avsnittet sitter inte riktigt än — läs teorin en gång till och försök igen.';
+                return (
+                    <div className="lab-exit" ref={topRef}>
+                        <div className="lab-exit-result">
+                            <span className="lab-mono-label">Exit ticket · Resultat</span>
+                            <div className="lab-exit-score">{score} / {total} rätt</div>
+                            <p className="lab-exit-verdict">{verdict}</p>
+                            <div className="lab-ovning-buttons">
+                                <button type="button" className="lab-btn lab-btn-primary" onClick={restart}>
+                                    Gör om förhöret
+                                </button>
+                                <button type="button" className="lab-btn lab-btn-quiet" onClick={onStudyAgain}>
+                                    Läs teorin igen
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="lab-exit" ref={topRef}>
+                    <div className="lab-exit-head">
+                        <span className="lab-mono-label">Exit ticket · Fråga {idx + 1} / {total}</span>
+                        <span className="lab-mono-label">{score} rätt hittills</span>
+                    </div>
+                    <div className="lab-exit-progress" aria-hidden="true">
+                        <div style={{ width: ((idx + (answered ? 1 : 0)) / total) * 100 + '%' }} />
+                    </div>
+                    <div className="lab-exit-question">
+                        <MarkdownBody source={q.question} className="lab-ovning-question" />
+                        <div className="lab-ovning-choices">
+                            {q.choices.map((choice, i) => {
+                                const isCorrectChoice = i === q.correct;
+                                let cls = 'lab-ovning-choice lab-exit-choice';
+                                if (answered) {
+                                    cls += ' is-locked';
+                                    if (i === picked && isCorrectChoice) cls += ' is-correct';
+                                    else if (i === picked) cls += ' is-wrong';
+                                    else if (isCorrectChoice) cls += ' is-reveal';
+                                }
+                                // Förklaring visas för det valda alternativet och
+                                // (vid fel svar) även för det rätta.
+                                const showWhy = answered && (i === picked || (picked !== q.correct && isCorrectChoice));
+                                return (
+                                    <React.Fragment key={i}>
+                                        <button type="button" className={cls} onClick={() => pick(i)}
+                                            disabled={answered} aria-pressed={picked === i}>
+                                            <span className="lab-ovning-choice-marker">{String.fromCharCode(65 + i)}</span>
+                                            <MarkdownBody source={choice} className="lab-ovning-choice-text" />
+                                        </button>
+                                        {showWhy && (
+                                            <div className={'lab-exit-why' + (isCorrectChoice ? ' is-right' : ' is-wrong')}>
+                                                <span className="lab-exit-why-tag">
+                                                    {isCorrectChoice ? 'Rätt svar' : 'Därför är det fel'}
+                                                </span>
+                                                <MarkdownBody source={q.why[i]} className="lab-exit-why-text" />
+                                            </div>
+                                        )}
+                                    </React.Fragment>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className="lab-ovning-buttons">
+                        <button type="button" className="lab-btn lab-btn-primary"
+                            onClick={goNext} disabled={!answered}
+                            style={!answered ? { opacity: 0.4, cursor: 'not-allowed' } : null}>
+                            {isLast ? 'Visa resultat' : 'Nästa fråga →'}
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
         function Catalog({ state, setState }) {
             const { subject, course, chapter, section } = state;
             const subjectData = K[subject] || {};
@@ -1322,6 +1455,7 @@
             const tid = activeSection ? teoriId(course, activeSection.num) : null;
             const hasTeori = tid && TEORI[tid];
             const hasOvningar = tid && OVNINGAR[tid] && OVNINGAR[tid].length > 0;
+            const hasExit = tid && EXITTICKETS[tid] && EXITTICKETS[tid].length > 0;
 
             // View-tab: 'teori' eller 'ovningar' (Simulering öppnar extern länk).
             // Ligger i top-state så att hashen (#fy2-1.5:ovningar) kan djuplänka hit.
@@ -1456,6 +1590,21 @@
                                                             {hasTeori ? 'Genomgång' : 'Kommer snart'}
                                                         </div>
                                                     </button>
+                                                    {hasExit ? (
+                                                        <button type="button"
+                                                            className={'lab-card ' + (view === 'exitticket' ? 'lab-card-active' : 'lab-card-clickable')}
+                                                            onClick={() => setView('exitticket')}>
+                                                            <div className="lab-card-tag">Koll</div>
+                                                            <div className="lab-card-title">Exit ticket</div>
+                                                            <div className="lab-card-meta">{EXITTICKETS[tid].length} frågor</div>
+                                                        </button>
+                                                    ) : (
+                                                        <div className="lab-card lab-card-disabled">
+                                                            <div className="lab-card-tag">Koll</div>
+                                                            <div className="lab-card-title">Exit ticket</div>
+                                                            <div className="lab-card-meta">Kommer snart</div>
+                                                        </div>
+                                                    )}
                                                     {activeSection.href ? (
                                                         <a className="lab-card lab-card-clickable" href={activeSection.href}>
                                                             <div className="lab-card-tag">Experiment</div>
@@ -1552,6 +1701,7 @@
                                                         onClose={() => setPresenting(false)} />
                                                 )}
                                                 {view === 'ovningar' && <Ovningar id={tid} />}
+                                                {view === 'exitticket' && <ExitTicket id={tid} onStudyAgain={() => setView('teori')} />}
 
                                                 <div className="lab-section-actions" style={{ marginTop: 32, paddingTop: 14, borderTop: '1px solid var(--lab-line)' }}>
                                                     {activeSection.href && (
@@ -1631,7 +1781,7 @@
             }
 
             const hash = (window.location.hash || '').replace(/^#/, '');
-            const m = hash.match(/^fy([12])(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar))?$/);
+            const m = hash.match(/^fy([12])(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar|exitticket))?$/);
             if (m && m[4]) out.view = m[4];
             if (m) {
                 const courseKey = m[1] === '1' ? 'Fysik nivå 1' : 'Fysik nivå 2';

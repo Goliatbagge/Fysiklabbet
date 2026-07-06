@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-06 | `2026-07-06-aldsta-kvasarerna` | Euclid hittar de mest avlägsna kvasarerna som någonsin bekräftats | ESA (Euclid, pressmeddelande) / Phys.org / Astronomy & Astrophysics (D. Yang et al. 2026) |
 | 2026-07-05 | `2026-07-05-super-puff-planeter` | Två jätteplaneter visar sig vara lättare än sockervadd | NASA (TESS-uppdraget) / University of Oxford / Phys.org / MNRAS (arXiv:2606.30016) |
 | 2026-07-04 | `2026-07-04-solstorm-norrsken` | En kraftig solstorm har nått jorden — chans till norrsken över stora delar av Sverige i sommarnatten | NASA (Solar Cycle 25-bloggen) / NOAA SWPC / The Watchers |
 | 2026-07-03 | `2026-07-03-vintergatans-spiralarmar` | Ekon av röntgenljus visar att Vintergatans yttre spiralarmar ligger längre bort än vi trott | NASA (Chandra) / ESA (XMM-Newton) / Phys.org / Astronomy & Astrophysics |

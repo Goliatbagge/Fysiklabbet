@@ -14,6 +14,26 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-06) — kan tas upp senare
+
+- **Största gravitationsvågskatalogen någonsin: 390 detektioner, 161 nya
+  svarta hål-kollisioner** — LIGO/Virgo/KAGRA-samarbetet (GWTC) har släppt en
+  ny katalog med bland annat den hittills tydligaste gravitationsvågssignalen
+  och den mest exakt lokaliserade sammanslagningen. Utmärkt vinkel för Fysik 2
+  (gravitation, vågor, svarta hål) men redan cirka två veckor gammal (kring
+  2026-06-25) — kolla om LVK eller ScienceDaily publicerat en färskare notis
+  innan den används. Källa: https://www.sciencedaily.com/releases/2026/06/260625060203.htm
+  (tillagd 2026-07-06)
+- **JWST hittar en ny stavgalax vid rödförskjutning z≈5** (M1149-BSG-z5) —
+  bra Fysik 2-vinkel (rödförskjutning, galaxstruktur) men mindre spännande/
+  konkret för gymnasienivå än kvasarnyheten som valdes idag. Källa: phys.org
+  (sök "JWST barred spiral galaxy M1149"). (tillagd 2026-07-06)
+- **KRISS rumstempererad enfotonkälla i ett 19-tums rack** — trevlig kvantoptik/
+  metrologi-vinkel, men vi har haft flera kvantoptik/enfotonkälle-nyheter
+  senaste veckorna (plug-and-play enfotonkälla 2026-07-03) — spara till det
+  svalnat. Källa: https://phys.org/news/2026-07-play-photon-source-room-temperature.html
+  (tillagd 2026-07-06)
+
 ## Fynd som inte användes (2026-07-04) — kan tas upp senare
 
 - **Optiska fibrer under havet avslöjar tysta valars rörelser** — forskare

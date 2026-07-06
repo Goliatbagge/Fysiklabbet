@@ -156,6 +156,86 @@ Gör så här, varje gång:
 4. **Vid minsta avvikelse mellan din sim och genomgången → rätta sim:en**,
    inte genomgången (om inte användaren uttryckligen ber om motsatsen).
 
+## Interaktiva grafer i teorin (`::: graf`)
+
+**REGEL: När en teorigenomgång handlar om hur en eller flera parametrar
+formar en graf ska du bädda in en interaktiv grafritare (`::: graf`) direkt
+i genomgången — inte bara en statisk figur.** Eleven/läraren ska kunna dra i
+glidare (eller skriva i sifferfält) och se grafen ändras live. Det gäller
+`::: graf` för alla kurser (matematik och fysik) och ska ske **automatiskt**
+när nya graf-tunga avsnitt läggs in.
+
+**Bädda in när avsnittet bygger på "parameter → grafens utseende", t.ex.:**
+- räta linjer (`y = kx + m` — lutning och m-värde),
+- proportionalitet (`y = kx`),
+- andragradsfunktioner/parabler (`y = ax² + bx + c`),
+- exponential- och potensfunktioner (`y = C·a^x`, `y = C·x^n`),
+- trigonometriska funktioner (amplitud, period, fasförskjutning),
+- fysik-samband som ritas som graf (v–t, s–t, sönderfall, svängningar).
+
+**Hoppa över när** avsnittet inte handlar om en parametriserad graf (ren
+räkning, definitioner, geometri utan funktionsgraf).
+
+### Syntax
+
+Blocket skrivs i `.md`-filen och byggs av `graf.js`
+(`window.FYSIKGRAF.mountAll`), som kopplas in efter render i både
+`katalog.html`, `avsnitt.html` och presentationsläget:
+
+```
+::: graf
+titel: y = kx + m
+uttryck: k*x + m
+ekvation: y = {k}x + {m}
+lutningstriangel: ja
+k: -2, -5, 5, 0.5
+m: 3, -10, 10, 1
+x: -6, 6
+y: -6, 6
+:::
+```
+
+- `titel:` — KaTeX-etikett ovanför grafen (valfritt; `$` behövs ej, hela
+  raden tolkas som matte så variabler blir kursiva).
+- `uttryck:` — **obligatoriskt.** Maskin-uttrycket i `x` och parametrarna,
+  med `.` som decimaltecken. Stöder `+ - * / ^`, parenteser, unärt minus och
+  funktionerna `sin cos tan asin acos atan sqrt abs exp ln log sign` samt
+  konstanterna `pi` och `e`. (`·` och `−` tolereras och normaliseras.)
+- `ekvation:` — KaTeX-mall med `{param}`-platshållare. Visas under grafen
+  **med aktuella värden insatta, live** (blå som kurvan). Städas automatiskt:
+  `+ -3` → `- 3`, `1x` → `x`, `0x + 3` → `3`, `+ 0` tas bort. **Använd
+  nästan alltid detta** — kopplingen "allmän form ovanför, konkret ekvation
+  under" är kärnpedagogiken. (Utan `ekvation:` visas i stället värde-chips.)
+- `lutningstriangel: ja` — streckat "trappsteg" från y-skärningen: 1 steg åt
+  höger, Δy steg upp/ner (för räta linjer = `k`), med etiketter. Får
+  automatiskt en kryssruta "Visa trappsteget" i widgetens footer. Använd på
+  avsnitt om räta linjer/lutning.
+- `<param>:` — en glidare per parameter: `värde, min, max[, steg]`. Utan
+  fjärde värdet gissas ett rimligt steg. Parameternamnen måste matcha dem i
+  `uttryck:`.
+- `x:` / `y:` — STARTfönster `min, max` (valfritt, standard `-6, 6`; det
+  ger stödlinjer för varje heltalssteg i startläget — behåll den storleks-
+  ordningen om inte kurvan kräver annat).
+  Rutnätet är ALLTID symmetriskt (1 enhet i x-led = 1 enhet i y-led,
+  kvadratiska rutor), så skalan sätts så att BÅDA intervallen ryms — den
+  rymligare riktningen får luft. Panorering (dra i rutnätet, touch/pinch)
+  och zoom (mushjul över rutnätet, +/−-knappar) är inbyggt; användaren kan
+  alltid flytta vyn själv, så fönstret behöver bara vara en rimlig start.
+
+**Konventioner:** parameternamn med **en bokstav** (`k`, `m`, `a`, `b`, `c`,
+`A`, `T`) speglar genomgångens beteckningar exakt (samma synk-regel som för
+simuleringar). Låt en parameters default matcha ett exempel som redan står i
+avsnittet, så eleven kan "spela upp" exemplet i verktyget. Widgeten ritar
+själv koordinatsystem i papperstemat (ink-axlar med pilspetsar, blå kurva,
+röd prick i `y`-skärningen) — du behöver inte rita någon SVG.
+
+**Byggkedja:** `::: graf`-block skyddas i `data/teori/build.js` (rörs ej av
+NBSP/term-transformer) och hoppas över av uppläsningen (config läses aldrig
+upp). Efter att du lagt in ett block: kör `node data/teori/build.js` som
+vanligt. Ingen TTS-omgenerering behövs för själva grafen (den ger ingen
+uppläsningstext), men omgivande brödtext följer den vanliga
+uppdateringskedjan.
+
 ## Projektstruktur
 
 ```

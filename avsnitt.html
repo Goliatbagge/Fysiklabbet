@@ -25,6 +25,7 @@
 
     <script>document.write('<scr' + 'ipt src="data/katalog.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="graf.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -218,6 +219,22 @@
 
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
+                // ::: graf — interaktiv grafritare. Samla config-raderna och
+                // gör om till en mount-placeholder (graf.js bygger widgeten).
+                const grafOpen = line.match(/^:::\s*graf\s*$/i);
+                if (grafOpen) {
+                    const cfgLines = [];
+                    let j = i + 1;
+                    for (; j < lines.length; j++) {
+                        if (/^:::\s*$/.test(lines[j])) break;
+                        cfgLines.push(lines[j]);
+                    }
+                    const src = cfgLines.join('\n');
+                    const b64 = btoa(unescape(encodeURIComponent(src)));
+                    out.push('<div class="lab-graf" data-graf-src="' + b64 + '"></div>');
+                    i = j; // hoppa förbi det avslutande :::
+                    continue;
+                }
                 const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
                 const close = line.match(/^:::\s*$/);
 
@@ -373,6 +390,8 @@
                     ],
                     throwOnError: false,
                 });
+                // Interaktiva grafer (::: graf) — bygg widgetarna.
+                if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(containerRef.current);
                 const root = containerRef.current;
                 const fit = () => fitMathDisplays(root);
                 let cancelled = false;

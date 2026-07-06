@@ -54,3 +54,28 @@ Till sist förbinder vi punkterna med en rät linje och vi får då vår graf:
 Grafen till $y = -2x + 3$ — en rät linje som lutar nedåt.
 :::
 :::
+
+Det är precis det här som de digitala hjälpmedlen gör åt dig — fast på ett
+ögonblick. Dra i reglagen nedan och se direkt hur talet framför $x$
+(lutningen $k$) och den konstanta termen ($m$) ändrar linjens utseende. Sätt
+$k = -2$ och $m = 3$ så får du tillbaka grafen från exemplet ovan.
+
+::: graf
+titel: y = kx + m
+uttryck: k*x + m
+ekvation: y = {k}x + {m}
+lutningstriangel: ja
+k: -2, -5, 5, 0.5
+m: 3, -10, 10, 1
+x: -6, 6
+y: -6, 6
+:::
+
+Testa att låta $m$ vara oförändrad medan du drar i $k$: linjen vrider sig
+kring samma punkt på $y$-axeln. Ändrar du i stället $m$ flyttas hela linjen
+rakt upp eller ner. Den röda pricken visar var linjen skär $y$-axeln — den
+ligger alltid i höjd med värdet på $m$. Det streckade trappsteget visar
+lutningen: går vi **ett steg åt höger** längs linjen, så går vi samtidigt
+**$k$ steg uppåt eller nedåt**. Du kan också dra i rutnätet för att flytta
+dig i koordinatsystemet och zooma med mushjulet (eller knapparna uppe till
+höger).

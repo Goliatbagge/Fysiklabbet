@@ -24787,6 +24787,12 @@
     "t": "k är lika med y delat med x"
    },
    {
+    "t": "Undersök själv: dra i reglaget för k och se hur proportionalitetens graf ändras."
+   },
+   {
+    "t": "Lägg märke till att linjen alltid går genom origo — oavsett värdet på k ."
+   },
+   {
     "t": "Exempel 1 — Tanka mopeden"
    },
    {
@@ -25044,6 +25050,15 @@
     "t": "k är lika med trappstegets höjd delat med trappstegets längd som är lika med förändring i y -led delat med förändring i x -led som är lika med delta y delat med delta x"
    },
    {
+    "t": "Figurerna ovan visade tre linjer i taget — undersök i stället själv genom att dra i k och m nedan."
+   },
+   {
+    "t": "Det streckade trappsteget har längden 1, så trappstegets höjd är alltid lika med k ."
+   },
+   {
+    "t": "Startläget visar y är lika med 2 x plus 1 från figurerna ovan."
+   },
+   {
     "t": "Exempel 1 — Bestäm linjens ekvation"
    },
    {
@@ -25118,6 +25133,12 @@
    },
    {
     "t": "k är lika med trappstegets höjd delat med trappstegets längd som är lika med förändring i y -led delat med förändring i x -led som är lika med delta y delat med delta x, ekvation 1"
+   },
+   {
+    "t": "Undersök själv: i grafen nedan har trappsteget längden delta x är lika med 1 , så trappstegets höjd är precis delta y är lika med k ."
+   },
+   {
+    "t": "Dra i reglagen och se hur trappsteget följer linjens lutning."
    },
    {
     "t": "Om vi vill beräkna k -värdet utifrån två punkter på linjen parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes utan att rita upp den kan vi göra det med en annan formel."
@@ -25929,6 +25950,15 @@
     "t": "Kan t.ex. beskriva radioaktivt sönderfall."
    },
    {
+    "t": "Undersök själv hur C och a formar exponentialfunktionen."
+   },
+   {
+    "t": "Den röda pricken visar skärningen med y-axeln — den ligger alltid i höjd med C , eftersom y är lika med C gånger a upphöjt till 0 som är lika med C när x är lika med 0 ."
+   },
+   {
+    "t": "Prova värden på förändringsfaktorn a både över och under 1."
+   },
+   {
     "t": "Exempel 3 — Vilken funktion är uppritad?"
    },
    {
@@ -26018,6 +26048,12 @@
    },
    {
     "t": "y är lika med x upphöjt till 1 delat med 2 som är lika med roten ur x"
+   },
+   {
+    "t": "Undersök själv: prova olika värden på exponenten a (t.ex. 2, 3 eller −1) och konstanten C och se hur grafens form ändras."
+   },
+   {
+    "t": "Startläget visar y är lika med x i kvadrat ."
    },
    {
     "t": "Exempel 1 — Funktionsvärde och ekvation"

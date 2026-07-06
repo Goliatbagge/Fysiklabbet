@@ -26,6 +26,21 @@ k = \frac{\text{trappstegets höjd}}{\text{trappstegets längd}}
 = \frac{\Delta y}{\Delta x} \quad (1)
 $$
 
+Undersök själv: i grafen nedan har trappsteget längden $\Delta x = 1$, så
+trappstegets höjd är precis $\Delta y = k$. Dra i reglagen och se hur
+trappsteget följer linjens lutning.
+
+::: graf
+titel: y = kx + m
+uttryck: k*x + m
+ekvation: y = {k}x + {m}
+lutningstriangel: ja
+k: 0.5, -4, 4, 0.5
+m: 2, -5, 5, 1
+x: -6, 6
+y: -6, 6
+:::
+
 Om vi vill beräkna $k$-värdet utifrån två punkter på linjen $(x_1, y_1)$
 och $(x_2, y_2)$ utan att rita upp den kan vi göra det med en annan
 formel. Förändringen i y-led $\Delta y$ fås av differensen mellan två

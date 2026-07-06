@@ -1,8 +1,8 @@
 {
  "id": "ma1c-4.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "b7c9fbf452187fceb3c5cbba36661acd573b129b",
- "dur": 206.57,
+ "hash": "029eab702695f8a0293908f1206c817cd4b8df1e",
+ "dur": 217.88,
  "segments": [
   {
    "t": "Proportionalitet",
@@ -92,107 +92,117 @@
   {
    "t": "k är lika med y delat med x",
    "s": 77.67,
-   "e": 82.46
+   "e": 85.4
+  },
+  {
+   "t": "Undersök själv: dra i reglaget för k och se hur proportionalitetens graf ändras.",
+   "s": 77.67,
+   "e": 85.4
+  },
+  {
+   "t": "Lägg märke till att linjen alltid går genom origo — oavsett värdet på k .",
+   "s": 85.4,
+   "e": 90.62
   },
   {
    "t": "Exempel 1 — Tanka mopeden",
-   "s": 77.67,
-   "e": 82.46
+   "s": 90.62,
+   "e": 93.75
   },
   {
    "t": "Fabian tankar sin moped med bensin för 20,00 kronor/liter.",
-   "s": 82.46,
-   "e": 88.53
+   "s": 93.75,
+   "e": 99.88
   },
   {
    "t": "Visa sambandet mellan kostnaden y kr och mängden bensin x liter han tankar med en. a) formel, och ange proportionalitetskonstanten b) värdetabell c) graf.",
-   "s": 88.53,
-   "e": 101.71
+   "s": 99.88,
+   "e": 113.01
   },
   {
    "t": "a) Eftersom literpriset 20,00 kronor ska multipliceras med varje liter x han tankar för att få kostnaden måste termen 20,00 x finnas med.",
-   "s": 101.71,
-   "e": 112.39
+   "s": 113.01,
+   "e": 123.69
   },
   {
    "t": "Vi har inget startvärde/ingen startavgift eller liknande, så ingen konstantterm ska finnas med i formeln för kostnaden.",
-   "s": 112.39,
-   "e": 120.15
+   "s": 123.69,
+   "e": 131.45
   },
   {
    "t": "Svar: y är lika med 20,00 x och proportionalitetskonstanten är 20,00.",
-   "s": 120.15,
-   "e": 127.29
+   "s": 131.45,
+   "e": 138.59
   },
   {
    "t": "b) Utifrån formeln ovan kan vi göra en värdetabell.",
-   "s": 127.29,
-   "e": 131.79
+   "s": 138.59,
+   "e": 143.09
   },
   {
    "t": "Vi gör en kolumn för antalet liter bensin x och en för motsvarande kostnad y och fyller i några värden:",
-   "s": 131.79,
-   "e": 142.29
+   "s": 143.09,
+   "e": 153.59
   },
   {
    "t": "c) Utifrån värdetabellen ovan kan vi rita upp en graf.",
-   "s": 131.79,
-   "e": 142.29
+   "s": 143.09,
+   "e": 153.59
   },
   {
    "t": "Vi ritar upp ett koordinatsystem och prickar in motsvarande punkter (0, 0), (5, 100), (10, 200), (15, 300) och (20, 400).",
-   "s": 142.29,
-   "e": 155.62
+   "s": 153.59,
+   "e": 166.93
   },
   {
    "t": "Vi behöver en x-axel som sträcker sig till 20 och en y-axel som sträcker sig till 400:",
-   "s": 155.62,
-   "e": 170.55
+   "s": 166.93,
+   "e": 181.85
   },
   {
    "t": "Därefter förbinder vi punkterna med en rät linje, vilket ger vår graf:",
-   "s": 155.62,
-   "e": 170.55
+   "s": 166.93,
+   "e": 181.85
   },
   {
    "t": "Grafen till proportionaliteten y är lika med 20 x är en rät linje genom origo.",
-   "s": 155.62,
-   "e": 170.55
+   "s": 166.93,
+   "e": 181.85
   },
   {
    "t": "Exempel 2 — Vilka grafer visar proportionalitet?",
-   "s": 170.55,
-   "e": 174.91
+   "s": 181.85,
+   "e": 186.21
   },
   {
    "t": "Vilken eller vilka av graferna nedan visar en proportionalitet?",
-   "s": 174.91,
-   "e": 179.96
+   "s": 186.21,
+   "e": 191.26
   },
   {
    "t": "För att grafen ska motsvara en proportionalitet ska den vara en rät linje OCH gå genom origo.",
-   "s": 179.96,
-   "e": 186.35
+   "s": 191.26,
+   "e": 197.65
   },
   {
    "t": "Graf B är en rät linje, men går inte genom origo och är därför inte en proportionalitet.",
-   "s": 186.35,
-   "e": 192.99
+   "s": 197.65,
+   "e": 204.29
   },
   {
    "t": "Graf C går visserligen genom origo, men är inte en rät linje och därför inte en proportionalitet.",
-   "s": 192.99,
-   "e": 199.82
+   "s": 204.29,
+   "e": 211.12
   },
   {
    "t": "Endast graf A uppfyller kriterierna för en proportionalitet.",
-   "s": 199.82,
-   "e": 204.46
+   "s": 211.12,
+   "e": 215.76
   },
   {
    "t": "Svar: A",
-   "s": 204.46,
-   "e": 206.57
+   "s": 215.76,
+   "e": 217.88
   }
  ]
 }

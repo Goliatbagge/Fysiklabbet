@@ -87,6 +87,22 @@ k = \frac{\text{trappstegets höjd}}{\text{trappstegets längd}}
 $$
 :::
 
+Figurerna ovan visade tre linjer i taget — undersök i stället själv genom
+att dra i $k$ och $m$ nedan. Det streckade trappsteget har längden 1, så
+trappstegets höjd är alltid lika med $k$. Startläget visar $y = 2x + 1$
+från figurerna ovan.
+
+::: graf
+titel: y = kx + m
+uttryck: k*x + m
+ekvation: y = {k}x + {m}
+lutningstriangel: ja
+k: 2, -5, 5, 0.5
+m: 1, -6, 6, 1
+x: -6, 6
+y: -6, 6
+:::
+
 ::: exempel "Exempel 1 — Bestäm linjens ekvation"
 **Bestäm ekvationen för linjen nedan.**
 

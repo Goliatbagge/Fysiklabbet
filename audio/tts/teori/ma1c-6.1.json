@@ -1,0 +1,263 @@
+{
+ "id": "ma1c-6.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "244ccf6f4f1481b89c1904b2daf55e3d968c7139",
+ "dur": 243.53,
+ "segments": [
+  {
+   "t": "Tangens för en vinkel",
+   "s": 0.1,
+   "e": 2.66
+  },
+  {
+   "t": "För att beräkna sidor och vinklar i trianglar kan vi använda oss av de trigonometriska funktionerna.",
+   "s": 2.61,
+   "e": 8.93
+  },
+  {
+   "t": "De vanligaste är tangens (tan), sinus (sin) och cosinus (cos).",
+   "s": 8.93,
+   "e": 15.91
+  },
+  {
+   "t": "Först repeterar vi några grundläggande begrepp i rätvinkliga trianglar.",
+   "s": 15.91,
+   "e": 21.11
+  },
+  {
+   "t": "Den längsta sidan (sidan mitt emot den räta vinkeln) kallas hypotenusa.",
+   "s": 21.11,
+   "e": 26.85
+  },
+  {
+   "t": "De två kortare sidorna kallas kateter.",
+   "s": 26.85,
+   "e": 30.43
+  },
+  {
+   "t": "Kateten mitt emot en vinkel kallas motstående katet.",
+   "s": 30.43,
+   "e": 34.92
+  },
+  {
+   "t": "Kateten som bildar vinkeln kallas närliggande katet.",
+   "s": 34.92,
+   "e": 39.21
+  },
+  {
+   "t": "Se figur:",
+   "s": 39.21,
+   "e": 47.83
+  },
+  {
+   "t": "Förhållandet (divisionen) mellan sidorna i en rätvinklig triangel kan skrivas med de trigonometriska funktionerna.",
+   "s": 39.21,
+   "e": 47.83
+  },
+  {
+   "t": "OBS!",
+   "s": 47.83,
+   "e": 49.44
+  },
+  {
+   "t": "Gäller endast rätvinkliga trianglar!",
+   "s": 49.44,
+   "e": 52.84
+  },
+  {
+   "t": "Trigonometriska funktioner",
+   "s": 52.84,
+   "e": 55.81
+  },
+  {
+   "t": "tangens v är lika med motstående katet delat med närliggande katet som är lika med a delat med b",
+   "s": 55.81,
+   "e": 72.36
+  },
+  {
+   "t": "sinus v är lika med motstående katet delat med hypotenusa som är lika med a delat med c",
+   "s": 55.81,
+   "e": 72.36
+  },
+  {
+   "t": "cosinus v är lika med närliggande katet delat med hypotenusa som är lika med b delat med c",
+   "s": 55.81,
+   "e": 72.36
+  },
+  {
+   "t": "De trigonometriska funktionerna kan beräknas med räknare.",
+   "s": 72.36,
+   "e": 76.78
+  },
+  {
+   "t": "Hitta knappen med \"tan\", \"sin\" och \"cos\" på din räknare!",
+   "s": 76.78,
+   "e": 81.01
+  },
+  {
+   "t": "Till sist några detaljer:",
+   "s": 81.01,
+   "e": 85.97
+  },
+  {
+   "t": "Det finns olika skrivsätt för vinklar. vinkeln ABC betyder den vinkel som uppstår om man utgår från hörn A, går till hörn B och sedan till hörn C.",
+   "s": 81.01,
+   "e": 102.08
+  },
+  {
+   "t": "Se exempel nedan:",
+   "s": 85.97,
+   "e": 102.08
+  },
+  {
+   "t": "vinkeln ABC är lika med 41 grader, vinkeln BCA är lika med 79 grader och vinkeln CAB är lika med 60 grader.",
+   "s": 85.97,
+   "e": 102.08
+  },
+  {
+   "t": "Om vi ska ange en sträcka, men enhet saknas, så används beteckningen l.e. (längdenheter).",
+   "s": 102.08,
+   "e": 109.55
+  },
+  {
+   "t": "Se en av exempeluppgifterna nedan.",
+   "s": 109.55,
+   "e": 113.11
+  },
+  {
+   "t": "Exempel 1 — Tangens ur sidorna",
+   "s": 113.11,
+   "e": 116.47
+  },
+  {
+   "t": "Beräkna för triangeln nedan. a) tan u b) tan v .",
+   "s": 116.47,
+   "e": 123.05
+  },
+  {
+   "t": "a) Vi ska titta på förhållandet mellan motstående och närliggande katet till vinkeln u :",
+   "s": 123.05,
+   "e": 134.69
+  },
+  {
+   "t": "tangens u är lika med motstående katet delat med närliggande katet som är lika med 4 delat med 3",
+   "s": 123.05,
+   "e": 134.69
+  },
+  {
+   "t": "Svar: 4 delat med 3",
+   "s": 134.69,
+   "e": 137.8
+  },
+  {
+   "t": "b) Vi ska nu titta på förhållandet mellan motstående och närliggande katet till vinkeln v :",
+   "s": 137.8,
+   "e": 151.28
+  },
+  {
+   "t": "tangens v är lika med motstående katet delat med närliggande katet som är lika med 3 delat med 4 som är lika med 0,75",
+   "s": 137.8,
+   "e": 151.28
+  },
+  {
+   "t": "Svar: 3 delat med 4 eller 0,75",
+   "s": 151.28,
+   "e": 155.81
+  },
+  {
+   "t": "Exempel 2 — Tangens med räknaren",
+   "s": 155.81,
+   "e": 159.28
+  },
+  {
+   "t": "Bestäm tan 29 grader med din räknare.",
+   "s": 159.28,
+   "e": 163.05
+  },
+  {
+   "t": "Vi slår tan 29 grader på räknaren och får",
+   "s": 163.05,
+   "e": 167.18
+  },
+  {
+   "t": "tangens 29 grader är lika med 0,5543 som är ungefär lika med 0,554",
+   "s": 167.18,
+   "e": 174.81
+  },
+  {
+   "t": "Svar: 0,554",
+   "s": 174.81,
+   "e": 178.78
+  },
+  {
+   "t": "Exempel 3 — Bestäm en okänd sida",
+   "s": 178.78,
+   "e": 182.32
+  },
+  {
+   "t": "Bestäm längden hos sidan x .",
+   "s": 182.32,
+   "e": 185.51
+  },
+  {
+   "t": "Figurerna är inte skalenliga.",
+   "s": 185.51,
+   "e": 188.6
+  },
+  {
+   "t": "a)",
+   "s": 188.6,
+   "e": 202.21
+  },
+  {
+   "t": "Vinkeln 30 grader har den motstående kateten x och den närliggande kateten 1,3 meter:",
+   "s": 188.6,
+   "e": 202.21
+  },
+  {
+   "t": "tangens 30 grader är lika med x delat med 1,3 x som är lika med 1,3 gånger tangens 30 grader",
+   "s": 188.6,
+   "e": 202.21
+  },
+  {
+   "t": "Vi slår på räknaren och får",
+   "s": 202.21,
+   "e": 205.16
+  },
+  {
+   "t": "x är lika med 0,750 meter som är ungefär lika med 0,75 meter",
+   "s": 205.16,
+   "e": 211.69
+  },
+  {
+   "t": "Svar: 0,75 meter",
+   "s": 211.69,
+   "e": 215.28
+  },
+  {
+   "t": "b)",
+   "s": 215.28,
+   "e": 233.59
+  },
+  {
+   "t": "Vinkeln 22 grader har den motstående kateten 5,0 och den närliggande kateten x :",
+   "s": 215.28,
+   "e": 233.59
+  },
+  {
+   "t": "tangens 22 grader är lika med 5,0 delat med x x som är lika med 5,0 delat med tangens 22 grader som är lika med 12,375 som är ungefär lika med 12 längdenheter",
+   "s": 215.28,
+   "e": 233.59
+  },
+  {
+   "t": "(Eftersom enhet saknas på sträckan 5,0 i uppgiften anger vi den i längdenheter.)",
+   "s": 233.59,
+   "e": 240.26
+  },
+  {
+   "t": "Svar: 12 längdenheter",
+   "s": 240.26,
+   "e": 243.53
+  }
+ ]
+}

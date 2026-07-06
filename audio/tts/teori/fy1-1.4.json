@@ -1,8 +1,8 @@
 {
  "id": "fy1-1.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "fe9eaa208b2b90f468fe6e638ac2d8ecdf5b4a1f",
- "dur": 326.65,
+ "hash": "6790f95496e3821f4f976fd2fa88eed71dafa2ba",
+ "dur": 326.09,
  "segments": [
   {
    "t": "Densitet",
@@ -197,92 +197,92 @@
   {
    "t": "Vi ställer upp formeln för densitet och löser ut massan m.",
    "s": 198.55,
-   "e": 209.01
+   "e": 208.96
   },
   {
    "t": "densiteten rho är lika med massan m delat med volymen V vilket är ekvivalent med att m är lika med rho gånger V",
    "s": 198.55,
-   "e": 209.01
+   "e": 208.96
   },
   {
-   "t": "densiteten rho är lika med 19,3 gånger 10 i kubik kilogram per kubikmeter parentesen fråntabell slut parentes volymen V som är lika med 1,5 centimeter gånger 1,5 centimeter gånger 1,5 centimeter som är lika med 1,5 i kubik kubikcentimeter som är lika med 3,375 kubikcentimeter som är lika med 3,375 gånger 10 upphöjt till minus 6 kubikmeter",
-   "s": 209.01,
-   "e": 235.84
+   "t": "densiteten rho är lika med 19,3 gånger 10 i kubik kilogram per kubikmeter parentesen från tabell slut parentes volymen V som är lika med 1,5 centimeter gånger 1,5 centimeter gånger 1,5 centimeter som är lika med 1,5 i kubik kubikcentimeter som är lika med 3,375 kubikcentimeter som är lika med 3,375 gånger 10 upphöjt till minus 6 kubikmeter",
+   "s": 208.96,
+   "e": 235.75
   },
   {
-   "t": "massan m är lika med 19,3 gånger 10 i kubik gånger 3,375 gånger 10 upphöjt till minus 6 som är lika med 0,0651 ldots kilogram som är ungefär lika med 0,065 kilogram som är lika med 65 gram",
-   "s": 235.84,
-   "e": 251.78
+   "t": "massan m är lika med 19,3 gånger 10 i kubik gånger 3,375 gånger 10 upphöjt till minus 6 som är lika med 0,0651 kilogram som är ungefär lika med 0,065 kilogram som är lika med 65 gram",
+   "s": 235.75,
+   "e": 251.22
   },
   {
    "t": "Svar: 65 gram",
-   "s": 251.78,
-   "e": 254.82
+   "s": 251.22,
+   "e": 254.26
   },
   {
    "t": "Lägsta och högsta densiteten",
-   "s": 254.82,
-   "e": 257.89
+   "s": 254.26,
+   "e": 257.32
   },
   {
    "t": "Det fasta ämnet med lägst densitet är aerogel med densiteten 0,0011 gram/cm i kubik.",
-   "s": 257.89,
-   "e": 266.07
+   "s": 257.32,
+   "e": 265.51
   },
   {
    "t": "Aerogel — porig vit klump som hålls i en hand, lätt som luft.",
-   "s": 266.07,
-   "e": 271.12
+   "s": 265.51,
+   "e": 270.56
   },
   {
    "t": "Originalbild från PDF kan läggas in här.",
-   "s": 271.12,
-   "e": 275.0
+   "s": 270.56,
+   "e": 274.44
   },
   {
    "t": "Det fasta grundämnet med högst densitet är osmium med densiteten 22 gram/cm i kubik (bly ligger på ungefär hälften och guld ligger på 19 gram/cm i kubik).",
-   "s": 275.0,
-   "e": 287.04
+   "s": 274.44,
+   "e": 286.48
   },
   {
    "t": "Osmium — silvergrå metallklump med kristallin yta.",
-   "s": 287.04,
-   "e": 291.46
+   "s": 286.48,
+   "e": 290.9
   },
   {
    "t": "Originalbild från PDF kan läggas in här.",
-   "s": 291.46,
-   "e": 295.3
+   "s": 290.9,
+   "e": 294.74
   },
   {
    "t": "Högst densitet i universum?",
-   "s": 295.3,
-   "e": 298.39
+   "s": 294.74,
+   "e": 297.82
   },
   {
    "t": "Neutronstjärnor med densiteten 4 gånger 10 upphöjt till 14 gram/cm i kubik.",
-   "s": 298.39,
-   "e": 305.26
+   "s": 297.82,
+   "e": 304.7
   },
   {
    "t": "Det tomma utrymmet i atomen är istället packat med neutroner som (motvilligt) trycks samman av den starka gravitationen.",
-   "s": 305.26,
-   "e": 313.27
+   "s": 304.7,
+   "e": 312.71
   },
   {
    "t": "En kubikcentimeter väger alltså 400 miljoner ton (!).",
-   "s": 313.27,
-   "e": 317.8
+   "s": 312.71,
+   "e": 317.24
   },
   {
    "t": "Neutronstjärna — kompakt blå stjärna med jetstrålar mot ett stjärnfält.",
-   "s": 317.8,
-   "e": 322.77
+   "s": 317.24,
+   "e": 322.21
   },
   {
    "t": "Originalbild från PDF kan läggas in här.",
-   "s": 322.77,
-   "e": 326.65
+   "s": 322.21,
+   "e": 326.09
   }
  ]
 }

@@ -1,8 +1,8 @@
 {
  "id": "fy2-4.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "50a133f0f819377dac5024ad9af3992474f06bfb",
- "dur": 690.82,
+ "hash": "821296e43337487934432051756be0bcb9940a60",
+ "dur": 690.14,
  "segments": [
   {
    "t": "Fotoelektrisk effekt",
@@ -375,139 +375,139 @@
    "e": 419.2
   },
   {
-   "t": "energin E är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 633 gånger 10 upphöjt till minus 9 som är lika med 3,138 ldots gånger 10 upphöjt till minus 19 joule",
+   "t": "energin E är lika med 6,626 gånger 10 upphöjt till minus 34 gånger 2,998 gånger 10 upphöjt till 8 delat med 633 gånger 10 upphöjt till minus 9 som är lika med 3,138 gånger 10 upphöjt till minus 19 joule",
    "s": 419.2,
-   "e": 437.18
+   "e": 436.93
   },
   {
    "t": "Vi omvandlar till eV genom att dividera med mätetalet för elektronens laddning 1,602 gånger 10 upphöjt till minus 19 .",
-   "s": 437.18,
-   "e": 446.07
+   "s": 436.93,
+   "e": 445.82
   },
   {
-   "t": "energin E är lika med 3,138 ldots gånger 10 upphöjt till minus 19 delat med 1,602 gånger 10 upphöjt till minus 19 elektronvolt som är lika med 1,958 ldots elektronvolt som är ungefär lika med 1,96 elektronvolt",
-   "s": 446.07,
-   "e": 463.6
+   "t": "energin E är lika med 3,138 gånger 10 upphöjt till minus 19 delat med 1,602 gånger 10 upphöjt till minus 19 elektronvolt som är lika med 1,958 elektronvolt som är ungefär lika med 1,96 elektronvolt",
+   "s": 445.82,
+   "e": 462.76
   },
   {
    "t": "Svar: 1,96 elektronvolt",
-   "s": 463.6,
-   "e": 467.72
+   "s": 462.76,
+   "e": 466.9
   },
   {
    "t": "b) Vi börjar med att beräkna elektronens rörelseenergi E k .",
-   "s": 467.72,
-   "e": 473.18
+   "s": 466.9,
+   "e": 472.36
   },
   {
    "t": "Vi löser ut E k från formeln för fotoelektrisk effekt.",
-   "s": 473.18,
-   "e": 478.17
+   "s": 472.36,
+   "e": 477.35
   },
   {
    "t": "höjden h gånger frekvensen f är lika med W u plus E k vilket är ekvivalent med att E k är lika med h gånger f minus W u",
-   "s": 478.17,
-   "e": 498.51
+   "s": 477.35,
+   "e": 497.61
   },
   {
-   "t": "höjden h gånger frekvensen f är lika med 1,958 ldots elektronvolt parentesen fotonensenergi,fråna-uppgiften slut parentes W u som är lika med 1,82 elektronvolt",
-   "s": 478.17,
-   "e": 498.51
+   "t": "höjden h gånger frekvensen f är lika med 1,958 elektronvolt parentesen fotonens energi, från a-uppgiften slut parentes W u som är lika med 1,82 elektronvolt",
+   "s": 477.35,
+   "e": 497.61
   },
   {
-   "t": "E k är lika med 1,958 ldots minus 1,82 som är lika med 0,138 ldots elektronvolt",
-   "s": 498.51,
-   "e": 507.78
+   "t": "E k är lika med 1,958 minus 1,82 som är lika med 0,138 elektronvolt",
+   "s": 497.61,
+   "e": 506.37
   },
   {
    "t": "Vi bestämmer nu elektronens hastighet v.",
-   "s": 507.78,
-   "e": 511.57
+   "s": 506.37,
+   "e": 510.16
   },
   {
    "t": "Vi löser ut v från formeln för rörelseenergi.",
-   "s": 511.57,
-   "e": 515.92
+   "s": 510.16,
+   "e": 514.53
   },
   {
    "t": "E k är lika med massan m gånger hastigheten v i kvadrat delat med 2 vilket är ekvivalent med att v är lika med roten ur 2 gånger E k delat med m",
-   "s": 515.92,
-   "e": 526.12
+   "s": 514.53,
+   "e": 524.75
   },
   {
-   "t": "E k är lika med 0,138 ldots elektronvolt som är lika med 0,138 ldots gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 2,225 ldots gånger 10 upphöjt till minus 20 joule massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronensmassa,slåsuppitabell slut parentes",
-   "s": 526.12,
-   "e": 550.63
+   "t": "E k är lika med 0,138 elektronvolt som är lika med 0,138 gånger 1,602 gånger 10 upphöjt till minus 19 joule som är lika med 2,225 gånger 10 upphöjt till minus 20 joule massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronens massa, slås upp i tabell slut parentes",
+   "s": 524.75,
+   "e": 549.22
   },
   {
-   "t": "hastigheten v är lika med roten ur 2 gånger 2,225 ldots gånger 10 upphöjt till minus 20 delat med 9,11 gånger 10 upphöjt till minus 31 som är lika med 221 039,772 ldots meter per sekund som är ungefär lika med 2,21 gånger 10 upphöjt till 5 meter per sekund som är lika med 0,221 Mm per sekund",
-   "s": 550.63,
-   "e": 575.05
+   "t": "hastigheten v är lika med roten ur 2 gånger 2,225 gånger 10 upphöjt till minus 20 delat med 9,11 gånger 10 upphöjt till minus 31 som är lika med 221 039,772 meter per sekund som är ungefär lika med 2,21 gånger 10 upphöjt till 5 meter per sekund som är lika med 0,221 Mm per sekund",
+   "s": 549.22,
+   "e": 573.32
   },
   {
    "t": "Svar: 0,221 Mm/s",
-   "s": 575.05,
-   "e": 583.02
+   "s": 573.32,
+   "e": 581.31
   },
   {
    "t": "Exempel 2 — Foton absorberas av en kväveatom",
-   "s": 575.05,
-   "e": 583.02
+   "s": 573.32,
+   "e": 581.31
   },
   {
    "t": "En foton med våglängden 450 nanometer absorberas av en kväve-14-atom i vila med massan 14,003074 u.",
-   "s": 583.02,
-   "e": 593.16
+   "s": 581.31,
+   "e": 591.45
   },
   {
    "t": "Vilken fart får atomen?",
-   "s": 593.16,
-   "e": 596.01
+   "s": 591.45,
+   "e": 594.3
   },
   {
    "t": "Rörelsemängden bevaras.",
-   "s": 596.01,
-   "e": 598.86
+   "s": 594.3,
+   "e": 597.15
   },
   {
    "t": "p frekvensen f ö r e är lika med p e f tiden t e r",
-   "s": 598.86,
-   "e": 616.35
+   "s": 597.15,
+   "e": 614.63
   },
   {
    "t": "p frekvensen f ö r e är lika med fotonens rörelsemängd är lika med höjden h delat med våglängden lambda och p e frekvensen f tiden t e r är lika med kväveatomens rörelsemängd är lika med massan m gånger hastigheten v ger",
-   "s": 598.86,
-   "e": 616.35
+   "s": 597.15,
+   "e": 614.63
   },
   {
    "t": "höjden h delat med våglängden lambda är lika med massan m gånger hastigheten v",
-   "s": 616.35,
-   "e": 622.08
+   "s": 614.63,
+   "e": 620.4
   },
   {
    "t": "Vi löser ut atomens hastighet v och får",
-   "s": 622.08,
-   "e": 626.13
+   "s": 620.4,
+   "e": 624.43
   },
   {
    "t": "hastigheten v är lika med höjden h delat med våglängden lambda gånger massan m",
-   "s": 626.13,
-   "e": 645.1
+   "s": 624.43,
+   "e": 630.56
   },
   {
-   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js våglängden lambda som är lika med 450 nanometer som är lika med 450 gånger 10 upphöjt till minus 9 meter massan m som är lika med 14,003074 u som är lika med 14,003074 gånger 1,66 gånger 10 upphöjt till minus 27 kilogram som är lika med 2,324 ldots gånger 10 upphöjt till minus 26 kilogram",
-   "s": 626.13,
-   "e": 660.99
+   "t": "höjden h är lika med 6,626 gånger 10 upphöjt till minus 34 Js våglängden lambda som är lika med 450 nanometer som är lika med 450 gånger 10 upphöjt till minus 9 meter massan m som är lika med 14,003074 u som är lika med 14,003074 gånger 1,66 gånger 10 upphöjt till minus 27 kilogram som är lika med 2,324 gånger 10 upphöjt till minus 26 kilogram",
+   "s": 630.56,
+   "e": 660.73
   },
   {
-   "t": "hastigheten v är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 450 gånger 10 upphöjt till minus 9 gånger 2,324 ldots gånger 10 upphöjt till minus 26 som är lika med 0,06334 ldots meter per sekund som är ungefär lika med 0,0633 meter per sekund som är lika med 6,33 centimeter per sekund",
-   "s": 660.94,
-   "e": 686.02
+   "t": "hastigheten v är lika med 6,626 gånger 10 upphöjt till minus 34 delat med 450 gånger 10 upphöjt till minus 9 gånger 2,324 gånger 10 upphöjt till minus 26 som är lika med 0,06334 meter per sekund som är ungefär lika med 0,0633 meter per sekund som är lika med 6,33 centimeter per sekund",
+   "s": 660.68,
+   "e": 685.36
   },
   {
    "t": "Svar: 6,33 centimeter/s",
-   "s": 686.02,
-   "e": 690.82
+   "s": 685.36,
+   "e": 690.14
   }
  ]
 }

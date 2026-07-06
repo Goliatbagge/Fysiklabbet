@@ -1,0 +1,88 @@
+{
+ "id": "ma1c-4.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1402d85b6a79a93cc349541733a2ff6a0aa39287",
+ "dur": 99.6,
+ "segments": [
+  {
+   "t": "Från ekvation till graf",
+   "s": 0.1,
+   "e": 2.95
+  },
+  {
+   "t": "Vi har tidigare sett hur en linjär modell kan beskrivas med en formel/ekvation, värdetabell respektive graf.",
+   "s": 2.9,
+   "e": 10.7
+  },
+  {
+   "t": "När vi ritar grafer längre fram i kursen kommer vi att göra det med digitala hjälpmedel, t.ex. GeoGebra.",
+   "s": 10.7,
+   "e": 17.9
+  },
+  {
+   "t": "För att förstå vad de digitala hjälpmedlen egentligen gör, så ska vi nu själva rita grafer för hand.",
+   "s": 17.9,
+   "e": 24.3
+  },
+  {
+   "t": "Exempel 1 — Rita grafen för hand",
+   "s": 24.3,
+   "e": 27.8
+  },
+  {
+   "t": "Rita grafen till ekvationen y är lika med minus 2 x plus 3 .",
+   "s": 27.8,
+   "e": 33.19
+  },
+  {
+   "t": "Vi gör en värdetabell med heltal från x är lika med minus 3 till x är lika med 3 .",
+   "s": 33.19,
+   "e": 39.4
+  },
+  {
+   "t": "Exakt vilka x-koordinater vi väljer är inte så noga, men en bra tumregel är att välja några positiva och negativa kring x är lika med 0 :",
+   "s": 39.4,
+   "e": 51.48
+  },
+  {
+   "t": "Varje rad i värdetabellen motsvarar en koordinat.",
+   "s": 39.4,
+   "e": 51.48
+  },
+  {
+   "t": "Från första raden har vi att när x är lika med minus 3 , så är y är lika med 9 .",
+   "s": 51.48,
+   "e": 57.39
+  },
+  {
+   "t": "Detta ger koordinaten (−3, 9).",
+   "s": 57.39,
+   "e": 61.64
+  },
+  {
+   "t": "På motsvarande sätt fås resten av koordinaterna (−2, 7), (−1, 5), (0, 3), (1, 1), (2, −1) och (3, −3).",
+   "s": 61.64,
+   "e": 73.71
+  },
+  {
+   "t": "Vi prickar in punkterna i ett koordinatsystem.",
+   "s": 73.71,
+   "e": 77.64
+  },
+  {
+   "t": "När vi ritar koordinatsystemet måste x-axeln sträcka sig från x är lika med minus 3 till x är lika med 3 och y-axeln från y är lika med minus 3 till y är lika med 9 (största respektive minsta x- och y-koordinaterna):",
+   "s": 77.64,
+   "e": 99.6
+  },
+  {
+   "t": "Till sist förbinder vi punkterna med en rät linje och vi får då vår graf:",
+   "s": 77.64,
+   "e": 99.6
+  },
+  {
+   "t": "Grafen till y är lika med minus 2 x plus 3 — en rät linje som lutar nedåt.",
+   "s": 77.64,
+   "e": 99.6
+  }
+ ]
+}

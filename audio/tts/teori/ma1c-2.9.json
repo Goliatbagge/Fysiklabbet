@@ -1,0 +1,288 @@
+{
+ "id": "ma1c-2.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d8fa8f9adf9a4be24ffbd8cbc12ff913e8629b20",
+ "dur": 291.21,
+ "segments": [
+  {
+   "t": "Enkla andra- och tredjegradsekvationer",
+   "s": 0.1,
+   "e": 3.54
+  },
+  {
+   "t": "I en ekvation avgör variabeltermen med högst exponent ekvationens grad.",
+   "s": 3.49,
+   "e": 9.11
+  },
+  {
+   "t": "En ekvation som innehåller en variabel där högsta exponenten är 2, t.ex. x i kvadrat plus 7 är lika med 11 , kallas andragradsekvation.",
+   "s": 9.11,
+   "e": 18.88
+  },
+  {
+   "t": "En ekvation som innehåller en variabel med högsta graden 3, t.ex. x i kubik minus 8 är lika med 1 , kallas tredjegradsekvation.",
+   "s": 18.88,
+   "e": 28.38
+  },
+  {
+   "t": "Andra- och tredjegradsekvationer som innehåller en enda variabelterm kallas enkla andra- och tredjegradsekvationer.",
+   "s": 28.38,
+   "e": 35.69
+  },
+  {
+   "t": "Lösa enkla andragradsekvationer",
+   "s": 35.69,
+   "e": 39.06
+  },
+  {
+   "t": "x i kvadrat är lika med a, där a är större än eller lika med 0, har lösningarna",
+   "s": 39.06,
+   "e": 45.33
+  },
+  {
+   "t": "x är lika med plus minus roten ur a",
+   "s": 45.33,
+   "e": 49.16
+  },
+  {
+   "t": "Om a är mindre än 0 saknas (reella) lösningar.",
+   "s": 49.16,
+   "e": 53.77
+  },
+  {
+   "t": "Lösa enkla tredjegradsekvationer",
+   "s": 53.77,
+   "e": 57.17
+  },
+  {
+   "t": "x i kubik är lika med a, för alla a, har lösningen",
+   "s": 57.17,
+   "e": 62.1
+  },
+  {
+   "t": "x är lika med tredje roten ur a",
+   "s": 62.1,
+   "e": 68.49
+  },
+  {
+   "t": "Exempel 1 — Enkla andra- och tredjegradsekvationer",
+   "s": 62.1,
+   "e": 68.49
+  },
+  {
+   "t": "Lös. a) x i kvadrat är lika med 64 b) x i kvadrat är lika med 10 c) x i kvadrat är lika med minus 9 d) x i kubik är lika med 343 e) x i kubik är lika med minus 27 f) 3 x i kvadrat minus 2,31 är lika med 17,97",
+   "s": 68.49,
+   "e": 89.24
+  },
+  {
+   "t": "a) Glöm inte den negativa lösningen:",
+   "s": 89.24,
+   "e": 97.51
+  },
+  {
+   "t": "x är lika med plus minus roten ur 64 som är lika med plus minus 8",
+   "s": 89.24,
+   "e": 97.51
+  },
+  {
+   "t": "Svar: x är lika med plus minus 8 , alternativt x ett är lika med 8 och x två är lika med minus 8",
+   "s": 97.51,
+   "e": 105.58
+  },
+  {
+   "t": "b) x är lika med plus minus roten ur 10 . roten ur 10 är svår att beräkna med huvudräkning.",
+   "s": 105.58,
+   "e": 114.66
+  },
+  {
+   "t": "Vi slår det på räknaren: x är lika med plus minus 3,162 som är ungefär lika med plus minus 3,16",
+   "s": 114.66,
+   "e": 123.2
+  },
+  {
+   "t": "Svar: x är lika med plus minus roten ur 10 eller x är ungefär lika med plus minus 3,16",
+   "s": 123.2,
+   "e": 130.93
+  },
+  {
+   "t": "c) x är lika med plus minus roten ur minus 9 .",
+   "s": 130.93,
+   "e": 135.93
+  },
+  {
+   "t": "Roten ur negativa tal saknar reella lösningar.",
+   "s": 135.93,
+   "e": 140.29
+  },
+  {
+   "t": "Svar: Saknar reella lösningar.",
+   "s": 140.29,
+   "e": 143.81
+  },
+  {
+   "t": "d) Tredjegradsekvationen har bara en lösning:",
+   "s": 143.81,
+   "e": 152.22
+  },
+  {
+   "t": "x är lika med tredje roten ur 343 som är lika med 7",
+   "s": 143.81,
+   "e": 152.22
+  },
+  {
+   "t": "Svar: x är lika med 7",
+   "s": 152.22,
+   "e": 155.41
+  },
+  {
+   "t": "e) Tredjeroten ur ett negativt tal går utmärkt (minus gånger minus gånger minus ger minus):",
+   "s": 155.41,
+   "e": 166.7
+  },
+  {
+   "t": "x är lika med tredje roten ur minus 27 som är lika med minus 3",
+   "s": 155.41,
+   "e": 166.7
+  },
+  {
+   "t": "Svar: x är lika med minus 3",
+   "s": 166.7,
+   "e": 170.26
+  },
+  {
+   "t": "f) Vi börjar med att lösa ut x i kvadrat .",
+   "s": 170.26,
+   "e": 174.46
+  },
+  {
+   "t": "Därefter gör vi som vanligt.",
+   "s": 174.46,
+   "e": 177.51
+  },
+  {
+   "t": "Adderar 2,31 till båda led:",
+   "s": 177.51,
+   "e": 184.18
+  },
+  {
+   "t": "3 x i kvadrat är lika med 20,28",
+   "s": 177.51,
+   "e": 184.18
+  },
+  {
+   "t": "Dividerar med 3 i båda led:",
+   "s": 184.18,
+   "e": 189.95
+  },
+  {
+   "t": "x i kvadrat är lika med 6,76",
+   "s": 184.18,
+   "e": 189.95
+  },
+  {
+   "t": "x är lika med plus minus roten ur 6,76 som är lika med plus minus 2,6",
+   "s": 189.95,
+   "e": 196.93
+  },
+  {
+   "t": "Svar: x är lika med plus minus 2,6",
+   "s": 196.93,
+   "e": 201.51
+  },
+  {
+   "t": "Exempel 2 — Kvadraten och kuben",
+   "s": 201.51,
+   "e": 205.01
+  },
+  {
+   "t": "Bestäm sidan hos en. a) kvadrat med arean 4 096 kvadratcentimeter b) kub med volymen 4 096 kubikcentimeter",
+   "s": 205.01,
+   "e": 216.68
+  },
+  {
+   "t": "a) Kvadratens area A ges av sidan gånger sidan.",
+   "s": 216.68,
+   "e": 221.46
+  },
+  {
+   "t": "Vi kallar sidan x .",
+   "s": 221.46,
+   "e": 224.15
+  },
+  {
+   "t": "Detta ger A är lika med x gånger x som är lika med x i kvadrat .",
+   "s": 224.15,
+   "e": 229.43
+  },
+  {
+   "t": "Se figur:",
+   "s": 229.43,
+   "e": 236.26
+  },
+  {
+   "t": "Vi vet att arean är 4 096 kvadratcentimeter , vilket ger",
+   "s": 229.43,
+   "e": 236.26
+  },
+  {
+   "t": "x i kvadrat är lika med 4 096",
+   "s": 236.26,
+   "e": 240.41
+  },
+  {
+   "t": "x är lika med plus minus roten ur 4 096 som är lika med plus minus 64 centimeter",
+   "s": 240.41,
+   "e": 247.9
+  },
+  {
+   "t": "Eftersom en sida inte kan vara negativ, så bortser vi från den negativa lösningen.",
+   "s": 247.9,
+   "e": 253.7
+  },
+  {
+   "t": "Svar: 64 centimeter",
+   "s": 253.7,
+   "e": 257.16
+  },
+  {
+   "t": "b) Kubens volym V ges av sidan gånger sidan gånger sidan.",
+   "s": 257.16,
+   "e": 262.61
+  },
+  {
+   "t": "Vi kallar sidan x .",
+   "s": 262.61,
+   "e": 265.3
+  },
+  {
+   "t": "Detta ger V är lika med x gånger x gånger x som är lika med x i kubik .",
+   "s": 265.3,
+   "e": 271.04
+  },
+  {
+   "t": "Se figur:",
+   "s": 271.04,
+   "e": 277.71
+  },
+  {
+   "t": "Vi vet att volymen är 4 096 kubikcentimeter , vilket ger",
+   "s": 271.04,
+   "e": 277.71
+  },
+  {
+   "t": "x i kubik är lika med 4 096",
+   "s": 277.71,
+   "e": 281.76
+  },
+  {
+   "t": "x är lika med tredje roten ur 4 096 som är lika med 16 centimeter",
+   "s": 281.76,
+   "e": 288.01
+  },
+  {
+   "t": "Svar: 16 centimeter",
+   "s": 288.01,
+   "e": 291.21
+  }
+ ]
+}

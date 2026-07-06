@@ -1,8 +1,8 @@
 {
  "id": "fy1-4.7",
  "voice": "sv-SE-SofieNeural",
- "hash": "79d43ff8c34863a6ef556e69943576e436608233",
- "dur": 423.7,
+ "hash": "08c656d105b691ef400ab4cbc8112e83e24a42c1",
+ "dur": 423.33,
  "segments": [
   {
    "t": "Rörelsemängd och impuls",
@@ -97,307 +97,307 @@
   {
    "t": "a)",
    "s": 79.0,
-   "e": 83.9
+   "e": 83.91
   },
   {
    "t": "trycket p är lika med massan m gånger hastigheten v",
    "s": 79.0,
-   "e": 83.9
+   "e": 83.91
   },
   {
-   "t": "massan m är lika med 48 kilogram hastigheten v som är lika med minus 7,0 meter per sekund parentesen minustecken—riktningenäråtvänster slut parentes",
-   "s": 83.9,
-   "e": 94.42
+   "t": "massan m är lika med 48 kilogram hastigheten v som är lika med minus 7,0 meter per sekund parentesen minustecken — riktningen är åt vänster slut parentes",
+   "s": 83.91,
+   "e": 94.61
   },
   {
-   "t": "trycket p är lika med 48 gånger parentesen minus 7,0 slut parentes som är lika med minus 336 kilogram\\cdotm per sekund som är ungefär lika med minus 340 kilogram\\cdotm per sekund",
-   "s": 94.42,
-   "e": 109.49
+   "t": "trycket p är lika med 48 gånger parentesen minus 7,0 slut parentes som är lika med minus 336 kilogram\\cdot m/s som är ungefär lika med minus 340 kilogram\\cdot m/s",
+   "s": 94.61,
+   "e": 114.7
   },
   {
    "t": "Svar: −340 kilogram gånger m/s",
-   "s": 109.49,
-   "e": 115.14
+   "s": 94.61,
+   "e": 114.7
   },
   {
    "t": "b)",
-   "s": 109.49,
-   "e": 115.14
+   "s": 94.61,
+   "e": 114.7
   },
   {
    "t": "E k är lika med massan m gånger hastigheten v i kvadrat delat med 2",
-   "s": 115.14,
-   "e": 120.74
+   "s": 114.7,
+   "e": 120.28
   },
   {
-   "t": "massan m är lika med 48 kilogram hastigheten v som är lika med 7,0 meter per sekund parentesen ingetminustecken—rörelseenergiärinteenvektor slut parentes",
-   "s": 120.74,
-   "e": 131.68
+   "t": "massan m är lika med 48 kilogram hastigheten v som är lika med 7,0 meter per sekund parentesen inget minustecken — rörelseenergi är inte en vektor slut parentes",
+   "s": 120.28,
+   "e": 131.41
   },
   {
    "t": "E k är lika med 48 gånger 7,0 i kvadrat delat med 2 som är lika med 1 176 joule som är ungefär lika med 1 100 joule som är lika med 1,1 kilojoule",
-   "s": 131.68,
-   "e": 143.62
+   "s": 131.41,
+   "e": 143.35
   },
   {
    "t": "Svar: 1,1 kilojoule",
-   "s": 143.62,
-   "e": 146.96
+   "s": 143.35,
+   "e": 146.7
   },
   {
    "t": "Impuls",
-   "s": 146.96,
-   "e": 148.79
+   "s": 146.7,
+   "e": 148.53
   },
   {
    "t": "En kraft som verkar under en viss tid kallas impuls, betecknas I och har SI-enheten Ns (newtonsekund).",
-   "s": 148.79,
-   "e": 156.54
+   "s": 148.53,
+   "e": 156.28
   },
   {
    "t": "En impuls ändrar rörelsemängd.",
-   "s": 156.54,
-   "e": 159.78
+   "s": 156.28,
+   "e": 159.51
   },
   {
    "t": "Impuls är en vektor med samma riktning som kraften.",
-   "s": 159.78,
-   "e": 163.74
+   "s": 159.51,
+   "e": 163.47
   },
   {
    "t": "Enligt Newtons tredje lag om kraft och motkraft, så kommer en impuls på ett föremål leda till en lika stor, men motriktad, impuls på ett annat föremål.",
-   "s": 163.74,
-   "e": 173.47
+   "s": 163.47,
+   "e": 173.21
   },
   {
    "t": "Impuls (definition)",
-   "s": 173.47,
-   "e": 176.35
+   "s": 173.21,
+   "e": 176.09
   },
   {
    "t": "strömmen I är lika med kraften F gånger delta tiden t",
-   "s": 176.35,
-   "e": 181.15
+   "s": 176.09,
+   "e": 180.89
   },
   {
    "t": "där",
-   "s": 181.15,
-   "e": 182.62
+   "s": 180.89,
+   "e": 182.36
   },
   {
    "t": "I är lika med impuls (Ns)",
-   "s": 182.62,
-   "e": 185.94
+   "s": 182.36,
+   "e": 185.68
   },
   {
    "t": "F är lika med kraft (newton)",
-   "s": 185.94,
-   "e": 189.43
+   "s": 185.68,
+   "e": 189.16
   },
   {
    "t": "Δt är lika med tid (sekunder)",
-   "s": 189.43,
-   "e": 192.74
+   "s": 189.16,
+   "e": 192.47
   },
   {
    "t": "Att impuls ger en motsvarande ändring av rörelsemängden kallas impulslagen.",
-   "s": 192.74,
-   "e": 198.35
+   "s": 192.47,
+   "e": 198.09
   },
   {
    "t": "Impulslagen",
-   "s": 198.35,
-   "e": 200.51
+   "s": 198.09,
+   "e": 200.25
   },
   {
    "t": "strömmen I är lika med delta trycket p eller I som är lika med massan m gånger delta hastigheten v eller I som är lika med m v två minus m v ett",
-   "s": 200.51,
-   "e": 210.32
+   "s": 200.25,
+   "e": 210.06
   },
   {
    "t": "där",
-   "s": 210.32,
-   "e": 211.84
+   "s": 210.06,
+   "e": 211.57
   },
   {
    "t": "I är lika med impuls (Ns)",
-   "s": 211.84,
-   "e": 215.15
+   "s": 211.57,
+   "e": 214.89
   },
   {
    "t": "Δp är lika med ändring av rörelsemängd (kg gånger m/s)",
-   "s": 215.15,
-   "e": 220.84
+   "s": 214.89,
+   "e": 220.57
   },
   {
    "t": "m är lika med massa (kilogram)",
-   "s": 220.84,
-   "e": 224.19
+   "s": 220.57,
+   "e": 223.93
   },
   {
    "t": "v två är lika med hastighet efter (meter per sekund)",
-   "s": 224.19,
-   "e": 229.0
+   "s": 223.93,
+   "e": 228.74
   },
   {
    "t": "v ett är lika med hastighet före (meter per sekund)",
-   "s": 229.0,
-   "e": 233.68
+   "s": 228.74,
+   "e": 233.41
   },
   {
    "t": "Δv är lika med ändring av hastighet (meter per sekund)",
-   "s": 233.68,
-   "e": 238.43
+   "s": 233.41,
+   "e": 238.16
   },
   {
    "t": "Härledning — Impulslagen",
-   "s": 238.43,
-   "e": 241.35
+   "s": 238.16,
+   "e": 241.09
   },
   {
    "t": "Vi ställer upp formeln för impuls.",
-   "s": 241.35,
-   "e": 244.46
+   "s": 241.09,
+   "e": 244.2
   },
   {
    "t": "strömmen I är lika med kraften F gånger delta tiden t",
-   "s": 244.46,
-   "e": 249.24
+   "s": 244.2,
+   "e": 248.97
   },
   {
    "t": "Enligt Newtons andra lag gäller F är lika med m gånger a.",
-   "s": 249.24,
-   "e": 253.9
+   "s": 248.97,
+   "e": 253.64
   },
   {
    "t": "Detta ger",
-   "s": 253.9,
-   "e": 255.91
+   "s": 253.64,
+   "e": 255.65
   },
   {
    "t": "strömmen I är lika med massan m gånger accelerationen a gånger delta tiden t",
-   "s": 255.91,
-   "e": 267.62
+   "s": 255.65,
+   "e": 267.36
   },
   {
    "t": "Definitionen för acceleration accelerationen a är lika med delta hastigheten v delat med delta tiden t ger",
-   "s": 255.91,
-   "e": 267.62
+   "s": 255.65,
+   "e": 267.36
   },
   {
    "t": "strömmen I är lika med massan m gånger delta hastigheten v gånger delta tiden t delat med delta t som är lika med m gånger delta v som är lika med delta trycket p vilket skulle visas",
-   "s": 267.62,
-   "e": 279.07
+   "s": 267.36,
+   "e": 278.81
   },
   {
    "t": "Impuls och grafer",
-   "s": 279.07,
-   "e": 281.51
+   "s": 278.81,
+   "e": 281.25
   },
   {
    "t": "Impuls i diagram",
-   "s": 281.51,
-   "e": 283.95
+   "s": 281.25,
+   "e": 283.69
   },
   {
    "t": "I en F-t-graf motsvaras impuls av arean under grafen (eftersom impuls är lika med produkten av kraft F och tid t).",
-   "s": 283.95,
-   "e": 292.96
+   "s": 283.69,
+   "e": 292.7
   },
   {
    "t": "I en v-t-graf ger ändringen av hastighet ändringen av rörelsemängd som i sin tur motsvarar impulsen.",
-   "s": 292.96,
-   "e": 300.3
+   "s": 292.7,
+   "e": 300.04
   },
   {
    "t": "Exempel 2 — Världens hårdaste fotbollsspark",
-   "s": 300.3,
-   "e": 304.19
+   "s": 300.04,
+   "e": 303.93
   },
   {
    "t": "En fotboll väger 0,45 kilogram och ligger still.",
-   "s": 304.19,
-   "e": 308.7
+   "s": 303.93,
+   "e": 308.44
   },
   {
    "t": "Hur stor medelkraft krävs på bollen för att den ska få farten 211 kilometer i timmen om kontakttiden med foten är 20 ms? (Brasilianaren Ronny Heberson lyckades med denna bedrift.)",
-   "s": 308.7,
-   "e": 321.84
+   "s": 308.44,
+   "e": 321.57
   },
   {
    "t": "Vi ställer upp formeln för impuls och löser ut kraften F.",
-   "s": 321.84,
-   "e": 329.05
+   "s": 321.57,
+   "e": 329.0
   },
   {
    "t": "strömmen I är lika med kraften F gånger delta tiden t vilket är ekvivalent med att F är lika med I delat med delta t",
-   "s": 321.84,
-   "e": 336.99
+   "s": 321.57,
+   "e": 336.63
   },
   {
    "t": "Impulsen bestäms med impulslagen.",
    "s": 329.16,
-   "e": 336.99
+   "e": 336.63
   },
   {
    "t": "strömmen I är lika med massan m gånger delta hastigheten v som är lika med 0,45 gånger 211 kilometer per timme som är lika med 0,45 gånger 211 delat med 3,6 meter per sekund som är lika med 26,375 Ns delta tiden t som är lika med 20 ms som är lika med 0,020 sekund",
-   "s": 336.94,
-   "e": 357.91
+   "s": 336.58,
+   "e": 357.55
   },
   {
    "t": "kraften F är lika med 26,375 delat med 0,020 som är lika med 1 318,75 newton som är ungefär lika med 1 300 newton som är lika med 1,3 kilonewton",
-   "s": 357.91,
-   "e": 371.71
+   "s": 357.55,
+   "e": 371.34
   },
   {
    "t": "Svar: 1,3 kilonewton",
-   "s": 371.71,
-   "e": 375.1
+   "s": 371.34,
+   "e": 374.73
   },
   {
    "t": "Exempel 3 — Impuls från F-t-graf",
-   "s": 375.1,
-   "e": 379.14
+   "s": 374.73,
+   "e": 378.76
   },
   {
    "t": "Beräkna impulsen som verkar på föremålet utifrån nedanstående graf.",
-   "s": 379.14,
-   "e": 384.4
+   "s": 378.76,
+   "e": 384.03
   },
   {
    "t": "Impulsen motsvaras av arean under grafen.",
-   "s": 384.4,
-   "e": 388.44
+   "s": 384.03,
+   "e": 388.06
   },
   {
    "t": "Vi kan dela in arean i tre olika delar och beräkna dem var och en för sig:",
-   "s": 388.44,
-   "e": 397.63
+   "s": 388.06,
+   "e": 397.25
   },
   {
    "t": "A är lika med triangeln mellan t är lika med 0 och t är lika med 3",
-   "s": 388.44,
-   "e": 397.63
+   "s": 388.06,
+   "e": 397.25
   },
   {
    "t": "B är lika med rektangeln mellan t är lika med 3 och t är lika med 7",
-   "s": 397.63,
-   "e": 403.03
+   "s": 397.25,
+   "e": 402.65
   },
   {
    "t": "C är lika med triangeln mellan t är lika med 7 och t är lika med 8",
-   "s": 403.03,
-   "e": 408.3
+   "s": 402.65,
+   "e": 407.93
   },
   {
    "t": "strömmen I är lika med arean A plus B plus C som är lika med 3 gånger 3 delat med 2 plus 4 gånger 3 plus 1 gånger 3 delat med 2 som är lika med 4,5 plus 12 plus 1,5 som är lika med 18 Ns",
-   "s": 408.3,
-   "e": 423.7
+   "s": 407.93,
+   "e": 423.33
   },
   {
    "t": "Svar: 18 Ns",
-   "s": 408.3,
-   "e": 423.7
+   "s": 407.93,
+   "e": 423.33
   }
  ]
 }

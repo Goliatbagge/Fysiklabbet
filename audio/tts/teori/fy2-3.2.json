@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "39d222930e1cf0b9e066409df3da347681e79f32",
- "dur": 379.11,
+ "hash": "93df8a21540df7edfe6f10223a1e563dc52a31be",
+ "dur": 382.67,
  "segments": [
   {
    "t": "Magnetfält kring lång rak ledare",
@@ -185,114 +185,114 @@
    "e": 178.24
   },
   {
-   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere strömmen I som är lika med 1,2 ampere avståndet d som är lika med 1,5 centimeter som är lika med 0,015 meter",
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla \\cdot m/A strömmen I som är lika med 1,2 ampere avståndet d som är lika med 1,5 centimeter som är lika med 0,015 meter",
    "s": 178.24,
-   "e": 192.01
+   "e": 192.9
   },
   {
-   "t": "B är lika med 2 gånger 10 upphöjt till minus 7 gånger 1,2 delat med 0,015 som är lika med 1,6 gånger 10 upphöjt till minus 5 tesla som är lika med 16 µT",
-   "s": 192.01,
-   "e": 209.8
+   "t": "B är lika med 2 gånger 10 upphöjt till minus 7 gånger 1,2 delat med 0,015 som är lika med 1,6 gånger 10 upphöjt till minus 5 tesla som är lika med 16 µ T",
+   "s": 192.9,
+   "e": 210.71
   },
   {
    "t": "Svar: 16 μT (eller 1,6 gånger 10 upphöjt till minus 5 tesla) rakt ut från planet.",
-   "s": 192.01,
-   "e": 209.8
+   "s": 192.9,
+   "e": 210.71
   },
   {
    "t": "b) Tumregeln ger att riktningen på fältet i punkten Q blir NO (snett uppåt höger).",
-   "s": 209.8,
-   "e": 216.45
+   "s": 210.71,
+   "e": 217.36
   },
   {
    "t": "Vi beräknar fältstyrkan.",
-   "s": 216.45,
-   "e": 219.29
+   "s": 217.36,
+   "e": 220.2
   },
   {
    "t": "B är lika med k gånger strömmen I delat med avståndet d",
-   "s": 219.29,
-   "e": 224.28
+   "s": 220.2,
+   "e": 225.2
   },
   {
-   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere strömmen I som är lika med 2,2 ampere avståndet d som är lika med 2,0 centimeter som är lika med 0,020 meter",
-   "s": 224.28,
-   "e": 237.94
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla \\cdot m/A strömmen I som är lika med 2,2 ampere avståndet d som är lika med 2,0 centimeter som är lika med 0,020 meter",
+   "s": 225.2,
+   "e": 239.66
   },
   {
-   "t": "B är lika med 2 gånger 10 upphöjt till minus 7 gånger 2,2 delat med 0,020 som är lika med 2,2 gånger 10 upphöjt till minus 5 tesla som är lika med 22 µT",
-   "s": 237.94,
-   "e": 252.7
+   "t": "B är lika med 2 gånger 10 upphöjt till minus 7 gånger 2,2 delat med 0,020 som är lika med 2,2 gånger 10 upphöjt till minus 5 tesla som är lika med 22 µ T",
+   "s": 239.66,
+   "e": 254.44
   },
   {
    "t": "Svar: 22 μT NO (snett uppåt höger).",
-   "s": 237.94,
-   "e": 252.7
+   "s": 239.66,
+   "e": 254.44
   },
   {
    "t": "c) Vi beräknar fältet från var och en av ledarna för sig och lägger sedan ihop dem.",
-   "s": 252.7,
-   "e": 258.69
+   "s": 254.44,
+   "e": 260.43
   },
   {
    "t": "Fältet från ledaren till vänster (ström ut) blir enligt tumregeln uppåtriktat vid R.",
-   "s": 258.69,
-   "e": 274.39
+   "s": 260.43,
+   "e": 276.12
   },
   {
    "t": "B hastigheten v ä n sträckan s tiden t e r är lika med k gånger I v ä n s t e r delat med d v ä n s t e r",
-   "s": 258.69,
-   "e": 274.39
+   "s": 260.43,
+   "e": 276.12
   },
   {
-   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere I hastigheten v ä n sträckan s tiden t e r som är lika med 3,2 ampere d v ä n s t e r som är lika med 2,9 centimeter som är lika med 0,029 meter",
-   "s": 274.39,
-   "e": 292.11
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla \\cdot m/A I hastigheten v ä n sträckan s tiden t e r som är lika med 3,2 ampere d v ä n s t e r som är lika med 2,9 centimeter som är lika med 0,029 meter",
+   "s": 276.12,
+   "e": 294.7
   },
   {
-   "t": "B hastigheten v ä n sträckan s tiden t e r är lika med 2 gånger 10 upphöjt till minus 7 gånger 3,2 delat med 0,029 som är lika med 2,206 ldots gånger 10 upphöjt till minus 5 tesla som är ungefär lika med 22,1 µT uppåt",
-   "s": 292.11,
-   "e": 310.71
+   "t": "B hastigheten v ä n sträckan s tiden t e r är lika med 2 gånger 10 upphöjt till minus 7 gånger 3,2 delat med 0,029 som är lika med 2,206 gånger 10 upphöjt till minus 5 tesla som är ungefär lika med 22,1 µ T uppåt",
+   "s": 294.7,
+   "e": 311.49
   },
   {
    "t": "Fältet från ledaren till höger (ström in) blir enligt tumregeln också uppåtriktat vid R.",
-   "s": 310.66,
-   "e": 340.17
+   "s": 311.49,
+   "e": 343.92
   },
   {
    "t": "B höjden h ö tyngdfaktorn g e r är lika med k gånger I h ö g e r delat med d h ö g e r",
-   "s": 310.66,
-   "e": 340.17
+   "s": 313.73,
+   "e": 343.92
   },
   {
-   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere I höjden h ö tyngdfaktorn g e r som är lika med 1,2 ampere d h ö g e r som är lika med 3,3 centimeter som är lika med 0,033 meter",
-   "s": 310.66,
-   "e": 340.17
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla \\cdot m/A I höjden h ö tyngdfaktorn g e r som är lika med 1,2 ampere d h ö g e r som är lika med 3,3 centimeter som är lika med 0,033 meter",
+   "s": 313.73,
+   "e": 343.92
   },
   {
-   "t": "B höjden h ö tyngdfaktorn g e r är lika med 2 gånger 10 upphöjt till minus 7 gånger 1,2 delat med 0,033 som är lika med 7,272 ldots gånger 10 upphöjt till minus 6 tesla som är ungefär lika med 7,3 µT uppåt",
-   "s": 340.17,
-   "e": 356.08
+   "t": "B höjden h ö tyngdfaktorn g e r är lika med 2 gånger 10 upphöjt till minus 7 gånger 1,2 delat med 0,033 som är lika med 7,272 gånger 10 upphöjt till minus 6 tesla som är ungefär lika med 7,3 µ T uppåt",
+   "s": 343.92,
+   "e": 359.63
   },
   {
    "t": "Eftersom båda fält verkar uppåt samverkar de.",
-   "s": 356.08,
-   "e": 360.18
+   "s": 359.63,
+   "e": 363.73
   },
   {
    "t": "Det totala fältet fås genom att addera fältstyrkorna.",
-   "s": 360.18,
-   "e": 364.53
+   "s": 363.73,
+   "e": 368.09
   },
   {
-   "t": "B är lika med B hastigheten v ä n sträckan s tiden t e r plus B höjden h ö tyngdfaktorn g e r som är lika med 22,1 plus 7,3 som är lika med 29,4 µT",
-   "s": 364.53,
-   "e": 379.11
+   "t": "B är lika med B hastigheten v ä n sträckan s tiden t e r plus B höjden h ö tyngdfaktorn g e r som är lika med 22,1 plus 7,3 som är lika med 29,4 µ T",
+   "s": 368.09,
+   "e": 382.67
   },
   {
    "t": "Svar: 29 μT uppåt",
-   "s": 364.53,
-   "e": 379.11
+   "s": 368.09,
+   "e": 382.67
   }
  ]
 }

@@ -1,8 +1,8 @@
 {
  "id": "fy1-3.7",
  "voice": "sv-SE-SofieNeural",
- "hash": "7e7777d02881ca1adf7ea7c3a1330cbe08eeba66",
- "dur": 441.6,
+ "hash": "127fa9b6b768c9da2138136694ede91115ccb8a9",
+ "dur": 439.72,
  "segments": [
   {
    "t": "Lutande plan",
@@ -172,167 +172,167 @@
   {
    "t": "Vinkeln mellan planet och tyngdkraften kan vi, med hjälp av att vinkelsumman i en triangel är 180 grader, bestämma till 180 grader − 90 grader − v är lika med 90 grader − v.",
    "s": 193.6,
-   "e": 204.95
+   "e": 204.96
   },
   {
    "t": "Detta ger",
-   "s": 204.95,
-   "e": 206.95
+   "s": 204.96,
+   "e": 206.96
   },
   {
-   "t": "x plus parentesen 90 grader minus hastigheten v slut parentes är lika med 90 grader parentesen tillsammansbildardeenrätvinkel slut parentes",
-   "s": 206.95,
-   "e": 216.61
+   "t": "x plus parentesen 90 grader minus hastigheten v slut parentes är lika med 90 grader parentesen tillsammans bildar de en rät vinkel slut parentes",
+   "s": 206.96,
+   "e": 217.3
   },
   {
    "t": "x plus 90 grader minus hastigheten v är lika med 90 grader",
-   "s": 216.61,
-   "e": 221.96
+   "s": 217.3,
+   "e": 222.66
   },
   {
    "t": "Vi subtraherar 90 grader från båda led och löser ut x.",
-   "s": 221.96,
-   "e": 232.68
+   "s": 222.66,
+   "e": 233.36
   },
   {
    "t": "x minus hastigheten v är lika med 0 vilket är ekvivalent med att x är lika med v vilket skulle visas",
-   "s": 221.96,
-   "e": 232.68
+   "s": 222.66,
+   "e": 233.36
   },
   {
    "t": "Exempel 1 — Konstant hastighet nedför 34 grader-plan",
-   "s": 232.68,
-   "e": 237.72
+   "s": 233.36,
+   "e": 238.41
   },
   {
    "t": "En låda med massan 0,30 kilogram glider med konstant hastighet nedför ett lutande plan med vinkeln 34 grader mot horisontalplanet.",
-   "s": 237.72,
-   "e": 247.01
+   "s": 238.41,
+   "e": 247.7
   },
   {
    "t": "Beräkna a) normalkraften, b) friktionskraften.",
-   "s": 247.01,
-   "e": 251.93
+   "s": 247.7,
+   "e": 252.61
   },
   {
    "t": "a) Vi skissar en figur, ritar alla krafter och delar upp tyngdkraften i två komposanter: F ett nedför planet och F två vinkelrätt mot planet.",
-   "s": 251.93,
-   "e": 261.76
+   "s": 252.61,
+   "e": 262.45
   },
   {
    "t": "Normalkraften F N är lika stor som F två ger",
-   "s": 261.76,
-   "e": 266.24
+   "s": 262.45,
+   "e": 266.93
   },
   {
-   "t": "F N är lika med F två som är lika med massan m gånger tyngdfaktorn g gånger cosinus alfa som är lika med 0,30 kilogram gånger 9,82 newton per kilogram gånger cosinus 34 grader som är lika med 2,442 ldots newton som är ungefär lika med 2,4 newton",
-   "s": 266.24,
-   "e": 284.07
+   "t": "F N är lika med F två som är lika med massan m gånger tyngdfaktorn g gånger cosinus alfa som är lika med 0,30 kilogram gånger 9,82 newton per kilogram gånger cosinus 34 grader som är lika med 2,442 newton som är ungefär lika med 2,4 newton",
+   "s": 266.93,
+   "e": 284.48
   },
   {
    "t": "Svar: 2,4 newton",
-   "s": 284.07,
-   "e": 287.44
+   "s": 284.48,
+   "e": 287.84
   },
   {
    "t": "b) Eftersom lådan glider med konstant hastighet nedför planet måste friktionskraften F frekvensen f vara lika stor som kraften nedför planet F ett.",
-   "s": 287.44,
-   "e": 299.51
+   "s": 287.84,
+   "e": 299.92
   },
   {
-   "t": "F frekvensen f är lika med F ett som är lika med massan m gånger tyngdfaktorn g gånger sinus alfa som är lika med 0,30 kilogram gånger 9,82 newton per kilogram gånger sinus 34 grader som är lika med 1,647 ldots newton som är ungefär lika med 1,6 newton",
-   "s": 299.46,
-   "e": 317.2
+   "t": "F frekvensen f är lika med F ett som är lika med massan m gånger tyngdfaktorn g gånger sinus alfa som är lika med 0,30 kilogram gånger 9,82 newton per kilogram gånger sinus 34 grader som är lika med 1,647 newton som är ungefär lika med 1,6 newton",
+   "s": 299.87,
+   "e": 317.36
   },
   {
    "t": "Svar: 1,6 newton",
-   "s": 317.2,
-   "e": 320.39
+   "s": 317.36,
+   "e": 320.55
   },
   {
    "t": "Exempel 2 — Elviras låda accelererar",
-   "s": 320.39,
-   "e": 324.26
+   "s": 320.55,
+   "e": 324.42
   },
   {
    "t": "Elvira placerar en låda med massan 7,5 kilogram på ett plan som lutar 36 grader.",
-   "s": 324.26,
-   "e": 330.92
+   "s": 324.42,
+   "e": 331.08
   },
   {
    "t": "Friktionstalet mellan lådan och planet är 0,42.",
-   "s": 330.92,
-   "e": 335.71
+   "s": 331.08,
+   "e": 335.87
   },
   {
    "t": "Bestäm lådans acceleration.",
-   "s": 335.71,
-   "e": 338.74
+   "s": 335.87,
+   "e": 338.89
   },
   {
    "t": "Vi skissar en figur och ritar alla krafter.",
-   "s": 338.74,
-   "e": 342.5
+   "s": 338.89,
+   "e": 342.66
   },
   {
    "t": "Eftersom lådan accelererar ska friktionskraften F frekvensen f vara mindre än kraften nedför planet F ett.",
-   "s": 342.5,
-   "e": 350.26
+   "s": 342.66,
+   "e": 350.42
   },
   {
    "t": "Lådans acceleration beror på den resulterande kraften.",
-   "s": 350.26,
-   "e": 354.6
+   "s": 350.42,
+   "e": 354.76
   },
   {
    "t": "Vi löser ut accelerationen från Newtons andra lag.",
-   "s": 354.6,
-   "e": 358.96
+   "s": 354.76,
+   "e": 359.12
   },
   {
    "t": "F resistansen R är lika med massan m gånger accelerationen a vilket är ekvivalent med att a är lika med F R delat med m",
-   "s": 358.96,
-   "e": 367.19
+   "s": 359.12,
+   "e": 367.35
   },
   {
    "t": "Vi behöver bestämma den resulterande kraften F resistansen R .",
-   "s": 367.19,
-   "e": 372.15
+   "s": 367.35,
+   "e": 372.31
   },
   {
    "t": "Från figuren får vi",
-   "s": 372.15,
-   "e": 374.8
+   "s": 372.31,
+   "e": 374.96
   },
   {
    "t": "F resistansen R är lika med F ett minus F frekvensen f",
-   "s": 374.8,
-   "e": 380.05
+   "s": 374.96,
+   "e": 380.18
   },
   {
-   "t": "F ett är lika med massan m gånger tyngdfaktorn g gånger sinus alfa som är lika med 7,5 kilogram gånger 9,82 newton per kilogram gånger sinus 36 grader som är lika med 43,290 ldots newton F frekvensen f som är lika med my gånger F N som är lika med my gånger F två som är lika med my gånger m gånger g gånger cosinus alfa som är lika med 0,42 gånger 7,5 gånger 9,82 gånger cosinus 36 grader som är lika med 25,025 ldots newton",
-   "s": 380.05,
-   "e": 410.84
+   "t": "F ett är lika med massan m gånger tyngdfaktorn g gånger sinus alfa som är lika med 7,5 kilogram gånger 9,82 newton per kilogram gånger sinus 36 grader som är lika med 43,290 newton F frekvensen f som är lika med my gånger F N som är lika med my gånger F två som är lika med my gånger m gånger g gånger cosinus alfa som är lika med 0,42 gånger 7,5 gånger 9,82 gånger cosinus 36 grader som är lika med 25,025 newton",
+   "s": 380.18,
+   "e": 410.39
   },
   {
-   "t": "F resistansen R är lika med 43,290 ldots minus 25,025 ldots som är lika med 18,265 ldots newton",
-   "s": 410.84,
-   "e": 421.4
+   "t": "F resistansen R är lika med 43,290 minus 25,025 som är lika med 18,265 newton",
+   "s": 410.39,
+   "e": 419.88
   },
   {
    "t": "Insättning ger",
-   "s": 421.4,
-   "e": 423.66
+   "s": 419.88,
+   "e": 422.14
   },
   {
-   "t": "accelerationen a är lika med 18,265 ldots delat med 7,5 som är lika med 2,435 ldots meter per sekund i kvadrat som är ungefär lika med 2,4 meter per sekund i kvadrat",
-   "s": 423.66,
-   "e": 437.16
+   "t": "accelerationen a är lika med 18,265 delat med 7,5 som är lika med 2,435 meter per sekund i kvadrat som är ungefär lika med 2,4 meter per sekund i kvadrat",
+   "s": 422.14,
+   "e": 435.28
   },
   {
    "t": "Svar: 2,4 meter per sekund i kvadrat",
-   "s": 437.16,
-   "e": 441.6
+   "s": 435.28,
+   "e": 439.72
   }
  ]
 }

@@ -1,8 +1,8 @@
 {
  "id": "fy1-3.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "eca27432f7d7052804252f40630cf26a140c8690",
- "dur": 288.89,
+ "hash": "ba27e646219435bfc4bae33ddefeb1ec3153241d",
+ "dur": 289.34,
  "segments": [
   {
    "t": "Newtons andra lag",
@@ -87,172 +87,172 @@
   {
    "t": "1 newton är den kraft som krävs för att ge massan 1 kilogram accelerationen 1 meter per sekund i kvadrat.",
    "s": 80.44,
-   "e": 87.75
+   "e": 87.79
   },
   {
    "t": "Om vi uttrycker 1 newton i grundenheter betyder det alltså att",
-   "s": 87.75,
-   "e": 92.55
+   "s": 87.79,
+   "e": 92.59
   },
   {
-   "t": "1 newton är lika med 1 kilogram gånger 1 meter per sekund i kvadrat som är lika med 1 kilogram\\cdotm per sekund i kvadrat",
-   "s": 92.55,
-   "e": 101.25
+   "t": "1 newton är lika med 1 kilogram gånger 1 meter per sekund i kvadrat som är lika med 1 kilogram \\cdot m/s^2",
+   "s": 92.59,
+   "e": 102.33
   },
   {
    "t": "Airbags och superhjältar",
-   "s": 101.25,
-   "e": 103.97
+   "s": 102.33,
+   "e": 105.05
   },
   {
    "t": "Newtons andra lag förklarar varför en airbag skyddar vid en krock.",
-   "s": 103.97,
-   "e": 108.72
+   "s": 105.05,
+   "e": 109.83
   },
   {
    "t": "Kudden gör att inbromsningen sker under en längre tid, vilket gör att huvudets acceleration blir lägre och därmed också kraften på huvudet.",
-   "s": 108.72,
-   "e": 117.22
+   "s": 109.83,
+   "e": 118.33
   },
   {
    "t": "Fundera: I superhjältefilmer ser man Superman komma flygande och rädda en fallande person precis innan den ska slå i marken.",
-   "s": 117.22,
-   "e": 125.29
+   "s": 118.33,
+   "e": 126.39
   },
   {
    "t": "Om vi bortser från superkrafter, skulle det fungera i verkligheten?",
-   "s": 125.29,
-   "e": 130.15
+   "s": 126.39,
+   "e": 131.25
   },
   {
    "t": "Svaret är nej — det spelar ingen roll om det är Superman eller marken som bromsar upp fallet.",
-   "s": 130.15,
-   "e": 136.09
+   "s": 131.25,
+   "e": 137.19
   },
   {
    "t": "Den kraftiga inbromsningen orsakar samma stora krafter.",
-   "s": 136.09,
-   "e": 140.26
+   "s": 137.19,
+   "e": 141.36
   },
   {
    "t": "Exempel 1 — Lådan som puttas",
-   "s": 140.26,
-   "e": 143.76
+   "s": 141.36,
+   "e": 144.86
   },
   {
    "t": "En låda som väger 5 000 gram står på ett golv.",
-   "s": 143.76,
-   "e": 147.9
+   "s": 144.86,
+   "e": 149.0
   },
   {
    "t": "Du puttar på den med kraften 50 newton och det uppstår då en friktionskraft på 20 newton i motsatt riktning.",
-   "s": 147.9,
-   "e": 154.85
+   "s": 149.0,
+   "e": 155.95
   },
   {
    "t": "a) Beräkna lådans acceleration.",
-   "s": 154.85,
-   "e": 158.44
+   "s": 155.95,
+   "e": 159.54
   },
   {
    "t": "b) Hur långt puttas den på 2,0 sekunder?",
-   "s": 158.44,
-   "e": 162.9
+   "s": 159.54,
+   "e": 164.0
   },
   {
    "t": "a) Vi ställer upp Newtons andra lag och löser ut accelerationen a.",
-   "s": 162.9,
-   "e": 184.49
+   "s": 164.0,
+   "e": 185.59
   },
   {
    "t": "F resistansen R är lika med massan m gånger accelerationen a vilket är ekvivalent med att a är lika med F R delat med m",
-   "s": 162.9,
-   "e": 184.49
+   "s": 164.0,
+   "e": 185.59
   },
   {
    "t": "F resistansen R är lika med parentesen 50 minus 20 slut parentes newton som är lika med 30 newton massan m som är lika med 5 000 gram som är lika med 5,0 kilogram",
-   "s": 162.9,
-   "e": 184.49
+   "s": 164.0,
+   "e": 185.59
   },
   {
    "t": "accelerationen a är lika med 30 delat med 5,0 som är lika med 6,0 meter per sekund i kvadrat",
-   "s": 184.49,
-   "e": 192.1
+   "s": 185.59,
+   "e": 193.2
   },
   {
    "t": "Svar: 6,0 meter per sekund i kvadrat",
-   "s": 192.1,
-   "e": 196.53
+   "s": 193.2,
+   "e": 197.62
   },
   {
    "t": "b) Sträckan vid konstant acceleration utan begynnelsehastighet beräknas",
-   "s": 196.53,
-   "e": 202.69
+   "s": 197.62,
+   "e": 203.79
   },
   {
    "t": "sträckan s är lika med accelerationen a gånger tiden t i kvadrat delat med 2",
-   "s": 202.69,
-   "e": 209.01
+   "s": 203.79,
+   "e": 210.11
   },
   {
    "t": "accelerationen a är lika med 6,0 meter per sekund i kvadrat tiden t som är lika med 2,0 sekund",
-   "s": 209.01,
-   "e": 216.61
+   "s": 210.11,
+   "e": 217.71
   },
   {
    "t": "sträckan s är lika med 6,0 gånger 2,0 i kvadrat delat med 2 som är lika med 24 delat med 2 som är lika med 12 meter",
-   "s": 216.61,
-   "e": 225.84
+   "s": 217.71,
+   "e": 226.94
   },
   {
    "t": "Svar: 12 meter",
-   "s": 225.84,
-   "e": 228.61
+   "s": 226.94,
+   "e": 229.71
   },
   {
    "t": "Exempel 2 — Resulterande kraft på bilen",
-   "s": 228.61,
-   "e": 232.38
+   "s": 229.71,
+   "e": 233.47
   },
   {
    "t": "En bil accelererar från 0 till 90 kilometer i timmen på 15 sekunder.",
-   "s": 232.38,
-   "e": 237.81
+   "s": 233.47,
+   "e": 238.91
   },
   {
    "t": "Bilen väger 1,2 ton.",
-   "s": 237.81,
-   "e": 240.95
+   "s": 238.91,
+   "e": 242.05
   },
   {
    "t": "Vilken är den genomsnittliga resulterande kraften på bilen under accelerationen?",
-   "s": 240.95,
-   "e": 246.56
+   "s": 242.05,
+   "e": 247.66
   },
   {
    "t": "Vi ställer upp Newtons andra lag.",
-   "s": 246.56,
-   "e": 249.68
+   "s": 247.66,
+   "e": 250.78
   },
   {
    "t": "F resistansen R är lika med massan m gånger accelerationen a",
-   "s": 249.68,
-   "e": 254.94
+   "s": 250.78,
+   "e": 256.02
   },
   {
-   "t": "massan m är lika med 1 200 kilogram accelerationen a som är lika med delta hastigheten v delat med delta tiden t som är lika med 90 delat med 3,6 meter per sekund delat med 15 sekund som är lika med 25 meter per sekund delat med 15 sekund som är lika med 1,666 ldots meter per sekund i kvadrat",
-   "s": 254.94,
-   "e": 274.99
+   "t": "massan m är lika med 1 200 kilogram accelerationen a som är lika med delta hastigheten v delat med delta tiden t som är lika med 90 delat med 3,6 meter per sekund delat med 15 sekund som är lika med 25 meter per sekund delat med 15 sekund som är lika med 1,666 meter per sekund i kvadrat",
+   "s": 256.02,
+   "e": 275.7
   },
   {
-   "t": "F resistansen R är lika med 1 200 gånger 1,666 ldots som är lika med 2 000 newton som är lika med 2,0 kilonewton",
-   "s": 274.99,
-   "e": 285.32
+   "t": "F resistansen R är lika med 1 200 gånger 1,666 som är lika med 2 000 newton som är lika med 2,0 kilonewton",
+   "s": 275.7,
+   "e": 285.77
   },
   {
    "t": "Svar: 2,0 kilonewton",
-   "s": 285.32,
-   "e": 288.89
+   "s": 285.77,
+   "e": 289.34
   }
  ]
 }

@@ -1,0 +1,173 @@
+{
+ "id": "ma1c-5.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "025a97852dbffff30cb50ab0a6ba62e761f9f70f",
+ "dur": 220.89,
+ "segments": [
+  {
+   "t": "Felmarginal och signifikans",
+   "s": 0.1,
+   "e": 3.33
+  },
+  {
+   "t": "Hur osäkert ett resultat är kallas felmarginal.",
+   "s": 3.27,
+   "e": 7.76
+  },
+  {
+   "t": "Den anger hur mycket resultaten från en statistisk undersökning kan förväntas variera om undersökningen skulle upprepas under liknande förhållanden och anges ofta i procent.",
+   "s": 7.76,
+   "e": 17.9
+  },
+  {
+   "t": "Ett vanligt sätt att ange felmarginal är att ett resultat i 95 procent av fallen ska ligga inom felmarginalen.",
+   "s": 17.9,
+   "e": 25.34
+  },
+  {
+   "t": "Det intervall som resultatet med felmarginal ger kallas konfidensintervall.",
+   "s": 25.34,
+   "e": 30.89
+  },
+  {
+   "t": "Felmarginal",
+   "s": 30.89,
+   "e": 33.16
+  },
+  {
+   "t": "Om vi med 95 procent säkerhet vill veta att ett resultat ligger i ett visst intervall kan felmarginalen f beräknas",
+   "s": 33.16,
+   "e": 41.04
+  },
+  {
+   "t": "f är lika med 1,96 gånger roten ur p parentesen 100 minus p slut parentes delat med n",
+   "s": 41.04,
+   "e": 48.76
+  },
+  {
+   "t": "där",
+   "s": 48.76,
+   "e": 50.26
+  },
+  {
+   "t": "f är lika med felmarginal i procentenheter",
+   "s": 50.26,
+   "e": 54.21
+  },
+  {
+   "t": "p är lika med andelen i procent som gett ett visst svar",
+   "s": 54.21,
+   "e": 58.75
+  },
+  {
+   "t": "n är lika med stickprovets storlek",
+   "s": 58.75,
+   "e": 62.11
+  },
+  {
+   "t": "Sannolikheten för att en statistisk förändring har skett kallas signifikans.",
+   "s": 62.11,
+   "e": 67.47
+  },
+  {
+   "t": "Om en förändring är större än felmarginalen kan vi med 95 procent säkerhet säga att det har skett en förändring.",
+   "s": 67.47,
+   "e": 74.5
+  },
+  {
+   "t": "Förändringen är då \"signifikant\" eller \"statistiskt säkerställd\".",
+   "s": 74.5,
+   "e": 79.2
+  },
+  {
+   "t": "Exempel 1 — Favoritämnet",
+   "s": 79.2,
+   "e": 82.46
+  },
+  {
+   "t": "En stickprovsundersökning gjordes bland Sveriges gymnasieelever för att ta reda på hur många procent av naturelever som har matematik som favoritämne.",
+   "s": 82.46,
+   "e": 91.3
+  },
+  {
+   "t": "Av 100 tillfrågade svarade 60 att de har matematik som favoritämne.. a) Beräkna felmarginalen.. b) Beräkna konfidensintervallet.. c) Undersökningen upprepades efter tre år.",
+   "s": 91.3,
+   "e": 109.16
+  },
+  {
+   "t": "Av 100 tillfrågade svarade då 52 att de har matematik som favoritämne.",
+   "s": 109.16,
+   "e": 115.09
+  },
+  {
+   "t": "Är förändringen statistiskt säkerställd, dvs. är det säkert att det har skett en minskning av andelen som har matematik som favoritämne?",
+   "s": 115.09,
+   "e": 123.59
+  },
+  {
+   "t": "a) Vi ställer upp formeln för felmarginal:",
+   "s": 123.59,
+   "e": 140.34
+  },
+  {
+   "t": "f är lika med 1,96 gånger roten ur p parentesen 100 minus p slut parentes delat med n",
+   "s": 123.59,
+   "e": 140.34
+  },
+  {
+   "t": "p är lika med 60 delat med 100 som är lika med 0,6 som är lika med 60 procent n som är lika med 100.",
+   "s": 123.59,
+   "e": 140.34
+  },
+  {
+   "t": "Insättning av värdena ovan i formeln för felmarginal ger",
+   "s": 140.34,
+   "e": 145.14
+  },
+  {
+   "t": "f är lika med 1,96 gånger roten ur 60 parentesen 100 minus 60 slut parentes delat med 100 som är lika med 9,601 procent som är ungefär lika med 9,6 procent",
+   "s": 145.14,
+   "e": 158.46
+  },
+  {
+   "t": "Svar: 9,6 procent",
+   "s": 158.46,
+   "e": 162.01
+  },
+  {
+   "t": "b) Konfidensintervallet fås genom att ta resultatet ± felmarginalen, dvs. 60 procent plus minus 9,6 procent :",
+   "s": 162.01,
+   "e": 183.6
+  },
+  {
+   "t": "Undre gräns är lika med 60 procent minus 9,6 procent som är lika med 50,4 procent Övre gräns som är lika med 60 procent plus 9,6 procent som är lika med 69,6 procent.",
+   "s": 162.01,
+   "e": 183.6
+  },
+  {
+   "t": "Svar: Mellan 50,4 procent och 69,6 procent. (Det är alltså 95 procent chans att det verkliga resultatet ligger mellan dessa värden.)",
+   "s": 183.6,
+   "e": 195.66
+  },
+  {
+   "t": "c) Den nya andelen positiva är",
+   "s": 195.66,
+   "e": 199.38
+  },
+  {
+   "t": "52 delat med 100 är lika med 0,52 som är lika med 52 procent",
+   "s": 199.38,
+   "e": 205.91
+  },
+  {
+   "t": "Detta ligger inom felmarginalen från föregående undersökning (52 procent ligger mellan 50,4 procent och 69,6 procent).",
+   "s": 205.91,
+   "e": 215.81
+  },
+  {
+   "t": "Svar: Nej, förändringen är inte statistiskt säkerställd.",
+   "s": 215.81,
+   "e": 220.89
+  }
+ ]
+}

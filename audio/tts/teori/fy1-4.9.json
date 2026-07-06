@@ -1,8 +1,8 @@
 {
  "id": "fy1-4.9",
  "voice": "sv-SE-SofieNeural",
- "hash": "7990dc6a305c0d6f178da20390b5cd404bfb2c1a",
- "dur": 201.5,
+ "hash": "4fd072bae1ff4fbce59ee8be3fab5de895020496",
+ "dur": 200.24,
  "segments": [
   {
    "t": "Arbete med friktion",
@@ -137,22 +137,22 @@
   {
    "t": "arbetet W är lika med massan m gånger tyngdfaktorn g gånger höjden h plus my gånger F N gånger sträckan s",
    "s": 143.39,
-   "e": 151.51
+   "e": 151.49
   },
   {
-   "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter my som är lika med 0,35 F N som är lika med F två som är lika med m gånger g gånger cosinus alfa som är lika med 32 gånger 9,82 gånger cosinus 30 grader som är lika med 272,139 ldots newton sträckan s som är lika med 5,0 meter",
-   "s": 151.51,
-   "e": 178.15
+   "t": "massan m är lika med 32 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 2,5 meter my som är lika med 0,35 F N som är lika med F två som är lika med m gånger g gånger cosinus alfa som är lika med 32 gånger 9,82 gånger cosinus 30 grader som är lika med 272,139 newton sträckan s som är lika med 5,0 meter",
+   "s": 151.49,
+   "e": 177.66
   },
   {
-   "t": "arbetet W är lika med 32 gånger 9,82 gånger 2,5 plus 0,35 gånger 272,139 ldots gånger 5,0 som är lika med 1 261,844 ldots Nm som är ungefär lika med 1 300 Nm som är lika med 1,3 kNm",
-   "s": 178.15,
-   "e": 198.18
+   "t": "arbetet W är lika med 32 gånger 9,82 gånger 2,5 plus 0,35 gånger 272,139 gånger 5,0 som är lika med 1 261,844 Nm som är ungefär lika med 1 300 Nm som är lika med 1,3 kNm",
+   "s": 177.66,
+   "e": 196.91
   },
   {
    "t": "Svar: 1,3 kNm",
-   "s": 198.18,
-   "e": 201.5
+   "s": 196.91,
+   "e": 200.24
   }
  ]
 }

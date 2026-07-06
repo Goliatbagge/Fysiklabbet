@@ -1,0 +1,218 @@
+{
+ "id": "ma1c-2.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "e14e11b20df1d10decdd5355ec813b821b3aeb8b",
+ "dur": 190.59,
+ "segments": [
+  {
+   "t": "Mer om ekvationer",
+   "s": 0.1,
+   "e": 2.73
+  },
+  {
+   "t": "Om vi har variabler på båda sidor om likhetstecknet, så samla dem på ena sidan och lös sedan ekvationen som vanligt.",
+   "s": 2.67,
+   "e": 10.53
+  },
+  {
+   "t": "Enklast brukar det bli genom att ta bort variabeltermen från den sida där som har minst koefficient.",
+   "s": 10.53,
+   "e": 16.9
+  },
+  {
+   "t": "Om en ekvation leder till en motsägelse, t.ex. 1 är lika med 2 , så betyder det att ekvationen saknar lösning.",
+   "s": 16.9,
+   "e": 24.69
+  },
+  {
+   "t": "Exempel 1 — Variabler i båda led",
+   "s": 24.69,
+   "e": 28.29
+  },
+  {
+   "t": "Lös. a) 5 x plus 8 minus 3 x är lika med 9 x minus 20 b) 54 minus 4 parentesen 3 x minus 5 slut parentes är lika med 25 x c) 3 parentesen 7 x minus 4 slut parentes är lika med 7 parentesen 9 plus 3 x slut parentes",
+   "s": 28.29,
+   "e": 48.4
+  },
+  {
+   "t": "a) Vi börjar med att förenkla båda led:",
+   "s": 48.4,
+   "e": 55.56
+  },
+  {
+   "t": "2 x plus 8 är lika med 9 x minus 20",
+   "s": 48.4,
+   "e": 55.56
+  },
+  {
+   "t": "Därefter tar vi bort variabeltermen från VL, eftersom den har minst koefficient.",
+   "s": 55.56,
+   "e": 61.69
+  },
+  {
+   "t": "Vi subtraherar alltså 2 x från båda led:",
+   "s": 61.69,
+   "e": 73.01
+  },
+  {
+   "t": "2 x plus 8 minus 2 x är lika med 9 x minus 20 minus 2 x",
+   "s": 61.69,
+   "e": 73.01
+  },
+  {
+   "t": "8 är lika med 7 x minus 20",
+   "s": 61.69,
+   "e": 73.01
+  },
+  {
+   "t": "Sedan löser vi ekvationen enligt tidigare metod.",
+   "s": 73.01,
+   "e": 77.24
+  },
+  {
+   "t": "Vi adderar 20 till båda led:",
+   "s": 77.24,
+   "e": 84.2
+  },
+  {
+   "t": "8 plus 20 är lika med 7 x minus 20 plus 20",
+   "s": 77.24,
+   "e": 84.2
+  },
+  {
+   "t": "28 är lika med 7 x",
+   "s": 84.2,
+   "e": 92.3
+  },
+  {
+   "t": "Dividerar med 7 i båda led:",
+   "s": 84.2,
+   "e": 92.3
+  },
+  {
+   "t": "28 delat med 7 är lika med 7 x delat med 7",
+   "s": 84.2,
+   "e": 92.3
+  },
+  {
+   "t": "4 är lika med x",
+   "s": 92.3,
+   "e": 96.69
+  },
+  {
+   "t": "Svar: x är lika med 4",
+   "s": 92.3,
+   "e": 96.69
+  },
+  {
+   "t": "b) Vi börjar återigen med att förenkla båda led.",
+   "s": 96.69,
+   "e": 100.96
+  },
+  {
+   "t": "Vi multiplicerar in −4 i parentesen (tänk på tecknen: minus 4 gånger parentesen minus 5 slut parentes är lika med plus 20 ):",
+   "s": 100.96,
+   "e": 122.22
+  },
+  {
+   "t": "54 minus 4 parentesen 3 x minus 5 slut parentes är lika med 25 x",
+   "s": 100.96,
+   "e": 122.22
+  },
+  {
+   "t": "54 minus 12 x plus 20 är lika med 25 x",
+   "s": 100.96,
+   "e": 122.22
+  },
+  {
+   "t": "74 minus 12 x är lika med 25 x",
+   "s": 100.96,
+   "e": 122.22
+  },
+  {
+   "t": "Därefter tar vi bort variabeltermen från VL, eftersom den har minst koefficient (−12 är mindre än 25).",
+   "s": 122.22,
+   "e": 130.07
+  },
+  {
+   "t": "Vi adderar 12 x till båda led:",
+   "s": 130.07,
+   "e": 146.38
+  },
+  {
+   "t": "74 minus 12 x plus 12 x är lika med 25 x plus 12 x",
+   "s": 130.07,
+   "e": 146.38
+  },
+  {
+   "t": "74 är lika med 37 x",
+   "s": 130.07,
+   "e": 146.38
+  },
+  {
+   "t": "Dividerar med 37 i båda led:",
+   "s": 130.07,
+   "e": 146.38
+  },
+  {
+   "t": "74 delat med 37 är lika med 37 x delat med 37",
+   "s": 130.07,
+   "e": 146.38
+  },
+  {
+   "t": "2 är lika med x",
+   "s": 146.38,
+   "e": 150.54
+  },
+  {
+   "t": "Svar: x är lika med 2",
+   "s": 146.38,
+   "e": 150.54
+  },
+  {
+   "t": "c) Vi börjar med att utveckla och förenkla båda led:",
+   "s": 150.54,
+   "e": 161.76
+  },
+  {
+   "t": "3 parentesen 7 x minus 4 slut parentes är lika med 7 parentesen 9 plus 3 x slut parentes",
+   "s": 150.54,
+   "e": 161.76
+  },
+  {
+   "t": "21 x minus 12 är lika med 63 plus 21 x",
+   "s": 161.76,
+   "e": 167.14
+  },
+  {
+   "t": "Vi subtraherar 21 x från båda led:",
+   "s": 167.14,
+   "e": 179.3
+  },
+  {
+   "t": "21 x minus 12 minus 21 x är lika med 63 plus 21 x minus 21 x",
+   "s": 167.14,
+   "e": 179.3
+  },
+  {
+   "t": "minus 12 är lika med 63",
+   "s": 167.14,
+   "e": 179.3
+  },
+  {
+   "t": "Detta är falskt eftersom minus 12 är inte lika med 63 .",
+   "s": 179.3,
+   "e": 184.2
+  },
+  {
+   "t": "Alltså saknar ekvationen lösningar.",
+   "s": 184.2,
+   "e": 187.57
+  },
+  {
+   "t": "Svar: Saknar lösning.",
+   "s": 187.57,
+   "e": 190.59
+  }
+ ]
+}

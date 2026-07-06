@@ -1,0 +1,193 @@
+{
+ "id": "ma1c-5.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "69c738a55fc5f1cc921efb1665be557c527075ba",
+ "dur": 198.26,
+ "segments": [
+  {
+   "t": "Experimentella sannolikheter",
+   "s": 0.1,
+   "e": 3.14
+  },
+  {
+   "t": "Introduktion — Experimentella sannolikheter",
+   "s": 3.09,
+   "e": 6.79
+  },
+  {
+   "t": "Vad är sannolikheten för att träffas i huvudet av en meteorit?",
+   "s": 6.79,
+   "e": 11.5
+  },
+  {
+   "t": "Det finns två möjliga utfall:",
+   "s": 11.5,
+   "e": 16.82
+  },
+  {
+   "t": "Du blir träffad i huvudet av en meteorit.",
+   "s": 11.5,
+   "e": 16.82
+  },
+  {
+   "t": "Du blir inte träffad i huvudet av en meteorit.",
+   "s": 16.82,
+   "e": 20.84
+  },
+  {
+   "t": "Enligt den klassiska sannolikhetsdefinitionen skulle sannolikheten då vara",
+   "s": 20.84,
+   "e": 26.12
+  },
+  {
+   "t": "P av bli träffad av en meteorit är lika med 1 delat med 2 som är lika med 0,5 som är lika med 50 procent",
+   "s": 26.12,
+   "e": 33.62
+  },
+  {
+   "t": "Det stämmer såklart inte.",
+   "s": 33.62,
+   "e": 36.2
+  },
+  {
+   "t": "Det är inte 50 procent risk att få en rymdsten i huvudet.",
+   "s": 36.2,
+   "e": 40.74
+  },
+  {
+   "t": "Men varför fungerar inte den klassiska sannolikhetsdefinitionen?",
+   "s": 40.74,
+   "e": 45.5
+  },
+  {
+   "t": "Jo, för att sannolikheten för de två utfallen är inte lika stor!",
+   "s": 45.5,
+   "e": 50.49
+  },
+  {
+   "t": "Alltså gäller inte den klassiska sannolikhetsdefinitionen!",
+   "s": 50.49,
+   "e": 54.83
+  },
+  {
+   "t": "Men hur ska vi ta reda på hur stor sannolikheten är för att bli träffad i huvudet av en meteorit?",
+   "s": 54.83,
+   "e": 61.14
+  },
+  {
+   "t": "Vi måste vänta tillräckligt länge tills någon faktiskt blir träffad av en meteorit.",
+   "s": 61.14,
+   "e": 66.55
+  },
+  {
+   "t": "Först då vet vi ungefär (om vi vill slippa krångliga astronomiska beräkningar).",
+   "s": 66.55,
+   "e": 72.24
+  },
+  {
+   "t": "Och det har hänt!",
+   "s": 72.24,
+   "e": 74.36
+  },
+  {
+   "t": "Sannolikheten att dö av en meteorit är ungefär 1 på 1 600 000 (att jämföra med sannolikheten 1 på 93 att dö i någon form av motorfordonsolycka).",
+   "s": 74.36,
+   "e": 85.35
+  },
+  {
+   "t": "Händelser där sannolikheten inte är självklar leder till experimentella sannolikheter.",
+   "s": 85.35,
+   "e": 91.34
+  },
+  {
+   "t": "Den experimentella sannolikheten bestäms genom upprepade försök och kan anges i procent som relativ frekvens.",
+   "s": 91.34,
+   "e": 98.7
+  },
+  {
+   "t": "Ju fler försök desto mer exakt kommer sannolikheten att bli.",
+   "s": 98.7,
+   "e": 103.46
+  },
+  {
+   "t": "Exempel 1 — Straffläggningen",
+   "s": 103.46,
+   "e": 106.54
+  },
+  {
+   "t": "Asllani lägger 200 straffar på Musovic.",
+   "s": 106.54,
+   "e": 110.61
+  },
+  {
+   "t": "Resultatet antecknas löpande i tabellen nedan.",
+   "s": 110.61,
+   "e": 114.74
+  },
+  {
+   "t": "Vad är sannolikheten i procent att nästa straff. a) blir mål? b) inte blir mål?",
+   "s": 114.74,
+   "e": 123.71
+  },
+  {
+   "t": "a) Vi tittar på den relativa frekvensen för alla straffar och ser att den är ungefär 70 procent.",
+   "s": 123.71,
+   "e": 130.46
+  },
+  {
+   "t": "Svar: 70 procent",
+   "s": 130.46,
+   "e": 133.45
+  },
+  {
+   "t": "b) Sannolikheten för att det inte blir mål måste vara 100 procent minus 70 procent är lika med 30 procent . (Detta kallas för motsatshändelsen eller komplementet.",
+   "s": 133.45,
+   "e": 145.32
+  },
+  {
+   "t": "Mer om det framöver.)",
+   "s": 145.32,
+   "e": 148.16
+  },
+  {
+   "t": "Svar: 30 procent",
+   "s": 148.16,
+   "e": 151.12
+  },
+  {
+   "t": "Exempel 2 — Flicka eller pojke?",
+   "s": 151.12,
+   "e": 154.45
+  },
+  {
+   "t": "Under 2022 föddes 50 901 flickor och 53 833 pojkar i Sverige.",
+   "s": 154.45,
+   "e": 162.39
+  },
+  {
+   "t": "Om du får ett barn, vad är sannolikheten att det blir en flicka?",
+   "s": 162.39,
+   "e": 166.65
+  },
+  {
+   "t": "Antalet födda flickor är 50 901 av totalt parentesen 50 901 plus 53 833 slut parentes är lika med 104 734 barn.",
+   "s": 166.65,
+   "e": 180.19
+  },
+  {
+   "t": "Det ger",
+   "s": 180.19,
+   "e": 182.1
+  },
+  {
+   "t": "P av flicka är lika med 50 901 delat med 104 734 som är lika med 0,4860 som är ungefär lika med 48,6 procent",
+   "s": 182.1,
+   "e": 194.14
+  },
+  {
+   "t": "Svar: Cirka 48,6 procent",
+   "s": 194.14,
+   "e": 198.26
+  }
+ ]
+}

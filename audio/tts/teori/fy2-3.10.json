@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.10",
  "voice": "sv-SE-SofieNeural",
- "hash": "5d49134d4ccbaa3f930eb37328523602586dcbad",
- "dur": 501.84,
+ "hash": "b273f700ea25c0a7d6e134c744c17487be427496",
+ "dur": 501.54,
  "segments": [
   {
    "t": "Växelströmsgenerator",
@@ -385,44 +385,44 @@
    "e": 449.54
   },
   {
-   "t": "hat u är lika med roten ur 2 gånger 110 som är lika med 155,563 ldots volt som är ungefär lika med 156 volt",
+   "t": "hat u är lika med roten ur 2 gånger 110 som är lika med 155,563 volt som är ungefär lika med 156 volt",
    "s": 449.54,
-   "e": 460.53
+   "e": 460.23
   },
   {
    "t": "Vi bestämmer sedan vinkelhastigheten ω.",
-   "s": 460.53,
-   "e": 466.46
+   "s": 460.23,
+   "e": 466.16
   },
   {
    "t": "omega är lika med 2 pi gånger frekvensen f",
-   "s": 460.53,
-   "e": 466.46
+   "s": 460.23,
+   "e": 466.16
   },
   {
    "t": "Insättning av f är lika med 60 hertz ger",
-   "s": 466.46,
-   "e": 470.36
+   "s": 466.16,
+   "e": 470.06
   },
   {
    "t": "omega är lika med 2 pi gånger 60 som är lika med 120 pi rad per sekund",
-   "s": 470.36,
-   "e": 476.49
+   "s": 470.06,
+   "e": 476.19
   },
   {
    "t": "Insättning av hat u är lika med 156 volt och omega är lika med 120 pi rad/s i ekvation 1 ger",
-   "s": 476.49,
-   "e": 485.41
+   "s": 476.19,
+   "e": 485.11
   },
   {
    "t": "u är lika med 156 gånger sinus parentesen 120 pi gånger tiden t slut parentes",
-   "s": 485.41,
-   "e": 493.21
+   "s": 485.11,
+   "e": 492.91
   },
   {
    "t": "Svar: u är lika med 156 gånger sinus parentesen 120 pi gånger tiden t slut parentes",
-   "s": 493.21,
-   "e": 501.84
+   "s": 492.91,
+   "e": 501.54
   }
  ]
 }

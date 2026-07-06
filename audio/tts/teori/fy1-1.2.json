@@ -1,8 +1,8 @@
 {
  "id": "fy1-1.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "d8111653709392c767aca9fa2460fb6b8aa0e676",
- "dur": 283.31,
+ "hash": "0b359e3f7672764171071402e4e7d9bcc0727ab4",
+ "dur": 286.18,
  "segments": [
   {
    "t": "Storheter, enheter och prefix",
@@ -82,207 +82,207 @@
   {
    "t": "Exempel 1 — SI-enhet för hastighet och volym",
    "s": 76.74,
-   "e": 81.04
+   "e": 81.06
   },
   {
-   "t": "Vad är SI-enheten föra) hastighet b) volym?",
-   "s": 81.04,
-   "e": 85.61
+   "t": "Vad är SI-enheten för. a) hastighet b) volym?",
+   "s": 81.06,
+   "e": 87.35
   },
   {
    "t": "a) Hastighet beräknas som sträcka / tid.",
-   "s": 85.61,
-   "e": 90.1
+   "s": 87.35,
+   "e": 91.84
   },
   {
    "t": "Eftersom SI-enheten för sträcka är meter och SI-enheten för tid är sekund blir SI-enheten för hastighet",
-   "s": 90.1,
-   "e": 97.22
+   "s": 91.84,
+   "e": 98.97
   },
   {
    "t": "sträcka delat med tid är lika med meter delat med sekund som är lika med meter delat med sekund som är lika med meter per sekund",
-   "s": 97.22,
-   "e": 104.94
+   "s": 98.97,
+   "e": 106.69
   },
   {
    "t": "Svar: m/s",
-   "s": 104.94,
-   "e": 111.65
+   "s": 106.69,
+   "e": 113.4
   },
   {
    "t": "b) Volym beräknas utifrån sträcka i tre dimensioner.",
-   "s": 104.94,
-   "e": 111.65
+   "s": 106.69,
+   "e": 113.4
   },
   {
    "t": "Eftersom SI-enheten för sträcka är meter blir SI-enheten för volym",
-   "s": 111.65,
-   "e": 117.01
+   "s": 113.4,
+   "e": 118.76
   },
   {
    "t": "sträcka gånger sträcka gånger sträcka är lika med meter gånger meter gånger meter som är lika med kubikmeter",
-   "s": 117.01,
-   "e": 124.31
+   "s": 118.76,
+   "e": 126.06
   },
   {
    "t": "Svar: m i kubik",
-   "s": 124.31,
-   "e": 127.19
+   "s": 126.06,
+   "e": 128.94
   },
   {
    "t": "OBS 1 — Avrundning",
-   "s": 127.19,
-   "e": 129.86
+   "s": 128.94,
+   "e": 131.61
   },
   {
    "t": "Mätetal är viktiga.",
-   "s": 129.86,
-   "e": 132.35
+   "s": 131.61,
+   "e": 134.1
   },
   {
    "t": "Avrunda inte förrän i slutet av en uppgift, annars kan felet bli stort!",
-   "s": 132.35,
-   "e": 137.85
+   "s": 134.1,
+   "e": 139.6
   },
   {
    "t": "OBS 2 — Värdesiffror",
-   "s": 137.85,
-   "e": 140.54
+   "s": 139.6,
+   "e": 142.29
   },
   {
    "t": "Tänk på att svara med korrekt antal värdesiffror eller gällande siffror.",
-   "s": 140.54,
-   "e": 145.44
+   "s": 142.29,
+   "e": 147.19
   },
   {
    "t": "Lathund — Att lösa fysikuppgifter",
-   "s": 145.44,
-   "e": 148.89
+   "s": 147.19,
+   "e": 150.64
   },
   {
    "t": "En lathund för hur man kan lösa fysikuppgifter på ett strukturerat sätt finns i ämnesmaterialet.",
-   "s": 148.89,
-   "e": 155.46
+   "s": 150.64,
+   "e": 157.21
   },
   {
    "t": "Exempel 2 — Svetlanas medelfart",
-   "s": 155.46,
-   "e": 158.94
+   "s": 157.21,
+   "e": 160.69
   },
   {
    "t": "Svetlana springer 56 meter på 7,12 sekunder.",
-   "s": 158.94,
-   "e": 163.8
+   "s": 160.69,
+   "e": 165.55
   },
   {
    "t": "Vilken är hennes medelfart?",
-   "s": 163.8,
-   "e": 166.74
+   "s": 165.55,
+   "e": 168.49
   },
   {
    "t": "Vi ställer upp formeln för medelfart.",
-   "s": 166.74,
-   "e": 170.01
+   "s": 168.49,
+   "e": 171.76
   },
   {
    "t": "v massan m är lika med sträckan s delat med tiden t",
-   "s": 170.01,
-   "e": 178.68
+   "s": 171.76,
+   "e": 180.41
   },
   {
    "t": "sträckan s är lika med 56 meter tiden t som är lika med 7,12 sekund",
-   "s": 170.01,
-   "e": 178.68
+   "s": 171.76,
+   "e": 180.41
   },
   {
-   "t": "v massan m är lika med 56 meter delat med 7,12 sekund som är lika med 7,865 ldots meter per sekund",
-   "s": 178.68,
-   "e": 187.54
+   "t": "v massan m är lika med 56 meter delat med 7,12 sekund som är lika med 7,865 meter per sekund",
+   "s": 180.41,
+   "e": 188.96
   },
   {
    "t": "Mätetalet 56 har två värdesiffror och mätetalet 7,12 har tre värdesiffror, alltså ska vi avrunda till två värdesiffror (minsta antalet värdesiffror).",
-   "s": 187.54,
-   "e": 198.11
+   "s": 188.96,
+   "e": 199.54
   },
   {
-   "t": "v massan m är lika med 7,865 ldots meter per sekund som är ungefär lika med 7,9 meter per sekund",
-   "s": 198.11,
-   "e": 206.51
+   "t": "v massan m är lika med 7,865 meter per sekund som är ungefär lika med 7,9 meter per sekund",
+   "s": 199.54,
+   "e": 207.68
   },
   {
    "t": "Svar: 7,9 meter per sekund",
-   "s": 206.51,
-   "e": 210.41
+   "s": 207.68,
+   "e": 211.57
   },
   {
    "t": "Prefix och tiopotenser",
-   "s": 210.41,
-   "e": 213.29
+   "s": 211.57,
+   "e": 214.44
   },
   {
    "t": "Prefix och tiopotenser används ofta för att underlätta att skriva sitt svar (särskilt om det är stora eller små tal).",
-   "s": 213.29,
-   "e": 221.21
+   "s": 214.44,
+   "e": 222.36
   },
   {
    "t": "De vanligaste prefixen finns i tabellen nedan.",
-   "s": 221.21,
-   "e": 225.1
+   "s": 222.36,
+   "e": 226.26
   },
   {
    "t": "Exempel 3 — Grundpotensform och prefix",
-   "s": 225.1,
-   "e": 228.93
+   "s": 226.26,
+   "e": 230.07
   },
   {
-   "t": "Skriv 0,000 002 4 metera) i grundpotensform b) med prefix.",
-   "s": 228.93,
-   "e": 235.9
+   "t": "Skriv 0,000 002 4 meter. a) i grundpotensform b) med prefix.",
+   "s": 230.07,
+   "e": 238.79
   },
   {
    "t": "a) I grundpotensform ska den första faktorn vara ett tal mellan 1 och 10.",
-   "s": 235.9,
-   "e": 241.68
+   "s": 238.79,
+   "e": 244.53
   },
   {
    "t": "I detta fall blir den 2,4.",
-   "s": 241.68,
-   "e": 244.93
+   "s": 244.53,
+   "e": 247.79
   },
   {
    "t": "För små tal, mindre än 1, ges tiopotensens exponent av antalet nollor innan den första siffran som inte är 0, med ett minustecken.",
-   "s": 244.93,
-   "e": 253.95
+   "s": 247.79,
+   "e": 256.81
   },
   {
    "t": "I detta fall har vi 6 nollor i början av talet, så exponenten blir −6.",
-   "s": 253.95,
-   "e": 259.55
+   "s": 256.81,
+   "e": 262.41
   },
   {
    "t": "Svar: 2,4 gånger 10 upphöjt till minus 6 meter",
-   "s": 259.55,
-   "e": 264.9
+   "s": 262.41,
+   "e": 267.76
   },
   {
    "t": "b) Vi tittar på talet i grundpotensform och studerar tiopotensen.",
-   "s": 264.9,
-   "e": 270.32
+   "s": 267.76,
+   "e": 273.19
   },
   {
    "t": "Tiopotensen 10 upphöjt till minus 6 har prefixet μ (mikro).",
-   "s": 270.32,
-   "e": 275.85
+   "s": 273.19,
+   "e": 278.71
   },
   {
    "t": "Vi byter ut tiopotensen mot sitt prefix.",
-   "s": 275.85,
-   "e": 279.8
+   "s": 278.71,
+   "e": 282.66
   },
   {
    "t": "Svar: 2,4 μm",
-   "s": 279.8,
-   "e": 283.31
+   "s": 282.66,
+   "e": 286.18
   }
  ]
 }

@@ -1,0 +1,278 @@
+{
+ "id": "ma1c-2.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "2882eb587c48441f6d4b7a30b467fa47bf0ce040",
+ "dur": 344.54,
+ "segments": [
+  {
+   "t": "Multiplicera med parenteser",
+   "s": 0.1,
+   "e": 3.25
+  },
+  {
+   "t": "Om vi har ett parentesuttryck med en faktor framför kan vi multiplicera in faktorn i parentesen.",
+   "s": 3.2,
+   "e": 9.6
+  },
+  {
+   "t": "Att skriva om ett uttryck, så att det står utan parenteser kallas att utveckla uttrycket.",
+   "s": 9.6,
+   "e": 15.79
+  },
+  {
+   "t": "Faktorn framför parentesen ska multipliceras med varje term inuti parentesen.",
+   "s": 15.79,
+   "e": 21.68
+  },
+  {
+   "t": "Denna regel kallas distributiva lagen.",
+   "s": 21.68,
+   "e": 25.27
+  },
+  {
+   "t": "Distributiva lagen",
+   "s": 25.27,
+   "e": 27.71
+  },
+  {
+   "t": "a parentesen b plus c slut parentes är lika med a b plus a c",
+   "s": 27.71,
+   "e": 34.92
+  },
+  {
+   "t": "Kontroll — Distributiva lagen",
+   "s": 27.71,
+   "e": 34.92
+  },
+  {
+   "t": "Vi kontrollerar om den distributiva lagen gäller med de räkneregler vi vet sedan tidigare.",
+   "s": 34.92,
+   "e": 41.24
+  },
+  {
+   "t": "Vi beräknar t.ex. 3 gånger parentesen 9 minus 4 slut parentes på två olika sätt.",
+   "s": 41.24,
+   "e": 48.5
+  },
+  {
+   "t": "Med prioriteringsreglerna:",
+   "s": 48.5,
+   "e": 57.46
+  },
+  {
+   "t": "3 gånger parentesen 9 minus 4 slut parentes är lika med 3 gånger 5 som är lika med 15",
+   "s": 48.5,
+   "e": 57.46
+  },
+  {
+   "t": "Med distributiva lagen:",
+   "s": 57.46,
+   "e": 69.5
+  },
+  {
+   "t": "3 gånger parentesen 9 minus 4 slut parentes är lika med 3 gånger 9 minus 3 gånger 4 som är lika med 27 minus 12 som är lika med 15",
+   "s": 57.46,
+   "e": 69.5
+  },
+  {
+   "t": "Vi får samma svar med distributiva lagen som med prioriteringsreglerna!",
+   "s": 69.5,
+   "e": 74.45
+  },
+  {
+   "t": "Regeln verkar stämma.",
+   "s": 74.45,
+   "e": 77.08
+  },
+  {
+   "t": "Exempel 1 — Multiplicera in i parentesen",
+   "s": 77.08,
+   "e": 81.19
+  },
+  {
+   "t": "Förenkla. a) 2 parentesen 2 x minus 1 slut parentes b) 8 parentesen 3 x plus 4 slut parentes minus 2 parentesen 5 x minus 7 slut parentes",
+   "s": 81.19,
+   "e": 95.29
+  },
+  {
+   "t": "a) Faktorn 2 multipliceras med varje term i parentesen:",
+   "s": 95.29,
+   "e": 108.24
+  },
+  {
+   "t": "2 parentesen 2 x minus 1 slut parentes är lika med 2 gånger 2 x minus 2 gånger 1 som är lika med 4 x minus 2",
+   "s": 95.29,
+   "e": 108.24
+  },
+  {
+   "t": "Svar: 4 x minus 2",
+   "s": 108.24,
+   "e": 111.61
+  },
+  {
+   "t": "b) Vi multiplicerar in 8:an, men har först kvar parentesen efter 2:an:",
+   "s": 111.61,
+   "e": 137.91
+  },
+  {
+   "t": "8 parentesen 3 x plus 4 slut parentes minus 2 parentesen 5 x minus 7 slut parentes är lika med 8 gånger 3 x plus 8 gånger 4 minus parentesen 2 gånger 5 x minus 2 gånger 7 slut parentes som är lika med 24 x plus 32 minus parentesen 10 x minus 14 slut parentes",
+   "s": 111.61,
+   "e": 137.91
+  },
+  {
+   "t": "Tar bort parentesen och ändrar tecken:",
+   "s": 137.91,
+   "e": 147.31
+  },
+  {
+   "t": "24 x plus 32 minus 10 x plus 14 är lika med 14 x plus 46",
+   "s": 137.91,
+   "e": 147.31
+  },
+  {
+   "t": "Svar: 14 x plus 46",
+   "s": 147.31,
+   "e": 151.19
+  },
+  {
+   "t": "När två parentespar multipliceras med varandra ska den första termen i den första parentesen multipliceras med alla termer i den andra parentesen.",
+   "s": 151.19,
+   "e": 160.28
+  },
+  {
+   "t": "Därefter ska den andra termen i den första parentesen multipliceras med alla termer i den andra parentesen.",
+   "s": 160.28,
+   "e": 167.34
+  },
+  {
+   "t": "Om det är fler än två termer i den första parentesen fortsätter man likadant tills man har multiplicerat in alla termer i den första parentesen in i den andra.",
+   "s": 167.34,
+   "e": 176.68
+  },
+  {
+   "t": "Multiplicera parenteser",
+   "s": 176.68,
+   "e": 179.56
+  },
+  {
+   "t": "Exempel 2 — Utveckla och förenkla",
+   "s": 179.56,
+   "e": 183.04
+  },
+  {
+   "t": "Utveckla och förenkla. a) parentesen x plus 7 slut parentes parentesen x plus 3 slut parentes b) parentesen 3 x minus 5 slut parentes parentesen 8 x plus 9 slut parentes c) 10 minus parentesen x minus 2 slut parentes parentesen x minus 3 slut parentes",
+   "s": 183.04,
+   "e": 204.14
+  },
+  {
+   "t": "a) Varje term i den första parentesen multipliceras med varje term i den andra:",
+   "s": 204.14,
+   "e": 222.54
+  },
+  {
+   "t": "parentesen x plus 7 slut parentes parentesen x plus 3 slut parentes är lika med x i kvadrat plus 3 x plus 7 x plus 21 som är lika med x i kvadrat plus 10 x plus 21",
+   "s": 204.14,
+   "e": 222.54
+  },
+  {
+   "t": "Svar: x i kvadrat plus 10 x plus 21",
+   "s": 222.54,
+   "e": 227.57
+  },
+  {
+   "t": "b) Samma metod — håll ordning på tecknen:",
+   "s": 227.57,
+   "e": 246.12
+  },
+  {
+   "t": "parentesen 3 x minus 5 slut parentes parentesen 8 x plus 9 slut parentes är lika med 24 x i kvadrat plus 27 x minus 40 x minus 45 som är lika med 24 x i kvadrat minus 13 x minus 45",
+   "s": 227.57,
+   "e": 246.12
+  },
+  {
+   "t": "Svar: 24 x i kvadrat minus 13 x minus 45",
+   "s": 246.12,
+   "e": 251.99
+  },
+  {
+   "t": "c) När vi har ett minustecken framför ett dubbelt parentespar ska vi behålla en stor parentes runt det utvecklade uttrycket, eftersom vi efteråt ska byta tecken på alla termer inne i parentesen:",
+   "s": 251.99,
+   "e": 275.52
+  },
+  {
+   "t": "10 minus parentesen x minus 2 slut parentes parentesen x minus 3 slut parentes är lika med 10 minus parentesen x i kvadrat minus 3 x minus 2 x plus 6 slut parentes",
+   "s": 251.99,
+   "e": 275.52
+  },
+  {
+   "t": "Byter tecken på alla termer inuti parentesen och förenklar:",
+   "s": 275.52,
+   "e": 297.98
+  },
+  {
+   "t": "10 minus x i kvadrat plus 3 x plus 2 x minus 6 är lika med 4 minus x i kvadrat plus 5 x",
+   "s": 275.52,
+   "e": 297.98
+  },
+  {
+   "t": "Svar: 4 minus x i kvadrat plus 5 x , alternativt minus x i kvadrat plus 5 x plus 4 (ofta vill man ha termerna med störst exponent först, men inget måste).",
+   "s": 275.52,
+   "e": 297.98
+  },
+  {
+   "t": "Exempel 3 — Ekvation med parentesmultiplikation",
+   "s": 297.98,
+   "e": 302.7
+  },
+  {
+   "t": "Lös ekvationen parentesen 1 plus 4 x slut parentes parentesen 3 x minus 2 slut parentes är lika med x parentesen 12 x minus 6 slut parentes .",
+   "s": 302.7,
+   "e": 314.52
+  },
+  {
+   "t": "Utvecklar parenteserna:",
+   "s": 314.52,
+   "e": 322.71
+  },
+  {
+   "t": "3 x minus 2 plus 12 x i kvadrat minus 8 x är lika med 12 x i kvadrat minus 6 x",
+   "s": 314.52,
+   "e": 336.59
+  },
+  {
+   "t": "Subtraherar 12 x i kvadrat från båda led och förenklar:",
+   "s": 322.88,
+   "e": 336.59
+  },
+  {
+   "t": "minus 5 x minus 2 är lika med minus 6 x",
+   "s": 322.88,
+   "e": 336.59
+  },
+  {
+   "t": "Adderar 6 x till båda led och förenklar:",
+   "s": 322.88,
+   "e": 336.59
+  },
+  {
+   "t": "x minus 2 är lika med 0",
+   "s": 322.88,
+   "e": 336.59
+  },
+  {
+   "t": "Adderar 2 till båda led och förenklar:",
+   "s": 336.54,
+   "e": 341.36
+  },
+  {
+   "t": "x är lika med 2",
+   "s": 336.54,
+   "e": 341.36
+  },
+  {
+   "t": "Svar: x är lika med 2",
+   "s": 341.36,
+   "e": 344.54
+  }
+ ]
+}

@@ -1,0 +1,123 @@
+{
+ "id": "ma1c-6.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a874b757241e5d661f47e6656cf8721e46fa1ae1",
+ "dur": 152.61,
+ "segments": [
+  {
+   "t": "Längden av en vektor i koordinatform",
+   "s": 0.1,
+   "e": 3.6
+  },
+  {
+   "t": "Vi har tidigare konstaterat att längden av en vektor kan beräknas med Pythagoras sats.",
+   "s": 3.55,
+   "e": 9.51
+  },
+  {
+   "t": "Studera nedanstående vektor vektorn A B :",
+   "s": 9.51,
+   "e": 19.94
+  },
+  {
+   "t": "Kom ihåg: Sträckan av vektorn A B skrivs längden av vektorn A B och utläses \"absolutbeloppet av AB\".",
+   "s": 9.51,
+   "e": 19.94
+  },
+  {
+   "t": "Om varje ruta motsvarar 1 längdenhet gäller att kateten i x-led är 8 längdenheter och att kateten i y-led är 4 längdenheter Så sträckan längden av vektorn A B beräknas med Pythagoras sats enligt",
+   "s": 19.94,
+   "e": 32.44
+  },
+  {
+   "t": "längden av vektorn A B i kvadrat är lika med 8 i kvadrat plus 4 i kvadrat",
+   "s": 32.44,
+   "e": 38.67
+  },
+  {
+   "t": "längden av vektorn A B är lika med roten ur 8 i kvadrat plus 4 i kvadrat",
+   "s": 38.67,
+   "e": 44.98
+  },
+  {
+   "t": "Nu tittar vi på vektorn i koordinatform.",
+   "s": 44.98,
+   "e": 48.6
+  },
+  {
+   "t": "I koordinatform gäller vektorn A B är lika med parentesen 8, 4 slut parentes .",
+   "s": 48.6,
+   "e": 55.24
+  },
+  {
+   "t": "Vi ser att koordinaternas storlek (8 och 4) motsvarar kateternas längd och termerna under rottecknet i formeln för sträckan längden av vektorn A B ovan!",
+   "s": 55.24,
+   "e": 65.41
+  },
+  {
+   "t": "Det spelar dessutom ingen roll om koordinaterna är negativa (en sträcka måste ju vara positiv) eftersom de blir positiva när de kvadreras under rottecknet.",
+   "s": 65.41,
+   "e": 74.91
+  },
+  {
+   "t": "Längden hos en vektor fås alltså genom att ta kvadratroten ur summan av koordinaternas kvadrater.",
+   "s": 74.91,
+   "e": 81.62
+  },
+  {
+   "t": "Längden hos en vektor i koordinatform",
+   "s": 81.62,
+   "e": 85.15
+  },
+  {
+   "t": "Längden längden av vektorn u för vektor vektorn u är lika med parentesen a, b slut parentes är",
+   "s": 85.15,
+   "e": 92.16
+  },
+  {
+   "t": "längden av vektorn u är lika med roten ur a i kvadrat plus b i kvadrat",
+   "s": 92.16,
+   "e": 97.99
+  },
+  {
+   "t": "… i formelbladet",
+   "s": 97.99,
+   "e": 100.45
+  },
+  {
+   "t": "Längden längden av vektorn u för vektor vektorn u är lika med parentesen a x, a y slut parentes är",
+   "s": 100.45,
+   "e": 107.88
+  },
+  {
+   "t": "längden av vektorn u är lika med roten ur a x i kvadrat plus a y i kvadrat",
+   "s": 107.88,
+   "e": 114.28
+  },
+  {
+   "t": "Exempel 1 — Längden ur koordinatform",
+   "s": 114.28,
+   "e": 118.21
+  },
+  {
+   "t": "Bestäm längden hos vektorn u är lika med parentesen 11, minus 5 slut parentes .",
+   "s": 118.21,
+   "e": 124.56
+  },
+  {
+   "t": "Svara exakt och avrundat till två decimaler.",
+   "s": 124.56,
+   "e": 128.75
+  },
+  {
+   "t": "längden av vektorn u är lika med roten ur 11 i kvadrat plus parentesen minus 5 slut parentes i kvadrat som är lika med roten ur 121 plus 25 som är lika med roten ur 146 längdenheter som är ungefär lika med 12,08 längdenheter",
+   "s": 128.75,
+   "e": 145.32
+  },
+  {
+   "t": "Svar: roten ur 146 längdenheter är ungefär lika med 12,08 längdenheter",
+   "s": 145.32,
+   "e": 152.61
+  }
+ ]
+}

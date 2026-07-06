@@ -1,0 +1,188 @@
+{
+ "id": "ma1c-5.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "34070b8535034a0433ae341900c5eaa8e7cc779a",
+ "dur": 168.94,
+ "segments": [
+  {
+   "t": "Korrelation och kausalitet",
+   "s": 0.1,
+   "e": 3.02
+  },
+  {
+   "t": "Om ett samband finns mellan två variabler har vi en korrelation.",
+   "s": 2.98,
+   "e": 7.58
+  },
+  {
+   "t": "Huruvida ett samband finns, kan undersökas med ett spridningsdiagram.",
+   "s": 7.58,
+   "e": 12.72
+  },
+  {
+   "t": "Om punkterna i ett spridningsdiagram ligger tydligt på en linje är korrelationen stark.",
+   "s": 12.72,
+   "e": 18.54
+  },
+  {
+   "t": "Om punkterna ligger kring en linje, men spridda, är korrelationen svag.",
+   "s": 18.54,
+   "e": 23.79
+  },
+  {
+   "t": "Om punkterna ligger kring en linje med positiv lutning är korrelationen positiv.",
+   "s": 23.79,
+   "e": 29.35
+  },
+  {
+   "t": "Om punkterna ligger kring en linje med negativ lutning är korrelationen negativ.",
+   "s": 29.35,
+   "e": 34.75
+  },
+  {
+   "t": "Exempel: Värdena för 10 mammors respektive döttrars längd prickas in i ett spridningsdiagram.",
+   "s": 34.75,
+   "e": 41.42
+  },
+  {
+   "t": "Döttrars längd i cm är markerade på y-axeln och mammors längd i cm är markerade på x-axeln:",
+   "s": 41.42,
+   "e": 52.54
+  },
+  {
+   "t": "Även om mätvärdena är spridda, så finns ett visst samband — en korrelation.",
+   "s": 41.42,
+   "e": 52.54
+  },
+  {
+   "t": "Mätvärdena är ganska spridda, men samlade kring en rät linje med positiv lutning.",
+   "s": 52.54,
+   "e": 58.59
+  },
+  {
+   "t": "Vi säger då att vi har en svag positiv korrelation.",
+   "s": 58.59,
+   "e": 62.75
+  },
+  {
+   "t": "Fler exempel:",
+   "s": 62.75,
+   "e": 66.72
+  },
+  {
+   "t": "Stark positiv korrelation.",
+   "s": 62.75,
+   "e": 66.72
+  },
+  {
+   "t": "Ex. fotlängd/skostorlek.",
+   "s": 66.72,
+   "e": 70.3
+  },
+  {
+   "t": "Svag negativ korrelation.",
+   "s": 70.3,
+   "e": 73.17
+  },
+  {
+   "t": "Ex. vägbredd/antal olyckor.",
+   "s": 73.17,
+   "e": 76.96
+  },
+  {
+   "t": "Ingen korrelation.",
+   "s": 76.96,
+   "e": 79.25
+  },
+  {
+   "t": "Ex. äggkonsumtion/kriminalitet.",
+   "s": 79.25,
+   "e": 83.28
+  },
+  {
+   "t": "Kausalitet",
+   "s": 83.28,
+   "e": 85.41
+  },
+  {
+   "t": "Ett orsakssamband mellan två variabler kallas kausalitet.",
+   "s": 85.41,
+   "e": 90.1
+  },
+  {
+   "t": "Vi återgår till exemplet med döttrars och mammors längd.",
+   "s": 90.1,
+   "e": 94.3
+  },
+  {
+   "t": "Är orsaken till att döttrarna blir långa att mammorna är långa?",
+   "s": 94.3,
+   "e": 98.66
+  },
+  {
+   "t": "Svaret är ja, eftersom generna från mamman (delvis) avgör hur lång dottern blir.",
+   "s": 98.66,
+   "e": 105.25
+  },
+  {
+   "t": "Alltså råder kausalitet.",
+   "s": 105.25,
+   "e": 108.1
+  },
+  {
+   "t": "Exempel 1 — Livslängd och internet",
+   "s": 108.1,
+   "e": 111.72
+  },
+  {
+   "t": "Ett spridningsdiagram över medellivslängd (år, y-axeln) och tillgång till internet (%, x-axeln) för några olika länder visar punkter spridda kring en stigande linje.",
+   "s": 111.72,
+   "e": 123.24
+  },
+  {
+   "t": "Avgör om det råder. a) korrelation, och i så fall vilken typ b) kausalitet.",
+   "s": 123.24,
+   "e": 130.95
+  },
+  {
+   "t": "a) Mätvärdena ligger spridda kring en linje med positiv lutning.",
+   "s": 130.95,
+   "e": 136.14
+  },
+  {
+   "t": "Svar: Svag positiv korrelation.",
+   "s": 136.14,
+   "e": 139.72
+  },
+  {
+   "t": "b) Vi tänker \"Är orsaken till den ökade medellivslängden att människor har tillgång till internet?\".",
+   "s": 139.72,
+   "e": 146.66
+  },
+  {
+   "t": "Svaret är nej.",
+   "s": 146.66,
+   "e": 149.06
+  },
+  {
+   "t": "Internettillgång ger inte ökad livslängd.",
+   "s": 149.06,
+   "e": 152.49
+  },
+  {
+   "t": "Detta är ett så kallat skensamband.",
+   "s": 152.49,
+   "e": 155.51
+  },
+  {
+   "t": "Den troliga förklaringen är att rika länder (där man har god tillgång till internet) i större utsträckning har en bättre sjukvård, som i sin tur ger längre livslängd.",
+   "s": 155.51,
+   "e": 164.71
+  },
+  {
+   "t": "Svar: Nej, ingen kausalitet råder.",
+   "s": 164.71,
+   "e": 168.94
+  }
+ ]
+}

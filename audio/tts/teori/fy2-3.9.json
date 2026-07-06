@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.9",
  "voice": "sv-SE-SofieNeural",
- "hash": "698b4816028987eec6fa292ec24e0931ba58a971",
- "dur": 451.55,
+ "hash": "0b102b0fd2892851afd6d3ddf7ec59d40d13dd80",
+ "dur": 451.48,
  "segments": [
   {
    "t": "Magnetiskt flöde och induktionslagen",
@@ -332,77 +332,77 @@
   {
    "t": "e är lika med minus N gånger delta Phi delat med delta tiden t, ekvation 1",
    "s": 339.1,
-   "e": 345.49
+   "e": 345.52
   },
   {
    "t": "N är lika med 370 delta Phi som är lika med parentesen 0,17 minus 0 slut parentes mWb som är lika med 0,17 gånger 10 upphöjt till minus 3 weber delta tiden t som är lika med 0,23 sekund",
-   "s": 345.49,
-   "e": 359.94
+   "s": 345.52,
+   "e": 359.97
   },
   {
-   "t": "e är lika med minus 370 gånger 0,17 gånger 10 upphöjt till minus 3 delat med 0,23 som är lika med minus 0,273 ldots volt som är ungefär lika med minus 0,27 volt",
-   "s": 359.94,
-   "e": 373.64
+   "t": "e är lika med minus 370 gånger 0,17 gånger 10 upphöjt till minus 3 delat med 0,23 som är lika med minus 0,273 volt som är ungefär lika med minus 0,27 volt",
+   "s": 359.97,
+   "e": 373.54
   },
   {
    "t": "Svar: −0,27 volt",
-   "s": 373.64,
-   "e": 377.44
+   "s": 373.54,
+   "e": 377.34
   },
   {
    "t": "Exempel 2 — Inducerad spänning från Φ–t-graf",
-   "s": 377.44,
-   "e": 381.73
+   "s": 377.34,
+   "e": 381.65
   },
   {
    "t": "Det magnetiska flödet genom en slinga ändras med tiden enligt nedanstående diagram.",
-   "s": 381.73,
-   "e": 387.47
+   "s": 381.65,
+   "e": 387.39
   },
   {
    "t": "Bestäm den inducerade spänningen vid tidpunkten",
-   "s": 387.47,
-   "e": 391.3
+   "s": 387.39,
+   "e": 391.23
   },
   {
    "t": "a) t är lika med 1 sekund",
-   "s": 391.3,
-   "e": 394.49
+   "s": 391.23,
+   "e": 394.42
   },
   {
    "t": "b) t är lika med 4 sekunder",
-   "s": 394.49,
-   "e": 398.14
+   "s": 394.42,
+   "e": 398.07
   },
   {
    "t": "a) Den inducerade spänningen vid en tidpunkt motsvarar momentanspänning, som ges av grafens lutning.",
-   "s": 398.14,
-   "e": 405.42
+   "s": 398.07,
+   "e": 405.34
   },
   {
    "t": "Vi bestämmer lutningen vid t är lika med 1 sekunder genom att undersöka ändringskvoten mellan t är lika med 0 och t är lika med 2 sekunder.",
-   "s": 405.42,
-   "e": 414.33
+   "s": 405.34,
+   "e": 414.25
   },
   {
    "t": "e är lika med minus delta Phi delat med delta tiden t som är lika med minus 10 mWb delat med 2 sekund som är lika med minus 10 gånger 10 upphöjt till minus 3 weber delat med 2 sekund som är lika med minus 0,005 volt som är lika med minus 5,0 millivolt",
-   "s": 414.33,
-   "e": 431.27
+   "s": 414.25,
+   "e": 431.19
   },
   {
    "t": "Svar: −5,0 millivolt",
-   "s": 431.27,
-   "e": 435.03
+   "s": 431.19,
+   "e": 434.95
   },
   {
    "t": "b) Vid t är lika med 4 sekunder sker ingen ändring av det magnetiska flödet (det ligger konstant på 10 mWb). ΔΦ är lika med 0, vilket innebär att ingen spänning induceras.",
-   "s": 435.03,
-   "e": 448.7
+   "s": 434.95,
+   "e": 448.63
   },
   {
    "t": "Svar: 0 volt",
-   "s": 448.7,
-   "e": 451.55
+   "s": 448.63,
+   "e": 451.48
   }
  ]
 }

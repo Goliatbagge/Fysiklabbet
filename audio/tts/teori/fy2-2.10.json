@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.10",
  "voice": "sv-SE-SofieNeural",
- "hash": "5cf13c86a53a16e8eb6f817cdcb46cc0c3221aa7",
- "dur": 425.99,
+ "hash": "e94c236179e4a69d5383a6bc371dfa82eae8a052",
+ "dur": 425.21,
  "segments": [
   {
    "t": "Ljudvågor och stående vågor i pipor",
@@ -285,99 +285,99 @@
    "e": 299.83
   },
   {
-   "t": "hävarmen l är lika med 24 centimeter som är lika med 0,24 meter n som är lika med 2 parentesen förstaövertonen slut parentes",
+   "t": "hävarmen l är lika med 24 centimeter som är lika med 0,24 meter n som är lika med 2 parentesen första övertonen slut parentes",
    "s": 299.78,
-   "e": 309.28
+   "e": 309.33
   },
   {
    "t": "våglängden lambda är lika med 4 gånger 0,24 delat med 2 gånger 2 minus 1 som är lika med 0,96 delat med 3 som är lika med 0,32 meter",
-   "s": 309.28,
-   "e": 320.5
+   "s": 309.33,
+   "e": 320.56
   },
   {
    "t": "hastigheten v är lika med 340 meter per sekund våglängden lambda som är lika med 0,32 meter",
-   "s": 320.5,
-   "e": 328.28
+   "s": 320.56,
+   "e": 328.34
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 328.28,
-   "e": 331.58
+   "s": 328.34,
+   "e": 331.64
   },
   {
    "t": "frekvensen f är lika med 340 delat med 0,32 som är lika med 1 062,5 hertz som är ungefär lika med 1 100 hertz som är lika med 1,1 kilohertz",
-   "s": 331.58,
-   "e": 343.78
+   "s": 331.64,
+   "e": 343.84
   },
   {
    "t": "Svar: 1,1 kilohertz",
-   "s": 343.78,
-   "e": 347.16
+   "s": 343.84,
+   "e": 347.23
   },
   {
    "t": "Exempel 2 — Längd på öppen pipa för 440 hertz",
-   "s": 347.16,
-   "e": 352.14
+   "s": 347.23,
+   "e": 352.2
   },
   {
    "t": "Hur lång öppen pipa krävs för att få grundtonen 440 hertz (ettstrukna A)?",
-   "s": 352.14,
-   "e": 358.73
+   "s": 352.2,
+   "e": 358.79
   },
   {
    "t": "Vi ställer upp formeln för en öppen pipa.",
-   "s": 358.73,
-   "e": 362.14
+   "s": 358.79,
+   "e": 362.2
   },
   {
    "t": "hävarmen l är lika med n gånger våglängden lambda delat med 2, ekvation 1",
-   "s": 362.14,
-   "e": 368.24
+   "s": 362.2,
+   "e": 368.3
   },
   {
    "t": "Vi måste ta reda på tonens våglängd λ.",
-   "s": 368.24,
-   "e": 371.58
+   "s": 368.3,
+   "e": 371.64
   },
   {
    "t": "Vi ställer upp formeln för våghastighet och löser ut λ.",
-   "s": 371.58,
-   "e": 382.51
+   "s": 371.64,
+   "e": 382.58
   },
   {
    "t": "hastigheten v är lika med frekvensen f gånger våglängden lambda vilket är ekvivalent med att lambda är lika med v delat med f",
-   "s": 371.58,
-   "e": 382.51
+   "s": 371.64,
+   "e": 382.58
   },
   {
    "t": "hastigheten v är lika med 340 meter per sekund frekvensen f som är lika med 440 hertz",
-   "s": 382.51,
-   "e": 389.98
+   "s": 382.58,
+   "e": 390.04
   },
   {
-   "t": "våglängden lambda är lika med 340 delat med 440 som är lika med 0,772 ldots meter",
-   "s": 389.98,
-   "e": 398.31
+   "t": "våglängden lambda är lika med 340 delat med 440 som är lika med 0,772 meter",
+   "s": 390.04,
+   "e": 398.1
   },
   {
-   "t": "n är lika med 1 parentesen grundtonen slut parentes våglängden lambda som är lika med 0,772 ldots meter",
-   "s": 398.31,
-   "e": 406.51
+   "t": "n är lika med 1 parentesen grundtonen slut parentes våglängden lambda som är lika med 0,772 meter",
+   "s": 398.1,
+   "e": 406.06
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 406.51,
-   "e": 409.84
+   "s": 406.06,
+   "e": 409.38
   },
   {
-   "t": "hävarmen l är lika med 1 gånger 0,772 ldots delat med 2 som är lika med 0,386 ldots meter som är ungefär lika med 0,39 meter som är lika med 39 centimeter",
-   "s": 409.84,
-   "e": 422.55
+   "t": "hävarmen l är lika med 1 gånger 0,772 delat med 2 som är lika med 0,386 meter som är ungefär lika med 0,39 meter som är lika med 39 centimeter",
+   "s": 409.38,
+   "e": 421.78
   },
   {
    "t": "Svar: 39 centimeter",
-   "s": 422.55,
-   "e": 425.99
+   "s": 421.78,
+   "e": 425.21
   }
  ]
 }

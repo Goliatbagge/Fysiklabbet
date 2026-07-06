@@ -1,0 +1,188 @@
+{
+ "id": "ma1c-2.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4e506f44c26c07c37b8f7bfa96d17ab359290ad9",
+ "dur": 195.74,
+ "segments": [
+  {
+   "t": "Teckna och tolka uttryck",
+   "s": 0.1,
+   "e": 2.9
+  },
+  {
+   "t": "Att hyra en studio kostar 800 kronor i en fast avgift och sedan 150 kronor per timme.",
+   "s": 2.85,
+   "e": 9.61
+  },
+  {
+   "t": "Den totala kostnaden för att hyra studion ett visst antal timmar kan då sammanställas i en tabell:",
+   "s": 9.61,
+   "e": 24.1
+  },
+  {
+   "t": "Vi kan skriva ett uttryck för kostnaden att hyra studion i x timmar som 800 plus 150 gånger x eller 800 plus 150 x .",
+   "s": 9.61,
+   "e": 24.1
+  },
+  {
+   "t": "Vi ska nu titta på uttrycket 800 plus 150 x och gå igenom vad de olika delarna heter.",
+   "s": 24.1,
+   "e": 31.04
+  },
+  {
+   "t": "Lär dig de fetmarkerade begreppen i högra kolumnen!",
+   "s": 31.04,
+   "e": 35.36
+  },
+  {
+   "t": "Uttryckets delar",
+   "s": 35.36,
+   "e": 37.74
+  },
+  {
+   "t": "Kostnaden för att hyra studion i exempelvis 12 timmar beräknar vi genom att sätta x är lika med 12 och sätta in i formeln 800 plus 150 x :",
+   "s": 37.74,
+   "e": 54.36
+  },
+  {
+   "t": "800 plus 150 gånger 12 är lika med 800 plus 1 800 som är lika med 2 600",
+   "s": 37.74,
+   "e": 54.36
+  },
+  {
+   "t": "Kostnaden blir alltså 2 600 kronor, där 2 600 kallas uttryckets värde.",
+   "s": 54.36,
+   "e": 61.44
+  },
+  {
+   "t": "Exempel 1 — Teckna uttryck för ålder",
+   "s": 61.44,
+   "e": 65.06
+  },
+  {
+   "t": "Linn är x år.",
+   "s": 65.06,
+   "e": 67.58
+  },
+  {
+   "t": "Albin är 3 gånger så gammal som Linn var för 4 år sedan.",
+   "s": 67.58,
+   "e": 72.2
+  },
+  {
+   "t": "Ställ upp ett uttryck för. a) Linns ålder för 12 år sedan b) Albins ålder.",
+   "s": 72.2,
+   "e": 79.88
+  },
+  {
+   "t": "a) Om Linn är x år nu, måste vi subtrahera 12 för att få hennes ålder för 12 år sedan.",
+   "s": 79.88,
+   "e": 86.7
+  },
+  {
+   "t": "Svar: x minus 12",
+   "s": 86.7,
+   "e": 89.62
+  },
+  {
+   "t": "b) Linn är x år nu.",
+   "s": 89.62,
+   "e": 92.78
+  },
+  {
+   "t": "För 4 år sedan var hon parentesen x minus 4 slut parentes år.",
+   "s": 92.78,
+   "e": 98.49
+  },
+  {
+   "t": "Albin är alltså 3 gånger så gammal som det, dvs. Albin är 3 parentesen x minus 4 slut parentes år.",
+   "s": 98.49,
+   "e": 106.55
+  },
+  {
+   "t": "Faktorer framför parenteser multiplicerar vi in med varje term:",
+   "s": 106.55,
+   "e": 116.36
+  },
+  {
+   "t": "3 parentesen x minus 4 slut parentes är lika med 3 x minus 12",
+   "s": 106.55,
+   "e": 116.36
+  },
+  {
+   "t": "Svar: 3 parentesen x minus 4 slut parentes eller 3 x minus 12",
+   "s": 116.36,
+   "e": 122.94
+  },
+  {
+   "t": "Exempel 2 — Tolka uttryck",
+   "s": 122.94,
+   "e": 126.29
+  },
+  {
+   "t": "Äpplen kostar a kr/st och päron b kr/st. Tolka. a) 3 a plus 4 b b) 10 a minus 7 b",
+   "s": 126.29,
+   "e": 143.24
+  },
+  {
+   "t": "a) Tre äpplen kostar 3 a kr och fyra päron kostar 4 b kr — summan är den totala kostnaden.",
+   "s": 132.1,
+   "e": 143.24
+  },
+  {
+   "t": "Svar: Kostnaden för 3 äpplen och 4 päron.",
+   "s": 143.24,
+   "e": 147.7
+  },
+  {
+   "t": "b) Differensen jämför priset på 10 äpplen med priset på 7 päron.",
+   "s": 147.7,
+   "e": 153.36
+  },
+  {
+   "t": "Svar: Prisskillnaden mellan 10 äpplen och 7 päron.",
+   "s": 153.36,
+   "e": 158.09
+  },
+  {
+   "t": "Exempel 3 — Beräkna uttryckets värde",
+   "s": 158.09,
+   "e": 161.76
+  },
+  {
+   "t": "Beräkna värdet för 20 minus 3 x om. a) x är lika med 4 b) x är lika med minus 5",
+   "s": 161.76,
+   "e": 170.7
+  },
+  {
+   "t": "a) Ersätt x med 4 i uttrycket och beräkna:",
+   "s": 170.7,
+   "e": 179.43
+  },
+  {
+   "t": "20 minus 3 gånger 4 är lika med 20 minus 12 som är lika med 8",
+   "s": 170.7,
+   "e": 179.43
+  },
+  {
+   "t": "Svar: 8",
+   "s": 179.43,
+   "e": 193.11
+  },
+  {
+   "t": "b) Ersätt x med −5 — tänk på teckenreglerna (minus gånger minus ger plus):",
+   "s": 179.43,
+   "e": 193.11
+  },
+  {
+   "t": "20 minus 3 gånger parentesen minus 5 slut parentes är lika med 20 plus 15 som är lika med 35",
+   "s": 179.43,
+   "e": 193.11
+  },
+  {
+   "t": "Svar: 35",
+   "s": 193.11,
+   "e": 195.74
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
  "id": "fy2-4.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "ca4780db56ce14055b6bdc9cac9f79a71f36e95b",
- "dur": 424.46,
+ "hash": "c39e845ab8c4e976a6366dd23a0744da3923afad",
+ "dur": 423.63,
  "segments": [
   {
    "t": "Ljusets brytning",
@@ -10,374 +10,374 @@
    "e": 2.58
   },
   {
-   "t": "Sedan tidigare vet vi att ljusets hastighet i vakuum är konstant 2,998 ldots gånger 10 upphöjt till 8 meter per sekund, oavsett om observatören är stilla eller i rörelse, enligt relativitetsteorin.",
+   "t": "Sedan tidigare vet vi att ljusets hastighet i vakuum är konstant 2,998 gånger 10 upphöjt till 8 meter per sekund, oavsett om observatören är stilla eller i rörelse, enligt relativitetsteorin.",
    "s": 2.52,
-   "e": 16.1
+   "e": 15.82
   },
   {
    "t": "Ljusets hastighet kan däremot vara olika i olika material!",
-   "s": 16.1,
-   "e": 21.01
+   "s": 15.82,
+   "e": 20.74
   },
   {
    "t": "Demonstration — Den brutna pennan",
-   "s": 21.01,
-   "e": 24.21
+   "s": 20.74,
+   "e": 23.94
   },
   {
    "t": "En penna eller linjal som ställs i ett glas med vatten ser bruten ut.",
-   "s": 24.21,
-   "e": 29.21
+   "s": 23.94,
+   "e": 28.94
   },
   {
    "t": "På grund av ljusets brytning i vattnet verkar pennans nedre del ligga närmare vattenytan än vad den faktiskt gör.",
-   "s": 29.21,
-   "e": 36.17
+   "s": 28.94,
+   "e": 35.9
   },
   {
    "t": "Pennans spets ligger egentligen vid X, men ljuset från spetsen bryts vid vattenytan.",
-   "s": 36.17,
-   "e": 42.25
+   "s": 35.9,
+   "e": 41.98
   },
   {
    "t": "För ögat ser strålen ut att komma från Y — pennan ser bruten ut.",
-   "s": 42.25,
-   "e": 47.17
+   "s": 41.98,
+   "e": 46.9
   },
   {
    "t": "Ljusstrålar som passerar gränsytan mellan två olika genomskinliga medier ändrar riktning, bryts.",
-   "s": 47.17,
-   "e": 54.29
+   "s": 46.9,
+   "e": 54.01
   },
   {
    "t": "Talet som avgör hur mycket ljuset bryts i ett material kallas brytningsindex som i sin tur beror på ljusets hastighet i materialet.",
-   "s": 54.29,
-   "e": 62.88
+   "s": 54.01,
+   "e": 62.6
   },
   {
    "t": "Brytningsindex slås upp i tabell.",
-   "s": 62.88,
-   "e": 66.24
+   "s": 62.6,
+   "e": 65.96
   },
   {
    "t": "Ju högre brytningsindex desto optiskt tätare är mediet.",
-   "s": 66.24,
-   "e": 70.83
+   "s": 65.96,
+   "e": 70.55
   },
   {
    "t": "Ju lägre brytningsindex desto optiskt tunnare är mediet.",
-   "s": 70.83,
-   "e": 75.38
+   "s": 70.55,
+   "e": 75.1
   },
   {
    "t": "Brytningsindex",
-   "s": 75.38,
-   "e": 77.78
+   "s": 75.1,
+   "e": 77.5
   },
   {
    "t": "n är lika med c delat med hastigheten v",
-   "s": 77.78,
-   "e": 81.5
+   "s": 77.5,
+   "e": 81.22
   },
   {
    "t": "där",
-   "s": 81.5,
-   "e": 82.97
+   "s": 81.22,
+   "e": 82.7
   },
   {
    "t": "n är lika med brytningsindex för ämne",
-   "s": 82.97,
-   "e": 86.42
+   "s": 82.7,
+   "e": 86.14
   },
   {
-   "t": "c är lika med ljushastighet i vakuum ( 2,998 ldots gånger 10 upphöjt till 8 meter per sekund)",
-   "s": 86.42,
-   "e": 94.81
+   "t": "c är lika med ljushastighet i vakuum ( 2,998 gånger 10 upphöjt till 8 meter per sekund)",
+   "s": 86.14,
+   "e": 94.19
   },
   {
    "t": "v är lika med ljushastighet i ämne (meter per sekund)",
-   "s": 94.81,
-   "e": 99.62
+   "s": 94.19,
+   "e": 99.0
   },
   {
    "t": "Exempel på brytningsindex",
-   "s": 99.62,
-   "e": 102.6
+   "s": 99.0,
+   "e": 101.97
   },
   {
    "t": "En stråle mot en genomskinlig yta både bryts och reflekteras.",
-   "s": 102.6,
-   "e": 107.47
+   "s": 101.97,
+   "e": 106.85
   },
   {
    "t": "Ofta ritar vi inte ut den reflekterade strålen, men den finns alltid där.",
-   "s": 107.47,
-   "e": 112.83
+   "s": 106.85,
+   "e": 112.2
   },
   {
    "t": "En sträcka vinkelrät mot gränsytan kallas normal.",
-   "s": 112.83,
-   "e": 117.1
+   "s": 112.2,
+   "e": 116.47
   },
   {
    "t": "Vinklar mäts alltid mellan strålen och normalen.",
-   "s": 117.1,
-   "e": 121.21
+   "s": 116.47,
+   "e": 120.59
   },
   {
    "t": "Lär dig namnen på de olika strålarna och vinklarna i figuren nedan.",
-   "s": 121.21,
-   "e": 126.05
+   "s": 120.59,
+   "e": 125.42
   },
   {
    "t": "Strålgång mot ett tätare medium.",
-   "s": 126.05,
-   "e": 129.24
+   "s": 125.42,
+   "e": 128.61
   },
   {
    "t": "Infallsvinkeln i, reflektionsvinkeln r och brytningsvinkeln b mäts alltid mellan strålen och normalen.",
-   "s": 129.24,
-   "e": 136.69
+   "s": 128.61,
+   "e": 136.06
   },
   {
    "t": "Brytningslagen för ljus (Snells lag)",
-   "s": 136.69,
-   "e": 140.54
+   "s": 136.06,
+   "e": 139.91
   },
   {
    "t": "n ett gånger sinus i är lika med n två gånger sinus b",
-   "s": 140.54,
-   "e": 145.28
+   "s": 139.91,
+   "e": 144.65
   },
   {
    "t": "där",
-   "s": 145.28,
-   "e": 146.75
+   "s": 144.65,
+   "e": 146.12
   },
   {
    "t": "n ett är lika med brytningsindex för medium 1",
-   "s": 146.75,
-   "e": 150.88
+   "s": 146.12,
+   "e": 150.25
   },
   {
    "t": "i är lika med infallsvinkel i medium 1",
-   "s": 150.88,
-   "e": 154.53
+   "s": 150.25,
+   "e": 153.9
   },
   {
    "t": "n två är lika med brytningsindex för medium 2",
-   "s": 154.53,
-   "e": 158.61
+   "s": 153.9,
+   "e": 157.99
   },
   {
    "t": "b är lika med brytningsvinkel i medium 2",
-   "s": 158.61,
-   "e": 162.43
+   "s": 157.99,
+   "e": 161.8
   },
   {
    "t": "OBS!",
-   "s": 162.43,
-   "e": 164.0
+   "s": 161.8,
+   "e": 163.38
   },
   {
    "t": "Vinklarna mäts från normal till stråle.",
-   "s": 164.0,
-   "e": 167.59
+   "s": 163.38,
+   "e": 166.96
   },
   {
    "t": "Fermats princip",
-   "s": 167.59,
-   "e": 170.07
+   "s": 166.96,
+   "e": 169.45
   },
   {
    "t": "Brytningslagen innebär att ljuset tar den väg mellan två punkter som tar kortast tid (!).",
-   "s": 170.07,
-   "e": 175.95
+   "s": 169.45,
+   "e": 175.32
   },
   {
    "t": "Brytning med eller mot normalen",
-   "s": 175.95,
-   "e": 179.14
+   "s": 175.32,
+   "e": 178.51
   },
   {
    "t": "En ljusstråle som går från ett optiskt",
-   "s": 179.14,
-   "e": 182.68
+   "s": 178.51,
+   "e": 182.05
   },
   {
    "t": "tunnare medium till ett optiskt tätare (t.ex. från luft till glas) bryts mot normalen.",
-   "s": 182.68,
-   "e": 189.14
+   "s": 182.05,
+   "e": 188.51
   },
   {
    "t": "tätare medium till ett optiskt tunnare (t.ex. från glas till luft) bryts från normalen.",
-   "s": 189.14,
-   "e": 195.66
+   "s": 188.51,
+   "e": 195.04
   },
   {
    "t": "Om infallsvinkeln i är lika med 0 grader , så går strålen rakt igenom ytan utan att brytas, dvs. b är lika med 0 grader .",
-   "s": 195.66,
-   "e": 204.4
+   "s": 195.04,
+   "e": 203.78
   },
   {
    "t": "Vi repeterar också reflektionslagen från tidigare vågrörelselära.",
-   "s": 204.4,
-   "e": 209.59
+   "s": 203.78,
+   "e": 208.96
   },
   {
    "t": "Reflektionslagen",
-   "s": 209.59,
-   "e": 212.04
+   "s": 208.96,
+   "e": 211.41
   },
   {
    "t": "i är lika med r",
-   "s": 212.04,
-   "e": 214.39
+   "s": 211.41,
+   "e": 213.76
   },
   {
    "t": "där",
-   "s": 214.39,
-   "e": 215.86
+   "s": 213.76,
+   "e": 215.24
   },
   {
    "t": "i är lika med infallande vinkel",
-   "s": 215.86,
-   "e": 218.9
+   "s": 215.24,
+   "e": 218.28
   },
   {
    "t": "r är lika med reflekterad vinkel",
-   "s": 218.9,
-   "e": 222.15
+   "s": 218.28,
+   "e": 221.53
   },
   {
    "t": "Exempel 1 — Brytningsvinkel från luft till glas",
-   "s": 222.15,
-   "e": 226.53
+   "s": 221.53,
+   "e": 225.9
   },
   {
    "t": "En ljusstråle träffar glas med infallsvinkeln 50 grader från luft.",
-   "s": 226.53,
-   "e": 231.64
+   "s": 225.9,
+   "e": 231.01
   },
   {
    "t": "Bestäm brytningsvinkeln om brytningsindex för glaset är 1,50.",
-   "s": 231.64,
-   "e": 236.96
+   "s": 231.01,
+   "e": 236.34
   },
   {
    "t": "Vi ställer upp brytningslagen och löser ut brytningsvinkeln b.",
-   "s": 236.96,
-   "e": 256.88
+   "s": 236.34,
+   "e": 256.24
   },
   {
    "t": "n ett gånger sinus i är lika med n två gånger sinus b vilket är ekvivalent med att sinus b är lika med n ett gånger sinus i delat med n två vilket är ekvivalent med att b är lika med sinus upphöjt till minus 1 parentesen n ett gånger sinus i delat med n två slut parentes",
-   "s": 236.96,
-   "e": 256.88
+   "s": 236.34,
+   "e": 256.24
   },
   {
    "t": "n ett är lika med 1,00 parentesen luft slut parentes i som är lika med 50 grader n två som är lika med 1,50 parentesen glas slut parentes",
-   "s": 256.88,
-   "e": 267.38
+   "s": 256.24,
+   "e": 266.75
   },
   {
-   "t": "b är lika med arcsin parentesen 1,00 gånger sinus 50 grader delat med 1,50 slut parentes som är lika med 30,710 ldots grader som är ungefär lika med 31 grader",
-   "s": 267.38,
-   "e": 279.89
+   "t": "b är lika med arcsinus parentesen 1,00 gånger sinus 50 grader delat med 1,50 slut parentes som är lika med 30,710 grader som är ungefär lika med 31 grader",
+   "s": 266.75,
+   "e": 279.29
   },
   {
    "t": "Svar: 31 grader",
-   "s": 279.89,
-   "e": 282.96
+   "s": 279.29,
+   "e": 282.36
   },
   {
    "t": "Osynlighet",
-   "s": 282.96,
-   "e": 285.19
+   "s": 282.36,
+   "e": 284.59
   },
   {
    "t": "Om man sänker ner ett genomskinligt föremål i en genomskinlig vätska med samma brytningsindex kommer föremålet att bli osynligt.",
-   "s": 285.19,
-   "e": 293.19
+   "s": 284.59,
+   "e": 292.59
   },
   {
    "t": "Ett exempel är polymerbollar med samma brytningsindex som vatten — de blir helt osynliga när de hamnar i vattnet.",
-   "s": 293.19,
-   "e": 300.3
+   "s": 292.59,
+   "e": 299.7
   },
   {
    "t": "Därför minskar ljusets hastighet",
-   "s": 300.3,
-   "e": 303.84
+   "s": 299.7,
+   "e": 303.23
   },
   {
    "t": "Vad är det som gör att ljus saktar ner sin hastighet i materia, i t.ex. glas eller vatten?",
-   "s": 303.84,
-   "e": 310.27
+   "s": 303.23,
+   "e": 309.68
   },
   {
    "t": "Och hur kan ljuset öka sin hastighet, och till synes \"få\" energi, när det övergår från ett optiskt tätare medium till ett optiskt tunnare, t.ex. när det lämnar glas och går till luft?",
-   "s": 310.27,
-   "e": 323.31
+   "s": 309.68,
+   "e": 322.48
   },
   {
    "t": "Förklaringen kräver att vi ser ljus som en våg.",
-   "s": 323.26,
-   "e": 327.12
+   "s": 322.43,
+   "e": 326.29
   },
   {
    "t": "När ljus passerar ett material ändrar ljuset det elektromagnetiska fältet inuti materialet.",
-   "s": 327.12,
-   "e": 333.64
+   "s": 326.29,
+   "e": 332.81
   },
   {
    "t": "Eftersom vi har ett material (till skillnad från vakuum) finns atomer med elektroner i det.",
-   "s": 333.64,
-   "e": 339.77
+   "s": 332.81,
+   "e": 338.94
   },
   {
    "t": "När dessa elektroner påverkas av det elektromagnetiska fältet från ljuset skapar de i sin tur ett elektromagnetiskt fält (laddningar i rörelse skapar ett elektromagnetiskt fält från tidigare del av ämnet).",
-   "s": 339.77,
-   "e": 352.87
+   "s": 338.94,
+   "e": 352.04
   },
   {
    "t": "När dessa två vågor superpositioneras ger de en resulterande våg med en lägre hastighet — och det är denna resulterande våghastighet som ger hastigheten i mediet!",
-   "s": 352.87,
-   "e": 362.85
+   "s": 352.04,
+   "e": 362.01
   },
   {
    "t": "När ljuset lämnar mediet upphör den interfererande vågen från elektronerna och hastigheten på vågen blir återigen densamma som innan den träffade mediet.",
-   "s": 362.85,
-   "e": 372.39
+   "s": 362.01,
+   "e": 371.56
   },
   {
    "t": "Därför böjs ljuset",
-   "s": 372.39,
-   "e": 375.13
+   "s": 371.56,
+   "e": 374.3
   },
   {
    "t": "Vad är det som gör att ljus böjs av när det faller in snett mot en yta med annan optisk täthet?",
-   "s": 375.13,
-   "e": 381.46
+   "s": 374.3,
+   "e": 380.63
   },
   {
    "t": "Det är tyvärr svårt att svara enkelt på inom ramen för det här ämnet, eftersom det kommer från Maxwells ekvationer för att beskriva elektromagnetiska vågor som vi inte har teorin bakom.",
-   "s": 381.46,
-   "e": 391.96
+   "s": 380.63,
+   "e": 391.13
   },
   {
    "t": "Men enligt Maxwells ekvationer har det elektriska fältet, som är vinkelrätt mot ljusets riktning, en komposant som är parallell med gränsskiktet och en komposant som är vinkelrät mot gränsskiktet.",
-   "s": 391.96,
-   "e": 403.56
+   "s": 391.13,
+   "e": 402.73
   },
   {
    "t": "Den parallella komposanten är samma i båda medier eftersom ljuset som går vinkelrätt in mot gränsskiktet inte påverkas av materialens brytningsindex.",
-   "s": 403.56,
-   "e": 413.3
+   "s": 402.73,
+   "e": 412.46
   },
   {
    "t": "Den vinkelräta komposanten påverkas däremot av materialens brytningsindex och gör att det resulterande fältet i det nya mediet byter riktning, precis enligt brytningslagen ovan.",
-   "s": 413.3,
-   "e": 424.46
+   "s": 412.46,
+   "e": 423.63
   }
  ]
 }

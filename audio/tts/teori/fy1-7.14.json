@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.14",
  "voice": "sv-SE-SofieNeural",
- "hash": "375548472f22dca944a62d3d9c1c7d0acec756bd",
- "dur": 281.32,
+ "hash": "c45fafe54e45d9d8d3c746083200df009df45e48",
+ "dur": 276.35,
  "segments": [
   {
    "t": "Millikans oljedroppsförsök",
@@ -52,157 +52,157 @@
   {
    "t": "F e är lika med F G, ekvation 1",
    "s": 66.89,
-   "e": 71.01
+   "e": 71.03
   },
   {
-   "t": "Från tidigare teori har vi att F e är lika med laddningen Q gånger mathbb energin E och F G är lika med massan m gånger tyngdfaktorn g .",
-   "s": 71.01,
-   "e": 80.1
+   "t": "Från tidigare teori har vi att F e är lika med laddningen Q gånger energin E och F G är lika med massan m gånger tyngdfaktorn g .",
+   "s": 71.03,
+   "e": 79.6
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 80.1,
-   "e": 83.38
+   "s": 79.6,
+   "e": 82.88
   },
   {
-   "t": "laddningen Q gånger mathbb energin E är lika med massan m gånger tyngdfaktorn g",
-   "s": 83.38,
-   "e": 89.46
+   "t": "laddningen Q gånger energin E är lika med massan m gånger tyngdfaktorn g",
+   "s": 82.88,
+   "e": 88.54
   },
   {
    "t": "Vi löser ut laddningen Q och får",
-   "s": 89.46,
-   "e": 92.97
+   "s": 88.54,
+   "e": 92.05
   },
   {
-   "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g delat med mathbb energin E",
-   "s": 92.97,
-   "e": 99.29
+   "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g delat med energin E",
+   "s": 92.05,
+   "e": 97.89
   },
   {
-   "t": "Den elektriska fältstyrkan mathbb energin E kan bestämmas med formeln mathbb energin E är lika med spänningen U delat med avståndet d , vilket insatt ovan ger",
-   "s": 99.29,
-   "e": 110.19
+   "t": "Den elektriska fältstyrkan energin E kan bestämmas med formeln energin E är lika med spänningen U delat med avståndet d , vilket insatt ovan ger",
+   "s": 97.89,
+   "e": 107.91
   },
   {
    "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g delat med spänningen U delat med avståndet d som är lika med m gånger g gånger d delat med U",
-   "s": 110.19,
-   "e": 123.8
+   "s": 107.91,
+   "e": 121.51
   },
   {
    "t": "(oljedroppens massa m bestämdes med falltiden).",
-   "s": 110.19,
-   "e": 123.8
+   "s": 107.91,
+   "e": 121.51
   },
   {
    "t": "Upprepade försök gav laddningar på",
-   "s": 123.8,
-   "e": 127.11
+   "s": 121.51,
+   "e": 124.83
   },
   {
    "t": "−1,6 gånger 10 upphöjt till minus 19 coulomb",
-   "s": 127.11,
-   "e": 131.84
+   "s": 124.83,
+   "e": 129.55
   },
   {
    "t": "−3,2 gånger 10 upphöjt till minus 19 coulomb",
-   "s": 131.84,
-   "e": 136.61
+   "s": 129.55,
+   "e": 134.32
   },
   {
    "t": "−4,8 gånger 10 upphöjt till minus 19 coulomb",
-   "s": 136.61,
-   "e": 141.6
+   "s": 134.32,
+   "e": 139.31
   },
   {
    "t": "−6,4 gånger 10 upphöjt till minus 19 coulomb",
-   "s": 141.6,
-   "e": 146.49
+   "s": 139.31,
+   "e": 144.2
   },
   {
    "t": "Slutsats: Alla laddningar är uppbyggda av ett visst antal elementarladdningar med storleken 1,6 gånger 10 upphöjt till minus 19 coulomb.",
-   "s": 146.49,
-   "e": 156.12
+   "s": 144.2,
+   "e": 153.84
   },
   {
    "t": "Detta är elektronens och protonens laddning!",
-   "s": 156.12,
-   "e": 159.97
+   "s": 153.84,
+   "e": 157.69
   },
   {
    "t": "Exempel 1 — Antal överskottselektroner",
-   "s": 159.97,
-   "e": 163.96
+   "s": 157.69,
+   "e": 161.68
   },
   {
    "t": "Oljedroppar sprayas in mellan två horisontella plattor på avståndet 5,0 millimeter från varandra.",
-   "s": 163.96,
-   "e": 170.86
+   "s": 161.68,
+   "e": 168.57
   },
   {
    "t": "När spänningen 2,2 kilovolt läggs över plattorna svävar en oljedroppe mellan plattorna.",
-   "s": 170.86,
-   "e": 177.3
+   "s": 168.57,
+   "e": 175.01
   },
   {
    "t": "Oljedroppens massa är 2,15 gånger 10 upphöjt till minus 14 kilogram.",
-   "s": 177.3,
-   "e": 183.29
+   "s": 175.01,
+   "e": 181.0
   },
   {
    "t": "Hur många överskottselektroner hade oljedroppen fått?",
-   "s": 183.29,
-   "e": 187.64
+   "s": 181.0,
+   "e": 185.35
   },
   {
-   "t": "Eftersom oljedroppen svävar måste den uppåtriktade elektriska kraften F e är lika med laddningen Q gånger mathbb energin E vara lika stor som den nedåtriktade tyngdkraften F G är lika med massan m gånger tyngdfaktorn g .",
-   "s": 187.64,
-   "e": 200.84
+   "t": "Eftersom oljedroppen svävar måste den uppåtriktade elektriska kraften F e är lika med laddningen Q gånger energin E vara lika stor som den nedåtriktade tyngdkraften F G är lika med massan m gånger tyngdfaktorn g .",
+   "s": 185.35,
+   "e": 198.06
   },
   {
    "t": "Detta ger",
-   "s": 200.84,
-   "e": 202.85
+   "s": 198.06,
+   "e": 200.07
   },
   {
-   "t": "F e är lika med F G vilket är ekvivalent med att laddningen Q gånger mathbb energin E är lika med massan m gånger tyngdfaktorn g",
-   "s": 202.85,
-   "e": 211.6
+   "t": "F e är lika med F G vilket är ekvivalent med att laddningen Q gånger energin E är lika med massan m gånger tyngdfaktorn g",
+   "s": 200.07,
+   "e": 208.36
   },
   {
    "t": "Vi löser ut laddningen Q och får",
-   "s": 211.6,
-   "e": 215.07
+   "s": 208.36,
+   "e": 211.86
   },
   {
-   "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g delat med mathbb energin E",
-   "s": 215.07,
-   "e": 242.88
+   "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g delat med energin E",
+   "s": 211.86,
+   "e": 238.69
   },
   {
-   "t": "massan m är lika med 2,15 gånger 10 upphöjt till minus 14 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram mathbb energin E som är lika med spänningen U delat med avståndet d som är lika med 2,2 gånger 10 i kubik volt delat med 5,0 gånger 10 upphöjt till minus 3 meter som är lika med 440 000 volt per meter",
-   "s": 215.07,
-   "e": 242.88
+   "t": "massan m är lika med 2,15 gånger 10 upphöjt till minus 14 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram energin E som är lika med spänningen U delat med avståndet d som är lika med 2,2 gånger 10 i kubik volt delat med 5,0 gånger 10 upphöjt till minus 3 meter som är lika med 440 000 volt per meter",
+   "s": 211.86,
+   "e": 238.69
   },
   {
-   "t": "laddningen Q är lika med 2,15 gånger 10 upphöjt till minus 14 gånger 9,82 delat med 440 000 som är lika med 4,798 ldots gånger 10 upphöjt till minus 19 coulomb",
-   "s": 242.88,
-   "e": 256.23
+   "t": "laddningen Q är lika med 2,15 gånger 10 upphöjt till minus 14 gånger 9,82 delat med 440 000 som är lika med 4,798 gånger 10 upphöjt till minus 19 coulomb",
+   "s": 238.69,
+   "e": 251.79
   },
   {
    "t": "För att få antalet elektroner n dividerar vi denna totala laddning på oljedroppen Q med laddningen hos en elektron q e .",
-   "s": 256.23,
-   "e": 264.25
+   "s": 251.79,
+   "e": 259.81
   },
   {
-   "t": "n är lika med laddningen Q delat med q e som är lika med 4,798 ldots gånger 10 upphöjt till minus 19 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 2,995 ldots som är ungefär lika med 3 st",
-   "s": 264.25,
-   "e": 281.32
+   "t": "n är lika med laddningen Q delat med q e som är lika med 4,798 gånger 10 upphöjt till minus 19 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 2,995 som är ungefär lika med 3 st",
+   "s": 259.81,
+   "e": 276.35
   },
   {
    "t": "Svar: 3 st",
-   "s": 264.25,
-   "e": 281.32
+   "s": 259.81,
+   "e": 276.35
   }
  ]
 }

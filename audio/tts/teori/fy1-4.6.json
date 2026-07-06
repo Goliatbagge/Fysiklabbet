@@ -1,8 +1,8 @@
 {
  "id": "fy1-4.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "042d3f9ce6eb5d5331bcf7c27035a1e137ea4669",
- "dur": 330.78,
+ "hash": "54e44971324e95d4f01947dd2d9265dd2f8c43a4",
+ "dur": 327.61,
  "segments": [
   {
    "t": "Verkningsgrad",
@@ -137,132 +137,132 @@
   {
    "t": "Bestäm verkningsgraden hos en motor om vi tillför den energin 252 kilojoule och får ut 88 kilojoule i rörelseenergi.",
    "s": 137.18,
-   "e": 146.01
+   "e": 146.03
   },
   {
    "t": "eta är lika med E n delat med E tiden t",
-   "s": 146.01,
-   "e": 154.79
+   "s": 146.03,
+   "e": 154.8
   },
   {
    "t": "E n är lika med 88 kilojoule E tiden t som är lika med 252 kilojoule",
-   "s": 146.01,
-   "e": 154.79
+   "s": 146.03,
+   "e": 154.8
   },
   {
-   "t": "eta är lika med 88 delat med 252 som är lika med 0,349 ldots som är ungefär lika med 0,35 som är lika med 35 procent",
-   "s": 154.79,
-   "e": 165.71
+   "t": "eta är lika med 88 delat med 252 som är lika med 0,349 som är ungefär lika med 0,35 som är lika med 35 procent",
+   "s": 154.8,
+   "e": 165.31
   },
   {
    "t": "Svar: 0,35 eller 35 procent",
-   "s": 165.71,
-   "e": 170.25
+   "s": 165.31,
+   "e": 169.85
   },
   {
    "t": "Exempel 2 — Hissens verkningsgrad (coulomb)",
-   "s": 170.25,
-   "e": 174.47
+   "s": 169.85,
+   "e": 174.07
   },
   {
    "t": "En hiss som lyfter 220 kilogram till höjden 15 meter förbrukar energin 43 kilojoule.",
-   "s": 174.47,
-   "e": 181.71
+   "s": 174.07,
+   "e": 181.31
   },
   {
    "t": "Bestäm hissens verkningsgrad.",
-   "s": 181.71,
-   "e": 184.72
+   "s": 181.31,
+   "e": 184.32
   },
   {
    "t": "eta är lika med E n delat med E tiden t",
-   "s": 184.72,
-   "e": 188.76
+   "s": 184.32,
+   "e": 188.36
   },
   {
    "t": "Den nyttiga energin är den som går åt för att lyfta hissen 15 meter och ge den lägesenergi.",
-   "s": 188.76,
-   "e": 195.01
+   "s": 188.36,
+   "e": 194.61
   },
   {
    "t": "E n är lika med delta E trycket p som är lika med massan m gånger tyngdfaktorn g gånger höjden h som är lika med 220 gånger 9,82 gånger 15 som är lika med 32 406 joule E tiden t som är lika med 43 kilojoule som är lika med 43 gånger 10 i kubik joule som är lika med 43 000 joule",
-   "s": 195.01,
-   "e": 214.65
+   "s": 194.61,
+   "e": 214.26
   },
   {
-   "t": "eta är lika med 32 406 delat med 43 000 som är lika med 0,753 ldots som är ungefär lika med 0,75 som är lika med 75 procent",
-   "s": 214.65,
-   "e": 226.46
+   "t": "eta är lika med 32 406 delat med 43 000 som är lika med 0,753 som är ungefär lika med 0,75 som är lika med 75 procent",
+   "s": 214.26,
+   "e": 225.59
   },
   {
    "t": "Svar: 0,75 eller 75 procent",
-   "s": 226.46,
-   "e": 230.89
+   "s": 225.59,
+   "e": 230.01
   },
   {
    "t": "Exempel 3 — Kraftverkets effekt (ampere)",
-   "s": 230.89,
-   "e": 235.1
+   "s": 230.01,
+   "e": 234.21
   },
   {
    "t": "Ett kraftverk har en fallhöjd på 107 meter.",
-   "s": 235.1,
-   "e": 239.46
+   "s": 234.21,
+   "e": 238.57
   },
   {
    "t": "Varje sekund passerar 275 ton vatten turbinerna.",
-   "s": 239.46,
-   "e": 244.32
+   "s": 238.57,
+   "e": 243.44
   },
   {
    "t": "Turbinernas verkningsgrad är 0,92.",
-   "s": 244.32,
-   "e": 248.28
+   "s": 243.44,
+   "e": 247.39
   },
   {
    "t": "Hur stor effekt kan kraftverket leverera?",
-   "s": 248.28,
-   "e": 252.0
+   "s": 247.39,
+   "e": 251.11
   },
   {
    "t": "Vi ställer upp formeln för verkningsgrad och löser ut den nyttiga effekten P n .",
-   "s": 252.0,
-   "e": 257.59
+   "s": 251.11,
+   "e": 256.74
   },
   {
    "t": "eta är lika med P n delat med P tiden t vilket är ekvivalent med att P n är lika med eta gånger P t",
-   "s": 257.59,
-   "e": 265.16
+   "s": 256.74,
+   "e": 264.34
   },
   {
    "t": "På tiden t är lika med 1 sekund tillförs energin från lägesenergin hos 275 ton vatten, dvs.",
-   "s": 265.16,
-   "e": 288.02
+   "s": 264.34,
+   "e": 286.02
   },
   {
-   "t": "E tiden t är lika med massan m gånger tyngdfaktorn g gånger höjden h som är lika med 275 000 kilogram gånger 9,82 newton per kilogram gånger 107 meter som är lika med 2,889 ldots gånger 10 upphöjt till 8 joule",
-   "s": 265.16,
-   "e": 288.02
+   "t": "E tiden t är lika med massan m gånger tyngdfaktorn g gånger höjden h som är lika med 275 000 kilogram gånger 9,82 newton per kilogram gånger 107 meter som är lika med 2,889 gånger 10 upphöjt till 8 joule",
+   "s": 264.34,
+   "e": 286.02
   },
   {
-   "t": "P tiden t är lika med E t delat med t som är lika med 2,889 ldots gånger 10 upphöjt till 8 joule delat med 1 sekund som är lika med 2,889 ldots gånger 10 upphöjt till 8 watt",
-   "s": 288.02,
-   "e": 301.32
+   "t": "P tiden t är lika med E t delat med t som är lika med 2,889 gånger 10 upphöjt till 8 joule delat med 1 sekund som är lika med 2,889 gånger 10 upphöjt till 8 watt",
+   "s": 286.02,
+   "e": 298.86
   },
   {
    "t": "Med η är lika med 0,92 ger detta",
-   "s": 301.32,
-   "e": 305.09
+   "s": 298.86,
+   "e": 302.61
   },
   {
-   "t": "P n är lika med 0,92 gånger 2,889 ldots gånger 10 upphöjt till 8 som är lika med 2,658 ldots gånger 10 upphöjt till 8 watt som är ungefär lika med 2,7 gånger 10 upphöjt till 8 watt som är lika med 0,27 gigawatt",
-   "s": 305.09,
-   "e": 324.37
+   "t": "P n är lika med 0,92 gånger 2,889 gånger 10 upphöjt till 8 som är lika med 2,658 gånger 10 upphöjt till 8 watt som är ungefär lika med 2,7 gånger 10 upphöjt till 8 watt som är lika med 0,27 gigawatt",
+   "s": 302.61,
+   "e": 321.16
   },
   {
    "t": "Svar: 2,7 gånger 10 upphöjt till 8 watt eller 0,27 gigawatt",
-   "s": 324.32,
-   "e": 330.78
+   "s": 321.11,
+   "e": 327.61
   }
  ]
 }

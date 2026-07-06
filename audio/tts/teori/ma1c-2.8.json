@@ -1,0 +1,198 @@
+{
+ "id": "ma1c-2.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b2f14b5b932c1f4a2b06c3aa8e538fd057bfb14b",
+ "dur": 130.55,
+ "segments": [
+  {
+   "t": "Problemlösning med ekvationer",
+   "s": 0.1,
+   "e": 3.16
+  },
+  {
+   "t": "När vi översätter ett problem till matematiskt språk för att lösa det ägnar vi oss åt problemlösning.",
+   "s": 3.11,
+   "e": 9.47
+  },
+  {
+   "t": "Metod för problemlösning",
+   "s": 9.47,
+   "e": 12.36
+  },
+  {
+   "t": "Översätt.",
+   "s": 12.36,
+   "e": 14.24
+  },
+  {
+   "t": "Definiera och inför en beteckning, t.ex. x , på det som söks och ställ upp en ekvation.",
+   "s": 14.24,
+   "e": 20.91
+  },
+  {
+   "t": "Lös ekvationen.",
+   "s": 20.91,
+   "e": 23.38
+  },
+  {
+   "t": "Tolka och svara med enhet.",
+   "s": 23.38,
+   "e": 26.32
+  },
+  {
+   "t": "Är svaret rimligt?",
+   "s": 26.32,
+   "e": 28.66
+  },
+  {
+   "t": "Exempel 1 — Dela upp ett belopp",
+   "s": 28.66,
+   "e": 31.98
+  },
+  {
+   "t": "Rayan, Arielle och Samuel ska dela på 4 000 kronor.",
+   "s": 31.98,
+   "e": 36.62
+  },
+  {
+   "t": "Rayan ska få dubbelt så mycket som Arielle och Samuel ska få 300 kronor mindre än Rayan.",
+   "s": 36.62,
+   "e": 42.73
+  },
+  {
+   "t": "Hur stort belopp får Arielle?",
+   "s": 42.73,
+   "e": 45.64
+  },
+  {
+   "t": "1.",
+   "s": 45.64,
+   "e": 47.89
+  },
+  {
+   "t": "Översätt",
+   "s": 45.64,
+   "e": 47.89
+  },
+  {
+   "t": "Vi tittar först på vad som efterfrågas.",
+   "s": 47.89,
+   "e": 51.39
+  },
+  {
+   "t": "Arielles belopp efterfrågas.",
+   "s": 51.39,
+   "e": 54.45
+  },
+  {
+   "t": "Då kallar vi det för x .",
+   "s": 54.45,
+   "e": 57.08
+  },
+  {
+   "t": "Skriv ner detta!",
+   "s": 57.08,
+   "e": 59.5
+  },
+  {
+   "t": "x är lika med Arielles belopp",
+   "s": 59.5,
+   "e": 62.5
+  },
+  {
+   "t": "Detta ger",
+   "s": 62.5,
+   "e": 64.47
+  },
+  {
+   "t": "2 x är lika med Rayans belopp",
+   "s": 64.47,
+   "e": 67.9
+  },
+  {
+   "t": "2 x minus 300 är lika med Samuels belopp",
+   "s": 67.9,
+   "e": 72.34
+  },
+  {
+   "t": "Vi ställer upp en ekvation och får",
+   "s": 72.34,
+   "e": 75.55
+  },
+  {
+   "t": "x plus 2 x plus parentesen 2 x minus 300 slut parentes är lika med 4 000",
+   "s": 75.55,
+   "e": 82.91
+  },
+  {
+   "t": "2.",
+   "s": 82.91,
+   "e": 85.72
+  },
+  {
+   "t": "Lös ekvationen",
+   "s": 82.91,
+   "e": 85.72
+  },
+  {
+   "t": "x plus 2 x plus 2 x minus 300 är lika med 4 000",
+   "s": 85.72,
+   "e": 91.53
+  },
+  {
+   "t": "5 x minus 300 är lika med 4 000",
+   "s": 91.53,
+   "e": 95.85
+  },
+  {
+   "t": "Adderar 300 till båda led:",
+   "s": 95.85,
+   "e": 103.54
+  },
+  {
+   "t": "5 x minus 300 plus 300 är lika med 4 000 plus 300",
+   "s": 95.85,
+   "e": 103.54
+  },
+  {
+   "t": "5 x är lika med 4 300",
+   "s": 103.54,
+   "e": 107.53
+  },
+  {
+   "t": "Dividerar med 5 i båda led:",
+   "s": 107.53,
+   "e": 114.56
+  },
+  {
+   "t": "5 x delat med 5 är lika med 4 300 delat med 5",
+   "s": 107.53,
+   "e": 114.56
+  },
+  {
+   "t": "x är lika med 860",
+   "s": 114.56,
+   "e": 117.97
+  },
+  {
+   "t": "3.",
+   "s": 117.97,
+   "e": 120.76
+  },
+  {
+   "t": "Tolka och svara",
+   "s": 117.97,
+   "e": 120.76
+  },
+  {
+   "t": "x var Arielles belopp, och 860 kronor av 4 000 kronor är rimligt.",
+   "s": 120.76,
+   "e": 126.99
+  },
+  {
+   "t": "Svar: 860 kronor",
+   "s": 126.99,
+   "e": 130.55
+  }
+ ]
+}

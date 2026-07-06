@@ -1,8 +1,8 @@
 {
  "id": "fy1-9.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "2e33627e8d91b1979af490207c1685dc32a78899",
- "dur": 398.03,
+ "hash": "1f01d762ab9eecfeadbb01d013a4b3b3cb97be8a",
+ "dur": 398.15,
  "segments": [
   {
    "t": "Stråldoser",
@@ -332,22 +332,22 @@
   {
    "t": "H är lika med D gånger laddningen Q",
    "s": 371.67,
-   "e": 385.65
+   "e": 385.78
   },
   {
-   "t": "D är lika med 0,50 mGy som är lika med 0,50 gånger 10 upphöjt till minus 3 Gy laddningen Q som är lika med 20 parentesen slåsuppitabell slut parentes",
+   "t": "D är lika med 0,50 mGy som är lika med 0,50 gånger 10 upphöjt till minus 3 Gy laddningen Q som är lika med 20 parentesen slås upp i tabell slut parentes",
    "s": 371.67,
-   "e": 385.65
+   "e": 385.78
   },
   {
    "t": "H är lika med 0,50 gånger 10 upphöjt till minus 3 gånger 20 som är lika med 0,010 Sv som är lika med 10 mSv",
-   "s": 385.65,
-   "e": 394.83
+   "s": 385.78,
+   "e": 394.95
   },
   {
    "t": "Svar: 10 mSv",
-   "s": 394.83,
-   "e": 398.03
+   "s": 394.95,
+   "e": 398.15
   }
  ]
 }

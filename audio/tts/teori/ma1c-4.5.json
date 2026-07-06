@@ -1,0 +1,203 @@
+{
+ "id": "ma1c-4.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "6fa7654dbb4f8431401df86d61468500a6154299",
+ "dur": 197.12,
+ "segments": [
+  {
+   "t": "Räta linjens ekvation",
+   "s": 0.1,
+   "e": 2.88
+  },
+  {
+   "t": "Sedan tidigare har vi tagit fram räta linjens ekvation i k-form.",
+   "s": 2.83,
+   "e": 7.75
+  },
+  {
+   "t": "Räta linjens ekvation förkortas ibland RLE.",
+   "s": 7.75,
+   "e": 12.16
+  },
+  {
+   "t": "Räta linjens ekvation (i k-form)",
+   "s": 12.16,
+   "e": 15.93
+  },
+  {
+   "t": "y är lika med k x plus m",
+   "s": 15.93,
+   "e": 21.6
+  },
+  {
+   "t": "k -värdet motsvarar linjens lutning.",
+   "s": 15.93,
+   "e": 21.6
+  },
+  {
+   "t": "Sedan tidigare har vi",
+   "s": 21.6,
+   "e": 24.36
+  },
+  {
+   "t": "k är lika med trappstegets höjd delat med trappstegets längd som är lika med förändring i y -led delat med förändring i x -led som är lika med delta y delat med delta x, ekvation 1",
+   "s": 24.36,
+   "e": 35.61
+  },
+  {
+   "t": "Om vi vill beräkna k -värdet utifrån två punkter på linjen parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes utan att rita upp den kan vi göra det med en annan formel.",
+   "s": 35.61,
+   "e": 48.1
+  },
+  {
+   "t": "Förändringen i y-led delta y fås av differensen mellan två y-koordinater, dvs.",
+   "s": 48.1,
+   "e": 57.31
+  },
+  {
+   "t": "delta y är lika med y två minus y ett",
+   "s": 48.1,
+   "e": 57.31
+  },
+  {
+   "t": "På motsvarande sätt gäller",
+   "s": 57.31,
+   "e": 60.17
+  },
+  {
+   "t": "delta x är lika med x två minus x ett",
+   "s": 60.17,
+   "e": 64.55
+  },
+  {
+   "t": "Insättning av dessa i ekvation 1 ger formeln för riktningskoefficienten.",
+   "s": 64.55,
+   "e": 69.78
+  },
+  {
+   "t": "Riktningskoefficient",
+   "s": 69.78,
+   "e": 72.44
+  },
+  {
+   "t": "k är lika med y två minus y ett delat med x två minus x ett",
+   "s": 72.44,
+   "e": 78.16
+  },
+  {
+   "t": "Exempel 1 — Riktningskoefficient ur två punkter",
+   "s": 78.16,
+   "e": 82.33
+  },
+  {
+   "t": "Beräkna riktningskoefficienten för linjen som går genom punkterna (−6, −1) och (2, 3).",
+   "s": 82.33,
+   "e": 89.85
+  },
+  {
+   "t": "Vi ställer upp formeln för riktningskoefficienten:",
+   "s": 89.85,
+   "e": 97.95
+  },
+  {
+   "t": "k är lika med y två minus y ett delat med x två minus x ett",
+   "s": 89.85,
+   "e": 97.95
+  },
+  {
+   "t": "Den första punkten är parentesen x ett, y ett slut parentes är lika med parentesen minus 6, minus 1 slut parentes och den andra är parentesen x två, y två slut parentes är lika med parentesen 2, 3 slut parentes .",
+   "s": 97.95,
+   "e": 112.84
+  },
+  {
+   "t": "Insättning i formeln ovan ger",
+   "s": 112.84,
+   "e": 116.08
+  },
+  {
+   "t": "k är lika med 3 minus parentesen minus 1 slut parentes delat med 2 minus parentesen minus 6 slut parentes som är lika med 3 plus 1 delat med 2 plus 6 som är lika med 4 delat med 8 som är lika med 1 delat med 2",
+   "s": 116.08,
+   "e": 130.97
+  },
+  {
+   "t": "Svar: k är lika med 1 delat med 2 eller 0,5",
+   "s": 130.97,
+   "e": 135.84
+  },
+  {
+   "t": "Exempel 2 — Bestäm ekvationen ur punkt och lutning",
+   "s": 135.84,
+   "e": 140.31
+  },
+  {
+   "t": "Bestäm ekvationen för den räta linjen som går genom punkten (4, −3) och har riktningskoefficienten 2.",
+   "s": 140.31,
+   "e": 147.75
+  },
+  {
+   "t": "Vi ställer upp räta linjens ekvation:",
+   "s": 147.75,
+   "e": 153.16
+  },
+  {
+   "t": "y är lika med k x plus m",
+   "s": 147.75,
+   "e": 153.16
+  },
+  {
+   "t": "Vi sätter in k är lika med 2 , vilket ger",
+   "s": 153.16,
+   "e": 157.25
+  },
+  {
+   "t": "y är lika med 2 x plus m",
+   "s": 157.25,
+   "e": 160.61
+  },
+  {
+   "t": "För att ta reda på m -värdet sätter vi in en valfri punkt som ligger på linjen, i detta fall (4, −3).",
+   "s": 160.61,
+   "e": 167.88
+  },
+  {
+   "t": "Vi sätter in x är lika med 4 och y är lika med minus 3 i formeln ovan och löser ut m :",
+   "s": 167.88,
+   "e": 183.94
+  },
+  {
+   "t": "minus 3 är lika med 2 gånger 4 plus m",
+   "s": 167.88,
+   "e": 183.94
+  },
+  {
+   "t": "minus 3 är lika med 8 plus m",
+   "s": 167.88,
+   "e": 183.94
+  },
+  {
+   "t": "Subtraherar 8 från båda led:",
+   "s": 167.88,
+   "e": 183.94
+  },
+  {
+   "t": "minus 3 minus 8 är lika med 8 plus m minus 8",
+   "s": 167.88,
+   "e": 183.94
+  },
+  {
+   "t": "minus 11 är lika med m",
+   "s": 183.94,
+   "e": 192.89
+  },
+  {
+   "t": "Insättning av k är lika med 2 och m är lika med minus 11 i RLE ger y är lika med 2 x minus 11 .",
+   "s": 183.94,
+   "e": 192.89
+  },
+  {
+   "t": "Svar: y är lika med 2 x minus 11",
+   "s": 192.89,
+   "e": 197.12
+  }
+ ]
+}

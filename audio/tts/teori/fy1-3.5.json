@@ -1,8 +1,8 @@
 {
  "id": "fy1-3.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "dc5b658190fb3e2516bd4ad14aa7af65d904c188",
- "dur": 275.54,
+ "hash": "b0b72c9fa9767ee46713738f557dded404072327",
+ "dur": 275.49,
  "segments": [
   {
    "t": "Gravitationslagen",
@@ -185,24 +185,24 @@
    "e": 214.68
   },
   {
-   "t": "G är lika med 6,67 gånger 10 upphöjt till minus 11 Nm i kvadrat per kilogram i kvadrat m j som är lika med 5,972 gånger 10 upphöjt till 24 kilogram parentesen jordensmassa,fråntabell slut parentes r som är lika med 6 378 kilometer som är lika med 6 378 gånger 10 i kubik meter parentesen jordensradie,fråntabell slut parentes",
+   "t": "G är lika med 6,67 gånger 10 upphöjt till minus 11 Nm i kvadrat per kilogram i kvadrat m j som är lika med 5,972 gånger 10 upphöjt till 24 kilogram parentesen jordens massa, från tabell slut parentes r som är lika med 6 378 kilometer som är lika med 6 378 gånger 10 i kubik meter parentesen jordens radie, från tabell slut parentes",
    "s": 214.68,
-   "e": 240.68
+   "e": 240.99
   },
   {
-   "t": "tyngdfaktorn g är lika med 6,67 gånger 10 upphöjt till minus 11 gånger 5,972 gånger 10 upphöjt till 24 delat med parentesen 6 378 gånger 10 i kubik slut parentes i kvadrat som är lika med 9,792 ldots newton per kilogram som är ungefär lika med 9,8 newton per kilogram",
-   "s": 240.68,
-   "e": 262.23
+   "t": "tyngdfaktorn g är lika med 6,67 gånger 10 upphöjt till minus 11 gånger 5,972 gånger 10 upphöjt till 24 delat med parentesen 6 378 gånger 10 i kubik slut parentes i kvadrat som är lika med 9,792 newton per kilogram som är ungefär lika med 9,8 newton per kilogram",
+   "s": 240.99,
+   "e": 262.19
   },
   {
    "t": "Svar: 9,8 newton per kilogram",
-   "s": 262.23,
-   "e": 266.34
+   "s": 262.19,
+   "e": 266.3
   },
   {
    "t": "Från exempel 2 ser vi alltså att Newtons gravitationslag förklarar varför tyngdfaktorn på jorden är just 9,82 newton per kilogram!",
-   "s": 266.34,
-   "e": 275.54
+   "s": 266.3,
+   "e": 275.49
   }
  ]
 }

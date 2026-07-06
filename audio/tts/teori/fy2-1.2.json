@@ -1,8 +1,8 @@
 {
  "id": "fy2-1.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "1938164e0d75e37c1e5298ad1858b202bbe431f4",
- "dur": 362.96,
+ "hash": "f48dc7a85d058667c5a4c8bf3848fcdf4e04f5be",
+ "dur": 364.32,
  "segments": [
   {
    "t": "Mer kraftmoment",
@@ -70,214 +70,214 @@
    "e": 76.97
   },
   {
-   "t": "En bräda väger 20 kilogram och ligger på två bockar enligt figuren nedan. a) Rita en figur med de krafter som verkar på brädan. b) Beräkna kraften på brädan från den högra bocken. c) Beräkna kraften på brädan från den vänstra bocken.",
+   "t": "En bräda väger 20 kilogram och ligger på två bockar enligt figuren nedan.. a) Rita en figur med de krafter som verkar på brädan.. b) Beräkna kraften på brädan från den högra bocken.. c) Beräkna kraften på brädan från den vänstra bocken.",
    "s": 76.97,
-   "e": 95.9
+   "e": 96.95
   },
   {
    "t": "a) Ju närmare tyngdpunkten en stödjande eller bärande kraft är, desto större del av tyngden bär den upp.",
-   "s": 95.9,
-   "e": 103.06
+   "s": 96.95,
+   "e": 104.11
   },
   {
    "t": "Eftersom tyngdpunkten ligger närmare stödet vid Q än stödet vid P kommer kraften uppåt från bocken vid Q att vara större än kraften uppåt från bocken vid P.",
-   "s": 103.06,
-   "e": 120.29
+   "s": 104.11,
+   "e": 121.34
   },
   {
    "t": "Krafterna på brädan: stödkrafterna F effekten P och F laddningen Q uppåt vid stöden och tyngdkraften F G nedåt från tyngdpunkten mitt på brädan.",
-   "s": 103.06,
-   "e": 120.29
+   "s": 104.11,
+   "e": 121.34
   },
   {
    "t": "b) Vi ska bestämma kraften från den högra bocken, F laddningen Q .",
-   "s": 120.29,
-   "e": 125.64
+   "s": 121.34,
+   "e": 126.69
   },
   {
    "t": "Kraften från den vänstra bocken, F effekten P , är också okänd — men om vi väljer P som vridningspunkt utövar F effekten P inget kraftmoment, eftersom dess riktningslinje går genom vridningspunkten.",
-   "s": 125.64,
-   "e": 137.7
+   "s": 126.69,
+   "e": 138.75
   },
   {
    "t": "Se figur.",
-   "s": 137.7,
-   "e": 139.79
+   "s": 138.75,
+   "e": 140.84
   },
   {
    "t": "Vridningspunkten (röd punkt) väljs i P — då får F effekten P hävarmen 0.",
-   "s": 139.79,
-   "e": 145.64
+   "s": 140.84,
+   "e": 146.69
   },
   {
    "t": "Hävarmarna l laddningen Q är lika med 2,5 meter och l G är lika med 1,5 meter mäts från P till respektive krafts riktningslinje.",
-   "s": 145.64,
-   "e": 155.21
+   "s": 146.69,
+   "e": 156.26
   },
   {
    "t": "Momentlagen ger",
-   "s": 155.21,
-   "e": 157.61
+   "s": 156.26,
+   "e": 158.66
   },
   {
    "t": "M ett är lika med M två",
-   "s": 157.61,
-   "e": 160.61
+   "s": 158.66,
+   "e": 161.66
   },
   {
    "t": "F laddningen Q gånger l Q är lika med F G gånger l G",
-   "s": 160.61,
-   "e": 165.65
+   "s": 161.66,
+   "e": 166.7
   },
   {
    "t": "Vi löser ut F laddningen Q och får",
-   "s": 165.65,
-   "e": 169.46
+   "s": 166.7,
+   "e": 170.51
   },
   {
    "t": "F laddningen Q är lika med F G gånger l G delat med l Q",
-   "s": 169.46,
-   "e": 186.45
+   "s": 170.51,
+   "e": 187.5
   },
   {
    "t": "F G är lika med massan m gånger tyngdfaktorn g som är lika med 20 gånger 9,82 som är lika med 196,4 newton l G som är lika med 1,5 meter l laddningen Q som är lika med 2,5 meter",
-   "s": 169.46,
-   "e": 186.45
+   "s": 170.51,
+   "e": 187.5
   },
   {
    "t": "F laddningen Q är lika med 196,4 gånger 1,5 delat med 2,5 som är lika med 117,84 newton som är ungefär lika med 120 newton som är lika med 0,12 kilonewton",
-   "s": 186.45,
-   "e": 200.31
+   "s": 187.5,
+   "e": 201.36
   },
   {
    "t": "Svar: 0,12 kilonewton.",
-   "s": 200.31,
-   "e": 203.99
+   "s": 201.36,
+   "e": 205.04
   },
   {
    "t": "c) Eftersom brädan är i vila kan kraften från den vänstra bocken beräknas med kraftjämvikt: krafterna uppåt från bockarna måste tillsammans vara lika stora som tyngdkraften nedåt.",
-   "s": 203.99,
-   "e": 215.09
+   "s": 205.04,
+   "e": 216.14
   },
   {
    "t": "Tyngdkraften är ungefär 200 newton och kraften från den högra bocken 120 newton, så kraften från den vänstra bocken måste vara parentesen 200 minus 120 slut parentes newton är lika med 80 newton .",
-   "s": 215.09,
-   "e": 229.22
+   "s": 216.14,
+   "e": 230.28
   },
   {
    "t": "Men vi beräknar den även med momentlagen, för att visa att det ger samma svar.",
-   "s": 229.22,
-   "e": 234.68
+   "s": 230.28,
+   "e": 235.72
   },
   {
    "t": "Med Q som vridningspunkt utövar kraften F laddningen Q från den högra bocken inget kraftmoment, eftersom dess riktningslinje går genom vridningspunkten.",
-   "s": 234.68,
-   "e": 244.19
+   "s": 235.72,
+   "e": 245.24
   },
   {
    "t": "Se figur.",
-   "s": 244.19,
-   "e": 246.28
+   "s": 245.24,
+   "e": 247.32
   },
   {
    "t": "Vridningspunkten (röd punkt) väljs nu i Q — då får F laddningen Q hävarmen 0.",
-   "s": 246.28,
-   "e": 252.38
+   "s": 247.32,
+   "e": 253.43
   },
   {
    "t": "Hävarmarna l effekten P är lika med 2,5 meter och l G är lika med 1,0 meter mäts från Q till respektive krafts riktningslinje.",
-   "s": 252.38,
-   "e": 261.93
+   "s": 253.43,
+   "e": 262.98
   },
   {
    "t": "Momentlagen ger",
-   "s": 261.93,
-   "e": 264.32
+   "s": 262.98,
+   "e": 265.38
   },
   {
    "t": "M ett är lika med M två",
-   "s": 264.32,
-   "e": 267.31
+   "s": 265.38,
+   "e": 268.36
   },
   {
    "t": "F G gånger l G är lika med F effekten P gånger l P",
-   "s": 267.31,
-   "e": 272.32
+   "s": 268.36,
+   "e": 273.39
   },
   {
    "t": "Vi löser ut F effekten P och får",
-   "s": 272.32,
-   "e": 276.11
+   "s": 273.39,
+   "e": 277.18
   },
   {
    "t": "F effekten P är lika med F G gånger l G delat med l P",
-   "s": 276.11,
-   "e": 289.91
+   "s": 277.18,
+   "e": 291.05
   },
   {
-   "t": "F G är lika med 196,4 newton (sedantidigare) l G som är lika med 1,0 meter l effekten P som är lika med 2,5 meter",
-   "s": 276.11,
-   "e": 289.91
+   "t": "F G är lika med 196,4 newton (sedan tidigare) l G som är lika med 1,0 meter l effekten P som är lika med 2,5 meter",
+   "s": 277.18,
+   "e": 291.05
   },
   {
    "t": "F effekten P är lika med 196,4 gånger 1,0 delat med 2,5 som är lika med 78,56 newton som är ungefär lika med 80 newton",
-   "s": 289.91,
-   "e": 302.92
+   "s": 291.05,
+   "e": 304.26
   },
   {
    "t": "Svar: 80 newton.",
-   "s": 302.87,
-   "e": 305.72
+   "s": 304.21,
+   "e": 307.08
   },
   {
    "t": "Demonstration — Vältning",
-   "s": 305.72,
-   "e": 308.49
+   "s": 307.08,
+   "e": 309.86
   },
   {
    "t": "Hur mycket kan man luta på något innan det välter?",
-   "s": 308.49,
-   "e": 312.52
+   "s": 309.86,
+   "e": 313.88
   },
   {
    "t": "Vi undersöker det genom att luta en kloss med en metallvisare i tyngdpunkten, som får illustrera tyngdkraftens riktning.",
-   "s": 312.52,
-   "e": 320.24
+   "s": 313.88,
+   "e": 321.61
   },
   {
    "t": "Vi ser att när tyngdpunkten hamnar utanför vridningspunkten, så välter klossen!",
-   "s": 320.24,
-   "e": 325.79
+   "s": 321.61,
+   "e": 327.16
   },
   {
    "t": "Överkurs — Stabilitet",
-   "s": 325.79,
-   "e": 328.61
+   "s": 327.16,
+   "e": 329.97
   },
   {
    "t": "Om ett föremåls tyngdpunkt ligger ovanför stödytan kommer det att vara stabilt och ligga still.",
-   "s": 328.61,
-   "e": 334.57
+   "s": 329.97,
+   "e": 335.93
   },
   {
    "t": "Om tyngdpunkten ligger utanför stödytan kommer föremålet att vara i obalans och falla.",
-   "s": 334.57,
-   "e": 340.53
+   "s": 335.93,
+   "e": 341.89
   },
   {
    "t": "Stödytan är det område som föremålets kontaktpunkter mot underlaget ringar in — och det avgörande är var tyngdpunktens lodräta riktningslinje träffar marken.",
-   "s": 340.53,
-   "e": 349.93
+   "s": 341.89,
+   "e": 351.3
   },
   {
    "t": "Tyngdpunkten (grön punkt) är utanför stödytan (lila) och bilen kommer att falla.",
-   "s": 349.93,
-   "e": 356.29
+   "s": 351.3,
+   "e": 357.66
   },
   {
    "t": "Föraren hoppar bakåt i bilen så att tyngdpunkten hamnar ovanför stödytan — bilen blir kvar på kanten.",
-   "s": 356.29,
-   "e": 362.96
+   "s": 357.66,
+   "e": 364.32
   }
  ]
 }

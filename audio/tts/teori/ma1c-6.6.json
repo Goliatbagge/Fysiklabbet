@@ -1,0 +1,103 @@
+{
+ "id": "ma1c-6.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "c98ede5b716d8bdb2ea59490926a3bd6d0a5b710",
+ "dur": 85.04,
+ "segments": [
+  {
+   "t": "Räkneoperationer med vektorer",
+   "s": 0.1,
+   "e": 3.25
+  },
+  {
+   "t": "Multiplikation av vektor med skalär (tal)",
+   "s": 3.2,
+   "e": 7.34
+  },
+  {
+   "t": "Om en vektor multipliceras med en skalär (ett tal) bildas en ny vektor vars storlek förändras lika mycket som faktorn vi multiplicerar med.",
+   "s": 7.34,
+   "e": 16.57
+  },
+  {
+   "t": "Om faktorn är negativ skiftar vektorn riktning.",
+   "s": 16.57,
+   "e": 20.38
+  },
+  {
+   "t": "Studera nedanstående vektorer:",
+   "s": 20.38,
+   "e": 25.88
+  },
+  {
+   "t": "Jämfört med vektorn w är vektorn",
+   "s": 20.38,
+   "e": 25.88
+  },
+  {
+   "t": "3 vektorn w tre gånger så lång och har samma riktning",
+   "s": 25.88,
+   "e": 30.29
+  },
+  {
+   "t": "minus 2 vektorn w dubbelt så lång och har motsatt riktning.",
+   "s": 30.29,
+   "e": 34.83
+  },
+  {
+   "t": "Addition av vektorer",
+   "s": 34.83,
+   "e": 37.48
+  },
+  {
+   "t": "Om två vektorer adderas parallellförflyttas den ena vektorn så att den startar vid spetsen hos den andra (eller vice versa).",
+   "s": 37.48,
+   "e": 45.34
+  },
+  {
+   "t": "Den resulterande vektorn fås som vektorn från startpunkten till slutpunkten (polygonmetoden) och kallas resultant.",
+   "s": 45.34,
+   "e": 53.51
+  },
+  {
+   "t": "Exempel 1 — Addera vektorer",
+   "s": 53.51,
+   "e": 56.88
+  },
+  {
+   "t": "Figurerna visar vektorerna u och vektorn v .",
+   "s": 56.88,
+   "e": 60.83
+  },
+  {
+   "t": "Rita vektorn w är lika med vektorn u plus vektorn v .",
+   "s": 60.83,
+   "e": 65.42
+  },
+  {
+   "t": "a)",
+   "s": 65.42,
+   "e": 85.04
+  },
+  {
+   "t": "Vi parallellförflyttar vektorn v , så att den startar vid spetsen hos vektorn u :",
+   "s": 65.42,
+   "e": 85.04
+  },
+  {
+   "t": "Vi drar sedan den resulterande vektorn w från startpunkten till slutpunkten:",
+   "s": 65.42,
+   "e": 85.04
+  },
+  {
+   "t": "b)",
+   "s": 65.42,
+   "e": 85.04
+  },
+  {
+   "t": "Vi parallellförflyttar vektorn v , så att den startar vid spetsen hos vektorn u , och drar sedan den resulterande vektorn w från startpunkten till slutpunkten:",
+   "s": 65.42,
+   "e": 85.04
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
  "id": "fy1-6.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "5a00acb099ce2d9568c50be4b20807b5435a7754",
- "dur": 460.85,
+ "hash": "9b9ce90ab3006a3fa4a2e8f6db5a127be475583d",
+ "dur": 462.98,
  "segments": [
   {
    "t": "Uppvärmning och avsvalning",
@@ -152,192 +152,192 @@
   {
    "t": "energin E är lika med c gånger massan m gånger delta periodtiden T",
    "s": 156.2,
-   "e": 184.78
+   "e": 185.49
   },
   {
-   "t": "c är lika med 4,18 kilojoule per (kg\\cdotK) som är lika med 4 180 joule per (kg\\cdotK) massan m som är lika med 25 kilogram parentesen 1litervattenvägerungefär1 kilogram slut parentes delta periodtiden T som är lika med T två minus T ett som är lika med 40 minus 10 som är lika med 30 kelvin",
+   "t": "c är lika med 4,18 kilojoule/(kg \\cdot K) som är lika med 4 180 joule/(kg \\cdot K) massan m som är lika med 25 kilogram parentesen 1 liter vatten väger ungefär 1 kilogram slut parentes delta periodtiden T som är lika med T två minus T ett som är lika med 40 minus 10 som är lika med 30 kelvin",
    "s": 156.2,
-   "e": 184.78
+   "e": 185.49
   },
   {
    "t": "energin E är lika med 4 180 gånger 25 gånger 30 som är lika med 3,135 gånger 10 upphöjt till 6 joule som är ungefär lika med 3,1 gånger 10 upphöjt till 6 joule som är lika med 3,1 megajoule",
-   "s": 184.78,
-   "e": 199.65
+   "s": 185.49,
+   "e": 200.39
   },
   {
    "t": "Svar: 3,1 megajoule",
-   "s": 199.65,
-   "e": 203.12
+   "s": 200.39,
+   "e": 203.86
   },
   {
    "t": "b) Den energi som avges från varmvattenberedaren tas upp av vattnet.",
-   "s": 203.12,
-   "e": 208.99
+   "s": 203.86,
+   "e": 209.72
   },
   {
    "t": "E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p, ekvation 1",
-   "s": 208.99,
-   "e": 216.51
+   "s": 209.72,
+   "e": 217.25
   },
   {
    "t": "Den avgivna energin från beredaren får vi genom att lösa ut energin E från effekten P är lika med energin E delat med tiden t , så E accelerationen a hastigheten v tyngdfaktorn g är lika med effekten P gånger tiden t .",
-   "s": 216.51,
-   "e": 230.15
+   "s": 217.25,
+   "e": 230.89
   },
   {
    "t": "Insättning av E accelerationen a hastigheten v tyngdfaktorn g är lika med effekten P gånger tiden t i ekvation 1 ger",
-   "s": 230.15,
-   "e": 238.59
+   "s": 230.89,
+   "e": 239.34
   },
   {
    "t": "effekten P gånger tiden t är lika med E u trycket p p",
-   "s": 238.59,
-   "e": 259.82
+   "s": 239.34,
+   "e": 260.7
   },
   {
    "t": "Tiden efterfrågas, så vi löser ut t.",
-   "s": 238.59,
-   "e": 259.82
+   "s": 239.34,
+   "e": 260.7
   },
   {
    "t": "tiden t är lika med E u trycket p p delat med effekten P",
-   "s": 238.59,
-   "e": 259.82
+   "s": 239.34,
+   "e": 260.7
   },
   {
-   "t": "E u trycket p p är lika med 3,135 gånger 10 upphöjt till 6 joule parentesen fråna-uppgiften slut parentes effekten P som är lika med 5,0 kilowatt som är lika med 5 000 watt",
-   "s": 238.59,
-   "e": 259.82
+   "t": "E u trycket p p är lika med 3,135 gånger 10 upphöjt till 6 joule parentesen från a-uppgiften slut parentes effekten P som är lika med 5,0 kilowatt som är lika med 5 000 watt",
+   "s": 239.34,
+   "e": 260.7
   },
   {
-   "t": "tiden t är lika med 3,135 gånger 10 upphöjt till 6 delat med 5 000 som är lika med 627 sekund som är lika med 10 minuteroch 27 sekunder",
-   "s": 259.82,
-   "e": 271.1
+   "t": "tiden t är lika med 3,135 gånger 10 upphöjt till 6 delat med 5 000 som är lika med 627 sekund som är lika med 10 minuter och 27 sekunder",
+   "s": 260.7,
+   "e": 272.1
   },
   {
    "t": "Svar: Ca 10 minuter",
-   "s": 271.1,
-   "e": 274.25
+   "s": 272.1,
+   "e": 275.25
   },
   {
    "t": "Exempel 2 — Blandning av varmt och kallt vatten",
-   "s": 274.25,
-   "e": 278.3
+   "s": 275.25,
+   "e": 279.3
   },
   {
    "t": "Du blandar 5,0 dl 80-gradigt vatten med 3,0 dl 20-gradigt vatten.",
-   "s": 278.3,
-   "e": 285.19
+   "s": 279.3,
+   "e": 286.19
   },
   {
    "t": "Vad blir blandningens sluttemperatur?",
-   "s": 285.19,
-   "e": 288.56
+   "s": 286.19,
+   "e": 289.56
   },
   {
    "t": "Bortse från energiförluster till omgivningen.",
-   "s": 288.56,
-   "e": 292.43
+   "s": 289.56,
+   "e": 293.43
   },
   {
    "t": "Eftersom värme flödar från varmt till kallt är det varmvattnet som avger energi och kallvattnet som upptar samma energi.",
-   "s": 292.43,
-   "e": 299.85
+   "s": 293.43,
+   "e": 300.84
   },
   {
    "t": "E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p, ekvation 1",
-   "s": 299.85,
-   "e": 307.38
+   "s": 300.84,
+   "e": 308.35
   },
   {
    "t": "Varmvattnet avsvalnar när det avger energi, så E accelerationen a hastigheten v tyngdfaktorn g är lika med c gånger m v gånger delta T v där m hastigheten v och delta T hastigheten v står för varmvattnets massa respektive temperaturändring.",
-   "s": 307.38,
-   "e": 324.39
+   "s": 308.35,
+   "e": 325.34
   },
   {
    "t": "Kallvattnet värms upp när det upptar energi, så E u trycket p p är lika med c gånger m k gånger delta T k där m k och delta T k står för kallvattnets massa respektive temperaturändring.",
-   "s": 324.34,
-   "e": 336.2
+   "s": 325.29,
+   "e": 337.18
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 336.2,
-   "e": 339.51
+   "s": 337.18,
+   "e": 340.49
   },
   {
    "t": "c gånger m hastigheten v gånger delta T v är lika med c gånger m k gånger delta T k",
-   "s": 339.51,
-   "e": 353.65
+   "s": 340.49,
+   "e": 354.6
   },
   {
    "t": "Dividerar med c i båda led:",
-   "s": 339.51,
-   "e": 353.65
+   "s": 340.49,
+   "e": 354.6
   },
   {
    "t": "m hastigheten v gånger delta T v är lika med m k gånger delta T k, ekvation 2",
-   "s": 339.51,
-   "e": 353.65
+   "s": 340.49,
+   "e": 354.6
   },
   {
-   "t": "m hastigheten v är lika med 0,50 kilogram parentesen 5dlvattenvägerungefär0,50 kilogram slut parentes m k som är lika med 0,30 kilogram parentesen 3dlvattenvägerungefär0,30 kilogram slut parentes delta T v som är lika med 80 minus periodtiden T delta T k som är lika med T minus 20",
-   "s": 353.65,
-   "e": 374.15
+   "t": "m hastigheten v är lika med 0,50 kilogram parentesen 5 dl vatten väger ungefär 0,50 kilogram slut parentes m k som är lika med 0,30 kilogram parentesen 3 dl vatten väger ungefär 0,30 kilogram slut parentes delta T v som är lika med 80 minus periodtiden T delta T k som är lika med T minus 20",
+   "s": 354.6,
+   "e": 376.33
   },
   {
    "t": "Om vi kallar sluttemperaturen T gäller",
-   "s": 374.15,
-   "e": 377.84
+   "s": 376.33,
+   "e": 380.01
   },
   {
    "t": "0,50 gånger parentesen 80 minus periodtiden T slut parentes är lika med 0,30 gånger parentesen T minus 20 slut parentes",
-   "s": 377.84,
-   "e": 388.09
+   "s": 380.01,
+   "e": 390.21
   },
   {
    "t": "40 minus 0,50 periodtiden T är lika med 0,30 tesla minus 6",
-   "s": 388.09,
-   "e": 394.59
+   "s": 390.21,
+   "e": 396.71
   },
   {
    "t": "46 är lika med 0,80 periodtiden T vilket är ekvivalent med att T är lika med 46 delat med 0,80 som är lika med 57,5 grader coulomb som är ungefär lika med 58 grader coulomb",
-   "s": 394.59,
-   "e": 408.11
+   "s": 396.71,
+   "e": 410.24
   },
   {
    "t": "Svar: 58 grader Celsius",
-   "s": 408.11,
-   "e": 411.61
+   "s": 410.24,
+   "e": 413.74
   },
   {
    "t": "Alternativ lösning — Viktat medelvärde",
-   "s": 411.61,
-   "e": 415.31
+   "s": 413.74,
+   "e": 417.44
   },
   {
    "t": "När det är samma vätska som blandas och ingen typ av fasövergång (till exempel smältning eller ångbildning) sker går uppgiften snabbare att lösa med viktat medelvärde.",
-   "s": 415.31,
-   "e": 425.4
+   "s": 417.44,
+   "e": 427.53
   },
   {
    "t": "Formeln för viktat medelvärde finns inte i formelbladet, så den får du i så fall komma ihåg själv.",
-   "s": 425.4,
-   "e": 431.93
+   "s": 427.53,
+   "e": 434.05
   },
   {
    "t": "Då behöver inte heller SI-enheter användas.",
-   "s": 431.93,
-   "e": 435.76
+   "s": 434.05,
+   "e": 437.89
   },
   {
    "t": "T sträckan s hävarmen l u tiden t är lika med V ett gånger T ett plus V två gånger T två delat med V ett plus V två som är lika med 5,0 dl gånger 80 grader coulomb plus 3,0 dl gånger 20 grader coulomb delat med parentesen 5,0 plus 3,0 slut parentes dl som är lika med 57,5 grader coulomb",
-   "s": 435.76,
-   "e": 457.35
+   "s": 437.89,
+   "e": 459.48
   },
   {
    "t": "Svar: 58 grader Celsius",
-   "s": 457.35,
-   "e": 460.85
+   "s": 459.48,
+   "e": 462.98
   }
  ]
 }

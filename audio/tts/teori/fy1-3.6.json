@@ -1,8 +1,8 @@
 {
  "id": "fy1-3.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "cf714e62ca3d821cc0491a5e8faab230ec4faa3a",
- "dur": 399.13,
+ "hash": "82cc55ec9a028ce2cd4bc5ff13bced2ad94eeae1",
+ "dur": 400.09,
  "segments": [
   {
    "t": "Friktion",
@@ -227,72 +227,72 @@
   {
    "t": "Exempel 2 — Bokhylla med friktion",
    "s": 279.52,
-   "e": 282.91
+   "e": 282.9
   },
   {
    "t": "En bokhylla med massan 50 kilogram dras med kraften 325 newton och får då accelerationen 4,0 meter per sekund i kvadrat.",
-   "s": 282.91,
+   "s": 282.9,
    "e": 292.19
   },
   {
-   "t": "Bestäma) friktionskraften b) friktionstalet.",
+   "t": "Bestäm. a) friktionskraften b) friktionstalet.",
    "s": 292.19,
-   "e": 296.79
+   "e": 298.07
   },
   {
    "t": "a) Vi kan inte beräkna friktionskraften med formeln för friktionskraft då vi inte vet friktionstalet.",
-   "s": 296.79,
-   "e": 303.73
+   "s": 298.07,
+   "e": 305.0
   },
   {
    "t": "Vi ställer istället upp en ekvation mellan krafterna och löser ut friktionskraften F frekvensen f .",
-   "s": 303.73,
-   "e": 310.5
+   "s": 305.0,
+   "e": 311.8
   },
   {
    "t": "F resistansen R är lika med F avståndet d r accelerationen a tyngdfaktorn g minus F frekvensen f vilket är ekvivalent med att F f är lika med F d r a g minus F R",
-   "s": 310.5,
-   "e": 339.55
+   "s": 311.8,
+   "e": 340.84
   },
   {
    "t": "F avståndet d r accelerationen a tyngdfaktorn g är lika med 325 newton F resistansen R som är lika med massan m gånger a som är lika med 50 kilogram gånger 4,0 meter per sekund i kvadrat som är lika med 200 newton",
-   "s": 316.68,
-   "e": 339.55
+   "s": 317.98,
+   "e": 340.84
   },
   {
    "t": "F frekvensen f är lika med 325 minus 200 som är lika med 125 newton som är ungefär lika med 130 newton som är lika med 0,13 kilonewton",
-   "s": 339.5,
-   "e": 351.05
+   "s": 340.79,
+   "e": 352.34
   },
   {
    "t": "Svar: 0,13 kilonewton eller 130 newton",
-   "s": 351.05,
-   "e": 356.35
+   "s": 352.34,
+   "e": 357.64
   },
   {
    "t": "b) Vi ställer upp formeln för friktion och löser ut friktionstalet.",
-   "s": 356.35,
-   "e": 361.48
+   "s": 357.64,
+   "e": 362.78
   },
   {
    "t": "F frekvensen f är lika med my gånger F N vilket är ekvivalent med att my är lika med F f delat med F N",
-   "s": 361.48,
-   "e": 369.12
+   "s": 362.78,
+   "e": 370.42
   },
   {
-   "t": "F frekvensen f är lika med 125 newton parentesen frånföregåendeuppgift slut parentes F N som är lika med F G som är lika med massan m gånger tyngdfaktorn g som är lika med 50 kilogram gånger 9,82 newton per kilogram som är lika med 491 newton",
-   "s": 369.12,
-   "e": 386.33
+   "t": "F frekvensen f är lika med 125 newton parentesen från föregående uppgift slut parentes F N som är lika med F G som är lika med massan m gånger tyngdfaktorn g som är lika med 50 kilogram gånger 9,82 newton per kilogram som är lika med 491 newton",
+   "s": 370.42,
+   "e": 387.61
   },
   {
-   "t": "my är lika med 125 delat med 491 som är lika med 0,254 ldots som är ungefär lika med 0,25",
-   "s": 386.33,
-   "e": 395.92
+   "t": "my är lika med 125 delat med 491 som är lika med 0,254 som är ungefär lika med 0,25",
+   "s": 387.61,
+   "e": 396.88
   },
   {
    "t": "Svar: 0,25",
-   "s": 395.92,
-   "e": 399.13
+   "s": 396.88,
+   "e": 400.09
   }
  ]
 }

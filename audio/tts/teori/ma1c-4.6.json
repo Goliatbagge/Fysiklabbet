@@ -1,0 +1,268 @@
+{
+ "id": "ma1c-4.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "9d394e3cb9ecc3e5d2fd68d1756d65a668e39aa3",
+ "dur": 222.07,
+ "segments": [
+  {
+   "t": "Parallella och vertikala linjer samt räta linjens ekvation i allmän form",
+   "s": 0.1,
+   "e": 5.4
+  },
+  {
+   "t": "Parallella och vertikala linjer",
+   "s": 5.35,
+   "e": 8.24
+  },
+  {
+   "t": "Om två linjer har samma lutning kallas de parallella.",
+   "s": 8.24,
+   "e": 12.32
+  },
+  {
+   "t": "Parallella linjer har alltså samma k-värde.",
+   "s": 12.32,
+   "e": 15.78
+  },
+  {
+   "t": "En linje som är lodrät kallas vertikal.",
+   "s": 15.78,
+   "e": 19.49
+  },
+  {
+   "t": "Vertikala linjer kan inte beskrivas med räta linjens ekvation i k-form, utan beskrivs utifrån var den ligger i x-led.",
+   "s": 19.49,
+   "e": 27.73
+  },
+  {
+   "t": "Vertikala linjens ekvation",
+   "s": 27.73,
+   "e": 30.73
+  },
+  {
+   "t": "x är lika med a",
+   "s": 30.73,
+   "e": 33.12
+  },
+  {
+   "t": "där a är linjens läge i x-led.",
+   "s": 33.12,
+   "e": 36.62
+  },
+  {
+   "t": "Räta linjens ekvation i allmän form",
+   "s": 36.62,
+   "e": 40.06
+  },
+  {
+   "t": "Alla räta linjer kan beskrivas med räta linjens ekvation i allmän form.",
+   "s": 40.06,
+   "e": 45.33
+  },
+  {
+   "t": "I allmän form samlas alla termer i linjens ekvation i ena ledet och det andra ledet blir då 0.",
+   "s": 45.33,
+   "e": 51.9
+  },
+  {
+   "t": "Räta linjens ekvation i allmän form",
+   "s": 51.9,
+   "e": 55.38
+  },
+  {
+   "t": "a x plus b y plus c är lika med 0",
+   "s": 55.38,
+   "e": 59.61
+  },
+  {
+   "t": "där a , b och c är konstanter.",
+   "s": 59.61,
+   "e": 63.08
+  },
+  {
+   "t": "Exempel 1 — Parallell linje och allmän form",
+   "s": 63.08,
+   "e": 67.15
+  },
+  {
+   "t": "En linje beskrivs av y är lika med 3 x minus 5 .",
+   "s": 67.15,
+   "e": 71.84
+  },
+  {
+   "t": "Ange ekvationen för. a) en parallell linje som går genom (1, 2) b) linjen i allmän form.",
+   "s": 71.84,
+   "e": 81.42
+  },
+  {
+   "t": "a) Linjens k -värde är 3.",
+   "s": 81.42,
+   "e": 84.72
+  },
+  {
+   "t": "Den parallella linjen ska alltså ha samma k -värde.",
+   "s": 84.72,
+   "e": 88.84
+  },
+  {
+   "t": "Insättning av k är lika med 3 i RLE i k-form ger",
+   "s": 88.84,
+   "e": 93.64
+  },
+  {
+   "t": "y är lika med 3 x plus m",
+   "s": 93.64,
+   "e": 97.1
+  },
+  {
+   "t": "Att (1, 2) ligger på linjen ger",
+   "s": 97.1,
+   "e": 101.19
+  },
+  {
+   "t": "2 är lika med 3 gånger 1 plus m",
+   "s": 101.19,
+   "e": 111.08
+  },
+  {
+   "t": "2 är lika med 3 plus m",
+   "s": 101.19,
+   "e": 111.08
+  },
+  {
+   "t": "Subtraherar 3 från båda led:",
+   "s": 101.19,
+   "e": 111.08
+  },
+  {
+   "t": "2 minus 3 är lika med 3 plus m minus 3",
+   "s": 101.19,
+   "e": 111.08
+  },
+  {
+   "t": "minus 1 är lika med m",
+   "s": 111.08,
+   "e": 120.0
+  },
+  {
+   "t": "Insättning av k är lika med 3 och m är lika med minus 1 i RLE ger y är lika med 3 x minus 1 .",
+   "s": 111.08,
+   "e": 120.0
+  },
+  {
+   "t": "Svar: y är lika med 3 x minus 1",
+   "s": 120.0,
+   "e": 124.24
+  },
+  {
+   "t": "b) Vi har ekvationen y är lika med 3 x minus 5 .",
+   "s": 124.24,
+   "e": 129.26
+  },
+  {
+   "t": "Vi samlar alla termer på ena sidan genom att subtrahera y från båda led:",
+   "s": 129.26,
+   "e": 140.45
+  },
+  {
+   "t": "y minus y är lika med 3 x minus 5 minus y",
+   "s": 129.26,
+   "e": 140.45
+  },
+  {
+   "t": "0 är lika med 3 x minus 5 minus y",
+   "s": 129.26,
+   "e": 140.45
+  },
+  {
+   "t": "Vi skiftar VL och HL och sorterar termerna i \"bokstavsordning\".",
+   "s": 140.45,
+   "e": 145.53
+  },
+  {
+   "t": "Svar: 3 x minus y minus 5 är lika med 0",
+   "s": 145.53,
+   "e": 150.18
+  },
+  {
+   "t": "Exempel 2 — k-värde ur allmän form",
+   "s": 150.18,
+   "e": 154.1
+  },
+  {
+   "t": "Ange k -värdet för linjen som beskrivs av 2 x plus 3 y minus 6 är lika med 0 .",
+   "s": 154.1,
+   "e": 160.76
+  },
+  {
+   "t": "Vi skriver om ekvationen till k-form genom att lösa ut y, för att därefter identifiera k -värdet:",
+   "s": 160.76,
+   "e": 170.74
+  },
+  {
+   "t": "2 x plus 3 y minus 6 är lika med 0",
+   "s": 160.76,
+   "e": 170.74
+  },
+  {
+   "t": "Vi börjar med att eliminera termerna 2 x och minus 6 från VL:",
+   "s": 170.74,
+   "e": 182.43
+  },
+  {
+   "t": "2 x plus 3 y minus 6 minus 2 x plus 6 är lika med 0 minus 2 x plus 6",
+   "s": 170.74,
+   "e": 182.43
+  },
+  {
+   "t": "3 y är lika med minus 2 x plus 6",
+   "s": 182.43,
+   "e": 186.8
+  },
+  {
+   "t": "Vi dividerar båda led med 3:",
+   "s": 186.8,
+   "e": 194.65
+  },
+  {
+   "t": "3 y delat med 3 är lika med minus 2 x delat med 3 plus 6 delat med 3",
+   "s": 186.8,
+   "e": 194.65
+  },
+  {
+   "t": "y är lika med minus 2 delat med 3 x plus 2",
+   "s": 194.65,
+   "e": 199.26
+  },
+  {
+   "t": "och vi ser nu lätt att k är lika med minus 2 delat med 3 .",
+   "s": 199.26,
+   "e": 204.01
+  },
+  {
+   "t": "Svar: k är lika med minus 2 delat med 3",
+   "s": 204.01,
+   "e": 208.41
+  },
+  {
+   "t": "Exempel 3 — Vertikal linje",
+   "s": 208.41,
+   "e": 211.59
+  },
+  {
+   "t": "Ange ekvationen för linjen nedan.",
+   "s": 211.59,
+   "e": 214.88
+  },
+  {
+   "t": "Vi har en vertikal linje vid x är lika med 3 .",
+   "s": 214.88,
+   "e": 218.95
+  },
+  {
+   "t": "Svar: x är lika med 3",
+   "s": 218.95,
+   "e": 222.07
+  }
+ ]
+}

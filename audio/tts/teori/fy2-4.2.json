@@ -1,8 +1,8 @@
 {
  "id": "fy2-4.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "8b0ae1672c8955adba692956ca51544c3e501497",
- "dur": 320.29,
+ "hash": "118e6bbf66a0324915f45676020eb0ee9da2c04c",
+ "dur": 320.01,
  "segments": [
   {
    "t": "Diffraktion och interferens",
@@ -227,42 +227,42 @@
   {
    "t": "a) Vi ställer upp gitterformeln och löser ut våglängden λ.",
    "s": 245.78,
-   "e": 274.05
+   "e": 274.04
   },
   {
    "t": "n gånger våglängden lambda är lika med avståndet d gånger sinus alfa n vilket är ekvivalent med att lambda är lika med d gånger sinus alfa n delat med n",
    "s": 245.78,
-   "e": 274.05
+   "e": 274.04
   },
   {
-   "t": "avståndet d är lika med 1 delat med 120 millimeter som är lika med 1 delat med 120 gånger 10 upphöjt till minus 3 meter alfa två som är lika med 9,4 grader n som är lika med 2 parentesen andraordningen slut parentes",
+   "t": "avståndet d är lika med 1 delat med 120 millimeter som är lika med 1 delat med 120 gånger 10 upphöjt till minus 3 meter alfa två som är lika med 9,4 grader n som är lika med 2 parentesen andra ordningen slut parentes",
    "s": 245.78,
-   "e": 274.05
+   "e": 274.04
   },
   {
-   "t": "våglängden lambda är lika med 1 delat med 120 gånger 10 upphöjt till minus 3 gånger sinus 9,4 grader delat med 2 som är lika med 6,805 ldots gånger 10 upphöjt till minus 7 meter som är ungefär lika med 6,81 gånger 10 upphöjt till minus 7 meter som är lika med 681 nanometer",
-   "s": 274.05,
-   "e": 293.29
+   "t": "våglängden lambda är lika med 1 delat med 120 gånger 10 upphöjt till minus 3 gånger sinus 9,4 grader delat med 2 som är lika med 6,805 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 6,81 gånger 10 upphöjt till minus 7 meter som är lika med 681 nanometer",
+   "s": 274.04,
+   "e": 293.0
   },
   {
    "t": "Svar: 681 nanometer",
-   "s": 293.29,
-   "e": 298.72
+   "s": 293.0,
+   "e": 298.43
   },
   {
    "t": "b) Vi tittar efter våglängden 681 nanometer i tabellen för det elektromagnetiska spektrumet (se avsnitt 4.1).",
-   "s": 298.67,
-   "e": 308.14
+   "s": 298.38,
+   "e": 307.86
   },
   {
    "t": "Vi ser att ljus med våglängden 681 nanometer ligger i det röda spektrumet (625 nanometer – 740 nanometer).",
-   "s": 308.14,
-   "e": 317.82
+   "s": 307.86,
+   "e": 317.53
   },
   {
    "t": "Svar: Rött",
-   "s": 317.82,
-   "e": 320.29
+   "s": 317.53,
+   "e": 320.01
   }
  ]
 }

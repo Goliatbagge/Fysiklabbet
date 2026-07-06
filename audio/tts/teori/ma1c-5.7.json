@@ -1,0 +1,123 @@
+{
+ "id": "ma1c-5.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "90f5ec13f79e677d5416c8d3c245474ef1b4ed1c",
+ "dur": 160.62,
+ "segments": [
+  {
+   "t": "Träddiagram",
+   "s": 0.1,
+   "e": 2.14
+  },
+  {
+   "t": "Om vi ska beräkna sannolikheten för en kombination där sannolikheterna för de enskilda utfallen är olika kan detta göras med ett diagram som byggs upp av grenar, ett så kallat träddiagram.",
+   "s": 2.09,
+   "e": 12.85
+  },
+  {
+   "t": "För att beräkna sannolikheten för en kombination, multiplicerar vi bara sannolikheterna längs med den grenen.",
+   "s": 12.85,
+   "e": 19.84
+  },
+  {
+   "t": "Exempel 1 — Strumporna i lådan",
+   "s": 19.84,
+   "e": 23.2
+  },
+  {
+   "t": "I en låda ligger 7 svarta och 3 vita strumpor.",
+   "s": 23.2,
+   "e": 27.31
+  },
+  {
+   "t": "Du drar två strumpor efter varandra.",
+   "s": 27.31,
+   "e": 30.56
+  },
+  {
+   "t": "Vad är sannolikheten att du. a) med återläggning drar två svarta strumpor?. b) utan återläggning drar två svarta strumpor?. c) utan återläggning drar en svart och en vit strumpa (ordningen oviktig)?",
+   "s": 30.56,
+   "e": 48.8
+  },
+  {
+   "t": "a) Vi börjar med att rita upp träddiagrammet och skriver sannolikheterna vid varje gren.",
+   "s": 48.8,
+   "e": 54.9
+  },
+  {
+   "t": "Med återläggning ändras inte sannolikheterna för varje utfall:",
+   "s": 54.9,
+   "e": 67.4
+  },
+  {
+   "t": "Vi ringar in alla kombinationer som ger två svarta strumpor (endast en kombination):",
+   "s": 54.9,
+   "e": 67.4
+  },
+  {
+   "t": "Vi multiplicerar sannolikheterna längs med den grenen och får",
+   "s": 54.9,
+   "e": 67.4
+  },
+  {
+   "t": "P av två svart är lika med 7 delat med 10 gånger 7 delat med 10 som är lika med 49 delat med 100 som är lika med 0,49 som är lika med 49 procent",
+   "s": 67.4,
+   "e": 78.56
+  },
+  {
+   "t": "Svar: 49 procent",
+   "s": 78.56,
+   "e": 81.7
+  },
+  {
+   "t": "b) Vi ritar återigen upp ett träddiagram.",
+   "s": 81.7,
+   "e": 85.78
+  },
+  {
+   "t": "Utan återläggning ändras sannolikheterna för varje utfall.",
+   "s": 85.78,
+   "e": 90.38
+  },
+  {
+   "t": "Om vi skulle dra en svart strumpa första gången kommer det att finnas kvar 6 svarta strumpor av 9 strumpor totalt andra dragningen.",
+   "s": 90.38,
+   "e": 98.24
+  },
+  {
+   "t": "Sannolikheten att dra en svart strumpa efter att ha dragit en svart strumpa är alltså 6 delat med 9 :",
+   "s": 98.24,
+   "e": 116.75
+  },
+  {
+   "t": "P av två svart är lika med 7 delat med 10 gånger 6 delat med 9 som är lika med 42 delat med 90 som är lika med 7 delat med 15 som är lika med 0,466 som är ungefär lika med 47 procent",
+   "s": 98.24,
+   "e": 116.75
+  },
+  {
+   "t": "Svar: 7 delat med 15 eller ca 47 procent",
+   "s": 116.75,
+   "e": 121.59
+  },
+  {
+   "t": "c) Samma träddiagram som i b-uppgiften gäller, men vi har nu flera kombinationer som ger en svart och en vit strumpa, se nedan:",
+   "s": 121.59,
+   "e": 153.97
+  },
+  {
+   "t": "Vi multiplicerar sannolikheterna längs med varje gren och adderar dem med varandra:",
+   "s": 121.59,
+   "e": 153.97
+  },
+  {
+   "t": "P av en svart, en vit är lika med 7 delat med 10 gånger 3 delat med 9 plus 3 delat med 10 gånger 7 delat med 9 som är lika med 21 delat med 90 plus 21 delat med 90 som är lika med 42 delat med 90 som är lika med 7 delat med 15 som är ungefär lika med 0,466 som är ungefär lika med 47 procent",
+   "s": 121.59,
+   "e": 155.84
+  },
+  {
+   "t": "Svar: 7 delat med 15 eller ca 47 procent",
+   "s": 155.84,
+   "e": 160.62
+  }
+ ]
+}

@@ -1,0 +1,208 @@
+{
+ "id": "ma1c-4.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "71ff96ba4af883826d7a4378b5ea8c06e87ada2b",
+ "dur": 228.55,
+ "segments": [
+  {
+   "t": "Definitionsmängd och värdemängd",
+   "s": 0.1,
+   "e": 3.12
+  },
+  {
+   "t": "Möjliga värden på den",
+   "s": 3.08,
+   "e": 5.65
+  },
+  {
+   "t": "oberoende variabeln, oftast x , kallas definitionsmängd",
+   "s": 5.65,
+   "e": 10.62
+  },
+  {
+   "t": "beroende variabeln, oftast y , kallas värdemängd.",
+   "s": 10.62,
+   "e": 15.14
+  },
+  {
+   "t": "När vi anger definitions- och värdemängd utifrån en graf är det viktigt att titta på hur grafens ändpunkter är markerade.",
+   "s": 15.14,
+   "e": 22.88
+  },
+  {
+   "t": "En",
+   "s": 22.88,
+   "e": 24.34
+  },
+  {
+   "t": "ifylld ring betyder att ändpunkten ingår i intervallet (markeras med ≤ eller ≥)",
+   "s": 24.34,
+   "e": 30.19
+  },
+  {
+   "t": "tom ring betyder att ändpunkten inte ingår i intervallet (markeras med < eller >).",
+   "s": 30.19,
+   "e": 36.3
+  },
+  {
+   "t": "Exempel 1 — Musiktjänsten",
+   "s": 36.3,
+   "e": 39.44
+  },
+  {
+   "t": "En musiktjänst kostar 50 kronor/månad.",
+   "s": 39.44,
+   "e": 43.75
+  },
+  {
+   "t": "Erbjudandet gäller max 1 år.",
+   "s": 43.75,
+   "e": 47.04
+  },
+  {
+   "t": "Kostnaden y kr för x månader kan då skrivas y är lika med 50 x .",
+   "s": 47.04,
+   "e": 52.81
+  },
+  {
+   "t": "Bestäm funktionens. a) definitionsmängd b) värdemängd.",
+   "s": 52.81,
+   "e": 59.3
+  },
+  {
+   "t": "a) Antalet månader vi betalar detta pris för tjänsten x kan variera från minst 0 till högst 12 månader. (Vi kan inte betala för tjänsten ett negativt antal månader och priset gäller endast i 12 månader.)",
+   "s": 59.3,
+   "e": 73.81
+  },
+  {
+   "t": "Svar: 0 är mindre än eller lika med x är mindre än eller lika med 12",
+   "s": 73.81,
+   "e": 79.59
+  },
+  {
+   "t": "b) I a-uppgiften fick vi att definitionsmängden var 0 är mindre än eller lika med x är mindre än eller lika med 12 .",
+   "s": 79.59,
+   "e": 87.49
+  },
+  {
+   "t": "Det minsta värdet på y (kostnaden) får vi då x är lika med 0 , dvs. då vi inte köper musiktjänsten alls:",
+   "s": 87.49,
+   "e": 99.56
+  },
+  {
+   "t": "y, ekvation 0 är lika med 50 gånger 0 som är lika med 0 kronor",
+   "s": 87.49,
+   "e": 99.56
+  },
+  {
+   "t": "Det största värdet på y får vi då x är lika med 12 :",
+   "s": 99.56,
+   "e": 108.39
+  },
+  {
+   "t": "y, ekvation 12 är lika med 50 gånger 12 som är lika med 600 kronor",
+   "s": 99.56,
+   "e": 108.39
+  },
+  {
+   "t": "Så värdet på y kan vara mellan 0 och 600 kronor.",
+   "s": 108.39,
+   "e": 112.88
+  },
+  {
+   "t": "Svar: 0 är mindre än eller lika med y är mindre än eller lika med 600",
+   "s": 112.88,
+   "e": 118.92
+  },
+  {
+   "t": "Exempel 2 — Ur en graf",
+   "s": 118.92,
+   "e": 121.86
+  },
+  {
+   "t": "Bestäm definitions- och värdemängd till nedanstående funktion.",
+   "s": 121.86,
+   "e": 126.47
+  },
+  {
+   "t": "Vi börjar med att bestämma definitionsmängden som står för tillåtna x-värden.",
+   "s": 126.47,
+   "e": 131.93
+  },
+  {
+   "t": "Vi tittar var grafen börjar på x-axeln (håll t.ex. en penna lodrätt och vandra från vänster till höger och stanna när du stöter på grafen).",
+   "s": 131.93,
+   "e": 140.97
+  },
+  {
+   "t": "Grafen startar vid x är lika med minus 1 .",
+   "s": 140.97,
+   "e": 144.97
+  },
+  {
+   "t": "Ringen är inte ifylld, vilket medför att x är större än minus 1 .",
+   "s": 144.97,
+   "e": 150.29
+  },
+  {
+   "t": "Titta sedan var grafen slutar på x-axeln (håll pennan lodrät och vandra från höger till vänster och stanna när du stöter på grafen).",
+   "s": 150.29,
+   "e": 158.71
+  },
+  {
+   "t": "Grafen slutar vid x är lika med 2 .",
+   "s": 158.71,
+   "e": 162.32
+  },
+  {
+   "t": "Ringen är ifylld, vilket medför att x är mindre än eller lika med 2 .",
+   "s": 162.32,
+   "e": 167.76
+  },
+  {
+   "t": "Definitionsmängden är alltså minus 1 är mindre än x är mindre än eller lika med 2 .",
+   "s": 167.76,
+   "e": 174.03
+  },
+  {
+   "t": "Vi bestämmer nu värdemängden som står för tillåtna y-värden.",
+   "s": 174.03,
+   "e": 178.64
+  },
+  {
+   "t": "Vi tittar var grafen börjar på y-axeln (håll pennan vågrätt och vandra nerifrån och upp och stanna när du stöter på grafen).",
+   "s": 178.64,
+   "e": 186.59
+  },
+  {
+   "t": "Grafen startar vid y är lika med 0 .",
+   "s": 186.59,
+   "e": 190.18
+  },
+  {
+   "t": "Punkten där är ifylld, vilket medför att y är större än eller lika med 0 .",
+   "s": 190.18,
+   "e": 195.57
+  },
+  {
+   "t": "Titta var grafen slutar på y-axeln (håll pennan vågrät och vandra uppifrån och ned och stanna när du stöter på grafen).",
+   "s": 195.57,
+   "e": 203.43
+  },
+  {
+   "t": "Grafen slutar vid y är lika med 4 (toppen ligger på kurvan), vilket medför att y är mindre än eller lika med 4 .",
+   "s": 203.43,
+   "e": 211.25
+  },
+  {
+   "t": "Värdemängden är alltså 0 är mindre än eller lika med y är mindre än eller lika med 4 .",
+   "s": 211.25,
+   "e": 217.5
+  },
+  {
+   "t": "Svar: Definitionsmängd: minus 1 är mindre än x är mindre än eller lika med 2 och värdemängd: 0 är mindre än eller lika med y är mindre än eller lika med 4",
+   "s": 217.5,
+   "e": 228.55
+  }
+ ]
+}

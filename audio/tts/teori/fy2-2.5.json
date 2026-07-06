@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "7fdef14bb8e7e48f85da58f5498e9a3c935b5b25",
- "dur": 314.64,
+ "hash": "dff17a694f970aa11422b0a8640a6bf4a0676d53",
+ "dur": 315.72,
  "segments": [
   {
    "t": "Plan pendel",
@@ -227,37 +227,37 @@
   {
    "t": "(Tiden 1,00 sekunder från ena vändläget till det andra motsvarar en halv periodtid, så T är lika med 2,00 sekunder.)",
    "s": 260.93,
-   "e": 270.1
+   "e": 270.09
   },
   {
-   "t": "hävarmen l är lika med 2,00 i kvadrat gånger 9,82 delat med 4 pi i kvadrat som är lika med 0,9949 ldots meter som är ungefär lika med 0,995 meter som är lika med 99,5 centimeter",
-   "s": 270.1,
-   "e": 285.39
+   "t": "hävarmen l är lika med 2,00 i kvadrat gånger 9,82 delat med 4 pi i kvadrat som är lika med 0,9949 meter som är ungefär lika med 0,995 meter som är lika med 99,5 centimeter",
+   "s": 270.09,
+   "e": 285.24
   },
   {
    "t": "Svar: 99,5 centimeter",
-   "s": 285.39,
-   "e": 289.39
+   "s": 285.24,
+   "e": 289.23
   },
   {
    "t": "Definitionen av 1 meter",
-   "s": 289.54,
-   "e": 292.48
+   "s": 289.23,
+   "e": 293.57
   },
   {
    "t": "På 1500-talet använde man pendellängden hos en sekundpendel som definition för 1 meter, men man upptäckte att inte samma längd gällde vid ekvatorn.",
-   "s": 292.43,
-   "e": 301.68
+   "s": 293.52,
+   "e": 302.76
   },
   {
    "t": "Varför?",
-   "s": 301.68,
-   "e": 303.48
+   "s": 302.76,
+   "e": 304.56
   },
   {
    "t": "Svar: Tyngdaccelerationen g är lite lägre vid ekvatorn på grund av jordklotets tillplattning, så tiden för en pendling blir lite längre där — och pendeln behöver vara kortare för att hålla samma period.",
-   "s": 303.48,
-   "e": 314.64
+   "s": 304.56,
+   "e": 315.72
   }
  ]
 }

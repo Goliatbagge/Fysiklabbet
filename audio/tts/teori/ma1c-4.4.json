@@ -1,0 +1,268 @@
+{
+ "id": "ma1c-4.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "640458d2cce669cee06487234298915ab7ff0ffe",
+ "dur": 279.88,
+ "segments": [
+  {
+   "t": "Från graf till ekvation",
+   "s": 0.1,
+   "e": 2.92
+  },
+  {
+   "t": "Vi kan nu konstatera att alla räta linjer kan beskrivas som en ekvation på formen y är lika med k x plus m där k och m är konstanter (tal).",
+   "s": 2.88,
+   "e": 12.3
+  },
+  {
+   "t": "Denna ekvation kallas räta linjens ekvation.",
+   "s": 12.3,
+   "e": 16.24
+  },
+  {
+   "t": "Vi ska nu undersöka hur vi kan hitta värdena på k och m utifrån en graf.",
+   "s": 16.24,
+   "e": 21.74
+  },
+  {
+   "t": "Vad motsvarar m-värdet?",
+   "s": 21.74,
+   "e": 24.51
+  },
+  {
+   "t": "Vi börjar med att undersöka vad m -värdet motsvarar.",
+   "s": 24.51,
+   "e": 28.91
+  },
+  {
+   "t": "Vi ritar upp graferna till y är lika med 2 x minus 1 , y är lika med 2 x och y är lika med 2 x plus 1 för att se skillnaden:",
+   "s": 28.91,
+   "e": 40.38
+  },
+  {
+   "t": "Grön linje: y är lika med 2 x minus 1 .",
+   "s": 28.91,
+   "e": 40.38
+  },
+  {
+   "t": "Blå linje: y är lika med 2 x .",
+   "s": 40.38,
+   "e": 44.16
+  },
+  {
+   "t": "Röd linje: y är lika med 2 x plus 1 .",
+   "s": 44.16,
+   "e": 48.58
+  },
+  {
+   "t": "Vi ser att linjen",
+   "s": 48.58,
+   "e": 51.08
+  },
+  {
+   "t": "y är lika med 2 x minus 1 skär y-axeln vid y är lika med minus 1",
+   "s": 51.08,
+   "e": 56.65
+  },
+  {
+   "t": "y är lika med 2 x skär y-axeln vid y är lika med 0",
+   "s": 56.65,
+   "e": 61.21
+  },
+  {
+   "t": "y är lika med 2 x plus 1 skär y-axeln vid y är lika med 1",
+   "s": 61.21,
+   "e": 66.41
+  },
+  {
+   "t": "m -värdet motsvarar alltså linjens skärning med y-axeln!",
+   "s": 66.41,
+   "e": 71.0
+  },
+  {
+   "t": "Skärningen med y-axeln kallas också y-intercept och motsvarar i linjära modeller \"startvärdet\".",
+   "s": 71.0,
+   "e": 77.44
+  },
+  {
+   "t": "Vad motsvarar k-värdet?",
+   "s": 77.44,
+   "e": 80.28
+  },
+  {
+   "t": "Vi studerar nu vad k -värdet motsvarar.",
+   "s": 80.28,
+   "e": 84.0
+  },
+  {
+   "t": "Vi ritar upp graferna till y är lika med 2 x plus 1 , y är lika med 3 x plus 1 och y är lika med minus 2 x plus 1 för att se skillnaden:",
+   "s": 84.0,
+   "e": 96.24
+  },
+  {
+   "t": "Grön linje: y är lika med 2 x plus 1 .",
+   "s": 84.0,
+   "e": 96.24
+  },
+  {
+   "t": "Blå linje: y är lika med 3 x plus 1 .",
+   "s": 96.24,
+   "e": 100.69
+  },
+  {
+   "t": "Röd linje: y är lika med minus 2 x plus 1 .",
+   "s": 100.69,
+   "e": 105.61
+  },
+  {
+   "t": "Alla tre skär y-axeln i (0, 1).",
+   "s": 105.61,
+   "e": 110.04
+  },
+  {
+   "t": "Vi ser att linjen",
+   "s": 110.04,
+   "e": 112.53
+  },
+  {
+   "t": "y är lika med 2 x plus 1 har lutningen 2 (den går 2 steg uppåt för varje steg åt höger)",
+   "s": 112.53,
+   "e": 119.69
+  },
+  {
+   "t": "y är lika med 3 x plus 1 har lutningen 3 (den går 3 steg uppåt för varje steg åt höger)",
+   "s": 119.69,
+   "e": 126.9
+  },
+  {
+   "t": "y är lika med minus 2 x plus 1 har lutningen −2 (den går 2 steg nedåt för varje steg åt höger)",
+   "s": 126.9,
+   "e": 134.56
+  },
+  {
+   "t": "k -värdet motsvarar alltså linjens lutning!",
+   "s": 134.56,
+   "e": 138.72
+  },
+  {
+   "t": "Linjens lutning kallas också riktningskoefficient och motsvarar i linjära modeller förändringshastigheten.",
+   "s": 138.72,
+   "e": 145.46
+  },
+  {
+   "t": "Räta linjens ekvation (i k-form)",
+   "s": 145.46,
+   "e": 149.21
+  },
+  {
+   "t": "Alla räta linjer (utom lodräta) kan beskrivas med ekvationen",
+   "s": 149.21,
+   "e": 154.43
+  },
+  {
+   "t": "y är lika med k x plus m",
+   "s": 154.43,
+   "e": 157.79
+  },
+  {
+   "t": "där k motsvarar linjens lutning och m motsvarar linjens skärning med y-axeln.",
+   "s": 157.79,
+   "e": 163.4
+  },
+  {
+   "t": "Ett positivt k -värde gör att linjen lutar uppåt (sett från vänster till höger) och ett negativt k -värde gör att linjen lutar nedåt. k -värdet kan beräknas med \"trappstegsmetoden\" där man ritar ett trappsteg mellan två valfria punkter på linjen och tänker att man går åt höger.",
+   "s": 163.4,
+   "e": 180.78
+  },
+  {
+   "t": "Trappstegets höjd motsvarar då förändringen i y-led, vilket skrivs delta y , och trappstegets längd motsvarar förändringen i x-led, vilket skrivs delta x .",
+   "s": 180.78,
+   "e": 191.26
+  },
+  {
+   "t": "Beräkna linjens lutning (k-värde)",
+   "s": 191.26,
+   "e": 194.86
+  },
+  {
+   "t": "k är lika med trappstegets höjd delat med trappstegets längd som är lika med förändring i y -led delat med förändring i x -led som är lika med delta y delat med delta x",
+   "s": 194.86,
+   "e": 207.22
+  },
+  {
+   "t": "Exempel 1 — Bestäm linjens ekvation",
+   "s": 194.86,
+   "e": 207.22
+  },
+  {
+   "t": "Bestäm ekvationen för linjen nedan.",
+   "s": 207.22,
+   "e": 210.69
+  },
+  {
+   "t": "När vi ska bestämma linjens ekvation ska vi ta fram dess k - och m -värde och sedan sätta in dem i räta linjens ekvation y är lika med k x plus m .",
+   "s": 210.69,
+   "e": 219.93
+  },
+  {
+   "t": "k är lika med 2 (linjen går upp två steg för varje steg vi går åt höger)",
+   "s": 219.93,
+   "e": 225.71
+  },
+  {
+   "t": "m är lika med 3 (linjens skärning med y-axeln)",
+   "s": 225.71,
+   "e": 230.0
+  },
+  {
+   "t": "Insättning av k är lika med 2 och m är lika med 3 i räta linjens ekvation ger y är lika med 2 x plus 3 .",
+   "s": 230.0,
+   "e": 237.57
+  },
+  {
+   "t": "Svar: y är lika med 2 x plus 3",
+   "s": 237.57,
+   "e": 241.68
+  },
+  {
+   "t": "Exempel 2 — Bestäm riktningskoefficienten",
+   "s": 241.68,
+   "e": 245.54
+  },
+  {
+   "t": "Bestäm linjens riktningskoefficient.",
+   "s": 245.54,
+   "e": 248.88
+  },
+  {
+   "t": "Riktningskoefficienten är detsamma som lutningen eller k -värdet.",
+   "s": 248.88,
+   "e": 253.75
+  },
+  {
+   "t": "Här är det svårt att enkelt se k -värdet.",
+   "s": 253.75,
+   "e": 257.65
+  },
+  {
+   "t": "Vi markerar två valfria punkter som är lätta att läsa av på linjen och ritar ett \"trappsteg\" mellan dessa:",
+   "s": 257.65,
+   "e": 275.35
+  },
+  {
+   "t": "Vi ser nu enkelt att delta y är lika med minus 3 och delta x är lika med 5 :",
+   "s": 257.65,
+   "e": 275.35
+  },
+  {
+   "t": "k är lika med delta y delat med delta x som är lika med minus 3 delat med 5 som är lika med minus 3 delat med 5",
+   "s": 257.65,
+   "e": 275.35
+  },
+  {
+   "t": "Svar: k är lika med minus 3 delat med 5",
+   "s": 275.35,
+   "e": 279.88
+  }
+ ]
+}

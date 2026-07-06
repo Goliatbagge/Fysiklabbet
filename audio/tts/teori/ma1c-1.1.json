@@ -1,0 +1,398 @@
+{
+ "id": "ma1c-1.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "9a5446b00f4c715f6f55a417b41eecb274e4f7df",
+ "dur": 449.15,
+ "segments": [
+  {
+   "t": "Talmängder och negativa tal",
+   "s": 0.1,
+   "e": 3.15
+  },
+  {
+   "t": "Talmängder",
+   "s": 3.1,
+   "e": 4.97
+  },
+  {
+   "t": "Alla tal kan delas in i så kallade talmängder.",
+   "s": 4.97,
+   "e": 8.88
+  },
+  {
+   "t": "Talmängder",
+   "s": 8.88,
+   "e": 10.76
+  },
+  {
+   "t": "Naturliga tal: innehåller alla icke-negativa heltal, t.ex. 0, 1, 2, 3 … osv. Mängden naturliga tal betecknas N och kan skrivas N är lika med { 0, 1, 2, 3, } .",
+   "s": 10.76,
+   "e": 26.95
+  },
+  {
+   "t": "Heltal: innehåller samtliga heltal, t.ex. −3, 0, 5 och 25.",
+   "s": 26.95,
+   "e": 33.92
+  },
+  {
+   "t": "Mängden heltal betecknas Z och kan skrivas Z är lika med {, minus 2, minus 1, 0, 1, 2, } .",
+   "s": 33.92,
+   "e": 43.19
+  },
+  {
+   "t": "Rationella tal: innehåller samtliga tal som kan skrivas som ett bråk, t.ex. 1 delat med 3 , −0,25 och 5.",
+   "s": 43.19,
+   "e": 52.02
+  },
+  {
+   "t": "Mängden rationella tal betecknas Q och kan skrivas Q är lika med { alla tal som kan skrivas på formen a delat med b där a och b är heltal, b är inte lika med 0 } .",
+   "s": 52.02,
+   "e": 62.81
+  },
+  {
+   "t": "Reella tal: innehåller samtliga tal som finns på tallinjen.",
+   "s": 62.81,
+   "e": 67.6
+  },
+  {
+   "t": "Här ingår även de irrationella talen, dvs. tal som inte kan skrivas som ett bråk, t.ex. π (pi) och roten ur 2 .",
+   "s": 67.6,
+   "e": 76.28
+  },
+  {
+   "t": "Irrationella tal kan även ses som tal med oändlig decimalutveckling, som inte upprepar sig.",
+   "s": 76.28,
+   "e": 82.74
+  },
+  {
+   "t": "Mängden reella tal betecknas R och kan skrivas R är lika med { alla tal på tallinjen } .",
+   "s": 82.74,
+   "e": 89.31
+  },
+  {
+   "t": "Talmängderna kan illustreras enligt figuren nedan:",
+   "s": 89.31,
+   "e": 102.54
+  },
+  {
+   "t": "Talmängderna ligger inuti varandra: varje naturligt tal är också ett heltal, varje heltal är också ett rationellt tal och varje rationellt tal är också ett reellt tal.",
+   "s": 89.31,
+   "e": 102.54
+  },
+  {
+   "t": "Alla naturliga tal är alltså även heltal, rationella tal och reella tal.",
+   "s": 102.54,
+   "e": 108.1
+  },
+  {
+   "t": "Alla heltal är även rationella tal och reella tal, men inte nödvändigtvis naturliga tal.",
+   "s": 108.1,
+   "e": 114.78
+  },
+  {
+   "t": "Exempel 1 — Rationellt tal som inte är heltal",
+   "s": 114.78,
+   "e": 119.04
+  },
+  {
+   "t": "Ange ett rationellt tal som inte är ett heltal.",
+   "s": 119.04,
+   "e": 123.08
+  },
+  {
+   "t": "Ett rationellt tal är ett tal som kan skrivas som ett bråk a delat med b där a och b är heltal och b är inte lika med 0 .",
+   "s": 123.08,
+   "e": 130.82
+  },
+  {
+   "t": "Väljer vi t.ex. 1 delat med 3 får vi ett tal som ligger mellan heltalen 0 och 1 — det är alltså rationellt men inte ett heltal.",
+   "s": 130.82,
+   "e": 139.16
+  },
+  {
+   "t": "Svar: T.ex.",
+   "s": 139.16,
+   "e": 143.14
+  },
+  {
+   "t": "1 delat med 3",
+   "s": 139.16,
+   "e": 143.14
+  },
+  {
+   "t": "Negativa tal",
+   "s": 143.14,
+   "e": 145.51
+  },
+  {
+   "t": "Tal som är mindre än 0 kallas negativa tal.",
+   "s": 145.51,
+   "e": 149.25
+  },
+  {
+   "t": "På tallinjen ligger de till vänster om 0.",
+   "s": 149.25,
+   "e": 152.79
+  },
+  {
+   "t": "Negativa tal skrivs med minustecken och ofta inom parentes vid beräkningar.",
+   "s": 152.79,
+   "e": 158.26
+  },
+  {
+   "t": "0 är varken positivt eller negativt.",
+   "s": 158.26,
+   "e": 162.07
+  },
+  {
+   "t": "Repetition — olikhetstecken",
+   "s": 162.07,
+   "e": 165.09
+  },
+  {
+   "t": "Tecken som anger att två led är olika stora kallas olikhetstecken och skrivs < eller >.",
+   "s": 165.09,
+   "e": 171.11
+  },
+  {
+   "t": "< betyder \"mindre än\"",
+   "s": 171.11,
+   "e": 173.75
+  },
+  {
+   "t": "> betyder \"större än\"",
+   "s": 173.75,
+   "e": 176.38
+  },
+  {
+   "t": "En kom ihåg-regel är att olikhetstecknet \"gapar\" åt det större värdet.",
+   "s": 176.38,
+   "e": 181.44
+  },
+  {
+   "t": "Exempel 2 — Sätt ut rätt olikhetstecken",
+   "s": 181.44,
+   "e": 185.39
+  },
+  {
+   "t": "Sätt ut korrekt olikhetstecken, < eller >, mellan talen.. a) 23 19 b) −20 −3",
+   "s": 185.39,
+   "e": 194.47
+  },
+  {
+   "t": "a) Talet längst till höger på tallinjen är det största talet.",
+   "s": 194.47,
+   "e": 199.15
+  },
+  {
+   "t": "Svar: 23 är större än 19",
+   "s": 199.15,
+   "e": 202.93
+  },
+  {
+   "t": "b) Ju längre till vänster på tallinjen ett tal ligger, desto mindre är det — och −20 ligger till vänster om −3.",
+   "s": 202.93,
+   "e": 210.09
+  },
+  {
+   "t": "Svar: parentesen minus 20 slut parentes är mindre än parentesen minus 3 slut parentes",
+   "s": 210.09,
+   "e": 217.57
+  },
+  {
+   "t": "Räkneregler för negativa tal",
+   "s": 217.57,
+   "e": 220.81
+  },
+  {
+   "t": "Addition och subtraktion",
+   "s": 220.81,
+   "e": 223.55
+  },
+  {
+   "t": "a plus parentesen minus b slut parentes är lika med a minus b a minus parentesen minus b slut parentes som är lika med a plus b",
+   "s": 223.55,
+   "e": 233.2
+  },
+  {
+   "t": "Med ord: lika tecken (minus/minus eller plus/plus) ihop kan ersättas med ett plustecken.",
+   "s": 233.2,
+   "e": 241.0
+  },
+  {
+   "t": "Olika tecken (plus/minus eller minus/plus) ihop kan ersättas med ett minustecken.",
+   "s": 241.0,
+   "e": 248.25
+  },
+  {
+   "t": "Minnesregel: \"minus minus ger plus\" och \"plus minus ger minus\".",
+   "s": 248.25,
+   "e": 253.91
+  },
+  {
+   "t": "Exempel 3 — Addition och subtraktion",
+   "s": 253.91,
+   "e": 257.68
+  },
+  {
+   "t": "Beräkna. a) 4 minus parentesen minus 9 slut parentes b) 25 plus parentesen minus 10 slut parentes",
+   "s": 257.68,
+   "e": 268.29
+  },
+  {
+   "t": "a) Två minustecken ihop ersätts med ett plustecken:",
+   "s": 268.29,
+   "e": 278.89
+  },
+  {
+   "t": "4 minus parentesen minus 9 slut parentes är lika med 4 plus 9 som är lika med 13",
+   "s": 268.29,
+   "e": 278.89
+  },
+  {
+   "t": "Svar: 13",
+   "s": 278.89,
+   "e": 281.5
+  },
+  {
+   "t": "b) Plus och minus ihop ersätts med ett minustecken:",
+   "s": 281.5,
+   "e": 292.45
+  },
+  {
+   "t": "25 plus parentesen minus 10 slut parentes är lika med 25 minus 10 som är lika med 15",
+   "s": 281.5,
+   "e": 292.45
+  },
+  {
+   "t": "Svar: 15",
+   "s": 292.45,
+   "e": 295.06
+  },
+  {
+   "t": "Multiplikation och division",
+   "s": 295.06,
+   "e": 298.1
+  },
+  {
+   "t": "a gånger parentesen minus b slut parentes är lika med parentesen minus a slut parentes gånger b som är lika med minus parentesen a gånger b slut parentes parentesen minus a slut parentes gånger parentesen minus b slut parentes som är lika med a gånger b",
+   "s": 298.1,
+   "e": 314.85
+  },
+  {
+   "t": "a delat med parentesen minus b slut parentes är lika med parentesen minus a slut parentes delat med b som är lika med minus a delat med b parentesen minus a slut parentes delat med parentesen minus b slut parentes som är lika med a delat med b",
+   "s": 314.85,
+   "e": 332.6
+  },
+  {
+   "t": "Med ord: lika tecken multiplicerat eller dividerat med varandra ger ett positivt värde.",
+   "s": 332.55,
+   "e": 338.95
+  },
+  {
+   "t": "Olika tecken multiplicerat eller dividerat med varandra ger ett negativt värde.",
+   "s": 338.95,
+   "e": 344.64
+  },
+  {
+   "t": "Minnesregel: \"minus gånger minus ger plus\" och \"plus gånger minus ger minus\".",
+   "s": 344.64,
+   "e": 350.99
+  },
+  {
+   "t": "Exempel 4 — Multiplikation och division",
+   "s": 350.99,
+   "e": 355.05
+  },
+  {
+   "t": "Beräkna. a) 4 gånger parentesen minus 3 slut parentes b) parentesen minus 5 slut parentes gånger parentesen minus 9 slut parentes c) 35 delat med parentesen minus 7 slut parentes d) parentesen minus 42 slut parentes delat med parentesen minus 7 slut parentes",
+   "s": 355.05,
+   "e": 376.38
+  },
+  {
+   "t": "a) Olika tecken ger minus: 4 gånger parentesen minus 3 slut parentes är lika med minus 12",
+   "s": 376.38,
+   "e": 384.1
+  },
+  {
+   "t": "Svar: −12",
+   "s": 384.1,
+   "e": 386.44
+  },
+  {
+   "t": "b) Lika tecken ger plus: parentesen minus 5 slut parentes gånger parentesen minus 9 slut parentes är lika med 45",
+   "s": 386.44,
+   "e": 396.01
+  },
+  {
+   "t": "Svar: 45",
+   "s": 396.01,
+   "e": 398.55
+  },
+  {
+   "t": "c) Olika tecken ger minus: 35 delat med minus 7 är lika med minus 5",
+   "s": 398.55,
+   "e": 405.03
+  },
+  {
+   "t": "Svar: −5",
+   "s": 405.03,
+   "e": 407.25
+  },
+  {
+   "t": "d) Lika tecken ger plus: minus 42 delat med minus 7 är lika med 6",
+   "s": 407.25,
+   "e": 413.92
+  },
+  {
+   "t": "Svar: 6",
+   "s": 413.92,
+   "e": 418.85
+  },
+  {
+   "t": "Exempel 5 — Se upp med subtraktionen",
+   "s": 413.92,
+   "e": 418.85
+  },
+  {
+   "t": "Beräkna parentesen minus 5 slut parentes minus 3",
+   "s": 418.85,
+   "e": 423.93
+  },
+  {
+   "t": "parentesen minus 5 slut parentes minus 3 är lika med minus 8",
+   "s": 423.93,
+   "e": 429.55
+  },
+  {
+   "t": "Svar: −8",
+   "s": 429.55,
+   "e": 431.9
+  },
+  {
+   "t": "OBS!",
+   "s": 431.9,
+   "e": 433.51
+  },
+  {
+   "t": "Svaret blir inte 8.",
+   "s": 433.51,
+   "e": 436.21
+  },
+  {
+   "t": "Det är inte två minustecken ihop och inte heller minus gånger minus.",
+   "s": 436.21,
+   "e": 441.09
+  },
+  {
+   "t": "Tänk termometern: −5 grader, och så sjunker temperaturen 3 grader.",
+   "s": 441.09,
+   "e": 446.6
+  },
+  {
+   "t": "Då blir det −8 grader.",
+   "s": 446.6,
+   "e": 449.15
+  }
+ ]
+}

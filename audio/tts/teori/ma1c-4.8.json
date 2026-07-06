@@ -1,0 +1,198 @@
+{
+ "id": "ma1c-4.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d8e671bb43d5fb08539b81d783d6fc596aa28cd7",
+ "dur": 196.66,
+ "segments": [
+  {
+   "t": "Ekvationslösning med grafritande hjälpmedel",
+   "s": 0.1,
+   "e": 4.04
+  },
+  {
+   "t": "Vi kan lösa ekvationer med hjälp av grafer med grafritande hjälpmedel, till exempel GeoGebra.",
+   "s": 3.99,
+   "e": 10.51
+  },
+  {
+   "t": "Vi gör då en grafisk lösning.",
+   "s": 10.51,
+   "e": 13.47
+  },
+  {
+   "t": "Lösa ekvationer med grafritande hjälpmedel",
+   "s": 13.47,
+   "e": 17.4
+  },
+  {
+   "t": "Vi har en ekvation VL är lika med HL.",
+   "s": 17.4,
+   "e": 21.24
+  },
+  {
+   "t": "Rita upp ekvationerna y är lika med vänsterledet och y är lika med högerledet i GeoGebra.",
+   "s": 21.24,
+   "e": 27.7
+  },
+  {
+   "t": "Ta fram skärningspunkten och läs av dess x-koordinat.",
+   "s": 27.7,
+   "e": 32.01
+  },
+  {
+   "t": "Detta är lösningen!",
+   "s": 32.01,
+   "e": 34.59
+  },
+  {
+   "t": "Exempel 1 — Grafisk lösning av en ekvation",
+   "s": 34.59,
+   "e": 38.7
+  },
+  {
+   "t": "Lös med grafritande hjälpmedel ekvationen 3 x minus 5 är lika med minus x plus 3 .",
+   "s": 38.7,
+   "e": 45.3
+  },
+  {
+   "t": "VL är lika med 3 x minus 5 och HL är lika med minus x plus 3 .",
+   "s": 45.3,
+   "e": 51.1
+  },
+  {
+   "t": "Vi öppnar GeoGebra och ritar y är lika med 3 x minus 5 och y är lika med minus x plus 3 .",
+   "s": 51.1,
+   "e": 58.15
+  },
+  {
+   "t": "Vi får nedanstående grafer:",
+   "s": 58.15,
+   "e": 64.54
+  },
+  {
+   "t": "Grön linje: y är lika med 3 x minus 5 .",
+   "s": 58.15,
+   "e": 64.54
+  },
+  {
+   "t": "Röd linje: y är lika med minus x plus 3 .",
+   "s": 64.54,
+   "e": 69.08
+  },
+  {
+   "t": "Vi tar fram skärningspunkten med verktyget Skärning mellan två objekt (eller verktyget Punkt) och klickar på linjerna.",
+   "s": 69.08,
+   "e": 76.42
+  },
+  {
+   "t": "Skärningspunkten markeras och vi kan läsa av dess koordinater:",
+   "s": 76.42,
+   "e": 85.97
+  },
+  {
+   "t": "Vi ser att skärningspunktens x-koordinat är 2, så lösningen är x är lika med 2 .",
+   "s": 76.42,
+   "e": 85.97
+  },
+  {
+   "t": "Svar: x är lika med 2",
+   "s": 85.97,
+   "e": 89.15
+  },
+  {
+   "t": "Exempel 2 — Grafisk lösning av en olikhet",
+   "s": 89.15,
+   "e": 93.29
+  },
+  {
+   "t": "Lös olikheten minus 2 x plus 5 är mindre än x minus 4 .",
+   "s": 93.29,
+   "e": 98.74
+  },
+  {
+   "t": "Vi gör på motsvarande sätt som med en ekvation och ritar upp graferna y är lika med minus 2 x plus 5 och y är lika med x minus 4 (vi sätter \" y =\" före vänster och höger led).",
+   "s": 98.74,
+   "e": 110.39
+  },
+  {
+   "t": "Vi markerar därefter skärningspunkten:",
+   "s": 110.39,
+   "e": 117.46
+  },
+  {
+   "t": "Röd linje: y är lika med minus 2 x plus 5 .",
+   "s": 110.39,
+   "e": 117.46
+  },
+  {
+   "t": "Grön linje: y är lika med x minus 4 .",
+   "s": 117.46,
+   "e": 121.64
+  },
+  {
+   "t": "Skärningspunkten ligger i (3, −1).",
+   "s": 121.64,
+   "e": 125.75
+  },
+  {
+   "t": "Vi ska nu avgöra när minus 2 x plus 5 är MINDRE ÄN x minus 4 .",
+   "s": 125.75,
+   "e": 131.46
+  },
+  {
+   "t": "minus 2 x plus 5 är MINDRE ÄN x minus 4 när linjen y är lika med minus 2 x plus 5 ligger under linjen y är lika med x minus 4 .",
+   "s": 131.46,
+   "e": 141.44
+  },
+  {
+   "t": "Det gör den till höger om skärningspunkten, dvs. när x är större än 3 .",
+   "s": 141.44,
+   "e": 147.06
+  },
+  {
+   "t": "Svar: x är större än 3",
+   "s": 147.06,
+   "e": 150.34
+  },
+  {
+   "t": "GeoGebra — Tips",
+   "s": 150.34,
+   "e": 153.0
+  },
+  {
+   "t": "Decimaltal",
+   "s": 153.0,
+   "e": 155.12
+  },
+  {
+   "t": "Decimaltal i GeoGebra skrivs med punkt (.) istället för decimalkomma (,).",
+   "s": 155.12,
+   "e": 160.78
+  },
+  {
+   "t": "Om du ska rita upp linjen y är lika med 7,5 x plus 3 i GeoGebra ska du alltså skriva y är lika med 7.5x + 3.",
+   "s": 160.78,
+   "e": 169.65
+  },
+  {
+   "t": "Observera skillnaden: 7,5 skrivs 7.5.",
+   "s": 169.65,
+   "e": 174.15
+  },
+  {
+   "t": "Variabler",
+   "s": 174.15,
+   "e": 176.11
+  },
+  {
+   "t": "I grafiska lösningar \"förstår\" GeoGebra bara variablerna x och y .",
+   "s": 176.11,
+   "e": 181.3
+  },
+  {
+   "t": "Om vi t.ex. vill skriva in ekvationen y är lika med 13 t plus 5 behöver vi byta ut variabeln t mot x och skriva in det vänstra ledet som y är lika med 13 x plus 5 : y är lika med 13 t plus 5 skrivs y är lika med 13x + 5.",
+   "s": 181.3,
+   "e": 196.66
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
  "id": "fy1-3.10",
  "voice": "sv-SE-SofieNeural",
- "hash": "a4dfb4ccbab059c082d59ff9d6e43c6bae93783d",
- "dur": 179.21,
+ "hash": "a3261e627fbc1233a9e56faa627a6d37fd74e4bf",
+ "dur": 180.69,
  "segments": [
   {
    "t": "Exempel — Trissor",
@@ -117,22 +117,22 @@
   {
    "t": "F resistansen R är lika med F S minus F G 1 vilket är ekvivalent med att F S är lika med F R plus F G 1",
    "s": 137.16,
-   "e": 146.12
+   "e": 146.14
   },
   {
-   "t": "F resistansen R är lika med m ett gånger accelerationen a som är lika med 1,0 gånger 4,91 som är lika med 4,91 newton parentesen OBS!Endastmassanpå1-kilosvikten slut parentes F G 1 som är lika med m ett gånger tyngdfaktorn g som är lika med 1,0 gånger 9,82 som är lika med 9,82 newton",
-   "s": 146.12,
-   "e": 167.15
+   "t": "F resistansen R är lika med m ett gånger accelerationen a som är lika med 1,0 gånger 4,91 som är lika med 4,91 newton parentesen OBS! Endast massan på 1-kilosvikten slut parentes F G 1 som är lika med m ett gånger tyngdfaktorn g som är lika med 1,0 gånger 9,82 som är lika med 9,82 newton",
+   "s": 146.14,
+   "e": 168.68
   },
   {
    "t": "F S är lika med 4,91 plus 9,82 som är lika med 14,73 newton som är ungefär lika med 15 newton",
-   "s": 167.15,
-   "e": 176.25
+   "s": 168.68,
+   "e": 177.74
   },
   {
    "t": "Svar: 15 newton",
-   "s": 176.25,
-   "e": 179.21
+   "s": 177.74,
+   "e": 180.69
   }
  ]
 }

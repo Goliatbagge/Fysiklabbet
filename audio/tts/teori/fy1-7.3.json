@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "5d82d4c335184a39f1414ae7733db51b5a98c3b0",
- "dur": 352.51,
+ "hash": "0f01412dede8de20426a12600923199a1a82f156",
+ "dur": 352.18,
  "segments": [
   {
    "t": "Elektrisk ström",
@@ -270,59 +270,59 @@
    "e": 282.8
   },
   {
-   "t": "n är lika med 0,24 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 1,498 ldots gånger 10 upphöjt till 18 st som är ungefär lika med 1,5 gånger 10 upphöjt till 18 st",
+   "t": "n är lika med 0,24 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 1,498 gånger 10 upphöjt till 18 st som är ungefär lika med 1,5 gånger 10 upphöjt till 18 st",
    "s": 282.8,
-   "e": 302.06
+   "e": 301.84
   },
   {
    "t": "Svar: 1,5 gånger 10 upphöjt till 18 st",
    "s": 282.8,
-   "e": 302.06
+   "e": 301.84
   },
   {
    "t": "Exempel 2 — Kirchhoffs första lag",
    "s": 282.8,
-   "e": 302.06
+   "e": 301.84
   },
   {
    "t": "Bestäm I två om I ett är lika med 0,25 ampere och I tre är lika med 0,08 ampere.",
-   "s": 302.06,
-   "e": 310.77
+   "s": 301.84,
+   "e": 310.43
   },
   {
    "t": "I ett in från vänster, I två ut åt höger, I tre ned i knutpunkten.",
-   "s": 310.72,
-   "e": 316.57
+   "s": 310.38,
+   "e": 316.24
   },
   {
    "t": "Summan av de ingående strömmarna till punkten ska vara lika med summan av de utgående strömmarna från punkten enligt Kirchhoffs första lag.",
-   "s": 316.57,
-   "e": 324.73
+   "s": 316.24,
+   "e": 324.41
   },
   {
    "t": "Vi ställer upp det sambandet och löser ut strömmen I två .",
-   "s": 324.73,
-   "e": 329.09
+   "s": 324.41,
+   "e": 328.77
   },
   {
    "t": "I ett är lika med I två plus I tre vilket är ekvivalent med att I två är lika med I ett minus I tre",
-   "s": 329.09,
-   "e": 336.14
+   "s": 328.77,
+   "e": 335.82
   },
   {
    "t": "I ett är lika med 0,25 ampere I tre som är lika med 0,08 ampere",
-   "s": 336.14,
-   "e": 342.47
+   "s": 335.82,
+   "e": 342.14
   },
   {
    "t": "I två är lika med 0,25 minus 0,08 som är lika med 0,17 ampere",
-   "s": 342.47,
-   "e": 349.13
+   "s": 342.14,
+   "e": 348.81
   },
   {
    "t": "Svar: 0,17 ampere",
-   "s": 349.13,
-   "e": 352.51
+   "s": 348.81,
+   "e": 352.18
   }
  ]
 }

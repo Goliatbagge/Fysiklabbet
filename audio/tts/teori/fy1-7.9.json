@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.9",
  "voice": "sv-SE-SofieNeural",
- "hash": "9b8c97ae7e82cbc6de48bdc5863387ee193495cf",
- "dur": 312.94,
+ "hash": "e41b26cc7969d5bcc211c39e3403ca73b502d91f",
+ "dur": 312.96,
  "segments": [
   {
    "t": "Elektrisk effekt",
@@ -250,64 +250,64 @@
    "e": 239.79
   },
   {
-   "t": "effekten P är lika med 5,0 watt spänningen U som är lika med parentesen 1,5 plus 1,5 slut parentes volt som är lika med 3,0 volt parentesen seriekoppladebatterieradderas slut parentes",
+   "t": "effekten P är lika med 5,0 watt spänningen U som är lika med parentesen 1,5 plus 1,5 slut parentes volt som är lika med 3,0 volt parentesen seriekopplade batterier adderas slut parentes",
    "s": 239.79,
-   "e": 253.05
+   "e": 253.41
   },
   {
-   "t": "strömmen I är lika med 5,0 delat med 3,0 som är lika med 1,666 ldots ampere som är ungefär lika med 1,7 ampere",
-   "s": 253.05,
-   "e": 262.7
+   "t": "strömmen I är lika med 5,0 delat med 3,0 som är lika med 1,666 ampere som är ungefär lika med 1,7 ampere",
+   "s": 253.41,
+   "e": 262.73
   },
   {
    "t": "Svar: 1,7 ampere",
-   "s": 262.7,
-   "e": 265.79
+   "s": 262.73,
+   "e": 265.81
   },
   {
    "t": "Exempel 2 — Värmeelement",
-   "s": 265.79,
-   "e": 268.98
+   "s": 265.81,
+   "e": 269.0
   },
   {
    "t": "Vilken effekt utvecklas i ett värmeelement med resistansen 50 ohm som kopplas till spänningen 230 volt?",
-   "s": 268.98,
-   "e": 276.76
+   "s": 269.0,
+   "e": 276.79
   },
   {
    "t": "Vi ska bestämma effekten.",
-   "s": 276.76,
-   "e": 279.43
+   "s": 276.79,
+   "e": 279.45
   },
   {
    "t": "I uppgiften har vi resistansen R och spänningen U.",
-   "s": 279.43,
-   "e": 283.71
+   "s": 279.45,
+   "e": 283.74
   },
   {
    "t": "Vi väljer då att använda formeln",
-   "s": 283.71,
-   "e": 286.8
+   "s": 283.74,
+   "e": 286.82
   },
   {
    "t": "effekten P är lika med spänningen U i kvadrat delat med resistansen R",
-   "s": 286.8,
-   "e": 296.66
+   "s": 286.82,
+   "e": 296.69
   },
   {
    "t": "spänningen U är lika med 230 volt resistansen R som är lika med 50 ohm",
-   "s": 286.8,
-   "e": 296.66
+   "s": 286.82,
+   "e": 296.69
   },
   {
    "t": "effekten P är lika med 230 i kvadrat delat med 50 som är lika med 1 058 watt som är ungefär lika med 1 100 watt som är lika med 1,1 kilowatt",
-   "s": 296.66,
-   "e": 307.95
+   "s": 296.69,
+   "e": 307.98
   },
   {
    "t": "Svar: 1,1 kilowatt eller 1 100 watt",
-   "s": 307.95,
-   "e": 312.94
+   "s": 307.98,
+   "e": 312.96
   }
  ]
 }

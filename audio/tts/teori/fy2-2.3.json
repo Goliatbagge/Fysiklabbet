@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "dbb521d39b2f1bf83660beafd860b6d7539bfb46",
- "dur": 413.09,
+ "hash": "c85ee8cea163e2a5c85bc2de44b877ba02d8f34b",
+ "dur": 412.8,
  "segments": [
   {
    "t": "Harmonisk svängningsrörelse",
@@ -317,62 +317,62 @@
   {
    "t": "Jämförelse ger omega är lika med 10 rad/s, så",
    "s": 325.0,
-   "e": 330.3
+   "e": 330.29
   },
   {
-   "t": "periodtiden T är lika med 2 pi delat med 10 som är lika med 0,628 ldots sekund som är ungefär lika med 0,63 sekund",
-   "s": 330.3,
-   "e": 340.05
+   "t": "periodtiden T är lika med 2 pi delat med 10 som är lika med 0,628 sekund som är ungefär lika med 0,63 sekund",
+   "s": 330.29,
+   "e": 339.78
   },
   {
    "t": "Svar: 0,63 sekunder",
-   "s": 340.05,
-   "e": 343.9
+   "s": 339.78,
+   "e": 343.62
   },
   {
    "t": "c) Hastigheten fås av derivatan av elongationen (glöm inte den inre derivatan).",
-   "s": 343.9,
-   "e": 350.89
+   "s": 343.62,
+   "e": 350.6
   },
   {
    "t": "hastigheten v är lika med y ' som är lika med 10 gånger 0,15 cosinus parentesen 10 tiden t slut parentes som är lika med 1,5 cosinus parentesen 10 t slut parentes",
-   "s": 350.89,
-   "e": 363.4
+   "s": 350.6,
+   "e": 363.12
   },
   {
    "t": "Svar: hastigheten v är lika med 1,5 cosinus parentesen 10 tiden t slut parentes m/s",
-   "s": 363.4,
-   "e": 382.98
+   "s": 363.12,
+   "e": 382.69
   },
   {
    "t": "d) Maximala farten fås då cosinus parentesen 10 tiden t slut parentes är lika med 1 :",
-   "s": 363.4,
-   "e": 382.98
+   "s": 363.12,
+   "e": 382.69
   },
   {
    "t": "v \\max är lika med 1,5 gånger 1 som är lika med 1,5 meter per sekund",
-   "s": 363.4,
-   "e": 382.98
+   "s": 363.12,
+   "e": 382.69
   },
   {
    "t": "Svar: 1,5 meter per sekund",
-   "s": 382.98,
-   "e": 386.71
+   "s": 382.69,
+   "e": 386.43
   },
   {
    "t": "e) Accelerationen fås av derivatan av hastigheten:",
-   "s": 386.71,
-   "e": 403.51
+   "s": 386.43,
+   "e": 403.23
   },
   {
    "t": "accelerationen a är lika med hastigheten v ' som är lika med minus 10 gånger 1,5 sinus parentesen 10 tiden t slut parentes som är lika med minus 15 sinus parentesen 10 t slut parentes",
-   "s": 386.71,
-   "e": 403.51
+   "s": 386.43,
+   "e": 403.23
   },
   {
    "t": "Svar: accelerationen a är lika med minus 15 sinus parentesen 10 tiden t slut parentes m/s i kvadrat",
-   "s": 403.51,
-   "e": 413.09
+   "s": 403.23,
+   "e": 412.8
   }
  ]
 }

@@ -1,8 +1,8 @@
 {
  "id": "fy1-3.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "9384936734d0a149bf95cbe6ff355e886055ca49",
- "dur": 342.15,
+ "hash": "698ab47b128a3864b19103dc7573ed022bae5ce1",
+ "dur": 341.35,
  "segments": [
   {
    "t": "Kraft och Newtons första lag",
@@ -202,82 +202,82 @@
   {
    "t": "F resistansen R i kvadrat är lika med F ett i kvadrat plus F två i kvadrat vilket är ekvivalent med att F R är lika med roten ur F ett i kvadrat plus F två i kvadrat",
    "s": 229.61,
-   "e": 241.46
+   "e": 241.47
   },
   {
    "t": "F ett är lika med 15 newton F två som är lika med 25 newton",
-   "s": 241.46,
-   "e": 246.86
+   "s": 241.47,
+   "e": 246.88
   },
   {
-   "t": "F resistansen R är lika med roten ur 15 i kvadrat plus 25 i kvadrat som är lika med roten ur 850 som är lika med 29,154 ldots som är ungefär lika med 29 newton",
-   "s": 246.86,
-   "e": 260.21
+   "t": "F resistansen R är lika med roten ur 15 i kvadrat plus 25 i kvadrat som är lika med roten ur 850 som är lika med 29,154 som är ungefär lika med 29 newton",
+   "s": 246.88,
+   "e": 259.91
   },
   {
    "t": "Svar: 29 newton",
-   "s": 260.21,
-   "e": 263.34
+   "s": 259.91,
+   "e": 263.04
   },
   {
    "t": "Exempel 2 — Komposant i y-led",
-   "s": 263.34,
-   "e": 266.99
+   "s": 263.04,
+   "e": 266.69
   },
   {
    "t": "En kraft på 20 newton verkar i riktning 25 grader mot horisontalplanet.",
-   "s": 266.99,
-   "e": 272.62
+   "s": 266.69,
+   "e": 272.32
   },
   {
    "t": "Hur stor del av denna kraft verkar i y-led, det vill säga bestäm kraftens komposant i y-led, F y .",
-   "s": 272.62,
-   "e": 279.65
+   "s": 272.32,
+   "e": 279.35
   },
   {
    "t": "Vi har återigen en rätvinklig krafttriangel, men denna gång bara storleken hos en av krafterna.",
-   "s": 279.65,
-   "e": 286.32
+   "s": 279.35,
+   "e": 286.02
   },
   {
    "t": "Vi kan då inte använda oss av Pythagoras sats utan får använda oss av trigonometri.",
-   "s": 286.32,
-   "e": 292.2
+   "s": 286.02,
+   "e": 291.9
   },
   {
    "t": "Kom ihåg — trigonometri i rätvinklig triangel",
-   "s": 292.2,
-   "e": 296.3
+   "s": 291.9,
+   "e": 296.0
   },
   {
    "t": "sinus hastigheten v är lika med accelerationen a delat med c, cosinus v som är lika med b delat med c, tangens v som är lika med a delat med b",
-   "s": 296.3,
-   "e": 308.11
+   "s": 296.0,
+   "e": 307.66
   },
   {
    "t": "där a är motstående katet, b är närliggande katet och c är hypotenusan till vinkeln v.",
-   "s": 308.06,
-   "e": 314.91
+   "s": 307.61,
+   "e": 314.48
   },
   {
    "t": "Om vi tittar på figuren i uppgiften så har vi hypotenusan och ska beräkna den motstående kateten, F y .",
-   "s": 314.91,
-   "e": 321.91
+   "s": 314.48,
+   "e": 321.48
   },
   {
    "t": "Vi använder då sinus för vinkeln.",
-   "s": 321.91,
-   "e": 325.31
+   "s": 321.48,
+   "e": 324.88
   },
   {
-   "t": "sinus 25 grader är lika med F y delat med 20 vilket är ekvivalent med att F y är lika med 20 sinus 25 grader som är lika med 8,452 ldots som är ungefär lika med 8,5 newton",
-   "s": 325.31,
-   "e": 338.71
+   "t": "sinus 25 grader är lika med F y delat med 20 vilket är ekvivalent med att F y är lika med 20 sinus 25 grader som är lika med 8,452 som är ungefär lika med 8,5 newton",
+   "s": 324.88,
+   "e": 337.91
   },
   {
    "t": "Svar: 8,5 newton",
-   "s": 338.71,
-   "e": 342.15
+   "s": 337.91,
+   "e": 341.35
   }
  ]
 }

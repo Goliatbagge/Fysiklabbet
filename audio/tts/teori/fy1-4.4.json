@@ -1,8 +1,8 @@
 {
  "id": "fy1-4.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "31543465d3a3a81abd273c194cbcfbfc2f656e33",
- "dur": 469.33,
+ "hash": "e0a478ce592640fce7fad3b014d6f3ee9dd7f8c7",
+ "dur": 469.2,
  "segments": [
   {
    "t": "Energiprincipen",
@@ -317,97 +317,97 @@
   {
    "t": "2 tyngdfaktorn g h ett plus v ett i kvadrat är lika med v två i kvadrat vilket är ekvivalent med att v två är lika med roten ur 2 gram h ett plus v ett i kvadrat",
    "s": 327.08,
-   "e": 338.28
+   "e": 338.3
   },
   {
    "t": "tyngdfaktorn g är lika med 9,82 newton per kilogram h ett som är lika med 12 meter v ett som är lika med 14 meter per sekund",
-   "s": 338.28,
+   "s": 338.3,
    "e": 347.53
   },
   {
-   "t": "v två är lika med roten ur 2 gånger 9,82 gånger 12 plus 14 i kvadrat som är lika med roten ur 431,68 som är lika med 20,776 ldots meter per sekund som är ungefär lika med 21 meter per sekund",
+   "t": "v två är lika med roten ur 2 gånger 9,82 gånger 12 plus 14 i kvadrat som är lika med roten ur 431,68 som är lika med 20,776 meter per sekund som är ungefär lika med 21 meter per sekund",
    "s": 347.53,
-   "e": 363.32
+   "e": 363.17
   },
   {
    "t": "Svar: 21 meter per sekund",
-   "s": 363.32,
-   "e": 366.93
+   "s": 363.17,
+   "e": 366.8
   },
   {
    "t": "Exempel 3 — Eddie i backen",
-   "s": 366.93,
-   "e": 370.17
+   "s": 366.8,
+   "e": 370.03
   },
   {
    "t": "Eddie med sin cykel väger 82 kilogram.",
-   "s": 370.17,
-   "e": 373.9
+   "s": 370.03,
+   "e": 373.76
   },
   {
    "t": "Han passerar ett backkrön med farten 10 meter per sekund.",
-   "s": 373.9,
-   "e": 378.41
+   "s": 373.76,
+   "e": 378.27
   },
   {
    "t": "Backen är 20 meter hög.",
-   "s": 378.41,
-   "e": 381.33
+   "s": 378.27,
+   "e": 381.2
   },
   {
    "t": "Farten längst ner är 19 meter per sekund.",
-   "s": 381.33,
-   "e": 385.16
+   "s": 381.2,
+   "e": 385.02
   },
   {
    "t": "Hur mycket energi har blivit friktionsvärme?",
-   "s": 385.16,
-   "e": 388.78
+   "s": 385.02,
+   "e": 388.65
   },
   {
    "t": "Vi kallar friktionsvärmen E hastigheten v .",
-   "s": 388.78,
-   "e": 392.75
+   "s": 388.65,
+   "e": 392.61
   },
   {
    "t": "Energiprincipen ger",
-   "s": 392.75,
-   "e": 395.51
+   "s": 392.61,
+   "e": 395.37
   },
   {
    "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 plus E hastigheten v",
-   "s": 395.51,
-   "e": 402.51
+   "s": 395.37,
+   "e": 402.37
   },
   {
    "t": "massan m tyngdfaktorn g höjden h plus m v ett i kvadrat delat med 2 är lika med 0 plus m v två i kvadrat delat med 2 plus E hastigheten v",
-   "s": 402.51,
-   "e": 412.75
+   "s": 402.37,
+   "e": 412.61
   },
   {
    "t": "Vi löser ut E hastigheten v",
-   "s": 412.75,
-   "e": 416.25
+   "s": 412.61,
+   "e": 416.11
   },
   {
    "t": "E hastigheten v är lika med massan m tyngdfaktorn g höjden h plus m v ett i kvadrat delat med 2 minus m v två i kvadrat delat med 2",
-   "s": 416.25,
-   "e": 426.31
+   "s": 416.11,
+   "e": 426.17
   },
   {
    "t": "massan m är lika med 82 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 20 meter v ett som är lika med 10 meter per sekund v två som är lika med 19 meter per sekund",
-   "s": 426.31,
-   "e": 439.98
+   "s": 426.17,
+   "e": 439.85
   },
   {
    "t": "E hastigheten v är lika med 82 gånger 9,82 gånger 20 plus 82 gånger 10 i kvadrat delat med 2 minus 82 gånger 19 i kvadrat delat med 2 som är lika med 16 104,8 plus 4 100 minus 14 801 som är lika med 5 403,8 joule som är ungefär lika med 5 400 joule som är lika med 5,4 kilojoule",
-   "s": 439.98,
-   "e": 465.83
+   "s": 439.85,
+   "e": 465.7
   },
   {
    "t": "Svar: 5,4 kilojoule",
-   "s": 465.83,
-   "e": 469.33
+   "s": 465.7,
+   "e": 469.2
   }
  ]
 }

@@ -1,7 +1,7 @@
 {
  "id": "fy1-2.7",
  "voice": "sv-SE-SofieNeural",
- "hash": "50518b24c6c5361c7c44a692b840d9fecb9f9c8a",
+ "hash": "9c24e3c5fe7ace6b87234de2077ced152a827a33",
  "dur": 262.39,
  "segments": [
   {
@@ -175,7 +175,7 @@
    "e": 226.0
   },
   {
-   "t": "ell ett är lika med L\\ddotos parentesen { Ekv1,Ekv2 } slut parentes som är lika med parentesen x som är lika med 559 delat med 800, y som är lika med 800 delat med 43 slut parentes",
+   "t": "ell ett är lika med L\\ddotos parentesen { Ekv1, Ekv2 } slut parentes som är lika med parentesen x som är lika med 559 delat med 800, y som är lika med 800 delat med 43 slut parentes",
    "s": 226.0,
    "e": 241.9
   },

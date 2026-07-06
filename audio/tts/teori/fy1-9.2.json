@@ -1,8 +1,8 @@
 {
  "id": "fy1-9.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "cfb61266ec3f7e771737a1024c7612f40ea3cf2e",
- "dur": 680.48,
+ "hash": "c8c5588ce72dc77fff81b1a36ec9a2f71c27b509",
+ "dur": 677.58,
  "segments": [
   {
    "t": "Massdefekt och bindningsenergi",
@@ -255,209 +255,209 @@
    "e": 333.61
   },
   {
-   "t": "energin E är ungefär lika med 1,66 gånger 10 upphöjt till minus 27 gånger parentesen 2,998 gånger 10 upphöjt till 8 slut parentes i kvadrat joule som är lika med 1,492 ldots gånger 10 upphöjt till minus 10 joule",
+   "t": "energin E är ungefär lika med 1,66 gånger 10 upphöjt till minus 27 gånger parentesen 2,998 gånger 10 upphöjt till 8 slut parentes i kvadrat joule som är lika med 1,492 gånger 10 upphöjt till minus 10 joule",
    "s": 323.45,
-   "e": 345.28
+   "e": 345.08
   },
   {
    "t": "Omvandling till eV:",
-   "s": 345.23,
-   "e": 366.5
+   "s": 345.03,
+   "e": 365.66
   },
   {
-   "t": "energin E är lika med 1,492 ldots gånger 10 upphöjt till minus 10 delat med 1,602 gånger 10 upphöjt till minus 19 elektronvolt som är lika med 9,313 ldots gånger 10 upphöjt till 8 elektronvolt som är ungefär lika med 931 megaelektronvolt vilket skulle visas",
-   "s": 345.23,
-   "e": 366.5
+   "t": "energin E är lika med 1,492 gånger 10 upphöjt till minus 10 delat med 1,602 gånger 10 upphöjt till minus 19 elektronvolt som är lika med 9,313 gånger 10 upphöjt till 8 elektronvolt som är ungefär lika med 931 megaelektronvolt vilket skulle visas",
+   "s": 345.03,
+   "e": 365.66
   },
   {
    "t": "Exempel 1 — Frigiven energi vid sönderfall",
-   "s": 366.5,
-   "e": 370.6
+   "s": 365.66,
+   "e": 369.76
   },
   {
    "t": "En kärna väger 128,13822 u och sönderfaller till produkter med den sammanlagda massan 128,25449 u.",
-   "s": 370.6,
-   "e": 381.57
+   "s": 369.76,
+   "e": 380.72
   },
   {
    "t": "Hur mycket energi frigjordes vid reaktionen?",
-   "s": 381.57,
-   "e": 385.4
+   "s": 380.72,
+   "e": 384.55
   },
   {
    "t": "Svara i MeV.",
-   "s": 385.4,
-   "e": 387.81
+   "s": 384.55,
+   "e": 386.96
   },
   {
    "t": "Vi börjar med att beräkna massdefekten delta massan m , dvs. skillnaden i massa.",
-   "s": 387.81,
-   "e": 393.97
+   "s": 386.96,
+   "e": 393.12
   },
   {
    "t": "delta massan m är lika med parentesen 128,25449 minus 128,13822 slut parentes u som är lika med 0,11627 u",
-   "s": 393.97,
-   "e": 407.5
+   "s": 393.12,
+   "e": 406.65
   },
   {
    "t": "Vi multiplicerar massdefekten med 931,49 för att få den frigjorda energin E i MeV.",
-   "s": 407.5,
-   "e": 415.3
+   "s": 406.65,
+   "e": 414.46
   },
   {
-   "t": "energin E är lika med 0,11627 gånger 931,49 som är lika med 108,304 ldots megaelektronvolt som är ungefär lika med 108,30 megaelektronvolt",
-   "s": 415.3,
-   "e": 430.01
+   "t": "energin E är lika med 0,11627 gånger 931,49 som är lika med 108,304 megaelektronvolt som är ungefär lika med 108,30 megaelektronvolt",
+   "s": 414.46,
+   "e": 428.97
   },
   {
    "t": "Svar: 108,30 megaelektronvolt",
-   "s": 430.01,
-   "e": 434.62
+   "s": 428.97,
+   "e": 433.58
   },
   {
    "t": "Exempel 2 — Atomkärnan hos Väte-2",
-   "s": 434.62,
-   "e": 438.55
+   "s": 433.58,
+   "e": 437.52
   },
   {
    "t": "Atomkärnan hos Väte-2 består av en proton och en neutron.",
-   "s": 438.55,
-   "e": 443.46
+   "s": 437.52,
+   "e": 442.43
   },
   {
    "t": "a) Bestäm massdefekten.",
-   "s": 443.46,
-   "e": 446.37
+   "s": 442.43,
+   "e": 445.35
   },
   {
    "t": "Svara i kg och u.",
-   "s": 446.37,
-   "e": 451.6
+   "s": 445.35,
+   "e": 450.57
   },
   {
    "t": "b) Bestäm bindningsenergin i kärnan.",
-   "s": 446.37,
-   "e": 451.6
+   "s": 445.35,
+   "e": 450.57
   },
   {
    "t": "Svara i J och MeV.",
-   "s": 451.6,
-   "e": 454.37
+   "s": 450.57,
+   "e": 453.35
   },
   {
    "t": "c) Hur mycket energi frigörs när en deuteron sönderfaller?",
-   "s": 454.37,
-   "e": 459.48
+   "s": 453.35,
+   "e": 458.46
   },
   {
    "t": "d) Vilken är bindningsenergin per nukleon?",
-   "s": 459.48,
-   "e": 463.78
+   "s": 458.46,
+   "e": 462.76
   },
   {
    "t": "a) Massorna för protonen, neutronen och nukliden ett i kvadrat H hittas i tabell (vi räknar dem med fem decimaler).",
-   "s": 463.78,
-   "e": 472.7
+   "s": 462.76,
+   "e": 471.67
   },
   {
    "t": "m trycket p accelerationen a r tiden t i k hävarmen l a r är lika med m p r o t o n plus m n e u t r o n som är lika med parentesen 1,00728 plus 1,00866 slut parentes u som är lika med 2,01594 u m k ä r n a som är lika med m n u k l i avståndet d minus Z gånger m e l e k t r o n som är lika med parentesen 2,01410 minus 1 gånger 0,00055 slut parentes u som är lika med 2,01355 u",
-   "s": 472.7,
-   "e": 517.8
+   "s": 471.67,
+   "e": 516.77
   },
   {
    "t": "delta massan m är lika med 2,01594 minus 2,01355 som är lika med 0,00239 u",
-   "s": 472.7,
-   "e": 517.8
+   "s": 471.67,
+   "e": 516.77
   },
   {
    "t": "Med 1 u är ungefär lika med 1,66 gånger 10 upphöjt till minus 27 kilogram :",
-   "s": 517.8,
-   "e": 541.81
+   "s": 516.77,
+   "e": 540.78
   },
   {
    "t": "delta massan m är lika med 0,00239 gånger 1,66 gånger 10 upphöjt till minus 27 kilogram som är lika med 3,9674 gånger 10 upphöjt till minus 30 kilogram som är ungefär lika med 3,97 gånger 10 upphöjt till minus 30 kilogram",
-   "s": 517.8,
-   "e": 541.81
+   "s": 516.77,
+   "e": 540.78
   },
   {
    "t": "Svar: 0,00239 u eller 3,97 gånger 10 upphöjt till minus 30 kilogram",
-   "s": 541.81,
-   "e": 549.9
+   "s": 540.78,
+   "e": 548.87
   },
   {
    "t": "b) Massdefekten motsvarar bindningsenergin.",
-   "s": 549.9,
-   "e": 554.35
+   "s": 548.87,
+   "e": 553.32
   },
   {
    "t": "energin E är lika med delta massan m gånger c i kvadrat",
-   "s": 554.35,
-   "e": 559.46
+   "s": 553.32,
+   "e": 558.42
   },
   {
    "t": "delta massan m är lika med 3,9674 gånger 10 upphöjt till minus 30 kilogram c som är lika med 2,998 gånger 10 upphöjt till 8 meter per sekund",
-   "s": 559.46,
-   "e": 571.07
+   "s": 558.42,
+   "e": 570.05
   },
   {
-   "t": "energin E är lika med 3,9674 gånger 10 upphöjt till minus 30 gånger parentesen 2,998 gånger 10 upphöjt till 8 slut parentes i kvadrat som är lika med 3,5659 ldots gånger 10 upphöjt till minus 13 joule",
-   "s": 571.07,
-   "e": 587.72
+   "t": "energin E är lika med 3,9674 gånger 10 upphöjt till minus 30 gånger parentesen 2,998 gånger 10 upphöjt till 8 slut parentes i kvadrat som är lika med 3,5659 gånger 10 upphöjt till minus 13 joule",
+   "s": 570.05,
+   "e": 586.27
   },
   {
    "t": "Vi omvandlar till elektronvolt genom att dividera med elementarladdningen.",
-   "s": 587.72,
-   "e": 593.06
+   "s": 586.27,
+   "e": 591.61
   },
   {
-   "t": "energin E är lika med 3,5659 ldots gånger 10 upphöjt till minus 13 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 2,225 ldots gånger 10 upphöjt till 6 elektronvolt som är ungefär lika med 2,23 megaelektronvolt",
-   "s": 593.06,
-   "e": 611.41
+   "t": "energin E är lika med 3,5659 gånger 10 upphöjt till minus 13 delat med 1,602 gånger 10 upphöjt till minus 19 som är lika med 2,225 gånger 10 upphöjt till 6 elektronvolt som är ungefär lika med 2,23 megaelektronvolt",
+   "s": 591.61,
+   "e": 609.33
   },
   {
    "t": "Alternativt hade vi kunnat få bindningsenergin direkt från massdefekten uttryckt i u med hjälp av omvandlingsfaktorn 931,49:",
-   "s": 611.41,
-   "e": 632.9
+   "s": 609.33,
+   "e": 630.52
   },
   {
-   "t": "energin E är lika med 0,00239 u gånger 931,49 som är lika med 2,226 ldots megaelektronvolt som är ungefär lika med 2,23 megaelektronvolt",
-   "s": 611.41,
-   "e": 632.9
+   "t": "energin E är lika med 0,00239 u gånger 931,49 som är lika med 2,226 megaelektronvolt som är ungefär lika med 2,23 megaelektronvolt",
+   "s": 609.33,
+   "e": 630.52
   },
   {
    "t": "Svar: 3,57 gånger 10 upphöjt till minus 13 joule eller 2,23 megaelektronvolt",
-   "s": 632.9,
-   "e": 640.83
+   "s": 630.52,
+   "e": 638.46
   },
   {
    "t": "c) Energin som frigörs är densamma som bindningsenergin (svaret i b-uppgiften).",
-   "s": 640.83,
-   "e": 647.92
+   "s": 638.46,
+   "e": 645.53
   },
   {
    "t": "Svar: 2,23 megaelektronvolt",
-   "s": 647.92,
-   "e": 652.31
+   "s": 645.53,
+   "e": 649.92
   },
   {
    "t": "d) Kärnan har två nukleoner (en proton och en neutron).",
-   "s": 652.31,
-   "e": 658.01
+   "s": 649.92,
+   "e": 655.62
   },
   {
    "t": "Bindningsenergin per nukleon får vi alltså genom att dividera totala bindningsenergin med 2.",
-   "s": 658.01,
-   "e": 664.2
+   "s": 655.62,
+   "e": 661.81
   },
   {
-   "t": "2,226 ldots megaelektronvolt delat med 2 är lika med 1,113 ldots megaelektronvolt som är ungefär lika med 1,11 megaelektronvolt",
-   "s": 664.2,
-   "e": 675.4
+   "t": "2,226 megaelektronvolt delat med 2 är lika med 1,113 megaelektronvolt som är ungefär lika med 1,11 megaelektronvolt",
+   "s": 661.81,
+   "e": 672.5
   },
   {
    "t": "Svar: 1,11 megaelektronvolt/nukleon",
-   "s": 675.4,
-   "e": 680.48
+   "s": 672.5,
+   "e": 677.58
   }
  ]
 }

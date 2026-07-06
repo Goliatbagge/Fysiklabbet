@@ -1,8 +1,8 @@
 {
  "id": "fy1-9.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "78fac6e48dc8a80ce101c8ba0e600d3fb504c9fa",
- "dur": 533.72,
+ "hash": "e8e845dbbaf8c017a4843b021f7788e7aa10c8ac",
+ "dur": 532.89,
  "segments": [
   {
    "t": "Aktivitet och halveringstid",
@@ -355,104 +355,104 @@
    "e": 385.5
   },
   {
-   "t": "arean A är lika med 0,25 gånger 10 upphöjt till 6 gånger 0,5 upphöjt till 10 delat med 30,08 som är lika med 198 547,099 ldots Bq som är ungefär lika med 200 000 Bq som är lika med 0,20 MBq",
+   "t": "arean A är lika med 0,25 gånger 10 upphöjt till 6 gånger 0,5 upphöjt till 10 delat med 30,08 som är lika med 198 547,099 Bq som är ungefär lika med 200 000 Bq som är lika med 0,20 MBq",
    "s": 385.5,
-   "e": 408.92
+   "e": 408.75
   },
   {
    "t": "Svar: 0,20 MBq",
    "s": 385.5,
-   "e": 408.92
+   "e": 408.75
   },
   {
    "t": "Exempel 2 — Brandvarnare med Am-241",
    "s": 385.5,
-   "e": 408.92
+   "e": 408.75
   },
   {
    "t": "En brandvarnare av vanlig typ innehåller Am-241.",
-   "s": 408.92,
-   "e": 413.97
+   "s": 408.75,
+   "e": 413.8
   },
   {
    "t": "Bestäm hur stor andel av preparatet som återstår efter 100 år.",
-   "s": 413.97,
-   "e": 418.96
+   "s": 413.8,
+   "e": 418.79
   },
   {
    "t": "N är lika med N noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2",
-   "s": 418.96,
-   "e": 425.59
+   "s": 418.79,
+   "e": 425.4
   },
   {
    "t": "tiden t är lika med 100 år T 1 delat med 2 som är lika med 432,6 år parentesen tabell slut parentes",
-   "s": 425.59,
-   "e": 434.92
+   "s": 425.4,
+   "e": 434.74
   },
   {
-   "t": "N är lika med N noll gånger 0,5 upphöjt till 100 delat med 432,6 som är lika med N noll gånger 0,8519 ldots som är ungefär lika med N noll gånger 0,85",
-   "s": 434.92,
-   "e": 448.01
+   "t": "N är lika med N noll gånger 0,5 upphöjt till 100 delat med 432,6 som är lika med N noll gånger 0,8519 som är ungefär lika med N noll gånger 0,85",
+   "s": 434.74,
+   "e": 447.45
   },
   {
    "t": "Svar: Ca 85 procent återstår.",
-   "s": 448.01,
-   "e": 451.97
+   "s": 447.45,
+   "e": 451.41
   },
   {
    "t": "Exempel 3 — Skeppsvrak (kol-14-datering)",
-   "s": 451.97,
-   "e": 456.79
+   "s": 451.41,
+   "e": 456.21
   },
   {
    "t": "En dykare hittar ett skeppsvrak vars halt av Kol-14 är 83,2 procent av den normala.",
-   "s": 456.79,
-   "e": 463.56
+   "s": 456.21,
+   "e": 462.99
   },
   {
    "t": "Hur gammalt är vraket?",
-   "s": 463.56,
-   "e": 466.2
+   "s": 462.99,
+   "e": 465.62
   },
   {
    "t": "N är lika med N noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2",
-   "s": 466.2,
-   "e": 472.87
+   "s": 465.62,
+   "e": 472.3
   },
   {
    "t": "N är lika med 0,832 gånger N noll T 1 delat med 2 som är lika med 5 730 år parentesen tabell slut parentes",
-   "s": 472.87,
-   "e": 483.26
+   "s": 472.3,
+   "e": 482.69
   },
   {
    "t": "0,832 gånger N noll är lika med N noll gånger 0,5 upphöjt till tiden t delat med 5730 vilket är ekvivalent med att 0,832 är lika med 0,5 upphöjt till t delat med 5730",
-   "s": 483.26,
-   "e": 499.4
+   "s": 482.69,
+   "e": 498.82
   },
   {
    "t": "Logaritmerar båda led och tillämpar logaritmlagarna:",
-   "s": 499.4,
-   "e": 511.2
+   "s": 498.82,
+   "e": 510.64
   },
   {
    "t": "logaritmen av 0,832 är lika med tiden t delat med 5 730 gånger logaritmen av 0,5",
-   "s": 499.4,
-   "e": 511.2
+   "s": 498.82,
+   "e": 510.64
   },
   {
    "t": "Vi löser ut t och får",
-   "s": 511.2,
-   "e": 514.24
+   "s": 510.64,
+   "e": 513.67
   },
   {
-   "t": "tiden t är lika med 5 730 gånger logaritmen av 0,832 delat med logaritmen av 0,5 som är lika med 1 520,424 ldots år som är ungefär lika med 1 520 år",
-   "s": 514.24,
-   "e": 529.81
+   "t": "tiden t är lika med 5 730 gånger logaritmen av 0,832 delat med logaritmen av 0,5 som är lika med 1 520,424 år som är ungefär lika med 1 520 år",
+   "s": 513.67,
+   "e": 528.97
   },
   {
    "t": "Svar: 1 520 år",
-   "s": 529.81,
-   "e": 533.72
+   "s": 528.97,
+   "e": 532.89
   }
  ]
 }

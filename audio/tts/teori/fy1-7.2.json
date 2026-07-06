@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "3d5129b56ca1ef8ccbb6bee640b180ac514c056a",
- "dur": 352.33,
+ "hash": "16a7febd9f7e7e50fefb41d2a263d8b94afbb1cb",
+ "dur": 354.35,
  "segments": [
   {
    "t": "Krafter mellan laddningar och Coulombs lag",
@@ -162,107 +162,107 @@
   {
    "t": "kraften F är lika med k gånger Q ett gånger Q två delat med r i kvadrat",
    "s": 179.41,
-   "e": 185.4
+   "e": 185.45
   },
   {
-   "t": "Q ett är lika med 5,0 nC som är lika med 5,0 gånger 10 upphöjt till minus 9 coulomb Q två som är lika med 3,0 nC som är lika med 3,0 gånger 10 upphöjt till minus 9 coulomb r som är lika med 30 centimeter som är lika med 0,30 meter k som är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton\\cdotm i kvadrat per coulomb i kvadrat",
-   "s": 185.4,
-   "e": 209.62
+   "t": "Q ett är lika med 5,0 nC som är lika med 5,0 gånger 10 upphöjt till minus 9 coulomb Q två som är lika med 3,0 nC som är lika med 3,0 gånger 10 upphöjt till minus 9 coulomb r som är lika med 30 centimeter som är lika med 0,30 meter k som är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2 / C^2",
+   "s": 185.45,
+   "e": 211.41
   },
   {
-   "t": "kraften F är lika med 8,99 gånger 10 upphöjt till 9 gånger 5,0 gånger 10 upphöjt till minus 9 gånger 3,0 gånger 10 upphöjt till minus 9 delat med 0,30 i kvadrat som är lika med 1,498 ldots gånger 10 upphöjt till minus 6 newton som är ungefär lika med 1,5 µN",
-   "s": 209.62,
-   "e": 229.0
+   "t": "kraften F är lika med 8,99 gånger 10 upphöjt till 9 gånger 5,0 gånger 10 upphöjt till minus 9 gånger 3,0 gånger 10 upphöjt till minus 9 delat med 0,30 i kvadrat som är lika med 1,498 gånger 10 upphöjt till minus 6 newton som är ungefär lika med 1,5 µ N",
+   "s": 211.41,
+   "e": 230.84
   },
   {
    "t": "Eftersom laddningarna har olika tecken kommer den negativa laddningen att dras åt den positiva laddningen.",
-   "s": 229.0,
-   "e": 235.59
+   "s": 230.84,
+   "e": 237.4
   },
   {
    "t": "Svar: 1,5 μN åt den positiva laddningen.",
-   "s": 235.59,
-   "e": 240.15
+   "s": 237.4,
+   "e": 241.96
   },
   {
    "t": "b) Enligt Newtons tredje lag kommer kraften på den positiva laddningen att bli densamma, men riktad åt den negativa laddningen.",
-   "s": 240.15,
-   "e": 248.47
+   "s": 241.96,
+   "e": 250.29
   },
   {
    "t": "Svar: 1,5 μN åt den negativa laddningen.",
-   "s": 248.47,
-   "e": 252.97
+   "s": 250.29,
+   "e": 254.79
   },
   {
    "t": "Exempel 2 — Hur ändras kraften?",
-   "s": 252.97,
-   "e": 256.24
+   "s": 254.79,
+   "e": 258.05
   },
   {
    "t": "Två laddade kulor påverkar varandra med en viss elektrisk kraft.",
-   "s": 256.24,
-   "e": 261.19
+   "s": 258.05,
+   "e": 263.0
   },
   {
    "t": "Hur förändras kraften om avståndet mellan kulorna halveras och laddningen hos den ena kulan fördubblas?",
-   "s": 261.19,
-   "e": 267.98
+   "s": 263.0,
+   "e": 269.79
   },
   {
    "t": "Vi saknar mätvärden, så vi löser uppgiften generellt.",
-   "s": 267.98,
-   "e": 272.64
+   "s": 269.79,
+   "e": 274.45
   },
   {
    "t": "Anta att laddningarna från början är Q ett och Q två och avståndet r.",
-   "s": 272.64,
-   "e": 277.98
+   "s": 274.45,
+   "e": 279.79
   },
   {
    "t": "Då gäller att den elektriska kraften från början F ett är",
-   "s": 277.98,
-   "e": 282.76
+   "s": 279.79,
+   "e": 284.57
   },
   {
    "t": "F ett är lika med k gånger Q ett gånger Q två delat med r i kvadrat",
-   "s": 282.76,
-   "e": 288.56
+   "s": 284.57,
+   "e": 290.36
   },
   {
    "t": "Om laddningen hos den ena kulan fördubblas gäller att Q ett fördubblas och blir parentesen 2 Q ett slut parentes .",
-   "s": 288.56,
-   "e": 296.12
+   "s": 290.36,
+   "e": 297.91
   },
   {
    "t": "Om avståndet halveras gäller att r halveras och blir r delat med 2 .",
-   "s": 296.12,
-   "e": 302.99
+   "s": 297.91,
+   "e": 303.01
   },
   {
    "t": "Vi beräknar den nya kraften F två genom att sätta in dessa uttryck i Coulombs lag och förenkla.",
-   "s": 302.94,
-   "e": 309.17
+   "s": 303.01,
+   "e": 311.15
   },
   {
    "t": "F två är lika med k gånger parentesen 2 Q ett slut parentes gånger Q två delat med parentesen r delat med 2 slut parentes i kvadrat som är lika med k gånger 2 gånger Q ett gånger Q två delat med r i kvadrat delat med 4 som är lika med k gånger 4 gånger 2 gånger Q ett gånger Q två delat med r i kvadrat som är lika med k gånger 8 gånger Q ett gånger Q två delat med r i kvadrat",
-   "s": 309.17,
-   "e": 333.93
+   "s": 311.1,
+   "e": 335.95
   },
   {
    "t": "Så F ett är lika med k gånger Q ett Q två delat med r i kvadrat och F två är lika med k gånger 8 gånger Q ett Q två delat med r i kvadrat .",
-   "s": 333.93,
-   "e": 343.85
+   "s": 335.95,
+   "e": 345.88
   },
   {
    "t": "Vi ser alltså att kraften efteråt F två blir 8 gånger så stor.",
-   "s": 343.85,
-   "e": 348.89
+   "s": 345.88,
+   "e": 350.91
   },
   {
    "t": "Svar: Den blir 8 gånger större.",
-   "s": 348.89,
-   "e": 352.33
+   "s": 350.91,
+   "e": 354.35
   }
  ]
 }

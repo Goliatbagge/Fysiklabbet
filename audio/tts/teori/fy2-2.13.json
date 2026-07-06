@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.13",
  "voice": "sv-SE-SofieNeural",
- "hash": "5e6e65052052e03ed3af6c5f84c7f5bb31d1a8a7",
- "dur": 358.59,
+ "hash": "de7d1c3563ddae339f869766ded1231febd2d2d8",
+ "dur": 357.94,
  "segments": [
   {
    "t": "Vattenvågor och brytningslagen",
@@ -255,44 +255,44 @@
    "e": 295.74
   },
   {
-   "t": "b är lika med sinus upphöjt till minus 1 parentesen 10 gånger sinus 40 grader delat med 15 slut parentes som är lika med 25,373 ldots grader som är ungefär lika med 25 grader",
+   "t": "b är lika med sinus upphöjt till minus 1 parentesen 10 gånger sinus 40 grader delat med 15 slut parentes som är lika med 25,373 grader som är ungefär lika med 25 grader",
    "s": 295.74,
-   "e": 308.9
+   "e": 308.58
   },
   {
    "t": "Svar: 25 grader",
-   "s": 308.9,
-   "e": 311.98
+   "s": 308.58,
+   "e": 311.65
   },
   {
    "t": "b) Vi ställer upp formeln för våghastighet och löser ut frekvensen f.",
-   "s": 311.98,
-   "e": 317.39
+   "s": 311.65,
+   "e": 317.07
   },
   {
    "t": "hastigheten v är lika med frekvensen f gånger våglängden lambda vilket är ekvivalent med att f är lika med v delat med lambda",
-   "s": 317.39,
-   "e": 325.49
+   "s": 317.07,
+   "e": 325.17
   },
   {
    "t": "Vi saknar hastigheten v i det grunda vattnet, men eftersom frekvensen är konstant kan vi räkna på frekvensen i det djupa vattnet.",
-   "s": 325.49,
-   "e": 333.77
+   "s": 325.17,
+   "e": 333.44
   },
   {
    "t": "hastigheten v är lika med 8,0 meter per sekund våglängden lambda som är lika med 15 meter",
-   "s": 333.77,
-   "e": 340.86
+   "s": 333.44,
+   "e": 340.53
   },
   {
-   "t": "f tyngdfaktorn g r u n tiden t är lika med f avståndet d j u trycket p t som är lika med 8,0 delat med 15 som är lika med 0,533 ldots hertz som är ungefär lika med 0,53 hertz",
-   "s": 340.86,
-   "e": 354.9
+   "t": "f tyngdfaktorn g r u n tiden t är lika med f avståndet d j u trycket p t som är lika med 8,0 delat med 15 som är lika med 0,533 hertz som är ungefär lika med 0,53 hertz",
+   "s": 340.53,
+   "e": 354.25
   },
   {
    "t": "Svar: 0,53 hertz",
-   "s": 354.9,
-   "e": 358.59
+   "s": 354.25,
+   "e": 357.94
   }
  ]
 }

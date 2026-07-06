@@ -1,0 +1,353 @@
+{
+ "id": "ma1c-1.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "368cc550b10206e6cc11863beb7d945858ededea",
+ "dur": 358.25,
+ "segments": [
+  {
+   "t": "Grundpotensform och prefix",
+   "s": 0.1,
+   "e": 3.02
+  },
+  {
+   "t": "Grundpotensform",
+   "s": 2.98,
+   "e": 5.3
+  },
+  {
+   "t": "En potens av 10 kallas tiopotens.",
+   "s": 5.3,
+   "e": 9.19
+  },
+  {
+   "t": "För att enklare skriva stora och små tal kan man använda sig av tiopotenser.",
+   "s": 9.19,
+   "e": 14.65
+  },
+  {
+   "t": "Om man anger ett tal med ett tal mellan 1 och 10 följt av en tiopotens är det skrivet i grundpotensform.",
+   "s": 14.65,
+   "e": 21.46
+  },
+  {
+   "t": "Grundpotensform",
+   "s": 21.46,
+   "e": 23.84
+  },
+  {
+   "t": "Ett tal i grundpotensform skrivs",
+   "s": 23.84,
+   "e": 27.18
+  },
+  {
+   "t": "a gånger 10 upphöjt till n där 1 är mindre än eller lika med a är mindre än 10 och n är ett heltal.",
+   "s": 27.18,
+   "e": 34.04
+  },
+  {
+   "t": "Tiopotensens exponent",
+   "s": 34.04,
+   "e": 36.96
+  },
+  {
+   "t": "Om ett tal är skrivet i grundpotensform gäller för tal",
+   "s": 36.96,
+   "e": 41.29
+  },
+  {
+   "t": "större än 1 att tiopotensens exponent anger antalet heltalssiffror efter den första siffran",
+   "s": 41.29,
+   "e": 47.95
+  },
+  {
+   "t": "mindre än 1 att tiopotensens exponent anger antalet nollor innan första siffran.",
+   "s": 47.95,
+   "e": 53.94
+  },
+  {
+   "t": "Exempel 1 — Skriv i grundpotensform",
+   "s": 53.94,
+   "e": 57.67
+  },
+  {
+   "t": "Skriv i grundpotensform. a) 8 000 000 000 b) 743 000 c) 0,0009 d) 0,000024",
+   "s": 57.67,
+   "e": 70.31
+  },
+  {
+   "t": "a) Det inledande talet ska vara mellan 1 och 10.",
+   "s": 70.31,
+   "e": 74.69
+  },
+  {
+   "t": "I detta fall är det 8.",
+   "s": 74.69,
+   "e": 77.24
+  },
+  {
+   "t": "Antalet siffror efter den första ger tiopotensens exponent.",
+   "s": 77.24,
+   "e": 82.01
+  },
+  {
+   "t": "I detta fall är det 9.",
+   "s": 82.01,
+   "e": 84.62
+  },
+  {
+   "t": "Svar: 8 gånger 10 upphöjt till 9",
+   "s": 84.62,
+   "e": 88.71
+  },
+  {
+   "t": "b) I detta fall inleds grundpotensformen med 7,43.",
+   "s": 88.71,
+   "e": 93.96
+  },
+  {
+   "t": "Antalet siffror efter den första ger tiopotensens exponent.",
+   "s": 93.96,
+   "e": 98.8
+  },
+  {
+   "t": "I detta fall är det 5.",
+   "s": 98.8,
+   "e": 101.26
+  },
+  {
+   "t": "Svar: 7,43 gånger 10 upphöjt till 5 (observera att exponenten ska vara 5 och inte 3)",
+   "s": 101.26,
+   "e": 109.21
+  },
+  {
+   "t": "c) I detta fall inleds grundpotensformen med 9.",
+   "s": 109.21,
+   "e": 113.91
+  },
+  {
+   "t": "Antalet nollor före den första icke-nollan ger tiopotensens negativa exponent.",
+   "s": 113.91,
+   "e": 119.74
+  },
+  {
+   "t": "I detta fall är det 4 nollor.",
+   "s": 119.74,
+   "e": 122.65
+  },
+  {
+   "t": "Svar: 9 gånger 10 upphöjt till minus 4",
+   "s": 122.65,
+   "e": 127.08
+  },
+  {
+   "t": "d) I detta fall inleds grundpotensformen med 2,4.",
+   "s": 127.08,
+   "e": 132.25
+  },
+  {
+   "t": "Antalet nollor före den första icke-nollan ger tiopotensens negativa exponent.",
+   "s": 132.25,
+   "e": 138.06
+  },
+  {
+   "t": "I detta fall är det 5 nollor.",
+   "s": 138.06,
+   "e": 141.0
+  },
+  {
+   "t": "Svar: 2,4 gånger 10 upphöjt till minus 5",
+   "s": 141.0,
+   "e": 145.93
+  },
+  {
+   "t": "Prefix",
+   "s": 145.93,
+   "e": 147.71
+  },
+  {
+   "t": "En bokstav som ersätter en tiopotens och sätts framför en enhet kallas prefix.",
+   "s": 147.71,
+   "e": 153.53
+  },
+  {
+   "t": "Alla nödvändiga prefix finns i formelbladet.",
+   "s": 153.53,
+   "e": 157.5
+  },
+  {
+   "t": "Prefix",
+   "s": 157.5,
+   "e": 159.26
+  },
+  {
+   "t": "Exempel 2 — Skriv med lämpligt prefix",
+   "s": 159.26,
+   "e": 162.95
+  },
+  {
+   "t": "Skriv med lämpligt prefix. a) 2 000 000 000 000 byte b) 0,0047 l c) 270 000 newton d) 0,000082 gram",
+   "s": 162.95,
+   "e": 176.68
+  },
+  {
+   "t": "a) Ett bra första steg är att skriva talet i grundpotensform:",
+   "s": 176.68,
+   "e": 186.28
+  },
+  {
+   "t": "2 000 000 000 000 byte är lika med 2,0 gånger 10 upphöjt till 12 byte",
+   "s": 176.68,
+   "e": 186.28
+  },
+  {
+   "t": "Därefter byter du ut tiopotensen mot sitt prefix.",
+   "s": 186.28,
+   "e": 190.78
+  },
+  {
+   "t": "10 upphöjt till 12 byts här ut mot T (se tabellen ovan).",
+   "s": 190.78,
+   "e": 196.11
+  },
+  {
+   "t": "Svar: 2,0 TB",
+   "s": 196.11,
+   "e": 199.36
+  },
+  {
+   "t": "b) Grundpotensform och prefix:",
+   "s": 199.36,
+   "e": 210.44
+  },
+  {
+   "t": "0,0047 l är lika med 4,7 gånger 10 upphöjt till minus 3 l som är lika med 4,7 ml",
+   "s": 199.36,
+   "e": 210.44
+  },
+  {
+   "t": "Svar: 4,7 ml",
+   "s": 210.44,
+   "e": 213.88
+  },
+  {
+   "t": "c) I grundpotensform: 270 000 newton är lika med 2,7 gånger 10 upphöjt till 5 newton .",
+   "s": 213.88,
+   "e": 221.93
+  },
+  {
+   "t": "Vi har inget prefix för 10 upphöjt till 5 .",
+   "s": 221.93,
+   "e": 225.94
+  },
+  {
+   "t": "Vi skriver om talet med en tiopotens i närheten som vi har prefix för, t.ex. 10 upphöjt till 6 .",
+   "s": 225.94,
+   "e": 233.34
+  },
+  {
+   "t": "OBS!",
+   "s": 233.34,
+   "e": 234.95
+  },
+  {
+   "t": "När vi ökar tiopotensen från 10 upphöjt till 5 till 10 upphöjt till 6 gör vi tiopotensen 10 gånger så stor.",
+   "s": 234.95,
+   "e": 242.72
+  },
+  {
+   "t": "För att talet ska behålla sin storlek måste vi samtidigt göra talet framför tiopotensen 10 \"gånger så litet\", dvs. 2,7 ska då ändras till 2,7 delat med 10 är lika med 0,27 :",
+   "s": 242.72,
+   "e": 262.76
+  },
+  {
+   "t": "2,7 gånger 10 upphöjt till 5 newton är lika med 0,27 gånger 10 upphöjt till 6 newton som är lika med 0,27 meganewton",
+   "s": 242.72,
+   "e": 262.76
+  },
+  {
+   "t": "Svar: 0,27 meganewton",
+   "s": 262.76,
+   "e": 266.66
+  },
+  {
+   "t": "d) Grundpotensform, justering till en tiopotens med prefix och byte till prefixet:",
+   "s": 266.66,
+   "e": 286.69
+  },
+  {
+   "t": "0,000082 gram är lika med 8,2 gånger 10 upphöjt till minus 5 gram som är lika med 82 gånger 10 upphöjt till minus 6 gram som är lika med 82 µg",
+   "s": 266.66,
+   "e": 286.69
+  },
+  {
+   "t": "Svar: 82 µg",
+   "s": 266.66,
+   "e": 286.69
+  },
+  {
+   "t": "Exempel 3 — Skriv utan prefix",
+   "s": 266.66,
+   "e": 286.69
+  },
+  {
+   "t": "Skriv 5 megahertz utan prefix.",
+   "s": 286.69,
+   "e": 290.24
+  },
+  {
+   "t": "Ersätt prefixet med sin tiopotens:",
+   "s": 290.24,
+   "e": 297.43
+  },
+  {
+   "t": "5 megahertz är lika med 5 gånger 10 upphöjt till 6 hertz",
+   "s": 290.24,
+   "e": 297.43
+  },
+  {
+   "t": "Svar: 5 gånger 10 upphöjt till 6 hertz (5 000 000 hertz)",
+   "s": 297.43,
+   "e": 303.11
+  },
+  {
+   "t": "Exempel 4 — Hårddisken",
+   "s": 303.11,
+   "e": 306.19
+  },
+  {
+   "t": "Josefin har köpt en extern hårddisk på 2,0 TB.",
+   "s": 306.19,
+   "e": 310.96
+  },
+  {
+   "t": "Hur många videofiler får plats på den om en fil i genomsnitt är 4,0 GB?",
+   "s": 310.96,
+   "e": 317.1
+  },
+  {
+   "t": "Vi ska ta reda på hur många filer med storleken 4,0 GB som får plats på en hårddisk med storleken 2,0 TB.",
+   "s": 317.1,
+   "e": 325.39
+  },
+  {
+   "t": "Vi ska alltså dividera hårddiskens storlek med storleken hos en fil för att få antalet.",
+   "s": 325.39,
+   "e": 331.41
+  },
+  {
+   "t": "För att få det korrekta antalet behöver vi göra om det till samma enhet i täljare och nämnare, t.ex. genom att skriva om prefixen som tiopotenser:",
+   "s": 331.41,
+   "e": 349.16
+  },
+  {
+   "t": "antal filer är lika med 2,0 TB delat med 4,0 GB som är lika med 2,0 gånger 10 upphöjt till 12 byte delat med 4,0 gånger 10 upphöjt till 9 byte som är lika med 0,5 gånger 10 i kubik som är lika med 500 st",
+   "s": 331.41,
+   "e": 358.25
+  },
+  {
+   "t": "Svar: 500 st",
+   "s": 349.32,
+   "e": 358.25
+  }
+ ]
+}

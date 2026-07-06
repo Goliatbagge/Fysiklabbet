@@ -1,8 +1,8 @@
 {
  "id": "fy1-3.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "1b4d80d99bd53f5a6e9a4a69f28592143d7c08ad",
- "dur": 359.56,
+ "hash": "da538d3a53160a8ca4db44986431844e8a984936",
+ "dur": 359.64,
  "segments": [
   {
    "t": "Newtons tredje lag",
@@ -102,252 +102,252 @@
   {
    "t": "Newtons tredje lag (lagen om verkan och återverkan)",
    "s": 83.4,
-   "e": 88.12
+   "e": 88.14
   },
   {
    "t": "Mot varje kraft på ett föremål verkar en lika stor, men motsatt riktad, kraft av samma sort på ett annat föremål.",
-   "s": 88.12,
-   "e": 95.69
+   "s": 88.14,
+   "e": 95.72
   },
   {
-   "t": "vec kraften F A på B är lika med minus vec F B på A",
-   "s": 95.69,
-   "e": 100.9
+   "t": "vektorn kraften F A på B är lika med minus vektorn F B på A",
+   "s": 95.72,
+   "e": 101.06
   },
   {
    "t": "Vi tittar på en annan situation.",
-   "s": 100.9,
-   "e": 104.09
+   "s": 101.06,
+   "e": 104.25
   },
   {
    "t": "En vikt står på ett bord.",
-   "s": 104.09,
-   "e": 106.66
+   "s": 104.25,
+   "e": 106.83
   },
   {
    "t": "Den är i kraftjämvikt.",
-   "s": 106.66,
-   "e": 109.42
+   "s": 106.83,
+   "e": 109.59
   },
   {
    "t": "Två krafter verkar på vikten: tyngdkraften nedåt och normalkraften uppåt.",
-   "s": 109.42,
-   "e": 115.11
+   "s": 109.59,
+   "e": 115.28
   },
   {
    "t": "Dessa två krafter är inte kraft och motkraft enligt Newtons tredje lag.",
-   "s": 115.11,
-   "e": 120.46
+   "s": 115.28,
+   "e": 120.62
   },
   {
    "t": "Dessa är istället jämviktskrafter.",
-   "s": 120.46,
-   "e": 123.74
+   "s": 120.62,
+   "e": 123.9
   },
   {
    "t": "Det är viktigt att skilja mellan motkrafter och jämviktskrafter.",
-   "s": 123.74,
-   "e": 128.14
+   "s": 123.9,
+   "e": 128.3
   },
   {
    "t": "Motkraften till en tyngdkraft (gravitationskraft) är alltså inte en normalkraft från till exempel ett bord, utan måste vara en annan gravitationskraft då den ska vara av samma typ.",
-   "s": 128.14,
-   "e": 138.94
+   "s": 128.3,
+   "e": 139.1
   },
   {
    "t": "Jämviktskrafter vs motkrafter",
-   "s": 138.94,
-   "e": 142.47
+   "s": 139.1,
+   "e": 142.64
   },
   {
    "t": "Jämviktskrafter: verkar på ett och samma föremål och håller detta i jämvikt.",
-   "s": 142.47,
-   "e": 148.14
+   "s": 142.64,
+   "e": 148.3
   },
   {
    "t": "Motkrafter: verkar på två olika föremål och är alltid samma typ av kraft.",
-   "s": 148.14,
-   "e": 153.82
+   "s": 148.3,
+   "e": 153.99
   },
   {
    "t": "Fundera — Astronauten utan lina",
-   "s": 153.82,
-   "e": 157.25
+   "s": 153.99,
+   "e": 157.41
   },
   {
    "t": "Det ikoniska fotografiet anses fortfarande vara ett av de mest skrämmande rymdfotografierna hittills.",
-   "s": 157.25,
-   "e": 164.09
+   "s": 157.41,
+   "e": 164.25
   },
   {
    "t": "Astronauten Bruce McCandless II blev den första människan att genomföra en rymdpromenad utan en säkerhetslina kopplad till ett rymdskepp.",
-   "s": 164.09,
-   "e": 172.46
+   "s": 164.25,
+   "e": 172.62
   },
   {
    "t": "År 1984 svävade han helt utan förankring i rymden med endast sin \"Manned Maneuvering Unit\".",
-   "s": 172.46,
-   "e": 179.78
+   "s": 172.62,
+   "e": 179.94
   },
   {
    "t": "Hur tar han sig tillbaka till rymdskeppet?",
-   "s": 179.78,
-   "e": 183.38
+   "s": 179.94,
+   "e": 183.54
   },
   {
    "t": "Går det att vifta med armarna och \"simma\"?",
-   "s": 183.38,
-   "e": 186.46
+   "s": 183.54,
+   "e": 186.62
   },
   {
    "t": "Foto: astronauten Bruce McCandless II svävande fritt i rymden med jorden i bakgrunden, 1984.",
-   "s": 186.46,
-   "e": 194.38
+   "s": 186.62,
+   "e": 194.54
   },
   {
    "t": "Newtons tredje lag — Jorden och månen",
-   "s": 194.38,
-   "e": 197.99
+   "s": 194.54,
+   "e": 198.15
   },
   {
    "t": "Vad är det som gör att månen kretsar kring jorden?",
-   "s": 197.99,
-   "e": 201.76
+   "s": 198.15,
+   "e": 201.93
   },
   {
    "t": "Svar: Jorden påverkar månen med en gravitationskraft som gör att månen dras mot jorden.",
-   "s": 201.76,
-   "e": 208.19
+   "s": 201.93,
+   "e": 208.35
   },
   {
    "t": "Men påverkar månen också jorden med en gravitationskraft?",
-   "s": 208.19,
-   "e": 212.61
+   "s": 208.35,
+   "e": 212.78
   },
   {
    "t": "Svar: Ja.",
-   "s": 212.61,
-   "e": 214.82
+   "s": 212.78,
+   "e": 214.99
   },
   {
    "t": "Hur stor är månens gravitationskraft på jorden jämfört med jordens gravitationskraft på månen?",
-   "s": 214.82,
-   "e": 221.12
+   "s": 214.99,
+   "e": 221.29
   },
   {
    "t": "Mindre, eftersom månens massa är betydligt mindre?",
-   "s": 221.12,
-   "e": 225.43
+   "s": 221.29,
+   "e": 225.59
   },
   {
    "t": "Svaret är att dessa två krafter är precis lika stora!",
-   "s": 225.43,
-   "e": 229.93
+   "s": 225.59,
+   "e": 230.09
   },
   {
    "t": "Hur kan det komma sig?",
-   "s": 229.93,
-   "e": 232.21
+   "s": 230.09,
+   "e": 232.38
   },
   {
    "t": "Jo, effekten av den lika stora kraften från månen på jorden blir mycket mindre på grund av jordens stora massa och tröghet.",
-   "s": 232.21,
-   "e": 240.32
+   "s": 232.38,
+   "e": 240.49
   },
   {
    "t": "De två massorna drar i varandra med exakt lika stor kraft, trots olika massa: 3 kilogram-massan drar i varje kilogram, medan 1 kilogram-massan drar i vart och ett av de tre kilogrammen med en tredjedel — totalt lika mycket.",
-   "s": 240.32,
-   "e": 254.14
+   "s": 240.49,
+   "e": 254.3
   },
   {
    "t": "Exempel 1 — Motkraften till tyngdkraften på ett äpple",
-   "s": 254.14,
-   "e": 258.8
+   "s": 254.3,
+   "e": 258.96
   },
   {
    "t": "Vilken är motkraften till tyngdkraften som verkar nedåt på ett äpple?",
-   "s": 258.8,
-   "e": 263.94
+   "s": 258.96,
+   "e": 264.1
   },
   {
    "t": "Motkraften till tyngdkraften nedåt på ett äpple kommer från jordklotet.",
-   "s": 263.94,
-   "e": 269.16
+   "s": 264.1,
+   "e": 269.32
   },
   {
    "t": "Då måste motkraften vara en lika stor tyngdkraft från äpplet uppåt på jordklotet.",
-   "s": 269.16,
-   "e": 275.06
+   "s": 269.32,
+   "e": 275.23
   },
   {
    "t": "Äpplet drar alltså upp jordklotet med samma kraft som jordklotet drar ner äpplet.",
-   "s": 275.06,
-   "e": 280.95
+   "s": 275.23,
+   "e": 281.11
   },
   {
    "t": "Jorden har dock en mycket större massa än äpplet (och därmed en större tröghet) så därför blir effekten på jordklotet inte lika stor som effekten på äpplet.",
-   "s": 280.95,
-   "e": 290.6
+   "s": 281.11,
+   "e": 290.76
   },
   {
    "t": "Svar: En tyngdkraft från äpplet uppåt på jordklotet.",
-   "s": 290.6,
-   "e": 296.93
+   "s": 290.76,
+   "e": 297.03
   },
   {
    "t": "Krafter i rep",
-   "s": 296.88,
-   "e": 299.1
+   "s": 296.98,
+   "e": 299.18
   },
   {
    "t": "Det här med krafter kan vara krångligt.",
-   "s": 299.1,
-   "e": 302.27
+   "s": 299.18,
+   "e": 302.36
   },
   {
    "t": "Vad är det som gör att ett lag vinner en dragkamp om spännkraften i repet är lika stort i båda riktningar?",
-   "s": 302.27,
-   "e": 308.96
+   "s": 302.36,
+   "e": 309.04
   },
   {
    "t": "Här gör även läroboksförfattare fel ibland!",
-   "s": 308.96,
-   "e": 312.78
+   "s": 309.04,
+   "e": 312.87
   },
   {
    "t": "Vanlig men felaktig bild av kraftsituationen.",
-   "s": 312.78,
-   "e": 316.86
+   "s": 312.87,
+   "e": 316.94
   },
   {
    "t": "Spännkraften i repet är lika stor i båda riktningar — den kan inte vara 600 newton åt ena hållet och 400 newton åt andra.",
-   "s": 316.86,
-   "e": 325.5
+   "s": 316.94,
+   "e": 325.58
   },
   {
    "t": "Korrekt bild: spännkraften i repet är lika stor åt båda håll.",
-   "s": 325.5,
-   "e": 330.58
+   "s": 325.58,
+   "e": 330.67
   },
   {
    "t": "Det är friktionen mot marken som avgör — laget med störst friktion (här vänster) vinner.",
-   "s": 330.58,
-   "e": 336.9
+   "s": 330.67,
+   "e": 336.98
   },
   {
    "t": "Fundera — Är detta en genial idé för framtida transport?",
-   "s": 336.9,
-   "e": 341.42
+   "s": 336.98,
+   "e": 341.51
   },
   {
    "t": "Magneten kommer visserligen att ge en framåtriktad kraft på metallbiten, men metallbiten kommer att ge en precis lika stor bakåtriktad kraft på magneten (som sitter ihop med bilen).",
-   "s": 341.42,
-   "e": 352.67
+   "s": 341.51,
+   "e": 352.76
   },
   {
    "t": "Den resulterande kraften på bilen blir alltså noll och ingen drivande kraft kommer (tyvärr) att uppstå.",
-   "s": 352.67,
-   "e": 359.56
+   "s": 352.76,
+   "e": 359.64
   }
  ]
 }

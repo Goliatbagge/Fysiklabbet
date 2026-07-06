@@ -1,7 +1,7 @@
 {
  "id": "fy1-7.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "0f819b4d5f888a2bb4fd78f77041e55054acade1",
+ "hash": "4581e3d5e91b34b48488d25fcffb88f1243ada53",
  "dur": 196.81,
  "segments": [
   {
@@ -132,36 +132,36 @@
   {
    "t": "Elektrisk energi ( energin E är lika med laddningen Q gånger spänningen U ) omvandlas och blir till rörelseenergi ( E k är lika med massan m hastigheten v i kvadrat delat med 2 ), dvs.",
    "s": 123.38,
-   "e": 140.9
+   "e": 140.91
   },
   {
    "t": "laddningen Q gånger spänningen U är lika med massan m gånger hastigheten v i kvadrat delat med 2",
    "s": 123.38,
-   "e": 140.9
+   "e": 140.91
   },
   {
    "t": "Vi löser ut hastigheten v och får",
-   "s": 140.9,
-   "e": 144.53
+   "s": 140.91,
+   "e": 144.54
   },
   {
    "t": "hastigheten v är lika med roten ur 2 gånger laddningen Q gånger spänningen U delat med massan m",
-   "s": 144.53,
-   "e": 165.41
+   "s": 144.54,
+   "e": 165.54
   },
   {
-   "t": "q är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb spänningen U som är lika med 1,5 volt massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronensmassa,slåsuppitabell slut parentes",
-   "s": 144.53,
-   "e": 165.41
+   "t": "q är lika med 1,602 gånger 10 upphöjt till minus 19 coulomb spänningen U som är lika med 1,5 volt massan m som är lika med 9,11 gånger 10 upphöjt till minus 31 kilogram parentesen elektronens massa, slås upp i tabell slut parentes",
+   "s": 144.54,
+   "e": 165.54
   },
   {
-   "t": "hastigheten v är lika med roten ur 2 gånger 1,602 gånger 10 upphöjt till minus 19 gånger 1,5 delat med 9,11 gånger 10 upphöjt till minus 31 som är lika med 726 327,846 ldots meter per sekund som är ungefär lika med 730 000 meter per sekund som är lika med 0,73 Mm per sekund",
-   "s": 165.41,
-   "e": 189.72
+   "t": "hastigheten v är lika med roten ur 2 gånger 1,602 gånger 10 upphöjt till minus 19 gånger 1,5 delat med 9,11 gånger 10 upphöjt till minus 31 som är lika med 726 327,846 meter per sekund som är ungefär lika med 730 000 meter per sekund som är lika med 0,73 Mm per sekund",
+   "s": 165.54,
+   "e": 189.71
   },
   {
    "t": "Svar: 0,73 Mm/s eller 730 000 meter per sekund",
-   "s": 189.72,
+   "s": 189.71,
    "e": 196.81
   }
  ]

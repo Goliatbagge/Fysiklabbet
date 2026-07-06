@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.8",
  "voice": "sv-SE-SofieNeural",
- "hash": "a578a4df5e05d3e08b056a9dd6b277a9d30bfd14",
- "dur": 368.71,
+ "hash": "49c91dbda1d7e336a83932f414c9ac34c24dbea8",
+ "dur": 368.88,
  "segments": [
   {
    "t": "Inducerad ström och Lenz lag",
@@ -122,222 +122,222 @@
   {
    "t": "kraften F är lika med B gånger strömmen I gånger hävarmen l",
    "s": 114.31,
-   "e": 128.05
+   "e": 128.19
   },
   {
-   "t": "B är lika med 0,80 tesla strömmen I som är lika med 0,40 ampere parentesen fråna-uppgiften slut parentes hävarmen l som är lika med 0,15 meter",
+   "t": "B är lika med 0,80 tesla strömmen I som är lika med 0,40 ampere parentesen från a-uppgiften slut parentes hävarmen l som är lika med 0,15 meter",
    "s": 114.31,
-   "e": 128.05
+   "e": 128.19
   },
   {
    "t": "kraften F är lika med 0,80 gånger 0,40 gånger 0,15 som är lika med 0,048 newton som är lika med 48 mN",
-   "s": 128.05,
-   "e": 137.82
+   "s": 128.19,
+   "e": 137.99
   },
   {
    "t": "Kraftens riktning fås av högerhandsregeln.",
-   "s": 137.82,
-   "e": 141.59
+   "s": 137.99,
+   "e": 141.75
   },
   {
    "t": "Strömmen (tummen) är uppåt genom ledaren och magnetfältet (pekfingret) är inåtriktat.",
-   "s": 141.59,
-   "e": 148.74
+   "s": 141.75,
+   "e": 148.9
   },
   {
    "t": "Långfingret ger att kraftens riktning är åt vänster.",
-   "s": 148.74,
-   "e": 152.84
+   "s": 148.9,
+   "e": 153.0
   },
   {
    "t": "Svar: 48 mN åt vänster.",
-   "s": 152.84,
-   "e": 156.66
+   "s": 153.0,
+   "e": 156.82
   },
   {
    "t": "Vi konstaterar att den inducerade strömmen i exemplet ovan ger upphov till en kraft som motverkar rörelsen (ledaren dras åt höger och den inducerade kraften blir åt vänster).",
-   "s": 156.66,
-   "e": 167.65
+   "s": 156.82,
+   "e": 167.81
   },
   {
    "t": "Demonstration — Virvelströmmar",
-   "s": 167.65,
-   "e": 170.7
+   "s": 167.81,
+   "e": 170.86
   },
   {
    "t": "Vi låter en omagnetisk och en magnetisk metallcylinder falla genom varsitt kopparrör.",
-   "s": 170.7,
-   "e": 176.82
+   "s": 170.86,
+   "e": 176.99
   },
   {
    "t": "Den magnetiska metallcylindern faller långsammare!",
-   "s": 176.82,
-   "e": 181.15
+   "s": 176.99,
+   "e": 181.31
   },
   {
    "t": "Virvelströmmar som induceras i kopparröret skapar ett magnetfält som motverkar fallet.",
-   "s": 181.15,
-   "e": 187.4
+   "s": 181.31,
+   "e": 187.56
   },
   {
    "t": "Den inducerade strömmen i demonstrationen ovan ger upphov till ett magnetfält som motverkar ändringen av magnetfältet (en ökning av magnetfältet, t.ex. uppåt, inducerar ett magnetfält nedåt).",
-   "s": 187.4,
-   "e": 200.1
+   "s": 187.56,
+   "e": 200.26
   },
   {
    "t": "Lenz lag",
-   "s": 200.1,
-   "e": 202.15
+   "s": 200.26,
+   "e": 202.31
   },
   {
    "t": "Inducerade strömmar uppstår antingen av en ledare som rör sig i ett magnetfält eller av en ändring av magnetfältet i närheten av en ledare.",
-   "s": 202.15,
-   "e": 210.76
+   "s": 202.31,
+   "e": 210.93
   },
   {
    "t": "Oavsett vilket induktionsfenomen vi har, induceras strömmar med en riktning som motverkar orsaken till dess uppkomst. Detta kallas Lenz lag.",
-   "s": 210.76,
-   "e": 221.45
+   "s": 210.93,
+   "e": 221.61
   },
   {
    "t": "Lenz lag",
-   "s": 221.45,
-   "e": 223.44
+   "s": 221.61,
+   "e": 223.6
   },
   {
    "t": "En inducerad ström får en sådan riktning att orsaken till dess uppkomst motverkas.",
-   "s": 223.44,
-   "e": 229.15
+   "s": 223.6,
+   "e": 229.31
   },
   {
    "t": "Demonstration — Thomsons ring",
-   "s": 229.15,
-   "e": 232.14
+   "s": 229.31,
+   "e": 232.3
   },
   {
    "t": "En lång järnkärna sätts i en spole.",
-   "s": 232.14,
-   "e": 235.36
+   "s": 232.3,
+   "e": 235.53
   },
   {
    "t": "Vi trär sedan en aluminiumring över järnkärnan och lägger på spolen.",
-   "s": 235.36,
-   "e": 240.36
+   "s": 235.53,
+   "e": 240.53
   },
   {
    "t": "Vi ger en kort ström genom spolen och aluminiumringen skjuts uppåt!",
-   "s": 240.36,
-   "e": 245.51
+   "s": 240.53,
+   "e": 245.68
   },
   {
    "t": "Vi upprepar försöket med en:",
-   "s": 245.51,
-   "e": 251.22
+   "s": 245.68,
+   "e": 251.39
   },
   {
    "t": "plastring (inget händer — ej ledande)",
-   "s": 245.51,
-   "e": 251.22
+   "s": 245.68,
+   "e": 251.39
   },
   {
    "t": "aluminiumring med skåra tvärs igenom (inget händer — strömmen kan inte gå runt)",
-   "s": 251.22,
-   "e": 257.18
+   "s": 251.39,
+   "e": 257.34
   },
   {
    "t": "hälften så hög aluminiumring (skjuts upp halva höjden — halverad ström, halverad kraft)",
-   "s": 257.18,
-   "e": 263.91
+   "s": 257.34,
+   "e": 264.07
   },
   {
    "t": "kopparring (skjuts upp halva höjden — dubbla tyngden p.g.a. högre densitet halverar höjden)",
-   "s": 263.91,
-   "e": 270.73
+   "s": 264.07,
+   "e": 270.89
   },
   {
    "t": "Förklaring: När strömmen går genom spolen bildas ett magnetfält som fortplantas genom järnkärnan och skapar ett magnetfält inuti aluminiumringen.",
-   "s": 270.73,
-   "e": 280.31
+   "s": 270.89,
+   "e": 280.48
   },
   {
    "t": "Enligt Lenz lag induceras en ström i ringen som skapar ett magnetfält motriktat det från spolen.",
-   "s": 280.31,
-   "e": 287.05
+   "s": 280.48,
+   "e": 287.21
   },
   {
    "t": "Ringen fungerar nu som en elektromagnet med omvänd polaritet.",
-   "s": 287.05,
-   "e": 292.11
+   "s": 287.21,
+   "e": 292.27
   },
   {
    "t": "Eftersom lika poler repellerar och ringen ligger löst skjuts den iväg uppåt.",
-   "s": 292.11,
-   "e": 297.71
+   "s": 292.27,
+   "e": 297.88
   },
   {
    "t": "Exempel 2 — Strömriktningen i en slinga",
-   "s": 297.71,
-   "e": 301.49
+   "s": 297.88,
+   "e": 301.65
   },
   {
    "t": "En magnet flyttas relativt en slinga.",
-   "s": 301.49,
-   "e": 304.96
+   "s": 301.65,
+   "e": 305.12
   },
   {
    "t": "Vilken riktning får strömmen genom slingan?",
-   "s": 304.96,
-   "e": 310.22
+   "s": 305.12,
+   "e": 310.39
   },
   {
    "t": "a) Orsaken till strömmens uppkomst är ändringen av magnetfältet.",
-   "s": 310.17,
-   "e": 315.45
+   "s": 310.34,
+   "e": 315.62
   },
   {
    "t": "Det högerriktade fältet förstärks när magneten närmar sig slingan.",
-   "s": 315.45,
-   "e": 320.52
+   "s": 315.62,
+   "e": 320.69
   },
   {
    "t": "Den inducerade strömmen strävar enligt Lenz lag efter att försvaga det högerriktade fältet och skapar ett motriktat (vänsterriktat) magnetfält.",
-   "s": 320.52,
-   "e": 329.73
+   "s": 320.69,
+   "e": 329.9
   },
   {
    "t": "Tumregeln för spole/slinga ger att strömriktningen blir uppåt i framkanten av slingan.",
-   "s": 329.73,
-   "e": 336.17
+   "s": 329.9,
+   "e": 336.34
   },
   {
    "t": "Svar: Strömriktningen blir uppåt i framkant av slingan.",
-   "s": 336.17,
-   "e": 340.98
+   "s": 336.34,
+   "e": 341.15
   },
   {
    "t": "b) Orsaken är åter ändringen av magnetfältet.",
-   "s": 340.98,
-   "e": 345.68
+   "s": 341.15,
+   "e": 345.85
   },
   {
    "t": "Det vänsterriktade fältet försvagas när magneten rör sig bort från slingan.",
-   "s": 345.68,
-   "e": 350.97
+   "s": 345.85,
+   "e": 351.14
   },
   {
    "t": "Den inducerade strömmen strävar efter att förstärka det vänsterriktade fältet och bildar alltså också ett vänsterriktat magnetfält.",
-   "s": 350.97,
-   "e": 358.88
+   "s": 351.14,
+   "e": 359.05
   },
   {
    "t": "Tumregeln ger att strömriktningen blir uppåt i framkanten av slingan.",
-   "s": 358.88,
-   "e": 363.9
+   "s": 359.05,
+   "e": 364.06
   },
   {
    "t": "Svar: Strömriktningen blir uppåt i framkant av slingan.",
-   "s": 363.9,
-   "e": 368.71
+   "s": 364.06,
+   "e": 368.88
   }
  ]
 }

@@ -53,7 +53,10 @@
         'K': 'kelvin', 'C': 'coulomb', 'T': 'tesla', 'Wb': 'weber',
         'Ω': 'ohm', 'kΩ': 'kiloohm', 'MΩ': 'megaohm',
         'eV': 'elektronvolt', 'keV': 'kiloelektronvolt', 'MeV': 'megaelektronvolt',
-        'mol': 'mol', '%': 'procent',
+        'mol': 'mol', '%': 'procent', '‰': 'promille',
+        'kr': 'kronor', 'B': 'byte', 'MN': 'meganewton',
+        'l.e.': 'längdenheter', 'a.e.': 'areaenheter', 'v.e.': 'volymenheter',
+        'VL': 'vänsterledet', 'HL': 'högerledet',
         '°C': 'grader Celsius', '°': 'grader',
         'm^2': 'kvadratmeter', 'm^3': 'kubikmeter',
         'cm^2': 'kvadratcentimeter', 'cm^3': 'kubikcentimeter', 'dm^3': 'kubikdecimeter',
@@ -83,6 +86,7 @@
 
     const FUNKTIONER = {
         'sin': 'sinus', 'cos': 'cosinus', 'tan': 'tangens',
+        'arcsin': 'arcsinus', 'arccos': 'arccosinus', 'arctan': 'arctangens',
         'ln': 'naturliga logaritmen av', 'lg': 'logaritmen av', 'log': 'logaritmen av',
     };
 
@@ -138,8 +142,12 @@
 
     // Enhetsfras för innehållet i \mathrm{...}: "N/kg" → "newton per kilogram"
     function unitPhrase(raw) {
-        raw = raw.replace(/\\Omega/g, 'Ω').replace(/\\mu/g, 'µ').replace(/\s+/g, '');
-        if (ENHET[raw]) return ENHET[raw];
+        raw = raw.replace(/\\Omega/g, 'Ω').replace(/\\mu/g, 'µ').trim();
+        const compact = raw.replace(/\s+/g, '');
+        if (ENHET[compact]) return ENHET[compact];
+        // Ordfras ("gamla värdet", "längden av") — läs som den är
+        if (/\s/.test(raw)) return raw.replace(/\s+/g, ' ');
+        raw = compact;
         const parts = raw.split('/');
         const spoken = parts.map((p) => {
             const sup = /^(.+)\^\{?(\d)\}?$/.exec(p);
@@ -223,13 +231,21 @@
                 } else if (c === 'text' || c === 'mathrm' || c === 'textrm' || c === 'operatorname') {
                     const raw = rawText(nextArg());
                     out.push(unitPhrase(raw));
-                } else if (c === 'mathit') {
+                } else if (c === 'mathit' || c === 'mathbf' || c === 'mathbb') {
                     out.push(renderToks(nextArg(), ctx));
+                } else if (c === 'vec' || c === 'overrightarrow') {
+                    out.push('vektorn ' + renderToks(nextArg(), ctx));
+                } else if (c === 'ldots' || c === 'dots' || c === 'cdots' || c === 'dotsc') {
+                    // utelämnade decimaler/termer — läses inte
+                } else if (c === 'phantom') {
+                    nextArg(); // osynlig platshållare — läses inte
+                } else if (c === 'angle') {
+                    out.push('vinkeln');
                 } else if (c === 'approx') {
                     out.push(ctx.eqCount++ === 0 ? 'är ungefär lika med' : 'som är ungefär lika med');
-                } else if (c === 'Leftrightarrow' || c === 'iff') {
+                } else if (c === 'Leftrightarrow' || c === 'Longleftrightarrow' || c === 'iff') {
                     out.push('vilket är ekvivalent med att'); ctx.eqCount = 0;
-                } else if (c === 'Rightarrow' || c === 'implies') {
+                } else if (c === 'Rightarrow' || c === 'Longrightarrow' || c === 'implies') {
                     out.push('vilket ger att'); ctx.eqCount = 0;
                 } else if (c === 'propto') {
                     out.push('är proportionell mot');
@@ -251,6 +267,7 @@
                 } else if (c === '\\') {
                     out.push(', '); // radbrytning i aligned → kort paus
                 } else if (c === 'left' || c === 'right' || c === 'begin' || c === 'end' ||
+                           c === 'big' || c === 'Big' || c === 'bigg' || c === 'Bigg' ||
                            c === 'displaystyle' || c === 'limits') {
                     if (c === 'begin' || c === 'end') {
                         const env = rawText(nextArg());   // släng {aligned}/{array}
@@ -390,7 +407,12 @@
             .replace(/\\\s*\n/g, ' ')
             .replace(/\\(?:,|;|!)/g, ' ')       // tunna mellanrum
             .replace(/\{,\}/g, ',')             // decimalkomma {,} → ,
-            .replace(/~|\\ /g, ' ');
+            .replace(/~|\\ /g, ' ')
+            // |vektor| → "längden av vektorn ..."
+            .replace(/\\left\||\\right\|/g, '|')
+            .replace(/\|\s*((?:\\vec|\\overrightarrow)\{[^}]*\})\s*\|/g, '\\text{längden av} $1 ')
+            // f(x), g(3), P(händelse) → "f av x" i stället för "parentesen"
+            .replace(/\b([fgP])\(([^()]{1,40})\)/g, '$1 \\text{av} $2 ');
         const ctx = { names: !!opts.names, said: new Set(), eqCount: 0 };
         return renderToks(tokenize(src), ctx);
     }
@@ -412,8 +434,12 @@
         s = s.replace(/[₀₁₂₃₄₅₆₇₈₉]/g, (c) => ' ' + SIFFERORD[SUB_UNI[c]]);
         // Ensam enhet i parentes: "(W)" → "(watt)"
         s = s.replace(UNIT_IN_PAREN, (_, u) => '(' + ENHET_TEXT[u] + ')');
-        // Mätetal + enhet: "75 W" → "75 watt"
-        s = s.replace(UNIT_AFTER_NUM, (_, n, u) => n + ' ' + ENHET_TEXT[u]);
+        // Mätetal + enhet: "75 W" → "75 watt" (singular efter exakt 1: "1 längdenhet")
+        s = s.replace(UNIT_AFTER_NUM, (_, n, u) => {
+            let w = ENHET_TEXT[u];
+            if (n.trim() === '1' && /enheter$/.test(w)) w = w.slice(0, -2);
+            return n + ' ' + w;
+        });
         // Ekvationsreferenser: "(5)" → "ekvation 5"
         s = s.replace(/\((\d{1,2})\)/g, 'ekvation $1');
         // Lösa operatorer i löptext
@@ -421,8 +447,12 @@
              .replace(/ ≈ /g, ' är ungefär lika med ')
              .replace(/ · /g, ' gånger ')
              .replace(/(\d) ?% /g, '$1 procent ')
+             .replace(/(\d) ?‰/g, '$1 promille')
              .replace(/(\d)°/g, '$1 grader')
-             .replace(/→/g, ' ger ');
+             .replace(/∠/g, 'vinkeln ')
+             .replace(/→/g, ' ger ')
+             // "vektorn $\vec{u}$" → talformen dubblerar ordet — säg det en gång
+             .replace(/\b([Vv]ektorn|[Vv]ektorerna)\s+vektorn\b/g, '$1');
         return s.replace(/\s+/g, ' ').trim();
     }
 
@@ -460,6 +490,9 @@
     function getSpeechText(el, opts) {
         const clone = el.cloneNode(true);
         clone.querySelectorAll('svg').forEach((n) => n.remove());
+        // <br> ger ingen text i textContent — utan detta klistras "Bestäm<br>a)"
+        // ihop till "Bestäma)". Punkt ger dessutom en naturlig paus/meningsgräns.
+        clone.querySelectorAll('br').forEach((n) => n.replaceWith(document.createTextNode('. ')));
         // Formler: ersätt varje KaTeX-span med talad text från TeX-annotationen
         clone.querySelectorAll('.katex').forEach((k) => {
             const ann = k.querySelector('annotation[encoding="application/x-tex"]');

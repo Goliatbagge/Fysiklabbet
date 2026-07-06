@@ -1,8 +1,8 @@
 {
  "id": "fy1-5.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "0796c9a0259ea7cd3c0615267ad5886a14a2301e",
- "dur": 309.38,
+ "hash": "54417e4da3e5a8be848498d1f8ac5e5581bfb339",
+ "dur": 306.55,
  "segments": [
   {
    "t": "Gasers lyftkraft",
@@ -142,97 +142,97 @@
   {
    "t": "F L är lika med densiteten rho hävarmen l u frekvensen f tiden t gånger volymen V gånger tyngdfaktorn g",
    "s": 140.43,
-   "e": 162.28
+   "e": 162.26
   },
   {
    "t": "densiteten rho hävarmen l u frekvensen f tiden t är lika med 1,293 kilogram per kubikmeter volymen V som är lika med 11 liter som är lika med 0,011 kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram",
    "s": 140.43,
-   "e": 162.28
+   "e": 162.26
   },
   {
-   "t": "F L är lika med 1,293 gånger 0,011 gånger 9,82 som är lika med 0,1396 ldots newton",
-   "s": 162.28,
-   "e": 172.28
+   "t": "F L är lika med 1,293 gånger 0,011 gånger 9,82 som är lika med 0,1396 newton",
+   "s": 162.26,
+   "e": 171.91
   },
   {
    "t": "Sedan bestämmer vi F G (tyngden på ballong + helium).",
-   "s": 172.28,
-   "e": 177.4
+   "s": 171.91,
+   "e": 177.04
   },
   {
    "t": "F G är lika med parentesen m b accelerationen a hävarmen l l o n tyngdfaktorn g plus m höjden h e l i u massan m slut parentes gånger g",
-   "s": 177.4,
-   "e": 188.76
+   "s": 177.04,
+   "e": 188.4
   },
   {
    "t": "m b accelerationen a hävarmen l l o n tyngdfaktorn g är lika med 4,0 gram som är lika med 0,0040 kilogram m höjden h e l i u massan m som är lika med densiteten rho h e l i u m gånger V h e l i u m som är lika med 0,178 gånger 0,011 som är lika med 0,001958 kilogram g som är lika med 9,82 newton per kilogram",
-   "s": 188.76,
-   "e": 215.93
+   "s": 188.4,
+   "e": 215.56
   },
   {
-   "t": "F G är lika med parentesen 0,004 plus 0,001958 slut parentes gånger 9,82 som är lika med 0,0585 ldots newton",
-   "s": 215.93,
-   "e": 227.89
+   "t": "F G är lika med parentesen 0,004 plus 0,001958 slut parentes gånger 9,82 som är lika med 0,0585 newton",
+   "s": 215.56,
+   "e": 227.36
   },
   {
    "t": "Insättning ger",
-   "s": 227.89,
-   "e": 230.15
+   "s": 227.36,
+   "e": 229.62
   },
   {
-   "t": "F S är lika med 0,1396 ldots minus 0,0585 ldots som är lika med 0,0811 ldots newton som är ungefär lika med 0,081 newton som är lika med 81 mN",
-   "s": 230.15,
-   "e": 244.12
+   "t": "F S är lika med 0,1396 minus 0,0585 som är lika med 0,0811 newton som är ungefär lika med 0,081 newton som är lika med 81 mN",
+   "s": 229.62,
+   "e": 242.32
   },
   {
    "t": "Svar: 81 mN",
-   "s": 244.12,
-   "e": 247.22
+   "s": 242.32,
+   "e": 245.41
   },
   {
    "t": "b) Från a-uppgiften har vi att en ballong ger spännkraften F S är lika med 0,0811… N.",
-   "s": 247.22,
-   "e": 259.94
+   "s": 245.41,
+   "e": 258.1
   },
   {
    "t": "Om vi har n stycken ballonger blir alltså den sammanlagda lyftande kraften",
-   "s": 254.64,
-   "e": 259.94
+   "s": 252.8,
+   "e": 258.1
   },
   {
    "t": "kraften F är lika med n gånger F S",
-   "s": 259.94,
-   "e": 263.77
+   "s": 258.1,
+   "e": 261.94
   },
   {
    "t": "För att ballongerna ska lyfta Algot krävs att den sammanlagda lyftande kraften F är minst lika stor som Algots tyngd F G är lika med massan m gånger tyngdfaktorn g .",
-   "s": 263.77,
-   "e": 273.68
+   "s": 261.94,
+   "e": 271.84
   },
   {
    "t": "Detta ger",
-   "s": 273.68,
-   "e": 275.69
+   "s": 271.84,
+   "e": 273.85
   },
   {
    "t": "massan m gånger tyngdfaktorn g är lika med n gånger F S vilket är ekvivalent med att n är lika med m gånger g delat med F S",
-   "s": 275.69,
-   "e": 292.71
+   "s": 273.85,
+   "e": 290.6
   },
   {
-   "t": "massan m är lika med 20 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram F S som är lika med 0,0811 ldots newton",
-   "s": 275.69,
-   "e": 292.71
+   "t": "massan m är lika med 20 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram F S som är lika med 0,0811 newton",
+   "s": 273.85,
+   "e": 290.6
   },
   {
-   "t": "n är lika med 20 gånger 9,82 delat med 0,0811 ldots som är lika med 2 419,613 ldots som är ungefär lika med 2 400 ballonger",
-   "s": 292.71,
-   "e": 305.51
+   "t": "n är lika med 20 gånger 9,82 delat med 0,0811 som är lika med 2 419,613 som är ungefär lika med 2 400 ballonger",
+   "s": 290.6,
+   "e": 302.7
   },
   {
    "t": "Svar: 2 400 ballonger",
-   "s": 305.51,
-   "e": 309.38
+   "s": 302.7,
+   "e": 306.55
   }
  ]
 }

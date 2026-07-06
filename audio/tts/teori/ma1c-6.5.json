@@ -1,0 +1,188 @@
+{
+ "id": "ma1c-6.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b92abdf7ef572ff07053786e4117d1beb6dc6759",
+ "dur": 189.5,
+ "segments": [
+  {
+   "t": "Vektorer och skalärer",
+   "s": 0.1,
+   "e": 2.84
+  },
+  {
+   "t": "En egenskap som på något sätt kan mätas kallas storhet.",
+   "s": 2.79,
+   "e": 7.45
+  },
+  {
+   "t": "Exempel på storheter är sträcka, hastighet, vikt, volym och temperatur.",
+   "s": 7.45,
+   "e": 13.99
+  },
+  {
+   "t": "Det finns två typer av storheter: vektorer och skalärer.",
+   "s": 13.99,
+   "e": 18.76
+  },
+  {
+   "t": "En storhet som anges med",
+   "s": 18.76,
+   "e": 21.68
+  },
+  {
+   "t": "storlek och riktning kallas vektor.",
+   "s": 21.68,
+   "e": 25.07
+  },
+  {
+   "t": "Exempel på vektorer är hastighet, kraft och acceleration.",
+   "s": 25.07,
+   "e": 30.11
+  },
+  {
+   "t": "endast storlek (ingen riktning) kallas skalär.",
+   "s": 30.11,
+   "e": 34.5
+  },
+  {
+   "t": "Exempel på skalärer är vikt, tid och temperatur.",
+   "s": 34.5,
+   "e": 39.01
+  },
+  {
+   "t": "Vi representerar vektorer med pilar där pilens längd motsvarar vektorns storlek och pilen motsvarar vektorns riktning.",
+   "s": 39.01,
+   "e": 46.77
+  },
+  {
+   "t": "För att beteckna en vektor används ofta en variabel ihop med en pil ovanför, t.ex. vektorn x .",
+   "s": 46.77,
+   "e": 53.79
+  },
+  {
+   "t": "Vektorer kan parallellförflyttas: så länge inte storleken eller riktningen ändras, så är det samma vektor.",
+   "s": 53.79,
+   "e": 60.86
+  },
+  {
+   "t": "Vektorer som är lika stora, men med motsatta riktningar kallas motsatta vektorer.",
+   "s": 60.86,
+   "e": 66.69
+  },
+  {
+   "t": "Vektorer som har samma lutning (men kan ha motsatta riktningar eller vara olika stora) är parallella.",
+   "s": 66.69,
+   "e": 73.28
+  },
+  {
+   "t": "Längden av en vektor vektorn u skrivs längden av vektorn u och utläses \"absolutbeloppet av u \".",
+   "s": 73.28,
+   "e": 80.09
+  },
+  {
+   "t": "Längden av en vektor beräknas med Pythagoras sats, på samma sätt som sträckor i koordinatsystem.",
+   "s": 80.09,
+   "e": 86.92
+  },
+  {
+   "t": "Exempel 1 — Samma, motsatta och parallella",
+   "s": 86.92,
+   "e": 90.99
+  },
+  {
+   "t": "Studera nedanstående vektorer.",
+   "s": 90.99,
+   "e": 94.36
+  },
+  {
+   "t": "Vilka vektorer är. a) samma b) motsatta c) parallella?",
+   "s": 94.36,
+   "e": 101.3
+  },
+  {
+   "t": "a) Eftersom vektorn v ett och vektorn v fyra har samma storlek och riktning är de samma vektor, så vektorn v ett är lika med vektorn v fyra .",
+   "s": 101.3,
+   "e": 110.92
+  },
+  {
+   "t": "Svar: vektorn v ett och vektorn v fyra",
+   "s": 110.92,
+   "e": 115.17
+  },
+  {
+   "t": "b) Eftersom vektorn v ett och vektorn v två har samma storlek, men motsatt riktning är de motsatta vektorer, så vektorn v två är lika med minus vektorn v ett .",
+   "s": 115.17,
+   "e": 126.1
+  },
+  {
+   "t": "Svar: vektorn v två och vektorn v ett",
+   "s": 126.1,
+   "e": 130.34
+  },
+  {
+   "t": "c) Eftersom vektorn v ett , vektorn v två , vektorn v tre och vektorn v fyra har samma lutning är de parallella vektorer.",
+   "s": 130.34,
+   "e": 139.7
+  },
+  {
+   "t": "Svar: vektorn v ett , vektorn v två , vektorn v tre och vektorn v fyra",
+   "s": 139.7,
+   "e": 146.47
+  },
+  {
+   "t": "Exempel 2 — Vektorns längd",
+   "s": 146.47,
+   "e": 149.44
+  },
+  {
+   "t": "Beräkna längden av vektorn A B .",
+   "s": 149.44,
+   "e": 152.66
+  },
+  {
+   "t": "En ruta motsvarar 1 längdenhet",
+   "s": 152.66,
+   "e": 156.1
+  },
+  {
+   "t": "Vi bildar en rätvinklig triangel:",
+   "s": 156.1,
+   "e": 160.99
+  },
+  {
+   "t": "Pythagoras sats ger",
+   "s": 156.1,
+   "e": 160.99
+  },
+  {
+   "t": "längden av vektorn A B i kvadrat är lika med 8 i kvadrat plus 4 i kvadrat",
+   "s": 160.99,
+   "e": 167.2
+  },
+  {
+   "t": "längden av vektorn A B i kvadrat är lika med 64 plus 16",
+   "s": 167.2,
+   "e": 172.78
+  },
+  {
+   "t": "längden av vektorn A B i kvadrat är lika med 80",
+   "s": 172.78,
+   "e": 177.16
+  },
+  {
+   "t": "längden av vektorn A B är lika med plus minus roten ur 80",
+   "s": 177.16,
+   "e": 182.25
+  },
+  {
+   "t": "Den negativa lösningen kan bortses.",
+   "s": 182.25,
+   "e": 185.71
+  },
+  {
+   "t": "Svar: roten ur 80 längdenheter",
+   "s": 185.71,
+   "e": 189.5
+  }
+ ]
+}

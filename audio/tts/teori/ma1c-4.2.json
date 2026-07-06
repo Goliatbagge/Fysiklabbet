@@ -1,0 +1,198 @@
+{
+ "id": "ma1c-4.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b7c9fbf452187fceb3c5cbba36661acd573b129b",
+ "dur": 206.57,
+ "segments": [
+  {
+   "t": "Proportionalitet",
+   "s": 0.1,
+   "e": 2.55
+  },
+  {
+   "t": "Ett samband där förhållandet mellan variablerna är konstant kallas proportionalitet.",
+   "s": 2.5,
+   "e": 8.3
+  },
+  {
+   "t": "En proportionalitet är ett specialfall av linjärt samband som kan beskrivas av formeln y är lika med k x och där grafen alltid är en rät linje som går genom origo.",
+   "s": 8.3,
+   "e": 18.52
+  },
+  {
+   "t": "Förhållandet k mellan y och x kallas proportionalitetskonstant.",
+   "s": 18.52,
+   "e": 23.74
+  },
+  {
+   "t": "Proportionaliteter uppstår t.ex. i linjära modeller där startvärdet är 0.",
+   "s": 23.74,
+   "e": 29.56
+  },
+  {
+   "t": "Exempel: När du köper lösviktsgodis betalar du ett visst kilopris.",
+   "s": 29.56,
+   "e": 35.09
+  },
+  {
+   "t": "Priset beror på vikten.",
+   "s": 35.09,
+   "e": 37.79
+  },
+  {
+   "t": "Köper du 0 kilogram godis betalar du 0 kronor (startvärdet är 0).",
+   "s": 37.79,
+   "e": 43.56
+  },
+  {
+   "t": "Vi säger att \"priset är proportionellt mot vikten\".",
+   "s": 43.56,
+   "e": 47.67
+  },
+  {
+   "t": "Proportionalitetskonstanten k motsvarar kilopriset.",
+   "s": 47.67,
+   "e": 52.35
+  },
+  {
+   "t": "Proportionalitet som formel",
+   "s": 52.35,
+   "e": 55.24
+  },
+  {
+   "t": "Alla proportionaliteter kan skrivas",
+   "s": 55.24,
+   "e": 58.69
+  },
+  {
+   "t": "y är lika med k x",
+   "s": 58.69,
+   "e": 61.46
+  },
+  {
+   "t": "där k kallas proportionalitetskonstant.",
+   "s": 61.46,
+   "e": 65.22
+  },
+  {
+   "t": "Proportionalitet som graf",
+   "s": 65.22,
+   "e": 68.16
+  },
+  {
+   "t": "Grafen till en proportionalitet går alltid genom origo.",
+   "s": 68.16,
+   "e": 72.71
+  },
+  {
+   "t": "Ur formeln följer att proportionalitetskonstanten kan beräknas",
+   "s": 72.71,
+   "e": 77.67
+  },
+  {
+   "t": "k är lika med y delat med x",
+   "s": 77.67,
+   "e": 82.46
+  },
+  {
+   "t": "Exempel 1 — Tanka mopeden",
+   "s": 77.67,
+   "e": 82.46
+  },
+  {
+   "t": "Fabian tankar sin moped med bensin för 20,00 kronor/liter.",
+   "s": 82.46,
+   "e": 88.53
+  },
+  {
+   "t": "Visa sambandet mellan kostnaden y kr och mängden bensin x liter han tankar med en. a) formel, och ange proportionalitetskonstanten b) värdetabell c) graf.",
+   "s": 88.53,
+   "e": 101.71
+  },
+  {
+   "t": "a) Eftersom literpriset 20,00 kronor ska multipliceras med varje liter x han tankar för att få kostnaden måste termen 20,00 x finnas med.",
+   "s": 101.71,
+   "e": 112.39
+  },
+  {
+   "t": "Vi har inget startvärde/ingen startavgift eller liknande, så ingen konstantterm ska finnas med i formeln för kostnaden.",
+   "s": 112.39,
+   "e": 120.15
+  },
+  {
+   "t": "Svar: y är lika med 20,00 x och proportionalitetskonstanten är 20,00.",
+   "s": 120.15,
+   "e": 127.29
+  },
+  {
+   "t": "b) Utifrån formeln ovan kan vi göra en värdetabell.",
+   "s": 127.29,
+   "e": 131.79
+  },
+  {
+   "t": "Vi gör en kolumn för antalet liter bensin x och en för motsvarande kostnad y och fyller i några värden:",
+   "s": 131.79,
+   "e": 142.29
+  },
+  {
+   "t": "c) Utifrån värdetabellen ovan kan vi rita upp en graf.",
+   "s": 131.79,
+   "e": 142.29
+  },
+  {
+   "t": "Vi ritar upp ett koordinatsystem och prickar in motsvarande punkter (0, 0), (5, 100), (10, 200), (15, 300) och (20, 400).",
+   "s": 142.29,
+   "e": 155.62
+  },
+  {
+   "t": "Vi behöver en x-axel som sträcker sig till 20 och en y-axel som sträcker sig till 400:",
+   "s": 155.62,
+   "e": 170.55
+  },
+  {
+   "t": "Därefter förbinder vi punkterna med en rät linje, vilket ger vår graf:",
+   "s": 155.62,
+   "e": 170.55
+  },
+  {
+   "t": "Grafen till proportionaliteten y är lika med 20 x är en rät linje genom origo.",
+   "s": 155.62,
+   "e": 170.55
+  },
+  {
+   "t": "Exempel 2 — Vilka grafer visar proportionalitet?",
+   "s": 170.55,
+   "e": 174.91
+  },
+  {
+   "t": "Vilken eller vilka av graferna nedan visar en proportionalitet?",
+   "s": 174.91,
+   "e": 179.96
+  },
+  {
+   "t": "För att grafen ska motsvara en proportionalitet ska den vara en rät linje OCH gå genom origo.",
+   "s": 179.96,
+   "e": 186.35
+  },
+  {
+   "t": "Graf B är en rät linje, men går inte genom origo och är därför inte en proportionalitet.",
+   "s": 186.35,
+   "e": 192.99
+  },
+  {
+   "t": "Graf C går visserligen genom origo, men är inte en rät linje och därför inte en proportionalitet.",
+   "s": 192.99,
+   "e": 199.82
+  },
+  {
+   "t": "Endast graf A uppfyller kriterierna för en proportionalitet.",
+   "s": 199.82,
+   "e": 204.46
+  },
+  {
+   "t": "Svar: A",
+   "s": 204.46,
+   "e": 206.57
+  }
+ ]
+}

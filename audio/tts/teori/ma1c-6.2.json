@@ -1,0 +1,248 @@
+{
+ "id": "ma1c-6.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "9bee192921928caaf101ba98aae15c38b5743a8b",
+ "dur": 239.35,
+ "segments": [
+  {
+   "t": "Sinus och cosinus",
+   "s": 0.1,
+   "e": 2.77
+  },
+  {
+   "t": "Kom ihåg från förra genomgången:",
+   "s": 2.73,
+   "e": 7.83
+  },
+  {
+   "t": "Trigonometriska funktioner",
+   "s": 2.73,
+   "e": 7.83
+  },
+  {
+   "t": "tangens v är lika med motstående katet delat med närliggande katet som är lika med a delat med b",
+   "s": 7.83,
+   "e": 24.41
+  },
+  {
+   "t": "sinus v är lika med motstående katet delat med hypotenusa som är lika med a delat med c",
+   "s": 7.83,
+   "e": 24.41
+  },
+  {
+   "t": "cosinus v är lika med närliggande katet delat med hypotenusa som är lika med b delat med c",
+   "s": 7.83,
+   "e": 24.41
+  },
+  {
+   "t": "Eftersom hypotenusan, per definition, alltid är längre än katetrarna kommer sin v och cos v alltid bli tal som är mindre än 1.",
+   "s": 24.41,
+   "e": 32.95
+  },
+  {
+   "t": "Detta eftersom vi dividerar sträckan hos en katet (ett mindre tal) med sträckan hos hypotenusan (ett större tal).",
+   "s": 32.95,
+   "e": 41.15
+  },
+  {
+   "t": "Exempel 1 — Sinus och cosinus ur sidorna",
+   "s": 41.15,
+   "e": 45.33
+  },
+  {
+   "t": "Beräkna för triangeln nedan. a) sin u b) cos u c) sin v d) cos v",
+   "s": 45.33,
+   "e": 54.4
+  },
+  {
+   "t": "a) Vi ska titta på förhållandet mellan motstående katet till vinkeln u och hypotenusan:",
+   "s": 54.4,
+   "e": 67.72
+  },
+  {
+   "t": "sinus u är lika med motstående katet delat med hypotenusa som är lika med 4 delat med 5 som är lika med 0,8",
+   "s": 54.4,
+   "e": 67.72
+  },
+  {
+   "t": "Svar: 4 delat med 5 eller 0,8",
+   "s": 67.72,
+   "e": 71.96
+  },
+  {
+   "t": "b) Närliggande katet till u genom hypotenusan:",
+   "s": 71.96,
+   "e": 83.36
+  },
+  {
+   "t": "cosinus u är lika med närliggande katet delat med hypotenusa som är lika med 3 delat med 5 som är lika med 0,6",
+   "s": 71.96,
+   "e": 83.36
+  },
+  {
+   "t": "Svar: 3 delat med 5 eller 0,6",
+   "s": 83.36,
+   "e": 87.64
+  },
+  {
+   "t": "c) Motstående katet till v genom hypotenusan:",
+   "s": 87.64,
+   "e": 99.5
+  },
+  {
+   "t": "sinus v är lika med motstående katet delat med hypotenusa som är lika med 3 delat med 5 som är lika med 0,6",
+   "s": 87.64,
+   "e": 99.5
+  },
+  {
+   "t": "Svar: 3 delat med 5 eller 0,6",
+   "s": 99.5,
+   "e": 103.78
+  },
+  {
+   "t": "d) Närliggande katet till v genom hypotenusan:",
+   "s": 103.78,
+   "e": 115.5
+  },
+  {
+   "t": "cosinus v är lika med närliggande katet delat med hypotenusa som är lika med 4 delat med 5 som är lika med 0,8",
+   "s": 103.78,
+   "e": 115.5
+  },
+  {
+   "t": "Svar: 4 delat med 5 eller 0,8",
+   "s": 115.5,
+   "e": 119.72
+  },
+  {
+   "t": "Exempel 2 — Bestäm hypotenusan",
+   "s": 119.72,
+   "e": 123.38
+  },
+  {
+   "t": "Bestäm längden hos sidan a .",
+   "s": 123.38,
+   "e": 126.35
+  },
+  {
+   "t": "Figuren är inte skalenlig.",
+   "s": 126.35,
+   "e": 129.4
+  },
+  {
+   "t": "Vi har en vinkel (41 grader) och dess motstående katet.",
+   "s": 129.4,
+   "e": 134.3
+  },
+  {
+   "t": "Vi ska beräkna hypotenusan a .",
+   "s": 134.3,
+   "e": 137.54
+  },
+  {
+   "t": "Då behöver vi ha en trigonometrisk funktion som innehåller motstående katet och hypotenusa.",
+   "s": 137.54,
+   "e": 143.79
+  },
+  {
+   "t": "Vilken är det?",
+   "s": 143.79,
+   "e": 146.04
+  },
+  {
+   "t": "Jo, sinus!",
+   "s": 146.04,
+   "e": 148.43
+  },
+  {
+   "t": "Då använder vi sinus för vinkeln:",
+   "s": 148.43,
+   "e": 162.28
+  },
+  {
+   "t": "sinus 41 grader är lika med 6,1 delat med a",
+   "s": 148.43,
+   "e": 162.28
+  },
+  {
+   "t": "a är lika med 6,1 delat med sinus 41 grader som är lika med 9,297 som är ungefär lika med 9,3 centimeter",
+   "s": 148.43,
+   "e": 162.28
+  },
+  {
+   "t": "Svar: 9,3 centimeter",
+   "s": 162.28,
+   "e": 165.89
+  },
+  {
+   "t": "Exempel 3 — Triangelns area",
+   "s": 165.89,
+   "e": 169.15
+  },
+  {
+   "t": "Beräkna arean av triangeln nedan.",
+   "s": 169.15,
+   "e": 172.55
+  },
+  {
+   "t": "Arean av en triangel är",
+   "s": 172.55,
+   "e": 175.43
+  },
+  {
+   "t": "A är lika med basen gånger höjden delat med 2 som är lika med b gånger h delat med 2",
+   "s": 175.43,
+   "e": 181.64
+  },
+  {
+   "t": "Eftersom triangeln inte är rätvinklig utgör ingen av sidorna höjden.",
+   "s": 181.64,
+   "e": 186.82
+  },
+  {
+   "t": "Vi behöver alltså beräkna höjden h .",
+   "s": 186.82,
+   "e": 190.21
+  },
+  {
+   "t": "Vi väljer sidan 12 som bas och ritar in höjden på triangeln:",
+   "s": 190.21,
+   "e": 200.7
+  },
+  {
+   "t": "Vi har nu bildat en rätvinklig triangel där höjden h utgör motstående katet och sidan 14 hypotenusa.",
+   "s": 190.21,
+   "e": 200.7
+  },
+  {
+   "t": "Vi använder sinus!",
+   "s": 200.7,
+   "e": 203.45
+  },
+  {
+   "t": "sinus 42 grader är lika med h delat med 14 timmar som är lika med 14 gånger sinus 42 grader",
+   "s": 203.45,
+   "e": 211.07
+  },
+  {
+   "t": "Vi har nu höjden!",
+   "s": 211.07,
+   "e": 213.56
+  },
+  {
+   "t": "Insättning av b är lika med 12 och h är lika med 14 gånger sinus 42 grader i formeln för triangelarean A är lika med b gånger h delat med 2 ger",
+   "s": 213.56,
+   "e": 223.81
+  },
+  {
+   "t": "A är lika med 12 gånger 14 gånger sinus 42 grader delat med 2 som är lika med 56,206 som är ungefär lika med 56 areaenheter (areaenheter)",
+   "s": 223.81,
+   "e": 235.68
+  },
+  {
+   "t": "Svar: 56 areaenheter",
+   "s": 235.68,
+   "e": 239.35
+  }
+ ]
+}

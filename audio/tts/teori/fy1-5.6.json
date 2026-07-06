@@ -1,8 +1,8 @@
 {
  "id": "fy1-5.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "6744661770b3bf9d16e359cfac5a715a03a772d9",
- "dur": 350.71,
+ "hash": "8b73014697f1054f0eddc5e3154be899077a1640",
+ "dur": 348.59,
  "segments": [
   {
    "t": "Ideala gaslagen och kelvinskalan",
@@ -187,87 +187,87 @@
   {
    "t": "p ett gånger V ett delat med T ett är lika med p två gånger V två delat med T två vilket är ekvivalent med att T två är lika med p två gånger V två gånger T ett delat med p ett gånger V ett",
    "s": 205.45,
-   "e": 218.39
+   "e": 218.36
   },
   {
    "t": "p ett är lika med 101 kilopascal V ett som är lika med 1 200 kubikmeter T ett som är lika med 15 grader coulomb som är lika med 15 plus 273 som är lika med 288 kelvin p två som är lika med 80 kilopascal V två som är lika med 1 400 kubikmeter",
-   "s": 218.39,
-   "e": 236.72
+   "s": 218.36,
+   "e": 236.78
   },
   {
-   "t": "T två är lika med 80 gånger 1 400 gånger 288 delat med 101 gånger 1 200 som är lika med 266,138 ldots kelvin som är ungefär lika med 266 kelvin som är lika med parentesen 266 minus 273 slut parentes grader coulomb som är lika med minus 7 grader coulomb",
-   "s": 236.72,
-   "e": 260.01
+   "t": "T två är lika med 80 gånger 1 400 gånger 288 delat med 101 gånger 1 200 som är lika med 266,138 kelvin som är ungefär lika med 266 kelvin som är lika med parentesen 266 minus 273 slut parentes grader coulomb som är lika med minus 7 grader coulomb",
+   "s": 236.78,
+   "e": 261.62
   },
   {
    "t": "Svar: −7 grader Celsius",
-   "s": 260.01,
-   "e": 263.23
+   "s": 236.78,
+   "e": 261.62
   },
   {
    "t": "Exempel 2 — Klassrum med uppvärmning",
-   "s": 263.23,
-   "e": 266.82
+   "s": 261.62,
+   "e": 265.2
   },
   {
    "t": "I ett klassrum finns 30 elever.",
-   "s": 266.82,
-   "e": 270.3
+   "s": 265.2,
+   "e": 268.68
   },
   {
    "t": "Temperaturen vid lektionens start är 20 grader Celsius och trycket är 103 kilopascal.",
-   "s": 270.3,
-   "e": 276.99
+   "s": 268.68,
+   "e": 275.36
   },
   {
    "t": "När lektionen slutar har temperaturen stigit till 28 grader Celsius.",
-   "s": 276.99,
-   "e": 282.34
+   "s": 275.36,
+   "e": 280.71
   },
   {
    "t": "Hur stort är det nya trycket i klassrummet?",
-   "s": 282.34,
-   "e": 286.04
+   "s": 280.71,
+   "e": 284.41
   },
   {
    "t": "Vi ställer upp ideala gaslagen och löser ut det nya trycket p två .",
-   "s": 286.04,
-   "e": 291.21
+   "s": 284.41,
+   "e": 289.59
   },
   {
    "t": "p ett gånger V ett delat med T ett är lika med p två gånger V två delat med T två vilket är ekvivalent med att p två är lika med p ett gånger V ett gånger T två delat med T ett gånger V två",
-   "s": 291.21,
-   "e": 303.88
+   "s": 289.59,
+   "e": 302.2
   },
   {
    "t": "Luftens volym inne i klassrummet är densamma före och efter så V ett är lika med V två .",
-   "s": 303.88,
-   "e": 310.25
+   "s": 302.2,
+   "e": 308.57
   },
   {
    "t": "Det innebär att vi kan förkorta bort V ett och V två i sambandet ovan, så",
-   "s": 310.25,
-   "e": 317.86
+   "s": 308.57,
+   "e": 316.19
   },
   {
    "t": "p två är lika med p ett gånger T två delat med T ett",
-   "s": 317.81,
-   "e": 322.77
+   "s": 316.14,
+   "e": 321.08
   },
   {
    "t": "p ett är lika med 103 kilopascal T ett som är lika med 20 grader coulomb som är lika med 293 kelvin T två som är lika med 28 grader coulomb som är lika med 301 kelvin",
-   "s": 322.77,
-   "e": 335.24
+   "s": 321.08,
+   "e": 333.56
   },
   {
-   "t": "p två är lika med 103 gånger 301 delat med 293 som är lika med 105,812 ldots kilopascal som är ungefär lika med 110 kilopascal",
-   "s": 335.24,
-   "e": 347.11
+   "t": "p två är lika med 103 gånger 301 delat med 293 som är lika med 105,812 kilopascal som är ungefär lika med 110 kilopascal",
+   "s": 333.56,
+   "e": 344.99
   },
   {
    "t": "Svar: 110 kilopascal",
-   "s": 347.11,
-   "e": 350.71
+   "s": 344.99,
+   "e": 348.59
   }
  ]
 }

@@ -1,8 +1,8 @@
 {
  "id": "fy1-2.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "46b05488520a8207566b5a2a6bd4c5ba9c586077",
- "dur": 106.11,
+ "hash": "52fecd2eb3904ee9c5a9fe87bb6c0ff26ec1c91a",
+ "dur": 106.08,
  "segments": [
   {
    "t": "Acceleration-tid-diagram",
@@ -75,24 +75,24 @@
    "e": 79.84
   },
   {
-   "t": "delta hastigheten v är lika med arean A som är lika med 4 gånger 5 som är lika med 20 meter per sekund parentesen hastighetsökningmed20 meter per sekund slut parentes",
+   "t": "delta hastigheten v är lika med arean A som är lika med 4 gånger 5 som är lika med 20 meter per sekund parentesen hastighetsökning med 20 meter per sekund slut parentes",
    "s": 79.84,
-   "e": 91.11
+   "e": 91.08
   },
   {
    "t": "Eftersom kroppen hade utgångshastigheten 8,0 meter per sekund blir sluthastigheten",
-   "s": 91.11,
-   "e": 97.51
+   "s": 91.08,
+   "e": 97.47
   },
   {
    "t": "8,0 plus 20 är lika med 28 meter per sekund",
-   "s": 97.51,
-   "e": 102.5
+   "s": 97.47,
+   "e": 102.46
   },
   {
    "t": "Svar: 28 meter per sekund",
-   "s": 102.5,
-   "e": 106.11
+   "s": 102.46,
+   "e": 106.08
   }
  ]
 }

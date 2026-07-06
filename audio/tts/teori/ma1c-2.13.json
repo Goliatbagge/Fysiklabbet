@@ -1,0 +1,278 @@
+{
+ "id": "ma1c-2.13",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "980bc6ae8417065d047ae2a9d578aeac299c3933",
+ "dur": 251.36,
+ "segments": [
+  {
+   "t": "Mönster och formler",
+   "s": 0.1,
+   "e": 2.64
+  },
+  {
+   "t": "En serie av tal kallas talföljd.",
+   "s": 2.59,
+   "e": 5.92
+  },
+  {
+   "t": "Talen i talföljden kallas element.",
+   "s": 5.92,
+   "e": 9.49
+  },
+  {
+   "t": "Betrakta nedanstående talföljd:",
+   "s": 9.49,
+   "e": 16.71
+  },
+  {
+   "t": "3, 7, 11, 15, 19,",
+   "s": 9.49,
+   "e": 16.71
+  },
+  {
+   "t": "Elementen betecknas a n där n står för ordningsnumret.",
+   "s": 16.71,
+   "e": 21.57
+  },
+  {
+   "t": "Här gäller",
+   "s": 21.57,
+   "e": 23.59
+  },
+  {
+   "t": "a ett är lika med 3 a två som är lika med 7 a tre som är lika med 11",
+   "s": 23.59,
+   "e": 29.11
+  },
+  {
+   "t": "En formel för att direkt beräkna ett element i talföljden kallas sluten formel.",
+   "s": 29.11,
+   "e": 34.75
+  },
+  {
+   "t": "Exempel 1 — Hitta en sluten formel",
+   "s": 34.75,
+   "e": 38.52
+  },
+  {
+   "t": "Vi har talföljden 3, 7, 11, 15, 19, …. a) Ange en sluten formel för talföljden. b) Vilket är det 100:e talet i talföljden?",
+   "s": 38.52,
+   "e": 53.01
+  },
+  {
+   "t": "a) Vi kallar det n :te talet i talföljden a n .",
+   "s": 53.01,
+   "e": 57.85
+  },
+  {
+   "t": "Vi ser att varje tal i talföljden fås genom att addera 4 till det föregående talet.",
+   "s": 57.85,
+   "e": 64.06
+  },
+  {
+   "t": "Då måste termen 4 n finnas med i formeln, så",
+   "s": 64.06,
+   "e": 68.35
+  },
+  {
+   "t": "a n är lika med 4 n",
+   "s": 68.35,
+   "e": 71.44
+  },
+  {
+   "t": "Vi vet att a ett är lika med 3 , så om vi sätter in n är lika med 1 i formeln ska det bli 3.",
+   "s": 71.44,
+   "e": 77.88
+  },
+  {
+   "t": "Vi testar:",
+   "s": 77.88,
+   "e": 83.14
+  },
+  {
+   "t": "a ett är lika med 4 gånger 1 som är lika med 4",
+   "s": 77.88,
+   "e": 83.14
+  },
+  {
+   "t": "a ett blev 4, som är 1 för mycket (det skulle bli 3).",
+   "s": 83.14,
+   "e": 87.96
+  },
+  {
+   "t": "Eftersom det blev 1 för mycket subtraherar vi med 1 i formeln, så",
+   "s": 87.96,
+   "e": 92.92
+  },
+  {
+   "t": "a n är lika med 4 n minus 1",
+   "s": 92.92,
+   "e": 96.61
+  },
+  {
+   "t": "Vi testar igen:",
+   "s": 96.61,
+   "e": 104.76
+  },
+  {
+   "t": "a ett är lika med 4 gånger 1 minus 1 som är lika med 4 minus 1 som är lika med 3 Stämmer!",
+   "s": 96.61,
+   "e": 104.76
+  },
+  {
+   "t": "a två är lika med 4 gånger 2 minus 1 som är lika med 8 minus 1 som är lika med 7 Stämmer!",
+   "s": 104.76,
+   "e": 112.0
+  },
+  {
+   "t": "a tre är lika med 4 gånger 3 minus 1 som är lika med 12 minus 1 som är lika med 11 Stämmer!",
+   "s": 112.0,
+   "e": 119.16
+  },
+  {
+   "t": "Vi har hittat vår formel!",
+   "s": 119.16,
+   "e": 121.91
+  },
+  {
+   "t": "Svar: a n är lika med 4 n minus 1",
+   "s": 121.91,
+   "e": 126.38
+  },
+  {
+   "t": "b) Vi sätter in n är lika med 100 i den slutna formeln a n är lika med 4 n minus 1 och får",
+   "s": 126.38,
+   "e": 133.95
+  },
+  {
+   "t": "a ett noll noll är lika med 4 gånger 100 minus 1 som är lika med 400 minus 1 som är lika med 399",
+   "s": 133.95,
+   "e": 142.75
+  },
+  {
+   "t": "Svar: 399",
+   "s": 142.75,
+   "e": 146.05
+  },
+  {
+   "t": "Exempel 2 — Prickmönstret",
+   "s": 146.05,
+   "e": 149.11
+  },
+  {
+   "t": "Nedanstående figurer byggs.",
+   "s": 149.11,
+   "e": 152.14
+  },
+  {
+   "t": "a) Ange en sluten formel för antalet prickar i figur n . b) Hur många prickar finns det i figur 1 000?",
+   "s": 152.14,
+   "e": 161.56
+  },
+  {
+   "t": "a) Vi studerar antalet prickar i varje figur:",
+   "s": 161.56,
+   "e": 170.06
+  },
+  {
+   "t": "a ett är lika med 4 a två som är lika med 7 a tre som är lika med 10",
+   "s": 161.56,
+   "e": 170.06
+  },
+  {
+   "t": "För varje figur ökar antalet prickar med 3.",
+   "s": 170.06,
+   "e": 174.03
+  },
+  {
+   "t": "Termen 3 n bör därför vara med i formeln, så",
+   "s": 174.03,
+   "e": 178.1
+  },
+  {
+   "t": "a n är lika med 3 n",
+   "s": 178.1,
+   "e": 181.24
+  },
+  {
+   "t": "Vi vet att a ett är lika med 4 .",
+   "s": 181.24,
+   "e": 184.71
+  },
+  {
+   "t": "Vi testar att sätta in n är lika med 1 och får a ett är lika med 3 gånger 1 som är lika med 3 .",
+   "s": 184.71,
+   "e": 191.05
+  },
+  {
+   "t": "3 är 1 för lite.",
+   "s": 191.05,
+   "e": 193.68
+  },
+  {
+   "t": "Vi måste alltså addera 1 i formeln för att a ett ska bli 4.",
+   "s": 193.68,
+   "e": 198.34
+  },
+  {
+   "t": "Detta ger",
+   "s": 198.34,
+   "e": 200.3
+  },
+  {
+   "t": "a n är lika med 3 n plus 1",
+   "s": 200.3,
+   "e": 203.94
+  },
+  {
+   "t": "Vi testar igen:",
+   "s": 203.94,
+   "e": 211.64
+  },
+  {
+   "t": "a ett är lika med 3 gånger 1 plus 1 som är lika med 3 plus 1 som är lika med 4 Stämmer!",
+   "s": 203.94,
+   "e": 211.64
+  },
+  {
+   "t": "a två är lika med 3 gånger 2 plus 1 som är lika med 6 plus 1 som är lika med 7 Stämmer!",
+   "s": 211.64,
+   "e": 218.51
+  },
+  {
+   "t": "a tre är lika med 3 gånger 3 plus 1 som är lika med 9 plus 1 som är lika med 10 Stämmer!",
+   "s": 218.51,
+   "e": 225.31
+  },
+  {
+   "t": "Vi har hittat korrekt formel.",
+   "s": 225.31,
+   "e": 228.09
+  },
+  {
+   "t": "Svar: a n är lika med 3 n plus 1",
+   "s": 228.09,
+   "e": 232.45
+  },
+  {
+   "t": "b) Från a-uppgiften har vi att a n är lika med 3 n plus 1 .",
+   "s": 232.45,
+   "e": 238.05
+  },
+  {
+   "t": "Insättning av n är lika med 1 000 ger",
+   "s": 238.05,
+   "e": 241.86
+  },
+  {
+   "t": "a ett noll noll noll är lika med 3 gånger 1 000 plus 1 som är lika med 3 001",
+   "s": 241.86,
+   "e": 248.51
+  },
+  {
+   "t": "Svar: 3 001",
+   "s": 248.51,
+   "e": 251.36
+  }
+ ]
+}

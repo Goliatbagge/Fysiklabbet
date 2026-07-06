@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.11",
  "voice": "sv-SE-SofieNeural",
- "hash": "6417b70ee5648775643cfabd82dc1ffe5e9aaab2",
- "dur": 360.4,
+ "hash": "bf15cedf8a941049c89278253ce5f2a69223322a",
+ "dur": 356.68,
  "segments": [
   {
    "t": "Elektrisk fältstyrka mellan två plattor",
@@ -45,284 +45,284 @@
    "e": 43.26
   },
   {
-   "t": "mathbb energin E är lika med spänningen U delat med avståndet d",
+   "t": "energin E är lika med spänningen U delat med avståndet d",
    "s": 43.26,
-   "e": 48.91
+   "e": 48.41
   },
   {
    "t": "där",
-   "s": 48.91,
-   "e": 50.42
+   "s": 48.41,
+   "e": 49.92
   },
   {
-   "t": "mathbb energin E är lika med elektrisk fältstyrka (N/C eller V/m)",
-   "s": 50.42,
-   "e": 57.67
+   "t": "energin E är lika med elektrisk fältstyrka (N/C eller V/m)",
+   "s": 49.92,
+   "e": 56.75
   },
   {
    "t": "U är lika med spänning mellan plattorna (volt)",
-   "s": 57.67,
-   "e": 61.73
+   "s": 56.75,
+   "e": 60.77
   },
   {
    "t": "d är lika med plattavstånd (meter)",
-   "s": 61.73,
-   "e": 65.7
+   "s": 60.77,
+   "e": 64.75
   },
   {
    "t": "Utifrån denna formel kan vi se att ytterligare en enhet för elektrisk fältstyrka är V/m.",
-   "s": 65.7,
-   "e": 74.51
+   "s": 64.75,
+   "e": 73.56
   },
   {
    "t": "Elektrisk fältstyrka mellan två plattor",
-   "s": 65.7,
-   "e": 74.51
+   "s": 64.75,
+   "e": 73.56
   },
   {
    "t": "Vi placerar en liten positiv laddning Q i ett homogent elektriskt fält mellan två plattor.",
-   "s": 74.51,
-   "e": 81.05
+   "s": 73.56,
+   "e": 80.1
   },
   {
    "t": "Spänningen mellan plattorna är U och avståndet mellan dem d.",
-   "s": 81.05,
-   "e": 85.99
+   "s": 80.1,
+   "e": 85.04
   },
   {
    "t": "En nedåtriktad elektrisk kraft F kommer att verka på laddningen.",
-   "s": 85.99,
-   "e": 90.72
+   "s": 85.04,
+   "e": 89.78
   },
   {
    "t": "Om vi flyttar laddningen från den negativa plattan till den positiva plattan krävs energi E.",
-   "s": 90.72,
-   "e": 96.92
+   "s": 89.78,
+   "e": 95.97
   },
   {
    "t": "Vi uträttar ett arbete W där vi måste ta i med en kraft som motsvarar den elektriska kraften F sträckan d.",
-   "s": 96.92,
-   "e": 104.81
+   "s": 95.97,
+   "e": 103.86
   },
   {
    "t": "Enligt definitionen för spänning gäller",
-   "s": 104.81,
-   "e": 108.29
+   "s": 103.86,
+   "e": 107.34
   },
   {
    "t": "spänningen U är lika med energin E delat med laddningen Q, ekvation 1",
-   "s": 108.29,
-   "e": 114.21
+   "s": 107.34,
+   "e": 113.26
   },
   {
    "t": "Arbetet W som uträttas ger denna ökade elektriska lägesenergi E.",
-   "s": 114.21,
-   "e": 120.01
+   "s": 113.26,
+   "e": 119.06
   },
   {
    "t": "Detta ger energin E är lika med arbetet W .",
-   "s": 120.01,
-   "e": 124.41
+   "s": 119.06,
+   "e": 123.46
   },
   {
    "t": "Sedan tidigare har vi definierat arbete som arbetet W är lika med kraften F gånger sträckan s , där sträckan s i vårt exempel motsvarar plattavståndet d.",
-   "s": 124.41,
-   "e": 135.4
+   "s": 123.46,
+   "e": 134.45
   },
   {
    "t": "Insättning i formeln ovan ger",
-   "s": 135.4,
-   "e": 138.62
+   "s": 134.45,
+   "e": 137.68
   },
   {
    "t": "energin E är lika med kraften F gånger avståndet d",
-   "s": 138.62,
-   "e": 143.71
+   "s": 137.68,
+   "e": 142.76
   },
   {
-   "t": "Enligt definitionen för elektrisk fältstyrka mathbb energin E är lika med kraften F delat med laddningen Q gäller att den elektriska kraften kan skrivas kraften F är lika med mathbb energin E gånger laddningen Q .",
-   "s": 143.71,
-   "e": 156.72
+   "t": "Enligt definitionen för elektrisk fältstyrka energin E är lika med kraften F delat med laddningen Q gäller att den elektriska kraften kan skrivas kraften F är lika med energin E gånger laddningen Q .",
+   "s": 142.76,
+   "e": 154.84
   },
   {
    "t": "Detta i formeln ovan ger",
-   "s": 156.72,
-   "e": 159.78
+   "s": 154.84,
+   "e": 157.89
   },
   {
-   "t": "energin E är lika med mathbb E gånger laddningen Q gånger avståndet d",
-   "s": 159.78,
-   "e": 166.16
+   "t": "energin E är lika med E gånger laddningen Q gånger avståndet d",
+   "s": 157.89,
+   "e": 163.53
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 166.16,
-   "e": 169.47
+   "s": 163.53,
+   "e": 166.84
   },
   {
-   "t": "spänningen U är lika med mathbb energin E gånger laddningen Q gånger avståndet d delat med Q vilket är ekvivalent med att U är lika med mathbb E gånger d",
-   "s": 169.47,
-   "e": 180.45
+   "t": "spänningen U är lika med energin E gånger laddningen Q gånger avståndet d delat med Q vilket är ekvivalent med att U är lika med E gånger d",
+   "s": 166.84,
+   "e": 176.99
   },
   {
-   "t": "Vi löser ut den elektriska fältstyrkan mathbb energin E och får",
-   "s": 180.45,
-   "e": 185.79
+   "t": "Vi löser ut den elektriska fältstyrkan energin E och får",
+   "s": 176.99,
+   "e": 181.9
   },
   {
-   "t": "mathbb energin E är lika med spänningen U delat med avståndet d vilket skulle visas",
-   "s": 185.79,
-   "e": 192.61
+   "t": "energin E är lika med spänningen U delat med avståndet d vilket skulle visas",
+   "s": 181.9,
+   "e": 188.32
   },
   {
    "t": "Enhetsanalys — Elektrisk fältstyrka",
-   "s": 192.61,
-   "e": 196.3
+   "s": 188.32,
+   "e": 192.01
   },
   {
    "t": "Vi vill visa att 1 volt/m är samma sak som 1 newton/C.",
-   "s": 196.3,
-   "e": 202.24
+   "s": 192.01,
+   "e": 197.95
   },
   {
    "t": "Eftersom spänning definieras som spänningen U är lika med energin E delat med laddningen Q gäller",
-   "s": 202.24,
-   "e": 209.01
+   "s": 197.95,
+   "e": 204.72
   },
   {
    "t": "1 volt är lika med 1 joule per coulomb, ekvation 1",
-   "s": 209.01,
-   "e": 213.57
+   "s": 204.72,
+   "e": 209.29
   },
   {
    "t": "Från den tidigare formeln för energi och arbete delta energin E är lika med kraften F gånger sträckan s gäller",
-   "s": 213.57,
-   "e": 221.22
+   "s": 209.29,
+   "e": 216.97
   },
   {
-   "t": "1 joule är lika med 1 newton gånger 1 meter som är lika med 1 newton\\cdotm",
-   "s": 221.22,
-   "e": 227.38
+   "t": "1 joule är lika med 1 newton gånger 1 meter som är lika med 1 newton \\cdot m",
+   "s": 216.97,
+   "e": 225.36
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 227.38,
-   "e": 230.69
+   "s": 216.97,
+   "e": 225.36
   },
   {
-   "t": "1 volt är lika med 1 newton\\cdotm per coulomb",
-   "s": 230.69,
-   "e": 235.6
+   "t": "1 volt är lika med 1 newton \\cdot m / C",
+   "s": 225.36,
+   "e": 231.0
   },
   {
    "t": "För att få V/m i VL, så dividerar vi båda led med m.",
-   "s": 235.6,
-   "e": 248.82
+   "s": 231.0,
+   "e": 245.79
   },
   {
-   "t": "1 volt per meter är lika med 1 newton\\cdotm per (C\\cdotm) som är lika med 1 newton per coulomb vilket skulle visas",
-   "s": 235.6,
-   "e": 248.82
+   "t": "1 volt per meter är lika med 1 newton \\cdot m / (C \\cdot m) som är lika med 1 newton per coulomb vilket skulle visas",
+   "s": 231.0,
+   "e": 245.79
   },
   {
    "t": "Exempel 1 — Spänning mellan plattor",
-   "s": 248.82,
-   "e": 252.45
+   "s": 245.79,
+   "e": 249.45
   },
   {
    "t": "Fältstyrkan mellan två parallella plattor 8,0 centimeter från varandra är 5,0 gånger 10 upphöjt till 4 volt/m.",
-   "s": 252.45,
-   "e": 262.93
+   "s": 249.45,
+   "e": 259.96
   },
   {
    "t": "Bestäm spänningen mellan plattorna.",
-   "s": 252.45,
-   "e": 262.93
+   "s": 249.45,
+   "e": 259.96
   },
   {
    "t": "Vi ställer upp formeln för elektrisk fältstyrka mellan två plattor och löser ut spänningen U.",
-   "s": 262.93,
-   "e": 276.57
+   "s": 259.96,
+   "e": 272.88
   },
   {
-   "t": "mathbb energin E är lika med spänningen U delat med avståndet d vilket är ekvivalent med att U är lika med mathbb E gånger d",
-   "s": 262.93,
-   "e": 276.57
+   "t": "energin E är lika med spänningen U delat med avståndet d vilket är ekvivalent med att U är lika med E gånger d",
+   "s": 259.96,
+   "e": 272.88
   },
   {
-   "t": "mathbb energin E är lika med 5,0 gånger 10 upphöjt till 4 volt per meter avståndet d som är lika med 8,0 centimeter som är lika med 0,080 meter",
-   "s": 276.57,
-   "e": 288.15
+   "t": "energin E är lika med 5,0 gånger 10 upphöjt till 4 volt per meter avståndet d som är lika med 8,0 centimeter som är lika med 0,080 meter",
+   "s": 272.88,
+   "e": 284.07
   },
   {
    "t": "spänningen U är lika med 5,0 gånger 10 upphöjt till 4 gånger 0,080 som är lika med 4 000 volt som är lika med 4,0 kilovolt",
-   "s": 288.15,
-   "e": 298.39
+   "s": 284.07,
+   "e": 294.3
   },
   {
    "t": "Svar: 4,0 kilovolt eller 4 000 volt",
-   "s": 298.39,
-   "e": 303.23
+   "s": 294.3,
+   "e": 299.16
   },
   {
    "t": "Bra att komma ihåg inför arbetet med uppgifterna",
-   "s": 303.23,
-   "e": 307.15
+   "s": 299.16,
+   "e": 303.1
   },
   {
    "t": "Svenska eluttag: 230 volt.",
-   "s": 307.28,
-   "e": 311.28
+   "s": 303.1,
+   "e": 307.05
   },
   {
    "t": "Elektronens laddning och massa:",
-   "s": 311.23,
-   "e": 319.55
+   "s": 307.05,
+   "e": 312.94
   },
   {
    "t": "q e är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb",
-   "s": 311.23,
-   "e": 319.55
+   "s": 307.05,
+   "e": 317.21
   },
   {
    "t": "m e är ungefär lika med 9,11 gånger 10 upphöjt till minus 31 kilogram",
-   "s": 319.55,
-   "e": 326.01
+   "s": 317.16,
+   "e": 323.57
   },
   {
    "t": "Elektrisk energi: energin E är lika med laddningen Q gånger spänningen U",
-   "s": 326.01,
-   "e": 341.25
+   "s": 323.57,
+   "e": 338.81
   },
   {
    "t": "Newtons andra lag: F resistansen R är lika med massan m gånger accelerationen a",
-   "s": 326.01,
-   "e": 341.25
+   "s": 323.57,
+   "e": 338.81
   },
   {
    "t": "Rörelseenergi: E k är lika med massan m hastigheten v i kvadrat delat med 2",
-   "s": 326.01,
-   "e": 341.25
+   "s": 323.57,
+   "e": 338.81
   },
   {
    "t": "Elektrisk fältstyrka:",
-   "s": 341.25,
-   "e": 353.55
+   "s": 338.81,
+   "e": 350.32
   },
   {
-   "t": "Definition: mathbb energin E är lika med kraften F delat med laddningen Q",
-   "s": 341.25,
-   "e": 353.55
+   "t": "Definition: energin E är lika med kraften F delat med laddningen Q",
+   "s": 338.81,
+   "e": 350.32
   },
   {
-   "t": "Klot: mathbb energin E är lika med k gånger laddningen Q delat med r i kvadrat",
-   "s": 341.25,
-   "e": 353.55
+   "t": "Klot: energin E är lika med k gånger laddningen Q delat med r i kvadrat",
+   "s": 338.81,
+   "e": 350.32
   },
   {
-   "t": "Mellan plattor: mathbb energin E är lika med spänningen U delat med avståndet d",
-   "s": 353.55,
-   "e": 360.4
+   "t": "Mellan plattor: energin E är lika med spänningen U delat med avståndet d",
+   "s": 350.32,
+   "e": 356.68
   }
  ]
 }

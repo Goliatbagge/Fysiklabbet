@@ -1,0 +1,353 @@
+{
+ "id": "ma1c-2.11",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "83a26a77186697b71e84f7a2e83b7522cb5c3084",
+ "dur": 341.42,
+ "segments": [
+  {
+   "t": "Olikheter",
+   "s": 0.1,
+   "e": 2.16
+  },
+  {
+   "t": "När två led är lika har vi en ekvation (likhet) som skrivs med likhetstecken, =.",
+   "s": 2.11,
+   "e": 9.3
+  },
+  {
+   "t": "När två led är olika har vi en olikhet som skrivs med olikhetstecken.",
+   "s": 9.3,
+   "e": 14.62
+  },
+  {
+   "t": "Det finns flera olikhetstecken.",
+   "s": 14.62,
+   "e": 17.7
+  },
+  {
+   "t": "Olikhetstecken",
+   "s": 17.7,
+   "e": 19.95
+  },
+  {
+   "t": "Exempel: 3 x minus 4 är lika med 2 är en ekvation.",
+   "s": 19.95,
+   "e": 25.0
+  },
+  {
+   "t": "3 x minus 4 är mindre än 2 är en olikhet.",
+   "s": 25.0,
+   "e": 29.35
+  },
+  {
+   "t": "Tolkningen av olikhetstecknen gäller om vi läser från vänster till höger.",
+   "s": 29.35,
+   "e": 34.74
+  },
+  {
+   "t": "Vi utläser alltså 3 är mindre än 5 som \"3 är mindre än 5\".",
+   "s": 34.74,
+   "e": 39.81
+  },
+  {
+   "t": "En kom ihåg-regel är att olikhetstecknet \"gapar åt\" det större värdet.",
+   "s": 39.81,
+   "e": 44.8
+  },
+  {
+   "t": "En annan är att man ser det som en pil som pekar på det mindre värdet.",
+   "s": 44.8,
+   "e": 49.48
+  },
+  {
+   "t": "Lösa olikheter",
+   "s": 49.48,
+   "e": 51.99
+  },
+  {
+   "t": "Olikheter löses på samma sätt som ekvationer, men olikhetstecknet vänds vid division eller multiplikation med negativa tal.",
+   "s": 51.99,
+   "e": 60.4
+  },
+  {
+   "t": "Olikheter av andra graden löser vi genom att undersöka gränsfallet (se exemplet nedan).",
+   "s": 60.4,
+   "e": 67.42
+  },
+  {
+   "t": "Undersökning — Olikhetstecknets vändning",
+   "s": 67.42,
+   "e": 71.06
+  },
+  {
+   "t": "Vi vet att 5 är större än 3 .",
+   "s": 71.06,
+   "e": 74.26
+  },
+  {
+   "t": "Om vi multiplicerar eller dividerar med ett negativt tal, t.ex. (−1), får vi",
+   "s": 74.26,
+   "e": 80.97
+  },
+  {
+   "t": "5 gånger parentesen minus 1 slut parentes är större än 3 gånger parentesen minus 1 slut parentes",
+   "s": 80.97,
+   "e": 88.3
+  },
+  {
+   "t": "minus 5 är större än minus 3",
+   "s": 88.3,
+   "e": 91.62
+  },
+  {
+   "t": "Men detta är ju falskt eftersom −5 är mindre än −3.",
+   "s": 91.62,
+   "e": 95.9
+  },
+  {
+   "t": "Alltså måste olikhetstecknet vändas, dvs. minus 5 är mindre än minus 3 , vid multiplikation och division med negativa tal.",
+   "s": 95.9,
+   "e": 104.89
+  },
+  {
+   "t": "Exempel 1 — Lös olikheterna",
+   "s": 104.89,
+   "e": 108.29
+  },
+  {
+   "t": "Lös. a) 3 x minus 5 är mindre än 22 b) 7 parentesen 6 minus x slut parentes är mindre än eller lika med 105 c) 6 a delat med 5 är större än 3 a minus 18",
+   "s": 108.29,
+   "e": 123.14
+  },
+  {
+   "t": "a) Vi adderar 5 till båda led:",
+   "s": 123.14,
+   "e": 130.47
+  },
+  {
+   "t": "3 x minus 5 plus 5 är mindre än 22 plus 5",
+   "s": 123.14,
+   "e": 130.47
+  },
+  {
+   "t": "3 x är mindre än 27",
+   "s": 130.47,
+   "e": 133.8
+  },
+  {
+   "t": "Vi dividerar båda led med 3:",
+   "s": 133.8,
+   "e": 140.22
+  },
+  {
+   "t": "3 x delat med 3 är mindre än 27 delat med 3",
+   "s": 133.8,
+   "e": 140.22
+  },
+  {
+   "t": "x är mindre än 9",
+   "s": 140.22,
+   "e": 142.95
+  },
+  {
+   "t": "Svar: x är mindre än 9",
+   "s": 142.95,
+   "e": 146.28
+  },
+  {
+   "t": "b) Vi utvecklar parentesen:",
+   "s": 146.28,
+   "e": 153.62
+  },
+  {
+   "t": "42 minus 7 x är mindre än eller lika med 105",
+   "s": 146.28,
+   "e": 153.62
+  },
+  {
+   "t": "Vi subtraherar 42 från båda led:",
+   "s": 153.62,
+   "e": 162.96
+  },
+  {
+   "t": "42 minus 7 x minus 42 är mindre än eller lika med 105 minus 42",
+   "s": 153.62,
+   "e": 162.96
+  },
+  {
+   "t": "minus 7 x är mindre än eller lika med 63",
+   "s": 162.96,
+   "e": 167.5
+  },
+  {
+   "t": "Vi dividerar med (−7) i båda led.",
+   "s": 167.5,
+   "e": 171.21
+  },
+  {
+   "t": "Eftersom vi dividerar med ett negativt tal ska olikhetstecknet vändas:",
+   "s": 171.21,
+   "e": 181.36
+  },
+  {
+   "t": "minus 7 x delat med minus 7 är större än eller lika med 63 delat med minus 7",
+   "s": 171.21,
+   "e": 181.36
+  },
+  {
+   "t": "x är större än eller lika med minus 9",
+   "s": 181.36,
+   "e": 185.19
+  },
+  {
+   "t": "Svar: x är större än eller lika med minus 9",
+   "s": 185.19,
+   "e": 189.65
+  },
+  {
+   "t": "c) Vi multiplicerar båda led med 5 (vilket motsvarar täljaren är lika med kvoten · nämnaren):",
+   "s": 189.65,
+   "e": 201.19
+  },
+  {
+   "t": "6 a är större än 5 parentesen 3 a minus 18 slut parentes",
+   "s": 189.65,
+   "e": 201.19
+  },
+  {
+   "t": "6 a är större än 15 a minus 90",
+   "s": 201.19,
+   "e": 205.21
+  },
+  {
+   "t": "Vi har variabeltermer på båda sidor.",
+   "s": 205.21,
+   "e": 208.76
+  },
+  {
+   "t": "Vi tar bort a -termen från VL och löser sedan som vanligt.",
+   "s": 208.76,
+   "e": 213.61
+  },
+  {
+   "t": "Subtraherar 6 a från båda led:",
+   "s": 213.61,
+   "e": 219.34
+  },
+  {
+   "t": "0 är större än 9 a minus 90",
+   "s": 213.61,
+   "e": 219.34
+  },
+  {
+   "t": "Adderar 90 till båda led:",
+   "s": 219.34,
+   "e": 228.5
+  },
+  {
+   "t": "90 är större än 9 a",
+   "s": 219.34,
+   "e": 228.5
+  },
+  {
+   "t": "Dividerar med 9:",
+   "s": 219.34,
+   "e": 228.5
+  },
+  {
+   "t": "90 delat med 9 är större än 9 a delat med 9",
+   "s": 219.34,
+   "e": 228.5
+  },
+  {
+   "t": "10 är större än a",
+   "s": 228.5,
+   "e": 231.26
+  },
+  {
+   "t": "När vi svarar med en olikhet vill vi som regel ha variabeln till vänster om olikhetstecknet.",
+   "s": 231.26,
+   "e": 237.66
+  },
+  {
+   "t": "När vi nu vänder på \"10\" och \" a \" måste också olikhetstecknet vändas, dvs. a är mindre än 10 .",
+   "s": 237.66,
+   "e": 244.32
+  },
+  {
+   "t": "Svar: a är mindre än 10",
+   "s": 244.32,
+   "e": 247.64
+  },
+  {
+   "t": "Exempel 2 — Olikheter av andra graden",
+   "s": 247.64,
+   "e": 251.56
+  },
+  {
+   "t": "Lös. a) x i kvadrat är mindre än 9 b) x i kvadrat är större än 9",
+   "s": 251.56,
+   "e": 259.14
+  },
+  {
+   "t": "a) Att lösa olikheter av andra graden gör vi på ett annat sätt.",
+   "s": 259.14,
+   "e": 264.44
+  },
+  {
+   "t": "Vi undersöker vad som gäller på gränsen av intervallet.",
+   "s": 264.44,
+   "e": 268.77
+  },
+  {
+   "t": "På gränsen av intervallet är x i kvadrat är lika med 9 , där lösningen är x är lika med plus minus roten ur 9 som är lika med plus minus 3 .",
+   "s": 268.77,
+   "e": 278.43
+  },
+  {
+   "t": "Vi ritar en tallinje och placerar punkter vid x är lika med minus 3 och x är lika med 3 .",
+   "s": 278.43,
+   "e": 284.89
+  },
+  {
+   "t": "För att x i kvadrat är mindre än 9 gäller nu att x måste vara mellan −3 och 3, vilket vi kan åskådliggöra med en sträcka däremellan:",
+   "s": 284.89,
+   "e": 297.59
+  },
+  {
+   "t": "Detta intervall beskrivs av minus 3 är mindre än x är mindre än 3 .",
+   "s": 284.89,
+   "e": 297.59
+  },
+  {
+   "t": "Svar: minus 3 är mindre än x är mindre än 3",
+   "s": 297.59,
+   "e": 302.24
+  },
+  {
+   "t": "b) Vi studerar gränsen av intervallet, som återigen är x i kvadrat är lika med 9 där lösningen är x är lika med plus minus roten ur 9 som är lika med plus minus 3 .",
+   "s": 302.24,
+   "e": 313.59
+  },
+  {
+   "t": "På motsvarande sätt som i a-uppgiften placerar vi punkter vid x är lika med minus 3 och x är lika med 3 .",
+   "s": 313.59,
+   "e": 320.8
+  },
+  {
+   "t": "För att x i kvadrat är större än 9 gäller nu att x måste vara större än 3 eller mindre än −3, vilket kan åskådliggöras med strålarna nedan:",
+   "s": 320.8,
+   "e": 336.58
+  },
+  {
+   "t": "Dessa intervall beskrivs av x är mindre än minus 3 och x är större än 3 .",
+   "s": 327.2,
+   "e": 336.58
+  },
+  {
+   "t": "Svar: x är mindre än minus 3 och x är större än 3 .",
+   "s": 336.53,
+   "e": 341.42
+  }
+ ]
+}

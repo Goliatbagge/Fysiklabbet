@@ -1,0 +1,198 @@
+{
+ "id": "ma1c-3.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "33dc8ad569cd5257870d5033bd42d0012a087541",
+ "dur": 260.27,
+ "segments": [
+  {
+   "t": "Sparande och ränteberäkningar",
+   "s": 0.1,
+   "e": 3.14
+  },
+  {
+   "t": "När du sätter in pengar på ett konto kan pengarna växa med en viss ränta.",
+   "s": 3.09,
+   "e": 7.84
+  },
+  {
+   "t": "Årsräntan anger med hur många procent beloppet på kontot växer varje år.",
+   "s": 7.84,
+   "e": 13.4
+  },
+  {
+   "t": "Står det bara \"ränta\" i en uppgift är det underförstått årsräntan.",
+   "s": 13.4,
+   "e": 17.98
+  },
+  {
+   "t": "Beloppet som finns på kontot kallas behållning.",
+   "s": 17.98,
+   "e": 21.64
+  },
+  {
+   "t": "Om vi snabbt vill ta reda på behållningen på ett konto varje år kan vi använda ett kalkylblad, t.ex. Google Kalkylark eller Microsoft Excel.",
+   "s": 21.64,
+   "e": 30.19
+  },
+  {
+   "t": "Ett kalkylblad byggs upp av rutor som kallas celler.",
+   "s": 30.19,
+   "e": 34.35
+  },
+  {
+   "t": "Varje cell har ett namn som består av en bokstav och ett tal.",
+   "s": 34.35,
+   "e": 38.92
+  },
+  {
+   "t": "Varje cell som ligger i kolumn A börjar med bokstaven A och varje cell som ligger på rad 1 slutar på talet 1.",
+   "s": 38.92,
+   "e": 46.17
+  },
+  {
+   "t": "Cellen i kolumn A på rad 1 heter alltså A1.",
+   "s": 46.17,
+   "e": 50.9
+  },
+  {
+   "t": "Cellen i kolumn C på rad 5 heter C5.",
+   "s": 50.9,
+   "e": 55.17
+  },
+  {
+   "t": "Om vi ska skriva in beräkningar i en cell inleds formeln i cellen alltid med ett likhetstecken, =.",
+   "s": 55.17,
+   "e": 62.17
+  },
+  {
+   "t": "Exempel 1 — Sparkonto i kalkylblad",
+   "s": 62.17,
+   "e": 65.95
+  },
+  {
+   "t": "Du sätter in pengar på ett konto.",
+   "s": 65.95,
+   "e": 68.99
+  },
+  {
+   "t": "Använd ett kalkylark och beräkna behållningen på kontot varje år till och med år 8 om du. a) sätter in 30 000 kronor med räntan 3,5 procent. b) sätter in 40 000 kronor med räntan 3,5 procent. c) sätter in 40 000 kronor med räntan 4,5 procent",
+   "s": 68.99,
+   "e": 90.99
+  },
+  {
+   "t": "a) Vi öppnar ett kalkylark och gör en kolumn för \"År\" och en kolumn för \"Behållning (kronor)\".",
+   "s": 90.99,
+   "e": 97.76
+  },
+  {
+   "t": "Vi fyller i kolumnen från år 0 till och med år 8.",
+   "s": 97.76,
+   "e": 101.97
+  },
+  {
+   "t": "Vi fyller också i insättningen 30 000 kronor (i cell B2) samt förändringsfaktorn som motsvarar en ökning med 3,5 procent, dvs. 1 plus 0,035 är lika med 1,035 (i cell B12).",
+   "s": 101.97,
+   "e": 116.4
+  },
+  {
+   "t": "För att få behållningen efter ett år ska vi multiplicera 30 000 (värdet i B2) med förändringsfaktorn (värdet i B12).",
+   "s": 116.4,
+   "e": 125.42
+  },
+  {
+   "t": "Vi ställer oss i cell B3 och skriver =B2*B12 och får värdet efter 1 år (31 050 kronor).",
+   "s": 125.42,
+   "e": 134.95
+  },
+  {
+   "t": "För att upprepa beräkningen för de resterande cellerna, så markera cell B3, ta tag i fyllnadshandtaget (det runda hörnet i högra nederkanten) och dra ner till och med cell B10.",
+   "s": 134.95,
+   "e": 146.3
+  },
+  {
+   "t": "Eftersom varje värde ska multipliceras med förändringsfaktorn i B12 ska den cellen \"låsas\" med dollartecken: =B2*$B$12.",
+   "s": 146.3,
+   "e": 156.54
+  },
+  {
+   "t": "b) Om insättningen istället är 40 000 kronor går vi nu bara till cell B2 och ändrar beloppet där till 40 000 kronor.",
+   "s": 156.54,
+   "e": 164.76
+  },
+  {
+   "t": "De resterande värdena ändras automatiskt (automagiskt!).",
+   "s": 164.76,
+   "e": 169.74
+  },
+  {
+   "t": "Efter 8 år är behållningen 52 672,36 kronor.",
+   "s": 169.74,
+   "e": 176.01
+  },
+  {
+   "t": "c) Om räntan istället är 4,5 procent går vi nu bara till cell B12 och ändrar förändringsfaktorn till 1,045.",
+   "s": 176.01,
+   "e": 184.78
+  },
+  {
+   "t": "De resterande värdena ändras återigen automatiskt.",
+   "s": 184.78,
+   "e": 189.16
+  },
+  {
+   "t": "Med 30 000 kronor insatta blir behållningen efter 8 år 42 663,02 kronor.",
+   "s": 189.16,
+   "e": 197.14
+  },
+  {
+   "t": "Exempel 2 — Årligt sparande",
+   "s": 197.14,
+   "e": 200.36
+  },
+  {
+   "t": "Du sätter in 5 000 kronor i slutet av varje år på ett konto med 2,8 procent ränta.",
+   "s": 200.36,
+   "e": 206.96
+  },
+  {
+   "t": "Vad är behållningen på kontot direkt efter 10:e insättningen?",
+   "s": 206.96,
+   "e": 211.62
+  },
+  {
+   "t": "Vi öppnar ett kalkylark och gör en kolumn för \"Insättning\" och en kolumn för \"Behållning (kronor)\".",
+   "s": 211.62,
+   "e": 218.16
+  },
+  {
+   "t": "Vi fyller i kolumnen från insättning 1 till och med insättning 10.",
+   "s": 218.16,
+   "e": 223.22
+  },
+  {
+   "t": "Vi fyller också i insättningen 5 000 kronor för den första insättningen.",
+   "s": 223.22,
+   "e": 228.39
+  },
+  {
+   "t": "För att få behållningen efter den andra insättningen ska det föregående beloppet (5 000 kronor) ha vuxit med 2,8 procent samtidigt som du lägger till ytterligare 5 000 kronor.",
+   "s": 228.39,
+   "e": 239.09
+  },
+  {
+   "t": "Vi ställer oss i cell B3 och skriver =B2*1,028+5000 och får värdet efter den andra insättningen (10 140 kronor).",
+   "s": 239.09,
+   "e": 250.99
+  },
+  {
+   "t": "Vi tar tag i fyllnadshandtaget och drar ner till och med insättning 10:",
+   "s": 250.99,
+   "e": 260.27
+  },
+  {
+   "t": "Svar: 56 794,24 kronor",
+   "s": 250.99,
+   "e": 260.27
+  }
+ ]
+}

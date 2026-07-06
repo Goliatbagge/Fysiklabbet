@@ -1,8 +1,8 @@
 {
  "id": "ma1c-4.11",
  "voice": "sv-SE-SofieNeural",
- "hash": "749a1d1fd87eb98845fe77fb45312dfdfb1d1bfa",
- "dur": 176.34,
+ "hash": "61dc5caf2c36eea1b91296880b5f4abdf61702e8",
+ "dur": 190.7,
  "segments": [
   {
    "t": "Potensfunktioner",
@@ -77,117 +77,127 @@
   {
    "t": "y är lika med x i kubik",
    "s": 68.8,
-   "e": 71.79
+   "e": 71.78
   },
   {
    "t": "y är lika med x upphöjt till minus 1 som är lika med 1 delat med x",
-   "s": 71.79,
-   "e": 82.97
+   "s": 71.78,
+   "e": 89.17
   },
   {
    "t": "y är lika med x upphöjt till 1 delat med 2 som är lika med roten ur x",
-   "s": 71.79,
-   "e": 82.97
+   "s": 71.78,
+   "e": 89.17
+  },
+  {
+   "t": "Undersök själv: prova olika värden på exponenten a (t.ex. 2, 3 eller −1) och konstanten C och se hur grafens form ändras.",
+   "s": 71.78,
+   "e": 89.17
+  },
+  {
+   "t": "Startläget visar y är lika med x i kvadrat .",
+   "s": 89.17,
+   "e": 93.44
   },
   {
    "t": "Exempel 1 — Funktionsvärde och ekvation",
-   "s": 71.79,
-   "e": 82.97
+   "s": 93.44,
+   "e": 97.42
   },
   {
    "t": "Låt f av x är lika med x upphöjt till 4 .. a) Bestäm f av 2 . b) Lös ekvationen f av x är lika med 2",
-   "s": 82.97,
-   "e": 95.15
+   "s": 97.42,
+   "e": 109.51
   },
   {
    "t": "a) Vi sätter in x är lika med 2 i funktionsuttrycket och beräknar värdet:",
-   "s": 95.15,
-   "e": 104.6
+   "s": 109.51,
+   "e": 118.96
   },
   {
    "t": "f av 2 är lika med 2 upphöjt till 4 som är lika med 16",
-   "s": 95.15,
-   "e": 104.6
+   "s": 109.51,
+   "e": 118.96
   },
   {
    "t": "Svar: 16",
-   "s": 104.6,
-   "e": 107.19
+   "s": 118.96,
+   "e": 121.55
   },
   {
    "t": "b) Vi sätter funktionsuttrycket lika med 2 och löser ekvationen:",
-   "s": 107.19,
-   "e": 114.56
+   "s": 121.55,
+   "e": 128.93
   },
   {
    "t": "x upphöjt till 4 är lika med 2",
-   "s": 107.19,
-   "e": 114.56
+   "s": 121.55,
+   "e": 128.93
   },
   {
    "t": "x är lika med plus minus 4:e roten ur 2",
-   "s": 114.56,
-   "e": 118.76
+   "s": 128.93,
+   "e": 133.12
   },
   {
    "t": "(± eftersom exponenten är jämn.)",
-   "s": 118.76,
-   "e": 122.76
+   "s": 133.12,
+   "e": 137.12
   },
   {
    "t": "Svar: x är lika med plus minus 4:e roten ur 2",
-   "s": 122.76,
-   "e": 127.61
+   "s": 137.12,
+   "e": 141.97
   },
   {
    "t": "Exempel 2 — Funktion i funktion",
-   "s": 127.61,
-   "e": 131.19
+   "s": 141.97,
+   "e": 145.55
   },
   {
    "t": "Låt f av x är lika med x upphöjt till 1 delat med 2 och g av x är lika med 4 x i kvadrat .",
-   "s": 131.19,
-   "e": 138.34
+   "s": 145.55,
+   "e": 152.7
   },
   {
    "t": "Bestäm f parentesen g av 2 slut parentes .",
-   "s": 138.34,
-   "e": 142.7
+   "s": 152.7,
+   "e": 157.06
   },
   {
    "t": "Nu har vi en funktion i en funktion.",
-   "s": 142.7,
-   "e": 146.12
+   "s": 157.06,
+   "e": 160.49
   },
   {
    "t": "Då räknar vi \"inifrån och ut\".",
-   "s": 146.12,
-   "e": 149.56
+   "s": 160.49,
+   "e": 163.93
   },
   {
    "t": "Vi beräknar alltså först den inre funktionen, alltså g av 2 :",
-   "s": 149.56,
-   "e": 159.93
+   "s": 163.93,
+   "e": 174.29
   },
   {
    "t": "g av 2 är lika med 4 gånger 2 i kvadrat som är lika med 4 gånger 4 som är lika med 16",
-   "s": 149.56,
-   "e": 159.93
+   "s": 163.93,
+   "e": 174.29
   },
   {
    "t": "Därefter kan vi ersätta g av 2 i den yttre funktionen med 16:",
-   "s": 159.93,
-   "e": 173.88
+   "s": 174.29,
+   "e": 188.24
   },
   {
    "t": "f parentesen g av 2 slut parentes är lika med f av 16 som är lika med 16 upphöjt till 1 delat med 2 som är lika med roten ur 16 som är lika med 4",
-   "s": 159.93,
-   "e": 173.88
+   "s": 174.29,
+   "e": 188.24
   },
   {
    "t": "Svar: 4",
-   "s": 173.88,
-   "e": 176.34
+   "s": 188.24,
+   "e": 190.7
   }
  ]
 }

@@ -41,6 +41,20 @@ $$
 k = \frac{y}{x}
 $$
 
+Undersök själv: dra i reglaget för $k$ och se hur proportionalitetens graf
+ändras. Lägg märke till att linjen alltid går genom origo — oavsett värdet
+på $k$.
+
+::: graf
+titel: y = kx
+uttryck: k*x
+ekvation: y = {k}x
+lutningstriangel: ja
+k: 2, -4, 4, 0.5
+x: -6, 6
+y: -6, 6
+:::
+
 ::: exempel "Exempel 1 — Tanka mopeden"
 **Fabian tankar sin moped med bensin för 20,00 kr/liter. Visa sambandet
 mellan kostnaden $y$ kr och mängden bensin $x$ liter han tankar med en<br>

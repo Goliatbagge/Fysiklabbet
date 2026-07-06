@@ -203,9 +203,13 @@ y: -6, 6
   konstanterna `pi` och `e`. (`·` och `−` tolereras och normaliseras.)
 - `ekvation:` — KaTeX-mall med `{param}`-platshållare. Visas under grafen
   **med aktuella värden insatta, live** (blå som kurvan). Städas automatiskt:
-  `+ -3` → `- 3`, `1x` → `x`, `0x + 3` → `3`, `+ 0` tas bort. **Använd
-  nästan alltid detta** — kopplingen "allmän form ovanför, konkret ekvation
-  under" är kärnpedagogiken. (Utan `ekvation:` visas i stället värde-chips.)
+  `+ -3` → `- 3`, `1x` → `x`, `1 \cdot` → bort, `0x + 3` → `3`, `+ 0` tas
+  bort. **Använd nästan alltid detta** — kopplingen "allmän form ovanför,
+  konkret ekvation under" är kärnpedagogiken. (Utan `ekvation:` visas i
+  stället värde-chips.) **Parameter i exponent:** skriv dubbla klamrar,
+  `x^{{a}}` — substitutionen konsumerar de inre (`{a}` → `2`) och de yttre
+  blir KaTeX-exponentens klamrar (`x^{2}`), vilket krävs för fleteckens-
+  värden som `-1` och `0{,}5`.
 - `lutningstriangel: ja` — streckat "trappsteg" från y-skärningen: 1 steg åt
   höger, Δy steg upp/ner (för räta linjer = `k`), med etiketter. Får
   automatiskt en kryssruta "Visa trappsteget" i widgetens footer. Använd på

@@ -61,6 +61,20 @@ $y = x^{-1} = \dfrac{1}{x}$
 $y = x^{1/2} = \sqrt{x}$
 :::
 
+Undersök själv: prova olika värden på exponenten $a$ (t.ex. 2, 3 eller
+−1) och konstanten $C$ och se hur grafens form ändras. Startläget visar
+$y = x^2$.
+
+::: graf
+titel: y = Cx^a
+uttryck: C*x^a
+ekvation: y = {C}x^{{a}}
+C: 1, -3, 3, 0.5
+a: 2, -2, 3, 1
+x: -4, 4
+y: -2, 6
+:::
+
 ::: exempel "Exempel 1 — Funktionsvärde och ekvation"
 **Låt $f(x) = x^4$.<br>a) Bestäm $f(2)$.&emsp;&emsp;b) Lös ekvationen $f(x) = 2$**
 

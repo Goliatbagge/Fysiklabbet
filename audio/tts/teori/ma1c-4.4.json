@@ -1,8 +1,8 @@
 {
  "id": "ma1c-4.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "640458d2cce669cee06487234298915ab7ff0ffe",
- "dur": 279.88,
+ "hash": "417c8819a8694ad5c2362d06fc98a126d17c455a",
+ "dur": 298.26,
  "segments": [
   {
    "t": "Från graf till ekvation",
@@ -177,92 +177,107 @@
   {
    "t": "Trappstegets höjd motsvarar då förändringen i y-led, vilket skrivs delta y , och trappstegets längd motsvarar förändringen i x-led, vilket skrivs delta x .",
    "s": 180.78,
-   "e": 191.26
+   "e": 191.25
   },
   {
    "t": "Beräkna linjens lutning (k-värde)",
-   "s": 191.26,
-   "e": 194.86
+   "s": 191.25,
+   "e": 194.85
   },
   {
    "t": "k är lika med trappstegets höjd delat med trappstegets längd som är lika med förändring i y -led delat med förändring i x -led som är lika med delta y delat med delta x",
-   "s": 194.86,
-   "e": 207.22
+   "s": 194.85,
+   "e": 210.31
+  },
+  {
+   "t": "Figurerna ovan visade tre linjer i taget — undersök i stället själv genom att dra i k och m nedan.",
+   "s": 194.85,
+   "e": 210.31
+  },
+  {
+   "t": "Det streckade trappsteget har längden 1, så trappstegets höjd är alltid lika med k .",
+   "s": 210.31,
+   "e": 216.16
+  },
+  {
+   "t": "Startläget visar y är lika med 2 x plus 1 från figurerna ovan.",
+   "s": 216.16,
+   "e": 221.85
   },
   {
    "t": "Exempel 1 — Bestäm linjens ekvation",
-   "s": 194.86,
-   "e": 207.22
+   "s": 221.85,
+   "e": 225.6
   },
   {
    "t": "Bestäm ekvationen för linjen nedan.",
-   "s": 207.22,
-   "e": 210.69
+   "s": 225.6,
+   "e": 229.06
   },
   {
    "t": "När vi ska bestämma linjens ekvation ska vi ta fram dess k - och m -värde och sedan sätta in dem i räta linjens ekvation y är lika med k x plus m .",
-   "s": 210.69,
-   "e": 219.93
+   "s": 229.06,
+   "e": 238.31
   },
   {
    "t": "k är lika med 2 (linjen går upp två steg för varje steg vi går åt höger)",
-   "s": 219.93,
-   "e": 225.71
+   "s": 238.31,
+   "e": 244.1
   },
   {
    "t": "m är lika med 3 (linjens skärning med y-axeln)",
-   "s": 225.71,
-   "e": 230.0
+   "s": 244.1,
+   "e": 248.39
   },
   {
    "t": "Insättning av k är lika med 2 och m är lika med 3 i räta linjens ekvation ger y är lika med 2 x plus 3 .",
-   "s": 230.0,
-   "e": 237.57
+   "s": 248.39,
+   "e": 255.96
   },
   {
    "t": "Svar: y är lika med 2 x plus 3",
-   "s": 237.57,
-   "e": 241.68
+   "s": 255.96,
+   "e": 260.06
   },
   {
    "t": "Exempel 2 — Bestäm riktningskoefficienten",
-   "s": 241.68,
-   "e": 245.54
+   "s": 260.06,
+   "e": 263.93
   },
   {
    "t": "Bestäm linjens riktningskoefficient.",
-   "s": 245.54,
-   "e": 248.88
+   "s": 263.93,
+   "e": 267.26
   },
   {
    "t": "Riktningskoefficienten är detsamma som lutningen eller k -värdet.",
-   "s": 248.88,
-   "e": 253.75
+   "s": 267.26,
+   "e": 272.14
   },
   {
    "t": "Här är det svårt att enkelt se k -värdet.",
-   "s": 253.75,
-   "e": 257.65
+   "s": 272.14,
+   "e": 276.04
   },
   {
    "t": "Vi markerar två valfria punkter som är lätta att läsa av på linjen och ritar ett \"trappsteg\" mellan dessa:",
-   "s": 257.65,
-   "e": 275.35
+   "s": 276.04,
+   "e": 293.74
   },
   {
    "t": "Vi ser nu enkelt att delta y är lika med minus 3 och delta x är lika med 5 :",
-   "s": 257.65,
-   "e": 275.35
+   "s": 276.04,
+   "e": 293.74
   },
   {
    "t": "k är lika med delta y delat med delta x som är lika med minus 3 delat med 5 som är lika med minus 3 delat med 5",
-   "s": 257.65,
-   "e": 275.35
+   "s": 276.04,
+   "e": 293.74
   },
   {
    "t": "Svar: k är lika med minus 3 delat med 5",
-   "s": 275.35,
-   "e": 279.88
+   "s": 293.74,
+   "e": 298.26
   }
  ]
 }

@@ -75,6 +75,21 @@ befolkningstillväxt.
 beskriva radioaktivt sönderfall.
 :::
 
+Undersök själv hur $C$ och $a$ formar exponentialfunktionen. Den röda
+pricken visar skärningen med y-axeln — den ligger alltid i höjd med $C$,
+eftersom $y = C \cdot a^0 = C$ när $x = 0$. Prova värden på
+förändringsfaktorn $a$ både över och under 1.
+
+::: graf
+titel: y = C \cdot a^x
+uttryck: C*a^x
+ekvation: y = {C} \cdot {a}^x
+C: 1, 0.5, 4, 0.5
+a: 1.5, 0.2, 2.5, 0.1
+x: -4, 4
+y: -1, 7
+:::
+
 ::: exempel "Exempel 3 — Vilken funktion är uppritad?"
 **Vilken funktion är uppritad: $f(x) = 3^x$ eller $g(x) = 2^x$?**
 

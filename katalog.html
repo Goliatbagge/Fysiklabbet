@@ -300,11 +300,18 @@
 
         marked.setOptions({ gfm: true, breaks: false });
 
+        // Kurskod för id/hash — 'Fysik nivå 1' → 'fy1', 'Matematik nivå 1c' → 'ma1c'
+        function courseCode(courseName) {
+            if (courseName === 'Fysik nivå 1') return 'fy1';
+            if (courseName === 'Fysik nivå 2') return 'fy2';
+            if (courseName === 'Matematik nivå 1c') return 'ma1c';
+            return null;
+        }
+
         // id-konvention för teori-uppslag — t.ex. Fysik + "2.3" → "fy1-2.3"
         function teoriId(courseName, num) {
-            if (courseName === 'Fysik nivå 1') return 'fy1-' + num;
-            if (courseName === 'Fysik nivå 2') return 'fy2-' + num;
-            return null;
+            const code = courseCode(courseName);
+            return code ? code + '-' + num : null;
         }
 
         const normalize = (text) => text.toLowerCase()
@@ -350,6 +357,7 @@
                                 <div className="lab-nav-dd-menu">
                                     <a href="katalog.html#fy1">Fysik nivå 1</a>
                                     <a href="katalog.html#fy2">Fysik nivå 2</a>
+                                    <a href="katalog.html#ma1c">Matematik nivå 1c</a>
                                 </div>
                             </div>
                             <a href="simuleringar.html">Simuleringar</a>
@@ -408,7 +416,7 @@
                 // en teori-länk (alltid) och en simulering-länk (om href finns).
                 const out = [];
                 for (const sim of filtered) {
-                    const code = sim.course === 'Fysik nivå 2' ? 'fy2' : 'fy1';
+                    const code = courseCode(sim.course) || 'fy1';
                     out.push({ ...sim, kind: 'teori', resultHref: `katalog.html#${code}-${sim.num}` });
                     if (sim.href) {
                         out.push({ ...sim, kind: 'sim', resultHref: sim.href });
@@ -477,19 +485,6 @@
                             </a>
                         ))}
                     </div>
-                </div>
-            );
-        }
-
-        function MathematicsPlaceholder() {
-            return (
-                <div className="lab-placeholder">
-                    <div className="lab-placeholder-title">Under uppbyggnad</div>
-                    <p className="lab-placeholder-text">
-                        Matematik-katalogen kommer hösten 2026. Vi planerar att täcka
-                        Matematik 1 till 4 med samma typ av interaktiva utforskningar
-                        som fysiken — i samma bibliotek.
-                    </p>
                 </div>
             );
         }
@@ -1513,13 +1508,8 @@
 
             return (
                 <section className="lab-section lab-catalog">
-                    {/* Kurs-nivån borttagen — Fysik/2 finns i headern */}
-                    {isMath ? (
-                        <div className="lab-level-3" style={{ paddingBottom: 24, marginBottom: 28 }}>
-                            <MathematicsPlaceholder />
-                        </div>
-                    ) : (
-                        <div className="lab-level-3">
+                    {/* Kurs-nivån borttagen — kurserna nås via Ämne-menyn i headern */}
+                    <div className="lab-level-3">
                             {/* Nivå 1: Kapitel */}
                             <div className="lab-mono-label" style={{ marginBottom: 12 }}>KAPITEL</div>
                                 <div className="lab-tabs-3">
@@ -1605,7 +1595,8 @@
                                                             <div className="lab-card-meta">Kommer snart</div>
                                                         </div>
                                                     )}
-                                                    {activeSection.href ? (
+                                                    {/* Matte har inga simuleringar — visa inte kortet alls där */}
+                                                    {!isMath && (activeSection.href ? (
                                                         <a className="lab-card lab-card-clickable" href={activeSection.href}>
                                                             <div className="lab-card-tag">Experiment</div>
                                                             <div className="lab-card-title">Simulering</div>
@@ -1617,7 +1608,7 @@
                                                             <div className="lab-card-title">Simulering</div>
                                                             <div className="lab-card-meta">Kommer snart</div>
                                                         </div>
-                                                    )}
+                                                    ))}
                                                     {hasOvningar ? (
                                                         <button type="button"
                                                             className={'lab-card ' + (view === 'ovningar' ? 'lab-card-active' : 'lab-card-clickable')}
@@ -1746,8 +1737,7 @@
                                     </div>
                                 </div>
                                 )}
-                        </div>
-                    )}
+                    </div>
 
                     <div style={{ height: 28 }} />
                 </section>
@@ -1768,11 +1758,24 @@
         //   katalog.html#fy1            → Fysik, kursintro
         //   katalog.html#fy2-3          → Fysik nivå 2, kapitel 3 (första avsnittet)
         //   katalog.html#fy1-2.3        → Fysik, kapitel 2, avsnitt 2.3
+        //   katalog.html#ma1c-1.1       → Matematik nivå 1c, kapitel 1, avsnitt 1.1
+        // Kurskod → [ämne, kurs] för hash-djuplänkar.
+        const HASH_COURSES = {
+            fy1: ['Fysik', 'Fysik nivå 1'],
+            fy2: ['Fysik', 'Fysik nivå 2'],
+            ma1c: ['Matematik', 'Matematik nivå 1c'],
+        };
         function parseInitialState() {
-            const subject = 'Fysik';
-            const subj = K[subject];
+            const out = { subject: 'Fysik', course: null, chapter: null, section: null, view: 'teori' };
+
+            const hash = (window.location.hash || '').replace(/^#/, '');
+            const m = hash.match(/^(fy1|fy2|ma1c)(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar|exitticket))?$/);
+            if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
+                out.subject = HASH_COURSES[m[1]][0];
+            }
+            const subj = K[out.subject];
             const courses = Object.keys(subj.courses);
-            const out = { subject, course: courses[0] || null, chapter: null, section: null, view: 'teori' };
+            out.course = courses[0] || null;
 
             const params = new URLSearchParams(window.location.search);
             const courseParam = params.get('course');
@@ -1780,12 +1783,10 @@
                 out.course = courseParam;
             }
 
-            const hash = (window.location.hash || '').replace(/^#/, '');
-            const m = hash.match(/^fy([12])(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar|exitticket))?$/);
             if (m && m[4]) out.view = m[4];
             if (m) {
-                const courseKey = m[1] === '1' ? 'Fysik nivå 1' : 'Fysik nivå 2';
-                if (subj.courses[courseKey]) {
+                const courseKey = HASH_COURSES[m[1]] && HASH_COURSES[m[1]][1];
+                if (courseKey && subj.courses[courseKey]) {
                     out.course = courseKey;
                     if (m[2]) {
                         const chapNum = parseInt(m[2], 10);

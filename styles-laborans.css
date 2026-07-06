@@ -1684,12 +1684,15 @@ button.lab-card-disabled { pointer-events: none; }
 }
 .lab-block-demo .lab-block-title { color: #8a4a18; }
 
-/* Härledning — persika (samma som demo) */
-.lab-block-harledning {
+/* Härledning — persika (samma som demo). Md-filerna skriver "::: härledning"
+   (med ä → klassen lab-block-härledning), så båda stavningarna måste träffas. */
+.lab-block-harledning,
+.lab-block-härledning {
     background: #f7e4cf;
     border-color: #d8b48a;
 }
-.lab-block-harledning .lab-block-title { color: #8a4a18; }
+.lab-block-harledning .lab-block-title,
+.lab-block-härledning .lab-block-title { color: #8a4a18; }
 
 /* Kuriosa — persika (samma som demo) */
 .lab-block-kuriosa {

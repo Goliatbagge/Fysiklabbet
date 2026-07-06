@@ -26,7 +26,8 @@ const WK = loadWindowScript('C:/claude/Fysiklabbet/data/katalog.js');
 const sections = [];
 for (const subj of Object.values(WK.KATALOG)) {
     for (const [courseName, course] of Object.entries(subj.courses || {})) {
-        const code = courseName === 'Fysik nivå 2' ? 'fy2' : 'fy1';
+        const code = courseName === 'Fysik nivå 2' ? 'fy2'
+                   : courseName === 'Matematik nivå 1c' ? 'ma1c' : 'fy1';
         for (const ch of Object.values(course.chapters || {})) {
             for (const s of ch.sections || []) sections.push(code + '-' + s.num);
         }

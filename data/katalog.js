@@ -253,8 +253,126 @@ window.KATALOG = {
       },
     },
   },
-  // Matematik-ämnet är borttaget för tillfället; återinför objektet ovanför
-  // denna kommentar när matte-innehållet är redo.
+  'Matematik': {
+    label: 'Matematik',
+    courses: {
+      // Matematik nivå 1c byggs ut avsnitt för avsnitt från genomgångarna i
+      // Genomgångar/Matematik nivå 1c/ — se .claude/matematik-plan.md för
+      // plan, kapitelmappning och status. Avsnitt läggs in här FÖRST när
+      // teori + övningar + exit ticket är klara (annars faller
+      // verify-exittickets.js och eleven möter tomma avsnitt).
+      // Inga simuleringar för matte — href: null, icon: null.
+      'Matematik nivå 1c': {
+        label: 'Matematik nivå 1c',
+        intro: {
+          tagline: 'Gymnasiets första matematikkurs för naturvetare och tekniker.',
+          paragraphs: [
+            'Matematik nivå 1c lägger grunden för all matematik på gymnasiet. Vi börjar med aritmetiken — talmängder, bråk, potenser och prioriteringsregler — och bygger vidare mot algebra och ekvationslösning, procentuella förändringar och privatekonomi, räta linjer och funktioner, statistik och sannolikhetslära samt trigonometri med vektorer.',
+            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+          ],
+          bullets: [
+            'Du lär dig: taluppfattning, algebra, funktioner och trigonometri',
+            'Du tränar på: ekvationslösning, procenträkning och problemlösning',
+            'Du möter: statistik, sannolikhetslära och vektorer',
+          ],
+        },
+        chapters: {
+          'Aritmetik': {
+            number: 1,
+            intro: 'Om tal och räkning — grunden som resten av kursen vilar på. Vi går igenom talmängderna och räknereglerna för negativa tal, bråkräkningens fyra räknesätt, tal i decimalform, potenser med olika slags exponenter, prefix och prioriteringsregler.',
+            sections: [
+              { num: '1.1', title: 'Talmängder och negativa tal', description: 'Naturliga tal, heltal, rationella och reella tal — och räknereglerna för negativa tal.', href: null, icon: null, keywords: ['aritmetik','talmängder','naturliga tal','heltal','rationella tal','reella tal','irrationella tal','negativa tal','tallinje','olikhetstecken','teckenregler'] },
+              { num: '1.2', title: 'Bråk', description: 'Täljare och nämnare, förlängning och förkortning — och hur man jämför bråk.', href: null, icon: null, keywords: ['aritmetik','bråk','täljare','nämnare','förlänga','förkorta','förlängning','förkortning','jämföra bråk','andel'] },
+              { num: '1.3', title: 'Addition och subtraktion av bråk', description: 'Gemensam nämnare, minsta gemensamma nämnaren och växling mellan bråkform och blandad form.', href: null, icon: null, keywords: ['aritmetik','bråk','addition','subtraktion','gemensam nämnare','minsta gemensamma nämnaren','mgn','blandad form','bråkform'] },
+              { num: '1.4', title: 'Multiplikation och division av bråk', description: 'Multiplicera täljare och nämnare, invertera vid division — och bråkdel av något.', href: null, icon: null, keywords: ['aritmetik','bråk','multiplikation','division','invertera','faktorisera','bråkdel','andel av'] },
+              { num: '1.5', title: 'Tal i decimalform', description: 'Positionssystemet, avrundning och värdesiffror — och hur noggrant ett svar ska anges.', href: null, icon: null, keywords: ['aritmetik','decimalform','positionssystem','decimala talsystemet','avrundning','närmevärde','avrundningssiffra','värdesiffror','gällande siffror','decimaler'] },
+              { num: '1.6', title: 'Potenser med positiva heltalsexponenter', description: 'Bas, exponent och potenslagarna — multiplicera, dividera och upphöja potenser.', href: null, icon: null, keywords: ['aritmetik','potenser','potens','bas','exponent','potenslagarna','potensform','faktorform','kvadrat','kubik','upphöjt'] },
+              { num: '1.7', title: 'Negativa exponenter och exponenten noll', description: 'Varför a⁰ = 1 och vad negativa exponenter betyder — med bevis för bråkets invers.', href: null, icon: null, keywords: ['aritmetik','potenser','negativ exponent','negativa exponenter','exponenten noll','invers','invertera bråk'] },
+              { num: '1.8', title: 'Rationella exponenter', description: 'Bråk i exponenten — a^(1/n) är n:te roten ur a.', href: null, icon: null, keywords: ['aritmetik','potenser','rationell exponent','rationella exponenter','rot','kvadratrot','kubikrot','tredjeroten','n:te roten'] },
+              { num: '1.9', title: 'Grundpotensform och prefix', description: 'Skriv stora och små tal med tiopotenser — och byt ut tiopotensen mot ett prefix.', href: null, icon: null, keywords: ['aritmetik','grundpotensform','tiopotens','tiopotenser','prefix','kilo','mega','giga','tera','milli','mikro','nano','piko'] },
+              { num: '1.10', title: 'Prioriteringsregler', description: 'I vilken ordning räkneoperationer utförs — parenteser, potenser, multiplikation och addition.', href: null, icon: null, keywords: ['aritmetik','prioriteringsregler','räkneordning','parenteser','potenser','mattedjävulen','term','summa','differens','faktor','produkt','täljare','nämnare','kvot'] },
+              { num: '1.11', title: 'Hur du slår på din räknare', description: 'Testberäkningar för räknaren — rötter, potenser, parenteser i bråk och E-notation.', href: null, icon: null, keywords: ['aritmetik','räknare','miniräknare','grafräknare','e-notation','tiopotens','parenteser','rot','bråk'] },
+            ],
+          },
+          'Algebra och ekvationer': {
+            number: 2,
+            intro: 'Bokstäverna gör entré — uttryck med variabler, förenkling, parenteser och faktorisering. Sedan lär vi oss lösa ekvationer: från balansmetodens grunder till ekvationer med nämnare, andragradsekvationer, potensekvationer, olikheter och formler.',
+            sections: [
+              { num: '2.1', title: 'Teckna och tolka uttryck', description: 'Variabel, koefficient och konstantterm — att skriva och läsa algebraiska uttryck.', href: null, icon: null, keywords: ['algebra','uttryck','variabel','koefficient','variabelterm','konstantterm','teckna uttryck','tolka uttryck','uttryckets värde'] },
+              { num: '2.2', title: 'Förenkla uttryck', description: 'Lägg ihop likadana termer och ta bort parenteser — med teckenbyte vid minus.', href: null, icon: null, keywords: ['algebra','förenkla','uttryck','likadana termer','parentes','parentesuttryck','teckenbyte','omkrets'] },
+              { num: '2.3', title: 'Multiplicera med parenteser', description: 'Distributiva lagen och parentesmultiplikation — utveckla och förenkla uttryck.', href: null, icon: null, keywords: ['algebra','distributiva lagen','multiplicera in','utveckla','parenteser','parentesmultiplikation'] },
+              { num: '2.4', title: 'Faktorisera uttryck', description: 'Bryt ut den största gemensamma faktorn — distributiva lagen baklänges.', href: null, icon: null, keywords: ['algebra','faktorisera','faktorisering','bryta ut','gemensam faktor','produkt'] },
+              { num: '2.5', title: 'Ekvationslösningens grunder', description: 'Balansmetoden — samma operation på båda led tills variabeln står ensam.', href: null, icon: null, keywords: ['algebra','ekvation','ekvationslösning','balansmetoden','lösa ut','vänsterled','högerled','kontroll','prövning'] },
+              { num: '2.6', title: 'Mer om ekvationer', description: 'Variabler i båda led — samla dem på ena sidan. Och ekvationer som saknar lösning.', href: null, icon: null, keywords: ['algebra','ekvation','variabler i båda led','saknar lösning','motsägelse','koefficient'] },
+              { num: '2.7', title: 'Ekvationer med nämnare', description: 'Bli av med nämnarna — korsvis multiplikation, MGN-metoden och förbjudna värden.', href: null, icon: null, keywords: ['algebra','ekvation','nämnare','korsvis multiplikation','mgn','minsta gemensamma nämnaren','ej definierad','division med noll'] },
+              { num: '2.8', title: 'Problemlösning med ekvationer', description: 'Översätt, lös och tolka — från textproblem till ekvation och rimligt svar.', href: null, icon: null, keywords: ['algebra','problemlösning','ekvation','översätta','teckna ekvation','tolka','rimlighet'] },
+              { num: '2.9', title: 'Enkla andra- och tredjegradsekvationer', description: 'x² = a har två lösningar, x³ = a har en — och roten ur negativa tal saknar reella lösningar.', href: null, icon: null, keywords: ['algebra','andragradsekvation','tredjegradsekvation','grad','kvadratrot','tredjeroten','plus minus','reella lösningar'] },
+              { num: '2.10', title: 'Potensekvationer', description: 'Lös xⁿ = a med potenslagar eller rötter — och avgör antalet lösningar med jämn/udda exponent.', href: null, icon: null, keywords: ['algebra','potensekvation','potensekvationer','rot','n:te roten','jämn exponent','udda exponent','antal lösningar'] },
+              { num: '2.11', title: 'Olikheter', description: 'Lös olikheter som ekvationer — men vänd tecknet vid multiplikation med negativa tal.', href: null, icon: null, keywords: ['algebra','olikhet','olikheter','olikhetstecken','större än','mindre än','intervall','vända tecknet'] },
+              { num: '2.12', title: 'Använda formler', description: 'Sätt in värden, lös ut storheter — och håll koll på enheterna.', href: null, icon: null, keywords: ['algebra','formel','formler','storhet','lösa ut','insättning','enheter','hastighet'] },
+              { num: '2.13', title: 'Mönster och formler', description: 'Talföljder och slutna formler — hitta mönstret och beräkna element nummer 1 000 direkt.', href: null, icon: null, keywords: ['algebra','talföljd','mönster','element','sluten formel','ordningsnummer','prickmönster'] },
+            ],
+          },
+          'Procentuella förändringar': {
+            number: 3,
+            intro: 'Procent i praktiken — från promille och ppm till förändringsfaktorer som gör upprepade höjningar och sänkningar till en enda multiplikation. Kapitlet avslutas med privatekonomi: sparande, lån och ränta.',
+            sections: [
+              { num: '3.1', title: 'Procent, promille och ppm', description: 'Hundradelar, tusendelar och miljondelar — andel, del och det hela med procenttriangeln.', href: null, icon: null, keywords: ['procent','promille','ppm','andel','delen','hela','procenttriangeln','koncentration'] },
+              { num: '3.2', title: 'Förändringsfaktor', description: 'Nya värdet med en enda multiplikation — och procentuella jämförelser åt båda hållen.', href: null, icon: null, keywords: ['procent','förändringsfaktor','nya värdet','gamla värdet','prisökning','prissänkning','jämförelse','rabatt'] },
+              { num: '3.3', title: 'Upprepade procentuella förändringar', description: 'Multiplicera förändringsfaktorerna — och varför +15 % följt av −15 % inte ger 0 %.', href: null, icon: null, keywords: ['procent','upprepade förändringar','total förändringsfaktor','ränta på ränta','sparkonto','exponentiell'] },
+              { num: '3.4', title: 'Sparande och ränteberäkningar', description: 'Ränta, behållning och kalkylblad — låsta cellreferenser och årligt sparande.', href: null, icon: null, keywords: ['procent','ränta','årsränta','sparande','sparkonto','behållning','kalkylblad','kalkylark','excel','cell','fyllnadshandtag'] },
+              { num: '3.5', title: 'Lån och ränteberäkningar', description: 'Amortering, ränta och total lånekostnad — rak amortering månad för månad i kalkylblad.', href: null, icon: null, keywords: ['procent','lån','ränta','räntesats','amortera','amortering','rak amortering','skuld','inbetalning','lånekostnad','privatekonomi'] },
+            ],
+          },
+          'Räta linjer och funktioner': {
+            number: 4,
+            intro: 'Koordinatsystemet blir hemmaplan — linjära modeller, proportionalitet och räta linjens ekvation y = kx + m. Vi går från ekvation till graf och tillbaka, möter funktionsbegreppet med definitions- och värdemängd, och avslutar med exponential- och potensfunktioner.',
+            sections: [
+              { num: '4.1', title: 'Koordinatsystem och linjära modeller', description: 'x-axel, y-axel, origo och kvadranter — och linjära modeller som formel, tabell och graf.', href: null, icon: null, keywords: ['räta linjer','koordinatsystem','koordinater','origo','kvadrant','kvadranter','linjär modell','värdetabell','graf'] },
+              { num: '4.2', title: 'Proportionalitet', description: 'y = kx — rät linje genom origo med konstant förhållande mellan variablerna.', href: null, icon: null, keywords: ['räta linjer','proportionalitet','proportionell','proportionalitetskonstant','origo','kilopris'] },
+              { num: '4.3', title: 'Från ekvation till graf', description: 'Värdetabell, inprickade punkter och en rät linje — rita grafen för hand.', href: null, icon: null, keywords: ['räta linjer','graf','rita graf','värdetabell','ekvation','koordinater','geogebra'] },
+              { num: '4.4', title: 'Från graf till ekvation', description: 'k är lutningen och m är skärningen med y-axeln — trappstegsmetoden ger k = Δy/Δx.', href: null, icon: null, keywords: ['räta linjer','räta linjens ekvation','k-värde','m-värde','lutning','riktningskoefficient','y-intercept','trappstegsmetoden','delta'] },
+              { num: '4.5', title: 'Räta linjens ekvation', description: 'Tvåpunktsformeln k = (y₂ − y₁)/(x₂ − x₁) — och m ur en känd punkt.', href: null, icon: null, keywords: ['räta linjer','räta linjens ekvation','rle','riktningskoefficient','tvåpunktsformeln','k-värde','m-värde'] },
+              { num: '4.6', title: 'Parallella och vertikala linjer samt räta linjens ekvation i allmän form', description: 'Samma k-värde ger parallella linjer, x = a beskriver lodräta — och ax + by + c = 0 klarar alla.', href: null, icon: null, keywords: ['räta linjer','parallella linjer','vertikal linje','lodrät linje','allmän form','k-form'] },
+              { num: '4.7', title: 'Funktion och funktionsvärde', description: 'Varje x ger exakt ett y — funktionsmaskinen, f(x)-skrivsättet och avläsning ur grafer.', href: null, icon: null, keywords: ['funktioner','funktion','funktionsvärde','f(x)','beroende variabel','oberoende variabel','linjär funktion','funktionsmaskin'] },
+              { num: '4.8', title: 'Ekvationslösning med grafritande hjälpmedel', description: 'Rita y = VL och y = HL i GeoGebra — skärningspunktens x-koordinat är lösningen.', href: null, icon: null, keywords: ['funktioner','grafisk lösning','geogebra','skärningspunkt','ekvationslösning','olikhet','grafritande'] },
+              { num: '4.9', title: 'Definitionsmängd och värdemängd', description: 'Tillåtna x- och y-värden — med ifyllda och tomma ringar i grafens ändpunkter.', href: null, icon: null, keywords: ['funktioner','definitionsmängd','värdemängd','intervall','ifylld ring','tom ring','ändpunkt'] },
+              { num: '4.10', title: 'Exponentialfunktioner', description: 'y = C·aˣ — variabeln i exponenten, med tillväxt när a > 1 och avtagande när a < 1.', href: null, icon: null, keywords: ['funktioner','exponentialfunktion','exponentialfunktioner','exponentiell','tillväxt','avtagande','förändringsfaktor','ränta på ränta','sönderfall'] },
+              { num: '4.11', title: 'Potensfunktioner', description: 'f(x) = C·xᵃ — variabeln i basen, från parabler och hyperblar till rotkurvor.', href: null, icon: null, keywords: ['funktioner','potensfunktion','potensfunktioner','parabel','hyperbel','rotfunktion','funktion i funktion','sammansatt funktion'] },
+            ],
+          },
+          'Statistik och sannolikhetslära': {
+            number: 5,
+            intro: 'Att dra slutsatser av data — undersökningar, urval och felkällor, felmarginaler och skillnaden mellan korrelation och kausalitet. Sedan sannolikhetslärans grunder: den klassiska definitionen, experiment, produktregeln, träddiagram och komplementhändelser.',
+            sections: [
+              { num: '5.1', title: 'Statistiska undersökningar, urval och felkällor', description: 'Population, stickprov och urvalsmetoder — och felkällorna urvalsfel, mätfel och bortfall.', href: null, icon: null, keywords: ['statistik','undersökning','population','stickprov','urval','totalundersökning','slumpmässigt urval','systematiskt urval','stratifierat urval','felkällor','urvalsfel','mätfel','ledande frågor','bortfall'] },
+              { num: '5.2', title: 'Felmarginal och signifikans', description: 'Hur osäkert är resultatet? Felmarginal, konfidensintervall och statistiskt säkerställda förändringar.', href: null, icon: null, keywords: ['statistik','felmarginal','konfidensintervall','signifikans','statistiskt säkerställd','osäkerhet','opinionsmätning'] },
+              { num: '5.3', title: 'Korrelation och kausalitet', description: 'Spridningsdiagram, starka och svaga samband — och varför korrelation inte bevisar orsak.', href: null, icon: null, keywords: ['statistik','korrelation','kausalitet','spridningsdiagram','samband','orsakssamband','skensamband','tredje variabel'] },
+              { num: '5.4', title: 'Den klassiska sannolikhetsdefinitionen', description: 'Gynnsamma utfall genom möjliga — sannolikheter från tärningar, mynt och kortlekar.', href: null, icon: null, keywords: ['sannolikhet','sannolikhetslära','klassiska sannolikhetsdefinitionen','utfall','utfallsrum','gynnsamma utfall','likformig','tärning','mynt','kortlek'] },
+              { num: '5.5', title: 'Experimentella sannolikheter', description: 'När utfallen inte är lika sannolika — relativ frekvens ur upprepade försök.', href: null, icon: null, keywords: ['sannolikhet','experimentell sannolikhet','relativ frekvens','försök','statistik','straffar'] },
+              { num: '5.6', title: 'Produktregeln', description: 'Multiplicera sannolikheterna — oberoende och beroende händelser, med och utan återläggning.', href: null, icon: null, keywords: ['sannolikhet','produktregeln','oberoende händelser','beroende händelser','återläggning','utan återläggning','yatzy'] },
+              { num: '5.7', title: 'Träddiagram', description: 'Multiplicera längs grenarna och addera de gynnsamma — flerstegsförsök med olika sannolikheter.', href: null, icon: null, keywords: ['sannolikhet','träddiagram','grenar','flerstegsförsök','kombination','strumpor'] },
+              { num: '5.8', title: 'Komplementhändelse', description: 'P(händelse) = 1 − P(motsatsen) — nyckeln till "minst en"-uppgifter och födelsedagsparadoxen.', href: null, icon: null, keywords: ['sannolikhet','komplementhändelse','komplement','motsatshändelse','minst en','födelsedagsparadoxen'] },
+            ],
+          },
+          'Trigonometri': {
+            number: 6,
+            intro: 'Trianglarnas matematik — tangens, sinus och cosinus kopplar vinklar till sidor i rätvinkliga trianglar, och de inversa funktionerna räknar baklänges. Kapitlet avslutas med vektorer: storhet med riktning, räkneoperationer och koordinatform.',
+            sections: [
+              { num: '6.1', title: 'Tangens för en vinkel', description: 'Hypotenusa, kateter och tan v = motstående/närliggande — bestäm okända sidor.', href: null, icon: null, keywords: ['trigonometri','tangens','tan','rätvinklig triangel','hypotenusa','katet','motstående','närliggande','vinkel'] },
+              { num: '6.2', title: 'Sinus och cosinus', description: 'sin v och cos v kopplar katetrarna till hypotenusan — och ger triangelns area via höjden.', href: null, icon: null, keywords: ['trigonometri','sinus','cosinus','sin','cos','hypotenusa','katet','triangelarea','area'] },
+              { num: '6.3', title: 'Bestämma vinklar med inversa funktioner', description: 'tan⁻¹, sin⁻¹ och cos⁻¹ — från sidförhållande till vinkel.', href: null, icon: null, keywords: ['trigonometri','invers','inversa funktioner','arctan','arcsin','arccos','vinkel','bestämma vinkel'] },
+              { num: '6.4', title: 'Bestämma sträckor och vinklar i koordinatsystem', description: 'Bilda en rätvinklig triangel mellan punkterna — Pythagoras ger sträckan, tangens ger vinkeln.', href: null, icon: null, keywords: ['trigonometri','pythagoras sats','koordinatsystem','sträcka','avstånd','vinkel','hypotenusa'] },
+              { num: '6.5', title: 'Vektorer och skalärer', description: 'Storlek och riktning — pilar, parallellförflyttning, motsatta vektorer och vektorns längd.', href: null, icon: null, keywords: ['vektorer','vektor','skalär','storhet','riktning','parallella vektorer','motsatta vektorer','absolutbelopp','längd'] },
+              { num: '6.6', title: 'Räkneoperationer med vektorer', description: 'Multiplicera med skalär och addera med polygonmetoden — resultanten från start till slut.', href: null, icon: null, keywords: ['vektorer','vektoraddition','resultant','polygonmetoden','skalär','multiplikation'] },
+              { num: '6.7', title: 'Subtraktion av vektorer', description: 'u − v = u + (−v) — addera den motsatta vektorn med polygonmetoden.', href: null, icon: null, keywords: ['vektorer','vektorsubtraktion','subtraktion','motsatt vektor','resultant'] },
+              { num: '6.8', title: 'Längden av en vektor i koordinatform', description: 'Koordinaterna är katetrar — Pythagoras sats ger längden av vektorn (a, b).', href: null, icon: null, keywords: ['vektorer','koordinatform','vektorlängd','längd','belopp','absolutbelopp','pythagoras sats','komponenter'] },
+            ],
+          },
+        },
+      },
+    },
+  },
 };
 
 // Platt lista — full kontext per avsnitt. Används för sök och listvyer.

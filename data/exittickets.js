@@ -9217,4 +9217,4088 @@ window.EXITTICKETS = {
   },
 ],
 
+// ════════════════════════════════════════════════════════════════
+// MATEMATIK NIVÅ 1c — kapitel 1: Aritmetik
+// ════════════════════════════════════════════════════════════════
+
+'ma1c-1.1': [
+  {
+    question: 'Vilken beteckning används för mängden av de **rationella talen**?',
+    choices: [
+      '$\\mathbb{N}$',
+      '$\\mathbb{Z}$',
+      '$\\mathbb{Q}$',
+      '$\\mathbb{R}$',
+    ],
+    correct: 2,
+    why: [
+      '$\\mathbb{N}$ betecknar de naturliga talen — alla icke-negativa heltal 0, 1, 2, 3 …',
+      '$\\mathbb{Z}$ betecknar heltalen — …, −2, −1, 0, 1, 2, …',
+      '$\\mathbb{Q}$ betecknar de rationella talen: alla tal som kan skrivas som ett bråk $\\frac{a}{b}$ där $a$ och $b$ är heltal och $b \\neq 0$.',
+      '$\\mathbb{R}$ betecknar de reella talen — alla tal på tallinjen, även de irrationella.',
+    ],
+  },
+  {
+    question: 'Vilka talmängder tillhör talet $-7$?',
+    choices: [
+      'Endast $\\mathbb{Z}$',
+      '$\\mathbb{Z}$, $\\mathbb{Q}$ och $\\mathbb{R}$, men inte $\\mathbb{N}$',
+      '$\\mathbb{N}$, $\\mathbb{Z}$, $\\mathbb{Q}$ och $\\mathbb{R}$',
+      '$\\mathbb{Q}$ och $\\mathbb{R}$, men inte $\\mathbb{Z}$',
+    ],
+    correct: 1,
+    why: [
+      'Talmängderna ligger inuti varandra — ett tal som ligger i $\\mathbb{Z}$ ligger automatiskt också i $\\mathbb{Q}$ och $\\mathbb{R}$.',
+      '$-7$ är ett heltal, och varje heltal är också rationellt (t.ex. $-7 = \\frac{-7}{1}$) och reellt. Däremot är $-7$ inte naturligt, eftersom de naturliga talen bara innehåller icke-negativa heltal.',
+      'De naturliga talen $\\mathbb{N}$ innehåller bara icke-negativa heltal — det negativa talet $-7$ ingår inte där.',
+      '$-7$ är visst ett heltal — heltalen $\\mathbb{Z}$ innehåller även de negativa heltalen.',
+    ],
+  },
+  {
+    question: 'Vad kännetecknar ett **irrationellt** tal?',
+    choices: [
+      'Det är mindre än 0',
+      'Det har oändligt många decimaler',
+      'Det kan inte skrivas som ett bråk av två heltal — decimalutvecklingen är oändlig utan att upprepa sig',
+      'Det ligger utanför de reella talen',
+    ],
+    correct: 2,
+    why: [
+      'Tecknet har inget med saken att göra — det finns både negativa rationella tal (t.ex. −0,25) och negativa irrationella tal (t.ex. −π).',
+      'Det räcker inte — även $\\frac{1}{3} = 0{,}333\\ldots$ har oändligt många decimaler, men de upprepar sig, och talet är rationellt.',
+      'Just det — irrationella tal som π och $\\sqrt{2}$ kan inte skrivas på formen $\\frac{a}{b}$ med heltal $a$ och $b$, och deras decimalutveckling är oändlig utan att upprepa sig.',
+      'Tvärtom — de irrationella talen ingår i de reella talen $\\mathbb{R}$, som innehåller alla tal på tallinjen.',
+    ],
+  },
+  {
+    question: 'Beräkna $6 - (-4)$.',
+    choices: [
+      '$2$',
+      '$-10$',
+      '$10$',
+      '$-2$',
+    ],
+    correct: 2,
+    why: [
+      'Då har du räknat $6 - 4$ — men två minustecken ihop ersätts med ett plustecken, så det blir $6 + 4$.',
+      'Teckenregeln ger plus, inte minus: $6 - (-4) = 6 + 4$.',
+      'Lika tecken ihop ersätts med ett plustecken: $6 - (-4) = 6 + 4 = 10$.',
+      'Det vore svaret på $(-6) + 4$ — här ska två minustecken ihop bli ett plus: $6 + 4 = 10$.',
+    ],
+  },
+  {
+    question: 'Vilket av följande uttryck har ett **negativt** värde?',
+    choices: [
+      '$(-3) \\cdot (-8)$',
+      '$5 + (-9)$',
+      '$\\dfrac{-24}{-6}$',
+      '$7 - (-2)$',
+    ],
+    correct: 1,
+    why: [
+      'Minus gånger minus ger plus: $(-3) \\cdot (-8) = 24$, som är positivt.',
+      'Plus och minus ihop ersätts med ett minustecken: $5 + (-9) = 5 - 9 = -4$, som är negativt.',
+      'Lika tecken dividerat med varandra ger plus: $\\frac{-24}{-6} = 4$, som är positivt.',
+      'Två minustecken ihop ersätts med ett plustecken: $7 - (-2) = 7 + 2 = 9$, som är positivt.',
+    ],
+  },
+],
+
+'ma1c-1.2': [
+  {
+    question: 'Vad kallas talet **ovanför** bråkstrecket?',
+    choices: [
+      'Nämnare',
+      'Täljare',
+      'Kvot',
+      'Faktor',
+    ],
+    correct: 1,
+    why: [
+      'Nämnaren är talet under bråkstrecket — "nämnaren där nere".',
+      'Talet ovanför bråkstrecket kallas täljare — "täljaren i toppen".',
+      'Kvoten är resultatet av en division, inte en del av bråkets skrivsätt.',
+      'Faktorer är talen i en multiplikation, inte delarna i ett bråk.',
+    ],
+  },
+  {
+    question: 'Vad händer med ett bråks **värde** när man förlänger bråket?',
+    choices: [
+      'Värdet blir större',
+      'Värdet blir mindre',
+      'Värdet är oförändrat',
+      'Det beror på vilket tal man förlänger med',
+    ],
+    correct: 2,
+    why: [
+      'Täljaren blir visserligen större, men nämnaren växer lika många gånger — andelen är kvar.',
+      'Bråket delas inte upp i mindre värde — bara i fler, mindre delar.',
+      'Vid förlängning multipliceras täljare och nämnare med samma tal, så bråkets storlek ändras inte — t.ex. är $\\frac{1}{4} = \\frac{3}{12}$.',
+      'Så länge man multiplicerar täljare och nämnare med samma tal (utom 0) är värdet alltid oförändrat, oavsett vilket talet är.',
+    ],
+  },
+  {
+    question: 'Förkorta $\\dfrac{8}{12}$ med 4.',
+    choices: [
+      '$\\dfrac{4}{6}$',
+      '$\\dfrac{2}{12}$',
+      '$\\dfrac{2}{3}$',
+      '$\\dfrac{8}{3}$',
+    ],
+    correct: 2,
+    why: [
+      '$\\frac{4}{6}$ får man om man förkortar med 2 — här skulle det förkortas med 4.',
+      'Här har bara täljaren dividerats med 4 — nämnaren måste också divideras med 4.',
+      'Att förkorta med 4 betyder att dividera både täljare och nämnare med 4: $\\frac{8/4}{12/4} = \\frac{2}{3}$.',
+      'Här har bara nämnaren dividerats med 4 — täljaren måste också divideras med 4.',
+    ],
+  },
+  {
+    question: 'När går det att förkorta ett bråk genom att "stryka likadana tal" i täljare och nämnare?',
+    choices: [
+      'Alltid — likadana tal tar ut varandra',
+      'När det står gångertecken mellan talen',
+      'När det står plustecken mellan talen',
+      'Aldrig — man måste alltid räkna ut täljare och nämnare först',
+    ],
+    correct: 1,
+    why: [
+      'Nej — t.ex. är $\\frac{6+2}{2+2} = \\frac{8}{4} = 2$, men "stryker" man 2:orna får man $\\frac{6}{2} = 3$, vilket är fel.',
+      'Strykning är egentligen en förkortning — division av täljare och nämnare med samma faktor — och det kräver att talet är en faktor, alltså att det står gångertecken mellan.',
+      'Precis tvärtom — med plustecken mellan ger strykning fel resultat, t.ex. $\\frac{6+2}{2+2} = 2$ men $\\frac{6}{2} = 3$.',
+      'Det går utmärkt att stryka gemensamma faktorer, t.ex. $\\frac{4 \\cdot 2}{4 \\cdot 1} = \\frac{2}{1}$ — så länge det är multiplikation.',
+    ],
+  },
+  {
+    question: 'Vilket bråk är störst: $\\dfrac{2}{3}$ eller $\\dfrac{3}{5}$?',
+    choices: [
+      '$\\dfrac{2}{3}$',
+      '$\\dfrac{3}{5}$',
+      'De är lika stora',
+    ],
+    correct: 0,
+    why: [
+      'Med samma nämnare syns det direkt: $\\frac{2}{3} = \\frac{10}{15}$ och $\\frac{3}{5} = \\frac{9}{15}$, och $\\frac{10}{15} > \\frac{9}{15}$.',
+      '$\\frac{3}{5} = \\frac{9}{15}$ är mindre än $\\frac{2}{3} = \\frac{10}{15}$ — jämför genom att göra om till samma nämnare.',
+      'Gör om till samma nämnare: $\\frac{10}{15}$ respektive $\\frac{9}{15}$ — de är inte lika.',
+    ],
+  },
+],
+
+'ma1c-1.3': [
+  {
+    question: 'Vad ska man göra **innan** man adderar två bråk med olika nämnare?',
+    choices: [
+      'Addera täljarna och nämnarna var för sig',
+      'Förlänga ett eller flera av bråken så att alla får samma nämnare',
+      'Förkorta båda bråken så långt det går',
+      'Skriva om bråken i blandad form',
+    ],
+    correct: 1,
+    why: [
+      'Det är det klassiska felet — $\\frac{1}{2} + \\frac{1}{2}$ skulle då bli $\\frac{2}{4} = \\frac{1}{2}$, vilket uppenbart är fel.',
+      'Först när bråken har samma nämnare går det att addera täljarna rakt av — därför förlänger man tills nämnarna är lika.',
+      'Förkortning kan snygga till bråken men löser inte problemet — nämnarna måste bli lika innan additionen.',
+      'Tvärtom — vid beräkningar ska alltid bråkform användas, inte blandad form.',
+    ],
+  },
+  {
+    question: 'Beräkna $\\dfrac{3}{7} + \\dfrac{2}{7}$.',
+    choices: [
+      '$\\dfrac{5}{14}$',
+      '$\\dfrac{6}{49}$',
+      '$\\dfrac{5}{7}$',
+      '$\\dfrac{1}{7}$',
+    ],
+    correct: 2,
+    why: [
+      'Nämnarna ska inte adderas — bråken har redan samma nämnare, så det är bara täljarna som adderas.',
+      'Här har täljare och nämnare multiplicerats — men det är en addition, inte en multiplikation.',
+      'Samma nämnare: addera täljarna och behåll nämnaren, $\\frac{3 + 2}{7} = \\frac{5}{7}$.',
+      'Det är differensen $\\frac{3}{7} - \\frac{2}{7}$ — här ska bråken adderas.',
+    ],
+  },
+  {
+    question: 'Vilken är den **minsta** gemensamma nämnaren (MGN) till 4 och 6?',
+    choices: [
+      '24',
+      '12',
+      '10',
+      '6',
+    ],
+    correct: 1,
+    why: [
+      '24 är en gemensam nämnare (4 · 6), men inte den minsta — 12 dyker upp tidigare i båda multiplarkolumnerna.',
+      'Multiplarna av 4 är 4, 8, 12 … och multiplarna av 6 är 6, 12 … — den första gemensamma multipeln är 12.',
+      '10 är varken en multipel av 4 eller ett användbart val — inget av bråken kan förlängas till nämnaren 10 med heltal.',
+      '6 är inte en multipel av 4 — fjärdedelarna kan inte skrivas om till sjättedelar med heltalsförlängning.',
+    ],
+  },
+  {
+    question: 'Skriv $2\\dfrac{1}{5}$ i bråkform.',
+    choices: [
+      '$\\dfrac{3}{5}$',
+      '$\\dfrac{21}{5}$',
+      '$\\dfrac{11}{5}$',
+      '$\\dfrac{7}{5}$',
+    ],
+    correct: 2,
+    why: [
+      'Här har talet 2 och täljaren 1 adderats — men de hela ska först multipliceras med nämnaren: 2 hela är $\\frac{10}{5}$.',
+      'Här har siffrorna 2 och 1 bara skrivits ihop — blandad form betyder $2 + \\frac{1}{5}$, inte 21 femtedelar.',
+      'Talet framför bråket gånger nämnaren plus täljaren: $\\frac{2 \\cdot 5 + 1}{5} = \\frac{11}{5}$.',
+      'Kontrollera: $\\frac{7}{5} = 1\\frac{2}{5}$, inte $2\\frac{1}{5}$.',
+    ],
+  },
+  {
+    question: 'Vilken form ska bråk skrivas i när man **räknar** med dem?',
+    choices: [
+      'Blandad form',
+      'Bråkform',
+      'Decimalform, alltid',
+      'Det spelar ingen roll',
+    ],
+    correct: 1,
+    why: [
+      'Blandad form är bra för att *läsa av* en storlek (t.ex. $3\\frac{3}{4}$ tårtor), men i beräkningar ställer den till det.',
+      'Vid beräkningar ska alltid bråkform användas — därför är det viktigt att kunna växla från blandad form till bråkform.',
+      'Decimalform är ofta avrundad och kan ge avrundningsfel — bråkform är exakt.',
+      'Jo — blandad form i en beräkning leder lätt till fel, t.ex. att $2\\frac{1}{5}$ råkar läsas som $2 \\cdot \\frac{1}{5}$.',
+    ],
+  },
+],
+
+'ma1c-1.4': [
+  {
+    question: 'Hur multiplicerar man två bråk?',
+    choices: [
+      'Täljare gånger täljare och nämnare gånger nämnare',
+      'Bråken måste först få samma nämnare',
+      'Täljare gånger nämnare korsvis',
+      'Man inverterar det andra bråket och multiplicerar sedan',
+    ],
+    correct: 0,
+    why: [
+      'Vid multiplikation multipliceras täljarna med varandra och nämnarna med varandra: $\\frac{2}{3} \\cdot \\frac{5}{7} = \\frac{10}{21}$.',
+      'Gemensam nämnare behövs vid addition och subtraktion — inte vid multiplikation.',
+      'Korsvis multiplikation är ett minnesknep för att jämföra bråk eller lösa ekvationer, inte för att multiplicera dem.',
+      'Invertering används vid division med bråk, inte vid multiplikation.',
+    ],
+  },
+  {
+    question: 'Vad gör man med bråket i **nämnaren** vid division med bråk?',
+    choices: [
+      'Man förkortar det så långt det går',
+      'Man inverterar det och byter divisionen mot multiplikation',
+      'Man förlänger det så att nämnarna blir lika',
+      'Ingenting — man dividerar täljarna och nämnarna var för sig',
+    ],
+    correct: 1,
+    why: [
+      'Förkortning ändrar inte divisionen till något enklare räknesätt — regeln är att invertera och multiplicera.',
+      'Divisionen byts mot multiplikation samtidigt som bråket i nämnaren inverteras: $\\frac{a}{b} \\Big/ \\frac{c}{d} = \\frac{a}{b} \\cdot \\frac{d}{c}$.',
+      'Gemensam nämnare hör till addition och subtraktion — vid division inverterar man i stället.',
+      'Det kan råka fungera i specialfall, men den allmänna regeln är invertera-och-multiplicera.',
+    ],
+  },
+  {
+    question: 'Beräkna $6 \\Big/ \\dfrac{2}{3}$.',
+    choices: [
+      '$4$',
+      '$\\dfrac{1}{9}$',
+      '$9$',
+      '$\\dfrac{12}{3}$',
+    ],
+    correct: 2,
+    why: [
+      '$6 \\cdot \\frac{2}{3} = 4$ — men här ska det divideras, så bråket ska inverteras först.',
+      'Här har divisionen vänts åt fel håll — det är bråket i nämnaren som ska inverteras, inte hela uttrycket.',
+      'Skriv $6 = \\frac{6}{1}$, invertera och multiplicera: $\\frac{6}{1} \\cdot \\frac{3}{2} = \\frac{18}{2} = 9$.',
+      '$\\frac{12}{3} = 4$ är resultatet av $6 \\cdot \\frac{2}{3}$ — division kräver invertering.',
+    ],
+  },
+  {
+    question: 'Hur mycket är $\\dfrac{2}{9}$ av 45 kr?',
+    choices: [
+      '5 kr',
+      '10 kr',
+      '18 kr',
+      '90 kr',
+    ],
+    correct: 1,
+    why: [
+      '5 kr är $\\frac{1}{9}$ av 45 kr — här söks $\\frac{2}{9}$, alltså dubbelt så mycket.',
+      'Bråkdel av något betyder multiplikation: $\\frac{2}{9} \\cdot 45 = \\frac{2 \\cdot 45}{9} = 2 \\cdot 5 = 10$.',
+      '18 kr är $\\frac{2}{5}$ av 45 kr — kontrollera nämnaren.',
+      '90 kr är dubbla beloppet — då har det multiplicerats med 2 utan att divideras med 9.',
+    ],
+  },
+  {
+    question: 'Varför lönar det sig att **faktorisera** täljare och nämnare innan man multiplicerar bråk med stora tal?',
+    choices: [
+      'Det gör att man slipper förkorta svaret',
+      'Gemensamma faktorer kan förkortas bort innan talen hinner bli stora',
+      'Det är enda sättet att få rätt svar',
+      'Faktorisering förvandlar multiplikationen till en addition',
+    ],
+    correct: 1,
+    why: [
+      'Man förkortar fortfarande — men mycket enklare, eftersom faktorerna syns direkt.',
+      'När täljare och nämnare skrivs som produkter syns gemensamma faktorer direkt och kan strykas — t.ex. $\\frac{7 \\cdot 6}{6 \\cdot 6 \\cdot 7 \\cdot 3} = \\frac{1}{18}$ utan att någonsin räkna ut $36 \\cdot 21$.',
+      'Att multiplicera först och förkorta sedan ger också rätt svar — det är bara krångligare med stora tal.',
+      'Räknesättet ändras inte — det är fortfarande multiplikation, bara med synliga faktorer.',
+    ],
+  },
+],
+
+'ma1c-1.5': [
+  {
+    question: 'Vad kallas ett värde som är avrundat?',
+    choices: [
+      'Närmevärde',
+      'Medelvärde',
+      'Gränsvärde',
+      'Absolutvärde',
+    ],
+    correct: 0,
+    why: [
+      'Ett avrundat värde kallas närmevärde — det ligger nära, men är inte exakt lika med, det ursprungliga talet.',
+      'Ett medelvärde är summan av flera värden delat med antalet — det har inget med avrundning att göra.',
+      'Gränsvärde är ett begrepp som dyker upp först i senare kurser och handlar om vad ett uttryck närmar sig.',
+      'Absolutvärdet av ett tal är talets avstånd till 0 på tallinjen, alltid utan tecken.',
+    ],
+  },
+  {
+    question: 'Avrunda 8,349 till tiondelar.',
+    choices: [
+      '8,4',
+      '8,3',
+      '8,35',
+      '8',
+    ],
+    correct: 1,
+    why: [
+      '8,4 får man om man först avrundar till 8,35 och sedan en gång till — men avrundning görs i ett steg, och siffran efter tiondelssiffran är 4, som avrundar nedåt.',
+      'Tiondelssiffran är 3 och siffran efter är 4 — den hör till gruppen 0–4, så tiondelssiffran behålls: 8,3.',
+      '8,35 är avrundat till hundradelar, inte tiondelar.',
+      '8 är avrundat till ental — här efterfrågas tiondelar.',
+    ],
+  },
+  {
+    question: 'Hur många värdesiffror har talet 0,0072?',
+    choices: [
+      '5',
+      '4',
+      '3',
+      '2',
+    ],
+    correct: 3,
+    why: [
+      'Nollorna före 7:an räknas inte — de visar bara var decimaltecknet ligger.',
+      'Den första värdesiffran är den första siffran som inte är 0 — nollorna i början räknas inte.',
+      'Bara siffrorna från och med den första nollskilda siffran räknas: 7 och 2.',
+      'Den första värdesiffran är den första siffran som inte är 0, alltså 7:an. Värdesiffrorna är 7 och 2 — två stycken.',
+    ],
+  },
+  {
+    question: 'Vid multiplikation av två mätvärden — vad avgör antalet värdesiffror i svaret?',
+    choices: [
+      'Värdet med minsta antalet decimaler',
+      'Värdet med minsta antalet värdesiffror',
+      'Värdet med största antalet värdesiffror',
+      'Svaret anges alltid med tre värdesiffror',
+    ],
+    correct: 1,
+    why: [
+      'Minsta antalet decimaler styr vid addition och subtraktion — inte vid multiplikation.',
+      'Vid multiplikation och division ger värdet med minsta antalet värdesiffror antalet värdesiffror i svaret — t.ex. 19,5 · 24 = 468 ≈ 470 (två värdesiffror, som i 24).',
+      'Då skulle svaret se noggrannare ut än den sämsta mätningen — noggrannheten kan aldrig bli bättre än den osäkraste faktorn.',
+      'Tre värdesiffror är en vanlig tumregel i fysiken när inget annat anges, men regeln här följer den minst noggranna faktorn.',
+    ],
+  },
+  {
+    question: 'Beräkna $5{,}84 - 2{,}1$ och svara med korrekt antal decimaler.',
+    choices: [
+      '3,74',
+      '3,7',
+      '3,8',
+      '4',
+    ],
+    correct: 1,
+    why: [
+      '3,74 är rätt uträknat men inte korrekt avrundat — vid subtraktion styr värdet med minsta antalet decimaler (2,1 har en decimal).',
+      'Differensen är 3,74, och eftersom 2,1 bara har en decimal avrundas svaret till en decimal: 3,7.',
+      '3,8 är felavrundat — siffran efter tiondelssiffran är 4, som avrundar nedåt.',
+      'Heltal vore för grovt — det minsta antalet decimaler bland termerna är en decimal, inte noll.',
+    ],
+  },
+],
+
+'ma1c-1.6': [
+  {
+    question: 'I potensen $3^5$ — vad kallas talet 3?',
+    choices: [
+      'Exponent',
+      'Bas',
+      'Faktor',
+      'Koefficient',
+    ],
+    correct: 1,
+    why: [
+      'Exponenten är talet 5 — det som anger hur många gånger basen ska multipliceras med sig själv.',
+      'Basen är det tal som upphöjs — här 3. Exponenten 5 anger antalet faktorer.',
+      'I faktorformen $3 \\cdot 3 \\cdot 3 \\cdot 3 \\cdot 3$ är varje trea en faktor, men i potensskrivsättet kallas 3:an bas.',
+      'Koefficient kallas talet framför en variabel, t.ex. 42 i $42x^3$.',
+    ],
+  },
+  {
+    question: 'Vad är $7^2 \\cdot 7^3$ skrivet som en enda potens?',
+    choices: [
+      '$7^6$',
+      '$49^5$',
+      '$7^5$',
+      '$14^5$',
+    ],
+    correct: 2,
+    why: [
+      '$7^6$ fås om exponenterna multipliceras — men vid multiplikation av potenser med samma bas ska de adderas.',
+      'Basen ändras inte vid multiplikation av potenser — bara exponenterna adderas.',
+      'Potenslagen ger $7^2 \\cdot 7^3 = 7^{2+3} = 7^5$.',
+      'Baserna ska inte adderas — båda potenserna har redan samma bas 7, och den behålls.',
+    ],
+  },
+  {
+    question: 'Vad är $(a^3)^4$?',
+    choices: [
+      '$a^7$',
+      '$a^{12}$',
+      '$a^{81}$',
+      '$a^{34}$',
+    ],
+    correct: 1,
+    why: [
+      '$a^7$ vore svaret på $a^3 \\cdot a^4$ — vid potens av potens multipliceras exponenterna i stället.',
+      'Vid "potens av potens" multipliceras exponenterna: $(a^3)^4 = a^{3 \\cdot 4} = a^{12}$.',
+      '81 är $3^4$ — men det är exponenterna 3 och 4 som ska multipliceras, inte upphöjas.',
+      'Exponenterna ska inte skrivas ihop som siffror — de multipliceras: $3 \\cdot 4 = 12$.',
+    ],
+  },
+  {
+    question: 'Vilket värde har $-4^2$?',
+    choices: [
+      '$16$',
+      '$-16$',
+      '$-8$',
+      '$8$',
+    ],
+    correct: 1,
+    why: [
+      '$16$ är värdet av $(-4)^2$, där hela talet −4 är basen. I $-4^2$ står minustecknet utanför potensen.',
+      'Utan parentes är basen bara 4: $-4^2 = -(4 \\cdot 4) = -16$.',
+      'Här har $4^2$ råkat bli $4 \\cdot 2$ — exponenten betyder upprepad multiplikation, inte multiplikation med 2.',
+      'Både tecknet och potensen har tappats bort — $-4^2$ är minus "4 i kvadrat", alltså −16.',
+    ],
+  },
+  {
+    question: 'Hur utläses $7^3$?',
+    choices: [
+      '"7 i kvadrat"',
+      '"3 upphöjt till 7"',
+      '"7 i kubik"',
+      '"7 gånger 3"',
+    ],
+    correct: 2,
+    why: [
+      '"I kvadrat" hör till exponenten 2 — här är exponenten 3.',
+      'Ordningen är omvänd — basen är 7 och exponenten 3, så det utläses "7 upphöjt till 3".',
+      'En trea i exponenten kan utläsas "i kubik", så $7^3$ blir "7 i kubik" (eller "7 upphöjt till 3").',
+      '$7 \\cdot 3 = 21$ men $7^3 = 343$ — en potens är upprepad multiplikation, inte en enkel produkt.',
+    ],
+  },
+],
+
+'ma1c-1.7': [
+  {
+    question: 'Vad är $9^0$?',
+    choices: [
+      '$0$',
+      '$1$',
+      '$9$',
+      'Odefinierat',
+    ],
+    correct: 1,
+    why: [
+      'Det vanligaste misstaget — men $\\frac{9^5}{9^5}$ är både $9^{5-5} = 9^0$ och uppenbart lika med 1, så $9^0 = 1$.',
+      'Alla tal utom 0 upphöjt till 0 är 1 — det följer av potenslagen för division: $\\frac{9^5}{9^5} = 9^0 = 1$.',
+      'Exponenten 0 betyder inte att talet behålls — det är exponenten 1 som gör det: $9^1 = 9$.',
+      'Det är bara $0^0$ som är odefinierat (det motsvarar division med 0) — för alla andra baser är värdet 1.',
+    ],
+  },
+  {
+    question: 'Vad är $2^{-4}$?',
+    choices: [
+      '$-16$',
+      '$-\\dfrac{1}{16}$',
+      '$\\dfrac{1}{16}$',
+      '$\\dfrac{1}{8}$',
+    ],
+    correct: 2,
+    why: [
+      'Minustecknet i exponenten gör inte värdet negativt — det betyder "1 dividerat med potensen".',
+      'Det finns inget minustecken kvar i värdet: $2^{-4}$ är ett positivt bråk.',
+      'Negativ exponent betyder $a^{-n} = \\frac{1}{a^n}$, så $2^{-4} = \\frac{1}{2^4} = \\frac{1}{16}$.',
+      '$\\frac{1}{8} = 2^{-3}$ — kontrollera exponenten: här är den −4.',
+    ],
+  },
+  {
+    question: 'Skriv $\\dfrac{1}{x^3}$ som en potens med basen $x$.',
+    choices: [
+      '$x^{-3}$',
+      '$x^{3}$',
+      '$x^{\\frac{1}{3}}$',
+      '$3x^{-1}$',
+    ],
+    correct: 0,
+    why: [
+      'Nämnaren "flyttas upp" med ombytt tecken på exponenten: $\\frac{1}{x^3} = x^{-3}$.',
+      '$x^3$ är nämnaren själv — bråket är dess invers, och det kräver negativ exponent.',
+      'Exponenten $\\frac{1}{3}$ betyder något helt annat (ett rotuttryck), inte "1 delat med".',
+      'Trean är en exponent i uttrycket, inte en koefficient framför $x$.',
+    ],
+  },
+  {
+    question: 'Vad är $\\left(\\dfrac{5}{8}\\right)^{-1}$?',
+    choices: [
+      '$-\\dfrac{5}{8}$',
+      '$\\dfrac{8}{5}$',
+      '$\\dfrac{5}{8}$',
+      '$-\\dfrac{8}{5}$',
+    ],
+    correct: 1,
+    why: [
+      'Exponenten −1 byter inte tecken på bråket — den inverterar det.',
+      'Att upphöja ett bråk till −1 är samma sak som att invertera det: täljare och nämnare byter plats.',
+      'Utan invertering har exponenten −1 inte använts alls.',
+      'Bråket ska inverteras men inte byta tecken — värdet förblir positivt.',
+    ],
+  },
+],
+
+'ma1c-1.8': [
+  {
+    question: 'Vad kallas en exponent som innehåller ett bråk, t.ex. $25^{1/2}$?',
+    choices: [
+      'Rationell exponent',
+      'Irrationell exponent',
+      'Negativ exponent',
+      'Bruten bas',
+    ],
+    correct: 0,
+    why: [
+      'En exponent som är ett bråk (ett rationellt tal) kallas rationell exponent.',
+      'Irrationella tal är tal som INTE kan skrivas som bråk — bråkexponenter är tvärtom rationella.',
+      'Negativa exponenter handlar om minustecken i exponenten, inte om bråk.',
+      'Det är exponenten som är ett bråk — basen 25 är ett vanligt heltal.',
+    ],
+  },
+  {
+    question: 'Vad är $36^{1/2}$?',
+    choices: [
+      '$18$',
+      '$6$',
+      '$72$',
+      '$\\dfrac{1}{36}$',
+    ],
+    correct: 1,
+    why: [
+      '18 är hälften av 36 — men exponenten $\\frac{1}{2}$ betyder kvadratrot, inte halvering.',
+      'Exponenten $\\frac{1}{2}$ betyder kvadratroten: $36^{1/2} = \\sqrt{36} = 6$.',
+      '72 är dubbla 36 — exponenten $\\frac{1}{2}$ är varken halvering eller dubblering.',
+      '$\\frac{1}{36}$ vore $36^{-1}$ — negativ exponent, inte rationell.',
+    ],
+  },
+  {
+    question: 'Vilket uttryck är lika med $\\sqrt[3]{64}$?',
+    choices: [
+      '$64^{3}$',
+      '$\\dfrac{64}{3}$',
+      '$64^{1/3}$',
+      '$3^{64}$',
+    ],
+    correct: 2,
+    why: [
+      '$64^3$ är 64 multiplicerat med sig själv tre gånger — motsatsen till att dra tredjeroten.',
+      'Tredjeroten är ingen division — $\\sqrt[3]{64} = 4$ men $\\frac{64}{3} \\approx 21{,}3$.',
+      'Regeln $a^{1/n} = \\sqrt[n]{a}$ ger $\\sqrt[3]{64} = 64^{1/3}$ (= 4, eftersom $4^3 = 64$).',
+      'Här har bas och exponent bytt plats — rotens index hamnar i exponentens nämnare.',
+    ],
+  },
+  {
+    question: 'Hur beräknas $8^{2/3}$ enklast utan räknare?',
+    choices: [
+      'Ta tredjeroten ur 8 och kvadrera resultatet',
+      'Dividera 8 med 3 och multiplicera med 2',
+      'Kvadrera 8 och dividera med 3',
+      'Ta kvadratroten ur 8 och upphöja till 3',
+    ],
+    correct: 0,
+    why: [
+      'Dela upp exponenten: $8^{2/3} = (8^{1/3})^2 = (\\sqrt[3]{8})^2 = 2^2 = 4$.',
+      'Exponenten är inget vanligt bråk att multiplicera basen med — den styr rot och potens.',
+      '$8^2/3$ vore något annat — i $8^{2/3}$ hör trean till rotdragningen, inte till en division av resultatet.',
+      'Nämnaren 3 ger tredjeroten och täljaren 2 ger kvadreringen — inte tvärtom.',
+    ],
+  },
+],
+
+'ma1c-1.9': [
+  {
+    question: 'Vilket villkor gäller för talet $a$ i grundpotensformen $a \\cdot 10^n$?',
+    choices: [
+      '$0 \\leq a < 1$',
+      '$1 \\leq a < 10$',
+      '$1 \\leq a \\leq 100$',
+      '$a$ kan vara vilket tal som helst',
+    ],
+    correct: 1,
+    why: [
+      'Med $a$ mindre än 1 (t.ex. $0{,}63 \\cdot 10^5$) är talet inte i grundpotensform.',
+      'Talet framför tiopotensen ska vara minst 1 men mindre än 10 — t.ex. $6{,}3 \\cdot 10^4$, inte $63 \\cdot 10^3$.',
+      'Tal mellan 10 och 100 framför tiopotensen (t.ex. $63 \\cdot 10^3$) är inte grundpotensform.',
+      'Utan villkoret vore skrivsättet inte entydigt — samma tal kunde skrivas på många sätt.',
+    ],
+  },
+  {
+    question: 'Skriv 0,0008 i grundpotensform.',
+    choices: [
+      '$8 \\cdot 10^{-3}$',
+      '$8 \\cdot 10^{-4}$',
+      '$0{,}8 \\cdot 10^{-3}$',
+      '$8 \\cdot 10^{4}$',
+    ],
+    correct: 1,
+    why: [
+      'Räkna nollorna före åttan: det är fyra (0,000…), inte tre.',
+      'Antalet nollor innan första siffran ger den negativa exponenten — här 4: $0{,}0008 = 8 \\cdot 10^{-4}$.',
+      '0,8 ligger inte mellan 1 och 10, så det är inte grundpotensform.',
+      'Talet är mindre än 1, så exponenten måste vara negativ.',
+    ],
+  },
+  {
+    question: 'Vilken tiopotens motsvarar prefixet G (giga)?',
+    choices: [
+      '$10^{6}$',
+      '$10^{9}$',
+      '$10^{12}$',
+      '$10^{-9}$',
+    ],
+    correct: 1,
+    why: [
+      '$10^6$ är mega (M) — giga är tusen gånger större.',
+      'Giga betyder miljard: $1\\ \\mathrm{GB} = 10^9\\ \\mathrm{B}$.',
+      '$10^{12}$ är tera (T) — som i terabyte.',
+      '$10^{-9}$ är nano (n) — små tal, inte stora.',
+    ],
+  },
+  {
+    question: 'Skriv 0,0025 A med lämpligt prefix.',
+    choices: [
+      '2,5 mA',
+      '25 mA',
+      '2,5 µA',
+      '2,5 cA',
+    ],
+    correct: 0,
+    why: [
+      '$0{,}0025\\ \\mathrm{A} = 2{,}5 \\cdot 10^{-3}\\ \\mathrm{A}$, och $10^{-3}$ är prefixet m (milli).',
+      'Kontrollera grundpotensformen: $0{,}0025 = 2{,}5 \\cdot 10^{-3}$, inte $25 \\cdot 10^{-3}$.',
+      'µ (mikro) är $10^{-6}$ — här är tiopotensen $10^{-3}$.',
+      'c (centi) är $10^{-2}$ — det skulle ge 0,25 cA, och centi används sällan utanför längdmått.',
+    ],
+  },
+  {
+    question: 'Varför skrivs 270 000 N som 0,27 MN och inte som $2{,}7 \\cdot 10^5$ N med ett eget prefix?',
+    choices: [
+      'Det finns inget prefix för $10^5$, så talet justeras till närmaste tiopotens med prefix',
+      'Prefixet för $10^5$ är för ovanligt för att användas i skolan',
+      '270 000 N går inte att skriva i grundpotensform',
+      'MN är fel — det borde vara 27 kN',
+    ],
+    correct: 0,
+    why: [
+      'Prefixen hoppar i tretal kring de vanliga ($10^3$, $10^6$, $10^9$ …), så $2{,}7 \\cdot 10^5$ skrivs om till $0{,}27 \\cdot 10^6 = 0{,}27$ MN.',
+      'Det handlar inte om ovanlighet — det finns helt enkelt inget SI-prefix för $10^5$.',
+      'Visst går det: $270\\ 000 = 2{,}7 \\cdot 10^5$ — men den tiopotensen saknar prefix.',
+      'Kontrollera: $27\\ \\mathrm{kN} = 27\\ 000\\ \\mathrm{N}$, vilket är tio gånger för litet.',
+    ],
+  },
+],
+
+'ma1c-1.10': [
+  {
+    question: 'I vilken ordning ska räkneoperationerna prioriteras?',
+    choices: [
+      'Parenteser → potenser → multiplikation/division → addition/subtraktion',
+      'Addition/subtraktion → multiplikation/division → potenser → parenteser',
+      'Multiplikation/division → parenteser → potenser → addition/subtraktion',
+      'Alltid från vänster till höger, oavsett räknesätt',
+    ],
+    correct: 0,
+    why: [
+      'Det är prioriteringsreglernas ordning — kom ihåg mattedjävulen uppifrån och ner: parenteser (hornen), potenser (ögonen), multiplikation/division, addition, subtraktion.',
+      'Det är precis omvänd ordning — addition och subtraktion kommer sist, inte först.',
+      'Parenteser går alltid först — de finns just för att tvinga fram en viss ordning.',
+      'Vänster till höger gäller bara mellan operationer med SAMMA prioritet — annars gäller reglerna, t.ex. $5 + 2 \\cdot 3 = 11$, inte 21.',
+    ],
+  },
+  {
+    question: 'Beräkna $10 - 2 \\cdot 3$.',
+    choices: [
+      '$24$',
+      '$4$',
+      '$16$',
+      '$-4$',
+    ],
+    correct: 1,
+    why: [
+      '24 fås om man räknar $10 - 2 = 8$ först — men multiplikationen har högre prioritet.',
+      'Multiplikationen först: $10 - 2 \\cdot 3 = 10 - 6 = 4$.',
+      '16 skulle kräva $10 + 2 \\cdot 3$ — kontrollera tecknet.',
+      'Ordningen är rätt men subtraktionen har vänts: $10 - 6 = 4$, inte $6 - 10$.',
+    ],
+  },
+  {
+    question: 'Vad kallas svaret i en division?',
+    choices: [
+      'Produkt',
+      'Differens',
+      'Kvot',
+      'Nämnare',
+    ],
+    correct: 2,
+    why: [
+      'Produkten är svaret i en multiplikation.',
+      'Differensen är svaret i en subtraktion.',
+      'Svaret i en division kallas kvot — t.ex. är kvoten $12/4 = 3$.',
+      'Nämnaren är talet man dividerar MED, inte svaret.',
+    ],
+  },
+  {
+    question: 'Beräkna $\\dfrac{18}{7 - 4}$.',
+    choices: [
+      '$6$',
+      '$-1{,}43$ (ungefär)',
+      '$2{,}57 - 4$ (går inte att förenkla)',
+      '$14$',
+    ],
+    correct: 0,
+    why: [
+      'Divisionen har en "osynlig" parentes kring nämnaren: $\\frac{18}{(7-4)} = \\frac{18}{3} = 6$.',
+      'Här har $\\frac{18}{7}$ beräknats först och sedan subtraherats med 4 — men hela nämnaren $7 - 4$ hör ihop.',
+      'Nämnaren beräknas alltid först som en helhet — uttrycket förenklas utmärkt till 6.',
+      'Kontrollera: $\\frac{18}{3} = 6$, inte 14.',
+    ],
+  },
+  {
+    question: 'Vad symboliserar hornen på "mattedjävulen"?',
+    choices: [
+      'Potenser',
+      'Parenteser',
+      'Multiplikation',
+      'Subtraktion',
+    ],
+    correct: 1,
+    why: [
+      'Potenserna är ögonen (upphöjt-tecknen ^ ^) — nivå två uppifrån.',
+      'Hornen är böjda som parenteser ( ) och sitter överst — parenteser prioriteras först.',
+      'Multiplikationspunkten sitter på kinden, i mitten av ansiktet — tredje prioritet.',
+      'Minustecknet är hakan längst ner — subtraktion kommer sist.',
+    ],
+  },
+],
+
+'ma1c-1.11': [
+  {
+    question: 'Räknaren visar \`2,5E-4\`. Vilket tal är det?',
+    choices: [
+      '$0{,}000\\ 25$',
+      '$-2{,}54$',
+      '$25\\ 000$',
+      '$2{,}5 - 4$',
+    ],
+    correct: 0,
+    why: [
+      'E-notationen betyder "gånger 10 upphöjt till": $2{,}5\\mathrm{E}{-4} = 2{,}5 \\cdot 10^{-4} = 0{,}000\\ 25$.',
+      'E är ingen subtraktion eller decimal — det är en tiopotens.',
+      '$25\\ 000$ vore $2{,}5\\mathrm{E}4$ — exponenten här är negativ, så talet är litet.',
+      'E:t skiljer talet från exponenten — det är inte ett minusuttryck.',
+    ],
+  },
+  {
+    question: 'Hur ska $\\dfrac{360}{2 \\cdot 3}$ slås in på räknaren för att ge rätt svar (60)?',
+    choices: [
+      '\`360/2*3\`',
+      '\`360/(2*3)\`',
+      '\`(360/2)*3\`',
+      '\`360*2/3\`',
+    ],
+    correct: 1,
+    why: [
+      '\`360/2*3\` tolkas från vänster: $\\frac{360}{2} \\cdot 3 = 540$ — fel.',
+      'Bråkstrecket har en osynlig parentes kring nämnaren — på räknaren måste den skrivas ut: $360/(2 \\cdot 3) = 60$.',
+      'Det är exakt vad räknaren gör med alternativet utan parentes — och det ger 540, inte 60.',
+      'Här har räknesätten kastats om helt: $360 \\cdot 2 / 3 = 240$.',
+    ],
+  },
+  {
+    question: 'Vad händer om man slår \`-3,7^2\` utan parentes i stället för \`(-3,7)^2\`?',
+    choices: [
+      'Räknaren ger samma svar, 13,69',
+      'Räknaren ger −13,69, eftersom potensen prioriteras före minustecknet',
+      'Räknaren ger ett felmeddelande',
+      'Räknaren ger 7,4',
+    ],
+    correct: 1,
+    why: [
+      'Utan parentes upphöjer räknaren bara 3,7 och sätter minustecknet efteråt — svaren skiljer sig åt.',
+      'Potenser prioriteras före minustecknet, så \`-3,7^2\` tolkas som $-(3{,}7^2) = -13{,}69$. Ska hela −3,7 kvadreras krävs parentes.',
+      'Uttrycket är giltigt — det ger bara ett annat (negativt) svar än väntat.',
+      '7,4 vore $3{,}7 \\cdot 2$ — potensen är inte en multiplikation.',
+    ],
+  },
+],
+
+// ── Kapitel 2: Algebra och ekvationer ─────────────────────────
+
+'ma1c-2.1': [
+  {
+    question: 'I uttrycket $800 + 150x$ — vad kallas $x$?',
+    choices: [
+      'Koefficient',
+      'Variabel',
+      'Konstantterm',
+      'Produkt',
+    ],
+    correct: 1,
+    why: [
+      'Koefficienten är talet 150 — det som multipliceras med variabeln.',
+      'Bokstaven som kan anta olika värden kallas variabel.',
+      'Konstanttermen är 800 — termen som bara består av ett tal.',
+      'En produkt är resultatet av en multiplikation — $x$ är en enskild bokstav.',
+    ],
+  },
+  {
+    question: 'Vad kallas termen $150x$ i uttrycket $800 + 150x$?',
+    choices: [
+      'Konstantterm',
+      'Koefficient',
+      'Variabelterm',
+      'Uttryckets värde',
+    ],
+    correct: 2,
+    why: [
+      'Konstanttermen är 800 — den innehåller ingen variabel.',
+      'Koefficienten är bara talet 150, inte hela termen.',
+      'Hela termen som innehåller variabeln kallas variabelterm.',
+      'Uttryckets värde är det tal man får när man sätter in ett värde på $x$ och räknar ut alltihop.',
+    ],
+  },
+  {
+    question: 'Vad är värdet av uttrycket $30 - 4x$ när $x = 5$?',
+    choices: [
+      '$10$',
+      '$26$',
+      '$130$',
+      '$-10$',
+    ],
+    correct: 0,
+    why: [
+      'Ersätt $x$ med 5: $30 - 4 \\cdot 5 = 30 - 20 = 10$.',
+      'Här har $4 \\cdot 5$ blivit 4 — koefficienten ska multipliceras med variabelns värde.',
+      'Här har $30 - 4 = 26$ multiplicerats med 5 — men multiplikationen prioriteras före subtraktionen.',
+      'Kontrollera ordningen: $30 - 20 = 10$, inte $20 - 30$.',
+    ],
+  },
+  {
+    question: 'Bullar kostar $a$ kr/st och kanelsnäckor $b$ kr/st. Vad beskriver uttrycket $6a - 2b$?',
+    choices: [
+      'Kostnaden för 6 bullar och 2 kanelsnäckor',
+      'Prisskillnaden mellan 6 bullar och 2 kanelsnäckor',
+      'Kostnaden för 4 bullar',
+      'Antalet bullar minus antalet kanelsnäckor',
+    ],
+    correct: 1,
+    why: [
+      'Kostnaden för båda tillsammans vore summan $6a + 2b$ — här står ett minustecken.',
+      'Differensen $6a - 2b$ jämför priset på 6 bullar med priset på 2 kanelsnäckor.',
+      'Termerna har olika variabler ($a$ och $b$) och kan inte slås ihop till $4a$.',
+      'Uttrycket handlar om kronor (pris gånger antal), inte om antal.',
+    ],
+  },
+],
+
+'ma1c-2.2': [
+  {
+    question: 'Vilka termer får läggas ihop när man förenklar ett uttryck?',
+    choices: [
+      'Alla termer i uttrycket',
+      'Endast likadana termer — $x$-termer för sig, $y$-termer för sig osv.',
+      'Endast termer med plustecken framför',
+      'Endast konstanttermer',
+    ],
+    correct: 1,
+    why: [
+      'Olika slags termer kan inte slås ihop — $6x + 12y$ går inte att förenkla vidare.',
+      'Likadana termer läggs ihop var för sig: $x$-termer, $y$-termer, $x^2$-termer och konstanttermer separat.',
+      'Tecknet följer med termen i beräkningen, men både plus- och minustermer av samma slag läggs ihop.',
+      'Även variabeltermer av samma slag läggs ihop, t.ex. $8x - 2x = 6x$.',
+    ],
+  },
+  {
+    question: 'Förenkla $5x + 2y - 3x + y$.',
+    choices: [
+      '$2x + 3y$',
+      '$8x + 3y$',
+      '$2x + 2y$',
+      '$5xy$',
+    ],
+    correct: 0,
+    why: [
+      '$5x - 3x = 2x$ och $2y + y = 3y$ ger $2x + 3y$.',
+      'Tecknet framför $3x$ är minus — termerna ska subtraheras, inte adderas.',
+      'Glöm inte att $y$ är samma sak som $1y$: $2y + y = 3y$.',
+      'Olika variabler kan inte multipliceras ihop vid en addition.',
+    ],
+  },
+  {
+    question: 'Vad händer med tecknen när parentesen tas bort i $a - (b - c)$?',
+    choices: [
+      'Ingenting: $a - b - c$',
+      'Alla tecken inuti byts: $a - b + c$',
+      'Bara första termens tecken byts: $a + b - c$',
+      'Parentesen kan inte tas bort',
+    ],
+    correct: 1,
+    why: [
+      'Utan teckenbyte har minustecknet framför parentesen bara applicerats på $b$ men inte på $c$.',
+      'Minustecken framför en parentes byter tecknen på ALLA termer inuti: $a - (b - c) = a - b + c$.',
+      'Det är precis tvärtom — alla tecken byts, inte bara det första.',
+      'Det går utmärkt — det är just teckenbytet som gör det möjligt.',
+    ],
+  },
+  {
+    question: 'Förenkla $12x - (3x + 5)$.',
+    choices: [
+      '$9x + 5$',
+      '$9x - 5$',
+      '$15x - 5$',
+      '$4x$',
+    ],
+    correct: 1,
+    why: [
+      'Även 5:ans tecken byts när minusparentesen tas bort: $12x - 3x - 5$.',
+      'Minustecknet byter båda tecknen inuti: $12x - 3x - 5 = 9x - 5$.',
+      '$3x$ ska subtraheras, inte adderas — minustecknet står framför parentesen.',
+      '$9x$ och $-5$ är olika slags termer och kan inte slås ihop till $4x$.',
+    ],
+  },
+],
+
+'ma1c-2.3': [
+  {
+    question: 'Vad säger den distributiva lagen?',
+    choices: [
+      '$a(b + c) = ab + ac$',
+      '$a(b + c) = ab + c$',
+      '$a + (b + c) = ab + ac$',
+      '$(a + b)(c + d) = ac + bd$',
+    ],
+    correct: 0,
+    why: [
+      'Faktorn framför parentesen multipliceras med varje term inuti: $a(b + c) = ab + ac$.',
+      'Här har faktorn bara multiplicerats med den första termen — den ska in i varje term.',
+      'Med ett plustecken framför parentesen sker ingen multiplikation alls.',
+      'Vid två parenteser ska varje term i den första multipliceras med varje term i den andra — här saknas $ad$ och $bc$.',
+    ],
+  },
+  {
+    question: 'Utveckla $3(4x - 5)$.',
+    choices: [
+      '$12x - 5$',
+      '$12x - 15$',
+      '$7x - 8$',
+      '$12x + 15$',
+    ],
+    correct: 1,
+    why: [
+      'Trean ska multipliceras med BÅDA termerna, även med −5.',
+      'Distributiva lagen: $3 \\cdot 4x - 3 \\cdot 5 = 12x - 15$.',
+      'Faktorn ska multipliceras, inte adderas, med termerna.',
+      'Tecknet följer med: $3 \\cdot (-5) = -15$, inte $+15$.',
+    ],
+  },
+  {
+    question: 'Hur många multiplikationer görs när $(a + b)(c + d)$ utvecklas?',
+    choices: [
+      'Två',
+      'Tre',
+      'Fyra',
+      'En',
+    ],
+    correct: 2,
+    why: [
+      'Två multiplikationer ($ac + bd$) missar korstermerna $ad$ och $bc$.',
+      'Det blir en term för varje par — och paren är fyra.',
+      'Varje term i den första parentesen multipliceras med varje term i den andra: $ac$, $ad$, $bc$ och $bd$ — fyra stycken.',
+      'En enda multiplikation räcker bara när båda parenteserna innehåller en term var.',
+    ],
+  },
+  {
+    question: 'Vad är första steget när $10 - (x - 2)(x - 3)$ ska förenklas?',
+    choices: [
+      'Byta tecken på termerna i den första parentesen',
+      'Utveckla parentesparet men behålla en stor parentes runt resultatet',
+      'Multiplicera in 10:an i parenteserna',
+      'Stryka parenteserna direkt',
+    ],
+    correct: 1,
+    why: [
+      'Teckenbytet görs på det UTVECKLADE uttrycket, inte på en av parenteserna i förväg.',
+      'Utveckla $(x-2)(x-3)$ inom en stor parentes — minustecknet framför ska sedan byta tecken på alla termer i den.',
+      '10:an är en term (subtraktion framför), inte en faktor — den ska inte multipliceras in.',
+      'Stryks parenteserna tappas minustecknets verkan på alla termer utom den första.',
+    ],
+  },
+],
+
+'ma1c-2.4': [
+  {
+    question: 'Vad innebär det att **faktorisera** ett uttryck?',
+    choices: [
+      'Att skriva uttrycket som en multiplikation',
+      'Att räkna ut uttryckets värde',
+      'Att ta bort alla parenteser',
+      'Att lägga ihop likadana termer',
+    ],
+    correct: 0,
+    why: [
+      'Faktorisering skriver om uttrycket som en produkt av faktorer, t.ex. $27x^2 - 18x = 9x(3x - 2)$.',
+      'Värdet beräknas när variabeln får ett tal — faktorisering ändrar bara uttryckets form.',
+      'Det är tvärtom utveckling — faktorisering SKAPAR parenteser.',
+      'Det är förenkling — faktorisering handlar om att bryta ut gemensamma faktorer.',
+    ],
+  },
+  {
+    question: 'Vilken är den största gemensamma faktorn i $27x^2 - 18x$?',
+    choices: [
+      '$9$',
+      '$x$',
+      '$9x$',
+      '$3x$',
+    ],
+    correct: 2,
+    why: [
+      '9 är rätt för koefficienterna — men båda termerna innehåller dessutom $x$.',
+      '$x$ kan brytas ut — men även koefficienterna har en gemensam faktor, 9.',
+      'Koefficienterna 27 och 18 delas båda av 9, och den minsta potensen av $x$ är $x$ — tillsammans $9x$.',
+      '3 är en gemensam delare men inte den största — 9 delar både 27 och 18.',
+    ],
+  },
+  {
+    question: 'Faktorisera $15x - 10$.',
+    choices: [
+      '$5(3x - 2)$',
+      '$5x(3 - 2)$',
+      '$5(3x - 10)$',
+      '$15(x - 10)$',
+    ],
+    correct: 0,
+    why: [
+      'Största gemensamma delaren till 15 och 10 är 5: $15x - 10 = 5(3x - 2)$.',
+      'Konstanttermen 10 innehåller inget $x$, så $x$ kan inte brytas ut.',
+      'Kontrollera med multiplikation: $5 \\cdot 3x - 5 \\cdot 10 = 15x - 50$, inte $15x - 10$.',
+      '15 delar inte 10 — kontrollera med multiplikation: $15x - 150$ blir fel.',
+    ],
+  },
+  {
+    question: 'Hur kontrollerar man enklast att en faktorisering är korrekt?',
+    choices: [
+      'Genom att multiplicera ihop faktorerna och jämföra med det ursprungliga uttrycket',
+      'Genom att sätta $x = 0$ i båda uttrycken',
+      'Genom att derivera båda uttrycken',
+      'Det går inte att kontrollera en faktorisering',
+    ],
+    correct: 0,
+    why: [
+      'Faktorisering är "distributiva lagen baklänges" — multiplicera in igen och se att det ursprungliga uttrycket kommer tillbaka.',
+      '$x = 0$ kollar bara konstanttermen — likheten måste gälla för ALLA $x$, och t.ex. missar testet fel i $x$-koefficienten.',
+      'Derivering hör till senare kurser — och multiplikation är både enklare och tillräcklig.',
+      'Det går utmärkt — kontrollen är en vanlig utveckling av parentesen.',
+    ],
+  },
+],
+
+'ma1c-2.5': [
+  {
+    question: 'Vad är grundprincipen vid ekvationslösning?',
+    choices: [
+      'Det man gör på ena sidan av likhetstecknet måste man också göra på andra sidan',
+      'Man testar olika värden på variabeln tills ekvationen stämmer',
+      'Variabeln ska alltid stå i vänsterledet',
+      'Man börjar alltid med att dividera båda led',
+    ],
+    correct: 0,
+    why: [
+      'Likheten bevaras bara om båda led behandlas lika — det är hela balansprincipen.',
+      'Prövning (att testa sig fram) är uttryckligen inte tillåtet vid ekvationslösning — lösningen ska härledas.',
+      'Variabeln får stå var som helst — målet är bara att den till slut står ensam.',
+      'Vilken operation som görs först beror på ekvationen — ofta tas termer bort före faktorer.',
+    ],
+  },
+  {
+    question: 'Vilken operation löser ekvationen $x - 24 = 72$?',
+    choices: [
+      'Subtrahera 24 från båda led',
+      'Addera 24 till båda led',
+      'Dividera båda led med 24',
+      'Multiplicera båda led med 24',
+    ],
+    correct: 1,
+    why: [
+      'Då blir vänsterledet $x - 48$ — termen försvinner inte.',
+      'För att få bort en term som subtraheras adderas den till båda led: $x = 72 + 24 = 96$.',
+      'Division tar bort en faktor, inte en term.',
+      'Multiplikation tar bort en nämnare, inte en term.',
+    ],
+  },
+  {
+    question: 'Lös ekvationen $9x = 63$.',
+    choices: [
+      '$x = 7$',
+      '$x = 54$',
+      '$x = 72$',
+      '$x = 567$',
+    ],
+    correct: 0,
+    why: [
+      'Faktorn 9 tas bort genom division med 9 i båda led: $x = \\frac{63}{9} = 7$.',
+      '54 är $63 - 9$ — men 9:an är en faktor och ska divideras bort, inte subtraheras.',
+      '72 är $63 + 9$ — fel operation.',
+      '567 är $63 \\cdot 9$ — multiplikation är motsatsen till vad som behövs här.',
+    ],
+  },
+  {
+    question: 'Hur kontrollerar man att $x = 7$ löser ekvationen $4x + 7 = 35$?',
+    choices: [
+      'Sätt in 7 i stället för $x$ och kontrollera att vänsterledet blir lika med högerledet',
+      'Lös ekvationen en gång till på ett annat sätt',
+      'Kontrollera att 7 är ett heltal',
+      'Derivera båda led',
+    ],
+    correct: 0,
+    why: [
+      '$\\mathrm{VL} = 4 \\cdot 7 + 7 = 35 = \\mathrm{HL}$ — likheten stämmer, så lösningen är korrekt.',
+      'Det kan fungera men är omständligt — insättning i den ursprungliga ekvationen räcker.',
+      'Lösningar behöver inte vara heltal — t.ex. har $\\frac{7x}{6} - 15 = -11$ lösningen $x = \\frac{24}{7}$.',
+      'Derivering hör inte hemma i ekvationskontroll — det är insättning som gäller.',
+    ],
+  },
+  {
+    question: 'Ekvationen $\\dfrac{7x}{6} - 15 = -11$ har lösningen $x = \\dfrac{24}{7}$. Hur bör svaret anges?',
+    choices: [
+      'Exakt som bråket $\\dfrac{24}{7}$ — avrunda inte',
+      'Avrundat till 3,4',
+      'Avrundat till 3',
+      'Som blandad form $3\\dfrac{3}{7}$, alltid',
+    ],
+    correct: 0,
+    why: [
+      'Bråkformen är exakt — en avrundad decimalform är bara ett närmevärde och gör svaret sämre.',
+      '3,4 är ett närmevärde — det exakta svaret $\\frac{24}{7}$ ska behållas.',
+      'Att avrunda till heltal kastar bort ännu mer information.',
+      'Blandad form är tillåten som avläsning men bråkform är standard — och kravet är framför allt att INTE avrunda.',
+    ],
+  },
+],
+
+'ma1c-2.6': [
+  {
+    question: 'Vad är första steget när en ekvation har variabler i **båda** led, t.ex. $2x + 8 = 9x - 20$?',
+    choices: [
+      'Samla variabeltermerna på ena sidan av likhetstecknet',
+      'Dividera båda led med $x$',
+      'Prova olika värden på $x$',
+      'Byta plats på vänster- och högerled',
+    ],
+    correct: 0,
+    why: [
+      'Ta bort variabeltermen med minst koefficient från sin sida — här subtraheras $2x$ från båda led.',
+      'Division med $x$ är riskabel ($x$ kan vara 0) och löser inte problemet med termerna.',
+      'Prövning är inte tillåtet vid ekvationslösning — lösningen ska härledas steg för steg.',
+      'Det ändrar ingenting i sak — variablerna finns fortfarande i båda led.',
+    ],
+  },
+  {
+    question: 'Från vilken sida bör variabeltermen tas bort, enligt genomgången?',
+    choices: [
+      'Från den sida där variabeltermen har minst koefficient',
+      'Alltid från vänsterledet',
+      'Alltid från högerledet',
+      'Det spelar ingen roll för resultatet — men minst koefficient brukar bli enklast',
+    ],
+    correct: 0,
+    why: [
+      'Då blir den kvarvarande koefficienten positiv och räkningen enklast — t.ex. tas $2x$ bort ur $2x + 8 = 9x - 20$.',
+      'Vänsterledet kan lika gärna ha den största koefficienten — då är det bättre att ta bort högerledets term.',
+      'Samma sak gäller där — det är koefficientens storlek som avgör, inte sidan.',
+      'Resultatet blir förstås detsamma oavsett — men genomgångens rekommendation är just minst koefficient, så det första alternativet är mer precist.',
+    ],
+  },
+  {
+    question: 'Lös ekvationen $6x + 4 = 2x + 24$.',
+    choices: [
+      '$x = 5$',
+      '$x = 7$',
+      '$x = 3{,}5$',
+      '$x = 2{,}5$',
+    ],
+    correct: 0,
+    why: [
+      'Subtrahera $2x$: $4x + 4 = 24$. Subtrahera 4: $4x = 20$. Dividera med 4: $x = 5$.',
+      '7 fås om 4:an adderas i stället för subtraheras — kontrollera stegen.',
+      '3,5 fås om $2x$ läggs till i stället för att dras bort ($8x = 28$).',
+      'Kontrollera: $6 \\cdot 2{,}5 + 4 = 19$ men $2 \\cdot 2{,}5 + 24 = 29$ — inte lika.',
+    ],
+  },
+  {
+    question: 'Ekvationen $3(7x - 4) = 7(9 + 3x)$ förenklas till $-12 = 63$. Vad är slutsatsen?',
+    choices: [
+      'Ekvationen saknar lösning',
+      '$x = -12$ eller $x = 63$',
+      '$x = 75$',
+      'Alla tal löser ekvationen',
+    ],
+    correct: 0,
+    why: [
+      'När variabeltermerna tar ut varandra och kvar står en falsk likhet finns inget $x$ som gör ekvationen sann.',
+      'Talen −12 och 63 är inte lösningar — de är resterna av konstanttermerna efter förenklingen.',
+      'Det finns inget steg som ger 75 — likheten är falsk oavsett $x$.',
+      'Det hade krävt en SANN likhet (som $0 = 0$) efter att variablerna försvunnit.',
+    ],
+  },
+],
+
+'ma1c-2.7': [
+  {
+    question: 'Vilka värden på $x$ är inte tillåtna i ekvationen $\\dfrac{9}{2x} = \\dfrac{3}{8}$?',
+    choices: [
+      '$x \\neq 0$',
+      '$x \\neq 8$',
+      '$x \\neq 2$',
+      'Alla värden är tillåtna',
+    ],
+    correct: 0,
+    why: [
+      'Nämnaren $2x$ får inte bli 0, och $2x = 0$ precis när $x = 0$.',
+      '8 står i en nämnare men innehåller ingen variabel — den kan aldrig bli 0.',
+      '$x = 2$ ger nämnaren $2 \\cdot 2 = 4 \\neq 0$ — helt tillåtet.',
+      'Variabeln finns i en nämnare, så värden som nollar nämnaren måste uteslutas.',
+    ],
+  },
+  {
+    question: 'Vilken metod passar när det står EN bråkterm i varje led, t.ex. $\\dfrac{9}{2x} = \\dfrac{3}{8}$?',
+    choices: [
+      'Korsvis multiplikation',
+      'Kvadrering av båda led',
+      'Prövning',
+      'Faktorisering',
+    ],
+    correct: 0,
+    why: [
+      'Täljaren i ena bråket multipliceras med nämnaren i det andra och vice versa: $3 \\cdot 2x = 9 \\cdot 8$.',
+      'Kvadrering hör till rotekvationer — här skulle den bara göra uttrycken krångligare.',
+      'Prövning är inte tillåtet vid ekvationslösning.',
+      'Det finns inga gemensamma faktorer att bryta ut som löser problemet med nämnarna.',
+    ],
+  },
+  {
+    question: 'Vad multiplicerar man båda led med för att lösa $\\dfrac{x}{3} + \\dfrac{1}{4} = \\dfrac{5}{6}$ enligt MGN-metoden?',
+    choices: [
+      '12',
+      '6',
+      '72',
+      '13',
+    ],
+    correct: 0,
+    why: [
+      '12 är det minsta talet som är delbart med 3, 4 och 6 — multiplikationen ger $4x + 3 = 10$.',
+      '6 är inte delbart med 4 — bråket $\\frac{1}{4}$ skulle inte bli heltaligt.',
+      '72 fungerar (alla nämnare delar 72) men är inte den MINSTA gemensamma nämnaren — talen blir onödigt stora.',
+      '13 är inte delbart med någon av nämnarna.',
+    ],
+  },
+  {
+    question: 'Ekvationen $\\dfrac{5x - 35}{x - 7} = 4$ ger räknevägen $x = 7$. Vad är slutsatsen?',
+    choices: [
+      'Lösningen är $x = 7$',
+      'Ekvationen saknar lösning, eftersom $x = 7$ gör nämnaren till 0',
+      'Lösningen är $x = -7$',
+      'Ekvationen har oändligt många lösningar',
+    ],
+    correct: 1,
+    why: [
+      '$x = 7$ ger nämnaren $7 - 7 = 0$ — division med 0 är inte definierad, så värdet är förbjudet.',
+      'Kandidatvärdet krockar med villkoret $x \\neq 7$ som sattes upp innan lösningen — alltså saknas lösning.',
+      'Teckenbyte hjälper inte — insättning av $-7$ ger $\\frac{-70}{-14} = 5 \\neq 4$.',
+      'En falsk likhet utan variabler hade behövts för "saknar lösning" på det sättet — här är problemet i stället det förbjudna värdet.',
+    ],
+  },
+],
+
+'ma1c-2.8': [
+  {
+    question: 'Vilka är de tre stegen i metoden för problemlösning med ekvationer, i rätt ordning?',
+    choices: [
+      'Översätt → lös ekvationen → tolka och svara',
+      'Lös ekvationen → översätt → svara',
+      'Gissa → kontrollera → justera',
+      'Rita figur → mät → beräkna',
+    ],
+    correct: 0,
+    why: [
+      'Först införs en beteckning och en ekvation ställs upp, sedan löses ekvationen, och till sist tolkas svaret med enhet och rimlighetskoll.',
+      'Ekvationen kan inte lösas innan den finns — översättningen kommer först.',
+      'Gissa-och-justera är prövning, vilket inte är tillåtet vid ekvationslösning.',
+      'Figurer kan hjälpa, men metoden bygger på att översätta till en ekvation.',
+    ],
+  },
+  {
+    question: 'Vad bör man införa beteckningen $x$ på i ett problemlösningsproblem?',
+    choices: [
+      'Det som efterfrågas i uppgiften',
+      'Det största talet i uppgiften',
+      'Alltid tiden',
+      'Det första talet som nämns',
+    ],
+    correct: 0,
+    why: [
+      'Kalla det som söks för $x$ — då är ekvationens lösning direkt svaret på frågan. Skriv ner vad $x$ betyder!',
+      'Storleken på talen har inget med valet att göra.',
+      'Tid är bara en av många möjliga storheter.',
+      'Ordningen i texten spelar ingen roll — det är frågan som styr.',
+    ],
+  },
+  {
+    question: 'Rayan får dubbelt så mycket som Arielle, som får $x$ kr. Samuel får 300 kr mindre än Rayan. Vilket uttryck beskriver Samuels belopp?',
+    choices: [
+      '$2x - 300$',
+      '$x - 300$',
+      '$2x + 300$',
+      '$2(x - 300)$',
+    ],
+    correct: 0,
+    why: [
+      'Rayan får $2x$ kr, och Samuel får 300 kr mindre än så: $2x - 300$.',
+      'Samuel jämförs med Rayan (som får $2x$), inte med Arielle.',
+      '"Mindre än" betyder subtraktion, inte addition.',
+      'Subtraktionen görs efter dubblingen — 300 kr dras från Rayans belopp, inte från Arielles före dubblingen.',
+    ],
+  },
+  {
+    question: 'Varför avslutas problemlösningen med att fråga "är svaret rimligt?"',
+    choices: [
+      'En rimlighetskoll avslöjar översättnings- och räknefel — t.ex. en ålder på 500 år',
+      'Det är bara en artighetsfras',
+      'För att kunna avrunda svaret korrekt',
+      'För att slippa kontrollera ekvationen',
+    ],
+    correct: 0,
+    why: [
+      'Om svaret är orimligt i sitt sammanhang har något gått fel i översättningen eller lösningen — tolkningssteget fångar det.',
+      'Rimlighetsbedömningen är en riktig kontroll av hela kedjan, inte en formalitet.',
+      'Avrundning styrs av värdesiffror — rimligheten handlar om storleksordning och sammanhang.',
+      'Tvärtom — rimlighetskollen är en del av kontrollen, och insättning i ekvationen är fortfarande bra.',
+    ],
+  },
+],
+
+'ma1c-2.9': [
+  {
+    question: 'Vad avgör en ekvations **grad**?',
+    choices: [
+      'Variabeltermen med högst exponent',
+      'Antalet termer i ekvationen',
+      'Storleken på konstanttermen',
+      'Antalet lösningar',
+    ],
+    correct: 0,
+    why: [
+      'Högsta exponenten på variabeln ger graden — $x^2 + 7 = 11$ är av grad 2 och $x^3 - 8 = 1$ av grad 3.',
+      'En ekvation kan ha många termer och ändå vara av första graden.',
+      'Konstanttermen påverkar inte graden alls.',
+      'Antalet lösningar hänger ihop med graden men definierar den inte.',
+    ],
+  },
+  {
+    question: 'Hur många lösningar har ekvationen $x^2 = 49$?',
+    choices: [
+      'En: $x = 7$',
+      'Två: $x = 7$ och $x = -7$',
+      'Ingen',
+      'Fyra',
+    ],
+    correct: 1,
+    why: [
+      'Den negativa lösningen glöms lätt — men $(-7)^2 = 49$ också.',
+      'Kvadraten av både 7 och −7 är 49, så $x = \\pm 7$.',
+      'Lösningar saknas bara när högerledet är negativt, t.ex. $x^2 = -9$.',
+      'En andragradsekvation har högst två lösningar.',
+    ],
+  },
+  {
+    question: 'Vad gäller för ekvationen $x^3 = -8$?',
+    choices: [
+      'Den saknar lösning, eftersom högerledet är negativt',
+      'Den har lösningen $x = -2$',
+      'Den har lösningarna $x = \\pm 2$',
+      'Den har lösningen $x = 2$',
+    ],
+    correct: 1,
+    why: [
+      'Det gäller för $x^2$ — men tredjeroten ur negativa tal fungerar: tre minustecken multiplicerade ger minus.',
+      '$(-2)^3 = (-2)(-2)(-2) = -8$ — tredjegradsekvationen har exakt denna lösning.',
+      '±-paret hör till jämna exponenter — $2^3 = +8$, inte $-8$.',
+      '$2^3 = 8$, med fel tecken — lösningen är negativ.',
+    ],
+  },
+  {
+    question: 'En kvadrat har arean $196\\ \\mathrm{cm^2}$. Ekvationen $x^2 = 196$ ger $x = \\pm 14$. Vad är kvadratens sida?',
+    choices: [
+      '14 cm — den negativa lösningen förkastas eftersom en sida inte kan vara negativ',
+      '±14 cm — båda lösningarna ska anges',
+      '98 cm — arean delas med 2',
+      '49 cm — arean delas med 4',
+    ],
+    correct: 0,
+    why: [
+      'Matematiskt har ekvationen två lösningar, men i sammanhanget är bara den positiva rimlig — en längd kan inte vara negativ.',
+      'I en geometrisk tillämpning tolkas svaret — en negativ sidlängd är orimlig och förkastas.',
+      'Arean är sidan i kvadrat, inte sidan gånger 2.',
+      'Division med 4 hör till omkretsen ($O = 4x$), inte arean.',
+    ],
+  },
+],
+
+'ma1c-2.10': [
+  {
+    question: 'Vad kallas en ekvation där variabeln är en potens, t.ex. $x^{14} = 80\\ 000$?',
+    choices: [
+      'Potensekvation',
+      'Exponentialekvation',
+      'Andragradsekvation',
+      'Rotekvation',
+    ],
+    correct: 0,
+    why: [
+      'Variabeln är basen i en potens ("upphöjt till något") — en potensekvation.',
+      'I en exponentialekvation sitter variabeln i EXPONENTEN (t.ex. $2^x = 8$) — här är den basen.',
+      'Andragradsekvationen är specialfallet $n = 2$ — här är exponenten 14.',
+      'Rotuttryck används för att LÖSA potensekvationer, men det är inte ekvationens namn.',
+    ],
+  },
+  {
+    question: 'Vilken är lösningen till $x^n = a$ skriven med potenslagar?',
+    choices: [
+      '$x = a^{1/n}$',
+      '$x = a^n$',
+      '$x = \\dfrac{a}{n}$',
+      '$x = n^a$',
+    ],
+    correct: 0,
+    why: [
+      'Upphöj båda led till exponentens invers $\\frac{1}{n}$: $(x^n)^{1/n} = x^1 = a^{1/n}$.',
+      'Det upphöjer åt fel håll — då växer exponenten till $n^2$.',
+      'Exponenten är ingen faktor — den kan inte divideras bort.',
+      'Bas och exponent har bytt plats.',
+    ],
+  },
+  {
+    question: 'Hur många lösningar har $x^4 = 0$?',
+    choices: [
+      'En: $x = 0$',
+      'Två: $x = \\pm\\sqrt[4]{0}$',
+      'Ingen',
+      'Fyra',
+    ],
+    correct: 0,
+    why: [
+      'Jämn exponent ger i allmänhet två lösningar, men här sammanfaller de: $+0$ och $-0$ är samma tal.',
+      '±0 är inte två olika tal — lösningen är bara $x = 0$.',
+      'Det finns visst en lösning: $0^4 = 0$.',
+      'Gradtalet anger högsta möjliga antal, inte det faktiska.',
+    ],
+  },
+  {
+    question: 'Vad är första steget när ekvationen $x^{2/5} = 10$ ska lösas?',
+    choices: [
+      'Upphöja båda led till exponentens nämnare, 5',
+      'Dra kvadratroten ur båda led',
+      'Dividera båda led med 2/5',
+      'Multiplicera båda led med 5',
+    ],
+    correct: 0,
+    why: [
+      'Då försvinner nämnaren i exponenten: $(x^{2/5})^5 = x^2 = 10^5$, och sedan löses ekvationen som vanligt.',
+      'Kvadratroten kommer först i ETT senare steg, när ekvationen blivit $x^2 = 100\\ 000$.',
+      'Exponenten är ingen koefficient — division ändrar inte potensen.',
+      'Multiplikation av leden ändrar bara talen, inte exponenten på $x$.',
+    ],
+  },
+  {
+    question: 'Varför får $x^{99} = -5$ exakt en lösning?',
+    choices: [
+      'Potensekvationer med udda exponent har alltid exakt en lösning',
+      'Alla potensekvationer har exakt en lösning',
+      'Eftersom −5 är negativt saknas lösningar',
+      'Eftersom 99 är stort finns bara en lösning',
+    ],
+    correct: 0,
+    why: [
+      'Udda potenser bevarar tecknet — ett negativt tal upphöjt till 99 är negativt, så det finns exakt ett $x$ som fungerar.',
+      'Jämna exponenter kan ge två, en eller noll lösningar — det är udda exponenter som alltid ger en.',
+      'Det gäller för JÄMNA exponenter — med udda exponent går negativa högerled utmärkt.',
+      'Exponentens storlek spelar ingen roll — det är dess paritet (udda/jämn) som avgör.',
+    ],
+  },
+],
+
+'ma1c-2.11': [
+  {
+    question: 'Vad skiljer en olikhet från en ekvation?',
+    choices: [
+      'Olikheten har ett olikhetstecken (<, >, ≤, ≥) i stället för likhetstecken',
+      'Olikheten innehåller inga variabler',
+      'Olikheten kan inte lösas',
+      'Olikheten har alltid exakt en lösning',
+    ],
+    correct: 0,
+    why: [
+      '$3x - 4 = 2$ är en ekvation; $3x - 4 < 2$ är en olikhet — skillnaden är tecknet mellan leden.',
+      'Olikheter innehåller oftast variabler, precis som ekvationer.',
+      'Olikheter löses nästan precis som ekvationer.',
+      'Tvärtom — lösningen är oftast ett helt intervall av tal, t.ex. $x < 9$.',
+    ],
+  },
+  {
+    question: 'Lös olikheten $-2x > 10$.',
+    choices: [
+      '$x > -5$',
+      '$x < -5$',
+      '$x > 5$',
+      '$x < 5$',
+    ],
+    correct: 1,
+    why: [
+      'Vid division med det negativa talet −2 måste olikhetstecknet vändas.',
+      'Dividera med −2 och vänd tecknet: $x < \\frac{10}{-2} = -5$.',
+      'Både tecknet på 5:an och olikhetstecknet har hanterats fel — kontrollera med t.ex. $x = -6$: $-2 \\cdot (-6) = 12 > 10$ stämmer.',
+      'Högerledet blir $-5$, inte 5, vid divisionen.',
+    ],
+  },
+  {
+    question: 'Varför vänds olikhetstecknet vid multiplikation med ett negativt tal?',
+    choices: [
+      'Talens ordning på tallinjen speglas — t.ex. är $5 > 3$ men $-5 < -3$',
+      'Det är en ren konvention utan matematisk grund',
+      'För att negativa tal inte kan jämföras',
+      'Tecknet vänds egentligen bara vid division, inte multiplikation',
+    ],
+    correct: 0,
+    why: [
+      'Multiplikation med ett negativt tal speglar tallinjen kring 0 — det större talet hamnar till vänster, så tecknet måste vändas.',
+      'Undersökningen med $5 > 3$ visar att regeln är tvingande, inte en konvention.',
+      'Negativa tal jämförs utmärkt — det är själva jämförelsens riktning som byts.',
+      'Regeln gäller både multiplikation och division med negativa tal.',
+    ],
+  },
+  {
+    question: 'Hur beskrivs lösningen till $x^2 < 9$?',
+    choices: [
+      '$-3 < x < 3$',
+      '$x < 3$',
+      '$x < \\pm 3$',
+      '$x < -3$ och $x > 3$',
+    ],
+    correct: 0,
+    why: [
+      'Gränsfallet $x^2 = 9$ ger $x = \\pm 3$, och kvadraten är mindre än 9 för alla tal MELLAN gränserna.',
+      '$x = -5 < 3$ men $(-5)^2 = 25 > 9$ — den negativa sidan måste också begränsas.',
+      'Skrivsättet $x < \\pm 3$ är inte väldefinierat — intervallet skrivs $-3 < x < 3$.',
+      'Det är lösningen till den OMVÄNDA olikheten $x^2 > 9$.',
+    ],
+  },
+],
+
+'ma1c-2.12': [
+  {
+    question: 'Vad är en **formel**?',
+    choices: [
+      'En ekvation som beskriver ett samband mellan olika storheter',
+      'En regel för hur räknaren används',
+      'Ett tal som aldrig ändras',
+      'En lista över enheter',
+    ],
+    correct: 0,
+    why: [
+      'T.ex. beskriver $v = \\frac{s}{t}$ sambandet mellan storheterna hastighet, sträcka och tid.',
+      'Formler är matematiska samband, inte bruksanvisningar.',
+      'Det beskriver snarare en konstant — formler innehåller variabler.',
+      'Enheter är viktiga i formler, men formeln är själva sambandet.',
+    ],
+  },
+  {
+    question: 'Lös ut $t$ ur formeln $v = \\dfrac{s}{t}$.',
+    choices: [
+      '$t = \\dfrac{s}{v}$',
+      '$t = \\dfrac{v}{s}$',
+      '$t = s \\cdot v$',
+      '$t = s - v$',
+    ],
+    correct: 0,
+    why: [
+      'Multiplicera båda led med $t$ ($s = vt$) och dividera sedan med $v$: $t = \\frac{s}{v}$.',
+      'Uttrycket är uppochnedvänt — tiden växer med sträckan, inte tvärtom.',
+      'Det är sträckan som är produkten: $s = v \\cdot t$.',
+      'Storheter med olika enheter kan inte subtraheras.',
+    ],
+  },
+  {
+    question: 'Formeln $H = 21\\ 000 + 2{,}5m$ gäller med $m$ i kilometer. Vad måste man göra innan man sätter in en körsträcka på 2 000 mil?',
+    choices: [
+      'Räkna om sträckan till kilometer: 2 000 mil = 20 000 km',
+      'Ingenting — mil och kilometer är samma sak',
+      'Räkna om kostnaden till euro',
+      'Dividera sträckan med 10',
+    ],
+    correct: 0,
+    why: [
+      'Formelns $m$ är definierad i kilometer — 1 mil = 10 km, så $m = 20\\ 000$.',
+      'En mil är 10 km — utan omvandling blir kostnaden tio gånger för låg.',
+      'Valutan har inget med formeln att göra.',
+      'Det är precis tvärtom — antalet mil MULTIPLICERAS med 10 för att bli kilometer.',
+    ],
+  },
+  {
+    question: 'Hur långt kan man köra för 30 000 kr om $H = 21\\ 000 + 2{,}5m$?',
+    choices: [
+      '3 600 km',
+      '9 000 km',
+      '12 000 km',
+      '360 km',
+    ],
+    correct: 0,
+    why: [
+      'Insättning av $H = 30\\ 000$ ger $9\\ 000 = 2{,}5m$, dvs. $m = 3\\ 600$ km (360 mil).',
+      '9 000 är kronorna som återstår efter den fasta kostnaden — de ska divideras med 2,5 kr/km.',
+      '12 000 vore $30\\ 000/2{,}5$ — den fasta kostnaden 21 000 kr måste dras bort först.',
+      '360 är svaret i MIL — i kilometer är det 3 600.',
+    ],
+  },
+],
+
+'ma1c-2.13': [
+  {
+    question: 'Vad kallas talen i en talföljd?',
+    choices: [
+      'Element',
+      'Faktorer',
+      'Koefficienter',
+      'Nämnare',
+    ],
+    correct: 0,
+    why: [
+      'Talen i en talföljd kallas element och betecknas $a_n$, där $n$ är ordningsnumret.',
+      'Faktorer är delarna i en multiplikation.',
+      'Koefficient är talet framför en variabel i ett uttryck.',
+      'Nämnaren är den nedre delen av ett bråk.',
+    ],
+  },
+  {
+    question: 'Vad betyder $a_3 = 11$ i en talföljd?',
+    choices: [
+      'Det tredje elementet i talföljden är 11',
+      'Talföljden har 3 element som är 11',
+      'Element nummer 11 är 3',
+      'Talföljden slutar på 11',
+    ],
+    correct: 0,
+    why: [
+      'Indexet 3 är ordningsnumret — det tredje talet i följden är 11.',
+      'Beteckningen pekar ut ETT element, det med ordningsnummer 3.',
+      'Ordningen är omvänd — indexet är ordningsnumret och värdet står efter likhetstecknet.',
+      'Talföljder fortsätter ofta oändligt — tre punkter (…) markerar det.',
+    ],
+  },
+  {
+    question: 'Talföljden 3, 7, 11, 15, … ökar med 4 per steg. Varför är formeln $a_n = 4n - 1$ och inte $a_n = 4n$?',
+    choices: [
+      'Testet $n = 1$ ger $4 \\cdot 1 = 4$, som är 1 för mycket — därför subtraheras 1',
+      'Man subtraherar alltid 1 i slutna formler',
+      'Eftersom talföljden börjar på ett udda tal',
+      'Formeln $a_n = 4n$ är också korrekt',
+    ],
+    correct: 0,
+    why: [
+      'Ökningen ger termen $4n$; konstanten bestäms genom att testa mot $a_1 = 3$ — och $4n$ ensamt ger 4, så 1 dras bort.',
+      'Justeringen beror helt på talföljden — 6, 10, 14 … kräver i stället $+2$.',
+      'Udda/jämnt avgör inte konstanten — det gör skillnaden mellan $4 \\cdot 1$ och $a_1$.',
+      'Nej: $a_1 = 4 \\cdot 1 = 4 \\neq 3$ — formeln måste stämma för alla element.',
+    ],
+  },
+  {
+    question: 'Ett mönster har formeln $a_n = 3n + 1$. Hur många prickar finns i figur 1 000?',
+    choices: [
+      '3 001',
+      '3 000',
+      '1 003',
+      '4 000',
+    ],
+    correct: 0,
+    why: [
+      'Insättning: $a_{1000} = 3 \\cdot 1\\ 000 + 1 = 3\\ 001$ — det är hela poängen med en sluten formel.',
+      'Ettan i formeln får inte glömmas: $3n + 1$, inte $3n$.',
+      'Koefficienten 3 multipliceras med $n$ — inte med 1.',
+      '4 000 vore $4n$ — fel koefficient.',
+    ],
+  },
+],
+
+// ── Kapitel 3: Procentuella förändringar ──────────────────────
+
+'ma1c-3.1': [
+  {
+    question: 'Vad betyder **promille**?',
+    choices: [
+      'Tusendelar',
+      'Hundradelar',
+      'Miljondelar',
+      'Tiondelar',
+    ],
+    correct: 0,
+    why: [
+      '1 ‰ = 1/1 000 = 0,001 — promille är tusendelar.',
+      'Hundradelar är procent (%).',
+      'Miljondelar är ppm (parts per million).',
+      'Tiondelar har ingen egen symbol i det här systemet.',
+    ],
+  },
+  {
+    question: 'Hur beräknas en andel?',
+    choices: [
+      'andel = delen/hela',
+      'andel = hela/delen',
+      'andel = delen · hela',
+      'andel = delen − hela',
+    ],
+    correct: 0,
+    why: [
+      'Andelen är delen dividerad med det hela — och den anges i bråk- eller decimalform.',
+      'Uppochnedvänt — då blir andelen större än 1 så fort delen är mindre än det hela.',
+      'Multiplikationen ger delen när andelen och det hela är kända: delen = andel · hela.',
+      'En differens jämför storlekar i samma enhet — en andel är en kvot.',
+    ],
+  },
+  {
+    question: 'Vad måste man kontrollera innan man beräknar andelen 120 g av 15 kg?',
+    choices: [
+      'Att delen och det hela har samma enhet',
+      'Att delen är större än det hela',
+      'Att båda talen är heltal',
+      'Att svaret blir i procent',
+    ],
+    correct: 0,
+    why: [
+      'Gör om till samma enhet först: 15 kg = 15 000 g, sedan är andelen 120/15 000 = 0,008 = 8 ‰.',
+      'Delen är normalt mindre än det hela — annars är andelen större än 100 %.',
+      'Decimaltal fungerar utmärkt i andelsberäkningar.',
+      'Andelen kan uttryckas i procent, promille eller ppm — det väljs efter frågan.',
+    ],
+  },
+  {
+    question: 'Skriv 5 ppm i decimalform.',
+    choices: [
+      '0,000 005',
+      '0,005',
+      '0,000 05',
+      '0,5',
+    ],
+    correct: 0,
+    why: [
+      'ppm är miljondelar: $5/1\\ 000\\ 000 = 0{,}000\\ 005$.',
+      '0,005 är 5 ‰ — promille, inte ppm.',
+      'En nolla för lite — miljondelar kräver sex decimalpositioner för 1 ppm.',
+      '0,5 är 50 % — långt ifrån miljondelar.',
+    ],
+  },
+  {
+    question: 'Hur används procenttriangeln?',
+    choices: [
+      'Täck den sökta storheten — de kvarvarande visar formeln',
+      'Den visar att alla tre storheterna alltid adderas',
+      'Den fungerar bara för procent, inte promille',
+      'Den ger svaret utan beräkning',
+    ],
+    correct: 0,
+    why: [
+      'Täcker man t.ex. "delen" står "andelen · hela" kvar bredvid varandra — multiplikation. Täcker man "andelen" står delen ÖVER hela — division.',
+      'Triangeln kodar multiplikation och division, inte addition.',
+      'Den fungerar utmärkt även för promille och ppm.',
+      'Triangeln ger formeln — beräkningen gör man själv.',
+    ],
+  },
+],
+
+'ma1c-3.2': [
+  {
+    question: 'Hur beräknas förändringsfaktorn?',
+    choices: [
+      'nya värdet dividerat med gamla värdet',
+      'gamla värdet dividerat med nya värdet',
+      'nya värdet minus gamla värdet',
+      'nya värdet plus gamla värdet',
+    ],
+    correct: 0,
+    why: [
+      'Förändringsfaktor = nya värdet/gamla värdet — och omvänt är nya värdet = förändringsfaktor · gamla värdet.',
+      'Uppochnedvänt — då får en ökning en faktor mindre än 1.',
+      'Differensen ger ändringen i kronor (eller annan enhet), inte faktorn.',
+      'En summa av två priser säger inget om förändringen.',
+    ],
+  },
+  {
+    question: 'Vilken förändringsfaktor motsvarar − 25 %?',
+    choices: [
+      '0,75',
+      '1,25',
+      '0,25',
+      '−0,25',
+    ],
+    correct: 0,
+    why: [
+      '$100\\ \\% - 25\\ \\% = 75\\ \\% = 0{,}75$.',
+      '1,25 motsvarar en ÖKNING med 25 %.',
+      '0,25 vore en minskning med 75 % — bara en fjärdedel kvar.',
+      'Förändringsfaktorer är aldrig negativa — minskningen kodas som en faktor mindre än 1.',
+    ],
+  },
+  {
+    question: 'En förändringsfaktor är 2,40. Vad betyder det?',
+    choices: [
+      'Värdet har ökat med 140 %',
+      'Värdet har ökat med 240 %',
+      'Värdet har ökat med 24 %',
+      'Värdet har minskat med 40 %',
+    ],
+    correct: 0,
+    why: [
+      '2,40 = 240 %, och jämfört med 100 % är ökningen 140 %.',
+      'En ökning med 240 % hade gett faktorn 3,40.',
+      'En ökning med 24 % ger faktorn 1,24.',
+      'Faktorer över 1 betyder alltid ökning.',
+    ],
+  },
+  {
+    question: 'Vid en procentuell jämförelse — vad motsvarar "gamla värdet"?',
+    choices: [
+      'Det man jämför med',
+      'Det största värdet',
+      'Det minsta värdet',
+      'Medelvärdet av de två',
+    ],
+    correct: 0,
+    why: [
+      '"Hur många procent dyrare än butik A?" — då är A:s pris gamla värdet. Det förklarar varför 22 % dyrare och 18 % billigare kan beskriva samma prisskillnad.',
+      'Jämförelsereferensen väljs av frågan, inte av storleken.',
+      'Samma sak — det är frågans "jämfört med" som styr.',
+      'Medelvärdet används inte i procentuella jämförelser av den här typen.',
+    ],
+  },
+  {
+    question: 'Ett pris ökar från 175 kr till 231 kr. Hur stor är ökningen i procent?',
+    choices: [
+      '32 %',
+      '56 %',
+      '132 %',
+      '24 %',
+    ],
+    correct: 0,
+    why: [
+      'Förändringsfaktorn är $231/175 = 1{,}32 = 132\\ \\%$ — alltså 32 % över 100 %.',
+      '56 kr är ökningen i KRONOR — i procent av 175 kr är den 32 %.',
+      '132 % är hela förändringsfaktorn — själva ökningen är det som överstiger 100 %.',
+      '24 % vore ökningen räknad på det NYA priset — ökningen räknas alltid på det gamla.',
+    ],
+  },
+],
+
+'ma1c-3.3': [
+  {
+    question: 'Hur fås den totala förändringsfaktorn vid upprepade procentuella förändringar?',
+    choices: [
+      'Förändringsfaktorerna multipliceras',
+      'Förändringsfaktorerna adderas',
+      'Procentsatserna adderas och görs om till faktor',
+      'Den största faktorn används',
+    ],
+    correct: 0,
+    why: [
+      'Total förändringsfaktor = faktor 1 · faktor 2 · … — varje förändring verkar på det redan förändrade värdet.',
+      'Faktorer adderas aldrig — addition av procentsatser är just det klassiska felet.',
+      '+15 % följt av −15 % ger 0,9775 (−2,25 %), inte 0 % — procentsatser kan inte adderas rakt av.',
+      'Alla förändringar påverkar — ingen kan hoppas över.',
+    ],
+  },
+  {
+    question: 'Ett pris höjs med 15 % och sänks sedan med 15 %. Vad har hänt totalt?',
+    choices: [
+      'Priset har minskat med 2,25 %',
+      'Priset är oförändrat',
+      'Priset har ökat med 2,25 %',
+      'Priset har minskat med 15 %',
+    ],
+    correct: 0,
+    why: [
+      '$1{,}15 \\cdot 0{,}85 = 0{,}9775$ — en minskning med 2,25 %, eftersom sänkningen räknas på det höjda priset.',
+      'Det känns intuitivt men stämmer inte — 15 % av det höjda priset är mer i kronor än 15 % av det ursprungliga.',
+      'Faktorn 0,9775 ligger UNDER 1 — en minskning.',
+      'Sänkningen med 15 % tog bara bort det mesta av höjningen, inte 15 % av originalet netto.',
+    ],
+  },
+  {
+    question: 'Vilket uttryck ger kontobehållningen efter 18 år om 80 000 kr sätts in med 2,5 % årsränta?',
+    choices: [
+      '$80\\ 000 \\cdot 1{,}025^{18}$',
+      '$80\\ 000 \\cdot 1{,}025 \\cdot 18$',
+      '$80\\ 000 \\cdot 0{,}025^{18}$',
+      '$80\\ 000 + 1{,}025^{18}$',
+    ],
+    correct: 0,
+    why: [
+      'Faktorn 1,025 multipliceras en gång per år — 18 gånger blir $1{,}025^{18}$.',
+      'Multiplikation med 18 ger enkel ränta gånger fel — upprepad förändring är en potens, inte en produkt med antalet år.',
+      '0,025 är räntesatsen ensam — förändringsfaktorn är $1 + 0{,}025$.',
+      'Faktorn ska multipliceras med beloppet, inte adderas.',
+    ],
+  },
+  {
+    question: 'Varför ger +15 % följt av −15 % inte 0 % totalt?',
+    choices: [
+      'Procentsatserna räknas på olika värden — sänkningen räknas på det redan höjda priset',
+      'Avrundningsfel i mellanstegen',
+      'Det ger visst 0 % totalt',
+      'Höjningar väger alltid tyngre än sänkningar',
+    ],
+    correct: 0,
+    why: [
+      '15 % av det höjda värdet är mer i kronor än 15 % av originalet — därför hamnar man under startvärdet.',
+      'Effekten är exakt, inte ett avrundningsfel: $1{,}15 \\cdot 0{,}85 = 0{,}9775$ precis.',
+      'Kontrollera: 100 kr → 115 kr → 97,75 kr. Inte tillbaka till 100.',
+      'Ordningen spelar ingen roll ($0{,}85 \\cdot 1{,}15$ är samma produkt) — asymmetrin ligger i att basen ändras.',
+    ],
+  },
+],
+
+'ma1c-3.4': [
+  {
+    question: 'Vad anger **årsräntan** på ett sparkonto?',
+    choices: [
+      'Med hur många procent behållningen växer varje år',
+      'Hur många kronor kontot växer med varje år',
+      'Hur mycket banken tar i avgift',
+      'Hur ofta man får sätta in pengar',
+    ],
+    correct: 0,
+    why: [
+      'Årsräntan är en procentsats — behållningen multipliceras varje år med förändringsfaktorn 1 + räntan.',
+      'Kronbeloppet ändras år från år (ränta på ränta) — procentsatsen är densamma.',
+      'Avgifter är något annat — räntan är tillväxten.',
+      'Räntan handlar om tillväxt, inte om insättningsregler.',
+    ],
+  },
+  {
+    question: 'Vad heter cellen i kolumn C på rad 5 i ett kalkylblad?',
+    choices: [
+      'C5',
+      '5C',
+      'C:5',
+      'R5K3',
+    ],
+    correct: 0,
+    why: [
+      'Kolumnbokstaven följs av radnumret: C5.',
+      'Ordningen är alltid bokstav först, siffra sedan.',
+      'Inget kolon används i cellnamn — kolon anger i stället ett OMRÅDE, t.ex. B3:B10.',
+      'Det skrivsättet används inte i vanliga kalkylblad.',
+    ],
+  },
+  {
+    question: 'Varför skrivs formeln som \`=B2*$B$12\` i stället för \`=B2*B12\` innan den dras nedåt?',
+    choices: [
+      'Dollartecknen låser referensen till B12 så att alla kopior använder samma faktorcell',
+      'Dollartecknen anger att värdet är i kronor',
+      'Formler fungerar inte utan dollartecken',
+      'Det gör beräkningen snabbare',
+    ],
+    correct: 0,
+    why: [
+      'Utan låsning flyttas referensen med vid kopiering (B13, B14 …) och pekar på tomma celler — med $B$12 använder alla rader förändringsfaktorn.',
+      'Dollartecknet i kalkylformler handlar om cellreferenser, inte valuta.',
+      'Formeln fungerar — men ger fel värden när den kopieras.',
+      'Hastigheten påverkas inte — det är korrektheten som står på spel.',
+    ],
+  },
+  {
+    question: 'Du sparar 5 000 kr i slutet av varje år med 2,8 % ränta. Vilken kalkylbladsformel ger nästa års behållning utifrån föregående (cell B2)?',
+    choices: [
+      '\`=B2*1,028+5000\`',
+      '\`=B2+5000*1,028\`',
+      '\`=B2*0,028+5000\`',
+      '\`=B2+5000\`',
+    ],
+    correct: 0,
+    why: [
+      'Det gamla beloppet växer med faktorn 1,028 OCH en ny insättning på 5 000 kr läggs till.',
+      'Här är det bara den nya insättningen som får ränta — det är tvärtom det gamla beloppet som ska växa.',
+      '0,028 ger bara själva räntedelen — behållningen kräver faktorn 1,028.',
+      'Utan faktorn växer inga pengar — det är sparande utan ränta.',
+    ],
+  },
+],
+
+'ma1c-3.5': [
+  {
+    question: 'Vad består varje inbetalning på ett lån av?',
+    choices: [
+      'Amortering och ränta',
+      'Endast amortering',
+      'Endast ränta',
+      'Insättning och behållning',
+    ],
+    correct: 0,
+    why: [
+      'Amorteringen betalar av själva skulden och räntan är lånekostnaden — båda ingår i inbetalningen.',
+      'Med enbart amortering vore lånet gratis — räntan är priset för lånet.',
+      'Med enbart ränta krymper skulden aldrig.',
+      'Insättning och behållning hör till sparkonton, inte lån.',
+    ],
+  },
+  {
+    question: 'Vad menas med "rak amortering"?',
+    choices: [
+      'Lika stora amorteringsbelopp vid varje inbetalning',
+      'Lika stora totala inbetalningar varje månad',
+      'Att hela lånet betalas på en gång',
+      'Att ingen ränta betalas',
+    ],
+    correct: 0,
+    why: [
+      'Skulden delas i lika delar — t.ex. 150 000 kr på 60 månader ger 2 500 kr amortering varje månad. Totalbeloppet sjunker ändå, eftersom räntedelen krymper.',
+      'Det beskriver annuitetslån — vid rak amortering är det amorteringen som är konstant, inte totalen.',
+      'Det vore en engångsbetalning, inte en amorteringsplan.',
+      'Ränta betalas alltid på den aktuella skulden.',
+    ],
+  },
+  {
+    question: 'En skuld är 150 000 kr och årsräntan 4,8 %. Hur stor är räntan den första månaden?',
+    choices: [
+      '600 kr',
+      '7 200 kr',
+      '2 500 kr',
+      '60 kr',
+    ],
+    correct: 0,
+    why: [
+      'Årsräntan är $0{,}048 \\cdot 150\\ 000 = 7\\ 200$ kr, och per månad $7\\ 200/12 = 600$ kr.',
+      '7 200 kr är räntan för ett HELT år — månadsräntan är en tolftedel.',
+      '2 500 kr är amorteringen i exemplet, inte räntan.',
+      'En tiopotens fel — kontrollera divisionen med 12.',
+    ],
+  },
+  {
+    question: 'Varför sjunker månadens totala inbetalning under lånets gång vid rak amortering?',
+    choices: [
+      'Räntan beräknas på den aktuella skulden, som minskar för varje amortering',
+      'Amorteringen minskar för varje månad',
+      'Banken sänker räntesatsen varje år',
+      'Den sjunker inte — inbetalningen är konstant',
+    ],
+    correct: 0,
+    why: [
+      'Amorteringen är konstant men räntedelen krymper i takt med skulden — från 600 kr första månaden till 10 kr den sista i exemplet.',
+      'Vid rak amortering är amorteringen exakt lika stor varje gång.',
+      'Räntesatsen är oförändrad — det är underlaget (skulden) som minskar.',
+      'Konstant inbetalning kännetecknar annuitetslån, inte rak amortering.',
+    ],
+  },
+  {
+    question: 'Vilken kalkylbladsformel summerar alla inbetalningar i cellerna D2 till D61?',
+    choices: [
+      '\`=SUM(D2:D61)\`',
+      '\`=D2+D61\`',
+      '\`=SUM(D2;D61)\`',
+      '\`=TOTAL(D)\`',
+    ],
+    correct: 0,
+    why: [
+      'SUM med kolon anger hela området från D2 till och med D61.',
+      'Det adderar bara den första och den sista cellen — inte alla däremellan.',
+      'Semikolon mellan referenserna betyder två ENSKILDA celler, inte ett område.',
+      'TOTAL är ingen standardfunktion i kalkylblad.',
+    ],
+  },
+],
+
+// ── Kapitel 4: Räta linjer och funktioner ─────────────────────
+
+'ma1c-4.1': [
+  {
+    question: 'Hur skrivs koordinaterna för en punkt?',
+    choices: [
+      'Med x-koordinaten först och y-koordinaten sist: ($x$, $y$)',
+      'Med y-koordinaten först och x-koordinaten sist: ($y$, $x$)',
+      'Ordningen spelar ingen roll',
+      'Med ett likhetstecken mellan: $x = y$',
+    ],
+    correct: 0,
+    why: [
+      'Läget i sidled (x) skrivs först och läget i höjdled (y) sist — punkten (2, 3) ligger 2 åt höger och 3 upp.',
+      'Ordningen är fast bestämd — (2, 3) och (3, 2) är olika punkter.',
+      'Med omkastad ordning hamnar man i fel punkt så fort koordinaterna är olika.',
+      'Likhetstecken har inget med koordinatskrivsättet att göra.',
+    ],
+  },
+  {
+    question: 'Vilken kvadrant har både positiva x-värden och positiva y-värden?',
+    choices: [
+      'Första kvadranten',
+      'Andra kvadranten',
+      'Tredje kvadranten',
+      'Fjärde kvadranten',
+    ],
+    correct: 0,
+    why: [
+      'Första kvadranten ligger uppe till höger, där båda koordinaterna är positiva — och numreringen fortsätter moturs.',
+      'Andra kvadranten (uppe till vänster) har negativa x-värden.',
+      'Tredje kvadranten (nere till vänster) har båda negativa.',
+      'Fjärde kvadranten (nere till höger) har negativa y-värden.',
+    ],
+  },
+  {
+    question: 'Vad kännetecknar en **linjär modell**?',
+    choices: [
+      'Något ändras i jämn takt med samma mängd — grafen blir en rät linje',
+      'Något fördubblas i varje steg',
+      'Grafen går alltid genom origo',
+      'Modellen saknar konstantterm',
+    ],
+    correct: 0,
+    why: [
+      'Jämn ändringstakt (t.ex. 400 kr per timme) ger en rät linje — därav namnet linjär.',
+      'Fördubbling i varje steg är exponentiell tillväxt, inte linjär.',
+      'Linjen kan skära y-axeln var som helst — verkstadsmodellen $y = 500 + 400x$ startar på 500.',
+      'Konstanttermen (t.ex. en fast avgift) är tillåten och vanlig.',
+    ],
+  },
+  {
+    question: 'På vilka tre sätt kan en linjär modell beskrivas enligt genomgången?',
+    choices: [
+      'Med formel, värdetabell eller graf',
+      'Endast med en formel',
+      'Med cirkeldiagram, stapeldiagram eller kurva',
+      'Med ekvation, olikhet eller rot',
+    ],
+    correct: 0,
+    why: [
+      'Samma samband kan uttryckas som formeln $y = 500 + 400x$, som en tabell med x- och y-värden, eller som en rät linje i ett koordinatsystem.',
+      'Formeln är bara ett av sätten — tabell och graf visar samma sak.',
+      'Cirkel- och stapeldiagram används för helt andra slags data.',
+      'Olikheter och rötter är andra verktyg — inte beskrivningsformer för en modell.',
+    ],
+  },
+],
+
+'ma1c-4.2': [
+  {
+    question: 'Vilken formel beskriver alla proportionaliteter?',
+    choices: [
+      '$y = kx$',
+      '$y = kx + m$',
+      '$y = x^k$',
+      '$y = \\dfrac{k}{x}$',
+    ],
+    correct: 0,
+    why: [
+      'En proportionalitet är $y = kx$ där $k$ är proportionalitetskonstanten — utan konstantterm.',
+      '$y = kx + m$ med $m \\neq 0$ är linjär men inte proportionell — grafen missar origo.',
+      'Variabeln i exponenten hör till potensfunktioner.',
+      'Det är en omvänd proportionalitet — något annat.',
+    ],
+  },
+  {
+    question: 'Var skär grafen till en proportionalitet y-axeln?',
+    choices: [
+      'I origo',
+      'I punkten (0, $k$)',
+      'I punkten (1, 0)',
+      'Den skär aldrig y-axeln',
+    ],
+    correct: 0,
+    why: [
+      'Med $x = 0$ ger $y = kx$ alltid $y = 0$ — grafen går genom origo.',
+      '$k$ är lutningen, inte skärningspunkten — insättning av $x = 0$ ger $y = 0$.',
+      '(1, 0) ligger på x-axeln — proportionalitetens graf går där bara om $k = 0$.',
+      'Alla räta linjer av formen $y = kx$ skär (går genom) y-axeln i origo.',
+    ],
+  },
+  {
+    question: 'Hur beräknas proportionalitetskonstanten $k$ ur ett värdepar?',
+    choices: [
+      '$k = \\dfrac{y}{x}$',
+      '$k = \\dfrac{x}{y}$',
+      '$k = y - x$',
+      '$k = x \\cdot y$',
+    ],
+    correct: 0,
+    why: [
+      'Ur $y = kx$ följer $k = \\frac{y}{x}$ — t.ex. ger (5, 100) konstanten $k = 20$.',
+      'Kvoten är vänd åt fel håll — det ger $\\frac{1}{k}$.',
+      'En differens ger inte förhållandet mellan variablerna.',
+      'Produkten är konstant i en OMVÄND proportionalitet, inte här.',
+    ],
+  },
+  {
+    question: 'Grafen till ett samband är en rät linje som skär y-axeln i (0, 50). Är sambandet en proportionalitet?',
+    choices: [
+      'Nej — grafen går inte genom origo',
+      'Ja — alla räta linjer är proportionaliteter',
+      'Ja — 50 är proportionalitetskonstanten',
+      'Det går inte att avgöra',
+    ],
+    correct: 0,
+    why: [
+      'Rät linje räcker inte — den måste dessutom gå genom origo, och (0, 50) är inte origo.',
+      'Räta linjer med startvärde (som $y = 50 + kx$) är linjära modeller men inte proportionaliteter.',
+      '50 är startvärdet (konstanttermen) — proportionaliteter saknar sådant.',
+      'Jo — kriterierna är tydliga: rät linje OCH genom origo, och det andra kravet är brutet.',
+    ],
+  },
+],
+
+'ma1c-4.3': [
+  {
+    question: 'Vad är första steget när grafen till $y = -2x + 3$ ska ritas för hand?',
+    choices: [
+      'Göra en värdetabell med några x-värden kring 0',
+      'Dra en linje på måfå och justera efteråt',
+      'Beräkna grafens lutning med gradskiva',
+      'Rita av grafen från räknaren',
+    ],
+    correct: 0,
+    why: [
+      'Värdetabellen ger koordinater att pricka in — en bra tumregel är några positiva och negativa x-värden kring 0.',
+      'Grafen ska byggas på beräknade punkter, inte gissningar.',
+      'Lutningen syns när punkterna är inprickade — ingen gradskiva behövs.',
+      'Poängen med handritning är att förstå vad de digitala verktygen gör.',
+    ],
+  },
+  {
+    question: 'Vad motsvarar en rad i värdetabellen ($x = -3$, $y = 9$) i koordinatsystemet?',
+    choices: [
+      'Punkten (−3, 9)',
+      'Punkten (9, −3)',
+      'En linje genom −3 och 9',
+      'Avståndet mellan −3 och 9',
+    ],
+    correct: 0,
+    why: [
+      'Varje rad är en koordinat: x-värdet först, y-värdet sist.',
+      'Omkastad ordning ger en helt annan punkt.',
+      'En rad ger EN punkt — linjen uppstår först när alla punkter förbinds.',
+      'Raden anger ett läge, inte ett avstånd.',
+    ],
+  },
+  {
+    question: 'Hur väljer man lämpliga intervall för axlarna innan punkterna prickas in?',
+    choices: [
+      'Axlarna måste täcka största och minsta x- respektive y-värdena i tabellen',
+      'Axlarna ska alltid gå från −10 till 10',
+      'x-axeln räcker från 0 och uppåt',
+      'Intervallen spelar ingen roll',
+    ],
+    correct: 0,
+    why: [
+      'För $y = -2x + 3$ med x från −3 till 3 krävs y-axel från −3 till 9 — annars ryms inte alla punkter.',
+      'Ett fast intervall passar ibland men slösar ofta plats eller klipper punkter.',
+      'Negativa x-värden hör till en bra värdetabell — axeln måste täcka dem.',
+      'För små intervall gör att punkter hamnar utanför papperet.',
+    ],
+  },
+  {
+    question: 'Grafen till en linjär ekvation blir en rät linje. Vad betyder det för punkterna i värdetabellen?',
+    choices: [
+      'Alla punkter ska hamna på en och samma räta linje',
+      'Punkterna bildar alltid en båge',
+      'Bara två av punkterna ligger på linjen',
+      'Punkterna ska ligga symmetriskt kring y-axeln',
+    ],
+    correct: 0,
+    why: [
+      'Ligger en punkt utanför linjen är det ett räknefel i den raden av värdetabellen — grafen fungerar som kontroll.',
+      'Bågar hör till andra funktionstyper — linjära ekvationer ger räta linjer.',
+      'ALLA punkter från tabellen ligger på linjen — det är själva linjäriteten.',
+      'Symmetri kring y-axeln gäller t.ex. $y = x^2$, inte räta linjer i allmänhet.',
+    ],
+  },
+],
+
+'ma1c-4.4': [
+  {
+    question: 'Vad kallas ekvationen $y = kx + m$?',
+    choices: [
+      'Räta linjens ekvation',
+      'Andragradsekvationen',
+      'Proportionalitetsekvationen',
+      'Potensekvationen',
+    ],
+    correct: 0,
+    why: [
+      'Alla räta linjer utom lodräta kan skrivas $y = kx + m$ — räta linjens ekvation i k-form.',
+      'Andragradsekvationer innehåller $x^2$.',
+      'Proportionaliteten är specialfallet $m = 0$.',
+      'I potensekvationer är variabeln basen i en potens med annan exponent.',
+    ],
+  },
+  {
+    question: 'Vad motsvarar $k$-värdet i $y = kx + m$?',
+    choices: [
+      'Linjens lutning',
+      'Skärningen med y-axeln',
+      'Skärningen med x-axeln',
+      'Linjens startvärde',
+    ],
+    correct: 0,
+    why: [
+      '$k$ är lutningen (riktningskoefficienten) — hur många steg linjen går uppåt per steg åt höger.',
+      'Skärningen med y-axeln är $m$-värdet.',
+      'Skärningen med x-axeln fås först när man löser $kx + m = 0$.',
+      '"Startvärdet" i linjära modeller motsvarar $m$, inte $k$.',
+    ],
+  },
+  {
+    question: 'Hur beräknas $k$-värdet med trappstegsmetoden?',
+    choices: [
+      '$k = \\dfrac{\\Delta y}{\\Delta x}$ — förändringen i y-led delat med förändringen i x-led',
+      '$k = \\dfrac{\\Delta x}{\\Delta y}$ — förändringen i x-led delat med förändringen i y-led',
+      '$k = \\Delta y \\cdot \\Delta x$',
+      '$k = \\Delta y - \\Delta x$',
+    ],
+    correct: 0,
+    why: [
+      'Trappstegets höjd genom dess längd: $k = \\frac{\\Delta y}{\\Delta x}$, och man tänker att man går åt höger.',
+      'Kvoten är uppochnedvänd — det gäller höjd genom längd.',
+      'Produkten säger inget om lutningen.',
+      'En differens ger inte förhållandet mellan förändringarna.',
+    ],
+  },
+  {
+    question: 'En linje går 2 steg nedåt för varje steg åt höger och skär y-axeln i (0, 1). Vilken är ekvationen?',
+    choices: [
+      '$y = -2x + 1$',
+      '$y = 2x + 1$',
+      '$y = -2x - 1$',
+      '$y = x - 2$',
+    ],
+    correct: 0,
+    why: [
+      'Nedåt betyder negativ lutning: $k = -2$, och skärningen ger $m = 1$.',
+      'Med $k = +2$ skulle linjen luta uppåt.',
+      '$m$ är skärningen med y-axeln, som är $+1$.',
+      'Här har $k$ och $m$ bytt roller.',
+    ],
+  },
+  {
+    question: 'Vad händer med linjen om $k$-värdet är negativt?',
+    choices: [
+      'Den lutar nedåt, sett från vänster till höger',
+      'Den lutar uppåt',
+      'Den blir vågrät',
+      'Den hamnar under x-axeln överallt',
+    ],
+    correct: 0,
+    why: [
+      'Negativt $k$ betyder att y minskar när x ökar — linjen faller åt höger, som $y = -2x + 1$.',
+      'Uppåtlutning kräver positivt $k$.',
+      'Vågrät linje har $k = 0$.',
+      'Linjen kan mycket väl ligga över x-axeln för små x — lutningen styr riktningen, inte läget.',
+    ],
+  },
+],
+
+'ma1c-4.5': [
+  {
+    question: 'Vad förkortas ibland "RLE"?',
+    choices: [
+      'Räta linjens ekvation',
+      'Riktningskoefficientens lägesekvation',
+      'Räta linjens exponent',
+      'Rätvinkliga linjers egenskaper',
+    ],
+    correct: 0,
+    why: [
+      'RLE står för räta linjens ekvation, $y = kx + m$.',
+      'Riktningskoefficienten är $k$-värdet i ekvationen, inte förkortningens betydelse.',
+      'Exponenter förekommer inte i räta linjens ekvation.',
+      'Rätvinklighet hör till nästa avsnitt om vinkelräta linjer.',
+    ],
+  },
+  {
+    question: 'Hur beräknas $\\Delta y$ ur två punkter $(x_1, y_1)$ och $(x_2, y_2)$?',
+    choices: [
+      '$\\Delta y = y_2 - y_1$',
+      '$\\Delta y = y_2 + y_1$',
+      '$\\Delta y = x_2 - x_1$',
+      '$\\Delta y = y_1 - y_2$, alltid med största talet först',
+    ],
+    correct: 0,
+    why: [
+      'Förändringen i y-led är differensen mellan y-koordinaterna, i samma ordning som punkterna: $y_2 - y_1$.',
+      'En summa mäter ingen förändring.',
+      'Det är $\\Delta x$ — förändringen i x-led.',
+      'Ordningen följer punkternas numrering — huvudsaken är att $\\Delta y$ och $\\Delta x$ tar punkterna i SAMMA ordning.',
+    ],
+  },
+  {
+    question: 'Beräkna $k$ för linjen genom (−6, −1) och (2, 3).',
+    choices: [
+      '$\\dfrac{1}{2}$',
+      '$2$',
+      '$-\\dfrac{1}{2}$',
+      '$\\dfrac{4}{-4}= -1$',
+    ],
+    correct: 0,
+    why: [
+      '$k = \\frac{3 - (-1)}{2 - (-6)} = \\frac{4}{8} = \\frac{1}{2}$ — dubbla minustecken blir plus.',
+      '2 är kvoten uppochnedvänd ($\\frac{8}{4}$) — $\\Delta y$ ska stå i täljaren.',
+      'Tecknen tar ut varandra i båda differenserna — kvoten blir positiv.',
+      'Nämnaren är $2 - (-6) = 8$, inte $-4$ — parenteserna kring negativa koordinater är viktiga.',
+    ],
+  },
+  {
+    question: 'En linje har $k = 2$ och går genom (4, −3). Hur bestäms $m$-värdet?',
+    choices: [
+      'Sätt in punktens koordinater i $y = 2x + m$ och lös ut $m$',
+      'Läs av var linjen skär x-axeln',
+      '$m$ är alltid y-koordinaten i den givna punkten',
+      '$m = k \\cdot 4$',
+    ],
+    correct: 0,
+    why: [
+      '$-3 = 2 \\cdot 4 + m$ ger $m = -11$ — punkten ligger på linjen, så koordinaterna uppfyller ekvationen.',
+      '$m$ är skärningen med y-axeln, inte x-axeln — och den kan inte läsas av utan graf.',
+      'Bara om punkten ligger PÅ y-axeln ($x = 0$) är y-koordinaten lika med $m$.',
+      '$k \\cdot 4$ är variabeltermens värde i punkten — $m$ är det som återstår upp till $y$.',
+    ],
+  },
+],
+
+'ma1c-4.6': [
+  {
+    question: 'Vad kännetecknar två parallella linjer?',
+    choices: [
+      'De har samma k-värde',
+      'De har samma m-värde',
+      'De skär varandra i origo',
+      'De har samma ekvation',
+    ],
+    correct: 0,
+    why: [
+      'Samma lutning betyder att linjerna aldrig möts — k-värdena är lika men m-värdena olika.',
+      'Samma m-värde betyder att linjerna skär y-axeln i samma punkt — då korsar de varandra där.',
+      'Parallella linjer skär aldrig varandra alls.',
+      'Samma ekvation vore samma linje, inte två parallella.',
+    ],
+  },
+  {
+    question: 'Varför kan en vertikal linje inte skrivas i k-form ($y = kx + m$)?',
+    choices: [
+      'Lutningen skulle bli oändligt stor — det finns inget k-värde',
+      'Vertikala linjer saknar punkter',
+      'Vertikala linjer är inga riktiga linjer',
+      'Den kan visst skrivas i k-form',
+    ],
+    correct: 0,
+    why: [
+      'Trappsteget har $\\Delta x = 0$ — kvoten $\\Delta y/\\Delta x$ är odefinierad. Vertikala linjer skrivs i stället $x = a$.',
+      'De har oändligt många punkter — alla med samma x-koordinat.',
+      'De är fullvärdiga räta linjer, bara med ett annat skrivsätt.',
+      'Ingen kombination av $k$ och $m$ ger en lodrät graf.',
+    ],
+  },
+  {
+    question: 'Vilken är räta linjens ekvation i **allmän form**?',
+    choices: [
+      '$ax + by + c = 0$',
+      '$y = kx + m$',
+      '$x = a$',
+      '$y = x^2 + c$',
+    ],
+    correct: 0,
+    why: [
+      'I allmän form samlas alla termer i ena ledet och andra ledet är 0 — den formen klarar även vertikala linjer.',
+      'Det är k-formen — den vanligaste, men den klarar inte vertikala linjer.',
+      'Det är den vertikala linjens specialform.',
+      '$x^2$ hör till andragradskurvor, inte räta linjer.',
+    ],
+  },
+  {
+    question: 'Vilket k-värde har linjen $2x + 3y - 6 = 0$?',
+    choices: [
+      '$-\\dfrac{2}{3}$',
+      '$2$',
+      '$\\dfrac{2}{3}$',
+      '$-6$',
+    ],
+    correct: 0,
+    why: [
+      'Lös ut y: $3y = -2x + 6$ ger $y = -\\frac{2}{3}x + 2$ — lutningen är $-\\frac{2}{3}$.',
+      '2 är koefficienten framför x i allmän form — inte lutningen i k-form.',
+      'Tecknet följer med när $2x$ flyttas över: $-\\frac{2}{3}$.',
+      '−6 är konstanten c i allmän form.',
+    ],
+  },
+],
+
+'ma1c-4.7': [
+  {
+    question: 'Vad krävs för att ett samband mellan $x$ och $y$ ska vara en **funktion**?',
+    choices: [
+      'Varje tillåtet x-värde ger exakt ett y-värde',
+      'Varje y-värde ger exakt ett x-värde',
+      'Grafen är en rät linje',
+      'Sambandet innehåller inga negativa tal',
+    ],
+    correct: 0,
+    why: [
+      'Det är funktionsdefinitionen — grafiskt: en lodrät penna skär grafen högst en gång.',
+      'Det är kravet åt fel håll — flera x-värden får gärna ge samma y-värde.',
+      'Även kurvor (t.ex. andragradsfunktioner) är funktioner — linjäritet krävs inte.',
+      'Negativa tal är inga problem för funktioner.',
+    ],
+  },
+  {
+    question: 'Hur utläses $f(x)$?',
+    choices: [
+      '"f av x"',
+      '"f gånger x"',
+      '"f upphöjt till x"',
+      '"f och x"',
+    ],
+    correct: 0,
+    why: [
+      '$f(x)$ utläses "f av x" — f är funktionens namn och x variabeln den beror på.',
+      'Parenteserna betyder INTE multiplikation här — det är funktionsskrivsättet.',
+      'Ingen exponent finns i skrivsättet.',
+      'Skrivsättet anger att f beror på x, inte en uppräkning.',
+    ],
+  },
+  {
+    question: 'Låt $f(x) = 2x + 3$. Vad är $f(5)$?',
+    choices: [
+      '$13$',
+      '$10$',
+      '$25$',
+      '$f \\cdot 5$',
+    ],
+    correct: 0,
+    why: [
+      'Ersätt x med 5: $f(5) = 2 \\cdot 5 + 3 = 13$.',
+      '10 är bara variabeltermen $2 \\cdot 5$ — konstanttermen 3 ska med.',
+      '25 vore $5^2$ — funktionen kvadrerar inte.',
+      '$f$ är ett funktionsnamn, inte ett tal att multiplicera med.',
+    ],
+  },
+  {
+    question: 'Vad kallas $y$ i sambandet $y = f(x)$?',
+    choices: [
+      'Den beroende variabeln',
+      'Den oberoende variabeln',
+      'Koefficienten',
+      'Definitionsmängden',
+    ],
+    correct: 0,
+    why: [
+      '$y$:s värde beror på vilket $x$ som stoppas in — därav "beroende".',
+      'Den oberoende variabeln är $x$ — den väljs fritt.',
+      'Koefficient är talet framför en variabel i ett uttryck.',
+      'Definitionsmängden är mängden tillåtna x-värden — ett begrepp som kommer i ett senare avsnitt.',
+    ],
+  },
+  {
+    question: 'Grafen till $f$ skär x-axeln i $x = -1$, $x = 1$ och $x = 3$. Vad säger det?',
+    choices: [
+      'Ekvationen $f(x) = 0$ har lösningarna $x = -1$, $x = 1$ och $x = 3$',
+      '$f(0) = -1$, $f(0) = 1$ och $f(0) = 3$',
+      'Funktionen är inte definierad där',
+      'Grafen är ingen funktion',
+    ],
+    correct: 0,
+    why: [
+      'Skärning med x-axeln betyder $y = 0$ — där är funktionsvärdet noll, alltså lösningarna till $f(x) = 0$.',
+      '$f(0)$ är skärningen med Y-axeln — och en funktion kan bara ha ETT värde i $x = 0$.',
+      'Tvärtom — funktionen är definierad och råkar vara exakt noll där.',
+      'Tre olika x-värden med varsitt y-värde bryter inte mot funktionskravet.',
+    ],
+  },
+],
+
+'ma1c-4.8': [
+  {
+    question: 'Vad kallas det att lösa en ekvation med hjälp av grafer i t.ex. GeoGebra?',
+    choices: [
+      'Grafisk lösning',
+      'Algebraisk lösning',
+      'Prövning',
+      'Faktorisering',
+    ],
+    correct: 0,
+    why: [
+      'Att rita y = VL och y = HL och läsa av skärningspunkten kallas grafisk lösning.',
+      'Algebraisk lösning är att räkna sig fram med balansmetoden.',
+      'Prövning (gissa och testa) är inte tillåtet vid ekvationslösning.',
+      'Faktorisering är en algebraisk teknik, inte en grafisk.',
+    ],
+  },
+  {
+    question: 'Vilka två grafer ritas för att lösa $3x - 5 = -x + 3$ grafiskt?',
+    choices: [
+      '$y = 3x - 5$ och $y = -x + 3$',
+      '$y = 3x$ och $y = -x$',
+      '$y = 3x - 5 + x - 3$ och $y = 0$',
+      '$x = 3$ och $x = -1$',
+    ],
+    correct: 0,
+    why: [
+      'Sätt "y =" framför vänsterledet respektive högerledet och rita båda.',
+      'Konstanttermerna måste med — annars ritas fel linjer.',
+      'Det är en alternativ metod (nollställemetoden), men genomgångens metod ritar VL och HL var för sig.',
+      'Det är två lodräta linjer — inte ekvationens led.',
+    ],
+  },
+  {
+    question: 'Skärningspunkten mellan graferna är (2, 1). Vad är lösningen till ekvationen?',
+    choices: [
+      '$x = 2$',
+      '$x = 1$',
+      '$x = 3$',
+      '$(2, 1)$ — hela punkten',
+    ],
+    correct: 0,
+    why: [
+      'Lösningen är skärningspunktens X-koordinat: vid $x = 2$ är båda leden lika (värdet 1).',
+      '1 är y-koordinaten — ledens gemensamma värde, inte lösningen.',
+      'Summan av koordinaterna har ingen betydelse här.',
+      'Ekvationen har EN obekant — svaret är ett x-värde, inte en punkt.',
+    ],
+  },
+  {
+    question: 'Hur skrivs ekvationen $y = 13t + 5$ när den matas in för grafisk lösning i GeoGebra?',
+    choices: [
+      '\`y = 13x + 5\`',
+      '\`y = 13t + 5\`',
+      '\`t = 13y + 5\`',
+      '\`y = 13.5\`',
+    ],
+    correct: 0,
+    why: [
+      'GeoGebra förstår bara x och y i grafiska lösningar — variabeln t byts mot x.',
+      'Med t kvar tolkar GeoGebra inte uttrycket som en linje i xy-planet.',
+      'Att kasta om variablerna ändrar sambandet helt.',
+      '13.5 är ett tal — hela uttrycket försvann.',
+    ],
+  },
+],
+
+'ma1c-4.9': [
+  {
+    question: 'Vad kallas mängden av möjliga värden på den beroende variabeln $y$?',
+    choices: [
+      'Värdemängd',
+      'Definitionsmängd',
+      'Funktionsmängd',
+      'Koordinatmängd',
+    ],
+    correct: 0,
+    why: [
+      'Möjliga y-värden bildar värdemängden.',
+      'Definitionsmängden är i stället de möjliga X-värdena.',
+      '"Funktionsmängd" är inget vedertaget begrepp här.',
+      'Koordinater är punkter — mängderna handlar om var sin variabel.',
+    ],
+  },
+  {
+    question: 'Vad betyder en **ifylld ring** i änden av en graf?',
+    choices: [
+      'Ändpunkten ingår i intervallet — markeras med ≤ eller ≥',
+      'Ändpunkten ingår inte i intervallet',
+      'Grafen fortsätter oändligt åt det hållet',
+      'Funktionen är odefinierad i punkten',
+    ],
+    correct: 0,
+    why: [
+      'Ifylld ring = punkten är med; tom ring = punkten är inte med (< eller >).',
+      'Det är den TOMMA ringens betydelse.',
+      'En pil brukar markera oändlig fortsättning — ringen markerar ett stopp.',
+      'Tvärtom — i en ifylld ändpunkt är funktionen definierad och antar värdet.',
+    ],
+  },
+  {
+    question: 'En graf börjar med en tom ring vid $x = -1$ och slutar med en ifylld punkt vid $x = 2$. Vilken är definitionsmängden?',
+    choices: [
+      '$-1 < x \\leq 2$',
+      '$-1 \\leq x < 2$',
+      '$-1 \\leq x \\leq 2$',
+      '$-1 < x < 2$',
+    ],
+    correct: 0,
+    why: [
+      'Tom ring ger strikt olikhet vid −1 och ifylld punkt ger ≤ vid 2.',
+      'Olikheterna har hamnat på fel ändar.',
+      'Vänstra änden är tom — $x = -1$ ingår inte.',
+      'Högra änden är ifylld — $x = 2$ ingår.',
+    ],
+  },
+  {
+    question: 'Musiktjänsten $y = 50x$ gäller i högst 12 månader ($0 \\leq x \\leq 12$). Vilken är värdemängden?',
+    choices: [
+      '$0 \\leq y \\leq 600$',
+      '$0 \\leq y \\leq 12$',
+      '$0 \\leq y \\leq 50$',
+      '$y = 600$',
+    ],
+    correct: 0,
+    why: [
+      'Minsta kostnaden är $y(0) = 0$ kr och största $y(12) = 600$ kr.',
+      '0–12 är definitionsmängden (månaderna), inte kostnaderna.',
+      '50 kr är bara priset för EN månad.',
+      '600 kr är bara det största värdet — värdemängden är hela spannet.',
+    ],
+  },
+],
+
+'ma1c-4.10': [
+  {
+    question: 'Var sitter variabeln i en exponentialfunktion?',
+    choices: [
+      'I exponenten',
+      'I basen',
+      'I nämnaren',
+      'Under ett rottecken',
+    ],
+    correct: 0,
+    why: [
+      'T.ex. $y = 25\\ 000 \\cdot 1{,}02^x$ — variabeln $x$ är exponenten.',
+      'Variabel i basen (t.ex. $y = x^2$) ger en potensfunktion.',
+      'Variabel i nämnaren hör till andra funktionstyper.',
+      'Rotuttryck motsvarar rationella exponenter på en variabel BAS.',
+    ],
+  },
+  {
+    question: 'I formeln $y = Ca^x$ — vad står $a$ för?',
+    choices: [
+      'Förändringsfaktorn',
+      'Det ursprungliga värdet',
+      'Tiden',
+      'Arean',
+    ],
+    correct: 0,
+    why: [
+      '$a$ är förändringsfaktorn — t.ex. 1,02 för +2 % per år eller 0,85 för −15 %.',
+      'Det ursprungliga värdet är $C$.',
+      'Tiden är exponenten $x$.',
+      'Formeln handlar om förändring över tid, inte geometri.',
+    ],
+  },
+  {
+    question: 'Bilens värde ges av $V(t) = 180\\ 000 \\cdot 0{,}85^t$. Vad betyder 0,85?',
+    choices: [
+      'Värdet minskar med 15 % per år',
+      'Värdet minskar med 85 % per år',
+      'Värdet ökar med 85 % per år',
+      'Bilen är värd 85 kr efter ett år',
+    ],
+    correct: 0,
+    why: [
+      '$0{,}85 = 100\\ \\% - 15\\ \\%$ — en årlig minskning med 15 %.',
+      'En minskning med 85 % hade gett faktorn 0,15.',
+      'Faktorer under 1 betyder minskning.',
+      '0,85 är en faktor, inte ett belopp — värdet efter 1 år är $180\\ 000 \\cdot 0{,}85 = 153\\ 000$ kr.',
+    ],
+  },
+  {
+    question: 'Hur ser grafen till $y = Ca^x$ ut när $0 < a < 1$?',
+    choices: [
+      'Den faller brant först och planar ut mot noll — exponentiell minskning',
+      'Den stiger allt brantare — exponentiell ökning',
+      'Den är en rät linje som lutar nedåt',
+      'Den är en parabel',
+    ],
+    correct: 0,
+    why: [
+      'Med faktor under 1 krymper värdet varje steg — som radioaktivt sönderfall.',
+      'Ökning kräver $a > 1$ — som befolkningstillväxt.',
+      'Exponentiella förlopp är aldrig räta linjer.',
+      'Parabler hör till andragradsfunktioner.',
+    ],
+  },
+  {
+    question: 'Hur avgör man om kurvan i en graf är $f(x) = 3^x$ eller $g(x) = 2^x$?',
+    choices: [
+      'Beräkna några punkter (t.ex. x = 1) och testa vilka som ligger på kurvan',
+      'Det går inte — kurvorna är identiska',
+      'Mät kurvans lutning med linjal',
+      'Kolla var kurvan skär x-axeln',
+    ],
+    correct: 0,
+    why: [
+      'Vid $x = 1$ ska $3^x$ ge 3 och $2^x$ ge 2 — punkttestet avgör direkt vilken kurva som är ritad.',
+      'Kurvorna skiljer sig överallt utom i (0, 1).',
+      'Lutningen ändras hela tiden på en exponentialkurva — punkttest är säkrare.',
+      'Exponentialkurvor skär aldrig x-axeln — de närmar sig den bara.',
+    ],
+  },
+],
+
+'ma1c-4.11': [
+  {
+    question: 'Var sitter variabeln i en potensfunktion?',
+    choices: [
+      'I basen',
+      'I exponenten',
+      'I nämnaren, alltid',
+      'Utanför funktionen',
+    ],
+    correct: 0,
+    why: [
+      '$f(x) = Cx^a$ — variabeln $x$ är basen som upphöjs till konstanten $a$.',
+      'Variabel i exponenten ($Ca^x$) ger en exponentialfunktion.',
+      '$x^{-1} = \\frac{1}{x}$ hamnar i nämnaren, men det är ett specialfall — inte definitionen.',
+      'Variabeln är själva kärnan i funktionsuttrycket.',
+    ],
+  },
+  {
+    question: 'Vilken funktionstyp är $g(x) = x^{-2}$?',
+    choices: [
+      'En potensfunktion',
+      'En exponentialfunktion',
+      'En linjär funktion',
+      'Ingen funktion alls',
+    ],
+    correct: 0,
+    why: [
+      'Variabeln är basen och exponenten är konstanten −2 — en potensfunktion ($g(x) = \\frac{1}{x^2}$).',
+      'Exponentialfunktioner har variabeln i exponenten, som $2^x$.',
+      'Linjära funktioner har formen $kx + m$.',
+      'För varje tillåtet $x$ (alla utom 0) fås exakt ett värde — en funktion.',
+    ],
+  },
+  {
+    question: 'Hur ser grafen till $y = x^2$ ut?',
+    choices: [
+      'En parabel med botten i origo, symmetrisk kring y-axeln',
+      'En hyperbel med två grenar',
+      'En rät linje',
+      'En kurva som bara finns för positiva x',
+    ],
+    correct: 0,
+    why: [
+      'Kvadraten är alltid positiv och lika stor för $x$ och $-x$ — en symmetrisk parabel.',
+      'Hyperbeln hör till $y = \\frac{1}{x}$.',
+      'Räta linjer kommer från förstagradsfunktioner.',
+      'Det beskriver $y = \\sqrt{x}$ — kvadraten är definierad för alla x.',
+    ],
+  },
+  {
+    question: 'Låt $f(x) = x^{1/2}$ och $g(x) = 4x^2$. Hur beräknas $f(g(2))$?',
+    choices: [
+      'Först $g(2) = 16$, sedan $f(16) = 4$ — inifrån och ut',
+      'Först $f(2)$, sedan $g$ av det',
+      '$f(2) \\cdot g(2)$',
+      '$f(2) + g(2)$',
+    ],
+    correct: 0,
+    why: [
+      'Funktion i funktion räknas inifrån och ut: den inre $g(2) = 4 \\cdot 4 = 16$, sedan den yttre $f(16) = \\sqrt{16} = 4$.',
+      'Det vore $g(f(2))$ — ordningen styrs av vilken funktion som står innerst.',
+      'Sammansättning är inte multiplikation av funktionsvärden.',
+      'Inte addition heller — $g(2)$ blir den yttre funktionens INDATA.',
+    ],
+  },
+],
+
+// ── Kapitel 5: Statistik och sannolikhetslära ─────────────────
+
+'ma1c-5.1': [
+  {
+    question: 'Vad kallas den mängd som en statistisk undersökning handlar om?',
+    choices: [
+      'Population',
+      'Stickprov',
+      'Data',
+      'Urval',
+    ],
+    correct: 0,
+    why: [
+      'Populationen är hela mängden (människor eller föremål) som undersökningen handlar om.',
+      'Stickprovet är den mindre del av populationen som faktiskt undersöks.',
+      'Data är informationen som samlas in, inte gruppen den samlas från.',
+      'Urvalet är metoden för att välja vilka som ska delta.',
+    ],
+  },
+  {
+    question: 'Vad är fördelen med en totalundersökning jämfört med en stickprovsundersökning?',
+    choices: [
+      'Den är exakt — hela populationen undersöks',
+      'Den är snabbare att genomföra',
+      'Den kräver inget urval av frågor',
+      'Den är alltid billigare',
+    ],
+    correct: 0,
+    why: [
+      'När alla i populationen undersöks finns ingen osäkerhet från urvalet — men det är tidskrävande för stora populationer.',
+      'Tvärtom — stickprovet är det snabba alternativet.',
+      'Frågorna måste utformas väl i båda fallen.',
+      'Att undersöka alla kostar i regel mer, inte mindre.',
+    ],
+  },
+  {
+    question: 'Vid ett stratifierat urval med 75 % kvinnor i populationen — hur väljs stickprovet?',
+    choices: [
+      'Så att även 75 % av stickprovet är kvinnor',
+      'Helt slumpmässigt ur hela populationen',
+      'Var femte person från en lista',
+      'Endast kvinnor väljs',
+    ],
+    correct: 0,
+    why: [
+      'Stratifierat urval speglar populationens sammansättning — 75 % kvinnor i populationen ger 75 % kvinnor i stickprovet.',
+      'Det beskriver obundet slumpmässigt urval.',
+      'Det beskriver systematiskt urval.',
+      'Då speglas inte populationen alls — 25 % är ju män.',
+    ],
+  },
+  {
+    question: 'Att fråga "Tror du på Gud?" utanför en kyrka för att mäta gudstron i en stad är ett exempel på…',
+    choices: [
+      'Urvalsfel — urvalet representerar inte populationen',
+      'Mätfel — frågan är felformulerad',
+      'Svarsbortfall',
+      'En totalundersökning',
+    ],
+    correct: 0,
+    why: [
+      'Kyrkobesökare är mer religiösa än stadens befolkning i stort — urvalet speglar inte populationen.',
+      'Själva frågan är neutral — problemet är VAR den ställs.',
+      'Bortfall handlar om de som inte svarar alls.',
+      'Långt ifrån — bara en liten, skev del av populationen tillfrågas.',
+    ],
+  },
+  {
+    question: 'Varför kan ett stort svarsbortfall göra en undersökning svårtolkad?',
+    choices: [
+      'De som inte svarat kan tycka annorlunda — resultatet får ett brett osäkerhetsintervall',
+      'Bortfallet gör alltid resultatet exakt noll',
+      'Enkäter med bortfall är olagliga',
+      'Det spelar ingen roll — bortfallet kan alltid ignoreras',
+    ],
+    correct: 0,
+    why: [
+      'I kärnkraftsexemplet kunde andelen positiva ligga mellan 42 % och 54 % beroende på hur bortfallet skulle ha svarat.',
+      'Bortfallet nollar inget — det skapar osäkerhet.',
+      'Inget olagligt — men resultaten måste tolkas försiktigt.',
+      'Bara små bortfall utan misstänkt snedvridning kan ibland ignoreras.',
+    ],
+  },
+],
+
+'ma1c-5.2': [
+  {
+    question: 'Vad anger **felmarginalen**?',
+    choices: [
+      'Hur mycket resultatet kan förväntas variera om undersökningen upprepas',
+      'Hur många som svarade fel på enkäten',
+      'Antalet personer i bortfallet',
+      'Undersökningens kostnad',
+    ],
+    correct: 0,
+    why: [
+      'Felmarginalen mäter resultatets osäkerhet — vanligen så att resultatet i 95 % av fallen ligger inom den.',
+      'Det finns inga "fel svar" i en åsiktsundersökning — marginalen handlar om slumpvariation.',
+      'Bortfall är en egen felkälla, skild från den statistiska osäkerheten.',
+      'Kostnaden har inget med felmarginalen att göra.',
+    ],
+  },
+  {
+    question: 'Med resultatet 60 % och felmarginalen 9,6 % — vilket är konfidensintervallet?',
+    choices: [
+      '50,4 % till 69,6 %',
+      '60 % till 69,6 %',
+      '9,6 % till 60 %',
+      '55 % till 65 %',
+    ],
+    correct: 0,
+    why: [
+      'Resultatet ± felmarginalen: $60 - 9{,}6 = 50{,}4$ och $60 + 9{,}6 = 69{,}6$.',
+      'Marginalen läggs åt BÅDA hållen, inte bara uppåt.',
+      'Felmarginalen är en bredd, inte en undre gräns.',
+      'Det vore intervallet för felmarginalen 5 %.',
+    ],
+  },
+  {
+    question: 'Vad betyder att en förändring är "statistiskt säkerställd" (signifikant)?',
+    choices: [
+      'Förändringen är större än felmarginalen — den beror med 95 % säkerhet inte på slumpen',
+      'Förändringen är exakt uppmätt utan någon osäkerhet',
+      'Alla i populationen har tillfrågats',
+      'Förändringen är större än 10 procentenheter',
+    ],
+    correct: 0,
+    why: [
+      'Ligger det nya värdet utanför konfidensintervallet är förändringen signifikant.',
+      'Osäkerheten finns kvar — men den är för liten för att förklara förändringen.',
+      'Signifikans bedöms just för STICKPROV — totalundersökningar behöver den inte.',
+      'Gränsen är felmarginalen, inte ett fast antal procentenheter.',
+    ],
+  },
+  {
+    question: 'Vad händer med felmarginalen när stickprovet görs större?',
+    choices: [
+      'Den minskar — resultatet blir säkrare',
+      'Den ökar',
+      'Den påverkas inte',
+      'Den blir alltid exakt 1,96 %',
+    ],
+    correct: 0,
+    why: [
+      '$n$ står i nämnaren under rottecknet — större stickprov ger mindre felmarginal (men det krävs 4 gånger fler för att halvera den).',
+      'Fler svarande kan aldrig göra resultatet osäkrare.',
+      '$n$ ingår i formeln — storleken påverkar i högsta grad.',
+      '1,96 är en konstant i formeln (kopplad till 95 %-nivån), inte felmarginalen själv.',
+    ],
+  },
+],
+
+'ma1c-5.3': [
+  {
+    question: 'Vad betyder det att två variabler har en **korrelation**?',
+    choices: [
+      'Det finns ett samband mellan dem',
+      'Den ena orsakar den andra',
+      'De är alltid lika stora',
+      'De saknar samband',
+    ],
+    correct: 0,
+    why: [
+      'Korrelation = samband (punkterna i spridningsdiagrammet följer ett mönster). Orsakssambandet är en annan fråga.',
+      'Det är kausalitet — korrelation kan finnas utan orsakssamband.',
+      'Variablerna kan ha helt olika storlek och ändå samvariera.',
+      'Tvärtom — utan samband är korrelationen just ingen.',
+    ],
+  },
+  {
+    question: 'Punkterna ligger spridda men kring en linje med positiv lutning. Vilken korrelation?',
+    choices: [
+      'Svag positiv',
+      'Stark positiv',
+      'Svag negativ',
+      'Ingen',
+    ],
+    correct: 0,
+    why: [
+      'Spridda punkter = svag; positiv lutning = positiv — som mammors och döttrars längd i genomgången.',
+      'Stark kräver att punkterna ligger TYDLIGT på linjen.',
+      'Lutningen är positiv, inte negativ.',
+      'Ett mönster finns — punkterna samlas kring en linje.',
+    ],
+  },
+  {
+    question: 'Vad kallas det när två variabler samvarierar utan att den ena orsakar den andra?',
+    choices: [
+      'Skensamband',
+      'Kausalitet',
+      'Signifikans',
+      'Proportionalitet',
+    ],
+    correct: 0,
+    why: [
+      'Som livslängd och internettillgång — korrelationen finns men förklaras av en tredje variabel (landets rikedom/sjukvård).',
+      'Kausalitet är motsatsen — ett äkta orsakssamband.',
+      'Signifikans handlar om statistisk säkerhet, inte orsaker.',
+      'Proportionalitet är ett exakt matematiskt samband, y = kx.',
+    ],
+  },
+  {
+    question: 'Mellan mammors och döttrars längd råder både korrelation och kausalitet. Varför kausalitet?',
+    choices: [
+      'Generna från mamman avgör delvis hur lång dottern blir',
+      'Punkterna ligger på en perfekt linje',
+      'Båda mäts i centimeter',
+      'Döttrarnas längd påverkar mammornas',
+    ],
+    correct: 0,
+    why: [
+      'Det finns en verklig orsaksmekanism — arvet — från mammans längd till dotterns.',
+      'Korrelationen var till och med svag — kausaliteten handlar om orsak, inte om hur tät linjen är.',
+      'Samma enhet skapar inget orsakssamband.',
+      'Orsaksriktningen går från mamma till dotter, inte tvärtom.',
+    ],
+  },
+],
+
+'ma1c-5.4': [
+  {
+    question: 'Vad kallas mängden av alla möjliga utfall i ett slumpförsök?',
+    choices: [
+      'Utfallsrum',
+      'Gynnsamma utfall',
+      'Population',
+      'Händelse',
+    ],
+    correct: 0,
+    why: [
+      'Utfallsrummet är alla möjliga utfall — för en tärning {1, 2, 3, 4, 5, 6}.',
+      'Gynnsamma utfall är bara de som stämmer in på händelsen.',
+      'Population hör till statistiska undersökningar.',
+      'Händelsen är det man frågar efter, t.ex. "minst 5".',
+    ],
+  },
+  {
+    question: 'Hur beräknas sannolikheten enligt den klassiska definitionen?',
+    choices: [
+      'Antalet gynnsamma utfall delat med antalet möjliga utfall',
+      'Antalet möjliga utfall delat med antalet gynnsamma',
+      'Gynnsamma plus möjliga utfall',
+      'Alltid 50 %',
+    ],
+    correct: 0,
+    why: [
+      '$P(\\text{händelse}) = \\frac{\\text{gynnsamma}}{\\text{möjliga}}$ — och den kräver likformig sannolikhetsfördelning.',
+      'Uppochnedvänt — då blir sannolikheten större än 1.',
+      'En summa av antal är ingen sannolikhet.',
+      '50 % gäller bara specialfall som slantsingling.',
+    ],
+  },
+  {
+    question: 'Varför fungerar den klassiska definitionen för slantsingling men INTE för straffläggning i fotboll?',
+    choices: [
+      'Slantsinglingens utfall är lika sannolika — mål och miss är det inte',
+      'Fotboll har fler utfall än mynt',
+      'Mynt kan inte landa på kant',
+      'Definitionen fungerar för båda',
+    ],
+    correct: 0,
+    why: [
+      'Formeln kräver likformig fördelning: krona och klave är lika sannolika, men sannolikheten för mål beror på skyttens skicklighet.',
+      'Antalet utfall är två i båda fallen (mål/miss, krona/klave) — problemet är sannolikheterna.',
+      'Kantfall är inte poängen — likformigheten är.',
+      'För straffar skulle formeln ge 50 % mål oavsett skytt — uppenbart fel.',
+    ],
+  },
+  {
+    question: 'Du kastar två tärningar. Hur många möjliga utfall finns i utfallsrummet?',
+    choices: [
+      '36',
+      '12',
+      '6',
+      '11',
+    ],
+    correct: 0,
+    why: [
+      'Sex utfall för första tärningen gånger sex för andra: $6 \\cdot 6 = 36$ rutor i tabellen.',
+      '12 vore $6 + 6$ — kombinationerna multipliceras, inte adderas.',
+      '6 gäller EN tärning.',
+      '11 är antalet olika SUMMOR (2–12), men de är inte lika sannolika.',
+    ],
+  },
+  {
+    question: 'Vad är sannolikheten att få minst summan 10 med två tärningar?',
+    choices: [
+      '$\\dfrac{6}{36} = \\dfrac{1}{6}$',
+      '$\\dfrac{3}{36} = \\dfrac{1}{12}$',
+      '$\\dfrac{10}{36}$',
+      '$\\dfrac{1}{36}$',
+    ],
+    correct: 0,
+    why: [
+      'Summorna 10, 11 och 12 täcker 3 + 2 + 1 = 6 rutor i utfallsrummet av 36.',
+      '$\\frac{3}{36}$ är sannolikheten för summa STÖRRE än 10 (bara 11 och 12) — skilj på formuleringarna!',
+      'Talet 10 i frågan är ett summavärde, inte ett antal utfall.',
+      '$\\frac{1}{36}$ är sannolikheten för exakt summan 12.',
+    ],
+  },
+],
+
+'ma1c-5.5': [
+  {
+    question: 'När behövs **experimentella** sannolikheter?',
+    choices: [
+      'När utfallen inte är lika sannolika och sannolikheten inte är självklar',
+      'När man kastar en vanlig tärning',
+      'När utfallsrummet är känt och likformigt',
+      'Aldrig — den klassiska definitionen räcker alltid',
+    ],
+    correct: 0,
+    why: [
+      'Som meteoritexemplet: två utfall men helt olika sannolika — då måste sannolikheten mätas genom försök.',
+      'Tärningen är likformig — där fungerar klassiska definitionen perfekt.',
+      'Det är precis läget där den KLASSISKA definitionen används.',
+      'Straffar, häftstift och meteoriter visar motsatsen.',
+    ],
+  },
+  {
+    question: 'Vad kallas andelen gånger en händelse inträffar i en försöksserie?',
+    choices: [
+      'Relativ frekvens',
+      'Utfallsrum',
+      'Konfidensintervall',
+      'Korrelation',
+    ],
+    correct: 0,
+    why: [
+      'Relativ frekvens = antal gånger händelsen inträffade delat med antalet försök — t.ex. 139 mål på 200 straffar ≈ 70 %.',
+      'Utfallsrummet är mängden möjliga utfall.',
+      'Konfidensintervall hör till felmarginalen.',
+      'Korrelation handlar om samband mellan variabler.',
+    ],
+  },
+  {
+    question: 'Asllanis relativa frekvens efter 200 straffar är cirka 70 %. Vad är sannolikheten att nästa straff INTE blir mål?',
+    choices: [
+      '30 %',
+      '70 %',
+      '50 %',
+      'Det går inte att veta',
+    ],
+    correct: 0,
+    why: [
+      'Motsatshändelsen: $100\\ \\% - 70\\ \\% = 30\\ \\%$.',
+      '70 % är sannolikheten FÖR mål.',
+      '50 % vore den felaktiga klassiska ansatsen med två utfall.',
+      'Jodå — komplementet ger det direkt.',
+    ],
+  },
+  {
+    question: 'Varför är den relativa frekvensen efter 200 straffar mer pålitlig än efter 5?',
+    choices: [
+      'Ju fler försök, desto närmare den verkliga sannolikheten kommer frekvensen',
+      'Frekvensen efter få försök är alltid för låg',
+      'Sannolikheten ändras med tiden',
+      '200 är ett jämnt tal',
+    ],
+    correct: 0,
+    why: [
+      'I tabellen studsade frekvensen (100 %, 50 %, 40 %…) i början men stabiliserades kring 70 % — fler försök ger mer exakthet.',
+      'Den kan vara för hög också — efter 1 straff var den 100 %.',
+      'Skyttens skicklighet antas konstant — det är MÄTNINGEN som förbättras.',
+      'Jämnhet hos talet har ingen betydelse.',
+    ],
+  },
+],
+
+'ma1c-5.6': [
+  {
+    question: 'Vad säger **produktregeln**?',
+    choices: [
+      'Sannolikheten för en kombination av händelser fås genom att multiplicera de enskilda sannolikheterna',
+      'Sannolikheter adderas alltid',
+      'Sannolikheten för två händelser är alltid 50 %',
+      'Produkten av två sannolikheter är alltid större än 1',
+    ],
+    correct: 0,
+    why: [
+      'T.ex. är $P(\\text{två sexor}) = \\frac{1}{6} \\cdot \\frac{1}{6} = \\frac{1}{36}$.',
+      'Addition hör till "antingen eller"-situationer, inte kombinationer.',
+      '50 % gäller bara enstaka specialfall.',
+      'Tvärtom — produkten av tal mellan 0 och 1 blir MINDRE än faktorerna.',
+    ],
+  },
+  {
+    question: 'Vad kännetecknar **oberoende** händelser?',
+    choices: [
+      'Sannolikheten påverkas inte av händelsen innan — "slumpen har inget minne"',
+      'De kan aldrig inträffa samtidigt',
+      'Deras sannolikheter är alltid lika stora',
+      'De sker alltid utan återläggning',
+    ],
+    correct: 0,
+    why: [
+      'Tärningskast är oberoende — sexans sannolikhet är $\\frac{1}{6}$ oavsett tidigare kast.',
+      'Det beskriver oförenliga händelser — något annat.',
+      'Oberoendet handlar om påverkan, inte om lika sannolikheter.',
+      'Tvärtom — UTAN återläggning blir händelserna beroende.',
+    ],
+  },
+  {
+    question: 'Du drar ett hjärter ur en kortlek och lägger INTE tillbaka det. Vad är sannolikheten att nästa kort också är hjärter?',
+    choices: [
+      '$\\dfrac{12}{51}$',
+      '$\\dfrac{13}{52}$',
+      '$\\dfrac{13}{51}$',
+      '$\\dfrac{12}{52}$',
+    ],
+    correct: 0,
+    why: [
+      '12 hjärter kvar av 51 kort — både täljare och nämnare har minskat.',
+      '$\\frac{13}{52}$ gällde FÖRSTA dragningen — utan återläggning ändras oddsen.',
+      'Ett hjärter är borta — 12 kvar, inte 13.',
+      'Ett kort är borta ur leken — 51 kvar, inte 52.',
+    ],
+  },
+  {
+    question: 'Skål med 6 röda och 4 blå kulor. Varför skiljer sig $P$(två blå) med och utan återläggning (16 % mot 13 %)?',
+    choices: [
+      'Utan återläggning finns färre blå kulor kvar till andra dragningen — händelserna är beroende',
+      'Med återläggning hinner kulorna blandas bättre',
+      'Skillnaden är ett avrundningsfel',
+      'De borde vara lika — beräkningen är fel',
+    ],
+    correct: 0,
+    why: [
+      'Andra faktorn ändras från $\\frac{4}{10}$ till $\\frac{3}{9}$ när den första blå kulan inte läggs tillbaka.',
+      'Blandningen är inte poängen — antalet kulor är det.',
+      'Skillnaden är exakt: $\\frac{16}{100}$ mot $\\frac{12}{90}$.',
+      'Beräkningarna stämmer — beroendet är verkligt.',
+    ],
+  },
+],
+
+'ma1c-5.7': [
+  {
+    question: 'När är ett träddiagram särskilt användbart?',
+    choices: [
+      'När sannolikheterna för de enskilda utfallen är olika',
+      'Bara när alla utfall är lika sannolika',
+      'Bara för tärningskast',
+      'När man vill undvika multiplikation',
+    ],
+    correct: 0,
+    why: [
+      'Trädet håller ordning på olika sannolikheter i varje steg — som 7/10 och 3/10 för strumporna.',
+      'Vid lika sannolika utfall räcker ofta ett enkelt utfallsrum.',
+      'Trädet fungerar för alla slags flerstegsförsök.',
+      'Multiplikationen längs grenarna är själva metoden.',
+    ],
+  },
+  {
+    question: 'Hur beräknas sannolikheten för kombinationen svart–svart i ett träddiagram?',
+    choices: [
+      'Multiplicera sannolikheterna längs grenen',
+      'Addera sannolikheterna längs grenen',
+      'Ta medelvärdet av sannolikheterna',
+      'Räkna antalet grenar',
+    ],
+    correct: 0,
+    why: [
+      'Längs grenen gäller produktregeln: $\\frac{7}{10} \\cdot \\frac{7}{10} = \\frac{49}{100}$ med återläggning.',
+      'Addition används MELLAN gynnsamma grenar, inte längs en gren.',
+      'Medelvärden hör inte hemma här.',
+      'Antalet grenar säger inget om sannolikheten när grenarna är olika sannolika.',
+    ],
+  },
+  {
+    question: 'Utan återläggning: efter en svart strumpa (av 7 svarta, 3 vita) — vilken sannolikhet står på grenen till nästa svarta?',
+    choices: [
+      '$\\dfrac{6}{9}$',
+      '$\\dfrac{7}{10}$',
+      '$\\dfrac{7}{9}$',
+      '$\\dfrac{6}{10}$',
+    ],
+    correct: 0,
+    why: [
+      '6 svarta kvar av 9 totalt — både täljare och nämnare har minskat med 1.',
+      'Det är sannolikheten i FÖRSTA dragningen.',
+      '$\\frac{7}{9}$ gäller grenen svart EFTER VIT — där är alla 7 svarta kvar.',
+      'Nämnaren ska också minska — en strumpa är borta ur lådan.',
+    ],
+  },
+  {
+    question: 'Vad görs när både grenen svart–vit och grenen vit–svart är gynnsamma?',
+    choices: [
+      'Grenarnas sannolikheter adderas',
+      'Grenarnas sannolikheter multipliceras',
+      'Bara den största grenen räknas',
+      'Trädet ritas om',
+    ],
+    correct: 0,
+    why: [
+      'Multiplicera längs varje gren, addera grenarna: $\\frac{21}{90} + \\frac{21}{90} = \\frac{42}{90}$.',
+      'Multiplikation sker LÄNGS grenar — mellan gynnsamma grenar adderas det.',
+      'Alla gynnsamma grenar bidrar till sannolikheten.',
+      'Samma träd används — det är avläsningen som ändras.',
+    ],
+  },
+],
+
+'ma1c-5.8': [
+  {
+    question: 'Vad är en **komplementhändelse**?',
+    choices: [
+      'Händelsen som tillsammans med den ursprungliga utgör alla möjliga utfall — "händelsens motsats"',
+      'En händelse med samma sannolikhet',
+      'En omöjlig händelse',
+      'Den mest sannolika händelsen',
+    ],
+    correct: 0,
+    why: [
+      'Händelse + komplement täcker allt: $P(\\text{händelse}) + P(\\text{komplement}) = 1$.',
+      'Komplementets sannolikhet är oftast en annan.',
+      'Komplementet är fullt möjligt — det är "allt annat".',
+      'Sannolikhetens storlek avgör inte vad som är komplement.',
+    ],
+  },
+  {
+    question: 'Sannolikheten för regn är 0,3. Vad är sannolikheten för komplementhändelsen?',
+    choices: [
+      '0,7',
+      '0,3',
+      '1,3',
+      '0',
+    ],
+    correct: 0,
+    why: [
+      '$1 - 0{,}3 = 0{,}7$ — sannolikheten att det INTE regnar.',
+      'Det är händelsens egen sannolikhet.',
+      'Sannolikheter kan aldrig överstiga 1.',
+      'Komplementet är inte omöjligt — det inträffar när det inte regnar.',
+    ],
+  },
+  {
+    question: 'Vad är komplementhändelsen till "att slå minst en femma" med en tärning?',
+    choices: [
+      'Att slå högst en fyra',
+      'Att slå en sexa',
+      'Att slå minst en fyra',
+      'Att slå exakt en femma',
+    ],
+    correct: 0,
+    why: [
+      '"Inte minst en femma" betyder 1, 2, 3 eller 4 — alltså högst en fyra.',
+      'Sexan ingår i händelsen "minst en femma".',
+      '"Minst en fyra" överlappar händelsen — komplement får inte överlappa.',
+      'Komplementet ska täcka ALLT som inte är händelsen.',
+    ],
+  },
+  {
+    question: 'Varför beräknas $P$(minst en sexa på fem tärningar) enklast med komplementhändelse?',
+    choices: [
+      '"Minst en" täcker många kombinationer, men komplementet "ingen sexa" är en enda enkel beräkning',
+      'Komplementet ger alltid större sannolikhet',
+      'Det går inte att räkna på fem tärningar annars',
+      'Tärningar kräver alltid komplement',
+    ],
+    correct: 0,
+    why: [
+      '$P(\\text{ingen sexa}) = (5/6)^5 \\approx 0{,}40$, så $P(\\text{minst en}) = 1 - 0{,}40 \\approx 60\\ \\%$ — en rad i stället för dussintals fall.',
+      'Komplementets sannolikhet kan vara mindre eller större — poängen är enkelheten.',
+      'Det går, men kräver att många kombinationer summeras.',
+      'Enkla tärningsfrågor klarar sig utan.',
+    ],
+  },
+  {
+    question: 'Hur många personer krävs enligt födelsedagsparadoxen för över 50 % chans att minst två delar födelsedag?',
+    choices: [
+      '23',
+      '183',
+      '365',
+      '57',
+    ],
+    correct: 0,
+    why: [
+      'Bara 23 — i en sådan grupp finns 253 möjliga par, så chansen växer mycket snabbare än intuitionen säger.',
+      '183 (halva 365) är den vanliga felgissningen.',
+      'Med 365 personer är det i praktiken garanterat — långt över 50 %.',
+      '57 personer ger över 99 % — frågan gällde 50 %.',
+    ],
+  },
+],
+
+// ── Kapitel 6: Trigonometri ───────────────────────────────────
+
+'ma1c-6.1': [
+  {
+    question: 'Vad kallas kateten MITT EMOT en vinkel i en rätvinklig triangel?',
+    choices: [
+      'Motstående katet',
+      'Närliggande katet',
+      'Hypotenusa',
+      'Höjd',
+    ],
+    correct: 0,
+    why: [
+      'Kateten mitt emot vinkeln är den motstående; kateten som bildar vinkeln är den närliggande.',
+      'Den närliggande kateten är den som BILDAR vinkeln tillsammans med hypotenusan.',
+      'Hypotenusan är den längsta sidan, mitt emot den räta vinkeln.',
+      'Höjd är inget av triangelns standardbegrepp här.',
+    ],
+  },
+  {
+    question: 'För vilka trianglar gäller de trigonometriska funktionerna tan, sin och cos (i denna kurs)?',
+    choices: [
+      'Endast rätvinkliga trianglar',
+      'Alla trianglar',
+      'Endast liksidiga trianglar',
+      'Endast trianglar med två lika sidor',
+    ],
+    correct: 0,
+    why: [
+      'Definitionerna bygger på hypotenusa och kateter — de kräver en rät vinkel. (Generaliseringar kommer i senare kurser.)',
+      'För allmänna trianglar krävs andra satser — grunddefinitionerna gäller rätvinkliga.',
+      'Liksidiga trianglar är inte ens rätvinkliga.',
+      'Likbenthet har inget med saken att göra.',
+    ],
+  },
+  {
+    question: 'Vad betyder skrivsättet ∠ABC?',
+    choices: [
+      'Vinkeln vid hörn B, när man går från A till B till C',
+      'Vinkeln vid hörn A',
+      'Triangeln med hörnen A, B och C',
+      'Sträckan från A till C',
+    ],
+    correct: 0,
+    why: [
+      'Mittenbokstaven anger hörnet där vinkeln sitter — ∠ABC är vinkeln vid B.',
+      'Vinkeln vid A skrivs ∠BAC eller ∠CAB.',
+      'Triangeln betecknas utan vinkelsymbol.',
+      'Sträckor skrivs utan vinkelsymbol, t.ex. AC.',
+    ],
+  },
+  {
+    question: 'I en triangel är motstående katet 4 cm och närliggande katet 3 cm till vinkeln $u$. Vad är tan $u$?',
+    choices: [
+      '$\\dfrac{4}{3}$',
+      '$\\dfrac{3}{4}$',
+      '$\\dfrac{4}{5}$',
+      '$\\dfrac{3}{5}$',
+    ],
+    correct: 0,
+    why: [
+      'Motstående genom närliggande: $\\tan u = \\frac{4}{3}$.',
+      '$\\frac{3}{4}$ är tangens för den ANDRA spetsiga vinkeln i triangeln.',
+      '$\\frac{4}{5}$ vore sinus (motstående/hypotenusa) i 3-4-5-triangeln.',
+      '$\\frac{3}{5}$ vore cosinus i samma triangel.',
+    ],
+  },
+  {
+    question: 'Vad betyder beteckningen "l.e."?',
+    choices: [
+      'Längdenheter — används när enhet saknas i uppgiften',
+      'Likbenta enheter',
+      'Longitud och latitud',
+      'Ett skrivfel',
+    ],
+    correct: 0,
+    why: [
+      'Saknar en sträcka enhet anges svaret i l.e. (längdenheter) — som x ≈ 12 l.e. i genomgången.',
+      '"Likbent" beskriver trianglar, inte enheter.',
+      'Koordinater på jordklotet hör inte hit.',
+      'Beteckningen är standard i svenska läromedel.',
+    ],
+  },
+],
+
+'ma1c-6.2': [
+  {
+    question: 'Vilken trigonometrisk funktion kopplar motstående katet till hypotenusan?',
+    choices: [
+      'Sinus',
+      'Cosinus',
+      'Tangens',
+      'Ingen av dem',
+    ],
+    correct: 0,
+    why: [
+      '$\\sin v = \\frac{\\text{motstående katet}}{\\text{hypotenusa}}$.',
+      'Cosinus använder den NÄRLIGGANDE kateten och hypotenusan.',
+      'Tangens använder de två katetrarna — hypotenusan ingår inte.',
+      'Sinus är exakt den kopplingen.',
+    ],
+  },
+  {
+    question: 'I 3-4-5-triangeln är motstående katet till $u$ 4 cm. Vad är cos $u$?',
+    choices: [
+      '$\\dfrac{3}{5}$',
+      '$\\dfrac{4}{5}$',
+      '$\\dfrac{4}{3}$',
+      '$\\dfrac{5}{3}$',
+    ],
+    correct: 0,
+    why: [
+      'Cosinus tar den NÄRLIGGANDE kateten (3) genom hypotenusan (5): $\\cos u = \\frac{3}{5} = 0{,}6$.',
+      '$\\frac{4}{5}$ är sin $u$ — motstående genom hypotenusan.',
+      '$\\frac{4}{3}$ är tan $u$.',
+      'Hypotenusan står alltid i NÄMNAREN för sinus och cosinus.',
+    ],
+  },
+  {
+    question: 'Du känner en vinkel och dess motstående katet och söker hypotenusan. Vilken funktion väljer du?',
+    choices: [
+      'Sinus',
+      'Cosinus',
+      'Tangens',
+      'Vilken som helst',
+    ],
+    correct: 0,
+    why: [
+      'Sinus innehåller just motstående katet och hypotenusa — som $\\sin 41° = \\frac{6{,}1}{a}$ i genomgången.',
+      'Cosinus kräver den närliggande kateten, som är okänd här.',
+      'Tangens innehåller inte hypotenusan alls.',
+      'Valet styrs av vilka sidor som är kända och sökta.',
+    ],
+  },
+  {
+    question: 'Hur beräknas arean av en triangel som INTE är rätvinklig, med basen 12, sidan 14 och mellanliggande vinkeln 42°?',
+    choices: [
+      'Höjden fås som $14 \\cdot \\sin 42°$ och arean blir $\\dfrac{12 \\cdot 14 \\cdot \\sin 42°}{2}$',
+      'Arean är $\\dfrac{12 \\cdot 14}{2}$ direkt',
+      'Arean kan inte beräknas utan den tredje sidan',
+      'Höjden fås som $14 \\cdot \\cos 42°$',
+    ],
+    correct: 0,
+    why: [
+      'Höjden ritas in och bildar en rätvinklig triangel där 14 är hypotenusa: $h = 14 \\sin 42°$, sedan basen gånger höjden delat med 2.',
+      'Det gäller bara om sidorna är vinkelräta — här är vinkeln 42°.',
+      'Två sidor och mellanliggande vinkel räcker precis.',
+      'Cosinus skulle ge den VÅGRÄTA projektionen, inte höjden.',
+    ],
+  },
+],
+
+'ma1c-6.3': [
+  {
+    question: 'Vad används de inversa trigonometriska funktionerna till?',
+    choices: [
+      'Att beräkna VINKLAR när sidförhållandena är kända',
+      'Att beräkna sidor när vinklarna är kända',
+      'Att invertera bråk',
+      'Att rita trianglar',
+    ],
+    correct: 0,
+    why: [
+      'tan⁻¹, sin⁻¹ och cos⁻¹ går "baklänges": från förhållandet till vinkeln, t.ex. $v = \\cos^{-1}(0{,}753) \\approx 41°$.',
+      'Sidor beräknas med de vanliga funktionerna tan, sin och cos.',
+      'Bråkinvertering är något annat — trots det liknande namnet.',
+      'De är räkneverktyg, inte ritverktyg.',
+    ],
+  },
+  {
+    question: 'Vad är ett annat namn för sin⁻¹?',
+    choices: [
+      'arcsin ("arcus sinus")',
+      'cosec',
+      'sinh',
+      '$\\dfrac{1}{\\sin}$',
+    ],
+    correct: 0,
+    why: [
+      'sin⁻¹ och arcsin är två skrivsätt för samma inversa funktion — känn igen båda.',
+      'Cosekant är $\\frac{1}{\\sin}$ — en annan funktion.',
+      'sinh är sinus hyperbolicus — hör till senare studier.',
+      'Upphöjt −1 på FUNKTIONEN betyder invers, inte "1 delat med".',
+    ],
+  },
+  {
+    question: 'Om $\\tan v = \\dfrac{a}{b}$, hur bestäms vinkeln $v$?',
+    choices: [
+      '$v = \\tan^{-1}\\left(\\dfrac{a}{b}\\right)$',
+      '$v = \\tan\\left(\\dfrac{a}{b}\\right)$',
+      '$v = \\dfrac{b}{a}$',
+      '$v = 180° - \\dfrac{a}{b}$',
+    ],
+    correct: 0,
+    why: [
+      'Den inversa funktionen "låser upp" vinkeln ur förhållandet.',
+      'tan går åt fel håll — från vinkel till förhållande.',
+      'Det inverterade bråket är fortfarande ett förhållande, ingen vinkel.',
+      'Vinkelsumman blandas inte in här.',
+    ],
+  },
+  {
+    question: 'I en rätvinklig triangel är närliggande katet 3 cm och hypotenusan 5 cm. Hur bestäms vinkeln $u$?',
+    choices: [
+      '$u = \\cos^{-1}\\left(\\dfrac{3}{5}\\right) \\approx 53°$',
+      '$u = \\sin^{-1}\\left(\\dfrac{3}{5}\\right) \\approx 37°$',
+      '$u = \\tan^{-1}\\left(\\dfrac{3}{5}\\right) \\approx 31°$',
+      '$u = \\dfrac{3}{5} = 0{,}6°$',
+    ],
+    correct: 0,
+    why: [
+      'Närliggande katet och hypotenusa → cosinus, och vinkeln fås med cos⁻¹.',
+      'sin⁻¹(3/5) ger den ANDRA vinkeln (37°) — där 3 cm är motstående katet.',
+      'Tangens kräver båda katetrarna — hypotenusan ingår inte.',
+      '0,6 är förhållandet, inte vinkeln — inversen behövs.',
+    ],
+  },
+],
+
+'ma1c-6.4': [
+  {
+    question: 'Hur bestäms sträckan mellan två punkter i ett koordinatsystem?',
+    choices: [
+      'Bilda en rätvinklig triangel — sträckan är hypotenusan och beräknas med Pythagoras sats',
+      'Räkna rutor längs sträckan',
+      'Addera x- och y-skillnaderna',
+      'Multiplicera koordinaterna',
+    ],
+    correct: 0,
+    why: [
+      'Katetrarna läggs vågrätt och lodrätt längs rutnätet; $c^2 = a^2 + b^2$ ger sträckan.',
+      'Att räkna rutor fungerar bara för vågräta och lodräta sträckor.',
+      '$4 + 3 = 7$ men sträckan är 5 — addition ger fel.',
+      'Koordinatprodukter har ingen geometrisk mening här.',
+    ],
+  },
+  {
+    question: 'Punkterna (−2, 1) och (2, 4) förbinds. Hur långa blir triangelns kateter?',
+    choices: [
+      '4 och 3 längdenheter',
+      '2 och 4 längdenheter',
+      '−2 och 1 längdenheter',
+      '5 och 5 längdenheter',
+    ],
+    correct: 0,
+    why: [
+      'Vågrätt: från −2 till 2 är 4 rutor. Lodrätt: från 1 till 4 är 3 rutor.',
+      'Det är koordinatvärden, inte skillnader.',
+      'Kateter är längder — alltid positiva.',
+      '5 är hypotenusan, inte katetrarna.',
+    ],
+  },
+  {
+    question: 'Varför förkastas den negativa lösningen när $c^2 = 25$ ger $c = \\pm 5$?',
+    choices: [
+      'En sträcka kan inte vara negativ',
+      'Negativa tal saknar kvadratrot',
+      'Pythagoras sats gäller bara positiva tal',
+      'Den förkastas inte — båda är svar',
+    ],
+    correct: 0,
+    why: [
+      'Ekvationen har två lösningar, men i sammanhanget är bara den positiva rimlig — precis som med kvadratens sida.',
+      '$(-5)^2 = 25$ fungerar utmärkt matematiskt — det är tolkningen som utesluter den.',
+      'Satsen i sig bryr sig inte — geometrin gör det.',
+      'Som LÄNGD är bara 5 giltig.',
+    ],
+  },
+  {
+    question: 'Hur bestäms vinkeln mellan sträckan och x-axeln när katetrarna 3 (motstående) och 4 (närliggande) är kända?',
+    choices: [
+      '$v = \\tan^{-1}\\left(\\dfrac{3}{4}\\right) \\approx 37°$',
+      '$v = \\tan\\left(\\dfrac{3}{4}\\right)$',
+      '$v = \\sin^{-1}\\left(\\dfrac{3}{4}\\right)$',
+      '$v = \\dfrac{3}{4} \\cdot 90°$',
+    ],
+    correct: 0,
+    why: [
+      'Två kateter → tangens, och vinkeln fås med inversen: $\\tan^{-1}(0{,}75) \\approx 37°$.',
+      'tan utan invers går åt fel håll — från vinkel till kvot.',
+      'sin⁻¹ kräver hypotenusan i nämnaren, och $\\frac{3}{4}$ är kvoten av katetrarna.',
+      'Vinklar skalas inte linjärt med kvoten.',
+    ],
+  },
+],
+
+'ma1c-6.5': [
+  {
+    question: 'Vilken av följande storheter är en skalär?',
+    choices: [
+      'Temperatur',
+      'Hastighet',
+      'Kraft',
+      'Acceleration',
+    ],
+    correct: 0,
+    why: [
+      'Temperatur har bara storlek — ingen riktning. En skalär.',
+      'Hastighet har riktning — en vektor.',
+      'Kraft har riktning — en vektor.',
+      'Acceleration har riktning — en vektor.',
+    ],
+  },
+  {
+    question: 'Hur representeras en vektor grafiskt?',
+    choices: [
+      'Med en pil vars längd är storleken och vars riktning är vektorns riktning',
+      'Med en punkt',
+      'Med en cirkel vars radie är storleken',
+      'Med ett tal',
+    ],
+    correct: 0,
+    why: [
+      'Pilen bär båda egenskaperna: längd = storlek, pilriktning = riktning.',
+      'En punkt saknar både längd och riktning.',
+      'En cirkel har ingen riktning.',
+      'Ett tal ensamt räcker bara för skalärer.',
+    ],
+  },
+  {
+    question: 'Vad händer med en vektor när den parallellförflyttas?',
+    choices: [
+      'Ingenting — det är fortfarande samma vektor',
+      'Den byter riktning',
+      'Den blir längre',
+      'Den blir en skalär',
+    ],
+    correct: 0,
+    why: [
+      'Startpunkten ingår inte i vektorn — bara storlek och riktning. Flyttas den utan att dessa ändras är den identisk.',
+      'Riktningen bevaras vid parallellförflyttning.',
+      'Längden bevaras också.',
+      'Vektorer förblir vektorer.',
+    ],
+  },
+  {
+    question: 'Hur skrivs och utläses längden av vektorn $\\vec{u}$?',
+    choices: [
+      '$|\\vec{u}|$ — "absolutbeloppet av u"',
+      '$\\vec{u}^2$ — "u i kvadrat"',
+      '$-\\vec{u}$ — "motsatta u"',
+      '$u°$ — "u grader"',
+    ],
+    correct: 0,
+    why: [
+      'Längden skrivs med absolutbeloppstecken och beräknas med Pythagoras sats.',
+      'Kvadraten på längden dyker upp i beräkningen, men beteckningen för längden är beloppet.',
+      '$-\\vec{u}$ är den motsatta vektorn, inte längden.',
+      'Grader mäter vinklar, inte längder.',
+    ],
+  },
+  {
+    question: 'Vektorn $\\overrightarrow{AB}$ har katetrarna 8 och 4 i rutnätet. Vad är $|\\overrightarrow{AB}|$?',
+    choices: [
+      '$\\sqrt{80}$ l.e.',
+      '$12$ l.e.',
+      '$80$ l.e.',
+      '$\\sqrt{12}$ l.e.',
+    ],
+    correct: 0,
+    why: [
+      '$|\\overrightarrow{AB}|^2 = 8^2 + 4^2 = 80$, så längden är $\\sqrt{80}$ l.e.',
+      '$8 + 4 = 12$ — men kateter adderas inte; Pythagoras sats gäller.',
+      '80 är längdens KVADRAT.',
+      '$\\sqrt{8 + 4}$ blandar ihop — kvadrera FÖRST, addera sedan.',
+    ],
+  },
+],
+
+'ma1c-6.6': [
+  {
+    question: 'Vad händer med en vektor som multipliceras med en NEGATIV skalär?',
+    choices: [
+      'Storleken skalas och riktningen vänds',
+      'Bara storleken ändras',
+      'Vektorn försvinner',
+      'Vektorn vrids 90 grader',
+    ],
+    correct: 0,
+    why: [
+      'T.ex. är $-2\\vec{w}$ dubbelt så lång som $\\vec{w}$ och pekar åt motsatt håll.',
+      'Minustecknet gör mer än så — det vänder riktningen.',
+      'Bara multiplikation med 0 nollar vektorn.',
+      'Skalärmultiplikation vrider aldrig — den skalar och kan vända.',
+    ],
+  },
+  {
+    question: 'Hur ritas summan av två vektorer med polygonmetoden?',
+    choices: [
+      'Den ena flyttas till den andras spets; resultanten dras från start till slut',
+      'Vektorerna ritas ovanpå varandra',
+      'Vinkeln mellan dem halveras',
+      'Den längre vektorn väljs som svar',
+    ],
+    correct: 0,
+    why: [
+      'Spets-till-start-kedja, sedan resultanten från första startpunkten till sista spetsen.',
+      'Ovanpå varandra går ingenting att avläsa.',
+      'Vinklar halveras inte i vektoraddition.',
+      'Båda vektorerna bidrar till resultanten.',
+    ],
+  },
+  {
+    question: 'Vad kallas vektorn $\\vec{w} = \\vec{u} + \\vec{v}$?',
+    choices: [
+      'Resultanten',
+      'Komplementet',
+      'Skalärprodukten',
+      'Inversen',
+    ],
+    correct: 0,
+    why: [
+      'Summavektorn kallas resultant.',
+      'Komplement hör till sannolikhetsläran.',
+      'Skalärprodukt är en annan operation (senare kurser).',
+      'Invers används om funktioner och motsatta vektorer, inte summor.',
+    ],
+  },
+  {
+    question: 'Jämfört med $\\vec{w}$ — vad är $3\\vec{w}$?',
+    choices: [
+      'Tre gånger så lång, samma riktning',
+      'Tre gånger så lång, motsatt riktning',
+      'Lika lång, annan riktning',
+      'En skalär',
+    ],
+    correct: 0,
+    why: [
+      'Positiv faktor: längden skalas, riktningen behålls.',
+      'Motsatt riktning kräver negativ faktor.',
+      'Längden ändras med faktorn 3.',
+      'Produkten av skalär och vektor är fortfarande en vektor.',
+    ],
+  },
+],
+
+'ma1c-6.7': [
+  {
+    question: 'Hur beräknas $\\vec{u} - \\vec{v}$ grafiskt?',
+    choices: [
+      'Rita $-\\vec{v}$, flytta den till spetsen av $\\vec{u}$ och dra resultanten från start till slut',
+      'Dra en pil mellan vektorernas startpunkter',
+      'Förkorta båda vektorerna med 2',
+      'Det går inte att subtrahera vektorer grafiskt',
+    ],
+    correct: 0,
+    why: [
+      'Subtraktionen skrivs om som addition med den motsatta vektorn och löses med polygonmetoden.',
+      'Startpunkterna säger inget — det är spets-till-start-kedjan som gäller.',
+      'Förkortning hör till bråk, inte vektorer.',
+      'Jodå — via omskrivningen till addition.',
+    ],
+  },
+  {
+    question: 'Vad är $\\vec{u} - \\vec{v}$ omskrivet som addition?',
+    choices: [
+      '$\\vec{u} + (-\\vec{v})$',
+      '$-\\vec{u} + \\vec{v}$',
+      '$\\vec{u} + \\vec{v}$',
+      '$-(\\vec{u} + \\vec{v})$',
+    ],
+    correct: 0,
+    why: [
+      'Minus en vektor = plus dess motsatta vektor.',
+      'Det är $\\vec{v} - \\vec{u}$ — resultanten pekar åt motsatt håll.',
+      'Utan teckenbytet blir det en helt annan resultant.',
+      'Det är motsatta vektorn till SUMMAN.',
+    ],
+  },
+  {
+    question: 'Vektorn $\\vec{v}$ pekar snett uppåt höger. Åt vilket håll pekar $-\\vec{v}$?',
+    choices: [
+      'Snett nedåt vänster',
+      'Snett uppåt vänster',
+      'Snett nedåt höger',
+      'Samma håll, men kortare',
+    ],
+    correct: 0,
+    why: [
+      'Motsatta vektorn pekar rakt motsatt: uppåt höger blir nedåt vänster.',
+      'Bara ena komposanten har vänt — båda ska byta tecken.',
+      'Samma sak — bara ena komposanten vänd.',
+      'Längden bevaras och riktningen vänds helt.',
+    ],
+  },
+  {
+    question: 'Var ritas resultanten $\\vec{w} = \\vec{u} - \\vec{v}$ i kedjan u följd av minus v?',
+    choices: [
+      'Från startpunkten av $\\vec{u}$ till spetsen av $-\\vec{v}$',
+      'Från spetsen av $\\vec{u}$ till startpunkten av $-\\vec{v}$',
+      'Mellan de två spetsarna',
+      'Från origo, alltid',
+    ],
+    correct: 0,
+    why: [
+      'Precis som vid addition: resultanten går från kedjans start till dess slut.',
+      'Det är baklänges — och de punkterna sammanfaller ju i kedjan.',
+      'Spets-till-spets ger fel vektor.',
+      'Vektorer är inte bundna till origo.',
+    ],
+  },
+],
+
+'ma1c-6.8': [
+  {
+    question: 'Vad motsvarar koordinaterna i vektorn $\\overrightarrow{AB} = (8,\\ 4)$?',
+    choices: [
+      'Katetlängderna i den rätvinkliga triangel som vektorn bildar',
+      'Punkten där vektorn slutar',
+      'Vektorns längd och vinkel',
+      'Två olika vektorer',
+    ],
+    correct: 0,
+    why: [
+      'Förflyttningen är 8 i x-led och 4 i y-led — precis katetrarna som går in i Pythagoras sats.',
+      'Vektorn kan starta var som helst — koordinaterna anger förflyttningen, inte en punkt.',
+      'Längd och vinkel kan RÄKNAS UT ur koordinaterna, men det är inte de som står där.',
+      'Det är EN vektor med två komponenter.',
+    ],
+  },
+  {
+    question: 'Beräkna längden av $\\vec{u} = (6,\\ 8)$.',
+    choices: [
+      '10 l.e.',
+      '14 l.e.',
+      '48 l.e.',
+      '$\\sqrt{14}$ l.e.',
+    ],
+    correct: 0,
+    why: [
+      '$\\sqrt{6^2 + 8^2} = \\sqrt{100} = 10$.',
+      '$6 + 8 = 14$ — koordinater adderas inte rakt av.',
+      '$6 \\cdot 8 = 48$ — ingen multiplikation i formeln.',
+      'Kvadrera FÖRST och addera sedan — inte tvärtom.',
+    ],
+  },
+  {
+    question: 'Varför spelar det ingen roll att en koordinat är negativ när längden beräknas?',
+    choices: [
+      'Kvadreringen gör den positiv',
+      'Negativa koordinater är förbjudna',
+      'Roten tar bort tecknet efteråt',
+      'Det spelar roll — längden kan bli negativ',
+    ],
+    correct: 0,
+    why: [
+      '$(-5)^2 = 25$ — under rottecknet är allt positivt, så $(11, -5)$ har samma längd som $(11, 5)$.',
+      'Vektorer pekar åt alla håll — negativa koordinater är vardag.',
+      'Tecknet försvinner redan VID kvadreringen.',
+      'En längd är alltid positiv.',
+    ],
+  },
+  {
+    question: 'Hur skrivs längdformeln med formelbladets beteckningar för $\\vec{u} = (a_x,\\ a_y)$?',
+    choices: [
+      '$|\\vec{u}| = \\sqrt{a_x^2 + a_y^2}$',
+      '$|\\vec{u}| = a_x^2 + a_y^2$',
+      '$|\\vec{u}| = \\sqrt{a_x + a_y}$',
+      '$|\\vec{u}| = a_x \\cdot a_y$',
+    ],
+    correct: 0,
+    why: [
+      'Samma Pythagoras-formel, med index x och y på komponenterna.',
+      'Utan roten fås längdens KVADRAT.',
+      'Komponenterna måste kvadreras innan de adderas.',
+      'Produkten har inget med längden att göra.',
+    ],
+  },
+],
+
 };

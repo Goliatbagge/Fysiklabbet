@@ -17568,4 +17568,5731 @@ $$ \\lambda = \\frac{hc}{E} = \\frac{6{,}626\\cdot 10^{-34}\\cdot 2{,}998\\cdot 
 **Generell slutsats:** Antalet möjliga linjer från nivå $n$ är antalet sätt att välja två nivåer, alltså $\\binom{n}{2}$ — här $\\binom{4}{2} = 6$. Den kortaste våglängden kommer alltid från det djupaste fallet (störst energiskillnad), den längsta från det grundaste $(4 \\to 3)$.`,
         },
     ],
+
+    // ════════════════════════════════════════════════════════════════
+    // MATEMATIK NIVÅ 1c
+    // ════════════════════════════════════════════════════════════════
+
+    'ma1c-1.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $12 - (-9)$.`,
+            answer: { value: 21, unit: '' },
+            solution: `Två minustecken ihop (lika tecken) kan ersättas med ett plustecken:
+
+$$ 12 - (-9) = 12 + 9 = 21 $$
+
+**Svar:** 21`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $(-8) \\cdot (-6)$.`,
+            answer: { value: 48, unit: '' },
+            solution: `Lika tecken multiplicerat med varandra ger ett **positivt** värde ("minus gånger minus ger plus"):
+
+$$ (-8) \\cdot (-6) = 48 $$
+
+**Svar:** 48`,
+        },
+        {
+            level: 1,
+            question: `Vilket av följande tal är ett heltal men **inte** ett naturligt tal?`,
+            choices: [
+                `$-4$`,
+                `$7$`,
+                `$\\dfrac{2}{3}$`,
+                `$0$`,
+            ],
+            correct: 0,
+            solution: `De naturliga talen $\\mathbb{N} = \\{0,\\ 1,\\ 2,\\ 3,\\ \\ldots\\}$ innehåller alla icke-negativa heltal. Heltalen $\\mathbb{Z}$ innehåller dessutom de negativa heltalen.
+
+- $-4$ är ett heltal men inte naturligt (det är negativt).
+- $7$ och $0$ är både naturliga tal och heltal.
+- $\\dfrac{2}{3}$ är inget heltal alls — det är ett rationellt tal.
+
+**Svar:** $-4$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $\\dfrac{-36}{-4} + 5 \\cdot (-3)$.`,
+            answer: { value: -6, unit: '' },
+            solution: `Ta ett steg i taget och använd teckenreglerna.
+
+Divisionen: lika tecken ger plus.
+
+$$ \\frac{-36}{-4} = 9 $$
+
+Multiplikationen: olika tecken ger minus.
+
+$$ 5 \\cdot (-3) = -15 $$
+
+Lägg ihop:
+
+$$ 9 + (-15) = 9 - 15 = -6 $$
+
+**Svar:** −6`,
+        },
+        {
+            level: 2,
+            question: `Vilket av följande påståenden är **falskt**?`,
+            choices: [
+                `Alla naturliga tal är rationella tal.`,
+                `π är ett reellt tal.`,
+                `Alla rationella tal är heltal.`,
+                `$-0{,}25$ är ett rationellt tal.`,
+            ],
+            correct: 2,
+            solution: `Talmängderna ligger inuti varandra: $\\mathbb{N}$ ligger i $\\mathbb{Z}$, som ligger i $\\mathbb{Q}$, som ligger i $\\mathbb{R}$ — men **inte** omvänt.
+
+- Alla naturliga tal är rationella: sant, t.ex. $5 = \\dfrac{5}{1}$.
+- π är reellt: sant — π är ett irrationellt tal, och de irrationella talen ingår i de reella.
+- **Alla rationella tal är heltal: falskt** — t.ex. $\\dfrac{1}{3}$ är rationellt men inget heltal.
+- $-0{,}25$ är rationellt: sant, eftersom $-0{,}25 = -\\dfrac{1}{4}$.
+
+**Svar:** "Alla rationella tal är heltal" är falskt.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Talen $a$ och $b$ är båda **negativa** heltal och $a < b$. Vilka av följande uttryck är då **säkert positiva**?<br>a) $a \\cdot b$&emsp;&emsp;b) $a + b$&emsp;&emsp;c) $a - b$&emsp;&emsp;d) $b - a$`,
+            choices: [
+                `a och d`,
+                `a och c`,
+                `a, b och d`,
+                `endast a`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** testa med konkreta tal och motivera sedan generellt. Ta t.ex. $a = -5$ och $b = -2$ (då gäller $a < b$ eftersom −5 ligger till vänster om −2 på tallinjen).
+
+**a)** $a \\cdot b$: minus gånger minus ger plus, t.ex. $(-5) \\cdot (-2) = 10$. Produkten av två negativa tal är **alltid positiv**.
+
+**b)** $a + b$: summan av två negativa tal är alltid **negativ**, t.ex. $(-5) + (-2) = -7$.
+
+**c)** $a - b$: eftersom $a < b$ är $a - b$ **negativt**, t.ex. $(-5) - (-2) = -5 + 2 = -3$.
+
+**d)** $b - a$: eftersom $b > a$ är $b - a$ **positivt**, t.ex. $(-2) - (-5) = -2 + 5 = 3$. Skillnaden "större minus mindre" är alltid positiv.
+
+**Svar:** a och d.
+
+**Generell slutsats:** $x - y > 0$ precis när $x > y$, oavsett tecken på talen — och en produkt av två tal med lika tecken är alltid positiv.`,
+        },
+    ],
+
+    'ma1c-1.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Förkorta $\\dfrac{12}{18}$ så långt det går.`,
+            choices: [
+                `$\\dfrac{2}{3}$`,
+                `$\\dfrac{6}{9}$`,
+                `$\\dfrac{3}{4}$`,
+                `$\\dfrac{4}{6}$`,
+            ],
+            correct: 0,
+            solution: `Vi dividerar täljare och nämnare med samma tal tills det inte går längre. Största gemensamma delaren till 12 och 18 är 6:
+
+$$ \\frac{12}{18} = \\frac{12/6}{18/6} = \\frac{2}{3} $$
+
+$\\dfrac{6}{9}$ och $\\dfrac{4}{6}$ är visserligen lika stora som $\\dfrac{12}{18}$, men de går att förkorta vidare — de är inte förkortade så långt det går.
+
+**Svar:** $\\dfrac{2}{3}$`,
+        },
+        {
+            level: 1,
+            question: `Förläng $\\dfrac{3}{5}$ så att nämnaren blir 20.`,
+            choices: [
+                `$\\dfrac{3}{20}$`,
+                `$\\dfrac{12}{20}$`,
+                `$\\dfrac{15}{20}$`,
+                `$\\dfrac{60}{20}$`,
+            ],
+            correct: 1,
+            solution: `Nämnaren 5 ska bli 20, så vi multiplicerar med 4 — och då måste **både** täljare och nämnare multipliceras med 4 för att bråkets värde inte ska ändras:
+
+$$ \\frac{3}{5} = \\frac{3 \\cdot 4}{5 \\cdot 4} = \\frac{12}{20} $$
+
+**Svar:** $\\dfrac{12}{20}$`,
+        },
+        {
+            level: 1,
+            question: `Vad kallas talet **under** bråkstrecket?`,
+            choices: [
+                `Täljare`,
+                `Kvot`,
+                `Nämnare`,
+                `Produkt`,
+            ],
+            correct: 2,
+            solution: `Talet under bråkstrecket kallas **nämnare** och talet ovanför kallas **täljare**. Kom ihåg-regel: **t**äljaren i **t**oppen, **n**ämnaren där **n**ere.
+
+**Svar:** Nämnare`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vilket bråk är störst: $\\dfrac{5}{8}$ eller $\\dfrac{7}{11}$?`,
+            choices: [
+                `$\\dfrac{5}{8}$`,
+                `$\\dfrac{7}{11}$`,
+                `De är lika stora`,
+            ],
+            correct: 1,
+            solution: `Vi gör om bråken till samma nämnare genom att förlänga varje bråk med det andra bråkets nämnare:
+
+$$ \\frac{5}{8} = \\frac{5 \\cdot 11}{8 \\cdot 11} = \\frac{55}{88} \\qquad \\frac{7}{11} = \\frac{7 \\cdot 8}{11 \\cdot 8} = \\frac{56}{88} $$
+
+Eftersom $\\frac{56}{88} > \\frac{55}{88}$ är $\\dfrac{7}{11}$ störst.
+
+**Svar:** $\\dfrac{7}{11}$`,
+        },
+        {
+            level: 2,
+            question: `Vilka av bråken $\\dfrac{6}{8}$, $\\dfrac{9}{12}$, $\\dfrac{12}{16}$ och $\\dfrac{10}{14}$ är lika med $\\dfrac{3}{4}$?`,
+            choices: [
+                `Alla fyra`,
+                `Endast $\\dfrac{6}{8}$`,
+                `$\\dfrac{6}{8}$, $\\dfrac{9}{12}$ och $\\dfrac{12}{16}$`,
+                `$\\dfrac{6}{8}$ och $\\dfrac{10}{14}$`,
+            ],
+            correct: 2,
+            solution: `Förkorta varje bråk så långt det går:
+
+$$ \\frac{6}{8} = \\frac{3}{4} \\qquad \\frac{9}{12} = \\frac{3}{4} \\qquad \\frac{12}{16} = \\frac{3}{4} \\qquad \\frac{10}{14} = \\frac{5}{7} $$
+
+De tre första är alltså förlängningar av $\\frac{3}{4}$ (med 2, 3 respektive 4), men $\\frac{10}{14}$ förkortas till $\\frac{5}{7} \\neq \\frac{3}{4}$.
+
+**Svar:** $\\dfrac{6}{8}$, $\\dfrac{9}{12}$ och $\\dfrac{12}{16}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vilket av följande bråk ligger **mellan** $\\dfrac{1}{3}$ och $\\dfrac{1}{2}$?`,
+            choices: [
+                `$\\dfrac{1}{4}$`,
+                `$\\dfrac{5}{12}$`,
+                `$\\dfrac{3}{5}$`,
+                `$\\dfrac{2}{6}$`,
+            ],
+            correct: 1,
+            solution: `**Insikten:** för att kunna jämföra alla bråk på en gång gör vi om $\\frac{1}{3}$ och $\\frac{1}{2}$ till samma nämnare. Nämnaren 12 fungerar bra (både 3 och 2 delar 12):
+
+$$ \\frac{1}{3} = \\frac{4}{12} \\qquad\\qquad \\frac{1}{2} = \\frac{6}{12} $$
+
+Vi söker alltså ett bråk mellan $\\frac{4}{12}$ och $\\frac{6}{12}$ — och där ligger precis $\\dfrac{5}{12}$.
+
+Kontroll av de övriga: $\\frac{1}{4} = \\frac{3}{12}$ är för litet, $\\frac{3}{5} = \\frac{36}{60} > \\frac{30}{60} = \\frac{1}{2}$ är för stort, och $\\frac{2}{6} = \\frac{4}{12} = \\frac{1}{3}$ ligger inte *mellan* gränserna — det är lika med den undre.
+
+**Svar:** $\\dfrac{5}{12}$
+
+**Generell slutsats:** mellan två bråk finns alltid fler bråk — gör om till gemensam nämnare (förläng mer vid behov) så syns de direkt.`,
+        },
+    ],
+
+    'ma1c-1.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $\\dfrac{2}{9} + \\dfrac{5}{9}$.`,
+            choices: [
+                `$\\dfrac{7}{18}$`,
+                `$\\dfrac{7}{9}$`,
+                `$\\dfrac{10}{81}$`,
+                `$\\dfrac{3}{9}$`,
+            ],
+            correct: 1,
+            solution: `Bråken har samma nämnare — addera täljarna och behåll nämnaren:
+
+$$ \\frac{2}{9} + \\frac{5}{9} = \\frac{2 + 5}{9} = \\frac{7}{9} $$
+
+Nämnarna ska **inte** adderas — nämnaren anger bara hur stora delarna är.
+
+**Svar:** $\\dfrac{7}{9}$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $\\dfrac{5}{6} - \\dfrac{1}{3}$.`,
+            choices: [
+                `$\\dfrac{4}{3}$`,
+                `$\\dfrac{2}{3}$`,
+                `$\\dfrac{1}{2}$`,
+                `$\\dfrac{1}{3}$`,
+            ],
+            correct: 2,
+            solution: `Förläng $\\frac{1}{3}$ med 2 så att båda bråken får nämnaren 6 (metod 1):
+
+$$ \\frac{5}{6} - \\frac{1}{3} = \\frac{5}{6} - \\frac{1 \\cdot 2}{3 \\cdot 2} = \\frac{5}{6} - \\frac{2}{6} = \\frac{3}{6} = \\frac{1}{2} $$
+
+**Svar:** $\\dfrac{1}{2}$`,
+        },
+        {
+            level: 1,
+            question: `Skriv $2\\dfrac{3}{4}$ i bråkform.`,
+            choices: [
+                `$\\dfrac{6}{4}$`,
+                `$\\dfrac{23}{4}$`,
+                `$\\dfrac{9}{4}$`,
+                `$\\dfrac{11}{4}$`,
+            ],
+            correct: 3,
+            solution: `Ta talet framför bråket (2) och multiplicera med nämnaren (4). Addera talet i täljaren (3). Dela hela summan med nämnaren:
+
+$$ 2\\frac{3}{4} = \\frac{2 \\cdot 4 + 3}{4} = \\frac{11}{4} $$
+
+**Svar:** $\\dfrac{11}{4}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $\\dfrac{3}{4} + \\dfrac{5}{6}$. Svara i enklaste bråkform.`,
+            choices: [
+                `$\\dfrac{8}{10}$`,
+                `$\\dfrac{19}{12}$`,
+                `$\\dfrac{15}{24}$`,
+                `$\\dfrac{19}{24}$`,
+            ],
+            correct: 1,
+            solution: `Minsta gemensamma nämnaren till 4 och 6 är 12. Förläng $\\frac{3}{4}$ med 3 och $\\frac{5}{6}$ med 2:
+
+$$ \\frac{3}{4} + \\frac{5}{6} = \\frac{3 \\cdot 3}{4 \\cdot 3} + \\frac{5 \\cdot 2}{6 \\cdot 2} = \\frac{9}{12} + \\frac{10}{12} = \\frac{19}{12} $$
+
+Att addera täljare och nämnare var för sig ($\\frac{8}{10}$) är fel — bråken måste först få samma nämnare.
+
+**Svar:** $\\dfrac{19}{12}$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm den minsta gemensamma nämnaren (MGN) till 8 och 12.`,
+            answer: { value: 24, unit: '' },
+            solution: `Skriv upp multiplarna av 8 och 12 i varsin kolumn:
+
+Multiplar av 8: 8, 16, **24**, 32, 40 …
+Multiplar av 12: 12, **24**, 36, 48 …
+
+Den första multipel som dyker upp i båda kolumnerna är 24.
+
+**Svar:** MGN = 24`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Beräkna $\\dfrac{5}{6} + \\dfrac{3}{8} - \\dfrac{7}{12}$. Svara i enklaste bråkform.`,
+            choices: [
+                `$\\dfrac{1}{24}$`,
+                `$\\dfrac{17}{24}$`,
+                `$\\dfrac{5}{8}$`,
+                `$\\dfrac{7}{8}$`,
+            ],
+            correct: 2,
+            solution: `**Insikten:** alla tre bråken behöver samma nämnare på en gång. Sök minsta gemensamma nämnaren till 6, 8 och 12 genom att lista multiplar:
+
+Multiplar av 6: 6, 12, 18, **24** …
+Multiplar av 8: 8, 16, **24** …
+Multiplar av 12: 12, **24** …
+
+MGN = 24. Förläng bråken med 4, 3 respektive 2:
+
+$$ \\frac{5}{6} + \\frac{3}{8} - \\frac{7}{12} = \\frac{20}{24} + \\frac{9}{24} - \\frac{14}{24} = \\frac{20 + 9 - 14}{24} = \\frac{15}{24} $$
+
+Förkorta med 3:
+
+$$ \\frac{15}{24} = \\frac{15/3}{24/3} = \\frac{5}{8} $$
+
+**Svar:** $\\dfrac{5}{8}$
+
+**Generell slutsats:** med fler än två bråk lönar det sig alltid att hitta EN gemensam nämnare för alla på en gång — och kom ihåg att förkorta svaret.`,
+        },
+    ],
+
+    'ma1c-1.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $\\dfrac{2}{3} \\cdot \\dfrac{5}{7}$.`,
+            choices: [
+                `$\\dfrac{10}{21}$`,
+                `$\\dfrac{7}{10}$`,
+                `$\\dfrac{14}{15}$`,
+                `$\\dfrac{10}{7}$`,
+            ],
+            correct: 0,
+            solution: `Vid multiplikation av två bråk multipliceras täljarna med varandra och nämnarna med varandra:
+
+$$ \\frac{2}{3} \\cdot \\frac{5}{7} = \\frac{2 \\cdot 5}{3 \\cdot 7} = \\frac{10}{21} $$
+
+**Svar:** $\\dfrac{10}{21}$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $4 \\cdot \\dfrac{3}{5}$.`,
+            choices: [
+                `$\\dfrac{12}{20}$`,
+                `$\\dfrac{12}{5}$`,
+                `$\\dfrac{3}{20}$`,
+                `$\\dfrac{7}{5}$`,
+            ],
+            correct: 1,
+            solution: `Ett heltal multipliceras med **täljaren** — nämnaren behålls:
+
+$$ 4 \\cdot \\frac{3}{5} = \\frac{4 \\cdot 3}{5} = \\frac{12}{5} $$
+
+Multiplicerar man även nämnaren med 4 (svaret $\\frac{12}{20}$) har man i själva verket bara förlängt bråket — då har inget multiplicerats.
+
+**Svar:** $\\dfrac{12}{5}$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $\\dfrac{3}{4} \\Big/ \\dfrac{5}{2}$.`,
+            choices: [
+                `$\\dfrac{15}{8}$`,
+                `$\\dfrac{8}{15}$`,
+                `$\\dfrac{3}{10}$`,
+                `$\\dfrac{20}{6}$`,
+            ],
+            correct: 2,
+            solution: `Byt divisionen mot multiplikation och invertera bråket i nämnaren:
+
+$$ \\frac{3}{4} \\Big/ \\frac{5}{2} = \\frac{3}{4} \\cdot \\frac{2}{5} = \\frac{3 \\cdot 2}{4 \\cdot 5} = \\frac{6}{20} = \\frac{3}{10} $$
+
+**Svar:** $\\dfrac{3}{10}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Hur mycket är $\\dfrac{3}{8}$ av 96 kr?`,
+            answer: { value: 36, unit: 'kr' },
+            solution: `En bråkdel *av* något beräknas genom att multiplicera med bråkdelen:
+
+$$ \\frac{3}{8} \\cdot 96 = \\frac{3 \\cdot 96}{8} $$
+
+Förkorta med 8 innan multiplikationen ($96/8 = 12$):
+
+$$ \\frac{3 \\cdot 96/8}{8/8} = 3 \\cdot 12 = 36 $$
+
+**Svar:** 36 kr`,
+        },
+        {
+            level: 2,
+            question: `Beräkna $\\dfrac{5}{24} \\cdot \\dfrac{8}{15}$ genom att faktorisera och förkorta innan du multiplicerar. Svara i enklaste bråkform.`,
+            choices: [
+                `$\\dfrac{40}{360}$`,
+                `$\\dfrac{1}{9}$`,
+                `$\\dfrac{2}{9}$`,
+                `$\\dfrac{1}{3}$`,
+            ],
+            correct: 1,
+            solution: `Faktorisera täljare och nämnare och förkorta innan multiplikationen:
+
+$$ \\frac{5}{24} \\cdot \\frac{8}{15} = \\frac{5 \\cdot 8}{24 \\cdot 15} = \\frac{5 \\cdot 8}{8 \\cdot 3 \\cdot 3 \\cdot 5} $$
+
+Faktorerna 5 och 8 finns i både täljare och nämnare och kan förkortas bort (kvar blir 1 i täljaren):
+
+$$ \\frac{1}{3 \\cdot 3} = \\frac{1}{9} $$
+
+$\\frac{40}{360}$ är samma värde men inte förkortat — och betydligt lättare att räkna fel på.
+
+**Svar:** $\\dfrac{1}{9}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Emma äter $\\dfrac{1}{4}$ av en tårta. Sedan äter Noah $\\dfrac{2}{3}$ av det som är **kvar**. Hur stor del av hela tårtan är kvar därefter?`,
+            choices: [
+                `$\\dfrac{1}{4}$`,
+                `$\\dfrac{1}{12}$`,
+                `$\\dfrac{1}{2}$`,
+                `$\\dfrac{5}{12}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** Noahs bråkdel räknas på *resten*, inte på hela tårtan — bråkdel av något betyder multiplikation med just det.
+
+Efter Emma är $1 - \\frac{1}{4} = \\frac{3}{4}$ av tårtan kvar.
+
+Noah äter $\\frac{2}{3}$ **av** $\\frac{3}{4}$:
+
+$$ \\frac{2}{3} \\cdot \\frac{3}{4} = \\frac{2 \\cdot 3}{3 \\cdot 4} = \\frac{6}{12} = \\frac{1}{2} $$
+
+Kvar är alltså
+
+$$ \\frac{3}{4} - \\frac{1}{2} = \\frac{3}{4} - \\frac{2}{4} = \\frac{1}{4} $$
+
+**Svar:** $\\dfrac{1}{4}$ av tårtan är kvar.
+
+**Generell slutsats:** när en andel tas "av det som är kvar" multipliceras bråkdelarna — kvar blir $\\left(1 - \\frac{1}{4}\\right) \\cdot \\left(1 - \\frac{2}{3}\\right) = \\frac{3}{4} \\cdot \\frac{1}{3} = \\frac{1}{4}$. Samma tankesätt återkommer i procenträkningens förändringsfaktorer.`,
+        },
+    ],
+
+    'ma1c-1.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Avrunda 3,276 till tiondelar.`,
+            answer: { value: 3.3, unit: '', tol: 0.001 },
+            solution: `Tiondelssiffran är 2. Siffran *efter* tvåan är 7, och eftersom 7 hör till gruppen 5–9 ökas avrundningssiffran med 1:
+
+$$ 3{,}276 \\approx 3{,}3 $$
+
+**Svar:** 3,3`,
+        },
+        {
+            level: 1,
+            question: `Vilken siffra i talet 5 830,47 står för antalet **hundratal**?`,
+            choices: [
+                `5`,
+                `8`,
+                `3`,
+                `4`,
+            ],
+            correct: 1,
+            solution: `Positionerna till vänster om decimaltecknet är (från decimaltecknet räknat): ental (0), tiotal (3), hundratal (8) och tusental (5). Siffran 4 står för tiondelar.
+
+**Svar:** 8`,
+        },
+        {
+            level: 1,
+            question: `Hur många värdesiffror har talet 0,0450?`,
+            choices: [
+                `2`,
+                `3`,
+                `4`,
+                `5`,
+            ],
+            correct: 1,
+            solution: `Den första värdesiffran är den första siffran som inte är 0 — alltså 4:an. Nollorna *före* är bara platshållare. Nollan *efter* 5:an är däremot en värdesiffra (den visar att mätningen är noggrann till den positionen). Värdesiffrorna är alltså 4, 5 och 0.
+
+**Svar:** 3 värdesiffror`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En rektangulär trädgårdsplatta är $32{,}6\\ \\mathrm{cm}$ × $18\\ \\mathrm{cm}$. Beräkna plattans area och svara med korrekt antal värdesiffror.`,
+            choices: [
+                `$586{,}8\\ \\mathrm{cm^2}$`,
+                `$587\\ \\mathrm{cm^2}$`,
+                `$590\\ \\mathrm{cm^2}$`,
+                `$600\\ \\mathrm{cm^2}$`,
+            ],
+            correct: 2,
+            solution: `Arean är
+
+$$ 32{,}6 \\cdot 18 = 586{,}8\\ \\mathrm{cm^2} $$
+
+Vid multiplikation avgör värdet med **minsta antalet värdesiffror**: 32,6 har tre värdesiffror och 18 har två. Svaret ska alltså ha två värdesiffror:
+
+$$ 586{,}8\\ \\mathrm{cm^2} \\approx 590\\ \\mathrm{cm^2} $$
+
+**Svar:** $590\\ \\mathrm{cm^2}$`,
+        },
+        {
+            level: 2,
+            question: `Beräkna $4{,}62 + 2{,}1$ och svara med korrekt antal decimaler.`,
+            answer: { value: 6.7, unit: '', tol: 0.001 },
+            solution: `Summan är
+
+$$ 4{,}62 + 2{,}1 = 6{,}72 $$
+
+Vid addition avgör värdet med **minsta antalet decimaler**: 4,62 har två decimaler och 2,1 har en. Svaret avrundas till en decimal:
+
+$$ 6{,}72 \\approx 6{,}7 $$
+
+**Svar:** 6,7`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Talet 7,4498 ska avrundas till **en decimal**. Amir avrundar i två steg: först till två decimaler (7,45) och sedan till en decimal (7,5). Vilket påstående stämmer?`,
+            choices: [
+                `Amirs metod är fel — rätt svar är 7,4, eftersom avrundningen ska göras direkt från originaltalet`,
+                `Amirs metod är rätt — 7,5 är korrekt avrundat`,
+                `Båda svaren är godkända närmevärden till en decimal`,
+                `Rätt svar är 7,44`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** avrundning ska alltid göras i ETT steg, direkt från originaltalet — annars kan felet växa.
+
+Avrundar vi 7,4498 direkt till en decimal tittar vi på siffran efter tiondelssiffran 4, alltså 4:an i hundradelsposition. Den hör till gruppen 0–4, så tiondelssiffran behålls:
+
+$$ 7{,}4498 \\approx 7{,}4 $$
+
+Amirs tvåstegsmetod ger 7,45 → 7,5 — men 7,4498 ligger närmare 7,4 än 7,5 (avståndet är 0,0498 respektive 0,0502). Stegvis avrundning har alltså flyttat värdet åt fel håll.
+
+**Svar:** Amirs metod är fel — rätt svar är 7,4.
+
+**Generell slutsats:** samma fälla finns i genomgångens exempel (61,4738 → ental blir 61, inte 62). Varje avrundning kastar bort information — avrunda därför alltid från originaltalet.`,
+        },
+    ],
+
+    'ma1c-1.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $2^5$.`,
+            answer: { value: 32, unit: '' },
+            solution: `Exponenten 5 anger hur många gånger basen 2 ska multipliceras med sig själv:
+
+$$ 2^5 = 2 \\cdot 2 \\cdot 2 \\cdot 2 \\cdot 2 = 32 $$
+
+**Svar:** 32`,
+        },
+        {
+            level: 1,
+            question: `Skriv $5 \\cdot 5 \\cdot 5 \\cdot 5$ i potensform.`,
+            choices: [
+                `$5^4$`,
+                `$4^5$`,
+                `$5 \\cdot 4$`,
+                `$5^5$`,
+            ],
+            correct: 0,
+            solution: `Fyra stycken femmor multipliceras — basen är 5 (det som upphöjs) och exponenten är 4 (antalet faktorer):
+
+$$ 5 \\cdot 5 \\cdot 5 \\cdot 5 = 5^4 $$
+
+$4^5$ betyder i stället fem stycken fyror, vilket är något helt annat ($4^5 = 1\\ 024$ men $5^4 = 625$).
+
+**Svar:** $5^4$`,
+        },
+        {
+            level: 1,
+            question: `Förenkla $x^3 \\cdot x^4$.`,
+            choices: [
+                `$x^{12}$`,
+                `$x^7$`,
+                `$2x^7$`,
+                `$x^{81}$`,
+            ],
+            correct: 1,
+            solution: `Vid multiplikation av potenser med samma bas adderas exponenterna:
+
+$$ x^3 \\cdot x^4 = x^{3+4} = x^7 $$
+
+Exponenterna ska **inte** multipliceras — det görs bara vid "potens av potens", $(x^3)^4 = x^{12}$.
+
+**Svar:** $x^7$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $-6^2 + (-2)^3$.`,
+            answer: { value: -44, unit: '' },
+            solution: `Var noga med vad som är basen i varje term!
+
+I $-6^2$ är basen bara 6 — minustecknet står utanför potensen:
+
+$$ -6^2 = -6 \\cdot 6 = -36 $$
+
+I $(-2)^3$ är hela talet −2 basen:
+
+$$ (-2)^3 = (-2) \\cdot (-2) \\cdot (-2) = -8 $$
+
+Summan blir
+
+$$ -36 + (-8) = -36 - 8 = -44 $$
+
+**Svar:** −44`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $5^n \\cdot 5^3 = 5^9$.`,
+            answer: { value: 6, unit: '' },
+            solution: `Skriv om vänsterledet som en enda potens av 5 med potenslagen $a^x \\cdot a^y = a^{x+y}$:
+
+$$ 5^{n+3} = 5^9 $$
+
+När båda led är en enda potens med samma bas måste exponenterna vara lika:
+
+$$ n + 3 = 9 $$
+
+$$ n = 6 $$
+
+**Svar:** $n = 6$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Förenkla $\\dfrac{4^{3x}}{2^x + 2^x}$ så långt som möjligt. Svara som EN potens med basen 2.`,
+            choices: [
+                `$2^{5x-1}$`,
+                `$2^{6x-1}$`,
+                `$2^{2x}$`,
+                `$2^{6x}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** gör om både täljare och nämnare till EN potens med samma bas — precis som i genomgångens sista exempel.
+
+Nämnaren är en summa av två lika termer, alltså en multiplikation:
+
+$$ 2^x + 2^x = 2 \\cdot 2^x = 2^1 \\cdot 2^x = 2^{1+x} $$
+
+Täljaren skrivs om med basen 2, eftersom $4 = 2^2$:
+
+$$ 4^{3x} = (2^2)^{3x} = 2^{6x} $$
+
+Nu kan divisionens potenslag användas:
+
+$$ \\frac{2^{6x}}{2^{1+x}} = 2^{6x - (1+x)} = 2^{6x - 1 - x} = 2^{5x-1} $$
+
+**Svar:** $2^{5x-1}$
+
+**Generell slutsats:** summor av lika potenser ($2^x + 2^x$) skrivs om som en produkt, och olika baser (4 och 2) skrivs om till samma bas — därefter gör potenslagarna resten.`,
+        },
+    ],
+
+    'ma1c-1.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $12^0$.`,
+            answer: { value: 1, unit: '' },
+            solution: `Varje tal utom 0 upphöjt till 0 är lika med 1:
+
+$$ 12^0 = 1 $$
+
+Varning: $12^0 \\neq 0$ — det är ett vanligt misstag.
+
+**Svar:** 1`,
+        },
+        {
+            level: 1,
+            question: `Skriv $3^{-2}$ som ett bråk och beräkna värdet.`,
+            choices: [
+                `$-\\dfrac{1}{9}$`,
+                `$\\dfrac{1}{9}$`,
+                `$-9$`,
+                `$\\dfrac{1}{6}$`,
+            ],
+            correct: 1,
+            solution: `En negativ exponent betyder "1 dividerat med potensen utan minustecknet":
+
+$$ 3^{-2} = \\frac{1}{3^2} = \\frac{1}{9} $$
+
+Observera att svaret är **positivt** — minustecknet i exponenten gör inte talet negativt.
+
+**Svar:** $\\dfrac{1}{9}$`,
+        },
+        {
+            level: 1,
+            question: `Skriv $\\dfrac{1}{7^4}$ i potensform.`,
+            choices: [
+                `$7^{-4}$`,
+                `$7^4$`,
+                `$4^{-7}$`,
+                `$-7^4$`,
+            ],
+            correct: 0,
+            solution: `Eftersom $7^{-4} = \\frac{1}{7^4}$ gäller det omvända också:
+
+$$ \\frac{1}{7^4} = 7^{-4} $$
+
+**Svar:** $7^{-4}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $\\left(\\dfrac{2}{5}\\right)^{-2}$.`,
+            choices: [
+                `$\\dfrac{4}{25}$`,
+                `$-\\dfrac{4}{25}$`,
+                `$\\dfrac{25}{4}$`,
+                `$\\dfrac{5}{4}$`,
+            ],
+            correct: 2,
+            solution: `Invertera bråket och byt tecken på exponenten — därefter är det en vanlig potens:
+
+$$ \\left(\\frac{2}{5}\\right)^{-2} = \\left(\\frac{5}{2}\\right)^{2} = \\frac{5^2}{2^2} = \\frac{25}{4} $$
+
+$\\frac{4}{25}$ är värdet av $\\left(\\frac{2}{5}\\right)^{2}$ — utan invertering.
+
+**Svar:** $\\dfrac{25}{4}$`,
+        },
+        {
+            level: 2,
+            question: `Beräkna $2^0 + 2^{-1} + 2^{-2}$. Svara i decimalform.`,
+            answer: { value: 1.75, unit: '', tol: 0.001 },
+            solution: `Beräkna varje term för sig:
+
+$$ 2^0 = 1 \\qquad 2^{-1} = \\frac{1}{2} = 0{,}5 \\qquad 2^{-2} = \\frac{1}{4} = 0{,}25 $$
+
+Summan blir
+
+$$ 1 + 0{,}5 + 0{,}25 = 1{,}75 $$
+
+**Svar:** 1,75`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ella påstår: "$4^{-3}$ är ett negativt tal, eftersom exponenten är negativ." Vilket påstående är korrekt?`,
+            choices: [
+                `Ella har fel — $4^{-3} = \\dfrac{1}{64}$, och en potens med positiv bas är alltid positiv`,
+                `Ella har rätt — $4^{-3} = -64$`,
+                `Ella har rätt — $4^{-3} = -\\dfrac{1}{64}$`,
+                `Ella har fel — $4^{-3} = 0$, eftersom exponenten är mindre än noll`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** minustecknet i exponenten handlar om *division*, inte om tecken.
+
+Definitionen av negativ exponent ger
+
+$$ 4^{-3} = \\frac{1}{4^3} = \\frac{1}{64} $$
+
+vilket är ett **positivt** tal (litet, men positivt). En potens med positiv bas är alltid positiv, oavsett exponentens tecken — att minska exponenten med 1 betyder bara att dividera med basen en gång till:
+
+$$ 4^2 = 16 \\quad\\to\\quad 4^1 = 4 \\quad\\to\\quad 4^0 = 1 \\quad\\to\\quad 4^{-1} = \\frac{1}{4} \\quad\\to\\quad 4^{-2} = \\frac{1}{16} \\quad\\to\\quad 4^{-3} = \\frac{1}{64} $$
+
+**Svar:** Ella har fel — $4^{-3} = \\dfrac{1}{64} > 0$.
+
+**Generell slutsats:** trappan ovan visar mönstret: varje steg nedåt i exponenten är en division med basen. Negativa exponenter ger små positiva tal, aldrig negativa (så länge basen är positiv).`,
+        },
+    ],
+
+    'ma1c-1.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $81^{1/2}$ utan räknare.`,
+            answer: { value: 9, unit: '' },
+            solution: `Exponenten $\\frac{1}{2}$ betyder kvadratroten:
+
+$$ 81^{1/2} = \\sqrt{81} = 9 $$
+
+**Svar:** 9`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $125^{1/3}$ utan räknare.`,
+            answer: { value: 5, unit: '' },
+            solution: `Exponenten $\\frac{1}{3}$ betyder tredjeroten (kubikroten). Vi söker det tal som multiplicerat med sig själv tre gånger blir 125:
+
+$$ 5 \\cdot 5 \\cdot 5 = 125 \\quad \\Rightarrow \\quad 125^{1/3} = \\sqrt[3]{125} = 5 $$
+
+**Svar:** 5`,
+        },
+        {
+            level: 1,
+            question: `Skriv $\\sqrt[4]{13}$ i potensform.`,
+            choices: [
+                `$13^{1/4}$`,
+                `$13^4$`,
+                `$4^{1/13}$`,
+                `$13^{-4}$`,
+            ],
+            correct: 0,
+            solution: `Regeln $a^{1/n} = \\sqrt[n]{a}$ gäller åt båda hållen — fjärderoten ur 13 är alltså 13 upphöjt till $\\frac{1}{4}$:
+
+$$ \\sqrt[4]{13} = 13^{1/4} $$
+
+**Svar:** $13^{1/4}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $16^{3/4}$ utan räknare.`,
+            answer: { value: 8, unit: '' },
+            solution: `Dela upp exponenten med potenslagen "potens av potens":
+
+$$ 16^{3/4} = \\left(16^{1/4}\\right)^3 $$
+
+Fjärderoten ur 16 är 2 (eftersom $2 \\cdot 2 \\cdot 2 \\cdot 2 = 16$):
+
+$$ \\left(16^{1/4}\\right)^3 = 2^3 = 8 $$
+
+**Svar:** 8`,
+        },
+        {
+            level: 2,
+            question: `Förenkla $\\dfrac{x^{5/2}}{x^2}$.`,
+            choices: [
+                `$\\sqrt{x}$`,
+                `$x^{5/4}$`,
+                `$x^{2}$`,
+                `$\\dfrac{1}{\\sqrt{x}}$`,
+            ],
+            correct: 0,
+            solution: `Potenslagen för division ger subtraktion av exponenterna — räkna med dem som med vanliga bråk:
+
+$$ \\frac{x^{5/2}}{x^2} = x^{5/2 - 2} = x^{5/2 - 4/2} = x^{1/2} = \\sqrt{x} $$
+
+**Svar:** $\\sqrt{x}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vilket av talen är störst: $2^{30}$, $4^{16}$ eller $8^{11}$?`,
+            choices: [
+                `$2^{30}$`,
+                `$4^{16}$`,
+                `$8^{11}$`,
+                `De är lika stora`,
+            ],
+            correct: 2,
+            solution: `**Insikten:** potenser med olika baser kan inte jämföras direkt — skriv om alla med samma bas. Här fungerar basen 2, eftersom $4 = 2^2$ och $8 = 2^3$:
+
+$$ 4^{16} = \\left(2^2\\right)^{16} = 2^{2 \\cdot 16} = 2^{32} $$
+
+$$ 8^{11} = \\left(2^3\\right)^{11} = 2^{3 \\cdot 11} = 2^{33} $$
+
+Nu har alla tre talen basen 2, och då avgör exponenten:
+
+$$ 2^{30} < 2^{32} < 2^{33} $$
+
+Störst är alltså $2^{33} = 8^{11}$.
+
+**Svar:** $8^{11}$
+
+**Generell slutsats:** samma-bas-tricket från potensekvationerna fungerar även för jämförelser — och "potens av potens" betyder att exponenterna multipliceras.`,
+        },
+    ],
+
+    'ma1c-1.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Skriv 63 000 i grundpotensform.`,
+            choices: [
+                `$6{,}3 \\cdot 10^4$`,
+                `$63 \\cdot 10^3$`,
+                `$6{,}3 \\cdot 10^3$`,
+                `$0{,}63 \\cdot 10^5$`,
+            ],
+            correct: 0,
+            solution: `Talet framför tiopotensen ska vara mellan 1 och 10 — här 6,3. Antalet siffror efter den första ger exponenten — här 4:
+
+$$ 63\\ 000 = 6{,}3 \\cdot 10^4 $$
+
+$63 \\cdot 10^3$ och $0{,}63 \\cdot 10^5$ har rätt värde men är inte grundpotensform, eftersom 63 och 0,63 inte ligger mellan 1 och 10.
+
+**Svar:** $6{,}3 \\cdot 10^4$`,
+        },
+        {
+            level: 1,
+            question: `Skriv 0,00052 i grundpotensform.`,
+            choices: [
+                `$5{,}2 \\cdot 10^{-3}$`,
+                `$5{,}2 \\cdot 10^{-4}$`,
+                `$52 \\cdot 10^{-5}$`,
+                `$5{,}2 \\cdot 10^{4}$`,
+            ],
+            correct: 1,
+            solution: `Grundpotensformen inleds med 5,2. Antalet nollor före den första icke-nollan ger den negativa exponenten — här 4 nollor (0,000…):
+
+$$ 0{,}00052 = 5{,}2 \\cdot 10^{-4} $$
+
+**Svar:** $5{,}2 \\cdot 10^{-4}$`,
+        },
+        {
+            level: 1,
+            question: `Skriv 6,5 km utan prefix. Svara i meter.`,
+            answer: { value: 6500, unit: 'm' },
+            solution: `Prefixet k (kilo) betyder $10^3$:
+
+$$ 6{,}5\\ \\mathrm{km} = 6{,}5 \\cdot 10^3\\ \\mathrm{m} = 6\\ 500\\ \\mathrm{m} $$
+
+**Svar:** 6 500 m`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Skriv 0,0000039 s med lämpligt prefix.`,
+            choices: [
+                `3,9 ns`,
+                `3,9 µs`,
+                `39 µs`,
+                `3,9 ms`,
+            ],
+            correct: 1,
+            solution: `Skriv först talet i grundpotensform:
+
+$$ 0{,}0000039\\ \\mathrm{s} = 3{,}9 \\cdot 10^{-6}\\ \\mathrm{s} $$
+
+Tiopotensen $10^{-6}$ har prefixet µ (mikro):
+
+$$ 3{,}9 \\cdot 10^{-6}\\ \\mathrm{s} = 3{,}9\\ \\mathrm{µs} $$
+
+**Svar:** 3,9 µs`,
+        },
+        {
+            level: 2,
+            question: `Skriv 45 000 000 W med lämpligt prefix.`,
+            choices: [
+                `45 kW`,
+                `4,5 MW`,
+                `45 MW`,
+                `45 GW`,
+            ],
+            correct: 2,
+            solution: `Grundpotensform: $45\\ 000\\ 000\\ \\mathrm{W} = 4{,}5 \\cdot 10^7\\ \\mathrm{W}$.
+
+Vi har inget prefix för $10^7$, så vi skriver om med en tiopotens som har prefix, t.ex. $10^6$ (mega). När tiopotensen blir 10 gånger mindre måste talet framför bli 10 gånger större:
+
+$$ 4{,}5 \\cdot 10^7\\ \\mathrm{W} = 45 \\cdot 10^6\\ \\mathrm{W} = 45\\ \\mathrm{MW} $$
+
+**Svar:** 45 MW`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En lagringsserver rymmer 1,8 TB. En musikfil är i genomsnitt 9,0 MB. Hur många musikfiler får plats på servern?`,
+            answer: { value: 200000, unit: 'st' },
+            solution: `**Insikten:** täljare och nämnare måste ha samma enhet innan divisionen — skriv om prefixen som tiopotenser.
+
+$$ 1{,}8\\ \\mathrm{TB} = 1{,}8 \\cdot 10^{12}\\ \\mathrm{B} \\qquad 9{,}0\\ \\mathrm{MB} = 9{,}0 \\cdot 10^{6}\\ \\mathrm{B} $$
+
+$$ \\text{antal filer} = \\frac{1{,}8 \\cdot 10^{12}\\ \\mathrm{B}}{9{,}0 \\cdot 10^{6}\\ \\mathrm{B}} = 0{,}2 \\cdot 10^{6} = 2 \\cdot 10^{5} = 200\\ 000\\ \\text{st} $$
+
+**Svar:** 200 000 st
+
+**Generell slutsats:** dividera talen för sig och tiopotenserna för sig ($10^{12}/10^{6} = 10^{6}$) — och kontrollera att enheterna verkligen tar ut varandra innan du litar på svaret.`,
+        },
+    ],
+
+    'ma1c-1.10': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $7 + 3 \\cdot 4$.`,
+            answer: { value: 19, unit: '' },
+            solution: `Multiplikation prioriteras före addition:
+
+$$ 7 + 3 \\cdot 4 = 7 + 12 = 19 $$
+
+Räknar man vänster till höger utan prioritering får man det felaktiga $10 \\cdot 4 = 40$.
+
+**Svar:** 19`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $6 \\cdot (8 - 5)$.`,
+            answer: { value: 18, unit: '' },
+            solution: `Parentesen beräknas först:
+
+$$ 6 \\cdot (8 - 5) = 6 \\cdot 3 = 18 $$
+
+**Svar:** 18`,
+        },
+        {
+            level: 1,
+            question: `Vad kallas svaret i en multiplikation?`,
+            choices: [
+                `Summa`,
+                `Produkt`,
+                `Kvot`,
+                `Differens`,
+            ],
+            correct: 1,
+            solution: `Delarna i en multiplikation kallas **faktorer** och svaret kallas **produkt**: $3 \\cdot 4 = 12$ är en produkt.
+
+Summa hör till addition, differens till subtraktion och kvot till division.
+
+**Svar:** Produkt`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $4 \\cdot 6 - (9 - 2 \\cdot 3)^2$.`,
+            answer: { value: 15, unit: '' },
+            solution: `Arbeta inifrån och ut enligt prioriteringsreglerna. Först multiplikationen **inne i** parentesen, sedan parentesen, sedan potensen:
+
+$$ 4 \\cdot 6 - (9 - 2 \\cdot 3)^2 = 4 \\cdot 6 - (9 - 6)^2 = 4 \\cdot 6 - 3^2 $$
+
+Sedan potensen, multiplikationen och till sist differensen:
+
+$$ 4 \\cdot 6 - 9 = 24 - 9 = 15 $$
+
+**Svar:** 15`,
+        },
+        {
+            level: 2,
+            question: `Beräkna $\\dfrac{24}{10 - 2 \\cdot 3}$.`,
+            answer: { value: 6, unit: '' },
+            solution: `I divisioner finns "osynliga" parenteser kring täljare och nämnare — hela nämnaren beräknas först, med prioriteringsreglerna inuti:
+
+$$ \\frac{24}{10 - 2 \\cdot 3} = \\frac{24}{10 - 6} = \\frac{24}{4} = 6 $$
+
+**Svar:** 6`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Sätt ut EN parentes i uttrycket $12 - 4 \\cdot 2 + 6$ så att uttryckets värde blir 22. Vilken placering är rätt?`,
+            choices: [
+                `$(12 - 4) \\cdot 2 + 6$`,
+                `$12 - 4 \\cdot (2 + 6)$`,
+                `$12 - (4 \\cdot 2) + 6$`,
+                `$(12 - 4 \\cdot 2) + 6$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** en parentes ändrar beräkningsordningen — testa systematiskt vad varje placering ger.
+
+Utan parentes: $12 - 4 \\cdot 2 + 6 = 12 - 8 + 6 = 10$.
+
+$$ (12 - 4) \\cdot 2 + 6 = 8 \\cdot 2 + 6 = 16 + 6 = 22 \\quad \\text{(stämmer!)} $$
+
+$$ 12 - 4 \\cdot (2 + 6) = 12 - 4 \\cdot 8 = 12 - 32 = -20 $$
+
+$$ 12 - (4 \\cdot 2) + 6 = 12 - 8 + 6 = 10 \\quad \\text{(parentesen ändrar inget — multiplikationen prioriteras ändå)} $$
+
+$$ (12 - 4 \\cdot 2) + 6 = 4 + 6 = 10 \\quad \\text{(samma sak — ordningen var redan denna)} $$
+
+**Svar:** $(12 - 4) \\cdot 2 + 6$
+
+**Generell slutsats:** en parentes gör bara skillnad om den tvingar fram en ordning som prioriteringsreglerna inte redan ger.`,
+        },
+    ],
+
+    // Kort praktiskt avsnitt — reducerat antal övningar (2 N1 + 1 N2).
+    'ma1c-1.11': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Använd räknaren och beräkna $\\sqrt[3]{85}$. Avrunda till två decimaler.`,
+            answer: { value: 4.4, unit: '', tol: 0.01 },
+            solution: `Slå tredjeroten på räknaren (ofta via en rot-knapp eller genom att skriva $85^{1/3}$ — glöm inte parentesen kring exponenten: \`85^(1/3)\`):
+
+$$ \\sqrt[3]{85} \\approx 4{,}40 $$
+
+Kontroll: $4{,}4^3 = 85{,}18 \\approx 85$.
+
+**Svar:** 4,40`,
+        },
+        {
+            level: 1,
+            question: `Räknaren visar \`6,1E9\`. Vilket tal är det?`,
+            choices: [
+                `$6\\ 100\\ 000\\ 000$`,
+                `$6{,}19$`,
+                `$0{,}000\\ 000\\ 006\\ 1$`,
+                `$61^9$`,
+            ],
+            correct: 0,
+            solution: `E-notationen betyder "gånger 10 upphöjt till", så
+
+$$ 6{,}1\\mathrm{E}9 = 6{,}1 \\cdot 10^9 = 6\\ 100\\ 000\\ 000 $$
+
+**Svar:** 6 100 000 000`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Nadia ska beräkna $\\dfrac{480}{4 \\cdot 6}$ och skriver \`480/4*6\` på räknaren, som svarar 720. Det korrekta svaret är 20. Vad blev fel?`,
+            choices: [
+                `Nämnaren måste skrivas inom parentes: \`480/(4*6)\``,
+                `Räknaren är trasig — uttrycket är rätt inslaget`,
+                `Divisionstecknet ska slås före täljaren`,
+                `Hon skulle ha använt decimalkomma i stället för punkt`,
+            ],
+            correct: 0,
+            solution: `Bråkstrecket har en "osynlig" parentes kring hela nämnaren, men räknaren ser bara tecknen i tur och ordning. \`480/4*6\` tolkas som
+
+$$ \\frac{480}{4} \\cdot 6 = 120 \\cdot 6 = 720 $$
+
+eftersom division och multiplikation har samma prioritet och utförs från vänster till höger. Med parentes kring nämnaren blir det rätt:
+
+$$ 480/(4 \\cdot 6) = \\frac{480}{24} = 20 $$
+
+**Svar:** Nämnaren måste skrivas inom parentes: \`480/(4*6)\`.`,
+        },
+    ],
+
+    'ma1c-2.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `I uttrycket $75 + 40x$ — vad kallas talet 40?`,
+            choices: [
+                `Variabel`,
+                `Konstantterm`,
+                `Koefficient`,
+                `Värde`,
+            ],
+            correct: 2,
+            solution: `Talet som multipliceras med variabeln ("talet framför $x$") kallas **koefficient**. I uttrycket är $x$ variabeln, $40x$ variabeltermen och 75 konstanttermen.
+
+**Svar:** Koefficient`,
+        },
+        {
+            level: 1,
+            question: `Beräkna värdet av uttrycket $8x - 5$ när $x = 6$.`,
+            answer: { value: 43, unit: '' },
+            solution: `Ersätt $x$ med 6 och beräkna enligt prioriteringsreglerna:
+
+$$ 8 \\cdot 6 - 5 = 48 - 5 = 43 $$
+
+**Svar:** 43`,
+        },
+        {
+            level: 1,
+            question: `En biobiljett kostar $p$ kr. Vilket uttryck beskriver kostnaden för 5 biljetter och en popcorn för 65 kr?`,
+            choices: [
+                `$5p + 65$`,
+                `$5(p + 65)$`,
+                `$p + 5 \\cdot 65$`,
+                `$70p$`,
+            ],
+            correct: 0,
+            solution: `Fem biljetter kostar $5p$ kr och popcornen 65 kr — den totala kostnaden är summan:
+
+$$ 5p + 65 $$
+
+$5(p + 65)$ vore fem biljetter OCH fem popcorn, eftersom femman multipliceras in i hela parentesen.
+
+**Svar:** $5p + 65$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna värdet av $14 - 5x$ när $x = -3$.`,
+            answer: { value: 29, unit: '' },
+            solution: `Ersätt $x$ med −3 och använd teckenreglerna — minus gånger minus ger plus:
+
+$$ 14 - 5 \\cdot (-3) = 14 + 15 = 29 $$
+
+Ett vanligt fel är att räkna $14 - 15 = -1$ — då har minustecknet i $-3$ tappats bort.
+
+**Svar:** 29`,
+        },
+        {
+            level: 2,
+            question: `Ett gym tar 250 kr i månadsavgift och 20 kr per pass. Selma är $x$ år och tränar $y$ pass en viss månad. Vilket uttryck beskriver månadens kostnad?`,
+            choices: [
+                `$250 + 20x$`,
+                `$250 + 20y$`,
+                `$270y$`,
+                `$250y + 20$`,
+            ],
+            correct: 1,
+            solution: `Kostnaden beror på antalet **pass**, som betecknas $y$: fast avgift 250 kr plus 20 kr per pass ger
+
+$$ 250 + 20y $$
+
+Selmas ålder $x$ är ett stickspår — den påverkar inte kostnaden. Att välja rätt variabel är halva jobbet när man tecknar uttryck.
+
+**Svar:** $250 + 20y$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Elsa är $x$ år. Hennes mamma är 4 gånger så gammal som Elsa var för 3 år sedan, och hennes pappa är 2 år äldre än mamman. Vilket uttryck beskriver pappans ålder, förenklat så långt som möjligt?`,
+            choices: [
+                `$4x - 10$`,
+                `$4x - 1$`,
+                `$4(x - 3) + 2x$`,
+                `$4x + 2$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** bygg uttrycket i flera led och förenkla först på slutet.
+
+Elsas ålder för 3 år sedan: $(x - 3)$ år.
+
+Mammans ålder: 4 gånger så mycket, alltså $4(x - 3)$ år.
+
+Pappans ålder: 2 år äldre än mamman, alltså
+
+$$ 4(x - 3) + 2 $$
+
+Multiplicera in faktorn 4 i parentesen och förenkla:
+
+$$ 4(x - 3) + 2 = 4x - 12 + 2 = 4x - 10 $$
+
+**Svar:** $4x - 10$
+
+**Generell slutsats:** teckna uttrycket steg för steg i den ordning berättelsen ger — parenteserna håller ordning på vad som hör ihop, och förenklingen görs sist.`,
+        },
+    ],
+
+    'ma1c-2.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Förenkla $7x + 4y - 3x + 2y$.`,
+            choices: [
+                `$4x + 6y$`,
+                `$10x + 6y$`,
+                `$4x + 2y$`,
+                `$10xy$`,
+            ],
+            correct: 0,
+            solution: `Samla likadana termer — $x$-termer för sig och $y$-termer för sig, med tecknen framför varje term:
+
+$$ 7x - 3x = 4x \\qquad 4y + 2y = 6y $$
+
+$$ 7x + 4y - 3x + 2y = 4x + 6y $$
+
+$x$- och $y$-termer kan aldrig slås ihop till $xy$-termer.
+
+**Svar:** $4x + 6y$`,
+        },
+        {
+            level: 1,
+            question: `Förenkla $9a + (2 - 4a)$.`,
+            choices: [
+                `$5a + 2$`,
+                `$13a + 2$`,
+                `$5a - 2$`,
+                `$7a$`,
+            ],
+            correct: 0,
+            solution: `Plustecken framför parentesen — parentesen tas bort utan att något ändras inuti:
+
+$$ 9a + (2 - 4a) = 9a + 2 - 4a = 5a + 2 $$
+
+**Svar:** $5a + 2$`,
+        },
+        {
+            level: 1,
+            question: `Förenkla $6x^2 + 2x - 4x^2$.`,
+            choices: [
+                `$4x^2$`,
+                `$2x^2 + 2x$`,
+                `$10x^2 + 2x$`,
+                `$2x^4 + 2x$`,
+            ],
+            correct: 1,
+            solution: `$x^2$-termer läggs ihop för sig och $x$-termer för sig — de är inte likadana termer:
+
+$$ 6x^2 - 4x^2 = 2x^2 $$
+
+$$ 6x^2 + 2x - 4x^2 = 2x^2 + 2x $$
+
+**Svar:** $2x^2 + 2x$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Förenkla $15a - (4 + 6a - 9b)$.`,
+            choices: [
+                `$9a - 4 + 9b$`,
+                `$9a - 4 - 9b$`,
+                `$21a - 4 - 9b$`,
+                `$9a + 4 - 9b$`,
+            ],
+            correct: 0,
+            solution: `Minustecknet framför parentesen byter tecken på ALLA termer inuti när parentesen tas bort:
+
+$$ 15a - (4 + 6a - 9b) = 15a - 4 - 6a + 9b $$
+
+Samla likadana termer:
+
+$$ 15a - 6a = 9a \\quad\\Rightarrow\\quad 9a - 4 + 9b $$
+
+Vanligaste felet är att bara byta tecken på den första termen i parentesen.
+
+**Svar:** $9a - 4 + 9b$`,
+        },
+        {
+            level: 2,
+            question: `En rektangel har höjden $2x$ och basen $5x - 4$. Vilket förenklat uttryck beskriver rektangelns omkrets?`,
+            choices: [
+                `$14x - 8$`,
+                `$7x - 4$`,
+                `$14x - 4$`,
+                `$10x^2 - 8x$`,
+            ],
+            correct: 0,
+            solution: `Omkretsen är summan av alla fyra sidor — två höjder och två baser:
+
+$$ 2 \\cdot 2x + 2 \\cdot (5x - 4) = 4x + 10x - 8 = 14x - 8 $$
+
+$7x - 4$ är bara halva omkretsen, och $10x^2 - 8x$ är arean ($2x \\cdot (5x - 4)$), inte omkretsen.
+
+**Svar:** $14x - 8$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Uttrycket $a - (b - (a - b))$ ska förenklas. Vilket är det förenklade uttrycket?`,
+            choices: [
+                `$2a - 2b$`,
+                `$0$`,
+                `$2b$`,
+                `$2a$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** vid parentes-i-parentes arbetar man inifrån och ut — och varje minustecken framför en parentes byter tecknen inuti just den parentesen.
+
+Inre parentesen först. Minustecknet framför $(a - b)$ byter tecknen:
+
+$$ b - (a - b) = b - a + b = 2b - a $$
+
+Nu återstår
+
+$$ a - (2b - a) = a - 2b + a = 2a - 2b $$
+
+**Svar:** $2a - 2b$
+
+**Generell slutsats:** lös upp en parentes i taget, inifrån och ut. Kontrollera gärna med siffror: $a = 5$, $b = 3$ ger $5 - (3 - (5 - 3)) = 5 - 1 = 4$ och $2 \\cdot 5 - 2 \\cdot 3 = 4$ — stämmer.`,
+        },
+    ],
+
+    'ma1c-2.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Utveckla $5(2x + 3)$.`,
+            choices: [
+                `$10x + 3$`,
+                `$10x + 15$`,
+                `$7x + 8$`,
+                `$10x + 8$`,
+            ],
+            correct: 1,
+            solution: `Distributiva lagen: faktorn 5 multipliceras med **varje** term i parentesen:
+
+$$ 5(2x + 3) = 5 \\cdot 2x + 5 \\cdot 3 = 10x + 15 $$
+
+Vanligaste felet är att bara multiplicera den första termen ($10x + 3$).
+
+**Svar:** $10x + 15$`,
+        },
+        {
+            level: 1,
+            question: `Utveckla $(x + 2)(x + 5)$.`,
+            choices: [
+                `$x^2 + 10$`,
+                `$x^2 + 7x + 10$`,
+                `$2x + 7$`,
+                `$x^2 + 10x + 7$`,
+            ],
+            correct: 1,
+            solution: `Varje term i första parentesen multipliceras med varje term i den andra:
+
+$$ (x + 2)(x + 5) = x^2 + 5x + 2x + 10 = x^2 + 7x + 10 $$
+
+$x^2 + 10$ missar de två mittentermerna $5x$ och $2x$.
+
+**Svar:** $x^2 + 7x + 10$`,
+        },
+        {
+            level: 1,
+            question: `Utveckla och förenkla $4(3x - 2) + 5$.`,
+            choices: [
+                `$12x - 3$`,
+                `$12x + 3$`,
+                `$12x - 8 + 5x$`,
+                `$7x + 3$`,
+            ],
+            correct: 0,
+            solution: `Multiplicera in 4:an i parentesen och lägg sedan till 5:
+
+$$ 4(3x - 2) + 5 = 12x - 8 + 5 = 12x - 3 $$
+
+**Svar:** $12x - 3$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Utveckla och förenkla $(2x - 3)(4x + 1)$.`,
+            choices: [
+                `$8x^2 - 10x - 3$`,
+                `$8x^2 + 10x - 3$`,
+                `$8x^2 - 3$`,
+                `$8x^2 - 14x - 3$`,
+            ],
+            correct: 0,
+            solution: `Multiplicera varje term i första parentesen med varje term i den andra — håll ordning på tecknen:
+
+$$ (2x - 3)(4x + 1) = 8x^2 + 2x - 12x - 3 = 8x^2 - 10x - 3 $$
+
+**Svar:** $8x^2 - 10x - 3$`,
+        },
+        {
+            level: 2,
+            question: `Utveckla och förenkla $7 - (x + 4)(x - 2)$.`,
+            choices: [
+                `$15 - x^2 - 2x$`,
+                `$7 - x^2 + 2x + 8$`,
+                `$x^2 + 2x - 1$`,
+                `$15 + x^2 - 2x$`,
+            ],
+            correct: 0,
+            solution: `Utveckla parentesparet men BEHÅLL en stor parentes — minustecknet framför ska sedan byta tecken på alla termer:
+
+$$ 7 - (x + 4)(x - 2) = 7 - (x^2 - 2x + 4x - 8) = 7 - (x^2 + 2x - 8) $$
+
+Byt tecken på alla termer inuti och förenkla:
+
+$$ 7 - x^2 - 2x + 8 = 15 - x^2 - 2x $$
+
+**Svar:** $15 - x^2 - 2x$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $(2x + 1)(3x - 4) = 6x(x - 2)$. Svara i decimalform med två decimaler.`,
+            answer: { value: 0.57, unit: '', tol: 0.02 },
+            solution: `**Insikten:** utveckla båda led — $x^2$-termerna tar ut varandra och kvar blir en vanlig förstagradsekvation.
+
+Utveckla vänsterledet:
+
+$$ (2x + 1)(3x - 4) = 6x^2 - 8x + 3x - 4 = 6x^2 - 5x - 4 $$
+
+Utveckla högerledet:
+
+$$ 6x(x - 2) = 6x^2 - 12x $$
+
+Ekvationen blir
+
+$$ 6x^2 - 5x - 4 = 6x^2 - 12x $$
+
+Subtrahera $6x^2$ från båda led:
+
+$$ -5x - 4 = -12x $$
+
+Addera $12x$ till båda led och därefter 4:
+
+$$ 7x - 4 = 0 \\qquad 7x = 4 \\qquad x = \\frac{4}{7} \\approx 0{,}57 $$
+
+**Svar:** $x = \\dfrac{4}{7} \\approx 0{,}57$
+
+**Generell slutsats:** när båda led innehåller samma $x^2$-term försvinner den — ekvationen är i själva verket linjär. Utveckla alltid fullständigt innan du drar slutsatser om ekvationens typ.`,
+        },
+    ],
+
+    'ma1c-2.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Faktorisera $6x + 9$ så långt som möjligt.`,
+            choices: [
+                `$3(2x + 3)$`,
+                `$6(x + 9)$`,
+                `$3(2x + 9)$`,
+                `$x(6 + 9)$`,
+            ],
+            correct: 0,
+            solution: `Den största gemensamma delaren till 6 och 9 är 3. Bryt ut 3 och tänk "distributiva lagen baklänges":
+
+$$ 6x + 9 = 3(2x + 3) $$
+
+Kontroll: $3 \\cdot 2x + 3 \\cdot 3 = 6x + 9$ — stämmer.
+
+**Svar:** $3(2x + 3)$`,
+        },
+        {
+            level: 1,
+            question: `Faktorisera $x^2 + 7x$ så långt som möjligt.`,
+            choices: [
+                `$x(x + 7)$`,
+                `$x^2(1 + 7x)$`,
+                `$7(x^2 + x)$`,
+                `$x(x + 7x)$`,
+            ],
+            correct: 0,
+            solution: `Båda termerna innehåller $x$ — bryt ut den minsta potensen av $x$, alltså $x$:
+
+$$ x^2 + 7x = x(x + 7) $$
+
+**Svar:** $x(x + 7)$`,
+        },
+        {
+            level: 1,
+            question: `Vilket uttryck är $12x - 8$ korrekt faktoriserat så långt som möjligt?`,
+            choices: [
+                `$2(6x - 4)$`,
+                `$4(3x - 2)$`,
+                `$4(3x - 8)$`,
+                `$8(4x - 1)$`,
+            ],
+            correct: 1,
+            solution: `Största gemensamma delaren till 12 och 8 är 4:
+
+$$ 12x - 8 = 4(3x - 2) $$
+
+$2(6x - 4)$ är en korrekt faktorisering men inte "så långt som möjligt" — parentesen kan faktoriseras vidare med 2.
+
+**Svar:** $4(3x - 2)$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Faktorisera $8x^3 - 12x^2 + 20x$ så långt som möjligt.`,
+            choices: [
+                `$4x(2x^2 - 3x + 5)$`,
+                `$2x(4x^2 - 6x + 10)$`,
+                `$4(2x^3 - 3x^2 + 5x)$`,
+                `$4x(2x^2 - 3x - 5)$`,
+            ],
+            correct: 0,
+            solution: `Koefficienterna 8, 12 och 20 har största gemensamma delaren 4. Alla termer innehåller $x$, och den minsta potensen är $x$. Bryt ut $4x$:
+
+$$ 8x^3 - 12x^2 + 20x = 4x(2x^2 - 3x + 5) $$
+
+$2x(4x^2 - 6x + 10)$ stämmer vid multiplikation men är inte färdigfaktoriserat — 2 kan brytas ut ur parentesen.
+
+**Svar:** $4x(2x^2 - 3x + 5)$`,
+        },
+        {
+            level: 2,
+            question: `Faktorisera $10a^2b + 15ab^2$ så långt som möjligt.`,
+            choices: [
+                `$5ab(2a + 3b)$`,
+                `$5(2a^2b + 3ab^2)$`,
+                `$ab(10a + 15b)$`,
+                `$5a^2b^2(2 + 3)$`,
+            ],
+            correct: 0,
+            solution: `Titta på varje del för sig: 10 och 15 har gemensamma faktorn 5, båda termerna innehåller $a$ (minsta potens $a$) och $b$ (minsta potens $b$). Bryt ut $5ab$:
+
+$$ 10a^2b + 15ab^2 = 5ab(2a + 3b) $$
+
+**Svar:** $5ab(2a + 3b)$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Beräkna $47 \\cdot 83 + 47 \\cdot 17$ utan räknare genom att faktorisera. Vilket är värdet?`,
+            answer: { value: 4700, unit: '' },
+            solution: `**Insikten:** faktorisering är inte bara för algebra — gemensamma faktorer i en summa kan brytas ut även med rena tal, och rätt utnyttjat gör det en jobbig beräkning trivial.
+
+Båda termerna innehåller faktorn 47. Bryt ut den:
+
+$$ 47 \\cdot 83 + 47 \\cdot 17 = 47 \\cdot (83 + 17) = 47 \\cdot 100 = 4\\ 700 $$
+
+**Svar:** 4 700
+
+**Generell slutsats:** distributiva lagen baklänges förvandlar "två svåra multiplikationer plus addition" till "en lätt addition gånger ett tal". Håll utkik efter gemensamma faktorer innan du börjar räkna på.`,
+        },
+    ],
+
+    'ma1c-2.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationen $x + 19 = 45$.`,
+            answer: { value: 26, unit: '' },
+            solution: `Termen 19 adderas till $x$ — subtrahera därför 19 från båda led:
+
+$$ x + 19 - 19 = 45 - 19 $$
+
+$$ x = 26 $$
+
+**Svar:** $x = 26$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $6x = 42$.`,
+            answer: { value: 7, unit: '' },
+            solution: `Faktorn 6 multipliceras med $x$ — dividera därför med 6 i båda led:
+
+$$ \\frac{6x}{6} = \\frac{42}{6} $$
+
+$$ x = 7 $$
+
+**Svar:** $x = 7$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $\\dfrac{x}{8} = 5$.`,
+            answer: { value: 40, unit: '' },
+            solution: `Nämnaren 8 divideras — multiplicera därför med 8 i båda led:
+
+$$ \\frac{x}{8} \\cdot 8 = 5 \\cdot 8 $$
+
+$$ x = 40 $$
+
+**Svar:** $x = 40$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $5x - 13 = 22$.`,
+            answer: { value: 7, unit: '' },
+            solution: `Två steg: addera först 13 till båda led, dividera sedan med 5.
+
+$$ 5x - 13 + 13 = 22 + 13 $$
+
+$$ 5x = 35 $$
+
+$$ \\frac{5x}{5} = \\frac{35}{5} $$
+
+$$ x = 7 $$
+
+**Kontroll:** $\\mathrm{VL} = 5 \\cdot 7 - 13 = 35 - 13 = 22 = \\mathrm{HL}$ — stämmer.
+
+**Svar:** $x = 7$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $\\dfrac{3x}{4} + 9 = 15$.`,
+            answer: { value: 8, unit: '' },
+            solution: `Subtrahera först 9 från båda led:
+
+$$ \\frac{3x}{4} = 6 $$
+
+Multiplicera med 4 i båda led:
+
+$$ 3x = 24 $$
+
+Dividera med 3 i båda led:
+
+$$ x = 8 $$
+
+**Svar:** $x = 8$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ekvationen $\\dfrac{2x}{5} - 7 = -4$ har lösningen $x = \\dfrac{15}{2}$. Simon löste den så här:<br>Steg 1: $\\dfrac{2x}{5} = 3$&emsp;&emsp;Steg 2: $2x = \\dfrac{3}{5}$&emsp;&emsp;Steg 3: $x = \\dfrac{3}{10}$<br>I vilket steg gjorde Simon fel, och varför?`,
+            choices: [
+                `Steg 2 — nämnaren 5 ska bort genom multiplikation med 5 i båda led, inte genom att flyttas till högerledet`,
+                `Steg 1 — han skulle ha subtraherat 4 i stället för att addera 7`,
+                `Steg 3 — divisionen med 2 är felräknad`,
+                `Inget steg är fel — facit har fel`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** varje steg i en ekvationslösning måste vara samma operation på BÅDA led — "flytta över" är bara en förkortning av det, och den kan bli fel.
+
+**Steg 1** är korrekt: addera 7 till båda led ger $\\frac{2x}{5} = -4 + 7 = 3$.
+
+**Steg 2** är felet. För att få bort nämnaren 5 ska båda led multipliceras med 5:
+
+$$ \\frac{2x}{5} \\cdot 5 = 3 \\cdot 5 \\qquad\\Rightarrow\\qquad 2x = 15 $$
+
+Simon "flyttade ner" 5:an till högerledets nämnare i stället — det motsvarar att dividera högerledet med 5 samtidigt som vänsterledet multipliceras med 5, alltså olika operationer på de två leden.
+
+**Steg 3** var sedan rätt utfört på fel ekvation. Korrekt fortsättning:
+
+$$ x = \\frac{15}{2} $$
+
+**Svar:** Steg 2 — båda led ska multipliceras med 5, vilket ger $2x = 15$ och $x = \\frac{15}{2}$.
+
+**Generell slutsats:** när något "flyttas över" likhetstecknet byter det operation (plus↔minus, gånger↔delat). Blanda inte ihop åt vilket håll — vid osäkerhet, skriv ut operationen på båda led.`,
+        },
+    ],
+
+    'ma1c-2.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationen $7x = 3x + 20$.`,
+            answer: { value: 5, unit: '' },
+            solution: `Samla variabeltermerna på ena sidan — subtrahera $3x$ (minst koefficient) från båda led:
+
+$$ 7x - 3x = 3x + 20 - 3x $$
+
+$$ 4x = 20 $$
+
+Dividera med 4 i båda led:
+
+$$ x = 5 $$
+
+**Svar:** $x = 5$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $9x - 6 = 5x + 18$.`,
+            answer: { value: 6, unit: '' },
+            solution: `Subtrahera $5x$ från båda led:
+
+$$ 4x - 6 = 18 $$
+
+Addera 6 till båda led:
+
+$$ 4x = 24 $$
+
+Dividera med 4:
+
+$$ x = 6 $$
+
+**Svar:** $x = 6$`,
+        },
+        {
+            level: 1,
+            question: `Vad betyder det att en ekvation leder till motsägelsen $5 = 8$?`,
+            choices: [
+                `Ekvationen saknar lösning`,
+                `Lösningen är $x = 3$`,
+                `Alla tal är lösningar`,
+                `Man måste börja om med en annan metod`,
+            ],
+            correct: 0,
+            solution: `Om alla variabeltermer försvinner och kvar står en falsk likhet (som $5 = 8$) finns inget värde på $x$ som kan göra ekvationen sann — ekvationen **saknar lösning**.
+
+**Svar:** Ekvationen saknar lösning.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $40 - 3(2x - 4) = 10x$.`,
+            answer: { value: 3.25, unit: '', tol: 0.01 },
+            solution: `Förenkla vänsterledet först — multiplicera in −3 i parentesen (tänk på tecknen):
+
+$$ 40 - 6x + 12 = 10x $$
+
+$$ 52 - 6x = 10x $$
+
+Addera $6x$ till båda led:
+
+$$ 52 = 16x $$
+
+Dividera med 16:
+
+$$ x = \\frac{52}{16} = \\frac{13}{4} = 3{,}25 $$
+
+**Svar:** $x = \\dfrac{13}{4} = 3{,}25$`,
+        },
+        {
+            level: 2,
+            question: `Vilken av följande ekvationer saknar lösning?`,
+            choices: [
+                `$4(2x + 3) = 8x + 12$`,
+                `$5x + 7 = 5x - 2$`,
+                `$6x - 9 = 3x$`,
+                `$2(x - 1) = x + 1$`,
+            ],
+            correct: 1,
+            solution: `Subtrahera $5x$ från båda led i $5x + 7 = 5x - 2$:
+
+$$ 7 = -2 $$
+
+En falsk likhet — ekvationen saknar lösning.
+
+De övriga: $4(2x+3) = 8x + 12$ är sann för ALLA $x$ (båda led är identiska), $6x - 9 = 3x$ ger $x = 3$, och $2(x-1) = x+1$ ger $x = 3$.
+
+**Svar:** $5x + 7 = 5x - 2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För vilket värde på talet $a$ saknar ekvationen $ax + 5 = 6x - 7$ lösning?`,
+            answer: { value: 6, unit: '' },
+            solution: `**Insikten:** en ekvation saknar lösning precis när variabeltermerna tar ut varandra men konstanttermerna inte gör det.
+
+Samla variabeltermerna:
+
+$$ ax - 6x = -7 - 5 $$
+
+$$ (a - 6)x = -12 $$
+
+Om $a \\neq 6$ kan vi dividera med $(a - 6)$ och få en lösning $x = \\frac{-12}{a-6}$.
+
+Men om $a = 6$ blir vänsterledet $0 \\cdot x = 0$, och ekvationen säger
+
+$$ 0 = -12 $$
+
+vilket är falskt — ingen lösning finns.
+
+**Svar:** $a = 6$
+
+**Generell slutsats:** ekvationen $kx = m$ saknar lösning när $k = 0$ men $m \\neq 0$. Det är exakt det som händer när båda led har samma variabelterm men olika konstantterm.`,
+        },
+    ],
+
+    'ma1c-2.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationen $\\dfrac{84}{2x} = 6$.`,
+            answer: { value: 7, unit: '' },
+            solution: `Nämnaren ger $2x \\neq 0$, alltså $x \\neq 0$.
+
+Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 84 = 6 \\cdot 2x $$
+
+$$ 84 = 12x $$
+
+$$ x = \\frac{84}{12} = 7 $$
+
+**Svar:** $x = 7$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $\\dfrac{5}{x} = \\dfrac{10}{12}$ med korsvis multiplikation.`,
+            answer: { value: 6, unit: '' },
+            solution: `Nämnarna ger $x \\neq 0$.
+
+Korsvis multiplikation — täljaren i ena bråket gånger nämnaren i det andra:
+
+$$ 10 \\cdot x = 5 \\cdot 12 $$
+
+$$ 10x = 60 $$
+
+$$ x = 6 $$
+
+**Svar:** $x = 6$`,
+        },
+        {
+            level: 1,
+            question: `Varför skriver man $x \\neq 0$ innan man löser ekvationen $\\dfrac{130}{3x} = 5$?`,
+            choices: [
+                `Division med 0 är inte definierat — nämnaren får aldrig bli 0`,
+                `Ekvationer får aldrig ha lösningen 0`,
+                `Talet 130 är inte delbart med 0`,
+                `Det är bara en tradition utan matematisk betydelse`,
+            ],
+            correct: 0,
+            solution: `Om $x = 0$ blir nämnaren $3x = 0$, och division med 0 är inte definierat. Därför måste vi utesluta det värdet INNAN vi löser ekvationen — och kontrollera att lösningen vi får inte är ett förbjudet värde.
+
+**Svar:** Division med 0 är inte definierat — nämnaren får aldrig bli 0.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $\\dfrac{x}{2} + \\dfrac{1}{3} = \\dfrac{3}{4}$. Svara i decimalform.`,
+            answer: { value: 0.83, unit: '', tol: 0.02 },
+            solution: `Minsta talet som är delbart med 2, 3 och 4 är 12 — multiplicera båda led med MGN = 12:
+
+$$ \\frac{12x}{2} + \\frac{12 \\cdot 1}{3} = \\frac{12 \\cdot 3}{4} $$
+
+$$ 6x + 4 = 9 $$
+
+$$ 6x = 5 $$
+
+$$ x = \\frac{5}{6} \\approx 0{,}83 $$
+
+**Svar:** $x = \\dfrac{5}{6} \\approx 0{,}83$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $\\dfrac{4}{5x} - \\dfrac{1}{10x} = \\dfrac{1}{2}$. Svara i decimalform.`,
+            answer: { value: 1.4, unit: '', tol: 0.01 },
+            solution: `Nämnarna ger $x \\neq 0$. MGN måste vara delbar med $5x$, $10x$ och 2 — MGN = $10x$.
+
+Multiplicera varje täljare med $10x$:
+
+$$ \\frac{10x \\cdot 4}{5x} - \\frac{10x \\cdot 1}{10x} = \\frac{10x \\cdot 1}{2} $$
+
+$$ 2 \\cdot 4 - 1 = 5x $$
+
+$$ 7 = 5x $$
+
+$$ x = \\frac{7}{5} = 1{,}4 $$
+
+**Svar:** $x = 1{,}4$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $\\dfrac{3x - 12}{x - 4} = 5$. Vad gäller?`,
+            choices: [
+                `Ekvationen saknar lösning`,
+                `$x = 4$`,
+                `$x = 8$`,
+                `Alla $x$ utom 4 är lösningar`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** kontrollera alltid lösningen mot de förbjudna värdena — ibland är den "lösning" man får exakt det värde som inte är tillåtet.
+
+Nämnaren ger $x \\neq 4$.
+
+Täljaren är lika med produkten av kvoten och nämnaren:
+
+$$ 3x - 12 = 5(x - 4) $$
+
+$$ 3x - 12 = 5x - 20 $$
+
+Subtrahera $3x$ från båda led:
+
+$$ -12 = 2x - 20 $$
+
+Addera 20:
+
+$$ 8 = 2x \\qquad x = 4 $$
+
+Men $x \\neq 4$! Det enda kandidatvärdet är förbjudet — ekvationen saknar lösning.
+
+**Svar:** Ekvationen saknar lösning.
+
+**Generell slutsats:** villkoret "$x \\neq$ …" skrivs ned FÖRST och kontrolleras SIST. Ett svar som bryter mot villkoret är inget svar — precis som i genomgångens exempel med $\\frac{5x-35}{x-7} = 4$.`,
+        },
+    ],
+
+    'ma1c-2.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad är FÖRSTA steget i metoden för problemlösning med ekvationer?`,
+            choices: [
+                `Definiera en beteckning på det som söks och ställ upp en ekvation`,
+                `Lösa ekvationen`,
+                `Gissa ett rimligt svar`,
+                `Svara med enhet`,
+            ],
+            correct: 0,
+            solution: `Metoden har tre steg: **1. Översätt** (inför en beteckning, t.ex. $x$, på det som söks och ställ upp ekvationen), **2. Lös ekvationen**, **3. Tolka och svara** med enhet.
+
+**Svar:** Definiera en beteckning på det som söks och ställ upp en ekvation.`,
+        },
+        {
+            level: 1,
+            question: `Ett tal ökat med 17 är lika med 43. Vilket är talet?`,
+            answer: { value: 26, unit: '' },
+            solution: `Kalla talet $x$ och översätt meningen till en ekvation:
+
+$$ x + 17 = 43 $$
+
+Subtrahera 17 från båda led:
+
+$$ x = 26 $$
+
+**Svar:** Talet är 26.`,
+        },
+        {
+            level: 1,
+            question: `Moa är $x$ år och hennes bror är 5 år äldre. Tillsammans är de 31 år. Vilken ekvation beskriver situationen?`,
+            choices: [
+                `$x + (x + 5) = 31$`,
+                `$x + 5x = 31$`,
+                `$x(x + 5) = 31$`,
+                `$x - 5 = 31$`,
+            ],
+            correct: 0,
+            solution: `Moa är $x$ år och brodern $(x + 5)$ år. "Tillsammans" betyder summan:
+
+$$ x + (x + 5) = 31 $$
+
+(Lösningen blir $2x + 5 = 31$, dvs. $x = 13$ — Moa är 13 år och brodern 18 år.)
+
+**Svar:** $x + (x + 5) = 31$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Tre syskon delar på 2 700 kr. Mellanbarnet får dubbelt så mycket som yngsta barnet, och äldsta barnet får 200 kr mer än mellanbarnet. Hur mycket får yngsta barnet?`,
+            answer: { value: 500, unit: 'kr' },
+            solution: `**Översätt.** Yngsta barnets belopp efterfrågas — kalla det $x$. Då får mellanbarnet $2x$ och äldsta barnet $2x + 200$.
+
+$$ x + 2x + (2x + 200) = 2\\ 700 $$
+
+**Lös ekvationen.**
+
+$$ 5x + 200 = 2\\ 700 $$
+
+$$ 5x = 2\\ 500 $$
+
+$$ x = 500 $$
+
+**Tolka och svara.** 500 kr av 2 700 kr är rimligt (mellanbarnet får 1 000 kr och äldsta 1 200 kr — kontroll: $500 + 1\\ 000 + 1\\ 200 = 2\\ 700$).
+
+**Svar:** 500 kr`,
+        },
+        {
+            level: 2,
+            question: `En rektangel har omkretsen 54 cm. Basen är 3 cm längre än höjden. Hur lång är höjden?`,
+            answer: { value: 12, unit: 'cm' },
+            solution: `**Översätt.** Höjden efterfrågas — kalla den $x$ cm. Då är basen $(x + 3)$ cm. Omkretsen är två baser plus två höjder:
+
+$$ 2x + 2(x + 3) = 54 $$
+
+**Lös ekvationen.**
+
+$$ 2x + 2x + 6 = 54 $$
+
+$$ 4x = 48 $$
+
+$$ x = 12 $$
+
+**Tolka och svara.** Höjden är 12 cm och basen 15 cm — omkretsen blir $2 \\cdot 12 + 2 \\cdot 15 = 54$ cm. Rimligt!
+
+**Svar:** 12 cm`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Farfar är i dag 6 gånger så gammal som sitt barnbarn. Om 8 år är han 4 gånger så gammal som barnbarnet. Hur gammalt är barnbarnet i dag?`,
+            answer: { value: 12, unit: 'år' },
+            solution: `**Insikten:** båda personernas åldrar ändras med tiden — villkoret "om 8 år" måste läggas på BÅDA åldrarna.
+
+**Översätt.** Barnbarnets ålder i dag efterfrågas — kalla den $x$ år. Farfar är då $6x$ år. Om 8 år är barnbarnet $(x + 8)$ år och farfar $(6x + 8)$ år, och då gäller
+
+$$ 6x + 8 = 4(x + 8) $$
+
+**Lös ekvationen.**
+
+$$ 6x + 8 = 4x + 32 $$
+
+Subtrahera $4x$ från båda led:
+
+$$ 2x + 8 = 32 $$
+
+$$ 2x = 24 \\qquad x = 12 $$
+
+**Tolka och svara.** Barnbarnet är 12 år och farfar $6 \\cdot 12 = 72$ år. Om 8 år: 20 respektive 80 år — och $80 = 4 \\cdot 20$. Stämmer!
+
+**Svar:** Barnbarnet är 12 år.
+
+**Generell slutsats:** i åldersproblem åldras alla lika mycket — addera tidsförskjutningen till varje persons uttryck innan villkoret ställs upp.`,
+        },
+    ],
+
+    'ma1c-2.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationen $x^2 = 81$. Vilket är svaret?`,
+            choices: [
+                `$x = 9$`,
+                `$x = \\pm 9$`,
+                `$x = \\pm 40{,}5$`,
+                `$x = 6\\ 561$`,
+            ],
+            correct: 1,
+            solution: `En enkel andragradsekvation har TVÅ lösningar — glöm inte den negativa:
+
+$$ x = \\pm\\sqrt{81} = \\pm 9 $$
+
+Kontroll: både $9^2 = 81$ och $(-9)^2 = 81$.
+
+**Svar:** $x = \\pm 9$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $x^3 = 125$.`,
+            answer: { value: 5, unit: '' },
+            solution: `En tredjegradsekvation av denna typ har EN lösning:
+
+$$ x = \\sqrt[3]{125} = 5 $$
+
+(Ingen ±-lösning här: $(-5)^3 = -125 \\neq 125$.)
+
+**Svar:** $x = 5$`,
+        },
+        {
+            level: 1,
+            question: `Vad gäller för ekvationen $x^2 = -16$?`,
+            choices: [
+                `Den saknar reella lösningar`,
+                `$x = \\pm 4$`,
+                `$x = -4$`,
+                `$x = -8$`,
+            ],
+            correct: 0,
+            solution: `Ingen kvadrat av ett reellt tal kan bli negativ ($x \\cdot x$ med lika tecken ger alltid plus). Roten ur ett negativt tal saknar därför reella lösningar.
+
+**Svar:** Ekvationen saknar reella lösningar.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $5x^2 - 7 = 118$. Ange den positiva lösningen.`,
+            answer: { value: 5, unit: '' },
+            solution: `Lös först ut $x^2$. Addera 7 till båda led:
+
+$$ 5x^2 = 125 $$
+
+Dividera med 5:
+
+$$ x^2 = 25 $$
+
+$$ x = \\pm\\sqrt{25} = \\pm 5 $$
+
+Den positiva lösningen är $x = 5$.
+
+**Svar:** $x = 5$ (och $x = -5$)`,
+        },
+        {
+            level: 2,
+            question: `En kvadratisk tomt har arean $625\\ \\mathrm{m^2}$. Hur lång är tomtens sida?`,
+            answer: { value: 25, unit: 'm' },
+            solution: `Kalla sidan $x$ m. Kvadratens area är $x^2$:
+
+$$ x^2 = 625 $$
+
+$$ x = \\pm\\sqrt{625} = \\pm 25 $$
+
+En sida kan inte vara negativ, så vi bortser från den negativa lösningen.
+
+**Svar:** 25 m`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En tärningsformad låda (kub) ska rymma exakt $8\\ 000\\ \\mathrm{cm^3}$. Ett snickeri vill såga sidorna med 2 cm marginal och undrar: hur lång blir kubens sida — och varför har ekvationen bara EN rimlig lösning trots att arean i förra uppgiften gav två?`,
+            choices: [
+                `Sidan är 20 cm; $x^3 = a$ har alltid exakt en reell lösning, medan $x^2 = a$ har två`,
+                `Sidan är 20 cm; ekvationen $x^3 = a$ har också två lösningar men den negativa glöms ofta`,
+                `Sidan är 40 cm; $x^3 = 8\\ 000$ ger $x = 8\\ 000/200$`,
+                `Sidan är 89 cm; $x = \\sqrt{8\\ 000}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** skillnaden mellan andra- och tredjegradsekvationer är inte en räkneteknisk detalj — den beror på teckenreglerna.
+
+Kubens volym: $x^3 = 8\\ 000$, vilket ger
+
+$$ x = \\sqrt[3]{8\\ 000} = 20 $$
+
+(kontroll: $20 \\cdot 20 \\cdot 20 = 8\\ 000$).
+
+**Varför bara en lösning?** I $x^2 = a$ ger både $x$ och $-x$ samma kvadrat, eftersom minus gånger minus är plus — därför två lösningar. Men i $x^3$ multipliceras tre lika tecken: $(-20)^3 = -8\\ 000$, inte $+8\\ 000$. Tredjepotensen bevarar tecknet, så $x^3 = a$ har exakt en reell lösning för varje $a$.
+
+**Svar:** Sidan blir 20 cm — och $x^3 = a$ har alltid exakt en reell lösning eftersom udda potenser bevarar tecknet.
+
+**Generell slutsats:** jämna exponenter ger ±-par (eller inga reella lösningar om $a < 0$); udda exponenter ger alltid exakt en reell lösning.`,
+        },
+    ],
+
+    'ma1c-2.10': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationen $x^7 = 30$. Avrunda till två decimaler.`,
+            answer: { value: 1.63, unit: '', tol: 0.01 },
+            solution: `Med rotuttryck (eller potenslagar):
+
+$$ x = \\sqrt[7]{30} = 30^{1/7} = 1{,}625\\ldots \\approx 1{,}63 $$
+
+Inget ± — exponenten 7 är udda.
+
+**Svar:** $x \\approx 1{,}63$`,
+        },
+        {
+            level: 1,
+            question: `Hur många lösningar har ekvationen $x^{8} = 200$?`,
+            choices: [
+                `Två — en positiv och en negativ`,
+                `En`,
+                `Ingen`,
+                `Åtta`,
+            ],
+            correct: 0,
+            solution: `Exponenten 8 är jämn och högerledet är positivt — då finns två lösningar:
+
+$$ x = \\pm\\sqrt[8]{200} $$
+
+**Svar:** Två lösningar — en positiv och en negativ.`,
+        },
+        {
+            level: 1,
+            question: `Hur många lösningar har ekvationen $x^{50} = -3$?`,
+            choices: [
+                `Ingen`,
+                `En`,
+                `Två`,
+                `Femtio`,
+            ],
+            correct: 0,
+            solution: `En jämn potens av ett reellt tal kan aldrig bli negativ ($x^{50} \\geq 0$ för alla $x$). Ekvationen saknar därför lösningar.
+
+**Svar:** Ingen lösning.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $5x^6 - 12 = 28$. Ange den positiva lösningen avrundad till två decimaler.`,
+            answer: { value: 1.41, unit: '', tol: 0.01 },
+            solution: `Lös först ut $x^6$. Addera 12 och dividera med 5:
+
+$$ 5x^6 = 40 \\qquad x^6 = 8 $$
+
+Jämn exponent ger två lösningar:
+
+$$ x = \\pm\\sqrt[6]{8} = \\pm 8^{1/6} = \\pm 1{,}414\\ldots \\approx \\pm 1{,}41 $$
+
+**Svar:** $x \\approx \\pm 1{,}41$ (positiva lösningen $\\approx 1{,}41$)`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $x^{1/3} = 5$.`,
+            answer: { value: 125, unit: '' },
+            solution: `Bråk i exponenten — upphöj båda led till exponentens nämnare 3:
+
+$$ \\left(x^{1/3}\\right)^3 = 5^3 $$
+
+$$ x = 125 $$
+
+**Svar:** $x = 125$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $x^{2/3} = 9$. Vilket är svaret?`,
+            choices: [
+                `$x = \\pm 27$`,
+                `$x = 27$`,
+                `$x = \\pm 6$`,
+                `$x = 5{,}2$ (ungefär)`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** när bråkexponenten har en JÄMN täljare uppstår ±-läget efter att nämnaren tagits bort — håll koll på var i lösningen tecknen dyker upp.
+
+Upphöj båda led till exponentens nämnare 3:
+
+$$ \\left(x^{2/3}\\right)^3 = 9^3 $$
+
+$$ x^2 = 729 $$
+
+Nu är det en enkel andragradsekvation — jämn exponent ger två lösningar:
+
+$$ x = \\pm\\sqrt{729} = \\pm 27 $$
+
+Kontroll: $27^{2/3} = (\\sqrt[3]{27})^2 = 3^2 = 9$ och $(-27)^{2/3} = (\\sqrt[3]{-27})^2 = (-3)^2 = 9$. Båda stämmer!
+
+**Svar:** $x = \\pm 27$
+
+**Generell slutsats:** följ genomgångens ordning — ta bort exponentens nämnare först, och avgör sedan antalet lösningar utifrån den exponent som blir kvar.`,
+        },
+    ],
+
+    'ma1c-2.11': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös olikheten $4x + 3 < 19$.`,
+            choices: [
+                `$x < 4$`,
+                `$x > 4$`,
+                `$x < 5{,}5$`,
+                `$x = 4$`,
+            ],
+            correct: 0,
+            solution: `Lös som en ekvation — subtrahera 3 och dividera med 4 (positivt tal, tecknet behålls):
+
+$$ 4x < 16 $$
+
+$$ x < 4 $$
+
+**Svar:** $x < 4$`,
+        },
+        {
+            level: 1,
+            question: `Vad betyder tecknet ≥?`,
+            choices: [
+                `Större än eller lika med`,
+                `Mindre än eller lika med`,
+                `Större än`,
+                `Skilt från`,
+            ],
+            correct: 0,
+            solution: `≥ betyder "större än eller lika med" — t.ex. betyder $x \\geq -9$ att $x$ får vara −9 eller vilket större tal som helst.
+
+**Svar:** Större än eller lika med`,
+        },
+        {
+            level: 1,
+            question: `När måste olikhetstecknet vändas?`,
+            choices: [
+                `Vid multiplikation eller division med ett negativt tal`,
+                `Vid addition av ett negativt tal`,
+                `Varje gång man byter räknesätt`,
+                `Aldrig — olikheter löses precis som ekvationer`,
+            ],
+            correct: 0,
+            solution: `Olikheter löses som ekvationer, MEN tecknet vänds vid multiplikation eller division med negativa tal. Kontroll: $5 > 3$, men $5 \\cdot (-1) = -5$ är MINDRE än $3 \\cdot (-1) = -3$.
+
+Addition och subtraktion (även av negativa tal) påverkar inte tecknet.
+
+**Svar:** Vid multiplikation eller division med ett negativt tal.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös olikheten $5(4 - x) \\leq 45$. Vilket är svaret?`,
+            choices: [
+                `$x \\geq -5$`,
+                `$x \\leq -5$`,
+                `$x \\geq 5$`,
+                `$x \\leq 5$`,
+            ],
+            correct: 0,
+            solution: `Utveckla parentesen:
+
+$$ 20 - 5x \\leq 45 $$
+
+Subtrahera 20 från båda led:
+
+$$ -5x \\leq 25 $$
+
+Dividera med (−5) — negativt tal, så olikhetstecknet VÄNDS:
+
+$$ x \\geq -5 $$
+
+**Svar:** $x \\geq -5$`,
+        },
+        {
+            level: 2,
+            question: `Lös olikheten $x^2 < 25$.`,
+            choices: [
+                `$-5 < x < 5$`,
+                `$x < 5$`,
+                `$x < \\pm 5$`,
+                `$x > 5$ och $x < -5$`,
+            ],
+            correct: 0,
+            solution: `Undersök gränsfallet: $x^2 = 25$ ger $x = \\pm 5$. För att kvadraten ska vara MINDRE än 25 måste $x$ ligga mellan gränserna:
+
+$$ -5 < x < 5 $$
+
+Enbart $x < 5$ räcker inte — t.ex. är $x = -7 < 5$ men $(-7)^2 = 49 > 25$.
+
+**Svar:** $-5 < x < 5$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös olikheten $\\dfrac{8a}{3} > 4a - 24$. Vilket är svaret?`,
+            choices: [
+                `$a < 18$`,
+                `$a > 18$`,
+                `$a < -18$`,
+                `$a > -6$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** flera moment kombineras — nämnare, variabler i båda led och en avslutande vändning när svaret skrivs med variabeln till vänster.
+
+Multiplicera båda led med 3:
+
+$$ 8a > 3(4a - 24) $$
+
+$$ 8a > 12a - 72 $$
+
+Subtrahera $8a$ från båda led:
+
+$$ 0 > 4a - 72 $$
+
+Addera 72:
+
+$$ 72 > 4a $$
+
+Dividera med 4 (positivt — tecknet behålls):
+
+$$ 18 > a $$
+
+Med variabeln till vänster vänds både ordningen och tecknet: $a < 18$.
+
+**Svar:** $a < 18$
+
+**Generell slutsats:** tecknet vänds i TVÅ situationer — vid multiplikation/division med negativt tal, och när hela olikheten läses baklänges för att få variabeln till vänster. Blanda inte ihop dem: här behölls tecknet i alla räknesteg.`,
+        },
+    ],
+
+    'ma1c-2.12': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Använd formeln $v = \\dfrac{s}{t}$ för att beräkna hastigheten när $s = 240\\ \\mathrm{km}$ och $t = 3$ timmar. Svara i km/h.`,
+            answer: { value: 80, unit: 'km/h' },
+            solution: `Sätt in värdena i formeln:
+
+$$ v = \\frac{s}{t} = \\frac{240}{3} = 80\\ \\mathrm{km/h} $$
+
+**Svar:** 80 km/h`,
+        },
+        {
+            level: 1,
+            question: `Lös ut $s$ ur formeln $v = \\dfrac{s}{t}$.`,
+            choices: [
+                `$s = v \\cdot t$`,
+                `$s = \\dfrac{v}{t}$`,
+                `$s = \\dfrac{t}{v}$`,
+                `$s = v + t$`,
+            ],
+            correct: 0,
+            solution: `Multiplicera båda led med $t$ så att nämnaren försvinner:
+
+$$ v \\cdot t = \\frac{s}{t} \\cdot t \\qquad\\Rightarrow\\qquad s = v \\cdot t $$
+
+**Svar:** $s = v \\cdot t$`,
+        },
+        {
+            level: 1,
+            question: `En taxiresa kostar enligt formeln $K = 45 + 12x$ kr, där $x$ är antalet kilometer. Vad kostar en resa på 8 km?`,
+            answer: { value: 141, unit: 'kr' },
+            solution: `Sätt in $x = 8$ i formeln:
+
+$$ K = 45 + 12 \\cdot 8 = 45 + 96 = 141\\ \\mathrm{kr} $$
+
+**Svar:** 141 kr`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Kostnaden för ett gymkort är $K = 3\\ 000 + 250x$ kr, där $x$ är antalet månader. Hur många månader räcker 9 500 kr till?`,
+            answer: { value: 26, unit: 'månader' },
+            solution: `Sätt in $K = 9\\ 500$ och lös ut $x$:
+
+$$ 9\\ 500 = 3\\ 000 + 250x $$
+
+Subtrahera 3 000 från båda led:
+
+$$ 6\\ 500 = 250x $$
+
+Dividera med 250:
+
+$$ x = \\frac{6\\ 500}{250} = 26 $$
+
+**Svar:** 26 månader`,
+        },
+        {
+            level: 2,
+            question: `Använd $t = \\dfrac{s}{v}$ för att beräkna restiden för 42 mil med medelhastigheten 84 km/h. Svara i timmar.`,
+            answer: { value: 5, unit: 'h' },
+            solution: `Enheterna måste stämma överens — hastigheten är i km/h, så sträckan anges i km:
+
+$$ \\left[\\begin{array}{l} s = 42\\ \\text{mil} = 420\\ \\mathrm{km} \\\\ v = 84\\ \\mathrm{km/h} \\end{array}\\right. $$
+
+$$ t = \\frac{s}{v} = \\frac{420}{84} = 5\\ \\text{timmar} $$
+
+Glöms mil→km-omvandlingen blir svaret tio gånger för litet.
+
+**Svar:** 5 timmar`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två biluthyrare har olika prismodeller för ett år: Firma A tar $H_\\mathrm{A} = 21\\ 000 + 2{,}5m$ kr och firma B tar $H_\\mathrm{B} = 12\\ 000 + 4{,}0m$ kr, där $m$ är antalet kilometer. Vid vilken körsträcka kostar firmorna lika mycket?`,
+            answer: { value: 6000, unit: 'km' },
+            solution: `**Insikten:** "kostar lika mycket" översätts till en ekvation där de två formlerna sätts lika.
+
+$$ 21\\ 000 + 2{,}5m = 12\\ 000 + 4{,}0m $$
+
+Subtrahera $2{,}5m$ från båda led:
+
+$$ 21\\ 000 = 12\\ 000 + 1{,}5m $$
+
+Subtrahera 12 000:
+
+$$ 9\\ 000 = 1{,}5m $$
+
+Dividera med 1,5:
+
+$$ m = 6\\ 000 $$
+
+**Tolka:** vid 6 000 km (600 mil) kostar båda $21\\ 000 + 2{,}5 \\cdot 6\\ 000 = 36\\ 000$ kr. Kör man kortare är firma B billigare (lägre fast kostnad); kör man längre vinner firma A (lägre kilometerkostnad).
+
+**Svar:** 6 000 km (600 mil)
+
+**Generell slutsats:** brytpunkten mellan två linjära prismodeller fås genom att sätta formlerna lika — och tolkningen av vem som är billigast på varje sida om brytpunkten är ofta själva poängen.`,
+        },
+    ],
+
+    'ma1c-2.13': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Talföljden 5, 8, 11, 14, … har den slutna formeln $a_n = 3n + 2$. Beräkna $a_5$.`,
+            answer: { value: 17, unit: '' },
+            solution: `Sätt in $n = 5$ i formeln:
+
+$$ a_5 = 3 \\cdot 5 + 2 = 15 + 2 = 17 $$
+
+(Kontroll: talföljden fortsätter 5, 8, 11, 14, **17** — stämmer.)
+
+**Svar:** $a_5 = 17$`,
+        },
+        {
+            level: 1,
+            question: `Vad kallas en formel som direkt kan beräkna ett element i en talföljd?`,
+            choices: [
+                `Sluten formel`,
+                `Öppen formel`,
+                `Rekursiv formel`,
+                `Ordningsnummer`,
+            ],
+            correct: 0,
+            solution: `En **sluten formel**, t.ex. $a_n = 4n - 1$, ger elementet direkt ur ordningsnumret $n$ — utan att man behöver räkna sig fram genom alla tidigare element.
+
+**Svar:** Sluten formel`,
+        },
+        {
+            level: 1,
+            question: `I talföljden 6, 10, 14, 18, … ökar varje element med 4. Vilken term måste då finnas med i den slutna formeln?`,
+            choices: [
+                `$4n$`,
+                `$n + 4$`,
+                `$4^n$`,
+                `$6n$`,
+            ],
+            correct: 0,
+            solution: `När ökningen mellan elementen är konstant lika med 4 måste termen $4n$ finnas med i formeln. Därefter justeras med en konstant: $a_1 = 6$ men $4 \\cdot 1 = 4$, som är 2 för lite — formeln blir $a_n = 4n + 2$.
+
+**Svar:** $4n$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ange en sluten formel för talföljden 2, 9, 16, 23, …`,
+            choices: [
+                `$a_n = 7n - 5$`,
+                `$a_n = 7n + 2$`,
+                `$a_n = 2n + 7$`,
+                `$a_n = 7n - 2$`,
+            ],
+            correct: 0,
+            solution: `Varje element ökar med 7, så termen $7n$ ska med:
+
+$$ a_n = 7n $$
+
+Testa $n = 1$: $7 \\cdot 1 = 7$, men $a_1 = 2$ — det är 5 för mycket. Subtrahera 5:
+
+$$ a_n = 7n - 5 $$
+
+Kontroll: $a_2 = 14 - 5 = 9$ och $a_3 = 21 - 5 = 16$ — stämmer!
+
+**Svar:** $a_n = 7n - 5$`,
+        },
+        {
+            level: 2,
+            question: `Ett mönster av stickor har $a_n = 5n + 3$ stickor i figur $n$. I vilken figur används exakt 128 stickor?`,
+            answer: { value: 25, unit: '' },
+            solution: `Sätt $a_n = 128$ och lös ekvationen:
+
+$$ 5n + 3 = 128 $$
+
+$$ 5n = 125 $$
+
+$$ n = 25 $$
+
+**Svar:** Figur 25`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ett prickmönster har 7 prickar i figur 2 och 13 prickar i figur 5. Antalet prickar följer en formel av typen $a_n = kn + m$. Hur många prickar finns i figur 100?`,
+            answer: { value: 203, unit: '' },
+            solution: `**Insikten:** här ges inte de första figurerna — ökningen per steg måste räknas fram ur två kända element.
+
+Från figur 2 till figur 5 är det $5 - 2 = 3$ steg, och antalet prickar ökar med $13 - 7 = 6$. Ökningen per steg är alltså
+
+$$ k = \\frac{6}{3} = 2 $$
+
+Formeln börjar $a_n = 2n + m$. Sätt in det kända elementet $a_2 = 7$:
+
+$$ 2 \\cdot 2 + m = 7 \\qquad m = 3 $$
+
+Formeln är $a_n = 2n + 3$. (Kontroll: $a_5 = 10 + 3 = 13$ — stämmer!)
+
+Figur 100:
+
+$$ a_{100} = 2 \\cdot 100 + 3 = 203 $$
+
+**Svar:** 203 prickar
+
+**Generell slutsats:** ökningen per steg = (skillnad i värde)/(skillnad i ordningsnummer) — samma tanke som lutningen för en rät linje, vilket återkommer i kapitlet om räta linjer.`,
+        },
+    ],
+
+    // ════════════════════════════════════════════════════════════════
+    // MATEMATIK NIVÅ 1c — kapitel 3: Procentuella förändringar
+    // ════════════════════════════════════════════════════════════════
+
+    'ma1c-3.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Skriv 1 ‰ i decimalform.`,
+            choices: [
+                `0,01`,
+                `0,001`,
+                `0,1`,
+                `0,000 001`,
+            ],
+            correct: 1,
+            solution: `Promille betyder tusendelar:
+
+$$ 1\\ \\text{‰} = \\frac{1}{1\\ 000} = 0{,}001 $$
+
+0,01 är 1 % (hundradel) och 0,000 001 är 1 ppm (miljondel).
+
+**Svar:** 0,001`,
+        },
+        {
+            level: 1,
+            question: `Hur mycket är 4 ‰ av 25 000 kr?`,
+            answer: { value: 100, unit: 'kr' },
+            solution: `Delen = andelen · hela, och andelen skrivs i decimalform:
+
+$$ 4\\ \\text{‰} = \\frac{4}{1\\ 000} = 0{,}004 $$
+
+$$ \\text{delen} = 0{,}004 \\cdot 25\\ 000 = 100\\ \\mathrm{kr} $$
+
+**Svar:** 100 kr`,
+        },
+        {
+            level: 1,
+            question: `Hur många procent är 45 kr av 180 kr?`,
+            answer: { value: 25, unit: '%' },
+            solution: `Andelen = delen/hela:
+
+$$ \\text{andel} = \\frac{45}{180} = 0{,}25 $$
+
+Decimalformen 0,25 motsvarar 25 %.
+
+**Svar:** 25 %`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Hur många promille är 84 g av 24 kg?`,
+            answer: { value: 3.5, unit: '‰', tol: 0.01 },
+            solution: `Samma enhet på delen och det hela: $24\\ \\mathrm{kg} = 24\\ 000\\ \\mathrm{g}$.
+
+$$ \\text{andel} = \\frac{84}{24\\ 000} = 0{,}0035 $$
+
+Multiplicera med 1 000 för promille:
+
+$$ 0{,}0035 = 3{,}5\\ \\text{‰} $$
+
+**Svar:** 3,5 ‰`,
+        },
+        {
+            level: 2,
+            question: `Ett dricksvatten innehåller 8 ppm fluorid. Hur mycket vatten behövs för att få i sig 2,0 gram fluorid? Svara i kg.`,
+            answer: { value: 250, unit: 'kg' },
+            solution: `Det hela = delen/andelen, med andelen i decimalform:
+
+$$ 8\\ \\text{ppm} = \\frac{8}{1\\ 000\\ 000} = 0{,}000\\ 008 $$
+
+$$ \\text{hela} = \\frac{2{,}0}{0{,}000\\ 008} = 250\\ 000\\ \\text{gram} = 250\\ \\mathrm{kg} $$
+
+**Svar:** 250 kg (250 liter vatten)`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En guldlegering innehåller 750 ‰ guld (18 karat). En smyckessmed har 40 g rent guld och vill tillverka så mycket 18-karats legering som möjligt. Hur många gram legering kan hon göra?`,
+            answer: { value: 53.3, unit: 'g', tol: 0.02 },
+            solution: `**Insikten:** det rena guldet är DELEN och legeringen är det HELA — frågan är alltså baklänges jämfört med de flesta promilleuppgifter.
+
+Andelen guld i legeringen är
+
+$$ 750\\ \\text{‰} = \\frac{750}{1\\ 000} = 0{,}75 $$
+
+Det hela (legeringen) löses ut ur andelsformeln:
+
+$$ \\text{hela} = \\frac{\\text{delen}}{\\text{andelen}} = \\frac{40}{0{,}75} = 53{,}33\\ldots \\approx 53{,}3\\ \\mathrm{g} $$
+
+**Tolka:** av 53,3 g legering är $0{,}75 \\cdot 53{,}3 \\approx 40$ g guld — resten (13,3 g) är andra metaller. Rimligt!
+
+**Svar:** cirka 53,3 g legering
+
+**Generell slutsats:** identifiera alltid vilken av de tre storheterna (andel, del, hela) som är okänd innan du räknar — procenttriangeln hjälper: täck det du söker.`,
+        },
+    ],
+
+    'ma1c-3.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken förändringsfaktor motsvarar en ökning med 35 %?`,
+            choices: [
+                `1,35`,
+                `0,35`,
+                `1,035`,
+                `0,65`,
+            ],
+            correct: 0,
+            solution: `Lägg ändringen till 100 % och gör om till decimalform:
+
+$$ 100\\ \\% + 35\\ \\% = 135\\ \\% = 1{,}35 $$
+
+0,35 är bara ändringen själv och 0,65 motsvarar en MINSKNING med 35 %.
+
+**Svar:** 1,35`,
+        },
+        {
+            level: 1,
+            question: `Vilken förändringsfaktor motsvarar en minskning med 12 %?`,
+            choices: [
+                `0,88`,
+                `1,12`,
+                `0,12`,
+                `0,98`,
+            ],
+            correct: 0,
+            solution: `Dra ändringen från 100 %:
+
+$$ 100\\ \\% - 12\\ \\% = 88\\ \\% = 0{,}88 $$
+
+**Svar:** 0,88`,
+        },
+        {
+            level: 1,
+            question: `En jacka kostar 1 200 kr och sänks med 25 %. Beräkna det nya priset med förändringsfaktor.`,
+            answer: { value: 900, unit: 'kr' },
+            solution: `Förändringsfaktorn är $100\\ \\% - 25\\ \\% = 75\\ \\% = 0{,}75$:
+
+$$ \\text{nya värdet} = 0{,}75 \\cdot 1\\ 200 = 900\\ \\mathrm{kr} $$
+
+**Svar:** 900 kr`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En hyra höjs från 6 500 kr till 6 891 kr. Hur många procent höjdes hyran?`,
+            answer: { value: 6, unit: '%' },
+            solution: `Bestäm förändringsfaktorn:
+
+$$ \\text{förändringsfaktor} = \\frac{\\text{nya värdet}}{\\text{gamla värdet}} = \\frac{6\\ 891}{6\\ 500} = 1{,}06 = 106\\ \\% $$
+
+Jämfört med 100 % har hyran ökat med 6 %.
+
+**Svar:** 6 %`,
+        },
+        {
+            level: 2,
+            question: `Elsa tjänar 32 000 kr/månad och Karim tjänar 25 600 kr/månad. Hur många procent MER tjänar Elsa än Karim?`,
+            answer: { value: 25, unit: '%' },
+            solution: `Vi jämför MED Karim — hans lön är "gamla värdet":
+
+$$ \\text{förändringsfaktor} = \\frac{32\\ 000}{25\\ 600} = 1{,}25 = 125\\ \\% $$
+
+Elsa tjänar alltså 25 % mer än Karim.
+
+(Observera att Karim tjänar $\\frac{25\\ 600}{32\\ 000} = 0{,}80$, dvs. 20 % MINDRE än Elsa — procentsatsen beror på vad man jämför med.)
+
+**Svar:** 25 %`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ett elpris höjs med 40 % under vintern. Till våren sänks det nya priset så att det hamnar tillbaka på det ursprungliga. Hur många procent sänktes priset? Avrunda till en decimal.`,
+            answer: { value: 28.6, unit: '%', tol: 0.01 },
+            solution: `**Insikten:** en höjning med 40 % återställs INTE av en sänkning med 40 % — procentsatsen räknas på olika "gamla värden".
+
+Kalla det ursprungliga priset $P$. Efter höjningen är priset $1{,}40P$.
+
+Sänkningen ska ta $1{,}40P$ tillbaka till $P$. Förändringsfaktorn för sänkningen är
+
+$$ \\frac{\\text{nya värdet}}{\\text{gamla värdet}} = \\frac{P}{1{,}40P} = \\frac{1}{1{,}40} = 0{,}714\\ldots \\approx 71{,}4\\ \\% $$
+
+Priset sänktes alltså med $100\\ \\% - 71{,}4\\ \\% = 28{,}6\\ \\%$.
+
+**Svar:** cirka 28,6 %
+
+**Generell slutsats:** faktorn "dit" och faktorn "hem" är varandras inverser ($1{,}40 \\cdot \\frac{1}{1{,}40} = 1$) — aldrig samma procentsats åt båda hållen (utom vid 0 %).`,
+        },
+    ],
+
+    'ma1c-3.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett pris höjs först med 10 % och sedan med 20 %. Vilken är den totala förändringsfaktorn?`,
+            choices: [
+                `$1{,}10 \\cdot 1{,}20 = 1{,}32$`,
+                `$1{,}30$`,
+                `$1{,}10 + 1{,}20 = 2{,}30$`,
+                `$0{,}88$`,
+            ],
+            correct: 0,
+            solution: `Vid upprepade förändringar MULTIPLICERAS förändringsfaktorerna:
+
+$$ 1{,}10 \\cdot 1{,}20 = 1{,}32 $$
+
+Den totala ökningen är alltså 32 % — inte 30 % som man får om procentsatserna adderas.
+
+**Svar:** $1{,}10 \\cdot 1{,}20 = 1{,}32$`,
+        },
+        {
+            level: 1,
+            question: `En vara kostar 500 kr. Priset höjs med 15 % och sänks därefter med 15 %. Vad kostar varan då?`,
+            answer: { value: 488.75, unit: 'kr', tol: 0.005 },
+            solution: `Total förändringsfaktor:
+
+$$ 1{,}15 \\cdot 0{,}85 = 0{,}9775 $$
+
+$$ 500 \\cdot 0{,}9775 = 488{,}75\\ \\mathrm{kr} $$
+
+Priset återgår alltså INTE till 500 kr — värdet som 15 % räknas av har ändrats.
+
+**Svar:** 488,75 kr`,
+        },
+        {
+            level: 1,
+            question: `Vilken total förändringsfaktor får ett sparkonto med årsräntan 3 % efter 5 år?`,
+            choices: [
+                `$1{,}03^5$`,
+                `$1{,}03 \\cdot 5$`,
+                `$1{,}15$`,
+                `$5 \\cdot 0{,}03$`,
+            ],
+            correct: 0,
+            solution: `Samma förändringsfaktor 1,03 multipliceras en gång per år, alltså fem gånger:
+
+$$ 1{,}03 \\cdot 1{,}03 \\cdot 1{,}03 \\cdot 1{,}03 \\cdot 1{,}03 = 1{,}03^5 \\approx 1{,}159 $$
+
+$1{,}03 \\cdot 5 = 5{,}15$ vore en femdubbling plus 15 % — orimligt för 3 % ränta.
+
+**Svar:** $1{,}03^5$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Nadia sätter in 45 000 kr på ett konto med årsräntan 3,2 %. Hur mycket finns på kontot efter 10 år? Avrunda till hela kronor.`,
+            answer: { value: 61638, unit: 'kr', tol: 0.001 },
+            solution: `Förändringsfaktorn per år är $1 + 0{,}032 = 1{,}032$. Efter 10 år:
+
+$$ 45\\ 000 \\cdot 1{,}032^{10} = 45\\ 000 \\cdot 1{,}3702\\ldots = 61\\ 637{,}6\\ldots \\approx 61\\ 638\\ \\mathrm{kr} $$
+
+**Svar:** 61 638 kr`,
+        },
+        {
+            level: 2,
+            question: `En aktie ökade med 8 % ett år och minskade med 5 % året därpå. Vilken var den totala förändringen?`,
+            choices: [
+                `+ 2,6 %`,
+                `+ 3,0 %`,
+                `− 2,6 %`,
+                `+ 13 %`,
+            ],
+            correct: 0,
+            solution: `Multiplicera förändringsfaktorerna:
+
+$$ 1{,}08 \\cdot 0{,}95 = 1{,}026 $$
+
+1,026 motsvarar en ökning med 2,6 %. Att addera procentsatserna ($8 - 5 = 3$ %) ger fel — faktorerna verkar på olika belopp.
+
+**Svar:** + 2,6 %`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En sjö växer igen: vassens yta ökar med 12 % per år. Efter hur många hela år har vassytan mer än fördubblats?`,
+            answer: { value: 7, unit: 'år' },
+            solution: `**Insikten:** frågan "hur många gånger måste faktorn 1,12 multipliceras för att nå 2?" löses genom att testa potenser av den årliga förändringsfaktorn.
+
+Förändringsfaktorn per år är 1,12. Total faktor efter $n$ år: $1{,}12^n$. Vi söker minsta $n$ med $1{,}12^n > 2$:
+
+$$ 1{,}12^5 = 1{,}762\\ldots \\quad 1{,}12^6 = 1{,}973\\ldots \\quad 1{,}12^7 = 2{,}210\\ldots $$
+
+Efter 6 år är ytan inte riktigt fördubblad (faktor 1,97), men efter 7 år är faktorn 2,21 > 2.
+
+**Svar:** Efter 7 år.
+
+**Generell slutsats:** exponentiell tillväxt smyger — 12 % per år fördubblar på ungefär 6–7 år. I senare kurser löses $1{,}12^n = 2$ exakt med logaritmer; här räcker systematisk testning.`,
+        },
+    ],
+
+    'ma1c-3.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas beloppet som finns på ett sparkonto?`,
+            choices: [
+                `Behållning`,
+                `Ränta`,
+                `Amortering`,
+                `Insättning`,
+            ],
+            correct: 0,
+            solution: `Beloppet på kontot kallas **behållning**. Räntan är procentsatsen som behållningen växer med varje år, och insättningen är det man sätter in.
+
+**Svar:** Behållning`,
+        },
+        {
+            level: 1,
+            question: `Du sätter in 12 000 kr på ett konto med årsräntan 3,5 %. Vad är behållningen efter ett år?`,
+            answer: { value: 12420, unit: 'kr' },
+            solution: `Förändringsfaktorn är $1 + 0{,}035 = 1{,}035$:
+
+$$ 12\\ 000 \\cdot 1{,}035 = 12\\ 420\\ \\mathrm{kr} $$
+
+**Svar:** 12 420 kr`,
+        },
+        {
+            level: 1,
+            question: `Vad måste en formel i en kalkylbladscell alltid inledas med?`,
+            choices: [
+                `Ett likhetstecken, =`,
+                `Ett dollartecken, $`,
+                `Cellens namn`,
+                `Ordet "formel"`,
+            ],
+            correct: 0,
+            solution: `Formler i kalkylblad inleds alltid med =, t.ex. \`=B2*B12\`. Utan likhetstecknet tolkas innehållet som vanlig text.
+
+Dollartecknet används för något annat: att "låsa" en cellreferens (t.ex. \`$B$12\`) när formeln kopieras.
+
+**Svar:** Ett likhetstecken, =`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I ett kalkylblad står startbeloppet i B2 och förändringsfaktorn i B12. Cell B3 innehåller \`=B2*B12\` och ska kopieras nedåt med fyllnadshandtaget. Hur ska formeln skrivas för att fungera korrekt?`,
+            choices: [
+                `\`=B2*$B$12\` — faktorcellen låses med dollartecken`,
+                `\`=B2*B12\` — precis som den är`,
+                `\`=$B$2*B12\` — startbeloppet låses`,
+                `\`=B3*B12\` — formeln ska peka på sin egen cell`,
+            ],
+            correct: 0,
+            solution: `När formeln kopieras nedåt flyttas referenserna med: \`=B2*B12\` blir \`=B3*B13\`, \`=B4*B14\` osv. — men förändringsfaktorn ligger BARA i B12. Den referensen måste därför låsas med dollartecken:
+
+\`=B2*$B$12\`
+
+Då blir kopiorna \`=B3*$B$12\`, \`=B4*$B$12\` … — föregående års behållning gånger samma faktor.
+
+**Svar:** \`=B2*$B$12\``,
+        },
+        {
+            level: 2,
+            question: `Amir sparar 60 000 kr med räntan 2,4 % i 6 år. Hur mycket finns på kontot då? Avrunda till hela kronor.`,
+            answer: { value: 69166, unit: 'kr', tol: 0.001 },
+            solution: `Samma förändringsfaktor varje år ger den totala faktorn $1{,}024^6$:
+
+$$ 60\\ 000 \\cdot 1{,}024^6 = 60\\ 000 \\cdot 1{,}1528\\ldots = 69\\ 166{,}0\\ldots \\approx 69\\ 166\\ \\mathrm{kr} $$
+
+**Svar:** 69 166 kr`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Livia sätter in 8 000 kr i slutet av varje år på ett konto med 3,0 % ränta. Vad är behållningen direkt efter den FJÄRDE insättningen? Avrunda till hela kronor.`,
+            answer: { value: 33469, unit: 'kr', tol: 0.001 },
+            solution: `**Insikten:** vid årligt sparande växer det gamla beloppet med räntan SAMTIDIGT som en ny insättning läggs till — precis som kalkylbladsformeln \`=B2*1,03+8000\`.
+
+Steg för steg (behållningen direkt efter varje insättning):
+
+Efter insättning 1: $8\\ 000$ kr
+
+Efter insättning 2: $8\\ 000 \\cdot 1{,}03 + 8\\ 000 = 16\\ 240$ kr
+
+Efter insättning 3: $16\\ 240 \\cdot 1{,}03 + 8\\ 000 = 24\\ 727{,}20$ kr
+
+Efter insättning 4: $24\\ 727{,}20 \\cdot 1{,}03 + 8\\ 000 = 33\\ 469{,}02 \\approx 33\\ 469$ kr
+
+**Svar:** cirka 33 469 kr
+
+**Generell slutsats:** varje insättning hinner växa olika länge (den första i tre år, den sista inte alls) — därför är behållningen mer än $4 \\cdot 8\\ 000 = 32\\ 000$ kr men mindre än om allt satts in från början. Kalkylblad är perfekta för sådana stegvisa beräkningar.`,
+        },
+    ],
+
+    'ma1c-3.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas det att betala tillbaka själva lånebeloppet?`,
+            choices: [
+                `Amortera`,
+                `Betala ränta`,
+                `Sätta in`,
+                `Låna om`,
+            ],
+            correct: 0,
+            solution: `Att betala tillbaka lånet kallas att **amortera**. Räntan är det man betalar extra — priset för lånet. Varje inbetalning består av amortering + ränta.
+
+**Svar:** Amortera`,
+        },
+        {
+            level: 1,
+            question: `Ett lån på 90 000 kr ska amorteras med lika stora belopp varje månad i 3 år. Hur stor blir amorteringen per månad?`,
+            answer: { value: 2500, unit: 'kr' },
+            solution: `Antalet inbetalningar är $3 \\cdot 12 = 36$ stycken:
+
+$$ \\frac{90\\ 000}{36} = 2\\ 500\\ \\mathrm{kr} $$
+
+**Svar:** 2 500 kr`,
+        },
+        {
+            level: 1,
+            question: `En skuld är 50 000 kr och årsräntan 6 %. Hur stor är räntan för EN månad?`,
+            answer: { value: 250, unit: 'kr' },
+            solution: `Årsräntan i kronor:
+
+$$ 0{,}06 \\cdot 50\\ 000 = 3\\ 000\\ \\mathrm{kr} $$
+
+Per månad (12 månader på ett år):
+
+$$ \\frac{3\\ 000}{12} = 250\\ \\mathrm{kr} $$
+
+**Svar:** 250 kr`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Hugo lånar 120 000 kr med rak amortering på 4 år och årsräntan 5,4 %. Hur mycket ska han betala totalt vid FÖRSTA inbetalningen (månadsvis)?`,
+            answer: { value: 3040, unit: 'kr' },
+            solution: `Amortering per månad: $4 \\cdot 12 = 48$ inbetalningar ger
+
+$$ \\frac{120\\ 000}{48} = 2\\ 500\\ \\mathrm{kr} $$
+
+Räntan första månaden räknas på hela skulden 120 000 kr:
+
+$$ \\frac{0{,}054 \\cdot 120\\ 000}{12} = \\frac{6\\ 480}{12} = 540\\ \\mathrm{kr} $$
+
+Total inbetalning:
+
+$$ 2\\ 500 + 540 = 3\\ 040\\ \\mathrm{kr} $$
+
+**Svar:** 3 040 kr`,
+        },
+        {
+            level: 2,
+            question: `I kalkylarket för ett lån står aktuell skuld i B2 och årsräntan är 4,8 %. Vilken formel ger räntan per månad?`,
+            choices: [
+                `\`=(B2*0,048)/12\``,
+                `\`=B2*0,048\``,
+                `\`=B2*1,048/12\``,
+                `\`=B2/12\``,
+            ],
+            correct: 0,
+            solution: `Räntan per månad är årsräntan (4,8 % av aktuell skuld) delad med 12:
+
+\`=(B2*0,048)/12\`
+
+\`=B2*0,048\` ger räntan för ett HELT år, och \`=B2*1,048/12\` blandar in förändringsfaktorn som hör till sparkonton — här ska bara räntedelen beräknas.
+
+**Svar:** \`=(B2*0,048)/12\``,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ellens billån: 150 000 kr, rak amortering 2 500 kr/månad i 60 månader, årsränta 4,8 %. Totalt betalar hon 168 300 kr. Hur stor är den TOTALA räntekostnaden — och varför är den mindre än $60 \\cdot 600 = 36\\ 000$ kr (första månadens ränta gånger 60)?`,
+            choices: [
+                `18 300 kr — skulden minskar för varje månad, så räntan sjunker från 600 kr mot 10 kr`,
+                `36 000 kr — räntan är 600 kr varje månad`,
+                `18 300 kr — banken ger rabatt vid rak amortering`,
+                `7 200 kr — en årsränta`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** vid rak amortering räknas räntan varje månad på den AKTUELLA skulden, som hela tiden krymper.
+
+Total räntekostnad = totalt betalt − lånebelopp:
+
+$$ 168\\ 300 - 150\\ 000 = 18\\ 300\\ \\mathrm{kr} $$
+
+Första månaden är räntan $\\frac{0{,}048 \\cdot 150\\ 000}{12} = 600$ kr, men sista månaden är skulden bara 2 500 kr och räntan $\\frac{0{,}048 \\cdot 2\\ 500}{12} = 10$ kr. Räntan sjunker linjärt, så i genomsnitt betalas ungefär $\\frac{600 + 10}{2} = 305$ kr/månad — och $60 \\cdot 305 = 18\\ 300$ kr. Stämmer!
+
+**Svar:** 18 300 kr — räntan räknas på den krympande skulden, inte på det ursprungliga lånebeloppet.
+
+**Generell slutsats:** total kostnad − lånat belopp = total ränta. Och vid rak amortering är genomsnittsräntan ungefär hälften av den första månadens, eftersom skulden i snitt är halva lånet.`,
+        },
+    ],
+
+    // ════════════════════════════════════════════════════════════════
+    // MATEMATIK NIVÅ 1c — kapitel 4: Räta linjer och funktioner
+    // ════════════════════════════════════════════════════════════════
+
+    'ma1c-4.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas skärningspunkten mellan x-axeln och y-axeln?`,
+            choices: [
+                `Origo`,
+                `Koordinat`,
+                `Kvadrant`,
+                `Nollpunkt`,
+            ],
+            correct: 0,
+            solution: `Skärningen mellan axlarna kallas **origo** och har koordinaten (0, 0).
+
+**Svar:** Origo`,
+        },
+        {
+            level: 1,
+            question: `I vilken kvadrant ligger punkten (−3, 5)?`,
+            choices: [
+                `Första`,
+                `Andra`,
+                `Tredje`,
+                `Fjärde`,
+            ],
+            correct: 1,
+            solution: `x-koordinaten är negativ och y-koordinaten positiv — punkten ligger uppe till vänster. Kvadranterna numreras moturs från övre högra hörnet: första (+, +), **andra (−, +)**, tredje (−, −), fjärde (+, −).
+
+**Svar:** Andra kvadranten`,
+        },
+        {
+            level: 1,
+            question: `En laddstation tar 30 kr i startavgift och 5 kr per kWh. Vilken formel beskriver kostnaden $y$ kr för $x$ kWh?`,
+            choices: [
+                `$y = 30 + 5x$`,
+                `$y = 5 + 30x$`,
+                `$y = 35x$`,
+                `$y = 30 \\cdot 5x$`,
+            ],
+            correct: 0,
+            solution: `Den fasta avgiften 30 kr är konstanttermen och 5 kr multipliceras med varje kWh:
+
+$$ y = 30 + 5x $$
+
+**Svar:** $y = 30 + 5x$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Den linjära modellen $y = 500 + 400x$ beskriver kostnaden hos en bilverkstad. Vad betyder talet 400 i modellen?`,
+            choices: [
+                `Kostnaden ökar med 400 kr för varje arbetad timme`,
+                `Den fasta avgiften är 400 kr`,
+                `Reparationen tar högst 400 minuter`,
+                `Kostnaden är alltid minst 400 kr`,
+            ],
+            correct: 0,
+            solution: `Talet 400 är koefficienten framför $x$ — det anger hur mycket $y$ ökar när $x$ ökar med 1, alltså kostnaden per timme. Den fasta avgiften är konstanttermen 500 kr.
+
+**Svar:** Kostnaden ökar med 400 kr per arbetad timme.`,
+        },
+        {
+            level: 2,
+            question: `Gör en värdetabell för $y = 200 + 150x$. Vilket y-värde hör till $x = 6$?`,
+            answer: { value: 1100, unit: '' },
+            solution: `Sätt in $x = 6$ i formeln:
+
+$$ y = 200 + 150 \\cdot 6 = 200 + 900 = 1\\ 100 $$
+
+**Svar:** $y = 1\\ 100$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Punkterna (1, 700), (2, 950) och (3, 1 200) ligger på grafen till en linjär modell $y = a + bx$. Vilken är modellen?`,
+            choices: [
+                `$y = 450 + 250x$`,
+                `$y = 700 + 250x$`,
+                `$y = 250 + 450x$`,
+                `$y = 700 + 500x$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** i en linjär modell är ökningen per steg konstant — den syns direkt i tabellen, och konstanttermen fås genom att "backa" till $x = 0$.
+
+Från $x = 1$ till $x = 2$ ökar $y$ med $950 - 700 = 250$, och från 2 till 3 med $1\\ 200 - 950 = 250$. Ökningen per steg är alltså $b = 250$.
+
+Backa ett steg från (1, 700): vid $x = 0$ är $y = 700 - 250 = 450$. Alltså $a = 450$:
+
+$$ y = 450 + 250x $$
+
+Kontroll: $x = 3$ ger $450 + 750 = 1\\ 200$ — stämmer!
+
+**Svar:** $y = 450 + 250x$
+
+**Generell slutsats:** konstant skillnad i en värdetabell ⟺ linjär modell. Koefficienten är skillnaden per steg och konstanttermen är värdet vid $x = 0$.`,
+        },
+    ],
+
+    'ma1c-4.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilka två krav ska en graf uppfylla för att visa en proportionalitet?`,
+            choices: [
+                `Den ska vara en rät linje och gå genom origo`,
+                `Den ska vara en rät linje och luta uppåt`,
+                `Den ska gå genom origo och vara böjd`,
+                `Den ska gå genom punkten (1, 1)`,
+            ],
+            correct: 0,
+            solution: `En proportionalitet skrivs $y = kx$ — grafen är en **rät linje** som **går genom origo** (startvärdet är 0). Båda kraven måste vara uppfyllda.
+
+**Svar:** Rät linje genom origo.`,
+        },
+        {
+            level: 1,
+            question: `Bananer kostar 24 kr/kg. Vilken formel beskriver kostnaden $y$ kr för $x$ kg bananer?`,
+            choices: [
+                `$y = 24x$`,
+                `$y = 24 + x$`,
+                `$y = \\dfrac{24}{x}$`,
+                `$y = x + 24x$`,
+            ],
+            correct: 0,
+            solution: `Priset är proportionellt mot vikten — ingen startavgift finns:
+
+$$ y = 24x $$
+
+Proportionalitetskonstanten $k = 24$ är kilopriset.
+
+**Svar:** $y = 24x$`,
+        },
+        {
+            level: 1,
+            question: `För en proportionalitet gäller att $y = 84$ när $x = 12$. Bestäm proportionalitetskonstanten $k$.`,
+            answer: { value: 7, unit: '' },
+            solution: `Proportionalitetskonstanten beräknas som förhållandet mellan $y$ och $x$:
+
+$$ k = \\frac{y}{x} = \\frac{84}{12} = 7 $$
+
+**Svar:** $k = 7$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vilken av följande värdetabeller visar en proportionalitet?`,
+            choices: [
+                `$x$: 2, 4, 6 — $y$: 5, 10, 15`,
+                `$x$: 2, 4, 6 — $y$: 7, 9, 11`,
+                `$x$: 2, 4, 6 — $y$: 4, 16, 36`,
+                `$x$: 2, 4, 6 — $y$: 10, 10, 10`,
+            ],
+            correct: 0,
+            solution: `I en proportionalitet är förhållandet $\\frac{y}{x}$ konstant:
+
+$$ \\frac{5}{2} = 2{,}5 \\qquad \\frac{10}{4} = 2{,}5 \\qquad \\frac{15}{6} = 2{,}5 $$
+
+Alla kvoter är lika — proportionalitet med $k = 2{,}5$.
+
+Tabell två ökar med samma mängd men har startvärde (linjär, ej proportionell), tabell tre är kvadratisk och tabell fyra konstant.
+
+**Svar:** $x$: 2, 4, 6 — $y$: 5, 10, 15`,
+        },
+        {
+            level: 2,
+            question: `En bil drar bensin proportionellt mot körsträckan: 42 liter på 600 km. Hur mycket bensin krävs för 850 km? Svara i liter.`,
+            answer: { value: 59.5, unit: 'liter', tol: 0.005 },
+            solution: `Proportionalitetskonstanten (förbrukning per km):
+
+$$ k = \\frac{42}{600} = 0{,}07\\ \\text{liter/km} $$
+
+För 850 km:
+
+$$ y = 0{,}07 \\cdot 850 = 59{,}5\\ \\text{liter} $$
+
+**Svar:** 59,5 liter`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En taxi tar 20 kr i startavgift plus 10 kr/km. Amanda betalar 60 kr för 4 km och resonerar: "Dubbla sträckan ger dubbla priset — 8 km kostar 120 kr." Vad kostar 8 km egentligen?`,
+            answer: { value: 100, unit: 'kr' },
+            solution: `**Insikten:** "dubbla sträckan ⟹ dubbla priset" gäller BARA för proportionaliteter ($y = kx$, genom origo). Startavgiften gör modellen linjär men inte proportionell.
+
+Modellen är $y = 20 + 10x$. För 8 km:
+
+$$ y = 20 + 10 \\cdot 8 = 100\\ \\mathrm{kr} $$
+
+— inte 120 kr. Amandas dubbling skulle även dubbla startavgiften, men den betalas bara en gång.
+
+Kontrollera kvoterna: $\\frac{60}{4} = 15$ kr/km men $\\frac{100}{8} = 12{,}5$ kr/km — kvoten $\\frac{y}{x}$ är inte konstant, alltså ingen proportionalitet. Grafen är en rät linje som skär y-axeln i 20, inte i origo.
+
+**Svar:** 100 kr
+
+**Generell slutsats:** skalningsknepet "dubbla in ⟹ dubbla ut" är ett kännetecken för proportionalitet. Finns ett startvärde måste formeln användas.`,
+        },
+    ],
+
+    'ma1c-4.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Du ska rita grafen till $y = -2x + 3$ och gör en värdetabell. Vilket y-värde hör till $x = -2$?`,
+            answer: { value: 7, unit: '' },
+            solution: `Sätt in $x = -2$ (tänk på teckenreglerna):
+
+$$ y = -2 \\cdot (-2) + 3 = 4 + 3 = 7 $$
+
+Raden ger koordinaten (−2, 7).
+
+**Svar:** $y = 7$`,
+        },
+        {
+            level: 1,
+            question: `Raden $x = 4$, $y = -5$ i en värdetabell motsvarar en punkt i koordinatsystemet. Vilken?`,
+            choices: [
+                `$(4, -5)$`,
+                `$(-5, 4)$`,
+                `$(4, 5)$`,
+                `$(-4, -5)$`,
+            ],
+            correct: 0,
+            solution: `Varje rad i värdetabellen är en koordinat med x-värdet först och y-värdet sist: (4, −5).
+
+**Svar:** $(4, -5)$`,
+        },
+        {
+            level: 1,
+            question: `Vad är sista steget när man ritar grafen till en linjär ekvation för hand?`,
+            choices: [
+                `Förbinda de inprickade punkterna med en rät linje`,
+                `Räkna ut lutningen med gradskiva`,
+                `Sudda ut värdetabellen`,
+                `Markera origo med en punkt`,
+            ],
+            correct: 0,
+            solution: `Arbetsgången är: värdetabell → pricka in punkterna → **förbind punkterna med en rät linje**. Linjen är grafen.
+
+**Svar:** Förbinda punkterna med en rät linje.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Du ska rita grafen till $y = 3x - 4$ för $x$ från −2 till 2. Vilka intervall måste axlarna minst täcka?`,
+            choices: [
+                `x-axeln −2 till 2 och y-axeln −10 till 2`,
+                `x-axeln −2 till 2 och y-axeln −4 till 4`,
+                `x-axeln 0 till 2 och y-axeln 0 till 2`,
+                `x-axeln −10 till 10 och y-axeln −10 till 10`,
+            ],
+            correct: 0,
+            solution: `Beräkna ändpunkterna: $x = -2$ ger $y = 3 \\cdot (-2) - 4 = -10$ och $x = 2$ ger $y = 3 \\cdot 2 - 4 = 2$. Axlarna måste täcka minsta och största värdena: x från −2 till 2, y från −10 till 2.
+
+**Svar:** x-axeln −2 till 2 och y-axeln −10 till 2.`,
+        },
+        {
+            level: 2,
+            question: `Punkten $(5, a)$ ligger på grafen till $y = -2x + 3$. Bestäm $a$.`,
+            answer: { value: -7, unit: '' },
+            solution: `Att punkten ligger på grafen betyder att koordinaterna uppfyller ekvationen. Sätt in $x = 5$:
+
+$$ a = -2 \\cdot 5 + 3 = -10 + 3 = -7 $$
+
+**Svar:** $a = -7$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Selma prickar in värdetabellen till $y = -2x + 3$ och ser att punkterna (1, 1), (2, −1) och (3, −3) ligger på en rät linje — men punkten hon räknat för $x = -2$ hamnar utanför linjen: (−2, −1). Vilket räknefel har hon gjort?`,
+            choices: [
+                `Hon räknade $-2 \\cdot (-2) = -4$ i stället för $+4$ — minus gånger minus ger plus, rätt punkt är (−2, 7)`,
+                `Hon glömde konstanttermen 3 helt`,
+                `Hon bytte plats på x och y i koordinaten`,
+                `Punkten är rätt — linjen är fel dragen`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** en punkt som faller utanför en i övrigt perfekt linje avslöjar nästan alltid ett teckenfel i värdetabellen — grafen fungerar som felsökare.
+
+Rätt beräkning för $x = -2$:
+
+$$ y = -2 \\cdot (-2) + 3 = 4 + 3 = 7 $$
+
+Selmas punkt (−2, −1) fås av $-4 + 3 = -1$, dvs. hon räknade $-2 \\cdot (-2) = -4$. Minus gånger minus ger plus!
+
+Kontroll mot linjen: linjen genom (1, 1) och (2, −1) har lutningen −2 och passerar (−2, 7) — precis den korrigerade punkten.
+
+**Svar:** Teckenfel: $-2 \\cdot (-2) = +4$, så rätt punkt är (−2, 7).
+
+**Generell slutsats:** när alla punkter utom en ligger på linjen är det punkten som är fel, inte linjen — räkna om just den raden i värdetabellen och leta efter teckenfel.`,
+        },
+    ],
+
+    'ma1c-4.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad motsvarar $m$-värdet i räta linjens ekvation $y = kx + m$?`,
+            choices: [
+                `Linjens skärning med y-axeln`,
+                `Linjens lutning`,
+                `Linjens skärning med x-axeln`,
+                `Linjens längd`,
+            ],
+            correct: 0,
+            solution: `$m$-värdet är linjens skärning med y-axeln (y-intercept) — i linjära modeller "startvärdet". Lutningen är $k$-värdet.
+
+**Svar:** Linjens skärning med y-axeln.`,
+        },
+        {
+            level: 1,
+            question: `En linje har lutningen 4 och skär y-axeln i (0, −2). Vilken är linjens ekvation?`,
+            choices: [
+                `$y = 4x - 2$`,
+                `$y = -2x + 4$`,
+                `$y = 4x + 2$`,
+                `$y = 2x - 4$`,
+            ],
+            correct: 0,
+            solution: `Sätt in $k = 4$ och $m = -2$ i räta linjens ekvation $y = kx + m$:
+
+$$ y = 4x - 2 $$
+
+**Svar:** $y = 4x - 2$`,
+        },
+        {
+            level: 1,
+            question: `En linje går genom punkterna (0, 5) och (1, 8). Bestäm linjens $k$-värde.`,
+            answer: { value: 3, unit: '' },
+            solution: `Trappstegsmetoden mellan punkterna (gå åt höger):
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{8 - 5}{1 - 0} = \\frac{3}{1} = 3 $$
+
+**Svar:** $k = 3$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En linje går genom punkterna (2, 11) och (6, 3). Bestäm linjens riktningskoefficient.`,
+            answer: { value: -2, unit: '' },
+            solution: `Trappsteg från (2, 11) till (6, 3):
+
+$$ \\Delta y = 3 - 11 = -8 \\qquad \\Delta x = 6 - 2 = 4 $$
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{-8}{4} = -2 $$
+
+Linjen lutar nedåt — negativt $k$-värde.
+
+**Svar:** $k = -2$`,
+        },
+        {
+            level: 2,
+            question: `En rät linje har ekvationen $y = kx + m$. Linjen går genom (0, 7) och har lutningen $-\\dfrac{1}{2}$. Vilket y-värde har linjen vid $x = 8$?`,
+            answer: { value: 3, unit: '' },
+            solution: `Skärningen med y-axeln ger $m = 7$, och $k = -\\frac{1}{2}$:
+
+$$ y = -\\frac{1}{2}x + 7 $$
+
+Vid $x = 8$:
+
+$$ y = -\\frac{1}{2} \\cdot 8 + 7 = -4 + 7 = 3 $$
+
+**Svar:** $y = 3$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En linje går genom punkterna (3, 5) och (7, 13). Bestäm linjens ekvation. Vilken är den?`,
+            choices: [
+                `$y = 2x - 1$`,
+                `$y = 2x + 5$`,
+                `$y = \\dfrac{1}{2}x + 3{,}5$`,
+                `$y = 2x + 1$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** när ingen av punkterna ligger på y-axeln fås $m$ inte direkt ur grafen — det måste räknas fram ur $k$ och en känd punkt.
+
+**Steg 1 — bestäm $k$** med trappstegsmetoden:
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{13 - 5}{7 - 3} = \\frac{8}{4} = 2 $$
+
+**Steg 2 — bestäm $m$.** Linjen är $y = 2x + m$, och punkten (3, 5) ligger på linjen, så koordinaterna uppfyller ekvationen:
+
+$$ 5 = 2 \\cdot 3 + m $$
+
+$$ 5 = 6 + m \\qquad m = -1 $$
+
+Ekvationen är $y = 2x - 1$.
+
+Kontroll med andra punkten: $y = 2 \\cdot 7 - 1 = 13$ — stämmer!
+
+**Svar:** $y = 2x - 1$
+
+**Generell slutsats:** två punkter räcker alltid: $k$ ur trappsteget, sedan $m$ genom insättning av en av punkterna. Kontrollera med den andra.`,
+        },
+    ],
+
+    'ma1c-4.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna riktningskoefficienten för linjen genom punkterna (1, 2) och (5, 14).`,
+            answer: { value: 3, unit: '' },
+            solution: `Formeln för riktningskoefficienten:
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{14 - 2}{5 - 1} = \\frac{12}{4} = 3 $$
+
+**Svar:** $k = 3$`,
+        },
+        {
+            level: 1,
+            question: `En linje har ekvationen $y = 5x - 7$. Vilken är linjens riktningskoefficient?`,
+            answer: { value: 5, unit: '' },
+            solution: `I räta linjens ekvation $y = kx + m$ är riktningskoefficienten talet framför $x$:
+
+$$ k = 5 $$
+
+(−7 är $m$-värdet, skärningen med y-axeln.)
+
+**Svar:** $k = 5$`,
+        },
+        {
+            level: 1,
+            question: `Vilken formel ger riktningskoefficienten ur två punkter $(x_1, y_1)$ och $(x_2, y_2)$?`,
+            choices: [
+                `$k = \\dfrac{y_2 - y_1}{x_2 - x_1}$`,
+                `$k = \\dfrac{x_2 - x_1}{y_2 - y_1}$`,
+                `$k = \\dfrac{y_2 + y_1}{x_2 + x_1}$`,
+                `$k = (y_2 - y_1)(x_2 - x_1)$`,
+            ],
+            correct: 0,
+            solution: `Riktningskoefficienten är förändringen i y-led delat med förändringen i x-led:
+
+$$ k = \\frac{\\Delta y}{\\Delta x} = \\frac{y_2 - y_1}{x_2 - x_1} $$
+
+**Svar:** $k = \\dfrac{y_2 - y_1}{x_2 - x_1}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna riktningskoefficienten för linjen genom (−4, 5) och (2, −7).`,
+            answer: { value: -2, unit: '' },
+            solution: `Insättning i formeln — håll ordning på tecknen:
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{-7 - 5}{2 - (-4)} = \\frac{-12}{6} = -2 $$
+
+**Svar:** $k = -2$`,
+        },
+        {
+            level: 2,
+            question: `En linje har riktningskoefficienten $-3$ och går genom punkten (2, 5). Bestäm linjens $m$-värde.`,
+            answer: { value: 11, unit: '' },
+            solution: `Sätt in $k = -3$ samt punktens koordinater $x = 2$, $y = 5$ i $y = kx + m$:
+
+$$ 5 = -3 \\cdot 2 + m $$
+
+$$ 5 = -6 + m $$
+
+$$ m = 11 $$
+
+(Linjens ekvation är alltså $y = -3x + 11$.)
+
+**Svar:** $m = 11$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Bestäm ekvationen för linjen genom punkterna (−2, 9) och (4, −9). Vilken är den?`,
+            choices: [
+                `$y = -3x + 3$`,
+                `$y = -3x + 9$`,
+                `$y = 3x + 15$`,
+                `$y = -\\dfrac{1}{3}x + 3$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** hela kedjan i ett svep — $k$ ur tvåpunktsformeln, $m$ ur insättning av en punkt.
+
+**Steg 1 — riktningskoefficienten:**
+
+$$ k = \\frac{y_2 - y_1}{x_2 - x_1} = \\frac{-9 - 9}{4 - (-2)} = \\frac{-18}{6} = -3 $$
+
+**Steg 2 — $m$-värdet.** Sätt in punkten (−2, 9) i $y = -3x + m$:
+
+$$ 9 = -3 \\cdot (-2) + m $$
+
+$$ 9 = 6 + m \\qquad m = 3 $$
+
+Ekvationen är $y = -3x + 3$.
+
+Kontroll med andra punkten: $y = -3 \\cdot 4 + 3 = -9$ — stämmer!
+
+**Svar:** $y = -3x + 3$
+
+**Generell slutsats:** teckenfelen lurar i $x_2 - x_1$ när en koordinat är negativ — skriv ut parenteserna ($4 - (-2) = 6$) i stället för att räkna i huvudet.`,
+        },
+    ],
+
+    'ma1c-4.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken av följande linjer är parallell med $y = 4x + 2$?`,
+            choices: [
+                `$y = 4x - 7$`,
+                `$y = -4x + 2$`,
+                `$y = 2x + 4$`,
+                `$y = \\dfrac{1}{4}x + 2$`,
+            ],
+            correct: 0,
+            solution: `Parallella linjer har samma $k$-värde. Bara $y = 4x - 7$ har $k = 4$ — $m$-värdet får vara olika.
+
+**Svar:** $y = 4x - 7$`,
+        },
+        {
+            level: 1,
+            question: `Vilken ekvation beskriver en vertikal (lodrät) linje som ligger vid 5 i x-led?`,
+            choices: [
+                `$x = 5$`,
+                `$y = 5$`,
+                `$y = 5x$`,
+                `$x = 5y$`,
+            ],
+            correct: 0,
+            solution: `Vertikala linjer kan inte skrivas i k-form — de beskrivs av sitt läge i x-led:
+
+$$ x = 5 $$
+
+($y = 5$ är i stället en HORISONTELL linje.)
+
+**Svar:** $x = 5$`,
+        },
+        {
+            level: 1,
+            question: `Skriv $y = 2x + 7$ i allmän form.`,
+            choices: [
+                `$2x - y + 7 = 0$`,
+                `$2x + y + 7 = 0$`,
+                `$y - 2x = 7$`,
+                `$2x - y = -7$`,
+            ],
+            correct: 0,
+            solution: `Samla alla termer i ena ledet. Subtrahera $y$ från båda led:
+
+$$ 0 = 2x - y + 7 $$
+
+Skifta led: $2x - y + 7 = 0$.
+
+($y - 2x = 7$ och $2x - y = -7$ är korrekta likheter men inte allmän form — där ska ena ledet vara 0.)
+
+**Svar:** $2x - y + 7 = 0$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ange $k$-värdet för linjen $4x + 2y - 10 = 0$.`,
+            answer: { value: -2, unit: '' },
+            solution: `Lös ut $y$ för att få k-formen:
+
+$$ 2y = -4x + 10 $$
+
+$$ y = -2x + 5 $$
+
+$k$-värdet är −2.
+
+**Svar:** $k = -2$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm ekvationen för den linje som är parallell med $y = -2x + 6$ och går genom punkten (3, 1).`,
+            choices: [
+                `$y = -2x + 7$`,
+                `$y = -2x + 1$`,
+                `$y = 2x - 5$`,
+                `$y = -2x - 5$`,
+            ],
+            correct: 0,
+            solution: `Parallell betyder samma $k$-värde: $k = -2$, så $y = -2x + m$.
+
+Punkten (3, 1) ligger på linjen:
+
+$$ 1 = -2 \\cdot 3 + m $$
+
+$$ 1 = -6 + m \\qquad m = 7 $$
+
+**Svar:** $y = -2x + 7$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Linjen $ax + 2y - 8 = 0$ är parallell med linjen genom punkterna (1, 3) och (4, 12). Bestäm konstanten $a$.`,
+            answer: { value: -6, unit: '' },
+            solution: `**Insikten:** båda linjernas $k$-värden måste räknas fram i var sin väg och sedan sättas lika.
+
+**Linjen genom punkterna** har
+
+$$ k = \\frac{12 - 3}{4 - 1} = \\frac{9}{3} = 3 $$
+
+**Linjen i allmän form** skrivs om till k-form:
+
+$$ 2y = -ax + 8 \\qquad y = -\\frac{a}{2}x + 4 $$
+
+dvs. $k = -\\frac{a}{2}$.
+
+**Parallellitet** kräver samma $k$-värde:
+
+$$ -\\frac{a}{2} = 3 \\qquad a = -6 $$
+
+Kontroll: $-6x + 2y - 8 = 0$ ger $y = 3x + 4$ — lutning 3, parallell. Stämmer!
+
+**Svar:** $a = -6$
+
+**Generell slutsats:** allmän form döljer lutningen — lös alltid ut $y$ först. För $ax + by + c = 0$ är lutningen $-\\frac{a}{b}$.`,
+        },
+    ],
+
+    'ma1c-4.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Låt $f(x) = 3x + 4$. Beräkna $f(6)$.`,
+            answer: { value: 22, unit: '' },
+            solution: `Ersätt $x$ med 6:
+
+$$ f(6) = 3 \\cdot 6 + 4 = 18 + 4 = 22 $$
+
+**Svar:** $f(6) = 22$`,
+        },
+        {
+            level: 1,
+            question: `Vad kallas $x$ i funktionen $y = f(x)$?`,
+            choices: [
+                `Den oberoende variabeln`,
+                `Den beroende variabeln`,
+                `Funktionsvärdet`,
+                `Koefficienten`,
+            ],
+            correct: 0,
+            solution: `$x$ väljs fritt och kallas den **oberoende variabeln**. Värdet på $y$ beror på $x$ — $y$ är den beroende variabeln, och det värde funktionen ger kallas funktionsvärde.
+
+**Svar:** Den oberoende variabeln`,
+        },
+        {
+            level: 1,
+            question: `Låt $g(x) = 10 - 2x$. Beräkna $g(-3)$.`,
+            answer: { value: 16, unit: '' },
+            solution: `Ersätt $x$ med −3 (minus gånger minus ger plus):
+
+$$ g(-3) = 10 - 2 \\cdot (-3) = 10 + 6 = 16 $$
+
+**Svar:** $g(-3) = 16$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Låt $f(x) = 5x - 3$. Vilket uttryck är $f(2a)$?`,
+            choices: [
+                `$10a - 3$`,
+                `$5a - 3$`,
+                `$10a - 6$`,
+                `$2a \\cdot 5x - 3$`,
+            ],
+            correct: 0,
+            solution: `Byt ut alla $x$ mot $2a$ och förenkla:
+
+$$ f(2a) = 5 \\cdot 2a - 3 = 10a - 3 $$
+
+Konstanttermen −3 påverkas inte av bytet.
+
+**Svar:** $10a - 3$`,
+        },
+        {
+            level: 2,
+            question: `Låt $f(x) = 4x + 1$. Beräkna $f(5) - f(3)$.`,
+            answer: { value: 8, unit: '' },
+            solution: `Beräkna funktionsvärdena var för sig:
+
+$$ f(5) = 4 \\cdot 5 + 1 = 21 \\qquad f(3) = 4 \\cdot 3 + 1 = 13 $$
+
+$$ f(5) - f(3) = 21 - 13 = 8 $$
+
+(Snabbkoll: för en linjär funktion är skillnaden $k \\cdot \\Delta x = 4 \\cdot 2 = 8$.)
+
+**Svar:** 8`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Sambandet $x = y^2$ ritas upp som en liggande parabel. Ali säger: "Det är en funktion, för varje y-värde ger exakt ett x-värde." Vad är rätt om vi som vanligt betraktar $y$ som funktion av $x$?`,
+            choices: [
+                `Ingen funktion — t.ex. ger $x = 4$ två y-värden (2 och −2), så penntestet misslyckas`,
+                `En funktion — Alis motivering håller`,
+                `En funktion — parabler är alltid funktioner`,
+                `Ingen funktion — parabeln går inte genom origo`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** funktionsbegreppet har en riktning — det är X-värdena som ska ge entydiga y-värden, inte tvärtom.
+
+Som samband "$y$ som funktion av $x$" kräver definitionen att varje tillåtet x-värde ger EXAKT ETT y-värde. Men $x = 4$ ger $y^2 = 4$, dvs. både $y = 2$ och $y = -2$. En lodrät penna vid $x = 4$ skär den liggande parabeln två gånger — ingen funktion.
+
+Ali har i och för sig rätt i att varje y ger exakt ett x — så $x$ ÄR en funktion av $y$. Men det är en annan fråga än den vanliga.
+
+**Svar:** Ingen funktion av $x$ — penntestet ger två skärningar (t.ex. $y = \\pm 2$ vid $x = 4$).
+
+**Generell slutsats:** pennan läggs alltid LODRÄTT när $y = f(x)$ prövas. Vilken variabel som är oberoende avgör åt vilket håll entydigheten ska gälla.`,
+        },
+    ],
+
+    'ma1c-4.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vid grafisk lösning av ekvationen $2x - 1 = x + 4$ ritas två linjer. Vad ger lösningen?`,
+            choices: [
+                `Skärningspunktens x-koordinat`,
+                `Skärningspunktens y-koordinat`,
+                `Linjernas k-värden`,
+                `Avståndet mellan linjerna`,
+            ],
+            correct: 0,
+            solution: `Rita $y = 2x - 1$ och $y = x + 4$; där graferna skär varandra är VL = HL. Lösningen är skärningspunktens **x-koordinat** (här $x = 5$; y-koordinaten 9 är bara ledens gemensamma värde).
+
+**Svar:** Skärningspunktens x-koordinat`,
+        },
+        {
+            level: 1,
+            question: `Graferna till $y = 3x - 5$ och $y = -x + 3$ skär varandra i punkten (2, 1). Vilken är lösningen till ekvationen $3x - 5 = -x + 3$?`,
+            answer: { value: 2, unit: '' },
+            solution: `Lösningen är skärningspunktens x-koordinat:
+
+$$ x = 2 $$
+
+Kontroll: $3 \\cdot 2 - 5 = 1$ och $-2 + 3 = 1$ — båda led lika.
+
+**Svar:** $x = 2$`,
+        },
+        {
+            level: 1,
+            question: `Hur skrivs talet 7,5 när det matas in i GeoGebra?`,
+            choices: [
+                `7.5`,
+                `7,5`,
+                `7:5`,
+                `75/10 måste alltid användas`,
+            ],
+            correct: 0,
+            solution: `GeoGebra använder decimalpunkt i stället för decimalkomma: 7,5 skrivs \`7.5\`.
+
+**Svar:** 7.5`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Du ska lösa $s = 90t - 30$ och $s = 60t + 45$ grafiskt i GeoGebra. Vad måste du göra med ekvationerna först?`,
+            choices: [
+                `Byta variablerna till x och y: \`y = 90x - 30\` och \`y = 60x + 45\``,
+                `Ingenting — GeoGebra förstår alla variabelnamn i grafiska lösningar`,
+                `Multiplicera båda ekvationerna med 10`,
+                `Skriva om dem i allmän form`,
+            ],
+            correct: 0,
+            solution: `I grafiska lösningar förstår GeoGebra bara variablerna $x$ och $y$. Ekvationerna skrivs därför om: $t \\to x$ och $s \\to y$.
+
+(Lösningen blir sedan skärningspunktens x-koordinat: $90x - 30 = 60x + 45$ ger $x = 2{,}5$.)
+
+**Svar:** Byta variablerna till x och y.`,
+        },
+        {
+            level: 2,
+            question: `Linjerna $y = -2x + 5$ och $y = x - 4$ skär varandra vid $x = 3$. För vilka $x$ gäller olikheten $-2x + 5 > x - 4$?`,
+            choices: [
+                `$x < 3$`,
+                `$x > 3$`,
+                `$x = 3$`,
+                `Alla $x$`,
+            ],
+            correct: 0,
+            solution: `$-2x + 5$ är STÖRRE än $x - 4$ när den fallande linjen $y = -2x + 5$ ligger ÖVER linjen $y = x - 4$ — det gör den till vänster om skärningspunkten:
+
+$$ x < 3 $$
+
+(Jämför genomgångens exempel, där $-2x + 5 < x - 4$ gav $x > 3$ — motsatt sida.)
+
+**Svar:** $x < 3$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Tim löser $4x - 2 = x + 7$ grafiskt och läser av skärningspunkten till (3, 10). Som svar skriver han "$x = 10$". Läraren ger honom fel. Vad blandade Tim ihop, och vad är rätt svar?`,
+            choices: [
+                `Han svarade med y-koordinaten; lösningen är x-koordinaten, $x = 3$`,
+                `Han läste av fel punkt; lösningen är $x = 10$`,
+                `Grafisk lösning fungerar inte på denna ekvation`,
+                `Båda koordinaterna är lösningar`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** skärningspunkten innehåller TVÅ tal med olika betydelse — bara det ena är ekvationens lösning.
+
+x-koordinaten 3 är det värde på $x$ som gör VL = HL. y-koordinaten 10 är ledens gemensamma VÄRDE i den punkten: $4 \\cdot 3 - 2 = 10$ och $3 + 7 = 10$.
+
+Kontroll av rätt svar: $x = 3$ ger $4 \\cdot 3 - 2 = 10 = 3 + 7$ — stämmer. Tims "$x = 10$" ger $4 \\cdot 10 - 2 = 38 \\neq 17$ — fel.
+
+**Svar:** Tim svarade med y-koordinaten. Rätt svar är $x = 3$.
+
+**Generell slutsats:** vid grafisk lösning är frågan alltid "för vilket $x$?" — läs av vågrätt läge (x-koordinaten), aldrig höjden.`,
+        },
+    ],
+
+    'ma1c-4.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas mängden av möjliga värden på den oberoende variabeln $x$?`,
+            choices: [
+                `Definitionsmängd`,
+                `Värdemängd`,
+                `Funktionsvärde`,
+                `Intervall`,
+            ],
+            correct: 0,
+            solution: `Möjliga x-värden bildar **definitionsmängden**; möjliga y-värden bildar **värdemängden**.
+
+**Svar:** Definitionsmängd`,
+        },
+        {
+            level: 1,
+            question: `En grafs ändpunkt är ritad som en tom (ej ifylld) ring. Vad betyder det?`,
+            choices: [
+                `Ändpunkten ingår inte i intervallet (< eller >)`,
+                `Ändpunkten ingår i intervallet (≤ eller ≥)`,
+                `Grafen fortsätter i all oändlighet`,
+                `Funktionen är noll där`,
+            ],
+            correct: 0,
+            solution: `Tom ring = ändpunkten ingår INTE (strikt olikhet, < eller >). Ifylld ring = ändpunkten ingår (≤ eller ≥).
+
+**Svar:** Ändpunkten ingår inte i intervallet.`,
+        },
+        {
+            level: 1,
+            question: `En parkering kostar 20 kr per påbörjad timme, i högst 8 timmar. Kostnaden är $y = 20x$. Vilken är definitionsmängden?`,
+            choices: [
+                `$0 \\leq x \\leq 8$`,
+                `$0 \\leq y \\leq 160$`,
+                `$x \\geq 0$`,
+                `$0 < x < 20$`,
+            ],
+            correct: 0,
+            solution: `Definitionsmängden är de tillåtna x-värdena (antalet timmar): minst 0 och högst 8:
+
+$$ 0 \\leq x \\leq 8 $$
+
+($0 \\leq y \\leq 160$ är i stället värdemängden.)
+
+**Svar:** $0 \\leq x \\leq 8$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Funktionen $y = 50x$ har definitionsmängden $0 \\leq x \\leq 12$. Vilken är värdemängden?`,
+            choices: [
+                `$0 \\leq y \\leq 600$`,
+                `$0 \\leq y \\leq 12$`,
+                `$50 \\leq y \\leq 600$`,
+                `$y \\geq 0$`,
+            ],
+            correct: 0,
+            solution: `Minsta y-värdet fås vid $x = 0$: $y = 50 \\cdot 0 = 0$. Största vid $x = 12$: $y = 50 \\cdot 12 = 600$:
+
+$$ 0 \\leq y \\leq 600 $$
+
+**Svar:** $0 \\leq y \\leq 600$`,
+        },
+        {
+            level: 2,
+            question: `En graf börjar med en tom ring i (−3, 1) och slutar med en ifylld punkt i (5, 7), och däremellan stiger den hela tiden. Vilken är definitionsmängden?`,
+            choices: [
+                `$-3 < x \\leq 5$`,
+                `$-3 \\leq x \\leq 5$`,
+                `$-3 < x < 5$`,
+                `$1 < y \\leq 7$`,
+            ],
+            correct: 0,
+            solution: `Tom ring vid $x = -3$ ger strikt olikhet ($x > -3$); ifylld punkt vid $x = 5$ ger $x \\leq 5$:
+
+$$ -3 < x \\leq 5 $$
+
+($1 < y \\leq 7$ är värdemängden — frågan gällde definitionsmängden.)
+
+**Svar:** $-3 < x \\leq 5$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Funktionen $f(x) = 4 - x^2$ har definitionsmängden $-1 < x \\leq 2$. Malte resonerar: "Värdemängden får jag genom att sätta in ändpunkterna: $f(-1) = 3$ och $f(2) = 0$, alltså $0 \\leq y < 3$." Vad missar Malte?`,
+            choices: [
+                `Funktionens topp ligger INUTI intervallet: $f(0) = 4$, så värdemängden är $0 \\leq y \\leq 4$`,
+                `Ingenting — värdemängden är $0 \\leq y < 3$`,
+                `Att båda ändpunkterna alltid ingår i värdemängden`,
+                `Att värdemängden alltid är samma som definitionsmängden`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** ändpunkterna räcker bara när funktionen är växande eller avtagande i HELA intervallet — en topp eller dal inuti kan ge större eller mindre värden.
+
+$f(x) = 4 - x^2$ har sitt största värde i $x = 0$ (mitt i intervallet):
+
+$$ f(0) = 4 $$
+
+Grafen stiger från den tomma ringen vid $(-1, 3)$ upp till toppen $(0, 4)$ och faller sedan till den ifyllda punkten $(2, 0)$. Alla värden mellan 0 och 4 antas — även de mellan 3 och 4, och toppvärdet 4 nås (ty $x = 0$ ingår). Minsta värdet 0 nås vid $x = 2$ (ifylld).
+
+$$ \\text{Värdemängd: } 0 \\leq y \\leq 4 $$
+
+(Att $y = 3$ inte nås i just $x = -1$ spelar ingen roll — värdet 3 antas även vid $x = 1$.)
+
+**Svar:** Toppen $f(0) = 4$ ligger i intervallet — värdemängden är $0 \\leq y \\leq 4$.
+
+**Generell slutsats:** bestäm värdemängden ur GRAFEN (lägsta och högsta punkt som faktiskt nås), inte enbart ur ändpunkterna.`,
+        },
+    ],
+
+    'ma1c-4.10': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kännetecknar en exponentialfunktion?`,
+            choices: [
+                `Den oberoende variabeln står i exponenten`,
+                `Den oberoende variabeln står i nämnaren`,
+                `Grafen är en rät linje`,
+                `Funktionen saknar konstant`,
+            ],
+            correct: 0,
+            solution: `I en exponentialfunktion, t.ex. $y = 25\\ 000 \\cdot 1{,}02^x$, sitter variabeln $x$ i **exponenten**. (Jämför potensfunktioner där variabeln är basen.)
+
+**Svar:** Den oberoende variabeln står i exponenten.`,
+        },
+        {
+            level: 1,
+            question: `Ett kapital på 8 000 kr växer med 3 % per år. Vilken funktion beskriver kapitalet $K$ kr efter $x$ år?`,
+            choices: [
+                `$K(x) = 8\\ 000 \\cdot 1{,}03^x$`,
+                `$K(x) = 8\\ 000 \\cdot 0{,}03^x$`,
+                `$K(x) = 8\\ 000 + 1{,}03x$`,
+                `$K(x) = 1{,}03 \\cdot 8\\ 000^x$`,
+            ],
+            correct: 0,
+            solution: `Enligt $y = Ca^x$: ursprungliga värdet $C = 8\\ 000$ och förändringsfaktorn $a = 1 + 0{,}03 = 1{,}03$:
+
+$$ K(x) = 8\\ 000 \\cdot 1{,}03^x $$
+
+**Svar:** $K(x) = 8\\ 000 \\cdot 1{,}03^x$`,
+        },
+        {
+            level: 1,
+            question: `I funktionen $y = Ca^x$ — vad står $C$ för?`,
+            choices: [
+                `Det ursprungliga värdet`,
+                `Förändringsfaktorn`,
+                `Tiden`,
+                `Värdet efter en viss tid`,
+            ],
+            correct: 0,
+            solution: `$C$ är det ursprungliga värdet (startvärdet), $a$ är förändringsfaktorn, $x$ är tiden och $y$ är värdet efter en viss tid.
+
+**Svar:** Det ursprungliga värdet`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Antalet bakterier i en odling ges av $N(t) = 500 \\cdot 1{,}12^t$ där $t$ är tiden i timmar. Vad beskriver funktionen?`,
+            choices: [
+                `500 bakterier från början som ökar med 12 % per timme`,
+                `500 bakterier från början som ökar med 1,12 % per timme`,
+                `112 bakterier från början som ökar med 500 % per timme`,
+                `500 bakterier som minskar med 12 % per timme`,
+            ],
+            correct: 0,
+            solution: `Jämför med $y = Ca^x$: $C = 500$ (ursprungligt antal) och $a = 1{,}12$, som motsvarar $100\\ \\% + 12\\ \\% $ — en ökning med 12 % per timme.
+
+**Svar:** 500 bakterier från början, ökning 12 % per timme.`,
+        },
+        {
+            level: 2,
+            question: `En maskin köps för 240 000 kr och tappar 20 % av värdet varje år. Vad är maskinen värd efter 5 år? Avrunda till hela tusental kronor.`,
+            answer: { value: 78643, unit: 'kr', tol: 0.02 },
+            solution: `Förändringsfaktorn är $1 - 0{,}20 = 0{,}80$ och funktionen $V(t) = 240\\ 000 \\cdot 0{,}80^t$:
+
+$$ V(5) = 240\\ 000 \\cdot 0{,}80^5 = 240\\ 000 \\cdot 0{,}32768 = 78\\ 643{,}2 \\approx 78\\ 600\\ \\mathrm{kr} $$
+
+**Svar:** cirka 78 600 kr`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Kurvan i en graf passerar punkterna (0, 4) och (2, 25). Vilken av följande exponentialfunktioner är uppritad?`,
+            choices: [
+                `$y = 4 \\cdot 2{,}5^x$`,
+                `$y = 4 \\cdot 1{,}25^x$`,
+                `$y = 25 \\cdot 0{,}4^x$`,
+                `$y = 2{,}5 \\cdot 4^x$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** punkten vid $x = 0$ avslöjar $C$ direkt (eftersom $a^0 = 1$), och en andra punkt bestämmer $a$.
+
+Vid $x = 0$: $y = C \\cdot a^0 = C = 4$. Alltså är $C = 4$ — de två sista alternativen faller direkt.
+
+Testa (2, 25) i $y = 4 \\cdot a^2$:
+
+$$ 4a^2 = 25 \\qquad a^2 = 6{,}25 \\qquad a = 2{,}5 $$
+
+Kontroll: $4 \\cdot 2{,}5^2 = 4 \\cdot 6{,}25 = 25$ — stämmer! ($4 \\cdot 1{,}25^2 = 6{,}25 \\neq 25$.)
+
+**Svar:** $y = 4 \\cdot 2{,}5^x$
+
+**Generell slutsats:** samma teststrategi som i genomgången — skärningen med y-axeln ger $C$, en till punkt ger $a$ via en enkel potensekvation.`,
+        },
+    ],
+
+    'ma1c-4.11': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken av följande är en potensfunktion?`,
+            choices: [
+                `$f(x) = 5x^3$`,
+                `$f(x) = 5 \\cdot 3^x$`,
+                `$f(x) = 3x + 5$`,
+                `$f(x) = 5$`,
+            ],
+            correct: 0,
+            solution: `I en potensfunktion $f(x) = Cx^a$ är variabeln i **basen**: $5x^3$ passar med $C = 5$ och $a = 3$.
+
+$5 \\cdot 3^x$ har variabeln i exponenten — en exponentialfunktion.
+
+**Svar:** $f(x) = 5x^3$`,
+        },
+        {
+            level: 1,
+            question: `Låt $f(x) = x^4$. Beräkna $f(3)$.`,
+            answer: { value: 81, unit: '' },
+            solution: `Sätt in $x = 3$:
+
+$$ f(3) = 3^4 = 81 $$
+
+**Svar:** 81`,
+        },
+        {
+            level: 1,
+            question: `Vad skiljer potensfunktionen $f(x) = Cx^a$ från exponentialfunktionen $f(x) = Ca^x$?`,
+            choices: [
+                `I potensfunktionen är variabeln basen; i exponentialfunktionen är den exponenten`,
+                `Potensfunktioner saknar konstanter`,
+                `Exponentialfunktioner kan bara öka`,
+                `Ingen skillnad — de är samma sak`,
+            ],
+            correct: 0,
+            solution: `Skillnaden ligger i var variabeln sitter: $x^a$ (basen — potensfunktion) mot $a^x$ (exponenten — exponentialfunktion). Graferna beter sig helt olika.
+
+**Svar:** Variabeln är basen i potensfunktionen och exponenten i exponentialfunktionen.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Låt $f(x) = x^6$. Lös ekvationen $f(x) = 40$. Ange den positiva lösningen med två decimaler.`,
+            answer: { value: 1.85, unit: '', tol: 0.01 },
+            solution: `Sätt funktionsuttrycket lika med 40:
+
+$$ x^6 = 40 $$
+
+Jämn exponent ger två lösningar:
+
+$$ x = \\pm\\sqrt[6]{40} = \\pm 40^{1/6} = \\pm 1{,}849\\ldots \\approx \\pm 1{,}85 $$
+
+**Svar:** $x \\approx \\pm 1{,}85$`,
+        },
+        {
+            level: 2,
+            question: `Vilken graf hör till $y = \\dfrac{1}{x}$?`,
+            choices: [
+                `En hyperbel med två grenar som närmar sig axlarna utan att röra dem`,
+                `En parabel med botten i origo`,
+                `En rät linje genom origo`,
+                `En kurva som startar i origo och stiger allt flackare`,
+            ],
+            correct: 0,
+            solution: `$y = x^{-1} = \\frac{1}{x}$ ger en hyperbel: en gren i första kvadranten och en i tredje. Kurvan är odefinierad för $x = 0$ och närmar sig axlarna utan att nå dem.
+
+(Parabeln är $y = x^2$, och kurvan från origo är $y = \\sqrt{x}$.)
+
+**Svar:** En hyperbel med två grenar.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Låt $f(x) = x^{1/2}$ och $g(x) = 9x^2$. Beräkna $f(g(4))$.`,
+            answer: { value: 12, unit: '' },
+            solution: `**Insikten:** funktion i funktion beräknas "inifrån och ut" — först den inre, sedan den yttre.
+
+**Inre funktionen:**
+
+$$ g(4) = 9 \\cdot 4^2 = 9 \\cdot 16 = 144 $$
+
+**Yttre funktionen:**
+
+$$ f(g(4)) = f(144) = 144^{1/2} = \\sqrt{144} = 12 $$
+
+**Svar:** 12
+
+**Generell slutsats:** ordningen spelar roll — $g(f(4)) = 9 \\cdot (\\sqrt{4})^2 = 36$ är något helt annat. Räkna alltid den innersta parentesen först, precis som i prioriteringsreglerna.`,
+        },
+    ],
+
+    // ════════════════════════════════════════════════════════════════
+    // MATEMATIK NIVÅ 1c — kapitel 5: Statistik och sannolikhetslära
+    // ════════════════════════════════════════════════════════════════
+
+    'ma1c-5.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas det när man samlar in data från en HEL population?`,
+            choices: [
+                `Totalundersökning`,
+                `Stickprovsundersökning`,
+                `Systematiskt urval`,
+                `Bortfall`,
+            ],
+            correct: 0,
+            solution: `Undersöks hela populationen är det en **totalundersökning** — exakt men tidskrävande. Undersöks bara en del är det en **stickprovsundersökning**.
+
+**Svar:** Totalundersökning`,
+        },
+        {
+            level: 1,
+            question: `Elin väljer var femte namn från en klasslista till sin undersökning. Vilken urvalsmetod använder hon?`,
+            choices: [
+                `Systematiskt urval`,
+                `Obundet slumpmässigt urval`,
+                `Stratifierat urval`,
+                `Totalundersökning`,
+            ],
+            correct: 0,
+            solution: `Ett fast system ("var femte") är ett **systematiskt urval**. Observera att det INTE är slumpmässigt, om inte listans ordning slumpats i förväg.
+
+**Svar:** Systematiskt urval`,
+        },
+        {
+            level: 1,
+            question: `Vilken av följande frågor är BÄST utformad för en enkät om matematik?`,
+            choices: [
+                `"Vad tycker du om matematik?"`,
+                `"Matematik är väl ett roligt ämne?"`,
+                `"Är matematik ett roligt ämne?"`,
+                `"Håller du med om att matematik är viktigt och roligt?"`,
+            ],
+            correct: 0,
+            solution: `En bra enkätfråga är neutral och styr inte den svarande. "Matematik är väl ett roligt ämne?" är mycket ledande, "Är matematik ett roligt ämne?" är ledande, och dubbelfrågan om "viktigt och roligt" går inte att besvara entydigt.
+
+**Svar:** "Vad tycker du om matematik?"`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en skola är 60 % av eleverna tjejer. Hamid gör ett stratifierat urval med 50 elever för en enkät om idrottsvanor. Hur många tjejer ska ingå i stickprovet?`,
+            answer: { value: 30, unit: 'st' },
+            solution: `Vid stratifierat urval ska stickprovet spegla populationen — 60 % av 50 elever:
+
+$$ 0{,}60 \\cdot 50 = 30 $$
+
+**Svar:** 30 tjejer (och 20 killar)`,
+        },
+        {
+            level: 2,
+            question: `En enkät skickades till 500 personer och 450 svarade. Hur stort var svarsbortfallet procentuellt?`,
+            answer: { value: 10, unit: '%' },
+            solution: `Bortfallet är $500 - 450 = 50$ personer av 500 utskickade:
+
+$$ \\frac{50}{500} = 0{,}10 = 10\\ \\% $$
+
+**Svar:** 10 %`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En enkät till 800 personer frågade "Bör kommunen bygga en ny simhall?". 360 svarade ja, 240 nej och 40 vet ej — resten svarade inte alls. Om hänsyn tas till bortfallet, mellan vilka värden kan andelen JA-sägare av alla 800 ligga? Ange den övre gränsen i procent.`,
+            answer: { value: 65, unit: '%' },
+            solution: `**Insikten:** bortfallet kan i värsta/bästa fall svara vad som helst — gränserna fås genom att låta ALLA i bortfallet svara åt samma håll.
+
+Antal svarande: $360 + 240 + 40 = 640$. Bortfall: $800 - 640 = 160$ personer.
+
+**Undre gränsen** (ingen i bortfallet säger ja):
+
+$$ \\frac{360}{800} = 0{,}45 = 45\\ \\% $$
+
+**Övre gränsen** (alla 160 i bortfallet säger ja):
+
+$$ \\frac{360 + 160}{800} = \\frac{520}{800} = 0{,}65 = 65\\ \\% $$
+
+**Svar:** Andelen ja-sägare ligger mellan 45 % och 65 % — övre gränsen är 65 %.
+
+**Generell slutsats:** ju större bortfall, desto bredare blir osäkerhetsintervallet — här hela 20 procentenheter. Det är därför stora bortfall gör undersökningar svårtolkade.`,
+        },
+    ],
+
+    'ma1c-5.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas intervallet som fås när resultatet av en undersökning anges tillsammans med sin felmarginal?`,
+            choices: [
+                `Konfidensintervall`,
+                `Definitionsmängd`,
+                `Signifikansnivå`,
+                `Stickprov`,
+            ],
+            correct: 0,
+            solution: `Resultatet ± felmarginalen ger **konfidensintervallet** — det intervall som det verkliga värdet med 95 % säkerhet ligger i.
+
+**Svar:** Konfidensintervall`,
+        },
+        {
+            level: 1,
+            question: `En undersökning ger resultatet 40 % med felmarginalen 5 %. Vilket är konfidensintervallet?`,
+            choices: [
+                `Mellan 35 % och 45 %`,
+                `Mellan 40 % och 45 %`,
+                `Mellan 30 % och 50 %`,
+                `Exakt 40 %`,
+            ],
+            correct: 0,
+            solution: `Konfidensintervallet är resultatet ± felmarginalen:
+
+$$ 40\\ \\% - 5\\ \\% = 35\\ \\% \\qquad 40\\ \\% + 5\\ \\% = 45\\ \\% $$
+
+**Svar:** Mellan 35 % och 45 %.`,
+        },
+        {
+            level: 1,
+            question: `Beräkna felmarginalen när $p = 50\\ \\%$ och $n = 100$. Avrunda till en decimal.`,
+            answer: { value: 9.8, unit: '%', tol: 0.01 },
+            solution: `Insättning i formeln:
+
+$$ f = 1{,}96 \\cdot \\sqrt{\\frac{50(100 - 50)}{100}} = 1{,}96 \\cdot \\sqrt{25} = 1{,}96 \\cdot 5 = 9{,}8\\ \\% $$
+
+**Svar:** 9,8 %`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en undersökning med 400 tillfrågade svarade 60 % ja. Beräkna felmarginalen. Avrunda till en decimal.`,
+            answer: { value: 4.8, unit: '%', tol: 0.01 },
+            solution: `Insättning av $p = 60$ och $n = 400$:
+
+$$ f = 1{,}96 \\cdot \\sqrt{\\frac{60(100 - 60)}{400}} = 1{,}96 \\cdot \\sqrt{\\frac{2\\ 400}{400}} = 1{,}96 \\cdot \\sqrt{6} = 4{,}80\\ldots \\approx 4{,}8\\ \\% $$
+
+Jämför med genomgångens exempel ($n = 100$ gav 9,6 %) — fyra gånger fler tillfrågade halverade felmarginalen.
+
+**Svar:** 4,8 %`,
+        },
+        {
+            level: 2,
+            question: `Ett parti fick 8,2 % i en väljarundersökning med felmarginalen 1,1 procentenheter. I nästa mätning fick partiet 9,0 %. Är ökningen statistiskt säkerställd?`,
+            choices: [
+                `Nej — 9,0 % ligger inom konfidensintervallet 7,1–9,3 %`,
+                `Ja — 9,0 % är större än 8,2 %`,
+                `Ja — alla förändringar över 0,5 procentenheter är signifikanta`,
+                `Nej — opinionsmätningar kan aldrig säkerställas`,
+            ],
+            correct: 0,
+            solution: `Konfidensintervallet kring första mätningen är $8{,}2\\ \\% \\pm 1{,}1\\ \\%$, dvs. 7,1 % till 9,3 %. Det nya värdet 9,0 % ligger INOM intervallet — förändringen kan bero på slumpen.
+
+**Svar:** Nej — förändringen är inte statistiskt säkerställd.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I genomgångens exempel gav $p = 60\\ \\%$ och $n = 100$ felmarginalen 9,6 %. Hur många personer måste tillfrågas (med samma $p$) för att felmarginalen ska bli högst 2,4 %?`,
+            answer: { value: 1600, unit: 'st' },
+            solution: `**Insikten:** felmarginalen skalar med $\\frac{1}{\\sqrt{n}}$ — för att fjärdedela $f$ krävs 16 gånger fler tillfrågade.
+
+Sök $n$ så att
+
+$$ 1{,}96 \\cdot \\sqrt{\\frac{60 \\cdot 40}{n}} = 2{,}4 $$
+
+Dividera med 1,96 och kvadrera båda led:
+
+$$ \\frac{2\\ 400}{n} = \\left(\\frac{2{,}4}{1{,}96}\\right)^2 = 1{,}4994\\ldots $$
+
+$$ n = \\frac{2\\ 400}{1{,}4994\\ldots} \\approx 1\\ 600 $$
+
+Rimlighetskoll med skalningen: $\\frac{9{,}6}{2{,}4} = 4$, och $4^2 = 16$ gånger fler än 100 är just 1 600. Stämmer!
+
+**Svar:** Cirka 1 600 personer.
+
+**Generell slutsats:** halverad felmarginal kräver fyrdubblat stickprov — precisionen är dyr, vilket är därför opinionsmätningar sällan har mer än några tusen svarande.`,
+        },
+    ],
+
+    'ma1c-5.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket diagram används för att undersöka om det finns en korrelation mellan två variabler?`,
+            choices: [
+                `Spridningsdiagram`,
+                `Cirkeldiagram`,
+                `Stapeldiagram`,
+                `Träddiagram`,
+            ],
+            correct: 0,
+            solution: `I ett **spridningsdiagram** prickas värdeparen in som punkter — mönstret avslöjar om (och hur starkt) variablerna samvarierar.
+
+**Svar:** Spridningsdiagram`,
+        },
+        {
+            level: 1,
+            question: `Punkterna i ett spridningsdiagram ligger tydligt samlade på en linje med negativ lutning. Vilken korrelation råder?`,
+            choices: [
+                `Stark negativ korrelation`,
+                `Svag negativ korrelation`,
+                `Stark positiv korrelation`,
+                `Ingen korrelation`,
+            ],
+            correct: 0,
+            solution: `Tydligt på en linje = **stark**; negativ lutning = **negativ**. Alltså stark negativ korrelation.
+
+**Svar:** Stark negativ korrelation`,
+        },
+        {
+            level: 1,
+            question: `Vad betyder **kausalitet**?`,
+            choices: [
+                `Ett orsakssamband mellan två variabler`,
+                `Att punkterna ligger på en rät linje`,
+                `Att två variabler är oberoende`,
+                `Att korrelationen är svag`,
+            ],
+            correct: 0,
+            solution: `Kausalitet betyder att den ena variabeln ORSAKAR förändringen i den andra — som att mammans gener (delvis) avgör dotterns längd.
+
+**Svar:** Ett orsakssamband mellan två variabler.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Antalet sålda glassar och antalet drunkningsolyckor samvarierar starkt över året. Vad är den bästa tolkningen?`,
+            choices: [
+                `Ett skensamband — båda orsakas av en tredje variabel (varmt väder)`,
+                `Glassätande orsakar drunkningsolyckor`,
+                `Drunkningsolyckor orsakar glassförsäljning`,
+                `Korrelationen bevisar kausalitet`,
+            ],
+            correct: 0,
+            solution: `Korrelationen är verklig men kausaliteten saknas — varmt väder får BÅDE glassförsäljningen och badandet (och därmed olyckorna) att öka. Ett klassiskt **skensamband** med en bakomliggande tredje variabel.
+
+**Svar:** Ett skensamband — båda orsakas av varmt väder.`,
+        },
+        {
+            level: 2,
+            question: `Vilket av följande variabelpar förväntas ha stark POSITIV korrelation OCH kausalitet?`,
+            choices: [
+                `Antal träningstimmar och kondition`,
+                `Skostorlek och ordförråd hos barn`,
+                `Vägbredd och antal olyckor`,
+                `Äggkonsumtion och kriminalitet`,
+            ],
+            correct: 0,
+            solution: `Mer träning ORSAKAR bättre kondition — positiv korrelation med kausalitet.
+
+Skostorlek/ordförråd hos barn samvarierar (båda växer med åldern) men är ett skensamband. Vägbredd/olyckor var genomgångens exempel på svag NEGATIV korrelation, och äggkonsumtion/kriminalitet på ingen korrelation alls.
+
+**Svar:** Antal träningstimmar och kondition.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En studie visar stark positiv korrelation mellan antal brandbilar på plats och skadekostnaden vid bränder. Kalle drar slutsatsen: "Skicka färre brandbilar, så minskar skadorna!" Vad är felet i resonemanget?`,
+            choices: [
+                `Korrelationen beror på en tredje variabel — brandens storlek styr både antalet brandbilar och skadorna`,
+                `Inget fel — färre brandbilar ger mindre skador`,
+                `Studien borde ha använt cirkeldiagram`,
+                `Korrelationen är negativ, inte positiv`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** korrelation säger inget om RIKTNINGEN på ett orsakssamband — eller om det ens finns ett.
+
+Den bakomliggande variabeln är brandens storlek: stora bränder får både fler brandbilar OCH större skador. Brandbilarna orsakar inte skadorna — de och skadorna har en gemensam orsak.
+
+Kalles åtgärd skulle testa kausaliteten åt fel håll: att minska antalet brandbilar minskar inte branden, utan tvärtom riskerar att ÖKA skadorna.
+
+**Svar:** Brandens storlek är en tredje variabel som styr båda — skensamband, ingen kausalitet från brandbilar till skador.
+
+**Generell slutsats:** fråga alltid "kan en tredje variabel förklara båda?" innan en korrelation används för beslut. Korrelation ⇏ kausalitet.`,
+        },
+    ],
+
+    'ma1c-5.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad är sannolikheten att slå en sexa med en vanlig tärning? Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{1}{6}$`,
+                `$\\dfrac{1}{2}$`,
+                `$\\dfrac{5}{6}$`,
+                `$6$`,
+            ],
+            correct: 0,
+            solution: `Ett gynnsamt utfall (sexan) av sex möjliga:
+
+$$ P(\\text{sexa}) = \\frac{1}{6} $$
+
+**Svar:** $\\dfrac{1}{6}$`,
+        },
+        {
+            level: 1,
+            question: `Vad betyder det att sannolikheten för en händelse är 0?`,
+            choices: [
+                `Händelsen är omöjlig`,
+                `Händelsen inträffar garanterat`,
+                `Händelsen inträffar i hälften av fallen`,
+                `Sannolikheten kan inte beräknas`,
+            ],
+            correct: 0,
+            solution: `$P = 0$ betyder omöjlighet ("slå en sjua på en vanlig tärning") och $P = 1$ betyder att händelsen garanterat inträffar. Alla sannolikheter ligger mellan 0 och 1.
+
+**Svar:** Händelsen är omöjlig.`,
+        },
+        {
+            level: 1,
+            question: `Vad är sannolikheten att dra ett ess ur en kortlek med 52 kort? Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{1}{13}$`,
+                `$\\dfrac{1}{52}$`,
+                `$\\dfrac{4}{13}$`,
+                `$\\dfrac{1}{4}$`,
+            ],
+            correct: 0,
+            solution: `Fyra gynnsamma utfall (esset i varje färg) av 52 möjliga:
+
+$$ P(\\text{ess}) = \\frac{4}{52} = \\frac{1}{13} $$
+
+**Svar:** $\\dfrac{1}{13}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Du kastar två tärningar. Vad är sannolikheten att summan blir exakt 7? Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{1}{6}$`,
+                `$\\dfrac{1}{12}$`,
+                `$\\dfrac{7}{36}$`,
+                `$\\dfrac{1}{7}$`,
+            ],
+            correct: 0,
+            solution: `Rita upp utfallsrummet — summan 7 fås av (1,6), (2,5), (3,4), (4,3), (5,2) och (6,1), dvs. 6 gynnsamma utfall av 36 möjliga:
+
+$$ P(\\text{summan 7}) = \\frac{6}{36} = \\frac{1}{6} $$
+
+(Summan 7 är faktiskt den vanligaste av alla summor.)
+
+**Svar:** $\\dfrac{1}{6}$`,
+        },
+        {
+            level: 2,
+            question: `I en skål ligger 5 röda, 7 gröna och 8 gula karameller. Du tar en på måfå. Vad är sannolikheten att den INTE är gul? Svara i procent.`,
+            answer: { value: 60, unit: '%' },
+            solution: `Gynnsamma utfall = de röda och gröna: $5 + 7 = 12$ av totalt $5 + 7 + 8 = 20$:
+
+$$ P(\\text{inte gul}) = \\frac{12}{20} = 0{,}6 = 60\\ \\% $$
+
+**Svar:** 60 %`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Du singlar två mynt. Leia säger: "Det finns tre utfall — två kronor, två klavar eller en av varje — så sannolikheten för en av varje är $\\frac{1}{3}$." Vad är rätt sannolikhet för en krona och en klave?`,
+            choices: [
+                `$\\dfrac{1}{2}$ — utfallsrummet har fyra lika sannolika utfall, varav två ger en av varje`,
+                `$\\dfrac{1}{3}$ — Leia har rätt`,
+                `$\\dfrac{1}{4}$`,
+                `$\\dfrac{2}{3}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** den klassiska definitionen kräver att utfallen är LIKA SANNOLIKA — Leias tre "utfall" är det inte.
+
+Rita utfallsrummet med mynten åtskilda (mynt 1, mynt 2):
+
+$$ (\\text{krona},\\ \\text{krona}) \\quad (\\text{krona},\\ \\text{klave}) \\quad (\\text{klave},\\ \\text{krona}) \\quad (\\text{klave},\\ \\text{klave}) $$
+
+Fyra lika sannolika utfall. "En av varje" täcks av två av dem:
+
+$$ P(\\text{en av varje}) = \\frac{2}{4} = \\frac{1}{2} $$
+
+Leias fel: hon slog ihop (krona, klave) och (klave, krona) till ETT utfall, fast kombinationen är dubbelt så vanlig som t.ex. två kronor.
+
+**Svar:** $\\dfrac{1}{2}$
+
+**Generell slutsats:** klassiska definitionen fungerar bara med lika sannolika utfall — håll därför alltid isär föremålen (mynt 1/mynt 2, tärning 1/tärning 2) när utfallsrummet ritas, precis som i tärningstabellen.`,
+        },
+    ],
+
+    'ma1c-5.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett häftstift landade med spetsen uppåt i 132 av 200 kast. Vad är den relativa frekvensen för "spets uppåt" i procent?`,
+            answer: { value: 66, unit: '%' },
+            solution: `Relativ frekvens = antalet gånger händelsen inträffade delat med antalet försök:
+
+$$ \\frac{132}{200} = 0{,}66 = 66\\ \\% $$
+
+**Svar:** 66 %`,
+        },
+        {
+            level: 1,
+            question: `Varför kan den klassiska sannolikhetsdefinitionen INTE användas för ett häftstiftskast (spets upp eller spets ner)?`,
+            choices: [
+                `Utfallen är inte lika sannolika`,
+                `Det finns fler än två utfall`,
+                `Häftstift är för små att räkna på`,
+                `Den kan visst användas — sannolikheten är 50 %`,
+            ],
+            correct: 0,
+            solution: `Klassiska definitionen kräver likformig sannolikhetsfördelning. Ett häftstift är osymmetriskt — spets upp och spets ner är INTE lika sannolika. Då måste sannolikheten bestämmas experimentellt genom upprepade kast.
+
+**Svar:** Utfallen är inte lika sannolika.`,
+        },
+        {
+            level: 1,
+            question: `Vad händer med den experimentella sannolikheten när antalet försök ökar?`,
+            choices: [
+                `Den blir mer exakt`,
+                `Den blir mindre exakt`,
+                `Den blir alltid 50 %`,
+                `Den påverkas inte av antalet försök`,
+            ],
+            correct: 0,
+            solution: `Ju fler försök, desto närmare den verkliga sannolikheten kommer den relativa frekvensen — i straffexemplet studsade frekvensen mellan 40 % och 100 % i början men stabiliserades kring 70 %.
+
+**Svar:** Den blir mer exakt.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En basketspelare satte 87 av 120 frikast under en säsong. Vad är sannolikheten (i procent, en decimal) att nästa frikast går i?`,
+            answer: { value: 72.5, unit: '%', tol: 0.005 },
+            solution: `Den experimentella sannolikheten är den relativa frekvensen:
+
+$$ \\frac{87}{120} = 0{,}725 = 72{,}5\\ \\% $$
+
+**Svar:** 72,5 %`,
+        },
+        {
+            level: 2,
+            question: `Under ett år föddes 4 850 barn på ett sjukhus, varav 2 361 flickor. Vad är den experimentella sannolikheten att ett barn som föds där är en pojke? Svara i procent med en decimal.`,
+            answer: { value: 51.3, unit: '%', tol: 0.005 },
+            solution: `Antalet pojkar är $4\\ 850 - 2\\ 361 = 2\\ 489$:
+
+$$ P(\\text{pojke}) = \\frac{2\\ 489}{4\\ 850} = 0{,}5132\\ldots \\approx 51{,}3\\ \\% $$
+
+**Svar:** cirka 51,3 %`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Elvin kastar ett mynt 10 gånger och får 7 kronor. Han säger: "Myntet är skevt — sannolikheten för krona är 70 %!" Vad är den viktigaste invändningen?`,
+            choices: [
+                `10 kast är alldeles för få — den relativa frekvensen varierar kraftigt vid små försöksantal`,
+                `Han har rätt — relativ frekvens är alltid sannolikheten`,
+                `Mynt kan aldrig vara skeva`,
+                `Sannolikheten för krona kan aldrig vara något annat än exakt 50 %`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** relativ frekvens närmar sig sannolikheten först vid MÅNGA försök — små stickprov svänger vilt.
+
+Jämför med straffexemplet i genomgången: efter 1 straff var frekvensen 100 %, efter 5 straffar 40 %, och först efter många försök stabiliserades den kring 70 %. Med bara 10 myntkast är 7 kronor inget konstigt alls — det inträffar för ett ärligt mynt i drygt 11 % av serierna.
+
+Vill Elvin påstå att myntet är skevt behöver han många fler kast (hundratals) — och gärna en jämförelse mot felmarginalen.
+
+**Svar:** 10 kast är för få — frekvensen har inte hunnit stabilisera sig.
+
+**Generell slutsats:** "ju fler försök, desto mer exakt" är hela kärnan i experimentella sannolikheter. Enstaka avvikelser i små serier är slump, inte bevis.`,
+        },
+    ],
+
+    'ma1c-5.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad är sannolikheten att få krona två gånger i rad vid slantsingling? Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{1}{4}$`,
+                `$\\dfrac{1}{2}$`,
+                `$\\dfrac{1}{8}$`,
+                `$1$`,
+            ],
+            correct: 0,
+            solution: `Singlingarna är oberoende — produktregeln ger
+
+$$ P(\\text{två kronor}) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4} $$
+
+**Svar:** $\\dfrac{1}{4}$`,
+        },
+        {
+            level: 1,
+            question: `Vilket av följande är ett exempel på OBEROENDE händelser?`,
+            choices: [
+                `Två tärningskast efter varandra`,
+                `Att dra två kort ur en kortlek utan återläggning`,
+                `Att dra två kulor ur en skål utan återläggning`,
+                `Att välja två elever ur en klass till samma grupp`,
+            ],
+            correct: 0,
+            solution: `Tärningen har "inget minne" — sannolikheten $\\frac{1}{6}$ för en sexa är densamma i varje kast. Dragningar UTAN återläggning är däremot beroende: det som dras först ändrar förutsättningarna.
+
+**Svar:** Två tärningskast efter varandra.`,
+        },
+        {
+            level: 1,
+            question: `Sannolikheten att en viss buss är försenad är 0,2 varje dag, oberoende av andra dagar. Vad är sannolikheten att den är försenad två dagar i rad?`,
+            answer: { value: 0.04, unit: '', tol: 0.01 },
+            solution: `Produktregeln för oberoende händelser:
+
+$$ 0{,}2 \\cdot 0{,}2 = 0{,}04 = 4\\ \\% $$
+
+**Svar:** 0,04 (4 %)`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en påse ligger 5 gröna och 3 gula karameller. Du tar två karameller utan återläggning. Vad är sannolikheten att båda är gröna? Svara i procent, avrundat till heltal.`,
+            answer: { value: 36, unit: '%', tol: 0.02 },
+            solution: `Beroende händelser — nämnaren minskar i andra dragningen:
+
+$$ P(\\text{två gröna}) = \\frac{5}{8} \\cdot \\frac{4}{7} = \\frac{20}{56} = \\frac{5}{14} \\approx 0{,}357 \\approx 36\\ \\% $$
+
+**Svar:** cirka 36 %`,
+        },
+        {
+            level: 2,
+            question: `Vad är sannolikheten att slå tre sexor i rad med en tärning? Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{1}{216}$`,
+                `$\\dfrac{1}{18}$`,
+                `$\\dfrac{3}{6}$`,
+                `$\\dfrac{1}{36}$`,
+            ],
+            correct: 0,
+            solution: `Tre oberoende kast:
+
+$$ \\left(\\frac{1}{6}\\right)^3 = \\frac{1}{216} $$
+
+$\\frac{1}{18}$ vore $3 \\cdot \\frac{1}{6} \\cdot \\frac{1}{6}$... sannolikheter för "i rad" multipliceras, aldrig adderas eller multipliceras med antalet.
+
+**Svar:** $\\dfrac{1}{216}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ur en kortlek (52 kort, 4 ess) drar du två kort utan återläggning. Vad är sannolikheten att BÅDA är ess? Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{1}{221}$`,
+                `$\\dfrac{1}{169}$`,
+                `$\\dfrac{2}{52}$`,
+                `$\\dfrac{1}{2\\ 652}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** utan återläggning ändras BÅDE täljare och nämnare till andra dragningen.
+
+Första kortet: $P(\\text{ess}) = \\frac{4}{52}$.
+
+Andra kortet, givet att ett ess redan dragits: 3 ess kvar av 51 kort, $P = \\frac{3}{51}$.
+
+Produktregeln:
+
+$$ \\frac{4}{52} \\cdot \\frac{3}{51} = \\frac{12}{2\\ 652} = \\frac{1}{221} $$
+
+($\\frac{1}{169} = \\frac{4}{52} \\cdot \\frac{4}{52}$ vore svaret MED återläggning — skillnaden är just beroendet.)
+
+**Svar:** $\\dfrac{1}{221}$
+
+**Generell slutsats:** fråga alltid "ändras förutsättningarna mellan händelserna?" — utan återläggning minskar både antalet gynnsamma och antalet möjliga utfall med varje dragning.`,
+        },
+    ],
+
+    'ma1c-5.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur beräknas sannolikheten för EN kombination (en gren) i ett träddiagram?`,
+            choices: [
+                `Multiplicera sannolikheterna längs grenen`,
+                `Addera sannolikheterna längs grenen`,
+                `Ta den största sannolikheten på grenen`,
+                `Dividera sannolikheterna med varandra`,
+            ],
+            correct: 0,
+            solution: `Sannolikheten för en kombination fås genom att **multiplicera** sannolikheterna längs med den grenen — t.ex. $\\frac{7}{10} \\cdot \\frac{7}{10} = \\frac{49}{100}$ för svart–svart med återläggning.
+
+**Svar:** Multiplicera sannolikheterna längs grenen.`,
+        },
+        {
+            level: 1,
+            question: `I en låda ligger 7 svarta och 3 vita strumpor. Du drar en svart strumpa och lägger INTE tillbaka den. Vilken sannolikhet gäller för att nästa strumpa också är svart?`,
+            choices: [
+                `$\\dfrac{6}{9}$`,
+                `$\\dfrac{7}{10}$`,
+                `$\\dfrac{7}{9}$`,
+                `$\\dfrac{6}{10}$`,
+            ],
+            correct: 0,
+            solution: `Utan återläggning finns 6 svarta kvar av 9 strumpor totalt:
+
+$$ P(\\text{svart efter svart}) = \\frac{6}{9} $$
+
+**Svar:** $\\dfrac{6}{9}$`,
+        },
+        {
+            level: 1,
+            question: `Vad gör man när FLERA grenar i träddiagrammet ger den sökta händelsen?`,
+            choices: [
+                `Multiplicerar längs varje gren och adderar grenarnas sannolikheter`,
+                `Multiplicerar alla grenar med varandra`,
+                `Väljer bara den första grenen`,
+                `Adderar alla sannolikheter i hela trädet`,
+            ],
+            correct: 0,
+            solution: `Varje gren ger sin sannolikhet (multiplikation längs grenen); när flera grenar är gynnsamma **adderas** de — som svart–vit och vit–svart i genomgången: $\\frac{21}{90} + \\frac{21}{90} = \\frac{42}{90}$.
+
+**Svar:** Multiplicera längs varje gren och addera grenarna.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en påse finns 4 röda och 6 blå kulor. Du drar två kulor utan återläggning. Använd ett träddiagram och beräkna sannolikheten för två röda. Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{2}{15}$`,
+                `$\\dfrac{4}{25}$`,
+                `$\\dfrac{1}{6}$`,
+                `$\\dfrac{7}{15}$`,
+            ],
+            correct: 0,
+            solution: `Grenen röd–röd utan återläggning:
+
+$$ \\frac{4}{10} \\cdot \\frac{3}{9} = \\frac{12}{90} = \\frac{2}{15} $$
+
+($\\frac{4}{25}$ vore svaret MED återläggning.)
+
+**Svar:** $\\dfrac{2}{15}$`,
+        },
+        {
+            level: 2,
+            question: `Sannolikheten att Vera hinner med bussen är $\\dfrac{9}{10}$ en vanlig dag och $\\dfrac{6}{10}$ en regnig dag. I morgon är risken för regn $\\dfrac{3}{10}$. Vad är sannolikheten att det regnar OCH att hon hinner med bussen? Svara i procent.`,
+            answer: { value: 18, unit: '%' },
+            solution: `Följ grenen regn → hinner med bussen i träddiagrammet:
+
+$$ \\frac{3}{10} \\cdot \\frac{6}{10} = \\frac{18}{100} = 18\\ \\% $$
+
+**Svar:** 18 %`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en låda ligger 5 svarta och 5 vita strumpor. Du drar två utan återläggning. Vad är sannolikheten att strumporna får OLIKA färg? Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{5}{9}$`,
+                `$\\dfrac{1}{2}$`,
+                `$\\dfrac{25}{100}$`,
+                `$\\dfrac{4}{9}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** "olika färg" täcks av TVÅ grenar i träddiagrammet — svart–vit och vit–svart — som ska adderas.
+
+Gren svart–vit:
+
+$$ \\frac{5}{10} \\cdot \\frac{5}{9} = \\frac{25}{90} $$
+
+Gren vit–svart:
+
+$$ \\frac{5}{10} \\cdot \\frac{5}{9} = \\frac{25}{90} $$
+
+Addera:
+
+$$ \\frac{25}{90} + \\frac{25}{90} = \\frac{50}{90} = \\frac{5}{9} $$
+
+(Notera att $\\frac{5}{9} > \\frac{1}{2}$ — olika färg är faktiskt VANLIGARE än lika färg utan återläggning, eftersom den första dragna strumpan lämnar färre av sin egen färg kvar.)
+
+**Svar:** $\\dfrac{5}{9}$
+
+**Generell slutsats:** rita trädet, ringa in ALLA gynnsamma grenar, multiplicera längs varje och addera. Intuitionen "50/50" luras när dragningarna är beroende.`,
+        },
+    ],
+
+    'ma1c-5.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad är komplementhändelsen till "att slå en sexa" med en tärning?`,
+            choices: [
+                `Att slå högst en femma`,
+                `Att slå en etta`,
+                `Att slå minst en femma`,
+                `Att slå en sexa igen`,
+            ],
+            correct: 0,
+            solution: `Komplementhändelsen är "att INTE slå en sexa", dvs. att slå 1, 2, 3, 4 eller 5 — vilket kan uttryckas "att slå högst en femma".
+
+**Svar:** Att slå högst en femma.`,
+        },
+        {
+            level: 1,
+            question: `Sannolikheten att ett tåg är i tid är 0,85. Vad är sannolikheten att det INTE är i tid?`,
+            answer: { value: 0.15, unit: '', tol: 0.01 },
+            solution: `Händelsen och dess komplement summerar till 1:
+
+$$ P(\\text{inte i tid}) = 1 - 0{,}85 = 0{,}15 $$
+
+**Svar:** 0,15 (15 %)`,
+        },
+        {
+            level: 1,
+            question: `I vilken typ av uppgifter är komplementhändelsen särskilt användbar?`,
+            choices: [
+                `Uppgifter med "minst en" eller "åtminstone en"`,
+                `Uppgifter med exakt ett utfall`,
+                `Uppgifter utan sannolikheter`,
+                `Uppgifter om medelvärden`,
+            ],
+            correct: 0,
+            solution: `"Minst en" täcker många kombinationer — men komplementet "ingen alls" är EN enkel kombination. Därför räknas $P(\\text{minst en}) = 1 - P(\\text{ingen})$.
+
+**Svar:** Uppgifter med "minst en" eller "åtminstone en".`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vad är sannolikheten att få minst en krona när du singlar tre mynt? Svara i bråkform.`,
+            choices: [
+                `$\\dfrac{7}{8}$`,
+                `$\\dfrac{1}{8}$`,
+                `$\\dfrac{3}{8}$`,
+                `$\\dfrac{1}{2}$`,
+            ],
+            correct: 0,
+            solution: `Komplementhändelsen är "ingen krona" (tre klavar):
+
+$$ P(\\text{ingen krona}) = \\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8} $$
+
+$$ P(\\text{minst en krona}) = 1 - \\frac{1}{8} = \\frac{7}{8} $$
+
+**Svar:** $\\dfrac{7}{8}$`,
+        },
+        {
+            level: 2,
+            question: `Sannolikheten att en viss lott vinner är 10 %. Amir köper tre lotter. Vad är sannolikheten att han vinner på minst en? Svara i procent med en decimal.`,
+            answer: { value: 27.1, unit: '%', tol: 0.005 },
+            solution: `Komplementet är att INGEN av lotterna vinner. Varje lott förlorar med sannolikheten 0,90:
+
+$$ P(\\text{ingen vinst}) = 0{,}90^3 = 0{,}729 $$
+
+$$ P(\\text{minst en vinst}) = 1 - 0{,}729 = 0{,}271 = 27{,}1\\ \\% $$
+
+(Observera: INTE $3 \\cdot 10\\ \\% = 30\\ \\%$ — sannolikheter för "minst en" adderas inte.)
+
+**Svar:** 27,1 %`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Hur många gånger måste du minst kasta en tärning för att sannolikheten att få minst en sexa ska överstiga 50 %?`,
+            answer: { value: 4, unit: 'kast' },
+            solution: `**Insikten:** "minst en sexa" angrips via komplementet "ingen sexa", och antalet kast testas systematiskt.
+
+$P(\\text{ingen sexa på } n \\text{ kast}) = \\left(\\frac{5}{6}\\right)^n$, så
+
+$$ P(\\text{minst en sexa}) = 1 - \\left(\\frac{5}{6}\\right)^n $$
+
+Testa:
+
+$$ n = 3: \\quad 1 - \\left(\\frac{5}{6}\\right)^3 = 1 - 0{,}5787\\ldots \\approx 42\\ \\% $$
+
+$$ n = 4: \\quad 1 - \\left(\\frac{5}{6}\\right)^4 = 1 - 0{,}4822\\ldots \\approx 52\\ \\% $$
+
+Efter 3 kast är chansen fortfarande under 50 %, efter 4 kast över.
+
+**Svar:** 4 kast
+
+**Generell slutsats:** intuitionen säger ofta "3 kast räcker, för $3 \\cdot \\frac{1}{6} = \\frac{1}{2}$" — men sannolikheter får inte adderas så. Komplementmetoden ger det rätta svaret, precis som i födelsedagsparadoxen.`,
+        },
+    ],
+
+    // ════════════════════════════════════════════════════════════════
+    // MATEMATIK NIVÅ 1c — kapitel 6: Trigonometri
+    // ════════════════════════════════════════════════════════════════
+
+    'ma1c-6.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas den längsta sidan i en rätvinklig triangel?`,
+            choices: [
+                `Hypotenusa`,
+                `Motstående katet`,
+                `Närliggande katet`,
+                `Bas`,
+            ],
+            correct: 0,
+            solution: `Sidan mitt emot den räta vinkeln — den längsta — kallas **hypotenusa**. De två kortare sidorna kallas kateter.
+
+**Svar:** Hypotenusa`,
+        },
+        {
+            level: 1,
+            question: `Hur definieras tan $v$ i en rätvinklig triangel?`,
+            choices: [
+                `$\\tan v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
+                `$\\tan v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
+                `$\\tan v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
+                `$\\tan v = \\dfrac{\\text{hypotenusa}}{\\text{motstående katet}}$`,
+            ],
+            correct: 0,
+            solution: `Tangens är förhållandet mellan motstående och närliggande katet. (Motstående/hypotenusa är sinus och närliggande/hypotenusa är cosinus.)
+
+**Svar:** $\\tan v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
+        },
+        {
+            level: 1,
+            question: `I en rätvinklig triangel är kateten mitt emot vinkeln $v$ 6 cm och kateten intill 8 cm. Beräkna tan $v$.`,
+            answer: { value: 0.75, unit: '', tol: 0.01 },
+            solution: `$$ \\tan v = \\frac{\\text{motstående}}{\\text{närliggande}} = \\frac{6}{8} = 0{,}75 $$
+
+**Svar:** 0,75`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en rätvinklig triangel är vinkeln 35° och den närliggande kateten 4,0 m. Beräkna den motstående kateten. Svara i meter med en decimal.`,
+            answer: { value: 2.8, unit: 'm', tol: 0.02 },
+            solution: `Tangens kopplar vinkeln till de två katetrarna:
+
+$$ \\tan 35° = \\frac{x}{4{,}0} $$
+
+$$ x = 4{,}0 \\cdot \\tan 35° = 4{,}0 \\cdot 0{,}7002\\ldots = 2{,}80\\ldots \\approx 2{,}8\\ \\mathrm{m} $$
+
+**Svar:** 2,8 m`,
+        },
+        {
+            level: 2,
+            question: `Vinkeln i en rätvinklig triangel är 22° och den motstående kateten är 5,0 l.e. Hur lång är den närliggande kateten? Avrunda till heltal.`,
+            answer: { value: 12, unit: 'l.e.', tol: 0.05 },
+            solution: `$$ \\tan 22° = \\frac{5{,}0}{x} $$
+
+Lös ut $x$ (täljaren = kvoten · nämnaren):
+
+$$ x = \\frac{5{,}0}{\\tan 22°} = \\frac{5{,}0}{0{,}4040\\ldots} = 12{,}37\\ldots \\approx 12\\ \\text{l.e.} $$
+
+**Svar:** 12 l.e.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ett 4,2 m högt träd står på plan mark. Solen står så att trädets skugga är 6,0 m lång. Senare på dagen har skuggan vuxit till 9,5 m. Hur många grader har solens höjdvinkel SJUNKIT mellan mätningarna? Avrunda till heltal.`,
+            answer: { value: 11, unit: '°', tol: 0.1 },
+            solution: `**Insikten:** båda situationerna är rätvinkliga trianglar med samma motstående katet (trädet) men olika närliggande katet (skuggan) — vinklarna fås ur tangens och jämförs. (Att bestämma vinkeln ur tangensvärdet görs med räknarens inversfunktion, som nästa avsnitt fördjupar.)
+
+Första mätningen:
+
+$$ \\tan v_1 = \\frac{4{,}2}{6{,}0} = 0{,}70 \\qquad v_1 \\approx 35{,}0° $$
+
+Andra mätningen:
+
+$$ \\tan v_2 = \\frac{4{,}2}{9{,}5} = 0{,}442\\ldots \\qquad v_2 \\approx 23{,}9° $$
+
+Skillnaden:
+
+$$ v_1 - v_2 \\approx 35{,}0° - 23{,}9° = 11{,}1° \\approx 11° $$
+
+**Svar:** cirka 11°
+
+**Generell slutsats:** samma föremål + längre skugga = mindre höjdvinkel. Tangens är rätt verktyg så fort BÅDA katetrarna (höjd och skugga) är inblandade — hypotenusan behövs aldrig.`,
+        },
+    ],
+
+    'ma1c-6.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `I en rätvinklig triangel är motstående katet 4 cm och hypotenusan 5 cm till vinkeln $u$. Beräkna sin $u$.`,
+            answer: { value: 0.8, unit: '', tol: 0.01 },
+            solution: `$$ \\sin u = \\frac{\\text{motstående katet}}{\\text{hypotenusa}} = \\frac{4}{5} = 0{,}8 $$
+
+**Svar:** 0,8`,
+        },
+        {
+            level: 1,
+            question: `Hur definieras cos $v$?`,
+            choices: [
+                `$\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
+                `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
+                `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
+                `$\\cos v = \\dfrac{\\text{hypotenusa}}{\\text{närliggande katet}}$`,
+            ],
+            correct: 0,
+            solution: `Cosinus är närliggande katet genom hypotenusan. (Motstående/hypotenusa är sinus, motstående/närliggande är tangens.)
+
+**Svar:** $\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
+        },
+        {
+            level: 1,
+            question: `Varför är sin $v$ och cos $v$ alltid mindre än 1 (för spetsiga vinklar i en rätvinklig triangel)?`,
+            choices: [
+                `En katet är alltid kortare än hypotenusan — täljaren är mindre än nämnaren`,
+                `Vinklarna är alltid mindre än 90°`,
+                `Räknaren avrundar alltid nedåt`,
+                `Det stämmer inte — de kan vara större än 1`,
+            ],
+            correct: 0,
+            solution: `Både sinus och cosinus har hypotenusan i nämnaren, och hypotenusan är per definition triangelns längsta sida. En katet delat med något större ger alltid ett tal under 1.
+
+(Tangens kan däremot bli hur stor som helst — där divideras två kateter.)
+
+**Svar:** Kateten är alltid kortare än hypotenusan.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en rätvinklig triangel är vinkeln 41° och dess motstående katet 6,1 cm. Beräkna hypotenusan. Svara i cm med en decimal.`,
+            answer: { value: 9.3, unit: 'cm', tol: 0.02 },
+            solution: `Motstående katet och hypotenusa → sinus:
+
+$$ \\sin 41° = \\frac{6{,}1}{a} $$
+
+$$ a = \\frac{6{,}1}{\\sin 41°} = \\frac{6{,}1}{0{,}6560\\ldots} = 9{,}29\\ldots \\approx 9{,}3\\ \\mathrm{cm} $$
+
+**Svar:** 9,3 cm`,
+        },
+        {
+            level: 2,
+            question: `I en rätvinklig triangel är hypotenusan 12 m och en vinkel 28°. Hur lång är den NÄRLIGGANDE kateten till vinkeln? Svara i meter med en decimal.`,
+            answer: { value: 10.6, unit: 'm', tol: 0.02 },
+            solution: `Närliggande katet och hypotenusa → cosinus:
+
+$$ \\cos 28° = \\frac{x}{12} $$
+
+$$ x = 12 \\cdot \\cos 28° = 12 \\cdot 0{,}8829\\ldots = 10{,}59\\ldots \\approx 10{,}6\\ \\mathrm{m} $$
+
+**Svar:** 10,6 m`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En triangel (ej rätvinklig) har sidorna 9,0 och 15 med vinkeln 38° mellan dem. Beräkna triangelns area. Avrunda till heltal.`,
+            answer: { value: 42, unit: 'a.e.', tol: 0.03 },
+            solution: `**Insikten:** höjden syns inte i figuren — den skapas med sinus, precis som i genomgångens sista exempel.
+
+Välj sidan 15 som bas. Höjden $h$ fälls från motstående hörn och bildar en rätvinklig triangel där sidan 9,0 är hypotenusa och $h$ motstående katet till 38°-vinkeln:
+
+$$ \\sin 38° = \\frac{h}{9{,}0} \\qquad h = 9{,}0 \\cdot \\sin 38° $$
+
+Areaformeln:
+
+$$ A = \\frac{b \\cdot h}{2} = \\frac{15 \\cdot 9{,}0 \\cdot \\sin 38°}{2} = \\frac{135 \\cdot 0{,}6156\\ldots}{2} = 41{,}56\\ldots \\approx 42\\ \\text{a.e.} $$
+
+**Svar:** cirka 42 a.e.
+
+**Generell slutsats:** arean av VARJE triangel kan skrivas $A = \\frac{a \\cdot b \\cdot \\sin C}{2}$, där $C$ är vinkeln mellan sidorna $a$ och $b$ — sinus tillverkar höjden åt oss.`,
+        },
+    ],
+
+    'ma1c-6.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm vinkeln $v$ om $\\tan v = 1$. Svara i grader.`,
+            answer: { value: 45, unit: '°' },
+            solution: `Använd den inversa funktionen:
+
+$$ v = \\tan^{-1}(1) = 45° $$
+
+(Rimligt: tangens 1 betyder att katetrarna är lika långa — en 45°-triangel.)
+
+**Svar:** 45°`,
+        },
+        {
+            level: 1,
+            question: `Vad är ett annat skrivsätt för $\\tan^{-1}$?`,
+            choices: [
+                `arctan`,
+                `$\\dfrac{1}{\\tan}$`,
+                `cotan`,
+                `tanh`,
+            ],
+            correct: 0,
+            solution: `$\\tan^{-1}$ ("tangens invers") och arctan ("arcus tangens") är samma funktion — bara olika skrivsätt. Båda förekommer på räknare och i litteratur.
+
+(Observera att $\\tan^{-1} v$ INTE betyder $\\frac{1}{\\tan v}$ i det här sammanhanget.)
+
+**Svar:** arctan`,
+        },
+        {
+            level: 1,
+            question: `Bestäm vinkeln $u$ om $\\cos u = 0{,}5$. Svara i grader.`,
+            answer: { value: 60, unit: '°' },
+            solution: `$$ u = \\cos^{-1}(0{,}5) = 60° $$
+
+**Svar:** 60°`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en rätvinklig triangel är motstående katet 7,0 cm och närliggande katet 4,0 cm till vinkeln $v$. Bestäm $v$. Svara i grader, avrundat till heltal.`,
+            answer: { value: 60, unit: '°', tol: 0.02 },
+            solution: `Två kateter → tangens, och vinkeln fås med inversen:
+
+$$ \\tan v = \\frac{7{,}0}{4{,}0} = 1{,}75 $$
+
+$$ v = \\tan^{-1}(1{,}75) = 60{,}25\\ldots° \\approx 60° $$
+
+**Svar:** cirka 60°`,
+        },
+        {
+            level: 2,
+            question: `En 6,0 m lång stege lutar mot en vägg och når 5,2 m upp. Vilken vinkel bildar stegen mot MARKEN? Svara i grader, avrundat till heltal.`,
+            answer: { value: 60, unit: '°', tol: 0.02 },
+            solution: `Stegen är hypotenusan (6,0 m) och höjden på väggen den motstående kateten (5,2 m) till markvinkeln:
+
+$$ \\sin v = \\frac{5{,}2}{6{,}0} = 0{,}8666\\ldots $$
+
+$$ v = \\sin^{-1}(0{,}8666\\ldots) = 60{,}07\\ldots° \\approx 60° $$
+
+**Svar:** cirka 60°`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en rätvinklig triangel är katetrarna 5,0 cm och 12 cm. Bestäm triangelns MINSTA vinkel. Svara i grader, avrundat till heltal.`,
+            answer: { value: 23, unit: '°', tol: 0.03 },
+            solution: `**Insikten:** den minsta vinkeln ligger alltid mitt emot den kortaste sidan — välj kvoten så att den korta kateten är motstående.
+
+Den minsta vinkeln $v$ har 5,0 cm som motstående och 12 cm som närliggande katet:
+
+$$ \\tan v = \\frac{5{,}0}{12} = 0{,}4166\\ldots $$
+
+$$ v = \\tan^{-1}(0{,}4166\\ldots) = 22{,}6\\ldots° \\approx 23° $$
+
+Kontroll: den andra spetsiga vinkeln är $\\tan^{-1}(12/5{,}0) \\approx 67°$, och $23° + 67° + 90° = 180°$. Stämmer — och 23° är mindre än 67°.
+
+**Svar:** cirka 23°
+
+**Generell slutsats:** vänds kvoten upp och ner fås den ANDRA vinkeln ($67°$) — kontrollera alltid att svaret är rimligt: liten motstående sida ⟹ liten vinkel.`,
+        },
+    ],
+
+    'ma1c-6.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad säger Pythagoras sats för en rätvinklig triangel med katetrarna $a$ och $b$ och hypotenusan $c$?`,
+            choices: [
+                `$a^2 + b^2 = c^2$`,
+                `$a + b = c$`,
+                `$a^2 - b^2 = c^2$`,
+                `$a^2 + c^2 = b^2$`,
+            ],
+            correct: 0,
+            solution: `Katet² + katet² = hypotenusa², dvs. $a^2 + b^2 = c^2$. Satsen gäller endast rätvinkliga trianglar.
+
+**Svar:** $a^2 + b^2 = c^2$`,
+        },
+        {
+            level: 1,
+            question: `En rätvinklig triangel har katetrarna 6 och 8. Hur lång är hypotenusan?`,
+            answer: { value: 10, unit: '' },
+            solution: `Pythagoras sats:
+
+$$ c^2 = 6^2 + 8^2 = 36 + 64 = 100 $$
+
+$$ c = \\sqrt{100} = 10 $$
+
+(Den negativa roten förkastas — en sträcka kan inte vara negativ.)
+
+**Svar:** 10`,
+        },
+        {
+            level: 1,
+            question: `En sträcka dras mellan två punkter i ett koordinatsystem. Vad motsvarar sträckan i den rätvinkliga triangel man bildar?`,
+            choices: [
+                `Hypotenusan`,
+                `Den vågräta kateten`,
+                `Den lodräta kateten`,
+                `Höjden`,
+            ],
+            correct: 0,
+            solution: `Katetrarna läggs längs rutnätet (vågrätt och lodrätt) och sträckan mellan punkterna blir triangelns **hypotenusa** — som beräknas med Pythagoras sats.
+
+**Svar:** Hypotenusan`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna längden av sträckan mellan punkterna (1, 2) och (7, 10).`,
+            answer: { value: 10, unit: 'l.e.' },
+            solution: `Katetrarna är skillnaderna i x- och y-led:
+
+$$ \\Delta x = 7 - 1 = 6 \\qquad \\Delta y = 10 - 2 = 8 $$
+
+Pythagoras sats:
+
+$$ c^2 = 6^2 + 8^2 = 100 \\qquad c = 10 $$
+
+**Svar:** 10 l.e.`,
+        },
+        {
+            level: 2,
+            question: `En sträcka dras från (0, 0) till (5, 3). Vilken vinkel bildar sträckan med x-axeln? Svara i grader, avrundat till heltal.`,
+            answer: { value: 31, unit: '°', tol: 0.02 },
+            solution: `Motstående katet är 3 (höjden) och närliggande katet 5 (basen):
+
+$$ \\tan v = \\frac{3}{5} = 0{,}6 $$
+
+$$ v = \\tan^{-1}(0{,}6) = 30{,}96\\ldots° \\approx 31° $$
+
+**Svar:** cirka 31°`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Triangeln med hörnen A(−3, 1), B(5, 1) och C(5, 7) är rätvinklig. Bestäm vinkeln vid hörn A. Svara i grader, avrundat till heltal.`,
+            answer: { value: 37, unit: '°', tol: 0.02 },
+            solution: `**Insikten:** rita (eller skissa) triangeln — hörnkoordinaterna avslöjar katetrarna direkt.
+
+A och B har samma y-koordinat → AB är vågrät med längden $5 - (-3) = 8$. B och C har samma x-koordinat → BC är lodrät med längden $7 - 1 = 6$. Räta vinkeln ligger vid B.
+
+Vinkeln vid A har BC = 6 som motstående katet och AB = 8 som närliggande:
+
+$$ \\tan A = \\frac{6}{8} = 0{,}75 \\qquad A = \\tan^{-1}(0{,}75) = 36{,}86\\ldots° \\approx 37° $$
+
+Kontroll: hypotenusan $AC = \\sqrt{8^2 + 6^2} = 10$ och vinkeln vid C blir $\\tan^{-1}(8/6) \\approx 53°$; $37 + 53 + 90 = 180$. Stämmer!
+
+**Svar:** cirka 37°
+
+**Generell slutsats:** i koordinatsystem är katetrarna alltid skillnaderna i x- och y-led — samma 3-4-5-mönster (här skalat till 6-8-10) dyker upp överallt.`,
+        },
+    ],
+
+    'ma1c-6.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad skiljer en vektor från en skalär?`,
+            choices: [
+                `En vektor har både storlek och riktning; en skalär har bara storlek`,
+                `En vektor är alltid större än en skalär`,
+                `En skalär har riktning men ingen storlek`,
+                `Ingen skillnad — orden betyder samma sak`,
+            ],
+            correct: 0,
+            solution: `Vektorer (t.ex. hastighet, kraft, acceleration) anges med storlek OCH riktning; skalärer (t.ex. vikt, tid, temperatur) med enbart storlek.
+
+**Svar:** En vektor har både storlek och riktning.`,
+        },
+        {
+            level: 1,
+            question: `Vilken av följande storheter är en VEKTOR?`,
+            choices: [
+                `Kraft`,
+                `Temperatur`,
+                `Tid`,
+                `Vikt`,
+            ],
+            correct: 0,
+            solution: `Kraft har både storlek och riktning — en vektor. Temperatur, tid och vikt är skalärer (enbart storlek).
+
+**Svar:** Kraft`,
+        },
+        {
+            level: 1,
+            question: `Vad krävs för att två vektorer ska vara SAMMA vektor?`,
+            choices: [
+                `Samma storlek och samma riktning`,
+                `Samma startpunkt`,
+                `Samma storlek, oavsett riktning`,
+                `Att de ligger på samma linje`,
+            ],
+            correct: 0,
+            solution: `Vektorer kan parallellförflyttas — startpunkten spelar ingen roll. Så länge storlek och riktning är oförändrade är det samma vektor.
+
+**Svar:** Samma storlek och samma riktning.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En vektor går 6 rutor åt höger och 8 rutor uppåt. Beräkna vektorns längd (1 ruta = 1 l.e.).`,
+            answer: { value: 10, unit: 'l.e.' },
+            solution: `Längden beräknas med Pythagoras sats:
+
+$$ |\\vec{u}|^2 = 6^2 + 8^2 = 36 + 64 = 100 $$
+
+$$ |\\vec{u}| = \\sqrt{100} = 10 $$
+
+**Svar:** 10 l.e.`,
+        },
+        {
+            level: 2,
+            question: `Vektorn $\\vec{a}$ pekar 3 rutor åt höger och 1 ruta uppåt. Vilken av följande är MOTSATT vektor till $\\vec{a}$?`,
+            choices: [
+                `3 rutor åt vänster och 1 ruta nedåt`,
+                `3 rutor åt höger och 1 ruta nedåt`,
+                `1 ruta åt höger och 3 rutor uppåt`,
+                `6 rutor åt höger och 2 rutor uppåt`,
+            ],
+            correct: 0,
+            solution: `Motsatt vektor $-\\vec{a}$ har samma storlek men exakt motsatt riktning — båda komposanterna byter tecken: (3, 1) → (−3, −1).
+
+(6 höger, 2 upp är $2\\vec{a}$ — parallell men inte motsatt.)
+
+**Svar:** 3 rutor åt vänster och 1 ruta nedåt.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Fyra vektorer ritas i ett rutnät: $\\vec{a}$ går (4, 1), $\\vec{b}$ går (−4, −1), $\\vec{c}$ går (8, 2) och $\\vec{d}$ går (4, 2). Vilket påstående stämmer?`,
+            choices: [
+                `$\\vec{a}$, $\\vec{b}$ och $\\vec{c}$ är parallella, men $\\vec{d}$ är det inte`,
+                `Alla fyra är parallella`,
+                `Endast $\\vec{a}$ och $\\vec{c}$ är parallella`,
+                `$\\vec{b}$ är samma vektor som $\\vec{a}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** parallellitet handlar om LUTNING — kontrollera kvoten mellan stegen.
+
+$\\vec{a}$: lutning $\\frac{1}{4}$. $\\vec{b} = -\\vec{a}$: samma lutning (motsatt riktning räknas som parallell). $\\vec{c} = 2\\vec{a}$: lutning $\\frac{2}{8} = \\frac{1}{4}$ — parallell.
+
+$\\vec{d}$: lutning $\\frac{2}{4} = \\frac{1}{2} \\neq \\frac{1}{4}$ — INTE parallell med de övriga.
+
+($\\vec{b}$ är den MOTSATTA vektorn till $\\vec{a}$, inte samma — riktningen skiljer.)
+
+**Svar:** $\\vec{a}$, $\\vec{b}$ och $\\vec{c}$ är parallella, men inte $\\vec{d}$.
+
+**Generell slutsats:** parallella vektorer är multiplar av varandra ($\\vec{c} = 2\\vec{a}$, $\\vec{b} = -1 \\cdot \\vec{a}$) — samma test som k-värdet för räta linjer.`,
+        },
+    ],
+
+    'ma1c-6.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad händer när vektorn $\\vec{w}$ multipliceras med 3?`,
+            choices: [
+                `Den nya vektorn blir tre gånger så lång med samma riktning`,
+                `Den nya vektorn blir tre gånger så lång med motsatt riktning`,
+                `Riktningen vrids 3 grader`,
+                `Ingenting — skalärer påverkar inte vektorer`,
+            ],
+            correct: 0,
+            solution: `Multiplikation med en positiv skalär skalar längden och behåller riktningen: $3\\vec{w}$ är tre gånger så lång som $\\vec{w}$.
+
+(Negativ faktor hade dessutom vänt riktningen.)
+
+**Svar:** Tre gånger så lång, samma riktning.`,
+        },
+        {
+            level: 1,
+            question: `Hur förhåller sig $-2\\vec{w}$ till $\\vec{w}$?`,
+            choices: [
+                `Dubbelt så lång och motsatt riktning`,
+                `Dubbelt så lång och samma riktning`,
+                `Hälften så lång och motsatt riktning`,
+                `Lika lång men motsatt riktning`,
+            ],
+            correct: 0,
+            solution: `Faktorn 2 dubblar längden och minustecknet vänder riktningen: $-2\\vec{w}$ är dubbelt så lång och pekar åt motsatt håll.
+
+**Svar:** Dubbelt så lång och motsatt riktning.`,
+        },
+        {
+            level: 1,
+            question: `Vad kallas den vektor som fås när två vektorer adderas?`,
+            choices: [
+                `Resultant`,
+                `Komposant`,
+                `Skalär`,
+                `Differens`,
+            ],
+            correct: 0,
+            solution: `Summan av vektorer kallas **resultant** — den dras från startpunkten till slutpunkten när vektorerna lagts efter varandra (polygonmetoden).
+
+**Svar:** Resultant`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beskriv polygonmetoden för att addera $\\vec{u}$ och $\\vec{v}$.`,
+            choices: [
+                `Flytta $\\vec{v}$ så att den startar vid spetsen av $\\vec{u}$; resultanten går från $\\vec{u}$:s start till $\\vec{v}$:s spets`,
+                `Lägg vektorerna med samma startpunkt och dra resultanten mellan spetsarna`,
+                `Multiplicera vektorernas längder`,
+                `Rita båda vektorerna från origo och addera vinklarna`,
+            ],
+            correct: 0,
+            solution: `Polygonmetoden: parallellförflytta den ena vektorn till den andras spets och dra resultanten från start till slut.
+
+(Att dra en vektor mellan spetsarna när de har samma startpunkt ger i stället DIFFERENSEN — det kommer i nästa avsnitt.)
+
+**Svar:** Spets-till-start-kedjan med resultanten från start till slut.`,
+        },
+        {
+            level: 2,
+            question: `$\\vec{u}$ pekar 5 rutor åt höger och $\\vec{v}$ pekar 3 rutor åt höger (båda vågräta). Hur lång blir resultanten $\\vec{w} = \\vec{u} + \\vec{v}$?`,
+            answer: { value: 8, unit: 'rutor' },
+            solution: `Vektorer med samma riktning adderas som längder — kedja dem efter varandra:
+
+$$ |\\vec{w}| = 5 + 3 = 8\\ \\text{rutor} $$
+
+**Svar:** 8 rutor`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `$\\vec{u}$ pekar 6 rutor åt höger och $\\vec{v}$ pekar 8 rutor uppåt. Hur lång blir resultanten $\\vec{w} = \\vec{u} + \\vec{v}$?`,
+            answer: { value: 10, unit: 'rutor' },
+            solution: `**Insikten:** vinkelräta vektorer bildar en rätvinklig triangel med resultanten som hypotenusa — polygonmetoden möter Pythagoras.
+
+Kedja vektorerna: gå 6 åt höger, sedan 8 uppåt. Resultanten går diagonalt från start till slut:
+
+$$ |\\vec{w}|^2 = 6^2 + 8^2 = 36 + 64 = 100 $$
+
+$$ |\\vec{w}| = 10\\ \\text{rutor} $$
+
+Observera att $|\\vec{w}| \\neq |\\vec{u}| + |\\vec{v}| = 14$ — längder adderas bara när vektorerna har SAMMA riktning.
+
+**Svar:** 10 rutor
+
+**Generell slutsats:** resultantens längd beror på vinkeln mellan vektorerna: från $|u| + |v|$ (samma riktning) ner till $||u| - |v||$ (motsatta). Vinkelräta fall ger alltid Pythagoras.`,
+        },
+    ],
+
+    'ma1c-6.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur skrivs subtraktionen $\\vec{u} - \\vec{v}$ om som en addition?`,
+            choices: [
+                `$\\vec{u} + (-\\vec{v})$`,
+                `$\\vec{v} + (-\\vec{u})$`,
+                `$-(\\vec{u} + \\vec{v})$`,
+                `$\\vec{u} \\cdot (-\\vec{v})$`,
+            ],
+            correct: 0,
+            solution: `Att subtrahera $\\vec{v}$ är samma sak som att addera den motsatta vektorn:
+
+$$ \\vec{u} - \\vec{v} = \\vec{u} + (-\\vec{v}) $$
+
+Sedan används polygonmetoden som vanligt.
+
+**Svar:** $\\vec{u} + (-\\vec{v})$`,
+        },
+        {
+            level: 1,
+            question: `Hur ser $-\\vec{v}$ ut jämfört med $\\vec{v}$?`,
+            choices: [
+                `Lika lång men motriktad`,
+                `Dubbelt så lång och motriktad`,
+                `Lika lång och samma riktning`,
+                `Kortare och vriden 90°`,
+            ],
+            correct: 0,
+            solution: `Den motsatta vektorn har exakt samma längd men pekar åt rakt motsatt håll.
+
+**Svar:** Lika lång men motriktad.`,
+        },
+        {
+            level: 1,
+            question: `Vilket är FÖRSTA steget när $\\vec{w} = \\vec{u} - \\vec{v}$ ska ritas?`,
+            choices: [
+                `Rita den motsatta vektorn $-\\vec{v}$`,
+                `Rita resultanten direkt`,
+                `Förkorta båda vektorerna`,
+                `Vrida $\\vec{u}$ 180°`,
+            ],
+            correct: 0,
+            solution: `Skriv om till addition och rita $-\\vec{v}$ (lika lång, motriktad). Sedan parallellförflyttas den till spetsen av $\\vec{u}$, och resultanten dras från start till slut.
+
+**Svar:** Rita den motsatta vektorn $-\\vec{v}$.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `$\\vec{u}$ pekar 7 rutor åt höger och $\\vec{v}$ pekar 3 rutor åt höger. Hur lång blir $\\vec{w} = \\vec{u} - \\vec{v}$ och åt vilket håll pekar den?`,
+            choices: [
+                `4 rutor åt höger`,
+                `10 rutor åt höger`,
+                `4 rutor åt vänster`,
+                `10 rutor åt vänster`,
+            ],
+            correct: 0,
+            solution: `$-\\vec{v}$ pekar 3 rutor åt vänster. Kedja: 7 åt höger följt av 3 åt vänster ger netto
+
+$$ 7 - 3 = 4\\ \\text{rutor åt höger} $$
+
+(10 åt höger vore ADDITIONEN $\\vec{u} + \\vec{v}$.)
+
+**Svar:** 4 rutor åt höger.`,
+        },
+        {
+            level: 2,
+            question: `$\\vec{u}$ pekar 4 rutor åt höger och $\\vec{v}$ pekar 3 rutor uppåt. Hur lång blir $\\vec{w} = \\vec{u} - \\vec{v}$?`,
+            answer: { value: 5, unit: 'rutor' },
+            solution: `$-\\vec{v}$ pekar 3 rutor NEDÅT. Kedjan blir 4 åt höger + 3 nedåt — en rätvinklig triangel:
+
+$$ |\\vec{w}|^2 = 4^2 + 3^2 = 25 \\qquad |\\vec{w}| = 5\\ \\text{rutor} $$
+
+(Notera att $|\\vec{u} - \\vec{v}| = |\\vec{u} + \\vec{v}| = 5$ här — vinkelräta vektorer ger samma längd åt båda hållen, men riktningarna skiljer.)
+
+**Svar:** 5 rutor`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två vektorer är lika långa: $|\\vec{u}| = |\\vec{v}| = 6$. Vad gäller för $\\vec{w} = \\vec{u} - \\vec{v}$ om $\\vec{u}$ och $\\vec{v}$ har SAMMA riktning?`,
+            choices: [
+                `$\\vec{w}$ blir nollvektorn — längden är 0`,
+                `$|\\vec{w}| = 12$`,
+                `$|\\vec{w}| = 6$`,
+                `Subtraktionen är inte definierad`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** subtraktion av två identiska vektorer tar ut allt — precis som $a - a = 0$ för tal.
+
+$\\vec{u}$ och $\\vec{v}$ har samma längd OCH samma riktning, dvs. $\\vec{u} = \\vec{v}$. Kedjan blir: gå 6 steg åt ett håll ($\\vec{u}$), sedan 6 steg rakt tillbaka ($-\\vec{v}$). Start- och slutpunkt sammanfaller:
+
+$$ \\vec{w} = \\vec{u} - \\vec{u} = \\vec{0} \\qquad |\\vec{w}| = 0 $$
+
+($|\\vec{w}| = 12$ hade krävt MOTSATTA riktningar: då pekar $-\\vec{v}$ åt samma håll som $\\vec{u}$ och längderna adderas.)
+
+**Svar:** Nollvektorn, längd 0.
+
+**Generell slutsats:** $|\\vec{u} - \\vec{v}|$ mäter SKILLNADEN mellan vektorerna — 0 när de är lika, störst ($|u|+|v|$) när de är motsatta. Jämför gärna med kraftjämvikt i fysiken.`,
+        },
+    ],
+
+    'ma1c-6.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna längden av vektorn $\\vec{u} = (3,\\ 4)$.`,
+            answer: { value: 5, unit: 'l.e.' },
+            solution: `Kvadratroten ur summan av koordinaternas kvadrater:
+
+$$ |\\vec{u}| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5 $$
+
+**Svar:** 5 l.e.`,
+        },
+        {
+            level: 1,
+            question: `Vilken formel ger längden av vektorn $\\vec{u} = (a,\\ b)$?`,
+            choices: [
+                `$|\\vec{u}| = \\sqrt{a^2 + b^2}$`,
+                `$|\\vec{u}| = a + b$`,
+                `$|\\vec{u}| = \\sqrt{a + b}$`,
+                `$|\\vec{u}| = a^2 + b^2$`,
+            ],
+            correct: 0,
+            solution: `Koordinaterna är katetlängderna i den rätvinkliga triangeln — Pythagoras sats ger
+
+$$ |\\vec{u}| = \\sqrt{a^2 + b^2} $$
+
+**Svar:** $|\\vec{u}| = \\sqrt{a^2 + b^2}$`,
+        },
+        {
+            level: 1,
+            question: `Vektorn $\\overrightarrow{AB}$ går 8 rutor i x-led och 4 rutor i y-led. Hur skrivs den i koordinatform?`,
+            choices: [
+                `$\\overrightarrow{AB} = (8,\\ 4)$`,
+                `$\\overrightarrow{AB} = (4,\\ 8)$`,
+                `$\\overrightarrow{AB} = \\sqrt{80}$`,
+                `$\\overrightarrow{AB} = 8 + 4$`,
+            ],
+            correct: 0,
+            solution: `Koordinatformen anger förflyttningen i x-led först och y-led sist: $(8,\\ 4)$.
+
+($\\sqrt{80}$ är vektorns LÄNGD, inte dess koordinatform.)
+
+**Svar:** $\\overrightarrow{AB} = (8,\\ 4)$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm längden av vektorn $\\vec{v} = (11,\\ -5)$. Avrunda till två decimaler.`,
+            answer: { value: 12.08, unit: 'l.e.', tol: 0.005 },
+            solution: `Det negativa tecknet försvinner vid kvadreringen:
+
+$$ |\\vec{v}| = \\sqrt{11^2 + (-5)^2} = \\sqrt{121 + 25} = \\sqrt{146} \\approx 12{,}08\\ \\text{l.e.} $$
+
+**Svar:** $\\sqrt{146} \\approx 12{,}08$ l.e.`,
+        },
+        {
+            level: 2,
+            question: `Vilken av följande vektorer är LÄNGST?`,
+            choices: [
+                `$(6,\\ 7)$`,
+                `$(9,\\ 0)$`,
+                `$(-8,\\ 4)$`,
+                `$(5,\\ -7)$`,
+            ],
+            correct: 0,
+            solution: `Jämför kvadratsummorna (roten behöver inte ens dras):
+
+$$ 6^2 + 7^2 = 85 \\qquad 9^2 + 0^2 = 81 \\qquad (-8)^2 + 4^2 = 80 \\qquad 5^2 + (-7)^2 = 74 $$
+
+Störst är 85 — vektorn $(6,\\ 7)$ med längden $\\sqrt{85} \\approx 9{,}2$.
+
+**Svar:** $(6,\\ 7)$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vektorn $\\vec{u} = (a,\\ 8)$ har längden 17. Bestäm det positiva värdet på $a$.`,
+            answer: { value: 15, unit: '' },
+            solution: `**Insikten:** längdformeln kan köras baklänges — en känd längd ger en ekvation för den okända koordinaten.
+
+$$ |\\vec{u}| = \\sqrt{a^2 + 8^2} = 17 $$
+
+Kvadrera båda led:
+
+$$ a^2 + 64 = 289 $$
+
+$$ a^2 = 225 $$
+
+$$ a = \\pm\\sqrt{225} = \\pm 15 $$
+
+Det positiva värdet är $a = 15$.
+
+Kontroll: $\\sqrt{15^2 + 8^2} = \\sqrt{225 + 64} = \\sqrt{289} = 17$. Stämmer!
+
+**Svar:** $a = 15$
+
+**Generell slutsats:** 8-15-17 är (liksom 3-4-5) en Pythagoreisk taltrippel — och notera att BÅDA tecknen på $a$ ger samma längd, eftersom kvadreringen suddar ut tecknet.`,
+        },
+    ],
 };

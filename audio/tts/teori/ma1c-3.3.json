@@ -1,0 +1,138 @@
+{
+ "id": "ma1c-3.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b9e3ecdfc346e256f34452c2bb526f94cdd422d0",
+ "dur": 144.57,
+ "segments": [
+  {
+   "t": "Upprepade procentuella förändringar",
+   "s": 0.1,
+   "e": 3.36
+  },
+  {
+   "t": "Vid upprepad procentuell förändring får vi den totala procentuella förändringen genom att beräkna den totala förändringsfaktorn.",
+   "s": 3.31,
+   "e": 10.93
+  },
+  {
+   "t": "Den totala förändringsfaktorn fås genom att multiplicera de olika förändringsfaktorerna.",
+   "s": 10.93,
+   "e": 17.16
+  },
+  {
+   "t": "Total förändringsfaktor",
+   "s": 17.16,
+   "e": 19.9
+  },
+  {
+   "t": "total förändringsfaktor är lika med förändringsfaktor ett gånger förändringsfaktor två gånger",
+   "s": 19.9,
+   "e": 26.16
+  },
+  {
+   "t": "Exempel 1 — Höjning följd av sänkning",
+   "s": 26.16,
+   "e": 29.88
+  },
+  {
+   "t": "Ett pris höjs med 15 procent för att sedan sänkas med 15 procent.",
+   "s": 29.88,
+   "e": 35.06
+  },
+  {
+   "t": "Med hur många procent har det ursprungliga priset ändrats?",
+   "s": 35.06,
+   "e": 39.33
+  },
+  {
+   "t": "Vi skriver upp de olika förändringsfaktorerna:",
+   "s": 39.33,
+   "e": 48.05
+  },
+  {
+   "t": "förändringsfaktor ett är lika med 1 plus 0,15 som är lika med 1,15",
+   "s": 39.33,
+   "e": 48.05
+  },
+  {
+   "t": "förändringsfaktor två är lika med 1 minus 0,15 som är lika med 0,85",
+   "s": 48.05,
+   "e": 54.41
+  },
+  {
+   "t": "Total förändringsfaktor:",
+   "s": 54.41,
+   "e": 63.81
+  },
+  {
+   "t": "total förändringsfaktor är lika med 1,15 gånger 0,85 som är lika med 0,9775",
+   "s": 54.41,
+   "e": 63.81
+  },
+  {
+   "t": "0,9775 motsvarar en minskning med 1 minus 0,9775 är lika med 0,0225 som är lika med 2,25 procent .",
+   "s": 63.81,
+   "e": 74.44
+  },
+  {
+   "t": "Svar: Det har minskat med 2,25 procent.",
+   "s": 74.44,
+   "e": 78.9
+  },
+  {
+   "t": "OBS!",
+   "s": 78.9,
+   "e": 80.51
+  },
+  {
+   "t": "En ökning med 15 procent följd av en minskning med 15 procent ger alltså INTE en förändring på 0 procent.",
+   "s": 80.51,
+   "e": 87.55
+  },
+  {
+   "t": "Detta beror på att värdet som vi räknar 15 procent av ändras.",
+   "s": 87.55,
+   "e": 92.38
+  },
+  {
+   "t": "Exempel 2 — Sparkontot",
+   "s": 92.38,
+   "e": 95.51
+  },
+  {
+   "t": "Axel sätter in 80 000 kronor på ett sparkonto med årsräntan 2,5 procent och tar inte ut några pengar.",
+   "s": 95.51,
+   "e": 102.79
+  },
+  {
+   "t": "Hur mycket pengar finns på kontot om 18 år?",
+   "s": 102.79,
+   "e": 106.6
+  },
+  {
+   "t": "I det här fallet är förändringsfaktorn densamma för varje år:",
+   "s": 106.6,
+   "e": 116.28
+  },
+  {
+   "t": "förändringsfaktor är lika med 1 plus 0,025 som är lika med 1,025",
+   "s": 106.6,
+   "e": 116.28
+  },
+  {
+   "t": "Vi ska alltså multiplicera beloppet med förändringsfaktorn 1,025 18 gånger, vilket ger den totala förändringsfaktorn 1,025 upphöjt till 18 :",
+   "s": 116.28,
+   "e": 139.39
+  },
+  {
+   "t": "80 000 gånger 1,025 upphöjt till 18 är lika med 124 772,697 kronor som är ungefär lika med 124 773 kronor",
+   "s": 116.28,
+   "e": 139.39
+  },
+  {
+   "t": "Svar: 124 773 kronor",
+   "s": 139.39,
+   "e": 144.57
+  }
+ ]
+}

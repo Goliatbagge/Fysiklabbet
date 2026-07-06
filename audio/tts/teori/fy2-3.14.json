@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.14",
  "voice": "sv-SE-SofieNeural",
- "hash": "b31c67c62b3bfaa4999af7b629f618be39ebff3e",
- "dur": 135.1,
+ "hash": "6234f5a5ee96c5693241817b16b27524012e88c0",
+ "dur": 133.28,
  "segments": [
   {
    "t": "Magnetfältsmätare och Halleffekt",
@@ -62,62 +62,62 @@
   {
    "t": "F massan m är lika med F e",
    "s": 64.69,
-   "e": 78.89
+   "e": 78.1
   },
   {
-   "t": "F massan m är lika med q gånger hastigheten v gånger B och F e är lika med q gånger mathbb energin E (där mathbb energin E är elektrisk fältstyrka, från Fysik nivå 1) ger",
+   "t": "F massan m är lika med q gånger hastigheten v gånger B och F e är lika med q gånger energin E (där energin E är elektrisk fältstyrka, från Fysik nivå 1) ger",
    "s": 64.69,
-   "e": 78.89
+   "e": 78.1
   },
   {
-   "t": "q gånger hastigheten v gånger B är lika med q gånger mathbb energin E",
-   "s": 78.89,
-   "e": 84.79
+   "t": "q gånger hastigheten v gånger B är lika med q gånger energin E",
+   "s": 78.1,
+   "e": 83.71
   },
   {
    "t": "Vi dividerar båda led med q.",
-   "s": 84.79,
-   "e": 97.11
+   "s": 83.71,
+   "e": 95.31
   },
   {
-   "t": "hastigheten v gånger B är lika med mathbb energin E",
-   "s": 84.79,
-   "e": 97.11
+   "t": "hastigheten v gånger B är lika med energin E",
+   "s": 83.71,
+   "e": 95.31
   },
   {
-   "t": "mathbb energin E är lika med spänningen U delat med avståndet d (från Fysik nivå 1) ger",
-   "s": 84.79,
-   "e": 97.11
+   "t": "energin E är lika med spänningen U delat med avståndet d (från Fysik nivå 1) ger",
+   "s": 83.71,
+   "e": 95.31
   },
   {
    "t": "hastigheten v gånger B är lika med spänningen U delat med avståndet d",
-   "s": 97.11,
-   "e": 103.04
+   "s": 95.31,
+   "e": 101.21
   },
   {
    "t": "Vi löser ut Hallspänningen U och får",
-   "s": 103.04,
-   "e": 106.71
+   "s": 101.21,
+   "e": 104.89
   },
   {
    "t": "spänningen U är lika med hastigheten v gånger avståndet d gånger B",
-   "s": 106.71,
-   "e": 112.84
+   "s": 104.89,
+   "e": 111.01
   },
   {
    "t": "Eftersom både v (elektronernas hastighet) och d är konstant, så beror Hallspänningen U direkt på den magnetiska flödestätheten B som då kan bestämmas.",
-   "s": 112.84,
-   "e": 123.4
+   "s": 111.01,
+   "e": 121.58
   },
   {
    "t": "Magnetfältsmätaren räknar alltså ut den magnetiska flödestätheten med formeln",
-   "s": 123.4,
-   "e": 129.2
+   "s": 121.58,
+   "e": 127.38
   },
   {
    "t": "B är lika med spänningen U delat med hastigheten v gånger avståndet d",
-   "s": 129.2,
-   "e": 135.1
+   "s": 127.38,
+   "e": 133.28
   }
  ]
 }

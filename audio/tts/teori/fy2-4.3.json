@@ -1,8 +1,8 @@
 {
  "id": "fy2-4.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "1a8070793523bdf29ac7ab286139e1e116729561",
- "dur": 473.49,
+ "hash": "c2d31dc2bed144895224034d6729644c161d64ae",
+ "dur": 473.72,
  "segments": [
   {
    "t": "Svartkroppsstrålning",
@@ -170,214 +170,214 @@
    "e": 174.3
   },
   {
-   "t": "våglängden lambda massan m accelerationen a x gånger periodtiden T är lika med 2,8978 gånger 10 upphöjt till minus 3 meter\\cdotK",
+   "t": "våglängden lambda massan m accelerationen a x gånger periodtiden T är lika med 2,8978 gånger 10 upphöjt till minus 3 meter\\cdot K",
    "s": 174.3,
-   "e": 185.64
+   "e": 185.75
   },
   {
    "t": "där",
-   "s": 185.64,
-   "e": 187.12
+   "s": 185.75,
+   "e": 187.24
   },
   {
    "t": "våglängden lambda massan m accelerationen a x är lika med våglängd med störst emittans/utstrålning (meter)",
-   "s": 187.12,
-   "e": 195.41
+   "s": 187.24,
+   "e": 195.53
   },
   {
    "t": "T är lika med temperatur (kelvin)",
-   "s": 195.41,
-   "e": 199.0
+   "s": 195.53,
+   "e": 199.11
   },
   {
    "t": "Emittansen hos en svart kropp beror också av föremålets temperatur enligt Stefan–Boltzmanns lag.",
-   "s": 199.0,
-   "e": 205.76
+   "s": 199.11,
+   "e": 205.88
   },
   {
    "t": "Stefan–Boltzmanns lag",
-   "s": 205.76,
-   "e": 208.71
+   "s": 205.88,
+   "e": 208.82
   },
   {
    "t": "kraftmomentet M är lika med sigma gånger periodtiden T upphöjt till 4",
-   "s": 208.71,
-   "e": 214.36
+   "s": 208.82,
+   "e": 214.47
   },
   {
    "t": "där",
-   "s": 214.36,
-   "e": 215.84
+   "s": 214.47,
+   "e": 215.95
   },
   {
    "t": "M är lika med emittans (W/m i kvadrat)",
-   "s": 215.84,
-   "e": 220.76
+   "s": 215.95,
+   "e": 220.88
   },
   {
    "t": "σ är lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m i kvadrat·K upphöjt till 4) (Stefan–Boltzmanns konstant)",
-   "s": 220.76,
-   "e": 231.3
+   "s": 220.88,
+   "e": 231.41
   },
   {
    "t": "T är lika med temperatur (kelvin)",
-   "s": 231.3,
-   "e": 234.93
+   "s": 231.41,
+   "e": 235.04
   },
   {
    "t": "Exempel 1 — Yttemperatur hos en exoplanet",
-   "s": 234.93,
-   "e": 239.15
+   "s": 235.04,
+   "e": 239.26
   },
   {
    "t": "Bestäm yttemperaturen hos en exoplanet som strålar med emittansen 1,5 kilowatt/m i kvadrat.",
-   "s": 239.15,
-   "e": 246.66
+   "s": 239.26,
+   "e": 246.78
   },
   {
    "t": "Anta att exoplaneten strålar som en svart kropp.",
-   "s": 246.66,
-   "e": 250.93
+   "s": 246.78,
+   "e": 251.04
   },
   {
    "t": "Svara i °C.",
-   "s": 250.93,
-   "e": 253.53
+   "s": 251.04,
+   "e": 253.64
   },
   {
    "t": "Vi ställer upp Stefan–Boltzmanns lag och löser ut temperaturen T.",
-   "s": 253.53,
-   "e": 266.57
+   "s": 253.64,
+   "e": 266.69
   },
   {
    "t": "kraftmomentet M är lika med sigma gånger periodtiden T upphöjt till 4 vilket är ekvivalent med att T är lika med 4:e roten ur M delat med sigma",
-   "s": 253.53,
-   "e": 266.57
+   "s": 253.64,
+   "e": 266.69
   },
   {
-   "t": "kraftmomentet M är lika med 1,5 kilowatt per kvadratmeter som är lika med 1 500 watt per kvadratmeter sigma som är lika med 5,67 gånger 10 upphöjt till minus 8 watt per (m^2\\cdotK^4)",
-   "s": 266.57,
-   "e": 282.91
+   "t": "kraftmomentet M är lika med 1,5 kilowatt per kvadratmeter som är lika med 1 500 watt per kvadratmeter sigma som är lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m^2 \\cdot K^4)",
+   "s": 266.69,
+   "e": 283.57
   },
   {
-   "t": "periodtiden T är lika med 4:e roten ur 1 500 delat med 5,67 gånger 10 upphöjt till minus 8 som är lika med 403,298 ldots kelvin som är ungefär lika med 403 kelvin som är ungefär lika med 403 minus 273 ^\\circC som är lika med 130 ^\\circC",
-   "s": 282.91,
-   "e": 306.36
+   "t": "periodtiden T är lika med 4:e roten ur 1 500 delat med 5,67 gånger 10 upphöjt till minus 8 som är lika med 403,298 kelvin som är ungefär lika med 403 kelvin som är ungefär lika med 403 minus 273 ^\\circ C som är lika med 130 ^\\circ C",
+   "s": 283.57,
+   "e": 309.31
   },
   {
    "t": "Svar: 130 grader Celsius",
-   "s": 306.36,
-   "e": 310.12
+   "s": 283.57,
+   "e": 309.31
   },
   {
    "t": "Exempel 2 — Solens maximala våglängd",
-   "s": 310.12,
-   "e": 313.94
+   "s": 309.31,
+   "e": 313.12
   },
   {
    "t": "Solen kan ses som en svart kropp.",
-   "s": 313.94,
-   "e": 317.21
+   "s": 313.12,
+   "e": 316.43
   },
   {
    "t": "Temperaturen på solens yta är ca 5 800 kelvin.",
-   "s": 317.33,
-   "e": 322.51
+   "s": 316.43,
+   "e": 323.18
   },
   {
    "t": "a) Vid vilken våglängd har solen sin maximala intensitet?",
-   "s": 322.46,
-   "e": 327.54
+   "s": 323.13,
+   "e": 328.22
   },
   {
    "t": "b) Vilken typ av strålning motsvarar det?",
-   "s": 327.54,
-   "e": 331.49
+   "s": 328.22,
+   "e": 332.15
   },
   {
    "t": "a) Vi ställer upp Wiens förskjutningslag och löser ut våglängden.",
-   "s": 331.49,
-   "e": 336.43
+   "s": 332.15,
+   "e": 337.09
   },
   {
    "t": "våglängden lambda massan m accelerationen a x gånger periodtiden T är lika med 2,8978 gånger 10 upphöjt till minus 3 vilket är ekvivalent med att lambda m a x är lika med 2,8978 gånger 10 upphöjt till minus 3 delat med T",
-   "s": 336.43,
-   "e": 355.39
+   "s": 337.09,
+   "e": 356.06
   },
   {
    "t": "periodtiden T är lika med 5 800 kelvin",
-   "s": 336.43,
-   "e": 355.39
+   "s": 337.09,
+   "e": 356.06
   },
   {
-   "t": "våglängden lambda massan m accelerationen a x är lika med 2,8978 gånger 10 upphöjt till minus 3 delat med 5 800 som är lika med 4,996 ldots gånger 10 upphöjt till minus 7 meter som är ungefär lika med 5,00 gånger 10 upphöjt till minus 7 meter som är lika med 500 nanometer",
-   "s": 355.39,
-   "e": 375.59
+   "t": "våglängden lambda massan m accelerationen a x är lika med 2,8978 gånger 10 upphöjt till minus 3 delat med 5 800 som är lika med 4,996 gånger 10 upphöjt till minus 7 meter som är ungefär lika med 5,00 gånger 10 upphöjt till minus 7 meter som är lika med 500 nanometer",
+   "s": 356.06,
+   "e": 375.87
   },
   {
    "t": "Svar: 500 nanometer",
-   "s": 375.59,
-   "e": 378.88
+   "s": 375.87,
+   "e": 379.15
   },
   {
    "t": "b) Vi läser av våglängden 500 nanometer i tabellen för det elektromagnetiska spektrumet (se avsnitt 4.1): 500 nanometer ligger på gränsen mellan blå (435–500 nanometer) och cyan (500–520 nanometer).",
-   "s": 378.88,
-   "e": 396.14
+   "s": 379.15,
+   "e": 396.37
   },
   {
    "t": "Svar: Blå/cyan (blågrönt ljus)",
-   "s": 396.14,
-   "e": 400.82
+   "s": 396.37,
+   "e": 401.04
   },
   {
    "t": "Solens färg",
-   "s": 400.82,
-   "e": 403.03
+   "s": 401.04,
+   "e": 403.25
   },
   {
    "t": "Solens maximala emittans sker alltså, enligt exemplet ovan, vid blågrönt ljus!",
-   "s": 403.03,
-   "e": 409.28
+   "s": 403.25,
+   "e": 409.5
   },
   {
    "t": "Varför ser solen då inte blågrön ut?",
-   "s": 409.28,
-   "e": 412.97
+   "s": 409.5,
+   "e": 413.19
   },
   {
    "t": "Jo, solen emitterar även våglängder kring blågrönt och dessa våglängder tillsammans bildar vit.",
-   "s": 412.97,
-   "e": 420.09
+   "s": 413.19,
+   "e": 420.32
   },
   {
    "t": "Varför ser solen då gul ut på himlen?",
-   "s": 420.09,
-   "e": 423.66
+   "s": 420.32,
+   "e": 423.88
   },
   {
    "t": "Det har att göra med hur solljuset bryts i vår atmosfär.",
-   "s": 423.66,
-   "e": 427.91
+   "s": 423.88,
+   "e": 428.13
   },
   {
    "t": "Den kan ju även se röd ut vid solnedgång när solljuset passerar en ännu större del av jordens atmosfär.",
-   "s": 427.91,
-   "e": 434.91
+   "s": 428.13,
+   "e": 435.13
   },
   {
    "t": "Men solen är alltså \"egentligen\" vit sedd utanför jordens atmosfär.",
-   "s": 434.91,
-   "e": 439.78
+   "s": 435.13,
+   "e": 440.0
   },
   {
    "t": "När solen står som högst upp på himlen ser den också mer vit ut.",
-   "s": 439.78,
-   "e": 444.38
+   "s": 440.0,
+   "e": 444.61
   },
   {
    "t": "Figur: tre bilder bredvid varandra. ekvation 1 Solen sedd från rymdstationen ISS — en bländande vit punkt mot rymdens svärta. ekvation 2 Solen högt över ett ökenlandskap — fortfarande nästan vit. ekvation 3 Tidsförlopp av månen som går ner över Maldiverna: månen ändrar färg från vit (högst upp) genom gul, orange och slutligen mörkröd (nära horisonten), eftersom ljuset passerar allt mer atmosfär.",
-   "s": 444.38,
-   "e": 473.49
+   "s": 444.61,
+   "e": 473.72
   }
  ]
 }

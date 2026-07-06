@@ -1,0 +1,308 @@
+{
+ "id": "ma1c-1.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1e53d836a1fe770187fadfc99a4f084c7c0dcdb6",
+ "dur": 361.92,
+ "segments": [
+  {
+   "t": "Multiplikation och division av bråk",
+   "s": 0.1,
+   "e": 3.69
+  },
+  {
+   "t": "Multiplikation med bråk",
+   "s": 3.64,
+   "e": 6.44
+  },
+  {
+   "t": "Vid multiplikation av",
+   "s": 6.44,
+   "e": 9.36
+  },
+  {
+   "t": "två bråk multipliceras täljarna med varandra och nämnarna med varandra",
+   "s": 9.36,
+   "e": 14.35
+  },
+  {
+   "t": "ett heltal och ett bråk multipliceras heltalet med täljaren.",
+   "s": 14.35,
+   "e": 19.2
+  },
+  {
+   "t": "Exempel 1 — Multiplikation",
+   "s": 19.2,
+   "e": 22.44
+  },
+  {
+   "t": "Beräkna. a) 8 delat med 3 gånger 7 delat med 2 b) 3 gånger 4 delat med 5",
+   "s": 22.44,
+   "e": 30.91
+  },
+  {
+   "t": "a) Täljare gånger täljare och nämnare gånger nämnare — förkorta gärna svaret:",
+   "s": 30.91,
+   "e": 49.25
+  },
+  {
+   "t": "8 delat med 3 gånger 7 delat med 2 är lika med 8 gånger 7 delat med 3 gånger 2 som är lika med 56 delat med 6 som är lika med 56 delat med 2 delat med 6 delat med 2 som är lika med 28 delat med 3",
+   "s": 30.91,
+   "e": 49.25
+  },
+  {
+   "t": "Svar: 28 delat med 3",
+   "s": 49.25,
+   "e": 52.64
+  },
+  {
+   "t": "b) Heltalet multipliceras med täljaren:",
+   "s": 52.64,
+   "e": 62.36
+  },
+  {
+   "t": "3 gånger 4 delat med 5 är lika med 3 gånger 4 delat med 5 som är lika med 12 delat med 5",
+   "s": 52.64,
+   "e": 62.36
+  },
+  {
+   "t": "Svar: 12 delat med 5",
+   "s": 62.36,
+   "e": 65.49
+  },
+  {
+   "t": "Multiplikation av bråk med stora tal",
+   "s": 65.49,
+   "e": 69.1
+  },
+  {
+   "t": "Vid vissa uträkningar blir talen i täljaren och/eller nämnaren stora, och då är det svårare att förkorta bråket korrekt.",
+   "s": 69.1,
+   "e": 77.11
+  },
+  {
+   "t": "Testa då att faktorisera täljarna och nämnarna och förkorta bråken innan du utför multiplikationen.",
+   "s": 77.11,
+   "e": 83.59
+  },
+  {
+   "t": "Exempel 2 — Faktorisera och förkorta först",
+   "s": 83.59,
+   "e": 87.54
+  },
+  {
+   "t": "Beräkna 7 delat med 36 gånger 6 delat med 21 genom att faktorisera täljarna och nämnarna och därefter förenkla.",
+   "s": 87.54,
+   "e": 95.7
+  },
+  {
+   "t": "7 delat med 36 gånger 6 delat med 21 är lika med 7 gånger 6 delat med 36 gånger 21 som är lika med 7 gånger 6 delat med 6 gånger 6 gånger 7 gånger 3",
+   "s": 95.7,
+   "e": 107.33
+  },
+  {
+   "t": "Vi kan nu förkorta med 7 och 6, eftersom de faktorerna finns i både täljare och nämnare.",
+   "s": 107.33,
+   "e": 113.66
+  },
+  {
+   "t": "OBS!",
+   "s": 113.66,
+   "e": 115.29
+  },
+  {
+   "t": "När 7 och 6 förkortas i täljaren får vi 1 kvar, eftersom 7 gånger 6 delat med 7 gånger 6 är lika med 1 :",
+   "s": 115.29,
+   "e": 130.18
+  },
+  {
+   "t": "7 gånger 6 delat med 6 gånger 6 gånger 7 gånger 3 är lika med 1 delat med 6 gånger 3 som är lika med 1 delat med 18",
+   "s": 115.29,
+   "e": 130.18
+  },
+  {
+   "t": "Svar: 1 delat med 18",
+   "s": 130.18,
+   "e": 133.41
+  },
+  {
+   "t": "Division med bråk",
+   "s": 133.41,
+   "e": 135.89
+  },
+  {
+   "t": "Division med bråk",
+   "s": 135.89,
+   "e": 138.31
+  },
+  {
+   "t": "Vid division med bråk så byter man ut det stora divisionstecknet mot multiplikation, samtidigt som man inverterar (byter plats på täljare och nämnare i) bråket i nämnaren.",
+   "s": 138.31,
+   "e": 149.09
+  },
+  {
+   "t": "Sedan beräknas det som vanligt.",
+   "s": 149.09,
+   "e": 152.24
+  },
+  {
+   "t": "Divisionstecknet kan ritas rakt eller snett:",
+   "s": 152.24,
+   "e": 162.06
+  },
+  {
+   "t": "a delat med b delat med c delat med d är lika med a delat med b delat med c delat med d",
+   "s": 152.24,
+   "e": 162.06
+  },
+  {
+   "t": "Bevis — Division med bråk",
+   "s": 162.06,
+   "e": 165.03
+  },
+  {
+   "t": "Vi bevisar regeln för division med bråk.",
+   "s": 165.03,
+   "e": 168.8
+  },
+  {
+   "t": "Anta att vi dividerar två godtyckliga bråk a delat med b och c delat med d .",
+   "s": 168.8,
+   "e": 175.0
+  },
+  {
+   "t": "För att få 1 i nämnaren förlänger vi bråket med inversen till bråket i nämnaren, dvs. med d delat med c :",
+   "s": 175.0,
+   "e": 206.79
+  },
+  {
+   "t": "a delat med b delat med c delat med d är lika med a delat med b gånger d delat med c delat med c delat med d gånger d delat med c som är lika med a delat med b gånger d delat med c delat med c gånger d delat med d gånger c som är lika med a delat med b gånger d delat med c delat med 1 som är lika med a delat med b gånger d delat med c",
+   "s": 175.0,
+   "e": 206.79
+  },
+  {
+   "t": "Alltså gäller a delat med b delat med c delat med d är lika med a delat med b gånger d delat med c , vsv. (vilket skulle visas).",
+   "s": 206.79,
+   "e": 218.31
+  },
+  {
+   "t": "Exempel 3 — Division",
+   "s": 218.31,
+   "e": 221.25
+  },
+  {
+   "t": "Beräkna. a) 3 delat med 4 delat med 2 delat med 5 b) 4 delat med 5 delat med 2 delat med 7 c) 5 delat med 3 delat med 4 d) 2 delat med 3 delat med 12",
+   "s": 221.25,
+   "e": 235.35
+  },
+  {
+   "t": "a) Byt division mot multiplikation och invertera bråket i nämnaren:",
+   "s": 235.35,
+   "e": 248.57
+  },
+  {
+   "t": "3 delat med 4 delat med 2 delat med 5 är lika med 3 delat med 4 gånger 5 delat med 2 som är lika med 15 delat med 8",
+   "s": 235.35,
+   "e": 248.57
+  },
+  {
+   "t": "Svar: 15 delat med 8",
+   "s": 248.57,
+   "e": 251.93
+  },
+  {
+   "t": "b) Samma regel med snett divisionstecken:",
+   "s": 251.93,
+   "e": 268.41
+  },
+  {
+   "t": "4 delat med 5 delat med 2 delat med 7 är lika med 4 delat med 5 gånger 7 delat med 2 som är lika med 28 delat med 10 som är lika med 28 delat med 2 delat med 10 delat med 2 som är lika med 14 delat med 5",
+   "s": 251.93,
+   "e": 268.41
+  },
+  {
+   "t": "Svar: 14 delat med 5",
+   "s": 268.41,
+   "e": 271.66
+  },
+  {
+   "t": "c) Här har vi enbart ett bråk i nämnaren, men samma regel gäller fortfarande.",
+   "s": 271.66,
+   "e": 277.69
+  },
+  {
+   "t": "En del tycker att det är lättare om man skriver om 5 som ett bråk, dvs. som 5 delat med 1 :",
+   "s": 277.69,
+   "e": 293.38
+  },
+  {
+   "t": "5 delat med 3 delat med 4 är lika med 5 delat med 1 delat med 3 delat med 4 som är lika med 5 delat med 1 gånger 4 delat med 3 som är lika med 20 delat med 3",
+   "s": 277.69,
+   "e": 293.38
+  },
+  {
+   "t": "Svar: 20 delat med 3",
+   "s": 293.38,
+   "e": 296.59
+  },
+  {
+   "t": "d) På liknande sätt som i c-uppgiften skriver vi om 12 som 12 delat med 1 och beräknar sedan som vanligt:",
+   "s": 296.59,
+   "e": 308.16
+  },
+  {
+   "t": "2 delat med 3 delat med 12 är lika med 2 delat med 3 delat med 12 delat med 1 som är lika med 2 delat med 3 gånger 1 delat med 12 som är lika med 2 delat med 36 som är lika med 2 delat med 2 delat med 36 delat med 2 som är lika med 1 delat med 18",
+   "s": 296.59,
+   "e": 320.68
+  },
+  {
+   "t": "Svar: 1 delat med 18",
+   "s": 320.63,
+   "e": 323.82
+  },
+  {
+   "t": "Bråkdel av något",
+   "s": 323.82,
+   "e": 326.39
+  },
+  {
+   "t": "Bråkdel av något",
+   "s": 326.39,
+   "e": 328.93
+  },
+  {
+   "t": "När vi ska beräkna en bråkdel av något så multiplicerar vi med bråkdelen.",
+   "s": 328.93,
+   "e": 334.33
+  },
+  {
+   "t": "Exempel 4 — Bråkdel av ett belopp",
+   "s": 334.33,
+   "e": 337.89
+  },
+  {
+   "t": "Hur mycket är 5 delat med 7 av 63 kronor?",
+   "s": 337.89,
+   "e": 342.12
+  },
+  {
+   "t": "5 delat med 7 gånger 63 är lika med 5 gånger 63 delat med 7",
+   "s": 342.12,
+   "e": 348.07
+  },
+  {
+   "t": "Vi förkortar med 7:",
+   "s": 348.07,
+   "e": 358.93
+  },
+  {
+   "t": "5 gånger 63 delat med 7 delat med 7 delat med 7 är lika med 5 gånger 9 delat med 1 som är lika med 5 gånger 9 som är lika med 45",
+   "s": 348.07,
+   "e": 358.93
+  },
+  {
+   "t": "Svar: 45 kronor",
+   "s": 358.93,
+   "e": 361.92
+  }
+ ]
+}

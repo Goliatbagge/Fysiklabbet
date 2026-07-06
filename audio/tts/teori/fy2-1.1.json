@@ -1,8 +1,8 @@
 {
  "id": "fy2-1.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "b3c4fe562ac0089aa65977b146aea3105bf40ee6",
- "dur": 347.62,
+ "hash": "1c193b1047a9cd105063873db238524e82055b67",
+ "dur": 346.68,
  "segments": [
   {
    "t": "Kraftmoment",
@@ -185,159 +185,159 @@
    "e": 178.34
   },
   {
-   "t": "kraften F är lika med 800 newton cosinus 45 grader som är lika med hävarmen l delat med 1,0 vilket är ekvivalent med att l är lika med 1,0 gånger cosinus 45 grader som är lika med 0,707 ldots meter",
+   "t": "kraften F är lika med 800 newton cosinus 45 grader som är lika med hävarmen l delat med 1,0 vilket är ekvivalent med att l är lika med 1,0 gånger cosinus 45 grader som är lika med 0,707 meter",
    "s": 178.34,
-   "e": 192.82
+   "e": 192.65
   },
   {
-   "t": "kraftmomentet M är lika med 800 gånger 0,707 ldots som är lika med 565,685 ldots Nm som är ungefär lika med 570 Nm som är lika med 0,57 kNm",
-   "s": 192.82,
-   "e": 206.65
+   "t": "kraftmomentet M är lika med 800 gånger 0,707 som är lika med 565,685 Nm som är ungefär lika med 570 Nm som är lika med 0,57 kNm",
+   "s": 192.65,
+   "e": 205.66
   },
   {
    "t": "Svar: 0,57 kNm",
-   "s": 206.65,
-   "e": 210.53
+   "s": 205.66,
+   "e": 209.53
   },
   {
    "t": "Momentjämvikt",
-   "s": 210.53,
-   "e": 212.88
+   "s": 209.53,
+   "e": 211.88
   },
   {
    "t": "När kraftmomentet moturs är lika stort som kraftmomentet medurs sker ingen vridning och då råder momentjämvikt.",
-   "s": 212.88,
-   "e": 220.59
+   "s": 211.88,
+   "e": 219.59
   },
   {
    "t": "Fysik i vardagen — Momentjämvikt",
-   "s": 220.59,
-   "e": 224.18
+   "s": 219.59,
+   "e": 223.18
   },
   {
    "t": "När vi gungar gungbräda blir det problem om den ena personen väger mer än den andra.",
-   "s": 224.18,
-   "e": 229.69
+   "s": 223.18,
+   "e": 228.69
   },
   {
    "t": "Den tyngre personen trycker ner brädan och den lättare fastnar uppe i luften.",
-   "s": 229.69,
-   "e": 234.62
+   "s": 228.69,
+   "e": 233.62
   },
   {
    "t": "Om den tyngre personen flyttar längre in på gungbrädan kommer båda till slut att vara i luften — momentjämvikt har uppnåtts!",
-   "s": 234.62,
-   "e": 241.71
+   "s": 233.62,
+   "e": 240.71
   },
   {
    "t": "Momentlagen",
-   "s": 241.71,
-   "e": 243.93
+   "s": 240.71,
+   "e": 242.93
   },
   {
    "t": "Vid momentjämvikt gäller",
-   "s": 243.93,
-   "e": 246.88
+   "s": 242.93,
+   "e": 245.88
   },
   {
    "t": "M ett är lika med M två",
-   "s": 246.88,
-   "e": 249.93
+   "s": 245.88,
+   "e": 248.93
   },
   {
    "t": "där",
-   "s": 249.93,
-   "e": 251.38
+   "s": 248.93,
+   "e": 250.38
   },
   {
    "t": "M ett är lika med kraftmomentet/kraftmomenten moturs",
-   "s": 251.38,
-   "e": 256.81
+   "s": 250.38,
+   "e": 255.81
   },
   {
    "t": "M två är lika med kraftmomentet/kraftmomenten medurs",
-   "s": 256.81,
-   "e": 262.15
+   "s": 255.81,
+   "e": 261.15
   },
   {
    "t": "Exempel 3 — Pappa och barn på gungbräda (E)",
-   "s": 262.15,
-   "e": 266.54
+   "s": 261.15,
+   "e": 265.54
   },
   {
    "t": "En pappa som väger 80 kilogram ska gunga gungbräda med sitt barn som väger 30 kilogram.",
-   "s": 266.54,
-   "e": 272.56
+   "s": 265.54,
+   "e": 271.56
   },
   {
    "t": "Barnet sitter 2,0 meter från vridningspunkten.",
-   "s": 272.56,
-   "e": 276.88
+   "s": 271.56,
+   "e": 275.88
   },
   {
    "t": "Hur långt från vridningspunkten ska pappa sitta för att de ska uppnå momentjämvikt?",
-   "s": 276.88,
-   "e": 282.3
+   "s": 275.88,
+   "e": 281.3
   },
   {
    "t": "Vid momentjämvikt gäller",
-   "s": 282.3,
-   "e": 285.34
+   "s": 281.3,
+   "e": 284.34
   },
   {
    "t": "M ett är lika med M två",
-   "s": 285.34,
-   "e": 288.3
+   "s": 284.34,
+   "e": 287.3
   },
   {
    "t": "Vi kallar pappans tyngd för F effekten P och barnets tyngd för F B .",
-   "s": 288.3,
-   "e": 293.43
+   "s": 287.3,
+   "e": 292.43
   },
   {
    "t": "Detta ger",
-   "s": 293.43,
-   "e": 295.4
+   "s": 292.43,
+   "e": 294.4
   },
   {
    "t": "F effekten P gånger l P är lika med F B gånger l B",
-   "s": 295.4,
-   "e": 304.1
+   "s": 294.4,
+   "e": 303.12
   },
   {
    "t": "Tyngdkraften kraften F är lika med massan m gånger tyngdfaktorn g ger",
-   "s": 295.4,
-   "e": 304.1
+   "s": 294.4,
+   "e": 303.12
   },
   {
    "t": "m effekten P gånger tyngdfaktorn g gånger l P är lika med m B gånger g gånger l B",
-   "s": 304.1,
-   "e": 310.73
+   "s": 303.12,
+   "e": 309.8
   },
   {
    "t": "Vi dividerar båda led med g och löser sedan ut pappans hävarm l effekten P .",
-   "s": 310.73,
-   "e": 318.37
+   "s": 309.8,
+   "e": 317.36
   },
   {
    "t": "m effekten P gånger l P är lika med m B gånger l B vilket är ekvivalent med att l P är lika med m B gånger l B delat med m P",
-   "s": 318.31,
-   "e": 333.39
+   "s": 317.31,
+   "e": 332.45
   },
   {
    "t": "m B är lika med 30 kilogram l B som är lika med 2,0 meter m effekten P som är lika med 80 kilogram",
-   "s": 318.31,
-   "e": 333.39
+   "s": 317.31,
+   "e": 332.45
   },
   {
    "t": "l effekten P är lika med 30 gånger 2,0 delat med 80 som är lika med 60 delat med 80 som är lika med 0,75 meter",
-   "s": 333.39,
-   "e": 342.33
+   "s": 332.45,
+   "e": 341.39
   },
   {
    "t": "Svar: Pappa ska sitta 0,75 meter från vridningspunkten.",
-   "s": 342.33,
-   "e": 347.62
+   "s": 341.39,
+   "e": 346.68
   }
  ]
 }

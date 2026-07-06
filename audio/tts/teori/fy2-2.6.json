@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "a83159d6ccce5789b3ba8d9232d9d3a3a1e51fca",
- "dur": 175.86,
+ "hash": "212330c4a80f727e105e2fd8b13b4221bd6f16d8",
+ "dur": 175.56,
  "segments": [
   {
    "t": "Resonans",
@@ -175,14 +175,14 @@
    "e": 163.09
   },
   {
-   "t": "frekvensen f är lika med 1 delat med 0,0122 som är lika med 81,967 ldots hertz som är ungefär lika med 82 hertz",
+   "t": "frekvensen f är lika med 1 delat med 0,0122 som är lika med 81,967 hertz som är ungefär lika med 82 hertz",
    "s": 163.09,
-   "e": 172.94
+   "e": 172.64
   },
   {
    "t": "Svar: 82 hertz",
-   "s": 172.94,
-   "e": 175.86
+   "s": 172.64,
+   "e": 175.56
   }
  ]
 }

@@ -1,0 +1,403 @@
+{
+ "id": "ma1c-1.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "99ed9701da1eb71369f151d0815e7911d70467b9",
+ "dur": 408.72,
+ "segments": [
+  {
+   "t": "Negativa exponenter och exponenten noll",
+   "s": 0.1,
+   "e": 3.92
+  },
+  {
+   "t": "Exponenten noll",
+   "s": 3.88,
+   "e": 6.11
+  },
+  {
+   "t": "7 i kubik betyder att 7 ska multipliceras med sig själv 3 gånger, dvs. 7 i kubik är lika med 7 gånger 7 gånger 7 .",
+   "s": 6.11,
+   "e": 14.7
+  },
+  {
+   "t": "Men hur ska vi tolka exponenten noll, t.ex. 7 upphöjt till 0 ?",
+   "s": 14.7,
+   "e": 19.99
+  },
+  {
+   "t": "Undersökning — Tolkning av exponenten noll",
+   "s": 19.99,
+   "e": 23.89
+  },
+  {
+   "t": "För att undersöka det så studerar vi t.ex. kvoten 7 upphöjt till 5 delat med 7 upphöjt till 5 och beräknar den på två sätt.",
+   "s": 23.89,
+   "e": 32.02
+  },
+  {
+   "t": "Med potenslagarna:",
+   "s": 32.02,
+   "e": 40.95
+  },
+  {
+   "t": "7 upphöjt till 5 delat med 7 upphöjt till 5 är lika med 7 upphöjt till 5 minus 5 som är lika med 7 upphöjt till 0",
+   "s": 32.02,
+   "e": 40.95
+  },
+  {
+   "t": "Lika stora tal divideras:",
+   "s": 40.95,
+   "e": 47.66
+  },
+  {
+   "t": "7 upphöjt till 5 delat med 7 upphöjt till 5 är lika med 1",
+   "s": 40.95,
+   "e": 47.66
+  },
+  {
+   "t": "Båda sätt är korrekta.",
+   "s": 47.66,
+   "e": 50.35
+  },
+  {
+   "t": "Vi ser alltså att 7 upphöjt till 0 är lika med 1 .",
+   "s": 50.35,
+   "e": 54.58
+  },
+  {
+   "t": "Detta gäller för alla reella tal.",
+   "s": 54.58,
+   "e": 57.65
+  },
+  {
+   "t": "Enda undantaget är 0, eftersom det skulle motsvara en division med 0.",
+   "s": 57.65,
+   "e": 63.08
+  },
+  {
+   "t": "Till exempel: 0 upphöjt till 0 är lika med 0 upphöjt till 5 delat med 0 upphöjt till 5 som är lika med 0 delat med 0 , som inte är definierat.",
+   "s": 63.08,
+   "e": 72.64
+  },
+  {
+   "t": "Exponenten noll",
+   "s": 72.64,
+   "e": 74.88
+  },
+  {
+   "t": "a upphöjt till 0 är lika med 1, där a är inte lika med 0",
+   "s": 74.88,
+   "e": 79.53
+  },
+  {
+   "t": "Varning!",
+   "s": 79.53,
+   "e": 81.4
+  },
+  {
+   "t": "7 upphöjt till 0 är inte lika med 0 — värdet är 1, inte 0.",
+   "s": 81.4,
+   "e": 86.42
+  },
+  {
+   "t": "Exempel 1 — Exponenten noll",
+   "s": 86.42,
+   "e": 89.78
+  },
+  {
+   "t": "Beräkna. a) 25 upphöjt till 0 b) 4 upphöjt till 0 plus parentesen minus 7 slut parentes upphöjt till 0",
+   "s": 89.78,
+   "e": 99.74
+  },
+  {
+   "t": "a) Varje tal (utom 0) upphöjt till 0 är 1:",
+   "s": 99.74,
+   "e": 107.15
+  },
+  {
+   "t": "25 upphöjt till 0 är lika med 1",
+   "s": 99.74,
+   "e": 107.15
+  },
+  {
+   "t": "Svar: 1",
+   "s": 107.15,
+   "e": 119.2
+  },
+  {
+   "t": "b) Båda termerna är potenser med exponenten 0:",
+   "s": 107.15,
+   "e": 119.2
+  },
+  {
+   "t": "4 upphöjt till 0 plus parentesen minus 7 slut parentes upphöjt till 0 är lika med 1 plus 1 som är lika med 2",
+   "s": 107.15,
+   "e": 119.2
+  },
+  {
+   "t": "Svar: 2",
+   "s": 119.2,
+   "e": 123.01
+  },
+  {
+   "t": "Negativa exponenter",
+   "s": 119.2,
+   "e": 123.01
+  },
+  {
+   "t": "Hur ska vi tolka negativa exponenter, t.ex. 2 upphöjt till minus 3 ?",
+   "s": 123.01,
+   "e": 128.86
+  },
+  {
+   "t": "Vi undersöker!",
+   "s": 128.86,
+   "e": 131.22
+  },
+  {
+   "t": "Undersökning — Tolkning av negativa exponenter",
+   "s": 131.22,
+   "e": 135.36
+  },
+  {
+   "t": "På motsvarande sätt som för exponenten noll, så undersöker vi tolkningen av negativa tal genom att beräkna t.ex. kvoten 2 i kvadrat delat med 2 upphöjt till 5 på två olika sätt.",
+   "s": 135.36,
+   "e": 146.81
+  },
+  {
+   "t": "Med potenslagarna:",
+   "s": 146.81,
+   "e": 156.29
+  },
+  {
+   "t": "2 i kvadrat delat med 2 upphöjt till 5 är lika med 2 upphöjt till 2 minus 5 som är lika med 2 upphöjt till minus 3",
+   "s": 146.81,
+   "e": 156.29
+  },
+  {
+   "t": "Med förkortning av bråk:",
+   "s": 156.29,
+   "e": 170.53
+  },
+  {
+   "t": "2 i kvadrat delat med 2 upphöjt till 5 är lika med 2 gånger 2 delat med 2 gånger 2 gånger 2 gånger 2 gånger 2 som är lika med 1 delat med 2 gånger 2 gånger 2 som är lika med 1 delat med 2 i kubik",
+   "s": 156.29,
+   "e": 170.53
+  },
+  {
+   "t": "Båda sätt är korrekta.",
+   "s": 170.53,
+   "e": 173.24
+  },
+  {
+   "t": "Vi ser alltså att 2 upphöjt till minus 3 är lika med 1 delat med 2 i kubik .",
+   "s": 173.24,
+   "e": 178.88
+  },
+  {
+   "t": "Vi kan upprepa samma resonemang och visa att t.ex. 3 upphöjt till minus 7 är lika med 1 delat med 3 upphöjt till 7 och 5 upphöjt till minus 4 är lika med 1 delat med 5 upphöjt till 4 .",
+   "s": 178.88,
+   "e": 190.1
+  },
+  {
+   "t": "Slutsats: tal upphöjt till negativa tal kan skrivas som \"1 dividerat med samma tal, men utan minustecknet framför exponenten\".",
+   "s": 190.1,
+   "e": 199.4
+  },
+  {
+   "t": "Negativa exponenter",
+   "s": 199.4,
+   "e": 202.09
+  },
+  {
+   "t": "a upphöjt till minus n är lika med 1 delat med a upphöjt till n, där a är inte lika med 0",
+   "s": 202.09,
+   "e": 208.31
+  },
+  {
+   "t": "Exempel 2 — Negativa exponenter",
+   "s": 208.31,
+   "e": 211.9
+  },
+  {
+   "t": "Beräkna utan räknare. a) 4 upphöjt till minus 2 b) 5 upphöjt till minus 1",
+   "s": 211.9,
+   "e": 220.12
+  },
+  {
+   "t": "a) Negativ exponent betyder \"1 delat med potensen utan minustecken\":",
+   "s": 220.12,
+   "e": 231.32
+  },
+  {
+   "t": "4 upphöjt till minus 2 är lika med 1 delat med 4 i kvadrat som är lika med 1 delat med 16",
+   "s": 220.12,
+   "e": 231.32
+  },
+  {
+   "t": "Svar: 1 delat med 16",
+   "s": 231.32,
+   "e": 234.59
+  },
+  {
+   "t": "b) På samma sätt:",
+   "s": 234.59,
+   "e": 242.81
+  },
+  {
+   "t": "5 upphöjt till minus 1 är lika med 1 delat med 5 upphöjt till 1 som är lika med 1 delat med 5",
+   "s": 234.59,
+   "e": 242.81
+  },
+  {
+   "t": "Svar: 1 delat med 5",
+   "s": 242.81,
+   "e": 245.85
+  },
+  {
+   "t": "Exempel 3 — Skriv i potensform",
+   "s": 245.85,
+   "e": 249.4
+  },
+  {
+   "t": "Skriv 1 delat med 3 upphöjt till 5 i potensform.",
+   "s": 249.4,
+   "e": 253.84
+  },
+  {
+   "t": "Vi ska skriva 1 delat med 3 upphöjt till 5 som en potens.",
+   "s": 253.84,
+   "e": 258.7
+  },
+  {
+   "t": "Eftersom 3 upphöjt till minus 5 är lika med 1 delat med 3 upphöjt till 5 måste givetvis det omvända gälla.",
+   "s": 258.7,
+   "e": 265.98
+  },
+  {
+   "t": "Så",
+   "s": 265.98,
+   "e": 267.46
+  },
+  {
+   "t": "1 delat med 3 upphöjt till 5 är lika med 3 upphöjt till minus 5",
+   "s": 267.46,
+   "e": 272.65
+  },
+  {
+   "t": "Svar: 3 upphöjt till minus 5",
+   "s": 272.65,
+   "e": 276.19
+  },
+  {
+   "t": "Exempel 4 — Flytta upp nämnaren",
+   "s": 276.19,
+   "e": 279.61
+  },
+  {
+   "t": "Skriv 5 delat med x som en potens med basen x .",
+   "s": 279.61,
+   "e": 284.14
+  },
+  {
+   "t": "Ett alternativt sätt att tänka när vi ska skriva om bråk som potenser är att \"flytta upp\" nämnaren till täljaren.",
+   "s": 284.14,
+   "e": 290.71
+  },
+  {
+   "t": "Samtidigt som vi gör det ska vi byta tecken på exponenten, så",
+   "s": 290.71,
+   "e": 295.56
+  },
+  {
+   "t": "5 delat med x är lika med 5 delat med x upphöjt till 1 som är lika med 5 x upphöjt till minus 1",
+   "s": 295.56,
+   "e": 302.99
+  },
+  {
+   "t": "Svar: 5 x upphöjt till minus 1",
+   "s": 302.99,
+   "e": 306.9
+  },
+  {
+   "t": "Upphöja bråk till −1",
+   "s": 306.9,
+   "e": 309.56
+  },
+  {
+   "t": "Upphöja bråk till −1",
+   "s": 309.56,
+   "e": 312.18
+  },
+  {
+   "t": "Att upphöja bråk till (−1) är samma sak som att invertera bråket.",
+   "s": 312.18,
+   "e": 319.12
+  },
+  {
+   "t": "Bevis — Upphöja bråk till (−1) är samma sak som bråkets invers",
+   "s": 319.07,
+   "e": 324.19
+  },
+  {
+   "t": "Vi studerar bråket parentesen a delat med b slut parentes upphöjt till minus 1 .",
+   "s": 324.19,
+   "e": 330.7
+  },
+  {
+   "t": "Enligt reglerna för negativa exponenter och division av bråk gäller",
+   "s": 330.7,
+   "e": 335.64
+  },
+  {
+   "t": "parentesen a delat med b slut parentes upphöjt till minus 1 är lika med 1 delat med parentesen a delat med b slut parentes upphöjt till 1 som är lika med 1 delat med a delat med b som är lika med 1 gånger b delat med a som är lika med b delat med a",
+   "s": 335.64,
+   "e": 356.96
+  },
+  {
+   "t": "dvs. parentesen a delat med b slut parentes upphöjt till minus 1 är lika med b delat med a , vsv.",
+   "s": 335.64,
+   "e": 356.96
+  },
+  {
+   "t": "Exempel 5 — Bråk med negativa exponenter",
+   "s": 356.96,
+   "e": 361.02
+  },
+  {
+   "t": "Beräkna. a) parentesen 3 delat med 4 slut parentes upphöjt till minus 1 b) parentesen 4 delat med 5 slut parentes upphöjt till minus 2",
+   "s": 361.02,
+   "e": 372.87
+  },
+  {
+   "t": "a) Att upphöja till −1 är samma sak som att invertera bråket:",
+   "s": 372.87,
+   "e": 383.49
+  },
+  {
+   "t": "parentesen 3 delat med 4 slut parentes upphöjt till minus 1 är lika med 4 delat med 3",
+   "s": 372.87,
+   "e": 383.49
+  },
+  {
+   "t": "Svar: 4 delat med 3",
+   "s": 383.49,
+   "e": 386.61
+  },
+  {
+   "t": "b) Invertera bråket och byt tecken på exponenten — sedan är det en vanlig potens:",
+   "s": 386.61,
+   "e": 405.05
+  },
+  {
+   "t": "parentesen 4 delat med 5 slut parentes upphöjt till minus 2 är lika med parentesen 5 delat med 4 slut parentes i kvadrat som är lika med 5 i kvadrat delat med 4 i kvadrat som är lika med 25 delat med 16",
+   "s": 386.61,
+   "e": 405.05
+  },
+  {
+   "t": "Svar: 25 delat med 16",
+   "s": 405.05,
+   "e": 408.72
+  }
+ ]
+}

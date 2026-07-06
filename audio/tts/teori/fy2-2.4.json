@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "4e93720710b80d82d191f15d65a7cf48869cce55",
- "dur": 290.55,
+ "hash": "0e814b73fe301cdbed793fa027cb321ba45ef1b3",
+ "dur": 289.18,
  "segments": [
   {
    "t": "Svängningstid i fjäder",
@@ -182,87 +182,87 @@
   {
    "t": "Med Hookes lag:",
    "s": 166.62,
-   "e": 175.68
+   "e": 175.66
   },
   {
    "t": "kraften F är lika med k gånger delta hävarmen l vilket är ekvivalent med att k är lika med F delat med delta l",
    "s": 166.62,
-   "e": 175.68
+   "e": 175.66
   },
   {
    "t": "kraften F är lika med massan m gånger tyngdfaktorn g som är lika med 0,100 gånger 9,82 som är lika med 0,982 newton delta hävarmen l som är lika med 9,0 centimeter som är lika med 0,090 meter",
-   "s": 175.68,
-   "e": 190.57
+   "s": 175.66,
+   "e": 190.55
   },
   {
-   "t": "k är lika med 0,982 delat med 0,090 som är lika med 10,911 ldots newton per meter",
-   "s": 190.57,
-   "e": 199.18
+   "t": "k är lika med 0,982 delat med 0,090 som är lika med 10,911 newton per meter",
+   "s": 190.55,
+   "e": 198.96
   },
   {
-   "t": "Insättning av massan m är lika med 0,100 kilogram och k är lika med 10,911 ldots N/m i ekvation 1 ger",
-   "s": 199.18,
-   "e": 208.54
+   "t": "Insättning av massan m är lika med 0,100 kilogram och k är lika med 10,911 newton/m i ekvation 1 ger",
+   "s": 198.96,
+   "e": 208.36
   },
   {
-   "t": "periodtiden T är lika med 2 pi roten ur 0,100 delat med 10,911 ldots som är lika med 0,601 ldots sekund som är ungefär lika med 0,60 sekund",
-   "s": 208.54,
-   "e": 220.76
+   "t": "periodtiden T är lika med 2 pi roten ur 0,100 delat med 10,911 som är lika med 0,601 sekund som är ungefär lika med 0,60 sekund",
+   "s": 208.36,
+   "e": 219.8
   },
   {
    "t": "Svar: 0,60 sekunder",
-   "s": 220.76,
-   "e": 224.4
+   "s": 219.8,
+   "e": 223.44
   },
   {
    "t": "Exempel 2 — Vilken massa ger önskad period?",
-   "s": 224.4,
-   "e": 228.35
+   "s": 223.44,
+   "e": 227.38
   },
   {
    "t": "En fjäder har fjäderkonstanten 0,14 kilonewton/m.",
-   "s": 228.35,
-   "e": 233.79
+   "s": 227.38,
+   "e": 232.81
   },
   {
    "t": "Hur stor massa ska den belastas med för att svängningstiden ska bli 0,20 sekunder?",
-   "s": 233.79,
-   "e": 239.72
+   "s": 232.81,
+   "e": 238.75
   },
   {
    "t": "Vi ställer upp formeln för perioden och löser ut massan m.",
-   "s": 239.72,
-   "e": 247.75
+   "s": 238.75,
+   "e": 246.78
   },
   {
    "t": "periodtiden T är lika med 2 pi roten ur massan m delat med k",
-   "s": 239.72,
-   "e": 247.75
+   "s": 238.75,
+   "e": 246.78
   },
   {
    "t": "Vi kvadrerar båda led för att få bort rottecknet och löser ut m.",
-   "s": 247.75,
-   "e": 262.16
+   "s": 246.78,
+   "e": 261.2
   },
   {
    "t": "periodtiden T i kvadrat är lika med 4 pi i kvadrat gånger massan m delat med k vilket är ekvivalent med att m är lika med T i kvadrat gånger k delat med 4 pi i kvadrat",
-   "s": 247.75,
-   "e": 262.16
+   "s": 246.78,
+   "e": 261.2
   },
   {
    "t": "periodtiden T är lika med 0,20 sekund k som är lika med 0,14 kilonewton per meter som är lika med 140 newton per meter",
-   "s": 262.16,
-   "e": 271.52
+   "s": 261.2,
+   "e": 270.56
   },
   {
-   "t": "massan m är lika med 0,20 i kvadrat gånger 140 delat med 4 pi i kvadrat som är lika med 0,141 ldots kilogram som är ungefär lika med 0,14 kilogram som är lika med 140 gram",
-   "s": 271.52,
-   "e": 285.43
+   "t": "massan m är lika med 0,20 i kvadrat gånger 140 delat med 4 pi i kvadrat som är lika med 0,141 kilogram som är ungefär lika med 0,14 kilogram som är lika med 140 gram",
+   "s": 270.56,
+   "e": 284.05
   },
   {
    "t": "Svar: 0,14 kilogram (140 gram)",
-   "s": 285.43,
-   "e": 290.55
+   "s": 284.05,
+   "e": 289.18
   }
  ]
 }

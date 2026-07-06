@@ -1,0 +1,158 @@
+{
+ "id": "ma1c-6.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5dd14466a7b332683e154f8574282b601176ca89",
+ "dur": 171.55,
+ "segments": [
+  {
+   "t": "Bestämma sträckor och vinklar i koordinatsystem",
+   "s": 0.1,
+   "e": 4.04
+  },
+  {
+   "t": "Kom ihåg: Om två sidor är kända i en rätvinklig triangel kan vi bestämma den tredje med Pythagoras sats.",
+   "s": 3.99,
+   "e": 11.21
+  },
+  {
+   "t": "Pythagoras sats",
+   "s": 11.21,
+   "e": 13.82
+  },
+  {
+   "t": "a i kvadrat plus b i kvadrat är lika med c i kvadrat",
+   "s": 13.82,
+   "e": 18.79
+  },
+  {
+   "t": "eller",
+   "s": 18.79,
+   "e": 20.39
+  },
+  {
+   "t": "katet i kvadrat plus katet i kvadrat är lika med hypotenusa i kvadrat",
+   "s": 20.39,
+   "e": 26.16
+  },
+  {
+   "t": "Om vi ska bestämma en sträcka eller vinkel mellan två punkter i ett koordinatsystem, så bildar vi en rätvinklig triangel med hörn i två av punkterna.",
+   "s": 26.16,
+   "e": 35.29
+  },
+  {
+   "t": "Sträckan motsvarar hypotenusan som beräknas med Pythagoras sats.",
+   "s": 35.29,
+   "e": 40.64
+  },
+  {
+   "t": "Vinkeln beräknas med trigonometri.",
+   "s": 40.64,
+   "e": 44.0
+  },
+  {
+   "t": "Exempel 1 — Sträcka och vinkel i koordinatsystemet",
+   "s": 44.0,
+   "e": 48.54
+  },
+  {
+   "t": "En sträcka dras mellan punkterna (−2, 1) och (2, 4).",
+   "s": 48.54,
+   "e": 54.3
+  },
+  {
+   "t": "Bestäm. a) sträckans längd b) vinkeln mellan sträckan och x-axeln.",
+   "s": 54.3,
+   "e": 61.38
+  },
+  {
+   "t": "a) Vi börjar med att rita upp punkterna i ett koordinatsystem och drar sträckan mellan dem:",
+   "s": 61.38,
+   "e": 75.38
+  },
+  {
+   "t": "Vi bildar nu en rätvinklig triangel enligt figuren nedan:",
+   "s": 61.38,
+   "e": 75.38
+  },
+  {
+   "t": "Vi tittar på skalan och ser att varje ruta motsvarar 1 längdenhet (längdenhet).",
+   "s": 61.38,
+   "e": 75.38
+  },
+  {
+   "t": "Vi räknar rutor och ser att den ena kateten (basen) är 4 längdenheter och den andra kateten (höjden) är 3 längdenheter Vi bestämmer nu sträckan c med Pythagoras sats, c i kvadrat är lika med a i kvadrat plus b i kvadrat .",
+   "s": 75.38,
+   "e": 90.14
+  },
+  {
+   "t": "Insättning av a är lika med 4 och b är lika med 3 ger",
+   "s": 90.14,
+   "e": 95.14
+  },
+  {
+   "t": "c i kvadrat är lika med 4 i kvadrat plus 3 i kvadrat",
+   "s": 95.14,
+   "e": 100.17
+  },
+  {
+   "t": "c i kvadrat är lika med 16 plus 9",
+   "s": 100.17,
+   "e": 104.09
+  },
+  {
+   "t": "c i kvadrat är lika med 25",
+   "s": 104.09,
+   "e": 107.5
+  },
+  {
+   "t": "c är lika med plus minus roten ur 25 som är lika med plus minus 5",
+   "s": 107.5,
+   "e": 113.09
+  },
+  {
+   "t": "Eftersom en sträcka inte kan vara negativ bortser vi från den negativa lösningen.",
+   "s": 113.09,
+   "e": 118.71
+  },
+  {
+   "t": "Svar: 5 längdenheter",
+   "s": 118.71,
+   "e": 121.91
+  },
+  {
+   "t": "b) Vi studerar återigen den rätvinkliga triangeln och markerar vinkeln v mellan sträckan och x-axeln (eller en valfri vågrät linje, enklast att välja triangelns bas):",
+   "s": 121.91,
+   "e": 139.55
+  },
+  {
+   "t": "Vi har den motstående kateten (3 längdenheter) och den närliggande kateten (4 längdenheter) till vinkeln v .",
+   "s": 121.91,
+   "e": 139.55
+  },
+  {
+   "t": "Vi kan då beräkna vinkeln med tangens eftersom tan v är lika med motstående katet/närliggande katet.",
+   "s": 139.55,
+   "e": 146.9
+  },
+  {
+   "t": "Insättning av motstående katet är lika med 3 och närliggande katet är lika med 4 ger",
+   "s": 146.9,
+   "e": 153.22
+  },
+  {
+   "t": "tangens v är lika med 3 delat med 4",
+   "s": 153.22,
+   "e": 156.97
+  },
+  {
+   "t": "v är lika med tangens upphöjt till minus 1 parentesen 3 delat med 4 slut parentes som är lika med 36,869 grader som är ungefär lika med 37 grader",
+   "s": 156.97,
+   "e": 168.53
+  },
+  {
+   "t": "Svar: 37 grader",
+   "s": 168.53,
+   "e": 171.55
+  }
+ ]
+}

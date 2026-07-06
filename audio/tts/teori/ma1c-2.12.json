@@ -1,0 +1,188 @@
+{
+ "id": "ma1c-2.12",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a24a5f4759450fd328132403e87f8744df82e3f8",
+ "dur": 189.91,
+ "segments": [
+  {
+   "t": "Använda formler",
+   "s": 0.1,
+   "e": 2.35
+  },
+  {
+   "t": "Något som kan mätas kallas storhet.",
+   "s": 2.3,
+   "e": 5.92
+  },
+  {
+   "t": "Längd, tid, vikt och hastighet är exempel på storheter.",
+   "s": 5.92,
+   "e": 10.9
+  },
+  {
+   "t": "En ekvation som beskriver ett samband mellan olika storheter kallas formel och fungerar som hjälpmedel för att lösa problem.",
+   "s": 10.9,
+   "e": 18.46
+  },
+  {
+   "t": "Exempel 1 — Hastighetsformeln",
+   "s": 18.46,
+   "e": 21.7
+  },
+  {
+   "t": "Formeln för att beräkna hastigheten v utifrån hur lång tid t det tar att färdas en viss sträcka s är v är lika med s delat med t .",
+   "s": 21.7,
+   "e": 29.85
+  },
+  {
+   "t": "Lös ut t och beräkna hur lång tid det tar att åka 35 mil med medelhastigheten 70 kilometer i timmen.",
+   "s": 29.85,
+   "e": 37.12
+  },
+  {
+   "t": "Vi börjar med att lösa ut t från formeln:",
+   "s": 37.12,
+   "e": 48.2
+  },
+  {
+   "t": "v är lika med s delat med t vilket är ekvivalent med att s är lika med v gånger t vilket är ekvivalent med att t är lika med s delat med v",
+   "s": 37.12,
+   "e": 48.2
+  },
+  {
+   "t": "Vi skriver sedan upp de värden vi har.",
+   "s": 48.2,
+   "e": 51.52
+  },
+  {
+   "t": "OBS!",
+   "s": 51.52,
+   "e": 53.1
+  },
+  {
+   "t": "Eftersom hastigheten är angiven i enheten km/h är det viktigt att vi anger sträckan i km och tiden i timmar:",
+   "s": 53.1,
+   "e": 67.4
+  },
+  {
+   "t": "s är lika med 35 mil som är lika med 350 kilometer v som är lika med 70 kilometer per timme.",
+   "s": 53.1,
+   "e": 67.4
+  },
+  {
+   "t": "Insättning av värdena i formeln ger",
+   "s": 67.4,
+   "e": 70.86
+  },
+  {
+   "t": "t är lika med s delat med v som är lika med 350 delat med 70 som är lika med 5 timmar",
+   "s": 70.86,
+   "e": 77.84
+  },
+  {
+   "t": "Svar: 5 timmar",
+   "s": 77.84,
+   "e": 80.53
+  },
+  {
+   "t": "Exempel 2 — Hyrbilen",
+   "s": 80.53,
+   "e": 83.47
+  },
+  {
+   "t": "Den totala kostnaden H kr för att hyra en bil under ett år är en fast kostnad på 21 000 kronor och sedan en rörlig kostnad på 2,5 kronor/km.",
+   "s": 83.47,
+   "e": 93.99
+  },
+  {
+   "t": "Formeln för den totala kostnaden om man kör m kilometer är då H är lika med 21 000 plus 2,5 meter .. a) Vad blir kostnaden för bilen om man kör 2 000 mil under året?. b) Hur långt kan du köra för 30 000 kronor?",
+   "s": 93.99,
+   "e": 111.69
+  },
+  {
+   "t": "a) Enheterna är viktiga!",
+   "s": 111.69,
+   "e": 114.72
+  },
+  {
+   "t": "Observera att m står för sträckan i kilometer.",
+   "s": 114.72,
+   "e": 118.96
+  },
+  {
+   "t": "Sträckan 2 000 mil motsvarar 20 000 kilometer.",
+   "s": 118.96,
+   "e": 123.74
+  },
+  {
+   "t": "Det betyder att m är lika med 20 000 .",
+   "s": 123.74,
+   "e": 127.62
+  },
+  {
+   "t": "Insättning av m är lika med 20 000 i formeln ger",
+   "s": 127.62,
+   "e": 132.03
+  },
+  {
+   "t": "H är lika med 21 000 plus 2,5 gånger 20 000 som är lika med 21 000 plus 50 000 som är lika med 71 000 kronor",
+   "s": 132.03,
+   "e": 141.43
+  },
+  {
+   "t": "Svar: 71 000 kronor",
+   "s": 141.43,
+   "e": 144.81
+  },
+  {
+   "t": "b) Den totala kostnaden motsvarar 30 000 kronor.",
+   "s": 144.81,
+   "e": 149.61
+  },
+  {
+   "t": "Insättning av H är lika med 30 000 i formeln ger",
+   "s": 149.61,
+   "e": 154.12
+  },
+  {
+   "t": "30 000 är lika med 21 000 plus 2,5 meter",
+   "s": 154.12,
+   "e": 159.21
+  },
+  {
+   "t": "Subtraherar 21 000 från båda led:",
+   "s": 159.21,
+   "e": 165.55
+  },
+  {
+   "t": "9 000 är lika med 2,5 meter",
+   "s": 159.21,
+   "e": 165.55
+  },
+  {
+   "t": "Dividerar med 2,5 i båda led:",
+   "s": 165.55,
+   "e": 174.07
+  },
+  {
+   "t": "9 000 delat med 2,5 är lika med 2,5 meter delat med 2,5",
+   "s": 165.55,
+   "e": 174.07
+  },
+  {
+   "t": "m är lika med 3 600",
+   "s": 174.07,
+   "e": 177.54
+  },
+  {
+   "t": "Sträckan blir 3 600 kilometer, vilket motsvarar 360 mil.",
+   "s": 177.54,
+   "e": 184.24
+  },
+  {
+   "t": "Svar: 360 mil (3 600 kilometer)",
+   "s": 184.24,
+   "e": 189.91
+  }
+ ]
+}

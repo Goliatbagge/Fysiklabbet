@@ -1,8 +1,8 @@
 {
  "id": "fy1-5.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "f0d7df03d36c95a190c9c6ff613c369b2dbcf608",
- "dur": 501.65,
+ "hash": "87610b306f3b24b72a28992c46510c7fb4ed39de",
+ "dur": 500.06,
  "segments": [
   {
    "t": "Lyftkraft och Arkimedes princip",
@@ -265,139 +265,139 @@
    "e": 312.6
   },
   {
-   "t": "volymen V är lika med 4 419 delat med 998 gånger 9,82 som är lika med 0,450 ldots kubikmeter som är ungefär lika med 0,45 kubikmeter",
+   "t": "volymen V är lika med 4 419 delat med 998 gånger 9,82 som är lika med 0,450 kubikmeter som är ungefär lika med 0,45 kubikmeter",
    "s": 312.55,
-   "e": 325.5
+   "e": 325.2
   },
   {
    "t": "Svar: 0,45 meter i kubik (450 liter)",
-   "s": 325.5,
-   "e": 331.3
+   "s": 325.2,
+   "e": 331.0
   },
   {
    "t": "Exempel 2 — Järnkista på havets botten",
-   "s": 331.3,
-   "e": 335.32
+   "s": 331.0,
+   "e": 335.03
   },
   {
    "t": "En kista av järn med måtten 70 × 90 × 40 centimeter som väger 260 kilogram står på havets botten.",
-   "s": 335.32,
-   "e": 342.82
+   "s": 335.03,
+   "e": 342.53
   },
   {
    "t": "Skulle du kunna lyfta kistan?",
-   "s": 342.82,
-   "e": 345.63
+   "s": 342.53,
+   "e": 345.35
   },
   {
    "t": "Eftersom kistan står på botten måste tyngdkraften F G nedåt vara större än lyftkraften F L uppåt.",
-   "s": 345.63,
-   "e": 352.96
+   "s": 345.35,
+   "e": 352.67
   },
   {
    "t": "Den kraft vi måste ta i med för att lyfta kistan F är skillnaden mellan tyngdkraften och lyftkraften, dvs.",
-   "s": 352.96,
-   "e": 368.93
+   "s": 352.67,
+   "e": 368.62
   },
   {
    "t": "kraften F är lika med F G minus F L",
-   "s": 352.96,
-   "e": 368.93
+   "s": 352.67,
+   "e": 368.62
   },
   {
    "t": "Observera att när vi beräknar lyftkraften med Arkimedes princip så är det vattnets densitet vi ska använda, inte järnets!",
-   "s": 352.96,
-   "e": 368.93
+   "s": 352.67,
+   "e": 368.62
   },
   {
-   "t": "F G är lika med massan m gånger tyngdfaktorn g som är lika med 260 gånger 9,82 som är lika med 2 553,2 newton F L som är lika med densiteten rho gånger g gånger volymen V som är lika med 998 gånger 9,82 gånger parentesen 0,70 gånger 0,90 gånger 0,40 slut parentes som är lika med 2 469,690 ldots newton",
-   "s": 368.93,
-   "e": 395.91
+   "t": "F G är lika med massan m gånger tyngdfaktorn g som är lika med 260 gånger 9,82 som är lika med 2 553,2 newton F L som är lika med densiteten rho gånger g gånger volymen V som är lika med 998 gånger 9,82 gånger parentesen 0,70 gånger 0,90 gånger 0,40 slut parentes som är lika med 2 469,690 newton",
+   "s": 368.62,
+   "e": 395.12
   },
   {
-   "t": "kraften F är lika med F G minus F L som är lika med 2 553,2 minus 2 469,690 ldots som är lika med 83,509 ldots newton",
-   "s": 395.91,
-   "e": 409.53
+   "t": "kraften F är lika med F G minus F L som är lika med 2 553,2 minus 2 469,690 som är lika med 83,509 newton",
+   "s": 395.12,
+   "e": 408.13
   },
   {
    "t": "Orkar du lyfta kistan?",
-   "s": 409.53,
-   "e": 412.01
+   "s": 408.13,
+   "e": 410.61
   },
   {
    "t": "Vi undersöker vilken massa som ger motsvarande tyngd.",
-   "s": 412.01,
-   "e": 416.27
+   "s": 410.61,
+   "e": 414.87
   },
   {
-   "t": "massan m är lika med kraften F delat med tyngdfaktorn g som är lika med 83,509 ldots delat med 9,82 som är lika med 8,504 kilogram som är ungefär lika med 8,5 kilogram",
-   "s": 416.27,
-   "e": 429.42
+   "t": "massan m är lika med kraften F delat med tyngdfaktorn g som är lika med 83,509 delat med 9,82 som är lika med 8,504 kilogram som är ungefär lika med 8,5 kilogram",
+   "s": 414.87,
+   "e": 427.83
   },
   {
    "t": "Svar: Ja, du skulle kunna lyfta kistan.",
-   "s": 429.42,
-   "e": 433.25
+   "s": 427.83,
+   "e": 431.66
   },
   {
    "t": "Den upplevs bara väga 8,5 kilogram.",
-   "s": 433.25,
-   "e": 437.06
+   "s": 431.66,
+   "e": 435.47
   },
   {
    "t": "Alternativ lösning",
-   "s": 437.06,
-   "e": 439.61
+   "s": 435.47,
+   "e": 438.02
   },
   {
    "t": "För att göra beräkningarna enklare kan vi göra om alla mått till dm i kubik och utnyttja att 1 liter vatten väger ca 1 kilogram.",
-   "s": 439.61,
-   "e": 447.68
+   "s": 438.02,
+   "e": 446.1
   },
   {
    "t": "Kom ihåg att 1 decimeter i kubik är lika med 1 liter.",
-   "s": 447.68,
-   "e": 452.12
+   "s": 446.1,
+   "e": 450.53
   },
   {
    "t": "Det undanträngda vattnets volym är",
-   "s": 452.12,
-   "e": 455.5
+   "s": 450.53,
+   "e": 453.91
   },
   {
    "t": "volymen V är lika med 7 decimeter gånger 9 decimeter gånger 4 decimeter som är lika med 252 kubikdecimeter som är lika med 252 liter",
-   "s": 455.5,
-   "e": 466.07
+   "s": 453.91,
+   "e": 464.48
   },
   {
    "t": "Eftersom 1 liter vatten väger ca 1 kilogram, så måste 252 liter vatten väga ca 252 kilogram.",
-   "s": 466.07,
-   "e": 474.87
+   "s": 464.48,
+   "e": 473.28
   },
   {
    "t": "Lyftkraften motsvarar alltså massan hos 252 kilogram medan tyngdkraften motsvarar massan hos 260 kilogram.",
-   "s": 474.87,
-   "e": 483.53
+   "s": 473.28,
+   "e": 481.95
   },
   {
    "t": "Det betyder att den kraft du måste ta i med för att lyfta kistan motsvarar",
-   "s": 483.53,
-   "e": 488.72
+   "s": 481.95,
+   "e": 487.13
   },
   {
    "t": "260 minus 252 är lika med 8 kilogram",
-   "s": 488.72,
-   "e": 494.0
+   "s": 487.13,
+   "e": 492.41
   },
   {
    "t": "Svar: Ja, du skulle kunna lyfta kistan.",
-   "s": 494.0,
-   "e": 497.81
+   "s": 492.41,
+   "e": 496.22
   },
   {
    "t": "Den upplevs bara väga ca 8 kilogram.",
-   "s": 497.81,
-   "e": 501.65
+   "s": 496.22,
+   "e": 500.06
   }
  ]
 }

@@ -1,0 +1,278 @@
+{
+ "id": "ma1c-1.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "46f81b73e4c2801bdb1918007aff9d470df0d892",
+ "dur": 257.89,
+ "segments": [
+  {
+   "t": "Bråk",
+   "s": 0.1,
+   "e": 1.79
+  },
+  {
+   "t": "Betrakta cirkeln i figuren nedan.",
+   "s": 1.74,
+   "e": 4.89
+  },
+  {
+   "t": "Den är indelad i fyra lika stora delar.",
+   "s": 4.89,
+   "e": 8.46
+  },
+  {
+   "t": "Varje del motsvarar då en fjärdedel.",
+   "s": 8.46,
+   "e": 12.16
+  },
+  {
+   "t": "Den skuggade arean motsvarar alltså en fjärdedel, som i bråkform skrivs 1 delat med 4 .",
+   "s": 12.16,
+   "e": 18.54
+  },
+  {
+   "t": "Cirkeln är indelad i fyra lika stora delar — den skuggade delen är en fjärdedel av cirkeln.",
+   "s": 18.54,
+   "e": 24.86
+  },
+  {
+   "t": "Talet ovanför bråkstrecket kallas täljare.",
+   "s": 24.86,
+   "e": 28.62
+  },
+  {
+   "t": "Talet under bråkstrecket kallas nämnare.",
+   "s": 28.62,
+   "e": 32.12
+  },
+  {
+   "t": "Kom ihåg-regel: täljaren i toppen, nämnaren där nere.",
+   "s": 32.12,
+   "e": 36.98
+  },
+  {
+   "t": "Betrakta nu cirklarna i figuren nedan.",
+   "s": 36.98,
+   "e": 40.49
+  },
+  {
+   "t": "Den vänstra cirkeln är indelad i fjärdedelar och 1 delat med 4 är skuggad.",
+   "s": 40.49,
+   "e": 46.0
+  },
+  {
+   "t": "Den högra cirkeln är indelad i tolftedelar och 3 delat med 12 är skuggad.",
+   "s": 46.0,
+   "e": 51.64
+  },
+  {
+   "t": "Eftersom båda andelarna är lika stora måste 1 delat med 4 är lika med 3 delat med 12 .",
+   "s": 51.64,
+   "e": 57.73
+  },
+  {
+   "t": "Olika bråk kan alltså vara lika stora.",
+   "s": 57.73,
+   "e": 61.29
+  },
+  {
+   "t": "En fjärdedel och tre tolftedelar är lika stora andelar av cirkeln.",
+   "s": 61.29,
+   "e": 66.3
+  },
+  {
+   "t": "Förlängning och förkortning",
+   "s": 66.3,
+   "e": 68.88
+  },
+  {
+   "t": "Förlängning och förkortning",
+   "s": 68.88,
+   "e": 71.46
+  },
+  {
+   "t": "När vi skriver om ett bråk utan att ändra dess storlek så förlänger eller förkortar vi bråket.",
+   "s": 71.46,
+   "e": 77.7
+  },
+  {
+   "t": "Vid förlängning och förkortning ändras inte storleken på bråket.",
+   "s": 77.7,
+   "e": 82.36
+  },
+  {
+   "t": "När vi",
+   "s": 82.36,
+   "e": 84.24
+  },
+  {
+   "t": "multiplicerar täljare och nämnare med samma tal förlänger vi bråket",
+   "s": 84.24,
+   "e": 89.24
+  },
+  {
+   "t": "dividerar täljare och nämnare med samma tal förkortar vi bråket.",
+   "s": 89.24,
+   "e": 94.21
+  },
+  {
+   "t": "Exempel 1 — Förkorta ett bråk",
+   "s": 94.21,
+   "e": 97.5
+  },
+  {
+   "t": "Förkorta 6 delat med 15 med 3.",
+   "s": 97.5,
+   "e": 100.89
+  },
+  {
+   "t": "Vi dividerar täljare och nämnare med 3:",
+   "s": 100.89,
+   "e": 110.74
+  },
+  {
+   "t": "6 delat med 15 är lika med 6 delat med 3 delat med 15 delat med 3 som är lika med 2 delat med 5",
+   "s": 100.89,
+   "e": 110.74
+  },
+  {
+   "t": "Svar: 2 delat med 5",
+   "s": 110.74,
+   "e": 113.83
+  },
+  {
+   "t": "Exempel 2 — Förläng ett bråk",
+   "s": 113.83,
+   "e": 117.1
+  },
+  {
+   "t": "Förläng 2 delat med 3 så att nämnaren blir 12.",
+   "s": 117.1,
+   "e": 121.0
+  },
+  {
+   "t": "Tänk: \"Vad ska jag multiplicera nämnaren 3 med för att den ska bli 12?",
+   "s": 121.0,
+   "e": 126.14
+  },
+  {
+   "t": "Jo, med 4.",
+   "s": 126.14,
+   "e": 128.53
+  },
+  {
+   "t": "Alltså ska jag multiplicera täljare och nämnare med 4!\"",
+   "s": 128.53,
+   "e": 133.11
+  },
+  {
+   "t": "2 delat med 3 är lika med 2 gånger 4 delat med 3 gånger 4 som är lika med 8 delat med 12",
+   "s": 133.11,
+   "e": 140.24
+  },
+  {
+   "t": "Svar: 8 delat med 12",
+   "s": 140.24,
+   "e": 143.39
+  },
+  {
+   "t": "OBS — Stryka likadana tal",
+   "s": 143.39,
+   "e": 146.55
+  },
+  {
+   "t": "Förkortning av bråk genom att \"stryka likadana tal\" i täljare och nämnare går endast att göra när det är gångertecken mellan dem.",
+   "s": 146.55,
+   "e": 154.29
+  },
+  {
+   "t": "Det går alltså inte att stryka likadana tal med plus- eller minustecken mellan.",
+   "s": 154.29,
+   "e": 159.43
+  },
+  {
+   "t": "Skriver vi 2 är lika med 8 delat med 4 som är lika med 4 gånger 2 delat med 4 gånger 1 och \"stryker\" 4:orna (gångertecken mellan) får vi 2 delat med 1 är lika med 2 .",
+   "s": 159.43,
+   "e": 170.75
+  },
+  {
+   "t": "Stämmer!",
+   "s": 170.75,
+   "e": 172.56
+  },
+  {
+   "t": "Skriver vi i stället 2 är lika med 8 delat med 4 som är lika med 6 plus 2 delat med 2 plus 2 och \"stryker\" 2:orna (plustecken mellan) får vi 6 delat med 2 är lika med 3 .",
+   "s": 172.56,
+   "e": 183.78
+  },
+  {
+   "t": "Stämmer inte!",
+   "s": 183.78,
+   "e": 185.96
+  },
+  {
+   "t": "Jämföra bråk",
+   "s": 185.96,
+   "e": 188.28
+  },
+  {
+   "t": "Jämföra bråk",
+   "s": 188.28,
+   "e": 190.57
+  },
+  {
+   "t": "När vi jämför bråk görs det lättast genom att göra om bråken till samma nämnare.",
+   "s": 190.57,
+   "e": 195.88
+  },
+  {
+   "t": "Vi inser t.ex. lätt att 5 delat med 7 är större än 4 delat med 7 .",
+   "s": 195.88,
+   "e": 201.51
+  },
+  {
+   "t": "Exempel 3 — Vilket bråk är störst?",
+   "s": 201.51,
+   "e": 205.04
+  },
+  {
+   "t": "Vilket bråk är störst: 4 delat med 9 eller 3 delat med 7 ?",
+   "s": 205.04,
+   "e": 210.29
+  },
+  {
+   "t": "Vi gör om bråken till samma nämnare!",
+   "s": 210.29,
+   "e": 213.66
+  },
+  {
+   "t": "Det går t.ex. genom att förlänga varje bråk med det tal som står i nämnaren i det andra bråket.",
+   "s": 213.66,
+   "e": 219.81
+  },
+  {
+   "t": "Vi förlänger 4 delat med 9 med 7, eftersom det står i nämnaren i det andra bråket.",
+   "s": 219.81,
+   "e": 225.86
+  },
+  {
+   "t": "Vi förlänger 3 delat med 7 med 9, eftersom det står i nämnaren i det första bråket.",
+   "s": 225.86,
+   "e": 231.89
+  },
+  {
+   "t": "4 delat med 9 är lika med 4 gånger 7 delat med 9 gånger 7 som är lika med 28 delat med 63 3 delat med 7 som är lika med 3 gånger 9 delat med 7 gånger 9 som är lika med 27 delat med 63",
+   "s": 231.89,
+   "e": 245.5
+  },
+  {
+   "t": "Vi ser nu enkelt att 28 delat med 63 är större än 27 delat med 63 , och därför måste 4 delat med 9 vara störst.",
+   "s": 245.5,
+   "e": 254.65
+  },
+  {
+   "t": "Svar: 4 delat med 9",
+   "s": 254.65,
+   "e": 257.89
+  }
+ ]
+}

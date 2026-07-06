@@ -1,0 +1,153 @@
+{
+ "id": "ma1c-4.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "de7654455293ea9c12cd7d883add3ad353c253c3",
+ "dur": 172.12,
+ "segments": [
+  {
+   "t": "Koordinatsystem och linjära modeller",
+   "s": 0.1,
+   "e": 3.49
+  },
+  {
+   "t": "Koordinatsystem",
+   "s": 3.44,
+   "e": 5.76
+  },
+  {
+   "t": "För att ange läget i ett plan krävs två talaxlar: en vågrät x-axel och en lodrät y-axel.",
+   "s": 5.76,
+   "e": 12.51
+  },
+  {
+   "t": "Detta kallas ett koordinatsystem.",
+   "s": 12.51,
+   "e": 15.79
+  },
+  {
+   "t": "Skärningen mellan x-axeln och y-axeln kallas origo.",
+   "s": 15.79,
+   "e": 20.24
+  },
+  {
+   "t": "Vi kan ange läget för en punkt genom att skriva dess koordinat.",
+   "s": 20.24,
+   "e": 24.76
+  },
+  {
+   "t": "Koordinater skrivs i parentes med x-koordinaten (läget i sidled) först och y-koordinaten (läget i höjdled) sist, dvs. ( x , y ).",
+   "s": 24.76,
+   "e": 36.27
+  },
+  {
+   "t": "Punkten markerad i koordinatsystemet har x-koordinaten 2 och y-koordinaten 3, vilket skrivs (2, 3).",
+   "s": 36.27,
+   "e": 44.9
+  },
+  {
+   "t": "Koordinatsystemets fyra områden delas in i kvadranter.",
+   "s": 44.9,
+   "e": 49.45
+  },
+  {
+   "t": "Kvadranten med positiva x- och y-värden kallas första kvadranten.",
+   "s": 49.45,
+   "e": 54.35
+  },
+  {
+   "t": "Sedan kommer andra, tredje och fjärde kvadranten moturs.",
+   "s": 54.35,
+   "e": 59.08
+  },
+  {
+   "t": "Om det i en uppgift står att vi ska hitta lösningar i t.ex. \"första kvadranten\" ska alltså både x- och y-koordinaten vara positiv.",
+   "s": 59.08,
+   "e": 67.42
+  },
+  {
+   "t": "Kvadranterna numreras moturs med start uppe till höger.",
+   "s": 67.42,
+   "e": 71.81
+  },
+  {
+   "t": "Linjära modeller",
+   "s": 71.81,
+   "e": 74.17
+  },
+  {
+   "t": "En modell som beskriver något som ändras i jämn takt med samma mängd kallas linjär modell (eftersom den grafiskt beskrivs av en rät linje).",
+   "s": 74.17,
+   "e": 82.96
+  },
+  {
+   "t": "Linjära modeller kan beskrivas med formel, tabell eller graf.",
+   "s": 82.96,
+   "e": 87.84
+  },
+  {
+   "t": "Exempel 1 — Bilverkstaden",
+   "s": 87.84,
+   "e": 91.03
+  },
+  {
+   "t": "En bilfirma tar för en reparation 500 kronor i fast avgift och sedan 400 kronor per timme utfört arbete.",
+   "s": 91.03,
+   "e": 98.69
+  },
+  {
+   "t": "Visa sambandet mellan kostnaden y kr för x arbetade timmar med en. a) formel b) värdetabell c) graf.",
+   "s": 98.69,
+   "e": 108.7
+  },
+  {
+   "t": "a) Eftersom 500 kronor är en fast kostnad måste termen 500 finnas med i formeln.",
+   "s": 108.7,
+   "e": 115.4
+  },
+  {
+   "t": "Eftersom kostnaden 400 kronor multipliceras med varje timme x måste även termen 400 gånger x är lika med 400 x finnas med.",
+   "s": 115.4,
+   "e": 124.64
+  },
+  {
+   "t": "Svar: y är lika med 500 plus 400 x",
+   "s": 124.64,
+   "e": 132.4
+  },
+  {
+   "t": "b) Utifrån formeln ovan kan vi göra en värdetabell.",
+   "s": 124.64,
+   "e": 132.4
+  },
+  {
+   "t": "Vi gör en kolumn för antalet arbetade timmar x och en för motsvarande kostnad y kr och fyller i några värden:",
+   "s": 132.4,
+   "e": 143.49
+  },
+  {
+   "t": "c) Utifrån värdetabellen ovan kan vi rita upp en graf.",
+   "s": 132.4,
+   "e": 143.49
+  },
+  {
+   "t": "Vi ritar upp ett koordinatsystem och prickar in motsvarande punkter (0, 500), (1, 900), (2, 1300), (3, 1700) och (4, 2100).",
+   "s": 143.49,
+   "e": 157.46
+  },
+  {
+   "t": "Vi behöver en x-axel som sträcker sig till 4 och en y-axel som sträcker sig till 2 100:",
+   "s": 157.46,
+   "e": 172.12
+  },
+  {
+   "t": "Därefter förbinder vi punkterna med en rät linje, vilket ger vår graf:",
+   "s": 157.46,
+   "e": 172.12
+  },
+  {
+   "t": "Grafen till y är lika med 500 plus 400 x är en rät linje.",
+   "s": 157.46,
+   "e": 172.12
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
  "id": "fy1-4.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "2d422fba906cf2222681b4cf0c1e3d5be3c46ede",
- "dur": 383.77,
+ "hash": "705a042d1b2f997622e66cafc0492b279f0e6cc4",
+ "dur": 386.39,
  "segments": [
   {
    "t": "Effekt",
@@ -210,7 +210,7 @@
    "e": 254.8
   },
   {
-   "t": "b) Vad kostar energiförbrukningen om priset är 1,50 kr/kWh?",
+   "t": "b) Vad kostar energiförbrukningen om priset är 1,50 kronor/kWh?",
    "s": 254.8,
    "e": 261.76
   },
@@ -257,47 +257,47 @@
   {
    "t": "1 468 800 joule är lika med 1 468 800 delat med 3,6 gånger 10 upphöjt till 6 kilowattimme som är lika med 0,408 kilowattimme",
    "s": 324.29,
-   "e": 339.77
+   "e": 340.17
   },
   {
-   "t": "Eftersom 1 kilowattimmar kostar 1,50 kr blir den totala kostnaden",
-   "s": 339.72,
-   "e": 345.32
+   "t": "Eftersom 1 kilowattimmar kostar 1,50 kronor blir den totala kostnaden",
+   "s": 340.12,
+   "e": 345.69
   },
   {
-   "t": "1,50 kr per kilowattimme gånger 0,408 kilowattimme är lika med 0,612 kr som är ungefär lika med 0,61 kr",
-   "s": 345.32,
-   "e": 358.12
+   "t": "1,50 kronor per kilowattimme gånger 0,408 kilowattimme är lika med 0,612 kronor som är ungefär lika med 0,61 kronor",
+   "s": 345.69,
+   "e": 356.04
   },
   {
-   "t": "Svar: 0,61 kr eller 61 öre",
-   "s": 345.32,
-   "e": 358.12
+   "t": "Svar: 0,61 kronor eller 61 öre",
+   "s": 356.04,
+   "e": 360.74
   },
   {
    "t": "Effekt i elektriska apparater",
-   "s": 358.12,
-   "e": 361.39
+   "s": 360.74,
+   "e": 364.03
   },
   {
    "t": "För att spara energi och pengar är det bra att undvika att använda apparater med hög effekt, särskilt när elpriset är högt (om man har ett rörligt elpris).",
-   "s": 361.39,
-   "e": 370.79
+   "s": 364.03,
+   "e": 373.42
   },
   {
    "t": "Generellt gäller att apparater som utvecklar mycket värme ger en hög energiförbrukning.",
-   "s": 370.79,
-   "e": 376.66
+   "s": 373.42,
+   "e": 379.28
   },
   {
    "t": "Gå hem och hitta den apparat hemma som har störst effekt!",
-   "s": 376.66,
-   "e": 380.89
+   "s": 379.28,
+   "e": 383.52
   },
   {
    "t": "Hur många watt är den märkt med?",
-   "s": 380.89,
-   "e": 383.77
+   "s": 383.52,
+   "e": 386.39
   }
  ]
 }

@@ -1,0 +1,358 @@
+{
+ "id": "ma1c-2.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ad85a016342d24dbc5a2ffde71d11e0e9cb2a06b",
+ "dur": 352.16,
+ "segments": [
+  {
+   "t": "Potensekvationer",
+   "s": 0.1,
+   "e": 2.54
+  },
+  {
+   "t": "En ekvation där variabeln, t.ex. x , är en potens (\"upphöjt till något\") kallas för potensekvation.",
+   "s": 2.49,
+   "e": 10.51
+  },
+  {
+   "t": "Dessa kan lösas med två algebraiska metoder: med potenslagar eller med rotuttryck.",
+   "s": 10.51,
+   "e": 16.88
+  },
+  {
+   "t": "Lösa potensekvationer med potenslagar",
+   "s": 16.88,
+   "e": 20.74
+  },
+  {
+   "t": "x upphöjt till n är lika med a har lösningen",
+   "s": 20.74,
+   "e": 24.7
+  },
+  {
+   "t": "x är lika med a upphöjt till 1 delat med n",
+   "s": 24.7,
+   "e": 31.39
+  },
+  {
+   "t": "Härledning — Lösa potensekvationer med potenslagar",
+   "s": 24.7,
+   "e": 31.39
+  },
+  {
+   "t": "Vi utgår från den generella ekvationen",
+   "s": 31.39,
+   "e": 34.98
+  },
+  {
+   "t": "x upphöjt till n är lika med a",
+   "s": 34.98,
+   "e": 38.31
+  },
+  {
+   "t": "Vi upphöjer båda led till exponentens invers, i detta fall 1 delat med n :",
+   "s": 38.31,
+   "e": 57.96
+  },
+  {
+   "t": "parentesen x upphöjt till n slut parentes upphöjt till 1 delat med n är lika med a upphöjt till 1 delat med n",
+   "s": 38.31,
+   "e": 57.96
+  },
+  {
+   "t": "x upphöjt till n delat med n är lika med a upphöjt till 1 delat med n",
+   "s": 38.31,
+   "e": 57.96
+  },
+  {
+   "t": "x upphöjt till 1 är lika med a upphöjt till 1 delat med n",
+   "s": 38.31,
+   "e": 57.96
+  },
+  {
+   "t": "x är lika med a upphöjt till 1 delat med n",
+   "s": 38.31,
+   "e": 57.96
+  },
+  {
+   "t": "vsv.",
+   "s": 57.96,
+   "e": 61.91
+  },
+  {
+   "t": "Lösa potensekvationer med rötter",
+   "s": 57.96,
+   "e": 61.91
+  },
+  {
+   "t": "x upphöjt till n är lika med a har lösningen",
+   "s": 61.91,
+   "e": 65.88
+  },
+  {
+   "t": "x är lika med n:e roten ur a",
+   "s": 65.88,
+   "e": 69.72
+  },
+  {
+   "t": "OBS!",
+   "s": 65.88,
+   "e": 69.72
+  },
+  {
+   "t": "Om exponenten är jämn får ekvationen, i allmänhet, två lösningar — en positiv och en negativ.",
+   "s": 69.72,
+   "e": 76.6
+  },
+  {
+   "t": "Då ska ± placeras framför rottecknet/lösningen.",
+   "s": 76.6,
+   "e": 81.76
+  },
+  {
+   "t": "Om exponenten är udda får ekvationen en lösning och inget ± ska placeras framför rottecknet/lösningen.",
+   "s": 81.76,
+   "e": 89.83
+  },
+  {
+   "t": "Antal lösningar till en potensekvation",
+   "s": 89.83,
+   "e": 93.41
+  },
+  {
+   "t": "En potensekvation x upphöjt till n är lika med a med",
+   "s": 93.41,
+   "e": 97.99
+  },
+  {
+   "t": "jämn exponent har två, en eller noll lösningar",
+   "s": 97.99,
+   "e": 102.36
+  },
+  {
+   "t": "udda exponent har en lösning.",
+   "s": 102.36,
+   "e": 105.44
+  },
+  {
+   "t": "Exempel 1 — Lös potensekvationerna",
+   "s": 105.44,
+   "e": 109.19
+  },
+  {
+   "t": "Lös ekvationerna och avrunda svaret till två decimaler.. a) x upphöjt till 14 är lika med 80 000 b) 3 x upphöjt till 5 minus 21 är lika med 0 c) x upphöjt till 3,4 är lika med 98 d) x upphöjt till 1 delat med 2 är lika med 4 e) x upphöjt till 2 delat med 5 är lika med 10",
+   "s": 109.19,
+   "e": 131.19
+  },
+  {
+   "t": "a) Med potenslagar:",
+   "s": 131.19,
+   "e": 136.91
+  },
+  {
+   "t": "x upphöjt till 14 är lika med 80 000",
+   "s": 131.19,
+   "e": 136.91
+  },
+  {
+   "t": "parentesen x upphöjt till 14 slut parentes upphöjt till 1 delat med 14 är lika med 80 000 upphöjt till 1 delat med 14",
+   "s": 136.91,
+   "e": 145.68
+  },
+  {
+   "t": "x är lika med plus minus 2,239 som är ungefär lika med plus minus 2,24",
+   "s": 145.68,
+   "e": 153.04
+  },
+  {
+   "t": "Med rotuttryck:",
+   "s": 153.04,
+   "e": 164.44
+  },
+  {
+   "t": "x är lika med plus minus 14:e roten ur 80 000 som är lika med plus minus 2,239 som är ungefär lika med plus minus 2,24",
+   "s": 153.04,
+   "e": 164.44
+  },
+  {
+   "t": "(± eftersom exponenten 14 är jämn.)",
+   "s": 164.44,
+   "e": 168.91
+  },
+  {
+   "t": "Svar: x är ungefär lika med plus minus 2,24",
+   "s": 168.91,
+   "e": 174.18
+  },
+  {
+   "t": "b) Vi börjar med att lösa ut x upphöjt till 5 :",
+   "s": 174.18,
+   "e": 181.5
+  },
+  {
+   "t": "3 x upphöjt till 5 minus 21 är lika med 0",
+   "s": 174.18,
+   "e": 181.5
+  },
+  {
+   "t": "3 x upphöjt till 5 är lika med 21",
+   "s": 181.5,
+   "e": 185.56
+  },
+  {
+   "t": "x upphöjt till 5 är lika med 7",
+   "s": 185.56,
+   "e": 188.93
+  },
+  {
+   "t": "Därefter löser vi ekvationen med potenslagar eller med rotuttryck:",
+   "s": 188.93,
+   "e": 202.44
+  },
+  {
+   "t": "x är lika med 7 upphöjt till 1 delat med 5 som är lika med 5:e roten ur 7 som är lika med 1,475 som är ungefär lika med 1,48",
+   "s": 188.93,
+   "e": 202.44
+  },
+  {
+   "t": "(Inget ± eftersom exponenten är udda.)",
+   "s": 202.44,
+   "e": 206.93
+  },
+  {
+   "t": "Svar: x är ungefär lika med 1,48",
+   "s": 206.93,
+   "e": 211.41
+  },
+  {
+   "t": "c) Vi löser ekvationer med decimaltal i exponenten på motsvarande sätt:",
+   "s": 211.41,
+   "e": 228.31
+  },
+  {
+   "t": "x är lika med 3,4:e roten ur 98 som är lika med 98 upphöjt till 1 delat med 3,4 som är lika med 3,851 som är ungefär lika med 3,85",
+   "s": 211.41,
+   "e": 228.31
+  },
+  {
+   "t": "Svar: x är ungefär lika med 3,85",
+   "s": 228.31,
+   "e": 232.84
+  },
+  {
+   "t": "d) När vi har bråk i exponenten börjar vi med att få bort nämnaren i exponenten genom att upphöja båda led till den, i det här fallet med 2:",
+   "s": 232.84,
+   "e": 247.18
+  },
+  {
+   "t": "parentesen x upphöjt till 1 delat med 2 slut parentes i kvadrat är lika med 4 i kvadrat",
+   "s": 232.84,
+   "e": 247.18
+  },
+  {
+   "t": "x är lika med 16",
+   "s": 247.18,
+   "e": 249.93
+  },
+  {
+   "t": "Svar: x är lika med 16",
+   "s": 249.93,
+   "e": 253.32
+  },
+  {
+   "t": "e) Vi har återigen ett bråk i exponenten.",
+   "s": 253.32,
+   "e": 257.43
+  },
+  {
+   "t": "Vi upphöjer båda led till exponentens nämnare 5:",
+   "s": 257.43,
+   "e": 267.69
+  },
+  {
+   "t": "parentesen x upphöjt till 2 delat med 5 slut parentes upphöjt till 5 är lika med 10 upphöjt till 5",
+   "s": 257.43,
+   "e": 267.69
+  },
+  {
+   "t": "x i kvadrat är lika med 100 000",
+   "s": 267.69,
+   "e": 271.56
+  },
+  {
+   "t": "Därefter löser vi ekvationen som vanligt:",
+   "s": 271.56,
+   "e": 285.31
+  },
+  {
+   "t": "x är lika med plus minus roten ur 100 000 som är lika med plus minus 316,227 som är ungefär lika med plus minus 316,23",
+   "s": 271.56,
+   "e": 285.31
+  },
+  {
+   "t": "Svar: x är ungefär lika med plus minus 316,23",
+   "s": 285.31,
+   "e": 291.35
+  },
+  {
+   "t": "Exempel 2 — Bestäm antalet lösningar",
+   "s": 291.35,
+   "e": 295.07
+  },
+  {
+   "t": "Bestäm antal lösningar till ekvationen. a) x upphöjt till 12 är lika med 154 b) x upphöjt till 4 är lika med 0 c) x upphöjt till 100 är lika med minus 50 d) x upphöjt till 99 är lika med minus 5",
+   "s": 295.07,
+   "e": 312.25
+  },
+  {
+   "t": "a) Jämn exponent och positivt högerled:",
+   "s": 312.25,
+   "e": 320.34
+  },
+  {
+   "t": "x är lika med plus minus 12:e roten ur 154",
+   "s": 312.25,
+   "e": 320.34
+  },
+  {
+   "t": "Svar: Två lösningar",
+   "s": 320.34,
+   "e": 323.34
+  },
+  {
+   "t": "b) Jämn exponent men högerledet är 0:",
+   "s": 323.34,
+   "e": 330.4
+  },
+  {
+   "t": "x är lika med 4:e roten ur 0 som är lika med 0",
+   "s": 323.34,
+   "e": 332.78
+  },
+  {
+   "t": "Svar: En lösning",
+   "s": 332.73,
+   "e": 335.32
+  },
+  {
+   "t": "c) Jämn exponent och negativt högerled — x upphöjt till 100 kan aldrig bli negativt:",
+   "s": 335.32,
+   "e": 344.17
+  },
+  {
+   "t": "Svar: Saknar lösningar",
+   "s": 335.32,
+   "e": 344.17
+  },
+  {
+   "t": "d) Potensekvationer med udda exponent har alltid en lösning.",
+   "s": 344.17,
+   "e": 349.52
+  },
+  {
+   "t": "Svar: En lösning",
+   "s": 349.52,
+   "e": 352.16
+  }
+ ]
+}

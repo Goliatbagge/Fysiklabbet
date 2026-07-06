@@ -1,8 +1,8 @@
 {
  "id": "fy1-3.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "b5643df789fc39e66ae6a1dfda87cf93323fdfb2",
- "dur": 315.14,
+ "hash": "2d9d6e6d474796b3220de06897ae60935627ec54",
+ "dur": 316.91,
  "segments": [
   {
    "t": "Tyngdkraft och normalkraft",
@@ -102,147 +102,147 @@
   {
    "t": "Till och med deras enheter N/kg och m/s i kvadrat står för samma sak:",
    "s": 120.31,
-   "e": 131.24
+   "e": 132.34
   },
   {
-   "t": "1 newton är lika med 1 kilogram\\cdotm per sekund i kvadrat",
+   "t": "1 newton är lika med 1 kilogram \\cdot m/s^2",
    "s": 120.31,
-   "e": 131.24
+   "e": 132.34
   },
   {
-   "t": "1 newton delat med kilogram är lika med 1 kilogram\\cdotm delat med s^2\\cdotkg som är lika med 1 meter delat med sekund i kvadrat dvs. 1 newton per kilogram som är lika med 1 meter per sekund i kvadrat",
-   "s": 131.24,
-   "e": 146.09
+   "t": "1 newton delat med kilogram är lika med 1 kilogram \\cdot m delat med s^2 \\cdot kg som är lika med 1 meter delat med sekund i kvadrat dvs. 1 newton per kilogram som är lika med 1 meter per sekund i kvadrat",
+   "s": 132.34,
+   "e": 147.84
   },
   {
    "t": "Tyngdkraft",
-   "s": 146.09,
-   "e": 148.06
+   "s": 147.84,
+   "e": 149.81
   },
   {
    "t": "F G är lika med massan m gånger tyngdfaktorn g",
-   "s": 148.06,
-   "e": 152.34
+   "s": 149.81,
+   "e": 154.06
   },
   {
    "t": "där",
-   "s": 152.34,
-   "e": 153.82
+   "s": 154.06,
+   "e": 155.55
   },
   {
    "t": "F G är lika med tyngdkraft eller tyngd (newton)",
-   "s": 153.82,
-   "e": 158.3
+   "s": 155.55,
+   "e": 160.03
   },
   {
    "t": "m är lika med massa (kilogram)",
-   "s": 158.3,
-   "e": 161.65
+   "s": 160.03,
+   "e": 163.38
   },
   {
    "t": "g är lika med tyngdfaktor (9,82 newton per kilogram i Sverige)",
-   "s": 161.65,
-   "e": 167.79
+   "s": 163.38,
+   "e": 169.51
   },
   {
    "t": "Normalkraft",
-   "s": 167.79,
-   "e": 170.06
+   "s": 169.51,
+   "e": 171.79
   },
   {
    "t": "När ett föremål har kontakt med en yta utövar ytan en kraft på föremålet som förhindrar att det passerar genom ytan.",
-   "s": 170.06,
-   "e": 177.72
+   "s": 171.79,
+   "e": 179.45
   },
   {
    "t": "Denna kraft kallas normalkraft, betecknas F N och verkar alltid vinkelrätt mot ytan. (Normal är ett matematiskt begrepp som står för en linje som är vinkelrät mot ett plan.)",
-   "s": 177.72,
-   "e": 190.4
+   "s": 179.45,
+   "e": 192.12
   },
   {
    "t": "Om vi ställer en vikt på ett bord, så verkar en tyngdkraft F G på den nedåt.",
-   "s": 190.4,
-   "e": 196.0
+   "s": 192.12,
+   "e": 197.72
   },
   {
    "t": "Eftersom vikten står still (befinner sig i vila) måste den resulterande kraften vara 0, enligt Newtons första lag.",
-   "s": 196.0,
-   "e": 203.76
+   "s": 197.72,
+   "e": 205.49
   },
   {
    "t": "Det måste alltså finnas en uppåtriktad kraft som är precis lika stor.",
-   "s": 203.76,
-   "e": 208.81
+   "s": 205.49,
+   "e": 210.54
   },
   {
    "t": "Det är normalkraften F N och står för kraften från bordet på vikten.",
-   "s": 208.81,
-   "e": 214.0
+   "s": 210.54,
+   "e": 215.72
   },
   {
    "t": "Lägg märke till att normalkraften alltid verkar vinkelrätt mot kontaktytorna.",
-   "s": 214.0,
-   "e": 219.3
+   "s": 215.72,
+   "e": 221.03
   },
   {
    "t": "Normalkraften på lådan verkar vinkelrätt mot det lutande planet.",
-   "s": 219.3,
-   "e": 224.06
+   "s": 221.03,
+   "e": 225.79
   },
   {
    "t": "Trycker man ett föremål mot en vägg åt höger uppstår en normalkraft åt vänster, vinkelrätt mot väggen.",
-   "s": 224.06,
-   "e": 231.0
+   "s": 225.79,
+   "e": 232.72
   },
   {
    "t": "Exempel 1 — Bom med motvikt",
-   "s": 231.0,
-   "e": 234.34
+   "s": 232.72,
+   "e": 236.06
   },
   {
    "t": "En bom väger 12 kilogram och har en balanserande motvikt med massan 24 kilogram.",
-   "s": 234.34,
-   "e": 240.35
+   "s": 236.06,
+   "e": 242.07
   },
   {
    "t": "Hur stor normalkraft verkar på bommen från stödet? (E)",
-   "s": 240.35,
-   "e": 256.64
+   "s": 242.07,
+   "e": 258.36
   },
   {
    "t": "De krafter som verkar på bommen är dess egen tyngd F Gbom (nedåt), tyngden från motvikten F Gvikt (nedåt) och normalkraften från stativet F N (uppåt).",
-   "s": 244.71,
-   "e": 256.64
+   "s": 246.44,
+   "e": 258.36
   },
   {
    "t": "Eftersom bommen ligger still ska den resulterande kraften vara 0, dvs. de nedåtriktade krafterna ska vara lika stora som de uppåtriktade krafterna.",
-   "s": 256.64,
-   "e": 265.65
+   "s": 258.36,
+   "e": 267.38
   },
   {
    "t": "Kraftjämvikt ger",
-   "s": 265.65,
-   "e": 268.12
+   "s": 267.38,
+   "e": 269.85
   },
   {
    "t": "F N är lika med F Gbom plus F Gvikt",
-   "s": 268.12,
-   "e": 272.19
+   "s": 269.85,
+   "e": 273.91
   },
   {
    "t": "F Gbom är lika med m b o massan m gånger tyngdfaktorn g som är lika med 12 kilogram gånger 9,82 newton per kilogram som är lika med 117,84 newton F Gvikt som är lika med m hastigheten v i k tiden t gånger g som är lika med 24 kilogram gånger 9,82 newton per kilogram som är lika med 235,68 newton",
-   "s": 272.19,
-   "e": 294.95
+   "s": 273.91,
+   "e": 296.65
   },
   {
    "t": "F N är lika med 117,84 plus 235,68 som är lika med 353,52 newton som är ungefär lika med 350 newton som är lika med 0,35 kilonewton",
-   "s": 294.95,
-   "e": 311.16
+   "s": 296.65,
+   "e": 312.95
   },
   {
    "t": "Svar: 0,35 kilonewton",
-   "s": 311.11,
-   "e": 315.14
+   "s": 312.9,
+   "e": 316.91
   }
  ]
 }

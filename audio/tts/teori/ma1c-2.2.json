@@ -1,0 +1,153 @@
+{
+ "id": "ma1c-2.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "3d09f03f9cab2ca0b968a3a3978d94af1e64ce9b",
+ "dur": 183.89,
+ "segments": [
+  {
+   "t": "Förenkla uttryck",
+   "s": 0.1,
+   "e": 2.59
+  },
+  {
+   "t": "När vi skriver ett uttryck på ett enklare sätt kallas det att förenkla uttryck.",
+   "s": 2.54,
+   "e": 7.62
+  },
+  {
+   "t": "Förenkla uttryck",
+   "s": 7.62,
+   "e": 10.11
+  },
+  {
+   "t": "Vi kan bara lägga ihop likadana termer med varandra, dvs. x -termer för sig, y -termer för sig, x i kvadrat -termer för sig, konstanttermer för sig, och så vidare.",
+   "s": 10.11,
+   "e": 21.21
+  },
+  {
+   "t": "Var noga med att titta på tecknet framför varje term!",
+   "s": 21.21,
+   "e": 25.14
+  },
+  {
+   "t": "Exempel 1 — Lägg ihop likadana termer",
+   "s": 25.14,
+   "e": 29.0
+  },
+  {
+   "t": "Förenkla. a) 8 x plus 3 y minus 2 x plus 9 y b) 5 x i kvadrat plus 3 x minus x i kvadrat",
+   "s": 29.0,
+   "e": 40.05
+  },
+  {
+   "t": "a) Vi samlar x -termerna för sig och y -termerna för sig.",
+   "s": 40.05,
+   "e": 44.75
+  },
+  {
+   "t": "Vi ser att x -termerna bildar 8 x minus 2 x är lika med 6 x och y -termerna bildar 3 y plus 9 y är lika med 12 y :",
+   "s": 44.75,
+   "e": 76.64
+  },
+  {
+   "t": "8 x plus 3 y minus 2 x plus 9 y är lika med 6 x plus 12 y",
+   "s": 44.75,
+   "e": 76.64
+  },
+  {
+   "t": "Svar: 6 x plus 12 y",
+   "s": 44.75,
+   "e": 76.64
+  },
+  {
+   "t": "b) Vi kan bara lägga ihop x i kvadrat -termer för sig och x -termer för sig:",
+   "s": 44.75,
+   "e": 76.64
+  },
+  {
+   "t": "5 x i kvadrat plus 3 x minus x i kvadrat är lika med 4 x i kvadrat plus 3 x",
+   "s": 44.75,
+   "e": 76.64
+  },
+  {
+   "t": "Svar: 4 x i kvadrat plus 3 x",
+   "s": 44.75,
+   "e": 76.64
+  },
+  {
+   "t": "Addition och subtraktion med parentesuttryck",
+   "s": 44.75,
+   "e": 76.64
+  },
+  {
+   "t": "När ett",
+   "s": 76.64,
+   "e": 78.66
+  },
+  {
+   "t": "plustecken står framför en parentes kan parentesen tas bort utan att ändra något inuti parentesen: a plus parentesen b plus c slut parentes är lika med a plus b plus c och a plus parentesen b minus c slut parentes är lika med a plus b minus c",
+   "s": 78.66,
+   "e": 109.28
+  },
+  {
+   "t": "minustecken står framför en parentes kan parentesen tas bort om man samtidigt ändrar tecknen på termerna inuti parentesen (plustecken blir minustecken och minustecken blir plustecken): a minus parentesen b plus c slut parentes är lika med a minus b minus c och a minus parentesen b minus c slut parentes är lika med a minus b plus c",
+   "s": 78.66,
+   "e": 118.88
+  },
+  {
+   "t": "Exempel 2 — Minustecken framför parentes",
+   "s": 109.28,
+   "e": 118.88
+  },
+  {
+   "t": "Förenkla 20 x minus parentesen 5 plus 3 x minus 7 y slut parentes .",
+   "s": 118.88,
+   "e": 125.84
+  },
+  {
+   "t": "Minustecknet framför parentesen gör att alla tecken inuti parentesen byts när parentesen tas bort:",
+   "s": 125.84,
+   "e": 147.39
+  },
+  {
+   "t": "20 x minus parentesen 5 plus 3 x minus 7 y slut parentes är lika med 20 x minus 5 minus 3 x plus 7 y som är lika med 17 x minus 5 plus 7 y",
+   "s": 125.84,
+   "e": 147.39
+  },
+  {
+   "t": "Svar: 17 x minus 5 plus 7 y",
+   "s": 125.84,
+   "e": 147.39
+  },
+  {
+   "t": "Exempel 3 — Rektangelns omkrets",
+   "s": 125.84,
+   "e": 147.39
+  },
+  {
+   "t": "Teckna ett förenklat uttryck för omkretsen till rektangeln nedan.",
+   "s": 147.39,
+   "e": 152.35
+  },
+  {
+   "t": "Eftersom motstående sidor i en rektangel är lika långa måste vänstersidan vara x och ovansidan vara 2 x plus 3 .",
+   "s": 152.35,
+   "e": 160.38
+  },
+  {
+   "t": "Omkretsen fås genom att lägga ihop alla sidor, dvs. som",
+   "s": 160.38,
+   "e": 165.49
+  },
+  {
+   "t": "parentesen 2 x plus 3 slut parentes plus parentesen 2 x plus 3 slut parentes plus x plus x är lika med 2 x plus 3 plus 2 x plus 3 plus x plus x som är lika med 6 x plus 6",
+   "s": 165.49,
+   "e": 180.46
+  },
+  {
+   "t": "Svar: 6 x plus 6",
+   "s": 180.46,
+   "e": 183.89
+  }
+ ]
+}

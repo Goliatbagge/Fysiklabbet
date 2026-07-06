@@ -1,0 +1,268 @@
+{
+ "id": "ma1c-1.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "cf88815c5851b6b9b9c145a8c4bc69fc48b6150c",
+ "dur": 259.91,
+ "segments": [
+  {
+   "t": "Tal i decimalform",
+   "s": 0.1,
+   "e": 2.7
+  },
+  {
+   "t": "Vårt positionssystem bygger på basen 10 och kallas det decimala talsystemet. (\"Decem\" betyder 10 på latin, jämför t.ex. med \"decennium\" som betyder årtionde.) Beroende på positionen i talet står siffran för olika saker.",
+   "s": 2.65,
+   "e": 19.89
+  },
+  {
+   "t": "Vi studerar talet 2708,539:",
+   "s": 19.89,
+   "e": 28.1
+  },
+  {
+   "t": "Siffrans position i talet avgör vad den står för.",
+   "s": 19.89,
+   "e": 28.1
+  },
+  {
+   "t": "2:an står alltså för hur många tusental vi har, 7:an för hur många hundratal vi har osv.",
+   "s": 28.1,
+   "e": 34.76
+  },
+  {
+   "t": "Avrundning",
+   "s": 34.76,
+   "e": 36.8
+  },
+  {
+   "t": "Ett värde som är avrundat kallas närmevärde.",
+   "s": 36.8,
+   "e": 40.48
+  },
+  {
+   "t": "Den siffra som ska avrundas kallas avrundningssiffra.",
+   "s": 40.48,
+   "e": 44.69
+  },
+  {
+   "t": "Avrundningsregeln",
+   "s": 44.69,
+   "e": 47.09
+  },
+  {
+   "t": "Exempel 1 — Avrundning",
+   "s": 47.09,
+   "e": 49.99
+  },
+  {
+   "t": "Avrunda 61,4738 till. a) tiondelar b) ental c) tiotal",
+   "s": 49.99,
+   "e": 58.85
+  },
+  {
+   "t": "a) Siffran 4 är tiondelssiffran.",
+   "s": 58.85,
+   "e": 62.59
+  },
+  {
+   "t": "Siffran efter fyran är 7, så fyran ökas med 1 (och blir 5).",
+   "s": 62.59,
+   "e": 68.15
+  },
+  {
+   "t": "Svar: 61,5",
+   "s": 68.15,
+   "e": 71.41
+  },
+  {
+   "t": "b) Siffran 1 är entalssiffran.",
+   "s": 71.41,
+   "e": 74.92
+  },
+  {
+   "t": "Siffran efter ettan är 4, så ettan behålls.",
+   "s": 74.92,
+   "e": 79.4
+  },
+  {
+   "t": "Svar: 61 (Observera att vi inte kan avrunda i två steg från svaret i a-uppgiften, eftersom det då hade blivit 62.)",
+   "s": 79.4,
+   "e": 88.53
+  },
+  {
+   "t": "c) Siffran 6 är tiotalssiffran.",
+   "s": 88.53,
+   "e": 92.47
+  },
+  {
+   "t": "Siffran efter sexan är 1, så sexan behålls (och sedan fyller vi på med nollor).",
+   "s": 92.47,
+   "e": 98.72
+  },
+  {
+   "t": "Svar: 60",
+   "s": 98.72,
+   "e": 101.3
+  },
+  {
+   "t": "Värdesiffror",
+   "s": 101.3,
+   "e": 103.39
+  },
+  {
+   "t": "När vi löser uppgifter som beskriver verkliga situationer behöver vi ofta avrunda.",
+   "s": 103.39,
+   "e": 108.84
+  },
+  {
+   "t": "Ett mått på hur noggrant ett närmevärde är kallas värdesiffror eller gällande siffror, och det styr hur mycket vi ska avrunda ett svar.",
+   "s": 108.84,
+   "e": 116.66
+  },
+  {
+   "t": "Jämför meningarna \"brädan är 4 meter\" och \"brädan är 4,00 meter\".",
+   "s": 116.66,
+   "e": 122.6
+  },
+  {
+   "t": "Även om 4 och 4,00 är samma tal, så indikerar 4,00 att vi har mätt brädan noggrannare.",
+   "s": 122.6,
+   "e": 130.14
+  },
+  {
+   "t": "4,00 har fler värdesiffror!",
+   "s": 130.14,
+   "e": 133.82
+  },
+  {
+   "t": "Antal värdesiffror i ett tal",
+   "s": 133.82,
+   "e": 136.99
+  },
+  {
+   "t": "Den första värdesiffran är den första siffran i ett tal som inte är 0.",
+   "s": 136.99,
+   "e": 141.9
+  },
+  {
+   "t": "Den sista värdesiffran är den sista siffran i talet.",
+   "s": 141.9,
+   "e": 146.15
+  },
+  {
+   "t": "Nollor i slutet av heltal måste inte vara värdesiffror — det beror på om det är avrundningsnollor eller inte.",
+   "s": 146.15,
+   "e": 152.85
+  },
+  {
+   "t": "Några exempel:",
+   "s": 152.85,
+   "e": 157.12
+  },
+  {
+   "t": "Antal värdesiffror i ett svar",
+   "s": 152.85,
+   "e": 157.12
+  },
+  {
+   "t": "Vid",
+   "s": 157.12,
+   "e": 165.95
+  },
+  {
+   "t": "multiplikation och division gäller att värdet med minsta antalet värdesiffror ger antalet värdesiffror i svaret (vanligast)",
+   "s": 157.12,
+   "e": 165.95
+  },
+  {
+   "t": "addition och subtraktion gäller att värdet med minsta antalet decimaler ger antalet decimaler i svaret.",
+   "s": 165.95,
+   "e": 173.14
+  },
+  {
+   "t": "Exempel 2 — Värdesiffror vid multiplikation",
+   "s": 173.14,
+   "e": 177.07
+  },
+  {
+   "t": "Framsidan av en bok är 19,5 centimeter × 24 centimeter.",
+   "s": 177.07,
+   "e": 182.74
+  },
+  {
+   "t": "Bestäm framsidans area.",
+   "s": 182.74,
+   "e": 185.54
+  },
+  {
+   "t": "area är lika med bas gånger höjd som är lika med 19,5 gånger 24 som är lika med 468 kvadratcentimeter",
+   "s": 185.54,
+   "e": 194.25
+  },
+  {
+   "t": "Vi har räknat multiplikation, så vi tittar på antalet värdesiffror.",
+   "s": 194.25,
+   "e": 199.36
+  },
+  {
+   "t": "19,5 har tre värdesiffror och 24 har två värdesiffror.",
+   "s": 199.36,
+   "e": 204.56
+  },
+  {
+   "t": "Vi avrundar till det minsta antalet värdesiffror, dvs. till två värdesiffror:",
+   "s": 204.56,
+   "e": 216.75
+  },
+  {
+   "t": "area är lika med 468 kvadratcentimeter som är ungefär lika med 470 kvadratcentimeter",
+   "s": 204.56,
+   "e": 216.75
+  },
+  {
+   "t": "Svar: 470 kvadratcentimeter",
+   "s": 216.75,
+   "e": 220.95
+  },
+  {
+   "t": "Exempel 3 — Decimaler vid subtraktion",
+   "s": 220.95,
+   "e": 224.78
+  },
+  {
+   "t": "Du har en bräda som är 1,73 meter och sågar av 1,3 meter.",
+   "s": 224.78,
+   "e": 230.09
+  },
+  {
+   "t": "Hur lång är brädbiten som är kvar?",
+   "s": 230.09,
+   "e": 233.35
+  },
+  {
+   "t": "brädbitens längd är lika med 1,73 meter minus 1,3 meter som är lika med 0,43 meter",
+   "s": 233.35,
+   "e": 240.86
+  },
+  {
+   "t": "Vi har räknat subtraktion, så vi tittar på antalet decimaler.",
+   "s": 240.86,
+   "e": 245.82
+  },
+  {
+   "t": "1,73 har två decimaler och 1,3 har en decimal.",
+   "s": 245.82,
+   "e": 250.91
+  },
+  {
+   "t": "Vi avrundar till det minsta antalet decimaler, dvs. till en decimal.",
+   "s": 250.91,
+   "e": 256.51
+  },
+  {
+   "t": "Svar: 0,4 meter",
+   "s": 256.51,
+   "e": 259.91
+  }
+ ]
+}

@@ -1,0 +1,103 @@
+{
+ "id": "ma1c-1.11",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5327e0d83322eda2e6a3abdce204be8ed0edb106",
+ "dur": 115.19,
+ "segments": [
+  {
+   "t": "Hur du slår på din räknare",
+   "s": 0.1,
+   "e": 2.94
+  },
+  {
+   "t": "Kontrollera att du kan göra de vanligaste uträkningarna med din räknare.",
+   "s": 2.89,
+   "e": 7.69
+  },
+  {
+   "t": "Testa att slå nedanstående beräkningar och se att du får korrekt svar med din räknare.",
+   "s": 7.69,
+   "e": 13.36
+  },
+  {
+   "t": "Testa din räknare",
+   "s": 13.36,
+   "e": 15.71
+  },
+  {
+   "t": "roten ur 7 är ungefär lika med 2,65 tredje roten ur 10 som är ungefär lika med 2,15 8:e roten ur 543 som är ungefär lika med 2,20",
+   "s": 15.71,
+   "e": 27.12
+  },
+  {
+   "t": "1,5 upphöjt till 9 är ungefär lika med 38,44 45 upphöjt till 2 delat med 3 som är ungefär lika med 12,65 35 upphöjt till minus 2 som är ungefär lika med 0,00082",
+   "s": 27.12,
+   "e": 41.27
+  },
+  {
+   "t": "parentesen minus 3,7 slut parentes i kvadrat är lika med 13,69",
+   "s": 41.27,
+   "e": 47.79
+  },
+  {
+   "t": "Parenteser i täljare och nämnare",
+   "s": 47.79,
+   "e": 51.0
+  },
+  {
+   "t": "När hela nämnaren (eller täljaren) består av flera tal måste den skrivas inom parentes på räknaren — annars räknar räknaren fel:",
+   "s": 51.0,
+   "e": 62.88
+  },
+  {
+   "t": "360 delat med 2 gånger 3 är lika med 60",
+   "s": 51.0,
+   "e": 62.88
+  },
+  {
+   "t": "På räknaren: 360/(2·3) — utan parentesen tolkas det som 360 delat med 2 gånger 3 är lika med 540 .",
+   "s": 62.88,
+   "e": 73.74
+  },
+  {
+   "t": "Svara som bråk",
+   "s": 73.74,
+   "e": 76.14
+  },
+  {
+   "t": "Många räknare kan svara i exakt bråkform i stället för decimalform.",
+   "s": 76.14,
+   "e": 81.36
+  },
+  {
+   "t": "Testa att din räknare kan förenkla",
+   "s": 81.36,
+   "e": 84.74
+  },
+  {
+   "t": "17 delat med 51 är lika med 1 delat med 3",
+   "s": 84.74,
+   "e": 89.12
+  },
+  {
+   "t": "Tolka räknarens tiopotenser",
+   "s": 89.12,
+   "e": 92.26
+  },
+  {
+   "t": "När talen blir mycket stora eller mycket små visar räknaren dem med E-notation, där E står för \"gånger 10 upphöjt till\":",
+   "s": 92.26,
+   "e": 106.41
+  },
+  {
+   "t": "3,7 E 12 är lika med 3,7 gånger 10 upphöjt till 12 som är lika med 3 700 000 000 000",
+   "s": 92.26,
+   "e": 106.41
+  },
+  {
+   "t": "2,5 E minus 4 är lika med 2,5 gånger 10 upphöjt till minus 4 som är lika med 0,000 25",
+   "s": 106.41,
+   "e": 115.19
+  }
+ ]
+}

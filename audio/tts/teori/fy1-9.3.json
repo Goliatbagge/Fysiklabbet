@@ -1,8 +1,8 @@
 {
  "id": "fy1-9.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "f1f463e3378820e7637e15df341c600b43150d77",
- "dur": 555.65,
+ "hash": "c183fb7525e7b0c549f6ef716f02d9944381118d",
+ "dur": 555.25,
  "segments": [
   {
    "t": "Radioaktivt sönderfall",
@@ -407,57 +407,57 @@
   {
    "t": "m höjden h ö tyngdfaktorn g e r är lika med parentesen 13,003355 minus 6 gånger 0,000549 slut parentes plus 0,000549 som är lika med 13,000610 u",
    "s": 457.74,
-   "e": 477.22
+   "e": 477.2
   },
   {
    "t": "Massdefekten delta massan m ger den frigjorda energin.",
    "s": 457.74,
-   "e": 477.22
+   "e": 477.2
   },
   {
    "t": "delta massan m är lika med m hastigheten v ä n sträckan s tiden t e r minus m höjden h ö tyngdfaktorn g e r som är lika med 13,001896 minus 13,000610 som är lika med 0,001286 u",
-   "s": 477.22,
-   "e": 494.25
+   "s": 477.2,
+   "e": 494.24
   },
   {
-   "t": "energin E är lika med 0,001286 gånger 931,49 megaelektronvolt som är lika med 1,197 ldots megaelektronvolt som är ungefär lika med 1,20 megaelektronvolt",
-   "s": 494.25,
-   "e": 509.19
+   "t": "energin E är lika med 0,001286 gånger 931,49 megaelektronvolt som är lika med 1,197 megaelektronvolt som är ungefär lika med 1,20 megaelektronvolt",
+   "s": 494.24,
+   "e": 508.8
   },
   {
    "t": "Svar: 1,20 megaelektronvolt",
-   "s": 509.19,
-   "e": 513.29
+   "s": 508.8,
+   "e": 512.89
   },
   {
    "t": "Upptäcka neutrinon",
-   "s": 513.29,
-   "e": 515.94
+   "s": 512.89,
+   "e": 515.54
   },
   {
    "t": "En av de mest framgångsrika metoderna för att detektera neutriner använder sig av det som kallas för tjerenkovstrålning.",
-   "s": 515.94,
-   "e": 523.17
+   "s": 515.54,
+   "e": 522.77
   },
   {
    "t": "När en neutrino interagerar med en atomkärna i vatten kan den skapa en sekundär partikel (till exempel en elektron) som rör sig snabbare än ljusets hastighet i vattnet.",
-   "s": 523.17,
-   "e": 533.64
+   "s": 522.77,
+   "e": 533.24
   },
   {
    "t": "Detta fenomen orsakar en sorts ljuschockvåg, liknande ljudbangen från ett överljudsflygplan, men i form av synligt ljus.",
-   "s": 533.64,
-   "e": 541.62
+   "s": 533.24,
+   "e": 541.22
   },
   {
    "t": "Detta ljus kan sedan upptäckas av fotomultiplikatorrör som bekläder insidan av en jättelik vattentank djupt under jorden eller under vattnet.",
-   "s": 541.62,
-   "e": 550.67
+   "s": 541.22,
+   "e": 550.27
   },
   {
    "t": "Ett exempel på en sådan anläggning är Super-Kamiokande i Japan.",
-   "s": 550.67,
-   "e": 555.65
+   "s": 550.27,
+   "e": 555.25
   }
  ]
 }

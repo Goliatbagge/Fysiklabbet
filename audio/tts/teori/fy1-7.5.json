@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "938c73ac448b7243e09cede57992f49d9a1a7938",
- "dur": 292.31,
+ "hash": "c7e57289c2d278e6eb33b949758fe6be77b5ba5a",
+ "dur": 294.86,
  "segments": [
   {
    "t": "Resistans och Ohms lag",
@@ -252,22 +252,22 @@
   {
    "t": "resistansen R är lika med densiteten rho gånger hävarmen l delat med arean A",
    "s": 241.64,
-   "e": 248.04
+   "e": 248.01
   },
   {
-   "t": "densiteten rho är lika med 0,027 µΩ\\cdotm som är lika med 0,027 gånger 10 upphöjt till minus 6 ohm\\cdotm parentesen tabell slut parentes hävarmen l som är lika med 2,0 meter arean A som är lika med 0,15 kvadratcentimeter som är lika med 0,15 gånger 10 upphöjt till minus 4 kvadratmeter",
-   "s": 248.04,
-   "e": 283.62
+   "t": "densiteten rho är lika med 0,027 µ Ω \\cdot m som är lika med 0,027 gånger 10 upphöjt till minus 6 ohm \\cdot m parentesen tabell slut parentes hävarmen l som är lika med 2,0 meter arean A som är lika med 0,15 kvadratcentimeter som är lika med 0,15 gånger 10 upphöjt till minus 4 kvadratmeter",
+   "s": 248.01,
+   "e": 271.64
   },
   {
    "t": "resistansen R är lika med 0,027 gånger 10 upphöjt till minus 6 gånger 2,0 delat med 0,15 gånger 10 upphöjt till minus 4 som är lika med 0,0036 ohm som är lika med 3,6 meterΩ",
-   "s": 248.04,
-   "e": 283.62
+   "s": 271.64,
+   "e": 286.12
   },
   {
    "t": "Svar: 3,6 meterΩ eller 3,6 gånger 10 upphöjt till minus 3 ohm eller 0,0036 ohm",
-   "s": 283.62,
-   "e": 292.31
+   "s": 286.12,
+   "e": 294.86
   }
  ]
 }

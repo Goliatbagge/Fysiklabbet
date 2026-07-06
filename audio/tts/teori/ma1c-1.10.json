@@ -1,0 +1,198 @@
+{
+ "id": "ma1c-1.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "cfcab5ad13f75b9346f9748e81f04630417fd9e4",
+ "dur": 199.57,
+ "segments": [
+  {
+   "t": "Prioriteringsregler",
+   "s": 0.1,
+   "e": 2.59
+  },
+  {
+   "t": "Introduktion",
+   "s": 2.54,
+   "e": 4.56
+  },
+  {
+   "t": "Beräkningen 5 plus 2 gånger 3 ger olika svar beroende på i vilken ordning man räknar.",
+   "s": 4.56,
+   "e": 10.79
+  },
+  {
+   "t": "Om vi först räknar ut 5 plus 2 får vi",
+   "s": 10.79,
+   "e": 14.61
+  },
+  {
+   "t": "5 plus 2 gånger 3 är lika med 7 gånger 3 som är lika med 21",
+   "s": 14.61,
+   "e": 20.05
+  },
+  {
+   "t": "Om vi i stället räknar ut 2 gånger 3 först får vi",
+   "s": 20.05,
+   "e": 24.51
+  },
+  {
+   "t": "5 plus 2 gånger 3 är lika med 5 plus 6 som är lika med 11",
+   "s": 24.51,
+   "e": 29.73
+  },
+  {
+   "t": "Eftersom svaren blir olika spelar ordningen på räkneoperationerna roll.",
+   "s": 29.73,
+   "e": 34.81
+  },
+  {
+   "t": "Regler för vilka beräkningar man ska utföra först kallas prioriteringsregler.",
+   "s": 34.81,
+   "e": 40.33
+  },
+  {
+   "t": "Prioriteringsregler",
+   "s": 40.33,
+   "e": 42.81
+  },
+  {
+   "t": "Parenteser — ( )",
+   "s": 42.81,
+   "e": 45.04
+  },
+  {
+   "t": "Potenser — a upphöjt till b",
+   "s": 45.04,
+   "e": 51.02
+  },
+  {
+   "t": "Multiplikation och division — gånger och /",
+   "s": 45.04,
+   "e": 51.02
+  },
+  {
+   "t": "Addition och subtraktion — + och −",
+   "s": 51.02,
+   "e": 54.4
+  },
+  {
+   "t": "Den korrekta uträkningen för exemplet ovan är alltså att först beräkna multiplikationen, så",
+   "s": 54.4,
+   "e": 60.74
+  },
+  {
+   "t": "5 plus 2 gånger 3 är lika med 5 plus 6 som är lika med 11",
+   "s": 60.74,
+   "e": 66.03
+  },
+  {
+   "t": "Mattedjävulen",
+   "s": 66.03,
+   "e": 68.12
+  },
+  {
+   "t": "\"Mattedjävulen\" är en bild för att komma ihåg prioriteringsreglerna.",
+   "s": 68.12,
+   "e": 72.67
+  },
+  {
+   "t": "Läs den uppifrån och ner!",
+   "s": 72.67,
+   "e": 75.84
+  },
+  {
+   "t": "Hornen är parenteser, ögonen potenser, kinderna multiplikation och division, munnen addition och hakan subtraktion.",
+   "s": 75.84,
+   "e": 84.54
+  },
+  {
+   "t": "Nu är det också dags att gå igenom några viktiga begrepp, nämligen vad delarna heter vid olika räknesätt.",
+   "s": 84.54,
+   "e": 91.21
+  },
+  {
+   "t": "Lär dig dessa utantill!",
+   "s": 91.21,
+   "e": 93.94
+  },
+  {
+   "t": "Räknesättens delar",
+   "s": 93.94,
+   "e": 96.56
+  },
+  {
+   "t": "Exempel 1 — Räkna i rätt ordning",
+   "s": 96.56,
+   "e": 100.04
+  },
+  {
+   "t": "Beräkna. a) 5 gånger parentesen 3 plus 6 slut parentes b) 8 gånger 10 minus parentesen 4 gånger 2 minus 3 slut parentes c) 9 gånger 5 minus parentesen 10 minus 7 slut parentes i kvadrat d) 15 delat med 5 minus 2",
+   "s": 100.04,
+   "e": 119.4
+  },
+  {
+   "t": "a) Beräkna parentesen först:",
+   "s": 119.4,
+   "e": 129.05
+  },
+  {
+   "t": "5 gånger parentesen 3 plus 6 slut parentes är lika med 5 gånger 9 som är lika med 45",
+   "s": 119.4,
+   "e": 129.05
+  },
+  {
+   "t": "Svar: 45",
+   "s": 129.05,
+   "e": 131.61
+  },
+  {
+   "t": "b) Multiplikationen i parentesen först, sedan parentesen, sedan multiplikationen och till sist differensen:",
+   "s": 131.61,
+   "e": 153.55
+  },
+  {
+   "t": "8 gånger 10 minus parentesen 4 gånger 2 minus 3 slut parentes är lika med 8 gånger 10 minus parentesen 8 minus 3 slut parentes som är lika med 8 gånger 10 minus 5 som är lika med 80 minus 5 som är lika med 75",
+   "s": 131.61,
+   "e": 153.55
+  },
+  {
+   "t": "Svar: 75",
+   "s": 153.55,
+   "e": 156.09
+  },
+  {
+   "t": "c) Parentesen först, sedan potensen, sedan multiplikationen och till sist differensen:",
+   "s": 156.09,
+   "e": 175.47
+  },
+  {
+   "t": "9 gånger 5 minus parentesen 10 minus 7 slut parentes i kvadrat är lika med 9 gånger 5 minus 3 i kvadrat som är lika med 9 gånger 5 minus 9 som är lika med 45 minus 9 som är lika med 36",
+   "s": 156.09,
+   "e": 175.47
+  },
+  {
+   "t": "Svar: 36",
+   "s": 175.47,
+   "e": 178.16
+  },
+  {
+   "t": "d) I divisioner finns \"osynliga\" parenteser.",
+   "s": 178.16,
+   "e": 182.72
+  },
+  {
+   "t": "Man kan tänka sig att det är en parentes kring täljaren och nämnaren — nämnaren beräknas först:",
+   "s": 182.72,
+   "e": 197.34
+  },
+  {
+   "t": "15 delat med 5 minus 2 är lika med 15 delat med parentesen 5 minus 2 slut parentes som är lika med 15 delat med 3 som är lika med 5",
+   "s": 182.72,
+   "e": 197.34
+  },
+  {
+   "t": "Svar: 5",
+   "s": 197.34,
+   "e": 199.57
+  }
+ ]
+}

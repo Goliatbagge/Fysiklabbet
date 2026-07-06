@@ -1,8 +1,8 @@
 {
  "id": "fy1-2.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "a107d323a51d8a95cc010488014062a49359dc0b",
- "dur": 504.23,
+ "hash": "e6a5520476107fb7977be5bb13b39cbc1fd2363e",
+ "dur": 504.95,
  "segments": [
   {
    "t": "Rörelse med konstant acceleration",
@@ -317,92 +317,92 @@
   {
    "t": "sträckan s är lika med 18 gånger 3,0 plus 2,0 gånger 3,0 i kvadrat delat med 2 som är lika med 54 plus 18 delat med 2 som är lika med 54 plus 9 som är lika med 63 meter",
    "s": 351.28,
-   "e": 364.88
+   "e": 364.92
   },
   {
    "t": "Svar: 63 meter",
-   "s": 364.88,
-   "e": 367.98
+   "s": 364.92,
+   "e": 368.02
   },
   {
    "t": "c) Vi ställer upp formeln för hastighet vid konstant acceleration och löser ut tiden t.",
-   "s": 367.98,
-   "e": 399.19
+   "s": 368.02,
+   "e": 382.2
   },
   {
    "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t vilket är ekvivalent med att t är lika med v minus v noll delat med a",
-   "s": 367.98,
-   "e": 399.19
+   "s": 368.02,
+   "e": 382.2
   },
   {
-   "t": "hastigheten v är lika med 16 meter per sekund v noll som är lika med 24 meter per sekund parentesen hastighetenvid3,0senligta-uppgiften slut parentes accelerationen a som är lika med minus 4,0 meter per sekund i kvadrat parentesen minustecken—negativacceleration slut parentes",
-   "s": 367.98,
-   "e": 401.33
+   "t": "hastigheten v är lika med 16 meter per sekund v noll som är lika med 24 meter per sekund parentesen hastigheten vid 3,0 sekunder enligt a-uppgiften slut parentes accelerationen a som är lika med minus 4,0 meter per sekund i kvadrat parentesen minustecken — negativ acceleration slut parentes",
+   "s": 382.2,
+   "e": 402.3
   },
   {
    "t": "tiden t är lika med 16 minus 24 delat med minus 4,0 som är lika med minus 8,0 delat med minus 4,0 som är lika med 2,0 sekund",
-   "s": 401.33,
-   "e": 411.92
+   "s": 402.3,
+   "e": 412.9
   },
   {
    "t": "Svar: 2,0 sekunder",
-   "s": 411.92,
-   "e": 415.23
+   "s": 412.9,
+   "e": 416.23
   },
   {
    "t": "Exempel 2 — Bestäm din reaktionstid",
-   "s": 415.23,
-   "e": 418.83
+   "s": 416.23,
+   "e": 419.83
   },
   {
    "t": "Låt din kompis hålla upp en linjal lodrätt medan du håller din tumme och pekfinger så att överkanten på dina fingrar är vid linjalens nollmarkering.",
-   "s": 418.83,
-   "e": 427.67
+   "s": 419.83,
+   "e": 428.67
   },
   {
    "t": "När kompisen släpper ska du nypa ihop fingrarna så fort som möjligt.",
-   "s": 427.67,
-   "e": 432.35
+   "s": 428.67,
+   "e": 433.35
   },
   {
    "t": "Läs av på linjalen var överkanten på dina fingrar hamnade.",
-   "s": 432.35,
-   "e": 437.08
+   "s": 433.35,
+   "e": 438.08
   },
   {
    "t": "Räkna sedan ut din reaktionstid.",
-   "s": 437.08,
-   "e": 440.28
+   "s": 438.08,
+   "e": 441.28
   },
   {
    "t": "Linjalen faller med den konstanta accelerationen g är lika med 9,82 meter per sekund i kvadrat och vi får en fallsträcka som vi läser av vid fingrarna. (Eftersom vi tittar på sträckan behöver vi inte bry oss om minustecken.) Vi ställer upp formeln för sträcka vid konstant acceleration och löser ut tiden t.",
-   "s": 440.28,
-   "e": 460.49
+   "s": 441.28,
+   "e": 461.49
   },
   {
    "t": "Eftersom v noll är lika med 0 kan den termen uteslutas, så",
-   "s": 460.49,
-   "e": 465.59
+   "s": 461.49,
+   "e": 466.59
   },
   {
    "t": "sträckan s är lika med tyngdfaktorn g gånger tiden t i kvadrat delat med 2 vilket är ekvivalent med att t är lika med roten ur 2 gånger s delat med g",
-   "s": 465.59,
-   "e": 475.65
+   "s": 466.59,
+   "e": 476.65
   },
   {
    "t": "Om du till exempel skulle få dina fingrar vid 12,0 centimeter gäller s är lika med 12,0 centimeter = 0,120 meter och g är lika med 9,82 meter per sekund i kvadrat, vilket ger reaktionstiden",
-   "s": 475.65,
-   "e": 490.3
+   "s": 476.65,
+   "e": 491.29
   },
   {
-   "t": "tiden t är lika med roten ur 2 gånger 0,120 delat med 9,82 som är lika med 0,1563 ldots sekund",
-   "s": 490.3,
-   "e": 499.8
+   "t": "tiden t är lika med roten ur 2 gånger 0,120 delat med 9,82 som är lika med 0,1563 sekund",
+   "s": 491.29,
+   "e": 500.5
   },
   {
    "t": "Svar: 0,156 sekunder",
-   "s": 499.8,
-   "e": 504.23
+   "s": 500.5,
+   "e": 504.95
   }
  ]
 }

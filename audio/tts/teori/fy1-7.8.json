@@ -1,8 +1,8 @@
 {
  "id": "fy1-7.8",
  "voice": "sv-SE-SofieNeural",
- "hash": "6e7915ddc69a07c74cdad1c47f1d712be8377a22",
- "dur": 294.68,
+ "hash": "93eecc38e2d8dd635b1f3011358de027e76c256f",
+ "dur": 292.18,
  "segments": [
   {
    "t": "Komplexa kopplingar",
@@ -30,209 +30,209 @@
    "e": 19.98
   },
   {
-   "t": "Seriekoppling: R tiden t o t är lika med R ett plus R två plus ldots",
+   "t": "Seriekoppling: R tiden t o t är lika med R ett plus R två plus",
    "s": 19.98,
-   "e": 26.16
+   "e": 25.91
   },
   {
-   "t": "Parallellkoppling: 1 delat med R tiden t o t är lika med 1 delat med R ett plus 1 delat med R två plus ldots",
-   "s": 26.16,
-   "e": 33.92
+   "t": "Parallellkoppling: 1 delat med R tiden t o t är lika med 1 delat med R ett plus 1 delat med R två plus",
+   "s": 25.91,
+   "e": 33.45
   },
   {
    "t": "Ohms lag: spänningen U är lika med resistansen R gånger strömmen I",
-   "s": 33.92,
-   "e": 44.69
+   "s": 33.45,
+   "e": 44.21
   },
   {
    "t": "Kirchhoffs första lag: Totala strömmen in i en punkt är lika stor som totala strömmen ut från punkten.",
-   "s": 33.92,
-   "e": 44.69
+   "s": 33.45,
+   "e": 44.21
   },
   {
    "t": "Ström i seriekoppling: Strömmen genom seriekopplade komponenter är lika stor.",
-   "s": 44.69,
-   "e": 50.56
+   "s": 44.21,
+   "e": 50.09
   },
   {
    "t": "Spänning i parallellkoppling: Spänningen över parallellkopplade komponenter är lika stor.",
-   "s": 50.56,
-   "e": 57.04
+   "s": 50.09,
+   "e": 56.56
   },
   {
    "t": "Exempel 1 — Tre resistorer, en seriekopplad med en parallell­koppling",
-   "s": 57.04,
-   "e": 62.55
+   "s": 56.56,
+   "e": 62.08
   },
   {
    "t": "Tre resistorer har kopplats enligt figuren och ansluts till spänningen 20 volt.",
-   "s": 62.55,
-   "e": 68.28
+   "s": 62.08,
+   "e": 67.8
   },
   {
    "t": "En 18 ohm-resistor sitter i serie med en parallellkoppling av en 20 ohm- och en 30 ohm-resistor.",
-   "s": 68.28,
-   "e": 74.89
+   "s": 67.8,
+   "e": 74.41
   },
   {
    "t": "Bestäm",
-   "s": 74.89,
-   "e": 76.59
+   "s": 74.41,
+   "e": 76.11
   },
   {
    "t": "R ett i serie med parallellkopplingen av R två och R tre, ansluten till spänningskällan.",
-   "s": 76.59,
-   "e": 82.95
+   "s": 76.11,
+   "e": 82.47
   },
   {
    "t": "a) den totala resistansen i kretsen.",
-   "s": 82.95,
-   "e": 86.69
+   "s": 82.47,
+   "e": 86.21
   },
   {
    "t": "b) strömmen genom 18 ohm-resistorn.",
-   "s": 86.69,
-   "e": 90.61
+   "s": 86.21,
+   "e": 90.14
   },
   {
    "t": "c) strömmen genom 20 ohm- och 30 ohm-resistorn.",
-   "s": 90.61,
-   "e": 95.22
+   "s": 90.14,
+   "e": 94.75
   },
   {
    "t": "a) I denna krets har vi två parallellkopplade resistorer ( R två och R tre ) som sitter i serie med den första resistorn ( R ett ).",
-   "s": 95.22,
-   "e": 104.33
+   "s": 94.75,
+   "e": 103.85
   },
   {
    "t": "Vi börjar med att beräkna ersättningsresistansen R 2,3 för de parallellkopplade resistorerna.",
-   "s": 104.33,
-   "e": 111.11
+   "s": 103.85,
+   "e": 110.64
   },
   {
-   "t": "1 delat med R 2,3 är lika med 1 delat med R två plus 1 delat med R tre som är lika med 1 delat med 20 plus 1 delat med 30 som är lika med 0,0833 ldots",
-   "s": 111.11,
-   "e": 122.35
+   "t": "1 delat med R 2,3 är lika med 1 delat med R två plus 1 delat med R tre som är lika med 1 delat med 20 plus 1 delat med 30 som är lika med 0,0833",
+   "s": 110.64,
+   "e": 121.53
   },
   {
-   "t": "R 2,3 är lika med 1 delat med 0,0833 ldots som är lika med 12 ohm",
-   "s": 122.35,
-   "e": 129.12
+   "t": "R 2,3 är lika med 1 delat med 0,0833 som är lika med 12 ohm",
+   "s": 121.53,
+   "e": 127.9
   },
   {
    "t": "Dessa sitter i serie med R ett är lika med 18 ohm , så den totala resistansen i kretsen R tiden t o t fås av",
-   "s": 129.12,
-   "e": 137.31
+   "s": 127.9,
+   "e": 136.09
   },
   {
    "t": "R tiden t o t är lika med R ett plus R 2,3 som är lika med 18 plus 12 som är lika med 30 ohm",
-   "s": 137.31,
-   "e": 144.99
+   "s": 136.09,
+   "e": 143.76
   },
   {
    "t": "Svar: 30 ohm",
-   "s": 144.99,
-   "e": 147.71
+   "s": 143.76,
+   "e": 146.49
   },
   {
    "t": "b) Strömmen ut från batteriet I kommer att vara densamma som strömmen genom 18 ohm-resistorn I ett eftersom den inte kan ta någon annan väg.",
-   "s": 147.71,
-   "e": 156.76
+   "s": 146.49,
+   "e": 155.54
   },
   {
    "t": "Vi beräknar strömmen ut från batteriet genom att lösa ut strömmen I från Ohms lag.",
-   "s": 156.76,
-   "e": 162.36
+   "s": 155.54,
+   "e": 161.14
   },
   {
    "t": "spänningen U är lika med resistansen R gånger strömmen I vilket är ekvivalent med att I är lika med U delat med R",
-   "s": 162.36,
-   "e": 176.43
+   "s": 161.14,
+   "e": 175.35
   },
   {
-   "t": "spänningen U är lika med 20 volt R tiden t o t som är lika med 30 ohm parentesen fråna-uppgiften slut parentes",
-   "s": 162.36,
-   "e": 176.43
+   "t": "spänningen U är lika med 20 volt R tiden t o t som är lika med 30 ohm parentesen från a-uppgiften slut parentes",
+   "s": 161.14,
+   "e": 175.35
   },
   {
-   "t": "I ett är lika med strömmen I som är lika med 20 delat med 30 som är lika med 0,666 ldots ampere som är ungefär lika med 0,67 ampere",
-   "s": 176.43,
-   "e": 186.94
+   "t": "I ett är lika med strömmen I som är lika med 20 delat med 30 som är lika med 0,666 ampere som är ungefär lika med 0,67 ampere",
+   "s": 175.35,
+   "e": 185.55
   },
   {
    "t": "Svar: 0,67 ampere",
-   "s": 186.94,
-   "e": 190.64
+   "s": 185.55,
+   "e": 189.25
   },
   {
    "t": "c) Efter att strömmen har passerat 18 ohm-resistorn delar den upp sig i förgreningen.",
-   "s": 190.64,
-   "e": 196.82
+   "s": 189.25,
+   "e": 195.44
   },
   {
    "t": "För att bestämma strömmen genom 20 ohm-resistorn ställer vi upp Ohms lag för den resistorn och löser ut strömmen I två .",
-   "s": 196.82,
-   "e": 204.07
+   "s": 195.44,
+   "e": 202.69
   },
   {
    "t": "U två är lika med R två gånger I två vilket är ekvivalent med att I två är lika med U två delat med R två, ekvation 1",
-   "s": 204.07,
-   "e": 212.55
+   "s": 202.69,
+   "e": 211.16
   },
   {
    "t": "Vi har R två är lika med 20 ohm , men saknar U två .",
-   "s": 212.55,
-   "e": 217.36
+   "s": 211.16,
+   "e": 215.97
   },
   {
    "t": "Vi beräknar U två med summan av delspänningar.",
-   "s": 217.36,
-   "e": 221.4
+   "s": 215.97,
+   "e": 220.01
   },
   {
    "t": "U ett plus U två är lika med spänningen U vilket är ekvivalent med att U två är lika med U minus U ett",
-   "s": 221.4,
-   "e": 228.78
+   "s": 220.01,
+   "e": 227.39
   },
   {
-   "t": "spänningen U är lika med 20 volt U ett som är lika med R ett gånger I ett som är lika med 18 ohm gånger 0,666 ldots ampere som är lika med 12 volt",
-   "s": 228.78,
-   "e": 239.69
+   "t": "spänningen U är lika med 20 volt U ett som är lika med R ett gånger I ett som är lika med 18 ohm gånger 0,666 ampere som är lika med 12 volt",
+   "s": 227.39,
+   "e": 237.94
   },
   {
    "t": "U två är lika med 20 minus 12 som är lika med 8 volt",
-   "s": 239.69,
-   "e": 244.59
+   "s": 237.94,
+   "e": 242.82
   },
   {
    "t": "Insättning av U två är lika med 8 volt och R två är lika med 20 ohm i ekvation 1 ger",
-   "s": 244.59,
-   "e": 251.31
+   "s": 242.82,
+   "e": 249.54
   },
   {
    "t": "I två är lika med 8,0 delat med 20 som är lika med 0,40 ampere",
-   "s": 251.31,
-   "e": 257.1
+   "s": 249.54,
+   "e": 255.32
   },
   {
    "t": "Strömmen genom 20 ohm-resistorn är alltså 0,40 ampere.",
-   "s": 257.1,
-   "e": 262.06
+   "s": 255.32,
+   "e": 260.29
   },
   {
    "t": "Eftersom strömmen innan förgreningen var 0,666… A måste strömmen genom 30 ohm-resistorn enligt Kirchhoffs första lag vara",
-   "s": 262.06,
-   "e": 272.41
+   "s": 260.29,
+   "e": 270.64
   },
   {
-   "t": "I tre är lika med I ett minus I två som är lika med parentesen 0,666 ldots minus 0,40 slut parentes ampere som är lika med 0,266 ldots ampere som är ungefär lika med 0,27 ampere",
-   "s": 272.41,
-   "e": 287.05
+   "t": "I tre är lika med I ett minus I två som är lika med parentesen 0,666 minus 0,40 slut parentes ampere som är lika med 0,266 ampere som är ungefär lika med 0,27 ampere",
+   "s": 270.64,
+   "e": 284.55
   },
   {
    "t": "Svar: 0,40 ampere genom 20 ohm-resistorn och 0,27 ampere genom 30 ohm-resistorn.",
-   "s": 287.05,
-   "e": 294.68
+   "s": 284.55,
+   "e": 292.18
   }
  ]
 }

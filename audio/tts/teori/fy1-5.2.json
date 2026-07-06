@@ -1,8 +1,8 @@
 {
  "id": "fy1-5.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "d9e672cfb851b2a17a7a1ad405cdec2080e945a1",
- "dur": 295.05,
+ "hash": "fd659ccb07b3bd228ab8ee2340567bc4c270d341",
+ "dur": 294.99,
  "segments": [
   {
    "t": "Vätsketryck",
@@ -212,57 +212,57 @@
   {
    "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h",
    "s": 211.4,
-   "e": 232.45
+   "e": 232.39
   },
   {
-   "t": "densiteten rho hastigheten v accelerationen a tiden t t e n är lika med 1 028 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,8 newton per kilogram parentesen handökinteiSverige slut parentes höjden h som är lika med 253,2 meter",
+   "t": "densiteten rho hastigheten v accelerationen a tiden t t e n är lika med 1 028 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,8 newton per kilogram parentesen han dök inte i Sverige slut parentes höjden h som är lika med 253,2 meter",
    "s": 211.4,
-   "e": 232.45
+   "e": 232.39
   },
   {
    "t": "trycket p är lika med 1 028 gånger 9,8 gånger 253,2 som är lika med 2 550 838,08 pascal som är ungefär lika med 2,6 gånger 10 upphöjt till 6 pascal som är lika med 2,6 MPa",
-   "s": 232.45,
-   "e": 249.59
+   "s": 232.39,
+   "e": 249.53
   },
   {
    "t": "Svar: 2,6 MPa (vilket motsvarar 25 gånger större tryck än normalt lufttryck)",
-   "s": 249.59,
-   "e": 256.86
+   "s": 249.53,
+   "e": 256.8
   },
   {
    "t": "Fysik i vardagen — Vattentorn",
-   "s": 256.86,
-   "e": 260.07
+   "s": 256.8,
+   "e": 260.01
   },
   {
    "t": "Högst upp i ett vattentorn finns en vattentank.",
-   "s": 260.07,
-   "e": 263.88
+   "s": 260.01,
+   "e": 263.81
   },
   {
    "t": "Vatten pumpas upp i tanken med en pump.",
-   "s": 263.88,
-   "e": 267.39
+   "s": 263.81,
+   "e": 267.32
   },
   {
    "t": "När vattnet väl är uppe i tanken behövs inte pumpen längre utan vattnet trycks ut i vattenledningarna av sin egen tyngd.",
-   "s": 267.39,
-   "e": 274.75
+   "s": 267.32,
+   "e": 274.69
   },
   {
    "t": "Ett sådant vattentorn syns till exempel tydligt i Stenstorp.",
-   "s": 274.75,
-   "e": 279.35
+   "s": 274.69,
+   "e": 279.29
   },
   {
    "t": "I Falköping har vi istället vattenreservoarer som fungerar på samma sätt, fast de är under marken (men fortfarande högre upp än vattenkranarna i våra hus).",
-   "s": 279.35,
-   "e": 289.29
+   "s": 279.29,
+   "e": 289.23
   },
   {
    "t": "Tänk till: var någonstans i lägenhetshuset är det störst tryck i vattenkranarna?",
-   "s": 289.29,
-   "e": 295.05
+   "s": 289.23,
+   "e": 294.99
   }
  ]
 }

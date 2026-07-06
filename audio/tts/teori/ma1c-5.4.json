@@ -1,0 +1,338 @@
+{
+ "id": "ma1c-5.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ff3291055e9714cffaafd708bf48acbf7887c6e0",
+ "dur": 427.45,
+ "segments": [
+  {
+   "t": "Den klassiska sannolikhetsdefinitionen",
+   "s": 0.1,
+   "e": 3.69
+  },
+  {
+   "t": "Introduktion — Tre sanna osannolikheter",
+   "s": 3.64,
+   "e": 7.35
+  },
+  {
+   "t": "Den 28 juli 1900 åkte Italiens kung Umberto I till en restaurang för middag.",
+   "s": 7.35,
+   "e": 13.19
+  },
+  {
+   "t": "När ägaren, som heter Umberto, tog kungens order, märkte han att de såg väldigt lika ut.",
+   "s": 13.19,
+   "e": 19.94
+  },
+  {
+   "t": "Så de tillbringade kvällen med att prata och upptäckte: de föddes båda den 14 mars 1844; de gifte sig båda med kvinnor med namnet Margherita samma dag; restaurangen öppnades samma dag som kungen kröntes.",
+   "s": 19.94,
+   "e": 33.01
+  },
+  {
+   "t": "Nästa dag fick kungen veta att restaurangägaren hade dött i en mystisk skjutning samma morgon.",
+   "s": 33.01,
+   "e": 39.27
+  },
+  {
+   "t": "När kungen pratade med en vän om det mördades kungen av en man i folkmassan.",
+   "s": 39.27,
+   "e": 44.55
+  },
+  {
+   "t": "Napoleon och Hitler föddes med 129 års mellanrum, kom till makten med 129 års mellanrum, förklarade krig med Ryssland med 129 års mellanrum och besegrades med 129 års mellanrum.",
+   "s": 44.55,
+   "e": 58.14
+  },
+  {
+   "t": "Två tvillingpojkar separerades vid födseln.",
+   "s": 58.14,
+   "e": 62.0
+  },
+  {
+   "t": "Deras adoptivfamiljer gav dem båda namnet James, de båda utbildade sig till poliser och gifte sig sedan med en kvinna som hette Linda.",
+   "s": 62.0,
+   "e": 70.19
+  },
+  {
+   "t": "De hade båda pojkar, varav en hette James Alan och en som hette James Allan.",
+   "s": 70.19,
+   "e": 75.64
+  },
+  {
+   "t": "De skilde sig från sina fruar Linda och gifte sig igen med kvinnor som hette Betty.",
+   "s": 75.64,
+   "e": 80.94
+  },
+  {
+   "t": "De hade båda en hund som heter Toy.",
+   "s": 80.94,
+   "e": 84.19
+  },
+  {
+   "t": "Roy Cleveland Sullivan, född 7 februari 1912, död 28 september 1983, var en amerikansk skogvaktare i Shenandoah nationalpark i Virginia.",
+   "s": 84.19,
+   "e": 95.28
+  },
+  {
+   "t": "Han är den person som träffats flest gånger av blixten.",
+   "s": 95.28,
+   "e": 99.59
+  },
+  {
+   "t": "Mellan 1942 och 1977 träffades Sullivan av blixtar vid sju olika tillfällen och överlevde dem alla.",
+   "s": 99.59,
+   "e": 107.65
+  },
+  {
+   "t": "Av denna anledning fick han smeknamnet \"Den mänskliga blixtledaren\" (The Human Lightning Rod).",
+   "s": 107.65,
+   "e": 113.79
+  },
+  {
+   "t": "Samtliga fall har bekräftats av läkare.",
+   "s": 113.79,
+   "e": 117.42
+  },
+  {
+   "t": "Slutsats: Det är väldigt sannolikt att osannolika saker sker!",
+   "s": 117.42,
+   "e": 122.45
+  },
+  {
+   "t": "Hur stor chans/risk att en händelse inträffar kallas sannolikhet och anges i decimal-, procent- eller bråkform.",
+   "s": 122.45,
+   "e": 130.7
+  },
+  {
+   "t": "Resultatet av varje slumpförsök kallas utfall.",
+   "s": 130.7,
+   "e": 134.94
+  },
+  {
+   "t": "Mängden av alla möjliga utfall kallas utfallsrum.",
+   "s": 134.94,
+   "e": 139.1
+  },
+  {
+   "t": "De utfall som stämmer in på händelsen kallas gynnsamma utfall.",
+   "s": 139.1,
+   "e": 143.66
+  },
+  {
+   "t": "Sannolikheten för en händelse skrivs P av händelse ( P från \"probability\" är lika med sannolikhet).",
+   "s": 143.66,
+   "e": 150.89
+  },
+  {
+   "t": "Om sannolikheten för varje utfall är lika stor har vi en likformig sannolikhetsfördelning som beräknas med den klassiska sannolikhetsdefinitionen.",
+   "s": 150.89,
+   "e": 159.54
+  },
+  {
+   "t": "Den klassiska sannolikhetsdefinitionen",
+   "s": 159.54,
+   "e": 163.14
+  },
+  {
+   "t": "Sannolikheten vid likformig sannolikhetsfördelning är",
+   "s": 163.14,
+   "e": 167.57
+  },
+  {
+   "t": "P av händelse är lika med antalet gynnsamma utfall delat med antalet möjliga utfall",
+   "s": 167.57,
+   "e": 173.56
+  },
+  {
+   "t": "Vid slantsingling har varje utfall samma sannolikhet.",
+   "s": 173.56,
+   "e": 177.88
+  },
+  {
+   "t": "Det är lika stor chans att få en krona som att få en klave.",
+   "s": 177.88,
+   "e": 182.22
+  },
+  {
+   "t": "Vid straffläggning i fotboll är sannolikheten för mål inte samma som sannolikheten för miss.",
+   "s": 182.22,
+   "e": 188.41
+  },
+  {
+   "t": "Formeln ovan fungerar alltså för slantsingling, men inte för straffläggning.",
+   "s": 188.41,
+   "e": 194.07
+  },
+  {
+   "t": "Sannolikheten för en händelse anges i decimalform som ett tal mellan 0 och 1.",
+   "s": 194.07,
+   "e": 200.18
+  },
+  {
+   "t": "Sannolikheten är lika med 0 betyder att händelsen är en omöjlighet. \"Sannolikheten att slå en sjua på en vanlig tärning är 0.\"",
+   "s": 200.18,
+   "e": 210.24
+  },
+  {
+   "t": "Sannolikheten är lika med 1 betyder att händelsen garanterat kommer att inträffa. \"Sannolikheten att dra upp en vit strumpa ur en låda med enbart vita strumpor är 1.\"",
+   "s": 210.24,
+   "e": 222.56
+  },
+  {
+   "t": "Exempel 1 — Tre klassiska sannolikheter",
+   "s": 222.56,
+   "e": 226.6
+  },
+  {
+   "t": "Vad är sannolikheten att. a) få klave vid slantsingling? b) slå minst 5 med en (vanlig) tärning? c) dra ett klätt hjärter ur en kortlek?",
+   "s": 226.6,
+   "e": 240.99
+  },
+  {
+   "t": "a) Antalet gynnsamma utfall är lika med 1 (klave).",
+   "s": 240.99,
+   "e": 246.03
+  },
+  {
+   "t": "Antalet möjliga utfall är lika med 2 (krona, klave):",
+   "s": 246.03,
+   "e": 259.61
+  },
+  {
+   "t": "P av klave är lika med antalet gynnsamma utfall delat med antalet möjliga utfall som är lika med 1 delat med 2 som är lika med 0,5 som är lika med 50 procent",
+   "s": 246.03,
+   "e": 259.61
+  },
+  {
+   "t": "Svar: 0,5",
+   "s": 259.61,
+   "e": 262.56
+  },
+  {
+   "t": "b) Antalet gynnsamma utfall är lika med 2 (femma och sexa).",
+   "s": 262.56,
+   "e": 268.11
+  },
+  {
+   "t": "Antalet möjliga utfall är lika med 6 (1, 2, 3, 4, 5, 6):",
+   "s": 268.11,
+   "e": 283.66
+  },
+  {
+   "t": "P av minst 5 är lika med 2 delat med 6 som är lika med 1 delat med 3 som är ungefär lika med 0,33 som är lika med 33 procent",
+   "s": 268.11,
+   "e": 283.66
+  },
+  {
+   "t": "Svar: 1 delat med 3 , alternativt ca 33 procent eller ca 0,33",
+   "s": 283.66,
+   "e": 290.77
+  },
+  {
+   "t": "c) Antalet gynnsamma utfall är lika med 4 (hjärter knekt, hjärter dam, hjärter kung och hjärter ess).",
+   "s": 290.77,
+   "e": 298.88
+  },
+  {
+   "t": "Antalet möjliga utfall är lika med 52 (alla kort i kortleken):",
+   "s": 298.88,
+   "e": 305.27
+  },
+  {
+   "t": "P av klätt hjärter är lika med 4 delat med 52 som är lika med 1 delat med 13 som är ungefär lika med 0,077 som är lika med 7,7 procent",
+   "s": 298.88,
+   "e": 314.95
+  },
+  {
+   "t": "Svar: 1 delat med 13 , alternativt ca 7,7 procent eller ca 0,077",
+   "s": 314.9,
+   "e": 322.33
+  },
+  {
+   "t": "Sannolikheter med två föremål",
+   "s": 322.33,
+   "e": 325.55
+  },
+  {
+   "t": "Uppgifter där vi använder oss av två föremål (kast med två tärningar, singla två mynt osv.) är oftast enklast att lösa genom att rita upp utfallsrummet (alla möjliga kombinationer).",
+   "s": 325.55,
+   "e": 337.23
+  },
+  {
+   "t": "Exempel 2 — Två tärningar",
+   "s": 337.23,
+   "e": 340.43
+  },
+  {
+   "t": "Du kastar två tärningar.",
+   "s": 340.43,
+   "e": 343.19
+  },
+  {
+   "t": "Vad är sannolikheten att få. a) minst summan 10? b) en summa större än 10?",
+   "s": 343.19,
+   "e": 352.32
+  },
+  {
+   "t": "Vi ritar upp utfallsrummet för summan av två tärningar och markerar alla gynnsamma utfall för a-uppgiften (de som ger summan 10, 11 eller 12):",
+   "s": 352.32,
+   "e": 371.78
+  },
+  {
+   "t": "a) Vi ritar upp utfallsrummet för summan av två tärningar och markerar alla gynnsamma utfall (de som ger summan 10, 11 eller 12):",
+   "s": 352.32,
+   "e": 371.78
+  },
+  {
+   "t": "Antalet gynnsamma utfall är lika med 6.",
+   "s": 352.32,
+   "e": 371.78
+  },
+  {
+   "t": "Antalet möjliga utfall är lika med 36:",
+   "s": 371.78,
+   "e": 383.93
+  },
+  {
+   "t": "P av minst 10 är lika med 6 delat med 36 som är lika med 1 delat med 6 som är ungefär lika med 0,17 som är lika med 17 procent",
+   "s": 371.78,
+   "e": 383.93
+  },
+  {
+   "t": "Svar: 1 delat med 6 , alternativt ca 17 procent eller ca 0,17",
+   "s": 383.93,
+   "e": 390.67
+  },
+  {
+   "t": "b) \"En summa över 10\" betyder att vi ska ha summan 11 eller 12 (inte 10 — skilj på formuleringarna!).",
+   "s": 390.67,
+   "e": 398.68
+  },
+  {
+   "t": "Vi tittar på utfallsrummet ovan igen och räknar hur många utfall som ger 11 eller 12.",
+   "s": 398.68,
+   "e": 404.8
+  },
+  {
+   "t": "Antalet gynnsamma utfall är lika med 3.",
+   "s": 404.8,
+   "e": 408.39
+  },
+  {
+   "t": "Antalet möjliga utfall är lika med 36:",
+   "s": 408.39,
+   "e": 420.65
+  },
+  {
+   "t": "P av större än 10 är lika med 3 delat med 36 som är lika med 1 delat med 12 som är ungefär lika med 0,08 som är lika med 8 procent",
+   "s": 408.39,
+   "e": 420.65
+  },
+  {
+   "t": "Svar: 1 delat med 12 , alternativt ca 8 procent eller ca 0,08",
+   "s": 420.65,
+   "e": 427.45
+  }
+ ]
+}

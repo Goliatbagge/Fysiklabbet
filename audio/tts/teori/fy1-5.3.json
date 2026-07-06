@@ -1,8 +1,8 @@
 {
  "id": "fy1-5.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "b9c7c253604fcee73247eb0446e7667d77e6f041",
- "dur": 327.96,
+ "hash": "29f8d8fb1291ff480cfe110f08b3b36dd90cfe95",
+ "dur": 327.76,
  "segments": [
   {
    "t": "Lufttryck och totalt tryck",
@@ -282,22 +282,22 @@
   {
    "t": "trycket p är lika med kraften F delat med arean A vilket är ekvivalent med att F är lika med p gånger A",
    "s": 289.81,
-   "e": 309.98
+   "e": 310.1
   },
   {
-   "t": "trycket p är lika med 29 401,08 pascal parentesen vätsketrycketfråna-uppgiften slut parentes arean A som är lika med 80 millimeter i kvadrat som är lika med 80 gånger 10 upphöjt till minus 6 kvadratmeter",
+   "t": "trycket p är lika med 29 401,08 pascal parentesen vätsketrycket från a-uppgiften slut parentes arean A som är lika med 80 millimeter i kvadrat som är lika med 80 gånger 10 upphöjt till minus 6 kvadratmeter",
    "s": 289.81,
-   "e": 309.98
+   "e": 310.1
   },
   {
-   "t": "kraften F är lika med 29 401,08 gånger 80 gånger 10 upphöjt till minus 6 som är lika med 2,352 ldots newton som är ungefär lika med 2,4 newton",
-   "s": 309.98,
-   "e": 324.64
+   "t": "kraften F är lika med 29 401,08 gånger 80 gånger 10 upphöjt till minus 6 som är lika med 2,352 newton som är ungefär lika med 2,4 newton",
+   "s": 310.1,
+   "e": 324.45
   },
   {
    "t": "Svar: 2,4 newton",
-   "s": 324.59,
-   "e": 327.96
+   "s": 324.4,
+   "e": 327.76
   }
  ]
 }

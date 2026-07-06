@@ -1,8 +1,8 @@
 {
  "id": "fy1-6.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "0b6c2effa0e601192bf4f0f8c3ffa27d67d660cd",
- "dur": 480.72,
+ "hash": "eb8f9b2508813996d7c5bacb85464a684f90e808",
+ "dur": 484.95,
  "segments": [
   {
    "t": "Faser och fasövergångar",
@@ -232,107 +232,107 @@
   {
    "t": "Vi slår upp den i tabell och ser att den är 232 grader Celsius.",
    "s": 262.01,
-   "e": 267.48
+   "e": 267.49
   },
   {
-   "t": "c är lika med 0,23 kilojoule per (kg\\cdotK) parentesen spec.värmekap.förtenn slut parentes massan m som är lika med 50 gram som är lika med 0,050 kilogram delta periodtiden T som är lika med 232 minus 20 som är lika med 212 kelvin l sträckan s som är lika med 59 kilojoule per kilogram parentesen spec.smältentalpiförtenn slut parentes",
-   "s": 267.48,
-   "e": 294.21
+   "t": "c är lika med 0,23 kilojoule/(kg \\cdot K) parentesen spec. värmekap. för tenn slut parentes massan m som är lika med 50 gram som är lika med 0,050 kilogram delta periodtiden T som är lika med 232 minus 20 som är lika med 212 kelvin l sträckan s som är lika med 59 kilojoule per kilogram parentesen spec. smältentalpi för tenn slut parentes",
+   "s": 267.49,
+   "e": 297.8
   },
   {
    "t": "Observera att vi anger entalpiteterna i kJ, så energin i svaret kommer att få enheten kJ.",
-   "s": 294.21,
-   "e": 302.99
+   "s": 297.8,
+   "e": 306.64
   },
   {
    "t": "energin E är lika med 0,23 gånger 0,050 gånger 212 plus 59 gånger 0,050 som är lika med 5,388 kilojoule som är ungefär lika med 5,4 kilojoule",
-   "s": 302.94,
-   "e": 316.88
+   "s": 306.59,
+   "e": 320.6
   },
   {
    "t": "Svar: 5,4 kilojoule",
-   "s": 316.88,
-   "e": 320.41
+   "s": 320.6,
+   "e": 324.12
   },
   {
    "t": "Exempel 2 — Varmvatten i is",
-   "s": 320.41,
-   "e": 323.87
+   "s": 324.12,
+   "e": 327.59
   },
   {
    "t": "Du häller i 1,0 liter 56-gradigt vatten i en hink med 2,0 kilogram is med temperaturen −8 grader Celsius.",
-   "s": 323.87,
-   "e": 332.57
+   "s": 327.59,
+   "e": 336.29
   },
   {
    "t": "Hur mycket is kommer att smälta av vattnet?",
-   "s": 332.57,
-   "e": 335.95
+   "s": 336.29,
+   "e": 339.66
   },
   {
    "t": "E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p, ekvation 1",
-   "s": 335.95,
-   "e": 343.44
+   "s": 339.66,
+   "e": 347.15
   },
   {
    "t": "Varmvattnet avger energin E accelerationen a hastigheten v tyngdfaktorn g och kommer att avsvalna ( c hastigheten v gånger m v gånger delta T v ).",
-   "s": 343.44,
-   "e": 354.12
+   "s": 347.15,
+   "e": 357.84
   },
   {
    "t": "Isen upptar energin E u trycket p p och kommer att uppvärmas ( c i sträckan s gånger m i s gånger delta T i s ) och delvis smälta ( l sträckan s gånger m s massan m ä hävarmen l tiden t i s ).",
-   "s": 354.12,
-   "e": 368.51
+   "s": 357.84,
+   "e": 372.22
   },
   {
    "t": "Massan på den is som smälter kallar vi alltså m sträckan s massan m ä hävarmen l tiden t i s och det är denna som söks.",
-   "s": 368.51,
-   "e": 376.76
+   "s": 372.22,
+   "e": 380.47
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 376.76,
-   "e": 380.08
+   "s": 380.47,
+   "e": 383.8
   },
   {
    "t": "c hastigheten v gånger m v gånger delta T v är lika med c i sträckan s gånger m i s gånger delta T i s plus l s gånger m s massan m ä hävarmen l tiden t i s",
-   "s": 380.08,
-   "e": 392.76
+   "s": 383.8,
+   "e": 396.47
   },
   {
    "t": "Vi löser ut m sträckan s massan m ä hävarmen l tiden t i s och får",
-   "s": 392.76,
-   "e": 399.0
+   "s": 396.47,
+   "e": 402.71
   },
   {
    "t": "m sträckan s massan m ä hävarmen l tiden t i s är lika med c hastigheten v gånger m v gånger delta T v minus c i s gånger m i s gånger delta T i s delat med l s",
-   "s": 399.0,
-   "e": 412.02
+   "s": 402.71,
+   "e": 415.74
   },
   {
    "t": "Eftersom en del av isen kommer att smälta kommer blandningens sluttemperatur (vatten + is) att vara 0 grader Celsius.",
-   "s": 412.02,
-   "e": 420.05
+   "s": 415.74,
+   "e": 423.76
   },
   {
    "t": "Denna sluttemperatur använder vi för att bestämma delta periodtiden T för vattnet och isen.",
-   "s": 420.05,
-   "e": 426.44
+   "s": 423.76,
+   "e": 430.15
   },
   {
-   "t": "c hastigheten v är lika med 4,18 kilojoule per (kg\\cdotK) m v som är lika med 1,0 kilogram delta T v som är lika med 56 minus 0 som är lika med 56 kelvin c i sträckan s som är lika med 2,2 kilojoule per (kg\\cdotK) m i s som är lika med 2,0 kilogram delta T i s som är lika med 0 minus parentesen minus 8 slut parentes som är lika med 8 kelvin l s som är lika med 334 kilojoule per kilogram",
-   "s": 426.44,
-   "e": 458.77
+   "t": "c hastigheten v är lika med 4,18 kilojoule/(kg \\cdot K) m v som är lika med 1,0 kilogram delta T v som är lika med 56 minus 0 som är lika med 56 kelvin c i sträckan s som är lika med 2,2 kilojoule/(kg \\cdot K) m i s som är lika med 2,0 kilogram delta T i s som är lika med 0 minus parentesen minus 8 slut parentes som är lika med 8 kelvin l s som är lika med 334 kilojoule per kilogram",
+   "s": 430.15,
+   "e": 463.35
   },
   {
-   "t": "m sträckan s massan m ä hävarmen l tiden t i s är lika med 4,18 gånger 1,0 gånger 56 minus 2,2 gånger 2,0 gånger 8 delat med 334 som är lika med 0,595 ldots kilogram som är ungefär lika med 0,60 kilogram",
-   "s": 458.77,
-   "e": 477.07
+   "t": "m sträckan s massan m ä hävarmen l tiden t i s är lika med 4,18 gånger 1,0 gånger 56 minus 2,2 gånger 2,0 gånger 8 delat med 334 som är lika med 0,595 kilogram som är ungefär lika med 0,60 kilogram",
+   "s": 463.35,
+   "e": 481.3
   },
   {
    "t": "Svar: 0,60 kilogram",
-   "s": 477.07,
-   "e": 480.72
+   "s": 481.3,
+   "e": 484.95
   }
  ]
 }

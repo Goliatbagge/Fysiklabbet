@@ -1,0 +1,233 @@
+{
+ "id": "ma1c-3.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "41f255ca51e9f7a45fab357b915a9a7a2c93ca8e",
+ "dur": 285.5,
+ "segments": [
+  {
+   "t": "Lån och ränteberäkningar",
+   "s": 0.1,
+   "e": 2.81
+  },
+  {
+   "t": "Om vi inte har pengar kan vi ta ett lån.",
+   "s": 2.76,
+   "e": 6.0
+  },
+  {
+   "t": "Ett lån kan ges av en bank, ett låneföretag eller en kompis.",
+   "s": 6.0,
+   "e": 10.76
+  },
+  {
+   "t": "Självklart ska vi betala tillbaka lånet.",
+   "s": 10.76,
+   "e": 14.25
+  },
+  {
+   "t": "Att betala tillbaka ett lån kallas amortera.",
+   "s": 14.25,
+   "e": 18.16
+  },
+  {
+   "t": "Det vi får betala extra kan man säga är priset för lånet och kallas ränta.",
+   "s": 18.16,
+   "e": 23.29
+  },
+  {
+   "t": "Ränta anges ofta som en viss procent av skulden och kallas då för räntesats.",
+   "s": 23.29,
+   "e": 28.64
+  },
+  {
+   "t": "(När vi sätter in pengar på ett sparkonto får vi själva tillbaka ränta på de pengar vi sätter in.",
+   "s": 28.64,
+   "e": 34.48
+  },
+  {
+   "t": "Det vi gör, fast vi kanske inte tänker på det, är att vi lånar ut våra pengar till banken och då får banken betala oss ränta.",
+   "s": 34.48,
+   "e": 41.88
+  },
+  {
+   "t": "Det banken gör med våra pengar är att de lånar ut dem till andra till en högre ränta och tjänar pengar på mellanskillnaden.)",
+   "s": 41.88,
+   "e": 49.24
+  },
+  {
+   "t": "Kom ihåg: Om det i uppgifter bara står \"ränta\" är det underförstått att de menar årsränta.",
+   "s": 49.24,
+   "e": 55.19
+  },
+  {
+   "t": "Ibland förekommer kvartalsränta där ett kvartal är ett \"kvarts år\", dvs. 3 månader.",
+   "s": 55.19,
+   "e": 61.45
+  },
+  {
+   "t": "Betala ett lån",
+   "s": 61.45,
+   "e": 63.71
+  },
+  {
+   "t": "När vi betalar av ett lån betalar vi amortering (återbetalning) och ränta (lånekostnad).",
+   "s": 63.71,
+   "e": 70.7
+  },
+  {
+   "t": "Exempel 1 — Billånet",
+   "s": 70.7,
+   "e": 73.71
+  },
+  {
+   "t": "Ellen tar ett lån på 150 000 kronor för att köpa en bil.",
+   "s": 73.71,
+   "e": 78.62
+  },
+  {
+   "t": "Amorteringstiden är 5 år och hon amorterar lika stora belopp varje månad (\"rak amortering\").",
+   "s": 78.62,
+   "e": 85.5
+  },
+  {
+   "t": "Årsräntan på lånet är 4,8 procent.",
+   "s": 85.5,
+   "e": 89.49
+  },
+  {
+   "t": "Hur. a) stor blir amorteringen varje månad?. b) mycket ska hon betala totalt vid första inbetalningen?. c) mycket kommer hon att betala totalt för lånet?",
+   "s": 89.49,
+   "e": 104.3
+  },
+  {
+   "t": "a) Om hon ska amortera varje månad i 5 år, så kommer hon att göra 5 gånger 12 är lika med 60 stycken inbetalningar.",
+   "s": 104.3,
+   "e": 112.55
+  },
+  {
+   "t": "Om hon ska amortera samma belopp vid varje inbetalning blir amorteringen varje månad",
+   "s": 112.55,
+   "e": 118.38
+  },
+  {
+   "t": "150 000 kronor delat med 60 är lika med 2 500 kronor",
+   "s": 118.38,
+   "e": 124.45
+  },
+  {
+   "t": "Svar: 2 500 kronor",
+   "s": 124.45,
+   "e": 128.18
+  },
+  {
+   "t": "b) Vid den första inbetalningen är hennes skuld 150 000 kronor.",
+   "s": 128.18,
+   "e": 133.82
+  },
+  {
+   "t": "Årsräntan är 4,8 procent av den, så",
+   "s": 133.82,
+   "e": 138.16
+  },
+  {
+   "t": "årsränta är lika med 0,048 gånger 150 000 kronor som är lika med 7 200 kronor",
+   "s": 138.16,
+   "e": 146.25
+  },
+  {
+   "t": "Eftersom hon betalar månadsvis, ska hon betala 1 delat med 12 av detta belopp i ränta varje månad (det går 12 månader på ett år), så",
+   "s": 146.25,
+   "e": 155.31
+  },
+  {
+   "t": "ränta är lika med 7 200 kronor delat med 12 som är lika med 600 kronor",
+   "s": 155.31,
+   "e": 161.74
+  },
+  {
+   "t": "Amorteringen varje månad har vi i a-uppgiften fått till 2 500 kronor.",
+   "s": 161.74,
+   "e": 167.57
+  },
+  {
+   "t": "Vid den första inbetalningen ska hon alltså betala",
+   "s": 167.57,
+   "e": 171.44
+  },
+  {
+   "t": "ränta plus amortering är lika med 600 kronor plus 2 500 kronor som är lika med 3 100 kronor",
+   "s": 171.44,
+   "e": 179.86
+  },
+  {
+   "t": "Svar: 3 100 kronor",
+   "s": 179.86,
+   "e": 183.56
+  },
+  {
+   "t": "c) Vi skapar ett kalkylark och fyller i månad 1–60 i kolumn A.",
+   "s": 183.56,
+   "e": 189.53
+  },
+  {
+   "t": "I kolumn B har vi rubriken \"Aktuell skuld\" och fyller i 150 000 i den översta cellen.",
+   "s": 189.53,
+   "e": 195.97
+  },
+  {
+   "t": "I kolumn C skriver vi \"Ränta per månad\" och i kolumn D \"Inbetalning\".",
+   "s": 195.97,
+   "e": 201.68
+  },
+  {
+   "t": "Vi fyller i kolumnen för aktuell skuld genom att subtrahera amorteringen 2 500 kronor från föregående värde.",
+   "s": 201.68,
+   "e": 209.54
+  },
+  {
+   "t": "Vi ställer oss i B3 och skriver =B2-2500 och fyller i resten av värdena med fyllnadshandtaget.",
+   "s": 209.54,
+   "e": 217.47
+  },
+  {
+   "t": "Vi fyller i kolumnen för ränta per månad genom att beräkna årsräntan, 4,8 procent av skulden, och dividera med 12.",
+   "s": 217.47,
+   "e": 225.49
+  },
+  {
+   "t": "Vi ställer oss i cellen C2 och skriver =(B2*0,048)/12 och fyller i resten av värdena med fyllnadshandtaget.",
+   "s": 225.49,
+   "e": 235.64
+  },
+  {
+   "t": "Vi fyller kolumnen för inbetalning genom att lägga till amorteringen 2 500 kronor till räntan per månad.",
+   "s": 235.64,
+   "e": 243.05
+  },
+  {
+   "t": "Vi ställer oss i cellen D2, skriver =2500+C2 och fyller i resten av värdena med fyllnadshandtaget:",
+   "s": 243.05,
+   "e": 257.2
+  },
+  {
+   "t": "Till sist beräknar vi det totala inbetalda beloppet genom att summera alla värden i kolumn D.",
+   "s": 243.05,
+   "e": 257.2
+  },
+  {
+   "t": "Vi bläddrar längst ner i kalkylarket, ställer oss i cellen under den sista inbetalningen och klickar på summasymbolen ∑ i verktygsfältet och väljer \"SUM\".",
+   "s": 257.2,
+   "e": 266.98
+  },
+  {
+   "t": "Därefter markerar vi alla värden i kolumn D, och texten i cellen blir då =SUM(D2:D61), vilket ger den totala summan av alla inbetalningar 168 300 kronor.",
+   "s": 266.98,
+   "e": 280.8
+  },
+  {
+   "t": "Svar: 168 300 kronor",
+   "s": 280.8,
+   "e": 285.5
+  }
+ ]
+}

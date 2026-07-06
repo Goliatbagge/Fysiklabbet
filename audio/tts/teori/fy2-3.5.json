@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "8d2ecefdf208d849ae7e088a1663b6c3280a4abd",
- "dur": 457.96,
+ "hash": "f03bc9c4f970820030bcd927481b068baa8169a2",
+ "dur": 458.58,
  "segments": [
   {
    "t": "Strömförande ledare i magnetfält",
@@ -60,324 +60,324 @@
    "e": 53.42
   },
   {
-   "t": "Kom ihåg att tummen motsvarar strömriktningen (I), pekfingret magnetfältet (B) och långfingret kraften (F).",
+   "t": "Kom ihåg att tummen motsvarar strömriktningen (I), pekfingret magnetfältet (byte) och långfingret kraften (F).",
    "s": 53.42,
-   "e": 61.89
+   "e": 62.0
   },
   {
    "t": "Härledning — Kraft på ledare i magnetfält",
-   "s": 61.89,
-   "e": 65.75
+   "s": 62.0,
+   "e": 65.86
   },
   {
    "t": "Vi har sedan tidigare att den magnetiska kraften på en enskild laddning är",
-   "s": 65.75,
-   "e": 70.94
+   "s": 65.86,
+   "e": 71.06
   },
   {
    "t": "kraften F är lika med q gånger hastigheten v gånger B, ekvation 1",
-   "s": 70.94,
-   "e": 76.96
+   "s": 71.06,
+   "e": 77.09
   },
   {
    "t": "Eftersom ström definieras som strömmen I är lika med laddningen Q delat med delta tiden t kan den totala laddningen Q som passerar under tidsintervallet Δt skrivas laddningen Q är lika med strömmen I gånger delta tiden t .",
-   "s": 76.96,
-   "e": 89.7
+   "s": 77.09,
+   "e": 89.83
   },
   {
    "t": "Om laddningarna passerar en viss längd av ledaren l under tiden Δt har de hastigheten hastigheten v är lika med hävarmen l delat med delta tiden t .",
-   "s": 89.7,
-   "e": 98.89
+   "s": 89.83,
+   "e": 99.01
   },
   {
    "t": "Insättning av laddningen Q är lika med strömmen I gånger delta tiden t och hastigheten v är lika med hävarmen l delat med delta tiden t i ekvation 1 ger",
-   "s": 98.89,
-   "e": 108.99
+   "s": 99.01,
+   "e": 109.11
   },
   {
    "t": "kraften F är lika med strömmen I gånger delta tiden t gånger hävarmen l delat med delta t gånger B som är lika med I gånger l gånger B dvs. F som är lika med B gånger I gånger l",
-   "s": 108.99,
-   "e": 125.1
+   "s": 109.11,
+   "e": 125.22
   },
   {
    "t": "vsv.",
-   "s": 108.99,
-   "e": 125.1
+   "s": 109.11,
+   "e": 125.22
   },
   {
    "t": "Demonstration #1 — Kraftens riktning på en strömförande ledare",
-   "s": 108.99,
-   "e": 125.1
+   "s": 109.11,
+   "e": 125.22
   },
   {
    "t": "Vi placerar en ledare i ett magnetfält och slår på en likström.",
-   "s": 125.1,
-   "e": 129.9
+   "s": 125.22,
+   "e": 130.03
   },
   {
    "t": "I vilken riktning kommer ledaren att åka?",
-   "s": 129.9,
-   "e": 133.46
+   "s": 130.03,
+   "e": 133.59
   },
   {
    "t": "Demonstration #2 — Aluminiumfolie mellan hästskomagneter",
-   "s": 133.46,
-   "e": 138.81
+   "s": 133.59,
+   "e": 138.94
   },
   {
    "t": "Vi placerar en remsa av aluminiumfolie mellan hästskomagneter, vridna på olika sätt, och slår på en växelström.",
-   "s": 138.81,
-   "e": 146.85
+   "s": 138.94,
+   "e": 146.97
   },
   {
    "t": "Vad kommer att hända?",
-   "s": 146.85,
-   "e": 149.14
+   "s": 146.97,
+   "e": 149.26
   },
   {
    "t": "Ström och längd — snarlika tecken",
-   "s": 149.14,
-   "e": 152.31
+   "s": 149.26,
+   "e": 152.44
   },
   {
    "t": "När vi skriver stora bokstaven I (för ström) och lilla bokstaven l (för längd) kan dessa se väldigt lika ut.",
-   "s": 152.31,
-   "e": 160.04
+   "s": 152.44,
+   "e": 160.16
   },
   {
    "t": "Hitta en skrivstil där du ser skillnad på beteckningen I för ström och l för längd.",
-   "s": 160.04,
-   "e": 165.44
+   "s": 160.16,
+   "e": 165.56
   },
   {
    "t": "Att riktningen på kraften blir just enligt högerhandsregeln beror på att ledaren egentligen befinner sig i två magnetfält samtidigt: ett homogent fält mellan magnetens poler och det cirkulära fältet kring ledaren.",
-   "s": 165.44,
-   "e": 177.69
+   "s": 165.56,
+   "e": 177.81
   },
   {
    "t": "När man lägger ihop dessa fält får man det resulterande fältet.",
-   "s": 177.69,
-   "e": 182.32
+   "s": 177.81,
+   "e": 182.45
   },
   {
    "t": "Det homogena fältet (uppe till vänster) och ledarens cirkulära fält (uppe till höger) ger tillsammans det resulterande fältet (nederst): tätare under ledaren och glesare över.",
-   "s": 182.32,
-   "e": 194.31
+   "s": 182.45,
+   "e": 194.44
   },
   {
    "t": "Det magnetiska fältet blir starkare under ledaren (tätare fältlinjer) och svagare över ledaren (glesare fältlinjer).",
-   "s": 194.31,
-   "e": 202.55
+   "s": 194.44,
+   "e": 202.68
   },
   {
    "t": "Man kan se det som att det starkare fältet under ledaren \"puttar\" den uppåt — kraften går alltså åt det håll där det resulterande fältet är som svagast.",
-   "s": 202.55,
-   "e": 211.24
+   "s": 202.68,
+   "e": 211.36
   },
   {
    "t": "Två parallella strömförande ledare",
-   "s": 211.24,
-   "e": 214.5
+   "s": 211.36,
+   "e": 214.62
   },
   {
    "t": "Två strömförande ledare nära varandra påverkar varandra med en magnetisk kraft eftersom den ena ledaren befinner sig i den andra ledarens magnetfält.",
-   "s": 214.5,
-   "e": 223.57
+   "s": 214.62,
+   "e": 223.7
   },
   {
    "t": "Magnetisk kraft mellan två strömförande ledare",
-   "s": 223.57,
-   "e": 227.41
+   "s": 223.7,
+   "e": 227.54
   },
   {
    "t": "kraften F är lika med k gånger I ett gånger I två gånger hävarmen l delat med avståndet d",
-   "s": 227.41,
-   "e": 234.66
+   "s": 227.54,
+   "e": 234.79
   },
   {
    "t": "där",
-   "s": 234.66,
-   "e": 236.15
+   "s": 234.79,
+   "e": 236.28
   },
   {
    "t": "F är lika med magnetisk kraft på ledarna (newton)",
-   "s": 236.15,
-   "e": 240.7
+   "s": 236.28,
+   "e": 240.82
   },
   {
    "t": "k är lika med 2,0 gånger 10 upphöjt till minus 7 tesla·m/A",
-   "s": 240.7,
-   "e": 247.15
+   "s": 240.82,
+   "e": 247.28
   },
   {
    "t": "I ett, I två är lika med ström genom ledare 1 respektive 2 (ampere)",
-   "s": 247.15,
-   "e": 253.46
+   "s": 247.28,
+   "e": 253.59
   },
   {
    "t": "l är lika med längd av den del av ledarna som är parallella (meter)",
-   "s": 253.46,
-   "e": 258.64
+   "s": 253.59,
+   "e": 258.76
   },
   {
    "t": "d är lika med avstånd mellan ledarna (meter)",
-   "s": 258.64,
-   "e": 263.32
+   "s": 258.76,
+   "e": 263.45
   },
   {
    "t": "Exempel 1 — Kraftens riktning",
-   "s": 263.32,
-   "e": 266.6
+   "s": 263.45,
+   "e": 266.73
   },
   {
    "t": "Vilken riktning får kraften på ledaren?",
-   "s": 266.6,
-   "e": 270.01
+   "s": 266.73,
+   "e": 270.14
   },
   {
    "t": "a) Vi håller upp fingrarna på vår högra hand.",
-   "s": 270.01,
-   "e": 273.66
+   "s": 270.14,
+   "e": 273.79
   },
   {
    "t": "Vi riktar tummen (strömmen) in i planet och pekfingret (magnetfältet) åt höger.",
-   "s": 273.66,
-   "e": 280.56
+   "s": 273.79,
+   "e": 280.69
   },
   {
    "t": "Vårt långfinger pekar då nedåt, vilket ger kraftens riktning.",
-   "s": 280.56,
-   "e": 287.07
+   "s": 280.69,
+   "e": 287.16
   },
   {
    "t": "Svar: Nedåt",
-   "s": 287.02,
-   "e": 289.53
+   "s": 287.11,
+   "e": 289.61
   },
   {
    "t": "b) Vi håller fingrarna på samma sätt igen.",
-   "s": 289.53,
-   "e": 293.22
+   "s": 289.61,
+   "e": 293.3
   },
   {
    "t": "Vi riktar tummen (strömmen) ut från planet och pekfingret (magnetfältet) nedåt.",
-   "s": 293.22,
-   "e": 300.28
+   "s": 293.3,
+   "e": 300.36
   },
   {
    "t": "Vårt långfinger pekar då åt höger, vilket ger kraftens riktning.",
-   "s": 300.28,
-   "e": 305.36
+   "s": 300.36,
+   "e": 305.44
   },
   {
    "t": "Svar: Åt höger",
-   "s": 305.36,
-   "e": 308.07
+   "s": 305.44,
+   "e": 308.15
   },
   {
    "t": "Exempel 2 — Magnetisk flödestäthet från känd kraft",
-   "s": 308.07,
-   "e": 312.85
+   "s": 308.15,
+   "e": 312.93
   },
   {
    "t": "En 25 millimeter lång rak ledare i ett magnetfält ges strömmen 2,2 ampere.",
-   "s": 312.85,
-   "e": 318.98
+   "s": 312.93,
+   "e": 319.06
   },
   {
    "t": "Den påverkas då av kraften 75 mN.",
-   "s": 318.98,
-   "e": 323.15
+   "s": 319.06,
+   "e": 323.23
   },
   {
    "t": "Beräkna den magnetiska flödestätheten.",
-   "s": 323.15,
-   "e": 326.92
+   "s": 323.23,
+   "e": 327.0
   },
   {
    "t": "Vi skriver formeln för magnetisk kraft på ledare och löser ut B.",
-   "s": 326.92,
-   "e": 338.71
+   "s": 327.0,
+   "e": 338.79
   },
   {
    "t": "kraften F är lika med B gånger strömmen I gånger hävarmen l vilket är ekvivalent med att B är lika med F delat med I gånger l",
-   "s": 326.92,
-   "e": 338.71
+   "s": 327.0,
+   "e": 338.79
   },
   {
    "t": "kraften F är lika med 75 mN som är lika med 0,075 newton strömmen I som är lika med 2,2 ampere hävarmen l som är lika med 25 millimeter som är lika med 0,025 meter",
-   "s": 338.71,
-   "e": 350.97
+   "s": 338.79,
+   "e": 351.06
   },
   {
-   "t": "B är lika med 0,075 delat med 2,2 gånger 0,025 som är lika med 1,363 ldots tesla som är ungefär lika med 1,4 tesla",
-   "s": 350.97,
-   "e": 362.36
+   "t": "B är lika med 0,075 delat med 2,2 gånger 0,025 som är lika med 1,363 tesla som är ungefär lika med 1,4 tesla",
+   "s": 351.06,
+   "e": 361.99
   },
   {
    "t": "Svar: 1,4 tesla",
-   "s": 362.36,
-   "e": 365.55
+   "s": 361.99,
+   "e": 365.18
   },
   {
    "t": "Exempel 3 — Kraft mellan två parallella ledare",
-   "s": 365.55,
-   "e": 369.7
+   "s": 365.18,
+   "e": 369.31
   },
   {
    "t": "Två parallella ledare på avståndet 3,0 centimeter från varandra ges en ström på 1,5 ampere med riktning enligt figuren.",
-   "s": 369.7,
-   "e": 378.22
+   "s": 369.31,
+   "e": 377.84
   },
   {
    "t": "Hur stor blir kraften på varje meter av ledarna, och blir kraften attraherande eller repellerande?",
-   "s": 378.22,
-   "e": 384.66
+   "s": 377.84,
+   "e": 384.28
   },
   {
    "t": "Vi ställer upp formeln för magnetisk kraft mellan två strömförande ledare.",
-   "s": 384.66,
-   "e": 389.83
+   "s": 384.28,
+   "e": 389.45
   },
   {
    "t": "kraften F är lika med k gånger I ett gånger I två gånger hävarmen l delat med avståndet d",
-   "s": 389.83,
-   "e": 397.06
+   "s": 389.45,
+   "e": 396.69
   },
   {
-   "t": "k är lika med 2,0 gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere I ett som är lika med I två som är lika med 1,5 ampere hävarmen l som är lika med 1,0 meter avståndet d som är lika med 3,0 centimeter som är lika med 0,030 meter",
-   "s": 397.06,
-   "e": 414.21
+   "t": "k är lika med 2,0 gånger 10 upphöjt till minus 7 tesla \\cdot m/A I ett som är lika med I två som är lika med 1,5 ampere hävarmen l som är lika med 1,0 meter avståndet d som är lika med 3,0 centimeter som är lika med 0,030 meter",
+   "s": 396.69,
+   "e": 414.78
   },
   {
-   "t": "kraften F är lika med 2,0 gånger 10 upphöjt till minus 7 gånger 1,5 gånger 1,5 gånger 1,0 delat med 0,030 som är lika med 1,5 gånger 10 upphöjt till minus 5 newton som är lika med 15 µN",
-   "s": 414.21,
-   "e": 428.86
+   "t": "kraften F är lika med 2,0 gånger 10 upphöjt till minus 7 gånger 1,5 gånger 1,5 gånger 1,0 delat med 0,030 som är lika med 1,5 gånger 10 upphöjt till minus 5 newton som är lika med 15 µ N",
+   "s": 414.78,
+   "e": 429.48
   },
   {
    "t": "Den högra ledaren befinner sig i ett nedåtriktat magnetfält från den vänstra ledaren.",
-   "s": 428.86,
-   "e": 434.7
+   "s": 429.48,
+   "e": 435.31
   },
   {
    "t": "Med strömriktningen uppåt ger högerhandsregeln att kraften på den högra ledaren riktas åt vänster (mot den vänstra ledaren).",
-   "s": 434.7,
-   "e": 442.95
+   "s": 435.31,
+   "e": 443.56
   },
   {
    "t": "Enligt Newtons tredje lag måste kraften på den vänstra ledaren bli lika stor och motriktad.",
-   "s": 442.95,
-   "e": 449.0
+   "s": 443.56,
+   "e": 449.61
   },
   {
    "t": "Vi får alltså en attraherande kraft mellan ledarna (de dras mot varandra).",
-   "s": 449.0,
-   "e": 454.5
+   "s": 449.61,
+   "e": 455.11
   },
   {
    "t": "Svar: 15 μN attraherande",
-   "s": 454.5,
-   "e": 457.96
+   "s": 455.11,
+   "e": 458.58
   }
  ]
 }

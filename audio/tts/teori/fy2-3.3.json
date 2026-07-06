@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "8d03553497743f5d5ce8b309baa4235ab85a8639",
- "dur": 185.0,
+ "hash": "d1051c9d524672787540a097977c6479e67c7d34",
+ "dur": 185.56,
  "segments": [
   {
    "t": "Magnetfält i spole",
@@ -147,27 +147,27 @@
   {
    "t": "Beräkna den magnetiska flödestätheten i en 600-varvsspole som är 7,5 centimeter lång, om vi ger den strömmen 1,5 ampere.",
    "s": 139.69,
-   "e": 148.79
+   "e": 148.78
   },
   {
    "t": "B är lika med my noll gånger n gånger strömmen I delat med hävarmen l",
-   "s": 148.79,
-   "e": 167.18
+   "s": 148.78,
+   "e": 167.93
   },
   {
-   "t": "my noll är lika med 4 pi gånger 10 upphöjt till minus 7 tesla\\cdotm per ampere n som är lika med 600 strömmen I som är lika med 1,5 ampere hävarmen l som är lika med 7,5 centimeter som är lika med 0,075 meter",
-   "s": 148.79,
-   "e": 167.18
+   "t": "my noll är lika med 4 pi gånger 10 upphöjt till minus 7 tesla \\cdot m/A n som är lika med 600 strömmen I som är lika med 1,5 ampere hävarmen l som är lika med 7,5 centimeter som är lika med 0,075 meter",
+   "s": 148.78,
+   "e": 167.93
   },
   {
-   "t": "B är lika med 4 pi gånger 10 upphöjt till minus 7 gånger 600 gånger 1,5 delat med 0,075 som är lika med 0,0150 ldots tesla som är ungefär lika med 0,015 tesla som är lika med 15 mT",
-   "s": 167.18,
-   "e": 182.05
+   "t": "B är lika med 4 pi gånger 10 upphöjt till minus 7 gånger 600 gånger 1,5 delat med 0,075 som är lika med 0,0150 tesla som är ungefär lika med 0,015 tesla som är lika med 15 mT",
+   "s": 167.93,
+   "e": 182.61
   },
   {
    "t": "Svar: 15 mT",
-   "s": 182.05,
-   "e": 185.0
+   "s": 182.61,
+   "e": 185.56
   }
  ]
 }

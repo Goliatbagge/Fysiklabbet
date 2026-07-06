@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.7",
  "voice": "sv-SE-SofieNeural",
- "hash": "f77608c92a6eaa4af17b76061c83e28aebe2ef00",
- "dur": 318.74,
+ "hash": "e2238d7fca15109aea4c886566109a56256dee49",
+ "dur": 316.85,
  "segments": [
   {
    "t": "Induktion och inducerad spänning (ems)",
@@ -140,129 +140,129 @@
    "e": 151.15
   },
   {
-   "t": "Från tidigare ämne har vi att F e är lika med q gånger mathbb energin E , där mathbb energin E är den elektriska fältstyrkan, och från tidigare avsnitt i detta ämne att F massan m är lika med q gånger hastigheten v gånger B (där q står för elektronladdningen).",
+   "t": "Från tidigare ämne har vi att F e är lika med q gånger energin E , där energin E är den elektriska fältstyrkan, och från tidigare avsnitt i detta ämne att F massan m är lika med q gånger hastigheten v gånger B (där q står för elektronladdningen).",
    "s": 151.15,
-   "e": 167.45
+   "e": 166.61
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 167.45,
-   "e": 170.75
+   "s": 166.61,
+   "e": 169.91
   },
   {
-   "t": "q gånger mathbb energin E är lika med q gånger hastigheten v gånger B",
-   "s": 170.75,
-   "e": 182.31
+   "t": "q gånger energin E är lika med q gånger hastigheten v gånger B",
+   "s": 169.91,
+   "e": 180.74
   },
   {
    "t": "Dividera båda led med q:",
-   "s": 170.75,
-   "e": 182.31
+   "s": 169.91,
+   "e": 180.74
   },
   {
-   "t": "mathbb energin E är lika med hastigheten v gånger B, ekvation 2",
-   "s": 170.75,
-   "e": 182.31
+   "t": "energin E är lika med hastigheten v gånger B, ekvation 2",
+   "s": 169.91,
+   "e": 180.74
   },
   {
-   "t": "Från tidigare ämne har vi också att den elektriska fältstyrkan mathbb energin E är lika med spänningen U delat med avståndet d .",
-   "s": 182.31,
-   "e": 191.06
+   "t": "Från tidigare ämne har vi också att den elektriska fältstyrkan energin E är lika med spänningen U delat med avståndet d .",
+   "s": 180.74,
+   "e": 189.01
   },
   {
    "t": "Spänningen U motsvarar den inducerade spänningen e, och avståndet d mellan polerna motsvarar ledarens längd l.",
-   "s": 191.06,
-   "e": 199.55
+   "s": 189.01,
+   "e": 197.5
   },
   {
-   "t": "Det innebär att mathbb energin E är lika med e delat med hävarmen l .",
-   "s": 199.55,
-   "e": 204.88
+   "t": "Det innebär att energin E är lika med e delat med hävarmen l .",
+   "s": 197.5,
+   "e": 202.47
   },
   {
    "t": "Insättning i ekvation 2 ger",
-   "s": 204.88,
-   "e": 208.25
+   "s": 202.47,
+   "e": 205.85
   },
   {
    "t": "e delat med hävarmen l är lika med hastigheten v gånger B",
-   "s": 208.25,
-   "e": 213.19
+   "s": 205.85,
+   "e": 210.8
   },
   {
    "t": "Vi löser ut den inducerade spänningen e och får",
-   "s": 213.19,
-   "e": 217.51
+   "s": 210.8,
+   "e": 215.12
   },
   {
    "t": "e är lika med hävarmen l gånger hastigheten v gånger B",
-   "s": 217.51,
-   "e": 225.31
+   "s": 215.12,
+   "e": 222.93
   },
   {
    "t": "vsv.",
-   "s": 217.51,
-   "e": 225.31
+   "s": 215.12,
+   "e": 222.93
   },
   {
    "t": "Exempel 1 — Inducerad spänning i två fall",
-   "s": 217.51,
-   "e": 225.31
+   "s": 215.12,
+   "e": 222.93
   },
   {
    "t": "En 20 centimeter lång ledare rör sig med hastigheten 80 centimeter/s i magnetfältet 0,85 mT.",
-   "s": 225.31,
-   "e": 233.88
+   "s": 222.93,
+   "e": 231.49
   },
   {
    "t": "Hur stor ems (spänning) induceras mellan ledarens ändar C och D i varje fall?",
-   "s": 233.88,
-   "e": 240.93
+   "s": 231.49,
+   "e": 238.54
   },
   {
    "t": "a) Fältets riktning är in/ut (vinkelrätt mot planet), ledarens riktning är vänster/höger och hastighetens riktning är upp/ner.",
-   "s": 240.93,
-   "e": 251.38
+   "s": 238.54,
+   "e": 248.99
   },
   {
    "t": "Alla tre är vinkelräta mot varandra, så en ems induceras.",
-   "s": 251.38,
-   "e": 256.48
+   "s": 248.99,
+   "e": 254.09
   },
   {
    "t": "e är lika med hävarmen l gånger hastigheten v gånger B",
-   "s": 256.48,
-   "e": 276.1
+   "s": 254.09,
+   "e": 273.71
   },
   {
    "t": "hävarmen l är lika med 20 centimeter som är lika med 0,20 meter hastigheten v som är lika med 80 centimeter per sekund som är lika med 0,80 meter per sekund B som är lika med 0,85 mT som är lika med 0,85 gånger 10 upphöjt till minus 3 tesla",
-   "s": 256.48,
-   "e": 276.1
+   "s": 254.09,
+   "e": 273.71
   },
   {
    "t": "e är lika med 0,20 gånger 0,80 gånger 0,85 gånger 10 upphöjt till minus 3 som är lika med 1,36 gånger 10 upphöjt till minus 4 volt som är lika med 0,136 millivolt som är ungefär lika med 0,14 millivolt",
-   "s": 276.1,
-   "e": 292.68
+   "s": 273.71,
+   "e": 290.35
   },
   {
    "t": "Svar: 0,14 millivolt",
-   "s": 292.68,
-   "e": 296.4
+   "s": 290.35,
+   "e": 294.09
   },
   {
    "t": "b) Fältets riktning är in/ut, ledarens riktning är vänster/höger och hastighetens riktning är också vänster/höger.",
-   "s": 296.4,
-   "e": 307.25
+   "s": 294.09,
+   "e": 305.36
   },
   {
    "t": "Eftersom ledarens riktning och hastighetens riktning är densamma rör sig elektronerna längs ledaren och inte tvärs över — ingen ems induceras.",
-   "s": 307.2,
-   "e": 315.89
+   "s": 305.31,
+   "e": 314.0
   },
   {
    "t": "Svar: 0 volt",
-   "s": 315.89,
-   "e": 318.74
+   "s": 314.0,
+   "e": 316.85
   }
  ]
 }

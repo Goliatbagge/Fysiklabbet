@@ -1,0 +1,358 @@
+{
+ "id": "ma1c-4.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b9e8cb1d9643aacf5d1a7d9b25c600e4663b606e",
+ "dur": 397.08,
+ "segments": [
+  {
+   "t": "Funktion och funktionsvärde",
+   "s": 0.1,
+   "e": 3.0
+  },
+  {
+   "t": "Ett samband mellan två variabler, t.ex. x och y , där varje tillåtet x-värde ger exakt ett y-värde kallas funktion.",
+   "s": 2.95,
+   "e": 11.26
+  },
+  {
+   "t": "Om vi ritar upp grafen till en funktion innebär det att om vi lägger en penna lodrätt över grafen kan den bara skära grafen en gång.",
+   "s": 11.26,
+   "e": 19.09
+  },
+  {
+   "t": "I sambandet y är lika med 2 x plus 3 säger vi att \" y är en funktion av x \".",
+   "s": 19.09,
+   "e": 25.26
+  },
+  {
+   "t": "Vad y har för värde beror på vad x har för värde.",
+   "s": 25.26,
+   "e": 29.41
+  },
+  {
+   "t": "Därför kallas y den beroende variabeln.",
+   "s": 29.41,
+   "e": 33.06
+  },
+  {
+   "t": "På motsvarande sätt kallas x för den oberoende variabeln.",
+   "s": 33.06,
+   "e": 37.6
+  },
+  {
+   "t": "Det värde som funktionen y får kallas funktionsvärde.",
+   "s": 37.6,
+   "e": 42.06
+  },
+  {
+   "t": "För att förtydliga att vi har en funktion och för att visa vilken variabel den beror på används ett annat skrivsätt.",
+   "s": 42.06,
+   "e": 49.12
+  },
+  {
+   "t": "Istället för y skriver vi f av x , där f är namnet på funktionen och x står för vilken variabel den beror på.",
+   "s": 49.12,
+   "e": 56.76
+  },
+  {
+   "t": "Alltså gäller y är lika med f av x . f av x utläses \" f av x \".",
+   "s": 56.76,
+   "e": 64.28
+  },
+  {
+   "t": "Om vi vill skriva sambandet y är lika med 2 x plus 3 som en funktion skriver vi alltså",
+   "s": 64.28,
+   "e": 70.58
+  },
+  {
+   "t": "f av x är lika med 2 x plus 3",
+   "s": 70.58,
+   "e": 74.46
+  },
+  {
+   "t": "Om vi skulle rita grafen till f av x är lika med 2 x plus 3 skulle det bli en rät linje (jämför med y är lika med k x plus m ).",
+   "s": 74.46,
+   "e": 83.35
+  },
+  {
+   "t": "Detta kallas därför en linjär funktion.",
+   "s": 83.35,
+   "e": 87.08
+  },
+  {
+   "t": "Om vi vill ta reda på funktionsvärdet när x är lika med 5 skriver vi f av 5 och beräknar det genom att ersätta x med 5 i vårt samband:",
+   "s": 87.08,
+   "e": 100.62
+  },
+  {
+   "t": "f av 5 är lika med 2 gånger 5 plus 3 som är lika med 10 plus 3 som är lika med 13",
+   "s": 87.08,
+   "e": 100.62
+  },
+  {
+   "t": "Så f av 5 är lika med 13 .",
+   "s": 100.62,
+   "e": 104.04
+  },
+  {
+   "t": "Funktionen brukar liknas vid en maskin eller en regel.",
+   "s": 104.04,
+   "e": 108.28
+  },
+  {
+   "t": "Vi stoppar in ett värde i maskinen/regeln och så ger det ett nytt värde.",
+   "s": 108.28,
+   "e": 113.36
+  },
+  {
+   "t": "I funktionen ovan stoppade vi in värdet 5 som bearbetades enligt \"regeln\" 2 x plus 3 och vi fick ut värdet 13.",
+   "s": 113.36,
+   "e": 121.17
+  },
+  {
+   "t": "Vi stoppar in den oberoende variabeln x är lika med 3 i funktionsmaskinen f av x är lika med x plus 2 och får ut den beroende variabeln y är lika med 5 .",
+   "s": 121.17,
+   "e": 131.2
+  },
+  {
+   "t": "Precis som att vi kan beteckna variabler med olika bokstäver, t.ex. x , y , z , …, så kan funktioner betecknas med olika bokstäver, vanligtvis f , g , h , …",
+   "s": 131.2,
+   "e": 143.32
+  },
+  {
+   "t": "f av x är lika med 2 x plus 3 betyder alltså samma sak som g av x är lika med 2 x plus 3 .",
+   "s": 143.32,
+   "e": 150.91
+  },
+  {
+   "t": "Exempel 1 — Beräkna funktionsvärden",
+   "s": 150.91,
+   "e": 154.65
+  },
+  {
+   "t": "Låt f av x är lika med 5 x minus 3 .",
+   "s": 154.65,
+   "e": 158.99
+  },
+  {
+   "t": "Bestäm. a) f av 4 b) f av minus 2 c) f av 3 a d) f av 7 minus f av 6",
+   "s": 158.99,
+   "e": 169.22
+  },
+  {
+   "t": "a) För att beräkna f av 4 ersätter vi alla x med 4 i funktionen f av x är lika med 5 x minus 3 :",
+   "s": 169.22,
+   "e": 183.01
+  },
+  {
+   "t": "f av 4 är lika med 5 gånger 4 minus 3 som är lika med 20 minus 3 som är lika med 17",
+   "s": 169.22,
+   "e": 183.01
+  },
+  {
+   "t": "Svar: 17",
+   "s": 183.01,
+   "e": 185.57
+  },
+  {
+   "t": "b) Vi gör på motsvarande sätt som i a-uppgiften:",
+   "s": 185.57,
+   "e": 198.41
+  },
+  {
+   "t": "f av minus 2 är lika med 5 gånger parentesen minus 2 slut parentes minus 3 som är lika med minus 10 minus 3 som är lika med minus 13",
+   "s": 185.57,
+   "e": 198.41
+  },
+  {
+   "t": "Svar: −13",
+   "s": 198.41,
+   "e": 201.01
+  },
+  {
+   "t": "c) Ibland kan vi sätta in variabler i vår funktion.",
+   "s": 201.01,
+   "e": 205.56
+  },
+  {
+   "t": "Principen är dock densamma.",
+   "s": 205.56,
+   "e": 208.51
+  },
+  {
+   "t": "När vi beräknar f av 3 a byter vi ut alla x mot 3 a och förenklar sedan som vanligt:",
+   "s": 208.51,
+   "e": 219.64
+  },
+  {
+   "t": "f av 3 a är lika med 5 gånger 3 a minus 3 som är lika med 15 a minus 3",
+   "s": 208.51,
+   "e": 219.64
+  },
+  {
+   "t": "Svar: 15 a minus 3",
+   "s": 219.64,
+   "e": 222.97
+  },
+  {
+   "t": "d) Ibland kan vi ha uttryck med flera funktioner.",
+   "s": 222.97,
+   "e": 227.44
+  },
+  {
+   "t": "Då beräknar vi dem var och en för sig för att sedan lägga ihop dem, eller så räknar vi ut dem tillsammans på en gång.",
+   "s": 227.44,
+   "e": 234.43
+  },
+  {
+   "t": "Metod 1: Var och en för sig",
+   "s": 234.43,
+   "e": 237.64
+  },
+  {
+   "t": "f av 7 är lika med 5 gånger 7 minus 3 som är lika med 35 minus 3 som är lika med 32",
+   "s": 237.64,
+   "e": 244.65
+  },
+  {
+   "t": "f av 6 är lika med 5 gånger 6 minus 3 som är lika med 30 minus 3 som är lika med 27",
+   "s": 244.65,
+   "e": 251.55
+  },
+  {
+   "t": "f av 7 minus f av 6 är lika med 32 minus 27 som är lika med 5",
+   "s": 251.55,
+   "e": 257.85
+  },
+  {
+   "t": "Metod 2: Tillsammans på en gång",
+   "s": 257.85,
+   "e": 261.41
+  },
+  {
+   "t": "f av 7 minus f av 6 är lika med 5 gånger 7 minus 3 minus parentesen 5 gånger 6 minus 3 slut parentes som är lika med 35 minus 3 minus parentesen 30 minus 3 slut parentes som är lika med 32 minus 27 som är lika med 5",
+   "s": 261.41,
+   "e": 277.89
+  },
+  {
+   "t": "Svar: 5",
+   "s": 277.89,
+   "e": 282.15
+  },
+  {
+   "t": "Exempel 2 — Är graferna funktioner?",
+   "s": 277.89,
+   "e": 282.15
+  },
+  {
+   "t": "Är f av x och g av x , som är uppritade nedan, funktioner?",
+   "s": 282.15,
+   "e": 287.82
+  },
+  {
+   "t": "Motivera ditt svar.",
+   "s": 287.82,
+   "e": 290.3
+  },
+  {
+   "t": "För att graferna ska vara funktioner ska varje giltigt x-värde ge ett enda y-värde.",
+   "s": 290.3,
+   "e": 296.01
+  },
+  {
+   "t": "Grafen till g av x har oändligt många y-värden för x är lika med minus 2 och är därför inte någon funktion.",
+   "s": 296.01,
+   "e": 303.3
+  },
+  {
+   "t": "Vi lägger en penna lodrätt över grafen till f av x …",
+   "s": 303.3,
+   "e": 309.95
+  },
+  {
+   "t": "… och ser att den skär grafen mer än en gång (två gånger). f av x är alltså inte heller en funktion.",
+   "s": 303.3,
+   "e": 315.5
+  },
+  {
+   "t": "Svar: Nej, de är inte funktioner eftersom ett x-värde kan ge flera y-värden.",
+   "s": 315.5,
+   "e": 321.81
+  },
+  {
+   "t": "Exempel 3 — Läs av funktionsvärden ur grafen",
+   "s": 321.81,
+   "e": 326.11
+  },
+  {
+   "t": "Grafen till funktionen f är uppritad.",
+   "s": 326.11,
+   "e": 329.73
+  },
+  {
+   "t": "a) Bestäm f av 2 b) Bestäm f av 0 c) Lös ekvationen f av x är lika med 0",
+   "s": 329.73,
+   "e": 336.91
+  },
+  {
+   "t": "a) f av 2 motsvarar funktionsvärdet (y-värdet) då x är lika med 2 :",
+   "s": 336.91,
+   "e": 347.73
+  },
+  {
+   "t": "Vi läser av grafen vid x är lika med 2 och ser att y-koordinaten där är −3.",
+   "s": 336.91,
+   "e": 347.73
+  },
+  {
+   "t": "Så f av 2 är lika med minus 3 .",
+   "s": 347.73,
+   "e": 351.31
+  },
+  {
+   "t": "Svar: −3",
+   "s": 351.31,
+   "e": 353.52
+  },
+  {
+   "t": "b) f av 0 motsvarar funktionsvärdet (y-värdet) då x är lika med 0 :",
+   "s": 353.52,
+   "e": 366.71
+  },
+  {
+   "t": "Vi läser av grafen vid x är lika med 0 (vilket motsvarar skärningen med y-axeln) och ser att y-koordinaten där är 3.",
+   "s": 353.52,
+   "e": 366.71
+  },
+  {
+   "t": "Så f av 0 är lika med 3 .",
+   "s": 366.71,
+   "e": 369.95
+  },
+  {
+   "t": "Svar: 3",
+   "s": 369.95,
+   "e": 387.11
+  },
+  {
+   "t": "c) f av x är lika med 0 motsvarar att funktionsvärdet (y-värdet) är lika med 0:",
+   "s": 369.95,
+   "e": 387.11
+  },
+  {
+   "t": "Vi läser av grafen vid y är lika med 0 (vilket motsvarar skärningarna med x-axeln) och ser att det gäller när x är lika med minus 1 , x är lika med 1 och x är lika med 3 .",
+   "s": 369.95,
+   "e": 387.11
+  },
+  {
+   "t": "Ekvationen har alltså tre lösningar.",
+   "s": 387.11,
+   "e": 390.52
+  },
+  {
+   "t": "Svar: x ett är lika med minus 1 , x två är lika med 1 och x tre är lika med 3",
+   "s": 390.52,
+   "e": 397.08
+  }
+ ]
+}

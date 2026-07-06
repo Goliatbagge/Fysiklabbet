@@ -1,8 +1,8 @@
 {
  "id": "fy1-8.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "56d8fe6ae1432f37a633f9eb6e7c2a4e5d554a4a",
- "dur": 574.24,
+ "hash": "5949b421f8ae71221d0314c84660fa2d94340ded",
+ "dur": 573.7,
  "segments": [
   {
    "t": "Relativitetsteori",
@@ -407,62 +407,62 @@
   {
    "t": "Kom ihåg: t noll är lika med \"passagerarens klocka\" och tiden t är lika med \"observatörens klocka\".",
    "s": 474.57,
-   "e": 481.42
+   "e": 481.43
   },
   {
    "t": "Insättning av hastigheten v är lika med 0,87 c ger",
-   "s": 481.42,
-   "e": 486.48
+   "s": 481.43,
+   "e": 486.49
   },
   {
-   "t": "tiden t är lika med t noll delat med roten ur 1 minus parentesen 0,87 c slut parentes i kvadrat delat med c i kvadrat som är lika med t noll delat med roten ur 1 minus 0,87 i kvadrat som är lika med t noll delat med roten ur 0,2431 som är lika med t noll delat med 0,493 ldots som är lika med 2,028 ldots gånger t noll",
-   "s": 486.48,
-   "e": 511.12
+   "t": "tiden t är lika med t noll delat med roten ur 1 minus parentesen 0,87 c slut parentes i kvadrat delat med c i kvadrat som är lika med t noll delat med roten ur 1 minus 0,87 i kvadrat som är lika med t noll delat med roten ur 0,2431 som är lika med t noll delat med 0,493 som är lika med 2,028 gånger t noll",
+   "s": 486.49,
+   "e": 510.57
   },
   {
    "t": "Det vill säga tiden t är ungefär lika med 2 gånger t noll .",
-   "s": 511.12,
-   "e": 515.73
+   "s": 510.57,
+   "e": 515.18
   },
   {
    "t": "Detta innebär att tiden tickar dubbelt så fort för observatören jämfört med passageraren.",
-   "s": 515.73,
-   "e": 521.82
+   "s": 515.18,
+   "e": 521.28
   },
   {
    "t": "Observatören kommer att åldras två år under ett år för passageraren!",
-   "s": 521.82,
-   "e": 526.94
+   "s": 521.28,
+   "e": 526.4
   },
   {
    "t": "Svar: tiden t är ungefär lika med 2 gånger t noll",
-   "s": 526.94,
-   "e": 531.7
+   "s": 526.4,
+   "e": 531.17
   },
   {
    "t": "Tid i gravitationsfält",
-   "s": 531.7,
-   "e": 534.63
+   "s": 531.17,
+   "e": 534.09
   },
   {
    "t": "Dina fötter åldras en gnutta långsammare än ditt huvud.",
-   "s": 534.63,
-   "e": 539.02
+   "s": 534.09,
+   "e": 538.48
   },
   {
    "t": "Ditt huvud befinner sig nämligen, när du står eller sitter, 1–1,5 meter högre upp i jordens gravitationsfält och märker därför av en gravitation som är aningen svagare.",
-   "s": 539.02,
-   "e": 549.62
+   "s": 538.48,
+   "e": 549.08
   },
   {
    "t": "Som Einstein visade teoretiskt i sin allmänna relativitetsteori, och som vi sedan experimentellt kunnat fastslå genom att studera GPS-satelliters atomklockor, flyter tiden långsammare i ett starkt gravitationsfält än i ett svagt.",
-   "s": 549.62,
-   "e": 563.68
+   "s": 549.08,
+   "e": 563.14
   },
   {
    "t": "Rent praktiskt är effekten liten här nere vid jordytan, eftersom ditt huvud åldras ca 90 miljarddelar av en sekund mer än dina fötter under en 79-årig livstid.",
-   "s": 563.68,
-   "e": 574.24
+   "s": 563.14,
+   "e": 573.7
   }
  ]
 }

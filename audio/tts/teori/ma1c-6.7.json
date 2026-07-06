@@ -1,0 +1,73 @@
+{
+ "id": "ma1c-6.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "e8c046ca3d114eb739517bddee6d246443add4da",
+ "dur": 63.84,
+ "segments": [
+  {
+   "t": "Subtraktion av vektorer",
+   "s": 0.1,
+   "e": 3.05
+  },
+  {
+   "t": "Subtraktion av vektorer",
+   "s": 3.0,
+   "e": 5.91
+  },
+  {
+   "t": "En subtraktion av vektorer skrivs om som en addition enligt",
+   "s": 5.91,
+   "e": 10.66
+  },
+  {
+   "t": "vektorn u minus vektorn v är lika med vektorn u plus parentesen minus vektorn v slut parentes",
+   "s": 10.66,
+   "e": 17.59
+  },
+  {
+   "t": "Vi adderar alltså den motsatta vektorn, vilket sedan beräknas med parallellförflyttning enligt tidigare.",
+   "s": 17.59,
+   "e": 24.57
+  },
+  {
+   "t": "Exempel 1 — Subtrahera vektorer",
+   "s": 24.57,
+   "e": 28.12
+  },
+  {
+   "t": "Figuren visar vektorerna u och vektorn v .",
+   "s": 28.12,
+   "e": 32.05
+  },
+  {
+   "t": "Rita vektorn w är lika med vektorn u minus vektorn v .",
+   "s": 32.05,
+   "e": 36.83
+  },
+  {
+   "t": "Vi skriver om vektorn w som en addition, det vill säga vektorn w är lika med vektorn u plus parentesen minus vektorn v slut parentes .",
+   "s": 36.83,
+   "e": 45.76
+  },
+  {
+   "t": "Vi ritar nu minus vektorn v , alltså den motsatta vektorn till vektorn v .",
+   "s": 45.76,
+   "e": 51.14
+  },
+  {
+   "t": "Den är lika lång, men motriktad:",
+   "s": 51.14,
+   "e": 63.84
+  },
+  {
+   "t": "Sedan parallellförflyttar vi minus vektorn v , så att den startar vid spetsen hos vektorn u :",
+   "s": 51.14,
+   "e": 63.84
+  },
+  {
+   "t": "Till sist drar vi den resulterande vektorn w från startpunkten till slutpunkten:",
+   "s": 51.14,
+   "e": 63.84
+  }
+ ]
+}

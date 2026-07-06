@@ -1,8 +1,8 @@
 {
  "id": "fy2-1.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "54d69defd483bb9502971878acd606ffccf50f90",
- "dur": 103.8,
+ "hash": "b10eb2f71dfa07aeb0f06b9527c3cc997c41ac43",
+ "dur": 103.56,
  "segments": [
   {
    "t": "Konisk pendel",
@@ -90,14 +90,14 @@
    "e": 87.86
   },
   {
-   "t": "periodtiden T är lika med 2 pi roten ur 5,0 gånger cosinus 30 grader delat med 9,82 som är lika med 4,172 ldots sekund som är ungefär lika med 4,2 sekund",
+   "t": "periodtiden T är lika med 2 pi roten ur 5,0 gånger cosinus 30 grader delat med 9,82 som är lika med 4,172 sekund som är ungefär lika med 4,2 sekund",
    "s": 87.86,
-   "e": 100.56
+   "e": 100.33
   },
   {
    "t": "Svar: 4,2 sekunder",
-   "s": 100.56,
-   "e": 103.8
+   "s": 100.33,
+   "e": 103.56
   }
  ]
 }

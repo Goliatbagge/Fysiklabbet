@@ -1,0 +1,353 @@
+{
+ "id": "ma1c-1.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "2b71696c6d2187834050580fab61fface0a31c22",
+ "dur": 363.54,
+ "segments": [
+  {
+   "t": "Potenser med positiva heltalsexponenter",
+   "s": 0.1,
+   "e": 3.94
+  },
+  {
+   "t": "På samma sätt som att 3 plus 3 plus 3 plus 3 plus 3 kan skrivas 3 gånger 5 , så kan 3 gånger 3 gånger 3 gånger 3 gånger 3 skrivas 3 upphöjt till 5 (utläses \"3 upphöjt till 5\").",
+   "s": 3.89,
+   "e": 16.54
+  },
+  {
+   "t": "Man säger att 3 upphöjt till 5 är en potens.",
+   "s": 16.54,
+   "e": 20.56
+  },
+  {
+   "t": "Delarna i en potens kallas för bas (det man upphöjer) och exponent (det man upphöjer till).",
+   "s": 20.56,
+   "e": 27.26
+  },
+  {
+   "t": "Så i exemplet 3 upphöjt till 5 är basen 3 och exponenten 5.",
+   "s": 27.26,
+   "e": 32.7
+  },
+  {
+   "t": "Potensen består av en bas och en exponent.",
+   "s": 32.7,
+   "e": 36.55
+  },
+  {
+   "t": "Potensform och faktorform",
+   "s": 36.55,
+   "e": 39.34
+  },
+  {
+   "t": "När ett tal skrivs",
+   "s": 39.34,
+   "e": 41.91
+  },
+  {
+   "t": "som en potens (med bas och exponent) är det skrivet i potensform",
+   "s": 41.91,
+   "e": 47.31
+  },
+  {
+   "t": "med sina faktorer (som en multiplikation) är det skrivet i faktorform eller som en produkt.",
+   "s": 47.31,
+   "e": 53.64
+  },
+  {
+   "t": "Exempel: 3 upphöjt till 5 är skrivet i potensform.",
+   "s": 53.64,
+   "e": 58.44
+  },
+  {
+   "t": "3 gånger 3 gånger 3 gånger 3 gånger 3 är skrivet i faktorform.",
+   "s": 58.44,
+   "e": 63.92
+  },
+  {
+   "t": "Utläsningar",
+   "s": 63.92,
+   "e": 65.97
+  },
+  {
+   "t": "En",
+   "s": 65.97,
+   "e": 67.39
+  },
+  {
+   "t": "tvåa i exponenten kan även utläsas \"i kvadrat\", så 7 i kvadrat kan utläsas \"7 i kvadrat\"",
+   "s": 67.39,
+   "e": 74.78
+  },
+  {
+   "t": "trea i exponenten kan även utläsas \"i kubik\", så 7 i kubik kan utläsas \"7 i kubik\".",
+   "s": 74.78,
+   "e": 81.92
+  },
+  {
+   "t": "För att räkna med potenser ska vi använda potenslagarna.",
+   "s": 81.92,
+   "e": 86.2
+  },
+  {
+   "t": "Potenslagarna",
+   "s": 86.2,
+   "e": 88.3
+  },
+  {
+   "t": "Exempel 1 — Tecken och potenser",
+   "s": 88.3,
+   "e": 91.66
+  },
+  {
+   "t": "Beräkna. a) parentesen minus 9 slut parentes i kvadrat b) minus 9 i kvadrat",
+   "s": 91.66,
+   "e": 100.2
+  },
+  {
+   "t": "a) Hela talet −9 är basen, så",
+   "s": 100.2,
+   "e": 104.08
+  },
+  {
+   "t": "parentesen minus 9 slut parentes i kvadrat är lika med parentesen minus 9 slut parentes gånger parentesen minus 9 slut parentes som är lika med 81",
+   "s": 104.08,
+   "e": 114.92
+  },
+  {
+   "t": "(när två negativa tal multipliceras blir produkten positiv).",
+   "s": 114.92,
+   "e": 120.03
+  },
+  {
+   "t": "Svar: 81",
+   "s": 120.03,
+   "e": 122.67
+  },
+  {
+   "t": "b) Här är basen bara 9 — minustecknet står utanför potensen (observera skillnaden jämfört med föregående uppgift):",
+   "s": 122.67,
+   "e": 135.86
+  },
+  {
+   "t": "minus 9 i kvadrat är lika med minus 9 gånger 9 som är lika med minus 81",
+   "s": 122.67,
+   "e": 135.86
+  },
+  {
+   "t": "Svar: −81",
+   "s": 135.86,
+   "e": 138.51
+  },
+  {
+   "t": "Exempel 2 — Skriv som en potens",
+   "s": 138.51,
+   "e": 142.06
+  },
+  {
+   "t": "Skriv 64 som en potens med basen 4.",
+   "s": 142.06,
+   "e": 146.22
+  },
+  {
+   "t": "Tänk \"4 upphöjt till något ska bli 64\", alternativt \"hur många fyror ska multipliceras för att produkten ska bli 64?\".",
+   "s": 146.22,
+   "e": 155.24
+  },
+  {
+   "t": "Testar:",
+   "s": 155.24,
+   "e": 160.41
+  },
+  {
+   "t": "4 gånger 4 är lika med 16 (för litet)",
+   "s": 155.24,
+   "e": 160.41
+  },
+  {
+   "t": "4 gånger 4 gånger 4 är lika med 16 gånger 4 som är lika med 64 (stämmer!)",
+   "s": 160.41,
+   "e": 167.5
+  },
+  {
+   "t": "Svar: 4 i kubik",
+   "s": 167.5,
+   "e": 170.43
+  },
+  {
+   "t": "Exempel 3 — Utveckla en parentes",
+   "s": 170.43,
+   "e": 174.11
+  },
+  {
+   "t": "Utveckla parentesen 7 x slut parentes i kvadrat .",
+   "s": 174.11,
+   "e": 178.96
+  },
+  {
+   "t": "Alla faktorer inne i parentesen ska upphöjas till 2:",
+   "s": 178.96,
+   "e": 190.91
+  },
+  {
+   "t": "parentesen 7 x slut parentes i kvadrat är lika med 7 i kvadrat gånger x i kvadrat som är lika med 49 x i kvadrat",
+   "s": 178.96,
+   "e": 190.91
+  },
+  {
+   "t": "Svar: 49 x i kvadrat",
+   "s": 190.91,
+   "e": 194.6
+  },
+  {
+   "t": "Exempel 4 — Förenkla ett bråk med potenser",
+   "s": 194.6,
+   "e": 198.64
+  },
+  {
+   "t": "Förenkla 42 x upphöjt till 5 delat med x i kvadrat .",
+   "s": 198.64,
+   "e": 203.78
+  },
+  {
+   "t": "Vi använder potenslagen för division:",
+   "s": 203.78,
+   "e": 215.22
+  },
+  {
+   "t": "42 x upphöjt till 5 delat med x i kvadrat är lika med 42 x upphöjt till 5 minus 2 som är lika med 42 x i kubik",
+   "s": 203.78,
+   "e": 215.22
+  },
+  {
+   "t": "Svar: 42 x i kubik",
+   "s": 215.22,
+   "e": 218.72
+  },
+  {
+   "t": "Exempel 5 — Potensekvation med samma bas",
+   "s": 218.72,
+   "e": 222.72
+  },
+  {
+   "t": "Lös ekvationen 8 upphöjt till m gånger 8 upphöjt till 5 är lika med 8 upphöjt till 7 .",
+   "s": 222.72,
+   "e": 229.07
+  },
+  {
+   "t": "Skriv om båda led som en enda potens av 8.",
+   "s": 229.07,
+   "e": 233.09
+  },
+  {
+   "t": "Sedan kan man sätta exponenterna lika och lösa ekvationen därifrån:",
+   "s": 233.09,
+   "e": 242.16
+  },
+  {
+   "t": "8 upphöjt till m gånger 8 upphöjt till 5 är lika med 8 upphöjt till 7",
+   "s": 233.09,
+   "e": 242.16
+  },
+  {
+   "t": "8 upphöjt till m plus 5 är lika med 8 upphöjt till 7",
+   "s": 242.16,
+   "e": 246.75
+  },
+  {
+   "t": "Nu är båda led skrivna som en enda potens av 8.",
+   "s": 246.75,
+   "e": 250.96
+  },
+  {
+   "t": "Då måste exponenterna vara lika, så",
+   "s": 250.96,
+   "e": 254.84
+  },
+  {
+   "t": "m plus 5 är lika med 7",
+   "s": 254.84,
+   "e": 257.7
+  },
+  {
+   "t": "m är lika med 2",
+   "s": 257.7,
+   "e": 260.05
+  },
+  {
+   "t": "Svar: m är lika med 2",
+   "s": 260.05,
+   "e": 263.15
+  },
+  {
+   "t": "Exempel 6 — Förenkla ett bråkuttryck med potenser",
+   "s": 263.15,
+   "e": 267.48
+  },
+  {
+   "t": "Förenkla 27 upphöjt till 5 x delat med 3 upphöjt till x plus 3 upphöjt till x plus 3 upphöjt till x .",
+   "s": 267.48,
+   "e": 275.5
+  },
+  {
+   "t": "När vi ska förenkla bråkuttryck med potenser ska vi först sikta på att skriva om både täljare och nämnare som en potens.",
+   "s": 275.5,
+   "e": 282.89
+  },
+  {
+   "t": "Därefter skriver vi om potenserna, så att de får samma bas.",
+   "s": 282.89,
+   "e": 287.39
+  },
+  {
+   "t": "Därefter brukar det bli enkelt.",
+   "s": 287.39,
+   "e": 290.4
+  },
+  {
+   "t": "Vi börjar med att skriva om nämnaren som en multiplikation:",
+   "s": 290.4,
+   "e": 304.66
+  },
+  {
+   "t": "27 upphöjt till 5 x delat med 3 upphöjt till x plus 3 upphöjt till x plus 3 upphöjt till x är lika med 27 upphöjt till 5 x delat med 3 gånger 3 upphöjt till x",
+   "s": 290.4,
+   "e": 304.66
+  },
+  {
+   "t": "Sedan skriver vi om nämnaren som en potens:",
+   "s": 304.66,
+   "e": 320.76
+  },
+  {
+   "t": "27 upphöjt till 5 x delat med 3 gånger 3 upphöjt till x är lika med 27 upphöjt till 5 x delat med 3 upphöjt till 1 gånger 3 upphöjt till x som är lika med 27 upphöjt till 5 x delat med 3 upphöjt till 1 plus x",
+   "s": 304.66,
+   "e": 320.76
+  },
+  {
+   "t": "Nu har vi en enda potens i både täljare och nämnare.",
+   "s": 320.76,
+   "e": 324.93
+  },
+  {
+   "t": "Nu skriver vi om dem med samma bas.",
+   "s": 324.93,
+   "e": 328.24
+  },
+  {
+   "t": "Eftersom 27 är lika med 3 i kubik gäller",
+   "s": 328.35,
+   "e": 332.36
+  },
+  {
+   "t": "27 upphöjt till 5 x delat med 3 upphöjt till 1 plus x är lika med parentesen 3 i kubik slut parentes upphöjt till 5 x delat med 3 upphöjt till 1 plus x som är lika med 3 upphöjt till 15 x delat med 3 upphöjt till 1 plus x som är lika med 3 upphöjt till 15 x minus parentesen 1 plus x slut parentes som är lika med 3 upphöjt till 15 x minus 1 minus x som är lika med 3 upphöjt till 14 x minus 1",
+   "s": 332.31,
+   "e": 359.11
+  },
+  {
+   "t": "Svar: 3 upphöjt till 14 x minus 1",
+   "s": 359.11,
+   "e": 363.54
+  }
+ ]
+}

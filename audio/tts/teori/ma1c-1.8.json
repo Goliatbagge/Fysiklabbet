@@ -1,0 +1,173 @@
+{
+ "id": "ma1c-1.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "27e7c1867cbadf0f44fb958b59e76d299c0a22a8",
+ "dur": 183.38,
+ "segments": [
+  {
+   "t": "Rationella exponenter",
+   "s": 0.1,
+   "e": 2.77
+  },
+  {
+   "t": "En exponent som innehåller ett bråk kallas rationell exponent.",
+   "s": 2.73,
+   "e": 7.62
+  },
+  {
+   "t": "Hur ska vi tolka rationella exponenter, t.ex. 25 upphöjt till 1 delat med 2 ?",
+   "s": 7.62,
+   "e": 14.07
+  },
+  {
+   "t": "Undersökning — Tolkning av rationella exponenter",
+   "s": 14.07,
+   "e": 18.29
+  },
+  {
+   "t": "Vi bildar t.ex. talet 25 på två sätt.",
+   "s": 18.29,
+   "e": 22.6
+  },
+  {
+   "t": "Med potenslagarna:",
+   "s": 22.6,
+   "e": 40.01
+  },
+  {
+   "t": "parentesen 25 upphöjt till 1 delat med 2 slut parentes i kvadrat är lika med 25 upphöjt till parentesen 1 delat med 2 slut parentes gånger 2 som är lika med 25 upphöjt till 2 delat med 2 som är lika med 25 upphöjt till 1 som är lika med 25",
+   "s": 22.6,
+   "e": 40.01
+  },
+  {
+   "t": "Med rötter:",
+   "s": 40.01,
+   "e": 48.04
+  },
+  {
+   "t": "parentesen roten ur 25 slut parentes i kvadrat är lika med 5 i kvadrat som är lika med 25",
+   "s": 40.01,
+   "e": 48.04
+  },
+  {
+   "t": "Båda sätt är korrekta.",
+   "s": 48.04,
+   "e": 50.73
+  },
+  {
+   "t": "Vi ser alltså att 25 upphöjt till 1 delat med 2 är lika med roten ur 25 .",
+   "s": 50.73,
+   "e": 56.76
+  },
+  {
+   "t": "På motsvarande sätt gäller",
+   "s": 56.76,
+   "e": 59.55
+  },
+  {
+   "t": "parentesen 27 upphöjt till 1 delat med 3 slut parentes i kubik är lika med 27 upphöjt till 3 delat med 3 som är lika med 27 upphöjt till 1 som är lika med 27",
+   "s": 59.55,
+   "e": 70.67
+  },
+  {
+   "t": "parentesen tredje roten ur 27 slut parentes i kubik är lika med 3 i kubik som är lika med 3 gånger 3 gånger 3 som är lika med 27",
+   "s": 70.67,
+   "e": 80.15
+  },
+  {
+   "t": "dvs. 27 upphöjt till 1 delat med 3 är lika med tredje roten ur 27 .",
+   "s": 80.15,
+   "e": 86.09
+  },
+  {
+   "t": "Rationella exponenter",
+   "s": 86.09,
+   "e": 88.75
+  },
+  {
+   "t": "a upphöjt till 1 delat med n är lika med n:e roten ur a",
+   "s": 88.75,
+   "e": 95.62
+  },
+  {
+   "t": "Exempel 1 — Beräkna utan räknare",
+   "s": 88.75,
+   "e": 95.62
+  },
+  {
+   "t": "Beräkna utan räknare. a) 49 upphöjt till 1 delat med 2 b) 5 gånger 8 upphöjt till 1 delat med 3 c) 27 upphöjt till 2 delat med 3",
+   "s": 95.62,
+   "e": 107.58
+  },
+  {
+   "t": "a) Exponenten 1 delat med 2 betyder kvadratroten:",
+   "s": 107.58,
+   "e": 117.34
+  },
+  {
+   "t": "49 upphöjt till 1 delat med 2 är lika med roten ur 49 som är lika med 7",
+   "s": 107.58,
+   "e": 117.34
+  },
+  {
+   "t": "Svar: 7",
+   "s": 117.34,
+   "e": 131.53
+  },
+  {
+   "t": "b) Exponenten 1 delat med 3 betyder tredjeroten (kubikroten):",
+   "s": 117.34,
+   "e": 131.53
+  },
+  {
+   "t": "5 gånger 8 upphöjt till 1 delat med 3 är lika med 5 gånger tredje roten ur 8 som är lika med 5 gånger 2 som är lika med 10",
+   "s": 117.34,
+   "e": 131.53
+  },
+  {
+   "t": "Svar: 10",
+   "s": 131.53,
+   "e": 134.01
+  },
+  {
+   "t": "c) Vi delar upp exponenten med potenslagen \"potens av potens\":",
+   "s": 134.01,
+   "e": 152.59
+  },
+  {
+   "t": "27 upphöjt till 2 delat med 3 är lika med parentesen 27 upphöjt till 1 delat med 3 slut parentes i kvadrat som är lika med parentesen tredje roten ur 27 slut parentes i kvadrat som är lika med 3 i kvadrat som är lika med 9",
+   "s": 134.01,
+   "e": 152.59
+  },
+  {
+   "t": "Svar: 9",
+   "s": 152.59,
+   "e": 157.51
+  },
+  {
+   "t": "Exempel 2 — Förenkla med potenslagarna",
+   "s": 152.59,
+   "e": 157.51
+  },
+  {
+   "t": "Förenkla x upphöjt till 7 delat med 2 delat med x i kubik .",
+   "s": 157.51,
+   "e": 162.79
+  },
+  {
+   "t": "Vi använder potenslagen för division och räknar med exponenterna som med vanliga bråk:",
+   "s": 162.79,
+   "e": 183.38
+  },
+  {
+   "t": "x upphöjt till 7 delat med 2 delat med x i kubik är lika med x upphöjt till 7 delat med 2 minus 3 som är lika med x upphöjt till 7 delat med 2 minus 6 delat med 2 som är lika med x upphöjt till 1 delat med 2 som är lika med roten ur x",
+   "s": 162.79,
+   "e": 183.38
+  },
+  {
+   "t": "Svar: roten ur x",
+   "s": 162.79,
+   "e": 183.38
+  }
+ ]
+}

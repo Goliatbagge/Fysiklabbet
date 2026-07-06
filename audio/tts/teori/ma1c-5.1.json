@@ -1,0 +1,313 @@
+{
+ "id": "ma1c-5.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "798613a793c69da96d5f27754473eaf585324497",
+ "dur": 352.37,
+ "segments": [
+  {
+   "t": "Statistiska undersökningar, urval och felkällor",
+   "s": 0.1,
+   "e": 4.49
+  },
+  {
+   "t": "Statistiska undersökningar och urval",
+   "s": 4.44,
+   "e": 8.04
+  },
+  {
+   "t": "Information som behandlas i en undersökning kallas data.",
+   "s": 8.04,
+   "e": 12.36
+  },
+  {
+   "t": "Den mängd som undersökningen handlar om kallas population.",
+   "s": 12.36,
+   "e": 16.84
+  },
+  {
+   "t": "Populationen kan utgöras av t.ex. människor eller föremål.",
+   "s": 16.84,
+   "e": 21.71
+  },
+  {
+   "t": "Om man samlar in data från en hel population kallas det totalundersökning.",
+   "s": 21.71,
+   "e": 26.95
+  },
+  {
+   "t": "Totalundersökningar är exakta, men tidskrävande om populationen är stor.",
+   "s": 26.95,
+   "e": 32.73
+  },
+  {
+   "t": "Om man väljer ut och undersöker en mindre del av populationen kallas detta för stickprovsundersökning.",
+   "s": 32.73,
+   "e": 39.41
+  },
+  {
+   "t": "Den är mindre exakt, men är lättare att genomföra.",
+   "s": 39.41,
+   "e": 43.77
+  },
+  {
+   "t": "Vid stickprovsundersökningar måste man på något sätt välja vilka i populationen som ska delta i undersökningen.",
+   "s": 43.77,
+   "e": 50.91
+  },
+  {
+   "t": "Hur man väljer dessa kallas urval.",
+   "s": 50.91,
+   "e": 54.29
+  },
+  {
+   "t": "Tre vanliga urvalsmetoder",
+   "s": 54.29,
+   "e": 57.25
+  },
+  {
+   "t": "Obundet slumpmässigt urval.",
+   "s": 57.25,
+   "e": 60.26
+  },
+  {
+   "t": "Varje individ i populationen tilldelas ett tal.",
+   "s": 60.26,
+   "e": 64.47
+  },
+  {
+   "t": "Sedan väljs ett tal med en slumpgenerator. \"Dra namnlappar ur en hatt.\" Urvalet blir helt slumpmässigt.",
+   "s": 64.47,
+   "e": 74.53
+  },
+  {
+   "t": "Systematiskt urval.",
+   "s": 74.53,
+   "e": 77.2
+  },
+  {
+   "t": "Man använder ett system för hur man gör sitt urval, t.ex. att välja var femte person från en klasslista.",
+   "s": 77.2,
+   "e": 84.19
+  },
+  {
+   "t": "Till skillnad från vad man kan tro är detta sätt inte slumpmässigt (om man inte har slumpat ordningen i klasslistan innan).",
+   "s": 84.19,
+   "e": 91.78
+  },
+  {
+   "t": "Stratifierat urval.",
+   "s": 91.78,
+   "e": 94.47
+  },
+  {
+   "t": "Man anpassar valet av individer i stickprovet för att spegla populationen.",
+   "s": 94.47,
+   "e": 99.84
+  },
+  {
+   "t": "T.ex. om 75 procent av en population är kvinnor, ska även 75 procent av stickprovet vara kvinnor, om man tror att kön har inverkan på resultatet.",
+   "s": 99.84,
+   "e": 110.01
+  },
+  {
+   "t": "Felkällor",
+   "s": 110.01,
+   "e": 112.04
+  },
+  {
+   "t": "Statistiska undersökningar kan ge felaktiga resultat.",
+   "s": 112.04,
+   "e": 116.4
+  },
+  {
+   "t": "Orsaker till felaktiga resultat kallas felkällor.",
+   "s": 116.4,
+   "e": 120.71
+  },
+  {
+   "t": "Fel som beror på att urvalet inte representerar populationen kallas urvalsfel.",
+   "s": 120.71,
+   "e": 126.67
+  },
+  {
+   "t": "Ett exempel på det skulle kunna vara att ställa sig utanför en kyrka och ställa frågan \"Tror du på Gud?\" för att dra en slutsats om gudstron i en stad.",
+   "s": 126.67,
+   "e": 135.15
+  },
+  {
+   "t": "Eftersom kyrkobesökare i större utsträckning är religiösa är sannolikheten att de tror på Gud större än för hela populationen i staden.",
+   "s": 135.15,
+   "e": 143.49
+  },
+  {
+   "t": "Därför blir urvalet olämpligt.",
+   "s": 143.49,
+   "e": 146.8
+  },
+  {
+   "t": "Fel som gör att de insamlade värdena blir felaktiga kallas mätfel.",
+   "s": 146.8,
+   "e": 151.78
+  },
+  {
+   "t": "Mätfel kan orsakas av en felgraderad linjal, men även av otydliga eller ledande frågor eller svarsalternativ som inte täcker in alla möjliga svar:",
+   "s": 151.78,
+   "e": 165.25
+  },
+  {
+   "t": "Om alla som tillfrågas i en undersökning inte svarar får vi ett svarsbortfall.",
+   "s": 151.78,
+   "e": 165.25
+  },
+  {
+   "t": "Om bortfallet är stort eller om de personer som ingår i bortfallet kan misstänkas svara annorlunda på undersökningen behöver hänsyn till bortfallet tas.",
+   "s": 165.25,
+   "e": 174.2
+  },
+  {
+   "t": "Exempel 1 — Granska en enkätfråga",
+   "s": 174.2,
+   "e": 178.03
+  },
+  {
+   "t": "Du vill undersöka uppfattningen om språk och ställer nedanstående fråga i en enkät:",
+   "s": 178.03,
+   "e": 186.93
+  },
+  {
+   "t": "Vilket språk tycker du är vackrast: spanska eller franska? ☐ Katalanska ☐ Franska",
+   "s": 178.03,
+   "e": 189.41
+  },
+  {
+   "t": "Finns det några problem med undersökningen?",
+   "s": 189.41,
+   "e": 192.7
+  },
+  {
+   "t": "Svar: Ja, svarsalternativen täcker inte in alla möjliga svar.",
+   "s": 192.7,
+   "e": 198.1
+  },
+  {
+   "t": "Det är inte säkert att en svarande föredrar något av språken.",
+   "s": 198.1,
+   "e": 202.78
+  },
+  {
+   "t": "Det är inte heller säkert att en svarande vet hur t.ex. katalanska låter.",
+   "s": 202.78,
+   "e": 208.3
+  },
+  {
+   "t": "Alternativen \"Inget\" och \"Vet ej\" saknas alltså. (Dessutom nämner frågan spanska, men alternativet som ges är katalanska.)",
+   "s": 208.3,
+   "e": 218.45
+  },
+  {
+   "t": "Exempel 2 — Ta hänsyn till bortfallet",
+   "s": 218.45,
+   "e": 222.24
+  },
+  {
+   "t": "En enkät skickades ut till 1 000 personer.",
+   "s": 222.24,
+   "e": 226.28
+  },
+  {
+   "t": "Frågan var \"Är du positiv eller negativ till utbyggnad av kärnkraft?\".",
+   "s": 226.28,
+   "e": 231.7
+  },
+  {
+   "t": "Resultatet blev",
+   "s": 231.7,
+   "e": 234.09
+  },
+  {
+   "t": "Positiv: 420 st Negativ: 380 st Vet ej: 80 st.",
+   "s": 234.09,
+   "e": 245.16
+  },
+  {
+   "t": "a) Hur stor andel av de som svarade var positiva till utbyggnad av kärnkraft?. b) Hur stort var bortfallet procentuellt?. c) Om vi tar hänsyn till bortfallet, mellan vilka värden kan andelen positiva till utbyggnad av kärnkraft ligga?",
+   "s": 234.09,
+   "e": 257.0
+  },
+  {
+   "t": "a) Vi har 420 positiva av parentesen 420 plus 380 plus 80 slut parentes är lika med 880 svarande.",
+   "s": 257.0,
+   "e": 267.01
+  },
+  {
+   "t": "Andelen positiva är då",
+   "s": 267.01,
+   "e": 269.8
+  },
+  {
+   "t": "420 delat med 880 är lika med 0,477 som är ungefär lika med 0,48 som är lika med 48 procent",
+   "s": 269.8,
+   "e": 279.46
+  },
+  {
+   "t": "Svar: 48 procent",
+   "s": 279.46,
+   "e": 282.54
+  },
+  {
+   "t": "b) 1 000 enkäter skickades ut och 880 svarade.",
+   "s": 282.54,
+   "e": 287.89
+  },
+  {
+   "t": "Antalet i bortfallet är alltså parentesen 1 000 minus 880 slut parentes är lika med 120 st. Det procentuella bortfallet är alltså",
+   "s": 287.89,
+   "e": 299.54
+  },
+  {
+   "t": "120 delat med 1 000 är lika med 0,12 som är lika med 12 procent",
+   "s": 299.54,
+   "e": 305.65
+  },
+  {
+   "t": "Svar: 12 procent",
+   "s": 305.65,
+   "e": 308.41
+  },
+  {
+   "t": "c) Vi får den undre gränsen om ingen i bortfallet är positiv.",
+   "s": 308.41,
+   "e": 313.48
+  },
+  {
+   "t": "Antalet positiva är i så fall fortfarande 420 och andelen är då",
+   "s": 313.64,
+   "e": 319.34
+  },
+  {
+   "t": "420 delat med 1 000 är lika med 0,42 som är lika med 42 procent",
+   "s": 319.29,
+   "e": 326.19
+  },
+  {
+   "t": "Den övre gränsen fås om alla i bortfallet är positiva.",
+   "s": 326.19,
+   "e": 330.81
+  },
+  {
+   "t": "Antalet positiva är i så fall parentesen 420 plus 120 slut parentes är lika med 540 st, vilket ger andelen",
+   "s": 330.81,
+   "e": 340.54
+  },
+  {
+   "t": "540 delat med 1 000 är lika med 0,54 som är lika med 54 procent",
+   "s": 340.54,
+   "e": 347.67
+  },
+  {
+   "t": "Svar: Mellan 42 procent och 54 procent.",
+   "s": 347.67,
+   "e": 352.37
+  }
+ ]
+}

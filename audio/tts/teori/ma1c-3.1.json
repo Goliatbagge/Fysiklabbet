@@ -1,0 +1,243 @@
+{
+ "id": "ma1c-3.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "da540e2688bd7ab68b745fc838172ca258084ab3",
+ "dur": 234.19,
+ "segments": [
+  {
+   "t": "Procent, promille och ppm",
+   "s": 0.1,
+   "e": 3.51
+  },
+  {
+   "t": "Hundradelar kallas procent.",
+   "s": 3.46,
+   "e": 6.5
+  },
+  {
+   "t": "Tusendelar kallas promille.",
+   "s": 6.5,
+   "e": 9.4
+  },
+  {
+   "t": "Miljondelar kallas ppm (parts per million).",
+   "s": 9.4,
+   "e": 13.57
+  },
+  {
+   "t": "Dessa används för att ange andelar.",
+   "s": 13.57,
+   "e": 16.79
+  },
+  {
+   "t": "Procent, promille och ppm",
+   "s": 16.79,
+   "e": 20.1
+  },
+  {
+   "t": "Vid beräkningar används promille och ppm på samma sätt som procent.",
+   "s": 20.1,
+   "e": 25.29
+  },
+  {
+   "t": "Beräkna andel",
+   "s": 25.29,
+   "e": 27.57
+  },
+  {
+   "t": "andel är lika med delen delat med hela",
+   "s": 27.57,
+   "e": 31.14
+  },
+  {
+   "t": "OBS!",
+   "s": 31.14,
+   "e": 32.71
+  },
+  {
+   "t": "Andelen anges i bråkform eller decimalform.",
+   "s": 32.71,
+   "e": 36.74
+  },
+  {
+   "t": "För att bestämma delen eller det hela, så löser vi ut det från formeln ovan.",
+   "s": 36.74,
+   "e": 41.83
+  },
+  {
+   "t": "Exempel 1 — Bestäm andelen",
+   "s": 41.83,
+   "e": 45.01
+  },
+  {
+   "t": "Hur många promille är 120 gram av 15 kilogram?",
+   "s": 45.01,
+   "e": 49.8
+  },
+  {
+   "t": "Det frågas efter andelen.",
+   "s": 49.8,
+   "e": 52.54
+  },
+  {
+   "t": "För att vi ska få korrekt andel krävs att vi har samma enhet på delen och det hela.",
+   "s": 52.54,
+   "e": 58.12
+  },
+  {
+   "t": "Vi gör om t.ex. 15 kilogram till gram och får 15 kilogram är lika med 15 000 gram .",
+   "s": 58.12,
+   "e": 64.76
+  },
+  {
+   "t": "Så delen är lika med 120 gram och hela är lika med 15 000 gram.",
+   "s": 64.76,
+   "e": 70.4
+  },
+  {
+   "t": "Vi sätter in i formeln för andelen och får",
+   "s": 70.4,
+   "e": 74.16
+  },
+  {
+   "t": "andel är lika med 120 delat med 15 000 som är lika med 1 delat med 125 som är lika med 0,008",
+   "s": 74.16,
+   "e": 83.01
+  },
+  {
+   "t": "För att göra om från decimalform till promille ska vi multiplicera med 1 000 (‰ är lika med tusendelar):",
+   "s": 83.01,
+   "e": 96.2
+  },
+  {
+   "t": "0,008 är lika med 0,008 gånger 1 000 promille som är lika med 8 promille",
+   "s": 83.01,
+   "e": 96.2
+  },
+  {
+   "t": "Svar: 8 promille",
+   "s": 96.2,
+   "e": 98.99
+  },
+  {
+   "t": "Exempel 2 — Bestäm delen",
+   "s": 98.99,
+   "e": 102.01
+  },
+  {
+   "t": "Vad är 3,5 promille av 32 000 kronor?",
+   "s": 102.01,
+   "e": 106.44
+  },
+  {
+   "t": "Det frågas efter delen.",
+   "s": 106.44,
+   "e": 109.03
+  },
+  {
+   "t": "Vi löser ut delen från formeln för andelen och får",
+   "s": 109.03,
+   "e": 113.3
+  },
+  {
+   "t": "andel är lika med delen delat med hela vilket är ekvivalent med att delen är lika med andel gånger hela, ekvation 1",
+   "s": 113.3,
+   "e": 121.28
+  },
+  {
+   "t": "Kom ihåg att andelen ska anges i decimal- eller bråkform:",
+   "s": 121.28,
+   "e": 132.86
+  },
+  {
+   "t": "andel är lika med 3,5 promille som är lika med 3,5 delat med 1 000 som är lika med 0,0035",
+   "s": 121.28,
+   "e": 132.86
+  },
+  {
+   "t": "Insättning av andel är lika med 0,0035 och hela är lika med 32 000 kronor i formel ekvation 1 ovan ger",
+   "s": 132.86,
+   "e": 141.65
+  },
+  {
+   "t": "delen är lika med 0,0035 gånger 32 000 kronor som är lika med 112 kronor",
+   "s": 141.65,
+   "e": 149.24
+  },
+  {
+   "t": "Svar: 112 kronor",
+   "s": 149.24,
+   "e": 152.53
+  },
+  {
+   "t": "Exempel 3 — Bestäm det hela",
+   "s": 152.53,
+   "e": 155.57
+  },
+  {
+   "t": "Koncentrationen av ett visst ämne i havsvatten är 5 ppm.",
+   "s": 155.57,
+   "e": 160.35
+  },
+  {
+   "t": "Hur mycket vatten behövs för att samla in 30 gram av ämnet?",
+   "s": 160.35,
+   "e": 164.84
+  },
+  {
+   "t": "Det frågas efter det hela.",
+   "s": 164.84,
+   "e": 167.43
+  },
+  {
+   "t": "Vi löser ut det hela från formeln för andelen och får",
+   "s": 167.43,
+   "e": 171.74
+  },
+  {
+   "t": "andel är lika med delen delat med hela vilket är ekvivalent med att hela är lika med delen delat med andelen",
+   "s": 171.74,
+   "e": 178.9
+  },
+  {
+   "t": "Insättning av delen är lika med 30 gram och andelen är lika med 5 ppm som är lika med 5 delat med 1 000 000 som är lika med 0,000 005 ger",
+   "s": 178.9,
+   "e": 189.18
+  },
+  {
+   "t": "hela är lika med 30 gram delat med 0,000 005 som är lika med 6 000 000 gram som är lika med 6 000 kilogram som är lika med 6 ton",
+   "s": 189.18,
+   "e": 199.06
+  },
+  {
+   "t": "Svar: 6 ton",
+   "s": 199.06,
+   "e": 201.7
+  },
+  {
+   "t": "Hjälpmedel — Procenttriangeln",
+   "s": 201.7,
+   "e": 204.81
+  },
+  {
+   "t": "Vissa tycker att procenttriangeln är en bra hjälp vid procenträkning.",
+   "s": 204.81,
+   "e": 209.56
+  },
+  {
+   "t": "Den fungerar även utmärkt för promille och ppm.",
+   "s": 209.56,
+   "e": 213.9
+  },
+  {
+   "t": "Täck över den storhet du söker, så visar triangeln formeln: står de kvarvarande storheterna bredvid varandra ska de multipliceras, står de över varandra ska de divideras.",
+   "s": 213.9,
+   "e": 224.62
+  },
+  {
+   "t": "Triangeln sammanfattar: delen är lika med andelen gånger hela, andelen är lika med delen/hela och hela är lika med delen/andelen.",
+   "s": 224.62,
+   "e": 234.19
+  }
+ ]
+}

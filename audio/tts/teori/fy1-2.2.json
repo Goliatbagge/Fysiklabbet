@@ -1,8 +1,8 @@
 {
  "id": "fy1-2.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "f26af8f8ef4712ebbb1bbf91137155a03dc3962f",
- "dur": 323.98,
+ "hash": "6c08bba6f91b4efc5ee7835b743cfc114462ce06",
+ "dur": 323.79,
  "segments": [
   {
    "t": "Medelhastighet, momentanhastighet och läge-tid-diagram",
@@ -92,162 +92,162 @@
   {
    "t": "Oavsett om vi ska beräkna en medelhastighet, konstant hastighet eller momentanhastighet utifrån ett s-t-diagram, så görs det genom att beräkna lutningen hos någon form av linje.",
    "s": 80.86,
-   "e": 92.08
+   "e": 92.09
   },
   {
    "t": "Linjens lutning bestäms genom att välja två valfria punkter (t ett, s ett) och (t två, s två) på linjen och sätta in i",
-   "s": 92.08,
-   "e": 118.62
+   "s": 92.09,
+   "e": 118.6
   },
   {
-   "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett (jämförmed k som är lika med delta y delat med delta x som är lika med y två minus y ett delat med x två minus x ett frånmatematiken)",
-   "s": 92.08,
-   "e": 118.62
+   "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett (jämför med k som är lika med delta y delat med delta x som är lika med y två minus y ett delat med x två minus x ett från matematiken)",
+   "s": 92.09,
+   "e": 118.6
   },
   {
    "t": "Exempel 1 — Avläsning av konstant hastighet",
-   "s": 118.62,
-   "e": 122.99
+   "s": 118.6,
+   "e": 122.96
   },
   {
    "t": "Beräkna den konstanta hastigheten som åskådliggörs i grafen nedan utifrån de markerade punkterna.",
-   "s": 122.99,
-   "e": 129.54
+   "s": 122.96,
+   "e": 129.51
   },
   {
    "t": "Den konstanta hastigheten motsvaras av linjens lutning.",
-   "s": 129.54,
-   "e": 134.1
+   "s": 129.51,
+   "e": 134.07
   },
   {
    "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t",
-   "s": 134.1,
-   "e": 154.35
+   "s": 134.07,
+   "e": 154.34
   },
   {
    "t": "delta sträckan s är lika med parentesen 0,72 minus 0,22 slut parentes meter som är lika med 0,50 meter delta tiden t som är lika med parentesen 0,50 minus 0,15 slut parentes sekund som är lika med 0,35 sekund",
-   "s": 134.1,
-   "e": 154.35
+   "s": 134.07,
+   "e": 154.34
   },
   {
-   "t": "hastigheten v är lika med 0,50 delat med 0,35 som är lika med 1,428 ldots meter per sekund som är ungefär lika med 1,4 meter per sekund",
-   "s": 154.35,
-   "e": 165.69
+   "t": "hastigheten v är lika med 0,50 delat med 0,35 som är lika med 1,428 meter per sekund som är ungefär lika med 1,4 meter per sekund",
+   "s": 154.34,
+   "e": 165.41
   },
   {
    "t": "Svar: 1,4 meter per sekund",
-   "s": 165.69,
-   "e": 169.44
+   "s": 165.41,
+   "e": 169.18
   },
   {
    "t": "Exempel 2 — Adam och Bertil cyklar",
-   "s": 169.44,
-   "e": 173.18
+   "s": 169.18,
+   "e": 172.91
   },
   {
    "t": "Adam cyklar hemifrån till affären samtidigt som Bertil cyklar från affären hem enligt nedanstående graf.",
-   "s": 173.18,
-   "e": 179.93
+   "s": 172.91,
+   "e": 179.66
   },
   {
    "t": "Vad är Bertils medelhastighet mellan t ett är lika med 0 minut och t två är lika med 25 minut ?",
-   "s": 179.93,
-   "e": 186.89
+   "s": 179.66,
+   "e": 186.62
   },
   {
    "t": "Vi ställer upp formeln för medelhastighet.",
-   "s": 186.89,
-   "e": 190.51
+   "s": 186.62,
+   "e": 190.25
   },
   {
    "t": "v massan m är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett",
-   "s": 190.51,
-   "e": 199.51
+   "s": 190.25,
+   "e": 199.25
   },
   {
    "t": "Vi läser av koordinaterna på den orange grafen vid t ett är lika med 0 minut och t två är lika med 25 minut och får (0, 6) och (25, 0), vilket ger",
-   "s": 199.51,
-   "e": 211.49
+   "s": 199.25,
+   "e": 211.22
   },
   {
    "t": "t ett är lika med 0 t två som är lika med 25 minut som är lika med 25 gånger 60 sekund som är lika med 1 500 sekund s ett som är lika med 6 kilometer som är lika med 6 000 meter s två som är lika med 0",
-   "s": 211.49,
-   "e": 225.74
+   "s": 211.22,
+   "e": 225.47
   },
   {
    "t": "v massan m är lika med s två minus s ett delat med t två minus t ett som är lika med 0 minus 6 000 delat med 1 500 minus 0 som är lika med minus 6 000 delat med 1 500 som är lika med minus 4,0 meter per sekund",
-   "s": 225.74,
-   "e": 241.82
+   "s": 225.47,
+   "e": 241.56
   },
   {
    "t": "Svar: −4,0 meter per sekund (OBS!",
-   "s": 241.82,
-   "e": 246.28
+   "s": 241.56,
+   "e": 246.01
   },
   {
    "t": "Minustecknet anger att riktningen är \"tillbaka\".)",
-   "s": 246.28,
-   "e": 250.06
+   "s": 246.01,
+   "e": 249.8
   },
   {
    "t": "Exempel 3 — Cecilias momentanhastighet",
-   "s": 250.06,
-   "e": 254.2
+   "s": 249.8,
+   "e": 253.94
   },
   {
    "t": "Cecilia springer enligt nedanstående s-t-graf.",
-   "s": 254.2,
-   "e": 258.32
+   "s": 253.94,
+   "e": 258.06
   },
   {
    "t": "Bestäm hennes momentanhastighet vid tiden t är lika med 5,0 sekund .",
-   "s": 258.32,
-   "e": 263.82
+   "s": 258.06,
+   "e": 263.56
   },
   {
    "t": "Tangentens lutning där tiden t är lika med 5,0 sekund ger hennes momentanhastighet.",
-   "s": 263.82,
-   "e": 270.32
+   "s": 263.56,
+   "e": 270.06
   },
   {
    "t": "Vi slår en tangent i punkten där tiden t är lika med 5,0 sekund .",
-   "s": 270.32,
-   "e": 275.61
+   "s": 270.06,
+   "e": 275.35
   },
   {
    "t": "Tangenten ska luta lika mycket som grafen gör i den punkten (\"snudda\" grafen).",
-   "s": 275.61,
-   "e": 281.4
+   "s": 275.35,
+   "e": 281.14
   },
   {
    "t": "Vi väljer två valfria punkter på tangenten (den orange linjen) och sätter in i formeln",
-   "s": 281.4,
-   "e": 287.51
+   "s": 281.14,
+   "e": 287.25
   },
   {
    "t": "hastigheten v är lika med s två minus s ett delat med t två minus t ett",
-   "s": 287.51,
-   "e": 293.98
+   "s": 287.25,
+   "e": 293.71
   },
   {
    "t": "Vi väljer till exempel punkterna (2, 20) och (8, 50), vilket ger värdena",
-   "s": 293.98,
-   "e": 301.12
+   "s": 293.71,
+   "e": 300.86
   },
   {
    "t": "t ett är lika med 2 sekund t två som är lika med 8 sekund s ett som är lika med 20 meter s två som är lika med 50 meter",
-   "s": 301.12,
-   "e": 311.63
+   "s": 300.86,
+   "e": 311.44
   },
   {
    "t": "hastigheten v är lika med 50 minus 20 delat med 8 minus 2 som är lika med 30 delat med 6 som är lika med 5 meter per sekund",
-   "s": 311.58,
-   "e": 320.73
+   "s": 311.39,
+   "e": 320.54
   },
   {
    "t": "Svar: 5 meter per sekund",
-   "s": 320.73,
-   "e": 323.98
+   "s": 320.54,
+   "e": 323.79
   }
  ]
 }

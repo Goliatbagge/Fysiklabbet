@@ -1,0 +1,168 @@
+{
+ "id": "ma1c-6.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "773df9383185b996dca2ce0865ff1954d2fc34b5",
+ "dur": 194.46,
+ "segments": [
+  {
+   "t": "Bestämma vinklar med inversa funktioner",
+   "s": 0.1,
+   "e": 3.56
+  },
+  {
+   "t": "Kom ihåg sedan tidigare:",
+   "s": 3.51,
+   "e": 8.03
+  },
+  {
+   "t": "Trigonometriska funktioner",
+   "s": 3.51,
+   "e": 8.03
+  },
+  {
+   "t": "tangens v är lika med motstående katet delat med närliggande katet sinus v som är lika med motstående katet delat med hypotenusa cosinus v som är lika med närliggande katet delat med hypotenusa",
+   "s": 8.03,
+   "e": 20.16
+  },
+  {
+   "t": "Vi kan även beräkna vinklar i trianglar med hjälp av de trigonometriska funktionernas inversa funktioner.",
+   "s": 20.16,
+   "e": 27.09
+  },
+  {
+   "t": "Alltså är t.ex. tan upphöjt till minus 1 och arctan samma sak — bara olika skrivsätt.",
+   "s": 27.09,
+   "e": 33.69
+  },
+  {
+   "t": "Det är bra att känna igen båda skrivsätten!",
+   "s": 33.69,
+   "e": 37.29
+  },
+  {
+   "t": "Inversa funktioner",
+   "s": 37.29,
+   "e": 39.95
+  },
+  {
+   "t": "Om",
+   "s": 39.95,
+   "e": 41.38
+  },
+  {
+   "t": "tangens v är lika med a delat med b gäller att v som är lika med tangens upphöjt till minus 1 parentesen a delat med b slut parentes som är lika med arctangens parentesen a delat med b slut parentes",
+   "s": 41.38,
+   "e": 54.08
+  },
+  {
+   "t": "sinus v är lika med a delat med c gäller att v som är lika med sinus upphöjt till minus 1 parentesen a delat med c slut parentes som är lika med arcsinus parentesen a delat med c slut parentes",
+   "s": 54.08,
+   "e": 66.5
+  },
+  {
+   "t": "cosinus v är lika med b delat med c gäller att v som är lika med cosinus upphöjt till minus 1 parentesen b delat med c slut parentes som är lika med arccosinus parentesen b delat med c slut parentes",
+   "s": 66.5,
+   "e": 79.64
+  },
+  {
+   "t": "De inversa funktionerna slås på räknare.",
+   "s": 79.64,
+   "e": 83.41
+  },
+  {
+   "t": "Lär dig att slå dem!",
+   "s": 83.41,
+   "e": 85.92
+  },
+  {
+   "t": "Exempel 1 — Bestäm vinkeln ur cosinusvärdet",
+   "s": 85.92,
+   "e": 90.19
+  },
+  {
+   "t": "Bestäm vinkeln v om cos v är lika med 0,753.",
+   "s": 90.19,
+   "e": 95.39
+  },
+  {
+   "t": "cosinus v är lika med 0,753",
+   "s": 95.39,
+   "e": 99.79
+  },
+  {
+   "t": "v är lika med cosinus upphöjt till minus 1 parentesen 0,753 slut parentes som är lika med 41,149 grader som är ungefär lika med 41 grader",
+   "s": 99.79,
+   "e": 111.75
+  },
+  {
+   "t": "Svar: 41 grader",
+   "s": 111.75,
+   "e": 114.72
+  },
+  {
+   "t": "Exempel 2 — Bestäm triangelns alla vinklar",
+   "s": 114.72,
+   "e": 118.64
+  },
+  {
+   "t": "Den ena kateten i en rätvinklig triangel är 3 centimeter och hypotenusan är 5 centimeter.",
+   "s": 118.64,
+   "e": 125.38
+  },
+  {
+   "t": "Bestäm triangelns vinklar med de inversa funktionerna.",
+   "s": 125.38,
+   "e": 129.49
+  },
+  {
+   "t": "Vi ritar en skiss av triangeln och kallar de okända vinklarna u och v :",
+   "s": 129.49,
+   "e": 136.4
+  },
+  {
+   "t": "Vi börjar med att bestämma vinkeln u .",
+   "s": 129.49,
+   "e": 136.4
+  },
+  {
+   "t": "Vi har närliggande katet och hypotenusa, så",
+   "s": 136.4,
+   "e": 140.5
+  },
+  {
+   "t": "cosinus u är lika med 3 delat med 5",
+   "s": 140.5,
+   "e": 144.3
+  },
+  {
+   "t": "u är lika med cosinus upphöjt till minus 1 parentesen 3 delat med 5 slut parentes som är lika med 53,130 grader som är ungefär lika med 53 grader",
+   "s": 144.3,
+   "e": 155.74
+  },
+  {
+   "t": "Vi vet nu två vinklar i triangeln (90 grader och 53 grader) och skulle kunna beräkna den tredje vinkeln v utifrån att vinkelsumman i en triangel är 180 grader.",
+   "s": 155.74,
+   "e": 166.53
+  },
+  {
+   "t": "Men vi ska beräkna vinkeln v med inversa funktioner, där vi har motstående katet och hypotenusa, så",
+   "s": 166.53,
+   "e": 173.86
+  },
+  {
+   "t": "sinus v är lika med 3 delat med 5",
+   "s": 173.86,
+   "e": 177.61
+  },
+  {
+   "t": "v är lika med sinus upphöjt till minus 1 parentesen 3 delat med 5 slut parentes som är lika med 36,869 grader som är ungefär lika med 37 grader",
+   "s": 177.61,
+   "e": 189.19
+  },
+  {
+   "t": "Svar: 90 grader, 53 grader och 37 grader",
+   "s": 189.19,
+   "e": 194.46
+  }
+ ]
+}

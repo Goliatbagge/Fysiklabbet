@@ -1,0 +1,233 @@
+{
+ "id": "ma1c-5.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5b0272c05fe668f14181f4f4f81e7ea707f6a71d",
+ "dur": 323.69,
+ "segments": [
+  {
+   "t": "Produktregeln",
+   "s": 0.1,
+   "e": 2.24
+  },
+  {
+   "t": "Kuriosa — Kortleken",
+   "s": 2.19,
+   "e": 4.79
+  },
+  {
+   "t": "När du blandar en kortlek så kan du vara tämligen säker på att ordningen som korten hamnar i är fullständigt unik i hela den mänskliga historien.",
+   "s": 4.79,
+   "e": 13.12
+  },
+  {
+   "t": "Det finns ca 8 gånger 10 upphöjt till 67 sätt att blanda en kortlek eller mer exakt 52 gånger 51 gånger 50 gånger 49 gånger gånger 3 gånger 2 gånger 1 (utläses \"52 fakultet\" och skrivs \"52!\") är lika med 80 658 175 170 943 878 571 660 636 856 403 766 975 289 505 440 883 277 824 000 000 000 000 möjliga kombinationer.",
+   "s": 13.12,
+   "e": 62.06
+  },
+  {
+   "t": "Detta tal är så stort att även om vi blandade kortleken en gång per sekund från Big bang så hade universum hunnit gå under innan vi nått en chans på miljarden att få upp samma sekvens av kort.",
+   "s": 62.06,
+   "e": 72.66
+  },
+  {
+   "t": "Antal möjliga blandningar motsvarar lika många atomer som i 600 biljarder jordklot.",
+   "s": 72.66,
+   "e": 78.72
+  },
+  {
+   "t": "Eller: Tänk dig att vi har en biljon människor.",
+   "s": 78.72,
+   "e": 82.81
+  },
+  {
+   "t": "Det är 10 gånger så många människor som någonsin har levt på jorden.",
+   "s": 82.81,
+   "e": 87.6
+  },
+  {
+   "t": "Ge dem en kortlek var.",
+   "s": 87.6,
+   "e": 90.26
+  },
+  {
+   "t": "Sedan ger du dem instruktionen att blanda sina kortlekar en biljon gånger i sekunden i en biljon år.",
+   "s": 90.26,
+   "e": 96.99
+  },
+  {
+   "t": "Sedan låter vi detta utspela sig i en biljon civilisationer i vårt universum.",
+   "s": 96.99,
+   "e": 102.71
+  },
+  {
+   "t": "Om du nu tar en kortlek och blandar den, så är det bara 40 procent chans att den är likadan som någon av de kombinationer som har blandats i detta påhittade universum.",
+   "s": 102.71,
+   "e": 112.59
+  },
+  {
+   "t": "Så när du blandar en kortlek kan du vara tämligen säker på att den kombinationen, från första till sista kortet, aldrig någonsin har uppstått i en tidigare blandning.",
+   "s": 112.59,
+   "e": 122.25
+  },
+  {
+   "t": "När en kombination av händelser sker kan vi beräkna sannolikheten för kombinationen genom att multiplicera sannolikheterna för de enskilda händelserna genom produktregeln.",
+   "s": 122.25,
+   "e": 132.1
+  },
+  {
+   "t": "Om sannolikheten för en händelse",
+   "s": 132.1,
+   "e": 135.25
+  },
+  {
+   "t": "inte påverkas av händelsen innan har vi en oberoende händelse.",
+   "s": 135.25,
+   "e": 140.14
+  },
+  {
+   "t": "T.ex. sannolikheten att slå en sexa vid ett kast med tärning är 1 delat med 6 .",
+   "s": 140.14,
+   "e": 146.29
+  },
+  {
+   "t": "Sannolikheten för att slå en sexa nästa gång med tärningen är fortfarande 1 delat med 6 (\"slumpen har inget minne\").",
+   "s": 146.29,
+   "e": 154.01
+  },
+  {
+   "t": "Kast med tärningar är alltså oberoende händelser.",
+   "s": 154.01,
+   "e": 157.95
+  },
+  {
+   "t": "påverkas av händelsen innan har vi en beroende händelse.",
+   "s": 157.95,
+   "e": 162.6
+  },
+  {
+   "t": "T.ex. sannolikheten att dra ett hjärter ur en kortlek är 13 delat med 52 .",
+   "s": 162.6,
+   "e": 168.89
+  },
+  {
+   "t": "Om jag lägger undan kortet (\"utan återläggning\"), så är sannolikheten att dra ytterligare ett hjärter ur kortleken 12 delat med 51 (12 hjärter är kvar av 51 kort totalt).",
+   "s": 168.89,
+   "e": 180.26
+  },
+  {
+   "t": "Sannolikheten att dra ett hjärter har ändrats!",
+   "s": 180.26,
+   "e": 184.1
+  },
+  {
+   "t": "Att dra kort utan återläggning är alltså beroende händelser.",
+   "s": 184.1,
+   "e": 188.64
+  },
+  {
+   "t": "Exempel 1 — Två sexor i rad",
+   "s": 188.64,
+   "e": 192.1
+  },
+  {
+   "t": "Vad är sannolikheten att slå två sexor i rad med tärning?",
+   "s": 192.1,
+   "e": 196.62
+  },
+  {
+   "t": "Kasten är oberoende — multiplicera sannolikheterna:",
+   "s": 196.62,
+   "e": 209.04
+  },
+  {
+   "t": "P av två sexor är lika med P av sexa gånger P av sexa som är lika med 1 delat med 6 gånger 1 delat med 6 som är lika med 1 delat med 36",
+   "s": 196.62,
+   "e": 209.04
+  },
+  {
+   "t": "Svar: 1 delat med 36",
+   "s": 209.04,
+   "e": 212.51
+  },
+  {
+   "t": "Exempel 2 — Yatzy!",
+   "s": 212.51,
+   "e": 215.22
+  },
+  {
+   "t": "Vad är sannolikheten att slå fem sexor vid ett kast med fem tärningar?",
+   "s": 215.22,
+   "e": 220.31
+  },
+  {
+   "t": "Yatzy!",
+   "s": 220.31,
+   "e": 222.01
+  },
+  {
+   "t": "P av fem sexor är lika med P av sexa gånger P av sexa gånger P av sexa gånger P av sexa gånger P av sexa som är lika med parentesen 1 delat med 6 slut parentes upphöjt till 5 som är lika med 1 upphöjt till 5 delat med 6 upphöjt till 5 som är lika med 1 delat med 7 776 som är ungefär lika med 0,00013 som är lika med 0,013 procent",
+   "s": 222.01,
+   "e": 245.32
+  },
+  {
+   "t": "Svar: 0,013 procent",
+   "s": 245.32,
+   "e": 249.15
+  },
+  {
+   "t": "Exempel 3 — Kulor med och utan återläggning",
+   "s": 249.15,
+   "e": 253.41
+  },
+  {
+   "t": "I en skål ligger 6 röda och 4 blå kulor.",
+   "s": 253.41,
+   "e": 257.49
+  },
+  {
+   "t": "Vad är sannolikheten att dra två blå kulor. a) med återläggning? b) utan återläggning?",
+   "s": 257.49,
+   "e": 267.16
+  },
+  {
+   "t": "a) Med återläggning påverkas inte sannolikheterna av föregående händelser:",
+   "s": 267.16,
+   "e": 284.1
+  },
+  {
+   "t": "P av två blå är lika med P av blå gånger P av blå som är lika med 4 delat med 10 gånger 4 delat med 10 som är lika med 16 delat med 100 som är lika med 0,16 som är lika med 16 procent",
+   "s": 267.16,
+   "e": 284.1
+  },
+  {
+   "t": "Svar: 16 procent",
+   "s": 284.1,
+   "e": 287.19
+  },
+  {
+   "t": "b) Utan återläggning påverkas sannolikheterna av föregående händelser.",
+   "s": 287.19,
+   "e": 293.04
+  },
+  {
+   "t": "Efter att vi har dragit en blå kula (4 på 10) finns bara 3 blå kulor kvar av 9 kulor totalt.",
+   "s": 293.04,
+   "e": 300.31
+  },
+  {
+   "t": "Så sannolikheten att dra en blå kula andra gången är alltså 3 delat med 9 :",
+   "s": 300.31,
+   "e": 311.89
+  },
+  {
+   "t": "P av två blå är lika med P av blå gånger P av blå som är lika med 4 delat med 10 gånger 3 delat med 9 som är lika med 12 delat med 90 som är lika med 2 delat med 15 som är ungefär lika med 0,13 som är lika med 13 procent",
+   "s": 300.31,
+   "e": 320.7
+  },
+  {
+   "t": "Svar: 13 procent",
+   "s": 320.65,
+   "e": 323.69
+  }
+ ]
+}

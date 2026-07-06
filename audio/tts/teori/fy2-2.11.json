@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.11",
  "voice": "sv-SE-SofieNeural",
- "hash": "7acbd658f14cbcb5b16dc530875ba973f8c4c86f",
- "dur": 382.65,
+ "hash": "ec3288da5dee7cf840c85a334ea61b3e50de6804",
+ "dur": 379.59,
  "segments": [
   {
    "t": "Ljudstyrka",
@@ -227,107 +227,107 @@
   {
    "t": "strömmen I är lika med effekten P delat med arean A",
    "s": 224.29,
-   "e": 242.96
+   "e": 242.78
   },
   {
-   "t": "effekten P är lika med 5,0 watt arean A som är lika med 4 pi gånger r i kvadrat som är lika med 4 pi gånger parentesen 10 meter slut parentes i kvadrat som är lika med 1 256,637 ldots kvadratmeter",
+   "t": "effekten P är lika med 5,0 watt arean A som är lika med 4 pi gånger r i kvadrat som är lika med 4 pi gånger parentesen 10 meter slut parentes i kvadrat som är lika med 1 256,637 kvadratmeter",
    "s": 224.29,
-   "e": 242.96
+   "e": 242.78
   },
   {
-   "t": "strömmen I är lika med 5,0 delat med 1 256,637 ldots som är lika med 0,00397 ldots watt per kvadratmeter som är ungefär lika med 0,0040 watt per kvadratmeter som är lika med 4,0 mW per kvadratmeter",
-   "s": 242.96,
-   "e": 260.9
+   "t": "strömmen I är lika med 5,0 delat med 1 256,637 som är lika med 0,00397 watt per kvadratmeter som är ungefär lika med 0,0040 watt per kvadratmeter som är lika med 4,0 mW per kvadratmeter",
+   "s": 242.78,
+   "e": 260.18
   },
   {
    "t": "Svar: 4,0 mW/m i kvadrat",
-   "s": 260.9,
-   "e": 266.01
+   "s": 260.18,
+   "e": 265.29
   },
   {
    "t": "b) Vi ställer upp formeln för ljudnivå.",
-   "s": 266.01,
-   "e": 269.71
+   "s": 265.29,
+   "e": 268.99
   },
   {
    "t": "L är lika med 10 gånger logaritmen av parentesen strömmen I delat med I noll slut parentes",
-   "s": 269.71,
-   "e": 276.52
+   "s": 268.99,
+   "e": 275.8
   },
   {
-   "t": "strömmen I är lika med 0,00397 ldots watt per kvadratmeter parentesen fråna-uppgiften slut parentes I noll som är lika med 10 upphöjt till minus 12 watt per kvadratmeter parentesen konstant slut parentes",
-   "s": 276.52,
-   "e": 290.59
+   "t": "strömmen I är lika med 0,00397 watt per kvadratmeter parentesen från a-uppgiften slut parentes I noll som är lika med 10 upphöjt till minus 12 watt per kvadratmeter parentesen konstant slut parentes",
+   "s": 275.8,
+   "e": 289.62
   },
   {
-   "t": "L är lika med 10 gånger logaritmen av parentesen 0,00397 ldots delat med 10 upphöjt till minus 12 slut parentes som är lika med 95,997 ldots dB som är ungefär lika med 96 dB",
-   "s": 290.59,
-   "e": 304.9
+   "t": "L är lika med 10 gånger logaritmen av parentesen 0,00397 delat med 10 upphöjt till minus 12 slut parentes som är lika med 95,997 dB som är ungefär lika med 96 dB",
+   "s": 289.62,
+   "e": 303.57
   },
   {
    "t": "Svar: 96 dB",
-   "s": 304.9,
-   "e": 307.99
+   "s": 303.57,
+   "e": 306.66
   },
   {
    "t": "Exempel 2 — Ljudintensitet vid 93 dB",
-   "s": 307.99,
-   "e": 312.41
+   "s": 306.66,
+   "e": 311.09
   },
   {
    "t": "Världens starkaste snarkning uppmättes till 93 dB.",
-   "s": 312.41,
-   "e": 317.18
+   "s": 311.09,
+   "e": 315.88
   },
   {
    "t": "Hur stor ljudintensitet motsvarar det?",
-   "s": 317.18,
-   "e": 320.75
+   "s": 315.88,
+   "e": 319.45
   },
   {
    "t": "Vi ställer upp formeln för ljudnivå och löser ut ljudintensiteten I.",
-   "s": 320.75,
-   "e": 328.52
+   "s": 319.45,
+   "e": 329.59
   },
   {
    "t": "L är lika med 10 gånger logaritmen av parentesen strömmen I delat med I noll slut parentes",
-   "s": 320.75,
-   "e": 332.77
+   "s": 319.45,
+   "e": 329.59
   },
   {
    "t": "Dividera båda led med 10:",
-   "s": 332.72,
-   "e": 341.37
+   "s": 329.72,
+   "e": 338.44
   },
   {
    "t": "L delat med 10 är lika med logaritmen av parentesen strömmen I delat med I noll slut parentes",
-   "s": 332.72,
-   "e": 341.37
+   "s": 329.72,
+   "e": 338.44
   },
   {
    "t": "Skriv om på potensform och lös ut I:",
-   "s": 341.37,
-   "e": 353.56
+   "s": 338.39,
+   "e": 350.68
   },
   {
    "t": "10 upphöjt till L delat med 10 är lika med strömmen I delat med I noll vilket är ekvivalent med att I är lika med I noll gånger 10 upphöjt till L delat med 10",
-   "s": 341.37,
-   "e": 353.56
+   "s": 338.39,
+   "e": 350.68
   },
   {
    "t": "I noll är lika med 10 upphöjt till minus 12 watt per kvadratmeter L som är lika med 93 dB",
-   "s": 353.56,
-   "e": 360.57
+   "s": 350.68,
+   "e": 357.68
   },
   {
-   "t": "strömmen I är lika med 10 upphöjt till minus 12 gånger 10 upphöjt till 93 delat med 10 som är lika med 0,00199 ldots watt per kvadratmeter som är ungefär lika med 0,0020 watt per kvadratmeter som är lika med 2,0 mW per kvadratmeter",
-   "s": 360.57,
-   "e": 377.54
+   "t": "strömmen I är lika med 10 upphöjt till minus 12 gånger 10 upphöjt till 93 delat med 10 som är lika med 0,00199 watt per kvadratmeter som är ungefär lika med 0,0020 watt per kvadratmeter som är lika med 2,0 mW per kvadratmeter",
+   "s": 357.68,
+   "e": 374.48
   },
   {
    "t": "Svar: 2,0 mW/m i kvadrat",
-   "s": 377.54,
-   "e": 382.65
+   "s": 374.48,
+   "e": 379.59
   }
  ]
 }

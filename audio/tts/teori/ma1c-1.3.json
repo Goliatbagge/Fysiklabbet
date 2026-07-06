@@ -1,0 +1,323 @@
+{
+ "id": "ma1c-1.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "80bb2d16ea199998dd0e02d3b7aa5a638c77a901",
+ "dur": 375.24,
+ "segments": [
+  {
+   "t": "Addition och subtraktion av bråk",
+   "s": 0.1,
+   "e": 3.46
+  },
+  {
+   "t": "När du ska addera (+) och subtrahera (−) bråk underlättar det om samtliga bråk har samma nämnare innan beräkningen utförs.",
+   "s": 3.41,
+   "e": 11.7
+  },
+  {
+   "t": "Addition och subtraktion av bråk",
+   "s": 11.7,
+   "e": 15.06
+  },
+  {
+   "t": "Om bråken har",
+   "s": 15.06,
+   "e": 17.21
+  },
+  {
+   "t": "samma nämnare: addera/subtrahera täljarna, behåll nämnaren.",
+   "s": 17.21,
+   "e": 22.77
+  },
+  {
+   "t": "Förkorta om möjligt.",
+   "s": 22.77,
+   "e": 25.35
+  },
+  {
+   "t": "olika nämnare: förläng ett eller flera av bråken, så att samtliga bråk får samma nämnare.",
+   "s": 25.35,
+   "e": 31.45
+  },
+  {
+   "t": "Sedan utför du beräkningen.",
+   "s": 31.45,
+   "e": 34.36
+  },
+  {
+   "t": "Exempel 1 — Samma nämnare",
+   "s": 34.36,
+   "e": 37.44
+  },
+  {
+   "t": "Beräkna. a) 1 delat med 13 plus 2 delat med 13 b) 19 delat med 6 minus 5 delat med 6",
+   "s": 37.44,
+   "e": 46.92
+  },
+  {
+   "t": "a) Bråken har redan samma nämnare — addera täljarna och behåll nämnaren:",
+   "s": 46.92,
+   "e": 59.02
+  },
+  {
+   "t": "1 delat med 13 plus 2 delat med 13 är lika med 1 plus 2 delat med 13 som är lika med 3 delat med 13",
+   "s": 46.92,
+   "e": 59.02
+  },
+  {
+   "t": "Svar: 3 delat med 13",
+   "s": 59.02,
+   "e": 62.33
+  },
+  {
+   "t": "b) Subtrahera täljarna, behåll nämnaren — och förkorta svaret:",
+   "s": 62.33,
+   "e": 79.15
+  },
+  {
+   "t": "19 delat med 6 minus 5 delat med 6 är lika med 19 minus 5 delat med 6 som är lika med 14 delat med 6 som är lika med 14 delat med 2 delat med 6 delat med 2 som är lika med 7 delat med 3",
+   "s": 62.33,
+   "e": 79.15
+  },
+  {
+   "t": "Svar: 7 delat med 3",
+   "s": 79.15,
+   "e": 82.22
+  },
+  {
+   "t": "Hitta en gemensam nämnare",
+   "s": 82.22,
+   "e": 85.08
+  },
+  {
+   "t": "Hitta en gemensam nämnare",
+   "s": 85.08,
+   "e": 87.89
+  },
+  {
+   "t": "Metod 1: Förläng bråket med den minsta nämnaren, så att nämnaren blir densamma som i bråket med den största nämnaren.",
+   "s": 87.89,
+   "e": 95.42
+  },
+  {
+   "t": "Metod 2: Om metod 1 inte fungerar: förläng det första bråket med nämnaren i det andra bråket, och förläng det andra bråket med nämnaren i det första bråket.",
+   "s": 95.42,
+   "e": 105.33
+  },
+  {
+   "t": "Detta ger alltid en gemensam nämnare — men inte nödvändigtvis den minsta gemensamma nämnaren.",
+   "s": 105.33,
+   "e": 111.6
+  },
+  {
+   "t": "Exempel 2 — Olika nämnare",
+   "s": 111.6,
+   "e": 114.78
+  },
+  {
+   "t": "Beräkna. a) 3 delat med 5 minus 7 delat med 20 b) 2 delat med 5 plus 1 delat med 3",
+   "s": 114.78,
+   "e": 123.85
+  },
+  {
+   "t": "a) Vi kan förlänga bråket med den minsta nämnaren ekvation 5, så att nämnaren blir densamma som i bråket med den största nämnaren ekvation 20, genom att förlänga det med 4 (eftersom 5 gånger 4 är lika med 20 ):",
+   "s": 123.85,
+   "e": 155.1
+  },
+  {
+   "t": "3 delat med 5 minus 7 delat med 20 är lika med 3 gånger 4 delat med 5 gånger 4 minus 7 delat med 20 som är lika med 12 delat med 20 minus 7 delat med 20 som är lika med 12 minus 7 delat med 20 som är lika med 5 delat med 20 som är lika med 5 delat med 5 delat med 20 delat med 5 som är lika med 1 delat med 4",
+   "s": 123.85,
+   "e": 158.11
+  },
+  {
+   "t": "Svar: 1 delat med 4",
+   "s": 158.11,
+   "e": 161.16
+  },
+  {
+   "t": "b) Den minsta nämnaren här är 3.",
+   "s": 161.16,
+   "e": 164.75
+  },
+  {
+   "t": "Men vi kan inte multiplicera 3 med ett heltal så att det blir 5 — metod 1 fungerar inte.",
+   "s": 164.75,
+   "e": 170.91
+  },
+  {
+   "t": "Vi använder då metod 2 och förlänger båda bråken med varandras nämnare: vi förlänger 2 delat med 5 med 3 och 1 delat med 3 med 5.",
+   "s": 170.91,
+   "e": 179.76
+  },
+  {
+   "t": "Detta ger",
+   "s": 179.76,
+   "e": 181.76
+  },
+  {
+   "t": "2 delat med 5 plus 1 delat med 3 är lika med 2 gånger 3 delat med 5 gånger 3 plus 1 gånger 5 delat med 3 gånger 5 som är lika med 6 delat med 15 plus 5 delat med 15 som är lika med 6 plus 5 delat med 15 som är lika med 11 delat med 15",
+   "s": 181.76,
+   "e": 197.97
+  },
+  {
+   "t": "Svar: 11 delat med 15",
+   "s": 197.97,
+   "e": 201.31
+  },
+  {
+   "t": "Hitta minsta gemensamma nämnaren (MGN)",
+   "s": 201.31,
+   "e": 205.38
+  },
+  {
+   "t": "Skriv upp nämnarna i varsin kolumn och fyll kolumnerna med deras multiplar, ca 8 st.",
+   "s": 205.38,
+   "e": 211.79
+  },
+  {
+   "t": "Den första multipeln som dyker upp i båda kolumnerna är den minsta gemensamma nämnaren.",
+   "s": 211.79,
+   "e": 217.31
+  },
+  {
+   "t": "OBS!",
+   "s": 217.31,
+   "e": 218.94
+  },
+  {
+   "t": "Denna metod kan vara svår med större tal i nämnarna, men då finns en annan metod som vi kommer att gå igenom längre fram i kursen.",
+   "s": 218.94,
+   "e": 226.76
+  },
+  {
+   "t": "Exempel 3 — Minsta gemensamma nämnaren",
+   "s": 226.76,
+   "e": 230.47
+  },
+  {
+   "t": "Bestäm den minsta gemensamma nämnaren till 10 och 6 och beräkna sedan 7 delat med 10 minus 1 delat med 6 .",
+   "s": 230.47,
+   "e": 238.03
+  },
+  {
+   "t": "Vi skriver upp nämnarna i två kolumner och fyller på med deras multiplar:",
+   "s": 238.03,
+   "e": 248.3
+  },
+  {
+   "t": "Vi ser att 30 är den första multipel som dyker upp i båda kolumnerna, så MGN är lika med 30.",
+   "s": 238.03,
+   "e": 248.3
+  },
+  {
+   "t": "Vi förlänger nu båda bråken så att nämnarna blir 30 och räknar sedan som vanligt:",
+   "s": 248.3,
+   "e": 276.1
+  },
+  {
+   "t": "7 delat med 10 minus 1 delat med 6 är lika med 7 gånger 3 delat med 10 gånger 3 minus 1 gånger 5 delat med 6 gånger 5 som är lika med 21 delat med 30 minus 5 delat med 30 som är lika med 21 minus 5 delat med 30 som är lika med 16 delat med 30 som är lika med 16 delat med 2 delat med 30 delat med 2 som är lika med 8 delat med 15",
+   "s": 248.3,
+   "e": 276.1
+  },
+  {
+   "t": "Svar: 8 delat med 15",
+   "s": 276.1,
+   "e": 279.39
+  },
+  {
+   "t": "Bråkform och blandad form",
+   "s": 279.39,
+   "e": 282.15
+  },
+  {
+   "t": "Bråkform och blandad form är två olika skrivsätt för bråk.",
+   "s": 282.15,
+   "e": 286.82
+  },
+  {
+   "t": "Blandad form kan användas när täljaren är större än nämnaren.",
+   "s": 286.82,
+   "e": 291.45
+  },
+  {
+   "t": "Vid beräkningar ska alltid bråkform användas, så det är bra att kunna växla från blandad form till bråkform.",
+   "s": 291.45,
+   "e": 299.8
+  },
+  {
+   "t": "Betrakta nedanstående \"tårtor\":",
+   "s": 299.75,
+   "e": 306.91
+  },
+  {
+   "t": "Tre hela tårtor och tre fjärdedelar — sammanlagt 15 fjärdedelar.",
+   "s": 299.75,
+   "e": 306.91
+  },
+  {
+   "t": "De skuggade areorna motsvaras i bråkform av 15 delat med 4 (15 stycken fjärdedelar).",
+   "s": 306.91,
+   "e": 313.95
+  },
+  {
+   "t": "Vi kan även låta de motsvaras i blandad form av 3 3 delat med 4 (3 hela och 3 fjärdedelar).",
+   "s": 313.95,
+   "e": 321.4
+  },
+  {
+   "t": "Så 15 delat med 4 (bråkform) är lika med 3 3 delat med 4 (blandad form).",
+   "s": 321.4,
+   "e": 328.39
+  },
+  {
+   "t": "Exempel 4 — Skriv i bråkform",
+   "s": 328.39,
+   "e": 331.87
+  },
+  {
+   "t": "Skriv i bråkform. a) 1 4 delat med 5 b) 3 1 delat med 7",
+   "s": 331.87,
+   "e": 339.25
+  },
+  {
+   "t": "a) Ta talet framför bråket ekvation 1 och multiplicera med nämnaren ekvation 5.",
+   "s": 339.25,
+   "e": 345.86
+  },
+  {
+   "t": "Addera talet i täljaren ekvation 4.",
+   "s": 345.86,
+   "e": 349.54
+  },
+  {
+   "t": "Dela hela summan med nämnaren ekvation 5:",
+   "s": 349.54,
+   "e": 359.1
+  },
+  {
+   "t": "1 4 delat med 5 är lika med 1 gånger 5 plus 4 delat med 5 som är lika med 9 delat med 5",
+   "s": 349.54,
+   "e": 359.1
+  },
+  {
+   "t": "Svar: 9 delat med 5",
+   "s": 359.1,
+   "e": 362.3
+  },
+  {
+   "t": "b) Vi gör på samma sätt som i a-uppgiften:",
+   "s": 362.3,
+   "e": 371.86
+  },
+  {
+   "t": "3 1 delat med 7 är lika med 3 gånger 7 plus 1 delat med 7 som är lika med 22 delat med 7",
+   "s": 362.3,
+   "e": 371.86
+  },
+  {
+   "t": "Svar: 22 delat med 7",
+   "s": 371.86,
+   "e": 375.24
+  }
+ ]
+}

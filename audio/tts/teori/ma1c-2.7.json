@@ -1,0 +1,448 @@
+{
+ "id": "ma1c-2.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d94ba63a06a25a71980858360f56c99c8e63750d",
+ "dur": 420.5,
+ "segments": [
+  {
+   "t": "Ekvationer med nämnare",
+   "s": 0.1,
+   "e": 2.77
+  },
+  {
+   "t": "OBS!",
+   "s": 2.73,
+   "e": 4.3
+  },
+  {
+   "t": "När vi har ekvationer med variabler, t.ex. x , i nämnaren får den inte anta ett värde som gör att nämnaren blir lika med 0, eftersom division med 0 inte är definierat.",
+   "s": 4.3,
+   "e": 15.11
+  },
+  {
+   "t": "Innan vi löser sådana ekvationer skriver vi vilka värden på variabeln som inte är tillåtna.",
+   "s": 15.11,
+   "e": 21.18
+  },
+  {
+   "t": "Inte sällan är det nämnaren som gör en ekvation svår att lösa, så för att lösa ekvationer med nämnare är en nyckel att snabbt bli av med nämnarna.",
+   "s": 21.18,
+   "e": 29.69
+  },
+  {
+   "t": "Att bli av med nämnarna går att göra på olika sätt, beroende på hur ekvationen ser ut.",
+   "s": 29.69,
+   "e": 35.62
+  },
+  {
+   "t": "Det finns tre vanliga varianter.",
+   "s": 35.62,
+   "e": 38.55
+  },
+  {
+   "t": "1.",
+   "s": 38.55,
+   "e": 43.55
+  },
+  {
+   "t": "En bråkterm i ena ledet, ingen bråkterm i andra ledet",
+   "s": 38.55,
+   "e": 43.55
+  },
+  {
+   "t": "Metod: Täljaren är lika med produkten av kvoten och nämnaren.",
+   "s": 43.55,
+   "e": 48.77
+  },
+  {
+   "t": "Exempel 1 — En bråkterm",
+   "s": 48.77,
+   "e": 51.9
+  },
+  {
+   "t": "Lös 130 delat med 3 x är lika med 5 .",
+   "s": 51.9,
+   "e": 56.55
+  },
+  {
+   "t": "Vi har 3 x i nämnaren, så 3 x är inte lika med 0 , vilket ger x är inte lika med 0 .",
+   "s": 56.55,
+   "e": 63.35
+  },
+  {
+   "t": "Täljaren är lika med produkten av kvoten och nämnaren:",
+   "s": 63.35,
+   "e": 76.39
+  },
+  {
+   "t": "130 är lika med 5 gånger 3 x",
+   "s": 63.35,
+   "e": 76.39
+  },
+  {
+   "t": "130 är lika med 15 x",
+   "s": 63.35,
+   "e": 76.39
+  },
+  {
+   "t": "130 delat med 15 är lika med 15 x delat med 15",
+   "s": 63.35,
+   "e": 76.39
+  },
+  {
+   "t": "26 delat med 3 är lika med x",
+   "s": 76.39,
+   "e": 82.79
+  },
+  {
+   "t": "Svar: x är lika med 26 delat med 3",
+   "s": 76.39,
+   "e": 82.79
+  },
+  {
+   "t": "2.",
+   "s": 82.79,
+   "e": 87.83
+  },
+  {
+   "t": "En bråkterm i ena ledet, en bråkterm i andra ledet",
+   "s": 82.79,
+   "e": 87.83
+  },
+  {
+   "t": "Metod: Korsvis multiplikation.",
+   "s": 87.83,
+   "e": 91.33
+  },
+  {
+   "t": "Exempel 2 — Korsvis multiplikation",
+   "s": 91.33,
+   "e": 95.06
+  },
+  {
+   "t": "Lös 9 delat med 2 x är lika med 3 delat med 8 .",
+   "s": 95.06,
+   "e": 99.81
+  },
+  {
+   "t": "Vi har 2 x i nämnaren så 2 x är inte lika med 0 , vilket ger x är inte lika med 0 .",
+   "s": 99.81,
+   "e": 106.3
+  },
+  {
+   "t": "Vi multiplicerar \"korsvis\", dvs. vi multiplicerar täljaren i ena bråket med nämnaren i det andra bråket och vice versa.",
+   "s": 106.3,
+   "e": 114.62
+  },
+  {
+   "t": "Ordningen spelar ingen roll!",
+   "s": 114.62,
+   "e": 117.39
+  },
+  {
+   "t": "3 gånger 2 x är lika med 9 gånger 8",
+   "s": 117.39,
+   "e": 121.44
+  },
+  {
+   "t": "6 x är lika med 72",
+   "s": 121.44,
+   "e": 124.67
+  },
+  {
+   "t": "6 x delat med 6 är lika med 72 delat med 6",
+   "s": 124.67,
+   "e": 129.49
+  },
+  {
+   "t": "x är lika med 12",
+   "s": 129.49,
+   "e": 131.99
+  },
+  {
+   "t": "Svar: x är lika med 12",
+   "s": 131.99,
+   "e": 135.16
+  },
+  {
+   "t": "3.",
+   "s": 135.16,
+   "e": 139.25
+  },
+  {
+   "t": "Tre eller fler bråktermer i en ekvation",
+   "s": 135.16,
+   "e": 139.25
+  },
+  {
+   "t": "Metod: Multiplicera båda led med MGN (minsta gemensamma nämnaren) eller skriv om båda led som ett bråk och använd korsvis multiplikation.",
+   "s": 139.25,
+   "e": 148.72
+  },
+  {
+   "t": "Exempel 3 — Tre bråktermer",
+   "s": 148.72,
+   "e": 152.16
+  },
+  {
+   "t": "Lös x delat med 3 plus 1 delat med 4 är lika med 5 delat med 6 .",
+   "s": 152.16,
+   "e": 157.99
+  },
+  {
+   "t": "Alternativ 1: Multiplicera med MGN (eller någon gemensam nämnare)",
+   "s": 157.99,
+   "e": 163.99
+  },
+  {
+   "t": "För att hitta MGN eller en gemensam nämnare kan man göra på lite olika sätt, men en variant är att du tittar på talen som står i nämnaren.",
+   "s": 163.99,
+   "e": 172.47
+  },
+  {
+   "t": "Vi har 3, 4 och 6.",
+   "s": 172.47,
+   "e": 175.65
+  },
+  {
+   "t": "Då tänker du: \"Vilket är det minsta tal jag kan komma på som är delbart med 3, 4 och 6?\".",
+   "s": 175.65,
+   "e": 182.55
+  },
+  {
+   "t": "Svaret är 12.",
+   "s": 182.55,
+   "e": 184.91
+  },
+  {
+   "t": "Då är 12 den minsta gemensamma nämnaren. (Du kanske såg att 3, 4 och 6 är delbart med 24 och då går det bra att multiplicera båda led med 24 också, huvudsaken är att vi hittar en gemensam nämnare.)",
+   "s": 184.91,
+   "e": 199.39
+  },
+  {
+   "t": "Vi multiplicerar båda led med MGN är lika med 12:",
+   "s": 199.39,
+   "e": 210.44
+  },
+  {
+   "t": "12 parentesen x delat med 3 plus 1 delat med 4 slut parentes är lika med 12 gånger 5 delat med 6",
+   "s": 199.39,
+   "e": 210.44
+  },
+  {
+   "t": "12 x delat med 3 plus 12 gånger 1 delat med 4 är lika med 12 gånger 5 delat med 6",
+   "s": 210.44,
+   "e": 217.46
+  },
+  {
+   "t": "4 x plus 3 är lika med 10",
+   "s": 217.46,
+   "e": 221.05
+  },
+  {
+   "t": "4 x plus 3 minus 3 är lika med 10 minus 3",
+   "s": 221.05,
+   "e": 225.84
+  },
+  {
+   "t": "4 x är lika med 7",
+   "s": 225.84,
+   "e": 228.8
+  },
+  {
+   "t": "4 x delat med 4 är lika med 7 delat med 4",
+   "s": 228.8,
+   "e": 233.21
+  },
+  {
+   "t": "x är lika med 7 delat med 4",
+   "s": 233.21,
+   "e": 236.55
+  },
+  {
+   "t": "Svar: x är lika med 7 delat med 4",
+   "s": 236.55,
+   "e": 240.54
+  },
+  {
+   "t": "Alternativ 2: Skriv om båda led som ett bråk och använd korsvis multiplikation",
+   "s": 240.54,
+   "e": 246.65
+  },
+  {
+   "t": "Vi förlänger bråken i VL med varandras nämnare för att göra dem liknämniga:",
+   "s": 246.65,
+   "e": 258.52
+  },
+  {
+   "t": "x gånger 4 delat med 3 gånger 4 plus 1 gånger 3 delat med 4 gånger 3 är lika med 5 delat med 6",
+   "s": 246.65,
+   "e": 258.52
+  },
+  {
+   "t": "4 x delat med 12 plus 3 delat med 12 är lika med 5 delat med 6",
+   "s": 258.52,
+   "e": 264.48
+  },
+  {
+   "t": "4 x plus 3 delat med 12 är lika med 5 delat med 6",
+   "s": 264.48,
+   "e": 269.64
+  },
+  {
+   "t": "Nu använder vi korsvis multiplikation:",
+   "s": 269.64,
+   "e": 277.9
+  },
+  {
+   "t": "6 parentesen 4 x plus 3 slut parentes är lika med 12 gånger 5",
+   "s": 269.64,
+   "e": 277.9
+  },
+  {
+   "t": "24 x plus 18 är lika med 60",
+   "s": 277.9,
+   "e": 281.96
+  },
+  {
+   "t": "24 x plus 18 minus 18 är lika med 60 minus 18",
+   "s": 281.96,
+   "e": 287.46
+  },
+  {
+   "t": "24 x är lika med 42",
+   "s": 287.46,
+   "e": 290.98
+  },
+  {
+   "t": "x är lika med 42 delat med 24 som är lika med 42 delat med 2 delat med 24 delat med 2 som är lika med 21 delat med 12 som är lika med 21 delat med 3 delat med 12 delat med 3 som är lika med 7 delat med 4",
+   "s": 290.98,
+   "e": 305.65
+  },
+  {
+   "t": "Svar: x är lika med 7 delat med 4",
+   "s": 305.65,
+   "e": 309.65
+  },
+  {
+   "t": "Exempel 4 — Variabler i nämnarna",
+   "s": 309.65,
+   "e": 313.18
+  },
+  {
+   "t": "Lös 5 delat med 3 x minus 1 delat med 2 x är lika med 1 delat med 6 .",
+   "s": 313.18,
+   "e": 319.34
+  },
+  {
+   "t": "Vi har 3 x och 2 x i nämnarna, vilka båda ger att x är inte lika med 0 .",
+   "s": 319.34,
+   "e": 325.45
+  },
+  {
+   "t": "Det här är en variant med tre bråk, så vi löser den genom att multiplicera båda led med MGN.",
+   "s": 325.45,
+   "e": 332.06
+  },
+  {
+   "t": "Lägg märke till att MGN även ska vara delbart med x , eftersom x finns med i nämnarna.",
+   "s": 332.06,
+   "e": 340.04
+  },
+  {
+   "t": "Så MGN är lika med 6 x .",
+   "s": 339.99,
+   "e": 343.49
+  },
+  {
+   "t": "När vi multiplicerar med MGN är lika med 6 x kan vi direkt göra det genom att multiplicera varje täljare med 6 x , så går lösningen snabbare:",
+   "s": 343.49,
+   "e": 360.26
+  },
+  {
+   "t": "6 x gånger 5 delat med 3 x minus 6 x gånger 1 delat med 2 x är lika med 6 x gånger 1 delat med 6",
+   "s": 343.49,
+   "e": 360.26
+  },
+  {
+   "t": "2 gånger 5 minus 3 gånger 1 är lika med x gånger 1",
+   "s": 360.26,
+   "e": 365.19
+  },
+  {
+   "t": "10 minus 3 är lika med x",
+   "s": 365.19,
+   "e": 371.11
+  },
+  {
+   "t": "7 är lika med x",
+   "s": 365.19,
+   "e": 371.11
+  },
+  {
+   "t": "Svar: x är lika med 7",
+   "s": 365.19,
+   "e": 371.11
+  },
+  {
+   "t": "Exempel 5 — När lösningen inte är tillåten",
+   "s": 371.11,
+   "e": 375.14
+  },
+  {
+   "t": "Lös 5 x minus 35 delat med x minus 7 är lika med 4 .",
+   "s": 375.14,
+   "e": 380.53
+  },
+  {
+   "t": "Vi har parentesen x minus 7 slut parentes i nämnaren, så x är inte lika med 7 .",
+   "s": 380.53,
+   "e": 387.18
+  },
+  {
+   "t": "Täljaren är lika med produkten av kvoten och nämnaren:",
+   "s": 387.18,
+   "e": 396.55
+  },
+  {
+   "t": "5 x minus 35 är lika med 4 parentesen x minus 7 slut parentes",
+   "s": 387.18,
+   "e": 396.55
+  },
+  {
+   "t": "5 x minus 35 är lika med 4 x minus 28",
+   "s": 396.55,
+   "e": 401.58
+  },
+  {
+   "t": "Subtraherar 4 x från båda led:",
+   "s": 401.58,
+   "e": 408.0
+  },
+  {
+   "t": "x minus 35 är lika med minus 28",
+   "s": 401.58,
+   "e": 408.0
+  },
+  {
+   "t": "Adderar 35 till båda led:",
+   "s": 408.0,
+   "e": 412.49
+  },
+  {
+   "t": "x är lika med 7",
+   "s": 408.0,
+   "e": 412.49
+  },
+  {
+   "t": "Men x är inte lika med 7 , så ekvationen saknar lösning.",
+   "s": 412.49,
+   "e": 417.44
+  },
+  {
+   "t": "Svar: Saknar lösning.",
+   "s": 417.44,
+   "e": 420.5
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "be70ccf0c11d21358ac92b2ded5ea07fe6440252",
- "dur": 373.63,
+ "hash": "99385e9c9cf8a47b57c0ad655ab5bdbda470b78e",
+ "dur": 373.15,
  "segments": [
   {
    "t": "Hookes lag",
@@ -330,29 +330,29 @@
    "e": 335.33
   },
   {
-   "t": "F resistansen R är lika med minus 30,6875 gånger parentesen minus 0,050 slut parentes som är lika med 1,534 ldots newton",
+   "t": "F resistansen R är lika med minus 30,6875 gånger parentesen minus 0,050 slut parentes som är lika med 1,534 newton",
    "s": 335.33,
-   "e": 346.81
+   "e": 346.51
   },
   {
    "t": "(positivt värde anger att kraften är riktad uppåt — mot jämviktsläget).",
-   "s": 346.81,
-   "e": 352.15
+   "s": 346.51,
+   "e": 351.85
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 352.15,
-   "e": 355.49
+   "s": 351.85,
+   "e": 355.19
   },
   {
-   "t": "accelerationen a är lika med 1,534 ldots delat med 0,250 som är lika med 6,1375 meter per sekund i kvadrat som är ungefär lika med 6,1 meter per sekund i kvadrat",
-   "s": 355.49,
-   "e": 369.18
+   "t": "accelerationen a är lika med 1,534 delat med 0,250 som är lika med 6,1375 meter per sekund i kvadrat som är ungefär lika med 6,1 meter per sekund i kvadrat",
+   "s": 355.19,
+   "e": 368.7
   },
   {
    "t": "Svar: 6,1 meter per sekund i kvadrat",
-   "s": 369.18,
-   "e": 373.63
+   "s": 368.7,
+   "e": 373.15
   }
  ]
 }

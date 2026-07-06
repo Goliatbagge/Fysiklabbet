@@ -1,8 +1,8 @@
 {
  "id": "fy2-4.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "1bf492e4acb1c156920962e2b902a34d21fe700d",
- "dur": 415.77,
+ "hash": "23c375e266e740ddae787fa8677dd63c5be386ad",
+ "dur": 413.72,
  "segments": [
   {
    "t": "Elektromagnetiska vågor och ljusintensitet",
@@ -257,87 +257,87 @@
   {
    "t": "effekten P är lika med 3,9 gånger 10 upphöjt till 26 watt r som är lika med 149,6 gånger 10 upphöjt till 6 kilometer som är lika med 149,6 gånger 10 upphöjt till 9 meter",
    "s": 290.75,
-   "e": 306.85
+   "e": 306.84
   },
   {
-   "t": "strömmen I är lika med 3,9 gånger 10 upphöjt till 26 delat med 4 pi gånger parentesen 149,6 gånger 10 upphöjt till 9 slut parentes i kvadrat som är lika med 1 386,728 ldots watt per kvadratmeter som är ungefär lika med 1 400 watt per kvadratmeter som är lika med 1,4 kilowatt per kvadratmeter",
-   "s": 306.8,
-   "e": 330.73
+   "t": "strömmen I är lika med 3,9 gånger 10 upphöjt till 26 delat med 4 pi gånger parentesen 149,6 gånger 10 upphöjt till 9 slut parentes i kvadrat som är lika med 1 386,728 watt per kvadratmeter som är ungefär lika med 1 400 watt per kvadratmeter som är lika med 1,4 kilowatt per kvadratmeter",
+   "s": 306.79,
+   "e": 333.4
   },
   {
    "t": "Svar: 1,4 kilowatt/m i kvadrat",
-   "s": 330.73,
-   "e": 335.44
+   "s": 306.79,
+   "e": 333.4
   },
   {
    "t": "Ljusets hastighet — exakt!",
-   "s": 335.44,
-   "e": 338.54
+   "s": 333.4,
+   "e": 336.49
   },
   {
    "t": "Är det möjligt att veta ljusets hastighet exakt?",
-   "s": 338.54,
-   "e": 342.42
+   "s": 336.49,
+   "e": 340.37
   },
   {
    "t": "Svaret är ja.",
-   "s": 342.42,
-   "e": 344.78
+   "s": 340.37,
+   "e": 342.73
   },
   {
    "t": "Vi vet faktiskt ljusets exakta hastighet.",
-   "s": 344.78,
-   "e": 348.63
+   "s": 342.73,
+   "e": 346.58
   },
   {
    "t": "Ljusets hastighet är exakt 299 792 458 meter per sekund.",
-   "s": 348.63,
-   "e": 356.95
+   "s": 346.58,
+   "e": 354.9
   },
   {
    "t": "Inte ungefär — exakt!",
-   "s": 356.95,
-   "e": 359.74
+   "s": 354.9,
+   "e": 357.69
   },
   {
    "t": "Hur kan det vara så?",
-   "s": 359.74,
-   "e": 362.03
+   "s": 357.69,
+   "e": 359.98
   },
   {
    "t": "Det beror på att 1 meter definieras som den sträcka som ljuset färdas på 1 delat med 299 792 458 sekund.",
-   "s": 362.03,
-   "e": 372.49
+   "s": 359.98,
+   "e": 370.44
   },
   {
    "t": "Vi ställer upp formeln för konstant hastighet och räknar på ljusets hastighet v är lika med c.",
-   "s": 372.49,
-   "e": 389.04
+   "s": 370.44,
+   "e": 386.99
   },
   {
    "t": "c är lika med sträckan s delat med tiden t",
-   "s": 372.49,
-   "e": 389.04
+   "s": 370.44,
+   "e": 386.99
   },
   {
    "t": "sträckan s är lika med 1 meter tiden t som är lika med 1 delat med 299 792 458 sekund",
-   "s": 372.49,
-   "e": 389.04
+   "s": 370.44,
+   "e": 386.99
   },
   {
    "t": "c är lika med 1 delat med 1 delat med 299 792 458 som är lika med 299 792 458 meter per sekund",
-   "s": 389.04,
-   "e": 403.14
+   "s": 386.99,
+   "e": 401.09
   },
   {
    "t": "Inga avrundningar har gjorts någonstans.",
-   "s": 403.14,
-   "e": 406.64
+   "s": 401.09,
+   "e": 404.59
   },
   {
    "t": "Ljusets hastighet är alltså exakt lika med 299 792 458 meter per sekund.",
-   "s": 406.64,
-   "e": 415.77
+   "s": 404.59,
+   "e": 413.72
   }
  ]
 }

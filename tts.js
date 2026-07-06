@@ -237,7 +237,8 @@
                 try {
                     const container = opts.getContainer && opts.getContainer();
                     if (container && window.TTSMANUS) {
-                        const pageSegs = window.TTSMANUS.extractSegments(container, { names: true });
+                        const pageSegs = window.TTSMANUS.extractSegments(container,
+                            { names: !/^ma/.test(String(opts.id || '')) });
                         els = alignSegments(meta.segments, pageSegs);
                     }
                 } catch (e) { els = null; }

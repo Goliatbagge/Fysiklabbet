@@ -172,7 +172,9 @@
                 ],
                 throwOnError: false,
             });
-            const segs = T.extractSegments(stage, { names: true });
+            // Storhetsnamn ("effekten P") gäller fysik — i matte är m, l, M
+            // m.fl. inte fysikstorheter, så namnen stängs av för ma-avsnitt
+            const segs = T.extractSegments(stage, { names: !/^ma/.test(id) });
             return {
                 id,
                 title: fm.title || id,

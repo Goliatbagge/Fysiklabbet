@@ -1,8 +1,8 @@
 {
  "id": "fy1-4.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "a5ca7caf8428201b646558118a30bead0874c007",
- "dur": 344.79,
+ "hash": "5e52360141e2e02f68d45dd2538a2f2e42798e8e",
+ "dur": 345.34,
  "segments": [
   {
    "t": "Energi och arbete",
@@ -260,84 +260,84 @@
    "e": 251.54
   },
   {
-   "t": "F sträckan s är lika med F två som är lika med kraften F gånger cosinus hastigheten v som är lika med 35 newton gånger cosinus 26 grader som är lika med 31,457 ldots newton s som är lika med 100 meter",
+   "t": "F sträckan s är lika med F två som är lika med kraften F gånger cosinus hastigheten v som är lika med 35 newton gånger cosinus 26 grader som är lika med 31,457 newton s som är lika med 100 meter",
    "s": 251.54,
-   "e": 266.19
+   "e": 265.85
   },
   {
-   "t": "arbetet W är lika med 31,457 ldots gånger 100 som är lika med 3 145,779 ldots Nm som är ungefär lika med 3 100 Nm som är lika med 3,1 kNm",
-   "s": 266.19,
-   "e": 281.06
+   "t": "arbetet W är lika med 31,457 gånger 100 som är lika med 3 145,779 Nm som är ungefär lika med 3 100 Nm som är lika med 3,1 kNm",
+   "s": 265.85,
+   "e": 280.12
   },
   {
    "t": "Svar: 3,1 kNm",
-   "s": 281.06,
-   "e": 284.45
+   "s": 280.12,
+   "e": 283.5
   },
   {
    "t": "Exempel 3 — Martin bär lådan",
-   "s": 284.45,
-   "e": 287.77
+   "s": 283.5,
+   "e": 286.82
   },
   {
    "t": "Martin går med en låda 30 meter åt höger med konstant hastighet.",
-   "s": 287.77,
-   "e": 292.65
+   "s": 286.82,
+   "e": 291.7
   },
   {
    "t": "Han håller upp den med den uppåtriktade kraften 180 newton.",
-   "s": 292.65,
-   "e": 297.52
+   "s": 291.7,
+   "e": 296.57
   },
   {
    "t": "Hur stort arbete uträttar han?",
-   "s": 297.52,
-   "e": 300.57
+   "s": 296.57,
+   "e": 299.62
   },
   {
    "t": "Vi skriver formeln för arbete.",
-   "s": 300.57,
-   "e": 303.57
+   "s": 299.62,
+   "e": 302.62
   },
   {
    "t": "arbetet W är lika med F sträckan s gånger s",
-   "s": 303.57,
-   "e": 310.51
+   "s": 302.62,
+   "e": 309.56
   },
   {
    "t": "Rörelsens riktning är åt höger med konstant fart.",
-   "s": 303.57,
-   "e": 310.51
+   "s": 302.62,
+   "e": 309.56
   },
   {
    "t": "Om vi bortser från luftmotståndet är alltså kraften i rörelsens riktning F sträckan s är lika med 0!",
-   "s": 310.51,
-   "e": 317.26
+   "s": 309.56,
+   "e": 316.32
   },
   {
    "t": "Martin tar visserligen i med en kraft uppåt, för att hålla uppe lådan, men ingen rörelse sker i den riktningen.",
-   "s": 317.26,
-   "e": 324.56
+   "s": 316.32,
+   "e": 323.61
   },
   {
    "t": "Att kraften i rörelsens riktning är 0 innebär att också arbetet blir lika med 0.",
-   "s": 324.72,
-   "e": 330.57
+   "s": 323.61,
+   "e": 331.13
   },
   {
    "t": "F sträckan s är lika med 0 sekunder som är lika med 30 meter",
-   "s": 330.52,
-   "e": 335.37
+   "s": 331.08,
+   "e": 335.93
   },
   {
    "t": "arbetet W är lika med 0 gånger 30 som är lika med 0",
-   "s": 335.37,
-   "e": 340.12
+   "s": 335.93,
+   "e": 340.68
   },
   {
    "t": "Svar: Inget arbete uträttas (0 Nm).",
-   "s": 340.12,
-   "e": 344.79
+   "s": 340.68,
+   "e": 345.34
   }
  ]
 }

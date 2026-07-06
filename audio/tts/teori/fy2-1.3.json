@@ -1,8 +1,8 @@
 {
  "id": "fy2-1.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "373b6a799565f473fadad8d14ab259e378f14d98",
- "dur": 469.27,
+ "hash": "64520d9799c66d83f13844b6d46c926bb30b6422",
+ "dur": 467.57,
  "segments": [
   {
    "t": "Period, frekvens, radianer och vinkelhastighet",
@@ -237,212 +237,212 @@
   {
    "t": "Svar: 36 grader/s",
    "s": 235.65,
-   "e": 243.64
+   "e": 243.65
   },
   {
    "t": "b) Kom ihåg: 360 grader är lika med 2 pi rad.",
    "s": 235.65,
-   "e": 243.64
+   "e": 243.65
   },
   {
    "t": "Karusellens vinkelhastighet i radianer blir då",
-   "s": 243.64,
-   "e": 247.6
+   "s": 243.65,
+   "e": 247.61
   },
   {
-   "t": "omega är lika med alfa delat med tiden t som är lika med 2 pi delat med 10 rad per sekund som är lika med pi delat med 5 rad per sekund som är lika med 0,628 ldots rad per sekund som är ungefär lika med 0,63 rad per sekund",
-   "s": 247.6,
-   "e": 262.56
+   "t": "omega är lika med alfa delat med tiden t som är lika med 2 pi delat med 10 rad per sekund som är lika med pi delat med 5 rad per sekund som är lika med 0,628 rad per sekund som är ungefär lika med 0,63 rad per sekund",
+   "s": 247.61,
+   "e": 262.35
   },
   {
    "t": "Svar: 0,63 rad/s",
-   "s": 262.56,
-   "e": 268.18
+   "s": 262.35,
+   "e": 268.0
   },
   {
    "t": "Fart i cirkulär bana",
-   "s": 262.56,
-   "e": 268.18
+   "s": 262.35,
+   "e": 268.0
   },
   {
    "t": "Kom ihåg att hastighet är en vektor med storlek och riktning, medan fart är en skalär med endast storlek.",
-   "s": 268.18,
-   "e": 275.31
+   "s": 268.0,
+   "e": 275.12
   },
   {
    "t": "Om något rör sig i en cirkelbana kan alltså farten vara konstant, men hastigheten är det inte — eftersom riktningen ändras hela tiden.",
-   "s": 275.31,
-   "e": 283.76
+   "s": 275.12,
+   "e": 283.57
   },
   {
    "t": "Fart i cirkulär bana",
-   "s": 283.76,
-   "e": 286.51
+   "s": 283.57,
+   "e": 286.32
   },
   {
    "t": "hastigheten v är lika med omega gånger r som är lika med 2 pi gånger r delat med periodtiden T",
-   "s": 286.51,
-   "e": 293.23
+   "s": 286.32,
+   "e": 293.04
   },
   {
    "t": "där",
-   "s": 293.23,
-   "e": 294.74
+   "s": 293.04,
+   "e": 294.55
   },
   {
    "t": "v är lika med fart i rörelsens riktning (meter per sekund)",
-   "s": 294.74,
-   "e": 299.62
+   "s": 294.55,
+   "e": 299.44
   },
   {
    "t": "ω är lika med vinkelhastighet (rad/s)",
-   "s": 299.62,
-   "e": 304.27
+   "s": 299.44,
+   "e": 304.09
   },
   {
    "t": "r är lika med banradien (meter)",
-   "s": 304.27,
-   "e": 307.79
+   "s": 304.09,
+   "e": 307.6
   },
   {
    "t": "T är lika med period (sekunder)",
-   "s": 307.79,
-   "e": 311.27
+   "s": 307.6,
+   "e": 311.09
   },
   {
    "t": "Härledning — Fart i cirkulär bana",
-   "s": 311.27,
-   "e": 314.65
+   "s": 311.09,
+   "e": 314.46
   },
   {
    "t": "Farten i rörelsens riktning bestäms med formeln",
-   "s": 314.65,
-   "e": 318.7
+   "s": 314.46,
+   "e": 318.51
   },
   {
    "t": "hastigheten v är lika med sträckan s delat med tiden t, ekvation 1",
-   "s": 318.7,
-   "e": 325.74
+   "s": 318.51,
+   "e": 331.94
   },
   {
    "t": "Om vi tittar på ett varv är sträckan densamma som cirkelns omkrets, dvs. sträckan s är lika med 2 pi gånger r .",
-   "s": 325.69,
-   "e": 333.34
+   "s": 324.0,
+   "e": 331.94
   },
   {
    "t": "Tiden för att utföra ett varv är en period T, så tiden för ett varv är tiden t är lika med periodtiden T .",
-   "s": 333.34,
-   "e": 340.32
+   "s": 331.89,
+   "e": 338.92
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 340.32,
-   "e": 343.62
+   "s": 338.92,
+   "e": 342.22
   },
   {
    "t": "hastigheten v är lika med 2 pi gånger r delat med periodtiden T, ekvation 2",
-   "s": 343.62,
-   "e": 350.13
+   "s": 342.22,
+   "e": 348.73
   },
   {
    "t": "Sedan tidigare har vi att vinkelhastigheten omega är lika med 2 pi delat med periodtiden T , vilket insatt i ekvation 2 ger",
-   "s": 350.13,
-   "e": 358.88
+   "s": 348.73,
+   "e": 357.48
   },
   {
    "t": "hastigheten v är lika med 2 pi gånger r delat med periodtiden T som är lika med 2 pi delat med T gånger r som är lika med omega gånger r",
-   "s": 358.88,
-   "e": 369.95
+   "s": 357.48,
+   "e": 368.55
   },
   {
    "t": "vsv.",
-   "s": 358.88,
-   "e": 369.95
+   "s": 357.48,
+   "e": 368.55
   },
   {
    "t": "Exempel 2 — LP-skiva",
-   "s": 358.88,
-   "e": 369.95
+   "s": 357.48,
+   "e": 368.55
   },
   {
    "t": "En LP-skiva har diametern 30 centimeter och snurrar 33 varv/minut.",
-   "s": 369.95,
-   "e": 376.33
+   "s": 368.55,
+   "e": 374.93
   },
   {
    "t": "Vilken fart får ett suddgummi som placeras 5,0 centimeter från ytterkanten på skivan?",
-   "s": 376.33,
-   "e": 383.02
+   "s": 374.93,
+   "e": 381.62
   },
   {
    "t": "Vi ställer upp formeln för fart.",
-   "s": 383.02,
-   "e": 385.88
+   "s": 381.62,
+   "e": 384.48
   },
   {
    "t": "hastigheten v är lika med omega gånger r, ekvation 1",
-   "s": 385.88,
-   "e": 390.9
+   "s": 384.48,
+   "e": 389.5
   },
   {
    "t": "Vi bestämmer först vinkelhastigheten.",
-   "s": 390.9,
-   "e": 394.35
+   "s": 389.5,
+   "e": 392.95
   },
   {
    "t": "omega är lika med 2 pi gånger frekvensen f, ekvation 2",
-   "s": 394.35,
-   "e": 399.53
+   "s": 392.95,
+   "e": 398.13
   },
   {
    "t": "Frekvensen i Hz:",
-   "s": 399.53,
-   "e": 412.93
+   "s": 398.13,
+   "e": 411.53
   },
   {
    "t": "frekvensen f är lika med 33 varv delat med 1 minut som är lika med 33 varv delat med 60 sekund som är lika med 0,55 varv per sekund som är lika med 0,55 hertz",
-   "s": 399.53,
-   "e": 412.93
+   "s": 398.13,
+   "e": 411.53
   },
   {
    "t": "Insättning av frekvensen f är lika med 0,55 hertz i ekvation 2 ger",
-   "s": 412.93,
-   "e": 419.1
+   "s": 411.53,
+   "e": 417.7
   },
   {
    "t": "omega är lika med 2 pi gånger 0,55 som är lika med 1,1 pi rad per sekund",
-   "s": 419.1,
-   "e": 425.65
+   "s": 417.7,
+   "e": 424.25
   },
   {
    "t": "Sedan bestämmer vi suddgummits banradie r.",
-   "s": 425.65,
-   "e": 433.93
+   "s": 424.25,
+   "e": 432.53
   },
   {
    "t": "LP-skivans radie är 30 centimeter delat med 2 är lika med 15 centimeter.",
-   "s": 425.65,
-   "e": 433.93
+   "s": 424.25,
+   "e": 432.53
   },
   {
    "t": "Om suddgummit är 5,0 centimeter från kanten blir dess banradie parentesen 15 minus 5,0 slut parentes centimeter är lika med 10 centimeter som är lika med 0,10 meter .",
-   "s": 433.93,
-   "e": 445.99
+   "s": 432.53,
+   "e": 444.57
   },
   {
    "t": "omega är lika med 1,1 pi rad per sekund r som är lika med 0,10 meter",
-   "s": 445.99,
-   "e": 452.08
+   "s": 444.57,
+   "e": 450.65
   },
   {
-   "t": "hastigheten v är lika med omega gånger r som är lika med 1,1 pi gånger 0,10 som är lika med 0,345 ldots meter per sekund som är ungefär lika med 0,35 meter per sekund",
-   "s": 452.08,
-   "e": 464.95
+   "t": "hastigheten v är lika med omega gånger r som är lika med 1,1 pi gånger 0,10 som är lika med 0,345 meter per sekund som är ungefär lika med 0,35 meter per sekund",
+   "s": 450.65,
+   "e": 463.25
   },
   {
    "t": "Svar: 0,35 meter per sekund",
-   "s": 464.95,
-   "e": 469.27
+   "s": 463.25,
+   "e": 467.57
   }
  ]
 }

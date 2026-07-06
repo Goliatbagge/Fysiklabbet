@@ -1,8 +1,8 @@
 {
  "id": "fy1-2.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "b66877ae6463ed06075f885cc999724e8ee3ed4a",
- "dur": 323.64,
+ "hash": "b2090c079df564d6773bed29b788d5e78ac82529",
+ "dur": 324.88,
  "segments": [
   {
    "t": "Vektoraddition",
@@ -170,114 +170,114 @@
    "e": 170.89
   },
   {
-   "t": "v ett är lika med 10 meter per sekund v två som är lika med minus 2 meter per sekund parentesen OBS!Minusteckenframför slut parentes",
+   "t": "v ett är lika med 10 meter per sekund v två som är lika med minus 2 meter per sekund parentesen OBS! Minustecken framför slut parentes",
    "s": 170.89,
-   "e": 180.43
+   "e": 182.09
   },
   {
    "t": "v tiden t o t är lika med 10 plus parentesen minus 2 slut parentes som är lika med 8 meter per sekund",
-   "s": 180.43,
-   "e": 188.47
+   "s": 182.09,
+   "e": 190.05
   },
   {
    "t": "Svar: 8 meter per sekund (i samma riktning som tåget)",
-   "s": 188.47,
-   "e": 193.59
+   "s": 190.05,
+   "e": 195.14
   },
   {
    "t": "Exempel 2 — David över forsen",
-   "s": 193.59,
-   "e": 197.01
+   "s": 195.14,
+   "e": 198.56
   },
   {
    "t": "David simmar rakt över en flod med den konstanta farten 1,5 meter per sekund relativt vattnet.",
-   "s": 197.01,
-   "e": 203.95
+   "s": 198.56,
+   "e": 205.5
   },
   {
    "t": "Vattnet forsar fram med 4,0 meter per sekund.",
-   "s": 203.95,
-   "e": 208.32
+   "s": 205.5,
+   "e": 209.88
   },
   {
    "t": "a) Hur lång tid tar det för David att simma över forsen om den är 45 meter bred?",
-   "s": 208.32,
-   "e": 214.28
+   "s": 209.88,
+   "e": 215.82
   },
   {
    "t": "b) Bestäm Davids hastighet relativt marken.",
-   "s": 214.28,
-   "e": 218.59
+   "s": 215.82,
+   "e": 220.14
   },
   {
    "t": "a) Vi ritar en figur där v ett är lika med 1,5 meter per sekund (vinkelrätt mot floden) och v två är lika med 4,0 meter per sekund (längs floden).",
-   "s": 218.59,
-   "e": 229.86
+   "s": 220.14,
+   "e": 231.41
   },
   {
    "t": "Det är endast den vinkelräta hastigheten mot floden v ett och flodens bredd s ett som avgör tiden det tar att korsa floden.",
-   "s": 229.86,
-   "e": 237.85
+   "s": 231.41,
+   "e": 239.4
   },
   {
    "t": "Vi ställer upp formeln för konstant hastighet och löser ut tiden.",
-   "s": 237.85,
-   "e": 242.6
+   "s": 239.4,
+   "e": 244.15
   },
   {
    "t": "v ett är lika med s ett delat med tiden t vilket är ekvivalent med att t är lika med s ett delat med v ett",
-   "s": 242.6,
-   "e": 250.05
+   "s": 244.15,
+   "e": 251.6
   },
   {
    "t": "s ett är lika med 45 meter v ett som är lika med 1,5 meter per sekund",
-   "s": 250.05,
-   "e": 256.32
+   "s": 251.6,
+   "e": 257.88
   },
   {
    "t": "tiden t är lika med 45 delat med 1,5 som är lika med 30 sekund",
-   "s": 256.32,
-   "e": 262.19
+   "s": 257.88,
+   "e": 263.74
   },
   {
    "t": "Svar: 30 sekunder.",
-   "s": 262.19,
-   "e": 265.09
+   "s": 263.74,
+   "e": 266.64
   },
   {
    "t": "b) Vi lägger ihop båda hastighetsvektorerna v ett och v två för att få den resulterande hastighetsvektorn v.",
-   "s": 265.09,
-   "e": 272.77
+   "s": 266.64,
+   "e": 274.32
   },
   {
    "t": "Vi parallellförflyttar vektorn v ett till spetsen hos vektorn v två och ritar den resulterande vektorn v.",
-   "s": 272.77,
-   "e": 279.77
+   "s": 274.32,
+   "e": 281.32
   },
   {
    "t": "En rätvinklig triangel har bildats och vi beräknar v med Pythagoras sats.",
-   "s": 279.77,
-   "e": 285.34
+   "s": 281.32,
+   "e": 286.89
   },
   {
    "t": "hastigheten v i kvadrat är lika med v ett i kvadrat plus v två i kvadrat vilket är ekvivalent med att v är lika med roten ur v ett i kvadrat plus v två i kvadrat",
-   "s": 285.34,
-   "e": 296.46
+   "s": 286.89,
+   "e": 298.01
   },
   {
    "t": "v ett är lika med 1,5 meter per sekund v två som är lika med 4,0 meter per sekund",
-   "s": 296.46,
-   "e": 305.48
+   "s": 298.01,
+   "e": 307.04
   },
   {
-   "t": "hastigheten v är lika med roten ur 1,5 i kvadrat plus 4,0 i kvadrat som är lika med roten ur 18,25 som är lika med 4,272 ldots som är ungefär lika med 4,3 meter per sekund",
-   "s": 305.43,
-   "e": 319.92
+   "t": "hastigheten v är lika med roten ur 1,5 i kvadrat plus 4,0 i kvadrat som är lika med roten ur 18,25 som är lika med 4,272 som är ungefär lika med 4,3 meter per sekund",
+   "s": 306.99,
+   "e": 321.15
   },
   {
    "t": "Svar: 4,3 meter per sekund",
-   "s": 319.92,
-   "e": 323.64
+   "s": 321.15,
+   "e": 324.88
   }
  ]
 }

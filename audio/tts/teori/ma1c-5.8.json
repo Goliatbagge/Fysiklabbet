@@ -1,0 +1,313 @@
+{
+ "id": "ma1c-5.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d064b831b2efe65ad90d34cc37b3f0690c34552b",
+ "dur": 388.7,
+ "segments": [
+  {
+   "t": "Komplementhändelse",
+   "s": 0.1,
+   "e": 2.52
+  },
+  {
+   "t": "En händelse som kompletterar en annan händelse, så att de tillsammans utgör alla möjliga utfall kallas komplementhändelse.",
+   "s": 2.48,
+   "e": 10.07
+  },
+  {
+   "t": "Komplementhändelse kan alltså ses som \"händelsens motsats\".",
+   "s": 10.07,
+   "e": 14.86
+  },
+  {
+   "t": "Sannolikheten för en händelse plus sannolikheten för dess komplementhändelse är lika med 1 eller 100 procent.",
+   "s": 14.86,
+   "e": 22.05
+  },
+  {
+   "t": "Sannolikhet med komplementhändelse",
+   "s": 22.05,
+   "e": 25.49
+  },
+  {
+   "t": "P av händelse är lika med 1 minus P av komplementhändelse",
+   "s": 25.49,
+   "e": 30.4
+  },
+  {
+   "t": "Härledning — Sannolikhet med komplementhändelse",
+   "s": 30.4,
+   "e": 34.42
+  },
+  {
+   "t": "Enligt definitionen för komplementhändelse gäller",
+   "s": 34.42,
+   "e": 38.46
+  },
+  {
+   "t": "P av händelse plus P av komplementhändelse är lika med 1",
+   "s": 38.46,
+   "e": 43.4
+  },
+  {
+   "t": "Vi löser ut P av händelse och får",
+   "s": 43.4,
+   "e": 47.09
+  },
+  {
+   "t": "P av händelse är lika med 1 minus P av komplementhändelse",
+   "s": 47.09,
+   "e": 51.92
+  },
+  {
+   "t": "vsv.",
+   "s": 51.92,
+   "e": 59.75
+  },
+  {
+   "t": "Komplementhändelser är användbara i uppgifter där vi ska beräkna sannolikheten för minst en eller åtminstone en.",
+   "s": 51.92,
+   "e": 59.75
+  },
+  {
+   "t": "Exempel 1 — Ange komplementhändelsen",
+   "s": 59.75,
+   "e": 63.52
+  },
+  {
+   "t": "Vad är komplementhändelsen till att. a) det regnar? b) dra ett hjärter ur en kortlek? c) slå minst en femma på en tärning?",
+   "s": 63.52,
+   "e": 76.46
+  },
+  {
+   "t": "a) \"Att det snöar\"?",
+   "s": 76.46,
+   "e": 79.22
+  },
+  {
+   "t": "Nej, bara för att det inte regnar behöver det inte snöa.",
+   "s": 79.22,
+   "e": 83.44
+  },
+  {
+   "t": "Det kan ju vara uppehåll. \"Att det är soligt\"?",
+   "s": 83.44,
+   "e": 88.24
+  },
+  {
+   "t": "Nej, bara för att det inte regnar behöver det inte vara soligt.",
+   "s": 88.24,
+   "e": 92.71
+  },
+  {
+   "t": "Det kan ju vara mulet utan att regna.",
+   "s": 92.71,
+   "e": 96.06
+  },
+  {
+   "t": "Att sätta ett \"inte\" framför händelsen för att få komplementhändelsen fungerar alltid!",
+   "s": 96.06,
+   "e": 101.62
+  },
+  {
+   "t": "Men om det går så försök att undvika \"inte\" i ditt svar.",
+   "s": 101.62,
+   "e": 105.83
+  },
+  {
+   "t": "I det här fallet är det dock svårt.",
+   "s": 105.83,
+   "e": 108.76
+  },
+  {
+   "t": "Svar: Att det inte regnar.",
+   "s": 108.76,
+   "e": 111.59
+  },
+  {
+   "t": "b) Komplementhändelsen är \"att inte dra ett hjärter\", dvs. att dra ett spader, klöver eller ruter.",
+   "s": 111.59,
+   "e": 119.26
+  },
+  {
+   "t": "Svar: Att dra ett spader, klöver eller ruter.",
+   "s": 119.26,
+   "e": 123.76
+  },
+  {
+   "t": "c) Komplementhändelsen är \"att inte slå minst en femma\", dvs. att slå 1, 2, 3 eller 4.",
+   "s": 123.76,
+   "e": 132.15
+  },
+  {
+   "t": "Detta kan vi uttrycka som \"att slå högst en fyra\".",
+   "s": 132.15,
+   "e": 136.36
+  },
+  {
+   "t": "Svar: Att slå högst en fyra.",
+   "s": 136.36,
+   "e": 139.69
+  },
+  {
+   "t": "Exempel 2 — Minst en sexa med fem tärningar",
+   "s": 139.69,
+   "e": 143.76
+  },
+  {
+   "t": "Vad är sannolikheten att få minst en sexa vid kast med fem vanliga tärningar?",
+   "s": 143.76,
+   "e": 149.09
+  },
+  {
+   "t": "Att beräkna denna uppgift utan komplementhändelse är jobbigt eftersom det finns så många kombinationer.",
+   "s": 149.09,
+   "e": 155.66
+  },
+  {
+   "t": "Men med komplementhändelse blir det lätt!",
+   "s": 155.66,
+   "e": 159.12
+  },
+  {
+   "t": "Komplementhändelsen till \"att få minst en sexa\" är \"att inte få någon sexa\".",
+   "s": 159.12,
+   "e": 164.1
+  },
+  {
+   "t": "Sannolikheten att inte få sexa vid kast med en tärning är 5 delat med 6 , så för fem tärningar gäller",
+   "s": 164.1,
+   "e": 171.09
+  },
+  {
+   "t": "P av ingen sexa är lika med parentesen 5 delat med 6 slut parentes upphöjt till 5 som är lika med 3 125 delat med 7 776 som är lika med 0,401",
+   "s": 171.09,
+   "e": 184.2
+  },
+  {
+   "t": "Vi beräknar nu sannolikheten för minst en sexa genom att subtrahera sannolikheten för komplementhändelsen från 1, så",
+   "s": 184.2,
+   "e": 192.01
+  },
+  {
+   "t": "P av minst en sexa är lika med 1 minus 0,401 som är lika med 0,598 som är ungefär lika med 0,60 som är lika med 60 procent",
+   "s": 192.01,
+   "e": 202.9
+  },
+  {
+   "t": "Svar: ca 60 procent",
+   "s": 202.9,
+   "e": 206.19
+  },
+  {
+   "t": "Exempel 3 — Minst en dotter",
+   "s": 206.19,
+   "e": 209.4
+  },
+  {
+   "t": "Vad är sannolikheten att få minst en dotter om man skaffar fyra barn? (Vi räknar med att det är samma sannolikhet att få en flicka som en pojke.)",
+   "s": 209.4,
+   "e": 219.62
+  },
+  {
+   "t": "Komplementhändelsen är \"ingen dotter\":",
+   "s": 219.62,
+   "e": 235.31
+  },
+  {
+   "t": "P av ingen dotter är lika med parentesen 1 delat med 2 slut parentes upphöjt till 4 som är lika med 1 upphöjt till 4 delat med 2 upphöjt till 4 som är lika med 1 delat med 16 som är lika med 0,0625",
+   "s": 219.62,
+   "e": 235.31
+  },
+  {
+   "t": "P av minst en dotter är lika med 1 minus 0,0625 som är lika med 0,9375 som är lika med 93,75 procent",
+   "s": 235.31,
+   "e": 245.29
+  },
+  {
+   "t": "Svar: Ca 94 procent",
+   "s": 245.29,
+   "e": 248.8
+  },
+  {
+   "t": "Kuriosa — Födelsedagsparadoxen",
+   "s": 248.8,
+   "e": 252.03
+  },
+  {
+   "t": "Hur många slumpvis valda personer måste vi ha för att sannolikheten att minst två stycken ska dela samma födelsedag ska vara över 50 procent?",
+   "s": 252.03,
+   "e": 260.77
+  },
+  {
+   "t": "Gissa själv först!",
+   "s": 260.77,
+   "e": 263.19
+  },
+  {
+   "t": "365 delat med 2 är ungefär lika med 183 stycken?",
+   "s": 263.19,
+   "e": 268.81
+  },
+  {
+   "t": "365 delat med 3 är ungefär lika med 122 stycken?",
+   "s": 268.81,
+   "e": 274.52
+  },
+  {
+   "t": "Detta är ett exempel som kan beräknas med hjälp av komplementhändelse!",
+   "s": 274.52,
+   "e": 279.51
+  },
+  {
+   "t": "Sannolikheten att 2 personer inte delar födelsedag är lika med 365 delat med 365 gånger 364 delat med 365",
+   "s": 279.51,
+   "e": 290.66
+  },
+  {
+   "t": "Sannolikheten att 2 personer delar födelsedag är lika med 1 minus parentesen 365 delat med 365 gånger 364 delat med 365 slut parentes som är ungefär lika med 0,003 som är lika med 0,3 procent",
+   "s": 290.66,
+   "e": 307.76
+  },
+  {
+   "t": "På motsvarande sätt får vi: sannolikheten att 3 personer delar samma födelsedag är lika med 1 minus parentesen 365 delat med 365 gånger 364 delat med 365 gånger 363 delat med 365 slut parentes som är ungefär lika med 0,008 som är lika med 0,8 procent",
+   "s": 307.76,
+   "e": 331.75
+  },
+  {
+   "t": "Fortsätter vi på samma sätt ser vi att det räcker med att ha 23 personer för att sannolikheten ska bli över 50 procent för att minst två stycken ska dela födelsedag.",
+   "s": 331.7,
+   "e": 341.2
+  },
+  {
+   "t": "Det är mycket färre än vad man kan tro, eftersom 23 är en så liten andel av 365, och på grund av sin kontraintuitiva slutsats kallas detta födelsedagsparadoxen.",
+   "s": 341.2,
+   "e": 352.16
+  },
+  {
+   "t": "Det räcker dessutom med en grupp på 57 personer för att sannolikheten ska bli över 99 procent att två delar samma födelsedag!",
+   "s": 352.16,
+   "e": 360.34
+  },
+  {
+   "t": "Ett sätt att kanske förstå varför det inte krävs så många är att tänka på antalet kombinationer.",
+   "s": 360.34,
+   "e": 366.5
+  },
+  {
+   "t": "I en grupp av 23 personer finns det 253 möjliga par (du och jag, du och någon annan, jag och någon annan, osv.).",
+   "s": 366.5,
+   "e": 375.73
+  },
+  {
+   "t": "Varje par har en 1/365 chans att dela födelsedag.",
+   "s": 375.73,
+   "e": 381.25
+  },
+  {
+   "t": "Eftersom det finns så många möjliga par, ökar sannolikheten snabbt att något av dessa par kommer att dela en födelsedag.",
+   "s": 381.25,
+   "e": 388.7
+  }
+ ]
+}

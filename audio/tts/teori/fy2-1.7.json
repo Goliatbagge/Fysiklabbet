@@ -1,8 +1,8 @@
 {
  "id": "fy2-1.7",
  "voice": "sv-SE-SofieNeural",
- "hash": "d15dc2c9faddf49629f189fcb24591a2444e2f21",
- "dur": 270.88,
+ "hash": "dd71a44d39f17e43f850681826db45bb89cd08f8",
+ "dur": 269.76,
  "segments": [
   {
    "t": "Räkneexempel — Den fatala gungan",
@@ -115,84 +115,84 @@
    "e": 154.34
   },
   {
-   "t": "hastigheten v är lika med roten ur 2 gånger 9,82 gånger 1,0 som är lika med 4,431 ldots meter per sekund",
+   "t": "hastigheten v är lika med roten ur 2 gånger 9,82 gånger 1,0 som är lika med 4,431 meter per sekund",
    "s": 154.34,
-   "e": 164.11
+   "e": 163.88
   },
   {
    "t": "Nu kan vi beräkna spännkraften F S .",
-   "s": 164.11,
-   "e": 167.97
+   "s": 163.88,
+   "e": 167.74
   },
   {
-   "t": "massan m är lika med 80 kilogram hastigheten v som är lika med 4,431 ldots meter per sekund r som är lika med 2,5 meter tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
-   "s": 167.97,
-   "e": 181.51
+   "t": "massan m är lika med 80 kilogram hastigheten v som är lika med 4,431 meter per sekund r som är lika med 2,5 meter tyngdfaktorn g som är lika med 9,82 meter per sekund i kvadrat",
+   "s": 167.74,
+   "e": 180.97
   },
   {
    "t": "i ekvation 1 ger",
-   "s": 181.51,
-   "e": 184.31
+   "s": 180.97,
+   "e": 183.78
   },
   {
-   "t": "F S är lika med 80 gånger 4,431 ldots i kvadrat delat med 2,5 plus 80 gånger 9,82 som är lika med 1414,08 newton som är ungefär lika med 1 400 newton som är lika med 1,4 kilonewton",
-   "s": 184.31,
-   "e": 201.11
+   "t": "F S är lika med 80 gånger 4,431 i kvadrat delat med 2,5 plus 80 gånger 9,82 som är lika med 1414,08 newton som är ungefär lika med 1 400 newton som är lika med 1,4 kilonewton",
+   "s": 183.78,
+   "e": 200.24
   },
   {
    "t": "Svar: 1,4 kilonewton",
-   "s": 201.11,
-   "e": 204.6
+   "s": 200.24,
+   "e": 203.72
   },
   {
    "t": "b) Vi ritar krafterna i översta läget.",
-   "s": 204.6,
-   "e": 208.62
+   "s": 203.72,
+   "e": 207.75
   },
   {
    "t": "I gränsfallet när repet precis slaknar är spännkraften F S är lika med 0 och endast tyngdkraften F G verkar.",
-   "s": 208.62,
-   "e": 216.51
+   "s": 207.75,
+   "e": 215.64
   },
   {
    "t": "Centripetalkraften utgörs alltså endast av tyngdkraften.",
-   "s": 216.51,
-   "e": 221.16
+   "s": 215.64,
+   "e": 220.29
   },
   {
    "t": "Detta ger",
-   "s": 221.16,
-   "e": 223.14
+   "s": 220.29,
+   "e": 222.26
   },
   {
    "t": "F C är lika med F G vilket är ekvivalent med att massan m gånger hastigheten v i kvadrat delat med r är lika med m gånger tyngdfaktorn g",
-   "s": 223.14,
-   "e": 232.32
+   "s": 222.26,
+   "e": 231.45
   },
   {
    "t": "Vi dividerar båda led med m och löser ut hastigheten v.",
-   "s": 232.32,
-   "e": 236.94
+   "s": 231.45,
+   "e": 236.06
   },
   {
    "t": "hastigheten v i kvadrat delat med r är lika med tyngdfaktorn g vilket är ekvivalent med att v i kvadrat är lika med g gånger r vilket är ekvivalent med att v är lika med roten ur g gånger r",
-   "s": 236.94,
-   "e": 254.93
+   "s": 236.06,
+   "e": 254.06
   },
   {
    "t": "tyngdfaktorn g är lika med 9,82 meter per sekund i kvadrat r som är lika med 2,5 meter",
-   "s": 236.94,
-   "e": 254.93
+   "s": 236.06,
+   "e": 254.06
   },
   {
-   "t": "hastigheten v är lika med roten ur 9,82 gånger 2,5 som är lika med 4,954 ldots meter per sekund som är ungefär lika med 5,0 meter per sekund",
-   "s": 254.93,
-   "e": 267.11
+   "t": "hastigheten v är lika med roten ur 9,82 gånger 2,5 som är lika med 4,954 meter per sekund som är ungefär lika med 5,0 meter per sekund",
+   "s": 254.06,
+   "e": 266.0
   },
   {
    "t": "Svar: 5,0 meter per sekund",
-   "s": 267.11,
-   "e": 270.88
+   "s": 266.0,
+   "e": 269.76
   }
  ]
 }

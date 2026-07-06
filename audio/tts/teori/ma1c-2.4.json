@@ -1,0 +1,278 @@
+{
+ "id": "ma1c-2.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "bbc66d509722874fe48cbbc66468d9ea4fbaef67",
+ "dur": 304.71,
+ "segments": [
+  {
+   "t": "Faktorisera uttryck",
+   "s": 0.1,
+   "e": 2.76
+  },
+  {
+   "t": "När vi skriver ett uttryck som en multiplikation kallas det att faktorisera uttryck.",
+   "s": 2.71,
+   "e": 8.36
+  },
+  {
+   "t": "Att faktorisera underlättar att lösa vissa ekvationer och att förkorta rationella uttryck.",
+   "s": 8.36,
+   "e": 14.62
+  },
+  {
+   "t": "Faktorisera",
+   "s": 14.62,
+   "e": 16.65
+  },
+  {
+   "t": "Hitta en eller flera gemensamma faktorer för alla termer i uttrycket. \"Bryt ut\" den gemensamma faktorn och färdigställ uttrycket genom att \"tänka baklänges\".",
+   "s": 16.65,
+   "e": 27.81
+  },
+  {
+   "t": "Exempel 1 — Faktorisera så långt som möjligt",
+   "s": 27.81,
+   "e": 31.86
+  },
+  {
+   "t": "Faktorisera så långt som möjligt. a) 27 x i kvadrat minus 18 x b) 5 x i kubik plus 20 x upphöjt till 5 c) 21 x i kvadrat minus 14 d) 4 x i kubik minus 6 x i kvadrat plus 10 x e) 81 y minus 45 x i kvadrat y plus 27 x y i kvadrat",
+   "s": 31.86,
+   "e": 54.62
+  },
+  {
+   "t": "a) Vi börjar med att titta på koefficienterna.",
+   "s": 54.62,
+   "e": 58.73
+  },
+  {
+   "t": "Det största tal som 27 och 18 båda är delbara med är 9 (de finns i 9:ans gångertabell) och därför är 9 en gemensam faktor.",
+   "s": 58.73,
+   "e": 67.71
+  },
+  {
+   "t": "Alltså kan vi bryta ut 9.",
+   "s": 67.71,
+   "e": 70.69
+  },
+  {
+   "t": "Därefter tittar vi på variablerna.",
+   "s": 70.69,
+   "e": 73.88
+  },
+  {
+   "t": "Alla termer innehåller variabeln x .",
+   "s": 73.88,
+   "e": 77.38
+  },
+  {
+   "t": "Då kan vi bryta ut den minsta potensen av x .",
+   "s": 77.38,
+   "e": 81.5
+  },
+  {
+   "t": "Alltså kan vi bryta ut x .",
+   "s": 81.5,
+   "e": 84.42
+  },
+  {
+   "t": "Eftersom vi kan bryta ut både 9 och x , så bryter vi ut 9 x .",
+   "s": 84.42,
+   "e": 89.84
+  },
+  {
+   "t": "Sedan sätter vi en parentes efteråt och tänker \"distributiva lagen baklänges\" för att uttrycket ska bli detsamma som det ursprungliga:",
+   "s": 89.84,
+   "e": 100.19
+  },
+  {
+   "t": "9 x parentesen slut parentes",
+   "s": 89.84,
+   "e": 100.19
+  },
+  {
+   "t": "Vi tänker \" 9 x gånger något ska bli 27 x i kvadrat \".",
+   "s": 100.19,
+   "e": 105.38
+  },
+  {
+   "t": "Det måste vara 3 x .",
+   "s": 105.38,
+   "e": 108.01
+  },
+  {
+   "t": "Då fyller vi på med 3 x i parentesen.",
+   "s": 108.01,
+   "e": 111.75
+  },
+  {
+   "t": "Efter 27 x i kvadrat i det ursprungliga uttrycket kommer ett minustecken.",
+   "s": 111.75,
+   "e": 117.35
+  },
+  {
+   "t": "Då fyller vi på med ett minustecken.",
+   "s": 117.35,
+   "e": 120.53
+  },
+  {
+   "t": "Till sist tänker vi \" 9 x gånger något ska bli 18 x \".",
+   "s": 120.53,
+   "e": 125.25
+  },
+  {
+   "t": "Det måste vara 2.",
+   "s": 125.25,
+   "e": 127.49
+  },
+  {
+   "t": "Då fyller vi på med 2 i parentesen.",
+   "s": 127.49,
+   "e": 130.91
+  },
+  {
+   "t": "Eftersom vi sedan är klara avslutar vi med en parentes:",
+   "s": 130.91,
+   "e": 141.53
+  },
+  {
+   "t": "27 x i kvadrat minus 18 x är lika med 9 x parentesen 3 x minus 2 slut parentes",
+   "s": 130.91,
+   "e": 141.53
+  },
+  {
+   "t": "(Om vi vill kan vi kontrollera att uttrycket blir 27 x i kvadrat minus 18 x när vi utför multiplikationen.)",
+   "s": 141.53,
+   "e": 149.6
+  },
+  {
+   "t": "Svar: 9 x parentesen 3 x minus 2 slut parentes",
+   "s": 149.6,
+   "e": 155.45
+  },
+  {
+   "t": "b) Enligt samma resonemang som i a-uppgiften kan vi här bryta ut 5 x i kubik , eftersom den största gemensamma delaren till 5 och 20 är 5 och den minsta potensen av variablerna är x i kubik .",
+   "s": 155.45,
+   "e": 167.66
+  },
+  {
+   "t": "Vi sätter en parentes efter och fyller på den, så att uttrycket vid multiplikation blir detsamma som det ursprungliga:",
+   "s": 167.66,
+   "e": 182.7
+  },
+  {
+   "t": "5 x i kubik plus 20 x upphöjt till 5 är lika med 5 x i kubik parentesen 1 plus 4 x i kvadrat slut parentes",
+   "s": 167.66,
+   "e": 182.7
+  },
+  {
+   "t": "Svar: 5 x i kubik parentesen 1 plus 4 x i kvadrat slut parentes",
+   "s": 182.7,
+   "e": 189.55
+  },
+  {
+   "t": "c) I detta fall kan vi endast bryta ut 7 (gemensam delare till 21 och 14) och ingen variabel, eftersom vi har en konstantterm med som inte innehåller något x :",
+   "s": 189.55,
+   "e": 206.86
+  },
+  {
+   "t": "21 x i kvadrat minus 14 är lika med 7 parentesen 3 x i kvadrat minus 2 slut parentes",
+   "s": 189.55,
+   "e": 206.86
+  },
+  {
+   "t": "Svar: 7 parentesen 3 x i kvadrat minus 2 slut parentes",
+   "s": 206.86,
+   "e": 212.82
+  },
+  {
+   "t": "d) I detta fall har vi tre termer.",
+   "s": 212.82,
+   "e": 216.49
+  },
+  {
+   "t": "Då ska vi hitta en gemensam faktor till alla tre termer.",
+   "s": 216.49,
+   "e": 220.81
+  },
+  {
+   "t": "4, 6 och 10 är alla delbara med 2.",
+   "s": 220.81,
+   "e": 224.96
+  },
+  {
+   "t": "Alltså kan vi bryta ut 2.",
+   "s": 224.96,
+   "e": 227.85
+  },
+  {
+   "t": "Den minsta potensen av x är x .",
+   "s": 227.85,
+   "e": 231.41
+  },
+  {
+   "t": "Alltså kan vi bryta ut x .",
+   "s": 231.41,
+   "e": 234.35
+  },
+  {
+   "t": "Vi kan alltså tillsammans bryta ut 2 x :",
+   "s": 234.35,
+   "e": 247.04
+  },
+  {
+   "t": "4 x i kubik minus 6 x i kvadrat plus 10 x är lika med 2 x parentesen 2 x i kvadrat minus 3 x plus 5 slut parentes",
+   "s": 234.35,
+   "e": 247.04
+  },
+  {
+   "t": "Svar: 2 x parentesen 2 x i kvadrat minus 3 x plus 5 slut parentes",
+   "s": 247.04,
+   "e": 254.3
+  },
+  {
+   "t": "e) I detta fall har vi återigen tre termer som dessutom innehåller två olika variabler: x och y .",
+   "s": 254.3,
+   "e": 261.48
+  },
+  {
+   "t": "Då får vi titta på varje variabel för sig.",
+   "s": 261.48,
+   "e": 265.09
+  },
+  {
+   "t": "81, 45 och 27 har 9 som gemensam faktor.",
+   "s": 265.09,
+   "e": 270.06
+  },
+  {
+   "t": "Den första termen innehåller inget x , alltså kan vi inte bryta ut något x .",
+   "s": 270.06,
+   "e": 275.76
+  },
+  {
+   "t": "Alla termer innehåller y .",
+   "s": 275.76,
+   "e": 278.51
+  },
+  {
+   "t": "Då kan vi bryta ut den minsta potensen av y , dvs. y .",
+   "s": 278.51,
+   "e": 283.56
+  },
+  {
+   "t": "Tillsammans bryter vi alltså ut 9 y :",
+   "s": 283.56,
+   "e": 297.09
+  },
+  {
+   "t": "81 y minus 45 x i kvadrat y plus 27 x y i kvadrat är lika med 9 y parentesen 9 minus 5 x i kvadrat plus 3 x y slut parentes",
+   "s": 283.56,
+   "e": 297.09
+  },
+  {
+   "t": "Svar: 9 y parentesen 9 minus 5 x i kvadrat plus 3 x y slut parentes",
+   "s": 297.09,
+   "e": 304.71
+  }
+ ]
+}

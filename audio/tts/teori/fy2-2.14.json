@@ -1,8 +1,8 @@
 {
  "id": "fy2-2.14",
  "voice": "sv-SE-SofieNeural",
- "hash": "b326e9e0562cd86e95f28f63339f37c90b8ca75d",
- "dur": 353.72,
+ "hash": "bcf2251492d192f7703580a4734a3774d48bdc69",
+ "dur": 352.41,
  "segments": [
   {
    "t": "Diffraktion och interferens",
@@ -87,217 +87,217 @@
   {
    "t": "Vägskillnaden mellan en punkt på en",
    "s": 86.3,
-   "e": 89.74
+   "e": 89.75
   },
   {
-   "t": "nodlinje till respektive öppning är ett halvt antal våglängder: våglängden lambda delat med 2, 3 lambda delat med 2, 5 lambda delat med 2, ldots (vågorna träffas i motfas).",
-   "s": 89.74,
-   "e": 102.16
+   "t": "nodlinje till respektive öppning är ett halvt antal våglängder: våglängden lambda delat med 2, 3 lambda delat med 2, 5 lambda delat med 2, (vågorna träffas i motfas).",
+   "s": 89.75,
+   "e": 101.61
   },
   {
-   "t": "maximilinje till respektive öppning är ett helt antal våglängder: 0, våglängden lambda, 2 lambda, 3 lambda, ldots (vågorna träffas i fas).",
-   "s": 102.16,
-   "e": 113.53
+   "t": "maximilinje till respektive öppning är ett helt antal våglängder: 0, våglängden lambda, 2 lambda, 3 lambda, (vågorna träffas i fas).",
+   "s": 101.61,
+   "e": 112.46
   },
   {
    "t": "Konstruktiv interferens (på maximilinjer)",
-   "s": 113.53,
-   "e": 117.58
+   "s": 112.46,
+   "e": 116.51
   },
   {
    "t": "delta sträckan s är lika med n gånger våglängden lambda",
-   "s": 117.58,
-   "e": 122.15
+   "s": 116.51,
+   "e": 121.1
   },
   {
    "t": "där",
-   "s": 122.15,
-   "e": 123.62
+   "s": 121.1,
+   "e": 122.58
   },
   {
    "t": "Δs är lika med vägskillnad (meter)",
-   "s": 123.62,
-   "e": 127.2
+   "s": 122.58,
+   "e": 126.15
   },
   {
    "t": "n är lika med maximilinjens ordningsnummer (0, 1, 2, …)",
-   "s": 127.2,
-   "e": 132.97
+   "s": 126.15,
+   "e": 131.93
   },
   {
    "t": "λ är lika med våglängd (meter)",
-   "s": 132.97,
-   "e": 136.21
+   "s": 131.93,
+   "e": 135.16
   },
   {
    "t": "Destruktiv interferens (på nodlinjer)",
-   "s": 136.21,
-   "e": 140.05
+   "s": 135.16,
+   "e": 139.0
   },
   {
    "t": "delta sträckan s är lika med parentesen n plus 1 delat med 2 slut parentes gånger våglängden lambda",
-   "s": 140.05,
-   "e": 147.69
+   "s": 139.0,
+   "e": 146.64
   },
   {
    "t": "där",
-   "s": 147.69,
-   "e": 149.2
+   "s": 146.64,
+   "e": 148.15
   },
   {
    "t": "Δs är lika med vägskillnad (meter)",
-   "s": 149.2,
-   "e": 152.79
+   "s": 148.15,
+   "e": 151.74
   },
   {
    "t": "n är lika med nodlinjens ordningsnummer (0, 1, 2, …)",
-   "s": 152.79,
-   "e": 158.35
+   "s": 151.74,
+   "e": 157.3
   },
   {
    "t": "λ är lika med våglängd (meter)",
-   "s": 158.35,
-   "e": 161.6
+   "s": 157.3,
+   "e": 160.55
   },
   {
    "t": "Exempel 1 — Två högtalare och första tysta punkten",
-   "s": 161.6,
-   "e": 165.95
+   "s": 160.55,
+   "e": 164.9
   },
   {
    "t": "Två högtalare A och B står 12 meter från en vägg och skickar ut en ton i fas.",
-   "s": 165.95,
-   "e": 172.12
+   "s": 164.9,
+   "e": 171.07
   },
   {
    "t": "Se figur.",
-   "s": 172.12,
-   "e": 174.18
+   "s": 171.07,
+   "e": 173.12
   },
   {
    "t": "När vi går från punkten C (på mittlinjen mellan A och B) till punkten E minskar ljudstyrkan för att nå ett minimum vid D (mitt emot högtalare B).",
-   "s": 174.18,
-   "e": 184.39
+   "s": 173.12,
+   "e": 183.34
   },
   {
    "t": "Därefter ökar ljudstyrkan när vi fortsätter gå från D mot E.",
-   "s": 184.39,
-   "e": 189.75
+   "s": 183.34,
+   "e": 188.7
   },
   {
    "t": "Vilken frekvens hade tonen som sändes ut från högtalarna?",
-   "s": 189.75,
-   "e": 194.35
+   "s": 188.7,
+   "e": 193.3
   },
   {
    "t": "Vi löser ut frekvensen från formeln för våghastighet hastigheten v är lika med frekvensen f gånger våglängden lambda :",
-   "s": 194.35,
-   "e": 206.82
+   "s": 193.3,
+   "e": 205.79
   },
   {
    "t": "frekvensen f är lika med hastigheten v delat med våglängden lambda, ekvation 1",
-   "s": 194.35,
-   "e": 206.82
+   "s": 193.3,
+   "e": 205.79
   },
   {
-   "t": "hastigheten v är lika med 340 meter per sekund parentesen ljudetshastighetiluft slut parentes våglängden lambda som är lika med ?",
-   "s": 206.82,
-   "e": 216.32
+   "t": "hastigheten v är lika med 340 meter per sekund parentesen ljudets hastighet i luft slut parentes våglängden lambda som är lika med ?",
+   "s": 205.79,
+   "e": 215.15
   },
   {
    "t": "Vi måste bestämma våglängden λ.",
-   "s": 216.32,
-   "e": 219.18
+   "s": 215.15,
+   "e": 218.0
   },
   {
    "t": "Vid C (mitt emellan A och B) är vi på 0:e maximilinjen.",
-   "s": 219.18,
-   "e": 224.43
+   "s": 218.0,
+   "e": 223.22
   },
   {
    "t": "När vi kommer till D når vi vårt första minimum — då är vi på 0:e nodlinjen och har destruktiv interferens.",
-   "s": 224.43,
-   "e": 231.84
+   "s": 223.22,
+   "e": 230.64
   },
   {
    "t": "Vi ställer upp formeln för destruktiv interferens och löser ut λ:",
-   "s": 231.84,
-   "e": 248.1
+   "s": 230.64,
+   "e": 246.84
   },
   {
    "t": "delta sträckan s är lika med parentesen n plus 1 delat med 2 slut parentes gånger våglängden lambda vilket är ekvivalent med att lambda är lika med delta s delat med n plus 1 delat med 2, ekvation 2",
-   "s": 231.84,
-   "e": 248.1
+   "s": 230.64,
+   "e": 246.84
   },
   {
-   "t": "delta sträckan s är lika med ? n som är lika med 0 parentesen viärpå0:enodlinjen slut parentes",
-   "s": 248.1,
-   "e": 256.81
+   "t": "delta sträckan s är lika med ? n som är lika med 0 parentesen vi är på 0:e nodlinjen slut parentes",
+   "s": 246.84,
+   "e": 255.49
   },
   {
    "t": "Vi måste bestämma Δs.",
-   "s": 256.81,
-   "e": 259.4
+   "s": 255.49,
+   "e": 258.07
   },
   {
    "t": "För vägskillnaden gäller",
-   "s": 259.4,
-   "e": 262.11
+   "s": 258.07,
+   "e": 260.8
   },
   {
    "t": "delta sträckan s är lika med arean A D minus B D, ekvation 3",
-   "s": 262.11,
-   "e": 269.06
+   "s": 260.8,
+   "e": 267.75
   },
   {
    "t": "Med Pythagoras sats: arean A D i kvadrat är lika med A B i kvadrat plus B D i kvadrat .",
-   "s": 269.06,
-   "e": 277.65
+   "s": 267.75,
+   "e": 276.34
   },
   {
    "t": "Eftersom C är mitt mellan A och B och CD är lika med 3,2 meter gäller arean A B är lika med 2 gånger 3,2 som är lika med 6,4 meter.",
-   "s": 277.65,
-   "e": 288.46
+   "s": 276.34,
+   "e": 287.15
   },
   {
    "t": "arean A D är lika med roten ur A B i kvadrat plus B D i kvadrat som är lika med roten ur 6,4 i kvadrat plus 12 i kvadrat som är lika med 13,6 meter B D som är lika med 12 meter",
-   "s": 288.46,
-   "e": 303.18
+   "s": 287.15,
+   "e": 301.9
   },
   {
    "t": "Insättning i ekvation 3 ger",
-   "s": 303.18,
-   "e": 306.56
+   "s": 301.9,
+   "e": 305.29
   },
   {
    "t": "delta sträckan s är lika med parentesen 13,6 minus 12 slut parentes meter som är lika med 1,6 meter",
-   "s": 306.56,
-   "e": 316.75
+   "s": 305.29,
+   "e": 315.45
   },
   {
    "t": "Insättning av delta sträckan s är lika med 1,6 meter och n är lika med 0 i ekvation 2 ger",
-   "s": 316.7,
-   "e": 323.75
+   "s": 315.4,
+   "e": 322.44
   },
   {
    "t": "våglängden lambda är lika med 1,6 delat med 0 plus 1 delat med 2 som är lika med 3,2 meter",
-   "s": 323.75,
-   "e": 331.42
+   "s": 322.44,
+   "e": 330.11
   },
   {
    "t": "Insättning av våglängden lambda är lika med 3,2 meter och hastigheten v är lika med 340 meter per sekund i ekvation 1 ger",
-   "s": 331.42,
-   "e": 340.73
+   "s": 330.11,
+   "e": 339.43
   },
   {
    "t": "frekvensen f är lika med 340 delat med 3,2 som är lika med 106,25 hertz som är ungefär lika med 110 hertz",
-   "s": 340.73,
-   "e": 350.47
+   "s": 339.43,
+   "e": 349.16
   },
   {
    "t": "Svar: 110 hertz",
-   "s": 350.47,
-   "e": 353.72
+   "s": 349.16,
+   "e": 352.41
   }
  ]
 }

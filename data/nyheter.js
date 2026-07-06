@@ -31,6 +31,51 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-06-aldsta-kvasarerna",
+    date: "2026-07-06",
+    title: "Euclid hittar de mest avlägsna kvasarerna som någonsin bekräftats",
+    deck: "Det europeiska rymdteleskopet Euclid har hittat 31 tidigare okända kvasarer från universums linda, däribland två nya rekordhållare vars ljus färdats i över 13 miljarder år. Fynden mer än fördubblar på ett enda år antalet kända kvasarer från denna avlägsna epok — och hjälper astronomer förstå hur universums första jättelika svarta hål hann växa så snabbt.",
+    category: "Astronomi",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-06-aldsta-kvasarerna.jpg",
+    imageAlt: "Himlakarta i Mollweide-projektion med Vintergatans ljusa stjärnband som ett bälte tvärs över mitten. Två oregelbundna blå fält uppe till vänster och nere till höger markerar de delar av himlen som Euclid kartlagt, med gula prickar för nyupptäckta kvasarer och två röda prickar för de mest avlägsna rekordhållarna.",
+    imageCredit: "Bild: ESA/Euclid/Euclid Consortium/NASA/Planck Collaboration/A. Mellinger (CC BY-SA 3.0 IGO)",
+    tags: ["astronomi", "kosmologi", "kvasar", "svarta hål", "rödförskjutning", "euclid", "esa", "reionisering", "big bang", "modern fysik", "supermassiva svarta hål", "rymden"],
+    sources: [
+      { name: "ESA — Euclid (pressmeddelande)", url: "https://www.esa.int/Science_Exploration/Space_Science/Euclid/Euclid_discovers_the_most_ancient_quasar_in_the_Universe" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-euclid-ancient-quasars-universe.html" }
+    ],
+    research: { citation: "D. Yang et al., ”Euclid: Discovery of 31 new quasars at 6.6 < z < 7.8”, Astronomy & Astrophysics (2026)", url: "https://doi.org/10.1051/0004-6361/202658883" },
+    body: [
+      { type: "p", html: "Ljuset hade redan varit på väg i över 13&nbsp;miljarder år när det till slut fångades av ett rymdteleskop i omloppsbana runt jorden. Det europeiska rymdteleskopet Euclid har hittat 31 tidigare okända kvasarer från universums linda — bland dem två nya rekordhållare, de mest avlägsna kvasarer som någonsin bekräftats. Fynden, publicerade i tidskriften <em>Astronomy &amp; Astrophysics</em>, mer än fördubblar på ett enda år antalet kända kvasarer från denna extremt tidiga epok — en uppgift som tidigare tagit över ett decennium att uppnå." },
+
+      { type: "h2", text: "Ett kortvarigt jättebloss kring ett svart hål" },
+      { type: "p", html: "En kvasar är ingen egen sorts himlakropp, utan en kort och intensiv fas i en galaxs liv. I centrum av nästan varje galax — även vår egen Vintergatan — sitter ett supermassivt svart hål. Ibland faller stora mängder gas och stoft in mot hålet i en roterande skiva, hettas upp till flera miljoner grader av friktion och gravitation, och lyser då upp starkare än hela den omgivande galaxen tillsammans. Det är den fasen som kallas kvasar, och de mest avlägsna som Euclid nu hittat sköt ut ljus med en sammanlagd ljusstyrka på omkring en biljon solar." },
+
+      { type: "h2", text: "Rödförskjutningen avslöjar både avstånd och ålder" },
+      { type: "p", html: "Universum expanderar, och ju längre resa ljuset gjort desto mer har dess våglängd sträckts ut på vägen — ljuset förskjuts mot den röda änden av spektrumet. Astronomer mäter denna rödförskjutning med talet <em>z</em>, och ett värde på <em>z</em>&nbsp;=&nbsp;7,77 betyder att våglängden har sträckts ut till nästan nio gånger sin ursprungliga längd. De två nya rekordhållarna, EUCL J172902.75+641018.1 (<em>z</em>&nbsp;=&nbsp;7,77) och EUCL J125308.55+705432.3 (<em>z</em>&nbsp;=&nbsp;7,69), knappar om den tidigare rekordhållaren från 2021 (<em>z</em>&nbsp;=&nbsp;7,64) och tar oss tillbaka till en tid då universum bara var omkring 670&nbsp;miljoner år gammalt — ynka 5&nbsp;% av dagens ålder på 13,8&nbsp;miljarder år. Båda objekten befinner sig mer än 13&nbsp;miljarder ljusår bort." },
+
+      { type: "h2", text: "Ett mörk materia-teleskop som råkar vara perfekt för kvasarjakt" },
+      { type: "p", html: "Euclid sköts upp i juli 2023 med huvuduppdraget att kartlägga hur galaxer är fördelade över en tredjedel av himlen, för att kartlägga mörk materia och mörk energi. Men samma kombination av stort synfält, hög upplösning och känslig infraröd syn gör teleskopet ovanligt bra även på att fånga sällsynta, extremt avlägsna objekt som annars försvinner i mängden. Forskarna, ledda av Daming Yang vid Leidens universitet i Nederländerna, sökte igenom Euclids breda himmelskartläggning med tre oberoende urvalsmetoder — bland annat maskininlärning — för att plocka ut kandidater, och bekräftade sedan 31 av dem som riktiga kvasarer med uppföljande spektroskopi från några av världens största markbaserade teleskop: Keck-observatoriet på Hawaii, Magellan-teleskopen i Chile och Large Binocular Telescope i Arizona, under drygt tjugo observationsnätter 2024–2025." },
+      { type: "p", html: "”Euclid är en verklig game changer”, säger Yang. ”Tidigare kunde vi bara hitta en handfull av de allra ljusstarkaste uråldriga kvasarerna, men Euclid låter oss söka mycket effektivare över enorma delar av himlen och fånga betydligt svagare ljus. Det är ett unikt verktyg för kvasarjakt.”" },
+
+      { type: "h2", text: "Svarta hål som verkar ha vuxit för fort" },
+      { type: "p", html: "Att hitta så massiva, ljusstarka svarta hål bara några hundra miljoner år efter Big Bang är i sig ett problem för teorin: ett svart hål växer normalt genom att sluka gas i en takt som begränsas av sitt eget strålningstryck, och det tar tid att bygga upp en massa på miljarder solmassor den vägen. En av de nya kvasarerna har visat sig ha ett svart hål på bara omkring 40&nbsp;miljoner solmassor — en bråkdel av de flera miljarder solmassor som tidigare kända rekordhållare vägt in på. Att Euclid nu även kan fånga in denna typ av svagare, lättare kvasarer ger forskarna ett mycket bredare urval att pröva sina teorier om tidig galaxutveckling mot. ”Det här fyndet mer än fördubblar antalet kvasarer vi känner till som är så uråldriga”, säger Antonio La Marca, forskare vid ESA. ”Euclid-teamet har för första gången tagit en riktig folkräkning av kvasarer vid universums gryning.”" },
+
+      { type: "quote", html: "”Uråldriga kvasarer är sällsynta fynd. De är intressanta i sig själva, men fungerar också som tidsmaskiner som låter oss utforska det tidiga universum och förstå hur de första generationerna av galaxer uppstod.”", cite: "Valeria Pettorino, ESA:s projektforskare för Euclid" },
+
+      { type: "h2", text: "Ljus genom kosmisk dimma" },
+      { type: "p", html: "Kvasarernas extrema ljusstyrka fungerar dessutom som ett bakljus genom kosmisk dimma. På vägen hit har ljuset passerat gas som ännu inte hunnit joniseras helt av de första stjärnorna och galaxerna — den så kallade reioniseringsepoken, då universum övergick från kallt och mörkt till hett och joniserat. Genom att studera exakt vilka våglängder som absorberats av vätgasen på vägen kan astronomer kartlägga hur och när universum till slut blev genomskinligt för ljus — en process som hänger ihop med atomers energinivåer och spektrallinjer, samma fysik som Fysiklabbets genomgång om atommodeller och spektra bygger på." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Rödförskjutningen <em>z</em>&nbsp;=&nbsp;7,77 betyder att kvasarens ljus har sträckts ut till nästan nio gånger sin ursprungliga våglängd på sin 13&nbsp;miljarder år långa resa hit.",
+        "Namn som EUCL J172902.75+641018.1 är inget slumpmässigt — siffrorna anger objektets position på himlen (rektascension och deklination), ungefär som ett postnummer för stjärnhimlen.",
+        "Euclids himmelskartläggning ska till slut täcka en tredjedel av himlen och pågår fram till 2029 — kartan i bilden ovan visar bara den del som var klar i augusti 2025, så fler uråldriga kvasarer väntas dyka upp."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-05-super-puff-planeter",
     date: "2026-07-05",
     title: "Två jätteplaneter visar sig vara lättare än sockervadd",

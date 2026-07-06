@@ -30,6 +30,7 @@
     <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/ovningar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/exittickets.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="graf.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -250,6 +251,22 @@
             const stack = [];
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
+                // ::: graf — interaktiv grafritare. Samla config-raderna och
+                // gör om till en mount-placeholder (graf.js bygger widgeten).
+                const grafOpen = line.match(/^:::\s*graf\s*$/i);
+                if (grafOpen) {
+                    const cfgLines = [];
+                    let j = i + 1;
+                    for (; j < lines.length; j++) {
+                        if (/^:::\s*$/.test(lines[j])) break;
+                        cfgLines.push(lines[j]);
+                    }
+                    const src = cfgLines.join('\n');
+                    const b64 = btoa(unescape(encodeURIComponent(src)));
+                    out.push('<div class="lab-graf" data-graf-src="' + b64 + '"></div>');
+                    i = j; // hoppa förbi det avslutande :::
+                    continue;
+                }
                 const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
                 const close = line.match(/^:::\s*$/);
                 if (open) {
@@ -547,6 +564,11 @@
                         if (p.namespaceURI === 'http://www.w3.org/2000/svg') return NodeFilter.FILTER_REJECT;
                         const c = p.classList;
                         if (c && (c.contains('katex') || c.contains('katex-display'))) return NodeFilter.FILTER_REJECT;
+                        // Interaktiva graf-widgetar: UI-text (kryssrutor,
+                        // knappar) ska inte bionic-formateras — och split-
+                        // spann blir egna flex-items i flex-etiketter
+                        // ("Visa trappsteget" → "Vi sa trapp steget").
+                        if (c && c.contains('lab-graf')) return NodeFilter.FILTER_REJECT;
                     }
                     return NodeFilter.FILTER_ACCEPT;
                 }
@@ -703,6 +725,8 @@
                 // FÖRE bionic — annars delar bionic upp "där"-textnoden och
                 // borttagningen av "där" i prosaförklaringar missar.
                 buildFormelLayouts(ref.current);
+                // Interaktiva grafer (::: graf) — bygg widgetarna.
+                if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(ref.current);
                 // Lägg in bionic-spann EFTER KaTeX (så .katex kan hoppas över).
                 // Synlighet styrs sedan av .bionic-on-klassen via CSS.
                 applyBionic(ref.current);
@@ -878,6 +902,10 @@
             // Tangentbordsnavigering
             useEffect(() => {
                 const onKey = (e) => {
+                    // Fokus i ett reglage/fält (t.ex. graf-widgetens glidare):
+                    // piltangenter m.m. ska styra reglaget, inte bläddra.
+                    const t = e.target;
+                    if (t && t.closest && t.closest('input, textarea, select, .lab-graf')) return;
                     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown'
                         || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); next(); }
                     else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'
@@ -904,6 +932,7 @@
                     throwOnError: false,
                 });
                 buildFormelLayouts(root);
+                if (window.FYSIKGRAF) window.FYSIKGRAF.mountAll(root);
                 const { steps, blocks } = buildPresSteps(root);
                 stepsRef.current = steps;
                 blocksRef.current = blocks;
@@ -971,6 +1000,10 @@
 
             const onStageClick = (e) => {
                 if (e.target.closest('button, a')) return;
+                // Interaktiva graf-widgetar: dra i glidare/rutnät, kryssrutor
+                // och sifferfält ska INTE bläddra vidare — man ska kunna
+                // stanna kvar och utforska. (Släpp efter drag ger ett click.)
+                if (e.target.closest('input, label, .lab-graf')) return;
                 const sel = window.getSelection && window.getSelection();
                 if (sel && sel.toString()) return;   // markerar text — bläddra inte
                 next();

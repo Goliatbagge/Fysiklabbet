@@ -1,8 +1,8 @@
 {
  "id": "ma1c-4.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "1402d85b6a79a93cc349541733a2ff6a0aa39287",
- "dur": 99.6,
+ "hash": "3663601a7ce9397e9288c2c82a186d3be7cdf073",
+ "dur": 154.32,
  "segments": [
   {
    "t": "Från ekvation till graf",
@@ -67,22 +67,62 @@
   {
    "t": "Vi prickar in punkterna i ett koordinatsystem.",
    "s": 73.71,
-   "e": 77.64
+   "e": 77.65
   },
   {
    "t": "När vi ritar koordinatsystemet måste x-axeln sträcka sig från x är lika med minus 3 till x är lika med 3 och y-axeln från y är lika med minus 3 till y är lika med 9 (största respektive minsta x- och y-koordinaterna):",
-   "s": 77.64,
-   "e": 99.6
+   "s": 77.65,
+   "e": 99.54
   },
   {
    "t": "Till sist förbinder vi punkterna med en rät linje och vi får då vår graf:",
-   "s": 77.64,
-   "e": 99.6
+   "s": 77.65,
+   "e": 99.54
   },
   {
    "t": "Grafen till y är lika med minus 2 x plus 3 — en rät linje som lutar nedåt.",
-   "s": 77.64,
-   "e": 99.6
+   "s": 77.65,
+   "e": 99.54
+  },
+  {
+   "t": "Det är precis det här som de digitala hjälpmedlen gör åt dig — fast på ett ögonblick.",
+   "s": 99.54,
+   "e": 104.91
+  },
+  {
+   "t": "Dra i reglagen nedan och se direkt hur talet framför x (lutningen k ) och den konstanta termen ( m ) ändrar linjens utseende.",
+   "s": 104.91,
+   "e": 113.83
+  },
+  {
+   "t": "Sätt k är lika med minus 2 och m är lika med 3 så får du tillbaka grafen från exemplet ovan.",
+   "s": 113.83,
+   "e": 120.49
+  },
+  {
+   "t": "Testa att låta m vara oförändrad medan du drar i k : linjen vrider sig kring samma punkt på y -axeln.",
+   "s": 120.49,
+   "e": 127.46
+  },
+  {
+   "t": "Ändrar du i stället m flyttas hela linjen rakt upp eller ner.",
+   "s": 127.46,
+   "e": 132.16
+  },
+  {
+   "t": "Den röda pricken visar var linjen skär y -axeln — den ligger alltid i höjd med värdet på m .",
+   "s": 132.16,
+   "e": 138.2
+  },
+  {
+   "t": "Det streckade trappsteget visar lutningen: går vi ett steg åt höger längs linjen, så går vi samtidigt k steg uppåt eller nedåt.",
+   "s": 138.2,
+   "e": 146.5
+  },
+  {
+   "t": "Du kan också dra i rutnätet för att flytta dig i koordinatsystemet och zooma med mushjulet (eller knapparna uppe till höger).",
+   "s": 146.5,
+   "e": 154.32
   }
  ]
 }

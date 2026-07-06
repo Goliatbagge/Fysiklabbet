@@ -78,7 +78,18 @@
             const lines = md.split('\n');
             const out = [];
             const stack = [];
-            for (const line of lines) {
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                // ::: graf — interaktiv grafritare. Bidrar inte med uppläsbar
+                // text: hoppa förbi hela blocket (config-raderna får ALDRIG
+                // läsas upp) och emit en tom placeholder.
+                if (/^:::\s*graf\s*$/i.test(line)) {
+                    let j = i + 1;
+                    for (; j < lines.length; j++) { if (/^:::\s*$/.test(lines[j])) break; }
+                    out.push('<div class="lab-graf"></div>');
+                    i = j;
+                    continue;
+                }
                 const open = line.match(/^:::\s*([a-zåäö]+)(?:\s+"([^"]*)")?\s*$/i);
                 const close = line.match(/^:::\s*$/);
                 if (open) {

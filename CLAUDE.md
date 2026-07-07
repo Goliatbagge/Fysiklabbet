@@ -24,6 +24,12 @@ node .claude/verify-no-white-outline.js
 # i kanterna (KÖR FÖRE COMMIT!)
 node .claude/verify-figur-bounds.js
 
+# Verifiera vinkelbågar och likhetsstreck i teori-figurernas SVG (KÖR FÖRE
+# COMMIT vid figurändringar!) — bågens medelpunkt i hörnet (rätt sweep-
+# flagga), ändpunkter på vinkelbenen, likhetsstreck vinkelräta mot sidan.
+# Se "Geometrifigurer" nedan för reglerna.
+node .claude/verify-vinkelbagar.js
+
 # Verifiera exit tickets efter ändringar i data/exittickets.js (KÖR FÖRE
 # COMMIT!) — syntax, täckning mot katalogen, choices/why-längder, emoji,
 # tappade KaTeX-backslash. Dataformatet dokumenteras i filens huvud;
@@ -918,6 +924,57 @@ riktig **måttlinje**, inte som en lös streckad linje på golvet:
 
 Referensimpl: `fy2-1.1.md` (skiftnyckel 0,25 m, spett `l`, gungbräda
 `l_P`/`l_B`) — generator-helper `dimHead(pt,dir)` i scratchpad-generatorerna.
+
+### Geometrifigurer: vinkelbågar, likhetsstreck och etiketter
+
+Gäller alla geometriska figurer (matte-teorin, men även vinklar i
+fysikfigurer). Dessa fel har ALLA förekommit och rättats i stor skala
+(ma2c kap 4, 2026-07-07) — bygg rätt från början och kör
+`node .claude/verify-vinkelbagar.js` före commit:
+
+1. **Rita ALLTID från beräknade koordinater, aldrig på ögonmått.** Välj
+   hörnens koordinater först, räkna sedan ut bågändpunkter, etikett-
+   positioner och streck numeriskt (cos/sin). Alla fel nedan uppstod ur
+   handplacerade punkter.
+2. **Vinkelbågens medelpunkt är HÖRNET.** Ändpunkterna ligger PÅ de två
+   vinkelbenen: `hörn + r·(cos θ, sin θ)` för respektive bens riktning θ.
+   En båge som slutar mitt i luften, sticker ut förbi benet eller spänner
+   halva vinkeln är fel — bågen ska spänna HELA vinkeln, ben till ben.
+3. **Sweep-flaggan (sista flaggan i `A`-kommandot) avgör åt vilket håll
+   bågen buktar — DET VANLIGASTE FELET.** Fel flagga speglar medelpunkten
+   till andra sidan kordan så bågen buktar bort från hörnet (∩ i stället
+   för ∪). Regel i SVG:s y-nedåt-system: går bågen från θ₁ till θ₂ med
+   **minskande** vinkel → sweep `0`, **ökande** → sweep `1`. Vid
+   tveksamhet: kör verifieraren, den räknar ut den faktiska medelpunkten.
+4. **Mätetal/beteckning FRAMFÖR vinkelbågen**: på bisektrisen, strax
+   utanför bågens radie (radie + ~6–14 px), inne i vinkelns "kil" — aldrig
+   ovanpå bågen, vinkelbenen eller andra objekt. För mycket spetsiga
+   vinklar (< ~20°): lägg kilen vågrätt om möjligt (texten är vågrät) och
+   placera talet längre ut där kilen är bred nog; räkna att glyfboxen får
+   marginal mot BÅDA benen.
+5. **Likhetsstreck (tvärstreck) står VINKELRÄTT mot sidan**, centrerade på
+   sidans mittpunkt, med ändpunkterna symmetriskt på var sin sida om
+   sidan (± ~4 px längs sidans normal; flera streck förskjuts ~2,5 px
+   längs sidan). Ett streck som lutar längs sidan är fel.
+6. **Skalenlighet**: sträckor som påstås/markeras lika ritas LIKA LÅNGA;
+   vinklar ritas nära sina angivna gradtal; likformiga figurer ritas
+   likformiga (samma form, olika skala); längdförhållanden i uppgiften
+   (t.ex. 9 mot 15) ska synas i figuren. Konstruera geometrin ur de givna
+   måtten (sinussatsen/cosinussatsen vid behov) i stället för att rita en
+   godtycklig triangel och sätta siffror på den.
+7. **Etiketter aldrig på linjer/objekt** (gäller även koordinatpar som
+   "(−4, 2)" och sidbeteckningar): flytta till fri yta bredvid/under
+   punkten, offsetta vinkelrätt ut från sidan. Sidlängds-etiketter på en
+   bas kan läggas UNDER basen (utanför figuren) i stället för inuti en
+   trång figur.
+8. **viewBox ska rymma alla glyfer** — rubriketiketter med versaler
+   ("Randvinkel") kräver ~9–10 px ovanför baslinjen; kontrollera att
+   inget klipps i över-/underkant (verify-figur-bounds.js fångar detta).
+9. **Bevisfigurer ska vara geometriskt korrekta**, inte bara snygga: en
+   bisektris ska faktiskt dela vinkeln mitt itu (och träffa motstående
+   sida i rätt delningsförhållande), hjälpsträckor ska gå till de hörn
+   beviset använder, medelpunktsvinkeln 2v ska vara just 2v (kan bli
+   reflex > 180° — rita den då som reflexbåge med large-arc-flagga 1).
 
 ### Diagramkonventioner (svensk fysik/matte-standard)
 

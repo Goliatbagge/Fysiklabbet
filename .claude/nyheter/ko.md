@@ -14,6 +14,43 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-07) — kan tas upp senare
+
+- **Vera C. Rubin-observatoriet har inlett sin tioåriga "Legacy Survey of
+  Space and Time"** — jätteteleskopet i Chile tog sin första bild 1 juli och
+  ska nu fotografera hela södra stjärnhimlen om och om igen i tio år (bland
+  annat för att kartlägga mörk materia). Redan under de första sex veckornas
+  testdrift katalogiserade det över 11 000 tidigare okända asteroider. Starkt
+  astronomiuppslag (gravitation, ljusinsamling, stordata) men vi har redan
+  kört tung astronomi flera dagar i rad (Euclid-kvasarer 07-06, TESS-planeter
+  07-05) — spara till astronomiklustret svalnat, eller till en lugn dag.
+  Källor: https://www.cnn.com/2026/07/01/science/rubin-observatory-legacy-survey-space-and-time ,
+  https://news.stanford.edu/stories/2026/06/rubin-observatory-legacy-survey-space-time
+  (tillagd 2026-07-07)
+- **Supraledande diod med konstgjorda "pinning-centra" ger bättre kontroll
+  över strömriktningen** — forskare vill etsa in nanoskaliga isolerande
+  prickar i en supraledande kanal för att styra virvel-fästpunkter
+  asymmetriskt och göra dioden mer robust/deterministisk. Bra ellära/modern
+  fysik-vinkel (supraledning, likriktning) men ganska tekniskt
+  (virveltillstånd, flödespinning) — kräver en ordentlig pedagogisk
+  förenkling för gymnasienivå. Källa:
+  https://physicsworld.com/a/new-superconducting-diode-gives-greater-control-over-the-flow-of-electrons/
+  (tillagd 2026-07-07)
+- **Magnoner får hundra gånger längre livslängd — kvantdator i myntstorlek?**
+  — fortsättning på magnon-tråden vi redan sparat undan tidigare (se
+  2026-07-04-noteringen nedan); nu med en konkret siffra (100x längre
+  livslängd) som gör den mer konkret. Fortfarande bäst att vänta tills
+  magnon-/spinnvågsämnet inte känns upprepat. Källa: ScienceDaily (sök
+  "magnon quantum computer penny-sized 2026"). (tillagd 2026-07-07)
+- **Svarta hål kan sluta dunsta och lämna kvar mikroskopiska "rester" som
+  bevarar all information** — teoretiskt förslag kopplat till en
+  sjudimensionell geometri som eventuellt även förklarar varför
+  elementarpartiklar har massa. Spännande men mycket teoretiskt/spekulativt
+  (informationsparadoxen, extra dimensioner) — kräver försiktig, tydligt
+  markerad "teoretiskt förslag"-vinkling om den någonsin används. Källa:
+  ScienceDaily, kring 2026-06-24 (sök "black hole remnants information
+  paradox seven-dimensional"). (tillagd 2026-07-07)
+
 ## Fynd som inte användes (2026-07-06) — kan tas upp senare
 
 - **Största gravitationsvågskatalogen någonsin: 390 detektioner, 161 nya

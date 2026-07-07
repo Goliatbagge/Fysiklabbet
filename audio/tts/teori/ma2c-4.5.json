@@ -1,0 +1,298 @@
+{
+ "id": "ma2c-4.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ef33c678730afc82cc94ad3404c06ab0323d7b67",
+ "dur": 295.99,
+ "segments": [
+  {
+   "t": "Pythagoras sats",
+   "s": 0.1,
+   "e": 2.71
+  },
+  {
+   "t": "Om vi vet två sidor i en rätvinklig triangel kan vi ta reda på den tredje med Pythagoras sats.",
+   "s": 2.66,
+   "e": 8.99
+  },
+  {
+   "t": "Triangelns längsta sida (mitt emot den räta vinkeln) kallas hypotenusa och de två övriga sidorna kallas kateter.",
+   "s": 8.99,
+   "e": 16.89
+  },
+  {
+   "t": "Pythagoras sats",
+   "s": 16.89,
+   "e": 19.5
+  },
+  {
+   "t": "a i kvadrat plus b i kvadrat är lika med c i kvadrat",
+   "s": 19.5,
+   "e": 24.46
+  },
+  {
+   "t": "Summan av kvadraterna på de två kortare sidorna är lika med kvadraten på hypotenusan.",
+   "s": 24.46,
+   "e": 30.6
+  },
+  {
+   "t": "Härledning — Pythagoras sats",
+   "s": 30.6,
+   "e": 33.86
+  },
+  {
+   "t": "1.",
+   "s": 33.86,
+   "e": 40.59
+  },
+  {
+   "t": "Vi bildar en godtycklig rätvinklig triangel med kateterna a och b , och hypotenusan c .",
+   "s": 33.86,
+   "e": 40.59
+  },
+  {
+   "t": "2.",
+   "s": 40.59,
+   "e": 47.81
+  },
+  {
+   "t": "Vi bildar sedan fyra likadana sådana trianglar och betecknar vinklarna som inte är räta för alfa och beta .",
+   "s": 40.59,
+   "e": 47.81
+  },
+  {
+   "t": "För varje triangel gäller",
+   "s": 47.81,
+   "e": 50.5
+  },
+  {
+   "t": "90 grader plus alfa plus beta är lika med 180 grader (vinkelsumma i triangel)",
+   "s": 50.5,
+   "e": 57.41
+  },
+  {
+   "t": "Vi subtraherar 90 grader från varje led och får",
+   "s": 57.41,
+   "e": 61.73
+  },
+  {
+   "t": "alfa plus beta är lika med 90 grader",
+   "s": 61.73,
+   "e": 65.4
+  },
+  {
+   "t": "3.",
+   "s": 65.4,
+   "e": 76.49
+  },
+  {
+   "t": "Vi arrangerar trianglarna så att de bildar en stor kvadrat med sidan parentesen a plus b slut parentes , med en mindre fyrhörning med sidan c inskriven (se figuren).",
+   "s": 65.4,
+   "e": 76.49
+  },
+  {
+   "t": "I varje \"skarv\" längs den stora kvadratens sidor gäller",
+   "s": 76.49,
+   "e": 80.97
+  },
+  {
+   "t": "alfa plus beta plus mellanliggande vinkeln är lika med 180 grader (sidovinklar)",
+   "s": 80.97,
+   "e": 87.54
+  },
+  {
+   "t": "och eftersom alfa plus beta är lika med 90 grader måste den mellanliggande vinkeln vara 90 grader.",
+   "s": 87.54,
+   "e": 94.2
+  },
+  {
+   "t": "Den inskrivna fyrhörningen med sidan c är alltså en kvadrat.",
+   "s": 94.2,
+   "e": 98.9
+  },
+  {
+   "t": "4.",
+   "s": 98.9,
+   "e": 103.81
+  },
+  {
+   "t": "Vi tecknar arean för den stora kvadraten på två sätt.",
+   "s": 98.9,
+   "e": 103.81
+  },
+  {
+   "t": "Varje sida i den stora kvadraten är parentesen a plus b slut parentes så",
+   "s": 103.81,
+   "e": 109.92
+  },
+  {
+   "t": "Area är lika med parentesen a plus b slut parentes i kvadrat som är lika med a i kvadrat plus 2 a b plus b i kvadrat, ekvation 1",
+   "s": 109.92,
+   "e": 119.96
+  },
+  {
+   "t": "Vi kan även teckna arean av den stora kvadraten som den sammanlagda arean av de fyra trianglarna och den lilla inskrivna kvadraten.",
+   "s": 119.96,
+   "e": 127.99
+  },
+  {
+   "t": "Arean hos varje triangel är a b delat med 2 och arean hos den inskrivna kvadraten är c i kvadrat .",
+   "s": 127.99,
+   "e": 135.24
+  },
+  {
+   "t": "Detta ger",
+   "s": 135.24,
+   "e": 137.22
+  },
+  {
+   "t": "Area är lika med 4 gånger a b delat med 2 plus c i kvadrat som är lika med 2 a b plus c i kvadrat, ekvation 2",
+   "s": 137.22,
+   "e": 146.09
+  },
+  {
+   "t": "Vi har nu tecknat arean på den stora kvadraten på två olika sätt och dessa uttryck måste såklart vara lika stora, dvs. ekvation 1 är lika med ekvation 2.",
+   "s": 146.09,
+   "e": 156.26
+  },
+  {
+   "t": "Detta ger",
+   "s": 156.26,
+   "e": 158.28
+  },
+  {
+   "t": "a i kvadrat plus 2 a b plus b i kvadrat är lika med 2 a b plus c i kvadrat",
+   "s": 158.28,
+   "e": 165.19
+  },
+  {
+   "t": "Vi subtraherar 2 a b från båda led:",
+   "s": 165.19,
+   "e": 172.56
+  },
+  {
+   "t": "a i kvadrat plus b i kvadrat är lika med c i kvadrat",
+   "s": 165.19,
+   "e": 172.56
+  },
+  {
+   "t": "v.s.v.",
+   "s": 172.56,
+   "e": 174.78
+  },
+  {
+   "t": "Om triangeln är rätvinklig, så gäller a i kvadrat plus b i kvadrat är lika med c i kvadrat .",
+   "s": 174.78,
+   "e": 181.55
+  },
+  {
+   "t": "Men omvändningen gäller också, dvs. om a i kvadrat plus b i kvadrat är lika med c i kvadrat , så är triangeln rätvinklig.",
+   "s": 181.55,
+   "e": 190.04
+  },
+  {
+   "t": "Detta är alltså en ekvivalens, så",
+   "s": 190.04,
+   "e": 193.64
+  },
+  {
+   "t": "a i kvadrat plus b i kvadrat är lika med c i kvadrat vilket är ekvivalent med att Triangeln är rätvinklig",
+   "s": 193.64,
+   "e": 201.32
+  },
+  {
+   "t": "Exempel 1 — Bestäm sidan",
+   "s": 201.32,
+   "e": 204.41
+  },
+  {
+   "t": "Bestäm sidan x .",
+   "s": 204.41,
+   "e": 206.84
+  },
+  {
+   "t": "Sidan 15 centimeter är hypotenusa eftersom den är mitt emot den räta vinkeln.",
+   "s": 206.84,
+   "e": 212.78
+  },
+  {
+   "t": "Pythagoras sats ger",
+   "s": 212.78,
+   "e": 215.59
+  },
+  {
+   "t": "x i kvadrat plus 9 i kvadrat är lika med 15 i kvadrat",
+   "s": 215.59,
+   "e": 220.81
+  },
+  {
+   "t": "Vi beräknar och löser ut x :",
+   "s": 220.81,
+   "e": 227.32
+  },
+  {
+   "t": "x i kvadrat plus 81 är lika med 225",
+   "s": 220.81,
+   "e": 227.32
+  },
+  {
+   "t": "x i kvadrat är lika med 144",
+   "s": 227.32,
+   "e": 231.32
+  },
+  {
+   "t": "x är lika med plus minus roten ur 144 som är lika med plus minus 12",
+   "s": 231.32,
+   "e": 237.66
+  },
+  {
+   "t": "Sidan måste vara positiv, så vi bortser från den negativa lösningen, så x är lika med 12 centimeter.",
+   "s": 237.66,
+   "e": 244.84
+  },
+  {
+   "t": "Svar: 12 centimeter",
+   "s": 244.84,
+   "e": 247.9
+  },
+  {
+   "t": "Exempel 2 — Är triangeln rätvinklig?",
+   "s": 247.9,
+   "e": 251.38
+  },
+  {
+   "t": "Sidorna i en triangel är 8 centimeter, 15 centimeter och 20 centimeter.",
+   "s": 251.38,
+   "e": 257.65
+  },
+  {
+   "t": "Är triangeln rätvinklig?",
+   "s": 257.65,
+   "e": 260.35
+  },
+  {
+   "t": "Om triangeln är rätvinklig ska summan av kvadraterna hos de korta sidorna vara lika med kvadraten hos den längsta sidan.",
+   "s": 260.35,
+   "e": 267.93
+  },
+  {
+   "t": "a i kvadrat plus b i kvadrat är lika med 8 i kvadrat plus 15 i kvadrat som är lika med 64 plus 225 som är lika med 289",
+   "s": 267.93,
+   "e": 278.57
+  },
+  {
+   "t": "c i kvadrat är lika med 20 i kvadrat som är lika med 400",
+   "s": 278.57,
+   "e": 283.9
+  },
+  {
+   "t": "289 är inte lika med 400 , alltså gäller inte a i kvadrat plus b i kvadrat är lika med c i kvadrat och då är triangeln inte rätvinklig.",
+   "s": 283.9,
+   "e": 293.71
+  },
+  {
+   "t": "Svar: Nej",
+   "s": 293.71,
+   "e": 295.99
+  }
+ ]
+}

@@ -1,0 +1,183 @@
+{
+ "id": "ma2c-1.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "bf9d19d0145ff6bf8860791c2b58803c558afcc4",
+ "dur": 166.72,
+ "segments": [
+  {
+   "t": "Grafisk lösning av linjära ekvationssystem",
+   "s": 0.1,
+   "e": 4.03
+  },
+  {
+   "t": "När vi har flera ekvationer som ska ha gemensamma (likadana) lösningar, så bildar vi ett ekvationssystem.",
+   "s": 3.98,
+   "e": 11.6
+  },
+  {
+   "t": "När vi löser ekvationssystem med hjälp av dess grafer genomför vi en grafisk lösning.",
+   "s": 11.6,
+   "e": 17.4
+  },
+  {
+   "t": "Betrakta ekvationen",
+   "s": 17.4,
+   "e": 19.99
+  },
+  {
+   "t": "y är lika med 2 x minus 4",
+   "s": 19.99,
+   "e": 23.44
+  },
+  {
+   "t": "Den består av två olika variabler, x och y .",
+   "s": 23.44,
+   "e": 27.64
+  },
+  {
+   "t": "Den har flera (oändligt många) par av lösningar, t.ex.",
+   "s": 27.64,
+   "e": 33.84
+  },
+  {
+   "t": "och så vidare.",
+   "s": 27.64,
+   "e": 33.84
+  },
+  {
+   "t": "För varje värde vi sätter in på x , så får vi ett bestämt värde på y .",
+   "s": 33.84,
+   "e": 38.92
+  },
+  {
+   "t": "Detsamma gäller för ekvationen y är lika med minus x plus 5 .",
+   "s": 38.92,
+   "e": 43.98
+  },
+  {
+   "t": "Den har på motsvarande sätt också oändligt antal lösningar.",
+   "s": 43.98,
+   "e": 48.54
+  },
+  {
+   "t": "Om vi vill hitta en gemensam lösning till båda ekvationer bildar vi ett ekvationssystem, vilket markeras med en krullparentes enligt",
+   "s": 48.54,
+   "e": 56.9
+  },
+  {
+   "t": "y är lika med 2 x minus 4 y som är lika med minus x plus 5",
+   "s": 56.9,
+   "e": 62.45
+  },
+  {
+   "t": "Lösa ett ekvationssystem grafiskt",
+   "s": 62.45,
+   "e": 66.03
+  },
+  {
+   "t": "Rita upp ekvationernas grafer genom att skriva in dem i Geogebra.",
+   "s": 66.03,
+   "e": 71.11
+  },
+  {
+   "t": "Ta fram eventuella skärningspunkters koordinater.",
+   "s": 71.11,
+   "e": 75.11
+  },
+  {
+   "t": "x -koordinaten är lösningen till x och y -koordinaten är lösningen till y .",
+   "s": 75.11,
+   "e": 80.91
+  },
+  {
+   "t": "Exempel 1 — Lös ett ekvationssystem grafiskt",
+   "s": 80.91,
+   "e": 85.31
+  },
+  {
+   "t": "Lös nedanstående ekvationssystem grafiskt.",
+   "s": 85.31,
+   "e": 89.45
+  },
+  {
+   "t": "y är lika med 2 x minus 4 y som är lika med minus x plus 5",
+   "s": 89.45,
+   "e": 95.03
+  },
+  {
+   "t": "Vi ritar upp y är lika med 2 x minus 4 och y är lika med minus x plus 5 i Geogebra och tar fram skärningspunktens koordinater.",
+   "s": 95.03,
+   "e": 103.69
+  },
+  {
+   "t": "Skärningspunktens koordinater är (3, 2), vilket ger lösningen.",
+   "s": 103.69,
+   "e": 109.51
+  },
+  {
+   "t": "Svar:",
+   "s": 109.51,
+   "e": 113.91
+  },
+  {
+   "t": "x är lika med 3 y som är lika med 2",
+   "s": 109.51,
+   "e": 113.91
+  },
+  {
+   "t": "Antalet lösningar till ett ekvationssystem",
+   "s": 113.91,
+   "e": 117.53
+  },
+  {
+   "t": "Antalet lösningar till ett linjärt ekvationssystem beror på linjernas k - och m -värden, enligt nedanstående:",
+   "s": 117.53,
+   "e": 129.22
+  },
+  {
+   "t": "Exempel 2 — Bestäm k och m",
+   "s": 117.53,
+   "e": 129.22
+  },
+  {
+   "t": "Bestäm k och m så att ekvationssystemet",
+   "s": 117.53,
+   "e": 129.22
+  },
+  {
+   "t": "y är lika med k x plus m y som är lika med 2 x plus 5",
+   "s": 129.22,
+   "e": 134.46
+  },
+  {
+   "t": "saknar lösningar.",
+   "s": 134.46,
+   "e": 137.07
+  },
+  {
+   "t": "För att ekvationssystemet ska sakna lösning krävs att linjerna har samma k -värde, men olika m -värden.",
+   "s": 137.07,
+   "e": 144.24
+  },
+  {
+   "t": "För den undre ekvationen gäller k är lika med 2 och m är lika med 5 .",
+   "s": 144.24,
+   "e": 149.45
+  },
+  {
+   "t": "Den övre ekvationen måste alltså ha samma k -värde, så k är lika med 2 .",
+   "s": 149.45,
+   "e": 155.15
+  },
+  {
+   "t": "m -värdena ska vara olika, så m kan vara vad som helst utom 5, dvs. m är inte lika med 5 .",
+   "s": 155.15,
+   "e": 162.28
+  },
+  {
+   "t": "Svar: k är lika med 2 och m är inte lika med 5",
+   "s": 162.28,
+   "e": 166.72
+  }
+ ]
+}

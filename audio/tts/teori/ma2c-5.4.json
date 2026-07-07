@@ -1,0 +1,428 @@
+{
+ "id": "ma2c-5.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "47666397bea483ce9ea7f2f1979302f594f6c2a9",
+ "dur": 434.25,
+ "segments": [
+  {
+   "t": "Logaritmlagarna",
+   "s": 0.1,
+   "e": 2.5
+  },
+  {
+   "t": "Räknereglerna för logaritmer kallas logaritmlagarna.",
+   "s": 2.45,
+   "e": 6.94
+  },
+  {
+   "t": "Logaritmlagarna",
+   "s": 6.94,
+   "e": 9.3
+  },
+  {
+   "t": "Första logaritmlagen:",
+   "s": 9.3,
+   "e": 16.8
+  },
+  {
+   "t": "logaritmen av x plus logaritmen av y är lika med logaritmen av x y",
+   "s": 9.3,
+   "e": 16.8
+  },
+  {
+   "t": "Andra logaritmlagen:",
+   "s": 16.8,
+   "e": 24.81
+  },
+  {
+   "t": "logaritmen av x minus logaritmen av y är lika med logaritmen av x delat med y",
+   "s": 16.8,
+   "e": 24.81
+  },
+  {
+   "t": "Tredje logaritmlagen:",
+   "s": 24.81,
+   "e": 32.0
+  },
+  {
+   "t": "logaritmen av x upphöjt till p är lika med p gånger logaritmen av x",
+   "s": 24.81,
+   "e": 32.0
+  },
+  {
+   "t": "där x är större än 0 och y är större än 0 .",
+   "s": 32.0,
+   "e": 36.02
+  },
+  {
+   "t": "Bevis — Första logaritmlagen",
+   "s": 36.02,
+   "e": 39.25
+  },
+  {
+   "t": "Vi skriver multiplikationen x gånger y på två sätt.",
+   "s": 39.25,
+   "e": 43.83
+  },
+  {
+   "t": "Sätt 1:",
+   "s": 43.83,
+   "e": 61.52
+  },
+  {
+   "t": "x gånger y är lika med 10 upphöjt till logaritmen av x gånger 10 upphöjt till logaritmen av y som är lika med 10 upphöjt till logaritmen av x plus logaritmen av y",
+   "s": 43.83,
+   "e": 61.52
+  },
+  {
+   "t": "Sätt 2:",
+   "s": 43.83,
+   "e": 61.52
+  },
+  {
+   "t": "x gånger y är lika med 10 upphöjt till logaritmen av parentesen x gånger y slut parentes",
+   "s": 43.83,
+   "e": 61.52
+  },
+  {
+   "t": "Eftersom dessa motsvarar samma sak, måste de vara lika, så",
+   "s": 61.52,
+   "e": 66.54
+  },
+  {
+   "t": "10 upphöjt till logaritmen av x plus logaritmen av y är lika med 10 upphöjt till logaritmen av parentesen x gånger y slut parentes",
+   "s": 66.54,
+   "e": 76.3
+  },
+  {
+   "t": "Eftersom vi har en likhet med samma bas, måste exponenterna vara lika, så",
+   "s": 76.3,
+   "e": 82.14
+  },
+  {
+   "t": "logaritmen av x plus logaritmen av y är lika med logaritmen av x y",
+   "s": 82.14,
+   "e": 90.56
+  },
+  {
+   "t": "v.s.v.",
+   "s": 82.14,
+   "e": 90.56
+  },
+  {
+   "t": "Bevis — Andra logaritmlagen",
+   "s": 82.14,
+   "e": 90.56
+  },
+  {
+   "t": "Vi skriver divisionen x delat med y på två sätt.",
+   "s": 90.56,
+   "e": 94.96
+  },
+  {
+   "t": "Sätt 1:",
+   "s": 94.96,
+   "e": 111.76
+  },
+  {
+   "t": "x delat med y är lika med 10 upphöjt till logaritmen av x delat med 10 upphöjt till logaritmen av y som är lika med 10 upphöjt till logaritmen av x minus logaritmen av y",
+   "s": 94.96,
+   "e": 111.76
+  },
+  {
+   "t": "Sätt 2:",
+   "s": 94.96,
+   "e": 111.76
+  },
+  {
+   "t": "x delat med y är lika med 10 upphöjt till logaritmen av x delat med y",
+   "s": 94.96,
+   "e": 111.76
+  },
+  {
+   "t": "Eftersom dessa motsvarar samma sak, måste de vara lika, och eftersom vi har en likhet med samma bas, måste exponenterna vara lika, så",
+   "s": 111.76,
+   "e": 120.9
+  },
+  {
+   "t": "logaritmen av x minus logaritmen av y är lika med logaritmen av x delat med y",
+   "s": 120.9,
+   "e": 129.78
+  },
+  {
+   "t": "v.s.v.",
+   "s": 120.9,
+   "e": 129.78
+  },
+  {
+   "t": "Bevis — Tredje logaritmlagen",
+   "s": 120.9,
+   "e": 129.78
+  },
+  {
+   "t": "Vi skriver x upphöjt till p på två olika sätt.",
+   "s": 129.78,
+   "e": 134.14
+  },
+  {
+   "t": "Sätt 1:",
+   "s": 134.14,
+   "e": 150.38
+  },
+  {
+   "t": "x upphöjt till p är lika med parentesen 10 upphöjt till logaritmen av x slut parentes upphöjt till p som är lika med 10 upphöjt till p gånger logaritmen av x",
+   "s": 134.14,
+   "e": 150.38
+  },
+  {
+   "t": "Sätt 2:",
+   "s": 134.14,
+   "e": 150.38
+  },
+  {
+   "t": "x upphöjt till p är lika med 10 upphöjt till logaritmen av x upphöjt till p",
+   "s": 134.14,
+   "e": 150.38
+  },
+  {
+   "t": "Eftersom dessa motsvarar samma sak, måste de vara lika, och eftersom vi har en likhet med samma bas, måste exponenterna vara lika, så",
+   "s": 150.38,
+   "e": 159.51
+  },
+  {
+   "t": "p gånger logaritmen av x är lika med logaritmen av x upphöjt till p",
+   "s": 159.51,
+   "e": 166.04
+  },
+  {
+   "t": "v.s.v.",
+   "s": 159.51,
+   "e": 166.04
+  },
+  {
+   "t": "Med den tredje logaritmlagen kan vi lösa exponentialekvationer på ytterligare ett sätt.",
+   "s": 166.04,
+   "e": 172.14
+  },
+  {
+   "t": "Lösa exponentialekvationer med tredje logaritmlagen",
+   "s": 172.14,
+   "e": 176.76
+  },
+  {
+   "t": "Logaritmera båda led i ekvationen (sätt lg framför båda uttrycken).",
+   "s": 176.76,
+   "e": 182.51
+  },
+  {
+   "t": "Multiplicera ner exponenten, enligt tredje logaritmlagen, och lös sedan som vanligt.",
+   "s": 182.51,
+   "e": 189.04
+  },
+  {
+   "t": "Vi kan nu även stöta på logaritmekvationer med flera logaritmtermer.",
+   "s": 189.04,
+   "e": 194.36
+  },
+  {
+   "t": "Lösa logaritmekvationer med flera logaritmtermer",
+   "s": 194.36,
+   "e": 198.64
+  },
+  {
+   "t": "Skriv om båda led som en enda logaritm med hjälp av logaritmlagarna.",
+   "s": 198.64,
+   "e": 203.74
+  },
+  {
+   "t": "Logaritmfunktionen kan därefter strykas och vi löser ekvationen som vanligt.",
+   "s": 203.74,
+   "e": 209.28
+  },
+  {
+   "t": "Exempel 1 — Beräkna utan räknare",
+   "s": 209.28,
+   "e": 212.95
+  },
+  {
+   "t": "Beräkna utan räknare. a) logaritmen av 25 plus logaritmen av 4 b) logaritmen av 3 000 minus logaritmen av 3",
+   "s": 212.95,
+   "e": 223.9
+  },
+  {
+   "t": "a) Vi utnyttjar första logaritmlagen och får",
+   "s": 223.9,
+   "e": 228.21
+  },
+  {
+   "t": "logaritmen av 25 plus logaritmen av 4 är lika med logaritmen av parentesen 25 gånger 4 slut parentes som är lika med logaritmen av 100 som är lika med 2",
+   "s": 228.21,
+   "e": 239.79
+  },
+  {
+   "t": "Svar: 2",
+   "s": 239.79,
+   "e": 245.19
+  },
+  {
+   "t": "b) Vi utnyttjar andra logaritmlagen och får",
+   "s": 239.79,
+   "e": 245.19
+  },
+  {
+   "t": "logaritmen av 3 000 minus logaritmen av 3 är lika med logaritmen av 3 000 delat med 3 som är lika med logaritmen av 1 000 som är lika med 3",
+   "s": 245.19,
+   "e": 255.28
+  },
+  {
+   "t": "Svar: 3",
+   "s": 255.28,
+   "e": 260.43
+  },
+  {
+   "t": "Exempel 2 — Lös med tredje logaritmlagen",
+   "s": 255.28,
+   "e": 260.43
+  },
+  {
+   "t": "Lös ekvationerna med tredje logaritmlagen.. a) 5 upphöjt till x är lika med 136 b) 4 gånger 5 upphöjt till x är lika med 3 gånger 2 upphöjt till x",
+   "s": 260.43,
+   "e": 279.86
+  },
+  {
+   "t": "a) Vi logaritmerar båda led:",
+   "s": 264.48,
+   "e": 279.86
+  },
+  {
+   "t": "logaritmen av 5 upphöjt till x är lika med logaritmen av 136",
+   "s": 264.48,
+   "e": 279.86
+  },
+  {
+   "t": "Vi multiplicerar ner exponenten och löser sedan ekvationen som vanligt:",
+   "s": 279.86,
+   "e": 289.6
+  },
+  {
+   "t": "x gånger logaritmen av 5 är lika med logaritmen av 136",
+   "s": 279.86,
+   "e": 289.6
+  },
+  {
+   "t": "x är lika med logaritmen av 136 delat med logaritmen av 5 som är ungefär lika med 3,05",
+   "s": 289.6,
+   "e": 297.57
+  },
+  {
+   "t": "Svar: x är lika med logaritmen av 136 delat med logaritmen av 5 som är ungefär lika med 3,05",
+   "s": 297.57,
+   "e": 306.38
+  },
+  {
+   "t": "b) Vi samlar faktorerna med exponenter på samma sida för att därefter skriva om dem med en enda exponent.",
+   "s": 306.38,
+   "e": 315.41
+  },
+  {
+   "t": "Därefter logaritmerar vi och löser med tredje logaritmlagen.",
+   "s": 315.36,
+   "e": 320.25
+  },
+  {
+   "t": "5 upphöjt till x delat med 2 upphöjt till x är lika med 3 delat med 4",
+   "s": 320.25,
+   "e": 326.16
+  },
+  {
+   "t": "parentesen 5 delat med 2 slut parentes upphöjt till x är lika med 3 delat med 4",
+   "s": 326.16,
+   "e": 332.71
+  },
+  {
+   "t": "Vi logaritmerar båda led:",
+   "s": 332.71,
+   "e": 344.35
+  },
+  {
+   "t": "logaritmen av parentesen 5 delat med 2 slut parentes upphöjt till x är lika med logaritmen av parentesen 3 delat med 4 slut parentes",
+   "s": 332.71,
+   "e": 344.35
+  },
+  {
+   "t": "x gånger logaritmen av parentesen 5 delat med 2 slut parentes är lika med logaritmen av parentesen 3 delat med 4 slut parentes",
+   "s": 344.35,
+   "e": 353.94
+  },
+  {
+   "t": "x är lika med logaritmen av parentesen 3 delat med 4 slut parentes delat med logaritmen av parentesen 5 delat med 2 slut parentes som är ungefär lika med minus 0,31",
+   "s": 353.94,
+   "e": 366.41
+  },
+  {
+   "t": "Svar: x är lika med logaritmen av parentesen 3 delat med 4 slut parentes delat med logaritmen av parentesen 5 delat med 2 slut parentes som är ungefär lika med minus 0,31",
+   "s": 366.41,
+   "e": 379.59
+  },
+  {
+   "t": "Exempel 3 — Flera logaritmtermer",
+   "s": 379.59,
+   "e": 383.19
+  },
+  {
+   "t": "Lös ekvationen 2 logaritmen av 5 plus logaritmen av 4 är lika med logaritmen av 2 x .",
+   "s": 383.19,
+   "e": 390.35
+  },
+  {
+   "t": "Vi börjar med att skriva om den första termen i VL med tredje logaritmlagen:",
+   "s": 390.35,
+   "e": 405.75
+  },
+  {
+   "t": "logaritmen av 5 i kvadrat plus logaritmen av 4 är lika med logaritmen av 2 x",
+   "s": 390.35,
+   "e": 405.75
+  },
+  {
+   "t": "logaritmen av 25 plus logaritmen av 4 är lika med logaritmen av 2 x",
+   "s": 390.35,
+   "e": 405.75
+  },
+  {
+   "t": "Vi skriver sedan om hela VL med första logaritmlagen:",
+   "s": 405.75,
+   "e": 419.38
+  },
+  {
+   "t": "logaritmen av parentesen 25 gånger 4 slut parentes är lika med logaritmen av 2 x",
+   "s": 405.75,
+   "e": 419.38
+  },
+  {
+   "t": "logaritmen av 100 är lika med logaritmen av 2 x",
+   "s": 405.75,
+   "e": 419.38
+  },
+  {
+   "t": "Vi har nu en enda logaritm i båda led och kan ta bort logaritmfunktionen från båda sidor och sedan lösa ekvationen som vanligt:",
+   "s": 419.38,
+   "e": 430.76
+  },
+  {
+   "t": "100 är lika med 2 x",
+   "s": 419.38,
+   "e": 430.76
+  },
+  {
+   "t": "x är lika med 50",
+   "s": 419.38,
+   "e": 430.76
+  },
+  {
+   "t": "Svar: x är lika med 50",
+   "s": 430.76,
+   "e": 434.25
+  }
+ ]
+}

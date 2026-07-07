@@ -1,0 +1,238 @@
+{
+ "id": "ma2c-4.12",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "64c9b3de880498111794fec76536f976c8236a49",
+ "dur": 212.24,
+ "segments": [
+  {
+   "t": "Kordasatsen och inskrivna fyrhörningar",
+   "s": 0.1,
+   "e": 3.77
+  },
+  {
+   "t": "En sträcka mellan två punkter på en cirkels rand kallas korda.",
+   "s": 3.73,
+   "e": 8.31
+  },
+  {
+   "t": "Kordasatsen",
+   "s": 8.31,
+   "e": 10.35
+  },
+  {
+   "t": "Om två kordor skär varandra är produkten av den ena kordans delsträckor lika med produkten av den andra kordans delsträckor.",
+   "s": 10.35,
+   "e": 18.27
+  },
+  {
+   "t": "a gånger b är lika med c gånger d",
+   "s": 18.27,
+   "e": 22.1
+  },
+  {
+   "t": "Bevis — Kordasatsen",
+   "s": 22.1,
+   "e": 24.77
+  },
+  {
+   "t": "Vi ritar två godtyckliga korsande kordor A C och B D som skär varandra i punkten E , och ritar två hjälpsträckor A D och B C enligt figuren nedan.",
+   "s": 24.77,
+   "e": 35.73
+  },
+  {
+   "t": "Vi jämför trianglarna A D E och B C E :",
+   "s": 35.73,
+   "e": 46.11
+  },
+  {
+   "t": "vinkeln A D B är lika med vinkeln A C B (randvinklar på samma båge)",
+   "s": 35.73,
+   "e": 46.11
+  },
+  {
+   "t": "vinkeln D A C är lika med vinkeln D B C (randvinklar på samma båge)",
+   "s": 46.11,
+   "e": 53.61
+  },
+  {
+   "t": "vinkeln A E D är lika med vinkeln B E C (vertikalvinklar)",
+   "s": 53.61,
+   "e": 60.15
+  },
+  {
+   "t": "Trianglarnas vinklar är lika vilket ger att triangeln A D E är likformig med triangeln B C E (likformiga).",
+   "s": 60.15,
+   "e": 68.84
+  },
+  {
+   "t": "Vi ställer upp sidförhållandena, med a är lika med A E , b är lika med E C , c är lika med D E och d är lika med E B :",
+   "s": 68.84,
+   "e": 83.08
+  },
+  {
+   "t": "a delat med d är lika med c delat med b",
+   "s": 68.84,
+   "e": 83.08
+  },
+  {
+   "t": "Korsvis multiplikation ger",
+   "s": 68.84,
+   "e": 83.08
+  },
+  {
+   "t": "a gånger b är lika med c gånger d",
+   "s": 83.08,
+   "e": 86.99
+  },
+  {
+   "t": "v.s.b.",
+   "s": 86.99,
+   "e": 89.22
+  },
+  {
+   "t": "En fyrhörning med samtliga hörn på en cirkels rand kallas inskriven fyrhörning.",
+   "s": 89.22,
+   "e": 94.78
+  },
+  {
+   "t": "Motstående vinklar i inskriven fyrhörning",
+   "s": 94.78,
+   "e": 98.56
+  },
+  {
+   "t": "Summan av motstående vinklar i en inskriven fyrhörning är 180 grader.",
+   "s": 98.56,
+   "e": 104.38
+  },
+  {
+   "t": "u plus v är lika med 180 grader",
+   "s": 104.38,
+   "e": 108.17
+  },
+  {
+   "t": "x plus y är lika med 180 grader",
+   "s": 108.17,
+   "e": 112.09
+  },
+  {
+   "t": "Bevis — Motstående vinklar i inskriven fyrhörning",
+   "s": 112.09,
+   "e": 116.42
+  },
+  {
+   "t": "Vi ritar en godtycklig inskriven fyrhörning.",
+   "s": 116.42,
+   "e": 120.41
+  },
+  {
+   "t": "Vi kallar två motstående hörn för u och v och vill visa att u plus v är lika med 180 grader .",
+   "s": 120.41,
+   "e": 127.25
+  },
+  {
+   "t": "Vi drar två hjälpsträckor från två motstående hörn till cirkelns medelpunkt enligt figuren nedan.",
+   "s": 127.25,
+   "e": 133.84
+  },
+  {
+   "t": "Enligt randvinkelsatsen är medelpunktsvinklarna då 2 u respektive 2 v .",
+   "s": 133.84,
+   "e": 139.79
+  },
+  {
+   "t": "Då gäller",
+   "s": 139.79,
+   "e": 141.76
+  },
+  {
+   "t": "2 u plus 2 v är lika med 360 grader (ett varv)",
+   "s": 141.76,
+   "e": 147.34
+  },
+  {
+   "t": "Vi dividerar båda led med 2 och får",
+   "s": 147.34,
+   "e": 151.03
+  },
+  {
+   "t": "u plus v är lika med 180 grader",
+   "s": 151.03,
+   "e": 154.81
+  },
+  {
+   "t": "v.s.b.",
+   "s": 154.81,
+   "e": 158.76
+  },
+  {
+   "t": "Exempel 1 — Kordasatsen",
+   "s": 154.81,
+   "e": 158.76
+  },
+  {
+   "t": "Bestäm längden av sidan markerad x .",
+   "s": 158.76,
+   "e": 162.39
+  },
+  {
+   "t": "Kordasatsen ger",
+   "s": 162.39,
+   "e": 164.81
+  },
+  {
+   "t": "10 x är lika med 18 gånger 20",
+   "s": 164.81,
+   "e": 168.49
+  },
+  {
+   "t": "Vi förenklar och löser ut x :",
+   "s": 168.49,
+   "e": 174.2
+  },
+  {
+   "t": "10 x är lika med 360",
+   "s": 168.49,
+   "e": 174.2
+  },
+  {
+   "t": "x är lika med 360 delat med 10 som är lika med 36",
+   "s": 174.2,
+   "e": 179.86
+  },
+  {
+   "t": "Svar: 36 millimeter",
+   "s": 179.86,
+   "e": 183.15
+  },
+  {
+   "t": "Exempel 2 — Inskriven fyrhörning",
+   "s": 183.15,
+   "e": 186.75
+  },
+  {
+   "t": "Bestäm vinkeln x .",
+   "s": 186.75,
+   "e": 189.24
+  },
+  {
+   "t": "Motstående vinklar i en inskriven fyrhörning är tillsammans 180 grader:",
+   "s": 189.24,
+   "e": 201.16
+  },
+  {
+   "t": "x plus 115 grader är lika med 180 grader (motstående vinklar i inskriven fyrhörning)",
+   "s": 189.24,
+   "e": 201.16
+  },
+  {
+   "t": "x är lika med 180 grader minus 115 grader som är lika med 65 grader",
+   "s": 201.16,
+   "e": 208.14
+  },
+  {
+   "t": "Svar: x är lika med 65 grader",
+   "s": 208.14,
+   "e": 212.24
+  }
+ ]
+}

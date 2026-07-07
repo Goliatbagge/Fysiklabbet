@@ -1,0 +1,233 @@
+{
+ "id": "ma2c-1.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ad26672b77a532c3dcf5cc2417e5d9bfd5c639f9",
+ "dur": 186.76,
+ "segments": [
+  {
+   "t": "Problemlösning med ekvationssystem",
+   "s": 0.1,
+   "e": 3.51
+  },
+  {
+   "t": "Problem där vi har mer än en okänd variabel kan ofta lösas med ekvationssystem.",
+   "s": 3.46,
+   "e": 9.07
+  },
+  {
+   "t": "Problemlösning med ekvationssystem",
+   "s": 9.07,
+   "e": 12.44
+  },
+  {
+   "t": "Definiera införda variabler.",
+   "s": 12.44,
+   "e": 15.53
+  },
+  {
+   "t": "Sätt upp ett ekvationssystem och lös det.",
+   "s": 15.53,
+   "e": 19.02
+  },
+  {
+   "t": "Tolka och svara.",
+   "s": 19.02,
+   "e": 21.3
+  },
+  {
+   "t": "Exempel 1 — Kor och höns",
+   "s": 21.3,
+   "e": 24.43
+  },
+  {
+   "t": "En bonde har kor och höns.",
+   "s": 24.43,
+   "e": 27.34
+  },
+  {
+   "t": "Totalt har djuren 100 huvuden och 352 ben.",
+   "s": 27.34,
+   "e": 32.1
+  },
+  {
+   "t": "Hur många kor respektive höns har bonden?",
+   "s": 32.1,
+   "e": 35.88
+  },
+  {
+   "t": "Vi börjar med att definiera våra variabler:",
+   "s": 35.88,
+   "e": 41.12
+  },
+  {
+   "t": "k är lika med antalet kor",
+   "s": 35.88,
+   "e": 41.12
+  },
+  {
+   "t": "h är lika med antalet höns",
+   "s": 41.12,
+   "e": 44.08
+  },
+  {
+   "t": "Om vi antar att varje djur har 1 huvud, varje ko 4 ben och varje höna 2 ben ger det",
+   "s": 44.08,
+   "e": 50.23
+  },
+  {
+   "t": "k plus h är lika med 100, ekvation 1 4 k plus 2 timmar som är lika med 352, ekvation 2",
+   "s": 50.23,
+   "e": 58.7
+  },
+  {
+   "t": "Vi löser ut t.ex. h från ekvation ekvation 1 och använder oss av substitutionsmetoden:",
+   "s": 58.7,
+   "e": 68.46
+  },
+  {
+   "t": "h är lika med 100 minus k, ekvation 3",
+   "s": 58.7,
+   "e": 68.46
+  },
+  {
+   "t": "Insättning av h är lika med 100 minus k i ekvation ekvation 2 ger",
+   "s": 68.46,
+   "e": 74.59
+  },
+  {
+   "t": "4 k plus 2 parentesen 100 minus k slut parentes är lika med 352",
+   "s": 74.59,
+   "e": 81.61
+  },
+  {
+   "t": "4 k plus 200 minus 2 k är lika med 352",
+   "s": 81.61,
+   "e": 87.08
+  },
+  {
+   "t": "2 k plus 200 är lika med 352",
+   "s": 87.08,
+   "e": 91.66
+  },
+  {
+   "t": "Vi subtraherar 200 från båda led och dividerar sedan med 2:",
+   "s": 91.66,
+   "e": 99.12
+  },
+  {
+   "t": "2 k är lika med 152",
+   "s": 91.66,
+   "e": 99.12
+  },
+  {
+   "t": "k är lika med 76",
+   "s": 99.12,
+   "e": 101.95
+  },
+  {
+   "t": "k är lika med 76 i ekvation ekvation 3 ger",
+   "s": 101.95,
+   "e": 106.65
+  },
+  {
+   "t": "h är lika med 100 minus 76 som är lika med 24",
+   "s": 106.65,
+   "e": 111.64
+  },
+  {
+   "t": "så ekvationssystemet har lösningen",
+   "s": 111.64,
+   "e": 115.19
+  },
+  {
+   "t": "k är lika med 76 timmar som är lika med 24",
+   "s": 115.19,
+   "e": 119.58
+  },
+  {
+   "t": "Svar: Bonden har 76 kor och 24 höns.",
+   "s": 119.58,
+   "e": 124.17
+  },
+  {
+   "t": "Exempel 2 — Summa och differens",
+   "s": 124.17,
+   "e": 127.72
+  },
+  {
+   "t": "Två tal har summan 19 och differensen 5.",
+   "s": 127.72,
+   "e": 131.65
+  },
+  {
+   "t": "Vilka är talen?",
+   "s": 131.65,
+   "e": 133.99
+  },
+  {
+   "t": "Vi kallar det största talet x och det minsta talet y .",
+   "s": 133.99,
+   "e": 138.11
+  },
+  {
+   "t": "Då gäller",
+   "s": 138.11,
+   "e": 140.04
+  },
+  {
+   "t": "x plus y är lika med 19, ekvation 1 x minus y som är lika med 5, ekvation 2",
+   "s": 140.04,
+   "e": 147.1
+  },
+  {
+   "t": "Vi använder additionsmetoden.",
+   "s": 147.1,
+   "e": 150.26
+  },
+  {
+   "t": "x plus y är lika med 19 plus x minus y som är lika med 5 hline 2 x som är lika med 24",
+   "s": 150.26,
+   "e": 157.65
+  },
+  {
+   "t": "Division med 2 i båda led ger",
+   "s": 157.65,
+   "e": 160.94
+  },
+  {
+   "t": "x är lika med 12",
+   "s": 160.94,
+   "e": 163.43
+  },
+  {
+   "t": "Insättning av x är lika med 12 i t.ex. ekvation 1 ger",
+   "s": 163.43,
+   "e": 168.6
+  },
+  {
+   "t": "12 plus y är lika med 19",
+   "s": 168.6,
+   "e": 171.95
+  },
+  {
+   "t": "y är lika med 19 minus 12 som är lika med 7",
+   "s": 171.95,
+   "e": 176.11
+  },
+  {
+   "t": "Så ekvationssystemet har lösningen",
+   "s": 176.11,
+   "e": 179.69
+  },
+  {
+   "t": "x är lika med 12 y som är lika med 7",
+   "s": 179.69,
+   "e": 183.41
+  },
+  {
+   "t": "Svar: Talen är 12 och 7.",
+   "s": 183.41,
+   "e": 186.76
+  }
+ ]
+}

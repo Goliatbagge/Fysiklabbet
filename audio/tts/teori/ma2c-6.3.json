@@ -1,0 +1,188 @@
+{
+ "id": "ma2c-6.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0478046c9cf2337fa92b229c0d55c184f440b9d9",
+ "dur": 235.96,
+ "segments": [
+  {
+   "t": "Statistik med digitala verktyg",
+   "s": 0.1,
+   "e": 3.34
+  },
+  {
+   "t": "Vid stora mängder data underlättar det att beräkna statistiska mått med digitala hjälpmedel.",
+   "s": 3.29,
+   "e": 9.11
+  },
+  {
+   "t": "För att ta fram statistiska mått så skriver vi in våra värden i en kolumn i Geogebras kalkylblad.",
+   "s": 9.11,
+   "e": 15.69
+  },
+  {
+   "t": "Därefter markerar vi värdena, klickar på menyn \"blå staplar\", väljer Envariabelanalys och sedan knappen \"Visa statistik\".",
+   "s": 15.69,
+   "e": 24.34
+  },
+  {
+   "t": "Användbara statistiska värden i Geogebra",
+   "s": 24.34,
+   "e": 28.15
+  },
+  {
+   "t": "Med Geogebra kan vi även bestämma percentiler och rita lådagram, se exemplet nedan.",
+   "s": 28.15,
+   "e": 34.31
+  },
+  {
+   "t": "Exempel 1 — Släktmiddagen i Geogebra",
+   "s": 34.31,
+   "e": 38.12
+  },
+  {
+   "t": "På en släktmiddag är åldrarna 1, 3, 4, 8, 15, 27, 30, 33, 36, 41, 42, 44, 46, 72 och 72 år.",
+   "s": 38.12,
+   "e": 53.29
+  },
+  {
+   "t": "Använd ett digitalt verktyg för att. a) bestämma minsta värdet, nedre kvartil, median, övre kvartil och största värdet b) avgöra hur gammal man ska vara för att tillhöra de 10 procent äldsta c) rita ett lådagram över åldrarna",
+   "s": 53.29,
+   "e": 69.65
+  },
+  {
+   "t": "a) Vi startar Geogebra, klickar på knappen \"Växla till kalkylblad\" i den översta menyraden och skriver in värdena i den vänstra kolumnen.",
+   "s": 69.65,
+   "e": 78.53
+  },
+  {
+   "t": "Vi markerar värdena, klickar på menyn \"blå staplar\" och väljer Envariabelanalys.",
+   "s": 78.53,
+   "e": 84.62
+  },
+  {
+   "t": "Vi klickar på knappen \"Visa statistik\" och läser av de efterfrågade värdena.",
+   "s": 84.62,
+   "e": 90.09
+  },
+  {
+   "t": "Svar: Minsta värde är lika med 1, nedre kvartil är lika med 8, median är lika med 33, övre kvartil är lika med 44 och största värde är lika med 72.",
+   "s": 90.09,
+   "e": 101.41
+  },
+  {
+   "t": "b) För att tillhöra de 10 procent äldsta ska man ligga över den 90:e percentilen, p nio noll (90 procent ska ha en lägre ålder).",
+   "s": 101.41,
+   "e": 110.75
+  },
+  {
+   "t": "Markera alla värden i kalkylbladet och klicka på \"Skapa lista\".",
+   "s": 110.75,
+   "e": 115.54
+  },
+  {
+   "t": "Standardnamnet är l1, men du kan ge listan ett eget namn.",
+   "s": 115.54,
+   "e": 120.59
+  },
+  {
+   "t": "Välj sedan OK.",
+   "s": 120.59,
+   "e": 123.2
+  },
+  {
+   "t": "Växla sedan tillbaka till standardläge i den övre menyraden.",
+   "s": 123.2,
+   "e": 127.94
+  },
+  {
+   "t": "Skriv \"perc\" i inmatningsfältet och klicka på \"Percentil( , )\".",
+   "s": 127.94,
+   "e": 132.66
+  },
+  {
+   "t": "Skriv därefter \"l1\" eller det namn du själv gett listan.",
+   "s": 132.66,
+   "e": 137.04
+  },
+  {
+   "t": "Stega ett steg åt höger med piltangenterna och skriv \"90 procent\" (eller \"0.9\") för att få svaret.",
+   "s": 137.04,
+   "e": 144.22
+  },
+  {
+   "t": "Geogebra svarar 72.",
+   "s": 144.22,
+   "e": 147.26
+  },
+  {
+   "t": "Svar: 72 år",
+   "s": 147.26,
+   "e": 150.11
+  },
+  {
+   "t": "c) Vi ska nu rita ett lådagram.",
+   "s": 150.11,
+   "e": 153.71
+  },
+  {
+   "t": "Markera alla värden i kalkylbladet, klicka på menyn \"blå staplar\" och välj Envariabelanalys.",
+   "s": 153.71,
+   "e": 160.51
+  },
+  {
+   "t": "I rullistan där det står \"Histogram\" väljer du \"Boxplot (Lådagram)\".",
+   "s": 160.51,
+   "e": 165.74
+  },
+  {
+   "t": "Om du vill modifiera lådagrammets utseende eller t.ex. lättare läsa av det mot axlarna kan du med fördel kopiera det till ritområdet.",
+   "s": 165.74,
+   "e": 174.04
+  },
+  {
+   "t": "Växla därefter till standardläget och justera vid behov axlarna med verktyget Flytta ritområdet.",
+   "s": 174.04,
+   "e": 180.68
+  },
+  {
+   "t": "Där kan du även justera utseendet (färg, linjetjocklek med mera).",
+   "s": 180.68,
+   "e": 186.24
+  },
+  {
+   "t": "Exempel 2 — Frekvenstabell i Geogebra",
+   "s": 186.24,
+   "e": 190.18
+  },
+  {
+   "t": "Antalet syskon som varje elev hade på en skola med 177 elever undersöktes.",
+   "s": 190.18,
+   "e": 196.41
+  },
+  {
+   "t": "Bestäm medelvärdet för antalet syskon utifrån nedanstående frekvenstabell.",
+   "s": 196.41,
+   "e": 201.99
+  },
+  {
+   "t": "För att slippa skriva in 177 separata värden i ett kalkylblad (eller i formeln för medelvärde), så kan vi i Geogebras kalkylblad skriva in frekvenserna i en extra kolumn till höger, dvs. så som de står i tabellen ovan.",
+   "s": 201.99,
+   "e": 216.12
+  },
+  {
+   "t": "Markera alla värden i båda kolumner, klicka på \"blå staplar\" och välj Envariabelanalys.",
+   "s": 216.12,
+   "e": 222.51
+  },
+  {
+   "t": "Klicka därefter på knappen \"Visa statistik\" och läs av medelvärdet i tabellen: Medel är ungefär lika med 1,7966.",
+   "s": 222.51,
+   "e": 231.36
+  },
+  {
+   "t": "Svar: Medelvärdet är ca 1,8 syskon.",
+   "s": 231.36,
+   "e": 235.96
+  }
+ ]
+}

@@ -13301,4 +13301,3494 @@ window.EXITTICKETS = {
   },
 ],
 
+// ═══════════════════════════════════════════════════════════════════
+// MATEMATIK NIVÅ 2c
+// ═══════════════════════════════════════════════════════════════════
+
+'ma2c-1.1': [
+  {
+    question: 'Vad betyder krullparentesen framför två ekvationer?',
+    choices: [
+      'Att ekvationerna bildar ett system med krav på en gemensam lösning',
+      'Att ekvationerna ska adderas',
+      'Att den övre ekvationen är viktigast',
+      'Att båda ekvationerna saknar lösning',
+    ],
+    correct: 0,
+    why: [
+      'Krullparentesen markerar ett ekvationssystem — lösningen måste passa i båda ekvationerna samtidigt.',
+      'Att addera ekvationerna kan vara ett lösningssteg (additionsmetoden), men det är inte vad parentesen betyder.',
+      'Ekvationerna i ett system är likvärdiga — ingen ordning eller prioritet gäller.',
+      'Var för sig har linjära ekvationer med två variabler oändligt många lösningar — systemet frågar efter de gemensamma.',
+    ],
+  },
+  {
+    question: 'Var i grafen hittar man lösningen till ett ekvationssystem?',
+    choices: [
+      'I skärningspunkten mellan linjerna',
+      'Där den ena linjen skär y-axeln',
+      'Där linjerna skär x-axeln',
+      'I punkten där avståndet mellan linjerna är störst',
+    ],
+    correct: 0,
+    why: [
+      'Skärningspunkten ligger på båda linjerna samtidigt — dess koordinater uppfyller båda ekvationerna, vilket är precis vad en lösning är.',
+      'Skärningen med y-axeln ger linjens m-värde, inte systemets lösning.',
+      'Linjernas nollställen hör till varje linje för sig — lösningen kräver en punkt som ligger på båda.',
+      'Lösningen är där linjerna möts, inte där de är som längst ifrån varandra.',
+    ],
+  },
+  {
+    question: 'Linjerna $y = 2x - 4$ och $y = -x + 5$ skär varandra i punkten (3, 2). Vilken är lösningen till ekvationssystemet?',
+    choices: [
+      '$x = 3$ och $y = 2$',
+      '$x = 2$ och $y = 3$',
+      '$x = 3$ eller $x = 2$',
+      '$x = -4$ och $y = 5$',
+    ],
+    correct: 0,
+    why: [
+      'Skärningspunktens x-koordinat är lösningen till x och y-koordinaten är lösningen till y — punkten (3, 2) ger x = 3 och y = 2.',
+      'Ordningen i en punkt är (x, y) — första koordinaten är x-värdet, inte y-värdet.',
+      'Lösningen är ett talpar (ett x och ett y som hör ihop), inte två alternativa x-värden.',
+      '−4 och 5 är linjernas m-värden (skärningar med y-axeln), inte systemets lösning.',
+    ],
+  },
+  {
+    question: 'Två linjer har samma $k$-värde men olika $m$-värden. Hur många lösningar har ekvationssystemet?',
+    choices: [
+      'Inga lösningar',
+      'Exakt en lösning',
+      'Oändligt många lösningar',
+      'Det beror på m-värdenas storlek',
+    ],
+    correct: 0,
+    why: [
+      'Samma lutning men olika startpunkter på y-axeln gör linjerna parallella — de skär aldrig varandra, så det finns ingen gemensam lösning.',
+      'Exakt en lösning kräver att linjerna skär varandra, vilket förutsätter olika k-värden.',
+      'Oändligt många lösningar fås först när linjerna är identiska — samma k OCH samma m.',
+      'Så länge m-värdena är olika är linjerna parallella oavsett hur stora eller små värdena är.',
+    ],
+  },
+  {
+    question: 'När har ett linjärt ekvationssystem exakt en lösning?',
+    choices: [
+      'När linjerna har olika $k$-värden',
+      'När linjerna har samma $k$-värde',
+      'När båda linjerna går genom origo',
+      'När linjerna har samma $m$-värde men olika $k$-värden',
+    ],
+    correct: 0,
+    why: [
+      'Olika lutningar gör att linjerna alltid korsar varandra i exakt en punkt — m-värdena spelar då ingen roll.',
+      'Samma k-värde ger antingen parallella linjer (inga lösningar) eller samma linje (oändligt många) — aldrig exakt en.',
+      'Två olika linjer genom origo skär varandra där, men det är olika k-värden som är det allmänna villkoret — inte origo.',
+      'Villkoret räcker med olika k-värden — kravet på samma m-värde är onödigt (då vet man dessutom att skärningen sker på y-axeln).',
+    ],
+  },
+],
+
+'ma2c-1.2': [
+  {
+    question: 'Vad innebär det att göra en **substitution** när man löser ett ekvationssystem?',
+    choices: [
+      'Att byta ut en variabel mot ett uttryck från den andra ekvationen',
+      'Att addera de två ekvationerna ledvis',
+      'Att rita upp båda ekvationerna i ett koordinatsystem',
+      'Att byta plats på ekvationerna i systemet',
+    ],
+    correct: 0,
+    why: [
+      'Substitution betyder utbyte — variabeln ersätts med ett likvärdigt uttryck, så att en ekvation med bara en variabel återstår.',
+      'Ledvis addition är additionsmetoden — en annan algebraisk metod.',
+      'Det är den grafiska lösningsmetoden, inte substitutionsmetoden.',
+      'Ekvationernas ordning spelar ingen roll — att byta plats förändrar ingenting.',
+    ],
+  },
+  {
+    question: 'Vad är det första steget i substitutionsmetoden?',
+    choices: [
+      'Lös ut en valfri variabel från en valfri ekvation',
+      'Sätt in ett gissat värde på $x$ i båda ekvationerna',
+      'Multiplicera ekvationerna så att en variabel får olika tecken',
+      'Beräkna skärningspunkten mellan linjerna',
+    ],
+    correct: 0,
+    why: [
+      'Först behövs ett uttryck att byta in — därför löser man ut en variabel (helst en med koefficient 1) ur någon av ekvationerna.',
+      'Substitutionsmetoden är exakt och algebraisk — ingen gissning behövs.',
+      'Det är förberedelsen i additionsmetoden, inte substitutionsmetoden.',
+      'Skärningspunkten hör till den grafiska metoden — substitutionsmetoden räknar fram lösningen algebraiskt.',
+    ],
+  },
+  {
+    question: 'Systemet $\\begin{cases} y = 3x \\\\ 2x + y = 10 \\end{cases}$ löses med substitutionsmetoden. Vilken ekvation får man?',
+    choices: [
+      '$2x + 3x = 10$',
+      '$2x + y = 3x$',
+      '$2 \\cdot 3x + y = 10$',
+      '$3x = 10$',
+    ],
+    correct: 0,
+    why: [
+      'Enligt den övre ekvationen är y lika med 3x — byt ut y mot 3x i den undre: $2x + 3x = 10$, dvs. $5x = 10$.',
+      'Substitutionen ska göras i den undre ekvationens y-term — inte genom att sätta ekvationernas led lika hur som helst.',
+      'Det är x-termen som fått fel ersättning — det är $y$ som ska bytas ut mot $3x$, inte $x$.',
+      'Då har $2x$-termen tappats bort — hela den undre ekvationen ska behållas.',
+    ],
+  },
+  {
+    question: 'Du har bestämt att $x = 3$. Hur får du fram $y$?',
+    choices: [
+      'Sätt in $x = 3$ i någon av de tidigare ekvationerna',
+      'Lös hela systemet en gång till med $y$ först',
+      'Addera 3 till båda led i den andra ekvationen',
+      '$y$ är alltid samma som $x$, så $y = 3$',
+    ],
+    correct: 0,
+    why: [
+      'När den ena variabeln är känd ger insättning i valfri tidigare ekvation den andra — vilken ekvation man väljer spelar ingen roll.',
+      'Det fungerar men är onödigt dubbelarbete — insättning räcker.',
+      'Att addera 3 till båda led är en balansoperation, inte ett sätt att utnyttja att x är känt.',
+      'x och y är olika variabler — deras värden hänger ihop via ekvationerna men är sällan lika.',
+    ],
+  },
+  {
+    question: 'Vilken variabel är smartast att lösa ut ur systemet $\\begin{cases} 3x - y = 2 \\\\ 5x + 2y = 10 \\end{cases}$?',
+    choices: [
+      '$y$ ur den övre ekvationen, eftersom den saknar koefficient',
+      '$x$ ur den övre ekvationen, eftersom $x$ kommer först',
+      '$y$ ur den undre ekvationen, eftersom 2 är ett litet tal',
+      'Det går inte att använda substitutionsmetoden här',
+    ],
+    correct: 0,
+    why: [
+      'Ur den övre fås $y = 3x - 2$ utan division eller bråk — variabler med koefficient 1 (eller −1) är enklast att lösa ut.',
+      'Att lösa ut x ur $3x - y = 2$ ger bråket $x = (2 + y)/3$ — det fungerar men ger jobbigare räkning.',
+      'Att lösa ut y ur $5x + 2y = 10$ kräver division med 2 och ger bråk i uttrycket.',
+      'Substitutionsmetoden fungerar på alla linjära ekvationssystem — frågan är bara vilket utlösande som ger minst räknearbete.',
+    ],
+  },
+],
+
+'ma2c-1.3': [
+  {
+    question: 'Vad krävs för att en variabel ska elimineras när ekvationerna adderas ledvis?',
+    choices: [
+      'Samma variabelterm finns i båda ekvationerna, med olika tecken',
+      'Samma variabelterm finns i båda ekvationerna, med samma tecken',
+      'Båda ekvationerna har samma högerled',
+      'Variabeln står ensam i ena ledet',
+    ],
+    correct: 0,
+    why: [
+      'Termer som $+5y$ och $-5y$ ger summan 0 vid ledvis addition — variabeln försvinner och kvar blir en ekvation med en variabel.',
+      'Med samma tecken blir summan dubbla termen (t.ex. $5y + 5y = 10y$) — inget elimineras.',
+      'Högerleden adderas också, men de behöver inte vara lika för att metoden ska fungera.',
+      'Det är utgångsläget för substitutionsmetoden — additionsmetoden bygger på teckenmotsatta termer.',
+    ],
+  },
+  {
+    question: 'Vad blir resultatet när ekvationerna i $\\begin{cases} -3x + 2y = 4 \\\\ 3x + 5y = 10 \\end{cases}$ adderas ledvis?',
+    choices: [
+      '$7y = 14$',
+      '$3y = 6$',
+      '$6x + 7y = 14$',
+      '$7y = 40$',
+    ],
+    correct: 0,
+    why: [
+      '$-3x$ och $+3x$ tar ut varandra; $2y + 5y = 7y$ och $4 + 10 = 14$.',
+      'y-termerna ska adderas, inte subtraheras: $2y + 5y = 7y$.',
+      'x-termerna har olika tecken och elimineras — de blir inte $6x$.',
+      'Högerleden adderas: $4 + 10 = 14$, inte $4 \\cdot 10 = 40$.',
+    ],
+  },
+  {
+    question: 'Systemet $\\begin{cases} 2x + y = 7 \\\\ 3x - 2y = 0 \\end{cases}$ ska lösas med additionsmetoden. Vad är ett lämpligt första steg?',
+    choices: [
+      'Multiplicera den övre ekvationen med 2',
+      'Addera ekvationerna direkt',
+      'Multiplicera den undre ekvationen med 2',
+      'Subtrahera 7 från båda led i den övre ekvationen',
+    ],
+    correct: 0,
+    why: [
+      'Då blir den övre $4x + 2y = 14$ — termerna $+2y$ och $-2y$ har olika tecken och elimineras vid addition.',
+      'Direkt addition ger $5x - y = 7$ — ingen variabel försvinner, man har bara fått en ny ekvation med två variabler.',
+      'Då blir den undre $6x - 4y = 0$, och y-termerna ($+y$ och $-4y$) matchar fortfarande inte.',
+      'Det ändrar bara den övre ekvationens form — det skapar inga teckenmotsatta variabeltermer.',
+    ],
+  },
+  {
+    question: 'När man multiplicerar en ekvation med ett tal — vad måste man tänka på?',
+    choices: [
+      'Alla termer i båda led ska multipliceras med talet',
+      'Bara variabeltermerna ska multipliceras',
+      'Bara vänsterledet ska multipliceras',
+      'Talet måste vara positivt',
+    ],
+    correct: 0,
+    why: [
+      'En ekvation är en likhet — den bevaras bara om hela vänsterledet och hela högerledet multipliceras med samma tal.',
+      'Om konstanttermerna hoppas över säger den nya ekvationen något annat än den gamla — likheten förstörs.',
+      'Högerledet måste följa med, annars gäller inte likheten längre.',
+      'Det går utmärkt att multiplicera med negativa tal — det används ofta just för att byta tecken på en term.',
+    ],
+  },
+  {
+    question: 'När behöver man multiplicera **båda** ekvationerna i ett system innan addition?',
+    choices: [
+      'När ingen variabelterm kan matchas genom att multiplicera bara en av ekvationerna med ett heltal',
+      'Alltid — båda ekvationerna måste alltid modifieras',
+      'När högerleden är olika stora',
+      'När systemet saknar lösningar',
+    ],
+    correct: 0,
+    why: [
+      'Om ingen koefficient är en multipel av motsvarande koefficient i den andra ekvationen (som i $2x + 7y = 8$ och $5x + 9y = 3$) multipliceras ekvationerna med varandras koefficienter, med tecken valda så att termerna elimineras.',
+      'Ofta räcker det att modifiera en ekvation — eller ingen alls, om teckenmotsatta termer redan finns.',
+      'Högerledens storlek styr inte metoden — det är variabeltermernas koefficienter som ska matchas.',
+      'Antalet lösningar avgör inte räknestrategin — även system utan lösning kan hanteras med addition (man får då en motsägelse).',
+    ],
+  },
+],
+
+'ma2c-1.4': [
+  {
+    question: 'Vad är det första steget vid problemlösning med ekvationssystem?',
+    choices: [
+      'Definiera vad variablerna betyder',
+      'Ställa upp ekvationerna',
+      'Gissa en rimlig lösning',
+      'Rita en graf',
+    ],
+    correct: 0,
+    why: [
+      'Innan ekvationerna kan tecknas måste det vara tydligt vad varje bokstav står för — t.ex. "k = antalet kor".',
+      'Ekvationerna kommer i steg 2 — utan definierade variabler vet man inte vad de betyder.',
+      'Metoden är algebraisk och exakt — gissning behövs inte.',
+      'En graf kan hjälpa men ingår inte i grundproceduren: definiera, ställ upp och lös, tolka.',
+    ],
+  },
+  {
+    question: 'En bonde har $k$ kor och $h$ höns. Vad beskriver termen $4k$ i ekvationen $4k + 2h = 352$?',
+    choices: [
+      'Det totala antalet ben från korna',
+      'Antalet kor gånger antalet huvuden',
+      'Att bonden har 4 kor',
+      'Det totala antalet djur',
+    ],
+    correct: 0,
+    why: [
+      'Varje ko har 4 ben, så k kor bidrar med 4k ben — ekvationen räknar ihop alla ben till totalt 352.',
+      'Huvudena räknas i den andra ekvationen ($k + h = 100$) — här handlar det om ben.',
+      'Siffran 4 är antalet ben per ko, inte antalet kor.',
+      'Totala antalet djur är $k + h$, inte $4k$.',
+    ],
+  },
+  {
+    question: 'Två tal har summan 19 och differensen 5. Vilket ekvationssystem beskriver detta, om $x$ är det största talet?',
+    choices: [
+      '$\\begin{cases} x + y = 19 \\\\ x - y = 5 \\end{cases}$',
+      '$\\begin{cases} x + y = 5 \\\\ x - y = 19 \\end{cases}$',
+      '$\\begin{cases} x \\cdot y = 19 \\\\ x - y = 5 \\end{cases}$',
+      '$\\begin{cases} x + y = 19 \\\\ y - x = 5 \\end{cases}$',
+    ],
+    correct: 0,
+    why: [
+      'Summan är resultatet av addition (19) och differensen av subtraktion (5) — och eftersom x är störst är $x - y$ positiv.',
+      'Summan och differensen har bytt plats — summan av två tal som skiljer sig med 19 kan inte vara 5 om båda är positiva.',
+      'Summan betyder addition, inte multiplikation — $x \\cdot y$ är produkten.',
+      'Med x som det största talet blir $y - x$ negativ (−5), inte 5.',
+    ],
+  },
+  {
+    question: 'Ekvationssystemet ger lösningen $k = 76$ och $h = 24$. Vad återstår enligt problemlösningsproceduren?',
+    choices: [
+      'Tolka lösningen och svara på frågan med ord',
+      'Ingenting — lösningen är svaret',
+      'Kontrollera att $k$ är större än $h$',
+      'Rita upp lösningen i ett koordinatsystem',
+    ],
+    correct: 0,
+    why: [
+      'Sista steget är att tolka: "Bonden har 76 kor och 24 höns." Ett bra svar kopplar tillbaka till det frågan faktiskt gällde — och en rimlighetskoll skadar aldrig.',
+      'Ett talpar är inte ett färdigt svar på en textuppgift — svaret ska formuleras i uppgiftens termer.',
+      'Det finns inget generellt krav på att den ena variabeln ska vara störst.',
+      'Grafisk redovisning behövs inte — men svaret ska tolkas och formuleras.',
+    ],
+  },
+  {
+    question: 'I en klass finns $p$ pojkar och $f$ flickor. Det finns 3 **fler** flickor än pojkar. Vilken ekvation stämmer?',
+    choices: [
+      '$f = p + 3$',
+      '$p = f + 3$',
+      '$f + p = 3$',
+      '$f = 3p$',
+    ],
+    correct: 0,
+    why: [
+      'Flickorna är fler — flickornas antal är pojkarnas antal plus 3.',
+      'Det säger tvärtom att pojkarna är 3 fler än flickorna — en klassisk teckningsfälla.',
+      'Summan av antalen är inte 3 — det är skillnaden som är 3.',
+      '"3 fler" betyder addition med 3, inte multiplikation med 3 ("3 gånger så många").',
+    ],
+  },
+],
+
+'ma2c-2.1': [
+  {
+    question: 'Vad säger första kvadreringsregeln?',
+    choices: [
+      '$(a + b)^2 = a^2 + 2ab + b^2$',
+      '$(a + b)^2 = a^2 + b^2$',
+      '$(a + b)^2 = a^2 + ab + b^2$',
+      '$(a + b)(a - b) = a^2 - b^2$',
+    ],
+    correct: 0,
+    why: [
+      'Kvadraten på en summa ger de båda kvadraterna PLUS den dubbla produkten 2ab.',
+      'Den dubbla produkten saknas — $(a + b)^2$ är inte samma sak som $a^2 + b^2$. Testa med a = b = 1: VL är 4 men HL är 2.',
+      'Produkten ska dubblas — mittentermen är 2ab, inte ab.',
+      'Det är konjugatregeln, inte en kvadreringsregel.',
+    ],
+  },
+  {
+    question: 'När kan konjugatregeln användas för att utveckla ett uttryck?',
+    choices: [
+      'När två likadana parenteser multipliceras och det enda som skiljer är tecknet mellan termerna',
+      'När en parentes upphöjs till 2',
+      'När båda parenteserna innehåller ett minustecken',
+      'När parenteserna innehåller helt olika termer',
+    ],
+    correct: 0,
+    why: [
+      'Konjugat är just ett par som $(a + b)(a - b)$ — samma termer, olika tecken emellan. Produkten blir $a^2 - b^2$.',
+      'En parentes i kvadrat utvecklas med en kvadreringsregel, inte konjugatregeln.',
+      'Två minusparenteser, t.ex. $(a - b)(a - b)$, är en kvadrat — andra kvadreringsregeln gäller då.',
+      'Med helt olika termer finns ingen genväg — då får man multiplicera in term för term.',
+    ],
+  },
+  {
+    question: 'Utveckla $(x - 5)^2$.',
+    choices: [
+      '$x^2 - 10x + 25$',
+      '$x^2 - 25$',
+      '$x^2 + 10x + 25$',
+      '$x^2 - 10x - 25$',
+    ],
+    correct: 0,
+    why: [
+      'Andra kvadreringsregeln: kvadraten på x, minus dubbla produkten 10x, plus kvadraten på 5.',
+      '$x^2 - 25$ är resultatet av konjugatet $(x + 5)(x - 5)$ — i en kvadrat uppstår en mittenterm.',
+      'Plustecknet framför mittentermen hör till $(x + 5)^2$ — här är tecknet minus.',
+      'Sista termen är $(-5)^2 = +25$ — kvadraten på ett negativt tal är positiv.',
+    ],
+  },
+  {
+    question: 'Vad blir den dubbla produkten när $(3x + 2)^2$ utvecklas?',
+    choices: [
+      '$12x$',
+      '$6x$',
+      '$5x$',
+      '$9x$',
+    ],
+    correct: 0,
+    why: [
+      'Multiplicera termerna och dubbla: $3x \\cdot 2 = 6x$, dubblat ger $12x$. Hela utvecklingen är $9x^2 + 12x + 4$.',
+      '$6x$ är produkten av termerna — den ska dessutom dubblas.',
+      '$5x$ vore summan av koefficienterna — den dubbla produkten är $2 \\cdot 3x \\cdot 2$.',
+      '$9x$ blandar ihop med kvadraten på $3x$ (som är $9x^2$).',
+    ],
+  },
+  {
+    question: 'Kan $(7 + 2x)(2x - 7)$ utvecklas med konjugatregeln?',
+    choices: [
+      'Ja — kasta om termerna i första parentesen till $(2x + 7)$, sedan ger regeln $4x^2 - 49$',
+      'Nej — parenteserna börjar med olika termer, så regeln kan aldrig användas',
+      'Ja — direkt utan omskrivning blir det $49 - 4x^2$',
+      'Nej — konjugatregeln gäller bara när båda parenteserna har plustecken',
+    ],
+    correct: 0,
+    why: [
+      'Termer med plustecken emellan får byta plats: $(7 + 2x) = (2x + 7)$. Då står konjugatparet $(2x + 7)(2x - 7)$ klart och ger $(2x)^2 - 7^2 = 4x^2 - 49$.',
+      'Ordningen i en parentes med plustecken kan alltid kastas om — då blir det ett konjugat.',
+      'Utan omskrivning ser man inte vilket tal som är "a" — och tecknet blir fel: svaret är $4x^2 - 49$, inte $49 - 4x^2$.',
+      'Konjugatregeln kräver precis ett plus- och ett minuspar — det är det som gör det till ett konjugat.',
+    ],
+  },
+],
+
+'ma2c-2.2': [
+  {
+    question: 'Vad innebär det att faktorisera ett uttryck?',
+    choices: [
+      'Att skriva om uttrycket som en multiplikation',
+      'Att förenkla uttrycket så långt som möjligt',
+      'Att utveckla alla parenteser',
+      'Att sätta uttrycket lika med 0',
+    ],
+    correct: 0,
+    why: [
+      'Faktorer är delarna i en multiplikation — att faktorisera är att skriva uttrycket som en produkt av faktorer.',
+      'Faktorisering är en särskild sorts omskrivning — resultatet är inte alltid "enklare", men det är en produkt.',
+      'Att utveckla parenteser är motsatsen — då går man från produkt till summa.',
+      'Att sätta ett uttryck lika med 0 skapar en ekvation — det är inte faktorisering.',
+    ],
+  },
+  {
+    question: 'Vilken regel används för att faktorisera $x^2 - 49$?',
+    choices: [
+      'Konjugatregeln baklänges — "kvadrat minus kvadrat är konjugat"',
+      'Första kvadreringsregeln baklänges',
+      'Andra kvadreringsregeln baklänges',
+      'Bryta ut den gemensamma faktorn 7',
+    ],
+    correct: 0,
+    why: [
+      'Två kvadrater ($x^2$ och $7^2$) med minus emellan: $x^2 - 49 = (x + 7)(x - 7)$.',
+      'Kvadreringsreglerna kräver TRE termer — här finns bara två.',
+      'Även andra kvadreringsregeln kräver tre termer med en mittenterm.',
+      'Termerna $x^2$ och 49 har ingen gemensam faktor att bryta ut.',
+    ],
+  },
+  {
+    question: 'Faktorisera $x^2 - 10x + 25$.',
+    choices: [
+      '$(x - 5)^2$',
+      '$(x + 5)^2$',
+      '$(x + 5)(x - 5)$',
+      '$x(x - 10) + 25$',
+    ],
+    correct: 0,
+    why: [
+      'Tre termer, första och sista är kvadrater, minus framför mittentermen — andra kvadreringsregeln baklänges. Kontroll: dubbla produkten $2 \\cdot x \\cdot 5 = 10x$ stämmer.',
+      'Plusvarianten $(x + 5)^2$ ger mittentermen $+10x$, men här är den $-10x$.',
+      'Konjugatet ger $x^2 - 25$ — utan mittenterm.',
+      'Det är ingen färdig faktorisering — uttrycket är inte skrivet som en enda produkt.',
+    ],
+  },
+  {
+    question: 'Vad är första steget när man ska faktorisera ett uttryck?',
+    choices: [
+      'Undersöka om något kan brytas ut "som vanligt"',
+      'Testa konjugatregeln',
+      'Sätta uttrycket lika med 0',
+      'Kvadratkomplettera',
+    ],
+    correct: 0,
+    why: [
+      'Ordningen är: 1) bryt ut om möjligt, 2) använd kvadrerings- eller konjugatregel baklänges. Att bryta ut först gör resten enklare — som i $50x^2 - 98 = 2(25x^2 - 49)$.',
+      'Konjugatregeln kan bli aktuell — men först efter att gemensamma faktorer brutits ut.',
+      'Faktorisering är en omskrivning av uttrycket — ingen ekvation behövs.',
+      'Kvadratkomplettering är en teknik för ekvationslösning, inte faktoriseringens första steg.',
+    ],
+  },
+  {
+    question: 'Hur förenklas det rationella uttrycket $\\dfrac{x^2 - 4}{2x + 4}$?',
+    choices: [
+      'Faktorisera till $\\dfrac{(x+2)(x-2)}{2(x+2)}$ och förkorta med $(x+2)$ — kvar blir $\\dfrac{x-2}{2}$',
+      'Stryk $x^2$ mot $2x$ och 4 mot 4 — kvar blir $\\dfrac{x}{2}$',
+      'Dividera täljare och nämnare med $x$ — kvar blir $\\dfrac{x - 4}{2 + 4}$',
+      'Uttrycket kan inte förenklas',
+    ],
+    correct: 0,
+    why: [
+      'Först faktoriseras täljare (konjugat) och nämnare (bryt ut 2), sedan förkortas den gemensamma FAKTORN $(x + 2)$.',
+      'Bara faktorer får förkortas — aldrig enskilda termer i en summa. Att stryka termer ger fel resultat.',
+      'Termerna innehåller inte alla $x$ — och division term för term är inte tillåten i bråk.',
+      'Det kan det visst — båda leden går att faktorisera med en gemensam faktor.',
+    ],
+  },
+],
+
+'ma2c-2.3': [
+  {
+    question: 'Vilken princip bygger nollproduktmetoden på?',
+    choices: [
+      'Om en produkt är lika med 0 måste minst en faktor vara lika med 0',
+      'Om en summa är lika med 0 måste båda termerna vara 0',
+      'En ekvation får alltid multipliceras med 0',
+      'Alla andragradsekvationer har lösningen $x = 0$',
+    ],
+    correct: 0,
+    why: [
+      'Två tal kan aldrig multipliceras till 0 om inget av dem är 0 — därför måste någon faktor vara 0.',
+      'En summa kan bli 0 på många sätt (t.ex. $5 + (-5)$) — principen gäller produkter.',
+      'Att multiplicera en ekvation med 0 förstör den (allt blir 0 = 0).',
+      'Endast ekvationer där konstantterm saknas har roten 0.',
+    ],
+  },
+  {
+    question: 'Vilka typer av ekvationer löses lämpligen med nollproduktmetoden?',
+    choices: [
+      'Ekvationer med både $x^2$-termer och $x$-termer (utan konstantterm), och ekvationer där en produkt är lika med 0',
+      'Alla ekvationer som innehåller $x^2$',
+      'Endast ekvationer som redan står i faktoriserad form',
+      'Ekvationer med $x$ under ett rottecken',
+    ],
+    correct: 0,
+    why: [
+      'När konstantterm saknas kan x brytas ut, och när vänsterledet är en produkt lika med 0 ger metoden lösningarna direkt.',
+      'Fullständiga andragradsekvationer (med konstantterm) kräver i stället pq-formeln.',
+      'Metoden fungerar även på ofaktoriserade uttryck — faktoriseringen är ju steg 2 i metoden.',
+      'Rotekvationer löses genom kvadrering, inte med nollproduktmetoden.',
+    ],
+  },
+  {
+    question: 'Vilka lösningar har ekvationen $x(x - 8) = 0$?',
+    choices: [
+      '$x_1 = 0$ och $x_2 = 8$',
+      'Endast $x = 8$',
+      '$x_1 = 0$ och $x_2 = -8$',
+      'Endast $x = 0$',
+    ],
+    correct: 0,
+    why: [
+      'Faktorerna är $x$ och $(x - 8)$ — den första är 0 när x = 0, den andra när x = 8.',
+      'Faktorn $x$ framför parentesen ger också en lösning: x = 0. Den glöms lätt bort.',
+      'Faktorn $(x - 8)$ blir 0 när $x = 8$ (ombytt tecken), inte −8.',
+      'Även parentesen kan bli 0 — det ger den andra lösningen x = 8.',
+    ],
+  },
+  {
+    question: 'Varför får man inte dividera båda led i $x^2 = 6x$ med $x$?',
+    choices: [
+      'Då tappas lösningen $x = 0$ bort',
+      'Division med variabler är alltid förbjuden',
+      'Då blir högerledet negativt',
+      'Det får man visst — det ger båda lösningarna',
+    ],
+    correct: 0,
+    why: [
+      'Division med x förutsätter att x inte är 0 — men x = 0 ÄR en av lösningarna. Rätt väg: flytta över och faktorisera, $x(x - 6) = 0$.',
+      'Division med en variabel är tillåten när variabeln bevisligen inte är 0 — problemet här är att den kan vara det.',
+      'Tecknet påverkas inte av divisionen — problemet är den förlorade roten.',
+      'Divisionen ger bara $x = 6$ — lösningen $x = 0$ försvinner.',
+    ],
+  },
+  {
+    question: 'Vilken ekvation har rötterna $x_1 = -2$ och $x_2 = 5$?',
+    choices: [
+      '$(x + 2)(x - 5) = 0$',
+      '$(x - 2)(x + 5) = 0$',
+      '$(x + 2)(x + 5) = 0$',
+      '$(x - 2)(x - 5) = 0$',
+    ],
+    correct: 0,
+    why: [
+      'Rötterna sätts in med ombytt tecken: roten −2 ger faktorn $(x + 2)$ och roten 5 ger faktorn $(x - 5)$.',
+      'Tecknen är omkastade — den här ekvationen har rötterna 2 och −5.',
+      'Båda faktorerna har fel tecken för roten 5 — $(x + 5)$ ger roten −5.',
+      '$(x - 2)$ ger roten +2, inte −2.',
+    ],
+  },
+],
+
+'ma2c-2.4': [
+  {
+    question: 'Vilken typ av ekvationer löses med pq-formeln?',
+    choices: [
+      'Fullständiga andragradsekvationer — med $x^2$-term, $x$-term och konstantterm',
+      'Ekvationer med endast $x^2$-term och konstantterm',
+      'Ekvationer med endast $x^2$-term och $x$-term',
+      'Linjära ekvationer med två variabler',
+    ],
+    correct: 0,
+    why: [
+      'När alla tre termtyperna finns räcker varken den vanliga metoden eller nollproduktmetoden — då används pq-formeln.',
+      'Utan x-term räcker den vanliga metoden: lös ut $x^2$ och dra roten ur.',
+      'Utan konstantterm är nollproduktmetoden (bryt ut x) enklare.',
+      'pq-formeln gäller andragradsekvationer med EN variabel.',
+    ],
+  },
+  {
+    question: 'Ekvationen $x^2 + px + q = 0$ har enligt pq-formeln lösningarna …',
+    choices: [
+      '$x = -\\dfrac{p}{2} \\pm \\sqrt{\\left(\\dfrac{p}{2}\\right)^2 - q}$',
+      '$x = \\dfrac{p}{2} \\pm \\sqrt{\\left(\\dfrac{p}{2}\\right)^2 - q}$',
+      '$x = -\\dfrac{p}{2} \\pm \\sqrt{\\left(\\dfrac{p}{2}\\right)^2 + q}$',
+      '$x = -p \\pm \\sqrt{p^2 - q}$',
+    ],
+    correct: 0,
+    why: [
+      'Halva koefficienten med ombytt tecken utanför roten; under roten samma tal i kvadrat minus konstanttermen.',
+      'Tecknet utanför roten ska vara ombytt — minus p/2, inte plus.',
+      'Under rottecknet ska konstanttermen subtraheras (dvs. ombytt tecken på q).',
+      'Det är HALVA koefficienten som används, både utanför och under roten.',
+    ],
+  },
+  {
+    question: 'Vilka två krav måste vara uppfyllda innan pq-formeln används?',
+    choices: [
+      'Ena ledet är 0 och koefficienten framför $x^2$-termen är 1',
+      'Båda leden är positiva och ekvationen har två lösningar',
+      'Ekvationen är faktoriserad och lika med 0',
+      'Konstanttermen är positiv och x-termen är negativ',
+    ],
+    correct: 0,
+    why: [
+      'Formeln utgår från mallen $x^2 + px + q = 0$ — därför måste ledet göras till 0 och en eventuell koefficient framför $x^2$ divideras bort.',
+      'Ledens tecken och antalet lösningar spelar ingen roll för att formeln ska få användas.',
+      'Faktorisering hör till nollproduktmetoden — pq-formeln används på den utvecklade formen.',
+      'p och q får ha vilka tecken som helst.',
+    ],
+  },
+  {
+    question: 'Hur löses $2x^2 + 12x - 14 = 0$ med pq-formeln?',
+    choices: [
+      'Dividera först båda led med 2, sedan pq-formeln på $x^2 + 6x - 7 = 0$',
+      'Sätt $p = 12$ och $q = -14$ direkt i formeln',
+      'Bryt ut 2x och använd nollproduktmetoden',
+      'Subtrahera 2 från båda led så att koefficienten försvinner',
+    ],
+    correct: 0,
+    why: [
+      'Koefficienten framför $x^2$ måste bort först — division med 2 ger $x^2 + 6x - 7 = 0$, och sedan ger formeln $x = -3 \\pm 4$.',
+      'p och q kan bara läsas av NÄR koefficienten framför $x^2$ är 1 — annars blir svaret fel.',
+      '$2x$ är ingen gemensam faktor i alla tre termerna (konstanttermen innehåller inget x).',
+      'Koefficienten sitter multiplicerad med $x^2$ — subtraktion tar inte bort den.',
+    ],
+  },
+  {
+    question: 'I lösningen $x = 4 \\pm \\sqrt{16 - 12}$ — vad ger $\\pm$-tecknet?',
+    choices: [
+      'De två lösningarna $x_1 = 4 - 2 = 2$ och $x_2 = 4 + 2 = 6$',
+      'Att lösningen är osäker',
+      'Att båda lösningarna är $\\pm 2$',
+      'Att ekvationen saknar lösningar',
+    ],
+    correct: 0,
+    why: [
+      'Roten ur 4 är 2, och plus/minus ger de två rötterna: $4 - 2$ och $4 + 2$.',
+      'Plus/minus betyder inte osäkerhet — det betyder att BÅDA tecknen ger giltiga lösningar.',
+      'Termen 4 utanför roten ska räknas med: lösningarna är 2 och 6, inte ±2.',
+      'Diskriminanten är positiv (4), så det finns två lösningar.',
+    ],
+  },
+],
+
+'ma2c-2.5': [
+  {
+    question: 'För vilken form av andragradsekvation är abc-formeln gjord?',
+    choices: [
+      '$ax^2 + bx + c = 0$',
+      '$x^2 + px + q = 0$',
+      '$a(x + b)^2 = c$',
+      '$ax^2 + bx = cx$',
+    ],
+    correct: 0,
+    why: [
+      'abc-formeln hanterar den allmänna formen där koefficienten a framför $x^2$ får vara vilket tal som helst.',
+      'Det är pq-formelns form — där måste koefficienten framför $x^2$ vara 1.',
+      'Kvadratform löses enklast genom rotdragning, inte abc-formeln.',
+      'Formeln kräver att ena ledet är 0.',
+    ],
+  },
+  {
+    question: 'Vad skiljer abc-formeln från pq-formeln?',
+    choices: [
+      'Koefficienten framför $x^2$-termen behöver inte divideras bort innan abc-formeln används',
+      'abc-formeln ger fler lösningar än pq-formeln',
+      'abc-formeln kräver ingen kvadratrot',
+      'pq-formeln fungerar bara när q är positivt',
+    ],
+    correct: 0,
+    why: [
+      'a ingår i abc-formeln, så ekvationen kan användas som den står — pq-formeln kräver först division så att koefficienten blir 1.',
+      'Båda formlerna ger exakt samma lösningar — de är två vägar till samma mål.',
+      'Båda formlerna innehåller en kvadratrot.',
+      'pq-formeln fungerar för alla tecken på q.',
+    ],
+  },
+  {
+    question: 'Vilka är $a$, $b$ och $c$ i ekvationen $5x^2 - 3x - 2 = 0$?',
+    choices: [
+      '$a = 5$, $b = -3$, $c = -2$',
+      '$a = 5$, $b = 3$, $c = 2$',
+      '$a = -3$, $b = 5$, $c = -2$',
+      '$a = 5x^2$, $b = -3x$, $c = -2$',
+    ],
+    correct: 0,
+    why: [
+      'Koefficienterna läses av med tecken: 5 framför $x^2$, −3 framför $x$ och konstanttermen −2.',
+      'Tecknen måste följa med — b och c är negativa här.',
+      'a hör alltid till $x^2$-termen, b till x-termen.',
+      'a, b och c är talen (koefficienterna), inte hela termerna.',
+    ],
+  },
+  {
+    question: 'Vad blir uttrycket under rottecknet ($b^2 - 4ac$) för ekvationen $2x^2 - 8x + 6 = 0$?',
+    choices: [
+      '$16$',
+      '$64$',
+      '$-48$',
+      '$112$',
+    ],
+    correct: 0,
+    why: [
+      '$b^2 - 4ac = (-8)^2 - 4 \\cdot 2 \\cdot 6 = 64 - 48 = 16$.',
+      '$64$ är bara $b^2$ — subtraktionen med $4ac = 48$ saknas.',
+      '$-48$ är bara $-4ac$ — termen $b^2 = 64$ saknas.',
+      '$112$ fås om man ADDERAR $4ac$ i stället för att subtrahera.',
+    ],
+  },
+  {
+    question: 'Ger pq-formeln och abc-formeln samma lösningar till en och samma ekvation?',
+    choices: [
+      'Ja — de är två likvärdiga metoder som ger exakt samma rötter',
+      'Nej — abc-formeln ger dubbelt så många lösningar',
+      'Bara om koefficienten framför $x^2$ är 1',
+      'Nej — de gäller olika typer av ekvationer',
+    ],
+    correct: 0,
+    why: [
+      'Formlerna är algebraiskt ekvivalenta — abc-formeln blir pq-formeln om man dividerar ekvationen med a först.',
+      'Antalet rötter bestäms av ekvationen (diskriminanten), inte av vilken formel som används.',
+      'De ger samma svar för alla koefficienter — skillnaden är bara hur mycket förarbete som krävs.',
+      'Båda löser samma sak: fullständiga andragradsekvationer lika med 0.',
+    ],
+  },
+],
+
+'ma2c-2.6': [
+  {
+    question: 'Vad kallas uttrycket under rottecknet i pq-formeln?',
+    choices: [
+      'Diskriminant',
+      'Koefficient',
+      'Konjugat',
+      'Dubbelrot',
+    ],
+    correct: 0,
+    why: [
+      'Diskriminanten $\\left(\\frac{p}{2}\\right)^2 - q$ "diskriminerar" (skiljer) mellan fallen två, en eller ingen lösning.',
+      'Koefficienter är talen framför variabeltermerna i ekvationen.',
+      'Konjugat är ett parentespar av typen $(a+b)(a-b)$.',
+      'Dubbelrot är namnet på lösningen när diskriminanten är 0 — inte på uttrycket självt.',
+    ],
+  },
+  {
+    question: 'Diskriminanten till en andragradsekvation är positiv. Hur många lösningar har ekvationen?',
+    choices: [
+      'Två',
+      'En',
+      'Ingen',
+      'Det beror på konstanttermen',
+    ],
+    correct: 0,
+    why: [
+      'Roten ur ett positivt tal är ett positivt tal, och ± ger då två olika värden.',
+      'En lösning fås bara när diskriminanten är exakt 0 (då är ± meningslöst).',
+      'Ingen lösning fås när diskriminanten är negativ.',
+      'Konstanttermen är redan inbakad i diskriminanten — dess tecken avgör ensamt.',
+    ],
+  },
+  {
+    question: 'Varför saknar ekvationen lösningar när diskriminanten är negativ?',
+    choices: [
+      'Kvadratroten ur ett negativt tal saknar (reellt) värde — inget tal i kvadrat blir negativt',
+      'Negativa tal kan inte vara lösningar till ekvationer',
+      'pq-formeln fungerar bara för positiva tal',
+      'Ekvationen har då oändligt många lösningar i stället',
+    ],
+    correct: 0,
+    why: [
+      'Ett tal multiplicerat med sig självt är aldrig negativt — därför finns inget (reellt) värde för roten, och formeln ger inga rötter.',
+      'Lösningar får visst vara negativa (t.ex. x = −7) — det är talet UNDER ROTEN som inte får vara negativt.',
+      'Formeln hanterar negativa p och q utmärkt — problemet är enbart negativt värde under rottecknet.',
+      'Negativ diskriminant ger noll lösningar, inte oändligt många.',
+    ],
+  },
+  {
+    question: 'Hur många lösningar har $x^2 + 4x + 4 = 0$?',
+    choices: [
+      'En (dubbelrot)',
+      'Två',
+      'Ingen',
+      'Fyra',
+    ],
+    correct: 0,
+    why: [
+      'pq-formeln ger $x = -2 \\pm \\sqrt{4 - 4} = -2 \\pm 0$ — diskriminanten är 0, så det finns exakt en lösning, x = −2.',
+      'Två lösningar kräver positiv diskriminant, men $2^2 - 4 = 0$.',
+      'Diskriminanten är inte negativ — den är exakt 0, vilket ger en rot.',
+      'En andragradsekvation kan aldrig ha fler än två lösningar.',
+    ],
+  },
+  {
+    question: 'För vilket värde på $q$ har $x^2 + 12x + q = 0$ exakt en lösning?',
+    choices: [
+      '$q = 36$',
+      '$q = 12$',
+      '$q = 6$',
+      '$q = 144$',
+    ],
+    correct: 0,
+    why: [
+      'Diskriminanten $6^2 - q$ ska vara 0, vilket ger $q = 36$.',
+      'q ska matcha KVADRATEN på halva koefficienten: $6^2 = 36$, inte koefficienten själv.',
+      '6 är halva koefficienten — diskriminanten kräver dess kvadrat.',
+      '144 är hela koefficienten i kvadrat ($12^2$) — det är halva koefficienten (6) som ska kvadreras.',
+    ],
+  },
+],
+
+'ma2c-2.7': [
+  {
+    question: 'Vad är det första steget i problemlösningsproceduren?',
+    choices: [
+      'Tolka problemet — definiera variabler och rita vid behov figur',
+      'Lösa ekvationen med pq-formeln',
+      'Kontrollera svaret',
+      'Ställa upp ekvationen',
+    ],
+    correct: 0,
+    why: [
+      'Först måste problemet förstås: vad är okänt, vad ska variablerna betyda, och hjälper en figur?',
+      'Ekvationslösningen är steg 3 — det finns ingen ekvation att lösa förrän problemet tolkats och tecknats.',
+      'Kontroll och tolkning av svaret är det sista steget.',
+      'Ekvationerna ställs upp i steg 2, efter att variablerna definierats.',
+    ],
+  },
+  {
+    question: 'En andragradsekvation ur ett geometriproblem ger rötterna $x_1 = -27$ och $x_2 = 45$, där $x$ är en sträcka i cm. Vad gäller?',
+    choices: [
+      'Roten $-27$ bortses — en sträcka kan inte vara negativ, så $x = 45$ cm',
+      'Båda rötterna är giltiga svar',
+      'Ekvationen måste ha lösts fel eftersom en rot är negativ',
+      'Svaret är medelvärdet av rötterna',
+    ],
+    correct: 0,
+    why: [
+      'Ekvationen vet inget om verkligheten — tolkningssteget sållar bort rötter som är orimliga i sammanhanget, som negativa längder.',
+      'En negativ sträcka saknar mening — bara den positiva roten duger som svar.',
+      'Negativa rötter är helt normala matematiskt — de sorteras bort i tolkningen, inte i räkningen.',
+      'Rötterna är två separata kandidater — de ska prövas mot verkligheten, inte medelvärdesbildas.',
+    ],
+  },
+  {
+    question: 'Två positiva tal har differensen 21 och produkten 1 080. Vilket ekvationssystem beskriver detta, om $y$ är det största talet?',
+    choices: [
+      '$\\begin{cases} y - x = 21 \\\\ x \\cdot y = 1\\,080 \\end{cases}$',
+      '$\\begin{cases} x + y = 21 \\\\ x \\cdot y = 1\\,080 \\end{cases}$',
+      '$\\begin{cases} y - x = 1\\,080 \\\\ x \\cdot y = 21 \\end{cases}$',
+      '$\\begin{cases} y - x = 21 \\\\ x + y = 1\\,080 \\end{cases}$',
+    ],
+    correct: 0,
+    why: [
+      'Differens betyder subtraktion (större minus mindre = 21) och produkt betyder multiplikation (= 1 080).',
+      'Differensen är en skillnad, inte en summa — talen adderas inte till 21.',
+      'Villkoren har bytt plats — differensen är 21 och produkten 1 080.',
+      'Produkten (multiplikationen) saknas — 1 080 är talens produkt, inte deras summa.',
+    ],
+  },
+  {
+    question: 'Varför blir det en andragradsekvation när substitutionen $y = 21 + x$ sätts in i $x \\cdot y = 1\\,080$?',
+    choices: [
+      'Produkten $x(21 + x)$ innehåller $x \\cdot x = x^2$',
+      'Talet 1 080 är stort',
+      'Substitutionsmetoden ger alltid andragradsekvationer',
+      'Det blir det inte — ekvationen är linjär',
+    ],
+    correct: 0,
+    why: [
+      'När x multipliceras in i parentesen uppstår termen $x^2$: $21x + x^2 = 1\\,080$ — en andragradsekvation som löses med pq-formeln.',
+      'Högerledets storlek påverkar inte ekvationens gradtal.',
+      'I linjära system (som kapitel 1) ger substitutionen linjära ekvationer — det är produktvillkoret som skapar $x^2$ här.',
+      'Termen $x \\cdot x$ gör ekvationen till en andragradsekvation.',
+    ],
+  },
+  {
+    question: 'En rektangel har sidorna $x$ och $x - 18$ cm och arean $1\\,215\\ \\mathrm{cm}^2$. Frågan gäller **omkretsen**. Vad ska man göra när $x = 45$ har bestämts?',
+    choices: [
+      'Sätta in $x = 45$ i omkretsformeln $O = 4x - 36$ — svaret är 144 cm, inte 45',
+      'Svara 45 cm — det är ju lösningen till ekvationen',
+      'Multiplicera sidorna för att få svaret',
+      'Dubblera $x$ till 90 cm',
+    ],
+    correct: 0,
+    why: [
+      'Ekvationen gav bara sidan x — men frågan gällde omkretsen. Sista steget är att räkna ut det som faktiskt efterfrågades: $O = 4 \\cdot 45 - 36 = 144$ cm.',
+      'x är ett delresultat — att svara med det är att missa tolkningssteget. Frågan gällde omkretsen.',
+      'Produkten av sidorna är arean ($1\\,215\\ \\mathrm{cm}^2$) — den var given från början.',
+      'Omkretsen är summan av ALLA fyra sidor: $x + x + (x-18) + (x-18)$.',
+    ],
+  },
+],
+
+'ma2c-2.8': [
+  {
+    question: 'Vad är en rotekvation?',
+    choices: [
+      'En ekvation där variabeln finns under ett rottecken',
+      'En ekvation som saknar rötter',
+      'En ekvation vars lösning är 0',
+      'En ekvation med en kvadratrot i svaret',
+    ],
+    correct: 0,
+    why: [
+      'Namnet syftar på att variabeln (t.ex. x) står under ett rottecken, som i $\\sqrt{x + 2} = 17$.',
+      'Rotekvationer kan mycket väl ha lösningar — "rot" syftar på rottecknet, inte på antalet rötter.',
+      'Lösningens värde har inget med namnet att göra.',
+      'Det är variabelns placering under rottecknet i EKVATIONEN som räknas, inte svarets form.',
+    ],
+  },
+  {
+    question: 'Vad är standardmetoden för att lösa en rotekvation?',
+    choices: [
+      'Lös ut rotuttrycket, kvadrera båda led och lös ekvationen — kontrollera sedan lösningarna',
+      'Dra roten ur båda led',
+      'Använd pq-formeln direkt på ekvationen',
+      'Gissa och pröva olika värden',
+    ],
+    correct: 0,
+    why: [
+      'Kvadrering tar bort rottecknet — men den kan skapa falska rötter, så kontrollen är obligatorisk.',
+      'Rotdragning skulle skapa ännu fler rotuttryck — det är kvadrering som tar BORT rottecken.',
+      'pq-formeln kräver en andragradsekvation utan rottecken — den kan bli aktuell först EFTER kvadreringen.',
+      'Metoden är systematisk och algebraisk — ingen gissning behövs.',
+    ],
+  },
+  {
+    question: 'Vad är en falsk rot?',
+    choices: [
+      'En lösning som uppstår vid kvadreringen men inte uppfyller den ursprungliga ekvationen',
+      'En lösning som är negativ',
+      'En lösning som innehåller ett rottecken',
+      'En avrundad lösning',
+    ],
+    correct: 0,
+    why: [
+      'Kvadreringen är inte reversibel: ur $A = B$ följer $A^2 = B^2$, men $A^2 = B^2$ gäller även för $A = -B$. Sådana extralösningar avslöjas vid kontrollen.',
+      'Negativa lösningar kan vara helt giltiga — falskheten avgörs av kontrollen i ursprungsekvationen, inte av tecknet.',
+      'Lösningens form spelar ingen roll — det är om den uppfyller ursprungsekvationen som räknas.',
+      'Falska rötter handlar inte om avrundning utan om kvadreringens extralösningar.',
+    ],
+  },
+  {
+    question: 'Ekvationen $x + 3\\sqrt{x} - 4 = 0$ ska lösas med variabelsubstitution. Vilken substitution är lämplig, och vad blir den nya ekvationen?',
+    choices: [
+      '$t = \\sqrt{x}$ ger $t^2 + 3t - 4 = 0$',
+      '$t = x^2$ ger $t + 3\\sqrt{t} - 4 = 0$',
+      '$t = 3\\sqrt{x}$ ger $t^2 + t - 4 = 0$',
+      '$t = x + 3$ ger $t\\sqrt{x} = 4$',
+    ],
+    correct: 0,
+    why: [
+      'Med $t = \\sqrt{x}$ blir $x = t^2$, och ekvationen förvandlas till en vanlig andragradsekvation i t som pq-formeln löser.',
+      'Den substitutionen gör inte ekvationen enklare — rottecknet finns kvar.',
+      'Med $t = 3\\sqrt{x}$ blir $x = t^2/9$ — koefficienterna blir krångligare, inte enklare.',
+      'Substitutionen ska ersätta ROTUTTRYCKET så att ekvationen blir rotfri.',
+    ],
+  },
+  {
+    question: 'Efter substitutionen $t = \\sqrt{x}$ fås $t_1 = -4$ och $t_2 = 1$. Vad gäller för $t_1 = -4$?',
+    choices: [
+      '$\\sqrt{x} = -4$ saknar lösning — ett rotuttryck är aldrig negativt (kvadrering ger den falska roten $x = 16$)',
+      '$t_1 = -4$ ger den giltiga lösningen $x = 16$',
+      '$t_1 = -4$ ger lösningen $x = -16$',
+      '$t_1 = -4$ ger lösningen $x = -2$',
+    ],
+    correct: 0,
+    why: [
+      'Kvadratroten ur ett tal är aldrig negativ, så $\\sqrt{x} = -4$ är omöjlig. Kvadrerar man ändå fås x = 16 — som kontrollen avslöjar som falsk rot.',
+      'Kontrollen i ursprungsekvationen visar att x = 16 INTE stämmer (VL blir 24, inte 0).',
+      'Kvadrering av −4 ger +16 — men även den roten är falsk.',
+      'Roten och halveringar hör inte ihop — och ekvationen $\\sqrt{x} = -4$ saknar helt lösning.',
+    ],
+  },
+],
+
+'ma2c-3.1': [
+  {
+    question: 'Vad kallas formen på grafen till en andragradsfunktion?',
+    choices: [
+      'Parabel',
+      'Hyperbel',
+      'Sinuskurva',
+      'Rät linje',
+    ],
+    correct: 0,
+    why: [
+      'Andragradsfunktionens graf bildar en "båge" som kallas parabel.',
+      'Hyperbel är grafen till t.ex. $y = 1/x$ — två separata grenar.',
+      'Sinuskurvan hör till trigonometriska funktioner och böljar fram och tillbaka.',
+      'Räta linjer hör till förstagradsfunktioner ($y = kx + m$).',
+    ],
+  },
+  {
+    question: 'Vad är en **extrempunkt**?',
+    choices: [
+      'Ett samlingsnamn för maximi- och minimipunkt',
+      'Den punkt där grafen skär y-axeln',
+      'Ett annat namn för nollställe',
+      'Den punkt där grafen är som brantast',
+    ],
+    correct: 0,
+    why: [
+      'En extrempunkt är antingen en maximipunkt ("topp") eller en minimipunkt ("dal") — vilket av dem kallas punktens karaktär.',
+      'Skärningen med y-axeln är en annan sak — den ges av konstanttermen.',
+      'Nollställen är där grafen skär x-axeln, inte parabelns topp/dal.',
+      'I extrempunkten är grafen tvärtom som flackast — den vänder där.',
+    ],
+  },
+  {
+    question: 'Funktionen $f(x) = -3x^2 + 6x - 1$ har en negativ $x^2$-term. Vilken karaktär har extrempunkten?',
+    choices: [
+      'Maximipunkt — negativ andragradsterm ger "sur mun"',
+      'Minimipunkt — negativ andragradsterm ger "glad mun"',
+      'Det beror på konstanttermen',
+      'Funktionen saknar extrempunkt',
+    ],
+    correct: 0,
+    why: [
+      'Negativ andragradsterm gör att parabeln öppnar sig nedåt ("sur mun") — grafen har en topp, en maximipunkt.',
+      'Minnesreglerna är tvärtom: positiv term ger glad mun (minimipunkt).',
+      'Karaktären avgörs enbart av tecknet på andragradstermen — konstanttermen flyttar bara grafen i höjdled.',
+      'Alla andragradsfunktioner har exakt en extrempunkt.',
+    ],
+  },
+  {
+    question: 'Vad gäller för symmetrilinjen till en parabel?',
+    choices: [
+      'Den är lodrät, går genom extrempunkten och anges med sin x-koordinat',
+      'Den är vågrät och går genom nollställena',
+      'Den sammanfaller alltid med y-axeln',
+      'Den finns bara om parabeln har nollställen',
+    ],
+    correct: 0,
+    why: [
+      'Symmetrilinjen delar parabeln i två spegellika halvor; extrempunkten ligger alltid på den, och ekvationen skrivs t.ex. $x_s = 3$.',
+      'Symmetrilinjen är lodrät — en vågrät linje kan inte dela parabeln i två spegellika halvor.',
+      'Bara parabler med extrempunkt på y-axeln har $x_s = 0$ — i allmänhet ligger den någon annanstans.',
+      'Alla parabler har en symmetrilinje, oavsett om nollställen finns.',
+    ],
+  },
+  {
+    question: 'Hur många nollställen kan en andragradsfunktion ha?',
+    choices: [
+      'Två, ett eller inga',
+      'Alltid exakt två',
+      'Alltid minst ett',
+      'Hur många som helst',
+    ],
+    correct: 0,
+    why: [
+      'Parabeln kan skära x-axeln två gånger, nudda den en gång (dubbelrot) eller ligga helt ovanför/under den (inga nollställen).',
+      'En parabel som ligger helt ovanför x-axeln saknar nollställen, och en som nuddar har bara ett.',
+      'En parabel med minimipunkt ovanför x-axeln skär aldrig axeln.',
+      'En parabel kan aldrig skära x-axeln fler än två gånger.',
+    ],
+  },
+],
+
+'ma2c-3.2': [
+  {
+    question: 'Hur bestäms en andragradsfunktions **nollställen** algebraiskt?',
+    choices: [
+      'Sätt funktionsuttrycket lika med 0 och lös ekvationen',
+      'Sätt in $x = 0$ i funktionsuttrycket',
+      'Ta medelvärdet av extrempunktens koordinater',
+      'Läs av konstanttermen',
+    ],
+    correct: 0,
+    why: [
+      'Nollställen är de x-värden där funktionens värde är 0 — ekvationen $f(x) = 0$ (t.ex. med pq-formeln) ger dem.',
+      '$x = 0$ ger skärningen med y-axeln, inte nollställena.',
+      'Extrempunkten ligger mellan nollställena men ger dem inte direkt.',
+      'Konstanttermen är funktionens värde vid $x = 0$.',
+    ],
+  },
+  {
+    question: 'En funktion har nollställena $x = 3$ och $x = 7$. Vilken är symmetrilinjen?',
+    choices: [
+      '$x_s = 5$',
+      '$x_s = 4$',
+      '$x_s = 10$',
+      '$x_s = 21$',
+    ],
+    correct: 0,
+    why: [
+      'Symmetrilinjen ligger mitt emellan nollställena: $(3 + 7)/2 = 5$.',
+      '4 är halva avståndet mellan nollställena — men symmetrilinjen är medelvärdet, inte avståndet.',
+      '10 är summan av nollställena — den ska halveras.',
+      '21 är produkten av nollställena, inte medelvärdet.',
+    ],
+  },
+  {
+    question: 'En funktion saknar nollställen. Hur hittas symmetrilinjen ändå?',
+    choices: [
+      'Som "talet framför rottecknet" i pq-formeln, dvs. $x_s = -\\frac{p}{2}$',
+      'Det går inte — utan nollställen finns ingen symmetrilinje',
+      'Symmetrilinjen är då alltid $x_s = 0$',
+      'Genom att läsa av konstanttermen q',
+    ],
+    correct: 0,
+    why: [
+      'pq-formelns första term $-\\frac{p}{2}$ pekar ut symmetrilinjen även när uttrycket under roten är negativt.',
+      'Alla parabler har en symmetrilinje — det är bara nollställena som kan saknas.',
+      'Symmetrilinjen ligger vid $-\\frac{p}{2}$, som sällan är 0.',
+      'q påverkar grafens höjdläge och antalet nollställen — inte symmetrilinjens läge.',
+    ],
+  },
+  {
+    question: 'Hur bestäms extrempunktens fullständiga koordinater?',
+    choices: [
+      'x-koordinaten är symmetrilinjens värde, y-koordinaten fås genom insättning i funktionen',
+      'Båda koordinaterna läses av i pq-formeln',
+      'x-koordinaten är ett nollställe, y-koordinaten är 0',
+      'x är konstanttermen och y är koefficienten framför x',
+    ],
+    correct: 0,
+    why: [
+      'Extrempunkten ligger på symmetrilinjen ($x = x_s$), och funktionsvärdet där, $f(x_s)$, är extrempunktens y-koordinat.',
+      'pq-formeln ger nollställena och (via $-p/2$) symmetrilinjen — y-koordinaten kräver insättning i funktionen.',
+      'Det beskriver ett nollställe, inte extrempunkten.',
+      'Koefficienterna är inte koordinater.',
+    ],
+  },
+  {
+    question: 'Bestäm minsta värdet av $f(x) = x^2 - 10x + 21$, som har nollställena $x = 3$ och $x = 7$.',
+    choices: [
+      '$-4$',
+      '$5$',
+      '$21$',
+      '$0$',
+    ],
+    correct: 0,
+    why: [
+      'Symmetrilinjen är $x_s = 5$ och $f(5) = 25 - 50 + 21 = -4$ — minsta värdet är extrempunktens y-koordinat.',
+      '5 är symmetrilinjens x-värde — minsta VÄRDET är funktionens värde där, $f(5)$.',
+      '21 är funktionens värde vid $x = 0$ (skärningen med y-axeln).',
+      '0 är funktionens värde i nollställena — men minimipunkten ligger lägre, mellan dem.',
+    ],
+  },
+],
+
+'ma2c-3.3': [
+  {
+    question: 'Vad står $x_1$ och $x_2$ för i faktorformen $f(x) = k(x - x_1)(x - x_2)$?',
+    choices: [
+      'Funktionens nollställen',
+      'Extrempunktens koordinater',
+      'Två valfria punkter på grafen',
+      'Koefficienterna framför x-termerna',
+    ],
+    correct: 0,
+    why: [
+      'Insättning av $x = x_1$ eller $x = x_2$ gör en faktor till 0 — de är precis funktionens nollställen.',
+      'Extrempunkten ligger mitt emellan nollställena men ingår inte i faktorformen direkt.',
+      'Punkterna i faktorformen är inte valfria — de är just nollställena.',
+      'Koefficienten i faktorformen är k.',
+    ],
+  },
+  {
+    question: 'Vad krävs för att bestämma en andragradsfunktion med faktorform (Metod 1)?',
+    choices: [
+      'Nollställena samt ytterligare en punkt på grafen (som inte är ett nollställe)',
+      'Endast nollställena',
+      'Tre valfria punkter på grafen',
+      'Extrempunkten och symmetrilinjen',
+    ],
+    correct: 0,
+    why: [
+      'Nollställena ger faktorerna, men k är fortfarande obekant — en extra punkt sätts in för att bestämma k.',
+      'Utan en extra punkt är k obekant — oändligt många parabler har samma nollställen.',
+      'Tre punkter hör till Metod 2 (utvecklad form) — faktorformen klarar sig med nollställen plus en punkt.',
+      'Extrempunkten ligger på symmetrilinjen så de ger delvis samma information — det räcker inte för att fixera funktionen utan nollställena.',
+    ],
+  },
+  {
+    question: 'När fungerar INTE metoden med faktorform?',
+    choices: [
+      'När funktionen saknar nollställen eller när nollställena är okända',
+      'När parabeln har en maximipunkt',
+      'När grafen går genom origo',
+      'När k är negativt',
+    ],
+    correct: 0,
+    why: [
+      'Faktorformen bygger på nollställena — finns de inte (eller syns de inte) används i stället tre punkter och utvecklad form.',
+      'Karaktären spelar ingen roll — k blir negativt för en maximipunkt, men metoden fungerar.',
+      'Origo kan själv vara ett nollställe (som för fontänen) — metoden fungerar utmärkt.',
+      'k får vara vilket tal som helst utom 0.',
+    ],
+  },
+  {
+    question: 'Vad gäller i faktorformen om funktionen har en dubbelrot (grafen vänder på x-axeln)?',
+    choices: [
+      '$x_1 = x_2$ — samma faktor två gånger',
+      'k måste vara 0',
+      'Faktorformen kan inte användas',
+      'Funktionen har då tre nollställen',
+    ],
+    correct: 0,
+    why: [
+      'Vid en dubbelrot nuddar parabeln x-axeln i en enda punkt: $f(x) = k(x - x_1)^2$.',
+      'k = 0 skulle göra hela funktionen till 0 — k beskriver formen, inte antalet rötter.',
+      'Faktorformen fungerar fint — faktorn upprepas bara.',
+      'En andragradsfunktion kan aldrig ha fler än två nollställen.',
+    ],
+  },
+  {
+    question: 'En parabel har nollställena $x = -2$ och $x = 4$ och går genom (0, 8). Vad är $k$ i $f(x) = k(x + 2)(x - 4)$?',
+    choices: [
+      '$k = -1$',
+      '$k = 1$',
+      '$k = 8$',
+      '$k = -4$',
+    ],
+    correct: 0,
+    why: [
+      'Insättning av (0, 8): $8 = k(0 + 2)(0 - 4) = -8k$, vilket ger $k = -1$.',
+      'Med $k = 1$ blir $f(0) = 2 \\cdot (-4) = -8$, inte $+8$.',
+      'Insättningen ger $8 = -8k$ — k är inte funktionsvärdet självt.',
+      'Produkten $(0+2)(0-4) = -8$ ska multipliceras med k och bli 8, så $k = -1$.',
+    ],
+  },
+],
+
+'ma2c-3.4': [
+  {
+    question: 'Ekvationen $x^2 - 3x + 1 = 2x - 1$ ska lösas grafiskt. Vad ritar man upp?',
+    choices: [
+      'Båda leden som varsin funktion: $y = x^2 - 3x + 1$ och $y = 2x - 1$',
+      'Endast vänsterledet: $y = x^2 - 3x + 1$',
+      'Skillnaden av leden upphöjd till 2',
+      'Symmetrilinjen till vänsterledet',
+    ],
+    correct: 0,
+    why: [
+      'Metoden är VL och HL som varsin graf — skärningarnas x-koordinater är lösningarna.',
+      'Bara VL fungerar när HL är 0 (då används nollställena) — här är HL en linje.',
+      'Ingen kvadrering ingår i den grafiska metoden.',
+      'Symmetrilinjen hittar extrempunkten — inte lösningarna till en ekvation.',
+    ],
+  },
+  {
+    question: 'En andragradsekvation är lika med 0. Vilken grafisk genväg finns?',
+    choices: [
+      'Rita vänsterledet och ta fram grafens nollställen',
+      'Rita vänsterledet och ta fram extrempunkten',
+      'Rita $y = 0$ och ta fram dess extrempunkt',
+      'Ingen — ekvationer lika med 0 kan inte lösas grafiskt',
+    ],
+    correct: 0,
+    why: [
+      'HL är 0, dvs. x-axeln — skärningarna med den är just grafens nollställen (verktyget "Nollställen" i Geogebra).',
+      'Extrempunkten visar största/minsta värde — inte var funktionen är 0.',
+      '$y = 0$ ÄR x-axeln — en rät linje utan extrempunkt.',
+      'Det går utmärkt — nollställena är lösningarna.',
+    ],
+  },
+  {
+    question: 'Vad ger skärningspunkternas x-koordinater när en **olikhet** löses grafiskt?',
+    choices: [
+      'Gränserna för lösningsintervallen',
+      'Lösningarna direkt',
+      'Olikhetens tecken',
+      'Funktionernas största värden',
+    ],
+    correct: 0,
+    why: [
+      'Skärningarna är där graferna byter ordning (över/under) — deras x-koordinater blir intervallens gränser, och sedan avgörs vilken sida som gäller.',
+      'Till skillnad från en ekvation är lösningen ett helt intervall, inte bara skärningspunkterna.',
+      'Tecknet står i uppgiften — grafen visar VAR det är uppfyllt.',
+      'Största värden hör till extrempunkter, inte olikhetslösning.',
+    ],
+  },
+  {
+    question: 'Olikheten $f(x) > g(x)$ gäller där …',
+    choices: [
+      'grafen till $f$ ligger över grafen till $g$',
+      'grafen till $f$ ligger under grafen till $g$',
+      'graferna skär varandra',
+      'grafen till $f$ ligger över x-axeln',
+    ],
+    correct: 0,
+    why: [
+      'Större funktionsvärde = högre upp i koordinatsystemet — f över g betyder $f(x) > g(x)$.',
+      'Under-läget svarar mot $f(x) < g(x)$.',
+      'I skärningarna är $f(x) = g(x)$ — likhet, inte olikhet.',
+      'x-axeln är bara referens när HL är 0 — här jämförs f med g.',
+    ],
+  },
+  {
+    question: 'Parabeln $f(x) = x^2 + 6x + 6$ skär linjen $g(x) = 1$ vid $x = -5$ och $x = -1$, och ligger under linjen däremellan. Vilken är lösningen till $x^2 + 6x + 6 > 1$?',
+    choices: [
+      '$x < -5$ och $x > -1$',
+      '$-5 < x < -1$',
+      '$x > -1$',
+      '$x = -5$ och $x = -1$',
+    ],
+    correct: 0,
+    why: [
+      'Parabeln ligger ÖVER linjen utanför skärningarna — lösningen består av två intervall, ett på varje sida.',
+      'Mellan skärningarna ligger parabeln UNDER linjen — det är lösningen till $< 1$.',
+      'Även området till vänster om $x = -5$ uppfyller olikheten — parabeln stiger brant åt båda hållen.',
+      'Det är lösningarna till EKVATIONEN $= 1$ — olikheten löses av hela intervall.',
+    ],
+  },
+],
+
+'ma2c-3.5': [
+  {
+    question: 'En rakets höjd beskrivs av $h(t) = 40t - 4{,}9t^2$. Hur tar man grafiskt reda på **när raketen landar**?',
+    choices: [
+      'Ta fram grafens nollställe längst till höger — där är höjden 0 igen',
+      'Ta fram extrempunkten',
+      'Läsa av grafens skärning med y-axeln',
+      'Rita hjälplinjen $y = 40$',
+    ],
+    correct: 0,
+    why: [
+      'Landning betyder $h(t) = 0$ — det högra nollstället ger landningstiden (det vänstra, $t = 0$, är starten).',
+      'Extrempunkten ger högsta höjden, inte landningen.',
+      'Vid $t = 0$ startar raketen — skärningen med y-axeln är startögonblicket.',
+      '40 är koefficienten i funktionen, inte en höjd att sikta på.',
+    ],
+  },
+  {
+    question: 'Hur bestäms raketens **högsta höjd** grafiskt?',
+    choices: [
+      'Med verktyget Extrempunkt — maximipunktens y-koordinat är svaret',
+      'Med verktyget Nollställen',
+      'Maximipunktens x-koordinat är svaret',
+      'Genom att rita $y = 100$ och ta skärningarna',
+    ],
+    correct: 0,
+    why: [
+      'Högsta höjden är det största funktionsvärdet — maximipunktens y-koordinat.',
+      'Nollställena visar när höjden är 0 — start och landning.',
+      'x-koordinaten säger NÄR raketen är som högst — höjden är y-koordinaten.',
+      'En godtycklig hjälplinje visar när en viss höjd nås — inte den högsta.',
+    ],
+  },
+  {
+    question: 'Hur tar man reda på **när** raketen befinner sig på höjden 50 meter?',
+    choices: [
+      'Rita hjälplinjen $y = 50$ och ta fram skärningarna med grafen',
+      'Sätt in $t = 50$ i funktionen',
+      'Ta fram nollställena',
+      'Läsa av y-koordinaten i extrempunkten',
+    ],
+    correct: 0,
+    why: [
+      'Skärningarna mellan banan och linjen $y = 50$ ger tidpunkterna — typiskt två: en på väg upp och en på väg ner.',
+      '$t = 50$ ger höjden efter 50 sekunder — frågan är omvänd: när är höjden 50?',
+      'Nollställena gäller höjden 0.',
+      'Extrempunkten ger den högsta höjden, inte en specifik höjd.',
+    ],
+  },
+  {
+    question: 'En hage byggs mot en mur med 52 m stängsel till tre sidor. De två lika sidorna kallas $x$. Varför blir den tredje sidan $52 - 2x$?',
+    choices: [
+      'Stängslet räcker till tre sidor — två av dem tar $2x$, resten blir kvar till den tredje',
+      'Muren är alltid dubbelt så lång som sidorna',
+      'Arean ska vara $52\\ \\mathrm{m}^2$',
+      'Symmetrilinjen ligger vid $x = 52$',
+    ],
+    correct: 0,
+    why: [
+      'Totalt 52 m fördelas på tre sidor: $x + x + \\text{tredje sidan} = 52$, så tredje sidan är $52 - 2x$.',
+      'Muren ersätter den fjärde sidan och behöver inget stängsel — dess längd ingår inte i beräkningen.',
+      '52 är stängslets längd i meter, inte arean.',
+      '52 är stängsellängden — symmetrilinjen för arean hamnar vid $x = 13$.',
+    ],
+  },
+  {
+    question: 'Arean beskrivs av $A(x) = x(52 - 2x)$ och verktyget Extrempunkt ger (13, 338). Hur tolkas det?',
+    choices: [
+      'Den maximala arean är $338\\ \\mathrm{m}^2$ och fås när $x = 13$ m',
+      'Den maximala arean är $13\\ \\mathrm{m}^2$ och fås när $x = 338$ m',
+      'Hagen ska vara 13 × 338 meter',
+      'Arean är alltid $338\\ \\mathrm{m}^2$ oavsett x',
+    ],
+    correct: 0,
+    why: [
+      'Maximipunktens x-koordinat är det värde på x som ger störst area, och y-koordinaten är själva arean. Måtten blir 13 m och $52 - 26 = 26$ m.',
+      'Koordinaterna har bytt plats — x-värdet är sidan, y-värdet arean.',
+      'Måtten är $x = 13$ m och $52 - 2x = 26$ m — 338 är arean, inte en sida.',
+      'Parabeln visar just att arean VARIERAR med x — 338 är dess största värde.',
+    ],
+  },
+],
+
+'ma2c-4.1': [
+  {
+    question: 'En vinkel är 90°. Vad kallas den?',
+    choices: [
+      'Rät vinkel',
+      'Spetsig vinkel',
+      'Trubbig vinkel',
+      'Rak vinkel',
+    ],
+    correct: 0,
+    why: [
+      'Exakt 90° är definitionen av en rät vinkel — den markeras ofta med en liten kvadrat.',
+      'Spetsiga vinklar är mindre än 90°.',
+      'Trubbiga vinklar ligger mellan 90° och 180°.',
+      'En rak vinkel är 180° — ett halvt varv.',
+    ],
+  },
+  {
+    question: 'Vad är en **transversal**?',
+    choices: [
+      'En linje som skär minst två andra linjer',
+      'En linje som delar en vinkel mitt itu',
+      'En linje som är parallell med en annan linje',
+      'En vinkel som är större än 180°',
+    ],
+    correct: 0,
+    why: [
+      'Transversalen är den skärande linjen — när den korsar två parallella linjer uppstår likbelägna vinklar, alternatvinklar med mera.',
+      'En stråle som delar en vinkel mitt itu kallas bisektris.',
+      'Parallella linjer skär aldrig varandra — transversalen gör precis tvärtom.',
+      'En transversal är en linje, inte en vinkel.',
+    ],
+  },
+  {
+    question: 'Två parallella linjer skärs av en transversal. Vad gäller för **likbelägna** vinklar?',
+    choices: [
+      'De är lika stora',
+      'De är tillsammans 180°',
+      'De är tillsammans 90°',
+      'Den ena är dubbelt så stor som den andra',
+    ],
+    correct: 0,
+    why: [
+      'Likbelägna vinklar sitter i samma position vid varsin skärning — och är lika stora när linjerna är parallella.',
+      'Tillsammans 180° gäller sidovinklar.',
+      'Ingen av vinkelparen vid en transversal summerar till 90° i allmänhet.',
+      'Dubbelt så stor hör till randvinkelsatsen i cirklar — inte transversaler.',
+    ],
+  },
+  {
+    question: 'Vinklarna $v_3$ och $v_4$ bildar tillsammans en rak vinkel. Vad kallas de, och vad är deras summa?',
+    choices: [
+      'Sidovinklar — summan är 180°',
+      'Vertikalvinklar — summan är 180°',
+      'Alternatvinklar — summan är 90°',
+      'Likbelägna vinklar — summan är 360°',
+    ],
+    correct: 0,
+    why: [
+      'Vinklar som tillsammans bildar en rak vinkel kallas sidovinklar, och en rak vinkel är 180°.',
+      'Vertikalvinklar ligger mitt emot varandra och är LIKA stora — deras summa varierar.',
+      'Alternatvinklar är lika stora (vid parallella linjer), inte komplementära.',
+      'Likbelägna vinklar är lika stora — och ett helt varv (360°) är fyra räta vinklar, inte en rak.',
+    ],
+  },
+  {
+    question: 'Vad gör en **bisektris**?',
+    choices: [
+      'Delar en vinkel mitt itu',
+      'Skär två parallella linjer',
+      'Delar en sträcka mitt itu',
+      'Bildar alltid en rät vinkel mot basen',
+    ],
+    correct: 0,
+    why: [
+      'En bisektris är en stråle som delar en vinkel i två lika stora halvor.',
+      'Det beskriver en transversal.',
+      'Bisektrisen delar en VINKEL — den punkt som delar en sträcka mitt itu kallas mittpunkt.',
+      'Bisektrisen följer vinkelns riktning — den är sällan vinkelrät mot något.',
+    ],
+  },
+],
+
+'ma2c-4.2': [
+  {
+    question: 'Vad är vinkelsumman i en triangel?',
+    choices: [
+      '180°',
+      '360°',
+      '90°',
+      'Det beror på triangelns form',
+    ],
+    correct: 0,
+    why: [
+      'Vinkelsumman i en triangel är alltid 180° — oavsett form.',
+      '360° är vinkelsumman i en fyrhörning.',
+      '90° är en enda rät vinkel.',
+      'Summan är alltid exakt 180° — det är formoberoende.',
+    ],
+  },
+  {
+    question: 'Vad är vinkelsumman i en fyrhörning?',
+    choices: [
+      '360°',
+      '180°',
+      '540°',
+      '720°',
+    ],
+    correct: 0,
+    why: [
+      'En fyrhörning kan delas i två trianglar — vinkelsumman är 2 · 180° = 360°.',
+      '180° är triangelns vinkelsumma.',
+      '540° är femhörningens vinkelsumma (tre trianglar).',
+      '720° är sexhörningens vinkelsumma (fyra trianglar).',
+    ],
+  },
+  {
+    question: 'Hur bestäms vinkelsumman i en femhörning?',
+    choices: [
+      'Dela femhörningen i tre trianglar från ett hörn: 3 · 180° = 540°',
+      'Multiplicera antalet hörn med 90°: 5 · 90° = 450°',
+      'Addera 100° per hörn: 5 · 100° = 500°',
+      'Vinkelsumman är alltid 360° oavsett antal hörn',
+    ],
+    correct: 0,
+    why: [
+      'Sträckor från ett hörn till alla övriga delar femhörningen i tre trianglar, och varje triangel bidrar med 180°.',
+      'Hörn gånger 90° stämmer inte — testa med triangeln: 3 · 90° = 270° ≠ 180°.',
+      '100° per hörn är påhittat — metoden är triangeluppdelningen.',
+      '360° gäller bara fyrhörningar (och hela varv).',
+    ],
+  },
+  {
+    question: 'Vad kännetecknar en **liksidig** triangel?',
+    choices: [
+      'Alla sidor lika långa och alla vinklar 60°',
+      'Minst två sidor lika långa',
+      'En rät vinkel',
+      'Alla vinklar olika stora',
+    ],
+    correct: 0,
+    why: [
+      'Liksidig = alla tre sidor lika, vilket tvingar alla vinklar att vara 180°/3 = 60°.',
+      'Minst två lika sidor beskriver en likbent triangel.',
+      'En rät vinkel gör triangeln rätvinklig — dess sidor följer Pythagoras sats.',
+      'Tvärtom — i en liksidig triangel är alla vinklar lika.',
+    ],
+  },
+  {
+    question: 'I en likbent triangel är basvinklarna …',
+    choices: [
+      'lika stora',
+      'tillsammans 90°',
+      'alltid 60°',
+      'olika stora',
+    ],
+    correct: 0,
+    why: [
+      'Basvinklarna (vinklarna mot basen) i en likbent triangel är alltid lika stora.',
+      'Deras summa beror på toppvinkeln — den är inte låst till 90°.',
+      '60° gäller bara i det liksidiga specialfallet.',
+      'Det är just likheten mellan basvinklarna som kännetecknar likbenta trianglar.',
+    ],
+  },
+],
+
+'ma2c-4.3': [
+  {
+    question: 'Vad betyder $A \\implies B$?',
+    choices: [
+      'A leder till B, men B behöver inte leda till A',
+      'A leder till B och B leder till A',
+      'A och B är samma påstående',
+      'A motsäger B',
+    ],
+    correct: 0,
+    why: [
+      'Implikationen pekar åt ett håll: om A är sann måste B vara sann — men inte nödvändigtvis omvänt.',
+      'Det beskriver ekvivalensen A ⟺ B.',
+      'A och B är olika påståenden som kopplas med en logisk pil.',
+      'Implikation handlar om att A MEDFÖR B — inte motsäger.',
+    ],
+  },
+  {
+    question: 'När är två påståenden **ekvivalenta**?',
+    choices: [
+      'När implikationen gäller åt båda håll',
+      'När implikationen gäller åt minst ett håll',
+      'När båda påståendena är falska',
+      'När det finns ett motexempel',
+    ],
+    correct: 0,
+    why: [
+      'Ekvivalens A ⟺ B kräver att A leder till B OCH att B leder till A.',
+      'Ett håll räcker bara för implikation.',
+      'Sanningshalten i enskilda fall avgör inte den logiska relationen.',
+      'Ett motexempel FÄLLER en implikation — det skapar ingen ekvivalens.',
+    ],
+  },
+  {
+    question: 'Hur visar man att implikationen "det är en hund ⟹ det är en tax" är falsk?',
+    choices: [
+      'Med ett enda motexempel, t.ex. en pudel',
+      'Genom att räkna upp många taxar',
+      'Genom att visa att alla taxar är hundar',
+      'Det går inte att visa',
+    ],
+    correct: 0,
+    why: [
+      'En pudel är en hund som inte är en tax — ett enda motexempel räcker för att fälla implikationen.',
+      'Stödjande exempel bevisar aldrig en implikation — och hjälper inte mot ett motexempel.',
+      'Det visar den OMVÄNDA implikationen (tax ⟹ hund), som faktiskt är sann.',
+      'Jodå — motexempel är precis verktyget för detta.',
+    ],
+  },
+  {
+    question: 'Varför gäller INTE implikationen $x^2 = 25 \\implies x = 5$?',
+    choices: [
+      'Ekvationen har även lösningen $x = -5$ — ett motexempel',
+      'Kvadratrötter kan inte beräknas exakt',
+      '25 är inte en jämn kvadrat',
+      'Implikationen gäller visst',
+    ],
+    correct: 0,
+    why: [
+      '$x = -5$ uppfyller $x^2 = 25$ men inte $x = 5$ — lösningen är inte entydig, så implikationen faller.',
+      '$\\sqrt{25} = 5$ är exakt — problemet är teckenvalet, inte beräkningen.',
+      '$25 = 5^2$ är visst en jämn kvadrat — det är inte där felet ligger.',
+      'Den gäller inte — andragradsekvationer har i regel två rötter.',
+    ],
+  },
+  {
+    question: 'Vilket tecken gäller mellan $x^3 = 27$ och $x = 3$?',
+    choices: [
+      '⟺ — båda hållen gäller eftersom tredjegradsrötter är entydiga',
+      '⟹ åt höger men inte åt vänster',
+      'Inget — påståendena saknar samband',
+      '⟸ åt vänster men inte åt höger',
+    ],
+    correct: 0,
+    why: [
+      'Udda exponent ger exakt en reell lösning: $x^3 = 27$ har bara $x = 3$, och $x = 3$ ger förstås $x^3 = 27$. Båda hållen gäller.',
+      'Även vänsterhållet gäller: $x = 3$ insatt ger $27 = 27$.',
+      'Sambandet är direkt — ekvationen och dess entydiga lösning.',
+      'Även högerhållet gäller — kubikroten ur 27 är entydigt 3.',
+    ],
+  },
+],
+
+'ma2c-4.4': [
+  {
+    question: 'Vad är skillnaden mellan ett axiom och en sats?',
+    choices: [
+      'Ett axiom gäller utan bevis, en sats är bevisad',
+      'Ett axiom är bevisat, en sats gäller utan bevis',
+      'De är samma sak',
+      'Ett axiom gäller bara i geometri',
+    ],
+    correct: 0,
+    why: [
+      'Axiom är överenskomna grundsatser som bevisen vilar på; satser är påståenden som bevisats utifrån axiom, definitioner och tidigare satser.',
+      'Precis tvärtom.',
+      'Skillnaden är just bevisen — axiom kräver inga, satser kräver.',
+      'Axiom finns i all matematik, t.ex. "varje heltal n följs av n + 1".',
+    ],
+  },
+  {
+    question: 'Vad avslutas ett utfört bevis med?',
+    choices: [
+      'v.s.b. eller v.s.v. (vilket skulle bevisas/visas)',
+      'Q.E.D. är det enda tillåtna',
+      'Ett utropstecken',
+      'Svar: följt av ett tal',
+    ],
+    correct: 0,
+    why: [
+      'Ett bevis avslutas med v.s.b. ("vilket skulle bevisas") eller v.s.v. ("vilket skulle visas").',
+      'Q.E.D. är den latinska motsvarigheten, men kursens konvention är v.s.b./v.s.v.',
+      'Beviset markeras med en formell avslutning, inte skiljetecken.',
+      '"Svar:" hör till beräkningsuppgifter — bevis avslutas med v.s.b./v.s.v.',
+    ],
+  },
+  {
+    question: 'Hur skrivs ett godtyckligt **udda** tal, om $k$ är ett heltal?',
+    choices: [
+      '$2k + 1$',
+      '$2k$',
+      '$k + 1$',
+      '$3k$',
+    ],
+    correct: 0,
+    why: [
+      'Ett udda tal är ett jämnt tal plus 1: $2k + 1$.',
+      '$2k$ är alltid jämnt (delbart med 2).',
+      '$k + 1$ kan vara både jämnt och udda beroende på k.',
+      '$3k$ växlar också paritet — t.ex. 3, 6, 9.',
+    ],
+  },
+  {
+    question: 'I ett bevis måste varje steg …',
+    choices: [
+      'motiveras utifrån axiom, definitioner eller tidigare kända satser',
+      'testas med minst tre exempel',
+      'innehålla en ekvation',
+      'godkännas av en lärare',
+    ],
+    correct: 0,
+    why: [
+      'Det är det som gör resonemanget till ett bevis — inga luckor, varje steg vilar på något etablerat.',
+      'Exempel illustrerar men bevisar inte — ett bevis ska täcka ALLA fall.',
+      'Bevis kan föras i ord och geometri också — kravet är motiveringen, inte formen.',
+      'Bevisets giltighet ligger i logiken, inte i ett godkännande.',
+    ],
+  },
+  {
+    question: 'Varför skrivs talen som $n$, $n + 1$, $n + 2$ när man bevisar något om tre på varandra följande heltal?',
+    choices: [
+      'För att beviset ska gälla ALLA sådana taltrippler, inte bara ett exempel',
+      'För att det är kortare att skriva',
+      'För att undvika negativa tal',
+      'För att summan då alltid blir jämn',
+    ],
+    correct: 0,
+    why: [
+      'Variabeln n representerar vilket heltal som helst — det som visas för n, n+1, n+2 gäller därmed generellt. Ett exempel som 4, 5, 6 bevisar bara det fallet.',
+      'Syftet är allmängiltighet, inte kortare skrivsätt.',
+      'n får vara negativt — beviset gäller ändå.',
+      'Summan 3n + 3 är delbar med 3, men jämnheten varierar med n.',
+    ],
+  },
+],
+
+'ma2c-4.5': [
+  {
+    question: 'Vad säger Pythagoras sats?',
+    choices: [
+      'I en rätvinklig triangel är summan av kateternas kvadrater lika med hypotenusans kvadrat',
+      'I alla trianglar är summan av de två kortaste sidorna lika med den längsta',
+      'Vinkelsumman i en rätvinklig triangel är 90°',
+      'Hypotenusan är alltid dubbelt så lång som en katet',
+    ],
+    correct: 0,
+    why: [
+      '$a^2 + b^2 = c^2$ där a och b är kateter och c hypotenusan — och satsen gäller just rätvinkliga trianglar.',
+      'Sidor adderas inte rakt av — det är KVADRATERNA som summeras, och bara i rätvinkliga trianglar.',
+      'Vinkelsumman är 180° i alla trianglar.',
+      'Förhållandet mellan hypotenusa och katet varierar — det är inget fast 2:1.',
+    ],
+  },
+  {
+    question: 'I en rätvinklig triangel är kateterna 3 och 4. Vad är hypotenusan?',
+    choices: [
+      '5',
+      '7',
+      '25',
+      '$\\sqrt{7}$',
+    ],
+    correct: 0,
+    why: [
+      '$c^2 = 3^2 + 4^2 = 25$, så $c = 5$ — den klassiska 3-4-5-triangeln.',
+      '7 är summan av kateterna — men det är kvadraterna som ska summeras, följt av roten.',
+      '25 är $c^2$ — glöm inte att dra roten ur.',
+      '$\\sqrt{7}$ fås om man adderar sidorna i stället för kvadraterna.',
+    ],
+  },
+  {
+    question: 'Varför skrivs lösningen $x = \\pm\\sqrt{144}$ men svaret blir bara 12?',
+    choices: [
+      'En sträcka kan inte vara negativ, så den negativa roten bortses',
+      'Negativa tal saknar kvadratrot',
+      '−12 är en felräkning',
+      'Man väljer alltid det största talet',
+    ],
+    correct: 0,
+    why: [
+      'Ekvationen $x^2 = 144$ har matematiskt två rötter, men i geometrin är x en sidlängd — tolkningen sållar bort −12.',
+      'Roten ur ett negativt tal saknas — men här är det roten som ger ± framför ett positivt resultat.',
+      '−12 löser ekvationen korrekt — den förkastas av geometriska skäl, inte räknefel.',
+      'Valet styrs av rimlighet (positiv längd), inte storlek.',
+    ],
+  },
+  {
+    question: 'Sidorna i en triangel är 6, 8 och 11. Är triangeln rätvinklig?',
+    choices: [
+      'Nej — $6^2 + 8^2 = 100$ men $11^2 = 121$',
+      'Ja — $6 + 8 > 11$',
+      'Ja — 6-8-triangeln är alltid rätvinklig',
+      'Det kan inte avgöras utan vinklarna',
+    ],
+    correct: 0,
+    why: [
+      'Omvändningen av Pythagoras sats: likheten $a^2 + b^2 = c^2$ måste gälla. Här är $100 \\neq 121$, så ingen rät vinkel.',
+      'Triangelolikheten avgör bara om triangeln EXISTERAR — inte om den är rätvinklig.',
+      'Med hypotenusan 10 vore den rätvinklig — men här är längsta sidan 11.',
+      'Pythagoras sats är en ekvivalens — sidorna räcker för att avgöra saken.',
+    ],
+  },
+  {
+    question: 'Pythagoras sats är en ekvivalens: $a^2 + b^2 = c^2 \\iff$ …',
+    choices: [
+      'triangeln är rätvinklig',
+      'triangeln är likbent',
+      'triangeln är liksidig',
+      'triangeln har en trubbig vinkel',
+    ],
+    correct: 0,
+    why: [
+      'Sambandet gäller åt båda håll: rätvinklig triangel ger likheten, och likheten ger rätvinklig triangel.',
+      'Likbenta trianglar handlar om två lika sidor — inget kvadratsamband.',
+      'Liksidiga trianglar har alla vinklar 60° — ingen rät vinkel alls.',
+      'Trubbvinkliga trianglar har tvärtom $a^2 + b^2 < c^2$.',
+    ],
+  },
+],
+
+'ma2c-4.6': [
+  {
+    question: 'Vad beräknar avståndsformeln $d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$?',
+    choices: [
+      'Avståndet mellan två punkter i ett koordinatsystem',
+      'Mittpunkten mellan två punkter',
+      'Lutningen mellan två punkter',
+      'Arean av triangeln mellan punkterna',
+    ],
+    correct: 0,
+    why: [
+      'Formeln är Pythagoras sats på koordinatform: kateterna är skillnaderna i x- respektive y-led och d är hypotenusan.',
+      'Mittpunkten fås av medelvärdena, inte av rötter och kvadrater.',
+      'Lutningen är kvoten Δy/Δx — utan kvadrater.',
+      'Formeln ger en sträcka, inte en area.',
+    ],
+  },
+  {
+    question: 'Hur lyder mittpunktsformeln?',
+    choices: [
+      '$(x_m, y_m) = \\left(\\frac{x_1 + x_2}{2},\\ \\frac{y_1 + y_2}{2}\\right)$',
+      '$(x_m, y_m) = (x_2 - x_1,\\ y_2 - y_1)$',
+      '$(x_m, y_m) = \\left(\\frac{x_1 + y_1}{2},\\ \\frac{x_2 + y_2}{2}\\right)$',
+      '$(x_m, y_m) = (x_1 \\cdot x_2,\\ y_1 \\cdot y_2)$',
+    ],
+    correct: 0,
+    why: [
+      'Mittpunkten ligger mitt emellan — medelvärdet av x-koordinaterna och medelvärdet av y-koordinaterna.',
+      'Skillnaderna ger förflyttningen mellan punkterna, inte mitten.',
+      'x- och y-koordinater får inte blandas — medelvärdena tas ledvis.',
+      'Multiplikation har inget med mittpunkter att göra.',
+    ],
+  },
+  {
+    question: 'Vilka kateter har den rätvinkliga triangel som avståndsformeln bygger på?',
+    choices: [
+      'Den vågräta sträckan $(x_2 - x_1)$ och den lodräta sträckan $(y_2 - y_1)$',
+      'De två koordinataxlarna',
+      'Avståndet d och mittpunkten',
+      'Två radier i en cirkel',
+    ],
+    correct: 0,
+    why: [
+      'Mellan punkterna bildas en triangel med en vågrät och en lodrät katet — avståndet är hypotenusan, och Pythagoras sats ger formeln.',
+      'Axlarna är referenslinjer — kateterna är sträckorna mellan punkternas koordinater.',
+      'd är hypotenusan och mittpunkten är en punkt — inte en katet.',
+      'Radier hör till cirkelgeometrin, inte avståndsformeln.',
+    ],
+  },
+  {
+    question: 'Bestäm avståndet mellan (0, 0) och (6, 8).',
+    choices: [
+      '10 l.e.',
+      '14 l.e.',
+      '100 l.e.',
+      '48 l.e.',
+    ],
+    correct: 0,
+    why: [
+      '$d = \\sqrt{6^2 + 8^2} = \\sqrt{100} = 10$.',
+      '14 är summan av koordinaterna — kvadrera, addera och dra roten ur i stället.',
+      '100 är $d^2$ — roten saknas.',
+      '48 är produkten 6 · 8 — fel operation.',
+    ],
+  },
+  {
+    question: 'Mittpunkten mellan (−4, 6) och (2, −2) är …',
+    choices: [
+      '(−1, 2)',
+      '(−2, 4)',
+      '(−6, 8)',
+      '(1, −2)',
+    ],
+    correct: 0,
+    why: [
+      'Medelvärden: $\\frac{-4 + 2}{2} = -1$ och $\\frac{6 + (-2)}{2} = 2$.',
+      '(−2, 4) är halva den första punkten — båda punkterna ska medelvärdesbildas.',
+      '(−6, 8) är skillnaden mellan punkterna, inte mitten.',
+      'Teckenfel — kontrollera medelvärdena: −1 och +2.',
+    ],
+  },
+],
+
+'ma2c-4.7': [
+  {
+    question: 'Två månghörningar är **likformiga**. Vad betyder det?',
+    choices: [
+      'De har samma form — motsvarande vinklar lika och sidförhållanden lika — men kan vara olika stora',
+      'De är exakt lika stora',
+      'De har samma omkrets',
+      'De har minst en gemensam sida',
+    ],
+    correct: 0,
+    why: [
+      'Likformighet = samma form: figurerna kan vara olika stora, vridna och spegelvända, men vinklar och sidförhållanden stämmer.',
+      'Lika stora OCH likformiga = kongruenta — det är ett starkare krav.',
+      'Omkretsen skiljer i regel (skalfaktorn gånger) — det är formen som ska stämma.',
+      'Figurerna behöver inte röra varandra alls.',
+    ],
+  },
+  {
+    question: 'Varför räcker det inte att kontrollera vinklarna för fyrhörningar?',
+    choices: [
+      'Figurer med lika vinklar kan ha olika proportioner — t.ex. en kvadrat och en avlång rektangel',
+      'Vinklarna går inte att mäta i fyrhörningar',
+      'Det räcker visst — vinklar räcker alltid',
+      'Fyrhörningar saknar motsvarande vinklar',
+    ],
+    correct: 0,
+    why: [
+      'Kvadraten och den avlånga rektangeln har båda fyra räta vinklar men helt olika form — sidförhållandena måste också kontrolleras.',
+      'Vinklar mäts likadant i alla månghörningar.',
+      'Bara för trianglar räcker ett villkor.',
+      'Motsvarande vinklar identifieras hörn för hörn precis som i trianglar.',
+    ],
+  },
+  {
+    question: 'Vad är en **skalfaktor**?',
+    choices: [
+      'Kvoten mellan två motsvarande sidor — hur många gånger större den ena figuren är',
+      'Skillnaden mellan två motsvarande sidor',
+      'Summan av alla sidförhållanden',
+      'Antalet hörn i månghörningen',
+    ],
+    correct: 0,
+    why: [
+      'Skalfaktorn fås genom att dividera motsvarande sidor, t.ex. 24/8 = 3 — alla sidor i den större figuren är 3 gånger längre.',
+      'Skillnaden varierar från sida till sida — det är KVOTEN som är konstant.',
+      'Ett enda sidpar räcker — kvoten är samma för alla par.',
+      'Hörnantalet måste vara lika för likformighet, men det är inte skalfaktorn.',
+    ],
+  },
+  {
+    question: 'Två likformiga figurer har skalfaktorn 3. Sidan 5 cm i den lilla motsvaras i den stora av …',
+    choices: [
+      '15 cm',
+      '8 cm',
+      '5 cm',
+      '45 cm',
+    ],
+    correct: 0,
+    why: [
+      'Motsvarande sida = 5 · 3 = 15 cm.',
+      '8 = 5 + 3 — skalfaktorn multipliceras, adderas inte.',
+      'Sidorna är lika bara om skalfaktorn är 1.',
+      '45 = 5 · 9 — det vore skalfaktorn 3 använd två gånger (det gäller AREOR, inte sidor).',
+    ],
+  },
+  {
+    question: 'Sidan $x$ i den stora figuren motsvarar sidan 5 i den lilla, och sidparet 24 och 8 är känt. Vilken ekvation ger $x$?',
+    choices: [
+      '$\\dfrac{x}{5} = \\dfrac{24}{8}$',
+      '$\\dfrac{x}{24} = \\dfrac{8}{5}$',
+      '$x \\cdot 5 = 24 \\cdot 8$',
+      '$x - 5 = 24 - 8$',
+    ],
+    correct: 0,
+    why: [
+      'Motsvarande sidor har samma förhållande: stor/liten = stor/liten, dvs. x/5 = 24/8, vilket ger x = 15.',
+      'Paren har blandats — x hör ihop med 5 och 24 hör ihop med 8.',
+      'Produkter av sidor hör till kordasatsen — likformighet bygger på kvoter.',
+      'Skillnader bevaras inte vid skalning — kvoterna gör det.',
+    ],
+  },
+],
+
+'ma2c-4.8': [
+  {
+    question: 'Vad betyder $\\triangle ABC \\sim \\triangle DEF$?',
+    choices: [
+      'Triangeln ABC är likformig med triangeln DEF',
+      'Triangeln ABC är kongruent med triangeln DEF',
+      'Trianglarna har samma area',
+      'Trianglarna är rätvinkliga',
+    ],
+    correct: 0,
+    why: [
+      'Tecknet ~ utläses "är likformig med".',
+      'Kongruens skrivs med ≅.',
+      'Likformighet handlar om form — arean skiljer med skalfaktorn i kvadrat.',
+      'Likformighet säger inget om räta vinklar.',
+    ],
+  },
+  {
+    question: 'Varför räcker det att TVÅ vinklar är lika för att två trianglar ska vara likformiga?',
+    choices: [
+      'Den tredje vinkeln är automatiskt lika, på grund av vinkelsumman 180°',
+      'Två vinklar räcker inte — alla tre måste kontrolleras',
+      'För att trianglar alltid har en rät vinkel',
+      'För att sidorna då är lika långa',
+    ],
+    correct: 0,
+    why: [
+      'Om två vinklar stämmer måste den tredje också stämma: 180° minus samma två tal ger samma rest.',
+      'Jo — den tredje följer gratis av vinkelsumman.',
+      'Trianglar behöver inte ha någon rät vinkel.',
+      'Likformighet kräver inte lika sidor — bara lika form.',
+    ],
+  },
+  {
+    question: 'Vilket villkor räcker för att två trianglar ska vara likformiga?',
+    choices: [
+      'Motsvarande vinklar lika ELLER sidförhållanden lika — ett av dem räcker',
+      'Både vinklar och sidförhållanden måste kontrolleras',
+      'Trianglarna måste vara lika stora',
+      'Trianglarna får inte vara spegelvända',
+    ],
+    correct: 0,
+    why: [
+      'Till skillnad från andra månghörningar räcker ETT villkor för trianglar.',
+      'Det gäller månghörningar med fler än tre hörn.',
+      'Storlek är irrelevant för likformighet.',
+      'Likformiga figurer får vara spegelvända.',
+    ],
+  },
+  {
+    question: 'Alva (1,60 m) har skuggan 1,20 m samtidigt som flaggstångens skugga är 6,75 m. Varför är trianglarna likformiga?',
+    choices: [
+      'Solens strålar ger samma vinkel i båda trianglar, och båda har en rät vinkel mot marken — två lika vinklar',
+      'För att Alva står bredvid flaggstången',
+      'För att skuggorna är olika långa',
+      'De är inte likformiga — bara kongruenta',
+    ],
+    correct: 0,
+    why: [
+      'Samma solvinkel + rät vinkel = två lika vinklar i båda trianglar — det räcker för likformighet, och sidförhållandena ger höjden 9,00 m.',
+      'Platsen spelar ingen roll — det är vinklarna som avgör.',
+      'Olika skugglängder är själva poängen (olika storlek) — likformigheten kommer från vinklarna.',
+      'Kongruens skulle kräva samma storlek — trianglarna är olika stora men likformiga.',
+    ],
+  },
+  {
+    question: 'Två likformiga trianglar har sidförhållandet 0,6. En sida i den stora är 7,5 cm. Motsvarande sida i den lilla är …',
+    choices: [
+      '4,5 cm',
+      '12,5 cm',
+      '6,9 cm',
+      '8,1 cm',
+    ],
+    correct: 0,
+    why: [
+      'Liten/stor = 0,6 ger liten sida = 7,5 · 0,6 = 4,5 cm.',
+      '12,5 = 7,5/0,6 — det vore att gå åt fel håll (förstora i stället för förminska).',
+      '6,9 = 7,5 − 0,6 — förhållandet multipliceras, subtraheras inte.',
+      '8,1 = 7,5 + 0,6 — förhållandet är en faktor, inte ett tillägg.',
+    ],
+  },
+],
+
+'ma2c-4.9': [
+  {
+    question: 'Vad säger **topptriangelsatsen**?',
+    choices: [
+      'En parallelltransversal bildar en topptriangel som är likformig med hela triangeln',
+      'Toppvinkeln i en triangel är alltid störst',
+      'En transversal delar triangelns sidor i olika förhållanden',
+      'Topptriangeln är alltid hälften av hela triangeln',
+    ],
+    correct: 0,
+    why: [
+      'Parallelltransversalen skapar en mindre triangel med samma vinklar (gemensam toppvinkel + likbelägna vinklar) — likformig med originalet.',
+      'Toppvinkelns storlek beror på triangeln — satsen handlar om likformighet.',
+      'Tvärtom — transversalsatsen säger att sidorna delas i SAMMA förhållande.',
+      'Storleksförhållandet beror på var transversalen dras.',
+    ],
+  },
+  {
+    question: 'Vad säger **transversalsatsen**?',
+    choices: [
+      'En parallelltransversal delar triangelns sidor i samma förhållande: $\\frac{a}{b} = \\frac{c}{d}$',
+      'Transversalen är alltid parallell med basen',
+      'Transversalen delar triangeln i två lika stora delar',
+      'Sidorna delas i förhållandet 1:2',
+    ],
+    correct: 0,
+    why: [
+      'Sidodelarna ovanför transversalen förhåller sig till delarna nedanför på samma sätt på båda sidor.',
+      'Satsen FÖRUTSÄTTER att transversalen är parallell med basen — det är inte slutsatsen.',
+      'Areadelningen beror på var transversalen ligger.',
+      'Förhållandet kan vara vilket som helst — poängen är att det är SAMMA på båda sidor.',
+    ],
+  },
+  {
+    question: 'När måste topptriangelsatsen användas i stället för transversalsatsen?',
+    choices: [
+      'När topptriangelns bas (transversalen) eller hela basen ingår i beräkningen',
+      'Alltid — transversalsatsen är bara en gissning',
+      'När triangeln är rätvinklig',
+      'När sidorna är lika långa',
+    ],
+    correct: 0,
+    why: [
+      'Transversalsatsen jämför bara sidornas DELAR. Så fort baserna (DE eller BC) ingår krävs topptriangelsatsen som jämför hela sidor och baser.',
+      'Båda är bevisade satser — tumregeln är att välja transversalsatsen när det går, för enklare räkning.',
+      'Rätvinklighet påverkar inte valet av sats.',
+      'Sidolängderna avgör inte metodvalet — det gör frågan om baserna används.',
+    ],
+  },
+  {
+    question: 'Vad säger **bisektrissatsen**?',
+    choices: [
+      'Bisektrisen delar motstående sida i samma förhållande som de två närliggande sidorna',
+      'Bisektrisen delar motstående sida mitt itu',
+      'Bisektrisen är alltid vinkelrät mot motstående sida',
+      'Bisektrisen delar triangeln i två kongruenta delar',
+    ],
+    correct: 0,
+    why: [
+      'Delarna på motstående sida förhåller sig som de närliggande sidorna: $\\frac{AD}{BD} = \\frac{AC}{BC}$.',
+      'Mitt itu blir det bara om de närliggande sidorna är lika långa (likbent triangel).',
+      'Vinkelräthet gäller höjden, inte bisektrisen.',
+      'Delarna är kongruenta bara i specialfall — satsen handlar om förhållanden.',
+    ],
+  },
+  {
+    question: 'En parallelltransversal delar sidorna så att $\\frac{a}{b} = \\frac{c}{d}$ med $a = 4$, $b = 8$ och $c = 5$. Vad är $d$?',
+    choices: [
+      '10',
+      '9',
+      '2,5',
+      '40',
+    ],
+    correct: 0,
+    why: [
+      '$\\frac{4}{8} = \\frac{5}{d}$ ger $4d = 40$, dvs. $d = 10$.',
+      '9 = 8 + 1 — förhållandet är multiplikativt, inte additivt.',
+      '2,5 fås om förhållandet vänds åt fel håll — d ska vara STÖRRE än c precis som b är större än a.',
+      '40 är korsprodukten $4d$ — dividera med 4 för att få d.',
+    ],
+  },
+],
+
+'ma2c-4.10': [
+  {
+    question: 'Vad krävs för att två figurer ska vara **kongruenta**?',
+    choices: [
+      'De är likformiga och lika stora',
+      'De är likformiga — storleken spelar ingen roll',
+      'De har samma omkrets',
+      'De har samma antal hörn',
+    ],
+    correct: 0,
+    why: [
+      'Kongruens = likformighet + samma storlek. Tecknet är ≅.',
+      'Utan storlekskravet är det bara likformighet (~).',
+      'Samma omkrets kan två helt olika figurer ha.',
+      'Hörnantalet är nödvändigt men långt ifrån tillräckligt.',
+    ],
+  },
+  {
+    question: 'Vilket av följande är ett giltigt kongruensvillkor för trianglar?',
+    choices: [
+      'SSS — alla tre sidorna överensstämmer',
+      'VVV — alla tre vinklarna överensstämmer',
+      'SSV — två sidor och en icke-mellanliggande vinkel',
+      'Omkretsen överensstämmer',
+    ],
+    correct: 0,
+    why: [
+      'SSS är ett av de tre villkoren (tillsammans med SVS och VSV) — tre lika sidor låser triangeln helt.',
+      'VVV ger bara likformighet — en stor och en liten triangel kan ha samma vinklar.',
+      'SSV är inte giltigt — den tredje sidan kan "fällas" åt två håll och ge två olika trianglar.',
+      'Samma omkrets kan uppnås med helt olika trianglar.',
+    ],
+  },
+  {
+    question: 'I villkoret SVS — var måste vinkeln sitta?',
+    choices: [
+      'Mellan de två sidorna (mellanliggande)',
+      'Var som helst i triangeln',
+      'Mitt emot den längsta sidan',
+      'Vid basen',
+    ],
+    correct: 0,
+    why: [
+      'Sida-VINKEL-sida: vinkeln kläms mellan de två kända sidorna — då är triangeln entydigt bestämd.',
+      'Med en annan vinkel (SSV) är triangeln inte entydig — villkoret faller.',
+      'Positionen relativt längsta sidan är irrelevant — det är läget mellan de kända sidorna som räknas.',
+      '"Basen" är bara ett ritval — villkoret handlar om de två givna sidorna.',
+    ],
+  },
+  {
+    question: 'Två trianglar är kongruenta enligt SSS. Sidan med två tvärstreck i den ena är 32 cm. Vad gäller i den andra?',
+    choices: [
+      'Sidan med två tvärstreck är också 32 cm',
+      'Sidan med ett tvärstreck är 32 cm',
+      'Alla sidor är 32 cm',
+      'Ingen slutsats kan dras',
+    ],
+    correct: 0,
+    why: [
+      'Lika många tvärstreck markerar motsvarande sidor — i kongruenta trianglar är motsvarande sidor exakt lika långa.',
+      'Ett tvärstreck markerar ett ANNAT sidopar — de kan ha en annan längd.',
+      'Bara motsvarande sida är 32 cm — de andra har sina egna längder.',
+      'Kongruensen ger precis denna slutsats — motsvarande delar är lika.',
+    ],
+  },
+  {
+    question: 'Vad är skillnaden mellan tecknen ~ och ≅?',
+    choices: [
+      '~ betyder likformig, ≅ betyder kongruent (likformig OCH lika stor)',
+      '≅ betyder likformig, ~ betyder kongruent',
+      'De betyder samma sak',
+      '~ används för vinklar och ≅ för sidor',
+    ],
+    correct: 0,
+    why: [
+      '~ = samma form; ≅ = samma form och samma storlek. Kongruens är det starkare kravet.',
+      'Precis tvärtom.',
+      'Skillnaden är storlekskravet — kongruens kräver lika stora figurer.',
+      'Båda tecknen relaterar hela figurer, inte enskilda delar.',
+    ],
+  },
+],
+
+'ma2c-4.11': [
+  {
+    question: 'Vad är en **randvinkel**?',
+    choices: [
+      'En vinkel med spetsen på cirkelns rand',
+      'En vinkel med spetsen i cirkelns medelpunkt',
+      'Vinkeln mellan en tangent och en radie',
+      'En vinkel som är större än 180°',
+    ],
+    correct: 0,
+    why: [
+      'Randvinkelns spets ligger på randen (cirkelkanten) och dess ben står på en cirkelbåge.',
+      'Det är en medelpunktsvinkel.',
+      'Tangent mot radie är alltid 90° — ett specialfall, men inte definitionen av randvinkel.',
+      'Vinkelns storlek ingår inte i definitionen — läget för spetsen gör det.',
+    ],
+  },
+  {
+    question: 'Vad säger randvinkelsatsen?',
+    choices: [
+      'Medelpunktsvinkeln är dubbelt så stor som randvinkeln på samma cirkelbåge',
+      'Randvinkeln är dubbelt så stor som medelpunktsvinkeln',
+      'Alla randvinklar är 90°',
+      'Randvinkeln är lika stor som cirkelbågen',
+    ],
+    correct: 0,
+    why: [
+      '$y = 2x$ — medelpunktsvinkeln (y) är dubbla randvinkeln (x) när de står på samma båge.',
+      'Förhållandet är omvänt — medelpunktsvinkeln är störst.',
+      '90° gäller bara randvinklar på en halvcirkelbåge.',
+      'Vinkel och båglängd är olika storheter — satsen jämför två vinklar.',
+    ],
+  },
+  {
+    question: 'Två randvinklar står på samma cirkelbåge. Vad gäller?',
+    choices: [
+      'De är lika stora',
+      'De är tillsammans 180°',
+      'Den ena är dubbelt så stor',
+      'De är tillsammans 90°',
+    ],
+    correct: 0,
+    why: [
+      'Följdsats: båda är hälften av samma medelpunktsvinkel — alltså lika stora, oavsett var på randen spetsarna sitter.',
+      '180°-summan gäller motstående vinklar i en inskriven fyrhörning.',
+      'Dubbelt gäller mellan MEDELPUNKTSvinkeln och randvinkeln.',
+      'Ingen sådan summa — vinklarna är helt enkelt lika.',
+    ],
+  },
+  {
+    question: 'En triangel bildas av två radier och en korda. Vad vet man säkert om triangeln?',
+    choices: [
+      'Den är likbent — två sidor är radier och därmed lika långa',
+      'Den är rätvinklig',
+      'Den är liksidig',
+      'Ingenting särskilt',
+    ],
+    correct: 0,
+    why: [
+      'Alla radier i en cirkel är lika långa — triangeln får två lika ben och därmed lika basvinklar.',
+      'Rätvinklig blir den bara i specialfall (t.ex. randvinkel på halvcirkelbåge).',
+      'Liksidig kräver att även kordan råkar vara lika lång som radien.',
+      'Jo — radiernas lika längd ger alltid en likbent triangel.',
+    ],
+  },
+  {
+    question: 'Vilken vinkel bildar en tangent med radien till tangeringspunkten?',
+    choices: [
+      'Alltid 90°',
+      'Alltid 45°',
+      'Det beror på cirkelns storlek',
+      'Alltid 180°',
+    ],
+    correct: 0,
+    why: [
+      'Tangenten rör cirkeln i exakt en punkt och står alltid vinkelrätt mot radien dit — motiveras (tangent mot radie).',
+      '45° har ingen särställning här.',
+      'Vinkeln är 90° oavsett cirkelns radie.',
+      '180° skulle betyda att tangenten sammanfaller med radiens förlängning — då skure den cirkeln.',
+    ],
+  },
+],
+
+'ma2c-4.12': [
+  {
+    question: 'Vad är en **korda**?',
+    choices: [
+      'En sträcka mellan två punkter på cirkelns rand',
+      'En linje som rör cirkeln i exakt en punkt',
+      'En sträcka från medelpunkten till randen',
+      'En vinkel i cirkeln',
+    ],
+    correct: 0,
+    why: [
+      'Kordan förbinder två randpunkter — diametern är den längsta kordan.',
+      'Det är en tangent.',
+      'Det är en radie.',
+      'En korda är en sträcka, inte en vinkel.',
+    ],
+  },
+  {
+    question: 'Två kordor skär varandra i delarna $a, b$ respektive $c, d$. Vad säger kordasatsen?',
+    choices: [
+      '$a \\cdot b = c \\cdot d$',
+      '$a + b = c + d$',
+      '$\\frac{a}{b} = \\frac{c}{d}$',
+      '$a - b = c - d$',
+    ],
+    correct: 0,
+    why: [
+      'Produkterna av respektive kordas delsträckor är lika — det följer av likformiga trianglar via randvinklar och vertikalvinklar.',
+      'Summorna (kordornas längder) är i regel olika.',
+      'Kvotformen hör till transversalsatsen — kordasatsen använder produkter.',
+      'Skillnaderna har inget samband.',
+    ],
+  },
+  {
+    question: 'Vilka satser används i beviset av kordasatsen?',
+    choices: [
+      'Randvinklar på samma båge och vertikalvinklar ger likformiga trianglar',
+      'Pythagoras sats och avståndsformeln',
+      'Kvadreringsreglerna',
+      'Bisektrissatsen',
+    ],
+    correct: 0,
+    why: [
+      'Hjälpsträckorna skapar två trianglar med lika vinklar (randvinklar på samma båge + vertikalvinklar) — likformigheten ger sidförhållandet som korsmultipliceras.',
+      'Inga räta vinklar behövs i beviset.',
+      'Algebraiska regler för parenteser ingår inte.',
+      'Bisektriser förekommer inte i kordasatsen.',
+    ],
+  },
+  {
+    question: 'Vad gäller för motstående vinklar i en **inskriven fyrhörning**?',
+    choices: [
+      'De är tillsammans 180°',
+      'De är lika stora',
+      'De är tillsammans 360°',
+      'De är alltid räta',
+    ],
+    correct: 0,
+    why: [
+      'Motstående vinklar summerar till 180° — beviset använder randvinkelsatsen: medelpunktsvinklarna 2u + 2v utgör ett helt varv.',
+      'Lika stora blir de bara i specialfall (t.ex. rektangel).',
+      '360° är summan av ALLA fyra vinklar.',
+      'Räta vinklar kräver att fyrhörningen är en rektangel.',
+    ],
+  },
+  {
+    question: 'I en inskriven fyrhörning är en vinkel 115°. Den motstående vinkeln är …',
+    choices: [
+      '65°',
+      '115°',
+      '245°',
+      '75°',
+    ],
+    correct: 0,
+    why: [
+      '$180° - 115° = 65°$ (motstående vinklar i inskriven fyrhörning).',
+      'Lika vinklar gäller inte i allmänhet — summan ska bli 180°.',
+      '245° skulle ge summan 360° — det är hela fyrhörningens vinkelsumma som är 360°, inte parets.',
+      '75° ger summan 190° — kontrollera subtraktionen: 180 − 115 = 65.',
+    ],
+  },
+],
+
+'ma2c-5.1': [
+  {
+    question: 'Vad skiljer en potensekvation från en exponentialekvation?',
+    choices: [
+      'I potensekvationen är variabeln i basen, i exponentialekvationen i exponenten',
+      'I potensekvationen är variabeln i exponenten, i exponentialekvationen i basen',
+      'Potensekvationer har alltid två lösningar',
+      'De är samma sak',
+    ],
+    correct: 0,
+    why: [
+      'Potensekvation: $x^7 = 860$ (x i basen). Exponentialekvation: $2^x = 37$ (x i exponenten).',
+      'Precis tvärtom.',
+      'Antalet lösningar beror på exponentens paritet — jämn ger två, udda ger en.',
+      'Skillnaden i variabelns placering avgör vilken lösningsmetod som fungerar.',
+    ],
+  },
+  {
+    question: 'Hur löses potensekvationen $x^7 = 860$ algebraiskt?',
+    choices: [
+      'Upphöj båda led till $\\frac{1}{7}$ eller dra sjunde roten ur',
+      'Logaritmera båda led och dividera med 7',
+      'Dividera båda led med 7',
+      'Den kan bara lösas grafiskt',
+    ],
+    correct: 0,
+    why: [
+      '$x = 860^{1/7} = \\sqrt[7]{860} \\approx 2{,}63$ — potenslagar eller rotuttryck.',
+      'Logaritmering är metoden för EXPONENTIALEKVATIONER — här sitter variabeln i basen.',
+      'Exponenten 7 är ingen faktor — division hjälper inte.',
+      'Potensekvationer har en direkt algebraisk lösning.',
+    ],
+  },
+  {
+    question: 'Varför löses exponentialekvationen $50\\,000 = 12\\,000 \\cdot 1{,}176^x$ grafiskt i detta avsnitt?',
+    choices: [
+      'Vi har ännu ingen algebraisk metod för variabler i exponenten — logaritmerna kommer i nästa avsnitt',
+      'Exponentialekvationer kan aldrig lösas algebraiskt',
+      'Grafisk lösning är alltid exaktare',
+      'Räknaren saknar potensknapp',
+    ],
+    correct: 0,
+    why: [
+      'Utan logaritmer finns inget verktyg för att "ta ner" x ur exponenten — därför skärningsmetoden. Tiologaritmerna (nästa avsnitt) ger sedan den algebraiska vägen.',
+      'Med logaritmer går det utmärkt algebraiskt.',
+      'Grafisk avläsning är tvärtom ungefärlig.',
+      'Räknarens funktioner räcker — det är metoden som saknas så här långt.',
+    ],
+  },
+  {
+    question: 'Vad står $C$ för i modellen $y = C \\cdot a^x$?',
+    choices: [
+      'Det ursprungliga värdet (startvärdet)',
+      'Förändringsfaktorn',
+      'Tiden',
+      'Det nya värdet',
+    ],
+    correct: 0,
+    why: [
+      'C är värdet vid start ($x = 0$ ger $y = C \\cdot a^0 = C$).',
+      'Förändringsfaktorn är a.',
+      'Tiden (antalet förändringar) är x.',
+      'Nya värdet är y.',
+    ],
+  },
+  {
+    question: 'Aktier köps för 12 000 kr och säljs 5 år senare för 27 000 kr. Vilken ekvation ger den årliga förändringsfaktorn?',
+    choices: [
+      '$27\\,000 = 12\\,000 \\cdot a^5$',
+      '$27\\,000 = 12\\,000 \\cdot 5a$',
+      '$27\\,000 = 12\\,000 + a^5$',
+      '$12\\,000 = 27\\,000 \\cdot a^5$',
+    ],
+    correct: 0,
+    why: [
+      'Modellen y = C·aˣ med y = 27 000, C = 12 000 och x = 5 — potensekvationen ger a = 2,25^(1/5) ≈ 1,176.',
+      '5a beskriver LINJÄR förändring — procentuell förändring är multiplikativ, a^5.',
+      'Förändringsfaktorn multipliceras med startvärdet, adderas inte.',
+      'Start- och slutvärde har bytt plats — då blir a en minskning.',
+    ],
+  },
+],
+
+'ma2c-5.2': [
+  {
+    question: 'Vad betyder $\\lg 100$?',
+    choices: [
+      '"Det tal som 10 ska upphöjas till för att bli 100" — alltså 2',
+      '"100 delat med 10" — alltså 10',
+      '"Roten ur 100" — alltså 10',
+      '"10 upphöjt till 100"',
+    ],
+    correct: 0,
+    why: [
+      'Tiologaritmen är tians exponent: $10^2 = 100$ ger $\\lg 100 = 2$.',
+      'Logaritm är inte division — det är en exponentfråga.',
+      'Roten ur är upphöjt till en halv — en annan operation.',
+      'Det vore $10^{100}$ — logaritmen frågar efter exponenten, inte potensen.',
+    ],
+  },
+  {
+    question: 'Vad är $\\lg 1$?',
+    choices: [
+      '0',
+      '1',
+      '10',
+      'Odefinierat',
+    ],
+    correct: 0,
+    why: [
+      '$10^0 = 1$, så $\\lg 1 = 0$.',
+      '$10^1 = 10$, inte 1.',
+      '10 är basen, inte logaritmen.',
+      '$\\lg 1$ är väldefinierat — det är logaritmer av tal ≤ 0 som saknas.',
+    ],
+  },
+  {
+    question: 'Varför måste talet man tar logaritmen av vara **större än 0**?',
+    choices: [
+      '10 upphöjt till något kan aldrig bli 0 eller negativt',
+      'Räknaren klarar inte negativa tal',
+      'Logaritmer är alltid positiva',
+      'Det är en godtycklig regel',
+    ],
+    correct: 0,
+    why: [
+      'Hur liten exponenten än blir ($10^{-6} = 0{,}000\\,001$) är potensen alltid positiv — det finns ingen exponent som ger 0 eller minus.',
+      'Begränsningen är matematisk, inte teknisk.',
+      'Logaritmen SJÄLV kan vara negativ (lg 0,01 = −2) — det är talet man loggar som måste vara positivt.',
+      'Regeln följer direkt av tiopotensernas egenskaper.',
+    ],
+  },
+  {
+    question: 'Utan räknare: mellan vilka heltal ligger $\\lg 42$, och varför?',
+    choices: [
+      'Mellan 1 och 2, eftersom $10^1 = 10 < 42 < 100 = 10^2$',
+      'Mellan 4 och 5, eftersom 42 börjar på 4',
+      'Mellan 2 och 3, eftersom 42 har två siffror och en till',
+      'Exakt 4,2',
+    ],
+    correct: 0,
+    why: [
+      'Kläm in talet mellan två tiopotenser: 10 är för litet, 100 för stort — exponenten ligger mellan 1 och 2 (räknaren ger 1,62).',
+      'Första siffran styr inte tiopotensen.',
+      'Nästan rätt tanke — ett tal med två siffror ligger mellan $10^1$ och $10^2$, alltså logaritm mellan 1 och 2.',
+      'lg 42 är irrationellt, ungefär 1,62 — inte 4,2.',
+    ],
+  },
+  {
+    question: 'Vad är $10^{\\lg a}$ (för $a > 0$)?',
+    choices: [
+      '$a$',
+      '$\\lg a$',
+      '$10a$',
+      '$1$',
+    ],
+    correct: 0,
+    why: [
+      'lg a är precis den exponent som gör att 10-potensen blir a — alltså $10^{\\lg a} = a$. Sambandet används för att skriva tal med basen 10.',
+      'lg a är exponenten — potensen blir talet självt.',
+      'Ingen multiplikation med 10 sker.',
+      '$10^0 = 1$ kräver att exponenten är 0, dvs. a = 1 — inte allmänt.',
+    ],
+  },
+],
+
+'ma2c-5.3': [
+  {
+    question: 'Vilket är första steget när $2^x = 37$ löses med tiologaritmer?',
+    choices: [
+      'Skriv om båda led med basen 10: $(10^{\\lg 2})^x = 10^{\\lg 37}$',
+      'Dividera båda led med 2',
+      'Dra roten ur båda led',
+      'Sätt $x = 37 - 2$',
+    ],
+    correct: 0,
+    why: [
+      'Med båda led som tiopotenser kan potenslagarna användas och exponenterna sättas lika: $x \\cdot \\lg 2 = \\lg 37$.',
+      'Division tar bort EN faktor 2 — men x anger hur många de är.',
+      'Rotdragning hjälper när variabeln är i basen, inte i exponenten.',
+      'Subtraktion har inget med potenser att göra.',
+    ],
+  },
+  {
+    question: 'Varför får man sätta exponenterna lika i $10^{x \\cdot \\lg 2} = 10^{\\lg 37}$?',
+    choices: [
+      'Två lika potenser med samma bas måste ha lika exponenter',
+      'Man får alltid stryka det som ser likadant ut',
+      'För att 10 är ett jämnt tal',
+      'Det är en avrundning',
+    ],
+    correct: 0,
+    why: [
+      'Funktionen $10^t$ antar varje värde exakt en gång — är potenserna lika måste exponenterna vara det.',
+      'Strykningen är giltig just för att basen är densamma — inte en allmän regel.',
+      'Basens paritet är irrelevant — principen gäller alla baser större än 0 (utom 1).',
+      'Steget är exakt, ingen avrundning.',
+    ],
+  },
+  {
+    question: 'Vad är en **logaritmekvation**?',
+    choices: [
+      'En ekvation där variabeln finns i logaritmen, t.ex. $\\lg x = 3$',
+      'En ekvation där variabeln är i exponenten',
+      'En ekvation som saknar lösning',
+      'En ekvation med två variabler',
+    ],
+    correct: 0,
+    why: [
+      'Variabeln står inuti logaritmen — ekvationen löses genom omskrivning till potensform: $x = 10^3$.',
+      'Det är en exponentialekvation.',
+      'Logaritmekvationer har ofta en lösning — t.ex. x = 1 000.',
+      'Antalet variabler har inget med namnet att göra.',
+    ],
+  },
+  {
+    question: 'Skriv om $\\lg x = 2{,}5$ till potensform.',
+    choices: [
+      '$x = 10^{2{,}5}$',
+      '$x = 2{,}5^{10}$',
+      '$10^x = 2{,}5$',
+      '$x = \\lg 2{,}5$',
+    ],
+    correct: 0,
+    why: [
+      '"10 upphöjt till det som står i högra ledet ska bli det vi har logaritmen för": $10^{2{,}5} = x \\approx 316$.',
+      'Bas och exponent har bytt plats.',
+      'Det är en annan ekvation — där är x exponenten.',
+      'Det tar logaritmen en gång till i stället för att invertera den.',
+    ],
+  },
+  {
+    question: 'Lösningen till $10^x = 53$ är …',
+    choices: [
+      '$x = \\lg 53 \\approx 1{,}72$',
+      '$x = 5{,}3$',
+      '$x = \\frac{53}{10}$',
+      '$x = 10^{53}$',
+    ],
+    correct: 0,
+    why: [
+      'Direkt från definitionen: exponenten som gör 10-potensen till 53 är lg 53 ≈ 1,72 (rimligt — mellan 1 och 2).',
+      '5,3 är 53/10 — logaritmen är ingen division.',
+      'Samma felslut — exponenten söks, inte kvoten.',
+      'Det är potensen av 53, inte exponenten för 53.',
+    ],
+  },
+],
+
+'ma2c-5.4': [
+  {
+    question: 'Vad säger **första** logaritmlagen?',
+    choices: [
+      '$\\lg x + \\lg y = \\lg xy$',
+      '$\\lg x + \\lg y = \\lg(x + y)$',
+      '$\\lg x \\cdot \\lg y = \\lg xy$',
+      '$\\lg x + \\lg y = \\lg x^y$',
+    ],
+    correct: 0,
+    why: [
+      'Summan av logaritmer är logaritmen av PRODUKTEN — t.ex. lg 25 + lg 4 = lg 100 = 2.',
+      'Klassisk fälla: logaritmen av en summa kan INTE delas upp.',
+      'Det är summan av logaritmerna, inte produkten av dem, som ger lg xy.',
+      'Exponentform hör till tredje lagen.',
+    ],
+  },
+  {
+    question: 'Vad säger **andra** logaritmlagen?',
+    choices: [
+      '$\\lg x - \\lg y = \\lg \\frac{x}{y}$',
+      '$\\lg x - \\lg y = \\lg(x - y)$',
+      '$\\frac{\\lg x}{\\lg y} = \\lg \\frac{x}{y}$',
+      '$\\lg x - \\lg y = \\frac{x}{y}$',
+    ],
+    correct: 0,
+    why: [
+      'Differensen av logaritmer är logaritmen av KVOTEN — t.ex. lg 3 000 − lg 3 = lg 1 000 = 3.',
+      'Logaritmen av en differens kan inte delas upp.',
+      'Kvoten av två logaritmer är något annat än logaritmen av kvoten.',
+      'Resultatet är en logaritm, inte kvoten själv.',
+    ],
+  },
+  {
+    question: 'Vad säger **tredje** logaritmlagen?',
+    choices: [
+      '$\\lg x^p = p \\cdot \\lg x$',
+      '$\\lg x^p = (\\lg x)^p$',
+      '$\\lg x^p = p + \\lg x$',
+      '$\\lg x^p = \\lg px$',
+    ],
+    correct: 0,
+    why: [
+      'Exponenten kan multipliceras ner framför logaritmen — nyckeln till att lösa exponentialekvationer algebraiskt.',
+      'Exponenten flyttas ner som FAKTOR — hela logaritmen upphöjs inte.',
+      'Multiplikation, inte addition.',
+      'p är exponent på x, inte en faktor inuti logaritmen.',
+    ],
+  },
+  {
+    question: 'Hur löses $5^x = 136$ med tredje logaritmlagen?',
+    choices: [
+      'Logaritmera båda led, multiplicera ner exponenten: $x = \\frac{\\lg 136}{\\lg 5}$',
+      'Dividera båda led med 5: $x = \\frac{136}{5}$',
+      'Ta $\\lg$ av vänsterledet enbart',
+      '$x = \\lg 136 - \\lg 5$',
+    ],
+    correct: 0,
+    why: [
+      '$\\lg 5^x = \\lg 136$ ger $x \\cdot \\lg 5 = \\lg 136$, dvs. $x = \\lg 136 / \\lg 5 \\approx 3{,}05$.',
+      'Division tar bort en faktor 5 — inte exponenten.',
+      'En ekvation kräver samma operation på BÅDA led.',
+      'Differensen $\\lg 136 - \\lg 5 = \\lg(136/5)$ — det är kvoten av logaritmerna som behövs, inte differensen.',
+    ],
+  },
+  {
+    question: 'I ekvationen $\\lg 100 = \\lg 2x$ — varför får logaritmfunktionen strykas?',
+    choices: [
+      'När en enda logaritm står i varje led måste innehållen vara lika: $100 = 2x$',
+      'Logaritmer får alltid strykas var de än står',
+      'För att 100 är en tiopotens',
+      'Den får inte strykas',
+    ],
+    correct: 0,
+    why: [
+      'Logaritmfunktionen antar varje värde exakt en gång — lika logaritmer betyder lika tal. Sedan löses 100 = 2x som vanligt (x = 50).',
+      'Först måste varje led vara skrivet som EN logaritm (via logaritmlagarna) — termvis strykning är fel.',
+      'Strykningen fungerar för alla positiva innehåll, inte bara tiopotenser.',
+      'Jo — det är precis så logaritmekvationer med flera termer avslutas.',
+    ],
+  },
+],
+
+'ma2c-5.5': [
+  {
+    question: 'Något ökar med 2,3 % per år. Vilken förändringsfaktor används i modellen $y = C \\cdot a^x$?',
+    choices: [
+      '$a = 1{,}023$',
+      '$a = 0{,}023$',
+      '$a = 2{,}3$',
+      '$a = 1{,}23$',
+    ],
+    correct: 0,
+    why: [
+      'En ökning med 2,3 % betyder att hela värdet (100 %) plus 2,3 % finns kvar: faktorn är 1 + 0,023 = 1,023.',
+      '0,023 är bara ökningsdelen — då försvinner 97,7 % av värdet varje år.',
+      '2,3 skulle betyda att värdet 2,3-dubblas varje år (+130 %).',
+      '1,23 motsvarar en ökning med 23 %, inte 2,3 %.',
+    ],
+  },
+  {
+    question: 'När behövs logaritmer i modellen $y = C \\cdot a^x$?',
+    choices: [
+      'När tiden $x$ söks — variabeln sitter i exponenten',
+      'När startvärdet $C$ söks',
+      'När nya värdet $y$ söks',
+      'Alltid',
+    ],
+    correct: 0,
+    why: [
+      'y och C fås med insättning, a med en potensekvation — men x i exponenten kräver logaritmering och tredje logaritmlagen.',
+      'C fås genom division: $C = y/a^x$.',
+      'y fås genom direkt beräkning.',
+      'Tre av fyra storheter nås utan logaritmer.',
+    ],
+  },
+  {
+    question: 'Ekvationen $1{,}2 = 1{,}023^x$ logaritmeras. Vad blir nästa rad?',
+    choices: [
+      '$\\lg 1{,}2 = x \\cdot \\lg 1{,}023$',
+      '$\\lg 1{,}2 = \\lg x \\cdot 1{,}023$',
+      '$1{,}2 = x \\cdot \\lg 1{,}023$',
+      '$\\lg 1{,}2 = 1{,}023 \\cdot \\lg x$',
+    ],
+    correct: 0,
+    why: [
+      'Tredje logaritmlagen multiplicerar ner exponenten x: $\\lg 1{,}023^x = x \\cdot \\lg 1{,}023$.',
+      'Det är exponenten x som flyttas ner — inte basen som flyttas in i logaritmen.',
+      'VL måste också logaritmeras — samma operation på båda led.',
+      'x är exponenten och flyttas ner som faktor; 1,023 stannar i logaritmen.',
+    ],
+  },
+  {
+    question: 'Beräkningen ger $x \\approx 8{,}02$ år för sparkontot, men svaret blir "efter 9 år". Varför?',
+    choices: [
+      'Räntan betalas ut i slutet av varje år — beloppet passerar gränsen först vid nästa hela utbetalning',
+      'Man ska alltid avrunda uppåt till närmaste heltal',
+      '8,02 är fel uträknat',
+      'Logaritmer ger bara heltalssvar',
+    ],
+    correct: 0,
+    why: [
+      'Modellen är kontinuerlig men räntan är diskret: efter 8 år har beloppet inte passerat 12 000 kr — det sker vid årsskifte 9.',
+      'Avrundningen motiveras av situationen (årsvisa utbetalningar), inte av en allmän regel.',
+      'Uträkningen stämmer — tolkningen kräver hela år.',
+      'Logaritmer ger vilka reella värden som helst.',
+    ],
+  },
+  {
+    question: 'Ett värde HALVERAS med tiden enligt $0{,}5 = a^x$. Vad kännetecknar förändringsfaktorn $a$?',
+    choices: [
+      '$a < 1$ — värdet minskar',
+      '$a > 1$ — värdet ökar',
+      '$a = 0{,}5$ alltid',
+      '$a$ är negativt',
+    ],
+    correct: 0,
+    why: [
+      'Minskning betyder förändringsfaktor under 1 (t.ex. 0,85 vid −15 % per år).',
+      'a > 1 beskriver tillväxt — då nås aldrig hälften.',
+      'a = 0,5 gäller bara om halveringen sker på exakt en tidsenhet.',
+      'Förändringsfaktorer är alltid positiva — annars växlar värdet tecken.',
+    ],
+  },
+],
+
+'ma2c-5.6': [
+  {
+    question: 'Vad betyder $\\log_2 16$?',
+    choices: [
+      '"Det tal som 2 ska upphöjas till för att bli 16" — alltså 4',
+      '"16 delat med 2" — alltså 8',
+      '"2 upphöjt till 16"',
+      '"Tiologaritmen av 32"',
+    ],
+    correct: 0,
+    why: [
+      'Generella logaritmer fungerar som tiologaritmen men med annan bas: $2^4 = 16$ ger $\\log_2 16 = 4$.',
+      'Logaritm är en exponentfråga, inte division.',
+      'Det vore $2^{16}$ — logaritmen är exponenten, inte potensen.',
+      'Basen är 2, inte 10 — och talet är 16.',
+    ],
+  },
+  {
+    question: 'Ekvationen $3^x = 25$ har lösningen …',
+    choices: [
+      '$x = \\log_3 25$',
+      '$x = \\lg 25$',
+      '$x = \\frac{25}{3}$',
+      '$x = \\sqrt[3]{25}$',
+    ],
+    correct: 0,
+    why: [
+      'Basen är 3, så lösningen är "3-logaritmen för 25".',
+      'lg är basen 10 — den löser $10^x = 25$.',
+      'Division löser linjära ekvationer, inte exponentialekvationer.',
+      'Tredje roten löser $x^3 = 25$ — variabeln i basen.',
+    ],
+  },
+  {
+    question: 'Vad är $5^{\\log_5 12}$?',
+    choices: [
+      '12',
+      '5',
+      '$\\log_5 12$',
+      '60',
+    ],
+    correct: 0,
+    why: [
+      'Samma samband som $10^{\\lg a} = a$ fast med basen 5: $5^{\\log_5 12} = 12$.',
+      'Basen är 5, men resultatet är talet man "loggat".',
+      'Det är exponenten — potensen blir talet självt.',
+      '60 = 5 · 12 — men potens är inte multiplikation.',
+    ],
+  },
+  {
+    question: 'Varför skrivs tiologaritmen "lg" i stället för $\\log_{10}$?',
+    choices: [
+      'Basen 10 är så vanlig att den fått ett förkortat skrivsätt',
+      'lg och log₁₀ är olika funktioner',
+      'lg betyder alltid basen 2',
+      'lg är en felskrivning',
+    ],
+    correct: 0,
+    why: [
+      'lg är bara en förkortning av log₁₀ — samma funktion, kortare namn.',
+      'De är exakt samma funktion.',
+      'Basen 2-logaritmen skrivs log₂ (ibland "lb").',
+      'lg är standardnotation i svensk matematik.',
+    ],
+  },
+  {
+    question: 'Bestäm $\\log_3 9$ utan räknare.',
+    choices: [
+      '2',
+      '3',
+      '$\\frac{9}{3} = 3$',
+      '81',
+    ],
+    correct: 0,
+    why: [
+      '$3^2 = 9$, så $\\log_3 9 = 2$.',
+      '3 är basen — exponenten som ger 9 är 2.',
+      'Kvoten 9/3 råkar också bli 3, men logaritmen är exponentfrågan: $3^? = 9$.',
+      '81 är $3^4$ (eller $9^2$) — inte exponenten.',
+    ],
+  },
+],
+
+'ma2c-6.1': [
+  {
+    question: 'Vilka är de tre vanligaste **lägesmåtten**?',
+    choices: [
+      'Medelvärde, median och typvärde',
+      'Medelvärde, variationsbredd och standardavvikelse',
+      'Median, kvartil och percentil',
+      'Frekvens, klassmitt och medelvärde',
+    ],
+    correct: 0,
+    why: [
+      'Lägesmåtten sammanfattar var materialet "ligger": medelvärde (summan/antalet), median (mitten) och typvärde (vanligast).',
+      'Variationsbredd och standardavvikelse är SPRIDNINGSmått.',
+      'Kvartiler och percentiler beskriver fördelningens delar, inte dess läge i första hand.',
+      'Frekvens och klassmitt är hjälpbegrepp, inte lägesmått.',
+    ],
+  },
+  {
+    question: 'Hur bestäms **medianen**?',
+    choices: [
+      'Sortera värdena i storleksordning och ta värdet i mitten',
+      'Dividera summan med antalet',
+      'Ta det värde som förekommer flest gånger',
+      'Ta det största värdet minus det minsta',
+    ],
+    correct: 0,
+    why: [
+      'Medianen är mittvärdet i det sorterade materialet — vid jämnt antal tas medelvärdet av de två mittersta.',
+      'Det är medelvärdet.',
+      'Det är typvärdet.',
+      'Det är variationsbredden — ett spridningsmått.',
+    ],
+  },
+  {
+    question: 'Åldrarna 16, 16, 16, 17, 17, 18 och 61 har medelvärdet 23 år. Varför är medianen (17 år) mer representativ här?',
+    choices: [
+      '61-åringen är ett utstickande värde som drar upp medelvärdet — medianen påverkas inte av det',
+      'Medianen är alltid mer representativ än medelvärdet',
+      'Medelvärdet är felräknat',
+      'Typvärdet är alltid bäst',
+    ],
+    correct: 0,
+    why: [
+      'Vid sned fördelning blir medelvärdet missvisande (ingen i rummet är nära 23 år) — medianen struntar i hur extremt ytterlighetsvärdet är.',
+      'I symmetriska material utan utstickare fungerar medelvärdet oftast utmärkt.',
+      'Medelvärdet 161/7 = 23 stämmer — det är representativiteten som brister.',
+      'Typvärdet (16) är ett alternativ, men frågan gäller medianens fördel över medelvärdet.',
+    ],
+  },
+  {
+    question: 'Vad är **frekvens**?',
+    choices: [
+      'Antalet av ett visst värde i materialet',
+      'Materialets största värde',
+      'Antalet klasser i ett histogram',
+      'Skillnaden mellan två klassmitter',
+    ],
+    correct: 0,
+    why: [
+      'Frekvensen anger hur många gånger ett värde förekommer — t.ex. att 17-åringarnas frekvens är 12 om det finns 12 stycken.',
+      'Största värdet har inget särskilt namn kopplat till frekvens.',
+      'Antalet klasser är just antalet klasser — frekvensen räknar värden.',
+      'Klassbredd beskriver avståndet mellan klassgränser.',
+    ],
+  },
+  {
+    question: 'Vad är **klassmitt** i ett klassindelat material?',
+    choices: [
+      'Värdet i mitten av ett intervall — det värde alla i klassen räknas som att de har',
+      'Den klass som har högst frekvens',
+      'Medianen av hela materialet',
+      'Mitten av histogrammets x-axel',
+    ],
+    correct: 0,
+    why: [
+      'Klassen 300 ≤ x < 400 har klassmitten 350 — vid t.ex. medelvärdesberäkning räknas alla i klassen som 350.',
+      'Klassen med högst frekvens ger typvärdesklassen.',
+      'Medianen är ett lägesmått för hela materialet, inte ett intervalls mitt.',
+      'Klassmitten hör till varje enskild klass, inte till axeln.',
+    ],
+  },
+],
+
+'ma2c-6.2': [
+  {
+    question: 'Hur beräknas **variationsbredden**?',
+    choices: [
+      'Största värdet minus minsta värdet',
+      'Övre kvartil minus nedre kvartil',
+      'Medelvärdet minus medianen',
+      'Största värdet dividerat med minsta värdet',
+    ],
+    correct: 0,
+    why: [
+      'Variationsbredden mäter hela materialets spann: största − minsta.',
+      'Det är kvartilavståndet.',
+      'Skillnaden mellan lägesmått är inget standardspridningsmått.',
+      'Det är en kvot, inte variationsbredden.',
+    ],
+  },
+  {
+    question: 'Vilka fem värden behövs för att rita ett lådagram?',
+    choices: [
+      'Minsta värdet, nedre kvartilen, medianen, övre kvartilen och största värdet',
+      'Medelvärdet, medianen, typvärdet, frekvensen och summan',
+      'De fem största värdena',
+      'Fem slumpmässigt valda värden',
+    ],
+    correct: 0,
+    why: [
+      'Pinnarnas ändar är minsta/största värdet, lådans kanter är kvartilerna Q1 och Q3, och strecket i lådan är medianen.',
+      'Lådagrammet bygger på kvartiler, inte på läges- och summamått.',
+      'Alla delar av materialet representeras — inte bara toppen.',
+      'Värdena är exakt bestämda av materialet.',
+    ],
+  },
+  {
+    question: 'Vad är den **nedre kvartilen** $Q_1$?',
+    choices: [
+      'Medianen av alla värden till vänster om (under) medianen',
+      'Det minsta värdet i materialet',
+      'En fjärdedel av största värdet',
+      'Medelvärdet av de fyra minsta värdena',
+    ],
+    correct: 0,
+    why: [
+      'Q1 delar den undre halvan i två lika delar — 25 % av värdena ligger under Q1.',
+      'Minsta värdet är pinnens ände, inte kvartilen.',
+      'Kvartilen är ett läge i materialet, inte en bråkdel av ett värde.',
+      'Q1 är medianen av HELA undre halvan, oavsett antal.',
+    ],
+  },
+  {
+    question: 'Vad betyder det att en del av lådagrammet är STOR?',
+    choices: [
+      'Värdena i den delen är utspridda över ett stort intervall',
+      'Den delen innehåller fler värden än de andra',
+      'Materialet innehåller fel',
+      'Medelvärdet ligger i den delen',
+    ],
+    correct: 0,
+    why: [
+      'Varje del innehåller alltid 25 % av värdena — en stor del betyder att dessa 25 % ligger utspridda (stor spridning).',
+      'Antalet är alltid 25 % per del — det är spridningen som varierar.',
+      'Olika stora delar är helt normalt — det är så spridningen syns.',
+      'Medelvärdet syns inte i ett lådagram.',
+    ],
+  },
+  {
+    question: 'Vad anger den 80:e percentilen, $p_{80}$?',
+    choices: [
+      'Värdet som 80 % av materialet är mindre än',
+      'Värdet som 80 % av materialet är större än',
+      'Att materialet innehåller 80 värden',
+      '80 % av medelvärdet',
+    ],
+    correct: 0,
+    why: [
+      'Percentiler anger hur många procent som är LÄGRE än värdet: under p80 ligger 80 %, över ligger 20 %.',
+      'Tvärtom — 20 % är större än p80.',
+      'Percentilen är ett värde i materialet, inte ett antal.',
+      'Percentilen är inte kopplad till medelvärdet.',
+    ],
+  },
+],
+
+'ma2c-6.3': [
+  {
+    question: 'Hur tar man fram statistiska mått ur en värdekolumn i Geogebra?',
+    choices: [
+      'Markera värdena, välj Envariabelanalys och klicka på "Visa statistik"',
+      'Skriv medelvärde() i inmatningsfältet',
+      'Växla till sannolikhetskalkylatorn',
+      'Rita ett spridningsdiagram',
+    ],
+    correct: 0,
+    why: [
+      'Envariabelanalys (menyn "blå staplar") med "Visa statistik" ger n, Medel, Min, Q1, Median, Q3, Max med mera på en gång.',
+      'Enstaka kommandon finns, men statistiktabellen ger allt samlat.',
+      'Sannolikhetskalkylatorn används för normalfördelningar.',
+      'Spridningsdiagram hör till TVÅvariabelsanalys.',
+    ],
+  },
+  {
+    question: 'Vad står **n** för i Geogebras statistiktabell?',
+    choices: [
+      'Antalet värden',
+      'Medelvärdet',
+      'Största värdet',
+      'Standardavvikelsen',
+    ],
+    correct: 0,
+    why: [
+      'n är antalet inmatade värden — bra som kontroll att allt kommit med.',
+      'Medelvärdet står vid "Medel".',
+      'Största värdet står vid "Max".',
+      'Standardavvikelsen står vid σ respektive s.',
+    ],
+  },
+  {
+    question: 'Hur beräknas percentilen $p_{90}$ i Geogebra?',
+    choices: [
+      'Skapa en lista av värdena och skriv Percentil(l1, 90%) i inmatningsfältet',
+      'Klicka på "Visa statistik" — percentilen står i tabellen',
+      'Multiplicera medelvärdet med 0,9',
+      'Läs av Q3 i statistiktabellen',
+    ],
+    correct: 0,
+    why: [
+      'Percentiler kräver kommandot Percentil med en lista och en procentsats — värdena görs först till en lista via "Skapa lista".',
+      'Statistiktabellen visar kvartiler men inte godtyckliga percentiler.',
+      'Percentilen är ett gränsvärde i materialet, inte en andel av medelvärdet.',
+      'Q3 är den 75:e percentilen — inte den 90:e.',
+    ],
+  },
+  {
+    question: 'En frekvenstabell ska analyseras i Geogebra. Hur matas den in?',
+    choices: [
+      'Värdena i en kolumn och frekvenserna i kolumnen till höger — markera båda',
+      'Varje värde skrivs in lika många gånger som frekvensen anger',
+      'Bara frekvenserna matas in',
+      'Frekvenstabeller kan inte analyseras i Geogebra',
+    ],
+    correct: 0,
+    why: [
+      'Geogebra viktar värdena med frekvenserna när båda kolumnerna markeras — 177 elever blir 14 celler.',
+      'Det fungerar men är just det arbete frekvenskolumnen besparar en.',
+      'Utan värdena vet Geogebra inte VAD som räknats.',
+      'Jodå — det är en av kalkylbladets styrkor.',
+    ],
+  },
+  {
+    question: 'Hur ritas ett lådagram i Geogebra?',
+    choices: [
+      'Välj Envariabelanalys och byt diagramtyp från "Histogram" till "Boxplot (Lådagram)" i rullistan',
+      'Skriv "lådagram" i inmatningsfältet',
+      'Lådagram måste ritas för hand',
+      'Använd verktyget Extrempunkt',
+    ],
+    correct: 0,
+    why: [
+      'I Envariabelanalysens rullista finns flera diagramtyper — Boxplot (Lådagram) är en av dem, och diagrammet kan kopieras till ritområdet.',
+      'Kommandot heter Boxplot/Låddiagram — men rullistan är den enkla vägen.',
+      'Geogebra ritar lådagrammet automatiskt ur värdena.',
+      'Extrempunkt hör till funktionsgrafer.',
+    ],
+  },
+],
+
+'ma2c-6.4': [
+  {
+    question: 'Vad betyder en STOR standardavvikelse?',
+    choices: [
+      'Stor spridning — värdena avviker i genomsnitt mycket från medelvärdet',
+      'Stort medelvärde',
+      'Många värden i materialet',
+      'Att materialet är normalfördelat',
+    ],
+    correct: 0,
+    why: [
+      'Standardavvikelsen är ett spridningsmått: stora avvikelser från medelvärdet ger stor standardavvikelse.',
+      'Medelvärdets storlek och spridningen är oberoende — 2, 4, 12, 24, 43 och 16, 17, 17, 17, 18 har samma medelvärde men helt olika spridning.',
+      'Antalet värden anges av n.',
+      'Standardavvikelse kan beräknas för alla material, normalfördelade eller ej.',
+    ],
+  },
+  {
+    question: 'När används beteckningen $s$ för standardavvikelsen?',
+    choices: [
+      'Vid en stickprovsundersökning — när bara en del av populationen undersökts',
+      'Vid en totalundersökning',
+      'När standardavvikelsen är liten',
+      's och σ används helt godtyckligt',
+    ],
+    correct: 0,
+    why: [
+      's hör till stickprov och σ till totalundersökning — de beräknas med lite olika formler (n − 1 respektive n i nämnaren).',
+      'Totalundersökningens standardavvikelse betecknas σ.',
+      'Beteckningen styrs av undersökningstypen, inte av värdets storlek.',
+      'Valet är betydelsebärande — läs av rätt rad i Geogebras tabell.',
+    ],
+  },
+  {
+    question: 'Datamängderna 16, 17, 17, 17, 18 och 2, 4, 12, 24, 43 har båda medelvärdet 17. Vad skiljer dem?',
+    choices: [
+      'Spridningen — den andra har mycket större standardavvikelse',
+      'Ingenting — samma medelvärde betyder samma egenskaper',
+      'Den första har större standardavvikelse',
+      'Den andra har större median',
+    ],
+    correct: 0,
+    why: [
+      'Avvikelserna från 17 är som mest 1 i den första men upp till 26 i den andra — lägesmåttet döljer spridningen, och det är därför spridningsmått behövs.',
+      'Medelvärdet säger inget om hur utspridda värdena är.',
+      'Den förstas värden ligger tätt kring 17 — minimal spridning.',
+      'Medianerna är 17 respektive 12 — men den stora skillnaden är spridningen.',
+    ],
+  },
+  {
+    question: 'Var läser man av standardavvikelsen för en totalundersökning i Geogebra?',
+    choices: [
+      'Vid σ i statistiktabellen (Envariabelanalys, "Visa statistik")',
+      'Vid s i statistiktabellen',
+      'Vid Max i statistiktabellen',
+      'Standardavvikelsen visas inte i Geogebra',
+    ],
+    correct: 0,
+    why: [
+      'σ (lilla sigma) är totalundersökningens standardavvikelse; framgår inget annat i uppgiften förutsätts totalundersökning.',
+      's gäller stickprov — värdet är något större.',
+      'Max är det största värdet.',
+      'Båda varianterna visas i tabellen.',
+    ],
+  },
+  {
+    question: 'En datamängd har standardavvikelsen 0. Vad vet du om värdena?',
+    choices: [
+      'Alla värden är exakt lika stora',
+      'Alla värden är 0',
+      'Materialet saknar medelvärde',
+      'Materialet innehåller bara ett värde',
+    ],
+    correct: 0,
+    why: [
+      'Ingen spridning alls betyder att inget värde avviker från medelvärdet — alla är identiska.',
+      'Värdena kan vara vilket tal som helst, bara de är lika (t.ex. 7, 7, 7).',
+      'Medelvärdet finns — det är lika med det gemensamma värdet.',
+      'Även 5, 5, 5, 5 (fyra värden) har standardavvikelsen 0.',
+    ],
+  },
+],
+
+'ma2c-6.5': [
+  {
+    question: 'Vad kännetecknar ett normalfördelat material?',
+    choices: [
+      'Värdena fördelas jämnt (symmetriskt) kring medelvärdet enligt normalfördelningskurvan',
+      'Alla värden är lika vanliga',
+      'Värdena ökar exponentiellt',
+      'Materialet innehåller inga negativa tal',
+    ],
+    correct: 0,
+    why: [
+      'Normalfördelningen är den klockformade kurvan där bestämda procentsatser (34,1/13,6/2,3 %) ligger inom givna intervall av standardavvikelser.',
+      'Lika vanliga värden vore en likformig fördelning — normalfördelningen toppar vid medelvärdet.',
+      'Exponentiell tillväxt är något annat — normalfördelning beskriver hur värden SPRIDS.',
+      'Normalfördelade värden kan vara negativa (t.ex. temperaturer).',
+    ],
+  },
+  {
+    question: 'Hur stor andel ligger mellan medelvärdet och EN standardavvikelse uppåt ($\\mu$ till $\\mu + \\sigma$)?',
+    choices: [
+      '34,1 %',
+      '68,2 %',
+      '13,6 %',
+      '50 %',
+    ],
+    correct: 0,
+    why: [
+      'Varje sida om medelvärdet upp till en standardavvikelse rymmer 34,1 %.',
+      '68,2 % är BÅDA sidorna tillsammans (±σ).',
+      '13,6 % ligger mellan en och två standardavvikelser.',
+      '50 % är hela halvan ovanför medelvärdet.',
+    ],
+  },
+  {
+    question: 'Hur stor andel ligger MER än två standardavvikelser ÖVER medelvärdet?',
+    choices: [
+      '2,3 %',
+      '13,6 %',
+      '4,6 %',
+      '15,9 %',
+    ],
+    correct: 0,
+    why: [
+      'Svansen ovanför μ + 2σ rymmer 2,3 % (kontroll: 34,1 + 13,6 + 2,3 = 50 %).',
+      '13,6 % ligger mellan en och två standardavvikelser.',
+      '4,6 % är BÅDA svansarna tillsammans.',
+      '15,9 % är allt ovanför μ + σ.',
+    ],
+  },
+  {
+    question: 'Kvinnors längd: $\\mu = 165{,}5$ och $\\sigma = 6{,}15$. Vilket Geogebra-verktyg besvarar "hur stor andel är mellan 160 och 170 cm"?',
+    choices: [
+      'Sannolikhetskalkylatorn med ett slutet intervall 160 ≤ X ≤ 170',
+      'Envariabelanalys med "Visa statistik"',
+      'Verktyget Nollställen',
+      'Percentil(l1, 50%)',
+    ],
+    correct: 0,
+    why: [
+      'Sannolikhetskalkylatorn tar μ och σ, och intervallknappen ger P(160 ≤ X ≤ 170) ≈ 0,58 = 58 %.',
+      'Envariabelanalys arbetar med inmatade värden — här finns bara fördelningens parametrar.',
+      'Nollställen hör till funktionsgrafer.',
+      'Percentiler kräver en lista av värden — och svarar på en annan fråga.',
+    ],
+  },
+  {
+    question: 'Hur påverkas normalfördelningskurvans form av spridningen?',
+    choices: [
+      'Liten spridning ger en hög och smal kurva; stor spridning ger en låg och bred',
+      'Liten spridning ger en låg och bred kurva',
+      'Spridningen påverkar inte formen',
+      'Kurvan blir asymmetrisk vid stor spridning',
+    ],
+    correct: 0,
+    why: [
+      'Samlade värden koncentrerar kurvan kring medelvärdet (hög/smal); utspridda värden plattar ut den (låg/bred). Arean under kurvan är alltid densamma.',
+      'Tvärtom.',
+      'σ styr precis kurvans bredd och höjd.',
+      'Normalfördelningskurvan är alltid symmetrisk kring μ.',
+    ],
+  },
+],
+
+'ma2c-6.6': [
+  {
+    question: 'Vad gör man när man utför en **linjär regression**?',
+    choices: [
+      'Tar fram ekvationen för den räta linje som bäst ansluter till punkterna',
+      'Beräknar medelvärdet av y-värdena',
+      'Ritar ett lådagram',
+      'Sorterar punkterna i storleksordning',
+    ],
+    correct: 0,
+    why: [
+      'Regressionslinjen är linjen punkterna samlas kring — regressionen ger dess ekvation, t.ex. y = 270x + 2 500.',
+      'Regression handlar om SAMBANDET mellan två variabler.',
+      'Lådagram beskriver en enda variabels spridning.',
+      'Ordningen på punkterna saknar betydelse.',
+    ],
+  },
+  {
+    question: 'Mellan vilka värden ligger korrelationskoefficienten $r$?',
+    choices: [
+      'Mellan −1 och 1',
+      'Mellan 0 och 1',
+      'Mellan 0 och 100',
+      'Vilka värden som helst',
+    ],
+    correct: 0,
+    why: [
+      'r = 1 är perfekt positiv, r = −1 perfekt negativ och r = 0 ingen korrelation.',
+      '0 till 1 gäller $r^2$ — $r$ själv kan vara negativt.',
+      'r är ingen procentsats.',
+      'r är normerad till intervallet [−1, 1].',
+    ],
+  },
+  {
+    question: 'Punkterna i ett spridningsdiagram ligger spritt kring en fallande linje. Hur beskrivs korrelationen?',
+    choices: [
+      'Svag negativ',
+      'Stark negativ',
+      'Svag positiv',
+      'Ingen korrelation',
+    ],
+    correct: 0,
+    why: [
+      'Fallande riktning = negativ; spridda punkter = svag. Ett typiskt r-värde kunde vara ≈ −0,5.',
+      'Stark kräver att punkterna ligger tydligt PÅ linjen.',
+      'Positiv korrelation kräver stigande lutning.',
+      'Det finns en tendens (fallande) — alltså viss korrelation.',
+    ],
+  },
+  {
+    question: 'Var läser man av $r$ i Geogebra efter en tvåvariabels regressionsanalys?',
+    choices: [
+      'Klicka på "Visa statistik" och läs av raden r',
+      'r visas i rutan med regressionsekvationen',
+      'r kan inte beräknas i Geogebra',
+      'r står i kalkylbladets sista rad',
+    ],
+    correct: 0,
+    why: [
+      'Statistikknappen i regressionsanalysen listar bl.a. r (korrelationskoefficienten) — för glassexemplet r ≈ 0,97.',
+      'Under diagrammet visas ekvationen — r kräver statistikvyn.',
+      'Jodå, via "Visa statistik".',
+      'Kalkylbladet innehåller rådata, inte analysresultaten.',
+    ],
+  },
+  {
+    question: 'Modellen y = 270x + 2 500 beskriver glassförsäljning (kr) som funktion av temperatur (°C). Hur uppskattas försäljningen vid 30 °C?',
+    choices: [
+      'Sätt in x = 30: y = 270 · 30 + 2 500 = 10 600 kr',
+      'Sätt in y = 30 och lös ut x',
+      'Multiplicera 30 med r-värdet',
+      'Läs av medelvärdet av försäljningen',
+    ],
+    correct: 0,
+    why: [
+      'Modellen används som en vanlig funktion — temperaturen in, försäljningen ut.',
+      'y = 30 skulle betyda 30 kr i försäljning — frågan ger temperaturen.',
+      'r beskriver korrelationens styrka, inte sambandet självt.',
+      'Poängen med modellen är att förutsäga NYA värden, inte att sammanfatta gamla.',
+    ],
+  },
+],
+
+'ma2c-6.7': [
+  {
+    question: 'Vilken modellform har en **exponentiell** regressionsmodell?',
+    choices: [
+      '$y = Ca^x$',
+      '$y = kx + m$',
+      '$y = Cx^a$',
+      '$y = ax^2 + bx + c$',
+    ],
+    correct: 0,
+    why: [
+      'Exponentiell: variabeln i exponenten, y = C·aˣ.',
+      'Det är den linjära modellen.',
+      'Det är potensmodellen — variabeln i basen.',
+      'Det är polynommodellen av grad 2.',
+    ],
+  },
+  {
+    question: 'Vad kännetecknar en **linjär** modell i data?',
+    choices: [
+      'Ökningen eller minskningen är lika stor överallt',
+      'Liten ökning i början och stor i slutet',
+      'Kurvan vänder och går genom origo',
+      'Värdena fördubblas varje period',
+    ],
+    correct: 0,
+    why: [
+      'En rät linje har konstant lutning — samma förändring per steg i hela materialet.',
+      'Accelererande ökning är exponentialfunktionens signum.',
+      'Vändning genom origo kännetecknar potensfunktionen.',
+      'Fördubbling per period är multiplikativ — exponentiell.',
+    ],
+  },
+  {
+    question: 'Vad används $r^2$-värdet till?',
+    choices: [
+      'Att jämföra hur väl olika regressionsmodeller är anpassade — närmast 1 vinner',
+      'Att beräkna medelvärdet av residualerna',
+      'Att avgöra om korrelationen är positiv eller negativ',
+      'Att räkna antalet punkter',
+    ],
+    correct: 0,
+    why: [
+      '$r^2$ ligger mellan 0 och 1; ju närmare 1, desto bättre kurvanpassning — t.ex. 0,9933 (exponentiell) mot 0,954 (linjär) för världens befolkning.',
+      '$r^2$ är ett sammanfattande mått, inte ett medelvärde av fel.',
+      'Kvadreringen tar bort tecknet — riktningen syns i $r$, inte i $r^2$.',
+      'Antalet punkter är n.',
+    ],
+  },
+  {
+    question: 'Varför är det svårt att skilja potens- och polynommodeller åt?',
+    choices: [
+      'Deras kurvor liknar varandra och kan ibland sammanfalla — $y = x^2$ är båda',
+      'Geogebra kan inte rita potenskurvor',
+      'Polynomkurvor går alltid genom origo',
+      'Potensfunktioner har inget $r^2$-värde',
+    ],
+    correct: 0,
+    why: [
+      '$y = x^2$ är på samma gång potensfunktionen $Cx^a$ ($C = 1$, $a = 2$) och polynomet $ax^2 + bx + c$ ($b = c = 0$) — kännetecken och $r^2$ får hjälpa till.',
+      'Geogebra har en egen rullistepost för potensmodellen.',
+      'Tvärtom — polynom går INTE nödvändigtvis genom origo, det gör potensfunktionen.',
+      '$r^2$ beräknas för alla modelltyper.',
+    ],
+  },
+  {
+    question: 'Världens befolkning 1920–2020: linjär modell ger $r^2 = 0{,}954$ och exponentiell ger $r^2 = 0{,}9933$. Vilken slutsats är rätt?',
+    choices: [
+      'Den exponentiella modellen beskriver sambandet bäst — dess $r^2$ ligger närmast 1',
+      'Den linjära är bäst eftersom den är enklast',
+      'Modellerna är likvärdiga',
+      'Ingen av modellerna kan användas',
+    ],
+    correct: 0,
+    why: [
+      'Både kurvans passform och $r^2$-jämförelsen pekar på den exponentiella modellen — befolkningen har vuxit procentuellt snarare än med fast antal per år.',
+      'Enkelhet är trevligt men $r^2$ visar att den linjära missar krökningen i datat.',
+      'Skillnaden 0,9933 mot 0,954 är tydlig i sammanhanget.',
+      'Båda fungerar hyggligt — den exponentiella bäst.',
+    ],
+  },
+],
+
 };

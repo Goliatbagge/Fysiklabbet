@@ -1,0 +1,173 @@
+{
+ "id": "ma2c-5.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "49189f4331f512b2049c990ee83019ba3e3f4c1e",
+ "dur": 144.88,
+ "segments": [
+  {
+   "t": "Tillämpningar av logaritmer",
+   "s": 0.1,
+   "e": 3.02
+  },
+  {
+   "t": "Kom ihåg 1:",
+   "s": 2.98,
+   "e": 7.38
+  },
+  {
+   "t": "Modell vid exponentiell förändring",
+   "s": 2.98,
+   "e": 7.38
+  },
+  {
+   "t": "Vid tillämpningar där något förändras exponentiellt eller t.ex. med en viss procent varje år ställer vi upp en modell på formen",
+   "s": 7.38,
+   "e": 15.4
+  },
+  {
+   "t": "y är lika med C gånger a upphöjt till x",
+   "s": 15.4,
+   "e": 19.35
+  },
+  {
+   "t": "där",
+   "s": 19.35,
+   "e": 20.82
+  },
+  {
+   "t": "y är lika med nya värdet",
+   "s": 20.82,
+   "e": 23.73
+  },
+  {
+   "t": "C är lika med startvärdet",
+   "s": 23.73,
+   "e": 26.68
+  },
+  {
+   "t": "a är lika med förändringsfaktorn",
+   "s": 26.68,
+   "e": 29.76
+  },
+  {
+   "t": "x är lika med antalet förändringar (ofta tid)",
+   "s": 29.76,
+   "e": 33.99
+  },
+  {
+   "t": "Kom ihåg 2:",
+   "s": 33.99,
+   "e": 39.69
+  },
+  {
+   "t": "Lösa exponentialekvationer med tredje logaritmlagen",
+   "s": 33.99,
+   "e": 39.69
+  },
+  {
+   "t": "Logaritmera båda led i ekvationen (sätt lg framför båda uttrycken).",
+   "s": 39.69,
+   "e": 45.46
+  },
+  {
+   "t": "Multiplicera ner exponenten, enligt tredje logaritmlagen, och lös sedan som vanligt.",
+   "s": 45.46,
+   "e": 51.98
+  },
+  {
+   "t": "Exempel 1 — Sparkontot",
+   "s": 51.98,
+   "e": 55.11
+  },
+  {
+   "t": "Du sätter in 10 000 kronor på ett konto med årsräntan 2,3 procent.",
+   "s": 55.11,
+   "e": 60.86
+  },
+  {
+   "t": "Hur lång tid tar det tills du har över 12 000 kronor på kontot?",
+   "s": 60.86,
+   "e": 65.6
+  },
+  {
+   "t": "Vi har något som växer procentuellt/exponentiellt, så vi ställer upp formeln",
+   "s": 65.6,
+   "e": 71.62
+  },
+  {
+   "t": "y är lika med C gånger a upphöjt till x",
+   "s": 71.62,
+   "e": 75.55
+  },
+  {
+   "t": "I detta fall är",
+   "s": 75.55,
+   "e": 77.7
+  },
+  {
+   "t": "y är lika med 12 000 (nya värdet)",
+   "s": 77.7,
+   "e": 81.64
+  },
+  {
+   "t": "C är lika med 10 000 (startvärdet)",
+   "s": 81.64,
+   "e": 85.66
+  },
+  {
+   "t": "a är lika med 1,023 (förändringsfaktorn som motsvarar en ökning med 2,3 procent)",
+   "s": 85.66,
+   "e": 92.97
+  },
+  {
+   "t": "Insättning i formeln ovan ger",
+   "s": 92.97,
+   "e": 96.17
+  },
+  {
+   "t": "12 000 är lika med 10 000 gånger 1,023 upphöjt till x",
+   "s": 96.17,
+   "e": 102.17
+  },
+  {
+   "t": "Vi dividerar båda led med 10 000, logaritmerar och löser ekvationen:",
+   "s": 102.17,
+   "e": 120.45
+  },
+  {
+   "t": "1,2 är lika med 1,023 upphöjt till x",
+   "s": 102.17,
+   "e": 120.45
+  },
+  {
+   "t": "logaritmen av 1,2 är lika med logaritmen av 1,023 upphöjt till x",
+   "s": 102.17,
+   "e": 120.45
+  },
+  {
+   "t": "logaritmen av 1,2 är lika med x gånger logaritmen av 1,023",
+   "s": 102.17,
+   "e": 120.45
+  },
+  {
+   "t": "Division med lg 1,023 i båda led ger",
+   "s": 120.45,
+   "e": 125.11
+  },
+  {
+   "t": "x är lika med logaritmen av 1,2 delat med logaritmen av 1,023 som är ungefär lika med 8,02",
+   "s": 125.11,
+   "e": 133.59
+  },
+  {
+   "t": "Eftersom räntan betalas ut i slutet av varje år kommer inte beloppet att växa över 12 000 kronor förrän efter 9 år.",
+   "s": 133.59,
+   "e": 141.8
+  },
+  {
+   "t": "Svar: Efter 9 år.",
+   "s": 141.8,
+   "e": 144.88
+  }
+ ]
+}

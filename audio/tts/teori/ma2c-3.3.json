@@ -1,0 +1,398 @@
+{
+ "id": "ma2c-3.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d8bdd15e8f71a5ed40c9500726a30060a929ceaf",
+ "dur": 543.1,
+ "segments": [
+  {
+   "t": "Andragradsfunktioner och modellering",
+   "s": 0.1,
+   "e": 3.44
+  },
+  {
+   "t": "För att ta reda på vilken andragradsfunktion som är uppritad finns flera olika metoder.",
+   "s": 3.39,
+   "e": 9.24
+  },
+  {
+   "t": "Bestämma andragradsfunktionen utifrån dess graf",
+   "s": 9.24,
+   "e": 13.45
+  },
+  {
+   "t": "Metod 1 — Använda nollställen och en punkt.",
+   "s": 13.45,
+   "e": 17.51
+  },
+  {
+   "t": "Andragradsfunktioner med nollställen kan skrivas i faktorform som f av x är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes där x ett och x två är funktionens nollställen.",
+   "s": 17.51,
+   "e": 31.85
+  },
+  {
+   "t": "Sätt in funktionens nollställen och bestäm sedan k utifrån ytterligare en punkt på grafen (som inte får vara ett nollställe).",
+   "s": 31.85,
+   "e": 39.65
+  },
+  {
+   "t": "Om funktionen har en dubbelrot (vänder på x -axeln) gäller att x ett är lika med x två .",
+   "s": 39.65,
+   "e": 46.33
+  },
+  {
+   "t": "Denna metod är att föredra om man enkelt kan avgöra nollställena.",
+   "s": 46.33,
+   "e": 51.2
+  },
+  {
+   "t": "Metod 2 — Använda tre punkter.",
+   "s": 51.2,
+   "e": 54.49
+  },
+  {
+   "t": "Alla andragradsfunktioner kan skrivas i utvecklad form som f av x är lika med a x i kvadrat plus b x plus c , där a , b och c är konstanter.",
+   "s": 54.49,
+   "e": 64.7
+  },
+  {
+   "t": "Genom att sätta in tre valfria punkter på grafen i detta funktionsuttryck kan vi bilda ett ekvationssystem med tre obekanta och tre ekvationer.",
+   "s": 64.7,
+   "e": 73.58
+  },
+  {
+   "t": "Då kan vi bestämma konstanterna a , b och c och därefter bestämma funktionen.",
+   "s": 73.58,
+   "e": 79.26
+  },
+  {
+   "t": "Denna metod är ofta krängligare räknemässigt, men fungerar alltid, även om t.ex. nollställena är okända.",
+   "s": 79.26,
+   "e": 86.99
+  },
+  {
+   "t": "Exempel 1 — Nollställen och en punkt",
+   "s": 86.99,
+   "e": 90.69
+  },
+  {
+   "t": "Figuren visar grafen till en andragradsfunktion f av x .",
+   "s": 90.69,
+   "e": 95.79
+  },
+  {
+   "t": "Bestäm f av x och svara på formen f av x är lika med a x i kvadrat plus b x plus c .",
+   "s": 95.79,
+   "e": 102.88
+  },
+  {
+   "t": "Vi ser i figuren att funktionen har nollställena x ett är lika med minus 1 och x två är lika med 3 , och att grafen går genom punkten (1, −8).",
+   "s": 102.88,
+   "e": 112.76
+  },
+  {
+   "t": "Vi skriver funktionen i faktorform:",
+   "s": 112.76,
+   "e": 130.85
+  },
+  {
+   "t": "f av x är lika med k parentesen x minus parentesen minus 1 slut parentes slut parentes parentesen x minus 3 slut parentes som är lika med k parentesen x plus 1 slut parentes parentesen x minus 3 slut parentes, ekvation 1",
+   "s": 112.76,
+   "e": 130.85
+  },
+  {
+   "t": "Vi sätter in punkten (1, −8), dvs. x är lika med 1 och f av x är lika med minus 8 , i ekvation 1 för att bestämma k :",
+   "s": 130.85,
+   "e": 146.72
+  },
+  {
+   "t": "minus 8 är lika med k parentesen 1 plus 1 slut parentes parentesen 1 minus 3 slut parentes",
+   "s": 130.85,
+   "e": 146.72
+  },
+  {
+   "t": "minus 8 är lika med k gånger 2 gånger parentesen minus 2 slut parentes",
+   "s": 146.72,
+   "e": 153.14
+  },
+  {
+   "t": "minus 8 är lika med minus 4 k vilket är ekvivalent med att k är lika med 2",
+   "s": 153.14,
+   "e": 159.24
+  },
+  {
+   "t": "Vi sätter in k är lika med 2 i ekvation 1 och utvecklar sedan uttrycket:",
+   "s": 159.24,
+   "e": 181.34
+  },
+  {
+   "t": "f av x är lika med 2 parentesen x plus 1 slut parentes parentesen x minus 3 slut parentes som är lika med 2 parentesen x i kvadrat minus 3 x plus x minus 3 slut parentes som är lika med 2 parentesen x i kvadrat minus 2 x minus 3 slut parentes",
+   "s": 159.24,
+   "e": 181.34
+  },
+  {
+   "t": "f av x är lika med 2 x i kvadrat minus 4 x minus 6",
+   "s": 181.34,
+   "e": 187.32
+  },
+  {
+   "t": "Svar: f av x är lika med 2 x i kvadrat minus 4 x minus 6",
+   "s": 187.32,
+   "e": 193.88
+  },
+  {
+   "t": "Exempel 2 — Tre punkter",
+   "s": 193.88,
+   "e": 197.0
+  },
+  {
+   "t": "Figuren visar grafen till en andragradsfunktion f av x som saknar nollställen och som går genom punkterna (−2, 1), (−1, 2) och (0, 5).",
+   "s": 197.0,
+   "e": 208.25
+  },
+  {
+   "t": "Bestäm f av x .",
+   "s": 208.25,
+   "e": 210.91
+  },
+  {
+   "t": "Funktionen saknar nollställen och vi kan därför inte enkelt skriva den i faktorform.",
+   "s": 210.91,
+   "e": 216.59
+  },
+  {
+   "t": "Vi skriver funktionen i utvecklad form f av x är lika med a x i kvadrat plus b x plus c och sätter in de tre punkterna, vilket bildar ett ekvationssystem:",
+   "s": 216.59,
+   "e": 246.0
+  },
+  {
+   "t": "a gånger parentesen minus 2 slut parentes i kvadrat plus b gånger parentesen minus 2 slut parentes plus c är lika med 1 a gånger parentesen minus 1 slut parentes i kvadrat plus b gånger parentesen minus 1 slut parentes plus c som är lika med 2 a gånger 0 i kvadrat plus b gånger 0 plus c som är lika med 5",
+   "s": 216.59,
+   "e": 246.0
+  },
+  {
+   "t": "Vi ska nu bestämma konstanterna a , b och c .",
+   "s": 246.0,
+   "e": 250.0
+  },
+  {
+   "t": "Vi förenklar ekvationerna och får",
+   "s": 250.0,
+   "e": 253.36
+  },
+  {
+   "t": "4 a minus 2 b plus c är lika med 1, ekvation 1 a minus b plus c som är lika med 2, ekvation 2 c som är lika med 5",
+   "s": 253.36,
+   "e": 262.89
+  },
+  {
+   "t": "Från den undre ekvationen har vi att c är lika med 5 .",
+   "s": 262.89,
+   "e": 267.36
+  },
+  {
+   "t": "Insättning i ekvation ekvation 1 och ekvation 2 ger",
+   "s": 267.36,
+   "e": 272.21
+  },
+  {
+   "t": "4 a minus 2 b plus 5 är lika med 1, ekvation 3 a minus b plus 5 som är lika med 2, ekvation 4",
+   "s": 272.21,
+   "e": 280.69
+  },
+  {
+   "t": "Vi använder substitutionsmetoden och löser ut a från ekvation ekvation 4:",
+   "s": 280.69,
+   "e": 289.34
+  },
+  {
+   "t": "a är lika med b minus 3, ekvation 5",
+   "s": 280.69,
+   "e": 289.34
+  },
+  {
+   "t": "Insättning av a är lika med b minus 3 i ekvation ekvation 3 ger",
+   "s": 289.34,
+   "e": 295.45
+  },
+  {
+   "t": "4 parentesen b minus 3 slut parentes minus 2 b plus 5 är lika med 1",
+   "s": 295.45,
+   "e": 302.06
+  },
+  {
+   "t": "4 b minus 12 minus 2 b plus 5 är lika med 1",
+   "s": 302.06,
+   "e": 308.8
+  },
+  {
+   "t": "2 b minus 7 är lika med 1 vilket är ekvivalent med att 2 b är lika med 8 vilket är ekvivalent med att b är lika med 4",
+   "s": 308.75,
+   "e": 316.99
+  },
+  {
+   "t": "Insättning av b är lika med 4 i ekvation 5 ger",
+   "s": 316.99,
+   "e": 321.51
+  },
+  {
+   "t": "a är lika med 4 minus 3 som är lika med 1",
+   "s": 321.51,
+   "e": 325.6
+  },
+  {
+   "t": "Insättning av a är lika med 1 , b är lika med 4 och c är lika med 5 i f av x är lika med a x i kvadrat plus b x plus c ger",
+   "s": 325.6,
+   "e": 335.11
+  },
+  {
+   "t": "f av x är lika med x i kvadrat plus 4 x plus 5",
+   "s": 335.11,
+   "e": 340.54
+  },
+  {
+   "t": "Svar: f av x är lika med x i kvadrat plus 4 x plus 5",
+   "s": 340.54,
+   "e": 346.45
+  },
+  {
+   "t": "Exempel 3 — Fontänen i Seoul",
+   "s": 346.45,
+   "e": 349.84
+  },
+  {
+   "t": "Avståndet längs vattenytan från en vattenstråles start till dess att strålen träffar vattnet är ungefär 2,3 meter.",
+   "s": 349.84,
+   "e": 357.38
+  },
+  {
+   "t": "Strålens högsta höjd över vattenytan är ungefär 3,1 meter.",
+   "s": 357.38,
+   "e": 362.6
+  },
+  {
+   "t": "Anta att strålens bana har samma form som grafen till en andragradsfunktion.",
+   "s": 362.6,
+   "e": 368.03
+  },
+  {
+   "t": "Bestäm en funktion som beskriver strålens bana. (Np Ma2c vt 2013)",
+   "s": 368.03,
+   "e": 376.19
+  },
+  {
+   "t": "Vi gör en skiss och lägger in parabeln i ett koordinatsystem.",
+   "s": 376.19,
+   "e": 380.74
+  },
+  {
+   "t": "Det kan göras på olika sätt, men vi väljer att lägga in den med start i origo.",
+   "s": 380.74,
+   "e": 386.34
+  },
+  {
+   "t": "Vi inser att vi då får nollställen vid x är lika med 0 och x är lika med 2,3 .",
+   "s": 386.34,
+   "e": 392.4
+  },
+  {
+   "t": "Maximipunkten måste ligga mitt emellan dessa, dvs. vid x är lika med 0 plus 2,3 delat med 2 som är lika med 1,15 och med y är lika med 3,1 .",
+   "s": 392.4,
+   "e": 403.35
+  },
+  {
+   "t": "Vi markerar dessa tre punkter med koordinater.",
+   "s": 403.35,
+   "e": 407.29
+  },
+  {
+   "t": "Vi kallar funktionen f av x och skriver den i faktorform f av x är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes där x ett är lika med 0 och x två är lika med 2,3 :",
+   "s": 407.29,
+   "e": 429.15
+  },
+  {
+   "t": "f av x är lika med k parentesen x minus 0 slut parentes parentesen x minus 2,3 slut parentes",
+   "s": 407.29,
+   "e": 429.15
+  },
+  {
+   "t": "f av x är lika med k x parentesen x minus 2,3 slut parentes, ekvation 1",
+   "s": 429.15,
+   "e": 436.95
+  },
+  {
+   "t": "Vi sätter in punkten (1,15; 3,1), dvs. x är lika med 1,15 och f av x är lika med 3,1 , i ekvation 1 för att bestämma k :",
+   "s": 436.95,
+   "e": 454.59
+  },
+  {
+   "t": "3,1 är lika med k gånger 1,15 parentesen 1,15 minus 2,3 slut parentes",
+   "s": 436.95,
+   "e": 454.59
+  },
+  {
+   "t": "3,1 är lika med k gånger 1,15 gånger parentesen minus 1,15 slut parentes",
+   "s": 454.59,
+   "e": 462.34
+  },
+  {
+   "t": "3,1 är lika med minus 1,3225 k",
+   "s": 462.34,
+   "e": 473.8
+  },
+  {
+   "t": "k är lika med 3,1 delat med minus 1,3225 som är lika med minus 2,344",
+   "s": 462.34,
+   "e": 473.8
+  },
+  {
+   "t": "Insättning av k är lika med minus 2,344 i ekvation 1 ger",
+   "s": 473.8,
+   "e": 479.99
+  },
+  {
+   "t": "f av x är lika med minus 2,344 x parentesen x minus 2,3 slut parentes",
+   "s": 479.99,
+   "e": 488.2
+  },
+  {
+   "t": "Vi utvecklar funktionsuttrycket och får",
+   "s": 488.2,
+   "e": 491.85
+  },
+  {
+   "t": "f av x är lika med minus 2,344 x i kvadrat plus 5,391 x",
+   "s": 491.85,
+   "e": 499.8
+  },
+  {
+   "t": "Vi avrundar koefficienterna till två decimaler och får",
+   "s": 499.8,
+   "e": 504.46
+  },
+  {
+   "t": "f av x är lika med minus 2,34 x i kvadrat plus 5,39 x",
+   "s": 504.46,
+   "e": 518.54
+  },
+  {
+   "t": "Svar: f av x är lika med minus 2,34 x i kvadrat plus 5,39 x",
+   "s": 504.46,
+   "e": 518.54
+  },
+  {
+   "t": "Undersök faktorformen själv",
+   "s": 504.46,
+   "e": 518.54
+  },
+  {
+   "t": "Undersök hur faktorformen y är lika med k parentesen x minus p slut parentes parentesen x minus q slut parentes formar parabeln — p och q är nollställena och k styr hur \"brant\" parabeln är och åt vilket håll den öppnar sig.",
+   "s": 518.54,
+   "e": 532.56
+  },
+  {
+   "t": "Startläget visar exempel 1:s funktion f av x är lika med 2 parentesen x plus 1 slut parentes parentesen x minus 3 slut parentes .",
+   "s": 532.56,
+   "e": 543.1
+  }
+ ]
+}

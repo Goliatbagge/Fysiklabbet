@@ -1,0 +1,153 @@
+{
+ "id": "ma2c-4.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "bb7948a79693b9f26d2bc5f5efa6e4710538247b",
+ "dur": 128.74,
+ "segments": [
+  {
+   "t": "Olika slags vinklar",
+   "s": 0.1,
+   "e": 2.71
+  },
+  {
+   "t": "Vinklar mäts ofta i grader (grader) och definieras av att ett helt varv är 360 grader.",
+   "s": 2.66,
+   "e": 9.9
+  },
+  {
+   "t": "Beteckningar på vinklar",
+   "s": 9.9,
+   "e": 12.5
+  },
+  {
+   "t": "I figuren har en vinkel v markerats vid punkten B.",
+   "s": 12.5,
+   "e": 16.8
+  },
+  {
+   "t": "Denna kan betecknas på olika sätt:",
+   "s": 16.8,
+   "e": 26.8
+  },
+  {
+   "t": "v är lika med vinkeln B som är lika med vinkeln A B C som är lika med vinkeln C B A",
+   "s": 16.8,
+   "e": 26.8
+  },
+  {
+   "t": "Namn på vinklar utifrån storlek",
+   "s": 16.8,
+   "e": 26.8
+  },
+  {
+   "t": "Transversal och vinklar vid parallella linjer",
+   "s": 26.8,
+   "e": 30.64
+  },
+  {
+   "t": "En linje som skär minst två andra linjer kallas transversal.",
+   "s": 30.64,
+   "e": 35.23
+  },
+  {
+   "t": "Om två parallella linjer L ett och L två skärs av en transversal uppstår vinklar enligt figuren nedan.",
+   "s": 35.23,
+   "e": 42.4
+  },
+  {
+   "t": "* Gäller endast om linjerna L ett och L två är parallella.",
+   "s": 42.4,
+   "e": 47.55
+  },
+  {
+   "t": "Bisektris",
+   "s": 47.55,
+   "e": 49.48
+  },
+  {
+   "t": "En stråle som delar en vinkel mitt itu kallas bisektris.",
+   "s": 49.48,
+   "e": 54.0
+  },
+  {
+   "t": "I geometriuppgifter är det viktigt att motivera varför en vinkel får en viss storlek.",
+   "s": 54.0,
+   "e": 59.69
+  },
+  {
+   "t": "Motiveringar kan skrivas kortfattat i parentes, se exemplen nedan.",
+   "s": 59.69,
+   "e": 65.09
+  },
+  {
+   "t": "Exempel 1 — Alternatvinklar",
+   "s": 65.09,
+   "e": 68.26
+  },
+  {
+   "t": "Beräkna vinkeln x om linjerna L ett och L två är parallella.",
+   "s": 68.26,
+   "e": 73.19
+  },
+  {
+   "t": "x är lika med 72 grader (alternatvinklar)",
+   "s": 73.19,
+   "e": 77.78
+  },
+  {
+   "t": "Svar: 72 grader",
+   "s": 77.78,
+   "e": 80.81
+  },
+  {
+   "t": "Exempel 2 — Hjälpvinkel",
+   "s": 80.81,
+   "e": 83.83
+  },
+  {
+   "t": "Beräkna vinkeln v ett om linjerna L ett och L två är parallella.",
+   "s": 83.83,
+   "e": 88.99
+  },
+  {
+   "t": "Denna uppgift kan lösas på flera sätt.",
+   "s": 88.99,
+   "e": 92.62
+  },
+  {
+   "t": "Vi lägger in en hjälpvinkel v två enligt figuren nedan.",
+   "s": 92.62,
+   "e": 97.3
+  },
+  {
+   "t": "v två är lika med 115 grader (likbelägna vinklar)",
+   "s": 97.3,
+   "e": 102.67
+  },
+  {
+   "t": "v ett plus v två är lika med 180 grader (sidovinklar)",
+   "s": 102.67,
+   "e": 108.24
+  },
+  {
+   "t": "Insättning av v två är lika med 115 grader ger",
+   "s": 108.24,
+   "e": 113.04
+  },
+  {
+   "t": "v ett plus 115 grader är lika med 180 grader",
+   "s": 113.04,
+   "e": 118.31
+  },
+  {
+   "t": "v ett är lika med 180 grader minus 115 grader som är lika med 65 grader",
+   "s": 118.31,
+   "e": 125.53
+  },
+  {
+   "t": "Svar: 65 grader",
+   "s": 125.53,
+   "e": 128.74
+  }
+ ]
+}

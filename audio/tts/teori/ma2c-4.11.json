@@ -1,0 +1,258 @@
+{
+ "id": "ma2c-4.11",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "edeaa62a9f867de309eeb1007777527facad0b1c",
+ "dur": 231.76,
+ "segments": [
+  {
+   "t": "Randvinkelsatsen",
+   "s": 0.1,
+   "e": 2.48
+  },
+  {
+   "t": "Kanten på en cirkel kallas rand och en vinkel med spetsen på randen kallas randvinkel.",
+   "s": 2.42,
+   "e": 8.44
+  },
+  {
+   "t": "Mittpunkten i en cirkel kallas medelpunkt och en vinkel med spetsen i medelpunkten kallas medelpunktsvinkel.",
+   "s": 8.44,
+   "e": 15.54
+  },
+  {
+   "t": "Rand- och medelpunktsvinklar har vinkelben som står på en vinkelbåge, se figur nedan.",
+   "s": 15.54,
+   "e": 21.62
+  },
+  {
+   "t": "Randvinkelsatsen",
+   "s": 21.62,
+   "e": 23.99
+  },
+  {
+   "t": "Medelpunktsvinkeln är dubbelt så stor som randvinkeln på samma cirkelbåge.",
+   "s": 23.99,
+   "e": 29.15
+  },
+  {
+   "t": "y är lika med 2 x",
+   "s": 29.15,
+   "e": 31.99
+  },
+  {
+   "t": "där x är randvinkeln och y är medelpunktsvinkeln.",
+   "s": 31.99,
+   "e": 36.38
+  },
+  {
+   "t": "I uppgifter där du utnyttjar randvinkelsatsen kan den motiveras (randvinkelsatsen).",
+   "s": 36.38,
+   "e": 42.52
+  },
+  {
+   "t": "Randvinklar kan ha lite olika utseende beroende var på randen de ligger — satsen y är lika med 2 x gäller så länge vinklarna står på samma cirkelbåge.",
+   "s": 42.52,
+   "e": 51.6
+  },
+  {
+   "t": "En sats som är en direkt följd av en tidigare sats kallas följdsats.",
+   "s": 51.6,
+   "e": 56.85
+  },
+  {
+   "t": "Följdsatser till randvinkelsatsen",
+   "s": 56.85,
+   "e": 60.12
+  },
+  {
+   "t": "Randvinklar på samma cirkelbåge är lika stora.",
+   "s": 60.12,
+   "e": 64.16
+  },
+  {
+   "t": "Motiveras (randvinklar på samma båge).",
+   "s": 64.16,
+   "e": 68.16
+  },
+  {
+   "t": "Randvinklar på en halvcirkelbåge är 90 grader.",
+   "s": 68.16,
+   "e": 72.34
+  },
+  {
+   "t": "Motiveras (randvinkel på halvcirkelbåge).",
+   "s": 72.34,
+   "e": 76.7
+  },
+  {
+   "t": "Vinklar i cirklar — specialfall",
+   "s": 76.7,
+   "e": 80.01
+  },
+  {
+   "t": "Tangenter.",
+   "s": 80.01,
+   "e": 81.81
+  },
+  {
+   "t": "Vinkeln som bildas mellan en tangent och radien till tangeringspunkten är alltid 90 grader.",
+   "s": 81.81,
+   "e": 87.97
+  },
+  {
+   "t": "Motiveras (tangent mot radie).",
+   "s": 87.97,
+   "e": 91.44
+  },
+  {
+   "t": "Likbenta trianglar.",
+   "s": 91.44,
+   "e": 94.04
+  },
+  {
+   "t": "Två radier som bildar en triangel ger alltid en likbent triangel.",
+   "s": 94.04,
+   "e": 98.88
+  },
+  {
+   "t": "Basvinklar i en likbent triangel är alltid lika stora.",
+   "s": 98.88,
+   "e": 103.38
+  },
+  {
+   "t": "Motiveras (likbent triangel).",
+   "s": 103.38,
+   "e": 106.89
+  },
+  {
+   "t": "Exempel 1 — Beräkna randvinkeln",
+   "s": 106.89,
+   "e": 110.34
+  },
+  {
+   "t": "Beräkna vinkeln x i figurerna.",
+   "s": 110.34,
+   "e": 113.51
+  },
+  {
+   "t": "I den vänstra figuren är medelpunktsvinkeln 120 grader given, och i den högra är randvinkeln 32 grader given.",
+   "s": 113.51,
+   "e": 121.78
+  },
+  {
+   "t": "a) Randvinkeln x och medelpunktsvinkeln 120 grader står på samma cirkelbåge.",
+   "s": 121.78,
+   "e": 128.47
+  },
+  {
+   "t": "Randvinkelsatsen ger",
+   "s": 128.47,
+   "e": 131.24
+  },
+  {
+   "t": "x är lika med 120 grader delat med 2 som är lika med 60 grader (randvinkelsatsen)",
+   "s": 131.24,
+   "e": 138.4
+  },
+  {
+   "t": "Svar: x är lika med 60 grader",
+   "s": 138.4,
+   "e": 142.22
+  },
+  {
+   "t": "b) Vinklarna x och 32 grader är randvinklar som står på samma cirkelbåge:",
+   "s": 142.22,
+   "e": 152.35
+  },
+  {
+   "t": "x är lika med 32 grader (randvinklar på samma båge)",
+   "s": 142.22,
+   "e": 152.35
+  },
+  {
+   "t": "Svar: x är lika med 32 grader",
+   "s": 152.35,
+   "e": 156.39
+  },
+  {
+   "t": "Exempel 2 — Likbent triangel av radier",
+   "s": 156.39,
+   "e": 160.45
+  },
+  {
+   "t": "Beräkna vinkeln y .",
+   "s": 160.45,
+   "e": 162.99
+  },
+  {
+   "t": "Den streckade linjen är en diameter och vinkeln 23 grader är given.",
+   "s": 162.99,
+   "e": 168.4
+  },
+  {
+   "t": "Kordan och diametern bildar tillsammans med radien en triangel där två ben är radier — en likbent triangel.",
+   "s": 168.4,
+   "e": 175.51
+  },
+  {
+   "t": "Basvinklarna är då lika stora:",
+   "s": 175.51,
+   "e": 184.51
+  },
+  {
+   "t": "x är lika med 23 grader (basvinklar i likbent triangel — båda ben motsvarar en radie)",
+   "s": 175.51,
+   "e": 184.51
+  },
+  {
+   "t": "x är en randvinkel och y är medelpunktsvinkeln på samma cirkelbåge:",
+   "s": 184.51,
+   "e": 196.56
+  },
+  {
+   "t": "y är lika med 2 x som är lika med 2 gånger 23 grader som är lika med 46 grader (randvinkelsatsen)",
+   "s": 184.51,
+   "e": 196.56
+  },
+  {
+   "t": "Svar: y är lika med 46 grader",
+   "s": 196.56,
+   "e": 200.46
+  },
+  {
+   "t": "Exempel 3 — Tangent",
+   "s": 200.46,
+   "e": 203.4
+  },
+  {
+   "t": "Linjen genom A och B är en tangent till cirkeln med medelpunkten P.",
+   "s": 203.4,
+   "e": 209.86
+  },
+  {
+   "t": "Beräkna vinkeln v .",
+   "s": 203.4,
+   "e": 209.86
+  },
+  {
+   "t": "vinkeln A B P är lika med 90 grader (tangent mot radie)",
+   "s": 209.86,
+   "e": 215.35
+  },
+  {
+   "t": "Vinkelsumman i triangeln A B P ger",
+   "s": 215.35,
+   "e": 219.35
+  },
+  {
+   "t": "v är lika med 180 grader minus 90 grader minus 50 grader som är lika med 40 grader (vinkelsumma i triangel)",
+   "s": 219.35,
+   "e": 228.07
+  },
+  {
+   "t": "Svar: v är lika med 40 grader",
+   "s": 228.07,
+   "e": 231.76
+  }
+ ]
+}

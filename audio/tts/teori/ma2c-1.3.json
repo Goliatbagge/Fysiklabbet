@@ -1,0 +1,358 @@
+{
+ "id": "ma2c-1.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0ebf0dc93c9c22627c15231dc29110e2cb3a68cd",
+ "dur": 334.99,
+ "segments": [
+  {
+   "t": "Additionsmetoden",
+   "s": 0.1,
+   "e": 2.46
+  },
+  {
+   "t": "Att lösa ett ekvationssystem algebraiskt genom att addera ekvationer kallas additionsmetoden.",
+   "s": 2.41,
+   "e": 8.94
+  },
+  {
+   "t": "Lösa ekvationssystem med additionsmetoden",
+   "s": 8.94,
+   "e": 12.94
+  },
+  {
+   "t": "Modifiera en eller båda ekvationer så att samma variabelterm, fast med olika tecken, finns i båda ekvationer.",
+   "s": 12.94,
+   "e": 20.54
+  },
+  {
+   "t": "Addera dem ledvis för att eliminera ena variabeln och lös ut den ena variabeln.",
+   "s": 20.54,
+   "e": 26.49
+  },
+  {
+   "t": "Sätt in värdet på den ena variabeln i någon av de tidigare ekvationerna för att få värdet på den andra variabeln.",
+   "s": 26.49,
+   "e": 33.6
+  },
+  {
+   "t": "Exempel 1 — Addera direkt",
+   "s": 33.6,
+   "e": 36.79
+  },
+  {
+   "t": "Lös ekvationssystemet",
+   "s": 36.79,
+   "e": 39.61
+  },
+  {
+   "t": "minus 2 x plus 5 y är lika med 6 4 x minus 5 y som är lika med 12",
+   "s": 39.61,
+   "e": 45.95
+  },
+  {
+   "t": "Vi ser att båda ekvationer innehåller samma term 5 y med ett plustecken framför den ena och ett minustecken framför den andra.",
+   "s": 45.95,
+   "e": 53.84
+  },
+  {
+   "t": "Vi adderar ekvationerna \"ledvis\" med additionsmetoden!",
+   "s": 53.84,
+   "e": 58.34
+  },
+  {
+   "t": "minus 2 x plus 5 y är lika med 6, ekvation 1 plus 4 x minus 5 y som är lika med 12, ekvation 2 hline 2 x plus 0 som är lika med 18",
+   "s": 58.34,
+   "e": 69.45
+  },
+  {
+   "t": "y -termerna tar ut varandra och kvar blir en ekvation med bara x :",
+   "s": 69.45,
+   "e": 76.26
+  },
+  {
+   "t": "2 x är lika med 18",
+   "s": 69.45,
+   "e": 76.26
+  },
+  {
+   "t": "2 x delat med 2 är lika med 18 delat med 2",
+   "s": 76.26,
+   "e": 80.59
+  },
+  {
+   "t": "x är lika med 9",
+   "s": 80.59,
+   "e": 83.25
+  },
+  {
+   "t": "Insättning av x är lika med 9 i ekvation 1 ger",
+   "s": 83.25,
+   "e": 87.92
+  },
+  {
+   "t": "minus 2 gånger 9 plus 5 y är lika med 6",
+   "s": 87.92,
+   "e": 92.45
+  },
+  {
+   "t": "minus 18 plus 5 y är lika med 6",
+   "s": 92.45,
+   "e": 96.5
+  },
+  {
+   "t": "Vi adderar 18 till båda led och dividerar sedan med 5:",
+   "s": 96.5,
+   "e": 103.11
+  },
+  {
+   "t": "5 y är lika med 24",
+   "s": 96.5,
+   "e": 103.11
+  },
+  {
+   "t": "y är lika med 24 delat med 5 som är lika med 4,8",
+   "s": 103.11,
+   "e": 108.25
+  },
+  {
+   "t": "Svar:",
+   "s": 108.25,
+   "e": 113.36
+  },
+  {
+   "t": "x är lika med 9 y som är lika med 4,8",
+   "s": 108.25,
+   "e": 113.36
+  },
+  {
+   "t": "Exempel 2 — Multiplicera ena ekvationen först",
+   "s": 113.36,
+   "e": 117.8
+  },
+  {
+   "t": "Lös ekvationssystemet",
+   "s": 117.8,
+   "e": 120.62
+  },
+  {
+   "t": "5 x plus 4 y är lika med 30 2 x minus 8 y som är lika med minus 12",
+   "s": 120.62,
+   "e": 127.15
+  },
+  {
+   "t": "Vi börjar med att skriva av ekvationssystemet och sätta etiketter.",
+   "s": 127.15,
+   "e": 132.01
+  },
+  {
+   "t": "5 x plus 4 y är lika med 30, ekvation 1 2 x minus 8 y som är lika med minus 12, ekvation 2",
+   "s": 132.01,
+   "e": 140.6
+  },
+  {
+   "t": "Innan vi adderar ekvationerna så vill vi ha samma x - eller y -term i båda ekvationer, men med olika tecken framför.",
+   "s": 140.6,
+   "e": 148.49
+  },
+  {
+   "t": "I den undre ekvationen har vi termen minus 8 y .",
+   "s": 148.49,
+   "e": 152.69
+  },
+  {
+   "t": "I den övre ekvationen har vi termen plus 4 y .",
+   "s": 152.69,
+   "e": 157.0
+  },
+  {
+   "t": "Om vi multiplicerar den övre ekvationen med 2 kommer termen att bli plus 8 y och y -termerna kommer att kunna elimineras med additionsmetoden.",
+   "s": 157.0,
+   "e": 165.74
+  },
+  {
+   "t": "Vi multiplicerar den övre ekvationen med 2.",
+   "s": 165.74,
+   "e": 169.82
+  },
+  {
+   "t": "Alla termer i ekvationen ska då multipliceras med 2:",
+   "s": 169.82,
+   "e": 179.25
+  },
+  {
+   "t": "10 x plus 8 y är lika med 60 2 x minus 8 y som är lika med minus 12",
+   "s": 169.82,
+   "e": 179.25
+  },
+  {
+   "t": "Nu adderar vi ekvationerna.",
+   "s": 179.25,
+   "e": 182.24
+  },
+  {
+   "t": "10 x plus 8 y är lika med 60 plus 2 x minus 8 y som är lika med minus 12 hline 12 x som är lika med 48",
+   "s": 182.24,
+   "e": 191.22
+  },
+  {
+   "t": "Division med 12 i båda led ger",
+   "s": 191.22,
+   "e": 194.53
+  },
+  {
+   "t": "x är lika med 4",
+   "s": 194.53,
+   "e": 197.07
+  },
+  {
+   "t": "Insättning av x är lika med 4 i t.ex. ekvation ekvation 1 ger",
+   "s": 197.07,
+   "e": 202.89
+  },
+  {
+   "t": "5 gånger 4 plus 4 y är lika med 30",
+   "s": 202.89,
+   "e": 207.15
+  },
+  {
+   "t": "20 plus 4 y är lika med 30",
+   "s": 207.15,
+   "e": 210.69
+  },
+  {
+   "t": "Vi subtraherar 20 från båda led och dividerar sedan med 4:",
+   "s": 210.69,
+   "e": 217.3
+  },
+  {
+   "t": "4 y är lika med 10",
+   "s": 210.69,
+   "e": 217.3
+  },
+  {
+   "t": "y är lika med 10 delat med 4 som är lika med 2,5",
+   "s": 217.3,
+   "e": 222.24
+  },
+  {
+   "t": "Svar:",
+   "s": 222.24,
+   "e": 227.24
+  },
+  {
+   "t": "x är lika med 4 y som är lika med 2,5",
+   "s": 222.24,
+   "e": 227.24
+  },
+  {
+   "t": "Exempel 3 — Multiplicera båda ekvationerna",
+   "s": 227.24,
+   "e": 231.32
+  },
+  {
+   "t": "Lös ekvationssystemet",
+   "s": 231.32,
+   "e": 234.16
+  },
+  {
+   "t": "2 x plus 7 y är lika med 8 5 x plus 9 y som är lika med 3",
+   "s": 234.16,
+   "e": 240.11
+  },
+  {
+   "t": "2 x plus 7 y är lika med 8, ekvation 1 5 x plus 9 y som är lika med 3, ekvation 2",
+   "s": 240.11,
+   "e": 248.16
+  },
+  {
+   "t": "Här räcker det inte att multiplicera en av ekvationerna för att eliminera x eller y .",
+   "s": 248.16,
+   "e": 253.86
+  },
+  {
+   "t": "Vi kan då multiplicera båda ekvationer.",
+   "s": 253.86,
+   "e": 257.61
+  },
+  {
+   "t": "Om vi t.ex. vill eliminera x -termerna kan vi multiplicera ekvationerna med varandras koefficienter framför x och se till att de får olika tecken.",
+   "s": 257.61,
+   "e": 266.89
+  },
+  {
+   "t": "Vi multiplicerar den övre ekvationen med 5 (koefficienten framför x i den undre ekvationen) och den undre ekvationen med −2 (koefficienten framför x i den övre ekvationen med ombytt tecken).",
+   "s": 266.89,
+   "e": 279.0
+  },
+  {
+   "t": "Det ger",
+   "s": 279.0,
+   "e": 280.9
+  },
+  {
+   "t": "10 x plus 35 y är lika med 40 minus 10 x minus 18 y som är lika med minus 6",
+   "s": 280.9,
+   "e": 288.35
+  },
+  {
+   "t": "Vi adderar nu ekvationerna och fortsätter sedan som vanligt.",
+   "s": 288.35,
+   "e": 293.0
+  },
+  {
+   "t": "10 x plus 35 y är lika med 40 plus minus 10 x minus 18 y som är lika med minus 6 hline 17 y som är lika med 34",
+   "s": 293.0,
+   "e": 302.64
+  },
+  {
+   "t": "Division med 17 i båda led ger",
+   "s": 302.64,
+   "e": 305.98
+  },
+  {
+   "t": "y är lika med 2",
+   "s": 305.98,
+   "e": 308.38
+  },
+  {
+   "t": "y är lika med 2 i ekvation ekvation 1 ger",
+   "s": 308.38,
+   "e": 312.65
+  },
+  {
+   "t": "2 x plus 7 gånger 2 är lika med 8",
+   "s": 312.65,
+   "e": 316.66
+  },
+  {
+   "t": "2 x plus 14 är lika med 8",
+   "s": 316.66,
+   "e": 320.27
+  },
+  {
+   "t": "Vi subtraherar 14 från båda led och dividerar sedan med 2:",
+   "s": 320.27,
+   "e": 327.25
+  },
+  {
+   "t": "2 x är lika med minus 6",
+   "s": 320.27,
+   "e": 327.25
+  },
+  {
+   "t": "x är lika med minus 3",
+   "s": 327.25,
+   "e": 330.19
+  },
+  {
+   "t": "Svar:",
+   "s": 330.19,
+   "e": 334.99
+  },
+  {
+   "t": "x är lika med minus 3 y som är lika med 2",
+   "s": 330.19,
+   "e": 334.99
+  }
+ ]
+}

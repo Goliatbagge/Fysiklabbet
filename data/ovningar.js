@@ -23295,4 +23295,4359 @@ Kontroll: $\\sqrt{15^2 + 8^2} = \\sqrt{225 + 64} = \\sqrt{289} = 17$. Stämmer!
 **Generell slutsats:** 8-15-17 är (liksom 3-4-5) en Pythagoreisk taltrippel — och notera att BÅDA tecknen på $a$ ger samma längd, eftersom kvadreringen suddar ut tecknet.`,
         },
     ],
+
+    // ═══════════════════════════════════════════════════════════════════
+    // MATEMATIK NIVÅ 2c
+    // ═══════════════════════════════════════════════════════════════════
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-1.1  Grafisk lösning av linjära ekvationssystem
+    // Skärningspunkten = lösningen; antal lösningar via k- och m-värden.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-1.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Två linjer är uppritade i koordinatsystemet nedan. Vilken är lösningen till ekvationssystemet som linjerna bildar?
+
+${makeDiagram({
+    xMax: 5, xTicks: [0, 1, 2, 3, 4, 5],
+    yMax: 6, yTicks: [0, 1, 2, 3, 4, 5, 6],
+    xLabel: '<tspan font-style="italic">x</tspan>',
+    yLabel: '<tspan font-style="italic">y</tspan>',
+    paths: [
+        { points: [[0, 1], [5, 6]], color: '#2563c9' },
+        { points: [[0, 5], [5, 0]], color: '#4a7d3a' },
+    ],
+})}`,
+            choices: [
+                `$x = 2$ och $y = 3$`,
+                `$x = 3$ och $y = 2$`,
+                `$x = 0$ och $y = 1$`,
+                `$x = 0$ och $y = 5$`,
+            ],
+            correct: 0,
+            solution: `Lösningen till ekvationssystemet är skärningspunktens koordinater. Linjerna skär varandra i punkten (2, 3), så $x$-koordinaten är lösningen till $x$ och $y$-koordinaten är lösningen till $y$.
+
+**Svar:** $x = 2$ och $y = 3$`,
+        },
+        {
+            level: 1,
+            question: `Vilket talpar är en lösning till ekvationssystemet
+$$
+\\begin{cases}
+y = 2x \\\\
+y = x + 3
+\\end{cases}
+$$`,
+            choices: [
+                `$x = 3$, $y = 6$`,
+                `$x = 2$, $y = 4$`,
+                `$x = 1$, $y = 4$`,
+                `$x = 0$, $y = 0$`,
+            ],
+            correct: 0,
+            solution: `En lösning till ett ekvationssystem måste passa i **båda** ekvationerna samtidigt. Pröva talparet i båda:
+
+$x = 3$, $y = 6$: första ekvationen ger $y = 2 \\cdot 3 = 6$ (stämmer), andra ger $y = 3 + 3 = 6$ (stämmer).
+
+Övriga par passar bara i den ena ekvationen — t.ex. $x = 2$, $y = 4$ stämmer i $y = 2x$ men inte i $y = x + 3$ (som ger 5).
+
+**Svar:** $x = 3$, $y = 6$`,
+        },
+        {
+            level: 1,
+            question: `Hur många lösningar har ekvationssystemet
+$$
+\\begin{cases}
+y = 4x + 1 \\\\
+y = 4x - 3
+\\end{cases}
+$$`,
+            answer: { value: 0, unit: '' },
+            solution: `Båda linjerna har samma $k$-värde (4) men olika $m$-värden (1 respektive −3). Linjerna är alltså parallella och skär aldrig varandra — systemet saknar lösningar.
+
+**Svar:** 0 lösningar (linjerna är parallella)`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Hur många lösningar har ekvationssystemet
+$$
+\\begin{cases}
+y = 2x + 3 \\\\
+2y = 4x + 6
+\\end{cases}
+$$`,
+            choices: [
+                `Oändligt många lösningar`,
+                `Exakt en lösning`,
+                `Saknar lösningar`,
+                `Exakt två lösningar`,
+            ],
+            correct: 0,
+            solution: `Skriv den andra ekvationen på formen $y = kx + m$ genom att dividera båda led med 2:
+
+$$ 2y = 4x + 6 \\iff y = 2x + 3 $$
+
+Det är **samma linje** som den första ekvationen — samma $k$-värde och samma $m$-värde. Varje punkt på linjen är en gemensam lösning, så systemet har oändligt många lösningar.
+
+**Svar:** Oändligt många lösningar`,
+        },
+        {
+            level: 2,
+            question: `Bestäm talet $a$ så att ekvationssystemet
+$$
+\\begin{cases}
+y = ax - 1 \\\\
+y = (2a - 3)x + 4
+\\end{cases}
+$$
+saknar lösningar.`,
+            answer: { value: 3, unit: '' },
+            solution: `Systemet saknar lösningar när linjerna är parallella: samma $k$-värde men olika $m$-värden.
+
+$m$-värdena är redan olika (−1 och 4), så villkoret är att $k$-värdena är lika:
+
+$$ a = 2a - 3 $$
+
+$$ 3 = 2a - a = a $$
+
+Kontroll: $a = 3$ ger linjerna $y = 3x - 1$ och $y = 3x + 4$ — parallella, inga gemensamma punkter.
+
+**Svar:** $a = 3$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Linjerna $y = x + 1$, $y = 3 - x$ och $y = kx + 5$ skär varandra i **en och samma punkt**. Bestäm $k$.`,
+            answer: { value: -3, unit: '' },
+            solution: `Nyckelinsikten: den gemensamma punkten måste vara skärningspunkten mellan de två första linjerna — den tredje linjen måste sedan gå genom just den punkten.
+
+**Steg 1.** Skärningen mellan $y = x + 1$ och $y = 3 - x$:
+
+$$ x + 1 = 3 - x $$
+
+$$ 2x = 2 \\iff x = 1 $$
+
+vilket ger $y = 1 + 1 = 2$. Gemensamma punkten är alltså (1, 2).
+
+**Steg 2.** Linjen $y = kx + 5$ ska gå genom (1, 2). Insättning:
+
+$$ 2 = k \\cdot 1 + 5 $$
+
+$$ k = 2 - 5 = -3 $$
+
+Kontroll: $y = -3x + 5$ ger $y = -3 + 5 = 2$ vid $x = 1$. Stämmer!
+
+**Svar:** $k = -3$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-1.2  Substitutionsmetoden
+    // Lös ut en variabel, byt ut den i den andra ekvationen.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-1.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationssystemet
+$$
+\\begin{cases}
+y = x + 1 \\\\
+y = 2x - 3
+\\end{cases}
+$$
+med substitutionsmetoden och ange $x$.`,
+            answer: { value: 4, unit: '' },
+            solution: `Båda ekvationerna har $y$ utlöst — byt ut $y$ i den ena mot uttrycket från den andra:
+
+$$ x + 1 = 2x - 3 $$
+
+Samla $x$ på ena sidan:
+
+$$ 1 + 3 = 2x - x $$
+
+$$ x = 4 $$
+
+**Svar:** $x = 4$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationssystemet
+$$
+\\begin{cases}
+y = 5x \\\\
+x + y = 12
+\\end{cases}
+$$
+och ange $y$.`,
+            answer: { value: 10, unit: '' },
+            solution: `Enligt den övre ekvationen är $y = 5x$. Substituera i den undre:
+
+$$ x + 5x = 12 $$
+
+$$ 6x = 12 \\iff x = 2 $$
+
+Insättning av $x = 2$ i $y = 5x$ ger
+
+$$ y = 5 \\cdot 2 = 10 $$
+
+**Svar:** $y = 10$`,
+        },
+        {
+            level: 1,
+            question: `Ekvationssystemet
+$$
+\\begin{cases}
+x = 2y + 1 \\\\
+3x + y = 17
+\\end{cases}
+$$
+ska lösas med substitutionsmetoden. Vilken ekvation får man efter substitutionen?`,
+            choices: [
+                `$3(2y + 1) + y = 17$`,
+                `$3x + 2y + 1 = 17$`,
+                `$2y + 1 + y = 17$`,
+                `$3(2y + 1) = 17$`,
+            ],
+            correct: 0,
+            solution: `Den övre ekvationen säger att $x$ är lika med uttrycket $2y + 1$. Byt ut $x$ mot **hela** uttrycket i den undre ekvationen — parentesen behövs eftersom hela uttrycket ska multipliceras med 3:
+
+$$ 3(2y + 1) + y = 17 $$
+
+**Svar:** $3(2y + 1) + y = 17$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationssystemet
+$$
+\\begin{cases}
+2x + 3y = 12 \\\\
+x - y = 1
+\\end{cases}
+$$
+och ange $x$.`,
+            answer: { value: 3, unit: '' },
+            solution: `Lös ut $x$ ur den undre ekvationen (enklast — koefficienten är 1):
+
+$$ x = 1 + y $$
+
+Substituera i den övre:
+
+$$ 2(1 + y) + 3y = 12 $$
+
+$$ 2 + 2y + 3y = 12 $$
+
+$$ 2 + 5y = 12 \\iff 5y = 10 \\iff y = 2 $$
+
+Insättning av $y = 2$ i $x = 1 + y$ ger $x = 3$.
+
+Kontroll i den övre ekvationen: $2 \\cdot 3 + 3 \\cdot 2 = 12$. Stämmer!
+
+**Svar:** $x = 3$`,
+        },
+        {
+            level: 2,
+            question: `Ekvationssystemet
+$$
+\\begin{cases}
+y = 2x + a \\\\
+3x + y = 18
+\\end{cases}
+$$
+har en lösning där $x = 2$. Bestäm talet $a$.`,
+            answer: { value: 8, unit: '' },
+            solution: `Sätt in $x = 2$ i den undre ekvationen för att först få $y$:
+
+$$ 3 \\cdot 2 + y = 18 \\iff y = 12 $$
+
+Lösningen är alltså $x = 2$, $y = 12$. Den ska också passa i den övre ekvationen:
+
+$$ 12 = 2 \\cdot 2 + a $$
+
+$$ a = 12 - 4 = 8 $$
+
+**Svar:** $a = 8$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För vilket värde på $c$ har ekvationssystemet
+$$
+\\begin{cases}
+2x + y = 5 \\\\
+4x + 2y = c
+\\end{cases}
+$$
+oändligt många lösningar?`,
+            answer: { value: 10, unit: '' },
+            solution: `Nyckelinsikten: oändligt många lösningar kräver att de två ekvationerna beskriver **samma linje**.
+
+Pröva substitutionsmetoden: lös ut $y = 5 - 2x$ ur den övre och sätt in i den undre:
+
+$$ 4x + 2(5 - 2x) = c $$
+
+$$ 4x + 10 - 4x = c $$
+
+$$ 10 = c $$
+
+Alla $x$-termer försvinner! Om $c = 10$ blir ekvationen $10 = 10$ — sant för **alla** $x$, så varje punkt på linjen $y = 5 - 2x$ är en lösning (oändligt många).
+
+Om $c \\neq 10$ blir ekvationen en motsägelse (t.ex. $10 = 7$) — då saknas lösningar helt (parallella linjer).
+
+**Svar:** $c = 10$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-1.3  Additionsmetoden
+    // Addera ekvationerna ledvis så att en variabel elimineras.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-1.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationssystemet
+$$
+\\begin{cases}
+x + y = 11 \\\\
+x - y = 3
+\\end{cases}
+$$
+med additionsmetoden och ange $x$.`,
+            answer: { value: 7, unit: '' },
+            solution: `Termerna $+y$ och $-y$ tar ut varandra vid ledvis addition:
+
+$$ (x + y) + (x - y) = 11 + 3 $$
+
+$$ 2x = 14 \\iff x = 7 $$
+
+**Svar:** $x = 7$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationssystemet
+$$
+\\begin{cases}
+2x + 3y = 12 \\\\
+4x - 3y = 6
+\\end{cases}
+$$
+och ange $y$.`,
+            answer: { value: 2, unit: '' },
+            solution: `Ledvis addition eliminerar $y$-termerna:
+
+$$ 6x = 18 \\iff x = 3 $$
+
+Insättning av $x = 3$ i den övre ekvationen:
+
+$$ 2 \\cdot 3 + 3y = 12 $$
+
+$$ 3y = 6 \\iff y = 2 $$
+
+**Svar:** $y = 2$`,
+        },
+        {
+            level: 1,
+            question: `Vad händer när ekvationerna i systemet
+$$
+\\begin{cases}
+5x - 2y = 4 \\\\
+3x + 2y = 12
+\\end{cases}
+$$
+adderas ledvis?`,
+            choices: [
+                `$y$-termerna elimineras — kvar blir $8x = 16$`,
+                `$x$-termerna elimineras — kvar blir $4y = 16$`,
+                `Ingen variabel elimineras — man måste multiplicera först`,
+                `Båda variablerna elimineras — kvar blir $0 = 16$`,
+            ],
+            correct: 0,
+            solution: `Termerna $-2y$ och $+2y$ är samma variabelterm med olika tecken — de tar ut varandra vid ledvis addition:
+
+$$ (5x - 2y) + (3x + 2y) = 4 + 12 $$
+
+$$ 8x = 16 $$
+
+(vilket ger $x = 2$).
+
+**Svar:** $y$-termerna elimineras — kvar blir $8x = 16$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationssystemet
+$$
+\\begin{cases}
+3x + 2y = 20 \\\\
+x - y = 5
+\\end{cases}
+$$
+med additionsmetoden och ange $x$.`,
+            answer: { value: 6, unit: '' },
+            solution: `Multiplicera den undre ekvationen med 2 så att $y$-termerna får samma koefficient med olika tecken:
+
+$$
+\\begin{cases}
+3x + 2y = 20 \\\\
+2x - 2y = 10
+\\end{cases}
+$$
+
+Ledvis addition:
+
+$$ 5x = 30 \\iff x = 6 $$
+
+(Insättning i $x - y = 5$ ger $y = 1$.)
+
+**Svar:** $x = 6$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationssystemet
+$$
+\\begin{cases}
+3x + 4y = 25 \\\\
+2x + 3y = 18
+\\end{cases}
+$$
+och ange $y$.`,
+            answer: { value: 4, unit: '' },
+            solution: `Här räcker det inte att multiplicera en ekvation — multiplicera båda. För att eliminera $x$: multiplicera den övre med 2 och den undre med −3 (varandras koefficienter, olika tecken):
+
+$$
+\\begin{cases}
+6x + 8y = 50 \\\\
+-6x - 9y = -54
+\\end{cases}
+$$
+
+Ledvis addition:
+
+$$ -y = -4 \\iff y = 4 $$
+
+(Insättning i den undre ursprungsekvationen: $2x + 12 = 18$ ger $x = 3$.)
+
+**Svar:** $y = 4$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ekvationssystemet
+$$
+\\begin{cases}
+ax + by = 7 \\\\
+2ax - by = 8
+\\end{cases}
+$$
+har lösningen $x = 1$, $y = 2$. Bestäm talet $a$.`,
+            answer: { value: 5, unit: '' },
+            solution: `Nyckelinsikten: sätt in den kända lösningen — då blir $a$ och $b$ de obekanta, och vi får ett **nytt ekvationssystem i $a$ och $b$**.
+
+Insättning av $x = 1$, $y = 2$:
+
+$$
+\\begin{cases}
+a + 2b = 7 \\\\
+2a - 2b = 8
+\\end{cases}
+$$
+
+Termerna $+2b$ och $-2b$ elimineras med additionsmetoden:
+
+$$ 3a = 15 \\iff a = 5 $$
+
+(Insättning ger $2b = 7 - 5 = 2$, dvs. $b = 1$.)
+
+Kontroll i den undre ursprungsekvationen: $2 \\cdot 5 \\cdot 1 - 1 \\cdot 2 = 10 - 2 = 8$. Stämmer!
+
+**Svar:** $a = 5$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-1.4  Problemlösning med ekvationssystem
+    // Definiera variabler → ställ upp systemet → lös → tolka.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-1.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Två tal har summan 25 och differensen 9. Bestäm det största talet.`,
+            answer: { value: 17, unit: '' },
+            solution: `Kalla det största talet $x$ och det minsta $y$:
+
+$$
+\\begin{cases}
+x + y = 25 \\\\
+x - y = 9
+\\end{cases}
+$$
+
+Additionsmetoden eliminerar $y$:
+
+$$ 2x = 34 \\iff x = 17 $$
+
+(Det mindre talet är $y = 25 - 17 = 8$; kontroll: $17 - 8 = 9$. Stämmer!)
+
+**Svar:** Det största talet är 17.`,
+        },
+        {
+            level: 1,
+            question: `En vuxenbiljett kostar 120 kr och en barnbiljett 60 kr. En familj köpte 10 biljetter för totalt 900 kr. Hur många vuxenbiljetter köpte familjen?`,
+            answer: { value: 5, unit: '' },
+            solution: `Definiera variabler: $v$ = antalet vuxenbiljetter, $b$ = antalet barnbiljetter.
+
+$$
+\\begin{cases}
+v + b = 10 \\\\
+120v + 60b = 900
+\\end{cases}
+$$
+
+Lös ut $b = 10 - v$ ur den övre ekvationen och substituera:
+
+$$ 120v + 60(10 - v) = 900 $$
+
+$$ 120v + 600 - 60v = 900 $$
+
+$$ 60v = 300 \\iff v = 5 $$
+
+**Svar:** Familjen köpte 5 vuxenbiljetter.`,
+        },
+        {
+            level: 1,
+            question: `En fruktlåda innehåller $x$ kg äpplen och $y$ kg päron. Frukten väger totalt 7 kg, och äpplena väger 3 kg mer än päronen. Vilket ekvationssystem beskriver situationen?`,
+            choices: [
+                `$\\begin{cases} x + y = 7 \\\\ x = y + 3 \\end{cases}$`,
+                `$\\begin{cases} x + y = 7 \\\\ y = x + 3 \\end{cases}$`,
+                `$\\begin{cases} x - y = 7 \\\\ x + y = 3 \\end{cases}$`,
+                `$\\begin{cases} x + y = 3 \\\\ x - y = 7 \\end{cases}$`,
+            ],
+            correct: 0,
+            solution: `Totalvikten ger den första ekvationen: $x + y = 7$.
+
+"Äpplena väger 3 kg **mer** än päronen" betyder att äpplenas vikt är päronens vikt plus 3: $x = y + 3$.
+
+(Vanlig fälla: att skriva $y = x + 3$, vilket skulle betyda att päronen väger mest.)
+
+**Svar:** $x + y = 7$ och $x = y + 3$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `I en hage finns kaniner och fasaner. Djuren har tillsammans 35 huvuden och 94 ben. Hur många kaniner finns i hagen?`,
+            answer: { value: 12, unit: '' },
+            solution: `Definiera variabler: $k$ = antalet kaniner, $f$ = antalet fasaner. Varje djur har 1 huvud; kaniner har 4 ben och fasaner 2 ben:
+
+$$
+\\begin{cases}
+k + f = 35 \\\\
+4k + 2f = 94
+\\end{cases}
+$$
+
+Lös ut $f = 35 - k$ och substituera:
+
+$$ 4k + 2(35 - k) = 94 $$
+
+$$ 4k + 70 - 2k = 94 $$
+
+$$ 2k = 24 \\iff k = 12 $$
+
+Tolka: 12 kaniner (och $f = 23$ fasaner; kontroll: $48 + 46 = 94$ ben. Stämmer!)
+
+**Svar:** 12 kaniner`,
+        },
+        {
+            level: 2,
+            question: `Anna är i dag 4 gånger så gammal som sin son. Om 20 år är hon dubbelt så gammal som sonen. Hur gammal är Anna i dag?`,
+            answer: { value: 40, unit: 'år' },
+            solution: `Definiera variabler: $A$ = Annas ålder i dag, $S$ = sonens ålder i dag.
+
+I dag: $A = 4S$. Om 20 år är Anna $A + 20$ och sonen $S + 20$, och då gäller $A + 20 = 2(S + 20)$:
+
+$$
+\\begin{cases}
+A = 4S \\\\
+A + 20 = 2(S + 20)
+\\end{cases}
+$$
+
+Substituera $A = 4S$ i den undre ekvationen:
+
+$$ 4S + 20 = 2S + 40 $$
+
+$$ 2S = 20 \\iff S = 10 $$
+
+vilket ger $A = 4 \\cdot 10 = 40$.
+
+Kontroll: om 20 år är Anna 60 och sonen 30 — dubbelt så gammal. Stämmer!
+
+**Svar:** Anna är 40 år.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En handlare blandar kaffe som kostar 80 kr/kg med kaffe som kostar 120 kr/kg. Blandningen ska väga 10 kg och kosta 95 kr/kg. Hur många kilogram av det dyrare kaffet ska handlaren ta? Svara i kg.`,
+            answer: { value: 3.75, unit: 'kg' },
+            solution: `Nyckelinsikten: det finns **två** villkor gömda i texten — ett för vikten och ett för **totala värdet**. Blandningens pris per kg gäller hela blandningen, så totala värdet är $10 \\cdot 95 = 950$ kr.
+
+Definiera variabler: $x$ = kg billigt kaffe, $y$ = kg dyrt kaffe.
+
+$$
+\\begin{cases}
+x + y = 10 \\\\
+80x + 120y = 950
+\\end{cases}
+$$
+
+Lös ut $x = 10 - y$ och substituera:
+
+$$ 80(10 - y) + 120y = 950 $$
+
+$$ 800 - 80y + 120y = 950 $$
+
+$$ 40y = 150 \\iff y = 3{,}75 $$
+
+Rimlighet: 95 kr/kg ligger närmare 80 än 120, så det ska vara mindre än hälften dyrt kaffe — $3{,}75 < 5$. Stämmer!
+
+**Svar:** $3{,}75$ kg av det dyrare kaffet`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-2.1  Kvadreringsreglerna och konjugatregeln
+    // (a±b)² = a² ± 2ab + b²; (a+b)(a−b) = a² − b².
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-2.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Utveckla $(x + 5)^2$.`,
+            choices: [
+                `$x^2 + 10x + 25$`,
+                `$x^2 + 25$`,
+                `$x^2 + 5x + 25$`,
+                `$x^2 + 10x + 10$`,
+            ],
+            correct: 0,
+            solution: `Första kvadreringsregeln $(a + b)^2 = a^2 + 2ab + b^2$ med $a = x$ och $b = 5$:
+
+$$ (x + 5)^2 = x^2 + 2 \\cdot x \\cdot 5 + 5^2 = x^2 + 10x + 25 $$
+
+Vanligaste felet är att glömma den dubbla produkten $10x$.
+
+**Svar:** $x^2 + 10x + 25$`,
+        },
+        {
+            level: 1,
+            question: `Utveckla $(x + 6)(x - 6)$.`,
+            choices: [
+                `$x^2 - 36$`,
+                `$x^2 + 36$`,
+                `$x^2 - 12x - 36$`,
+                `$x^2 - 12x + 36$`,
+            ],
+            correct: 0,
+            solution: `Parenteserna är lika sånär som på tecknet — konjugatregeln $(a + b)(a - b) = a^2 - b^2$:
+
+$$ (x + 6)(x - 6) = x^2 - 6^2 = x^2 - 36 $$
+
+Ingen mittenterm uppstår — de dubbla produkterna tar ut varandra.
+
+**Svar:** $x^2 - 36$`,
+        },
+        {
+            level: 1,
+            question: `Utveckla $(x - 3)^2$.`,
+            choices: [
+                `$x^2 - 6x + 9$`,
+                `$x^2 - 9$`,
+                `$x^2 + 6x + 9$`,
+                `$x^2 - 6x - 9$`,
+            ],
+            correct: 0,
+            solution: `Andra kvadreringsregeln $(a - b)^2 = a^2 - 2ab + b^2$:
+
+$$ (x - 3)^2 = x^2 - 2 \\cdot x \\cdot 3 + 3^2 = x^2 - 6x + 9 $$
+
+Observera att sista termen är **plus** 9 — $(-3)^2$ är positivt.
+
+**Svar:** $x^2 - 6x + 9$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Utveckla $(2x + 3)^2$.`,
+            choices: [
+                `$4x^2 + 12x + 9$`,
+                `$2x^2 + 12x + 9$`,
+                `$4x^2 + 6x + 9$`,
+                `$4x^2 + 9$`,
+            ],
+            correct: 0,
+            solution: `Hela termen $2x$ ska upphöjas till 2:
+
+$$ (2x + 3)^2 = (2x)^2 + 2 \\cdot 2x \\cdot 3 + 3^2 = 4x^2 + 12x + 9 $$
+
+**Svar:** $4x^2 + 12x + 9$`,
+        },
+        {
+            level: 2,
+            question: `Utveckla $(5 - 2x)(5 + 2x)$.`,
+            choices: [
+                `$25 - 4x^2$`,
+                `$25 + 4x^2$`,
+                `$25 - 20x - 4x^2$`,
+                `$10 - 4x^2$`,
+            ],
+            correct: 0,
+            solution: `Konjugatregeln, där även 2 ska upphöjas till 2:
+
+$$ (5 - 2x)(5 + 2x) = 5^2 - (2x)^2 = 25 - 4x^2 $$
+
+**Svar:** $25 - 4x^2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Beräkna $41^2 - 39^2$ **utan räknare** genom att utnyttja konjugatregeln.`,
+            answer: { value: 160, unit: '' },
+            solution: `Nyckelinsikten: konjugatregeln baklänges — "kvadrat minus kvadrat är konjugat":
+
+$$ 41^2 - 39^2 = (41 + 39)(41 - 39) $$
+
+$$ = 80 \\cdot 2 = 160 $$
+
+Det som ser ut som ett tungt räknestycke blir en enkel huvudräkning.
+
+**Svar:** 160`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-2.2  Faktorisering av uttryck
+    // Bryt ut + kvadrerings-/konjugatregeln baklänges; förkorta rationella uttryck.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-2.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Faktorisera $x^2 - 25$.`,
+            choices: [
+                `$(x + 5)(x - 5)$`,
+                `$(x - 5)^2$`,
+                `$(x + 5)^2$`,
+                `$x(x - 25)$`,
+            ],
+            correct: 0,
+            solution: `"Kvadrat minus kvadrat är konjugat!" Både $x^2$ och 25 är kvadrater med ett minus emellan:
+
+$$ x^2 - 25 = (x + 5)(x - 5) $$
+
+**Svar:** $(x + 5)(x - 5)$`,
+        },
+        {
+            level: 1,
+            question: `Faktorisera $x^2 + 8x + 16$.`,
+            choices: [
+                `$(x + 4)^2$`,
+                `$(x - 4)^2$`,
+                `$(x + 4)(x - 4)$`,
+                `$(x + 8)^2$`,
+            ],
+            correct: 0,
+            solution: `Tre termer där första ($x^2$) och sista ($16 = 4^2$) är kvadrater, plus framför mittentermen — första kvadreringsregeln baklänges:
+
+$$ x^2 + 8x + 16 = (x + 4)^2 $$
+
+Kontroll av dubbla produkten: $2 \\cdot x \\cdot 4 = 8x$. Stämmer!
+
+**Svar:** $(x + 4)^2$`,
+        },
+        {
+            level: 1,
+            question: `Faktorisera $6x^2 + 9x$ så långt som möjligt.`,
+            choices: [
+                `$3x(2x + 3)$`,
+                `$3(2x^2 + 3x)$`,
+                `$x(6x + 9)$`,
+                `$6x(x + 9)$`,
+            ],
+            correct: 0,
+            solution: `Bryt ut största möjliga faktor: koefficienterna 6 och 9 har största delaren 3, och båda termerna innehåller $x$ — bryt ut $3x$:
+
+$$ 6x^2 + 9x = 3x(2x + 3) $$
+
+Alternativen $3(2x^2 + 3x)$ och $x(6x + 9)$ är inte färdigfaktoriserade — parentesen kan faktoriseras vidare.
+
+**Svar:** $3x(2x + 3)$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Faktorisera $2x^2 - 18$ så långt som möjligt.`,
+            choices: [
+                `$2(x + 3)(x - 3)$`,
+                `$2(x^2 - 9)$`,
+                `$(2x + 6)(x - 3)$`,
+                `$2(x - 3)^2$`,
+            ],
+            correct: 0,
+            solution: `Först bryter vi ut 2:
+
+$$ 2x^2 - 18 = 2(x^2 - 9) $$
+
+Parentesen är "kvadrat minus kvadrat" — konjugatregeln baklänges:
+
+$$ 2(x^2 - 9) = 2(x + 3)(x - 3) $$
+
+**Svar:** $2(x + 3)(x - 3)$`,
+        },
+        {
+            level: 2,
+            question: `Förkorta $\\dfrac{x^2 - 16}{3x + 12}$ så långt som möjligt.`,
+            choices: [
+                `$\\dfrac{x - 4}{3}$`,
+                `$\\dfrac{x + 4}{3}$`,
+                `$\\dfrac{x - 16}{3 + 12}$`,
+                `$\\dfrac{x - 4}{3x}$`,
+            ],
+            correct: 0,
+            solution: `Faktorisera täljare och nämnare:
+
+$$ \\frac{x^2 - 16}{3x + 12} = \\frac{(x + 4)(x - 4)}{3(x + 4)} $$
+
+Förkorta med den gemensamma faktorn $(x + 4)$:
+
+$$ \\frac{(x + 4)(x - 4)}{3(x + 4)} = \\frac{x - 4}{3} $$
+
+**Svar:** $\\dfrac{x - 4}{3}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Förkorta $\\dfrac{x^2 - 6x + 9}{x^2 - 9}$ så långt som möjligt.`,
+            choices: [
+                `$\\dfrac{x - 3}{x + 3}$`,
+                `$\\dfrac{-6x + 9}{-9}$`,
+                `$\\dfrac{x - 3}{x - 3} = 1$`,
+                `$\\dfrac{x + 3}{x - 3}$`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: täljare och nämnare kräver **olika** faktoriseringsregler.
+
+Täljaren har tre termer med minus framför mittentermen — andra kvadreringsregeln baklänges (kontroll: dubbla produkten $2 \\cdot x \\cdot 3 = 6x$ stämmer):
+
+$$ x^2 - 6x + 9 = (x - 3)^2 $$
+
+Nämnaren är "kvadrat minus kvadrat" — konjugat:
+
+$$ x^2 - 9 = (x + 3)(x - 3) $$
+
+Förkorta med $(x - 3)$:
+
+$$ \\frac{(x - 3)^2}{(x + 3)(x - 3)} = \\frac{x - 3}{x + 3} $$
+
+(Att "stryka" termer som $x^2$ eller 9 rakt av är fel — bara **faktorer** får förkortas.)
+
+**Svar:** $\\dfrac{x - 3}{x + 3}$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-2.3  Nollproduktmetoden
+    // HL = 0, faktorisera VL, sätt varje faktor = 0.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-2.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ekvationen $x^2 - 7x = 0$ har två lösningar. Ange den lösning som **inte** är 0.`,
+            answer: { value: 7, unit: '' },
+            solution: `Bryt ut $x$ ur vänstra ledet:
+
+$$ x(x - 7) = 0 $$
+
+Nollproduktmetoden: en faktor måste vara 0.
+
+$$ x = 0 \\quad \\text{eller} \\quad x - 7 = 0 $$
+
+Den andra ekvationen ger $x = 7$.
+
+**Svar:** $x = 7$`,
+        },
+        {
+            level: 1,
+            question: `Vilka lösningar har ekvationen $(x + 2)(x - 9) = 0$?`,
+            choices: [
+                `$x_1 = -2$ och $x_2 = 9$`,
+                `$x_1 = 2$ och $x_2 = -9$`,
+                `$x_1 = 2$ och $x_2 = 9$`,
+                `Endast $x = -2$`,
+            ],
+            correct: 0,
+            solution: `Vänstra ledet är redan faktoriserat och lika med 0. Sätt varje faktor lika med 0:
+
+$$ x + 2 = 0 \\iff x = -2 $$
+
+$$ x - 9 = 0 \\iff x = 9 $$
+
+Observera teckenbytet — faktorn $(x + 2)$ blir 0 när $x = -2$, inte $+2$.
+
+**Svar:** $x_1 = -2$ och $x_2 = 9$`,
+        },
+        {
+            level: 1,
+            question: `Vad säger nollproduktmetodens princip om en produkt som är lika med 0?`,
+            choices: [
+                `Minst en av faktorerna måste vara lika med 0`,
+                `Båda faktorerna måste vara lika med 0`,
+                `Ingen av faktorerna får vara lika med 0`,
+                `Summan av faktorerna är lika med 0`,
+            ],
+            correct: 0,
+            solution: `Det går inte att multiplicera två tal så att produkten blir 0 om inte något av talen är 0. Därför: om $A \\cdot B = 0$ så är $A = 0$ eller $B = 0$ (minst en av dem).
+
+**Svar:** Minst en av faktorerna måste vara lika med 0.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ekvationen $5x^2 = 30x$ har två lösningar. Ange den lösning som **inte** är 0.`,
+            answer: { value: 6, unit: '' },
+            solution: `Gör först om så att högra ledet blir 0:
+
+$$ 5x^2 - 30x = 0 $$
+
+Bryt ut största möjliga faktor, $5x$:
+
+$$ 5x(x - 6) = 0 $$
+
+Nollproduktmetoden ger $5x = 0$ (dvs. $x = 0$) eller $x - 6 = 0$ (dvs. $x = 6$).
+
+(Vanligt fel: att dividera båda led med $x$ — då tappas lösningen $x = 0$ bort.)
+
+**Svar:** $x = 6$`,
+        },
+        {
+            level: 2,
+            question: `Vilken ekvation har rötterna $x_1 = 4$ och $x_2 = -6$?`,
+            choices: [
+                `$(x - 4)(x + 6) = 0$`,
+                `$(x + 4)(x - 6) = 0$`,
+                `$(x - 4)(x - 6) = 0$`,
+                `$(x + 4)(x + 6) = 0$`,
+            ],
+            correct: 0,
+            solution: `Nollproduktmetoden baklänges: sätt in rötterna med **ombytt tecken** i parenteserna.
+
+Roten $x = 4$ kräver faktorn $(x - 4)$ och roten $x = -6$ kräver faktorn $(x + 6)$:
+
+$$ (x - 4)(x + 6) = 0 $$
+
+Snabbkontroll: $x = 4$ gör första faktorn 0, $x = -6$ gör andra faktorn 0.
+
+**Svar:** $(x - 4)(x + 6) = 0$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ange den **största** lösningen till ekvationen $x^3 = 16x$.`,
+            answer: { value: 4, unit: '' },
+            solution: `Nyckelinsikten: dividera INTE med $x$ (då försvinner en lösning). Gör om till nollprodukt:
+
+$$ x^3 - 16x = 0 $$
+
+Bryt ut $x$:
+
+$$ x(x^2 - 16) = 0 $$
+
+Parentesen är "kvadrat minus kvadrat" — faktorisera vidare med konjugatregeln:
+
+$$ x(x + 4)(x - 4) = 0 $$
+
+Nollproduktmetoden ger tre lösningar:
+
+$$ x_1 = 0, \\quad x_2 = -4, \\quad x_3 = 4 $$
+
+Den största är 4.
+
+**Svar:** $x = 4$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-2.4  pq-formeln
+    // x² + px + q = 0 ⟹ x = −p/2 ± √((p/2)² − q).
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-2.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ekvationen $x^2 + 2x - 8 = 0$ har två lösningar. Ange den **största**.`,
+            answer: { value: 2, unit: '' },
+            solution: `Identifiera $p = 2$ och $q = -8$. pq-formeln ger
+
+$$ x = -1 \\pm \\sqrt{1^2 + 8} = -1 \\pm \\sqrt{9} = -1 \\pm 3 $$
+
+$$ x_1 = -1 - 3 = -4 \\qquad x_2 = -1 + 3 = 2 $$
+
+**Svar:** $x = 2$`,
+        },
+        {
+            level: 1,
+            question: `Vilka värden har $p$ och $q$ i ekvationen $x^2 - 6x + 8 = 0$?`,
+            choices: [
+                `$p = -6$ och $q = 8$`,
+                `$p = 6$ och $q = 8$`,
+                `$p = -6$ och $q = -8$`,
+                `$p = 3$ och $q = 8$`,
+            ],
+            correct: 0,
+            solution: `Jämför med mallen $x^2 + px + q = 0$: koefficienten framför $x$-termen är $p$ och konstanttermen är $q$ — **med tecken**:
+
+$$ p = -6 \\qquad q = 8 $$
+
+(I formeln blir då $-\\frac{p}{2} = +3$.)
+
+**Svar:** $p = -6$ och $q = 8$`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $x^2 - 2x - 15 = 0$ har två lösningar. Ange den **största**.`,
+            answer: { value: 5, unit: '' },
+            solution: `pq-formeln med $p = -2$ och $q = -15$:
+
+$$ x = 1 \\pm \\sqrt{1^2 + 15} = 1 \\pm \\sqrt{16} = 1 \\pm 4 $$
+
+$$ x_1 = -3 \\qquad x_2 = 5 $$
+
+**Svar:** $x = 5$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ekvationen $3x^2 - 15x + 18 = 0$ har två lösningar. Ange den **minsta**.`,
+            answer: { value: 2, unit: '' },
+            solution: `pq-formeln kräver att koefficienten framför $x^2$-termen är 1 — dividera först båda led med 3:
+
+$$ x^2 - 5x + 6 = 0 $$
+
+pq-formeln ger
+
+$$ x = \\frac{5}{2} \\pm \\sqrt{\\frac{25}{4} - 6} = \\frac{5}{2} \\pm \\sqrt{\\frac{1}{4}} = \\frac{5}{2} \\pm \\frac{1}{2} $$
+
+$$ x_1 = 2 \\qquad x_2 = 3 $$
+
+**Svar:** $x = 2$`,
+        },
+        {
+            level: 2,
+            question: `Ekvationen $x^2 = 5x + 24$ har två lösningar. Ange den **största**.`,
+            answer: { value: 8, unit: '' },
+            solution: `Gör först om ekvationen så att ena ledet blir 0:
+
+$$ x^2 - 5x - 24 = 0 $$
+
+pq-formeln ger
+
+$$ x = 2{,}5 \\pm \\sqrt{2{,}5^2 + 24} = 2{,}5 \\pm \\sqrt{30{,}25} = 2{,}5 \\pm 5{,}5 $$
+
+$$ x_1 = -3 \\qquad x_2 = 8 $$
+
+**Svar:** $x = 8$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ekvationen $x^2 + px + 12 = 0$ har lösningen $x = 2$. Bestäm ekvationens **andra** lösning.`,
+            answer: { value: 6, unit: '' },
+            solution: `Nyckelinsikten: en känd rot kan sättas in i ekvationen — då blir $p$ den obekanta.
+
+Insättning av $x = 2$:
+
+$$ 2^2 + 2p + 12 = 0 $$
+
+$$ 4 + 2p + 12 = 0 \\iff 2p = -16 \\iff p = -8 $$
+
+Ekvationen är alltså $x^2 - 8x + 12 = 0$. pq-formeln ger
+
+$$ x = 4 \\pm \\sqrt{16 - 12} = 4 \\pm 2 $$
+
+$$ x_1 = 2 \\qquad x_2 = 6 $$
+
+Den andra lösningen är 6.
+
+**Svar:** $x = 6$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-2.5  abc-formeln
+    // ax² + bx + c = 0 ⟹ x = −b/2a ± √(b²−4ac)/2a.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-2.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilka värden har $a$, $b$ och $c$ i ekvationen $3x^2 - 5x + 2 = 0$?`,
+            choices: [
+                `$a = 3$, $b = -5$, $c = 2$`,
+                `$a = 3$, $b = 5$, $c = 2$`,
+                `$a = 2$, $b = -5$, $c = 3$`,
+                `$a = 3x^2$, $b = -5x$, $c = 2$`,
+            ],
+            correct: 0,
+            solution: `Jämför med mallen $ax^2 + bx + c = 0$: $a$ är koefficienten framför $x^2$, $b$ framför $x$ (med tecken!) och $c$ är konstanttermen:
+
+$$ a = 3, \\quad b = -5, \\quad c = 2 $$
+
+($a$, $b$ och $c$ är talen — inte hela termerna.)
+
+**Svar:** $a = 3$, $b = -5$, $c = 2$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $2x^2 - 6x + 4 = 0$ med abc-formeln och ange den **största** lösningen.`,
+            answer: { value: 2, unit: '' },
+            solution: `Med $a = 2$, $b = -6$ och $c = 4$:
+
+$$ x = -\\frac{-6}{2 \\cdot 2} \\pm \\frac{\\sqrt{(-6)^2 - 4 \\cdot 2 \\cdot 4}}{2 \\cdot 2} $$
+
+$$ x = \\frac{6}{4} \\pm \\frac{\\sqrt{36 - 32}}{4} = 1{,}5 \\pm \\frac{2}{4} = 1{,}5 \\pm 0{,}5 $$
+
+$$ x_1 = 1 \\qquad x_2 = 2 $$
+
+**Svar:** $x = 2$`,
+        },
+        {
+            level: 1,
+            question: `Vilken är fördelen med abc-formeln jämfört med pq-formeln?`,
+            choices: [
+                `Koefficienten framför $x^2$-termen behöver inte divideras bort först`,
+                `Den ger fler lösningar`,
+                `Den fungerar även när ekvationen inte är lika med 0`,
+                `Den kräver ingen kvadratrot`,
+            ],
+            correct: 0,
+            solution: `abc-formeln är gjord för den allmänna formen $ax^2 + bx + c = 0$ — koefficienten $a$ ingår i formeln, så ingen division behövs innan. pq-formeln kräver att ekvationen först skrivs om till $x^2 + px + q = 0$.
+
+Båda formlerna ger samma lösningar och båda kräver att ena ledet är 0.
+
+**Svar:** Koefficienten framför $x^2$-termen behöver inte divideras bort först.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $3x^2 + 5x - 2 = 0$ med abc-formeln och ange den **minsta** lösningen.`,
+            answer: { value: -2, unit: '' },
+            solution: `Med $a = 3$, $b = 5$ och $c = -2$:
+
+$$ x = -\\frac{5}{6} \\pm \\frac{\\sqrt{5^2 - 4 \\cdot 3 \\cdot (-2)}}{6} = -\\frac{5}{6} \\pm \\frac{\\sqrt{25 + 24}}{6} = -\\frac{5}{6} \\pm \\frac{7}{6} $$
+
+$$ x_1 = \\frac{-5 - 7}{6} = -2 \\qquad x_2 = \\frac{-5 + 7}{6} = \\frac{1}{3} $$
+
+**Svar:** $x = -2$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $5x^2 = 2x + 3$ och ange den **största** lösningen.`,
+            answer: { value: 1, unit: '' },
+            solution: `Gör om så att ena ledet blir 0:
+
+$$ 5x^2 - 2x - 3 = 0 $$
+
+abc-formeln med $a = 5$, $b = -2$, $c = -3$:
+
+$$ x = \\frac{2}{10} \\pm \\frac{\\sqrt{4 + 60}}{10} = 0{,}2 \\pm \\frac{8}{10} = 0{,}2 \\pm 0{,}8 $$
+
+$$ x_1 = -0{,}6 \\qquad x_2 = 1 $$
+
+**Svar:** $x = 1$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För vilka värden på $c$ saknar ekvationen $2x^2 + 4x + c = 0$ lösningar? Ange det **minsta heltal** $c$ som gör att lösningar saknas.`,
+            answer: { value: 3, unit: '' },
+            solution: `Nyckelinsikten: i abc-formeln avgör uttrycket under rottecknet, $b^2 - 4ac$, om lösningar finns. Lösningar saknas när det är **negativt**:
+
+$$ b^2 - 4ac < 0 $$
+
+$$ 4^2 - 4 \\cdot 2 \\cdot c < 0 $$
+
+$$ 16 - 8c < 0 $$
+
+$$ 16 < 8c \\iff c > 2 $$
+
+Ekvationen saknar alltså lösningar för alla $c > 2$. Det minsta heltalet större än 2 är 3.
+
+(Kontroll: $c = 2$ ger $16 - 16 = 0$ — exakt en lösning, inte noll.)
+
+**Svar:** $c = 3$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-2.6  Antal lösningar till en andragradsekvation
+    // Diskriminantens tecken: positiv → 2, noll → 1, negativ → 0.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-2.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur många lösningar har ekvationen $x^2 + 6x + 10 = 0$?`,
+            answer: { value: 0, unit: '' },
+            solution: `pq-formeln ger
+
+$$ x = -3 \\pm \\sqrt{3^2 - 10} = -3 \\pm \\sqrt{-1} $$
+
+Diskriminanten är **negativ** (−1) — roten ur ett negativt tal saknar (reellt) värde, så ekvationen saknar lösningar.
+
+**Svar:** 0 lösningar`,
+        },
+        {
+            level: 1,
+            question: `Hur många lösningar har ekvationen $x^2 - 4x - 5 = 0$?`,
+            answer: { value: 2, unit: '' },
+            solution: `pq-formeln ger
+
+$$ x = 2 \\pm \\sqrt{2^2 + 5} = 2 \\pm \\sqrt{9} $$
+
+Diskriminanten är **positiv** (9), så ekvationen har två lösningar ($x = -1$ och $x = 5$).
+
+**Svar:** 2 lösningar`,
+        },
+        {
+            level: 1,
+            question: `Diskriminanten till en andragradsekvation är exakt 0. Vad gäller för ekvationens lösningar?`,
+            choices: [
+                `Ekvationen har exakt en lösning (dubbelrot)`,
+                `Ekvationen saknar lösningar`,
+                `Ekvationen har två lösningar`,
+                `Ekvationen har lösningen $x = 0$`,
+            ],
+            correct: 0,
+            solution: `Med diskriminanten 0 blir pq-formeln $x = -\\frac{p}{2} \\pm \\sqrt{0}$ — plus och minus ger samma värde, så det finns exakt en lösning (en dubbelrot).
+
+Att diskriminanten är 0 betyder inte att lösningen är 0 — lösningen är $-\\frac{p}{2}$.
+
+**Svar:** Ekvationen har exakt en lösning (dubbelrot).`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Hur många lösningar har ekvationen $2x^2 + 4x + 2 = 0$?`,
+            answer: { value: 1, unit: '' },
+            solution: `Dividera båda led med 2 för att kunna använda pq-formeln:
+
+$$ x^2 + 2x + 1 = 0 $$
+
+$$ x = -1 \\pm \\sqrt{1^2 - 1} = -1 \\pm \\sqrt{0} $$
+
+Diskriminanten är **noll** — ekvationen har exakt en lösning ($x = -1$, en dubbelrot).
+
+**Svar:** 1 lösning`,
+        },
+        {
+            level: 2,
+            question: `För vilket värde på $a$ har ekvationen $x^2 - 10x + a = 0$ en dubbelrot?`,
+            answer: { value: 25, unit: '' },
+            solution: `pq-formeln ger
+
+$$ x = 5 \\pm \\sqrt{5^2 - a} $$
+
+Dubbelrot kräver att diskriminanten är 0:
+
+$$ 25 - a = 0 \\iff a = 25 $$
+
+(Ekvationen blir då $x^2 - 10x + 25 = (x - 5)^2 = 0$ med dubbelroten $x = 5$.)
+
+**Svar:** $a = 25$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ekvationen $x^2 + 6x + q = 0$ har **två** lösningar. Ange det största heltal $q$ som är möjligt.`,
+            answer: { value: 8, unit: '' },
+            solution: `Nyckelinsikten: "två lösningar" är ett villkor på diskriminantens **tecken**, inte ett enskilt värde — det ger en olikhet.
+
+pq-formeln ger
+
+$$ x = -3 \\pm \\sqrt{3^2 - q} = -3 \\pm \\sqrt{9 - q} $$
+
+Två lösningar kräver positiv diskriminant:
+
+$$ 9 - q > 0 \\iff q < 9 $$
+
+Största heltalet mindre än 9 är 8.
+
+(Kontroll: $q = 9$ ger diskriminanten 0 — bara EN lösning, så 9 duger inte.)
+
+**Svar:** $q = 8$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-2.7  Problemlösning med andragradsekvationer
+    // Tolka → ställ upp → lös → tolka svaret (bortse orimliga rötter).
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-2.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Produkten av två på varandra följande positiva heltal är 72. Vilket är det **mindre** talet?`,
+            answer: { value: 8, unit: '' },
+            solution: `Kalla det mindre talet $x$ — då är nästa heltal $x + 1$:
+
+$$ x(x + 1) = 72 $$
+
+$$ x^2 + x - 72 = 0 $$
+
+pq-formeln ger
+
+$$ x = -0{,}5 \\pm \\sqrt{0{,}25 + 72} = -0{,}5 \\pm 8{,}5 $$
+
+$$ x_1 = -9 \\qquad x_2 = 8 $$
+
+Talen skulle vara positiva, så $x = 8$ (talen är 8 och 9; kontroll $8 \\cdot 9 = 72$).
+
+**Svar:** 8`,
+        },
+        {
+            level: 1,
+            question: `En rektangels bas är 5 cm längre än höjden. Arean är $84$ cm². Bestäm höjden. Svara i cm.`,
+            answer: { value: 7, unit: 'cm' },
+            solution: `Kalla höjden $h$ cm — då är basen $(h + 5)$ cm. Arean ger
+
+$$ h(h + 5) = 84 $$
+
+$$ h^2 + 5h - 84 = 0 $$
+
+pq-formeln ger
+
+$$ h = -2{,}5 \\pm \\sqrt{6{,}25 + 84} = -2{,}5 \\pm 9{,}5 $$
+
+$$ h_1 = -12 \\qquad h_2 = 7 $$
+
+En sträcka kan inte vara negativ, så $h = 7$ cm (basen är 12 cm; kontroll $7 \\cdot 12 = 84$).
+
+**Svar:** 7 cm`,
+        },
+        {
+            level: 1,
+            question: `Sidan i en kvadrat förlängs med 3 cm. Den nya arean är $49$ cm². Vilken ekvation beskriver situationen, om $x$ är den ursprungliga sidan?`,
+            choices: [
+                `$(x + 3)^2 = 49$`,
+                `$x^2 + 3 = 49$`,
+                `$x^2 + 3^2 = 49$`,
+                `$4(x + 3) = 49$`,
+            ],
+            correct: 0,
+            solution: `Den nya sidan är $(x + 3)$ cm, och kvadratens area är sidan i kvadrat:
+
+$$ (x + 3)^2 = 49 $$
+
+(Alternativen med $x^2 + 3$ och $x^2 + 9$ glömmer att **hela** den nya sidan ska kvadreras; $4(x + 3)$ är omkretsen.)
+
+**Svar:** $(x + 3)^2 = 49$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två positiva tal har differensen 5 och produkten 84. Ange det **större** talet.`,
+            answer: { value: 12, unit: '' },
+            solution: `Kalla det mindre talet $x$ och det större $y$:
+
+$$
+\\begin{cases}
+y - x = 5 \\\\
+x \\cdot y = 84
+\\end{cases}
+$$
+
+Substituera $y = x + 5$:
+
+$$ x(x + 5) = 84 \\iff x^2 + 5x - 84 = 0 $$
+
+pq-formeln ger
+
+$$ x = -2{,}5 \\pm \\sqrt{6{,}25 + 84} = -2{,}5 \\pm 9{,}5 $$
+
+Positivt tal: $x = 7$, vilket ger $y = 12$.
+
+Kontroll: $12 - 7 = 5$ och $7 \\cdot 12 = 84$. Stämmer!
+
+**Svar:** 12`,
+        },
+        {
+            level: 2,
+            question: `En kvadrats sida förkortas med 4 cm. Den nya arean är $121$ cm². Bestäm den ursprungliga sidan. Svara i cm.`,
+            answer: { value: 15, unit: 'cm' },
+            solution: `Kalla den ursprungliga sidan $s$ cm. Den nya sidan är $(s - 4)$ cm och den nya arean
+
+$$ (s - 4)^2 = 121 $$
+
+Dra roten ur båda led:
+
+$$ s - 4 = \\pm 11 $$
+
+$$ s_1 = 15 \\qquad s_2 = -7 $$
+
+En sträcka kan inte vara negativ, så $s = 15$ cm.
+
+**Svar:** 15 cm`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En rektangel har omkretsen 46 cm och arean $120$ cm². Bestäm den **längre** sidan. Svara i cm.`,
+            answer: { value: 15, unit: 'cm' },
+            solution: `Nyckelinsikten: omkrets och area ger ett ekvationssystem där den ena ekvationen är linjär och den andra innehåller en produkt — tillsammans ger de en andragradsekvation.
+
+Kalla sidorna $x$ och $y$ cm. Omkretsen ger $2x + 2y = 46$, dvs.
+
+$$ x + y = 23 $$
+
+Arean ger
+
+$$ x \\cdot y = 120 $$
+
+Substituera $y = 23 - x$:
+
+$$ x(23 - x) = 120 $$
+
+$$ 23x - x^2 = 120 \\iff x^2 - 23x + 120 = 0 $$
+
+pq-formeln ger
+
+$$ x = 11{,}5 \\pm \\sqrt{132{,}25 - 120} = 11{,}5 \\pm 3{,}5 $$
+
+$$ x_1 = 8 \\qquad x_2 = 15 $$
+
+Båda är giltiga — de är rektangelns två sidor (8 cm och 15 cm). Den längre är 15 cm.
+
+Kontroll: $2(8 + 15) = 46$ och $8 \\cdot 15 = 120$. Stämmer!
+
+**Svar:** 15 cm`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-2.8  Rotekvationer
+    // Kvadrera båda led; kontrollera alltid — falska rötter kan uppstå.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-2.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationen $\\sqrt{x} = 5$.`,
+            answer: { value: 25, unit: '' },
+            solution: `Kvadrera båda led:
+
+$$ \\left(\\sqrt{x}\\right)^2 = 5^2 $$
+
+$$ x = 25 $$
+
+Kontroll: $\\sqrt{25} = 5$. Stämmer!
+
+**Svar:** $x = 25$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $\\sqrt{x - 3} = 6$.`,
+            answer: { value: 39, unit: '' },
+            solution: `Kvadrera båda led:
+
+$$ x - 3 = 36 $$
+
+$$ x = 39 $$
+
+Kontroll: $\\sqrt{39 - 3} = \\sqrt{36} = 6$. Stämmer!
+
+**Svar:** $x = 39$`,
+        },
+        {
+            level: 1,
+            question: `Varför måste lösningarna till en rotekvation alltid kontrolleras?`,
+            choices: [
+                `Kvadreringen kan skapa falska rötter som inte uppfyller den ursprungliga ekvationen`,
+                `Rotekvationer saknar alltid lösningar`,
+                `Räknaren avrundar alltid fel vid rotdragning`,
+                `pq-formeln fungerar inte för rotekvationer`,
+            ],
+            correct: 0,
+            solution: `När båda led kvadreras kan extra rötter uppstå: ur $A = B$ följer $A^2 = B^2$, men $A^2 = B^2$ har även lösningen $A = -B$ — en falsk rot som inte uppfyller den ursprungliga ekvationen. Därför måste varje lösning sättas in i den ursprungliga ekvationen och kontrolleras.
+
+**Svar:** Kvadreringen kan skapa falska rötter som inte uppfyller den ursprungliga ekvationen.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $\\sqrt{2x + 1} = x - 1$. (Ekvationen har exakt en giltig lösning.)`,
+            answer: { value: 4, unit: '' },
+            solution: `Kvadrera båda led:
+
+$$ 2x + 1 = (x - 1)^2 = x^2 - 2x + 1 $$
+
+$$ 0 = x^2 - 4x $$
+
+$$ x(x - 4) = 0 $$
+
+Nollproduktmetoden ger $x_1 = 0$ och $x_2 = 4$.
+
+Kontroll $x = 0$: $\\mathrm{VL} = \\sqrt{1} = 1$, $\\mathrm{HL} = -1$. Stämmer inte — falsk rot!
+
+Kontroll $x = 4$: $\\mathrm{VL} = \\sqrt{9} = 3$, $\\mathrm{HL} = 3$. Stämmer!
+
+**Svar:** $x = 4$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $x - \\sqrt{x} - 6 = 0$ med variabelsubstitutionen $t = \\sqrt{x}$.`,
+            answer: { value: 9, unit: '' },
+            solution: `Med $t = \\sqrt{x}$ är $x = t^2$, så ekvationen blir
+
+$$ t^2 - t - 6 = 0 $$
+
+pq-formeln ger
+
+$$ t = 0{,}5 \\pm \\sqrt{0{,}25 + 6} = 0{,}5 \\pm 2{,}5 $$
+
+$$ t_1 = -2 \\qquad t_2 = 3 $$
+
+$\\sqrt{x} = -2$ är omöjligt (ett rotuttryck är aldrig negativt). $\\sqrt{x} = 3$ ger $x = 9$.
+
+Kontroll: $9 - \\sqrt{9} - 6 = 9 - 3 - 6 = 0$. Stämmer!
+
+**Svar:** $x = 9$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $\\sqrt{x + 7} + x = 5$. (Ekvationen har exakt en giltig lösning.)`,
+            answer: { value: 2, unit: '' },
+            solution: `Nyckelinsikten: lös först ut rotuttrycket **ensamt** — kvadrera aldrig ett led där roten står ihop med andra termer.
+
+$$ \\sqrt{x + 7} = 5 - x $$
+
+Kvadrera båda led:
+
+$$ x + 7 = 25 - 10x + x^2 $$
+
+$$ x^2 - 11x + 18 = 0 $$
+
+pq-formeln ger
+
+$$ x = 5{,}5 \\pm \\sqrt{30{,}25 - 18} = 5{,}5 \\pm 3{,}5 $$
+
+$$ x_1 = 2 \\qquad x_2 = 9 $$
+
+Kontroll $x = 2$: $\\mathrm{VL} = \\sqrt{9} + 2 = 5 = \\mathrm{HL}$. Stämmer!
+
+Kontroll $x = 9$: $\\mathrm{VL} = \\sqrt{16} + 9 = 13 \\neq 5$. Falsk rot!
+
+**Svar:** $x = 2$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-3.1  Grafen till en andragradsfunktion
+    // Parabel, extrempunkt, karaktär, symmetrilinje, nollställen.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-3.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Funktionen $f(x) = 3x^2 - 5x + 1$ har en **positiv** $x^2$-term. Vad gäller för grafen?`,
+            choices: [
+                `Grafen har en minimipunkt ("glad mun")`,
+                `Grafen har en maximipunkt ("sur mun")`,
+                `Grafen är en rät linje`,
+                `Grafen saknar extrempunkt`,
+            ],
+            correct: 0,
+            solution: `Minnesregeln: positiv $x^2$-term ger "glad mun" — parabeln öppnar sig uppåt och har en "dal" med en minimipunkt.
+
+**Svar:** Grafen har en minimipunkt.`,
+        },
+        {
+            level: 1,
+            question: `Vad kallas de $x$-värden där grafen till en funktion skär $x$-axeln?`,
+            choices: [
+                `Nollställen`,
+                `Extrempunkter`,
+                `Symmetrilinjer`,
+                `Koefficienter`,
+            ],
+            correct: 0,
+            solution: `Där grafen skär $x$-axeln är funktionens värde 0 — dessa $x$-värden kallas funktionens nollställen. En andragradsfunktion kan ha två, ett eller sakna nollställen.
+
+**Svar:** Nollställen`,
+        },
+        {
+            level: 1,
+            question: `En parabel har maximipunkten (2, 7). Ange symmetrilinjens $x$-värde.`,
+            answer: { value: 2, unit: '' },
+            solution: `Symmetrilinjen är den lodräta linje som delar parabeln i två likadana halvor, och den går alltid genom extrempunkten. Extrempunkten ligger vid $x = 2$, så symmetrilinjens ekvation är $x_s = 2$.
+
+**Svar:** $x_s = 2$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En andragradsfunktion har nollställena $x = -2$ och $x = 6$. Ange symmetrilinjens $x$-värde.`,
+            answer: { value: 2, unit: '' },
+            solution: `Symmetrilinjen ligger mitt emellan nollställena — deras medelvärde:
+
+$$ x_s = \\frac{-2 + 6}{2} = \\frac{4}{2} = 2 $$
+
+**Svar:** $x_s = 2$`,
+        },
+        {
+            level: 2,
+            question: `Vilket påstående om funktionen $f(x) = -2x^2 + 8x - 3$ är **sant**?`,
+            choices: [
+                `Grafen har en maximipunkt, och funktionen har därmed ett största värde`,
+                `Grafen har en minimipunkt, eftersom konstanttermen är negativ`,
+                `Grafen saknar symmetrilinje`,
+                `Grafen har alltid två nollställen eftersom det finns en x-term`,
+            ],
+            correct: 0,
+            solution: `Karaktären avgörs av tecknet framför $x^2$-termen: $-2x^2$ är negativ, vilket ger "sur mun" — en maximipunkt och därmed ett största värde.
+
+Konstanttermens tecken påverkar inte karaktären, alla parabler har en symmetrilinje, och antalet nollställen avgörs av diskriminanten — inte av att en $x$-term finns.
+
+**Svar:** Grafen har en maximipunkt, och funktionen har därmed ett största värde.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En andragradsfunktion har symmetrilinjen $x_s = 3$ och ett nollställe i $x = -1$. Ange funktionens **andra** nollställe.`,
+            answer: { value: 7, unit: '' },
+            solution: `Nyckelinsikten: nollställena ligger **symmetriskt** kring symmetrilinjen — lika långt från den på varsin sida.
+
+Avståndet från nollstället $x = -1$ till symmetrilinjen $x = 3$ är
+
+$$ 3 - (-1) = 4 $$
+
+Det andra nollstället ligger lika långt på andra sidan:
+
+$$ x = 3 + 4 = 7 $$
+
+Kontroll: medelvärdet av $-1$ och $7$ är $\\frac{-1 + 7}{2} = 3 = x_s$. Stämmer!
+
+**Svar:** $x = 7$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-3.2  Andragradsekvationer och andragradsfunktioner
+    // Nollställen, symmetrilinje och extrempunkt algebraiskt.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-3.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm det **största** nollstället till $f(x) = x^2 - 9$.`,
+            answer: { value: 3, unit: '' },
+            solution: `Sätt funktionsuttrycket lika med 0 och lös ekvationen:
+
+$$ x^2 - 9 = 0 \\iff x^2 = 9 \\iff x = \\pm 3 $$
+
+Nollställena är $x = -3$ och $x = 3$; det största är 3.
+
+**Svar:** $x = 3$`,
+        },
+        {
+            level: 1,
+            question: `Funktionen $f(x) = x^2 - 6x + 8$ har nollställena $x = 2$ och $x = 4$. Bestäm symmetrilinjens $x$-koordinat.`,
+            answer: { value: 3, unit: '' },
+            solution: `Symmetrilinjen ligger mitt emellan nollställena:
+
+$$ x_s = \\frac{2 + 4}{2} = 3 $$
+
+**Svar:** $x_s = 3$`,
+        },
+        {
+            level: 1,
+            question: `Hur bestäms extrempunktens $y$-koordinat algebraiskt?`,
+            choices: [
+                `Sätt in symmetrilinjens $x$-koordinat i funktionsuttrycket`,
+                `Läs av konstanttermen i funktionsuttrycket`,
+                `Ta medelvärdet av nollställena`,
+                `Sätt funktionen lika med 0 och lös ekvationen`,
+            ],
+            correct: 0,
+            solution: `Extrempunkten ligger på symmetrilinjen. Symmetrilinjen ger extrempunktens $x$-koordinat, och funktionsuttryckets värde där ger $y$-koordinaten: $y = f(x_s)$.
+
+Konstanttermen är grafens skärning med y-axeln, medelvärdet av nollställena ger $x_s$ (inte $y$) och $f(x) = 0$ ger nollställena.
+
+**Svar:** Sätt in symmetrilinjens $x$-koordinat i funktionsuttrycket.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm det **minsta värdet** av funktionen $f(x) = x^2 - 4x + 1$.`,
+            answer: { value: -3, unit: '' },
+            solution: `Nollställena ur $x^2 - 4x + 1 = 0$ ger via pq-formeln $x = 2 \\pm \\sqrt{3}$ — symmetrilinjen är "talet framför rottecknet":
+
+$$ x_s = 2 $$
+
+Minsta värdet är extrempunktens $y$-koordinat:
+
+$$ f(2) = 2^2 - 4 \\cdot 2 + 1 = 4 - 8 + 1 = -3 $$
+
+(Positiv $x^2$-term ger minimipunkt, så $-3$ är ett minsta värde.)
+
+**Svar:** $-3$`,
+        },
+        {
+            level: 2,
+            question: `Funktionen $f(x) = x^2 + 8x + 20$ saknar nollställen. Bestäm ändå symmetrilinjens $x$-koordinat.`,
+            answer: { value: -4, unit: '' },
+            solution: `Påbörja en lösning av $x^2 + 8x + 20 = 0$ med pq-formeln:
+
+$$ x = -4 \\pm \\sqrt{16 - 20} = -4 \\pm \\sqrt{-4} $$
+
+Diskriminanten är negativ — nollställen saknas. Men symmetrilinjen fås ändå som "talet framför rottecknet":
+
+$$ x_s = -4 $$
+
+**Svar:** $x_s = -4$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Funktionen $f(x) = x^2 + px + 11$ har det minsta värdet 2. Bestäm det **positiva** värde på $p$ som är möjligt.`,
+            answer: { value: 6, unit: '' },
+            solution: `Nyckelinsikten: minsta värdet ligger i extrempunkten, vars $x$-koordinat är $x_s = -\\frac{p}{2}$. Sätt in den i funktionen och kräv att värdet blir 2.
+
+$$ f\\left(-\\frac{p}{2}\\right) = \\left(-\\frac{p}{2}\\right)^2 + p\\left(-\\frac{p}{2}\\right) + 11 = \\frac{p^2}{4} - \\frac{p^2}{2} + 11 = 11 - \\frac{p^2}{4} $$
+
+Minsta värdet ska vara 2:
+
+$$ 11 - \\frac{p^2}{4} = 2 $$
+
+$$ \\frac{p^2}{4} = 9 \\iff p^2 = 36 \\iff p = \\pm 6 $$
+
+Det positiva värdet är $p = 6$.
+
+Kontroll: $f(x) = x^2 + 6x + 11$ har $x_s = -3$ och $f(-3) = 9 - 18 + 11 = 2$. Stämmer!
+
+**Svar:** $p = 6$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-3.3  Andragradsfunktioner och modellering
+    // Faktorform k(x−x₁)(x−x₂) och utvecklad form via tre punkter.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-3.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En andragradsfunktion har nollställena $x = 2$ och $x = 5$. Hur skrivs funktionen i faktorform?`,
+            choices: [
+                `$f(x) = k(x - 2)(x - 5)$`,
+                `$f(x) = k(x + 2)(x + 5)$`,
+                `$f(x) = (x - 2)(x - 5) + k$`,
+                `$f(x) = kx^2 - 2x - 5$`,
+            ],
+            correct: 0,
+            solution: `Faktorformen är $f(x) = k(x - x_1)(x - x_2)$ där nollställena sätts in med ombytt tecken i parenteserna:
+
+$$ f(x) = k(x - 2)(x - 5) $$
+
+(Kontroll: $x = 2$ och $x = 5$ gör varsin faktor till 0.)
+
+**Svar:** $f(x) = k(x - 2)(x - 5)$`,
+        },
+        {
+            level: 1,
+            question: `Funktionen $f(x) = k(x + 1)(x - 3)$ går genom punkten (0, 6). Bestäm $k$.`,
+            answer: { value: -2, unit: '' },
+            solution: `Sätt in $x = 0$ och $f(x) = 6$:
+
+$$ 6 = k(0 + 1)(0 - 3) $$
+
+$$ 6 = k \\cdot 1 \\cdot (-3) = -3k $$
+
+$$ k = -2 $$
+
+**Svar:** $k = -2$`,
+        },
+        {
+            level: 1,
+            question: `När behöver man använda metoden med **tre punkter** (utvecklad form) i stället för faktorform?`,
+            choices: [
+                `När nollställena är okända eller saknas`,
+                `När funktionen har en maximipunkt`,
+                `Alltid — faktorform fungerar bara för positiva nollställen`,
+                `När grafen går genom origo`,
+            ],
+            correct: 0,
+            solution: `Faktorformen kräver att nollställena kan avläsas. Om de är okända eller om funktionen saknar nollställen, sätts i stället tre valfria punkter in i $f(x) = ax^2 + bx + c$, vilket ger ett ekvationssystem för $a$, $b$ och $c$.
+
+**Svar:** När nollställena är okända eller saknas.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En parabel har nollställena $x = 1$ och $x = 5$ och går genom punkten (3, −8). Bestäm koefficienten $k$ i faktorformen $f(x) = k(x - 1)(x - 5)$.`,
+            answer: { value: 2, unit: '' },
+            solution: `Sätt in punkten (3, −8):
+
+$$ -8 = k(3 - 1)(3 - 5) $$
+
+$$ -8 = k \\cdot 2 \\cdot (-2) = -4k $$
+
+$$ k = 2 $$
+
+(Funktionen är $f(x) = 2(x - 1)(x - 5) = 2x^2 - 12x + 10$.)
+
+**Svar:** $k = 2$`,
+        },
+        {
+            level: 2,
+            question: `En andragradsfunktion $f(x) = ax^2 + bx + c$ går genom punkterna (0, 3), (1, 6) och (−1, 4). Bestäm $a$.`,
+            answer: { value: 2, unit: '' },
+            solution: `Insättning av de tre punkterna ger ekvationssystemet
+
+$$
+\\begin{cases}
+c = 3 \\\\
+a + b + c = 6 \\\\
+a - b + c = 4
+\\end{cases}
+$$
+
+Med $c = 3$ blir de två sista ekvationerna $a + b = 3$ och $a - b = 1$. Ledvis addition eliminerar $b$:
+
+$$ 2a = 4 \\iff a = 2 $$
+
+(och $b = 1$, så $f(x) = 2x^2 + x + 3$).
+
+**Svar:** $a = 2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En boll kastas från marken och landar 6 meter bort. Kastbanans högsta höjd är $4{,}5$ meter. Banan beskrivs av $h(x) = kx(x - 6)$, där $x$ är avståndet i meter. Bestäm $k$.`,
+            answer: { value: -0.5, unit: '' },
+            solution: `Nyckelinsikten: den högsta punkten ligger på symmetrilinjen — mitt emellan nollställena $x = 0$ och $x = 6$, dvs. vid $x = 3$. Där är höjden $4{,}5$ m, så punkten (3; 4,5) ligger på banan.
+
+Insättning i $h(x) = kx(x - 6)$:
+
+$$ 4{,}5 = k \\cdot 3(3 - 6) $$
+
+$$ 4{,}5 = k \\cdot 3 \\cdot (-3) = -9k $$
+
+$$ k = \\frac{4{,}5}{-9} = -0{,}5 $$
+
+Rimlighet: $k$ är negativ — banan är en "sur mun" med maximipunkt. Stämmer för en kastbana!
+
+**Svar:** $k = -0{,}5$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-3.4  Andragradsekvationer och olikheter med grafritande hjälpmedel
+    // Skärningar ger lösningar; under/över ger olikhetsintervall.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-3.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ekvationen VL = HL ska lösas grafiskt. Man ritar $y = \\mathrm{VL}$ och $y = \\mathrm{HL}$. Var hittar man lösningarna?`,
+            choices: [
+                `I skärningspunkternas x-koordinater`,
+                `I skärningspunkternas y-koordinater`,
+                `Där graferna skär y-axeln`,
+                `I grafernas extrempunkter`,
+            ],
+            correct: 0,
+            solution: `I en skärningspunkt har båda leden samma värde — likheten är uppfylld. Lösningen är det $x$-värde där det sker, alltså skärningens $x$-koordinat.
+
+**Svar:** I skärningspunkternas x-koordinater.`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $x^2 - 5x - 14 = 0$ löses grafiskt genom att rita $y = x^2 - 5x - 14$. Grafen skär $x$-axeln i (−2, 0) och (7, 0). Ange den **största** lösningen.`,
+            answer: { value: 7, unit: '' },
+            solution: `En ekvation som är lika med 0 löses grafiskt med nollställena. Nollställenas $x$-koordinater ger lösningarna $x_1 = -2$ och $x_2 = 7$; den största är 7.
+
+**Svar:** $x = 7$`,
+        },
+        {
+            level: 1,
+            question: `Graferna till $y = \\mathrm{VL}$ och $y = \\mathrm{HL}$ skär varandra i punkterna (1, 3) och (4, 6). Vilka är ekvationens lösningar?`,
+            choices: [
+                `$x_1 = 1$ och $x_2 = 4$`,
+                `$x_1 = 3$ och $x_2 = 6$`,
+                `$x_1 = 1$ och $x_2 = 3$`,
+                `$(1, 3)$ och $(4, 6)$`,
+            ],
+            correct: 0,
+            solution: `Lösningarna är skärningarnas **x-koordinater**: $x_1 = 1$ och $x_2 = 4$. ($y$-koordinaterna 3 och 6 är ledens värden i skärningarna — inte lösningarna. En ekvation i en variabel har tal som lösningar, inte punkter.)
+
+**Svar:** $x_1 = 1$ och $x_2 = 4$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Olikheten $f(x) < g(x)$ löses grafiskt. Graferna skär varandra vid $x = -2$ och $x = 3$, och grafen till $f$ ligger **under** grafen till $g$ mellan skärningarna. Vilken är lösningen?`,
+            choices: [
+                `$-2 < x < 3$`,
+                `$x < -2$ och $x > 3$`,
+                `$x = -2$ och $x = 3$`,
+                `$f(x) < g(x)$ saknar lösning`,
+            ],
+            correct: 0,
+            solution: `$f(x) < g(x)$ gäller där grafen till $f$ ligger under grafen till $g$ — enligt uppgiften mellan skärningarna. Skärningarnas $x$-koordinater ger intervallets gränser:
+
+$$ -2 < x < 3 $$
+
+**Svar:** $-2 < x < 3$`,
+        },
+        {
+            level: 2,
+            question: `Olikheten $x^2 - 9 > 0$ löses grafiskt genom att rita parabeln $y = x^2 - 9$ och avläsa var den ligger **över** $x$-axeln. Nollställena är $x = \\pm 3$. Ange den **positiva** intervallgränsen.`,
+            answer: { value: 3, unit: '' },
+            solution: `Parabeln (positiv $x^2$-term, "glad mun") ligger över $x$-axeln utanför nollställena. Olikheten gäller alltså för
+
+$$ x < -3 \\quad \\text{och} \\quad x > 3 $$
+
+Den positiva gränsen är $x = 3$.
+
+**Svar:** 3`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös olikheten $x^2 + 2x - 8 > 0$.`,
+            choices: [
+                `$x < -4$ och $x > 2$`,
+                `$-4 < x < 2$`,
+                `$x > 2$`,
+                `$x < -2$ och $x > 4$`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: lös först ekvationen $x^2 + 2x - 8 = 0$ för att hitta gränserna, och avgör sedan med parabelns form **var** olikheten gäller.
+
+pq-formeln ger
+
+$$ x = -1 \\pm \\sqrt{1 + 8} = -1 \\pm 3 $$
+
+dvs. nollställena $x = -4$ och $x = 2$.
+
+Parabeln $y = x^2 + 2x - 8$ har positiv $x^2$-term ("glad mun") och ligger därför **över** $x$-axeln utanför nollställena — till vänster om $-4$ och till höger om $2$:
+
+$$ x < -4 \\quad \\text{och} \\quad x > 2 $$
+
+(Att svara $-4 < x < 2$ är det klassiska felet — det är där parabeln ligger UNDER axeln, dvs. lösningen till $< 0$.)
+
+**Svar:** $x < -4$ och $x > 2$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-3.5  Problemlösning med grafritande hjälpmedel
+    // Extrempunkt, nollställen och skärningar i tillämpningar.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-3.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En raket har höjden $h(t) = 30t - 5t^2$ meter efter $t$ sekunder. Hur lång tid tar det innan raketen landar? Svara i sekunder.`,
+            answer: { value: 6, unit: 's' },
+            solution: `Raketen landar när höjden är 0. Nollställena fås ur
+
+$$ 30t - 5t^2 = 0 \\iff 5t(6 - t) = 0 $$
+
+dvs. $t = 0$ (start) och $t = 6$ (landning). Grafiskt: nollstället längst till höger på $t$-axeln.
+
+**Svar:** Efter 6 sekunder.`,
+        },
+        {
+            level: 1,
+            question: `Samma raket har höjden $h(t) = 30t - 5t^2$. Vilken är raketens högsta höjd? Svara i meter.`,
+            answer: { value: 45, unit: 'm' },
+            solution: `Högsta höjden är maximipunktens $y$-koordinat. Maximipunkten ligger på symmetrilinjen, mitt emellan nollställena $t = 0$ och $t = 6$, dvs. vid $t = 3$:
+
+$$ h(3) = 30 \\cdot 3 - 5 \\cdot 3^2 = 90 - 45 = 45 $$
+
+Grafiskt: verktyget *Extrempunkt* i Geogebra.
+
+**Svar:** 45 meter`,
+        },
+        {
+            level: 1,
+            question: `Vilket Geogebra-verktyg används för att ta fram en funktions **största värde**?`,
+            choices: [
+                `Extrempunkt`,
+                `Nollställen`,
+                `Skärning mellan två objekt`,
+                `Punkt på objekt`,
+            ],
+            correct: 0,
+            solution: `Största (eller minsta) värdet ligger i grafens extrempunkt — verktyget *Extrempunkt* markerar den och visar koordinaterna. *Nollställen* ger skärningar med x-axeln och *Skärning mellan två objekt* används när två grafer jämförs.
+
+**Svar:** Extrempunkt`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Raketen med $h(t) = 30t - 5t^2$ når höjden 25 meter två gånger. Efter hur många sekunder sker det **första** gången?`,
+            answer: { value: 1, unit: 's' },
+            solution: `Sätt $h(t) = 25$ (grafiskt: rita hjälplinjen $y = 25$ och ta skärningarna):
+
+$$ 30t - 5t^2 = 25 $$
+
+Dividera med −5 och ordna:
+
+$$ t^2 - 6t + 5 = 0 $$
+
+pq-formeln ger
+
+$$ t = 3 \\pm \\sqrt{9 - 5} = 3 \\pm 2 $$
+
+dvs. $t = 1$ (på väg upp) och $t = 5$ (på väg ner). Första gången är efter 1 sekund.
+
+**Svar:** Efter 1 sekund.`,
+        },
+        {
+            level: 2,
+            question: `En rektangulär inhägnad byggs mot en vägg med 40 meter staket till de tre öppna sidorna. Arean beskrivs av $A(x) = x(40 - 2x)$, där $x$ är de två lika sidorna. Bestäm den **maximala arean**. Svara i m².`,
+            answer: { value: 200, unit: 'm²' },
+            solution: `Grafen till $A(x) = x(40 - 2x)$ är en parabel med maximipunkt. Nollställena är $x = 0$ och $x = 20$, så maximum ligger vid $x = 10$:
+
+$$ A(10) = 10(40 - 20) = 10 \\cdot 20 = 200 $$
+
+Grafiskt: verktyget *Extrempunkt* ger maximipunkten (10, 200).
+
+**Svar:** $200$ m² (måtten blir $20 \\times 10$ m)`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Summan av två tal är 20. Hur stor kan talens **produkt** som mest bli?`,
+            answer: { value: 100, unit: '' },
+            solution: `Nyckelinsikten: skriv produkten som en funktion av det ena talet — då blir "största produkten" en fråga om en parabels maximipunkt.
+
+Kalla det ena talet $x$; det andra är då $20 - x$. Produkten är
+
+$$ P(x) = x(20 - x) $$
+
+Grafen är en parabel med negativ $x^2$-term (maximipunkt) och nollställena $x = 0$ och $x = 20$. Maximum ligger mitt emellan, vid $x = 10$:
+
+$$ P(10) = 10(20 - 10) = 100 $$
+
+Den största produkten fås alltså när talen är lika ($10 + 10 = 20$).
+
+**Svar:** 100`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.1  Olika slags vinklar
+    // Vinkeltyper, transversal, likbelägna/vertikal-/alternat-/sidovinklar.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En vinkel är 137°. Vad kallas en sådan vinkel?`,
+            choices: [
+                `Trubbig vinkel`,
+                `Spetsig vinkel`,
+                `Rät vinkel`,
+                `Rak vinkel`,
+            ],
+            correct: 0,
+            solution: `Vinklar namnges efter storleken: spetsig ($v < 90°$), rät ($v = 90°$), trubbig ($90° < v < 180°$) och rak ($v = 180°$). Eftersom $90° < 137° < 180°$ är vinkeln trubbig.
+
+**Svar:** Trubbig vinkel`,
+        },
+        {
+            level: 1,
+            question: `Två linjer skär varandra. Vad gäller för vinklarna som ligger mitt emot varandra i skärningen?`,
+            choices: [
+                `De kallas vertikalvinklar och är lika stora`,
+                `De kallas sidovinklar och är tillsammans 180°`,
+                `De kallas alternatvinklar och är tillsammans 90°`,
+                `De kallas likbelägna vinklar och är alltid 90°`,
+            ],
+            correct: 0,
+            solution: `Vinklar mitt emot varandra i en skärning mellan två linjer kallas vertikalvinklar, och de är alltid lika stora.
+
+(Sidovinklar är grannvinklarna längs en rak linje — de är tillsammans 180°.)
+
+**Svar:** Vertikalvinklar, lika stora`,
+        },
+        {
+            level: 1,
+            question: `Två vinklar är sidovinklar. Den ena är 68°. Hur stor är den andra? Svara i grader.`,
+            answer: { value: 112, unit: '°' },
+            solution: `Sidovinklar bildar tillsammans en rak vinkel:
+
+$$ v + 68° = 180° \\quad \\text{(sidovinklar)} $$
+
+$$ v = 180° - 68° = 112° $$
+
+**Svar:** 112°`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två parallella linjer skärs av en transversal. En av vinklarna är 74°. Hur stor är dess **alternatvinkel**? Svara i grader.`,
+            answer: { value: 74, unit: '°' },
+            solution: `Alternatvinklar ligger mot de parallella linjerna på motsatta sidor om transversalen — och de är lika stora (eftersom linjerna är parallella):
+
+$$ v = 74° \\quad \\text{(alternatvinklar)} $$
+
+**Svar:** 74°`,
+        },
+        {
+            level: 2,
+            question: `En transversal skär två parallella linjer. En vinkel vid den övre skärningen är 124°. Hur stor är den **spetsiga** vinkeln vid den undre skärningen? Svara i grader.`,
+            answer: { value: 56, unit: '°' },
+            solution: `Den likbelägna vinkeln vid den undre skärningen är också 124° (likbelägna vinklar). Den spetsiga vinkeln är dess sidovinkel:
+
+$$ v = 180° - 124° = 56° \\quad \\text{(sidovinklar)} $$
+
+**Svar:** 56°`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Tre vinklar bildar tillsammans en rak vinkel. Den andra vinkeln är dubbelt så stor som den första, och den tredje är tre gånger så stor som den första. Bestäm den **största** vinkeln. Svara i grader.`,
+            answer: { value: 90, unit: '°' },
+            solution: `Nyckelinsikten: teckna vinklarna med en variabel och använd att summan är 180°.
+
+Kalla den första vinkeln $v$ — då är de andra $2v$ och $3v$:
+
+$$ v + 2v + 3v = 180° \\quad \\text{(rak vinkel)} $$
+
+$$ 6v = 180° \\iff v = 30° $$
+
+Vinklarna är 30°, 60° och 90° — den största är $3v = 90°$.
+
+**Svar:** 90°`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.2  Vinklar i trianglar och månghörningar
+    // Vinkelsummor, triangeltyper.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Två vinklar i en triangel är 63° och 48°. Bestäm den tredje vinkeln. Svara i grader.`,
+            answer: { value: 69, unit: '°' },
+            solution: `Vinkelsumman i en triangel är 180°:
+
+$$ v = 180° - 63° - 48° = 69° \\quad \\text{(vinkelsumma i triangel)} $$
+
+**Svar:** 69°`,
+        },
+        {
+            level: 1,
+            question: `Vad kännetecknar en **likbent** triangel?`,
+            choices: [
+                `Minst två sidor är lika långa, och basvinklarna är lika stora`,
+                `Alla sidor är lika långa och alla vinklar är 60°`,
+                `En vinkel är rät`,
+                `Alla vinklar är trubbiga`,
+            ],
+            correct: 0,
+            solution: `En likbent triangel har minst två lika långa sidor, och vinklarna mot basen (basvinklarna) är lika stora.
+
+(Alla sidor lika = liksidig; en rät vinkel = rätvinklig. En triangel kan aldrig ha mer än en trubbig vinkel.)
+
+**Svar:** Minst två sidor lika långa, basvinklarna lika stora`,
+        },
+        {
+            level: 1,
+            question: `Tre av vinklarna i en fyrhörning är 90°, 110° och 75°. Bestäm den fjärde vinkeln. Svara i grader.`,
+            answer: { value: 85, unit: '°' },
+            solution: `Vinkelsumman i en fyrhörning är 360°:
+
+$$ v = 360° - 90° - 110° - 75° = 85° $$
+
+**Svar:** 85°`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En likbent triangel har toppvinkeln 40°. Bestäm en av basvinklarna. Svara i grader.`,
+            answer: { value: 70, unit: '°' },
+            solution: `Basvinklarna är lika stora (likbent triangel). Kalla dem $v$:
+
+$$ 40° + v + v = 180° \\quad \\text{(vinkelsumma i triangel)} $$
+
+$$ 2v = 140° \\iff v = 70° $$
+
+**Svar:** 70°`,
+        },
+        {
+            level: 2,
+            question: `Bestäm vinkelsumman i en sexhörning. Svara i grader.`,
+            answer: { value: 720, unit: '°' },
+            solution: `Utgå från ett hörn och dra sträckor till alla övriga hörn — en sexhörning delas då upp i 4 trianglar. Vinkelsumman blir
+
+$$ 4 \\cdot 180° = 720° $$
+
+(Mönstret: en månghörning med $n$ hörn delas i $n - 2$ trianglar.)
+
+**Svar:** 720°`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vinklarna i en triangel är $v$, $v + 30°$ och $2v + 10°$. Bestäm den **största** vinkeln. Svara i grader.`,
+            answer: { value: 80, unit: '°' },
+            solution: `Nyckelinsikten: vinkelsumman ger en ekvation i $v$.
+
+$$ v + (v + 30°) + (2v + 10°) = 180° $$
+
+$$ 4v + 40° = 180° \\iff 4v = 140° \\iff v = 35° $$
+
+Vinklarna är $35°$, $65°$ och $2 \\cdot 35° + 10° = 80°$ — den största är 80°.
+
+Kontroll: $35 + 65 + 80 = 180$. Stämmer!
+
+**Svar:** 80°`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.3  Implikation och ekvivalens
+    // A ⟹ B respektive A ⟺ B; motexempel.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad betyder symbolen ⟹?`,
+            choices: [
+                `"Medför att" — påståendet till vänster leder till påståendet till höger`,
+                `"Är ekvivalent med" — påståendena leder till varandra`,
+                `"Är lika med"`,
+                `"Är mindre än"`,
+            ],
+            correct: 0,
+            solution: `⟹ är implikationssymbolen och utläses "implicerar" eller "medför att". Att A ⟹ B betyder att om A är sann så måste B vara sann — men B behöver inte leda till A.
+
+**Svar:** "Medför att"`,
+        },
+        {
+            level: 1,
+            question: `Hur bevisar man att en implikation är **falsk**?`,
+            choices: [
+                `Genom att ge ett motexempel — ett enda räcker`,
+                `Genom att testa många exempel som stämmer`,
+                `Genom att vända på implikationen`,
+                `Det går inte att bevisa att en implikation är falsk`,
+            ],
+            correct: 0,
+            solution: `Ett enda motexempel räcker för att fälla en implikation. Exempel: "Det är en hund ⟹ det är en tax" faller på motexemplet "det kan vara en pudel".
+
+(Många stämmande exempel bevisar däremot ingenting — det kan finnas ett motexempel man inte provat.)
+
+**Svar:** Genom att ge ett motexempel.`,
+        },
+        {
+            level: 1,
+            question: `Gäller implikationen $x = 4 \\implies x^2 = 16$? Och gäller omvändningen?`,
+            choices: [
+                `Implikationen gäller, men inte omvändningen (motexempel: $x = -4$)`,
+                `Både implikationen och omvändningen gäller — det är en ekvivalens`,
+                `Varken implikationen eller omvändningen gäller`,
+                `Omvändningen gäller, men inte implikationen`,
+            ],
+            correct: 0,
+            solution: `Om $x = 4$ så är $x^2 = 16$ — implikationen gäller.
+
+Omvändningen $x^2 = 16 \\implies x = 4$ gäller **inte**: ekvationen $x^2 = 16$ har även lösningen $x = -4$ (motexempel).
+
+**Svar:** Implikationen gäller, men inte omvändningen.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vilket logiskt tecken ska stå mellan påståendena?<br>*Triangeln är liksidig* ____ *Triangelns alla vinklar är 60°*`,
+            choices: [
+                `⟺ — implikationen gäller åt båda håll`,
+                `⟹ — implikationen gäller bara åt höger`,
+                `⟸ — implikationen gäller bara åt vänster`,
+                `Inget tecken — påståendena saknar samband`,
+            ],
+            correct: 0,
+            solution: `En liksidig triangel har alltid alla vinklar 60° — och en triangel med alla vinklar 60° är alltid liksidig. Implikationen gäller åt båda håll, alltså en ekvivalens:
+
+$$ \\text{Triangeln är liksidig} \\iff \\text{Alla vinklar är } 60° $$
+
+**Svar:** ⟺`,
+        },
+        {
+            level: 2,
+            question: `Betrakta implikationen "Det regnar ⟹ marken blir blöt". Vad gäller för **omvändningen**?`,
+            choices: [
+                `Omvändningen gäller inte — marken kan bli blöt av annat (motexempel: en vattenspridare)`,
+                `Omvändningen gäller alltid — blöt mark betyder regn`,
+                `Omvändningen gäller, så det är en ekvivalens`,
+                `Implikationer kan inte vändas om`,
+            ],
+            correct: 0,
+            solution: `Omvändningen är "marken är blöt ⟹ det regnar". Den faller på ett motexempel: marken kan vara blöt av en vattenspridare (eller smält snö). Implikationen gäller alltså bara åt ett håll — ingen ekvivalens.
+
+**Svar:** Omvändningen gäller inte (motexempel: vattenspridare).`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Avgör vilka av implikationerna som gäller:<br>(1) $x^3 = 8 \\implies x = 2$&emsp;&emsp;(2) $x^2 = 9 \\implies x = 3$`,
+            choices: [
+                `(1) gäller men inte (2)`,
+                `Båda gäller`,
+                `(2) gäller men inte (1)`,
+                `Ingen av dem gäller`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: en implikation av typen "ekvation ⟹ lösning" gäller bara om lösningen är **entydig**.
+
+(1) $x^3 = 8$ har den enda (reella) lösningen $x = \\sqrt[3]{8} = 2$ — udda exponenter ger en lösning. Implikationen gäller.
+
+(2) $x^2 = 9$ har lösningarna $x = \\pm 3$ — motexemplet $x = -3$ fäller implikationen.
+
+**Svar:** (1) gäller men inte (2).`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.4  Satser och bevis
+    // Axiom, definition, sats; 2k, 2k+1; n, n+1, n+2.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad kallas ett påstående som är **bevisat**?`,
+            choices: [
+                `Sats`,
+                `Axiom`,
+                `Definition`,
+                `Hypotes`,
+            ],
+            correct: 0,
+            solution: `Ett bevisat påstående kallas sats. Ett axiom är en grundsats som gäller utan bevis, och en definition är en överenskommelse om vad ett begrepp betyder.
+
+**Svar:** Sats`,
+        },
+        {
+            level: 1,
+            question: `Hur skrivs ett godtyckligt **jämnt** tal i ett bevis, om $k$ är ett heltal?`,
+            choices: [
+                `$2k$`,
+                `$2k + 1$`,
+                `$k^2$`,
+                `$k + 2$`,
+            ],
+            correct: 0,
+            solution: `Ett jämnt tal är delbart med 2 och kan alltid skrivas $2k$ där $k$ är ett heltal. Ett udda tal skrivs $2k + 1$.
+
+($k^2$ kan vara både jämnt och udda, och $k + 2$ har samma paritet som $k$.)
+
+**Svar:** $2k$`,
+        },
+        {
+            level: 1,
+            question: `Vad är ett **axiom**?`,
+            choices: [
+                `En grundsats som gäller utan att den kräver ett bevis`,
+                `Ett påstående som är bevisat`,
+                `En överenskommelse om vad ett begrepp betyder`,
+                `Ett motexempel`,
+            ],
+            correct: 0,
+            solution: `Ett axiom är en grundsats man kommit överens om att utgå ifrån, utan bevis — t.ex. "varje heltal $n$ följs av heltalet $(n + 1)$". Bevisade påståenden kallas satser; begreppsöverenskommelser kallas definitioner.
+
+**Svar:** En grundsats som gäller utan bevis.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Hur tecknas tre på varandra följande heltal i ett bevis?`,
+            choices: [
+                `$n$, $n + 1$, $n + 2$`,
+                `$n$, $2n$, $3n$`,
+                `$n$, $n + 2$, $n + 4$`,
+                `$3n$`,
+            ],
+            correct: 0,
+            solution: `Tal som följer på varandra ökar med 1 i taget: $n$, $n + 1$, $n + 2$.
+
+($n$, $2n$, $3n$ är multiplar av n, och $n$, $n+2$, $n+4$ är vartannat tal — t.ex. tre jämna eller tre udda i rad.)
+
+**Svar:** $n$, $n + 1$, $n + 2$`,
+        },
+        {
+            level: 2,
+            question: `Du ska visa att summan av två udda tal alltid är jämn. Vilken uppställning genomför beviset korrekt?`,
+            choices: [
+                `$(2k + 1) + (2m + 1) = 2k + 2m + 2 = 2(k + m + 1)$, som är delbart med 2`,
+                `$3 + 5 = 8$, som är jämnt`,
+                `$(2k + 1) + (2k + 1) = 4k + 2$, som är delbart med 2`,
+                `Udda plus udda är jämnt enligt tabellen i boken`,
+            ],
+            correct: 0,
+            solution: `Två **godtyckliga** udda tal kräver två oberoende variabler: $2k + 1$ och $2m + 1$. Summan blir $2(k + m + 1)$ — en faktor 2, alltså jämn. v.s.v.
+
+Fällan i alternativet med $2k + 1$ två gånger: det visar bara fallet där talen är **lika**. Ett enskilt exempel (3 + 5) bevisar ingenting generellt.
+
+**Svar:** $(2k + 1) + (2m + 1) = 2(k + m + 1)$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Visa att summan av **fem** på varandra följande heltal alltid är delbar med 5. Vilket resonemang fullbordar beviset?`,
+            choices: [
+                `$n + (n+1) + (n+2) + (n+3) + (n+4) = 5n + 10 = 5(n + 2)$ — en faktor 5, alltså delbar med 5`,
+                `$1 + 2 + 3 + 4 + 5 = 15$ och $15/5 = 3$, alltså gäller det`,
+                `$5n$ är delbart med 5, och summan innehåller fem termer`,
+                `Summan är $5n + 10$, och 10 är delbart med 5, så det räcker`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: teckna talen generellt och bryt ut 5.
+
+$$ n + (n+1) + (n+2) + (n+3) + (n+4) = 5n + 10 = 5(n + 2) $$
+
+Uttrycket har faktorn 5, och $\\frac{5(n+2)}{5} = n + 2$ är ett heltal — summan är alltså alltid delbar med 5. v.s.v.
+
+(Ett enskilt exempel räcker inte, och "$5n$ delbart + 10 delbart" är visserligen sant men först faktoriseringen $5(n+2)$ gör argumentet komplett i ett steg.)
+
+**Svar:** $5n + 10 = 5(n + 2)$ — delbart med 5.`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.5  Pythagoras sats
+    // a² + b² = c²; omvändningen avgör rätvinklighet.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En rätvinklig triangel har kateterna 6 cm och 8 cm. Bestäm hypotenusan. Svara i cm.`,
+            answer: { value: 10, unit: 'cm' },
+            solution: `Pythagoras sats:
+
+$$ c^2 = 6^2 + 8^2 = 36 + 64 = 100 $$
+
+$$ c = \\sqrt{100} = 10 $$
+
+(Den negativa roten bortses — en sträcka är positiv.)
+
+**Svar:** 10 cm`,
+        },
+        {
+            level: 1,
+            question: `En rätvinklig triangel har hypotenusan 13 cm och den ena kateten 5 cm. Bestäm den andra kateten. Svara i cm.`,
+            answer: { value: 12, unit: 'cm' },
+            solution: `Pythagoras sats med hypotenusan ensam på ena sidan:
+
+$$ b^2 = 13^2 - 5^2 = 169 - 25 = 144 $$
+
+$$ b = \\sqrt{144} = 12 $$
+
+**Svar:** 12 cm`,
+        },
+        {
+            level: 1,
+            question: `Vilken sida i en rätvinklig triangel är hypotenusan?`,
+            choices: [
+                `Den längsta sidan — den som ligger mitt emot den räta vinkeln`,
+                `Den kortaste sidan`,
+                `Någon av de två sidor som bildar den räta vinkeln`,
+                `Sidan som är vågrät i figuren`,
+            ],
+            correct: 0,
+            solution: `Hypotenusan är triangelns längsta sida och ligger alltid mitt emot den räta vinkeln. De två sidor som bildar den räta vinkeln kallas kateter.
+
+**Svar:** Den längsta sidan, mitt emot den räta vinkeln.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Sidorna i en triangel är 7 cm, 24 cm och 25 cm. Är triangeln rätvinklig?`,
+            choices: [
+                `Ja — $7^2 + 24^2 = 625 = 25^2$, så $a^2 + b^2 = c^2$ gäller`,
+                `Nej — $7 + 24 \\neq 25$`,
+                `Nej — en triangel med så olika sidor kan inte vara rätvinklig`,
+                `Det går inte att avgöra utan att mäta vinklarna`,
+            ],
+            correct: 0,
+            solution: `Omvändningen av Pythagoras sats: om $a^2 + b^2 = c^2$ så är triangeln rätvinklig (satsen är en ekvivalens). Kontrollera med de korta sidorna mot den längsta:
+
+$$ 7^2 + 24^2 = 49 + 576 = 625 $$
+
+$$ 25^2 = 625 $$
+
+Likhet — triangeln är rätvinklig.
+
+**Svar:** Ja`,
+        },
+        {
+            level: 2,
+            question: `En 4,1 meter lång stege lutas mot en vägg. Stegens fot står 0,9 meter från väggen. Hur högt upp på väggen når stegen? Svara i meter.`,
+            answer: { value: 4.0, unit: 'm' },
+            solution: `Stegen är hypotenusa i en rätvinklig triangel med marken och väggen som kateter:
+
+$$ h^2 = 4{,}1^2 - 0{,}9^2 = 16{,}81 - 0{,}81 = 16 $$
+
+$$ h = \\sqrt{16} = 4{,}0 $$
+
+**Svar:** 4,0 m`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En likbent triangel har basen 16 cm och benen 17 cm. Bestäm triangelns höjd mot basen. Svara i cm.`,
+            answer: { value: 15, unit: 'cm' },
+            solution: `Nyckelinsikten: höjden mot basen i en likbent triangel delar basen mitt itu — då uppstår en rätvinklig triangel med **halva basen** (8 cm) och benet (17 cm) som hypotenusa.
+
+$$ h^2 = 17^2 - 8^2 = 289 - 64 = 225 $$
+
+$$ h = \\sqrt{225} = 15 $$
+
+**Svar:** 15 cm`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.6  Koordinatgeometri
+    // Avståndsformeln och mittpunktsformeln.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm avståndet mellan punkterna (1, 2) och (4, 6). Svara i längdenheter.`,
+            answer: { value: 5, unit: 'l.e.' },
+            solution: `Avståndsformeln:
+
+$$ d = \\sqrt{(4 - 1)^2 + (6 - 2)^2} = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5 $$
+
+**Svar:** 5 l.e.`,
+        },
+        {
+            level: 1,
+            question: `Bestäm mittpunkten mellan punkterna (2, 3) och (8, 7).`,
+            choices: [
+                `(5, 5)`,
+                `(6, 4)`,
+                `(10, 10)`,
+                `(3, 2)`,
+            ],
+            correct: 0,
+            solution: `Mittpunktsformeln — medelvärdet av koordinaterna:
+
+$$ (x_m, y_m) = \\left( \\frac{2 + 8}{2},\\ \\frac{3 + 7}{2} \\right) = (5, 5) $$
+
+**Svar:** (5, 5)`,
+        },
+        {
+            level: 1,
+            question: `Vilken sats bygger avståndsformeln på?`,
+            choices: [
+                `Pythagoras sats`,
+                `Randvinkelsatsen`,
+                `Topptriangelsatsen`,
+                `Bisektrissatsen`,
+            ],
+            correct: 0,
+            solution: `Mellan två punkter bildas en rätvinklig triangel med en vågrät katet $(x_2 - x_1)$ och en lodrät katet $(y_2 - y_1)$. Avståndet är hypotenusan, och Pythagoras sats ger
+
+$$ d = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} $$
+
+**Svar:** Pythagoras sats`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm avståndet mellan punkterna (−2, 5) och (4, −3). Svara i längdenheter.`,
+            answer: { value: 10, unit: 'l.e.' },
+            solution: `Avståndsformeln — håll ordning på tecknen:
+
+$$ d = \\sqrt{(4 - (-2))^2 + ((-3) - 5)^2} = \\sqrt{6^2 + (-8)^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10 $$
+
+**Svar:** 10 l.e.`,
+        },
+        {
+            level: 2,
+            question: `Bestäm mittpunkten mellan punkterna (−3, −5) och (7, −1).`,
+            choices: [
+                `(2, −3)`,
+                `(5, −2)`,
+                `(2, 3)`,
+                `(4, −6)`,
+            ],
+            correct: 0,
+            solution: `Mittpunktsformeln:
+
+$$ (x_m, y_m) = \\left( \\frac{-3 + 7}{2},\\ \\frac{-5 + (-1)}{2} \\right) = \\left( \\frac{4}{2},\\ \\frac{-6}{2} \\right) = (2, -3) $$
+
+**Svar:** (2, −3)`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Punkten $(5, y)$ ligger på avståndet 13 l.e. från punkten (0, 1), och $y > 0$. Bestäm $y$.`,
+            answer: { value: 13, unit: '' },
+            solution: `Nyckelinsikten: avståndsformeln kan användas baklänges — sätt in det kända avståndet och lös ekvationen.
+
+$$ \\sqrt{(5 - 0)^2 + (y - 1)^2} = 13 $$
+
+Kvadrera båda led:
+
+$$ 25 + (y - 1)^2 = 169 $$
+
+$$ (y - 1)^2 = 144 \\iff y - 1 = \\pm 12 $$
+
+$$ y_1 = 13 \\qquad y_2 = -11 $$
+
+Villkoret $y > 0$ ger $y = 13$.
+
+**Svar:** $y = 13$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.7  Likformiga månghörningar
+    // Vinklar OCH sidförhållanden; ekvation eller skalfaktor.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad krävs för att två månghörningar (med fler än tre hörn) ska vara likformiga?`,
+            choices: [
+                `Motsvarande vinklar är lika stora OCH förhållandet mellan motsvarande sidor är lika`,
+                `Det räcker att motsvarande vinklar är lika stora`,
+                `Det räcker att sidförhållandena är lika`,
+                `Månghörningarna måste vara exakt lika stora`,
+            ],
+            correct: 0,
+            solution: `För månghörningar med fler än tre hörn måste **båda** villkoren kontrolleras — lika vinklar OCH lika sidförhållanden. (Undantaget är trianglar, där ett av villkoren räcker.)
+
+**Svar:** Både vinklar och sidförhållanden måste stämma.`,
+        },
+        {
+            level: 1,
+            question: `Två likformiga figurer har motsvarande sidor 6 cm och 18 cm. Bestäm skalfaktorn från den lilla till den stora figuren.`,
+            answer: { value: 3, unit: '' },
+            solution: `Skalfaktorn fås genom att dividera två motsvarande sidor:
+
+$$ \\text{Skalfaktor} = \\frac{18}{6} = 3 $$
+
+Alla sidor i den stora figuren är alltså 3 gånger längre.
+
+**Svar:** 3`,
+        },
+        {
+            level: 1,
+            question: `Två månghörningar är likformiga. Sidan 4 cm i den lilla motsvarar 10 cm i den stora. Vilken sida i den stora motsvarar 6 cm i den lilla? Svara i cm.`,
+            answer: { value: 15, unit: 'cm' },
+            solution: `Förhållandet mellan motsvarande sidor är lika:
+
+$$ \\frac{x}{6} = \\frac{10}{4} $$
+
+$$ x = \\frac{10}{4} \\cdot 6 = 15 $$
+
+(Alternativt: skalfaktorn är $10/4 = 2{,}5$ och $6 \\cdot 2{,}5 = 15$.)
+
+**Svar:** 15 cm`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En rektangel har sidorna 4 cm och 6 cm, en annan har sidorna 6 cm och 9 cm. Är rektanglarna likformiga?`,
+            choices: [
+                `Ja — alla vinklar är 90° och sidförhållandena är lika ($\\frac{4}{6} = \\frac{6}{9} = \\frac{2}{3}$)`,
+                `Nej — sidorna är olika långa`,
+                `Nej — sidförhållandena är olika`,
+                `Det går inte att avgöra`,
+            ],
+            correct: 0,
+            solution: `Vinklarna är lika (alla 90° i rektanglar). Sidförhållandena:
+
+$$ \\frac{4}{6} = \\frac{2}{3} \\qquad \\frac{6}{9} = \\frac{2}{3} $$
+
+Båda villkoren är uppfyllda — rektanglarna är likformiga. (Likformiga figurer får vara olika stora — det är formen som ska stämma.)
+
+**Svar:** Ja`,
+        },
+        {
+            level: 2,
+            question: `Två likformiga femhörningar har skalfaktorn 2,5. Den lilla femhörningens omkrets är 12 cm. Bestäm den storas omkrets. Svara i cm.`,
+            answer: { value: 30, unit: 'cm' },
+            solution: `Varje sida i den stora femhörningen är 2,5 gånger längre — då blir även summan av sidorna (omkretsen) 2,5 gånger längre:
+
+$$ O = 12 \\cdot 2{,}5 = 30 $$
+
+**Svar:** 30 cm`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två rektanglar har alla vinklar lika stora (90°). Är de därmed **säkert** likformiga?`,
+            choices: [
+                `Nej — sidförhållandena måste också stämma (motexempel: en kvadrat och en avlång rektangel)`,
+                `Ja — lika vinklar räcker alltid för likformighet`,
+                `Ja — alla rektanglar är likformiga med varandra`,
+                `Nej — rektanglar kan aldrig vara likformiga`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: regeln "ett villkor räcker" gäller **bara trianglar**. För fyrhörningar måste båda villkoren kontrolleras.
+
+Motexempel: en kvadrat ($1 \\times 1$) och en avlång rektangel ($1 \\times 5$) har båda fyra räta vinklar, men sidförhållandena $\\frac{1}{1}$ och $\\frac{1}{5}$ är olika — de är inte likformiga.
+
+**Svar:** Nej — sidförhållandena måste också kontrolleras.`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.8  Likformiga trianglar
+    // ETT villkor räcker; tecknet ~; skugg-uppgifter.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad räcker det att kontrollera för att avgöra om två **trianglar** är likformiga?`,
+            choices: [
+                `Ett av villkoren: motsvarande vinklar lika ELLER sidförhållanden lika`,
+                `Båda villkoren: vinklar OCH sidförhållanden`,
+                `Att trianglarna är lika stora`,
+                `Att båda trianglarna är rätvinkliga`,
+            ],
+            correct: 0,
+            solution: `För trianglar räcker ETT villkor — lika vinklar eller lika sidförhållanden. (Det räcker till och med att två vinklar är lika, eftersom den tredje då är bestämd av vinkelsumman.)
+
+**Svar:** Ett av villkoren räcker.`,
+        },
+        {
+            level: 1,
+            question: `Två trianglar är likformiga. Den ena har sidorna 3, 4 och 5 cm. Den andra har sidorna 6, 8 och $x$ cm. Bestäm $x$.`,
+            answer: { value: 10, unit: 'cm' },
+            solution: `Skalfaktorn är $\\frac{6}{3} = 2$ — alla sidor i den stora triangeln är dubbelt så långa:
+
+$$ x = 5 \\cdot 2 = 10 $$
+
+**Svar:** $x = 10$ cm`,
+        },
+        {
+            level: 1,
+            question: `En triangel har vinklarna 35° och 80°. Bestäm den tredje vinkeln. Svara i grader.`,
+            answer: { value: 65, unit: '°' },
+            solution: `Vinkelsumman i en triangel är 180°:
+
+$$ v = 180° - 35° - 80° = 65° $$
+
+(Det är därför två lika vinklar räcker för likformighet — den tredje följer alltid med.)
+
+**Svar:** 65°`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En 1,5 meter hög pinne kastar en 2 meter lång skugga. Samtidigt kastar ett träd en 12 meter lång skugga. Hur högt är trädet? Svara i meter.`,
+            answer: { value: 9, unit: 'm' },
+            solution: `Solstrålarna träffar pinnen och trädet under samma vinkel, och båda står vinkelrätt mot marken — trianglarna är likformiga (två lika vinklar). Sidförhållandena är lika:
+
+$$ \\frac{h}{1{,}5} = \\frac{12}{2} $$
+
+$$ h = \\frac{12}{2} \\cdot 1{,}5 = 9 $$
+
+**Svar:** 9 m`,
+        },
+        {
+            level: 2,
+            question: `$\\triangle ABC \\sim \\triangle DEF$ med $AB = 5$ cm, $DE = 8$ cm och $BC = 7{,}5$ cm. Bestäm $EF$. Svara i cm.`,
+            answer: { value: 12, unit: 'cm' },
+            solution: `Motsvarande sidor har samma förhållande:
+
+$$ \\frac{EF}{BC} = \\frac{DE}{AB} = \\frac{8}{5} $$
+
+$$ EF = 7{,}5 \\cdot \\frac{8}{5} = 12 $$
+
+**Svar:** $EF = 12$ cm`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En lyktstolpe är 2,4 meter hög. En person som är 1,8 meter lång står 4,0 meter från stolpen. Hur lång blir personens skugga (räknat från personen och bort från stolpen)? Svara i meter.`,
+            answer: { value: 12, unit: 'm' },
+            solution: `Nyckelinsikten: ljusstrålen från lyktan över personens huvud till skuggspetsen skapar **två likformiga trianglar med gemensam spets i skuggspetsen** — en stor (stolpen) och en liten (personen).
+
+Kalla skuggans längd $s$. Den lilla triangeln har höjden 1,8 m och basen $s$; den stora har höjden 2,4 m och basen $4{,}0 + s$:
+
+$$ \\frac{2{,}4}{4{,}0 + s} = \\frac{1{,}8}{s} $$
+
+Korsvis multiplikation:
+
+$$ 2{,}4s = 1{,}8(4{,}0 + s) $$
+
+$$ 2{,}4s = 7{,}2 + 1{,}8s $$
+
+$$ 0{,}6s = 7{,}2 \\iff s = 12 $$
+
+**Svar:** 12 m`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.9  Triangelsatserna
+    // Topptriangelsatsen, transversalsatsen, bisektrissatsen.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En parallelltransversal delar en triangels vänstra sida i delarna $AD = 3$ och $DB = 6$, och den högra sidans övre del är $AE = 4$. Bestäm $EC$ (den högra sidans nedre del).`,
+            answer: { value: 8, unit: '' },
+            solution: `Transversalsatsen — en parallelltransversal delar triangelns sidor i samma förhållande:
+
+$$ \\frac{AD}{DB} = \\frac{AE}{EC} $$
+
+$$ \\frac{3}{6} = \\frac{4}{EC} \\iff EC = \\frac{4 \\cdot 6}{3} = 8 $$
+
+**Svar:** $EC = 8$`,
+        },
+        {
+            level: 1,
+            question: `När får transversalsatsen **inte** användas?`,
+            choices: [
+                `När topptriangelns bas (parallelltransversalen själv) ingår i beräkningen`,
+                `När triangeln är likbent`,
+                `När transversalen är parallell med en sida`,
+                `Transversalsatsen får alltid användas`,
+            ],
+            correct: 0,
+            solution: `Transversalsatsen handlar bara om sidornas delar. Om topptriangelns bas (transversalen) eller hela basen ingår i beräkningen måste topptriangelsatsen användas — den jämför hela sidor och baser i de likformiga trianglarna.
+
+**Svar:** När topptriangelns bas ingår i beräkningen.`,
+        },
+        {
+            level: 1,
+            question: `I en triangel med en parallelltransversal är $AD = 4$, hela sidan $AB = 12$ och transversalen $DE = 5$. Bestäm basen $BC$.`,
+            answer: { value: 15, unit: '' },
+            solution: `Basen ingår — topptriangelsatsen:
+
+$$ \\frac{AD}{AB} = \\frac{DE}{BC} $$
+
+$$ \\frac{4}{12} = \\frac{5}{BC} \\iff BC = \\frac{5 \\cdot 12}{4} = 15 $$
+
+**Svar:** $BC = 15$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En parallelltransversal delar en triangels sidor så att $AD = 6$, $DB = x$, $AE = 9$ och $EC = 12$. Bestäm $x$.`,
+            answer: { value: 8, unit: '' },
+            solution: `Transversalsatsen:
+
+$$ \\frac{AD}{DB} = \\frac{AE}{EC} $$
+
+$$ \\frac{6}{x} = \\frac{9}{12} $$
+
+Korsvis multiplikation:
+
+$$ 9x = 6 \\cdot 12 = 72 \\iff x = 8 $$
+
+**Svar:** $x = 8$`,
+        },
+        {
+            level: 2,
+            question: `En bisektris delar en triangels motstående sida i delarna 4 cm och 6 cm. Sidan närmast 4-delen är 10 cm. Bestäm sidan närmast 6-delen. Svara i cm.`,
+            answer: { value: 15, unit: 'cm' },
+            solution: `Bisektrissatsen — bisektrisen delar motstående sida i samma förhållande som de närliggande sidorna:
+
+$$ \\frac{6}{4} = \\frac{x}{10} $$
+
+$$ x = \\frac{6}{4} \\cdot 10 = 15 $$
+
+**Svar:** 15 cm`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en triangel är parallelltransversalen $DE = 6$ cm och basen $BC = 10$ cm. Sidans nedre del är $DB = 4$ cm. Bestäm sidans övre del $AD$. Svara i cm.`,
+            answer: { value: 6, unit: 'cm' },
+            solution: `Nyckelinsikten: basen ingår, så topptriangelsatsen krävs — och den okända $AD$ dyker upp på **båda** ställen i förhållandet, vilket ger en ekvation.
+
+$$ \\frac{AD}{AD + DB} = \\frac{DE}{BC} $$
+
+$$ \\frac{x}{x + 4} = \\frac{6}{10} $$
+
+Korsvis multiplikation:
+
+$$ 10x = 6(x + 4) $$
+
+$$ 10x = 6x + 24 \\iff 4x = 24 \\iff x = 6 $$
+
+Kontroll: $\\frac{6}{10} = 0{,}6$ och $\\frac{6}{6+4} = 0{,}6$. Stämmer!
+
+**Svar:** $AD = 6$ cm`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.10  Kongruens
+    // SVS, SSS, VSV; kongruent = likformig + lika stor.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.10': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad betyder det att två figurer är **kongruenta**?`,
+            choices: [
+                `De är likformiga OCH lika stora`,
+                `De har samma form men olika storlek`,
+                `De har samma omkrets`,
+                `De har minst en lika stor vinkel`,
+            ],
+            correct: 0,
+            solution: `Kongruens är likformighet plus lika storlek — figurerna är identiska sånär som på läge, vridning och spegling. Tecknet är ≅.
+
+**Svar:** Likformiga och lika stora.`,
+        },
+        {
+            level: 1,
+            question: `Vilka är de tre kongruensvillkoren för trianglar?`,
+            choices: [
+                `SVS (sida-vinkel-sida), SSS (sida-sida-sida) och VSV (vinkel-sida-vinkel)`,
+                `VVV, SSS och SSV`,
+                `Endast SSS`,
+                `Alla vinklar och alla sidor måste alltid kontrolleras`,
+            ],
+            correct: 0,
+            solution: `Det räcker att ett av villkoren är uppfyllt: två sidor och mellanliggande vinkel (SVS), alla tre sidor (SSS) eller två vinklar och mellanliggande sida (VSV).
+
+(VVV ger bara likformighet — storleken kan skilja.)
+
+**Svar:** SVS, SSS och VSV`,
+        },
+        {
+            level: 1,
+            question: `Två kongruenta trianglar har vinklarna 48° och 102° i den ena. Bestäm den tredje vinkeln. Svara i grader.`,
+            answer: { value: 30, unit: '°' },
+            solution: `Kongruenta trianglar har exakt samma vinklar, och vinkelsumman ger
+
+$$ v = 180° - 48° - 102° = 30° $$
+
+**Svar:** 30°`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vad kräver kongruensvillkoret **SVS**?`,
+            choices: [
+                `Två sidor och vinkeln MELLAN dem överensstämmer`,
+                `Två sidor och någon vinkel överensstämmer`,
+                `En sida och två vinklar överensstämmer`,
+                `Två vinklar och sidan mellan dem överensstämmer`,
+            ],
+            correct: 0,
+            solution: `SVS = sida-vinkel-sida: vinkeln måste vara den **mellanliggande** — alltså vinkeln mellan de två sidorna. Med en annan vinkel (SSV) är kongruensen inte säkerställd.
+
+(En sida + två vinklar liknar VSV; två vinklar och mellanliggande sida är just VSV.)
+
+**Svar:** Två sidor och vinkeln mellan dem.`,
+        },
+        {
+            level: 2,
+            question: `Två trianglar har alla tre vinklar lika stora. Är de säkert kongruenta?`,
+            choices: [
+                `Nej — de är likformiga, men storleken kan skilja`,
+                `Ja — lika vinklar betyder kongruens`,
+                `Ja — enligt villkoret VVV`,
+                `Nej — de är varken likformiga eller kongruenta`,
+            ],
+            correct: 0,
+            solution: `Lika vinklar ger likformighet — samma form. Men kongruens kräver också samma **storlek**: en liten och en stor liksidig triangel har samma vinklar utan att vara kongruenta. Därför finns inget kongruensvillkor "VVV".
+
+**Svar:** Nej — bara likformiga.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Trianglarna $ABC$ och $DEF$ har $AB = DE$, $BC = EF$ och $\\angle A = \\angle D$. Är trianglarna **säkert** kongruenta?`,
+            choices: [
+                `Nej — vinkeln ligger inte MELLAN de två kända sidorna, och "SSV" är inget kongruensvillkor`,
+                `Ja — två sidor och en vinkel räcker alltid (SVS)`,
+                `Ja — enligt villkoret SSS`,
+                `Nej — det krävs alltid att alla tre sidorna är kända`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: i SVS måste vinkeln vara **mellanliggande**. Här är $\\angle A$ vinkeln vid hörnet A, men de kända sidorna är $AB$ och $BC$ — vinkeln mellan dem är $\\angle B$, inte $\\angle A$.
+
+Kombinationen sida-sida-vinkel (SSV) är inte ett kongruensvillkor: det kan finnas två olika trianglar med samma två sidor och samma icke-mellanliggande vinkel (den tredje sidan kan "fällas" åt två håll).
+
+**Svar:** Nej — vinkeln är inte mellanliggande, så kongruensen är inte säkerställd.`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.11  Randvinkelsatsen
+    // y = 2x; följdsatser; tangent mot radie; likbenta radie-trianglar.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.11': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En medelpunktsvinkel är 84°. Hur stor är randvinkeln på samma cirkelbåge? Svara i grader.`,
+            answer: { value: 42, unit: '°' },
+            solution: `Randvinkelsatsen: medelpunktsvinkeln är dubbelt så stor som randvinkeln på samma båge.
+
+$$ x = \\frac{84°}{2} = 42° \\quad \\text{(randvinkelsatsen)} $$
+
+**Svar:** 42°`,
+        },
+        {
+            level: 1,
+            question: `En randvinkel är 28°. Hur stor är medelpunktsvinkeln på samma cirkelbåge? Svara i grader.`,
+            answer: { value: 56, unit: '°' },
+            solution: `Randvinkelsatsen:
+
+$$ y = 2 \\cdot 28° = 56° \\quad \\text{(randvinkelsatsen)} $$
+
+**Svar:** 56°`,
+        },
+        {
+            level: 1,
+            question: `Hur stor är en randvinkel som står på en **halvcirkelbåge**?`,
+            choices: [
+                `90°`,
+                `180°`,
+                `45°`,
+                `Det beror på var på randen spetsen ligger`,
+            ],
+            correct: 0,
+            solution: `Medelpunktsvinkeln på en halvcirkelbåge är 180° (en rak vinkel genom medelpunkten). Randvinkelsatsen ger randvinkeln $180°/2 = 90°$ — oavsett var på den andra halvcirkeln spetsen ligger.
+
+**Svar:** 90°`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två randvinklar står på samma cirkelbåge. Den ena är 37°. Hur stor är den andra? Svara i grader.`,
+            answer: { value: 37, unit: '°' },
+            solution: `Följdsats till randvinkelsatsen: randvinklar på samma cirkelbåge är lika stora (båda är hälften av samma medelpunktsvinkel).
+
+$$ v = 37° \\quad \\text{(randvinklar på samma båge)} $$
+
+**Svar:** 37°`,
+        },
+        {
+            level: 2,
+            question: `En tangent rör en cirkel i punkten B. Linjen från den yttre punkten A genom medelpunkten P bildar triangeln ABP, där medelpunktsvinkeln är 62°. Bestäm vinkeln vid A. Svara i grader.`,
+            answer: { value: 28, unit: '°' },
+            solution: `Vinkeln mellan tangenten och radien till tangeringspunkten är 90°:
+
+$$ \\angle ABP = 90° \\quad \\text{(tangent mot radie)} $$
+
+Vinkelsumman i triangeln ger
+
+$$ v = 180° - 90° - 62° = 28° \\quad \\text{(vinkelsumma i triangel)} $$
+
+**Svar:** 28°`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En randvinkel är $x$ och medelpunktsvinkeln på **samma** cirkelbåge är $(3x - 34°)$. Bestäm $x$. Svara i grader.`,
+            answer: { value: 34, unit: '°' },
+            solution: `Nyckelinsikten: randvinkelsatsen ger en ekvation — medelpunktsvinkeln måste vara $2x$.
+
+$$ 3x - 34° = 2x \\quad \\text{(randvinkelsatsen)} $$
+
+$$ x = 34° $$
+
+Kontroll: randvinkeln 34° ger medelpunktsvinkeln 68°, och $3 \\cdot 34° - 34° = 68°$. Stämmer!
+
+**Svar:** $x = 34°$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-4.12  Kordasatsen och inskrivna fyrhörningar
+    // a·b = c·d; motstående vinklar 180°.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-4.12': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Två kordor skär varandra. Den ena delas i delarna 4 och 9, den andra i delarna 6 och $x$. Bestäm $x$.`,
+            answer: { value: 6, unit: '' },
+            solution: `Kordasatsen:
+
+$$ 4 \\cdot 9 = 6 \\cdot x $$
+
+$$ 36 = 6x \\iff x = 6 $$
+
+**Svar:** $x = 6$`,
+        },
+        {
+            level: 1,
+            question: `En vinkel i en inskriven fyrhörning är 98°. Hur stor är dess **motstående** vinkel? Svara i grader.`,
+            answer: { value: 82, unit: '°' },
+            solution: `Motstående vinklar i en inskriven fyrhörning är tillsammans 180°:
+
+$$ v = 180° - 98° = 82° \\quad \\text{(motstående vinklar i inskriven fyrhörning)} $$
+
+**Svar:** 82°`,
+        },
+        {
+            level: 1,
+            question: `Vad säger kordasatsen om två kordor som skär varandra?`,
+            choices: [
+                `Produkten av den ena kordans delsträckor är lika med produkten av den andras`,
+                `Summan av den ena kordans delsträckor är lika med summan av den andras`,
+                `Kordorna delar alltid varandra mitt itu`,
+                `Kordorna är alltid lika långa`,
+            ],
+            correct: 0,
+            solution: `Kordasatsen: $a \\cdot b = c \\cdot d$, där $a, b$ är den ena kordans delar och $c, d$ den andras. Satsen bevisas med likformiga trianglar (randvinklar på samma båge + vertikalvinklar).
+
+**Svar:** Produkterna av delsträckorna är lika.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två kordor skär varandra. Den ena delas i delarna $x$ och 8, den andra i delarna 5 och 12. Bestäm $x$.`,
+            answer: { value: 7.5, unit: '' },
+            solution: `Kordasatsen:
+
+$$ 8x = 5 \\cdot 12 $$
+
+$$ 8x = 60 \\iff x = 7{,}5 $$
+
+**Svar:** $x = 7{,}5$`,
+        },
+        {
+            level: 2,
+            question: `I en inskriven fyrhörning är två motstående vinklar $x$ och $(2x + 30°)$. Bestäm $x$. Svara i grader.`,
+            answer: { value: 50, unit: '°' },
+            solution: `Motstående vinklar i en inskriven fyrhörning är tillsammans 180°:
+
+$$ x + (2x + 30°) = 180° $$
+
+$$ 3x = 150° \\iff x = 50° $$
+
+(Vinklarna är 50° och 130°; kontroll: $50 + 130 = 180$. Stämmer!)
+
+**Svar:** $x = 50°$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två kordor skär varandra. Den ena delas i delarna 3 och 12. Den andra delas **mitt itu** i två lika delar. Bestäm längden av en sådan del.`,
+            answer: { value: 6, unit: '' },
+            solution: `Nyckelinsikten: att kordan delas mitt itu betyder att båda delarna är samma tal $y$ — kordasatsen ger då en andragradsekvation.
+
+$$ 3 \\cdot 12 = y \\cdot y $$
+
+$$ y^2 = 36 \\iff y = \\pm 6 $$
+
+En sträcka är positiv, så $y = 6$ (hela kordan är 12).
+
+**Svar:** 6`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-5.1  Exponential- och potensekvationer
+    // Variabeln i basen (potens) vs exponenten (exponential).
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-5.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös potensekvationen $x^5 = 100$. Svara med två decimaler.`,
+            answer: { value: 2.51, unit: '', tol: 0.02 },
+            solution: `Upphöj båda led till $\\frac{1}{5}$ (eller dra femte roten ur):
+
+$$ x = 100^{1/5} = \\sqrt[5]{100} = 2{,}511\\ldots \\approx 2{,}51 $$
+
+(Udda exponent — bara en lösning.)
+
+**Svar:** $x \\approx 2{,}51$`,
+        },
+        {
+            level: 1,
+            question: `Vilken av följande är en **exponentialekvation**?`,
+            choices: [
+                `$3^x = 20$`,
+                `$x^3 = 20$`,
+                `$x^2 + 3 = 20$`,
+                `$3x = 20$`,
+            ],
+            correct: 0,
+            solution: `I en exponentialekvation är variabeln i **exponenten**: $3^x = 20$.
+
+($x^3 = 20$ är en potensekvation — variabeln i basen; $x^2 + 3 = 20$ är en andragradsekvation och $3x = 20$ en linjär ekvation.)
+
+**Svar:** $3^x = 20$`,
+        },
+        {
+            level: 1,
+            question: `Lös potensekvationen $x^4 = 50$ och ange den **positiva** lösningen med två decimaler.`,
+            answer: { value: 2.66, unit: '', tol: 0.02 },
+            solution: `Jämn exponent ger två lösningar:
+
+$$ x = \\pm 50^{1/4} = \\pm\\sqrt[4]{50} = \\pm 2{,}659\\ldots $$
+
+Den positiva lösningen är $x \\approx 2{,}66$.
+
+**Svar:** $x \\approx 2{,}66$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett fondkonto växer från 8 000 kr till 12 000 kr på 4 år. Hur stor genomsnittlig årlig ökning i procent motsvarar det? Svara med en decimal.`,
+            answer: { value: 10.7, unit: '%', tol: 0.2 },
+            solution: `Modellen $y = C \\cdot a^x$ med $y = 12\\,000$, $C = 8\\,000$ och $x = 4$:
+
+$$ 12\\,000 = 8\\,000 \\cdot a^4 $$
+
+$$ a^4 = 1{,}5 $$
+
+Potensekvationen ger
+
+$$ a = 1{,}5^{1/4} = 1{,}1067\\ldots $$
+
+Förändringsfaktorn 1,107 motsvarar en ökning med cirka 10,7 %.
+
+**Svar:** 10,7 %`,
+        },
+        {
+            level: 2,
+            question: `Varför skrivs $\\pm$ framför lösningen när potensekvationen har en **jämn** exponent?`,
+            choices: [
+                `Både ett positivt och ett negativt tal ger positivt resultat vid jämn upphöjning — det finns två lösningar`,
+                `Jämna exponenter gör alla lösningar negativa`,
+                `Räknaren kan inte hantera jämna exponenter`,
+                `Det är bara en skrivkonvention utan betydelse`,
+            ],
+            correct: 0,
+            solution: `Vid jämn exponent försvinner tecknet: t.ex. $2^4 = 16$ och $(-2)^4 = 16$. Ekvationen $x^4 = 16$ har därför två lösningar, $x = \\pm 2$. Vid udda exponent bevaras tecknet och det finns bara en lösning.
+
+**Svar:** Både positivt och negativt tal ger positivt resultat vid jämn upphöjning.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Mängden av ett ämne minskar med samma faktor varje år. Efter 6 år återstår 40 % av ursprungsmängden. Hur stor är den **årliga procentuella minskningen**? Svara i procent med en decimal.`,
+            answer: { value: 14.2, unit: '%', tol: 0.3 },
+            solution: `Nyckelinsikten: "samma faktor varje år" betyder $y = C \\cdot a^x$, och "40 % återstår" ger $y = 0{,}40C$.
+
+$$ 0{,}40C = C \\cdot a^6 $$
+
+$$ a^6 = 0{,}40 $$
+
+Potensekvationen ger
+
+$$ a = 0{,}40^{1/6} = 0{,}8584\\ldots $$
+
+Förändringsfaktorn 0,858 motsvarar en minskning med $1 - 0{,}858 = 0{,}142 \\approx 14{,}2\\ \\%$ per år.
+
+**Svar:** cirka 14,2 % per år`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-5.2  Tiologaritmer
+    // lg a = tians exponent; a = 10^lg a.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-5.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm $\\lg 1\\,000$ utan räknare.`,
+            answer: { value: 3, unit: '' },
+            solution: `"Vad ska 10 upphöjas till för att bli 1 000? Jo, 3" — eftersom $10^3 = 1\\,000$.
+
+**Svar:** 3`,
+        },
+        {
+            level: 1,
+            question: `Bestäm $\\lg 0{,}001$ utan räknare.`,
+            answer: { value: -3, unit: '' },
+            solution: `$0{,}001 = \\dfrac{1}{1\\,000} = 10^{-3}$, så
+
+$$ \\lg 0{,}001 = -3 $$
+
+**Svar:** −3`,
+        },
+        {
+            level: 1,
+            question: `Mellan vilka två heltal ligger $\\lg 500$?`,
+            choices: [
+                `Mellan 2 och 3`,
+                `Mellan 1 och 2`,
+                `Mellan 3 och 4`,
+                `Mellan 4 och 5`,
+            ],
+            correct: 0,
+            solution: `$10^2 = 100$ är för litet och $10^3 = 1\\,000$ är för stort — exponenten måste ligga mellan 2 och 3. (Räknaren ger $\\lg 500 \\approx 2{,}70$.)
+
+**Svar:** Mellan 2 och 3.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm $\\lg \\sqrt{1\\,000}$ utan räknare.`,
+            answer: { value: 1.5, unit: '' },
+            solution: `Roten ur är samma sak som att upphöja till en halv:
+
+$$ \\sqrt{1\\,000} = \\left(10^3\\right)^{1/2} = 10^{3/2} $$
+
+$$ \\lg \\sqrt{1\\,000} = \\frac{3}{2} = 1{,}5 $$
+
+**Svar:** 1,5`,
+        },
+        {
+            level: 2,
+            question: `Beräkna $10^{\\lg 7}$ utan räknare.`,
+            answer: { value: 7, unit: '' },
+            solution: `Enligt sambandet $a = 10^{\\lg a}$: att upphöja 10 till "det tal som 10 ska upphöjas till för att bli 7" ger förstås 7.
+
+$$ 10^{\\lg 7} = 7 $$
+
+**Svar:** 7`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Beräkna utan räknare $10^{\\lg 4} \\cdot \\lg 10^5 - \\lg 0{,}1$.`,
+            answer: { value: 21, unit: '' },
+            solution: `Nyckelinsikten: förenkla varje logaritmuttryck för sig utifrån definitionen.
+
+$$ 10^{\\lg 4} = 4 $$
+
+$$ \\lg 10^5 = 5 $$
+
+$$ \\lg 0{,}1 = \\lg 10^{-1} = -1 $$
+
+Insättning ger
+
+$$ 4 \\cdot 5 - (-1) = 20 + 1 = 21 $$
+
+**Svar:** 21`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-5.3  Exponentialekvationer och tiologaritmer
+    // Skriv om till basen 10; logaritmform ⟺ potensform.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-5.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Lös ekvationen $10^x = 1\\,000$.`,
+            answer: { value: 3, unit: '' },
+            solution: `Enligt definitionen är $x = \\lg 1\\,000 = 3$ (eftersom $10^3 = 1\\,000$).
+
+**Svar:** $x = 3$`,
+        },
+        {
+            level: 1,
+            question: `Lös logaritmekvationen $\\lg x = 2$.`,
+            answer: { value: 100, unit: '' },
+            solution: `Skriv om till potensform — "10 upphöjt till högra ledet är det vi har logaritmen för":
+
+$$ 10^2 = x \\iff x = 100 $$
+
+**Svar:** $x = 100$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $10^x = 47$. Svara med två decimaler.`,
+            answer: { value: 1.67, unit: '', tol: 0.02 },
+            solution: `Enligt definitionen:
+
+$$ x = \\lg 47 \\approx 1{,}67 $$
+
+(Rimligt: 47 ligger mellan $10^1$ och $10^2$, så x ligger mellan 1 och 2.)
+
+**Svar:** $x = \\lg 47 \\approx 1{,}67$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $3^x = 20$. Svara med två decimaler.`,
+            answer: { value: 2.73, unit: '', tol: 0.02 },
+            solution: `Skriv om båda led till basen 10 och förenkla med potenslagarna:
+
+$$ \\left(10^{\\lg 3}\\right)^x = 10^{\\lg 20} $$
+
+$$ 10^{x \\cdot \\lg 3} = 10^{\\lg 20} $$
+
+Sätt exponenterna lika:
+
+$$ x \\cdot \\lg 3 = \\lg 20 \\iff x = \\frac{\\lg 20}{\\lg 3} \\approx 2{,}73 $$
+
+**Svar:** $x = \\dfrac{\\lg 20}{\\lg 3} \\approx 2{,}73$`,
+        },
+        {
+            level: 2,
+            question: `Lös logaritmekvationen $\\lg 4x = 3{,}2$. Svara med en decimal.`,
+            answer: { value: 396.2, unit: '', tol: 1 },
+            solution: `Skriv om till potensform:
+
+$$ 10^{3{,}2} = 4x $$
+
+Division med 4 i båda led:
+
+$$ x = \\frac{10^{3{,}2}}{4} = \\frac{1\\,584{,}89\\ldots}{4} \\approx 396{,}2 $$
+
+**Svar:** $x \\approx 396{,}2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $7 \\cdot 2^{3x} + 5 = 61$ **exakt**.`,
+            answer: { value: 1, unit: '' },
+            solution: `Nyckelinsikten: lös först ut potensen — och känn igen att högerledet blir en ren tvåpotens, så svaret blir exakt.
+
+$$ 7 \\cdot 2^{3x} = 56 $$
+
+$$ 2^{3x} = 8 $$
+
+Eftersom $8 = 2^3$ har vi likhet med samma bas:
+
+$$ 2^{3x} = 2^3 \\iff 3x = 3 \\iff x = 1 $$
+
+Kontroll: $7 \\cdot 2^3 + 5 = 56 + 5 = 61$. Stämmer!
+
+**Svar:** $x = 1$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-5.4  Logaritmlagarna
+    // lg x + lg y = lg xy; lg x − lg y = lg(x/y); lg x^p = p·lg x.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-5.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $\\lg 5 + \\lg 2$ utan räknare.`,
+            answer: { value: 1, unit: '' },
+            solution: `Första logaritmlagen:
+
+$$ \\lg 5 + \\lg 2 = \\lg(5 \\cdot 2) = \\lg 10 = 1 $$
+
+**Svar:** 1`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $\\lg 40 - \\lg 4$ utan räknare.`,
+            answer: { value: 1, unit: '' },
+            solution: `Andra logaritmlagen:
+
+$$ \\lg 40 - \\lg 4 = \\lg \\frac{40}{4} = \\lg 10 = 1 $$
+
+**Svar:** 1`,
+        },
+        {
+            level: 1,
+            question: `Vad kan $\\lg x^3$ skrivas om till enligt tredje logaritmlagen?`,
+            choices: [
+                `$3 \\cdot \\lg x$`,
+                `$\\lg 3x$`,
+                `$(\\lg x)^3$`,
+                `$\\lg x + 3$`,
+            ],
+            correct: 0,
+            solution: `Tredje logaritmlagen: exponenten kan multipliceras ner framför logaritmen,
+
+$$ \\lg x^p = p \\cdot \\lg x $$
+
+så $\\lg x^3 = 3 \\cdot \\lg x$.
+
+**Svar:** $3 \\cdot \\lg x$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $2^x = 10$ med tredje logaritmlagen. Svara med två decimaler.`,
+            answer: { value: 3.32, unit: '', tol: 0.02 },
+            solution: `Logaritmera båda led och multiplicera ner exponenten:
+
+$$ \\lg 2^x = \\lg 10 $$
+
+$$ x \\cdot \\lg 2 = 1 $$
+
+$$ x = \\frac{1}{\\lg 2} \\approx 3{,}32 $$
+
+**Svar:** $x \\approx 3{,}32$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $\\lg x = \\lg 3 + \\lg 7$.`,
+            answer: { value: 21, unit: '' },
+            solution: `Skriv om HL som en enda logaritm med första logaritmlagen:
+
+$$ \\lg x = \\lg(3 \\cdot 7) = \\lg 21 $$
+
+Nu står en enda logaritm i varje led — logaritmfunktionen kan strykas:
+
+$$ x = 21 $$
+
+**Svar:** $x = 21$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $3 \\lg 2 + \\lg 5 = \\lg 4x$.`,
+            answer: { value: 10, unit: '' },
+            solution: `Nyckelinsikten: skriv om hela VL till EN logaritm — först flyttas 3:an upp som exponent (tredje lagen), sedan slås termerna ihop (första lagen).
+
+$$ \\lg 2^3 + \\lg 5 = \\lg 4x $$
+
+$$ \\lg 8 + \\lg 5 = \\lg 4x $$
+
+$$ \\lg(8 \\cdot 5) = \\lg 4x $$
+
+$$ \\lg 40 = \\lg 4x $$
+
+Logaritmfunktionen stryks:
+
+$$ 40 = 4x \\iff x = 10 $$
+
+**Svar:** $x = 10$`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-5.5  Tillämpningar av logaritmer
+    // y = C·a^x + logaritmering ger tiden.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-5.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `I modellen $y = C \\cdot a^x$ — vad står $a$ för?`,
+            choices: [
+                `Förändringsfaktorn`,
+                `Startvärdet`,
+                `Nya värdet`,
+                `Tiden`,
+            ],
+            correct: 0,
+            solution: `$a$ är förändringsfaktorn (t.ex. 1,023 vid en ökning med 2,3 %). $C$ är startvärdet, $y$ nya värdet och $x$ antalet förändringar (ofta tid).
+
+**Svar:** Förändringsfaktorn`,
+        },
+        {
+            level: 1,
+            question: `Du sätter in 5 000 kr på ett konto med årsräntan 3 %. Hur mycket finns på kontot efter 10 år? Svara i hela kronor.`,
+            answer: { value: 6720, unit: 'kr', tol: 5 },
+            solution: `Modellen $y = C \\cdot a^x$ med $C = 5\\,000$, $a = 1{,}03$ och $x = 10$:
+
+$$ y = 5\\,000 \\cdot 1{,}03^{10} = 5\\,000 \\cdot 1{,}3439\\ldots \\approx 6\\,720\\ \\mathrm{kr} $$
+
+**Svar:** cirka 6 720 kr`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $1{,}2 = 1{,}023^x$ ska lösas algebraiskt. Vilket är rätt tillvägagångssätt?`,
+            choices: [
+                `Logaritmera båda led och multiplicera ner exponenten: $x = \\frac{\\lg 1{,}2}{\\lg 1{,}023}$`,
+                `Dividera båda led med 1,023`,
+                `Dra roten ur båda led`,
+                `Multiplicera båda led med x`,
+            ],
+            correct: 0,
+            solution: `Variabeln sitter i exponenten — logaritmering plus tredje logaritmlagen tar ner den:
+
+$$ \\lg 1{,}2 = x \\cdot \\lg 1{,}023 \\iff x = \\frac{\\lg 1{,}2}{\\lg 1{,}023} \\approx 8{,}02 $$
+
+(Division med 1,023 tar bara bort EN faktor av x stycken.)
+
+**Svar:** Logaritmera och multiplicera ner exponenten.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ett kapital växer med 5 % per år. Efter hur många år har det **fördubblats**? Svara med en decimal.`,
+            answer: { value: 14.2, unit: 'år', tol: 0.2 },
+            solution: `Fördubbling betyder $y = 2C$:
+
+$$ 2C = C \\cdot 1{,}05^x $$
+
+$$ 2 = 1{,}05^x $$
+
+Logaritmera och använd tredje logaritmlagen:
+
+$$ \\lg 2 = x \\cdot \\lg 1{,}05 $$
+
+$$ x = \\frac{\\lg 2}{\\lg 1{,}05} \\approx 14{,}2 $$
+
+**Svar:** Efter cirka 14,2 år.`,
+        },
+        {
+            level: 2,
+            question: `En bil är värd 240 000 kr och tappar 15 % av värdet varje år. Efter hur många år är värdet under 100 000 kr? Svara med en decimal.`,
+            answer: { value: 5.4, unit: 'år', tol: 0.2 },
+            solution: `Minskning med 15 % ger förändringsfaktorn 0,85:
+
+$$ 100\\,000 = 240\\,000 \\cdot 0{,}85^x $$
+
+$$ \\frac{100\\,000}{240\\,000} = 0{,}85^x $$
+
+Logaritmera:
+
+$$ \\lg\\left(\\frac{100}{240}\\right) = x \\cdot \\lg 0{,}85 $$
+
+$$ x = \\frac{\\lg(100/240)}{\\lg 0{,}85} \\approx 5{,}4 $$
+
+**Svar:** Efter cirka 5,4 år.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En bakteriekultur växer med 8 % per timme. Hur lång tid tar det innan kulturen har vuxit med **50 %**? Svara i timmar med en decimal.`,
+            answer: { value: 5.3, unit: 'h', tol: 0.15 },
+            solution: `Nyckelinsikten: "vuxit med 50 %" betyder att nya värdet är 1,5 gånger startvärdet — inte 50 % av det.
+
+$$ 1{,}5C = C \\cdot 1{,}08^x $$
+
+$$ 1{,}5 = 1{,}08^x $$
+
+Logaritmera och använd tredje logaritmlagen:
+
+$$ \\lg 1{,}5 = x \\cdot \\lg 1{,}08 $$
+
+$$ x = \\frac{\\lg 1{,}5}{\\lg 1{,}08} = 5{,}268\\ldots \\approx 5{,}3 $$
+
+**Svar:** Efter cirka 5,3 timmar.`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-5.6  Logaritmer med andra baser
+    // a^x = b ⟺ x = log_a b.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-5.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm $\\log_2 32$ utan räknare.`,
+            answer: { value: 5, unit: '' },
+            solution: `"Vad ska 2 upphöjas till för att bli 32? Jo, 5" — eftersom $2^5 = 32$.
+
+**Svar:** 5`,
+        },
+        {
+            level: 1,
+            question: `Bestäm $\\log_5 125$ utan räknare.`,
+            answer: { value: 3, unit: '' },
+            solution: `$5^3 = 125$, så $\\log_5 125 = 3$.
+
+**Svar:** 3`,
+        },
+        {
+            level: 1,
+            question: `Vilken är lösningen till ekvationen $a^x = b$?`,
+            choices: [
+                `$x = \\log_a b$`,
+                `$x = \\log_b a$`,
+                `$x = \\lg(a \\cdot b)$`,
+                `$x = \\dfrac{b}{a}$`,
+            ],
+            correct: 0,
+            solution: `Definitionen av generella logaritmer: ekvationen $a^x = b$ har lösningen $x = \\log_a b$ — "a-logaritmen för b".
+
+**Svar:** $x = \\log_a b$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vilket uttryck är lösningen till $4^x = 9$?`,
+            choices: [
+                `$x = \\log_4 9$`,
+                `$x = \\log_9 4$`,
+                `$x = \\sqrt[4]{9}$`,
+                `$x = \\frac{9}{4}$`,
+            ],
+            correct: 0,
+            solution: `Basen är 4 och resultatet 9 — lösningen är "4-logaritmen för 9":
+
+$$ x = \\log_4 9 $$
+
+(Ordningen spelar roll: $\\log_9 4$ svarar på ekvationen $9^x = 4$. Fjärde roten löser potensekvationen $x^4 = 9$ — variabeln i basen.)
+
+**Svar:** $x = \\log_4 9$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm $\\log_2 \\dfrac{1}{8}$ utan räknare.`,
+            answer: { value: -3, unit: '' },
+            solution: `$\\dfrac{1}{8} = \\dfrac{1}{2^3} = 2^{-3}$, så
+
+$$ \\log_2 \\frac{1}{8} = -3 $$
+
+**Svar:** −3`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Beräkna utan räknare $2^{\\log_2 5} + 3^{\\log_3 4}$.`,
+            answer: { value: 9, unit: '' },
+            solution: `Nyckelinsikten: sambandet $a^{\\log_a b} = b$ gäller för alla baser — precis som $10^{\\lg b} = b$.
+
+$$ 2^{\\log_2 5} = 5 $$
+
+$$ 3^{\\log_3 4} = 4 $$
+
+$$ 5 + 4 = 9 $$
+
+**Svar:** 9`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-6.1  Lägesmått
+    // Medelvärde, median, typvärde, frekvens, klassmitt.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-6.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna medelvärdet av talen 4, 7, 9, 12 och 8.`,
+            answer: { value: 8, unit: '' },
+            solution: `$$ \\text{medelvärdet} = \\frac{\\text{summan}}{\\text{antalet}} = \\frac{4 + 7 + 9 + 12 + 8}{5} = \\frac{40}{5} = 8 $$
+
+**Svar:** 8`,
+        },
+        {
+            level: 1,
+            question: `Bestäm medianen av talen 3, 9, 5, 12 och 7.`,
+            answer: { value: 7, unit: '' },
+            solution: `Sortera talen i storleksordning och läs av värdet i mitten:
+
+$$ 3,\\ 5,\\ \\mathbf{7},\\ 9,\\ 12 $$
+
+**Svar:** 7`,
+        },
+        {
+            level: 1,
+            question: `Vad är **typvärdet** i en datamängd?`,
+            choices: [
+                `Det värde som förekommer flest gånger`,
+                `Värdet i mitten när talen sorterats`,
+                `Summan dividerad med antalet`,
+                `Skillnaden mellan största och minsta värdet`,
+            ],
+            correct: 0,
+            solution: `Typvärdet är det vanligast förekommande värdet — det med högst frekvens. Det kan användas även när datamängden inte är tal, t.ex. färger eller bilmärken.
+
+(Mitten = medianen; summan/antalet = medelvärdet; största − minsta = variationsbredden.)
+
+**Svar:** Det värde som förekommer flest gånger.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm medianen av talen 4, 6, 10 och 14.`,
+            answer: { value: 8, unit: '' },
+            solution: `Vid ett jämnt antal värden är medianen medelvärdet av de två mittersta:
+
+$$ 4,\\ \\mathbf{6},\\ \\mathbf{10},\\ 14 $$
+
+$$ \\text{medianen} = \\frac{6 + 10}{2} = 8 $$
+
+**Svar:** 8`,
+        },
+        {
+            level: 2,
+            question: `När är **medianen** ett lämpligare lägesmått än medelvärdet?`,
+            choices: [
+                `Vid sned fördelning — när enstaka utstickande värden drar iväg medelvärdet`,
+                `När alla värden är lika stora`,
+                `När datamängden består av färger eller märken`,
+                `Medelvärdet är alltid lämpligast`,
+            ],
+            correct: 0,
+            solution: `Ett utstickande värde (som 61-åringen i klassrummet med tonåringar) drar upp medelvärdet så att det inte representerar gruppen. Medianen påverkas inte av hur extrema ytterlighetsvärdena är.
+
+(För icke-numeriska data som färger är det typvärdet som gäller.)
+
+**Svar:** Vid sned fördelning med utstickande värden.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En klassindelad frekvenstabell visar: $0 \\leq x < 10$ har frekvensen 3, $10 \\leq x < 20$ har frekvensen 5 och $20 \\leq x < 30$ har frekvensen 2. Beräkna medelvärdet.`,
+            answer: { value: 14, unit: '' },
+            solution: `Nyckelinsikten: vid klassindelat material räknar man som att alla värden i en klass ligger i **klassmitten** (5, 15 respektive 25).
+
+$$ \\text{medelvärdet} = \\frac{3 \\cdot 5 + 5 \\cdot 15 + 2 \\cdot 25}{3 + 5 + 2} = \\frac{15 + 75 + 50}{10} = \\frac{140}{10} = 14 $$
+
+**Svar:** 14`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-6.2  Spridningsmått, lådagram och percentiler
+    // Variationsbredd, kvartiler, kvartilavstånd, percentiler.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-6.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm variationsbredden för talen 12, 17, 9, 25 och 14.`,
+            answer: { value: 16, unit: '' },
+            solution: `$$ \\text{variationsbredd} = \\text{största värdet} - \\text{minsta värdet} = 25 - 9 = 16 $$
+
+**Svar:** 16`,
+        },
+        {
+            level: 1,
+            question: `Vad visar **lådans bredd** i ett lådagram?`,
+            choices: [
+                `Kvartilavståndet — avståndet mellan nedre och övre kvartil`,
+                `Variationsbredden`,
+                `Medelvärdet`,
+                `Antalet värden i datamängden`,
+            ],
+            correct: 0,
+            solution: `Lådan sträcker sig från nedre kvartilen $Q_1$ till övre kvartilen $Q_3$ — dess bredd är kvartilavståndet, som rymmer de mittersta 50 % av värdena.
+
+(Variationsbredden motsvarar hela lådagrammet inklusive "pinnarna".)
+
+**Svar:** Kvartilavståndet.`,
+        },
+        {
+            level: 1,
+            question: `I en datamängd är nedre kvartilen 8 år och övre kvartilen 44 år. Bestäm kvartilavståndet. Svara i år.`,
+            answer: { value: 36, unit: 'år' },
+            solution: `$$ \\text{kvartilavstånd} = \\text{övre kvartil} - \\text{nedre kvartil} = 44 - 8 = 36 $$
+
+**Svar:** 36 år`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Hur stor andel av värdena innehåller varje del av ett lådagram ("vänster pinne", vänstra lådan, högra lådan och "höger pinne")?`,
+            choices: [
+                `25 % vardera`,
+                `Det beror på delens storlek — större del innehåller fler värden`,
+                `50 % i lådan och 50 % i pinnarna tillsammans, ojämnt fördelat`,
+                `10 % i pinnarna och 40 % i lådhalvorna`,
+            ],
+            correct: 0,
+            solution: `Kvartilerna delar materialet i fyra lika stora delar — varje del innehåller exakt 25 % av värdena. Därför gäller: ju STÖRRE en del ser ut, desto mer utspridda ligger dess 25 % av värdena.
+
+**Svar:** 25 % vardera.`,
+        },
+        {
+            level: 2,
+            question: `I ett statistiskt material är den 90:e percentilen $p_{90} = 72$. Hur många procent av värdena är **större** än 72?`,
+            answer: { value: 10, unit: '%' },
+            solution: `Percentilen anger hur många procent som är **lägre** än värdet: 90 % ligger under 72. Resten ligger över:
+
+$$ 100\\ \\% - 90\\ \\% = 10\\ \\% $$
+
+**Svar:** 10 %`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I ett lådagram är "höger pinne" mycket lång medan vänstra delen av lådan är mycket kort. Vad säger det om datamängden?`,
+            choices: [
+                `De översta 25 % av värdena är mycket utspridda, medan värdena strax under medianen ligger tätt samlade`,
+                `Det finns fler värden i höger pinne än i vänstra lådan`,
+                `Medelvärdet är större än det största värdet`,
+                `Datamängden innehåller ett fel`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: varje del innehåller ALLTID 25 % av värdena — delarnas storlek visar SPRIDNINGEN, inte antalet.
+
+En lång höger pinne betyder att den översta fjärdedelen är utspridd över ett stort intervall. En kort lådhalva betyder att den fjärdedelen ligger tätt packad.
+
+**Svar:** Den översta fjärdedelen är utspridd; fjärdedelen under medianen ligger samlad.`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-6.3  Statistik med digitala verktyg
+    // Envariabelanalys, Visa statistik, Percentil, frekvenskolumn.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-6.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad betyder **Q1** i Geogebras statistiktabell?`,
+            choices: [
+                `Nedre kvartilen`,
+                `Övre kvartilen`,
+                `Medelvärdet`,
+                `Antalet värden`,
+            ],
+            correct: 0,
+            solution: `I statistiktabellen står Q1 för nedre kvartilen och Q3 för övre kvartilen. Medelvärdet står vid "Medel" och antalet värden vid "n".
+
+**Svar:** Nedre kvartilen`,
+        },
+        {
+            level: 1,
+            question: `Vilket verktyg i Geogebra används för att få fram statistiska mått ur en kolumn med värden?`,
+            choices: [
+                `Envariabelanalys (via menyn "blå staplar") och knappen "Visa statistik"`,
+                `Sannolikhetskalkylatorn`,
+                `Verktyget Extrempunkt`,
+                `Tvåvariabels regressionsanalys`,
+            ],
+            correct: 0,
+            solution: `Markera värdena i kalkylbladet, klicka på "blå staplar", välj Envariabelanalys och klicka på "Visa statistik" — då visas n, Medel, Min, Q1, Median, Q3, Max med mera.
+
+(Sannolikhetskalkylatorn används för normalfördelningar och Tvåvariabels regressionsanalys för samband mellan TVÅ variabler.)
+
+**Svar:** Envariabelanalys + "Visa statistik"`,
+        },
+        {
+            level: 1,
+            question: `Vad beräknar kommandot Percentil(l1, 90%) i Geogebra?`,
+            choices: [
+                `Det värde i listan som 90 % av värdena är mindre än`,
+                `De 90 största värdena i listan`,
+                `90 % av medelvärdet`,
+                `Hur många värden som är exakt 90`,
+            ],
+            correct: 0,
+            solution: `Percentilen $p_{90}$ är gränsvärdet där 90 % av materialet ligger under — t.ex. åldern man måste överstiga för att tillhöra de 10 % äldsta.
+
+**Svar:** Värdet som 90 % av värdena är mindre än.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En frekvenstabell över antal syskon visar frekvenserna 17, 68, 51, 26, 9, 2 och 4. Hur många elever ingår i undersökningen?`,
+            answer: { value: 177, unit: '' },
+            solution: `Totala antalet är summan av frekvenserna:
+
+$$ 17 + 68 + 51 + 26 + 9 + 2 + 4 = 177 $$
+
+(I Geogebras statistiktabell syns detta som $n = 177$.)
+
+**Svar:** 177 elever`,
+        },
+        {
+            level: 2,
+            question: `Varför skriver man in frekvenserna i en egen kolumn i Geogebra i stället för att skriva in varje enskilt värde?`,
+            choices: [
+                `För att slippa mata in hundratals separata värden — Geogebra viktar värdena med frekvenserna`,
+                `För att medelvärdet blir mer exakt då`,
+                `Geogebra klarar högst 20 värden i en kolumn`,
+                `Frekvenserna måste alltid stå i kolumn B`,
+            ],
+            correct: 0,
+            solution: `Med värdena i en kolumn och frekvenserna i nästa markerar man båda kolumnerna och väljer Envariabelanalys — Geogebra räknar då varje värde så många gånger som frekvensen anger. 177 inmatningar blir 14.
+
+**Svar:** För att slippa mata in alla enskilda värden.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Antal syskon i en grupp: värdet 0 har frekvensen 2, värdet 1 har frekvensen 5, värdet 2 har frekvensen 2 och värdet 3 har frekvensen 1. Beräkna medelvärdet.`,
+            answer: { value: 1.2, unit: '' },
+            solution: `Nyckelinsikten: varje värde ska räknas så många gånger som frekvensen anger — summan är $\\sum (\\text{värde} \\cdot \\text{frekvens})$ och antalet är frekvensernas summa.
+
+$$ \\text{medelvärdet} = \\frac{0 \\cdot 2 + 1 \\cdot 5 + 2 \\cdot 2 + 3 \\cdot 1}{2 + 5 + 2 + 1} = \\frac{0 + 5 + 4 + 3}{10} = \\frac{12}{10} = 1{,}2 $$
+
+**Svar:** 1,2 syskon`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-6.4  Standardavvikelse
+    // Genomsnittlig avvikelse från medelvärdet; σ vs s.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-6.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad beskriver **standardavvikelsen**?`,
+            choices: [
+                `Hur mycket mätvärdena i genomsnitt avviker från medelvärdet`,
+                `Skillnaden mellan största och minsta värdet`,
+                `Värdet i mitten av datamängden`,
+                `Det vanligast förekommande värdet`,
+            ],
+            correct: 0,
+            solution: `Standardavvikelsen är ett spridningsmått: den anger med ett tal hur mycket värdena i genomsnitt avviker från datamängdens medelvärde. Stor standardavvikelse = stor spridning.
+
+(Största − minsta = variationsbredd; mitten = median; vanligast = typvärde.)
+
+**Svar:** Genomsnittlig avvikelse från medelvärdet.`,
+        },
+        {
+            level: 1,
+            question: `Vad är skillnaden mellan beteckningarna $\\sigma$ och $s$ för standardavvikelse?`,
+            choices: [
+                `$\\sigma$ används vid totalundersökning och $s$ vid stickprovsundersökning`,
+                `$s$ används vid totalundersökning och $\\sigma$ vid stickprov`,
+                `$\\sigma$ är alltid större än $s$`,
+                `De är exakt samma tal`,
+            ],
+            correct: 0,
+            solution: `Vid en totalundersökning (alla i populationen) betecknas standardavvikelsen $\\sigma$ (lilla sigma). Vid en stickprovsundersökning (en del av populationen) betecknas den $s$ — och beräknas med en något annorlunda formel.
+
+**Svar:** $\\sigma$ för totalundersökning, $s$ för stickprov.`,
+        },
+        {
+            level: 1,
+            question: `Alla värden i en datamängd är exakt lika stora. Vilken standardavvikelse har datamängden?`,
+            answer: { value: 0, unit: '' },
+            solution: `Utan spridning finns inga avvikelser från medelvärdet — standardavvikelsen är 0.
+
+**Svar:** 0`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Datamängderna A: 16, 17, 17, 17, 18 och B: 2, 4, 12, 24, 43 har båda medelvärdet 17. Vilken har störst standardavvikelse, och varför?`,
+            choices: [
+                `B — värdena avviker mycket mer från medelvärdet (som mest 26 mot som mest 1)`,
+                `A — värdena ligger tätt, vilket ger stor standardavvikelse`,
+                `De har samma standardavvikelse eftersom medelvärdena är lika`,
+                `Det går inte att avgöra utan räknare`,
+            ],
+            correct: 0,
+            solution: `Standardavvikelsen mäter spridningen kring medelvärdet. I A avviker värdena som mest 1 enhet; i B som mest 26 enheter. B har alltså mycket större standardavvikelse.
+
+(Samma medelvärde säger ingenting om spridningen — det är hela poängen med spridningsmått.)
+
+**Svar:** B — större avvikelser från medelvärdet.`,
+        },
+        {
+            level: 2,
+            question: `Geogebra visar $\\sigma = 15{,}13$ och $s = 16{,}91$ för en datamängd. Uppgiften gäller en totalundersökning. Vilket värde ska anges som standardavvikelse? Svara med en decimal.`,
+            answer: { value: 15.1, unit: '', tol: 0.05 },
+            solution: `Vid en totalundersökning läses standardavvikelsen av vid $\\sigma$:
+
+$$ \\sigma = 15{,}13 \\approx 15{,}1 $$
+
+($s$ hade gällt om undersökningen varit ett stickprov.)
+
+**Svar:** 15,1`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Alla värden i en datamängd ökas med 10. Vad händer med medelvärdet och standardavvikelsen?`,
+            choices: [
+                `Medelvärdet ökar med 10, men standardavvikelsen är oförändrad`,
+                `Både medelvärdet och standardavvikelsen ökar med 10`,
+                `Medelvärdet är oförändrat, men standardavvikelsen ökar med 10`,
+                `Båda är oförändrade`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: standardavvikelsen mäter AVSTÅNDEN till medelvärdet — inte var värdena ligger.
+
+När alla värden flyttas 10 steg åt samma håll flyttas medelvärdet med — men varje värdes avvikelse från medelvärdet är exakt densamma som förut. Spridningen (och därmed standardavvikelsen) ändras inte.
+
+Exempel: 1, 2, 3 (medel 2) → 11, 12, 13 (medel 12). Avvikelserna är −1, 0, 1 i båda fallen.
+
+**Svar:** Medelvärdet ökar med 10, standardavvikelsen är oförändrad.`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-6.5  Normalfördelning
+    // 34,1/13,6/2,3 %-intervallen; sannolikhetskalkylatorn.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-6.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur stor andel av ett normalfördelat material ligger inom **en standardavvikelse** från medelvärdet (mellan $\\mu - \\sigma$ och $\\mu + \\sigma$)? Svara i procent med en decimal.`,
+            answer: { value: 68.2, unit: '%', tol: 0.1 },
+            solution: `Normalfördelningskurvan ger 34,1 % på vardera sidan om medelvärdet:
+
+$$ 34{,}1\\ \\% + 34{,}1\\ \\% = 68{,}2\\ \\% $$
+
+**Svar:** 68,2 %`,
+        },
+        {
+            level: 1,
+            question: `Mäns längd är normalfördelad med $\\mu = 181$ cm och $\\sigma = 8$ cm. Hur stor andel är längre än 189 cm? Svara i procent med en decimal.`,
+            answer: { value: 15.9, unit: '%', tol: 0.1 },
+            solution: `189 cm är $\\mu + \\sigma$. Ovanför den gränsen ligger
+
+$$ 13{,}6\\ \\% + 2{,}3\\ \\% = 15{,}9\\ \\% $$
+
+**Svar:** 15,9 %`,
+        },
+        {
+            level: 1,
+            question: `Vad står $\\mu$ och $\\sigma$ för i en normalfördelning?`,
+            choices: [
+                `$\\mu$ = medelvärde och $\\sigma$ = standardavvikelse`,
+                `$\\mu$ = median och $\\sigma$ = summa`,
+                `$\\mu$ = minsta värdet och $\\sigma$ = största värdet`,
+                `$\\mu$ = antal värden och $\\sigma$ = spridning i procent`,
+            ],
+            correct: 0,
+            solution: `Normalfördelningen beskrivs helt av medelvärdet $\\mu$ (kurvans mitt) och standardavvikelsen $\\sigma$ (kurvans bredd).
+
+**Svar:** Medelvärde respektive standardavvikelse.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Mäns längd är normalfördelad med $\\mu = 181$ cm och $\\sigma = 8$ cm. Hur stor andel är mellan 165 cm och 197 cm? Svara i procent med en decimal.`,
+            answer: { value: 95.4, unit: '%', tol: 0.1 },
+            solution: `165 cm är $\\mu - 2\\sigma$ och 197 cm är $\\mu + 2\\sigma$. Inom två standardavvikelser ligger
+
+$$ 13{,}6 + 34{,}1 + 34{,}1 + 13{,}6 = 95{,}4\\ \\% $$
+
+**Svar:** 95,4 %`,
+        },
+        {
+            level: 2,
+            question: `I Geogebras sannolikhetskalkylator ska du besvara "hur många procent är mindre än 170 cm?". Vilken intervalltyp väljer du?`,
+            choices: [
+                `Öppet åt vänster`,
+                `Öppet åt höger`,
+                `Intervall`,
+                `Intervallkomplement`,
+            ],
+            correct: 0,
+            solution: `"Mindre än ett värde" är ett halvöppet intervall åt vänster — knappen "öppet åt vänster" ger $P(X \\leq 170)$.
+
+("Öppet åt höger" ger andelen STÖRRE än ett värde; "Intervall" kräver två gränser.)
+
+**Svar:** Öppet åt vänster.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `IQ är normalfördelat med $\\mu = 100$ och $\\sigma = 15$. Hur stor andel av befolkningen har IQ över 130? Svara i procent med en decimal.`,
+            answer: { value: 2.3, unit: '%', tol: 0.1 },
+            solution: `Nyckelinsikten: uttryck gränsen i standardavvikelser från medelvärdet.
+
+$$ 130 = 100 + 2 \\cdot 15 = \\mu + 2\\sigma $$
+
+Över två standardavvikelser ligger 2,3 % av ett normalfördelat material.
+
+**Svar:** 2,3 %`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-6.6  Linjär regression
+    // Regressionslinje, korrelationskoefficient r, prognoser.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-6.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad betyder det att korrelationskoefficienten $r = -1$?`,
+            choices: [
+                `Punkterna ligger perfekt på en linje med negativ lutning`,
+                `Det finns ingen korrelation alls`,
+                `Punkterna ligger perfekt på en linje med positiv lutning`,
+                `Regressionen har misslyckats`,
+            ],
+            correct: 0,
+            solution: `$r$ ligger alltid mellan −1 och 1: $r = 1$ är perfekt positiv korrelation, $r = -1$ perfekt negativ och $r = 0$ ingen korrelation.
+
+**Svar:** Perfekt negativ korrelation.`,
+        },
+        {
+            level: 1,
+            question: `Vad är en **regressionslinje**?`,
+            choices: [
+                `Linjen som värdena i ett spridningsdiagram ligger samlade kring`,
+                `Linjen mellan det största och minsta värdet`,
+                `En lodrät linje genom medelvärdet`,
+                `Diagrammets x-axel`,
+            ],
+            correct: 0,
+            solution: `Regressionslinjen är den räta linje som bäst ansluter till punkterna i spridningsdiagrammet. Att ta fram dess ekvation kallas linjär regression.
+
+**Svar:** Linjen som punkterna ligger samlade kring.`,
+        },
+        {
+            level: 1,
+            question: `Regressionsmodellen för glassförsäljningen är $y = 270x + 2\\,500$, där $x$ är medeltemperaturen i °C. Uppskatta försäljningen en vecka med medeltemperaturen 25 °C. Svara i kronor.`,
+            answer: { value: 9250, unit: 'kr' },
+            solution: `Insättning av $x = 25$:
+
+$$ y = 270 \\cdot 25 + 2\\,500 = 6\\,750 + 2\\,500 = 9\\,250 $$
+
+**Svar:** 9 250 kr`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En regressionsanalys ger $r = 0{,}97$. Hur beskrivs korrelationen?`,
+            choices: [
+                `Stark positiv korrelation`,
+                `Svag positiv korrelation`,
+                `Stark negativ korrelation`,
+                `Ingen korrelation`,
+            ],
+            correct: 0,
+            solution: `Tecknet anger riktningen (positivt = stigande) och närheten till ±1 anger styrkan. 0,97 ligger mycket nära 1 — stark positiv korrelation.
+
+**Svar:** Stark positiv korrelation.`,
+        },
+        {
+            level: 2,
+            question: `Modellen $y = 270x + 2\\,500$ beskriver glassförsäljningen. Vilken medeltemperatur motsvarar försäljningen 9 100 kr? Svara i °C med en decimal.`,
+            answer: { value: 24.4, unit: '°C', tol: 0.2 },
+            solution: `Sätt in $y = 9\\,100$ och lös ut $x$:
+
+$$ 9\\,100 = 270x + 2\\,500 $$
+
+$$ 270x = 6\\,600 $$
+
+$$ x = \\frac{6\\,600}{270} = 24{,}4\\ldots $$
+
+**Svar:** cirka 24,4 °C`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Glassmodellen $y = 270x + 2\\,500$ ger en **negativ** försäljning för temperaturer under cirka −9 °C. Vad illustrerar detta?`,
+            choices: [
+                `Modellen gäller bara inom det intervall där data samlades in — extrapolering långt utanför kan ge orimliga resultat`,
+                `Regressionslinjen är felräknad`,
+                `Korrelationskoefficienten måste vara negativ`,
+                `Glassförsäljning kan inte modelleras matematiskt`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: en regressionsmodell är byggd på data i ett visst intervall (här cirka 18–28 °C). Inom intervallet ger den bra uppskattningar — men långt utanför (extrapolering) kan den ge orimliga svar, som negativ försäljning.
+
+Modellen är alltså inte "fel", men dess giltighetsområde är begränsat, och prognoser utanför datat ska tolkas med försiktighet.
+
+**Svar:** Modellen gäller bara inom rimligt intervall — extrapolering är osäker.`,
+        },
+    ],
+
+    // ─────────────────────────────────────────────────────────────────
+    // ma2c-6.7  Olika regressionsmodeller
+    // Linjär/exponentiell/potens/polynom; r² avgör bäst anpassning.
+    // ─────────────────────────────────────────────────────────────────
+    'ma2c-6.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket är kännetecknet för en **exponentiell** modell $y = Ca^x$ (med $a > 1$)?`,
+            choices: [
+                `Liten ökning i början och stor ökning i slutet`,
+                `Lika stor ökning överallt`,
+                `Kurvan vänder och går genom origo`,
+                `Kurvan har en maximipunkt`,
+            ],
+            correct: 0,
+            solution: `Exponentiell tillväxt accelererar: långsam start, allt brantare mot slutet (eller tvärtom vid minskning: stor minskning i början, liten i slutet).
+
+(Lika stor ökning överallt = linjär; genom origo med vändning = potens; maximipunkt = polynom av grad 2.)
+
+**Svar:** Liten ökning i början och stor i slutet.`,
+        },
+        {
+            level: 1,
+            question: `Vad kännetecknar grafen till en **potensfunktion** $y = Cx^a$?`,
+            choices: [
+                `En kurva som vänder och går genom origo`,
+                `En rät linje genom origo`,
+                `En kurva som aldrig rör origo`,
+                `En vågrät linje`,
+            ],
+            correct: 0,
+            solution: `Potensfunktionen $y = Cx^a$ ger $y = 0$ när $x = 0$ — kurvan går genom origo, till skillnad från polynomet $y = ax^2 + bx + c$ som vänder var som helst.
+
+**Svar:** Kurva som vänder och går genom origo.`,
+        },
+        {
+            level: 1,
+            question: `Mellan vilka värden ligger $r^2$?`,
+            choices: [
+                `Mellan 0 och 1`,
+                `Mellan −1 och 1`,
+                `Mellan −1 och 0`,
+                `Mellan 0 och 100`,
+            ],
+            correct: 0,
+            solution: `Korrelationskoefficienten $r$ ligger mellan −1 och 1, men dess kvadrat $r^2$ ligger mellan 0 (ingen korrelation) och 1 (perfekt korrelation) — kvadreringen tar bort tecknet.
+
+**Svar:** Mellan 0 och 1.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Två regressionsmodeller för samma data ger $r^2 = 0{,}954$ (linjär) och $r^2 = 0{,}9933$ (exponentiell). Vilken modell är bäst anpassad?`,
+            choices: [
+                `Den exponentiella — dess $r^2$-värde ligger närmast 1`,
+                `Den linjära — dess $r^2$-värde är minst`,
+                `De är lika bra eftersom båda ligger nära 1`,
+                `Det kan inte avgöras med $r^2$`,
+            ],
+            correct: 0,
+            solution: `Ju närmare 1 som $r^2$ ligger, desto bättre är kurvanpassningen. $0{,}9933 > 0{,}954$, så den exponentiella modellen beskriver sambandet bäst — precis som för världens befolkning i genomgången.
+
+**Svar:** Den exponentiella.`,
+        },
+        {
+            level: 2,
+            question: `En bakteriekulturs storlek fördubblas varje dygn. Vilken regressionsmodell passar bäst för datat?`,
+            choices: [
+                `Exponentiell — $y = Ca^x$ med $a = 2$`,
+                `Linjär — $y = kx + m$`,
+                `Potens — $y = Cx^2$`,
+                `Polynom av grad 2`,
+            ],
+            correct: 0,
+            solution: `"Fördubblas varje dygn" är multiplikativ förändring med konstant faktor — det är exakt vad en exponentialfunktion beskriver: $y = C \\cdot 2^x$.
+
+(Linjär modell skulle betyda att samma ANTAL läggs till varje dygn.)
+
+**Svar:** Exponentiell modell.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Varför kan det vara svårt att skilja en potensmodell från en polynommodell utifrån ett spridningsdiagram?`,
+            choices: [
+                `Kurvorna kan vara mycket lika — och ibland sammanfalla helt, som $y = x^2$ som är BÅDE potens- och polynomfunktion`,
+                `Potensfunktioner kan inte ritas i spridningsdiagram`,
+                `Polynomfunktioner saknar $r^2$-värde`,
+                `De är alltid lätta att skilja åt`,
+            ],
+            correct: 0,
+            solution: `Nyckelinsikten: modellfamiljerna överlappar. $y = x^2$ är en potensfunktion ($y = Cx^a$ med $C = 1$, $a = 2$) och samtidigt en polynomfunktion ($y = ax^2 + bx + c$ med $b = c = 0$).
+
+Vid val av modell hjälper kännetecknen (går kurvan genom origo?) och $r^2$-värdena — men ibland är flera modeller nästan likvärdiga, och då kan sammanhanget få avgöra.
+
+**Svar:** Kurvorna kan vara mycket lika och ibland sammanfalla helt.`,
+        },
+    ],
 };

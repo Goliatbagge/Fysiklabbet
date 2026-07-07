@@ -1,0 +1,223 @@
+{
+ "id": "ma2c-6.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "94a21adb0b78042f86d63e32edd6c61cfb88a6e9",
+ "dur": 247.0,
+ "segments": [
+  {
+   "t": "Lägesmått",
+   "s": 0.1,
+   "e": 2.23
+  },
+  {
+   "t": "Ett sammanfattande värde för ett statistiskt material kallas lägesmått.",
+   "s": 2.17,
+   "e": 7.09
+  },
+  {
+   "t": "De vanligaste lägesmåtten är medelvärde, median och typvärde.",
+   "s": 7.09,
+   "e": 12.2
+  },
+  {
+   "t": "Medelvärde: Det vanligaste lägesmåttet.",
+   "s": 12.2,
+   "e": 16.04
+  },
+  {
+   "t": "Beräknas som summan dividerat med antalet.",
+   "s": 16.04,
+   "e": 20.01
+  },
+  {
+   "t": "Lämpligt att använda i de flesta fall.",
+   "s": 20.01,
+   "e": 23.39
+  },
+  {
+   "t": "Median: Värdet i mitten när de står i storleksordning.",
+   "s": 23.39,
+   "e": 27.94
+  },
+  {
+   "t": "Om två värden är i mitten är medianen medelvärdet av dessa.",
+   "s": 27.94,
+   "e": 32.84
+  },
+  {
+   "t": "Lämpligt vid sned fördelning, dvs. när enstaka värden sticker ut.",
+   "s": 32.84,
+   "e": 38.17
+  },
+  {
+   "t": "Typvärde: Det värde som förekommer flest gånger.",
+   "s": 38.17,
+   "e": 42.2
+  },
+  {
+   "t": "Kan användas även när datamängden inte är tal, t.ex. färger eller bilmärken.",
+   "s": 42.2,
+   "e": 48.15
+  },
+  {
+   "t": "Antalet av ett visst värde kallas frekvens.",
+   "s": 48.15,
+   "e": 52.24
+  },
+  {
+   "t": "Om t.ex. antalet 17-åringar i ett klassrum är 12 är 17-åringarnas frekvens 12.",
+   "s": 52.24,
+   "e": 58.62
+  },
+  {
+   "t": "Exempel 1 — Tre lägesmått",
+   "s": 58.62,
+   "e": 62.06
+  },
+  {
+   "t": "Åldern på personerna i ett klassrum är 16, 17, 61, 16, 16, 18 och 17 år.",
+   "s": 62.06,
+   "e": 70.76
+  },
+  {
+   "t": "Bestäm. a) medelvärdet b) medianen c) typvärdet",
+   "s": 70.76,
+   "e": 77.49
+  },
+  {
+   "t": "a)",
+   "s": 77.49,
+   "e": 91.76
+  },
+  {
+   "t": "medelvärdet är lika med summan delat med antalet som är lika med 16 plus 17 plus 61 plus 16 plus 16 plus 18 plus 17 delat med 7 som är lika med 161 delat med 7 som är lika med 23",
+   "s": 77.49,
+   "e": 91.76
+  },
+  {
+   "t": "Svar: 23 år",
+   "s": 91.76,
+   "e": 94.65
+  },
+  {
+   "t": "b) Vi sorterar åldrarna i storleksordning, t.ex. minst först, och läser av talet i mitten:",
+   "s": 94.65,
+   "e": 107.84
+  },
+  {
+   "t": "16, 16, 16, 17, 17, 18, 61",
+   "s": 94.65,
+   "e": 107.84
+  },
+  {
+   "t": "Svar: 17 år",
+   "s": 107.84,
+   "e": 110.59
+  },
+  {
+   "t": "c) Det är flest 16-åringar (3 stycken).",
+   "s": 110.59,
+   "e": 115.06
+  },
+  {
+   "t": "16 är alltså den vanligast förekommande åldern.",
+   "s": 115.06,
+   "e": 119.12
+  },
+  {
+   "t": "Svar: 16 år",
+   "s": 119.12,
+   "e": 121.94
+  },
+  {
+   "t": "Exempel 2 — Vilket lägesmått är lämpligast?",
+   "s": 121.94,
+   "e": 126.01
+  },
+  {
+   "t": "Vilket lägesmått är lämpligast att använda i exemplet ovan: medelvärde eller median?",
+   "s": 126.01,
+   "e": 132.41
+  },
+  {
+   "t": "Det beror på sammanhanget, men eftersom vi har ett utstickande värde (61-åringen) som drar upp medelvärdet till 23 år, så blir inte medelvärdet särskilt representativt för personerna i rummet (det finns ju inte en enda 20-åring där).",
+   "s": 132.41,
+   "e": 146.75
+  },
+  {
+   "t": "Alltså kan medianen vara att föredra i detta fall.",
+   "s": 146.75,
+   "e": 150.71
+  },
+  {
+   "t": "Svar: Medianen",
+   "s": 150.71,
+   "e": 153.34
+  },
+  {
+   "t": "Klasser och histogram",
+   "s": 153.34,
+   "e": 155.86
+  },
+  {
+   "t": "I viss statistik har vi inte exakta värden utan indelning i intervall, i så kallade klasser.",
+   "s": 155.86,
+   "e": 162.24
+  },
+  {
+   "t": "Sådana klasser kan redovisas antingen i tabellform eller i diagramform som ett histogram med sammanhängande staplar.",
+   "s": 162.24,
+   "e": 169.59
+  },
+  {
+   "t": "I dessa fall räknar man med att alla värden i en klass har värdet i mitten av intervallet, vilket kallas klassmitt.",
+   "s": 169.59,
+   "e": 176.71
+  },
+  {
+   "t": "Klassen 300 är mindre än eller lika med x är mindre än 400 har t.ex. klassmitten 350.",
+   "s": 176.71,
+   "e": 184.72
+  },
+  {
+   "t": "Exempel 3 — Medelvärde ur klassindelat material",
+   "s": 184.72,
+   "e": 189.05
+  },
+  {
+   "t": "Åldern hos personerna i ett rum åskådliggörs i en tabell med intervall och i ett histogram.",
+   "s": 189.05,
+   "e": 194.85
+  },
+  {
+   "t": "Beräkna medelåldern.",
+   "s": 194.85,
+   "e": 197.41
+  },
+  {
+   "t": "Intervallet 20 är mindre än eller lika med x är mindre än 30 har klassmitten 25 (vi räknar som att alla i intervallet har åldern 25 år), intervallet 30 är mindre än eller lika med x är mindre än 40 har klassmitten 35 (vi räknar som att alla i intervallet har åldern 35 år) och så vidare.",
+   "s": 197.41,
+   "e": 215.55
+  },
+  {
+   "t": "Detta ger oss",
+   "s": 215.55,
+   "e": 217.74
+  },
+  {
+   "t": "medelvärdet är lika med summan delat med antalet",
+   "s": 217.74,
+   "e": 221.95
+  },
+  {
+   "t": "är lika med 2 gånger 25 plus 4 gånger 35 plus 4 gånger 45 plus 5 gånger 55 plus 3 gånger 65 plus 1 gånger 75 plus 0 gånger 85 plus 1 gånger 95 delat med 2 plus 4 plus 4 plus 5 plus 3 plus 1 plus 0 plus 1 som är lika med 1 010 delat med 20 som är lika med 50,5 år",
+   "s": 221.95,
+   "e": 243.5
+  },
+  {
+   "t": "Svar: 50,5 år",
+   "s": 243.5,
+   "e": 247.0
+  }
+ ]
+}

@@ -1,0 +1,218 @@
+{
+ "id": "ma2c-4.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f05a231b2d6835469199d180c97e53c5164e3863",
+ "dur": 252.53,
+ "segments": [
+  {
+   "t": "Likformiga trianglar",
+   "s": 0.1,
+   "e": 2.59
+  },
+  {
+   "t": "Trianglar med samma form kallas likformiga trianglar och är ett specialfall av likformiga månghörningar.",
+   "s": 2.54,
+   "e": 8.94
+  },
+  {
+   "t": "Precis som för likformiga månghörningar gäller att likformiga trianglar kan vara olika stora, vridna olika mycket och spegelvända.",
+   "s": 8.94,
+   "e": 17.25
+  },
+  {
+   "t": "Precis som för likformiga månghörningar gäller även att i likformiga trianglar är motsvarande vinklar lika stora och sidförhållandet mellan motsvarande sidor är lika.",
+   "s": 17.25,
+   "e": 27.38
+  },
+  {
+   "t": "Skillnaden är att för att bestämma om två trianglar är likformiga räcker det att undersöka ETT av villkoren för vinklar och sidförhållanden (för månghörningar med mer än tre hörn behövde vi undersöka både vinklar och sidförhållanden).",
+   "s": 27.38,
+   "e": 40.54
+  },
+  {
+   "t": "Likformiga trianglar",
+   "s": 40.54,
+   "e": 43.02
+  },
+  {
+   "t": "Två trianglar är likformiga om",
+   "s": 43.02,
+   "e": 46.15
+  },
+  {
+   "t": "motsvarande vinklar är lika stora ELLER",
+   "s": 46.15,
+   "e": 49.74
+  },
+  {
+   "t": "förhållandet mellan motsvarande sidor är lika",
+   "s": 49.74,
+   "e": 53.66
+  },
+  {
+   "t": "Tecknet ~ betyder \"är likformig med\". \"Triangeln ABC är likformig med triangeln DEF\" kan alltså skrivas triangeln A B C är likformig med triangeln D E F .",
+   "s": 53.66,
+   "e": 65.85
+  },
+  {
+   "t": "Det räcker att undersöka om två vinklar är lika för att säga att två trianglar är likformiga (eftersom den tredje vinkeln då måste vara samma, på grund av vinkelsumman i trianglar).",
+   "s": 65.85,
+   "e": 76.65
+  },
+  {
+   "t": "Exempel 1 — Jämför vinklarna",
+   "s": 76.65,
+   "e": 79.95
+  },
+  {
+   "t": "Är trianglarna likformiga?",
+   "s": 79.95,
+   "e": 82.53
+  },
+  {
+   "t": "Vi undersöker motsvarande vinklar.",
+   "s": 82.53,
+   "e": 85.92
+  },
+  {
+   "t": "I triangeln A B C : A är lika med 128 grader och C är lika med 12 grader är givna, så",
+   "s": 85.92,
+   "e": 93.7
+  },
+  {
+   "t": "B är lika med 180 grader minus 128 grader minus 12 grader som är lika med 40 grader (vinkelsumma i triangel)",
+   "s": 93.7,
+   "e": 103.11
+  },
+  {
+   "t": "I triangeln D E F : E är lika med 40 grader och F är lika med 12 grader är givna, så",
+   "s": 103.11,
+   "e": 110.72
+  },
+  {
+   "t": "D är lika med 180 grader minus 12 grader minus 40 grader som är lika med 128 grader (vinkelsumma i triangel)",
+   "s": 110.72,
+   "e": 120.55
+  },
+  {
+   "t": "Motsvarande vinklar ( A är lika med D som är lika med 128 grader , B är lika med E som är lika med 40 grader och C är lika med F som är lika med 12 grader ) är lika stora, så trianglarna är likformiga: triangeln A B C är likformig med triangeln D E F .",
+   "s": 120.55,
+   "e": 138.22
+  },
+  {
+   "t": "Svar: Ja",
+   "s": 138.22,
+   "e": 140.45
+  },
+  {
+   "t": "Exempel 2 — Jämför sidförhållandena",
+   "s": 140.45,
+   "e": 144.0
+  },
+  {
+   "t": "Är trianglarna likformiga?",
+   "s": 144.0,
+   "e": 146.57
+  },
+  {
+   "t": "Vi undersöker sidförhållandena.",
+   "s": 146.57,
+   "e": 149.71
+  },
+  {
+   "t": "A B delat med D E är lika med 2,7 delat med 4,5 som är lika med 0,6",
+   "s": 149.71,
+   "e": 157.22
+  },
+  {
+   "t": "B C delat med D F är lika med 3,6 delat med 6,0 som är lika med 0,6 (observera att högra triangeln är spegelvänd)",
+   "s": 157.22,
+   "e": 167.78
+  },
+  {
+   "t": "A C delat med E F är lika med 4,5 delat med 7,5 som är lika med 0,6",
+   "s": 167.78,
+   "e": 174.84
+  },
+  {
+   "t": "Sidförhållandena är lika (0,6), alltså är trianglarna likformiga.",
+   "s": 174.84,
+   "e": 180.8
+  },
+  {
+   "t": "Svar: Ja",
+   "s": 180.8,
+   "e": 183.01
+  },
+  {
+   "t": "Exempel 3 — Flaggstången",
+   "s": 183.01,
+   "e": 186.04
+  },
+  {
+   "t": "Alva ska bestämma höjden hos en flaggstång en solig sommardag.",
+   "s": 186.04,
+   "e": 190.59
+  },
+  {
+   "t": "Hon är 1,60 meter lång och får en skugga som är 1,20 meter.",
+   "s": 190.59,
+   "e": 195.81
+  },
+  {
+   "t": "Hon mäter sedan längden på flaggstångens skugga till 6,75 meter.",
+   "s": 195.81,
+   "e": 201.35
+  },
+  {
+   "t": "Hur hög är flaggstången?",
+   "s": 201.35,
+   "e": 204.21
+  },
+  {
+   "t": "Eftersom flaggstången och Alva träffas under samma vinkel av solens strålar måste vinkeln som bildas mot höjden vara lika i båda trianglar.",
+   "s": 204.21,
+   "e": 213.09
+  },
+  {
+   "t": "Båda trianglar har dessutom en rät vinkel.",
+   "s": 213.09,
+   "e": 216.97
+  },
+  {
+   "t": "Vi ritar en skiss över flaggstången och Alva.",
+   "s": 216.97,
+   "e": 220.76
+  },
+  {
+   "t": "Trianglarna har alltså två vinklar som är lika stora och därför måste de vara likformiga.",
+   "s": 220.76,
+   "e": 226.59
+  },
+  {
+   "t": "Eftersom sidförhållandena då är lika gäller",
+   "s": 226.59,
+   "e": 230.34
+  },
+  {
+   "t": "x delat med 1,60 är lika med 6,75 delat med 1,20",
+   "s": 230.34,
+   "e": 236.36
+  },
+  {
+   "t": "Vi multiplicerar båda led med 1,60 och får",
+   "s": 236.36,
+   "e": 241.03
+  },
+  {
+   "t": "x är lika med 6,75 delat med 1,20 gånger 1,60 som är lika med 9,00",
+   "s": 241.03,
+   "e": 248.8
+  },
+  {
+   "t": "Svar: 9,00 meter",
+   "s": 248.8,
+   "e": 252.53
+  }
+ ]
+}

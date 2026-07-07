@@ -1,0 +1,258 @@
+{
+ "id": "ma2c-4.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "c19b238442a3e71bd26ee4166195e42c2b6c1efe",
+ "dur": 238.53,
+ "segments": [
+  {
+   "t": "Satser och bevis",
+   "s": 0.1,
+   "e": 2.6
+  },
+  {
+   "t": "Ett matematiskt bevis är ett logiskt resonemang som inte lämnar några luckor.",
+   "s": 2.55,
+   "e": 7.92
+  },
+  {
+   "t": "Några viktiga begrepp:",
+   "s": 7.92,
+   "e": 16.01
+  },
+  {
+   "t": "En grundsats som man kommit överens om att gälla som grund, utan att den kräver ett bevis, kallas axiom.",
+   "s": 7.92,
+   "e": 16.01
+  },
+  {
+   "t": "Exempel: \"Varje heltal n följs av heltalet parentesen n plus 1 slut parentes \" eller \"Från en given punkt är det möjligt att dra en rät linje till en annan given punkt\".",
+   "s": 16.01,
+   "e": 26.81
+  },
+  {
+   "t": "En överenskommelse om vad som menas med ett begrepp kallas definition.",
+   "s": 26.81,
+   "e": 31.85
+  },
+  {
+   "t": "Exempel: \"En månghörning med tre hörn kallas triangel.\"",
+   "s": 31.85,
+   "e": 36.61
+  },
+  {
+   "t": "Ett påstående som är bevisat kallar man för sats.",
+   "s": 36.61,
+   "e": 40.67
+  },
+  {
+   "t": "I ett bevis måste varje steg motiveras utifrån axiom, definitioner och/eller tidigare kända satser.",
+   "s": 40.67,
+   "e": 48.4
+  },
+  {
+   "t": "Ett utfört bevis avslutas v.s.b. (vilket skulle bevisas) eller v.s.v. (vilket skulle visas).",
+   "s": 48.4,
+   "e": 56.92
+  },
+  {
+   "t": "Udda och jämna tal vid bevis",
+   "s": 56.92,
+   "e": 60.08
+  },
+  {
+   "t": "Ett jämnt tal kan alltid skrivas: 2 k",
+   "s": 60.08,
+   "e": 67.25
+  },
+  {
+   "t": "Ett udda tal kan alltid skrivas: 2 k plus 1",
+   "s": 60.08,
+   "e": 67.25
+  },
+  {
+   "t": "där k är ett heltal.",
+   "s": 67.25,
+   "e": 70.06
+  },
+  {
+   "t": "På varandra följande tal vid bevis",
+   "s": 70.06,
+   "e": 73.35
+  },
+  {
+   "t": "Tal \"som följer på varandra\" är t.ex. 1, 2 och 3 eller 85, 86 och 87.",
+   "s": 73.35,
+   "e": 80.19
+  },
+  {
+   "t": "Tal som följer på varandra kan skrivas",
+   "s": 80.19,
+   "e": 83.61
+  },
+  {
+   "t": "n, n plus 1, n plus 2,",
+   "s": 83.61,
+   "e": 87.36
+  },
+  {
+   "t": "Exempel 1 — Yttervinkelsatsen",
+   "s": 87.36,
+   "e": 90.66
+  },
+  {
+   "t": "Betrakta nedanstående figur.",
+   "s": 90.66,
+   "e": 93.75
+  },
+  {
+   "t": "Yttervinkelsatsen lyder: \"Yttervinkeln x är lika med summan av de två motstående vinklarna a och c , dvs. x är lika med a plus c .\" Bevisa att yttervinkelsatsen gäller.",
+   "s": 93.75,
+   "e": 106.83
+  },
+  {
+   "t": "Vi skriver upp de geometriska samband som vi ser och går sedan vidare.",
+   "s": 106.83,
+   "e": 111.85
+  },
+  {
+   "t": "a plus b plus c är lika med 180 grader (vinkelsumma i triangel)",
+   "s": 111.85,
+   "e": 118.25
+  },
+  {
+   "t": "b plus x är lika med 180 grader (sidovinklar)",
+   "s": 118.25,
+   "e": 123.39
+  },
+  {
+   "t": "Eftersom båda VL (vänstra led) är lika med 180 grader gäller",
+   "s": 123.39,
+   "e": 129.18
+  },
+  {
+   "t": "a plus b plus c är lika med b plus x",
+   "s": 129.18,
+   "e": 136.93
+  },
+  {
+   "t": "Subtraherar b från båda led:",
+   "s": 129.18,
+   "e": 136.93
+  },
+  {
+   "t": "a plus c är lika med x",
+   "s": 129.18,
+   "e": 136.93
+  },
+  {
+   "t": "det vill säga",
+   "s": 136.93,
+   "e": 139.03
+  },
+  {
+   "t": "x är lika med a plus c",
+   "s": 139.03,
+   "e": 145.2
+  },
+  {
+   "t": "v.s.b.",
+   "s": 139.03,
+   "e": 145.2
+  },
+  {
+   "t": "Exempel 2 — Kvadraten av ett jämnt tal",
+   "s": 139.03,
+   "e": 145.2
+  },
+  {
+   "t": "Visa att kvadraten av ett jämnt tal alltid är delbar med 4.",
+   "s": 145.2,
+   "e": 150.19
+  },
+  {
+   "t": "Vi kallar talet x .",
+   "s": 150.19,
+   "e": 152.84
+  },
+  {
+   "t": "Eftersom talet är jämnt kan det skrivas x är lika med 2 k där k är ett heltal.",
+   "s": 152.84,
+   "e": 158.72
+  },
+  {
+   "t": "Vi tecknar och undersöker kvadraten av detta tal:",
+   "s": 158.72,
+   "e": 168.96
+  },
+  {
+   "t": "x i kvadrat är lika med parentesen 2 k slut parentes i kvadrat som är lika med 4 k i kvadrat",
+   "s": 158.72,
+   "e": 168.96
+  },
+  {
+   "t": "4 k i kvadrat är alltid delbart med 4 ty",
+   "s": 168.96,
+   "e": 173.36
+  },
+  {
+   "t": "4 k i kvadrat delat med 4 är lika med k i kvadrat",
+   "s": 173.36,
+   "e": 178.28
+  },
+  {
+   "t": "där k i kvadrat alltid är ett heltal. (Ordbok: \"ty\" är lika med \"därför att\".)",
+   "s": 178.28,
+   "e": 185.79
+  },
+  {
+   "t": "v.s.v.",
+   "s": 185.79,
+   "e": 190.89
+  },
+  {
+   "t": "Exempel 3 — Tre på varandra följande heltal",
+   "s": 185.79,
+   "e": 190.89
+  },
+  {
+   "t": "Visa att om a , b och c är tre på varandra följande heltal så gäller att deras summa är delbar med 3.",
+   "s": 190.89,
+   "e": 198.22
+  },
+  {
+   "t": "Eftersom det är på varandra följande heltal kan vi kalla talen a , b och c för n , parentesen n plus 1 slut parentes och parentesen n plus 2 slut parentes .",
+   "s": 198.22,
+   "e": 208.9
+  },
+  {
+   "t": "Detta ger",
+   "s": 208.9,
+   "e": 210.91
+  },
+  {
+   "t": "a plus b plus c är lika med n plus parentesen n plus 1 slut parentes plus parentesen n plus 2 slut parentes som är lika med 3 n plus 3 som är lika med 3 parentesen n plus 1 slut parentes",
+   "s": 210.91,
+   "e": 224.25
+  },
+  {
+   "t": "Denna summa är alltid delbar med 3 eftersom",
+   "s": 224.25,
+   "e": 228.21
+  },
+  {
+   "t": "3 parentesen n plus 1 slut parentes delat med 3 är lika med n plus 1",
+   "s": 228.21,
+   "e": 234.05
+  },
+  {
+   "t": "är ett heltal.",
+   "s": 234.05,
+   "e": 236.35
+  },
+  {
+   "t": "v.s.v.",
+   "s": 236.35,
+   "e": 238.53
+  }
+ ]
+}

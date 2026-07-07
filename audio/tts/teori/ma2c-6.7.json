@@ -1,0 +1,143 @@
+{
+ "id": "ma2c-6.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "80e046ab2bb7de10414f1ba291bcc6761d703012",
+ "dur": 196.56,
+ "segments": [
+  {
+   "t": "Olika regressionsmodeller",
+   "s": 0.1,
+   "e": 3.04
+  },
+  {
+   "t": "I förra genomgången såg vi hur vi kunde ta fram ett linjärt samband genom att anpassa en rät linje efter punkter.",
+   "s": 2.99,
+   "e": 9.99
+  },
+  {
+   "t": "Det finns andra samband som inte är linjära och vi kan ta fram många av dessa på liknande sätt.",
+   "s": 9.99,
+   "e": 15.96
+  },
+  {
+   "t": "För att veta vilken modell som passar bäst utifrån givna punkter kan det vara bra att känna till några kännetecken för utseendet hos olika funktioner.",
+   "s": 15.96,
+   "e": 24.6
+  },
+  {
+   "t": "Ibland är det svårt att avgöra vilken modell som passar bäst. Det kan t.ex. vara svårt att se om punkterna anpassas bäst av en exponential- eller en potensfunktion.",
+   "s": 24.6,
+   "e": 36.14
+  },
+  {
+   "t": "Potens- och polynomfunktioner kan vara ännu svårare att skilja åt eftersom de dessutom ibland kan sammanfalla ( y är lika med x i kvadrat är både en potensfunktion och en polynomfunktion).",
+   "s": 36.14,
+   "e": 47.41
+  },
+  {
+   "t": "För att avgöra vilken kurvanpassning som är bäst kan vi utnyttja korrelationskoefficientens kvadrat, r i kvadrat . r i kvadrat -värdet ligger mellan 0 (ingen korrelation alls) och 1 (perfekt korrelation).",
+   "s": 47.41,
+   "e": 62.2
+  },
+  {
+   "t": "Så ju närmare 1 som r i kvadrat -värdet ligger desto bättre anpassad är kurvan.",
+   "s": 62.2,
+   "e": 67.94
+  },
+  {
+   "t": "För att ta fram r i kvadrat -värdet matar vi, som vanligt, in värdena i Geogebras kalkylblad, klickar på knappen \"Visa statistik\" och läser av r i kvadrat -värdet i tabellen.",
+   "s": 67.94,
+   "e": 78.99
+  },
+  {
+   "t": "Exempel 1 — Världens befolkning",
+   "s": 78.99,
+   "e": 82.41
+  },
+  {
+   "t": "Världens befolkning vid några olika årtal redovisas i tabellen nedan.",
+   "s": 82.41,
+   "e": 87.83
+  },
+  {
+   "t": "Skapa ett spridningsdiagram och ta fram en regressionsmodell som är. a) linjär b) exponentiell c) Vilken av modellerna beskriver sambandet bäst?",
+   "s": 87.83,
+   "e": 99.15
+  },
+  {
+   "t": "a) Vi matar in värdena i Geogebras kalkylblad (tänk på att decimaltal skrivs med punkt), markerar värdena, klickar på \"blå staplar\" och väljer Tvåvariabels regressionsanalys.",
+   "s": 99.15,
+   "e": 110.94
+  },
+  {
+   "t": "Ett spridningsdiagram erhålls.",
+   "s": 110.94,
+   "e": 114.12
+  },
+  {
+   "t": "Vi väljer regressionsmodell Linjär och läser av ekvationen: y är lika med 0,0612 x minus 116,3385 .",
+   "s": 114.12,
+   "e": 124.4
+  },
+  {
+   "t": "Svar: y är lika med 0,061 x minus 120",
+   "s": 124.4,
+   "e": 130.39
+  },
+  {
+   "t": "b) Vi skiftar regressionsmodell i rullistan till Exponentiell C·aˣ och läser av ekvationen.",
+   "s": 130.39,
+   "e": 137.61
+  },
+  {
+   "t": "Svar: y är lika med 0 gånger 1,0153 upphöjt till x",
+   "s": 137.61,
+   "e": 150.51
+  },
+  {
+   "t": "(Startvärdet C är lika med 0 i modellen är orealistiskt, men Geogebra skriver inte ut alla decimaler för tal nära 0.)",
+   "s": 137.61,
+   "e": 150.51
+  },
+  {
+   "t": "c) För att avgöra vilken av modellerna som beskriver sambandet bäst tittar vi på vilken kurva som ligger bäst anpassad efter punkterna.",
+   "s": 150.51,
+   "e": 158.97
+  },
+  {
+   "t": "I detta fall är det lätt att se att exponentialfunktionen passar punkterna bättre och därmed är bäst.",
+   "s": 158.97,
+   "e": 165.56
+  },
+  {
+   "t": "Om vi vill vara säkra kan vi jämföra modellernas r i kvadrat -värden.",
+   "s": 165.56,
+   "e": 170.61
+  },
+  {
+   "t": "Vi klickar på knappen \"Visa statistik\" och läser av vid R i kvadrat för respektive modell:",
+   "s": 170.61,
+   "e": 180.75
+  },
+  {
+   "t": "Linjär: r i kvadrat är lika med 0,954",
+   "s": 170.61,
+   "e": 180.75
+  },
+  {
+   "t": "Exponentiell: r i kvadrat är lika med 0,9933",
+   "s": 180.75,
+   "e": 186.2
+  },
+  {
+   "t": "Eftersom r i kvadrat -värdet ligger närmast 1 för exponentialfunktionen är denna bäst.",
+   "s": 186.2,
+   "e": 192.75
+  },
+  {
+   "t": "Svar: Exponentiella modellen är bäst.",
+   "s": 192.75,
+   "e": 196.56
+  }
+ ]
+}

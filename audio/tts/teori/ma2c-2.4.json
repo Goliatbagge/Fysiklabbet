@@ -1,0 +1,258 @@
+{
+ "id": "ma2c-2.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "bca08fd6cd06e6df18332fbd2701c8c3eb248842",
+ "dur": 309.65,
+ "segments": [
+  {
+   "t": "pq-formeln",
+   "s": 0.1,
+   "e": 2.25
+  },
+  {
+   "t": "Ekvationer som innehåller x i kvadrat -termer, x -termer och konstanttermer kan vi varken lösa med vår vanliga metod eller med nollproduktmetoden.",
+   "s": 2.2,
+   "e": 11.38
+  },
+  {
+   "t": "Dessa ekvationer löser vi med pq-formeln.",
+   "s": 11.38,
+   "e": 15.29
+  },
+  {
+   "t": "pq-formeln",
+   "s": 15.29,
+   "e": 17.4
+  },
+  {
+   "t": "x i kvadrat plus p x plus q är lika med 0",
+   "s": 17.4,
+   "e": 21.86
+  },
+  {
+   "t": "har lösningarna",
+   "s": 21.86,
+   "e": 24.3
+  },
+  {
+   "t": "x är lika med minus p delat med 2 plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 24.3,
+   "e": 45.27
+  },
+  {
+   "t": "Formeln med ord: först halva koefficienten framför x -termen med ombytt tecken, sedan plus/minus roten ur föregående tal upphöjt till 2 (eventuellt minustecken innan kan bortses) minus konstanttermen med ombytt tecken.",
+   "s": 24.3,
+   "e": 45.27
+  },
+  {
+   "t": "OBS!",
+   "s": 45.27,
+   "e": 46.9
+  },
+  {
+   "t": "En förutsättning för att pq-formeln ska kunna användas är att ekvationen är lika med 0 och att vi inte har någon koefficient framför x i kvadrat -termen.",
+   "s": 46.9,
+   "e": 55.86
+  },
+  {
+   "t": "Härledning — pq-formeln",
+   "s": 55.86,
+   "e": 58.75
+  },
+  {
+   "t": "Vi utgår från ekvationen",
+   "s": 58.75,
+   "e": 61.75
+  },
+  {
+   "t": "x i kvadrat plus p x plus q är lika med 0",
+   "s": 61.75,
+   "e": 66.26
+  },
+  {
+   "t": "Vi subtraherar båda led med q för att få x -termerna ensamma i VL:",
+   "s": 66.26,
+   "e": 74.53
+  },
+  {
+   "t": "x i kvadrat plus p x är lika med minus q",
+   "s": 66.26,
+   "e": 74.53
+  },
+  {
+   "t": "Vi adderar parentesen p delat med 2 slut parentes i kvadrat till båda led, så att VL kan skrivas som en kvadreringsregel:",
+   "s": 74.53,
+   "e": 92.22
+  },
+  {
+   "t": "x i kvadrat plus p x plus parentesen p delat med 2 slut parentes i kvadrat är lika med parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 74.53,
+   "e": 92.22
+  },
+  {
+   "t": "parentesen x plus p delat med 2 slut parentes i kvadrat är lika med parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 92.22,
+   "e": 101.6
+  },
+  {
+   "t": "Vi drar roten ur båda led och löser sedan ut x :",
+   "s": 101.6,
+   "e": 121.89
+  },
+  {
+   "t": "x plus p delat med 2 är lika med plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 101.6,
+   "e": 121.89
+  },
+  {
+   "t": "x är lika med minus p delat med 2 plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 101.6,
+   "e": 121.89
+  },
+  {
+   "t": "v.s.b.",
+   "s": 101.6,
+   "e": 121.89
+  },
+  {
+   "t": "Exempel 1 — Lös ekvationerna",
+   "s": 101.6,
+   "e": 121.89
+  },
+  {
+   "t": "Lös ekvationerna. a) x i kvadrat plus 6 x minus 7 är lika med 0 b) 3 x i kvadrat minus 15 x plus 18 är lika med 0 c) x i kvadrat är lika med 39 minus 10 x",
+   "s": 121.89,
+   "e": 141.45
+  },
+  {
+   "t": "a) Vi identifierar p och q : p är lika med 6 och q är lika med minus 7 .",
+   "s": 124.3,
+   "e": 141.45
+  },
+  {
+   "t": "Insättning av dessa i pq-formeln ger",
+   "s": 141.45,
+   "e": 145.19
+  },
+  {
+   "t": "x är lika med minus 6 delat med 2 plus minus roten ur parentesen 6 delat med 2 slut parentes i kvadrat minus parentesen minus 7 slut parentes",
+   "s": 145.19,
+   "e": 156.19
+  },
+  {
+   "t": "x är lika med minus 3 plus minus roten ur 3 i kvadrat plus 7 som är lika med minus 3 plus minus roten ur 9 plus 7 som är lika med minus 3 plus minus roten ur 16 som är lika med minus 3 plus minus 4",
+   "s": 156.19,
+   "e": 169.75
+  },
+  {
+   "t": "Detta ger lösningarna",
+   "s": 169.75,
+   "e": 172.43
+  },
+  {
+   "t": "x ett är lika med minus 3 minus 4 som är lika med minus 7",
+   "s": 172.43,
+   "e": 177.54
+  },
+  {
+   "t": "x två är lika med minus 3 plus 4 som är lika med 1",
+   "s": 177.54,
+   "e": 182.5
+  },
+  {
+   "t": "Svar: x ett är lika med minus 7 och x två är lika med 1",
+   "s": 182.5,
+   "e": 187.6
+  },
+  {
+   "t": "Kommentar — snabbare lösning \"med ord\": halva koefficienten framför x -termen med ombytt tecken är minus 3 ; under rottecknet skrivs föregående tal ekvation 3 upphöjt till 2, och konstanttermen med ombytt tecken ( minus 7 blir plus 7 ).",
+   "s": 187.6,
+   "e": 202.36
+  },
+  {
+   "t": "Så kan vi direkt skriva x är lika med minus 3 plus minus roten ur 3 i kvadrat plus 7 .",
+   "s": 202.36,
+   "e": 209.49
+  },
+  {
+   "t": "b) För att kunna använda pq-formeln dividerar vi båda led med 3 för att få bort koefficienten framför x i kvadrat -termen:",
+   "s": 209.49,
+   "e": 221.05
+  },
+  {
+   "t": "x i kvadrat minus 5 x plus 6 är lika med 0",
+   "s": 209.49,
+   "e": 221.05
+  },
+  {
+   "t": "pq-formeln ger",
+   "s": 221.05,
+   "e": 223.56
+  },
+  {
+   "t": "x är lika med 5 delat med 2 plus minus roten ur parentesen 5 delat med 2 slut parentes i kvadrat minus 6 som är lika med 5 delat med 2 plus minus roten ur 25 delat med 4 minus 24 delat med 4 som är lika med 5 delat med 2 plus minus roten ur 1 delat med 4 som är lika med 5 delat med 2 plus minus 1 delat med 2",
+   "s": 223.56,
+   "e": 244.82
+  },
+  {
+   "t": "Detta ger lösningarna",
+   "s": 244.82,
+   "e": 247.51
+  },
+  {
+   "t": "x ett är lika med 5 delat med 2 minus 1 delat med 2 som är lika med 4 delat med 2 som är lika med 2",
+   "s": 247.51,
+   "e": 255.09
+  },
+  {
+   "t": "x två är lika med 5 delat med 2 plus 1 delat med 2 som är lika med 6 delat med 2 som är lika med 3",
+   "s": 255.09,
+   "e": 262.56
+  },
+  {
+   "t": "Svar: x ett är lika med 2 och x två är lika med 3",
+   "s": 262.56,
+   "e": 267.21
+  },
+  {
+   "t": "c) För att kunna använda pq-formeln gör vi om ekvationen så att ena ledet blir lika med 0:",
+   "s": 267.21,
+   "e": 277.39
+  },
+  {
+   "t": "x i kvadrat plus 10 x minus 39 är lika med 0",
+   "s": 267.21,
+   "e": 277.39
+  },
+  {
+   "t": "Nu använder vi pq-formeln:",
+   "s": 277.39,
+   "e": 290.14
+  },
+  {
+   "t": "x är lika med minus 5 plus minus roten ur 5 i kvadrat plus 39 som är lika med minus 5 plus minus roten ur 64 som är lika med minus 5 plus minus 8",
+   "s": 277.39,
+   "e": 290.14
+  },
+  {
+   "t": "Detta ger lösningarna",
+   "s": 290.14,
+   "e": 292.85
+  },
+  {
+   "t": "x ett är lika med minus 5 minus 8 som är lika med minus 13",
+   "s": 292.85,
+   "e": 298.11
+  },
+  {
+   "t": "x två är lika med minus 5 plus 8 som är lika med 3",
+   "s": 298.11,
+   "e": 304.57
+  },
+  {
+   "t": "Svar: x ett är lika med minus 13 och x två är lika med 3",
+   "s": 304.52,
+   "e": 309.65
+  }
+ ]
+}

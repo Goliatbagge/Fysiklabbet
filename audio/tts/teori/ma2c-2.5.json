@@ -1,0 +1,108 @@
+{
+ "id": "ma2c-2.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "dfcd1891db58ba96462e289b2fc74e83d6b5fc2b",
+ "dur": 114.04,
+ "segments": [
+  {
+   "t": "abc-formeln",
+   "s": 0.1,
+   "e": 2.5
+  },
+  {
+   "t": "Det finns ytterligare en formel för att lösa fullständiga andragradsekvationer på formen a x i kvadrat plus b x plus c är lika med 0 som kallas abc-formeln.",
+   "s": 2.45,
+   "e": 12.88
+  },
+  {
+   "t": "Till skillnad från pq-formeln behöver inte koefficienten framför x i kvadrat -termen \"divideras bort\" innan formeln används.",
+   "s": 12.88,
+   "e": 21.3
+  },
+  {
+   "t": "abc-formeln",
+   "s": 21.3,
+   "e": 23.64
+  },
+  {
+   "t": "a x i kvadrat plus b x plus c är lika med 0",
+   "s": 23.64,
+   "e": 28.69
+  },
+  {
+   "t": "har lösningarna",
+   "s": 28.69,
+   "e": 31.1
+  },
+  {
+   "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a",
+   "s": 31.1,
+   "e": 41.24
+  },
+  {
+   "t": "Exempel 1 — Lös med abc-formeln",
+   "s": 31.1,
+   "e": 41.24
+  },
+  {
+   "t": "Lös ekvationen 2 x i kvadrat minus 8 x plus 6 är lika med 0 med abc-formeln.",
+   "s": 41.24,
+   "e": 48.27
+  },
+  {
+   "t": "Vi ställer upp abc-formeln:",
+   "s": 48.27,
+   "e": 57.85
+  },
+  {
+   "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a",
+   "s": 48.27,
+   "e": 57.85
+  },
+  {
+   "t": "Vi identifierar a , b och c och ser att a är lika med 2 , b är lika med minus 8 och c är lika med 6 .",
+   "s": 57.85,
+   "e": 65.59
+  },
+  {
+   "t": "Insättning i abc-formeln ger",
+   "s": 65.59,
+   "e": 69.01
+  },
+  {
+   "t": "x är lika med minus minus 8 delat med 2 gånger 2 plus minus roten ur parentesen minus 8 slut parentes i kvadrat minus 4 gånger 2 gånger 6 delat med 2 gånger 2",
+   "s": 69.01,
+   "e": 81.14
+  },
+  {
+   "t": "x är lika med 8 delat med 4 plus minus roten ur 64 minus 48 delat med 4",
+   "s": 81.14,
+   "e": 88.33
+  },
+  {
+   "t": "x är lika med 2 plus minus roten ur 16 delat med 4 som är lika med 2 plus minus 4 delat med 4 som är lika med 2 plus minus 1",
+   "s": 88.33,
+   "e": 98.09
+  },
+  {
+   "t": "Detta ger lösningarna",
+   "s": 98.09,
+   "e": 100.74
+  },
+  {
+   "t": "x ett är lika med 2 minus 1 som är lika med 1",
+   "s": 100.74,
+   "e": 105.28
+  },
+  {
+   "t": "x två är lika med 2 plus 1 som är lika med 3",
+   "s": 105.28,
+   "e": 109.44
+  },
+  {
+   "t": "Svar: x ett är lika med 1 och x två är lika med 3",
+   "s": 109.44,
+   "e": 114.04
+  }
+ ]
+}

@@ -1,0 +1,108 @@
+{
+ "id": "ma2c-4.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "80238793ec51c08e81761bfd3947eff99487e969",
+ "dur": 83.04,
+ "segments": [
+  {
+   "t": "Vinklar i trianglar och månghörningar",
+   "s": 0.1,
+   "e": 3.46
+  },
+  {
+   "t": "En sluten figur som enbart består av sträckor och hörn kallas månghörning.",
+   "s": 3.41,
+   "e": 8.8
+  },
+  {
+   "t": "En månghörning med tre hörn kallas triangel.",
+   "s": 8.8,
+   "e": 12.51
+  },
+  {
+   "t": "En månghörning med fyra hörn kallas fyrhörning (tetragon), en månghörning med fem hörn kallas femhörning (pentagon) och så vidare.",
+   "s": 12.51,
+   "e": 21.5
+  },
+  {
+   "t": "Trianglar beskrivs ofta utifrån sina vinklar och sidor.",
+   "s": 21.5,
+   "e": 26.06
+  },
+  {
+   "t": "Namn på trianglar",
+   "s": 26.06,
+   "e": 28.54
+  },
+  {
+   "t": "Vinkelsummor",
+   "s": 28.54,
+   "e": 30.73
+  },
+  {
+   "t": "Vinkelsumman i en",
+   "s": 30.73,
+   "e": 33.3
+  },
+  {
+   "t": "triangel är 180 grader",
+   "s": 33.3,
+   "e": 36.59
+  },
+  {
+   "t": "fyrhörning är 360 grader",
+   "s": 36.59,
+   "e": 40.14
+  },
+  {
+   "t": "Exempel 1 — Vinkelsumman i en femhörning",
+   "s": 40.14,
+   "e": 44.04
+  },
+  {
+   "t": "Vad är vinkelsumman i en femhörning?",
+   "s": 44.04,
+   "e": 47.5
+  },
+  {
+   "t": "Vi ritar en godtycklig (valfri) femhörning.",
+   "s": 47.5,
+   "e": 51.83
+  },
+  {
+   "t": "Därefter utgår vi från ett hörn och ritar sträckor till samtliga övriga hörn.",
+   "s": 51.83,
+   "e": 57.2
+  },
+  {
+   "t": "Till sist markerar vi samtliga vinklar.",
+   "s": 57.2,
+   "e": 60.65
+  },
+  {
+   "t": "Alla vinklar i femhörningen har markerats.",
+   "s": 60.65,
+   "e": 64.35
+  },
+  {
+   "t": "Vi ser att dessa byggs upp av tre trianglar.",
+   "s": 64.35,
+   "e": 68.0
+  },
+  {
+   "t": "Eftersom vinkelsumman i en triangel är 180 grader måste vinkelsumman i en femhörning vara",
+   "s": 68.0,
+   "e": 74.55
+  },
+  {
+   "t": "3 gånger 180 grader är lika med 540 grader",
+   "s": 74.55,
+   "e": 79.66
+  },
+  {
+   "t": "Svar: 540 grader",
+   "s": 79.66,
+   "e": 83.04
+  }
+ ]
+}

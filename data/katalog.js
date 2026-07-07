@@ -371,6 +371,106 @@ window.KATALOG = {
           },
         },
       },
+      // Matematik nivå 2c byggs ut avsnitt för avsnitt från genomgångarna i
+      // Genomgångar/Matematik nivå 2c/ — se .claude/matematik-2c-plan.md för
+      // plan, kapitelmappning och status. Avsnitt läggs in här FÖRST när
+      // teori + övningar + exit ticket är klara. Inga simuleringar för
+      // matte — href: null, icon: null.
+      'Matematik nivå 2c': {
+        label: 'Matematik nivå 2c',
+        intro: {
+          tagline: 'Fortsättningskursen — algebra, geometri och logaritmer på djupet.',
+          paragraphs: [
+            'Matematik nivå 2c bygger vidare på nivå 1c. Vi lär oss lösa linjära ekvationssystem med grafiska och algebraiska metoder, knäcker andragradsekvationer med nollproduktmetoden och pq-formeln, och undersöker andragradsfunktionernas parabler. Geometrikapitlet tränar det matematiska hantverket — satser, bevis, likformighet och kongruens — innan logaritmerna gör det möjligt att lösa ekvationer med x i exponenten. Kursen avslutas med statistik: spridningsmått, standardavvikelse, normalfördelning och regression.',
+            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+          ],
+          bullets: [
+            'Du lär dig: ekvationssystem, andragradsekvationer och logaritmer',
+            'Du tränar på: algebraiska metoder, geometriska bevis och problemlösning',
+            'Du möter: andragradsfunktioner, normalfördelning och regression',
+          ],
+        },
+        chapters: {
+          'Linjära ekvationssystem': {
+            number: 1,
+            intro: 'Två ekvationer, två obekanta — och kravet att lösningen ska passa båda samtidigt. Vi löser systemen grafiskt som skärningspunkten mellan två linjer, och algebraiskt med substitutionsmetoden och additionsmetoden, innan vi använder dem för problemlösning.',
+            sections: [
+              { num: '1.1', title: 'Grafisk lösning av linjära ekvationssystem', description: 'Skärningspunktens koordinater är lösningen — och antalet lösningar avgörs av linjernas k- och m-värden.', href: null, icon: null, keywords: ['ekvationssystem','linjära ekvationssystem','grafisk lösning','skärningspunkt','krullparentes','antal lösningar','parallella linjer','geogebra'] },
+              { num: '1.2', title: 'Substitutionsmetoden', description: 'Lös ut en variabel och byt ut den i den andra ekvationen — algebraisk lösning utan graf.', href: null, icon: null, keywords: ['ekvationssystem','substitutionsmetoden','substitution','algebraisk lösning','lösa ut variabel','byta ut'] },
+              { num: '1.3', title: 'Additionsmetoden', description: 'Addera ekvationerna ledvis så att en variabel elimineras — multiplicera först vid behov.', href: null, icon: null, keywords: ['ekvationssystem','additionsmetoden','eliminera','ledvis addition','eliminationsmetoden','multiplicera ekvation'] },
+              { num: '1.4', title: 'Problemlösning med ekvationssystem', description: 'Definiera variabler, ställ upp systemet och tolka svaret — från textproblem till lösning.', href: null, icon: null, keywords: ['ekvationssystem','problemlösning','teckna ekvationssystem','definiera variabler','textuppgift','tolka svar'] },
+            ],
+          },
+          'Algebra och andragradsekvationer': {
+            number: 2,
+            intro: 'Kvadrerings- och konjugatreglerna snabbar upp algebran — framlänges för att utveckla, baklänges för att faktorisera. Sedan knäcker vi andragradsekvationerna: nollproduktmetoden, pq-formeln och abc-formeln, diskriminantens besked om antalet lösningar, problemlösning och rotekvationer med falska rötter.',
+            sections: [
+              { num: '2.1', title: 'Kvadreringsreglerna och konjugatregeln', description: '(a ± b)² = a² ± 2ab + b² och (a + b)(a − b) = a² − b² — utveckla parentesuttryck i ett steg.', href: null, icon: null, keywords: ['algebra','kvadreringsreglerna','kvadreringsregeln','konjugatregeln','konjugat','utveckla','dubbla produkten','parentes'] },
+              { num: '2.2', title: 'Faktorisering av uttryck', description: 'Bryt ut största faktorn och använd kvadrerings- eller konjugatregeln baklänges — och förkorta rationella uttryck.', href: null, icon: null, keywords: ['algebra','faktorisera','faktorisering','bryta ut','konjugatregeln baklänges','kvadreringsregel baklänges','rationella uttryck','förkorta'] },
+              { num: '2.3', title: 'Nollproduktmetoden', description: 'En produkt är noll bara om någon faktor är noll — lös andragradsekvationer utan konstantterm.', href: null, icon: null, keywords: ['algebra','nollproduktmetoden','nollprodukt','andragradsekvation','faktorisera','rot','rötter','bryta ut'] },
+              { num: '2.4', title: 'pq-formeln', description: 'x² + px + q = 0 löses med halva koefficienten och roten ur diskriminanten — med härledning via kvadratkomplettering.', href: null, icon: null, keywords: ['algebra','pq-formeln','andragradsekvation','fullständig andragradsekvation','kvadratkomplettering','rot','rötter'] },
+              { num: '2.5', title: 'abc-formeln', description: 'ax² + bx + c = 0 löses direkt — utan att dividera bort koefficienten framför x².', href: null, icon: null, keywords: ['algebra','abc-formeln','andragradsekvation','koefficient','lösningsformel'] },
+              { num: '2.6', title: 'Antal lösningar till en andragradsekvation', description: 'Diskriminantens tecken avgör: positiv ger två, noll ger en och negativ ger inga lösningar.', href: null, icon: null, keywords: ['algebra','diskriminant','diskriminanten','antal lösningar','dubbelrot','andragradsekvation'] },
+              { num: '2.7', title: 'Problemlösning med andragradsekvationer', description: 'Tolka, ställ upp, lös och tolka svaret — och sortera bort orimliga rötter.', href: null, icon: null, keywords: ['algebra','problemlösning','andragradsekvation','textuppgift','geometriproblem','area','omkrets','tolka svar'] },
+              { num: '2.8', title: 'Rotekvationer', description: 'Kvadrera båda led och kontrollera lösningarna — falska rötter kan uppstå.', href: null, icon: null, keywords: ['algebra','rotekvation','rotekvationer','kvadrera','falsk rot','falska rötter','variabelsubstitution','rottecken'] },
+            ],
+          },
+          'Andragradsfunktioner': {
+            number: 3,
+            intro: 'Parabelns värld — extrempunkter, symmetrilinjer och nollställen, först grafiskt och sedan algebraiskt. Vi bestämmer funktioner ur grafer med faktorform och tre punkter, löser ekvationer och olikheter med grafritande hjälpmedel och avslutar med problemlösning: raketbanor och maximala areor.',
+            sections: [
+              { num: '3.1', title: 'Grafen till en andragradsfunktion', description: 'Parabel, extrempunkt, symmetrilinje och nollställen — och en interaktiv graf att dra i.', href: null, icon: null, keywords: ['andragradsfunktion','andragradsfunktioner','parabel','extrempunkt','maximipunkt','minimipunkt','symmetrilinje','nollställe','nollställen','värdetabell','karaktär'] },
+              { num: '3.2', title: 'Andragradsekvationer och andragradsfunktioner', description: 'Nollställen, symmetrilinje och extrempunkt algebraiskt — med pq-formeln som verktyg.', href: null, icon: null, keywords: ['andragradsfunktion','nollställen algebraiskt','symmetrilinje','extrempunkt','medelvärde av nollställen','pq-formeln','största värde','minsta värde'] },
+              { num: '3.3', title: 'Andragradsfunktioner och modellering', description: 'Bestäm funktionen ur grafen — faktorform med nollställen eller ekvationssystem med tre punkter.', href: null, icon: null, keywords: ['andragradsfunktion','modellering','faktorform','utvecklad form','bestämma funktion','nollställen','tre punkter','kastparabel','fontän'] },
+              { num: '3.4', title: 'Andragradsekvationer och olikheter med grafritande hjälpmedel', description: 'Skärningarnas x-koordinater ger lösningarna — och över/under avgör olikhetens intervall.', href: null, icon: null, keywords: ['andragradsekvation','olikhet','olikheter','grafisk lösning','geogebra','skärningspunkt','nollställen','intervall'] },
+              { num: '3.5', title: 'Problemlösning med grafritande hjälpmedel', description: 'Raketbanor och maximala areor — extrempunkt, nollställen och skärningar i tillämpningar.', href: null, icon: null, keywords: ['problemlösning','grafritande hjälpmedel','geogebra','extrempunkt','maximering','största area','raket','kastbana'] },
+            ],
+          },
+          'Geometri': {
+            number: 4,
+            intro: 'Det matematiska hantverket — vinklar vid transversaler, vinkelsummor, implikation och ekvivalens, satser och bevis. Pythagoras sats härleds och används i koordinatgeometrin, likformighet och kongruens ger verktyg för trianglar, och kapitlet avslutas i cirkelns geometri med randvinkelsatsen och kordasatsen.',
+            sections: [
+              { num: '4.1', title: 'Olika slags vinklar', description: 'Spetsig, rät, trubbig och rak — och transversalens likbelägna, vertikal-, alternat- och sidovinklar.', href: null, icon: null, keywords: ['geometri','vinklar','spetsig vinkel','rät vinkel','trubbig vinkel','rak vinkel','transversal','likbelägna vinklar','vertikalvinklar','alternatvinklar','sidovinklar','bisektris'] },
+              { num: '4.2', title: 'Vinklar i trianglar och månghörningar', description: 'Vinkelsumman är 180° i triangeln och 360° i fyrhörningen — och triangeluppdelning ger resten.', href: null, icon: null, keywords: ['geometri','triangel','månghörning','vinkelsumma','rätvinklig','likbent','liksidig','basvinklar','femhörning','fyrhörning'] },
+              { num: '4.3', title: 'Implikation och ekvivalens', description: 'Pilarna ⟹ och ⟺ — när något medför något annat, och motexemplet som fäller en implikation.', href: null, icon: null, keywords: ['geometri','logik','implikation','ekvivalens','medför','motexempel','omvändning','logiska symboler'] },
+              { num: '4.4', title: 'Satser och bevis', description: 'Axiom, definition och sats — och bevisteknik med jämna tal 2k, udda tal 2k + 1 och talföljder.', href: null, icon: null, keywords: ['geometri','bevis','sats','axiom','definition','vsb','vsv','jämna tal','udda tal','delbarhet','yttervinkelsatsen'] },
+              { num: '4.5', title: 'Pythagoras sats', description: 'a² + b² = c² med areabevis — och omvändningen som avgör om triangeln är rätvinklig.', href: null, icon: null, keywords: ['geometri','pythagoras sats','hypotenusa','katet','kateter','rätvinklig triangel','areabevis'] },
+              { num: '4.6', title: 'Koordinatgeometri', description: 'Avståndsformeln ur Pythagoras sats och mittpunktsformeln ur medelvärden.', href: null, icon: null, keywords: ['geometri','koordinatgeometri','avståndsformeln','mittpunktsformeln','avstånd','mittpunkt','koordinatsystem'] },
+              { num: '4.7', title: 'Likformiga månghörningar', description: 'Samma form kräver lika vinklar OCH lika sidförhållanden — bestäm sidor med ekvation eller skalfaktor.', href: null, icon: null, keywords: ['geometri','likformighet','likformiga månghörningar','skalfaktor','sidförhållande','motsvarande sidor','parallellogram'] },
+              { num: '4.8', title: 'Likformiga trianglar', description: 'För trianglar räcker ETT villkor — vinklar eller sidförhållanden. Skuggor mäter flaggstänger.', href: null, icon: null, keywords: ['geometri','likformiga trianglar','likformighet','topptriangel','skugga','flaggstång','sidförhållande'] },
+              { num: '4.9', title: 'Triangelsatserna', description: 'Topptriangelsatsen, transversalsatsen och bisektrissatsen — med bevis och räkneexempel.', href: null, icon: null, keywords: ['geometri','triangelsatserna','topptriangelsatsen','transversalsatsen','bisektrissatsen','parallelltransversal','bisektris'] },
+              { num: '4.10', title: 'Kongruens', description: 'Likformiga och lika stora — kongruensvillkoren SVS, SSS och VSV avgör med tre uppgifter.', href: null, icon: null, keywords: ['geometri','kongruens','kongruenta trianglar','svs','sss','vsv','kongruensvillkor'] },
+              { num: '4.11', title: 'Randvinkelsatsen', description: 'Medelpunktsvinkeln är dubbla randvinkeln — med följdsatser, tangenter och likbenta radie-trianglar.', href: null, icon: null, keywords: ['geometri','cirkel','randvinkelsatsen','randvinkel','medelpunktsvinkel','cirkelbåge','tangent','halvcirkelbåge','följdsats'] },
+              { num: '4.12', title: 'Kordasatsen och inskrivna fyrhörningar', description: 'Korsande kordors delsträckor: a · b = c · d — och motstående vinklar som summerar till 180°.', href: null, icon: null, keywords: ['geometri','cirkel','korda','kordasatsen','inskriven fyrhörning','motstående vinklar'] },
+            ],
+          },
+          'Logaritmer': {
+            number: 5,
+            intro: 'Nyckeln till x i exponenten — potensekvationer löses med rötter, men exponentialekvationer kräver tiologaritmer. Vi definierar lg, härleder logaritmlagarna och använder dem på tillämpningar med ränta och tillväxt, innan kapitlet öppnar för logaritmer med godtyckliga baser.',
+            sections: [
+              { num: '5.1', title: 'Exponential- och potensekvationer', description: 'Variabeln i basen löses med rötter — variabeln i exponenten kräver graf, så länge.', href: null, icon: null, keywords: ['logaritmer','potensekvation','exponentialekvation','förändringsfaktor','exponentiell förändring','grafisk lösning'] },
+              { num: '5.2', title: 'Tiologaritmer', description: 'lg a är tians exponent — definitionen, mönstret för tiopotenser och sambandet a = 10^lg a.', href: null, icon: null, keywords: ['logaritmer','tiologaritm','lg','logaritm','tians exponent','definition','tiopotens'] },
+              { num: '5.3', title: 'Exponentialekvationer och tiologaritmer', description: 'Skriv om till basen 10 och sätt exponenterna lika — och lös logaritmekvationer via potensform.', href: null, icon: null, keywords: ['logaritmer','exponentialekvation','logaritmekvation','potensform','logaritmform','basen 10'] },
+              { num: '5.4', title: 'Logaritmlagarna', description: 'lg x + lg y = lg xy och två lagar till — med härledningar och den snabba vägen genom exponentialekvationer.', href: null, icon: null, keywords: ['logaritmer','logaritmlagarna','logaritmlagar','första logaritmlagen','andra logaritmlagen','tredje logaritmlagen','logaritmera'] },
+              { num: '5.5', title: 'Tillämpningar av logaritmer', description: 'Ränta, tillväxt och värdeminskning — logaritmerna ger tiden i modellen y = C · aˣ.', href: null, icon: null, keywords: ['logaritmer','tillämpningar','ränta','sparkonto','exponentiell tillväxt','värdeminskning','fördubblingstid'] },
+              { num: '5.6', title: 'Logaritmer med andra baser', description: 'aˣ = b har lösningen x = log_a b — samma logik som lg, med valfri bas.', href: null, icon: null, keywords: ['logaritmer','andra baser','generella logaritmer','log2','logaritm med bas','tvålogaritm'] },
+            ],
+          },
+          'Statistik': {
+            number: 6,
+            intro: 'Från lägesmått till prognoser — medelvärde, median och typvärde, spridningsmått med lådagram och percentiler, och standardavvikelsen som Geogebra räknar åt oss. Normalfördelningens klockkurva ger andelar i procent, och kapitlet avslutas med regressionsanalys: räta linjer och andra modeller anpassas efter data.',
+            sections: [
+              { num: '6.1', title: 'Lägesmått', description: 'Medelvärde, median och typvärde — och medelvärde ur klassindelat material med klassmitter.', href: null, icon: null, keywords: ['statistik','lägesmått','medelvärde','median','typvärde','frekvens','klasser','klassmitt','histogram'] },
+              { num: '6.2', title: 'Spridningsmått, lådagram och percentiler', description: 'Variationsbredd, kvartiler och kvartilavstånd — lådagrammet visar spridningen i fyra fjärdedelar.', href: null, icon: null, keywords: ['statistik','spridningsmått','variationsbredd','lådagram','kvartil','kvartiler','kvartilavstånd','percentil','percentiler'] },
+              { num: '6.3', title: 'Statistik med digitala verktyg', description: 'Envariabelanalys i Geogebra — statistiska mått, percentiler och lådagram ur kalkylbladet.', href: null, icon: null, keywords: ['statistik','digitala verktyg','geogebra','envariabelanalys','kalkylblad','frekvenstabell','percentil'] },
+              { num: '6.4', title: 'Standardavvikelse', description: 'Genomsnittlig avvikelse från medelvärdet — σ vid totalundersökning och s vid stickprov.', href: null, icon: null, keywords: ['statistik','standardavvikelse','spridning','sigma','stickprov','totalundersökning','avvikelse'] },
+              { num: '6.5', title: 'Normalfördelning', description: 'Klockkurvan med 34,1 – 13,6 – 2,3 % — och sannolikhetskalkylatorn för alla andra intervall.', href: null, icon: null, keywords: ['statistik','normalfördelning','normalfördelningskurva','klockkurva','standardavvikelse','sannolikhetskalkylator','andel'] },
+              { num: '6.6', title: 'Linjär regression', description: 'Regressionslinjen och korrelationskoefficienten r — anpassa en linje och gör prognoser.', href: null, icon: null, keywords: ['statistik','linjär regression','regressionslinje','korrelation','korrelationskoefficient','spridningsdiagram','prognos'] },
+              { num: '6.7', title: 'Olika regressionsmodeller', description: 'Linjär, exponentiell, potens eller polynom — kännetecken och r²-värden avgör bästa modellen.', href: null, icon: null, keywords: ['statistik','regressionsmodeller','regression','exponentiell modell','potensmodell','polynommodell','kurvanpassning','determinationskoefficient'] },
+            ],
+          },
+        },
+      },
     },
   },
 };

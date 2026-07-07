@@ -1,0 +1,188 @@
+{
+ "id": "ma2c-3.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4af980f303474d98cca520e13525d403d4e5d979",
+ "dur": 251.79,
+ "segments": [
+  {
+   "t": "Problemlösning med grafritande hjälpmedel",
+   "s": 0.1,
+   "e": 3.9
+  },
+  {
+   "t": "Vid problemlösning, så ritar vi upp den funktion som beskriver situationen för att besvara frågan.",
+   "s": 3.85,
+   "e": 10.35
+  },
+  {
+   "t": "Användbara verktyg i Geogebra är Extrempunkt, Skärning mellan två objekt och Nollställen.",
+   "s": 10.35,
+   "e": 17.05
+  },
+  {
+   "t": "Exempel 1 — Nyårsraketen",
+   "s": 17.05,
+   "e": 20.43
+  },
+  {
+   "t": "En nyårsraket har en höjd som kan beskrivas av funktionen h parentesen t slut parentes är lika med 40 t minus 4,9 t i kvadrat , där t är tiden i sekunder och h parentesen t slut parentes är raketens höjd i meter.",
+   "s": 20.43,
+   "e": 35.14
+  },
+  {
+   "t": "Vi ritar h parentesen t slut parentes är lika med 40 t minus 4,9 t i kvadrat i Geogebra och besvarar frågorna nedan ur grafen.",
+   "s": 35.14,
+   "e": 44.94
+  },
+  {
+   "t": "Hur. a) lång tid tar det innan raketen landar? b) högt når raketen som högst? c) lång tid tar det för raketen att nå höjden 50 meter?",
+   "s": 44.94,
+   "e": 58.86
+  },
+  {
+   "t": "a) Raketen landar när höjden h parentesen t slut parentes är lika med 0 , vilket motsvarar nollstället längst till höger på t -axeln.",
+   "s": 58.86,
+   "e": 68.16
+  },
+  {
+   "t": "Vi använder verktyget Nollställen och läser av dess t -koordinat: t är ungefär lika med 8,2 .",
+   "s": 68.16,
+   "e": 75.33
+  },
+  {
+   "t": "Svar: Efter 8,2 sekunder.",
+   "s": 75.33,
+   "e": 79.0
+  },
+  {
+   "t": "b) Raketen når som högst när höjden h parentesen t slut parentes är som störst, vilket är i maximipunkten.",
+   "s": 79.0,
+   "e": 87.25
+  },
+  {
+   "t": "Vi använder verktyget Extrempunkt och läser av maximipunktens y -koordinat.",
+   "s": 87.25,
+   "e": 93.25
+  },
+  {
+   "t": "Vi ser att högsta höjden är vid h parentesen t slut parentes är ungefär lika med 81,6 .",
+   "s": 93.25,
+   "e": 100.34
+  },
+  {
+   "t": "Svar: 81,6 meter",
+   "s": 100.34,
+   "e": 103.83
+  },
+  {
+   "t": "c) Raketen når höjden 50 meter när h parentesen t slut parentes är lika med 50 .",
+   "s": 103.83,
+   "e": 110.96
+  },
+  {
+   "t": "Vi ritar in hjälpfunktionen y är lika med 50 (den gröna linjen i figuren) och tar fram skärningspunkterna A och B med verktyget Skärning mellan två objekt: A är ungefär lika med (1,5; 50) och B är ungefär lika med (6,6; 50).",
+   "s": 110.96,
+   "e": 127.28
+  },
+  {
+   "t": "Vi ser att raketen når höjden 50 meter efter t är ungefär lika med 1,5 sekunder (på väg upp) och efter t är ungefär lika med 6,6 sekunder (på väg ner).",
+   "s": 127.28,
+   "e": 138.45
+  },
+  {
+   "t": "Svar: Efter 1,5 sekunder (på väg upp) och efter 6,6 sekunder (på väg ner).",
+   "s": 138.45,
+   "e": 145.76
+  },
+  {
+   "t": "Exempel 2 — Hagen vid muren",
+   "s": 145.76,
+   "e": 149.07
+  },
+  {
+   "t": "En rektangulär hage ska byggas mot en mur.",
+   "s": 149.07,
+   "e": 152.86
+  },
+  {
+   "t": "Det finns 52 meter stängsel som ska räcka till tre av sidorna eftersom den fjärde sidan utgörs av muren.",
+   "s": 152.86,
+   "e": 159.72
+  },
+  {
+   "t": "Se figur.",
+   "s": 159.72,
+   "e": 161.81
+  },
+  {
+   "t": "Vilka mått ska hagen ha för att dess area ska bli så stor som möjligt?",
+   "s": 161.81,
+   "e": 166.6
+  },
+  {
+   "t": "Vi tecknar ett uttryck för hagens area.",
+   "s": 166.6,
+   "e": 170.25
+  },
+  {
+   "t": "Vi kallar de två lika långa sidorna för x .",
+   "s": 170.25,
+   "e": 174.09
+  },
+  {
+   "t": "Eftersom vi har 52 meter stängsel totalt, måste den tredje sidan ha längden 52 minus 2 x .",
+   "s": 174.09,
+   "e": 181.36
+  },
+  {
+   "t": "Arean hos rektangeln fås av basen gånger höjden, dvs.",
+   "s": 181.36,
+   "e": 192.36
+  },
+  {
+   "t": "A parentesen x slut parentes är lika med x parentesen 52 minus 2 x slut parentes",
+   "s": 181.36,
+   "e": 192.36
+  },
+  {
+   "t": "Vi ritar upp funktionen A parentesen x slut parentes är lika med x parentesen 52 minus 2 x slut parentes i Geogebra.",
+   "s": 192.36,
+   "e": 201.74
+  },
+  {
+   "t": "Vi ska bestämma måtten som ger den maximala arean, dvs. vi vill ta reda på för vilket värde på x som A parentesen x slut parentes är som störst, vilket motsvarar grafens maximipunkt.",
+   "s": 201.74,
+   "e": 213.86
+  },
+  {
+   "t": "Vi använder verktyget Extrempunkt för att ta fram maximipunktens koordinat: (13, 338).",
+   "s": 213.86,
+   "e": 221.78
+  },
+  {
+   "t": "Vi ser att den maximala arean är 338 meter i kvadrat när x är lika med 13 meter.",
+   "s": 221.78,
+   "e": 228.97
+  },
+  {
+   "t": "De två lika stora sidorna är alltså x är lika med 13 meter och den tredje sidan är",
+   "s": 228.97,
+   "e": 234.84
+  },
+  {
+   "t": "52 minus 2 x är lika med 52 minus 2 gånger 13 som är lika med 52 minus 26 som är lika med 26 meter",
+   "s": 234.84,
+   "e": 244.14
+  },
+  {
+   "t": "Måtten på hagen är alltså 26 × 13 meter.",
+   "s": 244.14,
+   "e": 248.32
+  },
+  {
+   "t": "Svar: 26 × 13 meter",
+   "s": 248.32,
+   "e": 251.79
+  }
+ ]
+}

@@ -377,13 +377,10 @@
             numeric.push(<tspan key="neq"> = </tspan>);
             numeric.push(<tspan key="ntot" fontWeight="700">{fmtSigned(Mtot)} Nm</tspan>);
 
-            const onGround = Math.abs(theta) > THETA_GROUND - 0.012;
-            const side = leanRight ? 'höger' : 'vänster';
+            // status: nettomomentets riktning (pedagogiskt)
             const statusText = balanced
-                ? 'Jämvikt — gungbrädan är i balans'
-                : onGround
-                    ? 'Gungbrädan vilar mot marken åt ' + side
-                    : 'Gungbrädan lutar åt ' + side;
+                ? 'Momentjämvikt'
+                : Mtot > 0 ? 'Moturs kraftmoment' : 'Medurs kraftmoment';
             const statusCol = balanced ? COL.ok : 'rgba(15,22,32,0.72)';
 
             return (
@@ -406,7 +403,7 @@
 
                     <rect x="0" y="0" width={VBW} height={VBH} fill="url(#skyG)" />
 
-                    {/* status överst */}
+                    {/* status överst — nettomomentets riktning */}
                     <Tag x={VBW / 2} y={38} color={statusCol} size={21}>{statusText}</Tag>
 
                     {/* sammanlagt kraftmoment med uträkning (ovanför brädan) */}

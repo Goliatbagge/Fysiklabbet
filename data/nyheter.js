@@ -31,6 +31,49 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-07-elektronens-rymdtidsgrans",
+    date: "2026-07-07",
+    title: "Forskare bygger världens snabbaste elektronkamera — och stöter på en gräns mellan rum och tid",
+    deck: "Genom att ersätta sveptunnelmikroskopets vanliga spänning med två extremt korta ljuspulser har tyska fysiker för första gången fångat exakt det ögonblick en enskild elektron tunnlar genom en energibarriär. Resultatet, publicerat i Nature Photonics, visar en tydlig kompromiss mellan hur exakt man kan veta var elektronen är och när den rör sig.",
+    category: "Kvantfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-07-elektronens-rymdtidsgrans.jpg",
+    imageAlt: "Illustration av ett sveptunnelmikroskops vassa metallspets som svävar över en enskild kopparatom på en silverkristall, med ett blåglödande vågliknande moln som symboliserar elektronens kvantmekaniska tunnling genom gapet, medan en gyllene ljuspuls anländer från vänster.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kvantfysik", "modern fysik", "tunneleffekten", "heisenbergs osäkerhetsprincip", "sveptunnelmikroskop", "stm", "attosekundfysik", "våg-partikeldualitet", "laser", "nanoteknik", "optik", "atomfysik"],
+    sources: [
+      { name: "Regensburg Center for Ultrafast Nanoscopy (pressmeddelande)", url: "https://run-regensburg.de/2026/07/03/ultrafast-stm-at-the-run-reaches-the-quantum-mechanical-space-time-limit-for-the-first-time/" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-ultrafast-scanning-tunneling-microscopy-quantum.html" }
+    ],
+    research: { citation: "S. Maier et al., ”Tracking electrons at the space-time limit”, Nature Photonics (2026)", url: "https://doi.org/10.1038/s41566-026-01932-0" },
+    body: [
+      { type: "p", html: "En vass metallspets svävar bara någon atombredd ovanför en enda kopparatom, placerad på en silverkristall. I glappet mellan dem tunnlar elektroner rakt igenom en energibarriär de enligt klassisk fysik aldrig borde kunna korsa — ett rent kvantmekaniskt fenomen. Nu har fysiker vid universitetet i Regensburg, i samarbete med Max Planck-institutet för materiens struktur och dynamik i Hamburg, för första gången fångat exakt det ögonblick en enskild elektron gör detta, med en tidsupplösning på attosekunder: miljarddels miljarddelar av en sekund. Resultatet, publicerat i tidskriften <em>Nature Photonics</em>, avslöjar samtidigt något oväntat — en gräns i själva verkligheten. Ju säkrare forskarna vet <em>när</em> elektronen rör sig, desto osäkrare blir det <em>var</em> den befinner sig." },
+
+      { type: "h2", text: "Ett mikroskop byggt på en kvantgenväg" },
+      { type: "p", html: "Sveptunnelmikroskopet (STM) uppfanns i början av 1980-talet av Gerd Binnig och Heinrich Rohrer vid IBM i Zürich — en uppfinning som gav dem Nobelpriset i fysik 1986. Principen bygger helt på tunneleffekten: förs en ledande spets tillräckligt nära en yta börjar elektroner tunnla genom det tomma gapet emellan, trots att de enligt klassisk fysik saknar tillräcklig energi för att ta sig över barriären. Tunnelströmmen är extremt känslig för avståndet mellan spets och yta, vilket gör att man kan avläsa ytan atom för atom — STM var det första instrumentet som lät forskare se enskilda atomer med egna ögon." },
+
+      { type: "h2", text: "Ljuspulser i stället för spänning" },
+      { type: "p", html: "Vanligtvis drivs tunnelströmmen av en konstant spänning. Forskarlaget, med Simon Maier som försteförfattare tillsammans med bland andra Jascha Repp och Rupert Huber, ersatte i stället spänningen med två extremt korta ljusvågscykler från en laser och lät tidsintervallet mellan pulserna styra exakt när elektronen tunnlar. ”Genom att variera tidsintervallet mellan de två laserpulserna kan vi direkt se hur elektronerna svarar”, säger Maier. Genom att finjustera fördröjningen i steg om attosekunder kunde forskarna både utlösa och tidsbestämma enskilda tunnelhändelser med en precision som aldrig tidigare uppnåtts i ett verkligt rumsligt mikroskop." },
+
+      { type: "h2", text: "Ju säkrare i tid, desto osäkrare i rum" },
+      { type: "p", html: "Teoretiska simuleringar från Angel Rubios grupp vid Max Planck-institutet i Hamburg visade att elektronen inte reagerar på ljusfältet exakt samtidigt som det slår till. ”Elektronen följer inte ljusfältet direkt, utan med en liten fördröjning på 500&nbsp;attosekunder”, förklarar Rubio. Men den mest intressanta upptäckten ligger i vad som händer när elektronen exciteras: den vinner extra energi — och just den energin sprider ut dess vågpaket i rummet." },
+
+      { type: "quote", html: "”Ju mer exakt vi vill fastställa elektronens position i tiden, desto mer energi måste vi tillföra. Och som en följd sprids elektronens vågpaket ut mer i rummet.”", cite: "Raffael Spachtholz, medförfattare, Universitetet i Regensburg" },
+
+      { type: "p", html: "Kompromissen påminner om ett välbekant fenomen från kvantfysiken: Heisenbergs osäkerhetsprincip, som säger att man aldrig kan känna till både en partikels exakta position och dess rörelsemängd samtidigt (se Fysiklabbets genomgång om våg-partikeldualitet, avsnitt 4.6 i Fysik nivå&nbsp;2). Det nya är att forskarna nu, för första gången, har fångat motsvarande kompromiss mellan rum och tid direkt i en enda verklig elektron — inte bara som en rad i en lärobok, utan som en mätbar bild i ett riktigt mikroskop." },
+
+      { type: "h2", text: "En biljon ampere på en nanometeryta" },
+      { type: "p", html: "När elektronernas vågpaket klämdes samman i tid nådde strömmen genom mikroskopets spets extrema toppvärden: upp till en biljon (10<sup>12</sup>) ampere per kvadratcentimeter, koncentrerat till en yta bara någon atom bred — grovt räknat en miljard gånger tätare ström än vad en vanlig kopparledning i väggen klarar av. Jascha Repp vill använda de attosekundsnabba vågpaketen för att studera kemiska reaktioner i realtid: ”Vi vill använda sådana vågpaket för att selektivt utlösa kemiska reaktioner och se, på de relevanta längd- och tidsskalorna, hur kemiska bindningar bryts eller omformas.” Rupert Huber blickar i stället mot framtidens elektronik — insikterna skulle enligt honom kunna driva morgondagens kretsar vid elektronrörelsens egen hastighetsgräns, ”hundratusentals gånger snabbare än dagens dominerande CMOS-teknik”, den kiselbaserade transistortekniken som sitter i praktiskt taget alla dagens datorer och mobiler." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "En attosekund (10<sup>−18</sup>&nbsp;s) förhåller sig till en sekund ungefär som en sekund förhåller sig till universums ålder, 13,8&nbsp;miljarder år — så beskrivs skalan ofta inom attosekundfysiken, som belönades med Nobelpriset i fysik 2023.",
+        "Sveptunnelmikroskopet är, mer än 40&nbsp;år efter att det uppfanns, fortfarande ett av få instrument som kan se och flytta enskilda atomer en och en.",
+        "Tunneleffekten är samma kvantfenomen som gör att alfapartiklar ibland kan ta sig ut ur en atomkärna trots att de enligt klassisk fysik borde vara instängda — grunden för det radioaktiva alfasönderfallet."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-06-aldsta-kvasarerna",
     date: "2026-07-06",
     title: "Euclid hittar de mest avlägsna kvasarerna som någonsin bekräftats",

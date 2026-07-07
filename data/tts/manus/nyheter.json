@@ -1,5 +1,101 @@
 [
  {
+  "id": "2026-07-07-elektronens-rymdtidsgrans",
+  "title": "Forskare bygger världens snabbaste elektronkamera — och stöter på en gräns mellan rum och tid",
+  "segments": [
+   {
+    "t": "Forskare bygger världens snabbaste elektronkamera — och stöter på en gräns mellan rum och tid."
+   },
+   {
+    "t": "Genom att ersätta sveptunnelmikroskopets vanliga spänning med två extremt korta ljuspulser har tyska fysiker för första gången fångat exakt det ögonblick en enskild elektron tunnlar genom en energibarriär."
+   },
+   {
+    "t": "Resultatet, publicerat i Nature Photonics, visar en tydlig kompromiss mellan hur exakt man kan veta var elektronen är och när den rör sig."
+   },
+   {
+    "t": "En vass metallspets svävar bara någon atombredd ovanför en enda kopparatom, placerad på en silverkristall."
+   },
+   {
+    "t": "I glappet mellan dem tunnlar elektroner rakt igenom en energibarriär de enligt klassisk fysik aldrig borde kunna korsa — ett rent kvantmekaniskt fenomen."
+   },
+   {
+    "t": "Nu har fysiker vid universitetet i Regensburg, i samarbete med Max Planck-institutet för materiens struktur och dynamik i Hamburg, för första gången fångat exakt det ögonblick en enskild elektron gör detta, med en tidsupplösning på attosekunder: miljarddels miljarddelar av en sekund."
+   },
+   {
+    "t": "Resultatet, publicerat i tidskriften Nature Photonics, avslöjar samtidigt något oväntat — en gräns i själva verkligheten."
+   },
+   {
+    "t": "Ju säkrare forskarna vet när elektronen rör sig, desto osäkrare blir det var den befinner sig."
+   },
+   {
+    "t": "Ett mikroskop byggt på en kvantgenväg."
+   },
+   {
+    "t": "Sveptunnelmikroskopet (STM) uppfanns i början av 1980-talet av Gerd Binnig och Heinrich Rohrer vid IBM i Zürich — en uppfinning som gav dem Nobelpriset i fysik 1986."
+   },
+   {
+    "t": "Principen bygger helt på tunneleffekten: förs en ledande spets tillräckligt nära en yta börjar elektroner tunnla genom det tomma gapet emellan, trots att de enligt klassisk fysik saknar tillräcklig energi för att ta sig över barriären."
+   },
+   {
+    "t": "Tunnelströmmen är extremt känslig för avståndet mellan spets och yta, vilket gör att man kan avläsa ytan atom för atom — STM var det första instrumentet som lät forskare se enskilda atomer med egna ögon."
+   },
+   {
+    "t": "Ljuspulser i stället för spänning."
+   },
+   {
+    "t": "Vanligtvis drivs tunnelströmmen av en konstant spänning."
+   },
+   {
+    "t": "Forskarlaget, med Simon Maier som försteförfattare tillsammans med bland andra Jascha Repp och Rupert Huber, ersatte i stället spänningen med två extremt korta ljusvågscykler från en laser och lät tidsintervallet mellan pulserna styra exakt när elektronen tunnlar. ”Genom att variera tidsintervallet mellan de två laserpulserna kan vi direkt se hur elektronerna svarar”, säger Maier."
+   },
+   {
+    "t": "Genom att finjustera fördröjningen i steg om attosekunder kunde forskarna både utlösa och tidsbestämma enskilda tunnelhändelser med en precision som aldrig tidigare uppnåtts i ett verkligt rumsligt mikroskop."
+   },
+   {
+    "t": "Ju säkrare i tid, desto osäkrare i rum."
+   },
+   {
+    "t": "Teoretiska simuleringar från Angel Rubios grupp vid Max Planck-institutet i Hamburg visade att elektronen inte reagerar på ljusfältet exakt samtidigt som det slår till. ”Elektronen följer inte ljusfältet direkt, utan med en liten fördröjning på 500 attosekunder”, förklarar Rubio."
+   },
+   {
+    "t": "Men den mest intressanta upptäckten ligger i vad som händer när elektronen exciteras: den vinner extra energi — och just den energin sprider ut dess vågpaket i rummet."
+   },
+   {
+    "t": "”Ju mer exakt vi vill fastställa elektronens position i tiden, desto mer energi måste vi tillföra."
+   },
+   {
+    "t": "Och som en följd sprids elektronens vågpaket ut mer i rummet.”"
+   },
+   {
+    "t": "Kompromissen påminner om ett välbekant fenomen från kvantfysiken: Heisenbergs osäkerhetsprincip, som säger att man aldrig kan känna till både en partikels exakta position och dess rörelsemängd samtidigt (se Fysiklabbets genomgång om våg-partikeldualitet, avsnitt 4.6 i Fysik nivå 2)."
+   },
+   {
+    "t": "Det nya är att forskarna nu, för första gången, har fångat motsvarande kompromiss mellan rum och tid direkt i en enda verklig elektron — inte bara som en rad i en lärobok, utan som en mätbar bild i ett riktigt mikroskop."
+   },
+   {
+    "t": "En biljon ampere på en nanometeryta."
+   },
+   {
+    "t": "När elektronernas vågpaket klämdes samman i tid nådde strömmen genom mikroskopets spets extrema toppvärden: upp till en biljon (1012) ampere per kvadratcentimeter, koncentrerat till en yta bara någon atom bred — grovt räknat en miljard gånger tätare ström än vad en vanlig kopparledning i väggen klarar av."
+   },
+   {
+    "t": "Jascha Repp vill använda de attosekundsnabba vågpaketen för att studera kemiska reaktioner i realtid: ”Vi vill använda sådana vågpaket för att selektivt utlösa kemiska reaktioner och se, på de relevanta längd- och tidsskalorna, hur kemiska bindningar bryts eller omformas.” Rupert Huber blickar i stället mot framtidens elektronik — insikterna skulle enligt honom kunna driva morgondagens kretsar vid elektronrörelsens egen hastighetsgräns, ”hundratusentals gånger snabbare än dagens dominerande CMOS-teknik”, den kiselbaserade transistortekniken som sitter i praktiskt taget alla dagens datorer och mobiler."
+   },
+   {
+    "t": "Visste du."
+   },
+   {
+    "t": "En attosekund (10−18 sekunder) förhåller sig till en sekund ungefär som en sekund förhåller sig till universums ålder, 13,8 miljarder år — så beskrivs skalan ofta inom attosekundfysiken, som belönades med Nobelpriset i fysik 2023."
+   },
+   {
+    "t": "Sveptunnelmikroskopet är, mer än 40 år efter att det uppfanns, fortfarande ett av få instrument som kan se och flytta enskilda atomer en och en."
+   },
+   {
+    "t": "Tunneleffekten är samma kvantfenomen som gör att alfapartiklar ibland kan ta sig ut ur en atomkärna trots att de enligt klassisk fysik borde vara instängda — grunden för det radioaktiva alfasönderfallet."
+   }
+  ]
+ },
+ {
   "id": "2026-07-06-aldsta-kvasarerna",
   "title": "Euclid hittar de mest avlägsna kvasarerna som någonsin bekräftats",
   "segments": [

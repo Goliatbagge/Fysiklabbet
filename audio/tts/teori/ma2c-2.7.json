@@ -1,0 +1,373 @@
+{
+ "id": "ma2c-2.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5b4135b4830a7d52964930167f484a698079ccf2",
+ "dur": 308.21,
+ "segments": [
+  {
+   "t": "Problemlösning med andragradsekvationer",
+   "s": 0.1,
+   "e": 3.77
+  },
+  {
+   "t": "Vid problemlösning är det ofta bra att följa nedanstående procedur.",
+   "s": 3.73,
+   "e": 8.53
+  },
+  {
+   "t": "Problemlösning",
+   "s": 8.53,
+   "e": 10.7
+  },
+  {
+   "t": "Tolka problemet.",
+   "s": 10.7,
+   "e": 12.97
+  },
+  {
+   "t": "Definiera införda variabler och rita vid behov figur.",
+   "s": 12.97,
+   "e": 17.32
+  },
+  {
+   "t": "Ställ upp en eller flera ekvationer.",
+   "s": 17.32,
+   "e": 20.65
+  },
+  {
+   "t": "Lös ekvationen eller ekvationssystemet.",
+   "s": 20.65,
+   "e": 24.54
+  },
+  {
+   "t": "Använd lämplig metod.",
+   "s": 24.54,
+   "e": 27.25
+  },
+  {
+   "t": "Tolka svaret.",
+   "s": 27.25,
+   "e": 29.46
+  },
+  {
+   "t": "Vad stod variablerna för?",
+   "s": 29.46,
+   "e": 32.12
+  },
+  {
+   "t": "Är svaret rimligt?",
+   "s": 32.12,
+   "e": 34.48
+  },
+  {
+   "t": "Kan någon lösning bortses?",
+   "s": 34.48,
+   "e": 37.26
+  },
+  {
+   "t": "Exempel 1 — Differens och produkt",
+   "s": 37.26,
+   "e": 40.81
+  },
+  {
+   "t": "Två positiva tal har differensen 21 och produkten 1 080.",
+   "s": 40.81,
+   "e": 46.25
+  },
+  {
+   "t": "Vilka är talen?",
+   "s": 46.25,
+   "e": 48.59
+  },
+  {
+   "t": "1.",
+   "s": 48.59,
+   "e": 52.23
+  },
+  {
+   "t": "Vi inför och definierar variabler.",
+   "s": 48.59,
+   "e": 52.23
+  },
+  {
+   "t": "x är lika med det mindre talet",
+   "s": 52.23,
+   "e": 55.36
+  },
+  {
+   "t": "y är lika med det större talet",
+   "s": 55.36,
+   "e": 58.33
+  },
+  {
+   "t": "2.",
+   "s": 58.33,
+   "e": 61.79
+  },
+  {
+   "t": "Vi ställer upp ett ekvationssystem.",
+   "s": 58.33,
+   "e": 61.79
+  },
+  {
+   "t": "Eftersom vi har två obekanta, måste vi ställa upp två ekvationer:",
+   "s": 61.79,
+   "e": 72.72
+  },
+  {
+   "t": "y minus x är lika med 21, ekvation 1 x gånger y som är lika med 1 080, ekvation 2",
+   "s": 61.79,
+   "e": 72.72
+  },
+  {
+   "t": "3.",
+   "s": 72.72,
+   "e": 76.24
+  },
+  {
+   "t": "Vi löser ekvationssystemet.",
+   "s": 72.72,
+   "e": 76.24
+  },
+  {
+   "t": "Vi löser ut y från ekvation ekvation 1 och får",
+   "s": 76.24,
+   "e": 80.85
+  },
+  {
+   "t": "y är lika med 21 plus x, ekvation 3",
+   "s": 80.85,
+   "e": 85.21
+  },
+  {
+   "t": "Vi använder substitutionsmetoden och sätter in y är lika med 21 plus x i ekvation 2:",
+   "s": 85.21,
+   "e": 96.39
+  },
+  {
+   "t": "x parentesen 21 plus x slut parentes är lika med 1 080",
+   "s": 85.21,
+   "e": 96.39
+  },
+  {
+   "t": "Vi utvecklar VL och löser sedan ekvationen med pq-formeln:",
+   "s": 96.39,
+   "e": 104.6
+  },
+  {
+   "t": "21 x plus x i kvadrat är lika med 1 080",
+   "s": 96.39,
+   "e": 104.6
+  },
+  {
+   "t": "x i kvadrat plus 21 x minus 1 080 är lika med 0",
+   "s": 104.6,
+   "e": 110.14
+  },
+  {
+   "t": "x är lika med minus 21 delat med 2 plus minus roten ur parentesen 21 delat med 2 slut parentes i kvadrat plus 1 080",
+   "s": 110.14,
+   "e": 120.19
+  },
+  {
+   "t": "x är lika med minus 10,5 plus minus roten ur 1 190,25 som är lika med minus 10,5 plus minus 34,5",
+   "s": 120.19,
+   "e": 130.96
+  },
+  {
+   "t": "x ett är lika med minus 10,5 minus 34,5 som är lika med minus 45",
+   "s": 130.96,
+   "e": 137.78
+  },
+  {
+   "t": "x två är lika med minus 10,5 plus 34,5 som är lika med 24",
+   "s": 137.78,
+   "e": 144.35
+  },
+  {
+   "t": "4.",
+   "s": 144.35,
+   "e": 147.35
+  },
+  {
+   "t": "Vi tolkar svaret.",
+   "s": 144.35,
+   "e": 147.35
+  },
+  {
+   "t": "Eftersom x skulle vara ett positivt tal kan lösningen x ett är lika med minus 45 bortses.",
+   "s": 147.35,
+   "e": 154.14
+  },
+  {
+   "t": "Alltså gäller x är lika med 24 .",
+   "s": 154.14,
+   "e": 157.69
+  },
+  {
+   "t": "Insättning av x är lika med 24 i ekvation 3 ger",
+   "s": 157.69,
+   "e": 162.61
+  },
+  {
+   "t": "y är lika med 21 plus 24 som är lika med 45",
+   "s": 162.61,
+   "e": 167.47
+  },
+  {
+   "t": "Kontroll: 45 minus 24 är lika med 21 och 24 gånger 45 är lika med 1 080 .",
+   "s": 167.47,
+   "e": 174.94
+  },
+  {
+   "t": "Stämmer!",
+   "s": 174.94,
+   "e": 176.75
+  },
+  {
+   "t": "Svar: Talen är 24 och 45.",
+   "s": 176.75,
+   "e": 180.74
+  },
+  {
+   "t": "Exempel 2 — Rektangelns omkrets",
+   "s": 180.74,
+   "e": 184.14
+  },
+  {
+   "t": "En rektangel har arean 1 215 centimeter i kvadrat .",
+   "s": 184.14,
+   "e": 189.61
+  },
+  {
+   "t": "Den ena sidan är 18 centimeter kortare än den andra.",
+   "s": 189.61,
+   "e": 194.15
+  },
+  {
+   "t": "Vilken är rektangelns omkrets?",
+   "s": 194.15,
+   "e": 197.35
+  },
+  {
+   "t": "1.",
+   "s": 197.35,
+   "e": 201.09
+  },
+  {
+   "t": "Vi ritar figur och inför variabler.",
+   "s": 197.35,
+   "e": 201.09
+  },
+  {
+   "t": "Sidorna blir x cm respektive parentesen x minus 18 slut parentes cm.",
+   "s": 201.09,
+   "e": 208.25
+  },
+  {
+   "t": "2.",
+   "s": 208.25,
+   "e": 211.5
+  },
+  {
+   "t": "Omkretsen O är då",
+   "s": 208.25,
+   "e": 211.5
+  },
+  {
+   "t": "O är lika med x plus x plus parentesen x minus 18 slut parentes plus parentesen x minus 18 slut parentes",
+   "s": 211.5,
+   "e": 220.59
+  },
+  {
+   "t": "O är lika med 4 x minus 36",
+   "s": 220.59,
+   "e": 224.44
+  },
+  {
+   "t": "3.",
+   "s": 224.44,
+   "e": 227.4
+  },
+  {
+   "t": "Vi behöver hitta x .",
+   "s": 224.44,
+   "e": 227.4
+  },
+  {
+   "t": "Vi utnyttjar arean!",
+   "s": 227.4,
+   "e": 230.24
+  },
+  {
+   "t": "x parentesen x minus 18 slut parentes är lika med 1 215",
+   "s": 230.24,
+   "e": 236.55
+  },
+  {
+   "t": "x i kvadrat minus 18 x är lika med 1 215",
+   "s": 236.55,
+   "e": 242.19
+  },
+  {
+   "t": "x i kvadrat minus 18 x minus 1 215 är lika med 0",
+   "s": 242.19,
+   "e": 248.45
+  },
+  {
+   "t": "pq-formeln ger",
+   "s": 248.45,
+   "e": 250.95
+  },
+  {
+   "t": "x är lika med 9 plus minus roten ur 9 i kvadrat plus 1 215 som är lika med 9 plus minus roten ur 1 296 som är lika med 9 plus minus 36",
+   "s": 250.95,
+   "e": 263.7
+  },
+  {
+   "t": "x ett är lika med 9 minus 36 som är lika med minus 27",
+   "s": 263.7,
+   "e": 269.19
+  },
+  {
+   "t": "x två är lika med 9 plus 36 som är lika med 45",
+   "s": 269.19,
+   "e": 274.2
+  },
+  {
+   "t": "4.",
+   "s": 274.2,
+   "e": 277.19
+  },
+  {
+   "t": "Vi tolkar svaret.",
+   "s": 274.2,
+   "e": 277.19
+  },
+  {
+   "t": "En sträcka kan inte vara negativ så lösningen x är lika med minus 27 kan bortses.",
+   "s": 277.19,
+   "e": 283.27
+  },
+  {
+   "t": "Alltså gäller x är lika med 45 centimeter.",
+   "s": 283.27,
+   "e": 287.38
+  },
+  {
+   "t": "Insättning av x är lika med 45 centimeter i formeln för omkretsen O är lika med 4 x minus 36 ger",
+   "s": 287.38,
+   "e": 295.18
+  },
+  {
+   "t": "O är lika med 4 gånger 45 minus 36 som är lika med 180 minus 36 som är lika med 144 centimeter",
+   "s": 295.18,
+   "e": 304.36
+  },
+  {
+   "t": "Svar: 144 centimeter",
+   "s": 304.36,
+   "e": 308.21
+  }
+ ]
+}

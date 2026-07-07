@@ -1,0 +1,248 @@
+{
+ "id": "ma2c-6.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ec3ee22d8eec255f6b43aa9ab9a5b6661853ebb0",
+ "dur": 349.09,
+ "segments": [
+  {
+   "t": "Normalfördelning",
+   "s": 0.1,
+   "e": 2.46
+  },
+  {
+   "t": "Mycket statistiskt material fördelas jämnt kring medelvärdet.",
+   "s": 2.41,
+   "e": 7.14
+  },
+  {
+   "t": "En sådan fördelning kallas normalfördelning.",
+   "s": 7.14,
+   "e": 10.84
+  },
+  {
+   "t": "I ett normalfördelat material fördelas värdena med samma procentsatser inom vissa givna intervall som bygger på medelvärdet my och standardavvikelsen sigma , enligt nedanstående normalfördelningskurva:",
+   "s": 10.84,
+   "e": 26.35
+  },
+  {
+   "t": "där my är lika med medelvärde och sigma är lika med standardavvikelse.",
+   "s": 10.84,
+   "e": 26.35
+  },
+  {
+   "t": "Om man ska bestämma andelar som inte ligger vid jämna standardavvikelser får man ta hjälp av digitala verktyg, t.ex. Geogebra.",
+   "s": 26.35,
+   "e": 34.39
+  },
+  {
+   "t": "För att beräkna procentsatser vid normalfördelningar i Geogebra klickar vi på knappen \"Växla till sannolikhetskalkylator\", fyller i medelvärde ( my ) och standardavvikelse ( sigma ), klickar på den knapp som motsvarar det intervall vi är intresserade av och fyller i värdena.",
+   "s": 34.39,
+   "e": 49.89
+  },
+  {
+   "t": "Hur hög normalfördelningskurvan blir beror på spridningen.",
+   "s": 49.89,
+   "e": 54.62
+  },
+  {
+   "t": "Vid liten spridning ligger värdena samlade och kurvan blir högre och smalare.",
+   "s": 54.62,
+   "e": 59.96
+  },
+  {
+   "t": "Vid stor spridning ligger värdena mer utspridda och kurvan blir lägre och bredare.",
+   "s": 59.96,
+   "e": 65.4
+  },
+  {
+   "t": "Exempel 1 — Längden hos vuxna män",
+   "s": 65.4,
+   "e": 69.0
+  },
+  {
+   "t": "Anta att längden hos vuxna män är normalfördelad med medellängden 181 centimeter och standardavvikelsen 8 centimeter.",
+   "s": 69.0,
+   "e": 77.44
+  },
+  {
+   "t": "Vi ritar en normalfördelningskurva och fyller i värdena.",
+   "s": 77.44,
+   "e": 81.75
+  },
+  {
+   "t": "Rakt under toppen skriver vi in medelvärdet 181.",
+   "s": 81.75,
+   "e": 86.55
+  },
+  {
+   "t": "I nästa steg åt höger skriver vi in \"medelvärdet + en standardavvikelse\", alltså 181 plus 8 är lika med 189 .",
+   "s": 86.55,
+   "e": 95.54
+  },
+  {
+   "t": "Ytterligare ett steg åt höger skriver vi in \"medelvärdet + två standardavvikelser\", alltså 181 plus 8 plus 8 är lika med 197 .",
+   "s": 95.54,
+   "e": 105.44
+  },
+  {
+   "t": "Ett steg åt vänster från medelvärdet skriver vi in \"medelvärdet − en standardavvikelse\" är lika med 181 minus 8 är lika med 173 .",
+   "s": 105.44,
+   "e": 114.92
+  },
+  {
+   "t": "Och till sist, vid ytterligare ett steg åt vänster skriver vi in \"medelvärdet − två standardavvikelser\" är lika med 181 minus 8 minus 8 är lika med 165 .",
+   "s": 114.92,
+   "e": 125.96
+  },
+  {
+   "t": "Vi markerar området mellan 173 centimeter och 189 centimeter och jämför med normalfördelningskurvan:",
+   "s": 125.96,
+   "e": 135.12
+  },
+  {
+   "t": "Hur stor andel är. a) mellan 173 centimeter och 189 centimeter? b) längre än 197 centimeter?",
+   "s": 125.96,
+   "e": 145.15
+  },
+  {
+   "t": "a) Vi ser då att mellan 173 centimeter och 181 centimeter ligger 34,1 procent.",
+   "s": 145.15,
+   "e": 153.31
+  },
+  {
+   "t": "Mellan 181 centimeter och 189 centimeter ligger också 34,1 procent.",
+   "s": 153.31,
+   "e": 160.8
+  },
+  {
+   "t": "Mellan 173 centimeter och 189 centimeter ligger alltså",
+   "s": 160.8,
+   "e": 166.95
+  },
+  {
+   "t": "34,1 procent plus 34,1 procent är lika med 68,2 procent",
+   "s": 166.95,
+   "e": 173.93
+  },
+  {
+   "t": "Svar: 68,2 procent",
+   "s": 173.93,
+   "e": 177.76
+  },
+  {
+   "t": "b) Vi markerar området över 197 centimeter och jämför med normalfördelningskurvan.",
+   "s": 177.76,
+   "e": 184.59
+  },
+  {
+   "t": "197 centimeter motsvarar \"medelvärdet + två standardavvikelser\" och över detta ligger 2,3 procent.",
+   "s": 184.59,
+   "e": 192.49
+  },
+  {
+   "t": "Svar: 2,3 procent",
+   "s": 192.49,
+   "e": 195.79
+  },
+  {
+   "t": "Exempel 2 — Längden hos vuxna kvinnor (Geogebra)",
+   "s": 195.79,
+   "e": 200.59
+  },
+  {
+   "t": "Vuxna kvinnor har medellängden 165,5 centimeter med standardavvikelsen 6,15 centimeter.",
+   "s": 200.59,
+   "e": 208.61
+  },
+  {
+   "t": "Hur. a) stor andel av kvinnorna är mellan 160 och 170 centimeter? b) lång ska en kvinna vara för att vara längre än 99 procent av alla kvinnor?",
+   "s": 208.61,
+   "e": 222.14
+  },
+  {
+   "t": "a) Vi löser uppgiften med Geogebra.",
+   "s": 222.14,
+   "e": 225.85
+  },
+  {
+   "t": "Klicka på knappen \"Växla till sannolikhetskalkylator\" i menyraden överst.",
+   "s": 225.85,
+   "e": 231.22
+  },
+  {
+   "t": "Vi skriver in medelvärdet 165,5 vid my och standardavvikelsen 6,15 vid sigma .",
+   "s": 231.22,
+   "e": 238.65
+  },
+  {
+   "t": "OBS!",
+   "s": 238.65,
+   "e": 240.22
+  },
+  {
+   "t": "Tänk på att decimaltal skrivs med punkt i stället för komma: 165,5 ger 165.5.",
+   "s": 240.22,
+   "e": 248.39
+  },
+  {
+   "t": "Vi har nu ett \"slutet intervall\" mellan 160 till 170 centimeter som vi skriver in i fälten: P av 160 är mindre än eller lika med X är mindre än eller lika med 170 är lika med 0,582",
+   "s": 248.39,
+   "e": 262.61
+  },
+  {
+   "t": "Vi ser att andelen är ca 0,58 är lika med 58 procent, samtidigt som området markeras i normalfördelningskurvan.",
+   "s": 262.61,
+   "e": 271.56
+  },
+  {
+   "t": "Lämplig redovisning: \" my är lika med 165,5 och sigma är lika med 6,15 i GG [Geogebra] med intervallet 160 är mindre än eller lika med x är mindre än eller lika med 170 ger 58 procent.\"",
+   "s": 271.56,
+   "e": 287.27
+  },
+  {
+   "t": "Svar: 58 procent",
+   "s": 287.27,
+   "e": 290.41
+  },
+  {
+   "t": "b) Vi skriver in medelvärde och standardavvikelse precis som i a-uppgiften.",
+   "s": 290.41,
+   "e": 296.49
+  },
+  {
+   "t": "Vi vill ta reda på vilken längd 99 procent är MINDRE ÄN.",
+   "s": 296.49,
+   "e": 301.18
+  },
+  {
+   "t": "Då har vi ett så kallat \"halvöppet intervall\" som ska vara mindre än ett visst värde — vi klickar på knappen \"öppet åt vänster\".",
+   "s": 301.18,
+   "e": 308.7
+  },
+  {
+   "t": "Vilket värdet är vet vi inte, men vi vill att andelen ska vara 99 procent är lika med 0,99.",
+   "s": 308.7,
+   "e": 316.01
+  },
+  {
+   "t": "Vi skriver in 0,99 i fältet för andel: P av X är mindre än eller lika med 179,807 är lika med 0,99 .",
+   "s": 316.01,
+   "e": 328.26
+  },
+  {
+   "t": "Vi ser att längden där detta gäller är ca 180 centimeter.",
+   "s": 328.21,
+   "e": 333.1
+  },
+  {
+   "t": "Lämplig redovisning: \" my är lika med 165,5 och sigma är lika med 6,15 i GG med andelen 0,99 som undre gräns ger 180 centimeter.\"",
+   "s": 333.1,
+   "e": 345.52
+  },
+  {
+   "t": "Svar: 180 centimeter",
+   "s": 345.52,
+   "e": 349.09
+  }
+ ]
+}

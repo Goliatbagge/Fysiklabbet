@@ -1,0 +1,393 @@
+{
+ "id": "ma2c-4.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0a96e1e1bcedf8d972b5f6c0d87df90dc2875d06",
+ "dur": 364.3,
+ "segments": [
+  {
+   "t": "Triangelsatserna",
+   "s": 0.1,
+   "e": 2.38
+  },
+  {
+   "t": "Vi ska nu titta på några speciella samband i trianglar som tillsammans kallas triangelsatserna.",
+   "s": 2.33,
+   "e": 8.51
+  },
+  {
+   "t": "Topptriangelsatsen",
+   "s": 8.51,
+   "e": 10.85
+  },
+  {
+   "t": "En parallelltransversal bildar en topptriangel som är likformig med den ursprungliga triangeln.",
+   "s": 10.85,
+   "e": 17.05
+  },
+  {
+   "t": "A D delat med A B är lika med A E delat med A C som är lika med D E delat med B C",
+   "s": 17.05,
+   "e": 29.75
+  },
+  {
+   "t": "a delat med a plus b är lika med c delat med c plus d som är lika med e delat med f",
+   "s": 17.05,
+   "e": 29.75
+  },
+  {
+   "t": "Parallelltransversalen är parallell med sidan B C ; a är lika med A D , b är lika med D B , c är lika med A E , d är lika med E C , e är lika med D E och f är lika med B C .",
+   "s": 29.75,
+   "e": 44.3
+  },
+  {
+   "t": "Bevis — Topptriangelsatsen",
+   "s": 44.3,
+   "e": 47.3
+  },
+  {
+   "t": "vinkeln A är gemensam vinkel i triangeln A B C och triangeln A D E .",
+   "s": 47.3,
+   "e": 53.85
+  },
+  {
+   "t": "vinkeln A B C är lika med vinkeln A D E (likbelägna vinklar)",
+   "s": 53.85,
+   "e": 60.38
+  },
+  {
+   "t": "triangeln A B C och triangeln A D E har alltså två lika vinklar vilket ger att triangeln A B C är likformig med triangeln A D E (trianglarna är likformiga).",
+   "s": 60.38,
+   "e": 72.62
+  },
+  {
+   "t": "Förhållandet mellan motsvarande sidor är då lika, dvs.",
+   "s": 72.62,
+   "e": 85.45
+  },
+  {
+   "t": "A D delat med A B är lika med A E delat med A C som är lika med D E delat med B C",
+   "s": 72.62,
+   "e": 85.45
+  },
+  {
+   "t": "v.s.b.",
+   "s": 72.62,
+   "e": 85.45
+  },
+  {
+   "t": "Transversalsatsen",
+   "s": 72.62,
+   "e": 85.45
+  },
+  {
+   "t": "En parallelltransversal delar en triangels sidor i samma förhållande.",
+   "s": 85.45,
+   "e": 90.54
+  },
+  {
+   "t": "A D delat med D B är lika med A E delat med E C",
+   "s": 90.54,
+   "e": 99.17
+  },
+  {
+   "t": "a delat med b är lika med c delat med d",
+   "s": 90.54,
+   "e": 99.17
+  },
+  {
+   "t": "Bevis — Transversalsatsen",
+   "s": 99.17,
+   "e": 102.05
+  },
+  {
+   "t": "Sedan tidigare har vi visat triangeln A B C är likformig med triangeln A D E .",
+   "s": 102.05,
+   "e": 109.04
+  },
+  {
+   "t": "Detta ger",
+   "s": 109.04,
+   "e": 111.04
+  },
+  {
+   "t": "a delat med a plus b är lika med c delat med c plus d",
+   "s": 111.04,
+   "e": 116.12
+  },
+  {
+   "t": "Vi inverterar båda led, delar upp bråken och löser sedan ut a delat med b :",
+   "s": 116.12,
+   "e": 134.2
+  },
+  {
+   "t": "a plus b delat med a är lika med c plus d delat med c",
+   "s": 116.12,
+   "e": 134.2
+  },
+  {
+   "t": "a delat med a plus b delat med a är lika med c delat med c plus d delat med c",
+   "s": 116.12,
+   "e": 134.2
+  },
+  {
+   "t": "1 plus b delat med a är lika med 1 plus d delat med c",
+   "s": 116.12,
+   "e": 134.2
+  },
+  {
+   "t": "Vi subtraherar 1 från båda led:",
+   "s": 134.2,
+   "e": 140.8
+  },
+  {
+   "t": "b delat med a är lika med d delat med c",
+   "s": 134.2,
+   "e": 140.8
+  },
+  {
+   "t": "Vi inverterar båda led:",
+   "s": 140.8,
+   "e": 146.99
+  },
+  {
+   "t": "a delat med b är lika med c delat med d",
+   "s": 140.8,
+   "e": 146.99
+  },
+  {
+   "t": "v.s.b.",
+   "s": 146.99,
+   "e": 151.69
+  },
+  {
+   "t": "Topptriangelsatsen eller transversalsatsen?",
+   "s": 146.99,
+   "e": 151.69
+  },
+  {
+   "t": "Om vi ska använda en triangelsats där topptriangelns bas",
+   "s": 151.69,
+   "e": 156.19
+  },
+  {
+   "t": "används kan vi endast använda topptriangelsatsen.",
+   "s": 156.19,
+   "e": 160.21
+  },
+  {
+   "t": "inte används kan vi använda både topptriangelsatsen och transversalsatsen.",
+   "s": 160.21,
+   "e": 165.38
+  },
+  {
+   "t": "Tumregeln är då att använda transversalsatsen eftersom räkningen ofta blir enklare och snabbare.",
+   "s": 165.38,
+   "e": 171.78
+  },
+  {
+   "t": "Bisektrissatsen",
+   "s": 171.78,
+   "e": 174.14
+  },
+  {
+   "t": "En bisektris (en stråle som delar en vinkel mitt itu) delar en triangel enligt förhållandet",
+   "s": 174.14,
+   "e": 180.68
+  },
+  {
+   "t": "A D delat med B D är lika med A C delat med B C",
+   "s": 180.68,
+   "e": 188.04
+  },
+  {
+   "t": "Bevis — Bisektrissatsen",
+   "s": 180.68,
+   "e": 188.04
+  },
+  {
+   "t": "Vi ritar en godtycklig triangel A B C och ritar in en bisektris A D (där D ligger på sidan B C ).",
+   "s": 188.04,
+   "e": 196.99
+  },
+  {
+   "t": "Vi vill visa att C D delat med B D är lika med A C delat med A B .",
+   "s": 196.99,
+   "e": 203.56
+  },
+  {
+   "t": "Vi förlänger bisektrisen till en punkt P , så att sträckorna A B och B P blir lika långa och bildar då en likbent triangel triangeln A B P .",
+   "s": 203.56,
+   "e": 212.89
+  },
+  {
+   "t": "Vi studerar triangeln A C D och triangeln B D P :",
+   "s": 212.89,
+   "e": 226.04
+  },
+  {
+   "t": "vinkeln B A D är lika med vinkeln B P D (basvinklar i likbent triangel triangeln A B P )",
+   "s": 212.89,
+   "e": 226.04
+  },
+  {
+   "t": "vinkeln B A D är lika med vinkeln C A D (per definition eftersom A P är en bisektris som delar dem lika)",
+   "s": 226.04,
+   "e": 235.7
+  },
+  {
+   "t": "Alltså gäller",
+   "s": 235.7,
+   "e": 237.74
+  },
+  {
+   "t": "vinkeln B P D är lika med vinkeln C A D",
+   "s": 237.74,
+   "e": 243.14
+  },
+  {
+   "t": "vinkeln B D P är lika med vinkeln A D C (vertikalvinklar)",
+   "s": 243.14,
+   "e": 250.05
+  },
+  {
+   "t": "triangeln A C D och triangeln B D P har alltså två lika vinklar och är likformiga.",
+   "s": 250.05,
+   "e": 257.59
+  },
+  {
+   "t": "Vi ställer upp sidförhållandena:",
+   "s": 257.59,
+   "e": 265.27
+  },
+  {
+   "t": "C D delat med B D är lika med A C delat med B P",
+   "s": 257.59,
+   "e": 265.27
+  },
+  {
+   "t": "Eftersom B P är lika med A B kan vi ersätta B P med A B , vilket ger",
+   "s": 265.27,
+   "e": 271.23
+  },
+  {
+   "t": "C D delat med B D är lika med A C delat med A B",
+   "s": 271.23,
+   "e": 279.75
+  },
+  {
+   "t": "v.s.b.",
+   "s": 271.23,
+   "e": 279.75
+  },
+  {
+   "t": "Exempel 1 — Parallelltransversal",
+   "s": 271.23,
+   "e": 279.75
+  },
+  {
+   "t": "Bestäm sidan x .",
+   "s": 279.75,
+   "e": 282.23
+  },
+  {
+   "t": "Eftersom vi inte räknar på trianglarnas baser kan vi använda både transversalsatsen och topptriangelsatsen.",
+   "s": 282.23,
+   "e": 288.9
+  },
+  {
+   "t": "Välj en metod. (Tumregeln är att använda transversalsatsen när det är möjligt.)",
+   "s": 288.9,
+   "e": 296.02
+  },
+  {
+   "t": "Transversalsatsen ger",
+   "s": 296.02,
+   "e": 298.65
+  },
+  {
+   "t": "x delat med 10 är lika med 4 delat med 8",
+   "s": 298.65,
+   "e": 302.8
+  },
+  {
+   "t": "x är lika med 4 delat med 8 gånger 10 som är lika med 5",
+   "s": 302.8,
+   "e": 307.86
+  },
+  {
+   "t": "Topptriangelsatsen ger",
+   "s": 307.86,
+   "e": 310.59
+  },
+  {
+   "t": "4 delat med 4 plus 8 är lika med x delat med x plus 10",
+   "s": 310.59,
+   "e": 316.02
+  },
+  {
+   "t": "4 delat med 12 är lika med x delat med x plus 10",
+   "s": 316.02,
+   "e": 320.86
+  },
+  {
+   "t": "Korsvis multiplikation ger",
+   "s": 320.86,
+   "e": 323.94
+  },
+  {
+   "t": "4 parentesen x plus 10 slut parentes är lika med 12 x",
+   "s": 323.94,
+   "e": 335.56
+  },
+  {
+   "t": "4 x plus 40 är lika med 12 x",
+   "s": 323.94,
+   "e": 335.56
+  },
+  {
+   "t": "40 är lika med 8 x vilket är ekvivalent med att x är lika med 5",
+   "s": 323.94,
+   "e": 335.56
+  },
+  {
+   "t": "Svar: 5 centimeter",
+   "s": 335.56,
+   "e": 338.59
+  },
+  {
+   "t": "Exempel 2 — Bisektris",
+   "s": 338.59,
+   "e": 341.5
+  },
+  {
+   "t": "Bestäm sidan x .",
+   "s": 341.62,
+   "e": 344.08
+  },
+  {
+   "t": "Bisektrissatsen ger",
+   "s": 344.03,
+   "e": 346.71
+  },
+  {
+   "t": "5 delat med 3 är lika med x delat med 9",
+   "s": 346.71,
+   "e": 350.75
+  },
+  {
+   "t": "Vi multiplicerar båda led med 9 för att lösa ut x :",
+   "s": 350.75,
+   "e": 361.1
+  },
+  {
+   "t": "x är lika med 5 delat med 3 gånger 9 som är lika med 45 delat med 3 som är lika med 15",
+   "s": 350.75,
+   "e": 361.1
+  },
+  {
+   "t": "Svar: 15 centimeter",
+   "s": 361.1,
+   "e": 364.3
+  }
+ ]
+}

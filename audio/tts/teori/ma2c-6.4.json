@@ -1,0 +1,218 @@
+{
+ "id": "ma2c-6.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0f85b64cc4a88bbf938edb35ed49423d3e653538",
+ "dur": 265.79,
+ "segments": [
+  {
+   "t": "Standardavvikelse",
+   "s": 0.1,
+   "e": 2.51
+  },
+  {
+   "t": "Variationsbredd och lådagram är två exempel på spridningsmått, dvs. två sätt att beskriva spridning.",
+   "s": 2.46,
+   "e": 9.56
+  },
+  {
+   "t": "Ett tredje spridningsmått är standardavvikelse.",
+   "s": 9.56,
+   "e": 13.38
+  },
+  {
+   "t": "Hur mycket mätvärdena i en datamängd i genomsnitt avviker från datamängdens medelvärde kallas standardavvikelse och anges med ett tal.",
+   "s": 13.38,
+   "e": 21.84
+  },
+  {
+   "t": "Ju större standardavvikelse desto större spridning.",
+   "s": 21.84,
+   "e": 25.7
+  },
+  {
+   "t": "Ju mindre standardavvikelse desto mindre spridning.",
+   "s": 25.7,
+   "e": 29.64
+  },
+  {
+   "t": "Om vi inte har någon spridning alls är standardavvikelsen 0.",
+   "s": 29.64,
+   "e": 34.16
+  },
+  {
+   "t": "Standardavvikelsen beräknas på två olika sätt, beroende på om vi har en totalundersökning (alla i populationen undersöks) eller en stickprovsundersökning (en del av populationen undersöks).",
+   "s": 34.16,
+   "e": 46.5
+  },
+  {
+   "t": "Vid en totalundersökning betecknas standardavvikelsen sigma (lilla sigma) och vid en stickprovsundersökning betecknas standardavvikelsen s .",
+   "s": 46.5,
+   "e": 55.84
+  },
+  {
+   "t": "I den här kursen räcker det att vi kan beräkna standardavvikelsen med ett digitalt verktyg, se exemplet längre fram.",
+   "s": 55.84,
+   "e": 62.91
+  },
+  {
+   "t": "För förståelsens skull tittar vi först på ett enkelt exempel utifrån två datamängder.",
+   "s": 62.91,
+   "e": 68.96
+  },
+  {
+   "t": "Datamängd 1: 16, 17, 17, 17, 18 (liten spridning)",
+   "s": 68.96,
+   "e": 76.71
+  },
+  {
+   "t": "Datamängd 2: 2, 4, 12, 24, 43 (stor spridning)",
+   "s": 76.71,
+   "e": 84.39
+  },
+  {
+   "t": "Medelvärdet för båda dessa datamängder är 17:",
+   "s": 84.39,
+   "e": 95.59
+  },
+  {
+   "t": "Medelvärde för datamängd 1 är lika med 16 plus 17 plus 17 plus 17 plus 18 delat med 5 som är lika med 17",
+   "s": 84.39,
+   "e": 95.59
+  },
+  {
+   "t": "Medelvärde för datamängd 2 är lika med 2 plus 4 plus 12 plus 24 plus 43 delat med 5 som är lika med 17",
+   "s": 95.59,
+   "e": 104.36
+  },
+  {
+   "t": "Avvikelserna från medelvärdet fås genom att ta varje mätvärde minus medelvärdet.",
+   "s": 104.36,
+   "e": 110.46
+  },
+  {
+   "t": "Medelvärdet skrivs ibland bar x .",
+   "s": 110.46,
+   "e": 114.04
+  },
+  {
+   "t": "Så bar x är lika med 17 .",
+   "s": 114.04,
+   "e": 117.25
+  },
+  {
+   "t": "Vi ser att avvikelserna för datamängd 1 är små.",
+   "s": 117.25,
+   "e": 121.42
+  },
+  {
+   "t": "De skiljer sig som minst 0 och som mest 1.",
+   "s": 121.42,
+   "e": 125.09
+  },
+  {
+   "t": "Så standardavvikelsen (medelvärdet för avvikelserna) för datamängd 1 kommer att bli ett tal mellan 0 och 1.",
+   "s": 125.09,
+   "e": 132.65
+  },
+  {
+   "t": "Avvikelserna för datamängd 2 är större.",
+   "s": 132.65,
+   "e": 136.35
+  },
+  {
+   "t": "De skiljer sig som minst 5 och som mest 26.",
+   "s": 136.35,
+   "e": 140.4
+  },
+  {
+   "t": "Så standardavvikelsen för datamängd 2 kommer att bli ett tal någonstans mellan 5 och 26, alltså större än för datamängd 1.",
+   "s": 140.4,
+   "e": 148.7
+  },
+  {
+   "t": "Varför ser formeln ut som den gör?",
+   "s": 148.7,
+   "e": 151.94
+  },
+  {
+   "t": "Förklaringen att standardavvikelsen är medelvärdet av avvikelserna är något förenklad.",
+   "s": 151.94,
+   "e": 157.93
+  },
+  {
+   "t": "För att få standardavvikelsen ska avvikelserna dessutom kvadreras och när de har summerats och dividerats med antalet värden ska kvadratroten ur kvoten dras.",
+   "s": 157.93,
+   "e": 167.36
+  },
+  {
+   "t": "Detta ingår inte i kursen, men det kan ändå vara intressant att veta vad det är som våra digitala hjälpmedel gör.",
+   "s": 167.36,
+   "e": 174.41
+  },
+  {
+   "t": "Standardavvikelse för totalundersökning:",
+   "s": 174.41,
+   "e": 208.01
+  },
+  {
+   "t": "sigma är lika med roten ur parentesen x ett minus bar x slut parentes i kvadrat plus parentesen x två minus bar x slut parentes i kvadrat plus plus parentesen x n minus bar x slut parentes i kvadrat delat med n",
+   "s": 174.41,
+   "e": 208.01
+  },
+  {
+   "t": "Standardavvikelse för stickprov:",
+   "s": 174.41,
+   "e": 208.01
+  },
+  {
+   "t": "s är lika med roten ur parentesen x ett minus bar x slut parentes i kvadrat plus parentesen x två minus bar x slut parentes i kvadrat plus plus parentesen x n minus bar x slut parentes i kvadrat delat med n minus 1",
+   "s": 174.41,
+   "e": 212.3
+  },
+  {
+   "t": "Exempel 1 — Standardavvikelse i Geogebra",
+   "s": 208.01,
+   "e": 212.3
+  },
+  {
+   "t": "Beräkna standardavvikelsen för mätvärdena 2, 4, 12, 24 och 43.",
+   "s": 212.3,
+   "e": 219.2
+  },
+  {
+   "t": "Vi startar Geogebra, klickar på knappen \"Växla till kalkylblad\" i den översta menyraden och skriver in värdena i den vänstra kolumnen.",
+   "s": 219.2,
+   "e": 227.64
+  },
+  {
+   "t": "Vi markerar därefter alla värden, klickar på menyn \"blå staplar\" och väljer Envariabelanalys.",
+   "s": 227.64,
+   "e": 234.35
+  },
+  {
+   "t": "Klicka på knappen \"Visa statistik\" för att få fram statistiska data.",
+   "s": 234.35,
+   "e": 239.11
+  },
+  {
+   "t": "Eftersom det inte framgår i uppgiften att det är en stickprovsundersökning, så förutsätter vi att det är en totalundersökning.",
+   "s": 239.11,
+   "e": 246.21
+  },
+  {
+   "t": "Vi avläser standardavvikelsen vid sigma och avrundar: sigma är lika med 15,126 som är ungefär lika med 15,1 .",
+   "s": 246.21,
+   "e": 255.74
+  },
+  {
+   "t": "Svar: 15,1",
+   "s": 255.74,
+   "e": 258.75
+  },
+  {
+   "t": "(Om det hade varit ett stickprov hade vi avläst standardavvikelsen vid s och svarat 16,9.)",
+   "s": 258.75,
+   "e": 265.79
+  }
+ ]
+}

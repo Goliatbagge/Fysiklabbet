@@ -1,0 +1,283 @@
+{
+ "id": "ma2c-1.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "03c6d9667e9428a509962695c50edb14883a5778",
+ "dur": 256.21,
+ "segments": [
+  {
+   "t": "Substitutionsmetoden",
+   "s": 0.1,
+   "e": 2.79
+  },
+  {
+   "t": "Förutom att lösa ekvationssystem grafiskt, så kan vi lösa dem algebraiskt (med algebraiska metoder).",
+   "s": 2.74,
+   "e": 10.04
+  },
+  {
+   "t": "En metod för att lösa ekvationssystem algebraiskt är substitutionsmetoden. (Att utföra en substitution innebär att man byter ut något och det är precis det vi gör.)",
+   "s": 10.04,
+   "e": 21.68
+  },
+  {
+   "t": "Lösa ekvationssystem med substitutionsmetoden",
+   "s": 21.68,
+   "e": 25.85
+  },
+  {
+   "t": "Lös ut en valfri variabel från en valfri ekvation i ekvationssystemet.",
+   "s": 25.85,
+   "e": 31.55
+  },
+  {
+   "t": "Byt ut variabeln mot uttrycket du fick i den ekvation som du inte använt.",
+   "s": 31.55,
+   "e": 37.04
+  },
+  {
+   "t": "Lös ekvationen och bestäm värdet för den ena variabeln.",
+   "s": 37.04,
+   "e": 41.52
+  },
+  {
+   "t": "Sätt in värdet på den ena variabeln i någon av de tidigare ekvationerna för att få värdet på den andra variabeln.",
+   "s": 41.52,
+   "e": 48.62
+  },
+  {
+   "t": "Exempel 1 — Variabeln redan utlöst",
+   "s": 48.62,
+   "e": 52.45
+  },
+  {
+   "t": "Lös ekvationssystemet",
+   "s": 52.45,
+   "e": 55.29
+  },
+  {
+   "t": "y är lika med 2 x minus 4 y som är lika med minus x plus 5",
+   "s": 55.29,
+   "e": 60.85
+  },
+  {
+   "t": "Vi börjar med att ge ekvationerna etiketter för att underlätta hänvisning till dem.",
+   "s": 60.85,
+   "e": 66.21
+  },
+  {
+   "t": "Vi kallar den övre ekvationen för ekvation 1 och den undre ekvationen för ekvation 2.",
+   "s": 66.21,
+   "e": 72.36
+  },
+  {
+   "t": "y är lika med 2 x minus 4, ekvation 1 y som är lika med minus x plus 5, ekvation 2",
+   "s": 72.36,
+   "e": 80.01
+  },
+  {
+   "t": "Enligt ekvation ekvation 1 är y är lika med 2 x minus 4 .",
+   "s": 80.01,
+   "e": 85.5
+  },
+  {
+   "t": "Vi byter ut (substituerar) y mot 2 x minus 4 i ekvation ekvation 2.",
+   "s": 85.5,
+   "e": 92.36
+  },
+  {
+   "t": "Det ger",
+   "s": 92.36,
+   "e": 94.26
+  },
+  {
+   "t": "2 x minus 4 är lika med minus x plus 5",
+   "s": 94.26,
+   "e": 98.83
+  },
+  {
+   "t": "Vi samlar alla x på ena sidan genom att addera x till båda led, och adderar sedan 4 till båda led:",
+   "s": 98.83,
+   "e": 107.97
+  },
+  {
+   "t": "3 x minus 4 är lika med 5",
+   "s": 98.83,
+   "e": 107.97
+  },
+  {
+   "t": "3 x är lika med 9",
+   "s": 107.97,
+   "e": 111.03
+  },
+  {
+   "t": "Division med 3 i båda led ger",
+   "s": 111.03,
+   "e": 114.33
+  },
+  {
+   "t": "3 x delat med 3 är lika med 9 delat med 3",
+   "s": 114.33,
+   "e": 118.5
+  },
+  {
+   "t": "x är lika med 3",
+   "s": 118.5,
+   "e": 121.0
+  },
+  {
+   "t": "Vi har nu bestämt x .",
+   "s": 121.0,
+   "e": 123.61
+  },
+  {
+   "t": "Vi sätter nu in x är lika med 3 i någon av de ursprungliga ekvationerna (vilken spelar ingen roll) för att få ut y .",
+   "s": 123.61,
+   "e": 131.16
+  },
+  {
+   "t": "Insättning av x är lika med 3 i ekvation ekvation 1 ger",
+   "s": 131.16,
+   "e": 136.34
+  },
+  {
+   "t": "y är lika med 2 gånger 3 minus 4 som är lika med 6 minus 4 som är lika med 2",
+   "s": 136.34,
+   "e": 142.62
+  },
+  {
+   "t": "Så y är lika med 2 .",
+   "s": 142.62,
+   "e": 145.41
+  },
+  {
+   "t": "Lösningen till ett ekvationssystem brukar anges med klammer.",
+   "s": 145.41,
+   "e": 149.95
+  },
+  {
+   "t": "Svar:",
+   "s": 149.95,
+   "e": 154.31
+  },
+  {
+   "t": "x är lika med 3 y som är lika med 2",
+   "s": 149.95,
+   "e": 154.31
+  },
+  {
+   "t": "Exempel 2 — Lös ut en variabel först",
+   "s": 154.31,
+   "e": 158.19
+  },
+  {
+   "t": "Lös ekvationssystemet",
+   "s": 158.19,
+   "e": 161.01
+  },
+  {
+   "t": "2 x minus y är lika med 7 x minus 3 y som är lika med 1",
+   "s": 161.01,
+   "e": 166.51
+  },
+  {
+   "t": "Vi skriver av ekvationssystemet och sätter etiketter.",
+   "s": 166.51,
+   "e": 170.89
+  },
+  {
+   "t": "2 x minus y är lika med 7, ekvation 1 x minus 3 y som är lika med 1, ekvation 2",
+   "s": 170.89,
+   "e": 178.32
+  },
+  {
+   "t": "Här står inte x eller y ensamt i det ena ledet, så vi börjar med att lösa ut x eller y från någon av ekvationerna.",
+   "s": 178.32,
+   "e": 186.07
+  },
+  {
+   "t": "Vi löser ut x från ekvation ekvation 2 eftersom det är enklast (då den saknar koefficienter och minustecken framför).",
+   "s": 186.07,
+   "e": 194.56
+  },
+  {
+   "t": "Vi adderar 3 y till båda led:",
+   "s": 194.56,
+   "e": 201.06
+  },
+  {
+   "t": "x är lika med 1 plus 3 y, ekvation 3",
+   "s": 194.56,
+   "e": 201.06
+  },
+  {
+   "t": "Då sätter vi x är lika med 1 plus 3 y i ekvation ekvation 1 (den ekvation som vi inte använt oss av) och löser sedan ut y :",
+   "s": 201.06,
+   "e": 214.09
+  },
+  {
+   "t": "2 parentesen 1 plus 3 y slut parentes minus y är lika med 7",
+   "s": 201.06,
+   "e": 214.09
+  },
+  {
+   "t": "2 plus 6 y minus y är lika med 7",
+   "s": 214.09,
+   "e": 218.19
+  },
+  {
+   "t": "2 plus 5 y är lika med 7",
+   "s": 218.19,
+   "e": 221.49
+  },
+  {
+   "t": "Vi subtraherar 2 från båda led och dividerar sedan med 5:",
+   "s": 221.49,
+   "e": 227.8
+  },
+  {
+   "t": "5 y är lika med 5",
+   "s": 221.49,
+   "e": 227.8
+  },
+  {
+   "t": "y är lika med 1",
+   "s": 227.8,
+   "e": 230.25
+  },
+  {
+   "t": "Vi har nu bestämt y .",
+   "s": 230.25,
+   "e": 232.66
+  },
+  {
+   "t": "Vi sätter nu in y är lika med 1 i någon av våra ekvationer.",
+   "s": 232.66,
+   "e": 237.5
+  },
+  {
+   "t": "Insättning av y är lika med 1 i ekvation ekvation 3 ger",
+   "s": 237.5,
+   "e": 242.71
+  },
+  {
+   "t": "x är lika med 1 plus 3 gånger 1 som är lika med 1 plus 3 som är lika med 4",
+   "s": 242.71,
+   "e": 248.74
+  },
+  {
+   "t": "Så x är lika med 4 .",
+   "s": 248.74,
+   "e": 251.68
+  },
+  {
+   "t": "Svar:",
+   "s": 251.68,
+   "e": 256.21
+  },
+  {
+   "t": "x är lika med 4 y som är lika med 1",
+   "s": 251.68,
+   "e": 256.21
+  }
+ ]
+}

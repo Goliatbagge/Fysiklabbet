@@ -1,0 +1,253 @@
+{
+ "id": "ma2c-3.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5c9c524d32334fd83d27da094c871225c49c106b",
+ "dur": 329.86,
+ "segments": [
+  {
+   "t": "Grafen till en andragradsfunktion",
+   "s": 0.1,
+   "e": 3.38
+  },
+  {
+   "t": "En funktion där variabeltermens största exponent är 2 kallas andragradsfunktion. f av x är lika med x i kvadrat minus 6 och g av x är lika med 3 x i kvadrat minus 5 x plus 7 är exempel på andragradsfunktioner. x i kvadrat och 3 x i kvadrat kallas andragradstermer.",
+   "s": 3.33,
+   "e": 24.25
+  },
+  {
+   "t": "Vi kommer framför allt att använda digitala hjälpmedel för att rita grafer, men för förståelsen är det bra att kunna göra det för hand också.",
+   "s": 24.25,
+   "e": 32.21
+  },
+  {
+   "t": "Vi ritar andragradsfunktionen f av x är lika med x i kvadrat för hand.",
+   "s": 32.21,
+   "e": 37.73
+  },
+  {
+   "t": "Vi börjar med att rita upp en värdetabell för att få fram koordinater att pricka in.",
+   "s": 37.73,
+   "e": 43.24
+  },
+  {
+   "t": "Vi väljer att gå från x är lika med minus 3 till x är lika med 3 .",
+   "s": 43.24,
+   "e": 48.46
+  },
+  {
+   "t": "För att beräkna y -koordinaten när x är lika med minus 3 så sätter vi in −3 i vår funktion f av x är lika med x i kvadrat och får f av minus 3 är lika med parentesen minus 3 slut parentes i kvadrat som är lika med 9 .",
+   "s": 48.46,
+   "e": 61.89
+  },
+  {
+   "t": "Sedan gör vi på motsvarande sätt för övriga x -värden.",
+   "s": 61.89,
+   "e": 66.39
+  },
+  {
+   "t": "Vi prickar in koordinaterna i ett koordinatsystem och förbinder sedan punkterna — då får vi andragradsfunktionens graf.",
+   "s": 66.39,
+   "e": 73.67
+  },
+  {
+   "t": "Parabelns delar",
+   "s": 73.67,
+   "e": 76.0
+  },
+  {
+   "t": "Vi ser att grafen till andragradsfunktionen bildar en \"båge\".",
+   "s": 76.0,
+   "e": 80.86
+  },
+  {
+   "t": "Denna form kallas parabel.",
+   "s": 80.86,
+   "e": 83.75
+  },
+  {
+   "t": "Parabeln kan antingen ha en \"topp\" där vi hittar grafens maximipunkt och största värde eller en \"dal\" där vi hittar grafens minimipunkt och minsta värde.",
+   "s": 83.75,
+   "e": 92.59
+  },
+  {
+   "t": "Ett samlingsnamn för maximi- och minimipunkt är extrempunkt.",
+   "s": 92.59,
+   "e": 97.45
+  },
+  {
+   "t": "En extrempunkt kan alltså antingen vara en maximi- eller en minimipunkt.",
+   "s": 97.45,
+   "e": 102.66
+  },
+  {
+   "t": "Huruvida en extrempunkt är en maximi- eller minimipunkt kallas punktens karaktär.",
+   "s": 102.66,
+   "e": 108.75
+  },
+  {
+   "t": "Vi ser också att grafen är symmetrisk kring en lodrät linje som kallas symmetrilinje.",
+   "s": 108.75,
+   "e": 114.95
+  },
+  {
+   "t": "Extrempunkten ligger på symmetrilinjen (detta kommer vi att utnyttja framöver).",
+   "s": 114.95,
+   "e": 120.65
+  },
+  {
+   "t": "Symmetrilinjens ekvation anges med dess x -koordinat.",
+   "s": 120.65,
+   "e": 125.53
+  },
+  {
+   "t": "Om en symmetrilinje t.ex. ligger vid 3 på x -axeln är symmetrilinjens ekvation x är lika med 3 .",
+   "s": 125.53,
+   "e": 132.82
+  },
+  {
+   "t": "Ibland skrivs den också x s är lika med 3 .",
+   "s": 132.82,
+   "e": 136.72
+  },
+  {
+   "t": "De x -värden där funktionens värde är 0 och där grafen till funktionen skär x -axeln kallas nollställen.",
+   "s": 136.72,
+   "e": 143.81
+  },
+  {
+   "t": "Nollställena anges med sin x -koordinat.",
+   "s": 143.81,
+   "e": 147.75
+  },
+  {
+   "t": "Om en graf skär x -axeln vid 5 är ett nollställe x är lika med 5 .",
+   "s": 147.75,
+   "e": 153.1
+  },
+  {
+   "t": "En andragradsfunktion kan antingen ha två, ett eller sakna nollställen.",
+   "s": 153.1,
+   "e": 158.5
+  },
+  {
+   "t": "Parabelns utseende",
+   "s": 158.5,
+   "e": 161.03
+  },
+  {
+   "t": "Om andragradstermen (t.ex. x i kvadrat eller t i kvadrat ) i en andragradsfunktion är",
+   "s": 161.03,
+   "e": 168.1
+  },
+  {
+   "t": "positiv har grafen en minimipunkt (Minnesregel: positiv x i kvadrat -term ger \"glad mun\")",
+   "s": 168.1,
+   "e": 175.6
+  },
+  {
+   "t": "negativ har grafen en maximipunkt (Minnesregel: negativ x i kvadrat -term ger \"sur mun\")",
+   "s": 175.6,
+   "e": 183.24
+  },
+  {
+   "t": "Exempel 1 — Rita och avläs en andragradsfunktion",
+   "s": 183.24,
+   "e": 188.06
+  },
+  {
+   "t": "Rita grafen till funktionen g av x är lika med minus x i kvadrat minus 2 x plus 3 och bestäm nedanstående.",
+   "s": 188.06,
+   "e": 196.22
+  },
+  {
+   "t": "När vi ritar grafer i Geogebra ersätts funktionen med y , så i detta fall ersätts g av x med y .",
+   "s": 196.22,
+   "e": 203.26
+  },
+  {
+   "t": "Vi skriver in y är lika med minus x i kvadrat minus 2 x plus 3 i inmatningsfältet i Geogebra och får nedanstående graf.",
+   "s": 203.26,
+   "e": 212.41
+  },
+  {
+   "t": "a) största värdet b) nollställena c) extrempunktens koordinater d) symmetrilinjens ekvation",
+   "s": 212.41,
+   "e": 220.89
+  },
+  {
+   "t": "a) Vi ser att kurvan har en \"topp\" och därmed sitt största värde vid y är lika med 4 . (Om det är svårt att avläsa det största eller minsta värdet kan vi använda verktyget \"Extrempunkt\" i Geogebra.)",
+   "s": 220.89,
+   "e": 234.32
+  },
+  {
+   "t": "Svar: Största värdet är 4.",
+   "s": 234.32,
+   "e": 237.71
+  },
+  {
+   "t": "b) Nollställena är där grafen skär x -axeln, dvs. vid x är lika med minus 3 och vid x är lika med 1 . (Om det är svårt att avläsa nollställena kan vi använda verktyget \"Nollställen\" i Geogebra.)",
+   "s": 237.71,
+   "e": 252.39
+  },
+  {
+   "t": "Svar: x är lika med minus 3 och x är lika med 1",
+   "s": 252.39,
+   "e": 257.39
+  },
+  {
+   "t": "c) Extrempunktens koordinater är, i detta fall, koordinaterna för maximipunkten, dvs. (−1, 4).",
+   "s": 257.39,
+   "e": 266.66
+  },
+  {
+   "t": "Svar: (−1, 4)",
+   "s": 266.66,
+   "e": 275.43
+  },
+  {
+   "t": "d) Symmetrilinjen är den lodräta linje som delar grafen i två likadana halvor.",
+   "s": 266.66,
+   "e": 275.43
+  },
+  {
+   "t": "Den går alltid genom extrempunkten.",
+   "s": 275.43,
+   "e": 278.81
+  },
+  {
+   "t": "Eftersom extrempunkten ligger vid x är lika med minus 1 , måste alltså symmetrilinjen också gå vid x är lika med minus 1 .",
+   "s": 278.81,
+   "e": 287.19
+  },
+  {
+   "t": "Så symmetrilinjens ekvation är x s är lika med minus 1 .",
+   "s": 287.19,
+   "e": 292.27
+  },
+  {
+   "t": "Svar: x s är lika med minus 1",
+   "s": 292.27,
+   "e": 296.1
+  },
+  {
+   "t": "Undersök parabeln själv",
+   "s": 296.1,
+   "e": 298.86
+  },
+  {
+   "t": "Undersök hur koefficienterna a , b och c i y är lika med a x i kvadrat plus b x plus c formar parabeln.",
+   "s": 298.86,
+   "e": 308.94
+  },
+  {
+   "t": "Startläget visar exemplets funktion g av x är lika med minus x i kvadrat minus 2 x plus 3 .",
+   "s": 308.89,
+   "e": 316.68
+  },
+  {
+   "t": "Prova särskilt tecknet på a — positiv a ger \"glad mun\" (minimipunkt), negativ a ger \"sur mun\" (maximipunkt). c flyttar grafen i höjdled och är grafens skärning med y-axeln.",
+   "s": 316.68,
+   "e": 329.86
+  }
+ ]
+}

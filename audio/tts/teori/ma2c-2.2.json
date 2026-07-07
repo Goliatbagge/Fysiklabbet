@@ -1,0 +1,403 @@
+{
+ "id": "ma2c-2.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d70d0dc280dbe1110c52e3e915da7e6a23d50385",
+ "dur": 426.81,
+ "segments": [
+  {
+   "t": "Faktorisering av uttryck",
+   "s": 0.1,
+   "e": 3.09
+  },
+  {
+   "t": "Att skriva om ett uttryck som en multiplikation är att faktorisera uttryck.",
+   "s": 3.04,
+   "e": 8.38
+  },
+  {
+   "t": "Vi har gått igenom faktorisering tidigare i Matematik 1c.",
+   "s": 8.38,
+   "e": 13.29
+  },
+  {
+   "t": "Då faktoriserade vi genom att \"bryta ut\" en gemensam faktor.",
+   "s": 13.29,
+   "e": 18.19
+  },
+  {
+   "t": "I den här kursen ska vi även faktorisera genom att använda oss av kvadreringsreglerna och konjugatregeln baklänges.",
+   "s": 18.19,
+   "e": 25.49
+  },
+  {
+   "t": "Faktorisering med konjugat- och kvadreringsreglerna",
+   "s": 25.49,
+   "e": 29.68
+  },
+  {
+   "t": "Ett uttryck kan faktoriseras med",
+   "s": 29.68,
+   "e": 32.94
+  },
+  {
+   "t": "konjugatregeln om uttrycket har två kvadrattermer minus varandra.",
+   "s": 32.94,
+   "e": 38.12
+  },
+  {
+   "t": "Kom ihåg-ramsa: \"Kvadrat minus kvadrat är konjugat!\"",
+   "s": 38.12,
+   "e": 43.11
+  },
+  {
+   "t": "första kvadreringsregeln om uttrycket har tre termer där första och sista termen är kvadrater.",
+   "s": 43.11,
+   "e": 49.86
+  },
+  {
+   "t": "Tecknet framför mittentermen är plus.",
+   "s": 49.86,
+   "e": 53.25
+  },
+  {
+   "t": "OBS!",
+   "s": 53.25,
+   "e": 54.81
+  },
+  {
+   "t": "Kontrollera att mittentermen stämmer överens med den dubbla produkten.",
+   "s": 54.81,
+   "e": 59.49
+  },
+  {
+   "t": "andra kvadreringsregeln om uttrycket har tre termer där första och sista termen är kvadrater.",
+   "s": 59.49,
+   "e": 66.14
+  },
+  {
+   "t": "Tecknet framför mittentermen är minus.",
+   "s": 66.14,
+   "e": 69.64
+  },
+  {
+   "t": "OBS!",
+   "s": 69.64,
+   "e": 71.2
+  },
+  {
+   "t": "Kontrollera att mittentermen stämmer överens med den dubbla produkten.",
+   "s": 71.2,
+   "e": 75.85
+  },
+  {
+   "t": "Faktorisera uttryck",
+   "s": 75.85,
+   "e": 78.47
+  },
+  {
+   "t": "Om möjligt,",
+   "s": 78.47,
+   "e": 80.67
+  },
+  {
+   "t": "bryt ut \"som vanligt\"",
+   "s": 80.67,
+   "e": 83.41
+  },
+  {
+   "t": "använd kvadreringsregel eller konjugatregel baklänges",
+   "s": 83.41,
+   "e": 88.16
+  },
+  {
+   "t": "Förenkla rationella uttryck (bråkuttryck med x)",
+   "s": 88.16,
+   "e": 92.53
+  },
+  {
+   "t": "Faktorisera täljare och nämnare så långt som möjligt.",
+   "s": 92.53,
+   "e": 96.74
+  },
+  {
+   "t": "Förkorta (\"stryk\") likadana faktorer från täljare och nämnare.",
+   "s": 96.74,
+   "e": 101.91
+  },
+  {
+   "t": "Exempel 1 — Faktorisera",
+   "s": 101.91,
+   "e": 104.96
+  },
+  {
+   "t": "Faktorisera. a) 18 x i kvadrat plus 45 x i kubik minus 81 x upphöjt till 4 b) x i kvadrat minus 6 x plus 9 c) 50 x i kvadrat minus 98",
+   "s": 104.96,
+   "e": 119.58
+  },
+  {
+   "t": "a) Först undersöker vi om det går att bryta ut \"som vanligt\".",
+   "s": 119.58,
+   "e": 124.54
+  },
+  {
+   "t": "Vi tittar först på alla koefficienter, alltså talen framför variabeltermerna.",
+   "s": 124.54,
+   "e": 130.03
+  },
+  {
+   "t": "18, 45 och 81 har 9 som största möjliga delare.",
+   "s": 130.03,
+   "e": 135.15
+  },
+  {
+   "t": "Då kan vi bryta ut 9.",
+   "s": 135.15,
+   "e": 138.05
+  },
+  {
+   "t": "Alla termer innehåller x , så vi kan även bryta ut en variabel.",
+   "s": 138.05,
+   "e": 143.07
+  },
+  {
+   "t": "Den lägsta exponent vi har på x är 2, så vi kan bryta ut x i kvadrat .",
+   "s": 143.07,
+   "e": 148.69
+  },
+  {
+   "t": "Den största faktorn som vi kan bryta ut är alltså 9 x i kvadrat .",
+   "s": 148.69,
+   "e": 153.71
+  },
+  {
+   "t": "Sedan ska vi fylla parentesen så att vi får det ursprungliga uttrycket när vi multiplicerar in 9 x i kvadrat i parentesen.",
+   "s": 153.71,
+   "e": 161.62
+  },
+  {
+   "t": "Vi får då",
+   "s": 161.62,
+   "e": 163.66
+  },
+  {
+   "t": "9 x i kvadrat parentesen 2 plus 5 x minus 9 x i kvadrat slut parentes",
+   "s": 163.66,
+   "e": 170.72
+  },
+  {
+   "t": "Nu tittar vi på uttrycket i parentesen igen.",
+   "s": 170.72,
+   "e": 174.78
+  },
+  {
+   "t": "Kan vi faktorisera det ytterligare?",
+   "s": 174.78,
+   "e": 178.01
+  },
+  {
+   "t": "Nej, det kan inte faktoriseras ytterligare, t.ex. med en kvadreringsregel, eftersom den första termen ekvation 2 inte är en kvadrat (kan inte skrivas som ett heltal upphöjt till 2).",
+   "s": 178.01,
+   "e": 189.88
+  },
+  {
+   "t": "Svar: 9 x i kvadrat parentesen 2 plus 5 x minus 9 x i kvadrat slut parentes",
+   "s": 189.88,
+   "e": 197.8
+  },
+  {
+   "t": "b) Vi ska faktorisera x i kvadrat minus 6 x plus 9 .",
+   "s": 197.8,
+   "e": 203.62
+  },
+  {
+   "t": "Vi kan inte bryta ut något \"som vanligt\".",
+   "s": 203.62,
+   "e": 207.28
+  },
+  {
+   "t": "Kan det vara en kvadreringsregel eller konjugatregel baklänges?",
+   "s": 207.28,
+   "e": 212.2
+  },
+  {
+   "t": "Ja!",
+   "s": 212.2,
+   "e": 213.65
+  },
+  {
+   "t": "Eftersom uttrycket innehåller tre termer där den första och sista termen är kvadrater kan det vara en kvadreringsregel!",
+   "s": 213.65,
+   "e": 220.93
+  },
+  {
+   "t": "Vi skriver upp en mall för kvadreringsregeln.",
+   "s": 220.93,
+   "e": 224.57
+  },
+  {
+   "t": "Eftersom mittentermen är negativ måste det vara ett minustecken i parentesen:",
+   "s": 224.57,
+   "e": 235.7
+  },
+  {
+   "t": "x i kvadrat minus 6 x plus 9 är lika med parentesen minus slut parentes i kvadrat",
+   "s": 224.57,
+   "e": 235.7
+  },
+  {
+   "t": "Sedan tittar vi på första termen x i kvadrat och tänker \"Vad upphöjt till 2 blir x i kvadrat ?",
+   "s": 235.7,
+   "e": 242.11
+  },
+  {
+   "t": "Jo, x !\" Sedan tittar vi på andra termen 9 och tänker \"Vad upphöjt till 2 blir 9?",
+   "s": 242.11,
+   "e": 249.7
+  },
+  {
+   "t": "Jo, 3!\"",
+   "s": 249.7,
+   "e": 252.38
+  },
+  {
+   "t": "Då fyller vi på med x och 3 i parentesen och får",
+   "s": 252.38,
+   "e": 256.77
+  },
+  {
+   "t": "x i kvadrat minus 6 x plus 9 är lika med parentesen x minus 3 slut parentes i kvadrat",
+   "s": 256.77,
+   "e": 264.48
+  },
+  {
+   "t": "Vi kontrollerar att mittentermen/den dubbla produkten blir 6 x , vilket stämmer.",
+   "s": 264.48,
+   "e": 270.98
+  },
+  {
+   "t": "Svar: parentesen x minus 3 slut parentes i kvadrat",
+   "s": 270.98,
+   "e": 276.44
+  },
+  {
+   "t": "c) Vi ska faktorisera 50 x i kvadrat minus 98 .",
+   "s": 276.44,
+   "e": 281.89
+  },
+  {
+   "t": "Vi börjar med att bryta ut 2 från uttrycket:",
+   "s": 281.89,
+   "e": 290.29
+  },
+  {
+   "t": "2 parentesen 25 x i kvadrat minus 49 slut parentes",
+   "s": 281.89,
+   "e": 290.29
+  },
+  {
+   "t": "Nu tittar vi på uttrycket i parentesen igen.",
+   "s": 290.29,
+   "e": 294.34
+  },
+  {
+   "t": "Kan vi faktorisera det ytterligare?",
+   "s": 294.34,
+   "e": 297.57
+  },
+  {
+   "t": "Ja!",
+   "s": 297.57,
+   "e": 299.01
+  },
+  {
+   "t": "Eftersom uttrycket i parentesen är \"kvadrat minus kvadrat\" är det ett konjugat!",
+   "s": 299.01,
+   "e": 304.76
+  },
+  {
+   "t": "Vi skriver en mall för konjugatregeln, så",
+   "s": 304.76,
+   "e": 308.74
+  },
+  {
+   "t": "2 parentesen 25 x i kvadrat minus 49 slut parentes är lika med 2 parentesen plus slut parentes parentesen minus slut parentes",
+   "s": 308.74,
+   "e": 319.35
+  },
+  {
+   "t": "Sedan tittar vi på första termen 25 x i kvadrat och tänker \"Vad upphöjt till 2 blir 25 x i kvadrat ?",
+   "s": 319.35,
+   "e": 326.74
+  },
+  {
+   "t": "Jo, 5 x !\" Sedan tittar vi på andra termen 49 och tänker \"Vad upphöjt till 2 blir 49?",
+   "s": 326.74,
+   "e": 335.44
+  },
+  {
+   "t": "Jo, 7!\"",
+   "s": 335.44,
+   "e": 337.91
+  },
+  {
+   "t": "Då fyller vi på med 5 x och 7 i parenteserna och får",
+   "s": 337.91,
+   "e": 343.86
+  },
+  {
+   "t": "2 parentesen 25 x i kvadrat minus 49 slut parentes är lika med 2 parentesen 5 x plus 7 slut parentes parentesen 5 x minus 7 slut parentes",
+   "s": 343.81,
+   "e": 355.81
+  },
+  {
+   "t": "Svar: 2 parentesen 5 x plus 7 slut parentes parentesen 5 x minus 7 slut parentes",
+   "s": 355.81,
+   "e": 364.1
+  },
+  {
+   "t": "Exempel 2 — Förkorta ett rationellt uttryck",
+   "s": 364.1,
+   "e": 368.14
+  },
+  {
+   "t": "Förkorta x i kvadrat minus 9 delat med 5 x plus 15 så långt som möjligt.",
+   "s": 368.14,
+   "e": 374.47
+  },
+  {
+   "t": "Vi faktoriserar täljaren och nämnaren så långt vi kan.",
+   "s": 374.47,
+   "e": 378.92
+  },
+  {
+   "t": "Täljaren är \"kvadrat minus kvadrat\" och kan därför faktoriseras med konjugatregeln.",
+   "s": 378.92,
+   "e": 384.96
+  },
+  {
+   "t": "Nämnaren kan faktoriseras genom att bryta ut 5.",
+   "s": 384.96,
+   "e": 389.24
+  },
+  {
+   "t": "x i kvadrat minus 9 delat med 5 x plus 15 är lika med parentesen x plus 3 slut parentes parentesen x minus 3 slut parentes delat med 5 parentesen x plus 3 slut parentes",
+   "s": 389.24,
+   "e": 402.84
+  },
+  {
+   "t": "Därefter förkortar vi uttrycket med parentesen x plus 3 slut parentes eftersom den faktorn finns i både täljare och nämnare.",
+   "s": 402.84,
+   "e": 411.21
+  },
+  {
+   "t": "parentesen x plus 3 slut parentes parentesen x minus 3 slut parentes delat med 5 parentesen x plus 3 slut parentes är lika med x minus 3 delat med 5",
+   "s": 411.21,
+   "e": 423.09
+  },
+  {
+   "t": "Svar: x minus 3 delat med 5",
+   "s": 423.09,
+   "e": 426.81
+  }
+ ]
+}

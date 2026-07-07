@@ -1,0 +1,303 @@
+{
+ "id": "ma2c-2.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1c5639ab47dd6b18dbdccbef458ebd0462228c4c",
+ "dur": 318.14,
+ "segments": [
+  {
+   "t": "Nollproduktmetoden",
+   "s": 0.1,
+   "e": 2.62
+  },
+  {
+   "t": "Ekvationer som innehåller x i kvadrat -termer och x -termer kan vi inte lösa med vår vanliga metod.",
+   "s": 2.58,
+   "e": 9.21
+  },
+  {
+   "t": "Dessa ekvationer, samt ekvationer där en produkt (multiplikation) är lika med 0, löser vi med nollproduktmetoden.",
+   "s": 9.21,
+   "e": 17.6
+  },
+  {
+   "t": "Principen för nollproduktmetoden är att om vi har en multiplikation som ska vara lika med 0, så måste någon av faktorerna (delarna i multiplikationen) vara lika med 0.",
+   "s": 17.6,
+   "e": 27.96
+  },
+  {
+   "t": "Det går inte att multiplicera två tal, så att de blir lika med 0, om inte något av talen är 0.",
+   "s": 27.96,
+   "e": 34.64
+  },
+  {
+   "t": "Lösningen till en ekvation kallas också för rot.",
+   "s": 34.64,
+   "e": 38.65
+  },
+  {
+   "t": "Nollproduktmetoden",
+   "s": 38.65,
+   "e": 41.12
+  },
+  {
+   "t": "Ändra så att högra ledet blir lika med 0.",
+   "s": 41.12,
+   "e": 44.84
+  },
+  {
+   "t": "Faktorisera det vänstra ledet.",
+   "s": 44.84,
+   "e": 48.0
+  },
+  {
+   "t": "Sätt varje faktor lika med 0 och lös.",
+   "s": 48.0,
+   "e": 51.73
+  },
+  {
+   "t": "Exempel 1 — Lös ekvationerna",
+   "s": 51.73,
+   "e": 55.09
+  },
+  {
+   "t": "Lös ekvationerna. a) x i kvadrat minus 12 x är lika med 0 b) x i kvadrat plus 5 x är lika med 0 c) parentesen x minus 7 slut parentes parentesen x plus 3 slut parentes är lika med 0 d) 14 x i kvadrat är lika med 21 x",
+   "s": 55.09,
+   "e": 77.53
+  },
+  {
+   "t": "a) Vi har en ekvation med både x i kvadrat -termer och x -termer.",
+   "s": 57.45,
+   "e": 77.53
+  },
+  {
+   "t": "Den är lika med 0.",
+   "s": 77.53,
+   "e": 80.1
+  },
+  {
+   "t": "Då börjar vi med att faktorisera vänstra ledet.",
+   "s": 80.1,
+   "e": 84.11
+  },
+  {
+   "t": "Vi bryter ut x :",
+   "s": 84.11,
+   "e": 90.53
+  },
+  {
+   "t": "x parentesen x minus 12 slut parentes är lika med 0",
+   "s": 84.11,
+   "e": 90.53
+  },
+  {
+   "t": "Nu har vi skrivit det vänstra ledet som en produkt (multiplikation).",
+   "s": 90.53,
+   "e": 95.72
+  },
+  {
+   "t": "Om en produkt är lika med 0 måste en faktor vara 0.",
+   "s": 95.72,
+   "e": 99.95
+  },
+  {
+   "t": "Så",
+   "s": 99.95,
+   "e": 101.42
+  },
+  {
+   "t": "x är lika med 0 eller x minus 12 som är lika med 0",
+   "s": 101.42,
+   "e": 105.94
+  },
+  {
+   "t": "Så x är lika med 0 är en lösning.",
+   "s": 105.94,
+   "e": 109.54
+  },
+  {
+   "t": "Vi beräknar den andra lösningen också:",
+   "s": 109.54,
+   "e": 117.42
+  },
+  {
+   "t": "x minus 12 är lika med 0 vilket är ekvivalent med att x är lika med 12",
+   "s": 109.54,
+   "e": 117.42
+  },
+  {
+   "t": "Vi får alltså två lösningar: x ett är lika med 0 och x två är lika med 12 .",
+   "s": 117.42,
+   "e": 123.31
+  },
+  {
+   "t": "Svar: x ett är lika med 0 och x två är lika med 12",
+   "s": 123.31,
+   "e": 128.11
+  },
+  {
+   "t": "b) Vi har en ekvation med både x i kvadrat -termer och en x -term, så vi bryter ut x :",
+   "s": 128.11,
+   "e": 138.65
+  },
+  {
+   "t": "x parentesen x plus 5 slut parentes är lika med 0",
+   "s": 128.11,
+   "e": 138.65
+  },
+  {
+   "t": "Nollproduktmetoden ger",
+   "s": 138.65,
+   "e": 141.49
+  },
+  {
+   "t": "x är lika med 0 eller x plus 5 som är lika med 0",
+   "s": 141.49,
+   "e": 146.03
+  },
+  {
+   "t": "Den andra ekvationen ger x är lika med minus 5 .",
+   "s": 146.03,
+   "e": 150.21
+  },
+  {
+   "t": "Svar: x ett är lika med 0 och x två är lika med minus 5",
+   "s": 150.21,
+   "e": 155.28
+  },
+  {
+   "t": "c) Det vänstra ledet är redan faktoriserat och lika med 0.",
+   "s": 155.28,
+   "e": 160.43
+  },
+  {
+   "t": "Nollproduktmetoden ger",
+   "s": 160.43,
+   "e": 163.31
+  },
+  {
+   "t": "x minus 7 är lika med 0 vilket är ekvivalent med att x är lika med 7",
+   "s": 163.31,
+   "e": 169.01
+  },
+  {
+   "t": "eller",
+   "s": 169.01,
+   "e": 170.61
+  },
+  {
+   "t": "x plus 3 är lika med 0 vilket är ekvivalent med att x är lika med minus 3",
+   "s": 170.61,
+   "e": 176.65
+  },
+  {
+   "t": "Svar: x ett är lika med 7 och x två är lika med minus 3",
+   "s": 176.65,
+   "e": 181.6
+  },
+  {
+   "t": "d) Vi har en ekvation med både x i kvadrat -termer och x -termer (det spelar ingen roll att de är på olika sidor om likhetstecknet).",
+   "s": 181.6,
+   "e": 190.93
+  },
+  {
+   "t": "Vi börjar med att göra om så att det högra ledet blir 0, genom att subtrahera 21 x från båda led:",
+   "s": 190.93,
+   "e": 201.19
+  },
+  {
+   "t": "14 x i kvadrat minus 21 x är lika med 0",
+   "s": 190.93,
+   "e": 201.19
+  },
+  {
+   "t": "Därefter faktoriserar vi det vänstra ledet och löser ekvationen som vanligt.",
+   "s": 201.19,
+   "e": 206.84
+  },
+  {
+   "t": "7 x parentesen 2 x minus 3 slut parentes är lika med 0",
+   "s": 206.84,
+   "e": 212.66
+  },
+  {
+   "t": "(Det går även att bryta ut bara x , men helst största möjliga faktor.)",
+   "s": 212.66,
+   "e": 218.06
+  },
+  {
+   "t": "Nollproduktmetoden ger",
+   "s": 218.06,
+   "e": 220.9
+  },
+  {
+   "t": "7 x är lika med 0 vilket är ekvivalent med att x är lika med 0",
+   "s": 220.9,
+   "e": 226.4
+  },
+  {
+   "t": "eller",
+   "s": 226.4,
+   "e": 228.0
+  },
+  {
+   "t": "2 x minus 3 är lika med 0 vilket är ekvivalent med att 2 x är lika med 3 vilket är ekvivalent med att x är lika med 3 delat med 2",
+   "s": 228.0,
+   "e": 237.4
+  },
+  {
+   "t": "Svar: x ett är lika med 0 och x två är lika med 3 delat med 2",
+   "s": 237.4,
+   "e": 242.85
+  },
+  {
+   "t": "Exempel 2 — Konstruera en ekvation med givna rötter",
+   "s": 242.85,
+   "e": 247.41
+  },
+  {
+   "t": "Ange en ekvation med rötterna x ett är lika med 3 och x två är lika med minus 10 .",
+   "s": 247.41,
+   "e": 253.59
+  },
+  {
+   "t": "Vi ska konstruera en ekvation med rötterna (lösningarna) x är lika med 3 och x är lika med minus 10 .",
+   "s": 253.59,
+   "e": 261.01
+  },
+  {
+   "t": "Detta kan vi enkelt göra med nollproduktmetoden baklänges!",
+   "s": 261.01,
+   "e": 265.62
+  },
+  {
+   "t": "Om vi sätter ekvationen lika med 0, så måste faktorerna parentesen x minus 3 slut parentes och parentesen x plus 10 slut parentes finnas med eftersom när vi sätter in x är lika med 3 och x är lika med minus 10 i dessa så blir de 0.",
+   "s": 265.62,
+   "e": 280.52
+  },
+  {
+   "t": "Vi kan se det som att vi sätter in lösningarna fast med ombytt tecken i parenteserna.",
+   "s": 280.52,
+   "e": 285.99
+  },
+  {
+   "t": "En ekvation skulle alltså kunna vara",
+   "s": 285.99,
+   "e": 289.21
+  },
+  {
+   "t": "parentesen x minus 3 slut parentes parentesen x plus 10 slut parentes är lika med 0",
+   "s": 289.21,
+   "e": 296.62
+  },
+  {
+   "t": "(Vi ser med en snabb kontroll att x är lika med 3 gör att första faktorn blir 0 och x är lika med minus 10 gör att andra faktorn blir 0 och därmed gör att hela vänstra ledet blir lika med 0.)",
+   "s": 296.62,
+   "e": 308.11
+  },
+  {
+   "t": "Svar: parentesen x minus 3 slut parentes parentesen x plus 10 slut parentes är lika med 0",
+   "s": 308.11,
+   "e": 318.14
+  }
+ ]
+}

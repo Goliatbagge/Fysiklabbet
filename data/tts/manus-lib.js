@@ -257,6 +257,32 @@
                     out.push('är inte lika med');
                 } else if (c === 'pm') {
                     out.push('plus minus');
+                } else if (c === 'triangle') {
+                    out.push('triangeln');
+                } else if (c === 'sim') {
+                    out.push('är likformig med'); ctx.eqCount = 0;
+                } else if (c === 'cong') {
+                    out.push('är kongruent med'); ctx.eqCount = 0;
+                } else if (c === 'log') {
+                    // \log_2 16 → "2-logaritmen av 16"; \log_a b → "a-logaritmen av b".
+                    // OBS: uprightSubscripts() i build.js kan ha gjort om basen
+                    // till \mathrm{a} — packa i så fall upp den.
+                    const subAt = peekIs('_');
+                    let bas = '';
+                    if (subAt >= 0) {
+                        i = subAt + 1;
+                        let arg = nextArg();
+                        if (arg.length === 1 && arg[0].t === 'cmd' &&
+                            /^(text|mathrm|mathit)$/.test(arg[0].v)) {
+                            arg = nextArg();
+                        }
+                        const raw = rawText(arg);
+                        bas = /^\d+$/.test(raw) ? raw : subSpoken(raw);
+                    }
+                    // Trailing "av" bara om ett argument faktiskt följer
+                    const harArg = peekIs('ch') >= 0 || peekIs('grp') >= 0 || peekIs('cmd') >= 0;
+                    const stam = bas ? bas + '-logaritmen' : 'logaritmen';
+                    out.push(harArg ? stam + ' av' : stam);
                 } else if (FUNKTIONER[c]) {
                     out.push(FUNKTIONER[c]);
                 } else if (GREKISKA[c]) {
@@ -450,6 +476,8 @@
              .replace(/(\d) ?‰/g, '$1 promille')
              .replace(/(\d)°/g, '$1 grader')
              .replace(/∠/g, 'vinkeln ')
+             // Symboler som beskrivs i ord i omgivande text — läses inte upp
+             .replace(/\s*[⟹⟺≅]\s*/g, ' ')
              .replace(/→/g, ' ger ')
              // "vektorn $\vec{u}$" → talformen dubblerar ordet — säg det en gång
              .replace(/\b([Vv]ektorn|[Vv]ektorerna)\s+vektorn\b/g, '$1');

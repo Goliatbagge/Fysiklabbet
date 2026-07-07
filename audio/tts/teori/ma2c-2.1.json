@@ -1,0 +1,233 @@
+{
+ "id": "ma2c-2.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "e10a18c0908e761d5b43f4e01353c4637456cd60",
+ "dur": 324.92,
+ "segments": [
+  {
+   "t": "Kvadreringsreglerna och konjugatregeln",
+   "s": 0.1,
+   "e": 3.58
+  },
+  {
+   "t": "Kvadreringsreglerna är en metod för att enkelt utveckla parentesuttryck \"i kvadrat\".",
+   "s": 3.52,
+   "e": 9.47
+  },
+  {
+   "t": "Konjugatregeln är en metod för att enkelt utveckla en multiplikation av två likadana parentesuttryck där det enda som skiljer är tecknet mellan termerna inuti parentesen.",
+   "s": 9.47,
+   "e": 19.85
+  },
+  {
+   "t": "Kvadreringsreglerna",
+   "s": 19.85,
+   "e": 22.15
+  },
+  {
+   "t": "parentesen a plus b slut parentes i kvadrat är lika med a i kvadrat plus 2 a b plus b i kvadrat",
+   "s": 22.15,
+   "e": 30.2
+  },
+  {
+   "t": "parentesen a minus b slut parentes i kvadrat är lika med a i kvadrat minus 2 a b plus b i kvadrat",
+   "s": 30.2,
+   "e": 38.39
+  },
+  {
+   "t": "Konjugatregeln",
+   "s": 38.39,
+   "e": 40.64
+  },
+  {
+   "t": "parentesen a plus b slut parentes parentesen a minus b slut parentes är lika med a i kvadrat minus b i kvadrat",
+   "s": 40.64,
+   "e": 49.62
+  },
+  {
+   "t": "Bevis — Första kvadreringsregeln",
+   "s": 49.62,
+   "e": 53.05
+  },
+  {
+   "t": "parentesen a plus b slut parentes i kvadrat är lika med parentesen a plus b slut parentes parentesen a plus b slut parentes som är lika med a i kvadrat plus a b plus a b plus b i kvadrat som är lika med a i kvadrat plus 2 a b plus b i kvadrat",
+   "s": 53.05,
+   "e": 69.53
+  },
+  {
+   "t": "v.s.b.",
+   "s": 69.53,
+   "e": 73.28
+  },
+  {
+   "t": "Bevis — Konjugatregeln",
+   "s": 69.53,
+   "e": 73.28
+  },
+  {
+   "t": "parentesen a plus b slut parentes parentesen a minus b slut parentes är lika med a i kvadrat minus a b plus a b minus b i kvadrat som är lika med a i kvadrat minus b i kvadrat",
+   "s": 73.28,
+   "e": 86.24
+  },
+  {
+   "t": "v.s.b.",
+   "s": 86.24,
+   "e": 91.04
+  },
+  {
+   "t": "Exempel 1 — Utveckla med kvadreringsreglerna",
+   "s": 86.24,
+   "e": 91.04
+  },
+  {
+   "t": "Utveckla. a) parentesen x plus 4 slut parentes i kvadrat b) parentesen 7 minus b slut parentes i kvadrat c) parentesen 3 y minus 4 x slut parentes i kvadrat",
+   "s": 91.04,
+   "e": 105.44
+  },
+  {
+   "t": "a) Första kvadreringsregeln med a är lika med x och b är lika med 4 :",
+   "s": 105.44,
+   "e": 121.9
+  },
+  {
+   "t": "parentesen x plus 4 slut parentes i kvadrat är lika med x i kvadrat plus 2 gånger x gånger 4 plus 4 i kvadrat som är lika med x i kvadrat plus 8 x plus 16",
+   "s": 105.44,
+   "e": 121.9
+  },
+  {
+   "t": "Svar: x i kvadrat plus 8 x plus 16",
+   "s": 121.9,
+   "e": 126.76
+  },
+  {
+   "t": "Kommentar: \"Mittentermen\" eller \"den dubbla produkten\" kan vi ofta få fram direkt med snabb och enkel huvudräkning.",
+   "s": 126.76,
+   "e": 133.91
+  },
+  {
+   "t": "För att få den dubbla produkten multiplicerar vi de båda termerna inuti parentesen och dubblar sedan: x gånger 4 är 4 x — dubblat blir det 8 x .",
+   "s": 133.91,
+   "e": 143.93
+  },
+  {
+   "t": "Träna på detta!",
+   "s": 143.93,
+   "e": 146.19
+  },
+  {
+   "t": "b) Andra kvadreringsregeln:",
+   "s": 146.19,
+   "e": 156.1
+  },
+  {
+   "t": "parentesen 7 minus b slut parentes i kvadrat är lika med 49 minus 14 b plus b i kvadrat",
+   "s": 146.19,
+   "e": 156.1
+  },
+  {
+   "t": "Svar: 49 minus 14 b plus b i kvadrat",
+   "s": 156.1,
+   "e": 161.14
+  },
+  {
+   "t": "c) Tänk på att hela termerna 3 y och 4 x ska upphöjas till 2:",
+   "s": 161.14,
+   "e": 175.29
+  },
+  {
+   "t": "parentesen 3 y minus 4 x slut parentes i kvadrat är lika med 9 y i kvadrat minus 24 x y plus 16 x i kvadrat",
+   "s": 161.14,
+   "e": 175.29
+  },
+  {
+   "t": "Svar: 9 y i kvadrat minus 24 x y plus 16 x i kvadrat",
+   "s": 175.29,
+   "e": 182.2
+  },
+  {
+   "t": "Exempel 2 — Utveckla med konjugatregeln",
+   "s": 182.2,
+   "e": 186.11
+  },
+  {
+   "t": "Utveckla. a) parentesen x plus 8 slut parentes parentesen x minus 8 slut parentes b) parentesen 3 x minus 5 y slut parentes parentesen 3 x plus 5 y slut parentes c) parentesen 9 plus 2 x slut parentes parentesen 2 x minus 9 slut parentes",
+   "s": 186.11,
+   "e": 206.61
+  },
+  {
+   "t": "a) Vi ser att innehållet i parenteserna är lika och att det enda som skiljer är tecknet mellan termerna (plus i ena och minus i andra).",
+   "s": 206.61,
+   "e": 215.53
+  },
+  {
+   "t": "Alltså tillämpar vi konjugatregeln.",
+   "s": 215.53,
+   "e": 218.94
+  },
+  {
+   "t": "parentesen x plus 8 slut parentes parentesen x minus 8 slut parentes är lika med x i kvadrat minus 8 i kvadrat som är lika med x i kvadrat minus 64",
+   "s": 218.94,
+   "e": 230.56
+  },
+  {
+   "t": "Svar: x i kvadrat minus 64",
+   "s": 230.56,
+   "e": 234.66
+  },
+  {
+   "t": "Kommentar: Precis som med kvadreringsreglerna så träna på att få fram det slutgiltiga svaret i ett enda steg, dvs. försök att direkt få fram att parentesen x plus 8 slut parentes parentesen x minus 8 slut parentes är lika med x i kvadrat minus 64 utan några mellanled.",
+   "s": 234.66,
+   "e": 252.04
+  },
+  {
+   "t": "b) Tänk på att även 3 och 5 ska upphöjas till 2:",
+   "s": 252.04,
+   "e": 266.01
+  },
+  {
+   "t": "parentesen 3 x minus 5 y slut parentes parentesen 3 x plus 5 y slut parentes är lika med 9 x i kvadrat minus 25 y i kvadrat",
+   "s": 252.04,
+   "e": 266.01
+  },
+  {
+   "t": "Svar: 9 x i kvadrat minus 25 y i kvadrat",
+   "s": 266.01,
+   "e": 271.45
+  },
+  {
+   "t": "c) Detta ser vid en första anblick inte ut som ett konjugat eftersom vi inte har samma första term i parenteserna (9 respektive 2 x ).",
+   "s": 271.45,
+   "e": 280.96
+  },
+  {
+   "t": "Däremot är parenteserna snarlika.",
+   "s": 280.96,
+   "e": 284.59
+  },
+  {
+   "t": "Om vi kastar om termerna i den första parentesen kommer det dock att bli ett konjugat!",
+   "s": 284.59,
+   "e": 290.15
+  },
+  {
+   "t": "Att kasta om termerna är ok eftersom det är ett plustecken emellan och ordningen då inte spelar någon roll ( 3 plus 5 är ju samma sak som 5 plus 3 ).",
+   "s": 290.15,
+   "e": 299.15
+  },
+  {
+   "t": "Därefter fortsätter vi med konjugatregeln som vanligt.",
+   "s": 299.15,
+   "e": 303.55
+  },
+  {
+   "t": "parentesen 9 plus 2 x slut parentes parentesen 2 x minus 9 slut parentes är lika med parentesen 2 x plus 9 slut parentes parentesen 2 x minus 9 slut parentes som är lika med 4 x i kvadrat minus 81",
+   "s": 303.55,
+   "e": 320.74
+  },
+  {
+   "t": "Svar: 4 x i kvadrat minus 81",
+   "s": 320.69,
+   "e": 324.92
+  }
+ ]
+}

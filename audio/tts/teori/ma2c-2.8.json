@@ -1,0 +1,363 @@
+{
+ "id": "ma2c-2.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ae85eef550a5e359ee70c4bce69d395a731411b6",
+ "dur": 362.95,
+ "segments": [
+  {
+   "t": "Rotekvationer",
+   "s": 0.1,
+   "e": 2.33
+  },
+  {
+   "t": "En ekvation där variabeln, t.ex. x , är under ett rottecken kallas rotekvation.",
+   "s": 2.27,
+   "e": 8.62
+  },
+  {
+   "t": "Lösa rotekvationer — generellt",
+   "s": 8.62,
+   "e": 11.93
+  },
+  {
+   "t": "Lös ut termen som innehåller rotuttrycket.",
+   "s": 11.93,
+   "e": 15.95
+  },
+  {
+   "t": "Kvadrera båda led (för att bli av med rottecknet) och lös med lämplig metod.",
+   "s": 15.95,
+   "e": 21.23
+  },
+  {
+   "t": "Kontrollera din lösning!",
+   "s": 21.23,
+   "e": 23.84
+  },
+  {
+   "t": "Falska rötter kan uppstå.",
+   "s": 23.84,
+   "e": 26.59
+  },
+  {
+   "t": "Lösa rotekvationer — med variabelsubstitution",
+   "s": 26.59,
+   "e": 30.69
+  },
+  {
+   "t": "Substituera (byt ut) rotuttrycket, t.ex. roten ur x , mot en annan variabel, t.ex. t .",
+   "s": 30.69,
+   "e": 39.04
+  },
+  {
+   "t": "Teckna en ny ekvation med t och lös ekvationen.",
+   "s": 39.04,
+   "e": 43.38
+  },
+  {
+   "t": "Bestäm den ursprungliga variabeln x med hjälp av värdet på t .",
+   "s": 43.38,
+   "e": 48.11
+  },
+  {
+   "t": "Kontrollera din lösning!",
+   "s": 48.11,
+   "e": 50.69
+  },
+  {
+   "t": "Falska rötter kan uppstå.",
+   "s": 50.69,
+   "e": 53.41
+  },
+  {
+   "t": "Exempel 1 — Lös rotekvationerna",
+   "s": 53.41,
+   "e": 56.96
+  },
+  {
+   "t": "Lös. a) roten ur x är lika med 8 b) roten ur x plus 2 är lika med 17 c) x plus 3 roten ur x minus 4 är lika med 0",
+   "s": 56.96,
+   "e": 68.26
+  },
+  {
+   "t": "a) Vi kvadrerar båda led och löser ekvationen:",
+   "s": 68.26,
+   "e": 77.41
+  },
+  {
+   "t": "parentesen roten ur x slut parentes i kvadrat är lika med 8 i kvadrat",
+   "s": 68.26,
+   "e": 77.41
+  },
+  {
+   "t": "x är lika med 64",
+   "s": 77.41,
+   "e": 80.41
+  },
+  {
+   "t": "Kontroll: Insättning av x är lika med 64 i den ursprungliga ekvationen roten ur x är lika med 8 ger vänsterledet är lika med roten ur 64 som är lika med 8 som är lika med högerledet .",
+   "s": 80.41,
+   "e": 92.97
+  },
+  {
+   "t": "Stämmer!",
+   "s": 92.97,
+   "e": 94.79
+  },
+  {
+   "t": "Svar: x är lika med 64",
+   "s": 94.79,
+   "e": 98.42
+  },
+  {
+   "t": "b) Vi kvadrerar båda led och löser ekvationen:",
+   "s": 98.42,
+   "e": 108.22
+  },
+  {
+   "t": "parentesen roten ur x plus 2 slut parentes i kvadrat är lika med 17 i kvadrat",
+   "s": 98.42,
+   "e": 108.22
+  },
+  {
+   "t": "x plus 2 är lika med 289",
+   "s": 108.22,
+   "e": 112.24
+  },
+  {
+   "t": "x är lika med 287",
+   "s": 112.24,
+   "e": 115.64
+  },
+  {
+   "t": "Kontroll: Insättning av x är lika med 287 i den ursprungliga ekvationen ger vänsterledet är lika med roten ur 287 plus 2 som är lika med roten ur 289 som är lika med 17 som är lika med högerledet .",
+   "s": 115.64,
+   "e": 129.7
+  },
+  {
+   "t": "Stämmer!",
+   "s": 129.7,
+   "e": 131.51
+  },
+  {
+   "t": "Svar: x är lika med 287",
+   "s": 131.51,
+   "e": 135.59
+  },
+  {
+   "t": "c) Vi löser ut termen med rotuttrycket 3 roten ur x :",
+   "s": 135.59,
+   "e": 143.8
+  },
+  {
+   "t": "3 roten ur x är lika med 4 minus x",
+   "s": 135.59,
+   "e": 143.8
+  },
+  {
+   "t": "Vi kvadrerar båda led:",
+   "s": 143.8,
+   "e": 153.74
+  },
+  {
+   "t": "parentesen 3 roten ur x slut parentes i kvadrat är lika med parentesen 4 minus x slut parentes i kvadrat",
+   "s": 143.8,
+   "e": 153.74
+  },
+  {
+   "t": "9 x är lika med 16 minus 8 x plus x i kvadrat",
+   "s": 153.74,
+   "e": 159.19
+  },
+  {
+   "t": "Vi modifierar ekvationen och löser den sedan med pq-formeln:",
+   "s": 159.19,
+   "e": 167.45
+  },
+  {
+   "t": "x i kvadrat minus 17 x plus 16 är lika med 0",
+   "s": 159.19,
+   "e": 167.45
+  },
+  {
+   "t": "x är lika med 8,5 plus minus roten ur 8,5 i kvadrat minus 16 som är lika med 8,5 plus minus roten ur 56,25 som är lika med 8,5 plus minus 7,5",
+   "s": 167.45,
+   "e": 180.64
+  },
+  {
+   "t": "Detta ger lösningarna",
+   "s": 180.64,
+   "e": 183.31
+  },
+  {
+   "t": "x ett är lika med 8,5 minus 7,5 som är lika med 1",
+   "s": 183.31,
+   "e": 188.75
+  },
+  {
+   "t": "x två är lika med 8,5 plus 7,5 som är lika med 16",
+   "s": 188.75,
+   "e": 194.26
+  },
+  {
+   "t": "Kontroll: Insättning av x är lika med 1 i den ursprungliga ekvationen x plus 3 roten ur x minus 4 är lika med 0 ger",
+   "s": 194.26,
+   "e": 203.03
+  },
+  {
+   "t": "vänsterledet är lika med 1 plus 3 roten ur 1 minus 4 som är lika med 1 plus 3 minus 4 som är lika med 0 som är lika med högerledet",
+   "s": 203.03,
+   "e": 212.6
+  },
+  {
+   "t": "Stämmer!",
+   "s": 212.6,
+   "e": 214.36
+  },
+  {
+   "t": "Kontroll: Insättning av x är lika med 16 i den ursprungliga ekvationen ger",
+   "s": 214.36,
+   "e": 220.22
+  },
+  {
+   "t": "vänsterledet är lika med 16 plus 3 roten ur 16 minus 4 som är lika med 16 plus 12 minus 4 som är lika med 24 är inte lika med högerledet",
+   "s": 220.22,
+   "e": 230.65
+  },
+  {
+   "t": "Stämmer inte!",
+   "s": 230.65,
+   "e": 232.85
+  },
+  {
+   "t": "Falsk rot!",
+   "s": 232.85,
+   "e": 234.94
+  },
+  {
+   "t": "Svar: x är lika med 1",
+   "s": 234.94,
+   "e": 238.14
+  },
+  {
+   "t": "Exempel 2 — Alternativ lösning med variabelsubstitution",
+   "s": 238.14,
+   "e": 242.88
+  },
+  {
+   "t": "Lös x plus 3 roten ur x minus 4 är lika med 0 med variabelsubstitution.",
+   "s": 242.88,
+   "e": 249.22
+  },
+  {
+   "t": "Sätt roten ur x är lika med t .",
+   "s": 249.22,
+   "e": 252.69
+  },
+  {
+   "t": "Detta ger x är lika med roten ur x gånger roten ur x som är lika med t gånger t som är lika med t i kvadrat och den nya ekvationen",
+   "s": 252.69,
+   "e": 261.76
+  },
+  {
+   "t": "t i kvadrat plus 3 t minus 4 är lika med 0",
+   "s": 261.76,
+   "e": 266.38
+  },
+  {
+   "t": "pq-formeln ger",
+   "s": 266.38,
+   "e": 268.8
+  },
+  {
+   "t": "t är lika med minus 1,5 plus minus roten ur 1,5 i kvadrat plus 4 som är lika med minus 1,5 plus minus roten ur 6,25 som är lika med minus 1,5 plus minus 2,5",
+   "s": 268.8,
+   "e": 282.4
+  },
+  {
+   "t": "Detta ger lösningarna",
+   "s": 282.4,
+   "e": 285.09
+  },
+  {
+   "t": "t ett är lika med minus 1,5 minus 2,5 som är lika med minus 4",
+   "s": 285.09,
+   "e": 291.29
+  },
+  {
+   "t": "t två är lika med minus 1,5 plus 2,5 som är lika med 1",
+   "s": 291.29,
+   "e": 297.12
+  },
+  {
+   "t": "roten ur x är lika med t ett ger",
+   "s": 297.12,
+   "e": 300.96
+  },
+  {
+   "t": "roten ur x är lika med minus 4 vilket ger att x ett är lika med 16",
+   "s": 300.96,
+   "e": 306.82
+  },
+  {
+   "t": "roten ur x är lika med t två ger",
+   "s": 306.82,
+   "e": 310.71
+  },
+  {
+   "t": "roten ur x är lika med 1 vilket ger att x två är lika med 1",
+   "s": 310.71,
+   "e": 316.04
+  },
+  {
+   "t": "(Kontrollera lösningarna x ett är lika med 16 och x två är lika med 1 som i första lösningen — x är lika med 16 visar sig vara en falsk rot.)",
+   "s": 316.04,
+   "e": 325.45
+  },
+  {
+   "t": "Svar: x är lika med 1",
+   "s": 325.45,
+   "e": 328.7
+  },
+  {
+   "t": "Varför uppstår falska rötter?",
+   "s": 328.7,
+   "e": 331.73
+  },
+  {
+   "t": "Anta A är lika med B .",
+   "s": 331.73,
+   "e": 334.52
+  },
+  {
+   "t": "Vi kvadrerar båda led och får",
+   "s": 334.52,
+   "e": 337.7
+  },
+  {
+   "t": "A i kvadrat är lika med B i kvadrat",
+   "s": 337.7,
+   "e": 341.44
+  },
+  {
+   "t": "Löser vi denna ekvation får vi",
+   "s": 341.44,
+   "e": 344.61
+  },
+  {
+   "t": "A är lika med plus minus B",
+   "s": 344.61,
+   "e": 347.76
+  },
+  {
+   "t": "Den andra lösningen A är lika med minus B är en falsk rot (om A inte är lika med 0) eftersom den inte uppfyller det första villkoret A är lika med B .",
+   "s": 347.76,
+   "e": 358.51
+  },
+  {
+   "t": "Slutsats: Kvadreringar kan ge extra \"falska\" rötter.",
+   "s": 358.46,
+   "e": 362.95
+  }
+ ]
+}

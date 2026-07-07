@@ -1,0 +1,263 @@
+{
+ "id": "ma2c-3.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "17f15dca2e83cecb9b40fbc89a5246a55a67cfec",
+ "dur": 292.96,
+ "segments": [
+  {
+   "t": "Andragradsekvationer och andragradsfunktioner",
+   "s": 0.1,
+   "e": 4.17
+  },
+  {
+   "t": "I förra avsnittet bestämde vi en andragradsfunktions nollställen, extrempunkt och symmetrilinje grafiskt.",
+   "s": 4.12,
+   "e": 11.43
+  },
+  {
+   "t": "Vi ska nu bestämma dem algebraiskt.",
+   "s": 11.43,
+   "e": 14.81
+  },
+  {
+   "t": "Bestämma nollställen, symmetrilinje och extrempunkt algebraiskt",
+   "s": 14.81,
+   "e": 20.07
+  },
+  {
+   "t": "Algebraiskt bestäms en andragradsfunktions",
+   "s": 20.07,
+   "e": 24.15
+  },
+  {
+   "t": "nollställen genom att sätta funktionen lika med 0 och lösa den.",
+   "s": 24.15,
+   "e": 28.77
+  },
+  {
+   "t": "Lösningarna ger nollställena.",
+   "s": 28.77,
+   "e": 31.71
+  },
+  {
+   "t": "symmetrilinje genom medelvärdet av nollställena.",
+   "s": 31.71,
+   "e": 35.83
+  },
+  {
+   "t": "Om nollställen saknas kan symmetrilinjen fås av \"talet framför rottecknet\" i pq-formeln, dvs. x s är lika med minus p delat med 2 .",
+   "s": 35.83,
+   "e": 45.29
+  },
+  {
+   "t": "extrempunkt genom att sätta in symmetrilinjens x -koordinat i funktionsuttrycket.",
+   "s": 45.29,
+   "e": 51.17
+  },
+  {
+   "t": "Symmetrilinjen ger extrempunktens x -koordinat och funktionsuttryckets värde ger extrempunktens y -koordinat.",
+   "s": 51.17,
+   "e": 59.01
+  },
+  {
+   "t": "Exempel 1 — Bestäm allt algebraiskt",
+   "s": 59.01,
+   "e": 62.86
+  },
+  {
+   "t": "Vi har funktionen f av x är lika med 3 x i kvadrat minus 12 x plus 9 .",
+   "s": 62.86,
+   "e": 69.34
+  },
+  {
+   "t": "Ange funktionens. a) nollställen b) symmetrilinje c) extrempunkt d) extrempunkts karaktär e) största eller minsta värde",
+   "s": 69.34,
+   "e": 81.3
+  },
+  {
+   "t": "a) Vi bestämmer nollställena genom att sätta funktionsuttrycket lika med 0 och lösa ekvationen:",
+   "s": 81.3,
+   "e": 91.66
+  },
+  {
+   "t": "3 x i kvadrat minus 12 x plus 9 är lika med 0",
+   "s": 81.3,
+   "e": 91.66
+  },
+  {
+   "t": "Vi dividerar båda led med 3 och löser sedan ekvationen med pq-formeln:",
+   "s": 91.66,
+   "e": 100.45
+  },
+  {
+   "t": "x i kvadrat minus 4 x plus 3 är lika med 0",
+   "s": 91.66,
+   "e": 100.45
+  },
+  {
+   "t": "x är lika med 2 plus minus roten ur 2 i kvadrat minus 3 som är lika med 2 plus minus roten ur 1 som är lika med 2 plus minus 1",
+   "s": 100.45,
+   "e": 109.83
+  },
+  {
+   "t": "x ett är lika med 2 minus 1 som är lika med 1",
+   "s": 109.83,
+   "e": 114.38
+  },
+  {
+   "t": "x två är lika med 2 plus 1 som är lika med 3",
+   "s": 114.38,
+   "e": 118.56
+  },
+  {
+   "t": "Svar: x är lika med 1 och x är lika med 3",
+   "s": 118.56,
+   "e": 122.89
+  },
+  {
+   "t": "b) Symmetrilinjen ligger mitt emellan nollställena, vilket motsvarar deras medelvärde:",
+   "s": 122.89,
+   "e": 134.44
+  },
+  {
+   "t": "x s är lika med 1 plus 3 delat med 2 som är lika med 4 delat med 2 som är lika med 2",
+   "s": 122.89,
+   "e": 134.44
+  },
+  {
+   "t": "Svar: x s är lika med 2",
+   "s": 134.44,
+   "e": 137.8
+  },
+  {
+   "t": "c) Extrempunkten ligger på symmetrilinjen och har alltså samma x -koordinat, dvs. x är lika med 2 .",
+   "s": 137.8,
+   "e": 145.72
+  },
+  {
+   "t": "Insättning av x är lika med 2 i funktionen f av x är lika med 3 x i kvadrat minus 12 x plus 9 ger",
+   "s": 145.72,
+   "e": 154.03
+  },
+  {
+   "t": "f av 2 är lika med 3 gånger 2 i kvadrat minus 12 gånger 2 plus 9 som är lika med 12 minus 24 plus 9 som är lika med minus 3",
+   "s": 154.03,
+   "e": 163.7
+  },
+  {
+   "t": "Extrempunktens y -koordinat är alltså −3.",
+   "s": 163.7,
+   "e": 167.68
+  },
+  {
+   "t": "Sammanfattningsvis är alltså extrempunktens fullständiga koordinater (2, −3).",
+   "s": 167.68,
+   "e": 174.24
+  },
+  {
+   "t": "Svar: (2, −3)",
+   "s": 174.24,
+   "e": 177.71
+  },
+  {
+   "t": "d) Extrempunktens karaktär avgörs av tecknet framför x i kvadrat -termen.",
+   "s": 177.71,
+   "e": 184.09
+  },
+  {
+   "t": "I det här fallet har vi funktionen f av x är lika med 3 x i kvadrat minus 12 x plus 9 som har en positiv x i kvadrat -term (vi tänker oss då en kurva med \"glad mun\").",
+   "s": 184.09,
+   "e": 195.51
+  },
+  {
+   "t": "Kurvan har alltså en \"dal\", vilket ger oss att det är en minimipunkt.",
+   "s": 195.51,
+   "e": 200.47
+  },
+  {
+   "t": "Svar: Minimipunkt",
+   "s": 200.47,
+   "e": 203.41
+  },
+  {
+   "t": "e) Eftersom funktionen har en minimipunkt har den ett minsta värde.",
+   "s": 203.41,
+   "e": 208.64
+  },
+  {
+   "t": "Det minsta värdet motsvarar y -koordinaten i extrempunkten (största eller minsta värdet ligger alltid i extrempunkten).",
+   "s": 208.64,
+   "e": 217.14
+  },
+  {
+   "t": "Vi har tidigare tagit fram extrempunkten som (2, −3).",
+   "s": 217.14,
+   "e": 222.12
+  },
+  {
+   "t": "Det minsta värdet är alltså −3.",
+   "s": 222.12,
+   "e": 225.1
+  },
+  {
+   "t": "Svar: −3",
+   "s": 225.1,
+   "e": 227.3
+  },
+  {
+   "t": "Exempel 2 — Symmetrilinje utan nollställen",
+   "s": 227.3,
+   "e": 231.46
+  },
+  {
+   "t": "Bestäm symmetrilinjen till f av x är lika med x i kvadrat plus 6 x plus 10 .",
+   "s": 231.46,
+   "e": 238.07
+  },
+  {
+   "t": "Vi börjar med att ta reda på funktionens nollställen genom att sätta funktionsuttrycket lika med 0 och lösa ekvationen:",
+   "s": 238.07,
+   "e": 248.76
+  },
+  {
+   "t": "x i kvadrat plus 6 x plus 10 är lika med 0",
+   "s": 238.07,
+   "e": 248.76
+  },
+  {
+   "t": "x är lika med minus 3 plus minus roten ur 3 i kvadrat minus 10 som är lika med minus 3 plus minus roten ur 9 minus 10 som är lika med minus 3 plus minus roten ur minus 1",
+   "s": 248.76,
+   "e": 260.8
+  },
+  {
+   "t": "Denna ekvation saknar lösning eftersom kvadratroten ur negativa tal saknar reella lösningar.",
+   "s": 260.8,
+   "e": 267.69
+  },
+  {
+   "t": "Funktionen saknar alltså nollställen (grafiskt betyder det att hela grafen ligger ovanför eller under x -axeln).",
+   "s": 267.69,
+   "e": 275.45
+  },
+  {
+   "t": "Vi kan ändå bestämma symmetrilinjens ekvation som \"talet framför rottecknet\" i pq-formeln.",
+   "s": 275.45,
+   "e": 281.73
+  },
+  {
+   "t": "I detta fall är det −3.",
+   "s": 281.73,
+   "e": 284.21
+  },
+  {
+   "t": "Alltså är symmetrilinjens ekvation x s är lika med minus 3 .",
+   "s": 284.21,
+   "e": 289.25
+  },
+  {
+   "t": "Svar: x s är lika med minus 3",
+   "s": 289.25,
+   "e": 292.96
+  }
+ ]
+}

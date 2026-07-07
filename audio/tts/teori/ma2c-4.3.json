@@ -1,0 +1,268 @@
+{
+ "id": "ma2c-4.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "e91d0c2b193ea9bafd59d14d4a9fcec3eb679c1c",
+ "dur": 257.76,
+ "segments": [
+  {
+   "t": "Implikation och ekvivalens",
+   "s": 0.1,
+   "e": 3.24
+  },
+  {
+   "t": "Ett logiskt förhållande där ett visst påstående 1 är sant medför att ett annat påstående 2 också måste vara sant kallas implikation.",
+   "s": 3.19,
+   "e": 11.82
+  },
+  {
+   "t": "Något förenklat kan man säga att en implikation är när något medför något annat.",
+   "s": 11.82,
+   "e": 17.43
+  },
+  {
+   "t": "Implikation skrivs med symbolen och utläses \"implicerar\" eller \"medför att\".",
+   "s": 17.43,
+   "e": 23.14
+  },
+  {
+   "t": "Ett logiskt förhållande där implikationen även gäller åt andra hållet, dvs. om påstående 2 är sant och det medför att påstående 1 också måste vara sant, kallas ekvivalens.",
+   "s": 23.14,
+   "e": 34.26
+  },
+  {
+   "t": "Ekvivalens skrivs med symbolen och utläses \"är ekvivalent med\".",
+   "s": 34.26,
+   "e": 39.44
+  },
+  {
+   "t": "Om en implikation är falsk bevisar man det genom att ge ett motexempel (ett enda motexempel räcker).",
+   "s": 39.44,
+   "e": 46.44
+  },
+  {
+   "t": "Implikation och ekvivalens",
+   "s": 46.44,
+   "e": 49.59
+  },
+  {
+   "t": "Implikation: A vilket ger att B .",
+   "s": 49.59,
+   "e": 53.05
+  },
+  {
+   "t": "A leder till B, men B behöver inte leda till A.",
+   "s": 53.05,
+   "e": 60.31
+  },
+  {
+   "t": "Ekvivalens: A vilket är ekvivalent med att B .",
+   "s": 53.05,
+   "e": 60.31
+  },
+  {
+   "t": "A leder till B och B leder till A.",
+   "s": 60.31,
+   "e": 65.56
+  },
+  {
+   "t": "Exempel 1 — Taxen och hunden",
+   "s": 60.31,
+   "e": 65.56
+  },
+  {
+   "t": "Betrakta meningen \"Om det är en tax, så är det en hund\".. a) Skriv meningen med logiska symboler. b) Är meningen en implikation eller en ekvivalens?",
+   "s": 65.56,
+   "e": 78.35
+  },
+  {
+   "t": "a) Påståendena som kopplas ihop är \"det är en tax\" och \"det är en hund\".",
+   "s": 78.35,
+   "e": 83.61
+  },
+  {
+   "t": "Svar: Det är en tax Det är en hund",
+   "s": 83.61,
+   "e": 86.91
+  },
+  {
+   "t": "b) Implikationen Det är en tax Det är en hund är sann.",
+   "s": 86.91,
+   "e": 91.22
+  },
+  {
+   "t": "Vi undersöker omvändningen:",
+   "s": 91.22,
+   "e": 95.45
+  },
+  {
+   "t": "Det är en hund Det är en tax",
+   "s": 91.22,
+   "e": 95.45
+  },
+  {
+   "t": "Detta är falskt.",
+   "s": 95.45,
+   "e": 97.9
+  },
+  {
+   "t": "Motexempel: Det kan vara en pudel.",
+   "s": 97.9,
+   "e": 101.17
+  },
+  {
+   "t": "Eftersom implikationen endast gäller åt ett håll är det ingen ekvivalens.",
+   "s": 101.17,
+   "e": 106.36
+  },
+  {
+   "t": "Svar: Det är en implikation.",
+   "s": 106.36,
+   "e": 109.53
+  },
+  {
+   "t": "Exempel 2 — Vilket logiskt tecken?",
+   "s": 109.53,
+   "e": 113.01
+  },
+  {
+   "t": "Avgör vilket logiskt tecken som ska vara mellan påståendena:",
+   "s": 113.01,
+   "e": 123.1
+  },
+  {
+   "t": "Alla vinklar i triangeln är 60 grader ____ Triangeln är liksidig",
+   "s": 113.01,
+   "e": 123.1
+  },
+  {
+   "t": "Vi undersöker om implikationerna är sanna åt varje håll.",
+   "s": 123.1,
+   "e": 127.75
+  },
+  {
+   "t": "Alla vinklar i triangeln är 60 grader Triangeln är liksidig",
+   "s": 127.75,
+   "e": 132.8
+  },
+  {
+   "t": "Detta påstående är sant, eftersom det inte finns några trianglar som detta gäller för förutom liksidiga trianglar.",
+   "s": 132.8,
+   "e": 140.07
+  },
+  {
+   "t": "Vi undersöker omvändningen.",
+   "s": 140.07,
+   "e": 143.07
+  },
+  {
+   "t": "Triangeln är liksidig Alla vinklar i triangeln är 60 grader",
+   "s": 143.07,
+   "e": 147.99
+  },
+  {
+   "t": "Detta påstående är också sant.",
+   "s": 147.99,
+   "e": 151.14
+  },
+  {
+   "t": "I alla liksidiga trianglar är alla vinklarna 60 grader.",
+   "s": 151.14,
+   "e": 155.55
+  },
+  {
+   "t": "Implikationen gäller alltså åt båda håll och vi har då en ekvivalens.",
+   "s": 155.55,
+   "e": 160.39
+  },
+  {
+   "t": "Svar:",
+   "s": 160.39,
+   "e": 164.59
+  },
+  {
+   "t": "Exempel 3 — Stämmer implikationerna?",
+   "s": 160.39,
+   "e": 164.59
+  },
+  {
+   "t": "Avgör om följande implikationer stämmer.. a) 2 x plus 5 är lika med 11 vilket ger att x är lika med 3 b) man äter godis man får hål i tänderna c) x i kvadrat är lika med 25 vilket ger att x är lika med 5 d) x i kubik är lika med 27 vilket ger att x är lika med 3",
+   "s": 164.59,
+   "e": 184.38
+  },
+  {
+   "t": "a) Vi löser ekvationen för att undersöka om lösningen entydigt är x är lika med 3 :",
+   "s": 184.38,
+   "e": 197.93
+  },
+  {
+   "t": "2 x plus 5 är lika med 11 vilket är ekvivalent med att 2 x är lika med 6 vilket är ekvivalent med att x är lika med 3",
+   "s": 184.38,
+   "e": 197.93
+  },
+  {
+   "t": "och inga andra lösningar finns.",
+   "s": 197.93,
+   "e": 200.82
+  },
+  {
+   "t": "Svar: Implikationen gäller.",
+   "s": 200.82,
+   "e": 204.0
+  },
+  {
+   "t": "b) man äter godis man får hål i tänderna",
+   "s": 204.0,
+   "e": 208.09
+  },
+  {
+   "t": "Svar: Implikationen gäller inte.",
+   "s": 208.09,
+   "e": 211.6
+  },
+  {
+   "t": "Motexempel: Det finns de som äter godis som inte får hål i tänderna.",
+   "s": 211.6,
+   "e": 216.86
+  },
+  {
+   "t": "c) Vi löser ekvationen för att undersöka om lösningen entydigt är x är lika med 5 :",
+   "s": 216.86,
+   "e": 230.96
+  },
+  {
+   "t": "x i kvadrat är lika med 25 vilket är ekvivalent med att x är lika med plus minus roten ur 25 som är lika med plus minus 5",
+   "s": 216.86,
+   "e": 230.96
+  },
+  {
+   "t": "Svar: Implikationen gäller inte.",
+   "s": 230.96,
+   "e": 234.5
+  },
+  {
+   "t": "Motexempel: x är lika med minus 5 .",
+   "s": 234.5,
+   "e": 238.38
+  },
+  {
+   "t": "d) Vi löser ekvationen för att undersöka om lösningen entydigt är x är lika med 3 :",
+   "s": 238.38,
+   "e": 251.44
+  },
+  {
+   "t": "x i kubik är lika med 27 vilket är ekvivalent med att x är lika med tredje roten ur 27 som är lika med 3",
+   "s": 238.38,
+   "e": 251.44
+  },
+  {
+   "t": "(inga andra lösningar finns).",
+   "s": 251.44,
+   "e": 254.5
+  },
+  {
+   "t": "Svar: Implikationen gäller.",
+   "s": 254.5,
+   "e": 257.76
+  }
+ ]
+}

@@ -1,0 +1,223 @@
+{
+ "id": "ma2c-4.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f0f2f373c5c28ae99fa3c1b0588c6cc3b548d0b5",
+ "dur": 216.54,
+ "segments": [
+  {
+   "t": "Likformiga månghörningar",
+   "s": 0.1,
+   "e": 2.77
+  },
+  {
+   "t": "Månghörningar med samma form kallas likformiga.",
+   "s": 2.73,
+   "e": 6.42
+  },
+  {
+   "t": "Likformiga månghörningar kan vara olika stora, vridna olika mycket och spegelvända.",
+   "s": 6.42,
+   "e": 12.43
+  },
+  {
+   "t": "Likformiga månghörningar",
+   "s": 12.43,
+   "e": 15.1
+  },
+  {
+   "t": "Två månghörningar är likformiga om",
+   "s": 15.1,
+   "e": 18.34
+  },
+  {
+   "t": "motsvarande vinklar är lika stora OCH",
+   "s": 18.34,
+   "e": 21.73
+  },
+  {
+   "t": "förhållandet mellan motsvarande sidor är lika",
+   "s": 21.73,
+   "e": 25.65
+  },
+  {
+   "t": "OBS!",
+   "s": 25.65,
+   "e": 27.23
+  },
+  {
+   "t": "Både vinklar och sidförhållanden måste kontrolleras. (Undantaget är trianglar, vilket nästa genomgång handlar om.)",
+   "s": 27.23,
+   "e": 36.33
+  },
+  {
+   "t": "Exempel 1 — Är parallellogrammen likformiga?",
+   "s": 36.33,
+   "e": 40.35
+  },
+  {
+   "t": "Är parallellogrammen likformiga?",
+   "s": 40.35,
+   "e": 43.41
+  },
+  {
+   "t": "Motstående vinklar i en parallellogram är lika stora.",
+   "s": 43.41,
+   "e": 47.7
+  },
+  {
+   "t": "Motstående sidor i en parallellogram är lika stora.",
+   "s": 47.7,
+   "e": 51.95
+  },
+  {
+   "t": "Vi börjar med att bestämma alla vinklar.",
+   "s": 51.95,
+   "e": 55.35
+  },
+  {
+   "t": "I den lilla parallellogrammen är A är lika med 50 grader och B är lika med 130 grader , och motstående vinklar ger C är lika med 50 grader och D är lika med 130 grader .",
+   "s": 55.35,
+   "e": 67.2
+  },
+  {
+   "t": "I den stora gäller på samma sätt E är lika med 50 grader , F är lika med 130 grader , G är lika med 50 grader och H är lika med 130 grader .",
+   "s": 67.2,
+   "e": 77.5
+  },
+  {
+   "t": "Nu undersöker vi motsvarande vinklar:",
+   "s": 77.5,
+   "e": 92.08
+  },
+  {
+   "t": "A är lika med E som är lika med 50 grader B som är lika med F som är lika med 130 grader C som är lika med G som är lika med 50 grader D som är lika med H som är lika med 130 grader",
+   "s": 77.5,
+   "e": 92.08
+  },
+  {
+   "t": "Alla motsvarande vinklar är lika stora.",
+   "s": 92.08,
+   "e": 95.6
+  },
+  {
+   "t": "Vi bestämmer alla sidor: A B är lika med 8 , A D är lika med 6 (motstående sidor ger D C är lika med 8 och B C är lika med 6 ) samt E F är lika med 12 , E H är lika med 9 (motstående sidor ger H G är lika med 12 och F G är lika med 9 ).",
+   "s": 95.6,
+   "e": 114.31
+  },
+  {
+   "t": "Nu undersöker vi sidförhållandena:",
+   "s": 114.31,
+   "e": 125.0
+  },
+  {
+   "t": "A B delat med E F är lika med D C delat med H G som är lika med 8 delat med 12 som är lika med 2 delat med 3",
+   "s": 114.31,
+   "e": 125.0
+  },
+  {
+   "t": "A D delat med E H är lika med B C delat med F G som är lika med 6 delat med 9 som är lika med 2 delat med 3",
+   "s": 125.0,
+   "e": 133.68
+  },
+  {
+   "t": "Även sidförhållandena är lika.",
+   "s": 133.68,
+   "e": 136.79
+  },
+  {
+   "t": "Eftersom både motsvarande vinklar och sidförhållanden är lika är parallellogrammen likformiga.",
+   "s": 136.79,
+   "e": 143.24
+  },
+  {
+   "t": "Svar: Ja",
+   "s": 143.24,
+   "e": 145.45
+  },
+  {
+   "t": "Exempel 2 — Bestäm sidan",
+   "s": 145.45,
+   "e": 148.53
+  },
+  {
+   "t": "Figurerna är likformiga.",
+   "s": 148.53,
+   "e": 151.21
+  },
+  {
+   "t": "Bestäm sidan x .",
+   "s": 151.21,
+   "e": 153.64
+  },
+  {
+   "t": "Sidor i likformiga figurer kan bestämmas på två sätt: med ekvation eller med skalfaktor.",
+   "s": 153.64,
+   "e": 160.24
+  },
+  {
+   "t": "Med ekvation.",
+   "s": 160.24,
+   "e": 162.49
+  },
+  {
+   "t": "Förhållandet mellan motsvarande sidor är lika, så",
+   "s": 162.49,
+   "e": 166.93
+  },
+  {
+   "t": "x delat med 5 är lika med 24 delat med 8",
+   "s": 166.93,
+   "e": 171.28
+  },
+  {
+   "t": "Korsvis multiplikation ger",
+   "s": 171.28,
+   "e": 174.36
+  },
+  {
+   "t": "8 x är lika med 24 gånger 5",
+   "s": 174.36,
+   "e": 178.18
+  },
+  {
+   "t": "8 x är lika med 120 vilket är ekvivalent med att x är lika med 15 centimeter",
+   "s": 178.18,
+   "e": 185.15
+  },
+  {
+   "t": "Med skalfaktor.",
+   "s": 185.15,
+   "e": 187.36
+  },
+  {
+   "t": "Vi dividerar två kända sidor för att bestämma skalfaktorn, dvs. hur stora figurerna är relativt varandra.",
+   "s": 187.36,
+   "e": 194.86
+  },
+  {
+   "t": "Skalfaktor är lika med 24 delat med 8 som är lika med 3",
+   "s": 194.86,
+   "e": 199.99
+  },
+  {
+   "t": "Det innebär att motsvarande sidor är 3 gånger längre i den större månghörningen.",
+   "s": 199.99,
+   "e": 205.25
+  },
+  {
+   "t": "Sidan x motsvarar sidan 5 i den mindre figuren:",
+   "s": 205.25,
+   "e": 213.34
+  },
+  {
+   "t": "x är lika med 5 gånger 3 som är lika med 15 centimeter",
+   "s": 205.25,
+   "e": 213.34
+  },
+  {
+   "t": "Svar: 15 centimeter",
+   "s": 213.34,
+   "e": 216.54
+  }
+ ]
+}

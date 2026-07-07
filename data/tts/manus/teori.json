@@ -22561,7 +22561,7 @@
     "t": "högerledet är lika med 35"
    },
    {
-    "t": "vänsterledet är lika med högerledet ⟹ Stämmer!"
+    "t": "vänsterledet är lika med högerledet Stämmer!"
    },
    {
     "t": "Svar: x är lika med 7"
@@ -28068,6 +28068,6429 @@
    },
    {
     "t": "Svar: roten ur 146 längdenheter är ungefär lika med 12,08 längdenheter"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-1.1",
+  "title": "Grafisk lösning av linjära ekvationssystem",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Grafisk lösning av linjära ekvationssystem"
+   },
+   {
+    "t": "När vi har flera ekvationer som ska ha gemensamma (likadana) lösningar, så bildar vi ett ekvationssystem."
+   },
+   {
+    "t": "När vi löser ekvationssystem med hjälp av dess grafer genomför vi en grafisk lösning."
+   },
+   {
+    "t": "Betrakta ekvationen"
+   },
+   {
+    "t": "y är lika med 2 x minus 4"
+   },
+   {
+    "t": "Den består av två olika variabler, x och y ."
+   },
+   {
+    "t": "Den har flera (oändligt många) par av lösningar, t.ex."
+   },
+   {
+    "t": "och så vidare."
+   },
+   {
+    "t": "För varje värde vi sätter in på x , så får vi ett bestämt värde på y ."
+   },
+   {
+    "t": "Detsamma gäller för ekvationen y är lika med minus x plus 5 ."
+   },
+   {
+    "t": "Den har på motsvarande sätt också oändligt antal lösningar."
+   },
+   {
+    "t": "Om vi vill hitta en gemensam lösning till båda ekvationer bildar vi ett ekvationssystem, vilket markeras med en krullparentes enligt"
+   },
+   {
+    "t": "y är lika med 2 x minus 4 y som är lika med minus x plus 5"
+   },
+   {
+    "t": "Lösa ett ekvationssystem grafiskt"
+   },
+   {
+    "t": "Rita upp ekvationernas grafer genom att skriva in dem i Geogebra."
+   },
+   {
+    "t": "Ta fram eventuella skärningspunkters koordinater."
+   },
+   {
+    "t": "x -koordinaten är lösningen till x och y -koordinaten är lösningen till y ."
+   },
+   {
+    "t": "Exempel 1 — Lös ett ekvationssystem grafiskt"
+   },
+   {
+    "t": "Lös nedanstående ekvationssystem grafiskt."
+   },
+   {
+    "t": "y är lika med 2 x minus 4 y som är lika med minus x plus 5"
+   },
+   {
+    "t": "Vi ritar upp y är lika med 2 x minus 4 och y är lika med minus x plus 5 i Geogebra och tar fram skärningspunktens koordinater."
+   },
+   {
+    "t": "Skärningspunktens koordinater är (3, 2), vilket ger lösningen."
+   },
+   {
+    "t": "Svar:"
+   },
+   {
+    "t": "x är lika med 3 y som är lika med 2"
+   },
+   {
+    "t": "Antalet lösningar till ett ekvationssystem"
+   },
+   {
+    "t": "Antalet lösningar till ett linjärt ekvationssystem beror på linjernas k - och m -värden, enligt nedanstående:"
+   },
+   {
+    "t": "Exempel 2 — Bestäm k och m"
+   },
+   {
+    "t": "Bestäm k och m så att ekvationssystemet"
+   },
+   {
+    "t": "y är lika med k x plus m y som är lika med 2 x plus 5"
+   },
+   {
+    "t": "saknar lösningar."
+   },
+   {
+    "t": "För att ekvationssystemet ska sakna lösning krävs att linjerna har samma k -värde, men olika m -värden."
+   },
+   {
+    "t": "För den undre ekvationen gäller k är lika med 2 och m är lika med 5 ."
+   },
+   {
+    "t": "Den övre ekvationen måste alltså ha samma k -värde, så k är lika med 2 ."
+   },
+   {
+    "t": "m -värdena ska vara olika, så m kan vara vad som helst utom 5, dvs. m är inte lika med 5 ."
+   },
+   {
+    "t": "Svar: k är lika med 2 och m är inte lika med 5"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-1.2",
+  "title": "Substitutionsmetoden",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Substitutionsmetoden"
+   },
+   {
+    "t": "Förutom att lösa ekvationssystem grafiskt, så kan vi lösa dem algebraiskt (med algebraiska metoder)."
+   },
+   {
+    "t": "En metod för att lösa ekvationssystem algebraiskt är substitutionsmetoden. (Att utföra en substitution innebär att man byter ut något och det är precis det vi gör.)"
+   },
+   {
+    "t": "Lösa ekvationssystem med substitutionsmetoden"
+   },
+   {
+    "t": "Lös ut en valfri variabel från en valfri ekvation i ekvationssystemet."
+   },
+   {
+    "t": "Byt ut variabeln mot uttrycket du fick i den ekvation som du inte använt."
+   },
+   {
+    "t": "Lös ekvationen och bestäm värdet för den ena variabeln."
+   },
+   {
+    "t": "Sätt in värdet på den ena variabeln i någon av de tidigare ekvationerna för att få värdet på den andra variabeln."
+   },
+   {
+    "t": "Exempel 1 — Variabeln redan utlöst"
+   },
+   {
+    "t": "Lös ekvationssystemet"
+   },
+   {
+    "t": "y är lika med 2 x minus 4 y som är lika med minus x plus 5"
+   },
+   {
+    "t": "Vi börjar med att ge ekvationerna etiketter för att underlätta hänvisning till dem."
+   },
+   {
+    "t": "Vi kallar den övre ekvationen för ekvation 1 och den undre ekvationen för ekvation 2."
+   },
+   {
+    "t": "y är lika med 2 x minus 4, ekvation 1 y som är lika med minus x plus 5, ekvation 2"
+   },
+   {
+    "t": "Enligt ekvation ekvation 1 är y är lika med 2 x minus 4 ."
+   },
+   {
+    "t": "Vi byter ut (substituerar) y mot 2 x minus 4 i ekvation ekvation 2."
+   },
+   {
+    "t": "Det ger"
+   },
+   {
+    "t": "2 x minus 4 är lika med minus x plus 5"
+   },
+   {
+    "t": "Vi samlar alla x på ena sidan genom att addera x till båda led, och adderar sedan 4 till båda led:"
+   },
+   {
+    "t": "3 x minus 4 är lika med 5"
+   },
+   {
+    "t": "3 x är lika med 9"
+   },
+   {
+    "t": "Division med 3 i båda led ger"
+   },
+   {
+    "t": "3 x delat med 3 är lika med 9 delat med 3"
+   },
+   {
+    "t": "x är lika med 3"
+   },
+   {
+    "t": "Vi har nu bestämt x ."
+   },
+   {
+    "t": "Vi sätter nu in x är lika med 3 i någon av de ursprungliga ekvationerna (vilken spelar ingen roll) för att få ut y ."
+   },
+   {
+    "t": "Insättning av x är lika med 3 i ekvation ekvation 1 ger"
+   },
+   {
+    "t": "y är lika med 2 gånger 3 minus 4 som är lika med 6 minus 4 som är lika med 2"
+   },
+   {
+    "t": "Så y är lika med 2 ."
+   },
+   {
+    "t": "Lösningen till ett ekvationssystem brukar anges med klammer."
+   },
+   {
+    "t": "Svar:"
+   },
+   {
+    "t": "x är lika med 3 y som är lika med 2"
+   },
+   {
+    "t": "Exempel 2 — Lös ut en variabel först"
+   },
+   {
+    "t": "Lös ekvationssystemet"
+   },
+   {
+    "t": "2 x minus y är lika med 7 x minus 3 y som är lika med 1"
+   },
+   {
+    "t": "Vi skriver av ekvationssystemet och sätter etiketter."
+   },
+   {
+    "t": "2 x minus y är lika med 7, ekvation 1 x minus 3 y som är lika med 1, ekvation 2"
+   },
+   {
+    "t": "Här står inte x eller y ensamt i det ena ledet, så vi börjar med att lösa ut x eller y från någon av ekvationerna."
+   },
+   {
+    "t": "Vi löser ut x från ekvation ekvation 2 eftersom det är enklast (då den saknar koefficienter och minustecken framför)."
+   },
+   {
+    "t": "Vi adderar 3 y till båda led:"
+   },
+   {
+    "t": "x är lika med 1 plus 3 y, ekvation 3"
+   },
+   {
+    "t": "Då sätter vi x är lika med 1 plus 3 y i ekvation ekvation 1 (den ekvation som vi inte använt oss av) och löser sedan ut y :"
+   },
+   {
+    "t": "2 parentesen 1 plus 3 y slut parentes minus y är lika med 7"
+   },
+   {
+    "t": "2 plus 6 y minus y är lika med 7"
+   },
+   {
+    "t": "2 plus 5 y är lika med 7"
+   },
+   {
+    "t": "Vi subtraherar 2 från båda led och dividerar sedan med 5:"
+   },
+   {
+    "t": "5 y är lika med 5"
+   },
+   {
+    "t": "y är lika med 1"
+   },
+   {
+    "t": "Vi har nu bestämt y ."
+   },
+   {
+    "t": "Vi sätter nu in y är lika med 1 i någon av våra ekvationer."
+   },
+   {
+    "t": "Insättning av y är lika med 1 i ekvation ekvation 3 ger"
+   },
+   {
+    "t": "x är lika med 1 plus 3 gånger 1 som är lika med 1 plus 3 som är lika med 4"
+   },
+   {
+    "t": "Så x är lika med 4 ."
+   },
+   {
+    "t": "Svar:"
+   },
+   {
+    "t": "x är lika med 4 y som är lika med 1"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-1.3",
+  "title": "Additionsmetoden",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Additionsmetoden"
+   },
+   {
+    "t": "Att lösa ett ekvationssystem algebraiskt genom att addera ekvationer kallas additionsmetoden."
+   },
+   {
+    "t": "Lösa ekvationssystem med additionsmetoden"
+   },
+   {
+    "t": "Modifiera en eller båda ekvationer så att samma variabelterm, fast med olika tecken, finns i båda ekvationer."
+   },
+   {
+    "t": "Addera dem ledvis för att eliminera ena variabeln och lös ut den ena variabeln."
+   },
+   {
+    "t": "Sätt in värdet på den ena variabeln i någon av de tidigare ekvationerna för att få värdet på den andra variabeln."
+   },
+   {
+    "t": "Exempel 1 — Addera direkt"
+   },
+   {
+    "t": "Lös ekvationssystemet"
+   },
+   {
+    "t": "minus 2 x plus 5 y är lika med 6 4 x minus 5 y som är lika med 12"
+   },
+   {
+    "t": "Vi ser att båda ekvationer innehåller samma term 5 y med ett plustecken framför den ena och ett minustecken framför den andra."
+   },
+   {
+    "t": "Vi adderar ekvationerna \"ledvis\" med additionsmetoden!"
+   },
+   {
+    "t": "minus 2 x plus 5 y är lika med 6, ekvation 1 plus 4 x minus 5 y som är lika med 12, ekvation 2 hline 2 x plus 0 som är lika med 18"
+   },
+   {
+    "t": "y -termerna tar ut varandra och kvar blir en ekvation med bara x :"
+   },
+   {
+    "t": "2 x är lika med 18"
+   },
+   {
+    "t": "2 x delat med 2 är lika med 18 delat med 2"
+   },
+   {
+    "t": "x är lika med 9"
+   },
+   {
+    "t": "Insättning av x är lika med 9 i ekvation 1 ger"
+   },
+   {
+    "t": "minus 2 gånger 9 plus 5 y är lika med 6"
+   },
+   {
+    "t": "minus 18 plus 5 y är lika med 6"
+   },
+   {
+    "t": "Vi adderar 18 till båda led och dividerar sedan med 5:"
+   },
+   {
+    "t": "5 y är lika med 24"
+   },
+   {
+    "t": "y är lika med 24 delat med 5 som är lika med 4,8"
+   },
+   {
+    "t": "Svar:"
+   },
+   {
+    "t": "x är lika med 9 y som är lika med 4,8"
+   },
+   {
+    "t": "Exempel 2 — Multiplicera ena ekvationen först"
+   },
+   {
+    "t": "Lös ekvationssystemet"
+   },
+   {
+    "t": "5 x plus 4 y är lika med 30 2 x minus 8 y som är lika med minus 12"
+   },
+   {
+    "t": "Vi börjar med att skriva av ekvationssystemet och sätta etiketter."
+   },
+   {
+    "t": "5 x plus 4 y är lika med 30, ekvation 1 2 x minus 8 y som är lika med minus 12, ekvation 2"
+   },
+   {
+    "t": "Innan vi adderar ekvationerna så vill vi ha samma x - eller y -term i båda ekvationer, men med olika tecken framför."
+   },
+   {
+    "t": "I den undre ekvationen har vi termen minus 8 y ."
+   },
+   {
+    "t": "I den övre ekvationen har vi termen plus 4 y ."
+   },
+   {
+    "t": "Om vi multiplicerar den övre ekvationen med 2 kommer termen att bli plus 8 y och y -termerna kommer att kunna elimineras med additionsmetoden."
+   },
+   {
+    "t": "Vi multiplicerar den övre ekvationen med 2."
+   },
+   {
+    "t": "Alla termer i ekvationen ska då multipliceras med 2:"
+   },
+   {
+    "t": "10 x plus 8 y är lika med 60 2 x minus 8 y som är lika med minus 12"
+   },
+   {
+    "t": "Nu adderar vi ekvationerna."
+   },
+   {
+    "t": "10 x plus 8 y är lika med 60 plus 2 x minus 8 y som är lika med minus 12 hline 12 x som är lika med 48"
+   },
+   {
+    "t": "Division med 12 i båda led ger"
+   },
+   {
+    "t": "x är lika med 4"
+   },
+   {
+    "t": "Insättning av x är lika med 4 i t.ex. ekvation ekvation 1 ger"
+   },
+   {
+    "t": "5 gånger 4 plus 4 y är lika med 30"
+   },
+   {
+    "t": "20 plus 4 y är lika med 30"
+   },
+   {
+    "t": "Vi subtraherar 20 från båda led och dividerar sedan med 4:"
+   },
+   {
+    "t": "4 y är lika med 10"
+   },
+   {
+    "t": "y är lika med 10 delat med 4 som är lika med 2,5"
+   },
+   {
+    "t": "Svar:"
+   },
+   {
+    "t": "x är lika med 4 y som är lika med 2,5"
+   },
+   {
+    "t": "Exempel 3 — Multiplicera båda ekvationerna"
+   },
+   {
+    "t": "Lös ekvationssystemet"
+   },
+   {
+    "t": "2 x plus 7 y är lika med 8 5 x plus 9 y som är lika med 3"
+   },
+   {
+    "t": "2 x plus 7 y är lika med 8, ekvation 1 5 x plus 9 y som är lika med 3, ekvation 2"
+   },
+   {
+    "t": "Här räcker det inte att multiplicera en av ekvationerna för att eliminera x eller y ."
+   },
+   {
+    "t": "Vi kan då multiplicera båda ekvationer."
+   },
+   {
+    "t": "Om vi t.ex. vill eliminera x -termerna kan vi multiplicera ekvationerna med varandras koefficienter framför x och se till att de får olika tecken."
+   },
+   {
+    "t": "Vi multiplicerar den övre ekvationen med 5 (koefficienten framför x i den undre ekvationen) och den undre ekvationen med −2 (koefficienten framför x i den övre ekvationen med ombytt tecken)."
+   },
+   {
+    "t": "Det ger"
+   },
+   {
+    "t": "10 x plus 35 y är lika med 40 minus 10 x minus 18 y som är lika med minus 6"
+   },
+   {
+    "t": "Vi adderar nu ekvationerna och fortsätter sedan som vanligt."
+   },
+   {
+    "t": "10 x plus 35 y är lika med 40 plus minus 10 x minus 18 y som är lika med minus 6 hline 17 y som är lika med 34"
+   },
+   {
+    "t": "Division med 17 i båda led ger"
+   },
+   {
+    "t": "y är lika med 2"
+   },
+   {
+    "t": "y är lika med 2 i ekvation ekvation 1 ger"
+   },
+   {
+    "t": "2 x plus 7 gånger 2 är lika med 8"
+   },
+   {
+    "t": "2 x plus 14 är lika med 8"
+   },
+   {
+    "t": "Vi subtraherar 14 från båda led och dividerar sedan med 2:"
+   },
+   {
+    "t": "2 x är lika med minus 6"
+   },
+   {
+    "t": "x är lika med minus 3"
+   },
+   {
+    "t": "Svar:"
+   },
+   {
+    "t": "x är lika med minus 3 y som är lika med 2"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-1.4",
+  "title": "Problemlösning med ekvationssystem",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Problemlösning med ekvationssystem"
+   },
+   {
+    "t": "Problem där vi har mer än en okänd variabel kan ofta lösas med ekvationssystem."
+   },
+   {
+    "t": "Problemlösning med ekvationssystem"
+   },
+   {
+    "t": "Definiera införda variabler."
+   },
+   {
+    "t": "Sätt upp ett ekvationssystem och lös det."
+   },
+   {
+    "t": "Tolka och svara."
+   },
+   {
+    "t": "Exempel 1 — Kor och höns"
+   },
+   {
+    "t": "En bonde har kor och höns."
+   },
+   {
+    "t": "Totalt har djuren 100 huvuden och 352 ben."
+   },
+   {
+    "t": "Hur många kor respektive höns har bonden?"
+   },
+   {
+    "t": "Vi börjar med att definiera våra variabler:"
+   },
+   {
+    "t": "k är lika med antalet kor"
+   },
+   {
+    "t": "h är lika med antalet höns"
+   },
+   {
+    "t": "Om vi antar att varje djur har 1 huvud, varje ko 4 ben och varje höna 2 ben ger det"
+   },
+   {
+    "t": "k plus h är lika med 100, ekvation 1 4 k plus 2 timmar som är lika med 352, ekvation 2"
+   },
+   {
+    "t": "Vi löser ut t.ex. h från ekvation ekvation 1 och använder oss av substitutionsmetoden:"
+   },
+   {
+    "t": "h är lika med 100 minus k, ekvation 3"
+   },
+   {
+    "t": "Insättning av h är lika med 100 minus k i ekvation ekvation 2 ger"
+   },
+   {
+    "t": "4 k plus 2 parentesen 100 minus k slut parentes är lika med 352"
+   },
+   {
+    "t": "4 k plus 200 minus 2 k är lika med 352"
+   },
+   {
+    "t": "2 k plus 200 är lika med 352"
+   },
+   {
+    "t": "Vi subtraherar 200 från båda led och dividerar sedan med 2:"
+   },
+   {
+    "t": "2 k är lika med 152"
+   },
+   {
+    "t": "k är lika med 76"
+   },
+   {
+    "t": "k är lika med 76 i ekvation ekvation 3 ger"
+   },
+   {
+    "t": "h är lika med 100 minus 76 som är lika med 24"
+   },
+   {
+    "t": "så ekvationssystemet har lösningen"
+   },
+   {
+    "t": "k är lika med 76 timmar som är lika med 24"
+   },
+   {
+    "t": "Svar: Bonden har 76 kor och 24 höns."
+   },
+   {
+    "t": "Exempel 2 — Summa och differens"
+   },
+   {
+    "t": "Två tal har summan 19 och differensen 5."
+   },
+   {
+    "t": "Vilka är talen?"
+   },
+   {
+    "t": "Vi kallar det största talet x och det minsta talet y ."
+   },
+   {
+    "t": "Då gäller"
+   },
+   {
+    "t": "x plus y är lika med 19, ekvation 1 x minus y som är lika med 5, ekvation 2"
+   },
+   {
+    "t": "Vi använder additionsmetoden."
+   },
+   {
+    "t": "x plus y är lika med 19 plus x minus y som är lika med 5 hline 2 x som är lika med 24"
+   },
+   {
+    "t": "Division med 2 i båda led ger"
+   },
+   {
+    "t": "x är lika med 12"
+   },
+   {
+    "t": "Insättning av x är lika med 12 i t.ex. ekvation 1 ger"
+   },
+   {
+    "t": "12 plus y är lika med 19"
+   },
+   {
+    "t": "y är lika med 19 minus 12 som är lika med 7"
+   },
+   {
+    "t": "Så ekvationssystemet har lösningen"
+   },
+   {
+    "t": "x är lika med 12 y som är lika med 7"
+   },
+   {
+    "t": "Svar: Talen är 12 och 7."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-2.1",
+  "title": "Kvadreringsreglerna och konjugatregeln",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Kvadreringsreglerna och konjugatregeln"
+   },
+   {
+    "t": "Kvadreringsreglerna är en metod för att enkelt utveckla parentesuttryck \"i kvadrat\"."
+   },
+   {
+    "t": "Konjugatregeln är en metod för att enkelt utveckla en multiplikation av två likadana parentesuttryck där det enda som skiljer är tecknet mellan termerna inuti parentesen."
+   },
+   {
+    "t": "Kvadreringsreglerna"
+   },
+   {
+    "t": "parentesen a plus b slut parentes i kvadrat är lika med a i kvadrat plus 2 a b plus b i kvadrat"
+   },
+   {
+    "t": "parentesen a minus b slut parentes i kvadrat är lika med a i kvadrat minus 2 a b plus b i kvadrat"
+   },
+   {
+    "t": "Konjugatregeln"
+   },
+   {
+    "t": "parentesen a plus b slut parentes parentesen a minus b slut parentes är lika med a i kvadrat minus b i kvadrat"
+   },
+   {
+    "t": "Bevis — Första kvadreringsregeln"
+   },
+   {
+    "t": "parentesen a plus b slut parentes i kvadrat är lika med parentesen a plus b slut parentes parentesen a plus b slut parentes som är lika med a i kvadrat plus a b plus a b plus b i kvadrat som är lika med a i kvadrat plus 2 a b plus b i kvadrat"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "Bevis — Konjugatregeln"
+   },
+   {
+    "t": "parentesen a plus b slut parentes parentesen a minus b slut parentes är lika med a i kvadrat minus a b plus a b minus b i kvadrat som är lika med a i kvadrat minus b i kvadrat"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "Exempel 1 — Utveckla med kvadreringsreglerna"
+   },
+   {
+    "t": "Utveckla. a) parentesen x plus 4 slut parentes i kvadrat b) parentesen 7 minus b slut parentes i kvadrat c) parentesen 3 y minus 4 x slut parentes i kvadrat"
+   },
+   {
+    "t": "a) Första kvadreringsregeln med a är lika med x och b är lika med 4 :"
+   },
+   {
+    "t": "parentesen x plus 4 slut parentes i kvadrat är lika med x i kvadrat plus 2 gånger x gånger 4 plus 4 i kvadrat som är lika med x i kvadrat plus 8 x plus 16"
+   },
+   {
+    "t": "Svar: x i kvadrat plus 8 x plus 16"
+   },
+   {
+    "t": "Kommentar: \"Mittentermen\" eller \"den dubbla produkten\" kan vi ofta få fram direkt med snabb och enkel huvudräkning."
+   },
+   {
+    "t": "För att få den dubbla produkten multiplicerar vi de båda termerna inuti parentesen och dubblar sedan: x gånger 4 är 4 x — dubblat blir det 8 x ."
+   },
+   {
+    "t": "Träna på detta!"
+   },
+   {
+    "t": "b) Andra kvadreringsregeln:"
+   },
+   {
+    "t": "parentesen 7 minus b slut parentes i kvadrat är lika med 49 minus 14 b plus b i kvadrat"
+   },
+   {
+    "t": "Svar: 49 minus 14 b plus b i kvadrat"
+   },
+   {
+    "t": "c) Tänk på att hela termerna 3 y och 4 x ska upphöjas till 2:"
+   },
+   {
+    "t": "parentesen 3 y minus 4 x slut parentes i kvadrat är lika med 9 y i kvadrat minus 24 x y plus 16 x i kvadrat"
+   },
+   {
+    "t": "Svar: 9 y i kvadrat minus 24 x y plus 16 x i kvadrat"
+   },
+   {
+    "t": "Exempel 2 — Utveckla med konjugatregeln"
+   },
+   {
+    "t": "Utveckla. a) parentesen x plus 8 slut parentes parentesen x minus 8 slut parentes b) parentesen 3 x minus 5 y slut parentes parentesen 3 x plus 5 y slut parentes c) parentesen 9 plus 2 x slut parentes parentesen 2 x minus 9 slut parentes"
+   },
+   {
+    "t": "a) Vi ser att innehållet i parenteserna är lika och att det enda som skiljer är tecknet mellan termerna (plus i ena och minus i andra)."
+   },
+   {
+    "t": "Alltså tillämpar vi konjugatregeln."
+   },
+   {
+    "t": "parentesen x plus 8 slut parentes parentesen x minus 8 slut parentes är lika med x i kvadrat minus 8 i kvadrat som är lika med x i kvadrat minus 64"
+   },
+   {
+    "t": "Svar: x i kvadrat minus 64"
+   },
+   {
+    "t": "Kommentar: Precis som med kvadreringsreglerna så träna på att få fram det slutgiltiga svaret i ett enda steg, dvs. försök att direkt få fram att parentesen x plus 8 slut parentes parentesen x minus 8 slut parentes är lika med x i kvadrat minus 64 utan några mellanled."
+   },
+   {
+    "t": "b) Tänk på att även 3 och 5 ska upphöjas till 2:"
+   },
+   {
+    "t": "parentesen 3 x minus 5 y slut parentes parentesen 3 x plus 5 y slut parentes är lika med 9 x i kvadrat minus 25 y i kvadrat"
+   },
+   {
+    "t": "Svar: 9 x i kvadrat minus 25 y i kvadrat"
+   },
+   {
+    "t": "c) Detta ser vid en första anblick inte ut som ett konjugat eftersom vi inte har samma första term i parenteserna (9 respektive 2 x )."
+   },
+   {
+    "t": "Däremot är parenteserna snarlika."
+   },
+   {
+    "t": "Om vi kastar om termerna i den första parentesen kommer det dock att bli ett konjugat!"
+   },
+   {
+    "t": "Att kasta om termerna är ok eftersom det är ett plustecken emellan och ordningen då inte spelar någon roll ( 3 plus 5 är ju samma sak som 5 plus 3 )."
+   },
+   {
+    "t": "Därefter fortsätter vi med konjugatregeln som vanligt."
+   },
+   {
+    "t": "parentesen 9 plus 2 x slut parentes parentesen 2 x minus 9 slut parentes är lika med parentesen 2 x plus 9 slut parentes parentesen 2 x minus 9 slut parentes som är lika med 4 x i kvadrat minus 81"
+   },
+   {
+    "t": "Svar: 4 x i kvadrat minus 81"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-2.2",
+  "title": "Faktorisering av uttryck",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Faktorisering av uttryck"
+   },
+   {
+    "t": "Att skriva om ett uttryck som en multiplikation är att faktorisera uttryck."
+   },
+   {
+    "t": "Vi har gått igenom faktorisering tidigare i Matematik 1c."
+   },
+   {
+    "t": "Då faktoriserade vi genom att \"bryta ut\" en gemensam faktor."
+   },
+   {
+    "t": "I den här kursen ska vi även faktorisera genom att använda oss av kvadreringsreglerna och konjugatregeln baklänges."
+   },
+   {
+    "t": "Faktorisering med konjugat- och kvadreringsreglerna"
+   },
+   {
+    "t": "Ett uttryck kan faktoriseras med"
+   },
+   {
+    "t": "konjugatregeln om uttrycket har två kvadrattermer minus varandra."
+   },
+   {
+    "t": "Kom ihåg-ramsa: \"Kvadrat minus kvadrat är konjugat!\""
+   },
+   {
+    "t": "första kvadreringsregeln om uttrycket har tre termer där första och sista termen är kvadrater."
+   },
+   {
+    "t": "Tecknet framför mittentermen är plus."
+   },
+   {
+    "t": "OBS!"
+   },
+   {
+    "t": "Kontrollera att mittentermen stämmer överens med den dubbla produkten."
+   },
+   {
+    "t": "andra kvadreringsregeln om uttrycket har tre termer där första och sista termen är kvadrater."
+   },
+   {
+    "t": "Tecknet framför mittentermen är minus."
+   },
+   {
+    "t": "OBS!"
+   },
+   {
+    "t": "Kontrollera att mittentermen stämmer överens med den dubbla produkten."
+   },
+   {
+    "t": "Faktorisera uttryck"
+   },
+   {
+    "t": "Om möjligt,"
+   },
+   {
+    "t": "bryt ut \"som vanligt\""
+   },
+   {
+    "t": "använd kvadreringsregel eller konjugatregel baklänges"
+   },
+   {
+    "t": "Förenkla rationella uttryck (bråkuttryck med x)"
+   },
+   {
+    "t": "Faktorisera täljare och nämnare så långt som möjligt."
+   },
+   {
+    "t": "Förkorta (\"stryk\") likadana faktorer från täljare och nämnare."
+   },
+   {
+    "t": "Exempel 1 — Faktorisera"
+   },
+   {
+    "t": "Faktorisera. a) 18 x i kvadrat plus 45 x i kubik minus 81 x upphöjt till 4 b) x i kvadrat minus 6 x plus 9 c) 50 x i kvadrat minus 98"
+   },
+   {
+    "t": "a) Först undersöker vi om det går att bryta ut \"som vanligt\"."
+   },
+   {
+    "t": "Vi tittar först på alla koefficienter, alltså talen framför variabeltermerna."
+   },
+   {
+    "t": "18, 45 och 81 har 9 som största möjliga delare."
+   },
+   {
+    "t": "Då kan vi bryta ut 9."
+   },
+   {
+    "t": "Alla termer innehåller x , så vi kan även bryta ut en variabel."
+   },
+   {
+    "t": "Den lägsta exponent vi har på x är 2, så vi kan bryta ut x i kvadrat ."
+   },
+   {
+    "t": "Den största faktorn som vi kan bryta ut är alltså 9 x i kvadrat ."
+   },
+   {
+    "t": "Sedan ska vi fylla parentesen så att vi får det ursprungliga uttrycket när vi multiplicerar in 9 x i kvadrat i parentesen."
+   },
+   {
+    "t": "Vi får då"
+   },
+   {
+    "t": "9 x i kvadrat parentesen 2 plus 5 x minus 9 x i kvadrat slut parentes"
+   },
+   {
+    "t": "Nu tittar vi på uttrycket i parentesen igen."
+   },
+   {
+    "t": "Kan vi faktorisera det ytterligare?"
+   },
+   {
+    "t": "Nej, det kan inte faktoriseras ytterligare, t.ex. med en kvadreringsregel, eftersom den första termen ekvation 2 inte är en kvadrat (kan inte skrivas som ett heltal upphöjt till 2)."
+   },
+   {
+    "t": "Svar: 9 x i kvadrat parentesen 2 plus 5 x minus 9 x i kvadrat slut parentes"
+   },
+   {
+    "t": "b) Vi ska faktorisera x i kvadrat minus 6 x plus 9 ."
+   },
+   {
+    "t": "Vi kan inte bryta ut något \"som vanligt\"."
+   },
+   {
+    "t": "Kan det vara en kvadreringsregel eller konjugatregel baklänges?"
+   },
+   {
+    "t": "Ja!"
+   },
+   {
+    "t": "Eftersom uttrycket innehåller tre termer där den första och sista termen är kvadrater kan det vara en kvadreringsregel!"
+   },
+   {
+    "t": "Vi skriver upp en mall för kvadreringsregeln."
+   },
+   {
+    "t": "Eftersom mittentermen är negativ måste det vara ett minustecken i parentesen:"
+   },
+   {
+    "t": "x i kvadrat minus 6 x plus 9 är lika med parentesen minus slut parentes i kvadrat"
+   },
+   {
+    "t": "Sedan tittar vi på första termen x i kvadrat och tänker \"Vad upphöjt till 2 blir x i kvadrat ?"
+   },
+   {
+    "t": "Jo, x !\" Sedan tittar vi på andra termen 9 och tänker \"Vad upphöjt till 2 blir 9?"
+   },
+   {
+    "t": "Jo, 3!\""
+   },
+   {
+    "t": "Då fyller vi på med x och 3 i parentesen och får"
+   },
+   {
+    "t": "x i kvadrat minus 6 x plus 9 är lika med parentesen x minus 3 slut parentes i kvadrat"
+   },
+   {
+    "t": "Vi kontrollerar att mittentermen/den dubbla produkten blir 6 x , vilket stämmer."
+   },
+   {
+    "t": "Svar: parentesen x minus 3 slut parentes i kvadrat"
+   },
+   {
+    "t": "c) Vi ska faktorisera 50 x i kvadrat minus 98 ."
+   },
+   {
+    "t": "Vi börjar med att bryta ut 2 från uttrycket:"
+   },
+   {
+    "t": "2 parentesen 25 x i kvadrat minus 49 slut parentes"
+   },
+   {
+    "t": "Nu tittar vi på uttrycket i parentesen igen."
+   },
+   {
+    "t": "Kan vi faktorisera det ytterligare?"
+   },
+   {
+    "t": "Ja!"
+   },
+   {
+    "t": "Eftersom uttrycket i parentesen är \"kvadrat minus kvadrat\" är det ett konjugat!"
+   },
+   {
+    "t": "Vi skriver en mall för konjugatregeln, så"
+   },
+   {
+    "t": "2 parentesen 25 x i kvadrat minus 49 slut parentes är lika med 2 parentesen plus slut parentes parentesen minus slut parentes"
+   },
+   {
+    "t": "Sedan tittar vi på första termen 25 x i kvadrat och tänker \"Vad upphöjt till 2 blir 25 x i kvadrat ?"
+   },
+   {
+    "t": "Jo, 5 x !\" Sedan tittar vi på andra termen 49 och tänker \"Vad upphöjt till 2 blir 49?"
+   },
+   {
+    "t": "Jo, 7!\""
+   },
+   {
+    "t": "Då fyller vi på med 5 x och 7 i parenteserna och får"
+   },
+   {
+    "t": "2 parentesen 25 x i kvadrat minus 49 slut parentes är lika med 2 parentesen 5 x plus 7 slut parentes parentesen 5 x minus 7 slut parentes"
+   },
+   {
+    "t": "Svar: 2 parentesen 5 x plus 7 slut parentes parentesen 5 x minus 7 slut parentes"
+   },
+   {
+    "t": "Exempel 2 — Förkorta ett rationellt uttryck"
+   },
+   {
+    "t": "Förkorta x i kvadrat minus 9 delat med 5 x plus 15 så långt som möjligt."
+   },
+   {
+    "t": "Vi faktoriserar täljaren och nämnaren så långt vi kan."
+   },
+   {
+    "t": "Täljaren är \"kvadrat minus kvadrat\" och kan därför faktoriseras med konjugatregeln."
+   },
+   {
+    "t": "Nämnaren kan faktoriseras genom att bryta ut 5."
+   },
+   {
+    "t": "x i kvadrat minus 9 delat med 5 x plus 15 är lika med parentesen x plus 3 slut parentes parentesen x minus 3 slut parentes delat med 5 parentesen x plus 3 slut parentes"
+   },
+   {
+    "t": "Därefter förkortar vi uttrycket med parentesen x plus 3 slut parentes eftersom den faktorn finns i både täljare och nämnare."
+   },
+   {
+    "t": "parentesen x plus 3 slut parentes parentesen x minus 3 slut parentes delat med 5 parentesen x plus 3 slut parentes är lika med x minus 3 delat med 5"
+   },
+   {
+    "t": "Svar: x minus 3 delat med 5"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-2.3",
+  "title": "Nollproduktmetoden",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Nollproduktmetoden"
+   },
+   {
+    "t": "Ekvationer som innehåller x i kvadrat -termer och x -termer kan vi inte lösa med vår vanliga metod."
+   },
+   {
+    "t": "Dessa ekvationer, samt ekvationer där en produkt (multiplikation) är lika med 0, löser vi med nollproduktmetoden."
+   },
+   {
+    "t": "Principen för nollproduktmetoden är att om vi har en multiplikation som ska vara lika med 0, så måste någon av faktorerna (delarna i multiplikationen) vara lika med 0."
+   },
+   {
+    "t": "Det går inte att multiplicera två tal, så att de blir lika med 0, om inte något av talen är 0."
+   },
+   {
+    "t": "Lösningen till en ekvation kallas också för rot."
+   },
+   {
+    "t": "Nollproduktmetoden"
+   },
+   {
+    "t": "Ändra så att högra ledet blir lika med 0."
+   },
+   {
+    "t": "Faktorisera det vänstra ledet."
+   },
+   {
+    "t": "Sätt varje faktor lika med 0 och lös."
+   },
+   {
+    "t": "Exempel 1 — Lös ekvationerna"
+   },
+   {
+    "t": "Lös ekvationerna. a) x i kvadrat minus 12 x är lika med 0 b) x i kvadrat plus 5 x är lika med 0 c) parentesen x minus 7 slut parentes parentesen x plus 3 slut parentes är lika med 0 d) 14 x i kvadrat är lika med 21 x"
+   },
+   {
+    "t": "a) Vi har en ekvation med både x i kvadrat -termer och x -termer."
+   },
+   {
+    "t": "Den är lika med 0."
+   },
+   {
+    "t": "Då börjar vi med att faktorisera vänstra ledet."
+   },
+   {
+    "t": "Vi bryter ut x :"
+   },
+   {
+    "t": "x parentesen x minus 12 slut parentes är lika med 0"
+   },
+   {
+    "t": "Nu har vi skrivit det vänstra ledet som en produkt (multiplikation)."
+   },
+   {
+    "t": "Om en produkt är lika med 0 måste en faktor vara 0."
+   },
+   {
+    "t": "Så"
+   },
+   {
+    "t": "x är lika med 0 eller x minus 12 som är lika med 0"
+   },
+   {
+    "t": "Så x är lika med 0 är en lösning."
+   },
+   {
+    "t": "Vi beräknar den andra lösningen också:"
+   },
+   {
+    "t": "x minus 12 är lika med 0 vilket är ekvivalent med att x är lika med 12"
+   },
+   {
+    "t": "Vi får alltså två lösningar: x ett är lika med 0 och x två är lika med 12 ."
+   },
+   {
+    "t": "Svar: x ett är lika med 0 och x två är lika med 12"
+   },
+   {
+    "t": "b) Vi har en ekvation med både x i kvadrat -termer och en x -term, så vi bryter ut x :"
+   },
+   {
+    "t": "x parentesen x plus 5 slut parentes är lika med 0"
+   },
+   {
+    "t": "Nollproduktmetoden ger"
+   },
+   {
+    "t": "x är lika med 0 eller x plus 5 som är lika med 0"
+   },
+   {
+    "t": "Den andra ekvationen ger x är lika med minus 5 ."
+   },
+   {
+    "t": "Svar: x ett är lika med 0 och x två är lika med minus 5"
+   },
+   {
+    "t": "c) Det vänstra ledet är redan faktoriserat och lika med 0."
+   },
+   {
+    "t": "Nollproduktmetoden ger"
+   },
+   {
+    "t": "x minus 7 är lika med 0 vilket är ekvivalent med att x är lika med 7"
+   },
+   {
+    "t": "eller"
+   },
+   {
+    "t": "x plus 3 är lika med 0 vilket är ekvivalent med att x är lika med minus 3"
+   },
+   {
+    "t": "Svar: x ett är lika med 7 och x två är lika med minus 3"
+   },
+   {
+    "t": "d) Vi har en ekvation med både x i kvadrat -termer och x -termer (det spelar ingen roll att de är på olika sidor om likhetstecknet)."
+   },
+   {
+    "t": "Vi börjar med att göra om så att det högra ledet blir 0, genom att subtrahera 21 x från båda led:"
+   },
+   {
+    "t": "14 x i kvadrat minus 21 x är lika med 0"
+   },
+   {
+    "t": "Därefter faktoriserar vi det vänstra ledet och löser ekvationen som vanligt."
+   },
+   {
+    "t": "7 x parentesen 2 x minus 3 slut parentes är lika med 0"
+   },
+   {
+    "t": "(Det går även att bryta ut bara x , men helst största möjliga faktor.)"
+   },
+   {
+    "t": "Nollproduktmetoden ger"
+   },
+   {
+    "t": "7 x är lika med 0 vilket är ekvivalent med att x är lika med 0"
+   },
+   {
+    "t": "eller"
+   },
+   {
+    "t": "2 x minus 3 är lika med 0 vilket är ekvivalent med att 2 x är lika med 3 vilket är ekvivalent med att x är lika med 3 delat med 2"
+   },
+   {
+    "t": "Svar: x ett är lika med 0 och x två är lika med 3 delat med 2"
+   },
+   {
+    "t": "Exempel 2 — Konstruera en ekvation med givna rötter"
+   },
+   {
+    "t": "Ange en ekvation med rötterna x ett är lika med 3 och x två är lika med minus 10 ."
+   },
+   {
+    "t": "Vi ska konstruera en ekvation med rötterna (lösningarna) x är lika med 3 och x är lika med minus 10 ."
+   },
+   {
+    "t": "Detta kan vi enkelt göra med nollproduktmetoden baklänges!"
+   },
+   {
+    "t": "Om vi sätter ekvationen lika med 0, så måste faktorerna parentesen x minus 3 slut parentes och parentesen x plus 10 slut parentes finnas med eftersom när vi sätter in x är lika med 3 och x är lika med minus 10 i dessa så blir de 0."
+   },
+   {
+    "t": "Vi kan se det som att vi sätter in lösningarna fast med ombytt tecken i parenteserna."
+   },
+   {
+    "t": "En ekvation skulle alltså kunna vara"
+   },
+   {
+    "t": "parentesen x minus 3 slut parentes parentesen x plus 10 slut parentes är lika med 0"
+   },
+   {
+    "t": "(Vi ser med en snabb kontroll att x är lika med 3 gör att första faktorn blir 0 och x är lika med minus 10 gör att andra faktorn blir 0 och därmed gör att hela vänstra ledet blir lika med 0.)"
+   },
+   {
+    "t": "Svar: parentesen x minus 3 slut parentes parentesen x plus 10 slut parentes är lika med 0"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-2.4",
+  "title": "pq-formeln",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "pq-formeln"
+   },
+   {
+    "t": "Ekvationer som innehåller x i kvadrat -termer, x -termer och konstanttermer kan vi varken lösa med vår vanliga metod eller med nollproduktmetoden."
+   },
+   {
+    "t": "Dessa ekvationer löser vi med pq-formeln."
+   },
+   {
+    "t": "pq-formeln"
+   },
+   {
+    "t": "x i kvadrat plus p x plus q är lika med 0"
+   },
+   {
+    "t": "har lösningarna"
+   },
+   {
+    "t": "x är lika med minus p delat med 2 plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q"
+   },
+   {
+    "t": "Formeln med ord: först halva koefficienten framför x -termen med ombytt tecken, sedan plus/minus roten ur föregående tal upphöjt till 2 (eventuellt minustecken innan kan bortses) minus konstanttermen med ombytt tecken."
+   },
+   {
+    "t": "OBS!"
+   },
+   {
+    "t": "En förutsättning för att pq-formeln ska kunna användas är att ekvationen är lika med 0 och att vi inte har någon koefficient framför x i kvadrat -termen."
+   },
+   {
+    "t": "Härledning — pq-formeln"
+   },
+   {
+    "t": "Vi utgår från ekvationen"
+   },
+   {
+    "t": "x i kvadrat plus p x plus q är lika med 0"
+   },
+   {
+    "t": "Vi subtraherar båda led med q för att få x -termerna ensamma i VL:"
+   },
+   {
+    "t": "x i kvadrat plus p x är lika med minus q"
+   },
+   {
+    "t": "Vi adderar parentesen p delat med 2 slut parentes i kvadrat till båda led, så att VL kan skrivas som en kvadreringsregel:"
+   },
+   {
+    "t": "x i kvadrat plus p x plus parentesen p delat med 2 slut parentes i kvadrat är lika med parentesen p delat med 2 slut parentes i kvadrat minus q"
+   },
+   {
+    "t": "parentesen x plus p delat med 2 slut parentes i kvadrat är lika med parentesen p delat med 2 slut parentes i kvadrat minus q"
+   },
+   {
+    "t": "Vi drar roten ur båda led och löser sedan ut x :"
+   },
+   {
+    "t": "x plus p delat med 2 är lika med plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q"
+   },
+   {
+    "t": "x är lika med minus p delat med 2 plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "Exempel 1 — Lös ekvationerna"
+   },
+   {
+    "t": "Lös ekvationerna. a) x i kvadrat plus 6 x minus 7 är lika med 0 b) 3 x i kvadrat minus 15 x plus 18 är lika med 0 c) x i kvadrat är lika med 39 minus 10 x"
+   },
+   {
+    "t": "a) Vi identifierar p och q : p är lika med 6 och q är lika med minus 7 ."
+   },
+   {
+    "t": "Insättning av dessa i pq-formeln ger"
+   },
+   {
+    "t": "x är lika med minus 6 delat med 2 plus minus roten ur parentesen 6 delat med 2 slut parentes i kvadrat minus parentesen minus 7 slut parentes"
+   },
+   {
+    "t": "x är lika med minus 3 plus minus roten ur 3 i kvadrat plus 7 som är lika med minus 3 plus minus roten ur 9 plus 7 som är lika med minus 3 plus minus roten ur 16 som är lika med minus 3 plus minus 4"
+   },
+   {
+    "t": "Detta ger lösningarna"
+   },
+   {
+    "t": "x ett är lika med minus 3 minus 4 som är lika med minus 7"
+   },
+   {
+    "t": "x två är lika med minus 3 plus 4 som är lika med 1"
+   },
+   {
+    "t": "Svar: x ett är lika med minus 7 och x två är lika med 1"
+   },
+   {
+    "t": "Kommentar — snabbare lösning \"med ord\": halva koefficienten framför x -termen med ombytt tecken är minus 3 ; under rottecknet skrivs föregående tal ekvation 3 upphöjt till 2, och konstanttermen med ombytt tecken ( minus 7 blir plus 7 )."
+   },
+   {
+    "t": "Så kan vi direkt skriva x är lika med minus 3 plus minus roten ur 3 i kvadrat plus 7 ."
+   },
+   {
+    "t": "b) För att kunna använda pq-formeln dividerar vi båda led med 3 för att få bort koefficienten framför x i kvadrat -termen:"
+   },
+   {
+    "t": "x i kvadrat minus 5 x plus 6 är lika med 0"
+   },
+   {
+    "t": "pq-formeln ger"
+   },
+   {
+    "t": "x är lika med 5 delat med 2 plus minus roten ur parentesen 5 delat med 2 slut parentes i kvadrat minus 6 som är lika med 5 delat med 2 plus minus roten ur 25 delat med 4 minus 24 delat med 4 som är lika med 5 delat med 2 plus minus roten ur 1 delat med 4 som är lika med 5 delat med 2 plus minus 1 delat med 2"
+   },
+   {
+    "t": "Detta ger lösningarna"
+   },
+   {
+    "t": "x ett är lika med 5 delat med 2 minus 1 delat med 2 som är lika med 4 delat med 2 som är lika med 2"
+   },
+   {
+    "t": "x två är lika med 5 delat med 2 plus 1 delat med 2 som är lika med 6 delat med 2 som är lika med 3"
+   },
+   {
+    "t": "Svar: x ett är lika med 2 och x två är lika med 3"
+   },
+   {
+    "t": "c) För att kunna använda pq-formeln gör vi om ekvationen så att ena ledet blir lika med 0:"
+   },
+   {
+    "t": "x i kvadrat plus 10 x minus 39 är lika med 0"
+   },
+   {
+    "t": "Nu använder vi pq-formeln:"
+   },
+   {
+    "t": "x är lika med minus 5 plus minus roten ur 5 i kvadrat plus 39 som är lika med minus 5 plus minus roten ur 64 som är lika med minus 5 plus minus 8"
+   },
+   {
+    "t": "Detta ger lösningarna"
+   },
+   {
+    "t": "x ett är lika med minus 5 minus 8 som är lika med minus 13"
+   },
+   {
+    "t": "x två är lika med minus 5 plus 8 som är lika med 3"
+   },
+   {
+    "t": "Svar: x ett är lika med minus 13 och x två är lika med 3"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-2.5",
+  "title": "abc-formeln",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "abc-formeln"
+   },
+   {
+    "t": "Det finns ytterligare en formel för att lösa fullständiga andragradsekvationer på formen a x i kvadrat plus b x plus c är lika med 0 som kallas abc-formeln."
+   },
+   {
+    "t": "Till skillnad från pq-formeln behöver inte koefficienten framför x i kvadrat -termen \"divideras bort\" innan formeln används."
+   },
+   {
+    "t": "abc-formeln"
+   },
+   {
+    "t": "a x i kvadrat plus b x plus c är lika med 0"
+   },
+   {
+    "t": "har lösningarna"
+   },
+   {
+    "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a"
+   },
+   {
+    "t": "Exempel 1 — Lös med abc-formeln"
+   },
+   {
+    "t": "Lös ekvationen 2 x i kvadrat minus 8 x plus 6 är lika med 0 med abc-formeln."
+   },
+   {
+    "t": "Vi ställer upp abc-formeln:"
+   },
+   {
+    "t": "x är lika med minus b delat med 2 a plus minus roten ur b i kvadrat minus 4 a c delat med 2 a"
+   },
+   {
+    "t": "Vi identifierar a , b och c och ser att a är lika med 2 , b är lika med minus 8 och c är lika med 6 ."
+   },
+   {
+    "t": "Insättning i abc-formeln ger"
+   },
+   {
+    "t": "x är lika med minus minus 8 delat med 2 gånger 2 plus minus roten ur parentesen minus 8 slut parentes i kvadrat minus 4 gånger 2 gånger 6 delat med 2 gånger 2"
+   },
+   {
+    "t": "x är lika med 8 delat med 4 plus minus roten ur 64 minus 48 delat med 4"
+   },
+   {
+    "t": "x är lika med 2 plus minus roten ur 16 delat med 4 som är lika med 2 plus minus 4 delat med 4 som är lika med 2 plus minus 1"
+   },
+   {
+    "t": "Detta ger lösningarna"
+   },
+   {
+    "t": "x ett är lika med 2 minus 1 som är lika med 1"
+   },
+   {
+    "t": "x två är lika med 2 plus 1 som är lika med 3"
+   },
+   {
+    "t": "Svar: x ett är lika med 1 och x två är lika med 3"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-2.6",
+  "title": "Antal lösningar till en andragradsekvation",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Antal lösningar till en andragradsekvation"
+   },
+   {
+    "t": "pq-formeln säger att ekvationen x i kvadrat plus p x plus q är lika med 0 har lösningarna"
+   },
+   {
+    "t": "x är lika med minus p delat med 2 plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q"
+   },
+   {
+    "t": "Uttrycket under rottecknet, parentesen p delat med 2 slut parentes i kvadrat minus q , kallas diskriminant."
+   },
+   {
+    "t": "Genom att undersöka diskriminantens tecken kan vi avgöra hur många lösningar ekvationen har."
+   },
+   {
+    "t": "Undersökning — Diskriminantens tecken"
+   },
+   {
+    "t": "Positiv diskriminant."
+   },
+   {
+    "t": "Ekvationen x i kvadrat plus 6 x minus 7 är lika med 0 har lösningarna"
+   },
+   {
+    "t": "x är lika med minus 3 plus minus roten ur 3 i kvadrat plus 7 som är lika med minus 3 plus minus roten ur 16"
+   },
+   {
+    "t": "Vi har en positiv diskriminant ekvation 16 och vi får två lösningar ( x är lika med minus 3 plus minus 4 )."
+   },
+   {
+    "t": "Diskriminanten 0."
+   },
+   {
+    "t": "Ekvationen x i kvadrat plus 6 x plus 9 är lika med 0 har lösningarna"
+   },
+   {
+    "t": "x är lika med minus 3 plus minus roten ur 3 i kvadrat minus 9 som är lika med minus 3 plus minus roten ur 0"
+   },
+   {
+    "t": "Vi har diskriminanten 0 och vi får en lösning ( x är lika med minus 3 )."
+   },
+   {
+    "t": "Negativ diskriminant."
+   },
+   {
+    "t": "Ekvationen x i kvadrat plus 6 x plus 18 är lika med 0 har lösningarna"
+   },
+   {
+    "t": "x är lika med minus 3 plus minus roten ur 3 i kvadrat minus 18 som är lika med minus 3 plus minus roten ur minus 9"
+   },
+   {
+    "t": "Vi har en negativ diskriminant (−9) och ekvationen saknar lösningar eftersom vi inte kan ta kvadratroten ur ett negativt tal (inget tal multiplicerat med sig själv blir −9)."
+   },
+   {
+    "t": "Vi sammanfattar undersökningen:"
+   },
+   {
+    "t": "Exempel 1 — Ange antalet lösningar"
+   },
+   {
+    "t": "Ange antalet lösningar till. a) x i kvadrat plus 12 x minus 13 är lika med 0 b) x i kvadrat plus 5 x plus 8 är lika med 0"
+   },
+   {
+    "t": "a) pq-formeln ger"
+   },
+   {
+    "t": "x är lika med minus 6 plus minus roten ur 6 i kvadrat plus 13 som är lika med minus 6 plus minus roten ur 36 plus 13 som är lika med minus 6 plus minus roten ur 49"
+   },
+   {
+    "t": "Diskriminanten (talet under rottecknet) är positiv ekvation 49."
+   },
+   {
+    "t": "Alltså har ekvationen två lösningar."
+   },
+   {
+    "t": "Svar: 2"
+   },
+   {
+    "t": "b) pq-formeln ger"
+   },
+   {
+    "t": "x är lika med minus 2,5 plus minus roten ur 2,5 i kvadrat minus 8 som är lika med minus 2,5 plus minus roten ur 6,25 minus 8 som är lika med minus 2,5 plus minus roten ur minus 1,75"
+   },
+   {
+    "t": "Diskriminanten är negativ."
+   },
+   {
+    "t": "Alltså saknar ekvationen lösningar."
+   },
+   {
+    "t": "Svar: 0"
+   },
+   {
+    "t": "Exempel 2 — Dubbelrot"
+   },
+   {
+    "t": "För vilka värden på a gäller att ekvationen x i kvadrat minus 8 x plus a är lika med 0 har en enda lösning (en så kallad dubbelrot)?"
+   },
+   {
+    "t": "För att ekvationen ska ha en enda lösning ska diskriminanten vara lika med 0."
+   },
+   {
+    "t": "Vi påbörjar en lösning med pq-formeln:"
+   },
+   {
+    "t": "x är lika med 4 plus minus roten ur 4 i kvadrat minus a"
+   },
+   {
+    "t": "Vi sätter nu diskriminanten lika med 0 och löser ekvationen:"
+   },
+   {
+    "t": "4 i kvadrat minus a är lika med 0"
+   },
+   {
+    "t": "16 minus a är lika med 0"
+   },
+   {
+    "t": "16 är lika med a"
+   },
+   {
+    "t": "Vi får alltså en enda lösning när a är lika med 16 ."
+   },
+   {
+    "t": "Svar: a är lika med 16"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-2.7",
+  "title": "Problemlösning med andragradsekvationer",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Problemlösning med andragradsekvationer"
+   },
+   {
+    "t": "Vid problemlösning är det ofta bra att följa nedanstående procedur."
+   },
+   {
+    "t": "Problemlösning"
+   },
+   {
+    "t": "Tolka problemet."
+   },
+   {
+    "t": "Definiera införda variabler och rita vid behov figur."
+   },
+   {
+    "t": "Ställ upp en eller flera ekvationer."
+   },
+   {
+    "t": "Lös ekvationen eller ekvationssystemet."
+   },
+   {
+    "t": "Använd lämplig metod."
+   },
+   {
+    "t": "Tolka svaret."
+   },
+   {
+    "t": "Vad stod variablerna för?"
+   },
+   {
+    "t": "Är svaret rimligt?"
+   },
+   {
+    "t": "Kan någon lösning bortses?"
+   },
+   {
+    "t": "Exempel 1 — Differens och produkt"
+   },
+   {
+    "t": "Två positiva tal har differensen 21 och produkten 1 080."
+   },
+   {
+    "t": "Vilka är talen?"
+   },
+   {
+    "t": "1."
+   },
+   {
+    "t": "Vi inför och definierar variabler."
+   },
+   {
+    "t": "x är lika med det mindre talet"
+   },
+   {
+    "t": "y är lika med det större talet"
+   },
+   {
+    "t": "2."
+   },
+   {
+    "t": "Vi ställer upp ett ekvationssystem."
+   },
+   {
+    "t": "Eftersom vi har två obekanta, måste vi ställa upp två ekvationer:"
+   },
+   {
+    "t": "y minus x är lika med 21, ekvation 1 x gånger y som är lika med 1 080, ekvation 2"
+   },
+   {
+    "t": "3."
+   },
+   {
+    "t": "Vi löser ekvationssystemet."
+   },
+   {
+    "t": "Vi löser ut y från ekvation ekvation 1 och får"
+   },
+   {
+    "t": "y är lika med 21 plus x, ekvation 3"
+   },
+   {
+    "t": "Vi använder substitutionsmetoden och sätter in y är lika med 21 plus x i ekvation 2:"
+   },
+   {
+    "t": "x parentesen 21 plus x slut parentes är lika med 1 080"
+   },
+   {
+    "t": "Vi utvecklar VL och löser sedan ekvationen med pq-formeln:"
+   },
+   {
+    "t": "21 x plus x i kvadrat är lika med 1 080"
+   },
+   {
+    "t": "x i kvadrat plus 21 x minus 1 080 är lika med 0"
+   },
+   {
+    "t": "x är lika med minus 21 delat med 2 plus minus roten ur parentesen 21 delat med 2 slut parentes i kvadrat plus 1 080"
+   },
+   {
+    "t": "x är lika med minus 10,5 plus minus roten ur 1 190,25 som är lika med minus 10,5 plus minus 34,5"
+   },
+   {
+    "t": "x ett är lika med minus 10,5 minus 34,5 som är lika med minus 45"
+   },
+   {
+    "t": "x två är lika med minus 10,5 plus 34,5 som är lika med 24"
+   },
+   {
+    "t": "4."
+   },
+   {
+    "t": "Vi tolkar svaret."
+   },
+   {
+    "t": "Eftersom x skulle vara ett positivt tal kan lösningen x ett är lika med minus 45 bortses."
+   },
+   {
+    "t": "Alltså gäller x är lika med 24 ."
+   },
+   {
+    "t": "Insättning av x är lika med 24 i ekvation 3 ger"
+   },
+   {
+    "t": "y är lika med 21 plus 24 som är lika med 45"
+   },
+   {
+    "t": "Kontroll: 45 minus 24 är lika med 21 och 24 gånger 45 är lika med 1 080 ."
+   },
+   {
+    "t": "Stämmer!"
+   },
+   {
+    "t": "Svar: Talen är 24 och 45."
+   },
+   {
+    "t": "Exempel 2 — Rektangelns omkrets"
+   },
+   {
+    "t": "En rektangel har arean 1 215 centimeter i kvadrat ."
+   },
+   {
+    "t": "Den ena sidan är 18 centimeter kortare än den andra."
+   },
+   {
+    "t": "Vilken är rektangelns omkrets?"
+   },
+   {
+    "t": "1."
+   },
+   {
+    "t": "Vi ritar figur och inför variabler."
+   },
+   {
+    "t": "Sidorna blir x cm respektive parentesen x minus 18 slut parentes cm."
+   },
+   {
+    "t": "2."
+   },
+   {
+    "t": "Omkretsen O är då"
+   },
+   {
+    "t": "O är lika med x plus x plus parentesen x minus 18 slut parentes plus parentesen x minus 18 slut parentes"
+   },
+   {
+    "t": "O är lika med 4 x minus 36"
+   },
+   {
+    "t": "3."
+   },
+   {
+    "t": "Vi behöver hitta x ."
+   },
+   {
+    "t": "Vi utnyttjar arean!"
+   },
+   {
+    "t": "x parentesen x minus 18 slut parentes är lika med 1 215"
+   },
+   {
+    "t": "x i kvadrat minus 18 x är lika med 1 215"
+   },
+   {
+    "t": "x i kvadrat minus 18 x minus 1 215 är lika med 0"
+   },
+   {
+    "t": "pq-formeln ger"
+   },
+   {
+    "t": "x är lika med 9 plus minus roten ur 9 i kvadrat plus 1 215 som är lika med 9 plus minus roten ur 1 296 som är lika med 9 plus minus 36"
+   },
+   {
+    "t": "x ett är lika med 9 minus 36 som är lika med minus 27"
+   },
+   {
+    "t": "x två är lika med 9 plus 36 som är lika med 45"
+   },
+   {
+    "t": "4."
+   },
+   {
+    "t": "Vi tolkar svaret."
+   },
+   {
+    "t": "En sträcka kan inte vara negativ så lösningen x är lika med minus 27 kan bortses."
+   },
+   {
+    "t": "Alltså gäller x är lika med 45 centimeter."
+   },
+   {
+    "t": "Insättning av x är lika med 45 centimeter i formeln för omkretsen O är lika med 4 x minus 36 ger"
+   },
+   {
+    "t": "O är lika med 4 gånger 45 minus 36 som är lika med 180 minus 36 som är lika med 144 centimeter"
+   },
+   {
+    "t": "Svar: 144 centimeter"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-2.8",
+  "title": "Rotekvationer",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Rotekvationer"
+   },
+   {
+    "t": "En ekvation där variabeln, t.ex. x , är under ett rottecken kallas rotekvation."
+   },
+   {
+    "t": "Lösa rotekvationer — generellt"
+   },
+   {
+    "t": "Lös ut termen som innehåller rotuttrycket."
+   },
+   {
+    "t": "Kvadrera båda led (för att bli av med rottecknet) och lös med lämplig metod."
+   },
+   {
+    "t": "Kontrollera din lösning!"
+   },
+   {
+    "t": "Falska rötter kan uppstå."
+   },
+   {
+    "t": "Lösa rotekvationer — med variabelsubstitution"
+   },
+   {
+    "t": "Substituera (byt ut) rotuttrycket, t.ex. roten ur x , mot en annan variabel, t.ex. t ."
+   },
+   {
+    "t": "Teckna en ny ekvation med t och lös ekvationen."
+   },
+   {
+    "t": "Bestäm den ursprungliga variabeln x med hjälp av värdet på t ."
+   },
+   {
+    "t": "Kontrollera din lösning!"
+   },
+   {
+    "t": "Falska rötter kan uppstå."
+   },
+   {
+    "t": "Exempel 1 — Lös rotekvationerna"
+   },
+   {
+    "t": "Lös. a) roten ur x är lika med 8 b) roten ur x plus 2 är lika med 17 c) x plus 3 roten ur x minus 4 är lika med 0"
+   },
+   {
+    "t": "a) Vi kvadrerar båda led och löser ekvationen:"
+   },
+   {
+    "t": "parentesen roten ur x slut parentes i kvadrat är lika med 8 i kvadrat"
+   },
+   {
+    "t": "x är lika med 64"
+   },
+   {
+    "t": "Kontroll: Insättning av x är lika med 64 i den ursprungliga ekvationen roten ur x är lika med 8 ger vänsterledet är lika med roten ur 64 som är lika med 8 som är lika med högerledet ."
+   },
+   {
+    "t": "Stämmer!"
+   },
+   {
+    "t": "Svar: x är lika med 64"
+   },
+   {
+    "t": "b) Vi kvadrerar båda led och löser ekvationen:"
+   },
+   {
+    "t": "parentesen roten ur x plus 2 slut parentes i kvadrat är lika med 17 i kvadrat"
+   },
+   {
+    "t": "x plus 2 är lika med 289"
+   },
+   {
+    "t": "x är lika med 287"
+   },
+   {
+    "t": "Kontroll: Insättning av x är lika med 287 i den ursprungliga ekvationen ger vänsterledet är lika med roten ur 287 plus 2 som är lika med roten ur 289 som är lika med 17 som är lika med högerledet ."
+   },
+   {
+    "t": "Stämmer!"
+   },
+   {
+    "t": "Svar: x är lika med 287"
+   },
+   {
+    "t": "c) Vi löser ut termen med rotuttrycket 3 roten ur x :"
+   },
+   {
+    "t": "3 roten ur x är lika med 4 minus x"
+   },
+   {
+    "t": "Vi kvadrerar båda led:"
+   },
+   {
+    "t": "parentesen 3 roten ur x slut parentes i kvadrat är lika med parentesen 4 minus x slut parentes i kvadrat"
+   },
+   {
+    "t": "9 x är lika med 16 minus 8 x plus x i kvadrat"
+   },
+   {
+    "t": "Vi modifierar ekvationen och löser den sedan med pq-formeln:"
+   },
+   {
+    "t": "x i kvadrat minus 17 x plus 16 är lika med 0"
+   },
+   {
+    "t": "x är lika med 8,5 plus minus roten ur 8,5 i kvadrat minus 16 som är lika med 8,5 plus minus roten ur 56,25 som är lika med 8,5 plus minus 7,5"
+   },
+   {
+    "t": "Detta ger lösningarna"
+   },
+   {
+    "t": "x ett är lika med 8,5 minus 7,5 som är lika med 1"
+   },
+   {
+    "t": "x två är lika med 8,5 plus 7,5 som är lika med 16"
+   },
+   {
+    "t": "Kontroll: Insättning av x är lika med 1 i den ursprungliga ekvationen x plus 3 roten ur x minus 4 är lika med 0 ger"
+   },
+   {
+    "t": "vänsterledet är lika med 1 plus 3 roten ur 1 minus 4 som är lika med 1 plus 3 minus 4 som är lika med 0 som är lika med högerledet"
+   },
+   {
+    "t": "Stämmer!"
+   },
+   {
+    "t": "Kontroll: Insättning av x är lika med 16 i den ursprungliga ekvationen ger"
+   },
+   {
+    "t": "vänsterledet är lika med 16 plus 3 roten ur 16 minus 4 som är lika med 16 plus 12 minus 4 som är lika med 24 är inte lika med högerledet"
+   },
+   {
+    "t": "Stämmer inte!"
+   },
+   {
+    "t": "Falsk rot!"
+   },
+   {
+    "t": "Svar: x är lika med 1"
+   },
+   {
+    "t": "Exempel 2 — Alternativ lösning med variabelsubstitution"
+   },
+   {
+    "t": "Lös x plus 3 roten ur x minus 4 är lika med 0 med variabelsubstitution."
+   },
+   {
+    "t": "Sätt roten ur x är lika med t ."
+   },
+   {
+    "t": "Detta ger x är lika med roten ur x gånger roten ur x som är lika med t gånger t som är lika med t i kvadrat och den nya ekvationen"
+   },
+   {
+    "t": "t i kvadrat plus 3 t minus 4 är lika med 0"
+   },
+   {
+    "t": "pq-formeln ger"
+   },
+   {
+    "t": "t är lika med minus 1,5 plus minus roten ur 1,5 i kvadrat plus 4 som är lika med minus 1,5 plus minus roten ur 6,25 som är lika med minus 1,5 plus minus 2,5"
+   },
+   {
+    "t": "Detta ger lösningarna"
+   },
+   {
+    "t": "t ett är lika med minus 1,5 minus 2,5 som är lika med minus 4"
+   },
+   {
+    "t": "t två är lika med minus 1,5 plus 2,5 som är lika med 1"
+   },
+   {
+    "t": "roten ur x är lika med t ett ger"
+   },
+   {
+    "t": "roten ur x är lika med minus 4 vilket ger att x ett är lika med 16"
+   },
+   {
+    "t": "roten ur x är lika med t två ger"
+   },
+   {
+    "t": "roten ur x är lika med 1 vilket ger att x två är lika med 1"
+   },
+   {
+    "t": "(Kontrollera lösningarna x ett är lika med 16 och x två är lika med 1 som i första lösningen — x är lika med 16 visar sig vara en falsk rot.)"
+   },
+   {
+    "t": "Svar: x är lika med 1"
+   },
+   {
+    "t": "Varför uppstår falska rötter?"
+   },
+   {
+    "t": "Anta A är lika med B ."
+   },
+   {
+    "t": "Vi kvadrerar båda led och får"
+   },
+   {
+    "t": "A i kvadrat är lika med B i kvadrat"
+   },
+   {
+    "t": "Löser vi denna ekvation får vi"
+   },
+   {
+    "t": "A är lika med plus minus B"
+   },
+   {
+    "t": "Den andra lösningen A är lika med minus B är en falsk rot (om A inte är lika med 0) eftersom den inte uppfyller det första villkoret A är lika med B ."
+   },
+   {
+    "t": "Slutsats: Kvadreringar kan ge extra \"falska\" rötter."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-3.1",
+  "title": "Grafen till en andragradsfunktion",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Grafen till en andragradsfunktion"
+   },
+   {
+    "t": "En funktion där variabeltermens största exponent är 2 kallas andragradsfunktion. f av x är lika med x i kvadrat minus 6 och g av x är lika med 3 x i kvadrat minus 5 x plus 7 är exempel på andragradsfunktioner. x i kvadrat och 3 x i kvadrat kallas andragradstermer."
+   },
+   {
+    "t": "Vi kommer framför allt att använda digitala hjälpmedel för att rita grafer, men för förståelsen är det bra att kunna göra det för hand också."
+   },
+   {
+    "t": "Vi ritar andragradsfunktionen f av x är lika med x i kvadrat för hand."
+   },
+   {
+    "t": "Vi börjar med att rita upp en värdetabell för att få fram koordinater att pricka in."
+   },
+   {
+    "t": "Vi väljer att gå från x är lika med minus 3 till x är lika med 3 ."
+   },
+   {
+    "t": "För att beräkna y -koordinaten när x är lika med minus 3 så sätter vi in −3 i vår funktion f av x är lika med x i kvadrat och får f av minus 3 är lika med parentesen minus 3 slut parentes i kvadrat som är lika med 9 ."
+   },
+   {
+    "t": "Sedan gör vi på motsvarande sätt för övriga x -värden."
+   },
+   {
+    "t": "Vi prickar in koordinaterna i ett koordinatsystem och förbinder sedan punkterna — då får vi andragradsfunktionens graf."
+   },
+   {
+    "t": "Parabelns delar"
+   },
+   {
+    "t": "Vi ser att grafen till andragradsfunktionen bildar en \"båge\"."
+   },
+   {
+    "t": "Denna form kallas parabel."
+   },
+   {
+    "t": "Parabeln kan antingen ha en \"topp\" där vi hittar grafens maximipunkt och största värde eller en \"dal\" där vi hittar grafens minimipunkt och minsta värde."
+   },
+   {
+    "t": "Ett samlingsnamn för maximi- och minimipunkt är extrempunkt."
+   },
+   {
+    "t": "En extrempunkt kan alltså antingen vara en maximi- eller en minimipunkt."
+   },
+   {
+    "t": "Huruvida en extrempunkt är en maximi- eller minimipunkt kallas punktens karaktär."
+   },
+   {
+    "t": "Vi ser också att grafen är symmetrisk kring en lodrät linje som kallas symmetrilinje."
+   },
+   {
+    "t": "Extrempunkten ligger på symmetrilinjen (detta kommer vi att utnyttja framöver)."
+   },
+   {
+    "t": "Symmetrilinjens ekvation anges med dess x -koordinat."
+   },
+   {
+    "t": "Om en symmetrilinje t.ex. ligger vid 3 på x -axeln är symmetrilinjens ekvation x är lika med 3 ."
+   },
+   {
+    "t": "Ibland skrivs den också x s är lika med 3 ."
+   },
+   {
+    "t": "De x -värden där funktionens värde är 0 och där grafen till funktionen skär x -axeln kallas nollställen."
+   },
+   {
+    "t": "Nollställena anges med sin x -koordinat."
+   },
+   {
+    "t": "Om en graf skär x -axeln vid 5 är ett nollställe x är lika med 5 ."
+   },
+   {
+    "t": "En andragradsfunktion kan antingen ha två, ett eller sakna nollställen."
+   },
+   {
+    "t": "Parabelns utseende"
+   },
+   {
+    "t": "Om andragradstermen (t.ex. x i kvadrat eller t i kvadrat ) i en andragradsfunktion är"
+   },
+   {
+    "t": "positiv har grafen en minimipunkt (Minnesregel: positiv x i kvadrat -term ger \"glad mun\")"
+   },
+   {
+    "t": "negativ har grafen en maximipunkt (Minnesregel: negativ x i kvadrat -term ger \"sur mun\")"
+   },
+   {
+    "t": "Exempel 1 — Rita och avläs en andragradsfunktion"
+   },
+   {
+    "t": "Rita grafen till funktionen g av x är lika med minus x i kvadrat minus 2 x plus 3 och bestäm nedanstående."
+   },
+   {
+    "t": "När vi ritar grafer i Geogebra ersätts funktionen med y , så i detta fall ersätts g av x med y ."
+   },
+   {
+    "t": "Vi skriver in y är lika med minus x i kvadrat minus 2 x plus 3 i inmatningsfältet i Geogebra och får nedanstående graf."
+   },
+   {
+    "t": "a) största värdet b) nollställena c) extrempunktens koordinater d) symmetrilinjens ekvation"
+   },
+   {
+    "t": "a) Vi ser att kurvan har en \"topp\" och därmed sitt största värde vid y är lika med 4 . (Om det är svårt att avläsa det största eller minsta värdet kan vi använda verktyget \"Extrempunkt\" i Geogebra.)"
+   },
+   {
+    "t": "Svar: Största värdet är 4."
+   },
+   {
+    "t": "b) Nollställena är där grafen skär x -axeln, dvs. vid x är lika med minus 3 och vid x är lika med 1 . (Om det är svårt att avläsa nollställena kan vi använda verktyget \"Nollställen\" i Geogebra.)"
+   },
+   {
+    "t": "Svar: x är lika med minus 3 och x är lika med 1"
+   },
+   {
+    "t": "c) Extrempunktens koordinater är, i detta fall, koordinaterna för maximipunkten, dvs. (−1, 4)."
+   },
+   {
+    "t": "Svar: (−1, 4)"
+   },
+   {
+    "t": "d) Symmetrilinjen är den lodräta linje som delar grafen i två likadana halvor."
+   },
+   {
+    "t": "Den går alltid genom extrempunkten."
+   },
+   {
+    "t": "Eftersom extrempunkten ligger vid x är lika med minus 1 , måste alltså symmetrilinjen också gå vid x är lika med minus 1 ."
+   },
+   {
+    "t": "Så symmetrilinjens ekvation är x s är lika med minus 1 ."
+   },
+   {
+    "t": "Svar: x s är lika med minus 1"
+   },
+   {
+    "t": "Undersök parabeln själv"
+   },
+   {
+    "t": "Undersök hur koefficienterna a , b och c i y är lika med a x i kvadrat plus b x plus c formar parabeln."
+   },
+   {
+    "t": "Startläget visar exemplets funktion g av x är lika med minus x i kvadrat minus 2 x plus 3 ."
+   },
+   {
+    "t": "Prova särskilt tecknet på a — positiv a ger \"glad mun\" (minimipunkt), negativ a ger \"sur mun\" (maximipunkt). c flyttar grafen i höjdled och är grafens skärning med y-axeln."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-3.2",
+  "title": "Andragradsekvationer och andragradsfunktioner",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Andragradsekvationer och andragradsfunktioner"
+   },
+   {
+    "t": "I förra avsnittet bestämde vi en andragradsfunktions nollställen, extrempunkt och symmetrilinje grafiskt."
+   },
+   {
+    "t": "Vi ska nu bestämma dem algebraiskt."
+   },
+   {
+    "t": "Bestämma nollställen, symmetrilinje och extrempunkt algebraiskt"
+   },
+   {
+    "t": "Algebraiskt bestäms en andragradsfunktions"
+   },
+   {
+    "t": "nollställen genom att sätta funktionen lika med 0 och lösa den."
+   },
+   {
+    "t": "Lösningarna ger nollställena."
+   },
+   {
+    "t": "symmetrilinje genom medelvärdet av nollställena."
+   },
+   {
+    "t": "Om nollställen saknas kan symmetrilinjen fås av \"talet framför rottecknet\" i pq-formeln, dvs. x s är lika med minus p delat med 2 ."
+   },
+   {
+    "t": "extrempunkt genom att sätta in symmetrilinjens x -koordinat i funktionsuttrycket."
+   },
+   {
+    "t": "Symmetrilinjen ger extrempunktens x -koordinat och funktionsuttryckets värde ger extrempunktens y -koordinat."
+   },
+   {
+    "t": "Exempel 1 — Bestäm allt algebraiskt"
+   },
+   {
+    "t": "Vi har funktionen f av x är lika med 3 x i kvadrat minus 12 x plus 9 ."
+   },
+   {
+    "t": "Ange funktionens. a) nollställen b) symmetrilinje c) extrempunkt d) extrempunkts karaktär e) största eller minsta värde"
+   },
+   {
+    "t": "a) Vi bestämmer nollställena genom att sätta funktionsuttrycket lika med 0 och lösa ekvationen:"
+   },
+   {
+    "t": "3 x i kvadrat minus 12 x plus 9 är lika med 0"
+   },
+   {
+    "t": "Vi dividerar båda led med 3 och löser sedan ekvationen med pq-formeln:"
+   },
+   {
+    "t": "x i kvadrat minus 4 x plus 3 är lika med 0"
+   },
+   {
+    "t": "x är lika med 2 plus minus roten ur 2 i kvadrat minus 3 som är lika med 2 plus minus roten ur 1 som är lika med 2 plus minus 1"
+   },
+   {
+    "t": "x ett är lika med 2 minus 1 som är lika med 1"
+   },
+   {
+    "t": "x två är lika med 2 plus 1 som är lika med 3"
+   },
+   {
+    "t": "Svar: x är lika med 1 och x är lika med 3"
+   },
+   {
+    "t": "b) Symmetrilinjen ligger mitt emellan nollställena, vilket motsvarar deras medelvärde:"
+   },
+   {
+    "t": "x s är lika med 1 plus 3 delat med 2 som är lika med 4 delat med 2 som är lika med 2"
+   },
+   {
+    "t": "Svar: x s är lika med 2"
+   },
+   {
+    "t": "c) Extrempunkten ligger på symmetrilinjen och har alltså samma x -koordinat, dvs. x är lika med 2 ."
+   },
+   {
+    "t": "Insättning av x är lika med 2 i funktionen f av x är lika med 3 x i kvadrat minus 12 x plus 9 ger"
+   },
+   {
+    "t": "f av 2 är lika med 3 gånger 2 i kvadrat minus 12 gånger 2 plus 9 som är lika med 12 minus 24 plus 9 som är lika med minus 3"
+   },
+   {
+    "t": "Extrempunktens y -koordinat är alltså −3."
+   },
+   {
+    "t": "Sammanfattningsvis är alltså extrempunktens fullständiga koordinater (2, −3)."
+   },
+   {
+    "t": "Svar: (2, −3)"
+   },
+   {
+    "t": "d) Extrempunktens karaktär avgörs av tecknet framför x i kvadrat -termen."
+   },
+   {
+    "t": "I det här fallet har vi funktionen f av x är lika med 3 x i kvadrat minus 12 x plus 9 som har en positiv x i kvadrat -term (vi tänker oss då en kurva med \"glad mun\")."
+   },
+   {
+    "t": "Kurvan har alltså en \"dal\", vilket ger oss att det är en minimipunkt."
+   },
+   {
+    "t": "Svar: Minimipunkt"
+   },
+   {
+    "t": "e) Eftersom funktionen har en minimipunkt har den ett minsta värde."
+   },
+   {
+    "t": "Det minsta värdet motsvarar y -koordinaten i extrempunkten (största eller minsta värdet ligger alltid i extrempunkten)."
+   },
+   {
+    "t": "Vi har tidigare tagit fram extrempunkten som (2, −3)."
+   },
+   {
+    "t": "Det minsta värdet är alltså −3."
+   },
+   {
+    "t": "Svar: −3"
+   },
+   {
+    "t": "Exempel 2 — Symmetrilinje utan nollställen"
+   },
+   {
+    "t": "Bestäm symmetrilinjen till f av x är lika med x i kvadrat plus 6 x plus 10 ."
+   },
+   {
+    "t": "Vi börjar med att ta reda på funktionens nollställen genom att sätta funktionsuttrycket lika med 0 och lösa ekvationen:"
+   },
+   {
+    "t": "x i kvadrat plus 6 x plus 10 är lika med 0"
+   },
+   {
+    "t": "x är lika med minus 3 plus minus roten ur 3 i kvadrat minus 10 som är lika med minus 3 plus minus roten ur 9 minus 10 som är lika med minus 3 plus minus roten ur minus 1"
+   },
+   {
+    "t": "Denna ekvation saknar lösning eftersom kvadratroten ur negativa tal saknar reella lösningar."
+   },
+   {
+    "t": "Funktionen saknar alltså nollställen (grafiskt betyder det att hela grafen ligger ovanför eller under x -axeln)."
+   },
+   {
+    "t": "Vi kan ändå bestämma symmetrilinjens ekvation som \"talet framför rottecknet\" i pq-formeln."
+   },
+   {
+    "t": "I detta fall är det −3."
+   },
+   {
+    "t": "Alltså är symmetrilinjens ekvation x s är lika med minus 3 ."
+   },
+   {
+    "t": "Svar: x s är lika med minus 3"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-3.3",
+  "title": "Andragradsfunktioner och modellering",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Andragradsfunktioner och modellering"
+   },
+   {
+    "t": "För att ta reda på vilken andragradsfunktion som är uppritad finns flera olika metoder."
+   },
+   {
+    "t": "Bestämma andragradsfunktionen utifrån dess graf"
+   },
+   {
+    "t": "Metod 1 — Använda nollställen och en punkt."
+   },
+   {
+    "t": "Andragradsfunktioner med nollställen kan skrivas i faktorform som f av x är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes där x ett och x två är funktionens nollställen."
+   },
+   {
+    "t": "Sätt in funktionens nollställen och bestäm sedan k utifrån ytterligare en punkt på grafen (som inte får vara ett nollställe)."
+   },
+   {
+    "t": "Om funktionen har en dubbelrot (vänder på x -axeln) gäller att x ett är lika med x två ."
+   },
+   {
+    "t": "Denna metod är att föredra om man enkelt kan avgöra nollställena."
+   },
+   {
+    "t": "Metod 2 — Använda tre punkter."
+   },
+   {
+    "t": "Alla andragradsfunktioner kan skrivas i utvecklad form som f av x är lika med a x i kvadrat plus b x plus c , där a , b och c är konstanter."
+   },
+   {
+    "t": "Genom att sätta in tre valfria punkter på grafen i detta funktionsuttryck kan vi bilda ett ekvationssystem med tre obekanta och tre ekvationer."
+   },
+   {
+    "t": "Då kan vi bestämma konstanterna a , b och c och därefter bestämma funktionen."
+   },
+   {
+    "t": "Denna metod är ofta krängligare räknemässigt, men fungerar alltid, även om t.ex. nollställena är okända."
+   },
+   {
+    "t": "Exempel 1 — Nollställen och en punkt"
+   },
+   {
+    "t": "Figuren visar grafen till en andragradsfunktion f av x ."
+   },
+   {
+    "t": "Bestäm f av x och svara på formen f av x är lika med a x i kvadrat plus b x plus c ."
+   },
+   {
+    "t": "Vi ser i figuren att funktionen har nollställena x ett är lika med minus 1 och x två är lika med 3 , och att grafen går genom punkten (1, −8)."
+   },
+   {
+    "t": "Vi skriver funktionen i faktorform:"
+   },
+   {
+    "t": "f av x är lika med k parentesen x minus parentesen minus 1 slut parentes slut parentes parentesen x minus 3 slut parentes som är lika med k parentesen x plus 1 slut parentes parentesen x minus 3 slut parentes, ekvation 1"
+   },
+   {
+    "t": "Vi sätter in punkten (1, −8), dvs. x är lika med 1 och f av x är lika med minus 8 , i ekvation 1 för att bestämma k :"
+   },
+   {
+    "t": "minus 8 är lika med k parentesen 1 plus 1 slut parentes parentesen 1 minus 3 slut parentes"
+   },
+   {
+    "t": "minus 8 är lika med k gånger 2 gånger parentesen minus 2 slut parentes"
+   },
+   {
+    "t": "minus 8 är lika med minus 4 k vilket är ekvivalent med att k är lika med 2"
+   },
+   {
+    "t": "Vi sätter in k är lika med 2 i ekvation 1 och utvecklar sedan uttrycket:"
+   },
+   {
+    "t": "f av x är lika med 2 parentesen x plus 1 slut parentes parentesen x minus 3 slut parentes som är lika med 2 parentesen x i kvadrat minus 3 x plus x minus 3 slut parentes som är lika med 2 parentesen x i kvadrat minus 2 x minus 3 slut parentes"
+   },
+   {
+    "t": "f av x är lika med 2 x i kvadrat minus 4 x minus 6"
+   },
+   {
+    "t": "Svar: f av x är lika med 2 x i kvadrat minus 4 x minus 6"
+   },
+   {
+    "t": "Exempel 2 — Tre punkter"
+   },
+   {
+    "t": "Figuren visar grafen till en andragradsfunktion f av x som saknar nollställen och som går genom punkterna (−2, 1), (−1, 2) och (0, 5)."
+   },
+   {
+    "t": "Bestäm f av x ."
+   },
+   {
+    "t": "Funktionen saknar nollställen och vi kan därför inte enkelt skriva den i faktorform."
+   },
+   {
+    "t": "Vi skriver funktionen i utvecklad form f av x är lika med a x i kvadrat plus b x plus c och sätter in de tre punkterna, vilket bildar ett ekvationssystem:"
+   },
+   {
+    "t": "a gånger parentesen minus 2 slut parentes i kvadrat plus b gånger parentesen minus 2 slut parentes plus c är lika med 1 a gånger parentesen minus 1 slut parentes i kvadrat plus b gånger parentesen minus 1 slut parentes plus c som är lika med 2 a gånger 0 i kvadrat plus b gånger 0 plus c som är lika med 5"
+   },
+   {
+    "t": "Vi ska nu bestämma konstanterna a , b och c ."
+   },
+   {
+    "t": "Vi förenklar ekvationerna och får"
+   },
+   {
+    "t": "4 a minus 2 b plus c är lika med 1, ekvation 1 a minus b plus c som är lika med 2, ekvation 2 c som är lika med 5"
+   },
+   {
+    "t": "Från den undre ekvationen har vi att c är lika med 5 ."
+   },
+   {
+    "t": "Insättning i ekvation ekvation 1 och ekvation 2 ger"
+   },
+   {
+    "t": "4 a minus 2 b plus 5 är lika med 1, ekvation 3 a minus b plus 5 som är lika med 2, ekvation 4"
+   },
+   {
+    "t": "Vi använder substitutionsmetoden och löser ut a från ekvation ekvation 4:"
+   },
+   {
+    "t": "a är lika med b minus 3, ekvation 5"
+   },
+   {
+    "t": "Insättning av a är lika med b minus 3 i ekvation ekvation 3 ger"
+   },
+   {
+    "t": "4 parentesen b minus 3 slut parentes minus 2 b plus 5 är lika med 1"
+   },
+   {
+    "t": "4 b minus 12 minus 2 b plus 5 är lika med 1"
+   },
+   {
+    "t": "2 b minus 7 är lika med 1 vilket är ekvivalent med att 2 b är lika med 8 vilket är ekvivalent med att b är lika med 4"
+   },
+   {
+    "t": "Insättning av b är lika med 4 i ekvation 5 ger"
+   },
+   {
+    "t": "a är lika med 4 minus 3 som är lika med 1"
+   },
+   {
+    "t": "Insättning av a är lika med 1 , b är lika med 4 och c är lika med 5 i f av x är lika med a x i kvadrat plus b x plus c ger"
+   },
+   {
+    "t": "f av x är lika med x i kvadrat plus 4 x plus 5"
+   },
+   {
+    "t": "Svar: f av x är lika med x i kvadrat plus 4 x plus 5"
+   },
+   {
+    "t": "Exempel 3 — Fontänen i Seoul"
+   },
+   {
+    "t": "Avståndet längs vattenytan från en vattenstråles start till dess att strålen träffar vattnet är ungefär 2,3 meter."
+   },
+   {
+    "t": "Strålens högsta höjd över vattenytan är ungefär 3,1 meter."
+   },
+   {
+    "t": "Anta att strålens bana har samma form som grafen till en andragradsfunktion."
+   },
+   {
+    "t": "Bestäm en funktion som beskriver strålens bana. (Np Ma2c vt 2013)"
+   },
+   {
+    "t": "Vi gör en skiss och lägger in parabeln i ett koordinatsystem."
+   },
+   {
+    "t": "Det kan göras på olika sätt, men vi väljer att lägga in den med start i origo."
+   },
+   {
+    "t": "Vi inser att vi då får nollställen vid x är lika med 0 och x är lika med 2,3 ."
+   },
+   {
+    "t": "Maximipunkten måste ligga mitt emellan dessa, dvs. vid x är lika med 0 plus 2,3 delat med 2 som är lika med 1,15 och med y är lika med 3,1 ."
+   },
+   {
+    "t": "Vi markerar dessa tre punkter med koordinater."
+   },
+   {
+    "t": "Vi kallar funktionen f av x och skriver den i faktorform f av x är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes där x ett är lika med 0 och x två är lika med 2,3 :"
+   },
+   {
+    "t": "f av x är lika med k parentesen x minus 0 slut parentes parentesen x minus 2,3 slut parentes"
+   },
+   {
+    "t": "f av x är lika med k x parentesen x minus 2,3 slut parentes, ekvation 1"
+   },
+   {
+    "t": "Vi sätter in punkten (1,15; 3,1), dvs. x är lika med 1,15 och f av x är lika med 3,1 , i ekvation 1 för att bestämma k :"
+   },
+   {
+    "t": "3,1 är lika med k gånger 1,15 parentesen 1,15 minus 2,3 slut parentes"
+   },
+   {
+    "t": "3,1 är lika med k gånger 1,15 gånger parentesen minus 1,15 slut parentes"
+   },
+   {
+    "t": "3,1 är lika med minus 1,3225 k"
+   },
+   {
+    "t": "k är lika med 3,1 delat med minus 1,3225 som är lika med minus 2,344"
+   },
+   {
+    "t": "Insättning av k är lika med minus 2,344 i ekvation 1 ger"
+   },
+   {
+    "t": "f av x är lika med minus 2,344 x parentesen x minus 2,3 slut parentes"
+   },
+   {
+    "t": "Vi utvecklar funktionsuttrycket och får"
+   },
+   {
+    "t": "f av x är lika med minus 2,344 x i kvadrat plus 5,391 x"
+   },
+   {
+    "t": "Vi avrundar koefficienterna till två decimaler och får"
+   },
+   {
+    "t": "f av x är lika med minus 2,34 x i kvadrat plus 5,39 x"
+   },
+   {
+    "t": "Svar: f av x är lika med minus 2,34 x i kvadrat plus 5,39 x"
+   },
+   {
+    "t": "Undersök faktorformen själv"
+   },
+   {
+    "t": "Undersök hur faktorformen y är lika med k parentesen x minus p slut parentes parentesen x minus q slut parentes formar parabeln — p och q är nollställena och k styr hur \"brant\" parabeln är och åt vilket håll den öppnar sig."
+   },
+   {
+    "t": "Startläget visar exempel 1:s funktion f av x är lika med 2 parentesen x plus 1 slut parentes parentesen x minus 3 slut parentes ."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-3.4",
+  "title": "Andragradsekvationer och olikheter med grafritande hjälpmedel",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Andragradsekvationer och olikheter med grafritande hjälpmedel"
+   },
+   {
+    "t": "Vi ska nu titta på hur man löser andragradsekvationer och olikheter grafiskt med hjälp av grafritande hjälpmedel, t.ex. Geogebra."
+   },
+   {
+    "t": "Vi har i en tidigare kurs löst linjära ekvationer med grafritande hjälpmedel och metoden är precis densamma för andragradsekvationer."
+   },
+   {
+    "t": "Skillnaden är att vi nu kan få två lösningar."
+   },
+   {
+    "t": "Lösa ekvationer med grafritande hjälpmedel"
+   },
+   {
+    "t": "Vi har en ekvation VL är lika med HL."
+   },
+   {
+    "t": "Rita upp ekvationerna y är lika med vänsterledet och y är lika med högerledet i Geogebra."
+   },
+   {
+    "t": "Ta fram skärningarna och läs av deras x -koordinater."
+   },
+   {
+    "t": "Dessa är lösningarna!"
+   },
+   {
+    "t": "Om vi har en andragradsekvation som är lika med 0, kan vi alternativt lösa ekvationen genom att ta fram nollställena."
+   },
+   {
+    "t": "Lösa ekvationer lika med 0 med grafritande hjälpmedel"
+   },
+   {
+    "t": "Vi har en ekvation VL är lika med 0."
+   },
+   {
+    "t": "Rita upp ekvationen y är lika med vänsterledet ."
+   },
+   {
+    "t": "Ta fram nollställena och läs av deras x -koordinater."
+   },
+   {
+    "t": "Dessa är lösningarna!"
+   },
+   {
+    "t": "Vi kan även lösa olikheter med grafritande hjälpmedel."
+   },
+   {
+    "t": "Lösa olikheter med grafritande hjälpmedel"
+   },
+   {
+    "t": "Vi har en olikhet, t.ex. VL < HL eller VL > HL."
+   },
+   {
+    "t": "Rita upp f av x är lika med vänsterledet och g av x är lika med högerledet ."
+   },
+   {
+    "t": "Ta fram skärningarna och läs av deras x -koordinater."
+   },
+   {
+    "t": "Dessa ger gränserna för intervallet!"
+   },
+   {
+    "t": "Om grafen till f av x ligger under grafen till g av x gäller f av x är mindre än g av x över grafen till g av x gäller f av x är större än g av x ."
+   },
+   {
+    "t": "under grafen till g av x gäller f av x är mindre än g av x"
+   },
+   {
+    "t": "över grafen till g av x gäller f av x är större än g av x ."
+   },
+   {
+    "t": "Exempel 1 — Lös ekvationerna grafiskt"
+   },
+   {
+    "t": "Lös ekvationerna grafiskt."
+   },
+   {
+    "t": "I a-uppgiften ritar vi upp båda leden som varsin funktion — grafen nedan visar uppritningen."
+   },
+   {
+    "t": "a) x i kvadrat minus 4 x plus 5 är lika med 2 b) x i kvadrat minus 2 x minus 15 är lika med 0"
+   },
+   {
+    "t": "a) VAD: Vi ritar upp funktionerna y är lika med x i kvadrat minus 4 x plus 5 och y är lika med 2 i Geogebra (se figuren ovan) och tar fram skärningarnas koordinater."
+   },
+   {
+    "t": "HUR: Skärningarnas x -koordinater ger lösningarna, dvs. x ett är lika med 3 och x två är lika med 1 ."
+   },
+   {
+    "t": "Svar: x ett är lika med 3 och x två är lika med 1"
+   },
+   {
+    "t": "b) Här har vi en ekvation som är lika med 0 och vi kan då undersöka nollställena."
+   },
+   {
+    "t": "VAD: Vi ritar upp funktionen y är lika med x i kvadrat minus 2 x minus 15 i Geogebra och tar fram nollställena med verktyget \"Nollställen\"."
+   },
+   {
+    "t": "HUR: Nollställenas x -koordinater ger lösningarna, dvs. x ett är lika med 5 och x två är lika med minus 3 ."
+   },
+   {
+    "t": "Svar: x ett är lika med 5 och x två är lika med minus 3"
+   },
+   {
+    "t": "Exempel 2 — Lös olikheterna grafiskt"
+   },
+   {
+    "t": "Lös olikheterna nedan."
+   },
+   {
+    "t": "Vi ritar upp f av x är lika med x i kvadrat plus 6 x plus 6 och g av x är lika med 1 i Geogebra och tar fram skärningarnas koordinater — se grafen."
+   },
+   {
+    "t": "a) x i kvadrat plus 6 x plus 6 är mindre än 1 b) x i kvadrat plus 6 x plus 6 är större än 1"
+   },
+   {
+    "t": "a) HUR: Skärningarnas x -koordinater ger intervallets gränser, dvs. x är lika med minus 5 och x är lika med minus 1 ."
+   },
+   {
+    "t": "Eftersom x i kvadrat plus 6 x plus 6 är mindre än 1 gäller att f av x är mindre än g av x , dvs. f av x ska vara mindre än g av x ."
+   },
+   {
+    "t": "Detta gäller när grafen till f av x är under grafen till g av x , dvs. mellan x är lika med minus 5 och x är lika med minus 1 ."
+   },
+   {
+    "t": "Detta ger intervallet minus 5 är mindre än x är mindre än minus 1 ."
+   },
+   {
+    "t": "Svar: minus 5 är mindre än x är mindre än minus 1"
+   },
+   {
+    "t": "b) Vi har samma funktioner så graferna och skärningarna kommer att bli desamma som i a-uppgiften, så vi tittar på samma graf igen."
+   },
+   {
+    "t": "HUR: Skärningarnas x -koordinater ger återigen intervallets gränser, dvs. x är lika med minus 5 och x är lika med minus 1 ."
+   },
+   {
+    "t": "Eftersom x i kvadrat plus 6 x plus 6 är större än 1 gäller att f av x är större än g av x , dvs. f av x ska vara större än g av x ."
+   },
+   {
+    "t": "Detta gäller när grafen till f av x är över grafen till g av x , dvs. till vänster om x är lika med minus 5 och till höger om x är lika med minus 1 ."
+   },
+   {
+    "t": "Detta ger intervallen x är mindre än minus 5 och x är större än minus 1 ."
+   },
+   {
+    "t": "Svar: x är mindre än minus 5 och x är större än minus 1"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-3.5",
+  "title": "Problemlösning med grafritande hjälpmedel",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Problemlösning med grafritande hjälpmedel"
+   },
+   {
+    "t": "Vid problemlösning, så ritar vi upp den funktion som beskriver situationen för att besvara frågan."
+   },
+   {
+    "t": "Användbara verktyg i Geogebra är Extrempunkt, Skärning mellan två objekt och Nollställen."
+   },
+   {
+    "t": "Exempel 1 — Nyårsraketen"
+   },
+   {
+    "t": "En nyårsraket har en höjd som kan beskrivas av funktionen h parentesen t slut parentes är lika med 40 t minus 4,9 t i kvadrat , där t är tiden i sekunder och h parentesen t slut parentes är raketens höjd i meter."
+   },
+   {
+    "t": "Vi ritar h parentesen t slut parentes är lika med 40 t minus 4,9 t i kvadrat i Geogebra och besvarar frågorna nedan ur grafen."
+   },
+   {
+    "t": "Hur. a) lång tid tar det innan raketen landar? b) högt når raketen som högst? c) lång tid tar det för raketen att nå höjden 50 meter?"
+   },
+   {
+    "t": "a) Raketen landar när höjden h parentesen t slut parentes är lika med 0 , vilket motsvarar nollstället längst till höger på t -axeln."
+   },
+   {
+    "t": "Vi använder verktyget Nollställen och läser av dess t -koordinat: t är ungefär lika med 8,2 ."
+   },
+   {
+    "t": "Svar: Efter 8,2 sekunder."
+   },
+   {
+    "t": "b) Raketen når som högst när höjden h parentesen t slut parentes är som störst, vilket är i maximipunkten."
+   },
+   {
+    "t": "Vi använder verktyget Extrempunkt och läser av maximipunktens y -koordinat."
+   },
+   {
+    "t": "Vi ser att högsta höjden är vid h parentesen t slut parentes är ungefär lika med 81,6 ."
+   },
+   {
+    "t": "Svar: 81,6 meter"
+   },
+   {
+    "t": "c) Raketen når höjden 50 meter när h parentesen t slut parentes är lika med 50 ."
+   },
+   {
+    "t": "Vi ritar in hjälpfunktionen y är lika med 50 (den gröna linjen i figuren) och tar fram skärningspunkterna A och B med verktyget Skärning mellan två objekt: A är ungefär lika med (1,5; 50) och B är ungefär lika med (6,6; 50)."
+   },
+   {
+    "t": "Vi ser att raketen når höjden 50 meter efter t är ungefär lika med 1,5 sekunder (på väg upp) och efter t är ungefär lika med 6,6 sekunder (på väg ner)."
+   },
+   {
+    "t": "Svar: Efter 1,5 sekunder (på väg upp) och efter 6,6 sekunder (på väg ner)."
+   },
+   {
+    "t": "Exempel 2 — Hagen vid muren"
+   },
+   {
+    "t": "En rektangulär hage ska byggas mot en mur."
+   },
+   {
+    "t": "Det finns 52 meter stängsel som ska räcka till tre av sidorna eftersom den fjärde sidan utgörs av muren."
+   },
+   {
+    "t": "Se figur."
+   },
+   {
+    "t": "Vilka mått ska hagen ha för att dess area ska bli så stor som möjligt?"
+   },
+   {
+    "t": "Vi tecknar ett uttryck för hagens area."
+   },
+   {
+    "t": "Vi kallar de två lika långa sidorna för x ."
+   },
+   {
+    "t": "Eftersom vi har 52 meter stängsel totalt, måste den tredje sidan ha längden 52 minus 2 x ."
+   },
+   {
+    "t": "Arean hos rektangeln fås av basen gånger höjden, dvs."
+   },
+   {
+    "t": "A parentesen x slut parentes är lika med x parentesen 52 minus 2 x slut parentes"
+   },
+   {
+    "t": "Vi ritar upp funktionen A parentesen x slut parentes är lika med x parentesen 52 minus 2 x slut parentes i Geogebra."
+   },
+   {
+    "t": "Vi ska bestämma måtten som ger den maximala arean, dvs. vi vill ta reda på för vilket värde på x som A parentesen x slut parentes är som störst, vilket motsvarar grafens maximipunkt."
+   },
+   {
+    "t": "Vi använder verktyget Extrempunkt för att ta fram maximipunktens koordinat: (13, 338)."
+   },
+   {
+    "t": "Vi ser att den maximala arean är 338 meter i kvadrat när x är lika med 13 meter."
+   },
+   {
+    "t": "De två lika stora sidorna är alltså x är lika med 13 meter och den tredje sidan är"
+   },
+   {
+    "t": "52 minus 2 x är lika med 52 minus 2 gånger 13 som är lika med 52 minus 26 som är lika med 26 meter"
+   },
+   {
+    "t": "Måtten på hagen är alltså 26 × 13 meter."
+   },
+   {
+    "t": "Svar: 26 × 13 meter"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.1",
+  "title": "Olika slags vinklar",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Olika slags vinklar"
+   },
+   {
+    "t": "Vinklar mäts ofta i grader (grader) och definieras av att ett helt varv är 360 grader."
+   },
+   {
+    "t": "Beteckningar på vinklar"
+   },
+   {
+    "t": "I figuren har en vinkel v markerats vid punkten B."
+   },
+   {
+    "t": "Denna kan betecknas på olika sätt:"
+   },
+   {
+    "t": "v är lika med vinkeln B som är lika med vinkeln A B C som är lika med vinkeln C B A"
+   },
+   {
+    "t": "Namn på vinklar utifrån storlek"
+   },
+   {
+    "t": "Transversal och vinklar vid parallella linjer"
+   },
+   {
+    "t": "En linje som skär minst två andra linjer kallas transversal."
+   },
+   {
+    "t": "Om två parallella linjer L ett och L två skärs av en transversal uppstår vinklar enligt figuren nedan."
+   },
+   {
+    "t": "* Gäller endast om linjerna L ett och L två är parallella."
+   },
+   {
+    "t": "Bisektris"
+   },
+   {
+    "t": "En stråle som delar en vinkel mitt itu kallas bisektris."
+   },
+   {
+    "t": "I geometriuppgifter är det viktigt att motivera varför en vinkel får en viss storlek."
+   },
+   {
+    "t": "Motiveringar kan skrivas kortfattat i parentes, se exemplen nedan."
+   },
+   {
+    "t": "Exempel 1 — Alternatvinklar"
+   },
+   {
+    "t": "Beräkna vinkeln x om linjerna L ett och L två är parallella."
+   },
+   {
+    "t": "x är lika med 72 grader (alternatvinklar)"
+   },
+   {
+    "t": "Svar: 72 grader"
+   },
+   {
+    "t": "Exempel 2 — Hjälpvinkel"
+   },
+   {
+    "t": "Beräkna vinkeln v ett om linjerna L ett och L två är parallella."
+   },
+   {
+    "t": "Denna uppgift kan lösas på flera sätt."
+   },
+   {
+    "t": "Vi lägger in en hjälpvinkel v två enligt figuren nedan."
+   },
+   {
+    "t": "v två är lika med 115 grader (likbelägna vinklar)"
+   },
+   {
+    "t": "v ett plus v två är lika med 180 grader (sidovinklar)"
+   },
+   {
+    "t": "Insättning av v två är lika med 115 grader ger"
+   },
+   {
+    "t": "v ett plus 115 grader är lika med 180 grader"
+   },
+   {
+    "t": "v ett är lika med 180 grader minus 115 grader som är lika med 65 grader"
+   },
+   {
+    "t": "Svar: 65 grader"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.2",
+  "title": "Vinklar i trianglar och månghörningar",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Vinklar i trianglar och månghörningar"
+   },
+   {
+    "t": "En sluten figur som enbart består av sträckor och hörn kallas månghörning."
+   },
+   {
+    "t": "En månghörning med tre hörn kallas triangel."
+   },
+   {
+    "t": "En månghörning med fyra hörn kallas fyrhörning (tetragon), en månghörning med fem hörn kallas femhörning (pentagon) och så vidare."
+   },
+   {
+    "t": "Trianglar beskrivs ofta utifrån sina vinklar och sidor."
+   },
+   {
+    "t": "Namn på trianglar"
+   },
+   {
+    "t": "Vinkelsummor"
+   },
+   {
+    "t": "Vinkelsumman i en"
+   },
+   {
+    "t": "triangel är 180 grader"
+   },
+   {
+    "t": "fyrhörning är 360 grader"
+   },
+   {
+    "t": "Exempel 1 — Vinkelsumman i en femhörning"
+   },
+   {
+    "t": "Vad är vinkelsumman i en femhörning?"
+   },
+   {
+    "t": "Vi ritar en godtycklig (valfri) femhörning."
+   },
+   {
+    "t": "Därefter utgår vi från ett hörn och ritar sträckor till samtliga övriga hörn."
+   },
+   {
+    "t": "Till sist markerar vi samtliga vinklar."
+   },
+   {
+    "t": "Alla vinklar i femhörningen har markerats."
+   },
+   {
+    "t": "Vi ser att dessa byggs upp av tre trianglar."
+   },
+   {
+    "t": "Eftersom vinkelsumman i en triangel är 180 grader måste vinkelsumman i en femhörning vara"
+   },
+   {
+    "t": "3 gånger 180 grader är lika med 540 grader"
+   },
+   {
+    "t": "Svar: 540 grader"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.3",
+  "title": "Implikation och ekvivalens",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Implikation och ekvivalens"
+   },
+   {
+    "t": "Ett logiskt förhållande där ett visst påstående 1 är sant medför att ett annat påstående 2 också måste vara sant kallas implikation."
+   },
+   {
+    "t": "Något förenklat kan man säga att en implikation är när något medför något annat."
+   },
+   {
+    "t": "Implikation skrivs med symbolen och utläses \"implicerar\" eller \"medför att\"."
+   },
+   {
+    "t": "Ett logiskt förhållande där implikationen även gäller åt andra hållet, dvs. om påstående 2 är sant och det medför att påstående 1 också måste vara sant, kallas ekvivalens."
+   },
+   {
+    "t": "Ekvivalens skrivs med symbolen och utläses \"är ekvivalent med\"."
+   },
+   {
+    "t": "Om en implikation är falsk bevisar man det genom att ge ett motexempel (ett enda motexempel räcker)."
+   },
+   {
+    "t": "Implikation och ekvivalens"
+   },
+   {
+    "t": "Implikation: A vilket ger att B ."
+   },
+   {
+    "t": "A leder till B, men B behöver inte leda till A."
+   },
+   {
+    "t": "Ekvivalens: A vilket är ekvivalent med att B ."
+   },
+   {
+    "t": "A leder till B och B leder till A."
+   },
+   {
+    "t": "Exempel 1 — Taxen och hunden"
+   },
+   {
+    "t": "Betrakta meningen \"Om det är en tax, så är det en hund\".. a) Skriv meningen med logiska symboler. b) Är meningen en implikation eller en ekvivalens?"
+   },
+   {
+    "t": "a) Påståendena som kopplas ihop är \"det är en tax\" och \"det är en hund\"."
+   },
+   {
+    "t": "Svar: Det är en tax Det är en hund"
+   },
+   {
+    "t": "b) Implikationen Det är en tax Det är en hund är sann."
+   },
+   {
+    "t": "Vi undersöker omvändningen:"
+   },
+   {
+    "t": "Det är en hund Det är en tax"
+   },
+   {
+    "t": "Detta är falskt."
+   },
+   {
+    "t": "Motexempel: Det kan vara en pudel."
+   },
+   {
+    "t": "Eftersom implikationen endast gäller åt ett håll är det ingen ekvivalens."
+   },
+   {
+    "t": "Svar: Det är en implikation."
+   },
+   {
+    "t": "Exempel 2 — Vilket logiskt tecken?"
+   },
+   {
+    "t": "Avgör vilket logiskt tecken som ska vara mellan påståendena:"
+   },
+   {
+    "t": "Alla vinklar i triangeln är 60 grader ____ Triangeln är liksidig"
+   },
+   {
+    "t": "Vi undersöker om implikationerna är sanna åt varje håll."
+   },
+   {
+    "t": "Alla vinklar i triangeln är 60 grader Triangeln är liksidig"
+   },
+   {
+    "t": "Detta påstående är sant, eftersom det inte finns några trianglar som detta gäller för förutom liksidiga trianglar."
+   },
+   {
+    "t": "Vi undersöker omvändningen."
+   },
+   {
+    "t": "Triangeln är liksidig Alla vinklar i triangeln är 60 grader"
+   },
+   {
+    "t": "Detta påstående är också sant."
+   },
+   {
+    "t": "I alla liksidiga trianglar är alla vinklarna 60 grader."
+   },
+   {
+    "t": "Implikationen gäller alltså åt båda håll och vi har då en ekvivalens."
+   },
+   {
+    "t": "Svar:"
+   },
+   {
+    "t": "Exempel 3 — Stämmer implikationerna?"
+   },
+   {
+    "t": "Avgör om följande implikationer stämmer.. a) 2 x plus 5 är lika med 11 vilket ger att x är lika med 3 b) man äter godis man får hål i tänderna c) x i kvadrat är lika med 25 vilket ger att x är lika med 5 d) x i kubik är lika med 27 vilket ger att x är lika med 3"
+   },
+   {
+    "t": "a) Vi löser ekvationen för att undersöka om lösningen entydigt är x är lika med 3 :"
+   },
+   {
+    "t": "2 x plus 5 är lika med 11 vilket är ekvivalent med att 2 x är lika med 6 vilket är ekvivalent med att x är lika med 3"
+   },
+   {
+    "t": "och inga andra lösningar finns."
+   },
+   {
+    "t": "Svar: Implikationen gäller."
+   },
+   {
+    "t": "b) man äter godis man får hål i tänderna"
+   },
+   {
+    "t": "Svar: Implikationen gäller inte."
+   },
+   {
+    "t": "Motexempel: Det finns de som äter godis som inte får hål i tänderna."
+   },
+   {
+    "t": "c) Vi löser ekvationen för att undersöka om lösningen entydigt är x är lika med 5 :"
+   },
+   {
+    "t": "x i kvadrat är lika med 25 vilket är ekvivalent med att x är lika med plus minus roten ur 25 som är lika med plus minus 5"
+   },
+   {
+    "t": "Svar: Implikationen gäller inte."
+   },
+   {
+    "t": "Motexempel: x är lika med minus 5 ."
+   },
+   {
+    "t": "d) Vi löser ekvationen för att undersöka om lösningen entydigt är x är lika med 3 :"
+   },
+   {
+    "t": "x i kubik är lika med 27 vilket är ekvivalent med att x är lika med tredje roten ur 27 som är lika med 3"
+   },
+   {
+    "t": "(inga andra lösningar finns)."
+   },
+   {
+    "t": "Svar: Implikationen gäller."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.4",
+  "title": "Satser och bevis",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Satser och bevis"
+   },
+   {
+    "t": "Ett matematiskt bevis är ett logiskt resonemang som inte lämnar några luckor."
+   },
+   {
+    "t": "Några viktiga begrepp:"
+   },
+   {
+    "t": "En grundsats som man kommit överens om att gälla som grund, utan att den kräver ett bevis, kallas axiom."
+   },
+   {
+    "t": "Exempel: \"Varje heltal n följs av heltalet parentesen n plus 1 slut parentes \" eller \"Från en given punkt är det möjligt att dra en rät linje till en annan given punkt\"."
+   },
+   {
+    "t": "En överenskommelse om vad som menas med ett begrepp kallas definition."
+   },
+   {
+    "t": "Exempel: \"En månghörning med tre hörn kallas triangel.\""
+   },
+   {
+    "t": "Ett påstående som är bevisat kallar man för sats."
+   },
+   {
+    "t": "I ett bevis måste varje steg motiveras utifrån axiom, definitioner och/eller tidigare kända satser."
+   },
+   {
+    "t": "Ett utfört bevis avslutas v.s.b. (vilket skulle bevisas) eller v.s.v. (vilket skulle visas)."
+   },
+   {
+    "t": "Udda och jämna tal vid bevis"
+   },
+   {
+    "t": "Ett jämnt tal kan alltid skrivas: 2 k"
+   },
+   {
+    "t": "Ett udda tal kan alltid skrivas: 2 k plus 1"
+   },
+   {
+    "t": "där k är ett heltal."
+   },
+   {
+    "t": "På varandra följande tal vid bevis"
+   },
+   {
+    "t": "Tal \"som följer på varandra\" är t.ex. 1, 2 och 3 eller 85, 86 och 87."
+   },
+   {
+    "t": "Tal som följer på varandra kan skrivas"
+   },
+   {
+    "t": "n, n plus 1, n plus 2,"
+   },
+   {
+    "t": "Exempel 1 — Yttervinkelsatsen"
+   },
+   {
+    "t": "Betrakta nedanstående figur."
+   },
+   {
+    "t": "Yttervinkelsatsen lyder: \"Yttervinkeln x är lika med summan av de två motstående vinklarna a och c , dvs. x är lika med a plus c .\" Bevisa att yttervinkelsatsen gäller."
+   },
+   {
+    "t": "Vi skriver upp de geometriska samband som vi ser och går sedan vidare."
+   },
+   {
+    "t": "a plus b plus c är lika med 180 grader (vinkelsumma i triangel)"
+   },
+   {
+    "t": "b plus x är lika med 180 grader (sidovinklar)"
+   },
+   {
+    "t": "Eftersom båda VL (vänstra led) är lika med 180 grader gäller"
+   },
+   {
+    "t": "a plus b plus c är lika med b plus x"
+   },
+   {
+    "t": "Subtraherar b från båda led:"
+   },
+   {
+    "t": "a plus c är lika med x"
+   },
+   {
+    "t": "det vill säga"
+   },
+   {
+    "t": "x är lika med a plus c"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "Exempel 2 — Kvadraten av ett jämnt tal"
+   },
+   {
+    "t": "Visa att kvadraten av ett jämnt tal alltid är delbar med 4."
+   },
+   {
+    "t": "Vi kallar talet x ."
+   },
+   {
+    "t": "Eftersom talet är jämnt kan det skrivas x är lika med 2 k där k är ett heltal."
+   },
+   {
+    "t": "Vi tecknar och undersöker kvadraten av detta tal:"
+   },
+   {
+    "t": "x i kvadrat är lika med parentesen 2 k slut parentes i kvadrat som är lika med 4 k i kvadrat"
+   },
+   {
+    "t": "4 k i kvadrat är alltid delbart med 4 ty"
+   },
+   {
+    "t": "4 k i kvadrat delat med 4 är lika med k i kvadrat"
+   },
+   {
+    "t": "där k i kvadrat alltid är ett heltal. (Ordbok: \"ty\" är lika med \"därför att\".)"
+   },
+   {
+    "t": "v.s.v."
+   },
+   {
+    "t": "Exempel 3 — Tre på varandra följande heltal"
+   },
+   {
+    "t": "Visa att om a , b och c är tre på varandra följande heltal så gäller att deras summa är delbar med 3."
+   },
+   {
+    "t": "Eftersom det är på varandra följande heltal kan vi kalla talen a , b och c för n , parentesen n plus 1 slut parentes och parentesen n plus 2 slut parentes ."
+   },
+   {
+    "t": "Detta ger"
+   },
+   {
+    "t": "a plus b plus c är lika med n plus parentesen n plus 1 slut parentes plus parentesen n plus 2 slut parentes som är lika med 3 n plus 3 som är lika med 3 parentesen n plus 1 slut parentes"
+   },
+   {
+    "t": "Denna summa är alltid delbar med 3 eftersom"
+   },
+   {
+    "t": "3 parentesen n plus 1 slut parentes delat med 3 är lika med n plus 1"
+   },
+   {
+    "t": "är ett heltal."
+   },
+   {
+    "t": "v.s.v."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.5",
+  "title": "Pythagoras sats",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Pythagoras sats"
+   },
+   {
+    "t": "Om vi vet två sidor i en rätvinklig triangel kan vi ta reda på den tredje med Pythagoras sats."
+   },
+   {
+    "t": "Triangelns längsta sida (mitt emot den räta vinkeln) kallas hypotenusa och de två övriga sidorna kallas kateter."
+   },
+   {
+    "t": "Pythagoras sats"
+   },
+   {
+    "t": "a i kvadrat plus b i kvadrat är lika med c i kvadrat"
+   },
+   {
+    "t": "Summan av kvadraterna på de två kortare sidorna är lika med kvadraten på hypotenusan."
+   },
+   {
+    "t": "Härledning — Pythagoras sats"
+   },
+   {
+    "t": "1."
+   },
+   {
+    "t": "Vi bildar en godtycklig rätvinklig triangel med kateterna a och b , och hypotenusan c ."
+   },
+   {
+    "t": "2."
+   },
+   {
+    "t": "Vi bildar sedan fyra likadana sådana trianglar och betecknar vinklarna som inte är räta för alfa och beta ."
+   },
+   {
+    "t": "För varje triangel gäller"
+   },
+   {
+    "t": "90 grader plus alfa plus beta är lika med 180 grader (vinkelsumma i triangel)"
+   },
+   {
+    "t": "Vi subtraherar 90 grader från varje led och får"
+   },
+   {
+    "t": "alfa plus beta är lika med 90 grader"
+   },
+   {
+    "t": "3."
+   },
+   {
+    "t": "Vi arrangerar trianglarna så att de bildar en stor kvadrat med sidan parentesen a plus b slut parentes , med en mindre fyrhörning med sidan c inskriven (se figuren)."
+   },
+   {
+    "t": "I varje \"skarv\" längs den stora kvadratens sidor gäller"
+   },
+   {
+    "t": "alfa plus beta plus mellanliggande vinkeln är lika med 180 grader (sidovinklar)"
+   },
+   {
+    "t": "och eftersom alfa plus beta är lika med 90 grader måste den mellanliggande vinkeln vara 90 grader."
+   },
+   {
+    "t": "Den inskrivna fyrhörningen med sidan c är alltså en kvadrat."
+   },
+   {
+    "t": "4."
+   },
+   {
+    "t": "Vi tecknar arean för den stora kvadraten på två sätt."
+   },
+   {
+    "t": "Varje sida i den stora kvadraten är parentesen a plus b slut parentes så"
+   },
+   {
+    "t": "Area är lika med parentesen a plus b slut parentes i kvadrat som är lika med a i kvadrat plus 2 a b plus b i kvadrat, ekvation 1"
+   },
+   {
+    "t": "Vi kan även teckna arean av den stora kvadraten som den sammanlagda arean av de fyra trianglarna och den lilla inskrivna kvadraten."
+   },
+   {
+    "t": "Arean hos varje triangel är a b delat med 2 och arean hos den inskrivna kvadraten är c i kvadrat ."
+   },
+   {
+    "t": "Detta ger"
+   },
+   {
+    "t": "Area är lika med 4 gånger a b delat med 2 plus c i kvadrat som är lika med 2 a b plus c i kvadrat, ekvation 2"
+   },
+   {
+    "t": "Vi har nu tecknat arean på den stora kvadraten på två olika sätt och dessa uttryck måste såklart vara lika stora, dvs. ekvation 1 är lika med ekvation 2."
+   },
+   {
+    "t": "Detta ger"
+   },
+   {
+    "t": "a i kvadrat plus 2 a b plus b i kvadrat är lika med 2 a b plus c i kvadrat"
+   },
+   {
+    "t": "Vi subtraherar 2 a b från båda led:"
+   },
+   {
+    "t": "a i kvadrat plus b i kvadrat är lika med c i kvadrat"
+   },
+   {
+    "t": "v.s.v."
+   },
+   {
+    "t": "Om triangeln är rätvinklig, så gäller a i kvadrat plus b i kvadrat är lika med c i kvadrat ."
+   },
+   {
+    "t": "Men omvändningen gäller också, dvs. om a i kvadrat plus b i kvadrat är lika med c i kvadrat , så är triangeln rätvinklig."
+   },
+   {
+    "t": "Detta är alltså en ekvivalens, så"
+   },
+   {
+    "t": "a i kvadrat plus b i kvadrat är lika med c i kvadrat vilket är ekvivalent med att Triangeln är rätvinklig"
+   },
+   {
+    "t": "Exempel 1 — Bestäm sidan"
+   },
+   {
+    "t": "Bestäm sidan x ."
+   },
+   {
+    "t": "Sidan 15 centimeter är hypotenusa eftersom den är mitt emot den räta vinkeln."
+   },
+   {
+    "t": "Pythagoras sats ger"
+   },
+   {
+    "t": "x i kvadrat plus 9 i kvadrat är lika med 15 i kvadrat"
+   },
+   {
+    "t": "Vi beräknar och löser ut x :"
+   },
+   {
+    "t": "x i kvadrat plus 81 är lika med 225"
+   },
+   {
+    "t": "x i kvadrat är lika med 144"
+   },
+   {
+    "t": "x är lika med plus minus roten ur 144 som är lika med plus minus 12"
+   },
+   {
+    "t": "Sidan måste vara positiv, så vi bortser från den negativa lösningen, så x är lika med 12 centimeter."
+   },
+   {
+    "t": "Svar: 12 centimeter"
+   },
+   {
+    "t": "Exempel 2 — Är triangeln rätvinklig?"
+   },
+   {
+    "t": "Sidorna i en triangel är 8 centimeter, 15 centimeter och 20 centimeter."
+   },
+   {
+    "t": "Är triangeln rätvinklig?"
+   },
+   {
+    "t": "Om triangeln är rätvinklig ska summan av kvadraterna hos de korta sidorna vara lika med kvadraten hos den längsta sidan."
+   },
+   {
+    "t": "a i kvadrat plus b i kvadrat är lika med 8 i kvadrat plus 15 i kvadrat som är lika med 64 plus 225 som är lika med 289"
+   },
+   {
+    "t": "c i kvadrat är lika med 20 i kvadrat som är lika med 400"
+   },
+   {
+    "t": "289 är inte lika med 400 , alltså gäller inte a i kvadrat plus b i kvadrat är lika med c i kvadrat och då är triangeln inte rätvinklig."
+   },
+   {
+    "t": "Svar: Nej"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.6",
+  "title": "Koordinatgeometri",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Koordinatgeometri"
+   },
+   {
+    "t": "Att studera geometriska figurer genom att använda ett koordinatsystem kallas koordinatgeometri."
+   },
+   {
+    "t": "Avståndet mellan två punkter i ett koordinatsystem kan bestämmas med avståndsformeln."
+   },
+   {
+    "t": "Avståndsformeln"
+   },
+   {
+    "t": "d är lika med roten ur parentesen x två minus x ett slut parentes i kvadrat plus parentesen y två minus y ett slut parentes i kvadrat"
+   },
+   {
+    "t": "där d är avståndet mellan punkterna parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes ."
+   },
+   {
+    "t": "Härledning — Avståndsformeln"
+   },
+   {
+    "t": "Vi bestämmer avståndet d mellan två punkter genom att bilda en rätvinklig triangel och använda Pythagoras sats enligt figuren nedan."
+   },
+   {
+    "t": "Exempel: Triangelns vågräta katet är sträckan mellan x är lika med minus 4 och x är lika med 5 ."
+   },
+   {
+    "t": "Den kan beräknas som 5 minus parentesen minus 4 slut parentes är lika med 9 längdenheter På motsvarande sätt är triangelns lodräta katet sträckan mellan y är lika med 2 och y är lika med 7 som beräknas parentesen 7 minus 2 slut parentes är lika med 5 längdenheter"
+   },
+   {
+    "t": "Pythagoras sats ger"
+   },
+   {
+    "t": "d i kvadrat är lika med parentesen 5 minus parentesen minus 4 slut parentes slut parentes i kvadrat plus parentesen 7 minus 2 slut parentes i kvadrat"
+   },
+   {
+    "t": "d är lika med roten ur 9 i kvadrat plus 5 i kvadrat som är lika med roten ur 81 plus 25 som är lika med roten ur 106 som är ungefär lika med 10,3 längdenheter"
+   },
+   {
+    "t": "(den negativa lösningen bortses)."
+   },
+   {
+    "t": "Generellt: Triangelns vågräta katet är sträckan mellan x ett och x två ."
+   },
+   {
+    "t": "Den kan beräknas som parentesen x två minus x ett slut parentes ."
+   },
+   {
+    "t": "På motsvarande sätt är triangelns lodräta katet sträckan mellan y ett och y två som beräknas parentesen y två minus y ett slut parentes ."
+   },
+   {
+    "t": "Pythagoras sats ger"
+   },
+   {
+    "t": "d i kvadrat är lika med parentesen x två minus x ett slut parentes i kvadrat plus parentesen y två minus y ett slut parentes i kvadrat"
+   },
+   {
+    "t": "d är lika med roten ur parentesen x två minus x ett slut parentes i kvadrat plus parentesen y två minus y ett slut parentes i kvadrat"
+   },
+   {
+    "t": "v.s.v."
+   },
+   {
+    "t": "Punkten mitt emellan två andra punkter kallas mittpunkt och kan bestämmas med mittpunktsformeln."
+   },
+   {
+    "t": "Mittpunkten ligger mitt emellan punkternas x - respektive y -koordinater och kan bestämmas genom deras medelvärden."
+   },
+   {
+    "t": "Mittpunktsformeln"
+   },
+   {
+    "t": "parentesen x m, y m slut parentes är lika med parentesen x ett plus x två delat med 2, y ett plus y två delat med 2 slut parentes"
+   },
+   {
+    "t": "där parentesen x m, y m slut parentes är mittpunkten mellan punkterna parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes ."
+   },
+   {
+    "t": "Exempel 1 — Avstånd och mittpunkt"
+   },
+   {
+    "t": "Vi har punkterna (−3, −5) och (7, −1)."
+   },
+   {
+    "t": "Bestäm. a) avståndet mellan punkterna b) mittpunkten"
+   },
+   {
+    "t": "a) Vi använder avståndsformeln och sätter in värdena x ett är lika med minus 3 , y ett är lika med minus 5 , x två är lika med 7 och y två är lika med minus 1 ."
+   },
+   {
+    "t": "Detta ger"
+   },
+   {
+    "t": "d är lika med roten ur parentesen 7 minus parentesen minus 3 slut parentes slut parentes i kvadrat plus parentesen parentesen minus 1 slut parentes minus parentesen minus 5 slut parentes slut parentes i kvadrat som är lika med roten ur 10 i kvadrat plus 4 i kvadrat som är lika med roten ur 100 plus 16 som är lika med roten ur 116 som är ungefär lika med 10,8 längdenheter"
+   },
+   {
+    "t": "Svar: roten ur 116 längdenheter är ungefär lika med 10,8 längdenheter"
+   },
+   {
+    "t": "b) Vi använder mittpunktsformeln och sätter in värdena x ett är lika med minus 3 , y ett är lika med minus 5 , x två är lika med 7 och y två är lika med minus 1 ."
+   },
+   {
+    "t": "Detta ger"
+   },
+   {
+    "t": "parentesen x m, y m slut parentes är lika med parentesen minus 3 plus 7 delat med 2, minus 5 plus parentesen minus 1 slut parentes delat med 2 slut parentes som är lika med parentesen 4 delat med 2, minus 6 delat med 2 slut parentes som är lika med parentesen 2, minus 3 slut parentes"
+   },
+   {
+    "t": "Svar: (2, −3)"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.7",
+  "title": "Likformiga månghörningar",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Likformiga månghörningar"
+   },
+   {
+    "t": "Månghörningar med samma form kallas likformiga."
+   },
+   {
+    "t": "Likformiga månghörningar kan vara olika stora, vridna olika mycket och spegelvända."
+   },
+   {
+    "t": "Likformiga månghörningar"
+   },
+   {
+    "t": "Två månghörningar är likformiga om"
+   },
+   {
+    "t": "motsvarande vinklar är lika stora OCH"
+   },
+   {
+    "t": "förhållandet mellan motsvarande sidor är lika"
+   },
+   {
+    "t": "OBS!"
+   },
+   {
+    "t": "Både vinklar och sidförhållanden måste kontrolleras. (Undantaget är trianglar, vilket nästa genomgång handlar om.)"
+   },
+   {
+    "t": "Exempel 1 — Är parallellogrammen likformiga?"
+   },
+   {
+    "t": "Är parallellogrammen likformiga?"
+   },
+   {
+    "t": "Motstående vinklar i en parallellogram är lika stora."
+   },
+   {
+    "t": "Motstående sidor i en parallellogram är lika stora."
+   },
+   {
+    "t": "Vi börjar med att bestämma alla vinklar."
+   },
+   {
+    "t": "I den lilla parallellogrammen är A är lika med 50 grader och B är lika med 130 grader , och motstående vinklar ger C är lika med 50 grader och D är lika med 130 grader ."
+   },
+   {
+    "t": "I den stora gäller på samma sätt E är lika med 50 grader , F är lika med 130 grader , G är lika med 50 grader och H är lika med 130 grader ."
+   },
+   {
+    "t": "Nu undersöker vi motsvarande vinklar:"
+   },
+   {
+    "t": "A är lika med E som är lika med 50 grader B som är lika med F som är lika med 130 grader C som är lika med G som är lika med 50 grader D som är lika med H som är lika med 130 grader"
+   },
+   {
+    "t": "Alla motsvarande vinklar är lika stora."
+   },
+   {
+    "t": "Vi bestämmer alla sidor: A B är lika med 8 , A D är lika med 6 (motstående sidor ger D C är lika med 8 och B C är lika med 6 ) samt E F är lika med 12 , E H är lika med 9 (motstående sidor ger H G är lika med 12 och F G är lika med 9 )."
+   },
+   {
+    "t": "Nu undersöker vi sidförhållandena:"
+   },
+   {
+    "t": "A B delat med E F är lika med D C delat med H G som är lika med 8 delat med 12 som är lika med 2 delat med 3"
+   },
+   {
+    "t": "A D delat med E H är lika med B C delat med F G som är lika med 6 delat med 9 som är lika med 2 delat med 3"
+   },
+   {
+    "t": "Även sidförhållandena är lika."
+   },
+   {
+    "t": "Eftersom både motsvarande vinklar och sidförhållanden är lika är parallellogrammen likformiga."
+   },
+   {
+    "t": "Svar: Ja"
+   },
+   {
+    "t": "Exempel 2 — Bestäm sidan"
+   },
+   {
+    "t": "Figurerna är likformiga."
+   },
+   {
+    "t": "Bestäm sidan x ."
+   },
+   {
+    "t": "Sidor i likformiga figurer kan bestämmas på två sätt: med ekvation eller med skalfaktor."
+   },
+   {
+    "t": "Med ekvation."
+   },
+   {
+    "t": "Förhållandet mellan motsvarande sidor är lika, så"
+   },
+   {
+    "t": "x delat med 5 är lika med 24 delat med 8"
+   },
+   {
+    "t": "Korsvis multiplikation ger"
+   },
+   {
+    "t": "8 x är lika med 24 gånger 5"
+   },
+   {
+    "t": "8 x är lika med 120 vilket är ekvivalent med att x är lika med 15 centimeter"
+   },
+   {
+    "t": "Med skalfaktor."
+   },
+   {
+    "t": "Vi dividerar två kända sidor för att bestämma skalfaktorn, dvs. hur stora figurerna är relativt varandra."
+   },
+   {
+    "t": "Skalfaktor är lika med 24 delat med 8 som är lika med 3"
+   },
+   {
+    "t": "Det innebär att motsvarande sidor är 3 gånger längre i den större månghörningen."
+   },
+   {
+    "t": "Sidan x motsvarar sidan 5 i den mindre figuren:"
+   },
+   {
+    "t": "x är lika med 5 gånger 3 som är lika med 15 centimeter"
+   },
+   {
+    "t": "Svar: 15 centimeter"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.8",
+  "title": "Likformiga trianglar",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Likformiga trianglar"
+   },
+   {
+    "t": "Trianglar med samma form kallas likformiga trianglar och är ett specialfall av likformiga månghörningar."
+   },
+   {
+    "t": "Precis som för likformiga månghörningar gäller att likformiga trianglar kan vara olika stora, vridna olika mycket och spegelvända."
+   },
+   {
+    "t": "Precis som för likformiga månghörningar gäller även att i likformiga trianglar är motsvarande vinklar lika stora och sidförhållandet mellan motsvarande sidor är lika."
+   },
+   {
+    "t": "Skillnaden är att för att bestämma om två trianglar är likformiga räcker det att undersöka ETT av villkoren för vinklar och sidförhållanden (för månghörningar med mer än tre hörn behövde vi undersöka både vinklar och sidförhållanden)."
+   },
+   {
+    "t": "Likformiga trianglar"
+   },
+   {
+    "t": "Två trianglar är likformiga om"
+   },
+   {
+    "t": "motsvarande vinklar är lika stora ELLER"
+   },
+   {
+    "t": "förhållandet mellan motsvarande sidor är lika"
+   },
+   {
+    "t": "Tecknet ~ betyder \"är likformig med\". \"Triangeln ABC är likformig med triangeln DEF\" kan alltså skrivas triangeln A B C är likformig med triangeln D E F ."
+   },
+   {
+    "t": "Det räcker att undersöka om två vinklar är lika för att säga att två trianglar är likformiga (eftersom den tredje vinkeln då måste vara samma, på grund av vinkelsumman i trianglar)."
+   },
+   {
+    "t": "Exempel 1 — Jämför vinklarna"
+   },
+   {
+    "t": "Är trianglarna likformiga?"
+   },
+   {
+    "t": "Vi undersöker motsvarande vinklar."
+   },
+   {
+    "t": "I triangeln A B C : A är lika med 128 grader och C är lika med 12 grader är givna, så"
+   },
+   {
+    "t": "B är lika med 180 grader minus 128 grader minus 12 grader som är lika med 40 grader (vinkelsumma i triangel)"
+   },
+   {
+    "t": "I triangeln D E F : E är lika med 40 grader och F är lika med 12 grader är givna, så"
+   },
+   {
+    "t": "D är lika med 180 grader minus 12 grader minus 40 grader som är lika med 128 grader (vinkelsumma i triangel)"
+   },
+   {
+    "t": "Motsvarande vinklar ( A är lika med D som är lika med 128 grader , B är lika med E som är lika med 40 grader och C är lika med F som är lika med 12 grader ) är lika stora, så trianglarna är likformiga: triangeln A B C är likformig med triangeln D E F ."
+   },
+   {
+    "t": "Svar: Ja"
+   },
+   {
+    "t": "Exempel 2 — Jämför sidförhållandena"
+   },
+   {
+    "t": "Är trianglarna likformiga?"
+   },
+   {
+    "t": "Vi undersöker sidförhållandena."
+   },
+   {
+    "t": "A B delat med D E är lika med 2,7 delat med 4,5 som är lika med 0,6"
+   },
+   {
+    "t": "B C delat med D F är lika med 3,6 delat med 6,0 som är lika med 0,6 (observera att högra triangeln är spegelvänd)"
+   },
+   {
+    "t": "A C delat med E F är lika med 4,5 delat med 7,5 som är lika med 0,6"
+   },
+   {
+    "t": "Sidförhållandena är lika (0,6), alltså är trianglarna likformiga."
+   },
+   {
+    "t": "Svar: Ja"
+   },
+   {
+    "t": "Exempel 3 — Flaggstången"
+   },
+   {
+    "t": "Alva ska bestämma höjden hos en flaggstång en solig sommardag."
+   },
+   {
+    "t": "Hon är 1,60 meter lång och får en skugga som är 1,20 meter."
+   },
+   {
+    "t": "Hon mäter sedan längden på flaggstångens skugga till 6,75 meter."
+   },
+   {
+    "t": "Hur hög är flaggstången?"
+   },
+   {
+    "t": "Eftersom flaggstången och Alva träffas under samma vinkel av solens strålar måste vinkeln som bildas mot höjden vara lika i båda trianglar."
+   },
+   {
+    "t": "Båda trianglar har dessutom en rät vinkel."
+   },
+   {
+    "t": "Vi ritar en skiss över flaggstången och Alva."
+   },
+   {
+    "t": "Trianglarna har alltså två vinklar som är lika stora och därför måste de vara likformiga."
+   },
+   {
+    "t": "Eftersom sidförhållandena då är lika gäller"
+   },
+   {
+    "t": "x delat med 1,60 är lika med 6,75 delat med 1,20"
+   },
+   {
+    "t": "Vi multiplicerar båda led med 1,60 och får"
+   },
+   {
+    "t": "x är lika med 6,75 delat med 1,20 gånger 1,60 som är lika med 9,00"
+   },
+   {
+    "t": "Svar: 9,00 meter"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.9",
+  "title": "Triangelsatserna",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Triangelsatserna"
+   },
+   {
+    "t": "Vi ska nu titta på några speciella samband i trianglar som tillsammans kallas triangelsatserna."
+   },
+   {
+    "t": "Topptriangelsatsen"
+   },
+   {
+    "t": "En parallelltransversal bildar en topptriangel som är likformig med den ursprungliga triangeln."
+   },
+   {
+    "t": "A D delat med A B är lika med A E delat med A C som är lika med D E delat med B C"
+   },
+   {
+    "t": "a delat med a plus b är lika med c delat med c plus d som är lika med e delat med f"
+   },
+   {
+    "t": "Parallelltransversalen är parallell med sidan B C ; a är lika med A D , b är lika med D B , c är lika med A E , d är lika med E C , e är lika med D E och f är lika med B C ."
+   },
+   {
+    "t": "Bevis — Topptriangelsatsen"
+   },
+   {
+    "t": "vinkeln A är gemensam vinkel i triangeln A B C och triangeln A D E ."
+   },
+   {
+    "t": "vinkeln A B C är lika med vinkeln A D E (likbelägna vinklar)"
+   },
+   {
+    "t": "triangeln A B C och triangeln A D E har alltså två lika vinklar vilket ger att triangeln A B C är likformig med triangeln A D E (trianglarna är likformiga)."
+   },
+   {
+    "t": "Förhållandet mellan motsvarande sidor är då lika, dvs."
+   },
+   {
+    "t": "A D delat med A B är lika med A E delat med A C som är lika med D E delat med B C"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "Transversalsatsen"
+   },
+   {
+    "t": "En parallelltransversal delar en triangels sidor i samma förhållande."
+   },
+   {
+    "t": "A D delat med D B är lika med A E delat med E C"
+   },
+   {
+    "t": "a delat med b är lika med c delat med d"
+   },
+   {
+    "t": "Bevis — Transversalsatsen"
+   },
+   {
+    "t": "Sedan tidigare har vi visat triangeln A B C är likformig med triangeln A D E ."
+   },
+   {
+    "t": "Detta ger"
+   },
+   {
+    "t": "a delat med a plus b är lika med c delat med c plus d"
+   },
+   {
+    "t": "Vi inverterar båda led, delar upp bråken och löser sedan ut a delat med b :"
+   },
+   {
+    "t": "a plus b delat med a är lika med c plus d delat med c"
+   },
+   {
+    "t": "a delat med a plus b delat med a är lika med c delat med c plus d delat med c"
+   },
+   {
+    "t": "1 plus b delat med a är lika med 1 plus d delat med c"
+   },
+   {
+    "t": "Vi subtraherar 1 från båda led:"
+   },
+   {
+    "t": "b delat med a är lika med d delat med c"
+   },
+   {
+    "t": "Vi inverterar båda led:"
+   },
+   {
+    "t": "a delat med b är lika med c delat med d"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "Topptriangelsatsen eller transversalsatsen?"
+   },
+   {
+    "t": "Om vi ska använda en triangelsats där topptriangelns bas"
+   },
+   {
+    "t": "används kan vi endast använda topptriangelsatsen."
+   },
+   {
+    "t": "inte används kan vi använda både topptriangelsatsen och transversalsatsen."
+   },
+   {
+    "t": "Tumregeln är då att använda transversalsatsen eftersom räkningen ofta blir enklare och snabbare."
+   },
+   {
+    "t": "Bisektrissatsen"
+   },
+   {
+    "t": "En bisektris (en stråle som delar en vinkel mitt itu) delar en triangel enligt förhållandet"
+   },
+   {
+    "t": "A D delat med B D är lika med A C delat med B C"
+   },
+   {
+    "t": "Bevis — Bisektrissatsen"
+   },
+   {
+    "t": "Vi ritar en godtycklig triangel A B C och ritar in en bisektris A D (där D ligger på sidan B C )."
+   },
+   {
+    "t": "Vi vill visa att C D delat med B D är lika med A C delat med A B ."
+   },
+   {
+    "t": "Vi förlänger bisektrisen till en punkt P , så att sträckorna A B och B P blir lika långa och bildar då en likbent triangel triangeln A B P ."
+   },
+   {
+    "t": "Vi studerar triangeln A C D och triangeln B D P :"
+   },
+   {
+    "t": "vinkeln B A D är lika med vinkeln B P D (basvinklar i likbent triangel triangeln A B P )"
+   },
+   {
+    "t": "vinkeln B A D är lika med vinkeln C A D (per definition eftersom A P är en bisektris som delar dem lika)"
+   },
+   {
+    "t": "Alltså gäller"
+   },
+   {
+    "t": "vinkeln B P D är lika med vinkeln C A D"
+   },
+   {
+    "t": "vinkeln B D P är lika med vinkeln A D C (vertikalvinklar)"
+   },
+   {
+    "t": "triangeln A C D och triangeln B D P har alltså två lika vinklar och är likformiga."
+   },
+   {
+    "t": "Vi ställer upp sidförhållandena:"
+   },
+   {
+    "t": "C D delat med B D är lika med A C delat med B P"
+   },
+   {
+    "t": "Eftersom B P är lika med A B kan vi ersätta B P med A B , vilket ger"
+   },
+   {
+    "t": "C D delat med B D är lika med A C delat med A B"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "Exempel 1 — Parallelltransversal"
+   },
+   {
+    "t": "Bestäm sidan x ."
+   },
+   {
+    "t": "Eftersom vi inte räknar på trianglarnas baser kan vi använda både transversalsatsen och topptriangelsatsen."
+   },
+   {
+    "t": "Välj en metod. (Tumregeln är att använda transversalsatsen när det är möjligt.)"
+   },
+   {
+    "t": "Transversalsatsen ger"
+   },
+   {
+    "t": "x delat med 10 är lika med 4 delat med 8"
+   },
+   {
+    "t": "x är lika med 4 delat med 8 gånger 10 som är lika med 5"
+   },
+   {
+    "t": "Topptriangelsatsen ger"
+   },
+   {
+    "t": "4 delat med 4 plus 8 är lika med x delat med x plus 10"
+   },
+   {
+    "t": "4 delat med 12 är lika med x delat med x plus 10"
+   },
+   {
+    "t": "Korsvis multiplikation ger"
+   },
+   {
+    "t": "4 parentesen x plus 10 slut parentes är lika med 12 x"
+   },
+   {
+    "t": "4 x plus 40 är lika med 12 x"
+   },
+   {
+    "t": "40 är lika med 8 x vilket är ekvivalent med att x är lika med 5"
+   },
+   {
+    "t": "Svar: 5 centimeter"
+   },
+   {
+    "t": "Exempel 2 — Bisektris"
+   },
+   {
+    "t": "Bestäm sidan x ."
+   },
+   {
+    "t": "Bisektrissatsen ger"
+   },
+   {
+    "t": "5 delat med 3 är lika med x delat med 9"
+   },
+   {
+    "t": "Vi multiplicerar båda led med 9 för att lösa ut x :"
+   },
+   {
+    "t": "x är lika med 5 delat med 3 gånger 9 som är lika med 45 delat med 3 som är lika med 15"
+   },
+   {
+    "t": "Svar: 15 centimeter"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.10",
+  "title": "Kongruens",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Kongruens"
+   },
+   {
+    "t": "Då likformiga figurer är lika stora råder kongruens och vi säger att figurerna är kongruenta."
+   },
+   {
+    "t": "Kongruens markeras med tecknet och utläses \"är kongruent med\"."
+   },
+   {
+    "t": "\"Triangeln A B C är kongruent med triangeln D E F \" kan alltså skrivas"
+   },
+   {
+    "t": "triangeln A B C är kongruent med triangeln D E F"
+   },
+   {
+    "t": "För att avgöra om två trianglar är kongruenta behöver vi inte undersöka alla vinklar och sidor, utan det räcker att ett av nedanstående tre kongruensvillkor är uppfyllt."
+   },
+   {
+    "t": "Kongruenta trianglar"
+   },
+   {
+    "t": "Två trianglar är kongruenta om de överensstämmer i"
+   },
+   {
+    "t": "två sidor och mellanliggande vinkel (sida-vinkel-sida eller SVS)"
+   },
+   {
+    "t": "alla tre sidor (sida-sida-sida eller SSS)"
+   },
+   {
+    "t": "två vinklar och mellanliggande sida (vinkel-sida-vinkel eller VSV)"
+   },
+   {
+    "t": "I figurer markeras lika långa sidor med lika många tvärstreck och lika stora vinklar med vinkelbågar."
+   },
+   {
+    "t": "Exempel 1 — Kongruenta enligt SVS"
+   },
+   {
+    "t": "Trianglarna överensstämmer i två sidor och mellanliggande vinkel."
+   },
+   {
+    "t": "Bestäm sträckorna x och y ."
+   },
+   {
+    "t": "Trianglarna är kongruenta enligt SVS."
+   },
+   {
+    "t": "Då gäller"
+   },
+   {
+    "t": "x är lika med 24 centimeter (sidan markerad med ett tvärstreck)"
+   },
+   {
+    "t": "y är lika med 32 centimeter (sidan markerad med två tvärstreck)"
+   },
+   {
+    "t": "Svar: x är lika med 24 centimeter och y är lika med 32 centimeter"
+   },
+   {
+    "t": "Exempel 2 — Kongruenta enligt SSS"
+   },
+   {
+    "t": "Trianglarna överensstämmer i alla tre sidor."
+   },
+   {
+    "t": "Bestäm de okända vinklarna i triangeln till höger."
+   },
+   {
+    "t": "Trianglarna är kongruenta enligt SSS."
+   },
+   {
+    "t": "Då gäller"
+   },
+   {
+    "t": "vinkeln D är lika med vinkeln A (vinkeln mitt emot sträckan markerad med två tvärstreck)"
+   },
+   {
+    "t": "vinkeln E är lika med vinkeln B som är lika med 48 grader (vinkeln mitt emot sträckan markerad med tre tvärstreck)"
+   },
+   {
+    "t": "vinkeln F är lika med vinkeln C som är lika med 102 grader (vinkeln mitt emot sträckan markerad med ett tvärstreck)"
+   },
+   {
+    "t": "och den sista vinkeln fås av vinkelsumman:"
+   },
+   {
+    "t": "vinkeln D är lika med 180 grader minus 48 grader minus 102 grader som är lika med 30 grader (vinkelsumma i triangel)"
+   },
+   {
+    "t": "Svar: vinkeln D är lika med 30 grader , vinkeln E är lika med 48 grader och vinkeln F är lika med 102 grader"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.11",
+  "title": "Randvinkelsatsen",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Randvinkelsatsen"
+   },
+   {
+    "t": "Kanten på en cirkel kallas rand och en vinkel med spetsen på randen kallas randvinkel."
+   },
+   {
+    "t": "Mittpunkten i en cirkel kallas medelpunkt och en vinkel med spetsen i medelpunkten kallas medelpunktsvinkel."
+   },
+   {
+    "t": "Rand- och medelpunktsvinklar har vinkelben som står på en vinkelbåge, se figur nedan."
+   },
+   {
+    "t": "Randvinkelsatsen"
+   },
+   {
+    "t": "Medelpunktsvinkeln är dubbelt så stor som randvinkeln på samma cirkelbåge."
+   },
+   {
+    "t": "y är lika med 2 x"
+   },
+   {
+    "t": "där x är randvinkeln och y är medelpunktsvinkeln."
+   },
+   {
+    "t": "I uppgifter där du utnyttjar randvinkelsatsen kan den motiveras (randvinkelsatsen)."
+   },
+   {
+    "t": "Randvinklar kan ha lite olika utseende beroende var på randen de ligger — satsen y är lika med 2 x gäller så länge vinklarna står på samma cirkelbåge."
+   },
+   {
+    "t": "En sats som är en direkt följd av en tidigare sats kallas följdsats."
+   },
+   {
+    "t": "Följdsatser till randvinkelsatsen"
+   },
+   {
+    "t": "Randvinklar på samma cirkelbåge är lika stora."
+   },
+   {
+    "t": "Motiveras (randvinklar på samma båge)."
+   },
+   {
+    "t": "Randvinklar på en halvcirkelbåge är 90 grader."
+   },
+   {
+    "t": "Motiveras (randvinkel på halvcirkelbåge)."
+   },
+   {
+    "t": "Vinklar i cirklar — specialfall"
+   },
+   {
+    "t": "Tangenter."
+   },
+   {
+    "t": "Vinkeln som bildas mellan en tangent och radien till tangeringspunkten är alltid 90 grader."
+   },
+   {
+    "t": "Motiveras (tangent mot radie)."
+   },
+   {
+    "t": "Likbenta trianglar."
+   },
+   {
+    "t": "Två radier som bildar en triangel ger alltid en likbent triangel."
+   },
+   {
+    "t": "Basvinklar i en likbent triangel är alltid lika stora."
+   },
+   {
+    "t": "Motiveras (likbent triangel)."
+   },
+   {
+    "t": "Exempel 1 — Beräkna randvinkeln"
+   },
+   {
+    "t": "Beräkna vinkeln x i figurerna."
+   },
+   {
+    "t": "I den vänstra figuren är medelpunktsvinkeln 120 grader given, och i den högra är randvinkeln 32 grader given."
+   },
+   {
+    "t": "a) Randvinkeln x och medelpunktsvinkeln 120 grader står på samma cirkelbåge."
+   },
+   {
+    "t": "Randvinkelsatsen ger"
+   },
+   {
+    "t": "x är lika med 120 grader delat med 2 som är lika med 60 grader (randvinkelsatsen)"
+   },
+   {
+    "t": "Svar: x är lika med 60 grader"
+   },
+   {
+    "t": "b) Vinklarna x och 32 grader är randvinklar som står på samma cirkelbåge:"
+   },
+   {
+    "t": "x är lika med 32 grader (randvinklar på samma båge)"
+   },
+   {
+    "t": "Svar: x är lika med 32 grader"
+   },
+   {
+    "t": "Exempel 2 — Likbent triangel av radier"
+   },
+   {
+    "t": "Beräkna vinkeln y ."
+   },
+   {
+    "t": "Den streckade linjen är en diameter och vinkeln 23 grader är given."
+   },
+   {
+    "t": "Kordan och diametern bildar tillsammans med radien en triangel där två ben är radier — en likbent triangel."
+   },
+   {
+    "t": "Basvinklarna är då lika stora:"
+   },
+   {
+    "t": "x är lika med 23 grader (basvinklar i likbent triangel — båda ben motsvarar en radie)"
+   },
+   {
+    "t": "x är en randvinkel och y är medelpunktsvinkeln på samma cirkelbåge:"
+   },
+   {
+    "t": "y är lika med 2 x som är lika med 2 gånger 23 grader som är lika med 46 grader (randvinkelsatsen)"
+   },
+   {
+    "t": "Svar: y är lika med 46 grader"
+   },
+   {
+    "t": "Exempel 3 — Tangent"
+   },
+   {
+    "t": "Linjen genom A och B är en tangent till cirkeln med medelpunkten P."
+   },
+   {
+    "t": "Beräkna vinkeln v ."
+   },
+   {
+    "t": "vinkeln A B P är lika med 90 grader (tangent mot radie)"
+   },
+   {
+    "t": "Vinkelsumman i triangeln A B P ger"
+   },
+   {
+    "t": "v är lika med 180 grader minus 90 grader minus 50 grader som är lika med 40 grader (vinkelsumma i triangel)"
+   },
+   {
+    "t": "Svar: v är lika med 40 grader"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-4.12",
+  "title": "Kordasatsen och inskrivna fyrhörningar",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Kordasatsen och inskrivna fyrhörningar"
+   },
+   {
+    "t": "En sträcka mellan två punkter på en cirkels rand kallas korda."
+   },
+   {
+    "t": "Kordasatsen"
+   },
+   {
+    "t": "Om två kordor skär varandra är produkten av den ena kordans delsträckor lika med produkten av den andra kordans delsträckor."
+   },
+   {
+    "t": "a gånger b är lika med c gånger d"
+   },
+   {
+    "t": "Bevis — Kordasatsen"
+   },
+   {
+    "t": "Vi ritar två godtyckliga korsande kordor A C och B D som skär varandra i punkten E , och ritar två hjälpsträckor A D och B C enligt figuren nedan."
+   },
+   {
+    "t": "Vi jämför trianglarna A D E och B C E :"
+   },
+   {
+    "t": "vinkeln A D B är lika med vinkeln A C B (randvinklar på samma båge)"
+   },
+   {
+    "t": "vinkeln D A C är lika med vinkeln D B C (randvinklar på samma båge)"
+   },
+   {
+    "t": "vinkeln A E D är lika med vinkeln B E C (vertikalvinklar)"
+   },
+   {
+    "t": "Trianglarnas vinklar är lika vilket ger att triangeln A D E är likformig med triangeln B C E (likformiga)."
+   },
+   {
+    "t": "Vi ställer upp sidförhållandena, med a är lika med A E , b är lika med E C , c är lika med D E och d är lika med E B :"
+   },
+   {
+    "t": "a delat med d är lika med c delat med b"
+   },
+   {
+    "t": "Korsvis multiplikation ger"
+   },
+   {
+    "t": "a gånger b är lika med c gånger d"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "En fyrhörning med samtliga hörn på en cirkels rand kallas inskriven fyrhörning."
+   },
+   {
+    "t": "Motstående vinklar i inskriven fyrhörning"
+   },
+   {
+    "t": "Summan av motstående vinklar i en inskriven fyrhörning är 180 grader."
+   },
+   {
+    "t": "u plus v är lika med 180 grader"
+   },
+   {
+    "t": "x plus y är lika med 180 grader"
+   },
+   {
+    "t": "Bevis — Motstående vinklar i inskriven fyrhörning"
+   },
+   {
+    "t": "Vi ritar en godtycklig inskriven fyrhörning."
+   },
+   {
+    "t": "Vi kallar två motstående hörn för u och v och vill visa att u plus v är lika med 180 grader ."
+   },
+   {
+    "t": "Vi drar två hjälpsträckor från två motstående hörn till cirkelns medelpunkt enligt figuren nedan."
+   },
+   {
+    "t": "Enligt randvinkelsatsen är medelpunktsvinklarna då 2 u respektive 2 v ."
+   },
+   {
+    "t": "Då gäller"
+   },
+   {
+    "t": "2 u plus 2 v är lika med 360 grader (ett varv)"
+   },
+   {
+    "t": "Vi dividerar båda led med 2 och får"
+   },
+   {
+    "t": "u plus v är lika med 180 grader"
+   },
+   {
+    "t": "v.s.b."
+   },
+   {
+    "t": "Exempel 1 — Kordasatsen"
+   },
+   {
+    "t": "Bestäm längden av sidan markerad x ."
+   },
+   {
+    "t": "Kordasatsen ger"
+   },
+   {
+    "t": "10 x är lika med 18 gånger 20"
+   },
+   {
+    "t": "Vi förenklar och löser ut x :"
+   },
+   {
+    "t": "10 x är lika med 360"
+   },
+   {
+    "t": "x är lika med 360 delat med 10 som är lika med 36"
+   },
+   {
+    "t": "Svar: 36 millimeter"
+   },
+   {
+    "t": "Exempel 2 — Inskriven fyrhörning"
+   },
+   {
+    "t": "Bestäm vinkeln x ."
+   },
+   {
+    "t": "Motstående vinklar i en inskriven fyrhörning är tillsammans 180 grader:"
+   },
+   {
+    "t": "x plus 115 grader är lika med 180 grader (motstående vinklar i inskriven fyrhörning)"
+   },
+   {
+    "t": "x är lika med 180 grader minus 115 grader som är lika med 65 grader"
+   },
+   {
+    "t": "Svar: x är lika med 65 grader"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-5.1",
+  "title": "Exponential- och potensekvationer",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Exponential- och potensekvationer"
+   },
+   {
+    "t": "Potensekvationer"
+   },
+   {
+    "t": "En ekvation där variabeln, oftast x , är i basen (\" x upphöjt till något\") kallas potensekvation."
+   },
+   {
+    "t": "Dessa kan lösas med två algebraiska metoder — antingen med potenslagar eller med rotuttryck."
+   },
+   {
+    "t": "Exempel 1 — Lös potensekvationen"
+   },
+   {
+    "t": "Lös potensekvationen x upphöjt till 7 är lika med 860 ."
+   },
+   {
+    "t": "Metod 1: Med potenslagar."
+   },
+   {
+    "t": "Vi upphöjer båda led till 1 delat med 7 :"
+   },
+   {
+    "t": "x är lika med 860 upphöjt till 1 delat med 7 som är ungefär lika med 2,63 (slås på räknaren)"
+   },
+   {
+    "t": "Metod 2: Med rotuttryck."
+   },
+   {
+    "t": "Vi drar sjunde roten ur båda led:"
+   },
+   {
+    "t": "x är lika med 7:e roten ur 860 som är ungefär lika med 2,63 (slås på räknaren)"
+   },
+   {
+    "t": "Svar: x är ungefär lika med 2,63"
+   },
+   {
+    "t": "OBS!"
+   },
+   {
+    "t": "Om exponenten är jämn får ekvationen två lösningar — en positiv och en negativ."
+   },
+   {
+    "t": "Då ska plus minus placeras framför rottecknet/lösningen."
+   },
+   {
+    "t": "En potensfunktion i generell form skrivs y är lika med C gånger x upphöjt till a ."
+   },
+   {
+    "t": "Exponentialekvationer"
+   },
+   {
+    "t": "En ekvation där variabeln, oftast x , är i exponenten (\"något upphöjt till x \") kallas exponentialekvation."
+   },
+   {
+    "t": "Dessa har vi ingen algebraisk metod för att lösa — än."
+   },
+   {
+    "t": "Dessa löser vi då grafiskt, genom att rita upp båda led i ekvationen och ta fram skärningens x -koordinat."
+   },
+   {
+    "t": "En exponentialfunktion i generell form skrivs y är lika med C gånger a upphöjt till x ."
+   },
+   {
+    "t": "Tillämpningar"
+   },
+   {
+    "t": "Vid tillämpningar där vi har en exponentiell förändring, t.ex. där något ändras med en viss procentsats per år, kan vi ställa upp en ekvation på formen"
+   },
+   {
+    "t": "y är lika med C gånger a upphöjt till x"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "y är lika med värdet efter ett visst antal förändringar (ofta efter en viss tid)"
+   },
+   {
+    "t": "C är lika med ursprungliga värdet"
+   },
+   {
+    "t": "a är lika med förändringsfaktorn"
+   },
+   {
+    "t": "x är lika med antal förändringar (ofta tid)"
+   },
+   {
+    "t": "Exempel 2 — Aktier"
+   },
+   {
+    "t": "Du köper aktier för 12 000 kronor."
+   },
+   {
+    "t": "I b-uppgiften kommer vi att lösa en exponentialekvation grafiskt — grafen nedan visar uppritningen med skärningspunkten A."
+   },
+   {
+    "t": "a) 5 år senare säljer du dem för 27 000 kronor."
+   },
+   {
+    "t": "Hur stor genomsnittlig årlig ökning i procent motsvarar det? b) Om ökningen fortsätter på samma sätt, hur lång tid efter inköpet är de värda 50 000 kronor?"
+   },
+   {
+    "t": "a) Vi ska beräkna en procentuell förändring, så vi ställer upp formeln"
+   },
+   {
+    "t": "y är lika med C gånger a upphöjt till x"
+   },
+   {
+    "t": "där vi söker förändringsfaktorn a ."
+   },
+   {
+    "t": "Vi sätter in våra kända värden: y är lika med 27 000 (värdet efter en viss tid), C är lika med 12 000 (ursprungliga värdet) och x är lika med 5 (tid)."
+   },
+   {
+    "t": "27 000 är lika med 12 000 gånger a upphöjt till 5"
+   },
+   {
+    "t": "27 000 delat med 12 000 är lika med a upphöjt till 5"
+   },
+   {
+    "t": "2,25 är lika med a upphöjt till 5"
+   },
+   {
+    "t": "Detta är en potensekvation:"
+   },
+   {
+    "t": "a är lika med 2,25 upphöjt till 1 delat med 5 som är lika med 5:e roten ur 2,25 som är lika med 1,1760 som är ungefär lika med 1,176"
+   },
+   {
+    "t": "Förändringsfaktorn är alltså ungefär 1,176, vilket motsvarar en ökning med 17,6 procent ( 1,176 minus 1 är lika med 0,176 som är lika med 17,6 procent )."
+   },
+   {
+    "t": "Svar: 17,6 procent"
+   },
+   {
+    "t": "b) Vi ska beräkna efter hur lång tid aktierna har ett visst värde med samma procentuella förändring."
+   },
+   {
+    "t": "Vi ställer återigen upp formeln y är lika med C gånger a upphöjt till x , där vi söker tiden x ."
+   },
+   {
+    "t": "Vi sätter in våra kända värden: y är lika med 50 000 , C är lika med 12 000 och a är lika med 1,176 :"
+   },
+   {
+    "t": "50 000 är lika med 12 000 gånger 1,176 upphöjt till x"
+   },
+   {
+    "t": "Detta är en exponentialekvation."
+   },
+   {
+    "t": "Vi ritar y är lika med 50 000 (uttrycket i vänster led) och y är lika med 12 000 gånger 1,176 upphöjt till x (uttrycket i höger led) med ett grafritande hjälpmedel och tar fram skärningens x -koordinat — se grafen ovan."
+   },
+   {
+    "t": "Vi ser att skärningens x -koordinat är x är ungefär lika med 8,8 ."
+   },
+   {
+    "t": "Svar: Efter ca 9 år."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-5.2",
+  "title": "Tiologaritmer",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Tiologaritmer"
+   },
+   {
+    "t": "Det tal som 10 ska upphöjas till (\"tians exponent\") för att bli ett visst värde kallas tiologaritm, skrivs \"lg\" och utläses ofta \"tiologaritmen för\"."
+   },
+   {
+    "t": "Logaritmer går att se som den inversa (bakvända) operationen till att upphöja och används för att lösa exponentialekvationer algebraiskt."
+   },
+   {
+    "t": "Vi börjar med några enkla exempel för att förstå skrivsättet."
+   },
+   {
+    "t": "lg 100 betyder \"det tal som 10 ska upphöjas till för att bli 100\"."
+   },
+   {
+    "t": "Eftersom 10 i kvadrat är lika med 100 gäller alltså att logaritmen av 100 är lika med 2 ."
+   },
+   {
+    "t": "lg 1 betyder \"det tal som 10 ska upphöjas till för att bli 1\"."
+   },
+   {
+    "t": "Eftersom 10 upphöjt till 0 är lika med 1 gäller logaritmen av 1 är lika med 0 ."
+   },
+   {
+    "t": "lg 0,01 betyder \"det tal som 10 ska upphöjas till för att bli 0,01\"."
+   },
+   {
+    "t": "Eftersom 10 upphöjt till minus 2 är lika med 1 delat med 10 i kvadrat som är lika med 0,01 gäller logaritmen av 0,01 är lika med minus 2 ."
+   },
+   {
+    "t": "Upptäck mönstret för tiologaritmer för jämna potenser av 10:"
+   },
+   {
+    "t": "Tiologaritmer för annat än jämna potenser av 10 är svårare att bestämma med huvudräkning, men har vi förståelsen för logaritmer kan vi ändå göra bra uppskattningar."
+   },
+   {
+    "t": "Säg att vi ska avgöra hur stort lg 42 är."
+   },
+   {
+    "t": "Det betyder alltså vad vi ska upphöja 10 till för att värdet ska bli 42."
+   },
+   {
+    "t": "Vi vet att 10 upphöjt till 1 är lika med 10 är för litet."
+   },
+   {
+    "t": "Vi vet också att 10 i kvadrat är lika med 100 är för stort."
+   },
+   {
+    "t": "Alltså måste exponenten vara någonstans mellan 1 och 2, dvs. lg 42 ligger mellan 1 och 2."
+   },
+   {
+    "t": "Vi kan få ett exaktare värde genom att slå logaritmen på våra räknare med knappen log."
+   },
+   {
+    "t": "Testa att slå lg 42 på din räknare."
+   },
+   {
+    "t": "Vi får logaritmen av 42 är lika med 1,623 som är ungefär lika med 1,62 ."
+   },
+   {
+    "t": "Som vi förutsåg hamnade värdet mellan 1 och 2, närmare bestämt ungefär 1,62."
+   },
+   {
+    "t": "Detta betyder att 42 är ungefär lika med 10 upphöjt till 1,62 ."
+   },
+   {
+    "t": "Om vi vill ha en exakt likhet, så behåller vi logaritmen i exponenten, dvs."
+   },
+   {
+    "t": "42 är lika med 10 upphöjt till logaritmen av 42"
+   },
+   {
+    "t": "Tiologaritm — Definition"
+   },
+   {
+    "t": "a är lika med 10 upphöjt till x vilket är ekvivalent med att x är lika med logaritmen av a där a är större än 0"
+   },
+   {
+    "t": "Skriva ett tal med basen 10"
+   },
+   {
+    "t": "a är lika med 10 upphöjt till logaritmen av a där a är större än 0"
+   },
+   {
+    "t": "Det tal vi tar logaritmen för måste vara större än 0 eftersom vi aldrig kan upphöja 10 till något och få ett negativt värde."
+   },
+   {
+    "t": "Ju mindre värde tians exponent har desto närmare 0 kommer vi, men det blir aldrig 0 eller negativt: 10 upphöjt till minus 3 är lika med 1 delat med 1 000 som är lika med 0,001 och 10 upphöjt till minus 6 är lika med 1 delat med 1 000 000 som är lika med 0,000 001 och så vidare."
+   },
+   {
+    "t": "Exempel 1 — Bestäm utan räknare"
+   },
+   {
+    "t": "Bestäm utan räknare. a) logaritmen av 10 000 b) logaritmen av 10 upphöjt till minus 5 c) logaritmen av roten ur 10"
+   },
+   {
+    "t": "a) Vi tänker \"Vad ska vi upphöja 10 till för att det ska bli 10 000?"
+   },
+   {
+    "t": "Jo, 4.\""
+   },
+   {
+    "t": "Svar: 4"
+   },
+   {
+    "t": "b) Vi tänker \"Vad ska vi upphöja 10 till för att det ska bli 10 upphöjt till minus 5 ?"
+   },
+   {
+    "t": "Jo, −5.\""
+   },
+   {
+    "t": "Svar: −5"
+   },
+   {
+    "t": "c) Vi tänker \"Vad ska vi upphöja 10 till för att det ska bli roten ur 10 ?\" Svaret till denna fråga kanske inte är lika självklart."
+   },
+   {
+    "t": "Kom ihåg att dra kvadratroten ur är samma sak som att upphöja till en halv, så roten ur 10 är lika med 10 upphöjt till 1 delat med 2 ."
+   },
+   {
+    "t": "Vi ska alltså upphöja 10 till 1 delat med 2 för att svaret ska bli roten ur 10 ."
+   },
+   {
+    "t": "Svar: 1 delat med 2"
+   },
+   {
+    "t": "Exempel 2 — Skriv som en potens med basen 10"
+   },
+   {
+    "t": "Skriv som en potens med basen 10.. a) 4 b) 75"
+   },
+   {
+    "t": "a) Den exponent vi ska upphöja 10 till för att det ska bli 4 kan skrivas lg 4."
+   },
+   {
+    "t": "Så"
+   },
+   {
+    "t": "10 upphöjt till logaritmen av 4 är lika med 4"
+   },
+   {
+    "t": "Svar: 10 upphöjt till logaritmen av 4"
+   },
+   {
+    "t": "b) På motsvarande sätt som i a-uppgiften gäller 75 är lika med 10 upphöjt till logaritmen av 75 ."
+   },
+   {
+    "t": "Svar: 10 upphöjt till logaritmen av 75"
+   },
+   {
+    "t": "Exempel 3 — Beräkna utan räknare"
+   },
+   {
+    "t": "Beräkna utan räknare 10 upphöjt till logaritmen av 9 minus 3 gånger 10 upphöjt till logaritmen av 3 delat med logaritmen av 10 ."
+   },
+   {
+    "t": "Vi förenklar de olika logaritmerna:"
+   },
+   {
+    "t": "10 upphöjt till logaritmen av 9 är lika med 9"
+   },
+   {
+    "t": "10 upphöjt till logaritmen av 3 är lika med 3"
+   },
+   {
+    "t": "logaritmen av 10 är lika med 1 (lg 10 betyder vad vi ska upphöja 10 till för att det ska bli 10, alltså 1)"
+   },
+   {
+    "t": "Insättning av dessa förenklade värden ger"
+   },
+   {
+    "t": "10 upphöjt till logaritmen av 9 minus 3 gånger 10 upphöjt till logaritmen av 3 delat med logaritmen av 10 är lika med 9 minus 3 gånger 3 delat med 1 som är lika med 9 minus 9 som är lika med 0"
+   },
+   {
+    "t": "Svar: 0"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-5.3",
+  "title": "Exponentialekvationer och tiologaritmer",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Exponentialekvationer och tiologaritmer"
+   },
+   {
+    "t": "Kom ihåg: ett tal kan skrivas med basen 10 enligt"
+   },
+   {
+    "t": "a är lika med 10 upphöjt till logaritmen av a där a är större än 0"
+   },
+   {
+    "t": "För att lösa exponentialekvationer med hjälp av tiologaritmer använder vi principen att om två potenser med samma bas är lika, så måste också deras exponenter vara lika."
+   },
+   {
+    "t": "Exempelvis, om 2 upphöjt till x är lika med 2 upphöjt till 7 , så måste x är lika med 7 ."
+   },
+   {
+    "t": "Lösa exponentialekvationer med tiologaritmer"
+   },
+   {
+    "t": "Skriv om båda led med basen 10 enligt principen a är lika med 10 upphöjt till logaritmen av a ."
+   },
+   {
+    "t": "Förenkla med potenslagarna."
+   },
+   {
+    "t": "Sätt exponenterna lika och lös ekvationen."
+   },
+   {
+    "t": "En ekvation där variabeln finns i logaritmen, t.ex. logaritmen av x är lika med 3 , kallas logaritmekvation."
+   },
+   {
+    "t": "Dessa löser vi enklast genom att skriva om ekvationen från logaritmform till potensform och sedan lösa ekvationen enligt tidigare metoder."
+   },
+   {
+    "t": "Lösa logaritmekvationer"
+   },
+   {
+    "t": "logaritmen av x är lika med a (logaritmform) vilket är ekvivalent med att 10 upphöjt till a är lika med x (potensform)"
+   },
+   {
+    "t": "Omskrivning från logaritmform till potensform med ord: \"10 upphöjt till det som står i högra ledet är lika med det vi har logaritmen för.\""
+   },
+   {
+    "t": "Exempel 1 — Lös ekvationerna"
+   },
+   {
+    "t": "Lös ekvationerna nedan."
+   },
+   {
+    "t": "Svara exakt och med två decimaler.. a) 10 upphöjt till x är lika med 53 b) 2 upphöjt till x är lika med 37 c) 5 gånger 3 upphöjt till 2 x minus 4 är lika med 31"
+   },
+   {
+    "t": "a) Vi skriver om HL till basen 10 och sätter sedan exponenterna lika:"
+   },
+   {
+    "t": "10 upphöjt till x är lika med 10 upphöjt till logaritmen av 53"
+   },
+   {
+    "t": "x är lika med logaritmen av 53 som är ungefär lika med 1,72"
+   },
+   {
+    "t": "(Om du direkt från ekvationen 10 upphöjt till x är lika med 53 ser att x är lika med logaritmen av 53 , utifrån definitionen, går det bra att skriva det direkt, utan mellanled.)"
+   },
+   {
+    "t": "Svar: x är lika med logaritmen av 53 som är ungefär lika med 1,72"
+   },
+   {
+    "t": "b) Vi skriver om båda led till basen 10 och förenklar med potenslagarna:"
+   },
+   {
+    "t": "parentesen 10 upphöjt till logaritmen av 2 slut parentes upphöjt till x är lika med 10 upphöjt till logaritmen av 37"
+   },
+   {
+    "t": "10 upphöjt till x gånger logaritmen av 2 är lika med 10 upphöjt till logaritmen av 37"
+   },
+   {
+    "t": "Vi kan nu sätta exponenterna lika och får"
+   },
+   {
+    "t": "x gånger logaritmen av 2 är lika med logaritmen av 37"
+   },
+   {
+    "t": "Division med lg 2 i båda led ger"
+   },
+   {
+    "t": "x är lika med logaritmen av 37 delat med logaritmen av 2 som är ungefär lika med 5,21"
+   },
+   {
+    "t": "Svar: x är lika med logaritmen av 37 delat med logaritmen av 2 som är ungefär lika med 5,21"
+   },
+   {
+    "t": "c) Vi börjar med att lösa ut potensen 3 upphöjt till 2 x ."
+   },
+   {
+    "t": "Vi adderar 4 till båda led och dividerar sedan med 5:"
+   },
+   {
+    "t": "5 gånger 3 upphöjt till 2 x är lika med 35"
+   },
+   {
+    "t": "3 upphöjt till 2 x är lika med 7"
+   },
+   {
+    "t": "Skriver om båda led till basen 10 och förenklar med potenslagarna:"
+   },
+   {
+    "t": "parentesen 10 upphöjt till logaritmen av 3 slut parentes upphöjt till 2 x är lika med 10 upphöjt till logaritmen av 7"
+   },
+   {
+    "t": "10 upphöjt till 2 x gånger logaritmen av 3 är lika med 10 upphöjt till logaritmen av 7"
+   },
+   {
+    "t": "Sätter exponenterna lika och löser ekvationen:"
+   },
+   {
+    "t": "2 x gånger logaritmen av 3 är lika med logaritmen av 7"
+   },
+   {
+    "t": "x är lika med logaritmen av 7 delat med 2 gånger logaritmen av 3 som är ungefär lika med 0,89"
+   },
+   {
+    "t": "Svar: x är lika med logaritmen av 7 delat med 2 gånger logaritmen av 3 som är ungefär lika med 0,89"
+   },
+   {
+    "t": "Exempel 2 — Lös logaritmekvationerna"
+   },
+   {
+    "t": "Lös. a) logaritmen av x är lika med 3 b) logaritmen av 5 x är lika med 2,7"
+   },
+   {
+    "t": "a) Vi skriver om ekvationen till potensform. \"10 upphöjt till det som står i högra ledet, ska bli det vi har logaritmen för.\""
+   },
+   {
+    "t": "10 i kubik är lika med x"
+   },
+   {
+    "t": "x är lika med 1 000"
+   },
+   {
+    "t": "(Om du direkt från ekvationen ser att x är lika med 1 000 eftersom logaritmen av 1 000 är lika med 3 , går det bra att skriva det direkt, utan mellanled.)"
+   },
+   {
+    "t": "Svar: x är lika med 1 000"
+   },
+   {
+    "t": "b) Vi skriver om ekvationen till potensform:"
+   },
+   {
+    "t": "10 upphöjt till 2,7 är lika med 5 x"
+   },
+   {
+    "t": "Division med 5 i båda led ger"
+   },
+   {
+    "t": "x är lika med 10 upphöjt till 2,7 delat med 5 som är ungefär lika med 100,24"
+   },
+   {
+    "t": "Svar: x är ungefär lika med 100,24"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-5.4",
+  "title": "Logaritmlagarna",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Logaritmlagarna"
+   },
+   {
+    "t": "Räknereglerna för logaritmer kallas logaritmlagarna."
+   },
+   {
+    "t": "Logaritmlagarna"
+   },
+   {
+    "t": "Första logaritmlagen:"
+   },
+   {
+    "t": "logaritmen av x plus logaritmen av y är lika med logaritmen av x y"
+   },
+   {
+    "t": "Andra logaritmlagen:"
+   },
+   {
+    "t": "logaritmen av x minus logaritmen av y är lika med logaritmen av x delat med y"
+   },
+   {
+    "t": "Tredje logaritmlagen:"
+   },
+   {
+    "t": "logaritmen av x upphöjt till p är lika med p gånger logaritmen av x"
+   },
+   {
+    "t": "där x är större än 0 och y är större än 0 ."
+   },
+   {
+    "t": "Bevis — Första logaritmlagen"
+   },
+   {
+    "t": "Vi skriver multiplikationen x gånger y på två sätt."
+   },
+   {
+    "t": "Sätt 1:"
+   },
+   {
+    "t": "x gånger y är lika med 10 upphöjt till logaritmen av x gånger 10 upphöjt till logaritmen av y som är lika med 10 upphöjt till logaritmen av x plus logaritmen av y"
+   },
+   {
+    "t": "Sätt 2:"
+   },
+   {
+    "t": "x gånger y är lika med 10 upphöjt till logaritmen av parentesen x gånger y slut parentes"
+   },
+   {
+    "t": "Eftersom dessa motsvarar samma sak, måste de vara lika, så"
+   },
+   {
+    "t": "10 upphöjt till logaritmen av x plus logaritmen av y är lika med 10 upphöjt till logaritmen av parentesen x gånger y slut parentes"
+   },
+   {
+    "t": "Eftersom vi har en likhet med samma bas, måste exponenterna vara lika, så"
+   },
+   {
+    "t": "logaritmen av x plus logaritmen av y är lika med logaritmen av x y"
+   },
+   {
+    "t": "v.s.v."
+   },
+   {
+    "t": "Bevis — Andra logaritmlagen"
+   },
+   {
+    "t": "Vi skriver divisionen x delat med y på två sätt."
+   },
+   {
+    "t": "Sätt 1:"
+   },
+   {
+    "t": "x delat med y är lika med 10 upphöjt till logaritmen av x delat med 10 upphöjt till logaritmen av y som är lika med 10 upphöjt till logaritmen av x minus logaritmen av y"
+   },
+   {
+    "t": "Sätt 2:"
+   },
+   {
+    "t": "x delat med y är lika med 10 upphöjt till logaritmen av x delat med y"
+   },
+   {
+    "t": "Eftersom dessa motsvarar samma sak, måste de vara lika, och eftersom vi har en likhet med samma bas, måste exponenterna vara lika, så"
+   },
+   {
+    "t": "logaritmen av x minus logaritmen av y är lika med logaritmen av x delat med y"
+   },
+   {
+    "t": "v.s.v."
+   },
+   {
+    "t": "Bevis — Tredje logaritmlagen"
+   },
+   {
+    "t": "Vi skriver x upphöjt till p på två olika sätt."
+   },
+   {
+    "t": "Sätt 1:"
+   },
+   {
+    "t": "x upphöjt till p är lika med parentesen 10 upphöjt till logaritmen av x slut parentes upphöjt till p som är lika med 10 upphöjt till p gånger logaritmen av x"
+   },
+   {
+    "t": "Sätt 2:"
+   },
+   {
+    "t": "x upphöjt till p är lika med 10 upphöjt till logaritmen av x upphöjt till p"
+   },
+   {
+    "t": "Eftersom dessa motsvarar samma sak, måste de vara lika, och eftersom vi har en likhet med samma bas, måste exponenterna vara lika, så"
+   },
+   {
+    "t": "p gånger logaritmen av x är lika med logaritmen av x upphöjt till p"
+   },
+   {
+    "t": "v.s.v."
+   },
+   {
+    "t": "Med den tredje logaritmlagen kan vi lösa exponentialekvationer på ytterligare ett sätt."
+   },
+   {
+    "t": "Lösa exponentialekvationer med tredje logaritmlagen"
+   },
+   {
+    "t": "Logaritmera båda led i ekvationen (sätt lg framför båda uttrycken)."
+   },
+   {
+    "t": "Multiplicera ner exponenten, enligt tredje logaritmlagen, och lös sedan som vanligt."
+   },
+   {
+    "t": "Vi kan nu även stöta på logaritmekvationer med flera logaritmtermer."
+   },
+   {
+    "t": "Lösa logaritmekvationer med flera logaritmtermer"
+   },
+   {
+    "t": "Skriv om båda led som en enda logaritm med hjälp av logaritmlagarna."
+   },
+   {
+    "t": "Logaritmfunktionen kan därefter strykas och vi löser ekvationen som vanligt."
+   },
+   {
+    "t": "Exempel 1 — Beräkna utan räknare"
+   },
+   {
+    "t": "Beräkna utan räknare. a) logaritmen av 25 plus logaritmen av 4 b) logaritmen av 3 000 minus logaritmen av 3"
+   },
+   {
+    "t": "a) Vi utnyttjar första logaritmlagen och får"
+   },
+   {
+    "t": "logaritmen av 25 plus logaritmen av 4 är lika med logaritmen av parentesen 25 gånger 4 slut parentes som är lika med logaritmen av 100 som är lika med 2"
+   },
+   {
+    "t": "Svar: 2"
+   },
+   {
+    "t": "b) Vi utnyttjar andra logaritmlagen och får"
+   },
+   {
+    "t": "logaritmen av 3 000 minus logaritmen av 3 är lika med logaritmen av 3 000 delat med 3 som är lika med logaritmen av 1 000 som är lika med 3"
+   },
+   {
+    "t": "Svar: 3"
+   },
+   {
+    "t": "Exempel 2 — Lös med tredje logaritmlagen"
+   },
+   {
+    "t": "Lös ekvationerna med tredje logaritmlagen.. a) 5 upphöjt till x är lika med 136 b) 4 gånger 5 upphöjt till x är lika med 3 gånger 2 upphöjt till x"
+   },
+   {
+    "t": "a) Vi logaritmerar båda led:"
+   },
+   {
+    "t": "logaritmen av 5 upphöjt till x är lika med logaritmen av 136"
+   },
+   {
+    "t": "Vi multiplicerar ner exponenten och löser sedan ekvationen som vanligt:"
+   },
+   {
+    "t": "x gånger logaritmen av 5 är lika med logaritmen av 136"
+   },
+   {
+    "t": "x är lika med logaritmen av 136 delat med logaritmen av 5 som är ungefär lika med 3,05"
+   },
+   {
+    "t": "Svar: x är lika med logaritmen av 136 delat med logaritmen av 5 som är ungefär lika med 3,05"
+   },
+   {
+    "t": "b) Vi samlar faktorerna med exponenter på samma sida för att därefter skriva om dem med en enda exponent."
+   },
+   {
+    "t": "Därefter logaritmerar vi och löser med tredje logaritmlagen."
+   },
+   {
+    "t": "5 upphöjt till x delat med 2 upphöjt till x är lika med 3 delat med 4"
+   },
+   {
+    "t": "parentesen 5 delat med 2 slut parentes upphöjt till x är lika med 3 delat med 4"
+   },
+   {
+    "t": "Vi logaritmerar båda led:"
+   },
+   {
+    "t": "logaritmen av parentesen 5 delat med 2 slut parentes upphöjt till x är lika med logaritmen av parentesen 3 delat med 4 slut parentes"
+   },
+   {
+    "t": "x gånger logaritmen av parentesen 5 delat med 2 slut parentes är lika med logaritmen av parentesen 3 delat med 4 slut parentes"
+   },
+   {
+    "t": "x är lika med logaritmen av parentesen 3 delat med 4 slut parentes delat med logaritmen av parentesen 5 delat med 2 slut parentes som är ungefär lika med minus 0,31"
+   },
+   {
+    "t": "Svar: x är lika med logaritmen av parentesen 3 delat med 4 slut parentes delat med logaritmen av parentesen 5 delat med 2 slut parentes som är ungefär lika med minus 0,31"
+   },
+   {
+    "t": "Exempel 3 — Flera logaritmtermer"
+   },
+   {
+    "t": "Lös ekvationen 2 logaritmen av 5 plus logaritmen av 4 är lika med logaritmen av 2 x ."
+   },
+   {
+    "t": "Vi börjar med att skriva om den första termen i VL med tredje logaritmlagen:"
+   },
+   {
+    "t": "logaritmen av 5 i kvadrat plus logaritmen av 4 är lika med logaritmen av 2 x"
+   },
+   {
+    "t": "logaritmen av 25 plus logaritmen av 4 är lika med logaritmen av 2 x"
+   },
+   {
+    "t": "Vi skriver sedan om hela VL med första logaritmlagen:"
+   },
+   {
+    "t": "logaritmen av parentesen 25 gånger 4 slut parentes är lika med logaritmen av 2 x"
+   },
+   {
+    "t": "logaritmen av 100 är lika med logaritmen av 2 x"
+   },
+   {
+    "t": "Vi har nu en enda logaritm i båda led och kan ta bort logaritmfunktionen från båda sidor och sedan lösa ekvationen som vanligt:"
+   },
+   {
+    "t": "100 är lika med 2 x"
+   },
+   {
+    "t": "x är lika med 50"
+   },
+   {
+    "t": "Svar: x är lika med 50"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-5.5",
+  "title": "Tillämpningar av logaritmer",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Tillämpningar av logaritmer"
+   },
+   {
+    "t": "Kom ihåg 1:"
+   },
+   {
+    "t": "Modell vid exponentiell förändring"
+   },
+   {
+    "t": "Vid tillämpningar där något förändras exponentiellt eller t.ex. med en viss procent varje år ställer vi upp en modell på formen"
+   },
+   {
+    "t": "y är lika med C gånger a upphöjt till x"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "y är lika med nya värdet"
+   },
+   {
+    "t": "C är lika med startvärdet"
+   },
+   {
+    "t": "a är lika med förändringsfaktorn"
+   },
+   {
+    "t": "x är lika med antalet förändringar (ofta tid)"
+   },
+   {
+    "t": "Kom ihåg 2:"
+   },
+   {
+    "t": "Lösa exponentialekvationer med tredje logaritmlagen"
+   },
+   {
+    "t": "Logaritmera båda led i ekvationen (sätt lg framför båda uttrycken)."
+   },
+   {
+    "t": "Multiplicera ner exponenten, enligt tredje logaritmlagen, och lös sedan som vanligt."
+   },
+   {
+    "t": "Exempel 1 — Sparkontot"
+   },
+   {
+    "t": "Du sätter in 10 000 kronor på ett konto med årsräntan 2,3 procent."
+   },
+   {
+    "t": "Hur lång tid tar det tills du har över 12 000 kronor på kontot?"
+   },
+   {
+    "t": "Vi har något som växer procentuellt/exponentiellt, så vi ställer upp formeln"
+   },
+   {
+    "t": "y är lika med C gånger a upphöjt till x"
+   },
+   {
+    "t": "I detta fall är"
+   },
+   {
+    "t": "y är lika med 12 000 (nya värdet)"
+   },
+   {
+    "t": "C är lika med 10 000 (startvärdet)"
+   },
+   {
+    "t": "a är lika med 1,023 (förändringsfaktorn som motsvarar en ökning med 2,3 procent)"
+   },
+   {
+    "t": "Insättning i formeln ovan ger"
+   },
+   {
+    "t": "12 000 är lika med 10 000 gånger 1,023 upphöjt till x"
+   },
+   {
+    "t": "Vi dividerar båda led med 10 000, logaritmerar och löser ekvationen:"
+   },
+   {
+    "t": "1,2 är lika med 1,023 upphöjt till x"
+   },
+   {
+    "t": "logaritmen av 1,2 är lika med logaritmen av 1,023 upphöjt till x"
+   },
+   {
+    "t": "logaritmen av 1,2 är lika med x gånger logaritmen av 1,023"
+   },
+   {
+    "t": "Division med lg 1,023 i båda led ger"
+   },
+   {
+    "t": "x är lika med logaritmen av 1,2 delat med logaritmen av 1,023 som är ungefär lika med 8,02"
+   },
+   {
+    "t": "Eftersom räntan betalas ut i slutet av varje år kommer inte beloppet att växa över 12 000 kronor förrän efter 9 år."
+   },
+   {
+    "t": "Svar: Efter 9 år."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-5.6",
+  "title": "Logaritmer med andra baser",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Logaritmer med andra baser"
+   },
+   {
+    "t": "Ekvationen 10 upphöjt till x är lika med 16 kan lösas med hjälp av \"10-logaritmen för 16\" som skrivs x är lika med logaritmen av 16 ."
+   },
+   {
+    "t": "På motsvarande sätt kan ekvationen 2 upphöjt till x är lika med 16 lösas med \"2-logaritmen för 16\" som skrivs x är lika med 2-logaritmen av 16 ."
+   },
+   {
+    "t": "Generella logaritmer"
+   },
+   {
+    "t": "Ekvationen a upphöjt till x är lika med b har lösningen"
+   },
+   {
+    "t": "x är lika med a-logaritmen av b"
+   },
+   {
+    "t": "De tidigare logaritmlagarna och sambanden gäller även för andra baser än 10."
+   },
+   {
+    "t": "På samma sätt som att 10 upphöjt till logaritmen av 3 är lika med 3 gäller att 7 upphöjt till 7-logaritmen av 3 är lika med 3 och 5 upphöjt till 5-logaritmen av 12 är lika med 12 och så vidare."
+   },
+   {
+    "t": "(\"10-logaritmen\" kan även skrivas 10-logaritmen , men eftersom den är så vanlig används det förkortade skrivsättet \"lg\".)"
+   },
+   {
+    "t": "Exempel 1 — Lös med generell logaritm"
+   },
+   {
+    "t": "Lös 3 upphöjt till x är lika med 25 ."
+   },
+   {
+    "t": "Enligt definitionen av generella logaritmer är lösningen \"3-logaritmen för 25\":"
+   },
+   {
+    "t": "x är lika med 3-logaritmen av 25"
+   },
+   {
+    "t": "Svar: x är lika med 3-logaritmen av 25"
+   },
+   {
+    "t": "Exempel 2 — Bestäm utan räknare"
+   },
+   {
+    "t": "Bestäm utan räknare. a) 2-logaritmen av 16 b) 3-logaritmen av 9"
+   },
+   {
+    "t": "a) 2-logaritmen av 16 kan tolkas \"vad 2 ska upphöjas till för att bli 16\"."
+   },
+   {
+    "t": "Då 2 upphöjt till 4 är lika med 16 gäller 2-logaritmen av 16 är lika med 4 ."
+   },
+   {
+    "t": "Svar: 4"
+   },
+   {
+    "t": "b) 3-logaritmen av 9 kan tolkas \"vad 3 ska upphöjas till för att bli 9\"."
+   },
+   {
+    "t": "Då 3 i kvadrat är lika med 9 gäller 3-logaritmen av 9 är lika med 2 ."
+   },
+   {
+    "t": "Svar: 2"
+   },
+   {
+    "t": "Exempel 3 — Skriv som en potens"
+   },
+   {
+    "t": "Skriv 24 som en potens med basen 3."
+   },
+   {
+    "t": "Talet som 3 ska upphöjas till för att bli 24 är (per definition) 3-logaritmen av 24 ."
+   },
+   {
+    "t": "Alltså gäller"
+   },
+   {
+    "t": "3 upphöjt till 3-logaritmen av 24 är lika med 24"
+   },
+   {
+    "t": "Svar: 3 upphöjt till 3-logaritmen av 24"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-6.1",
+  "title": "Lägesmått",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Lägesmått"
+   },
+   {
+    "t": "Ett sammanfattande värde för ett statistiskt material kallas lägesmått."
+   },
+   {
+    "t": "De vanligaste lägesmåtten är medelvärde, median och typvärde."
+   },
+   {
+    "t": "Medelvärde: Det vanligaste lägesmåttet."
+   },
+   {
+    "t": "Beräknas som summan dividerat med antalet."
+   },
+   {
+    "t": "Lämpligt att använda i de flesta fall."
+   },
+   {
+    "t": "Median: Värdet i mitten när de står i storleksordning."
+   },
+   {
+    "t": "Om två värden är i mitten är medianen medelvärdet av dessa."
+   },
+   {
+    "t": "Lämpligt vid sned fördelning, dvs. när enstaka värden sticker ut."
+   },
+   {
+    "t": "Typvärde: Det värde som förekommer flest gånger."
+   },
+   {
+    "t": "Kan användas även när datamängden inte är tal, t.ex. färger eller bilmärken."
+   },
+   {
+    "t": "Antalet av ett visst värde kallas frekvens."
+   },
+   {
+    "t": "Om t.ex. antalet 17-åringar i ett klassrum är 12 är 17-åringarnas frekvens 12."
+   },
+   {
+    "t": "Exempel 1 — Tre lägesmått"
+   },
+   {
+    "t": "Åldern på personerna i ett klassrum är 16, 17, 61, 16, 16, 18 och 17 år."
+   },
+   {
+    "t": "Bestäm. a) medelvärdet b) medianen c) typvärdet"
+   },
+   {
+    "t": "a)"
+   },
+   {
+    "t": "medelvärdet är lika med summan delat med antalet som är lika med 16 plus 17 plus 61 plus 16 plus 16 plus 18 plus 17 delat med 7 som är lika med 161 delat med 7 som är lika med 23"
+   },
+   {
+    "t": "Svar: 23 år"
+   },
+   {
+    "t": "b) Vi sorterar åldrarna i storleksordning, t.ex. minst först, och läser av talet i mitten:"
+   },
+   {
+    "t": "16, 16, 16, 17, 17, 18, 61"
+   },
+   {
+    "t": "Svar: 17 år"
+   },
+   {
+    "t": "c) Det är flest 16-åringar (3 stycken)."
+   },
+   {
+    "t": "16 är alltså den vanligast förekommande åldern."
+   },
+   {
+    "t": "Svar: 16 år"
+   },
+   {
+    "t": "Exempel 2 — Vilket lägesmått är lämpligast?"
+   },
+   {
+    "t": "Vilket lägesmått är lämpligast att använda i exemplet ovan: medelvärde eller median?"
+   },
+   {
+    "t": "Det beror på sammanhanget, men eftersom vi har ett utstickande värde (61-åringen) som drar upp medelvärdet till 23 år, så blir inte medelvärdet särskilt representativt för personerna i rummet (det finns ju inte en enda 20-åring där)."
+   },
+   {
+    "t": "Alltså kan medianen vara att föredra i detta fall."
+   },
+   {
+    "t": "Svar: Medianen"
+   },
+   {
+    "t": "Klasser och histogram"
+   },
+   {
+    "t": "I viss statistik har vi inte exakta värden utan indelning i intervall, i så kallade klasser."
+   },
+   {
+    "t": "Sådana klasser kan redovisas antingen i tabellform eller i diagramform som ett histogram med sammanhängande staplar."
+   },
+   {
+    "t": "I dessa fall räknar man med att alla värden i en klass har värdet i mitten av intervallet, vilket kallas klassmitt."
+   },
+   {
+    "t": "Klassen 300 är mindre än eller lika med x är mindre än 400 har t.ex. klassmitten 350."
+   },
+   {
+    "t": "Exempel 3 — Medelvärde ur klassindelat material"
+   },
+   {
+    "t": "Åldern hos personerna i ett rum åskådliggörs i en tabell med intervall och i ett histogram."
+   },
+   {
+    "t": "Beräkna medelåldern."
+   },
+   {
+    "t": "Intervallet 20 är mindre än eller lika med x är mindre än 30 har klassmitten 25 (vi räknar som att alla i intervallet har åldern 25 år), intervallet 30 är mindre än eller lika med x är mindre än 40 har klassmitten 35 (vi räknar som att alla i intervallet har åldern 35 år) och så vidare."
+   },
+   {
+    "t": "Detta ger oss"
+   },
+   {
+    "t": "medelvärdet är lika med summan delat med antalet"
+   },
+   {
+    "t": "är lika med 2 gånger 25 plus 4 gånger 35 plus 4 gånger 45 plus 5 gånger 55 plus 3 gånger 65 plus 1 gånger 75 plus 0 gånger 85 plus 1 gånger 95 delat med 2 plus 4 plus 4 plus 5 plus 3 plus 1 plus 0 plus 1 som är lika med 1 010 delat med 20 som är lika med 50,5 år"
+   },
+   {
+    "t": "Svar: 50,5 år"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-6.2",
+  "title": "Spridningsmått, lådagram och percentiler",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Spridningsmått, lådagram och percentiler"
+   },
+   {
+    "t": "Spridningsmått säger något om hur spridda värdena är hos en datamängd."
+   },
+   {
+    "t": "En stor variation bland värdena ger en större spridning och en liten variation ger en mindre spridning."
+   },
+   {
+    "t": "Det finns flera typer av spridningsmått."
+   },
+   {
+    "t": "Hur mycket det skiljer mellan det största och minsta värdet kallas variationsbredd."
+   },
+   {
+    "t": "Variationsbredd"
+   },
+   {
+    "t": "variationsbredd är lika med största värdet minus minsta värdet"
+   },
+   {
+    "t": "Ett annat sätt att åskådliggöra spridning utifrån en bild är lådagram."
+   },
+   {
+    "t": "I lådagram delar man in värdena i fyra lika stora delar och visar mellan vilka värden dessa ligger."
+   },
+   {
+    "t": "Varje del i lådagrammet innehåller alltså en fjärdedel av värdena."
+   },
+   {
+    "t": "Gränserna mellan varje fjärdedel kallas kvartiler."
+   },
+   {
+    "t": "För att få lådagrammet behöver man fem viktiga värden."
+   },
+   {
+    "t": "Till att börja med behöver man minsta värdet, medianen och största värdet."
+   },
+   {
+    "t": "Medianen delar värdena i två lika stora delar (50 procent)."
+   },
+   {
+    "t": "För att dela in det i fjärdedelar måste vi dela de undre värdena i två lika stora delar."
+   },
+   {
+    "t": "Talet som delar de undre värdena i två lika stora delar kallas nedre kvartil (eller första kvartil) och betecknas Q ett ."
+   },
+   {
+    "t": "På motsvarande sätt behövs ett värde för att dela de övre värdena i två lika stora delar och detta kallas övre kvartil (eller tredje kvartil) och betecknas Q tre ."
+   },
+   {
+    "t": "Medianen kallas ibland för den andra kvartilen och betecknas då Q två ."
+   },
+   {
+    "t": "Differensen (skillnaden) mellan övre kvartil och nedre kvartil motsvarar lådans bredd och kallas kvartilavstånd."
+   },
+   {
+    "t": "Kvartilavstånd"
+   },
+   {
+    "t": "kvartilavstånd är lika med övre kvartil minus nedre kvartil"
+   },
+   {
+    "t": "Eftersom varje del av lådan (\"vänster pinne\", \"vänstra lådan\", \"högra lådan\" och \"höger pinne\") innehåller lika många värden betyder det att ju större delen är desto större är spridningen i det området (ju mer spridda ligger värdena)."
+   },
+   {
+    "t": "Omvändningen gäller också: ju mindre delen är desto mindre är spridningen (ju mer samlade ligger värdena)."
+   },
+   {
+    "t": "Om man har ett större antal observationer kan man, istället för kvartiler (fjärdedelar), dela in det statistiska materialet i percentiler (hundradelar)."
+   },
+   {
+    "t": "Percentiler anger hur många procent som är lägre än ett visst värde. p åtta noll är t.ex. den 80:e percentilen och då är 80 procent av värdena mindre än detta värde och 20 procent av värdena större."
+   },
+   {
+    "t": "Percentiler beräknas i Geogebra (se exemplet nedan)."
+   },
+   {
+    "t": "Exempel 1 — Två middagar"
+   },
+   {
+    "t": "Adriana arrangerar två olika typer av middagar: en släktmiddag och en kompismiddag."
+   },
+   {
+    "t": "Åldrarna på deltagarna i respektive middag är:"
+   },
+   {
+    "t": "Släktmiddag: 1, 3, 4, 8, 15, 27, 30, 33, 36, 41, 42, 44, 46, 72, 72"
+   },
+   {
+    "t": "Kompismiddag: 28, 30, 31, 31, 32, 32, 33, 33, 34, 34, 34, 34, 35, 35, 36"
+   },
+   {
+    "t": "I b-uppgiften kommer vi att rita lådagrammen nedan över resultaten."
+   },
+   {
+    "t": "a) Bestäm för båda middagar medianen, variationsbredden, nedre och övre kvartil samt kvartilavståndet.. b) Rita ett lådagram över resultaten.. c) Bestäm utifrån lådagrammet hur stor andel som är över 8 år på släktmiddagen.. d) Hur gammal ska man vara för att tillhöra de 10 procent äldsta på släktmiddagen?"
+   },
+   {
+    "t": "a) Medianen är för båda middagarna 33 år (värdet i mitten)."
+   },
+   {
+    "t": "För att bestämma den nedre kvartilen, så bestämmer vi medianen till alla värden till vänster om medianen."
+   },
+   {
+    "t": "Den är 8 år (släktmiddag) och 31 år (kompismiddag)."
+   },
+   {
+    "t": "Den övre kvartilen är på motsvarande sätt medianen till alla värden till höger om medianen."
+   },
+   {
+    "t": "Den är 44 år (släktmiddag) och 34 år (kompismiddag)."
+   },
+   {
+    "t": "Variationsbredd s l ä k t är lika med 72 minus 1 som är lika med 71 år"
+   },
+   {
+    "t": "Variationsbredd k o m p i s är lika med 36 minus 28 som är lika med 8 år"
+   },
+   {
+    "t": "Kvartilavstånd s l ä k t är lika med 44 minus 8 som är lika med 36 år"
+   },
+   {
+    "t": "Kvartilavstånd k o m p i s är lika med 34 minus 31 som är lika med 3 år"
+   },
+   {
+    "t": "Svar: Släktmiddag: median är lika med 33 år, variationsbredd är lika med 71 år, nedre kvartil är lika med 8 år, övre kvartil är lika med 44 år och kvartilavstånd är lika med 36 år."
+   },
+   {
+    "t": "Kompismiddag: median är lika med 33 år, variationsbredd är lika med 8 år, nedre kvartil = 31 år, övre kvartil är lika med 34 år och kvartilavstånd är lika med 3 år."
+   },
+   {
+    "t": "b) Vi markerar största och minsta värdet med korta lodräta streck ovanför en tallinje."
+   },
+   {
+    "t": "Därefter markerar vi medianen samt nedre och övre kvartil med längre lodräta streck."
+   },
+   {
+    "t": "Därefter förbinder vi de längre lodräta strecken och bildar lådagrammen — se figuren ovan."
+   },
+   {
+    "t": "OBS!"
+   },
+   {
+    "t": "Lägg märke till hur den lilla spridningen vid kompismiddagen ger små delar i lådagrammet, jämfört med lådagrammet för släktmiddagen."
+   },
+   {
+    "t": "c) Vi ska bestämma hur många procent som är äldre än 8 år utifrån lådagrammet för släktmiddagen ovan."
+   },
+   {
+    "t": "Eftersom varje del i lådagrammet innehåller 25 procent — och 8 år är den nedre kvartilen — betyder det att de tre delarna till höger om 8 år tillsammans innehåller 75 procent."
+   },
+   {
+    "t": "Svar: 75 procent"
+   },
+   {
+    "t": "d) För att tillhöra de 10 procent äldsta ska man ligga över den 90:e percentilen, p nio noll ."
+   },
+   {
+    "t": "Vi beräknar p nio noll med Geogebra: skriv in alla värden i kalkylbladet, markera dem och välj \"Skapa lista\" (standardnamn l1)."
+   },
+   {
+    "t": "Skriv sedan Percentil(l1, 90 procent) i inmatningsfältet."
+   },
+   {
+    "t": "Geogebra svarar 72."
+   },
+   {
+    "t": "Svar: 72 år"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-6.3",
+  "title": "Statistik med digitala verktyg",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Statistik med digitala verktyg"
+   },
+   {
+    "t": "Vid stora mängder data underlättar det att beräkna statistiska mått med digitala hjälpmedel."
+   },
+   {
+    "t": "För att ta fram statistiska mått så skriver vi in våra värden i en kolumn i Geogebras kalkylblad."
+   },
+   {
+    "t": "Därefter markerar vi värdena, klickar på menyn \"blå staplar\", väljer Envariabelanalys och sedan knappen \"Visa statistik\"."
+   },
+   {
+    "t": "Användbara statistiska värden i Geogebra"
+   },
+   {
+    "t": "Med Geogebra kan vi även bestämma percentiler och rita lådagram, se exemplet nedan."
+   },
+   {
+    "t": "Exempel 1 — Släktmiddagen i Geogebra"
+   },
+   {
+    "t": "På en släktmiddag är åldrarna 1, 3, 4, 8, 15, 27, 30, 33, 36, 41, 42, 44, 46, 72 och 72 år."
+   },
+   {
+    "t": "Använd ett digitalt verktyg för att. a) bestämma minsta värdet, nedre kvartil, median, övre kvartil och största värdet b) avgöra hur gammal man ska vara för att tillhöra de 10 procent äldsta c) rita ett lådagram över åldrarna"
+   },
+   {
+    "t": "a) Vi startar Geogebra, klickar på knappen \"Växla till kalkylblad\" i den översta menyraden och skriver in värdena i den vänstra kolumnen."
+   },
+   {
+    "t": "Vi markerar värdena, klickar på menyn \"blå staplar\" och väljer Envariabelanalys."
+   },
+   {
+    "t": "Vi klickar på knappen \"Visa statistik\" och läser av de efterfrågade värdena."
+   },
+   {
+    "t": "Svar: Minsta värde är lika med 1, nedre kvartil är lika med 8, median är lika med 33, övre kvartil är lika med 44 och största värde är lika med 72."
+   },
+   {
+    "t": "b) För att tillhöra de 10 procent äldsta ska man ligga över den 90:e percentilen, p nio noll (90 procent ska ha en lägre ålder)."
+   },
+   {
+    "t": "Markera alla värden i kalkylbladet och klicka på \"Skapa lista\"."
+   },
+   {
+    "t": "Standardnamnet är l1, men du kan ge listan ett eget namn."
+   },
+   {
+    "t": "Välj sedan OK."
+   },
+   {
+    "t": "Växla sedan tillbaka till standardläge i den övre menyraden."
+   },
+   {
+    "t": "Skriv \"perc\" i inmatningsfältet och klicka på \"Percentil( , )\"."
+   },
+   {
+    "t": "Skriv därefter \"l1\" eller det namn du själv gett listan."
+   },
+   {
+    "t": "Stega ett steg åt höger med piltangenterna och skriv \"90 procent\" (eller \"0.9\") för att få svaret."
+   },
+   {
+    "t": "Geogebra svarar 72."
+   },
+   {
+    "t": "Svar: 72 år"
+   },
+   {
+    "t": "c) Vi ska nu rita ett lådagram."
+   },
+   {
+    "t": "Markera alla värden i kalkylbladet, klicka på menyn \"blå staplar\" och välj Envariabelanalys."
+   },
+   {
+    "t": "I rullistan där det står \"Histogram\" väljer du \"Boxplot (Lådagram)\"."
+   },
+   {
+    "t": "Om du vill modifiera lådagrammets utseende eller t.ex. lättare läsa av det mot axlarna kan du med fördel kopiera det till ritområdet."
+   },
+   {
+    "t": "Växla därefter till standardläget och justera vid behov axlarna med verktyget Flytta ritområdet."
+   },
+   {
+    "t": "Där kan du även justera utseendet (färg, linjetjocklek med mera)."
+   },
+   {
+    "t": "Exempel 2 — Frekvenstabell i Geogebra"
+   },
+   {
+    "t": "Antalet syskon som varje elev hade på en skola med 177 elever undersöktes."
+   },
+   {
+    "t": "Bestäm medelvärdet för antalet syskon utifrån nedanstående frekvenstabell."
+   },
+   {
+    "t": "För att slippa skriva in 177 separata värden i ett kalkylblad (eller i formeln för medelvärde), så kan vi i Geogebras kalkylblad skriva in frekvenserna i en extra kolumn till höger, dvs. så som de står i tabellen ovan."
+   },
+   {
+    "t": "Markera alla värden i båda kolumner, klicka på \"blå staplar\" och välj Envariabelanalys."
+   },
+   {
+    "t": "Klicka därefter på knappen \"Visa statistik\" och läs av medelvärdet i tabellen: Medel är ungefär lika med 1,7966."
+   },
+   {
+    "t": "Svar: Medelvärdet är ca 1,8 syskon."
+   }
+  ]
+ },
+ {
+  "id": "ma2c-6.4",
+  "title": "Standardavvikelse",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Standardavvikelse"
+   },
+   {
+    "t": "Variationsbredd och lådagram är två exempel på spridningsmått, dvs. två sätt att beskriva spridning."
+   },
+   {
+    "t": "Ett tredje spridningsmått är standardavvikelse."
+   },
+   {
+    "t": "Hur mycket mätvärdena i en datamängd i genomsnitt avviker från datamängdens medelvärde kallas standardavvikelse och anges med ett tal."
+   },
+   {
+    "t": "Ju större standardavvikelse desto större spridning."
+   },
+   {
+    "t": "Ju mindre standardavvikelse desto mindre spridning."
+   },
+   {
+    "t": "Om vi inte har någon spridning alls är standardavvikelsen 0."
+   },
+   {
+    "t": "Standardavvikelsen beräknas på två olika sätt, beroende på om vi har en totalundersökning (alla i populationen undersöks) eller en stickprovsundersökning (en del av populationen undersöks)."
+   },
+   {
+    "t": "Vid en totalundersökning betecknas standardavvikelsen sigma (lilla sigma) och vid en stickprovsundersökning betecknas standardavvikelsen s ."
+   },
+   {
+    "t": "I den här kursen räcker det att vi kan beräkna standardavvikelsen med ett digitalt verktyg, se exemplet längre fram."
+   },
+   {
+    "t": "För förståelsens skull tittar vi först på ett enkelt exempel utifrån två datamängder."
+   },
+   {
+    "t": "Datamängd 1: 16, 17, 17, 17, 18 (liten spridning)"
+   },
+   {
+    "t": "Datamängd 2: 2, 4, 12, 24, 43 (stor spridning)"
+   },
+   {
+    "t": "Medelvärdet för båda dessa datamängder är 17:"
+   },
+   {
+    "t": "Medelvärde för datamängd 1 är lika med 16 plus 17 plus 17 plus 17 plus 18 delat med 5 som är lika med 17"
+   },
+   {
+    "t": "Medelvärde för datamängd 2 är lika med 2 plus 4 plus 12 plus 24 plus 43 delat med 5 som är lika med 17"
+   },
+   {
+    "t": "Avvikelserna från medelvärdet fås genom att ta varje mätvärde minus medelvärdet."
+   },
+   {
+    "t": "Medelvärdet skrivs ibland bar x ."
+   },
+   {
+    "t": "Så bar x är lika med 17 ."
+   },
+   {
+    "t": "Vi ser att avvikelserna för datamängd 1 är små."
+   },
+   {
+    "t": "De skiljer sig som minst 0 och som mest 1."
+   },
+   {
+    "t": "Så standardavvikelsen (medelvärdet för avvikelserna) för datamängd 1 kommer att bli ett tal mellan 0 och 1."
+   },
+   {
+    "t": "Avvikelserna för datamängd 2 är större."
+   },
+   {
+    "t": "De skiljer sig som minst 5 och som mest 26."
+   },
+   {
+    "t": "Så standardavvikelsen för datamängd 2 kommer att bli ett tal någonstans mellan 5 och 26, alltså större än för datamängd 1."
+   },
+   {
+    "t": "Varför ser formeln ut som den gör?"
+   },
+   {
+    "t": "Förklaringen att standardavvikelsen är medelvärdet av avvikelserna är något förenklad."
+   },
+   {
+    "t": "För att få standardavvikelsen ska avvikelserna dessutom kvadreras och när de har summerats och dividerats med antalet värden ska kvadratroten ur kvoten dras."
+   },
+   {
+    "t": "Detta ingår inte i kursen, men det kan ändå vara intressant att veta vad det är som våra digitala hjälpmedel gör."
+   },
+   {
+    "t": "Standardavvikelse för totalundersökning:"
+   },
+   {
+    "t": "sigma är lika med roten ur parentesen x ett minus bar x slut parentes i kvadrat plus parentesen x två minus bar x slut parentes i kvadrat plus plus parentesen x n minus bar x slut parentes i kvadrat delat med n"
+   },
+   {
+    "t": "Standardavvikelse för stickprov:"
+   },
+   {
+    "t": "s är lika med roten ur parentesen x ett minus bar x slut parentes i kvadrat plus parentesen x två minus bar x slut parentes i kvadrat plus plus parentesen x n minus bar x slut parentes i kvadrat delat med n minus 1"
+   },
+   {
+    "t": "Exempel 1 — Standardavvikelse i Geogebra"
+   },
+   {
+    "t": "Beräkna standardavvikelsen för mätvärdena 2, 4, 12, 24 och 43."
+   },
+   {
+    "t": "Vi startar Geogebra, klickar på knappen \"Växla till kalkylblad\" i den översta menyraden och skriver in värdena i den vänstra kolumnen."
+   },
+   {
+    "t": "Vi markerar därefter alla värden, klickar på menyn \"blå staplar\" och väljer Envariabelanalys."
+   },
+   {
+    "t": "Klicka på knappen \"Visa statistik\" för att få fram statistiska data."
+   },
+   {
+    "t": "Eftersom det inte framgår i uppgiften att det är en stickprovsundersökning, så förutsätter vi att det är en totalundersökning."
+   },
+   {
+    "t": "Vi avläser standardavvikelsen vid sigma och avrundar: sigma är lika med 15,126 som är ungefär lika med 15,1 ."
+   },
+   {
+    "t": "Svar: 15,1"
+   },
+   {
+    "t": "(Om det hade varit ett stickprov hade vi avläst standardavvikelsen vid s och svarat 16,9.)"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-6.5",
+  "title": "Normalfördelning",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Normalfördelning"
+   },
+   {
+    "t": "Mycket statistiskt material fördelas jämnt kring medelvärdet."
+   },
+   {
+    "t": "En sådan fördelning kallas normalfördelning."
+   },
+   {
+    "t": "I ett normalfördelat material fördelas värdena med samma procentsatser inom vissa givna intervall som bygger på medelvärdet my och standardavvikelsen sigma , enligt nedanstående normalfördelningskurva:"
+   },
+   {
+    "t": "där my är lika med medelvärde och sigma är lika med standardavvikelse."
+   },
+   {
+    "t": "Om man ska bestämma andelar som inte ligger vid jämna standardavvikelser får man ta hjälp av digitala verktyg, t.ex. Geogebra."
+   },
+   {
+    "t": "För att beräkna procentsatser vid normalfördelningar i Geogebra klickar vi på knappen \"Växla till sannolikhetskalkylator\", fyller i medelvärde ( my ) och standardavvikelse ( sigma ), klickar på den knapp som motsvarar det intervall vi är intresserade av och fyller i värdena."
+   },
+   {
+    "t": "Hur hög normalfördelningskurvan blir beror på spridningen."
+   },
+   {
+    "t": "Vid liten spridning ligger värdena samlade och kurvan blir högre och smalare."
+   },
+   {
+    "t": "Vid stor spridning ligger värdena mer utspridda och kurvan blir lägre och bredare."
+   },
+   {
+    "t": "Exempel 1 — Längden hos vuxna män"
+   },
+   {
+    "t": "Anta att längden hos vuxna män är normalfördelad med medellängden 181 centimeter och standardavvikelsen 8 centimeter."
+   },
+   {
+    "t": "Vi ritar en normalfördelningskurva och fyller i värdena."
+   },
+   {
+    "t": "Rakt under toppen skriver vi in medelvärdet 181."
+   },
+   {
+    "t": "I nästa steg åt höger skriver vi in \"medelvärdet + en standardavvikelse\", alltså 181 plus 8 är lika med 189 ."
+   },
+   {
+    "t": "Ytterligare ett steg åt höger skriver vi in \"medelvärdet + två standardavvikelser\", alltså 181 plus 8 plus 8 är lika med 197 ."
+   },
+   {
+    "t": "Ett steg åt vänster från medelvärdet skriver vi in \"medelvärdet − en standardavvikelse\" är lika med 181 minus 8 är lika med 173 ."
+   },
+   {
+    "t": "Och till sist, vid ytterligare ett steg åt vänster skriver vi in \"medelvärdet − två standardavvikelser\" är lika med 181 minus 8 minus 8 är lika med 165 ."
+   },
+   {
+    "t": "Vi markerar området mellan 173 centimeter och 189 centimeter och jämför med normalfördelningskurvan:"
+   },
+   {
+    "t": "Hur stor andel är. a) mellan 173 centimeter och 189 centimeter? b) längre än 197 centimeter?"
+   },
+   {
+    "t": "a) Vi ser då att mellan 173 centimeter och 181 centimeter ligger 34,1 procent."
+   },
+   {
+    "t": "Mellan 181 centimeter och 189 centimeter ligger också 34,1 procent."
+   },
+   {
+    "t": "Mellan 173 centimeter och 189 centimeter ligger alltså"
+   },
+   {
+    "t": "34,1 procent plus 34,1 procent är lika med 68,2 procent"
+   },
+   {
+    "t": "Svar: 68,2 procent"
+   },
+   {
+    "t": "b) Vi markerar området över 197 centimeter och jämför med normalfördelningskurvan."
+   },
+   {
+    "t": "197 centimeter motsvarar \"medelvärdet + två standardavvikelser\" och över detta ligger 2,3 procent."
+   },
+   {
+    "t": "Svar: 2,3 procent"
+   },
+   {
+    "t": "Exempel 2 — Längden hos vuxna kvinnor (Geogebra)"
+   },
+   {
+    "t": "Vuxna kvinnor har medellängden 165,5 centimeter med standardavvikelsen 6,15 centimeter."
+   },
+   {
+    "t": "Hur. a) stor andel av kvinnorna är mellan 160 och 170 centimeter? b) lång ska en kvinna vara för att vara längre än 99 procent av alla kvinnor?"
+   },
+   {
+    "t": "a) Vi löser uppgiften med Geogebra."
+   },
+   {
+    "t": "Klicka på knappen \"Växla till sannolikhetskalkylator\" i menyraden överst."
+   },
+   {
+    "t": "Vi skriver in medelvärdet 165,5 vid my och standardavvikelsen 6,15 vid sigma ."
+   },
+   {
+    "t": "OBS!"
+   },
+   {
+    "t": "Tänk på att decimaltal skrivs med punkt i stället för komma: 165,5 ger 165.5."
+   },
+   {
+    "t": "Vi har nu ett \"slutet intervall\" mellan 160 till 170 centimeter som vi skriver in i fälten: P av 160 är mindre än eller lika med X är mindre än eller lika med 170 är lika med 0,582"
+   },
+   {
+    "t": "Vi ser att andelen är ca 0,58 är lika med 58 procent, samtidigt som området markeras i normalfördelningskurvan."
+   },
+   {
+    "t": "Lämplig redovisning: \" my är lika med 165,5 och sigma är lika med 6,15 i GG [Geogebra] med intervallet 160 är mindre än eller lika med x är mindre än eller lika med 170 ger 58 procent.\""
+   },
+   {
+    "t": "Svar: 58 procent"
+   },
+   {
+    "t": "b) Vi skriver in medelvärde och standardavvikelse precis som i a-uppgiften."
+   },
+   {
+    "t": "Vi vill ta reda på vilken längd 99 procent är MINDRE ÄN."
+   },
+   {
+    "t": "Då har vi ett så kallat \"halvöppet intervall\" som ska vara mindre än ett visst värde — vi klickar på knappen \"öppet åt vänster\"."
+   },
+   {
+    "t": "Vilket värdet är vet vi inte, men vi vill att andelen ska vara 99 procent är lika med 0,99."
+   },
+   {
+    "t": "Vi skriver in 0,99 i fältet för andel: P av X är mindre än eller lika med 179,807 är lika med 0,99 ."
+   },
+   {
+    "t": "Vi ser att längden där detta gäller är ca 180 centimeter."
+   },
+   {
+    "t": "Lämplig redovisning: \" my är lika med 165,5 och sigma är lika med 6,15 i GG med andelen 0,99 som undre gräns ger 180 centimeter.\""
+   },
+   {
+    "t": "Svar: 180 centimeter"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-6.6",
+  "title": "Linjär regression",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Linjär regression"
+   },
+   {
+    "t": "Repetition från Matematik 1c"
+   },
+   {
+    "t": "Om ett samband finns mellan två variabler har vi en korrelation."
+   },
+   {
+    "t": "Huruvida ett samband finns, kan undersökas med ett spridningsdiagram."
+   },
+   {
+    "t": "Om punkterna i ett spridningsdiagram ligger tydligt på en linje är korrelationen stark."
+   },
+   {
+    "t": "Om punkterna ligger kring en rät linje, men spridda är korrelationen svag."
+   },
+   {
+    "t": "Om punkterna ligger kring en linje med positiv lutning är korrelationen positiv."
+   },
+   {
+    "t": "Om punkterna ligger kring en linje med negativ lutning är korrelationen negativ."
+   },
+   {
+    "t": "Linjen som värdena ligger samlade kring kallas regressionslinje."
+   },
+   {
+    "t": "Om vi tar fram ekvationen för regressionslinjen gör vi en linjär regression."
+   },
+   {
+    "t": "En regressionsanalys går att göra ungefärligt för hand eller exaktare med digitala verktyg."
+   },
+   {
+    "t": "Vid regressionsanalysen kan vi ta fram ett värde som säger hur stark korrelationen är."
+   },
+   {
+    "t": "Detta värde kallas korrelationskoefficient, betecknas r och är alltid ett värde mellan −1 och 1."
+   },
+   {
+    "t": "Om punkterna ligger perfekt på en linje med positiv lutning är r är lika med 1 ."
+   },
+   {
+    "t": "Om punkterna ligger perfekt på en linje med negativ lutning är r är lika med minus 1 ."
+   },
+   {
+    "t": "Om ingen korrelation finns alls är r är lika med 0 ."
+   },
+   {
+    "t": "Se exemplen nedan."
+   },
+   {
+    "t": "Exempel på samband: fotlängd/skostorlek har stark positiv korrelation, vägbredd/antal olyckor kan ha svag negativ korrelation och äggkonsumtion/kriminalitet har ingen korrelation."
+   },
+   {
+    "t": "Exempel 1 — Glassförsäljningen"
+   },
+   {
+    "t": "Medeltemperaturen och ett företags försäljning av glass under en vecka visas nedan."
+   },
+   {
+    "t": "Spridningsdiagrammet och regressionslinjen som tas fram i a- och b-uppgifterna visas i figuren nedan."
+   },
+   {
+    "t": "a) Rita ett spridningsdiagram över resultatet."
+   },
+   {
+    "t": "Låt medeltemperaturen vara på x-axeln och glassförsäljningen på y-axeln.. b) Bestäm ekvationen för regressionslinjen.. c) Bestäm korrelationskoefficienten.. d) Uppskatta glassförsäljningen en vecka där medeltemperaturen är 30 grader Celsius utifrån din modell."
+   },
+   {
+    "t": "a) Starta Geogebra, växla till kalkylblad och skriv av värdena från tabellen."
+   },
+   {
+    "t": "Markera värdena, klicka på \"blå staplarna\", välj Tvåvariabels regressionsanalys och vårt spridningsdiagram visas."
+   },
+   {
+    "t": "b) Efter att ha tagit fram spridningsdiagrammet klickar vi på rullistan \"Regressionsmodell\" och väljer \"Linjär\"."
+   },
+   {
+    "t": "Regressionslinjen ritas upp (den röda linjen i figuren) och ekvationen för den visas under diagrammet: y är lika med 268,6652 x plus 2 496,1775 ."
+   },
+   {
+    "t": "Vi avrundar värdena i ekvationen till lämpligt antal värdesiffror."
+   },
+   {
+    "t": "Svar: y är ungefär lika med 270 x plus 2 500"
+   },
+   {
+    "t": "(Givetvis går det bra att rita spridningsdiagrammet, rita regressionslinjen och ta fram ekvationen för hand, men det tar mycket längre tid och blir mindre exakt.)"
+   },
+   {
+    "t": "c) Efter att ha tagit fram spridningsdiagrammet klickar vi på \"Visa statistik\", läser av r och avrundar till två decimaler: r är lika med 0,9651"
+   },
+   {
+    "t": "Svar: r är ungefär lika med 0,97"
+   },
+   {
+    "t": "d) Från b-uppgiften fick vi fram sambandet y är lika med 270 x plus 2 500 där x är medeltemperaturen i °C och y försäljningen i kronor."
+   },
+   {
+    "t": "Om medeltemperaturen är 30 grader Celsius sätter vi in x är lika med 30 i formeln ovan för att få fram den förväntade försäljningen:"
+   },
+   {
+    "t": "y är lika med 270 gånger 30 plus 2 500 som är lika med 10 600"
+   },
+   {
+    "t": "Svar: 10 600 kronor"
+   }
+  ]
+ },
+ {
+  "id": "ma2c-6.7",
+  "title": "Olika regressionsmodeller",
+  "course": "Matematik nivå 2c",
+  "segments": [
+   {
+    "t": "Olika regressionsmodeller"
+   },
+   {
+    "t": "I förra genomgången såg vi hur vi kunde ta fram ett linjärt samband genom att anpassa en rät linje efter punkter."
+   },
+   {
+    "t": "Det finns andra samband som inte är linjära och vi kan ta fram många av dessa på liknande sätt."
+   },
+   {
+    "t": "För att veta vilken modell som passar bäst utifrån givna punkter kan det vara bra att känna till några kännetecken för utseendet hos olika funktioner."
+   },
+   {
+    "t": "Ibland är det svårt att avgöra vilken modell som passar bäst. Det kan t.ex. vara svårt att se om punkterna anpassas bäst av en exponential- eller en potensfunktion."
+   },
+   {
+    "t": "Potens- och polynomfunktioner kan vara ännu svårare att skilja åt eftersom de dessutom ibland kan sammanfalla ( y är lika med x i kvadrat är både en potensfunktion och en polynomfunktion)."
+   },
+   {
+    "t": "För att avgöra vilken kurvanpassning som är bäst kan vi utnyttja korrelationskoefficientens kvadrat, r i kvadrat . r i kvadrat -värdet ligger mellan 0 (ingen korrelation alls) och 1 (perfekt korrelation)."
+   },
+   {
+    "t": "Så ju närmare 1 som r i kvadrat -värdet ligger desto bättre anpassad är kurvan."
+   },
+   {
+    "t": "För att ta fram r i kvadrat -värdet matar vi, som vanligt, in värdena i Geogebras kalkylblad, klickar på knappen \"Visa statistik\" och läser av r i kvadrat -värdet i tabellen."
+   },
+   {
+    "t": "Exempel 1 — Världens befolkning"
+   },
+   {
+    "t": "Världens befolkning vid några olika årtal redovisas i tabellen nedan."
+   },
+   {
+    "t": "Skapa ett spridningsdiagram och ta fram en regressionsmodell som är. a) linjär b) exponentiell c) Vilken av modellerna beskriver sambandet bäst?"
+   },
+   {
+    "t": "a) Vi matar in värdena i Geogebras kalkylblad (tänk på att decimaltal skrivs med punkt), markerar värdena, klickar på \"blå staplar\" och väljer Tvåvariabels regressionsanalys."
+   },
+   {
+    "t": "Ett spridningsdiagram erhålls."
+   },
+   {
+    "t": "Vi väljer regressionsmodell Linjär och läser av ekvationen: y är lika med 0,0612 x minus 116,3385 ."
+   },
+   {
+    "t": "Svar: y är lika med 0,061 x minus 120"
+   },
+   {
+    "t": "b) Vi skiftar regressionsmodell i rullistan till Exponentiell C·aˣ och läser av ekvationen."
+   },
+   {
+    "t": "Svar: y är lika med 0 gånger 1,0153 upphöjt till x"
+   },
+   {
+    "t": "(Startvärdet C är lika med 0 i modellen är orealistiskt, men Geogebra skriver inte ut alla decimaler för tal nära 0.)"
+   },
+   {
+    "t": "c) För att avgöra vilken av modellerna som beskriver sambandet bäst tittar vi på vilken kurva som ligger bäst anpassad efter punkterna."
+   },
+   {
+    "t": "I detta fall är det lätt att se att exponentialfunktionen passar punkterna bättre och därmed är bäst."
+   },
+   {
+    "t": "Om vi vill vara säkra kan vi jämföra modellernas r i kvadrat -värden."
+   },
+   {
+    "t": "Vi klickar på knappen \"Visa statistik\" och läser av vid R i kvadrat för respektive modell:"
+   },
+   {
+    "t": "Linjär: r i kvadrat är lika med 0,954"
+   },
+   {
+    "t": "Exponentiell: r i kvadrat är lika med 0,9933"
+   },
+   {
+    "t": "Eftersom r i kvadrat -värdet ligger närmast 1 för exponentialfunktionen är denna bäst."
+   },
+   {
+    "t": "Svar: Exponentiella modellen är bäst."
    }
   ]
  }

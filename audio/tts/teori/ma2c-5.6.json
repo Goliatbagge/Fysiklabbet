@@ -1,0 +1,148 @@
+{
+ "id": "ma2c-5.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d336f30a650d91f073d3b8f9e925c014a698cffe",
+ "dur": 147.22,
+ "segments": [
+  {
+   "t": "Logaritmer med andra baser",
+   "s": 0.1,
+   "e": 2.99
+  },
+  {
+   "t": "Ekvationen 10 upphöjt till x är lika med 16 kan lösas med hjälp av \"10-logaritmen för 16\" som skrivs x är lika med logaritmen av 16 .",
+   "s": 2.94,
+   "e": 12.69
+  },
+  {
+   "t": "På motsvarande sätt kan ekvationen 2 upphöjt till x är lika med 16 lösas med \"2-logaritmen för 16\" som skrivs x är lika med 2-logaritmen av 16 .",
+   "s": 12.69,
+   "e": 23.12
+  },
+  {
+   "t": "Generella logaritmer",
+   "s": 23.12,
+   "e": 25.62
+  },
+  {
+   "t": "Ekvationen a upphöjt till x är lika med b har lösningen",
+   "s": 25.62,
+   "e": 30.26
+  },
+  {
+   "t": "x är lika med a-logaritmen av b",
+   "s": 30.26,
+   "e": 33.81
+  },
+  {
+   "t": "De tidigare logaritmlagarna och sambanden gäller även för andra baser än 10.",
+   "s": 33.81,
+   "e": 39.6
+  },
+  {
+   "t": "På samma sätt som att 10 upphöjt till logaritmen av 3 är lika med 3 gäller att 7 upphöjt till 7-logaritmen av 3 är lika med 3 och 5 upphöjt till 5-logaritmen av 12 är lika med 12 och så vidare.",
+   "s": 39.6,
+   "e": 51.31
+  },
+  {
+   "t": "(\"10-logaritmen\" kan även skrivas 10-logaritmen , men eftersom den är så vanlig används det förkortade skrivsättet \"lg\".)",
+   "s": 51.31,
+   "e": 59.56
+  },
+  {
+   "t": "Exempel 1 — Lös med generell logaritm",
+   "s": 59.56,
+   "e": 63.66
+  },
+  {
+   "t": "Lös 3 upphöjt till x är lika med 25 .",
+   "s": 63.66,
+   "e": 67.79
+  },
+  {
+   "t": "Enligt definitionen av generella logaritmer är lösningen \"3-logaritmen för 25\":",
+   "s": 67.79,
+   "e": 76.58
+  },
+  {
+   "t": "x är lika med 3-logaritmen av 25",
+   "s": 67.79,
+   "e": 76.58
+  },
+  {
+   "t": "Svar: x är lika med 3-logaritmen av 25",
+   "s": 76.58,
+   "e": 81.26
+  },
+  {
+   "t": "Exempel 2 — Bestäm utan räknare",
+   "s": 81.26,
+   "e": 84.76
+  },
+  {
+   "t": "Bestäm utan räknare. a) 2-logaritmen av 16 b) 3-logaritmen av 9",
+   "s": 84.76,
+   "e": 92.84
+  },
+  {
+   "t": "a) 2-logaritmen av 16 kan tolkas \"vad 2 ska upphöjas till för att bli 16\".",
+   "s": 92.84,
+   "e": 99.35
+  },
+  {
+   "t": "Då 2 upphöjt till 4 är lika med 16 gäller 2-logaritmen av 16 är lika med 4 .",
+   "s": 99.35,
+   "e": 106.05
+  },
+  {
+   "t": "Svar: 4",
+   "s": 106.05,
+   "e": 113.22
+  },
+  {
+   "t": "b) 3-logaritmen av 9 kan tolkas \"vad 3 ska upphöjas till för att bli 9\".",
+   "s": 106.05,
+   "e": 113.22
+  },
+  {
+   "t": "Då 3 i kvadrat är lika med 9 gäller 3-logaritmen av 9 är lika med 2 .",
+   "s": 113.22,
+   "e": 119.41
+  },
+  {
+   "t": "Svar: 2",
+   "s": 119.41,
+   "e": 123.92
+  },
+  {
+   "t": "Exempel 3 — Skriv som en potens",
+   "s": 119.41,
+   "e": 123.92
+  },
+  {
+   "t": "Skriv 24 som en potens med basen 3.",
+   "s": 123.92,
+   "e": 128.01
+  },
+  {
+   "t": "Talet som 3 ska upphöjas till för att bli 24 är (per definition) 3-logaritmen av 24 .",
+   "s": 128.01,
+   "e": 135.2
+  },
+  {
+   "t": "Alltså gäller",
+   "s": 135.2,
+   "e": 137.22
+  },
+  {
+   "t": "3 upphöjt till 3-logaritmen av 24 är lika med 24",
+   "s": 137.22,
+   "e": 142.51
+  },
+  {
+   "t": "Svar: 3 upphöjt till 3-logaritmen av 24",
+   "s": 142.51,
+   "e": 147.22
+  }
+ ]
+}

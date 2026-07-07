@@ -1,0 +1,193 @@
+{
+ "id": "ma2c-4.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0d9ece22045b84127ffc1dca5717876fc97b78b5",
+ "dur": 285.39,
+ "segments": [
+  {
+   "t": "Koordinatgeometri",
+   "s": 0.1,
+   "e": 2.76
+  },
+  {
+   "t": "Att studera geometriska figurer genom att använda ett koordinatsystem kallas koordinatgeometri.",
+   "s": 2.71,
+   "e": 9.24
+  },
+  {
+   "t": "Avståndet mellan två punkter i ett koordinatsystem kan bestämmas med avståndsformeln.",
+   "s": 9.24,
+   "e": 15.25
+  },
+  {
+   "t": "Avståndsformeln",
+   "s": 15.25,
+   "e": 17.51
+  },
+  {
+   "t": "d är lika med roten ur parentesen x två minus x ett slut parentes i kvadrat plus parentesen y två minus y ett slut parentes i kvadrat",
+   "s": 17.51,
+   "e": 27.93
+  },
+  {
+   "t": "där d är avståndet mellan punkterna parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes .",
+   "s": 27.93,
+   "e": 37.41
+  },
+  {
+   "t": "Härledning — Avståndsformeln",
+   "s": 37.41,
+   "e": 40.35
+  },
+  {
+   "t": "Vi bestämmer avståndet d mellan två punkter genom att bilda en rätvinklig triangel och använda Pythagoras sats enligt figuren nedan.",
+   "s": 40.35,
+   "e": 49.24
+  },
+  {
+   "t": "Exempel: Triangelns vågräta katet är sträckan mellan x är lika med minus 4 och x är lika med 5 .",
+   "s": 49.24,
+   "e": 56.83
+  },
+  {
+   "t": "Den kan beräknas som 5 minus parentesen minus 4 slut parentes är lika med 9 längdenheter På motsvarande sätt är triangelns lodräta katet sträckan mellan y är lika med 2 och y är lika med 7 som beräknas parentesen 7 minus 2 slut parentes är lika med 5 längdenheter",
+   "s": 56.83,
+   "e": 73.38
+  },
+  {
+   "t": "Pythagoras sats ger",
+   "s": 73.38,
+   "e": 76.19
+  },
+  {
+   "t": "d i kvadrat är lika med parentesen 5 minus parentesen minus 4 slut parentes slut parentes i kvadrat plus parentesen 7 minus 2 slut parentes i kvadrat",
+   "s": 76.19,
+   "e": 87.88
+  },
+  {
+   "t": "d är lika med roten ur 9 i kvadrat plus 5 i kvadrat som är lika med roten ur 81 plus 25 som är lika med roten ur 106 som är ungefär lika med 10,3 längdenheter",
+   "s": 87.88,
+   "e": 100.14
+  },
+  {
+   "t": "(den negativa lösningen bortses).",
+   "s": 100.14,
+   "e": 103.66
+  },
+  {
+   "t": "Generellt: Triangelns vågräta katet är sträckan mellan x ett och x två .",
+   "s": 103.66,
+   "e": 109.75
+  },
+  {
+   "t": "Den kan beräknas som parentesen x två minus x ett slut parentes .",
+   "s": 109.75,
+   "e": 115.51
+  },
+  {
+   "t": "På motsvarande sätt är triangelns lodräta katet sträckan mellan y ett och y två som beräknas parentesen y två minus y ett slut parentes .",
+   "s": 115.51,
+   "e": 124.95
+  },
+  {
+   "t": "Pythagoras sats ger",
+   "s": 124.95,
+   "e": 127.78
+  },
+  {
+   "t": "d i kvadrat är lika med parentesen x två minus x ett slut parentes i kvadrat plus parentesen y två minus y ett slut parentes i kvadrat",
+   "s": 127.78,
+   "e": 138.6
+  },
+  {
+   "t": "d är lika med roten ur parentesen x två minus x ett slut parentes i kvadrat plus parentesen y två minus y ett slut parentes i kvadrat",
+   "s": 138.6,
+   "e": 149.09
+  },
+  {
+   "t": "v.s.v.",
+   "s": 149.09,
+   "e": 155.97
+  },
+  {
+   "t": "Punkten mitt emellan två andra punkter kallas mittpunkt och kan bestämmas med mittpunktsformeln.",
+   "s": 149.09,
+   "e": 155.97
+  },
+  {
+   "t": "Mittpunkten ligger mitt emellan punkternas x - respektive y -koordinater och kan bestämmas genom deras medelvärden.",
+   "s": 155.97,
+   "e": 163.53
+  },
+  {
+   "t": "Mittpunktsformeln",
+   "s": 163.53,
+   "e": 165.91
+  },
+  {
+   "t": "parentesen x m, y m slut parentes är lika med parentesen x ett plus x två delat med 2, y ett plus y två delat med 2 slut parentes",
+   "s": 165.91,
+   "e": 176.31
+  },
+  {
+   "t": "där parentesen x m, y m slut parentes är mittpunkten mellan punkterna parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes .",
+   "s": 176.31,
+   "e": 187.55
+  },
+  {
+   "t": "Exempel 1 — Avstånd och mittpunkt",
+   "s": 187.55,
+   "e": 191.16
+  },
+  {
+   "t": "Vi har punkterna (−3, −5) och (7, −1).",
+   "s": 191.16,
+   "e": 196.31
+  },
+  {
+   "t": "Bestäm. a) avståndet mellan punkterna b) mittpunkten",
+   "s": 196.31,
+   "e": 202.45
+  },
+  {
+   "t": "a) Vi använder avståndsformeln och sätter in värdena x ett är lika med minus 3 , y ett är lika med minus 5 , x två är lika med 7 och y två är lika med minus 1 .",
+   "s": 202.45,
+   "e": 213.36
+  },
+  {
+   "t": "Detta ger",
+   "s": 213.36,
+   "e": 215.38
+  },
+  {
+   "t": "d är lika med roten ur parentesen 7 minus parentesen minus 3 slut parentes slut parentes i kvadrat plus parentesen parentesen minus 1 slut parentes minus parentesen minus 5 slut parentes slut parentes i kvadrat som är lika med roten ur 10 i kvadrat plus 4 i kvadrat som är lika med roten ur 100 plus 16 som är lika med roten ur 116 som är ungefär lika med 10,8 längdenheter",
+   "s": 215.38,
+   "e": 242.1
+  },
+  {
+   "t": "Svar: roten ur 116 längdenheter är ungefär lika med 10,8 längdenheter",
+   "s": 242.1,
+   "e": 249.01
+  },
+  {
+   "t": "b) Vi använder mittpunktsformeln och sätter in värdena x ett är lika med minus 3 , y ett är lika med minus 5 , x två är lika med 7 och y två är lika med minus 1 .",
+   "s": 249.01,
+   "e": 260.04
+  },
+  {
+   "t": "Detta ger",
+   "s": 260.04,
+   "e": 262.05
+  },
+  {
+   "t": "parentesen x m, y m slut parentes är lika med parentesen minus 3 plus 7 delat med 2, minus 5 plus parentesen minus 1 slut parentes delat med 2 slut parentes som är lika med parentesen 4 delat med 2, minus 6 delat med 2 slut parentes som är lika med parentesen 2, minus 3 slut parentes",
+   "s": 262.05,
+   "e": 281.93
+  },
+  {
+   "t": "Svar: (2, −3)",
+   "s": 281.93,
+   "e": 285.39
+  }
+ ]
+}

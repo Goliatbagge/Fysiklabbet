@@ -1,0 +1,163 @@
+{
+ "id": "ma2c-4.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "489369e9c76d01a74da989a02d68ddd441801150",
+ "dur": 163.26,
+ "segments": [
+  {
+   "t": "Kongruens",
+   "s": 0.1,
+   "e": 2.11
+  },
+  {
+   "t": "Då likformiga figurer är lika stora råder kongruens och vi säger att figurerna är kongruenta.",
+   "s": 2.06,
+   "e": 8.45
+  },
+  {
+   "t": "Kongruens markeras med tecknet och utläses \"är kongruent med\".",
+   "s": 8.45,
+   "e": 13.24
+  },
+  {
+   "t": "\"Triangeln A B C är kongruent med triangeln D E F \" kan alltså skrivas",
+   "s": 13.24,
+   "e": 19.43
+  },
+  {
+   "t": "triangeln A B C är kongruent med triangeln D E F",
+   "s": 19.43,
+   "e": 24.69
+  },
+  {
+   "t": "För att avgöra om två trianglar är kongruenta behöver vi inte undersöka alla vinklar och sidor, utan det räcker att ett av nedanstående tre kongruensvillkor är uppfyllt.",
+   "s": 24.69,
+   "e": 34.86
+  },
+  {
+   "t": "Kongruenta trianglar",
+   "s": 34.86,
+   "e": 37.44
+  },
+  {
+   "t": "Två trianglar är kongruenta om de överensstämmer i",
+   "s": 37.44,
+   "e": 41.69
+  },
+  {
+   "t": "två sidor och mellanliggande vinkel (sida-vinkel-sida eller SVS)",
+   "s": 41.69,
+   "e": 47.48
+  },
+  {
+   "t": "alla tre sidor (sida-sida-sida eller SSS)",
+   "s": 47.48,
+   "e": 52.3
+  },
+  {
+   "t": "två vinklar och mellanliggande sida (vinkel-sida-vinkel eller VSV)",
+   "s": 52.3,
+   "e": 58.14
+  },
+  {
+   "t": "I figurer markeras lika långa sidor med lika många tvärstreck och lika stora vinklar med vinkelbågar.",
+   "s": 58.14,
+   "e": 64.88
+  },
+  {
+   "t": "Exempel 1 — Kongruenta enligt SVS",
+   "s": 64.88,
+   "e": 68.91
+  },
+  {
+   "t": "Trianglarna överensstämmer i två sidor och mellanliggande vinkel.",
+   "s": 68.91,
+   "e": 73.69
+  },
+  {
+   "t": "Bestäm sträckorna x och y .",
+   "s": 73.69,
+   "e": 76.62
+  },
+  {
+   "t": "Trianglarna är kongruenta enligt SVS.",
+   "s": 76.62,
+   "e": 80.46
+  },
+  {
+   "t": "Då gäller",
+   "s": 80.46,
+   "e": 82.4
+  },
+  {
+   "t": "x är lika med 24 centimeter (sidan markerad med ett tvärstreck)",
+   "s": 82.4,
+   "e": 88.05
+  },
+  {
+   "t": "y är lika med 32 centimeter (sidan markerad med två tvärstreck)",
+   "s": 88.05,
+   "e": 93.66
+  },
+  {
+   "t": "Svar: x är lika med 24 centimeter och y är lika med 32 centimeter",
+   "s": 93.66,
+   "e": 100.06
+  },
+  {
+   "t": "Exempel 2 — Kongruenta enligt SSS",
+   "s": 100.06,
+   "e": 104.15
+  },
+  {
+   "t": "Trianglarna överensstämmer i alla tre sidor.",
+   "s": 104.15,
+   "e": 107.95
+  },
+  {
+   "t": "Bestäm de okända vinklarna i triangeln till höger.",
+   "s": 107.95,
+   "e": 111.89
+  },
+  {
+   "t": "Trianglarna är kongruenta enligt SSS.",
+   "s": 111.89,
+   "e": 115.79
+  },
+  {
+   "t": "Då gäller",
+   "s": 115.79,
+   "e": 117.74
+  },
+  {
+   "t": "vinkeln D är lika med vinkeln A (vinkeln mitt emot sträckan markerad med två tvärstreck)",
+   "s": 117.74,
+   "e": 124.76
+  },
+  {
+   "t": "vinkeln E är lika med vinkeln B som är lika med 48 grader (vinkeln mitt emot sträckan markerad med tre tvärstreck)",
+   "s": 124.76,
+   "e": 132.95
+  },
+  {
+   "t": "vinkeln F är lika med vinkeln C som är lika med 102 grader (vinkeln mitt emot sträckan markerad med ett tvärstreck)",
+   "s": 132.95,
+   "e": 141.31
+  },
+  {
+   "t": "och den sista vinkeln fås av vinkelsumman:",
+   "s": 141.31,
+   "e": 153.86
+  },
+  {
+   "t": "vinkeln D är lika med 180 grader minus 48 grader minus 102 grader som är lika med 30 grader (vinkelsumma i triangel)",
+   "s": 141.31,
+   "e": 153.86
+  },
+  {
+   "t": "Svar: vinkeln D är lika med 30 grader , vinkeln E är lika med 48 grader och vinkeln F är lika med 102 grader",
+   "s": 153.86,
+   "e": 163.26
+  }
+ ]
+}

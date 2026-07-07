@@ -359,6 +359,7 @@
             });
             // Skolboks-städning av insatta värden:
             tex = tex.replace(/\+\s*-\s*/g, '- ');          // "+ -3"  → "- 3"
+            tex = tex.replace(/-\s*-\s*/g, '+ ');           // "- -1"  → "+ 1"
             tex = tex.replace(/(^|[=+(\s-])1x/g, '$1x');    // "1x"    → "x"  (inte "21x")
             tex = tex.replace(/(^|[=+(\s-])1\s*\\cdot\s*/g, '$1'); // "1 · a^x" → "a^x"
             tex = tex.replace(/\s*\+\s*0(?![.,{\d])/g, ''); // "+ 0"   → bort

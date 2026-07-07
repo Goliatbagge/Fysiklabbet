@@ -1,0 +1,303 @@
+{
+ "id": "ma2c-5.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0ce7bb4a4e609e41762422dc087643a255e4a718",
+ "dur": 346.84,
+ "segments": [
+  {
+   "t": "Tiologaritmer",
+   "s": 0.1,
+   "e": 2.31
+  },
+  {
+   "t": "Det tal som 10 ska upphöjas till (\"tians exponent\") för att bli ett visst värde kallas tiologaritm, skrivs \"lg\" och utläses ofta \"tiologaritmen för\".",
+   "s": 2.26,
+   "e": 12.43
+  },
+  {
+   "t": "Logaritmer går att se som den inversa (bakvända) operationen till att upphöja och används för att lösa exponentialekvationer algebraiskt.",
+   "s": 12.43,
+   "e": 21.5
+  },
+  {
+   "t": "Vi börjar med några enkla exempel för att förstå skrivsättet.",
+   "s": 21.5,
+   "e": 26.05
+  },
+  {
+   "t": "lg 100 betyder \"det tal som 10 ska upphöjas till för att bli 100\".",
+   "s": 26.05,
+   "e": 31.74
+  },
+  {
+   "t": "Eftersom 10 i kvadrat är lika med 100 gäller alltså att logaritmen av 100 är lika med 2 .",
+   "s": 31.74,
+   "e": 38.76
+  },
+  {
+   "t": "lg 1 betyder \"det tal som 10 ska upphöjas till för att bli 1\".",
+   "s": 38.76,
+   "e": 43.99
+  },
+  {
+   "t": "Eftersom 10 upphöjt till 0 är lika med 1 gäller logaritmen av 1 är lika med 0 .",
+   "s": 43.99,
+   "e": 50.11
+  },
+  {
+   "t": "lg 0,01 betyder \"det tal som 10 ska upphöjas till för att bli 0,01\".",
+   "s": 50.11,
+   "e": 56.62
+  },
+  {
+   "t": "Eftersom 10 upphöjt till minus 2 är lika med 1 delat med 10 i kvadrat som är lika med 0,01 gäller logaritmen av 0,01 är lika med minus 2 .",
+   "s": 56.62,
+   "e": 67.0
+  },
+  {
+   "t": "Upptäck mönstret för tiologaritmer för jämna potenser av 10:",
+   "s": 67.0,
+   "e": 80.78
+  },
+  {
+   "t": "Tiologaritmer för annat än jämna potenser av 10 är svårare att bestämma med huvudräkning, men har vi förståelsen för logaritmer kan vi ändå göra bra uppskattningar.",
+   "s": 67.0,
+   "e": 80.78
+  },
+  {
+   "t": "Säg att vi ska avgöra hur stort lg 42 är.",
+   "s": 80.78,
+   "e": 84.96
+  },
+  {
+   "t": "Det betyder alltså vad vi ska upphöja 10 till för att värdet ska bli 42.",
+   "s": 84.96,
+   "e": 90.1
+  },
+  {
+   "t": "Vi vet att 10 upphöjt till 1 är lika med 10 är för litet.",
+   "s": 90.1,
+   "e": 95.08
+  },
+  {
+   "t": "Vi vet också att 10 i kvadrat är lika med 100 är för stort.",
+   "s": 95.08,
+   "e": 99.96
+  },
+  {
+   "t": "Alltså måste exponenten vara någonstans mellan 1 och 2, dvs. lg 42 ligger mellan 1 och 2.",
+   "s": 99.96,
+   "e": 107.38
+  },
+  {
+   "t": "Vi kan få ett exaktare värde genom att slå logaritmen på våra räknare med knappen log.",
+   "s": 107.38,
+   "e": 113.04
+  },
+  {
+   "t": "Testa att slå lg 42 på din räknare.",
+   "s": 113.04,
+   "e": 117.05
+  },
+  {
+   "t": "Vi får logaritmen av 42 är lika med 1,623 som är ungefär lika med 1,62 .",
+   "s": 117.05,
+   "e": 124.35
+  },
+  {
+   "t": "Som vi förutsåg hamnade värdet mellan 1 och 2, närmare bestämt ungefär 1,62.",
+   "s": 124.35,
+   "e": 130.95
+  },
+  {
+   "t": "Detta betyder att 42 är ungefär lika med 10 upphöjt till 1,62 .",
+   "s": 130.95,
+   "e": 136.76
+  },
+  {
+   "t": "Om vi vill ha en exakt likhet, så behåller vi logaritmen i exponenten, dvs.",
+   "s": 136.76,
+   "e": 146.15
+  },
+  {
+   "t": "42 är lika med 10 upphöjt till logaritmen av 42",
+   "s": 136.76,
+   "e": 146.15
+  },
+  {
+   "t": "Tiologaritm — Definition",
+   "s": 146.15,
+   "e": 149.09
+  },
+  {
+   "t": "a är lika med 10 upphöjt till x vilket är ekvivalent med att x är lika med logaritmen av a där a är större än 0",
+   "s": 149.09,
+   "e": 157.06
+  },
+  {
+   "t": "Skriva ett tal med basen 10",
+   "s": 157.06,
+   "e": 160.34
+  },
+  {
+   "t": "a är lika med 10 upphöjt till logaritmen av a där a är större än 0",
+   "s": 160.34,
+   "e": 165.95
+  },
+  {
+   "t": "Det tal vi tar logaritmen för måste vara större än 0 eftersom vi aldrig kan upphöja 10 till något och få ett negativt värde.",
+   "s": 165.95,
+   "e": 173.4
+  },
+  {
+   "t": "Ju mindre värde tians exponent har desto närmare 0 kommer vi, men det blir aldrig 0 eller negativt: 10 upphöjt till minus 3 är lika med 1 delat med 1 000 som är lika med 0,001 och 10 upphöjt till minus 6 är lika med 1 delat med 1 000 000 som är lika med 0,000 001 och så vidare.",
+   "s": 173.4,
+   "e": 191.46
+  },
+  {
+   "t": "Exempel 1 — Bestäm utan räknare",
+   "s": 191.46,
+   "e": 195.07
+  },
+  {
+   "t": "Bestäm utan räknare. a) logaritmen av 10 000 b) logaritmen av 10 upphöjt till minus 5 c) logaritmen av roten ur 10",
+   "s": 195.07,
+   "e": 206.4
+  },
+  {
+   "t": "a) Vi tänker \"Vad ska vi upphöja 10 till för att det ska bli 10 000?",
+   "s": 206.4,
+   "e": 211.62
+  },
+  {
+   "t": "Jo, 4.\"",
+   "s": 211.62,
+   "e": 214.45
+  },
+  {
+   "t": "Svar: 4",
+   "s": 214.45,
+   "e": 221.34
+  },
+  {
+   "t": "b) Vi tänker \"Vad ska vi upphöja 10 till för att det ska bli 10 upphöjt till minus 5 ?",
+   "s": 214.45,
+   "e": 221.34
+  },
+  {
+   "t": "Jo, −5.\"",
+   "s": 221.34,
+   "e": 223.85
+  },
+  {
+   "t": "Svar: −5",
+   "s": 223.85,
+   "e": 226.11
+  },
+  {
+   "t": "c) Vi tänker \"Vad ska vi upphöja 10 till för att det ska bli roten ur 10 ?\" Svaret till denna fråga kanske inte är lika självklart.",
+   "s": 226.11,
+   "e": 236.12
+  },
+  {
+   "t": "Kom ihåg att dra kvadratroten ur är samma sak som att upphöja till en halv, så roten ur 10 är lika med 10 upphöjt till 1 delat med 2 .",
+   "s": 236.12,
+   "e": 244.71
+  },
+  {
+   "t": "Vi ska alltså upphöja 10 till 1 delat med 2 för att svaret ska bli roten ur 10 .",
+   "s": 244.71,
+   "e": 250.61
+  },
+  {
+   "t": "Svar: 1 delat med 2",
+   "s": 250.61,
+   "e": 253.59
+  },
+  {
+   "t": "Exempel 2 — Skriv som en potens med basen 10",
+   "s": 253.59,
+   "e": 257.86
+  },
+  {
+   "t": "Skriv som en potens med basen 10.. a) 4 b) 75",
+   "s": 257.86,
+   "e": 264.86
+  },
+  {
+   "t": "a) Den exponent vi ska upphöja 10 till för att det ska bli 4 kan skrivas lg 4.",
+   "s": 264.86,
+   "e": 271.32
+  },
+  {
+   "t": "Så",
+   "s": 271.32,
+   "e": 272.85
+  },
+  {
+   "t": "10 upphöjt till logaritmen av 4 är lika med 4",
+   "s": 272.85,
+   "e": 277.43
+  },
+  {
+   "t": "Svar: 10 upphöjt till logaritmen av 4",
+   "s": 277.43,
+   "e": 281.65
+  },
+  {
+   "t": "b) På motsvarande sätt som i a-uppgiften gäller 75 är lika med 10 upphöjt till logaritmen av 75 .",
+   "s": 281.65,
+   "e": 289.29
+  },
+  {
+   "t": "Svar: 10 upphöjt till logaritmen av 75",
+   "s": 289.29,
+   "e": 293.79
+  },
+  {
+   "t": "Exempel 3 — Beräkna utan räknare",
+   "s": 293.79,
+   "e": 297.43
+  },
+  {
+   "t": "Beräkna utan räknare 10 upphöjt till logaritmen av 9 minus 3 gånger 10 upphöjt till logaritmen av 3 delat med logaritmen av 10 .",
+   "s": 297.43,
+   "e": 306.94
+  },
+  {
+   "t": "Vi förenklar de olika logaritmerna:",
+   "s": 306.94,
+   "e": 313.64
+  },
+  {
+   "t": "10 upphöjt till logaritmen av 9 är lika med 9",
+   "s": 306.94,
+   "e": 313.64
+  },
+  {
+   "t": "10 upphöjt till logaritmen av 3 är lika med 3",
+   "s": 313.64,
+   "e": 319.65
+  },
+  {
+   "t": "logaritmen av 10 är lika med 1 (lg 10 betyder vad vi ska upphöja 10 till för att det ska bli 10, alltså 1)",
+   "s": 319.6,
+   "e": 327.6
+  },
+  {
+   "t": "Insättning av dessa förenklade värden ger",
+   "s": 327.6,
+   "e": 331.35
+  },
+  {
+   "t": "10 upphöjt till logaritmen av 9 minus 3 gånger 10 upphöjt till logaritmen av 3 delat med logaritmen av 10 är lika med 9 minus 3 gånger 3 delat med 1 som är lika med 9 minus 9 som är lika med 0",
+   "s": 331.35,
+   "e": 344.49
+  },
+  {
+   "t": "Svar: 0",
+   "s": 344.49,
+   "e": 346.84
+  }
+ ]
+}

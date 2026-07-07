@@ -1,0 +1,278 @@
+{
+ "id": "ma2c-5.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1bfcc88152a8355c8dfe5d074935618549517c11",
+ "dur": 295.6,
+ "segments": [
+  {
+   "t": "Exponential- och potensekvationer",
+   "s": 0.1,
+   "e": 3.38
+  },
+  {
+   "t": "Potensekvationer",
+   "s": 3.33,
+   "e": 5.71
+  },
+  {
+   "t": "En ekvation där variabeln, oftast x , är i basen (\" x upphöjt till något\") kallas potensekvation.",
+   "s": 5.71,
+   "e": 13.47
+  },
+  {
+   "t": "Dessa kan lösas med två algebraiska metoder — antingen med potenslagar eller med rotuttryck.",
+   "s": 13.47,
+   "e": 19.99
+  },
+  {
+   "t": "Exempel 1 — Lös potensekvationen",
+   "s": 19.99,
+   "e": 23.8
+  },
+  {
+   "t": "Lös potensekvationen x upphöjt till 7 är lika med 860 .",
+   "s": 23.8,
+   "e": 29.1
+  },
+  {
+   "t": "Metod 1: Med potenslagar.",
+   "s": 29.1,
+   "e": 32.44
+  },
+  {
+   "t": "Vi upphöjer båda led till 1 delat med 7 :",
+   "s": 32.44,
+   "e": 43.11
+  },
+  {
+   "t": "x är lika med 860 upphöjt till 1 delat med 7 som är ungefär lika med 2,63 (slås på räknaren)",
+   "s": 32.44,
+   "e": 43.11
+  },
+  {
+   "t": "Metod 2: Med rotuttryck.",
+   "s": 43.11,
+   "e": 46.44
+  },
+  {
+   "t": "Vi drar sjunde roten ur båda led:",
+   "s": 46.44,
+   "e": 56.31
+  },
+  {
+   "t": "x är lika med 7:e roten ur 860 som är ungefär lika med 2,63 (slås på räknaren)",
+   "s": 46.44,
+   "e": 56.31
+  },
+  {
+   "t": "Svar: x är ungefär lika med 2,63",
+   "s": 56.31,
+   "e": 60.91
+  },
+  {
+   "t": "OBS!",
+   "s": 60.91,
+   "e": 62.54
+  },
+  {
+   "t": "Om exponenten är jämn får ekvationen två lösningar — en positiv och en negativ.",
+   "s": 62.54,
+   "e": 68.15
+  },
+  {
+   "t": "Då ska plus minus placeras framför rottecknet/lösningen.",
+   "s": 68.15,
+   "e": 73.11
+  },
+  {
+   "t": "En potensfunktion i generell form skrivs y är lika med C gånger x upphöjt till a .",
+   "s": 73.11,
+   "e": 79.42
+  },
+  {
+   "t": "Exponentialekvationer",
+   "s": 79.42,
+   "e": 82.22
+  },
+  {
+   "t": "En ekvation där variabeln, oftast x , är i exponenten (\"något upphöjt till x \") kallas exponentialekvation.",
+   "s": 82.22,
+   "e": 90.49
+  },
+  {
+   "t": "Dessa har vi ingen algebraisk metod för att lösa — än.",
+   "s": 90.49,
+   "e": 95.01
+  },
+  {
+   "t": "Dessa löser vi då grafiskt, genom att rita upp båda led i ekvationen och ta fram skärningens x -koordinat.",
+   "s": 95.01,
+   "e": 102.11
+  },
+  {
+   "t": "En exponentialfunktion i generell form skrivs y är lika med C gånger a upphöjt till x .",
+   "s": 102.11,
+   "e": 108.8
+  },
+  {
+   "t": "Tillämpningar",
+   "s": 108.8,
+   "e": 110.81
+  },
+  {
+   "t": "Vid tillämpningar där vi har en exponentiell förändring, t.ex. där något ändras med en viss procentsats per år, kan vi ställa upp en ekvation på formen",
+   "s": 110.81,
+   "e": 120.26
+  },
+  {
+   "t": "y är lika med C gånger a upphöjt till x",
+   "s": 120.26,
+   "e": 124.2
+  },
+  {
+   "t": "där",
+   "s": 124.2,
+   "e": 125.66
+  },
+  {
+   "t": "y är lika med värdet efter ett visst antal förändringar (ofta efter en viss tid)",
+   "s": 125.66,
+   "e": 131.47
+  },
+  {
+   "t": "C är lika med ursprungliga värdet",
+   "s": 131.47,
+   "e": 134.86
+  },
+  {
+   "t": "a är lika med förändringsfaktorn",
+   "s": 134.86,
+   "e": 137.99
+  },
+  {
+   "t": "x är lika med antal förändringar (ofta tid)",
+   "s": 137.99,
+   "e": 142.2
+  },
+  {
+   "t": "Exempel 2 — Aktier",
+   "s": 142.2,
+   "e": 144.97
+  },
+  {
+   "t": "Du köper aktier för 12 000 kronor.",
+   "s": 144.97,
+   "e": 148.61
+  },
+  {
+   "t": "I b-uppgiften kommer vi att lösa en exponentialekvation grafiskt — grafen nedan visar uppritningen med skärningspunkten A.",
+   "s": 148.61,
+   "e": 159.54
+  },
+  {
+   "t": "a) 5 år senare säljer du dem för 27 000 kronor.",
+   "s": 148.61,
+   "e": 159.54
+  },
+  {
+   "t": "Hur stor genomsnittlig årlig ökning i procent motsvarar det? b) Om ökningen fortsätter på samma sätt, hur lång tid efter inköpet är de värda 50 000 kronor?",
+   "s": 159.54,
+   "e": 171.5
+  },
+  {
+   "t": "a) Vi ska beräkna en procentuell förändring, så vi ställer upp formeln",
+   "s": 171.5,
+   "e": 176.88
+  },
+  {
+   "t": "y är lika med C gånger a upphöjt till x",
+   "s": 176.88,
+   "e": 180.81
+  },
+  {
+   "t": "där vi söker förändringsfaktorn a .",
+   "s": 180.81,
+   "e": 184.05
+  },
+  {
+   "t": "Vi sätter in våra kända värden: y är lika med 27 000 (värdet efter en viss tid), C är lika med 12 000 (ursprungliga värdet) och x är lika med 5 (tid).",
+   "s": 184.05,
+   "e": 195.21
+  },
+  {
+   "t": "27 000 är lika med 12 000 gånger a upphöjt till 5",
+   "s": 195.21,
+   "e": 200.18
+  },
+  {
+   "t": "27 000 delat med 12 000 är lika med a upphöjt till 5",
+   "s": 200.18,
+   "e": 205.12
+  },
+  {
+   "t": "2,25 är lika med a upphöjt till 5",
+   "s": 205.12,
+   "e": 209.03
+  },
+  {
+   "t": "Detta är en potensekvation:",
+   "s": 209.03,
+   "e": 222.65
+  },
+  {
+   "t": "a är lika med 2,25 upphöjt till 1 delat med 5 som är lika med 5:e roten ur 2,25 som är lika med 1,1760 som är ungefär lika med 1,176",
+   "s": 209.03,
+   "e": 222.65
+  },
+  {
+   "t": "Förändringsfaktorn är alltså ungefär 1,176, vilket motsvarar en ökning med 17,6 procent ( 1,176 minus 1 är lika med 0,176 som är lika med 17,6 procent ).",
+   "s": 222.65,
+   "e": 237.46
+  },
+  {
+   "t": "Svar: 17,6 procent",
+   "s": 237.46,
+   "e": 240.99
+  },
+  {
+   "t": "b) Vi ska beräkna efter hur lång tid aktierna har ett visst värde med samma procentuella förändring.",
+   "s": 240.99,
+   "e": 247.56
+  },
+  {
+   "t": "Vi ställer återigen upp formeln y är lika med C gånger a upphöjt till x , där vi söker tiden x .",
+   "s": 247.56,
+   "e": 254.41
+  },
+  {
+   "t": "Vi sätter in våra kända värden: y är lika med 50 000 , C är lika med 12 000 och a är lika med 1,176 :",
+   "s": 254.41,
+   "e": 267.85
+  },
+  {
+   "t": "50 000 är lika med 12 000 gånger 1,176 upphöjt till x",
+   "s": 254.41,
+   "e": 267.85
+  },
+  {
+   "t": "Detta är en exponentialekvation.",
+   "s": 267.85,
+   "e": 271.24
+  },
+  {
+   "t": "Vi ritar y är lika med 50 000 (uttrycket i vänster led) och y är lika med 12 000 gånger 1,176 upphöjt till x (uttrycket i höger led) med ett grafritande hjälpmedel och tar fram skärningens x -koordinat — se grafen ovan.",
+   "s": 271.24,
+   "e": 286.57
+  },
+  {
+   "t": "Vi ser att skärningens x -koordinat är x är ungefär lika med 8,8 .",
+   "s": 286.57,
+   "e": 292.35
+  },
+  {
+   "t": "Svar: Efter ca 9 år.",
+   "s": 292.35,
+   "e": 295.6
+  }
+ ]
+}

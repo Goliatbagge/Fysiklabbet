@@ -1,7 +1,7 @@
 {
  "id": "ma1c-2.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "923ffcc8d3c7d20838be2df6044c830ab130b747",
+ "hash": "54cd53a483e5e3f3473355a63808fa249dc335e5",
  "dur": 213.69,
  "segments": [
   {
@@ -155,7 +155,7 @@
    "e": 167.2
   },
   {
-   "t": "vänsterledet är lika med högerledet ⟹ Stämmer!",
+   "t": "vänsterledet är lika med högerledet Stämmer!",
    "s": 167.2,
    "e": 171.01
   },

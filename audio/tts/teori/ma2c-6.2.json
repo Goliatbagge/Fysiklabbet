@@ -1,0 +1,293 @@
+{
+ "id": "ma2c-6.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f1e179fd92e83f7d14df3c836407e621cbce3d7c",
+ "dur": 398.96,
+ "segments": [
+  {
+   "t": "Spridningsmått, lådagram och percentiler",
+   "s": 0.1,
+   "e": 4.1
+  },
+  {
+   "t": "Spridningsmått säger något om hur spridda värdena är hos en datamängd.",
+   "s": 4.05,
+   "e": 9.0
+  },
+  {
+   "t": "En stor variation bland värdena ger en större spridning och en liten variation ger en mindre spridning.",
+   "s": 9.0,
+   "e": 15.31
+  },
+  {
+   "t": "Det finns flera typer av spridningsmått.",
+   "s": 15.31,
+   "e": 18.76
+  },
+  {
+   "t": "Hur mycket det skiljer mellan det största och minsta värdet kallas variationsbredd.",
+   "s": 18.76,
+   "e": 23.94
+  },
+  {
+   "t": "Variationsbredd",
+   "s": 23.94,
+   "e": 26.16
+  },
+  {
+   "t": "variationsbredd är lika med största värdet minus minsta värdet",
+   "s": 26.16,
+   "e": 31.1
+  },
+  {
+   "t": "Ett annat sätt att åskådliggöra spridning utifrån en bild är lådagram.",
+   "s": 31.1,
+   "e": 36.33
+  },
+  {
+   "t": "I lådagram delar man in värdena i fyra lika stora delar och visar mellan vilka värden dessa ligger.",
+   "s": 36.33,
+   "e": 42.76
+  },
+  {
+   "t": "Varje del i lådagrammet innehåller alltså en fjärdedel av värdena.",
+   "s": 42.76,
+   "e": 47.79
+  },
+  {
+   "t": "Gränserna mellan varje fjärdedel kallas kvartiler.",
+   "s": 47.79,
+   "e": 51.83
+  },
+  {
+   "t": "För att få lådagrammet behöver man fem viktiga värden.",
+   "s": 51.83,
+   "e": 55.95
+  },
+  {
+   "t": "Till att börja med behöver man minsta värdet, medianen och största värdet.",
+   "s": 55.95,
+   "e": 61.14
+  },
+  {
+   "t": "Medianen delar värdena i två lika stora delar (50 procent).",
+   "s": 61.14,
+   "e": 66.59
+  },
+  {
+   "t": "För att dela in det i fjärdedelar måste vi dela de undre värdena i två lika stora delar.",
+   "s": 66.59,
+   "e": 72.55
+  },
+  {
+   "t": "Talet som delar de undre värdena i två lika stora delar kallas nedre kvartil (eller första kvartil) och betecknas Q ett .",
+   "s": 72.55,
+   "e": 80.64
+  },
+  {
+   "t": "På motsvarande sätt behövs ett värde för att dela de övre värdena i två lika stora delar och detta kallas övre kvartil (eller tredje kvartil) och betecknas Q tre .",
+   "s": 80.64,
+   "e": 90.6
+  },
+  {
+   "t": "Medianen kallas ibland för den andra kvartilen och betecknas då Q två .",
+   "s": 90.6,
+   "e": 95.66
+  },
+  {
+   "t": "Differensen (skillnaden) mellan övre kvartil och nedre kvartil motsvarar lådans bredd och kallas kvartilavstånd.",
+   "s": 95.66,
+   "e": 103.61
+  },
+  {
+   "t": "Kvartilavstånd",
+   "s": 103.61,
+   "e": 105.79
+  },
+  {
+   "t": "kvartilavstånd är lika med övre kvartil minus nedre kvartil",
+   "s": 105.79,
+   "e": 110.6
+  },
+  {
+   "t": "Eftersom varje del av lådan (\"vänster pinne\", \"vänstra lådan\", \"högra lådan\" och \"höger pinne\") innehåller lika många värden betyder det att ju större delen är desto större är spridningen i det området (ju mer spridda ligger värdena).",
+   "s": 110.6,
+   "e": 124.34
+  },
+  {
+   "t": "Omvändningen gäller också: ju mindre delen är desto mindre är spridningen (ju mer samlade ligger värdena).",
+   "s": 124.34,
+   "e": 131.43
+  },
+  {
+   "t": "Om man har ett större antal observationer kan man, istället för kvartiler (fjärdedelar), dela in det statistiska materialet i percentiler (hundradelar).",
+   "s": 131.43,
+   "e": 141.25
+  },
+  {
+   "t": "Percentiler anger hur många procent som är lägre än ett visst värde. p åtta noll är t.ex. den 80:e percentilen och då är 80 procent av värdena mindre än detta värde och 20 procent av värdena större.",
+   "s": 141.25,
+   "e": 154.86
+  },
+  {
+   "t": "Percentiler beräknas i Geogebra (se exemplet nedan).",
+   "s": 154.86,
+   "e": 159.79
+  },
+  {
+   "t": "Exempel 1 — Två middagar",
+   "s": 159.79,
+   "e": 162.95
+  },
+  {
+   "t": "Adriana arrangerar två olika typer av middagar: en släktmiddag och en kompismiddag.",
+   "s": 162.95,
+   "e": 168.99
+  },
+  {
+   "t": "Åldrarna på deltagarna i respektive middag är:",
+   "s": 168.99,
+   "e": 186.51
+  },
+  {
+   "t": "Släktmiddag: 1, 3, 4, 8, 15, 27, 30, 33, 36, 41, 42, 44, 46, 72, 72",
+   "s": 168.99,
+   "e": 186.51
+  },
+  {
+   "t": "Kompismiddag: 28, 30, 31, 31, 32, 32, 33, 33, 34, 34, 34, 34, 35, 35, 36",
+   "s": 186.51,
+   "e": 203.29
+  },
+  {
+   "t": "I b-uppgiften kommer vi att rita lådagrammen nedan över resultaten.",
+   "s": 203.29,
+   "e": 208.45
+  },
+  {
+   "t": "a) Bestäm för båda middagar medianen, variationsbredden, nedre och övre kvartil samt kvartilavståndet.. b) Rita ett lådagram över resultaten.. c) Bestäm utifrån lådagrammet hur stor andel som är över 8 år på släktmiddagen.. d) Hur gammal ska man vara för att tillhöra de 10 procent äldsta på släktmiddagen?",
+   "s": 208.45,
+   "e": 233.57
+  },
+  {
+   "t": "a) Medianen är för båda middagarna 33 år (värdet i mitten).",
+   "s": 233.57,
+   "e": 239.45
+  },
+  {
+   "t": "För att bestämma den nedre kvartilen, så bestämmer vi medianen till alla värden till vänster om medianen.",
+   "s": 239.45,
+   "e": 246.14
+  },
+  {
+   "t": "Den är 8 år (släktmiddag) och 31 år (kompismiddag).",
+   "s": 246.14,
+   "e": 251.44
+  },
+  {
+   "t": "Den övre kvartilen är på motsvarande sätt medianen till alla värden till höger om medianen.",
+   "s": 251.44,
+   "e": 257.76
+  },
+  {
+   "t": "Den är 44 år (släktmiddag) och 34 år (kompismiddag).",
+   "s": 257.76,
+   "e": 263.64
+  },
+  {
+   "t": "Variationsbredd s l ä k t är lika med 72 minus 1 som är lika med 71 år",
+   "s": 263.64,
+   "e": 270.29
+  },
+  {
+   "t": "Variationsbredd k o m p i s är lika med 36 minus 28 som är lika med 8 år",
+   "s": 270.29,
+   "e": 277.34
+  },
+  {
+   "t": "Kvartilavstånd s l ä k t är lika med 44 minus 8 som är lika med 36 år",
+   "s": 277.34,
+   "e": 284.2
+  },
+  {
+   "t": "Kvartilavstånd k o m p i s är lika med 34 minus 31 som är lika med 3 år",
+   "s": 284.2,
+   "e": 291.31
+  },
+  {
+   "t": "Svar: Släktmiddag: median är lika med 33 år, variationsbredd är lika med 71 år, nedre kvartil är lika med 8 år, övre kvartil är lika med 44 år och kvartilavstånd är lika med 36 år.",
+   "s": 291.31,
+   "e": 305.44
+  },
+  {
+   "t": "Kompismiddag: median är lika med 33 år, variationsbredd är lika med 8 år, nedre kvartil = 31 år, övre kvartil är lika med 34 år och kvartilavstånd är lika med 3 år.",
+   "s": 305.44,
+   "e": 320.5
+  },
+  {
+   "t": "b) Vi markerar största och minsta värdet med korta lodräta streck ovanför en tallinje.",
+   "s": 320.45,
+   "e": 326.9
+  },
+  {
+   "t": "Därefter markerar vi medianen samt nedre och övre kvartil med längre lodräta streck.",
+   "s": 326.9,
+   "e": 332.94
+  },
+  {
+   "t": "Därefter förbinder vi de längre lodräta strecken och bildar lådagrammen — se figuren ovan.",
+   "s": 332.94,
+   "e": 339.23
+  },
+  {
+   "t": "OBS!",
+   "s": 339.23,
+   "e": 340.84
+  },
+  {
+   "t": "Lägg märke till hur den lilla spridningen vid kompismiddagen ger små delar i lådagrammet, jämfört med lådagrammet för släktmiddagen.",
+   "s": 340.84,
+   "e": 349.04
+  },
+  {
+   "t": "c) Vi ska bestämma hur många procent som är äldre än 8 år utifrån lådagrammet för släktmiddagen ovan.",
+   "s": 349.04,
+   "e": 356.44
+  },
+  {
+   "t": "Eftersom varje del i lådagrammet innehåller 25 procent — och 8 år är den nedre kvartilen — betyder det att de tre delarna till höger om 8 år tillsammans innehåller 75 procent.",
+   "s": 356.44,
+   "e": 367.1
+  },
+  {
+   "t": "Svar: 75 procent",
+   "s": 367.1,
+   "e": 370.18
+  },
+  {
+   "t": "d) För att tillhöra de 10 procent äldsta ska man ligga över den 90:e percentilen, p nio noll .",
+   "s": 370.18,
+   "e": 377.49
+  },
+  {
+   "t": "Vi beräknar p nio noll med Geogebra: skriv in alla värden i kalkylbladet, markera dem och välj \"Skapa lista\" (standardnamn l1).",
+   "s": 377.49,
+   "e": 387.19
+  },
+  {
+   "t": "Skriv sedan Percentil(l1, 90 procent) i inmatningsfältet.",
+   "s": 387.19,
+   "e": 393.08
+  },
+  {
+   "t": "Geogebra svarar 72.",
+   "s": 393.08,
+   "e": 396.11
+  },
+  {
+   "t": "Svar: 72 år",
+   "s": 396.11,
+   "e": 398.96
+  }
+ ]
+}

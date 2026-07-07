@@ -1,0 +1,273 @@
+{
+ "id": "ma2c-5.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f945f0402038ae957bd4e76f4f3f5363c07daced",
+ "dur": 314.35,
+ "segments": [
+  {
+   "t": "Exponentialekvationer och tiologaritmer",
+   "s": 0.1,
+   "e": 3.88
+  },
+  {
+   "t": "Kom ihåg: ett tal kan skrivas med basen 10 enligt",
+   "s": 3.83,
+   "e": 8.51
+  },
+  {
+   "t": "a är lika med 10 upphöjt till logaritmen av a där a är större än 0",
+   "s": 8.51,
+   "e": 14.2
+  },
+  {
+   "t": "För att lösa exponentialekvationer med hjälp av tiologaritmer använder vi principen att om två potenser med samma bas är lika, så måste också deras exponenter vara lika.",
+   "s": 14.2,
+   "e": 24.94
+  },
+  {
+   "t": "Exempelvis, om 2 upphöjt till x är lika med 2 upphöjt till 7 , så måste x är lika med 7 .",
+   "s": 24.94,
+   "e": 31.89
+  },
+  {
+   "t": "Lösa exponentialekvationer med tiologaritmer",
+   "s": 31.89,
+   "e": 36.15
+  },
+  {
+   "t": "Skriv om båda led med basen 10 enligt principen a är lika med 10 upphöjt till logaritmen av a .",
+   "s": 36.15,
+   "e": 43.15
+  },
+  {
+   "t": "Förenkla med potenslagarna.",
+   "s": 43.15,
+   "e": 46.1
+  },
+  {
+   "t": "Sätt exponenterna lika och lös ekvationen.",
+   "s": 46.1,
+   "e": 50.05
+  },
+  {
+   "t": "En ekvation där variabeln finns i logaritmen, t.ex. logaritmen av x är lika med 3 , kallas logaritmekvation.",
+   "s": 50.05,
+   "e": 58.34
+  },
+  {
+   "t": "Dessa löser vi enklast genom att skriva om ekvationen från logaritmform till potensform och sedan lösa ekvationen enligt tidigare metoder.",
+   "s": 58.34,
+   "e": 66.95
+  },
+  {
+   "t": "Lösa logaritmekvationer",
+   "s": 66.95,
+   "e": 69.92
+  },
+  {
+   "t": "logaritmen av x är lika med a (logaritmform) vilket är ekvivalent med att 10 upphöjt till a är lika med x (potensform)",
+   "s": 69.92,
+   "e": 78.91
+  },
+  {
+   "t": "Omskrivning från logaritmform till potensform med ord: \"10 upphöjt till det som står i högra ledet är lika med det vi har logaritmen för.\"",
+   "s": 78.91,
+   "e": 87.94
+  },
+  {
+   "t": "Exempel 1 — Lös ekvationerna",
+   "s": 87.94,
+   "e": 91.34
+  },
+  {
+   "t": "Lös ekvationerna nedan.",
+   "s": 91.34,
+   "e": 94.19
+  },
+  {
+   "t": "Svara exakt och med två decimaler.. a) 10 upphöjt till x är lika med 53 b) 2 upphöjt till x är lika med 37 c) 5 gånger 3 upphöjt till 2 x minus 4 är lika med 31",
+   "s": 94.19,
+   "e": 108.71
+  },
+  {
+   "t": "a) Vi skriver om HL till basen 10 och sätter sedan exponenterna lika:",
+   "s": 108.71,
+   "e": 118.8
+  },
+  {
+   "t": "10 upphöjt till x är lika med 10 upphöjt till logaritmen av 53",
+   "s": 108.71,
+   "e": 118.8
+  },
+  {
+   "t": "x är lika med logaritmen av 53 som är ungefär lika med 1,72",
+   "s": 118.8,
+   "e": 124.65
+  },
+  {
+   "t": "(Om du direkt från ekvationen 10 upphöjt till x är lika med 53 ser att x är lika med logaritmen av 53 , utifrån definitionen, går det bra att skriva det direkt, utan mellanled.)",
+   "s": 124.65,
+   "e": 137.11
+  },
+  {
+   "t": "Svar: x är lika med logaritmen av 53 som är ungefär lika med 1,72",
+   "s": 137.11,
+   "e": 143.68
+  },
+  {
+   "t": "b) Vi skriver om båda led till basen 10 och förenklar med potenslagarna:",
+   "s": 143.68,
+   "e": 156.62
+  },
+  {
+   "t": "parentesen 10 upphöjt till logaritmen av 2 slut parentes upphöjt till x är lika med 10 upphöjt till logaritmen av 37",
+   "s": 143.68,
+   "e": 156.62
+  },
+  {
+   "t": "10 upphöjt till x gånger logaritmen av 2 är lika med 10 upphöjt till logaritmen av 37",
+   "s": 156.62,
+   "e": 163.53
+  },
+  {
+   "t": "Vi kan nu sätta exponenterna lika och får",
+   "s": 163.53,
+   "e": 167.35
+  },
+  {
+   "t": "x gånger logaritmen av 2 är lika med logaritmen av 37",
+   "s": 167.35,
+   "e": 172.45
+  },
+  {
+   "t": "Division med lg 2 i båda led ger",
+   "s": 172.45,
+   "e": 176.1
+  },
+  {
+   "t": "x är lika med logaritmen av 37 delat med logaritmen av 2 som är ungefär lika med 5,21",
+   "s": 176.1,
+   "e": 183.56
+  },
+  {
+   "t": "Svar: x är lika med logaritmen av 37 delat med logaritmen av 2 som är ungefär lika med 5,21",
+   "s": 183.56,
+   "e": 191.74
+  },
+  {
+   "t": "c) Vi börjar med att lösa ut potensen 3 upphöjt till 2 x .",
+   "s": 191.74,
+   "e": 197.09
+  },
+  {
+   "t": "Vi adderar 4 till båda led och dividerar sedan med 5:",
+   "s": 197.09,
+   "e": 204.97
+  },
+  {
+   "t": "5 gånger 3 upphöjt till 2 x är lika med 35",
+   "s": 197.09,
+   "e": 204.97
+  },
+  {
+   "t": "3 upphöjt till 2 x är lika med 7",
+   "s": 204.97,
+   "e": 208.75
+  },
+  {
+   "t": "Skriver om båda led till basen 10 och förenklar med potenslagarna:",
+   "s": 208.75,
+   "e": 220.97
+  },
+  {
+   "t": "parentesen 10 upphöjt till logaritmen av 3 slut parentes upphöjt till 2 x är lika med 10 upphöjt till logaritmen av 7",
+   "s": 208.75,
+   "e": 220.97
+  },
+  {
+   "t": "10 upphöjt till 2 x gånger logaritmen av 3 är lika med 10 upphöjt till logaritmen av 7",
+   "s": 220.97,
+   "e": 228.01
+  },
+  {
+   "t": "Sätter exponenterna lika och löser ekvationen:",
+   "s": 228.01,
+   "e": 235.94
+  },
+  {
+   "t": "2 x gånger logaritmen av 3 är lika med logaritmen av 7",
+   "s": 228.01,
+   "e": 235.94
+  },
+  {
+   "t": "x är lika med logaritmen av 7 delat med 2 gånger logaritmen av 3 som är ungefär lika med 0,89",
+   "s": 235.94,
+   "e": 243.74
+  },
+  {
+   "t": "Svar: x är lika med logaritmen av 7 delat med 2 gånger logaritmen av 3 som är ungefär lika med 0,89",
+   "s": 243.74,
+   "e": 252.25
+  },
+  {
+   "t": "Exempel 2 — Lös logaritmekvationerna",
+   "s": 252.25,
+   "e": 256.14
+  },
+  {
+   "t": "Lös. a) logaritmen av x är lika med 3 b) logaritmen av 5 x är lika med 2,7",
+   "s": 256.14,
+   "e": 264.75
+  },
+  {
+   "t": "a) Vi skriver om ekvationen till potensform. \"10 upphöjt till det som står i högra ledet, ska bli det vi har logaritmen för.\"",
+   "s": 264.75,
+   "e": 274.9
+  },
+  {
+   "t": "10 i kubik är lika med x",
+   "s": 274.9,
+   "e": 279.61
+  },
+  {
+   "t": "x är lika med 1 000",
+   "s": 274.9,
+   "e": 279.61
+  },
+  {
+   "t": "(Om du direkt från ekvationen ser att x är lika med 1 000 eftersom logaritmen av 1 000 är lika med 3 , går det bra att skriva det direkt, utan mellanled.)",
+   "s": 279.61,
+   "e": 289.94
+  },
+  {
+   "t": "Svar: x är lika med 1 000",
+   "s": 289.94,
+   "e": 293.51
+  },
+  {
+   "t": "b) Vi skriver om ekvationen till potensform:",
+   "s": 293.51,
+   "e": 302.44
+  },
+  {
+   "t": "10 upphöjt till 2,7 är lika med 5 x",
+   "s": 293.51,
+   "e": 302.44
+  },
+  {
+   "t": "Division med 5 i båda led ger",
+   "s": 293.51,
+   "e": 302.44
+  },
+  {
+   "t": "x är lika med 10 upphöjt till 2,7 delat med 5 som är ungefär lika med 100,24",
+   "s": 302.44,
+   "e": 309.6
+  },
+  {
+   "t": "Svar: x är ungefär lika med 100,24",
+   "s": 309.6,
+   "e": 314.35
+  }
+ ]
+}

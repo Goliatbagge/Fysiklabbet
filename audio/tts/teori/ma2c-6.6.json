@@ -1,0 +1,188 @@
+{
+ "id": "ma2c-6.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "995334784de411dd0f2a1239af1f92429dc29e5b",
+ "dur": 242.99,
+ "segments": [
+  {
+   "t": "Linjär regression",
+   "s": 0.1,
+   "e": 2.62
+  },
+  {
+   "t": "Repetition från Matematik 1c",
+   "s": 2.58,
+   "e": 6.14
+  },
+  {
+   "t": "Om ett samband finns mellan två variabler har vi en korrelation.",
+   "s": 6.14,
+   "e": 10.71
+  },
+  {
+   "t": "Huruvida ett samband finns, kan undersökas med ett spridningsdiagram.",
+   "s": 10.71,
+   "e": 15.86
+  },
+  {
+   "t": "Om punkterna i ett spridningsdiagram ligger tydligt på en linje är korrelationen stark.",
+   "s": 15.86,
+   "e": 21.68
+  },
+  {
+   "t": "Om punkterna ligger kring en rät linje, men spridda är korrelationen svag.",
+   "s": 21.68,
+   "e": 26.99
+  },
+  {
+   "t": "Om punkterna ligger kring en linje med positiv lutning är korrelationen positiv.",
+   "s": 26.99,
+   "e": 32.52
+  },
+  {
+   "t": "Om punkterna ligger kring en linje med negativ lutning är korrelationen negativ.",
+   "s": 32.52,
+   "e": 37.95
+  },
+  {
+   "t": "Linjen som värdena ligger samlade kring kallas regressionslinje.",
+   "s": 37.95,
+   "e": 42.74
+  },
+  {
+   "t": "Om vi tar fram ekvationen för regressionslinjen gör vi en linjär regression.",
+   "s": 42.74,
+   "e": 48.24
+  },
+  {
+   "t": "En regressionsanalys går att göra ungefärligt för hand eller exaktare med digitala verktyg.",
+   "s": 48.24,
+   "e": 54.45
+  },
+  {
+   "t": "Vid regressionsanalysen kan vi ta fram ett värde som säger hur stark korrelationen är.",
+   "s": 54.45,
+   "e": 60.38
+  },
+  {
+   "t": "Detta värde kallas korrelationskoefficient, betecknas r och är alltid ett värde mellan −1 och 1.",
+   "s": 60.38,
+   "e": 67.06
+  },
+  {
+   "t": "Om punkterna ligger perfekt på en linje med positiv lutning är r är lika med 1 .",
+   "s": 67.06,
+   "e": 72.69
+  },
+  {
+   "t": "Om punkterna ligger perfekt på en linje med negativ lutning är r är lika med minus 1 .",
+   "s": 72.69,
+   "e": 78.59
+  },
+  {
+   "t": "Om ingen korrelation finns alls är r är lika med 0 .",
+   "s": 78.59,
+   "e": 82.92
+  },
+  {
+   "t": "Se exemplen nedan.",
+   "s": 82.92,
+   "e": 85.64
+  },
+  {
+   "t": "Exempel på samband: fotlängd/skostorlek har stark positiv korrelation, vägbredd/antal olyckor kan ha svag negativ korrelation och äggkonsumtion/kriminalitet har ingen korrelation.",
+   "s": 85.64,
+   "e": 98.4
+  },
+  {
+   "t": "Exempel 1 — Glassförsäljningen",
+   "s": 98.4,
+   "e": 101.64
+  },
+  {
+   "t": "Medeltemperaturen och ett företags försäljning av glass under en vecka visas nedan.",
+   "s": 101.64,
+   "e": 107.35
+  },
+  {
+   "t": "Spridningsdiagrammet och regressionslinjen som tas fram i a- och b-uppgifterna visas i figuren nedan.",
+   "s": 107.35,
+   "e": 114.19
+  },
+  {
+   "t": "a) Rita ett spridningsdiagram över resultatet.",
+   "s": 114.19,
+   "e": 118.67
+  },
+  {
+   "t": "Låt medeltemperaturen vara på x-axeln och glassförsäljningen på y-axeln.. b) Bestäm ekvationen för regressionslinjen.. c) Bestäm korrelationskoefficienten.. d) Uppskatta glassförsäljningen en vecka där medeltemperaturen är 30 grader Celsius utifrån din modell.",
+   "s": 118.67,
+   "e": 140.43
+  },
+  {
+   "t": "a) Starta Geogebra, växla till kalkylblad och skriv av värdena från tabellen.",
+   "s": 140.43,
+   "e": 146.62
+  },
+  {
+   "t": "Markera värdena, klicka på \"blå staplarna\", välj Tvåvariabels regressionsanalys och vårt spridningsdiagram visas.",
+   "s": 146.62,
+   "e": 154.71
+  },
+  {
+   "t": "b) Efter att ha tagit fram spridningsdiagrammet klickar vi på rullistan \"Regressionsmodell\" och väljer \"Linjär\".",
+   "s": 154.71,
+   "e": 161.93
+  },
+  {
+   "t": "Regressionslinjen ritas upp (den röda linjen i figuren) och ekvationen för den visas under diagrammet: y är lika med 268,6652 x plus 2 496,1775 .",
+   "s": 161.93,
+   "e": 176.43
+  },
+  {
+   "t": "Vi avrundar värdena i ekvationen till lämpligt antal värdesiffror.",
+   "s": 176.43,
+   "e": 181.4
+  },
+  {
+   "t": "Svar: y är ungefär lika med 270 x plus 2 500",
+   "s": 181.4,
+   "e": 187.6
+  },
+  {
+   "t": "(Givetvis går det bra att rita spridningsdiagrammet, rita regressionslinjen och ta fram ekvationen för hand, men det tar mycket längre tid och blir mindre exakt.)",
+   "s": 187.6,
+   "e": 197.55
+  },
+  {
+   "t": "c) Efter att ha tagit fram spridningsdiagrammet klickar vi på \"Visa statistik\", läser av r och avrundar till två decimaler: r är lika med 0,9651",
+   "s": 197.55,
+   "e": 208.8
+  },
+  {
+   "t": "Svar: r är ungefär lika med 0,97",
+   "s": 208.8,
+   "e": 213.2
+  },
+  {
+   "t": "d) Från b-uppgiften fick vi fram sambandet y är lika med 270 x plus 2 500 där x är medeltemperaturen i °C och y försäljningen i kronor.",
+   "s": 213.2,
+   "e": 224.72
+  },
+  {
+   "t": "Om medeltemperaturen är 30 grader Celsius sätter vi in x är lika med 30 i formeln ovan för att få fram den förväntade försäljningen:",
+   "s": 224.72,
+   "e": 239.09
+  },
+  {
+   "t": "y är lika med 270 gånger 30 plus 2 500 som är lika med 10 600",
+   "s": 224.72,
+   "e": 239.09
+  },
+  {
+   "t": "Svar: 10 600 kronor",
+   "s": 239.09,
+   "e": 242.99
+  }
+ ]
+}

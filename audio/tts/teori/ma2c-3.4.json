@@ -1,0 +1,258 @@
+{
+ "id": "ma2c-3.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "fdc04b9d300956f00e976fdd12bcec324e1a0542",
+ "dur": 316.8,
+ "segments": [
+  {
+   "t": "Andragradsekvationer och olikheter med grafritande hjälpmedel",
+   "s": 0.1,
+   "e": 5.17
+  },
+  {
+   "t": "Vi ska nu titta på hur man löser andragradsekvationer och olikheter grafiskt med hjälp av grafritande hjälpmedel, t.ex. Geogebra.",
+   "s": 5.12,
+   "e": 13.86
+  },
+  {
+   "t": "Vi har i en tidigare kurs löst linjära ekvationer med grafritande hjälpmedel och metoden är precis densamma för andragradsekvationer.",
+   "s": 13.86,
+   "e": 22.21
+  },
+  {
+   "t": "Skillnaden är att vi nu kan få två lösningar.",
+   "s": 22.21,
+   "e": 25.98
+  },
+  {
+   "t": "Lösa ekvationer med grafritande hjälpmedel",
+   "s": 25.98,
+   "e": 29.9
+  },
+  {
+   "t": "Vi har en ekvation VL är lika med HL.",
+   "s": 29.9,
+   "e": 33.74
+  },
+  {
+   "t": "Rita upp ekvationerna y är lika med vänsterledet och y är lika med högerledet i Geogebra.",
+   "s": 33.74,
+   "e": 40.25
+  },
+  {
+   "t": "Ta fram skärningarna och läs av deras x -koordinater.",
+   "s": 40.25,
+   "e": 44.62
+  },
+  {
+   "t": "Dessa är lösningarna!",
+   "s": 44.62,
+   "e": 47.27
+  },
+  {
+   "t": "Om vi har en andragradsekvation som är lika med 0, kan vi alternativt lösa ekvationen genom att ta fram nollställena.",
+   "s": 47.27,
+   "e": 54.71
+  },
+  {
+   "t": "Lösa ekvationer lika med 0 med grafritande hjälpmedel",
+   "s": 54.71,
+   "e": 59.4
+  },
+  {
+   "t": "Vi har en ekvation VL är lika med 0.",
+   "s": 59.4,
+   "e": 63.05
+  },
+  {
+   "t": "Rita upp ekvationen y är lika med vänsterledet .",
+   "s": 63.05,
+   "e": 67.53
+  },
+  {
+   "t": "Ta fram nollställena och läs av deras x -koordinater.",
+   "s": 67.53,
+   "e": 71.96
+  },
+  {
+   "t": "Dessa är lösningarna!",
+   "s": 71.96,
+   "e": 74.58
+  },
+  {
+   "t": "Vi kan även lösa olikheter med grafritande hjälpmedel.",
+   "s": 74.58,
+   "e": 79.14
+  },
+  {
+   "t": "Lösa olikheter med grafritande hjälpmedel",
+   "s": 79.14,
+   "e": 83.04
+  },
+  {
+   "t": "Vi har en olikhet, t.ex. VL < HL eller VL > HL.",
+   "s": 83.04,
+   "e": 88.51
+  },
+  {
+   "t": "Rita upp f av x är lika med vänsterledet och g av x är lika med högerledet .",
+   "s": 88.51,
+   "e": 94.72
+  },
+  {
+   "t": "Ta fram skärningarna och läs av deras x -koordinater.",
+   "s": 94.72,
+   "e": 99.09
+  },
+  {
+   "t": "Dessa ger gränserna för intervallet!",
+   "s": 99.09,
+   "e": 102.4
+  },
+  {
+   "t": "Om grafen till f av x ligger under grafen till g av x gäller f av x är mindre än g av x över grafen till g av x gäller f av x är större än g av x .",
+   "s": 102.4,
+   "e": 112.65
+  },
+  {
+   "t": "under grafen till g av x gäller f av x är mindre än g av x",
+   "s": 112.65,
+   "e": 118.12
+  },
+  {
+   "t": "över grafen till g av x gäller f av x är större än g av x .",
+   "s": 118.12,
+   "e": 123.54
+  },
+  {
+   "t": "Exempel 1 — Lös ekvationerna grafiskt",
+   "s": 123.54,
+   "e": 127.49
+  },
+  {
+   "t": "Lös ekvationerna grafiskt.",
+   "s": 127.49,
+   "e": 130.5
+  },
+  {
+   "t": "I a-uppgiften ritar vi upp båda leden som varsin funktion — grafen nedan visar uppritningen.",
+   "s": 130.5,
+   "e": 136.72
+  },
+  {
+   "t": "a) x i kvadrat minus 4 x plus 5 är lika med 2 b) x i kvadrat minus 2 x minus 15 är lika med 0",
+   "s": 136.72,
+   "e": 145.54
+  },
+  {
+   "t": "a) VAD: Vi ritar upp funktionerna y är lika med x i kvadrat minus 4 x plus 5 och y är lika med 2 i Geogebra (se figuren ovan) och tar fram skärningarnas koordinater.",
+   "s": 145.54,
+   "e": 157.44
+  },
+  {
+   "t": "HUR: Skärningarnas x -koordinater ger lösningarna, dvs. x ett är lika med 3 och x två är lika med 1 .",
+   "s": 157.44,
+   "e": 165.75
+  },
+  {
+   "t": "Svar: x ett är lika med 3 och x två är lika med 1",
+   "s": 165.75,
+   "e": 170.61
+  },
+  {
+   "t": "b) Här har vi en ekvation som är lika med 0 och vi kan då undersöka nollställena.",
+   "s": 170.61,
+   "e": 176.39
+  },
+  {
+   "t": "VAD: Vi ritar upp funktionen y är lika med x i kvadrat minus 2 x minus 15 i Geogebra och tar fram nollställena med verktyget \"Nollställen\".",
+   "s": 176.39,
+   "e": 186.25
+  },
+  {
+   "t": "HUR: Nollställenas x -koordinater ger lösningarna, dvs. x ett är lika med 5 och x två är lika med minus 3 .",
+   "s": 186.25,
+   "e": 194.88
+  },
+  {
+   "t": "Svar: x ett är lika med 5 och x två är lika med minus 3",
+   "s": 194.88,
+   "e": 199.95
+  },
+  {
+   "t": "Exempel 2 — Lös olikheterna grafiskt",
+   "s": 199.95,
+   "e": 203.99
+  },
+  {
+   "t": "Lös olikheterna nedan.",
+   "s": 203.99,
+   "e": 206.91
+  },
+  {
+   "t": "Vi ritar upp f av x är lika med x i kvadrat plus 6 x plus 6 och g av x är lika med 1 i Geogebra och tar fram skärningarnas koordinater — se grafen.",
+   "s": 206.91,
+   "e": 217.38
+  },
+  {
+   "t": "a) x i kvadrat plus 6 x plus 6 är mindre än 1 b) x i kvadrat plus 6 x plus 6 är större än 1",
+   "s": 217.38,
+   "e": 226.19
+  },
+  {
+   "t": "a) HUR: Skärningarnas x -koordinater ger intervallets gränser, dvs. x är lika med minus 5 och x är lika med minus 1 .",
+   "s": 226.19,
+   "e": 235.74
+  },
+  {
+   "t": "Eftersom x i kvadrat plus 6 x plus 6 är mindre än 1 gäller att f av x är mindre än g av x , dvs. f av x ska vara mindre än g av x .",
+   "s": 235.74,
+   "e": 246.3
+  },
+  {
+   "t": "Detta gäller när grafen till f av x är under grafen till g av x , dvs. mellan x är lika med minus 5 och x är lika med minus 1 .",
+   "s": 246.3,
+   "e": 255.64
+  },
+  {
+   "t": "Detta ger intervallet minus 5 är mindre än x är mindre än minus 1 .",
+   "s": 255.64,
+   "e": 261.21
+  },
+  {
+   "t": "Svar: minus 5 är mindre än x är mindre än minus 1",
+   "s": 261.21,
+   "e": 266.27
+  },
+  {
+   "t": "b) Vi har samma funktioner så graferna och skärningarna kommer att bli desamma som i a-uppgiften, så vi tittar på samma graf igen.",
+   "s": 266.27,
+   "e": 274.29
+  },
+  {
+   "t": "HUR: Skärningarnas x -koordinater ger återigen intervallets gränser, dvs. x är lika med minus 5 och x är lika med minus 1 .",
+   "s": 274.29,
+   "e": 283.75
+  },
+  {
+   "t": "Eftersom x i kvadrat plus 6 x plus 6 är större än 1 gäller att f av x är större än g av x , dvs. f av x ska vara större än g av x .",
+   "s": 283.75,
+   "e": 293.99
+  },
+  {
+   "t": "Detta gäller när grafen till f av x är över grafen till g av x , dvs. till vänster om x är lika med minus 5 och till höger om x är lika med minus 1 .",
+   "s": 293.99,
+   "e": 304.09
+  },
+  {
+   "t": "Detta ger intervallen x är mindre än minus 5 och x är större än minus 1 .",
+   "s": 304.09,
+   "e": 309.77
+  },
+  {
+   "t": "Svar: x är mindre än minus 5 och x är större än minus 1",
+   "s": 309.77,
+   "e": 316.8
+  }
+ ]
+}

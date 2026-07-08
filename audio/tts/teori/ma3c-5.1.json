@@ -1,0 +1,303 @@
+{
+ "id": "ma3c-5.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ae6956cbf6433d563f9ac40b5e5b345194a47014",
+ "dur": 388.74,
+ "segments": [
+  {
+   "t": "Primitiva funktioner",
+   "s": 0.1,
+   "e": 2.83
+  },
+  {
+   "t": "Vi har i tidigare avsnitt tagit fram derivatan f prim parentesen x slut parentes utifrån en ursprunglig funktion f av x .",
+   "s": 2.77,
+   "e": 11.55
+  },
+  {
+   "t": "Nu ska vi göra tvärtom, det vill säga ta fram en ursprunglig funktion f av x utifrån dess derivata f prim parentesen x slut parentes .",
+   "s": 11.55,
+   "e": 20.91
+  },
+  {
+   "t": "En sådan ursprunglig funktion till en annan funktion kallas primitiv funktion.",
+   "s": 20.91,
+   "e": 26.36
+  },
+  {
+   "t": "En primitiv funktion kallas också \"baklängesderivata\" eller \"antiderivata\".",
+   "s": 26.36,
+   "e": 31.88
+  },
+  {
+   "t": "Skrivsätt för primitiv funktion",
+   "s": 31.88,
+   "e": 35.24
+  },
+  {
+   "t": "Om vi har en funktion",
+   "s": 35.24,
+   "e": 37.83
+  },
+  {
+   "t": "f bis parentesen x slut parentes så skrivs den primitiva funktionen f prim parentesen x slut parentes",
+   "s": 37.83,
+   "e": 46.16
+  },
+  {
+   "t": "f prim parentesen x slut parentes så skrivs den primitiva funktionen f av x",
+   "s": 46.16,
+   "e": 57.48
+  },
+  {
+   "t": "f av x så skrivs den primitiva funktionen F parentesen x slut parentes",
+   "s": 46.16,
+   "e": 57.48
+  },
+  {
+   "t": "För en primitiv funktion F parentesen x slut parentes gäller alltså F prim parentesen x slut parentes är lika med f av x .",
+   "s": 57.48,
+   "e": 66.67
+  },
+  {
+   "t": "En primitiv funktion till f av x är lika med 2 x är alltså F parentesen x slut parentes är lika med x i kvadrat , eftersom vi när vi deriverar F parentesen x slut parentes är lika med x i kvadrat får derivatan f av x är lika med 2 x enligt våra tidigare deriveringsregler.",
+   "s": 66.67,
+   "e": 84.4
+  },
+  {
+   "t": "Men även F parentesen x slut parentes är lika med x i kvadrat plus 7 eller F parentesen x slut parentes är lika med x i kvadrat minus 12 har derivatan F prim parentesen x slut parentes är lika med 2 x .",
+   "s": 84.4,
+   "e": 98.59
+  },
+  {
+   "t": "Vi får alltså skilja på om vi ska ange en primitiv funktion eller samtliga primitiva funktioner.",
+   "s": 98.59,
+   "e": 104.79
+  },
+  {
+   "t": "Ange en primitiv funktion eller samtliga primitiva funktioner",
+   "s": 104.79,
+   "e": 109.53
+  },
+  {
+   "t": "Om vi till f av x är lika med 2 x ska ange",
+   "s": 109.53,
+   "e": 113.86
+  },
+  {
+   "t": "en primitiv funktion gäller: F parentesen x slut parentes är lika med x i kvadrat",
+   "s": 113.86,
+   "e": 120.41
+  },
+  {
+   "t": "samtliga eller alla primitiva funktioner gäller: F parentesen x slut parentes är lika med x i kvadrat plus C , där C är en konstant som kan stå för vilket tal som helst",
+   "s": 120.41,
+   "e": 131.8
+  },
+  {
+   "t": "Exempel 1 — En och samtliga primitiva funktioner",
+   "s": 131.8,
+   "e": 136.2
+  },
+  {
+   "t": "Ange för funktionen f av x är lika med 3 x i kvadrat . a) en primitiv funktion b) samtliga primitiva funktioner",
+   "s": 136.2,
+   "e": 146.44
+  },
+  {
+   "t": "a) Om vi deriverar F parentesen x slut parentes är lika med x i kubik så får vi f av x är lika med 3 x i kvadrat enligt deriveringsreglerna.",
+   "s": 146.44,
+   "e": 156.6
+  },
+  {
+   "t": "Alltså är F parentesen x slut parentes är lika med x i kubik en primitiv funktion.",
+   "s": 156.6,
+   "e": 163.21
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med x i kubik",
+   "s": 163.21,
+   "e": 168.86
+  },
+  {
+   "t": "b) Vi tar svaret i a-uppgiften och lägger till den generella konstanten C .",
+   "s": 168.86,
+   "e": 174.49
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med x i kubik plus C",
+   "s": 174.49,
+   "e": 180.65
+  },
+  {
+   "t": "Ibland är det lätt att se vilken den primitiva funktionen är.",
+   "s": 180.65,
+   "e": 185.06
+  },
+  {
+   "t": "Ibland är det svårare.",
+   "s": 185.06,
+   "e": 187.49
+  },
+  {
+   "t": "Då finns tre metoder som alltid fungerar beroende på om vi har en potensfunktion, en konstant funktion eller en exponentialfunktion.",
+   "s": 187.49,
+   "e": 195.72
+  },
+  {
+   "t": "I den här kursen kommer vi bara ta fram primitiva funktioner till exponentialfunktioner med basen e .",
+   "s": 195.72,
+   "e": 202.18
+  },
+  {
+   "t": "Bestämma primitiva funktioner",
+   "s": 202.18,
+   "e": 205.29
+  },
+  {
+   "t": "Bestämma primitiva funktioner",
+   "s": 205.29,
+   "e": 208.36
+  },
+  {
+   "t": "Exempel 2 — Bestäm en primitiv funktion",
+   "s": 208.36,
+   "e": 212.28
+  },
+  {
+   "t": "Bestäm en primitiv funktion till. a) f av x är lika med 5 b) f av x är lika med 14 x i kvadrat minus 3 c) f av x är lika med e upphöjt till 4 x",
+   "s": 212.28,
+   "e": 232.44
+  },
+  {
+   "t": "a) Vi har en konstant funktion, så vi multiplicerar konstanten med x och får F parentesen x slut parentes är lika med 5 x . (Eftersom vi bara ska ta fram en primitiv funktion och inte samtliga behöver vi inte lägga till konstanten C .)",
+   "s": 215.47,
+   "e": 239.2
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med 5 x",
+   "s": 239.2,
+   "e": 249.18
+  },
+  {
+   "t": "b) Vi har en funktion med flera termer och tar då fram en primitiv funktion till varje term för sig.",
+   "s": 239.2,
+   "e": 249.18
+  },
+  {
+   "t": "Termen 14 x i kvadrat är en potensterm ( x i basen) där vi ska öka exponenten med 1 och dividera med den nya exponenten.",
+   "s": 249.18,
+   "e": 257.86
+  },
+  {
+   "t": "Vi får då 14 x i kubik delat med 3 .",
+   "s": 257.86,
+   "e": 261.94
+  },
+  {
+   "t": "Termen minus 3 är en konstantterm där vi ska multiplicera den med x .",
+   "s": 261.94,
+   "e": 267.26
+  },
+  {
+   "t": "Vi får då minus 3 x .",
+   "s": 267.26,
+   "e": 270.21
+  },
+  {
+   "t": "Lägger vi ihop dessa får vi den primitiva funktionen",
+   "s": 270.21,
+   "e": 274.51
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med 14 x i kubik delat med 3 minus 3 x",
+   "s": 274.51,
+   "e": 295.85
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med 14 x i kubik delat med 3 minus 3 x",
+   "s": 274.51,
+   "e": 295.85
+  },
+  {
+   "t": "c) Vi har en exponentialfunktion ( x i exponenten) och ska då skriva av funktionen och sedan dividera med koefficienten (talet) framför x i exponenten.",
+   "s": 274.51,
+   "e": 295.85
+  },
+  {
+   "t": "I detta fall är koefficienten 4, så vi dividerar med 4 och får då",
+   "s": 295.85,
+   "e": 303.04
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med e upphöjt till 4 x delat med 4",
+   "s": 302.99,
+   "e": 309.08
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med e upphöjt till 4 x delat med 4",
+   "s": 309.08,
+   "e": 315.82
+  },
+  {
+   "t": "Exempel 3 — Bestäm samtliga primitiva funktioner",
+   "s": 315.82,
+   "e": 320.08
+  },
+  {
+   "t": "Bestäm samtliga primitiva funktioner till. a) f av x är lika med 6 x b) f av x är lika med 6 e upphöjt till 3 x",
+   "s": 320.08,
+   "e": 336.82
+  },
+  {
+   "t": "a) Vi har en potensfunktion ( x i basen) och ska då öka exponenten med 1 och dividera med den nya exponenten.",
+   "s": 323.62,
+   "e": 336.82
+  },
+  {
+   "t": "Eftersom vi ska ha samtliga primitiva funktioner ska vi lägga till konstanten C på slutet.",
+   "s": 336.82,
+   "e": 342.94
+  },
+  {
+   "t": "Vi får då",
+   "s": 342.94,
+   "e": 344.94
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med 6 x i kvadrat delat med 2 plus C som är lika med 3 x i kvadrat plus C",
+   "s": 344.94,
+   "e": 366.42
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med 3 x i kvadrat plus C",
+   "s": 344.94,
+   "e": 366.42
+  },
+  {
+   "t": "b) Vi har en exponentialfunktion ( x i exponenten) och ska då skriva av funktionen och dividera med koefficienten (talet) framför x i exponenten.",
+   "s": 344.94,
+   "e": 366.42
+  },
+  {
+   "t": "Eftersom vi ska ha samtliga primitiva funktioner ska vi lägga till konstanten C på slutet.",
+   "s": 366.42,
+   "e": 372.55
+  },
+  {
+   "t": "Vi får då",
+   "s": 372.55,
+   "e": 374.57
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med 6 e upphöjt till 3 x delat med 3 plus C som är lika med 2 e upphöjt till 3 x plus C",
+   "s": 374.57,
+   "e": 388.74
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med 2 e upphöjt till 3 x plus C",
+   "s": 374.57,
+   "e": 388.74
+  }
+ ]
+}

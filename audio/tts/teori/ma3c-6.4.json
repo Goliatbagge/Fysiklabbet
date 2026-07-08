@@ -1,0 +1,158 @@
+{
+ "id": "ma3c-6.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f04de86129635112fdd7247667a33f4329cd511d",
+ "dur": 192.72,
+ "segments": [
+  {
+   "t": "Trigonometriska ekvationer – räknelektion och tangens",
+   "s": 0.1,
+   "e": 4.65
+  },
+  {
+   "t": "Ekvationer av typen sinus v är lika med a eller cosinus v är lika med a löser vi med hjälp av deras inversa funktioner.",
+   "s": 4.6,
+   "e": 12.62
+  },
+  {
+   "t": "På motsvarande sätt löser vi ekvationen tangens v är lika med a med den inversa funktionen för tangens.",
+   "s": 12.62,
+   "e": 19.34
+  },
+  {
+   "t": "Precis som sinus upphöjt till minus 1 och cosinus upphöjt till minus 1 skriver vi den inversa funktionen för tangens som tangens upphöjt till minus 1 .",
+   "s": 19.34,
+   "e": 29.02
+  },
+  {
+   "t": "Vi har tidigare konstaterat att sinus- och cosinusfunktionerna upprepas för varje 360 grader som läggs till (eller dras ifrån) en vinkel.",
+   "s": 29.02,
+   "e": 38.52
+  },
+  {
+   "t": "Vi säger att sinus- och cosinusfunktionen har en period på 360 grader .",
+   "s": 38.52,
+   "e": 44.4
+  },
+  {
+   "t": "Härledning — tangens period",
+   "s": 44.4,
+   "e": 47.3
+  },
+  {
+   "t": "Vi undersöker perioden för tangensfunktionen.",
+   "s": 47.3,
+   "e": 51.38
+  },
+  {
+   "t": "Vi vet sedan tidigare att",
+   "s": 51.38,
+   "e": 54.3
+  },
+  {
+   "t": "tangens v är lika med sinus v delat med cosinus v",
+   "s": 54.3,
+   "e": 58.96
+  },
+  {
+   "t": "Detta ger",
+   "s": 58.96,
+   "e": 60.92
+  },
+  {
+   "t": "tangens parentesen v plus 180 grader slut parentes är lika med sinus parentesen v plus 180 grader slut parentes delat med cosinus parentesen v plus 180 grader slut parentes som är lika med minus sinus v delat med minus cosinus v som är lika med sinus v delat med cosinus v som är lika med tangens v",
+   "s": 60.92,
+   "e": 80.33
+  },
+  {
+   "t": "Vi ser alltså att",
+   "s": 80.33,
+   "e": 82.76
+  },
+  {
+   "t": "tangens v är lika med tangens parentesen v plus 180 grader slut parentes",
+   "s": 82.76,
+   "e": 89.01
+  },
+  {
+   "t": "Tangensfunktionen har alltså en period på 180 grader v.s.v.",
+   "s": 89.01,
+   "e": 95.56
+  },
+  {
+   "t": "Kuriosa — tangens period",
+   "s": 89.01,
+   "e": 95.56
+  },
+  {
+   "t": "Det finns ett alternativt sätt att tänka kring tangens period.",
+   "s": 95.56,
+   "e": 99.84
+  },
+  {
+   "t": "Eftersom",
+   "s": 99.84,
+   "e": 101.9
+  },
+  {
+   "t": "tangens v är lika med sinus v delat med cosinus v som är lika med y delat med x som är lika med k",
+   "s": 101.9,
+   "e": 109.05
+  },
+  {
+   "t": "kan vi se värdet av tangens v som riktningskoefficienten ( k -värdet) för linjen genom origo och en punkt på enhetscirkeln.",
+   "s": 109.05,
+   "e": 117.26
+  },
+  {
+   "t": "Bildar vi en godtycklig vinkel v ger den en punkt på enhetscirkeln, och linjen genom origo och den punkten får ett visst k -värde.",
+   "s": 117.26,
+   "e": 125.26
+  },
+  {
+   "t": "Vrider vi vinkeln ytterligare 180 grader hamnar vi i den diametralt motsatta punkten på cirkeln — men det är samma linje genom origo, så lutningen ( tangens v ) blir densamma.",
+   "s": 125.26,
+   "e": 136.46
+  },
+  {
+   "t": "Alltså är perioden för tangensfunktionen 180 grader .",
+   "s": 136.46,
+   "e": 141.4
+  },
+  {
+   "t": "Trigonometriska funktioner och perioder",
+   "s": 141.4,
+   "e": 144.94
+  },
+  {
+   "t": "Exempel 1 — Lös en tangensekvation",
+   "s": 144.94,
+   "e": 148.8
+  },
+  {
+   "t": "Lös ekvationen tangens v är lika med 2 i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader .",
+   "s": 148.8,
+   "e": 158.03
+  },
+  {
+   "t": "v ett är lika med tangens upphöjt till minus 1, ekvation 2 som är lika med 63,434 grader som är ungefär lika med 63,4 grader",
+   "s": 158.03,
+   "e": 169.01
+  },
+  {
+   "t": "Vi lägger till en period på 180 grader för att få den andra lösningen i intervallet.",
+   "s": 169.01,
+   "e": 175.03
+  },
+  {
+   "t": "v två är ungefär lika med 63,4 grader plus 180 grader som är lika med 243,4 grader",
+   "s": 175.03,
+   "e": 183.71
+  },
+  {
+   "t": "Svar: v ett är ungefär lika med 63,4 grader och v två är ungefär lika med 243,4 grader",
+   "s": 183.71,
+   "e": 192.72
+  }
+ ]
+}

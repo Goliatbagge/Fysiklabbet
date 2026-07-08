@@ -1,0 +1,183 @@
+{
+ "id": "ma3c-2.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a5024b611dc2024d6d18a3ad5f5884998e41fb5c",
+ "dur": 258.91,
+ "segments": [
+  {
+   "t": "Derivatans definition",
+   "s": 0.1,
+   "e": 2.89
+  },
+  {
+   "t": "Tangentens lutning i en punkt kallas derivata.",
+   "s": 2.84,
+   "e": 6.84
+  },
+  {
+   "t": "Ska vi bestämma derivatan för en funktion f av x i punkten där x är lika med a skriver vi f prim parentesen a slut parentes , vilket utläses \" f prim av a \".",
+   "s": 6.84,
+   "e": 17.36
+  },
+  {
+   "t": "Vi har tidigare konstaterat att en kurvas medellutning över ett intervall kan beräknas exakt med sekantens lutning.",
+   "s": 17.36,
+   "e": 24.68
+  },
+  {
+   "t": "Men hur kan vi bestämma lutningen exakt i en enda punkt — alltså tangentens lutning?",
+   "s": 24.68,
+   "e": 30.4
+  },
+  {
+   "t": "Vi ritar upp en godtycklig funktion f av x och vill bestämma lutningen exakt i punkten med x -koordinaten a .",
+   "s": 30.4,
+   "e": 37.85
+  },
+  {
+   "t": "Vi drar en sekant där den andra punkten ligger på avståndet h i sidled från den första punkten. x -koordinaten för den andra punkten är då a plus h .",
+   "s": 37.85,
+   "e": 48.76
+  },
+  {
+   "t": "Se figuren nedan.",
+   "s": 48.76,
+   "e": 51.36
+  },
+  {
+   "t": "De två punkterna parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes på sekanten är alltså parentesen a, f av a slut parentes och parentesen a plus h, f av a plus h slut parentes .",
+   "s": 51.36,
+   "e": 66.14
+  },
+  {
+   "t": "Sekantens lutning kan då beräknas enligt",
+   "s": 66.14,
+   "e": 69.99
+  },
+  {
+   "t": "k är lika med y två minus y ett delat med x två minus x ett som är lika med f av a plus h minus f av a delat med parentesen a plus h slut parentes minus a som är lika med f av a plus h minus f av a delat med h",
+   "s": 69.99,
+   "e": 84.61
+  },
+  {
+   "t": "Om vi låter avståndet h mellan punkterna minska och gå mot 0 kommer sekanten att övergå till en tangent.",
+   "s": 84.61,
+   "e": 91.61
+  },
+  {
+   "t": "Lutningen i punkten — derivatan — får vi alltså genom att beräkna ett gränsvärde då h går mot 0.",
+   "s": 91.61,
+   "e": 98.01
+  },
+  {
+   "t": "Detta är derivatans definition!",
+   "s": 98.01,
+   "e": 101.35
+  },
+  {
+   "t": "Derivatans definition",
+   "s": 101.35,
+   "e": 104.08
+  },
+  {
+   "t": "f prim parentesen a slut parentes är lika med gränsvärdet då h går mot 0 f av a plus h minus f av a delat med h eller f prim parentesen x slut parentes som är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h",
+   "s": 104.08,
+   "e": 120.49
+  },
+  {
+   "t": "Steg för steg",
+   "s": 104.08,
+   "e": 120.49
+  },
+  {
+   "t": "Ställ upp derivatans definition med funktionen f (och eventuellt en given punkt a ).",
+   "s": 120.49,
+   "e": 126.95
+  },
+  {
+   "t": "Förenkla täljaren och faktorisera bort h ur täljare och nämnare — annars går det inte att sätta h är lika med 0 (det ger division med 0).",
+   "s": 126.95,
+   "e": 135.54
+  },
+  {
+   "t": "Sätt nu h är lika med 0 och beräkna gränsvärdet.",
+   "s": 135.54,
+   "e": 139.82
+  },
+  {
+   "t": "Exempel 1 — Derivatans definition",
+   "s": 139.82,
+   "e": 143.45
+  },
+  {
+   "t": "Funktionen f av x är lika med x i kvadrat är given.",
+   "s": 143.45,
+   "e": 148.3
+  },
+  {
+   "t": "Bestäm. a) f prim, ekvation 5 b) tangentens lutning då x är lika med 5 .",
+   "s": 148.3,
+   "e": 156.47
+  },
+  {
+   "t": "a) Vi ställer upp derivatans definition, sätter därefter a är lika med 5 och förenklar.",
+   "s": 156.47,
+   "e": 163.05
+  },
+  {
+   "t": "f prim parentesen a slut parentes är lika med gränsvärdet då h går mot 0 f av a plus h minus f av a delat med h",
+   "s": 163.05,
+   "e": 197.11
+  },
+  {
+   "t": "f prim, ekvation 5 är lika med gränsvärdet då h går mot 0 f av 5 plus h minus f av 5 delat med h som är lika med gränsvärdet då h går mot 0 parentesen 5 plus h slut parentes i kvadrat minus 5 i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 25 plus 10 timmar plus h i kvadrat minus 25 delat med h som är lika med gränsvärdet då h går mot 0 10 timmar plus h i kvadrat delat med h",
+   "s": 163.05,
+   "e": 199.2
+  },
+  {
+   "t": "Vi kan inte sätta h är lika med 0 direkt eftersom vi då får en division med 0.",
+   "s": 199.2,
+   "e": 204.64
+  },
+  {
+   "t": "Vi faktoriserar täljaren och förkortar bort h .",
+   "s": 204.64,
+   "e": 208.66
+  },
+  {
+   "t": "f prim, ekvation 5 är lika med gränsvärdet då h går mot 0 timmar parentesen 10 plus h slut parentes delat med h som är lika med gränsvärdet då h går mot 0 parentesen 10 plus h slut parentes",
+   "s": 208.66,
+   "e": 221.89
+  },
+  {
+   "t": "Nu är nämnaren borta, så vi kan sätta h är lika med 0 och beräkna gränsvärdet.",
+   "s": 221.89,
+   "e": 227.71
+  },
+  {
+   "t": "f prim, ekvation 5 är lika med gränsvärdet då h går mot 0 parentesen 10 plus h slut parentes som är lika med 10 plus 0 som är lika med 10",
+   "s": 227.71,
+   "e": 237.86
+  },
+  {
+   "t": "Svar: f prim, ekvation 5 är lika med 10",
+   "s": 237.86,
+   "e": 242.56
+  },
+  {
+   "t": "b) Tangentens lutning då x är lika med 5 är samma sak som derivatan f prim, ekvation 5 .",
+   "s": 242.56,
+   "e": 250.21
+  },
+  {
+   "t": "Svaret är alltså detsamma som i a).",
+   "s": 250.21,
+   "e": 253.84
+  },
+  {
+   "t": "Svar: Tangentens lutning då x är lika med 5 är 10 .",
+   "s": 253.84,
+   "e": 258.91
+  }
+ ]
+}

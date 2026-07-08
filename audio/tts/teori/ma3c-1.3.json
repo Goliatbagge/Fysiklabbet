@@ -1,0 +1,288 @@
+{
+ "id": "ma3c-1.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7fa995912656b85a17e08e35b022348b735ffca6",
+ "dur": 458.89,
+ "segments": [
+  {
+   "t": "Multiplikation och division av rationella uttryck",
+   "s": 0.1,
+   "e": 4.42
+  },
+  {
+   "t": "För multiplikation och division av rationella uttryck gäller samma regler som för multiplikation och division av bråk — skillnaden är att täljare och nämnare nu är polynom.",
+   "s": 4.38,
+   "e": 14.78
+  },
+  {
+   "t": "Precis som vid förkortning behöver vi ofta faktorisera först för att kunna förenkla resultatet så långt som möjligt.",
+   "s": 14.78,
+   "e": 22.19
+  },
+  {
+   "t": "Multiplikation av rationella uttryck",
+   "s": 22.19,
+   "e": 25.8
+  },
+  {
+   "t": "Vid multiplikation av två rationella uttryck multipliceras täljarna med varandra och nämnarna med varandra:",
+   "s": 25.8,
+   "e": 38.41
+  },
+  {
+   "t": "a delat med b gånger c delat med d är lika med a gånger c delat med b gånger d",
+   "s": 25.8,
+   "e": 38.41
+  },
+  {
+   "t": "Faktorisera gärna täljare och nämnare innan du multiplicerar ihop dem — det gör det lättare att se vilka faktorer som senare kan förkortas bort.",
+   "s": 38.41,
+   "e": 46.89
+  },
+  {
+   "t": "Exempel 1 — Multiplikation av rationella uttryck",
+   "s": 46.89,
+   "e": 51.46
+  },
+  {
+   "t": "Förenkla. a) 3 delat med 8 minus x gånger x i kvadrat plus 5 delat med 6 b) 3 x plus 6 delat med x minus 2 gånger x i kvadrat minus 4 delat med 3",
+   "s": 51.46,
+   "e": 65.33
+  },
+  {
+   "t": "a) Vi multiplicerar täljare med täljare och nämnare med nämnare:",
+   "s": 65.33,
+   "e": 82.04
+  },
+  {
+   "t": "3 delat med 8 minus x gånger x i kvadrat plus 5 delat med 6 är lika med 3 parentesen x i kvadrat plus 5 slut parentes delat med 6 parentesen 8 minus x slut parentes",
+   "s": 65.33,
+   "e": 82.04
+  },
+  {
+   "t": "Förkortar med 3:",
+   "s": 82.04,
+   "e": 116.76
+  },
+  {
+   "t": "3 parentesen x i kvadrat plus 5 slut parentes delat med 6 parentesen 8 minus x slut parentes är lika med x i kvadrat plus 5 delat med 2 parentesen 8 minus x slut parentes som är lika med x i kvadrat plus 5 delat med 16 minus 2 x",
+   "s": 82.04,
+   "e": 116.76
+  },
+  {
+   "t": "Svar: x i kvadrat plus 5 delat med 2 parentesen 8 minus x slut parentes är lika med x i kvadrat plus 5 delat med 16 minus 2 x",
+   "s": 82.04,
+   "e": 116.76
+  },
+  {
+   "t": "b) Vi faktoriserar täljare och nämnare så långt det går, multiplicerar ihop dem och förkortar därefter med lika dana faktorer.",
+   "s": 82.04,
+   "e": 118.71
+  },
+  {
+   "t": "Täljaren 3 x plus 6 bryts ut till 3 parentesen x plus 2 slut parentes , och nämnaren x i kvadrat minus 4 är en konjugat: x i kvadrat minus 4 är lika med parentesen x plus 2 slut parentes parentesen x minus 2 slut parentes .",
+   "s": 118.71,
+   "e": 135.44
+  },
+  {
+   "t": "3 x plus 6 delat med x minus 2 gånger x i kvadrat minus 4 delat med 3 är lika med 3 parentesen x plus 2 slut parentes delat med x minus 2 gånger parentesen x plus 2 slut parentes parentesen x minus 2 slut parentes delat med 3 som är lika med 3 parentesen x plus 2 slut parentes parentesen x plus 2 slut parentes parentesen x minus 2 slut parentes delat med 3 parentesen x minus 2 slut parentes",
+   "s": 135.44,
+   "e": 165.1
+  },
+  {
+   "t": "Förkortar med 3 parentesen x minus 2 slut parentes :",
+   "s": 165.1,
+   "e": 193.9
+  },
+  {
+   "t": "3 parentesen x plus 2 slut parentes parentesen x plus 2 slut parentes parentesen x minus 2 slut parentes delat med 3 parentesen x minus 2 slut parentes är lika med parentesen x plus 2 slut parentes parentesen x plus 2 slut parentes som är lika med parentesen x plus 2 slut parentes i kvadrat som är lika med x i kvadrat plus 4 x plus 4",
+   "s": 165.1,
+   "e": 193.9
+  },
+  {
+   "t": "Svar: parentesen x plus 2 slut parentes i kvadrat är lika med x i kvadrat plus 4 x plus 4",
+   "s": 193.9,
+   "e": 202.18
+  },
+  {
+   "t": "Division av rationella uttryck",
+   "s": 202.18,
+   "e": 205.44
+  },
+  {
+   "t": "Division av rationella uttryck",
+   "s": 205.44,
+   "e": 208.7
+  },
+  {
+   "t": "Vid division med ett rationellt uttryck byter man ut det stora divisionstecknet mot multiplikation, samtidigt som man inverterar (byter plats på täljare och nämnare i) uttrycket i nämnaren.",
+   "s": 208.7,
+   "e": 220.62
+  },
+  {
+   "t": "Sedan förenklas det som vanligt:",
+   "s": 220.62,
+   "e": 232.35
+  },
+  {
+   "t": "a delat med b delat med c delat med d är lika med a delat med b gånger d delat med c",
+   "s": 220.62,
+   "e": 232.35
+  },
+  {
+   "t": "Exempel 2 — Division av rationella uttryck",
+   "s": 220.62,
+   "e": 232.35
+  },
+  {
+   "t": "Förenkla 3 x delat med x plus 7 delat med 5 x delat med x minus 2 .",
+   "s": 232.35,
+   "e": 238.56
+  },
+  {
+   "t": "Vi byter ut divisionstecknet mot multiplikation och inverterar uttrycket i nämnaren:",
+   "s": 238.56,
+   "e": 255.95
+  },
+  {
+   "t": "3 x delat med x plus 7 gånger x minus 2 delat med 5 x är lika med 3 x parentesen x minus 2 slut parentes delat med 5 x parentesen x plus 7 slut parentes",
+   "s": 238.56,
+   "e": 255.95
+  },
+  {
+   "t": "Förkortar med x :",
+   "s": 255.95,
+   "e": 275.32
+  },
+  {
+   "t": "3 x parentesen x minus 2 slut parentes delat med 5 x parentesen x plus 7 slut parentes är lika med 3 parentesen x minus 2 slut parentes delat med 5 parentesen x plus 7 slut parentes som är lika med 3 x minus 6 delat med 5 x plus 35",
+   "s": 255.95,
+   "e": 275.32
+  },
+  {
+   "t": "Svar: 3 parentesen x minus 2 slut parentes delat med 5 parentesen x plus 7 slut parentes är lika med 3 x minus 6 delat med 5 x plus 35",
+   "s": 275.32,
+   "e": 287.27
+  },
+  {
+   "t": "Ekvationer med rationella uttryck",
+   "s": 287.27,
+   "e": 290.59
+  },
+  {
+   "t": "Multiplikations- och divisionsreglerna används också när vi löser ekvationer som innehåller rationella uttryck.",
+   "s": 290.59,
+   "e": 297.59
+  },
+  {
+   "t": "Ett viktigt förbehåll: eftersom division med noll inte är definierad måste vi alltid utesluta de värden på x som gör någon nämnare i ekvationen lika med noll.",
+   "s": 297.59,
+   "e": 309.1
+  },
+  {
+   "t": "Exempel 3 — Lös en ekvation med rationella uttryck",
+   "s": 309.05,
+   "e": 313.61
+  },
+  {
+   "t": "Lös ekvationen x minus 2 delat med x minus 3 är lika med x plus 7 delat med x .",
+   "s": 313.61,
+   "e": 320.32
+  },
+  {
+   "t": "Eftersom ingen nämnare får vara noll måste x är inte lika med 3 och x är inte lika med 0 .",
+   "s": 320.32,
+   "e": 326.45
+  },
+  {
+   "t": "Alternativ 1: Multiplicera med MGN",
+   "s": 326.45,
+   "e": 330.54
+  },
+  {
+   "t": "Vi multiplicerar båda leden med minsta gemensamma nämnaren, M G N är lika med x parentesen x minus 3 slut parentes , och förkortar:",
+   "s": 330.54,
+   "e": 362.75
+  },
+  {
+   "t": "x parentesen x minus 3 slut parentes parentesen x minus 2 slut parentes delat med x minus 3 är lika med x parentesen x minus 3 slut parentes parentesen x plus 7 slut parentes delat med x vilket ger att x parentesen x minus 2 slut parentes är lika med parentesen x minus 3 slut parentes parentesen x plus 7 slut parentes",
+   "s": 330.54,
+   "e": 362.75
+  },
+  {
+   "t": "Alternativ 2: Korsvis multiplikation",
+   "s": 362.75,
+   "e": 366.82
+  },
+  {
+   "t": "Eftersom ekvationen har formen a delat med b är lika med c delat med d kan vi multiplicera korsvis, a gånger d är lika med c gånger b , vilket ger samma ekvation direkt:",
+   "s": 366.82,
+   "e": 387.01
+  },
+  {
+   "t": "x parentesen x minus 2 slut parentes är lika med parentesen x minus 3 slut parentes parentesen x plus 7 slut parentes",
+   "s": 366.82,
+   "e": 387.01
+  },
+  {
+   "t": "Båda alternativen leder alltså till samma andragradsekvation.",
+   "s": 387.01,
+   "e": 391.82
+  },
+  {
+   "t": "Vi utvecklar högerledet:",
+   "s": 391.82,
+   "e": 399.82
+  },
+  {
+   "t": "x i kvadrat minus 2 x är lika med x i kvadrat plus 4 x minus 21",
+   "s": 391.82,
+   "e": 399.82
+  },
+  {
+   "t": "Vi subtraherar x i kvadrat från båda led, samlar x -termerna på samma sida och löser ut x :",
+   "s": 399.82,
+   "e": 422.1
+  },
+  {
+   "t": "minus 2 x är lika med 4 x minus 21 minus 2 x minus 4 x som är lika med minus 21 minus 6 x som är lika med minus 21 x som är lika med minus 21 delat med minus 6 som är lika med 21 delat med 6 som är lika med 7 delat med 2",
+   "s": 399.82,
+   "e": 422.1
+  },
+  {
+   "t": "Lösningen x är lika med 7 delat med 2 är varken 3 eller 0, så den är giltig.",
+   "s": 422.1,
+   "e": 428.25
+  },
+  {
+   "t": "Svar: x är lika med 7 delat med 2",
+   "s": 428.25,
+   "e": 432.21
+  },
+  {
+   "t": "Sammanfattning",
+   "s": 432.21,
+   "e": 434.41
+  },
+  {
+   "t": "Multiplikation: täljare gånger täljare, nämnare gånger nämnare.",
+   "s": 434.41,
+   "e": 439.7
+  },
+  {
+   "t": "Division: byt ut divisionstecknet mot multiplikation och invertera uttrycket i nämnaren.",
+   "s": 439.7,
+   "e": 446.41
+  },
+  {
+   "t": "Faktorisera täljare och nämnare innan du förenklar — då syns vilka faktorer som kan förkortas bort.",
+   "s": 446.41,
+   "e": 452.96
+  },
+  {
+   "t": "Uteslut alltid de värden på x som gör någon nämnare i ekvationen lika med noll.",
+   "s": 452.96,
+   "e": 458.89
+  }
+ ]
+}

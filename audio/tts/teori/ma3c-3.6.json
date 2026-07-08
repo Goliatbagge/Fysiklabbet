@@ -1,0 +1,443 @@
+{
+ "id": "ma3c-3.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d60adfe0e7009a749fb2b4b8306a76b9840fe114",
+ "dur": 580.31,
+ "segments": [
+  {
+   "t": "Tillämpningar av derivata",
+   "s": 0.1,
+   "e": 3.0
+  },
+  {
+   "t": "I avsnittet Använda derivata konstaterade vi hur derivatan tolkas: en positiv derivata svarar mot en ökning och en negativ derivata mot en minskning, och enheten för derivatan fås som \"enheten för funktionen som deriveras\" per \"enheten för variabeln\".",
+   "s": 2.95,
+   "e": 18.51
+  },
+  {
+   "t": "I det här avsnittet bygger vi vidare på det med två nya tillämpningar: att bestämma en obekant konstant i en modell med hjälp av derivatan, och att bestämma ekvationen för tangenten till en kurva i en given punkt.",
+   "s": 18.51,
+   "e": 30.55
+  },
+  {
+   "t": "Exempel 1 — Tillväxthastighet för en folkmängd",
+   "s": 30.55,
+   "e": 34.86
+  },
+  {
+   "t": "Folkmängden N parentesen t slut parentes i en kommun beräknas minska enligt N parentesen t slut parentes är lika med 42 000 gånger 0,98 upphöjt till t , där t är tiden i år från 1 januari 2020.",
+   "s": 34.86,
+   "e": 49.59
+  },
+  {
+   "t": "Beräkna tillväxthastigheten den 1 januari 2025.",
+   "s": 49.59,
+   "e": 54.76
+  },
+  {
+   "t": "Tillväxthastigheten av folkmängden vid en tidpunkt motsvaras av derivatan av folkmängden.",
+   "s": 54.76,
+   "e": 61.4
+  },
+  {
+   "t": "Tiden från 1 januari 2020 till 1 januari 2025 är 5 år, dvs. t är lika med 5 .",
+   "s": 61.4,
+   "e": 69.85
+  },
+  {
+   "t": "Det är alltså N prim, ekvation 5 som söks.",
+   "s": 69.85,
+   "e": 74.06
+  },
+  {
+   "t": "Vi deriverar först och sätter sedan in 5 i derivatan.",
+   "s": 74.06,
+   "e": 78.6
+  },
+  {
+   "t": "N parentesen t slut parentes är lika med 42 000 gånger 0,98 upphöjt till t",
+   "s": 78.6,
+   "e": 93.71
+  },
+  {
+   "t": "N prim parentesen t slut parentes är lika med 42 000 gånger 0,98 upphöjt till t gånger naturliga logaritmen av 0,98",
+   "s": 78.6,
+   "e": 93.71
+  },
+  {
+   "t": "N prim, ekvation 5 är lika med 42 000 gånger 0,98 upphöjt till 5 gånger naturliga logaritmen av 0,98 som är ungefär lika med minus 766,989 som är ungefär lika med minus 770",
+   "s": 93.71,
+   "e": 109.2
+  },
+  {
+   "t": "Att värdet på derivatan blir negativt tolkar vi som en minskning.",
+   "s": 109.2,
+   "e": 114.12
+  },
+  {
+   "t": "Enheten för derivatan är \"enheten för N parentesen t slut parentes \" per \"enheten för t \", alltså invånare/år.",
+   "s": 114.12,
+   "e": 122.61
+  },
+  {
+   "t": "Svar: Den 1 januari 2025 minskar folkmängden med cirka 770 invånare/år.",
+   "s": 122.61,
+   "e": 130.34
+  },
+  {
+   "t": "Bestämma en konstant med hjälp av derivata",
+   "s": 130.34,
+   "e": 134.07
+  },
+  {
+   "t": "Ibland är inte alla konstanter i en modell kända från start.",
+   "s": 134.07,
+   "e": 138.62
+  },
+  {
+   "t": "Om vi känner till funktionens eller derivatans värde vid en viss tidpunkt kan vi använda den informationen för att bestämma en obekant konstant — ofta med hjälp av logaritmer, precis som vid exponentialekvationer i Matematik 2.",
+   "s": 138.62,
+   "e": 151.55
+  },
+  {
+   "t": "Exempel 2 — Bestämma en konstant med hjälp av derivata",
+   "s": 151.55,
+   "e": 156.01
+  },
+  {
+   "t": "Temperaturen y °C hos en maträtt som placerats i en ugn ges av y är lika med e upphöjt till k x minus 19 , där x är antalet minuter i ugnen och k en konstant.. a) Efter 20 minuter är maten 70 grader Celsius.",
+   "s": 156.01,
+   "e": 171.99
+  },
+  {
+   "t": "Bestäm konstanten k . b) Bestäm och tolka y prim, ekvation 15 .",
+   "s": 171.99,
+   "e": 179.16
+  },
+  {
+   "t": "a) Att maten efter 20 minuter är 70 grader Celsius betyder att när x är lika med 20 är y är lika med 70 .",
+   "s": 179.16,
+   "e": 187.44
+  },
+  {
+   "t": "Insättning av x är lika med 20 och y är lika med 70 i funktionen y är lika med e upphöjt till k x minus 19 ger",
+   "s": 187.44,
+   "e": 195.61
+  },
+  {
+   "t": "70 är lika med e upphöjt till k gånger 20 minus 19",
+   "s": 195.61,
+   "e": 200.61
+  },
+  {
+   "t": "70 är lika med e upphöjt till 20 k minus 19",
+   "s": 200.61,
+   "e": 205.09
+  },
+  {
+   "t": "Vi löser ut exponentialtermen genom att addera 19 till båda led.",
+   "s": 205.09,
+   "e": 210.24
+  },
+  {
+   "t": "70 plus 19 är lika med e upphöjt till 20 k minus 19 plus 19",
+   "s": 210.24,
+   "e": 215.97
+  },
+  {
+   "t": "89 är lika med e upphöjt till 20 k vilket är ekvivalent med att e upphöjt till 20 k är lika med 89",
+   "s": 215.97,
+   "e": 223.47
+  },
+  {
+   "t": "Vi ska nu lösa ut k som finns i exponenten.",
+   "s": 223.47,
+   "e": 227.43
+  },
+  {
+   "t": "I Matematik 2 lärde vi oss att lösa exponentialekvationer genom att logaritmera båda led, för att kunna multiplicera ner exponenten.",
+   "s": 227.43,
+   "e": 236.11
+  },
+  {
+   "t": "I detta fall när vi har e som bas logaritmerar vi enklast med den naturliga logaritmen naturliga logaritmen av (tänk på att naturliga logaritmen av e är lika med 1 , på samma sätt som logaritmen av 10 är lika med 1 ).",
+   "s": 236.11,
+   "e": 249.64
+  },
+  {
+   "t": "Vi logaritmerar båda led för att multiplicera ner exponenten.",
+   "s": 249.64,
+   "e": 254.66
+  },
+  {
+   "t": "naturliga logaritmen av e upphöjt till 20 k är lika med naturliga logaritmen av 89",
+   "s": 254.66,
+   "e": 261.12
+  },
+  {
+   "t": "20 k gånger naturliga logaritmen av e är lika med naturliga logaritmen av 89",
+   "s": 261.12,
+   "e": 267.73
+  },
+  {
+   "t": "Eftersom naturliga logaritmen av e är lika med 1 får vi",
+   "s": 267.73,
+   "e": 272.29
+  },
+  {
+   "t": "20 k är lika med naturliga logaritmen av 89",
+   "s": 272.29,
+   "e": 276.91
+  },
+  {
+   "t": "Vi löser ut konstanten k .",
+   "s": 276.91,
+   "e": 279.86
+  },
+  {
+   "t": "20 k delat med 20 är lika med naturliga logaritmen av 89 delat med 20",
+   "s": 279.86,
+   "e": 286.07
+  },
+  {
+   "t": "k är lika med naturliga logaritmen av 89 delat med 20 som är lika med 0,22443",
+   "s": 286.07,
+   "e": 293.69
+  },
+  {
+   "t": "Eftersom det är en modell kan vi avrunda och sätta k är ungefär lika med 0,2244 (spara minst 4 decimaler, eftersom stora avrundningar i exponenter kan leda till stora fel).",
+   "s": 293.69,
+   "e": 305.8
+  },
+  {
+   "t": "Svar: k är ungefär lika med 0,2244",
+   "s": 305.8,
+   "e": 312.32
+  },
+  {
+   "t": "b) Vi ska bestämma och tolka y prim, ekvation 15 .",
+   "s": 312.27,
+   "e": 317.23
+  },
+  {
+   "t": "Eftersom vi har fått k är ungefär lika med 0,2244 kan vi sätta in det i den ursprungliga funktionen y är lika med e upphöjt till k x minus 19 och får då",
+   "s": 317.23,
+   "e": 327.54
+  },
+  {
+   "t": "y är lika med e upphöjt till 0,2244 x minus 19",
+   "s": 327.54,
+   "e": 333.31
+  },
+  {
+   "t": "Vi deriverar och sätter sedan in x är lika med 15 .",
+   "s": 333.31,
+   "e": 337.87
+  },
+  {
+   "t": "Kom ihåg att konstanten minus 19 försvinner när vi deriverar.",
+   "s": 337.87,
+   "e": 342.83
+  },
+  {
+   "t": "y prim är lika med 0,2244 e upphöjt till 0,2244 x",
+   "s": 342.83,
+   "e": 360.83
+  },
+  {
+   "t": "y prim, ekvation 15 är lika med 0,2244 e upphöjt till 0,2244 gånger 15 som är ungefär lika med 6,499 som är ungefär lika med 6,5",
+   "s": 342.83,
+   "e": 360.83
+  },
+  {
+   "t": "Att värdet på derivatan är positivt tolkar vi som en ökning.",
+   "s": 360.83,
+   "e": 365.67
+  },
+  {
+   "t": "Enheten för derivatan är \"enheten för y \" per \"enheten för x \", alltså °C/minut.",
+   "s": 365.67,
+   "e": 372.73
+  },
+  {
+   "t": "Svar: Efter 15 minuter ökar temperaturen på maträtten med 6,5 °C/minut.",
+   "s": 372.73,
+   "e": 380.18
+  },
+  {
+   "t": "Tangentens ekvation",
+   "s": 380.18,
+   "e": 382.79
+  },
+  {
+   "t": "En tangent är en rät linje och kan därför beskrivas med räta linjens ekvation y är lika med k x plus m .",
+   "s": 382.79,
+   "e": 390.38
+  },
+  {
+   "t": "Eftersom derivatan i en punkt är detsamma som kurvans (och tangentens) lutning där, kan vi bestämma riktningskoefficienten k genom att derivera.",
+   "s": 390.38,
+   "e": 399.88
+  },
+  {
+   "t": "Konstanten m bestäms sedan genom att sätta in tangeringspunktens koordinater i räta linjens ekvation.",
+   "s": 399.88,
+   "e": 406.84
+  },
+  {
+   "t": "Tangentens ekvation",
+   "s": 406.84,
+   "e": 409.43
+  },
+  {
+   "t": "Tangenten till kurvan y är lika med f av x i punkten där x är lika med a har ekvationen",
+   "s": 409.43,
+   "e": 415.88
+  },
+  {
+   "t": "y är lika med k x plus m",
+   "s": 415.88,
+   "e": 419.16
+  },
+  {
+   "t": "där riktningskoefficienten ges av derivatan i punkten,",
+   "s": 419.16,
+   "e": 423.89
+  },
+  {
+   "t": "k är lika med f prim parentesen a slut parentes",
+   "s": 423.89,
+   "e": 428.29
+  },
+  {
+   "t": "Konstanten m bestäms genom att sätta in tangeringspunktens koordinater parentesen a, f av a slut parentes i räta linjens ekvation.",
+   "s": 428.29,
+   "e": 437.38
+  },
+  {
+   "t": "Exempel 3 — Tangentens ekvation",
+   "s": 437.38,
+   "e": 441.01
+  },
+  {
+   "t": "Bestäm ekvationen för tangenten i punkten där x är lika med 3 på kurvan y är lika med x i kvadrat plus 4 x minus 7 .",
+   "s": 441.01,
+   "e": 449.64
+  },
+  {
+   "t": "En tangent är en rät linje och kan beskrivas med räta linjens ekvation y är lika med k x plus m .",
+   "s": 449.64,
+   "e": 456.91
+  },
+  {
+   "t": "Vi ska bestämma k och m .",
+   "s": 456.91,
+   "e": 459.82
+  },
+  {
+   "t": "k -värdet står för tangentens lutning, som är samma sak som derivatan i punkten då x är lika med 3 , dvs. k är lika med y prim, ekvation 3 .",
+   "s": 459.82,
+   "e": 470.03
+  },
+  {
+   "t": "Vi bestämmer y prim, ekvation 3 genom att först derivera och sedan sätta in x är lika med 3 .",
+   "s": 470.03,
+   "e": 476.82
+  },
+  {
+   "t": "y är lika med x i kvadrat plus 4 x minus 7",
+   "s": 476.82,
+   "e": 481.51
+  },
+  {
+   "t": "y prim är lika med 2 x plus 4",
+   "s": 481.51,
+   "e": 485.24
+  },
+  {
+   "t": "k är lika med y prim, ekvation 3 som är lika med 2 gånger 3 plus 4 som är lika med 6 plus 4 som är lika med 10",
+   "s": 485.24,
+   "e": 493.51
+  },
+  {
+   "t": "Insättning av k är lika med 10 i räta linjens ekvation y är lika med k x plus m ger",
+   "s": 493.51,
+   "e": 500.24
+  },
+  {
+   "t": "y är lika med 10 x plus m",
+   "s": 500.24,
+   "e": 503.74
+  },
+  {
+   "t": "Vi bestämmer till sist m genom att sätta in en punkt som tangenten går genom.",
+   "s": 503.74,
+   "e": 509.06
+  },
+  {
+   "t": "Vi vet att tangenten träffar kurvan y är lika med x i kvadrat plus 4 x minus 7 där x är lika med 3 .",
+   "s": 509.06,
+   "e": 516.77
+  },
+  {
+   "t": "Vi sätter in x är lika med 3 för att få punktens y -koordinat.",
+   "s": 516.77,
+   "e": 521.87
+  },
+  {
+   "t": "y är lika med 3 i kvadrat plus 4 gånger 3 minus 7 som är lika med 9 plus 12 minus 7 som är lika med 14",
+   "s": 521.87,
+   "e": 529.79
+  },
+  {
+   "t": "Tangenten går alltså genom punkten parentesen 3, 14 slut parentes .",
+   "s": 529.79,
+   "e": 535.41
+  },
+  {
+   "t": "Insättning av x är lika med 3 och y är lika med 14 i tangentens ekvation y är lika med 10 x plus m ger",
+   "s": 535.41,
+   "e": 543.67
+  },
+  {
+   "t": "14 är lika med 10 gånger 3 plus m",
+   "s": 543.67,
+   "e": 549.44
+  },
+  {
+   "t": "14 är lika med 30 plus m",
+   "s": 543.67,
+   "e": 549.44
+  },
+  {
+   "t": "Vi löser ut m .",
+   "s": 549.44,
+   "e": 552.04
+  },
+  {
+   "t": "14 minus 30 är lika med 30 plus m minus 30",
+   "s": 552.04,
+   "e": 556.82
+  },
+  {
+   "t": "minus 16 är lika med m vilket är ekvivalent med att m är lika med minus 16",
+   "s": 556.82,
+   "e": 562.81
+  },
+  {
+   "t": "Insättning av k är lika med 10 och m är lika med minus 16 i räta linjens ekvation y är lika med k x plus m ger tangentens ekvation",
+   "s": 562.81,
+   "e": 572.06
+  },
+  {
+   "t": "y är lika med 10 x minus 16",
+   "s": 572.06,
+   "e": 575.87
+  },
+  {
+   "t": "Svar: y är lika med 10 x minus 16",
+   "s": 575.87,
+   "e": 580.31
+  }
+ ]
+}

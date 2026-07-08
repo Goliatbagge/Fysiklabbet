@@ -16791,4 +16791,3244 @@ window.EXITTICKETS = {
   },
 ],
 
+// ═══════════════════════════════════════════════════════════════════════
+// Matematik fortsättning nivå 1c (Ma3c)
+// ═══════════════════════════════════════════════════════════════════════
+'ma3c-1.1': [
+  {
+    question: 'Vad är ett rationellt uttryck?',
+    choices: [
+      'Ett uttryck med ett polynom i täljaren och ett polynom i nämnaren',
+      'Ett uttryck som bara innehåller heltal',
+      'Ett uttryck utan variabler',
+      'En ekvation med två obekanta',
+    ],
+    correct: 0,
+    why: [
+      'Precis — ett bråk där både täljare och nämnare är polynom, t.ex. $\\dfrac{5x^2 - 5x}{3x - 3}$.',
+      'Rationella uttryck innehåller nästan alltid variabler — det är polynomen i täljare och nämnare som är det centrala.',
+      'Tvärtom, variabler är typiska för rationella uttryck.',
+      'Ett rationellt uttryck är just ett uttryck, inte en ekvation — det finns inget likhetstecken.',
+    ],
+  },
+  {
+    question: 'Vad händer med ett uttrycks värde när du förkortar eller förlänger det?',
+    choices: [
+      'Värdet ändras inte',
+      'Värdet blir alltid mindre',
+      'Värdet blir alltid större',
+      'Värdet dubbleras',
+    ],
+    correct: 0,
+    why: [
+      'Förkortning och förlängning innebär att dividera respektive multiplicera täljare och nämnare med samma sak — storleken på uttrycket är oförändrad.',
+      'Förkortning gör bara uttrycket enklare att skriva, inte mindre i värde.',
+      'Förlängning ändrar hur uttrycket skrivs, inte dess värde.',
+      'Att multiplicera både täljare och nämnare med samma tal ändrar inte kvoten.',
+    ],
+  },
+  {
+    question: 'Vilka tre metoder har vi för att faktorisera ett polynom?',
+    choices: [
+      'Bryta ut gemensam faktor, kvadrerings-/konjugatregeln baklänges, och nollställen',
+      'Addition, subtraktion och multiplikation',
+      'Förkorta, förlänga och förenkla',
+      'pq-formeln, abc-formeln och gränsvärden',
+    ],
+    correct: 0,
+    why: [
+      'Just dessa tre — och den tredje (nollställen) fungerar på vilket polynom som helst.',
+      'Det är räknesätt, inte faktoriseringsmetoder.',
+      'Det är vad vi gör med rationella uttryck, inte metoder att faktorisera med.',
+      'pq- och abc-formeln löser ekvationer; de används inom nollställesmetoden men är inte de tre metoderna i sig.',
+    ],
+  },
+  {
+    question: 'Ett polynom $p(x)$ har nollställena $x_1$ och $x_2$ och koefficienten $k$ framför högsta gradens term. Hur kan det faktoriseras?',
+    choices: [
+      '$p(x) = k(x - x_1)(x - x_2)$',
+      '$p(x) = k(x + x_1)(x + x_2)$',
+      '$p(x) = (x - x_1) + (x - x_2)$',
+      '$p(x) = k \\cdot x_1 \\cdot x_2$',
+    ],
+    correct: 0,
+    why: [
+      'Varje nollställe $x_i$ ger en faktor $(x - x_i)$, och $k$ är koefficienten framför termen med högst grad.',
+      'Tecknet är fel — ett nollställe $x_1$ ger faktorn $(x - x_1)$, så $x_1 = 3$ ger $(x - 3)$.',
+      'Faktorer multipliceras, de adderas inte.',
+      'Faktoriseringen består av förstagradsfaktorer $(x - x_i)$, inte av produkten av nollställena.',
+    ],
+  },
+  {
+    question: 'Varför faktoriserar vi täljare och nämnare innan vi förkortar ett rationellt uttryck?',
+    choices: [
+      'Bara hela gemensamma faktorer får förkortas bort — inte enskilda termer',
+      'För att uttrycket ska bli längre',
+      'För att slippa räkna ut nollställen',
+      'Det behövs aldrig — man kan alltid förkorta term för term',
+    ],
+    correct: 0,
+    why: [
+      'Förkortning kräver en gemensam faktor i både täljare och nämnare; faktoriseringen gör dessa synliga. Man får aldrig stryka enstaka termer.',
+      'Målet med förkortning är att förenkla, inte förlänga.',
+      'Nollställen är ofta just den metod vi behöver för att kunna faktorisera.',
+      'Att förkorta term för term är ett vanligt fel — $\\dfrac{x + 2}{x + 3}$ kan inte förkortas till $\\dfrac{2}{3}$.',
+    ],
+  },
+],
+
+
+'ma3c-1.2': [
+  {
+    question: 'Vad krävs för att man ska kunna addera eller subtrahera två rationella uttryck direkt (utan att göra dem liknämniga)?',
+    choices: [
+      'Att de har samma nämnare',
+      'Att de har samma täljare',
+      'Att båda uttrycken är positiva',
+      'Att exponenterna i täljarna är lika',
+    ],
+    correct: 0,
+    why: [
+      'Precis — med samma nämnare adderas eller subtraheras bara täljarna; nämnaren förblir densamma.',
+      'Täljarna får gärna vara olika — det är nämnarna som måste stämma överens.',
+      'Tecknet på uttrycken spelar ingen roll för om man kan addera dem direkt.',
+      'Exponenter i täljaren avgör inte om nämnarna är lika.',
+    ],
+  },
+  {
+    question: 'Hur gör man två rationella uttryck med olika nämnare liknämniga?',
+    choices: [
+      'Man förlänger varje term med den andra termens nämnare',
+      'Man adderar nämnarna till en gemensam summa',
+      'Man stryker nämnarna och adderar bara täljarna',
+      'Man sätter båda nämnarna till 1',
+    ],
+    correct: 0,
+    why: [
+      'Genom att förlänga varje term med den andra termens (eller MGN:s) nämnare får båda samma nämnare, utan att uttryckens värden ändras.',
+      'Nämnare adderas inte ihop — man förlänger med dem, man summerar dem inte.',
+      'Nämnaren måste vara densamma innan man kan slå ihop täljarna — den kan inte bara strykas.',
+      'Det skulle ändra uttryckens värden, vilket varken förkortning eller förlängning får göra.',
+    ],
+  },
+  {
+    question: 'Varför måste man kontrollera vilka $x$-värden som gör en nämnare lika med noll innan man löser en ekvation med rationella uttryck?',
+    choices: [
+      'Dessa värden gör ekvationen odefinierad och får aldrig vara med i svaret',
+      'För att kunna förkorta uttrycket snyggare',
+      'Det behövs bara om ekvationen saknar lösning',
+      'För att avgöra vilken metod (MGN eller liknämnigt) som är snabbast',
+    ],
+    correct: 0,
+    why: [
+      'En nämnare som är noll gör att uttrycket är odefinierat — sådana $x$-värden kan aldrig vara giltiga lösningar, även om de dyker upp i uträkningen.',
+      'Kontrollen handlar om vilka lösningar som är tillåtna, inte om att förenkla uttrycket.',
+      'Kontrollen behövs alltid, oavsett hur många lösningar ekvationen råkar ha.',
+      'Valet av metod är valfritt — kontrollen av nämnaren gäller definitionsmängden, inte vilken metod som är snabbast.',
+    ],
+  },
+  {
+    question: 'Vilka två metoder kan användas för att lösa en ekvation med rationella uttryck?',
+    choices: [
+      'Multiplicera med minsta gemensamma nämnaren, eller göra liknämnigt',
+      'Kvadreringsreglerna eller konjugatregeln',
+      '$pq$-formeln eller nollproduktmetoden',
+      'Förkortning eller förlängning av bråk',
+    ],
+    correct: 0,
+    why: [
+      'Just dessa två metoder löser ekvationer med rationella uttryck — antingen multiplicerar man bort nämnarna, eller gör man alla termer liknämniga.',
+      'Det är metoder för att faktorisera polynom, inte för att lösa ekvationer med rationella uttryck.',
+      'De kan behövas som delsteg (t.ex. vid en andragradsekvation som dyker upp under lösningen), men är inte själva huvudmetoderna för rationella ekvationer.',
+      'Det är operationer på rationella uttryck i sig, inte metoder för att lösa ekvationer.',
+    ],
+  },
+  {
+    question: 'En ekvation med rationella uttryck ger efter uträkning lösningarna $x = 0$ och $x = 3$, men nämnaren i den ursprungliga ekvationen innehåller faktorn $(x - 3)$. Vad blir slutsatsen?',
+    choices: [
+      '$x = 3$ måste förkastas eftersom ekvationen inte är definierad där; enda giltiga svaret är $x = 0$',
+      'Båda lösningarna är giltiga eftersom uträkningen gav dem',
+      '$x = 0$ måste förkastas eftersom det är den minsta lösningen',
+      'Ekvationen saknar lösning eftersom en av rötterna är ogiltig',
+    ],
+    correct: 0,
+    why: [
+      '$x = 3$ gör nämnaren $(x - 3)$ noll, så det värdet ligger utanför definitionsmängden och kan inte vara en lösning — trots att det löser den multiplicerade ekvationen.',
+      'Att multiplicera bort nämnare kan införa falska rötter — varje lösning måste kontrolleras mot de förbjudna värdena.',
+      'Det är definitionsmängden, inte storleken på lösningen, som avgör om den ska förkastas.',
+      'Ekvationen har fortfarande en giltig lösning ($x = 0$) — bara den falska roten förkastas, inte hela ekvationen.',
+    ],
+  },
+],
+
+'ma3c-1.3': [
+  {
+    question: 'Hur multiplicerar man två rationella uttryck $\\dfrac{a}{b}$ och $\\dfrac{c}{d}$?',
+    choices: [
+      '$\\dfrac{a}{b}\\cdot\\dfrac{c}{d}=\\dfrac{ac}{bd}$ — täljare gånger täljare, nämnare gånger nämnare',
+      '$\\dfrac{a}{b}\\cdot\\dfrac{c}{d}=\\dfrac{a+c}{b+d}$',
+      '$\\dfrac{a}{b}\\cdot\\dfrac{c}{d}=\\dfrac{ac}{b}$',
+      '$\\dfrac{a}{b}\\cdot\\dfrac{c}{d}=\\dfrac{a}{b}\\cdot\\dfrac{d}{c}$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — täljarna multipliceras med varandra och nämnarna med varandra, precis som vid multiplikation av vanliga bråk.',
+      'Så adderar man bråk med gemensam nämnare — det är inte multiplikationsregeln.',
+      'Nämnaren $d$ måste också vara med i resultatet, annars blir uttrycket inte likvärdigt med det ursprungliga.',
+      'Det är divisionens invertering, inte multiplikation — här ska ingenting inverteras.',
+    ],
+  },
+  {
+    question: 'Hur beräknar man $\\dfrac{a}{b} \\Big/ \\dfrac{c}{d}$?',
+    choices: [
+      'Genom att byta divisionstecknet mot multiplikation och invertera uttrycket i nämnaren: $\\dfrac{a}{b}\\cdot\\dfrac{d}{c}$',
+      'Genom att dividera täljarna och nämnarna var för sig: $\\dfrac{a/c}{b/d}$',
+      'Genom att invertera båda uttrycken: $\\dfrac{b}{a}\\cdot\\dfrac{d}{c}$',
+      'Genom att multiplicera täljare och nämnare direkt utan att invertera: $\\dfrac{ac}{bd}$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — division med ett rationellt uttryck blir multiplikation med dess invers: man byter plats på täljare och nämnare i uttrycket i nämnaren.',
+      'Det räcker inte att dela täljare mot täljare och nämnare mot nämnare var för sig — man måste invertera uttrycket i nämnaren och multiplicera.',
+      'Bara uttrycket i nämnaren (det man delar med) ska inverteras — det första uttrycket lämnas oförändrat.',
+      'Det beskriver multiplikation, inte division — vid division måste det andra uttrycket inverteras innan man multiplicerar.',
+    ],
+  },
+  {
+    question: 'Varför faktoriserar vi täljare och nämnare innan vi förkortar en produkt eller kvot av rationella uttryck?',
+    choices: [
+      'Bara hela gemensamma faktorer får förkortas bort — inte enskilda termer',
+      'För att uttrycket ska se mer komplicerat ut',
+      'Faktorisering är obligatorisk enligt lag, inte av matematiska skäl',
+      'Man kan alltid förkorta term för term utan att faktorisera',
+    ],
+    correct: 0,
+    why: [
+      'Precis — en gemensam faktor måste synas i både täljare och nämnare för att få strykas, och faktorisering gör dessa faktorer synliga.',
+      'Målet är tvärtom att förenkla uttrycket, inte göra det krångligare.',
+      'Det handlar om vilka räkneoperationer som är matematiskt giltiga, inte om någon godtycklig regel.',
+      'Att förkorta term för term är ett vanligt fel — t.ex. kan $\\dfrac{x+2}{x+5}$ inte förkortas till $\\dfrac{2}{5}$.',
+    ],
+  },
+  {
+    question: 'Vid ekvationen $\\dfrac{x-2}{x-3} = \\dfrac{x+7}{x}$ måste man notera att $x \\neq 3$ och $x \\neq 0$. Varför?',
+    choices: [
+      'Därför att ingen nämnare i en rationell ekvation får vara noll',
+      'Därför att $x$ alltid ska vara ett positivt heltal',
+      'Därför att täljaren annars blir noll',
+      'Det är bara en rekommendation, inte ett krav',
+    ],
+    correct: 0,
+    why: [
+      'Precis — division med noll är inte definierad, så varje värde som gör en nämnare lika med noll måste uteslutas ur lösningsmängden.',
+      'Rationella uttryck kan anta vilka reella värden som helst för $x$ (utom de som ger nämnaren noll) — inget krav på positiva heltal.',
+      'Det är nämnarna, inte täljarna, som styr vilka värden som måste uteslutas.',
+      'Det är ett absolut krav — ett värde som gör en nämnare noll ger ett odefinierat uttryck och kan aldrig vara en giltig lösning.',
+    ],
+  },
+  {
+    question: 'Vilket är det första steget för att förenkla $\\dfrac{x^2-4}{5}\\cdot\\dfrac{10}{x+2}$?',
+    choices: [
+      'Faktorisera $x^2-4$ som konjugat: $(x-2)(x+2)$',
+      'Addera täljarna: $x^2-4+10$',
+      'Förkorta $x^2$ mot $x$ i nämnaren direkt',
+      'Invertera det andra uttrycket eftersom det är en division',
+    ],
+    correct: 0,
+    why: [
+      'Precis — genom att faktorisera $x^2-4$ med konjugatregeln syns faktorn $(x+2)$ som sedan kan förkortas mot nämnaren i det andra uttrycket.',
+      'Det är multiplikation, inte addition — täljarna ska multipliceras, inte adderas.',
+      'Man får bara förkorta hela faktorer, inte enskilda termer i ett polynom som $x^2-4$.',
+      'Uttrycket är en multiplikation, inte en division — ingen invertering behövs här.',
+    ],
+  },
+],
+
+'ma3c-1.4': [
+  {
+    question: 'Vad är ett gränsvärde?',
+    choices: [
+      'Det värde ett uttryck närmar sig när variabeln går mot ett visst värde eller mot en oändlighet',
+      'Det största värde ett uttryck kan anta',
+      'Skillnaden mellan två uttryck',
+      'Det värde där ett uttryck alltid är odefinierat',
+    ],
+    correct: 0,
+    why: [
+      'Precis — gränsvärdet är det värde uttrycket närmar sig, till exempel $\\lim_{x \\to \\infty} \\dfrac{1}{x} = 0$, även om uttrycket aldrig når fram dit.',
+      'Ett gränsvärde handlar om vad ett uttryck närmar sig, inte om något maximivärde.',
+      'Ett gränsvärde beskriver ett enda uttrycks beteende, inte en jämförelse mellan två uttryck.',
+      'Många gränsvärden bestäms just för uttryck som ÄR odefinierade i en punkt (t.ex. $\\frac{0}{0}$), men gränsvärdet existerar ofta ändå.',
+    ],
+  },
+  {
+    question: 'Hur bestämmer man $\\lim_{x \\to a} f(x)$ om $f$ är definierad vid $x = a$?',
+    choices: [
+      'Man sätter in $x = a$ direkt i uttrycket och beräknar',
+      'Man måste alltid faktorisera uttrycket först',
+      'Man måste alltid göra en tabell med värden underifrån och ovanifrån',
+      'Gränsvärdet kan då aldrig bestämmas',
+    ],
+    correct: 0,
+    why: [
+      'Det är metod 1 — den enklaste och mest effektiva metoden, som fungerar så snart uttrycket är definierat vid $x = a$.',
+      'Faktorisering (metod 2) behövs bara när direkt insättning ger en odefinierad form som $\\frac{0}{0}$.',
+      'Tabeller (metod 3) är sista utvägen, när varken metod 1 eller metod 2 fungerar.',
+      'Är uttrycket definierat vid $x = a$ går gränsvärdet alltid att bestämma genom direkt insättning.',
+    ],
+  },
+  {
+    question: 'Vid direkt insättning i $\\displaystyle\\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1}$ fås formen $\\frac{0}{0}$. Vad bör man göra?',
+    choices: [
+      'Faktorisera täljare och nämnare och förkorta bort den gemensamma faktorn',
+      'Sätta gränsvärdet till 0 direkt',
+      'Sätta gränsvärdet till oändligheten',
+      'Byta ut nämnaren mot 1',
+    ],
+    correct: 0,
+    why: [
+      'Att faktorisera täljaren (här med konjugatregeln till $(x+1)(x-1)$) och förkorta bort $(x-1)$ gör uttrycket definierat vid $x=1$, så man kan sätta in värdet.',
+      'Formen $\\frac{0}{0}$ säger ingenting om gränsvärdets faktiska värde — det måste bestämmas genom förkortning (eller tabeller).',
+      'Formen $\\frac{0}{0}$ är inte samma sak som en oändlighet i täljare eller nämnare.',
+      'Nämnaren får inte bytas ut godtyckligt — man förkortar bara bort gemensamma faktorer som faktiskt finns i uttrycket.',
+    ],
+  },
+  {
+    question: 'Vad blir $\\displaystyle\\lim_{x \\to \\infty} \\frac{7}{x}$?',
+    choices: [
+      '$0$',
+      '$7$',
+      'Oändlighet',
+      'Gränsvärde saknas',
+    ],
+    correct: 0,
+    why: [
+      'En oändlighet enbart i nämnaren gör nämnaren oändligt mycket större än täljaren, så kvoten går mot 0.',
+      '7 är bara täljarens konstant — den påverkar inte vart kvoten går när nämnaren växer obegränsat.',
+      'Oändlighet som gränsvärde fås när täljaren ensam går mot oändligheten, inte nämnaren.',
+      'Gränsvärdet existerar här och är väldefinierat: 0.',
+    ],
+  },
+  {
+    question: 'Gränsvärdet av ett uttryck är $-\\infty$ när $x$ närmar sig ett tal underifrån, men $+\\infty$ när $x$ närmar sig samma tal ovanifrån. Vad gäller?',
+    choices: [
+      'Gränsvärdet saknas',
+      'Gränsvärdet är medelvärdet av de två, det vill säga 0',
+      'Gränsvärdet är alltid 0',
+      'Man använder det största av de två värdena som gränsvärde',
+    ],
+    correct: 0,
+    why: [
+      'För att ett gränsvärde ska existera måste uttrycket gå mot samma värde underifrån och ovanifrån. Här skiljer sig värdena åt, så gränsvärdet saknas.',
+      'Gränsvärden beräknas inte som medelvärden av ensidiga gränsvärden — existerar inte båda och är lika, saknas gränsvärdet helt.',
+      'Ingenting i uppgiften ger 0 som svar — slutsatsen av olika ensidiga gränsvärden är att gränsvärdet saknas.',
+      'Man väljer inte det ena ensidiga gränsvärdet framför det andra — om de skiljer sig åt saknas gränsvärdet.',
+    ],
+  },
+],
+
+'ma3c-1.5': [
+  {
+    question: 'Vad kännetecknar ett symbolhanterande hjälpmedel?',
+    choices: [
+      'Det kan hantera algebraiska uttryck (bokstavsuttryck), inte bara numeriska beräkningar',
+      'Det kan bara utföra numeriska beräkningar, precis som en vanlig räknare',
+      'Det kan bara rita grafer, inte beräkna något',
+      'Det är ett annat namn för en vanlig miniräknare',
+    ],
+    correct: 0,
+    why: [
+      'Precis — utöver numeriska beräkningar (beräkningar med siffror) kan ett symbolhanterande hjälpmedel räkna med algebraiska uttryck, t.ex. faktorisera och lösa ekvationer symboliskt. Geogebra är ett exempel.',
+      'Tvärtom — det är just förmågan att hantera algebraiska uttryck utöver tal som skiljer ett symbolhanterande hjälpmedel från en vanlig räknare.',
+      'Grafritning är bara en av flera funktioner i Geogebra — symbolhanteringen (förenkla, faktorisera, lösa, gränsvärden) är det utmärkande.',
+      'En vanlig miniräknare klarar bara numeriska beräkningar — den kan inte hantera uttryck med bokstäver i sig.',
+    ],
+  },
+  {
+    question: 'Vilket kommando används i Geogebra för att faktorisera ett polynom?',
+    choices: [
+      'Faktorisera( Polynom )',
+      'Förenkla( Funktion )',
+      'Lös( Ekvation )',
+      'Gränsvärde( Funktion, Värde )',
+    ],
+    correct: 0,
+    why: [
+      'Faktorisera( Polynom ) skriver om ett polynom som en produkt av faktorer, t.ex. $(x-1)(x+3)(x+5)$.',
+      'Förenkla förenklar ett uttryck, men skriver inte nödvändigtvis om det som en produkt av faktorer.',
+      'Lös( Ekvation ) löser ekvationer — det förutsätter ett likhetstecken, inte bara ett uttryck att faktorisera.',
+      'Gränsvärde( Funktion, Värde ) beräknar vad ett uttryck närmar sig, inte hur det faktoriseras.',
+    ],
+  },
+  {
+    question: 'Vad skiljer kommandona NLös och Lös åt när man löser en ekvation?',
+    choices: [
+      'NLös ger lösningen i decimalform, Lös ger den exakt med symboler',
+      'NLös ger lösningen exakt med symboler, Lös ger decimalform',
+      'De ger alltid identiskt samma sorts svar',
+      'NLös kan bara användas på förstagradsekvationer',
+    ],
+    correct: 0,
+    why: [
+      'NLös (numeriskt lös) svarar med decimaltal, t.ex. $x \\approx 1{,}73$, medan Lös svarar exakt, t.ex. $x = \\sqrt{3}$.',
+      'Det är tvärtom — NLös står för "numeriskt lös" och ger decimalform.',
+      'Skillnaden är just formen på svaret: decimaler mot exakta symboler.',
+      'Både NLös och Lös fungerar på ekvationer av godtycklig grad, inte bara förstagradsekvationer.',
+    ],
+  },
+  {
+    question: 'En funktion $f(x) = x^3 - 4x^2$ är definierad i Geogebra. Hur bestämmer man funktionsvärdet $f(7)$?',
+    choices: [
+      'Man skriver f(7) på raden under funktionsdefinitionen och läser av svaret',
+      'Man använder kommandot Gränsvärde( f, 7 )',
+      'Man skriver NLös( f(x) = 7 )',
+      'Funktionsvärden kan bara läsas av grafiskt, inte beräknas exakt',
+    ],
+    correct: 0,
+    why: [
+      'När funktionen är definierad räcker det att skriva f(7) på en ny rad — Geogebra räknar ut och visar värdet direkt.',
+      'Gränsvärde beräknar vad ett uttryck närmar sig när variabeln går mot ett värde, inte ett funktionsvärde vid en punkt.',
+      'NLös( f(x) = 7 ) löser i stället ekvationen $f(x) = 7$ med avseende på $x$ — motsatt fråga.',
+      'Geogebra beräknar funktionsvärden exakt och numeriskt, inte bara genom att läsa av grafen.',
+    ],
+  },
+  {
+    question: 'Kommandot $\\text{Gränsvärde}\\!\\left(\\dfrac{x^2 - 9}{x - 3},\\ 3\\right)$ ger svaret 6, trots att uttrycket inte är definierat för $x = 3$. Varför blir svaret ändå 6?',
+    choices: [
+      'Gränsvärdet beskriver vad uttrycket närmar sig när $x$ går mot 3, inte vad som händer exakt vid $x = 3$',
+      'Geogebra gissar ett rimligt värde när nämnaren blir 0',
+      'Uttrycket är faktiskt definierat för $x = 3$ — nämnaren blir aldrig 0',
+      'Gränsvärden kan bara beräknas för polynom, inte för rationella uttryck',
+    ],
+    correct: 0,
+    why: [
+      'Just det — förkortar man bort den gemensamma faktorn $(x-3)$ fås $x + 3$, som är definierat vid $x = 3$ och ger värdet 6. Gränsvärdet bryr sig bara om vad som händer nära punkten, inte i den.',
+      'Geogebra gissar ingenting — den räknar exakt genom att hantera den borttagbara luckan i definitionsmängden algebraiskt.',
+      'Nämnaren $x - 3$ blir exakt 0 när $x = 3$, så uttrycket är odefinierat just där.',
+      'Gränsvärden kan mycket väl beräknas för rationella uttryck — det är precis vad detta exempel visar.',
+    ],
+  },
+],
+
+'ma3c-2.1': [
+  {
+    question: 'Vad kallas en rät linje mellan två punkter på en kurva?',
+    choices: [
+      'En sekant',
+      'En tangent',
+      'En asymptot',
+      'En normal',
+    ],
+    correct: 0,
+    why: [
+      'Just det — en sekant är en rät linje mellan två punkter på en kurva.',
+      'En tangent nuddar kurvan i endast en punkt och har samma lutning som kurvan just där — inte samma sak som en linje mellan två punkter.',
+      'En asymptot är en linje som kurvan närmar sig men aldrig når — inte relaterat till två markerade punkter på kurvan.',
+      'En normal är vinkelrät mot en tangent i en punkt — inte en linje mellan två punkter på kurvan.',
+    ],
+  },
+  {
+    question: 'Vilken formel ger sekantens lutning $k$ mellan punkterna $(x_1, y_1)$ och $(x_2, y_2)$?',
+    choices: [
+      '$k = \\dfrac{y_2 - y_1}{x_2 - x_1}$',
+      '$k = \\dfrac{x_2 - x_1}{y_2 - y_1}$',
+      '$k = (y_2 - y_1)(x_2 - x_1)$',
+      '$k = \\dfrac{y_2 + y_1}{x_2 + x_1}$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — förändringen i y-led delat med förändringen i x-led.',
+      'Kvoten är omvänd här — täljare och nämnare har bytt plats.',
+      'Lutningen fås genom division av differenserna, inte genom multiplikation.',
+      'Formeln bygger på differenser (minus) mellan koordinaterna, inte summor (plus).',
+    ],
+  },
+  {
+    question: 'Vad står sekantens lutning för vid tillämpningar, t.ex. när en storhet förändras över tiden?',
+    choices: [
+      'En genomsnittlig förändringshastighet',
+      'Ett maximivärde',
+      'Ett nollställe',
+      'En amplitud',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — sekantens lutning motsvarar den genomsnittliga förändringen per enhet i det valda intervallet.',
+      'Ett maximivärde är en extrempunkt på kurvan och har inget direkt samband med sekantens lutning.',
+      'Ett nollställe är där kurvan skär x-axeln — inte samma sak som en lutning.',
+      'Amplitud beskriver svängningars utslag, inte en sekants lutning.',
+    ],
+  },
+  {
+    question: 'En sekant till $f(x) = x^2$ dras mellan $x = 2$ och $x = 4$. Vad blir sekantens lutning?',
+    choices: [
+      '$k = 6$',
+      '$k = 12$',
+      '$k = 3$',
+      '$k = 20$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — $f(2) = 4$ och $f(4) = 16$ ger $k = \\dfrac{16 - 4}{4 - 2} = \\dfrac{12}{2} = 6$.',
+      '12 är skillnaden i funktionsvärde ($16 - 4$), men den måste också delas med skillnaden i x-värde ($4 - 2 = 2$).',
+      'Nämnaren är $4 - 2 = 2$, inte $4$ — kontrollera differensen i x-led igen.',
+      'Att addera funktionsvärdena ($16 + 4 = 20$) i stället för att beräkna differensen ger fel svar.',
+    ],
+  },
+  {
+    question: 'Varför kan en kurvas lutning inte anges med ett enda tal, till skillnad från en rät linjes lutning?',
+    choices: [
+      'Eftersom en kurvas lutning varierar längs kurvan, medan en rät linje har samma lutning överallt',
+      'Eftersom kurvor saknar lutning',
+      'Eftersom en kurva alltid är brant lodrätt',
+      'Eftersom bara räta linjer kan ha negativ lutning',
+    ],
+    correct: 0,
+    why: [
+      'Just därför använder vi en sekants medellutning för att beskriva en kurvas lutning i ett visst intervall.',
+      'Kurvor har visst en lutning i varje punkt, men den skiljer sig från punkt till punkt.',
+      'En kurva kan luta på vilket sätt som helst — den är inte alltid brant.',
+      'Både kurvor och räta linjer kan ha negativ lutning (avta) i olika delar.',
+    ],
+  },
+],
+
+'ma3c-2.2': [
+  {
+    question: 'Vad är en tangent till en kurva?',
+    choices: [
+      'En rät linje som snuddar kurvan i exakt en punkt',
+      'En rät linje som skär kurvan i två punkter',
+      'En kurva som aldrig möter en annan kurva',
+      'Kurvans högsta punkt',
+    ],
+    correct: 0,
+    why: [
+      'En tangent snuddar (tangerar) kurvan i en enda punkt, och dess lutning där är densamma som kurvans lutning i den punkten.',
+      'En linje som skär kurvan i två punkter kallas i stället sekant.',
+      'Det som beskrivs är snarare en asymptot — och även en asymptot kan i vissa fall mötas av kurvan.',
+      'Kurvans högsta punkt är en extrempunkt, inte en tangent — en tangent är en linje, inte en punkt.',
+    ],
+  },
+  {
+    question: 'Två punkter $(x_1, y_1)$ och $(x_2, y_2)$ ligger på en tangent. Vilken formel ger tangentens lutning $k$?',
+    choices: [
+      '$k = \\dfrac{y_2 - y_1}{x_2 - x_1}$',
+      '$k = \\dfrac{x_2 - x_1}{y_2 - y_1}$',
+      '$k = y_2 - y_1$',
+      '$k = \\dfrac{y_2 + y_1}{x_2 + x_1}$',
+    ],
+    correct: 0,
+    why: [
+      'Riktningskoefficienten är kvoten mellan förändringen i $y$-led och förändringen i $x$-led, $k = \\dfrac{\\Delta y}{\\Delta x}$.',
+      'Här är täljare och nämnare omvända — det ger det inverterade värdet, inte $k$.',
+      'Detta saknar nämnare — utan att dela med förändringen i $x$-led får man inte en lutning.',
+      'Att summera koordinaterna i stället för att bilda differenser ger inte lutningen mellan punkterna.',
+    ],
+  },
+  {
+    question: 'En tangent till en kurva går genom punkterna $(1, 4)$ och $(4, 13)$. Beräkna tangentens lutning $k$.',
+    choices: [
+      '$k = 3$',
+      '$k = 9$',
+      '$k = 0{,}33$',
+      '$k = 2{,}25$',
+    ],
+    correct: 0,
+    why: [
+      '$k = \\dfrac{13 - 4}{4 - 1} = \\dfrac{9}{3} = 3$ — rätt insättning i formeln.',
+      'Detta är bara $\\Delta y = 13 - 4 = 9$, utan att dela med $\\Delta x$.',
+      'Här har täljare och nämnare bytt plats: $\\dfrac{4 - 1}{13 - 4} = \\dfrac{3}{9} = 0{,}33$ är inte lutningen.',
+      'Detta motsvarar att dela $\\Delta y$ med $x_2 = 4$ i stället för med $\\Delta x = x_2 - x_1 = 3$.',
+    ],
+  },
+  {
+    question: 'En graf visar en tanks vattenvolym $V$ (liter) som funktion av tiden $t$ (min). Vilken enhet får tangentens lutning i en punkt på grafen?',
+    choices: [
+      'liter/min',
+      'min/liter',
+      'liter',
+      'min',
+    ],
+    correct: 0,
+    why: [
+      'Enheten blir "enheten på $y$-axeln" per "enheten på $x$-axeln", dvs. liter per minut.',
+      'Det är tvärtom — täljaren i enheten följer $y$-axeln och nämnaren $x$-axeln, inte omvänt.',
+      'Enbart liter är enheten för volymen själv, inte för hur snabbt den förändras.',
+      'Enbart minuter är enheten för tiden, inte för lutningen mellan volym och tid.',
+    ],
+  },
+  {
+    question: 'Vad står tangentens lutning för när en graf visar en storhet som funktion av tiden, t.ex. sträcka som funktion av tid?',
+    choices: [
+      'Förändringshastigheten vid just den tidpunkten',
+      'Medelhastigheten över hela tidsintervallet',
+      'Det totala värdet av storheten vid den tidpunkten',
+      'En konstant som är densamma överallt på grafen',
+    ],
+    correct: 0,
+    why: [
+      'Tangentens lutning i en punkt motsvarar förändringshastigheten just vid den tidpunkten — det är därför tangenten, och inte sekanten, används för att beskriva ett ögonblick.',
+      'Medelhastigheten över ett helt intervall beräknas i stället med en sekant mellan intervallets ändpunkter.',
+      'Det totala värdet vid tidpunkten läses av direkt på $y$-axeln, inte från lutningen.',
+      'Lutningen kan variera längs kurvan — bara för en rät linje är lutningen densamma överallt.',
+    ],
+  },
+],
+
+'ma3c-2.3': [
+  {
+    question: 'Vad kallas gränsvärdet $\\displaystyle\\lim_{h \\to 0} \\dfrac{f(a+h)-f(a)}{h}$, om det existerar?',
+    choices: [
+      'Derivatan av $f$ i punkten $x = a$, alltså $f\'(a)$',
+      'Sekantens lutning',
+      'Integralen av $f$',
+      'Medellutningen över ett intervall',
+    ],
+    correct: 0,
+    why: [
+      'Precis — det är just detta gränsvärde som definierar derivatan (tangentens lutning) i punkten $x = a$.',
+      'Sekantens lutning är uttrycket $\\dfrac{f(a+h)-f(a)}{h}$ INNAN gränsvärdet tas — när $h \\to 0$ övergår sekanten i tangenten.',
+      'Integraler handlar om area under en kurva, inte om lutning i en punkt.',
+      'Medellutningen över ett intervall är just $\\dfrac{f(a+h)-f(a)}{h}$ utan gränsvärde — det ger ett närmevärde, inte den exakta lutningen i en punkt.',
+    ],
+  },
+  {
+    question: 'Vilket uttryck ger sekantens lutning genom punkterna $(a, f(a))$ och $(a+h, f(a+h))$?',
+    choices: [
+      '$\\dfrac{f(a+h) - f(a)}{h}$',
+      '$\\dfrac{f(a) - f(a+h)}{h}$',
+      '$\\dfrac{f(a+h) + f(a)}{h}$',
+      '$\\dfrac{h}{f(a+h) - f(a)}$',
+    ],
+    correct: 0,
+    why: [
+      'Lutningen $k = \\dfrac{y_2-y_1}{x_2-x_1}$ ger med $(x_1,y_1)=(a,f(a))$ och $(x_2,y_2)=(a+h,f(a+h))$ just $\\dfrac{f(a+h)-f(a)}{h}$, eftersom $x_2-x_1 = (a+h)-a = h$.',
+      'Tecknet i täljaren är fel — det ska vara det senare funktionsvärdet minus det tidigare, inte tvärtom.',
+      'Termerna i täljaren ska subtraheras, inte adderas — annars är det inte en lutning.',
+      'Detta är lutningens invers ($1/k$), inte lutningen själv.',
+    ],
+  },
+  {
+    question: 'Varför kan man inte sätta $h = 0$ direkt i uttrycket $\\dfrac{f(a+h) - f(a)}{h}$ innan man har förenklat?',
+    choices: [
+      'Då blir nämnaren 0, vilket ger division med 0',
+      'Då blir täljaren negativ',
+      'Då försvinner variabeln $a$ ur uttrycket',
+      'Det går utmärkt att göra det',
+    ],
+    correct: 0,
+    why: [
+      'Just det — med $h=0$ i nämnaren får vi division med 0, som är odefinierat. Därför måste vi först faktorisera bort $h$ ur täljare och nämnare.',
+      'Täljarens tecken beror på funktionen, inte på att $h=0$ ger något odefinierat problem.',
+      '$a$ finns kvar i uttrycket oavsett vad $h$ sätts till — problemet ligger i nämnaren.',
+      'Det är precis vad man INTE får göra direkt — nämnaren blir 0 innan uttrycket förenklats.',
+    ],
+  },
+  {
+    question: 'Vad innebär det geometriskt att låta $h \\to 0$ i derivatans definition?',
+    choices: [
+      'Sekanten genom de två punkterna övergår i tangenten i punkten $x = a$',
+      'Kurvan blir en rät linje överallt',
+      'Funktionen blir konstant',
+      'Punkten med $x$-koordinaten $a$ försvinner ur figuren',
+    ],
+    correct: 0,
+    why: [
+      'Precis — när den andra punkten $(a+h, f(a+h))$ närmar sig $(a, f(a))$ (dvs. $h \\to 0$) glider sekanten mot tangenten i punkten.',
+      'Det är bara sekanten som övergår i tangenten, inte hela kurvan som rätas ut.',
+      'Funktionen är oförändrad — det är bara vilken linje (sekant eller tangent) vi betraktar som ändras.',
+      'Punkten $x=a$ är fortfarande kvar; det är den ANDRA punkten, $a+h$, som glider in mot den första när $h \\to 0$.',
+    ],
+  },
+  {
+    question: 'Vid beräkning av $f\'(a)$ för $f(x) = x^2$ förenklas täljaren $(a+h)^2 - a^2$ (innan förkortning med $h$) till vilket uttryck?',
+    choices: [
+      '$2ah + h^2$',
+      '$a^2 + h^2$',
+      '$2ah$',
+      '$h^2$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — $(a+h)^2 - a^2 = a^2 + 2ah + h^2 - a^2 = 2ah + h^2$, en summa där båda termerna innehåller faktorn $h$.',
+      'Här saknas korsledet $2ah$ och $a^2$ ska försvinna eftersom $-a^2$ tar bort det ursprungliga $a^2$.',
+      'Termen $h^2$ har fallit bort — kvadreringen $(a+h)^2$ ger tre termer, inte två.',
+      'Termen $2ah$ har fallit bort — bara $h^2$ räcker inte för att beskriva hela utvecklingen.',
+    ],
+  },
+],
+
+'ma3c-2.4': [
+  {
+    question: 'Vad står derivatan för vid tillämpningar inom t.ex. naturvetenskap eller ekonomi?',
+    choices: [
+      'Någon form av förändringshastighet vid en tidpunkt',
+      'Funktionens värde vid en viss tidpunkt',
+      'Grafens skärningspunkt med x-axeln',
+      'Medelvärdet av funktionen över ett intervall',
+    ],
+    correct: 0,
+    why: [
+      'Precis — grafiskt är derivatan lutningen i en punkt, och i tillämpningar tolkas den som en momentan förändringshastighet.',
+      'Det är funktionsvärdet $f(a)$, inte derivatan $f\'(a)$, som beskriver ett värde vid en viss tidpunkt.',
+      'Nollställen beskriver var funktionen är noll, inte hur snabbt den förändras.',
+      'Ett medelvärde över ett intervall är inte detsamma som en momentan förändringshastighet i en enda punkt.',
+    ],
+  },
+  {
+    question: 'En funktion $g(x)$ har enheten kg och variabeln $x$ har enheten sekunder. Vilken enhet har $g\'(x)$?',
+    choices: [
+      'kg/s',
+      's/kg',
+      'kg',
+      's',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — enheten för derivatan fås genom att ta "enheten för funktionen" per "enheten för variabeln", dvs. kg per s.',
+      'Kvoten tas i motsatt ordning mot det korrekta: det är funktionens enhet per variabelns enhet, inte tvärtom.',
+      'Det är enheten för $g(x)$ själv, inte för förändringshastigheten $g\'(x)$.',
+      'Det är enheten för variabeln $x$, inte för derivatan.',
+    ],
+  },
+  {
+    question: 'Antalet besökare på en webbsida ges av $B(t)$, där $t$ är tiden i dygn. Om $B\'(4) = 150$, vad betyder det?',
+    choices: [
+      'Efter 4 dygn ökar antalet besökare med cirka 150 per dygn',
+      'Efter 4 dygn har sidan haft totalt 150 besökare',
+      'Efter 150 dygn har sidan haft 4 besökare',
+      'Antalet besökare ökar med exakt 150 varje dygn under hela mätperioden',
+    ],
+    correct: 0,
+    why: [
+      'Precis — $B\'(4)$ är den momentana förändringshastigheten vid $t = 4$, med enheten besökare per dygn.',
+      'Det totala antalet besökare vid $t = 4$ är $B(4)$, inte $B\'(4)$ — derivatan beskriver förändringstakten, inte ett funktionsvärde.',
+      'Detta byter ut vilken variabel som är vilken och stämmer inte med hur $B\'(4) = 150$ ska läsas.',
+      '$B\'(4) = 150$ gäller bara vid tidpunkten $t = 4$ — det säger inget om hur snabbt antalet besökare förändras vid andra tidpunkter.',
+    ],
+  },
+  {
+    question: 'Du ska mata in funktionen $f(x) = 0{,}3x^2 - 5$ i Geogebras inmatningsfält. Hur skriver du talet $0{,}3$?',
+    choices: [
+      '0.3',
+      '0,3',
+      '0:3',
+      '3/10',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — i Geogebras inmatningsfält används punkt som decimaltecken, så $0{,}3$ skrivs som 0.3.',
+      'Det svenska decimalkommat tolkas inte som decimaltecken i Geogebras inmatningsfält.',
+      'Kolon används inte som decimaltecken i Geogebra.',
+      'Bråkform fungerar visserligen matematiskt, men frågan gäller hur decimaltalet $0{,}3$ specifikt ska skrivas.',
+    ],
+  },
+  {
+    question: 'En bils sträcka ges av $s(t)$ km, där $t$ är tiden i timmar. Vad är skillnaden mellan $s(2)$ och $s\'(2)$?',
+    choices: [
+      '$s(2)$ är sträckan efter 2 timmar; $s\'(2)$ är momentanhastigheten vid $t = 2$ timmar',
+      '$s(2)$ och $s\'(2)$ betyder samma sak, bara skrivet på två sätt',
+      '$s(2)$ är momentanhastigheten; $s\'(2)$ är den tillryggalagda sträckan',
+      '$s(2)$ gäller vid $t = 2$ timmar, men $s\'(2)$ gäller vid $t = 2$ km',
+    ],
+    correct: 0,
+    why: [
+      'Precis — $s(2)$ är funktionsvärdet (sträckan i km), medan $s\'(2)$ är derivatans värde (momentanhastigheten i km/h) vid samma tidpunkt.',
+      'De har olika enheter och olika betydelse: km respektive km/h, sträcka respektive hastighet.',
+      'Detta är tvärtom — det är $s\'(2)$ som är hastigheten och $s(2)$ som är sträckan.',
+      '$t = 2$ km ger ingen mening här — variabeln $t$ mäts i timmar, inte kilometer, i båda fallen.',
+    ],
+  },
+],
+
+'ma3c-2.5': [
+  {
+    question: 'Vad innebär det att en funktion är kontinuerlig i en punkt?',
+    choices: [
+      'Grafen hänger ihop där — den kan ritas utan att lyfta pennan',
+      'Funktionen har ett maximum där',
+      'Derivatan är noll där',
+      'Funktionen är alltid positiv där',
+    ],
+    correct: 0,
+    why: [
+      'Precis — en kontinuerlig graf hänger ihop, utan hopp eller språng, i punkten.',
+      'Kontinuitet handlar om att grafen hänger ihop, inte om extrempunkter.',
+      'En derivata lika med noll beskriver en vågrät tangent, inte kontinuitet.',
+      'En funktion kan vara kontinuerlig även om den är negativ — tecknet på funktionsvärdet spelar ingen roll.',
+    ],
+  },
+  {
+    question: 'Hur definieras absolutbeloppet $|a|$ av ett tal $a$?',
+    choices: [
+      'Talets avstånd till 0 på tallinjen',
+      'Talet multiplicerat med $-1$',
+      'Kvadratroten ur talet',
+      'Talets motsats',
+    ],
+    correct: 0,
+    why: [
+      'Just det — $|{-3}| = 3$ eftersom avståndet från $-3$ till 0 är 3, och $|2| = 2$ eftersom avståndet från 2 till 0 är 2.',
+      'Det gäller bara för negativa tal ($|{-3}| = -1 \\cdot (-3) = 3$) — för positiva tal skulle det ge fel tecken ($|2| \\ne -2$).',
+      'Kvadratroten är bara definierad för icke-negativa tal och sammanfaller inte i allmänhet med absolutbeloppet.',
+      'Motsatsen till $a$ är $-a$, vilket är negativt när $a$ är positivt — absolutbeloppet är alltid icke-negativt.',
+    ],
+  },
+  {
+    question: 'Vilket av följande är INTE ett skäl till att en funktion saknar derivata i en punkt?',
+    choices: [
+      'Funktionen är deriverbar och kontinuerlig i punkten',
+      'Funktionen har en hörnpunkt där',
+      'Funktionen är diskontinuerlig där (t.ex. ett hopp)',
+      'Funktionen är inte definierad där (t.ex. ett språng)',
+    ],
+    correct: 0,
+    why: [
+      'Om funktionen redan är deriverbar i punkten finns derivatan förstås där — detta är motsatsen till ett skäl att sakna derivata.',
+      'I en hörnpunkt är lutningen olika från vänster och höger, så derivatan saknar ett entydigt värde.',
+      'En diskontinuerlig funktion (t.ex. med ett hopp) kan inte ha en väldefinierad derivata i den punkten.',
+      'En funktion som inte är definierad i en punkt kan inte heller ha en derivata där.',
+    ],
+  },
+  {
+    question: 'Varför är $f(x) = |x|$ inte deriverbar i $x = 0$?',
+    choices: [
+      'Eftersom lutningen är $-1$ från vänster och $1$ från höger — gränsvärdena är olika',
+      'Eftersom funktionen inte är definierad i $x = 0$',
+      'Eftersom funktionen är diskontinuerlig i $x = 0$',
+      'Eftersom $f(0) = 0$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — vänster- och högergränsvärdet för derivatan skiljer sig åt, så derivatan saknar ett entydigt värde i hörnpunkten.',
+      '$f(x) = |x|$ är definierad överallt, även i $x = 0$ (där $f(0) = 0$).',
+      '$f(x) = |x|$ hänger ihop i hela sin graf, även i $x = 0$ — den är kontinuerlig där.',
+      'Att $f(0) = 0$ säger bara vad funktionsvärdet är — det säger inget om varför derivatan saknas.',
+    ],
+  },
+  {
+    question: 'En funktions graf har en öppen ring i punkten $(2, 5)$ och en fylld prick i punkten $(2, 3)$. Vad kan vi dra för slutsats?',
+    choices: [
+      'Funktionen har ett hopp i $x = 2$ och är varken kontinuerlig eller deriverbar där',
+      'Funktionen är kontinuerlig men inte deriverbar i $x = 2$',
+      'Funktionen är deriverbar i $x = 2$',
+      'Funktionen är inte definierad i $x = 2$',
+    ],
+    correct: 0,
+    why: [
+      'Den öppna ringen visar att gränsvärdet från ena hållet är 5 medan det faktiska funktionsvärdet (fylld prick) är 3 — grafen hänger inte ihop, dvs. ett hopp. Då är funktionen varken kontinuerlig eller deriverbar i punkten.',
+      'Ett hopp innebär att grafen inte hänger ihop, så funktionen är inte ens kontinuerlig i $x = 2$ — inte bara icke-deriverbar.',
+      'Deriverbarhet kräver kontinuitet, och en funktion med ett hopp är inte kontinuerlig i punkten.',
+      'Den fyllda pricken vid $(2, 3)$ visar tvärtom att funktionen faktiskt är definierad i $x = 2$, med värdet 3.',
+    ],
+  },
+],
+
+'ma3c-3.1': [
+  {
+    question: 'Vilken deriveringsregel gäller för $f(x) = x^n$?',
+    choices: [
+      '$f\'(x) = nx^{n-1}$',
+      '$f\'(x) = nx^n$',
+      '$f\'(x) = x^{n-1}$',
+      '$f\'(x) = nx^{n+1}$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — vi multiplicerar ned exponenten framför och minskar den sedan med 1.',
+      'Exponenten ska minskas med 1 i svaret, inte lämnas oförändrad.',
+      'Exponenten $n$ ska också multipliceras ned framför x-termen, inte bara försvinna ur svaret.',
+      'Exponenten ska minskas med 1, inte ökas.',
+    ],
+  },
+  {
+    question: 'Derivera $f(x) = 4x^5$.',
+    choices: [
+      '$f\'(x) = 20x^4$',
+      '$f\'(x) = 20x^5$',
+      '$f\'(x) = 4x^4$',
+      '$f\'(x) = 5x^4$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — vi multiplicerar ned exponenten 5 till koefficienten 4 (vilket ger 20) och minskar exponenten med 1.',
+      'Exponenten i svaret ska minskas med 1 (till 4), inte lämnas som 5.',
+      'Koefficienten 4 ska multipliceras med exponenten 5 (vilket ger 20) — den ska inte stå oförändrad.',
+      'Ursprungskoefficienten 4 måste också multipliceras in i svaret — annars försvinner den.',
+    ],
+  },
+  {
+    question: 'Vad är derivatan av en konstant funktion $f(x) = a$?',
+    choices: [
+      '$f\'(x) = 0$',
+      '$f\'(x) = a$',
+      '$f\'(x) = 1$',
+      '$f\'(x) = ax$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — grafen till en konstant funktion är en horisontell linje, och lutningen (derivatan) är alltid 0.',
+      'Detta är funktionens eget värde, inte dess derivata — en konstant funktions derivata är alltid 0.',
+      'Derivatan är 0, inte 1, oavsett vilket tal $a$ har.',
+      'En konstant funktion innehåller ingen $x$-term, så derivatan kan inte bli $ax$.',
+    ],
+  },
+  {
+    question: 'Vilken är derivatan av förstagradsfunktionen $f(x) = 9x$?',
+    choices: [
+      '$f\'(x) = 9$',
+      '$f\'(x) = 9x$',
+      '$f\'(x) = 0$',
+      '$f\'(x) = x$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — vid derivering av en $x$-term av grad 1 "försvinner" $x$:et, och kvar blir bara koefficienten 9.',
+      'Vid derivering ska $x$:et försvinna — svaret kan inte längre innehålla $x$.',
+      'Derivatan är 0 bara för konstanta funktioner utan någon $x$-term, inte för $f(x) = 9x$.',
+      'Koefficienten 9 måste vara med i svaret — den försvinner inte vid derivering.',
+    ],
+  },
+  {
+    question: 'Hur deriverar man $f(x) = \\dfrac{g(x)}{a}$, där $a$ är en konstant?',
+    choices: [
+      'Man deriverar täljaren $g(x)$ med de vanliga deriveringsreglerna och behåller nämnaren $a$',
+      'Man deriverar både täljaren och nämnaren',
+      'Man behåller täljaren och deriverar bara nämnaren $a$',
+      'Man kan inte derivera ett uttryck med en konstant i nämnaren',
+    ],
+    correct: 0,
+    why: [
+      'Precis — en konstant nämnare kan ses som en koefficient, så täljaren deriveras som vanligt medan nämnaren står kvar oförändrad.',
+      'Nämnaren $a$ är en konstant och ska inte deriveras — bara täljaren $g(x)$ deriveras.',
+      'Det är täljaren $g(x)$ som ska deriveras, inte nämnaren — nämnaren $a$ behålls oförändrad.',
+      'Uttrycket går utmärkt att derivera — nämnaren $a$ fungerar precis som en vanlig koefficient.',
+    ],
+  },
+],
+
+'ma3c-3.2': [
+  {
+    question: 'Vad innebär det att derivera en polynomfunktion "term för term"?',
+    choices: [
+      'Att varje term i polynomet deriveras var för sig, och att derivatorna sedan adderas',
+      'Att bara den term som har högst exponent deriveras',
+      'Att man deriverar en gång för varje term i nämnaren',
+      'Att man sätter alla termer lika med noll och löser ekvationen',
+    ],
+    correct: 0,
+    why: [
+      'Precis — varje term deriveras separat med deriveringsreglerna, och summan av dessa derivator ger hela funktionens derivata.',
+      'Alla termer måste deriveras, inte bara den med högst exponent — annars försvinner information ur derivatan.',
+      'Nämnaren i ett bråkuttryck har inget med antalet termer i polynomet att göra.',
+      'Det beskriver hur man löser en ekvation, inte hur man deriverar en funktion.',
+    ],
+  },
+  {
+    question: 'Funktionen $f(x) = x^2 + 4x - 7$ deriverades i avsnittet både med derivatans definition och term för term. Vilket samband stämmer?',
+    choices: [
+      'Båda metoderna ger samma derivata, $f\'(x) = 2x + 4$',
+      'Derivatans definition ger $f\'(x) = 2x + 4$, men term för term ger ett annat svar',
+      'De två metoderna kan bara användas på olika typer av funktioner',
+      'Derivatans definition fungerar inte för polynom med fler än en term',
+    ],
+    correct: 0,
+    why: [
+      'Term för term-metoden bygger på samma deriveringsregler och ger alltid samma resultat som derivatans definition — precis det som räkneexemplet visade.',
+      'Tvärtom ger de två metoderna exakt samma derivata; term för term är bara en snabbare väg till samma svar.',
+      'Båda metoderna fungerar på alla polynomfunktioner, oavsett hur många termer de har.',
+      'Derivatans definition gäller för alla deriverbara funktioner, inklusive polynom med flera termer — den ligger till grund för alla deriveringsregler.',
+    ],
+  },
+  {
+    question: 'Derivera $f(x) = 6x^3 - 2x + 9$.',
+    choices: [
+      `$f'(x) = 18x^2 - 2$`,
+      `$f'(x) = 18x^2 - 2x$`,
+      `$f'(x) = 6x^2 - 2$`,
+      `$f'(x) = 18x^2 - 2 + 9$`,
+    ],
+    correct: 0,
+    why: [
+      'Varje term deriveras för sig: $6x^3$ ger $18x^2$, $-2x$ ger $-2$, och konstanten $9$ försvinner.',
+      'Exponenten på $x$ i den deriverade termen ska minska med 1 jämfört med ursprungstermen — här blir det $x^2$, inte $x$.',
+      'Koefficienten $6$ ska multipliceras med exponenten $3$ innan exponenten minskas, dvs. $3 \\cdot 6 = 18$, inte bara $6$.',
+      'Konstanttermen $9$ har derivatan $0$ och ska inte finnas kvar i svaret.',
+    ],
+  },
+  {
+    question: 'Vad måste göras innan man deriverar $f(x) = (3x - 1)^2$?',
+    choices: [
+      'Parentesen måste utvecklas till ett polynom innan man deriverar term för term',
+      'Man deriverar parentesuttrycket direkt, utan förberedelse',
+      'Man sätter in ett värde på $x$ innan man deriverar',
+      'Man förkortar uttrycket med en gemensam faktor innan man deriverar',
+    ],
+    correct: 0,
+    why: [
+      'Deriveringsregeln term för term gäller bara när funktionen är skriven som en summa av termer — kvadraten måste därför utvecklas till ett polynom först.',
+      'Att derivera parentesuttrycket direkt utan att utveckla det ger fel svar.',
+      'Att sätta in ett specifikt $x$-värde är ett separat steg som görs efter deriveringen, om man vill beräkna derivatans värde i en punkt.',
+      'Förkortning används för att förenkla rationella uttryck (bråk), inte för att förbereda derivering av ett polynom.',
+    ],
+  },
+  {
+    question: 'Låt $f(x) = 2x^2 - 3x$. Vad är $f\'(1)$?',
+    choices: [
+      `$1$`,
+      `$-1$`,
+      `$4$`,
+      `$2$`,
+    ],
+    correct: 0,
+    why: [
+      'Derivatan är $f\'(x) = 4x - 3$, så $f\'(1) = 4 \\cdot 1 - 3 = 1$.',
+      'Ett teckenfel har smugit sig in — $4 \\cdot 1 - 3 = 1$, inte $-1$.',
+      'Termen $-3x$ ger derivatan $-3$; den försvinner inte när $x = 1$ sätts in.',
+      'Det är koefficienten framför $x^2$ i derivatan, inte derivatans värde i punkten $x = 1$.',
+    ],
+  },
+],
+
+'ma3c-3.3': [
+  {
+    question: 'Gäller potensregeln $f\'(x) = ax^{a-1}$ för $f(x) = x^a$ bara när $a$ är ett positivt heltal?',
+    choices: [
+      'Nej, den gäller för alla reella tal $a$ (om $x > 0$)',
+      'Ja, bara för positiva heltal',
+      'Ja, men bara för negativa heltal',
+      'Nej, den gäller bara för bråkexponenter',
+    ],
+    correct: 0,
+    why: [
+      'Med derivatans definition visar man att regeln fungerar lika bra för bråkexponenter (t.ex. $a = 1/2$) och negativa exponenter (t.ex. $a = -1$) — regeln är alltså generell.',
+      'Regeln gäller betydligt bredare — även bråk- och negativa exponenter ger samma enkla mönster.',
+      'Regeln gäller inte bara negativa heltal, utan alla reella exponenter.',
+      'Bråkexponenter är bara ett av flera fall regeln täcker — den gäller även heltal och negativa exponenter.',
+    ],
+  },
+  {
+    question: 'Hur skriver man om $\\dfrac{1}{x^5}$ som en potens innan man deriverar?',
+    choices: [
+      '$x^{-5}$',
+      '$x^{5}$',
+      '$-x^{5}$',
+      '$x^{1/5}$',
+    ],
+    correct: 0,
+    why: [
+      'Att flytta en faktor från nämnare till täljare byter tecken på exponenten, så $\\dfrac{1}{x^5} = x^{-5}$.',
+      'Tecknet på exponenten måste bytas när $x^5$ flyttas upp från nämnaren till täljaren.',
+      'Minustecknet ska sitta i exponenten, inte framför hela uttrycket — annars byter uttrycket värde.',
+      'Detta är hur man skriver om en rot ($\\sqrt[5]{x}$), inte hur man flyttar en nämnare till täljaren.',
+    ],
+  },
+  {
+    question: 'Hur skriver man om $\\sqrt{x}$ som en potens innan man deriverar?',
+    choices: [
+      '$x^{1/2}$',
+      '$x^{2}$',
+      '$x^{-1/2}$',
+      '$2x$',
+    ],
+    correct: 0,
+    why: [
+      'Kvadratroten ur $x$ motsvarar exponenten $1/2$, dvs. $\\sqrt{x} = x^{1/2}$.',
+      'Exponenten 2 svarar mot $x^2$, inte mot roten ur $x$.',
+      'Exponenten ska vara positiv $1/2$ — det negativa tecknet hör till $\\dfrac{1}{\\sqrt{x}}$, inte till $\\sqrt{x}$.',
+      'Att skriva om roten som en potens ger $x^{1/2}$, inte ett uttryck med $x$ multiplicerat med en konstant.',
+    ],
+  },
+  {
+    question: 'Vad blir $f\'(x)$ om $f(x) = \\dfrac{1}{x^2}$?',
+    choices: [
+      '$f\'(x) = -\\dfrac{2}{x^3}$',
+      '$f\'(x) = \\dfrac{2}{x^3}$',
+      '$f\'(x) = -\\dfrac{1}{x}$',
+      '$f\'(x) = -2x$',
+    ],
+    correct: 0,
+    why: [
+      'Med $f(x) = x^{-2}$ ger potensregeln $f\'(x) = -2x^{-3} = -\\dfrac{2}{x^3}$.',
+      'Tecknet blir fel — exponenten $-2$ multiplicerad ner ger ett negativt tal, inte ett positivt.',
+      'Exponenten ska minskas med 1 (från $-2$ till $-3$), inte försvinna helt.',
+      'Man multiplicerar ner exponenten $-2$ som faktor och minskar den med 1 i potensen — resultatet är fortfarande ett bråk, inte ett förstagradsuttryck.',
+    ],
+  },
+  {
+    question: 'Hur deriverar man enklast $f(x) = \\dfrac{5x - 3}{x}$, som har $x$ i både täljare och nämnare?',
+    choices: [
+      'Dela upp bråket i två termer, $5 - 3x^{-1}$, och derivera termvis',
+      'Derivera täljaren och nämnaren var för sig och sätt kvoten av derivatorna',
+      'Förkorta bort $x$ direkt i bråket före derivering',
+      'Bråket kan inte deriveras eftersom $x$ finns i nämnaren',
+    ],
+    correct: 0,
+    why: [
+      'Genom att dela upp $\\dfrac{5x - 3}{x}$ i $\\dfrac{5x}{x} - \\dfrac{3}{x} = 5 - 3x^{-1}$ kan varje term deriveras enkelt med potensregeln.',
+      'Att derivera täljare och nämnare separat och dividera derivatorna är inte hur ett kvotuttryck deriveras.',
+      'Man får inte förkorta bort $x$ ur $5x - 3$, eftersom $-3$ saknar faktorn $x$ — de är inte en gemensam faktor för hela täljaren.',
+      'Uttryck med $x$ i nämnaren kan deriveras — man skriver bara om dem som potenser med negativa exponenter först.',
+    ],
+  },
+],
+
+'ma3c-3.4': [
+  {
+    question: 'Vad är derivatan av $f(x) = e^x$?',
+    choices: [
+      '$f\'(x) = e^x$',
+      '$f\'(x) = xe^{x-1}$',
+      '$f\'(x) = 0$',
+      '$f\'(x) = e$',
+    ],
+    correct: 0,
+    why: [
+      'Funktionen $e^x$ är sin egen derivata — det är just det som gör talet $e$ speciellt.',
+      'Det är regeln för potensfunktioner ($x^n$), inte för exponentialfunktioner där variabeln sitter i exponenten.',
+      'Variabeln $x$ sitter i exponenten, så funktionen är inte konstant — derivatan är inte 0.',
+      'Derivatan behåller $x$ i exponenten, den blir inte en ren konstant.',
+    ],
+  },
+  {
+    question: 'Varför gäller att derivatan av $f(x) = e^x$ är precis $f\'(x) = e^x$?',
+    choices: [
+      'Talet $e$ är definierat som den bas där gränsvärdet $k = \\lim\\limits_{h\\to 0}\\dfrac{a^h-1}{h}$ blir exakt 1',
+      'Talet $e$ är det enda talet som är sin egen kvadrat',
+      'Alla exponentialfunktioner har samma derivata som sig själva',
+      '$e$ är en variabel, inte en konstant, så den deriveras precis som $x$',
+    ],
+    correct: 0,
+    why: [
+      'Derivatan av $a^x$ är $a^x \\cdot k$ där $k$ beror på basen $a$. Just för $a = e$ blir $k = 1$, så derivatan blir exakt $e^x$.',
+      'Det är en annan egenskap (och stämmer förresten inte för $e$) — det handlar inte om varför derivatan blir sig själv.',
+      'Tvärtom varierar $k$-värdet med basen $a$; det är bara för basen $e$ som $k = 1$.',
+      '$e$ är ett bestämt tal (en konstant, $\\approx 2{,}72$), precis som $\\pi$ — det är $x$ som är variabeln.',
+    ],
+  },
+  {
+    question: 'Vad är ett ungefärligt värde för talet $e$?',
+    choices: [
+      '$e \\approx 2{,}72$',
+      '$e \\approx 3{,}14$',
+      '$e \\approx 1{,}41$',
+      '$e \\approx 1{,}00$',
+    ],
+    correct: 0,
+    why: [
+      'Talet $e$ är ett irrationellt tal, $e = 2{,}718\\ldots \\approx 2{,}72$.',
+      'Det är en avrundning av $\\pi$, inte av $e$.',
+      'Det är en avrundning av $\\sqrt{2}$, inte av $e$.',
+      'Om $k = 1$ (talet $e$ som bas), inte om basen själv skulle vara 1 — då vore funktionen konstant och inte alls intressant att derivera.',
+    ],
+  },
+  {
+    question: 'Derivera $f(x) = 6e^x$.',
+    choices: [
+      '$f\'(x) = 6e^x$',
+      '$f\'(x) = e^x$',
+      '$f\'(x) = 6xe^{x-1}$',
+      '$f\'(x) = 6e^{x-1}$',
+    ],
+    correct: 0,
+    why: [
+      'En koefficient framför $e^x$ behålls oförändrad vid derivering, precis som för alla andra funktioner.',
+      'Koefficienten framför en term ska behållas vid derivering, inte försvinna.',
+      'Det är regeln för potensfunktioner ($x^n$) som blandas ihop här — $e^x$ deriveras inte på det sättet.',
+      'Exponenten på $e$ ska inte minskas med 1 — den regeln gäller potensfunktioner, inte exponentialfunktioner med basen $e$.',
+    ],
+  },
+  {
+    question: 'Funktionen är $f(x) = e^x + 4$. Vad är $f\'(x)$?',
+    choices: [
+      '$f\'(x) = e^x$',
+      '$f\'(x) = e^x + 4$',
+      '$f\'(x) = 4e^x$',
+      '$f\'(x) = e^{x+4}$',
+    ],
+    correct: 0,
+    why: [
+      'Konstanten $+4$ försvinner vid derivering (derivatan av en konstant är 0), så bara $e^x$ blir kvar.',
+      'Konstanttermen ska försvinna vid derivering — den ska inte hänga kvar oförändrad.',
+      'Konstanten $4$ adderas, den ska inte bli en multiplikativ koefficient framför $e^x$.',
+      'Uttrycket deriveras termvis; $4$ är en egen additiv term, inte en del av exponenten.',
+    ],
+  },
+],
+
+'ma3c-3.5': [
+  {
+    question: 'Vad är $f\'(x)$ om $f(x) = e^{7x}$?',
+    choices: [
+      '$7e^{7x}$',
+      '$e^{7x}$',
+      '$7e^{x}$',
+      '$e^{7}$',
+    ],
+    correct: 0,
+    why: [
+      'Derivatan av $e^{kx}$ är $ke^{kx}$ — koefficienten i exponenten (7) multipliceras in framför.',
+      'Här saknas koefficienten 7 som exponenten faktiskt har — den ska multipliceras in, inte utelämnas.',
+      'Exponenten ska vara oförändrad ($7x$, inte $x$) — bara koefficienten flyttas fram, funktionen skrivs annars av som den var.',
+      'Det saknas både rätt exponent och rätt koefficient — $f(x)$ deriveras inte till en konstant.',
+    ],
+  },
+  {
+    question: 'Vad är $f\'(x)$ om $f(x) = 3^x$?',
+    choices: [
+      '$3^x \\ln 3$',
+      '$3^x$',
+      '$x \\cdot 3^{x-1}$',
+      '$\\ln 3$',
+    ],
+    correct: 0,
+    why: [
+      'Basen 3 är inte $e$, så enligt regeln $f\'(x) = a^x \\ln a$ multipliceras funktionen med $\\ln 3$.',
+      'Det stämmer bara för basen $e$ ($f(x) = e^x$ har derivatan $e^x$) — med en annan bas måste man multiplicera med $\\ln$ för den basen.',
+      'Det är potensregeln för $x^n$ med konstant exponent — här är det tvärtom, $x$ som står i exponenten och 3 som är basen.',
+      'Det är bara $\\ln$-faktorn, men själva funktionen $3^x$ saknas i svaret.',
+    ],
+  },
+  {
+    question: 'Vad innebär $\\ln 5$?',
+    choices: [
+      'Det tal $e$ ska upphöjas till för att svaret ska bli 5',
+      'Talet 5 upphöjt till $e$',
+      'Tiologaritmen av 5',
+      'Talet $e$ dividerat med 5',
+    ],
+    correct: 0,
+    why: [
+      '$\\ln$ är den naturliga logaritmen, dvs. $e$-logaritmen — $\\ln 5$ svarar på "vad ska $e$ upphöjas till för att bli 5?".',
+      'Det är $e^5$, inte $\\ln 5$ — ordningen mellan bas och exponent är omvänd.',
+      'Tiologaritmen har basen 10 och skrivs $\\lg$ — $\\ln$ har i stället basen $e$.',
+      '$\\ln 5$ är en logaritm, inte en division mellan $e$ och 5.',
+    ],
+  },
+  {
+    question: 'Vad händer med koefficienten framför en exponentialfunktion, t.ex. i $f(x) = 4e^{3x}$, när man deriverar?',
+    choices: [
+      'Den behålls oförändrad framför',
+      'Den försvinner',
+      'Den kvadreras',
+      'Den blir en exponent',
+    ],
+    correct: 0,
+    why: [
+      'En konstant faktor framför funktionen följer med rakt av — bara faktorer i exponenten påverkar hur derivatan bildas.',
+      'Koefficienten framför en exponentialfunktion försvinner aldrig vid derivering, till skillnad från t.ex. en konstantterm i en summa.',
+      'Ingenting i deriveringsregeln kvadrerar koefficienten framför funktionen.',
+      'Koefficienten framför funktionen byter inte plats med exponenten vid derivering.',
+    ],
+  },
+  {
+    question: 'Enligt "lathunden" för att derivera exponentialfunktioner ska man multiplicera med $\\ln$ för basen …',
+    choices: [
+      '… bara om basen är någon annan än $e$',
+      '… alltid, oavsett bas',
+      '… bara om det finns en koefficient framför funktionen',
+      '… aldrig',
+    ],
+    correct: 0,
+    why: [
+      'Är basen $e$ gäller $\\ln e = 1$, så den faktorn syns inte — därför multiplicerar man bara med $\\ln$ när basen är en annan än $e$.',
+      'Med basen $e$ skulle det innebära att multiplicera med $\\ln e = 1$, vilket inte ändrar något — regeln gäller alltså bara andra baser.',
+      'Om basen ska ha en $\\ln$-faktor eller ej avgörs av basen, inte av om det finns en koefficient framför funktionen.',
+      'Utan $\\ln$-faktorn skulle t.ex. $f(x) = 2^x$ få samma derivata som $f(x) = e^x$, vilket är fel — baserna ger olika brantheter.',
+    ],
+  },
+],
+
+'ma3c-3.6': [
+  {
+    question: 'Derivatan av en modell är negativ vid en viss tidpunkt. Hur tolkar vi det?',
+    choices: [
+      'Storheten minskar vid den tidpunkten',
+      'Storheten ökar vid den tidpunkten',
+      'Storheten är noll vid den tidpunkten',
+      'Modellen innehåller ett räknefel',
+    ],
+    correct: 0,
+    why: [
+      'En negativ derivata betyder att funktionens värde avtar just då — en minskning.',
+      'En ökning svarar mot en positiv derivata, inte en negativ.',
+      'Att storheten är noll säger derivatan inget om — det handlar om funktionens eget värde, inte förändringstakten.',
+      'En negativ derivata är ett giltigt, tolkningsbart resultat — inte ett tecken på ett fel.',
+    ],
+  },
+  {
+    question: 'En funktion $f(t)$ mäts i liter och $t$ i minuter. Vilken enhet får $f\'(t)$?',
+    choices: [
+      'Liter per minut',
+      'Minuter per liter',
+      'Liter gånger minuter',
+      'Liter',
+    ],
+    correct: 0,
+    why: [
+      'Enheten för derivatan är "enheten för funktionen" per "enheten för variabeln" — här liter per minut.',
+      'Ordningen är omvänd — det är funktionens enhet delat med variabelns enhet, inte tvärtom.',
+      'Derivatan är ett kvot-begrepp (förändring per tidsenhet), inte en produkt.',
+      'Att bara ange liter (samma enhet som $f$ själv) glömmer bort att derivatan är en förändringshastighet per tidsenhet.',
+    ],
+  },
+  {
+    question: 'Tangenten till kurvan $y = f(x)$ i punkten där $x = a$ har ekvationen $y = kx + m$. Hur bestäms $k$?',
+    choices: [
+      '$k = f\'(a)$',
+      '$k = f(a)$',
+      '$k = f\'\'(a)$',
+      '$k = a \\cdot f(a)$',
+    ],
+    correct: 0,
+    why: [
+      'Riktningskoefficienten är tangentens (och kurvans) lutning i punkten, vilket är derivatans värde där.',
+      '$f(a)$ ger tangeringspunktens $y$-koordinat, inte lutningen.',
+      'Andraderivatan beskriver hur lutningen själv förändras, inte lutningen i sig.',
+      'Detta blandar ihop $x$-koordinaten och funktionsvärdet med lutningen — de har inget sådant samband.',
+    ],
+  },
+  {
+    question: 'Varför räcker det inte att bara känna $k = f\'(a)$ för att skriva tangentens fullständiga ekvation?',
+    choices: [
+      'Man måste också bestämma $m$ genom att sätta in tangeringspunktens koordinater',
+      '$k$ bestämmer alltid hela linjen på egen hand',
+      '$m$ är alltid noll för en tangent',
+      'Tangentens ekvation behöver ingen konstant $m$',
+    ],
+    correct: 0,
+    why: [
+      'Räta linjens ekvation har två konstanter, $k$ och $m$. Lutningen $k$ fixerar bara riktningen — $m$ läggs till genom att kräva att linjen går genom tangeringspunkten $(a, f(a))$.',
+      'Oändligt många linjer har samma lutning $k$ men olika $m$ — bara en av dem går genom rätt punkt.',
+      '$m$ är $y$-värdet där linjen skär $y$-axeln och beror på var tangeringspunkten ligger — det är sällan noll.',
+      'Utan $m$ vet man bara linjens lutning, inte var den befinner sig i koordinatsystemet.',
+    ],
+  },
+  {
+    question: 'Kurvan $y = x^2 - 4x + 1$ har en tangent i punkten där $x = 3$. Vad är tangentens lutning $k = y\'(3)$?',
+    choices: [
+      '2',
+      '3',
+      '6',
+      '−2',
+    ],
+    correct: 0,
+    why: [
+      'Derivatan är $y\' = 2x - 4$, så $y\'(3) = 2 \\cdot 3 - 4 = 6 - 4 = 2$.',
+      'Detta är $x$-koordinaten, inte lutningen — den måste beräknas via derivatan.',
+      'Detta fås om man glömmer att subtrahera $4$ efter att ha satt in $x = 3$ i $2x$.',
+      'Tecknet är fel — $2 \\cdot 3 - 4 = 2$, inte $-2$.',
+    ],
+  },
+],
+
+'ma3c-3.7': [
+  {
+    question: 'Vilket Geogebra-kommando ger derivatans värde vid en given punkt, t.ex. vid $x = 3$, för en redan definierad funktion $f$?',
+    choices: [
+      `f'(3)`,
+      'f(3)',
+      'NLös(f(x) = 3)',
+      'Lös(f(x) = 3)',
+    ],
+    correct: 0,
+    why: [
+      `Just det — när funktionen $f(x)$ redan är definierad ger f'(3) derivatans värde i punkten $x = 3$.`,
+      'f(3) ger funktionens eget värde i $x = 3$, inte lutningen där.',
+      'NLös löser ekvationer numeriskt — det ger inte derivatans värde direkt.',
+      'Lös löser ekvationer exakt (symboliskt) — det är inte samma sak som att läsa av derivatans värde.',
+    ],
+  },
+  {
+    question: 'Vad är skillnaden mellan kommandona NLös(Ekvation) och Lös(Ekvation) i Geogebra?',
+    choices: [
+      'NLös ger svaret som decimaltal, Lös ger svaret exakt med symboler',
+      'NLös löser bara andragradsekvationer, Lös löser alla ekvationer',
+      'NLös deriverar ekvationen, Lös bestämmer funktionsvärdet',
+      'Det är samma kommando fast med olika namn',
+    ],
+    correct: 0,
+    why: [
+      'Exakt — NLös returnerar en numerisk lösning (decimaltal), medan Lös ger den exakta, symboliska lösningen.',
+      'Båda kommandona fungerar på alla typer av ekvationer — det är svarets form som skiljer dem åt, inte vilka ekvationer de klarar.',
+      'Ingetdera kommando deriverar eller ger enbart ett funktionsvärde — båda löser ekvationer.',
+      'De ger olika typer av svar (numeriskt respektive exakt), så de är inte utbytbara.',
+    ],
+  },
+  {
+    question: 'En exponentialfunktion skrivs $y = C \\cdot a^x$. Hur skriver man om den på formen med basen $e$?',
+    choices: [
+      '$y = Ce^{kx}$ där $e^k = a$',
+      '$y = Ce^{ax}$ där $k = a$',
+      '$y = Ce^{x/k}$ där $k = a$',
+      '$y = C^k e^x$ där $k = a$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt uppställning — förändringsfaktorn $a$ motsvaras av $e^k$, så $k = \\ln a$.',
+      'Exponenten ska innehålla $k$, inte $a$ direkt — sambandet är $e^k = a$, inte $k = a$.',
+      'Det är inte division i exponenten, utan multiplikation: $kx$.',
+      'Startvärdet $C$ ska inte upphöjas — det är bara koefficienten framför exponentialuttrycket.',
+    ],
+  },
+  {
+    question: 'Hur bestämmer man koefficienten $k$ när en modell $y = C \\cdot a^x$ ska skrivas om med basen $e$?',
+    choices: [
+      '$k = \\ln a$, eftersom $e^k = a$',
+      '$k = a$ eftersom baserna är lika',
+      '$k = \\log a$ med basen 10',
+      '$k$ kan inte bestämmas utan att känna $C$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — logaritmera båda led i $e^k = a$: $\\ln e^k = \\ln a$, dvs. $k \\cdot \\ln e = \\ln a$, och eftersom $\\ln e = 1$ blir $k = \\ln a$.',
+      'Basbytet kräver logaritmering — $k$ är inte samma tal som $a$.',
+      'Det är den naturliga logaritmen (ln, med basen $e$) som används här, inte 10-logaritmen.',
+      '$k$ beror bara på förändringsfaktorn $a$ — startvärdet $C$ påverkar inte $k$.',
+    ],
+  },
+  {
+    question: `En funktions graf har som brantast negativa lutning vid en viss punkt. Vad motsvarar det i grafen till derivatan $f'(x)$?`,
+    choices: [
+      'Derivatans minimipunkt',
+      'Derivatans nollställe',
+      'Derivatans maximipunkt',
+      `Punkten där $f'(x) = f(x)$`,
+    ],
+    correct: 0,
+    why: [
+      `Ja — lutningen är som mest negativ just där derivatan $f'(x)$ själv har sitt minsta värde, dvs. i derivatans minimipunkt.`,
+      `Ett nollställe till $f'(x)$ betyder att lutningen är noll (en extrempunkt hos $f$), inte att lutningen är som mest negativ.`,
+      `En maximipunkt hos $f'(x)$ ger i stället den brantaste positiva lutningen.`,
+      `Det är inget villkor som beskriver extrem lutning — $f'(x)$ och $f(x)$ är olika funktioner.`,
+    ],
+  },
+],
+
+'ma3c-5.1': [
+  {
+    question: 'Vad menas med att $F(x)$ är en primitiv funktion till $f(x)$?',
+    choices: [
+      'Att $F\'(x) = f(x)$',
+      'Att $f\'(x) = F(x)$',
+      'Att $F(x)$ är andraderivatan av $f(x)$',
+      'Att $F(x)$ och $f(x)$ är samma funktion fast omskriven',
+    ],
+    correct: 0,
+    why: [
+      'Precis — en primitiv funktion är en funktion vars derivata ger tillbaka den ursprungliga funktionen.',
+      'Det är tvärtom: det är $F$ som deriveras till $f$, inte $f$ som deriveras till $F$.',
+      'Andraderivatan fås genom att derivera två gånger, inte genom att gå baklänges ett steg.',
+      'De är i allmänhet olika funktioner — $F$ har en högre exponent (eller motsvarande) än $f$.',
+    ],
+  },
+  {
+    question: 'Vad är skillnaden mellan att ange "en primitiv funktion" och "samtliga primitiva funktioner" till $f(x)$?',
+    choices: [
+      'Samtliga primitiva funktioner innehåller en generell konstant $C$ som en primitiv funktion inte behöver ha',
+      'En primitiv funktion måste alltid vara en konstant funktion',
+      'Samtliga primitiva funktioner är alltid lika med noll',
+      'Det finns ingen skillnad, de betyder samma sak',
+    ],
+    correct: 0,
+    why: [
+      'Alla funktioner av formen $F(x) + C$ har samma derivata $f(x)$, så samtliga primitiva funktioner skrivs med konstanten $C$ på slutet.',
+      'En primitiv funktion kan vara vilken funktion som helst — det beror på $f(x)$, den behöver inte alls vara konstant.',
+      'Konstanten $C$ kan stå för vilket tal som helst, inte bara noll.',
+      'Skillnaden är avgörande: en primitiv funktion är ett enda exempel, samtliga primitiva funktioner är hela familjen $F(x) + C$.',
+    ],
+  },
+  {
+    question: 'Hur bestämmer man en primitiv funktion till potensfunktionen $f(x) = x^n$?',
+    choices: [
+      'Öka exponenten med 1 och dividera med den nya exponenten: $F(x) = \\dfrac{x^{n+1}}{n+1}$',
+      'Öka exponenten med 1 utan att dividera: $F(x) = x^{n+1}$',
+      'Minska exponenten med 1 och multiplicera med $n$: $F(x) = nx^{n-1}$',
+      'Dividera exponenten med $x$: $F(x) = \\dfrac{x^n}{n}$',
+    ],
+    correct: 0,
+    why: [
+      'Just detta är regeln för potensfunktioner — den nya exponenten $n + 1$ används både i täljaren och som divisor.',
+      'Man måste också dividera med den nya exponenten, annars stämmer inte derivatan tillbaka till $x^n$.',
+      'Det är deriveringsregeln (framlänges), inte regeln för en primitiv funktion.',
+      'Det är exponenten på $x$ som ska ökas med 1, inte $x^n$ som ska divideras med den gamla exponenten $n$.',
+    ],
+  },
+  {
+    question: 'Hur bestämmer man en primitiv funktion till en konstant funktion $f(x) = k$?',
+    choices: [
+      'Multiplicera konstanten med $x$: $F(x) = kx$',
+      'Låt funktionen vara oförändrad: $F(x) = k$',
+      'Kvadrera konstanten och dividera med 2: $F(x) = \\dfrac{k^2}{2}$',
+      'Dividera konstanten med $x$: $F(x) = \\dfrac{k}{x}$',
+    ],
+    correct: 0,
+    why: [
+      'Deriverar man $F(x) = kx$ fås just $k$ tillbaka, så detta är den primitiva funktionen till en konstant.',
+      'Deriverar man en konstant $F(x) = k$ blir derivatan noll, inte $k$ — det stämmer alltså inte.',
+      'Det är inte regeln för en konstant funktion — ingen kvadrering är inblandad.',
+      'Att dividera med $x$ ger en funktion som inte alls har derivatan $k$.',
+    ],
+  },
+  {
+    question: 'Hur bestämmer man en primitiv funktion till exponentialfunktionen $f(x) = e^{kx}$?',
+    choices: [
+      'Skriv av funktionen och dividera med koefficienten $k$ framför $x$ i exponenten: $F(x) = \\dfrac{e^{kx}}{k}$',
+      'Skriv av funktionen och multiplicera med $k$: $F(x) = ke^{kx}$',
+      'Låt funktionen vara oförändrad: $F(x) = e^{kx}$',
+      'Öka exponenten med 1 som för en potensfunktion: $F(x) = \\dfrac{e^{kx+1}}{k+1}$',
+    ],
+    correct: 0,
+    why: [
+      'Deriverar man $F(x) = \\dfrac{e^{kx}}{k}$ med kedjeregeln fås $k \\cdot \\dfrac{e^{kx}}{k} = e^{kx}$ tillbaka, precis $f(x)$.',
+      'Att multiplicera med $k$ ger fel håll — deriverar man den funktionen fås $k^2 e^{kx}$, inte $e^{kx}$.',
+      'Deriverar man $e^{kx}$ oförändrad fås $k e^{kx}$ på grund av kedjeregeln, inte $e^{kx}$ — det stämmer alltså inte.',
+      'Exponentialfunktioner med basen $e$ följer en egen regel; man ökar inte exponenten som för en potensfunktion.',
+    ],
+  },
+],
+
+'ma3c-5.2': [
+  {
+    question: 'Vad menas med ett "villkor" för en primitiv funktion?',
+    choices: [
+      'En extra uppgift om funktionen, till exempel ett känt funktionsvärde, som gör att konstanten $C$ kan bestämmas',
+      'Ett krav på att funktionen måste vara ett polynom',
+      'Att funktionen saknar nollställen',
+      'Att man alltid får $C = 0$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — ett villkor som $F(1) = 7$ ger en ekvation som löser ut $C$.',
+      'Villkoret handlar om att bestämma konstanten, inte om vilken typ av funktion det är.',
+      'Nollställen har inget att göra med hur $C$ bestäms.',
+      'Konstanten $C$ kan bli vilket tal som helst — det beror helt på villkoret.',
+    ],
+  },
+  {
+    question: 'Vad är motsatsen till att derivera?',
+    choices: [
+      'Att integrera',
+      'Att förenkla',
+      'Att faktorisera',
+      'Att förkorta',
+    ],
+    correct: 0,
+    why: [
+      'Att ta fram en primitiv funktion (integrera) är motsatsen till att derivera.',
+      'Förenkling är en allmän räkneoperation, inte motsatsen till derivering.',
+      'Faktorisering handlar om att skriva om uttryck som produkter, inte om derivator.',
+      'Förkortning gäller rationella uttryck, inte sambandet mellan derivator och primitiva funktioner.',
+    ],
+  },
+  {
+    question: 'Om vi deriverar en sträckfunktion $s(t)$ två gånger efter varandra, vad får vi?',
+    choices: [
+      'En accelerationsfunktion $a(t)$',
+      'En hastighetsfunktion $v(t)$',
+      'Samma sträckfunktion $s(t)$ igen',
+      'Konstanten $C$',
+    ],
+    correct: 0,
+    why: [
+      'Första deriveringen ger hastigheten $v(t)$, andra deriveringen av $v(t)$ ger accelerationen $a(t)$.',
+      'Det är bara resultatet av den första deriveringen — frågan gäller två deriveringar.',
+      'Derivering av en icke-konstant funktion ger en ny funktion, inte samma tillbaka.',
+      'Konstanten $C$ dyker upp vid integrering, inte vid derivering.',
+    ],
+  },
+  {
+    question: 'En primitiv funktion till $f(x) = 2x$ är $F(x) = x^2 + C$. Vilket villkor ger $C = 3$?',
+    choices: [
+      '$F(0) = 3$',
+      '$F(3) = 0$',
+      '$f(0) = 3$',
+      '$F(1) = 1$',
+    ],
+    correct: 0,
+    why: [
+      'Insättning ger $0^2 + C = 3$, alltså $C = 3$.',
+      'Insättning ger $9 + C = 0$, alltså $C = -9$ — inte $3$.',
+      'Villkoret måste gälla den primitiva funktionen $F$, inte $f$ (och $f(0) = 0$ oavsett $C$).',
+      'Insättning ger $1 + C = 1$, alltså $C = 0$ — inte $3$.',
+    ],
+  },
+  {
+    question: 'Hastigheten för ett föremål är $v(t) = 6t$, och $s(0) = 2$. Vilken är sträckfunktionen $s(t)$?',
+    choices: [
+      '$s(t) = 3t^2 + 2$',
+      '$s(t) = 3t^2$',
+      '$s(t) = 6t^2 + 2$',
+      '$s(t) = 3t^2 + 6$',
+    ],
+    correct: 0,
+    why: [
+      'Integrering av $6t$ ger $3t^2 + C$, och $s(0) = 2$ ger $C = 2$.',
+      'Villkoret $s(0) = 2$ har inte använts — det ger $C = 2$, inte $C = 0$.',
+      'Exponenten ska öka med 1 och man ska dividera med den nya exponenten: $6t$ ger $3t^2$, inte $6t^2$.',
+      'Konstanten $C$ ska bestämmas av villkoret $s(0) = 2$, den är inte samma tal som koefficienten i $v(t)$.',
+    ],
+  },
+],
+
+'ma3c-5.3': [
+  {
+    question: 'Vad motsvarar en bestämd integral $\\int_a^b f(x)\\, dx$ grafiskt?',
+    choices: [
+      'Arean mellan grafen och $x$-axeln, mellan $x = a$ och $x = b$',
+      'Lutningen på grafens tangent i en punkt',
+      'Skärningspunkten mellan grafen och $x$-axeln',
+      'Grafens högsta värde mellan $x = a$ och $x = b$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — integralen motsvarar arean under grafen mellan de två integrationsgränserna.',
+      'Det är derivatan (tangentens lutning i en punkt) som beskrivs så, inte integralen.',
+      'Det beskriver ett nollställe till funktionen, inte en integral.',
+      'Det beskriver ett maximivärde, inte en integral.',
+    ],
+  },
+  {
+    question: 'Hur går övergången från summan av rektangelareor $\\sum f(x) \\cdot \\Delta x$ till integralen $\\int f(x)\\, dx$?',
+    choices: [
+      'Genom att låta rektanglarnas bredd $\\Delta x$ gå mot 0, så att $\\Delta x$ blir $dx$ och summan blir en integral',
+      'Genom att multiplicera alla rektangelareor med varandra i stället för att addera dem',
+      'Genom att bara använda en enda, bredare rektangel',
+      'Genom att derivera summan av rektangelareorna',
+    ],
+    correct: 0,
+    why: [
+      'När $\\Delta x$ går mot noll blir summan av oändligt många, oändligt smala rektangelareor en integral — integraltecknet är en "utdragen s" för summa.',
+      'Rektangelareorna adderas (summeras) hela tiden, både före och efter gränsövergången — de multipliceras aldrig.',
+      'Tvärtom blir approximationen bättre ju FLER (och smalare) rektanglar som används, inte färre.',
+      'Derivering är den motsatta operationen till integrering och har inget med denna gränsövergång att göra.',
+    ],
+  },
+  {
+    question: 'En area under en funktions graf ligger helt under $x$-axeln. Vad gäller för arean respektive integralen?',
+    choices: [
+      'Integralen blir negativ, men arean i sig kan aldrig vara negativ',
+      'Både integralen och arean blir negativa',
+      'Integralen blir positiv eftersom en area alltid är positiv',
+      'Integralen blir noll eftersom området ligger under $x$-axeln',
+    ],
+    correct: 0,
+    why: [
+      'Precis denna distinktion är central: en integral kan bli negativ, men en geometrisk area är per definition alltid större än eller lika med noll.',
+      'En area kan aldrig vara negativ — det är bara integralens värde som kan bli det.',
+      'Att arean ligger under $x$-axeln gör tvärtom att integralens värde blir negativt, inte positivt.',
+      'Integralen blir negativ (inte noll) så länge området har en utsträckning skild från noll.',
+    ],
+  },
+  {
+    question: 'I integralen $\\int_2^7 f(x)\\, dx$ — vad kallas talet 7?',
+    choices: [
+      'Övre integrationsgräns',
+      'Undre integrationsgräns',
+      'Integrand',
+      'Integrationsvariabel',
+    ],
+    correct: 0,
+    why: [
+      'Precis — 7 är det $x$-värde där arean slutar, alltså den övre integrationsgränsen.',
+      'Den undre integrationsgränsen är talet längst ner vid integraltecknet, här 2.',
+      'Integranden är funktionen som integreras, $f(x)$, inte en gräns.',
+      'Integrationsvariabeln är $x$ (den som anges i $dx$), inte en gräns.',
+    ],
+  },
+  {
+    question: 'Grafen till $f(x) = 3$ bildar tillsammans med $x$-axeln, $x = 1$ och $x = 5$ en rektangel. Vad är $\\int_1^5 3\\, dx$?',
+    choices: [
+      '$12$',
+      '$15$',
+      '$4$',
+      '$3$',
+    ],
+    correct: 0,
+    why: [
+      'Rektangeln har basen $5 - 1 = 4$ och höjden $3$, så integralens värde är $4 \\cdot 3 = 12$.',
+      'Det motsvarar $5 \\cdot 3$ — men bredden på rektangeln är $5 - 1 = 4$, inte $5$; glöm inte att subtrahera den undre gränsen.',
+      'Det är bara bredden $5 - 1 = 4$ — höjden (funktionsvärdet $3$) måste också multipliceras in.',
+      'Det är bara höjden $f(x) = 3$ — bredden $5 - 1 = 4$ måste också multipliceras in.',
+    ],
+  },
+],
+
+'ma3c-5.4': [
+  {
+    question: 'Vad säger integralkalkylens fundamentalsats?',
+    choices: [
+      '$\\int_a^b f(x)\\, dx = F(b) - F(a)$, där $F$ är en primitiv funktion till $f$',
+      '$\\int_a^b f(x)\\, dx = f(b) - f(a)$',
+      '$\\int_a^b f(x)\\, dx = F(a) - F(b)$',
+      '$\\int_a^b f(x)\\, dx = \\dfrac{F(b) - F(a)}{b - a}$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — den bestämda integralen beräknas som skillnaden mellan den primitiva funktionens värden i övre och undre gränsen.',
+      'Det är den primitiva funktionen $F$, inte $f$ självt, som ska sättas in i gränserna.',
+      'Ordningen är omvänd — det är övre gränsen minus undre gränsen, $F(b) - F(a)$, inte tvärtom.',
+      'Det uttrycket är formeln för en medellutning (sekant) mellan två punkter — integralen är själva differensen $F(b) - F(a)$, inte den delat med $b - a$.',
+    ],
+  },
+  {
+    question: 'Vad betyder skrivsättet $\\big[F(x)\\big]_a^b$?',
+    choices: [
+      'Ett kompakt skrivsätt för differensen $F(b) - F(a)$',
+      'Ett kompakt skrivsätt för differensen $F(a) - F(b)$',
+      'Ett kompakt skrivsätt för summan $F(b) + F(a)$',
+      'Ett kompakt skrivsätt för derivatan av $F$ i intervallet',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — hakparentesen med gränserna är bara ett skrivsätt för att först sätta in övre gränsen och sedan subtrahera värdet vid undre gränsen.',
+      'Ordningen är omvänd: det är övre gränsens värde som sätts in först och undre gränsens värde som subtraheras, inte tvärtom.',
+      'Det handlar om en differens, inte en summa.',
+      'Skrivsättet handlar om att sätta in gränserna i en redan bestämd primitiv funktion, inte om att derivera något.',
+    ],
+  },
+  {
+    question: 'Vilket krav ställs på funktionen $F$ i integralkalkylens fundamentalsats?',
+    choices: [
+      'Den måste vara en primitiv funktion till $f$, dvs. en funktion vars derivata är lika med $f$',
+      'Den måste vara samma funktion som $f$',
+      'Den måste vara derivatan av $f$',
+      'Den kan vara vilken funktion som helst',
+    ],
+    correct: 0,
+    why: [
+      'Just det — $F$ måste vara en primitiv funktion (antiderivata) till $f$, det vill säga en funktion vars derivata är $f$, annars gäller inte sambandet.',
+      '$f$ är integranden, funktionen som ska integreras — $F$ är en annan funktion, den primitiva funktionen till $f$.',
+      'Det är tvärtom: $f$ är derivatan av $F$, inte omvänt.',
+      'Sambandet gäller bara om $F$ specifikt är en primitiv funktion till $f$ — vilken funktion som helst duger inte.',
+    ],
+  },
+  {
+    question: 'Varför måste man sätta parentes runt hela uttrycket när man sätter in den undre gränsen, om den primitiva funktionen har flera termer?',
+    choices: [
+      'Annars påverkar minustecknet bara den första termen i stället för samtliga termer, vilket ger fel tecken i svaret',
+      'Det är bara en skrivvana utan betydelse för slutsvaret',
+      'För att göra uttrycket kortare och lättare att läsa',
+      'Parentes behövs bara vid den övre gränsen, aldrig vid den undre',
+    ],
+    correct: 0,
+    why: [
+      'Precis — utan parentesen distribueras inte minustecknet till alla termer i den undre gränsens uttryck, och svaret blir fel.',
+      'En glömd parentes ändrar ofta hela svaret, så det är inte bara en stilfråga.',
+      'Parentesen handlar om att räkna rätt, inte om att förkorta uttrycket.',
+      'Det är tvärtom den undre gränsen (den som subtraheras med ett minustecken framför) som kräver parentes när den har flera termer.',
+    ],
+  },
+  {
+    question: 'Vad blir $\\big[x^2\\big]_1^3$?',
+    choices: [
+      '$8$',
+      '$5$',
+      '$9$',
+      '$4$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — $3^2 - 1^2 = 9 - 1 = 8$.',
+      '$5$ stämmer varken med $3^2$ eller med differensen $9 - 1$ — kontrollera uträkningen igen.',
+      '$9$ är bara $3^2$ — den undre gränsens värde $1^2 = 1$ har inte subtraherats.',
+      '$4$ stämmer inte med vare sig $3^2$ eller $1^2$ — se över kvadreringen.',
+    ],
+  },
+],
+
+'ma3c-5.5': [
+  {
+    question: 'Vilket kommando använder man i Geogebra för att bestämma en primitiv funktion till en given funktion?',
+    choices: [
+      'Integral( Funktion )',
+      'Integral( Funktion, Från x-värde, Till x-värde )',
+      'Derivata( Funktion )',
+      'Lös( Funktion )',
+    ],
+    correct: 0,
+    why: [
+      'Matar man bara in funktionsuttrycket, utan gränser, ger kommandot en primitiv funktion.',
+      'Det kommandot har två gränser också och används för att beräkna integralens värde, inte för att ta fram en primitiv funktion.',
+      'Derivata ger derivatan av funktionen — den motsatta operationen till att integrera.',
+      'Lös används för att lösa ekvationer, inte för att bestämma primitiva funktioner.',
+    ],
+  },
+  {
+    question: 'Vad är skillnaden mellan att använda kommandot Integral( Funktion ) i standardläget respektive i CAS-läget?',
+    choices: [
+      'Standardläget ger en enda primitiv funktion, CAS-läget ger samtliga primitiva funktioner (med konstanten $c_1$)',
+      'Standardläget ger ett exakt svar, CAS-läget ger ett närmevärde',
+      'De ger alltid exakt samma svar',
+      'CAS-läget fungerar bara för andragradsfunktioner',
+    ],
+    correct: 0,
+    why: [
+      'CAS-läget lägger till den godtyckliga konstanten $c_1$ och beskriver därmed hela familjen av primitiva funktioner, medan standardläget bara ger en av dem.',
+      'Skillnaden mellan exakt svar och närmevärde gäller kommandot med integrationsgränser — utan gränser skiljer det sig i stället genom konstanten $c_1$.',
+      'Svaren skiljer sig åt just genom att CAS-lägets svar innehåller $c_1$.',
+      'Kommandot fungerar för polynomfunktioner av vilken grad som helst, inte bara andragradsfunktioner.',
+    ],
+  },
+  {
+    question: 'Med kommandot Integral( Funktion, Från x-värde, Till x-värde ) i standardläget — vilken typ av svar får man?',
+    choices: [
+      'Ett närmevärde (ett ungefärligt decimaltal)',
+      'Ett exakt svar, t.ex. i bråkform',
+      'En primitiv funktion utan gränser',
+      'Ett samband mellan två variabler',
+    ],
+    correct: 0,
+    why: [
+      'I standardläget beräknar Geogebra integralen numeriskt och ger ett ungefärligt decimaltal.',
+      'Ett exakt svar, t.ex. som bråk, får man i stället i CAS-läget.',
+      'Kommandot har två integrationsgränser inmatade, så svaret blir ett tal, inte en funktion.',
+      'Svaret är ett enda tal — integralens värde mellan gränserna — inte ett samband.',
+    ],
+  },
+  {
+    question: 'Med samma kommando, Integral( Funktion, Från x-värde, Till x-värde ), fast i CAS-läget — vilken typ av svar får man?',
+    choices: [
+      'Ett exakt svar, t.ex. i bråkform',
+      'Ett närmevärde (ett ungefärligt decimaltal)',
+      'En primitiv funktion utan gränser',
+      'Alltid ett heltal',
+    ],
+    correct: 0,
+    why: [
+      'CAS-läget räknar symboliskt och ger integralens exakta värde, t.ex. som ett bråk.',
+      'Ett ungefärligt decimaltal är vad standardläget ger, inte CAS-läget.',
+      'Gränserna är inmatade i kommandot, så svaret är integralens värde, inte en primitiv funktion.',
+      'Svaret kan mycket väl bli ett bråk eller ett rotuttryck — det behöver inte bli ett heltal.',
+    ],
+  },
+  {
+    question: 'Ett digitalt hjälpmedel ger i CAS-läget $\\displaystyle\\int_1^5 (x^2 - 4)\\, dx = \\dfrac{76}{3}$. Vilket svar skulle samma integral ge i standardläget?',
+    choices: [
+      '$\\approx 25{,}3$',
+      '$\\dfrac{76}{3}$, exakt precis som i CAS-läget',
+      '$76$',
+      '$\\dfrac{3}{76}$',
+    ],
+    correct: 0,
+    why: [
+      'Standardläget ger samma tal som CAS-läget, men som ett numeriskt närmevärde: $\\dfrac{76}{3} \\approx 25{,}3$.',
+      'Det exakta bråksvaret är det CAS-läget ger — standardläget avrundar i stället till ett decimaltal.',
+      'Det är täljaren i det exakta svaret, inte integralens värde eller dess närmevärde.',
+      'Det är bråket upp och ner — inte integralens värde.',
+    ],
+  },
+],
+
+'ma3c-5.6': [
+  {
+    question: 'Hur beräknas arean mellan två kurvor $f(x)$ och $g(x)$ i intervallet $[a, b]$, om $f(x) \\geq g(x)$ i hela intervallet?',
+    choices: [
+      '$A = \\int_a^b (f(x) - g(x))\\, dx$',
+      '$A = \\int_a^b (g(x) - f(x))\\, dx$',
+      '$A = \\int_a^b f(x)\\, dx + \\int_a^b g(x)\\, dx$',
+      '$A = f(b) - f(a) - (g(b) - g(a))$',
+    ],
+    correct: 0,
+    why: [
+      'Just det — arean ges av integralen av den övre funktionen minus den undre funktionen.',
+      'Det är tvärtom: eftersom $f(x)$ är den övre funktionen ska den stå först i differensen, annars blir integralen negativ.',
+      'Det ger summan av areorna under båda kurvorna var för sig, inte arean mellan dem — den undre arean ska subtraheras, inte adderas.',
+      'Man kan inte bara subtrahera funktionsvärden i ändpunkterna — hela differensen $f(x) - g(x)$ måste integreras över intervallet.',
+    ],
+  },
+  {
+    question: 'Varför subtraherar vi den undre funktionens integral från den övre funktionens integral när vi beräknar arean mellan två kurvor?',
+    choices: [
+      'Arean under den övre kurvan innehåller även arean under den undre kurvan, som ska räknas bort',
+      'Det är bara en beräkningsregel utan geometrisk betydelse',
+      'För att arean annars alltid blir negativ',
+      'För att undvika att använda integraler över huvud taget',
+    ],
+    correct: 0,
+    why: [
+      'Precis — integralen av $f(x)$ ger arean mellan $f(x)$ och x-axeln, vilket omfattar arean under $g(x)$ också. Subtraherar man bort den kvarstår bara arean mellan kurvorna.',
+      'Subtraktionen har en tydlig geometrisk tolkning: den övre arean minus den undre arean blir kvar som arean mellan kurvorna.',
+      'Arean blir bara negativ om man råkar subtrahera i fel ordning (undre minus övre), inte som en följd av metoden i sig.',
+      'Tvärtom — metoden bygger helt på att integrera båda funktionerna.',
+    ],
+  },
+  {
+    question: 'Kurvorna $y = f(x)$ och $y = g(x)$ ska integreras mellan sina skärningspunkter, men inga gränser är angivna i uppgiften. Hur bestäms integrationsgränserna $a$ och $b$?',
+    choices: [
+      'Genom att sätta $f(x) = g(x)$ och lösa ekvationen',
+      'Genom att derivera $f(x) - g(x)$ och sätta lika med noll',
+      'Genom att sätta $f(x) = 0$ och $g(x) = 0$',
+      'Gränserna kan väljas godtyckligt',
+    ],
+    correct: 0,
+    why: [
+      'Just det — där kurvorna skär varandra gäller $f(x) = g(x)$, och lösningarna till den ekvationen ger integrationsgränserna.',
+      'Det ger i stället extrempunkter till differensfunktionen, inte skärningspunkterna mellan kurvorna.',
+      'Det ger kurvornas egna nollställen (var de skär x-axeln), inte var de skär varandra.',
+      'Gränserna måste vara skärningspunkterna — annars integreras ett område där kurvorna inte längre avgränsar varandra på det sättet.',
+    ],
+  },
+  {
+    question: 'Ett område avgränsas av tre kurvor så att den övre funktionen byter identitet mitt i intervallet (t.ex. en rät linje först, sedan en parabel). Hur beräknas den sammanlagda arean?',
+    choices: [
+      'Dela upp intervallet vid bytespunkten, beräkna varje delarea för sig och addera dem',
+      'Integrera med den funktion som är övre funktion i störst del av intervallet, över hela intervallet',
+      'Integrera skillnaden mellan de två övre funktionerna',
+      'Beräkna bara arean i den ena delen — den andra bidrar inte',
+    ],
+    correct: 0,
+    why: [
+      'Precis så — varje delintervall har sin egen övre och undre funktion, så $A_1$ och $A_2$ beräknas separat och adderas: $A = A_1 + A_2$.',
+      'Det ger fel resultat i den del av intervallet där den funktionen inte längre är den övre.',
+      'De två "övre" funktionerna gäller i olika delintervall, inte samtidigt — de ska inte subtraheras från varandra.',
+      'Båda delarna bidrar till den sammanlagda arean — ingen del kan uteslutas.',
+    ],
+  },
+  {
+    question: 'Vad är skillnaden mellan att beräkna arean mellan två kurvor i Geogebras CAS-läge och i standardvyn med kommandot IntegralMellan?',
+    choices: [
+      'CAS-läget ger ett exakt svar, standardvyn ger ett närmevärde',
+      'CAS-läget ger ett närmevärde, standardvyn ger ett exakt svar',
+      'Det är ingen skillnad — båda ger exakt samma sorts svar',
+      'CAS-läget kan bara användas för en kurva åt gången',
+    ],
+    correct: 0,
+    why: [
+      'Just det — CAS-läget räknar symboliskt och ger exakta svar (t.ex. som bråk), medan standardvyn ger ett numeriskt närmevärde.',
+      'Det är tvärtom: CAS-läget ger exakta svar, standardvyn ger närmevärden.',
+      'Kommandot är detsamma, men CAS-läget respektive standardvyn tolkar och presenterar resultatet på olika sätt (exakt kontra numeriskt).',
+      'IntegralMellan tar emot två funktionsuttryck — en övre och en undre — i båda vyerna, inte bara ett.',
+    ],
+  },
+],
+
+'ma3c-5.7': [
+  {
+    question: 'Vad står en integral generellt för vid tillämpningar?',
+    choices: [
+      'Produkten av den beroende variabeln och den oberoende variabeln',
+      'Derivatan av funktionen i en given punkt',
+      'Funktionens medelvärde över ett intervall',
+      'Skillnaden mellan funktionens största och minsta värde',
+    ],
+    correct: 0,
+    why: [
+      'Precis — en integral $\\int f(x)\\, dx$ tolkas som produkten av $f(x)$ (den beroende variabeln) och $x$ (den oberoende variabeln), vilket bland annat ger enheten för integralen.',
+      'Det är derivatan $f\'(a)$ som beskriver en momentan förändringshastighet i en punkt — en helt annan storhet än integralen.',
+      'Ett medelvärde fås genom att dividera integralen med intervallets längd, inte av integralen ensam.',
+      'Skillnaden mellan störst och minst värde säger inget om integralens tolkning som en produkt.',
+    ],
+  },
+  {
+    question: 'En funktion $f$ har enheten kg/s och variabeln $x$ (tiden) har enheten sekunder. Vilken enhet får $\\displaystyle\\int f(x)\\, dx$?',
+    choices: [
+      'kg',
+      'kg/s',
+      's',
+      '$\\text{kg} \\cdot \\text{s}^2$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — integralens enhet fås genom att ta "enheten för $f$" $\\cdot$ "enheten för $x$", dvs. $\\dfrac{\\text{kg}}{\\text{s}} \\cdot \\text{s} = \\text{kg}$.',
+      'Det är enheten för $f(x)$ själv, inte för integralen — s-enheterna ska förkortas bort.',
+      'Det är enheten för variabeln $x$, inte för hela integralen.',
+      'Enheterna för sekunder förkortas bort mot varandra i stället för att multipliceras ihop till kvadrat.',
+    ],
+  },
+  {
+    question: 'Vilket samband stämmer mellan sträcka $s(t)$, hastighet $v(t)$ och acceleration $a(t)$?',
+    choices: [
+      '$v(t) = \\displaystyle\\int a(t)\\, dt$ och $s(t) = \\displaystyle\\int v(t)\\, dt$',
+      '$a(t) = \\displaystyle\\int v(t)\\, dt$ och $v(t) = \\displaystyle\\int s(t)\\, dt$',
+      '$v(t) = s(t) \\cdot t$',
+      '$a(t) = s(t) \\cdot v(t)$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — vi integrerar oss "bakåt" från accelerationen till hastigheten och vidare till sträckan (motsatsen till att derivera).',
+      'Detta har riktningen omvänd: det är hastigheten som fås genom att integrera accelerationen, inte tvärtom.',
+      'Hastighet och sträcka är inte relaterade genom en enkel multiplikation med tiden om inte hastigheten är konstant.',
+      'Acceleration är inte en produkt av sträcka och hastighet, utan hänger ihop med dem via derivering/integrering.',
+    ],
+  },
+  {
+    question: 'Hastigheten för ett fordon ges av $v(t)$ m/s. Vad beräknar $\\displaystyle\\int_5^{12} v(t)\\, dt$?',
+    choices: [
+      'Den sträcka som fordonet färdas mellan $t = 5$ s och $t = 12$ s',
+      'Fordonets hastighet vid $t = 12$ s',
+      'Fordonets acceleration mellan $t = 5$ s och $t = 12$ s',
+      'Den genomsnittliga hastigheten mellan $t = 5$ s och $t = 12$ s',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — integralen av hastigheten mellan två tidpunkter ger den tillryggalagda sträckan under det tidsintervallet.',
+      'Hastigheten vid en viss tidpunkt fås genom att sätta in tidpunkten i $v(t)$, inte genom att integrera.',
+      'Accelerationen fås genom att derivera hastigheten, inte genom att integrera den.',
+      'Medelhastigheten fås genom att dela integralen med tidsintervallets längd ($\\frac{1}{12-5}\\int_5^{12} v(t)\\, dt$) — inte av integralen ensam.',
+    ],
+  },
+  {
+    question: 'Ett företags omsättningshastighet ges av $K(t)$ kr/månad. Om $\\displaystyle\\int_0^{12} K(t)\\, dt = 3\\,000\\,000$, vad betyder detta?',
+    choices: [
+      'Företaget omsatte totalt 3 000 000 kr under de första 12 månaderna',
+      'Företagets omsättningshastighet är 3 000 000 kr/månad vid $t = 12$',
+      'Företaget behöver 3 000 000 månader för att nå en viss omsättning',
+      'Företagets fasta kostnader är 3 000 000 kr',
+    ],
+    correct: 0,
+    why: [
+      'Precis — integralen av en omsättningshastighet (kr/månad) över ett tidsintervall (månader) ger den totala omsättningen i kronor under intervallet.',
+      'Det skulle vara $K(12)$, inte integralen, som gav omsättningshastigheten vid en enskild tidpunkt — och 3 000 000 är dessutom orimligt stort för en hastighet.',
+      'Enheten kr kommer från kr/månad $\\cdot$ månad — talet 3 000 000 är en summa pengar, inte ett antal månader.',
+      'Integralen av en omsättningshastighet säger inget om kostnader, bara om den totala omsättningen (intäkten).',
+    ],
+  },
+],
+
+'ma3c-4.1': [
+  {
+    question: 'Vad kan vi säga om en funktion $f(x)$ i en punkt där $f\'(x) > 0$?',
+    choices: [
+      'Funktionen växer i den punkten',
+      'Funktionen avtar i den punkten',
+      'Funktionen har ett maximum där',
+      'Funktionen är konstant där',
+    ],
+    correct: 0,
+    why: [
+      'Precis — positiv derivata betyder positiv lutning, dvs. att funktionen växer.',
+      'Avtagande hör ihop med negativ derivata, $f\'(x) < 0$, inte positiv.',
+      'I en maximipunkt är derivatan noll, inte positiv.',
+      'En konstant funktion har derivatan noll överallt, inte ett positivt värde.',
+    ],
+  },
+  {
+    question: 'Vilket samband gäller mellan derivatans tecken och funktionens graf?',
+    choices: [
+      '$f\'(x) < 0$ ger avtagande funktion, $f\'(x) > 0$ ger växande funktion',
+      '$f\'(x) < 0$ ger växande funktion, $f\'(x) > 0$ ger avtagande funktion',
+      'Derivatans tecken avgör om funktionen är positiv eller negativ',
+      'Derivatans tecken har ingen koppling till om funktionen växer eller avtar',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — negativ lutning ("nedförsbacke") ger avtagande, positiv lutning ("uppförsbacke") ger växande.',
+      'Detta är tvärtom — negativ derivata ger avtagande, inte växande.',
+      'Derivatans tecken beskriver lutningen (om funktionen växer eller avtar), inte om funktionsvärdet självt är positivt eller negativt.',
+      'Tvärtom — det är just derivatans tecken som avgör om en funktion växer eller avtar.',
+    ],
+  },
+  {
+    question: 'Vad krävs för att en funktion ska vara strängt växande i ett intervall?',
+    choices: [
+      'Funktionen måste växa i hela intervallet, utan avbrott',
+      'Funktionen måste växa i minst halva intervallet',
+      'Funktionens derivata måste vara konstant i intervallet',
+      'Funktionen måste ha ett minimum i intervallet',
+    ],
+    correct: 0,
+    why: [
+      'Just det — strängt växande betyder växande under hela intervallet, ingen del får avta eller vara konstant.',
+      'En del av intervallet räcker inte — hela intervallet måste vara växande.',
+      'Derivatan behöver bara vara positiv, inte konstant — lutningen får variera i storlek så länge den är positiv.',
+      'Ett minimum mitt i intervallet skulle betyda att funktionen både avtar och växer där, inte att den är strängt växande.',
+    ],
+  },
+  {
+    question: 'Grafen till derivatan $f\'(x)$ ligger under $x$-axeln i ett visst intervall. Vad innebär det för $f(x)$?',
+    choices: [
+      '$f(x)$ är avtagande i det intervallet',
+      '$f(x)$ är växande i det intervallet',
+      '$f(x)$ har ett nollställe i det intervallet',
+      '$f(x)$ är negativ i det intervallet',
+    ],
+    correct: 0,
+    why: [
+      'Att grafen till $f\'(x)$ ligger under $x$-axeln betyder att $f\'(x) < 0$ där, vilket ger avtagande $f(x)$.',
+      'Växande skulle kräva att $f\'(x) > 0$, dvs. att grafen till $f\'(x)$ ligger ovanför $x$-axeln.',
+      'Det är $f\'(x)$:s graf som ligger under axeln — det säger inget om var $f(x)$ själv är noll.',
+      'Tecknet på $f\'(x)$ säger hur $f(x)$ förändras, inte vilket värde $f(x)$ själv har.',
+    ],
+  },
+  {
+    question: 'Varför är det användbart att sammanställa tecknet på $f\'(x)$ i en teckentabell?',
+    choices: [
+      'Det ger en tydlig översikt över i vilka intervall $f(x)$ växer respektive avtar',
+      'Det är enda sättet att beräkna $f\'(x)$',
+      'Tabellen visar exakt vilket värde $f(x)$ har i varje punkt',
+      'Tabellen behövs för att avgöra om $f(x)$ är ett polynom',
+    ],
+    correct: 0,
+    why: [
+      'Precis — teckentabellen sammanfattar tecknet på $f\'(x)$ i varje intervall mellan nollställena, vilket direkt visar var $f(x)$ växer och avtar.',
+      'Teckentabellen används efter att $f\'(x)$ redan är bestämd eller avläst — den är inget verktyg för att derivera.',
+      'Teckentabellen visar bara tecknet (positivt, negativt eller noll) på $f\'(x)$, inte funktionsvärdet på $f(x)$.',
+      'Att $f(x)$ är ett polynom eller inte har inget att göra med teckentabellen.',
+    ],
+  },
+],
+
+'ma3c-4.2': [
+  {
+    question: 'Vad kännetecknar en lokal extrempunkt (maximi- eller minimipunkt) hos en deriverbar funktion $f(x)$?',
+    choices: [
+      'Att $f\'(x) = 0$ i punkten',
+      'Att $f(x) = 0$ i punkten',
+      'Att $f(x)$ är negativ i punkten',
+      'Att funktionen är kontinuerlig i punkten',
+    ],
+    correct: 0,
+    why: [
+      'I en lokal extrempunkt är tangenten vågrät, vilket innebär att derivatan (lutningen) är exakt 0.',
+      'Det villkoret gäller nollställen till funktionen själv, inte extrempunkter — en extrempunkt kan ha vilket funktionsvärde som helst.',
+      'Funktionsvärdets tecken säger ingenting om huruvida punkten är en extrempunkt.',
+      'Kontinuitet krävs för att derivatan ska vara definierad, men säger inget om var extrempunkter finns.',
+    ],
+  },
+  {
+    question: 'Vad kallas en punkt där derivatan är 0, men kurvan fortsätter i samma riktning (varken vänder uppåt eller nedåt)?',
+    choices: [
+      'Terrasspunkt',
+      'Lokal maximipunkt',
+      'Lokal minimipunkt',
+      'Nollställe',
+    ],
+    correct: 0,
+    why: [
+      'En terrasspunkt har en vågrät tangent precis som en extrempunkt, men kurvan planar bara ut en stund innan den fortsätter åt samma håll som innan.',
+      'En lokal maximipunkt är en "topp" där kurvan vänder nedåt efteråt — här fortsätter kurvan i samma riktning.',
+      'En lokal minimipunkt är en "dal" där kurvan vänder uppåt efteråt — här fortsätter kurvan i samma riktning.',
+      'Ett nollställe är en punkt där funktionsvärdet är 0, vilket är ett annat villkor än att derivatan är 0.',
+    ],
+  },
+  {
+    question: 'I en teckentabell för $f\'(x)$ växlar tecknet från $+$ till $-$ vid $x = a$. Vad innebär det för punkten $x = a$?',
+    choices: [
+      'Det är en lokal maximipunkt',
+      'Det är en lokal minimipunkt',
+      'Det är en terrasspunkt',
+      'Funktionen saknar extrempunkt där',
+    ],
+    correct: 0,
+    why: [
+      'Funktionen växer före $x = a$ och avtar efter — kurvan går från stigande till fallande, vilket är precis vad som kännetecknar en topp, dvs. en lokal maximipunkt.',
+      'En minimipunkt kräver den motsatta teckenväxlingen: från $-$ till $+$.',
+      'Vid en terrasspunkt behåller derivatan samma tecken på båda sidor om nollstället, den växlar inte.',
+      'En teckenväxling vid $f\'(a) = 0$ innebär tvärtom att $x = a$ är en extrempunkt.',
+    ],
+  },
+  {
+    question: 'En andragradsfunktion har en negativ koefficient framför $x^2$-termen. Vilken karaktär har dess extrempunkt?',
+    choices: [
+      'Maximipunkt',
+      'Minimipunkt',
+      'Terrasspunkt',
+      'Kan vara vilken som helst av de tre',
+    ],
+    correct: 0,
+    why: [
+      'En negativ $x^2$-term ger en "sur" kurva som öppnar sig nedåt, och en sådan kurva har alltid en topp, dvs. en maximipunkt.',
+      'Minimipunkt hade krävt en positiv $x^2$-term ("glad" kurva som öppnar sig uppåt).',
+      'En andragradsfunktions enda extrempunkt är alltid en riktig maximi- eller minimipunkt, aldrig en terrasspunkt.',
+      'Tecknet framför $x^2$-termen avgör entydigt karaktären — det behövs ingen teckentabell för andragradsfunktioner.',
+    ],
+  },
+  {
+    question: 'Vilket är det första steget för att bestämma en funktions lokala extrempunkter?',
+    choices: [
+      'Derivera funktionen och lösa $f\'(x) = 0$',
+      'Sätta $f(x) = 0$ och lösa ekvationen',
+      'Rita upp en värdetabell för funktionen',
+      'Beräkna funktionens andraderivata',
+    ],
+    correct: 0,
+    why: [
+      'Extrempunkternas $x$-koordinater fås genom att derivera funktionen, sätta derivatan lika med 0 och lösa den ekvationen.',
+      'Det ger i stället funktionens nollställen, dvs. var kurvan skär $x$-axeln — ett annat problem än att hitta extrempunkter.',
+      'En värdetabell kan ge en fingervisning, men ger inte extrempunkternas exakta koordinater.',
+      'Andraderivatan används inte i den metod som gås igenom i det här avsnittet — karaktären bestäms i stället med en teckentabell.',
+    ],
+  },
+],
+
+'ma3c-4.3': [
+  {
+    question: 'Var kan en funktions största eller minsta värde i ett slutet intervall finnas?',
+    choices: [
+      'I en extrempunkt eller i en av intervallets ändpunkter',
+      'Bara i en extrempunkt',
+      'Bara i intervallets ändpunkter',
+      'Var som helst där funktionen är definierad',
+    ],
+    correct: 0,
+    why: [
+      'Precis — det största och minsta värdet i ett slutet intervall finns alltid antingen i en extrempunkt eller i en av ändpunkterna, aldrig någon annanstans.',
+      'En ändpunkt kan också ge det största eller minsta värdet — t.ex. om funktionen fortsätter växa ända fram till intervallets kant.',
+      'En extrempunkt inom intervallet kan också ge det största eller minsta värdet, inte bara ändpunkterna.',
+      'Det är för vagt — värdet finns bland en bestämd, liten mängd kandidatpunkter, inte var som helst.',
+    ],
+  },
+  {
+    question: 'Vad är det första steget när vi ska bestämma en funktions största och minsta värde i ett intervall?',
+    choices: [
+      'Sätta in intervallets ändpunkter i $f(x)$',
+      'Derivera funktionen och sätta derivatan lika med 0',
+      'Rita grafen och läsa av värdena',
+      'Beräkna andraderivatan',
+    ],
+    correct: 0,
+    why: [
+      'Ja — vi börjar med att beräkna $y$-koordinaterna i ändpunkterna, innan vi undersöker extrempunkterna.',
+      'Det är steg två i metoden — att hitta extrempunkterna med derivata görs efter att ändpunkterna är beräknade.',
+      'Vi ska just skissa grafen med hjälp av de beräknade punkterna, inte tvärtom läsa av punkter ur en redan ritad graf.',
+      'Andraderivatan används inte i den här metoden — extrempunkternas karaktär bestäms med en teckentabell.',
+    ],
+  },
+  {
+    question: 'Funktionen $g(x) = 2x + 1$ är definierad på intervallet $1 \\leq x \\leq 4$. Vilket är funktionens värde vid den högra ändpunkten?',
+    choices: [
+      '$g(4) = 9$',
+      '$g(4) = 8$',
+      '$g(1) = 3$',
+      '$g(4) = 7$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt insättning: $g(4) = 2 \\cdot 4 + 1 = 8 + 1 = 9$.',
+      'Additionen med $1$ har tappats bort — $2 \\cdot 4 = 8$, men $g(4) = 8 + 1 = 9$.',
+      'Det är värdet vid den vänstra ändpunkten ($x = 1$), inte den högra.',
+      'Det motsvarar $2 \\cdot 4 - 1$, men funktionen adderar $1$, den subtraherar inte.',
+    ],
+  },
+  {
+    question: 'I en teckentabell anger pilen $\\nearrow$ att funktionen är växande i det delintervallet. Vad anger en vågrät pil ($\\rightarrow$) i tabellens $f(x)$-rad?',
+    choices: [
+      'En punkt där derivatan är $0$, dvs. en horisontell tangent (en extrempunkt)',
+      'Att funktionen är konstant i hela det angränsande intervallet',
+      'Att derivatan är odefinierad i den punkten',
+      'Att grafen har en asymptot i den punkten',
+    ],
+    correct: 0,
+    why: [
+      'Precis — den vågräta pilen markerar en enda punkt, där lutningen (derivatan) är $0$, dvs. en extrempunkt.',
+      'Pilen markerar en enskild punkt i tabellen, inte ett helt delintervall där funktionen skulle vara konstant.',
+      'Tvärtom är derivatan precis definierad och lika med $0$ i den punkten — det är själva poängen.',
+      'Teckentabellen för extrempunkter har ingenting med asymptoter att göra.',
+    ],
+  },
+  {
+    question: 'Vad behöver du känna till om en funktions extrempunkter innan du kan skissa grafens utseende?',
+    choices: [
+      'Deras koordinater och deras karaktär (max-, min- eller terrasspunkt)',
+      'Bara deras $x$-koordinater',
+      'Bara om funktionen är ett polynom',
+      'Funktionens andraderivata i alla punkter',
+    ],
+    correct: 0,
+    why: [
+      'Ja — utan $y$-koordinaterna och utan att veta om punkten är en topp eller en dal går det inte att skissa kurvans form.',
+      '$x$-koordinaterna räcker inte — du behöver också $y$-koordinaterna (ur den ursprungliga funktionen) och punkternas karaktär.',
+      'Metoden med derivata och teckentabell fungerar för alla deriverbara funktioner, inte bara polynom.',
+      'Det räcker med en teckentabell baserad på förstaderivatans tecken — andraderivatan i alla punkter behövs inte.',
+    ],
+  },
+],
+
+'ma3c-4.4': [
+  {
+    question: 'Vad kallas derivatan av derivatan, och hur utläses den?',
+    choices: [
+      'Andraderivatan, $f\'\'(x)$, utläses "$f$ bis av $x$"',
+      'Förstaderivatan, $f\'(x)$, utläses "$f$ prim av $x$"',
+      'Tredjederivatan, $f\'\'\'(x)$, utläses "$f$ ters av $x$"',
+      'Integralen av $f(x)$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — deriverar man en funktion två gånger får man andraderivatan, som skrivs $f\'\'(x)$ och utläses "$f$ bis av $x$".',
+      'Förstaderivatan $f\'(x)$ fås genom att derivera funktionen en enda gång, inte två.',
+      'Tredjederivatan skulle kräva ytterligare en derivering av $f\'\'(x)$ — här har vi bara deriverat två gånger.',
+      'Integralen är motsatsen till derivering, inte samma sak som att derivera två gånger.',
+    ],
+  },
+  {
+    question: 'Vad innebär det att $f\'\'(x) > 0$ i ett helt intervall?',
+    choices: [
+      'Kurvan är konvex (böjer uppåt, en "glad" kurva) i intervallet',
+      'Kurvan är konkav (böjer nedåt, en "ledsen" kurva) i intervallet',
+      'Funktionen är växande i intervallet',
+      'Funktionen har ett nollställe i intervallet',
+    ],
+    correct: 0,
+    why: [
+      'Precis — en positiv andraderivata betyder att lutningen hela tiden ökar, vilket ger en konvex, uppåtböjande kurva.',
+      'En konkav kurva ger tvärtom en negativ andraderivata, $f\'\'(x) < 0$.',
+      'Om funktionen växer eller avtar avgörs av förstaderivatans tecken, $f\'(x)$ — inte av andraderivatan.',
+      'Nollställen (punkter där $f(x) = 0$) har inget direkt samband med andraderivatans tecken.',
+    ],
+  },
+  {
+    question: 'Vad innebär det att $f\'\'(x) < 0$ i ett helt intervall?',
+    choices: [
+      'Kurvan är konkav (böjer nedåt, en "ledsen" kurva) i intervallet',
+      'Kurvan är konvex (böjer uppåt, en "glad" kurva) i intervallet',
+      'Funktionen är avtagande i intervallet',
+      'Funktionen saknar extrempunkter i intervallet',
+    ],
+    correct: 0,
+    why: [
+      'Precis — en negativ andraderivata betyder att lutningen hela tiden minskar, vilket ger en konkav, nedåtböjande kurva.',
+      'En konvex kurva ger tvärtom en positiv andraderivata, $f\'\'(x) > 0$.',
+      'Om funktionen växer eller avtar avgörs av förstaderivatans tecken $f\'(x)$ — inte av andraderivatans tecken.',
+      'Andraderivatans tecken säger inget om huruvida det finns extrempunkter i intervallet — det avgörs av förstaderivatans nollställen.',
+    ],
+  },
+  {
+    question: 'Vad kännetecknar en inflexionspunkt?',
+    choices: [
+      'Andraderivatan är noll där, samtidigt som kurvan växlar mellan konvex och konkav',
+      'Förstaderivatan är noll där, och funktionen har ett extremvärde',
+      'Funktionen själv är noll där, dvs. ett nollställe',
+      'Kurvan är konvex i hela intervallet kring punkten',
+    ],
+    correct: 0,
+    why: [
+      'Precis — i en inflexionspunkt är $f\'\'(x) = 0$ samtidigt som andraderivatan byter tecken, så kurvan går från konvex till konkav eller tvärtom.',
+      'Det beskriver i stället en extrempunkt (en lokal maximi- eller minimipunkt), inte en inflexionspunkt.',
+      'Ett nollställe är en punkt där $f(x) = 0$ — det har inget direkt samband med andraderivatans tecken.',
+      'Om kurvan är konvex i hela intervallet byter andraderivatan aldrig tecken där, och då finns ingen inflexionspunkt.',
+    ],
+  },
+  {
+    question: 'En funktion har andraderivatan $f\'\'(x) = 4x - 8$. I vilket intervall är funktionen konvex?',
+    choices: [
+      '$x > 2$',
+      '$x < 2$',
+      '$x > 8$',
+      '$x < -2$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — konvex innebär $f\'\'(x) > 0$, och $4x - 8 > 0$ ger $x > 2$.',
+      'Det intervallet är där $f\'\'(x) < 0$, dvs. där funktionen i stället är konkav.',
+      'Olikheten $4x - 8 > 0$ ger $x > 2$ efter division med 4 — talet 8 ska inte stå kvar som gräns.',
+      'Tecknet är fel vänt: $4x - 8 > 0$ ger ett positivt gränsvärde, $x > 2$, inte ett negativt.',
+    ],
+  },
+],
+
+'ma3c-4.5': [
+  {
+    question: 'Om $f\'(a) = 0$ och $f\'\'(a) > 0$, vad gäller för funktionen $f$ vid $x = a$?',
+    choices: [
+      'Lokal minimipunkt',
+      'Lokal maximipunkt',
+      'Terrasspunkt',
+      'Inflexionspunkt utan att vara extrempunkt',
+    ],
+    correct: 0,
+    why: [
+      'Positiv andraderivata betyder att kurvan är konvex (en "glad mun") i punkten, så en kritisk punkt där blir en minimipunkt.',
+      'En maximipunkt kräver i stället $f\'\'(a) < 0$ — kurvan konkav (en "sur mun").',
+      'En terrasspunkt uppstår när $f\'\'(a) = 0$, inte när andraderivatan är positiv.',
+      'En sådan punkt kräver $f\'\'(a) = 0$ och att derivatan inte byter tecken — det stämmer inte med $f\'\'(a) > 0$.',
+    ],
+  },
+  {
+    question: 'Om $f\'(a) = 0$ och $f\'\'(a) < 0$, vad gäller för funktionen $f$ vid $x = a$?',
+    choices: [
+      'Lokal maximipunkt',
+      'Lokal minimipunkt',
+      'Terrasspunkt',
+      'Kurvan är konvex vid $x = a$',
+    ],
+    correct: 0,
+    why: [
+      'Negativ andraderivata betyder att kurvan är konkav (en "sur mun") i punkten, så en kritisk punkt där blir en maximipunkt.',
+      'En minimipunkt kräver i stället $f\'\'(a) > 0$ — kurvan konvex.',
+      'Terrasspunkt gäller när $f\'\'(a) = 0$, inte när andraderivatan är negativ.',
+      'Negativ andraderivata betyder tvärtom att kurvan är konkav, inte konvex.',
+    ],
+  },
+  {
+    question: 'Vad krävs för att avgöra karaktären hos en extrempunkt om $f\'(a) = 0$ och $f\'\'(a) = 0$?',
+    choices: [
+      'Ett teckenstudium (teckentabell) av $f\'(x)$ kring $x = a$',
+      'Punkten är automatiskt en minimipunkt',
+      'Punkten är automatiskt en maximipunkt',
+      'Punkten kan inte vara en extrempunkt',
+    ],
+    correct: 0,
+    why: [
+      'När andraderivatan är noll ger den ingen information om karaktären — då behövs en teckentabell för $f\'(x)$ för att se om derivatan byter tecken, och i så fall åt vilket håll.',
+      'Andraderivatan noll säger ingenting om karaktären — varken minimi- eller maximipunkt kan avgöras direkt på det sättet.',
+      'Andraderivatan noll säger ingenting om karaktären — varken maximi- eller minimipunkt kan avgöras direkt på det sättet.',
+      'Punkten kan mycket väl vara en extrempunkt — men den kan också vara en terrasspunkt. Utan teckenstudium vet vi inte vilket.',
+    ],
+  },
+  {
+    question: 'Funktionen $f(x) = x^3 - 6x^2$ har $f\'(x) = 3x^2 - 12x$, med $f\'(4) = 0$. Vad är $f\'\'(4)$ och vilken karaktär har extrempunkten?',
+    choices: [
+      '$f\'\'(4) = 12$, minimipunkt',
+      '$f\'\'(4) = 12$, maximipunkt',
+      '$f\'\'(4) = -12$, minimipunkt',
+      '$f\'\'(4) = 0$, terrasspunkt',
+    ],
+    correct: 0,
+    why: [
+      'Andraderivatan är $f\'\'(x) = 6x - 12$, så $f\'\'(4) = 24 - 12 = 12 > 0$, vilket ger en minimipunkt.',
+      'Värdet $f\'\'(4) = 12$ stämmer, men positiv andraderivata ger en minimipunkt, inte en maximipunkt.',
+      'Tecknet är fel: $f\'\'(4) = 6 \\cdot 4 - 12 = 12$, inte $-12$.',
+      '$f\'\'(4) = 12 \\neq 0$, så det är ingen terrasspunkt.',
+    ],
+  },
+  {
+    question: 'Varför måste andraderivatan vara positiv vid en lokal minimipunkt?',
+    choices: [
+      'Eftersom en minimipunkt alltid ligger på en konvex del av kurvan (en "glad mun"), och konvexitet innebär $f\'\'(x) > 0$',
+      'Eftersom derivatan $f\'(x)$ alltid är positiv vid en minimipunkt',
+      'Eftersom minimipunkter bara finns på räta linjer',
+      'Eftersom andraderivatan mäter funktionens eget värde, inte dess lutning',
+    ],
+    correct: 0,
+    why: [
+      'En lokal minimipunkt är en "dal" i kurvan — grafen böjer av uppåt kring punkten, vilket är precis vad positiv andraderivata (konvexitet) innebär.',
+      'Vid själva extrempunkten är $f\'(a) = 0$, inte positiv — det är andraderivatans tecken, inte förstaderivatans, som avgör karaktären.',
+      'Räta linjer har $f\'\'(x) = 0$ överallt och saknar extrempunkter helt.',
+      'Andraderivatan är derivatan av derivatan och mäter hur lutningen ändras (konkaviteten), inte funktionens värde.',
+    ],
+  },
+],
+
+'ma3c-4.6': [
+  {
+    question: 'Vad kallas problem som handlar om att bestämma ett störst eller minst möjligt värde?',
+    choices: [
+      'Extremvärdesproblem (eller optimeringsproblem)',
+      'Ekvationssystem',
+      'Gränsvärdesproblem',
+      'Andragradsekvationer',
+    ],
+    correct: 0,
+    why: [
+      'Just det — även kallat optimeringsproblem.',
+      'Ett ekvationssystem har flera obekanta och samband — det handlar inte om att optimera en storhet.',
+      'Gränsvärden beskriver vad en funktion närmar sig, inte det störst eller minst möjliga värdet.',
+      'Andragradsekvationer är en ekvationstyp — andragradsfunktioner förekommer ofta i extremvärdesproblem, men begreppen är inte samma sak.',
+    ],
+  },
+  {
+    question: 'Vilket är det första steget när man löser ett extremvärdesproblem?',
+    choices: [
+      'Ställa upp en funktion för den storhet som ska maximeras eller minimeras',
+      'Sätta derivatan lika med 0',
+      'Rita upp grafen i ett koordinatsystem',
+      'Beräkna andraderivatan',
+    ],
+    correct: 0,
+    why: [
+      'Utan en funktion att derivera finns inget att optimera — det är alltid det första steget.',
+      'Derivatan sätts lika med 0 senare, efter att funktionen ställts upp och deriverats.',
+      'En graf kan vara ett hjälpmedel, men det krävs inte för den algebraiska lösningsmetoden.',
+      'Andraderivatan används för att bestämma extrempunktens karaktär, vilket sker efter att extrempunkten hittats.',
+    ],
+  },
+  {
+    question: 'En funktion $A(x)$ beskriver en storhet. Vid $x = x_0$ gäller $A\'(x_0) = 0$ och $A\'\'(x_0) < 0$. Vad innebär det?',
+    choices: [
+      '$x_0$ ger ett maximivärde',
+      '$x_0$ ger ett minimivärde',
+      '$A$ saknar extrempunkt vid $x_0$',
+      '$A$ är växande vid $x_0$',
+    ],
+    correct: 0,
+    why: [
+      'En negativ andraderivata i en punkt där derivatan är 0 betyder att kurvan böjer nedåt där, vilket ger en maximipunkt.',
+      'En minimipunkt har i stället en positiv andraderivata (kurvan böjer uppåt där).',
+      'Tvärtom — att derivatan är 0 och andraderivatan har ett bestämt tecken visar just att det finns en extrempunkt.',
+      'Är derivatan 0 exakt i punkten kan funktionen inte vara växande (eller avtagande) där — lutningen är noll.',
+    ],
+  },
+  {
+    question: 'Varför räcker det inte att bara ange $x$-värdet när man svarar på ett extremvärdesproblem?',
+    choices: [
+      'Resultatet måste tolkas i problemets sammanhang, t.ex. vilket pris eller vilken area som blir följden',
+      'Ett $x$-värde kan aldrig vara en del av ett korrekt svar på matematiska problem',
+      'Andraderivatan kan bara beräknas om $x$-värdet skrivs ut i decimalform',
+      '$x$-värdet är alltid fel om det inte anges tillsammans med en enhet',
+    ],
+    correct: 0,
+    why: [
+      'Extremvärdesproblem beskriver verkliga situationer — svaret ska kopplas till vad $x$-värdet betyder i sammanhanget, t.ex. det pris eller den area som ger extremvärdet.',
+      'Tvärtom, ett $x$-värde kan mycket väl vara en del av ett korrekt svar — men det räcker sällan som ett fullständigt svar i ett tillämpat problem.',
+      'Andraderivatan beror inte på hur $x$-värdet skrivs — den beräknas ur funktionsuttrycket, inte ur ett tals decimalform.',
+      'Enhet är viktigt när det finns en, men huvudskälet till att tolka resultatet är sammanhanget, inte enheten i sig.',
+    ],
+  },
+  {
+    question: 'En intäktsfunktion skrivs $I(x) = x(300 - 2x)$, där $x$ är biljettpriset i kr. Hur tolkas faktorn $(300 - 2x)$?',
+    choices: [
+      'Antalet sålda biljetter vid biljettpriset $x$',
+      'Den totala intäkten i kr',
+      'Vinsten efter avdrag för kostnader',
+      'Antalet besökare som inte köper biljett',
+    ],
+    correct: 0,
+    why: [
+      'Eftersom $\\text{intäkt} = \\text{biljettpris} \\cdot \\text{antal sålda biljetter}$ och $x$ redan står för biljettpriset måste den andra faktorn vara antalet sålda biljetter.',
+      'Den totala intäkten är hela produkten $I(x) = x(300 - 2x)$, inte bara den ena faktorn.',
+      'Funktionen beskriver intäkten, inte vinsten — den tar inte hänsyn till några kostnader.',
+      'Faktorn beskriver hur många som faktiskt köper biljett vid det priset, inte hur många som avstår.',
+    ],
+  },
+],
+
+'ma3c-4.7': [
+  {
+    question: 'Varför måste vi uttrycka storheten som ska optimeras (t.ex. en volym) som en funktion av en enda variabel innan vi ritar grafen i Geogebra?',
+    choices: [
+      'Ett vanligt koordinatsystem visar bara hur ett $y$-värde beror av ETT $x$-värde, så funktionen måste bero av en enda variabel för att kunna ritas',
+      'Annars kan Geogebra inte beräkna areor eller volymer alls',
+      'En funktion med flera variabler blir alltid negativ',
+      'Det är bara för att svaret ska bli ett heltal',
+    ],
+    correct: 0,
+    why: [
+      'En graf ritas i ett koordinatsystem med en $x$-axel och en $y$-axel — funktionen måste alltså bero av en enda variabel för att kunna ritas och undersökas med verktyget Extrempunkt.',
+      'Geogebra kan visst beräkna uttryck med flera variabler — problemet är att en sådan funktion inte kan ritas som en vanlig graf i ett plan.',
+      'Att en funktion beror av flera variabler säger ingenting om tecknet på dess värden.',
+      'Svaret behöver inte alls bli ett heltal — i exemplet blev radien cirka 16,7 cm.',
+    ],
+  },
+  {
+    question: 'I ett extremvärdesproblem har vi tagit fram funktionen $V(r) = 50\\pi r^2 - 2\\pi r^3$ och hittat extrempunkten $B = (16.66667, 14544.41043)$ i Geogebra. Vad representerar $y$-koordinaten?',
+    choices: [
+      'Den maximala volymen',
+      'Radien som ger maximal volym',
+      'Höjden hos cylindern',
+      'Antalet extrempunkter på grafen',
+    ],
+    correct: 0,
+    why: [
+      'Grafen visar $V(r)$ mot $r$, så $y$-koordinaten hos en punkt på grafen är just funktionsvärdet — här den maximala volymen.',
+      'Radien är den oberoende variabeln $r$, som är $x$-koordinaten hos punkten, inte $y$-koordinaten.',
+      'Höjden $h$ förekommer inte i den graf som ritas — den eliminerades redan när $V$ skrevs som funktion av enbart $r$.',
+      'En enda extrempunkt har ett $x$- och ett $y$-värde; koordinaterna säger inget om hur många extrempunkter grafen har totalt.',
+    ],
+  },
+  {
+    question: 'Vilket av följande är den algebraiska motsvarigheten till att klicka med Geogebras verktyg Extrempunkt på en graf?',
+    choices: [
+      'Att derivera funktionen, sätta derivatan lika med noll och lösa ut den obekanta variabeln',
+      'Att sätta funktionen lika med noll och lösa ut den obekanta variabeln',
+      'Att integrera funktionen över hela definitionsmängden',
+      'Att förkorta funktionens uttryck så långt som möjligt',
+    ],
+    correct: 0,
+    why: [
+      'Det är precis det här Geogebra gör i bakgrunden när verktyget markerar en extrempunkt: hittar var derivatan (lutningen) är noll.',
+      'Att sätta funktionen (inte derivatan) lika med noll ger nollställen, dvs. var grafen skär $x$-axeln — inte extrempunkter.',
+      'Integraler ger arean under en kurva, inte extrempunkter.',
+      'Förkortning handlar om att förenkla rationella uttryck, inte om att optimera en funktion.',
+    ],
+  },
+  {
+    question: 'En pappskiva ska vikas till en låda. Volymen som funktion av den bortklippta kvadratsidan $x$ är $V(x) = x(24 - 2x)(15 - 2x)$, med definitionsmängden $0 < x < 7{,}5$. Geogebra markerar TVÅ punkter med vågrät tangent: $(3, 486)$ och $(10, -200)$. Varför duger inte punkten $(10, -200)$ som svar?',
+    choices: [
+      '$x = 10$ ligger utanför den tillåtna definitionsmängden $0 < x < 7{,}5$',
+      'Geogebra har räknat fel',
+      'En volym kan aldrig vara ett jämnt tal',
+      'Extrempunkter måste alltid ha positiva koordinater',
+    ],
+    correct: 0,
+    why: [
+      'Definitionsmängden begränsas av att sidan $15 - 2x$ måste vara positiv, vilket ger $x < 7{,}5$. Eftersom $10 > 7{,}5$ ligger punkten utanför det fysikaliskt möjliga intervallet.',
+      'Geogebra räknar rätt på den matematiska funktionen — problemet är att den delen av grafen inte motsvarar en verklig låda.',
+      'Volymer kan mycket väl vara jämna tal (486 är jämnt) — det är inte skälet till att punkten förkastas.',
+      'Extrempunkter kan visst ha negativa koordinater rent matematiskt; det är definitionsmängden, inte tecknet i sig, som avgör om punkten duger som svar.',
+    ],
+  },
+  {
+    question: 'Vilken är fördelen med att lösa ett extremvärdesproblem grafiskt i Geogebra, jämfört med att lösa det algebraiskt för hand?',
+    choices: [
+      'Vi slipper derivera för hand — men får bara ett avläst, avrundat värde i stället för ett exakt uttryck',
+      'Vi får alltid ett exaktare svar än med den algebraiska metoden',
+      'Vi behöver inte uttrycka storheten som funktion av en variabel',
+      'Metoden fungerar bara för andragradsfunktioner',
+    ],
+    correct: 0,
+    why: [
+      'Geogebras verktyg Extrempunkt hittar extremvärdet automatiskt utan att vi behöver derivera för hand, men resultatet är ett numeriskt (avrundat) värde, till skillnad från ett exakt algebraiskt uttryck.',
+      'Tvärtom — den grafiska avläsningen ger ett avrundat närmevärde, medan den algebraiska metoden (när den går att genomföra) ger ett exakt svar.',
+      'Precis som i den algebraiska metoden måste storheten uttryckas som funktion av en enda variabel för att kunna ritas som en vanlig graf.',
+      'Metoden fungerar för alla funktioner som går att rita i Geogebra, t.ex. tredjegradsfunktioner som i cylinderexemplet.',
+    ],
+  },
+],
+
+'ma3c-6.1': [
+  {
+    question: 'I en rätvinklig triangel: vilken sida kallas hypotenusan?',
+    choices: [
+      'Sidan mitt emot den räta vinkeln (den längsta sidan)',
+      'Sidan mitt emot vinkeln $v$',
+      'Sidan som tillsammans med hypotenusan bildar vinkeln $v$',
+      'Vilken som helst av de tre sidorna, beroende på hur man mäter',
+    ],
+    correct: 0,
+    why: [
+      'Precis — hypotenusan ligger alltid mitt emot den räta vinkeln och är triangelns längsta sida.',
+      'Det är den motstående kateten som beskrivs så, inte hypotenusan.',
+      'Det är den närliggande kateten som beskrivs så, inte hypotenusan.',
+      'Hypotenusan är en bestämd sida — alltid den mitt emot den räta vinkeln, oavsett hur triangeln är vriden.',
+    ],
+  },
+  {
+    question: 'Vilket samband definierar $\\cos v$ i en rätvinklig triangel?',
+    choices: [
+      '$\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$',
+      '$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$',
+      '$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$',
+      '$\\cos v = \\dfrac{\\text{hypotenusa}}{\\text{närliggande katet}}$',
+    ],
+    correct: 0,
+    why: [
+      'Cosinus är förhållandet mellan den närliggande kateten och hypotenusan.',
+      'Det förhållandet definierar $\\sin v$, inte $\\cos v$.',
+      'Det förhållandet definierar $\\tan v$, inte $\\cos v$.',
+      'Bråket är upp och ner — hypotenusan står alltid i nämnaren för både sinus och cosinus.',
+    ],
+  },
+  {
+    question: 'Du känner den motstående och den närliggande kateten till vinkeln $v$ och vill bestämma $v$. Vilken funktion (och dess invers) använder du?',
+    choices: [
+      'Tangens — $v = \\tan^{-1}\\!\\left(\\dfrac{\\text{motstående}}{\\text{närliggande}}\\right)$',
+      'Sinus — $v = \\sin^{-1}\\!\\left(\\dfrac{\\text{motstående}}{\\text{närliggande}}\\right)$',
+      'Cosinus — $v = \\cos^{-1}\\!\\left(\\dfrac{\\text{motstående}}{\\text{närliggande}}\\right)$',
+      'Ingen av funktionerna fungerar utan hypotenusan',
+    ],
+    correct: 0,
+    why: [
+      'Tangens är just kvoten mellan motstående och närliggande katet, så $\\tan^{-1}$ av den kvoten ger $v$ direkt.',
+      'Sinus kräver hypotenusan i nämnaren, inte den närliggande kateten.',
+      'Cosinus kräver hypotenusan, inte den motstående kateten i täljaren.',
+      'Tangens kopplar just de två kateterna till varandra — hypotenusan behövs aldrig i den relationen.',
+    ],
+  },
+  {
+    question: 'Vad gör den inversa funktionen $\\tan^{-1}$ (arctan)?',
+    choices: [
+      'Den ger vinkeln $v$ när kvoten mellan motstående och närliggande katet är känd',
+      'Den ger kvoten mellan katetrarna när vinkeln $v$ är känd',
+      'Den är samma sak som $\\dfrac{1}{\\tan v}$',
+      'Den fungerar bara för vinklar större än 90°',
+    ],
+    correct: 0,
+    why: [
+      'Just det — $\\tan^{-1}$ "vänder om" tangens och tar en kvot av sidor som indata och lämnar en vinkel som resultat.',
+      'Det är precis vad $\\tan v$ själv gör (utan invers) — inversen går åt andra hållet.',
+      'Vanlig förväxling: trots skrivsättet $\\tan^{-1}$ betyder det INTE $1/\\tan v$, utan den inversa funktionen till tangens.',
+      'Tvärtom — i en rätvinklig triangel är de spetsiga vinklarna alltid mindre än 90°, och det är just för såna vinklar $\\tan^{-1}$ används här.',
+    ],
+  },
+  {
+    question: 'En rätvinklig triangel har hypotenusan 10 cm och vinkeln $v = 30°$. Vilken formel ger den motstående kateten $a$?',
+    choices: [
+      '$a = 10 \\cdot \\sin 30°$',
+      '$a = 10 \\cdot \\cos 30°$',
+      '$a = 10 / \\sin 30°$',
+      '$a = 10 \\cdot \\tan 30°$',
+    ],
+    correct: 0,
+    why: [
+      'Eftersom $\\sin v = \\dfrac{a}{\\text{hypotenusa}}$ ger multiplikation med hypotenusan just den motstående kateten.',
+      'Det uttrycket ger den närliggande kateten, inte den motstående.',
+      'Division i stället för multiplikation skulle ge en sträcka LÄNGRE än hypotenusan — omöjligt för en katet.',
+      'Tangens kopplar ihop de två kateterna med varandra, inte en katet med hypotenusan.',
+    ],
+  },
+],
+
+'ma3c-6.2': [
+  {
+    question: 'Vad är en enhetscirkel?',
+    choices: [
+      'En cirkel med radien 1 och medelpunkten i origo',
+      'En cirkel med radien 1 med valfri medelpunkt',
+      'En cirkel med omkretsen 1',
+      'En cirkel som bara går genom heltalspunkter',
+    ],
+    correct: 0,
+    why: [
+      'Just så — radie 1 och medelpunkt i origo. Det gör att en punkt på cirkeln direkt ger cosinus- och sinusvärdet.',
+      'Medelpunkten måste ligga i origo för att koordinaterna ska bli $\\cos v$ och $\\sin v$.',
+      'Det är radien, inte omkretsen, som är 1.',
+      'Alla punkter på cirkelns rand räknas, inte bara heltalspunkter.',
+    ],
+  },
+  {
+    question: 'En vinkel $v$ ger punkten $(x, y)$ på enhetscirkeln. Vad är $\\cos v$?',
+    choices: [
+      '$x$-koordinaten',
+      '$y$-koordinaten',
+      'Kvoten $y/x$',
+      'Avståndet till origo',
+    ],
+    correct: 0,
+    why: [
+      'På enhetscirkeln är $\\cos v = x$ och $\\sin v = y$ — cosinus är alltid $x$-koordinaten.',
+      '$y$-koordinaten är $\\sin v$, inte $\\cos v$.',
+      'Kvoten $y/x$ är $\\tan v$.',
+      'Avståndet till origo är radien, som alltid är $1$.',
+    ],
+  },
+  {
+    question: 'Hur mäts en positiv vinkel i enhetscirkeln?',
+    choices: [
+      'Moturs från den positiva $x$-axeln',
+      'Medurs från den positiva $x$-axeln',
+      'Moturs från den positiva $y$-axeln',
+      'Från närmaste axel',
+    ],
+    correct: 0,
+    why: [
+      'En positiv vinkel startar vid den positiva $x$-axeln och vrids moturs.',
+      'Medurs motsvarar i stället en negativ vinkel.',
+      'Vinkeln mäts från $x$-axeln, inte $y$-axeln.',
+      'Vinkeln mäts alltid från den positiva $x$-axeln, inte från närmaste axel.',
+    ],
+  },
+  {
+    question: 'Vinkeln $v$ och vinkeln $-v$ ger två punkter på enhetscirkeln. Hur förhåller de sig till varandra?',
+    choices: [
+      'Punkten för $-v$ är en spegelbild i $x$-axeln av punkten för $v$',
+      'Punkterna är identiska',
+      'Punkten för $-v$ är en spegelbild i $y$-axeln',
+      'Punkterna ligger på motsatta sidor om origo',
+    ],
+    correct: 0,
+    why: [
+      'En negativ vinkel vrids medurs, så punkten speglas i $x$-axeln: $\\cos v$ är oförändrat men $\\sin v$ byter tecken.',
+      'Punkterna sammanfaller bara om $v = 0^\\circ$.',
+      'Spegling i $y$-axeln skulle byta tecken på $\\cos v$, men det är $\\sin v$ som byter tecken.',
+      'Diametralt motsatta punkter hör i stället ihop med $v$ och $v + 180^\\circ$.',
+    ],
+  },
+  {
+    question: 'Varför ger $360^\\circ + v$ samma punkt på enhetscirkeln som $v$?',
+    choices: [
+      'Ett helt varv är $360^\\circ$, så man hamnar tillbaka i samma punkt',
+      'För att $360^\\circ$ är ett rakt varv gånger två',
+      'För att sinus alltid är $0$ vid $360^\\circ$',
+      'Det stämmer inte — punkterna är olika',
+    ],
+    correct: 0,
+    why: [
+      'Att lägga till $360^\\circ$ innebär ett helt varv runt cirkeln, tillbaka till exakt samma punkt.',
+      'Ett helt varv är $360^\\circ$, inte ett rakt varv gånger två.',
+      'Sinusvärdet vid en vinkel beror på punktens $y$-koordinat, inte på att man passerar $360^\\circ$.',
+      'Punkterna sammanfaller — hela poängen med periodiciteten är att $v$ och $360^\\circ + v$ ger samma punkt.',
+    ],
+  },
+],
+
+'ma3c-6.3': [
+  {
+    question: 'Vad kallas en ekvation som innehåller sinus, cosinus eller tangens?',
+    choices: [
+      'En trigonometrisk ekvation',
+      'En andragradsekvation',
+      'En linjär ekvation',
+      'En exponentialekvation',
+    ],
+    correct: 0,
+    why: [
+      'Precis — ekvationer med de trigonometriska funktionerna kallas trigonometriska ekvationer.',
+      'En andragradsekvation innehåller en term med $x^2$, inte trigonometriska funktioner.',
+      'En linjär ekvation innehåller bara $x$ i första graden, ingen trigonometrisk funktion.',
+      'En exponentialekvation har den obekanta i exponenten, t.ex. $a^x = b$ — inte samma sak.',
+    ],
+  },
+  {
+    question: 'Hur löser man ekvationen $\\sin v = a$ med hjälp av enhetscirkeln?',
+    choices: [
+      'Man drar en vågrät linje vid $y = a$ och avläser var den skär cirkeln',
+      'Man drar en lodrät linje vid $x = a$ och avläser var den skär cirkeln',
+      'Man drar en linje genom origo med lutningen $a$',
+      'Man ritar en ny cirkel med radien $a$',
+    ],
+    correct: 0,
+    why: [
+      'Sinus motsvarar $y$-koordinaten på enhetscirkeln, så en vågrät linje vid $y = a$ visar var $\\sin v = a$.',
+      'En lodrät linje vid $x = a$ används för att lösa $\\cos v = a$, inte $\\sin v = a$.',
+      'Det är inte metoden — enhetscirkeln har alltid radien 1, och ekvationen löses med en horisontell linje, inte en linje genom origo.',
+      'Enhetscirkelns radie är alltid 1, oavsett vilket $a$-värde ekvationen har.',
+    ],
+  },
+  {
+    question: 'Räknaren ger $v_1$ som lösning till ekvationen $\\sin v = a$. Hur bestäms den andra lösningen $v_2$ i intervallet $0\^\circ$–$360\^\circ$?',
+    choices: [
+      '$v_2 = 180\^\circ - v_1$',
+      '$v_2 = 360\^\circ - v_1$',
+      '$v_2 = 90\^\circ - v_1$',
+      '$v_2 = v_1 + 180\^\circ$',
+    ],
+    correct: 0,
+    why: [
+      'För sinusekvationer gäller sambandet $v_2 = 180\^\circ - v_1$, eftersom sinus har samma värde i första och andra kvadranten.',
+      'Det sambandet gäller för cosinusekvationer, inte för sinusekvationer.',
+      'Detta samband stämmer inte för vare sig sinus eller cosinus.',
+      'Att lägga till $180\^\circ$ ger en vinkel utanför intervallet $0\^\circ$–$360\^\circ$ för de flesta $v_1$, och ger dessutom fel värde på sinus (motsatt tecken).',
+    ],
+  },
+  {
+    question: 'Räknaren ger $v_1$ som lösning till ekvationen $\\cos v = a$. Hur bestäms den andra lösningen $v_2$ i intervallet $0\^\circ$–$360\^\circ$?',
+    choices: [
+      '$v_2 = 360\^\circ - v_1$',
+      '$v_2 = 180\^\circ - v_1$',
+      '$v_2 = v_1 - 360\^\circ$',
+      '$v_2 = 2v_1$',
+    ],
+    correct: 0,
+    why: [
+      'För cosinusekvationer gäller sambandet $v_2 = 360\^\circ - v_1$, eftersom cosinus har samma värde speglat kring $x$-axeln.',
+      'Det sambandet gäller för sinusekvationer, inte för cosinusekvationer.',
+      'Det ger ett negativt tal för alla lösningar $v_1$ i intervallet $0\^\circ$–$360\^\circ$, vilket hamnar utanför intervallet.',
+      'Det finns inget samband som säger att $v_2$ är dubbelt så stort som $v_1$.',
+    ],
+  },
+  {
+    question: 'Ekvationen $\\cos v = 1{,}8$ ska lösas i intervallet $0\^\circ$–$360\^\circ$. Vad gäller?',
+    choices: [
+      'Ekvationen saknar lösning, eftersom $1{,}8 > 1$',
+      'Ekvationen har exakt en lösning',
+      'Ekvationen har två lösningar, precis som alla cosinusekvationer',
+      'Ekvationen har oändligt många lösningar i intervallet',
+    ],
+    correct: 0,
+    why: [
+      'Enhetscirkelns radie är 1, så $\\cos v$ kan aldrig anta ett värde större än 1. Linjen $x = 1{,}8$ hamnar helt utanför cirkeln.',
+      'Ekvationen har ingen lösning alls, eftersom $1{,}8$ ligger utanför cosinus värdemängd $[-1, 1]$.',
+      'Det stämmer bara när $|a| < 1$ — här är $a = 1{,}8$ för stort för att ge någon lösning.',
+      'Trigonometriska ekvationer kan ha oändligt många lösningar om man tillåter alla varv runt cirkeln, men här saknas lösning helt eftersom $a$-värdet är för stort.',
+    ],
+  },
+],
+
+'ma3c-6.4': [
+  {
+    question: 'Vilken invers funktion använder vi för att lösa ekvationen $\\tan v = a$?',
+    choices: [
+      '$\\tan^{-1}$',
+      '$\\sin^{-1}$',
+      '$\\cos^{-1}$',
+      'Ingen — tangensekvationer går inte att lösa',
+    ],
+    correct: 0,
+    why: [
+      'Precis som $\\sin^{-1}$ och $\\cos^{-1}$ löser sina ekvationer, löser $\\tan^{-1}$ ekvationen $\\tan v = a$.',
+      '$\\sin^{-1}$ hör till ekvationen $\\sin v = a$, inte $\\tan v = a$.',
+      '$\\cos^{-1}$ hör till ekvationen $\\cos v = a$.',
+      'Tangensekvationer löses med den inversa funktionen $\\tan^{-1}$.',
+    ],
+  },
+  {
+    question: 'Vad är perioden för tangensfunktionen?',
+    choices: [
+      '$180^\\circ$',
+      '$360^\\circ$',
+      '$90^\\circ$',
+      '$270^\\circ$',
+    ],
+    correct: 0,
+    why: [
+      'Tangens upprepar sig var $180^\\circ$ eftersom $\\tan(v + 180^\\circ) = \\tan v$ — en linje genom origo och dess förlängning har samma lutning.',
+      '$360^\\circ$ är perioden för sinus och cosinus, inte för tangens.',
+      'Tangens upprepar sig inte redan efter $90^\\circ$.',
+      'Perioden är $180^\\circ$, inte $270^\\circ$.',
+    ],
+  },
+  {
+    question: 'Du har hittat en lösning $v_1 = 40^\\circ$ till en tangensekvation. Hur får du nästa lösning i intervallet $0^\\circ \\leq v \\leq 360^\\circ$?',
+    choices: [
+      'Lägg till perioden $180^\\circ$: $v_2 = 220^\\circ$',
+      'Lägg till $360^\\circ$: $v_2 = 400^\\circ$',
+      'Ta $180^\\circ - 40^\\circ = 140^\\circ$',
+      'Ta $90^\\circ - 40^\\circ = 50^\\circ$',
+    ],
+    correct: 0,
+    why: [
+      'Tangens har perioden $180^\\circ$, så nästa lösning fås genom att lägga till $180^\\circ$.',
+      'Att lägga till $360^\\circ$ ger en vinkel utanför intervallet och missar lösningen vid $220^\\circ$.',
+      '$180^\\circ - v$ är regeln för sinusekvationer, inte tangensekvationer.',
+      '$90^\\circ - v$ hör inte ihop med tangensekvationers lösningar.',
+    ],
+  },
+  {
+    question: 'Varför upprepar sig tangens redan efter $180^\\circ$ och inte först efter $360^\\circ$?',
+    choices: [
+      'Eftersom $\\tan(v + 180^\\circ) = \\dfrac{-\\sin v}{-\\cos v} = \\tan v$',
+      'Eftersom tangens bara är definierad mellan $0^\\circ$ och $180^\\circ$',
+      'Eftersom tangens alltid är positiv',
+      'Eftersom $180^\\circ$ är ett halvt varv och sinus då är noll',
+    ],
+    correct: 0,
+    why: [
+      'Vid $v + 180^\\circ$ byter både $\\sin v$ och $\\cos v$ tecken, och kvoten blir därför oförändrad — samma tangensvärde.',
+      'Tangens är definierad för alla vinklar utom där $\\cos v = 0$.',
+      'Tangens kan vara både positiv och negativ.',
+      'Att sinus är noll vid $180^\\circ$ förklarar inte periodiciteten — det är teckenbytet i både täljare och nämnare som gör det.',
+    ],
+  },
+  {
+    question: 'En ekvation $\\tan v = a$ ska lösas i intervallet $0^\\circ \\leq v \\leq 360^\\circ$. Hur många lösningar har den vanligtvis?',
+    choices: [
+      'Två — en grundlösning och en till efter ett halvt varv',
+      'Bara en',
+      'Fyra',
+      'Ingen',
+    ],
+    correct: 0,
+    why: [
+      'Med perioden $180^\\circ$ ryms två lösningar i ett $360^\\circ$-intervall: grundlösningen och grundlösningen plus $180^\\circ$.',
+      'En enda lösning missar den andra som ligger ett halvt varv bort.',
+      'Fyra lösningar skulle kräva ett intervall på $720^\\circ$.',
+      'Tangens antar varje värde, så ekvationen saknar inte lösning.',
+    ],
+  },
+],
+
+'ma3c-6.6': [
+  {
+    question: 'Vad säger sinussatsen om en triangel $ABC$?',
+    choices: [
+      '$\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C}$',
+      '$a^2 = b^2 + c^2 - 2bc\\cos A$',
+      '$a + b + c = 180^\\circ$',
+      '$\\dfrac{a}{b} = \\dfrac{c}{a}$',
+    ],
+    correct: 0,
+    why: [
+      'Just så — kvoten mellan en sida och sinus för dess motstående vinkel är lika stor för alla tre sidorna.',
+      'Det är cosinussatsen, inte sinussatsen.',
+      'Det är sidorna som summeras här — det är vinklarna i en triangel som summerar till $180^\\circ$.',
+      'Sinussatsen kopplar ihop sidor med sina motstående vinklars sinus, inte sidor med varandra direkt.',
+    ],
+  },
+  {
+    question: 'I sinussatsen — vilken vinkel hör ihop med sidan $a$?',
+    choices: [
+      'Vinkeln $A$, mitt emot sidan $a$',
+      'Vinkeln $B$, intill sidan $a$',
+      'Den största vinkeln',
+      'Vinkeln $C$',
+    ],
+    correct: 0,
+    why: [
+      'Sidan $a$ paras ihop med sin motstående vinkel $A$ i kvoten $\\dfrac{a}{\\sin A}$.',
+      'Det är den motstående, inte den intilliggande, vinkeln som hör ihop med sidan.',
+      'Kopplingen gäller motstående vinkel, oavsett om den är störst.',
+      'Vinkeln $C$ hör ihop med sidan $c$, inte $a$.',
+    ],
+  },
+  {
+    question: 'I vilket fall kan du använda sinussatsen?',
+    choices: [
+      'När en sida och två vinklar är kända',
+      'När bara de tre sidorna är kända',
+      'När två sidor och den mellanliggande vinkeln är kända',
+      'Bara i rätvinkliga trianglar',
+    ],
+    correct: 0,
+    why: [
+      'Med en sida och två vinklar (och därmed den tredje) kan sinussatsen ge de övriga sidorna.',
+      'Med enbart tre sidor behövs cosinussatsen — sinussatsen räcker inte.',
+      'Två sidor och mellanliggande vinkel löses med cosinussatsen.',
+      'Sinussatsen gäller alla trianglar, inte bara rätvinkliga.',
+    ],
+  },
+  {
+    question: 'För att bestämma en sida med sinussatsen behöver du känna till...',
+    choices: [
+      'Den motstående vinkeln till sidan, samt ett annat sida–vinkel-par',
+      'Alla tre vinklarna men ingen sida',
+      'Bara två sidor',
+      'Triangelns area',
+    ],
+    correct: 0,
+    why: [
+      'Sinussatsen kopplar två sida–vinkel-par, så du behöver den sökta sidans motstående vinkel plus ett känt par.',
+      'Utan minst en känd sida kan trianglarnas storlek inte bestämmas — vinklarna ensamma ger bara formen.',
+      'Två sidor utan tillhörande vinklar räcker inte för sinussatsen.',
+      'Arean behövs inte för att tillämpa sinussatsen.',
+    ],
+  },
+  {
+    question: 'När du löser $\\sin A = 0{,}77$ för en vinkel i en triangel kan det finnas två kandidater. Varför?',
+    choices: [
+      'Både en spetsig och en trubbig vinkel har samma sinusvärde',
+      'Sinusfunktionen kan ge två olika värden för samma vinkel',
+      'Triangeln måste vara liksidig',
+      'Räknaren avrundar fel',
+    ],
+    correct: 0,
+    why: [
+      'Sinus är positivt för både spetsiga och trubbiga vinklar, så $A$ och $180^\\circ - A$ ger samma sinusvärde — man måste pröva om båda ger en giltig triangel.',
+      'Sinus ger ett bestämt värde för en given vinkel; det är det omvända — samma sinusvärde för två vinklar — som ger tvetydigheten.',
+      'Den tvetydiga situationen har inget med liksidiga trianglar att göra.',
+      'Det handlar inte om avrundning utan om att sinus är positivt i två kvadranter.',
+    ],
+  },
+],
+
+'ma3c-6.5': [
+  {
+    question: 'Vilka uppgifter behöver du känna till för att kunna beräkna en triangels area med areasatsen?',
+    choices: [
+      'Två sidor och vinkeln mellan dem (den mellanliggande vinkeln)',
+      'Alla tre sidorna',
+      'En vinkel och triangelns omkrets',
+      'Triangelns bas och höjd',
+    ],
+    correct: 0,
+    why: [
+      'Precis — areasatsen $T = \\dfrac{ab\\sin C}{2}$ kräver bara två sidor och vinkeln mellan dem, ingen höjd.',
+      'Tre sidor räcker (det finns andra formler för det), men areasatsen är till för fallet med två sidor och en mellanliggande vinkel.',
+      'Omkretsen ger ingen information om vinklarna eller hur sidorna förhåller sig till varandra.',
+      'Just poängen med areasatsen är att slippa känna till höjden — den beräknas i stället med sinus för den mellanliggande vinkeln.',
+    ],
+  },
+  {
+    question: 'I en triangel $ABC$ är vinkeln $B$ mellanliggande vinkel till vilka två sidor?',
+    choices: [
+      '$a$ och $c$',
+      '$a$ och $b$',
+      '$b$ och $c$',
+      'Alla tre sidorna',
+    ],
+    correct: 0,
+    why: [
+      'Sidorna $a$ och $c$ möts i hörn $B$, så det är dessa som är mellanliggande till vinkeln $B$.',
+      'Sidan $b$ ligger mitt emot vinkeln $B$ — den möts alltså inte i hörn $B$ och är inte mellanliggande.',
+      'Sidan $b$ är motstående sida, inte mellanliggande, till vinkeln $B$.',
+      'Endast två sidor möts i varje hörn, inte alla tre.',
+    ],
+  },
+  {
+    question: 'En triangel har sidorna $a = 4{,}0$ cm och $b = 6{,}0$ cm med mellanliggande vinkel $C = 30^\\circ$. Vad är triangelns area?',
+    choices: [
+      '$6{,}0$ cm²',
+      '$12$ cm²',
+      '$24$ cm²',
+      '$3{,}0$ cm²',
+    ],
+    correct: 0,
+    why: [
+      'Rätt: $T = \\dfrac{ab\\sin C}{2} = \\dfrac{4{,}0 \\cdot 6{,}0 \\cdot \\sin 30^\\circ}{2} = 6{,}0$ cm².',
+      'Detta är $ab\\sin C$ utan att dela med 2 — glöm inte nämnaren i areasatsen.',
+      'Detta är bara $a \\cdot b$, utan att alls ta hänsyn till $\\sin C$.',
+      'Detta har delats med 2 en gång för mycket — areasatsen har bara en tvåa i nämnaren.',
+    ],
+  },
+  {
+    question: 'En triangel har arean $12$ cm². Två sidor är $6{,}0$ cm och $8{,}0$ cm. Hur många möjliga värden finns det för den mellanliggande vinkeln?',
+    choices: [
+      'Två — cirka $30^\\circ$ och $150^\\circ$',
+      'Bara ett — cirka $30^\\circ$',
+      'Bara ett — cirka $150^\\circ$',
+      'Inget värde är möjligt',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — $\\sin C = 0{,}5$ ger $C \\approx 30^\\circ$ eller $C \\approx 150^\\circ$, och till skillnad från sinussatsen finns här ingen vinkelsumma som utesluter någon av dem.',
+      'Den trubbiga lösningen $150^\\circ$ är lika giltig — sinus är positivt för både spetsiga och trubbiga vinklar.',
+      'Den spetsiga lösningen $30^\\circ$ är lika giltig som den trubbiga.',
+      'Ekvationen $\\sin C = 0{,}5$ har en lösning i intervallet $0^\\circ$ till $180^\\circ$.',
+    ],
+  },
+  {
+    question: 'I beviset för areasatsen dras en höjd $h$ från ett hörn ner till motstående sida, vilket bildar en rätvinklig triangel. Vilket samband används där för att uttrycka $h$ med sidan $b$ och vinkeln $A$?',
+    choices: [
+      '$h = b\\sin A$',
+      '$h = b\\cos A$',
+      '$h = \\dfrac{b}{\\sin A}$',
+      '$h = a\\sin A$',
+    ],
+    correct: 0,
+    why: [
+      'Rätt — i den rätvinkliga triangeln gäller $\\sin A = \\dfrac{h}{b}$, vilket ger $h = b\\sin A$.',
+      'Cosinus för $A$ ger i stället den andra kateten i den rätvinkliga triangeln (avståndet längs basen), inte höjden.',
+      'Att dividera i stället för att multiplicera vänder på sambandet — $\\sin A = h/b$ ger $h = b\\sin A$, inte $b/\\sin A$.',
+      'Höjden uttrycks med sidan $b$ (hypotenusan i den lilla rätvinkliga triangeln), inte med sidan $a$.',
+    ],
+  },
+],
+
+'ma3c-6.8': [
+  {
+    question: 'Vad kallas areasatsen, sinussatsen och cosinussatsen tillsammans?',
+    choices: [
+      'Triangelsatserna',
+      'Trigonometriska ekvationerna',
+      'Enhetscirkelns satser',
+      'Vinkelsumman',
+    ],
+    correct: 0,
+    why: [
+      'Just det — de tre satserna kallas gemensamt för triangelsatserna eftersom alla beskriver samband mellan sidor och vinklar i en triangel.',
+      'Trigonometriska ekvationer löses med sinus, cosinus och tangens i enhetscirkeln — inte samma sak som satserna om sidor och vinklar i en triangel.',
+      'Enhetscirkeln definierar de trigonometriska funktionerna, men areasatsen, sinussatsen och cosinussatsen har inget eget samlingsnamn kopplat till den.',
+      'Vinkelsumman ($180^\\circ$ i en triangel) är en enskild regel, inte samlingsnamnet för de tre satserna.',
+    ],
+  },
+  {
+    question: 'En triangel har två kända sidor och den mellanliggande vinkeln känd. Vilken sats används lämpligast för att bestämma den tredje sidan?',
+    choices: [
+      'Cosinussatsen',
+      'Sinussatsen',
+      'Areasatsen',
+      'Vinkelsumman i en triangel',
+    ],
+    correct: 0,
+    why: [
+      'Cosinussatsen kopplar samman tre sidor och en vinkel, så den fungerar direkt så fort två sidor och den mellanliggande vinkeln är kända.',
+      'Sinussatsen kräver en känd vinkel-sida-motstående-par — här känner vi ingen vinkel som står mot en av de kända sidorna.',
+      'Areasatsen ger triangelns area, inte en sidas längd.',
+      'Vinkelsumman ger en tredje vinkel om två vinklar är kända — här är det sidor, inte vinklar, som saknas.',
+    ],
+  },
+  {
+    question: 'En triangel har en sida och två vinklar kända. Vilken sats används för att bestämma en av de andra sidorna?',
+    choices: [
+      'Sinussatsen',
+      'Cosinussatsen',
+      'Areasatsen',
+      'Pythagoras sats',
+    ],
+    correct: 0,
+    why: [
+      'Med en sida och två vinklar kända (vilket ger alla tre vinklarna via vinkelsumman) ger sinussatsen $\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B}$ direkt de andra sidorna.',
+      'Cosinussatsen kräver två kända sidor för att lösa ut en tredje sida eller en vinkel — här är bara en sida känd.',
+      'Areasatsen ger arean, inte en enskild sidas längd.',
+      'Pythagoras sats gäller bara i rätvinkliga trianglar, vilket inte är givet här.',
+    ],
+  },
+  {
+    question: 'Alla tre sidorna i en triangel är kända, men ingen vinkel. Vilken sats kan användas för att bestämma en vinkel?',
+    choices: [
+      'Cosinussatsen',
+      'Sinussatsen',
+      'Areasatsen',
+      'Ingen sats fungerar utan att minst en vinkel är känd',
+    ],
+    correct: 0,
+    why: [
+      'Cosinussatsen kan lösas ut med avseende på cosinustermen, t.ex. $\\cos C = \\dfrac{a^2 + b^2 - c^2}{2ab}$, så en vinkel kan bestämmas även när bara sidorna är kända.',
+      'Sinussatsen kräver att minst en vinkel redan är känd för att kunna sätta upp ett samband — det har vi inte här.',
+      'Areasatsen kräver en känd vinkel för att ge arean, och ger i vilket fall inte en vinkel som svar.',
+      'Cosinussatsen fungerar utan någon känd vinkel, så en vinkel går faktiskt att bestämma.',
+    ],
+  },
+  {
+    question: 'I ett tillämpningsproblem med två höjdvinklar mot samma lodräta linje (t.ex. en flaggstång på en kulle, sedd från en punkt på marken) — hur löser man det?',
+    choices: [
+      'Man bestämmer först en gemensam sträcka (t.ex. siktlinjen till den övre punkten) med en triangelsats i den ena triangeln, och använder den sträckan som känd i nästa triangel',
+      'Man använder cosinussatsen en enda gång och är klar',
+      'Man mäter höjden direkt ur figuren utan beräkning',
+      'Man löser de två trianglarna helt oberoende av varandra utan att någon storhet återanvänds',
+    ],
+    correct: 0,
+    why: [
+      'De två trianglarna delar en sida (siktlinjen till den övre punkten), så den sträckan fungerar som en brygga: bestäm den i den ena triangeln, återanvänd den sedan som känd storhet i den andra.',
+      'En enda tillämpning av en sats räcker sällan — det saknas tillräckligt med kända storheter i någon av trianglarna för att lösa hela problemet i ett steg.',
+      'Figuren är en skiss, inte skalenlig — höjden måste beräknas med triangelsatserna, inte avläsas.',
+      'Trianglarna delar en sida, så den ena triangelns resultat behövs som indata till den andra — de är inte oberoende.',
+    ],
+  },
+],
+
+'ma3c-6.7': [
+  {
+    question: 'I en triangel $ABC$ med sidorna $a$, $b$ och $c$, vilket uttryck är cosinussatsen för sidan $c$?',
+    choices: [
+      '$c^2 = a^2 + b^2 - 2ab\\cos C$',
+      '$c^2 = a^2 + b^2 + 2ab\\cos C$',
+      '$c^2 = a^2 + b^2 - 2ab\\sin C$',
+      '$c = a + b - 2ab\\cos C$',
+    ],
+    correct: 0,
+    why: [
+      'Precis — kvadraten på sidan mitt emot en vinkel är summan av de andra sidornas kvadrater minus $2ab\\cos C$.',
+      'Tecknet framför $2ab\\cos C$ ska vara minus, inte plus — annars stämmer inte formeln när $C = 0^\\circ$ (triangeln "faller ihop" och $c$ borde bli $b - a$, inte $a + b$).',
+      'Cosinussatsen innehåller $\\cos C$, inte $\\sin C$ — det är just cosinusfunktionen som ger sambandet mellan sidorna och den mellanliggande vinkeln.',
+      'Vänsterledet ska vara $c^2$, inte $c$ — sambandet gäller kvadraterna på sidorna, inte sidorna själva.',
+    ],
+  },
+  {
+    question: 'I vilken situation kan cosinussatsen användas, men INTE sinussatsen?',
+    choices: [
+      'När alla tre sidorna är kända, men ingen vinkel',
+      'När en sida och två vinklar är kända',
+      'När två sidor och en icke-mellanliggande vinkel är kända',
+      'När triangelns omkrets är känd',
+    ],
+    correct: 0,
+    why: [
+      'Sinussatsen kräver ett känt vinkel–sida-par (en vinkel och dess motstående sida). Känner man bara tre sidor finns inget sådant par, och cosinussatsen behövs.',
+      'Det är precis tvärtom — en sida och två vinklar är sinussatsens klassiska användningsfall, inte cosinussatsens.',
+      'Två sidor och en icke-mellanliggande vinkel är också ett fall för sinussatsen, inte cosinussatsen.',
+      'Enbart omkretsen (summan av sidorna) räcker inte för att bestämma triangeln entydigt, och det är inte den situation som skiljer satserna åt.',
+    ],
+  },
+  {
+    question: 'En triangel $ABC$ har sidorna $a = 6$ cm och $b = 9$ cm, med vinkeln $C = 40^\\circ$ mellan dem. Vilken storhet kan bestämmas direkt med cosinussatsen, utan mellansteg?',
+    choices: [
+      'Sidan $c$, motstående vinkel $C$',
+      'Vinkeln $A$',
+      'Vinkeln $B$',
+      'Triangelns area',
+    ],
+    correct: 0,
+    why: [
+      'Med två sidor och den mellanliggande vinkeln kända ger cosinussatsen $c^2 = a^2 + b^2 - 2ab\\cos C$ sidan $c$ i ett enda steg.',
+      'Vinkeln $A$ kräver att sidan $c$ är känd först (för att alla tre sidorna ska vara kända) — det är alltså ett tvåstegsproblem.',
+      'Precis som för $A$ krävs sidan $c$ innan $B$ kan bestämmas med cosinus- eller sinussatsen.',
+      'Arean kräver kännedom om en höjd eller använder en annan formel (t.ex. $\\frac{1}{2}ab\\sin C$) — det är inte det cosinussatsen ger direkt.',
+    ],
+  },
+  {
+    question: 'Varför rekommenderas cosinussatsen framför sinussatsen när man ska bestämma en vinkel och alla tre sidorna är kända?',
+    choices: [
+      'Cosinus är entydig i intervallet $0^\\circ$–$180^\\circ$, så $\\cos^{-1}$ ger alltid rätt vinkel direkt',
+      'Cosinussatsen är alltid enklare att räkna ut för hand',
+      'Sinussatsen fungerar bara i rätvinkliga trianglar',
+      'Cosinussatsen kräver inte att man känner några sidor alls',
+    ],
+    correct: 0,
+    why: [
+      'Cosinus är en-till-en-funktion mellan $0^\\circ$ och $180^\\circ$, medan sinus ger samma värde för en spetsig och dess trubbiga komplementvinkel — sinussatsen kan därför ge en falsk lösning som måste kontrolleras och förkastas.',
+      'Beräkningarna är ungefär lika omfattande för båda satserna — fördelen med cosinussatsen ligger i entydigheten, inte enkelheten.',
+      'Både sinussatsen och cosinussatsen gäller för godtyckliga trianglar, inte bara rätvinkliga.',
+      'Cosinussatsen kräver tvärtom att man känner sidorna (och/eller vinklar) i triangeln — den kan inte användas helt utan information.',
+    ],
+  },
+  {
+    question: 'Vilket samband ger cosinussatsen för sidan $a$ (motstående vinkel $A$)?',
+    choices: [
+      '$a^2 = b^2 + c^2 - 2bc\\cos A$',
+      '$a^2 = b^2 + c^2 - 2ab\\cos A$',
+      '$a^2 = a^2 + c^2 - 2ac\\cos A$',
+      '$a^2 = b^2 - c^2 - 2bc\\cos A$',
+      ],
+    correct: 0,
+    why: [
+      'Precis som $c^2 = a^2 + b^2 - 2ab\\cos C$ byts sidorna cykliskt: för $a^2$ används de ANDRA två sidorna $b$ och $c$ tillsammans med $\\cos A$.',
+      'Produkttermen ska innehålla just de två sidor som INTE är $a$, det vill säga $b$ och $c$ — inte $a$ och $b$.',
+      'Vänsterledet får inte förekomma igen i högerledet ($a^2$ på båda sidor är fel) — högerledet ska bestå av de två andra sidornas kvadrater.',
+      'Tecknet mellan $b^2$ och $c^2$ ska vara plus, inte minus — cosinussatsen är en summa av kvadraterna minus dubbla produkttermen.',
+    ],
+  },
+],
 };

@@ -1,0 +1,248 @@
+{
+ "id": "ma3c-4.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f3601ba423cbaabe894a467da5cd379e904de0f3",
+ "dur": 373.16,
+ "segments": [
+  {
+   "t": "Växande och avtagande funktion",
+   "s": 0.1,
+   "e": 3.48
+  },
+  {
+   "t": "Kom ihåg: derivatan motsvarar en grafs lutning i en punkt.",
+   "s": 3.42,
+   "e": 8.38
+  },
+  {
+   "t": "Tecknet på derivatan avslöjar därför åt vilket håll grafen lutar — och därmed om funktionen växer eller avtar.",
+   "s": 8.38,
+   "e": 15.88
+  },
+  {
+   "t": "Växande och avtagande",
+   "s": 15.88,
+   "e": 18.73
+  },
+  {
+   "t": "Om värdet på f prim parentesen x slut parentes är",
+   "s": 18.73,
+   "e": 23.56
+  },
+  {
+   "t": "positivt, dvs. f prim parentesen x slut parentes är större än 0 , är lutningen hos f av x positiv (\"uppförsbacke\") och funktionen växande.",
+   "s": 23.56,
+   "e": 34.1
+  },
+  {
+   "t": "negativt, dvs. f prim parentesen x slut parentes är mindre än 0 , är lutningen hos f av x negativ (\"nedförsbacke\") och funktionen avtagande.",
+   "s": 34.1,
+   "e": 44.85
+  },
+  {
+   "t": "Strängt växande och strängt avtagande",
+   "s": 44.85,
+   "e": 48.39
+  },
+  {
+   "t": "Om en funktion hela tiden är",
+   "s": 48.39,
+   "e": 51.31
+  },
+  {
+   "t": "växande i ett intervall är funktionen strängt växande i intervallet.",
+   "s": 51.31,
+   "e": 56.5
+  },
+  {
+   "t": "avtagande i ett intervall är funktionen strängt avtagande i intervallet.",
+   "s": 56.5,
+   "e": 61.9
+  },
+  {
+   "t": "Vi kan alltså avgöra i vilka intervall en funktion växer och avtar på två sätt: antingen genom att studera lutningen direkt på grafen till f av x , eller genom att studera tecknet på grafen till derivatan f prim parentesen x slut parentes .",
+   "s": 61.9,
+   "e": 76.42
+  },
+  {
+   "t": "Avläsa växande och avtagande ur en graf",
+   "s": 76.42,
+   "e": 80.5
+  },
+  {
+   "t": "Exempel 1 — Avläsa växande och avtagande ur en graf",
+   "s": 80.5,
+   "e": 85.4
+  },
+  {
+   "t": "I vilka intervall växer respektive avtar funktionerna nedan?. a) f av x b) g av x",
+   "s": 85.4,
+   "e": 100.21
+  },
+  {
+   "t": "a) f av x är växande där grafen har positiv lutning (\"uppförsbacke\" sett från vänster till höger).",
+   "s": 90.56,
+   "e": 100.21
+  },
+  {
+   "t": "Det har den för alla x -värden fram till x är lika med 1 , dvs. funktionen är växande för x är mindre än 1 .",
+   "s": 100.21,
+   "e": 108.11
+  },
+  {
+   "t": "f av x är avtagande där grafen har negativ lutning (\"nedförsbacke\").",
+   "s": 108.11,
+   "e": 114.19
+  },
+  {
+   "t": "Det har den för alla x -värden efter x är lika med 1 , dvs. funktionen är avtagande för x är större än 1 .",
+   "s": 114.19,
+   "e": 122.04
+  },
+  {
+   "t": "Svar: Växande för x är mindre än 1 och avtagande för x är större än 1 .",
+   "s": 122.04,
+   "e": 128.03
+  },
+  {
+   "t": "b) Samma resonemang som i a-uppgiften. g av x är växande mellan x är lika med minus 1 och x är lika med 1 , dvs. för minus 1 är mindre än x är mindre än 1 .",
+   "s": 128.03,
+   "e": 141.21
+  },
+  {
+   "t": "g av x är avtagande för alla x -värden före minus 1 och för alla x -värden efter 1 , dvs. för x är mindre än minus 1 och x är större än 1 .",
+   "s": 141.21,
+   "e": 151.6
+  },
+  {
+   "t": "Svar: Växande för minus 1 är mindre än x är mindre än 1 och avtagande för x är mindre än minus 1 samt x är större än 1 .",
+   "s": 151.6,
+   "e": 160.6
+  },
+  {
+   "t": "Exempel 2 — Tolka derivatans tecken ur en graf",
+   "s": 160.6,
+   "e": 164.97
+  },
+  {
+   "t": "Grafen till funktionen g av x (samma funktion som i föregående exempel) visas nedan.. a) Är g prim, ekvation 2 positiv, negativ eller noll? b) I vilket intervall är g prim parentesen x slut parentes är större än 0 ? c) För vilka x gäller att g prim parentesen x slut parentes är lika med 0 ?",
+   "s": 164.97,
+   "e": 190.44
+  },
+  {
+   "t": "a) g prim, ekvation 2 står för derivatan (lutningen) då x är lika med 2 .",
+   "s": 190.44,
+   "e": 197.35
+  },
+  {
+   "t": "Lutningen är negativ där, eftersom g av x avtar för x är större än 1 . g prim, ekvation 2 är alltså negativ.",
+   "s": 197.35,
+   "e": 207.57
+  },
+  {
+   "t": "Svar: Negativ.",
+   "s": 207.57,
+   "e": 210.15
+  },
+  {
+   "t": "b) Att g prim parentesen x slut parentes är större än 0 betyder att derivatan (lutningen) ska vara positiv, dvs. att funktionen växer.",
+   "s": 210.15,
+   "e": 220.46
+  },
+  {
+   "t": "Grafen har positiv lutning mellan x är lika med minus 1 och x är lika med 1 , dvs. då minus 1 är mindre än x är mindre än 1 .",
+   "s": 220.46,
+   "e": 229.97
+  },
+  {
+   "t": "Svar: minus 1 är mindre än x är mindre än 1",
+   "s": 229.97,
+   "e": 234.65
+  },
+  {
+   "t": "c) Att g prim parentesen x slut parentes är lika med 0 betyder att derivatan (lutningen) ska vara noll, dvs. att tangenten i punkten är horisontell.",
+   "s": 234.65,
+   "e": 245.89
+  },
+  {
+   "t": "Det är den vid x är lika med minus 1 och x är lika med 1 (i den lokala minimi- respektive maximipunkten).",
+   "s": 245.89,
+   "e": 253.75
+  },
+  {
+   "t": "Svar: x är lika med minus 1 och x är lika med 1",
+   "s": 253.75,
+   "e": 258.74
+  },
+  {
+   "t": "Bestämma växande och avtagande med en teckentabell",
+   "s": 258.74,
+   "e": 262.79
+  },
+  {
+   "t": "När vi i stället ser grafen till derivatan f prim parentesen x slut parentes kan vi bestämma var f av x växer och avtar genom att studera tecknet på f prim parentesen x slut parentes i intervallen mellan dess nollställen.",
+   "s": 262.79,
+   "e": 276.48
+  },
+  {
+   "t": "Steg för steg",
+   "s": 276.48,
+   "e": 278.79
+  },
+  {
+   "t": "Bestäm nollställena till f prim parentesen x slut parentes , dvs. var derivatans graf skär x -axeln.",
+   "s": 278.79,
+   "e": 286.74
+  },
+  {
+   "t": "Avläs tecknet på f prim parentesen x slut parentes i varje intervall mellan nollställena — positivt tecken ger växande f av x , negativt tecken ger avtagande f av x .",
+   "s": 286.74,
+   "e": 298.26
+  },
+  {
+   "t": "Sammanställ resultatet i en teckentabell.",
+   "s": 298.26,
+   "e": 301.98
+  },
+  {
+   "t": "Exempel 3 — Bestämma f(x):s växande ur grafen till f′(x)",
+   "s": 301.98,
+   "e": 308.65
+  },
+  {
+   "t": "Figuren nedan visar grafen till y är lika med f prim parentesen x slut parentes .. a) I vilket intervall är f av x växande? b) För vilka x -värden har grafen till f av x lutningen 0?",
+   "s": 308.65,
+   "e": 326.95
+  },
+  {
+   "t": "a) f av x är växande när f prim parentesen x slut parentes (lutningen) är större än 0.",
+   "s": 326.95,
+   "e": 334.53
+  },
+  {
+   "t": "Grafen till f prim parentesen x slut parentes ligger ovanför x -axeln mellan x är lika med minus 1 och x är lika med 5 , dvs. för minus 1 är mindre än x är mindre än 5 .",
+   "s": 334.53,
+   "e": 347.04
+  },
+  {
+   "t": "Svar: minus 1 är mindre än x är mindre än 5",
+   "s": 347.04,
+   "e": 351.73
+  },
+  {
+   "t": "b) f av x har lutningen 0 där f prim parentesen x slut parentes är lika med 0 , dvs. där grafen till f prim parentesen x slut parentes skär x -axeln.",
+   "s": 351.73,
+   "e": 363.35
+  },
+  {
+   "t": "Det sker vid x är lika med minus 1 och x är lika med 5 .",
+   "s": 363.35,
+   "e": 368.24
+  },
+  {
+   "t": "Svar: x är lika med minus 1 och x är lika med 5",
+   "s": 368.24,
+   "e": 373.16
+  }
+ ]
+}

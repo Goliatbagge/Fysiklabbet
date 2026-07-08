@@ -1,0 +1,188 @@
+{
+ "id": "ma3c-5.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "6312a8c59c004e8d023d8da19c15c2d84a4acd8b",
+ "dur": 287.07,
+ "segments": [
+  {
+   "t": "Integralkalkylens fundamentalsats",
+   "s": 0.1,
+   "e": 3.62
+  },
+  {
+   "t": "Sedan tidigare vet vi att en bestämd integral grafiskt motsvarar arean mellan en funktions graf och x -axeln, och att arean i princip kan bestämmas genom att summera oändligt många smala rektangelareor.",
+   "s": 3.58,
+   "e": 16.1
+  },
+  {
+   "t": "Men hur beräknar vi integralen i praktiken, utan att behöva summera oändligt många rektanglar?",
+   "s": 16.1,
+   "e": 22.69
+  },
+  {
+   "t": "Svaret ligger i sambandet mellan integraler och primitiva funktioner.",
+   "s": 22.69,
+   "e": 27.93
+  },
+  {
+   "t": "Härledning — Integralkalkylens fundamentalsats",
+   "s": 27.93,
+   "e": 32.12
+  },
+  {
+   "t": "Tankesätt: om vi har en funktion F parentesen x slut parentes vars förändring vi vill undersöka från x är lika med a till x är lika med b kan detta skrivas som \"slutvärde\" är lika med \"startvärde\"",
+   "s": 32.12,
+   "e": 44.61
+  },
+  {
+   "t": "\"summan av alla förändringar i y -led\", dvs.",
+   "s": 44.61,
+   "e": 58.96
+  },
+  {
+   "t": "F parentesen b slut parentes är lika med F parentesen a slut parentes plus integralen av a upphöjt till b F prim parentesen x slut parentes d x",
+   "s": 44.61,
+   "e": 58.96
+  },
+  {
+   "t": "Eftersom F prim parentesen x slut parentes är lika med f av x kan detta skrivas",
+   "s": 58.96,
+   "e": 65.34
+  },
+  {
+   "t": "F parentesen b slut parentes är lika med F parentesen a slut parentes plus integralen av a upphöjt till b f av x d x",
+   "s": 65.34,
+   "e": 75.1
+  },
+  {
+   "t": "Vi löser ut integralen och får integralkalkylens fundamentalsats.",
+   "s": 75.1,
+   "e": 80.49
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x är lika med F parentesen b slut parentes minus F parentesen a slut parentes",
+   "s": 80.49,
+   "e": 90.51
+  },
+  {
+   "t": "Vi kan alltså beräkna integralen exakt med hjälp av primitiva funktioner!",
+   "s": 90.51,
+   "e": 95.89
+  },
+  {
+   "t": "Detta samband kallas integralkalkylens fundamentalsats.",
+   "s": 95.89,
+   "e": 100.71
+  },
+  {
+   "t": "Differensen F parentesen b slut parentes minus F parentesen a slut parentes kan skrivas med det nya skrivsättet F parentesen x slut parentes a upphöjt till b .",
+   "s": 100.71,
+   "e": 112.26
+  },
+  {
+   "t": "Integralkalkylens fundamentalsats",
+   "s": 112.26,
+   "e": 115.79
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x är lika med F parentesen x slut parentes a upphöjt till b som är lika med F parentesen b slut parentes minus F parentesen a slut parentes",
+   "s": 115.79,
+   "e": 129.1
+  },
+  {
+   "t": "Exempel 1 — Beräkna integraler med primitiva funktioner",
+   "s": 129.1,
+   "e": 133.94
+  },
+  {
+   "t": "Beräkna integralerna med primitiva funktioner.",
+   "s": 133.94,
+   "e": 137.94
+  },
+  {
+   "t": "a) integralen av ett i kubik 2 x d x b) integralen av ett upphöjt till 5 parentesen x i kvadrat minus 4 slut parentes d x",
+   "s": 137.94,
+   "e": 156.9
+  },
+  {
+   "t": "a) Den primitiva funktionen till f av x är lika med 2 x är F parentesen x slut parentes är lika med x i kvadrat .",
+   "s": 137.94,
+   "e": 156.9
+  },
+  {
+   "t": "Vi sätter den primitiva funktionen inom klammer med gränserna och får",
+   "s": 156.9,
+   "e": 161.93
+  },
+  {
+   "t": "integralen av ett i kubik 2 x d x är lika med x i kvadrat ett i kubik",
+   "s": 161.93,
+   "e": 168.89
+  },
+  {
+   "t": "Vi sätter därefter in den övre gränsen x är lika med 3 i den primitiva funktionen, för att sedan subtrahera med det vi får då vi sätter in den undre gränsen x är lika med 1 .",
+   "s": 168.89,
+   "e": 179.46
+  },
+  {
+   "t": "x i kvadrat ett i kubik är lika med 3 i kvadrat minus parentesen 1 i kvadrat slut parentes som är lika med 9 minus 1 som är lika med 8",
+   "s": 179.46,
+   "e": 189.36
+  },
+  {
+   "t": "Svar: 8",
+   "s": 189.36,
+   "e": 195.43
+  },
+  {
+   "t": "b) Vi löser b-uppgiften på motsvarande sätt som a-uppgiften.",
+   "s": 189.36,
+   "e": 195.43
+  },
+  {
+   "t": "Extra viktigt när den primitiva funktionen har flera termer är att sätta en parentes runt hela uttrycket innan vi sätter in den undre gränsen — annars blir tecknen fel.",
+   "s": 195.43,
+   "e": 205.09
+  },
+  {
+   "t": "integralen av ett upphöjt till 5 parentesen x i kvadrat minus 4 slut parentes d x är lika med x i kubik delat med 3 minus 4 x ett upphöjt till 5 som är lika med 5 i kubik delat med 3 minus 4 gånger 5 minus parentesen 1 i kubik delat med 3 minus 4 gånger 1 slut parentes",
+   "s": 205.09,
+   "e": 224.36
+  },
+  {
+   "t": "är lika med 125 delat med 3 minus 20 minus parentesen 1 delat med 3 minus 4 slut parentes som är lika med 125 delat med 3 minus 60 delat med 3 minus parentesen 1 delat med 3 minus 12 delat med 3 slut parentes som är lika med 65 delat med 3 minus parentesen minus 11 delat med 3 slut parentes som är lika med 65 delat med 3 plus 11 delat med 3 som är lika med 76 delat med 3",
+   "s": 224.36,
+   "e": 252.56
+  },
+  {
+   "t": "Svar: 76 delat med 3",
+   "s": 252.56,
+   "e": 255.86
+  },
+  {
+   "t": "OBS — glöm inte parentesen",
+   "s": 255.86,
+   "e": 259.14
+  },
+  {
+   "t": "Om den primitiva funktionen har flera termer måste du sätta parentes runt hela uttrycket innan du sätter in den undre gränsen.",
+   "s": 259.14,
+   "e": 267.01
+  },
+  {
+   "t": "Annars är risken stor att minustecknet bara påverkar den första termen i stället för alla termer i uttrycket — vilket ger fel svar.",
+   "s": 267.01,
+   "e": 275.06
+  },
+  {
+   "t": "Jämför exempel 1b ovan:",
+   "s": 275.06,
+   "e": 287.07
+  },
+  {
+   "t": "minus parentesen 1 delat med 3 minus 4 slut parentes är lika med minus 1 delat med 3 plus 4 men minus 1 delat med 3 minus 4 är fel.",
+   "s": 275.06,
+   "e": 287.07
+  }
+ ]
+}

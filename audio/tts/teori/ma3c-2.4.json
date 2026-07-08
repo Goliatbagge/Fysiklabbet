@@ -1,0 +1,188 @@
+{
+ "id": "ma3c-2.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "852c450ffd97b33ca361ca2c36ec28da2f00df0f",
+ "dur": 229.6,
+ "segments": [
+  {
+   "t": "Använda derivata",
+   "s": 0.1,
+   "e": 2.62
+  },
+  {
+   "t": "Tolka derivata",
+   "s": 2.58,
+   "e": 4.88
+  },
+  {
+   "t": "Sedan tidigare har vi konstaterat att derivatan grafiskt står för en grafs lutning i en viss punkt (eller tangentens lutning i en viss punkt).",
+   "s": 4.88,
+   "e": 13.95
+  },
+  {
+   "t": "Vid tillämpningar inom t.ex. naturvetenskap eller ekonomi står derivatan för någon form av förändringshastighet vid en tidpunkt.",
+   "s": 13.95,
+   "e": 22.62
+  },
+  {
+   "t": "Enheten för derivatan fås genom att ta \"enheten för funktionen\" per \"enheten för variabeln\".",
+   "s": 22.62,
+   "e": 29.4
+  },
+  {
+   "t": "Exempel 1 — Tolka derivatan",
+   "s": 29.4,
+   "e": 32.74
+  },
+  {
+   "t": "En bil färdas s parentesen t slut parentes km på t timmar.",
+   "s": 32.74,
+   "e": 38.58
+  },
+  {
+   "t": "Tolka. a) s, ekvation 2 är lika med 120 b) s prim, ekvation 2 är lika med 90",
+   "s": 38.58,
+   "e": 47.99
+  },
+  {
+   "t": "a) s står för sträckan i kilometer (120 kilometer). t står för tiden i timmar (2 timmar).",
+   "s": 47.99,
+   "e": 57.5
+  },
+  {
+   "t": "Svar: Efter 2 timmar har bilen färdats 120 kilometer.",
+   "s": 57.5,
+   "e": 62.92
+  },
+  {
+   "t": "b) Enheten för derivatan är \"enheten för funktionen\" per \"enheten för variabeln\".",
+   "s": 62.92,
+   "e": 69.54
+  },
+  {
+   "t": "Enheten för funktionen s parentesen t slut parentes är km.",
+   "s": 69.54,
+   "e": 75.24
+  },
+  {
+   "t": "Enheten för variabeln t är timme. s prim motsvarar alltså km/h.",
+   "s": 75.24,
+   "e": 86.99
+  },
+  {
+   "t": "s prim står för momentanhastigheten (90 kilometer i timmen). t står för tidpunkten (2 timmar).",
+   "s": 78.81,
+   "e": 90.66
+  },
+  {
+   "t": "Svar: Efter 2 timmar färdas bilen med hastigheten 90 kilometer i timmen.",
+   "s": 90.66,
+   "e": 96.56
+  },
+  {
+   "t": "Beräkna derivata med Geogebra",
+   "s": 96.56,
+   "e": 99.83
+  },
+  {
+   "t": "Vi kan beräkna en derivata med symbolhanterande hjälpmedel, t.ex. Geogebra.",
+   "s": 99.83,
+   "e": 105.96
+  },
+  {
+   "t": "Vi definierar då en funktion genom att skriva f av x är lika med i inmatningsfältet och sedan beräkna derivatan genom att skriva f prim parentesen a slut parentes för den punkt x är lika med a vi är intresserade av.",
+   "s": 105.96,
+   "e": 118.64
+  },
+  {
+   "t": "OBS — decimaltecken i Geogebra",
+   "s": 118.64,
+   "e": 122.14
+  },
+  {
+   "t": "I Geogebras inmatningsfält används punkt . som decimaltecken, inte komma.",
+   "s": 122.14,
+   "e": 129.46
+  },
+  {
+   "t": "Talet 0,3 skrivs alltså som 0.3 när du matar in en funktion.",
+   "s": 129.46,
+   "e": 135.1
+  },
+  {
+   "t": "Exempel 2 — Beräkna derivata med Geogebra",
+   "s": 135.1,
+   "e": 139.07
+  },
+  {
+   "t": "En vårdag ges temperaturen f av x °C av formeln f av x är lika med 0,3 x i kvadrat minus 5 , där x är tiden i timmar efter 6.00.. a) Beräkna f prim, ekvation 5 med symbolhanterande hjälpmedel. b) Tolka svaret i a) med ord.",
+   "s": 139.07,
+   "e": 160.18
+  },
+  {
+   "t": "a) I Geogebras inmatningsfält skriver vi",
+   "s": 160.18,
+   "e": 164.55
+  },
+  {
+   "t": "f av x är lika med 0. 3 x i kvadrat minus 5",
+   "s": 164.55,
+   "e": 170.76
+  },
+  {
+   "t": "och trycker Enter.",
+   "s": 170.76,
+   "e": 172.89
+  },
+  {
+   "t": "I inmatningsfältet under skriver vi sedan f prim, ekvation 5 och trycker Enter.",
+   "s": 172.89,
+   "e": 178.82
+  },
+  {
+   "t": "Vi får då svaret 3.",
+   "s": 178.82,
+   "e": 181.54
+  },
+  {
+   "t": "Alltså är f prim, ekvation 5 är lika med 3 .",
+   "s": 181.54,
+   "e": 185.86
+  },
+  {
+   "t": "Svar: f prim, ekvation 5 är lika med 3",
+   "s": 185.86,
+   "e": 190.49
+  },
+  {
+   "t": "b) Vi hade att f prim, ekvation 5 är lika med 3 .",
+   "s": 190.49,
+   "e": 195.4
+  },
+  {
+   "t": "Enheten för f är °C och enheten för x är h.",
+   "s": 195.4,
+   "e": 203.31
+  },
+  {
+   "t": "Enheten på derivatan är alltså °C/h.",
+   "s": 195.4,
+   "e": 203.31
+  },
+  {
+   "t": "Vi tolkar alltså f prim, ekvation 5 är lika med 3 som \"efter 5 timmar ökar temperaturen med 3 °C/h\".",
+   "s": 203.31,
+   "e": 212.05
+  },
+  {
+   "t": "Eftersom tiden räknas från klockan 6.00 kan vi också formulera det som att \"klockan 11.00 ökar temperaturen med 3 grader Celsius/h\".",
+   "s": 212.05,
+   "e": 221.72
+  },
+  {
+   "t": "Svar: Efter 5 timmar (klockan 11.00) ökar temperaturen med 3 grader Celsius/h.",
+   "s": 221.72,
+   "e": 229.6
+  }
+ ]
+}

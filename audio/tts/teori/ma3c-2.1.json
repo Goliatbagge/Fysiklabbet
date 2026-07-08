@@ -1,0 +1,148 @@
+{
+ "id": "ma3c-2.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "453db02f2b66e4976e1274193ad36e63ed2648d9",
+ "dur": 207.74,
+ "segments": [
+  {
+   "t": "Sekantens lutning",
+   "s": 0.1,
+   "e": 2.62
+  },
+  {
+   "t": "En rät linje har samma lutning överallt.",
+   "s": 2.58,
+   "e": 6.25
+  },
+  {
+   "t": "En kurvas lutning kan däremot variera.",
+   "s": 6.25,
+   "e": 9.68
+  },
+  {
+   "t": "En kurvas medellutning i ett visst intervall kan beräknas genom att dra en rät linje mellan punkterna i intervallets ändpunkter.",
+   "s": 9.68,
+   "e": 17.27
+  },
+  {
+   "t": "En linje mellan två punkter på en kurva kallas sekant.",
+   "s": 17.27,
+   "e": 21.65
+  },
+  {
+   "t": "Sekantens lutning (riktningskoefficient, ändringskvot eller k-värde) beräknas på samma sätt som för vilken rät linje som helst. Vi läser av två punkter på linjen, parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes , och sätter in koordinaterna i formeln för riktningskoefficienten k .",
+   "s": 21.65,
+   "e": 43.39
+  },
+  {
+   "t": "Riktningskoefficienten",
+   "s": 43.39,
+   "e": 46.15
+  },
+  {
+   "t": "k är lika med delta y delat med delta x som är lika med y två minus y ett delat med x två minus x ett som är lika med f av x två minus f av x ett delat med x två minus x ett",
+   "s": 46.15,
+   "e": 58.84
+  },
+  {
+   "t": "Tolka sekantens lutning vid tillämpningar",
+   "s": 58.84,
+   "e": 62.4
+  },
+  {
+   "t": "Vid tillämpningar står sekantens lutning för en genomsnittlig förändringshastighet.",
+   "s": 62.4,
+   "e": 68.01
+  },
+  {
+   "t": "Eftersom k är lika med delta y delat med delta x gäller att enheten på sekantens lutning vid tillämpningar blir \"enheten på y -axeln\" per \"enheten på x -axeln\".",
+   "s": 68.01,
+   "e": 78.58
+  },
+  {
+   "t": "Vi tillämpar detta i två exempel.",
+   "s": 78.58,
+   "e": 81.89
+  },
+  {
+   "t": "Exempel 1 — Sekantens lutning som förändringshastighet",
+   "s": 81.89,
+   "e": 86.54
+  },
+  {
+   "t": "En granplanta har höjden y dm efter x år enligt diagrammet nedan.. a) Beräkna sekantens lutning mellan x är lika med 0 och x är lika med 2 . b) Tolka svaret i a) med ord.",
+   "s": 86.54,
+   "e": 102.59
+  },
+  {
+   "t": "a) Vi drar en sekant mellan punkterna på grafen där x är lika med 0 och x är lika med 2 och läser av deras koordinater: parentesen 0, 0 slut parentes och parentesen 2 ; 1,4 slut parentes .",
+   "s": 102.59,
+   "e": 116.25
+  },
+  {
+   "t": "Vi sätter in koordinaterna i formeln för riktningskoefficienten k .",
+   "s": 116.25,
+   "e": 121.25
+  },
+  {
+   "t": "k är lika med y två minus y ett delat med x två minus x ett som är lika med 1,4 minus 0 delat med 2 minus 0 som är lika med 1,4 delat med 2 som är lika med 0,7",
+   "s": 121.25,
+   "e": 133.45
+  },
+  {
+   "t": "Svar: k är lika med 0,7",
+   "s": 133.45,
+   "e": 137.09
+  },
+  {
+   "t": "b) Sekantens lutning står för hur mycket granen i genomsnitt har vuxit per år under de två första åren.",
+   "s": 137.09,
+   "e": 144.18
+  },
+  {
+   "t": "Enheten på y -axeln är dm och enheten på x -axeln är år, så enheten på k -värdet blir dm per år.",
+   "s": 144.18,
+   "e": 152.72
+  },
+  {
+   "t": "Svar: Granen har i genomsnitt vuxit med 0,7 decimeter per år de två första åren.",
+   "s": 152.72,
+   "e": 159.51
+  },
+  {
+   "t": "Exempel 2 — Ändringskvoten för en andragradsfunktion",
+   "s": 159.51,
+   "e": 164.03
+  },
+  {
+   "t": "Beräkna ändringskvoten mellan x är lika med 3 och x är lika med 5 för f av x är lika med x i kvadrat .",
+   "s": 164.03,
+   "e": 171.47
+  },
+  {
+   "t": "Ändringskvoten är detsamma som sekantens lutning.",
+   "s": 171.47,
+   "e": 175.53
+  },
+  {
+   "t": "Vi ställer upp formeln för riktningskoefficienten och sätter in värden.",
+   "s": 175.53,
+   "e": 180.29
+  },
+  {
+   "t": "Kom ihåg att funktionsvärdet f av x står för en y -koordinat.",
+   "s": 180.29,
+   "e": 185.64
+  },
+  {
+   "t": "k är lika med f av x två minus f av x ett delat med x två minus x ett som är lika med f av 5 minus f av 3 delat med 5 minus 3 som är lika med 5 i kvadrat minus 3 i kvadrat delat med 5 minus 3 som är lika med 25 minus 9 delat med 2 som är lika med 16 delat med 2 som är lika med 8",
+   "s": 185.64,
+   "e": 204.61
+  },
+  {
+   "t": "Svar: k är lika med 8",
+   "s": 204.61,
+   "e": 207.74
+  }
+ ]
+}

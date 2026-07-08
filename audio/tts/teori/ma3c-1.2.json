@@ -1,0 +1,348 @@
+{
+ "id": "ma3c-1.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "c4cbb8543b968aa5b0ea2fb59a86a46027a6881a",
+ "dur": 554.96,
+ "segments": [
+  {
+   "t": "Addition och subtraktion av rationella uttryck",
+   "s": 0.1,
+   "e": 4.1
+  },
+  {
+   "t": "För att addera och subtrahera rationella uttryck krävs (precis som för bråk) att de har samma nämnare.",
+   "s": 4.05,
+   "e": 11.0
+  },
+  {
+   "t": "I det här avsnittet löser vi också ekvationer som innehåller rationella uttryck.",
+   "s": 11.0,
+   "e": 16.61
+  },
+  {
+   "t": "Lösa ekvationer med rationella uttryck",
+   "s": 16.61,
+   "e": 20.3
+  },
+  {
+   "t": "Kontrollera först för vilka värden på x som nämnaren eller nämnarna blir lika med noll.",
+   "s": 20.3,
+   "e": 26.19
+  },
+  {
+   "t": "För dessa värden är ekvationen inte definierad, så de är inte tillåtna som lösningar.",
+   "s": 26.19,
+   "e": 32.15
+  },
+  {
+   "t": "Lös sedan ekvationen med någon av metoderna:",
+   "s": 32.15,
+   "e": 39.5
+  },
+  {
+   "t": "Multiplicera med minsta gemensamma nämnaren (MGN).",
+   "s": 32.15,
+   "e": 39.5
+  },
+  {
+   "t": "Multiplicera båda leden med MGN (eller en annan gemensam nämnare).",
+   "s": 39.5,
+   "e": 45.15
+  },
+  {
+   "t": "Förkorta sedan och lös som vanligt.",
+   "s": 45.15,
+   "e": 48.6
+  },
+  {
+   "t": "Gör liknämnigt.",
+   "s": 48.6,
+   "e": 51.1
+  },
+  {
+   "t": "Förläng termerna så att de får samma nämnare.",
+   "s": 51.1,
+   "e": 54.64
+  },
+  {
+   "t": "Slå sedan ihop dem på ett enda divisionsstreck och utnyttja att täljare är lika med kvot gånger nämnare (eller motsvarande).",
+   "s": 54.64,
+   "e": 62.73
+  },
+  {
+   "t": "Addera och subtrahera rationella uttryck",
+   "s": 62.73,
+   "e": 66.58
+  },
+  {
+   "t": "Har termerna redan samma nämnare adderar eller subtraherar vi bara täljarna — nämnaren förblir densamma.",
+   "s": 66.58,
+   "e": 73.12
+  },
+  {
+   "t": "Har de olika nämnare måste vi först göra dem liknämniga, precis som för vanliga bråk: vi förlänger varje term med den andra termens nämnare.",
+   "s": 73.12,
+   "e": 81.92
+  },
+  {
+   "t": "Exempel 1 — Förenkla",
+   "s": 81.92,
+   "e": 84.76
+  },
+  {
+   "t": "Förenkla",
+   "s": 84.76,
+   "e": 86.56
+  },
+  {
+   "t": "a) 5 x i kvadrat delat med x minus 2 plus 7 delat med x minus 2 b) 8 x delat med x plus 3 minus 5 x minus 9 delat med x",
+   "s": 86.56,
+   "e": 101.21
+  },
+  {
+   "t": "a) Här har båda termerna samma nämnare, så täljarna adderas.",
+   "s": 86.56,
+   "e": 101.21
+  },
+  {
+   "t": "5 x i kvadrat delat med x minus 2 plus 7 delat med x minus 2 är lika med 5 x i kvadrat plus 7 delat med x minus 2",
+   "s": 101.21,
+   "e": 110.76
+  },
+  {
+   "t": "Svar: 5 x i kvadrat plus 7 delat med x minus 2",
+   "s": 110.76,
+   "e": 116.12
+  },
+  {
+   "t": "b) Här har termerna olika nämnare.",
+   "s": 116.12,
+   "e": 119.83
+  },
+  {
+   "t": "För att få samma nämnare förlänger vi den första termen med nämnaren i den andra termen, x , och den andra termen med nämnaren i den första termen, parentesen x plus 3 slut parentes .",
+   "s": 119.83,
+   "e": 131.18
+  },
+  {
+   "t": "8 x delat med x plus 3 minus 5 x minus 9 delat med x är lika med 8 x gånger x delat med parentesen x plus 3 slut parentes gånger x minus parentesen 5 x minus 9 slut parentes parentesen x plus 3 slut parentes delat med x gånger parentesen x plus 3 slut parentes som är lika med 8 x i kvadrat delat med x parentesen x plus 3 slut parentes minus parentesen 5 x minus 9 slut parentes parentesen x plus 3 slut parentes delat med x parentesen x plus 3 slut parentes",
+   "s": 131.18,
+   "e": 166.45
+  },
+  {
+   "t": "Nu har båda termerna samma nämnare x parentesen x plus 3 slut parentes , och vi kan subtrahera täljarna på ett gemensamt divisionsstreck.",
+   "s": 166.45,
+   "e": 175.65
+  },
+  {
+   "t": "8 x i kvadrat minus parentesen 5 x minus 9 slut parentes parentesen x plus 3 slut parentes delat med x parentesen x plus 3 slut parentes är lika med 8 x i kvadrat minus parentesen 5 x i kvadrat plus 15 x minus 9 x minus 27 slut parentes delat med x parentesen x plus 3 slut parentes som är lika med 8 x i kvadrat minus 5 x i kvadrat minus 15 x plus 9 x plus 27 delat med x parentesen x plus 3 slut parentes som är lika med 3 x i kvadrat minus 6 x plus 27 delat med x parentesen x plus 3 slut parentes som är lika med 3 parentesen x i kvadrat minus 2 x plus 9 slut parentes delat med x parentesen x plus 3 slut parentes",
+   "s": 175.65,
+   "e": 225.39
+  },
+  {
+   "t": "Vi undersöker om parentesen x i kvadrat minus 2 x plus 9 slut parentes kan faktoriseras mer genom att bestämma dess nollställen.",
+   "s": 225.39,
+   "e": 234.81
+  },
+  {
+   "t": "x i kvadrat minus 2 x plus 9 är lika med 0",
+   "s": 234.81,
+   "e": 239.68
+  },
+  {
+   "t": "p q -formeln ger",
+   "s": 239.68,
+   "e": 242.3
+  },
+  {
+   "t": "x är lika med 1 plus minus roten ur 1 i kvadrat minus 9 som är lika med 1 plus minus roten ur minus 8",
+   "s": 242.3,
+   "e": 250.28
+  },
+  {
+   "t": "Uttrycket under rottecknet är negativt, så andragradsekvationen saknar reella rötter. parentesen x i kvadrat minus 2 x plus 9 slut parentes kan alltså inte faktoriseras mer.",
+   "s": 250.28,
+   "e": 264.2
+  },
+  {
+   "t": "Svar: 3 parentesen x i kvadrat minus 2 x plus 9 slut parentes delat med x parentesen x plus 3 slut parentes",
+   "s": 264.2,
+   "e": 274.01
+  },
+  {
+   "t": "Lös ekvationer med rationella uttryck",
+   "s": 274.01,
+   "e": 277.69
+  },
+  {
+   "t": "När en ekvation innehåller rationella uttryck börjar vi alltid med att kontrollera vilka x -värden som gör någon nämnare lika med noll — dessa värden får aldrig vara med i svaret.",
+   "s": 277.69,
+   "e": 287.48
+  },
+  {
+   "t": "Sedan löser vi ekvationen med metod 1 eller metod 2 från rutan ovan.",
+   "s": 287.48,
+   "e": 293.09
+  },
+  {
+   "t": "Exempel 2 — Lös ekvationerna",
+   "s": 293.09,
+   "e": 296.48
+  },
+  {
+   "t": "Lös ekvationerna",
+   "s": 296.48,
+   "e": 298.84
+  },
+  {
+   "t": "a) x delat med 2 minus x delat med 8 är lika med 24 b) 1 delat med 3 plus 2 delat med x minus 3 som är lika med 1 c) x delat med x minus 1 som är lika med 2 x delat med x i kvadrat minus 1",
+   "s": 298.84,
+   "e": 315.63
+  },
+  {
+   "t": "a) Ingen nämnare innehåller x , så ekvationen är definierad för alla x .",
+   "s": 315.58,
+   "e": 321.73
+  },
+  {
+   "t": "Metod 1: Multiplicera med MGN.",
+   "s": 321.73,
+   "e": 325.5
+  },
+  {
+   "t": "Här är MGN är lika med 8 .",
+   "s": 325.5,
+   "e": 328.85
+  },
+  {
+   "t": "Vi multiplicerar båda leden med 8.",
+   "s": 328.85,
+   "e": 332.53
+  },
+  {
+   "t": "x delat med 2 minus x delat med 8 är lika med 24 vilket ger att x gånger 8 delat med 2 minus x gånger 8 delat med 8 är lika med 24 gånger 8 vilket ger att 4 x minus x är lika med 192 vilket ger att 3 x är lika med 192 vilket ger att x är lika med 64",
+   "s": 332.53,
+   "e": 351.29
+  },
+  {
+   "t": "Svar: x är lika med 64",
+   "s": 351.29,
+   "e": 354.96
+  },
+  {
+   "t": "Metod 2: Göra liknämnigt.",
+   "s": 354.96,
+   "e": 358.35
+  },
+  {
+   "t": "Vi förlänger den första termen med 4 för att få samma nämnare.",
+   "s": 358.35,
+   "e": 362.8
+  },
+  {
+   "t": "x delat med 2 minus x delat med 8 är lika med 24 vilket ger att 4 x delat med 8 minus x delat med 8 är lika med 24 vilket ger att 4 x minus x delat med 8 är lika med 24 vilket ger att 3 x delat med 8 är lika med 24",
+   "s": 362.8,
+   "e": 378.64
+  },
+  {
+   "t": "3 x är lika med 24 gånger 8 som är lika med 192 vilket ger att x är lika med 192 delat med 3 som är lika med 64",
+   "s": 378.64,
+   "e": 388.81
+  },
+  {
+   "t": "Svar: x är lika med 64",
+   "s": 388.81,
+   "e": 392.49
+  },
+  {
+   "t": "b) Nämnaren parentesen x minus 3 slut parentes gör att ekvationen inte är definierad för x är lika med 3 , så x är inte lika med 3 .",
+   "s": 392.49,
+   "e": 402.25
+  },
+  {
+   "t": "Vi multiplicerar båda leden med MGN är lika med 3 parentesen x minus 3 slut parentes .",
+   "s": 402.25,
+   "e": 409.39
+  },
+  {
+   "t": "1 gånger 3 parentesen x minus 3 slut parentes delat med 3 plus 2 gånger 3 parentesen x minus 3 slut parentes delat med x minus 3 är lika med 1 gånger 3 parentesen x minus 3 slut parentes",
+   "s": 409.39,
+   "e": 423.54
+  },
+  {
+   "t": "parentesen x minus 3 slut parentes plus 2 gånger 3 är lika med 3 parentesen x minus 3 slut parentes vilket ger att x minus 3 plus 6 är lika med 3 x minus 9 vilket ger att x plus 3 är lika med 3 x minus 9",
+   "s": 423.54,
+   "e": 438.69
+  },
+  {
+   "t": "3 är lika med 2 x minus 9 vilket ger att 12 är lika med 2 x vilket ger att x är lika med 6",
+   "s": 438.69,
+   "e": 446.21
+  },
+  {
+   "t": "Svar: x är lika med 6",
+   "s": 446.21,
+   "e": 449.49
+  },
+  {
+   "t": "c) Vi undersöker för vilka x som nämnarna blir noll.",
+   "s": 449.49,
+   "e": 454.25
+  },
+  {
+   "t": "x minus 1 är lika med 0 vilket är ekvivalent med att x är lika med 1 x i kvadrat minus 1 som är lika med 0 vilket är ekvivalent med att x är lika med plus minus 1",
+   "s": 454.25,
+   "e": 465.5
+  },
+  {
+   "t": "Så x är inte lika med 1 och x är inte lika med minus 1 .",
+   "s": 465.5,
+   "e": 470.16
+  },
+  {
+   "t": "Vi faktoriserar täljare och nämnare så långt det går — parentesen x i kvadrat minus 1 slut parentes är en konjugat och faktoriseras som parentesen x plus 1 slut parentes parentesen x minus 1 slut parentes .",
+   "s": 470.16,
+   "e": 483.75
+  },
+  {
+   "t": "x delat med x minus 1 är lika med 2 x delat med parentesen x plus 1 slut parentes parentesen x minus 1 slut parentes",
+   "s": 483.75,
+   "e": 493.38
+  },
+  {
+   "t": "Vi multiplicerar båda leden med MGN är lika med parentesen x plus 1 slut parentes parentesen x minus 1 slut parentes .",
+   "s": 493.38,
+   "e": 502.53
+  },
+  {
+   "t": "x parentesen x plus 1 slut parentes parentesen x minus 1 slut parentes delat med x minus 1 är lika med 2 x parentesen x plus 1 slut parentes parentesen x minus 1 slut parentes delat med parentesen x plus 1 slut parentes parentesen x minus 1 slut parentes vilket ger att x parentesen x plus 1 slut parentes är lika med 2 x",
+   "s": 502.53,
+   "e": 525.39
+  },
+  {
+   "t": "Vi utvecklar och gör högerledet lika med noll.",
+   "s": 525.39,
+   "e": 529.51
+  },
+  {
+   "t": "x i kvadrat plus x är lika med 2 x vilket ger att x i kvadrat minus x är lika med 0 vilket ger att x parentesen x minus 1 slut parentes är lika med 0",
+   "s": 529.51,
+   "e": 540.56
+  },
+  {
+   "t": "Nollproduktmetoden ger x ett är lika med 0 och x två är lika med 1 .",
+   "s": 540.56,
+   "e": 546.06
+  },
+  {
+   "t": "Eftersom x är inte lika med 1 förkastar vi lösningen x två är lika med 1 .",
+   "s": 546.06,
+   "e": 551.8
+  },
+  {
+   "t": "Svar: x är lika med 0",
+   "s": 551.8,
+   "e": 554.96
+  }
+ ]
+}

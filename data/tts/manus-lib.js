@@ -309,6 +309,17 @@
                     out.push('grader');
                 } else if (c === 'infty') {
                     out.push('oändligheten');
+                } else if (c === 'to' || c === 'rightarrow' || c === 'longrightarrow') {
+                    out.push('går mot');
+                } else if (c === 'lim') {
+                    out.push('gränsvärdet då');
+                    const us = peekIs('_');
+                    if (us >= 0) {
+                        i = us + 1;
+                        out.push(renderToks(nextArg(), ctx));
+                    }
+                } else if (c === 'int') {
+                    out.push('integralen av');
                 } else {
                     // Okänt kommando: läs namnet rakt av (bättre än tystnad)
                     out.push(c);
@@ -394,6 +405,13 @@
             else if (ch === '%') out.push('procent');
             else if (ch === '·' || ch === '×') out.push('gånger');
             else if (ch === '≈') out.push(ctx.eqCount++ === 0 ? 'är ungefär lika med' : 'som är ungefär lika med');
+            else if (ch === "'" || ch === '’' || ch === '′') {
+                // Derivata-prim: f'(x) → "f prim", f''(x) → "f bis"
+                if (toks[i] && toks[i].t === 'ch' &&
+                    (toks[i].v === "'" || toks[i].v === '’' || toks[i].v === '′')) {
+                    i++; out.push('bis');
+                } else out.push('prim');
+            }
             else if (ch === '[' || ch === ']') { /* tyst */ }
             else out.push(ch);
         }

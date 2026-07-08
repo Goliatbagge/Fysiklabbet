@@ -471,6 +471,104 @@ window.KATALOG = {
           },
         },
       },
+      // Matematik fortsättning nivå 1c (Ma3c) byggs ut avsnitt för avsnitt
+      // från den samlade genomgångs-PDF:en i Genomgångar/Matematik
+      // fortsättning nivå 1c/ — se .claude/matematik-3c-plan.md för plan,
+      // sidmappning och status. Avsnitt läggs in här FÖRST när teori +
+      // övningar + exit ticket är klara. Inga simuleringar för matte —
+      // href: null, icon: null.
+      'Matematik fortsättning nivå 1c': {
+        label: 'Matematik fortsättning nivå 1c',
+        intro: {
+          tagline: 'Tredje matematikkursen — derivata, integraler och trigonometri.',
+          paragraphs: [
+            'Matematik fortsättning nivå 1c (Ma3c) tar dig vidare in i analysen. Vi börjar med att räkna med rationella uttryck och närma oss gränsvärden, innan derivatan introduceras som en kurvas lutning i en punkt — först grafiskt med sekanter och tangenter, sedan via definitionen och de deriveringsregler som gör räknandet snabbt. Med derivatan i handen undersöker vi funktioners grafer: växande och avtagande, extrempunkter, andraderivatan och extremvärdesproblem. Därefter vänder vi på steget och integrerar — primitiva funktioner, area under och mellan kurvor och integralkalkylens fundamentalsats. Kursen avslutas med trigonometri: enhetscirkeln, trigonometriska ekvationer och triangelsatserna.',
+            'Fokus ligger på att förstå varför metoderna fungerar — inte bara på att räkna rätt. Varje avsnitt har en teorigenomgång med exempel, övningsuppgifter i tre nivåer och en exit ticket som kollar att du hängt med.',
+          ],
+          bullets: [
+            'Du lär dig: derivator, integraler och trigonometri',
+            'Du tränar på: deriveringsregler, kurvanalys och extremvärdesproblem',
+            'Du möter: gränsvärden, primitiva funktioner och triangelsatserna',
+          ],
+        },
+        chapters: {
+          'Rationella uttryck och gränsvärden': {
+            number: 1,
+            intro: 'Rationella uttryck är bråk med polynom i täljare och nämnare. Vi förkortar och förlänger dem som vanliga bråk — men först måste polynomen faktoriseras, nu med tre metoder inklusive nollställen. Sedan möter vi gränsvärden: vad ett uttryck närmar sig när variabeln går mot ett värde, och hur symbolhanterande hjälpmedel hjälper oss.',
+            sections: [
+              { num: '1.1', title: 'Förkortning och förlängning av rationella uttryck', description: 'Faktorisera täljare och nämnare — med utbrytning, konjugatregeln eller nollställen — och förkorta bort gemensamma faktorer.', href: null, icon: null, keywords: ['rationella uttryck','förkorta','förlänga','faktorisera','polynom','nollställen','konjugatregeln','bryta ut','gemensam faktor'] },
+              { num: '1.2', title: 'Addition och subtraktion av rationella uttryck', description: 'Gör rationella uttryck liknämniga för att addera och subtrahera dem, och lös ekvationer med rationella uttryck genom att multiplicera med MGN eller göra liknämnigt.', href: null, icon: null, keywords: ['rationella uttryck','addera','subtrahera','liknämnigt','MGN','minsta gemensamma nämnaren','ekvationer','definitionsmängd','nollproduktmetoden'] },
+              { num: '1.3', title: 'Multiplikation och division av rationella uttryck', description: 'Multiplicera täljare med täljare och nämnare med nämnare; vid division byts divisionstecknet mot multiplikation och uttrycket i nämnaren inverteras.', href: null, icon: null, keywords: ['rationella uttryck','multiplikation','division','invertera','faktorisera','förkorta','ekvationer','definitionsmängd'] },
+              { num: '1.4', title: 'Gränsvärden', description: 'Bestäm vad ett uttryck närmar sig när variabeln går mot ett tal eller mot en oändlighet — genom insättning, förkortning eller tabeller.', href: null, icon: null, keywords: ['gränsvärde','limes','oändlighet','tabellmetod','förkorta','lim','asymptot'] },
+              { num: '1.5', title: 'Symbolhanterande hjälpmedel', description: 'Geogebra som CAS-verktyg — förenkla och faktorisera uttryck, lös ekvationer exakt eller numeriskt och beräkna gränsvärden.', href: null, icon: null, keywords: ['symbolhanterande hjälpmedel','geogebra','cas','faktorisera','förenkla','lösa ekvationer','gränsvärde','digitala verktyg'] },
+            ],
+          },
+          'Derivatan': {
+            number: 2,
+            intro: 'Derivatan mäter hur snabbt en funktion förändras — kurvans lutning i en punkt. Vi närmar oss den stegvis: först sekantens medellutning mellan två punkter, sedan tangentens lutning i en enda punkt, och till sist derivatans definition som ett gränsvärde. Vi tolkar derivatan som momentan förändringshastighet, beräknar den med digitala verktyg och undersöker när en funktion inte är deriverbar.',
+            sections: [
+              { num: '2.1', title: 'Sekantens lutning', description: 'Beräkna en kurvas medellutning mellan två punkter med sekantens riktningskoefficient, och tolka den som en genomsnittlig förändringshastighet.', href: null, icon: null, keywords: ['sekant','riktningskoefficient','ändringskvot','k-värde','medellutning','förändringshastighet','derivata'] },
+              { num: '2.2', title: 'Tangentens lutning', description: 'Rita en linje som tangerar kurvan i en punkt och beräkna dess lutning genom att läsa av två punkter på tangenten — vid tillämpningar motsvarar lutningen förändringshastigheten i just den punkten.', href: null, icon: null, keywords: ['derivata','tangent','tangentens lutning','riktningskoefficient','förändringshastighet','momentanhastighet','graf','lutning','k-värde'] },
+              { num: '2.3', title: 'Derivatans definition', description: 'Derivatan som gränsvärde: sekantens lutning då avståndet h mellan punkterna går mot 0.', href: null, icon: null, keywords: ['derivata', 'derivatans definition', 'gränsvärde', 'sekant', 'tangent', 'lutning', 'differentialkvot'] },
+              { num: '2.4', title: 'Använda derivata', description: 'Tolka vad f\'(a) betyder som momentan förändringshastighet, och beräkna derivator med symbolhanterande hjälpmedel som Geogebra.', href: null, icon: null, keywords: ['derivata','tolka derivata','förändringshastighet','geogebra','symbolhanterande hjälpmedel','digitala hjälpmedel','momentanhastighet'] },
+              { num: '2.5', title: 'Deriverbarhet och absolutbelopp', description: 'Kontinuerliga och diskontinuerliga funktioner, absolutbelopp och varför en hörnpunkt aldrig är deriverbar.', href: null, icon: null, keywords: ['derivata','deriverbarhet','absolutbelopp','kontinuerlig','diskontinuerlig','hörnpunkt','hörn','hopp','språng','gränsvärde'] },
+            ],
+          },
+          'Deriveringsregler': {
+            number: 3,
+            intro: 'Att derivera med definitionen varje gång är omständligt. Här härleder vi deriveringsreglerna som gör räknandet snabbt: potensregeln för alla reella exponenter, derivering av polynom term för term, och reglerna för exponentialfunktionerna eˣ, eᵏˣ och aˣ. Sedan använder vi dem på tillämpningar — förändringshastigheter och tangentens ekvation — både för hand och med digitala verktyg.',
+            sections: [
+              { num: '3.1', title: 'Derivatan av enkla potensfunktioner', description: 'Deriveringsregler härledda med derivatans definition — potensfunktioner, koefficienter och konstanta funktioner.', href: null, icon: null, keywords: ['derivata','deriveringsregler','potensfunktion','derivatans definition','koefficient','konstant funktion'] },
+              { num: '3.2', title: 'Derivatan av polynomfunktioner', description: 'Derivera ett polynom term för term — samma resultat som med derivatans definition, fast snabbare.', href: null, icon: null, keywords: ['derivata','polynom','deriveringsregler','term för term','potensregeln','summaregeln','polynomfunktion'] },
+              { num: '3.3', title: 'Mer om derivatan av potensfunktioner', description: 'Potensregeln $f\'(x) = ax^{a-1}$ gäller för alla reella exponenter — skriv om rötter och nämnare som potenser innan du deriverar.', href: null, icon: null, keywords: ['derivata','derivering','potensregeln','potensfunktioner','negativa exponenter','rationella exponenter','rotuttryck','deriveringsregler'] },
+              { num: '3.4', title: 'Derivatan av eˣ', description: 'Härledning av talet e som gränsvärdet där derivatan av aˣ blir precis aˣ igen, och deriveringsregeln att f\'(x) = eˣ när f(x) = eˣ.', href: null, icon: null, keywords: ['derivata','exponentialfunktion','talet e','eulers tal','gränsvärde','deriveringsregler','irrationellt tal','eˣ','aˣ'] },
+              { num: '3.5', title: 'Derivatan av eᵏˣ och aˣ', description: 'Derivatan av e^(kx) är k · e^(kx), och av a^x är a^x · ln a — via derivatans definition och en omskrivning till basen e med den naturliga logaritmen.', href: null, icon: null, keywords: ['derivator','deriveringsregler','exponentialfunktioner','derivatan av e^x','naturliga logaritmen','ln','basbyte','exponentialfunktion','lathund'] },
+              { num: '3.6', title: 'Tillämpningar av derivata', description: 'Förändringshastighet vid en tidpunkt, obekanta konstanter i modeller — och tangentens ekvation y = kx + m med k = f\'(a).', href: null, icon: null, keywords: ['derivata','tillämpningar','förändringshastighet','tillväxthastighet','tangent','tangentens ekvation','räta linjens ekvation','konstant','exponentialfunktion','tolka derivata'] },
+              { num: '3.7', title: 'Tillämpningar av derivata med digitala hjälpmedel', description: 'Geogebra som räknehjälp — derivera, lös ekvationer numeriskt eller exakt, och skriv om exponentialmodeller med basen e.', href: null, icon: null, keywords: ['derivata','deriveringsregler','geogebra','digitala hjälpmedel','tillämpningar','exponentialfunktion','basen e','tillväxthastighet','nlös','extrempunkt'] },
+            ],
+          },
+          'Kurvor och extremvärden': {
+            number: 4,
+            intro: 'Med derivatan kan vi läsa av en funktions graf utan att rita den. Derivatans tecken avslöjar var funktionen växer och avtar, dess nollställen ger extrempunkterna, och andraderivatan berättar om kurvans form och inflexionspunkter. Vi hittar största och minsta värdet i ett intervall och löser extremvärdesproblem — optimering av areor, intäkter och volymer — både för hand och med digitala verktyg.',
+            sections: [
+              { num: '4.1', title: 'Växande och avtagande funktion', description: 'Avgör var en funktion växer och avtar genom att studera tecknet på derivatan — direkt ur grafen till f(x) eller ur grafen till f′(x) med en teckentabell.', href: null, icon: null, keywords: ['växande','avtagande','strängt växande','strängt avtagande','derivatans tecken','teckentabell','lutning','graf'] },
+              { num: '4.2', title: 'Derivatans nollställen', description: 'Lös f\'(x) = 0 för att hitta lokala extrempunkter, och avgör deras karaktär — maximi-, minimi- eller terrasspunkt — med en teckentabell.', href: null, icon: null, keywords: ['derivata','extrempunkt','lokal maximipunkt','lokal minimipunkt','terrasspunkt','teckentabell','extremvärde','nollställe','karaktär'] },
+              { num: '4.3', title: 'Största och minsta värde i ett intervall samt kurvkonstruktion', description: 'Det största eller minsta värdet i ett slutet intervall finns bland extrempunkterna eller i intervallets ändpunkter — med samma metod skissar vi grafens kurva.', href: null, icon: null, keywords: ['extremvärde','störst','minst','intervall','ändpunkt','ändpunkter','kurvkonstruktion','teckentabell','maximipunkt','minimipunkt','skissa graf'] },
+              { num: '4.4', title: 'Andraderivatan och funktionens graf', description: 'Andraderivatans tecken avslöjar kurvans form: positiv ger en konvex kurva, negativ en konkav kurva, och en teckenväxling ger en inflexionspunkt.', href: null, icon: null, keywords: ['andraderivata','konvex','konkav','inflexionspunkt','kurvform','derivata','f bis av x'] },
+              { num: '4.5', title: 'Andraderivatan och lokala extrempunkter', description: 'Avgör en extrempunkts karaktär direkt med andraderivatans tecken — positiv ger minimipunkt, negativ ger maximipunkt — som ett snabbare alternativ till teckentabellen.', href: null, icon: null, keywords: ['andraderivata','extrempunkt','maximipunkt','minimipunkt','terrasspunkt','konkav','konvex','teckentabell','lokal extrempunkt'] },
+              { num: '4.6', title: 'Extremvärdesproblem', description: 'Ställ upp en funktion för storheten som ska maximeras eller minimeras, derivera, sätt derivatan lika med 0 och lös — tolka sedan resultatet i sammanhanget.', href: null, icon: null, keywords: ['extremvärdesproblem','optimeringsproblem','optimering','maximal area','maximal intäkt','derivata','extrempunkt','andraderivata','maximivärde','minimivärde'] },
+              { num: '4.7', title: 'Extremvärdesproblem med digitalt hjälpmedel', description: 'Lös samma typ av optimeringsproblem grafiskt i Geogebra — rita funktionen och läs av extrempunkten i stället för att derivera för hand.', href: null, icon: null, keywords: ['extremvärdesproblem','geogebra','digitalt hjälpmedel','extrempunkt','optimering','graf','definitionsmängd'] },
+            ],
+          },
+          'Integraler': {
+            number: 5,
+            intro: 'Integralen är derivatans motsats. Vi börjar med primitiva funktioner — att gå baklänges från derivata till ursprungsfunktion — och bestämmer integrationskonstanten ur ett villkor. Sedan tolkar vi den bestämda integralen som arean under en kurva, beräknar den exakt med integralkalkylens fundamentalsats, och använder integraler för area mellan kurvor och tillämpningar som sträcka ur hastighet.',
+            sections: [
+              { num: '5.1', title: 'Primitiva funktioner', description: 'Gå baklänges från en derivata till dess ursprungliga funktion, med reglerna för potensfunktioner, konstanter och exponentialfunktioner samt konstanten C.', href: null, icon: null, keywords: ['primitiv funktion','primitiva funktioner','antiderivata','baklängesderivata','integraler','deriveringsregler baklänges','potensfunktion','exponentialfunktion','konstant C'] },
+              { num: '5.2', title: 'Primitiva funktioner med villkor', description: 'Bestäm integrationskonstanten C med ett givet villkor — en känd punkt eller ett begynnelsevärde.', href: null, icon: null, keywords: ['integraler','primitiv funktion','villkor','integrationskonstant','sträcka','hastighet','acceleration','integrera'] },
+              { num: '5.3', title: 'Arean under en kurva', description: 'Area under en graf approximeras med rektanglar och beräknas exakt med en bestämd integral.', href: null, icon: null, keywords: ['integral', 'bestämd integral', 'area under kurva', 'riemannsumma', 'integraltecken', 'integrand'] },
+              { num: '5.4', title: 'Integralkalkylens fundamentalsats', description: 'Beräkna en bestämd integral exakt genom att sätta in gränserna i en primitiv funktion — med parentes runt uttrycket vid den undre gränsen så att tecknen blir rätt.', href: null, icon: null, keywords: ['integral','integraler','bestämd integral','integralkalkylens fundamentalsats','primitiv funktion','fundamentalsats','beräkna integraler'] },
+              { num: '5.5', title: 'Beräkna integraler med digitalt hjälpmedel', description: 'Geogebra som räknehjälp — primitiva funktioner och bestämda integraler, exakt i CAS-läget eller som närmevärde i standardläget.', href: null, icon: null, keywords: ['integraler','primitiv funktion','digitalt hjälpmedel','geogebra','cas-läget','standardläget','närmevärde','exakt värde','bestämd integral'] },
+              { num: '5.6', title: 'Area mellan kurvor', description: 'Arean mellan två kurvor ges av integralen av övre funktion minus undre funktion, med skärningspunkterna som integrationsgränser — exakt för hand eller med Geogebras IntegralMellan.', href: null, icon: null, keywords: ['integral', 'area mellan kurvor', 'övre funktion', 'undre funktion', 'skärningspunkter', 'geogebra', 'integralmellan', 'sammansatt area'] },
+              { num: '5.7', title: 'Tillämpningar av integraler', description: 'Integralen som produkten av en beroende och en oberoende variabel — sträcka från hastighet, total omsättning från en förändringstakt.', href: null, icon: null, keywords: ['integraler','tillämpningar','sträcka','hastighet','acceleration','enhetsanalys','tolka integraler','derivera','integrera'] },
+            ],
+          },
+          'Trigonometri och triangelsatserna': {
+            number: 6,
+            intro: 'Trigonometrin knyter ihop vinklar och sträckor. Vi börjar i den rätvinkliga triangeln och utvidgar sinus, cosinus och tangens till alla vinklar med enhetscirkeln. Med den löser vi trigonometriska ekvationer, och med triangelsatserna — areasatsen, sinussatsen och cosinussatsen — beräknar vi sidor, vinklar och areor i vilken triangel som helst.',
+            sections: [
+              { num: '6.1', title: 'Trigonometri i rätvinkliga trianglar', description: 'Repetition från Matematik 1c: tangens, sinus och cosinus samt deras inversa funktioner för att bestämma sidor och vinklar i rätvinkliga trianglar.', href: null, icon: null, keywords: ['trigonometri','rätvinklig triangel','tangens','sinus','cosinus','hypotenusa','katet','motstående katet','närliggande katet','inversa funktioner','arctan','arcsin','arccos'] },
+              { num: '6.2', title: 'Enhetscirkeln', description: 'En cirkel med radien 1 i origo definierar sinus, cosinus och tangens för alla vinklar — sin v är punktens y-koordinat och cos v dess x-koordinat.', href: null, icon: null, keywords: ['enhetscirkeln','enhetscirkel','sinus','cosinus','tangens','vinkel','moturs','negativ vinkel','period','trigonometri'] },
+              { num: '6.3', title: 'Trigonometriska ekvationer', description: 'Lös sin v = a och cos v = a med enhetscirkeln — och hitta båda lösningarna i 0°–360° med räknarens invers.', href: null, icon: null, keywords: ['trigonometri','trigonometriska ekvationer','enhetscirkeln','sinus','cosinus','inversa funktioner','ekvationer','vinklar'] },
+              { num: '6.4', title: 'Trigonometriska ekvationer – räknelektion och tangens', description: 'Lös tan v = a med den inversa funktionen tan⁻¹, och hitta alla lösningar i ett intervall genom att lägga till tangens period 180°.', href: null, icon: null, keywords: ['trigonometriska ekvationer','tangens','tan','invers funktion','period','tangens period','tan⁻¹','lösningar i intervall'] },
+              { num: '6.5', title: 'Areasatsen', description: 'Beräkna en triangels area med två sidor och den mellanliggande vinkeln — utan att känna till höjden.', href: null, icon: null, keywords: ['trigonometri','areasatsen','triangelarea','mellanliggande vinkel','sinus','triangel'] },
+              { num: '6.6', title: 'Sinussatsen', description: 'Kvoten mellan en sida och sinus för dess motstående vinkel är lika för alla tre sidorna — använd sinussatsen när en sida och två vinklar, eller två sidor och en icke-mellanliggande vinkel, är kända.', href: null, icon: null, keywords: ['sinussatsen','triangel','motstående vinkel','sida','vinkel','triangelsatserna','tvetydiga fallet','trigonometri'] },
+              { num: '6.7', title: 'Cosinussatsen', description: 'c² = a² + b² − 2ab · cos C — bestäm en sida med två kända sidor och mellanliggande vinkel, eller en vinkel när alla tre sidorna är kända.', href: null, icon: null, keywords: ['cosinussatsen','triangelsatserna','trigonometri','sinussatsen','vinkel','sida','mellanliggande vinkel'] },
+              { num: '6.8', title: 'Tillämpningar av triangelsatserna', description: 'Välj rätt sats efter vad som är känt i triangeln, och kedja ihop flera trianglar för att lösa verkliga höjd- och avståndsproblem.', href: null, icon: null, keywords: ['triangelsatserna','tillämpningar','areasatsen','sinussatsen','cosinussatsen','höjdvinkel','elevationsvinkel','flaggstång','kulle','problemlösning'] },
+            ],
+          },
+        },
+      },
     },
   },
 };

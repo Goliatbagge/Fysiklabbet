@@ -1,0 +1,183 @@
+{
+ "id": "ma3c-6.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b04a477d65a18de0cda4f0eb9282bf60795acbdd",
+ "dur": 218.86,
+ "segments": [
+  {
+   "t": "Sinussatsen",
+   "s": 0.1,
+   "e": 2.39
+  },
+  {
+   "t": "För att bestämma sidor och vinklar i vissa trianglar kan vi använda oss av sinussatsen.",
+   "s": 2.34,
+   "e": 8.1
+  },
+  {
+   "t": "Sinussatsen",
+   "s": 8.1,
+   "e": 10.36
+  },
+  {
+   "t": "I en triangel A B C med sidorna a , b och c gäller",
+   "s": 10.36,
+   "e": 15.28
+  },
+  {
+   "t": "sinus A delat med a är lika med sinus B delat med b som är lika med sinus C delat med c",
+   "s": 15.28,
+   "e": 22.32
+  },
+  {
+   "t": "eller, alternativt (samma samband upp och ned),",
+   "s": 22.32,
+   "e": 27.16
+  },
+  {
+   "t": "a delat med sinus A är lika med b delat med sinus B som är lika med c delat med sinus C",
+   "s": 27.16,
+   "e": 40.95
+  },
+  {
+   "t": "Sidan a är motstående sida till vinkel A , sidan b är motstående sida till vinkel B och sidan c är motstående sida till vinkel C .",
+   "s": 27.16,
+   "e": 40.95
+  },
+  {
+   "t": "Bevis — Sinussatsen",
+   "s": 40.95,
+   "e": 43.71
+  },
+  {
+   "t": "Vi utgår från areasatsen, som vi bevisade i föregående avsnitt, och multiplicerar alla led med 2.",
+   "s": 43.71,
+   "e": 50.94
+  },
+  {
+   "t": "a b sinus C delat med 2 är lika med a c sinus B delat med 2 som är lika med b c sinus A delat med 2 vilket är ekvivalent med att a b sinus C är lika med a c sinus B som är lika med b c sinus A",
+   "s": 50.94,
+   "e": 64.56
+  },
+  {
+   "t": "Vi dividerar alla led med a b c och förkortar därefter.",
+   "s": 64.56,
+   "e": 69.34
+  },
+  {
+   "t": "a b sinus C delat med a b c är lika med a c sinus B delat med a b c som är lika med b c sinus A delat med a b c vilket är ekvivalent med att sinus C delat med c är lika med sinus B delat med b som är lika med sinus A delat med a",
+   "s": 69.34,
+   "e": 87.81
+  },
+  {
+   "t": "v.s.b.",
+   "s": 69.34,
+   "e": 87.81
+  },
+  {
+   "t": "Sinussatsen går att använda för trianglar med",
+   "s": 69.34,
+   "e": 87.81
+  },
+  {
+   "t": "en sida och två vinklar kända,",
+   "s": 87.81,
+   "e": 91.21
+  },
+  {
+   "t": "två sidor och en icke-mellanliggande vinkel kända.",
+   "s": 91.21,
+   "e": 95.26
+  },
+  {
+   "t": "Exempel 1 — Bestäm en sida med sinussatsen",
+   "s": 95.26,
+   "e": 99.3
+  },
+  {
+   "t": "Bestäm sidan a i triangeln nedan.",
+   "s": 99.3,
+   "e": 102.64
+  },
+  {
+   "t": "Två vinklar och en sida är kända, så vi kan använda sinussatsen.",
+   "s": 102.64,
+   "e": 107.59
+  },
+  {
+   "t": "Vi måste bara först bestämma vinkeln A .",
+   "s": 107.59,
+   "e": 110.97
+  },
+  {
+   "t": "A är lika med 180 grader minus 30 grader minus 70 grader som är lika med 80 grader (vinkelsumman i en triangel)",
+   "s": 110.97,
+   "e": 119.56
+  },
+  {
+   "t": "Sinussatsen a delat med sinus A är lika med b delat med sinus B ger",
+   "s": 119.56,
+   "e": 125.4
+  },
+  {
+   "t": "a delat med sinus 80 grader är lika med 24 delat med sinus 30 grader vilket är ekvivalent med att a är lika med 24 sinus 80 grader delat med sinus 30 grader som är ungefär lika med 47,270 som är ungefär lika med 47,3",
+   "s": 125.4,
+   "e": 140.9
+  },
+  {
+   "t": "Svar: a är ungefär lika med 47,3 centimeter",
+   "s": 140.9,
+   "e": 145.88
+  },
+  {
+   "t": "Exempel 2 — Bestäm en vinkel med sinussatsen",
+   "s": 145.88,
+   "e": 149.91
+  },
+  {
+   "t": "En triangel A B C har sidorna a är lika med 7 centimeter och b är lika med 10 centimeter.",
+   "s": 149.91,
+   "e": 156.78
+  },
+  {
+   "t": "Vinkeln B , mitt emot sidan b , är 40 grader .",
+   "s": 156.78,
+   "e": 161.21
+  },
+  {
+   "t": "Bestäm vinkeln A , mitt emot sidan a .",
+   "s": 161.21,
+   "e": 165.04
+  },
+  {
+   "t": "Vi bestämmer vinkeln A med sinussatsen.",
+   "s": 165.04,
+   "e": 168.75
+  },
+  {
+   "t": "sinus A delat med 7 är lika med sinus 40 grader delat med 10 vilket är ekvivalent med att sinus A är lika med 7 sinus 40 grader delat med 10 som är ungefär lika med 0,449",
+   "s": 168.75,
+   "e": 181.16
+  },
+  {
+   "t": "A ett är lika med sinus upphöjt till minus 1 parentesen 0,449 slut parentes som är ungefär lika med 26,740 grader som är ungefär lika med 26,7 grader",
+   "s": 181.16,
+   "e": 194.32
+  },
+  {
+   "t": "A två är lika med 180 grader minus A ett som är ungefär lika med 180 grader minus 26,7 grader som är lika med 153,3 grader",
+   "s": 194.32,
+   "e": 205.57
+  },
+  {
+   "t": "Vinkeln A två är orimlig eftersom den ger en vinkelsumma över 180 grader (den ena vinkeln är redan 40 grader ).",
+   "s": 205.57,
+   "e": 214.05
+  },
+  {
+   "t": "Svar: A är ungefär lika med 26,7 grader",
+   "s": 214.05,
+   "e": 218.86
+  }
+ ]
+}

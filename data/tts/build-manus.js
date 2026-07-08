@@ -46,6 +46,20 @@ function buildTeori() {
         .replace(/&amp;/g, '&');
     const docs = JSON.parse(json);
 
+    // Normalisera unicode-superscript i rubriker/prosa (t.ex. titeln "Derivatan
+    // av eˣ") som TTS annars läser fel. KaTeX-formler i brödtexten sköts av
+    // manus-lib; detta gäller bara löptext utanför math-block.
+    const normalizeSuper = (s) => s
+        .replace(/eᵏˣ/g, 'e upphöjt till k x')
+        .replace(/eˣ/g, 'e upphöjt till x')
+        .replace(/aˣ/g, 'a upphöjt till x');
+    for (const d of docs) {
+        if (d.title) d.title = normalizeSuper(d.title);
+        for (const seg of (d.segments || [])) {
+            if (seg && seg.t) seg.t = normalizeSuper(seg.t);
+        }
+    }
+
     const errors = docs.filter((d) => d.error);
     if (errors.length) {
         console.warn('\nVARNING: fel i avsnitt:', errors.map((d) => d.id + ': ' + d.error).join('; '));

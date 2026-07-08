@@ -1,0 +1,348 @@
+{
+ "id": "ma3c-1.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "6d8ba9b6db5d12d3ef4211ca356d71cc52964634",
+ "dur": 446.85,
+ "segments": [
+  {
+   "t": "Förkortning och förlängning av rationella uttryck",
+   "s": 0.1,
+   "e": 4.11
+  },
+  {
+   "t": "Ett uttryck där alla variabeltermer har positiva heltalsexponenter kallas polynom.",
+   "s": 4.06,
+   "e": 10.34
+  },
+  {
+   "t": "Ett uttryck med ett polynom i täljare och nämnare kallas rationellt uttryck.",
+   "s": 10.34,
+   "e": 15.97
+  },
+  {
+   "t": "5 x i kvadrat minus 5 x delat med 3 x minus 3 och x plus 3 delat med 8",
+   "s": 15.97,
+   "e": 23.02
+  },
+  {
+   "t": "är exempel på rationella uttryck.",
+   "s": 23.02,
+   "e": 26.27
+  },
+  {
+   "t": "Vi förkortar och förlänger rationella uttryck enligt samma princip som för bråk.",
+   "s": 26.27,
+   "e": 31.84
+  },
+  {
+   "t": "Kom ihåg att vid förkortning och förlängning av bråk eller rationella uttryck så ändras inte storleken på uttrycket.",
+   "s": 31.84,
+   "e": 39.26
+  },
+  {
+   "t": "När vi förkortar rationella uttryck gör vi det genom att faktorisera för att hitta gemensamma faktorer.",
+   "s": 39.26,
+   "e": 45.84
+  },
+  {
+   "t": "Sedan tidigare har vi två metoder för att faktorisera polynom:",
+   "s": 45.84,
+   "e": 52.24
+  },
+  {
+   "t": "Bryta ut gemensam faktor.",
+   "s": 45.84,
+   "e": 52.24
+  },
+  {
+   "t": "Kvadreringsreglerna eller konjugatregeln baklänges.",
+   "s": 52.24,
+   "e": 56.64
+  },
+  {
+   "t": "Det finns en tredje metod för att faktorisera vilket polynomuttryck som helst — genom att bestämma polynomets nollställen!",
+   "s": 56.64,
+   "e": 64.01
+  },
+  {
+   "t": "I Matematik 2c konstaterade vi att ett polynom p parentesen x slut parentes med nollställena x ett, x två,, x n kunde skrivas enligt p parentesen x slut parentes är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes parentesen x minus x n slut parentes .",
+   "s": 64.01,
+   "e": 84.79
+  },
+  {
+   "t": "Detta är en faktorisering.",
+   "s": 84.79,
+   "e": 87.79
+  },
+  {
+   "t": "Faktorisera med nollställen",
+   "s": 87.79,
+   "e": 90.72
+  },
+  {
+   "t": "Ett polynom p parentesen x slut parentes av grad n med nollställena x ett, x två,, x n kan faktoriseras enligt",
+   "s": 90.72,
+   "e": 100.05
+  },
+  {
+   "t": "p parentesen x slut parentes är lika med k parentesen x minus x ett slut parentes parentesen x minus x två slut parentes parentesen x minus x n slut parentes",
+   "s": 100.05,
+   "e": 112.88
+  },
+  {
+   "t": "där k är koefficienten framför x -termen med högst grad (exponent).",
+   "s": 112.88,
+   "e": 118.66
+  },
+  {
+   "t": "I uppgifter där vi ska faktorisera uttryck, t.ex. när vi ska förenkla rationella uttryck, har vi nu tre metoder.",
+   "s": 118.66,
+   "e": 126.58
+  },
+  {
+   "t": "Faktorisera",
+   "s": 126.58,
+   "e": 128.64
+  },
+  {
+   "t": "Bryt ut gemensam faktor.",
+   "s": 128.64,
+   "e": 131.59
+  },
+  {
+   "t": "Kvadreringsreglerna eller konjugatregeln baklänges.",
+   "s": 131.59,
+   "e": 135.95
+  },
+  {
+   "t": "Med hjälp av nollställen.",
+   "s": 135.95,
+   "e": 138.53
+  },
+  {
+   "t": "Förläng och förkorta",
+   "s": 138.53,
+   "e": 140.9
+  },
+  {
+   "t": "Vi repeterar först principen med några exempel med bråk.",
+   "s": 140.9,
+   "e": 145.4
+  },
+  {
+   "t": "Därefter går vi över till rationella uttryck.",
+   "s": 145.4,
+   "e": 149.36
+  },
+  {
+   "t": "Att förlänga innebär att multiplicera både täljare och nämnare med samma tal eller uttryck.",
+   "s": 149.36,
+   "e": 155.54
+  },
+  {
+   "t": "Att förkorta innebär att dividera både täljare och nämnare med en gemensam faktor.",
+   "s": 155.54,
+   "e": 161.29
+  },
+  {
+   "t": "Exempel 1 — Förläng ett bråk",
+   "s": 161.29,
+   "e": 164.51
+  },
+  {
+   "t": "Förläng 3 delat med 4 med 5.",
+   "s": 164.51,
+   "e": 167.78
+  },
+  {
+   "t": "Vi multiplicerar både täljare och nämnare med 5.",
+   "s": 167.78,
+   "e": 171.99
+  },
+  {
+   "t": "3 delat med 4 är lika med 3 gånger 5 delat med 4 gånger 5 som är lika med 15 delat med 20",
+   "s": 171.99,
+   "e": 179.44
+  },
+  {
+   "t": "Svar: 15 delat med 20",
+   "s": 179.44,
+   "e": 182.89
+  },
+  {
+   "t": "Exempel 2 — Förkorta ett bråk",
+   "s": 182.89,
+   "e": 186.28
+  },
+  {
+   "t": "Förkorta 14 delat med 21 .",
+   "s": 186.28,
+   "e": 189.7
+  },
+  {
+   "t": "Vi ska försöka hitta gemensamma delare till 14 och 21.",
+   "s": 189.7,
+   "e": 194.43
+  },
+  {
+   "t": "Vid mindre tal kan vi ganska lätt hitta en gemensam delare (i detta fall 7).",
+   "s": 194.43,
+   "e": 200.04
+  },
+  {
+   "t": "Alternativt kan vi primtalsfaktorisera täljare och nämnare och därefter förkorta med gemensamma faktorer, vilket är lämpligt för större tal.",
+   "s": 200.04,
+   "e": 208.89
+  },
+  {
+   "t": "Alternativ 1: Vi ser att största gemensamma delaren till 14 och 21 är 7 och förkortar med den.",
+   "s": 208.89,
+   "e": 216.05
+  },
+  {
+   "t": "14 delat med 21 är lika med 14 delat med 7 delat med 21 delat med 7 som är lika med 2 delat med 3",
+   "s": 216.05,
+   "e": 224.03
+  },
+  {
+   "t": "Alternativ 2: Med primtalsfaktorisering.",
+   "s": 224.03,
+   "e": 228.16
+  },
+  {
+   "t": "14 delat med 21 är lika med 2 gånger 7 delat med 3 gånger 7 som är lika med 2 delat med 3",
+   "s": 228.16,
+   "e": 235.34
+  },
+  {
+   "t": "Svar: 2 delat med 3",
+   "s": 235.34,
+   "e": 238.44
+  },
+  {
+   "t": "Exempel 3 — Förläng ett rationellt uttryck",
+   "s": 238.44,
+   "e": 242.46
+  },
+  {
+   "t": "Förläng x plus 3 delat med 8 med parentesen x minus 2 slut parentes .",
+   "s": 242.46,
+   "e": 248.79
+  },
+  {
+   "t": "Svara i faktoriserad form och i utvecklad form.",
+   "s": 248.79,
+   "e": 252.99
+  },
+  {
+   "t": "Vi multiplicerar täljare och nämnare med parentesen x minus 2 slut parentes .",
+   "s": 252.99,
+   "e": 259.27
+  },
+  {
+   "t": "x plus 3 delat med 8 är lika med parentesen x plus 3 slut parentes parentesen x minus 2 slut parentes delat med 8 parentesen x minus 2 slut parentes som är lika med x i kvadrat plus x minus 6 delat med 8 x minus 16",
+   "s": 259.27,
+   "e": 275.95
+  },
+  {
+   "t": "Svar: parentesen x plus 3 slut parentes parentesen x minus 2 slut parentes delat med 8 parentesen x minus 2 slut parentes (faktoriserad form) eller x i kvadrat plus x minus 6 delat med 8 x minus 16 (utvecklad form)",
+   "s": 275.95,
+   "e": 293.38
+  },
+  {
+   "t": "Exempel 4 — Förkorta rationella uttryck",
+   "s": 293.38,
+   "e": 297.46
+  },
+  {
+   "t": "Förkorta",
+   "s": 297.46,
+   "e": 299.31
+  },
+  {
+   "t": "a) 35 x i kubik delat med 30 x upphöjt till 5 b) 5 x i kvadrat minus 5 x delat med 3 x minus 3 c) x i kvadrat minus 8 x plus 7 delat med x minus 1",
+   "s": 299.31,
+   "e": 313.07
+  },
+  {
+   "t": "a) Detta uttryck har en enda term i både täljare och nämnare, så vi skriver ut samtliga faktorer för att se vilka förkortningar som är möjliga.",
+   "s": 313.07,
+   "e": 324.0
+  },
+  {
+   "t": "35 x i kubik delat med 30 x upphöjt till 5 är lika med 7 gånger 5 gånger x gånger x gånger x delat med 5 gånger 3 gånger 2 gånger x gånger x gånger x gånger x gånger x som är lika med 7 delat med 3 gånger 2 gånger x gånger x som är lika med 7 delat med 6 x i kvadrat",
+   "s": 323.95,
+   "e": 343.14
+  },
+  {
+   "t": "b) Detta uttryck har flera termer i täljare och nämnare.",
+   "s": 343.14,
+   "e": 348.06
+  },
+  {
+   "t": "Vi utnyttjar samma princip som för bråken: vi skriver om täljare och nämnare som multiplikationer, dvs. vi faktoriserar dem.",
+   "s": 348.06,
+   "e": 356.74
+  },
+  {
+   "t": "Vi bryter ut största gemensamma faktorn i täljaren respektive nämnaren och förkortar sedan.",
+   "s": 356.74,
+   "e": 362.86
+  },
+  {
+   "t": "5 x i kvadrat minus 5 x delat med 3 x minus 3 är lika med 5 x parentesen x minus 1 slut parentes delat med 3 parentesen x minus 1 slut parentes som är lika med 5 x delat med 3",
+   "s": 362.86,
+   "e": 376.4
+  },
+  {
+   "t": "c) Nämnaren x minus 1 kan inte faktoriseras mer.",
+   "s": 376.4,
+   "e": 381.42
+  },
+  {
+   "t": "Täljaren kan inte faktoriseras med metod 1 eller 2, så vi bestämmer dess nollställen genom att sätta uttrycket lika med noll och lösa ekvationen.",
+   "s": 381.42,
+   "e": 390.5
+  },
+  {
+   "t": "x i kvadrat minus 8 x plus 7 är lika med 0",
+   "s": 390.5,
+   "e": 395.09
+  },
+  {
+   "t": "Vi använder p q -formeln och får",
+   "s": 395.09,
+   "e": 398.65
+  },
+  {
+   "t": "x är lika med 4 plus minus roten ur 4 i kvadrat minus 7 x som är lika med 4 plus minus roten ur 9 x som är lika med 4 plus minus 3",
+   "s": 398.65,
+   "e": 409.19
+  },
+  {
+   "t": "vilket ger x ett är lika med 4 minus 3 som är lika med 1 och x två är lika med 4 plus 3 som är lika med 7 .",
+   "s": 409.19,
+   "e": 417.01
+  },
+  {
+   "t": "Täljaren har alltså nollställena 1 och 7 och kan då faktoriseras som parentesen x minus 1 slut parentes parentesen x minus 7 slut parentes .",
+   "s": 417.01,
+   "e": 426.91
+  },
+  {
+   "t": "Detta ger",
+   "s": 426.91,
+   "e": 428.9
+  },
+  {
+   "t": "x i kvadrat minus 8 x plus 7 delat med x minus 1 är lika med parentesen x minus 1 slut parentes parentesen x minus 7 slut parentes delat med parentesen x minus 1 slut parentes som är lika med x minus 7",
+   "s": 428.9,
+   "e": 444.02
+  },
+  {
+   "t": "Svar: x minus 7",
+   "s": 444.02,
+   "e": 446.85
+  }
+ ]
+}

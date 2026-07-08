@@ -1,0 +1,218 @@
+{
+ "id": "ma3c-5.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "9e42d550b0002234425f95232dadb7f027925405",
+ "dur": 247.74,
+ "segments": [
+  {
+   "t": "Beräkna integraler med digitalt hjälpmedel",
+   "s": 0.1,
+   "e": 4.03
+  },
+  {
+   "t": "Vi kan använda digitala hjälpmedel, till exempel Geogebra, för att beräkna primitiva funktioner och bestämda integraler.",
+   "s": 3.98,
+   "e": 11.89
+  },
+  {
+   "t": "Beroende på om du arbetar i Geogebras standardläge eller CAS-läge får du antingen ett numeriskt närmevärde eller ett exakt svar.",
+   "s": 11.89,
+   "e": 20.01
+  },
+  {
+   "t": "Beräkna primitiva funktioner och integraler i Geogebra",
+   "s": 20.01,
+   "e": 24.69
+  },
+  {
+   "t": "Bestämma en primitiv funktion (standardläget)",
+   "s": 24.69,
+   "e": 29.04
+  },
+  {
+   "t": "I inmatningsfältet, skriv \"Integral\" och välj Integral( Funktion ).",
+   "s": 29.04,
+   "e": 34.66
+  },
+  {
+   "t": "Mata in funktionsuttrycket, utan f av x är lika med .",
+   "s": 34.66,
+   "e": 39.59
+  },
+  {
+   "t": "Enter ger en primitiv funktion.",
+   "s": 39.59,
+   "e": 42.77
+  },
+  {
+   "t": "Bestämma samtliga primitiva funktioner (CAS-läget)",
+   "s": 42.77,
+   "e": 47.19
+  },
+  {
+   "t": "I inmatningsfältet, skriv \"Integral\" och välj Integral( Funktion ).",
+   "s": 47.19,
+   "e": 52.85
+  },
+  {
+   "t": "Mata in funktionsuttrycket, utan f av x är lika med .",
+   "s": 52.85,
+   "e": 57.79
+  },
+  {
+   "t": "Enter ger samtliga primitiva funktioner, med konstanten c ett .",
+   "s": 57.79,
+   "e": 62.89
+  },
+  {
+   "t": "Beräkna integral exakt (CAS-läget)",
+   "s": 62.89,
+   "e": 67.06
+  },
+  {
+   "t": "I inmatningsfältet, skriv \"Integral\" och välj Integral( Funktion, Från x-värde, Till x-värde ).",
+   "s": 67.06,
+   "e": 75.0
+  },
+  {
+   "t": "Mata in funktionsuttrycket, utan f av x .",
+   "s": 75.0,
+   "e": 79.47
+  },
+  {
+   "t": "Pil höger och skriv undre integrationsgränsen.",
+   "s": 79.47,
+   "e": 83.49
+  },
+  {
+   "t": "Pil höger och skriv övre integrationsgränsen.",
+   "s": 83.49,
+   "e": 87.47
+  },
+  {
+   "t": "Enter ger det exakta svaret.",
+   "s": 87.47,
+   "e": 90.41
+  },
+  {
+   "t": "Beräkna integral med närmevärde (standardläget)",
+   "s": 90.41,
+   "e": 95.04
+  },
+  {
+   "t": "I inmatningsfältet, skriv \"Integral\" och välj Integral( Funktion, Från x-värde, Till x-värde ).",
+   "s": 95.04,
+   "e": 102.92
+  },
+  {
+   "t": "Mata in funktionsuttrycket, utan f av x .",
+   "s": 102.92,
+   "e": 107.4
+  },
+  {
+   "t": "Pil höger och skriv undre integrationsgränsen.",
+   "s": 107.4,
+   "e": 111.42
+  },
+  {
+   "t": "Pil höger och skriv övre integrationsgränsen.",
+   "s": 111.42,
+   "e": 115.4
+  },
+  {
+   "t": "Enter ger ett närmevärde (ungefärligt värde).",
+   "s": 115.4,
+   "e": 119.34
+  },
+  {
+   "t": "Kommandot Integral har alltså flera varianter beroende på vad du matar in: med bara ett funktionsuttryck ger det en primitiv funktion, och med två gränser dessutom ger det integralens värde.",
+   "s": 119.34,
+   "e": 130.12
+  },
+  {
+   "t": "CAS-läget ger exakta svar (bråk, rotuttryck) medan standardläget ger numeriska närmevärden — välj läge efter vilken sorts svar uppgiften efterfrågar.",
+   "s": 130.12,
+   "e": 140.59
+  },
+  {
+   "t": "Exempel 1 — Beräkna en bestämd integral med digitalt hjälpmedel",
+   "s": 140.59,
+   "e": 145.81
+  },
+  {
+   "t": "Beräkna integralen av ett upphöjt till 5 parentesen x i kvadrat minus 4 slut parentes d x med ett digitalt hjälpmedel.",
+   "s": 145.81,
+   "e": 155.09
+  },
+  {
+   "t": "Svara. a) med ett närmevärde b) exakt.",
+   "s": 155.09,
+   "e": 160.5
+  },
+  {
+   "t": "a) I Geogebras standardläge skriver vi \"Integral\" och väljer Integral( Funktion, Från x-värde, Till x-värde ) i menyn Integral.",
+   "s": 160.5,
+   "e": 170.21
+  },
+  {
+   "t": "I inmatningsfältet skriver vi sedan \"Integral parentesen x i kvadrat minus 4, 1, 5 slut parentes \" och får x är ungefär lika med 25,3 .",
+   "s": 170.21,
+   "e": 180.68
+  },
+  {
+   "t": "Svar: x är ungefär lika med 25,3",
+   "s": 180.68,
+   "e": 185.28
+  },
+  {
+   "t": "b) Vi byter till Geogebras CAS-läge.",
+   "s": 185.28,
+   "e": 189.31
+  },
+  {
+   "t": "I inmatningsfältet skriver vi sedan, precis som i a-uppgiften, \"Integral parentesen x i kvadrat minus 4, 1, 5 slut parentes \" och får",
+   "s": 189.31,
+   "e": 199.5
+  },
+  {
+   "t": "x är lika med 76 delat med 3",
+   "s": 199.5,
+   "e": 203.18
+  },
+  {
+   "t": "Svar: 76 delat med 3",
+   "s": 203.18,
+   "e": 206.5
+  },
+  {
+   "t": "Exempel 2 — Bestämma en primitiv funktion med digitalt hjälpmedel",
+   "s": 206.5,
+   "e": 211.68
+  },
+  {
+   "t": "Ange en primitiv funktion till f av x är lika med x i kvadrat minus 4 .",
+   "s": 211.68,
+   "e": 217.4
+  },
+  {
+   "t": "I Geogebras standardläge skriver vi \"Integral\" och väljer Integral( Funktion ) i menyn Integral.",
+   "s": 217.4,
+   "e": 224.65
+  },
+  {
+   "t": "I inmatningsfältet skriver vi sedan \"Integral parentesen x i kvadrat minus 4 slut parentes \" och får",
+   "s": 224.65,
+   "e": 232.05
+  },
+  {
+   "t": "1 delat med 3 x i kubik minus 4 x",
+   "s": 232.05,
+   "e": 247.74
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med 1 delat med 3 x i kubik minus 4 x alternativt F parentesen x slut parentes är lika med x i kubik delat med 3 minus 4 x",
+   "s": 232.05,
+   "e": 247.74
+  }
+ ]
+}

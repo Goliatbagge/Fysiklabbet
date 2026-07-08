@@ -1,0 +1,468 @@
+{
+ "id": "ma3c-3.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "00134972d437d9b8e6c6bb1073ae90ae7c2823fd",
+ "dur": 709.14,
+ "segments": [
+  {
+   "t": "Derivatan av e upphöjt till k x och a upphöjt till x",
+   "s": 0.1,
+   "e": 4.94
+  },
+  {
+   "t": "Vi har sett att derivatan till f av x är lika med e upphöjt till x är f prim parentesen x slut parentes är lika med e upphöjt till x , eller ännu mer generellt att derivatan till f av x är lika med a e upphöjt till x är f prim parentesen x slut parentes är lika med a e upphöjt till x — funktionerna är sina egna derivator.",
+   "s": 4.89,
+   "e": 23.89
+  },
+  {
+   "t": "Nu undersöker vi derivatan till en exponentialfunktion med en koefficient i exponenten, f av x är lika med e upphöjt till k x , med hjälp av derivatans definition.",
+   "s": 23.89,
+   "e": 34.79
+  },
+  {
+   "t": "Koefficient i exponenten",
+   "s": 34.79,
+   "e": 37.74
+  },
+  {
+   "t": "Derivatan för f av x är lika med e upphöjt till k x med derivatans definition",
+   "s": 37.74,
+   "e": 43.92
+  },
+  {
+   "t": "Vi undersöker derivatan för f av x är lika med e upphöjt till k x genom att studera derivatan till f av x är lika med e upphöjt till 3 x med derivatans definition.",
+   "s": 43.92,
+   "e": 54.42
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 e upphöjt till 3 parentesen x plus h slut parentes minus e upphöjt till 3 x delat med h som är lika med gränsvärdet då h går mot 0 e upphöjt till 3 x plus 3 timmar minus e upphöjt till 3 x delat med h som är lika med gränsvärdet då h går mot 0 e upphöjt till 3 x gånger e upphöjt till 3 timmar minus e upphöjt till 3 x delat med h som är lika med gränsvärdet då h går mot 0 e upphöjt till 3 x parentesen e upphöjt till 3 timmar minus 1 slut parentes delat med h",
+   "s": 54.42,
+   "e": 94.38
+  },
+  {
+   "t": "Eftersom faktorn e upphöjt till 3 x inte beror av h kan den flyttas framför gränsvärdet, så",
+   "s": 94.38,
+   "e": 101.29
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med e upphöjt till 3 x gränsvärdet då h går mot 0 e upphöjt till 3 timmar minus 1 delat med h",
+   "s": 101.29,
+   "e": 110.95
+  },
+  {
+   "t": "Med räknare kan vi visa att gränsvärdet då h \\to 0 e upphöjt till 3 timmar minus 1 delat med h går mot 3 när h går mot 0, så",
+   "s": 110.95,
+   "e": 120.58
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med e upphöjt till 3 x gånger 3",
+   "s": 120.58,
+   "e": 126.69
+  },
+  {
+   "t": "f av x är lika med e upphöjt till 3 x har alltså derivatan f prim parentesen x slut parentes är lika med 3 e upphöjt till 3 x .",
+   "s": 126.69,
+   "e": 136.14
+  },
+  {
+   "t": "På motsvarande sätt kan vi visa att t.ex. f av x är lika med e upphöjt till 4 x har derivatan f prim parentesen x slut parentes är lika med 4 e upphöjt till 4 x och att f av x är lika med e upphöjt till 5 x har derivatan f prim parentesen x slut parentes är lika med 5 e upphöjt till 5 x .",
+   "s": 136.14,
+   "e": 155.19
+  },
+  {
+   "t": "Slutsats: Om f av x är lika med e upphöjt till k x så gäller att f prim parentesen x slut parentes är lika med k e upphöjt till k x .",
+   "s": 155.19,
+   "e": 165.03
+  },
+  {
+   "t": "Derivatan av f av x är lika med e upphöjt till k x",
+   "s": 165.03,
+   "e": 169.97
+  },
+  {
+   "t": "Om f av x är lika med e upphöjt till k x så gäller att",
+   "s": 169.97,
+   "e": 174.81
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med k gånger e upphöjt till k x",
+   "s": 174.81,
+   "e": 184.86
+  },
+  {
+   "t": "Exempel 1 — Derivera exponentialfunktioner med basen e",
+   "s": 174.81,
+   "e": 184.86
+  },
+  {
+   "t": "Derivera. a) f av x är lika med 3 e upphöjt till x b) f av x är lika med e upphöjt till 4 x c) f av x är lika med 2 e upphöjt till 5 x d) f av x är lika med 12 e upphöjt till x delat med 3",
+   "s": 174.81,
+   "e": 198.46
+  },
+  {
+   "t": "a) När vi deriverar en exponentialfunktion med basen e utan koefficient i exponenten blir derivatan densamma som funktionen.",
+   "s": 198.46,
+   "e": 207.56
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 3 e upphöjt till x",
+   "s": 207.56,
+   "e": 223.45
+  },
+  {
+   "t": "b) När vi deriverar en exponentialfunktion med basen e med en koefficient i exponenten blir derivatan densamma, fast vi multiplicerar med koefficienten i exponenten.",
+   "s": 207.56,
+   "e": 223.45
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 4 e upphöjt till 4 x",
+   "s": 223.45,
+   "e": 237.89
+  },
+  {
+   "t": "c) En koefficient framför exponentialfunktionen behålls när vi deriverar, och vi multiplicerar dessutom med koefficienten i exponenten.",
+   "s": 223.45,
+   "e": 237.89
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 5 gånger 2 e upphöjt till 5 x som är lika med 10 e upphöjt till 5 x",
+   "s": 237.89,
+   "e": 256.89
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 10 e upphöjt till 5 x",
+   "s": 237.89,
+   "e": 256.89
+  },
+  {
+   "t": "d) Har vi i stället en division i exponenten dividerar vi koefficienten framför med samma nämnare.",
+   "s": 237.89,
+   "e": 256.89
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 12 e upphöjt till x delat med 3 delat med 3 som är lika med 4 e upphöjt till x delat med 3",
+   "s": 256.89,
+   "e": 266.52
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 4 e upphöjt till x delat med 3",
+   "s": 266.52,
+   "e": 273.46
+  },
+  {
+   "t": "Nu har vi deriveringsregler för alla exponentialfunktioner med basen e .",
+   "s": 273.46,
+   "e": 280.71
+  },
+  {
+   "t": "Men vad gäller för derivatan till en exponentialfunktion med en annan bas än e , t.ex. f av x är lika med 2 upphöjt till x eller f av x är lika med 3 upphöjt till 5 x ?",
+   "s": 280.67,
+   "e": 292.1
+  },
+  {
+   "t": "För att ta reda på det behöver vi först repetera tiologaritmer och införa en ny logaritm.",
+   "s": 292.1,
+   "e": 298.09
+  },
+  {
+   "t": "Naturliga logaritmen",
+   "s": 298.09,
+   "e": 300.71
+  },
+  {
+   "t": "Tiologaritmer (repetition) och den naturliga logaritmen",
+   "s": 300.71,
+   "e": 305.33
+  },
+  {
+   "t": "Tiologaritmen skrivs 10-logaritmen eller förkortat lg.",
+   "s": 305.33,
+   "e": 310.19
+  },
+  {
+   "t": "logaritmen av 100 är \"det tal vi ska upphöja 10 till för att svaret ska bli 100\".",
+   "s": 310.19,
+   "e": 316.48
+  },
+  {
+   "t": "Eftersom 10 i kvadrat är lika med 100 är alltså logaritmen av 100 är lika med 2 .",
+   "s": 316.48,
+   "e": 323.17
+  },
+  {
+   "t": "Eftersom logaritmen av 100 är lika med 2 gäller",
+   "s": 323.17,
+   "e": 327.71
+  },
+  {
+   "t": "10 i kvadrat är lika med 10 upphöjt till logaritmen av 100 som är lika med 100, dvs. 10 upphöjt till logaritmen av 100 som är lika med 100",
+   "s": 327.71,
+   "e": 338.19
+  },
+  {
+   "t": "På motsvarande sätt gäller 10 upphöjt till logaritmen av 1000 är lika med 1000 och 10 upphöjt till logaritmen av 7 är lika med 7 och så vidare.",
+   "s": 338.19,
+   "e": 347.87
+  },
+  {
+   "t": "Nu inför vi en ny logaritm, e -logaritmen.",
+   "s": 347.87,
+   "e": 352.17
+  },
+  {
+   "t": "Den fungerar på exakt samma sätt som tiologaritmen, men har i stället talet e som bas.",
+   "s": 352.17,
+   "e": 358.54
+  },
+  {
+   "t": "e -logaritmen skrivs e-logaritmen eller förkortat ln och kallas för den naturliga logaritmen.",
+   "s": 358.54,
+   "e": 365.04
+  },
+  {
+   "t": "Så naturliga logaritmen av 5 är \"det tal vi ska upphöja e till för att svaret ska bli 5\".",
+   "s": 365.04,
+   "e": 371.15
+  },
+  {
+   "t": "Eftersom e är det irrationella talet 2,718 är det svårt att beräkna naturliga logaritmen av 5 med huvudräkning.",
+   "s": 371.15,
+   "e": 379.46
+  },
+  {
+   "t": "På räknaren finns en knapp märkt \"ln\" som ger ett närmevärde på naturliga logaritmen av 5 .",
+   "s": 379.46,
+   "e": 385.62
+  },
+  {
+   "t": "Hitta den!",
+   "s": 385.62,
+   "e": 387.55
+  },
+  {
+   "t": "naturliga logaritmen av 5 är ungefär lika med 1,61",
+   "s": 387.55,
+   "e": 392.54
+  },
+  {
+   "t": "dvs. e upphöjt till 1,61 är ungefär lika med 5 .",
+   "s": 392.54,
+   "e": 397.67
+  },
+  {
+   "t": "Exakt kan vi skriva e upphöjt till naturliga logaritmen av 5 är lika med 5 .",
+   "s": 397.67,
+   "e": 403.39
+  },
+  {
+   "t": "På motsvarande sätt som för tiologaritmen gäller e upphöjt till naturliga logaritmen av 12 är lika med 12 och så vidare.",
+   "s": 403.39,
+   "e": 411.26
+  },
+  {
+   "t": "Andra baser än e",
+   "s": 411.26,
+   "e": 417.94
+  },
+  {
+   "t": "Derivatan för f av x är lika med a upphöjt till x med annan bas än e",
+   "s": 411.26,
+   "e": 417.94
+  },
+  {
+   "t": "Vi undersöker derivatan för f av x är lika med a upphöjt till x med annan bas än e genom att studera derivatan till f av x är lika med 5 upphöjt till x .",
+   "s": 417.94,
+   "e": 427.71
+  },
+  {
+   "t": "Vi gör det genom att skriva om basen 5 till basen e — och sedan derivera som vanligt med regeln för f av x är lika med e upphöjt till k x .",
+   "s": 427.71,
+   "e": 436.28
+  },
+  {
+   "t": "Vi skriver om basen 5 till basen e enligt principen 5 är lika med e upphöjt till naturliga logaritmen av 5 , så",
+   "s": 436.28,
+   "e": 444.39
+  },
+  {
+   "t": "f av x är lika med 5 upphöjt till x som är lika med parentesen e upphöjt till naturliga logaritmen av 5 slut parentes upphöjt till x som är lika med e upphöjt till parentesen naturliga logaritmen av 5 slut parentes gånger x",
+   "s": 444.39,
+   "e": 458.88
+  },
+  {
+   "t": "Sedan deriverar vi enligt deriveringsregeln för f av x är lika med e upphöjt till k x , med k är lika med naturliga logaritmen av 5 :",
+   "s": 458.88,
+   "e": 477.23
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med naturliga logaritmen av 5 gånger e upphöjt till parentesen naturliga logaritmen av 5 slut parentes gånger x",
+   "s": 458.88,
+   "e": 477.23
+  },
+  {
+   "t": "Vi \"skriver tillbaka\" e upphöjt till naturliga logaritmen av 5 som 5:",
+   "s": 477.23,
+   "e": 497.55
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med naturliga logaritmen av 5 gånger 5 upphöjt till x",
+   "s": 477.23,
+   "e": 497.55
+  },
+  {
+   "t": "f av x är lika med 5 upphöjt till x har alltså derivatan f prim parentesen x slut parentes är lika med 5 upphöjt till x gånger naturliga logaritmen av 5 .",
+   "s": 477.23,
+   "e": 497.55
+  },
+  {
+   "t": "På motsvarande sätt kan vi visa att t.ex. f av x är lika med 7 upphöjt till x har derivatan f prim parentesen x slut parentes är lika med 7 upphöjt till x gånger naturliga logaritmen av 7 och att f av x är lika med 1,14 upphöjt till x har derivatan f prim parentesen x slut parentes är lika med 1,14 upphöjt till x gånger naturliga logaritmen av 1,14 .",
+   "s": 497.55,
+   "e": 521.13
+  },
+  {
+   "t": "Slutsats: Om f av x är lika med a upphöjt till x så gäller att f prim parentesen x slut parentes är lika med a upphöjt till x naturliga logaritmen av a .",
+   "s": 521.13,
+   "e": 531.29
+  },
+  {
+   "t": "Derivatan av f av x är lika med a upphöjt till x",
+   "s": 531.29,
+   "e": 535.88
+  },
+  {
+   "t": "Om f av x är lika med a upphöjt till x så gäller att",
+   "s": 535.88,
+   "e": 540.28
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med a upphöjt till x gånger naturliga logaritmen av a",
+   "s": 540.28,
+   "e": 547.38
+  },
+  {
+   "t": "Om vi lägger ihop alla deriveringsregler vi nu har kommit fram till för exponentialfunktioner kan vi sammanfatta dem i en enda \"lathund\" som alltid fungerar.",
+   "s": 547.38,
+   "e": 558.41
+  },
+  {
+   "t": "Lathund för att derivera exponentialfunktioner",
+   "s": 558.36,
+   "e": 562.49
+  },
+  {
+   "t": "Skriv av den ursprungliga funktionen.",
+   "s": 562.49,
+   "e": 565.9
+  },
+  {
+   "t": "Ändra ingenting.",
+   "s": 565.9,
+   "e": 568.3
+  },
+  {
+   "t": "Multiplicera med koefficienten framför variabeln i exponenten.",
+   "s": 568.3,
+   "e": 573.21
+  },
+  {
+   "t": "Är basen en annan än e , multiplicera även med naturliga logaritmen av för den basen.",
+   "s": 573.21,
+   "e": 579.65
+  },
+  {
+   "t": "Exempel 2 — Derivera exponentialfunktioner med annan bas än e",
+   "s": 579.65,
+   "e": 585.46
+  },
+  {
+   "t": "Derivera. a) f av x är lika med 12 upphöjt till x b) f av x är lika med 3 gånger 7 upphöjt till x c) f av x är lika med 4 upphöjt till 3 x d) f av x är lika med 5 gånger 8 upphöjt till 6 x",
+   "s": 579.65,
+   "e": 603.35
+  },
+  {
+   "t": "a) Vi har en exponentialfunktion, så vi skriver först av funktionen.",
+   "s": 585.46,
+   "e": 603.35
+  },
+  {
+   "t": "Eftersom vi har en annan bas än e multiplicerar vi med naturliga logaritmen av för basen, alltså med naturliga logaritmen av 12 .",
+   "s": 603.35,
+   "e": 611.89
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 12 upphöjt till x gånger naturliga logaritmen av 12",
+   "s": 611.89,
+   "e": 619.94
+  },
+  {
+   "t": "b) Vi skriver först av funktionen.",
+   "s": 619.94,
+   "e": 623.43
+  },
+  {
+   "t": "Eftersom vi har en annan bas än e multiplicerar vi med naturliga logaritmen av 7 .",
+   "s": 623.43,
+   "e": 629.51
+  },
+  {
+   "t": "Koefficienten framför ekvation 3 behålls.",
+   "s": 629.51,
+   "e": 633.36
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 3 gånger 7 upphöjt till x gånger naturliga logaritmen av 7",
+   "s": 633.36,
+   "e": 641.89
+  },
+  {
+   "t": "c) Vi skriver först av funktionen.",
+   "s": 641.89,
+   "e": 645.55
+  },
+  {
+   "t": "Eftersom vi har en koefficient i exponenten ekvation 3 multiplicerar vi med den.",
+   "s": 645.55,
+   "e": 651.61
+  },
+  {
+   "t": "Eftersom vi har en annan bas än e multiplicerar vi även med naturliga logaritmen av 4 .",
+   "s": 651.61,
+   "e": 657.88
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 3 gånger 4 upphöjt till 3 x gånger naturliga logaritmen av 4",
+   "s": 657.88,
+   "e": 666.83
+  },
+  {
+   "t": "d) Vi skriver först av funktionen.",
+   "s": 666.83,
+   "e": 670.51
+  },
+  {
+   "t": "Eftersom vi har en koefficient i exponenten ekvation 6 multiplicerar vi med den.",
+   "s": 670.51,
+   "e": 676.59
+  },
+  {
+   "t": "Eftersom vi har en annan bas än e multiplicerar vi även med naturliga logaritmen av 8 .",
+   "s": 676.59,
+   "e": 682.9
+  },
+  {
+   "t": "Koefficienten framför ekvation 5 behålls.",
+   "s": 682.9,
+   "e": 686.76
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 5 gånger 6 gånger 8 upphöjt till 6 x gånger naturliga logaritmen av 8 som är lika med 30 gånger 8 upphöjt till 6 x gånger naturliga logaritmen av 8",
+   "s": 686.76,
+   "e": 700.09
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 30 gånger 8 upphöjt till 6 x gånger naturliga logaritmen av 8",
+   "s": 700.09,
+   "e": 709.14
+  }
+ ]
+}

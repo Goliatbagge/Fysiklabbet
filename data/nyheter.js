@@ -31,6 +31,47 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-08-optisk-nal",
+    date: "2026-07-08",
+    title: "Forskare formar ljus till en nål — och ser nästan nio gånger djupare in i ögat",
+    deck: "En ultratunn platt lins, bara omkring 7 mikrometer tjock, fokuserar ljus till en extremt smal och samtidigt ovanligt lång stråle — en så kallad optisk nål. Kombinerad med den ögonundersökningsteknik som kallas optisk koherenstomografi gav linsen nästan nio gånger djupare bilder utan att tappa skärpan, enligt en ny studie från Sun Yat-sen University.",
+    category: "Optik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-08-optisk-nal.jpg",
+    imageAlt: "Illustration av en tunn diffraktiv lins med koncentriska ringformade mikrostrukturer som fokuserar en ljusstråle till en extremt smal och lång nål av ljus, riktad mot en stiliserad tvärsnittsbild av ett människoöga i bakgrunden.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["optik", "diffraktion", "interferens", "vågor", "lins", "metalins", "oct", "medicinsk fysik", "våglängd", "ljus", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-ultrathin-lens-focuses-optical-needle.html" },
+      { name: "Optica — Optics Letters (sammanfattning)", url: "https://opg.optica.org/ol/abstract.cfm?doi=10.1364%2FOL.597598" }
+    ],
+    research: { citation: "J. Huang, Z. Duan, P. Xiao, H. Liang, ”Optical Needle with Narrow Lateral Focal Width and Extended Longitudinal Focal Depth Enabled by Multi-Level Diffractive Lens”, Optics Letters (2026)", url: "https://doi.org/10.1364/OL.597598" },
+    body: [
+      { type: "p", html: "En helt platt skiva av glas, bara omkring 7&nbsp;mikrometer tjock — tunnare än ett tiondels hårstrå — kan forma en ljusstråle till något som liknar en nål: extremt smal, och ändå fokuserad över en ovanligt lång sträcka. Forskare vid Sun Yat-sen University i Kina har byggt en sådan lins och kombinerat den med optisk koherenstomografi (OCT), tekniken ögonläkare använder för att fotografera ögats inre lager för lager. Resultatet, presenterat i en studie som antagits för publicering i tidskriften <em>Optics Letters</em>, gav nästan nio gånger djupare bilder utan att tappa skärpan." },
+
+      { type: "h2", text: "En inbyggd avvägning i all optik" },
+      { type: "p", html: "En vanlig lins tvingas välja mellan skärpa och räckvidd. Ju hårdare ljus fokuseras till en liten punkt, desto kortare sträcka håller fokuseringen i sig innan strålen böjer av och sprids igen — en konsekvens av att ljus är en våg och alltid <em>diffrakterar</em> en aning, precis som i Fysiklabbets genomgång om diffraktion och interferens i Fysik nivå&nbsp;2. Samma avvägning gör OCT besvärligt: tekniken kan visa strukturer på olika djup i till exempel näthinnan, men har historiskt haft svårt att samtidigt fånga riktigt fina detaljer alldeles vid vävnadens yta." },
+
+      { type: "h2", text: "En lins byggd av trappsteg" },
+      { type: "p", html: "Forskarlaget, lett av Haowen Liang, löste avvägningen genom att helt lämna den klassiska buktade linsen. I stället ritade de en platt skiva uppbyggd av miljontals mikroskopiska, trappstegsformade strukturer — en så kallad diffraktiv lins, som böjer ljuset med mönster i stället för med en krökt glasyta. Med datorstödd optimering finjusterade forskarna varje enskild struktur för att forma ljuset till en <em>optisk nål</em>: en stråle som hålls extremt smal över en ovanligt lång sträcka. De invecklade mönstren tillverkades sedan med en avancerad teknik som brukar kallas 3D-laserskrivning, som ristar strukturer med en precision under själva ljusets våglängd." },
+
+      { type: "h2", text: "Nästan nio gånger djupare" },
+      { type: "p", html: "I experimenten fokuserade den 7&nbsp;mikrometer tjocka linsen ljus med våglängder mellan 800 och 900&nbsp;nanometer till en nål med en genomsnittlig bredd på bara 2,4&nbsp;mikrometer — samtidigt som fokus höll sig skarpt över hela 2,64&nbsp;mm, ett djup omkring 1&nbsp;100 gånger större än nålens bredd. Ett människohår är omkring 70&nbsp;mikrometer tjockt; skalar man upp nålens mått till samma bredd skulle den hålla sig lika skarp över nästan 8&nbsp;centimeter, i stället för att tappa fokus efter någon millimeter som en vanlig lins gör. När forskarna bytte ut den vanliga fokuseringslinsen i ett OCT-system mot den nya diffraktiva linsen ökade avbildningsdjupet med nästan en faktor nio, jämfört med ett system som gav samma sidledsupplösning på traditionellt sätt." },
+
+      { type: "quote", html: "”Även om OCT kan avbilda strukturer på olika djup har tekniken svårare att fånga riktigt fina detaljer på vävnadens yta. Med den optiska nålen går det att få skarpa, högupplösta bilder av både ytan och djupet samtidigt — vilket kan avslöja detaljer som är svåra att se med konventionella system.”", cite: "Haowen Liang, Sun Yat-sen University" },
+
+      { type: "h2", text: "Från ögonbotten till mobilkameran" },
+      { type: "p", html: "Liang ser i första hand en tillämpning inom ögonsjukvård: en skarpare bild av både näthinnans yta och dess djupare lager skulle kunna hjälpa läkare upptäcka sjukdomar tidigare och ställa säkrare diagnoser. Men samma grepp — att ersätta tung, buktad optik med en tunn, mönstrad skiva — öppnar enligt forskarna också för enklare och billigare avbildningssystem i vardagliga prylar som mobilkameror, utan att offra bildkvaliteten. Nästa steg är att göra den optiska nålen dynamiskt justerbar, så att dess form och intensitet kan anpassas efter vad som ska avbildas." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "En diffraktiv lins böjer ljus med hjälp av mikroskopiska mönster i stället för genom en krökt glasyta — samma princip som ger diffraktionsmönstret bakom ett vanligt optiskt gitter.",
+        "Optisk koherenstomografi (OCT) mäter avstånd i vävnad genom ljusets interferens, med en precision på någon mikrometer — lite som ett ultraljud, fast med ljus i stället för ljud.",
+        "Namnet ”optisk nål” syftar på strålens form: extremt smal och samtidigt ovanligt lång i förhållande till sin bredd, ungefär som en riktig synål — fast av ljus."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-07-elektronens-rymdtidsgrans",
     date: "2026-07-07",
     title: "Forskare bygger världens snabbaste elektronkamera — och stöter på en gräns mellan rum och tid",

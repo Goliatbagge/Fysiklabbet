@@ -14,6 +14,29 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-08) — kan tas upp senare
+
+- **Första direkta spektroskopiska belägget för högenergetiska ”gravitoner” i
+  fraktionella kvant-Hall-tillstånd** — forskare vid Nanjing University (Lingjie
+  Du m.fl.) har hittat två distinkta spinn-2-excitationer (”kirala gravitoner”)
+  i samma kvant-Hall-tillstånd, vilket stöder teorin om ”partoner” — kvarkliknande
+  kvasipartiklar med bråkdelsladdning. Spännande kvantfysik/fastkroppsfysik-vinkel,
+  men mycket teoretiskt tungt (kvant-Hall-effekten, spinn-2-excitationer,
+  partonteori) för gymnasienivå, och vi körde redan en tung kvantfysiknyhet
+  07-07. Källor: https://phys.org/news/2026-07-evidence-elusive-high-energy-gravitons.html ,
+  Nature Physics (Z. Yang et al. 2026, DOI 10.1038/s41567-026-03338-9).
+  (tillagd 2026-07-08)
+- **Programmerbar värmestrålning med fasomvandlingsmaterial** — forskare vid
+  Osaka Metropolitan University (Koichi Okamoto, Shunsuke Murai m.fl.) har byggt
+  en metayta av magnetoopiskt material + GST (fasomvandlingsmaterial) som kan
+  styra riktningen på värmestrålning, slås av/på och behålla sin inställning
+  utan ström — ungefär som ett minne fast för infraröd strålning. Bra
+  termodynamik/optik-vinkel men tekniskt komplex (olinjär icke-reciprocitet,
+  magnetoopik) — kräver ordentlig pedagogisk förenkling. Källa:
+  https://www.sciencedaily.com/releases/2026/07/260707025046.htm , Laser &
+  Photonics Reviews (Y. M. Qing et al. 2026, DOI 10.1002/lpor.71438).
+  (tillagd 2026-07-08)
+
 ## Fynd som inte användes (2026-07-07) — kan tas upp senare
 
 - **Vera C. Rubin-observatoriet har inlett sin tioåriga "Legacy Survey of

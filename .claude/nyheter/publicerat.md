@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-08 | `2026-07-08-optisk-nal` | Forskare formar ljus till en nål — och ser nästan nio gånger djupare in i ögat | Phys.org / Optica — Optics Letters (J. Huang, Z. Duan, P. Xiao, H. Liang 2026) |
 | 2026-07-07 | `2026-07-07-elektronens-rymdtidsgrans` | Forskare bygger världens snabbaste elektronkamera — och stöter på en gräns mellan rum och tid | Regensburg Center for Ultrafast Nanoscopy (pressmeddelande) / Phys.org / Nature Photonics (S. Maier et al. 2026) |
 | 2026-07-06 | `2026-07-06-aldsta-kvasarerna` | Euclid hittar de mest avlägsna kvasarerna som någonsin bekräftats | ESA (Euclid, pressmeddelande) / Phys.org / Astronomy & Astrophysics (D. Yang et al. 2026) |
 | 2026-07-05 | `2026-07-05-super-puff-planeter` | Två jätteplaneter visar sig vara lättare än sockervadd | NASA (TESS-uppdraget) / University of Oxford / Phys.org / MNRAS (arXiv:2606.30016) |

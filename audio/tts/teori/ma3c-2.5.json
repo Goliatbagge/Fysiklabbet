@@ -1,0 +1,273 @@
+{
+ "id": "ma3c-2.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "52be6250409f04b5e8412ab1b6a475bed900b64b",
+ "dur": 302.9,
+ "segments": [
+  {
+   "t": "Deriverbarhet och absolutbelopp",
+   "s": 0.1,
+   "e": 3.55
+  },
+  {
+   "t": "Om det går att beräkna derivatan i en punkt, så är funktionen deriverbar i den punkten.",
+   "s": 3.5,
+   "e": 9.39
+  },
+  {
+   "t": "För att förstå deriverbarhet behöver vi först gå igenom begreppen kontinuerlig/diskontinuerlig funktion och absolutbelopp.",
+   "s": 9.39,
+   "e": 17.73
+  },
+  {
+   "t": "Kontinuerlig och diskontinuerlig funktion",
+   "s": 17.73,
+   "e": 21.48
+  },
+  {
+   "t": "Kontinuerlig och diskontinuerlig funktion",
+   "s": 21.48,
+   "e": 25.15
+  },
+  {
+   "t": "En funktion vars graf",
+   "s": 25.15,
+   "e": 27.81
+  },
+  {
+   "t": "hänger ihop är kontinuerlig.",
+   "s": 27.81,
+   "e": 30.8
+  },
+  {
+   "t": "Grafen till en kontinuerlig funktion kan vi rita \"utan att lyfta pennan\".",
+   "s": 30.8,
+   "e": 36.1
+  },
+  {
+   "t": "inte hänger ihop, på grund av ett \"hopp\" eller \"språng\", är diskontinuerlig i punkten.",
+   "s": 36.1,
+   "e": 41.96
+  },
+  {
+   "t": "En diskontinuitet kan se ut på olika sätt.",
+   "s": 41.96,
+   "e": 46.08
+  },
+  {
+   "t": "Vid ett hopp ändras funktionsvärdet plötsligt till ett annat värde i punkten — grafen ritas då ofta med en öppen ring (punkten ingår inte) och en fylld prick (punkten ingår) på olika höjd.",
+   "s": 46.08,
+   "e": 57.27
+  },
+  {
+   "t": "Vid ett språng går grafen i stället mot oändligheten på ömse sidor om punkten, t.ex. vid en lodrät asymptot, där grafen delas i två grenar som går mot plus oändligheten respektive minus oändligheten .",
+   "s": 57.27,
+   "e": 70.21
+  },
+  {
+   "t": "Absolutbelopp",
+   "s": 70.21,
+   "e": 72.47
+  },
+  {
+   "t": "Ett tals avstånd till 0 på tallinjen kallas absolutbelopp.",
+   "s": 72.47,
+   "e": 77.38
+  },
+  {
+   "t": "Absolut- beloppet av ett tal a skrivs | a | och utläses \"absolutbeloppet av a \".",
+   "s": 77.38,
+   "e": 83.79
+  },
+  {
+   "t": "Till exempel gäller",
+   "s": 83.79,
+   "e": 86.24
+  },
+  {
+   "t": "| 2 | är lika med 2 (avståndet från 2 till 0 på tallinjen är 2)",
+   "s": 86.24,
+   "e": 91.83
+  },
+  {
+   "t": "| minus 3 | är lika med 3 (avståndet från −3 till 0 på tallinjen är 3)",
+   "s": 91.83,
+   "e": 97.8
+  },
+  {
+   "t": "Vi kan också se det som att absolutbelopp \"tar bort\" minustecknet från negativa tal.",
+   "s": 97.8,
+   "e": 103.49
+  },
+  {
+   "t": "Vi gör en värdetabell för funktionen f av x är lika med | x | och undersöker grafens utseende.",
+   "s": 103.49,
+   "e": 110.1
+  },
+  {
+   "t": "x minus 3 minus 2 minus 1 0 1 2 3 hline f av x är lika med | x | 3 2 1 0 1 2 3",
+   "s": 110.1,
+   "e": 118.51
+  },
+  {
+   "t": "Grafen får ett \"hörn\".",
+   "s": 118.51,
+   "e": 121.26
+  },
+  {
+   "t": "Deriverbarhet",
+   "s": 121.26,
+   "e": 123.61
+  },
+  {
+   "t": "Deriverbarhet",
+   "s": 123.61,
+   "e": 125.9
+  },
+  {
+   "t": "En funktion är inte deriverbar i en viss punkt om funktionen",
+   "s": 125.9,
+   "e": 130.62
+  },
+  {
+   "t": "inte är definierad i punkten (t.ex. då grafen har ett \"språng\"),",
+   "s": 130.62,
+   "e": 135.91
+  },
+  {
+   "t": "är diskontinuerlig i punkten (t.ex. då grafen har ett \"hopp\"), eller",
+   "s": 135.91,
+   "e": 141.51
+  },
+  {
+   "t": "har en hörnpunkt i punkten (då grafen har ett \"hörn\").",
+   "s": 141.51,
+   "e": 145.94
+  },
+  {
+   "t": "Kuriosa — Deriverbarhet",
+   "s": 145.94,
+   "e": 148.78
+  },
+  {
+   "t": "Hur kan det komma sig att en funktion med en hörnpunkt inte är deriverbar i hörnpunkten, trots att den både är definierad och kontinuerlig i punkten?",
+   "s": 148.78,
+   "e": 157.44
+  },
+  {
+   "t": "Vi tittar på grafen till f av x är lika med | x | igen.",
+   "s": 157.44,
+   "e": 161.99
+  },
+  {
+   "t": "Vi ser att om vi undersöker gränsvärdet när vi närmar oss x är lika med 0 från vänster, så gäller f prim, ekvation 0 är lika med minus 1 (lutningen där är minus 1 ).",
+   "s": 161.99,
+   "e": 172.94
+  },
+  {
+   "t": "Om vi i stället undersöker gränsvärdet när vi närmar oss x är lika med 0 från höger, så gäller f prim, ekvation 0 är lika med 1 (lutningen där är 1 ).",
+   "s": 172.94,
+   "e": 183.12
+  },
+  {
+   "t": "Eftersom gränsvärdet blir olika, beroende på från vilket håll vi närmar oss x är lika med 0 , saknar derivatan ett entydigt värde, och f av x är lika med | x | är alltså inte deriverbar i x är lika med 0 .",
+   "s": 183.12,
+   "e": 195.95
+  },
+  {
+   "t": "Exempel 1 — Beräkna absolutbelopp",
+   "s": 195.95,
+   "e": 199.65
+  },
+  {
+   "t": "Beräkna | x i kubik plus 5 | för x är lika med minus 2 .",
+   "s": 199.65,
+   "e": 204.56
+  },
+  {
+   "t": "Vi sätter x är lika med minus 2 i uttrycket | x i kubik plus 5 | och beräknar.",
+   "s": 204.56,
+   "e": 210.91
+  },
+  {
+   "t": "| parentesen minus 2 slut parentes i kubik plus 5 | är lika med | minus 8 plus 5 | som är lika med | minus 3 | som är lika med 3",
+   "s": 210.91,
+   "e": 219.44
+  },
+  {
+   "t": "Svar: 3",
+   "s": 219.44,
+   "e": 224.82
+  },
+  {
+   "t": "Exempel 2 — Lös en ekvation med absolutbelopp",
+   "s": 219.44,
+   "e": 224.82
+  },
+  {
+   "t": "Lös ekvationen | x minus 7 | är lika med 10 .",
+   "s": 224.82,
+   "e": 229.1
+  },
+  {
+   "t": "Om | x minus 7 | är lika med 10 gäller antingen x minus 7 är lika med 10 eller x minus 7 är lika med minus 10 , som vi kan lösa separat.",
+   "s": 229.1,
+   "e": 238.46
+  },
+  {
+   "t": "x minus 7 är lika med 10 eller x minus 7 som är lika med minus 10",
+   "s": 238.46,
+   "e": 244.0
+  },
+  {
+   "t": "vilket ger x ett är lika med 17 respektive x två är lika med minus 3 .",
+   "s": 244.0,
+   "e": 249.62
+  },
+  {
+   "t": "Alternativt kan vi ställa upp ekvationen x minus 7 är lika med plus minus 10 och få båda lösningarna direkt.",
+   "s": 249.62,
+   "e": 256.86
+  },
+  {
+   "t": "x minus 7 är lika med plus minus 10 vilket ger att x ett är lika med 7 plus 10 som är lika med 17, x två som är lika med 7 minus 10 som är lika med minus 3",
+   "s": 256.86,
+   "e": 267.38
+  },
+  {
+   "t": "Svar: x ett är lika med 17 och x två är lika med minus 3",
+   "s": 267.38,
+   "e": 272.66
+  },
+  {
+   "t": "Exempel 3 — Avläs deriverbarhet ur en graf",
+   "s": 272.66,
+   "e": 276.99
+  },
+  {
+   "t": "Figuren visar grafen till en funktion.",
+   "s": 276.99,
+   "e": 280.62
+  },
+  {
+   "t": "För vilka värden på x är funktionen inte deriverbar?",
+   "s": 280.62,
+   "e": 285.01
+  },
+  {
+   "t": "Grafen har ett hörn då x är lika med minus 4 och är diskontinuerlig (den har ett hopp) då x är lika med 0 .",
+   "s": 285.01,
+   "e": 292.62
+  },
+  {
+   "t": "I dessa punkter är funktionen alltså inte deriverbar.",
+   "s": 292.62,
+   "e": 296.88
+  },
+  {
+   "t": "Svar: x är lika med minus 4 och x är lika med 0",
+   "s": 296.88,
+   "e": 302.9
+  }
+ ]
+}

@@ -1,0 +1,243 @@
+{
+ "id": "ma3c-6.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "952fdd81d8adf05c7df7eea740254936643437f9",
+ "dur": 335.21,
+ "segments": [
+  {
+   "t": "Enhetscirkeln",
+   "s": 0.1,
+   "e": 2.38
+  },
+  {
+   "t": "En cirkel med radien 1 placerad med medelpunkten i origo kallas enhetscirkel.",
+   "s": 2.33,
+   "e": 8.16
+  },
+  {
+   "t": "Enhetscirkeln används för att definiera sinus, cosinus och tangens för alla vinklar — inte bara spetsiga vinklar mellan 0 grader och 90 grader som i en rätvinklig triangel.",
+   "s": 8.16,
+   "e": 18.7
+  },
+  {
+   "t": "Om vi drar en sträcka som bildar vinkeln v med den positiva x -axeln, fram till enhetscirkelns rand, bildas en rätvinklig triangel där hypotenusan är cirkelns radie — som alltid är lika med 1 , se figuren ovan.",
+   "s": 18.7,
+   "e": 31.57
+  },
+  {
+   "t": "Med hjälp av den triangeln gäller",
+   "s": 31.57,
+   "e": 34.6
+  },
+  {
+   "t": "sinus v är lika med y delat med 1 som är lika med y cosinus v som är lika med x delat med 1 som är lika med x tangens v som är lika med y delat med x som är lika med sinus v delat med cosinus v",
+   "s": 34.6,
+   "e": 46.5
+  },
+  {
+   "t": "Alltså motsvaras sinus v av punktens y -koordinat och cosinus v av punktens x -koordinat.",
+   "s": 46.5,
+   "e": 53.56
+  },
+  {
+   "t": "Punktens koordinat parentesen x, y slut parentes kan därför alltid skrivas parentesen cosinus v, sinus v slut parentes — för vilken vinkel v som helst, inte bara spetsiga vinklar.",
+   "s": 53.56,
+   "e": 65.91
+  },
+  {
+   "t": "Definition av sinus, cosinus och tangens på enhetscirkeln",
+   "s": 65.91,
+   "e": 71.19
+  },
+  {
+   "t": "Vinkeln v ger en punkt parentesen x, y slut parentes på enhetscirkeln.",
+   "s": 71.19,
+   "e": 77.0
+  },
+  {
+   "t": "För samtliga vinklar v gäller",
+   "s": 77.0,
+   "e": 80.08
+  },
+  {
+   "t": "sinus v är lika med y",
+   "s": 80.08,
+   "e": 89.49
+  },
+  {
+   "t": "cosinus v är lika med x",
+   "s": 80.08,
+   "e": 89.49
+  },
+  {
+   "t": "tangens v är lika med sinus v delat med cosinus v , där cosinus v är inte lika med 0",
+   "s": 80.08,
+   "e": 89.49
+  },
+  {
+   "t": "Vinklar i enhetscirkeln",
+   "s": 89.49,
+   "e": 92.55
+  },
+  {
+   "t": "En vinkel v i enhetscirkeln kan vara vilken storlek som helst — inte bara mellan 0 grader och 90 grader som i en rätvinklig triangel.",
+   "s": 92.55,
+   "e": 100.99
+  },
+  {
+   "t": "Vinklar i enhetscirkeln",
+   "s": 100.99,
+   "e": 104.05
+  },
+  {
+   "t": "En vinkel v",
+   "s": 104.05,
+   "e": 106.16
+  },
+  {
+   "t": "startar vid den positiva x -axeln och vrids moturs det antal grader som anges.",
+   "s": 106.16,
+   "e": 112.03
+  },
+  {
+   "t": "som är större än 360 grader har gått ett helt varv och fortsätter sedan om igen, t.ex. ger 360 grader plus v samma punkt på cirkeln som v .",
+   "s": 112.03,
+   "e": 122.34
+  },
+  {
+   "t": "som är negativ motsvarar i stället en vridning medurs det antal grader som anges.",
+   "s": 122.34,
+   "e": 128.16
+  },
+  {
+   "t": "Figuren visar en positiv vinkel v (moturs, ovanför x -axeln, blå punkt) och den negativa vinkeln minus v (medurs, nedanför x -axeln, röd punkt).",
+   "s": 128.16,
+   "e": 140.05
+  },
+  {
+   "t": "Den negativa vinkeln ger en punkt som är en spegelbild i x -axeln av punkten för v : x -koordinaten (cosinusvärdet) är oförändrad, medan y -koordinaten (sinusvärdet) byter tecken.",
+   "s": 140.05,
+   "e": 152.89
+  },
+  {
+   "t": "Exempel 1 — Bestäm ur enhetscirkeln",
+   "s": 152.89,
+   "e": 156.72
+  },
+  {
+   "t": "Bestäm ur enhetscirkeln, där punkten parentesen 0,51 ; 0,86 slut parentes motsvarar vinkeln v (se figuren).. a) cosinus v b) sinus v c) tangens v . d) v e) sinus 419,3 grader f) sinus parentesen minus 59,3 grader slut parentes",
+   "s": 156.72,
+   "e": 181.61
+  },
+  {
+   "t": "a) cosinus v motsvarar punktens x -koordinat, det vill säga 0,51 .",
+   "s": 181.61,
+   "e": 188.18
+  },
+  {
+   "t": "Svar: 0,51",
+   "s": 188.18,
+   "e": 191.51
+  },
+  {
+   "t": "b) sinus v motsvarar punktens y -koordinat, det vill säga 0,86 .",
+   "s": 191.51,
+   "e": 198.05
+  },
+  {
+   "t": "Svar: 0,86",
+   "s": 198.05,
+   "e": 201.47
+  },
+  {
+   "t": "c) Vi använder sambandet tangens v är lika med sinus v delat med cosinus v .",
+   "s": 201.47,
+   "e": 207.89
+  },
+  {
+   "t": "Sedan tidigare har vi cosinus v är lika med 0,51 och sinus v är lika med 0,86 , vilket ger",
+   "s": 207.89,
+   "e": 216.05
+  },
+  {
+   "t": "tangens v är lika med 0,86 delat med 0,51 som är lika med 1,686 som är ungefär lika med 1,69",
+   "s": 216.05,
+   "e": 225.79
+  },
+  {
+   "t": "Svar: är ungefär lika med 1,69",
+   "s": 225.79,
+   "e": 230.11
+  },
+  {
+   "t": "d) Vi bestämmer v med hjälp av något av sambanden ovan, till exempel sinus v är lika med 0,86 .",
+   "s": 230.11,
+   "e": 238.36
+  },
+  {
+   "t": "v är lika med sinus upphöjt till minus 1 parentesen 0,86 slut parentes som är lika med 59,316 grader som är ungefär lika med 59,3 grader",
+   "s": 238.36,
+   "e": 250.56
+  },
+  {
+   "t": "Svar: är ungefär lika med 59,3 grader",
+   "s": 250.56,
+   "e": 255.31
+  },
+  {
+   "t": "e) Vinkeln 419,3 grader är större än 360 grader .",
+   "s": 255.31,
+   "e": 261.66
+  },
+  {
+   "t": "Vi drar bort ett helt varv ( 360 grader ) för att hitta vinkeln mellan 0 grader och 360 grader som ger samma punkt på enhetscirkeln.",
+   "s": 261.66,
+   "e": 271.4
+  },
+  {
+   "t": "sinus 419,3 grader är lika med sinus parentesen 419,3 grader minus 360 grader slut parentes som är lika med sinus 59,3 grader",
+   "s": 271.4,
+   "e": 283.79
+  },
+  {
+   "t": "Från d) vet vi att 59,3 grader är vinkeln v i figuren ovan, med sinus v är lika med 0,86 .",
+   "s": 283.79,
+   "e": 293.0
+  },
+  {
+   "t": "Svar: 0,86",
+   "s": 293.0,
+   "e": 296.44
+  },
+  {
+   "t": "f) Vinkeln minus 59,3 grader motsvarar en vridning 59,3 grader medurs.",
+   "s": 296.44,
+   "e": 303.86
+  },
+  {
+   "t": "Vi markerar vinkeln och den nya punkten i en enhetscirkel:",
+   "s": 303.86,
+   "e": 319.2
+  },
+  {
+   "t": "Punkten är en spegelbild i x -axeln av punkten i föregående figur — x -koordinaten (cosinusvärdet) är oförändrad, medan y -koordinaten (sinusvärdet) byter tecken.",
+   "s": 303.86,
+   "e": 319.2
+  },
+  {
+   "t": "Alltså gäller",
+   "s": 319.2,
+   "e": 321.24
+  },
+  {
+   "t": "sinus parentesen minus 59,3 grader slut parentes är lika med minus sinus 59,3 grader som är lika med minus 0,86",
+   "s": 321.24,
+   "e": 331.43
+  },
+  {
+   "t": "Svar: minus 0,86",
+   "s": 331.43,
+   "e": 335.21
+  }
+ ]
+}

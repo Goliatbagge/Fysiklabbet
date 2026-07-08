@@ -1,0 +1,283 @@
+{
+ "id": "ma3c-3.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "e287b3cdaa90c8dad99ad41d92be2f612129b7a0",
+ "dur": 358.04,
+ "segments": [
+  {
+   "t": "Tillämpningar av derivata med digitala hjälpmedel",
+   "s": 0.1,
+   "e": 4.29
+  },
+  {
+   "t": "När vi löser en tillämpningsuppgift med deriveringsregler gör vi en algebraisk lösning för hand.",
+   "s": 4.24,
+   "e": 10.64
+  },
+  {
+   "t": "Vi kan även lösa tillämpningsuppgifter med derivata med hjälp av digitala hjälpmedel, t.ex. Geogebra.",
+   "s": 10.64,
+   "e": 17.96
+  },
+  {
+   "t": "Vi har sedan tidigare visat att en exponentialfunktion kan skrivas på formen y är lika med C gånger a upphöjt till x där C står för funktionens startvärde och a för förändringsfaktorn.",
+   "s": 17.96,
+   "e": 29.05
+  },
+  {
+   "t": "Vi kan även skriva exponentialfunktioner med basen e för att underlätta vid derivering.",
+   "s": 29.05,
+   "e": 35.17
+  },
+  {
+   "t": "Exponentialfunktioner med basen e",
+   "s": 35.17,
+   "e": 41.01
+  },
+  {
+   "t": "y är lika med C e upphöjt till k x",
+   "s": 35.17,
+   "e": 41.01
+  },
+  {
+   "t": "där e upphöjt till k är lika med a (förändringsfaktorn).",
+   "s": 41.01,
+   "e": 45.77
+  },
+  {
+   "t": "Lösa tillämpningsuppgifter med Geogebra",
+   "s": 45.77,
+   "e": 49.42
+  },
+  {
+   "t": "Exempel 1 — Tillväxthastighet hos en kaninpopulation",
+   "s": 49.42,
+   "e": 54.19
+  },
+  {
+   "t": "Antalet kaniner N parentesen t slut parentes i en population ges av N parentesen t slut parentes är lika med 30 gånger 1,84 upphöjt till t där t är tiden räknat i veckor.. a) Beräkna tillväxthastigheten efter 4 veckor. b) Efter hur lång tid är tillväxthastigheten 100 kaniner/vecka?",
+   "s": 54.19,
+   "e": 77.19
+  },
+  {
+   "t": "a) Tillväxthastigheten efter 4 veckor motsvaras av N prim, ekvation 4 .",
+   "s": 77.19,
+   "e": 83.84
+  },
+  {
+   "t": "Vi definierar funktionen genom att skriva in N parentesen t slut parentes är lika med 30 gånger 1,84 upphöjt till t i Geogebras inmatningsfält.",
+   "s": 83.84,
+   "e": 94.26
+  },
+  {
+   "t": "Därefter skriver vi N prim, ekvation 4 på raden under och läser av värdet:",
+   "s": 94.26,
+   "e": 105.36
+  },
+  {
+   "t": "N prim, ekvation 4 är ungefär lika med 209,67925",
+   "s": 94.26,
+   "e": 105.36
+  },
+  {
+   "t": "Vi ser att N prim, ekvation 4 är ungefär lika med 210 .",
+   "s": 105.36,
+   "e": 110.86
+  },
+  {
+   "t": "Svar: Populationen ökar med cirka 210 kaniner/vecka efter 4 veckor.",
+   "s": 110.86,
+   "e": 117.69
+  },
+  {
+   "t": "b) Tillväxthastigheten 100 kaniner/vecka motsvaras av N prim parentesen t slut parentes är lika med 100 .",
+   "s": 117.69,
+   "e": 126.9
+  },
+  {
+   "t": "Vi skriver NLös(N'(t) är lika med 100) i Geogebras inmatningsfält för att lösa ut tiden och får",
+   "s": 126.9,
+   "e": 135.43
+  },
+  {
+   "t": "t är ungefär lika med 2,78575",
+   "s": 135.43,
+   "e": 140.03
+  },
+  {
+   "t": "vilket avrundas till t är ungefär lika med 2,8 .",
+   "s": 140.03,
+   "e": 144.51
+  },
+  {
+   "t": "Svar: Efter cirka 2,8 veckor.",
+   "s": 144.51,
+   "e": 148.4
+  },
+  {
+   "t": "Exempel 2 — Minsta lutning hos en funktion",
+   "s": 148.4,
+   "e": 152.35
+  },
+  {
+   "t": "För vilket värde på x har funktionen f av x är lika med x i kubik minus 3 x i kvadrat minus 4 x sin minsta lutning?",
+   "s": 152.35,
+   "e": 161.34
+  },
+  {
+   "t": "Kom ihåg att en grafs lutning är detsamma som derivatan till funktionen.",
+   "s": 161.34,
+   "e": 166.53
+  },
+  {
+   "t": "Vi ska alltså bestämma när derivatan f prim parentesen x slut parentes är som minst.",
+   "s": 166.53,
+   "e": 173.04
+  },
+  {
+   "t": "Vi definierar f av x är lika med x i kubik minus 3 x i kvadrat minus 4 x i Geogebra och tar sedan fram f prim parentesen x slut parentes :",
+   "s": 173.04,
+   "e": 189.21
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 x i kvadrat minus 6 x minus 4",
+   "s": 173.04,
+   "e": 189.21
+  },
+  {
+   "t": "Derivatan f prim parentesen x slut parentes är i sig en andragradsfunktion vars graf är en parabel som öppnar uppåt, med ett minsta värde i sin minimipunkt.",
+   "s": 189.21,
+   "e": 199.29
+  },
+  {
+   "t": "Vi studerar grafen till f prim parentesen x slut parentes i Geogebra och använder verktyget Extrempunkt för att ta fram minimipunkten.",
+   "s": 199.29,
+   "e": 208.34
+  },
+  {
+   "t": "Den ligger vid x är lika med 1 .",
+   "s": 208.34,
+   "e": 211.59
+  },
+  {
+   "t": "Vi ser att f prim parentesen x slut parentes har sitt lägsta värde då x är lika med 1 , dvs. det är där funktionen f av x har sin minsta lutning.",
+   "s": 211.59,
+   "e": 221.72
+  },
+  {
+   "t": "Svar: x är lika med 1",
+   "s": 221.72,
+   "e": 224.97
+  },
+  {
+   "t": "Ställa upp exponentialmodeller med basen e",
+   "s": 224.97,
+   "e": 231.81
+  },
+  {
+   "t": "Exempel 3 — Kattungens vikt som exponentialmodell",
+   "s": 224.97,
+   "e": 231.81
+  },
+  {
+   "t": "En kattunge väger 100 gram och ökar sin vikt med 5 procent per dag under den första månaden.",
+   "s": 231.81,
+   "e": 238.09
+  },
+  {
+   "t": "Ställ upp en exponentialfunktion med basen e för kattungens vikt V i gram som funktion av tiden t dagar.",
+   "s": 238.09,
+   "e": 245.57
+  },
+  {
+   "t": "Vi har ett exponentiellt samband, som vi kan skriva på formen y är lika med C gånger a upphöjt till x , där C är startvärdet (100 gram) och a är förändringsfaktorn (1,05, eftersom vikten ökar med 5 procent per dag).",
+   "s": 245.57,
+   "e": 260.26
+  },
+  {
+   "t": "Detta ger",
+   "s": 260.26,
+   "e": 262.27
+  },
+  {
+   "t": "V parentesen t slut parentes är lika med 100 gånger 1,05 upphöjt till t",
+   "s": 262.27,
+   "e": 269.14
+  },
+  {
+   "t": "Vi ska skriva om det exponentiella sambandet med basen e , dvs. på formen y är lika med C e upphöjt till k x .",
+   "s": 269.14,
+   "e": 277.45
+  },
+  {
+   "t": "Detta ger",
+   "s": 277.45,
+   "e": 279.46
+  },
+  {
+   "t": "V parentesen t slut parentes är lika med 100 gånger e upphöjt till k t, ekvation 1",
+   "s": 279.46,
+   "e": 286.7
+  },
+  {
+   "t": "Vi ska nu bestämma koefficienten k .",
+   "s": 286.7,
+   "e": 290.05
+  },
+  {
+   "t": "Vi jämför de två uttrycken för V parentesen t slut parentes :",
+   "s": 290.05,
+   "e": 300.2
+  },
+  {
+   "t": "100 gånger 1,05 upphöjt till t är lika med 100 gånger e upphöjt till k t",
+   "s": 290.05,
+   "e": 300.2
+  },
+  {
+   "t": "Vi ser då att",
+   "s": 300.2,
+   "e": 302.49
+  },
+  {
+   "t": "e upphöjt till k är lika med 1,05",
+   "s": 302.49,
+   "e": 306.44
+  },
+  {
+   "t": "Vi löser ekvationen genom att logaritmera båda leden och lösa ut k .",
+   "s": 306.44,
+   "e": 311.76
+  },
+  {
+   "t": "naturliga logaritmen av e upphöjt till k är lika med naturliga logaritmen av 1,05 k gånger naturliga logaritmen av e som är lika med naturliga logaritmen av 1,05",
+   "s": 311.76,
+   "e": 324.61
+  },
+  {
+   "t": "Eftersom naturliga logaritmen av e är lika med 1 blir",
+   "s": 324.56,
+   "e": 329.13
+  },
+  {
+   "t": "k är lika med naturliga logaritmen av 1,05 som är ungefär lika med 0,04879",
+   "s": 329.13,
+   "e": 336.78
+  },
+  {
+   "t": "Insättning av k är ungefär lika med 0,04879 i ekvation 1 ger",
+   "s": 336.78,
+   "e": 343.45
+  },
+  {
+   "t": "V parentesen t slut parentes är lika med 100 gånger e upphöjt till 0,04879 t",
+   "s": 343.45,
+   "e": 358.04
+  },
+  {
+   "t": "Svar: V parentesen t slut parentes är lika med 100 gånger e upphöjt till 0,04879 t",
+   "s": 343.45,
+   "e": 358.04
+  }
+ ]
+}

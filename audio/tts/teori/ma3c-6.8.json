@@ -1,0 +1,163 @@
+{
+ "id": "ma3c-6.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a519429cb6e27cdd12473228bf508fd7db0b4aed",
+ "dur": 231.09,
+ "segments": [
+  {
+   "t": "Tillämpningar av triangelsatserna",
+   "s": 0.1,
+   "e": 3.35
+  },
+  {
+   "t": "Areasatsen, sinussatsen och cosinussatsen kallas tillsammans för triangelsatserna.",
+   "s": 3.3,
+   "e": 9.55
+  },
+  {
+   "t": "I det här avsnittet tillämpar vi dem för att lösa problem — det viktigaste steget är att avgöra vilken sats som passar till den information som är given.",
+   "s": 9.55,
+   "e": 18.25
+  },
+  {
+   "t": "Kom ihåg — triangelsatserna",
+   "s": 18.25,
+   "e": 21.14
+  },
+  {
+   "t": "I en triangel A B C med sidorna a , b och c gäller",
+   "s": 21.14,
+   "e": 26.06
+  },
+  {
+   "t": "Areasatsen",
+   "s": 26.06,
+   "e": 28.26
+  },
+  {
+   "t": "T är lika med a b sinus C delat med 2 som är lika med a c sinus B delat med 2 som är lika med b c sinus A delat med 2",
+   "s": 28.26,
+   "e": 37.39
+  },
+  {
+   "t": "Sinussatsen",
+   "s": 37.39,
+   "e": 39.67
+  },
+  {
+   "t": "sinus A delat med a är lika med sinus B delat med b som är lika med sinus C delat med c alternativt a delat med sinus A som är lika med b delat med sinus B som är lika med c delat med sinus C",
+   "s": 39.67,
+   "e": 53.25
+  },
+  {
+   "t": "Cosinussatsen",
+   "s": 39.67,
+   "e": 53.25
+  },
+  {
+   "t": "c i kvadrat är lika med a i kvadrat plus b i kvadrat minus 2 a b cosinus C b i kvadrat som är lika med a i kvadrat plus c i kvadrat minus 2 a c cosinus B a i kvadrat som är lika med b i kvadrat plus c i kvadrat minus 2 b c cosinus A",
+   "s": 53.25,
+   "e": 77.44
+  },
+  {
+   "t": "Sidan a är motstående sida till vinkel A , sidan b är motstående sida till vinkel B och sidan c är motstående sida till vinkel C .",
+   "s": 53.25,
+   "e": 77.44
+  },
+  {
+   "t": "När vi löser ett problem är det viktigt att veta vilken sats som är möjlig att använda utifrån vad som är känt i triangeln.",
+   "s": 77.44,
+   "e": 84.92
+  },
+  {
+   "t": "I många tillämpningsproblem behöver vi dessutom använda satserna i flera trianglar efter varandra — en storhet som beräknas i den ena triangeln används sedan som känd information i nästa.",
+   "s": 84.92,
+   "e": 95.91
+  },
+  {
+   "t": "Nästa exempel visar hur.",
+   "s": 95.91,
+   "e": 98.89
+  },
+  {
+   "t": "Exempel 1 — Bestäm en kulles höjd",
+   "s": 98.89,
+   "e": 102.35
+  },
+  {
+   "t": "En 11 meter hög flaggstång står på toppen av en kulle.",
+   "s": 102.35,
+   "e": 106.8
+  },
+  {
+   "t": "Från en punkt B på marken är höjdvinkeln till flaggstångens topp 32 grader , samtidigt som höjdvinkeln till kullens topp är 25 grader .",
+   "s": 106.8,
+   "e": 115.6
+  },
+  {
+   "t": "Hur hög är kullen?",
+   "s": 115.6,
+   "e": 118.16
+  },
+  {
+   "t": "Låt A vara flaggstångens topp, D kullens topp (flaggstångens fot) och C foten av lodlinjen från A och D ner till marken, rakt under B sett i höjdled.",
+   "s": 118.16,
+   "e": 129.68
+  },
+  {
+   "t": "Vinkeln vid C är rät.",
+   "s": 129.68,
+   "e": 132.54
+  },
+  {
+   "t": "Den enda kända sidan är A D är lika med 11 meter, och den tillhör triangeln A B D .",
+   "s": 132.54,
+   "e": 140.15
+  },
+  {
+   "t": "Vi börjar därför med att ta reda på två vinklar i den triangeln.",
+   "s": 140.15,
+   "e": 144.8
+  },
+  {
+   "t": "vinkeln A B D är lika med 32 grader minus 25 grader som är lika med 7 grader",
+   "s": 144.8,
+   "e": 152.11
+  },
+  {
+   "t": "vinkeln B A D är lika med 180 grader minus 90 grader minus 32 grader som är lika med 58 grader (vinkelsumman i triangeln A B C )",
+   "s": 152.11,
+   "e": 163.53
+  },
+  {
+   "t": "I triangeln A B D känner vi nu en sida och två vinklar, så vi använder sinussatsen för att bestämma sträckan B D .",
+   "s": 163.53,
+   "e": 172.51
+  },
+  {
+   "t": "B D delat med sinus 58 grader är lika med 11 delat med sinus 7 grader vilket är ekvivalent med att B D är lika med 11 sinus 58 grader delat med sinus 7 grader som är ungefär lika med 76,545 meter",
+   "s": 172.51,
+   "e": 188.19
+  },
+  {
+   "t": "I den rätvinkliga triangeln B C D känner vi nu en vinkel ( 25 grader ) och hypotenusan ( B D är ungefär lika med 76,545 meter).",
+   "s": 188.19,
+   "e": 200.03
+  },
+  {
+   "t": "Kullens höjd C D är den motstående kateten till vinkeln 25 grader , så vi bestämmer den med sinus.",
+   "s": 200.03,
+   "e": 207.72
+  },
+  {
+   "t": "sinus 25 grader är lika med C D delat med 76,545 vilket är ekvivalent med att C D är lika med 76,545 gånger sinus 25 grader som är ungefär lika med 32,349 som är ungefär lika med 32 meter",
+   "s": 207.72,
+   "e": 225.91
+  },
+  {
+   "t": "Svar: C D är ungefär lika med 32 meter",
+   "s": 225.91,
+   "e": 231.09
+  }
+ ]
+}

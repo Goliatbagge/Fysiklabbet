@@ -1,0 +1,403 @@
+{
+ "id": "ma3c-5.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "24e1e79adee9403278a080acca4b5ae9eac27091",
+ "dur": 534.29,
+ "segments": [
+  {
+   "t": "Arean under en kurva",
+   "s": 0.1,
+   "e": 2.8
+  },
+  {
+   "t": "Vi vet sedan tidigare hur vi beräknar arean av enkla geometriska figurer, som rektanglar och trianglar.",
+   "s": 2.75,
+   "e": 10.05
+  },
+  {
+   "t": "Men hur beräknar vi arean under grafen till en godtycklig funktion — en area som ofta har en böjd, oregelbunden rand?",
+   "s": 10.05,
+   "e": 17.73
+  },
+  {
+   "t": "Betrakta till exempel arean under grafen till f av x är lika med x i kvadrat mellan x är lika med 1 och x är lika med 3 .",
+   "s": 17.73,
+   "e": 26.3
+  },
+  {
+   "t": "Vi ritar upp grafen och markerar det sökta området, se figuren nedan.",
+   "s": 26.3,
+   "e": 31.55
+  },
+  {
+   "t": "Härledning — från rektanglar till integral",
+   "s": 31.55,
+   "e": 35.42
+  },
+  {
+   "t": "Vi kan approximera (få ett ungefärligt värde på) arean genom att dela in området under grafen i rektanglar — ibland kallade kolonner — och lägga ihop deras areor.",
+   "s": 35.42,
+   "e": 45.62
+  },
+  {
+   "t": "Ju fler och smalare rektanglar vi delar in området i, desto bättre stämmer rektanglarnas sammanlagda area med den verkliga arean under kurvan — rektanglarna \"sticker ut\" allt mindre från grafen, som i figuren ovan.",
+   "s": 45.62,
+   "e": 58.04
+  },
+  {
+   "t": "Arean A hos en enskild rektangel är höjden gånger bredden.",
+   "s": 58.04,
+   "e": 62.88
+  },
+  {
+   "t": "Har rektangeln bredden delta x och en höjd som ges av funktionsvärdet f av x kan alltså arean skrivas",
+   "s": 62.88,
+   "e": 70.44
+  },
+  {
+   "t": "A är lika med höjden gånger bredden som är lika med f av x gånger delta x",
+   "s": 70.44,
+   "e": 88.11
+  },
+  {
+   "t": "Summerar vi ett ändligt antal sådana rektangelareor från x är lika med a till x är lika med b kan den sammanlagda (ungefärliga) arean skrivas med summatecknet — stora grekiska bokstaven sigma, summan av — enligt",
+   "s": 70.44,
+   "e": 88.11
+  },
+  {
+   "t": "A är ungefär lika med sum x som är lika med a upphöjt till b f av x gånger delta x, ekvation 1",
+   "s": 88.11,
+   "e": 95.74
+  },
+  {
+   "t": "Detta ger dock bara ett ungefärligt värde på arean.",
+   "s": 95.74,
+   "e": 99.86
+  },
+  {
+   "t": "Vi har konstaterat att ju smalare bredd delta x rektanglarna har, desto exaktare blir arean.",
+   "s": 99.86,
+   "e": 106.51
+  },
+  {
+   "t": "Hur får vi då den exakta arean?",
+   "s": 106.51,
+   "e": 109.81
+  },
+  {
+   "t": "Vi låter delta x gå mot 0!",
+   "s": 109.81,
+   "e": 113.12
+  },
+  {
+   "t": "När delta x går mot noll skriver vi det d x i stället.",
+   "s": 113.12,
+   "e": 118.45
+  },
+  {
+   "t": "Vi ska nu summera ett oändligt antal oändligt smala rektangelareor.",
+   "s": 118.45,
+   "e": 123.76
+  },
+  {
+   "t": "När vi summerar ett oändligt antal termer byts summatecknet summan av ut mot integraltecknet integralen av (ett utdraget \"s\"), men symbolen står fortfarande för samma sak — en summa.",
+   "s": 123.76,
+   "e": 135.22
+  },
+  {
+   "t": "Gör vi dessa ersättningar i formel ekvation 1 ovan får vi den exakta arean",
+   "s": 135.22,
+   "e": 141.15
+  },
+  {
+   "t": "A är lika med integralen av a upphöjt till b f av x d x",
+   "s": 141.15,
+   "e": 147.01
+  },
+  {
+   "t": "Detta uttryck kallas en integral.",
+   "s": 147.01,
+   "e": 150.49
+  },
+  {
+   "t": "Eftersom denna integral har en undre gräns a och en övre gräns b kallas den en bestämd integral.",
+   "s": 150.49,
+   "e": 156.78
+  },
+  {
+   "t": "Bestämd integral",
+   "s": 156.78,
+   "e": 159.11
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x",
+   "s": 159.11,
+   "e": 164.41
+  },
+  {
+   "t": "där",
+   "s": 164.41,
+   "e": 165.93
+  },
+  {
+   "t": "integralen av är lika med integraltecken (summatecknet för oändligt många termer)",
+   "s": 165.93,
+   "e": 172.19
+  },
+  {
+   "t": "a är lika med undre integrationsgräns (grafiskt, det x -värde där arean börjar)",
+   "s": 172.19,
+   "e": 178.7
+  },
+  {
+   "t": "b är lika med övre integrationsgräns (grafiskt, det x -värde där arean slutar)",
+   "s": 178.7,
+   "e": 185.41
+  },
+  {
+   "t": "f av x är lika med integrand (grafiskt, den funktion vi ska beräkna arean under)",
+   "s": 185.41,
+   "e": 192.18
+  },
+  {
+   "t": "d x är lika med integrationsvariabel (grafiskt, den oändligt smala bredden hos en rektangel)",
+   "s": 192.18,
+   "e": 200.06
+  },
+  {
+   "t": "Grafiskt motsvaras alltså en bestämd integral av arean mellan en funktions graf och x -axeln, avgränsad av x är lika med a och x är lika med b .",
+   "s": 200.06,
+   "e": 210.05
+  },
+  {
+   "t": "Areor under x-axeln",
+   "s": 210.05,
+   "e": 212.85
+  },
+  {
+   "t": "En bestämd integral kan få ett negativt värde, nämligen om arean under grafen ligger under x -axeln.",
+   "s": 212.85,
+   "e": 219.99
+  },
+  {
+   "t": "En area kan däremot aldrig vara negativ.",
+   "s": 219.99,
+   "e": 223.71
+  },
+  {
+   "t": "Ligger området under x -axeln är alltså integralens värde lika med arean, fast med motsatt (negativt) tecken.",
+   "s": 223.71,
+   "e": 231.7
+  },
+  {
+   "t": "Exempel 1 — Beskriv en skuggad area med en integral",
+   "s": 231.7,
+   "e": 236.24
+  },
+  {
+   "t": "Grafen till f av x är lika med 0,5 x i kvadrat plus 1 är ritad i ett koordinatsystem.",
+   "s": 236.24,
+   "e": 243.5
+  },
+  {
+   "t": "Det skuggade området begränsas av grafen, x -axeln, linjen x är lika med 1 och linjen x är lika med 4 .",
+   "s": 243.5,
+   "e": 251.31
+  },
+  {
+   "t": "Beskriv det skuggade områdets area med en integral.",
+   "s": 251.31,
+   "e": 255.4
+  },
+  {
+   "t": "Arean börjar vid x är lika med 1 och slutar vid x är lika med 4 , så den undre integrationsgränsen är 1 och den övre är 4 .",
+   "s": 255.4,
+   "e": 264.11
+  },
+  {
+   "t": "Grafens funktion är f av x är lika med 0,5 x i kvadrat plus 1 , vilket är integranden.",
+   "s": 264.11,
+   "e": 271.44
+  },
+  {
+   "t": "Arean ges alltså av",
+   "s": 271.44,
+   "e": 274.24
+  },
+  {
+   "t": "integralen av ett upphöjt till 4 parentesen 0,5 x i kvadrat plus 1 slut parentes d x",
+   "s": 274.24,
+   "e": 290.64
+  },
+  {
+   "t": "Svar: integralen av ett upphöjt till 4 parentesen 0,5 x i kvadrat plus 1 slut parentes d x",
+   "s": 274.24,
+   "e": 290.64
+  },
+  {
+   "t": "Beräkna arean utifrån en graf",
+   "s": 274.24,
+   "e": 290.64
+  },
+  {
+   "t": "Exempel 2 — Beräkna area och integral utifrån en graf",
+   "s": 290.64,
+   "e": 295.59
+  },
+  {
+   "t": "Grafen till den räta linjen f av x är lika med 0,5 x plus 2 är ritad i ett koordinatsystem.",
+   "s": 295.59,
+   "e": 304.67
+  },
+  {
+   "t": "Tillsammans med x -axeln, linjen x är lika med 2 och linjen x är lika med 6 bildar grafen ett skuggat område.. a) Beräkna den skuggade arean. b) Beräkna integralen av två upphöjt till 6 parentesen 0,5 x plus 2 slut parentes d x utifrån grafen.",
+   "s": 304.62,
+   "e": 326.13
+  },
+  {
+   "t": "a) Vi delar in det skuggade området i en rektangel och en triangel, båda med basen 4 (avståndet mellan x är lika med 2 och x är lika med 6 ).",
+   "s": 326.13,
+   "e": 336.63
+  },
+  {
+   "t": "Rektangelns höjd ges av det lägsta funktionsvärdet, f av 2 är lika med 0,5 gånger 2 plus 2 som är lika med 3 .",
+   "s": 336.63,
+   "e": 344.82
+  },
+  {
+   "t": "Triangelns höjd ges av skillnaden mellan det högsta och det lägsta funktionsvärdet: f av 6 minus f av 2 är lika med parentesen 0,5 gånger 6 plus 2 slut parentes minus 3 som är lika med 5 minus 3 som är lika med 2 .",
+   "s": 344.82,
+   "e": 359.32
+  },
+  {
+   "t": "A är lika med rektangelarean plus triangelarean som är lika med 4 gånger 3 plus 4 gånger 2 delat med 2 som är lika med 12 plus 4 som är lika med 16",
+   "s": 359.32,
+   "e": 369.77
+  },
+  {
+   "t": "Svar: 16 areaenheter",
+   "s": 369.77,
+   "e": 373.34
+  },
+  {
+   "t": "b) Integralen motsvarar arean under grafen mellan x är lika med 2 och x är lika med 6 , det vill säga samma area som i a-uppgiften.",
+   "s": 373.34,
+   "e": 382.78
+  },
+  {
+   "t": "Värdet av integralen är alltså 16 (observera att integraler, till skillnad från areor, inte anges med någon enhet).",
+   "s": 382.78,
+   "e": 391.64
+  },
+  {
+   "t": "Svar: 16",
+   "s": 391.64,
+   "e": 394.22
+  },
+  {
+   "t": "Exempel 3 — En integral med negativt värde",
+   "s": 394.22,
+   "e": 398.25
+  },
+  {
+   "t": "Grafen till f av x är lika med 1 minus x är ritad i ett koordinatsystem.",
+   "s": 398.25,
+   "e": 404.22
+  },
+  {
+   "t": "Tillsammans med x -axeln och linjen x är lika med 6 bildar grafen ett skuggat område mellan x är lika med 1 och x är lika med 6 .",
+   "s": 404.22,
+   "e": 413.48
+  },
+  {
+   "t": "Bestäm. a) den skuggade arean b) integralen av ett upphöjt till 6 parentesen 1 minus x slut parentes d x .",
+   "s": 413.48,
+   "e": 424.24
+  },
+  {
+   "t": "a) Området är en triangel.",
+   "s": 424.24,
+   "e": 427.52
+  },
+  {
+   "t": "Grafen skär x -axeln vid x är lika med 1 (då f av 1 är lika med 1 minus 1 som är lika med 0 ), så triangelns bas sträcker sig från x är lika med 1 till x är lika med 6 och är 5 längdenheter.",
+   "s": 427.52,
+   "e": 440.44
+  },
+  {
+   "t": "Höjden ges av beloppet | f av 6 | är lika med | 1 minus 6 | som är lika med 5 längdenheter.",
+   "s": 440.44,
+   "e": 446.99
+  },
+  {
+   "t": "Area är lika med basen gånger höjden delat med 2 som är lika med 5 gånger 5 delat med 2 som är lika med 12,5",
+   "s": 446.99,
+   "e": 455.04
+  },
+  {
+   "t": "Svar: 12,5 areaenheter",
+   "s": 455.04,
+   "e": 458.85
+  },
+  {
+   "t": "b) Integralen motsvarar samma område, men eftersom området ligger under x -axeln blir integralens värde negativt.",
+   "s": 458.85,
+   "e": 467.35
+  },
+  {
+   "t": "Till skillnad från i a-uppgiften anges inte svaret med areaenheter, eftersom det är integralens värde (inte en area) som efterfrågas.",
+   "s": 467.35,
+   "e": 476.42
+  },
+  {
+   "t": "Svar: minus 12,5",
+   "s": 476.42,
+   "e": 479.8
+  },
+  {
+   "t": "Avgöra tecknet på en integral",
+   "s": 479.8,
+   "e": 482.94
+  },
+  {
+   "t": "Exempel 4 — Avgör om en integral är positiv eller negativ",
+   "s": 482.94,
+   "e": 488.05
+  },
+  {
+   "t": "Grafen till f av x delar tillsammans med x -axeln in ett område i två delar mellan x är lika med a och x är lika med b : del A ligger ovanför x -axeln och del B ligger under x -axeln.",
+   "s": 488.05,
+   "e": 499.84
+  },
+  {
+   "t": "Del B är större än del A .",
+   "s": 499.84,
+   "e": 502.92
+  },
+  {
+   "t": "Avgör om integralen av a upphöjt till b f av x d x är positiv eller negativ.",
+   "s": 502.92,
+   "e": 510.05
+  },
+  {
+   "t": "Motivera ditt svar.",
+   "s": 510.05,
+   "e": 512.55
+  },
+  {
+   "t": "Arean under x -axeln (del B ) bidrar med ett negativt värde till integralen, medan arean ovanför x -axeln (del A ) bidrar med ett positivt värde.",
+   "s": 512.55,
+   "e": 523.08
+  },
+  {
+   "t": "Eftersom del B är större än del A blir det negativa bidraget större än det positiva, så integralens sammanlagda värde blir negativt.",
+   "s": 523.08,
+   "e": 531.7
+  },
+  {
+   "t": "Svar: Negativ",
+   "s": 531.7,
+   "e": 534.29
+  }
+ ]
+}

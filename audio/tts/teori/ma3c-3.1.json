@@ -1,0 +1,358 @@
+{
+ "id": "ma3c-3.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "17084f79f5e5906f08482f9d7fb0a40d78533de4",
+ "dur": 573.02,
+ "segments": [
+  {
+   "t": "Derivatan av enkla potensfunktioner",
+   "s": 0.1,
+   "e": 3.83
+  },
+  {
+   "t": "För att slippa använda derivatans definition varje gång en derivata ska beräknas försöker vi hitta enkla deriveringsregler.",
+   "s": 3.77,
+   "e": 11.66
+  },
+  {
+   "t": "Vi undersöker derivatan med derivatans definition för några enkla potensfunktioner.",
+   "s": 11.66,
+   "e": 17.86
+  },
+  {
+   "t": "Kom ihåg: derivatans definition",
+   "s": 17.86,
+   "e": 21.52
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h",
+   "s": 21.52,
+   "e": 33.95
+  },
+  {
+   "t": "Derivatan för f av x är lika med x med derivatans definition",
+   "s": 21.52,
+   "e": 33.95
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 parentesen x plus h slut parentes minus x delat med h som är lika med gränsvärdet då h går mot 0 timmar delat med h som är lika med gränsvärdet då h går mot 0 1 som är lika med 1",
+   "s": 33.95,
+   "e": 55.33
+  },
+  {
+   "t": "Så f av x är lika med x har derivatan f prim parentesen x slut parentes är lika med 1 .",
+   "s": 55.33,
+   "e": 63.0
+  },
+  {
+   "t": "Derivatan för f av x är lika med x i kvadrat med derivatans definition",
+   "s": 63.0,
+   "e": 68.72
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 parentesen x plus h slut parentes i kvadrat minus x i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 x i kvadrat plus 2 x h plus h i kvadrat minus x i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 2 x h plus h i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 timmar parentesen 2 x plus h slut parentes delat med h som är lika med gränsvärdet då h går mot 0 parentesen 2 x plus h slut parentes som är lika med 2 x",
+   "s": 68.72,
+   "e": 111.91
+  },
+  {
+   "t": "Så f av x är lika med x i kvadrat har derivatan f prim parentesen x slut parentes är lika med 2 x .",
+   "s": 111.91,
+   "e": 120.34
+  },
+  {
+   "t": "Fortsätter vi undersöka derivator på samma sätt för fler potensfunktioner får vi",
+   "s": 120.34,
+   "e": 126.17
+  },
+  {
+   "t": "Vi ser att derivatan följer ett mönster.",
+   "s": 126.17,
+   "e": 129.85
+  },
+  {
+   "t": "När vi deriverar en potensfunktion multipliceras exponenten ned framför samtidigt som exponenten minskas med 1.",
+   "s": 129.85,
+   "e": 138.01
+  },
+  {
+   "t": "Derivatan av f av x är lika med x upphöjt till n",
+   "s": 138.01,
+   "e": 149.76
+  },
+  {
+   "t": "f av x är lika med x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n x upphöjt till n minus 1",
+   "s": 138.01,
+   "e": 149.76
+  },
+  {
+   "t": "Derivatan med en koefficient",
+   "s": 149.76,
+   "e": 152.9
+  },
+  {
+   "t": "Vi undersöker vad derivatan blir för funktioner med en koefficient framför potensen.",
+   "s": 152.9,
+   "e": 158.93
+  },
+  {
+   "t": "Derivatan för f av x är lika med 3 x i kvadrat med derivatans definition",
+   "s": 158.93,
+   "e": 164.94
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 3 parentesen x plus h slut parentes i kvadrat minus 3 x i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 3 x i kvadrat plus 6 x h plus 3 timmar i kvadrat minus 3 x i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 6 x h plus 3 timmar i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 3 timmar parentesen 2 x plus h slut parentes delat med h som är lika med gränsvärdet då h går mot 0 3 parentesen 2 x plus h slut parentes som är lika med 3 parentesen 2 x plus 0 slut parentes som är lika med 6 x",
+   "s": 164.94,
+   "e": 213.84
+  },
+  {
+   "t": "Så f av x är lika med 3 x i kvadrat har derivatan f prim parentesen x slut parentes är lika med 6 x .",
+   "s": 213.84,
+   "e": 222.74
+  },
+  {
+   "t": "Samma mönster gäller alltså fortfarande!",
+   "s": 222.74,
+   "e": 226.19
+  },
+  {
+   "t": "Vi multiplicerar ned exponenten till koefficienten framför, samtidigt som vi minskar exponenten med 1, dvs.",
+   "s": 226.19,
+   "e": 246.5
+  },
+  {
+   "t": "f av x är lika med 3 x i kvadrat vilket ger att f prim parentesen x slut parentes är lika med 2 gånger 3 x upphöjt till 2 minus 1 som är lika med 6 x",
+   "s": 226.19,
+   "e": 246.5
+  },
+  {
+   "t": "Derivatan av f av x är lika med k x upphöjt till n",
+   "s": 226.19,
+   "e": 246.5
+  },
+  {
+   "t": "f av x är lika med k x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n k x upphöjt till n minus 1",
+   "s": 246.5,
+   "e": 255.93
+  },
+  {
+   "t": "En följd av denna regel är att när x -termer av grad 1 deriveras, så \"försvinner\" x :et.",
+   "s": 255.93,
+   "e": 262.6
+  },
+  {
+   "t": "Derivatan av f av x är lika med k x",
+   "s": 262.6,
+   "e": 272.19
+  },
+  {
+   "t": "f av x är lika med k x vilket ger att f prim parentesen x slut parentes är lika med k",
+   "s": 262.6,
+   "e": 272.19
+  },
+  {
+   "t": "Ytterligare en följd av regeln är att när vi deriverar funktioner med en konstant (ett tal) i nämnaren, så deriveras täljaren enligt de vanliga deriveringsreglerna medan nämnaren behålls.",
+   "s": 272.19,
+   "e": 285.18
+  },
+  {
+   "t": "Det beror på att en konstant nämnare kan ses som en koefficient — funktionen f av x är lika med x i kvadrat delat med 3 kan till exempel skrivas f av x är lika med 1 delat med 3 x i kvadrat , och vid derivering ska koefficienten 1 delat med 3 behållas.",
+   "s": 285.13,
+   "e": 300.17
+  },
+  {
+   "t": "Derivatan av f av x är lika med g av x delat med a",
+   "s": 300.17,
+   "e": 315.41
+  },
+  {
+   "t": "f av x är lika med g av x delat med a vilket ger att f prim parentesen x slut parentes är lika med g prim parentesen x slut parentes delat med a",
+   "s": 300.17,
+   "e": 315.41
+  },
+  {
+   "t": "Derivatan av konstanta funktioner",
+   "s": 300.17,
+   "e": 315.41
+  },
+  {
+   "t": "Till sist undersöker vi vad derivatan blir av konstanta funktioner, dvs. funktioner utan någon x -term alls.",
+   "s": 315.41,
+   "e": 323.18
+  },
+  {
+   "t": "Derivatan för f av x är lika med 5 med derivatans definition",
+   "s": 323.18,
+   "e": 328.43
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 5 minus 5 delat med h som är lika med gränsvärdet då h går mot 0 0 delat med h som är lika med gränsvärdet då h går mot 0 0 som är lika med 0",
+   "s": 328.43,
+   "e": 347.32
+  },
+  {
+   "t": "Så f av x är lika med 5 har derivatan f prim parentesen x slut parentes är lika med 0 .",
+   "s": 347.32,
+   "e": 354.72
+  },
+  {
+   "t": "Detta gäller oavsett vilken konstant funktion vi har — lutningen är ju 0 för alla konstanta funktioner, eftersom grafen är en horisontell linje.",
+   "s": 354.72,
+   "e": 363.63
+  },
+  {
+   "t": "Derivatan av f av x är lika med a",
+   "s": 363.63,
+   "e": 372.07
+  },
+  {
+   "t": "Derivatan av en konstant funktion f av x är lika med a , där a är ett tal, är",
+   "s": 363.63,
+   "e": 372.07
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 0",
+   "s": 372.07,
+   "e": 376.81
+  },
+  {
+   "t": "Sammanfattning — deriveringsregler",
+   "s": 376.81,
+   "e": 380.03
+  },
+  {
+   "t": "f av x är lika med x upphöjt till n f prim parentesen x slut parentes som är lika med n x upphöjt till n minus 1, 6 p t f av x som är lika med k x upphöjt till n f prim parentesen x slut parentes som är lika med n k x upphöjt till n minus 1, 6 p t f av x som är lika med k x f prim parentesen x slut parentes som är lika med k, 6 p t f av x som är lika med a f prim parentesen x slut parentes som är lika med 0, 6 p t f av x som är lika med g av x delat med a f prim parentesen x slut parentes som är lika med g prim parentesen x slut parentes delat med a",
+   "s": 380.03,
+   "e": 422.71
+  },
+  {
+   "t": "Derivera och bestämma derivatans värde i en punkt",
+   "s": 414.83,
+   "e": 422.71
+  },
+  {
+   "t": "Bestäm f prim parentesen x slut parentes med deriveringsreglerna.",
+   "s": 422.71,
+   "e": 428.13
+  },
+  {
+   "t": "Sätt sedan in x är lika med a i derivatafunktionen och bestäm f prim parentesen a slut parentes .",
+   "s": 428.13,
+   "e": 435.4
+  },
+  {
+   "t": "Exempel 1 — Derivera med deriveringsreglerna",
+   "s": 435.4,
+   "e": 439.52
+  },
+  {
+   "t": "Derivera. a) f av x är lika med x upphöjt till 7 b) y är lika med 3 x upphöjt till 5 c) f av x är lika med 27 d) g av x är lika med 12 x e) f av x är lika med x upphöjt till 4 delat med 5",
+   "s": 439.52,
+   "e": 455.73
+  },
+  {
+   "t": "a) Vi multiplicerar ned exponenten 7 och minskar den sedan med 1.",
+   "s": 455.73,
+   "e": 461.26
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 7 x upphöjt till 6",
+   "s": 461.26,
+   "e": 467.11
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 7 x upphöjt till 6",
+   "s": 467.11,
+   "e": 473.55
+  },
+  {
+   "t": "b) Vi multiplicerar ned exponenten 5 och minskar den sedan med 1.",
+   "s": 473.55,
+   "e": 479.23
+  },
+  {
+   "t": "y prim är lika med 5 gånger 3 x upphöjt till 4 som är lika med 15 x upphöjt till 4",
+   "s": 479.23,
+   "e": 486.0
+  },
+  {
+   "t": "Svar: y prim är lika med 15 x upphöjt till 4",
+   "s": 486.0,
+   "e": 490.86
+  },
+  {
+   "t": "c) Derivatan av en konstant funktion är 0.",
+   "s": 490.86,
+   "e": 495.23
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 0",
+   "s": 495.23,
+   "e": 499.96
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 0",
+   "s": 499.96,
+   "e": 505.3
+  },
+  {
+   "t": "d) När vi deriverar en x -term av grad 1 \"försvinner\" x :et.",
+   "s": 505.3,
+   "e": 511.21
+  },
+  {
+   "t": "g prim parentesen x slut parentes är lika med 12",
+   "s": 511.21,
+   "e": 516.06
+  },
+  {
+   "t": "Svar: g prim parentesen x slut parentes är lika med 12",
+   "s": 516.06,
+   "e": 521.55
+  },
+  {
+   "t": "e) Vi deriverar täljaren med deriveringsreglerna och behåller nämnaren.",
+   "s": 521.55,
+   "e": 526.95
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 4 x i kubik delat med 5",
+   "s": 526.95,
+   "e": 533.18
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 4 x i kubik delat med 5",
+   "s": 533.18,
+   "e": 540.03
+  },
+  {
+   "t": "Exempel 2 — Derivatans värde i en punkt",
+   "s": 540.03,
+   "e": 544.01
+  },
+  {
+   "t": "Bestäm f prim, ekvation 3 för f av x är lika med 4 x i kvadrat .",
+   "s": 544.01,
+   "e": 550.0
+  },
+  {
+   "t": "Vi bestämmer först f prim parentesen x slut parentes med deriveringsreglerna och sätter sedan in x är lika med 3 i derivatan.",
+   "s": 550.0,
+   "e": 558.8
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 8 x",
+   "s": 558.8,
+   "e": 568.01
+  },
+  {
+   "t": "f prim, ekvation 3 är lika med 8 gånger 3 som är lika med 24",
+   "s": 558.8,
+   "e": 568.01
+  },
+  {
+   "t": "Svar: f prim, ekvation 3 är lika med 24",
+   "s": 568.01,
+   "e": 573.02
+  }
+ ]
+}

@@ -1,0 +1,203 @@
+{
+ "id": "ma3c-6.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "59148c5af6d21d9abe31115d56143da559825932",
+ "dur": 258.45,
+ "segments": [
+  {
+   "t": "Areasatsen",
+   "s": 0.1,
+   "e": 2.3
+  },
+  {
+   "t": "Med hjälp av sinusfunktionen kan vi beräkna arean T för en triangel utan att känna till höjden.",
+   "s": 2.25,
+   "e": 8.62
+  },
+  {
+   "t": "Det enda vi behöver veta är två sidor och vinkeln mellan dem — den mellanliggande vinkeln.",
+   "s": 8.62,
+   "e": 14.46
+  },
+  {
+   "t": "Areasatsen",
+   "s": 14.46,
+   "e": 16.66
+  },
+  {
+   "t": "I en triangel A B C med sidorna a , b och c gäller",
+   "s": 16.66,
+   "e": 21.57
+  },
+  {
+   "t": "T är lika med a b sinus C delat med 2 som är lika med a c sinus B delat med 2 som är lika med b c sinus A delat med 2",
+   "s": 21.57,
+   "e": 30.7
+  },
+  {
+   "t": "där T är triangelns area.",
+   "s": 30.7,
+   "e": 33.71
+  },
+  {
+   "t": "Vinkeln C är mellanliggande vinkel till sidorna a och b , eftersom det är dessa två sidor som möts i hörn C .",
+   "s": 33.71,
+   "e": 41.27
+  },
+  {
+   "t": "På samma sätt är vinkeln B mellanliggande till sidorna a och c , och vinkeln A mellanliggande till sidorna b och c .",
+   "s": 41.27,
+   "e": 49.05
+  },
+  {
+   "t": "Areasatsen fungerar alltså för trianglar där två sidor och den mellanliggande vinkeln är kända.",
+   "s": 49.05,
+   "e": 55.41
+  },
+  {
+   "t": "Bevis — Areasatsen",
+   "s": 55.41,
+   "e": 58.16
+  },
+  {
+   "t": "Låt A vara den mellanliggande vinkeln till sidorna b och c .",
+   "s": 58.16,
+   "e": 62.92
+  },
+  {
+   "t": "Vi drar en höjd h från hörn C ner till punkten P på sidan A B , enligt figuren nedan.",
+   "s": 62.92,
+   "e": 69.51
+  },
+  {
+   "t": "Triangeln A P C är rätvinklig, med den räta vinkeln i P .",
+   "s": 69.51,
+   "e": 74.72
+  },
+  {
+   "t": "Vi uttrycker höjden h med hjälp av sinus för vinkeln A :",
+   "s": 74.72,
+   "e": 85.74
+  },
+  {
+   "t": "sinus A är lika med h delat med b vilket är ekvivalent med att h är lika med b sinus A, ekvation 1",
+   "s": 74.72,
+   "e": 85.74
+  },
+  {
+   "t": "Arean T för en triangel ges av basen gånger höjden genom två:",
+   "s": 85.74,
+   "e": 95.72
+  },
+  {
+   "t": "T är lika med basen gånger höjden delat med 2 som är lika med c gånger h delat med 2",
+   "s": 85.74,
+   "e": 95.72
+  },
+  {
+   "t": "Insättning av h är lika med b sinus A från ekvation 1 ger",
+   "s": 95.72,
+   "e": 101.17
+  },
+  {
+   "t": "T är lika med c gånger b sinus A delat med 2 som är lika med b c sinus A delat med 2 v.s.b.",
+   "s": 101.17,
+   "e": 109.03
+  },
+  {
+   "t": "På motsvarande sätt bevisas de två övriga formlerna, T är lika med a b sinus C delat med 2 och T är lika med a c sinus B delat med 2 , genom att i stället dra höjden från hörn A respektive hörn B .",
+   "s": 109.03,
+   "e": 121.58
+  },
+  {
+   "t": "Exempel 1 — Beräkna arean av en triangel",
+   "s": 121.58,
+   "e": 125.69
+  },
+  {
+   "t": "Beräkna arean av triangeln nedan.",
+   "s": 125.69,
+   "e": 129.12
+  },
+  {
+   "t": "Den enda kända vinkeln är A är lika med 80 grader .",
+   "s": 129.12,
+   "e": 133.43
+  },
+  {
+   "t": "Den är mellanliggande vinkel till sidorna 11 centimeter och 8 centimeter (sidan mitt emot A behövs inte).",
+   "s": 133.43,
+   "e": 141.18
+  },
+  {
+   "t": "Insättning i areasatsen ger",
+   "s": 141.18,
+   "e": 144.41
+  },
+  {
+   "t": "T är lika med b c sinus A delat med 2 som är lika med 11 gånger 8 sinus 80 grader delat med 2 som är ungefär lika med 43,331 centimeter i kvadrat som är ungefär lika med 43,3 centimeter i kvadrat",
+   "s": 144.41,
+   "e": 159.15
+  },
+  {
+   "t": "Svar: T är ungefär lika med 43,3 centimeter i kvadrat",
+   "s": 159.15,
+   "e": 165.0
+  },
+  {
+   "t": "Exempel 2 — Bestäm en mellanliggande vinkel",
+   "s": 165.0,
+   "e": 168.82
+  },
+  {
+   "t": "En triangel har arean 10 centimeter i kvadrat.",
+   "s": 168.82,
+   "e": 173.11
+  },
+  {
+   "t": "En sida är 4,0 centimeter och en annan är 12,0 centimeter.",
+   "s": 173.11,
+   "e": 178.78
+  },
+  {
+   "t": "Bestäm den mellanliggande vinkeln till dessa sidor.",
+   "s": 178.78,
+   "e": 182.68
+  },
+  {
+   "t": "Vi ställer upp areasatsen T är lika med a b sinus C delat med 2 med T är lika med 10 centimeter i kvadrat, a är lika med 4,0 centimeter och b är lika med 12,0 centimeter, och löser sedan ut sinus C .",
+   "s": 182.68,
+   "e": 196.15
+  },
+  {
+   "t": "10 är lika med 4,0 gånger 12,0 gånger sinus C delat med 2 vilket är ekvivalent med att sinus C är lika med 2 gånger 10 delat med 4,0 gånger 12,0 som är lika med 0,416",
+   "s": 196.15,
+   "e": 210.03
+  },
+  {
+   "t": "C ett är lika med sinus upphöjt till minus 1 parentesen 0,416 slut parentes som är ungefär lika med 24,624 grader som är ungefär lika med 25 grader",
+   "s": 210.03,
+   "e": 222.68
+  },
+  {
+   "t": "C två är lika med 180 grader minus C ett som är ungefär lika med 180 grader minus 25 grader som är lika med 155 grader",
+   "s": 222.68,
+   "e": 233.04
+  },
+  {
+   "t": "Svar: C är ungefär lika med 25 grader eller C är ungefär lika med 155 grader",
+   "s": 233.04,
+   "e": 240.15
+  },
+  {
+   "t": "Observera att båda vinklarna ger giltiga trianglar — se figuren nedan.",
+   "s": 240.15,
+   "e": 245.28
+  },
+  {
+   "t": "Till skillnad från när vi bestämmer vinklar med sinussatsen (nästa avsnitt), där vinkelsumman ibland utesluter en av lösningarna, finns här inget sådant villkor: arean och två sidor bestämmer inte triangeln entydigt.",
+   "s": 245.28,
+   "e": 258.45
+  }
+ ]
+}

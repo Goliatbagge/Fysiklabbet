@@ -1,0 +1,203 @@
+{
+ "id": "ma3c-4.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "209a12ad5c92f1833b3331ea5aec8b3903e76abc",
+ "dur": 263.39,
+ "segments": [
+  {
+   "t": "Extremvärdesproblem med digitalt hjälpmedel",
+   "s": 0.1,
+   "e": 3.96
+  },
+  {
+   "t": "När vi löser extremvärdesproblem med derivata gör vi en algebraisk lösning: vi ställer upp en formel, deriverar, sätter derivatan lika med noll och löser ut den obekanta variabeln.",
+   "s": 3.91,
+   "e": 15.07
+  },
+  {
+   "t": "Vi kan även lösa extremvärdesproblem med digitala hjälpmedel, t.ex. Geogebra.",
+   "s": 15.07,
+   "e": 21.44
+  },
+  {
+   "t": "Då ritar vi i stället upp grafen för den funktion som ska optimeras och läser av eventuella extrempunkter direkt i grafen — utan att derivera för hand.",
+   "s": 21.44,
+   "e": 30.76
+  },
+  {
+   "t": "Så löser du ett extremvärdesproblem grafiskt i Geogebra",
+   "s": 30.76,
+   "e": 35.61
+  },
+  {
+   "t": "Ställ upp en formel för den storhet som ska optimeras (t.ex. en volym eller en area).",
+   "s": 35.61,
+   "e": 42.45
+  },
+  {
+   "t": "Utnyttja ett bivillkor för att uttrycka storheten som en funktion av en enda variabel.",
+   "s": 42.45,
+   "e": 48.34
+  },
+  {
+   "t": "Skriv in funktionen i Geogebras inmatningsfält och anpassa koordinataxlarna så att den intressanta delen av grafen syns.",
+   "s": 48.34,
+   "e": 56.46
+  },
+  {
+   "t": "Använd verktyget Extrempunkt och klicka på grafen.",
+   "s": 56.46,
+   "e": 60.71
+  },
+  {
+   "t": "Läs av koordinaterna: x -koordinaten ger värdet på den variabel som efterfrågas, y -koordinaten ger själva det optimerade värdet.",
+   "s": 60.71,
+   "e": 69.74
+  },
+  {
+   "t": "Metoden fungerar på precis samma typ av problem som den algebraiska metoden, men kräver ingen derivering för hand.",
+   "s": 69.74,
+   "e": 77.39
+  },
+  {
+   "t": "Nackdelen är att vi bara får ett avläst, avrundat värde — inte ett exakt uttryck.",
+   "s": 77.39,
+   "e": 83.28
+  },
+  {
+   "t": "Exempel 1 — Optimera en cylindervolym grafiskt",
+   "s": 83.28,
+   "e": 87.92
+  },
+  {
+   "t": "En cylinder ska tillverkas där summan av höjden och diametern ska vara 50 centimeter.",
+   "s": 87.92,
+   "e": 94.01
+  },
+  {
+   "t": "Vilken radie ska cylindern ha för att den ska få så stor volym som möjligt?",
+   "s": 94.01,
+   "e": 99.17
+  },
+  {
+   "t": "Eftersom volymen ska optimeras ställer vi upp formeln för volymen hos en cylinder.",
+   "s": 99.17,
+   "e": 104.9
+  },
+  {
+   "t": "V är lika med pi r i kvadrat h, ekvation 1",
+   "s": 104.9,
+   "e": 109.46
+  },
+  {
+   "t": "Volymen beror av två variabler, radien r och höjden h .",
+   "s": 109.46,
+   "e": 114.25
+  },
+  {
+   "t": "För att vi ska kunna optimera volymen måste vi uttrycka den i en enda variabel.",
+   "s": 114.25,
+   "e": 119.78
+  },
+  {
+   "t": "Vi utnyttjar att summan av höjden och diametern ska vara 50 centimeter.",
+   "s": 119.78,
+   "e": 125.31
+  },
+  {
+   "t": "Kom ihåg att diametern d är lika med 2 r , vilket ger",
+   "s": 125.31,
+   "e": 130.59
+  },
+  {
+   "t": "h plus 2 r är lika med 50",
+   "s": 130.59,
+   "e": 134.03
+  },
+  {
+   "t": "Vi löser ut h och får",
+   "s": 134.03,
+   "e": 137.0
+  },
+  {
+   "t": "h är lika med 50 minus 2 r",
+   "s": 137.0,
+   "e": 140.46
+  },
+  {
+   "t": "Vi sätter in h är lika med 50 minus 2 r i formel ekvation 1, vilket ger",
+   "s": 140.46,
+   "e": 146.74
+  },
+  {
+   "t": "V är lika med pi r i kvadrat parentesen 50 minus 2 r slut parentes som är lika med 50 pi r i kvadrat minus 2 pi r i kubik",
+   "s": 146.74,
+   "e": 156.26
+  },
+  {
+   "t": "Vi har nu skrivit volymen V som en funktion av den enda variabeln r :",
+   "s": 156.26,
+   "e": 166.94
+  },
+  {
+   "t": "V parentesen r slut parentes är lika med 50 pi r i kvadrat minus 2 pi r i kubik",
+   "s": 156.26,
+   "e": 166.94
+  },
+  {
+   "t": "Vi skriver in V parentesen r slut parentes är lika med 50 pi r i kvadrat minus 2 pi r i kubik i inmatningsfältet i Geogebra och anpassar koordinataxlarna med panoreringsverktyget så att grafens topp syns.",
+   "s": 166.94,
+   "e": 180.47
+  },
+  {
+   "t": "Grafen är en tredjegradskurva som stiger från origo upp till ett maximum och sedan avtar mot allt mer negativa värden.",
+   "s": 180.47,
+   "e": 188.2
+  },
+  {
+   "t": "Vi använder därefter verktyget Extrempunkt och klickar på grafen.",
+   "s": 188.2,
+   "e": 193.29
+  },
+  {
+   "t": "Eftersom det är radien (den oberoende variabeln) som efterfrågas läser vi av x -koordinaten för extrempunkten.",
+   "s": 193.29,
+   "e": 201.07
+  },
+  {
+   "t": "Geogebra markerar punkten B och visar",
+   "s": 201.07,
+   "e": 204.95
+  },
+  {
+   "t": "B är lika med parentesen 16. 66667, 14544. 41043 slut parentes",
+   "s": 204.95,
+   "e": 218.22
+  },
+  {
+   "t": "(Geogebra visar decimaltal med punkt som decimaltecken, inte komma.) x -koordinaten ger radien och y -koordinaten anger samtidigt den maximala volymen i cm i kubik.",
+   "s": 218.22,
+   "e": 229.99
+  },
+  {
+   "t": "Vi ser att maximal volym fås vid radien r är lika med 16,666 som är ungefär lika med 16,7 centimeter.",
+   "s": 229.99,
+   "e": 239.14
+  },
+  {
+   "t": "Även vid en grafisk lösning bör man kontrollera att svaret är rimligt: här måste 0 är mindre än r är mindre än 25 gälla, eftersom höjden h är lika med 50 minus 2 r annars blir negativ.",
+   "s": 239.14,
+   "e": 251.06
+  },
+  {
+   "t": "Radien r är ungefär lika med 16,7 centimeter ligger inom detta intervall, så svaret är rimligt.",
+   "s": 251.06,
+   "e": 258.44
+  },
+  {
+   "t": "Svar: r är ungefär lika med 16,7 centimeter",
+   "s": 258.44,
+   "e": 263.39
+  }
+ ]
+}

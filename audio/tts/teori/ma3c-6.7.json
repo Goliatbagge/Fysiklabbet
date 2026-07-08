@@ -1,0 +1,303 @@
+{
+ "id": "ma3c-6.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8d20d76854b0ea383dade2b402e231d43286666e",
+ "dur": 433.32,
+ "segments": [
+  {
+   "t": "Cosinussatsen",
+   "s": 0.1,
+   "e": 2.39
+  },
+  {
+   "t": "För att bestämma sidor och vinklar i vissa trianglar, som sinussatsen inte klarar av, kan vi använda oss av cosinussatsen.",
+   "s": 2.34,
+   "e": 10.41
+  },
+  {
+   "t": "Cosinussatsen",
+   "s": 10.41,
+   "e": 12.71
+  },
+  {
+   "t": "I en triangel A B C med sidorna a , b och c gäller",
+   "s": 12.71,
+   "e": 17.65
+  },
+  {
+   "t": "c i kvadrat är lika med a i kvadrat plus b i kvadrat minus 2 a b cosinus C b i kvadrat som är lika med a i kvadrat plus c i kvadrat minus 2 a c cosinus B a i kvadrat som är lika med b i kvadrat plus c i kvadrat minus 2 b c cosinus A",
+   "s": 17.65,
+   "e": 42.29
+  },
+  {
+   "t": "Sidan a är motstående sida till vinkel A , sidan b är motstående sida till vinkel B och sidan c är motstående sida till vinkel C .",
+   "s": 17.65,
+   "e": 42.29
+  },
+  {
+   "t": "Vi bevisar sambandet för b i kvadrat nedan.",
+   "s": 42.29,
+   "e": 46.41
+  },
+  {
+   "t": "Vi konstruerar en godtycklig triangel med beteckningar enligt figuren nedan, där höjden h från A delar sidan a i delsträckorna x (närmast B ) och a minus x (närmast C ).",
+   "s": 46.41,
+   "e": 58.15
+  },
+  {
+   "t": "Bevis — Cosinussatsen",
+   "s": 58.15,
+   "e": 61.02
+  },
+  {
+   "t": "Pythagoras sats i de två räta trianglarna ger",
+   "s": 61.02,
+   "e": 65.29
+  },
+  {
+   "t": "c i kvadrat är lika med h i kvadrat plus x i kvadrat vilket är ekvivalent med att h i kvadrat är lika med c i kvadrat minus x i kvadrat",
+   "s": 65.29,
+   "e": 75.12
+  },
+  {
+   "t": "b i kvadrat är lika med h i kvadrat plus parentesen a minus x slut parentes i kvadrat vilket är ekvivalent med att h i kvadrat är lika med b i kvadrat minus parentesen a minus x slut parentes i kvadrat",
+   "s": 75.12,
+   "e": 89.0
+  },
+  {
+   "t": "Eftersom båda uttrycken är lika med h i kvadrat får vi",
+   "s": 89.0,
+   "e": 93.55
+  },
+  {
+   "t": "c i kvadrat minus x i kvadrat är lika med b i kvadrat minus parentesen a minus x slut parentes i kvadrat som är lika med b i kvadrat minus a i kvadrat plus 2 a x minus x i kvadrat vilket är ekvivalent med att c i kvadrat är lika med b i kvadrat minus a i kvadrat plus 2 a x",
+   "s": 93.55,
+   "e": 112.62
+  },
+  {
+   "t": "Vi löser ut b i kvadrat och får",
+   "s": 112.62,
+   "e": 116.21
+  },
+  {
+   "t": "b i kvadrat är lika med a i kvadrat plus c i kvadrat minus 2 a x, ekvation 1",
+   "s": 116.21,
+   "e": 123.58
+  },
+  {
+   "t": "I den räta triangeln med hypotenusan c gäller",
+   "s": 123.58,
+   "e": 127.81
+  },
+  {
+   "t": "cosinus B är lika med x delat med c vilket är ekvivalent med att x är lika med c cosinus B",
+   "s": 127.81,
+   "e": 138.46
+  },
+  {
+   "t": "Insättning av x är lika med c cosinus B i ekvation 1 ger",
+   "s": 127.81,
+   "e": 138.46
+  },
+  {
+   "t": "b i kvadrat är lika med a i kvadrat plus c i kvadrat minus 2 a c cosinus B",
+   "s": 138.46,
+   "e": 146.06
+  },
+  {
+   "t": "v.s.b.",
+   "s": 138.46,
+   "e": 146.06
+  },
+  {
+   "t": "På motsvarande sätt bevisas de två övriga formlerna.",
+   "s": 146.06,
+   "e": 150.4
+  },
+  {
+   "t": "Cosinussatsen – användning",
+   "s": 150.4,
+   "e": 153.32
+  },
+  {
+   "t": "Cosinussatsen går att använda för trianglar med",
+   "s": 153.32,
+   "e": 157.14
+  },
+  {
+   "t": "två sidor och mellanliggande vinkel kända,",
+   "s": 157.14,
+   "e": 161.1
+  },
+  {
+   "t": "alla tre sidor kända och ingen vinkel känd.",
+   "s": 161.1,
+   "e": 164.9
+  },
+  {
+   "t": "Exempel 1 — Bestäm en sida med cosinussatsen",
+   "s": 164.9,
+   "e": 169.09
+  },
+  {
+   "t": "Bestäm sidan c i triangeln nedan.",
+   "s": 169.09,
+   "e": 172.49
+  },
+  {
+   "t": "Två sidor och mellanliggande vinkel är kända, så vi kan använda cosinussatsen.",
+   "s": 172.49,
+   "e": 178.38
+  },
+  {
+   "t": "Cosinussatsen c i kvadrat är lika med a i kvadrat plus b i kvadrat minus 2 a b cosinus C ger",
+   "s": 178.38,
+   "e": 186.28
+  },
+  {
+   "t": "c i kvadrat är lika med 19 i kvadrat plus 17 i kvadrat minus 2 gånger 19 gånger 17 cosinus 34 grader vilket är ekvivalent med att c är lika med roten ur 19 i kvadrat plus 17 i kvadrat minus 2 gånger 19 gånger 17 cosinus 34 grader som är ungefär lika med 10,697 som är ungefär lika med 10,7",
+   "s": 186.28,
+   "e": 207.22
+  },
+  {
+   "t": "Svar: c är ungefär lika med 10,7 centimeter",
+   "s": 207.22,
+   "e": 212.03
+  },
+  {
+   "t": "Exempel 2 — Bestäm alla vinklar med cosinussatsen",
+   "s": 212.03,
+   "e": 216.34
+  },
+  {
+   "t": "Beräkna vinklarna i triangeln nedan.",
+   "s": 216.34,
+   "e": 219.6
+  },
+  {
+   "t": "Alla tre sidor är kända, så vi kan använda cosinussatsen.",
+   "s": 219.6,
+   "e": 224.34
+  },
+  {
+   "t": "Vi börjar med att bestämma vinkeln A och använder då den form av cosinussatsen som innehåller cosinus A .",
+   "s": 224.34,
+   "e": 231.25
+  },
+  {
+   "t": "a i kvadrat är lika med b i kvadrat plus c i kvadrat minus 2 b c cosinus A",
+   "s": 231.25,
+   "e": 239.79
+  },
+  {
+   "t": "Insättning av våra värden ger",
+   "s": 231.25,
+   "e": 239.79
+  },
+  {
+   "t": "5 i kvadrat är lika med 7 i kvadrat plus 3,5 i kvadrat minus 2 gånger 7 gånger 3,5 cosinus A",
+   "s": 239.79,
+   "e": 248.39
+  },
+  {
+   "t": "Vi löser ut cosinus A",
+   "s": 248.39,
+   "e": 266.86
+  },
+  {
+   "t": "2 gånger 7 gånger 3,5 cosinus A är lika med 7 i kvadrat plus 3,5 i kvadrat minus 5 i kvadrat vilket är ekvivalent med att cosinus A är lika med 7 i kvadrat plus 3,5 i kvadrat minus 5 i kvadrat delat med 2 gånger 7 gånger 3,5",
+   "s": 248.39,
+   "e": 266.86
+  },
+  {
+   "t": "A är lika med cosinus upphöjt till minus 1 parentesen 7 i kvadrat plus 3,5 i kvadrat minus 5 i kvadrat delat med 2 gånger 7 gånger 3,5 slut parentes som är ungefär lika med 42,285 grader som är ungefär lika med 42,3 grader",
+   "s": 266.86,
+   "e": 284.31
+  },
+  {
+   "t": "När en vinkel är känd kan vi bestämma ytterligare en vinkel med antingen cosinussatsen eller sinussatsen.",
+   "s": 284.31,
+   "e": 291.06
+  },
+  {
+   "t": "Vi visar båda metoderna.",
+   "s": 291.06,
+   "e": 293.89
+  },
+  {
+   "t": "Med cosinussatsen:",
+   "s": 293.89,
+   "e": 308.41
+  },
+  {
+   "t": "b i kvadrat är lika med a i kvadrat plus c i kvadrat minus 2 a c cosinus B",
+   "s": 293.89,
+   "e": 308.41
+  },
+  {
+   "t": "7 i kvadrat är lika med 5 i kvadrat plus 3,5 i kvadrat minus 2 gånger 5 gånger 3,5 cosinus B vilket är ekvivalent med att cosinus B är lika med 5 i kvadrat plus 3,5 i kvadrat minus 7 i kvadrat delat med 2 gånger 5 gånger 3,5",
+   "s": 293.89,
+   "e": 319.06
+  },
+  {
+   "t": "B är lika med cosinus upphöjt till minus 1 parentesen 5 i kvadrat plus 3,5 i kvadrat minus 7 i kvadrat delat med 2 gånger 5 gånger 3,5 slut parentes som är ungefär lika med 109,615 grader som är ungefär lika med 109,6 grader",
+   "s": 319.01,
+   "e": 337.15
+  },
+  {
+   "t": "Med sinussatsen:",
+   "s": 337.15,
+   "e": 351.53
+  },
+  {
+   "t": "sinus B delat med b är lika med sinus A delat med a vilket är ekvivalent med att sinus B är lika med 7 sinus 42,285 grader delat med 5 som är ungefär lika med 0,941",
+   "s": 337.15,
+   "e": 351.53
+  },
+  {
+   "t": "B ett är lika med sinus upphöjt till minus 1 parentesen 0,941 slut parentes som är ungefär lika med 70,385 grader som är ungefär lika med 70,4 grader",
+   "s": 351.53,
+   "e": 364.07
+  },
+  {
+   "t": "B två är lika med 180 grader minus B ett som är ungefär lika med 180 grader minus 70,4 grader som är lika med 109,6 grader",
+   "s": 364.07,
+   "e": 375.0
+  },
+  {
+   "t": "Vinkeln B ett är ungefär lika med 70,4 grader är orimlig eftersom cosinus B var negativt, vilket innebär att vinkeln B är trubbig.",
+   "s": 375.0,
+   "e": 384.47
+  },
+  {
+   "t": "Vi får alltså B är ungefär lika med 109,6 grader .",
+   "s": 384.47,
+   "e": 389.73
+  },
+  {
+   "t": "Den tredje och sista vinkeln C bestäms enklast med triangelns vinkelsumma.",
+   "s": 389.73,
+   "e": 395.11
+  },
+  {
+   "t": "C är lika med 180 grader minus A minus B som är ungefär lika med 180 grader minus 42,3 grader minus 109,6 grader som är lika med 28,1 grader",
+   "s": 395.11,
+   "e": 407.62
+  },
+  {
+   "t": "Svar: A är ungefär lika med 42,3 grader och B är ungefär lika med 109,6 grader och C är ungefär lika med 28,1 grader",
+   "s": 407.62,
+   "e": 418.02
+  },
+  {
+   "t": "Observera att sinussatsens första lösning ovan gav en felaktig vinkel (den spetsiga B ett ).",
+   "s": 418.02,
+   "e": 425.1
+  },
+  {
+   "t": "För att minska risken för slarvfel rekommenderas, om möjligt, cosinussatsen framför sinussatsen när man ska bestämma vinklar.",
+   "s": 425.1,
+   "e": 433.32
+  }
+ ]
+}

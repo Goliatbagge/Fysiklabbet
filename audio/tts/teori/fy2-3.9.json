@@ -1,8 +1,8 @@
 {
  "id": "fy2-3.9",
  "voice": "sv-SE-SofieNeural",
- "hash": "0b102b0fd2892851afd6d3ddf7ec59d40d13dd80",
- "dur": 451.48,
+ "hash": "0b0f0126bbf7e380e17d697f16a1e3bdbb193fb2",
+ "dur": 452.4,
  "segments": [
   {
    "t": "Magnetiskt flöde och induktionslagen",
@@ -107,302 +107,302 @@
   {
    "t": "Genomsnittlig spänning eller spänning vid konstant/likformig förändring av flöde:",
    "s": 112.54,
-   "e": 130.1
+   "e": 130.24
   },
   {
    "t": "e är lika med minus delta Phi delat med delta tiden t",
    "s": 112.54,
-   "e": 130.1
+   "e": 130.24
   },
   {
    "t": "Momentanspänning:",
    "s": 112.54,
-   "e": 130.1
+   "e": 130.24
   },
   {
-   "t": "e är lika med minus avståndet d Phi delat med d tiden t som är lika med minus Phi ' parentesen t slut parentes",
+   "t": "e är lika med minus avståndet d Phi delat med d tiden t som är lika med minus Phi prim parentesen t slut parentes",
    "s": 112.54,
-   "e": 130.1
+   "e": 130.24
   },
   {
    "t": "där",
-   "s": 130.1,
-   "e": 131.61
+   "s": 130.24,
+   "e": 131.75
   },
   {
    "t": "e är lika med inducerad spänning/ems (volt)",
-   "s": 131.61,
-   "e": 136.78
+   "s": 131.75,
+   "e": 136.91
   },
   {
    "t": "ΔΦ är lika med ändring av magnetiskt flöde (weber)",
-   "s": 136.78,
-   "e": 141.03
+   "s": 136.91,
+   "e": 141.16
   },
   {
    "t": "Δt är lika med tiden för ändring av magnetiskt flöde (sekunder)",
-   "s": 141.03,
-   "e": 146.24
+   "s": 141.16,
+   "e": 146.36
   },
   {
-   "t": "avståndet d Phi delat med d tiden t är lika med Phi ' parentesen t slut parentes är lika med tidsderivatan av det magnetiska flödet (Wb/s)",
-   "s": 146.24,
-   "e": 158.38
+   "t": "avståndet d Phi delat med d tiden t är lika med Phi prim parentesen t slut parentes är lika med tidsderivatan av det magnetiska flödet (Wb/s)",
+   "s": 146.36,
+   "e": 158.65
   },
   {
    "t": "Minustecknet i induktionslagen kommer från Lenz lag — den inducerade strömmen motverkar den förändring som orsakar den.",
-   "s": 158.38,
-   "e": 166.16
+   "s": 158.65,
+   "e": 166.43
   },
   {
    "t": "Härledning — Induktionslagen",
-   "s": 166.16,
-   "e": 169.2
+   "s": 166.43,
+   "e": 169.46
   },
   {
    "t": "Vi tänker oss att vi flyttar en ledare med konstant hastighet i ett magnetfält.",
-   "s": 169.2,
-   "e": 174.6
+   "s": 169.46,
+   "e": 174.86
   },
   {
    "t": "Mellan tidpunkterna t ett och t två har det magnetiska flödet ändrats med",
-   "s": 174.6,
-   "e": 180.15
+   "s": 174.86,
+   "e": 180.41
   },
   {
    "t": "delta Phi är lika med B gånger delta arean A, ekvation 1",
-   "s": 180.15,
-   "e": 185.9
+   "s": 180.41,
+   "e": 186.16
   },
   {
    "t": "där ΔA motsvaras av det skuggade området:",
-   "s": 185.9,
-   "e": 198.01
+   "s": 186.16,
+   "e": 198.28
   },
   {
    "t": "delta arean A är lika med hävarmen l gånger delta sträckan s",
-   "s": 185.9,
-   "e": 198.01
+   "s": 186.16,
+   "e": 198.28
   },
   {
    "t": "Förflyttningen delta sträckan s är lika med hastigheten v gånger delta tiden t .",
-   "s": 185.9,
-   "e": 198.01
+   "s": 186.16,
+   "e": 198.28
   },
   {
    "t": "Detta ger",
-   "s": 198.01,
-   "e": 200.03
+   "s": 198.28,
+   "e": 200.29
   },
   {
    "t": "delta arean A är lika med hävarmen l gånger hastigheten v gånger delta tiden t",
-   "s": 200.03,
-   "e": 208.29
+   "s": 200.29,
+   "e": 208.55
   },
   {
    "t": "Insättning i ekvation 1 ger",
-   "s": 200.03,
-   "e": 208.29
+   "s": 200.29,
+   "e": 208.55
   },
   {
    "t": "delta Phi är lika med B gånger hävarmen l gånger hastigheten v gånger delta tiden t",
-   "s": 208.29,
-   "e": 214.91
+   "s": 208.55,
+   "e": 215.18
   },
   {
    "t": "Sedan tidigare har vi att e är lika med hävarmen l gånger hastigheten v gånger B , så B gånger hävarmen l gånger hastigheten v är lika med e :",
-   "s": 214.91,
-   "e": 226.72
+   "s": 215.18,
+   "e": 226.99
   },
   {
    "t": "delta Phi är lika med e gånger delta tiden t",
-   "s": 214.91,
-   "e": 226.72
+   "s": 215.18,
+   "e": 226.99
   },
   {
    "t": "Vi löser ut den inducerade spänningen och får",
-   "s": 226.72,
-   "e": 230.8
+   "s": 226.99,
+   "e": 231.06
   },
   {
    "t": "e är lika med delta Phi delat med delta tiden t",
-   "s": 230.8,
-   "e": 237.97
+   "s": 231.06,
+   "e": 238.24
   },
   {
    "t": "vsv. (Lenz lag tillför minustecknet.)",
-   "s": 230.8,
-   "e": 237.97
+   "s": 231.06,
+   "e": 238.24
   },
   {
    "t": "Induktion i spole",
-   "s": 237.97,
-   "e": 240.45
+   "s": 238.24,
+   "e": 240.71
   },
   {
    "t": "Om det magnetiska flödet ändras i en spole med N varv, blir den inducerade spänningen N gånger så stor.",
-   "s": 240.45,
-   "e": 247.38
+   "s": 240.71,
+   "e": 247.64
   },
   {
    "t": "Induktionslagen för spole",
-   "s": 247.38,
-   "e": 250.19
+   "s": 247.64,
+   "e": 250.45
   },
   {
    "t": "Genomsnittlig spänning eller spänning vid konstant/likformig förändring av flöde:",
-   "s": 250.19,
-   "e": 269.19
+   "s": 250.45,
+   "e": 269.62
   },
   {
    "t": "e är lika med minus N gånger delta Phi delat med delta tiden t",
-   "s": 250.19,
-   "e": 269.19
+   "s": 250.45,
+   "e": 269.62
   },
   {
    "t": "Momentanspänning:",
-   "s": 250.19,
-   "e": 269.19
+   "s": 250.45,
+   "e": 269.62
   },
   {
-   "t": "e är lika med minus N gånger avståndet d Phi delat med d tiden t som är lika med minus N gånger Phi ' parentesen t slut parentes",
-   "s": 250.19,
-   "e": 269.19
+   "t": "e är lika med minus N gånger avståndet d Phi delat med d tiden t som är lika med minus N gånger Phi prim parentesen t slut parentes",
+   "s": 250.45,
+   "e": 269.62
   },
   {
    "t": "där",
-   "s": 269.19,
-   "e": 270.7
+   "s": 269.62,
+   "e": 271.14
   },
   {
    "t": "e är lika med inducerad spänning (volt)",
-   "s": 270.7,
-   "e": 274.75
+   "s": 271.14,
+   "e": 275.19
   },
   {
    "t": "N är lika med antalet varv på spolen",
-   "s": 274.75,
-   "e": 278.16
+   "s": 275.19,
+   "e": 278.6
   },
   {
    "t": "ΔΦ är lika med ändring av magnetiskt flöde (weber)",
-   "s": 278.16,
-   "e": 282.39
+   "s": 278.6,
+   "e": 282.82
   },
   {
    "t": "Δt är lika med tiden för ändring av magnetiskt flöde (sekunder)",
-   "s": 282.39,
-   "e": 287.55
+   "s": 282.82,
+   "e": 287.99
   },
   {
-   "t": "avståndet d Phi delat med d tiden t är lika med Phi ' parentesen t slut parentes är lika med tidsderivatan av det magnetiska flödet (Wb/s)",
-   "s": 287.55,
-   "e": 299.65
+   "t": "avståndet d Phi delat med d tiden t är lika med Phi prim parentesen t slut parentes är lika med tidsderivatan av det magnetiska flödet (Wb/s)",
+   "s": 287.99,
+   "e": 300.27
   },
   {
    "t": "Induktion och grafer",
-   "s": 299.65,
-   "e": 302.21
+   "s": 300.27,
+   "e": 302.85
   },
   {
-   "t": "Lutningen i en Φ–t-graf motsvarar inducerad spänning/ems, eftersom e är lika med minus Phi ' parentesen tiden t slut parentes (derivatan motsvarar lutningen).",
-   "s": 302.21,
-   "e": 316.0
+   "t": "Lutningen i en Φ–t-graf motsvarar inducerad spänning/ems, eftersom e är lika med minus Phi prim parentesen tiden t slut parentes (derivatan motsvarar lutningen).",
+   "s": 302.85,
+   "e": 316.93
   },
   {
    "t": "Exempel 1 — Likformig flödesändring i en spole",
-   "s": 315.95,
-   "e": 320.35
+   "s": 316.88,
+   "e": 321.28
   },
   {
    "t": "Det magnetiska flödet i en spole med 370 varv ökar likformigt från 0 till 0,17 mWb på 0,23 sekunder.",
-   "s": 320.35,
-   "e": 329.55
+   "s": 321.28,
+   "e": 330.48
   },
   {
    "t": "Hur stor blir den inducerade spänningen?",
-   "s": 329.55,
-   "e": 332.99
+   "s": 330.48,
+   "e": 333.91
   },
   {
    "t": "Vi ställer upp formeln för inducerad spänning i en spole vid likformig förändring av flödet.",
-   "s": 332.99,
-   "e": 339.1
+   "s": 333.91,
+   "e": 340.03
   },
   {
    "t": "e är lika med minus N gånger delta Phi delat med delta tiden t, ekvation 1",
-   "s": 339.1,
-   "e": 345.52
+   "s": 340.03,
+   "e": 346.44
   },
   {
    "t": "N är lika med 370 delta Phi som är lika med parentesen 0,17 minus 0 slut parentes mWb som är lika med 0,17 gånger 10 upphöjt till minus 3 weber delta tiden t som är lika med 0,23 sekund",
-   "s": 345.52,
-   "e": 359.97
+   "s": 346.44,
+   "e": 360.89
   },
   {
    "t": "e är lika med minus 370 gånger 0,17 gånger 10 upphöjt till minus 3 delat med 0,23 som är lika med minus 0,273 volt som är ungefär lika med minus 0,27 volt",
-   "s": 359.97,
-   "e": 373.54
+   "s": 360.89,
+   "e": 374.46
   },
   {
    "t": "Svar: −0,27 volt",
-   "s": 373.54,
-   "e": 377.34
+   "s": 374.46,
+   "e": 378.26
   },
   {
    "t": "Exempel 2 — Inducerad spänning från Φ–t-graf",
-   "s": 377.34,
-   "e": 381.65
+   "s": 378.26,
+   "e": 382.58
   },
   {
    "t": "Det magnetiska flödet genom en slinga ändras med tiden enligt nedanstående diagram.",
-   "s": 381.65,
-   "e": 387.39
+   "s": 382.58,
+   "e": 388.31
   },
   {
    "t": "Bestäm den inducerade spänningen vid tidpunkten",
-   "s": 387.39,
-   "e": 391.23
+   "s": 388.31,
+   "e": 392.15
   },
   {
    "t": "a) t är lika med 1 sekund",
-   "s": 391.23,
-   "e": 394.42
+   "s": 392.15,
+   "e": 395.34
   },
   {
    "t": "b) t är lika med 4 sekunder",
-   "s": 394.42,
-   "e": 398.07
+   "s": 395.34,
+   "e": 398.99
   },
   {
    "t": "a) Den inducerade spänningen vid en tidpunkt motsvarar momentanspänning, som ges av grafens lutning.",
-   "s": 398.07,
-   "e": 405.34
+   "s": 398.99,
+   "e": 406.26
   },
   {
    "t": "Vi bestämmer lutningen vid t är lika med 1 sekunder genom att undersöka ändringskvoten mellan t är lika med 0 och t är lika med 2 sekunder.",
-   "s": 405.34,
-   "e": 414.25
+   "s": 406.26,
+   "e": 415.18
   },
   {
    "t": "e är lika med minus delta Phi delat med delta tiden t som är lika med minus 10 mWb delat med 2 sekund som är lika med minus 10 gånger 10 upphöjt till minus 3 weber delat med 2 sekund som är lika med minus 0,005 volt som är lika med minus 5,0 millivolt",
-   "s": 414.25,
-   "e": 431.19
+   "s": 415.18,
+   "e": 432.11
   },
   {
    "t": "Svar: −5,0 millivolt",
-   "s": 431.19,
-   "e": 434.95
+   "s": 432.11,
+   "e": 435.88
   },
   {
    "t": "b) Vid t är lika med 4 sekunder sker ingen ändring av det magnetiska flödet (det ligger konstant på 10 mWb). ΔΦ är lika med 0, vilket innebär att ingen spänning induceras.",
-   "s": 434.95,
-   "e": 448.63
+   "s": 435.88,
+   "e": 449.55
   },
   {
    "t": "Svar: 0 volt",
-   "s": 448.63,
-   "e": 451.48
+   "s": 449.55,
+   "e": 452.4
   }
  ]
 }

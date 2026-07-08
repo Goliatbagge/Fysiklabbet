@@ -1,0 +1,193 @@
+{
+ "id": "ma3c-3.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d085055a7dd2d34b34b11ca16571f83e03ca8f79",
+ "dur": 292.94,
+ "segments": [
+  {
+   "t": "Derivatan av polynomfunktioner",
+   "s": 0.1,
+   "e": 3.48
+  },
+  {
+   "t": "En funktion med flera termer kallas polynomfunktion.",
+   "s": 3.42,
+   "e": 7.74
+  },
+  {
+   "t": "Vi undersöker om det finns enkla deriveringsregler även för polynomfunktioner.",
+   "s": 7.74,
+   "e": 13.54
+  },
+  {
+   "t": "Sedan tidigare har vi derivatans definition",
+   "s": 13.54,
+   "e": 17.62
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h",
+   "s": 17.62,
+   "e": 32.19
+  },
+  {
+   "t": "Härledning — Derivatan av f av x är lika med x i kvadrat plus 4 x minus 7 med definitionen",
+   "s": 17.62,
+   "e": 32.19
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 parentesen x plus h slut parentes i kvadrat plus 4 parentesen x plus h slut parentes minus 7 minus parentesen x i kvadrat plus 4 x minus 7 slut parentes delat med h som är lika med gränsvärdet då h går mot 0 x i kvadrat plus 2 x h plus h i kvadrat plus 4 x plus 4 timmar minus 7 minus x i kvadrat minus 4 x plus 7 delat med h som är lika med gränsvärdet då h går mot 0 2 x h plus h i kvadrat plus 4 timmar delat med h som är lika med gränsvärdet då h går mot 0 timmar parentesen 2 x plus h plus 4 slut parentes delat med h som är lika med gränsvärdet då h går mot 0 parentesen 2 x plus h plus 4 slut parentes som är lika med 2 x plus 4",
+   "s": 32.19,
+   "e": 89.14
+  },
+  {
+   "t": "Så f av x är lika med x i kvadrat plus 4 x minus 7 har derivatan f prim parentesen x slut parentes är lika med 2 x plus 4 .",
+   "s": 89.14,
+   "e": 99.44
+  },
+  {
+   "t": "Om vi i stället deriverar samma funktion f av x är lika med x i kvadrat plus 4 x minus 7 term för term, med de deriveringsregler vi tidigare tagit fram (multiplicera ner exponenten och minska den med 1), får vi",
+   "s": 99.44,
+   "e": 113.38
+  },
+  {
+   "t": "x i kvadrat har derivatan 2 x",
+   "s": 113.38,
+   "e": 119.19
+  },
+  {
+   "t": "4 x har derivatan 4",
+   "s": 113.38,
+   "e": 119.19
+  },
+  {
+   "t": "minus 7 har derivatan 0",
+   "s": 119.19,
+   "e": 122.3
+  },
+  {
+   "t": "Lägger vi ihop dessa termer får vi f prim parentesen x slut parentes är lika med 2 x plus 4 — precis samma svar som med derivatans definition ovan!",
+   "s": 122.3,
+   "e": 132.04
+  },
+  {
+   "t": "Derivatan av polynom",
+   "s": 132.04,
+   "e": 134.86
+  },
+  {
+   "t": "Derivatan av en funktion med flera termer (ett polynom) fås genom att derivera funktionen term för term.",
+   "s": 134.86,
+   "e": 142.32
+  },
+  {
+   "t": "Exempel 1 — Derivera term för term",
+   "s": 142.32,
+   "e": 145.89
+  },
+  {
+   "t": "Derivera. a) f av x är lika med 3 x upphöjt till 7 minus 5 x i kvadrat plus 8 b) f av x är lika med 4 x i kubik delat med 3 minus x delat med 5 c) f av x är lika med parentesen 2 x minus 3 slut parentes i kvadrat",
+   "s": 145.89,
+   "e": 164.12
+  },
+  {
+   "t": "a) Vi deriverar term för term och får",
+   "s": 164.12,
+   "e": 168.0
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 7 gånger 3 x upphöjt till 6 minus 2 gånger 5 x som är lika med 21 x upphöjt till 6 minus 10 x",
+   "s": 168.0,
+   "e": 189.76
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 21 x upphöjt till 6 minus 10 x",
+   "s": 168.0,
+   "e": 189.76
+  },
+  {
+   "t": "b) Vi deriverar täljarna med de vanliga deriveringsreglerna och behåller nämnarna oförändrade.",
+   "s": 168.0,
+   "e": 189.76
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 gånger 4 x i kvadrat delat med 3 minus 1 delat med 5 som är lika med 12 x i kvadrat delat med 3 minus 1 delat med 5 som är lika med 4 x i kvadrat minus 1 delat med 5",
+   "s": 189.76,
+   "e": 205.18
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 4 x i kvadrat minus 1 delat med 5",
+   "s": 205.18,
+   "e": 212.82
+  },
+  {
+   "t": "c) Har funktionen ett parentesuttryck måste vi först utveckla parentesen och därefter derivera som vanligt.",
+   "s": 212.82,
+   "e": 220.74
+  },
+  {
+   "t": "Vi utvecklar med andra kvadreringsregeln.",
+   "s": 220.74,
+   "e": 224.49
+  },
+  {
+   "t": "f av x är lika med 4 x i kvadrat minus 12 x plus 9",
+   "s": 224.49,
+   "e": 230.28
+  },
+  {
+   "t": "Nu deriverar vi term för term.",
+   "s": 230.28,
+   "e": 233.38
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 2 gånger 4 x minus 12 som är lika med 8 x minus 12",
+   "s": 233.38,
+   "e": 241.36
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 8 x minus 12",
+   "s": 241.36,
+   "e": 247.7
+  },
+  {
+   "t": "Exempel 2 — Derivatans värde i en punkt",
+   "s": 247.7,
+   "e": 251.72
+  },
+  {
+   "t": "Låt f av x är lika med 3 x i kvadrat minus x .",
+   "s": 251.72,
+   "e": 256.75
+  },
+  {
+   "t": "Bestäm f prim parentesen minus 2 slut parentes .",
+   "s": 256.75,
+   "e": 261.36
+  },
+  {
+   "t": "Vi börjar med att derivera funktionen.",
+   "s": 261.36,
+   "e": 264.8
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 2 gånger 3 x minus 1 som är lika med 6 x minus 1",
+   "s": 264.8,
+   "e": 272.91
+  },
+  {
+   "t": "Därefter sätter vi in x är lika med minus 2 i derivatafunktionen.",
+   "s": 272.91,
+   "e": 278.2
+  },
+  {
+   "t": "f prim parentesen minus 2 slut parentes är lika med 6 gånger parentesen minus 2 slut parentes minus 1 som är lika med minus 12 minus 1 som är lika med minus 13",
+   "s": 278.2,
+   "e": 289.95
+  },
+  {
+   "t": "Svar: minus 13",
+   "s": 289.95,
+   "e": 292.94
+  }
+ ]
+}

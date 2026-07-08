@@ -1,0 +1,368 @@
+{
+ "id": "ma3c-1.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8cf255b2260f4d93e5d50c29831eb7a1335b9d92",
+ "dur": 430.59,
+ "segments": [
+  {
+   "t": "Gränsvärden",
+   "s": 0.1,
+   "e": 2.17
+  },
+  {
+   "t": "Introduktion — gränsvärde",
+   "s": 2.12,
+   "e": 4.88
+  },
+  {
+   "t": "Vi undersöker värdet hos uttrycket 1 delat med x när x blir större och större.",
+   "s": 4.88,
+   "e": 10.72
+  },
+  {
+   "t": "1 delat med 10 är lika med 0,1 1 delat med 100 som är lika med 0,01 1 delat med 1000 som är lika med 0,001 1 delat med 10 000 som är lika med 0,0001",
+   "s": 10.72,
+   "e": 23.31
+  },
+  {
+   "t": "Vi ser att när x ökar, kommer värdet av 1 delat med x närmare och närmare 0.",
+   "s": 23.31,
+   "e": 29.46
+  },
+  {
+   "t": "Talet 0 är den gräns som värdet går mot — men det når aldrig fram dit.",
+   "s": 29.46,
+   "e": 34.56
+  },
+  {
+   "t": "Vi säger att gränsvärdet är 0.",
+   "s": 34.56,
+   "e": 37.8
+  },
+  {
+   "t": "Ett värde som ett uttryck närmar sig kallas gränsvärde.",
+   "s": 37.8,
+   "e": 42.11
+  },
+  {
+   "t": "I exemplet ovan gäller alltså att gränsvärdet när x går mot oändligheten ( oändligheten ) för 1 delat med x är lika med 0.",
+   "s": 42.11,
+   "e": 50.59
+  },
+  {
+   "t": "Detta skrivs",
+   "s": 50.59,
+   "e": 52.83
+  },
+  {
+   "t": "gränsvärdet då x går mot oändligheten 1 delat med x är lika med 0",
+   "s": 52.83,
+   "e": 58.44
+  },
+  {
+   "t": "Beteckningen gränsvärdet då x går mot oändligheten utläses \"limes då x går mot oändligheten\" eller \"gränsvärdet då x går mot oändligheten\" (ordet kommer av det latinska limes, som betyder just \"gräns\" — jämför med engelskans limit).",
+   "s": 58.44,
+   "e": 72.41
+  },
+  {
+   "t": "Gränsvärden kan bestämmas med olika metoder beroende på hur uttrycket ser ut och på om variabeln går mot ett tal eller mot en oändlighet.",
+   "s": 72.41,
+   "e": 80.89
+  },
+  {
+   "t": "Gränsvärde då variabeln går mot ett tal",
+   "s": 80.89,
+   "e": 84.66
+  },
+  {
+   "t": "Bestämma gränsvärde då variabeln går mot ett tal",
+   "s": 84.66,
+   "e": 88.78
+  },
+  {
+   "t": "Metod 1: Sätt in det värde som x går mot direkt och beräkna.",
+   "s": 88.78,
+   "e": 93.85
+  },
+  {
+   "t": "Metod 2: Faktorisera och förkorta uttrycket, och sätt sedan in värdet som x går mot.",
+   "s": 93.85,
+   "e": 100.65
+  },
+  {
+   "t": "Metod 3: Gör två tabeller och närma dig värdet som x går mot underifrån (\"från vänster\") respektive ovanifrån (\"från höger\").",
+   "s": 100.65,
+   "e": 110.16
+  },
+  {
+   "t": "Går de mot samma gränsvärde är det uttryckets gränsvärde.",
+   "s": 110.16,
+   "e": 114.58
+  },
+  {
+   "t": "Går de mot olika värden saknas gränsvärde.",
+   "s": 114.58,
+   "e": 118.44
+  },
+  {
+   "t": "Metoderna är sorterade efter hur effektiva de är.",
+   "s": 118.44,
+   "e": 122.55
+  },
+  {
+   "t": "Fungerar inte metod 1, gå vidare till metod 2.",
+   "s": 122.55,
+   "e": 126.94
+  },
+  {
+   "t": "Fungerar inte metod 2, gå vidare till metod 3.",
+   "s": 126.94,
+   "e": 131.44
+  },
+  {
+   "t": "Exempel 1 — Sätta in värdet direkt",
+   "s": 131.44,
+   "e": 135.09
+  },
+  {
+   "t": "Bestäm gränsvärdet då x går mot 2 parentesen x plus 5 slut parentes .",
+   "s": 135.09,
+   "e": 141.2
+  },
+  {
+   "t": "Uttrycket x plus 5 är definierat för alla x , så metod 1 fungerar: vi sätter in x är lika med 2 direkt (samtidigt som limes-beteckningen tas bort) och beräknar.",
+   "s": 141.2,
+   "e": 152.16
+  },
+  {
+   "t": "gränsvärdet då x går mot 2 parentesen x plus 5 slut parentes är lika med 2 plus 5 som är lika med 7",
+   "s": 152.16,
+   "e": 160.31
+  },
+  {
+   "t": "Svar: 7",
+   "s": 160.31,
+   "e": 164.74
+  },
+  {
+   "t": "Exempel 2 — Förkorta uttrycket",
+   "s": 160.31,
+   "e": 164.74
+  },
+  {
+   "t": "Bestäm gränsvärdet då x går mot 1 x i kvadrat minus 1 delat med x minus 1 a) med tabeller b) genom att förkorta uttrycket.",
+   "s": 164.74,
+   "e": 173.94
+  },
+  {
+   "t": "Metod 1 fungerar inte: sätter vi in x är lika med 1 får vi 0 delat med 0 , och uttrycket är inte definierat där.",
+   "s": 173.94,
+   "e": 181.89
+  },
+  {
+   "t": "a) Vi gör två tabeller och närmar oss värdet 1 underifrån respektive ovanifrån.",
+   "s": 181.89,
+   "e": 188.09
+  },
+  {
+   "t": "Både underifrån och ovanifrån närmar sig uttrycket värdet 2 när x går mot 1, så",
+   "s": 188.09,
+   "e": 194.95
+  },
+  {
+   "t": "gränsvärdet då x går mot 1 x i kvadrat minus 1 delat med x minus 1 är lika med 2",
+   "s": 194.95,
+   "e": 202.19
+  },
+  {
+   "t": "b) Vi faktoriserar täljaren med konjugatregeln och förkortar bort den gemensamma faktorn parentesen x minus 1 slut parentes .",
+   "s": 202.19,
+   "e": 211.15
+  },
+  {
+   "t": "gränsvärdet då x går mot 1 x i kvadrat minus 1 delat med x minus 1 är lika med gränsvärdet då x går mot 1 parentesen x plus 1 slut parentes parentesen x minus 1 slut parentes delat med x minus 1 som är lika med gränsvärdet då x går mot 1 parentesen x plus 1 slut parentes",
+   "s": 211.15,
+   "e": 230.3
+  },
+  {
+   "t": "Nu är uttrycket definierat vid x är lika med 1 , så vi sätter in värdet (samtidigt som limes-beteckningen tas bort) och beräknar.",
+   "s": 230.3,
+   "e": 238.82
+  },
+  {
+   "t": "gränsvärdet då x går mot 1 parentesen x plus 1 slut parentes är lika med 1 plus 1 som är lika med 2",
+   "s": 238.82,
+   "e": 246.62
+  },
+  {
+   "t": "Svar: 2",
+   "s": 246.62,
+   "e": 251.11
+  },
+  {
+   "t": "Exempel 3 — Gränsvärde saknas",
+   "s": 246.62,
+   "e": 251.11
+  },
+  {
+   "t": "Bestäm gränsvärdet då x går mot 3 x plus 1 delat med x minus 3 .",
+   "s": 251.11,
+   "e": 257.05
+  },
+  {
+   "t": "Metod 1 fungerar inte eftersom nämnaren blir 0 vid x är lika med 3 .",
+   "s": 257.05,
+   "e": 262.64
+  },
+  {
+   "t": "Vi kan inte heller förkorta uttrycket enligt metod 2 — varken täljaren eller nämnaren går att faktorisera.",
+   "s": 262.64,
+   "e": 269.4
+  },
+  {
+   "t": "Då återstår metod 3: två tabeller där x närmar sig 3 underifrån respektive ovanifrån.",
+   "s": 269.4,
+   "e": 276.43
+  },
+  {
+   "t": "Underifrån växer uttrycket mot minus oändligheten , medan det ovanifrån växer mot plus oändligheten .",
+   "s": 276.43,
+   "e": 283.74
+  },
+  {
+   "t": "Eftersom vi får olika gränsvärden underifrån och ovanifrån saknas gränsvärde.",
+   "s": 283.74,
+   "e": 289.34
+  },
+  {
+   "t": "Svar: Gränsvärde saknas.",
+   "s": 289.34,
+   "e": 292.6
+  },
+  {
+   "t": "Gränsvärde då variabeln går mot en oändlighet",
+   "s": 292.6,
+   "e": 296.82
+  },
+  {
+   "t": "Går enbart täljaren i ett uttryck mot en oändlighet är täljaren alltid oändligt mycket större än nämnaren, hur stor nämnaren än är — gränsvärdet blir då en oändlighet.",
+   "s": 296.82,
+   "e": 308.94
+  },
+  {
+   "t": "Går i stället enbart nämnaren mot en oändlighet blir nämnaren oändligt mycket större än täljaren, och kvoten går mot 0.",
+   "s": 308.89,
+   "e": 316.48
+  },
+  {
+   "t": "Går både täljaren och nämnaren mot en oändlighet måste uttrycket först förenklas: konstanttermer kan strykas eftersom de försvinner i jämförelse med en oändlighet (att hälla en tesked vatten i havet gör fortfarande havet \"oändligt\" mycket större).",
+   "s": 316.48,
+   "e": 330.7
+  },
+  {
+   "t": "Därefter kan uttrycket förkortas och gränsvärdet bestämmas.",
+   "s": 330.7,
+   "e": 335.36
+  },
+  {
+   "t": "Bestämma gränsvärde då variabeln går mot en oändlighet",
+   "s": 335.36,
+   "e": 339.86
+  },
+  {
+   "t": "Om en variabel x går mot",
+   "s": 339.86,
+   "e": 343.05
+  },
+  {
+   "t": "den positiva oändligheten skrivs det x går mot oändligheten eller x går mot plus oändligheten",
+   "s": 343.05,
+   "e": 349.76
+  },
+  {
+   "t": "den negativa oändligheten skrivs det x går mot minus oändligheten",
+   "s": 349.76,
+   "e": 355.1
+  },
+  {
+   "t": "Ett uttryck med en oändlighet",
+   "s": 355.1,
+   "e": 358.25
+  },
+  {
+   "t": "enbart i täljaren ger en oändlighet som gränsvärde",
+   "s": 358.25,
+   "e": 362.51
+  },
+  {
+   "t": "enbart i nämnaren ger 0 som gränsvärde",
+   "s": 362.51,
+   "e": 366.29
+  },
+  {
+   "t": "i både täljaren och nämnaren förenklas genom att konstanttermer stryks.",
+   "s": 366.29,
+   "e": 371.33
+  },
+  {
+   "t": "Därefter görs en förkortning och gränsvärdet kan bestämmas.",
+   "s": 371.33,
+   "e": 375.96
+  },
+  {
+   "t": "Exempel 4 — Oändlighet i nämnaren",
+   "s": 375.96,
+   "e": 379.66
+  },
+  {
+   "t": "Bestäm gränsvärdet då x går mot oändligheten 5 delat med x .",
+   "s": 379.66,
+   "e": 384.86
+  },
+  {
+   "t": "Vi har ett gränsvärde med en oändlighet enbart i nämnaren.",
+   "s": 384.86,
+   "e": 389.59
+  },
+  {
+   "t": "Gränsvärdet blir då 0.",
+   "s": 389.59,
+   "e": 392.49
+  },
+  {
+   "t": "Svar: 0",
+   "s": 392.49,
+   "e": 397.99
+  },
+  {
+   "t": "Exempel 5 — Oändlighet i både täljare och nämnare",
+   "s": 392.49,
+   "e": 397.99
+  },
+  {
+   "t": "Bestäm gränsvärdet då x går mot oändligheten 3 x plus 2 delat med x minus 1 .",
+   "s": 397.99,
+   "e": 404.71
+  },
+  {
+   "t": "Vi har ett gränsvärde med oändligheter i både täljaren och nämnaren.",
+   "s": 404.71,
+   "e": 409.85
+  },
+  {
+   "t": "Vi stryker konstanttermerna, förkortar och beräknar.",
+   "s": 409.85,
+   "e": 414.1
+  },
+  {
+   "t": "gränsvärdet då x går mot oändligheten 3 x plus 2 delat med x minus 1 är lika med gränsvärdet då x går mot oändligheten 3 x delat med x som är lika med gränsvärdet då x går mot oändligheten 3 som är lika med 3",
+   "s": 414.1,
+   "e": 428.36
+  },
+  {
+   "t": "Svar: 3",
+   "s": 428.36,
+   "e": 430.59
+  }
+ ]
+}

@@ -323,6 +323,7 @@
             if (courseName === 'Fysik nivå 2') return 'fy2';
             if (courseName === 'Matematik nivå 1c') return 'ma1c';
             if (courseName === 'Matematik nivå 2c') return 'ma2c';
+            if (courseName === 'Matematik fortsättning nivå 1c') return 'ma3c';
             return null;
         }
 
@@ -377,6 +378,7 @@
                                     <a href="katalog.html#fy2">Fysik nivå 2</a>
                                     <a href="katalog.html#ma1c">Matematik nivå 1c</a>
                                     <a href="katalog.html#ma2c">Matematik nivå 2c</a>
+                                    <a href="katalog.html#ma3c">Matematik fortsättning nivå 1c</a>
                                 </div>
                             </div>
                             <a href="simuleringar.html">Simuleringar</a>
@@ -1800,12 +1802,13 @@
             fy2: ['Fysik', 'Fysik nivå 2'],
             ma1c: ['Matematik', 'Matematik nivå 1c'],
             ma2c: ['Matematik', 'Matematik nivå 2c'],
+            ma3c: ['Matematik', 'Matematik fortsättning nivå 1c'],
         };
         function parseInitialState() {
             const out = { subject: 'Fysik', course: null, chapter: null, section: null, view: 'teori' };
 
             const hash = (window.location.hash || '').replace(/^#/, '');
-            const m = hash.match(/^(fy1|fy2|ma1c|ma2c)(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar|exitticket))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c)(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar|exitticket))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }

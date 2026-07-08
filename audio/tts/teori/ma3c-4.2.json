@@ -1,0 +1,313 @@
+{
+ "id": "ma3c-4.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "42d80aa0441c3eed1ee571b9de876e17584665ab",
+ "dur": 442.56,
+ "segments": [
+  {
+   "t": "Derivatans nollställen",
+   "s": 0.1,
+   "e": 2.89
+  },
+  {
+   "t": "Vi vet sedan tidigare att tecknet på derivatan f prim parentesen x slut parentes avgör om en funktion är växande eller avtagande i ett intervall: f prim parentesen x slut parentes är större än 0 ger en växande funktion och f prim parentesen x slut parentes är mindre än 0 ger en avtagande funktion.",
+   "s": 2.84,
+   "e": 21.27
+  },
+  {
+   "t": "Men vad händer i den punkt där derivatan är exakt 0, dvs. där f prim parentesen x slut parentes är lika med 0 ?",
+   "s": 21.27,
+   "e": 29.61
+  },
+  {
+   "t": "Där är kurvans tangent vågrät, och punkten är antingen en lokal maximipunkt, en lokal minimipunkt eller en terrasspunkt.",
+   "s": 29.61,
+   "e": 38.12
+  },
+  {
+   "t": "Lokal maximipunkt och lokal minimipunkt",
+   "s": 38.12,
+   "e": 42.14
+  },
+  {
+   "t": "En punkt på en kurva som vänder kallas en lokal extrempunkt.",
+   "s": 42.14,
+   "e": 46.88
+  },
+  {
+   "t": "Vänder kurvan i en",
+   "s": 46.88,
+   "e": 49.49
+  },
+  {
+   "t": "\"topp\" kallas punkten en lokal maximipunkt.",
+   "s": 49.49,
+   "e": 53.36
+  },
+  {
+   "t": "Funktionsvärdet ( y -värdet) i en lokal maximipunkt kallas lokalt maximum.",
+   "s": 53.36,
+   "e": 59.64
+  },
+  {
+   "t": "\"dal\" kallas punkten en lokal minimipunkt.",
+   "s": 59.64,
+   "e": 63.62
+  },
+  {
+   "t": "Funktionsvärdet ( y -värdet) i en lokal minimipunkt kallas lokalt minimum.",
+   "s": 63.62,
+   "e": 69.88
+  },
+  {
+   "t": "Ett gemensamt namn för lokala maximi- och minimipunkter är lokala extrempunkter, och funktionsvärdet i en sådan punkt kallas lokalt extremvärde.",
+   "s": 69.88,
+   "e": 79.3
+  },
+  {
+   "t": "Ordet \"lokal\" används eftersom det bara gäller i ett litet intervall kring punkten — kurvan kan mycket väl ha andra delar med större eller mindre funktionsvärden.",
+   "s": 79.3,
+   "e": 88.26
+  },
+  {
+   "t": "I en lokal extrempunkt är derivatan (lutningen) lika med 0.",
+   "s": 88.26,
+   "e": 93.66
+  },
+  {
+   "t": "Terrasspunkt",
+   "s": 93.66,
+   "e": 95.69
+  },
+  {
+   "t": "Om en kurva planar ut i en punkt (tangenten blir vågrät) men sedan fortsätter i samma riktning som innan kallas punkten en terrasspunkt.",
+   "s": 95.69,
+   "e": 104.49
+  },
+  {
+   "t": "Även i en terrasspunkt är derivatan (lutningen) lika med 0.",
+   "s": 104.49,
+   "e": 109.76
+  },
+  {
+   "t": "Sammanfattningsvis gäller att om f prim parentesen a slut parentes är lika med 0 så är punkten där x är lika med a antingen en lokal maximipunkt, en lokal minimipunkt eller en terrasspunkt.",
+   "s": 109.76,
+   "e": 121.58
+  },
+  {
+   "t": "Huruvida en punkt är en maximi-, minimi- eller terrasspunkt kallas punktens karaktär.",
+   "s": 121.58,
+   "e": 127.92
+  },
+  {
+   "t": "Karaktären kan alltid bestämmas med hjälp av en teckentabell, där vi undersöker tecknet på f prim parentesen x slut parentes strax till vänster och strax till höger om punkten (se exemplet nedan).",
+   "s": 127.92,
+   "e": 140.16
+  },
+  {
+   "t": "Är funktionen en andragradsfunktion kan karaktären bestämmas snabbare, direkt utifrån tecknet framför x i kvadrat -termen: en positiv x i kvadrat -term ger en \"glad\" kurva och en minimipunkt, medan en negativ x i kvadrat -term ger en \"sur\" kurva och en maximipunkt.",
+   "s": 140.16,
+   "e": 156.45
+  },
+  {
+   "t": "Bestämma extrempunkter och deras karaktär",
+   "s": 156.45,
+   "e": 160.11
+  },
+  {
+   "t": "Bestämma extrempunkter och deras karaktär",
+   "s": 160.11,
+   "e": 163.74
+  },
+  {
+   "t": "Derivera den ursprungliga funktionen, sätt derivatan lika med 0 och lös ekvationen.",
+   "s": 163.74,
+   "e": 169.96
+  },
+  {
+   "t": "Det ger extrempunkternas x -koordinater.",
+   "s": 169.96,
+   "e": 173.79
+  },
+  {
+   "t": "Sätt in x -värdena från steg 1 i den ursprungliga funktionen.",
+   "s": 173.79,
+   "e": 178.72
+  },
+  {
+   "t": "Det ger extrempunkternas y -koordinater.",
+   "s": 178.72,
+   "e": 182.49
+  },
+  {
+   "t": "Bestäm punkternas karaktär med hjälp av en teckentabell.",
+   "s": 182.49,
+   "e": 186.56
+  },
+  {
+   "t": "Exempel 1 — Bestäm lokala extrempunkter och deras karaktär",
+   "s": 186.56,
+   "e": 191.54
+  },
+  {
+   "t": "Bestäm de lokala extrempunkterna och deras karaktär till funktionen",
+   "s": 191.54,
+   "e": 196.47
+  },
+  {
+   "t": "f av x är lika med x i kubik minus 6 x i kvadrat plus 9 x plus 3",
+   "s": 196.47,
+   "e": 203.38
+  },
+  {
+   "t": "Steg 1: Vi deriverar funktionen, sätter derivatan lika med 0 och löser ekvationen för att få fram extrempunkternas x -koordinater.",
+   "s": 203.38,
+   "e": 212.57
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 x i kvadrat minus 12 x plus 9",
+   "s": 212.57,
+   "e": 219.78
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 0 vilket ger att 3 x i kvadrat minus 12 x plus 9 är lika med 0",
+   "s": 219.78,
+   "e": 228.43
+  },
+  {
+   "t": "Vi delar båda led med 3 och löser med p q -formeln.",
+   "s": 228.43,
+   "e": 232.9
+  },
+  {
+   "t": "x i kvadrat minus 4 x plus 3 är lika med 0",
+   "s": 232.9,
+   "e": 237.57
+  },
+  {
+   "t": "x är lika med 2 plus minus roten ur 2 i kvadrat minus 3 x som är lika med 2 plus minus roten ur 1 x som är lika med 2 plus minus 1",
+   "s": 237.57,
+   "e": 247.75
+  },
+  {
+   "t": "vilket ger x ett är lika med 1 och x två är lika med 3 .",
+   "s": 247.75,
+   "e": 252.45
+  },
+  {
+   "t": "Steg 2: Vi sätter in x -värdena i den ursprungliga funktionen för att få fram extrempunkternas y -koordinater.",
+   "s": 252.45,
+   "e": 260.05
+  },
+  {
+   "t": "f av 1 är lika med 1 i kubik minus 6 gånger 1 i kvadrat plus 9 gånger 1 plus 3 som är lika med 7",
+   "s": 260.05,
+   "e": 267.89
+  },
+  {
+   "t": "f av 3 är lika med 3 i kubik minus 6 gånger 3 i kvadrat plus 9 gånger 3 plus 3 som är lika med 3",
+   "s": 267.89,
+   "e": 275.79
+  },
+  {
+   "t": "Punkterna parentesen 1, 7 slut parentes och parentesen 3, 3 slut parentes har alltså derivatan 0.",
+   "s": 275.79,
+   "e": 283.9
+  },
+  {
+   "t": "Steg 3: Vi bestämmer punkternas karaktär med en teckentabell.",
+   "s": 283.9,
+   "e": 288.77
+  },
+  {
+   "t": "Vi sätter in ett valfritt värde mindre än 1 (t.ex. x är lika med 0 ), ett värde mellan 1 och 3 (t.ex. x är lika med 2 ) och ett värde större än 3 (t.ex. x är lika med 10 ) i derivatan.",
+   "s": 288.77,
+   "e": 304.37
+  },
+  {
+   "t": "f prim, ekvation 0 är lika med 3 gånger 0 i kvadrat minus 12 gånger 0 plus 9 som är lika med 9 är större än 0",
+   "s": 304.32,
+   "e": 312.97
+  },
+  {
+   "t": "f prim, ekvation 2 är lika med 3 gånger 2 i kvadrat minus 12 gånger 2 plus 9 som är lika med minus 3 är mindre än 0",
+   "s": 312.97,
+   "e": 321.99
+  },
+  {
+   "t": "f prim, ekvation 10 är lika med 3 gånger 10 i kvadrat minus 12 gånger 10 plus 9 som är lika med 189 är större än 0",
+   "s": 321.99,
+   "e": 331.78
+  },
+  {
+   "t": "Derivatans teckenväxling plus går mot 0 går mot minus vid x är lika med 1 visar att parentesen 1, 7 slut parentes är en lokal maximipunkt, och teckenväxlingen minus går mot 0 går mot plus vid x är lika med 3 visar att parentesen 3, 3 slut parentes är en lokal minimipunkt.",
+   "s": 331.78,
+   "e": 350.03
+  },
+  {
+   "t": "Svar: parentesen 1, 7 slut parentes är en lokal maximipunkt och parentesen 3, 3 slut parentes är en lokal minimipunkt.",
+   "s": 350.03,
+   "e": 359.86
+  },
+  {
+   "t": "Exempel 2 — Extrempunkt till en andragradsfunktion",
+   "s": 359.86,
+   "e": 364.28
+  },
+  {
+   "t": "Bestäm extrempunkten och dess karaktär till funktionen",
+   "s": 364.28,
+   "e": 368.54
+  },
+  {
+   "t": "f av x är lika med 3 x i kvadrat minus 6 x plus 2",
+   "s": 368.54,
+   "e": 374.27
+  },
+  {
+   "t": "Vi deriverar funktionen, sätter derivatan lika med 0 och löser ekvationen för att få fram extrempunktens x -koordinat.",
+   "s": 374.27,
+   "e": 382.43
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 6 x minus 6",
+   "s": 382.43,
+   "e": 388.29
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 0 vilket ger att 6 x minus 6 är lika med 0 vilket ger att x är lika med 1",
+   "s": 388.29,
+   "e": 397.44
+  },
+  {
+   "t": "Vi sätter in x är lika med 1 i den ursprungliga funktionen för att få fram extrempunktens y -koordinat.",
+   "s": 397.44,
+   "e": 404.49
+  },
+  {
+   "t": "f av 1 är lika med 3 gånger 1 i kvadrat minus 6 gånger 1 plus 2 som är lika med minus 1",
+   "s": 404.49,
+   "e": 411.84
+  },
+  {
+   "t": "Extrempunkten har alltså koordinaterna parentesen 1, minus 1 slut parentes .",
+   "s": 411.84,
+   "e": 418.22
+  },
+  {
+   "t": "Eftersom f av x är en andragradsfunktion kan vi bestämma karaktären snabbare, utan teckentabell, genom tecknet framför x i kvadrat -termen.",
+   "s": 418.22,
+   "e": 428.12
+  },
+  {
+   "t": "Koefficienten framför x i kvadrat är 3, som är positiv, vilket ger en \"glad\" kurva och därmed en minimipunkt.",
+   "s": 428.12,
+   "e": 436.19
+  },
+  {
+   "t": "Svar: parentesen 1, minus 1 slut parentes är en lokal minimipunkt.",
+   "s": 436.19,
+   "e": 442.56
+  }
+ ]
+}

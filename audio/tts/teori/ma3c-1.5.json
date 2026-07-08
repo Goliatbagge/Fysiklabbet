@@ -1,0 +1,243 @@
+{
+ "id": "ma3c-1.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ff941c200c70a551c724721b71faa8a85c358a80",
+ "dur": 350.87,
+ "segments": [
+  {
+   "t": "Symbolhanterande hjälpmedel",
+   "s": 0.1,
+   "e": 3.3
+  },
+  {
+   "t": "En räknare som inte bara kan hantera numeriska beräkningar (beräkningar med siffror), utan också kan hantera algebraiska uttryck (bokstavsuttryck), kallas symbolhanterande hjälpmedel.",
+   "s": 3.25,
+   "e": 14.74
+  },
+  {
+   "t": "Geogebra är ett exempel på ett sådant hjälpmedel.",
+   "s": 14.74,
+   "e": 18.82
+  },
+  {
+   "t": "Symbolhanterande hjälpmedel kan t.ex. användas för att förenkla uttryck, faktorisera uttryck, lösa ekvationer och bestämma gränsvärden.",
+   "s": 18.82,
+   "e": 28.0
+  },
+  {
+   "t": "Kommandon i Geogebra",
+   "s": 28.0,
+   "e": 30.75
+  },
+  {
+   "t": "Exempel 1 — Förenkla ett uttryck",
+   "s": 30.75,
+   "e": 34.38
+  },
+  {
+   "t": "Förenkla parentesen x plus 3 slut parentes parentesen x minus 1 slut parentes parentesen x plus 5 slut parentes med symbolhanterande hjälpmedel.",
+   "s": 34.38,
+   "e": 45.34
+  },
+  {
+   "t": "Kommandot Utveckla är nära besläktat med Förenkla i tabellen ovan — det multiplicerar ut parenteserna och skriver om uttrycket i utvecklad (expanderad) form.",
+   "s": 45.34,
+   "e": 55.64
+  },
+  {
+   "t": "I Geogebras inmatningsfält skriver vi \"utv\" och väljer Utveckla( Uttryck ) i menyn Utveckla.",
+   "s": 55.64,
+   "e": 62.73
+  },
+  {
+   "t": "Vi skriver in uttrycket och slår Enter.",
+   "s": 62.73,
+   "e": 66.31
+  },
+  {
+   "t": "Utveckla parentesen parentesen x plus 3 slut parentes parentesen x minus 1 slut parentes parentesen x plus 5 slut parentes slut parentes går mot x i kubik plus 7 x i kvadrat plus 7 x minus 15",
+   "s": 66.31,
+   "e": 81.91
+  },
+  {
+   "t": "Svar: x i kubik plus 7 x i kvadrat plus 7 x minus 15",
+   "s": 81.91,
+   "e": 88.12
+  },
+  {
+   "t": "Exempel 2 — Faktorisera ett uttryck",
+   "s": 88.12,
+   "e": 91.97
+  },
+  {
+   "t": "Faktorisera x i kubik plus 7 x i kvadrat plus 7 x minus 15 med symbolhanterande hjälpmedel.",
+   "s": 91.97,
+   "e": 99.62
+  },
+  {
+   "t": "I Geogebras inmatningsfält skriver vi \"fakt\" och väljer Faktorisera( Polynom ) i menyn Faktorisera.",
+   "s": 99.62,
+   "e": 107.21
+  },
+  {
+   "t": "Vi definierar en funktion med uttrycket i kommandot och slår Enter.",
+   "s": 107.21,
+   "e": 112.41
+  },
+  {
+   "t": "f av x är lika med Faktorisera parentesen x i kubik plus 7 x i kvadrat plus 7 x minus 15 slut parentes som är lika med parentesen x minus 1 slut parentes parentesen x plus 3 slut parentes parentesen x plus 5 slut parentes",
+   "s": 112.41,
+   "e": 129.32
+  },
+  {
+   "t": "Svar: parentesen x minus 1 slut parentes parentesen x plus 3 slut parentes parentesen x plus 5 slut parentes",
+   "s": 129.32,
+   "e": 139.21
+  },
+  {
+   "t": "Exempel 3 — Lös en tredjegradsekvation",
+   "s": 139.21,
+   "e": 143.29
+  },
+  {
+   "t": "Lös ekvationen x i kubik minus x i kvadrat minus 3 x plus 3 är lika med 0 med symbolhanterande hjälpmedel.",
+   "s": 143.29,
+   "e": 151.76
+  },
+  {
+   "t": "Svara. a) med två decimaler b) exakt.",
+   "s": 151.76,
+   "e": 157.32
+  },
+  {
+   "t": "a) I Geogebras inmatningsfält skriver vi \"nlös\" och väljer NLös( Ekvation ) i menyn NLös.",
+   "s": 157.32,
+   "e": 165.15
+  },
+  {
+   "t": "Vi skriver in ekvationen och slår Enter.",
+   "s": 165.15,
+   "e": 168.79
+  },
+  {
+   "t": "l ett är lika med NLös parentesen x i kubik minus x i kvadrat minus 3 x plus 3 som är lika med 0 slut parentes som är ungefär lika med { x som är lika med minus 1,73205, x som är lika med 1, x som är lika med 1,73205 }",
+   "s": 168.79,
+   "e": 186.2
+  },
+  {
+   "t": "Svar: x ett är ungefär lika med minus 1,73 , x två är lika med 1 och x tre är ungefär lika med 1,73",
+   "s": 186.2,
+   "e": 195.14
+  },
+  {
+   "t": "b) I stället skriver vi \"lös\" och väljer Lös( Ekvation ) i menyn Lös.",
+   "s": 195.14,
+   "e": 201.09
+  },
+  {
+   "t": "l ett är lika med Lös parentesen x i kubik minus x i kvadrat minus 3 x plus 3 som är lika med 0 slut parentes som är lika med { x som är lika med minus roten ur 3, x som är lika med 1, x som är lika med roten ur 3 }",
+   "s": 201.09,
+   "e": 216.12
+  },
+  {
+   "t": "Svar: x ett är lika med minus roten ur 3 , x två är lika med 1 och x tre är lika med roten ur 3",
+   "s": 216.12,
+   "e": 224.0
+  },
+  {
+   "t": "Observera att man i Geogebra enkelt kan växla mellan exakt och ungefärlig form med knapparna \" är lika med \" och \" är ungefär lika med \" utan att skriva om hela kommandot.",
+   "s": 224.0,
+   "e": 233.79
+  },
+  {
+   "t": "Exempel 4 — Funktionsvärde och ekvationslösning",
+   "s": 233.79,
+   "e": 238.25
+  },
+  {
+   "t": "Funktionen f av x är lika med x i kubik minus 4 x i kvadrat är given.",
+   "s": 238.25,
+   "e": 244.56
+  },
+  {
+   "t": "Med symbolhanterande hjälpmedel, bestäm. a) f av 7 b) lösningen till f av x är lika med 7 .",
+   "s": 244.56,
+   "e": 253.61
+  },
+  {
+   "t": "a) Vi definierar funktionen genom att skriva f av x är lika med x i kubik minus 4 x i kvadrat i Geogebras inmatningsfält.",
+   "s": 253.61,
+   "e": 262.85
+  },
+  {
+   "t": "Därefter skriver vi f av 7 på raden under och får vårt värde.",
+   "s": 262.85,
+   "e": 267.85
+  },
+  {
+   "t": "f av x är lika med x i kubik minus 4 x i kvadrat, 2 p t f av 7, 2 p t som är lika med 147",
+   "s": 267.85,
+   "e": 277.25
+  },
+  {
+   "t": "Svar: 147",
+   "s": 277.25,
+   "e": 280.32
+  },
+  {
+   "t": "b) Vi definierar funktionen precis som i a).",
+   "s": 280.32,
+   "e": 285.16
+  },
+  {
+   "t": "På raden under väljer vi kommandot Lös( Ekvation ) och skriver f av x är lika med 7 (eller bara f är lika med 7 ) i parentesen.",
+   "s": 285.16,
+   "e": 294.07
+  },
+  {
+   "t": "Lös parentesen f är lika med 7 slut parentes som är lika med { x som är lika med 4,36705 }",
+   "s": 294.07,
+   "e": 302.55
+  },
+  {
+   "t": "Svar: x är ungefär lika med 4,37",
+   "s": 302.55,
+   "e": 307.12
+  },
+  {
+   "t": "Exempel 5 — Gränsvärde",
+   "s": 307.12,
+   "e": 310.07
+  },
+  {
+   "t": "Bestäm gränsvärdet då x går mot oändligheten 3 x plus 2 delat med x minus 1 med symbolhanterande hjälpmedel.",
+   "s": 310.07,
+   "e": 318.25
+  },
+  {
+   "t": "I Geogebras inmatningsfält skriver vi \"grän\" och väljer Gränsvärde( Funktion, Värde ) i menyn Gränsvärde.",
+   "s": 318.25,
+   "e": 327.79
+  },
+  {
+   "t": "Vi skriver in uttrycket och det värde som variabeln går mot, och slår Enter.",
+   "s": 327.74,
+   "e": 333.21
+  },
+  {
+   "t": "Gränsvärde parentesen 3 x plus 2 delat med x minus 1, oändligheten slut parentes går mot 3",
+   "s": 333.21,
+   "e": 341.1
+  },
+  {
+   "t": "Oändlighetstecknet oändligheten hittar du bland tangentbordets specialtecken, eller genom att skriva \"infinity\".",
+   "s": 341.1,
+   "e": 348.61
+  },
+  {
+   "t": "Svar: 3",
+   "s": 348.61,
+   "e": 350.87
+  }
+ ]
+}

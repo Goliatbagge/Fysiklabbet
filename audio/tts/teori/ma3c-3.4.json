@@ -1,0 +1,368 @@
+{
+ "id": "ma3c-3.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "02d9d3194aabf54fb18ebc20e8831c7367481564",
+ "dur": 498.06,
+ "segments": [
+  {
+   "t": "Derivatan av e upphöjt till x",
+   "s": 0.1,
+   "e": 3.66
+  },
+  {
+   "t": "En funktion där variabeln, t.ex. x , sitter i exponenten kallas en exponentialfunktion — till exempel f av x är lika med 2 upphöjt till x eller mer allmänt f av x är lika med a upphöjt till x .",
+   "s": 3.61,
+   "e": 16.12
+  },
+  {
+   "t": "I det här avsnittet undersöker vi derivatan av den allmänna exponentialfunktionen f av x är lika med a upphöjt till x med hjälp av derivatans definition, och upptäcker längs vägen varför ett särskilt tal — talet e — gör derivering av exponentialfunktioner mycket enkel.",
+   "s": 16.12,
+   "e": 31.81
+  },
+  {
+   "t": "Härledning av derivatan för a upphöjt till x",
+   "s": 31.81,
+   "e": 40.52
+  },
+  {
+   "t": "Derivatan för f(x) är lika med a upphöjt till x med derivatans definition",
+   "s": 31.81,
+   "e": 40.52
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 a upphöjt till x plus h minus a upphöjt till x delat med h som är lika med gränsvärdet då h går mot 0 a upphöjt till x gånger a upphöjt till h minus a upphöjt till x delat med h som är lika med gränsvärdet då h går mot 0 a upphöjt till x parentesen a upphöjt till h minus 1 slut parentes delat med h som är lika med gränsvärdet då h går mot 0 a upphöjt till x gånger a upphöjt till h minus 1 delat med h",
+   "s": 40.52,
+   "e": 76.28
+  },
+  {
+   "t": "Eftersom a upphöjt till x inte beror av h kan vi flytta den faktorn framför gränsvärdet, så",
+   "s": 76.28,
+   "e": 82.92
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med a upphöjt till x gånger gränsvärdet då h går mot 0 a upphöjt till h minus 1 delat med h",
+   "s": 82.92,
+   "e": 92.25
+  },
+  {
+   "t": "Vi kan inte förkorta bort h i nämnaren, så gränsvärdet är svårt att beräkna direkt.",
+   "s": 92.25,
+   "e": 98.21
+  },
+  {
+   "t": "Vi kallar gränsvärdet k :",
+   "s": 98.21,
+   "e": 110.46
+  },
+  {
+   "t": "gränsvärdet då h går mot 0 a upphöjt till h minus 1 delat med h är lika med k vilket ger att f prim parentesen x slut parentes är lika med a upphöjt till x gånger k",
+   "s": 98.21,
+   "e": 110.46
+  },
+  {
+   "t": "Vi undersöker nu värdet på k genom att beräkna kvoten a upphöjt till h minus 1 delat med h för några olika baser a , med ett värde på h som ligger väldigt nära 0.",
+   "s": 110.46,
+   "e": 120.44
+  },
+  {
+   "t": "Gränsvärdet k varierar alltså beroende på vilken bas a vi har:",
+   "s": 120.44,
+   "e": 128.86
+  },
+  {
+   "t": "k är ungefär lika med 0,69 om a är lika med 2",
+   "s": 120.44,
+   "e": 128.86
+  },
+  {
+   "t": "k är ungefär lika med 1,10 om a är lika med 3",
+   "s": 128.86,
+   "e": 133.3
+  },
+  {
+   "t": "k är ungefär lika med 4,61 om a är lika med 100",
+   "s": 133.3,
+   "e": 138.55
+  },
+  {
+   "t": "Slutsats: derivatan av f av x är lika med a upphöjt till x är f prim parentesen x slut parentes är lika med a upphöjt till x gånger k , där k varierar beroende på talet a .",
+   "s": 138.55,
+   "e": 150.26
+  },
+  {
+   "t": "Enligt undersökningen ovan måste det finnas ett tal mellan a är lika med 2 och a är lika med 3 där k är lika med 1 — eftersom k är ungefär lika med 0,69 när a är lika med 2 och k är ungefär lika med 1,10 när a är lika med 3 .",
+   "s": 150.26,
+   "e": 164.03
+  },
+  {
+   "t": "För det talet blir derivatan väldigt enkel!",
+   "s": 164.03,
+   "e": 167.78
+  },
+  {
+   "t": "Vi kallar detta tal e .",
+   "s": 167.78,
+   "e": 170.41
+  },
+  {
+   "t": "Undersök själv: dra i glidaren för a i grafen nedan och se hur kurvans branthet ändras.",
+   "s": 170.41,
+   "e": 176.85
+  },
+  {
+   "t": "Runt a är ungefär lika med 2,7 är kurvans lutning i punkten x är lika med 0 nära 1 — det är precis den basen vi letar efter.",
+   "s": 176.85,
+   "e": 185.34
+  },
+  {
+   "t": "Talet e",
+   "s": 185.34,
+   "e": 187.21
+  },
+  {
+   "t": "Hur stort är talet e?",
+   "s": 187.21,
+   "e": 189.7
+  },
+  {
+   "t": "För små värden på h gäller e upphöjt till h minus 1 delat med h är ungefär lika med 1 .",
+   "s": 189.7,
+   "e": 195.97
+  },
+  {
+   "t": "Vi kan då skriva om uttrycket steg för steg för att lösa ut e .",
+   "s": 195.97,
+   "e": 200.88
+  },
+  {
+   "t": "e upphöjt till h minus 1 delat med h är ungefär lika med 1 e upphöjt till h minus 1 som är ungefär lika med h e upphöjt till h som är ungefär lika med h plus 1 e som är ungefär lika med parentesen h plus 1 slut parentes upphöjt till 1 delat med h",
+   "s": 200.88,
+   "e": 215.35
+  },
+  {
+   "t": "Vi undersöker vad parentesen h plus 1 slut parentes upphöjt till 1 delat med h blir när h går närmare och närmare 0.",
+   "s": 215.35,
+   "e": 223.39
+  },
+  {
+   "t": "Vi ser att talet e är ungefär lika med 2,72.",
+   "s": 223.39,
+   "e": 227.89
+  },
+  {
+   "t": "Talet e är, precis som pi , ett irrationellt tal — det kan inte skrivas som kvoten av två heltal, och har en oändlig decimalutveckling som inte upprepar sig.",
+   "s": 227.89,
+   "e": 238.14
+  },
+  {
+   "t": "e är lika med 2,718 som är ungefär lika med 2,72",
+   "s": 238.14,
+   "e": 243.8
+  },
+  {
+   "t": "Vi hade i härledningen tidigare att funktionen f av x är lika med a upphöjt till x har derivatan f prim parentesen x slut parentes är lika med a upphöjt till x gånger k .",
+   "s": 243.8,
+   "e": 254.56
+  },
+  {
+   "t": "Sätter vi in a är lika med e och k är lika med 1 får vi att funktionen f av x är lika med e upphöjt till x har derivatan",
+   "s": 254.56,
+   "e": 262.52
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med e upphöjt till x gånger 1 som är lika med e upphöjt till x",
+   "s": 262.52,
+   "e": 274.92
+  },
+  {
+   "t": "Funktionen e upphöjt till x är alltså sin egen derivata!",
+   "s": 267.84,
+   "e": 274.92
+  },
+  {
+   "t": "Grafiskt betyder det att funktionens värde ( y -koordinaten) i varje punkt är detsamma som kurvans lutning där.",
+   "s": 274.87,
+   "e": 282.21
+  },
+  {
+   "t": "Lutningen är 1 där y är lika med 1 , lutningen är 2 där y är lika med 2 , och så vidare.",
+   "s": 282.21,
+   "e": 289.03
+  },
+  {
+   "t": "Derivatan av f(x) är lika med e upphöjt till x",
+   "s": 289.03,
+   "e": 297.12
+  },
+  {
+   "t": "Derivatan av f av x är lika med e upphöjt till x är",
+   "s": 289.03,
+   "e": 297.12
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med e upphöjt till x",
+   "s": 297.12,
+   "e": 302.63
+  },
+  {
+   "t": "Har funktionen en koefficient framför, f av x är lika med a e upphöjt till x , behålls koefficienten oförändrad vid derivering:",
+   "s": 302.63,
+   "e": 315.24
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med a e upphöjt till x",
+   "s": 302.63,
+   "e": 315.24
+  },
+  {
+   "t": "där konstanten e är ungefär lika med 2,72 .",
+   "s": 315.24,
+   "e": 319.68
+  },
+  {
+   "t": "Exempel 1 — Derivera exponentialfunktioner",
+   "s": 319.68,
+   "e": 324.03
+  },
+  {
+   "t": "Derivera. a) f av x är lika med e upphöjt till x b) f av x är lika med 3 e upphöjt till x c) f av x är lika med e minus e upphöjt till x",
+   "s": 324.03,
+   "e": 338.28
+  },
+  {
+   "t": "a) Funktionen är sin egen derivata, så",
+   "s": 325.88,
+   "e": 338.28
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med e upphöjt till x",
+   "s": 338.28,
+   "e": 348.26
+  },
+  {
+   "t": "b) Precis som med alla andra funktioner behålls koefficienten framför termen vid derivering.",
+   "s": 338.28,
+   "e": 348.26
+  },
+  {
+   "t": "Så även här blir funktionen sin egen derivata, med koefficienten 3 kvar:",
+   "s": 348.26,
+   "e": 361.53
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 e upphöjt till x",
+   "s": 348.26,
+   "e": 361.53
+  },
+  {
+   "t": "c) Kom ihåg att e är ett tal, dvs. en konstant.",
+   "s": 348.26,
+   "e": 361.53
+  },
+  {
+   "t": "Deriverar vi den som en egen term blir den 0.",
+   "s": 361.53,
+   "e": 365.43
+  },
+  {
+   "t": "I övrigt deriverar vi term för term precis som tidigare:",
+   "s": 365.43,
+   "e": 393.22
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 0 minus e upphöjt till x som är lika med minus e upphöjt till x",
+   "s": 365.43,
+   "e": 393.22
+  },
+  {
+   "t": "Svar: a) f prim parentesen x slut parentes är lika med e upphöjt till x b) f prim parentesen x slut parentes är lika med 3 e upphöjt till x c) f prim parentesen x slut parentes är lika med minus e upphöjt till x",
+   "s": 365.43,
+   "e": 393.22
+  },
+  {
+   "t": "Exempel 2 — Bestäm derivatans värde",
+   "s": 365.43,
+   "e": 393.22
+  },
+  {
+   "t": "Funktionen är f av x är lika med 5 x i kubik delat med 3 plus 3 e upphöjt till x .",
+   "s": 393.22,
+   "e": 400.42
+  },
+  {
+   "t": "Bestäm. a) f prim, ekvation 0 b) f prim, ekvation 2",
+   "s": 400.42,
+   "e": 407.92
+  },
+  {
+   "t": "Avrunda och svara med en decimal.",
+   "s": 407.92,
+   "e": 411.17
+  },
+  {
+   "t": "a) Vi deriverar f av x är lika med 5 x i kubik delat med 3 plus 3 e upphöjt till x termvis.",
+   "s": 411.17,
+   "e": 419.26
+  },
+  {
+   "t": "Den rationella termen deriverar vi med de tidigare deriveringsreglerna, och 3 e upphöjt till x är sin egen derivata (med koefficienten 3 kvar):",
+   "s": 419.26,
+   "e": 438.57
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 15 x i kvadrat delat med 3 plus 3 e upphöjt till x som är lika med 5 x i kvadrat plus 3 e upphöjt till x",
+   "s": 419.26,
+   "e": 438.57
+  },
+  {
+   "t": "Sedan sätter vi in x är lika med 0 .",
+   "s": 438.57,
+   "e": 442.21
+  },
+  {
+   "t": "Kom ihåg att e upphöjt till 0 är lika med 1 :",
+   "s": 442.21,
+   "e": 453.76
+  },
+  {
+   "t": "f prim, ekvation 0 är lika med 5 gånger 0 i kvadrat plus 3 e upphöjt till 0 som är lika med 0 plus 3 gånger 1 som är lika med 3",
+   "s": 442.21,
+   "e": 453.76
+  },
+  {
+   "t": "Svar: f prim, ekvation 0 är lika med 3",
+   "s": 453.76,
+   "e": 458.34
+  },
+  {
+   "t": "b) Från a-uppgiften har vi f prim parentesen x slut parentes är lika med 5 x i kvadrat plus 3 e upphöjt till x .",
+   "s": 458.34,
+   "e": 467.18
+  },
+  {
+   "t": "Vi sätter in x är lika med 2 :",
+   "s": 467.18,
+   "e": 478.02
+  },
+  {
+   "t": "f prim, ekvation 2 är lika med 5 gånger 2 i kvadrat plus 3 e i kvadrat som är lika med 20 plus 3 e i kvadrat",
+   "s": 467.18,
+   "e": 478.02
+  },
+  {
+   "t": "Det finns en knapp för talet e på din räknare — hitta den och beräkna 20 plus 3 e i kvadrat .",
+   "s": 478.02,
+   "e": 484.83
+  },
+  {
+   "t": "f prim, ekvation 2 är lika med 42,167 som är ungefär lika med 42,2",
+   "s": 484.83,
+   "e": 492.43
+  },
+  {
+   "t": "Svar: f prim, ekvation 2 är ungefär lika med 42,2",
+   "s": 492.43,
+   "e": 498.06
+  }
+ ]
+}

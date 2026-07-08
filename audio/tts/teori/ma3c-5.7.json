@@ -1,0 +1,193 @@
+{
+ "id": "ma3c-5.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0d91e1b15d7b3e7af906fd7496dd50f6c5e7cba5",
+ "dur": 296.2,
+ "segments": [
+  {
+   "t": "Tillämpningar av integraler",
+   "s": 0.1,
+   "e": 3.2
+  },
+  {
+   "t": "Vi kan använda integraler för att lösa praktiska problem inom en rad olika områden.",
+   "s": 3.15,
+   "e": 8.84
+  },
+  {
+   "t": "Kom ihåg sambandet mellan sträcka, hastighet och acceleration vid tillämpningar: deriverar vi sträckan får vi hastigheten, och deriverar vi hastigheten får vi accelerationen.",
+   "s": 8.84,
+   "e": 19.76
+  },
+  {
+   "t": "Går vi åt andra hållet — integrerar vi — går vi tillbaka.",
+   "s": 19.76,
+   "e": 24.12
+  },
+  {
+   "t": "Samband mellan sträcka, hastighet och acceleration",
+   "s": 24.12,
+   "e": 28.76
+  },
+  {
+   "t": "s parentesen t slut parentes xrightarrow Derivera v parentesen t slut parentes xrightarrow Derivera a parentesen t slut parentes",
+   "s": 28.76,
+   "e": 38.6
+  },
+  {
+   "t": "a parentesen t slut parentes xrightarrow Integrera v parentesen t slut parentes xrightarrow Integrera s parentesen t slut parentes",
+   "s": 38.6,
+   "e": 48.45
+  },
+  {
+   "t": "Integraler kan dock användas för mer än så.",
+   "s": 48.45,
+   "e": 52.25
+  },
+  {
+   "t": "Generellt kan man säga att integralen står för produkten av den beroende variabeln (t.ex. y eller f av x ) och den oberoende variabeln (t.ex. x ).",
+   "s": 52.25,
+   "e": 62.52
+  },
+  {
+   "t": "Om vi t.ex. har ett badkar som läcker vatten med en hastighet i liter per minut, som funktion av tiden i minuter, kan vi bestämma hur många liter vatten som har läckt ut efter en viss tid eftersom",
+   "s": 62.52,
+   "e": 74.35
+  },
+  {
+   "t": "liter delat med minut gånger minut är lika med liter.",
+   "s": 74.35,
+   "e": 78.81
+  },
+  {
+   "t": "Tolka integraler",
+   "s": 78.81,
+   "e": 81.26
+  },
+  {
+   "t": "En integral står för produkten av den beroende variabeln ( y ) och den oberoende variabeln ( x ).",
+   "s": 81.26,
+   "e": 88.39
+  },
+  {
+   "t": "För att få enheten för integralen tar vi alltså \"enheten för y \" gånger \"enheten för x \".",
+   "s": 88.39,
+   "e": 94.54
+  },
+  {
+   "t": "På motsvarande sätt gäller att om vi utgår från en graf får vi enheten för integralen genom att ta \"enheten på y -axeln\" gånger \"enheten på x -axeln\".",
+   "s": 94.54,
+   "e": 103.97
+  },
+  {
+   "t": "Exempel 1 — Sträcka från en hastighet-tid-funktion",
+   "s": 103.97,
+   "e": 108.46
+  },
+  {
+   "t": "Hastigheten v parentesen t slut parentes m/s för en bil ges av v parentesen t slut parentes är lika med 40 minus 40 e upphöjt till minus 0,25 t där t är tiden i sekunder efter start.",
+   "s": 108.46,
+   "e": 122.45
+  },
+  {
+   "t": "Hur långt rör sig bilen mellan t är lika med 5,0 sekunder och t är lika med 12 sekunder?",
+   "s": 122.45,
+   "e": 129.16
+  },
+  {
+   "t": "Vi har en funktion för hastigheten och ska ta fram en sträcka.",
+   "s": 129.16,
+   "e": 133.61
+  },
+  {
+   "t": "Vi får då sträckan s genom att integrera (se sambandet ovan).",
+   "s": 133.61,
+   "e": 139.03
+  },
+  {
+   "t": "Eftersom vi ska bestämma sträckan mellan t är lika med 5,0 sekunder och t är lika med 12 sekunder ska integralen starta vid t är lika med 5,0 och sluta vid t är lika med 12 .",
+   "s": 139.03,
+   "e": 149.9
+  },
+  {
+   "t": "Detta ger",
+   "s": 149.9,
+   "e": 151.91
+  },
+  {
+   "t": "s är lika med integralen av fem upphöjt till 12 v parentesen t slut parentes d t som är lika med integralen av fem upphöjt till 12 parentesen 40 minus 40 e upphöjt till minus 0,25 t slut parentes d t som är lika med 40 t minus 40 e upphöjt till minus 0,25 t delat med minus 0,25 fem upphöjt till 12 som är lika med 40 t plus 160 e upphöjt till minus 0,25 t fem upphöjt till 12",
+   "s": 151.91,
+   "e": 180.65
+  },
+  {
+   "t": "är lika med parentesen 40 gånger 12 plus 160 e upphöjt till minus 0,25 gånger 12 slut parentes minus parentesen 40 gånger 5 plus 160 e upphöjt till minus 0,25 gånger 5 slut parentes som är lika med parentesen 480 plus 160 e upphöjt till minus 3 slut parentes minus parentesen 200 plus 160 e upphöjt till minus 1,25 slut parentes",
+   "s": 180.65,
+   "e": 208.14
+  },
+  {
+   "t": "är lika med 480 plus 160 e upphöjt till minus 3 minus 200 minus 160 e upphöjt till minus 1,25 som är ungefär lika med 242 meter som är ungefär lika med 240 meter",
+   "s": 208.14,
+   "e": 222.79
+  },
+  {
+   "t": "Svar: Bilen rör sig ungefär 240 meter mellan t är lika med 5,0 sekunder och t är lika med 12 sekunder.",
+   "s": 222.79,
+   "e": 231.5
+  },
+  {
+   "t": "Exempel 2 — Tolka en integral",
+   "s": 231.5,
+   "e": 234.99
+  },
+  {
+   "t": "Ett företag omsätter K parentesen t slut parentes kr/månad, där t är tiden i månader.",
+   "s": 234.99,
+   "e": 242.69
+  },
+  {
+   "t": "Tolka",
+   "s": 242.69,
+   "e": 244.5
+  },
+  {
+   "t": "integralen av noll upphöjt till 12 kelvin parentesen t slut parentes d t är lika med 3 000 000",
+   "s": 244.5,
+   "e": 252.59
+  },
+  {
+   "t": "i ord.",
+   "s": 252.59,
+   "e": 254.39
+  },
+  {
+   "t": "Integralen står för produkten av den beroende variabeln och den oberoende variabeln.",
+   "s": 254.39,
+   "e": 260.07
+  },
+  {
+   "t": "Enheten för den beroende variabeln ( K parentesen t slut parentes ) är kr/månad och enheten för den oberoende variabeln ( t ) är månader.",
+   "s": 260.07,
+   "e": 270.32
+  },
+  {
+   "t": "Vi gör en enhetsanalys och får att integralen får enheten",
+   "s": 270.32,
+   "e": 275.06
+  },
+  {
+   "t": "kronor delat med månad gånger månad är lika med kronor.",
+   "s": 275.06,
+   "e": 279.55
+  },
+  {
+   "t": "Värdet av integralen, 3 000 000, står alltså för omsättningen i kronor mellan månad 0 och månad 12, dvs. under det första året.",
+   "s": 279.55,
+   "e": 289.09
+  },
+  {
+   "t": "Svar: Under de 12 första månaderna (det första året) omsätter företaget 3 000 000 kronor.",
+   "s": 289.09,
+   "e": 296.2
+  }
+ ]
+}

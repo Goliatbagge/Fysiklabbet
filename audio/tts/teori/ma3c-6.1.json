@@ -1,0 +1,188 @@
+{
+ "id": "ma3c-6.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "0a21cefa15035013cbad7ee218749409fbc0420e",
+ "dur": 221.81,
+ "segments": [
+  {
+   "t": "Trigonometri i rätvinkliga trianglar",
+   "s": 0.1,
+   "e": 3.62
+  },
+  {
+   "t": "Vi repeterar från Matematik 1c.",
+   "s": 3.58,
+   "e": 7.24
+  },
+  {
+   "t": "I en rätvinklig triangel kallas sidan mitt emot den räta vinkeln hypotenusa.",
+   "s": 7.24,
+   "e": 12.79
+  },
+  {
+   "t": "De två kortare sidorna kallas kateter.",
+   "s": 12.79,
+   "e": 16.35
+  },
+  {
+   "t": "Katetern mitt emot vinkeln v kallas motstående katet, och katetern som tillsammans med hypotenusan bildar vinkeln v kallas närliggande katet.",
+   "s": 16.35,
+   "e": 26.11
+  },
+  {
+   "t": "Med hjälp av dessa tre sidor definieras de trigonometriska funktionerna tangens, sinus och cosinus.",
+   "s": 26.11,
+   "e": 33.46
+  },
+  {
+   "t": "Trigonometriska funktioner",
+   "s": 33.46,
+   "e": 36.49
+  },
+  {
+   "t": "tangens v är lika med motstående katet delat med närliggande katet som är lika med a delat med b",
+   "s": 36.49,
+   "e": 53.04
+  },
+  {
+   "t": "sinus v är lika med motstående katet delat med hypotenusa som är lika med a delat med c",
+   "s": 36.49,
+   "e": 53.04
+  },
+  {
+   "t": "cosinus v är lika med närliggande katet delat med hypotenusa som är lika med b delat med c",
+   "s": 36.49,
+   "e": 53.04
+  },
+  {
+   "t": "Om vi i stället känner ett förhållande mellan två sidor och vill bestämma vinkeln v vänder vi på sambanden ovan med de inversa trigonometriska funktionerna.",
+   "s": 53.04,
+   "e": 62.23
+  },
+  {
+   "t": "Inversa trigonometriska funktioner",
+   "s": 62.23,
+   "e": 65.85
+  },
+  {
+   "t": "tangens v är lika med a delat med b vilket är ekvivalent med att v är lika med tangens upphöjt till minus 1 parentesen a delat med b slut parentes som är lika med arctangens parentesen a delat med b slut parentes",
+   "s": 65.85,
+   "e": 79.53
+  },
+  {
+   "t": "sinus v är lika med a delat med c vilket är ekvivalent med att v är lika med sinus upphöjt till minus 1 parentesen a delat med c slut parentes som är lika med arcsinus parentesen a delat med c slut parentes",
+   "s": 79.53,
+   "e": 93.01
+  },
+  {
+   "t": "cosinus v är lika med b delat med c vilket är ekvivalent med att v är lika med cosinus upphöjt till minus 1 parentesen b delat med c slut parentes som är lika med arccosinus parentesen b delat med c slut parentes",
+   "s": 93.01,
+   "e": 107.28
+  },
+  {
+   "t": "De inversa funktionerna hittar du på räknaren som tangens upphöjt till minus 1 , sinus upphöjt till minus 1 och cosinus upphöjt till minus 1 (ofta genom att trycka shift/2nd följt av tan-, sin- eller cos-knappen).",
+   "s": 107.28,
+   "e": 121.0
+  },
+  {
+   "t": "Känner vi en vinkel och en sida i en rätvinklig triangel kan vi alltså bestämma en annan sida med tangens, sinus eller cosinus.",
+   "s": 121.0,
+   "e": 129.14
+  },
+  {
+   "t": "Känner vi i stället två sidor kan vi bestämma vinkeln med en invers funktion.",
+   "s": 129.14,
+   "e": 134.55
+  },
+  {
+   "t": "Exempel 1 — Bestäm en sida med sinus",
+   "s": 134.55,
+   "e": 138.4
+  },
+  {
+   "t": "Bestäm längden av sidan a .",
+   "s": 138.4,
+   "e": 141.19
+  },
+  {
+   "t": "Avrunda till en decimal.",
+   "s": 141.19,
+   "e": 144.05
+  },
+  {
+   "t": "Till vinkeln 41 grader har vi motstående katet och vi ska bestämma hypotenusan.",
+   "s": 144.05,
+   "e": 149.81
+  },
+  {
+   "t": "Vi använder alltså sinus för vinkeln.",
+   "s": 149.81,
+   "e": 153.3
+  },
+  {
+   "t": "Kom ihåg:",
+   "s": 153.3,
+   "e": 159.2
+  },
+  {
+   "t": "sinus v är lika med motstående katet delat med hypotenusa",
+   "s": 153.3,
+   "e": 159.2
+  },
+  {
+   "t": "sinus 41 grader är lika med 6,1 centimeter delat med a vilket är ekvivalent med att a är lika med 6,1 centimeter delat med sinus 41 grader som är lika med 9,297 centimeter som är ungefär lika med 9,3 centimeter",
+   "s": 159.2,
+   "e": 174.2
+  },
+  {
+   "t": "Svar: 9,3 centimeter",
+   "s": 174.2,
+   "e": 177.81
+  },
+  {
+   "t": "Exempel 2 — Bestäm en vinkel med tangens",
+   "s": 177.81,
+   "e": 181.56
+  },
+  {
+   "t": "Bestäm vinkeln v .",
+   "s": 181.56,
+   "e": 183.94
+  },
+  {
+   "t": "Avrunda till hela grader.",
+   "s": 183.94,
+   "e": 186.71
+  },
+  {
+   "t": "Till vinkeln v har vi motstående katet och närliggande katet.",
+   "s": 186.71,
+   "e": 191.38
+  },
+  {
+   "t": "Vi använder alltså tangens för vinkeln.",
+   "s": 191.38,
+   "e": 194.81
+  },
+  {
+   "t": "Kom ihåg:",
+   "s": 194.81,
+   "e": 200.82
+  },
+  {
+   "t": "tangens v är lika med motstående katet delat med närliggande katet",
+   "s": 194.81,
+   "e": 200.82
+  },
+  {
+   "t": "tangens v är lika med 2,3 millimeter delat med 1,8 millimeter vilket är ekvivalent med att v är lika med tangens upphöjt till minus 1 parentesen 2,3 delat med 1,8 slut parentes som är lika med 51,952 grader som är ungefär lika med 52 grader",
+   "s": 200.82,
+   "e": 218.88
+  },
+  {
+   "t": "Svar: 52 grader",
+   "s": 218.88,
+   "e": 221.81
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
  "id": "fy2-5.6",
  "voice": "sv-SE-SofieNeural",
- "hash": "cf1065fcd45123016e319f09d0ee5c415c118f83",
- "dur": 19.25,
+ "hash": "1a5ce777a829b6b0c0052e01155391a694970106",
+ "dur": 292.25,
  "segments": [
   {
    "t": "Stjärnbildning",
@@ -17,242 +17,242 @@
   {
    "t": "Men hur uppstår en stjärna från första början?",
    "s": 8.61,
-   "e": 8.61
+   "e": 12.4
   },
   {
    "t": "Svaret börjar i de tunna, kalla gasmolnen mellan stjärnorna — och slutar med en kamp mellan två krafter: gravitationen som drar ihop, och trycket som strävar att hålla emot.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 12.4,
+   "e": 22.99
   },
   {
    "t": "Allt börjar i ett gasmoln",
-   "s": 8.61,
-   "e": 8.61
+   "s": 22.99,
+   "e": 25.85
   },
   {
    "t": "Rymden mellan stjärnorna är inte helt tom.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 25.85,
+   "e": 29.3
   },
   {
    "t": "Den innehåller väldiga molekylmoln av mest vätgas och lite stoft.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 29.3,
+   "e": 34.31
   },
   {
    "t": "Molnen är mycket kalla — kring 10–20 kelvin — och kan vara många ljusår breda och väga tusentals solmassor.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 34.31,
+   "e": 41.73
   },
   {
    "t": "Så länge molnet är stilla råder en balans: gasens eget tryck håller emot den svaga gravitationen och inget händer.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 41.73,
+   "e": 49.51
   },
   {
    "t": "Men om molnet störs — av tryckvågen från en närliggande supernova eller en krock med ett annat moln — kan en del av det bli tillräckligt tätt för att gravitationen ska ta över.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 49.51,
+   "e": 58.99
   },
   {
    "t": "Då börjar molnet kollapsa.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 58.99,
+   "e": 61.83
   },
   {
    "t": "Från glest molekylmoln, via gravitationskollaps, till en protostjärna omgiven av en roterande skiva av gas och stoft.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 61.83,
+   "e": 70.11
   },
   {
    "t": "Gravitationen mot trycket",
-   "s": 8.61,
-   "e": 8.61
+   "s": 70.11,
+   "e": 73.06
   },
   {
    "t": "Stjärnbildning kan beskrivas som en ständig dragkamp mellan två krafter:",
-   "s": 8.61,
-   "e": 8.61
+   "s": 73.06,
+   "e": 81.62
   },
   {
    "t": "Gravitationen drar all gas inåt mot en gemensam mittpunkt.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 73.06,
+   "e": 81.62
   },
   {
    "t": "Gastrycket (och senare strålningstrycket) strävar utåt och håller emot.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 81.62,
+   "e": 87.38
   },
   {
    "t": "Ett moln börjar dra ihop sig av egen tyngd bara om det är tillräckligt massivt och kallt.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 87.38,
+   "e": 93.26
   },
   {
    "t": "Då vinner gravitationen över trycket.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 93.26,
+   "e": 96.89
   },
   {
    "t": "Ju mer gasen pressas ihop, desto varmare blir den — precis som luften i en cykelpump värms när den komprimeras.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 96.89,
+   "e": 104.2
   },
   {
    "t": "Den frigjorda lägesenergin omvandlas till värme, och i mitten bildas en allt hetare klump — en protostjärna.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 104.2,
+   "e": 111.35
   },
   {
    "t": "Varför värms en kollapsande gas?",
-   "s": 8.61,
-   "e": 8.61
+   "s": 111.35,
+   "e": 114.62
   },
   {
    "t": "När gas faller inåt mot mitten omvandlas dess lägesenergi till rörelseenergi, och kollisionerna mellan partiklarna gör gasen varmare.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 114.62,
+   "e": 123.11
   },
   {
    "t": "Samma princip som i en cykelpump: komprimerar man en gas stiger dess temperatur.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 123.11,
+   "e": 128.97
   },
   {
    "t": "Det är gravitationen själv som levererar värmen som till slut tänder stjärnan.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 128.97,
+   "e": 134.32
   },
   {
    "t": "Protostjärnan tänds",
-   "s": 8.61,
-   "e": 8.61
+   "s": 134.32,
+   "e": 136.75
   },
   {
    "t": "Kärnan blir hetare och tätare under hundratusentals år medan mer gas fortsätter att falla in.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 136.75,
+   "e": 143.35
   },
   {
    "t": "När temperaturen i mitten når omkring 10 miljoner kelvin sker något avgörande: vätekärnorna börjar fusioneras till helium.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 143.35,
+   "e": 151.45
   },
   {
    "t": "Vätefusion (förenklat)",
-   "s": 8.61,
-   "e": 8.61
+   "s": 151.45,
+   "e": 154.51
   },
   {
-   "t": "4 upphöjt till 1 ett H longrightarrow upphöjt till 4 två He plus energi",
-   "s": 8.61,
-   "e": 8.61
+   "t": "4 upphöjt till 1 ett H går mot upphöjt till 4 två He plus energi",
+   "s": 154.51,
+   "e": 160.32
   },
   {
    "t": "Fyra vätekärnor (protoner) slås samman till en heliumkärna.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 160.32,
+   "e": 165.46
   },
   {
    "t": "Den sammanslagna kärnan väger något mindre än de fyra protonerna tillsammans — massdifferensen frigörs som energi enligt energin E är lika med massan m c i kvadrat .",
-   "s": 8.61,
-   "e": 8.61
+   "s": 165.46,
+   "e": 175.88
   },
   {
    "t": "Fusionen frigör enorma mängder energi.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 175.88,
+   "e": 179.61
   },
   {
    "t": "Strålningen utifrån skapar nu ett strålningstryck som äntligen kan hålla emot gravitationen.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 179.61,
+   "e": 185.78
   },
   {
    "t": "När de två krafterna kommer i jämvikt slutar stjärnan att krympa — den har blivit en färdig stjärna och har nått det stabila stadium som kallas huvudserien, där solen befinner sig idag.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 185.78,
+   "e": 195.59
   },
   {
    "t": "Hydrostatisk jämvikt",
-   "s": 8.61,
-   "e": 8.61
+   "s": 195.59,
+   "e": 198.4
   },
   {
    "t": "En färdig stjärna är i hydrostatisk jämvikt: trycket utåt från fusionen i kärnan balanserar exakt gravitationen inåt.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 198.4,
+   "e": 206.8
   },
   {
    "t": "Så länge det finns vätebränsle kvar håller jämvikten — för solen i totalt cirka 10 miljarder år.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 206.8,
+   "e": 213.28
   },
   {
    "t": "Det är denna balans som gör att en stjärna kan lysa stabilt under så oerhört lång tid.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 213.28,
+   "e": 219.09
   },
   {
    "t": "Hur stor blir stjärnan?",
-   "s": 8.61,
-   "e": 8.61
+   "s": 219.09,
+   "e": 221.7
   },
   {
    "t": "Hur mycket gas som samlas i protostjärnan avgör vilken sorts stjärna det blir — och hur länge den lever:",
-   "s": 8.61,
-   "e": 8.61
+   "s": 221.7,
+   "e": 232.0
   },
   {
    "t": "Det kan verka bakvänt att de tyngsta stjärnorna lever kortast — de har ju mest bränsle.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 221.7,
+   "e": 232.0
   },
   {
    "t": "Men de förbränner sitt väte så enormt mycket snabbare att de ändå tar slut först. En tung stjärna lever häftigt och dör ung.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 232.0,
+   "e": 241.01
   },
   {
    "t": "Solen föddes inte ensam",
-   "s": 8.61,
-   "e": 8.61
+   "s": 241.01,
+   "e": 243.95
   },
   {
    "t": "Stjärnor bildas nästan aldrig en och en, utan i stjärnhopar ur samma molekylmoln.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 243.95,
+   "e": 249.82
   },
   {
    "t": "Vår egen sol föddes troligen tillsammans med tusentals syskonstjärnor för ungefär 4,6 miljarder år sedan.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 249.82,
+   "e": 257.34
   },
   {
    "t": "Med tiden har de spridits ut längs sina banor runt Vintergatans centrum, så idag vet vi inte säkert vilka stjärnor som var solens syskon.",
-   "s": 8.61,
-   "e": 8.61
+   "s": 257.34,
+   "e": 265.93
   },
   {
    "t": "Vi är stjärnstoft",
-   "s": 8.61,
-   "e": 8.61
+   "s": 265.93,
+   "e": 268.38
   },
   {
    "t": "Det vätgas som bildar nya stjärnor är nästan lika gammalt som universum självt.",
-   "s": 0.1,
-   "e": 2.54
+   "s": 268.38,
+   "e": 275.54
   },
   {
    "t": "Men de tyngre grundämnena — kolet, syret och järnet i din kropp — skapades inuti tidigare generationers stjärnor och spreds ut i rymden när de dog i supernovor.",
-   "s": 2.49,
-   "e": 12.6
+   "s": 275.49,
+   "e": 285.6
   },
   {
    "t": "Varje nytt stjärnsystem, inklusive vårt eget, byggs delvis av resterna från döda stjärnor.",
-   "s": 12.6,
-   "e": 19.25
+   "s": 285.6,
+   "e": 292.25
   }
  ]
 }

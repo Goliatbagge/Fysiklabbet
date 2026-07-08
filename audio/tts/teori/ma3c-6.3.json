@@ -1,0 +1,348 @@
+{
+ "id": "ma3c-6.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "bd5d2ee5bd432b6d6f03c8d4ce750461eebba812",
+ "dur": 444.0,
+ "segments": [
+  {
+   "t": "Trigonometriska ekvationer",
+   "s": 0.1,
+   "e": 3.11
+  },
+  {
+   "t": "Ekvationer med de trigonometriska funktionerna sinus, cosinus och tangens kallas trigonometriska ekvationer.",
+   "s": 3.06,
+   "e": 11.01
+  },
+  {
+   "t": "Lösa trigonometriska ekvationer med enhetscirkeln",
+   "s": 11.01,
+   "e": 15.45
+  },
+  {
+   "t": "Om vi ska lösa ekvationen",
+   "s": 15.45,
+   "e": 18.3
+  },
+  {
+   "t": "sinus v är lika med a",
+   "s": 18.3,
+   "e": 26.46
+  },
+  {
+   "t": "drar vi linjen y är lika med a (vågrätt) och avläser vinklarna där linjen skär enhetscirkeln.",
+   "s": 18.3,
+   "e": 26.46
+  },
+  {
+   "t": "Om vi i stället ska lösa ekvationen",
+   "s": 26.46,
+   "e": 29.96
+  },
+  {
+   "t": "cosinus v är lika med a",
+   "s": 29.96,
+   "e": 39.71
+  },
+  {
+   "t": "drar vi linjen x är lika med a (lodrätt) och avläser vinklarna där linjen skär enhetscirkeln (se figurerna nedan).",
+   "s": 29.96,
+   "e": 39.71
+  },
+  {
+   "t": "Vi löser sinus v är lika med 0,5 genom att dra en vågrät linje vid y är lika med 0,5 .",
+   "s": 39.71,
+   "e": 46.67
+  },
+  {
+   "t": "Linjen skär enhetscirkeln i två punkter, vid v ett är lika med 30 grader och v två är lika med 150 grader .",
+   "s": 46.67,
+   "e": 54.81
+  },
+  {
+   "t": "Vi löser cosinus v är lika med 0,5 genom att dra en lodrät linje vid x är lika med 0,5 .",
+   "s": 54.81,
+   "e": 61.89
+  },
+  {
+   "t": "Linjen skär enhetscirkeln i två punkter, vid v ett är lika med 60 grader och v två är lika med 300 grader .",
+   "s": 61.89,
+   "e": 69.95
+  },
+  {
+   "t": "Observera att vi i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader oftast får två lösningar.",
+   "s": 69.95,
+   "e": 79.34
+  },
+  {
+   "t": "Egentligen finns det oändligt många lösningar, eftersom vi kan lägga till hur många multipler av 360 grader som helst till varje lösning.",
+   "s": 79.34,
+   "e": 88.03
+  },
+  {
+   "t": "I den här kursen håller vi oss vanligtvis till lösningar i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader .",
+   "s": 88.03,
+   "e": 97.5
+  },
+  {
+   "t": "Eftersom enhetscirkelns radie är 1 kan varken sinus v eller cosinus v anta värden utanför intervallet minus 1, 1 .",
+   "s": 97.5,
+   "e": 106.04
+  },
+  {
+   "t": "Om | a | är större än 1 hamnar linjen y är lika med a (eller x är lika med a ) helt utanför cirkeln, och ekvationen saknar då lösning.",
+   "s": 106.04,
+   "e": 114.92
+  },
+  {
+   "t": "När vi löser en trigonometrisk ekvation med räknare ger räknaren bara den minsta lösningen, v ett .",
+   "s": 114.92,
+   "e": 121.99
+  },
+  {
+   "t": "För att få den andra lösningen v två i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader måste vi räkna ut den för hand.",
+   "s": 121.99,
+   "e": 132.29
+  },
+  {
+   "t": "För sinus gäller v två är lika med 180 grader minus v ett .",
+   "s": 132.29,
+   "e": 137.93
+  },
+  {
+   "t": "För cosinus gäller v två är lika med 360 grader minus v ett .",
+   "s": 137.93,
+   "e": 143.94
+  },
+  {
+   "t": "Kontrollera gärna mot exemplen ovan.",
+   "s": 143.94,
+   "e": 147.47
+  },
+  {
+   "t": "Lösa trigonometriska ekvationer med räknare",
+   "s": 147.47,
+   "e": 151.54
+  },
+  {
+   "t": "Lös ut den trigonometriska funktionen.",
+   "s": 151.54,
+   "e": 155.35
+  },
+  {
+   "t": "Lös ekvationen som vanligt, med inversa funktioner.",
+   "s": 155.35,
+   "e": 159.76
+  },
+  {
+   "t": "Ta fram den andra lösningen.",
+   "s": 159.76,
+   "e": 162.59
+  },
+  {
+   "t": "För en ekvation med sinus gäller v två är lika med 180 grader minus v ett cosinus gäller v två är lika med 360 grader minus v ett",
+   "s": 162.59,
+   "e": 173.12
+  },
+  {
+   "t": "sinus gäller v två är lika med 180 grader minus v ett",
+   "s": 173.12,
+   "e": 178.68
+  },
+  {
+   "t": "cosinus gäller v två är lika med 360 grader minus v ett",
+   "s": 178.68,
+   "e": 184.4
+  },
+  {
+   "t": "Exempel 1 — Sinus och cosinus för vinklar på enhetscirkeln",
+   "s": 184.4,
+   "e": 189.44
+  },
+  {
+   "t": "Använd enhetscirkeln för att bestämma. a) sinus 90 grader b) cosinus 180 grader .",
+   "s": 189.44,
+   "e": 197.7
+  },
+  {
+   "t": "a) Vi utgår från den positiva x -axeln och roterar 90 grader moturs.",
+   "s": 197.7,
+   "e": 203.69
+  },
+  {
+   "t": "Då hamnar vi högst upp på enhetscirkeln, i punkten parentesen 0, 1 slut parentes .",
+   "s": 203.69,
+   "e": 210.16
+  },
+  {
+   "t": "Sinus motsvarar y -koordinaten, så",
+   "s": 210.16,
+   "e": 214.22
+  },
+  {
+   "t": "sinus 90 grader är lika med 1",
+   "s": 214.22,
+   "e": 217.72
+  },
+  {
+   "t": "Svar: 1",
+   "s": 217.72,
+   "e": 228.9
+  },
+  {
+   "t": "b) Vi roterar i stället 180 grader moturs och hamnar då längst till vänster på enhetscirkeln, i punkten parentesen minus 1, 0 slut parentes .",
+   "s": 217.72,
+   "e": 228.9
+  },
+  {
+   "t": "Cosinus motsvarar x -koordinaten, så",
+   "s": 228.9,
+   "e": 232.99
+  },
+  {
+   "t": "cosinus 180 grader är lika med minus 1",
+   "s": 232.99,
+   "e": 237.35
+  },
+  {
+   "t": "Svar: minus 1",
+   "s": 237.35,
+   "e": 240.18
+  },
+  {
+   "t": "Exempel 2 — Närmevärden med enhetscirkeln",
+   "s": 240.18,
+   "e": 244.11
+  },
+  {
+   "t": "Använd enhetscirkeln för att bestämma ett närmevärde till. a) sinus 45 grader b) cosinus 220 grader .",
+   "s": 244.11,
+   "e": 253.75
+  },
+  {
+   "t": "a) Vi sätter en punkt på enhetscirkelns rand vid 45 grader . sinus 45 grader motsvarar y -koordinaten här, och avläst mot y -axeln ger det ungefär 0,7.",
+   "s": 253.75,
+   "e": 266.6
+  },
+  {
+   "t": "Svar: 0,7",
+   "s": 266.6,
+   "e": 269.57
+  },
+  {
+   "t": "b) Vi sätter en punkt på enhetscirkelns rand vid 220 grader . cosinus 220 grader motsvarar x -koordinaten här, och avläst mot x -axeln ger det ungefär minus 0,8 .",
+   "s": 269.57,
+   "e": 283.7
+  },
+  {
+   "t": "Svar: minus 0,8",
+   "s": 283.7,
+   "e": 287.0
+  },
+  {
+   "t": "Exempel 3 — Lös trigonometriska ekvationer med enhetscirkeln",
+   "s": 287.0,
+   "e": 292.25
+  },
+  {
+   "t": "Använd enhetscirkeln för att lösa ekvationerna nedan i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader .. a) sinus v är lika med 0,4 b) cosinus v är lika med 1,5",
+   "s": 292.25,
+   "e": 308.54
+  },
+  {
+   "t": "a) Eftersom sinus motsvarar y -koordinaten drar vi en vågrät linje vid y är lika med 0,4 .",
+   "s": 308.54,
+   "e": 316.25
+  },
+  {
+   "t": "Linjen skär enhetscirkeln vid ungefär 20 grader och 160 grader .",
+   "s": 316.25,
+   "e": 321.99
+  },
+  {
+   "t": "Svar: 20 grader och 160 grader",
+   "s": 321.99,
+   "e": 328.15
+  },
+  {
+   "t": "b) Eftersom cosinus motsvarar x -koordinaten drar vi en lodrät linje vid x är lika med 1,5 .",
+   "s": 328.1,
+   "e": 335.85
+  },
+  {
+   "t": "Linjen hamnar helt utanför enhetscirkeln (radien är ju bara 1), så ekvationen saknar lösning.",
+   "s": 335.85,
+   "e": 342.73
+  },
+  {
+   "t": "Svar: Lösning saknas.",
+   "s": 342.73,
+   "e": 345.88
+  },
+  {
+   "t": "Exempel 4 — Lös en trigonometrisk ekvation med räknare",
+   "s": 345.88,
+   "e": 350.8
+  },
+  {
+   "t": "Lös ekvationen 4 cosinus v plus 3,28 är lika med 6,58 med räknare.",
+   "s": 350.8,
+   "e": 358.0
+  },
+  {
+   "t": "Ange lösningarna i intervallet 0 grader är mindre än eller lika med v är mindre än eller lika med 360 grader .",
+   "s": 358.0,
+   "e": 366.06
+  },
+  {
+   "t": "Vi löser först ut den trigonometriska funktionen cosinus v .",
+   "s": 366.06,
+   "e": 371.26
+  },
+  {
+   "t": "4 cosinus v plus 3,28 minus 3,28 är lika med 6,58 minus 3,28",
+   "s": 371.26,
+   "e": 379.88
+  },
+  {
+   "t": "4 cosinus v är lika med 3,3",
+   "s": 379.88,
+   "e": 383.82
+  },
+  {
+   "t": "4 cosinus v delat med 4 är lika med 3,3 delat med 4",
+   "s": 383.82,
+   "e": 389.33
+  },
+  {
+   "t": "cosinus v är lika med 0,825",
+   "s": 389.33,
+   "e": 393.63
+  },
+  {
+   "t": "Sedan bestämmer vi vinkeln v med den inversa funktionen.",
+   "s": 393.63,
+   "e": 398.06
+  },
+  {
+   "t": "v ett är lika med cosinus upphöjt till minus 1 parentesen 0,825 slut parentes som är lika med 34,411 grader som är ungefär lika med 34,4 grader",
+   "s": 398.06,
+   "e": 410.81
+  },
+  {
+   "t": "Den andra lösningen får vi genom sambandet cosinus parentesen 360 grader minus v slut parentes är lika med cosinus v , dvs. genom att dra bort vinkeln från 360 grader .",
+   "s": 410.81,
+   "e": 423.23
+  },
+  {
+   "t": "v två är lika med 360 grader minus 34,411 grader som är lika med 325,588 grader som är ungefär lika med 325,6 grader",
+   "s": 423.23,
+   "e": 435.95
+  },
+  {
+   "t": "Svar: v ett är lika med 34,4 grader och v två är lika med 325,6 grader",
+   "s": 435.95,
+   "e": 444.0
+  }
+ ]
+}

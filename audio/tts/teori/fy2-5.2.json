@@ -1,8 +1,8 @@
 {
  "id": "fy2-5.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "828b012c87d8b0cf73b4cd56c9f63bbf9a59f74f",
- "dur": 469.98,
+ "hash": "37497d6679d5f565847f0f7fcb533d65dc9bb4cd",
+ "dur": 472.18,
  "segments": [
   {
    "t": "Mäta avstånd i rymden",
@@ -152,247 +152,247 @@
   {
    "t": "Eftersom stjärnorna är så långt borta blir parallaxvinklarna mycket små — alldeles för små för att uttryckas i hela grader.",
    "s": 166.46,
-   "e": 173.66
+   "e": 173.65
   },
   {
    "t": "Därför delar man upp graden i mindre delar:",
-   "s": 173.66,
-   "e": 179.16
+   "s": 173.65,
+   "e": 179.15
   },
   {
    "t": "Bågminuter och bågsekunder",
-   "s": 173.66,
-   "e": 179.16
+   "s": 173.65,
+   "e": 179.15
   },
   {
-   "t": "1 grader är lika med 60 ' som är lika med 60 gånger 60 ' ' som är lika med 3 600 ' '",
-   "s": 179.16,
-   "e": 186.36
+   "t": "1 grader är lika med 60 prim som är lika med 60 gånger 60 bis som är lika med 3 600 bis",
+   "s": 179.15,
+   "e": 186.76
   },
   {
-   "t": "där en bågminut skrivs ' och en bågsekund skrivs ' ' .",
-   "s": 186.36,
-   "e": 190.97
+   "t": "där en bågminut skrivs prim och en bågsekund skrivs bis .",
+   "s": 186.76,
+   "e": 191.47
   },
   {
    "t": "Det avstånd som ger en parallax på exakt 1 bågsekund, med 1 AU som bas, kallas en parsec (pc) — namnet är en förkortning av parallaxsecund.",
-   "s": 190.97,
-   "e": 200.82
+   "s": 191.47,
+   "e": 201.34
   },
   {
    "t": "Parallaxmetoden",
-   "s": 200.82,
-   "e": 203.12
+   "s": 201.34,
+   "e": 203.64
   },
   {
    "t": "r är lika med 1 delat med trycket p",
-   "s": 203.12,
-   "e": 206.35
+   "s": 203.64,
+   "e": 206.86
   },
   {
    "t": "där",
-   "s": 206.35,
-   "e": 207.8
+   "s": 206.86,
+   "e": 208.31
   },
   {
    "t": "r är lika med avståndet till stjärnan (pc)",
-   "s": 207.8,
-   "e": 211.75
+   "s": 208.31,
+   "e": 212.26
   },
   {
-   "t": "p är lika med parallaxvinkeln (bågsekunder, ' ' )",
-   "s": 211.75,
-   "e": 216.09
+   "t": "p är lika med parallaxvinkeln (bågsekunder, bis )",
+   "s": 212.26,
+   "e": 217.25
   },
   {
    "t": "Med formeln blir ett stjärnavstånd alltså bara ett delat med parallaxen — så länge avståndet anges i parsec och parallaxen i bågsekunder.",
-   "s": 216.09,
-   "e": 224.41
+   "s": 217.25,
+   "e": 225.55
   },
   {
    "t": "Vill man ha svaret i ljusår multiplicerar man med 3,26:",
-   "s": 224.41,
-   "e": 230.95
+   "s": 225.55,
+   "e": 232.09
   },
   {
    "t": "Parsec till ljusår",
-   "s": 224.41,
-   "e": 230.95
+   "s": 225.55,
+   "e": 232.09
   },
   {
    "t": "1 pc är ungefär lika med 3,26 ljusår",
-   "s": 230.95,
-   "e": 235.49
+   "s": 232.09,
+   "e": 236.62
   },
   {
    "t": "Varför blir formeln så enkel?",
-   "s": 235.49,
-   "e": 238.4
+   "s": 236.62,
+   "e": 239.54
   },
   {
    "t": "För små vinklar gäller att parallaxen (i radianer) ungefär är basen delad med avståndet: trycket p är ungefär lika med 1 AU delat med r .",
-   "s": 238.4,
-   "e": 247.8
+   "s": 239.54,
+   "e": 248.94
   },
   {
    "t": "En parsec är per definition det avstånd där 1 AU ses under vinkeln 1 bågsekund.",
-   "s": 247.8,
-   "e": 253.96
+   "s": 248.94,
+   "e": 255.1
   },
   {
    "t": "Räknar man därför r i parsec och p i bågsekunder försvinner alla omräkningsfaktorer, och kvar blir helt enkelt r är lika med 1 delat med trycket p .",
-   "s": 253.96,
-   "e": 263.38
+   "s": 255.1,
+   "e": 264.51
   },
   {
    "t": "Ju mindre parallax, desto större avstånd.",
-   "s": 263.38,
-   "e": 267.07
+   "s": 264.51,
+   "e": 268.21
   },
   {
    "t": "Exempel 1 — Avstånd från parallax (coulomb)",
-   "s": 267.07,
-   "e": 271.51
+   "s": 268.21,
+   "e": 272.65
   },
   {
    "t": "En astronom observerar en stjärna från jorden med ett halvår mellan observationerna.",
-   "s": 271.51,
-   "e": 277.3
+   "s": 272.65,
+   "e": 278.41
   },
   {
    "t": "Den skenbara förflyttningen mot bakgrundsstjärnorna (parallaxvinkeln) mäts till 0,40 bågsekunder.",
-   "s": 277.3,
-   "e": 286.08
+   "s": 278.41,
+   "e": 286.97
   },
   {
    "t": "Beräkna avståndet till stjärnan med a) trigonometriska funktioner b) formeln för parallax.",
-   "s": 286.03,
-   "e": 292.8
+   "s": 286.92,
+   "e": 293.72
   },
   {
    "t": "a) I den rätvinkliga triangeln är 1 AU motstående katet till vinkeln p och avståndet r är närliggande katet:",
-   "s": 292.8,
-   "e": 316.02
+   "s": 293.72,
+   "e": 307.14
   },
   {
    "t": "tangens trycket p är lika med 1 AU delat med r vilket ger att r är lika med 1 AU delat med tangens p",
-   "s": 292.8,
-   "e": 316.02
+   "s": 293.72,
+   "e": 307.14
   },
   {
-   "t": "1 AU är lika med 1,50 gånger 10 upphöjt till 11 meter trycket p som är lika med 0,40 ' ' som är lika med 0,40 delat med 3 600 grader",
-   "s": 292.8,
-   "e": 316.02
+   "t": "1 AU är lika med 1,50 gånger 10 upphöjt till 11 meter trycket p som är lika med 0,40 bis som är lika med 0,40 delat med 3 600 grader",
+   "s": 307.14,
+   "e": 318.2
   },
   {
    "t": "r är lika med 1,50 gånger 10 upphöjt till 11 delat med tangens parentesen 0,40 delat med 3 600 grader slut parentes som är ungefär lika med 7,7 gånger 10 upphöjt till 16 meter",
-   "s": 316.02,
-   "e": 329.41
+   "s": 318.2,
+   "e": 331.6
   },
   {
    "t": "Omräknat till ljusår (dela med 9,5 gånger 10 upphöjt till 15 meter ):",
-   "s": 329.41,
-   "e": 344.02
+   "s": 331.6,
+   "e": 346.22
   },
   {
    "t": "r är ungefär lika med 7,7 gånger 10 upphöjt till 16 delat med 9,5 gånger 10 upphöjt till 15 som är ungefär lika med 8,2 ljusår",
-   "s": 329.41,
-   "e": 344.02
+   "s": 331.6,
+   "e": 346.22
   },
   {
    "t": "b) Med parallaxformeln får vi svaret direkt i parsec:",
-   "s": 344.02,
-   "e": 354.48
+   "s": 346.22,
+   "e": 356.68
   },
   {
    "t": "r är lika med 1 delat med trycket p som är lika med 1 delat med 0,40 som är lika med 2,5 pc",
-   "s": 344.02,
-   "e": 354.48
+   "s": 346.22,
+   "e": 356.68
   },
   {
    "t": "r är lika med 2,5 gånger 3,26 som är ungefär lika med 8,2 ljusår",
-   "s": 354.48,
-   "e": 361.21
+   "s": 356.68,
+   "e": 363.4
   },
   {
    "t": "Svar: Avståndet är cirka 2,5 pc är ungefär lika med 8,2 ljusår.",
-   "s": 361.21,
-   "e": 367.72
+   "s": 363.4,
+   "e": 369.92
   },
   {
    "t": "Båda metoderna ger samma resultat.",
-   "s": 367.72,
-   "e": 371.12
+   "s": 369.92,
+   "e": 373.32
   },
   {
    "t": "Hur långt når metoden?",
-   "s": 371.12,
-   "e": 373.95
+   "s": 373.32,
+   "e": 376.14
   },
   {
    "t": "Från jordytan störs mätningarna av atmosfären, och parallaxmetoden fungerar då bara för stjärnor som — med astronomiska mått — ligger relativt nära, ut till ungefär 100 ljusår.",
-   "s": 373.95,
-   "e": 384.87
+   "s": 376.14,
+   "e": 387.07
   },
   {
    "t": "Längre bort blir vinklarna för små för att mäta tillförlitligt.",
-   "s": 384.87,
-   "e": 389.38
+   "s": 387.07,
+   "e": 391.58
   },
   {
    "t": "Med satelliter ovanför atmosfären går det mycket bättre.",
-   "s": 389.38,
-   "e": 393.51
+   "s": 391.58,
+   "e": 395.7
   },
   {
    "t": "ESA:s rymdteleskop Gaia har mätt parallaxen till nästan två miljarder stjärnor och når avstånd på tiotusentals ljusår — och har på så vis ritat den mest detaljerade kartan någonsin över Vintergatan.",
-   "s": 393.51,
-   "e": 405.15
+   "s": 395.7,
+   "e": 407.34
   },
   {
    "t": "För ännu större avstånd, bortom vår galax, krävs andra metoder (till exempel standardljus som vissa pulserande stjärnor och supernovor).",
-   "s": 405.15,
-   "e": 414.73
+   "s": 407.34,
+   "e": 416.93
   },
   {
    "t": "Parsec är ett avstånd — inte en tid",
-   "s": 414.73,
-   "e": 418.28
+   "s": 416.93,
+   "e": 420.48
   },
   {
    "t": "I filmen Star Wars skryter Han Solo med att hans skepp klarade \"Kessel-rundan på mindre än 12 parsec\".",
-   "s": 418.28,
-   "e": 425.2
+   "s": 420.48,
+   "e": 427.39
   },
   {
    "t": "Men en parsec är ett avstånd, inte en tid — det är ungefär som att säga \"jag sprang loppet på mindre än 12 kilometer\".",
-   "s": 425.2,
-   "e": 432.72
+   "s": 427.39,
+   "e": 434.92
   },
   {
    "t": "Fansen har i efterhand försökt rädda repliken genom att hävda att Han tog en kortare rutt, men ursprungligen var det helt enkelt ett fysikfel i manuset.",
-   "s": 432.72,
-   "e": 441.76
+   "s": 434.92,
+   "e": 443.95
   },
   {
    "t": "Vår närmaste granne",
-   "s": 441.76,
-   "e": 444.31
+   "s": 443.95,
+   "e": 446.5
   },
   {
    "t": "Den närmaste stjärnan utöver solen, Proxima Centauri, har en parallax på ungefär 0,77 bågsekunder — den största som uppmätts för någon stjärna.",
-   "s": 444.31,
-   "e": 453.78
+   "s": 446.5,
+   "e": 455.98
   },
   {
    "t": "Det ger avståndet r är lika med 1 delat med 0,77 som är ungefär lika med 1,3 pc , alltså cirka 4,2 ljusår.",
-   "s": 453.78,
-   "e": 462.55
+   "s": 455.98,
+   "e": 464.74
   },
   {
    "t": "Trots att den är vår allra närmaste granne skulle det ta tiotusentals år att resa dit med dagens snabbaste rymdsonder.",
-   "s": 462.55,
-   "e": 469.98
+   "s": 464.74,
+   "e": 472.18
   }
  ]
 }

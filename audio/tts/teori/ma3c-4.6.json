@@ -1,0 +1,328 @@
+{
+ "id": "ma3c-4.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "283fd40218745577644217570ad762d1978640fb",
+ "dur": 474.23,
+ "segments": [
+  {
+   "t": "Extremvärdesproblem",
+   "s": 0.1,
+   "e": 2.62
+  },
+  {
+   "t": "Problem som handlar om att bestämma ett \"största/maximala\" eller \"minsta/minimala\" värde kallas extremvärdesproblem eller optimeringsproblem.",
+   "s": 2.58,
+   "e": 11.78
+  },
+  {
+   "t": "Vi löser extremvärdesproblem på samma sätt som när vi tar fram extrempunkter — med tillägget att vi också ska tolka vårt resultat i problemets sammanhang.",
+   "s": 11.78,
+   "e": 21.05
+  },
+  {
+   "t": "Steg för steg",
+   "s": 21.05,
+   "e": 23.36
+  },
+  {
+   "t": "Ställ upp en funktion för den storhet som ska maximeras eller minimeras.",
+   "s": 23.36,
+   "e": 28.84
+  },
+  {
+   "t": "Derivera funktionen.",
+   "s": 28.84,
+   "e": 31.41
+  },
+  {
+   "t": "Sätt derivatan lika med 0 och lös ekvationen.",
+   "s": 31.41,
+   "e": 35.67
+  },
+  {
+   "t": "Det ger det x -värde som kan ge det största eller minsta värdet.",
+   "s": 35.67,
+   "e": 40.25
+  },
+  {
+   "t": "Bestäm extrempunktens karaktär (maximi- eller minimipunkt) med andraderivatan eller ett teckenschema.",
+   "s": 40.25,
+   "e": 47.48
+  },
+  {
+   "t": "Sätt in x -värdet i den ursprungliga funktionen för att få fram extremvärdet.",
+   "s": 47.48,
+   "e": 53.14
+  },
+  {
+   "t": "Tolka resultatet i problemets sammanhang.",
+   "s": 53.14,
+   "e": 56.88
+  },
+  {
+   "t": "Exempel 1 — Maximal intäkt",
+   "s": 56.88,
+   "e": 60.33
+  },
+  {
+   "t": "Per anordnar en fest. Intäkten I kr med biljettpriset x kr ges av formeln I parentesen x slut parentes är lika med 300 x minus 2 x i kvadrat .. a) Vilket biljettpris ger maximal intäkt och vad blir då intäkten? b) Förklara varför formeln ser ut som den gör.",
+   "s": 60.33,
+   "e": 82.47
+  },
+  {
+   "t": "a) Vi börjar med att ta reda på vilket biljettpris x som ger maximal intäkt.",
+   "s": 82.47,
+   "e": 88.56
+  },
+  {
+   "t": "Vi deriverar den ursprungliga funktionen, sätter derivatan lika med 0 och löser ekvationen för att få det biljettpris som kan ge den största intäkten.",
+   "s": 88.56,
+   "e": 97.67
+  },
+  {
+   "t": "I parentesen x slut parentes är lika med 300 x minus 2 x i kvadrat vilket ger att I prim parentesen x slut parentes är lika med 300 minus 4 x",
+   "s": 97.67,
+   "e": 109.01
+  },
+  {
+   "t": "I prim parentesen x slut parentes är lika med 0 ger",
+   "s": 109.01,
+   "e": 113.95
+  },
+  {
+   "t": "300 minus 4 x är lika med 0 vilket ger att 4 x är lika med 300 vilket ger att x är lika med 75",
+   "s": 113.95,
+   "e": 122.4
+  },
+  {
+   "t": "Vi har alltså en maximal eller minimal intäkt då biljettpriset är 75 kronor.",
+   "s": 122.4,
+   "e": 128.41
+  },
+  {
+   "t": "Vi sätter in x -värdet 75 i den ursprungliga funktionen I parentesen x slut parentes är lika med 300 x minus 2 x i kvadrat för att få fram intäkten vid biljettpriset 75 kronor.",
+   "s": 128.41,
+   "e": 140.81
+  },
+  {
+   "t": "I, ekvation 75 är lika med 300 gånger 75 minus 2 gånger 75 i kvadrat som är lika med 22 500 minus 11 250 som är lika med 11 250",
+   "s": 140.81,
+   "e": 154.5
+  },
+  {
+   "t": "Vi bestämmer extrempunktens karaktär genom att sätta in x -värdet i andraderivatan och undersöka tecknet.",
+   "s": 154.5,
+   "e": 161.71
+  },
+  {
+   "t": "Sedan tidigare har vi I prim parentesen x slut parentes är lika med 300 minus 4 x , vilket ger",
+   "s": 161.71,
+   "e": 169.66
+  },
+  {
+   "t": "I bis parentesen x slut parentes är lika med minus 4",
+   "s": 169.66,
+   "e": 174.72
+  },
+  {
+   "t": "Eftersom I bis, ekvation 75 är lika med minus 4 är mindre än 0 (negativ) är extrempunkten en maximipunkt.",
+   "s": 174.72,
+   "e": 183.55
+  },
+  {
+   "t": "Vi hade också kunnat avgöra karaktären genom att konstatera att I är en andragradsfunktion med negativ x i kvadrat -term, vilket alltid ger en maximipunkt.",
+   "s": 183.55,
+   "e": 193.44
+  },
+  {
+   "t": "Den maximala intäkten är alltså 11 250 kronor då biljettpriset är 75 kronor.",
+   "s": 193.44,
+   "e": 200.56
+  },
+  {
+   "t": "Svar: Biljettpriset 75 kronor ger den maximala intäkten 11 250 kronor.",
+   "s": 200.56,
+   "e": 207.8
+  },
+  {
+   "t": "b) Intäkten ges av formeln",
+   "s": 207.8,
+   "e": 211.19
+  },
+  {
+   "t": "intäkt är lika med biljettpris gånger antal sålda biljetter",
+   "s": 211.19,
+   "e": 216.07
+  },
+  {
+   "t": "Om vi faktoriserar formeln för intäkten kan vi jämföra den med formeln ovan.",
+   "s": 216.07,
+   "e": 221.46
+  },
+  {
+   "t": "I parentesen x slut parentes är lika med 300 x minus 2 x i kvadrat som är lika med x parentesen 300 minus 2 x slut parentes",
+   "s": 221.46,
+   "e": 231.86
+  },
+  {
+   "t": "Vi jämför I parentesen x slut parentes är lika med x gånger parentesen 300 minus 2 x slut parentes med intäkt är lika med biljettpris gånger antal sålda biljetter .",
+   "s": 231.86,
+   "e": 243.76
+  },
+  {
+   "t": "Vi vet att I står för intäkten och att x står för biljettpriset.",
+   "s": 243.76,
+   "e": 248.81
+  },
+  {
+   "t": "Då måste faktorn parentesen 300 minus 2 x slut parentes stå för antalet sålda biljetter.",
+   "s": 248.81,
+   "e": 255.89
+  },
+  {
+   "t": "Att antalet sålda biljetter är parentesen 300 minus 2 x slut parentes kan vi tolka som att det vid fritt inträde ( x är lika med 0 ) säljs 300 biljetter, och att det för varje krona biljettpriset ökar säljs 2 biljetter färre.",
+   "s": 255.89,
+   "e": 270.05
+  },
+  {
+   "t": "Svar: Formeln motsvarar intäkt är lika med biljettpris gånger antal sålda biljetter.",
+   "s": 270.05,
+   "e": 276.64
+  },
+  {
+   "t": "Vid gratis inträde säljs 300 biljetter, och för varje krona biljettpriset ökar säljs 2 biljetter färre.",
+   "s": 276.64,
+   "e": 284.04
+  },
+  {
+   "t": "Exempel 2 — Maximal area",
+   "s": 284.04,
+   "e": 287.1
+  },
+  {
+   "t": "Vanja har köpt 60 meter stängsel för att göra en rektangulär hästhage där en av sidorna ska utgöras av en mur (inget stängsel behövs där).",
+   "s": 287.1,
+   "e": 295.85
+  },
+  {
+   "t": "Se figur.. a) Teckna ett uttryck för hagens area. b) Vilken är den maximala area hagen kan få?",
+   "s": 295.85,
+   "e": 306.45
+  },
+  {
+   "t": "a) Vi låter sidorna mot muren vara x meter.",
+   "s": 306.45,
+   "e": 312.31
+  },
+  {
+   "t": "Stängslet på den tredje sidan kommer då att vara parentesen 60 minus 2 x slut parentes meter, eftersom Vanja hade 60 meter stängsel och 2 x har gått åt till de övriga två sidorna.",
+   "s": 312.26,
+   "e": 324.05
+  },
+  {
+   "t": "Se figur.",
+   "s": 324.05,
+   "e": 326.13
+  },
+  {
+   "t": "Vi kallar hagens area för A .",
+   "s": 326.13,
+   "e": 329.31
+  },
+  {
+   "t": "Eftersom den har formen av en rektangel gäller",
+   "s": 329.31,
+   "e": 333.08
+  },
+  {
+   "t": "A är lika med basen gånger höjden",
+   "s": 333.08,
+   "e": 336.41
+  },
+  {
+   "t": "vilket ger",
+   "s": 336.41,
+   "e": 338.49
+  },
+  {
+   "t": "A parentesen x slut parentes är lika med parentesen 60 minus 2 x slut parentes gånger x som är lika med x parentesen 60 minus 2 x slut parentes som är lika med 60 x minus 2 x i kvadrat",
+   "s": 338.49,
+   "e": 353.04
+  },
+  {
+   "t": "Svar: A parentesen x slut parentes är lika med x parentesen 60 minus 2 x slut parentes eller A parentesen x slut parentes är lika med 60 x minus 2 x i kvadrat",
+   "s": 353.04,
+   "e": 365.66
+  },
+  {
+   "t": "b) Vi ska nu bestämma den maximala arean — vi har alltså ett extremvärdesproblem!",
+   "s": 365.66,
+   "e": 371.69
+  },
+  {
+   "t": "Vi deriverar funktionen som ska optimeras, sätter derivatan lika med 0 och löser ekvationen för att få det x -värde som kan ge den största arean.",
+   "s": 371.69,
+   "e": 380.88
+  },
+  {
+   "t": "A parentesen x slut parentes är lika med 60 x minus 2 x i kvadrat vilket ger att A prim parentesen x slut parentes är lika med 60 minus 4 x",
+   "s": 380.88,
+   "e": 395.0
+  },
+  {
+   "t": "A prim parentesen x slut parentes är lika med 0 ger",
+   "s": 380.88,
+   "e": 395.0
+  },
+  {
+   "t": "60 minus 4 x är lika med 0 vilket ger att 4 x är lika med 60 vilket ger att x är lika med 15",
+   "s": 395.0,
+   "e": 403.16
+  },
+  {
+   "t": "Vi har alltså en maximal eller minimal area då x är lika med 15 meter.",
+   "s": 403.16,
+   "e": 409.05
+  },
+  {
+   "t": "Vi sätter in x -värdet i den ursprungliga funktionen A parentesen x slut parentes är lika med 60 x minus 2 x i kvadrat för att få fram vilken area den ger.",
+   "s": 409.05,
+   "e": 419.69
+  },
+  {
+   "t": "A, ekvation 15 är lika med 60 gånger 15 minus 2 gånger 15 i kvadrat som är lika med 900 minus 450 som är lika med 450",
+   "s": 419.69,
+   "e": 430.75
+  },
+  {
+   "t": "Vi bestämmer extrempunktens karaktär genom att sätta in x -värdet i andraderivatan och undersöka tecknet.",
+   "s": 430.75,
+   "e": 437.93
+  },
+  {
+   "t": "Sedan tidigare hade vi A prim parentesen x slut parentes är lika med 60 minus 4 x , vilket ger",
+   "s": 437.93,
+   "e": 445.64
+  },
+  {
+   "t": "A bis parentesen x slut parentes är lika med minus 4",
+   "s": 445.64,
+   "e": 450.96
+  },
+  {
+   "t": "Eftersom A bis, ekvation 15 är lika med minus 4 är mindre än 0 (negativ) är extrempunkten en maximipunkt, så den area vi räknat ut är ett maximivärde.",
+   "s": 450.96,
+   "e": 462.13
+  },
+  {
+   "t": "Den maximala arean är alltså 450 meter i kvadrat när x är lika med 15 meter.",
+   "s": 462.13,
+   "e": 468.8
+  },
+  {
+   "t": "Svar: Den maximala arean är 450 meter i kvadrat .",
+   "s": 468.8,
+   "e": 474.23
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
  "id": "fy1-9.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "c183fb7525e7b0c549f6ef716f02d9944381118d",
- "dur": 555.25,
+ "hash": "67618d0420cfe43162eb9c34954194230ca6723a",
+ "dur": 552.79,
  "segments": [
   {
    "t": "Radioaktivt sönderfall",
@@ -112,352 +112,352 @@
   {
    "t": "Vid alfa-/α-sönderfall sänds en heliumkärna två upphöjt till 4 He ut.",
    "s": 116.75,
-   "e": 122.76
+   "e": 122.71
   },
   {
    "t": "α-sönderfall",
-   "s": 122.76,
-   "e": 124.79
+   "s": 122.71,
+   "e": 124.74
   },
   {
-   "t": "Z upphöjt till arean A X rightarrow Z minus 2 upphöjt till A minus 4 Y plus två upphöjt till 4 He",
-   "s": 124.79,
-   "e": 132.97
+   "t": "Z upphöjt till arean A X går mot Z minus 2 upphöjt till A minus 4 Y plus två upphöjt till 4 He",
+   "s": 124.74,
+   "e": 132.8
   },
   {
    "t": "där",
-   "s": 132.97,
-   "e": 134.49
+   "s": 132.8,
+   "e": 134.31
   },
   {
    "t": "A är lika med masstal/antal neutroner + protoner",
-   "s": 134.49,
-   "e": 139.59
+   "s": 134.31,
+   "e": 139.4
   },
   {
    "t": "Z är lika med atomnummer/antal protoner",
-   "s": 139.59,
-   "e": 144.26
+   "s": 139.4,
+   "e": 144.07
   },
   {
    "t": "Vid beta-/β-sönderfall är antalet nukleoner (protoner och neutroner) konstant, men de omfördelas.",
-   "s": 144.26,
-   "e": 152.5
+   "s": 144.07,
+   "e": 152.31
   },
   {
    "t": "Det finns två typer: β upphöjt till minus -sönderfall och β upphöjt till +-sönderfall.",
-   "s": 152.5,
-   "e": 158.29
+   "s": 152.31,
+   "e": 158.1
   },
   {
    "t": "Vid β upphöjt till minus -sönderfall omvandlas en neutron och blir en proton, en elektron och en neutrino.",
-   "s": 158.29,
-   "e": 165.45
+   "s": 158.1,
+   "e": 165.26
   },
   {
    "t": "Vid β upphöjt till +-sönderfall omvandlas en proton och blir en neutron, en positron och en neutrino.",
-   "s": 165.45,
-   "e": 172.5
+   "s": 165.26,
+   "e": 172.3
   },
   {
    "t": "β-sönderfall",
-   "s": 172.5,
-   "e": 174.54
+   "s": 172.3,
+   "e": 174.32
   },
   {
    "t": "β upphöjt till minus -sönderfall:",
-   "s": 174.54,
-   "e": 184.56
+   "s": 174.32,
+   "e": 183.96
   },
   {
-   "t": "Z upphöjt till arean A X rightarrow Z plus 1 upphöjt till A Y plus minus 1 upphöjt till 0 e plus ny",
-   "s": 174.54,
-   "e": 184.56
+   "t": "Z upphöjt till arean A X går mot Z plus 1 upphöjt till A Y plus minus 1 upphöjt till 0 e plus ny",
+   "s": 174.32,
+   "e": 183.96
   },
   {
    "t": "β upphöjt till +-sönderfall:",
-   "s": 184.56,
-   "e": 194.11
+   "s": 183.96,
+   "e": 193.2
   },
   {
-   "t": "Z upphöjt till arean A X rightarrow Z minus 1 upphöjt till A Y plus ett upphöjt till 0 e plus ny",
-   "s": 184.56,
-   "e": 194.11
+   "t": "Z upphöjt till arean A X går mot Z minus 1 upphöjt till A Y plus ett upphöjt till 0 e plus ny",
+   "s": 183.96,
+   "e": 193.2
   },
   {
    "t": "Vid gamma-/γ-sönderfall sker ingen ändring i kärnpartiklarna, men elektromagnetisk strålning i form av fotoner sänds ut när atomer deexciteras, det vill säga då elektroner hoppar från en högre energinivå till en lägre energinivå.",
-   "s": 194.11,
-   "e": 208.34
+   "s": 193.2,
+   "e": 207.43
   },
   {
    "t": "γ-sönderfall",
-   "s": 208.34,
-   "e": 210.39
+   "s": 207.43,
+   "e": 209.47
   },
   {
-   "t": "Z upphöjt till arean A X upphöjt till * rightarrow Z upphöjt till A X plus gamma",
-   "s": 210.39,
-   "e": 217.74
+   "t": "Z upphöjt till arean A X upphöjt till * går mot Z upphöjt till A X plus gamma",
+   "s": 209.47,
+   "e": 216.65
   },
   {
    "t": "där Z upphöjt till arean A X upphöjt till * är ett exciterat tillstånd av Z upphöjt till arean A X .",
-   "s": 217.74,
-   "e": 225.84
+   "s": 216.65,
+   "e": 224.7
   },
   {
    "t": "Sönderfall i dimkammare",
-   "s": 225.84,
-   "e": 228.59
+   "s": 224.7,
+   "e": 227.45
   },
   {
    "t": "Vi placerar det radioaktiva preparatet torium (alfastrålare) i en kyld kammare med propanol och bildar på så sätt en dimkammare.",
-   "s": 228.59,
-   "e": 237.06
+   "s": 227.45,
+   "e": 235.93
   },
   {
    "t": "När sönderfall sker från preparatet ser vi spåren av dessa i form av spår i dimman.",
-   "s": 237.06,
-   "e": 243.1
+   "s": 235.93,
+   "e": 241.96
   },
   {
    "t": "Exempel 1 — Skriv sönderfallsformler",
-   "s": 243.1,
-   "e": 246.78
+   "s": 241.96,
+   "e": 245.64
   },
   {
    "t": "Skriv sönderfallsformeln för",
-   "s": 246.78,
-   "e": 249.86
+   "s": 245.64,
+   "e": 248.72
   },
   {
    "t": "a) Radium-226 som α-sönderfaller.",
-   "s": 249.86,
-   "e": 254.2
+   "s": 248.72,
+   "e": 253.06
   },
   {
    "t": "b) Kol-14 som β upphöjt till minus -sönderfaller.",
-   "s": 254.2,
-   "e": 259.01
+   "s": 253.06,
+   "e": 257.88
   },
   {
    "t": "c) Aluminium-25 som β upphöjt till +-sönderfaller.",
-   "s": 259.01,
-   "e": 264.18
+   "s": 257.88,
+   "e": 263.04
   },
   {
    "t": "d) Kobolt-60 som γ-sönderfaller när den deexciteras från 1,33 megaelektronvolt till 1,17 megaelektronvolt.",
-   "s": 264.18,
-   "e": 273.65
+   "s": 263.04,
+   "e": 272.51
   },
   {
    "t": "e) Kobolt-59 som tar upp en neutron och sedan sönderfaller till Nickel-60.",
-   "s": 273.65,
-   "e": 280.14
+   "s": 272.51,
+   "e": 279.0
   },
   {
    "t": "a) Radium har atomnummer 88.",
-   "s": 280.14,
-   "e": 284.04
+   "s": 279.0,
+   "e": 282.9
   },
   {
    "t": "Att den α-sönderfaller betyder att den sänder ut en heliumkärna.",
-   "s": 284.04,
-   "e": 288.7
+   "s": 282.9,
+   "e": 287.55
   },
   {
    "t": "Svar:",
-   "s": 288.7,
-   "e": 300.07
+   "s": 287.55,
+   "e": 298.51
   },
   {
-   "t": "åtta åtta upphöjt till 226 Ra rightarrow två upphöjt till 4 He plus åtta sex upphöjt till 222 Rn",
-   "s": 288.7,
-   "e": 300.07
+   "t": "åtta åtta upphöjt till 226 Ra går mot två upphöjt till 4 He plus åtta sex upphöjt till 222 Rn",
+   "s": 287.55,
+   "e": 298.51
   },
   {
    "t": "b) Kol har atomnummer 6.",
-   "s": 288.7,
-   "e": 300.07
+   "s": 287.55,
+   "e": 298.51
   },
   {
    "t": "Vid β upphöjt till minus -sönderfall ökar atomnumret med 1.",
-   "s": 300.07,
-   "e": 304.96
+   "s": 298.51,
+   "e": 303.4
   },
   {
    "t": "Svar:",
-   "s": 304.96,
-   "e": 309.26
+   "s": 303.4,
+   "e": 308.38
   },
   {
-   "t": "sex upphöjt till 14 coulomb rightarrow sju upphöjt till 14 newton plus minus 1 upphöjt till 0 e plus ny",
-   "s": 304.96,
-   "e": 315.0
+   "t": "sex upphöjt till 14 coulomb går mot sju upphöjt till 14 newton plus minus 1 upphöjt till 0 e plus ny",
+   "s": 303.4,
+   "e": 313.5
   },
   {
    "t": "c) Aluminium har atomnummer 13.",
-   "s": 314.95,
-   "e": 319.09
+   "s": 313.45,
+   "e": 317.59
   },
   {
    "t": "Vid β upphöjt till +-sönderfall minskar atomnumret med 1.",
-   "s": 319.09,
-   "e": 324.09
+   "s": 317.59,
+   "e": 322.59
   },
   {
    "t": "Svar:",
-   "s": 324.09,
-   "e": 332.62
+   "s": 322.59,
+   "e": 330.85
   },
   {
-   "t": "ett tre upphöjt till 25 Al rightarrow ett två upphöjt till 25 Mg plus ett upphöjt till 0 e plus ny",
-   "s": 324.09,
-   "e": 332.62
+   "t": "ett tre upphöjt till 25 Al går mot ett två upphöjt till 25 Mg plus ett upphöjt till 0 e plus ny",
+   "s": 322.59,
+   "e": 330.85
   },
   {
    "t": "d) Vid γ-sönderfall sker ingen ändring av kärnpartiklarna, utan endast utsändning av en foton.",
-   "s": 332.62,
-   "e": 339.55
+   "s": 330.85,
+   "e": 337.76
   },
   {
    "t": "Fotonen får mellanskillnaden i energi, dvs. (1,33 − 1,17) MeV är lika med 0,16 megaelektronvolt.",
-   "s": 339.55,
-   "e": 349.35
+   "s": 337.76,
+   "e": 347.56
   },
   {
    "t": "Svar:",
-   "s": 349.35,
-   "e": 365.31
+   "s": 347.56,
+   "e": 363.21
   },
   {
-   "t": "upphöjt till 60 Co parentesen 1,33 megaelektronvolt slut parentes rightarrow upphöjt till 60 Co parentesen 1,17 megaelektronvolt slut parentes plus gamma parentesen 0,16 megaelektronvolt slut parentes",
-   "s": 349.35,
-   "e": 365.31
+   "t": "upphöjt till 60 Co parentesen 1,33 megaelektronvolt slut parentes går mot upphöjt till 60 Co parentesen 1,17 megaelektronvolt slut parentes plus gamma parentesen 0,16 megaelektronvolt slut parentes",
+   "s": 347.56,
+   "e": 363.21
   },
   {
    "t": "e) Vi skriver upp det vi vet om sönderfallet och balanserar.",
-   "s": 365.31,
-   "e": 370.27
+   "s": 363.21,
+   "e": 368.17
   },
   {
-   "t": "två sju upphöjt till 59 Co plus noll upphöjt till 1 n rightarrow två åtta upphöjt till 60 Ni plus minus 1 upphöjt till 0 e",
-   "s": 370.27,
-   "e": 380.62
+   "t": "två sju upphöjt till 59 Co plus noll upphöjt till 1 n går mot två åtta upphöjt till 60 Ni plus minus 1 upphöjt till 0 e",
+   "s": 368.17,
+   "e": 378.2
   },
   {
    "t": "Svar: Som ovan.",
-   "s": 370.27,
-   "e": 380.62
+   "s": 368.17,
+   "e": 378.2
   },
   {
    "t": "Exempel 2 — Energi vid β<sup>+</sup>-sönderfall av Kväve-13",
-   "s": 380.62,
-   "e": 387.19
+   "s": 378.2,
+   "e": 384.76
   },
   {
    "t": "Kväve-13 β upphöjt till +-sönderfaller.",
-   "s": 387.19,
-   "e": 391.02
+   "s": 384.76,
+   "e": 388.6
   },
   {
    "t": "Bestäm den energi som frigörs vid sönderfallet.",
-   "s": 391.02,
-   "e": 395.14
+   "s": 388.6,
+   "e": 392.71
   },
   {
    "t": "Vid β-sönderfall ändras antalet elektroner och vi måste då ta hänsyn till elektronernas massor i nuklidmassorna (detta gäller inte för α- eller γ-sönderfall).",
-   "s": 395.14,
-   "e": 404.59
+   "s": 392.71,
+   "e": 402.15
   },
   {
    "t": "Vi börjar med att skriva formeln för sönderfallet.",
-   "s": 404.59,
-   "e": 408.6
+   "s": 402.15,
+   "e": 406.16
   },
   {
-   "t": "sju upphöjt till 13 newton rightarrow sex upphöjt till 13 coulomb plus ett upphöjt till 0 e plus ny",
-   "s": 408.6,
-   "e": 415.61
+   "t": "sju upphöjt till 13 newton går mot sex upphöjt till 13 coulomb plus ett upphöjt till 0 e plus ny",
+   "s": 406.16,
+   "e": 413.15
   },
   {
    "t": "Vi beräknar totala massan i vänsterledet, dvs. massan hos kärnan sju upphöjt till 13 newton .",
-   "s": 415.61,
-   "e": 422.71
+   "s": 413.15,
+   "e": 420.25
   },
   {
    "t": "Vi läser av massan på nukliden (atomen inklusive elektroner) från en tabell och drar sedan ifrån massan av elektronerna.",
-   "s": 422.71,
-   "e": 431.2
+   "s": 420.25,
+   "e": 428.74
   },
   {
    "t": "m hastigheten v ä n sträckan s tiden t e r är lika med 13,005739 minus 7 gånger 0,000549 som är lika med 13,001896 u",
-   "s": 431.2,
-   "e": 444.61
+   "s": 428.74,
+   "e": 442.15
   },
   {
    "t": "Vi beräknar sedan totala massan i högerledet, dvs. massan hos kärnan sex upphöjt till 13 coulomb och hos en positron (samma som elektronen).",
-   "s": 444.61,
-   "e": 454.51
+   "s": 442.15,
+   "e": 452.05
   },
   {
    "t": "Neutrinon har försumbar massa.",
-   "s": 454.51,
-   "e": 457.74
+   "s": 452.05,
+   "e": 455.27
   },
   {
    "t": "m höjden h ö tyngdfaktorn g e r är lika med parentesen 13,003355 minus 6 gånger 0,000549 slut parentes plus 0,000549 som är lika med 13,000610 u",
-   "s": 457.74,
-   "e": 477.2
+   "s": 455.27,
+   "e": 474.74
   },
   {
    "t": "Massdefekten delta massan m ger den frigjorda energin.",
-   "s": 457.74,
-   "e": 477.2
+   "s": 455.27,
+   "e": 474.74
   },
   {
    "t": "delta massan m är lika med m hastigheten v ä n sträckan s tiden t e r minus m höjden h ö tyngdfaktorn g e r som är lika med 13,001896 minus 13,000610 som är lika med 0,001286 u",
-   "s": 477.2,
-   "e": 494.24
+   "s": 474.74,
+   "e": 491.77
   },
   {
    "t": "energin E är lika med 0,001286 gånger 931,49 megaelektronvolt som är lika med 1,197 megaelektronvolt som är ungefär lika med 1,20 megaelektronvolt",
-   "s": 494.24,
-   "e": 508.8
+   "s": 491.77,
+   "e": 506.34
   },
   {
    "t": "Svar: 1,20 megaelektronvolt",
-   "s": 508.8,
-   "e": 512.89
+   "s": 506.34,
+   "e": 510.42
   },
   {
    "t": "Upptäcka neutrinon",
-   "s": 512.89,
-   "e": 515.54
+   "s": 510.42,
+   "e": 513.07
   },
   {
    "t": "En av de mest framgångsrika metoderna för att detektera neutriner använder sig av det som kallas för tjerenkovstrålning.",
-   "s": 515.54,
-   "e": 522.77
+   "s": 513.07,
+   "e": 520.31
   },
   {
    "t": "När en neutrino interagerar med en atomkärna i vatten kan den skapa en sekundär partikel (till exempel en elektron) som rör sig snabbare än ljusets hastighet i vattnet.",
-   "s": 522.77,
-   "e": 533.24
+   "s": 520.31,
+   "e": 530.77
   },
   {
    "t": "Detta fenomen orsakar en sorts ljuschockvåg, liknande ljudbangen från ett överljudsflygplan, men i form av synligt ljus.",
-   "s": 533.24,
-   "e": 541.22
+   "s": 530.77,
+   "e": 538.76
   },
   {
    "t": "Detta ljus kan sedan upptäckas av fotomultiplikatorrör som bekläder insidan av en jättelik vattentank djupt under jorden eller under vattnet.",
-   "s": 541.22,
-   "e": 550.27
+   "s": 538.76,
+   "e": 547.81
   },
   {
    "t": "Ett exempel på en sådan anläggning är Super-Kamiokande i Japan.",
-   "s": 550.27,
-   "e": 555.25
+   "s": 547.81,
+   "e": 552.79
   }
  ]
 }

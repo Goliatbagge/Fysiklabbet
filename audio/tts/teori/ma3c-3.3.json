@@ -1,0 +1,378 @@
+{
+ "id": "ma3c-3.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "deb1b995bd043d051dcf22d4f9f0e237f361a75d",
+ "dur": 669.27,
+ "segments": [
+  {
+   "t": "Mer om derivatan av potensfunktioner",
+   "s": 0.1,
+   "e": 3.94
+  },
+  {
+   "t": "Sedan tidigare har vi visat att f av x är lika med x upphöjt till n har derivatan f prim parentesen x slut parentes är lika med n x upphöjt till n minus 1 där n är ett positivt heltal.",
+   "s": 3.89,
+   "e": 15.9
+  },
+  {
+   "t": "Vi undersöker om deriveringsregeln gäller även för exponenter som inte är positiva heltal — vi börjar med exponenter som inte är heltal alls.",
+   "s": 15.9,
+   "e": 24.99
+  },
+  {
+   "t": "Derivatan för f av x är lika med x upphöjt till 1 delat med 2 , dvs. för f av x är lika med roten ur x , med derivatans definition",
+   "s": 24.99,
+   "e": 34.73
+  },
+  {
+   "t": "Om den vanliga regeln (multiplicera ner exponenten och minska den med 1) gäller även för denna typ av funktion ska",
+   "s": 34.73,
+   "e": 42.29
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 1 delat med 2 x upphöjt till minus 1 delat med 2 som är lika med 1 delat med 2 x upphöjt till 1 delat med 2 som är lika med 1 delat med 2 roten ur x",
+   "s": 42.29,
+   "e": 55.1
+  },
+  {
+   "t": "Vi undersöker om det verkligen är så med derivatans definition.",
+   "s": 55.1,
+   "e": 59.95
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 roten ur x plus h minus roten ur x delat med h",
+   "s": 59.95,
+   "e": 74.03
+  },
+  {
+   "t": "Vi förlänger bråket med konjugatet till täljaren för att bli av med rottecknen.",
+   "s": 74.03,
+   "e": 79.25
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 parentesen roten ur x plus h minus roten ur x slut parentes parentesen roten ur x plus h plus roten ur x slut parentes delat med h parentesen roten ur x plus h plus roten ur x slut parentes som är lika med gränsvärdet då h går mot 0 x plus h minus x delat med h parentesen roten ur x plus h plus roten ur x slut parentes",
+   "s": 79.25,
+   "e": 106.47
+  },
+  {
+   "t": "är lika med gränsvärdet då h går mot 0 timmar delat med h parentesen roten ur x plus h plus roten ur x slut parentes som är lika med gränsvärdet då h går mot 0 1 delat med roten ur x plus h plus roten ur x som är lika med 1 delat med roten ur x plus roten ur x som är lika med 1 delat med 2 roten ur x",
+   "s": 106.47,
+   "e": 126.03
+  },
+  {
+   "t": "De enkla deriveringsreglerna gäller alltså även för annat än heltalsexponenter!",
+   "s": 126.03,
+   "e": 131.74
+  },
+  {
+   "t": "Vi undersöker sedan om deriveringsregeln gäller för exponenter som är negativa.",
+   "s": 131.74,
+   "e": 137.6
+  },
+  {
+   "t": "Derivatan för f av x är lika med x upphöjt till minus 1 , dvs. för f av x är lika med 1 delat med x , med derivatans definition",
+   "s": 137.6,
+   "e": 147.09
+  },
+  {
+   "t": "Om den vanliga regeln gäller även för denna funktion ska f prim parentesen x slut parentes är lika med minus x upphöjt till minus 2 , dvs. f prim parentesen x slut parentes är lika med minus 1 delat med x i kvadrat .",
+   "s": 147.09,
+   "e": 161.3
+  },
+  {
+   "t": "Vi undersöker om det verkligen är så med derivatans definition.",
+   "s": 161.3,
+   "e": 166.19
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 1 delat med x plus h minus 1 delat med x delat med h",
+   "s": 166.19,
+   "e": 180.6
+  },
+  {
+   "t": "Vi förlänger bråken i täljaren med varandras nämnare för att få liknämnigt och förenklar.",
+   "s": 180.6,
+   "e": 186.28
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 x delat med x parentesen x plus h slut parentes minus x plus h delat med x parentesen x plus h slut parentes delat med h som är lika med gränsvärdet då h går mot 0 x minus parentesen x plus h slut parentes delat med x parentesen x plus h slut parentes delat med h som är lika med gränsvärdet då h går mot 0 minus h delat med x parentesen x plus h slut parentes delat med h",
+   "s": 186.28,
+   "e": 217.84
+  },
+  {
+   "t": "är lika med gränsvärdet då h går mot 0 minus h delat med h gånger x parentesen x plus h slut parentes som är lika med gränsvärdet då h går mot 0 minus 1 delat med x parentesen x plus h slut parentes som är lika med minus 1 delat med x gånger x som är lika med minus 1 delat med x i kvadrat",
+   "s": 217.84,
+   "e": 237.51
+  },
+  {
+   "t": "De enkla deriveringsreglerna gäller alltså även för negativa exponenter!",
+   "s": 237.51,
+   "e": 242.95
+  },
+  {
+   "t": "Potensregeln för alla reella exponenter",
+   "s": 242.95,
+   "e": 246.69
+  },
+  {
+   "t": "Båda undersökningarna ovan bekräftar samma sak: den enkla deriverings- regeln — multiplicera ner exponenten och minska den med 1 — gäller inte bara för positiva heltalsexponenter, utan för alla reella exponenter.",
+   "s": 246.69,
+   "e": 259.96
+  },
+  {
+   "t": "Derivatan av potensfunktioner",
+   "s": 259.96,
+   "e": 263.27
+  },
+  {
+   "t": "Derivatan av",
+   "s": 263.27,
+   "e": 265.5
+  },
+  {
+   "t": "f av x är lika med x upphöjt till a",
+   "s": 265.5,
+   "e": 269.32
+  },
+  {
+   "t": "är",
+   "s": 269.32,
+   "e": 270.75
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med a x upphöjt till a minus 1",
+   "s": 270.75,
+   "e": 278.54
+  },
+  {
+   "t": "för alla reella tal a (om x är större än 0 ).",
+   "s": 278.49,
+   "e": 282.82
+  },
+  {
+   "t": "För att kunna använda regeln måste uttrycket skrivas om som en ren potens x upphöjt till a innan vi deriverar — variabler under ett rottecken eller i en nämnare räknas alltså om till en potens med bråk- eller negativ exponent först.",
+   "s": 282.82,
+   "e": 296.07
+  },
+  {
+   "t": "Derivera variabler under rottecknet eller i nämnaren",
+   "s": 296.07,
+   "e": 300.42
+  },
+  {
+   "t": "Om vi ska derivera en funktion som innehåller variabler (t.ex. x ) under rottecknet eller i en nämnare gör vi det enklast genom att",
+   "s": 300.42,
+   "e": 309.2
+  },
+  {
+   "t": "skriva om termen som en potens och förenkla,",
+   "s": 309.2,
+   "e": 313.25
+  },
+  {
+   "t": "och sedan derivera som vanligt.",
+   "s": 313.25,
+   "e": 316.3
+  },
+  {
+   "t": "Derivera uttryck med variabeln i både täljare och nämnare",
+   "s": 316.3,
+   "e": 320.84
+  },
+  {
+   "t": "När vi har variabeln, t.ex. x , i både täljare och nämnare deriverar vi funktionen enklast genom att dela upp bråket i flera termer och sedan derivera termvis.",
+   "s": 320.84,
+   "e": 331.58
+  },
+  {
+   "t": "Exempel 1 — Derivera potensuttryck",
+   "s": 331.58,
+   "e": 335.45
+  },
+  {
+   "t": "Derivera",
+   "s": 335.45,
+   "e": 337.29
+  },
+  {
+   "t": "a) f av x är lika med 3 delat med x b) f av x som är lika med 1 delat med 5 x c) f av x som är lika med 4 x minus 7 delat med x",
+   "s": 337.29,
+   "e": 363.83
+  },
+  {
+   "t": "d) f av x är lika med roten ur x plus tredje roten ur x e) f av x som är lika med x roten ur x f) f av x som är lika med 8 delat med roten ur x",
+   "s": 337.29,
+   "e": 363.83
+  },
+  {
+   "t": "a) Vi har variabeln i nämnaren och skriver därför först om funktionsuttrycket som en potens.",
+   "s": 337.29,
+   "e": 363.83
+  },
+  {
+   "t": "f av x är lika med 3 delat med x som är lika med 3 delat med x upphöjt till 1 som är lika med 3 x upphöjt till minus 1",
+   "s": 363.83,
+   "e": 372.75
+  },
+  {
+   "t": "Därefter deriverar vi \"som vanligt\" genom att multiplicera ner exponenten och minska den med 1.",
+   "s": 372.75,
+   "e": 379.27
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med minus 3 x upphöjt till minus 2 som är lika med minus 3 delat med x i kvadrat",
+   "s": 379.27,
+   "e": 388.33
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med minus 3 x upphöjt till minus 2 eller f prim parentesen x slut parentes är lika med minus 3 delat med x i kvadrat",
+   "s": 388.33,
+   "e": 400.29
+  },
+  {
+   "t": "b) Vi har återigen x i nämnaren.",
+   "s": 400.29,
+   "e": 404.05
+  },
+  {
+   "t": "Vi \"flyttar upp\" x till täljaren samtidigt som vi byter tecken på exponenten (femman ska vara kvar i nämnaren).",
+   "s": 404.05,
+   "e": 411.32
+  },
+  {
+   "t": "Sedan kan vi derivera som vanligt.",
+   "s": 411.32,
+   "e": 414.74
+  },
+  {
+   "t": "f av x är lika med 1 delat med 5 x som är lika med 1 delat med 5 x upphöjt till 1 som är lika med x upphöjt till minus 1 delat med 5",
+   "s": 414.74,
+   "e": 423.83
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med minus x upphöjt till minus 2 delat med 5 som är lika med minus 1 delat med 5 x i kvadrat",
+   "s": 423.83,
+   "e": 433.74
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med minus x upphöjt till minus 2 delat med 5 eller f prim parentesen x slut parentes är lika med minus 1 delat med 5 x i kvadrat",
+   "s": 433.74,
+   "e": 446.28
+  },
+  {
+   "t": "c) Nu har vi x i både täljare och nämnare.",
+   "s": 446.28,
+   "e": 450.5
+  },
+  {
+   "t": "Vi delar upp bråket i två termer och förenklar.",
+   "s": 450.5,
+   "e": 454.45
+  },
+  {
+   "t": "f av x är lika med 4 x minus 7 delat med x som är lika med 4 x delat med x minus 7 delat med x som är lika med 4 minus 7 x upphöjt till minus 1",
+   "s": 454.45,
+   "e": 465.53
+  },
+  {
+   "t": "Nu deriverar vi term för term.",
+   "s": 465.53,
+   "e": 468.67
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med minus 7 gånger parentesen minus 1 slut parentes x upphöjt till minus 2 som är lika med 7 x upphöjt till minus 2 som är lika med 7 delat med x i kvadrat",
+   "s": 468.67,
+   "e": 482.22
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 7 x upphöjt till minus 2 eller f prim parentesen x slut parentes är lika med 7 delat med x i kvadrat",
+   "s": 482.22,
+   "e": 493.4
+  },
+  {
+   "t": "d) Vi skriver först om rötterna som potenser.",
+   "s": 493.4,
+   "e": 497.67
+  },
+  {
+   "t": "Sedan deriverar vi som vanligt.",
+   "s": 497.67,
+   "e": 500.99
+  },
+  {
+   "t": "f av x är lika med roten ur x plus tredje roten ur x som är lika med x upphöjt till 1 delat med 2 plus x upphöjt till 1 delat med 3",
+   "s": 500.99,
+   "e": 510.44
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 1 delat med 2 x upphöjt till minus 1 delat med 2 plus 1 delat med 3 x upphöjt till minus 2 delat med 3 som är lika med 1 delat med 2 x upphöjt till 1 delat med 2 plus 1 delat med 3 x upphöjt till 2 delat med 3 som är lika med 1 delat med 2 roten ur x plus 1 delat med 3 tredje roten ur x i kvadrat",
+   "s": 510.44,
+   "e": 531.89
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med x upphöjt till minus 1 delat med 2 delat med 2 plus x upphöjt till minus 2 delat med 3 delat med 3 eller f prim parentesen x slut parentes är lika med 1 delat med 2 roten ur x plus 1 delat med 3 tredje roten ur x i kvadrat",
+   "s": 531.89,
+   "e": 550.45
+  },
+  {
+   "t": "e) Vi börjar med att skriva roten ur x är lika med x upphöjt till 1 delat med 2 och sedan förenkla med potenslagarna.",
+   "s": 550.45,
+   "e": 558.64
+  },
+  {
+   "t": "f av x är lika med x gånger x upphöjt till 1 delat med 2 som är lika med x upphöjt till 1 gånger x upphöjt till 1 delat med 2 som är lika med x upphöjt till 1 plus 1 delat med 2 som är lika med x upphöjt till 3 delat med 2",
+   "s": 558.64,
+   "e": 574.37
+  },
+  {
+   "t": "Därefter deriverar vi som vanligt.",
+   "s": 574.32,
+   "e": 577.73
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 delat med 2 x upphöjt till 3 delat med 2 minus 1 som är lika med 3 delat med 2 x upphöjt till 1 delat med 2 som är lika med 3 delat med 2 roten ur x som är lika med 3 roten ur x delat med 2",
+   "s": 577.73,
+   "e": 593.78
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 3 delat med 2 x upphöjt till 1 delat med 2 eller f prim parentesen x slut parentes är lika med 3 roten ur x delat med 2",
+   "s": 593.78,
+   "e": 606.04
+  },
+  {
+   "t": "f) Vi skriver först om roten som en potens.",
+   "s": 606.04,
+   "e": 610.22
+  },
+  {
+   "t": "f av x är lika med 8 delat med x upphöjt till 1 delat med 2",
+   "s": 610.22,
+   "e": 615.48
+  },
+  {
+   "t": "Vi flyttar sedan upp x upphöjt till 1 delat med 2 från nämnaren samtidigt som vi byter tecken på exponenten.",
+   "s": 615.48,
+   "e": 622.68
+  },
+  {
+   "t": "f av x är lika med 8 x upphöjt till minus 1 delat med 2",
+   "s": 622.68,
+   "e": 628.01
+  },
+  {
+   "t": "Därefter deriverar vi med de vanliga deriveringsreglerna.",
+   "s": 628.01,
+   "e": 632.49
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med minus 1 delat med 2 gånger 8 x upphöjt till minus 3 delat med 2 som är lika med minus 4 x upphöjt till minus 3 delat med 2 som är lika med minus 4 delat med x upphöjt till 3 delat med 2 som är lika med minus 4 delat med x gånger x upphöjt till 1 delat med 2 som är lika med minus 4 delat med x roten ur x",
+   "s": 632.49,
+   "e": 665.27
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med minus 4 x upphöjt till minus 3 delat med 2 eller f prim parentesen x slut parentes är lika med minus 4 delat med x roten ur x",
+   "s": 632.49,
+   "e": 669.27
+  }
+ ]
+}

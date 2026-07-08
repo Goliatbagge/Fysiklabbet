@@ -1,0 +1,243 @@
+{
+ "id": "ma3c-4.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "393197a1347c58e593ee7e2e15fc4e7358aebd26",
+ "dur": 346.94,
+ "segments": [
+  {
+   "t": "Andraderivatan och funktionens graf",
+   "s": 0.1,
+   "e": 3.49
+  },
+  {
+   "t": "Derivatan av derivatan kallas andraderivatan, skrivs f bis parentesen x slut parentes och utläses \" f bis av x \".",
+   "s": 3.44,
+   "e": 12.64
+  },
+  {
+   "t": "Andraderivatan beskriver hur derivatan (eller lutningen) ändras.",
+   "s": 12.64,
+   "e": 18.1
+  },
+  {
+   "t": "En punkt där lutningen inte ändras kallas inflexionspunkt.",
+   "s": 18.1,
+   "e": 22.73
+  },
+  {
+   "t": "Konvex och konkav kurva",
+   "s": 22.73,
+   "e": 25.49
+  },
+  {
+   "t": "Vi har tidigare sett hur förstaderivatans tecken avslöjar om en funktion växer eller avtar, och hur teckenväxlingar avslöjar extrempunkter.",
+   "s": 25.49,
+   "e": 34.7
+  },
+  {
+   "t": "Nu undersöker vi vad andraderivatan berättar om kurvans form.",
+   "s": 34.7,
+   "e": 39.56
+  },
+  {
+   "t": "Andraderivatan och grafen — analys av f prim parentesen x slut parentes och f bis parentesen x slut parentes",
+   "s": 39.56,
+   "e": 48.0
+  },
+  {
+   "t": "Betrakta en funktion f av x på intervallet a är mindre än eller lika med x är mindre än eller lika med d , med extrempunkter där x är lika med b och där x är lika med c (där b är mindre än c ), och en inflexionspunkt där x är lika med z (mellan b och c ).",
+   "s": 48.0,
+   "e": 64.75
+  },
+  {
+   "t": "Vi börjar med att analysera förstaderivatan.",
+   "s": 64.75,
+   "e": 68.71
+  },
+  {
+   "t": "Vi analyserar nu andraderivatan f bis parentesen x slut parentes , som beskriver hur f prim parentesen x slut parentes — alltså lutningen — ändras.",
+   "s": 68.71,
+   "e": 79.12
+  },
+  {
+   "t": "Andraderivatan och grafen — kom ihåg",
+   "s": 79.12,
+   "e": 82.74
+  },
+  {
+   "t": "I en punkt där",
+   "s": 82.74,
+   "e": 85.08
+  },
+  {
+   "t": "kurvan böjer uppåt (en \"glad\" kurva) är andraderivatan positiv och kurvan är konvex,",
+   "s": 85.08,
+   "e": 91.8
+  },
+  {
+   "t": "kurvan böjer nedåt (en \"ledsen\" kurva) är andraderivatan negativ och kurvan är konkav,",
+   "s": 91.8,
+   "e": 98.51
+  },
+  {
+   "t": "kurvans lutning inte ändras (mungipan mellan en \"glad\" och en \"ledsen\" kurva) är andraderivatan noll — punkten är en inflexionspunkt.",
+   "s": 98.51,
+   "e": 107.15
+  },
+  {
+   "t": "Andraderivatan är negativ för hela den blå delen av kurvan (\"ledsen\" kurva, konkav) och positiv för hela den röda delen (\"glad\" kurva, konvex).",
+   "s": 107.15,
+   "e": 117.78
+  },
+  {
+   "t": "I inflexionspunkten, där kurvan varken är konkav eller konvex, är andraderivatan lika med noll.",
+   "s": 117.78,
+   "e": 124.92
+  },
+  {
+   "t": "Exempel 1 — Inflexionspunkt och konvexitet",
+   "s": 124.92,
+   "e": 129.25
+  },
+  {
+   "t": "Funktionen f av x är lika med x i kubik minus 6 x i kvadrat plus 7 x är given.. a) Bestäm inflexionspunktens koordinater. b) I vilket intervall är funktionen konvex?",
+   "s": 129.25,
+   "e": 145.16
+  },
+  {
+   "t": "a) I inflexionspunkten är andraderivatan lika med noll.",
+   "s": 145.16,
+   "e": 150.34
+  },
+  {
+   "t": "Vi tar fram andraderivatan genom att derivera funktionen två gånger, sätter den lika med noll och löser sedan ekvationen för att få fram inflexionspunktens x -koordinat.",
+   "s": 150.34,
+   "e": 160.6
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 x i kvadrat minus 12 x plus 7",
+   "s": 160.6,
+   "e": 167.65
+  },
+  {
+   "t": "f bis parentesen x slut parentes är lika med 6 x minus 12",
+   "s": 167.65,
+   "e": 173.38
+  },
+  {
+   "t": "f bis parentesen x slut parentes är lika med 0 ger",
+   "s": 173.38,
+   "e": 178.62
+  },
+  {
+   "t": "6 x minus 12 är lika med 0 6 x som är lika med 12 x som är lika med 2",
+   "s": 178.62,
+   "e": 185.04
+  },
+  {
+   "t": "Vi sätter in x är lika med 2 i den ursprungliga funktionen f av x är lika med x i kubik minus 6 x i kvadrat plus 7 x för att bestämma inflexionspunktens y -koordinat.",
+   "s": 185.04,
+   "e": 196.6
+  },
+  {
+   "t": "f av 2 är lika med 2 i kubik minus 6 gånger 2 i kvadrat plus 7 gånger 2 som är lika med 8 minus 24 plus 14 som är lika med minus 2",
+   "s": 196.6,
+   "e": 206.74
+  },
+  {
+   "t": "Så inflexionspunkten har koordinaterna parentesen 2, minus 2 slut parentes .",
+   "s": 206.74,
+   "e": 213.2
+  },
+  {
+   "t": "Svar: parentesen 2, minus 2 slut parentes",
+   "s": 213.2,
+   "e": 218.31
+  },
+  {
+   "t": "b) Funktionen är konvex när f bis parentesen x slut parentes är större än 0 .",
+   "s": 218.31,
+   "e": 225.07
+  },
+  {
+   "t": "Vi har sedan tidigare att f bis parentesen x slut parentes är lika med 6 x minus 12 .",
+   "s": 225.07,
+   "e": 232.03
+  },
+  {
+   "t": "f bis parentesen x slut parentes är större än 0 ger",
+   "s": 232.03,
+   "e": 237.1
+  },
+  {
+   "t": "6 x minus 12 är större än 0 6 x är större än 12 x är större än 2",
+   "s": 237.1,
+   "e": 243.28
+  },
+  {
+   "t": "Svar: x är större än 2",
+   "s": 243.28,
+   "e": 246.47
+  },
+  {
+   "t": "Exempel 2 — Inflexionspunkt från grafen till f av x eller f prim parentesen x slut parentes",
+   "s": 246.47,
+   "e": 253.84
+  },
+  {
+   "t": "Ange x -koordinaten för inflexionspunkten till funktionen f av x .. a) Grafen till y är lika med f av x har extrempunkter där x är lika med minus 1 och x är lika med 1 . b) Grafen till y är lika med f prim parentesen x slut parentes har en extrempunkt (minimum) där x är lika med 1 .",
+   "s": 253.84,
+   "e": 277.31
+  },
+  {
+   "t": "a) Inflexionspunkten för funktionen f av x ges av när grafen till f av x växlar mellan att vara konvex och konkav (i \"mungipan\").",
+   "s": 277.31,
+   "e": 287.06
+  },
+  {
+   "t": "På grund av symmetrin ligger den alltid mitt emellan två extrempunkter.",
+   "s": 287.06,
+   "e": 292.2
+  },
+  {
+   "t": "Vi har extrempunkter där x är lika med minus 1 och x är lika med 1 .",
+   "s": 292.2,
+   "e": 297.89
+  },
+  {
+   "t": "Alltså ligger inflexionspunkten mitt emellan dessa, dvs. då x är lika med 0 .",
+   "s": 297.89,
+   "e": 303.89
+  },
+  {
+   "t": "Svar: x är lika med 0",
+   "s": 303.89,
+   "e": 307.12
+  },
+  {
+   "t": "b) I inflexionspunkten är f bis parentesen x slut parentes är lika med 0 .",
+   "s": 307.12,
+   "e": 313.81
+  },
+  {
+   "t": "Vi kan se f bis parentesen x slut parentes som derivatan (lutningen) till f prim parentesen x slut parentes .",
+   "s": 313.81,
+   "e": 324.69
+  },
+  {
+   "t": "Inflexionspunkten för funktionen f av x ges alltså av när grafen till f prim parentesen x slut parentes har lutningen 0, dvs. i sin egen extrempunkt.",
+   "s": 324.64,
+   "e": 335.64
+  },
+  {
+   "t": "Grafen till f prim parentesen x slut parentes har en extrempunkt (minimum) där x är lika med 1 .",
+   "s": 335.64,
+   "e": 343.72
+  },
+  {
+   "t": "Svar: x är lika med 1",
+   "s": 343.72,
+   "e": 346.94
+  }
+ ]
+}

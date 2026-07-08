@@ -1,0 +1,238 @@
+{
+ "id": "ma3c-4.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4b41db9879137ca76f472a9f71408baae964f65b",
+ "dur": 375.98,
+ "segments": [
+  {
+   "t": "Största och minsta värde i ett intervall samt kurvkonstruktion",
+   "s": 0.1,
+   "e": 4.9
+  },
+  {
+   "t": "Sedan tidigare vet vi hur vi bestämmer en funktions extrempunkter och deras karaktär (maximipunkt, minimipunkt eller terrasspunkt).",
+   "s": 4.85,
+   "e": 13.85
+  },
+  {
+   "t": "Kom ihåg — bestämma extrempunkter och deras karaktär",
+   "s": 13.85,
+   "e": 18.06
+  },
+  {
+   "t": "Derivera den ursprungliga funktionen, sätt derivatan lika med 0 och lös ekvationen.",
+   "s": 18.06,
+   "e": 24.25
+  },
+  {
+   "t": "Vi får då fram extrempunkternas x -koordinater.",
+   "s": 24.25,
+   "e": 28.49
+  },
+  {
+   "t": "Sätt in de x -värden vi fick fram i steg 1 i den ursprungliga funktionen.",
+   "s": 28.49,
+   "e": 33.83
+  },
+  {
+   "t": "Vi får då fram extrempunkternas y -koordinater.",
+   "s": 33.83,
+   "e": 37.99
+  },
+  {
+   "t": "Bestäm extrempunkternas karaktär med hjälp av en teckentabell.",
+   "s": 37.99,
+   "e": 42.6
+  },
+  {
+   "t": "Ibland ska vi bestämma en funktions största eller minsta värde i ett slutet intervall, dvs. ett intervall där även ändpunkterna a är mindre än eller lika med x är mindre än eller lika med b räknas med.",
+   "s": 42.6,
+   "e": 54.5
+  },
+  {
+   "t": "Det största eller minsta värdet i intervallet finns då alltid antingen i en extrempunkt eller i en av intervallets ändpunkter — aldrig någon annanstans.",
+   "s": 54.5,
+   "e": 63.69
+  },
+  {
+   "t": "Bestämma största och minsta värdet i ett intervall",
+   "s": 63.69,
+   "e": 67.6
+  },
+  {
+   "t": "Sätt in intervallets ändpunkter i f av x för att få fram y -koordinaterna i dessa ändpunkter.",
+   "s": 67.6,
+   "e": 73.99
+  },
+  {
+   "t": "Beräkna y -koordinaterna i de extrempunkter som ligger inom intervallet, enligt metoden för att bestämma extrempunkter med derivata (se kom-ihåg-rutan ovan).",
+   "s": 73.99,
+   "e": 84.38
+  },
+  {
+   "t": "Det största respektive minsta värdet bland punkterna i steg 1 och 2 är funktionens största respektive minsta värde i intervallet.",
+   "s": 84.38,
+   "e": 92.4
+  },
+  {
+   "t": "Kurvkonstruktion",
+   "s": 92.4,
+   "e": 94.72
+  },
+  {
+   "t": "Vid kurvkonstruktion använder vi samma metod som ovan för att bestämma extrempunkter och deras karaktär.",
+   "s": 94.72,
+   "e": 101.44
+  },
+  {
+   "t": "Därefter skissar vi kurvan utifrån extrempunkternas läge och karaktär — utan att räkna ut fler punkter än nödvändigt.",
+   "s": 101.44,
+   "e": 109.2
+  },
+  {
+   "t": "Exempel 1 — Största och minsta värde samt kurvkonstruktion",
+   "s": 109.2,
+   "e": 114.0
+  },
+  {
+   "t": "Funktionen f av x är lika med x i kubik minus 3 x är given i intervallet minus 2 är mindre än eller lika med x är mindre än eller lika med 3 .",
+   "s": 114.0,
+   "e": 124.19
+  },
+  {
+   "t": "Bestäm funktionens största och minsta värde i intervallet och skissa sedan grafen utan digitala hjälpmedel.",
+   "s": 124.19,
+   "e": 131.15
+  },
+  {
+   "t": "Vi börjar med att bestämma y -koordinaterna i intervallets ändpunkter.",
+   "s": 131.15,
+   "e": 136.25
+  },
+  {
+   "t": "f av minus 2 är lika med parentesen minus 2 slut parentes i kubik minus 3 gånger parentesen minus 2 slut parentes som är lika med minus 8 plus 6 som är lika med minus 2 vilket ger att parentesen minus 2, minus 2 slut parentes är en ändpunkt",
+   "s": 136.25,
+   "e": 152.57
+  },
+  {
+   "t": "f av 3 är lika med 3 i kubik minus 3 gånger 3 som är lika med 27 minus 9 som är lika med 18 vilket ger att parentesen 3, 18 slut parentes är en ändpunkt",
+   "s": 152.57,
+   "e": 163.84
+  },
+  {
+   "t": "Därefter bestämmer vi y -koordinaterna i extrempunkterna.",
+   "s": 163.84,
+   "e": 168.6
+  },
+  {
+   "t": "Vi börjar med att derivera och ta fram de x -värden där derivatan (lutningen) är 0 .",
+   "s": 168.6,
+   "e": 174.81
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 x i kvadrat minus 3",
+   "s": 174.81,
+   "e": 180.96
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 0 ger",
+   "s": 180.96,
+   "e": 186.03
+  },
+  {
+   "t": "3 x i kvadrat minus 3 är lika med 0 vilket är ekvivalent med att 3 x i kvadrat är lika med 3 vilket är ekvivalent med att x i kvadrat är lika med 1 vilket är ekvivalent med att x är lika med plus minus roten ur 1",
+   "s": 186.03,
+   "e": 199.9
+  },
+  {
+   "t": "vilket ger x ett är lika med minus 1 och x två är lika med 1 .",
+   "s": 199.9,
+   "e": 205.12
+  },
+  {
+   "t": "Vi sätter in dessa x -värden i den ursprungliga funktionen för att få extrempunkternas y -koordinater.",
+   "s": 205.12,
+   "e": 211.81
+  },
+  {
+   "t": "f av minus 1 är lika med parentesen minus 1 slut parentes i kubik minus 3 gånger parentesen minus 1 slut parentes som är lika med minus 1 plus 3 som är lika med 2 vilket ger att parentesen minus 1, 2 slut parentes är en extrempunkt",
+   "s": 211.81,
+   "e": 227.45
+  },
+  {
+   "t": "f av 1 är lika med 1 i kubik minus 3 gånger 1 som är lika med 1 minus 3 som är lika med minus 2 vilket ger att parentesen 1, minus 2 slut parentes är en extrempunkt",
+   "s": 227.45,
+   "e": 238.97
+  },
+  {
+   "t": "Vi jämför nu y -värdena i ändpunkterna och i extrempunkterna: minus 2 , 18 , 2 och minus 2 .",
+   "s": 238.97,
+   "e": 246.74
+  },
+  {
+   "t": "Det största värdet är 18 (i ändpunkten x är lika med 3 ) och det minsta är minus 2 (både i ändpunkten x är lika med minus 2 och i extrempunkten x är lika med 1 ).",
+   "s": 246.74,
+   "e": 258.14
+  },
+  {
+   "t": "Svar: Största värdet är 18 .",
+   "s": 258.14,
+   "e": 261.65
+  },
+  {
+   "t": "Minsta värdet är minus 2 .",
+   "s": 261.65,
+   "e": 264.62
+  },
+  {
+   "t": "Nu skissar vi grafen.",
+   "s": 264.62,
+   "e": 267.26
+  },
+  {
+   "t": "Vi har redan fått fram ändpunkterna parentesen minus 2, minus 2 slut parentes och parentesen 3, 18 slut parentes samt extrempunkterna parentesen minus 1, 2 slut parentes och parentesen 1, minus 2 slut parentes .",
+   "s": 267.26,
+   "e": 283.89
+  },
+  {
+   "t": "Vi bestämmer extrempunkternas karaktär med hjälp av en teckentabell.",
+   "s": 283.84,
+   "e": 288.67
+  },
+  {
+   "t": "Vi fyller i de x -värden vi har fått fram där derivatan är 0 , och testar sedan tecknet på f prim parentesen x slut parentes är lika med 3 x i kvadrat minus 3 i en punkt i vart och ett av de tre delintervallen.",
+   "s": 288.67,
+   "e": 301.7
+  },
+  {
+   "t": "f prim parentesen minus 2 slut parentes är lika med 3 gånger parentesen minus 2 slut parentes i kvadrat minus 3 som är lika med 12 minus 3 som är lika med 9 vilket ger att plus f prim, ekvation 0 är lika med 3 gånger 0 i kvadrat minus 3 som är lika med minus 3 vilket ger att minus f prim, ekvation 2 är lika med 3 gånger 2 i kvadrat minus 3 som är lika med 12 minus 3 som är lika med 9 vilket ger att plus",
+   "s": 301.7,
+   "e": 327.61
+  },
+  {
+   "t": "Teckentabellen visar att kurvan har en maximipunkt i parentesen minus 1, 2 slut parentes (växande går mot avtagande) och en minimipunkt i parentesen 1, minus 2 slut parentes (avtagande går mot växande).",
+   "s": 327.61,
+   "e": 341.95
+  },
+  {
+   "t": "Vi förbinder nu de fyra punkterna med en jämn kurva.",
+   "s": 341.95,
+   "e": 346.13
+  },
+  {
+   "t": "Ändpunkterna parentesen minus 2, minus 2 slut parentes och parentesen 3, 18 slut parentes markeras med ohyllda cirklar, maximipunkten parentesen minus 1, 2 slut parentes och minimipunkten parentesen 1, minus 2 slut parentes med fyllda röda punkter.",
+   "s": 346.13,
+   "e": 363.64
+  },
+  {
+   "t": "Kurvan är växande fram till maximipunkten, avtagande mellan max- och minimipunkten, och därefter växande igen fram till högra ändpunkten.",
+   "s": 363.64,
+   "e": 372.77
+  },
+  {
+   "t": "Svar: Se grafen ovan.",
+   "s": 372.77,
+   "e": 375.98
+  }
+ ]
+}

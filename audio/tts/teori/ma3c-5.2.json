@@ -1,0 +1,253 @@
+{
+ "id": "ma3c-5.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4ca51ed3ceb23d77099d7898f28505c62c5039f1",
+ "dur": 344.89,
+ "segments": [
+  {
+   "t": "Primitiva funktioner med villkor",
+   "s": 0.1,
+   "e": 3.25
+  },
+  {
+   "t": "Vi har tidigare tagit fram samtliga primitiva funktioner till en funktion genom att lägga till en konstant C till funktionsuttrycket.",
+   "s": 3.2,
+   "e": 10.82
+  },
+  {
+   "t": "Om vi har någon ytterligare information om den primitiva funktionen — ett så kallat villkor — kan vi bestämma denna konstant genom att sätta in villkoret i den primitiva funktionen.",
+   "s": 10.82,
+   "e": 20.82
+  },
+  {
+   "t": "Att ta fram en primitiv funktion kallas att integrera.",
+   "s": 20.82,
+   "e": 24.99
+  },
+  {
+   "t": "Motsatsen till \"att derivera\" är alltså \"att integrera\".",
+   "s": 24.99,
+   "e": 29.21
+  },
+  {
+   "t": "Vid tillämpningar av derivata har vi konstaterat att om vi deriverar en sträcka s parentesen t slut parentes får vi en hastighet v parentesen t slut parentes , och deriverar vi hastigheten v parentesen t slut parentes får vi en acceleration a parentesen t slut parentes .",
+   "s": 29.21,
+   "e": 46.33
+  },
+  {
+   "t": "Bakvägen gäller då att om vi integrerar en hastighet v parentesen t slut parentes får vi en sträcka s parentesen t slut parentes , och integrerar vi en acceleration a parentesen t slut parentes får vi en hastighet v parentesen t slut parentes .",
+   "s": 46.33,
+   "e": 61.91
+  },
+  {
+   "t": "Samband mellan sträcka, hastighet och acceleration",
+   "s": 61.91,
+   "e": 66.6
+  },
+  {
+   "t": "Vid tillämpningar hänger sträckan s parentesen t slut parentes , hastigheten v parentesen t slut parentes och accelerationen a parentesen t slut parentes ihop genom derivering och integrering:",
+   "s": 66.6,
+   "e": 87.51
+  },
+  {
+   "t": "s parentesen t slut parentes xrightarrow derivera v parentesen t slut parentes xrightarrow derivera a parentesen t slut parentes",
+   "s": 66.6,
+   "e": 87.51
+  },
+  {
+   "t": "a parentesen t slut parentes xrightarrow integrera v parentesen t slut parentes xrightarrow integrera s parentesen t slut parentes",
+   "s": 87.51,
+   "e": 97.4
+  },
+  {
+   "t": "Deriverar vi en sträcka s parentesen t slut parentes två gånger får vi alltså direkt en acceleration a parentesen t slut parentes .",
+   "s": 97.4,
+   "e": 106.44
+  },
+  {
+   "t": "Omvänt ger integrering av en acceleration en hastighet, och integrering av en hastighet en sträcka.",
+   "s": 106.44,
+   "e": 113.41
+  },
+  {
+   "t": "Bestäm konstanten C med ett villkor",
+   "s": 113.41,
+   "e": 116.81
+  },
+  {
+   "t": "Exempel 1 — Bestäm konstanten C med ett villkor",
+   "s": 116.81,
+   "e": 121.26
+  },
+  {
+   "t": "Bestäm den primitiva funktionen till f av x är lika med x i kubik plus 12 x som uppfyller villkoret F, ekvation 1 är lika med 7 .",
+   "s": 121.26,
+   "e": 130.71
+  },
+  {
+   "t": "Vi börjar med att ta fram samtliga primitiva funktioner till f av x .",
+   "s": 130.71,
+   "e": 135.91
+  },
+  {
+   "t": "Båda termerna är potenstermer ( x i basen), så vi tar fram primitiva funktioner för dem båda genom att öka exponenten med 1 och sedan dividera med den nya exponenten.",
+   "s": 135.91,
+   "e": 146.41
+  },
+  {
+   "t": "Detta ger",
+   "s": 146.41,
+   "e": 148.43
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med x upphöjt till 4 delat med 4 plus 12 x i kvadrat delat med 2 plus C vilket är ekvivalent med att F parentesen x slut parentes är lika med x upphöjt till 4 delat med 4 plus 6 x i kvadrat plus C, ekvation 1",
+   "s": 148.43,
+   "e": 165.85
+  },
+  {
+   "t": "Därefter utnyttjar vi villkoret F, ekvation 1 är lika med 7 , det vill säga vi sätter in x är lika med 1 i den primitiva funktionen som då ska vara lika med 7.",
+   "s": 165.85,
+   "e": 176.26
+  },
+  {
+   "t": "1 upphöjt till 4 delat med 4 plus 6 gånger 1 i kvadrat plus C är lika med 7",
+   "s": 176.26,
+   "e": 183.05
+  },
+  {
+   "t": "1 delat med 4 plus 6 plus C är lika med 7",
+   "s": 183.05,
+   "e": 187.6
+  },
+  {
+   "t": "6,25 plus C är lika med 7",
+   "s": 187.6,
+   "e": 191.62
+  },
+  {
+   "t": "6,25 plus C minus 6,25 är lika med 7 minus 6,25",
+   "s": 191.62,
+   "e": 198.51
+  },
+  {
+   "t": "C är lika med 0,75",
+   "s": 198.51,
+   "e": 201.79
+  },
+  {
+   "t": "Vi vet nu att C är lika med 0,75 .",
+   "s": 201.79,
+   "e": 205.86
+  },
+  {
+   "t": "Sätter vi in detta i formel ekvation 1 för samtliga primitiva funktioner får vi",
+   "s": 205.86,
+   "e": 211.7
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med x upphöjt till 4 delat med 4 plus 6 x i kvadrat plus 0,75",
+   "s": 211.7,
+   "e": 220.59
+  },
+  {
+   "t": "Svar: F parentesen x slut parentes är lika med x upphöjt till 4 delat med 4 plus 6 x i kvadrat plus 0,75",
+   "s": 220.59,
+   "e": 230.26
+  },
+  {
+   "t": "Tillämpning: sträcka ur en hastighetsfunktion",
+   "s": 230.26,
+   "e": 234.31
+  },
+  {
+   "t": "Exempel 2 — Sträcka ur en hastighetsfunktion",
+   "s": 234.31,
+   "e": 238.38
+  },
+  {
+   "t": "Hastigheten v parentesen t slut parentes m/s för en bil som accelererar är v parentesen t slut parentes är lika med 1,2 t i kvadrat , där t är tiden i sekunder från start.",
+   "s": 238.38,
+   "e": 251.41
+  },
+  {
+   "t": "Hur lång sträcka rör sig bilen de första 10 sekunderna?",
+   "s": 251.41,
+   "e": 255.75
+  },
+  {
+   "t": "Vi har funktionen för hastigheten v parentesen t slut parentes och ska ta reda på sträckan s parentesen t slut parentes .",
+   "s": 255.75,
+   "e": 263.91
+  },
+  {
+   "t": "Alltså ska vi integrera (ta fram en primitiv funktion) för att få fram formeln för sträckan.",
+   "s": 263.91,
+   "e": 270.06
+  },
+  {
+   "t": "Detta ger",
+   "s": 270.06,
+   "e": 272.07
+  },
+  {
+   "t": "s parentesen t slut parentes är lika med 1,2 t i kubik delat med 3 plus C",
+   "s": 272.07,
+   "e": 278.81
+  },
+  {
+   "t": "Vi förenklar och får",
+   "s": 278.81,
+   "e": 281.41
+  },
+  {
+   "t": "s parentesen t slut parentes är lika med 0,4 t i kubik plus C, ekvation 1",
+   "s": 281.41,
+   "e": 288.79
+  },
+  {
+   "t": "Eftersom sträckan som bilen rört sig från början är 0 gäller s, ekvation 0 är lika med 0 , vilket ger",
+   "s": 288.79,
+   "e": 296.14
+  },
+  {
+   "t": "0,4 gånger 0 i kubik plus C är lika med 0 vilket ger att C är lika med 0",
+   "s": 296.14,
+   "e": 304.53
+  },
+  {
+   "t": "Detta i ekvation 1 ger formeln för sträckan, som då blir",
+   "s": 304.48,
+   "e": 309.36
+  },
+  {
+   "t": "s parentesen t slut parentes är lika med 0,4 t i kubik",
+   "s": 309.36,
+   "e": 315.02
+  },
+  {
+   "t": "Eftersom vi ska ha sträckan bilen rör sig de första 10 sekunderna ska vi beräkna s, ekvation 10 .",
+   "s": 315.02,
+   "e": 321.87
+  },
+  {
+   "t": "Vi sätter in t är lika med 10 i formeln för sträckan och får då",
+   "s": 321.87,
+   "e": 326.91
+  },
+  {
+   "t": "s, ekvation 10 är lika med 0,4 gånger 10 i kubik som är lika med 0,4 gånger 1000 som är lika med 400",
+   "s": 326.91,
+   "e": 336.08
+  },
+  {
+   "t": "Eftersom hastigheten är angiven i meter/sekund blir sträckan i meter.",
+   "s": 336.08,
+   "e": 342.0
+  },
+  {
+   "t": "Svar: 400 meter",
+   "s": 342.0,
+   "e": 344.89
+  }
+ ]
+}

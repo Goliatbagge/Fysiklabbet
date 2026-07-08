@@ -1,0 +1,98 @@
+{
+ "id": "ma3c-2.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a130cb5baef80326c1eae327a6b6d9f87ff5012f",
+ "dur": 130.94,
+ "segments": [
+  {
+   "t": "Tangentens lutning",
+   "s": 0.1,
+   "e": 2.62
+  },
+  {
+   "t": "Om vi vill veta en kurvas lutning i en viss punkt kan vi rita en linje som snuddar kurvan i just den punkten och beräkna lutningen på den linjen.",
+   "s": 2.58,
+   "e": 10.86
+  },
+  {
+   "t": "En linje som snuddar (eller tangerar) en kurva i en punkt kallas tangent.",
+   "s": 10.86,
+   "e": 16.46
+  },
+  {
+   "t": "Tangentens lutning motsvarar alltså lutningen på kurvan i tangeringspunkten.",
+   "s": 16.46,
+   "e": 21.99
+  },
+  {
+   "t": "Tangentens lutning beräknas, precis som sekantens, genom att läsa av två punkter på linjen parentesen x ett, y ett slut parentes och parentesen x två, y två slut parentes och sätta in dem i formeln för riktningskoefficienten k .",
+   "s": 21.99,
+   "e": 36.65
+  },
+  {
+   "t": "Riktningskoefficienten",
+   "s": 36.65,
+   "e": 39.38
+  },
+  {
+   "t": "k är lika med delta y delat med delta x som är lika med y två minus y ett delat med x två minus x ett som är lika med f av x två minus f av x ett delat med x två minus x ett",
+   "s": 39.38,
+   "e": 52.05
+  },
+  {
+   "t": "Tolka tangentens lutning vid tillämpningar",
+   "s": 52.05,
+   "e": 55.67
+  },
+  {
+   "t": "Vid tillämpningar står tangentens lutning för förändringshastigheten vid en tidpunkt (lutningen i en punkt).",
+   "s": 55.67,
+   "e": 63.16
+  },
+  {
+   "t": "Eftersom lutningen k är lika med delta y delat med delta x gäller att enheten på tangentens lutning vid tillämpningar blir \"enheten på y -axeln\" per \"enheten på x -axeln\".",
+   "s": 63.16,
+   "e": 74.08
+  },
+  {
+   "t": "Exempel 1 — Avläs tangentens lutning i en graf",
+   "s": 74.08,
+   "e": 78.5
+  },
+  {
+   "t": "En granplanta har höjden y dm efter x år enligt diagrammet nedan.",
+   "s": 78.5,
+   "e": 84.1
+  },
+  {
+   "t": "Med vilken hastighet växer granplantan efter 2 år?",
+   "s": 84.1,
+   "e": 88.58
+  },
+  {
+   "t": "Vi ska ta reda på en förändringshastighet vid en tidpunkt.",
+   "s": 88.58,
+   "e": 92.99
+  },
+  {
+   "t": "Vi slår en tangent i punkten på kurvan där x är lika med 2 och beräknar dess lutning.",
+   "s": 92.99,
+   "e": 98.91
+  },
+  {
+   "t": "Vi läser av två punkter på tangenten, t.ex. parentesen 0 ; 0,7 slut parentes och parentesen 2 ; 1,4 slut parentes , och sätter in dem i formeln för k .",
+   "s": 98.91,
+   "e": 110.61
+  },
+  {
+   "t": "k är lika med y två minus y ett delat med x två minus x ett som är lika med 1,4 minus 0,7 delat med 2 minus 0 som är lika med 0,7 delat med 2 som är lika med 0,35 decimeter per år",
+   "s": 110.61,
+   "e": 124.61
+  },
+  {
+   "t": "Svar: Efter 2 år växer granplantan med 0,35 decimeter per år.",
+   "s": 124.61,
+   "e": 130.94
+  }
+ ]
+}

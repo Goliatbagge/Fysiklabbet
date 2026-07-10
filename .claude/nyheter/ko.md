@@ -14,6 +14,55 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-10) — kan tas upp senare
+
+- **Svarta hål-kollisioner tycks följa en "maximal entropi"-princip** — forskare vid
+  Penn State (Monica Rincon-Ramirez m.fl.) visar att en sammanslagen svart håls
+  slutresultat kan förutsägas enkelt genom att anta att entropin maximeras, med några
+  procents träffsäkerhet jämfört med tunga datorsimuleringar. Fin termodynamik-koppling
+  (jämviktsentropi) men tungt på allmän relativitetsteori, och vi har kört mycket
+  astronomi/svarta hål senaste veckorna (Euclid-kvasarer 07-06). Källor:
+  https://phys.org/news/2026-07-black-hole-collisions-entropy-law.html , Physical
+  Review Letters (2026). (tillagd 2026-07-10)
+- **Långlivad radioutbrott från ett svart hål uppvisar egenskaper från tidiga
+  universum** — SDSS J110546.07+145202.4 har lyst ovanligt länge i radiovågor.
+  Ofärdig research, mest en kort notis när vi kollade. Källa:
+  https://phys.org/news/2026-07-radio-outburst-black-hole-properties.html
+  (tillagd 2026-07-10)
+- **OBS — undvik "150 år gammal gallium-gåta"-nyheten om den dyker upp igen**:
+  ScienceDaily/Phys.org återpublicerade 2026-07-09 en story om galliums
+  atombindningar (University of Auckland/Victoria University of Wellington) som
+  visade sig vara en omskrivning av forskning redan publicerad i Materials Horizons
+  2024 (samma sak som phys.org körde i juni 2024) — inte färsk nyhet trots nytt
+  publiceringsdatum. Kontrollera alltid ursprunglig publikationsdatum innan en
+  "gammal nyhet i ny tappning" används. (tillagd 2026-07-10)
+
+## Fynd som inte användes (2026-07-09) — kan tas upp senare
+
+- **AI hittar två nya supraledare och snabbar upp jakten på rumstemperatur-
+  supraledning** — forskare vid Aalto University (SuperC-konsortiet) kombinerade
+  maskininlärning med kvantfysikberäkningar för att screena enorma mängder
+  materialkombinationer och hittade två tidigare okända supraledare, YRu₃B₂
+  och LuRu₃B₂. Bra ellära/modern fysik-vinkel, men vi körde redan grafit-
+  supraledning 2026-07-01 — spara till ämnet svalnat. Källor:
+  https://www.sciencedaily.com/releases/2026/07/260701205006.htm ,
+  https://phys.org/news/2026-06-superconductors-yield-thousands.html
+  (tillagd 2026-07-09)
+- **Antineutrinodetektorer skulle kunna avslöja hemlig plutoniumproduktion i
+  fusionsreaktorer** — en studie i Physical Review Applied (Patrick Huber m.fl.)
+  visar att en kompakt detektor utanför en fusionsreaktor kan upptäcka
+  antineutrino-signaturer från olovlig produktion av vapengradigt plutonium
+  inom cirka 30 dagar. Intressant kärnfysik/partikelfysik-vinkel (antineutriner,
+  strålskydd/icke-spridning) men kräver en försiktig, pedagogisk vinkling kring
+  kärnvapenfrågan för gymnasienivå. Källor:
+  https://phys.org/news/2026-06-fusion-reactors-covert-plutonium-production.html ,
+  https://physicsworld.com/a/antineutrino-detectors-could-spot-signs-that-a-fusion-reactor-is-producing-weapons-grade-plutonium/
+  (tillagd 2026-07-09)
+- **Total solförmörkelse över norra Spanien 12 augusti 2026** — bra
+  kommande-händelse-vinkel (månens skugga, geometri) men bäst att spara till
+  närmare inpå datumet, inte redan i juli. Källa: phys.org (sök "total solar
+  eclipse due in august 2026"). (tillagd 2026-07-09)
+
 ## Fynd som inte användes (2026-07-08) — kan tas upp senare
 
 - **Första direkta spektroskopiska belägget för högenergetiska ”gravitoner” i

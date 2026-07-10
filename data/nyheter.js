@@ -31,6 +31,89 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-10-frost-isbroar",
+    date: "2026-07-10",
+    title: "Forskare avslöjar hur frost sprider sig — via mikroskopiska isbroar som svävar fritt i luften",
+    deck: "En forskargrupp vid University of Illinois Urbana-Champaign har för första gången filmat i tre dimensioner hur frost egentligen sprider sig mellan vattendroppar. Ibland kryper isen längs ytan, men på vissa material bygger den i stället osynliga broar av is som svävar fritt i luften — en upptäckt, publicerad i Nature Physics, som nästan kan fördubbla tiden innan kylskåp och luftkonditionering fryser igen.",
+    category: "Termodynamik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-10-frost-isbroar.jpg",
+    imageAlt: "Makronärbild av vita, kantiga iskristaller (rimfrost) som växer tätt tillsammans mot en svart bakgrund, med skarpt ljus som glittrar i kristallernas fasetter.",
+    imageCredit: "Foto: W.carter (Wikimedia Commons, CC BY-SA 4.0)",
+    tags: ["termodynamik", "värmelära", "fasövergångar", "deposition", "frost", "vätning", "hydrofob", "superhydrofob", "värmeledning", "materialfysik", "kylteknik", "fysik 1"],
+    sources: [
+      { name: "Physics World", url: "https://physicsworld.com/a/frost-spreads-across-surfaces-via-suspended-ice-bridges/" },
+      { name: "EurekAlert! (University of Illinois Urbana-Champaign, pressmeddelande)", url: "https://www.eurekalert.org/news-releases/1130602" }
+    ],
+    research: { citation: "S. Yang, F. Chu, V. Ganesan et al., ”Growth and control of suspended ice bridges during sessile droplet freezing”, Nature Physics (2026)", url: "https://doi.org/10.1038/s41567-026-03296-2" },
+    body: [
+      { type: "p", html: "Två vattendroppar ligger sida vid sida på en kall yta. Den ena har redan frusit till is, den andra är fortfarande flytande — fast långt under 0&nbsp;°C, i det som kallas ett underkylt tillstånd. På bara några sekunder växer en tunn, nästan osynlig bro av is mellan dem. Forskare vid University of Illinois Urbana-Champaign har nu för första gången filmat i tre dimensioner hur sådana ”isbroar” bildas — och upptäckt att de ibland kryper längs ytan, ibland svävar fritt i luften ovanför den. Skillnaden, publicerad i tidskriften <em>Nature Physics</em>, visar sig vara nyckeln till att bromsa hur snabbt frost täcker en yta." },
+
+      { type: "h2", text: "Ångan väljer den redan frusna droppen" },
+      { type: "p", html: "Anledningen till att en bro alls bildas ligger i en skillnad i mättnadsångtryck — det tryck vattenånga har när luften precis är mättad — mellan flytande vatten och is vid samma temperatur under noll grader. Underkylt, flytande vatten har ett högre mättnadsångtryck än is vid samma temperatur, så vattenmolekyler avdunstar lättare från den flytande droppen än de sitter kvar på den redan frusna. Ångan diffunderar genom luften och övergår direkt till is på den frusna droppens yta — en fasövergång som kallas <em>deposition</em>, samma princip som ger rimfrost på gräs kalla nätter (se Fysiklabbets genomgång om faser och fasövergångar, Fysik nivå&nbsp;1). Resultatet blir en tunn, växande tråd av is som till slut når hela vägen fram och fryser den flytande droppen också. På så sätt sprider sig frosten vidare, droppe för droppe, i en kedjereaktion över ytan." },
+
+      { type: "h2", text: "Fuktavvisande ytor styr bron ut i luften" },
+      { type: "p", html: "Med en teknik som kallas fokalplansskiftande avbildning, kombinerad med höghastighetsmikroskopi, kunde forskarlaget för första gången se broarna från sidan i stället för uppifrån — och upptäckte att ytans <em>vätningsegenskaper</em> avgör var bron växer. På en vanlig, fuktvänlig (hydrofil) yta ligger dropparna platta och breda, och isbron växer längs själva ytan, i kontakt med det kalla underlaget hela vägen. På en kraftigt fuktavvisande (superhydrofob) yta — där dropparna i stället bildar nästan perfekta klot, ungefär som daggdroppar på ett lotusblad — tvingas bron i stället växa uppåt och ut i fri luft mellan dropptopparna, utan att någonsin röra själva ytan. Forskarna fann att övergången sker vid en kontaktvinkel på ungefär 105°: droppar som är rundare än så ger nästan alltid en svävande bro." },
+
+      { type: "h2", text: "Luften isolerar — och bromsar tillväxten" },
+      { type: "p", html: "Skillnaden visade sig vara avgörande för hur snabbt frosten sprider sig. En bro som ligger an mot den kalla ytan leder bort värme snabbt, vilket håller ångtrycksskillnaden mellan broens spets och den flytande droppen hög — och bron fortsätter växa i rask takt. En svävande bro omges i stället av luft, en betydligt sämre värmeledare än det fasta underlaget (se Fysiklabbets genomgång om värme och temperatur, Fysik nivå&nbsp;1). Spetsen på en svävande bro blir därför varmare i takt med att den växer, ångtrycksskillnaden som driver tillväxten krymper, och hela processen bromsas självmant in. Mätningarna visade att svävande broar växte över 80&nbsp;% långsammare än broar i kontakt med ytan." },
+
+      { type: "quote", html: "”Vår studie visar att ytans vätningsegenskaper är den avgörande parameter som styr övergången mellan de två sätten att växa på.”", cite: "Siyan Yang, University of Illinois Urbana-Champaign" },
+
+      { type: "h2", text: "Nästan dubbelt så lång tid innan kylan tar över" },
+      { type: "p", html: "Upptäckten är mer än ett labbcuriosum. Forskarna testade en superhydrofob ytbeläggning på fullskaliga, kommersiella värmeväxlare av den typ som sitter i luftkonditionering, kylskåp och bilars kylsystem — och tiden innan frost helt täckte ytan blev nästan dubbelt så lång som på en obehandlad yta. Frost på en värmeväxlare försämrar värmeöverföringen och tvingar systemet att lägga energi på återkommande avfrostning, så insikten om isbroarnas geometri kan ge ingenjörer ett helt nytt grepp: att inte bara fördröja att is börjar bildas, utan att aktivt styra hur den sedan sprider sig vidare. Forskarna pekar själva ut flygplansvingar och kylsystem som exempel på ytor där några extra minuter utan frost kan göra stor skillnad." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Frost bildas genom deposition — vattenånga övergår direkt till is utan att passera vätskefasen på vägen, exakt samma fasövergång som ger rimfrost på gräs och bilrutor kalla nätter.",
+        "Superhydrofoba ytor, som får vatten att bilda nästan runda droppar, är ofta inspirerade av lotusbladets självrengörande yta — den så kallade lotuseffekten.",
+        "Isbroarna i studien var bara några tiotal mikrometer breda, tunnare än ett människohår, och hann bildas helt på under en halv minut."
+      ]}
+    ]
+  },
+
+  {
+    id: "2026-07-09-skort-eller-segt-glas",
+    date: "2026-07-09",
+    title: "Fysiker knäcker gåtan om varför vissa glas spricker tvärt — och andra ger efter mjukt",
+    deck: "En ny studie från Tata Institute of Fundamental Research i Hyderabad (TIFRH) visar att en och samma materialegenskap — hur snabbt ett ämne blir trögflytande när det kyls till glas — avgör om det brister plötsligt eller ger efter mjukt under belastning. Upptäckten, publicerad i Nature Communications, gäller långt fler material än fönsterglas: metaller, plaster, skum och geler kan alla vara ”glas” i fysikens mening.",
+    category: "Materialfysik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-09-skort-eller-segt-glas.jpg",
+    imageAlt: "Makrofoto av en glasskiva som brustit i ett stjärnformat mönster, med tunna sprickor som strålar ut från en central islagspunkt och korsas av koncentriska ringsprickor — ett klassiskt exempel på skört brott.",
+    imageCredit: "Foto: Jiří Zelenka (Wikimedia Commons, CC BY-SA 4.0)",
+    tags: ["materialfysik", "mekanik", "glas", "amorfa material", "brottmekanik", "spänning-töjning", "sträckgräns", "hookes lag", "simulering", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-glasses-suddenly-deform-smoothly.html" },
+      { name: "EurekAlert! (TIFR Hyderabad, pressmeddelande)", url: "https://www.eurekalert.org/news-releases/1135355" }
+    ],
+    research: { citation: "R. Chatterjee, M. Adhikari, S. Karmakar, ”Role of fragility of the glass formers in the yielding transition under oscillatory shear”, Nature Communications (2026)", url: "https://doi.org/10.1038/s41467-026-71157-w" },
+    body: [
+      { type: "p", html: "En tallrik som far i golvet splittras på ett ögonblick i tiotals vassa skärvor. En plastlinjal går nästan att böja dubbelt utan att gå sönder. Båda räknas som <em>glas</em> i fysikens mening — och nu har forskare vid Tata Institute of Fundamental Research i Hyderabad (TIFRH) hittat en förvånansvärt enkel förklaring till varför vissa glas brister tvärt medan andra ger efter mjukt. Studien, publicerad i tidskriften <em>Nature Communications</em>, pekar ut en enda materialegenskap — dess ”fragilitet” — som avgörande för om utfallet blir skört eller segt." },
+
+      { type: "h2", text: "Glas är mer än fönsterrutor" },
+      { type: "p", html: "I fysikens mening är ett glas vilket fast ämne som helst där atomerna eller molekylerna har frusit fast i ett oordnat mönster i stället för att packa sig i en regelbunden kristallstruktur. Det sker när en vätska kyls så snabbt att partiklarna inte hinner ordna sig innan rörelsen avstannar helt. Utöver vanligt fönsterglas räknas därför en lång rad vardagliga material dit: vissa metallegeringar, plaster, skum, geler och till och med mjuka material som emulsioner och koloider. Alla kan uppträda helt olika under påfrestning — vissa ger efter mjukt och smidigt (segt beteende), andra håller emot och brister sedan tvärt utan förvarning (skört beteende)." },
+
+      { type: "h2", text: "Stark eller skör vätska — långt innan glaset stelnat" },
+      { type: "p", html: "Redan innan ett glas ens bildas skiljer forskare på ”starka” och ”sköra” vätskor, en klassificering som den amerikansk-australiske kemisten C.&nbsp;Austen Angell myntade på 1980-talet. När en vätska kyls mot sin glasövergång måste partiklarna ta sig över energibarriärer för att kunna röra på sig. I sköra vätskor växer barriärerna snabbt vid nedkylning, så viskositeten (trögflutenheten) skjuter i höjden redan vid en liten temperatursänkning. I starka vätskor växer barriärerna mer stegvis, så viskositeten ökar jämnare i stället. Forskarna Roni Chatterjee och Monoj Adhikari, i Smarajit Karmakars forskargrupp vid TIFRH, ställde en enkel fråga: styr samma egenskap även hur det färdiga, stelnade glaset beter sig när man böjer, drar eller trycker på det?" },
+
+      { type: "h2", text: "Simulerad töjning fram och tillbaka" },
+      { type: "p", html: "Med storskaliga datorsimuleringar byggde forskarna modeller av fyra sorters glasbildande system — metalliska glas, molekylära glas, kornformiga (granulära) system och nätverksbildande, kvartsliknande glas — vid en rad olika temperaturer. Varje modellmaterial utsattes sedan för upprepad fram-och-tillbaka-töjning (så kallad oscillerande skjuvning) med varierande amplitud, medan forskarna avläste hur den mekaniska spänningen (kraft per ytenhet — inte att förväxla med elektrisk spänning) förändrades med töjningen, den relativa formändringen. Precis som i den raka, inledande delen av ett fjäderdiagram (se Fysiklabbets genomgång om energi i fjädrar och Hookes lag, Fysik nivå&nbsp;2) ökade spänningen till en början proportionellt mot töjningen. Vid ett visst värde, <em>sträckgränsen</em>, nådde spänningen ett maximum — och just där skilde sig materialen åt. Ett stort spänningsfall direkt efter sträckgränsen är kännetecknet för skört brott; ett litet fall betyder i stället att materialet fortsätter flyta segt vidare." },
+
+      { type: "h2", text: "Energibarriärerna avgör fallhöjden" },
+      { type: "p", html: "Mönstret visade sig hänga ihop exakt med fragiliteten. I sköra glas växer energibarriärerna snabbt vid nedkylning, vilket tvingar fram allt större töjning innan materialet ger efter — och en större lagrad spänning ger ett större fall när brottet väl kommer: skört beteende. I starka glas ökar barriärerna mer stegvis, sträckgränsen förblir nästan oförändrad även vid djupare nedkylning, och spänningsfallet blir litet: segt beteende. I sitt pressmaterial illustrerar forskargruppen själva ytterligheterna med två vardagliga bilder: en fönsterruta som spricker i ett nät av sprickor, och smör som mjukt ger efter för en kniv utan att gå sönder." },
+
+      { type: "h2", text: "Nästa steg: skräddarsydda material" },
+      { type: "p", html: "Insikten är mer än en kuriositet. Ingenjörer väljer redan material efter hur de beter sig vid belastning — en bilruta ska helst spricka i trubbiga korn snarare än vassa skärvor, medan en bärande stålbalk absolut inte får brista utan förvarning. Genom att koppla ihop hur ett material stelnar till glas med hur det sedan brister hoppas forskarna kunna förutsäga, och kanske till och med skräddarsy, ett materials hållfasthet redan innan det tillverkas — bara genom att styra kylhastigheten." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Även metaller kan bli ”glas”: kyls en metallegering tillräckligt snabbt — för vissa legeringar krävs uppemot en miljon grader per sekund — hinner atomerna aldrig kristallisera. Sådana metalliska glas används bland annat i vissa golfklubbor och i transformatorkärnor, tack vare sin höga hållfasthet och låga energiförluster.",
+        "Klassificeringen ”stark” och ”skör” vätska visualiseras i det så kallade Angell-diagrammet, en av glasfysikens mest citerade figurer — uppkallat efter kemisten som införde begreppen på 1980-talet.",
+        "Sträckgränsen är samma begrepp som ingenjörer använder för stål och andra konstruktionsmaterial: den spänning där materialet slutar återgå till sin ursprungsform och i stället börjar deformeras permanent."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-08-optisk-nal",
     date: "2026-07-08",
     title: "Forskare formar ljus till en nål — och ser nästan nio gånger djupare in i ögat",

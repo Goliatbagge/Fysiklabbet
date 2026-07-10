@@ -71,6 +71,10 @@
             width: 100vw; height: 100vh; border-radius: 0;
         }
         .scene-wrap > svg { display: block; width: 100%; height: 100%; touch-action: none; }
+        /* I fullskärm: lyft scenen så innehållet inte hamnar bakom den
+           nedre reglagepanelen (som dessutom startar hopfälld). */
+        .scene-wrap:fullscreen > svg,
+        .scene-wrap:-webkit-full-screen > svg { height: calc(100% - 150px); }
 
         .scene-hint {
             position: absolute; bottom: 10px; left: 12px; z-index: 5;
@@ -354,10 +358,12 @@
 
             // ── Fullskärm ──
             useEffect(() => {
-                const handler = () => setIsFullscreen(
-                    document.fullscreenElement === sceneWrapRef.current ||
-                    document.webkitFullscreenElement === sceneWrapRef.current
-                );
+                const handler = () => {
+                    const fs = document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current;
+                    setIsFullscreen(fs);
+                    if (fs) setControlsOpen(false);   // starta hopfälld i fullskärm
+                };
                 document.addEventListener('fullscreenchange', handler);
                 document.addEventListener('webkitfullscreenchange', handler);
                 return () => {

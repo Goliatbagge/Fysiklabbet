@@ -381,10 +381,12 @@
 
             // ── Fullskärm ──
             useEffect(() => {
-                const handler = () => setIsFullscreen(
-                    document.fullscreenElement === sceneWrapRef.current ||
-                    document.webkitFullscreenElement === sceneWrapRef.current
-                );
+                const handler = () => {
+                    const fs = document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current;
+                    setIsFullscreen(fs);
+                    if (fs) setControlsOpen(false);   // starta hopfälld i fullskärm
+                };
                 document.addEventListener('fullscreenchange', handler);
                 document.addEventListener('webkitfullscreenchange', handler);
                 return () => {

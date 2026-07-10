@@ -208,7 +208,6 @@
         const { useState, useEffect, useRef } = React;
 
         const G = 9.82;                 // tyngdfaktorn (N/kg)
-        const L = 6.0;                  // brädans längd (m)
 
         const fmt = (num, decimals = 1) => {
             if (!isFinite(num)) return '–';
@@ -293,18 +292,22 @@
         //  Geometri
         // ════════════════════════════════════════════════════════
         const VBW = 860, VBH = 520;
-        const ORIGIN_X = 94;               // brädans vänstra ände (x = 0)
-        const PXM = 112;                   // px per meter
+        const PLANK_W = 600;               // brädans bredd på skärmen (px) — konstant;
+                                           // längd-glidaren ändrar bara skalan (PXM)
+        const WORLD0_X = 130;              // skärm-x för världskoordinat 0
         const PLANK_Y = 300;               // brädans ovansida (px)
         const PLANK_T = 15;                // brädans tjocklek (px)
         const CONTACT_Y = PLANK_Y + PLANK_T;   // stödens kontakt mot brädans undersida
         const GROUND_Y = 436;
-        const sx = (xm) => ORIGIN_X + xm * PXM;     // brädkoord (m) → skärm-x
         const ARROW_MAX = 104;             // längsta kraftpil (px) — nedåtpilar
                                            // ryms mellan brädan (315) och marken (436)
+        // px per meter för en given brädlängd (håller brädan PLANK_W px bred)
+        const pxmFor = (Lb) => PLANK_W / Lb;
+        // världskoordinat (m) → skärm-x, för en given brädlängd
+        const sxFor = (Lb) => (w) => WORLD0_X + w * pxmFor(Lb);
 
         // ── En bock (stöd) ──
-        const Sawhorse = ({ x, letter, isPivot, drag, onDown, onMove, onUp }) => {
+        const Sawhorse = ({ x, letter, isPivot, drag, sx, onDown, onMove, onUp }) => {
             const cx = sx(x);
             const topY = CONTACT_Y;
             return (
@@ -356,13 +359,13 @@
         // ════════════════════════════════════════════════════════
         //  Scenen
         // ════════════════════════════════════════════════════════
-        const Scene = ({ svgRef, phys, person, show, xP, xQ, pivot,
+        const Scene = ({ svgRef, sx, Lb, plankX, phys, person, show, xP, xQ, pivot,
                          drag, onDown, onMove, onUp }) => {
             const { FP, FQ, FG, FL, stable, tipDeg, xcg } = phys;
             const total = FG + FL;
             const scale = ARROW_MAX / Math.max(FP, FQ, FG, FL, 1);
             const lenF = (F) => F * scale;
-            const xG = L / 2;
+            const xG = plankX + Lb / 2;
 
             // hävarmar mätt från vald vridningspunkt
             const xPiv = pivot === 'P' ? xP : xQ;
@@ -438,18 +441,32 @@
                     })()}
 
                     {/* bockarna (ritas bakom brädan) */}
-                    <Sawhorse x={xP} letter="P" isPivot={pivot === 'P'} drag={drag === 'P'}
+                    <Sawhorse x={xP} letter="P" isPivot={pivot === 'P'} drag={drag === 'P'} sx={sx}
                               onDown={onDown} onMove={onMove} onUp={onUp} />
-                    <Sawhorse x={xQ} letter="Q" isPivot={pivot === 'Q'} drag={drag === 'Q'}
+                    <Sawhorse x={xQ} letter="Q" isPivot={pivot === 'Q'} drag={drag === 'Q'} sx={sx}
                               onDown={onDown} onMove={onMove} onUp={onUp} />
 
                     {/* brädan + personen roterar tillsammans vid vältning */}
                     <g transform={`rotate(${tipDeg} ${sx(pivotTipX)} ${CONTACT_Y})`}>
-                        <rect x={sx(0)} y={PLANK_Y} width={L * PXM} height={PLANK_T} rx="4"
-                              fill="url(#beamG)" stroke="#7c5a2a" strokeWidth="2.4" />
+                        {/* brädan — dragbar (skjuts i sidled över bockarna) */}
+                        <g style={{ cursor: drag === 'plank' ? 'grabbing' : 'grab' }}
+                           onPointerDown={(e) => onDown(e, 'plank')}
+                           onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
+                            <rect x={sx(plankX)} y={PLANK_Y} width={Lb * pxmFor(Lb)} height={PLANK_T} rx="4"
+                                  fill="url(#beamG)" stroke="#7c5a2a" strokeWidth="2.4" />
+                        </g>
                         {/* tyngdpunktsmarkering */}
                         <circle cx={sx(xG)} cy={PLANK_Y + PLANK_T / 2} r="2.6" fill="#7c5a2a" />
                         {person.on && <Person fx={sx(person.x)} footY={PLANK_Y} />}
+                        {/* personens träffyta (överst → grabbas före brädan) */}
+                        {person.on && (
+                            <g style={{ cursor: drag === 'person' ? 'grabbing' : 'grab' }}
+                               onPointerDown={(e) => onDown(e, 'person')}
+                               onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
+                                <rect x={sx(person.x) - 20} y={PLANK_Y - 102} width="40" height="104"
+                                      fill="transparent" />
+                            </g>
+                        )}
                     </g>
 
                     {show.forces && stable && (
@@ -570,8 +587,8 @@
         );
 
         // ── Beräkningspanel (momentlagen med vald vridningspunkt) ──
-        const CalcPanel = ({ m, person, xP, xQ, pivot, FG, FL, FP, FQ, stable }) => {
-            const xG = L / 2;
+        const CalcPanel = ({ m, Lb, plankX, person, xP, xQ, pivot, FG, FL, FP, FQ, stable }) => {
+            const xG = plankX + Lb / 2;
             const total = FG + FL;
             const d = Math.abs(xQ - xP);
             if (!stable) {
@@ -635,10 +652,12 @@
             );
         };
 
-        // ── Kontrollrader ──
-        const Controls = ({ m, setM, xP, setXP, xQ, setXQ, person, setPerson, reset }) => {
-            const setPX = (v) => setPerson((p) => ({ ...p, x: v }));
+        // ── Kontrollrader ── (positioner visas som brädkoordinat = avstånd
+        //    från brädans vänstra ände; internt lagras världskoordinater)
+        const Controls = ({ m, setM, Lb, setL, plankX, xP, setXP, xQ, setXQ, person, setPerson, reset }) => {
+            const setPX = (v) => setPerson((p) => ({ ...p, x: v }));   // v i världskoord
             const setPM = (v) => setPerson((p) => ({ ...p, m: v }));
+            const toB = (w) => w - plankX;                            // världs- → brädkoord
             return (
                 <div>
                     <div className="ctl-row">
@@ -651,6 +670,11 @@
                             <Slider value={m} min={5} max={40} step={0.5} onChange={setM} />
                             <NumInput value={m} min={1} max={200} fmtFn={(v) => fmt(v, 0)} unit="kg" onCommit={setM} />
                         </div>
+                        <div className="ctl-line">
+                            <span className="ctl-lbl">Längd <em>L</em></span>
+                            <Slider value={Lb} min={2.5} max={8} step={0.5} onChange={setL} />
+                            <NumInput value={Lb} min={2.5} max={8} fmtFn={(v) => fmt(v, 1)} unit="m" color="#b4894a" onCommit={setL} />
+                        </div>
                     </div>
 
                     <div className="ctl-row">
@@ -660,13 +684,13 @@
                         </div>
                         <div className="ctl-line">
                             <span className="ctl-lbl">Stöd P</span>
-                            <Slider value={xP} min={0.2} max={xQ - 0.5} step={0.05} onChange={setXP} />
-                            <NumInput value={xP} min={0} max={xQ - 0.3} fmtFn={fmtPos} unit="m" color={COL.stod} onCommit={setXP} />
+                            <Slider value={toB(xP)} min={0.1} max={toB(xQ) - 0.4} step={0.05} onChange={(v) => setXP(v + plankX)} />
+                            <NumInput value={toB(xP)} min={0} max={toB(xQ) - 0.3} fmtFn={fmtPos} unit="m" color={COL.stod} onCommit={(v) => setXP(v + plankX)} />
                         </div>
                         <div className="ctl-line">
                             <span className="ctl-lbl">Stöd Q</span>
-                            <Slider value={xQ} min={xP + 0.5} max={5.8} step={0.05} onChange={setXQ} />
-                            <NumInput value={xQ} min={xP + 0.3} max={L} fmtFn={fmtPos} unit="m" color={COL.stod} onCommit={setXQ} />
+                            <Slider value={toB(xQ)} min={toB(xP) + 0.4} max={Lb - 0.1} step={0.05} onChange={(v) => setXQ(v + plankX)} />
+                            <NumInput value={toB(xQ)} min={toB(xP) + 0.3} max={Lb} fmtFn={fmtPos} unit="m" color={COL.stod} onCommit={(v) => setXQ(v + plankX)} />
                         </div>
                     </div>
 
@@ -688,8 +712,8 @@
                         </div>
                         <div className="ctl-line" style={{ opacity: person.on ? 1 : 0.4 }}>
                             <span className="ctl-lbl">Placering</span>
-                            <Slider value={person.x} min={0} max={L} step={0.05} onChange={setPX} />
-                            <NumInput value={person.x} min={0} max={L} fmtFn={fmtPos} unit="m" color="#3f6fa3" onCommit={setPX} />
+                            <Slider value={toB(person.x)} min={0} max={Lb} step={0.05} onChange={(v) => setPX(v + plankX)} />
+                            <NumInput value={toB(person.x)} min={0} max={Lb} fmtFn={fmtPos} unit="m" color="#3f6fa3" onCommit={(v) => setPX(v + plankX)} />
                         </div>
                     </div>
                 </div>
@@ -697,11 +721,15 @@
         };
 
         // ── Huvudapp ─────────────────────────────────────────────
-        const DEF = () => ({ m: 20, xP: 1.5, xQ: 4.0, person: { on: true, m: 45, x: 3.6 }, pivot: 'P' });
+        const DEF = () => ({ m: 20, Lb: 6.0, plankX: 0, xP: 1.5, xQ: 4.0,
+                             person: { on: true, m: 45, x: 3.6 }, pivot: 'P' });
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
         const App = () => {
             const d0 = DEF();
             const [m, setM] = useState(d0.m);
+            const [Lb, setLbRaw] = useState(d0.Lb);
+            const [plankX, setPlankXraw] = useState(d0.plankX);   // brädans vänsterände (världskoord)
             const [xP, setXPraw] = useState(d0.xP);
             const [xQ, setXQraw] = useState(d0.xQ);
             const [person, setPerson] = useState(d0.person);
@@ -714,15 +742,29 @@
             const sceneWrapRef = useRef(null);
             const svgRef = useRef(null);
             const dragRef = useRef(null);
+            const startRef = useRef(null);
             const rafRef = useRef(null);
             const tipRef = useRef(0);
 
-            // håll xP < xQ
-            const setXP = (v) => setXPraw(Math.max(0, Math.min(v, xQ - 0.3)));
-            const setXQ = (v) => setXQraw(Math.min(L, Math.max(v, xP + 0.3)));
+            // skala + koordinatavbildning (beror på brädans längd)
+            const PXM = pxmFor(Lb);
+            const sx = sxFor(Lb);
 
-            // ── Fysik ──
-            const xG = L / 2;
+            // stöden och lasten hålls på brädan; xP < xQ
+            const setXP = (v) => setXPraw(clamp(v, plankX + 0.1, xQ - 0.4));
+            const setXQ = (v) => setXQraw(clamp(v, xP + 0.4, plankX + Lb - 0.1));
+            // längd-ändring: klampa bräda, stöd och last in i den nya brädan
+            const setL = (v) => {
+                const nb = clamp(v, 2.5, 8);
+                const px = clamp(plankX, -nb / 6, nb / 6);
+                const nQ = clamp(xQ, px + 0.5, px + nb - 0.1);
+                const nP = clamp(xP, px + 0.1, nQ - 0.4);
+                setLbRaw(nb); setPlankXraw(px); setXQraw(nQ); setXPraw(nP);
+                setPerson((p) => ({ ...p, x: clamp(p.x, px, px + nb) }));
+            };
+
+            // ── Fysik (världskoordinater) ──
+            const xG = plankX + Lb / 2;
             const FG = m * G;
             const FL = person.on ? person.m * G : 0;
             const total = FG + FL;
@@ -781,11 +823,12 @@
 
             const reset = () => {
                 const dd = DEF();
-                setM(dd.m); setXPraw(dd.xP); setXQraw(dd.xQ);
+                setM(dd.m); setLbRaw(dd.Lb); setPlankXraw(dd.plankX);
+                setXPraw(dd.xP); setXQraw(dd.xQ);
                 setPerson(dd.person); setPivot(dd.pivot);
             };
 
-            // ── dra i scenen (person / bockar) ──
+            // ── dra i scenen (person / bockar / bräda) ──
             const localX = (clientX, clientY) => {
                 const svg = svgRef.current;
                 if (!svg) return null;
@@ -794,31 +837,48 @@
                 const pt = svg.createSVGPoint();
                 pt.x = clientX; pt.y = clientY;
                 const p = pt.matrixTransform(ctm.inverse());
-                return (p.x - ORIGIN_X) / PXM;      // → brädkoord (m)
+                return (p.x - WORLD0_X) / PXM;      // skärm-x → världskoord (m)
+            };
+            const applyDrag = (what, wx) => {
+                if (what === 'person') {
+                    setPerson((p) => ({ ...p, x: clamp(wx, plankX, plankX + Lb) }));
+                } else if (what === 'P') {
+                    setXP(wx);
+                } else if (what === 'Q') {
+                    setXQ(wx);
+                } else if (what === 'plank') {
+                    const st = startRef.current;
+                    if (!st) return;
+                    // bockarna står kvar på marken → brädan får inte glida av dem
+                    const loP = Math.max(-Lb / 6, xQ + 0.1 - Lb);
+                    const hiP = Math.min(Lb / 6, xP - 0.1);
+                    const np = clamp(st.plankX + (wx - st.wx), loP, hiP);
+                    const applied = np - st.plankX;
+                    setPlankXraw(np);
+                    setPerson((p) => ({ ...p, x: clamp(st.personX + applied, np, np + Lb) }));
+                }
             };
             const moveTo = (e) => {
                 const what = dragRef.current;
                 if (!what) return;
                 let x = localX(e.clientX, e.clientY);
                 if (x == null) return;
-                x = Math.round(x * 20) / 20;
-                if (what === 'person') setPerson((p) => ({ ...p, x: Math.max(0, Math.min(L, x)) }));
-                else if (what === 'P') setXP(x);
-                else if (what === 'Q') setXQ(x);
+                x = Math.round(x * 100) / 100;
+                applyDrag(what, x);
             };
             const onDown = (e, what) => {
                 e.preventDefault(); e.stopPropagation();
                 dragRef.current = what; setDrag(what);
                 e.currentTarget.setPointerCapture?.(e.pointerId);
-                moveTo(e);
+                const wx = localX(e.clientX, e.clientY);
+                startRef.current = { wx: wx == null ? 0 : wx, plankX, personX: person.x };
+                if (what !== 'plank') moveTo(e);
             };
             const onMove = (e) => { if (dragRef.current) moveTo(e); };
             const onUp = (e) => {
-                dragRef.current = null; setDrag(null);
+                dragRef.current = null; startRef.current = null; setDrag(null);
                 e.currentTarget.releasePointerCapture?.(e.pointerId);
             };
-            // person dras separat (annat element)
-            const personDown = (e) => onDown(e, 'person');
 
             const tShow = (k) => setShow((sh) => ({ ...sh, [k]: !sh[k] }));
 
@@ -839,14 +899,6 @@
                     )}
                 </div>
             );
-
-            // personen behöver egen pekar-handler → egen wrapper i scenen
-            const PersonHit = person.on ? (
-                <g style={{ cursor: drag === 'person' ? 'grabbing' : 'grab' }}
-                   onPointerDown={personDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
-                    <rect x={sx(person.x) - 20} y={PLANK_Y - 100} width="40" height="106" fill="transparent" />
-                </g>
-            ) : null;
 
             return (
                 <div className="min-h-screen dark-container px-4 md:px-8 pb-12" style={{ fontFamily: "'DM Sans', sans-serif" }}>
@@ -871,18 +923,12 @@
                             {/* Scen */}
                             <div className="lg:w-3/5 order-1">
                                 <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}>
-                                    <Scene svgRef={svgRef} phys={phys} person={person} show={show}
+                                    <Scene svgRef={svgRef} sx={sx} Lb={Lb} plankX={plankX}
+                                           phys={phys} person={person} show={show}
                                            xP={xP} xQ={xQ} pivot={pivot} drag={drag}
                                            onDown={onDown} onMove={onMove} onUp={onUp} />
-                                    {/* personens dragyta ligger ovanpå scenen som separat svg-lager */}
-                                    {person.on && (
-                                        <svg viewBox={`0 0 ${VBW} ${VBH}`} preserveAspectRatio="xMidYMid meet"
-                                             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-                                            {PersonHit}
-                                        </svg>
-                                    )}
                                     <div className="scene-hint">
-                                        Dra i personen eller i bockarna. Brädan svarar direkt.
+                                        Dra i brädan, i personen eller i bockarna. Allt svarar direkt.
                                     </div>
                                     {sceneToggles()}
                                     <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
@@ -901,7 +947,8 @@
                                     {isFullscreen && (
                                         <div className="fs-sliders">
                                             <div className="fs-title">Bräda, stöd och last</div>
-                                            <Controls m={m} setM={setM} xP={xP} setXP={setXP} xQ={xQ} setXQ={setXQ}
+                                            <Controls m={m} setM={setM} Lb={Lb} setL={setL} plankX={plankX}
+                                                      xP={xP} setXP={setXP} xQ={xQ} setXQ={setXQ}
                                                       person={person} setPerson={setPerson} reset={reset} />
                                         </div>
                                     )}
@@ -930,7 +977,7 @@
                                     </div>
                                 </div>
 
-                                <CalcPanel m={m} person={person} xP={xP} xQ={xQ} pivot={pivot}
+                                <CalcPanel m={m} Lb={Lb} plankX={plankX} person={person} xP={xP} xQ={xQ} pivot={pivot}
                                            FG={FG} FL={FL} FP={FP} FQ={FQ} stable={stable} />
                             </div>
                         </main>

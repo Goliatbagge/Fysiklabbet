@@ -172,7 +172,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma1c — trigonometri och vektorer
 
-- [ ] **Vektorpromenaden** (ma1c-6.5–6.8). Dra vektorer på rutnät;
+- [x] **Vektorpromenaden** (ma1c-6.5–6.8). KLAR 2026-07-11, `ma1c-6.5.js`. Dra vektorer på rutnät;
   komposanter som streckad trappa med v·cos α / v·sin α utskrivet;
   additionsläge spets-till-svans där eleven ordnar om vektorerna med
   drag-and-drop och ser resultanten stå still (kommutativitet);
@@ -214,7 +214,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma2c — geometri
 
-- [ ] **Pythagoras areapussel** (ma2c-4.5). Kvadraterna a², b², c² på
+- [x] **Pythagoras areapussel** (ma2c-4.5). KLAR 2026-07-11, `ma2c-4.5.js`. Kvadraterna a², b², c² på
   triangelns sidor; eleven flyttar pusselbitar från de två små kvadraterna
   in i den stora (klassiskt omflyttningsbevis); dra det räta hörnet och se
   att pusslet bara går ihop vid 90° (koppling till cosinussatsen).
@@ -250,7 +250,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   punkt på 10^x; spegelpunkten över y = x ritar log-kurvan som spår;
   koordinatpar byter plats live. Uppdrag: "lös 10^x = 500 genom att dra"
   → x ≈ 2,7, sedan knappen "exakt: lg 500". Basglidare (2, e, 10).
-- [ ] **Räknestickan: logaritmlagarna i trä** (ma2c-5.4). Två dragbara
+- [x] **Räknestickan: logaritmlagarna i trä** (ma2c-5.4). KLAR 2026-07-11, `ma2c-5.4.js` (id: 5.4, 5.5). Två dragbara
   log-graderade linjaler; eleven räknar 2,3 · 3,1 på riktigt genom att
   skjuta — och ser sträckorna lg a + lg b adderas som färgade segment.
   Lägen: potenslagen (n kopior av segmentet), division (skjut åt andra
@@ -319,7 +319,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   x-led över tre staplade grafer; konvex/konkav färgkodas på f samtidigt
   som tecknen på f″ lyser. Missuppfattning: blandar växande/avtagande (f′)
   med buktar upp/ner (f″).
-- [ ] **Extremvärdesfabriken: lådan** (ma3c-4.6–4.7, ma4-2.9). Dra
+- [x] **Extremvärdesfabriken: lådan** (ma3c-4.6–4.7, ma4-2.9). KLAR 2026-07-11, `ma3c-4.6.js`. Dra
   hörnklippet x på ett kartongark; arket viks till låda i enkel
   3D-projektion, volymen visas; (x, V(x)) prickas i en graf som fylls av
   elevens egen utforskning; gissa först var maximum ligger; toggle V′(x)
@@ -345,7 +345,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   stapeln (övre − undre) med höjd utskriven; bakom skannern fylls arean;
   vid korsning byter stapeln färg (teckenbyte → dela upp integralen);
   skärningspunkterna snäpps som gränsförslag.
-- [ ] **Integralen som resemätare** (ma3c-5.7, ma4-3.5). Dragbar
+- [x] **Integralen som resemätare** (ma3c-5.7, ma4-3.5). KLAR 2026-07-11, `ma3c-5.7.js`. Dragbar
   v(t)-kurva; play: bilen kör, arean skuggas i takt med färden, vägmätaren
   = areavärdet; negativ v: bilen backar, röd area, sträcka vs total resa
   skiljs åt. Uppdrag: "forma kurvan så bilen är tillbaka på start efter
@@ -406,7 +406,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   plus hörnet Δf·Δg; dra Δx → 0: hörnets ANDEL går mot noll (procentmätare).
   Jämför med felsvaret f′·g′. Kvotregeln som lager 2. Missuppfattning:
   derivatan av produkt = produkten av derivator.
-- [ ] **Sneda asymptoter genom utzoomning** (ma4-2.12–2.14). Knapp "dela":
+- [x] **Sneda asymptoter genom utzoomning** (ma4-2.12–2.14). KLAR 2026-07-11, `ma4-2.12.js`. Knapp "dela":
   polynomdivisionen animeras till kvot + rest/nämnare, kvotlinjen ritas
   streckad; zoomglidare ×1 → ×50: kurvan smälter ihop med linjen medan
   restens värde visas som krympande stapel vid dragbar x-markör; vertikala

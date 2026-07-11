@@ -128,7 +128,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma1c — procent och funktioner
 
-- [ ] **Faktorkedjan** (ma1c-3.2–3.3). Startbelopp som stapel; eleven
+- [x] **Faktorkedjan** (ma1c-3.2–3.3). KLAR 2026-07-11, `ma1c-3.2.js`. Startbelopp som stapel; eleven
   kedjar dragbara faktor-brickor (×1,20; ×0,80; …) och ser stapeln
   transformeras stegvis. Huvudnummer som prediktion: "+20 % följt av −20 %
   — tillbaka på start?" (0,96!). n-glidare för upprepad faktor →
@@ -197,7 +197,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   p·x; "vik"-reglage klyver remsan och sveper halvan runt hörnet; det
   saknade hörnet (p/2)² blinkar; algebra-raden byggs term för term ända
   fram till pq-formeln. Insikt: formeln är minnesbilden av en rörelse.
-- [ ] **Diskriminantens gränsland** (ma2c-2.6, brygga till ma4-4.3).
+- [x] **Diskriminantens gränsland** (ma2c-2.6 + ma4-4.3). KLAR 2026-07-11, `ma2c-2.6.js`.
   Glidare p, q: överst parabeln, under rötterna som punkter i ett KOMPLEXT
   plan. Dra q uppåt: rötterna glider mot varandra på reella axeln, möts
   (dubbelrot/tangering) och viker sedan av vinkelrätt ut i komplexa planet
@@ -291,7 +291,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   lim-formeln), 4) Derivatan (prickspår (a, k) i undre koordinatsystem +
   facit-linjen f′(x) = 2x). Missuppfattning: tangent och derivata som två
   orelaterade begrepp.
-- [ ] **Deriverbarhets-mikroskopet** (ma3c-2.5). Klicka en punkt på vald
+- [x] **Deriverbarhets-mikroskopet** (ma3c-2.5). KLAR 2026-07-11, `ma3c-2.5.js`. Klicka en punkt på vald
   kurva (sin x, x², |x|, x^(1/3)); cirkulär lins med zoom ×1 → ×1000;
   släta kurvor rätas ut till en linje (lutningen ÄR derivatan), |x| i 0
   förblir ett V oavsett zoom; vänster-/högerlutning visas (−1 vs +1).
@@ -360,7 +360,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   tan. Lager (ma4-1.5): "radien som måttband" — böj radien längs bågen,
   räknaren tickar 1, 2, 3 … 6 hela + 0,28 ≈ 2π per varv, oberoende av
   radie.
-- [ ] **Trig-ekvationens alla lösningar** (ma3c-6.3–6.4, ma4-1.3–1.4).
+- [x] **Trig-ekvationens alla lösningar** (ma3c-6.3–6.4, ma4-1.3–1.4). KLAR 2026-07-11, `ma3c-6.3.js`.
   Dra linjen y = k: i enhetscirkeln lyser de TVÅ strålarna (speglade i
   y-axeln); i grafen prickas alla skärningar, färgade per familj
   (v + n·360° blå, 180° − v + n·360° röd); dra k mot 1 → familjerna
@@ -387,7 +387,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   (sin α·cos β grönt, cos α·sin β orange); hovra en term i formeln →
   segmentet pulserar; specialfall α = β ger dubbla vinkeln-formeln.
   Missuppfattning: sin(α+β) = sin α + sin β.
-- [ ] **a·sin x + b·cos x är alltid en sinus** (ma4-1.14). Vänster: dragbar
+- [x] **a·sin x + b·cos x är alltid en sinus** (ma4-1.14). KLAR 2026-07-11, `ma4-1.14.js`. Vänster: dragbar
   vektor (a, b); höger: kurvan + (toggle) c·sin(x + v); dra spetsen: kurvan
   formas live, c = vektorns längd (måttsatt), v = dess vinkel; rotera med
   konstant längd → ren fasförskjutning. Insikt: amplituden är √(a²+b²),
@@ -401,7 +401,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   "×f′(u)" utskrivna; totalfaktorn = produkten. Dra x-punkten: faktorerna
   ändras live. Förval: sin(x²), e^(2x), (3x+1)⁵. Missuppfattning: glömmer
   inre derivatan.
-- [ ] **Produktregeln som växande rektangel** (ma4-2.7). Rektangel med
+- [x] **Produktregeln som växande rektangel** (ma4-2.7). KLAR 2026-07-11, `ma4-2.7.js`. Rektangel med
   sidor f(x) och g(x); dra Δx: tillskottet delas i remsorna f·Δg och g·Δf
   plus hörnet Δf·Δg; dra Δx → 0: hörnets ANDEL går mot noll (procentmätare).
   Jämför med felsvaret f′·g′. Kvotregeln som lager 2. Missuppfattning:

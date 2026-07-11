@@ -30,6 +30,7 @@
     <script>document.write('<scr' + 'ipt src="data/teori/bundle.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/ovningar.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="data/exittickets.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/visualiseringar/index.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script>document.write('<scr' + 'ipt src="graf.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
@@ -45,6 +46,7 @@
         const TEORI = window.TEORI || {};
         const OVNINGAR = window.OVNINGAR || {};
         const EXITTICKETS = window.EXITTICKETS || {};
+        const VIS_INDEX = window.VISUALISERINGAR_INDEX || {};
 
         // --- Skydda math-block ($$..$$ och $..$) från markdown-parsern.
         // Annars tolkar marked LaTeX-escape som \; \, \! och dyl. som vanlig
@@ -324,6 +326,7 @@
             if (courseName === 'Matematik nivå 1c') return 'ma1c';
             if (courseName === 'Matematik nivå 2c') return 'ma2c';
             if (courseName === 'Matematik fortsättning nivå 1c') return 'ma3c';
+            if (courseName === 'Matematik fortsättning nivå 2') return 'ma4';
             return null;
         }
 
@@ -379,6 +382,7 @@
                                     <a href="katalog.html#ma1c">Matematik nivå 1c</a>
                                     <a href="katalog.html#ma2c">Matematik nivå 2c</a>
                                     <a href="katalog.html#ma3c">Matematik fortsättning nivå 1c</a>
+                                    <a href="katalog.html#ma4">Matematik fortsättning nivå 2</a>
                                 </div>
                             </div>
                             <a href="simuleringar.html">Simuleringar</a>
@@ -1472,6 +1476,56 @@
             );
         }
 
+        // ── Visualisering (interaktiv "aha-maskin") ─────────────────────
+        // Modulerna lazy-laddas först när kortet klickas; varje modul
+        // registrerar window.VISUALISERINGAR['<teori-id>'] = { mount(el) }.
+        const visModuleCache = {};   // fil → Promise (laddas bara en gång)
+        function loadVisModule(fil) {
+            if (!visModuleCache[fil]) {
+                visModuleCache[fil] = new Promise((resolve, reject) => {
+                    const s = document.createElement('script');
+                    s.src = fil + '?v=' + window.__CB;
+                    s.onload = resolve;
+                    s.onerror = () => reject(new Error('Kunde inte ladda ' + fil));
+                    document.head.appendChild(s);
+                });
+            }
+            return visModuleCache[fil];
+        }
+
+        function Visualisering({ id }) {
+            const hostRef = useRef(null);
+            const [error, setError] = useState(null);
+            useEffect(() => {
+                const meta = VIS_INDEX[id];
+                if (!meta || !hostRef.current) return;
+                let cancelled = false;
+                let instance = null;
+                setError(null);
+                loadVisModule(meta.fil).then(() => {
+                    if (cancelled || !hostRef.current) return;
+                    const mod = (window.VISUALISERINGAR || {})[id];
+                    if (mod && mod.mount) {
+                        instance = mod.mount(hostRef.current);
+                    } else {
+                        setError('Visualiseringen kunde inte startas.');
+                    }
+                }).catch(() => {
+                    if (!cancelled) setError('Visualiseringen kunde inte laddas.');
+                });
+                return () => {
+                    cancelled = true;
+                    if (instance && instance.destroy) instance.destroy();
+                };
+            }, [id]);
+            return (
+                <div className="lab-vis-host">
+                    {error && <p className="lab-vis-error">{error}</p>}
+                    <div ref={hostRef} />
+                </div>
+            );
+        }
+
         function Catalog({ state, setState }) {
             const { subject, course, chapter, section } = state;
             const subjectData = K[subject] || {};
@@ -1488,6 +1542,10 @@
             const hasTeori = tid && TEORI[tid];
             const hasOvningar = tid && OVNINGAR[tid] && OVNINGAR[tid].length > 0;
             const hasExit = tid && EXITTICKETS[tid] && EXITTICKETS[tid].length > 0;
+            // Visualisering-kortet renderas BARA när avsnittet har en
+            // visualisering (inget "Kommer snart" — de flesta avsnitt ska
+            // inte ha något kort alls).
+            const vis = tid ? VIS_INDEX[tid] : null;
 
             // View-tab: 'teori' eller 'ovningar' (Simulering öppnar extern länk).
             // Ligger i top-state så att hashen (#fy2-1.5:ovningar) kan djuplänka hit.
@@ -1632,6 +1690,15 @@
                                                             <div className="lab-card-meta">Kommer snart</div>
                                                         </div>
                                                     )}
+                                                    {vis && (
+                                                        <button type="button"
+                                                            className={'lab-card ' + (view === 'visualisering' ? 'lab-card-active' : 'lab-card-clickable')}
+                                                            onClick={() => setView('visualisering')}>
+                                                            <div className="lab-card-tag">Utforska</div>
+                                                            <div className="lab-card-title">Visualisering</div>
+                                                            <div className="lab-card-meta">{vis.titel}</div>
+                                                        </button>
+                                                    )}
                                                     {/* Matte har inga simuleringar — visa inte kortet alls där */}
                                                     {!isMath && (activeSection.href ? (
                                                         <a className="lab-card lab-card-clickable" href={activeSection.href}>
@@ -1730,6 +1797,7 @@
                                                 )}
                                                 {view === 'ovningar' && <Ovningar id={tid} />}
                                                 {view === 'exitticket' && <ExitTicket id={tid} onStudyAgain={() => setView('teori')} />}
+                                                {view === 'visualisering' && vis && <Visualisering id={tid} />}
 
                                                 <div className="lab-section-actions" style={{ marginTop: 32, paddingTop: 14, borderTop: '1px solid var(--lab-line)' }}>
                                                     {activeSection.href && (
@@ -1803,12 +1871,13 @@
             ma1c: ['Matematik', 'Matematik nivå 1c'],
             ma2c: ['Matematik', 'Matematik nivå 2c'],
             ma3c: ['Matematik', 'Matematik fortsättning nivå 1c'],
+            ma4: ['Matematik', 'Matematik fortsättning nivå 2'],
         };
         function parseInitialState() {
             const out = { subject: 'Fysik', course: null, chapter: null, section: null, view: 'teori' };
 
             const hash = (window.location.hash || '').replace(/^#/, '');
-            const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c)(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar|exitticket))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }

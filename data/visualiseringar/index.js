@@ -29,6 +29,71 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra h mot 0 och se sekanten övergå i tangenten — derivatans definition.',
         fil: 'data/visualiseringar/ma3c-2.3.js'
     },
+    'ma1c-2.5': {
+        titel: 'Ekvationsvågen',
+        beskrivning: 'Gör samma operation på båda vågskålarna för att lösa ut x — och testa vad som händer om du fuskar.',
+        fil: 'data/visualiseringar/ma1c-2.5.js'
+    },
+    'ma1c-2.6': {
+        titel: 'Ekvationsvågen',
+        beskrivning: 'Gör samma operation på båda vågskålarna för att lösa ut x — och testa vad som händer om du fuskar.',
+        fil: 'data/visualiseringar/ma1c-2.5.js'
+    },
+    'ma1c-5.6': {
+        titel: 'Träddiagram-byggaren',
+        beskrivning: 'Bygg ett kulträd med och utan återläggning — klicka en väg för multiplikation, en händelse för addition.',
+        fil: 'data/visualiseringar/ma1c-5.7.js'
+    },
+    'ma1c-5.7': {
+        titel: 'Träddiagram-byggaren',
+        beskrivning: 'Bygg ett kulträd med och utan återläggning — klicka en väg för multiplikation, en händelse för addition.',
+        fil: 'data/visualiseringar/ma1c-5.7.js'
+    },
+    'ma1c-5.8': {
+        titel: 'Träddiagram-byggaren',
+        beskrivning: 'Bygg ett kulträd med och utan återläggning — och se komplementhändelsen ge samma svar med färre räkningar.',
+        fil: 'data/visualiseringar/ma1c-5.7.js'
+    },
+    'ma3c-4.1': {
+        titel: 'Konkavitetsbilen',
+        beskrivning: 'Kör en bil längs kurvan och se teckentabellen byggas av lutningen och dess ändring.',
+        fil: 'data/visualiseringar/ma3c-4.1.js'
+    },
+    'ma3c-4.2': {
+        titel: 'Konkavitetsbilen',
+        beskrivning: 'Kör en bil längs kurvan och se teckentabellen byggas av lutningen och dess ändring.',
+        fil: 'data/visualiseringar/ma3c-4.1.js'
+    },
+    'ma3c-4.4': {
+        titel: 'Konkavitetsbilen',
+        beskrivning: 'Kör en bil längs kurvan och se teckentabellen byggas av lutningen och dess ändring.',
+        fil: 'data/visualiseringar/ma3c-4.1.js'
+    },
+    'ma3c-4.5': {
+        titel: 'Konkavitetsbilen',
+        beskrivning: 'Kör en bil längs kurvan och se teckentabellen byggas av lutningen och dess ändring.',
+        fil: 'data/visualiseringar/ma3c-4.1.js'
+    },
+    'ma2c-1.1': {
+        titel: 'Ekvationssystemets tre öden',
+        beskrivning: 'Dra i två linjer och se skärningspunkten bli lösningen — algebraiskt och grafiskt på samma gång.',
+        fil: 'data/visualiseringar/ma2c-1.1.js'
+    },
+    'ma2c-1.2': {
+        titel: 'Ekvationssystemets tre öden',
+        beskrivning: 'Dra i två linjer och se skärningspunkten bli lösningen — algebraiskt och grafiskt på samma gång.',
+        fil: 'data/visualiseringar/ma2c-1.1.js'
+    },
+    'ma2c-1.3': {
+        titel: 'Ekvationssystemets tre öden',
+        beskrivning: 'Dra i två linjer och se skärningspunkten bli lösningen — algebraiskt och grafiskt på samma gång.',
+        fil: 'data/visualiseringar/ma2c-1.1.js'
+    },
+    'ma2c-1.4': {
+        titel: 'Ekvationssystemets tre öden',
+        beskrivning: 'Dra i två linjer och se skärningspunkten bli lösningen — algebraiskt och grafiskt på samma gång.',
+        fil: 'data/visualiseringar/ma2c-1.1.js'
+    },
     'ma2c-2.1': {
         titel: 'Kvadratregler som areor',
         beskrivning: 'Se (a+b)² och konjugatregeln som bokstavliga areor — dra i figuren och flytta pusselbiten.',
@@ -104,10 +169,35 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra x-markören och se den ackumulerade arean A(x) växa i takt med f(x) — fundamentalsatsen i praktiken.',
         fil: 'data/visualiseringar/ma3c-5.4.js'
     },
+    'ma2c-3.1': {
+        titel: 'Parabelns tre klädnader',
+        beskrivning: 'Dra i nollställena, extrempunkten eller y-skärningen — samma parabel, tre skrivsätt som uppdateras live.',
+        fil: 'data/visualiseringar/ma2c-3.1.js'
+    },
+    'ma2c-3.2': {
+        titel: 'Parabelns tre klädnader',
+        beskrivning: 'Dra i nollställena, extrempunkten eller y-skärningen — samma parabel, tre skrivsätt som uppdateras live.',
+        fil: 'data/visualiseringar/ma2c-3.1.js'
+    },
+    'ma2c-3.3': {
+        titel: 'Parabelns tre klädnader',
+        beskrivning: 'Dra i nollställena, extrempunkten eller y-skärningen — samma parabel, tre skrivsätt som uppdateras live.',
+        fil: 'data/visualiseringar/ma2c-3.1.js'
+    },
     'ma2c-4.11': {
         titel: 'Randvinkeljakten',
         beskrivning: 'Dra punkten P längs cirkeln och se randvinkeln stå stilla — och testa diameterfallet där den alltid blir 90°.',
         fil: 'data/visualiseringar/ma2c-4.11.js'
+    },
+    'ma4-2.3': {
+        titel: 'Kedjeregeln: tre tallinjer',
+        beskrivning: 'Dra punkten och se x avbildas via u = g(x) till y = f(u) — förstoringsfaktorerna multipliceras.',
+        fil: 'data/visualiseringar/ma4-2.3.js'
+    },
+    'ma4-2.4': {
+        titel: 'Kedjeregeln: tre tallinjer',
+        beskrivning: 'Dra punkten och se x avbildas via u = g(x) till y = f(u) — förstoringsfaktorerna multipliceras.',
+        fil: 'data/visualiseringar/ma4-2.3.js'
     },
     'ma4-3.7': {
         titel: 'Rotationskroppar steg för steg',

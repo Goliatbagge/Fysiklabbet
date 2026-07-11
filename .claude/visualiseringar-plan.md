@@ -107,7 +107,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   (atom) till 10²⁶ m (universum) med SVG-vinjetter per dekad; aktuell skala
   visas hela tiden som a·10ⁿ. Sökuppdrag: "ställ in 3·10⁸ m". Insikt:
   exponenten är en position, multiplikation med 10 = ett zoomsteg.
-- [ ] **Ekvationsvågen** (ma1c-2.5–2.7). Balansvåg med x-lådor och
+- [x] **Ekvationsvågen** (ma1c-2.5–2.7). KLAR 2026-07-11, `ma1c-2.5.js` (id: 2.5, 2.6). Balansvåg med x-lådor och
   tal-vikter; eleven drar bort lika mycket från båda skålarna, delar i lika
   högar; vågen tippar direkt vid fusk; algebra-raden synkas per handling.
   Nivåer med x på båda sidor och negativa "ballongvikter". Missuppfattning:
@@ -164,7 +164,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   markera en händelse ("summan är 7") — sannolikheten visas som bråk,
   decimaltal och procent. Missuppfattningar: gambler's fallacy; att
   summa 7 och summa 2 är lika sannolika.
-- [ ] **Träddiagram-byggaren** (ma1c-5.6–5.8). Eleven bygger trädet gren
+- [x] **Träddiagram-byggaren** (ma1c-5.6–5.8). KLAR 2026-07-11, `ma1c-5.7.js`. Eleven bygger trädet gren
   för gren; växel med/utan återläggning ändrar andra nivåns sannolikheter
   automatiskt; produkten längs en väg räknas live med färgade grenar;
   komplementhändelsen som "alla vägar utom denna" (1 − P lyser).
@@ -182,7 +182,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma2c — ekvationssystem och andragrad
 
-- [ ] **Ekvationssystemets tre öden** (ma2c-1.1–1.4). Två dragbara linjer;
+- [x] **Ekvationssystemets tre öden** (ma2c-1.1–1.4). KLAR 2026-07-11, `ma2c-1.1.js`. Två dragbara linjer;
   skärningspunkten följer med; synkad algebrapanel visar substitutions-/
   additionsstegen med aktuella tal live. Uppdrag: "gör systemet olösligt"
   → vid parallella linjer kollapsar algebran till "0 = 5" som pulserar.
@@ -206,7 +206,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 - [ ] **Rotekvationens falska rot** (ma2c-2.8). √x och x−2 ritas; bredvid
   de kvadrerade graferna där en EXTRA skärningspunkt dykt upp, markerad
   "falsk rot". Insikt: kvadrering glömmer tecken → prövning obligatorisk.
-- [ ] **Kastparabelns tre klädnader** (ma2c-3.1–3.3). EN parabel, tre
+- [x] **Kastparabelns tre klädnader** (ma2c-3.1–3.3). KLAR 2026-07-11, `ma2c-3.1.js` ("Parabelns tre klädnader"). EN parabel, tre
   formler (faktorform, vertexform, allmän form); tre draghandtag på kurvan
   — nollställena styr faktorformen, vertex styr vertexformen, y-skärningen
   styr c; den styrda formen lyser, övriga räknas om gråtonat; symmetri-
@@ -310,7 +310,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma3c — kurvkonstruktion och integraler
 
-- [ ] **Konkavitetsbilen** (ma3c-4.1–4.5). En bil kör längs kurvan
+- [x] **Konkavitetsbilen** (ma3c-4.1–4.5). KLAR 2026-07-11, `ma3c-4.1.js` (täcker även f/f′/f″-synk via mätarna). En bil kör längs kurvan
   (positionsglidare); instrumentpanel med lutningsmätare (f′) och
   rattvridnings-indikator (f″); teckentabellen byggs upp LIVE i takt med
   färden; extrempunkter och inflexionspunkter flaggas vid passage.
@@ -395,7 +395,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma4 — derivator och asymptoter
 
-- [ ] **Kedjeregeln som tre kopplade tallinjer** (ma4-2.3–2.4). Tre
+- [x] **Kedjeregeln som tre kopplade tallinjer** (ma4-2.3–2.4). KLAR 2026-07-11, `ma4-2.3.js`. Tre
   vertikala tallinjer x → u = g(x) → y = f(u); dra en Δx-klamp: bilderna
   Δu och Δy visas som färgade segment med förstoringarna "×g′(x)" och
   "×f′(u)" utskrivna; totalfaktorn = produkten. Dra x-punkten: faktorerna

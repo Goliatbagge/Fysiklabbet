@@ -1,0 +1,288 @@
+{
+ "id": "ma4-3.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "093d8fbd2e2d678324bbb1a73d6cddfa9161a730",
+ "dur": 284.39,
+ "segments": [
+  {
+   "t": "Primitiva funktioner",
+   "s": 0.1,
+   "e": 2.83
+  },
+  {
+   "t": "En primitiv funktion F till en funktion f är en funktion vars derivata är f , alltså F prim parentesen x slut parentes är lika med f av x .",
+   "s": 2.77,
+   "e": 12.25
+  },
+  {
+   "t": "Att bestämma en primitiv funktion är därför den omvända operationen till att derivera.",
+   "s": 12.25,
+   "e": 17.99
+  },
+  {
+   "t": "Det här repeterar vi från Matematik 3, och lägger sedan till de primitiva funktioner som följer av kursens nya deriveringsregler.",
+   "s": 17.99,
+   "e": 26.25
+  },
+  {
+   "t": "Skrivsätt för primitiv funktion",
+   "s": 26.25,
+   "e": 29.61
+  },
+  {
+   "t": "Om vi har en funktion",
+   "s": 29.61,
+   "e": 32.19
+  },
+  {
+   "t": "f bis parentesen x slut parentes så skrivs den primitiva funktionen f prim parentesen x slut parentes f prim parentesen x slut parentes så skrivs den primitiva funktionen f av x f av x så skrivs den primitiva funktionen F parentesen x slut parentes",
+   "s": 32.19,
+   "e": 49.4
+  },
+  {
+   "t": "Om F parentesen x slut parentes är en primitiv funktion till f av x så är även F parentesen x slut parentes plus C det, för varje konstant C (en konstant deriveras ju bort).",
+   "s": 49.4,
+   "e": 61.79
+  },
+  {
+   "t": "Vill vi ange en primitiv funktion räcker det med ett uttryck; ska vi ange samtliga primitiva funktioner lägger vi till konstanten C , som kan stå för vilket tal som helst. Till exempel har f av x är lika med 2 x den primitiva funktionen F parentesen x slut parentes är lika med x i kvadrat , och samtliga primitiva funktioner ges av F parentesen x slut parentes är lika med x i kvadrat plus C .",
+   "s": 61.79,
+   "e": 86.83
+  },
+  {
+   "t": "Bestämma primitiva funktioner",
+   "s": 86.83,
+   "e": 90.0
+  },
+  {
+   "t": "f av x är lika med x upphöjt till n vilket ger att F parentesen x slut parentes är lika med x upphöjt till n plus 1 delat med n plus 1, n är inte lika med minus 1, 4 p t f av x som är lika med k vilket ger att F parentesen x slut parentes är lika med k x, 4 p t f av x som är lika med e upphöjt till k x vilket ger att F parentesen x slut parentes är lika med e upphöjt till k x delat med k, 4 p t f av x som är lika med a upphöjt till k x vilket ger att F parentesen x slut parentes är lika med a upphöjt till k x delat med k gånger naturliga logaritmen av a",
+   "s": 90.0,
+   "e": 128.43
+  },
+  {
+   "t": "En potensfunktion får alltså sin exponent ökad med 1 , varefter vi dividerar med den nya exponenten.",
+   "s": 128.43,
+   "e": 135.74
+  },
+  {
+   "t": "En konstant k multipliceras med x .",
+   "s": 135.74,
+   "e": 139.49
+  },
+  {
+   "t": "En exponentialfunktion skrivs av och divideras med derivatan till exponenten (och, om basen inte är e , dessutom med naturliga logaritmen av av basen).",
+   "s": 139.49,
+   "e": 150.12
+  },
+  {
+   "t": "I den här kursen har vi gått igenom några nya deriveringsregler, till exempel D parentesen sinus x slut parentes är lika med cosinus x , D parentesen cosinus x slut parentes är lika med minus sinus x och D parentesen naturliga logaritmen av x slut parentes är lika med 1 delat med x .",
+   "s": 150.12,
+   "e": 169.64
+  },
+  {
+   "t": "Utifrån dessa kan vi ta fram fler primitiva funktioner.",
+   "s": 169.64,
+   "e": 174.11
+  },
+  {
+   "t": "Kom ihåg att för att reglerna ska gälla för trigonometriska funktioner måste vinklarna anges i radianer.",
+   "s": 174.11,
+   "e": 180.76
+  },
+  {
+   "t": "Bestämma fler primitiva funktioner",
+   "s": 180.76,
+   "e": 184.0
+  },
+  {
+   "t": "f av x är lika med sinus x vilket ger att F parentesen x slut parentes är lika med minus cosinus x, 4 p t f av x som är lika med sinus k x vilket ger att F parentesen x slut parentes är lika med minus cosinus k x delat med k, 4 p t f av x som är lika med cosinus x vilket ger att F parentesen x slut parentes är lika med sinus x, 4 p t f av x som är lika med cosinus k x vilket ger att F parentesen x slut parentes är lika med sinus k x delat med k, 4 p t f av x som är lika med 1 delat med x vilket ger att F parentesen x slut parentes är lika med naturliga logaritmen av x, parentesen x är större än 0 slut parentes",
+   "s": 184.0,
+   "e": 229.04
+  },
+  {
+   "t": "Vid tillämpningar hänger sträckan s parentesen t slut parentes , hastigheten v parentesen t slut parentes och accelerationen a parentesen t slut parentes ihop.",
+   "s": 229.04,
+   "e": 240.1
+  },
+  {
+   "t": "Deriverar vi når vi nästa storhet ( s går mot v går mot a ), och tar vi en primitiv funktion går vi åt andra hållet ( a går mot v går mot s ).",
+   "s": 240.1,
+   "e": 249.81
+  },
+  {
+   "t": "Exempel 1 — ange en primitiv funktion",
+   "s": 249.81,
+   "e": 253.78
+  },
+  {
+   "t": "Ange en primitiv funktion till. a) f av x är lika med 5 x upphöjt till 4 plus 1 delat med x b) f av x är lika med e upphöjt till 3 x minus 5 cosinus x",
+   "s": 253.78,
+   "e": 269.25
+  },
+  {
+   "t": "a) Vi tar en primitiv funktion term för term.",
+   "s": 256.95,
+   "e": 269.25
+  },
+  {
+   "t": "Potenstermen 5 x upphöjt till 4 höjer exponenten med 1 och divideras med den nya exponenten; 1 delat med x ger naturliga logaritmen av x :",
+   "s": 269.25,
+   "e": 284.39
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med 5 x upphöjt till 5 delat med 5 plus naturliga logaritmen av x som är lika med x upphöjt till 5 plus naturliga logaritmen av x",
+   "s": 269.25,
+   "e": 284.39
+  },
+  {
+   "t": "b) Exponentialtermen e upphöjt till 3 x divideras med derivatan till exponenten, 3 , och cosinus x har den primitiva funktionen sinus x :",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med e upphöjt till 3 x delat med 3 minus 5 sinus x",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Svar: a) x upphöjt till 5 plus naturliga logaritmen av x b) e upphöjt till 3 x delat med 3 minus 5 sinus x",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Exempel 2 — ange samtliga primitiva funktioner",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Ange samtliga primitiva funktioner till. a) f av x är lika med 7 delat med x plus 8 delat med x minus 5 b) f av x är lika med x delat med x i kvadrat plus 5 x minus x i kubik plus 5 x delat med x i kvadrat",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "a) Båda termerna är av typen 1 delat med x (den andra med x minus 5 i nämnaren), så vi får logaritmer.",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "När vi anger samtliga primitiva funktioner lägger vi till konstanten C :",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med 7 naturliga logaritmen av x plus 8 naturliga logaritmen av parentesen x minus 5 slut parentes plus C",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "b) Här har vi variabler i både täljare och nämnare.",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Vi förenklar först varje term så att vi får variabeln enbart i täljaren eller enbart i nämnaren:",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "x delat med x i kvadrat plus 5 x är lika med x delat med x parentesen x plus 5 slut parentes som är lika med 1 delat med x plus 5 x i kubik plus 5 x delat med x i kvadrat som är lika med x i kubik delat med x i kvadrat plus 5 x delat med x i kvadrat som är lika med x plus 5 delat med x",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Detta ger",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "f av x är lika med 1 delat med x plus 5 minus parentesen x plus 5 delat med x slut parentes som är lika med 1 delat med x plus 5 minus x minus 5 delat med x",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Nu kan vi bestämma samtliga primitiva funktioner genom att integrera termvis:",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "F parentesen x slut parentes är lika med naturliga logaritmen av parentesen x plus 5 slut parentes minus x i kvadrat delat med 2 minus 5 naturliga logaritmen av x plus C",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Svar: a) 7 naturliga logaritmen av x plus 8 naturliga logaritmen av parentesen x minus 5 slut parentes plus C b) naturliga logaritmen av parentesen x plus 5 slut parentes minus x i kvadrat delat med 2 minus 5 naturliga logaritmen av x plus C",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Exempel 3 — från hastighet till sträcka",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "En raket skjuts rakt upp och ökar hastigheten enligt formeln v parentesen t slut parentes är lika med 3 plus 0,9 t i kvadrat , där t är tiden i sekunder efter uppskjutning.",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Raketen skjuts iväg 1,5 meter över marken.",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "På vilken höjd befinner sig raketen efter 4 sekunder?",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Vi ska bestämma höjden h utifrån formeln för hastighet.",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Höjden är en primitiv funktion till hastigheten, så vi börjar med att ta fram samtliga primitiva funktioner till hastighetsfunktionen:",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "h parentesen t slut parentes är lika med 3 t plus 0,9 t i kubik delat med 3 plus C som är lika med 3 t plus 0,3 t i kubik plus C, ekvation 1",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "För att bestämma konstanten C utnyttjar vi att raketen startar 1,5 meter över marken, alltså villkoret h, ekvation 0 är lika med 1,5 :",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "3 gånger 0 plus 0,3 gånger 0 i kubik plus C är lika med 1,5 vilket är ekvivalent med att C är lika med 1,5",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Insättning av C är lika med 1,5 i , ekvation 1 ger",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "h parentesen t slut parentes är lika med 3 t plus 0,3 t i kubik plus 1,5",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Nu sätter vi in tiden t är lika med 4 i formeln för höjden:",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "h, ekvation 4 är lika med 3 gånger 4 plus 0,3 gånger 4 i kubik plus 1,5 som är lika med 12 plus 19,2 plus 1,5 som är lika med 32,7",
+   "s": 284.39,
+   "e": 284.39
+  },
+  {
+   "t": "Svar: Efter 4 sekunder är raketen på höjden 32,7 meter .",
+   "s": 284.39,
+   "e": 284.39
+  }
+ ]
+}

@@ -1,0 +1,273 @@
+{
+ "id": "ma4-1.14",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "03f5595655505b28e3f2d03c2ee9b3dc97998bb6",
+ "dur": 349.28,
+ "segments": [
+  {
+   "t": "Grafen till y är lika med a sin x + b cos x",
+   "s": 0.1,
+   "e": 4.96
+  },
+  {
+   "t": "Om vi vill bestämma det största eller det minsta värdet till en funktion av typen y är lika med a sinus x plus b cosinus x underlättar det att först skriva om uttrycket som en enda trigonometrisk funktion.",
+   "s": 4.91,
+   "e": 16.59
+  },
+  {
+   "t": "Summan av en sinusterm och en cosinusterm är nämligen alltid en förskjuten sinuskurva.",
+   "s": 16.59,
+   "e": 22.89
+  },
+  {
+   "t": "Sammanslagning till en sinuskurva",
+   "s": 22.89,
+   "e": 26.18
+  },
+  {
+   "t": "y är lika med a sinus x plus b cosinus x som är lika med c sinus parentesen x plus v slut parentes",
+   "s": 26.18,
+   "e": 34.44
+  },
+  {
+   "t": "där amplituden är",
+   "s": 34.44,
+   "e": 37.08
+  },
+  {
+   "t": "c är lika med roten ur a i kvadrat plus b i kvadrat och tangens v som är lika med b delat med a",
+   "s": 37.08,
+   "e": 44.05
+  },
+  {
+   "t": "Eftersom kurvan är en oförskjuten sinusform i y -led (den svänger kring x -axeln) blir det största värdet c och det minsta värdet minus c .",
+   "s": 44.05,
+   "e": 53.16
+  },
+  {
+   "t": "Dra i glidarna nedan och se hur a och b tillsammans formar en enda sinuskurva.",
+   "s": 53.16,
+   "e": 59.23
+  },
+  {
+   "t": "Med a är lika med 5 och b är lika med 12 blir amplituden c är lika med roten ur 5 i kvadrat plus 12 i kvadrat som är lika med roten ur 169 som är lika med 13 — kurvan når som mest upp till 13 och som minst ner till minus 13 .",
+   "s": 59.23,
+   "e": 74.0
+  },
+  {
+   "t": "Exempel 1 — amplitud, största och minsta värde",
+   "s": 74.0,
+   "e": 78.47
+  },
+  {
+   "t": "Funktionen y är lika med 4 sinus x plus 3 cosinus x är given.",
+   "s": 78.47,
+   "e": 84.58
+  },
+  {
+   "t": "Bestäm dess. a) amplitud b) största värde c) minsta värde.",
+   "s": 84.58,
+   "e": 91.51
+  },
+  {
+   "t": "a) Vi jämför y är lika med 4 sinus x plus 3 cosinus x med y är lika med a sinus x plus b cosinus x och identifierar a är lika med 4 och b är lika med 3 .",
+   "s": 91.51,
+   "e": 103.22
+  },
+  {
+   "t": "Vi skriver om funktionen på formen y är lika med c sinus parentesen x plus v slut parentes :",
+   "s": 103.22,
+   "e": 121.51
+  },
+  {
+   "t": "c är lika med roten ur a i kvadrat plus b i kvadrat som är lika med roten ur 4 i kvadrat plus 3 i kvadrat som är lika med roten ur 16 plus 9 som är lika med roten ur 25 som är lika med 5",
+   "s": 103.22,
+   "e": 121.51
+  },
+  {
+   "t": "så y är lika med 5 sinus parentesen x plus v slut parentes .",
+   "s": 121.51,
+   "e": 127.6
+  },
+  {
+   "t": "Amplituden är absolutbeloppet av faktorn framför den trigonometriska funktionen, det vill säga | 5 | är lika med 5 .",
+   "s": 127.6,
+   "e": 135.24
+  },
+  {
+   "t": "Svar a): amplituden är 5",
+   "s": 135.24,
+   "e": 138.82
+  },
+  {
+   "t": "b) Det största värdet är detsamma som amplituden, eftersom funktionen inte är förskjuten i y -led.",
+   "s": 138.82,
+   "e": 145.99
+  },
+  {
+   "t": "Svar b): största värdet är 5",
+   "s": 145.99,
+   "e": 149.64
+  },
+  {
+   "t": "c) Det minsta värdet är det negativa värdet av amplituden.",
+   "s": 149.64,
+   "e": 154.66
+  },
+  {
+   "t": "Svar c): minsta värdet är minus 5",
+   "s": 154.66,
+   "e": 158.68
+  },
+  {
+   "t": "Exempel 2 — bestäm a för en given amplitud",
+   "s": 158.68,
+   "e": 162.76
+  },
+  {
+   "t": "Bestäm a så att funktionen y är lika med a sinus x plus 12 cosinus x får amplituden 13.",
+   "s": 162.76,
+   "e": 169.97
+  },
+  {
+   "t": "Vi skriver om funktionen så att den består av ett enda trigonometriskt uttryck enligt formeln ovan:",
+   "s": 169.97,
+   "e": 182.74
+  },
+  {
+   "t": "y är lika med roten ur a i kvadrat plus 12 i kvadrat gånger sinus parentesen x plus v slut parentes",
+   "s": 169.97,
+   "e": 182.74
+  },
+  {
+   "t": "Faktorn framför den trigonometriska funktionen, i detta fall roten ur a i kvadrat plus 12 i kvadrat , ger amplituden.",
+   "s": 182.74,
+   "e": 190.95
+  },
+  {
+   "t": "Den ska vara 13:",
+   "s": 190.95,
+   "e": 197.28
+  },
+  {
+   "t": "roten ur a i kvadrat plus 12 i kvadrat är lika med 13",
+   "s": 190.95,
+   "e": 197.28
+  },
+  {
+   "t": "Vi kvadrerar båda leden och löser ut a :",
+   "s": 197.28,
+   "e": 212.96
+  },
+  {
+   "t": "a i kvadrat plus 12 i kvadrat är lika med 13 i kvadrat vilket är ekvivalent med att a i kvadrat plus 144 är lika med 169 vilket är ekvivalent med att a i kvadrat är lika med 25",
+   "s": 197.28,
+   "e": 212.96
+  },
+  {
+   "t": "a är lika med plus minus roten ur 25 som är lika med plus minus 5",
+   "s": 212.96,
+   "e": 218.57
+  },
+  {
+   "t": "Svar: a är lika med plus minus 5",
+   "s": 218.57,
+   "e": 222.4
+  },
+  {
+   "t": "Exempel 3 — från förskjuten sinus till a sin x + b cos x",
+   "s": 222.4,
+   "e": 228.26
+  },
+  {
+   "t": "Låt f av x är lika med 4 sinus parentesen x plus pi delat med 6 slut parentes .",
+   "s": 228.26,
+   "e": 235.57
+  },
+  {
+   "t": "Ange funktionsuttrycket på formen f av x är lika med a sinus x plus b cosinus x där a, b är större än 0 .",
+   "s": 235.57,
+   "e": 244.14
+  },
+  {
+   "t": "Vi jämför uttrycket 4 sinus parentesen x plus pi delat med 6 slut parentes med c sinus parentesen x plus v slut parentes för att identifiera c och v .",
+   "s": 244.14,
+   "e": 255.68
+  },
+  {
+   "t": "Identifiering ger c är lika med 4 och v är lika med pi delat med 6 .",
+   "s": 255.68,
+   "e": 260.99
+  },
+  {
+   "t": "Nu använder vi de två sambanden baklänges.",
+   "s": 260.99,
+   "e": 265.11
+  },
+  {
+   "t": "Eftersom c är lika med roten ur a i kvadrat plus b i kvadrat ger detta",
+   "s": 265.11,
+   "e": 271.02
+  },
+  {
+   "t": "4 är lika med roten ur a i kvadrat plus b i kvadrat vilket är ekvivalent med att 16 är lika med a i kvadrat plus b i kvadrat, ekvation 1",
+   "s": 271.02,
+   "e": 281.0
+  },
+  {
+   "t": "Eftersom tangens v är lika med b delat med a ger detta",
+   "s": 281.0,
+   "e": 285.46
+  },
+  {
+   "t": "tangens parentesen pi delat med 6 slut parentes är lika med b delat med a vilket är ekvivalent med att 1 delat med roten ur 3 är lika med b delat med a, ekvation 2",
+   "s": 285.46,
+   "e": 296.34
+  },
+  {
+   "t": "Vi bildar ett ekvationssystem av ekvation 1 och ekvation 2.",
+   "s": 296.34,
+   "e": 301.41
+  },
+  {
+   "t": "Ur den undre ekvationen får vi a är lika med b roten ur 3 , som vi sätter in i den övre:",
+   "s": 301.41,
+   "e": 322.2
+  },
+  {
+   "t": "16 är lika med parentesen b roten ur 3 slut parentes i kvadrat plus b i kvadrat som är lika med 3 b i kvadrat plus b i kvadrat som är lika med 4 b i kvadrat vilket är ekvivalent med att b i kvadrat är lika med 4",
+   "s": 306.39,
+   "e": 322.2
+  },
+  {
+   "t": "b är lika med roten ur 4 som är lika med 2",
+   "s": 322.15,
+   "e": 326.25
+  },
+  {
+   "t": "(den negativa lösningen bortses eftersom b är större än 0 ).",
+   "s": 326.25,
+   "e": 331.14
+  },
+  {
+   "t": "Insättning av b är lika med 2 i a är lika med b roten ur 3 ger a är lika med 2 roten ur 3 .",
+   "s": 331.14,
+   "e": 338.33
+  },
+  {
+   "t": "Alltså:",
+   "s": 338.33,
+   "e": 349.28
+  },
+  {
+   "t": "f av x är lika med 2 roten ur 3 sinus x plus 2 cosinus x",
+   "s": 338.33,
+   "e": 349.28
+  },
+  {
+   "t": "Svar: f av x är lika med 2 roten ur 3 sinus x plus 2 cosinus x",
+   "s": 338.33,
+   "e": 349.28
+  }
+ ]
+}

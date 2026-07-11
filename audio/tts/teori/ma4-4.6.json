@@ -1,0 +1,278 @@
+{
+ "id": "ma4-4.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "ca605a87f1a8cf67897766d526640839173334f2",
+ "dur": 314.81,
+ "segments": [
+  {
+   "t": "Polär form",
+   "s": 0.1,
+   "e": 2.19
+  },
+  {
+   "t": "Ett komplext tal på formen z är lika med a plus b i kallas rektangulär form.",
+   "s": 2.14,
+   "e": 7.84
+  },
+  {
+   "t": "Vi har sett att ett komplext tal också kan representeras med en visare i det komplexa talplanet.",
+   "s": 7.84,
+   "e": 14.12
+  },
+  {
+   "t": "Visarens längd r är detsamma som absolutbeloppet av z , som skrivs | z | .",
+   "s": 14.12,
+   "e": 20.1
+  },
+  {
+   "t": "Absolutbelopp",
+   "s": 20.1,
+   "e": 22.36
+  },
+  {
+   "t": "| z | är lika med r som är lika med roten ur a i kvadrat plus b i kvadrat",
+   "s": 22.36,
+   "e": 28.31
+  },
+  {
+   "t": "Vinkeln v som visaren bildar mot den positiva reella axeln kallas argumentet för z och skrivs arg z .",
+   "s": 28.31,
+   "e": 35.76
+  },
+  {
+   "t": "Argumentet bestäms av tangens, men man måste tänka på i vilken kvadrant talet ligger.",
+   "s": 35.76,
+   "e": 41.95
+  },
+  {
+   "t": "Argument",
+   "s": 41.95,
+   "e": 43.94
+  },
+  {
+   "t": "arg z är lika med v tangens v som är lika med b delat med a",
+   "s": 43.94,
+   "e": 49.02
+  },
+  {
+   "t": "Om z ligger i första eller fjärde kvadranten ( a är större än 0 ) ger räknarens tangens upphöjt till minus 1 direkt rätt vinkel.",
+   "s": 49.02,
+   "e": 57.35
+  },
+  {
+   "t": "Ligger z i andra eller tredje kvadranten ( a är mindre än 0 ) måste man addera 180 grader (eller pi ) till räknarens svar för att hamna på rätt sida.",
+   "s": 57.35,
+   "e": 67.17
+  },
+  {
+   "t": "Komplexa tal kan beskrivas på en annan form än a plus b i , som gör att de blir lätta att tolka som visare med längd och vinkel — den så kallade polära formen.",
+   "s": 67.17,
+   "e": 76.45
+  },
+  {
+   "t": "Polär form",
+   "s": 76.45,
+   "e": 78.55
+  },
+  {
+   "t": "z är lika med r parentesen cosinus v plus i sinus v slut parentes",
+   "s": 78.55,
+   "e": 84.9
+  },
+  {
+   "t": "Sambanden mellan formerna följer direkt av den rätvinkliga triangel som visaren bildar med axlarna: a är lika med r cosinus v och b är lika med r sinus v .",
+   "s": 84.9,
+   "e": 94.6
+  },
+  {
+   "t": "Absolutbelopp och avstånd",
+   "s": 94.6,
+   "e": 97.55
+  },
+  {
+   "t": "Absolutbeloppet mäter också avstånd i talplanet.",
+   "s": 97.55,
+   "e": 101.78
+  },
+  {
+   "t": "På den reella tallinjen är | minus 3 minus 0 | är lika med | minus 3 | som är lika med 3 avståndet mellan minus 3 och 0 , och | minus 3 minus 1 | är lika med | minus 4 | som är lika med 4 avståndet mellan minus 3 och 1 .",
+   "s": 101.78,
+   "e": 114.92
+  },
+  {
+   "t": "På motsvarande sätt gäller i det komplexa talplanet:",
+   "s": 114.92,
+   "e": 120.89
+  },
+  {
+   "t": "Absolutbelopp och avstånd",
+   "s": 114.92,
+   "e": 120.89
+  },
+  {
+   "t": "| z minus w | är avståndet mellan z och w",
+   "s": 120.89,
+   "e": 127.84
+  },
+  {
+   "t": "Absolutbelopp och argument av en visare",
+   "s": 120.89,
+   "e": 127.84
+  },
+  {
+   "t": "Figuren nedan visar ett komplext tal z som en visare från origo.",
+   "s": 127.84,
+   "e": 133.2
+  },
+  {
+   "t": "Visarens längd är beloppet r är lika med | z | och vinkeln till den positiva reella axeln är argumentet v .",
+   "s": 133.2,
+   "e": 140.39
+  },
+  {
+   "t": "Exempel 1 — Från polär till rektangulär form",
+   "s": 140.39,
+   "e": 144.62
+  },
+  {
+   "t": "Ange 4 roten ur 2 parentesen cosinus 135 grader plus i sinus 135 grader slut parentes på formen a plus b i .",
+   "s": 144.62,
+   "e": 154.6
+  },
+  {
+   "t": "Vi utvecklar uttrycket genom att multiplicera in faktorn 4 roten ur 2 :",
+   "s": 154.6,
+   "e": 166.51
+  },
+  {
+   "t": "4 roten ur 2 cosinus 135 grader plus 4 roten ur 2 i sinus 135 grader",
+   "s": 154.6,
+   "e": 166.51
+  },
+  {
+   "t": "Från tabell har vi cosinus 135 grader är lika med minus 1 delat med roten ur 2 och sinus 135 grader är lika med 1 delat med roten ur 2 .",
+   "s": 166.51,
+   "e": 176.91
+  },
+  {
+   "t": "Insättning ger:",
+   "s": 176.91,
+   "e": 201.56
+  },
+  {
+   "t": "4 roten ur 2 gånger parentesen minus 1 delat med roten ur 2 slut parentes plus 4 roten ur 2 gånger 1 delat med roten ur 2 i är lika med minus 4 roten ur 2 delat med roten ur 2 plus 4 roten ur 2 delat med roten ur 2 i som är lika med minus 4 plus 4 i",
+   "s": 176.91,
+   "e": 201.56
+  },
+  {
+   "t": "Svar: minus 4 plus 4 i",
+   "s": 176.91,
+   "e": 201.56
+  },
+  {
+   "t": "Exempel 2 — Läs av en visare och skriv på polär form",
+   "s": 176.91,
+   "e": 201.56
+  },
+  {
+   "t": "En visare pekar mot punkten z är lika med 5 minus 4 i .",
+   "s": 201.56,
+   "e": 206.61
+  },
+  {
+   "t": "Ange z på polär form.",
+   "s": 206.61,
+   "e": 209.59
+  },
+  {
+   "t": "Vi jämför med formen z är lika med a plus b i och ser att a är lika med 5 och b är lika med minus 4 .",
+   "s": 209.59,
+   "e": 216.53
+  },
+  {
+   "t": "Talet ligger i fjärde kvadranten ( a är större än 0 ), så tangens upphöjt till minus 1 ger rätt vinkel direkt.",
+   "s": 216.53,
+   "e": 223.89
+  },
+  {
+   "t": "Beloppet:",
+   "s": 223.89,
+   "e": 241.19
+  },
+  {
+   "t": "r är lika med | z | som är lika med roten ur a i kvadrat plus b i kvadrat som är lika med roten ur 5 i kvadrat plus parentesen minus 4 slut parentes i kvadrat som är lika med roten ur 25 plus 16 som är lika med roten ur 41 som är ungefär lika med 6,4",
+   "s": 223.89,
+   "e": 241.19
+  },
+  {
+   "t": "Argumentet:",
+   "s": 241.19,
+   "e": 257.51
+  },
+  {
+   "t": "tangens v är lika med b delat med a som är lika med minus 4 delat med 5 vilket är ekvivalent med att v är lika med tangens upphöjt till minus 1 parentesen minus 4 delat med 5 slut parentes som är ungefär lika med minus 38,7 grader",
+   "s": 241.19,
+   "e": 257.51
+  },
+  {
+   "t": "Insättning av r är lika med roten ur 41 och v är ungefär lika med minus 38,7 grader i z är lika med r parentesen cosinus v plus i sinus v slut parentes ger:",
+   "s": 257.67,
+   "e": 259.86
+  },
+  {
+   "t": "z är lika med roten ur 41 parentesen cosinus parentesen minus 38,7 grader slut parentes plus i sinus parentesen minus 38,7 grader slut parentes slut parentes",
+   "s": 259.86,
+   "e": 259.86
+  },
+  {
+   "t": "Svar: z är lika med roten ur 41 parentesen cosinus parentesen minus 38,7 grader slut parentes plus i sinus parentesen minus 38,7 grader slut parentes slut parentes",
+   "s": 259.86,
+   "e": 259.86
+  },
+  {
+   "t": "Exempel 3 — Tolka en absolutbeloppsekvation som en cirkel",
+   "s": 259.81,
+   "e": 264.79
+  },
+  {
+   "t": "Markera i det komplexa talplanet de tal z för vilka | z plus parentesen minus 3 minus 2 i slut parentes | är lika med 2 .",
+   "s": 264.79,
+   "e": 273.62
+  },
+  {
+   "t": "För att underlätta tolkningen skriver vi om uttrycket i absolutbeloppet som en differens.",
+   "s": 273.62,
+   "e": 279.67
+  },
+  {
+   "t": "Vi bryter ut ett minustecken och skiftar tecken inuti parentesen:",
+   "s": 279.67,
+   "e": 288.74
+  },
+  {
+   "t": "| z minus parentesen 3 plus 2 i slut parentes | är lika med 2",
+   "s": 279.67,
+   "e": 288.74
+  },
+  {
+   "t": "Enligt sambandet för avstånd betyder | z minus w | avståndet mellan z och w .",
+   "s": 288.74,
+   "e": 295.38
+  },
+  {
+   "t": "Här är w är lika med 3 plus 2 i , så vi ska markera alla punkter vars avstånd till 3 plus 2 i är exakt 2 .",
+   "s": 295.38,
+   "e": 303.81
+  },
+  {
+   "t": "Det motsvarar en cirkel med medelpunkten i 3 plus 2 i och radien 2 .",
+   "s": 303.81,
+   "e": 309.41
+  },
+  {
+   "t": "Svar: en cirkel med medelpunkt 3 plus 2 i och radie 2",
+   "s": 309.41,
+   "e": 314.81
+  }
+ ]
+}

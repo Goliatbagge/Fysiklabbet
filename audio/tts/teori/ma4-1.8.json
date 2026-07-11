@@ -1,0 +1,318 @@
+{
+ "id": "ma4-1.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "63d1dda9981db4c5b75e1041d74a9dcc1beed10c",
+ "dur": 564.01,
+ "segments": [
+  {
+   "t": "Additions- och subtraktionsformler",
+   "s": 0.1,
+   "e": 3.31
+  },
+  {
+   "t": "Hittills har vi räknat ut sinus och cosinus för en enskild vinkel.",
+   "s": 3.26,
+   "e": 8.24
+  },
+  {
+   "t": "Ibland behöver vi i stället ett uttryck för sinus eller cosinus av en summa eller skillnad av två vinklar, u plus v respektive u minus v .",
+   "s": 8.24,
+   "e": 17.45
+  },
+  {
+   "t": "Ett vanligt missförstånd är att sinus parentesen u plus v slut parentes skulle vara sinus u plus sinus v — så är det inte.",
+   "s": 17.45,
+   "e": 25.89
+  },
+  {
+   "t": "I stället gäller additions- och subtraktionsformlerna nedan.",
+   "s": 25.89,
+   "e": 30.4
+  },
+  {
+   "t": "Additions- och subtraktionsformler",
+   "s": 30.4,
+   "e": 33.6
+  },
+  {
+   "t": "sinus parentesen u plus v slut parentes är lika med sinus u cosinus v plus cosinus u sinus v sinus parentesen u minus v slut parentes som är lika med sinus u cosinus v minus cosinus u sinus v cosinus parentesen u plus v slut parentes som är lika med cosinus u cosinus v minus sinus u sinus v cosinus parentesen u minus v slut parentes som är lika med cosinus u cosinus v plus sinus u sinus v",
+   "s": 33.6,
+   "e": 61.81
+  },
+  {
+   "t": "Lägg märke till teckenväxlingen: i sinusformlerna följer högerledets tecken med vänsterledets ( plus ger plus , minus ger minus ), medan cosinusformlerna byter tecken ( plus ger minus , minus ger plus ).",
+   "s": 61.81,
+   "e": 75.41
+  },
+  {
+   "t": "Bevis av subtraktionsformeln för cosinus",
+   "s": 75.41,
+   "e": 79.36
+  },
+  {
+   "t": "Formlerna kan bevisas geometriskt.",
+   "s": 79.36,
+   "e": 82.89
+  },
+  {
+   "t": "Vi visar subtraktionsformeln för cosinus, cosinus parentesen u minus v slut parentes ; de övriga bevisas på liknande sätt.",
+   "s": 82.89,
+   "e": 92.14
+  },
+  {
+   "t": "Vi markerar två godtyckliga vinklar u och v i enhetscirkeln, där u är större än v .",
+   "s": 92.14,
+   "e": 98.65
+  },
+  {
+   "t": "Vinkeln mellan motsvarande vinkelben blir då u minus v .",
+   "s": 98.65,
+   "e": 103.3
+  },
+  {
+   "t": "Punkterna där vinkelbenen träffar enhetscirkeln kallar vi P respektive Q , och sträckan mellan dem kallar vi P Q .",
+   "s": 103.3,
+   "e": 110.81
+  },
+  {
+   "t": "Eftersom radien är 1 har punkterna koordinaterna P är lika med parentesen cosinus v, sinus v slut parentes och Q är lika med parentesen cosinus u, sinus u slut parentes .",
+   "s": 110.81,
+   "e": 122.45
+  },
+  {
+   "t": "Idén är att skriva parentesen P Q slut parentes i kvadrat på två olika sätt och sedan sätta uttrycken lika med varandra.",
+   "s": 122.45,
+   "e": 130.81
+  },
+  {
+   "t": "Cosinussatsen c i kvadrat är lika med a i kvadrat plus b i kvadrat minus 2 a b cosinus C ger, med de två radierna 1 och mellanliggande vinkeln u minus v :",
+   "s": 130.81,
+   "e": 160.84
+  },
+  {
+   "t": "parentesen P Q slut parentes i kvadrat är lika med 1 i kvadrat plus 1 i kvadrat minus 2 gånger 1 gånger 1 gånger cosinus parentesen u minus v slut parentes parentesen P Q slut parentes i kvadrat som är lika med 2 minus 2 cosinus parentesen u minus v slut parentes, ekvation 1",
+   "s": 130.81,
+   "e": 160.84
+  },
+  {
+   "t": "Avståndsformeln d i kvadrat är lika med parentesen x två minus x ett slut parentes i kvadrat plus parentesen y två minus y ett slut parentes i kvadrat ger, med punkternas koordinater:",
+   "s": 160.84,
+   "e": 194.9
+  },
+  {
+   "t": "parentesen P Q slut parentes i kvadrat är lika med parentesen cosinus u minus cosinus v slut parentes i kvadrat plus parentesen sinus u minus sinus v slut parentes i kvadrat parentesen P Q slut parentes i kvadrat som är lika med cosinus i kvadrat u minus 2 cosinus u cosinus v plus cosinus i kvadrat v plus sinus i kvadrat u minus 2 sinus u sinus v plus sinus i kvadrat v parentesen P Q slut parentes i kvadrat som är lika med sinus i kvadrat u plus cosinus i kvadrat u plus sinus i kvadrat v plus cosinus i kvadrat v minus 2 cosinus u cosinus v minus 2 sinus u sinus v",
+   "s": 160.84,
+   "e": 213.2
+  },
+  {
+   "t": "Trigonometriska ettan ( sinus i kvadrat u plus cosinus i kvadrat u är lika med 1 och sinus i kvadrat v plus cosinus i kvadrat v är lika med 1 ) ger:",
+   "s": 213.2,
+   "e": 240.78
+  },
+  {
+   "t": "parentesen P Q slut parentes i kvadrat är lika med 1 plus 1 minus 2 cosinus u cosinus v minus 2 sinus u sinus v parentesen P Q slut parentes i kvadrat som är lika med 2 minus 2 cosinus u cosinus v minus 2 sinus u sinus v, ekvation 2",
+   "s": 213.2,
+   "e": 240.78
+  },
+  {
+   "t": "Sätter vi , ekvation 1 är lika med, ekvation 2 får vi:",
+   "s": 240.78,
+   "e": 254.61
+  },
+  {
+   "t": "2 minus 2 cosinus parentesen u minus v slut parentes är lika med 2 minus 2 cosinus u cosinus v minus 2 sinus u sinus v",
+   "s": 240.78,
+   "e": 254.61
+  },
+  {
+   "t": "Vi subtraherar 2 från båda led:",
+   "s": 254.61,
+   "e": 266.32
+  },
+  {
+   "t": "minus 2 cosinus parentesen u minus v slut parentes är lika med minus 2 cosinus u cosinus v minus 2 sinus u sinus v",
+   "s": 254.61,
+   "e": 266.32
+  },
+  {
+   "t": "och dividerar båda led med minus 2 :",
+   "s": 266.32,
+   "e": 279.12
+  },
+  {
+   "t": "cosinus parentesen u minus v slut parentes är lika med cosinus u cosinus v plus sinus u sinus v textbf parentesen v s b slut parentes",
+   "s": 266.32,
+   "e": 279.12
+  },
+  {
+   "t": "På liknande sätt kan man visa de övriga additions- och subtraktionsformlerna.",
+   "s": 279.12,
+   "e": 284.26
+  },
+  {
+   "t": "Formler för dubbla vinkeln",
+   "s": 284.26,
+   "e": 287.05
+  },
+  {
+   "t": "Om vi sätter v är lika med u i additionsformlerna får vi formler för den dubbla vinkeln 2 v .",
+   "s": 287.05,
+   "e": 295.34
+  },
+  {
+   "t": "De är användbara när ett uttryck innehåller både en vinkel och dess dubbel.",
+   "s": 295.29,
+   "e": 300.31
+  },
+  {
+   "t": "Sinus och cosinus för dubbla vinkeln",
+   "s": 300.31,
+   "e": 303.89
+  },
+  {
+   "t": "sinus 2 v är lika med 2 sinus v cosinus v, 4 p t cosinus 2 v som är lika med cosinus i kvadrat v minus sinus i kvadrat v cosinus 2 v som är lika med 2 cosinus i kvadrat v minus 1 cosinus 2 v som är lika med 1 minus 2 sinus i kvadrat v",
+   "s": 303.89,
+   "e": 321.28
+  },
+  {
+   "t": "Vi bevisar formeln för sinus 2 v med hjälp av additionsformeln för sinus:",
+   "s": 321.28,
+   "e": 339.93
+  },
+  {
+   "t": "sinus 2 v är lika med sinus parentesen v plus v slut parentes som är lika med sinus v cosinus v plus cosinus v sinus v som är lika med 2 sinus v cosinus v textbf parentesen v s b slut parentes",
+   "s": 321.28,
+   "e": 339.93
+  },
+  {
+   "t": "och formeln för cosinus 2 v med additionsformeln för cosinus:",
+   "s": 339.93,
+   "e": 359.76
+  },
+  {
+   "t": "cosinus 2 v är lika med cosinus parentesen v plus v slut parentes som är lika med cosinus v cosinus v minus sinus v sinus v som är lika med cosinus i kvadrat v minus sinus i kvadrat v textbf parentesen v s b slut parentes",
+   "s": 339.93,
+   "e": 359.76
+  },
+  {
+   "t": "De två sista formerna för cosinus 2 v får vi sedan genom att byta ut sinus i kvadrat v mot 1 minus cosinus i kvadrat v (eller tvärtom) med hjälp av trigonometriska ettan.",
+   "s": 359.76,
+   "e": 371.19
+  },
+  {
+   "t": "Exempel 1 — Förenkla ett uttryck",
+   "s": 371.19,
+   "e": 374.88
+  },
+  {
+   "t": "Förenkla sinus parentesen x plus 30 grader slut parentes minus sinus parentesen x minus 30 grader slut parentes .",
+   "s": 374.88,
+   "e": 383.86
+  },
+  {
+   "t": "Vi använder additions- och subtraktionsformeln för sinus på varje term.",
+   "s": 383.86,
+   "e": 389.1
+  },
+  {
+   "t": "Termerna med sinus x cosinus 30 grader tar ut varandra:",
+   "s": 389.1,
+   "e": 422.13
+  },
+  {
+   "t": "sinus parentesen x plus 30 grader slut parentes minus sinus parentesen x minus 30 grader slut parentes är lika med sinus x cosinus 30 grader plus cosinus x sinus 30 grader minus sinus x cosinus 30 grader plus cosinus x sinus 30 grader som är lika med 2 cosinus x sinus 30 grader som är lika med 2 cosinus x gånger 1 delat med 2 som är lika med cosinus x",
+   "s": 389.1,
+   "e": 422.13
+  },
+  {
+   "t": "Svar: cosinus x",
+   "s": 389.1,
+   "e": 422.13
+  },
+  {
+   "t": "Exempel 2 — Bestäm sin 75 grader exakt",
+   "s": 389.1,
+   "e": 422.13
+  },
+  {
+   "t": "Bestäm det exakta värdet av sinus 75 grader .",
+   "s": 422.13,
+   "e": 426.43
+  },
+  {
+   "t": "Vi saknar ett tabellvärde för 75 grader , men vi kan skriva 75 grader som en summa av två vinklar med kända värden: 45 grader och 30 grader .",
+   "s": 426.43,
+   "e": 436.44
+  },
+  {
+   "t": "Sedan använder vi additionsformeln för sinus.",
+   "s": 436.44,
+   "e": 440.48
+  },
+  {
+   "t": "sinus 75 grader är lika med sinus parentesen 45 grader plus 30 grader slut parentes som är lika med sinus 45 grader cosinus 30 grader plus cosinus 45 grader sinus 30 grader som är lika med 1 delat med roten ur 2 gånger roten ur 3 delat med 2 plus 1 delat med roten ur 2 gånger 1 delat med 2 som är lika med roten ur 3 plus 1 delat med 2 roten ur 2",
+   "s": 440.48,
+   "e": 464.25
+  },
+  {
+   "t": "Detta är ett exakt och förkortat svar.",
+   "s": 464.25,
+   "e": 467.55
+  },
+  {
+   "t": "Vill vi svara utan rottecken i nämnaren förlänger vi med roten ur 2 :",
+   "s": 467.55,
+   "e": 485.86
+  },
+  {
+   "t": "parentesen roten ur 3 plus 1 slut parentes roten ur 2 delat med 2 roten ur 2 gånger roten ur 2 är lika med roten ur 6 plus roten ur 2 delat med 2 gånger 2 som är lika med roten ur 6 plus roten ur 2 delat med 4",
+   "s": 467.55,
+   "e": 485.86
+  },
+  {
+   "t": "Svar: roten ur 3 plus 1 delat med 2 roten ur 2 eller roten ur 6 plus roten ur 2 delat med 4",
+   "s": 485.86,
+   "e": 494.03
+  },
+  {
+   "t": "Exempel 3 — Visa en identitet",
+   "s": 494.03,
+   "e": 497.68
+  },
+  {
+   "t": "Visa att sinus 2 x delat med 1 plus cosinus 2 x är lika med tangens x .",
+   "s": 497.68,
+   "e": 504.16
+  },
+  {
+   "t": "Vi utgår från vänsterledet (vänsterledet) och skriver om dubbla vinklarna med sinus 2 x är lika med 2 sinus x cosinus x och cosinus 2 x är lika med cosinus i kvadrat x minus sinus i kvadrat x :",
+   "s": 504.16,
+   "e": 528.85
+  },
+  {
+   "t": "vänsterledet är lika med sinus 2 x delat med 1 plus cosinus 2 x som är lika med 2 sinus x cosinus x delat med 1 plus cosinus i kvadrat x minus sinus i kvadrat x",
+   "s": 504.16,
+   "e": 528.85
+  },
+  {
+   "t": "Här ser det ut som att vi har fastnat.",
+   "s": 528.85,
+   "e": 531.96
+  },
+  {
+   "t": "Men om vi i stället använder formen cosinus 2 x är lika med 2 cosinus i kvadrat x minus 1 i nämnaren förkortas 1 :orna bort:",
+   "s": 531.96,
+   "e": 556.81
+  },
+  {
+   "t": "2 sinus x cosinus x delat med 1 plus 2 cosinus i kvadrat x minus 1 är lika med 2 sinus x cosinus x delat med 2 cosinus i kvadrat x som är lika med sinus x delat med cosinus x som är lika med tangens x som är lika med högerledet",
+   "s": 531.96,
+   "e": 556.81
+  },
+  {
+   "t": "Vänsterledet är alltså lika med högerledet, vilket skulle visas. (vsv)",
+   "s": 556.81,
+   "e": 564.01
+  }
+ ]
+}

@@ -1,0 +1,263 @@
+{
+ "id": "ma4-2.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "05bc8daf73d7670ecdb8ae871ba3c2dfb1dfbbbb",
+ "dur": 445.72,
+ "segments": [
+  {
+   "t": "Derivatans definition och deriveringsregler",
+   "s": 0.1,
+   "e": 3.99
+  },
+  {
+   "t": "Vi repeterar derivatans definition och deriveringsreglerna från Matematik 3.",
+   "s": 3.94,
+   "e": 9.7
+  },
+  {
+   "t": "Men först inför vi ett nytt skrivsätt för derivata och andraderivata.",
+   "s": 9.7,
+   "e": 14.8
+  },
+  {
+   "t": "Leibniz notation",
+   "s": 14.8,
+   "e": 17.32
+  },
+  {
+   "t": "y prim är lika med f prim parentesen x slut parentes som är lika med d y delat med d x y bis som är lika med f bis parentesen x slut parentes som är lika med d i kvadrat y delat med d x i kvadrat",
+   "s": 17.32,
+   "e": 32.64
+  },
+  {
+   "t": "Skrivsättet kallas Leibniz notation.",
+   "s": 32.64,
+   "e": 36.38
+  },
+  {
+   "t": "Uttrycket d y delat med d x utläses \"derivatan av y med avseende på x \".",
+   "s": 36.38,
+   "e": 43.95
+  },
+  {
+   "t": "Om y är lika med x i kubik så är derivatan y prim är lika med 3 x i kvadrat , vilket med Leibniz notation skrivs d y delat med d x är lika med 3 x i kvadrat .",
+   "s": 43.95,
+   "e": 56.04
+  },
+  {
+   "t": "Även om y prim är kortare har d y delat med d x flera fördelar:",
+   "s": 56.04,
+   "e": 63.33
+  },
+  {
+   "t": "Tydlighet.",
+   "s": 56.04,
+   "e": 63.33
+  },
+  {
+   "t": "Skrivsättet visar vilken variabel vi deriverar med avseende på.",
+   "s": 63.33,
+   "e": 68.38
+  },
+  {
+   "t": "Om en funktion beror på både x och t talar d y delat med d x om att det är förändringen i y när x förändras vi menar, medan d y delat med d t skulle betyda förändringen när t förändras.",
+   "s": 68.38,
+   "e": 82.39
+  },
+  {
+   "t": "Koppling till definitionen.",
+   "s": 82.39,
+   "e": 85.25
+  },
+  {
+   "t": "Derivatan definieras som gränsvärdet av ändringskvoten delta y delat med delta x när delta x går mot noll.",
+   "s": 85.25,
+   "e": 93.22
+  },
+  {
+   "t": "Notationen d y delat med d x påminner oss om detta ursprung: en kvot mellan två oändligt små förändringar.",
+   "s": 93.22,
+   "e": 101.89
+  },
+  {
+   "t": "Derivatans definition",
+   "s": 101.89,
+   "e": 104.65
+  },
+  {
+   "t": "Derivatan i en punkt är gränsvärdet av ändringskvoten, det vill säga lutningen på en sekant som dras allt närmare tangenten i punkten.",
+   "s": 104.65,
+   "e": 113.19
+  },
+  {
+   "t": "Derivatans definition",
+   "s": 113.19,
+   "e": 115.95
+  },
+  {
+   "t": "f prim parentesen a slut parentes är lika med gränsvärdet då h går mot 0 f av a plus h minus f av a delat med h eller f prim parentesen x slut parentes som är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h",
+   "s": 115.95,
+   "e": 137.84
+  },
+  {
+   "t": "Ändringskvoten f av a plus h minus f av a delat med h är lutningen på sekanten genom punkterna P och Q på kurvan.",
+   "s": 115.95,
+   "e": 137.84
+  },
+  {
+   "t": "När h går mot 0 glider Q in mot P och sekanten närmar sig kurvans tangent i P (streckad).",
+   "s": 137.84,
+   "e": 144.9
+  },
+  {
+   "t": "Sekantens lutning går då mot tangentens lutning — som är derivatans värde f prim parentesen a slut parentes .",
+   "s": 144.9,
+   "e": 152.49
+  },
+  {
+   "t": "Deriveringsregler",
+   "s": 152.49,
+   "e": 154.84
+  },
+  {
+   "t": "Nedan samlas de deriveringsregler vi behöver.",
+   "s": 154.84,
+   "e": 158.82
+  },
+  {
+   "t": "Ett polynom (uttryck med flera termer) deriveras term för term.",
+   "s": 158.82,
+   "e": 163.89
+  },
+  {
+   "t": "Sammanfattning — deriveringsregler",
+   "s": 163.89,
+   "e": 167.18
+  },
+  {
+   "t": "f av x är lika med x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n x upphöjt till n minus 1 f av x som är lika med k x upphöjt till n vilket ger att f prim parentesen x slut parentes är lika med n k x upphöjt till n minus 1 f av x som är lika med a parentesen konstant slut parentes vilket ger att f prim parentesen x slut parentes är lika med 0 f av x som är lika med k x vilket ger att f prim parentesen x slut parentes är lika med k f av x som är lika med g av x delat med a vilket ger att f prim parentesen x slut parentes är lika med g prim parentesen x slut parentes delat med a f av x som är lika med e upphöjt till x vilket ger att f prim parentesen x slut parentes är lika med e upphöjt till x f av x som är lika med e upphöjt till k x vilket ger att f prim parentesen x slut parentes är lika med k e upphöjt till k x f av x som är lika med a upphöjt till x vilket ger att f prim parentesen x slut parentes är lika med a upphöjt till x naturliga logaritmen av a",
+   "s": 167.18,
+   "e": 245.78
+  },
+  {
+   "t": "Innehåller en funktion en variabel under ett rottecken eller i en nämnare skriver vi först om termen som en potens och deriverar sedan som vanligt: roten ur x är lika med x upphöjt till 1 delat med 2 och 1 delat med x i kvadrat är lika med x upphöjt till minus 2 .",
+   "s": 230.03,
+   "e": 245.78
+  },
+  {
+   "t": "För att bestämma derivatans värde i en punkt x är lika med a deriverar vi först och sätter sedan in x är lika med a i derivatafunktionen.",
+   "s": 245.78,
+   "e": 254.3
+  },
+  {
+   "t": "Exempel 1 — Derivatans definition",
+   "s": 254.3,
+   "e": 258.01
+  },
+  {
+   "t": "Bestäm f prim parentesen x slut parentes för f av x är lika med x i kvadrat med derivatans definition.",
+   "s": 258.01,
+   "e": 265.79
+  },
+  {
+   "t": "Vi ställer upp derivatans definition och förenklar tills h kan förkortas bort.",
+   "s": 265.79,
+   "e": 271.32
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h som är lika med gränsvärdet då h går mot 0 parentesen x plus h slut parentes i kvadrat minus x i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 x i kvadrat plus 2 x h plus h i kvadrat minus x i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 2 x h plus h i kvadrat delat med h som är lika med gränsvärdet då h går mot 0 timmar parentesen 2 x plus h slut parentes delat med h som är lika med gränsvärdet då h går mot 0 parentesen 2 x plus h slut parentes som är lika med 2 x",
+   "s": 271.32,
+   "e": 318.88
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 2 x",
+   "s": 285.24,
+   "e": 318.88
+  },
+  {
+   "t": "Exempel 2 — Derivera och bestäm derivatans värde",
+   "s": 285.24,
+   "e": 322.36
+  },
+  {
+   "t": "Bestäm f prim, ekvation 4 då f av x är lika med x i kubik minus 4 roten ur x .",
+   "s": 322.36,
+   "e": 329.78
+  },
+  {
+   "t": "Vi skriver först om roten som en potens, roten ur x är lika med x upphöjt till 1 delat med 2 , och deriverar sedan term för term.",
+   "s": 329.78,
+   "e": 338.36
+  },
+  {
+   "t": "f av x är lika med x i kubik minus 4 x upphöjt till 1 delat med 2",
+   "s": 338.36,
+   "e": 344.59
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 x i kvadrat minus 4 gånger 1 delat med 2 x upphöjt till minus 1 delat med 2 som är lika med 3 x i kvadrat minus 2 x upphöjt till minus 1 delat med 2 som är lika med 3 x i kvadrat minus 2 delat med roten ur x",
+   "s": 344.59,
+   "e": 377.36
+  },
+  {
+   "t": "Sätt in x är lika med 4 i derivatafunktionen:",
+   "s": 344.59,
+   "e": 377.36
+  },
+  {
+   "t": "f prim, ekvation 4 är lika med 3 gånger 4 i kvadrat minus 2 delat med roten ur 4 som är lika med 48 minus 2 delat med 2 som är lika med 48 minus 1 som är lika med 47",
+   "s": 344.59,
+   "e": 377.36
+  },
+  {
+   "t": "Svar: f prim, ekvation 4 är lika med 47",
+   "s": 377.36,
+   "e": 382.19
+  },
+  {
+   "t": "Exempel 3 — Andraderivatan",
+   "s": 382.19,
+   "e": 385.42
+  },
+  {
+   "t": "Låt y är lika med e upphöjt till 3 x .",
+   "s": 385.42,
+   "e": 389.46
+  },
+  {
+   "t": "Bestäm d y delat med d x och d i kvadrat y delat med d x i kvadrat .",
+   "s": 389.46,
+   "e": 397.92
+  },
+  {
+   "t": "Vi deriverar y med avseende på x med regeln f av x är lika med e upphöjt till k x vilket ger att f prim parentesen x slut parentes är lika med k e upphöjt till k x , här med k är lika med 3 :",
+   "s": 397.92,
+   "e": 423.87
+  },
+  {
+   "t": "d y delat med d x är lika med 3 e upphöjt till 3 x",
+   "s": 397.92,
+   "e": 423.87
+  },
+  {
+   "t": "Andraderivatan d i kvadrat y delat med d x i kvadrat får vi genom att derivera d y delat med d x en gång till.",
+   "s": 397.92,
+   "e": 423.87
+  },
+  {
+   "t": "Koefficienten 3 följer med:",
+   "s": 423.87,
+   "e": 445.72
+  },
+  {
+   "t": "d i kvadrat y delat med d x i kvadrat är lika med 3 gånger 3 e upphöjt till 3 x som är lika med 9 e upphöjt till 3 x",
+   "s": 423.87,
+   "e": 445.72
+  },
+  {
+   "t": "Svar: d y delat med d x är lika med 3 e upphöjt till 3 x och d i kvadrat y delat med d x i kvadrat är lika med 9 e upphöjt till 3 x",
+   "s": 423.87,
+   "e": 445.72
+  }
+ ]
+}

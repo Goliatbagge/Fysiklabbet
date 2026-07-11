@@ -1,0 +1,208 @@
+{
+ "id": "ma4-4.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "35593e17a180cab2e9e0c649997304c84a61099c",
+ "dur": 286.04,
+ "segments": [
+  {
+   "t": "Potenser av komplexa tal och de Moivres formel",
+   "s": 0.1,
+   "e": 4.3
+  },
+  {
+   "t": "När vi har ett komplext tal som bas med en viss exponent har vi potenser av komplexa tal.",
+   "s": 4.25,
+   "e": 10.64
+  },
+  {
+   "t": "Att gång på gång multiplicera ihop ett tal i rektangulär form a plus b i blir snabbt oöverskådligt.",
+   "s": 10.64,
+   "e": 17.48
+  },
+  {
+   "t": "Är talet däremot skrivet i polär form finns en genväg: de Moivres formel.",
+   "s": 17.48,
+   "e": 23.07
+  },
+  {
+   "t": "Den bygger vidare på multiplikationsregeln från förra avsnittet — vid multiplikation multipliceras beloppen och adderas argumenten — och gäller för positiva heltalsexponenter.",
+   "s": 23.07,
+   "e": 33.73
+  },
+  {
+   "t": "de Moivres formel",
+   "s": 33.73,
+   "e": 36.33
+  },
+  {
+   "t": "z upphöjt till n är lika med bigl parentesen r parentesen cosinus v plus i sinus v slut parentes bigr slut parentes upphöjt till n som är lika med r upphöjt till n bigl parentesen cosinus n v plus i sinus n v bigr slut parentes",
+   "s": 36.33,
+   "e": 51.54
+  },
+  {
+   "t": "där n är ett positivt heltal.",
+   "s": 51.54,
+   "e": 54.8
+  },
+  {
+   "t": "I ord: upphöj beloppet till n och multiplicera argumentet med n .",
+   "s": 54.8,
+   "e": 60.29
+  },
+  {
+   "t": "Beloppet r blir alltså r upphöjt till n , och vinkeln v blir n v .",
+   "s": 60.29,
+   "e": 65.39
+  },
+  {
+   "t": "Härledning",
+   "s": 65.39,
+   "e": 67.4
+  },
+  {
+   "t": "Från förra avsnittet har vi formeln för multiplikation av två komplexa tal:",
+   "s": 67.4,
+   "e": 83.8
+  },
+  {
+   "t": "z gånger w är lika med | z | gånger | w | bigl parentesen cosinus parentesen u plus v slut parentes plus i sinus parentesen u plus v slut parentes bigr slut parentes",
+   "s": 67.4,
+   "e": 83.8
+  },
+  {
+   "t": "Om vi ersätter w med z (så att u är lika med v ) får vi kvadraten:",
+   "s": 83.8,
+   "e": 108.45
+  },
+  {
+   "t": "z gånger z är lika med z i kvadrat som är lika med | z | gånger | z | bigl parentesen cosinus parentesen v plus v slut parentes plus i sinus parentesen v plus v slut parentes bigr slut parentes som är lika med | z | i kvadrat bigl parentesen cosinus 2 v plus i sinus 2 v bigr slut parentes",
+   "s": 83.8,
+   "e": 108.45
+  },
+  {
+   "t": "På motsvarande sätt får vi för z i kubik genom att multiplicera med z en gång till:",
+   "s": 108.45,
+   "e": 135.54
+  },
+  {
+   "t": "z gånger z gånger z är lika med z i kubik som är lika med | z | gånger | z | gånger | z | bigl parentesen cosinus parentesen v plus v plus v slut parentes plus i sinus parentesen v plus v plus v slut parentes bigr slut parentes som är lika med | z | i kubik bigl parentesen cosinus 3 v plus i sinus 3 v bigr slut parentes",
+   "s": 108.45,
+   "e": 135.54
+  },
+  {
+   "t": "Generellt gäller då",
+   "s": 135.54,
+   "e": 138.03
+  },
+  {
+   "t": "z upphöjt till n är lika med | z | upphöjt till n bigl parentesen cosinus n v plus i sinus n v bigr slut parentes",
+   "s": 138.03,
+   "e": 146.62
+  },
+  {
+   "t": "och med | z | är lika med r får vi de Moivres formel:",
+   "s": 146.62,
+   "e": 160.38
+  },
+  {
+   "t": "z upphöjt till n är lika med r upphöjt till n bigl parentesen cosinus n v plus i sinus n v bigr slut parentes textbf parentesen v s b slut parentes",
+   "s": 146.62,
+   "e": 160.38
+  },
+  {
+   "t": "Exempel 1 — Beräkna en potens och förenkla",
+   "s": 160.38,
+   "e": 164.4
+  },
+  {
+   "t": "Beräkna z upphöjt till 4 för z är lika med 2 parentesen cosinus pi delat med 8 plus i sinus pi delat med 8 slut parentes .",
+   "s": 164.4,
+   "e": 174.03
+  },
+  {
+   "t": "Förenkla svaret så långt som möjligt.",
+   "s": 174.03,
+   "e": 177.4
+  },
+  {
+   "t": "Vi börjar med att identifiera n , r och v :",
+   "s": 177.4,
+   "e": 189.34
+  },
+  {
+   "t": "n är lika med 4 (graden), r som är lika med 2 (absolutbeloppet), v som är lika med pi delat med 8 (argumentet)",
+   "s": 177.4,
+   "e": 189.34
+  },
+  {
+   "t": "Insättning i de Moivres formel z upphöjt till n är lika med r upphöjt till n parentesen cosinus n v plus i sinus n v slut parentes ger:",
+   "s": 189.34,
+   "e": 215.15
+  },
+  {
+   "t": "z upphöjt till 4 är lika med 2 upphöjt till 4 parentesen cosinus 4 gånger pi delat med 8 plus i sinus 4 gånger pi delat med 8 slut parentes som är lika med 16 parentesen cosinus pi delat med 2 plus i sinus pi delat med 2 slut parentes",
+   "s": 189.34,
+   "e": 215.15
+  },
+  {
+   "t": "Eftersom cosinus pi delat med 2 är lika med 0 och sinus pi delat med 2 är lika med 1 får vi:",
+   "s": 215.15,
+   "e": 232.64
+  },
+  {
+   "t": "z upphöjt till 4 är lika med 16 parentesen 0 plus i slut parentes som är lika med 16 i",
+   "s": 215.15,
+   "e": 232.64
+  },
+  {
+   "t": "Svar: z upphöjt till 4 är lika med 16 i",
+   "s": 215.15,
+   "e": 232.64
+  },
+  {
+   "t": "Exempel 2 — Svar på formen a + bi",
+   "s": 215.15,
+   "e": 232.64
+  },
+  {
+   "t": "Låt z är lika med cosinus 10 grader plus i sinus 10 grader .",
+   "s": 232.64,
+   "e": 238.21
+  },
+  {
+   "t": "Beräkna z upphöjt till 27 och ange resultatet på formen a plus b i .",
+   "s": 238.21,
+   "e": 244.06
+  },
+  {
+   "t": "Vi identifierar n , r och v enligt n är lika med 27 , r är lika med 1 och v är lika med 10 grader .",
+   "s": 244.06,
+   "e": 252.06
+  },
+  {
+   "t": "Insättning i de Moivres formel ger:",
+   "s": 252.06,
+   "e": 269.26
+  },
+  {
+   "t": "z upphöjt till 27 är lika med 1 upphöjt till 27 bigl parentesen cosinus 27 gånger 10 grader plus i sinus 27 gånger 10 grader bigr slut parentes som är lika med cosinus 270 grader plus i sinus 270 grader",
+   "s": 252.06,
+   "e": 269.26
+  },
+  {
+   "t": "Eftersom cosinus 270 grader är lika med 0 och sinus 270 grader är lika med minus 1 blir:",
+   "s": 269.26,
+   "e": 286.04
+  },
+  {
+   "t": "z upphöjt till 27 är lika med 0 plus i gånger parentesen minus 1 slut parentes som är lika med minus i",
+   "s": 269.26,
+   "e": 286.04
+  },
+  {
+   "t": "Svar: minus i , alternativt 0 minus i",
+   "s": 269.26,
+   "e": 286.04
+  }
+ ]
+}

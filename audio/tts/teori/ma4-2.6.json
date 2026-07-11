@@ -1,0 +1,248 @@
+{
+ "id": "ma4-2.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7456e91f320d0a600aa7210099f6ec65e652c45f",
+ "dur": 365.01,
+ "segments": [
+  {
+   "t": "Derivatan av exponential- och logaritmfunktioner",
+   "s": 0.1,
+   "e": 4.46
+  },
+  {
+   "t": "Vi går igenom ytterligare ett sätt att skriva derivata på.",
+   "s": 4.41,
+   "e": 8.84
+  },
+  {
+   "t": "Om en funktion f av x ska deriveras kan det skrivas D parentesen f av x slut parentes och betyder alltså samma sak som f prim parentesen x slut parentes .",
+   "s": 8.84,
+   "e": 20.15
+  },
+  {
+   "t": "Fördelen med detta skrivsätt är att det är effektivt eftersom uttrycket som ska deriveras kan sättas in direkt.",
+   "s": 20.15,
+   "e": 27.26
+  },
+  {
+   "t": "Till exempel: D parentesen 3 x i kvadrat slut parentes är lika med 6 x eller D parentesen x i kvadrat minus 5 x plus 3 slut parentes är lika med 2 x minus 5 .",
+   "s": 27.26,
+   "e": 40.74
+  },
+  {
+   "t": "En funktion där variabeln finns i exponenten kallas exponentialfunktion.",
+   "s": 40.74,
+   "e": 46.4
+  },
+  {
+   "t": "Deriveringsreglerna för dessa härledde vi i Matematik 3.",
+   "s": 46.4,
+   "e": 50.9
+  },
+  {
+   "t": "Derivatan av exponentialfunktioner",
+   "s": 50.9,
+   "e": 54.56
+  },
+  {
+   "t": "D parentesen e upphöjt till k x slut parentes är lika med k e upphöjt till k x D parentesen a upphöjt till x slut parentes som är lika med naturliga logaritmen av a gånger a upphöjt till x",
+   "s": 54.56,
+   "e": 68.04
+  },
+  {
+   "t": "En funktion där variabeln finns i en logaritm kallas logaritmfunktion.",
+   "s": 68.04,
+   "e": 73.34
+  },
+  {
+   "t": "Derivatan av logaritmfunktionen y är lika med ln x",
+   "s": 73.34,
+   "e": 84.88
+  },
+  {
+   "t": "D parentesen naturliga logaritmen av x slut parentes är lika med 1 delat med x där x är större än 0",
+   "s": 73.34,
+   "e": 84.88
+  },
+  {
+   "t": "Härledning — derivatan av logaritmfunktionen y är lika med ln x",
+   "s": 84.88,
+   "e": 90.53
+  },
+  {
+   "t": "Vi vill bestämma derivatan till y är lika med naturliga logaritmen av x , det vill säga D parentesen naturliga logaritmen av x slut parentes .",
+   "s": 90.53,
+   "e": 100.5
+  },
+  {
+   "t": "Vi gör det med hjälp av derivatan till y är lika med x , det vill säga D parentesen x slut parentes .",
+   "s": 100.5,
+   "e": 108.33
+  },
+  {
+   "t": "Om vi skriver om x med basen e , så gäller",
+   "s": 108.33,
+   "e": 112.4
+  },
+  {
+   "t": "x är lika med e upphöjt till naturliga logaritmen av x",
+   "s": 112.4,
+   "e": 117.25
+  },
+  {
+   "t": "Alltså gäller",
+   "s": 117.25,
+   "e": 119.24
+  },
+  {
+   "t": "D parentesen x slut parentes är lika med D parentesen e upphöjt till naturliga logaritmen av x slut parentes",
+   "s": 119.24,
+   "e": 128.3
+  },
+  {
+   "t": "Vi använder kedjeregeln för det högra ledet och får",
+   "s": 128.3,
+   "e": 132.47
+  },
+  {
+   "t": "D parentesen x slut parentes är lika med e upphöjt till naturliga logaritmen av x gånger D parentesen naturliga logaritmen av x slut parentes",
+   "s": 132.47,
+   "e": 143.25
+  },
+  {
+   "t": "Insättning av D parentesen x slut parentes är lika med 1 och e upphöjt till naturliga logaritmen av x är lika med x ger",
+   "s": 143.25,
+   "e": 152.49
+  },
+  {
+   "t": "1 är lika med x gånger D parentesen naturliga logaritmen av x slut parentes",
+   "s": 152.49,
+   "e": 159.18
+  },
+  {
+   "t": "Vi löser ut D parentesen naturliga logaritmen av x slut parentes och får",
+   "s": 159.18,
+   "e": 165.96
+  },
+  {
+   "t": "D parentesen naturliga logaritmen av x slut parentes är lika med 1 delat med x textbf parentesen v s b slut parentes",
+   "s": 165.96,
+   "e": 175.41
+  },
+  {
+   "t": "Exempel 1 — Derivera med D-notation",
+   "s": 175.41,
+   "e": 179.75
+  },
+  {
+   "t": "Bestäm. a) D parentesen e upphöjt till 3 x slut parentes b) d delat med d x parentesen 5 naturliga logaritmen av x slut parentes c) d delat med d t parentesen naturliga logaritmen av t upphöjt till 4 slut parentes .",
+   "s": 179.75,
+   "e": 199.82
+  },
+  {
+   "t": "a) När vi deriverar en exponentialfunktion med basen e är derivatan densamma multiplicerad med den inre derivatan till exponenten.",
+   "s": 199.82,
+   "e": 209.06
+  },
+  {
+   "t": "Här är den inre derivatan 3 :",
+   "s": 209.06,
+   "e": 227.54
+  },
+  {
+   "t": "D parentesen e upphöjt till 3 x slut parentes är lika med e upphöjt till 3 x gånger 3 som är lika med 3 e upphöjt till 3 x",
+   "s": 209.06,
+   "e": 227.54
+  },
+  {
+   "t": "b) Operatorn d delat med d x betyder att vi ska derivera det efterföljande uttrycket med avseende på x .",
+   "s": 209.06,
+   "e": 227.54
+  },
+  {
+   "t": "Eftersom derivatan till naturliga logaritmen av x är 1 delat med x gäller",
+   "s": 227.54,
+   "e": 233.26
+  },
+  {
+   "t": "d delat med d x parentesen 5 naturliga logaritmen av x slut parentes är lika med 5 gånger 1 delat med x som är lika med 5 delat med x",
+   "s": 233.26,
+   "e": 250.31
+  },
+  {
+   "t": "c) Här har vi en yttre funktion naturliga logaritmen av z där z är lika med t upphöjt till 4 är den inre funktionen.",
+   "s": 233.26,
+   "e": 250.31
+  },
+  {
+   "t": "Kedjeregeln ger",
+   "s": 250.31,
+   "e": 252.78
+  },
+  {
+   "t": "d delat med d t parentesen naturliga logaritmen av t upphöjt till 4 slut parentes är lika med 1 delat med t upphöjt till 4 gånger 4 t i kubik som är lika med 4 t i kubik delat med t upphöjt till 4 som är lika med 4 delat med t",
+   "s": 252.78,
+   "e": 276.98
+  },
+  {
+   "t": "Svar: a) 3 e upphöjt till 3 x b) 5 delat med x c) 4 delat med t",
+   "s": 252.78,
+   "e": 276.98
+  },
+  {
+   "t": "Exempel 2 — Kedjeregeln i flera steg",
+   "s": 252.78,
+   "e": 276.98
+  },
+  {
+   "t": "Derivera. a) y är lika med naturliga logaritmen av parentesen 3 x minus 4 slut parentes i kvadrat b) y är lika med e upphöjt till sinus x .",
+   "s": 276.98,
+   "e": 289.07
+  },
+  {
+   "t": "a) Här har vi en yttre funktion naturliga logaritmen av z där z är lika med parentesen 3 x minus 4 slut parentes i kvadrat är den inre funktionen.",
+   "s": 289.07,
+   "e": 299.74
+  },
+  {
+   "t": "Observera att när vi deriverar den inre funktionen parentesen 3 x minus 4 slut parentes i kvadrat så har den i sin tur en inre funktion parentesen 3 x minus 4 slut parentes .",
+   "s": 299.74,
+   "e": 313.61
+  },
+  {
+   "t": "Vi kommer alltså att få en inre derivata till en inre derivata.",
+   "s": 313.56,
+   "e": 318.08
+  },
+  {
+   "t": "Kedjeregeln ger",
+   "s": 318.08,
+   "e": 320.51
+  },
+  {
+   "t": "y prim är lika med 1 delat med parentesen 3 x minus 4 slut parentes i kvadrat gånger 2 parentesen 3 x minus 4 slut parentes gånger 3",
+   "s": 320.51,
+   "e": 331.03
+  },
+  {
+   "t": "y prim är lika med 6 parentesen 3 x minus 4 slut parentes delat med parentesen 3 x minus 4 slut parentes i kvadrat som är lika med 6 delat med 3 x minus 4",
+   "s": 331.03,
+   "e": 343.26
+  },
+  {
+   "t": "b) Vi deriverar en yttre funktion e upphöjt till z där z är lika med sinus x är den inre funktionen:",
+   "s": 343.26,
+   "e": 365.01
+  },
+  {
+   "t": "y prim är lika med e upphöjt till sinus x gånger cosinus x som är lika med cosinus x gånger e upphöjt till sinus x",
+   "s": 343.26,
+   "e": 365.01
+  },
+  {
+   "t": "Svar: a) y prim är lika med 6 delat med 3 x minus 4 b) y prim är lika med cosinus x gånger e upphöjt till sinus x",
+   "s": 343.26,
+   "e": 365.01
+  }
+ ]
+}

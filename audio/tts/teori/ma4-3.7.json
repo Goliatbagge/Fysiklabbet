@@ -1,0 +1,263 @@
+{
+ "id": "ma4-3.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "242cff4db012c05dd83f988a187315a9187f09b8",
+ "dur": 387.39,
+ "segments": [
+  {
+   "t": "Rotationskroppar",
+   "s": 0.1,
+   "e": 2.46
+  },
+  {
+   "t": "Tänk dig att du har en svarv.",
+   "s": 2.41,
+   "e": 5.17
+  },
+  {
+   "t": "Du sätter fast en träbit och låter den snurra snabbt runt sin egen axel samtidigt som du formar den.",
+   "s": 5.17,
+   "e": 11.55
+  },
+  {
+   "t": "Resultatet blir ett objekt som är helt symmetriskt och runt — som en schackpjäs, en vas eller ett stolsben.",
+   "s": 11.55,
+   "e": 18.81
+  },
+  {
+   "t": "Alla dessa är exempel på rotationskroppar.",
+   "s": 18.81,
+   "e": 22.59
+  },
+  {
+   "t": "En tredimensionell figur som skapas genom att rotera en tvådimensionell kurva eller ett område runt en rotationsaxel (vanligtvis x - eller y -axeln) kallas en rotationskropp.",
+   "s": 22.59,
+   "e": 33.94
+  },
+  {
+   "t": "En metod för att bestämma volymen av dessa kroppar är att med integraler summera oändligt tunna skivor, vilket kallas skivmetoden.",
+   "s": 33.94,
+   "e": 42.04
+  },
+  {
+   "t": "Härledning — skivmetoden vid rotation kring x-axeln",
+   "s": 42.04,
+   "e": 46.65
+  },
+  {
+   "t": "Vi utgår från en funktion y är lika med f av x och området mellan grafen och x -axeln i ett intervall a är mindre än eller lika med x är mindre än eller lika med b .",
+   "s": 46.65,
+   "e": 56.83
+  },
+  {
+   "t": "När vi roterar det området ett helt varv runt x -axeln sveper det ut en rotationskropp.",
+   "s": 56.83,
+   "e": 62.94
+  },
+  {
+   "t": "Vi delar in kroppen i skivor.",
+   "s": 62.94,
+   "e": 66.03
+  },
+  {
+   "t": "Varje skiva kan ses som en cylinder med radien r är lika med y och höjden h är lika med delta x .",
+   "s": 66.03,
+   "e": 72.86
+  },
+  {
+   "t": "Volymen för en skiva blir då basytan (cirkeln) gånger höjden:",
+   "s": 72.86,
+   "e": 92.76
+  },
+  {
+   "t": "V s k i v a är lika med pi r i kvadrat h som är lika med pi gånger y i kvadrat gånger delta x",
+   "s": 72.86,
+   "e": 92.76
+  },
+  {
+   "t": "Volymen för hela kroppen V blir summan av volymen för alla dessa skivor:",
+   "s": 72.86,
+   "e": 92.76
+  },
+  {
+   "t": "V är lika med sum x som är lika med a upphöjt till b pi gånger y i kvadrat gånger delta x",
+   "s": 72.86,
+   "e": 92.76
+  },
+  {
+   "t": "För att få den exakta volymen låter vi höjden delta x på varje skiva bli oändligt liten ( d x ) och summerar ett oändligt antal skivor med en integral.",
+   "s": 92.76,
+   "e": 103.09
+  },
+  {
+   "t": "Då blir V s k i v a är lika med pi gånger y i kvadrat d x och summan övergår i:",
+   "s": 103.09,
+   "e": 121.2
+  },
+  {
+   "t": "V är lika med integralen av a upphöjt till b pi gånger y i kvadrat d x som är lika med pi integralen av a upphöjt till b y i kvadrat d x",
+   "s": 103.09,
+   "e": 121.2
+  },
+  {
+   "t": "Volym vid rotation kring x-axeln",
+   "s": 103.09,
+   "e": 121.2
+  },
+  {
+   "t": "När en funktion y är lika med f av x roterar runt x -axeln i intervallet a är mindre än eller lika med x är mindre än eller lika med b , beräknas volymen V med formeln V är lika med pi integralen av a upphöjt till b y i kvadrat d x",
+   "s": 121.2,
+   "e": 139.6
+  },
+  {
+   "t": "Svaret anges ofta i volymenheter (volymenheter).",
+   "s": 121.2,
+   "e": 139.6
+  },
+  {
+   "t": "Ibland får du inte veta intervallet (start och stopp).",
+   "s": 139.6,
+   "e": 143.95
+  },
+  {
+   "t": "Då måste du oftast räkna ut var kurvan skär x -axeln för att hitta dina integrationsgränser.",
+   "s": 143.95,
+   "e": 150.31
+  },
+  {
+   "t": "Exempel 1 — Volym då intervallet inte är givet",
+   "s": 150.31,
+   "e": 154.76
+  },
+  {
+   "t": "Området som begränsas av kurvan y är lika med 3 x minus x i kvadrat och x -axeln roterar runt x -axeln.",
+   "s": 154.76,
+   "e": 162.74
+  },
+  {
+   "t": "Beräkna rotationskroppens volym.",
+   "s": 162.74,
+   "e": 166.07
+  },
+  {
+   "t": "Vi börjar med att hitta integrationsgränserna.",
+   "s": 166.07,
+   "e": 169.79
+  },
+  {
+   "t": "Eftersom området begränsas av x -axeln ger funktionens nollställen (skärningarna med x -axeln) gränserna:",
+   "s": 169.79,
+   "e": 184.96
+  },
+  {
+   "t": "3 x minus x i kvadrat är lika med 0 vilket är ekvivalent med att x parentesen 3 minus x slut parentes är lika med 0",
+   "s": 169.79,
+   "e": 184.96
+  },
+  {
+   "t": "Nollproduktmetoden ger x ett är lika med 0 och x två är lika med 3 , så integrationsgränserna är x är lika med 0 och x är lika med 3 .",
+   "s": 184.96,
+   "e": 194.39
+  },
+  {
+   "t": "Insättning i V är lika med pi integralen av a upphöjt till b y i kvadrat d x ger",
+   "s": 194.39,
+   "e": 201.59
+  },
+  {
+   "t": "V är lika med pi integralen av noll i kubik parentesen 3 x minus x i kvadrat slut parentes i kvadrat d x",
+   "s": 201.59,
+   "e": 210.64
+  },
+  {
+   "t": "Vi använder kvadreringsregeln och därefter integralkalkylens fundamentalsats:",
+   "s": 210.64,
+   "e": 245.38
+  },
+  {
+   "t": "V är lika med pi integralen av noll i kubik parentesen 9 x i kvadrat minus 6 x i kubik plus x upphöjt till 4 slut parentes d x som är lika med pi 9 x i kubik delat med 3 minus 6 x upphöjt till 4 delat med 4 plus x upphöjt till 5 delat med 5 noll i kubik, 4 p t som är lika med pi 3 x i kubik minus 3 x upphöjt till 4 delat med 2 plus x upphöjt till 5 delat med 5 noll i kubik som är lika med pi parentesen 3 gånger 3 i kubik minus 3 gånger 3 upphöjt till 4 delat med 2 plus 3 upphöjt till 5 delat med 5 slut parentes, 4 p t som är lika med pi parentesen 81 minus 243 delat med 2 plus 243 delat med 5 slut parentes som är lika med pi gånger 810 minus 1 215 plus 486 delat med 10 som är lika med pi gånger 81 delat med 10 som är lika med 8,1 pi",
+   "s": 210.64,
+   "e": 272.23
+  },
+  {
+   "t": "Svar: 8,1 pi är ungefär lika med 25,4 volymenheter",
+   "s": 272.23,
+   "e": 278.19
+  },
+  {
+   "t": "Exempel 2 — Rotation av kvadratrotskurvan",
+   "s": 278.19,
+   "e": 282.34
+  },
+  {
+   "t": "Området mellan kurvan y är lika med roten ur x och x -axeln, från x är lika med 0 till x är lika med 4 , roterar runt x -axeln.",
+   "s": 282.34,
+   "e": 293.94
+  },
+  {
+   "t": "Beräkna rotationskroppens volym.",
+   "s": 293.89,
+   "e": 297.23
+  },
+  {
+   "t": "Här är intervallet givet, a är lika med 0 och b är lika med 4 .",
+   "s": 297.23,
+   "e": 302.45
+  },
+  {
+   "t": "Eftersom y i kvadrat är lika med parentesen roten ur x slut parentes i kvadrat som är lika med x blir integralen enkel:",
+   "s": 302.45,
+   "e": 329.5
+  },
+  {
+   "t": "V är lika med pi integralen av noll upphöjt till 4 parentesen roten ur x slut parentes i kvadrat d x som är lika med pi integralen av noll upphöjt till 4 x d x som är lika med pi x i kvadrat delat med 2 noll upphöjt till 4 som är lika med pi gånger 16 delat med 2 som är lika med 8 pi",
+   "s": 302.45,
+   "e": 329.5
+  },
+  {
+   "t": "Svar: 8 pi är ungefär lika med 25,1 volymenheter",
+   "s": 329.5,
+   "e": 334.88
+  },
+  {
+   "t": "Exempel 3 — En kon",
+   "s": 334.88,
+   "e": 337.74
+  },
+  {
+   "t": "Området mellan linjen y är lika med x , x -axeln och linjen x är lika med 3 roterar runt x -axeln.",
+   "s": 337.74,
+   "e": 345.44
+  },
+  {
+   "t": "Beräkna rotationskroppens volym.",
+   "s": 345.44,
+   "e": 348.76
+  },
+  {
+   "t": "Rotationskroppen är en kon med basradien r är lika med 3 och höjden h är lika med 3 .",
+   "s": 348.76,
+   "e": 354.89
+  },
+  {
+   "t": "Med y i kvadrat är lika med x i kvadrat får vi",
+   "s": 354.89,
+   "e": 359.14
+  },
+  {
+   "t": "V är lika med pi integralen av noll i kubik x i kvadrat d x som är lika med pi x i kubik delat med 3 noll i kubik som är lika med pi gånger 27 delat med 3 som är lika med 9 pi",
+   "s": 359.14,
+   "e": 371.09
+  },
+  {
+   "t": "Kontroll med den kända konvolymen V är lika med pi r i kvadrat h delat med 3 som är lika med pi gånger 3 i kvadrat gånger 3 delat med 3 som är lika med 9 pi — samma svar.",
+   "s": 371.09,
+   "e": 381.8
+  },
+  {
+   "t": "Svar: 9 pi är ungefär lika med 28,3 volymenheter",
+   "s": 381.8,
+   "e": 387.39
+  }
+ ]
+}

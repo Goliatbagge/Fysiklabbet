@@ -1,0 +1,238 @@
+{
+ "id": "ma4-3.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "31299931e0a44101f6ccad37bbe9ad5e30241f55",
+ "dur": 336.65,
+ "segments": [
+  {
+   "t": "Mer om rotationskroppar (rotation kring y-axeln)",
+   "s": 0.1,
+   "e": 4.86
+  },
+  {
+   "t": "Vi har tidigare lärt oss att beräkna volymen av en kropp som uppstår när en funktion roterar kring x -axeln.",
+   "s": 4.81,
+   "e": 11.84
+  },
+  {
+   "t": "Då tänkte vi oss att volymen bestod av massor av tunna, stående skivor staplade på rad längs x -axeln.",
+   "s": 11.84,
+   "e": 19.25
+  },
+  {
+   "t": "Vi kan även beräkna volymer genom att rotera en kurva kring y -axeln.",
+   "s": 19.25,
+   "e": 24.35
+  },
+  {
+   "t": "Skillnaden är att kurvans x -värde (i stället för y -värdet) ger radien för varje skiva, att tjockleken på skivan motsvaras av d y (i stället för d x ) och att integrationen sker längs y -axeln (i stället för längs x -axeln).",
+   "s": 24.35,
+   "e": 40.1
+  },
+  {
+   "t": "Härledning — skivmetoden vid rotation kring y-axeln",
+   "s": 40.1,
+   "e": 44.62
+  },
+  {
+   "t": "Vi delar in kroppen i tunna skivor vinkelräta mot y -axeln.",
+   "s": 44.62,
+   "e": 49.51
+  },
+  {
+   "t": "Varje skiva kan ses som en cylinder med radien r är lika med x (kurvans x -värde) och höjden h är lika med delta y .",
+   "s": 49.51,
+   "e": 57.88
+  },
+  {
+   "t": "Volymen för en skiva blir då basytan (en cirkel) gånger höjden:",
+   "s": 57.88,
+   "e": 78.21
+  },
+  {
+   "t": "V s k i v a är lika med pi gånger r i kvadrat gånger h som är lika med pi gånger x i kvadrat gånger delta y",
+   "s": 57.88,
+   "e": 78.21
+  },
+  {
+   "t": "Volymen för hela kroppen V blir summan av volymen för alla skivorna:",
+   "s": 57.88,
+   "e": 78.21
+  },
+  {
+   "t": "V är lika med sum y som är lika med a upphöjt till b pi gånger x i kvadrat gånger delta y",
+   "s": 57.88,
+   "e": 78.21
+  },
+  {
+   "t": "För att få den exakta volymen låter vi höjden delta y på varje skiva bli oändligt liten ( d y ) och summerar med en integral.",
+   "s": 78.21,
+   "e": 87.09
+  },
+  {
+   "t": "Detta ger:",
+   "s": 87.09,
+   "e": 100.24
+  },
+  {
+   "t": "V är lika med integralen av a upphöjt till b pi gånger x i kvadrat d y som är lika med pi integralen av a upphöjt till b x i kvadrat d y",
+   "s": 87.09,
+   "e": 100.24
+  },
+  {
+   "t": "Volym vid rotation kring y-axeln",
+   "s": 87.09,
+   "e": 100.24
+  },
+  {
+   "t": "När en funktion y är lika med f av x roterar runt y -axeln i intervallet a är mindre än eller lika med y är mindre än eller lika med b beräknas volymen V med formeln",
+   "s": 100.24,
+   "e": 110.66
+  },
+  {
+   "t": "V är lika med pi integralen av a upphöjt till b x i kvadrat d y",
+   "s": 110.66,
+   "e": 116.9
+  },
+  {
+   "t": "Eftersom vi integrerar med avseende på y måste x uttryckas med hjälp av variabeln y , vilket betyder att vi behöver en funktion x är lika med f av y .",
+   "s": 116.9,
+   "e": 126.46
+  },
+  {
+   "t": "Eftersom vi ofta har funktionen på formen y är lika med betyder det att vi kommer att behöva lösa ut x ur ekvationen för att sätta in i integralen.",
+   "s": 126.46,
+   "e": 135.41
+  },
+  {
+   "t": "Detta kallas att hitta inversen.",
+   "s": 135.41,
+   "e": 138.56
+  },
+  {
+   "t": "Exempel 1 — Rotation kring y-axeln",
+   "s": 138.56,
+   "e": 142.1
+  },
+  {
+   "t": "Låt området som begränsas av kurvan y är lika med roten ur x minus 1 , de positiva koordinataxlarna och linjen y är lika med 2 rotera kring y -axeln.",
+   "s": 142.1,
+   "e": 152.68
+  },
+  {
+   "t": "Beräkna rotationskroppens volym.",
+   "s": 152.68,
+   "e": 156.01
+  },
+  {
+   "t": "Vi ställer upp formeln för volym vid rotation kring y -axeln:",
+   "s": 156.01,
+   "e": 174.06
+  },
+  {
+   "t": "V är lika med pi integralen av a upphöjt till b x i kvadrat d y",
+   "s": 156.01,
+   "e": 174.06
+  },
+  {
+   "t": "Begränsningarna ger integrationsgränserna a är lika med 0 och b är lika med 2 (tänk på att eftersom vi integrerar längs y -axeln så är det gränser i y -led som ska anges).",
+   "s": 156.01,
+   "e": 174.06
+  },
+  {
+   "t": "Vi löser ut x ur funktionen y är lika med roten ur x minus 1 .",
+   "s": 174.06,
+   "e": 179.93
+  },
+  {
+   "t": "Kvadrera båda led för att få bort rottecknet och lös sedan ut x :",
+   "s": 179.93,
+   "e": 190.76
+  },
+  {
+   "t": "y i kvadrat är lika med x minus 1 vilket är ekvivalent med att x är lika med y i kvadrat plus 1",
+   "s": 179.93,
+   "e": 190.76
+  },
+  {
+   "t": "Vi sätter nu x är lika med y i kvadrat plus 1 och integrationsgränserna a är lika med 0 och b är lika med 2 i formeln för volymen och utvecklar sedan med kvadreringsregeln:",
+   "s": 190.76,
+   "e": 223.22
+  },
+  {
+   "t": "V är lika med pi integralen av noll i kvadrat parentesen y i kvadrat plus 1 slut parentes i kvadrat d y som är lika med pi integralen av noll i kvadrat parentesen y upphöjt till 4 plus 2 y i kvadrat plus 1 slut parentes d y",
+   "s": 190.76,
+   "e": 223.22
+  },
+  {
+   "t": "Integralkalkylens fundamentalsats ger:",
+   "s": 190.76,
+   "e": 223.22
+  },
+  {
+   "t": "V är lika med pi y upphöjt till 5 delat med 5 plus 2 y i kubik delat med 3 plus y noll i kvadrat som är lika med pi parentesen 2 upphöjt till 5 delat med 5 plus 2 gånger 2 i kubik delat med 3 plus 2 minus 0 slut parentes, 4 p t som är lika med pi parentesen 32 delat med 5 plus 16 delat med 3 plus 2 slut parentes som är lika med pi parentesen 96 delat med 15 plus 80 delat med 15 plus 30 delat med 15 slut parentes som är lika med pi gånger 206 delat med 15 som är lika med 206 pi delat med 15",
+   "s": 190.76,
+   "e": 254.28
+  },
+  {
+   "t": "Detta ger 206 pi delat med 15 är ungefär lika med 43,1 volymsenheter.",
+   "s": 254.28,
+   "e": 260.99
+  },
+  {
+   "t": "Svar: V är lika med 206 pi delat med 15 volymenheter som är ungefär lika med 43,1 volymenheter",
+   "s": 260.99,
+   "e": 269.54
+  },
+  {
+   "t": "Exempel 2 — Kurvan y är lika med x<sup>2</sup>",
+   "s": 269.54,
+   "e": 275.46
+  },
+  {
+   "t": "Området som begränsas av kurvan y är lika med x i kvadrat , y -axeln och linjen y är lika med 4 roterar kring y -axeln.",
+   "s": 275.46,
+   "e": 285.83
+  },
+  {
+   "t": "Beräkna volymen exakt.",
+   "s": 285.78,
+   "e": 288.63
+  },
+  {
+   "t": "Formeln kräver x uttryckt i y .",
+   "s": 288.63,
+   "e": 292.1
+  },
+  {
+   "t": "Vi löser ut x ur y är lika med x i kvadrat , och eftersom området ligger i första kvadranten tar vi den positiva roten:",
+   "s": 292.1,
+   "e": 308.28
+  },
+  {
+   "t": "x är lika med roten ur y",
+   "s": 292.1,
+   "e": 308.28
+  },
+  {
+   "t": "Radien i kvadrat blir då x i kvadrat är lika med parentesen roten ur y slut parentes i kvadrat som är lika med y .",
+   "s": 292.1,
+   "e": 308.28
+  },
+  {
+   "t": "Med gränserna a är lika med 0 och b är lika med 4 :",
+   "s": 308.28,
+   "e": 329.58
+  },
+  {
+   "t": "V är lika med pi integralen av noll upphöjt till 4 x i kvadrat d y som är lika med pi integralen av noll upphöjt till 4 y d y som är lika med pi y i kvadrat delat med 2 noll upphöjt till 4 som är lika med pi parentesen 16 delat med 2 minus 0 slut parentes som är lika med 8 pi",
+   "s": 308.28,
+   "e": 329.58
+  },
+  {
+   "t": "Svar: V är lika med 8 pi volymenheter som är ungefär lika med 25,1 volymenheter",
+   "s": 329.58,
+   "e": 336.65
+  }
+ ]
+}

@@ -33011,4 +33011,5342 @@ vilket ger $x_1 = 8$ och $x_2 = -15$. Eftersom en sidlängd inte kan vara negati
 **Svar:** $x = 8$ cm`,
         },
     ],
+    // ═══════════════════ Matematik fortsättning nivå 2 (Ma4) ═══════════════════
+    'ma4-1.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur definieras $\\cos v$ i en rätvinklig triangel?`,
+            choices: [
+                `$\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
+                `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{hypotenusa}}$`,
+                `$\\cos v = \\dfrac{\\text{motstående katet}}{\\text{närliggande katet}}$`,
+                `$\\cos v = \\dfrac{\\text{hypotenusa}}{\\text{närliggande katet}}$`,
+            ],
+            correct: 0,
+            solution: `Cosinus är förhållandet mellan den närliggande kateten och hypotenusan. (Motstående/hypotenusa är sinus och motstående/närliggande är tangens.)
+
+**Svar:** $\\cos v = \\dfrac{\\text{närliggande katet}}{\\text{hypotenusa}}$`,
+        },
+        {
+            level: 1,
+            question: `En rätvinklig triangel har vinkeln 38° och hypotenusan 12 cm. Beräkna den motstående kateten. Avrunda till en decimal.`,
+            answer: { value: 7.4, unit: 'cm', tol: 0.05 },
+            solution: `Den motstående kateten och hypotenusan hör ihop via sinus.
+
+$$
+\\sin 38^\\circ = \\frac{a}{12} \\quad\\Leftrightarrow\\quad a = 12 \\cdot \\sin 38^\\circ = 7{,}388\\ldots \\approx 7{,}4\\ \\mathrm{cm}
+$$
+
+**Svar:** 7,4 cm`,
+        },
+        {
+            level: 1,
+            question: `I en rätvinklig triangel är den motstående kateten till vinkeln $v$ 4,0 m och den närliggande kateten 6,0 m. Bestäm vinkeln $v$. Avrunda till hela grader.`,
+            answer: { value: 34, unit: '°', tol: 1 },
+            solution: `Motstående och närliggande katet hör ihop via tangens — vi använder dess invers.
+
+$$
+\\tan v = \\frac{4{,}0}{6{,}0} = 0{,}6\\overline{6} \\quad\\Rightarrow\\quad v = \\tan^{-1}\\!\\left(\\frac{4{,}0}{6{,}0}\\right) = 33{,}69\\ldots^\\circ \\approx 34^\\circ
+$$
+
+**Svar:** 34°`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En stege lutar mot en vägg. Stegen är 5,0 m lång och når 4,3 m upp på väggen.<br>a) Bestäm stegens lutningsvinkel $v$ mot marken (avrunda till heltal).&emsp;&emsp;b) Bestäm avståndet från väggen till stegens fot (avrunda till en decimal).`,
+            choices: [
+                `59°; 2,6 m`,
+                `31°; 2,6 m`,
+                `59°; 3,3 m`,
+                `41°; 2,6 m`,
+            ],
+            correct: 0,
+            solution: `**a)** Väggens höjd (4,3 m) är motstående katet till $v$ och stegen (5,0 m) är hypotenusan — vi använder sinus och dess invers.
+
+$$
+\\sin v = \\frac{4{,}3}{5{,}0} = 0{,}86 \\quad\\Rightarrow\\quad v = \\sin^{-1}(0{,}86) = 59{,}316\\ldots^\\circ \\approx 59^\\circ
+$$
+
+**b)** Avståndet till stegens fot är närliggande katet — vi använder cosinus (med den oavrundade vinkeln) eller Pythagoras sats.
+
+$$
+x = 5{,}0 \\cdot \\cos 59{,}316\\ldots^\\circ = 2{,}553\\ldots \\approx 2{,}6\\ \\mathrm{m}
+$$
+
+**Svar:** 59°; 2,6 m`,
+        },
+        {
+            level: 2,
+            question: `Från en punkt på marken 25 m från ett torn ser man tornets topp i höjdvinkeln 34°. Ögonhöjden är 1,6 m.<br>a) Bestäm höjden från ögonhöjd upp till toppen.&emsp;&emsp;b) Bestäm tornets totala höjd över marken. Avrunda till en decimal.`,
+            choices: [
+                `16,9 m; 18,5 m`,
+                `18,5 m; 16,9 m`,
+                `13,8 m; 15,4 m`,
+                `16,9 m; 16,9 m`,
+            ],
+            correct: 0,
+            solution: `**a)** Höjden ovanför ögat är motstående katet till höjdvinkeln och det vågräta avståndet (25 m) är närliggande katet — vi använder tangens.
+
+$$
+\\tan 34^\\circ = \\frac{h}{25} \\quad\\Leftrightarrow\\quad h = 25 \\cdot \\tan 34^\\circ = 16{,}865\\ldots \\approx 16{,}9\\ \\mathrm{m}
+$$
+
+**b)** Tornets totala höjd får vi genom att lägga till ögonhöjden.
+
+$$
+H = 16{,}865\\ldots + 1{,}6 = 18{,}465\\ldots \\approx 18{,}5\\ \\mathrm{m}
+$$
+
+**Svar:** 16,9 m; 18,5 m`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `I en rätvinklig triangel är den motstående kateten till vinkeln $v$ dubbelt så lång som den närliggande kateten. Vilket är det exakta värdet av $\\sin v$?`,
+            choices: [
+                `$\\dfrac{2}{\\sqrt{5}}$`,
+                `$\\dfrac{1}{\\sqrt{5}}$`,
+                `$\\dfrac{2}{\\sqrt{3}}$`,
+                `$2$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** ingen sida är given som tal, men förhållandet mellan kateterna räcker för att bestämma hypotenusan (via Pythagoras sats) och därmed $\\sin v$ exakt.
+
+Sätt den närliggande kateten till $b = 1$. Då är den motstående kateten $a = 2$. Hypotenusan ges av Pythagoras sats:
+
+$$
+c = \\sqrt{a^2 + b^2} = \\sqrt{2^2 + 1^2} = \\sqrt{5}
+$$
+
+Sinus är motstående katet delat med hypotenusan:
+
+$$
+\\sin v = \\frac{a}{c} = \\frac{2}{\\sqrt{5}}
+$$
+
+De felaktiga alternativen förväxlar $\\sin v$ med $\\cos v$ (som är $\\tfrac{1}{\\sqrt 5}$), använder fel hypotenusa, eller tar bara kvoten mellan kateterna (vilket är $\\tan v = 2$, inte sinus).
+
+**Svar:** $\\dfrac{2}{\\sqrt{5}}$`,
+        },
+    ],
+'ma4-1.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `På enhetscirkeln (radie 1, medelpunkt i origo) svarar en vinkel $v$ mot en punkt $(x, y)$ på randen. Vad motsvarar $\\sin v$?`,
+            choices: [
+                `Punktens $y$-koordinat`,
+                `Punktens $x$-koordinat`,
+                `Kvoten $\\dfrac{x}{y}$`,
+                `Cirkelns radie, dvs. 1`,
+            ],
+            correct: 0,
+            solution: `Eftersom hypotenusan (radien) är 1 gäller $\\sin v = \\dfrac{y}{1} = y$. Sinus är alltså punktens $y$-koordinat. (Cosinus är $x$-koordinaten och $\\tan v = \\tfrac{y}{x}$.)
+
+**Svar:** punktens $y$-koordinat`,
+        },
+        {
+            level: 1,
+            question: `Vilket är det exakta värdet av $\\sin 30^\\circ$?`,
+            choices: [
+                `$\\dfrac{1}{2}$`,
+                `$\\dfrac{\\sqrt{2}}{2}$`,
+                `$\\dfrac{\\sqrt{3}}{2}$`,
+                `$\\dfrac{\\sqrt{3}}{3}$`,
+            ],
+            correct: 0,
+            solution: `Standardvinkeln $30^\\circ$ har det exakta sinusvärdet $\\tfrac{1}{2}$. (Minnesknep: sinusraden är $\\tfrac{\\sqrt{0}}{2}, \\tfrac{\\sqrt{1}}{2}, \\tfrac{\\sqrt{2}}{2}, \\tfrac{\\sqrt{3}}{2}, \\tfrac{\\sqrt{4}}{2}$ för $0^\\circ, 30^\\circ, 45^\\circ, 60^\\circ, 90^\\circ$, och $\\tfrac{\\sqrt{1}}{2} = \\tfrac{1}{2}$.) De övriga är $\\sin 45^\\circ$, $\\sin 60^\\circ$ och $\\tan 30^\\circ$.
+
+**Svar:** $\\dfrac{1}{2}$`,
+        },
+        {
+            level: 1,
+            question: `En punkt på enhetscirkeln svarar mot vinkeln $v$ och har koordinaten $(0{,}60;\\ 0{,}80)$. Bestäm $\\tan v$. Avrunda till två decimaler.`,
+            answer: { value: 1.33, unit: '', tol: 0.02 },
+            solution: `Tangens är kvoten mellan sinus (punktens $y$-koordinat) och cosinus (dess $x$-koordinat).
+
+$$
+\\tan v = \\frac{\\sin v}{\\cos v} = \\frac{0{,}80}{0{,}60} = 1{,}333\\ldots \\approx 1{,}33
+$$
+
+**Svar:** 1,33`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En punkt på enhetscirkeln svarar mot vinkeln $v$ och har $y$-koordinaten $0{,}77$.<br>a) Bestäm $\\sin(v + 360^\\circ)$.&emsp;&emsp;b) Bestäm $\\sin(-v)$.`,
+            choices: [
+                `0,77 och −0,77`,
+                `−0,77 och 0,77`,
+                `0,77 och 0,77`,
+                `−0,77 och −0,77`,
+            ],
+            correct: 0,
+            solution: `**a)** Att lägga till $360^\\circ$ innebär ett helt varv runt cirkeln — man landar på exakt samma punkt. Sinus (punktens $y$-koordinat) är därför oförändrat: $\\sin(v + 360^\\circ) = \\sin v = 0{,}77$.
+
+**b)** En negativ vinkel $-v$ är en vridning lika många grader medurs. Punkten speglas i $x$-axeln, så $y$-koordinaten byter tecken: $\\sin(-v) = -\\sin v = -0{,}77$.
+
+**Svar:** 0,77 och −0,77`,
+        },
+        {
+            level: 2,
+            question: `För en vinkel $v$ i första kvadranten (både $x$ och $y$ positiva) gäller $\\cos v = 0{,}28$. Bestäm $\\sin v$ med hjälp av att punkten ligger på enhetscirkeln. Avrunda till två decimaler.`,
+            answer: { value: 0.96, unit: '', tol: 0.02 },
+            solution: `På enhetscirkeln är punkten $(\\cos v,\\ \\sin v)$ och avståndet till origo är 1, så koordinaterna uppfyller $\\cos^2 v + \\sin^2 v = 1$.
+
+$$
+\\sin^2 v = 1 - \\cos^2 v = 1 - 0{,}28^2 = 1 - 0{,}0784 = 0{,}9216
+$$
+
+I första kvadranten är $\\sin v > 0$, så vi tar den positiva roten:
+
+$$
+\\sin v = \\sqrt{0{,}9216} = 0{,}96
+$$
+
+**Svar:** 0,96`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En punkt på enhetscirkeln ligger i första kvadranten och har lika stora $x$- och $y$-koordinater. Bestäm punktens exakta koordinat och vinkeln $v$.`,
+            choices: [
+                `$\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$, $v = 45^\\circ$`,
+                `$\\left(\\dfrac{1}{2},\\ \\dfrac{1}{2}\\right)$, $v = 45^\\circ$`,
+                `$\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$, $v = 60^\\circ$`,
+                `$\\left(\\dfrac{\\sqrt{3}}{2},\\ \\dfrac{\\sqrt{3}}{2}\\right)$, $v = 30^\\circ$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** villkoret $x = y$ räcker tillsammans med enhetscirkelns ekvation för att låsa både koordinaten och vinkeln — inget mätvärde behövs.
+
+Punkten ligger på enhetscirkeln, så $x^2 + y^2 = 1$. Sätt in $x = y$:
+
+$$
+x^2 + x^2 = 1 \\quad\\Leftrightarrow\\quad 2x^2 = 1 \\quad\\Leftrightarrow\\quad x = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}
+$$
+
+(positiv rot, eftersom punkten ligger i första kvadranten). Alltså är koordinaten $\\left(\\tfrac{\\sqrt{2}}{2},\\ \\tfrac{\\sqrt{2}}{2}\\right)$. Eftersom $\\cos v = \\sin v$ är $\\tan v = 1$, vilket ger $v = 45^\\circ$ — precis standardvinkeln med $\\sin 45^\\circ = \\cos 45^\\circ = \\tfrac{\\sqrt{2}}{2}$.
+
+Alternativet $\\left(\\tfrac{1}{2}, \\tfrac{1}{2}\\right)$ ligger inte på cirkeln ($\\left(\\tfrac{1}{2}\\right)^2 + \\left(\\tfrac{1}{2}\\right)^2 = \\tfrac{1}{2} \\neq 1$), och $60^\\circ$ respektive $30^\\circ$ har olika stora $x$- och $y$-koordinater.
+
+**Svar:** $\\left(\\dfrac{\\sqrt{2}}{2},\\ \\dfrac{\\sqrt{2}}{2}\\right)$, $v = 45^\\circ$`,
+        },
+    ],
+'ma4-1.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Om $v$ är en lösning till $\\tan x = a$, vilket uttryck ger samtliga lösningar?`,
+            choices: [
+                `$x = v + n \\cdot 180^\\circ$`,
+                `$x = v + n \\cdot 360^\\circ$`,
+                `$x = \\pm v + n \\cdot 360^\\circ$`,
+                `$x = 180^\\circ - v + n \\cdot 180^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Tangens har perioden $180^\\circ$, så till en lösning $v$ kan vi lägga eller dra ifrån ett helt antal $180^\\circ$. (Termen $n \\cdot 360^\\circ$ hör till sinus och cosinus, och $\\pm v$ hör till cosinus.)
+
+**Svar:** $x = v + n \\cdot 180^\\circ$`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $\\sin x = a$ har lösningen $v_1 = 25^\\circ$ i intervallet $0^\\circ \\leq x \\leq 360^\\circ$. Vilken är den andra lösningen i samma intervall? Svara i hela grader.`,
+            answer: { value: 155, unit: '°', tol: 1 },
+            solution: `För sinus fås den andra lösningen som $180^\\circ$ minus den första.
+
+$$
+v_2 = 180^\\circ - v_1 = 180^\\circ - 25^\\circ = 155^\\circ
+$$
+
+**Svar:** 155°`,
+        },
+        {
+            level: 1,
+            question: `Ange samtliga lösningar till $\\cos x = 0{,}5$. (Grundlösningen är $\\cos^{-1}(0{,}5) = 60^\\circ$.)`,
+            choices: [
+                `$x = \\pm 60^\\circ + n \\cdot 360^\\circ$`,
+                `$x = 60^\\circ + n \\cdot 360^\\circ$ och $x = 120^\\circ + n \\cdot 360^\\circ$`,
+                `$x = \\pm 60^\\circ + n \\cdot 180^\\circ$`,
+                `$x = 60^\\circ + n \\cdot 180^\\circ$`,
+            ],
+            correct: 0,
+            solution: `För cosinus tar vi $\\pm$ grundlösningen och lägger till termen $n \\cdot 360^\\circ$.
+
+$$
+x = \\pm v + n \\cdot 360^\\circ = \\pm 60^\\circ + n \\cdot 360^\\circ
+$$
+
+**Svar:** $x = \\pm 60^\\circ + n \\cdot 360^\\circ$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $\\sin x = 0{,}6$ och ange samtliga lösningar. Svara med en decimal.`,
+            choices: [
+                `$x \\approx 36{,}9^\\circ + n \\cdot 360^\\circ$ och $x \\approx 143{,}1^\\circ + n \\cdot 360^\\circ$`,
+                `$x \\approx \\pm 36{,}9^\\circ + n \\cdot 360^\\circ$`,
+                `$x \\approx 36{,}9^\\circ + n \\cdot 360^\\circ$ och $x \\approx 216{,}9^\\circ + n \\cdot 360^\\circ$`,
+                `$x \\approx 36{,}9^\\circ + n \\cdot 180^\\circ$ och $x \\approx 143{,}1^\\circ + n \\cdot 180^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Ekvationen har sinus, så vi tar räknarens lösning och lägger till $n \\cdot 360^\\circ$, och därefter $180^\\circ$ minus räknarens lösning.
+
+$$
+\\sin^{-1}(0{,}6) = 36{,}869\\ldots^\\circ
+$$
+
+$$
+x = 36{,}869\\ldots^\\circ + n \\cdot 360^\\circ \\approx 36{,}9^\\circ + n \\cdot 360^\\circ
+$$
+
+$$
+x = 180^\\circ - 36{,}869\\ldots^\\circ + n \\cdot 360^\\circ = 143{,}130\\ldots^\\circ + n \\cdot 360^\\circ \\approx 143{,}1^\\circ + n \\cdot 360^\\circ
+$$
+
+**Svar:** $x \\approx 36{,}9^\\circ + n \\cdot 360^\\circ$ och $x \\approx 143{,}1^\\circ + n \\cdot 360^\\circ$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $\\cos 2x = 0{,}4$ och ange samtliga lösningar. Svara med en decimal.`,
+            choices: [
+                `$x \\approx \\pm 33{,}2^\\circ + n \\cdot 180^\\circ$`,
+                `$x \\approx \\pm 66{,}4^\\circ + n \\cdot 360^\\circ$`,
+                `$x \\approx \\pm 33{,}2^\\circ + n \\cdot 360^\\circ$`,
+                `$x \\approx \\pm 66{,}4^\\circ + n \\cdot 180^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Ekvationen har cosinus, så vi tar $\\pm$ räknarens lösning och lägger till $n \\cdot 360^\\circ$ — men först för argumentet $2x$.
+
+$$
+\\cos^{-1}(0{,}4) = 66{,}421\\ldots^\\circ \\quad\\Rightarrow\\quad 2x = \\pm 66{,}421\\ldots^\\circ + n \\cdot 360^\\circ
+$$
+
+Vi löser ut $x$ genom att dividera hela ekvationen med 2:
+
+$$
+\\frac{2x}{2} = \\frac{\\pm 66{,}421\\ldots^\\circ}{2} + \\frac{n \\cdot 360^\\circ}{2} \\quad\\Leftrightarrow\\quad x \\approx \\pm 33{,}2^\\circ + n \\cdot 180^\\circ
+$$
+
+Notera att $n \\cdot 360^\\circ$ blir $n \\cdot 180^\\circ$ efter divisionen — en vanlig fälla är att glömma dela även den termen.
+
+**Svar:** $x \\approx \\pm 33{,}2^\\circ + n \\cdot 180^\\circ$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Hur många lösningar har ekvationen $\\cos 3x = 0{,}6$ i intervallet $0^\\circ \\leq x \\leq 360^\\circ$?`,
+            choices: [
+                `6`,
+                `2`,
+                `3`,
+                `12`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** man behöver inte lista alla lösningar — det räcker att se hur många perioder som ryms i intervallet. Cosinus ger 2 lösningar per varv, och koefficienten 3 pressar ihop perioden.
+
+Grundlösningen är $\\cos^{-1}(0{,}6) = 53{,}130\\ldots^\\circ$, så
+
+$$
+3x = \\pm 53{,}130\\ldots^\\circ + n \\cdot 360^\\circ \\quad\\Leftrightarrow\\quad x = \\pm 17{,}710\\ldots^\\circ + n \\cdot 120^\\circ
+$$
+
+Perioden för $x$ är alltså $\\dfrac{360^\\circ}{3} = 120^\\circ$. När $x$ löper genom hela intervallet $0^\\circ$–$360^\\circ$ löper $3x$ genom $0^\\circ$–$1080^\\circ$, alltså tre hela varv. Cosinus antar värdet $0{,}6$ två gånger per varv, vilket ger $3 \\cdot 2 = 6$ lösningar.
+
+**Svar:** 6`,
+        },
+    ],
+'ma4-1.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ekvationen $\\cos x \\cdot \\sin x = 0$ ska lösas. Vad säger nollproduktmetoden?`,
+            choices: [
+                `Produkten är noll om $\\cos x = 0$ eller $\\sin x = 0$ — lös var för sig`,
+                `Man kräver att $\\cos x = 0$ och $\\sin x = 0$ samtidigt`,
+                `Ekvationen saknar lösningar eftersom en produkt aldrig blir noll`,
+                `Man dividerar båda led med $\\cos x$ och löser $\\tan x = 0$`,
+            ],
+            correct: 0,
+            solution: `En produkt är noll precis när minst en av faktorerna är noll. Vi löser därför $\\cos x = 0$ och $\\sin x = 0$ var för sig och tar med alla lösningar.
+
+**Svar:** Produkten är noll om $\\cos x = 0$ eller $\\sin x = 0$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $\\sin(2x) = 0$. Ange den minsta positiva lösningen (i grader).`,
+            answer: { value: 90, unit: '°', tol: 0.5 },
+            solution: `$\\sin(2x) = 0$ ger de två fallen
+
+$$
+2x = 0^\\circ + n \\cdot 360^\\circ \\;\\Leftrightarrow\\; x = n \\cdot 180^\\circ \\qquad\\text{och}\\qquad 2x = 180^\\circ + n \\cdot 360^\\circ \\;\\Leftrightarrow\\; x = 90^\\circ + n \\cdot 180^\\circ
+$$
+
+Tillsammans blir det $x = n \\cdot 90^\\circ$. Den minsta positiva lösningen fås för $n = 1$.
+
+**Svar:** 90°`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $3\\sin x - \\cos x = 0$ skrivs om till en ekvation i $\\tan x$ genom division med $\\cos x$. Vad blir resultatet?`,
+            choices: [
+                `$\\tan x = \\dfrac{1}{3}$`,
+                `$\\tan x = 3$`,
+                `$\\tan x = -\\dfrac{1}{3}$`,
+                `$\\tan x = -3$`,
+            ],
+            correct: 0,
+            solution: `Flytta över och dividera båda led med $\\cos x$:
+
+$$
+3\\sin x = \\cos x \\;\\Leftrightarrow\\; 3 \\cdot \\frac{\\sin x}{\\cos x} = 1 \\;\\Leftrightarrow\\; 3\\tan x = 1
+$$
+
+$$
+\\tan x = \\frac{1}{3}
+$$
+
+**Svar:** $\\tan x = \\dfrac{1}{3}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $\\cos x \\cdot (2\\sin x - 1) = 0$ i intervallet $0^\\circ \\le x < 360^\\circ$.`,
+            choices: [
+                `30°, 90°, 150° och 270°`,
+                `90° och 270°`,
+                `30° och 150°`,
+                `30°, 90°, 150°, 210°, 270° och 330°`,
+            ],
+            correct: 0,
+            solution: `Nollproduktmetoden ger två ekvationer.
+
+$\\cos x = 0$ i intervallet: $x = 90^\\circ$ och $x = 270^\\circ$.
+
+$2\\sin x - 1 = 0 \\;\\Leftrightarrow\\; \\sin x = \\dfrac{1}{2}$ i intervallet: $x = 30^\\circ$ och $x = 150^\\circ$.
+
+Alla fyra värdena ligger i $0^\\circ \\le x < 360^\\circ$.
+
+**Svar:** 30°, 90°, 150° och 270°`,
+        },
+        {
+            level: 2,
+            question: `Hur många lösningar har ekvationen $\\tan(2x) = 1$ i intervallet $0^\\circ \\le x < 360^\\circ$?`,
+            answer: { value: 4, unit: 'st', tol: 0.5 },
+            solution: `Tangens har perioden $180^\\circ$, så
+
+$$
+2x = 45^\\circ + n \\cdot 180^\\circ \\;\\Leftrightarrow\\; x = 22{,}5^\\circ + n \\cdot 90^\\circ
+$$
+
+I intervallet $0^\\circ \\le x < 360^\\circ$ ger $n = 0, 1, 2, 3$ lösningarna $22{,}5^\\circ$, $112{,}5^\\circ$, $202{,}5^\\circ$ och $292{,}5^\\circ$ — alltså 4 lösningar.
+
+**Svar:** 4 lösningar`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $\\sin(2x) = \\cos(2x)$ och ange samtliga lösningar.`,
+            choices: [
+                `$x = 22{,}5^\\circ + n \\cdot 90^\\circ$`,
+                `$x = 45^\\circ + n \\cdot 180^\\circ$`,
+                `$x = 22{,}5^\\circ + n \\cdot 180^\\circ$`,
+                `$x = 45^\\circ + n \\cdot 90^\\circ$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** eftersom både $\\sin$ och $\\cos$ har samma argument kan vi dividera båda led med $\\cos(2x)$ och få en ekvation i tangens — och sedan måste *både* det partikulära värdet och periodtermen delas med argumentets koefficient 2.
+
+$$
+\\sin(2x) = \\cos(2x) \\;\\Leftrightarrow\\; \\frac{\\sin(2x)}{\\cos(2x)} = 1 \\;\\Leftrightarrow\\; \\tan(2x) = 1
+$$
+
+Tangens har perioden $180^\\circ$:
+
+$$
+2x = 45^\\circ + n \\cdot 180^\\circ
+$$
+
+Dividera hela ledet med 2 — perioden $180^\\circ$ blir då $90^\\circ$:
+
+$$
+x = 22{,}5^\\circ + n \\cdot 90^\\circ
+$$
+
+Fällan är att glömma dela periodtermen med 2 (ger fel period $180^\\circ$) eller att inte dela alls.
+
+**Svar:** $x = 22{,}5^\\circ + n \\cdot 90^\\circ$`,
+        },
+    ],
+'ma4-1.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Ett helt varv ($360^\\circ$) motsvarar hur många radianer?`,
+            choices: [
+                `$2\\pi$ rad`,
+                `$\\pi$ rad`,
+                `$\\dfrac{\\pi}{2}$ rad`,
+                `$360$ rad`,
+            ],
+            correct: 0,
+            solution: `Ett helt varv motsvarar hela cirkelns omkrets, som är $2\\pi$ radier. Alltså är $360^\\circ = 2\\pi$ rad. (Ett halvt varv, $180^\\circ$, är $\\pi$ rad.)
+
+**Svar:** $2\\pi$ rad`,
+        },
+        {
+            level: 1,
+            question: `Omvandla $\\dfrac{2\\pi}{3}$ rad till grader.`,
+            answer: { value: 120, unit: '°', tol: 0.5 },
+            solution: `Vi utnyttjar att $\\pi$ rad $= 180^\\circ$.
+
+$$
+\\frac{2\\pi}{3}\\ \\text{rad} = \\frac{2 \\cdot 180^\\circ}{3} = \\frac{360^\\circ}{3} = 120^\\circ
+$$
+
+**Svar:** $120^\\circ$`,
+        },
+        {
+            level: 1,
+            question: `Omvandla $30^\\circ$ till radianer. Svara exakt.`,
+            choices: [
+                `$\\dfrac{\\pi}{6}$ rad`,
+                `$\\dfrac{\\pi}{3}$ rad`,
+                `$\\dfrac{\\pi}{4}$ rad`,
+                `$\\dfrac{\\pi}{2}$ rad`,
+            ],
+            correct: 0,
+            solution: `Vi utnyttjar att $1^\\circ = \\dfrac{\\pi}{180}$ rad.
+
+$$
+30^\\circ = 30 \\cdot \\frac{\\pi}{180}\\ \\text{rad} = \\frac{\\pi}{6}\\ \\text{rad}
+$$
+
+**Svar:** $\\dfrac{\\pi}{6}$ rad`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Omvandla $1{,}5$ rad till grader. Avrunda till hela grader.`,
+            answer: { value: 86, unit: '°', tol: 1 },
+            solution: `Här saknas $\\pi$, men eftersom $\\pi$ rad $= 180^\\circ$ gäller $1\\ \\text{rad} = \\dfrac{180^\\circ}{\\pi}$.
+
+$$
+1{,}5\\ \\text{rad} = 1{,}5 \\cdot \\frac{180^\\circ}{\\pi} = 85{,}943\\ldots^\\circ \\approx 86^\\circ
+$$
+
+**Svar:** $86^\\circ$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $\\cos x = \\dfrac{1}{2}$. Svara exakt i radianer (alla lösningar).`,
+            choices: [
+                `$x = \\dfrac{\\pi}{3} + n \\cdot 2\\pi$ och $x = -\\dfrac{\\pi}{3} + n \\cdot 2\\pi$`,
+                `$x = \\dfrac{\\pi}{3} + n \\cdot 2\\pi$ och $x = \\dfrac{2\\pi}{3} + n \\cdot 2\\pi$`,
+                `$x = \\dfrac{\\pi}{6} + n \\cdot 2\\pi$ och $x = -\\dfrac{\\pi}{6} + n \\cdot 2\\pi$`,
+                `$x = \\dfrac{\\pi}{3} + n \\cdot \\pi$`,
+            ],
+            correct: 0,
+            solution: `Från formelbladet ser vi att $\\cos\\dfrac{\\pi}{3} = \\dfrac{1}{2}$. Cosinus är positiv i både första och fjärde kvadranten, så den andra lösningen är $-\\dfrac{\\pi}{3}$ (spegling i $x$-axeln). Cosinus har perioden $2\\pi$.
+
+$$
+x = \\frac{\\pi}{3} + n \\cdot 2\\pi \\qquad \\text{och} \\qquad x = -\\frac{\\pi}{3} + n \\cdot 2\\pi
+$$
+
+**Svar:** $x = \\dfrac{\\pi}{3} + n \\cdot 2\\pi$ och $x = -\\dfrac{\\pi}{3} + n \\cdot 2\\pi$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $2\\cos x + \\sqrt{3} = 0$. Svara exakt i radianer (alla lösningar).`,
+            choices: [
+                `$x = \\dfrac{5\\pi}{6} + n \\cdot 2\\pi$ och $x = \\dfrac{7\\pi}{6} + n \\cdot 2\\pi$`,
+                `$x = \\dfrac{\\pi}{6} + n \\cdot 2\\pi$ och $x = -\\dfrac{\\pi}{6} + n \\cdot 2\\pi$`,
+                `$x = \\dfrac{5\\pi}{6} + n \\cdot \\pi$`,
+                `$x = \\dfrac{\\pi}{3} + n \\cdot 2\\pi$ och $x = \\dfrac{2\\pi}{3} + n \\cdot 2\\pi$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** ekvationen måste först lösas ut till formen $\\cos x = \\text{tal}$, och eftersom talet blir *negativt* hamnar de två lösningarna i andra och tredje kvadranten — inte kring $\\dfrac{\\pi}{6}$.
+
+Isolera cosinus:
+
+$$
+2\\cos x + \\sqrt{3} = 0 \\quad\\Leftrightarrow\\quad \\cos x = -\\frac{\\sqrt{3}}{2}
+$$
+
+Referensvinkeln är $\\dfrac{\\pi}{6}$ (eftersom $\\cos\\dfrac{\\pi}{6} = \\dfrac{\\sqrt{3}}{2}$). Cosinus är negativ i andra och tredje kvadranten:
+
+$$
+x = \\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6} \\qquad \\text{och} \\qquad x = \\pi + \\frac{\\pi}{6} = \\frac{7\\pi}{6}
+$$
+
+Perioden är $2\\pi$. De felaktiga alternativen glömmer minustecknet, använder tangens period $\\pi$, eller tar fel referensvinkel.
+
+**Svar:** $x = \\dfrac{5\\pi}{6} + n \\cdot 2\\pi$ och $x = \\dfrac{7\\pi}{6} + n \\cdot 2\\pi$`,
+        },
+    ],
+'ma4-1.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Använd komplementvinklar. Vad är $\\sin 70^\\circ$ lika med?`,
+            choices: [
+                `$\\cos 20^\\circ$`,
+                `$\\sin 20^\\circ$`,
+                `$\\cos 70^\\circ$`,
+                `$\\cos 110^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Sinus för en vinkel är lika med cosinus för dess komplementvinkel, alltså $\\sin v = \\cos(90^\\circ - v)$.
+
+$$
+\\sin 70^\\circ = \\cos(90^\\circ - 70^\\circ) = \\cos 20^\\circ
+$$
+
+**Svar:** $\\cos 20^\\circ$`,
+        },
+        {
+            level: 1,
+            question: `Vad är $\\cos(v + 180^\\circ)$ lika med?`,
+            choices: [
+                `$-\\cos v$`,
+                `$\\cos v$`,
+                `$-\\sin v$`,
+                `$\\sin v$`,
+            ],
+            correct: 0,
+            solution: `Att lägga till $180^\\circ$ är ett halvt varv i enhetscirkeln — punkten hamnar rakt mitt emot och båda koordinaterna byter tecken. Cosinus (x-koordinaten) byter alltså tecken.
+
+$$
+\\cos(v + 180^\\circ) = -\\cos v
+$$
+
+**Svar:** $-\\cos v$`,
+        },
+        {
+            level: 1,
+            question: `Det är känt att $\\sin 25^\\circ \\approx 0{,}42$. Bestäm $\\cos 65^\\circ$.`,
+            answer: { value: 0.42, unit: '', tol: 0.01 },
+            solution: `Vinklarna $25^\\circ$ och $65^\\circ$ är komplementvinklar (de bildar tillsammans $90^\\circ$), så cosinus för den ena är sinus för den andra.
+
+$$
+\\cos 65^\\circ = \\sin(90^\\circ - 65^\\circ) = \\sin 25^\\circ \\approx 0{,}42
+$$
+
+**Svar:** $\\approx 0{,}42$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Det är känt att $\\sin 50^\\circ \\approx 0{,}77$. Bestäm<br>a) $\\sin(-50^\\circ)$&emsp;&emsp;b) $\\sin 130^\\circ$`,
+            choices: [
+                `a) $-0{,}77$&emsp;&emsp;b) $0{,}77$`,
+                `a) $0{,}77$&emsp;&emsp;b) $0{,}77$`,
+                `a) $-0{,}77$&emsp;&emsp;b) $-0{,}77$`,
+                `a) $0{,}77$&emsp;&emsp;b) $-0{,}77$`,
+            ],
+            correct: 0,
+            solution: `**a)** En negativ vinkel speglar punkten i $x$-axeln, så sinus byter tecken:
+
+$$
+\\sin(-50^\\circ) = -\\sin 50^\\circ \\approx -0{,}77
+$$
+
+**b)** $130^\\circ$ kan skrivas som $180^\\circ - 50^\\circ$, och $\\sin(180^\\circ - v) = \\sin v$:
+
+$$
+\\sin 130^\\circ = \\sin(180^\\circ - 50^\\circ) = \\sin 50^\\circ \\approx 0{,}77
+$$
+
+**Svar:** a) $-0{,}77$&emsp;&emsp;b) $0{,}77$`,
+        },
+        {
+            level: 2,
+            question: `Det är känt att $\\cos \\dfrac{\\pi}{3} = \\dfrac{1}{2}$. Bestäm det exakta värdet av $\\cos \\dfrac{2\\pi}{3}$.`,
+            choices: [
+                `$-\\dfrac{1}{2}$`,
+                `$\\dfrac{1}{2}$`,
+                `$-\\dfrac{\\sqrt{3}}{2}$`,
+                `$\\dfrac{\\sqrt{3}}{2}$`,
+            ],
+            correct: 0,
+            solution: `Vi gör om vinklarna till grader för att lättare tolka dem i enhetscirkeln:
+
+$$
+\\frac{\\pi}{3} = 60^\\circ \\qquad\\text{och}\\qquad \\frac{2\\pi}{3} = 120^\\circ
+$$
+
+Eftersom $120^\\circ = 180^\\circ - 60^\\circ$ och $\\cos(180^\\circ - v) = -\\cos v$ byter cosinus tecken:
+
+$$
+\\cos \\frac{2\\pi}{3} = \\cos 120^\\circ = -\\cos 60^\\circ = -\\frac{1}{2}
+$$
+
+**Svar:** $-\\dfrac{1}{2}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Förenkla uttrycket $\\dfrac{\\sin(v + 90^\\circ)}{\\cos(v + 180^\\circ)}$ så långt som möjligt.`,
+            choices: [
+                `$-1$`,
+                `$1$`,
+                `$-\\tan v$`,
+                `$\\tan v$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** täljaren och nämnaren kan var för sig skrivas om med sambanden mellan vinklar, och då visar det sig att hela uttrycket förenklas till en konstant — $v$ försvinner.
+
+Täljaren: att vrida $90^\\circ$ ger $\\sin(v + 90^\\circ) = \\cos v$.
+
+Nämnaren: att vrida ett halvt varv ger $\\cos(v + 180^\\circ) = -\\cos v$.
+
+$$
+\\frac{\\sin(v + 90^\\circ)}{\\cos(v + 180^\\circ)} = \\frac{\\cos v}{-\\cos v} = -1
+$$
+
+Faktorn $\\cos v$ förkortas bort och kvar blir $-1$, oberoende av $v$. De felaktiga alternativen glömmer teckenbytet i nämnaren ($1$) eller förkortar inte bort $\\cos v$ ($\\pm\\tan v$).
+
+**Svar:** $-1$`,
+        },
+    ],
+'ma4-1.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad säger trigonometriska ettan för en godtycklig vinkel $v$?`,
+            choices: [
+                `$\\sin^2 v + \\cos^2 v = 1$`,
+                `$\\sin v + \\cos v = 1$`,
+                `$\\sin^2 v - \\cos^2 v = 1$`,
+                `$\\sin^2 v \\cdot \\cos^2 v = 1$`,
+            ],
+            correct: 0,
+            solution: `Trigonometriska ettan säger att summan av sinus i kvadrat och cosinus i kvadrat för samma vinkel alltid är 1. Det är kvadraterna (inte funktionerna själva) som adderas, och det är en summa — inte en differens eller produkt.
+
+**Svar:** $\\sin^2 v + \\cos^2 v = 1$`,
+        },
+        {
+            level: 1,
+            question: `Vinkeln $v$ ligger i första kvadranten och $\\sin v = 0{,}8$. Bestäm $\\cos v$.`,
+            answer: { value: 0.6, unit: '', tol: 0.01 },
+            solution: `Vi använder trigonometriska ettan och löser ut $\\cos v$.
+
+$$
+\\sin^2 v + \\cos^2 v = 1 \\quad\\Leftrightarrow\\quad \\cos^2 v = 1 - 0{,}8^2 = 1 - 0{,}64 = 0{,}36
+$$
+
+$$
+\\cos v = \\pm\\sqrt{0{,}36} = \\pm 0{,}6
+$$
+
+I första kvadranten är $\\cos v$ ($x$-koordinaten) positiv, så vi väljer plustecknet.
+
+**Svar:** $\\cos v = 0{,}6$`,
+        },
+        {
+            level: 1,
+            question: `Vilket uttryck är lika med $1 - \\sin^2 v$?`,
+            choices: [
+                `$\\cos^2 v$`,
+                `$\\sin^2 v$`,
+                `$1 + \\cos^2 v$`,
+                `$\\tan^2 v$`,
+            ],
+            correct: 0,
+            solution: `Skriv om trigonometriska ettan $\\sin^2 v + \\cos^2 v = 1$ genom att flytta över $\\sin^2 v$:
+
+$$
+\\cos^2 v = 1 - \\sin^2 v
+$$
+
+**Svar:** $\\cos^2 v$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Vinkeln $v$ ligger i tredje kvadranten och $\\cos v = -0{,}28$. Bestäm $\\sin v$.`,
+            choices: [
+                `$-0{,}96$`,
+                `$0{,}96$`,
+                `$-0{,}28$`,
+                `$-0{,}92$`,
+            ],
+            correct: 0,
+            solution: `Vi använder trigonometriska ettan för att lösa ut $\\sin v$.
+
+$$
+\\sin^2 v = 1 - \\cos^2 v = 1 - (-0{,}28)^2 = 1 - 0{,}0784 = 0{,}9216
+$$
+
+$$
+\\sin v = \\pm\\sqrt{0{,}9216} = \\pm 0{,}96
+$$
+
+I tredje kvadranten är $\\sin v$ ($y$-koordinaten) negativ, så vi väljer minustecknet.
+
+**Svar:** $\\sin v = -0{,}96$`,
+        },
+        {
+            level: 2,
+            question: `Vinkeln $v$ ligger i fjärde kvadranten och $\\sin v = -\\dfrac{5}{13}$. Bestäm det exakta värdet av $\\cos v$.`,
+            choices: [
+                `$\\dfrac{12}{13}$`,
+                `$-\\dfrac{12}{13}$`,
+                `$\\dfrac{5}{13}$`,
+                `$\\dfrac{13}{12}$`,
+            ],
+            correct: 0,
+            solution: `Trigonometriska ettan ger
+
+$$
+\\cos^2 v = 1 - \\sin^2 v = 1 - \\left(\\frac{5}{13}\\right)^2 = 1 - \\frac{25}{169} = \\frac{144}{169}
+$$
+
+$$
+\\cos v = \\pm\\sqrt{\\frac{144}{169}} = \\pm\\frac{12}{13}
+$$
+
+I fjärde kvadranten är $\\cos v$ ($x$-koordinaten) positiv, så vi väljer plustecknet.
+
+**Svar:** $\\cos v = \\dfrac{12}{13}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För en vinkel $v$ gäller att $\\sin v \\cdot \\cos v = 0{,}3$. Bestäm värdet av $(\\sin v + \\cos v)^2$.`,
+            choices: [
+                `$1{,}6$`,
+                `$0{,}6$`,
+                `$0{,}9$`,
+                `$1{,}0$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** ingen av $\\sin v$ och $\\cos v$ är känd var för sig, men kvadreringen av summan skapar en term $2\\sin v\\cos v$ som är given, och resten är trigonometriska ettan.
+
+Utveckla kvadraten:
+
+$$
+(\\sin v + \\cos v)^2 = \\sin^2 v + 2\\sin v\\cos v + \\cos^2 v
+$$
+
+Samla ihop $\\sin^2 v + \\cos^2 v = 1$ (trigonometriska ettan):
+
+$$
+(\\sin v + \\cos v)^2 = \\underbrace{\\sin^2 v + \\cos^2 v}_{=\\,1} + 2\\sin v\\cos v = 1 + 2 \\cdot 0{,}3 = 1{,}6
+$$
+
+De felaktiga alternativen glömmer korstermen $2\\sin v\\cos v$, missar faktorn 2, eller sätter $\\sin^2 v + \\cos^2 v$ till något annat än 1.
+
+**Svar:** $(\\sin v + \\cos v)^2 = 1{,}6$`,
+        },
+    ],
+'ma4-1.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket uttryck är lika med $\\cos(u + v)$?`,
+            choices: [
+                `$\\cos u\\cos v - \\sin u\\sin v$`,
+                `$\\cos u\\cos v + \\sin u\\sin v$`,
+                `$\\sin u\\cos v + \\cos u\\sin v$`,
+                `$\\cos u + \\cos v$`,
+            ],
+            correct: 0,
+            solution: `Additionsformeln för cosinus byter tecken jämfört med sinus: ett plus i vänsterledet ger ett minustecken mellan produkterna.
+
+**Svar:** $\\cos u\\cos v - \\sin u\\sin v$`,
+        },
+        {
+            level: 1,
+            question: `Vilket uttryck är lika med $\\sin 2v$?`,
+            choices: [
+                `$2\\sin v\\cos v$`,
+                `$\\sin^2 v + \\cos^2 v$`,
+                `$2\\cos^2 v - 1$`,
+                `$\\sin v + \\sin v$`,
+            ],
+            correct: 0,
+            solution: `Formeln för dubbla vinkeln följer av additionsformeln för sinus med $u = v$:
+
+$$
+\\sin 2v = \\sin(v + v) = \\sin v\\cos v + \\cos v\\sin v = 2\\sin v\\cos v
+$$
+
+**Svar:** $2\\sin v\\cos v$`,
+        },
+        {
+            level: 1,
+            question: `En spetsig vinkel $v$ har $\\sin v = 0{,}6$ och $\\cos v = 0{,}8$. Beräkna $\\sin 2v$.`,
+            answer: { value: 0.96, unit: '', tol: 0.01 },
+            solution: `Vi använder formeln för dubbla vinkeln.
+
+$$
+\\sin 2v = 2\\sin v\\cos v = 2\\cdot 0{,}6\\cdot 0{,}8 = 0{,}96
+$$
+
+**Svar:** 0,96`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm det exakta värdet av $\\cos 15^\\circ$ genom att skriva $15^\\circ = 45^\\circ - 30^\\circ$.`,
+            choices: [
+                `$\\dfrac{\\sqrt{6} + \\sqrt{2}}{4}$`,
+                `$\\dfrac{\\sqrt{6} - \\sqrt{2}}{4}$`,
+                `$\\dfrac{\\sqrt{3} + 1}{2}$`,
+                `$\\dfrac{\\sqrt{2} - \\sqrt{6}}{4}$`,
+            ],
+            correct: 0,
+            solution: `Vi använder subtraktionsformeln för cosinus med de kända vinklarna $45^\\circ$ och $30^\\circ$:
+
+$$
+\\cos 15^\\circ = \\cos(45^\\circ - 30^\\circ) = \\cos 45^\\circ\\cos 30^\\circ + \\sin 45^\\circ\\sin 30^\\circ
+$$
+
+$$
+= \\frac{1}{\\sqrt{2}}\\cdot \\frac{\\sqrt{3}}{2} + \\frac{1}{\\sqrt{2}}\\cdot \\frac{1}{2} = \\frac{\\sqrt{3} + 1}{2\\sqrt{2}} = \\frac{\\sqrt{6} + \\sqrt{2}}{4}
+$$
+
+**Svar:** $\\dfrac{\\sqrt{6} + \\sqrt{2}}{4}$`,
+        },
+        {
+            level: 2,
+            question: `Förenkla $\\sin(x + 30^\\circ) + \\sin(x - 30^\\circ)$ så långt som möjligt.`,
+            choices: [
+                `$\\sqrt{3}\\,\\sin x$`,
+                `$\\cos x$`,
+                `$2\\sin x$`,
+                `$\\sqrt{3}\\,\\cos x$`,
+            ],
+            correct: 0,
+            solution: `Additions- och subtraktionsformeln för sinus ger — termerna med $\\cos x\\sin 30^\\circ$ tar ut varandra:
+
+$$
+\\sin(x + 30^\\circ) + \\sin(x - 30^\\circ) = 2\\sin x\\cos 30^\\circ = 2\\sin x\\cdot \\frac{\\sqrt{3}}{2} = \\sqrt{3}\\,\\sin x
+$$
+
+**Svar:** $\\sqrt{3}\\,\\sin x$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En spetsig vinkel $v$ uppfyller $\\sin v + \\cos v = \\dfrac{7}{5}$. Bestäm det exakta värdet av $\\sin 2v$.`,
+            choices: [
+                `$\\dfrac{24}{25}$`,
+                `$\\dfrac{7}{25}$`,
+                `$\\dfrac{49}{25}$`,
+                `$\\dfrac{2}{5}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** kvadrera summan — då dyker $2\\sin v\\cos v = \\sin 2v$ upp tillsammans med trigonometriska ettan.
+
+$$
+(\\sin v + \\cos v)^2 = \\sin^2 v + 2\\sin v\\cos v + \\cos^2 v = 1 + \\sin 2v
+$$
+
+Vänsterledet är $\\left(\\dfrac{7}{5}\\right)^2 = \\dfrac{49}{25}$, så
+
+$$
+1 + \\sin 2v = \\frac{49}{25} \\quad\\Leftrightarrow\\quad \\sin 2v = \\frac{49}{25} - 1 = \\frac{24}{25}
+$$
+
+Alternativet $\\tfrac{49}{25}$ är kvadraten innan man dragit bort ettan.
+
+**Svar:** $\\dfrac{24}{25}$`,
+        },
+    ],
+'ma4-1.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket samband gäller för dubbla vinkeln av sinus?`,
+            choices: [
+                `$\\sin 2v = 2\\sin v \\cos v$`,
+                `$\\sin 2v = \\sin v \\cos v$`,
+                `$\\sin 2v = 2\\sin v$`,
+                `$\\sin 2v = \\cos^2 v - \\sin^2 v$`,
+            ],
+            correct: 0,
+            solution: `Formeln fås ur additionsformeln $\\sin(v+v) = \\sin v\\cos v + \\cos v\\sin v = 2\\sin v\\cos v$. Uttrycket $\\cos^2 v - \\sin^2 v$ är i stället $\\cos 2v$.
+
+**Svar:** $\\sin 2v = 2\\sin v \\cos v$`,
+        },
+        {
+            level: 1,
+            question: `Hur kan produkten $\\sin x \\cos x$ skrivas med hjälp av dubbla vinkeln?`,
+            choices: [
+                `$\\dfrac{1}{2}\\sin 2x$`,
+                `$\\sin 2x$`,
+                `$2\\sin 2x$`,
+                `$\\cos 2x$`,
+            ],
+            correct: 0,
+            solution: `Eftersom $\\sin 2x = 2\\sin x\\cos x$ är $\\sin x\\cos x = \\dfrac{1}{2}\\sin 2x$. Man delar alltså med 2, inte multiplicerar.
+
+**Svar:** $\\dfrac{1}{2}\\sin 2x$`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $\\sin x\\,(2\\cos x - 1) = 0$ löses med nollproduktmetoden. Vilka två ekvationer delas den upp i?`,
+            choices: [
+                `$\\sin x = 0$ och $2\\cos x - 1 = 0$`,
+                `$\\sin x = 1$ och $2\\cos x = 1$`,
+                `$\\sin x = 0$ och $\\cos x = 2$`,
+                `$\\sin x \\cdot 2\\cos x = 1$`,
+            ],
+            correct: 0,
+            solution: `En produkt är noll om (minst) en faktor är noll. Alltså $\\sin x = 0$ eller $2\\cos x - 1 = 0$. Man sätter varje faktor för sig lika med noll — man multiplicerar inte ihop dem.
+
+**Svar:** $\\sin x = 0$ och $2\\cos x - 1 = 0$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $2\\sin x\\cos x = \\dfrac{1}{2}$ och ange den allmänna lösningen i radianer.`,
+            choices: [
+                `$x = \\dfrac{\\pi}{12} + n\\cdot\\pi$ och $x = \\dfrac{5\\pi}{12} + n\\cdot\\pi$`,
+                `$x = \\dfrac{\\pi}{6} + n\\cdot 2\\pi$ och $x = \\dfrac{5\\pi}{6} + n\\cdot 2\\pi$`,
+                `$x = \\dfrac{\\pi}{12} + n\\cdot 2\\pi$`,
+                `$x = \\dfrac{\\pi}{6} + n\\cdot\\pi$`,
+            ],
+            correct: 0,
+            solution: `Vänsterledet är $\\sin 2x$, så ekvationen blir $\\sin 2x = \\dfrac{1}{2}$. Eftersom $\\sin\\dfrac{\\pi}{6} = \\dfrac{1}{2}$:
+
+$$
+\\textbf{Fall 1:}\\quad 2x = \\frac{\\pi}{6} + n\\cdot 2\\pi \\;\\Leftrightarrow\\; x = \\frac{\\pi}{12} + n\\cdot\\pi
+$$
+
+$$
+\\textbf{Fall 2:}\\quad 2x = \\pi - \\frac{\\pi}{6} + n\\cdot 2\\pi = \\frac{5\\pi}{6} + n\\cdot 2\\pi \\;\\Leftrightarrow\\; x = \\frac{5\\pi}{12} + n\\cdot\\pi
+$$
+
+**Svar:** $x = \\dfrac{\\pi}{12} + n\\cdot\\pi$ och $x = \\dfrac{5\\pi}{12} + n\\cdot\\pi$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $\\sin 2x = \\sin x$ och svara i grader.`,
+            choices: [
+                `$x = n\\cdot 180^\\circ$ och $x = \\pm 60^\\circ + n\\cdot 360^\\circ$`,
+                `$x = n\\cdot 360^\\circ$ och $x = 60^\\circ + n\\cdot 360^\\circ$`,
+                `$x = \\pm 60^\\circ + n\\cdot 360^\\circ$`,
+                `$x = 90^\\circ + n\\cdot 180^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Skriv om $\\sin 2x = 2\\sin x\\cos x$ och flytta allt till ena ledet:
+
+$$
+2\\sin x\\cos x - \\sin x = 0 \\;\\Leftrightarrow\\; \\sin x\\,(2\\cos x - 1) = 0
+$$
+
+$$
+\\textbf{Fall 1:}\\quad \\sin x = 0 \\;\\Leftrightarrow\\; x = n\\cdot 180^\\circ
+$$
+
+$$
+\\textbf{Fall 2:}\\quad 2\\cos x - 1 = 0 \\;\\Leftrightarrow\\; \\cos x = \\tfrac{1}{2} \\;\\Leftrightarrow\\; x = \\pm 60^\\circ + n\\cdot 360^\\circ
+$$
+
+Dividera inte bort $\\sin x$ — då tappar man Fall 1-lösningarna.
+
+**Svar:** $x = n\\cdot 180^\\circ$ och $x = \\pm 60^\\circ + n\\cdot 360^\\circ$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $\\cos 2x + \\sin x = 0$ och svara i grader.`,
+            choices: [
+                `$x = 90^\\circ + n\\cdot 360^\\circ,\\ x = 210^\\circ + n\\cdot 360^\\circ$ och $x = 330^\\circ + n\\cdot 360^\\circ$`,
+                `$x = 90^\\circ + n\\cdot 360^\\circ,\\ x = 30^\\circ + n\\cdot 360^\\circ$ och $x = 150^\\circ + n\\cdot 360^\\circ$`,
+                `$x = 90^\\circ + n\\cdot 360^\\circ$`,
+                `$x = 210^\\circ + n\\cdot 360^\\circ$ och $x = 330^\\circ + n\\cdot 360^\\circ$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** välj den form av dubbla vinkeln som ger *samma* funktion som den andra termen. Här finns $\\sin x$, så använd $\\cos 2x = 1 - 2\\sin^2 x$; då blir allt uttryckt i $\\sin x$.
+
+$$
+1 - 2\\sin^2 x + \\sin x = 0 \\;\\Leftrightarrow\\; 2\\sin^2 x - \\sin x - 1 = 0
+$$
+
+Substituera $\\sin x = t$ och lös med pq-formeln (eller faktorisering):
+
+$$
+2t^2 - t - 1 = 0 \\;\\Leftrightarrow\\; t = \\frac{1 \\pm \\sqrt{1 + 8}}{4} = \\frac{1 \\pm 3}{4}
+$$
+
+$$
+t_1 = 1 \\qquad t_2 = -\\tfrac{1}{2}
+$$
+
+Växla tillbaka $t = \\sin x$:
+
+$$
+\\sin x = 1 \\;\\Rightarrow\\; x = 90^\\circ + n\\cdot 360^\\circ
+$$
+
+$$
+\\sin x = -\\tfrac{1}{2} \\;\\Rightarrow\\; x = 210^\\circ + n\\cdot 360^\\circ \\text{ och } x = 330^\\circ + n\\cdot 360^\\circ
+$$
+
+**Svar:** $x = 90^\\circ + n\\cdot 360^\\circ,\\ x = 210^\\circ + n\\cdot 360^\\circ$ och $x = 330^\\circ + n\\cdot 360^\\circ$`,
+        },
+    ],
+'ma4-1.10': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad är perioden för sinusfunktionen $y = \\sin x$?`,
+            choices: [
+                `$360^\\circ$ (motsvarande $2\\pi$)`,
+                `$180^\\circ$ (motsvarande $\\pi$)`,
+                `$90^\\circ$ (motsvarande $\\dfrac{\\pi}{2}$)`,
+                `$720^\\circ$ (motsvarande $4\\pi$)`,
+            ],
+            correct: 0,
+            solution: `Efter ett helt varv i enhetscirkeln upprepas exakt samma sinusvärden, så kurvan upprepar sig med perioden $360^\\circ$, vilket motsvarar $2\\pi$ radianer.
+
+**Svar:** $360^\\circ$ (motsvarande $2\\pi$)`,
+        },
+        {
+            level: 1,
+            question: `Vilken är värdemängden för cosinusfunktionen $y = \\cos x$?`,
+            choices: [
+                `$-1 \\leq y \\leq 1$`,
+                `$0 \\leq y \\leq 1$`,
+                `$-1 < y < 1$`,
+                `alla reella tal`,
+            ],
+            correct: 0,
+            solution: `Cosinusvärdet kommer från en punkt på enhetscirkeln och kan aldrig bli större än $1$ eller mindre än $-1$. Ytterlägena $1$ och $-1$ antas faktiskt (vid $0^\\circ$ respektive $180^\\circ$), så de ingår.
+
+**Svar:** $-1 \\leq y \\leq 1$`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $\\sin x = 0{,}4$ har inom ett varv ($0^\\circ \\leq x < 360^\\circ$) lösningarna $x_1 \\approx 23{,}6^\\circ$ och $x_2$. Bestäm $x_2$ i grader.`,
+            answer: { value: 156.4, unit: '°', tol: 0.5 },
+            solution: `Sinuskurvan är symmetrisk kring $x = 90^\\circ$ inom det första varvet, så den andra lösningen speglas: $x_2 = 180^\\circ - x_1$.
+
+$$
+x_2 = 180^\\circ - 23{,}6^\\circ = 156{,}4^\\circ
+$$
+
+**Svar:** 156,4°`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Skärningspunkterna mellan $y = \\sin x$ och $y = 0{,}4$ ger inom ett varv $x_1 \\approx 23{,}6^\\circ$ och $x_2 \\approx 156{,}4^\\circ$. Vilket uttryck beskriver **samtliga** lösningar till $\\sin x = 0{,}4$?`,
+            choices: [
+                `$x \\approx 23{,}6^\\circ + n \\cdot 360^\\circ$ och $x \\approx 156{,}4^\\circ + n \\cdot 360^\\circ$`,
+                `$x \\approx 23{,}6^\\circ + n \\cdot 180^\\circ$ och $x \\approx 156{,}4^\\circ + n \\cdot 180^\\circ$`,
+                `enbart $x \\approx 23{,}6^\\circ$ och $x \\approx 156{,}4^\\circ$`,
+                `$x \\approx 23{,}6^\\circ + n \\cdot 360^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Sinusfunktionen är periodisk med perioden $360^\\circ$, så varje lösning upprepas efter ett helt varv. Vi anger de två lösningarna inom första varvet och lägger till ett helt antal perioder $n \\cdot 360^\\circ$, där $n$ är ett heltal.
+
+**Svar:** $x \\approx 23{,}6^\\circ + n \\cdot 360^\\circ$ och $x \\approx 156{,}4^\\circ + n \\cdot 360^\\circ$`,
+        },
+        {
+            level: 2,
+            question: `Ekvationen $\\sin x = 0{,}4$ har inom första varvet lösningen $x_1 \\approx 23{,}6^\\circ$. Bestäm den minsta lösning som är större än $360^\\circ$. Avrunda till en decimal.`,
+            answer: { value: 383.6, unit: '°', tol: 0.5 },
+            solution: `Nästa gång sinuskurvan tar värdet $0{,}4$ efter $x_1$ i ett nytt varv är exakt en period ($360^\\circ$) senare.
+
+$$
+x = x_1 + 360^\\circ = 23{,}6^\\circ + 360^\\circ = 383{,}6^\\circ
+$$
+
+(Nästa lösning efter det är $156{,}4^\\circ + 360^\\circ = 516{,}4^\\circ$, alltså större.)
+
+**Svar:** 383,6°`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För vilka värden på $k$ har ekvationen $\\sin x = k$ **exakt en** lösning inom ett varv, $0^\\circ \\leq x < 360^\\circ$?`,
+            choices: [
+                `$k = 1$ eller $k = -1$`,
+                `$k = 0$`,
+                `alla $k$ med $-1 \\leq k \\leq 1$`,
+                `$k = 0{,}5$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** en vågrät linje $y = k$ skär sinuskurvan olika många gånger inom ett varv. För de flesta $k$-värden i $[-1,\\ 1]$ träffar linjen kurvan i **två** punkter (kurvan går upp och sedan ner igen). Undantaget är kurvans topp och botten, där linjen precis tangerar:
+
+- Vid $k = 1$ nuddar linjen toppen i en enda punkt, $x = 90^\\circ$.
+- Vid $k = -1$ nuddar linjen botten i en enda punkt, $x = 270^\\circ$.
+
+För $k = 0$ blir det tvärtom två lösningar ($x = 0^\\circ$ och $x = 180^\\circ$), och för $|k| > 1$ finns ingen lösning alls. Alltså ger bara ytterlägena exakt en lösning.
+
+**Svar:** $k = 1$ eller $k = -1$`,
+        },
+    ],
+'ma4-1.11': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken är amplituden för funktionen $y = 4 \\sin x$?`,
+            choices: [
+                `4`,
+                `1`,
+                `8`,
+                `$-4$`,
+            ],
+            correct: 0,
+            solution: `Amplituden för $y = A \\sin x$ är $|A|$, alltså koefficienten framför sinus (utan tecken).
+
+$$
+\\text{amplitud} = |4| = 4
+$$
+
+**Svar:** Amplituden är 4.`,
+        },
+        {
+            level: 1,
+            question: `Bestäm perioden (i grader) för funktionen $y = \\sin 6x$.`,
+            answer: { value: 60, unit: '°', tol: 0 },
+            solution: `Perioden för $y = \\sin Bx$ är $\\dfrac{360^\\circ}{B}$. Här är $B = 6$.
+
+$$
+\\text{period} = \\frac{360^\\circ}{6} = 60^\\circ
+$$
+
+**Svar:** 60°`,
+        },
+        {
+            level: 1,
+            question: `Vilken är amplituden för funktionen $y = -3 \\sin 2x$?`,
+            choices: [
+                `3`,
+                `$-3$`,
+                `2`,
+                `6`,
+            ],
+            correct: 0,
+            solution: `En negativ koefficient speglar grafen i $x$-axeln, men amplituden är ett avstånd och kan aldrig vara negativ. Vi tar absolutbeloppet av koefficienten framför sinus.
+
+$$
+\\text{amplitud} = |-3| = 3
+$$
+
+**Svar:** Amplituden är 3.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm amplituden och perioden (i grader) för funktionen $y = 8 \\sin 4x$.`,
+            choices: [
+                `Amplitud 8 och period 90°`,
+                `Amplitud 4 och period 90°`,
+                `Amplitud 8 och period 45°`,
+                `Amplitud 8 och period 4°`,
+            ],
+            correct: 0,
+            solution: `Koefficienten framför sinus ger amplituden, och koefficienten framför $x$ ger perioden via $\\dfrac{360^\\circ}{B}$.
+
+$$
+\\text{amplitud} = |8| = 8
+$$
+
+$$
+\\text{period} = \\frac{360^\\circ}{4} = 90^\\circ
+$$
+
+**Svar:** Amplituden är 8 och perioden 90°.`,
+        },
+        {
+            level: 2,
+            question: `Bestäm amplituden och perioden (i grader) för funktionen $y = 10 \\sin\\left(\\dfrac{x}{2}\\right)$.`,
+            choices: [
+                `Amplitud 10 och period 720°`,
+                `Amplitud 10 och period 180°`,
+                `Amplitud 5 och period 720°`,
+                `Amplitud 10 och period 2°`,
+            ],
+            correct: 0,
+            solution: `Argumentet innehåller en division. Vi skriver om den som en multiplikation för att hitta koefficienten $B$:
+
+$$
+\\frac{x}{2} = \\frac{1}{2}x = 0{,}5x \\quad\\Rightarrow\\quad B = 0{,}5
+$$
+
+$$
+\\text{amplitud} = |10| = 10
+$$
+
+$$
+\\text{period} = \\frac{360^\\circ}{0{,}5} = 720^\\circ
+$$
+
+**Svar:** Amplituden är 10 och perioden 720°.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En funktion $y = A \\sin Bx$ med $A > 0$ och $B > 0$ har största värdet 4 och gör exakt två hela svängningar (perioder) på intervallet $0^\\circ \\le x \\le 360^\\circ$. Bestäm $A$ och $B$.`,
+            choices: [
+                `$A = 4$ och $B = 2$`,
+                `$A = 4$ och $B = \\tfrac{1}{2}$`,
+                `$A = 2$ och $B = 4$`,
+                `$A = 4$ och $B = 180$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** koefficienten $B$ är just antalet hela perioder som ryms på $360^\\circ$ — funktionen "svänger $B$ gånger så fort". Två uppgifter göms i frågan.
+
+Största värdet är amplituden, så
+
+$$
+A = 4
+$$
+
+Två hela perioder på $360^\\circ$ betyder att varje period är hälften så lång:
+
+$$
+\\text{period} = \\frac{360^\\circ}{2} = 180^\\circ \\quad\\Rightarrow\\quad B = \\frac{360^\\circ}{\\text{period}} = \\frac{360^\\circ}{180^\\circ} = 2
+$$
+
+De felaktiga alternativen vänder på period-sambandet ($B = \\tfrac{1}{2}$ ger bara en halv svängning), förväxlar $A$ och $B$, eller sätter $B$ till periodens gradtal i stället för antalet svängningar.
+
+**Svar:** $A = 4$ och $B = 2$`,
+        },
+    ],
+'ma4-1.12': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur förskjuts grafen till $y = \\sin x + 4$ jämfört med $y = \\sin x$?`,
+            choices: [
+                `4 enheter uppåt`,
+                `4 enheter nedåt`,
+                `$4^\\circ$ åt höger`,
+                `$4^\\circ$ åt vänster`,
+            ],
+            correct: 0,
+            solution: `Konstanten adderas till hela funktionsvärdet, så varje $y$-koordinat blir 4 större. Det motsvarar en förskjutning i $y$-led.
+
+**Svar:** 4 enheter uppåt`,
+        },
+        {
+            level: 1,
+            question: `Åt vilket håll förskjuts grafen till $y = \\sin (x - 60^\\circ)$ jämfört med $y = \\sin x$?`,
+            choices: [
+                `$60^\\circ$ åt höger`,
+                `$60^\\circ$ åt vänster`,
+                `60 enheter nedåt`,
+                `60 enheter uppåt`,
+            ],
+            correct: 0,
+            solution: `Förskjutningen sitter inne i argumentet, alltså i $x$-led. Här är $C = -60^\\circ$, och ett negativt $C$ ger förskjutning åt höger.
+
+**Svar:** $60^\\circ$ åt höger`,
+        },
+        {
+            level: 1,
+            question: `Vilken funktion är förskjuten 3 enheter nedåt och $20^\\circ$ åt vänster jämfört med $y = \\sin x$?`,
+            choices: [
+                `$y = \\sin (x + 20^\\circ) - 3$`,
+                `$y = \\sin (x - 20^\\circ) - 3$`,
+                `$y = \\sin (x + 20^\\circ) + 3$`,
+                `$y = \\sin (x - 3^\\circ) + 20$`,
+            ],
+            correct: 0,
+            solution: `Åt vänster kräver ett positivt $C$, så $C = +20^\\circ$ ger argumentet $(x + 20^\\circ)$. Nedåt ger ett negativt $D$, alltså $D = -3$.
+
+$$
+y = \\sin (x + 20^\\circ) - 3
+$$
+
+**Svar:** $y = \\sin (x + 20^\\circ) - 3$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beskriv hur grafen till $y = \\sin (x + 90^\\circ) + 1$ ser ut jämfört med $y = \\sin x$.`,
+            choices: [
+                `$90^\\circ$ åt vänster och 1 enhet uppåt`,
+                `$90^\\circ$ åt höger och 1 enhet uppåt`,
+                `$90^\\circ$ åt vänster och 1 enhet nedåt`,
+                `1 enhet åt vänster och $90^\\circ$ uppåt`,
+            ],
+            correct: 0,
+            solution: `Konstanten i argumentet ($C = +90^\\circ$) ger förskjutning i $x$-led; eftersom $C > 0$ blir det åt vänster. Termen utanför ($D = +1$) ger förskjutning 1 enhet uppåt i $y$-led.
+
+**Svar:** $90^\\circ$ åt vänster och 1 enhet uppåt`,
+        },
+        {
+            level: 2,
+            question: `En kurva har samma form som $y = \\sin x$ men är förskjuten $25^\\circ$ åt vänster och 4 enheter nedåt. Skriv funktionens ekvation.`,
+            choices: [
+                `$y = \\sin (x + 25^\\circ) - 4$`,
+                `$y = \\sin (x - 25^\\circ) - 4$`,
+                `$y = \\sin (x + 25^\\circ) + 4$`,
+                `$y = \\sin (x - 25^\\circ) + 4$`,
+            ],
+            correct: 0,
+            solution: `Åt vänster ger ett positivt $C$, alltså $C = +25^\\circ$ och argumentet $(x + 25^\\circ)$. Nedåt ger ett negativt $D$, alltså $D = -4$.
+
+$$
+y = \\sin (x + C) + D = \\sin (x + 25^\\circ) - 4
+$$
+
+**Svar:** $y = \\sin (x + 25^\\circ) - 4$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Grafen till $y = \\sin (x + C) + D$ har sitt största värde 4, och detta maximum inträffar för $x = 20^\\circ$. Bestäm $C$ och $D$ (välj $0^\\circ \\le C < 360^\\circ$).`,
+            choices: [
+                `$C = 70^\\circ$ och $D = 3$`,
+                `$C = 20^\\circ$ och $D = 4$`,
+                `$C = 110^\\circ$ och $D = 3$`,
+                `$C = 70^\\circ$ och $D = 4$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** grundfunktionen $\\sin$ har amplituden 1, så det största värdet är $1 + D$ (inte $D$), och det inträffar när argumentet $x + C = 90^\\circ$.
+
+Störst värde ger $D$:
+
+$$
+1 + D = 4 \\quad\\Leftrightarrow\\quad D = 3
+$$
+
+Maximum vid $x = 20^\\circ$ ger $C$:
+
+$$
+x + C = 90^\\circ \\quad\\Rightarrow\\quad 20^\\circ + C = 90^\\circ \\quad\\Leftrightarrow\\quad C = 70^\\circ
+$$
+
+De felaktiga alternativen glömmer att sinus egen amplitud är 1 (så $D \\ne 4$) eller sätter $C$ direkt till $x$-värdet utan att gå via argumentet $= 90^\\circ$.
+
+**Svar:** $C = 70^\\circ$ och $D = 3$`,
+        },
+    ],
+'ma4-1.13': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken är perioden för funktionen $y = \\tan x$?`,
+            choices: [
+                `$180^\\circ$`,
+                `$360^\\circ$`,
+                `$90^\\circ$`,
+                `$45^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Grafen till $\\tan x$ upprepar samma form mellan varje par av lodräta asymptoter, och det sker med perioden $180^\\circ$ (eller $\\pi$ rad). Sinus och cosinus har perioden $360^\\circ$, men tangens upprepar sig dubbelt så ofta.
+
+**Svar:** $180^\\circ$`,
+        },
+        {
+            level: 1,
+            question: `Ange perioden (i grader) för funktionen $y = \\tan 4x$.`,
+            answer: { value: 45, unit: '°', tol: 0 },
+            solution: `Perioden för $\\tan x$ är $180^\\circ$. För $\\tan(Bx)$ dividerar vi med koefficienten $B$ framför $x$. Här är $B = 4$.
+
+$$
+\\frac{180^\\circ}{4} = 45^\\circ
+$$
+
+**Svar:** 45°`,
+        },
+        {
+            level: 1,
+            question: `Varför har grafen till $y = \\tan x$ lodräta asymptoter?`,
+            choices: [
+                `Eftersom $\\tan x = \\dfrac{\\sin x}{\\cos x}$ inte är definierad där $\\cos x = 0$`,
+                `Eftersom $\\sin x = 0$ för vissa värden på $x$`,
+                `Eftersom tangens har en amplitud som växer obegränsat`,
+                `Eftersom perioden är $180^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Tangens skrivs som ett bråk, $\\tan x = \\dfrac{\\sin x}{\\cos x}$. Ett bråk är inte definierat när nämnaren är $0$, alltså där $\\cos x = 0$ (vid $x = 90^\\circ + n \\cdot 180^\\circ$). Just där sticker grafen av mot oändligheten och bildar en lodrät asymptot.
+
+**Svar:** Eftersom $\\tan x = \\dfrac{\\sin x}{\\cos x}$ inte är definierad där $\\cos x = 0$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ange perioden för funktionen $y = 2\\tan\\dfrac{x}{5}$.`,
+            choices: [
+                `$900^\\circ$`,
+                `$450^\\circ$`,
+                `$36^\\circ$`,
+                `$90^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Faktorn $2$ framför $\\tan$ påverkar inte perioden — tangens har ingen amplitud, så en faktor tänjer bara kurvan i höjdled. Perioden bestäms enbart av koefficienten framför $x$, här $B = \\dfrac{1}{5}$.
+
+$$
+\\frac{180^\\circ}{\\frac{1}{5}} = 5 \\cdot 180^\\circ = 900^\\circ
+$$
+
+**Svar:** $900^\\circ$`,
+        },
+        {
+            level: 2,
+            question: `Beskriv hur grafen till $y = \\tan\\left(x - \\dfrac{\\pi}{4}\\right) - 1$ är förskjuten jämfört med grafen till $y = \\tan x$.`,
+            choices: [
+                `$\\dfrac{\\pi}{4}$ åt höger och $1$ nedåt`,
+                `$\\dfrac{\\pi}{4}$ åt vänster och $1$ nedåt`,
+                `$\\dfrac{\\pi}{4}$ åt höger och $1$ uppåt`,
+                `$1$ åt höger och $\\dfrac{\\pi}{4}$ nedåt`,
+            ],
+            correct: 0,
+            solution: `Förskjutningar för $\\tan x$ fungerar som för sinus och cosinus. Argumentet $x - \\dfrac{\\pi}{4}$ (motsvarar $C = -\\dfrac{\\pi}{4} < 0$) förskjuter grafen $\\dfrac{\\pi}{4}$ åt höger, och den fristående termen $-1$ förskjuter grafen $1$ enhet nedåt.
+
+**Svar:** $\\dfrac{\\pi}{4}$ åt höger och $1$ nedåt`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För vilka värden på $x$ är funktionen $y = \\tan 3x$ inte definierad?`,
+            choices: [
+                `$x = \\dfrac{\\pi}{6} + n \\cdot \\dfrac{\\pi}{3}$`,
+                `$x = \\dfrac{\\pi}{2} + n \\cdot \\pi$`,
+                `$x = \\dfrac{\\pi}{6} + n \\cdot \\pi$`,
+                `$x = \\dfrac{\\pi}{2} + n \\cdot \\dfrac{\\pi}{3}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** asymptoterna kommer från nämnaren $\\cos 3x$, och när man löser ut $x$ måste HELA högerledet — även termen $n \\cdot \\pi$ — divideras med $3$.
+
+Vi skriver om funktionen: $\\tan 3x = \\dfrac{\\sin 3x}{\\cos 3x}$. Den är inte definierad då nämnaren är $0$:
+
+$$
+\\cos 3x = 0 \\quad\\Leftrightarrow\\quad 3x = \\frac{\\pi}{2} + n \\cdot \\pi
+$$
+
+Vi dividerar båda leden med $3$:
+
+$$
+x = \\frac{\\pi}{6} + n \\cdot \\frac{\\pi}{3}
+$$
+
+Fällan är att glömma dividera $n \\cdot \\pi$ med $3$ (ger $\\dfrac{\\pi}{6} + n \\cdot \\pi$) eller att inte alls dela med koefficienten $3$.
+
+**Svar:** $x = \\dfrac{\\pi}{6} + n \\cdot \\dfrac{\\pi}{3}$`,
+        },
+    ],
+'ma4-1.14': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm amplituden till funktionen $y = 3 \\sin x + 4 \\cos x$.`,
+            choices: [
+                `$5$`,
+                `$7$`,
+                `$\\sqrt{7}$`,
+                `$25$`,
+            ],
+            correct: 0,
+            solution: `Amplituden är $c = \\sqrt{a^2 + b^2}$ med $a = 3$ och $b = 4$.
+
+$$
+c = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5
+$$
+
+**Svar:** amplituden är 5`,
+        },
+        {
+            level: 1,
+            question: `Vilket är det största värdet till funktionen $y = 6 \\sin x + 8 \\cos x$?`,
+            answer: { value: 10, unit: '', tol: 0.05 },
+            solution: `Det största värdet är lika med amplituden $c = \\sqrt{a^2 + b^2}$.
+
+$$
+c = \\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10
+$$
+
+Eftersom kurvan svänger kring $x$-axeln är det största värdet just $c = 10$.
+
+**Svar:** 10`,
+        },
+        {
+            level: 1,
+            question: `Vilket är det minsta värdet till funktionen $y = 8 \\sin x + 6 \\cos x$?`,
+            answer: { value: -10, unit: '', tol: 0.05 },
+            solution: `Amplituden är $c = \\sqrt{a^2 + b^2}$.
+
+$$
+c = \\sqrt{8^2 + 6^2} = \\sqrt{64 + 36} = \\sqrt{100} = 10
+$$
+
+Det minsta värdet är det negativa värdet av amplituden, alltså $-c$.
+
+**Svar:** $-10$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm $a$ så att funktionen $y = a \\sin x + 8 \\cos x$ får amplituden 10.`,
+            choices: [
+                `$a = \\pm 6$`,
+                `$a = 6$`,
+                `$a = \\pm 2$`,
+                `$a = \\pm\\sqrt{164}$`,
+            ],
+            correct: 0,
+            solution: `Amplituden är faktorn framför den sammanslagna sinusfunktionen, $c = \\sqrt{a^2 + 8^2}$, och den ska vara 10.
+
+$$
+\\sqrt{a^2 + 8^2} = 10 \\quad\\Leftrightarrow\\quad a^2 + 64 = 100 \\quad\\Leftrightarrow\\quad a^2 = 36
+$$
+
+$$
+a = \\pm\\sqrt{36} = \\pm 6
+$$
+
+Båda tecknen ger amplituden 10, så det finns två lösningar.
+
+**Svar:** $a = \\pm 6$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm det exakta största värdet till funktionen $y = 2 \\sin x - 3 \\cos x$.`,
+            choices: [
+                `$\\sqrt{13}$`,
+                `$\\sqrt{5}$`,
+                `$13$`,
+                `$5$`,
+            ],
+            correct: 0,
+            solution: `Här är $a = 2$ och $b = -3$. Amplituden $c = \\sqrt{a^2 + b^2}$ innehåller kvadrater, så tecknet på $b$ spelar ingen roll.
+
+$$
+c = \\sqrt{2^2 + (-3)^2} = \\sqrt{4 + 9} = \\sqrt{13}
+$$
+
+Det största värdet är lika med amplituden.
+
+**Svar:** $\\sqrt{13}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Låt $f(x) = 8 \\sin\\!\\left(x + \\dfrac{\\pi}{3}\\right)$. Skriv $f(x)$ på formen $a \\sin x + b \\cos x$ där $a, b > 0$.`,
+            choices: [
+                `$4 \\sin x + 4\\sqrt{3}\\,\\cos x$`,
+                `$4\\sqrt{3}\\,\\sin x + 4 \\cos x$`,
+                `$8 \\sin x + 8\\sqrt{3}\\,\\cos x$`,
+                `$2\\sqrt{3}\\,\\sin x + 2 \\cos x$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** jämför $8\\sin\\!\\left(x + \\tfrac{\\pi}{3}\\right)$ med $c \\sin(x + v)$. Då är $c = 8$ och $v = \\tfrac{\\pi}{3}$, och de två sambanden $c = \\sqrt{a^2 + b^2}$ och $\\tan v = \\tfrac{b}{a}$ bildar ett ekvationssystem.
+
+Ur amplituden:
+
+$$
+\\sqrt{a^2 + b^2} = 8 \\quad\\Leftrightarrow\\quad a^2 + b^2 = 64 \\qquad (1)
+$$
+
+Ur vinkeln, med det exakta värdet $\\tan\\tfrac{\\pi}{3} = \\sqrt{3}$:
+
+$$
+\\frac{b}{a} = \\sqrt{3} \\quad\\Leftrightarrow\\quad b = a\\sqrt{3} \\qquad (2)
+$$
+
+Sätt in (2) i (1):
+
+$$
+a^2 + (a\\sqrt{3})^2 = 64 \\quad\\Leftrightarrow\\quad a^2 + 3a^2 = 64 \\quad\\Leftrightarrow\\quad 4a^2 = 64
+$$
+
+$$
+a^2 = 16 \\quad\\Rightarrow\\quad a = 4 \\quad (a > 0)
+$$
+
+Då blir $b = 4\\sqrt{3}$, alltså $f(x) = 4 \\sin x + 4\\sqrt{3}\\,\\cos x$.
+
+**Svar:** $4 \\sin x + 4\\sqrt{3}\\,\\cos x$`,
+        },
+    ],
+'ma4-1.15': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En harmonisk svängning beskrivs av $y = A \\sin Bt$ (radianer). Hur beräknas periodtiden $T$?`,
+            choices: [
+                `$T = \\dfrac{2\\pi}{B}$`,
+                `$T = \\dfrac{B}{2\\pi}$`,
+                `$T = 2\\pi B$`,
+                `$T = \\dfrac{2\\pi}{A}$`,
+            ],
+            correct: 0,
+            solution: `Periodtiden (perioden) för $y = A \\sin Bt$ ges av $T = \\dfrac{2\\pi}{B}$ i radianer (eller $\\dfrac{360^\\circ}{B}$). Det är $B$ — inte amplituden $A$ — som styr hur snabb svängningen är.
+
+**Svar:** $T = \\dfrac{2\\pi}{B}$`,
+        },
+        {
+            level: 1,
+            question: `En vikt i en fjäder pendlar enligt $y = 2{,}4 \\sin 8t$, där $t$ är tiden i sekunder (radianer). Bestäm periodtiden. Avrunda till två decimaler.`,
+            answer: { value: 0.79, unit: 's', tol: 0.02 },
+            solution: `Vi identifierar $B = 8$ och använder $T = \\dfrac{2\\pi}{B}$.
+
+$$
+T = \\frac{2\\pi}{8} = 0{,}785\\ldots \\approx 0{,}79\\ \\mathrm{s}
+$$
+
+**Svar:** 0,79 s`,
+        },
+        {
+            level: 1,
+            question: `Vilken amplitud har svängningen $y = -5 \\sin 2t$?`,
+            answer: { value: 5, unit: '', tol: 0.01 },
+            solution: `Amplituden är $|A|$, alltså beloppet av talet framför sinus. Här är $A = -5$.
+
+$$
+|A| = |-5| = 5
+$$
+
+Amplituden är alltid positiv — minustecknet speglar bara grafen i $x$-axeln.
+
+**Svar:** 5`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En harmonisk svängning har periodtiden $T = 0{,}50\\ \\mathrm{s}$. Bestäm konstanten $B$ i modellen $y = A \\sin Bt$ (radianer). Avrunda till en decimal.`,
+            answer: { value: 12.6, unit: '', tol: 0.1 },
+            solution: `Ur $T = \\dfrac{2\\pi}{B}$ löser vi ut $B$:
+
+$$
+0{,}50 = \\frac{2\\pi}{B} \\quad\\Leftrightarrow\\quad B = \\frac{2\\pi}{0{,}50} = 12{,}566\\ldots \\approx 12{,}6
+$$
+
+**Svar:** $B \\approx 12{,}6$`,
+        },
+        {
+            level: 2,
+            question: `Temperaturen i ett växthus varierar under dygnet mellan lägst 18 °C och högst 26 °C och modelleras med $y = A \\sin(Bt + C) + D$. Bestäm amplituden $A$ och jämviktsläget $D$.`,
+            choices: [
+                `$A = 4$ och $D = 22$`,
+                `$A = 8$ och $D = 22$`,
+                `$A = 4$ och $D = 44$`,
+                `$A = 22$ och $D = 4$`,
+            ],
+            correct: 0,
+            solution: `Amplituden är halva avståndet mellan max och min, och jämviktsläget $D$ är värdet mitt emellan max och min.
+
+$$
+A = \\frac{26 - 18}{2} = \\frac{8}{2} = 4
+$$
+
+$$
+D = \\frac{26 + 18}{2} = \\frac{44}{2} = 22
+$$
+
+**Svar:** $A = 4$ och $D = 22$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Tidvattnet vid en hamn modelleras med $h(t) = A \\sin(Bt + C) + D$, där $t$ är tiden i timmar (radianer). Perioden är 12 timmar och det första högvattnet (max) efter $t = 0$ inträffar vid $t = 2$ timmar. Bestäm fasförskjutningskonstanten $C$ exakt.`,
+            choices: [
+                `$C = \\dfrac{\\pi}{6}$`,
+                `$C = \\dfrac{\\pi}{3}$`,
+                `$C = \\dfrac{\\pi}{2}$`,
+                `$C = 0$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** en sinusfunktion når sitt maximum när argumentet är $\\dfrac{\\pi}{2}$ (inte $0$). Sätt alltså $Bt + C = \\dfrac{\\pi}{2}$ vid maxpunkten.
+
+Först ger perioden $T = 12$ konstanten $B$:
+
+$$
+B = \\frac{2\\pi}{T} = \\frac{2\\pi}{12} = \\frac{\\pi}{6}
+$$
+
+Vid högvatten är $t = 2$ och argumentet ska vara $\\dfrac{\\pi}{2}$:
+
+$$
+\\frac{\\pi}{6}\\cdot 2 + C = \\frac{\\pi}{2} \\quad\\Leftrightarrow\\quad \\frac{\\pi}{3} + C = \\frac{\\pi}{2}
+$$
+
+$$
+C = \\frac{\\pi}{2} - \\frac{\\pi}{3} = \\frac{3\\pi - 2\\pi}{6} = \\frac{\\pi}{6}
+$$
+
+Fällan är att sätta argumentet till $0$ i stället för $\\dfrac{\\pi}{2}$ vid maximum.
+
+**Svar:** $C = \\dfrac{\\pi}{6}$`,
+        },
+    ],
+'ma4-2.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Bestäm derivatan $f'(x)$ då $f(x) = x^5$.`,
+            choices: [
+                `$f'(x) = 5x^4$`,
+                `$f'(x) = x^4$`,
+                `$f'(x) = 5x^6$`,
+                `$f'(x) = 4x^5$`,
+            ],
+            correct: 0,
+            solution: `Vi använder potensregeln $f(x) = x^n \\Rightarrow f'(x) = nx^{n-1}$ med $n = 5$:
+
+$$
+f'(x) = 5x^{5-1} = 5x^4
+$$
+
+**Svar:** $f'(x) = 5x^4$`,
+        },
+        {
+            level: 1,
+            question: `Låt $f(x) = x^3 + 2x$. Bestäm derivatans värde $f'(1)$.`,
+            answer: { value: 5, unit: '', tol: 0.01 },
+            solution: `Vi deriverar term för term och sätter sedan in $x = 1$.
+
+$$
+f'(x) = 3x^2 + 2
+$$
+
+$$
+f'(1) = 3\\cdot 1^2 + 2 = 3 + 2 = 5
+$$
+
+**Svar:** $f'(1) = 5$`,
+        },
+        {
+            level: 1,
+            question: `Vad är andraderivatan $f''(x)$ till $f(x) = x^4$?`,
+            choices: [
+                `$f''(x) = 12x^2$`,
+                `$f''(x) = 4x^3$`,
+                `$f''(x) = 12x^3$`,
+                `$f''(x) = 24x$`,
+            ],
+            correct: 0,
+            solution: `Vi deriverar två gånger. Först förstaderivatan:
+
+$$
+f'(x) = 4x^3
+$$
+
+Sedan deriverar vi en gång till för att få andraderivatan:
+
+$$
+f''(x) = 4\\cdot 3x^2 = 12x^2
+$$
+
+**Svar:** $f''(x) = 12x^2$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Derivera $f(x) = 3\\sqrt{x}$.`,
+            choices: [
+                `$f'(x) = \\dfrac{3}{2\\sqrt{x}}$`,
+                `$f'(x) = \\dfrac{3}{\\sqrt{x}}$`,
+                `$f'(x) = \\dfrac{3}{2}\\sqrt{x}$`,
+                `$f'(x) = \\dfrac{\\sqrt{x}}{2}$`,
+            ],
+            correct: 0,
+            solution: `Vi skriver först om roten som en potens, $\\sqrt{x} = x^{1/2}$, och deriverar sedan med potensregeln.
+
+$$
+f(x) = 3x^{1/2}
+$$
+
+$$
+f'(x) = 3\\cdot \\tfrac{1}{2}x^{-1/2} = \\frac{3}{2}x^{-1/2} = \\frac{3}{2\\sqrt{x}}
+$$
+
+**Svar:** $f'(x) = \\dfrac{3}{2\\sqrt{x}}$`,
+        },
+        {
+            level: 2,
+            question: `Låt $f(x) = e^{2x}$. Bestäm andraderivatans värde $f''(0)$.`,
+            answer: { value: 4, unit: '', tol: 0.01 },
+            solution: `Vi deriverar två gånger med regeln $f(x) = e^{kx} \\Rightarrow f'(x) = ke^{kx}$, här med $k = 2$.
+
+$$
+f'(x) = 2e^{2x} \\qquad f''(x) = 2\\cdot 2e^{2x} = 4e^{2x}
+$$
+
+Sätt in $x = 0$ och använd $e^0 = 1$:
+
+$$
+f''(0) = 4e^{0} = 4\\cdot 1 = 4
+$$
+
+**Svar:** $f''(0) = 4$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För funktionen $f(x) = e^{kx}$ gäller att $f''(x) = 25\\,f(x)$ för alla $x$, och att $f$ är växande. Bestäm konstanten $k$.`,
+            choices: [
+                `$k = 5$`,
+                `$k = \\pm 5$`,
+                `$k = 25$`,
+                `$k = -5$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** derivera $f$ två gånger och jämför med villkoret $f''(x) = 25\\,f(x)$. Varje derivering av $e^{kx}$ drar ner en faktor $k$, så andraderivatan får faktorn $k^2$.
+
+$$
+f'(x) = ke^{kx} \\qquad f''(x) = k^2 e^{kx}
+$$
+
+Villkoret $f''(x) = 25\\,f(x)$ blir då
+
+$$
+k^2 e^{kx} = 25 e^{kx} \\quad\\Leftrightarrow\\quad k^2 = 25 \\quad\\Leftrightarrow\\quad k = \\pm 5
+$$
+
+Här sitter fällan: $k^2 = 25$ ger både $k = 5$ och $k = -5$. Men $f$ ska vara **växande**, och $f'(x) = ke^{kx} > 0$ kräver $k > 0$ (eftersom $e^{kx} > 0$ alltid). Alltså gäller $k = 5$.
+
+**Svar:** $k = 5$`,
+        },
+    ],
+'ma4-2.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad motsvarar derivatan i en punkt grafiskt?`,
+            choices: [
+                `Tangentens lutning ($k$-värde) i punkten`,
+                `Kurvans $y$-värde i punkten`,
+                `Arean under kurvan`,
+                `Tangentens $y$-skärning ($m$-värde)`,
+            ],
+            correct: 0,
+            solution: `Grafiskt motsvarar derivatan i en punkt lutningen på den tangent (räta linje) som tangerar kurvan i den punkten — samma sak som tangentens riktningskoefficient $k$.
+
+**Svar:** Tangentens lutning ($k$-värde) i punkten`,
+        },
+        {
+            level: 1,
+            question: `Kurvan $y = x^2 + 4x - 7$ har derivatan $y' = 2x + 4$. Bestäm lutningen $k$ för tangenten i punkten där $x = 1$.`,
+            answer: { value: 6, unit: '', tol: 0.01 },
+            solution: `Tangentens lutning i en punkt är derivatans värde där, alltså $k = y'(1)$.
+
+$$
+k = y'(1) = 2\\cdot 1 + 4 = 6
+$$
+
+**Svar:** $k = 6$`,
+        },
+        {
+            level: 1,
+            question: `Vattenmängden i ett badkar ges av $V(t)$ liter efter $t$ minuter. Vilken enhet har derivatan $V'(t)$?`,
+            choices: [
+                `liter/minut`,
+                `liter`,
+                `minut`,
+                `liter $\\cdot$ minut`,
+            ],
+            correct: 0,
+            solution: `Derivatans enhet är enheten på $y$-axeln (liter) per enheten på $x$-axeln (minut). Derivatan är en förändringshastighet, så $V'(t)$ mäts i liter/minut.
+
+**Svar:** liter/minut`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm ekvationen för tangenten till kurvan $y = x^2 - 2x + 1$ i punkten där $x = 2$.`,
+            choices: [
+                `$y = 2x - 3$`,
+                `$y = 2x + 1$`,
+                `$y = 2x - 1$`,
+                `$y = 4x - 7$`,
+            ],
+            correct: 0,
+            solution: `Tangenten är en rät linje $y = kx + m$. Lutningen är derivatans värde: $y' = 2x - 2$, så
+
+$$
+k = y'(2) = 2\\cdot 2 - 2 = 2
+$$
+
+Tangeringspunktens $y$-koordinat fås ur kurvan: $y(2) = 2^2 - 2\\cdot 2 + 1 = 1$, alltså punkten $(2,\\ 1)$. Insättning i $y = 2x + m$ ger
+
+$$
+1 = 2\\cdot 2 + m \\quad\\Rightarrow\\quad m = 1 - 4 = -3
+$$
+
+**Svar:** $y = 2x - 3$`,
+        },
+        {
+            level: 2,
+            question: `En boll rullar så att sträckan (i meter) ges av $s(t) = 5t^2$, där $t$ är tiden i sekunder. Derivatan är $s'(t) = 10t$. Beräkna bollens momentana hastighet vid $t = 2\\ \\mathrm{s}$.`,
+            answer: { value: 20, unit: 'm/s', tol: 0.01 },
+            solution: `Derivatan av sträckan med avseende på tiden är hastigheten, $s'(t) = v(t)$. Momentanhastigheten vid $t = 2$ är
+
+$$
+v(2) = s'(2) = 10\\cdot 2 = 20\\ \\mathrm{m/s}
+$$
+
+**Svar:** $20\\ \\mathrm{m/s}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Den räta linjen $y = 4x + m$ är tangent till kurvan $y = x^2$. Bestäm $m$.`,
+            choices: [
+                `$m = -4$`,
+                `$m = 4$`,
+                `$m = -2$`,
+                `$m = 0$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** i tangeringspunkten har kurvan samma lutning som tangenten. Kurvans derivata är $y' = 2x$, och tangentens lutning är $4$, så
+
+$$
+2x = 4 \\quad\\Rightarrow\\quad x = 2
+$$
+
+Tangeringspunkten ligger på kurvan: $y = 2^2 = 4$, alltså punkten $(2,\\ 4)$. Denna punkt ligger även på tangenten $y = 4x + m$:
+
+$$
+4 = 4\\cdot 2 + m \\quad\\Rightarrow\\quad m = 4 - 8 = -4
+$$
+
+**Svar:** $m = -4$`,
+        },
+    ],
+'ma4-2.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket uttryck ger derivatan av en sammansatt funktion $y = f(g(x))$ enligt kedjeregeln?`,
+            choices: [
+                `$y' = f\\,'(g(x))\\cdot g'(x)$`,
+                `$y' = f\\,'(x)\\cdot g'(x)$`,
+                `$y' = f\\,'(g(x)) + g'(x)$`,
+                `$y' = f\\,'(g'(x))$`,
+            ],
+            correct: 0,
+            solution: `Kedjeregeln säger att man deriverar den yttre funktionen med den inre kvar och multiplicerar med den inre derivatan:
+
+$$
+y' = f\\,'(g(x))\\cdot g'(x)
+$$
+
+**Svar:** $y' = f\\,'(g(x))\\cdot g'(x)$`,
+        },
+        {
+            level: 1,
+            question: `Derivera $y = (2x + 1)^3$.`,
+            choices: [
+                `$y' = 6(2x + 1)^2$`,
+                `$y' = 3(2x + 1)^2$`,
+                `$y' = 2(2x + 1)^2$`,
+                `$y' = 6(2x + 1)^3$`,
+            ],
+            correct: 0,
+            solution: `Yttre funktion $z^3$, inre funktion $2x + 1$ med inre derivata $2$. Kedjeregeln ger:
+
+$$
+y' = 3(2x + 1)^2\\cdot 2 = 6(2x + 1)^2
+$$
+
+**Svar:** $y' = 6(2x + 1)^2$`,
+        },
+        {
+            level: 1,
+            question: `Funktionen $y = e^{2x}$ har derivatan $y' = 2e^{2x}$. Beräkna $y'$ för $x = 0$.`,
+            answer: { value: 2, unit: '', tol: 0.01 },
+            solution: `Yttre funktion $e^z$, inre funktion $2x$ med inre derivata $2$, så $y' = 2e^{2x}$. Vi sätter in $x = 0$:
+
+$$
+y'(0) = 2e^{2\\cdot 0} = 2e^{0} = 2\\cdot 1 = 2
+$$
+
+**Svar:** $y'(0) = 2$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Derivera $y = \\sqrt{x^2 + 1}$.`,
+            choices: [
+                `$y' = \\dfrac{x}{\\sqrt{x^2 + 1}}$`,
+                `$y' = \\dfrac{1}{2\\sqrt{x^2 + 1}}$`,
+                `$y' = \\dfrac{2x}{\\sqrt{x^2 + 1}}$`,
+                `$y' = \\dfrac{x}{2\\sqrt{x^2 + 1}}$`,
+            ],
+            correct: 0,
+            solution: `Vi skriver om roten som en potens: $y = (x^2 + 1)^{1/2}$. Kedjeregeln med inre derivata $2x$ ger:
+
+$$
+y' = \\frac{1}{2}(x^2 + 1)^{-1/2}\\cdot 2x = \\frac{2x}{2\\sqrt{x^2 + 1}} = \\frac{x}{\\sqrt{x^2 + 1}}
+$$
+
+**Svar:** $y' = \\dfrac{x}{\\sqrt{x^2 + 1}}$`,
+        },
+        {
+            level: 2,
+            question: `Funktionen $y = (x^2 - 3)^4$ har derivatan $y' = 8x(x^2 - 3)^3$. Beräkna $y'$ för $x = 2$.`,
+            answer: { value: 16, unit: '', tol: 0.01 },
+            solution: `Kedjeregeln ger $y' = 4(x^2 - 3)^3\\cdot 2x = 8x(x^2 - 3)^3$. Vi sätter in $x = 2$:
+
+$$
+y'(2) = 8\\cdot 2\\cdot (2^2 - 3)^3 = 16\\cdot (4 - 3)^3 = 16\\cdot 1^3 = 16
+$$
+
+**Svar:** $y'(2) = 16$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Kurvan $y = (x^2 - 4x)^3$ har vågräta tangenter i tre punkter. Bestäm samtliga $x$-värden där tangenten är vågrät.`,
+            choices: [
+                `$x = 0$, $x = 2$ och $x = 4$`,
+                `Endast $x = 2$`,
+                `$x = 0$ och $x = 4$`,
+                `$x = 2$ och $x = 4$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** kedjeregeln ger en produkt av två faktorer, och båda faktorernas nollställen ger vågrät tangent — inte bara den inre derivatans.
+
+$$
+y' = 3(x^2 - 4x)^2\\cdot (2x - 4)
+$$
+
+En vågrät tangent kräver $y' = 0$, alltså att någon faktor är noll:
+
+$$
+(x^2 - 4x)^2 = 0 \\quad\\Leftrightarrow\\quad x(x - 4) = 0 \\quad\\Leftrightarrow\\quad x = 0 \\text{ eller } x = 4
+$$
+
+$$
+2x - 4 = 0 \\quad\\Leftrightarrow\\quad x = 2
+$$
+
+Glömmer man den kvadrerade inre faktorn får man bara $x = 2$; struntar man i den inre derivatan missar man $x = 2$.
+
+**Svar:** $x = 0$, $x = 2$ och $x = 4$`,
+        },
+    ],
+'ma4-2.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Kedjeregeln på Leibniz form säger att om $y = f(z)$ och $z = g(x)$ så gäller ...`,
+            choices: [
+                `$\\dfrac{dy}{dx} = \\dfrac{dy}{dz}\\cdot \\dfrac{dz}{dx}$`,
+                `$\\dfrac{dy}{dx} = \\dfrac{dy}{dz} + \\dfrac{dz}{dx}$`,
+                `$\\dfrac{dy}{dx} = \\dfrac{dz}{dy}\\cdot \\dfrac{dx}{dz}$`,
+                `$\\dfrac{dy}{dx} = \\dfrac{dy}{dz}\\cdot \\dfrac{dx}{dz}$`,
+            ],
+            correct: 0,
+            solution: `Man deriverar den yttre funktionen med avseende på $z$ och multiplicerar med den inre funktionens derivata, $\\dfrac{dz}{dx}$. Ser man det som ett "bråk" förkortas $dz$ bort och kvar blir $\\dfrac{dy}{dx}$.
+
+**Svar:** $\\dfrac{dy}{dx} = \\dfrac{dy}{dz}\\cdot \\dfrac{dz}{dx}$`,
+        },
+        {
+            level: 1,
+            question: `Arean av en cirkel är $A(r) = \\pi r^2$. Vad är $\\dfrac{dA}{dr}$?`,
+            choices: [
+                `$2\\pi r$`,
+                `$\\pi r^2$`,
+                `$\\pi r$`,
+                `$2\\pi r^2$`,
+            ],
+            correct: 0,
+            solution: `Vi deriverar $A(r) = \\pi r^2$ med avseende på $r$. Konstanten $\\pi$ står kvar och $r^2$ deriveras till $2r$:
+
+$$
+\\frac{dA}{dr} = \\pi\\cdot 2r = 2\\pi r
+$$
+
+**Svar:** $2\\pi r$`,
+        },
+        {
+            level: 1,
+            question: `En sten kastas i en damm och ger upphov till en cirkulär ring vars radie växer med hastigheten $2\\ \\mathrm{m/s}$. Hur snabbt växer den cirkelns area i det ögonblick då radien är $5\\ \\mathrm{m}$? Svara i $\\mathrm{m^2/s}$ (avrunda till en decimal).`,
+            answer: { value: 62.83, unit: 'm²/s', tol: 0.5 },
+            solution: `Vi kopplar arean till tiden med kedjeregeln. Med $A(r) = \\pi r^2$ är $\\dfrac{dA}{dr} = 2\\pi r$.
+
+$$
+\\frac{dA}{dt} = \\frac{dA}{dr}\\cdot \\frac{dr}{dt} = 2\\pi r\\cdot \\frac{dr}{dt} = 2\\pi\\cdot 5\\cdot 2 = 20\\pi \\approx 62{,}8\\ \\mathrm{m^2/s}
+$$
+
+**Svar:** $\\approx 62{,}8\\ \\mathrm{m^2/s}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `En klotformad ballong blåses upp så att radien växer med hastigheten $0{,}5\\ \\mathrm{cm/s}$. Hur snabbt ökar volymen i det ögonblick då radien är $10\\ \\mathrm{cm}$? Volymen för ett klot är $V(r) = \\dfrac{4\\pi r^3}{3}$. Svara i $\\mathrm{cm^3/s}$ (avrunda till heltal).`,
+            answer: { value: 628.3, unit: 'cm³/s', tol: 1 },
+            solution: `Vi ställer upp kedjeregeln. Deriverar vi $V(r) = \\dfrac{4\\pi r^3}{3}$ får vi $\\dfrac{dV}{dr} = \\dfrac{3\\cdot 4\\pi r^2}{3} = 4\\pi r^2$.
+
+$$
+\\frac{dV}{dt} = \\frac{dV}{dr}\\cdot \\frac{dr}{dt} = 4\\pi r^2\\cdot \\frac{dr}{dt} = 4\\pi\\cdot 10^2\\cdot 0{,}5 = 200\\pi \\approx 628\\ \\mathrm{cm^3/s}
+$$
+
+**Svar:** $\\approx 628\\ \\mathrm{cm^3/s}$`,
+        },
+        {
+            level: 2,
+            question: `Luft pumpas in i en klotformad boll med den konstanta hastigheten $100\\ \\mathrm{cm^3/s}$. Hur snabbt växer bollens radie i det ögonblick då radien är $5\\ \\mathrm{cm}$? Volymen för ett klot är $V(r) = \\dfrac{4\\pi r^3}{3}$. Svara i $\\mathrm{cm/s}$ (avrunda till två decimaler).`,
+            answer: { value: 0.32, unit: 'cm/s', tol: 0.01 },
+            solution: `Vi ställer upp kedjeregeln och löser ut $\\dfrac{dr}{dt}$. Med $\\dfrac{dV}{dr} = 4\\pi r^2$:
+
+$$
+\\frac{dV}{dt} = \\frac{dV}{dr}\\cdot \\frac{dr}{dt}
+\\quad\\Leftrightarrow\\quad
+\\frac{dr}{dt} = \\frac{\\dfrac{dV}{dt}}{4\\pi r^2} = \\frac{100}{4\\pi\\cdot 5^2} = \\frac{100}{100\\pi} = \\frac{1}{\\pi} \\approx 0{,}32\\ \\mathrm{cm/s}
+$$
+
+**Svar:** $\\approx 0{,}32\\ \\mathrm{cm/s}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En cirkelformad oljefläck har en area som växer med den konstanta hastigheten $8\\pi\\ \\mathrm{m^2/s}$. Hur snabbt växer radien i det ögonblick då arean är $16\\pi\\ \\mathrm{m^2}$?`,
+            choices: [
+                `$1\\ \\mathrm{m/s}$`,
+                `$2\\ \\mathrm{m/s}$`,
+                `$0{,}5\\ \\mathrm{m/s}$`,
+                `$8\\pi\\ \\mathrm{m/s}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** här är det *arean* som växer konstant, och det är *arean* — inte radien — som är given. Vi måste därför både hitta radien först och lösa ut $\\dfrac{dr}{dt}$ ur kedjeregeln.
+
+Ur $A = \\pi r^2 = 16\\pi$ följer $r^2 = 16$, alltså $r = 4\\ \\mathrm{m}$.
+
+Kedjeregeln $\\dfrac{dA}{dt} = 2\\pi r\\cdot \\dfrac{dr}{dt}$ löst för radiens hastighet ger
+
+$$
+\\frac{dr}{dt} = \\frac{\\dfrac{dA}{dt}}{2\\pi r} = \\frac{8\\pi}{2\\pi\\cdot 4} = \\frac{8\\pi}{8\\pi} = 1\\ \\mathrm{m/s}
+$$
+
+**Svar:** $1\\ \\mathrm{m/s}$`,
+        },
+    ],
+'ma4-2.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken är derivatan av $f(x) = \\sin x$ (vinkeln i radianer)?`,
+            choices: [
+                `$f'(x) = \\cos x$`,
+                `$f'(x) = -\\cos x$`,
+                `$f'(x) = -\\sin x$`,
+                `$f'(x) = \\cos x - 1$`,
+            ],
+            correct: 0,
+            solution: `Deriveringsregeln säger att sinus deriveras till cosinus när vinkeln mäts i radianer.
+
+$$
+f(x) = \\sin x \\quad\\Rightarrow\\quad f'(x) = \\cos x
+$$
+
+**Svar:** $f'(x) = \\cos x$`,
+        },
+        {
+            level: 1,
+            question: `Derivera $f(x) = 6\\cos x$.`,
+            choices: [
+                `$f'(x) = -6\\sin x$`,
+                `$f'(x) = 6\\sin x$`,
+                `$f'(x) = -6\\cos x$`,
+                `$f'(x) = 6\\cos x$`,
+            ],
+            correct: 0,
+            solution: `Cosinus deriveras till $-\\sin x$, och konstanten $6$ följer med.
+
+$$
+f'(x) = 6\\cdot(-\\sin x) = -6\\sin x
+$$
+
+**Svar:** $f'(x) = -6\\sin x$`,
+        },
+        {
+            level: 1,
+            question: `Funktionen $f(x) = 3\\sin x$ har vinkeln $x$ i radianer. Beräkna $f'(0)$.`,
+            answer: { value: 3, unit: '', tol: 0.01 },
+            solution: `Vi deriverar och sätter in $x = 0$. Kom ihåg att $\\cos 0 = 1$.
+
+$$
+f'(x) = 3\\cos x \\quad\\Rightarrow\\quad f'(0) = 3\\cos 0 = 3\\cdot 1 = 3
+$$
+
+**Svar:** $f'(0) = 3$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Derivera $f(x) = -5\\cos\\dfrac{x}{3}$.`,
+            choices: [
+                `$f'(x) = \\dfrac{5}{3}\\sin\\dfrac{x}{3}$`,
+                `$f'(x) = 5\\sin\\dfrac{x}{3}$`,
+                `$f'(x) = -\\dfrac{5}{3}\\sin\\dfrac{x}{3}$`,
+                `$f'(x) = \\dfrac{5}{3}\\cos\\dfrac{x}{3}$`,
+            ],
+            correct: 0,
+            solution: `Vi använder kedjeregeln. Den inre funktionen är $\\dfrac{x}{3}$ med derivatan $\\dfrac{1}{3}$, och cosinus deriveras till $-\\sin$.
+
+$$
+f'(x) = -5\\cdot\\left(-\\sin\\frac{x}{3}\\right)\\cdot\\frac{1}{3} = \\frac{5}{3}\\sin\\frac{x}{3}
+$$
+
+**Svar:** $f'(x) = \\dfrac{5}{3}\\sin\\dfrac{x}{3}$`,
+        },
+        {
+            level: 2,
+            question: `Kurvan $y = 4\\sin 2x$ har vinkeln i radianer. Beräkna lutningen i punkten där $x = 0$.`,
+            answer: { value: 8, unit: '', tol: 0.01 },
+            solution: `Lutningen ges av derivatans värde. Vi deriverar med kedjeregeln (inre derivatan $2$):
+
+$$
+y' = 4\\cos 2x\\cdot 2 = 8\\cos 2x
+$$
+
+Sätt in $x = 0$, då $\\cos 0 = 1$:
+
+$$
+y'(0) = 8\\cos 0 = 8\\cdot 1 = 8
+$$
+
+**Svar:** Lutningen är $8$.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Kurvan $y = \\sin x + \\cos x$ har en horisontell tangent för ett värde på $x$ i intervallet $0 \\leq x \\leq \\dfrac{\\pi}{2}$. Bestäm detta $x$ (i radianer).`,
+            choices: [
+                `$x = \\dfrac{\\pi}{4}$`,
+                `$x = \\dfrac{\\pi}{2}$`,
+                `$x = \\dfrac{\\pi}{3}$`,
+                `$x = 0$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** en horisontell tangent betyder att derivatan är noll. Vi deriverar och löser $y' = 0$.
+
+$$
+y' = \\cos x - \\sin x
+$$
+
+$$
+\\cos x - \\sin x = 0 \\quad\\Leftrightarrow\\quad \\sin x = \\cos x \\quad\\Leftrightarrow\\quad \\tan x = 1
+$$
+
+I intervallet $0 \\leq x \\leq \\dfrac{\\pi}{2}$ ger $\\tan x = 1$ lösningen $x = \\dfrac{\\pi}{4}$.
+
+**Svar:** $x = \\dfrac{\\pi}{4}$`,
+        },
+    ],
+'ma4-2.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad är $D(\\ln x)$ för $x > 0$?`,
+            choices: [
+                `$\\dfrac{1}{x}$`,
+                `$\\ln x$`,
+                `$x\\ln x$`,
+                `$e^x$`,
+            ],
+            correct: 0,
+            solution: `Derivatan av logaritmfunktionen $y = \\ln x$ är
+
+$$
+D(\\ln x) = \\frac{1}{x}
+$$
+
+**Svar:** $\\dfrac{1}{x}$`,
+        },
+        {
+            level: 1,
+            question: `Derivera $y = e^{3x}$.`,
+            choices: [
+                `$3e^{3x}$`,
+                `$e^{3x}$`,
+                `$3x\\,e^{3x}$`,
+                `$e^{3}$`,
+            ],
+            correct: 0,
+            solution: `Derivatan av en exponentialfunktion med basen $e$ är densamma multiplicerad med exponentens inre derivata. Här är den inre derivatan $3$:
+
+$$
+D(e^{3x}) = e^{3x}\\cdot 3 = 3e^{3x}
+$$
+
+**Svar:** $3e^{3x}$`,
+        },
+        {
+            level: 1,
+            question: `Derivera $y = 5\\ln x$.`,
+            choices: [
+                `$\\dfrac{5}{x}$`,
+                `$5x$`,
+                `$\\dfrac{1}{5x}$`,
+                `$5\\ln x$`,
+            ],
+            correct: 0,
+            solution: `Konstanten $5$ följer med, och derivatan av $\\ln x$ är $\\dfrac{1}{x}$:
+
+$$
+\\frac{d}{dx}(5\\ln x) = 5\\cdot \\frac{1}{x} = \\frac{5}{x}
+$$
+
+**Svar:** $\\dfrac{5}{x}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Derivera $y = \\ln t^4$ med avseende på $t$.`,
+            choices: [
+                `$\\dfrac{4}{t}$`,
+                `$\\dfrac{1}{t^4}$`,
+                `$4t^3$`,
+                `$\\dfrac{4}{t^4}$`,
+            ],
+            correct: 0,
+            solution: `Yttre funktion $\\ln z$ med inre funktion $z = t^4$. Kedjeregeln ger
+
+$$
+\\frac{d}{dt}(\\ln t^4) = \\frac{1}{t^4}\\cdot 4t^3 = \\frac{4t^3}{t^4} = \\frac{4}{t}
+$$
+
+**Svar:** $\\dfrac{4}{t}$`,
+        },
+        {
+            level: 2,
+            question: `Derivera $y = e^{\\sin x}$.`,
+            choices: [
+                `$\\cos x\\cdot e^{\\sin x}$`,
+                `$e^{\\sin x}$`,
+                `$e^{\\cos x}$`,
+                `$\\sin x\\cdot e^{\\cos x}$`,
+            ],
+            correct: 0,
+            solution: `Yttre funktion $e^z$ med inre funktion $z = \\sin x$. Den inre derivatan är $\\cos x$:
+
+$$
+y' = e^{\\sin x}\\cdot \\cos x = \\cos x\\cdot e^{\\sin x}
+$$
+
+**Svar:** $\\cos x\\cdot e^{\\sin x}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Derivera $y = \\ln(3x - 4)^2$ och förenkla svaret så långt som möjligt.`,
+            choices: [
+                `$\\dfrac{6}{3x - 4}$`,
+                `$\\dfrac{2}{3x - 4}$`,
+                `$\\dfrac{6(3x - 4)}{(3x - 4)^2}$`,
+                `$\\dfrac{1}{(3x - 4)^2}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** den inre funktionen $(3x - 4)^2$ har i sin tur en inre funktion $(3x - 4)$, så kedjeregeln tillämpas i två steg — och sedan måste bråket förkortas.
+
+Yttre funktion $\\ln z$ med $z = (3x - 4)^2$:
+
+$$
+y' = \\frac{1}{(3x - 4)^2}\\cdot 2(3x - 4)\\cdot 3
+$$
+
+Förenkla genom att förkorta bort en faktor $(3x - 4)$:
+
+$$
+y' = \\frac{6(3x - 4)}{(3x - 4)^2} = \\frac{6}{3x - 4}
+$$
+
+Alternativet $\\dfrac{6(3x - 4)}{(3x - 4)^2}$ är rätt men oförkortat.
+
+**Svar:** $\\dfrac{6}{3x - 4}$`,
+        },
+    ],
+'ma4-2.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Om $y = f(x)\\cdot g(x)$, vilket uttryck är derivatan $y'$?`,
+            choices: [
+                `$f'(x)\\cdot g(x) + f(x)\\cdot g'(x)$`,
+                `$f'(x)\\cdot g'(x)$`,
+                `$f'(x)\\cdot g(x) - f(x)\\cdot g'(x)$`,
+                `$f(x)\\cdot g(x)$`,
+            ],
+            correct: 0,
+            solution: `Produktregeln säger att man deriverar den ena faktorn i taget och adderar: derivatan av $f$ gånger $g$, plus $f$ gånger derivatan av $g$.
+
+**Svar:** $f'(x)\\cdot g(x) + f(x)\\cdot g'(x)$`,
+        },
+        {
+            level: 1,
+            question: `Derivera $y = x^2\\cdot \\sin x$.`,
+            choices: [
+                `$2x\\sin x + x^2\\cos x$`,
+                `$2x\\cos x$`,
+                `$2x\\cos x + x^2\\sin x$`,
+                `$x^2\\cos x$`,
+            ],
+            correct: 0,
+            solution: `Med $f(x) = x^2$ och $g(x) = \\sin x$ är $f'(x) = 2x$ och $g'(x) = \\cos x$. Produktregeln ger
+
+$$
+y' = 2x\\cdot \\sin x + x^2\\cdot \\cos x = 2x\\sin x + x^2\\cos x
+$$
+
+**Svar:** $2x\\sin x + x^2\\cos x$`,
+        },
+        {
+            level: 1,
+            question: `Funktionen $y = \\tan x$ har derivatan $y' = \\dfrac{1}{\\cos^2 x}$. Beräkna $y'(0)$.`,
+            answer: { value: 1, unit: '', tol: 0.01 },
+            solution: `Vi sätter in $x = 0$ i derivatan. Eftersom $\\cos 0 = 1$ blir
+
+$$
+y'(0) = \\frac{1}{\\cos^2 0} = \\frac{1}{1^2} = 1
+$$
+
+**Svar:** 1`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Kurvan $y = \\dfrac{x}{x^2 + 1}$ har en viss lutning i punkten där $x = 2$. Beräkna $y'(2)$.`,
+            answer: { value: -0.12, unit: '', tol: 0.005 },
+            solution: `Med $f(x) = x$ och $g(x) = x^2 + 1$ är $f'(x) = 1$ och $g'(x) = 2x$. Kvotregeln ger
+
+$$
+y' = \\frac{1\\cdot(x^2 + 1) - x\\cdot 2x}{(x^2 + 1)^2} = \\frac{1 - x^2}{(x^2 + 1)^2}
+$$
+
+Vi sätter in $x = 2$:
+
+$$
+y'(2) = \\frac{1 - 4}{(4 + 1)^2} = \\frac{-3}{25} = -0{,}12
+$$
+
+**Svar:** $-0{,}12$`,
+        },
+        {
+            level: 2,
+            question: `Derivera $y = \\dfrac{\\ln x}{x}$.`,
+            choices: [
+                `$\\dfrac{1 - \\ln x}{x^2}$`,
+                `$\\dfrac{\\ln x - 1}{x^2}$`,
+                `$\\dfrac{1}{x^2}$`,
+                `$\\dfrac{1 - \\ln x}{x}$`,
+            ],
+            correct: 0,
+            solution: `Med $f(x) = \\ln x$ och $g(x) = x$ är $f'(x) = \\dfrac{1}{x}$ och $g'(x) = 1$. Kvotregeln ger
+
+$$
+y' = \\frac{\\dfrac{1}{x}\\cdot x - \\ln x\\cdot 1}{x^2} = \\frac{1 - \\ln x}{x^2}
+$$
+
+**Svar:** $\\dfrac{1 - \\ln x}{x^2}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Kurvan $y = x\\,e^{x}$ har en horisontell tangent i exakt en punkt. Bestäm punktens koordinater.`,
+            choices: [
+                `$\\left(-1,\\ -\\dfrac{1}{e}\\right)$`,
+                `$(0,\\ 0)$`,
+                `$(1,\\ e)$`,
+                `$\\left(-1,\\ e\\right)$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** en horisontell tangent betyder $y' = 0$. Produktregeln på $y = x\\cdot e^{x}$ ger
+
+$$
+y' = 1\\cdot e^{x} + x\\cdot e^{x} = e^{x}(1 + x)
+$$
+
+Eftersom $e^{x} > 0$ för alla $x$ kan faktorn $e^{x}$ aldrig bli noll. Alltså måste den andra faktorn vara noll:
+
+$$
+1 + x = 0 \\quad\\Leftrightarrow\\quad x = -1
+$$
+
+Vi sätter in $x = -1$ i funktionen för $y$-värdet:
+
+$$
+y = (-1)\\cdot e^{-1} = -\\frac{1}{e}
+$$
+
+**Svar:** $\\left(-1,\\ -\\dfrac{1}{e}\\right)$`,
+        },
+    ],
+'ma4-2.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Du har definierat en funktion $f$ i Geogebra. Vilket kommando ger derivatans värde i punkten $x = 3$?`,
+            choices: [
+                `$f'(3)$`,
+                `$f(3)$`,
+                `$\\text{NLös}(f(x) = 0)$`,
+                `Verktyget Nollställen`,
+            ],
+            correct: 0,
+            solution: `Derivatans värde i en punkt får man genom att skriva $f'$ följt av $x$-värdet. $f(3)$ ger funktionens värde, inte förändringen, och de övriga alternativen löser i stället ekvationer.
+
+**Svar:** $f'(3)$`,
+        },
+        {
+            level: 1,
+            question: `En storhet beskrivs av funktionen $f$. Du vill veta var storheten inte ändras alls. Vilken ekvation ska du lösa?`,
+            choices: [
+                `$f'(x) = 0$`,
+                `$f(x) = 0$`,
+                `$f''(x) = 0$`,
+                `$f(x) = x$`,
+            ],
+            correct: 0,
+            solution: `"Ändras inte alls" betyder att förändringshastigheten är noll. Förändringshastigheten är derivatan, så vi löser $f'(x) = 0$. Ekvationen $f(x) = 0$ ger i stället var funktionen själv är noll.
+
+**Svar:** $f'(x) = 0$`,
+        },
+        {
+            level: 1,
+            question: `I Geogebra definierar du $f(x) = x^3 - 6x$ och skriver $f'(2)$. Vilket värde får du (kontrollera för hand)?`,
+            answer: { value: 6, unit: '', tol: 0.01 },
+            solution: `Derivatan är $f'(x) = 3x^2 - 6$. Vi sätter in $x = 2$:
+
+$$
+f'(2) = 3\\cdot 2^2 - 6 = 12 - 6 = 6
+$$
+
+**Svar:** 6`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `För en dammnivå $N(t)$ (i meter, $t$ i månader) ger Geogebra $N'(4) \\approx -1{,}7$. Hur tolkas värdet?`,
+            choices: [
+                `Nivån minskar med ungefär $1{,}7$ meter per månad`,
+                `Nivån ökar med ungefär $1{,}7$ meter per månad`,
+                `Nivån är $1{,}7$ meter vid $t = 4$`,
+                `Nivån minskar med $1{,}7$ meter under hela perioden`,
+            ],
+            correct: 0,
+            solution: `$N'(4)$ är förändringshastigheten vid $t = 4$. Det negativa tecknet betyder att nivån avtar, och beloppet $1{,}7$ mäts i meter per månad eftersom $N$ är meter och $t$ månader. Värdet är en hastighet vid en tidpunkt, inte själva nivån och inte förändringen över hela perioden.
+
+**Svar:** Nivån minskar med ungefär $1{,}7$ meter per månad`,
+        },
+        {
+            level: 2,
+            question: `En intäkt beskrivs av $f(x) = -2x^2 + 12x$. Du skriver $\\text{NLös}(f'(x) = 0)$ i Geogebra. Vilket $x$-värde får du?`,
+            answer: { value: 3, unit: '', tol: 0.01 },
+            solution: `Verktyget löser $f'(x) = 0$. Derivatan är $f'(x) = -4x + 12$:
+
+$$
+-4x + 12 = 0 \\quad\\Leftrightarrow\\quad x = \\frac{12}{4} = 3
+$$
+
+**Svar:** $x = 3$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Funktionen $f(x) = x\\,e^{-x}$ har en maximipunkt. Löser du $f'(x) = 0$ för hand — vilket $x$-värde får du?`,
+            choices: [
+                `$x = 1$`,
+                `Ekvationen saknar lösning eftersom $e^{-x} \\neq 0$`,
+                `$x = 0$`,
+                `$x = e$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** derivera med produktregeln och bryt ut $e^{-x}$ — då kan man använda nollproduktmetoden.
+
+$$
+f'(x) = 1\\cdot e^{-x} + x\\cdot(-e^{-x}) = e^{-x}(1 - x)
+$$
+
+En produkt är noll när någon faktor är noll. Faktorn $e^{-x}$ är **alltid** positiv och kan aldrig bli noll, så det är just därför den inte ger någon lösning — kvar blir
+
+$$
+1 - x = 0 \\quad\\Leftrightarrow\\quad x = 1
+$$
+
+Fällan är att stanna vid "$e^{-x} \\neq 0$" och tro att ekvationen saknar lösning; i själva verket är det den andra faktorn som ger $x = 1$.
+
+**Svar:** $x = 1$`,
+        },
+    ],
+'ma4-2.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En deriverbar funktion har $f'(a) = 0$ och $f''(a) > 0$. Vilken typ av punkt är $x = a$?`,
+            choices: [
+                `En lokal minimipunkt`,
+                `En lokal maximipunkt`,
+                `En terrasspunkt`,
+                `En punkt där funktionen växer`,
+            ],
+            correct: 0,
+            solution: `Att $f'(a) = 0$ betyder att lutningen är noll, så det är en extrempunkt eller terrasspunkt. Andraderivatans tecken avgör karaktären: $f''(a) > 0$ betyder att kurvan böjer uppåt ("glad" kurva), alltså en minimipunkt.
+
+**Svar:** En lokal minimipunkt`,
+        },
+        {
+            level: 1,
+            question: `Vanjas rektangulära hästhage mot en mur har arean $A(x) = 60x - 2x^2$, där $x$ är sidan mot muren i meter. Beräkna arean då $x = 10\\ \\mathrm{m}$.`,
+            answer: { value: 400, unit: 'm²', tol: 0 },
+            solution: `Vi sätter in $x = 10$ i funktionen.
+
+$$
+A(10) = 60\\cdot 10 - 2\\cdot 10^2 = 600 - 200 = 400
+$$
+
+**Svar:** $400\\ \\mathrm{m}^2$`,
+        },
+        {
+            level: 1,
+            question: `Arean av Vanjas hästhage är $A(x) = 60x - 2x^2$. Derivera och lös $A'(x) = 0$. Vilket $x$-värde ger extrempunkten?`,
+            answer: { value: 15, unit: 'm', tol: 0 },
+            solution: `Vi deriverar och sätter derivatan lika med noll.
+
+$$
+A'(x) = 60 - 4x
+$$
+
+$$
+60 - 4x = 0 \\quad\\Leftrightarrow\\quad x = \\frac{60}{4} = 15
+$$
+
+**Svar:** $x = 15\\ \\mathrm{m}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm det lokala minimivärdet för funktionen $f(x) = x^3 - 12x$.`,
+            answer: { value: -16, unit: '', tol: 0 },
+            solution: `Vi deriverar och löser $f'(x) = 0$:
+
+$$
+f'(x) = 3x^2 - 12 = 0 \\quad\\Leftrightarrow\\quad x^2 = 4 \\quad\\Leftrightarrow\\quad x = \\pm 2
+$$
+
+Andraderivatan är $f''(x) = 6x$. Eftersom $f''(2) = 12 > 0$ är $x = 2$ en minimipunkt. Minimivärdet är $y$-koordinaten:
+
+$$
+f(2) = 2^3 - 12\\cdot 2 = 8 - 24 = -16
+$$
+
+**Svar:** Det lokala minimivärdet är $-16$.`,
+        },
+        {
+            level: 2,
+            question: `Bestäm det största värdet av $f(x) = x^3 - 12x$ i intervallet $0 \\le x \\le 3$.`,
+            answer: { value: 0, unit: '', tol: 0 },
+            solution: `Vi jämför funktionsvärdet i ändpunkterna och i de extrempunkter som ligger inom intervallet. Extrempunkterna ligger vid $x = \\pm 2$; bara $x = 2$ är med i intervallet.
+
+$$
+f(0) = 0, \\qquad f(2) = 8 - 24 = -16, \\qquad f(3) = 27 - 36 = -9
+$$
+
+Det största av dessa är $0$. Fällan är att $x = 2$ ger en *minimi*punkt, så det största värdet finns i stället i ändpunkten $x = 0$.
+
+**Svar:** Det största värdet är $0$ (vid $x = 0$).`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Talet 12 ska delas i två positiva tal $x$ och $12 - x$ så att produkten $P = x^2(12 - x)$ blir så stor som möjligt. Bestäm det största värdet av produkten.`,
+            choices: [
+                `256`,
+                `216`,
+                `288`,
+                `144`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** använd villkoret för att skriva produkten som en funktion av *en* variabel, derivera och förkasta den rot som inte ger något maximum.
+
+$$
+P(x) = x^2(12 - x) = 12x^2 - x^3
+$$
+
+$$
+P'(x) = 24x - 3x^2 = 3x(8 - x) = 0 \\quad\\Leftrightarrow\\quad x = 0 \\ \\text{ eller } \\ x = 8
+$$
+
+Roten $x = 0$ ger produkten $0$ (talen måste vara positiva), så maximum finns vid $x = 8$. Då är delarna $8$ och $4$:
+
+$$
+P(8) = 8^2\\cdot(12 - 8) = 64\\cdot 4 = 256
+$$
+
+Alternativet $216$ är fällan att dela lika ($x = 6$ ger $6^2\\cdot 6 = 216$), vilket inte är störst.
+
+**Svar:** $256$`,
+        },
+    ],
+'ma4-2.10': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `I ett extremvärdesproblem ritar man upp grafen till funktionen som ska optimeras. Vad läser man sedan av med verktyget för extrempunkter?`,
+            choices: [
+                `Grafens maximi- och minimipunkter`,
+                `Grafens nollställen`,
+                `Grafens skärning med $y$-axeln`,
+                `Grafens lutning i varje punkt`,
+            ],
+            correct: 0,
+            solution: `Tumregeln vid extremvärdesproblem med digitala hjälpmedel är att rita grafen till funktionen och läsa av dess maximi- och minimipunkter. Extrempunktens $y$-koordinat är det sökta största eller minsta värdet.
+
+**Svar:** Grafens maximi- och minimipunkter`,
+        },
+        {
+            level: 1,
+            question: `Ett digitalt hjälpmedel ger en funktions maximipunkt som $A = (4{,}2;\\ 27{,}8)$. Vilket är funktionens största värde?`,
+            answer: { value: 27.8, unit: '', tol: 0.05 },
+            solution: `Funktionens största värde är maximipunktens $y$-koordinat, medan $x$-koordinaten talar om var maximum inträffar.
+
+$$
+\\text{största värde} = 27{,}8
+$$
+
+**Svar:** 27,8`,
+        },
+        {
+            level: 1,
+            question: `Läkemedelskoncentrationen $K(t) = 5t^{1{,}4}\\cdot e^{-0{,}25t} + 1{,}5\\cos(0{,}8t) + 3$ ritas i GeoGebra, som ger maximipunkten $A = (7{,}09;\\ 17{,}41)$. Ange den maximala koncentrationen avrundad till en decimal (mg/liter).`,
+            answer: { value: 17.4, unit: 'mg/liter', tol: 0.05 },
+            solution: `Den maximala koncentrationen är $y$-koordinaten i maximipunkten $A$.
+
+$$
+K_{\\max} = 17{,}41 \\approx 17{,}4\\ \\mathrm{mg/liter}
+$$
+
+**Svar:** ca 17,4 mg/liter`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `För samma läkemedel som ovan vill man veta när koncentrationen ökar som snabbast. Man deriverar $K(t)$ och GeoGebra ger derivatans maximipunkt som $A = (0{,}62;\\ 3{,}83)$. Ange den maximala ökningstakten avrundad till en decimal (mg/liter per timme).`,
+            answer: { value: 3.8, unit: 'mg/liter per timme', tol: 0.05 },
+            solution: `Ökningstakten är förändringshastigheten, alltså derivatan $K'(t)$. Störst ökning inträffar där $K'(t)$ har sitt största värde, som är $y$-koordinaten i derivatans maximipunkt.
+
+$$
+K'_{\\max} = 3{,}83 \\approx 3{,}8\\ \\mathrm{mg/liter} \\text{ per timme}
+$$
+
+**Svar:** ca 3,8 mg/liter per timme`,
+        },
+        {
+            level: 2,
+            question: `En kostnad $C(x)$ (i tusen kr) ska minimeras. I GeoGebra hittar man extrempunkterna $(2;\\ 15)$ som är en minimipunkt och $(6;\\ 40)$ som är en maximipunkt. Vilket $x$ ger den lägsta kostnaden?`,
+            choices: [
+                `$x = 2$`,
+                `$x = 6$`,
+                `$x = 15$`,
+                `$x = 40$`,
+            ],
+            correct: 0,
+            solution: `Den lägsta kostnaden svarar mot **minimipunkten**, inte maximipunkten. Minimipunkten är $(2;\\ 15)$, så den lägsta kostnaden inträffar vid $x = 2$ och är $15$ tusen kr. Värdena $15$ och $40$ är $y$-koordinater (kostnader), inte $x$-värden.
+
+**Svar:** $x = 2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Modellen $K(t) = 5t^{1{,}4}\\cdot e^{-0{,}25t} + 1{,}5\\cos(0{,}8t) + 3$ gäller endast för $t \\geq 0$. När den snabbaste ökningstakten söks studeras derivatans graf $K'(t)$, som svänger och har flera lokala maxima. Hjälpmedlet visar en extrempunkt även vid ett litet negativt $t$-värde. Varför ska man ändå välja maximipunkten vid $t = 0{,}62$?`,
+            choices: [
+                `Eftersom modellen bara gäller för $t \\geq 0$ saknar en extrempunkt med negativt $t$ mening — den giltiga största ökningstakten är derivatans största värde i området $t \\geq 0$.`,
+                `Eftersom en negativ tidpunkt alltid ger ett större värde på derivatan.`,
+                `Eftersom derivatan $K'(t)$ är noll vid $t = 0{,}62$.`,
+                `Eftersom $t = 0{,}62$ är funktionens $K(t)$ maximipunkt.`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** en digital lösning måste tolkas mot modellens giltighetsområde. Grafen till $K'(t)$ finns matematiskt för alla $t$, men modellen gäller bara för $t \\geq 0$, så extrempunkter med $t < 0$ är utan mening här. Den snabbaste ökningen är därför derivatans största värde i området $t \\geq 0$, som avläses vid $t = 0{,}62$.
+
+Fällan i alternativ 4 är att blanda ihop de två frågorna: funktionens $K(t)$ egen maximipunkt ligger vid $t = 7{,}09$ (störst koncentration), medan derivatans $K'(t)$ maximipunkt vid $t = 0{,}62$ ger störst ökningstakt.
+
+**Svar:** Eftersom modellen bara gäller för $t \\geq 0$; den giltiga största ökningstakten är derivatans största värde i det området.`,
+        },
+    ],
+'ma4-2.11': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `I en teckentabell växlar derivatan tecken från $-$ till $+$ vid $x = 2$. Vilken karaktär har punkten där $x = 2$?`,
+            choices: [
+                `En lokal minimipunkt`,
+                `En lokal maximipunkt`,
+                `En terrasspunkt`,
+                `En ändpunkt`,
+            ],
+            correct: 0,
+            solution: `När derivatan går från negativ till positiv avtar funktionen före punkten och växer efter den — kurvan vänder uppåt.
+
+**Svar:** En lokal minimipunkt`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $e^x(x^2 - 4) = 0$ med nollproduktmetoden.`,
+            choices: [
+                `$x = -2$ och $x = 2$`,
+                `$x = 4$`,
+                `$x = 2$`,
+                `Ekvationen saknar lösning`,
+            ],
+            correct: 0,
+            solution: `Faktorn $e^x = 0$ saknar lösning eftersom $e^x > 0$ för alla $x$. Kvar är:
+
+$$
+x^2 - 4 = 0 \\quad\\Leftrightarrow\\quad x^2 = 4 \\quad\\Leftrightarrow\\quad x = \\pm 2
+$$
+
+**Svar:** $x = -2$ och $x = 2$`,
+        },
+        {
+            level: 1,
+            question: `Funktionen $f(x) = (x - 1)^2 e^x$ har en minimipunkt vid $x = 1$. Beräkna minimipunktens $y$-koordinat.`,
+            answer: { value: 0, unit: '', tol: 0.001 },
+            solution: `Vi sätter in $x = 1$ i den ursprungliga funktionen:
+
+$$
+f(1) = (1 - 1)^2\\cdot e^1 = 0^2\\cdot e = 0
+$$
+
+**Svar:** 0`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Funktionen $f(x) = (x - 1)^2 e^x$ har en lokal maximipunkt vid $x = -1$. Beräkna maximipunktens $y$-koordinat med två decimaler.`,
+            answer: { value: 1.47, unit: '', tol: 0.02 },
+            solution: `Vi sätter in $x = -1$ i den ursprungliga funktionen:
+
+$$
+f(-1) = (-1 - 1)^2\\cdot e^{-1} = (-2)^2\\cdot e^{-1} = \\frac{4}{e} \\approx 1{,}47
+$$
+
+**Svar:** 1,47`,
+        },
+        {
+            level: 2,
+            question: `En funktion har derivatan $g'(x) = x^2 e^x$. Vilken typ av punkt har grafen där $g'(x) = 0$?`,
+            choices: [
+                `En terrasspunkt i $x = 0$`,
+                `En minimipunkt i $x = 0$`,
+                `En maximipunkt i $x = 0$`,
+                `Ingen speciell punkt — $g'(x)$ saknar nollställe`,
+            ],
+            correct: 0,
+            solution: `Nollproduktmetoden ger $g'(x) = 0$ endast då $x^2 = 0$, alltså $x = 0$ (eftersom $e^x > 0$). Undersök derivatans tecken på båda sidor: för både $x < 0$ och $x > 0$ är $x^2 > 0$ och $e^x > 0$, så $g'(x) > 0$. Derivatan är noll men växlar **inte** tecken, vilket ger en terrasspunkt.
+
+**Svar:** En terrasspunkt i $x = 0$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Funktionen $f(x) = (x - 1)^2 e^x$ studeras i det slutna intervallet $-2 \\le x \\le 2$. Den har en lokal maximipunkt i $(-1;\\ 1{,}47)$. Bestäm funktionens **största värde** i intervallet.`,
+            choices: [
+                `$7{,}39$`,
+                `$1{,}47$`,
+                `$1{,}22$`,
+                `$0$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** i ett slutet intervall kan största värdet ligga i en *ändpunkt* — inte nödvändigtvis i den lokala maximipunkten. Man måste därför jämföra funktionens värde i extrempunkterna med värdena i ändpunkterna $x = -2$ och $x = 2$.
+
+$$
+\\begin{aligned}
+f(-2) &= (-3)^2 e^{-2} = \\frac{9}{e^2} \\approx 1{,}22\\\\
+f(-1) &= (-2)^2 e^{-1} = \\frac{4}{e} \\approx 1{,}47 \\quad(\\text{lokal max})\\\\
+f(1) &= 0\\\\
+f(2) &= (1)^2 e^2 = e^2 \\approx 7{,}39
+\\end{aligned}
+$$
+
+Det största av dessa värden är $f(2) \\approx 7{,}39$. Alternativet $1{,}47$ är fällan — det är bara det *lokala* maximivärdet.
+
+**Svar:** $7{,}39$`,
+        },
+    ],
+'ma4-2.12': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Var har funktionen $f(x) = \\dfrac{3}{x - 5}$ sin vertikala asymptot?`,
+            choices: [
+                `$x = 5$`,
+                `$x = -5$`,
+                `$x = 3$`,
+                `$y = 5$`,
+            ],
+            correct: 0,
+            solution: `En vertikal asymptot till en rationell funktion finns där nämnaren är lika med 0.
+
+$$
+x - 5 = 0 \\quad\\Leftrightarrow\\quad x = 5
+$$
+
+**Svar:** $x = 5$`,
+        },
+        {
+            level: 1,
+            question: `Bestäm $x$-koordinaten för den vertikala asymptoten till $f(x) = \\dfrac{1}{2x - 6}$.`,
+            answer: { value: 3, unit: '', tol: 0.001 },
+            solution: `Vi sätter nämnaren lika med 0 och löser ekvationen.
+
+$$
+2x - 6 = 0 \\quad\\Leftrightarrow\\quad 2x = 6 \\quad\\Leftrightarrow\\quad x = 3
+$$
+
+**Svar:** $x = 3$`,
+        },
+        {
+            level: 1,
+            question: `Bestäm $y$-värdet för den horisontella asymptoten till $f(x) = \\dfrac{4}{x + 2} + 5$.`,
+            answer: { value: 5, unit: '', tol: 0.001 },
+            solution: `Vi bestämmer gränsvärdet då $x \\to \\infty$. Termen $\\dfrac{4}{x + 2}$ går mot 0 när $x$ växer.
+
+$$
+\\lim_{x \\to \\infty} \\left( \\frac{4}{x + 2} + 5 \\right) = 0 + 5 = 5
+$$
+
+**Svar:** $y = 5$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm den horisontella asymptoten till $f(x) = \\dfrac{2x + 1}{x - 4}$.`,
+            choices: [
+                `$y = 2$`,
+                `$y = 1$`,
+                `$y = 4$`,
+                `$y = 0$`,
+            ],
+            correct: 0,
+            solution: `Vi bestämmer gränsvärdet då $x \\to \\infty$. Konstanttermerna kan försummas, så täljare och nämnare bestäms av $x$-termerna:
+
+$$
+\\lim_{x \\to \\infty} \\left( \\frac{2x + 1}{x - 4} \\right) = \\frac{2x}{x} = 2
+$$
+
+Gränsvärdet då $x \\to -\\infty$ blir detsamma.
+
+**Svar:** $y = 2$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm samtliga vertikala asymptoter till $f(x) = \\dfrac{1}{x^2 - 9}$.`,
+            choices: [
+                `$x = 3$ och $x = -3$`,
+                `Endast $x = 3$`,
+                `$x = 9$ och $x = -9$`,
+                `$x = 0$`,
+            ],
+            correct: 0,
+            solution: `Vertikala asymptoter finns där nämnaren är lika med 0. Nämnaren är en andragradsuttryck, så vi löser en andragradsekvation.
+
+$$
+x^2 - 9 = 0 \\quad\\Leftrightarrow\\quad x^2 = 9 \\quad\\Leftrightarrow\\quad x = \\pm 3
+$$
+
+Funktionen har alltså två vertikala asymptoter.
+
+**Svar:** $x = 3$ och $x = -3$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Bestäm den vertikala asymptoten till $f(x) = \\dfrac{x^2 - 4}{x - 2}$.`,
+            choices: [
+                `Ingen vertikal asymptot — faktorn $x - 2$ förkortas bort`,
+                `$x = 2$`,
+                `$x = -2$`,
+                `$x = 2$ och $x = -2$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** kontrollera om täljaren har en gemensam faktor med nämnaren innan du sätter nämnaren lika med 0. Täljaren är en konjugatregel:
+
+$$
+x^2 - 4 = (x - 2)(x + 2)
+$$
+
+Faktorn $x - 2$ förkortas då bort mot nämnaren:
+
+$$
+f(x) = \\frac{(x - 2)(x + 2)}{x - 2} = x + 2 \\qquad (x \\ne 2)
+$$
+
+Funktionen är alltså den räta linjen $y = x + 2$ (med ett hål i punkten $x = 2$) och saknar vertikal asymptot. Fällan $x = 2$ gäller bara om faktorn inte förkortas bort.
+
+**Svar:** Ingen vertikal asymptot`,
+        },
+    ],
+'ma4-2.13': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `När har en rationell funktion en sned asymptot?`,
+            choices: [
+                `När täljarens grad är exakt en högre än nämnarens grad`,
+                `När täljarens grad är exakt lika med nämnarens grad`,
+                `När täljarens grad är exakt en lägre än nämnarens grad`,
+                `När nämnarens grad är noll`,
+            ],
+            correct: 0,
+            solution: `En sned asymptot uppstår just när täljarens grad överstiger nämnarens med exakt $1$. Vid en polynomdivision blir då "heldelen" en förstagradare $kx + m$ och resten en restterm som går mot $0$.
+
+**Svar:** När täljarens grad är exakt en högre än nämnarens grad`,
+        },
+        {
+            level: 1,
+            question: `Ett uttryck är skrivet på formen $y = 3x - 2 + \\dfrac{5}{x+4}$. Vilken är den sneda asymptoten?`,
+            choices: [
+                `$y = 3x - 2$`,
+                `$y = 3x + 4$`,
+                `$y = \\dfrac{5}{x+4}$`,
+                `$y = -2$`,
+            ],
+            correct: 0,
+            solution: `Uttrycket har redan formen $y = kx + m + R(x)$, där resttermen $R(x) = \\dfrac{5}{x+4} \\to 0$ då $x \\to \\pm\\infty$. Den räta linjen $y = kx + m$ som blir kvar är den sneda asymptoten.
+
+**Svar:** $y = 3x - 2$`,
+        },
+        {
+            level: 1,
+            question: `I omskrivningen $y = 4x + 1 + \\dfrac{2}{x-5}$, vilken del är resttermen $R(x)$?`,
+            choices: [
+                `$\\dfrac{2}{x-5}$`,
+                `$4x$`,
+                `$4x + 1$`,
+                `$1$`,
+            ],
+            correct: 0,
+            solution: `Resttermen $R(x)$ är den del som går mot $0$ när $x$ blir mycket stor. Här är det bråket $\\dfrac{2}{x-5}$, medan $4x + 1$ är själva den sneda asymptoten.
+
+**Svar:** $\\dfrac{2}{x-5}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm den sneda asymptoten till $y = \\dfrac{2x^2 - 4x + 3}{x}$.`,
+            choices: [
+                `$y = 2x - 4$`,
+                `$y = 2x + 3$`,
+                `$y = 2x - 4 + \\dfrac{3}{x}$`,
+                `$y = 2x$`,
+            ],
+            correct: 0,
+            solution: `Vi delar upp bråket term för term:
+
+$$
+\\frac{2x^2 - 4x + 3}{x} = \\frac{2x^2}{x} - \\frac{4x}{x} + \\frac{3}{x} = 2x - 4 + \\frac{3}{x}
+$$
+
+Resttermen $\\dfrac{3}{x} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asymptoten är $y = 2x - 4$. Alternativet $2x - 4 + \\tfrac{3}{x}$ är hela funktionen, inte asymptoten.
+
+**Svar:** $y = 2x - 4$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm den sneda asymptoten till $y = \\dfrac{x^2 - 3x + 5}{x - 1}$.`,
+            choices: [
+                `$y = x - 2$`,
+                `$y = x - 3$`,
+                `$y = x + 2$`,
+                `$y = x - 2 + \\dfrac{3}{x-1}$`,
+            ],
+            correct: 0,
+            solution: `Polynomdivision av $x^2 - 3x + 5$ med $x - 1$ ger kvoten $x - 2$ och resten $3$:
+
+$$
+y = \\frac{x^2 - 3x + 5}{x - 1} = x - 2 + \\frac{3}{x - 1}
+$$
+
+Resttermen $\\dfrac{3}{x-1} \\to 0$ då $x \\to \\pm\\infty$, så den sneda asymptoten är $y = x - 2$.
+
+**Svar:** $y = x - 2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Kurvan $y = \\dfrac{x^2 + bx + 7}{x + 1}$ har den sneda asymptoten $y = x + 4$. Bestäm konstanten $b$.`,
+            choices: [
+                `$b = 5$`,
+                `$b = 4$`,
+                `$b = 3$`,
+                `$b = -3$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** det är bara *kvoten* vid polynomdivisionen — inte resten — som bestämmer den sneda asymptoten. Vi dividerar $x^2 + bx + 7$ med $x + 1$:
+
+$$
+x^2 + bx + 7 = (x + 1)\\bigl(x + (b-1)\\bigr) + (8 - b)
+$$
+
+Kvoten är alltså $x + (b - 1)$ och den sneda asymptoten $y = x + (b-1)$. Vi sätter den lika med den givna asymptoten:
+
+$$
+x + (b - 1) = x + 4 \\quad\\Leftrightarrow\\quad b - 1 = 4 \\quad\\Leftrightarrow\\quad b = 5
+$$
+
+Resten blir då $8 - b = 3 \\neq 0$, så asymptoten är genuint sned. Talet $7$ i täljaren hamnar bara i resten och påverkar inte asymptoten — en vanlig fälla.
+
+**Svar:** $b = 5$`,
+        },
+    ],
+'ma4-2.14': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken lodrät (vertikal) asymptot har funktionen $f(x) = \\dfrac{x^2 + 1}{x}$?`,
+            choices: [
+                `$x = 0$`,
+                `$y = 0$`,
+                `$x = 1$`,
+                `$y = x$`,
+            ],
+            correct: 0,
+            solution: `Uttrycket kan inte förkortas, så vi söker de $x$-värden där nämnaren blir noll. Nämnaren är $x$, vilket ger $x = 0$.
+
+**Svar:** $x = 0$`,
+        },
+        {
+            level: 1,
+            question: `Skriv om $f(x) = \\dfrac{x^2 + 1}{x}$ på formen $kx + m + R(x)$. Vilken blir den sneda asymptoten?`,
+            choices: [
+                `$y = x$`,
+                `$y = x + 1$`,
+                `$y = \\dfrac{1}{x}$`,
+                `$y = x^2$`,
+            ],
+            correct: 0,
+            solution: `Vi delar upp uttrycket i termer:
+
+$$
+f(x) = \\frac{x^2 + 1}{x} = \\frac{x^2}{x} + \\frac{1}{x} = x + \\frac{1}{x}
+$$
+
+Resttermen $\\dfrac{1}{x}$ går mot $0$ då $x$ växer, så kvar blir $y = x$.
+
+**Svar:** $y = x$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna funktionsvärdet $f(2)$ för $f(x) = \\dfrac{x^2 + 1}{x}$.`,
+            answer: { value: 2.5, unit: '', tol: 0.01 },
+            solution: `Vi sätter in $x = 2$ i funktionen.
+
+$$
+f(2) = \\frac{2^2 + 1}{2} = \\frac{4 + 1}{2} = \\frac{5}{2} = 2{,}5
+$$
+
+**Svar:** 2,5`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Bestäm den sneda asymptoten till $g(x) = \\dfrac{2x^2 + 1}{x}$.`,
+            choices: [
+                `$y = 2x$`,
+                `$y = x$`,
+                `$y = 2x + 1$`,
+                `$y = \\dfrac{1}{x}$`,
+            ],
+            correct: 0,
+            solution: `Vi delar upp uttrycket i termer:
+
+$$
+g(x) = \\frac{2x^2 + 1}{x} = \\frac{2x^2}{x} + \\frac{1}{x} = 2x + \\frac{1}{x}
+$$
+
+Resttermen $\\dfrac{1}{x}$ går mot $0$ då $x$ växer, så den sneda asymptoten är $y = 2x$.
+
+**Svar:** $y = 2x$`,
+        },
+        {
+            level: 2,
+            question: `Derivatan av $f(x) = \\dfrac{x^2 + 1}{x}$ är $f'(x) = \\dfrac{x^2 - 1}{x^2}$. I teckentabellen är $f'(x) > 0$ till vänster om $x = -1$ och $f'(x) < 0$ till höger om $x = -1$. Vilken sorts punkt har grafen där?`,
+            choices: [
+                `En maximipunkt`,
+                `En minimipunkt`,
+                `En terrasspunkt`,
+                `En asymptot`,
+            ],
+            correct: 0,
+            solution: `Derivatan byter tecken från $+$ till $-$ när vi passerar $x = -1$: grafen växer först och avtar sedan. Det innebär att kurvan vänder nedåt, alltså en maximipunkt.
+
+Med $f(-1) = \\dfrac{(-1)^2 + 1}{-1} = -2$ ligger maximipunkten i $(-1,\\ -2)$.
+
+**Svar:** En maximipunkt`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Funktionen $f(x) = \\dfrac{x^2 + k}{x}$ (med $k > 0$) har en extrempunkt då $x = 3$. Bestäm konstanten $k$.`,
+            answer: { value: 9, unit: '', tol: 0.01 },
+            solution: `**Insikten:** skriv först om funktionen i termer, derivera och utnyttja att derivatan är $0$ i extrempunkten.
+
+$$
+f(x) = \\frac{x^2 + k}{x} = x + \\frac{k}{x} = x + kx^{-1}
+$$
+
+Derivatan blir
+
+$$
+f'(x) = 1 - kx^{-2} = 1 - \\frac{k}{x^2}
+$$
+
+Extrempunkt då $x = 3$ betyder $f'(3) = 0$:
+
+$$
+1 - \\frac{k}{3^2} = 0 \\quad\\Leftrightarrow\\quad \\frac{k}{9} = 1 \\quad\\Leftrightarrow\\quad k = 9
+$$
+
+**Svar:** $k = 9$`,
+        },
+    ],
+'ma4-3.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken är en primitiv funktion till $f(x) = \\cos x$?`,
+            choices: [
+                `$F(x) = \\sin x$`,
+                `$F(x) = -\\sin x$`,
+                `$F(x) = -\\cos x$`,
+                `$F(x) = \\cos x$`,
+            ],
+            correct: 0,
+            solution: `En primitiv funktion är en funktion vars derivata är $f$. Eftersom $D(\\sin x) = \\cos x$ är $\\sin x$ en primitiv funktion till $\\cos x$.
+
+**Svar:** $F(x) = \\sin x$`,
+        },
+        {
+            level: 1,
+            question: `Vilken är en primitiv funktion till $f(x) = e^{2x}$?`,
+            choices: [
+                `$F(x) = \\dfrac{e^{2x}}{2}$`,
+                `$F(x) = 2e^{2x}$`,
+                `$F(x) = e^{2x}$`,
+                `$F(x) = \\dfrac{e^{2x}}{2x}$`,
+            ],
+            correct: 0,
+            solution: `En exponentialfunktion med basen $e$ skrivs av och divideras med derivatan till exponenten. Derivatan av $2x$ är $2$, så
+
+$$
+F(x) = \\frac{e^{2x}}{2}
+$$
+
+**Svar:** $F(x) = \\dfrac{e^{2x}}{2}$`,
+        },
+        {
+            level: 1,
+            question: `En primitiv funktion till $f(x) = x^3$ är $F(x) = \\dfrac{x^4}{4}$. Beräkna $F(2)$.`,
+            answer: { value: 4, unit: '', tol: 0.01 },
+            solution: `Vi sätter in $x = 2$ i den primitiva funktionen.
+
+$$
+F(2) = \\frac{2^4}{4} = \\frac{16}{4} = 4
+$$
+
+**Svar:** 4`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ange samtliga primitiva funktioner till $f(x) = \\dfrac{2}{x} + \\sin x$.`,
+            choices: [
+                `$F(x) = 2\\ln x - \\cos x + C$`,
+                `$F(x) = 2\\ln x + \\cos x + C$`,
+                `$F(x) = -\\dfrac{2}{x^2} + \\cos x + C$`,
+                `$F(x) = 2\\ln x - \\cos x$`,
+            ],
+            correct: 0,
+            solution: `Vi tar en primitiv funktion term för term. Termen $\\dfrac{2}{x}$ ger $2\\ln x$, och $\\sin x$ har den primitiva funktionen $-\\cos x$. Eftersom vi ska ange *samtliga* primitiva funktioner lägger vi till konstanten $C$.
+
+$$
+F(x) = 2\\ln x - \\cos x + C
+$$
+
+**Svar:** $F(x) = 2\\ln x - \\cos x + C$`,
+        },
+        {
+            level: 2,
+            question: `Ange samtliga primitiva funktioner till $f(x) = \\dfrac{x^2 + 3x}{x}$.`,
+            choices: [
+                `$F(x) = \\dfrac{x^2}{2} + 3x + C$`,
+                `$F(x) = \\dfrac{x^3}{3} + \\dfrac{3x^2}{2} + C$`,
+                `$F(x) = x + 3 + C$`,
+                `$F(x) = \\dfrac{x^2}{2} + 3\\ln x + C$`,
+            ],
+            correct: 0,
+            solution: `Vi förenklar först uttrycket genom att dela varje term med $x$:
+
+$$
+\\frac{x^2 + 3x}{x} = \\frac{x^2}{x} + \\frac{3x}{x} = x + 3
+$$
+
+Nu integrerar vi termvis och lägger till konstanten $C$:
+
+$$
+F(x) = \\frac{x^2}{2} + 3x + C
+$$
+
+**Svar:** $F(x) = \\dfrac{x^2}{2} + 3x + C$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En partikel rör sig så att accelerationen är $a(t) = 6t$. Vid tiden $t = 0$ är hastigheten $v(0) = 4$ och sträckan $s(0) = 1$. Bestäm $s(2)$.`,
+            answer: { value: 17, unit: '', tol: 0.01 },
+            solution: `**Insikten:** vi måste ta en primitiv funktion *två* gånger — först från $a(t)$ till $v(t)$, sedan från $v(t)$ till $s(t)$ — och bestämma en konstant i varje steg med hjälp av begynnelsevärdena.
+
+Först hastigheten som primitiv funktion till accelerationen:
+
+$$
+v(t) = 3t^2 + C_1
+$$
+
+Villkoret $v(0) = 4$ ger $3\\cdot 0^2 + C_1 = 4$, alltså $C_1 = 4$ och $v(t) = 3t^2 + 4$.
+
+Sedan sträckan som primitiv funktion till hastigheten:
+
+$$
+s(t) = t^3 + 4t + C_2
+$$
+
+Villkoret $s(0) = 1$ ger $C_2 = 1$, alltså $s(t) = t^3 + 4t + 1$. Nu sätter vi in $t = 2$:
+
+$$
+s(2) = 2^3 + 4\\cdot 2 + 1 = 8 + 8 + 1 = 17
+$$
+
+**Svar:** 17`,
+        },
+    ],
+'ma4-3.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vad motsvarar $\\displaystyle\\int_a^b f(x)\\,dx$ grafiskt när $f(x) > 0$ i hela intervallet?`,
+            choices: [
+                `Arean mellan grafen $y = f(x)$ och $x$-axeln från $x = a$ till $x = b$`,
+                `Lutningen på grafen mellan $x = a$ och $x = b$`,
+                `Skillnaden $f(b) - f(a)$`,
+                `Kurvans längd mellan $x = a$ och $x = b$`,
+            ],
+            correct: 0,
+            solution: `En bestämd integral tolkas grafiskt som arean mellan funktionens graf och $x$-axeln, avgränsad av den undre gränsen $a$ och den övre gränsen $b$.
+
+**Svar:** arean mellan grafen och $x$-axeln från $x = a$ till $x = b$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $\\displaystyle\\int_0^2 (x + 1)\\,dx$.`,
+            answer: { value: 4, unit: '', tol: 0.01 },
+            solution: `En primitiv funktion till $x + 1$ är $\\dfrac{x^2}{2} + x$. Vi sätter in gränserna med fundamentalsatsen.
+
+$$
+\\int_0^2 (x + 1)\\,dx = \\left[\\frac{x^2}{2} + x\\right]_0^2 = \\left(\\frac{4}{2} + 2\\right) - 0 = 4
+$$
+
+**Svar:** 4`,
+        },
+        {
+            level: 1,
+            question: `Grafen $y = x^2$ ligger över $x$-axeln. Beräkna arean mellan grafen och $x$-axeln från $x = 0$ till $x = 3$.`,
+            answer: { value: 9, unit: 'a.e.', tol: 0.01 },
+            solution: `Eftersom grafen ligger över $x$-axeln är arean lika med integralen. En primitiv funktion till $x^2$ är $\\dfrac{x^3}{3}$.
+
+$$
+A = \\int_0^3 x^2\\,dx = \\left[\\frac{x^3}{3}\\right]_0^3 = \\frac{27}{3} - 0 = 9
+$$
+
+**Svar:** $9$ a.e.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $\\displaystyle\\int_0^{\\pi} \\sin x\\,dx$.`,
+            answer: { value: 2, unit: '', tol: 0.01 },
+            solution: `En primitiv funktion till $\\sin x$ är $-\\cos x$.
+
+$$
+\\int_0^{\\pi} \\sin x\\,dx = \\Big[-\\cos x\\Big]_0^{\\pi} = -\\cos\\pi - (-\\cos 0) = 1 + 1 = 2
+$$
+
+**Svar:** 2`,
+        },
+        {
+            level: 2,
+            question: `Kurvan $y = x^2 - 4$ ligger under $x$-axeln mellan $x = 0$ och $x = 2$. Beräkna arean av området mellan kurvan och $x$-axeln.`,
+            answer: { value: 5.33, unit: 'a.e.', tol: 0.05 },
+            solution: `Grafen ligger under $x$-axeln, så arean är den **negativa** integralen: $A = -\\displaystyle\\int_0^2 (x^2 - 4)\\,dx$.
+
+$$
+\\int_0^2 (x^2 - 4)\\,dx = \\left[\\frac{x^3}{3} - 4x\\right]_0^2 = \\left(\\frac{8}{3} - 8\\right) - 0 = -\\frac{16}{3}
+$$
+
+$$
+A = -\\left(-\\frac{16}{3}\\right) = \\frac{16}{3} \\approx 5{,}33
+$$
+
+**Svar:** $\\dfrac{16}{3} \\approx 5{,}33$ a.e.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Kurvan $y = x^3 - x$ avgränsar tillsammans med $x$-axeln ett område mellan $x = -1$ och $x = 1$. Beräkna områdets totala area.`,
+            answer: { value: 0.5, unit: 'a.e.', tol: 0.01 },
+            solution: `**Insikten:** grafen skär $x$-axeln i $x = 0$, så den ligger **över** axeln på $-1 \\le x \\le 0$ och **under** axeln på $0 \\le x \\le 1$. Räknar man $\\displaystyle\\int_{-1}^{1} (x^3 - x)\\,dx$ i ett svep blir svaret $0$ (delarna tar ut varandra) — därför måste området delas upp och den undre delen negeras.
+
+En primitiv funktion är $\\dfrac{x^4}{4} - \\dfrac{x^2}{2}$.
+
+$$
+\\int_{-1}^{0} (x^3 - x)\\,dx = \\left[\\frac{x^4}{4} - \\frac{x^2}{2}\\right]_{-1}^{0} = 0 - \\left(\\frac{1}{4} - \\frac{1}{2}\\right) = \\frac{1}{4}
+$$
+
+$$
+\\int_{0}^{1} (x^3 - x)\\,dx = \\left[\\frac{x^4}{4} - \\frac{x^2}{2}\\right]_{0}^{1} = \\left(\\frac{1}{4} - \\frac{1}{2}\\right) - 0 = -\\frac{1}{4}
+$$
+
+$$
+A = \\frac{1}{4} - \\left(-\\frac{1}{4}\\right) = \\frac{1}{2}
+$$
+
+**Svar:** $\\dfrac{1}{2}$ a.e.`,
+        },
+    ],
+'ma4-3.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket uttryck är lika med $\\int_a^b 3f(x)\\,dx$?`,
+            choices: [
+                `$3\\int_a^b f(x)\\,dx$`,
+                `$\\int_a^b f(x)\\,dx + 3$`,
+                `$\\dfrac{1}{3}\\int_a^b f(x)\\,dx$`,
+                `$3 + f(x)$`,
+            ],
+            correct: 0,
+            solution: `En konstant faktor kan brytas ut framför integraltecknet, eftersom $3$ inte innehåller variabeln $x$:
+
+$$
+\\int_a^b 3f(x)\\,dx = 3\\int_a^b f(x)\\,dx
+$$
+
+**Svar:** $3\\int_a^b f(x)\\,dx$`,
+        },
+        {
+            level: 1,
+            question: `Det gäller att $\\int_1^2 f(x)\\,dx = 4$. Beräkna $\\int_1^2 5f(x)\\,dx$.`,
+            answer: { value: 20, unit: '', tol: 0.001 },
+            solution: `Vi bryter ut den konstanta faktorn $5$ och sätter in det kända värdet:
+
+$$
+\\int_1^2 5f(x)\\,dx = 5\\int_1^2 f(x)\\,dx = 5\\cdot 4 = 20
+$$
+
+**Svar:** 20`,
+        },
+        {
+            level: 1,
+            question: `Det gäller att $\\int_0^2 g(x)\\,dx = 3$ och $\\int_2^5 g(x)\\,dx = 4$. Beräkna $\\int_0^5 g(x)\\,dx$.`,
+            answer: { value: 7, unit: '', tol: 0.001 },
+            solution: `Gränserna hänger samman ($0 \\to 2 \\to 5$) och funktionen är densamma, så delintervallen fogas ihop:
+
+$$
+\\int_0^5 g(x)\\,dx = \\int_0^2 g(x)\\,dx + \\int_2^5 g(x)\\,dx = 3 + 4 = 7
+$$
+
+**Svar:** 7`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $\\int_1^2 \\bigl(6x^2 - 2\\bigr)\\,dx$ genom att dela integralen ledvis.`,
+            answer: { value: 12, unit: '', tol: 0.001 },
+            solution: `Subtraktionsregeln låter oss beräkna varje term för sig:
+
+$$
+\\int_1^2 \\bigl(6x^2 - 2\\bigr)\\,dx = \\int_1^2 6x^2\\,dx - \\int_1^2 2\\,dx
+$$
+
+$$
+\\int_1^2 6x^2\\,dx = \\Bigl[2x^3\\Bigr]_1^2 = 2\\cdot 8 - 2\\cdot 1 = 16 - 2 = 14
+$$
+
+$$
+\\int_1^2 2\\,dx = \\Bigl[2x\\Bigr]_1^2 = 4 - 2 = 2
+$$
+
+Alltså $14 - 2 = 12$.
+
+**Svar:** 12`,
+        },
+        {
+            level: 2,
+            question: `Beräkna det exakta värdet av $\\int_2^1 \\dfrac{4}{x}\\,dx$.`,
+            choices: [
+                `$-4\\ln 2$`,
+                `$4\\ln 2$`,
+                `$-2\\ln 2$`,
+                `$4\\ln 2 - 4$`,
+            ],
+            correct: 0,
+            solution: `Gränserna står i "fel" ordning (den övre är mindre än den nedre). Vi kastar om dem och byter tecken:
+
+$$
+\\int_2^1 \\frac{4}{x}\\,dx = -\\int_1^2 \\frac{4}{x}\\,dx = -4\\int_1^2 \\frac{1}{x}\\,dx
+$$
+
+$$
+= -4\\Bigl[\\ln x\\Bigr]_1^2 = -4\\bigl(\\ln 2 - \\ln 1\\bigr) = -4\\bigl(\\ln 2 - 0\\bigr) = -4\\ln 2
+$$
+
+**Svar:** $-4\\ln 2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Det gäller att $\\int_2^6 f(x)\\,dx = 20$, $\\int_2^4 f(x)\\,dx = 7$ och $\\int_4^6 g(x)\\,dx = 3$. Bestäm $\\int_4^6 \\bigl(f(x) - 2g(x)\\bigr)\\,dx$.`,
+            choices: [
+                `$7$`,
+                `$19$`,
+                `$10$`,
+                `$14$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** vi känner inte $\\int_4^6 f(x)\\,dx$ direkt, men den kan tas fram med additivitetsregeln ur de två integraler vi har över $[2,6]$ och $[2,4]$:
+
+$$
+\\int_4^6 f(x)\\,dx = \\int_2^6 f(x)\\,dx - \\int_2^4 f(x)\\,dx = 20 - 7 = 13
+$$
+
+Nu använder vi subtraktionsregeln och bryter ut den konstanta faktorn $2$:
+
+$$
+\\int_4^6 \\bigl(f(x) - 2g(x)\\bigr)\\,dx = \\int_4^6 f(x)\\,dx - 2\\int_4^6 g(x)\\,dx = 13 - 2\\cdot 3 = 7
+$$
+
+Fällan $19$ fås om man adderar i stället för att subtrahera $2g$; $10$ om man glömmer faktorn $2$.
+
+**Svar:** $7$`,
+        },
+    ],
+'ma4-3.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket uttryck ger arean mellan två kurvor där $f(x)$ ligger ovanför $g(x)$ i intervallet $a \\le x \\le b$?`,
+            choices: [
+                `$A = \\displaystyle\\int_a^b \\big(f(x) - g(x)\\big)\\,dx$`,
+                `$A = \\displaystyle\\int_a^b \\big(g(x) - f(x)\\big)\\,dx$`,
+                `$A = \\displaystyle\\int_a^b f(x)\\,g(x)\\,dx$`,
+                `$A = \\displaystyle\\int_a^b \\big(f(x) + g(x)\\big)\\,dx$`,
+            ],
+            correct: 0,
+            solution: `Arean mellan två kurvor är integralen av den övre funktionen minus den undre.
+
+$$
+A = \\int_a^b \\big(f(x) - g(x)\\big)\\,dx
+$$
+
+**Svar:** $A = \\displaystyle\\int_a^b \\big(f(x) - g(x)\\big)\\,dx$`,
+        },
+        {
+            level: 1,
+            question: `Du ska beräkna arean mellan två kurvor men ser inte mellan vilka $x$-värden området ligger. Vad gör du först?`,
+            choices: [
+                `Bestämmer skärningspunkterna genom att sätta funktionsuttrycken lika`,
+                `Deriverar båda funktionerna`,
+                `Sätter båda funktionerna lika med noll`,
+                `Adderar funktionsuttrycken och integrerar summan`,
+            ],
+            correct: 0,
+            solution: `Skärningspunkternas $x$-koordinater blir integrationsgränserna $a$ och $b$. Dem hittar vi genom att sätta funktionsuttrycken lika och lösa ekvationen.
+
+**Svar:** Bestämmer skärningspunkterna genom att sätta funktionsuttrycken lika`,
+        },
+        {
+            level: 1,
+            question: `Beräkna arean av området som begränsas av linjen $y = 9$ (övre) och parabeln $y = x^2$ (undre).`,
+            answer: { value: 36, unit: '', tol: 0.1 },
+            solution: `Kurvorna skär varandra där $x^2 = 9$, alltså $x = -3$ och $x = 3$. Linjen $y = 9$ är övre funktion:
+
+$$
+A = \\int_{-3}^{3} (9 - x^2)\\,dx = \\left[\\, 9x - \\frac{x^3}{3} \\,\\right]_{-3}^{3}
+$$
+
+$$
+= \\left(27 - 9\\right) - \\left(-27 + 9\\right) = 18 - (-18) = 36
+$$
+
+**Svar:** $A = 36$ a.e.`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna arean av området som begränsas av linjen $y = x + 2$ och parabeln $y = x^2$.`,
+            choices: [
+                `$\\dfrac{9}{2}$ a.e.`,
+                `$\\dfrac{7}{6}$ a.e.`,
+                `$\\dfrac{10}{3}$ a.e.`,
+                `$9$ a.e.`,
+            ],
+            correct: 0,
+            solution: `Skärningspunkter: $x^2 = x + 2 \\;\\Leftrightarrow\\; x^2 - x - 2 = 0 \\;\\Leftrightarrow\\; (x + 1)(x - 2) = 0$, alltså $x = -1$ och $x = 2$. Linjen är övre funktion:
+
+$$
+A = \\int_{-1}^{2} \\big((x + 2) - x^2\\big)\\,dx = \\left[\\, \\frac{x^2}{2} + 2x - \\frac{x^3}{3} \\,\\right]_{-1}^{2}
+$$
+
+$$
+= \\frac{10}{3} - \\left(-\\frac{7}{6}\\right) = \\frac{20}{6} + \\frac{7}{6} = \\frac{27}{6} = \\frac{9}{2}
+$$
+
+**Svar:** $\\dfrac{9}{2}$ a.e.`,
+        },
+        {
+            level: 2,
+            question: `Beräkna arean av området som begränsas av parabeln $y = x^2$ och linjen $y = 2x$.`,
+            choices: [
+                `$\\dfrac{4}{3}$ a.e.`,
+                `$\\dfrac{8}{3}$ a.e.`,
+                `$2$ a.e.`,
+                `$4$ a.e.`,
+            ],
+            correct: 0,
+            solution: `Skärningspunkter: $x^2 = 2x \\;\\Leftrightarrow\\; x^2 - 2x = 0 \\;\\Leftrightarrow\\; x(x - 2) = 0$, alltså $x = 0$ och $x = 2$. Mellan dem är $y = 2x$ övre funktion:
+
+$$
+A = \\int_{0}^{2} (2x - x^2)\\,dx = \\left[\\, x^2 - \\frac{x^3}{3} \\,\\right]_{0}^{2} = 4 - \\frac{8}{3} = \\frac{4}{3}
+$$
+
+**Svar:** $\\dfrac{4}{3}$ a.e.`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Beräkna den totala arean av området som begränsas av kurvan $y = x^3$ och linjen $y = x$.`,
+            choices: [
+                `$\\dfrac{1}{2}$ a.e.`,
+                `$0$ a.e.`,
+                `$\\dfrac{1}{4}$ a.e.`,
+                `$1$ a.e.`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** kurvorna skär varandra i $x = -1$, $x = 0$ och $x = 1$, så området består av **två** delar. Räknar man naivt $\\displaystyle\\int_{-1}^{1} (x - x^3)\\,dx$ blir svaret $0$, eftersom integranden är udda och delarna tar ut varandra — men arean är inte noll.
+
+I intervallet $0 \\le x \\le 1$ är $y = x$ övre kurva; i $-1 \\le x \\le 0$ är $y = x^3$ övre. Av symmetrin är delarna lika stora, så
+
+$$
+A = 2\\int_{0}^{1} (x - x^3)\\,dx = 2\\left[\\, \\frac{x^2}{2} - \\frac{x^4}{4} \\,\\right]_{0}^{1} = 2\\left(\\frac{1}{2} - \\frac{1}{4}\\right) = 2\\cdot \\frac{1}{4} = \\frac{1}{2}
+$$
+
+Alternativet $0$ är den vanliga fällan.
+
+**Svar:** $\\dfrac{1}{2}$ a.e.`,
+        },
+    ],
+'ma4-3.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En graf visar en hastighet på $y$-axeln (enhet m/s) och tiden på $x$-axeln (enhet s). Vilken storhet, och i vilken enhet, ger arean under grafen?`,
+            choices: [
+                `Sträcka, i meter`,
+                `Hastighet, i m/s`,
+                `Acceleration, i $\\mathrm{m/s^2}$`,
+                `Tid, i sekunder`,
+            ],
+            correct: 0,
+            solution: `Integralens enhet är produkten av axlarnas enheter:
+
+$$
+\\frac{\\mathrm{m}}{\\mathrm{s}} \\cdot \\mathrm{s} = \\mathrm{m}
+$$
+
+Arean under en hastighet–tid-graf är alltså en sträcka i meter.
+
+**Svar:** Sträcka, i meter`,
+        },
+        {
+            level: 1,
+            question: `En kropps hastighet ges av $v(t) = 3t$ (m/s). Hur lång sträcka färdas kroppen mellan $t = 0$ och $t = 2\\ \\mathrm{s}$?`,
+            answer: { value: 6, unit: 'm', tol: 0.1 },
+            solution: `Sträckan är integralen av hastigheten över tiden:
+
+$$
+\\Delta s = \\int_0^2 3t\\,dt = \\left[\\frac{3t^2}{2}\\right]_0^2 = \\frac{3\\cdot 2^2}{2} - 0 = 6\\ \\mathrm{m}
+$$
+
+**Svar:** $6\\ \\mathrm{m}$`,
+        },
+        {
+            level: 1,
+            question: `Effekten i en apparat varierar med tiden enligt $P(t)$. Vilken integral ger den omvandlade energin mellan $t_1$ och $t_2$?`,
+            choices: [
+                `$E = \\int_{t_1}^{t_2} P(t)\\,dt$`,
+                `$E = \\int_{t_1}^{t_2} P'(t)\\,dt$`,
+                `$E = P(t_2) - P(t_1)$`,
+                `$E = \\dfrac{P(t_2)}{t_2 - t_1}$`,
+            ],
+            correct: 0,
+            solution: `Energi är effekt multiplicerat med tid. Eftersom effekten varierar summerar vi bidragen med en integral av effekten över tiden:
+
+$$
+E = \\int_{t_1}^{t_2} P(t)\\,dt
+$$
+
+Enheten blir $\\mathrm{W}\\cdot \\mathrm{s} = \\mathrm{J}$, alltså energi i joule.
+
+**Svar:** $E = \\int_{t_1}^{t_2} P(t)\\,dt$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Effekten i en resistor ges av $P(t) = 6t^2$ (W). Hur stor energi omvandlas under de första två sekunderna?`,
+            answer: { value: 16, unit: 'J', tol: 0.1 },
+            solution: `Energin är integralen av effekten mellan $t = 0$ och $t = 2$:
+
+$$
+E = \\int_0^2 6t^2\\,dt = \\left[\\frac{6t^3}{3}\\right]_0^2 = \\left[2t^3\\right]_0^2 = 2\\cdot 2^3 - 0 = 16\\ \\mathrm{J}
+$$
+
+**Svar:** $16\\ \\mathrm{J}$`,
+        },
+        {
+            level: 2,
+            question: `En kropps hastighet ges av $v(t) = 1{,}5t + 4$ (m/s). Bestäm förflyttningen mellan $t = 0$ och $t = 4\\ \\mathrm{s}$.`,
+            answer: { value: 28, unit: 'm', tol: 0.1 },
+            solution: `Förflyttningen är integralen av hastigheten över tiden:
+
+$$
+\\Delta s = \\int_0^4 (1{,}5t + 4)\\,dt = \\left[\\frac{1{,}5t^2}{2} + 4t\\right]_0^4
+$$
+
+$$
+= \\frac{1{,}5\\cdot 4^2}{2} + 4\\cdot 4 - 0 = 12 + 16 = 28\\ \\mathrm{m}
+$$
+
+**Svar:** $28\\ \\mathrm{m}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Vatten rinner in i en tank med flödet $q(t) = 6t$ (liter/minut). Vid $t = 0$ innehåller tanken redan 5 liter. Vid vilken tidpunkt innehåller tanken 32 liter?`,
+            choices: [
+                `$t = 3$ min`,
+                `$t = 9$ min`,
+                `$t \\approx 3{,}3$ min`,
+                `$t \\approx 5{,}3$ min`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** flödet är volymändring per tid, så volymen är integralen av flödet — och begynnelsevolymen 5 liter bestämmer integrationskonstanten.
+
+Volymfunktionen fås genom att integrera flödet:
+
+$$
+V(t) = \\int 6t\\,dt = 3t^2 + C
+$$
+
+Villkoret $V(0) = 5$ ger $C = 5$, alltså $V(t) = 3t^2 + 5$. Vi söker den tid då volymen är 32 liter:
+
+$$
+3t^2 + 5 = 32 \\quad\\Leftrightarrow\\quad 3t^2 = 27 \\quad\\Leftrightarrow\\quad t^2 = 9 \\quad\\Leftrightarrow\\quad t = 3\\ \\text{min}
+$$
+
+(Endast den positiva roten är rimlig.) Alternativet $t = 9$ är $t^2$-värdet, som man missar att dra roten ur; $t \\approx 3{,}3$ får man om man glömmer begynnelsevolymen och löser $3t^2 = 32$.
+
+**Svar:** $t = 3$ min`,
+        },
+    ],
+'ma4-3.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Arean under en täthetsfunktion $f(x)$ mellan $x = a$ och $x = b$ är lika med vad?`,
+            choices: [
+                `Sannolikheten $P(a \\leq X \\leq b)$`,
+                `Medelvärdet av $X$`,
+                `Funktionens största värde i intervallet`,
+                `Längden $b - a$`,
+            ],
+            correct: 0,
+            solution: `Sannolikheten att utfallet hamnar mellan $a$ och $b$ ges av integralen av täthetsfunktionen:
+
+$$
+P(a \\leq X \\leq b) = \\int_a^b f(x)\\,dx
+$$
+
+Integralen är just arean under grafen mellan $a$ och $b$.
+
+**Svar:** Sannolikheten $P(a \\leq X \\leq b)$`,
+        },
+        {
+            level: 1,
+            question: `Vad måste den totala arean under en täthetsfunktions graf vara?`,
+            choices: [
+                `Exakt $1$`,
+                `Exakt $0$`,
+                `Alltid $100$`,
+                `Vilket positivt tal som helst`,
+            ],
+            correct: 0,
+            solution: `Den totala sannolikheten är $100\\ \\%$, vilket motsvarar arean $1$ under hela kurvan:
+
+$$
+\\int_{-\\infty}^{\\infty} f(x)\\,dx = 1
+$$
+
+**Svar:** Exakt $1$`,
+        },
+        {
+            level: 1,
+            question: `En likformig täthetsfunktion är konstant på intervallet $0 \\leq x \\leq 8$ och noll utanför. Vilket värde har funktionen på intervallet?`,
+            answer: { value: 0.125, unit: '', tol: 0.001 },
+            solution: `Grafen är en vågrät linje, så arean under den är en rektangel med basen $8$ och höjden $f$. Den totala arean ska vara $1$:
+
+$$
+8\\cdot f = 1 \\quad\\Leftrightarrow\\quad f = \\frac{1}{8} = 0{,}125
+$$
+
+**Svar:** $0{,}125$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Funktionen $f(x) = k\\cdot x$ är definierad i intervallet $0 \\leq x \\leq 5$. Bestäm konstanten $k$ så att $f(x)$ är en täthetsfunktion.`,
+            answer: { value: 0.08, unit: '', tol: 0.005 },
+            solution: `Den totala arean under kurvan ska vara $1$. Vi integrerar över hela intervallet och sätter lika med $1$:
+
+$$
+\\int_0^5 k\\cdot x\\,dx = \\left[\\frac{k\\cdot x^2}{2}\\right]_0^5 = \\frac{k\\cdot 25}{2} = 12{,}5\\,k = 1
+$$
+
+$$
+k = \\frac{1}{12{,}5} = 0{,}08
+$$
+
+**Svar:** $k = 0{,}08$`,
+        },
+        {
+            level: 2,
+            question: `Väntetiden på en buss är likformigt fördelad mellan $0$ och $10$ minuter, så täthetsfunktionen är $f(x) = 0{,}1$ på intervallet. Bestäm sannolikheten att väntetiden blir mellan $2$ och $6$ minuter.`,
+            answer: { value: 0.4, unit: '', tol: 0.01 },
+            solution: `Sannolikheten är arean under den vågräta linjen mellan $x = 2$ och $x = 6$ — en rektangel med basen $6 - 2 = 4$ och höjden $0{,}1$:
+
+$$
+P(2 \\leq X \\leq 6) = \\int_2^6 0{,}1\\,dx = (6 - 2)\\cdot 0{,}1 = 4\\cdot 0{,}1 = 0{,}4
+$$
+
+**Svar:** $0{,}4$ (det vill säga $40\\ \\%$)`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Funktionen $f(t) = k\\cdot e^{-0{,}0005t}$ är definierad för $t \\geq 0$. Bestäm konstanten $k$ så att $f(t)$ blir en täthetsfunktion.`,
+            choices: [
+                `$k = 0{,}0005$`,
+                `$k = 2000$`,
+                `$k = 0{,}5$`,
+                `$k = 0{,}002$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** intervallet saknar övre gräns, så integralen går ända till oändligheten. Där avtar $e^{-0{,}0005t}$ mot noll, vilket gör den generaliserade integralen ändlig. Vi kräver att den totala arean är $1$:
+
+$$
+\\int_0^{\\infty} k\\cdot e^{-0{,}0005t}\\,dt = \\left[\\frac{k\\cdot e^{-0{,}0005t}}{-0{,}0005}\\right]_0^{\\infty}
+$$
+
+När $t \\to \\infty$ går $e^{-0{,}0005t} \\to 0$, så den övre gränsen bidrar med $0$:
+
+$$
+= 0 - \\left(\\frac{k}{-0{,}0005}\\right) = \\frac{k}{0{,}0005} = 2000\\,k = 1
+$$
+
+$$
+k = \\frac{1}{2000} = 0{,}0005
+$$
+
+Alternativet $2000$ är vad man får om man glömmer att invertera på slutet.
+
+**Svar:** $k = 0{,}0005$`,
+        },
+    ],
+'ma4-3.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En kurva $y = f(x)$ roterar runt $x$-axeln i intervallet $a \\leq x \\leq b$. Vilken formel ger rotationskroppens volym?`,
+            choices: [
+                `$V = \\pi\\displaystyle\\int_a^b y^2\\, dx$`,
+                `$V = \\pi\\displaystyle\\int_a^b y\\, dx$`,
+                `$V = \\displaystyle\\int_a^b y^2\\, dx$`,
+                `$V = 2\\pi\\displaystyle\\int_a^b y\\, dx$`,
+            ],
+            correct: 0,
+            solution: `Varje skiva är en cylinder med radien $r = y$ och tjockleken $dx$, så skivans volym är $\\pi r^2\\, dx = \\pi y^2\\, dx$. Summeras alla skivor med en integral fås
+
+$$
+V = \\pi\\int_a^b y^2\\, dx
+$$
+
+**Svar:** $V = \\pi\\displaystyle\\int_a^b y^2\\, dx$`,
+        },
+        {
+            level: 1,
+            question: `Den konstanta funktionen $y = 2$ roterar runt $x$-axeln mellan $x = 0$ och $x = 3$ (en cylinder). Volymen kan skrivas $V = k\\pi$. Bestäm talet $k$.`,
+            answer: { value: 12, unit: '', tol: 0.01 },
+            solution: `Med $y = 2$ blir $y^2 = 4$, som är konstant:
+
+$$
+V = \\pi\\int_0^3 2^2\\, dx = \\pi\\int_0^3 4\\, dx = \\pi\\left[4x\\right]_0^3 = \\pi\\cdot 12 = 12\\pi
+$$
+
+Detta stämmer med cylindervolymen $\\pi r^2 h = \\pi\\cdot 2^2\\cdot 3 = 12\\pi$.
+
+**Svar:** $k = 12$`,
+        },
+        {
+            level: 1,
+            question: `Området mellan kurvan $y = \\sqrt{x}$ och $x$-axeln, från $x = 0$ till $x = 2$, roterar runt $x$-axeln. Volymen kan skrivas $V = k\\pi$. Bestäm talet $k$.`,
+            answer: { value: 2, unit: '', tol: 0.01 },
+            solution: `Eftersom $y^2 = (\\sqrt{x})^2 = x$ blir integralen enkel:
+
+$$
+V = \\pi\\int_0^2 (\\sqrt{x})^2\\, dx = \\pi\\int_0^2 x\\, dx = \\pi\\left[\\frac{x^2}{2}\\right]_0^2 = \\pi\\cdot \\frac{4}{2} = 2\\pi
+$$
+
+**Svar:** $k = 2$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Kurvan $y = x^2 - 4x$ och $x$-axeln begränsar ett område som roterar runt $x$-axeln. Vilka integrationsgränser ska användas?`,
+            choices: [
+                `$x = 0$ och $x = 4$`,
+                `$x = -4$ och $x = 0$`,
+                `$x = 0$ och $x = 2$`,
+                `$x = -2$ och $x = 2$`,
+            ],
+            correct: 0,
+            solution: `Gränserna är kurvans skärningar med $x$-axeln, alltså funktionens nollställen:
+
+$$
+x^2 - 4x = 0 \\quad\\Leftrightarrow\\quad x(x - 4) = 0
+$$
+
+Nollproduktmetoden ger $x = 0$ och $x = 4$.
+
+**Svar:** $x = 0$ och $x = 4$`,
+        },
+        {
+            level: 2,
+            question: `Området som begränsas av linjen $y = 2 - x$, $x$-axeln och $y$-axeln roterar runt $x$-axeln (en kon). Bestäm rotationskroppens volym.`,
+            choices: [
+                `$\\dfrac{8\\pi}{3}$`,
+                `$\\dfrac{4\\pi}{3}$`,
+                `$2\\pi$`,
+                `$8\\pi$`,
+            ],
+            correct: 0,
+            solution: `$y$-axeln ger den vänstra gränsen $x = 0$, och linjen skär $x$-axeln där $2 - x = 0$, alltså $x = 2$. Med $y^2 = (2 - x)^2$:
+
+$$
+V = \\pi\\int_0^2 (2 - x)^2\\, dx = \\pi\\left[-\\frac{(2 - x)^3}{3}\\right]_0^2 = \\pi\\left(0 - \\left(-\\frac{8}{3}\\right)\\right) = \\frac{8\\pi}{3}
+$$
+
+Kontroll med konvolymen $\\dfrac{\\pi r^2 h}{3} = \\dfrac{\\pi\\cdot 2^2\\cdot 2}{3} = \\dfrac{8\\pi}{3}$.
+
+**Svar:** $\\dfrac{8\\pi}{3}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Området mellan kurvan $y = \\sqrt{x}$ och $x$-axeln, från $x = 0$ till $x = b$, roterar runt $x$-axeln. För vilket värde på $b$ blir rotationskroppens volym exakt $8\\pi$?`,
+            choices: [
+                `$b = 4$`,
+                `$b = 16$`,
+                `$b = 8$`,
+                `$b = 2\\sqrt{2}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** ställ upp volymen med den okända övre gränsen $b$ och lös sedan ekvationen $V = 8\\pi$. Eftersom $y^2 = x$:
+
+$$
+V = \\pi\\int_0^b x\\, dx = \\pi\\left[\\frac{x^2}{2}\\right]_0^b = \\frac{\\pi b^2}{2}
+$$
+
+Sätt volymen lika med $8\\pi$ och dividera bort $\\pi$:
+
+$$
+\\frac{\\pi b^2}{2} = 8\\pi \\quad\\Leftrightarrow\\quad b^2 = 16 \\quad\\Leftrightarrow\\quad b = 4
+$$
+
+(Vi tar den positiva roten eftersom $b > 0$.) Fällan $b = 16$ är $b^2$-värdet, som man får om man glömmer att dra roten.
+
+**Svar:** $b = 4$`,
+        },
+    ],
+'ma4-3.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilken formel ger volymen då kurvan $y = f(x)$ roterar kring $y$-axeln i intervallet $a \\leq y \\leq b$?`,
+            choices: [
+                `$V = \\pi\\int_a^b x^2\\, dy$`,
+                `$V = \\pi\\int_a^b y^2\\, dx$`,
+                `$V = \\pi\\int_a^b x\\, dy$`,
+                `$V = 2\\pi\\int_a^b x\\, dy$`,
+            ],
+            correct: 0,
+            solution: `Vid rotation kring $y$-axeln är radien för varje skiva kurvans $x$-värde, och skivan har tjockleken $dy$. En skivas volym är basytan $\\pi x^2$ gånger höjden $dy$, och summan blir en integral i $y$-led.
+
+**Svar:** $V = \\pi\\int_a^b x^2\\, dy$`,
+        },
+        {
+            level: 1,
+            question: `Kurvan $y = \\sqrt{x}$ ska roteras kring $y$-axeln. Vilket uttryck ger $x$ uttryckt i $y$?`,
+            choices: [
+                `$x = y^2$`,
+                `$x = \\sqrt{y}$`,
+                `$x = y^2 + 1$`,
+                `$x = \\dfrac{1}{y^2}$`,
+            ],
+            correct: 0,
+            solution: `Eftersom vi integrerar med avseende på $y$ måste $x$ uttryckas i $y$. Vi kvadrerar båda led i $y = \\sqrt{x}$:
+
+$$
+y^2 = x \\quad\\Leftrightarrow\\quad x = y^2
+$$
+
+**Svar:** $x = y^2$`,
+        },
+        {
+            level: 1,
+            question: `Området begränsas av linjen $x = 2$, $y$-axeln, $y = 0$ och $y = 3$ och roterar kring $y$-axeln. Beräkna volymen. Svara i volymsenheter (v.e.) med en decimal.`,
+            answer: { value: 37.70, unit: 'v.e.', tol: 0.2 },
+            solution: `Radien är konstant, $x = 2$, så kroppen är en cylinder. Vi använder formeln med gränserna $a = 0$ och $b = 3$:
+
+$$
+V = \\pi\\int_0^3 x^2\\, dy = \\pi\\int_0^3 2^2\\, dy = \\pi\\Big[4y\\Big]_0^3 = \\pi\\cdot 12 = 12\\pi \\approx 37{,}7
+$$
+
+**Svar:** $12\\pi\\ \\text{v.e.} \\approx 37{,}7\\ \\text{v.e.}$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Kurvan $y = x^2$ roterar kring $y$-axeln i intervallet $0 \\leq y \\leq 4$. Bestäm volymen exakt.`,
+            choices: [
+                `$8\\pi$`,
+                `$16\\pi$`,
+                `$4\\pi$`,
+                `$\\dfrac{32\\pi}{3}$`,
+            ],
+            correct: 0,
+            solution: `Vi löser ut $x$ ur $y = x^2$ och tar den positiva roten: $x = \\sqrt{y}$, så $x^2 = y$. Med gränserna $a = 0$ och $b = 4$:
+
+$$
+V = \\pi\\int_0^4 x^2\\, dy = \\pi\\int_0^4 y\\, dy = \\pi\\left[\\frac{y^2}{2}\\right]_0^4 = \\pi\\cdot 8 = 8\\pi
+$$
+
+**Svar:** $8\\pi$`,
+        },
+        {
+            level: 2,
+            question: `Området begränsas av kurvan $y = \\sqrt{x}$, $y$-axeln och linjen $y = 1$ och roterar kring $y$-axeln. Bestäm volymen exakt.`,
+            choices: [
+                `$\\dfrac{\\pi}{5}$`,
+                `$\\dfrac{\\pi}{3}$`,
+                `$\\dfrac{2\\pi}{5}$`,
+                `$\\pi$`,
+            ],
+            correct: 0,
+            solution: `Vi löser ut $x$ ur $y = \\sqrt{x}$ genom att kvadrera: $x = y^2$, så $x^2 = y^4$. Med gränserna $a = 0$ och $b = 1$:
+
+$$
+V = \\pi\\int_0^1 x^2\\, dy = \\pi\\int_0^1 y^4\\, dy = \\pi\\left[\\frac{y^5}{5}\\right]_0^1 = \\pi\\cdot \\frac{1}{5} = \\frac{\\pi}{5}
+$$
+
+**Svar:** $\\dfrac{\\pi}{5}$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Området i första kvadranten som begränsas av kurvorna $y = x^2$ och $y = x$ roterar kring $y$-axeln. Beräkna volymen exakt.`,
+            choices: [
+                `$\\dfrac{\\pi}{6}$`,
+                `$\\dfrac{\\pi}{3}$`,
+                `$\\dfrac{\\pi}{2}$`,
+                `$\\dfrac{\\pi}{30}$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** kroppen är ihålig — för varje höjd $y$ (mellan $0$ och $1$) sträcker sig området från linjen ut till parabeln, så vi måste subtrahera två radier i kvadrat (en ring).
+
+Vi uttrycker båda kurvorna i $y$. Linjen $y = x$ ger $x = y$ (inre radie), parabeln $y = x^2$ ger $x = \\sqrt{y}$ (yttre radie, eftersom $\\sqrt{y} > y$ för $0 < y < 1$).
+
+$$
+V = \\pi\\int_0^1\\left((\\sqrt{y})^2 - y^2\\right) dy = \\pi\\int_0^1 (y - y^2)\\, dy
+$$
+
+$$
+= \\pi\\left[\\frac{y^2}{2} - \\frac{y^3}{3}\\right]_0^1 = \\pi\\left(\\frac{1}{2} - \\frac{1}{3}\\right) = \\frac{\\pi}{6}
+$$
+
+**Svar:** $\\dfrac{\\pi}{6}$`,
+        },
+    ],
+'ma4-4.1': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket värde har $i^2$?`,
+            choices: [
+                `$-1$`,
+                `$1$`,
+                `$i$`,
+                `$-i$`,
+            ],
+            correct: 0,
+            solution: `Den imaginära enheten $i$ definieras just av egenskapen
+
+$$
+i^2 = -1
+$$
+
+**Svar:** $-1$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $\\sqrt{-36}$.`,
+            choices: [
+                `$6i$`,
+                `$-6i$`,
+                `$36i$`,
+                `$6$`,
+            ],
+            correct: 0,
+            solution: `Vi använder snabbvarianten $\\sqrt{-a} = \\sqrt{a}\\cdot i$.
+
+$$
+\\sqrt{-36} = \\sqrt{36}\\cdot i = 6i
+$$
+
+**Svar:** $6i$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $(-6i)\\cdot (4i)$.`,
+            answer: { value: 24, unit: '', tol: 0 },
+            solution: `Vi multiplicerar faktorerna och använder att $i^2 = -1$.
+
+$$
+(-6i)\\cdot (4i) = -24i^2 = -24\\cdot (-1) = 24
+$$
+
+**Svar:** $24$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $x^2 = -64$.`,
+            choices: [
+                `$x = \\pm 8i$`,
+                `$x = \\pm 8$`,
+                `$x = \\pm 64i$`,
+                `$x = 8i$`,
+            ],
+            correct: 0,
+            solution: `Vi skriver om $-64$ som en produkt där $i^2 = -1$ ingår och drar sedan roten:
+
+$$
+x = \\pm\\sqrt{-64} = \\pm\\sqrt{64\\cdot i^2} = \\pm 8i
+$$
+
+Ekvationen har två lösningar, så både $+8i$ och $-8i$ ska med.
+
+**Svar:** $x = \\pm 8i$`,
+        },
+        {
+            level: 2,
+            question: `Lös ekvationen $(x + 9)^2 = -49$.`,
+            choices: [
+                `$x = -9 \\pm 7i$`,
+                `$x = 9 \\pm 7i$`,
+                `$x = -9 \\pm 49i$`,
+                `$x = -16 \\text{ och } x = -2$`,
+            ],
+            correct: 0,
+            solution: `Vi drar kvadratroten ur båda led och löser sedan ut $x$:
+
+$$
+\\begin{aligned}
+x + 9 &= \\pm\\sqrt{-49} = \\pm 7i\\\\
+x &= -9 \\pm 7i
+\\end{aligned}
+$$
+
+**Svar:** $x_1 = -9 - 7i$ och $x_2 = -9 + 7i$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Lös ekvationen $x^2 + 6x + 34 = 0$.`,
+            choices: [
+                `$x = -3 \\pm 5i$`,
+                `$x = 3 \\pm 5i$`,
+                `$x = -3 \\pm 25i$`,
+                `$x = -6 \\pm 5i$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** kvadratkomplettera vänsterledet så att ekvationen får formen $(x + a)^2 = \\text{negativt tal}$ — precis den form vi kan dra roten ur.
+
+$$
+\\begin{aligned}
+x^2 + 6x + 34 &= 0\\\\
+(x + 3)^2 - 9 + 34 &= 0\\\\
+(x + 3)^2 &= -25
+\\end{aligned}
+$$
+
+Nu drar vi roten ur båda led, med $\\sqrt{-25} = 5i$:
+
+$$
+x + 3 = \\pm 5i \\quad\\Leftrightarrow\\quad x = -3 \\pm 5i
+$$
+
+**Svar:** $x_1 = -3 - 5i$ och $x_2 = -3 + 5i$`,
+        },
+    ],
+'ma4-4.2': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna $(3 + 5i) + (2 - 8i)$.`,
+            choices: [
+                `$5 - 3i$`,
+                `$5 + 13i$`,
+                `$1 + 13i$`,
+                `$6 - 40i$`,
+            ],
+            correct: 0,
+            solution: `Vi tar bort parenteserna och behåller alla tecken, sedan slår vi ihop realdelarna för sig och imaginärdelarna för sig.
+
+$$
+(3 + 5i) + (2 - 8i) = 3 + 2 + 5i - 8i = 5 - 3i
+$$
+
+**Svar:** $5 - 3i$`,
+        },
+        {
+            level: 1,
+            question: `Vad är konjugatet $\\bar{z}$ till $z = 6 - 2i$?`,
+            choices: [
+                `$6 + 2i$`,
+                `$6 - 2i$`,
+                `$-6 + 2i$`,
+                `$-6 - 2i$`,
+            ],
+            correct: 0,
+            solution: `Konjugatet fås genom att byta tecken på imaginärdelen. Realdelen $6$ behålls.
+
+$$
+\\bar{z} = 6 + 2i
+$$
+
+**Svar:** $6 + 2i$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $(2 + i)(3 - i)$. Använd att $i^2 = -1$.`,
+            choices: [
+                `$7 + i$`,
+                `$6 - i$`,
+                `$5 + i$`,
+                `$6 + i$`,
+            ],
+            correct: 0,
+            solution: `Vi multiplicerar ihop parenteserna och använder $i^2 = -1$.
+
+$$
+(2 + i)(3 - i) = 6 - 2i + 3i - i^2 = 6 + i + 1 = 7 + i
+$$
+
+**Svar:** $7 + i$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Skriv $\\dfrac{4 + 2i}{1 - i}$ på formen $a + bi$.`,
+            choices: [
+                `$1 + 3i$`,
+                `$3 + i$`,
+                `$1 - 3i$`,
+                `$2 + 6i$`,
+            ],
+            correct: 0,
+            solution: `Vi förlänger bråket med nämnarens konjugat $(1 + i)$ så att nämnaren blir reell.
+
+$$
+\\frac{4 + 2i}{1 - i} = \\frac{(4 + 2i)(1 + i)}{(1 - i)(1 + i)} = \\frac{4 + 4i + 2i + 2i^2}{1 - i^2} = \\frac{4 + 6i - 2}{1 + 1} = \\frac{2 + 6i}{2} = 1 + 3i
+$$
+
+**Svar:** $1 + 3i$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm det komplexa talet $z$ som uppfyller $3\\operatorname{Re} z + z = 8 + 4i$.`,
+            choices: [
+                `$z = 2 + 4i$`,
+                `$z = 8 + 4i$`,
+                `$z = 2 - 4i$`,
+                `$z = 4 + 2i$`,
+            ],
+            correct: 0,
+            solution: `Vi skriver $z = a + bi$, så att $\\operatorname{Re} z = a$. Insättning ger
+
+$$
+3a + (a + bi) = 8 + 4i \\quad\\Longrightarrow\\quad 4a + bi = 8 + 4i
+$$
+
+Identifikation (jämförelse mellan vänsterled och högerled) ger $4a = 8$, alltså $a = 2$, och $b = 4$.
+
+$$
+z = a + bi = 2 + 4i
+$$
+
+**Svar:** $z = 2 + 4i$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `För vilket reellt tal $a$ blir $\\dfrac{a + i}{2 - i}$ ett reellt tal?`,
+            choices: [
+                `$a = -2$`,
+                `$a = 2$`,
+                `$a = -\\dfrac{1}{2}$`,
+                `Inget reellt $a$ fungerar`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** ett komplext tal är reellt precis när dess imaginärdel är $0$. Vi förlänger därför med nämnarens konjugat $(2 + i)$ och kräver att imaginärdelen försvinner.
+
+$$
+\\frac{a + i}{2 - i} = \\frac{(a + i)(2 + i)}{(2 - i)(2 + i)} = \\frac{2a + ai + 2i + i^2}{4 - i^2} = \\frac{(2a - 1) + (a + 2)i}{5}
+$$
+
+Imaginärdelen är $\\dfrac{a + 2}{5}$. Den är $0$ när
+
+$$
+a + 2 = 0 \\quad\\Longleftrightarrow\\quad a = -2
+$$
+
+(Med $a = -2$ blir uttrycket $\\dfrac{-5}{5} = -1$, som är reellt.)
+
+**Svar:** $a = -2$`,
+        },
+    ],
+'ma4-4.3': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `En andragradsekvation med reella koefficienter har en negativ diskriminant. Vad gäller för rötterna?`,
+            choices: [
+                `Ekvationen har två icke-reella, komplexkonjugerade rötter`,
+                `Ekvationen har två reella rötter`,
+                `Ekvationen har en reell dubbelrot`,
+                `Ekvationen saknar helt lösningar`,
+            ],
+            correct: 0,
+            solution: `Antalet lösningar avgörs av diskriminantens tecken. Är talet under rottecknet negativt drar vi roten ur ett negativt tal, vilket ger ett imaginärt led. Rötterna blir då $a + bi$ och $a - bi$ — varandras komplexkonjugat.
+
+**Svar:** Två icke-reella, komplexkonjugerade rötter`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $z^2 - 2z + 10 = 0$.`,
+            choices: [
+                `$z = 1 \\pm 3i$`,
+                `$z = 2 \\pm 3i$`,
+                `$z = 1 \\pm 9i$`,
+                `$z = -1 \\pm 3i$`,
+            ],
+            correct: 0,
+            solution: `Här är $p = -2$ och $q = 10$. *pq*-formeln ger
+
+$$
+z = 1 \\pm \\sqrt{1^2 - 10} = 1 \\pm \\sqrt{-9} = 1 \\pm 3i
+$$
+
+**Svar:** $z = 1 \\pm 3i$`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $z^2 + 16 = 0$ har rötterna $\\pm bi$. Bestäm det positiva talet $b$.`,
+            answer: { value: 4, unit: '', tol: 0.01 },
+            solution: `Vi löser ut $z^2$ och drar roten:
+
+$$
+z^2 = -16 \\quad\\Rightarrow\\quad z = \\pm\\sqrt{-16} = \\pm 4i
+$$
+
+Rötterna är alltså $\\pm 4i$, så $b = 4$.
+
+**Svar:** $b = 4$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $z^2 - 4iz - 5 = 0$ (observera att koefficienterna är komplexa).`,
+            choices: [
+                `$z = 2i \\pm 1$`,
+                `$z = 2 \\pm i$`,
+                `$z = -2i \\pm 1$`,
+                `$z = i \\pm 2$`,
+            ],
+            correct: 0,
+            solution: `*pq*-formeln fungerar även med komplexa koefficienter. Här är $p = -4i$ och $q = -5$:
+
+$$
+z = 2i \\pm \\sqrt{(2i)^2 + 5} = 2i \\pm \\sqrt{4i^2 + 5} = 2i \\pm \\sqrt{-4 + 5} = 2i \\pm \\sqrt{1} = 2i \\pm 1
+$$
+
+**Svar:** $z = 2i \\pm 1$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm talet $a$ så att ekvationen $x^2 + 2x + a = 0$ får roten $x_1 = -1 + 3i$.`,
+            answer: { value: 10, unit: '', tol: 0.01 },
+            solution: `Eftersom $x_1 = -1 + 3i$ är en lösning sätter vi in den i ekvationen:
+
+$$
+\\begin{aligned}
+(-1 + 3i)^2 + 2(-1 + 3i) + a &= 0\\\\
+1 - 6i + 9i^2 - 2 + 6i + a &= 0\\\\
+1 - 6i - 9 - 2 + 6i + a &= 0\\\\
+-10 + a &= 0
+\\end{aligned}
+$$
+
+Alltså $a = 10$.
+
+**Svar:** $a = 10$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En andragradsekvation $x^2 + px + q = 0$ med reella koefficienter har roten $2 + 5i$. Bestäm $p$ och $q$.`,
+            choices: [
+                `$p = -4$ och $q = 29$`,
+                `$p = 4$ och $q = 29$`,
+                `$p = -4$ och $q = -21$`,
+                `$p = -4$ och $q = 21$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** när koefficienterna är reella kommer komplexa rötter alltid i konjugatpar, så den andra roten måste vara $2 - 5i$. Ekvationen kan då faktoriseras:
+
+$$
+\\bigl(x - (2 + 5i)\\bigr)\\bigl(x - (2 - 5i)\\bigr) = 0
+$$
+
+Multiplicerar vi ihop paret (konjugatregeln) försvinner det imaginära ledet:
+
+$$
+x^2 - \\bigl((2+5i) + (2-5i)\\bigr)x + (2+5i)(2-5i) = x^2 - 4x + (4 + 25)
+$$
+
+alltså $x^2 - 4x + 29 = 0$. Jämförelse med $x^2 + px + q = 0$ ger $p = -4$ och $q = 29$.
+
+**Svar:** $p = -4$ och $q = 29$`,
+        },
+    ],
+'ma4-4.4': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Polynomet $p(x)$ har nollstället $x = 3$. Vilken faktor måste då $p(x)$ ha enligt faktorsatsen?`,
+            choices: [
+                `$(x - 3)$`,
+                `$(x + 3)$`,
+                `$3x$`,
+                `$(3 - x^2)$`,
+            ],
+            correct: 0,
+            solution: `Faktorsatsen: om $x = a$ är ett nollställe till $p(x)$ så är $(x - a)$ en faktor. Med $a = 3$ blir faktorn $(x - 3)$.
+
+**Svar:** $(x - 3)$`,
+        },
+        {
+            level: 1,
+            question: `Lös ekvationen $(x - 2)(x + 5) = 0$ med nollproduktmetoden.`,
+            choices: [
+                `$x = 2$ eller $x = -5$`,
+                `$x = -2$ eller $x = 5$`,
+                `$x = 2$ eller $x = 5$`,
+                `$x = -2$ eller $x = -5$`,
+            ],
+            correct: 0,
+            solution: `En produkt är $0$ om minst en faktor är $0$:
+
+$$
+x - 2 = 0 \\;\\Rightarrow\\; x = 2, \\qquad x + 5 = 0 \\;\\Rightarrow\\; x = -5
+$$
+
+**Svar:** $x = 2$ eller $x = -5$`,
+        },
+        {
+            level: 1,
+            question: `Ekvationen $x^3 - 9x = 0$ kan skrivas $x(x^2 - 9) = 0$. En rot är $x = 0$. Ange den största av de övriga rötterna.`,
+            answer: { value: 3, unit: '', tol: 0.01 },
+            solution: `Faktorn $x^2 - 9 = 0$ ger $x^2 = 9$, alltså $x = \\pm 3$.
+
+$$
+x^2 - 9 = 0 \\;\\Leftrightarrow\\; x = 3 \\ \\text{eller}\\ x = -3
+$$
+
+Den största av dessa är $x = 3$.
+
+**Svar:** $x = 3$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Lös ekvationen $x^3 - 7x^2 + 10x = 0$ och ange den största roten.`,
+            answer: { value: 5, unit: '', tol: 0.01 },
+            solution: `Bryt ut $x$: $\\;x(x^2 - 7x + 10) = 0$. Det ger $x_1 = 0$ och andragradsfaktorn $x^2 - 7x + 10 = 0$:
+
+$$
+x = \\frac{7}{2} \\pm \\sqrt{\\left(\\frac{7}{2}\\right)^2 - 10} = \\frac{7}{2} \\pm \\sqrt{\\frac{9}{4}} = \\frac{7}{2} \\pm \\frac{3}{2}
+$$
+
+Det ger $x_2 = 2$ och $x_3 = 5$. Den största roten är $5$.
+
+**Svar:** $x = 5$`,
+        },
+        {
+            level: 2,
+            question: `En tredjegradsekvation har roten $x = 2$. Polynomdivision med $(x - 2)$ ger andragradsfaktorn $x^2 + 6x + 5$. Vilka är ekvationens övriga rötter?`,
+            choices: [
+                `$x = -1$ och $x = -5$`,
+                `$x = 1$ och $x = 5$`,
+                `$x = -2$ och $x = -3$`,
+                `$x = 2$ och $x = -5$`,
+            ],
+            correct: 0,
+            solution: `De övriga rötterna fås ur andragradsfaktorn $x^2 + 6x + 5 = 0$:
+
+$$
+x = -3 \\pm \\sqrt{3^2 - 5} = -3 \\pm \\sqrt{4} = -3 \\pm 2
+$$
+
+vilket ger $x = -1$ och $x = -5$.
+
+**Svar:** $x = -1$ och $x = -5$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Ekvationen $x^3 - x^2 + x - 1 = 0$ har den reella roten $x = 1$. Bestäm ekvationens övriga (komplexa) rötter.`,
+            choices: [
+                `$x = i$ och $x = -i$`,
+                `$x = 1$ och $x = -1$`,
+                `$x = i$ (dubbelrot)`,
+                `Inga övriga rötter — endast $x = 1$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** eftersom $x = 1$ är en rot är $(x - 1)$ en faktor. Polynomdivision av $x^3 - x^2 + x - 1$ med $x - 1$ ger kvoten $x^2 + 1$ (kontroll: $(x - 1)(x^2 + 1) = x^3 - x^2 + x - 1$).
+
+De övriga rötterna fås ur $x^2 + 1 = 0$, alltså $x^2 = -1$:
+
+$$
+x = \\pm\\sqrt{-1} = \\pm i
+$$
+
+De icke-reella rötterna bildar ett konjugerat par.
+
+**Svar:** $x = i$ och $x = -i$`,
+        },
+    ],
+'ma4-4.5': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket komplext tal motsvarar punkten med realdel $3$ och imaginärdel $-2$ i det komplexa talplanet?`,
+            choices: [
+                `$3 - 2i$`,
+                `$-2 + 3i$`,
+                `$3 + 2i$`,
+                `$-3 - 2i$`,
+            ],
+            correct: 0,
+            solution: `Realdelen är talet framför (utan $i$) och imaginärdelen är koefficienten framför $i$. Realdel $3$ och imaginärdel $-2$ ger alltså $z = 3 + (-2)i = 3 - 2i$.
+
+**Svar:** $3 - 2i$`,
+        },
+        {
+            level: 1,
+            question: `Beräkna $(2 + 3i) + (1 + 4i)$.`,
+            choices: [
+                `$3 + 7i$`,
+                `$3 + 12i$`,
+                `$2 + 7i$`,
+                `$7 + 3i$`,
+            ],
+            correct: 0,
+            solution: `Vi adderar realdelarna för sig och imaginärdelarna för sig:
+
+$$
+(2 + 3i) + (1 + 4i) = (2 + 1) + (3 + 4)i = 3 + 7i
+$$
+
+**Svar:** $3 + 7i$`,
+        },
+        {
+            level: 1,
+            question: `Var i det komplexa talplanet ligger punkten för det rent imaginära talet $z = -4i$?`,
+            choices: [
+                `På Im-axeln (den lodräta axeln), $4$ steg ner`,
+                `På Re-axeln (den vågräta axeln), $4$ steg åt vänster`,
+                `I första kvadranten`,
+                `I origo`,
+            ],
+            correct: 0,
+            solution: `Talet $-4i$ har realdel $0$ och imaginärdel $-4$. När realdelen är $0$ ligger punkten på Im-axeln, och eftersom imaginärdelen är negativ hamnar den $4$ steg ner från origo.
+
+**Svar:** På Im-axeln, $4$ steg ner`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Låt $z = 3 + 2i$ och $w = -2 - 4i$. Beräkna $z + w$.`,
+            choices: [
+                `$1 - 2i$`,
+                `$5 + 6i$`,
+                `$1 + 6i$`,
+                `$-1 - 2i$`,
+            ],
+            correct: 0,
+            solution: `Vi adderar realdelarna för sig och imaginärdelarna för sig:
+
+$$
+z + w = (3 + 2i) + (-2 - 4i) = (3 - 2) + (2 - 4)i = 1 - 2i
+$$
+
+**Svar:** $z + w = 1 - 2i$`,
+        },
+        {
+            level: 2,
+            question: `Låt $z = 3 + 2i$ och $w = -2 - 4i$. Beräkna $z - w$.`,
+            choices: [
+                `$5 + 6i$`,
+                `$1 - 2i$`,
+                `$5 - 6i$`,
+                `$1 + 2i$`,
+            ],
+            correct: 0,
+            solution: `Vi subtraherar realdelarna för sig och imaginärdelarna för sig. Tänk på tecknen — vi drar bort ett negativt tal, vilket blir en addition:
+
+$$
+z - w = (3 + 2i) - (-2 - 4i) = (3 - (-2)) + (2 - (-4))i = 5 + 6i
+$$
+
+**Svar:** $z - w = 5 + 6i$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Två komplexa tal $z$ och $w$ uppfyller $z + w = 1 + i$ och $z - w = 5 + 3i$. Bestäm $z$.`,
+            choices: [
+                `$3 + 2i$`,
+                `$-2 - i$`,
+                `$6 + 4i$`,
+                `$4 + 4i$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** behandla de två sambanden som ett ekvationssystem. Adderar vi ekvationerna faller $w$ bort, precis som med vanliga tal:
+
+$$
+(z + w) + (z - w) = (1 + i) + (5 + 3i) \\quad\\Rightarrow\\quad 2z = 6 + 4i
+$$
+
+Delar vi båda led med $2$ får vi realdel och imaginärdel var för sig:
+
+$$
+z = \\frac{6 + 4i}{2} = 3 + 2i
+$$
+
+Alternativet $6 + 4i$ är $2z$ innan man delat med $2$, och $-2 - i$ är $w$ (fås ur $z - w$).
+
+**Svar:** $z = 3 + 2i$`,
+        },
+    ],
+'ma4-4.6': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna absolutbeloppet $|z|$ för $z = 3 + 4i$.`,
+            answer: { value: 5, unit: '', tol: 0.01 },
+            solution: `Absolutbeloppet är visarens längd.
+
+$$
+|z| = \\sqrt{a^2 + b^2} = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5
+$$
+
+**Svar:** 5`,
+        },
+        {
+            level: 1,
+            question: `Vilket uttryck är den polära formen av ett komplext tal?`,
+            choices: [
+                `$r(\\cos v + i\\sin v)$`,
+                `$r(\\cos v - i\\sin v)$`,
+                `$r(\\sin v + i\\cos v)$`,
+                `$r + v\\,i$`,
+            ],
+            correct: 0,
+            solution: `Den polära formen bygger på visarens längd $r$ och vinkel $v$, med sambanden $a = r\\cos v$ och $b = r\\sin v$:
+
+$$
+z = r(\\cos v + i\\sin v)
+$$
+
+**Svar:** $r(\\cos v + i\\sin v)$`,
+        },
+        {
+            level: 1,
+            question: `Talet $z = 4(\\cos 60^\\circ + i\\sin 60^\\circ)$ är skrivet på polär form. Bestäm realdelen $a$.`,
+            answer: { value: 2, unit: '', tol: 0.01 },
+            solution: `Realdelen är $a = r\\cos v$.
+
+$$
+a = 4\\cos 60^\\circ = 4\\cdot \\frac{1}{2} = 2
+$$
+
+**Svar:** 2`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ange $z = 2(\\cos 120^\\circ + i\\sin 120^\\circ)$ på formen $a + bi$.`,
+            choices: [
+                `$-1 + \\sqrt{3}\\,i$`,
+                `$1 + \\sqrt{3}\\,i$`,
+                `$-\\sqrt{3} + i$`,
+                `$-1 - \\sqrt{3}\\,i$`,
+            ],
+            correct: 0,
+            solution: `Vi använder $a = r\\cos v$ och $b = r\\sin v$ med $r = 2$ och $v = 120^\\circ$:
+
+$$
+a = 2\\cos 120^\\circ = 2\\cdot\\left(-\\frac{1}{2}\\right) = -1
+$$
+
+$$
+b = 2\\sin 120^\\circ = 2\\cdot\\frac{\\sqrt{3}}{2} = \\sqrt{3}
+$$
+
+**Svar:** $-1 + \\sqrt{3}\\,i$`,
+        },
+        {
+            level: 2,
+            question: `Bestäm $\\arg z$ i grader för $z = -1 + i$.`,
+            choices: [
+                `$135^\\circ$`,
+                `$-45^\\circ$`,
+                `$45^\\circ$`,
+                `$225^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Här är $a = -1$ och $b = 1$, så talet ligger i **andra kvadranten**. Räknaren ger
+
+$$
+\\tan v = \\frac{b}{a} = \\frac{1}{-1} = -1 \\quad\\Rightarrow\\quad \\tan^{-1}(-1) = -45^\\circ
+$$
+
+Eftersom $a < 0$ måste vi addera $180^\\circ$ för att komma till rätt kvadrant:
+
+$$
+\\arg z = -45^\\circ + 180^\\circ = 135^\\circ
+$$
+
+**Svar:** $135^\\circ$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Talet $z$ ligger på cirkeln $|z + (-3 - 2i)| = 2$. Vilket är det minsta möjliga värdet av $|z|$?`,
+            choices: [
+                `$\\sqrt{13} - 2$`,
+                `$\\sqrt{13} + 2$`,
+                `$\\sqrt{13}$`,
+                `$2$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** $|z|$ är avståndet från $z$ till origo, och ekvationen är en cirkel. Vi skriver om absolutbeloppet som en differens:
+
+$$
+|z - (3 + 2i)| = 2
+$$
+
+Det är en cirkel med medelpunkt $3 + 2i$ och radie $2$. Avståndet från origo till medelpunkten är
+
+$$
+|3 + 2i| = \\sqrt{3^2 + 2^2} = \\sqrt{13}
+$$
+
+De punkter på cirkeln som ligger närmast origo ligger på linjen mellan origo och medelpunkten. Minsta avståndet blir därför avståndet till medelpunkten minus radien:
+
+$$
+|z|_{\\min} = \\sqrt{13} - 2
+$$
+
+Alternativet $\\sqrt{13} + 2$ är i stället det **största** värdet av $|z|$.
+
+**Svar:** $\\sqrt{13} - 2$`,
+        },
+    ],
+'ma4-4.7': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Beräkna produkten $z\\cdot w$ i polär form, där $z = 2(\\cos 20^\\circ + i\\sin 20^\\circ)$ och $w = 3(\\cos 50^\\circ + i\\sin 50^\\circ)$.`,
+            choices: [
+                `$6(\\cos 70^\\circ + i\\sin 70^\\circ)$`,
+                `$5(\\cos 70^\\circ + i\\sin 70^\\circ)$`,
+                `$6(\\cos 30^\\circ + i\\sin 30^\\circ)$`,
+                `$6(\\cos 1000^\\circ + i\\sin 1000^\\circ)$`,
+            ],
+            correct: 0,
+            solution: `Vid multiplikation i polär form multiplicerar vi beloppen och adderar argumenten.
+
+$$
+z\\cdot w = 2\\cdot 3\\big(\\cos(20^\\circ + 50^\\circ) + i\\sin(20^\\circ + 50^\\circ)\\big) = 6(\\cos 70^\\circ + i\\sin 70^\\circ)
+$$
+
+**Svar:** $6(\\cos 70^\\circ + i\\sin 70^\\circ)$`,
+        },
+        {
+            level: 1,
+            question: `Vad motsvarar en multiplikation med $i$ geometriskt i det komplexa talplanet?`,
+            choices: [
+                `En vridning $90^\\circ$ moturs`,
+                `En vridning $90^\\circ$ medurs`,
+                `En vridning $180^\\circ$`,
+                `En fördubbling av beloppet`,
+            ],
+            correct: 0,
+            solution: `Talet $i$ har beloppet $1$ och argumentet $90^\\circ$. Vid multiplikation multipliceras beloppen (här med $1$, ingen skalning) och argumenten adderas — visaren vrids alltså $90^\\circ$ moturs.
+
+**Svar:** En vridning $90^\\circ$ moturs`,
+        },
+        {
+            level: 1,
+            question: `Talet $z$ har beloppet $12$ och talet $w$ har beloppet $3$. Bestäm beloppet av kvoten $\\dfrac{z}{w}$.`,
+            answer: { value: 4, unit: '', tol: 0.01 },
+            solution: `Vid division i polär form dividerar vi beloppen (och subtraherar argumenten).
+
+$$
+\\left|\\frac{z}{w}\\right| = \\frac{|z|}{|w|} = \\frac{12}{3} = 4
+$$
+
+**Svar:** 4`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $z_1\\cdot z_2$ och skriv svaret med ett argument mellan $0^\\circ$ och $360^\\circ$, där $z_1 = 5(\\cos 300^\\circ + i\\sin 300^\\circ)$ och $z_2 = 4(\\cos 100^\\circ + i\\sin 100^\\circ)$.`,
+            choices: [
+                `$20(\\cos 40^\\circ + i\\sin 40^\\circ)$`,
+                `$9(\\cos 40^\\circ + i\\sin 40^\\circ)$`,
+                `$20(\\cos 200^\\circ + i\\sin 200^\\circ)$`,
+                `$20(\\cos(-40^\\circ) + i\\sin(-40^\\circ))$`,
+            ],
+            correct: 0,
+            solution: `Vi multiplicerar beloppen och adderar argumenten:
+
+$$
+z_1\\cdot z_2 = 5\\cdot 4\\big(\\cos(300^\\circ + 100^\\circ) + i\\sin(300^\\circ + 100^\\circ)\\big) = 20(\\cos 400^\\circ + i\\sin 400^\\circ)
+$$
+
+Eftersom $400^\\circ$ är ett helt varv för mycket drar vi bort $360^\\circ$: $400^\\circ - 360^\\circ = 40^\\circ$.
+
+$$
+= 20(\\cos 40^\\circ + i\\sin 40^\\circ)
+$$
+
+**Svar:** $20(\\cos 40^\\circ + i\\sin 40^\\circ)$`,
+        },
+        {
+            level: 2,
+            question: `Talet $5 - 2i$ multipliceras med $i$. Vilket tal får man?`,
+            choices: [
+                `$2 + 5i$`,
+                `$5 + 2i$`,
+                `$-2 + 5i$`,
+                `$2 - 5i$`,
+            ],
+            correct: 0,
+            solution: `Vi multiplicerar in $i$ och använder $i^2 = -1$:
+
+$$
+i(5 - 2i) = 5i - 2i^2 = 5i + 2 = 2 + 5i
+$$
+
+Geometriskt är $2 + 5i$ visaren för $5 - 2i$ vriden $90^\\circ$ moturs.
+
+**Svar:** $2 + 5i$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Multiplikation med ett komplext tal $w$ vrider varje visare $60^\\circ$ moturs och gör den tre gånger så lång. Bestäm $w$ skrivet på formen $a + bi$.`,
+            choices: [
+                `$\\dfrac{3}{2} + \\dfrac{3\\sqrt{3}}{2}i$`,
+                `$\\dfrac{3\\sqrt{3}}{2} + \\dfrac{3}{2}i$`,
+                `$\\dfrac{1}{2} + \\dfrac{\\sqrt{3}}{2}i$`,
+                `$3 + 3i$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** en multiplikation med $w$ är en skalning med beloppet $|w|$ och en vridning med argumentet $\\arg w$. Vridningen är $60^\\circ$ moturs och längden tredubblas, så
+
+$$
+|w| = 3, \\qquad \\arg w = 60^\\circ \\quad\\Rightarrow\\quad w = 3(\\cos 60^\\circ + i\\sin 60^\\circ)
+$$
+
+Nu sätter vi in de exakta värdena $\\cos 60^\\circ = \\dfrac{1}{2}$ och $\\sin 60^\\circ = \\dfrac{\\sqrt{3}}{2}$:
+
+$$
+w = 3\\left(\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i\\right) = \\frac{3}{2} + \\frac{3\\sqrt{3}}{2}i
+$$
+
+Alternativet $\\tfrac{1}{2} + \\tfrac{\\sqrt{3}}{2}i$ är $w$ utan skalningen med $3$.
+
+**Svar:** $\\dfrac{3}{2} + \\dfrac{3\\sqrt{3}}{2}i$`,
+        },
+    ],
+'ma4-4.8': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Enligt de Moivres formel är $\\bigl(r(\\cos v + i\\sin v)\\bigr)^n$ lika med vilket uttryck?`,
+            choices: [
+                `$r^n(\\cos nv + i\\sin nv)$`,
+                `$r^n(\\cos v + i\\sin v)$`,
+                `$nr(\\cos nv + i\\sin nv)$`,
+                `$r^n(\\cos v^n + i\\sin v^n)$`,
+            ],
+            correct: 0,
+            solution: `de Moivres formel säger att beloppet upphöjs till $n$ och att argumentet multipliceras med $n$.
+
+**Svar:** $r^n(\\cos nv + i\\sin nv)$`,
+        },
+        {
+            level: 1,
+            question: `Låt $z = 3(\\cos 20^\\circ + i\\sin 20^\\circ)$. Vilket blir absolutbeloppet $|z^4|$?`,
+            answer: { value: 81, unit: '', tol: 0.5 },
+            solution: `Enligt de Moivres formel upphöjs beloppet till exponenten:
+
+$$
+|z^4| = r^4 = 3^4 = 81
+$$
+
+**Svar:** 81`,
+        },
+        {
+            level: 1,
+            question: `Låt $z = \\cos 15^\\circ + i\\sin 15^\\circ$. Vilket blir argumentet för $z^6$?`,
+            answer: { value: 90, unit: '°', tol: 0.5 },
+            solution: `Enligt de Moivres formel multipliceras argumentet med exponenten:
+
+$$
+\\arg(z^6) = 6v = 6\\cdot 15^\\circ = 90^\\circ
+$$
+
+**Svar:** $90^\\circ$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Beräkna $z^3$ för $z = 2(\\cos 30^\\circ + i\\sin 30^\\circ)$ och ange svaret på formen $a + bi$.`,
+            choices: [
+                `$8i$`,
+                `$-8i$`,
+                `$8$`,
+                `$4 + 4i$`,
+            ],
+            correct: 0,
+            solution: `de Moivres formel med $r = 2$, $v = 30^\\circ$ och $n = 3$ ger:
+
+$$
+z^3 = 2^3(\\cos 90^\\circ + i\\sin 90^\\circ) = 8(0 + i\\cdot 1) = 8i
+$$
+
+**Svar:** $8i$`,
+        },
+        {
+            level: 2,
+            question: `Låt $z = \\cos 40^\\circ + i\\sin 40^\\circ$. Beräkna $z^9$ och ange svaret på formen $a + bi$.`,
+            choices: [
+                `$-1$`,
+                `$1$`,
+                `$-i$`,
+                `$i$`,
+            ],
+            correct: 0,
+            solution: `de Moivres formel med $r = 1$, $v = 40^\\circ$ och $n = 9$ ger:
+
+$$
+z^9 = 1^9(\\cos 360^\\circ + i\\sin 360^\\circ)
+$$
+
+Argumentet blir $9\\cdot 40^\\circ = 360^\\circ$, som är samma riktning som $0^\\circ$. Alltså är $\\cos 360^\\circ = 1$ och $\\sin 360^\\circ = 0$:
+
+$$
+z^9 = 1 + i\\cdot 0 = 1
+$$
+
+Fällan är att välja $-1$, som i stället svarar mot argumentet $180^\\circ$.
+
+**Svar:** $1$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Talet $z = 1 + i$ ska upphöjas till $z^8$. Skriv först $z$ i polär form och använd sedan de Moivres formel. Vad blir $z^8$?`,
+            choices: [
+                `$16$`,
+                `$16i$`,
+                `$256$`,
+                `$-16$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** de Moivres formel kräver polär form, så vi måste först bestämma belopp och argument för $z = 1 + i$.
+
+Beloppet är $r = \\sqrt{1^2 + 1^2} = \\sqrt{2}$, och eftersom både real- och imaginärdel är $1$ ligger $z$ i första kvadranten med argumentet $v = 45^\\circ$. Alltså
+
+$$
+z = \\sqrt{2}\\,(\\cos 45^\\circ + i\\sin 45^\\circ)
+$$
+
+de Moivres formel med $n = 8$ ger:
+
+$$
+z^8 = (\\sqrt{2})^8(\\cos 360^\\circ + i\\sin 360^\\circ) = 16\\cdot (1 + i\\cdot 0) = 16
+$$
+
+Här är $(\\sqrt{2})^8 = 2^4 = 16$ och $8\\cdot 45^\\circ = 360^\\circ$, som pekar i samma riktning som $0^\\circ$.
+
+**Svar:** $16$`,
+        },
+    ],
+'ma4-4.9': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Hur många lösningar har ekvationen $z^6 = w$, där $n = 6$ och $w \\neq 0$?`,
+            choices: [
+                `Exakt $6$ stycken`,
+                `Exakt $1$ styck`,
+                `Exakt $2$ stycken`,
+                `Oändligt många`,
+            ],
+            correct: 0,
+            solution: `En ekvation av formen $z^n = w$ (med $w \\neq 0$) har exakt $n$ olika lösningar. Här är $n = 6$.
+
+**Svar:** $6$ lösningar`,
+        },
+        {
+            level: 1,
+            question: `Lösningarna till $z^3 = 27$ ligger jämnt fördelade på en cirkel kring origo. Beräkna cirkelns radie.`,
+            answer: { value: 3, unit: '', tol: 0.01 },
+            solution: `Radien ges av $r = \\sqrt[n]{|w|}$. Här är $n = 3$ och $|w| = 27$:
+
+$$
+r = \\sqrt[3]{27} = 3
+$$
+
+**Svar:** $r = 3$ längdenheter`,
+        },
+        {
+            level: 1,
+            question: `Hur många grader skiljer två närliggande lösningar till $z^4 = w$ åt i det komplexa talplanet?`,
+            choices: [
+                `$90^\\circ$`,
+                `$45^\\circ$`,
+                `$120^\\circ$`,
+                `$360^\\circ$`,
+            ],
+            correct: 0,
+            solution: `De $n$ lösningarna ligger jämnt fördelade runt cirkeln, så mellanrummet är $\\dfrac{360^\\circ}{n}$. Med $n = 4$:
+
+$$
+\\frac{360^\\circ}{4} = 90^\\circ
+$$
+
+**Svar:** $90^\\circ$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Ekvationen $z^3 = 8$ löses i polär form. Vilka argument $v$ får de tre lösningarna?`,
+            choices: [
+                `$0^\\circ$, $120^\\circ$ och $240^\\circ$`,
+                `$0^\\circ$, $90^\\circ$ och $180^\\circ$`,
+                `$0^\\circ$, $60^\\circ$ och $120^\\circ$`,
+                `$120^\\circ$, $240^\\circ$ och $360^\\circ$`,
+            ],
+            correct: 0,
+            solution: `Talet $8$ har argumentet $\\arg w = 0^\\circ$. Argumenten ges av
+
+$$
+v = \\frac{0^\\circ + n\\cdot 360^\\circ}{3} = n\\cdot 120^\\circ
+$$
+
+För $n = 0, 1, 2$ blir $v = 0^\\circ,\\ 120^\\circ,\\ 240^\\circ$.
+
+**Svar:** $0^\\circ$, $120^\\circ$ och $240^\\circ$`,
+        },
+        {
+            level: 2,
+            question: `Ett komplext tal $w$ har argumentet $\\arg w = 120^\\circ$. Bestäm det minsta positiva argumentet ($k = 0$) bland lösningarna till $z^4 = w$.`,
+            answer: { value: 30, unit: '°', tol: 0.1 },
+            solution: `Argumenten ges av $v = \\dfrac{\\arg w + k\\cdot 360^\\circ}{4}$, där nämnaren är exponenten $4$. Det minsta argumentet fås för $k = 0$:
+
+$$
+v = \\frac{120^\\circ + 0\\cdot 360^\\circ}{4} = \\frac{120^\\circ}{4} = 30^\\circ
+$$
+
+**Svar:** $v = 30^\\circ$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `En av lösningarna till en ekvation $z^3 = w$ är $z_1 = 2(\\cos 20^\\circ + i\\sin 20^\\circ)$. Bestäm de två övriga lösningarna i polär form.`,
+            choices: [
+                `$z_2 = 2(\\cos 140^\\circ + i\\sin 140^\\circ)$ och $z_3 = 2(\\cos 260^\\circ + i\\sin 260^\\circ)$`,
+                `$z_2 = 2(\\cos 120^\\circ + i\\sin 120^\\circ)$ och $z_3 = 2(\\cos 240^\\circ + i\\sin 240^\\circ)$`,
+                `$z_2 = 2(\\cos 80^\\circ + i\\sin 80^\\circ)$ och $z_3 = 2(\\cos 160^\\circ + i\\sin 160^\\circ)$`,
+                `$z_2 = 6(\\cos 140^\\circ + i\\sin 140^\\circ)$ och $z_3 = 6(\\cos 260^\\circ + i\\sin 260^\\circ)$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** de tre lösningarna har alla samma absolutbelopp och ligger jämnt fördelade $\\dfrac{360^\\circ}{3} = 120^\\circ$ från varandra. Man behöver alltså inte ens känna $w$ — det räcker att addera $120^\\circ$ till argumentet.
+
+Absolutbeloppet är oförändrat $r = 2$ (radien är $\\sqrt[3]{|w|}$, samma för alla rötter). Argumenten ökar med $120^\\circ$:
+
+$$
+v_2 = 20^\\circ + 120^\\circ = 140^\\circ, \\qquad v_3 = 20^\\circ + 240^\\circ = 260^\\circ
+$$
+
+Alternativet med radien $6$ är fällan: man kubar $r$ i stället för att behålla det, och alternativet $120^\\circ, 240^\\circ$ glömmer startvinkeln $20^\\circ$.
+
+**Svar:** $z_2 = 2(\\cos 140^\\circ + i\\sin 140^\\circ)$ och $z_3 = 2(\\cos 260^\\circ + i\\sin 260^\\circ)$`,
+        },
+    ],
+'ma4-4.10': [
+        // ── Nivå 1 (E) ───────────────────────────────────────────────
+        {
+            level: 1,
+            question: `Vilket samband är **Eulers formel**?`,
+            choices: [
+                `$e^{iv} = \\cos v + i\\sin v$`,
+                `$e^{iv} = \\cos v - i\\sin v$`,
+                `$e^{iv} = \\sin v + i\\cos v$`,
+                `$e^{iv} = i(\\cos v + \\sin v)$`,
+            ],
+            correct: 0,
+            solution: `Eulers formel binder samman exponentialfunktionen med de trigonometriska funktionerna: realdelen ges av $\\cos v$ och imaginärdelen av $\\sin v$.
+
+**Svar:** $e^{iv} = \\cos v + i\\sin v$`,
+        },
+        {
+            level: 1,
+            question: `Ett komplext tal skrivs på exponentiell form $z = 4e^{i\\frac{\\pi}{3}}$. Vad är talets belopp $r = |z|$?`,
+            answer: { value: 4, unit: '', tol: 0.001 },
+            solution: `På exponentiell form $z = r\\,e^{iv}$ är beloppet den faktor som står framför $e$. Här är
+
+$$
+z = 4e^{i\\frac{\\pi}{3}} \\quad\\Rightarrow\\quad r = 4
+$$
+
+**Svar:** $r = 4$`,
+        },
+        {
+            level: 1,
+            question: `Skriv $z = 3e^{i\\frac{\\pi}{2}}$ på rektangulär form $a + bi$.`,
+            choices: [
+                `$3i$`,
+                `$-3i$`,
+                `$3$`,
+                `$-3$`,
+            ],
+            correct: 0,
+            solution: `Med $r = 3$ och $v = \\dfrac{\\pi}{2}$ ger Eulers formel:
+
+$$
+z = 3\\left(\\cos \\frac{\\pi}{2} + i\\sin \\frac{\\pi}{2}\\right) = 3(0 + i\\cdot 1) = 3i
+$$
+
+**Svar:** $z = 3i$`,
+        },
+        // ── Nivå 2 (C) ───────────────────────────────────────────────
+        {
+            level: 2,
+            question: `Skriv $z = 2e^{i\\frac{\\pi}{3}}$ på formen $a + bi$.`,
+            choices: [
+                `$1 + i\\sqrt{3}$`,
+                `$\\sqrt{3} + i$`,
+                `$2 + 2i\\sqrt{3}$`,
+                `$1 - i\\sqrt{3}$`,
+            ],
+            correct: 0,
+            solution: `Med $r = 2$ och $v = \\dfrac{\\pi}{3}$ ger den polära formen:
+
+$$
+z = 2\\left(\\cos \\frac{\\pi}{3} + i\\sin \\frac{\\pi}{3}\\right) = 2\\left(\\frac{1}{2} + i\\frac{\\sqrt{3}}{2}\\right) = 1 + i\\sqrt{3}
+$$
+
+**Svar:** $z = 1 + i\\sqrt{3}$`,
+        },
+        {
+            level: 2,
+            question: `Skriv $z = e^{2 + i\\pi}$ på formen $a + bi$.`,
+            choices: [
+                `$-e^2$`,
+                `$e^2$`,
+                `$e^2 i$`,
+                `$-e^2 i$`,
+            ],
+            correct: 0,
+            solution: `Faktorisera exponenten med potenslagarna och använd Eulers identitet $e^{i\\pi} = -1$:
+
+$$
+z = e^{2 + i\\pi} = e^2\\cdot e^{i\\pi} = e^2\\cdot (-1) = -e^2
+$$
+
+**Svar:** $z = -e^2$`,
+        },
+        // ── Nivå 3 (A) ───────────────────────────────────────────────
+        {
+            level: 3,
+            question: `Bestäm en lösning till ekvationen $e^z = 2i$.`,
+            choices: [
+                `$z = \\ln 2 + \\dfrac{\\pi}{2}i$`,
+                `$z = \\ln 2 + \\dfrac{3\\pi}{2}i$`,
+                `$z = 2 + \\dfrac{\\pi}{2}i$`,
+                `$z = \\dfrac{\\pi}{2} + i\\ln 2$`,
+            ],
+            correct: 0,
+            solution: `**Insikten:** skriv båda leden på polär form och identifiera belopp och argument var för sig. Med $z = a + bi$ blir vänsterledet
+
+$$
+e^z = e^{a + bi} = e^a(\\cos b + i\\sin b)
+$$
+
+Högerledet $2i$ har belopp $r = 2$ och argument $v = \\dfrac{\\pi}{2}$:
+
+$$
+2i = 2\\left(\\cos \\frac{\\pi}{2} + i\\sin \\frac{\\pi}{2}\\right)
+$$
+
+Identifiering ger $e^a = 2 \\Leftrightarrow a = \\ln 2$ (inte $a = 2$ — det är fällan) och $b = \\dfrac{\\pi}{2}$.
+
+$$
+z = \\ln 2 + \\frac{\\pi}{2}i
+$$
+
+**Svar:** $z = \\ln 2 + \\dfrac{\\pi}{2}i$`,
+        },
+    ],
 };

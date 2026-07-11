@@ -1,0 +1,228 @@
+{
+ "id": "ma4-2.8",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "22fe402e90a443050afb85b4d65b14505fd1656e",
+ "dur": 302.7,
+ "segments": [
+  {
+   "t": "Tillämpningar med digitala verktyg",
+   "s": 0.1,
+   "e": 3.35
+  },
+  {
+   "t": "Med digitala verktyg kan vi derivera funktioner snabbare än att göra det för hand.",
+   "s": 3.3,
+   "e": 8.53
+  },
+  {
+   "t": "Vi kan dessutom derivera funktioner som vi saknar deriveringsregler för, och vi kan visualisera fenomen som är svåra att få en bild av bara utifrån ett funktionsuttryck.",
+   "s": 8.53,
+   "e": 18.74
+  },
+  {
+   "t": "Här använder vi Geogebra, men samma tankesätt fungerar i de flesta grafräknare och matematikprogram.",
+   "s": 18.74,
+   "e": 25.82
+  },
+  {
+   "t": "I Geogebra kallar vi funktionen f och variabeln x .",
+   "s": 25.82,
+   "e": 30.45
+  },
+  {
+   "t": "När funktionen är inskriven finns tre operationer vi ofta återkommer till: att läsa av förändringen i en viss punkt med f prim parentesen a slut parentes , och att ta reda på var förändringen är noll genom att lösa f prim parentesen x slut parentes är lika med 0 — antingen grafiskt (rita f prim och ta fram nollstället med verktyget Nollställen) eller numeriskt med kommandot NLös .",
+   "s": 30.45,
+   "e": 51.92
+  },
+  {
+   "t": "Tre användbara operationer i Geogebra",
+   "s": 51.92,
+   "e": 55.76
+  },
+  {
+   "t": "Definiera funktionen: f av x är lika med, 2 p t Förändring i punkten x som är lika med a : f prim parentesen a slut parentes, 2 p t Var är förändringen noll parentesen f prim parentesen x slut parentes som är lika med 0 slut parentes : NLös parentesen f prim parentesen x slut parentes som är lika med 0 slut parentes eller verktyget Nollställen",
+   "s": 55.76,
+   "e": 78.81
+  },
+  {
+   "t": "Poängen är att verktyget sköter själva deriveringen.",
+   "s": 78.81,
+   "e": 83.04
+  },
+  {
+   "t": "Vår uppgift är att veta vilken operation som svarar mot frågan — en förändringshastighet är ett derivatavärde f prim parentesen a slut parentes , medan \"ändras inte alls\" och \"största/minsta värde\" leder till ekvationen f prim parentesen x slut parentes är lika med 0 .",
+   "s": 83.04,
+   "e": 99.12
+  },
+  {
+   "t": "Exempel 1 — Förändring vid en tidpunkt",
+   "s": 99.12,
+   "e": 102.88
+  },
+  {
+   "t": "Vattennivån vid en damm påverkas av både nederbörd och avdunstning.",
+   "s": 102.88,
+   "e": 108.06
+  },
+  {
+   "t": "En modell för nivån är N parentesen t slut parentes är lika med 25 roten ur t gånger e upphöjt till minus 0,2 t plus 10 , där N är nivån i meter över en referenspunkt och t är antalet månader efter mätstarten parentesen t är större än eller lika med 1 slut parentes .",
+   "s": 108.06,
+   "e": 125.41
+  },
+  {
+   "t": "Hur ändras vattennivån efter 4 månader?",
+   "s": 125.41,
+   "e": 129.26
+  },
+  {
+   "t": "Ändringen av vattennivån efter 4 månader är derivatan av nivån då t är lika med 4 , det vill säga N prim, ekvation 4 .",
+   "s": 129.26,
+   "e": 138.32
+  },
+  {
+   "t": "I Geogebra kallar vi funktionen f och variabeln x , så vi definierar",
+   "s": 138.32,
+   "e": 144.09
+  },
+  {
+   "t": "f av x är lika med 25 roten ur x gånger e upphöjt till minus 0,2 x plus 10",
+   "s": 144.09,
+   "e": 151.62
+  },
+  {
+   "t": "och skriver sedan i inmatningsfältet f prim, ekvation 4 .",
+   "s": 151.62,
+   "e": 156.57
+  },
+  {
+   "t": "Verktyget ger",
+   "s": 156.57,
+   "e": 158.95
+  },
+  {
+   "t": "f prim, ekvation 4 är ungefär lika med minus 1,7",
+   "s": 158.95,
+   "e": 164.11
+  },
+  {
+   "t": "Eftersom N mäts i meter och t i månader tolkar vi det negativa värdet som att nivån minskar med 1,7 meter per månad vid denna tidpunkt.",
+   "s": 164.11,
+   "e": 172.99
+  },
+  {
+   "t": "Svar: Vattennivån minskar med 1,7 meter per månad.",
+   "s": 172.99,
+   "e": 177.96
+  },
+  {
+   "t": "Exempel 2 — När är förändringen noll?",
+   "s": 177.96,
+   "e": 181.43
+  },
+  {
+   "t": "Vid vilken tidpunkt ändras vattennivån i Exempel 1 inte alls?",
+   "s": 181.43,
+   "e": 186.44
+  },
+  {
+   "t": "När vattennivån inte ändras alls är förändringshastigheten noll, alltså N prim parentesen t slut parentes är lika med 0 .",
+   "s": 186.44,
+   "e": 194.61
+  },
+  {
+   "t": "Vi har redan definierat funktionen som f av x är lika med 25 roten ur x gånger e upphöjt till minus 0,2 x plus 10 och löser f prim parentesen x slut parentes är lika med 0 .",
+   "s": 194.61,
+   "e": 206.96
+  },
+  {
+   "t": "Två vägar ger samma svar:",
+   "s": 206.96,
+   "e": 210.95
+  },
+  {
+   "t": "Grafisk lösning.",
+   "s": 206.96,
+   "e": 210.95
+  },
+  {
+   "t": "Vi skriver in f prim parentesen x slut parentes , anpassar koordinataxlarna så att vi ser grafen och använder verktyget Nollställen.",
+   "s": 210.95,
+   "e": 219.8
+  },
+  {
+   "t": "Punkten där f prim skär x -axeln har x -koordinaten 2,5 .",
+   "s": 219.8,
+   "e": 225.28
+  },
+  {
+   "t": "Numerisk lösning.",
+   "s": 225.28,
+   "e": 227.59
+  },
+  {
+   "t": "Vi skriver i stället NLös parentesen f prim parentesen x slut parentes är lika med 0 slut parentes och läser av lösningen direkt:",
+   "s": 227.59,
+   "e": 244.62
+  },
+  {
+   "t": "NLös parentesen f prim parentesen x slut parentes är lika med 0 slut parentes som är lika med { x som är lika med 2,5 }",
+   "s": 227.59,
+   "e": 244.62
+  },
+  {
+   "t": "Båda metoderna ger t är lika med 2,5 . (Här är nivån som störst — derivatan växlar från positiv till negativ.)",
+   "s": 244.62,
+   "e": 254.43
+  },
+  {
+   "t": "Svar: Efter 2,5 månader.",
+   "s": 254.43,
+   "e": 258.1
+  },
+  {
+   "t": "Exempel 3 — En funktion utan handregel",
+   "s": 258.1,
+   "e": 262.02
+  },
+  {
+   "t": "Bestäm f prim, ekvation 1 för f av x är lika med x upphöjt till sinus x .",
+   "s": 262.02,
+   "e": 268.19
+  },
+  {
+   "t": "Här står variabeln x i både basen och exponenten, så ingen av våra vanliga deriveringsregler räcker för att derivera för hand.",
+   "s": 268.19,
+   "e": 276.48
+  },
+  {
+   "t": "Med ett digitalt verktyg är det ändå enkelt: vi definierar",
+   "s": 276.48,
+   "e": 281.31
+  },
+  {
+   "t": "f av x är lika med x upphöjt till sinus x",
+   "s": 281.31,
+   "e": 286.24
+  },
+  {
+   "t": "och skriver f prim, ekvation 1 .",
+   "s": 281.31,
+   "e": 289.44
+  },
+  {
+   "t": "Verktyget ger",
+   "s": 289.39,
+   "e": 291.75
+  },
+  {
+   "t": "f prim, ekvation 1 är ungefär lika med 0,84",
+   "s": 291.75,
+   "e": 296.9
+  },
+  {
+   "t": "Svar: f prim, ekvation 1 är ungefär lika med 0,84",
+   "s": 296.9,
+   "e": 302.7
+  }
+ ]
+}

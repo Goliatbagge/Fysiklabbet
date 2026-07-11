@@ -1,0 +1,238 @@
+{
+ "id": "ma4-1.11",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "723890aa5e917a18a23e2a3d916cf48e5886566f",
+ "dur": 284.61,
+ "segments": [
+  {
+   "t": "Amplitud och period",
+   "s": 0.1,
+   "e": 2.62
+  },
+  {
+   "t": "Avståndet från jämviktsläget till kurvans topp (eller dal) kallas amplitud.",
+   "s": 2.58,
+   "e": 8.5
+  },
+  {
+   "t": "Man kan också se amplituden som hälften av skillnaden mellan funktionens största och minsta värde.",
+   "s": 8.5,
+   "e": 14.96
+  },
+  {
+   "t": "Den minsta vinkel där en graf upprepar sig kallas period.",
+   "s": 14.96,
+   "e": 19.4
+  },
+  {
+   "t": "Man kan också se perioden som avståndet i x -led mellan två motsvarande punkter på kurvan, till exempel avståndet mellan två toppar.",
+   "s": 19.4,
+   "e": 28.06
+  },
+  {
+   "t": "Både grundfunktionerna y är lika med sinus x och y är lika med cosinus x har amplituden 1 och perioden 360 grader (i grader) eller 2 pi (i radianer).",
+   "s": 28.06,
+   "e": 39.75
+  },
+  {
+   "t": "Koefficienten framför funktionen ändrar amplituden",
+   "s": 39.75,
+   "e": 43.96
+  },
+  {
+   "t": "Vi undersöker hur en koefficient framför den trigonometriska funktionen påverkar grafen.",
+   "s": 43.96,
+   "e": 50.33
+  },
+  {
+   "t": "Eftersom varje värde för sinus x multipliceras med 2 i funktionen y är lika med 2 sinus x blir läget i y -led dubbelt så stort i varje punkt.",
+   "s": 50.33,
+   "e": 60.04
+  },
+  {
+   "t": "Amplituden för y är lika med 2 sinus x är därför 2, och på samma sätt har y är lika med 3 sinus x amplituden 3.",
+   "s": 60.04,
+   "e": 68.53
+  },
+  {
+   "t": "Ritar vi upp y är lika med minus 2 sinus x ser vi att grafen är en spegling av y är lika med 2 sinus x i x -axeln — varje positiv y -koordinat blir negativ och tvärtom.",
+   "s": 68.53,
+   "e": 79.88
+  },
+  {
+   "t": "Amplituden är ändå 2, eftersom en amplitud aldrig kan vara negativ.",
+   "s": 79.88,
+   "e": 85.25
+  },
+  {
+   "t": "Generellt gäller att y är lika med A sinus x har amplituden | A | .",
+   "s": 85.25,
+   "e": 90.55
+  },
+  {
+   "t": "Koefficienten inuti argumentet ändrar perioden",
+   "s": 90.55,
+   "e": 94.89
+  },
+  {
+   "t": "Koefficienten inuti argumentet påverkar i stället perioden.",
+   "s": 94.89,
+   "e": 99.9
+  },
+  {
+   "t": "Eftersom varje x -värde i vinkeln multipliceras med 2 i funktionen y är lika med sinus 2 x hinner kurvan svänga dubbelt så fort.",
+   "s": 99.9,
+   "e": 108.72
+  },
+  {
+   "t": "Perioden blir 360 grader delat med 2 är lika med 180 grader .",
+   "s": 108.72,
+   "e": 114.71
+  },
+  {
+   "t": "På samma sätt har y är lika med sinus 3 x perioden 360 grader delat med 3 är lika med 120 grader , eftersom den svänger tre gånger så fort.",
+   "s": 114.71,
+   "e": 125.04
+  },
+  {
+   "t": "Generellt gäller att y är lika med sinus B x har perioden 360 grader delat med B (i grader) eller 2 pi delat med B (i radianer).",
+   "s": 125.04,
+   "e": 135.0
+  },
+  {
+   "t": "Amplitud och period",
+   "s": 135.0,
+   "e": 137.53
+  },
+  {
+   "t": "Funktionen y är lika med A sinus B x har amplituden | A | och perioden",
+   "s": 137.53,
+   "e": 143.6
+  },
+  {
+   "t": "360 grader delat med B (i grader) eller 2 pi delat med B (i radianer)",
+   "s": 143.6,
+   "e": 150.24
+  },
+  {
+   "t": "Testa själv hur koefficienterna formar kurvan.",
+   "s": 150.24,
+   "e": 154.22
+  },
+  {
+   "t": "Dra i reglaget för amplituden A och se hur kurvans höjd ändras, och dra i reglaget för B och se hur perioden blir kortare när kurvan svänger snabbare.",
+   "s": 154.22,
+   "e": 163.47
+  },
+  {
+   "t": "Med A är lika med 2 och B är lika med 1 får du y är lika med 2 sinus x .",
+   "s": 163.47,
+   "e": 169.21
+  },
+  {
+   "t": "Exempel 1 — Bestäm amplitud och period",
+   "s": 169.21,
+   "e": 173.28
+  },
+  {
+   "t": "Bestäm amplituden och perioden för funktionen y är lika med 5 sinus 8 x .",
+   "s": 173.28,
+   "e": 179.25
+  },
+  {
+   "t": "Koefficienten framför sinus är amplituden, och koefficienten framför x styr perioden via 360 grader delat med B .",
+   "s": 179.25,
+   "e": 188.12
+  },
+  {
+   "t": "amplitud är lika med 5",
+   "s": 188.12,
+   "e": 190.97
+  },
+  {
+   "t": "period är lika med 360 grader delat med 8 som är lika med 45 grader",
+   "s": 190.97,
+   "e": 197.19
+  },
+  {
+   "t": "Svar: Amplituden är 5 och perioden 45 grader.",
+   "s": 197.19,
+   "e": 201.95
+  },
+  {
+   "t": "Exempel 2 — Negativ koefficient",
+   "s": 201.95,
+   "e": 205.64
+  },
+  {
+   "t": "Bestäm amplituden och perioden för funktionen y är lika med minus 25 sinus 5 x .",
+   "s": 205.64,
+   "e": 212.4
+  },
+  {
+   "t": "En negativ koefficient framför sinus speglar grafen i x -axeln, men amplituden är ett avstånd och kan aldrig vara negativ.",
+   "s": 212.4,
+   "e": 221.19
+  },
+  {
+   "t": "Vi tar därför absolutbeloppet av koefficienten.",
+   "s": 221.19,
+   "e": 225.47
+  },
+  {
+   "t": "amplitud är lika med | minus 25 | som är lika med 25",
+   "s": 225.47,
+   "e": 230.25
+  },
+  {
+   "t": "period är lika med 360 grader delat med 5 som är lika med 72 grader",
+   "s": 230.25,
+   "e": 236.5
+  },
+  {
+   "t": "Svar: Amplituden är 25 och perioden 72 grader.",
+   "s": 236.5,
+   "e": 241.62
+  },
+  {
+   "t": "Exempel 3 — Division i argumentet",
+   "s": 241.62,
+   "e": 245.43
+  },
+  {
+   "t": "Bestäm amplituden och perioden för funktionen y är lika med 3 delat med 5 cosinus parentesen x delat med 2 slut parentes .",
+   "s": 245.43,
+   "e": 254.4
+  },
+  {
+   "t": "Observera att argumentet innehåller en division.",
+   "s": 254.4,
+   "e": 258.68
+  },
+  {
+   "t": "Vi skriver om den som en multiplikation för att hitta koefficienten B :",
+   "s": 258.68,
+   "e": 271.86
+  },
+  {
+   "t": "x delat med 2 är lika med 1 delat med 2 x som är lika med 0,5 x",
+   "s": 258.68,
+   "e": 271.86
+  },
+  {
+   "t": "amplitud är lika med 3 delat med 5 som är lika med 0,6",
+   "s": 258.68,
+   "e": 271.86
+  },
+  {
+   "t": "period är lika med 360 grader delat med 0,5 som är lika med 720 grader",
+   "s": 271.86,
+   "e": 278.88
+  },
+  {
+   "t": "Svar: Amplituden är 0,6 och perioden 720 grader.",
+   "s": 278.88,
+   "e": 284.61
+  }
+ ]
+}

@@ -1,0 +1,308 @@
+{
+ "id": "ma4-2.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "785bc054901703fe7a0f3da3f6fea1f9f0ee52f9",
+ "dur": 466.57,
+ "segments": [
+  {
+   "t": "Extremvärdesproblem (repetition)",
+   "s": 0.1,
+   "e": 3.55
+  },
+  {
+   "t": "Problem som handlar om att hitta det största (maximala) eller minsta (minimala) värdet av en storhet kallas extremvärdesproblem eller optimeringsproblem.",
+   "s": 3.5,
+   "e": 14.04
+  },
+  {
+   "t": "Vi löser dem med derivata: i en topp eller en dal på kurvan är lutningen — och därmed derivatan — noll, så vi letar upp de x där f prim parentesen x slut parentes är lika med 0 och avgör sedan om det är ett maximum eller ett minimum.",
+   "s": 14.04,
+   "e": 27.88
+  },
+  {
+   "t": "Repetition från Matematik 3",
+   "s": 27.88,
+   "e": 31.16
+  },
+  {
+   "t": "Tecknet på förstaderivatan berättar om funktionen växer eller avtar.",
+   "s": 31.16,
+   "e": 36.59
+  },
+  {
+   "t": "Om f prim parentesen x slut parentes är större än 0 är lutningen positiv (\"uppförsbacke\") och funktionen växande; om f prim parentesen x slut parentes är mindre än 0 är lutningen negativ (\"nedförsbacke\") och funktionen avtagande.",
+   "s": 36.59,
+   "e": 51.64
+  },
+  {
+   "t": "En punkt där kurvan vänder från växande till avtagande är en lokal maximipunkt (\"topp\"), och en punkt där den vänder från avtagande till växande är en lokal minimipunkt (\"dal\").",
+   "s": 51.64,
+   "e": 63.02
+  },
+  {
+   "t": "Funktionsvärdet ( y -värdet) i punkten kallas lokalt maximum respektive minimum.",
+   "s": 63.02,
+   "e": 69.72
+  },
+  {
+   "t": "Planar kurvan ut och fortsätter sedan i samma riktning har vi i stället en terrasspunkt — även där är derivatan noll, men kurvan vänder inte.",
+   "s": 69.72,
+   "e": 78.3
+  },
+  {
+   "t": "Andraderivatan och grafen — kom-ihåg-regel",
+   "s": 78.3,
+   "e": 82.16
+  },
+  {
+   "t": "Andraderivatan talar om åt vilket håll kurvan böjer, och därför kan den avgöra en extrempunkts karaktär.",
+   "s": 82.16,
+   "e": 89.5
+  },
+  {
+   "t": "Andraderivatan och grafen",
+   "s": 89.5,
+   "e": 92.38
+  },
+  {
+   "t": "I en punkt där f prim parentesen x slut parentes är lika med 0 gäller:",
+   "s": 92.38,
+   "e": 105.04
+  },
+  {
+   "t": "f bis parentesen x slut parentes är större än 0 — kurvan böjer uppåt (\"glad\" kurva, konvex): minimipunkt",
+   "s": 92.38,
+   "e": 105.04
+  },
+  {
+   "t": "f bis parentesen x slut parentes är mindre än 0 — kurvan böjer nedåt (\"sur\" kurva, konkav): maximipunkt",
+   "s": 105.04,
+   "e": 113.72
+  },
+  {
+   "t": "f bis parentesen x slut parentes är lika med 0 — kurvans böjning kan ändras (inflexionspunkt); teckenstudium krävs för att avgöra karaktären.",
+   "s": 113.72,
+   "e": 123.71
+  },
+  {
+   "t": "Bestämma extrempunkter och deras karaktär",
+   "s": 123.71,
+   "e": 127.38
+  },
+  {
+   "t": "Metod i tre steg",
+   "s": 127.38,
+   "e": 129.9
+  },
+  {
+   "t": "Derivera den ursprungliga funktionen, sätt f prim parentesen x slut parentes är lika med 0 och lös ekvationen.",
+   "s": 129.9,
+   "e": 137.74
+  },
+  {
+   "t": "Rötterna är extrempunkternas x -koordinater.",
+   "s": 137.74,
+   "e": 141.89
+  },
+  {
+   "t": "Sätt in dessa x -värden i den ursprungliga funktionen f av x för att få extrempunkternas y -koordinater.",
+   "s": 141.89,
+   "e": 149.25
+  },
+  {
+   "t": "Bestäm karaktären med andraderivatans tecken: f bis parentesen a slut parentes är större än 0 ger minimipunkt, f bis parentesen a slut parentes är mindre än 0 ger maximipunkt.",
+   "s": 149.25,
+   "e": 161.18
+  },
+  {
+   "t": "Är funktionen en andragradsfunktion kan karaktären avgöras direkt av tecknet framför x i kvadrat -termen: en positiv x i kvadrat -term ger en minimipunkt, en negativ x i kvadrat -term en maximipunkt.",
+   "s": 161.18,
+   "e": 174.47
+  },
+  {
+   "t": "Största och minsta värdet i ett intervall",
+   "s": 174.47,
+   "e": 178.14
+  },
+  {
+   "t": "Söker vi det största eller minsta värdet i ett slutet intervall räcker det inte att titta på extrempunkterna — även intervallets ändpunkter kan vara högst eller lägst. Sätt därför in intervallets ändpunkter i f av x , beräkna y -värdet i de extrempunkter som ligger inom intervallet, och jämför.",
+   "s": 178.14,
+   "e": 196.45
+  },
+  {
+   "t": "Det största av alla dessa värden är funktionens största värde i intervallet, och det minsta är dess minsta värde.",
+   "s": 196.45,
+   "e": 203.39
+  },
+  {
+   "t": "Exempel 1 — Vanjas hästhage",
+   "s": 203.39,
+   "e": 206.85
+  },
+  {
+   "t": "Vanja har köpt 60 meter stängsel för en rektangulär hästhage där en av sidorna ska utgöras av en mur (inget stängsel behövs där, se figuren).",
+   "s": 206.85,
+   "e": 216.2
+  },
+  {
+   "t": "Vilken är den maximala arean hagen kan få?",
+   "s": 216.2,
+   "e": 220.24
+  },
+  {
+   "t": "Låt sidorna mot muren vara x meter.",
+   "s": 220.24,
+   "e": 223.81
+  },
+  {
+   "t": "Stängslet på den tredje sidan blir då 60 minus 2 x meter, eftersom 2 x har gått åt till de två övriga sidorna.",
+   "s": 223.81,
+   "e": 231.9
+  },
+  {
+   "t": "Arean är basen gånger höjden:",
+   "s": 231.9,
+   "e": 244.0
+  },
+  {
+   "t": "A parentesen x slut parentes är lika med x parentesen 60 minus 2 x slut parentes som är lika med 60 x minus 2 x i kvadrat",
+   "s": 231.9,
+   "e": 244.0
+  },
+  {
+   "t": "Vi deriverar, sätter derivatan lika med noll och löser ekvationen:",
+   "s": 244.0,
+   "e": 264.84
+  },
+  {
+   "t": "A prim parentesen x slut parentes är lika med 60 minus 4 x",
+   "s": 244.0,
+   "e": 264.84
+  },
+  {
+   "t": "A prim parentesen x slut parentes är lika med 0 vilket är ekvivalent med att 60 minus 4 x är lika med 0 vilket är ekvivalent med att x är lika med 60 delat med 4 som är lika med 15",
+   "s": 244.0,
+   "e": 264.84
+  },
+  {
+   "t": "Vi sätter in x är lika med 15 i den ursprungliga funktionen för att få arean:",
+   "s": 264.84,
+   "e": 278.96
+  },
+  {
+   "t": "A, ekvation 15 är lika med 60 gånger 15 minus 2 gånger 15 i kvadrat som är lika med 900 minus 450 som är lika med 450",
+   "s": 264.84,
+   "e": 281.82
+  },
+  {
+   "t": "Karaktären bestämmer vi med andraderivatan.",
+   "s": 281.77,
+   "e": 285.41
+  },
+  {
+   "t": "Eftersom A prim parentesen x slut parentes är lika med 60 minus 4 x är A bis parentesen x slut parentes är lika med minus 4 , alltså",
+   "s": 285.41,
+   "e": 295.6
+  },
+  {
+   "t": "A bis, ekvation 15 är lika med minus 4 är mindre än 0 vilket ger att maximipunkt",
+   "s": 295.6,
+   "e": 302.49
+  },
+  {
+   "t": "(Vi kunde också ha sett det direkt: A parentesen x slut parentes är lika med 60 x minus 2 x i kvadrat har en negativ x i kvadrat -term och ger därför ett maximum.)",
+   "s": 302.49,
+   "e": 313.81
+  },
+  {
+   "t": "Svar: Den maximala arean är 450 meter i kvadrat .",
+   "s": 313.81,
+   "e": 319.24
+  },
+  {
+   "t": "Exempel 2 — Bestäm och klassificera extrempunkterna",
+   "s": 319.24,
+   "e": 323.62
+  },
+  {
+   "t": "Bestäm de lokala extrempunkterna till f av x är lika med x i kubik minus 12 x och avgör med andraderivatan om de är max eller min.",
+   "s": 323.62,
+   "e": 332.66
+  },
+  {
+   "t": "Vi deriverar och löser f prim parentesen x slut parentes är lika med 0 :",
+   "s": 332.66,
+   "e": 343.1
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 x i kvadrat minus 12",
+   "s": 332.66,
+   "e": 343.1
+  },
+  {
+   "t": "3 x i kvadrat minus 12 är lika med 0 vilket är ekvivalent med att x i kvadrat är lika med 4 vilket är ekvivalent med att x är lika med plus minus 2",
+   "s": 343.1,
+   "e": 353.54
+  },
+  {
+   "t": "y -koordinaterna fås ur den ursprungliga funktionen:",
+   "s": 353.54,
+   "e": 375.0
+  },
+  {
+   "t": "f av 2 är lika med 2 i kubik minus 12 gånger 2 som är lika med 8 minus 24 som är lika med minus 16, f av minus 2 som är lika med parentesen minus 2 slut parentes i kubik minus 12 gånger parentesen minus 2 slut parentes som är lika med minus 8 plus 24 som är lika med 16",
+   "s": 353.54,
+   "e": 375.0
+  },
+  {
+   "t": "Andraderivatan är f bis parentesen x slut parentes är lika med 6 x :",
+   "s": 375.0,
+   "e": 392.09
+  },
+  {
+   "t": "f bis, ekvation 2 är lika med 12 är större än 0 vilket ger att minimipunkt, f bis parentesen minus 2 slut parentes är lika med minus 12 är mindre än 0 vilket ger att maximipunkt",
+   "s": 375.0,
+   "e": 392.09
+  },
+  {
+   "t": "Svar: Lokal maximipunkt parentesen minus 2, 16 slut parentes och lokal minimipunkt parentesen 2, minus 16 slut parentes .",
+   "s": 392.09,
+   "e": 402.49
+  },
+  {
+   "t": "Exempel 3 — Största och minsta värdet i ett intervall",
+   "s": 402.49,
+   "e": 407.06
+  },
+  {
+   "t": "Bestäm det största och det minsta värdet av f av x är lika med x i kubik minus 12 x i intervallet 0 är mindre än eller lika med x är mindre än eller lika med 3 .",
+   "s": 407.06,
+   "e": 417.61
+  },
+  {
+   "t": "Vi jämför funktionsvärdet i intervallets ändpunkter och i de extrempunkter som ligger inom intervallet.",
+   "s": 417.61,
+   "e": 424.51
+  },
+  {
+   "t": "Från Exempel 2 vet vi att extrempunkterna finns vid x är lika med minus 2 och x är lika med 2 ; bara x är lika med 2 ligger i intervallet.",
+   "s": 424.51,
+   "e": 434.12
+  },
+  {
+   "t": "f av 0 är lika med 0, f av 2 som är lika med 2 i kubik minus 12 gånger 2 som är lika med minus 16, f av 3 som är lika med 3 i kubik minus 12 gånger 3 som är lika med 27 minus 36 som är lika med minus 9",
+   "s": 434.12,
+   "e": 448.69
+  },
+  {
+   "t": "Det största av värdena är 0 (vid ändpunkten x är lika med 0 ) och det minsta är minus 16 (i minimipunkten x är lika med 2 ).",
+   "s": 448.69,
+   "e": 458.04
+  },
+  {
+   "t": "Svar: Största värdet är 0 (vid x är lika med 0 ) och minsta värdet är minus 16 (vid x är lika med 2 ).",
+   "s": 458.04,
+   "e": 466.57
+  }
+ ]
+}

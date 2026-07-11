@@ -1,0 +1,203 @@
+{
+ "id": "ma4-2.11",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "58e1b3179970a1a8bd4de3e067fe7d4ea70cf2dd",
+ "dur": 463.62,
+ "segments": [
+  {
+   "t": "Kurvkonstruktion med derivata",
+   "s": 0.1,
+   "e": 3.21
+  },
+  {
+   "t": "Vid kurvkonstruktion med derivata använder vi samma metod för att bestämma extrempunkter och deras karaktär som vi gått igenom tidigare.",
+   "s": 3.16,
+   "e": 11.31
+  },
+  {
+   "t": "Skillnaden är att vi nu skissar hela grafens form utifrån extrempunkterna och eventuella ändpunkter.",
+   "s": 11.31,
+   "e": 18.39
+  },
+  {
+   "t": "Bestämma extrempunkter och deras karaktär",
+   "s": 18.39,
+   "e": 22.04
+  },
+  {
+   "t": "Derivera den ursprungliga funktionen, sätt derivatan lika med 0 och lös ekvationen.",
+   "s": 22.04,
+   "e": 28.25
+  },
+  {
+   "t": "Vi får då fram extrempunkternas x -koordinater.",
+   "s": 28.25,
+   "e": 32.5
+  },
+  {
+   "t": "Sätt in x -värdena i den ursprungliga funktionen.",
+   "s": 32.5,
+   "e": 36.65
+  },
+  {
+   "t": "Vi får då fram extrempunkternas y -koordinater.",
+   "s": 36.65,
+   "e": 40.83
+  },
+  {
+   "t": "Bestäm extrempunkternas karaktär med hjälp av andraderivatans värde.",
+   "s": 40.83,
+   "e": 46.0
+  },
+  {
+   "t": "Om f bis parentesen a slut parentes är lika med 0 gäller:",
+   "s": 46.0,
+   "e": 68.05
+  },
+  {
+   "t": "f bis parentesen a slut parentes är större än 0 vilket ger att lokal minimipunkt där x är lika med a f bis parentesen a slut parentes är mindre än 0 vilket ger att lokal maximipunkt där x är lika med a f bis parentesen a slut parentes som är lika med 0 vilket ger att terrasspunkt eller lokal extrempunkt",
+   "s": 46.0,
+   "e": 68.05
+  },
+  {
+   "t": "Om f bis parentesen a slut parentes är lika med 0 krävs ett teckenstudium (teckentabell) för att avgöra karaktären.",
+   "s": 68.05,
+   "e": 76.45
+  },
+  {
+   "t": "Är funktionen en andragradsfunktion kan karaktären avläsas direkt av tecknet framför x i kvadrat -termen: positiv x i kvadrat -term ger minimipunkt och negativ ger maximipunkt.",
+   "s": 76.45,
+   "e": 88.35
+  },
+  {
+   "t": "När vi skissar mer avancerade funktioner är det ofta enklast att använda en teckentabell.",
+   "s": 88.35,
+   "e": 94.26
+  },
+  {
+   "t": "I teckentabellen markerar vi derivatans nollställen och intervallets ändpunkter, undersöker derivatans tecken i varje delintervall och avläser var funktionen växer ( nearrow ) respektive avtar ( searrow ).",
+   "s": 94.26,
+   "e": 107.36
+  },
+  {
+   "t": "Kom ihåg att en skiss inte behöver vara exakt, men att punkter där derivatan är 0 (extrempunkter och terrasspunkter) och ändpunkter ska vara korrekt markerade.",
+   "s": 107.36,
+   "e": 117.4
+  },
+  {
+   "t": "Exempel 1 — Skissa grafen med teckentabell",
+   "s": 117.4,
+   "e": 121.33
+  },
+  {
+   "t": "Skissa grafen till f av x är lika med parentesen x minus 1 slut parentes i kvadrat e upphöjt till x i intervallet minus 2 är mindre än eller lika med x är mindre än eller lika med 2 .",
+   "s": 121.33,
+   "e": 133.46
+  },
+  {
+   "t": "Steg 1: Derivera funktionen, sätt den lika med 0 och ta fram x -koordinaterna för punkterna där lutningen är 0 .",
+   "s": 133.46,
+   "e": 141.46
+  },
+  {
+   "t": "Produktregeln och kedjeregeln ger:",
+   "s": 141.46,
+   "e": 170.16
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 2 parentesen x minus 1 slut parentes gånger 1 gånger e upphöjt till x plus parentesen x minus 1 slut parentes i kvadrat gånger e upphöjt till x f prim parentesen x slut parentes som är lika med parentesen 2 x minus 2 slut parentes e upphöjt till x plus parentesen x i kvadrat minus 2 x plus 1 slut parentes e upphöjt till x",
+   "s": 141.46,
+   "e": 170.16
+  },
+  {
+   "t": "Vi faktoriserar genom att bryta ut e upphöjt till x för att kunna använda nollproduktmetoden:",
+   "s": 170.16,
+   "e": 192.24
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med e upphöjt till x parentesen 2 x minus 2 plus x i kvadrat minus 2 x plus 1 slut parentes f prim parentesen x slut parentes som är lika med e upphöjt till x parentesen x i kvadrat minus 1 slut parentes",
+   "s": 170.16,
+   "e": 192.24
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 0 ger e upphöjt till x parentesen x i kvadrat minus 1 slut parentes är lika med 0 .",
+   "s": 192.24,
+   "e": 201.71
+  },
+  {
+   "t": "Nollproduktmetoden ger två fall:",
+   "s": 201.71,
+   "e": 210.35
+  },
+  {
+   "t": "Fall 1: e upphöjt till x är lika med 0 saknar lösning då e upphöjt till x är större än 0",
+   "s": 201.71,
+   "e": 210.35
+  },
+  {
+   "t": "Fall 2: x i kvadrat minus 1 är lika med 0 x i kvadrat som är lika med 1 x som är lika med plus minus roten ur 1 x ett som är lika med minus 1 och x två som är lika med 1",
+   "s": 210.35,
+   "e": 222.69
+  },
+  {
+   "t": "Steg 2: Undersök derivatans tecken på båda sidor om nollställena.",
+   "s": 222.69,
+   "e": 228.22
+  },
+  {
+   "t": "Vi väljer ett x -värde i varje delintervall och sätter in det i derivatan:",
+   "s": 228.22,
+   "e": 260.91
+  },
+  {
+   "t": "f prim parentesen minus 2 slut parentes är lika med e upphöjt till minus 2 bigl parentesen parentesen minus 2 slut parentes i kvadrat minus 1 bigr slut parentes som är lika med e upphöjt till minus 2 gånger 3 som är lika med 3 delat med e i kvadrat som är ungefär lika med 0,406 är större än 0 parentesen positivt slut parentes f prim, ekvation 0 som är lika med e upphöjt till 0 parentesen 0 i kvadrat minus 1 slut parentes som är lika med 1 gånger parentesen minus 1 slut parentes som är lika med minus 1 är mindre än 0 parentesen negativt slut parentes f prim, ekvation 2 som är lika med e i kvadrat parentesen 2 i kvadrat minus 1 slut parentes som är lika med e i kvadrat gånger 3 som är lika med 3 e i kvadrat som är ungefär lika med 22,167 är större än 0 parentesen positivt slut parentes",
+   "s": 228.22,
+   "e": 288.12
+  },
+  {
+   "t": "Vi fyller i plus- och minustecken på raden för derivatan och ritar sedan \"pil upp\" ( nearrow ) där derivatan är positiv och \"pil ner\" ( searrow ) där den är negativ på raden för funktionen:",
+   "s": 288.06,
+   "e": 311.21
+  },
+  {
+   "t": "Teckentabellen visar att x är lika med minus 1 är en lokal maximipunkt (derivatan går från plus till minus ) och att x är lika med 1 är en lokal minimipunkt (derivatan går från minus till plus ).",
+   "s": 288.06,
+   "e": 311.21
+  },
+  {
+   "t": "Steg 3: Sätt in x -värdena för derivatans nollställen och intervallets ändpunkter i den ursprungliga funktionen för att bestämma y -koordinaterna.",
+   "s": 311.21,
+   "e": 320.64
+  },
+  {
+   "t": "f av minus 2 är lika med parentesen minus 2 minus 1 slut parentes i kvadrat gånger e upphöjt till minus 2 som är lika med parentesen minus 3 slut parentes i kvadrat gånger e upphöjt till minus 2 som är lika med 9 delat med e i kvadrat som är ungefär lika med 1,22 vilket ger att parentesen minus 2 ; 1,22 slut parentes en ändpunkt f av 2 är lika med parentesen 2 minus 1 slut parentes i kvadrat gånger e i kvadrat som är lika med, ekvation 1 i kvadrat gånger e i kvadrat som är lika med e i kvadrat som är ungefär lika med 7,39 vilket ger att parentesen 2 ; 7,39 slut parentes en ändpunkt f av minus 1 är lika med parentesen minus 1 minus 1 slut parentes i kvadrat gånger e upphöjt till minus 1 som är lika med parentesen minus 2 slut parentes i kvadrat gånger e upphöjt till minus 1 som är lika med 4 delat med e som är ungefär lika med 1,47 vilket ger att parentesen minus 1 ; 1,47 slut parentes en maximipunkt f av 1 är lika med parentesen 1 minus 1 slut parentes i kvadrat gånger e upphöjt till 1 som är lika med, ekvation 0 i kvadrat gånger e som är lika med 0 vilket ger att parentesen 1 ; 0 slut parentes en minimipunkt",
+   "s": 320.64,
+   "e": 398.53
+  },
+  {
+   "t": "Steg 4: Skissa grafen.",
+   "s": 398.53,
+   "e": 401.75
+  },
+  {
+   "t": "Vi ritar upp ett koordinatsystem som täcker in alla x - och y -värden vi har beräknat, markerar ändpunkterna och extrempunkterna och binder samman dem med en graf enligt teckentabellen: kurvan växer svagt fram till maximipunkten parentesen minus 1 ; 1,47 slut parentes , avtar ner till minimipunkten parentesen 1 ; 0 slut parentes och stiger sedan brant till ändpunkten parentesen 2 ; 7,39 slut parentes .",
+   "s": 401.75,
+   "e": 428.12
+  },
+  {
+   "t": "Svar: Kurvan har en lokal maximipunkt i parentesen minus 1 ; 1,47 slut parentes , en lokal minimipunkt i parentesen 1 ; 0 slut parentes och ändpunkter i parentesen minus 2 ; 1,22 slut parentes och parentesen 2 ; 7,39 slut parentes .",
+   "s": 428.12,
+   "e": 446.59
+  },
+  {
+   "t": "Nedan kan du utforska den färdiga kurvan y är lika med parentesen x minus 1 slut parentes i kvadrat e upphöjt till x .",
+   "s": 446.59,
+   "e": 454.98
+  },
+  {
+   "t": "Panorera och zooma för att se hur maximipunkten, minimipunkten och den branta stigningen mot högerkanten hänger ihop med teckentabellen.",
+   "s": 454.98,
+   "e": 463.62
+  }
+ ]
+}

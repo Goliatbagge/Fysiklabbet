@@ -1,0 +1,228 @@
+{
+ "id": "ma4-4.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8876f03d0638cec6d18316147fbfd749d7066d63",
+ "dur": 491.9,
+ "segments": [
+  {
+   "t": "Multiplikation och division i polär form",
+   "s": 0.1,
+   "e": 3.9
+  },
+  {
+   "t": "I rektangulär form är multiplikation av komplexa tal en ganska mödosam uträkning.",
+   "s": 3.85,
+   "e": 9.82
+  },
+  {
+   "t": "I polär form blir den däremot förvånansvärt enkel.",
+   "s": 9.82,
+   "e": 14.01
+  },
+  {
+   "t": "Vi undersöker vad som händer när vi multiplicerar två komplexa tal i polär form, till exempel z är lika med 4 parentesen cosinus 40 grader plus i sinus 40 grader slut parentes och w är lika med 2 parentesen cosinus 80 grader plus i sinus 80 grader slut parentes .",
+   "s": 14.01,
+   "e": 31.21
+  },
+  {
+   "t": "Vi multiplicerar ihop dem och samlar real- och imaginärdel.",
+   "s": 31.21,
+   "e": 36.09
+  },
+  {
+   "t": "Med additionsformlerna för sinus och cosinus ( cosinus u cosinus v minus sinus u sinus v är lika med cosinus parentesen u plus v slut parentes och sinus u cosinus v plus cosinus u sinus v är lika med sinus parentesen u plus v slut parentes ) kan parenteserna skrivas som cosinus och sinus för en enda vinkel:",
+   "s": 36.09,
+   "e": 69.14
+  },
+  {
+   "t": "z gånger w är lika med 4 parentesen cosinus 40 grader plus i sinus 40 grader slut parentes gånger 2 parentesen cosinus 80 grader plus i sinus 80 grader slut parentes som är lika med 8 parentesen cosinus 40 grader cosinus 80 grader plus i cosinus 40 grader sinus 80 grader plus i sinus 40 grader cosinus 80 grader plus i i kvadrat sinus 40 grader sinus 80 grader slut parentes som är lika med 8 parentesen parentesen cosinus 40 grader cosinus 80 grader minus sinus 40 grader sinus 80 grader slut parentes plus i parentesen cosinus 40 grader sinus 80 grader plus sinus 40 grader cosinus 80 grader slut parentes slut parentes som är lika med 8 parentesen cosinus parentesen 40 grader plus 80 grader slut parentes plus i sinus parentesen 40 grader plus 80 grader slut parentes slut parentes som är lika med 8 parentesen cosinus 120 grader plus i sinus 120 grader slut parentes",
+   "s": 36.09,
+   "e": 117.26
+  },
+  {
+   "t": "Lägg märke till mönstret: absolutbeloppet 8 är produkten av absolutbeloppen ( 4 och 2 ), och argumentet 120 grader är summan av argumenten ( 40 grader och 80 grader ).",
+   "s": 117.26,
+   "e": 130.12
+  },
+  {
+   "t": "Detta ger en enkel regel — och en lika enkel regel finns för division, där beloppen i stället divideras och argumenten subtraheras.",
+   "s": 130.12,
+   "e": 138.82
+  },
+  {
+   "t": "Multiplikation och division av komplexa tal i polär form",
+   "s": 138.82,
+   "e": 143.56
+  },
+  {
+   "t": "För z är lika med | z | parentesen cosinus u plus i sinus u slut parentes och w är lika med | w | parentesen cosinus v plus i sinus v slut parentes gäller z gånger w är lika med | z | gånger | w | parentesen cosinus parentesen u plus v slut parentes plus i sinus parentesen u plus v slut parentes slut parentes, 4 p t z delat med w som är lika med | z | delat med | w | parentesen cosinus parentesen u minus v slut parentes plus i sinus parentesen u minus v slut parentes slut parentes",
+   "s": 143.56,
+   "e": 178.03
+  },
+  {
+   "t": "Geometriskt betyder detta att en multiplikation är en vridning (argumenten adderas) kombinerad med en skalning (beloppen multipliceras).",
+   "s": 178.03,
+   "e": 187.81
+  },
+  {
+   "t": "Vill man göra tvärtom — dividera — vrider man tillbaka och skalar ner.",
+   "s": 187.81,
+   "e": 192.72
+  },
+  {
+   "t": "I figuren nedan syns de tre visarna för z är lika med 4 parentesen cosinus 40 grader plus i sinus 40 grader slut parentes , w är lika med 2 parentesen cosinus 80 grader plus i sinus 80 grader slut parentes och deras produkt z gånger w .",
+   "s": 192.72,
+   "e": 209.2
+  },
+  {
+   "t": "Produktens visare är åtta enheter lång ( 4 gånger 2 ) och pekar i riktningen 120 grader , eftersom z :s argument 40 grader och w :s argument 80 grader läggs ihop.",
+   "s": 209.2,
+   "e": 222.09
+  },
+  {
+   "t": "Multiplikation och division med i",
+   "s": 222.09,
+   "e": 228.41
+  },
+  {
+   "t": "Ett särskilt viktigt specialfall är att multiplicera med i .",
+   "s": 222.09,
+   "e": 228.41
+  },
+  {
+   "t": "Tar vi talet 3 och multiplicerar med i får vi 3 i .",
+   "s": 228.41,
+   "e": 233.01
+  },
+  {
+   "t": "Multiplicerar vi 3 i med i får vi 3 i i kvadrat är lika med minus 3 .",
+   "s": 233.01,
+   "e": 238.74
+  },
+  {
+   "t": "Multiplicerar vi minus 3 med i får vi minus 3 i , och multiplicerar vi minus 3 i med i får vi minus 3 i i kvadrat är lika med 3 — och är tillbaka där vi började.",
+   "s": 238.74,
+   "e": 248.99
+  },
+  {
+   "t": "Ritar vi in talen som visare i det komplexa talplanet ser vi att varje multiplikation med i vrider visaren 90 grader moturs.",
+   "s": 248.99,
+   "e": 257.3
+  },
+  {
+   "t": "Detta gäller även tal med både realdel och imaginärdel. Talet 3 plus 2 i ger i parentesen 3 plus 2 i slut parentes är lika med 3 i plus 2 i i kvadrat som är lika med minus 2 plus 3 i, och visaren för minus 2 plus 3 i är just visaren för 3 plus 2 i vriden 90 grader moturs. Talet i har ju beloppet 1 (ingen skalning) och argumentet 90 grader (vridningen).",
+   "s": 257.3,
+   "e": 284.26
+  },
+  {
+   "t": "Multiplikation och division med i",
+   "s": 284.26,
+   "e": 297.95
+  },
+  {
+   "t": "multiplikation med i vilket är ekvivalent med att vridning 90 grader moturs, 2 p t division med i vilket är ekvivalent med att vridning 90 grader medurs",
+   "s": 286.68,
+   "e": 297.95
+  },
+  {
+   "t": "Exempel 1 — multiplicera och dividera i polär form",
+   "s": 297.9,
+   "e": 302.53
+  },
+  {
+   "t": "Låt z ett är lika med 3 parentesen cosinus 120 grader plus i sinus 120 grader slut parentes och z två är lika med 6 parentesen cosinus 30 grader plus i sinus 30 grader slut parentes .",
+   "s": 302.53,
+   "e": 316.57
+  },
+  {
+   "t": "Bestäm. a) z ett gånger z två b) z två delat med z ett",
+   "s": 316.57,
+   "e": 324.06
+  },
+  {
+   "t": "a) Vid multiplikation multiplicerar vi beloppen och adderar argumenten:",
+   "s": 324.06,
+   "e": 350.21
+  },
+  {
+   "t": "z ett gånger z två är lika med 3 gånger 6 parentesen cosinus parentesen 120 grader plus 30 grader slut parentes plus i sinus parentesen 120 grader plus 30 grader slut parentes slut parentes som är lika med 18 parentesen cosinus 150 grader plus i sinus 150 grader slut parentes",
+   "s": 324.06,
+   "e": 350.21
+  },
+  {
+   "t": "b) Vid division dividerar vi beloppen och subtraherar argumenten:",
+   "s": 350.21,
+   "e": 385.16
+  },
+  {
+   "t": "z två delat med z ett är lika med 6 delat med 3 parentesen cosinus parentesen 30 grader minus 120 grader slut parentes plus i sinus parentesen 30 grader minus 120 grader slut parentes slut parentes som är lika med 2 parentesen cosinus parentesen minus 90 grader slut parentes plus i sinus parentesen minus 90 grader slut parentes slut parentes som är lika med 2 parentesen 0 plus i gånger parentesen minus 1 slut parentes slut parentes som är lika med minus 2 i",
+   "s": 350.21,
+   "e": 407.25
+  },
+  {
+   "t": "Svar: a) 18 parentesen cosinus 150 grader plus i sinus 150 grader slut parentes b) 2 parentesen cosinus parentesen minus 90 grader slut parentes plus i sinus parentesen minus 90 grader slut parentes slut parentes är lika med minus 2 i",
+   "s": 385.16,
+   "e": 407.25
+  },
+  {
+   "t": "Exempel 2 — vrid ett tal i talplanet",
+   "s": 385.16,
+   "e": 407.25
+  },
+  {
+   "t": "Talet z nedan är markerat i det komplexa talplanet.",
+   "s": 407.25,
+   "e": 411.88
+  },
+  {
+   "t": "Markera i samma talplan. a) z delat med i b) z gånger i i kvadrat",
+   "s": 411.88,
+   "e": 419.77
+  },
+  {
+   "t": "Ur figuren läser vi av att z är lika med minus 3 plus 2 i .",
+   "s": 419.77,
+   "e": 425.07
+  },
+  {
+   "t": "a) En division med i motsvarar en vridning 90 grader medurs.",
+   "s": 425.07,
+   "e": 430.38
+  },
+  {
+   "t": "Talet z delat med i har alltså samma belopp som z men ett argument som är 90 grader mindre.",
+   "s": 430.38,
+   "e": 437.16
+  },
+  {
+   "t": "Räknar vi ut det (med 1 delat med i är lika med minus i ) får vi",
+   "s": 437.16,
+   "e": 442.42
+  },
+  {
+   "t": "z delat med i är lika med z gånger parentesen minus i slut parentes som är lika med parentesen minus 3 plus 2 i slut parentes parentesen minus i slut parentes som är lika med 3 i minus 2 i i kvadrat som är lika med 2 plus 3 i",
+   "s": 442.42,
+   "e": 465.52
+  },
+  {
+   "t": "b) En multiplikation med i i kvadrat är lika med i gånger i är två vridningar 90 grader moturs, alltså en vridning 180 grader .",
+   "s": 442.42,
+   "e": 465.52
+  },
+  {
+   "t": "Eftersom i i kvadrat är lika med minus 1 blir",
+   "s": 465.52,
+   "e": 469.81
+  },
+  {
+   "t": "z gånger i i kvadrat är lika med z gånger parentesen minus 1 slut parentes som är lika med minus parentesen minus 3 plus 2 i slut parentes som är lika med 3 minus 2 i",
+   "s": 469.81,
+   "e": 491.9
+  },
+  {
+   "t": "Svar: a) z delat med i är lika med 2 plus 3 i ( 90 grader medurs) b) z gånger i i kvadrat är lika med 3 minus 2 i ( 180 grader )",
+   "s": 469.81,
+   "e": 491.9
+  }
+ ]
+}

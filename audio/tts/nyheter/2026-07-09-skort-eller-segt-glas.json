@@ -1,0 +1,203 @@
+{
+ "id": "2026-07-09-skort-eller-segt-glas",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "322f80a4a9970d742769fb69773c1ea3dc7f7d50",
+ "dur": 353.26,
+ "segments": [
+  {
+   "t": "Fysiker knäcker gåtan om varför vissa glas spricker tvärt — och andra ger efter mjukt.",
+   "s": 0.1,
+   "e": 5.97
+  },
+  {
+   "t": "En ny studie från Tata Institute of Fundamental Research i Hyderabad (TIFRH) visar att en och samma materialegenskap — hur snabbt ett ämne blir trögflytande när det kyls till glas — avgör om det brister plötsligt eller ger efter mjukt under belastning.",
+   "s": 5.92,
+   "e": 20.36
+  },
+  {
+   "t": "Upptäckten, publicerad i Nature Communications, gäller långt fler material än fönsterglas: metaller, plaster, skum och geler kan alla vara ”glas” i fysikens mening.",
+   "s": 20.36,
+   "e": 31.57
+  },
+  {
+   "t": "En tallrik som far i golvet splittras på ett ögonblick i tiotals vassa skärvor.",
+   "s": 31.57,
+   "e": 37.33
+  },
+  {
+   "t": "En plastlinjal går nästan att böja dubbelt utan att gå sönder.",
+   "s": 37.33,
+   "e": 42.12
+  },
+  {
+   "t": "Båda räknas som glas i fysikens mening — och nu har forskare vid Tata Institute of Fundamental Research i Hyderabad (TIFRH) hittat en förvånansvärt enkel förklaring till varför vissa glas brister tvärt medan andra ger efter mjukt.",
+   "s": 42.12,
+   "e": 55.71
+  },
+  {
+   "t": "Studien, publicerad i tidskriften Nature Communications, pekar ut en enda materialegenskap — dess ”fragilitet” — som avgörande för om utfallet blir skört eller segt.",
+   "s": 55.71,
+   "e": 66.42
+  },
+  {
+   "t": "Glas är mer än fönsterrutor.",
+   "s": 66.42,
+   "e": 69.59
+  },
+  {
+   "t": "I fysikens mening är ett glas vilket fast ämne som helst där atomerna eller molekylerna har frusit fast i ett oordnat mönster i stället för att packa sig i en regelbunden kristallstruktur.",
+   "s": 69.59,
+   "e": 80.59
+  },
+  {
+   "t": "Det sker när en vätska kyls så snabbt att partiklarna inte hinner ordna sig innan rörelsen avstannar helt.",
+   "s": 80.59,
+   "e": 87.45
+  },
+  {
+   "t": "Utöver vanligt fönsterglas räknas därför en lång rad vardagliga material dit: vissa metallegeringar, plaster, skum, geler och till och med mjuka material som emulsioner och koloider.",
+   "s": 87.45,
+   "e": 99.79
+  },
+  {
+   "t": "Alla kan uppträda helt olika under påfrestning — vissa ger efter mjukt och smidigt (segt beteende), andra håller emot och brister sedan tvärt utan förvarning (skört beteende).",
+   "s": 99.79,
+   "e": 111.15
+  },
+  {
+   "t": "Stark eller skör vätska — långt innan glaset stelnat.",
+   "s": 111.15,
+   "e": 115.71
+  },
+  {
+   "t": "Redan innan ett glas ens bildas skiljer forskare på ”starka” och ”sköra” vätskor, en klassificering som den amerikansk-australiske kemisten C.",
+   "s": 115.71,
+   "e": 127.24
+  },
+  {
+   "t": "Austen Angell myntade på 1980-talet.",
+   "s": 115.71,
+   "e": 127.24
+  },
+  {
+   "t": "När en vätska kyls mot sin glasövergång måste partiklarna ta sig över energibarriärer för att kunna röra på sig.",
+   "s": 127.24,
+   "e": 134.29
+  },
+  {
+   "t": "I sköra vätskor växer barriärerna snabbt vid nedkylning, så viskositeten (trögflutenheten) skjuter i höjden redan vid en liten temperatursänkning.",
+   "s": 134.29,
+   "e": 143.96
+  },
+  {
+   "t": "I starka vätskor växer barriärerna mer stegvis, så viskositeten ökar jämnare i stället.",
+   "s": 143.96,
+   "e": 150.68
+  },
+  {
+   "t": "Forskarna Roni Chatterjee och Monoj Adhikari, i Smarajit Karmakars forskargrupp vid TIFRH, ställde en enkel fråga: styr samma egenskap även hur det färdiga, stelnade glaset beter sig när man böjer, drar eller trycker på det?",
+   "s": 150.68,
+   "e": 164.32
+  },
+  {
+   "t": "Simulerad töjning fram och tillbaka.",
+   "s": 164.32,
+   "e": 167.69
+  },
+  {
+   "t": "Med storskaliga datorsimuleringar byggde forskarna modeller av fyra sorters glasbildande system — metalliska glas, molekylära glas, kornformiga (granulära) system och nätverksbildande, kvartsliknande glas — vid en rad olika temperaturer.",
+   "s": 167.69,
+   "e": 183.16
+  },
+  {
+   "t": "Varje modellmaterial utsattes sedan för upprepad fram-och-tillbaka-töjning (så kallad oscillerande skjuvning) med varierande amplitud, medan forskarna avläste hur den mekaniska spänningen (kraft per ytenhet — inte att förväxla med elektrisk spänning) förändrades med töjningen, den relativa formändringen.",
+   "s": 183.16,
+   "e": 201.06
+  },
+  {
+   "t": "Precis som i den raka, inledande delen av ett fjäderdiagram (se Fysiklabbets genomgång om energi i fjädrar och Hookes lag, Fysik nivå 2) ökade spänningen till en början proportionellt mot töjningen.",
+   "s": 201.06,
+   "e": 214.07
+  },
+  {
+   "t": "Vid ett visst värde, sträckgränsen, nådde spänningen ett maximum — och just där skilde sig materialen åt.",
+   "s": 214.07,
+   "e": 221.1
+  },
+  {
+   "t": "Ett stort spänningsfall direkt efter sträckgränsen är kännetecknet för skört brott; ett litet fall betyder i stället att materialet fortsätter flyta segt vidare.",
+   "s": 221.1,
+   "e": 230.81
+  },
+  {
+   "t": "Energibarriärerna avgör fallhöjden.",
+   "s": 230.81,
+   "e": 234.34
+  },
+  {
+   "t": "Mönstret visade sig hänga ihop exakt med fragiliteten.",
+   "s": 234.34,
+   "e": 238.81
+  },
+  {
+   "t": "I sköra glas växer energibarriärerna snabbt vid nedkylning, vilket tvingar fram allt större töjning innan materialet ger efter — och en större lagrad spänning ger ett större fall när brottet väl kommer: skört beteende.",
+   "s": 238.81,
+   "e": 250.88
+  },
+  {
+   "t": "I starka glas ökar barriärerna mer stegvis, sträckgränsen förblir nästan oförändrad även vid djupare nedkylning, och spänningsfallet blir litet: segt beteende.",
+   "s": 250.88,
+   "e": 262.65
+  },
+  {
+   "t": "I sitt pressmaterial illustrerar forskargruppen själva ytterligheterna med två vardagliga bilder: en fönsterruta som spricker i ett nät av sprickor, och smör som mjukt ger efter för en kniv utan att gå sönder.",
+   "s": 262.6,
+   "e": 275.04
+  },
+  {
+   "t": "Nästa steg: skräddarsydda material.",
+   "s": 275.04,
+   "e": 278.38
+  },
+  {
+   "t": "Insikten är mer än en kuriositet.",
+   "s": 278.38,
+   "e": 281.76
+  },
+  {
+   "t": "Ingenjörer väljer redan material efter hur de beter sig vid belastning — en bilruta ska helst spricka i trubbiga korn snarare än vassa skärvor, medan en bärande stålbalk absolut inte får brista utan förvarning.",
+   "s": 281.76,
+   "e": 294.05
+  },
+  {
+   "t": "Genom att koppla ihop hur ett material stelnar till glas med hur det sedan brister hoppas forskarna kunna förutsäga, och kanske till och med skräddarsy, ett materials hållfasthet redan innan det tillverkas — bara genom att styra kylhastigheten.",
+   "s": 294.05,
+   "e": 307.14
+  },
+  {
+   "t": "Visste du.",
+   "s": 307.14,
+   "e": 308.99
+  },
+  {
+   "t": "Även metaller kan bli ”glas”: kyls en metallegering tillräckligt snabbt — för vissa legeringar krävs uppemot en miljon grader per sekund — hinner atomerna aldrig kristallisera.",
+   "s": 308.99,
+   "e": 319.67
+  },
+  {
+   "t": "Sådana metalliska glas används bland annat i vissa golfklubbor och i transformatorkärnor, tack vare sin höga hållfasthet och låga energiförluster.",
+   "s": 319.67,
+   "e": 329.05
+  },
+  {
+   "t": "Klassificeringen ”stark” och ”skör” vätska visualiseras i det så kallade Angell-diagrammet, en av glasfysikens mest citerade figurer — uppkallat efter kemisten som införde begreppen på 1980-talet.",
+   "s": 329.05,
+   "e": 341.46
+  },
+  {
+   "t": "Sträckgränsen är samma begrepp som ingenjörer använder för stål och andra konstruktionsmaterial: den spänning där materialet slutar återgå till sin ursprungsform och i stället börjar deformeras permanent.",
+   "s": 341.46,
+   "e": 353.26
+  }
+ ]
+}

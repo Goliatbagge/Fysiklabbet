@@ -456,6 +456,37 @@ pakka hela parentesen i math-block.
    detta. Skriver du rå inline-HTML/SVG (utanför markdown-pipelinen) gäller
    inte automatiken: lägg då parentesen *inuti* formeln, `$(q_e = …$`.
 
+### ⚠️ Inline-math `$…$` måste ligga på EN källrad — aldrig radbrytas
+
+**Ett inline-math-span (enkelt `$…$`) får ALDRIG spänna över en radbrytning i
+md-källan.** marked+KaTeX kräver att hela `$…$` ligger på en rad. Bryts det
+mitt itu — t.ex.
+
+```
+sinusraden är $\dfrac{\sqrt{0}}{2},\ \dfrac{\sqrt{1}}{2},\
+\dfrac{\sqrt{2}}{2}$ — täljarens rot …
+```
+
+— så bryts delimiter-paringen och felet **kaskaderar**: efterföljande löptext
+hamnar i math-mode, mellanslagen strippas och rå LaTeX visas
+("täljarensroträknarbarauppp…"). Radbryt alltid MELLAN math-spann, aldrig
+inuti ett. Långa inline-formler får hellre ligga på en lång rad (eller göras
+till ett `$$…$$`-displayblock, som DÄREMOT får spänna flera rader).
+
+**Verifierarna fångar INTE detta** — bara en katalog-skärmdump avslöjar det.
+Vanlig fälla när subagenter radbryter för ~76-teckensmarginal. Scanner: dela
+på `$$…$$`, splitta resten på `$`, flagga udda index som innehåller `\n`.
+
+### ⚠️ Figur-viewBox får aldrig klippa cirkeln/kurvan; axeletikett aldrig på kurvan
+
+När en `::: figur` innehåller en cirkel eller kurva: sätt viewBoxen så att
+HELA geometrin ryms med ~3 px marginal (räkna `cx±r`, `cy±r` — inte på
+ögonmått). Lägg axeletiketten (`x`/`y`) vid pilspetsen, **ovanför/bredvid**
+kurvan, och kontrollera numeriskt att glyfboxen inte överlappar cirkeln (vid
+etikettens x är cirkelns rand `cy − √(r² − (x−cx)²)`). `verify-figur-bounds.js`
+fångar INTE detta (mäter text-bbox för klipp, inte geometri; phantom-punkter i
+0,0 gör vänster/topp-marginal negativ) — granska ALLTID skärmdump.
+
 ### JS-strängar: dubbla alla backslash
 
 I `data/ovningar.js` (och andra `.js`-filer där KaTeX-källa ligger i

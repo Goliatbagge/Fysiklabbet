@@ -1,0 +1,313 @@
+{
+ "id": "ma4-4.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1d9bfde0f51ed8a4f55605663eb95b63d77acc40",
+ "dur": 493.8,
+ "segments": [
+  {
+   "t": "Polynomekvationer av högre grad och polynomdivision",
+   "s": 0.1,
+   "e": 4.55
+  },
+  {
+   "t": "Kom ihåg att vi kan faktorisera ett polynom med hjälp av dess nollställen.",
+   "s": 4.5,
+   "e": 9.88
+  },
+  {
+   "t": "Om vi vet ett nollställe kan vi bryta ut motsvarande faktor och på så sätt bryta ner en ekvation av högre grad till lägre grad, som vi redan kan lösa.",
+   "s": 9.88,
+   "e": 18.84
+  },
+  {
+   "t": "Faktorsatsen",
+   "s": 18.84,
+   "e": 21.0
+  },
+  {
+   "t": "Om x är lika med a är ett nollställe till polynomet p parentesen x slut parentes , så är parentesen x minus a slut parentes en faktor till polynomet.",
+   "s": 21.0,
+   "e": 31.41
+  },
+  {
+   "t": "Polynomet kan då skrivas",
+   "s": 31.41,
+   "e": 34.41
+  },
+  {
+   "t": "p parentesen x slut parentes är lika med parentesen x minus a slut parentes gånger q parentesen x slut parentes",
+   "s": 34.41,
+   "e": 43.17
+  },
+  {
+   "t": "där q parentesen x slut parentes är ett polynom med lägre grad.",
+   "s": 43.17,
+   "e": 48.52
+  },
+  {
+   "t": "När vi löser polynomekvationer av högre grad än 2 gör vi det genom att skriva om ekvationen så att den blir lika med 0 , faktorisera och använda nollproduktmetoden.",
+   "s": 48.52,
+   "e": 58.48
+  },
+  {
+   "t": "Ibland är det svårt att hitta faktorerna direkt — då kan vi ta fram dem genom att dividera polynom med varandra, vilket kallas polynomdivision.",
+   "s": 58.48,
+   "e": 67.11
+  },
+  {
+   "t": "Anta att vi vill lösa ekvationen x i kubik plus 2 x i kvadrat minus x minus 2 är lika med 0 och att vi vet att polynomet har nollstället x är lika med minus 1 .",
+   "s": 67.11,
+   "e": 78.24
+  },
+  {
+   "t": "Då måste parentesen x plus 1 slut parentes vara en faktor enligt faktorsatsen, så vi kan skriva",
+   "s": 78.24,
+   "e": 85.3
+  },
+  {
+   "t": "x i kubik plus 2 x i kvadrat minus x minus 2 är lika med parentesen x plus 1 slut parentes parentesen slut parentes",
+   "s": 85.3,
+   "e": 94.92
+  },
+  {
+   "t": "För att ta reda på den andra faktorn dividerar vi x i kubik plus 2 x i kvadrat minus x minus 2 med x plus 1 .",
+   "s": 94.92,
+   "e": 103.4
+  },
+  {
+   "t": "Vi bygger upp kvoten term för term och drar vid varje steg bort det vi har multiplicerat upp:",
+   "s": 103.4,
+   "e": 123.21
+  },
+  {
+   "t": "x i kubik plus 2 x i kvadrat minus x minus 2 underline x i kubik plus x i kvadrat x i kvadrat minus x minus 2 underline x i kvadrat plus x minus 2 x minus 2 underline minus 2 x minus 2 0",
+   "s": 103.4,
+   "e": 123.21
+  },
+  {
+   "t": "Först ger x i kubik : x är lika med x i kvadrat ; produkten x i kvadrat parentesen x plus 1 slut parentes är lika med x i kubik plus x i kvadrat dras bort och kvar blir x i kvadrat minus x .",
+   "s": 123.21,
+   "e": 137.25
+  },
+  {
+   "t": "Sedan ger x i kvadrat : x är lika med x ; produkten x parentesen x plus 1 slut parentes är lika med x i kvadrat plus x dras bort och kvar blir minus 2 x minus 2 .",
+   "s": 137.25,
+   "e": 149.91
+  },
+  {
+   "t": "Till sist ger minus 2 x : x är lika med minus 2 ; produkten minus 2 parentesen x plus 1 slut parentes är lika med minus 2 x minus 2 dras bort och resten blir 0 .",
+   "s": 149.91,
+   "e": 162.03
+  },
+  {
+   "t": "Kvoten är alltså x i kvadrat plus x minus 2 , och",
+   "s": 162.03,
+   "e": 166.99
+  },
+  {
+   "t": "x i kubik plus 2 x i kvadrat minus x minus 2 är lika med parentesen x plus 1 slut parentes parentesen x i kvadrat plus x minus 2 slut parentes",
+   "s": 166.99,
+   "e": 178.6
+  },
+  {
+   "t": "Nu kan vi gå tillbaka till ekvationen, faktorisera och lösa den med nollproduktmetoden.",
+   "s": 178.6,
+   "e": 184.65
+  },
+  {
+   "t": "Andragradsfaktorn löser vi med kvadratkomplettering (eller p q -formeln):",
+   "s": 184.65,
+   "e": 197.06
+  },
+  {
+   "t": "parentesen x plus 1 slut parentes parentesen x i kvadrat plus x minus 2 slut parentes är lika med 0",
+   "s": 184.65,
+   "e": 197.06
+  },
+  {
+   "t": "Faktorn x plus 1 är lika med 0 ger den redan kända roten x ett är lika med minus 1 .",
+   "s": 197.06,
+   "e": 203.75
+  },
+  {
+   "t": "Faktorn x i kvadrat plus x minus 2 är lika med 0 ger",
+   "s": 203.75,
+   "e": 208.96
+  },
+  {
+   "t": "x är lika med minus 1 delat med 2 plus minus roten ur parentesen 1 delat med 2 slut parentes i kvadrat plus 2 som är lika med minus 1 delat med 2 plus minus roten ur 9 delat med 4 som är lika med minus 1 delat med 2 plus minus 3 delat med 2",
+   "s": 208.96,
+   "e": 225.4
+  },
+  {
+   "t": "så x två är lika med minus 1 delat med 2 minus 3 delat med 2 som är lika med minus 2 och x tre är lika med minus 1 delat med 2 plus 3 delat med 2 som är lika med 1 .",
+   "s": 225.4,
+   "e": 236.7
+  },
+  {
+   "t": "Ekvationen x i kubik plus 2 x i kvadrat minus x minus 2 är lika med 0 har alltså lösningarna x ett är lika med minus 1 , x två är lika med minus 2 och x tre är lika med 1 .",
+   "s": 236.7,
+   "e": 249.18
+  },
+  {
+   "t": "Exempel 1 — redan faktoriserat polynom",
+   "s": 249.18,
+   "e": 253.16
+  },
+  {
+   "t": "Bestäm nollställena till p parentesen x slut parentes är lika med x parentesen x plus 4 slut parentes parentesen x minus 10 slut parentes .",
+   "s": 253.16,
+   "e": 263.73
+  },
+  {
+   "t": "Nollställena fås då p parentesen x slut parentes är lika med 0 , det vill säga",
+   "s": 263.73,
+   "e": 269.82
+  },
+  {
+   "t": "x parentesen x plus 4 slut parentes parentesen x minus 10 slut parentes är lika med 0",
+   "s": 269.82,
+   "e": 277.71
+  },
+  {
+   "t": "Nollproduktmetoden ger tre möjligheter, en per faktor:",
+   "s": 277.71,
+   "e": 291.86
+  },
+  {
+   "t": "x ett är lika med 0, x plus 4 som är lika med 0 vilket ger att x två är lika med minus 4, x minus 10 som är lika med 0 vilket ger att x tre är lika med 10",
+   "s": 277.71,
+   "e": 291.86
+  },
+  {
+   "t": "Svar: x ett är lika med 0 , x två är lika med minus 4 och x tre är lika med 10",
+   "s": 291.86,
+   "e": 300.56
+  },
+  {
+   "t": "Exempel 2 — grafisk lösning",
+   "s": 300.51,
+   "e": 303.76
+  },
+  {
+   "t": "Grafen till p parentesen x slut parentes är lika med x i kubik minus x i kvadrat minus 2 x är ritad nedan.",
+   "s": 303.76,
+   "e": 312.31
+  },
+  {
+   "t": "Lös ekvationen x i kubik minus x i kvadrat minus 2 x är lika med 0 med hjälp av grafen.",
+   "s": 312.31,
+   "e": 319.53
+  },
+  {
+   "t": "Lösningarna ges av nollställena, alltså där grafen skär x -axeln.",
+   "s": 319.53,
+   "e": 324.73
+  },
+  {
+   "t": "Grafen skär x -axeln vid x ett är lika med minus 1 , x två är lika med 0 och x tre är lika med 2 .",
+   "s": 324.73,
+   "e": 332.28
+  },
+  {
+   "t": "Svar: x ett är lika med minus 1 , x två är lika med 0 och x tre är lika med 2",
+   "s": 332.28,
+   "e": 338.94
+  },
+  {
+   "t": "Exempel 3 — bryt ut x",
+   "s": 338.94,
+   "e": 347.33
+  },
+  {
+   "t": "Lös ekvationen x i kubik minus 7 x i kvadrat plus 10 x är lika med 0 .",
+   "s": 338.94,
+   "e": 347.33
+  },
+  {
+   "t": "Vi faktoriserar vänsterledet genom att bryta ut x :",
+   "s": 347.33,
+   "e": 357.2
+  },
+  {
+   "t": "x parentesen x i kvadrat minus 7 x plus 10 slut parentes är lika med 0",
+   "s": 347.33,
+   "e": 357.2
+  },
+  {
+   "t": "Nollproduktmetoden ger x ett är lika med 0 och andragradsfaktorn x i kvadrat minus 7 x plus 10 är lika med 0 :",
+   "s": 357.2,
+   "e": 386.1
+  },
+  {
+   "t": "x är lika med 7 delat med 2 plus minus roten ur parentesen 7 delat med 2 slut parentes i kvadrat minus 10 som är lika med 7 delat med 2 plus minus roten ur 49 delat med 4 minus 40 delat med 4 som är lika med 7 delat med 2 plus minus roten ur 9 delat med 4 som är lika med 7 delat med 2 plus minus 3 delat med 2",
+   "s": 357.2,
+   "e": 386.1
+  },
+  {
+   "t": "Det ger x två är lika med 7 delat med 2 minus 3 delat med 2 som är lika med 2 och x tre är lika med 7 delat med 2 plus 3 delat med 2 som är lika med 5 .",
+   "s": 386.1,
+   "e": 396.44
+  },
+  {
+   "t": "Svar: x ett är lika med 0 , x två är lika med 2 och x tre är lika med 5",
+   "s": 396.44,
+   "e": 402.75
+  },
+  {
+   "t": "Exempel 4 — polynomdivision med en given rot",
+   "s": 402.75,
+   "e": 407.13
+  },
+  {
+   "t": "Ekvationen x i kubik plus 4 x i kvadrat minus 7 x minus 10 är lika med 0 har roten x är lika med 2 .",
+   "s": 407.13,
+   "e": 415.63
+  },
+  {
+   "t": "Bestäm ekvationens övriga rötter.",
+   "s": 415.63,
+   "e": 418.95
+  },
+  {
+   "t": "Eftersom x är lika med 2 är en rot är parentesen x minus 2 slut parentes en faktor enligt faktorsatsen.",
+   "s": 418.95,
+   "e": 427.3
+  },
+  {
+   "t": "Vi dividerar x i kubik plus 4 x i kvadrat minus 7 x minus 10 med x minus 2 :",
+   "s": 427.3,
+   "e": 450.36
+  },
+  {
+   "t": "x i kubik plus 4 x i kvadrat minus 7 x minus 10 underline x i kubik minus 2 x i kvadrat 6 x i kvadrat minus 7 x minus 10 underline 6 x i kvadrat minus 12 x 5 x minus 10 underline 5 x minus 10 0",
+   "s": 427.3,
+   "e": 450.36
+  },
+  {
+   "t": "Kvoten blir x i kvadrat plus 6 x plus 5 , så ekvationen kan skrivas parentesen x minus 2 slut parentes parentesen x i kvadrat plus 6 x plus 5 slut parentes är lika med 0 .",
+   "s": 450.36,
+   "e": 463.88
+  },
+  {
+   "t": "De övriga rötterna fås ur x i kvadrat plus 6 x plus 5 är lika med 0 :",
+   "s": 463.88,
+   "e": 479.24
+  },
+  {
+   "t": "x är lika med minus 3 plus minus roten ur 3 i kvadrat minus 5 som är lika med minus 3 plus minus roten ur 4 som är lika med minus 3 plus minus 2",
+   "s": 463.88,
+   "e": 479.24
+  },
+  {
+   "t": "vilket ger x ett är lika med minus 3 minus 2 som är lika med minus 5 och x två är lika med minus 3 plus 2 som är lika med minus 1 .",
+   "s": 479.24,
+   "e": 488.45
+  },
+  {
+   "t": "Svar: x ett är lika med minus 5 och x två är lika med minus 1",
+   "s": 488.45,
+   "e": 493.8
+  }
+ ]
+}

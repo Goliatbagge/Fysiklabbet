@@ -29,7 +29,8 @@ for (const subj of Object.values(WK.KATALOG)) {
         const code = courseName === 'Fysik nivå 2' ? 'fy2'
                    : courseName === 'Matematik nivå 1c' ? 'ma1c'
                    : courseName === 'Matematik nivå 2c' ? 'ma2c'
-                   : courseName === 'Matematik fortsättning nivå 1c' ? 'ma3c' : 'fy1';
+                   : courseName === 'Matematik fortsättning nivå 1c' ? 'ma3c'
+                   : courseName === 'Matematik fortsättning nivå 2' ? 'ma4' : 'fy1';
         for (const ch of Object.values(course.chapters || {})) {
             for (const s of ch.sections || []) sections.push(code + '-' + s.num);
         }

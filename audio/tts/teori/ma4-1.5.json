@@ -1,0 +1,318 @@
+{
+ "id": "ma4-1.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1b310bb285c6b2effb041b6ee76c0d88dc955170",
+ "dur": 360.91,
+ "segments": [
+  {
+   "t": "Radianer",
+   "s": 0.1,
+   "e": 2.1
+  },
+  {
+   "t": "För att underlätta derivering av trigonometriska funktioner krävs ett nytt vinkelmått.",
+   "s": 2.05,
+   "e": 8.03
+  },
+  {
+   "t": "I stället för att mäta vinklar i grader kan vi mäta dem i radianer.",
+   "s": 8.03,
+   "e": 12.8
+  },
+  {
+   "t": "Enheten för radianer skrivs ibland \"rad\".",
+   "s": 12.8,
+   "e": 16.51
+  },
+  {
+   "t": "Definition — radian",
+   "s": 16.51,
+   "e": 19.14
+  },
+  {
+   "t": "En vinkel som spänner upp en cirkelbåge vars längd är lika med radien i cirkeln är 1 radian.",
+   "s": 19.14,
+   "e": 25.2
+  },
+  {
+   "t": "Annorlunda uttryckt: förhållandet mellan båglängd och radie ger ett vinkelmått i radianer.",
+   "s": 25.2,
+   "e": 31.62
+  },
+  {
+   "t": "Eftersom radianer är förhållandet mellan båglängd och radie (båda i t.ex. meter) är det egentligen en dimensionslös enhet.",
+   "s": 31.62,
+   "e": 40.26
+  },
+  {
+   "t": "Inom matematik anges vinklar ibland utan enhet, och då är det underförstått att de mäts i radianer.",
+   "s": 40.26,
+   "e": 47.31
+  },
+  {
+   "t": "Ett helt varv motsvarar hela cirkelns omkrets, som är 2 pi radier.",
+   "s": 47.31,
+   "e": 52.73
+  },
+  {
+   "t": "Alltså gäller att 360 grader är lika med 2 pi rad.",
+   "s": 52.73,
+   "e": 57.54
+  },
+  {
+   "t": "Utifrån detta kan vi bestämma förhållandet mellan radianer och grader.",
+   "s": 57.54,
+   "e": 62.44
+  },
+  {
+   "t": "Samband mellan grader och radianer",
+   "s": 62.44,
+   "e": 65.79
+  },
+  {
+   "t": "360 grader är lika med 2 pi rad 180 grader som är lika med pi rad",
+   "s": 65.79,
+   "e": 72.08
+  },
+  {
+   "t": "Delar vi det andra sambandet med 180 respektive med pi får vi omvandlingsfaktorerna åt båda hållen:",
+   "s": 72.08,
+   "e": 87.34
+  },
+  {
+   "t": "1 grader är lika med pi delat med 180 rad 1 rad som är lika med 180 grader delat med pi som är ungefär lika med 57,3 grader",
+   "s": 72.08,
+   "e": 87.34
+  },
+  {
+   "t": "Lär dig pi rad är lika med 180 grader och 2 pi rad är lika med 360 grader .",
+   "s": 87.34,
+   "e": 94.1
+  },
+  {
+   "t": "Dessa förekommer ofta.",
+   "s": 94.1,
+   "e": 96.67
+  },
+  {
+   "t": "På räknaren ändrar du mellan grader och radianer under inställningarna — undersök hur just din räknare gör.",
+   "s": 96.67,
+   "e": 103.29
+  },
+  {
+   "t": "I Geogebra tolkas en vinkel som anges med ett rent tal eller med enheten grader som grader, medan en vinkel som innehåller pi eller enheten rad tolkas som radianer.",
+   "s": 103.29,
+   "e": 113.64
+  },
+  {
+   "t": "Exempel 1 — Omvandla till radianer",
+   "s": 113.64,
+   "e": 117.26
+  },
+  {
+   "t": "Omvandla till radianer.. a) 30 grader b) 90 grader",
+   "s": 117.26,
+   "e": 123.79
+  },
+  {
+   "t": "a) Vi utnyttjar att 1 grader är lika med pi delat med 180 rad.",
+   "s": 123.79,
+   "e": 129.7
+  },
+  {
+   "t": "Detta ger",
+   "s": 129.7,
+   "e": 131.71
+  },
+  {
+   "t": "30 grader är lika med 30 gånger pi delat med 180 rad som är lika med pi delat med 6 rad",
+   "s": 131.71,
+   "e": 138.55
+  },
+  {
+   "t": "Svar: pi delat med 6 rad",
+   "s": 138.55,
+   "e": 141.78
+  },
+  {
+   "t": "b) På motsvarande sätt får vi",
+   "s": 141.78,
+   "e": 145.11
+  },
+  {
+   "t": "90 grader är lika med 90 gånger pi delat med 180 rad som är lika med pi delat med 2 rad",
+   "s": 145.11,
+   "e": 151.89
+  },
+  {
+   "t": "Alternativt kan vi utnyttja att pi rad är lika med 180 grader .",
+   "s": 151.89,
+   "e": 157.18
+  },
+  {
+   "t": "Då måste 90 grader vara hälften av det, alltså pi delat med 2 rad.",
+   "s": 157.18,
+   "e": 162.21
+  },
+  {
+   "t": "Svar: pi delat med 2 rad",
+   "s": 162.21,
+   "e": 165.5
+  },
+  {
+   "t": "Exempel 2 — Omvandla till grader",
+   "s": 165.5,
+   "e": 169.0
+  },
+  {
+   "t": "Omvandla till grader.. a) pi delat med 4 rad b) 2 pi delat med 5 rad c) 0,72 rad",
+   "s": 169.0,
+   "e": 178.7
+  },
+  {
+   "t": "a) Eftersom pi rad är lika med 180 grader gäller",
+   "s": 178.7,
+   "e": 183.62
+  },
+  {
+   "t": "pi delat med 4 rad är lika med 180 grader delat med 4 som är lika med 45 grader",
+   "s": 183.62,
+   "e": 190.56
+  },
+  {
+   "t": "Svar: 45 grader",
+   "s": 190.56,
+   "e": 193.51
+  },
+  {
+   "t": "b) Vi utnyttjar återigen att pi rad är lika med 180 grader och får",
+   "s": 193.51,
+   "e": 199.51
+  },
+  {
+   "t": "2 pi delat med 5 rad är lika med 2 gånger 180 grader delat med 5 som är lika med 360 grader delat med 5 som är lika med 72 grader",
+   "s": 199.51,
+   "e": 209.99
+  },
+  {
+   "t": "Svar: 72 grader",
+   "s": 209.99,
+   "e": 212.96
+  },
+  {
+   "t": "c) Här saknas pi , men eftersom pi rad är lika med 180 grader gäller 1 rad är lika med 180 grader delat med pi .",
+   "s": 212.96,
+   "e": 222.2
+  },
+  {
+   "t": "Detta ger",
+   "s": 222.2,
+   "e": 224.2
+  },
+  {
+   "t": "0,72 rad är lika med 0,72 gånger 180 grader delat med pi som är lika med 41,252 grader som är ungefär lika med 41 grader",
+   "s": 224.2,
+   "e": 235.39
+  },
+  {
+   "t": "Svar: 41 grader",
+   "s": 235.39,
+   "e": 238.36
+  },
+  {
+   "t": "När vi löser en trigonometrisk ekvation och vill ha svaret i radianer ställer vi först in räknaren på radianer.",
+   "s": 238.36,
+   "e": 245.4
+  },
+  {
+   "t": "Lösningarna anges sedan med perioden 2 pi (för sinus och cosinus) eller pi (för tangens) i stället för 360 grader respektive 180 grader .",
+   "s": 245.4,
+   "e": 256.38
+  },
+  {
+   "t": "Exempel 3 — Lös en ekvation, svar i radianer",
+   "s": 256.38,
+   "e": 261.04
+  },
+  {
+   "t": "Lös ekvationen sinus x är lika med 0,7 .",
+   "s": 261.04,
+   "e": 265.56
+  },
+  {
+   "t": "Svara i radianer med två decimaler.",
+   "s": 265.56,
+   "e": 269.04
+  },
+  {
+   "t": "Se först till att ändra inställningen på din räknare till radianer.",
+   "s": 269.04,
+   "e": 273.82
+  },
+  {
+   "t": "Med sinus upphöjt till minus 1 parentesen 0,7 slut parentes får vi en vinkel i första kvadranten, och den andra lösningen speglas i pi (motsvarigheten till 180 grader ):",
+   "s": 273.82,
+   "e": 292.75
+  },
+  {
+   "t": "x är lika med 0,775 plus n gånger 2 pi som är ungefär lika med 0,78 plus n gånger 2 pi",
+   "s": 273.82,
+   "e": 292.75
+  },
+  {
+   "t": "x är lika med pi minus 0,775 plus n gånger 2 pi som är lika med 2,366 plus n gånger 2 pi som är ungefär lika med 2,37 plus n gånger 2 pi",
+   "s": 292.75,
+   "e": 305.12
+  },
+  {
+   "t": "Kom ihåg: 2 pi är lika med 360 grader och pi är lika med 180 grader .",
+   "s": 305.12,
+   "e": 311.88
+  },
+  {
+   "t": "Svar: x är ungefär lika med 0,78 plus n gånger 2 pi och x är ungefär lika med 2,37 plus n gånger 2 pi",
+   "s": 311.88,
+   "e": 321.21
+  },
+  {
+   "t": "Exempel 4 — Exakt lösning i radianer",
+   "s": 321.21,
+   "e": 325.1
+  },
+  {
+   "t": "Lös ekvationen tangens x är lika med minus roten ur 3 .",
+   "s": 325.1,
+   "e": 329.98
+  },
+  {
+   "t": "Svara exakt i radianer.",
+   "s": 329.98,
+   "e": 334.52
+  },
+  {
+   "t": "Vi tittar i formelbladet vilken vinkel för tangens som ger minus roten ur 3 .",
+   "s": 334.47,
+   "e": 340.32
+  },
+  {
+   "t": "Där ser vi att vinkeln 2 pi delat med 3 rad (motsvarande 120 grader ) är en lösning.",
+   "s": 340.32,
+   "e": 347.29
+  },
+  {
+   "t": "Eftersom tangens har perioden pi upprepas lösningen varje halvt varv:",
+   "s": 347.29,
+   "e": 355.66
+  },
+  {
+   "t": "x är lika med 2 pi delat med 3 plus n gånger pi",
+   "s": 347.29,
+   "e": 355.66
+  },
+  {
+   "t": "Svar: x är lika med 2 pi delat med 3 plus n gånger pi",
+   "s": 355.66,
+   "e": 360.91
+  }
+ ]
+}

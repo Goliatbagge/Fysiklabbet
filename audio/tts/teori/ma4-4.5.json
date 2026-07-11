@@ -1,0 +1,213 @@
+{
+ "id": "ma4-4.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a4b83956022b03bf1b7861ddd411ef053f339558",
+ "dur": 297.81,
+ "segments": [
+  {
+   "t": "Komplexa tal som punkter och visare",
+   "s": 0.1,
+   "e": 3.4
+  },
+  {
+   "t": "På den vanliga tallinjen kan alla reella tal placeras.",
+   "s": 3.35,
+   "e": 7.51
+  },
+  {
+   "t": "Imaginära tal kan däremot inte placeras där.",
+   "s": 7.51,
+   "e": 11.47
+  },
+  {
+   "t": "För att åskådliggöra imaginära tal inför vi en imaginär tallinje vinkelrätt mot den reella.",
+   "s": 11.47,
+   "e": 18.02
+  },
+  {
+   "t": "Tillsammans bildar de det komplexa talplanet.",
+   "s": 18.02,
+   "e": 21.79
+  },
+  {
+   "t": "Det komplexa talplanet fungerar som ett koordinatsystem: realdelen läses av på den vågräta Re-axeln och imaginärdelen på den lodräta Im-axeln.",
+   "s": 21.79,
+   "e": 31.5
+  },
+  {
+   "t": "Origo motsvarar talet 0 .",
+   "s": 31.5,
+   "e": 34.59
+  },
+  {
+   "t": "Ett komplext tal z är lika med a plus b i svarar då mot punkten med realdelen a på Re-axeln och imaginärdelen b på Im-axeln.",
+   "s": 34.59,
+   "e": 43.2
+  },
+  {
+   "t": "Talet kan åskådliggöras antingen som en punkt eller som en visare — en pil med start i origo och spets i det komplexa talets punkt.",
+   "s": 43.2,
+   "e": 51.44
+  },
+  {
+   "t": "Komplexa talet i talplanet",
+   "s": 51.44,
+   "e": 54.45
+  },
+  {
+   "t": "z är lika med a plus b i longleftrightarrow punkten parentesen a, b slut parentes",
+   "s": 54.45,
+   "e": 61.2
+  },
+  {
+   "t": "Realdelen a ger läget längs Re-axeln, imaginärdelen b läget längs Im-axeln.",
+   "s": 61.2,
+   "e": 67.61
+  },
+  {
+   "t": "Reella tal (där b är lika med 0 ) hamnar på Re-axeln och rent imaginära tal (där a är lika med 0 ) på Im-axeln.",
+   "s": 67.61,
+   "e": 75.83
+  },
+  {
+   "t": "Addition och subtraktion — geometriskt",
+   "s": 75.83,
+   "e": 79.59
+  },
+  {
+   "t": "Addition och subtraktion av komplexa tal räknas på samma vis som när vi adderar och subtraherar vektorer: realdelarna för sig och imaginärdelarna för sig.",
+   "s": 79.59,
+   "e": 89.42
+  },
+  {
+   "t": "Addition och subtraktion",
+   "s": 89.42,
+   "e": 92.21
+  },
+  {
+   "t": "parentesen a plus b i slut parentes plus minus parentesen c plus d i slut parentes är lika med parentesen a plus minus c slut parentes plus parentesen b plus minus d slut parentes i",
+   "s": 92.21,
+   "e": 108.67
+  },
+  {
+   "t": "Geometriskt betyder det att visarna läggs ihop.",
+   "s": 92.21,
+   "e": 108.67
+  },
+  {
+   "t": "Om vi parallellförflyttar visaren för w så att den startar där visaren för z slutar, så motsvaras summan z plus w av visaren från origo till spetsen på den förflyttade visaren.",
+   "s": 108.67,
+   "e": 120.08
+  },
+  {
+   "t": "Exempel 1 — Punkter i talplanet",
+   "s": 120.08,
+   "e": 123.67
+  },
+  {
+   "t": "Ange realdel och imaginärdel för z är lika med 3 plus 2 i och w är lika med minus 2 minus 4 i , och beskriv var punkterna hamnar.",
+   "s": 123.67,
+   "e": 133.38
+  },
+  {
+   "t": "För z är lika med 3 plus 2 i är realdelen 3 och imaginärdelen 2 , så punkten ligger 3 steg åt höger och 2 steg upp — i första kvadranten.",
+   "s": 133.38,
+   "e": 143.38
+  },
+  {
+   "t": "För w är lika med minus 2 minus 4 i är realdelen minus 2 och imaginärdelen minus 4 , så punkten ligger 2 steg åt vänster och 4 steg ner — i tredje kvadranten.",
+   "s": 143.38,
+   "e": 154.8
+  },
+  {
+   "t": "Svar: z har Re parentesen z slut parentes är lika med 3 , Im parentesen z slut parentes är lika med 2 ; w har Re parentesen w slut parentes är lika med minus 2 , Im parentesen w slut parentes är lika med minus 4 .",
+   "s": 154.8,
+   "e": 170.91
+  },
+  {
+   "t": "Exempel 2 — Addera två komplexa tal",
+   "s": 170.91,
+   "e": 174.66
+  },
+  {
+   "t": "Beräkna z plus w då z är lika med 3 plus 2 i och w är lika med minus 2 minus 4 i , och tolka resultatet geometriskt.",
+   "s": 174.66,
+   "e": 184.64
+  },
+  {
+   "t": "Vi adderar realdelarna för sig och imaginärdelarna för sig:",
+   "s": 184.64,
+   "e": 207.9
+  },
+  {
+   "t": "z plus w är lika med parentesen 3 plus 2 i slut parentes plus parentesen minus 2 minus 4 i slut parentes som är lika med parentesen 3 plus parentesen minus 2 slut parentes slut parentes plus parentesen 2 plus parentesen minus 4 slut parentes slut parentes i som är lika med 1 minus 2 i",
+   "s": 184.64,
+   "e": 207.9
+  },
+  {
+   "t": "Geometriskt: lägger vi visaren för w i förlängningen av visaren för z , så går den sammanlagda visaren från origo till punkten 1 minus 2 i .",
+   "s": 207.9,
+   "e": 217.93
+  },
+  {
+   "t": "Svar: z plus w är lika med 1 minus 2 i",
+   "s": 217.93,
+   "e": 225.36
+  },
+  {
+   "t": "Exempel 3 — Subtrahera två komplexa tal",
+   "s": 217.93,
+   "e": 225.36
+  },
+  {
+   "t": "Beräkna z minus w då z är lika med 3 plus 2 i och w är lika med minus 2 minus 4 i .",
+   "s": 225.36,
+   "e": 233.14
+  },
+  {
+   "t": "Vi subtraherar realdelarna för sig och imaginärdelarna för sig.",
+   "s": 233.14,
+   "e": 238.1
+  },
+  {
+   "t": "Tänk på tecknen — vi drar bort ett negativt tal:",
+   "s": 238.1,
+   "e": 266.76
+  },
+  {
+   "t": "z minus w är lika med parentesen 3 plus 2 i slut parentes minus parentesen minus 2 minus 4 i slut parentes som är lika med parentesen 3 minus parentesen minus 2 slut parentes slut parentes plus parentesen 2 minus parentesen minus 4 slut parentes slut parentes i som är lika med 5 plus 6 i",
+   "s": 238.1,
+   "e": 266.76
+  },
+  {
+   "t": "Svar: z minus w är lika med 5 plus 6 i",
+   "s": 238.1,
+   "e": 266.76
+  },
+  {
+   "t": "Konjugatet som spegling",
+   "s": 238.1,
+   "e": 266.76
+  },
+  {
+   "t": "Konjugatet till ett komplext tal, bar z , motsvarar en spegling längs den reella axeln (Re-axeln).",
+   "s": 266.76,
+   "e": 274.43
+  },
+  {
+   "t": "Talet z är lika med a plus b i och dess konjugat bar z är lika med a minus b i har nämligen samma realdel a men motsatt imaginärdel, så punkterna ligger lika långt över respektive under Re-axeln.",
+   "s": 274.43,
+   "e": 286.77
+  },
+  {
+   "t": "Multiplikation och division av komplexa tal fungerar däremot inte på samma sätt som för vektorer.",
+   "s": 286.77,
+   "e": 295.42
+  },
+  {
+   "t": "Mer om det längre fram.",
+   "s": 295.37,
+   "e": 297.81
+  }
+ ]
+}

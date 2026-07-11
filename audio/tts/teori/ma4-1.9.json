@@ -1,0 +1,258 @@
+{
+ "id": "ma4-1.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "544096221b276f27538b192064aa4a07f7d063c5",
+ "dur": 396.13,
+ "segments": [
+  {
+   "t": "Formler och trigonometriska ekvationer",
+   "s": 0.1,
+   "e": 3.89
+  },
+  {
+   "t": "Ibland blir en trigonometrisk ekvation enklare att lösa om vi först skriver om den med hjälp av tidigare samband: trigonometriska ettan, additions- och subtraktionsformlerna samt formlerna för dubbla vinkeln.",
+   "s": 3.84,
+   "e": 15.74
+  },
+  {
+   "t": "Tanken är att få hela vänsterledet uttryckt i en och samma trigonometriska funktion av en och samma vinkel, så att ekvationen blir en vanlig ekvation vi redan kan lösa.",
+   "s": 15.74,
+   "e": 25.91
+  },
+  {
+   "t": "Kom ihåg nedanstående samband.",
+   "s": 25.91,
+   "e": 29.01
+  },
+  {
+   "t": "Trigonometriska ettan och tangens",
+   "s": 29.01,
+   "e": 32.24
+  },
+  {
+   "t": "För alla vinklar v gäller",
+   "s": 32.24,
+   "e": 35.09
+  },
+  {
+   "t": "sinus i kvadrat v plus cosinus i kvadrat v är lika med 1 tangens v som är lika med sinus v delat med cosinus v",
+   "s": 35.09,
+   "e": 43.21
+  },
+  {
+   "t": "Additions- och subtraktionsformler",
+   "s": 43.21,
+   "e": 46.45
+  },
+  {
+   "t": "sinus parentesen u plus v slut parentes är lika med sinus u gånger cosinus v plus cosinus u gånger sinus v",
+   "s": 46.45,
+   "e": 55.24
+  },
+  {
+   "t": "sinus parentesen u minus v slut parentes är lika med sinus u gånger cosinus v minus cosinus u gånger sinus v",
+   "s": 55.24,
+   "e": 64.33
+  },
+  {
+   "t": "cosinus parentesen u plus v slut parentes är lika med cosinus u gånger cosinus v minus sinus u gånger sinus v",
+   "s": 64.33,
+   "e": 73.47
+  },
+  {
+   "t": "cosinus parentesen u minus v slut parentes är lika med cosinus u gånger cosinus v plus sinus u gånger sinus v",
+   "s": 73.47,
+   "e": 82.36
+  },
+  {
+   "t": "Formler för dubbla vinkeln",
+   "s": 82.36,
+   "e": 85.22
+  },
+  {
+   "t": "sinus 2 v är lika med 2 sinus v cosinus v",
+   "s": 85.22,
+   "e": 89.97
+  },
+  {
+   "t": "cosinus 2 v är lika med cosinus i kvadrat v minus sinus i kvadrat v som är lika med 2 cosinus i kvadrat v minus 1 som är lika med 1 minus 2 sinus i kvadrat v",
+   "s": 89.97,
+   "e": 101.38
+  },
+  {
+   "t": "När vi väl har fått ekvationen på formen sinus parentesen något slut parentes är lika med a eller cosinus parentesen något slut parentes är lika med a ger den i regel två fall av lösningar (Fall 1 och Fall 2), eftersom det på ett varv finns två vinklar med samma sinus- respektive cosinusvärde.",
+   "s": 101.38,
+   "e": 118.74
+  },
+  {
+   "t": "Vi tar med båda fallen och lägger till perioden ( n gånger 2 pi i radianer eller n gånger 360 grader i grader) för att få alla lösningar.",
+   "s": 118.74,
+   "e": 128.11
+  },
+  {
+   "t": "Exempel 1 — skriv om till dubbla vinkeln (radianer)",
+   "s": 128.11,
+   "e": 132.7
+  },
+  {
+   "t": "Lös ekvationen sinus x cosinus x är lika med roten ur 3 delat med 4 och svara i radianer.",
+   "s": 132.7,
+   "e": 139.93
+  },
+  {
+   "t": "Vänsterledet påminner om uttrycket för sinus 2 x .",
+   "s": 139.93,
+   "e": 144.71
+  },
+  {
+   "t": "Vi multiplicerar båda led med 2 för att kunna skriva om vänsterledet som sinus 2 x .",
+   "s": 144.71,
+   "e": 151.24
+  },
+  {
+   "t": "2 sinus x cosinus x är lika med roten ur 3 delat med 2 vilket är ekvivalent med att sinus 2 x är lika med roten ur 3 delat med 2",
+   "s": 151.24,
+   "e": 160.85
+  },
+  {
+   "t": "Eftersom sinus pi delat med 3 är lika med roten ur 3 delat med 2 får vi två fall.",
+   "s": 160.85,
+   "e": 167.03
+  },
+  {
+   "t": "textbf F a l l 1 : 2 x är lika med pi delat med 3 plus n gånger 2 pi vilket är ekvivalent med att x är lika med pi delat med 6 plus n gånger pi",
+   "s": 167.03,
+   "e": 178.03
+  },
+  {
+   "t": "textbf F a l l 2 : 2 x är lika med pi minus pi delat med 3 plus n gånger 2 pi som är lika med 2 pi delat med 3 plus n gånger 2 pi vilket är ekvivalent med att x är lika med pi delat med 3 plus n gånger pi",
+   "s": 178.03,
+   "e": 192.57
+  },
+  {
+   "t": "Svar: x är lika med pi delat med 6 plus n gånger pi och x är lika med pi delat med 3 plus n gånger pi",
+   "s": 192.57,
+   "e": 200.24
+  },
+  {
+   "t": "Exempel 2 — nollproduktmetoden (grader)",
+   "s": 200.24,
+   "e": 204.5
+  },
+  {
+   "t": "Lös ekvationen cosinus 2 x minus 4 cosinus x plus 1 är lika med 0 och svara i grader.",
+   "s": 204.5,
+   "e": 211.88
+  },
+  {
+   "t": "Eftersom den andra termen innehåller cosinus x väljer vi den form av dubbla vinkeln som ger något med cosinus x , alltså cosinus 2 x är lika med 2 cosinus i kvadrat x minus 1 .",
+   "s": 211.88,
+   "e": 223.6
+  },
+  {
+   "t": "2 cosinus i kvadrat x minus 1 minus 4 cosinus x plus 1 är lika med 0 vilket är ekvivalent med att 2 cosinus i kvadrat x minus 4 cosinus x är lika med 0",
+   "s": 223.6,
+   "e": 235.49
+  },
+  {
+   "t": "Båda termerna innehåller faktorn cosinus x , så vi bryter ut den och använder nollproduktmetoden.",
+   "s": 235.49,
+   "e": 242.22
+  },
+  {
+   "t": "cosinus x parentesen 2 cosinus x minus 4 slut parentes är lika med 0",
+   "s": 242.22,
+   "e": 248.55
+  },
+  {
+   "t": "En produkt är noll om någon av faktorerna är noll.",
+   "s": 248.55,
+   "e": 252.64
+  },
+  {
+   "t": "textbf F a l l 1 : cosinus x är lika med 0 vilket är ekvivalent med att x är lika med plus minus 90 grader plus n gånger 360 grader",
+   "s": 252.64,
+   "e": 263.66
+  },
+  {
+   "t": "textbf F a l l 2 : 2 cosinus x minus 4 är lika med 0 vilket är ekvivalent med att cosinus x är lika med 2",
+   "s": 263.66,
+   "e": 272.88
+  },
+  {
+   "t": "Fall 2 saknar lösningar, eftersom minus 1 är mindre än eller lika med cosinus x är mindre än eller lika med 1 .",
+   "s": 272.88,
+   "e": 281.16
+  },
+  {
+   "t": "Svar: x är lika med plus minus 90 grader plus n gånger 360 grader",
+   "s": 281.16,
+   "e": 287.75
+  },
+  {
+   "t": "Exempel 3 — substitution och pq-formeln (grader)",
+   "s": 287.75,
+   "e": 292.8
+  },
+  {
+   "t": "Lös ekvationen 2 sinus x minus cosinus i kvadrat x minus 2 är lika med 0 och svara i grader.",
+   "s": 292.8,
+   "e": 300.3
+  },
+  {
+   "t": "Den första termen innehåller sinus x , så vi använder trigonometriska ettan för att skriva cosinus i kvadrat x är lika med 1 minus sinus i kvadrat x .",
+   "s": 300.3,
+   "e": 311.87
+  },
+  {
+   "t": "2 sinus x minus parentesen 1 minus sinus i kvadrat x slut parentes minus 2 är lika med 0 vilket är ekvivalent med att sinus i kvadrat x plus 2 sinus x minus 3 är lika med 0",
+   "s": 311.82,
+   "e": 324.77
+  },
+  {
+   "t": "Båda termerna med x innehåller sinus x , så vi kan göra en substitution.",
+   "s": 324.77,
+   "e": 330.5
+  },
+  {
+   "t": "Vi sätter sinus x är lika med t och löser med pq-formeln.",
+   "s": 330.5,
+   "e": 335.48
+  },
+  {
+   "t": "t i kvadrat plus 2 t minus 3 är lika med 0 vilket är ekvivalent med att t är lika med minus 1 plus minus roten ur 1 i kvadrat plus 3 som är lika med minus 1 plus minus 2",
+   "s": 335.48,
+   "e": 347.04
+  },
+  {
+   "t": "t ett är lika med minus 1 minus 2 som är lika med minus 3 t två som är lika med minus 1 plus 2 som är lika med 1",
+   "s": 347.04,
+   "e": 355.52
+  },
+  {
+   "t": "Nu växlar vi tillbaka t är lika med sinus x .",
+   "s": 355.52,
+   "e": 359.87
+  },
+  {
+   "t": "textbf F a l l 1 : sinus x är lika med minus 3 saknar lösningar, då minus 1 är mindre än eller lika med sinus x är mindre än eller lika med 1",
+   "s": 359.87,
+   "e": 371.09
+  },
+  {
+   "t": "textbf F a l l 2 : sinus x är lika med 1 vilket är ekvivalent med att x är lika med 90 grader plus n gånger 360 grader",
+   "s": 371.09,
+   "e": 381.28
+  },
+  {
+   "t": "(Det andra fallet x är lika med 180 grader minus 90 grader plus n gånger 360 grader ger samma lösningar.)",
+   "s": 381.28,
+   "e": 390.12
+  },
+  {
+   "t": "Svar: x är lika med 90 grader plus n gånger 360 grader",
+   "s": 390.12,
+   "e": 396.13
+  }
+ ]
+}

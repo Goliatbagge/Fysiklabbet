@@ -1,0 +1,218 @@
+{
+ "id": "ma4-2.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "6219fbeac8f930601d13c020fc9b0e80632f690a",
+ "dur": 328.95,
+ "segments": [
+  {
+   "t": "Derivatan av sammansatta funktioner och kedjeregeln",
+   "s": 0.1,
+   "e": 4.53
+  },
+  {
+   "t": "En funktion av en annan funktion kallas sammansatt funktion.",
+   "s": 4.47,
+   "e": 9.1
+  },
+  {
+   "t": "Om vi har funktionerna f av x och g av x , så är f parentesen g av x slut parentes en sammansatt funktion.",
+   "s": 9.1,
+   "e": 17.36
+  },
+  {
+   "t": "Vi kallar f av x för den yttre funktionen och g av x för den inre funktionen.",
+   "s": 17.36,
+   "e": 23.27
+  },
+  {
+   "t": "Det betyder att vi sätter in g av x i funktionen f av x .",
+   "s": 23.27,
+   "e": 28.38
+  },
+  {
+   "t": "På motsvarande sätt är även g parentesen f av x slut parentes en sammansatt funktion, där vi i stället sätter in f av x i funktionen g av x .",
+   "s": 28.38,
+   "e": 38.35
+  },
+  {
+   "t": "Om f av x är lika med 2 x plus 3 och g av x är lika med x i kvadrat gäller",
+   "s": 38.35,
+   "e": 44.83
+  },
+  {
+   "t": "f parentesen g av x slut parentes är lika med vi sätter in g av x som är lika med x i kvadrat i f av x som är lika med f av x i kvadrat som är lika med 2 x i kvadrat plus 3 gram parentesen f av x slut parentes som är lika med vi sätter in f av x som är lika med 2 x plus 3 i g av x som är lika med g av 2 x plus 3 som är lika med parentesen 2 x plus 3 slut parentes i kvadrat som är lika med 4 x i kvadrat plus 12 x plus 9",
+   "s": 44.83,
+   "e": 73.94
+  },
+  {
+   "t": "Vi ser alltså att f parentesen g av x slut parentes inte är detsamma som g parentesen f av x slut parentes .",
+   "s": 73.94,
+   "e": 82.34
+  },
+  {
+   "t": "Vilken funktion som är yttre eller inre spelar roll.",
+   "s": 82.34,
+   "e": 86.41
+  },
+  {
+   "t": "Regeln för att derivera sammansatta funktioner kallas kedjeregeln.",
+   "s": 86.41,
+   "e": 91.49
+  },
+  {
+   "t": "Kedjeregeln",
+   "s": 91.49,
+   "e": 93.62
+  },
+  {
+   "t": "Derivatan av en sammansatt funktion y är lika med f parentesen g av x slut parentes är",
+   "s": 93.62,
+   "e": 100.58
+  },
+  {
+   "t": "y' är lika med f\\,'(g(x))\\cdot g'(x)",
+   "s": 100.58,
+   "e": 108.7
+  },
+  {
+   "t": "där f\\,'(g(x)) är den yttre derivatan och g prim parentesen x slut parentes den inre derivatan.",
+   "s": 108.7,
+   "e": 118.01
+  },
+  {
+   "t": "Med Leibniz beteckning, om y beror på u och u på x :",
+   "s": 118.01,
+   "e": 131.11
+  },
+  {
+   "t": "d y delat med d x är lika med d y delat med d u gånger d u delat med d x",
+   "s": 118.01,
+   "e": 131.11
+  },
+  {
+   "t": "Man deriverar alltså först den yttre funktionen och multiplicerar sedan med derivatan till den inre funktionen (uttrycket inom parentesen).",
+   "s": 131.11,
+   "e": 140.32
+  },
+  {
+   "t": "Exempel 1 — Potensfunktion, med kontroll",
+   "s": 140.32,
+   "e": 144.32
+  },
+  {
+   "t": "Derivera y är lika med parentesen x i kvadrat minus 5 slut parentes i kvadrat .",
+   "s": 144.32,
+   "e": 151.07
+  },
+  {
+   "t": "Den yttre funktionen är en potensfunktion z i kvadrat och den inre funktionen är det som står inuti parentesen.",
+   "s": 151.07,
+   "e": 158.5
+  },
+  {
+   "t": "Vi deriverar först den yttre funktionen (\"multiplicera ned exponenten och minska den med 1\") och multiplicerar sedan med derivatan till den inre funktionen:",
+   "s": 158.5,
+   "e": 190.91
+  },
+  {
+   "t": "y prim är lika med 2 parentesen x i kvadrat minus 5 slut parentes gånger 2 x som är lika med 4 x parentesen x i kvadrat minus 5 slut parentes som är lika med 4 x i kubik minus 20 x",
+   "s": 158.5,
+   "e": 190.91
+  },
+  {
+   "t": "Kontroll: vi utvecklar y med kvadreringsregeln och deriverar som vanligt:",
+   "s": 158.5,
+   "e": 190.91
+  },
+  {
+   "t": "y är lika med parentesen x i kvadrat minus 5 slut parentes i kvadrat som är lika med parentesen x i kvadrat slut parentes i kvadrat minus 2 x i kvadrat gånger 5 plus 5 i kvadrat som är lika med x upphöjt till 4 minus 10 x i kvadrat plus 25",
+   "s": 158.5,
+   "e": 203.06
+  },
+  {
+   "t": "y prim är lika med 4 x i kubik minus 20 x",
+   "s": 203.06,
+   "e": 207.96
+  },
+  {
+   "t": "Detta stämmer med svaret.",
+   "s": 207.96,
+   "e": 210.64
+  },
+  {
+   "t": "Svar: y prim är lika med 4 x i kubik minus 20 x",
+   "s": 210.64,
+   "e": 218.29
+  },
+  {
+   "t": "Exempel 2 — Exponentialfunktion",
+   "s": 210.64,
+   "e": 218.29
+  },
+  {
+   "t": "Derivera y är lika med e upphöjt till x i kubik minus 5 .",
+   "s": 218.29,
+   "e": 223.39
+  },
+  {
+   "t": "Den yttre funktionen är en exponentialfunktion e upphöjt till z och den inre funktionen är det som står i exponenten, x i kubik minus 5 .",
+   "s": 223.39,
+   "e": 232.72
+  },
+  {
+   "t": "Den yttre derivatan är e upphöjt till z i oförändrad form; vi multiplicerar den med derivatan till den inre funktionen:",
+   "s": 232.72,
+   "e": 245.41
+  },
+  {
+   "t": "y prim är lika med e upphöjt till x i kubik minus 5 gånger 3 x i kvadrat",
+   "s": 232.72,
+   "e": 245.41
+  },
+  {
+   "t": "Svar: y prim är lika med 3 x i kvadrat e upphöjt till x i kubik minus 5",
+   "s": 245.41,
+   "e": 252.09
+  },
+  {
+   "t": "Exempel 3 — Rotfunktion",
+   "s": 252.09,
+   "e": 255.24
+  },
+  {
+   "t": "Derivera y är lika med roten ur x i kvadrat plus 3 x .",
+   "s": 255.24,
+   "e": 260.64
+  },
+  {
+   "t": "Den yttre funktionen är en rotfunktion roten ur z är lika med z upphöjt till 1 delat med 2 och den inre funktionen är det som står under rottecknet, x i kvadrat plus 3 x .",
+   "s": 260.64,
+   "e": 271.88
+  },
+  {
+   "t": "Vi börjar med att skriva om rotuttrycket som en potens:",
+   "s": 271.88,
+   "e": 284.69
+  },
+  {
+   "t": "y är lika med roten ur x i kvadrat plus 3 x som är lika med parentesen x i kvadrat plus 3 x slut parentes upphöjt till 1 delat med 2",
+   "s": 271.88,
+   "e": 284.69
+  },
+  {
+   "t": "Nu använder vi kedjeregeln, med den inre derivatan 2 x plus 3 :",
+   "s": 284.69,
+   "e": 307.19
+  },
+  {
+   "t": "y prim är lika med 1 delat med 2 parentesen x i kvadrat plus 3 x slut parentes upphöjt till minus 1 delat med 2 gånger parentesen 2 x plus 3 slut parentes som är lika med parentesen x i kvadrat plus 3 x slut parentes upphöjt till minus 1 delat med 2 parentesen 2 x plus 3 slut parentes delat med 2 som är lika med 2 x plus 3 delat med 2 parentesen x i kvadrat plus 3 x slut parentes upphöjt till 1 delat med 2 som är lika med 2 x plus 3 delat med 2 roten ur x i kvadrat plus 3 x",
+   "s": 284.69,
+   "e": 328.95
+  },
+  {
+   "t": "Svar: y prim är lika med 2 x plus 3 delat med 2 roten ur x i kvadrat plus 3 x",
+   "s": 307.35,
+   "e": 328.95
+  }
+ ]
+}

@@ -1,0 +1,263 @@
+{
+ "id": "ma4-3.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "c4cc0785b5039666f8c2548cb45503fd80cf69dc",
+ "dur": 394.95,
+ "segments": [
+  {
+   "t": "Beräkning av storheter med integraler",
+   "s": 0.1,
+   "e": 3.73
+  },
+  {
+   "t": "I många naturvetenskapliga tillämpningar använder vi integraler för att summera förändringar över tid eller sträcka.",
+   "s": 3.67,
+   "e": 10.89
+  },
+  {
+   "t": "Om en storhet — till exempel hastighet eller effekt — varierar, kan vi inte bara använda enkel multiplikation.",
+   "s": 10.89,
+   "e": 18.1
+  },
+  {
+   "t": "Istället beräknar vi \"arean under grafen\" med hjälp av en integral.",
+   "s": 18.1,
+   "e": 23.07
+  },
+  {
+   "t": "Grundidén är att integralen av en förändringshastighet ger den ackumulerade storheten.",
+   "s": 23.07,
+   "e": 29.24
+  },
+  {
+   "t": "Integralen av hastigheten ger sträckan, integralen av effekten ger energin, och så vidare.",
+   "s": 29.24,
+   "e": 36.02
+  },
+  {
+   "t": "Vilken storhet integralen står för kan man alltid se på enheterna.",
+   "s": 36.02,
+   "e": 40.91
+  },
+  {
+   "t": "Integralens enhet",
+   "s": 40.91,
+   "e": 43.5
+  },
+  {
+   "t": "Integralens enhet är alltid produkten av axlarnas enheter:",
+   "s": 43.5,
+   "e": 52.8
+  },
+  {
+   "t": "y -axelns enhet gånger x -axelns enhet är lika med integralens enhet",
+   "s": 43.5,
+   "e": 52.8
+  },
+  {
+   "t": "Exempel: en hastighet i m/s integrerad över tiden i s ger en sträcka i m,",
+   "s": 52.8,
+   "e": 60.12
+  },
+  {
+   "t": "meter delat med sekund gånger sekund är lika med meter",
+   "s": 60.12,
+   "e": 64.62
+  },
+  {
+   "t": "Nedan samlas fyra vanliga tillämpningar.",
+   "s": 64.62,
+   "e": 68.12
+  },
+  {
+   "t": "I samtliga fall är den storhet vi söker integralen av en förändringshastighet: hastigheten v parentesen t slut parentes är lägesändring per tid, accelerationen a parentesen t slut parentes är hastighetsändring per tid, kraften F parentesen s slut parentes ger arbete per sträcka och effekten P av t är energi per tid.",
+   "s": 68.12,
+   "e": 88.08
+  },
+  {
+   "t": "Fyra vanliga tillämpningar där integraler används",
+   "s": 88.08,
+   "e": 92.29
+  },
+  {
+   "t": "Lägesändring: delta s är lika med integralen av t ett upphöjt till t två v parentesen t slut parentes d t, 4 p t Hastighetsändring: delta v som är lika med integralen av t ett upphöjt till t två a parentesen t slut parentes d t, 4 p t Arbete: W som är lika med integralen av s ett upphöjt till s två F parentesen s slut parentes d s, 4 p t Energiförbrukning: E som är lika med integralen av t ett upphöjt till t två P av t d t",
+   "s": 92.29,
+   "e": 128.76
+  },
+  {
+   "t": "Grafen nedan visar ett flöde som ökar med tiden.",
+   "s": 92.29,
+   "e": 128.76
+  },
+  {
+   "t": "Arean under kurvan — det skuggade området — är integralen, och dess enhet avslöjar vilken storhet den står för.",
+   "s": 128.76,
+   "e": 136.44
+  },
+  {
+   "t": "Exempel 1 — Vilken storhet står arean för?",
+   "s": 136.44,
+   "e": 140.71
+  },
+  {
+   "t": "Grafen ovan visar ett flöde där y -axeln har enheten liter/minut och x -axeln enheten minut.",
+   "s": 140.71,
+   "e": 148.11
+  },
+  {
+   "t": "Avgör vilken storhet och enhet integralen (arean) står för.",
+   "s": 148.11,
+   "e": 153.78
+  },
+  {
+   "t": "Integralens enhet är produkten av axlarnas enheter:",
+   "s": 153.78,
+   "e": 161.55
+  },
+  {
+   "t": "liter delat med minut gånger minut är lika med liter",
+   "s": 153.78,
+   "e": 161.55
+  },
+  {
+   "t": "Vi får alltså en volym uttryckt i liter.",
+   "s": 161.55,
+   "e": 165.28
+  },
+  {
+   "t": "Svar: Volym i liter.",
+   "s": 165.28,
+   "e": 168.25
+  },
+  {
+   "t": "Exempel 2 — Energi ur effekt",
+   "s": 168.25,
+   "e": 171.89
+  },
+  {
+   "t": "Effekten i en resistor ges av formeln P av t är lika med 3,31 t i kvadrat .",
+   "s": 171.89,
+   "e": 178.57
+  },
+  {
+   "t": "Vilken energi omvandlas under de första fem sekunderna?",
+   "s": 178.57,
+   "e": 182.95
+  },
+  {
+   "t": "Energi beräknas som effekt multiplicerat med tid.",
+   "s": 182.95,
+   "e": 187.35
+  },
+  {
+   "t": "Eftersom effekten varierar ges den omvandlade energin av integralen av effekten över tiden, mellan t är lika med 0 och t är lika med 5 :",
+   "s": 187.35,
+   "e": 222.93
+  },
+  {
+   "t": "E är lika med integralen av noll upphöjt till 5 P av t d t som är lika med integralen av noll upphöjt till 5 3,31 t i kvadrat d t som är lika med 3,31 t i kubik delat med 3 noll upphöjt till 5 som är lika med 3,31 gånger 5 i kubik delat med 3 minus 3,31 gånger 0 i kubik delat med 3, 4 p t som är lika med 137,916 som är ungefär lika med 140",
+   "s": 187.35,
+   "e": 222.93
+  },
+  {
+   "t": "Svar: E är ungefär lika med 140 joule",
+   "s": 222.93,
+   "e": 227.39
+  },
+  {
+   "t": "Exempel 3 — Sträcka ur hastighet",
+   "s": 227.39,
+   "e": 231.0
+  },
+  {
+   "t": "En bil kör på en påfart till en motorväg.",
+   "s": 231.0,
+   "e": 234.69
+  },
+  {
+   "t": "Föraren håller hastigheten 15 meter per sekund när hon börjar accelerera med konstant acceleration a är lika med 2,5 meter per sekund i kvadrat i 6 sekunder för att komma upp i motorvägsfart.",
+   "s": 234.69,
+   "e": 246.61
+  },
+  {
+   "t": "Vid tidpunkten då accelerationen startar ( t är lika med 0 ) har bilen totalt färdats 400 meter från sin startpunkt.. a) Teckna funktionen s parentesen t slut parentes för bilens läge i förhållande till startpunkten. b) Hur lång sträcka färdas bilen under dessa 6 sekunder av acceleration?",
+   "s": 246.61,
+   "e": 267.98
+  },
+  {
+   "t": "a) Vi har accelerationen a parentesen t slut parentes är lika med 2,5 och söker läget s parentesen t slut parentes .",
+   "s": 267.98,
+   "e": 277.39
+  },
+  {
+   "t": "Först tar vi fram hastigheten v parentesen t slut parentes som integralen av accelerationen med tiden:",
+   "s": 277.39,
+   "e": 296.27
+  },
+  {
+   "t": "v parentesen t slut parentes är lika med 2,5 t plus C",
+   "s": 277.39,
+   "e": 296.27
+  },
+  {
+   "t": "Villkoret v, ekvation 0 är lika med 15 ger 2,5 gånger 0 plus C är lika med 15 , alltså C är lika med 15 och",
+   "s": 277.39,
+   "e": 296.27
+  },
+  {
+   "t": "v parentesen t slut parentes är lika med 2,5 t plus 15",
+   "s": 296.27,
+   "e": 316.24
+  },
+  {
+   "t": "Sedan tar vi fram sträckan s parentesen t slut parentes som integralen av hastigheten:",
+   "s": 302.12,
+   "e": 316.24
+  },
+  {
+   "t": "s parentesen t slut parentes är lika med 2,5 t i kvadrat delat med 2 plus 15 t plus D",
+   "s": 302.12,
+   "e": 316.24
+  },
+  {
+   "t": "Villkoret s, ekvation 0 är lika med 400 ger D är lika med 400 , alltså",
+   "s": 316.19,
+   "e": 323.44
+  },
+  {
+   "t": "s parentesen t slut parentes är lika med 2,5 t i kvadrat delat med 2 plus 15 t plus 400",
+   "s": 323.44,
+   "e": 331.9
+  },
+  {
+   "t": "b) Vi sätter in t är lika med 6 i funktionen för sträckan:",
+   "s": 331.9,
+   "e": 348.62
+  },
+  {
+   "t": "s, ekvation 6 är lika med 2,5 gånger 6 i kvadrat delat med 2 plus 15 gånger 6 plus 400 som är lika med 45 plus 90 plus 400 som är lika med 535 meter",
+   "s": 331.9,
+   "e": 348.62
+  },
+  {
+   "t": "Eftersom bilen hade färdats 400 meter innan accelerationen blir sträckan under accelerationen 535 minus 400 är lika med 135 meter .",
+   "s": 348.62,
+   "e": 359.47
+  },
+  {
+   "t": "Alternativt får vi förflyttningen direkt som integralen av hastigheten mellan t är lika med 0 och t är lika med 6 :",
+   "s": 359.47,
+   "e": 383.49
+  },
+  {
+   "t": "integralen av noll upphöjt till 6 parentesen 2,5 t plus 15 slut parentes d t är lika med 2,5 t i kvadrat delat med 2 plus 15 t noll upphöjt till 6 som är lika med 45 plus 90 minus 0 som är lika med 135 meter",
+   "s": 359.47,
+   "e": 383.49
+  },
+  {
+   "t": "Svar: a) s parentesen t slut parentes är lika med 2,5 t i kvadrat delat med 2 plus 15 t plus 400 b) 135 meter",
+   "s": 383.49,
+   "e": 394.95
+  }
+ ]
+}

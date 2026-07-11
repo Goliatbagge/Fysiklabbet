@@ -1,0 +1,243 @@
+{
+ "id": "ma4-1.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a0c94c74275a8f18d734d85f02e430f4d76df6b6",
+ "dur": 428.75,
+ "segments": [
+  {
+   "t": "Samband mellan vinklar i enhetscirkeln",
+   "s": 0.1,
+   "e": 3.86
+  },
+  {
+   "t": "Två vinklar som tillsammans bildar 90 grader kallas komplementvinklar.",
+   "s": 3.81,
+   "e": 9.03
+  },
+  {
+   "t": "Sinus för en vinkel är lika med cosinus för dess komplementvinkel och vice versa.",
+   "s": 9.03,
+   "e": 14.7
+  },
+  {
+   "t": "Komplementvinklar",
+   "s": 14.7,
+   "e": 16.95
+  },
+  {
+   "t": "sinus parentesen 90 grader minus v slut parentes är lika med cosinus v",
+   "s": 16.95,
+   "e": 23.24
+  },
+  {
+   "t": "cosinus parentesen 90 grader minus v slut parentes är lika med sinus v",
+   "s": 23.24,
+   "e": 29.62
+  },
+  {
+   "t": "Till exempel innebär det att sinus 80 grader är lika med cosinus 10 grader och att cosinus 40 grader är lika med sinus 50 grader .",
+   "s": 29.62,
+   "e": 37.99
+  },
+  {
+   "t": "Det finns fler enkla samband mellan vinklar i enhetscirkeln som gör det lättare att räkna med trigonometriska funktioner.",
+   "s": 37.99,
+   "e": 45.45
+  },
+  {
+   "t": "Sambanden bygger på symmetrier och speglingar i enhetscirkeln: de visar hur sinus och cosinus hänger ihop för olika vinklar, till exempel när vi adderar eller subtraherar 90 grader eller 180 grader , eller använder negativa vinklar.",
+   "s": 45.45,
+   "e": 60.29
+  },
+  {
+   "t": "Samband mellan vinklar",
+   "s": 60.29,
+   "e": 63.12
+  },
+  {
+   "t": "För alla vinklar v gäller:",
+   "s": 63.12,
+   "e": 151.0
+  },
+  {
+   "t": "\\begin{array}{l@{\\qquad}l} \\sin(90^\\circ - v) är lika med \\cos v & \\cos(90^\\circ - v) är lika med \\sin v \\\\[2pt] \\sin(-v) är lika med -\\sin v & \\cos(-v) är lika med \\cos v \\\\[2pt] \\sin(180^\\circ - v) är lika med \\sin v & \\cos(180^\\circ - v) är lika med -\\cos v \\\\[2pt] \\sin(v + 90^\\circ) är lika med \\cos v & \\cos(v + 90^\\circ) är lika med -\\sin v \\\\[2pt] \\sin(v + 180^\\circ) är lika med -\\sin v & \\cos(v + 180^\\circ) är lika med -\\cos v \\end{array}",
+   "s": 63.12,
+   "e": 151.0
+  },
+  {
+   "t": "Dessa formler står inte med i formelbladet för kursen.",
+   "s": 151.0,
+   "e": 155.22
+  },
+  {
+   "t": "Det är alltså bra att förstå varför sambanden blir som de blir utifrån enhetscirkeln (eller att memorera dem).",
+   "s": 155.22,
+   "e": 162.38
+  },
+  {
+   "t": "Ett tydligt exempel är vad som händer när vi lägger till 90 grader .",
+   "s": 162.38,
+   "e": 167.06
+  },
+  {
+   "t": "En punkt på enhetscirkeln vid vinkeln v har koordinaterna parentesen cosinus v, sinus v slut parentes .",
+   "s": 167.06,
+   "e": 175.01
+  },
+  {
+   "t": "Vrider vi radien ett kvarts varv moturs, till vinkeln v plus 90 grader , byter koordinaterna plats och x -koordinaten byter dessutom tecken: den nya punkten får koordinaterna parentesen minus sinus v, cosinus v slut parentes .",
+   "s": 175.01,
+   "e": 190.2
+  },
+  {
+   "t": "Att läsa av de nya koordinaterna ger direkt att cosinus parentesen v plus 90 grader slut parentes är lika med minus sinus v och sinus parentesen v plus 90 grader slut parentes är lika med cosinus v .",
+   "s": 190.2,
+   "e": 203.12
+  },
+  {
+   "t": "Om en vinkel är given i radianer är det ofta enklast att först göra om den till grader för att lättare tolka den i enhetscirkeln.",
+   "s": 203.12,
+   "e": 210.76
+  },
+  {
+   "t": "Har du en vinkel som är större än 360 grader (eller mindre än 0 grader ) kan du lägga till eller dra ifrån hela varv, 360 grader , i argumentet utan att funktionsvärdet ändras.",
+   "s": 210.76,
+   "e": 223.25
+  },
+  {
+   "t": "I radianer gör du på samma sätt, men då är ett helt varv i stället 2 pi .",
+   "s": 223.25,
+   "e": 228.84
+  },
+  {
+   "t": "Exempel 1 — negativa och vridna vinklar",
+   "s": 228.84,
+   "e": 232.61
+  },
+  {
+   "t": "Vi vet att sinus 60 grader är lika med roten ur 3 delat med 2 .",
+   "s": 232.61,
+   "e": 237.85
+  },
+  {
+   "t": "Bestäm utan hjälpmedel. a) sinus parentesen minus 60 grader slut parentes b) cosinus 30 grader c) sinus 240 grader",
+   "s": 237.85,
+   "e": 249.39
+  },
+  {
+   "t": "a) En negativ vinkel speglar punkten i x -axeln, så sinus byter tecken:",
+   "s": 249.39,
+   "e": 263.12
+  },
+  {
+   "t": "sinus parentesen minus 60 grader slut parentes är lika med minus sinus 60 grader som är lika med minus roten ur 3 delat med 2",
+   "s": 249.39,
+   "e": 263.12
+  },
+  {
+   "t": "b) 30 grader och 60 grader är komplementvinklar (de bildar tillsammans 90 grader ), så cosinus för den ena är sinus för den andra:",
+   "s": 263.12,
+   "e": 282.07
+  },
+  {
+   "t": "cosinus 30 grader är lika med sinus parentesen 90 grader minus 30 grader slut parentes som är lika med sinus 60 grader som är lika med roten ur 3 delat med 2",
+   "s": 263.12,
+   "e": 282.07
+  },
+  {
+   "t": "c) Ett halvt varv ( 180 grader ) hamnar mitt emot i enhetscirkeln, så sinus byter tecken:",
+   "s": 282.07,
+   "e": 300.88
+  },
+  {
+   "t": "sinus 240 grader är lika med sinus parentesen 60 grader plus 180 grader slut parentes som är lika med minus sinus 60 grader som är lika med minus roten ur 3 delat med 2",
+   "s": 282.07,
+   "e": 300.88
+  },
+  {
+   "t": "Svar: a) minus roten ur 3 delat med 2 b) roten ur 3 delat med 2 c) minus roten ur 3 delat med 2",
+   "s": 300.88,
+   "e": 309.82
+  },
+  {
+   "t": "Exempel 2 — vinkel i radianer",
+   "s": 309.82,
+   "e": 313.31
+  },
+  {
+   "t": "Vi vet att cosinus pi delat med 4 är lika med 1 delat med roten ur 2 .",
+   "s": 313.31,
+   "e": 318.94
+  },
+  {
+   "t": "Bestäm cosinus 5 pi delat med 4 .",
+   "s": 318.94,
+   "e": 322.55
+  },
+  {
+   "t": "Vi gör om vinklarna till grader:",
+   "s": 322.55,
+   "e": 337.16
+  },
+  {
+   "t": "pi delat med 4 är lika med 180 grader delat med 4 som är lika med 45 grader och 5 pi delat med 4 som är lika med 5 gånger 180 grader delat med 4 som är lika med 225 grader",
+   "s": 322.55,
+   "e": 337.16
+  },
+  {
+   "t": "Vi vet alltså att cosinus 45 grader är lika med 1 delat med roten ur 2 och ska bestämma cosinus 225 grader .",
+   "s": 337.16,
+   "e": 347.58
+  },
+  {
+   "t": "Eftersom 225 grader ligger 180 grader bort från 45 grader byter cosinus tecken:",
+   "s": 347.53,
+   "e": 370.97
+  },
+  {
+   "t": "cosinus 5 pi delat med 4 är lika med cosinus 225 grader som är lika med minus cosinus parentesen 225 grader minus 180 grader slut parentes som är lika med minus cosinus 45 grader som är lika med minus 1 delat med roten ur 2",
+   "s": 347.53,
+   "e": 370.97
+  },
+  {
+   "t": "Svar: minus 1 delat med roten ur 2",
+   "s": 370.97,
+   "e": 375.25
+  },
+  {
+   "t": "Exempel 3 — visa ett samband",
+   "s": 375.25,
+   "e": 378.5
+  },
+  {
+   "t": "Visa att sinus parentesen 450 grader minus v slut parentes är lika med cosinus v .",
+   "s": 378.5,
+   "e": 385.77
+  },
+  {
+   "t": "Vinkeln i argumentet är större än 360 grader .",
+   "s": 385.77,
+   "e": 390.53
+  },
+  {
+   "t": "Vi börjar med att dra bort ett helt varv ( 360 grader ) eftersom det inte påverkar det trigonometriska värdet:",
+   "s": 390.53,
+   "e": 416.98
+  },
+  {
+   "t": "vänsterledet är lika med sinus parentesen 450 grader minus v slut parentes som är lika med sinus parentesen 450 grader minus 360 grader minus v slut parentes som är lika med sinus parentesen 90 grader minus v slut parentes som är lika med cosinus v som är lika med högerledet",
+   "s": 390.53,
+   "e": 416.98
+  },
+  {
+   "t": "där det sista steget använder komplementvinkel-sambandet sinus parentesen 90 grader minus v slut parentes är lika med cosinus v .",
+   "s": 416.98,
+   "e": 426.13
+  },
+  {
+   "t": "Svar: V.S.V.",
+   "s": 426.13,
+   "e": 428.75
+  }
+ ]
+}

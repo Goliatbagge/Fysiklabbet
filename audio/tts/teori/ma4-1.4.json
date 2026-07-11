@@ -1,0 +1,233 @@
+{
+ "id": "ma4-1.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "eb2a23bc1cfd33d00f9ff0a17bb49817f94919ea",
+ "dur": 354.39,
+ "segments": [
+  {
+   "t": "Mer om trigonometriska ekvationer",
+   "s": 0.1,
+   "e": 3.74
+  },
+  {
+   "t": "När vi löser en trigonometrisk ekvation får vi oändligt många lösningar, som vi skriver med en periodterm ( plus n gånger 360 grader för sinus och cosinus, plus n gånger 180 grader för tangens, där n är ett heltal).",
+   "s": 3.69,
+   "e": 18.29
+  },
+  {
+   "t": "Ofta vill vi bara ha de lösningar som ligger i ett visst intervall.",
+   "s": 18.29,
+   "e": 22.95
+  },
+  {
+   "t": "Då tar vi först fram samtliga lösningar och prövar sedan vilka heltal n som ger lösningar inom intervallet.",
+   "s": 22.95,
+   "e": 29.94
+  },
+  {
+   "t": "Lösa trigonometriska ekvationer i ett intervall",
+   "s": 29.94,
+   "e": 34.35
+  },
+  {
+   "t": "Ange samtliga lösningar till ekvationen med periodterm (som vanligt).",
+   "s": 34.35,
+   "e": 39.77
+  },
+  {
+   "t": "Bestäm de värden på n som ger lösningar i intervallet och ange lösningarna.",
+   "s": 39.77,
+   "e": 45.1
+  },
+  {
+   "t": "Två knep är särskilt användbara när ekvationen inte har standardformen sinus x är lika med a direkt.",
+   "s": 45.1,
+   "e": 52.27
+  },
+  {
+   "t": "Tips",
+   "s": 52.27,
+   "e": 53.85
+  },
+  {
+   "t": "Nollproduktmetoden gäller även för trigonometriska ekvationer: en produkt är noll om (minst) en av faktorerna är noll.",
+   "s": 53.85,
+   "e": 62.26
+  },
+  {
+   "t": "I vissa ekvationer kan vi utnyttja att sinus x delat med cosinus x är lika med tangens x för att eliminera en term med x .",
+   "s": 62.26,
+   "e": 70.67
+  },
+  {
+   "t": "Exempel 1 — lösningar i ett intervall",
+   "s": 70.67,
+   "e": 74.5
+  },
+  {
+   "t": "Lös ekvationen sinus parentesen 3 x plus 30 grader slut parentes är lika med roten ur 3 delat med 2 i intervallet 180 grader är mindre än eller lika med x är mindre än 450 grader .",
+   "s": 74.5,
+   "e": 87.75
+  },
+  {
+   "t": "Vi börjar med att ta fram samtliga lösningar.",
+   "s": 87.75,
+   "e": 91.4
+  },
+  {
+   "t": "Eftersom sinus 60 grader är lika med roten ur 3 delat med 2 ger ekvationen två fall.",
+   "s": 91.4,
+   "e": 97.89
+  },
+  {
+   "t": "Fall 1:",
+   "s": 97.89,
+   "e": 115.36
+  },
+  {
+   "t": "3 x plus 30 grader är lika med 60 grader plus n gånger 360 grader vilket är ekvivalent med att 3 x är lika med 30 grader plus n gånger 360 grader vilket är ekvivalent med att x är lika med 10 grader plus n gånger 120 grader",
+   "s": 97.89,
+   "e": 115.36
+  },
+  {
+   "t": "Fall 2:",
+   "s": 115.36,
+   "e": 128.38
+  },
+  {
+   "t": "3 x plus 30 grader är lika med 180 grader minus 60 grader plus n gånger 360 grader som är lika med 120 grader plus n gånger 360 grader",
+   "s": 115.36,
+   "e": 128.38
+  },
+  {
+   "t": "3 x är lika med 90 grader plus n gånger 360 grader vilket är ekvivalent med att x är lika med 30 grader plus n gånger 120 grader",
+   "s": 128.38,
+   "e": 138.95
+  },
+  {
+   "t": "Nu prövar vi vilka heltal n som ger lösningar i intervallet 180 grader är mindre än eller lika med x är mindre än 450 grader .",
+   "s": 138.95,
+   "e": 148.39
+  },
+  {
+   "t": "I fall 1 ( x är lika med 10 grader plus n gånger 120 grader ) ger n är lika med 2 lösningen x är lika med 250 grader och n är lika med 3 ger x är lika med 370 grader .",
+   "s": 148.39,
+   "e": 161.46
+  },
+  {
+   "t": "I fall 2 ( x är lika med 30 grader plus n gånger 120 grader ) ger n är lika med 2 lösningen x är lika med 270 grader och n är lika med 3 ger x är lika med 390 grader .",
+   "s": 161.46,
+   "e": 174.49
+  },
+  {
+   "t": "Övriga heltal ( n är mindre än eller lika med 1 och n är större än eller lika med 4 ) ger lösningar utanför intervallet.",
+   "s": 174.49,
+   "e": 182.91
+  },
+  {
+   "t": "Svar: 250 grader, 270 grader, 370 grader och 390 grader",
+   "s": 182.91,
+   "e": 190.93
+  },
+  {
+   "t": "Exempel 2 — nollproduktmetoden",
+   "s": 190.93,
+   "e": 194.34
+  },
+  {
+   "t": "Lös ekvationen sinus parentesen 2 x slut parentes gånger cosinus parentesen 3 x slut parentes är lika med 0 .",
+   "s": 194.34,
+   "e": 203.44
+  },
+  {
+   "t": "Vänsterledet är en produkt som ska vara lika med noll.",
+   "s": 203.44,
+   "e": 207.7
+  },
+  {
+   "t": "Enligt nollproduktmetoden är produkten noll om (minst) en av faktorerna är noll, så vi löser sinus parentesen 2 x slut parentes är lika med 0 och cosinus parentesen 3 x slut parentes är lika med 0 var för sig.",
+   "s": 207.7,
+   "e": 221.51
+  },
+  {
+   "t": "sinus parentesen 2 x slut parentes är lika med 0 ger de två fallen",
+   "s": 221.51,
+   "e": 227.38
+  },
+  {
+   "t": "2 x är lika med 0 grader plus n gånger 360 grader vilket är ekvivalent med att x är lika med n gånger 180 grader",
+   "s": 227.38,
+   "e": 236.65
+  },
+  {
+   "t": "2 x är lika med 180 grader plus n gånger 360 grader vilket är ekvivalent med att x är lika med 90 grader plus n gånger 180 grader",
+   "s": 236.65,
+   "e": 247.56
+  },
+  {
+   "t": "Dessa två kan slås ihop till x är lika med n gånger 90 grader (varannan lösning 0 grader, 90 grader, 180 grader, ).",
+   "s": 247.56,
+   "e": 257.1
+  },
+  {
+   "t": "cosinus parentesen 3 x slut parentes är lika med 0 ger",
+   "s": 257.1,
+   "e": 262.5
+  },
+  {
+   "t": "3 x är lika med plus minus 90 grader plus n gånger 360 grader vilket är ekvivalent med att x är lika med plus minus 30 grader plus n gånger 120 grader",
+   "s": 262.5,
+   "e": 274.21
+  },
+  {
+   "t": "Svar: x är lika med n gånger 90 grader och x är lika med plus minus 30 grader plus n gånger 120 grader",
+   "s": 274.21,
+   "e": 282.74
+  },
+  {
+   "t": "Exempel 3 — eliminera en term med tangens",
+   "s": 282.74,
+   "e": 286.74
+  },
+  {
+   "t": "Lös ekvationen 4 cosinus x minus 5 sinus x är lika med 0 .",
+   "s": 286.74,
+   "e": 292.46
+  },
+  {
+   "t": "Vi adderar 5 sinus x till båda led och dividerar sedan båda led med cosinus x :",
+   "s": 292.46,
+   "e": 308.64
+  },
+  {
+   "t": "4 cosinus x är lika med 5 sinus x vilket är ekvivalent med att 4 cosinus x delat med cosinus x är lika med 5 sinus x delat med cosinus x vilket är ekvivalent med att 4 är lika med 5 gånger sinus x delat med cosinus x",
+   "s": 292.46,
+   "e": 314.83
+  },
+  {
+   "t": "Vi utnyttjar att sinus x delat med cosinus x är lika med tangens x , vilket ger",
+   "s": 314.78,
+   "e": 321.18
+  },
+  {
+   "t": "4 är lika med 5 tangens x vilket är ekvivalent med att tangens x är lika med 4 delat med 5 som är lika med 0,8",
+   "s": 321.18,
+   "e": 329.86
+  },
+  {
+   "t": "Tangens har perioden 180 grader , så vi får alla lösningar med en enda periodterm:",
+   "s": 329.86,
+   "e": 348.66
+  },
+  {
+   "t": "x är lika med tangens upphöjt till minus 1 parentesen 0,8 slut parentes som är lika med 38,659 grader som är ungefär lika med 38,7 grader plus n gånger 180 grader",
+   "s": 329.86,
+   "e": 348.66
+  },
+  {
+   "t": "Svar: 38,7 grader plus n gånger 180 grader",
+   "s": 348.66,
+   "e": 354.39
+  }
+ ]
+}

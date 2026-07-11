@@ -1,0 +1,268 @@
+{
+ "id": "ma4-2.14",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "999d27a3928cd836357a2a8a9cc5a56620c77f75",
+ "dur": 434.87,
+ "segments": [
+  {
+   "t": "Kurvritning med hjälp av asymptoter",
+   "s": 0.1,
+   "e": 3.41
+  },
+  {
+   "t": "När vi ska skissa grafen till mer avancerade funktioner, till exempel rationella funktioner, underlättar det om vi först ritar in asymptoterna.",
+   "s": 3.36,
+   "e": 12.24
+  },
+  {
+   "t": "I övrigt följer vi samma procedur som tidigare för när vi skissar grafer, det vill säga att vi gör en teckentabell.",
+   "s": 12.24,
+   "e": 19.29
+  },
+  {
+   "t": "Förutom x -koordinater där derivatan är lika med 0 skriver vi nu även in de x -koordinater där funktionen inte är definierad i teckentabellen (se exemplet längre ned).",
+   "s": 19.29,
+   "e": 30.24
+  },
+  {
+   "t": "Kurvritning med hjälp av asymptoter",
+   "s": 30.24,
+   "e": 33.55
+  },
+  {
+   "t": "Bestäm samtliga asymptoter och strecka dessa i ett koordinatsystem.",
+   "s": 33.55,
+   "e": 38.5
+  },
+  {
+   "t": "Ta fram extrempunkter och gör teckentabell enligt tidigare procedur.",
+   "s": 38.5,
+   "e": 43.46
+  },
+  {
+   "t": "Prova själv hur en rationell funktion av samma typ ser ut.",
+   "s": 43.46,
+   "e": 47.89
+  },
+  {
+   "t": "Dra i reglaget för c och se hur kurvan hela tiden smyger sig mot den sneda asymptoten y är lika med x och den lodräta asymptoten x är lika med 0 .",
+   "s": 47.89,
+   "e": 57.49
+  },
+  {
+   "t": "Med c är lika med 1 får du funktionen i Exempel 1.",
+   "s": 57.49,
+   "e": 61.9
+  },
+  {
+   "t": "Exempel 1 — Skissa grafen till en rationell funktion",
+   "s": 61.9,
+   "e": 66.28
+  },
+  {
+   "t": "Skissa grafen till f av x är lika med x i kvadrat plus 1 delat med x .",
+   "s": 66.28,
+   "e": 72.14
+  },
+  {
+   "t": "Steg 1: Vi börjar med att bestämma samtliga asymptoter.",
+   "s": 72.14,
+   "e": 76.91
+  },
+  {
+   "t": "Vertikala: Uttrycket kan inte förkortas, så vi sätter nämnaren x lika med 0 .",
+   "s": 76.91,
+   "e": 83.11
+  },
+  {
+   "t": "Vi får då x är lika med 0 som vertikal asymptot.",
+   "s": 83.11,
+   "e": 87.62
+  },
+  {
+   "t": "Horisontella: Vi undersöker gränsvärdet då x växer obegränsat:",
+   "s": 87.62,
+   "e": 118.33
+  },
+  {
+   "t": "y är lika med gränsvärdet då x går mot oändligheten parentesen x i kvadrat plus 1 delat med x slut parentes som är lika med gränsvärdet då x går mot oändligheten parentesen x i kvadrat delat med x plus 1 delat med x slut parentes som är lika med gränsvärdet då x går mot oändligheten parentesen x plus 1 delat med x slut parentes som är lika med oändligheten plus 0 som är lika med oändligheten",
+   "s": 87.62,
+   "e": 118.33
+  },
+  {
+   "t": "Gränsvärde saknas vilket ger att horisontell asymptot saknas.",
+   "s": 118.33,
+   "e": 123.44
+  },
+  {
+   "t": "Sneda: Vi skriver om funktionen på formen f av x är lika med parentesen k x plus m slut parentes plus R parentesen x slut parentes genom att dela upp uttrycket i flera termer:",
+   "s": 123.44,
+   "e": 144.55
+  },
+  {
+   "t": "f av x är lika med x i kvadrat plus 1 delat med x som är lika med x i kvadrat delat med x plus 1 delat med x som är lika med x plus 1 delat med x",
+   "s": 123.44,
+   "e": 144.55
+  },
+  {
+   "t": "Vi får då y är lika med x som sned asymptot.",
+   "s": 144.55,
+   "e": 148.81
+  },
+  {
+   "t": "Steg 2: Vi tar fram extrempunkter och gör en teckentabell.",
+   "s": 148.81,
+   "e": 153.68
+  },
+  {
+   "t": "Vi deriverar funktionen och sätter derivatan lika med 0 .",
+   "s": 153.68,
+   "e": 158.44
+  },
+  {
+   "t": "Kvotregeln ger:",
+   "s": 158.44,
+   "e": 178.59
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 2 x gånger x minus parentesen x i kvadrat plus 1 slut parentes gånger 1 delat med x i kvadrat som är lika med 2 x i kvadrat minus x i kvadrat minus 1 delat med x i kvadrat som är lika med x i kvadrat minus 1 delat med x i kvadrat",
+   "s": 158.44,
+   "e": 178.59
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 0 ger:",
+   "s": 178.59,
+   "e": 194.46
+  },
+  {
+   "t": "x i kvadrat minus 1 delat med x i kvadrat är lika med 0 vilket ger att x i kvadrat minus 1 är lika med 0 vilket ger att x i kvadrat är lika med 1 vilket ger att x är lika med plus minus 1",
+   "s": 178.59,
+   "e": 194.46
+  },
+  {
+   "t": "Vi har alltså extrempunkter eller terrasspunkter då x är lika med minus 1 och x är lika med 1 .",
+   "s": 194.46,
+   "e": 201.43
+  },
+  {
+   "t": "Vi sätter in dessa x -koordinater i den ursprungliga funktionen för att få fram tillhörande y -koordinater:",
+   "s": 201.43,
+   "e": 219.95
+  },
+  {
+   "t": "f av minus 1 är lika med parentesen minus 1 slut parentes i kvadrat plus 1 delat med minus 1 som är lika med 1 plus 1 delat med minus 1 som är lika med 2 delat med minus 1 som är lika med minus 2",
+   "s": 201.43,
+   "e": 219.95
+  },
+  {
+   "t": "f av 1 är lika med 1 i kvadrat plus 1 delat med 1 som är lika med 2 delat med 1 som är lika med 2",
+   "s": 219.95,
+   "e": 227.06
+  },
+  {
+   "t": "Punkterna parentesen minus 1, minus 2 slut parentes och parentesen 1, 2 slut parentes är alltså punkter där lutningen är 0 .",
+   "s": 227.06,
+   "e": 236.36
+  },
+  {
+   "t": "Vi undersöker derivatans tecken till vänster och höger om dessa värden — och kring x är lika med 0 , där funktionen inte är definierad — genom att sätta in några provvärden i derivatan f prim parentesen x slut parentes är lika med x i kvadrat minus 1 delat med x i kvadrat :",
+   "s": 236.36,
+   "e": 267.81
+  },
+  {
+   "t": "f prim parentesen minus 2 slut parentes är lika med parentesen minus 2 slut parentes i kvadrat minus 1 delat med parentesen minus 2 slut parentes i kvadrat som är lika med 4 minus 1 delat med 4 som är lika med 3 delat med 4 är större än 0",
+   "s": 236.36,
+   "e": 270.06
+  },
+  {
+   "t": "f prim parentesen minus 0,5 slut parentes är lika med parentesen minus 0,5 slut parentes i kvadrat minus 1 delat med parentesen minus 0,5 slut parentes i kvadrat som är lika med 0,25 minus 1 delat med 0,25 som är lika med minus 0,75 delat med 0,25 är mindre än 0",
+   "s": 270.06,
+   "e": 293.02
+  },
+  {
+   "t": "f prim parentesen 0,5 slut parentes är lika med 0,5 i kvadrat minus 1 delat med 0,5 i kvadrat som är lika med 0,25 minus 1 delat med 0,25 som är lika med minus 0,75 delat med 0,25 är mindre än 0",
+   "s": 292.97,
+   "e": 309.48
+  },
+  {
+   "t": "f prim, ekvation 2 är lika med 2 i kvadrat minus 1 delat med 2 i kvadrat som är lika med 4 minus 1 delat med 4 som är lika med 3 delat med 4 är större än 0",
+   "s": 309.48,
+   "e": 320.71
+  },
+  {
+   "t": "Vi fyller i tecknen och ritar motsvarande pilar på sista raden i tabellen.",
+   "s": 320.71,
+   "e": 325.97
+  },
+  {
+   "t": "Kom ihåg att funktionen inte är definierad för x är lika med 0 (lodrät asymptot):",
+   "s": 325.97,
+   "e": 341.36
+  },
+  {
+   "t": "Vi ser från teckentabellen att vi har en maximipunkt i parentesen minus 1, minus 2 slut parentes och en minimipunkt i parentesen 1, 2 slut parentes .",
+   "s": 325.97,
+   "e": 341.36
+  },
+  {
+   "t": "Till sist ritar vi in krökningarna kring dessa punkter och låter grafens grenar närma sig respektive asymptot allt mer.",
+   "s": 341.36,
+   "e": 348.98
+  },
+  {
+   "t": "Svar: Grafen har den lodräta asymptoten x är lika med 0 och den sneda asymptoten y är lika med x , en maximipunkt i parentesen minus 1, minus 2 slut parentes och en minimipunkt i parentesen 1, 2 slut parentes .",
+   "s": 348.98,
+   "e": 363.93
+  },
+  {
+   "t": "Exempel 2 — Bestäm samtliga asymptoter",
+   "s": 363.93,
+   "e": 367.68
+  },
+  {
+   "t": "Bestäm samtliga asymptoter till g av x är lika med 2 x i kvadrat plus 1 delat med x .",
+   "s": 367.68,
+   "e": 374.57
+  },
+  {
+   "t": "Vertikala: Uttrycket kan inte förkortas, så vi sätter nämnaren lika med 0 och får x är lika med 0 som vertikal asymptot.",
+   "s": 374.57,
+   "e": 382.95
+  },
+  {
+   "t": "Horisontella: Då x växer obegränsat gäller",
+   "s": 382.95,
+   "e": 387.31
+  },
+  {
+   "t": "gränsvärdet då x går mot oändligheten parentesen 2 x i kvadrat plus 1 delat med x slut parentes är lika med gränsvärdet då x går mot oändligheten parentesen 2 x plus 1 delat med x slut parentes som är lika med oändligheten",
+   "s": 387.31,
+   "e": 402.37
+  },
+  {
+   "t": "Gränsvärde saknas, så någon horisontell asymptot finns inte.",
+   "s": 402.37,
+   "e": 407.53
+  },
+  {
+   "t": "Sneda: Vi delar upp uttrycket i termer:",
+   "s": 407.53,
+   "e": 426.42
+  },
+  {
+   "t": "g av x är lika med 2 x i kvadrat plus 1 delat med x som är lika med 2 x i kvadrat delat med x plus 1 delat med x som är lika med 2 x plus 1 delat med x",
+   "s": 407.53,
+   "e": 426.42
+  },
+  {
+   "t": "Resttermen 1 delat med x går mot 0 då x växer, så y är lika med 2 x är sned asymptot.",
+   "s": 407.53,
+   "e": 426.42
+  },
+  {
+   "t": "Svar: Vertikal asymptot x är lika med 0 och sned asymptot y är lika med 2 x ; ingen horisontell asymptot.",
+   "s": 426.42,
+   "e": 434.87
+  }
+ ]
+}

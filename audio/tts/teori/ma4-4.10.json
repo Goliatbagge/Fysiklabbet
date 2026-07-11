@@ -1,0 +1,333 @@
+{
+ "id": "ma4-4.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b047b14e7042e1ce393b03dc00c2c93005f06910",
+ "dur": 500.27,
+ "segments": [
+  {
+   "t": "Eulers formel och talet eᶻ",
+   "s": 0.1,
+   "e": 2.98
+  },
+  {
+   "t": "För att beskriva förhållandet mellan exponentialfunktionen och de trigonometriska funktionerna för ett komplext tal används Eulers formel.",
+   "s": 2.92,
+   "e": 11.46
+  },
+  {
+   "t": "Den knyter ihop två till synes helt olika delar av matematiken — potenser med basen e å ena sidan, och cosinus och sinus å den andra.",
+   "s": 11.46,
+   "e": 20.8
+  },
+  {
+   "t": "Eulers formel",
+   "s": 20.8,
+   "e": 23.04
+  },
+  {
+   "t": "För alla reella tal v gäller e upphöjt till i v är lika med cosinus v plus i sinus v",
+   "s": 23.04,
+   "e": 29.61
+  },
+  {
+   "t": "Troliggörande av Eulers formel",
+   "s": 29.61,
+   "e": 32.89
+  },
+  {
+   "t": "Ett fullständigt bevis av Eulers formel kräver mer avancerad matematik (Maclaurin­utvecklingar).",
+   "s": 32.89,
+   "e": 39.83
+  },
+  {
+   "t": "Vi kan dock troliggöra den genom att visa att de två sidorna har samma grundläggande egenskaper.",
+   "s": 39.83,
+   "e": 46.14
+  },
+  {
+   "t": "Vi låter f av v är lika med e upphöjt till i v och g av v är lika med cosinus v plus i sinus v .",
+   "s": 46.14,
+   "e": 53.42
+  },
+  {
+   "t": "Egenskap 1 — värdet då v är lika med 0 .",
+   "s": 53.42,
+   "e": 57.58
+  },
+  {
+   "t": "Båda funktionerna startar i samma punkt:",
+   "s": 57.58,
+   "e": 71.29
+  },
+  {
+   "t": "f av 0 är lika med e upphöjt till i gånger 0 som är lika med e upphöjt till 0 som är lika med 1 gram av 0 som är lika med cosinus 0 plus i sinus 0 som är lika med 1 plus i gånger 0 som är lika med 1",
+   "s": 57.58,
+   "e": 71.29
+  },
+  {
+   "t": "Egenskap 2 — derivatan.",
+   "s": 71.29,
+   "e": 74.34
+  },
+  {
+   "t": "Båda funktionerna deriveras genom att man multiplicerar den ursprungliga funktionen med talet i :",
+   "s": 74.34,
+   "e": 101.33
+  },
+  {
+   "t": "f prim parentesen v slut parentes är lika med i e upphöjt till i v som är lika med i gånger f av v g prim parentesen v slut parentes som är lika med minus sinus v plus i cosinus v som är lika med i cosinus v plus i i kvadrat sinus v som är lika med i parentesen cosinus v plus i sinus v slut parentes som är lika med i gånger g av v",
+   "s": 74.34,
+   "e": 101.33
+  },
+  {
+   "t": "Två funktioner som startar på samma värde och därefter följer samma deriveringsregel borde vara samma funktion.",
+   "s": 101.33,
+   "e": 108.35
+  },
+  {
+   "t": "Detta troliggör att e upphöjt till i v är lika med cosinus v plus i sinus v .",
+   "s": 108.35,
+   "e": 114.28
+  },
+  {
+   "t": "Eulers identitet",
+   "s": 114.28,
+   "e": 116.85
+  },
+  {
+   "t": "En direkt följd av Eulers formel får vi om vi sätter v är lika med pi .",
+   "s": 116.85,
+   "e": 121.95
+  },
+  {
+   "t": "Eftersom cosinus pi är lika med minus 1 och sinus pi är lika med 0 blir",
+   "s": 121.95,
+   "e": 127.51
+  },
+  {
+   "t": "e upphöjt till i pi är lika med cosinus pi plus i sinus pi som är lika med minus 1 plus 0 som är lika med minus 1",
+   "s": 127.51,
+   "e": 135.56
+  },
+  {
+   "t": "Eulers identitet",
+   "s": 135.56,
+   "e": 138.11
+  },
+  {
+   "t": "e upphöjt till i pi är lika med minus 1 eller e upphöjt till i pi plus 1 som är lika med 0",
+   "s": 138.11,
+   "e": 144.34
+  },
+  {
+   "t": "Eulers identitet betraktas ofta som \"världens vackraste ekvation\", eftersom den på ett förvånansvärt enkelt sätt förenar fem av matematikens mest grundläggande konstanter — 0 , 1 , e , i och pi — från helt olika matematiska grenar i ett enda, elegant samband.",
+   "s": 144.34,
+   "e": 160.59
+  },
+  {
+   "t": "Komplexa tal på exponentiell form",
+   "s": 160.59,
+   "e": 163.97
+  },
+  {
+   "t": "När vi beskriver komplexa tal med basen e kallas det för exponentiell form.",
+   "s": 163.97,
+   "e": 169.54
+  },
+  {
+   "t": "Sedan tidigare vet vi att ett komplext tal på polär form skrivs z är lika med r parentesen cosinus v plus i sinus v slut parentes .",
+   "s": 169.54,
+   "e": 178.93
+  },
+  {
+   "t": "Sätter vi in Eulers formel cosinus v plus i sinus v är lika med e upphöjt till i v i den polära formen får vi den exponentiella formen direkt.",
+   "s": 178.93,
+   "e": 188.26
+  },
+  {
+   "t": "Komplexa tal på exponentiell form",
+   "s": 188.26,
+   "e": 191.66
+  },
+  {
+   "t": "Ett komplext tal z på exponentiell form skrivs z är lika med r e upphöjt till i v där r som är lika med | z | som är lika med roten ur a i kvadrat plus b i kvadrat och v som är lika med arg z",
+   "s": 191.66,
+   "e": 209.21
+  },
+  {
+   "t": "Ett och samma komplexa tal kan alltså skrivas på tre olika sätt, alla med samma belopp r och samma argument v .",
+   "s": 191.66,
+   "e": 209.21
+  },
+  {
+   "t": "Komplexa tal i tre former",
+   "s": 209.21,
+   "e": 212.15
+  },
+  {
+   "t": "z är lika med a plus b i rektangulär form z som är lika med r parentesen cosinus v plus i sinus v slut parentes polär form z som är lika med r e upphöjt till i v exponentiell form",
+   "s": 212.15,
+   "e": 224.6
+  },
+  {
+   "t": "I det komplexa talplanet motsvarar e upphöjt till i v (alltså r är lika med 1 ) en punkt på enhetscirkeln: dess reella del är cosinus v och dess imaginära del är sinus v .",
+   "s": 224.6,
+   "e": 235.8
+  },
+  {
+   "t": "Talet eᶻ för ett komplext z",
+   "s": 235.8,
+   "e": 238.91
+  },
+  {
+   "t": "När exponenten själv är ett komplext tal, z är lika med a plus b i , delar vi upp potensen med potenslagarna: e upphöjt till a plus b i är lika med e upphöjt till a gånger e upphöjt till b i .",
+   "s": 238.91,
+   "e": 250.74
+  },
+  {
+   "t": "Faktorn e upphöjt till a är ett vanligt reellt tal, och e upphöjt till b i skrivs om med Eulers formel (här är r är lika med 1 och vinkeln b ).",
+   "s": 250.74,
+   "e": 260.23
+  },
+  {
+   "t": "Omskrivning från exponentiell till rektangulär form",
+   "s": 260.23,
+   "e": 264.61
+  },
+  {
+   "t": "e upphöjt till a plus b i är lika med e upphöjt till a gånger e upphöjt till b i som är lika med e upphöjt till a parentesen cosinus b plus i sinus b slut parentes",
+   "s": 264.61,
+   "e": 276.79
+  },
+  {
+   "t": "Exempel 1 — Skriv z på formen a + bi",
+   "s": 276.74,
+   "e": 281.01
+  },
+  {
+   "t": "Skriv talen på formen z är lika med a plus b i . . a) z är lika med 4 e upphöjt till i pi delat med 3 b) z är lika med e upphöjt till 4 plus i pi delat med 2 c) z är lika med e upphöjt till i parentesen pi minus 3 i slut parentes",
+   "s": 281.01,
+   "e": 298.56
+  },
+  {
+   "t": "a) Vi jämför z är lika med 4 e upphöjt till i pi delat med 3 med den exponentiella formen z är lika med r e upphöjt till i v och ser att r är lika med 4 och v är lika med pi delat med 3 .",
+   "s": 298.56,
+   "e": 310.44
+  },
+  {
+   "t": "Insättning i den polära formen z är lika med r parentesen cosinus v plus i sinus v slut parentes ger:",
+   "s": 310.44,
+   "e": 337.94
+  },
+  {
+   "t": "z är lika med 4 parentesen cosinus pi delat med 3 plus i sinus pi delat med 3 slut parentes som är lika med 4 parentesen 1 delat med 2 plus i roten ur 3 delat med 2 slut parentes som är lika med 4 gånger 1 delat med 2 plus 4 i roten ur 3 delat med 2 som är lika med 2 plus 2 i roten ur 3",
+   "s": 310.44,
+   "e": 337.94
+  },
+  {
+   "t": "b) Har exponenten en realdel kan den faktoriseras ut som en egen potens enligt potenslagarna.",
+   "s": 337.94,
+   "e": 345.26
+  },
+  {
+   "t": "Faktorn e upphöjt till i pi delat med 2 skrivs på polär form med r är lika med 1 och v är lika med pi delat med 2 :",
+   "s": 345.26,
+   "e": 375.59
+  },
+  {
+   "t": "z är lika med e upphöjt till 4 plus i pi delat med 2 som är lika med e upphöjt till 4 gånger e upphöjt till i pi delat med 2 som är lika med e upphöjt till 4 parentesen cosinus pi delat med 2 plus i sinus pi delat med 2 slut parentes som är lika med e upphöjt till 4 parentesen 0 plus i gånger 1 slut parentes som är lika med e upphöjt till 4 i",
+   "s": 345.26,
+   "e": 375.59
+  },
+  {
+   "t": "c) Vi utvecklar först parentesen i exponenten (kom ihåg att i i kvadrat är lika med minus 1 ):",
+   "s": 345.26,
+   "e": 392.61
+  },
+  {
+   "t": "z är lika med e upphöjt till i parentesen pi minus 3 i slut parentes som är lika med e upphöjt till i pi minus 3 i i kvadrat som är lika med e upphöjt till i pi plus 3 som är lika med e upphöjt till i pi gånger e i kubik",
+   "s": 375.59,
+   "e": 392.61
+  },
+  {
+   "t": "Eulers identitet e upphöjt till i pi är lika med minus 1 ger:",
+   "s": 392.61,
+   "e": 403.76
+  },
+  {
+   "t": "z är lika med parentesen minus 1 slut parentes gånger e i kubik som är lika med minus e i kubik",
+   "s": 392.61,
+   "e": 403.76
+  },
+  {
+   "t": "Svar: a) z är lika med 2 plus 2 i roten ur 3 b) z är lika med e upphöjt till 4 i c) z är lika med minus e i kubik",
+   "s": 403.76,
+   "e": 413.94
+  },
+  {
+   "t": "Exempel 2 — Bestäm en lösning till en ekvation",
+   "s": 413.94,
+   "e": 418.06
+  },
+  {
+   "t": "Bestäm en lösning till e upphöjt till z är lika med minus 3 i .",
+   "s": 418.06,
+   "e": 423.27
+  },
+  {
+   "t": "Vi skriver båda leden på polär form.",
+   "s": 423.27,
+   "e": 426.74
+  },
+  {
+   "t": "I vänsterledet är exponenten komplex, z är lika med a plus b i :",
+   "s": 426.74,
+   "e": 443.93
+  },
+  {
+   "t": "vänsterledet är lika med e upphöjt till z som är lika med e upphöjt till a plus b i som är lika med e upphöjt till a gånger e upphöjt till b i som är lika med e upphöjt till a parentesen cosinus b plus i sinus b slut parentes",
+   "s": 426.74,
+   "e": 443.93
+  },
+  {
+   "t": "Högerledet minus 3 i har beloppet r är lika med | minus 3 i | som är lika med 3 och argumentet v är lika med 3 pi delat med 2 (vinkeln till visaren i det komplexa talplanet):",
+   "s": 443.93,
+   "e": 463.59
+  },
+  {
+   "t": "högerledet är lika med minus 3 i som är lika med 3 parentesen cosinus 3 pi delat med 2 plus i sinus 3 pi delat med 2 slut parentes",
+   "s": 443.93,
+   "e": 463.59
+  },
+  {
+   "t": "Detta ger ekvationen",
+   "s": 463.59,
+   "e": 466.24
+  },
+  {
+   "t": "e upphöjt till a parentesen cosinus b plus i sinus b slut parentes är lika med 3 parentesen cosinus 3 pi delat med 2 plus i sinus 3 pi delat med 2 slut parentes",
+   "s": 466.24,
+   "e": 477.94
+  },
+  {
+   "t": "Identifiering av belopp och argument ger:",
+   "s": 477.94,
+   "e": 489.18
+  },
+  {
+   "t": "e upphöjt till a är lika med 3 vilket är ekvivalent med att a är lika med naturliga logaritmen av 3 och b som är lika med 3 pi delat med 2",
+   "s": 477.94,
+   "e": 489.18
+  },
+  {
+   "t": "Insättning i z är lika med a plus b i ger lösningen.",
+   "s": 489.18,
+   "e": 493.88
+  },
+  {
+   "t": "Svar: z är lika med naturliga logaritmen av 3 plus 3 pi delat med 2 i",
+   "s": 493.88,
+   "e": 500.27
+  }
+ ]
+}

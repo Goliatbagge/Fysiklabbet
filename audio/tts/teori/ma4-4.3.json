@@ -1,0 +1,208 @@
+{
+ "id": "ma4-4.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "f17a778d02e4e6721993e2a9f7474ab4babe6990",
+ "dur": 278.54,
+ "segments": [
+  {
+   "t": "Andragradsekvationer med komplexa rötter",
+   "s": 0.1,
+   "e": 3.7
+  },
+  {
+   "t": "En fullständig andragradsekvation löser vi som vanligt med pq-formeln.",
+   "s": 3.65,
+   "e": 8.82
+  },
+  {
+   "t": "Skillnaden nu är att vi tillåter uttrycket under rottecknet att bli negativt — då blir rötterna komplexa i stället för att ekvationen saknar lösning.",
+   "s": 8.82,
+   "e": 17.82
+  },
+  {
+   "t": "pq-formeln",
+   "s": 17.82,
+   "e": 19.98
+  },
+  {
+   "t": "x i kvadrat plus p x plus q är lika med 0",
+   "s": 19.98,
+   "e": 24.45
+  },
+  {
+   "t": "har lösningarna",
+   "s": 24.45,
+   "e": 26.89
+  },
+  {
+   "t": "x är lika med minus p delat med 2 plus minus roten ur parentesen p delat med 2 slut parentes i kvadrat minus q",
+   "s": 26.89,
+   "e": 47.41
+  },
+  {
+   "t": "Antalet lösningar beror på tecknet hos diskriminanten, det vill säga talet parentesen p delat med 2 slut parentes i kvadrat minus q under rottecknet:",
+   "s": 26.89,
+   "e": 47.41
+  },
+  {
+   "t": "är diskriminanten positiv har ekvationen två reella lösningar,",
+   "s": 26.89,
+   "e": 47.41
+  },
+  {
+   "t": "är den noll har ekvationen en reell lösning (en dubbelrot),",
+   "s": 47.41,
+   "e": 52.69
+  },
+  {
+   "t": "är den negativ har ekvationen två icke-reella (komplexa) lösningar.",
+   "s": 52.69,
+   "e": 58.38
+  },
+  {
+   "t": "Lösningarna kallas också rötter.",
+   "s": 58.38,
+   "e": 61.55
+  },
+  {
+   "t": "Är diskriminanten negativ blir de två rötterna varandras komplexkonjugat, alltså a plus b i och a minus b i .",
+   "s": 61.55,
+   "e": 69.41
+  },
+  {
+   "t": "Exempel 1 — Lös andragradsekvationer med komplexa rötter",
+   "s": 69.41,
+   "e": 74.35
+  },
+  {
+   "t": "Lös ekvationerna. a) z i kvadrat minus 4 z plus 13 är lika med 0 b) z i kvadrat minus 4 i z minus 5 är lika med 0",
+   "s": 74.35,
+   "e": 86.03
+  },
+  {
+   "t": "a) Här är p är lika med minus 4 och q är lika med 13 . pq-formeln ger",
+   "s": 86.03,
+   "e": 93.69
+  },
+  {
+   "t": "z är lika med 2 plus minus roten ur 2 i kvadrat minus 13 z som är lika med 2 plus minus roten ur minus 9 z som är lika med 2 plus minus 3 i",
+   "s": 93.69,
+   "e": 108.46
+  },
+  {
+   "t": "Diskriminanten blev negativ, så vi får två komplexkonjugerade rötter.",
+   "s": 93.69,
+   "e": 108.46
+  },
+  {
+   "t": "Svar: z är lika med 2 plus minus 3 i",
+   "s": 108.46,
+   "e": 117.09
+  },
+  {
+   "t": "b) pq-formeln fungerar även när koefficienterna själva är komplexa.",
+   "s": 108.46,
+   "e": 117.09
+  },
+  {
+   "t": "Här är p är lika med minus 4 i och q är lika med minus 5 , så",
+   "s": 117.09,
+   "e": 122.49
+  },
+  {
+   "t": "z är lika med 2 i plus minus roten ur parentesen 2 i slut parentes i kvadrat plus 5 z som är lika med 2 i plus minus roten ur 4 i i kvadrat plus 5 z som är lika med 2 i plus minus roten ur minus 4 plus 5 z som är lika med 2 i plus minus roten ur 1 z som är lika med 2 i plus minus 1",
+   "s": 122.49,
+   "e": 142.24
+  },
+  {
+   "t": "Svar: z är lika med 2 i plus minus 1",
+   "s": 142.24,
+   "e": 146.82
+  },
+  {
+   "t": "Exempel 2 — Bestäm en okänd koefficient ur en rot",
+   "s": 146.82,
+   "e": 151.47
+  },
+  {
+   "t": "Bestäm talet a så att ekvationen x i kvadrat minus 6 x plus a är lika med 0 får roten x ett är lika med 3 minus 4 i .",
+   "s": 151.47,
+   "e": 160.81
+  },
+  {
+   "t": "Bestäm även ekvationens andra rot.",
+   "s": 160.81,
+   "e": 164.4
+  },
+  {
+   "t": "Eftersom x ett är lika med 3 minus 4 i är en lösning kan vi sätta in den i ekvationen för att bestämma a :",
+   "s": 164.4,
+   "e": 214.7
+  },
+  {
+   "t": "parentesen 3 minus 4 i slut parentes i kvadrat minus 6 parentesen 3 minus 4 i slut parentes plus a är lika med 0 9 minus 24 i plus 16 i i kvadrat minus 18 plus 24 i plus a som är lika med 0 9 minus 24 i minus 16 minus 18 plus 24 i plus a som är lika med 0 minus 25 plus a som är lika med 0 a som är lika med 25",
+   "s": 164.4,
+   "e": 214.7
+  },
+  {
+   "t": "Vi sätter nu in a är lika med 25 i den ursprungliga ekvationen och löser den med pq-formeln för att få den andra roten:",
+   "s": 164.4,
+   "e": 214.7
+  },
+  {
+   "t": "x i kvadrat minus 6 x plus 25 är lika med 0 x som är lika med 3 plus minus roten ur 3 i kvadrat minus 25 x som är lika med 3 plus minus roten ur minus 16 x som är lika med 3 plus minus 4 i",
+   "s": 164.4,
+   "e": 214.7
+  },
+  {
+   "t": "Rötterna är alltså x ett är lika med 3 minus 4 i och x två är lika med 3 plus 4 i — de är varandras komplexkonjugat.",
+   "s": 214.7,
+   "e": 223.54
+  },
+  {
+   "t": "Svar: a är lika med 25 och den andra roten är x två är lika med 3 plus 4 i",
+   "s": 223.54,
+   "e": 232.91
+  },
+  {
+   "t": "Exempel 3 — Villkor för två icke-reella rötter",
+   "s": 223.54,
+   "e": 232.91
+  },
+  {
+   "t": "För vilka värden på talet a har ekvationen x i kvadrat plus a x plus 9 är lika med 0 två icke-reella rötter?",
+   "s": 232.91,
+   "e": 241.0
+  },
+  {
+   "t": "Vi ställer upp pq-formeln för att få fram diskriminanten:",
+   "s": 241.0,
+   "e": 252.56
+  },
+  {
+   "t": "x är lika med minus a delat med 2 plus minus roten ur parentesen a delat med 2 slut parentes i kvadrat minus 9",
+   "s": 241.0,
+   "e": 252.56
+  },
+  {
+   "t": "Ekvationen har två icke-reella rötter precis när diskriminanten (talet under rottecknet) är mindre än 0 :",
+   "s": 252.56,
+   "e": 268.98
+  },
+  {
+   "t": "parentesen a delat med 2 slut parentes i kvadrat minus 9 är mindre än 0 a i kvadrat delat med 4 är mindre än 9 a i kvadrat är mindre än 36",
+   "s": 252.56,
+   "e": 268.98
+  },
+  {
+   "t": "Vilket ger minus 6 är mindre än a är mindre än 6 .",
+   "s": 268.98,
+   "e": 273.73
+  },
+  {
+   "t": "Svar: minus 6 är mindre än a är mindre än 6",
+   "s": 273.73,
+   "e": 278.54
+  }
+ ]
+}

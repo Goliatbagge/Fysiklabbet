@@ -1,0 +1,203 @@
+{
+ "id": "ma4-3.3",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a6aad32e08e3ae4c9fd3ce3f7fe6cb13be6c883a",
+ "dur": 379.44,
+ "segments": [
+  {
+   "t": "Räkneregler för integraler",
+   "s": 0.1,
+   "e": 3.19
+  },
+  {
+   "t": "För att underlätta vissa integralberäkningar, där vi har addition och subtraktion i det uttryck som ska integreras eller där vi har multiplikation med en konstant, finns räkneregler.",
+   "s": 3.14,
+   "e": 13.86
+  },
+  {
+   "t": "De låter oss bryta upp en krånglig integral i flera enklare — precis som motsvarande regler för derivator.",
+   "s": 13.86,
+   "e": 20.88
+  },
+  {
+   "t": "Räkneregler för integraler",
+   "s": 20.88,
+   "e": 24.01
+  },
+  {
+   "t": "integralen av a upphöjt till c f av x d x är lika med integralen av a upphöjt till b f av x d x plus integralen av b upphöjt till c f av x d x, 4 p t integralen av a upphöjt till b bigl parentesen f av x plus g av x bigr slut parentes d x som är lika med integralen av a upphöjt till b f av x d x plus integralen av a upphöjt till b g av x d x, 4 p t integralen av a upphöjt till b bigl parentesen f av x minus g av x bigr slut parentes d x som är lika med integralen av a upphöjt till b f av x d x minus integralen av a upphöjt till b g av x d x, 4 p t integralen av a upphöjt till b k gånger f av x d x som är lika med k gånger integralen av a upphöjt till b f av x d x parentesen k konstant slut parentes",
+   "s": 24.01,
+   "e": 79.99
+  },
+  {
+   "t": "Reglerna säger i tur och ordning att: en integral kan delas upp i delintervall som fogas ihop ( a går mot b går mot c ), att en integral av en summa eller skillnad kan beräknas ledvis, och att en konstant faktor kan brytas ut framför integraltecknet.",
+   "s": 79.99,
+   "e": 95.3
+  },
+  {
+   "t": "Konstanten k får inte innehålla någon variabel — den ska vara oberoende av x .",
+   "s": 95.3,
+   "e": 100.89
+  },
+  {
+   "t": "Byter vi plats på de två integrationsgränserna byter integralen tecken:",
+   "s": 100.89,
+   "e": 116.06
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x är lika med minus integralen av b upphöjt till a f av x d x",
+   "s": 100.89,
+   "e": 116.06
+  },
+  {
+   "t": "Exempel 1 — foga ihop två intervall",
+   "s": 100.89,
+   "e": 116.06
+  },
+  {
+   "t": "Beräkna integralen av noll upphöjt till pi delat med 2 sinus 2 x d x plus integralen av \\pi/2 upphöjt till pi sinus 2 x d x .",
+   "s": 116.06,
+   "e": 128.31
+  },
+  {
+   "t": "Eftersom vi har samma funktion och integrationsgränserna i de två integralerna är sammanhängande ( 0 går mot pi delat med 2 går mot pi ) kan vi teckna dem som en enda integral:",
+   "s": 128.31,
+   "e": 154.55
+  },
+  {
+   "t": "integralen av noll upphöjt till pi delat med 2 sinus 2 x d x plus integralen av \\pi/2 upphöjt till pi sinus 2 x d x är lika med integralen av noll upphöjt till pi sinus 2 x d x",
+   "s": 128.31,
+   "e": 154.55
+  },
+  {
+   "t": "Vi beräknar sedan integralen som vanligt.",
+   "s": 154.55,
+   "e": 158.4
+  },
+  {
+   "t": "En primitiv funktion till sinus 2 x är minus cosinus 2 x delat med 2 :",
+   "s": 158.4,
+   "e": 183.68
+  },
+  {
+   "t": "integralen av noll upphöjt till pi sinus 2 x d x är lika med minus cosinus 2 x delat med 2 noll upphöjt till pi som är lika med minus cosinus 2 pi delat med 2 minus parentesen minus cosinus 0 delat med 2 slut parentes som är lika med minus 1 delat med 2 plus 1 delat med 2 som är lika med 0",
+   "s": 158.4,
+   "e": 183.68
+  },
+  {
+   "t": "Svar: 0",
+   "s": 183.68,
+   "e": 188.62
+  },
+  {
+   "t": "Exempel 2 — bryt ut en konstant faktor",
+   "s": 183.68,
+   "e": 188.62
+  },
+  {
+   "t": "Beräkna integralen av noll upphöjt till pi delat med 2 5 sinus 2 x d x .",
+   "s": 188.62,
+   "e": 195.71
+  },
+  {
+   "t": "Vi \"bryter ut\" faktorn som inte innehåller någon variabel ( 5 ).",
+   "s": 195.71,
+   "e": 200.72
+  },
+  {
+   "t": "Detta ger:",
+   "s": 200.72,
+   "e": 213.65
+  },
+  {
+   "t": "integralen av noll upphöjt till pi delat med 2 5 sinus 2 x d x är lika med 5 gånger integralen av noll upphöjt till pi delat med 2 sinus 2 x d x",
+   "s": 200.72,
+   "e": 213.65
+  },
+  {
+   "t": "Vi beräknar sedan integralen som vanligt:",
+   "s": 213.65,
+   "e": 244.39
+  },
+  {
+   "t": "5 gånger integralen av noll upphöjt till pi delat med 2 sinus 2 x d x är lika med 5 minus cosinus 2 x delat med 2 noll upphöjt till pi delat med 2 som är lika med 5 parentesen minus cosinus pi delat med 2 minus parentesen minus cosinus 0 delat med 2 slut parentes slut parentes, 4 p t som är lika med 5 parentesen 1 delat med 2 plus 1 delat med 2 slut parentes som är lika med 5 gånger 1 som är lika med 5",
+   "s": 213.65,
+   "e": 244.39
+  },
+  {
+   "t": "Svar: 5",
+   "s": 244.39,
+   "e": 249.46
+  },
+  {
+   "t": "Exempel 3 — dela en integral av flera termer",
+   "s": 244.39,
+   "e": 249.46
+  },
+  {
+   "t": "Beräkna integralen av ett i kvadrat parentesen 4 x i kubik plus 5 delat med x slut parentes d x och integralen av ett i kvadrat parentesen 4 x i kubik minus 5 delat med x slut parentes d x .",
+   "s": 249.46,
+   "e": 264.81
+  },
+  {
+   "t": "Funktionsuttrycket som ska integreras består av flera termer.",
+   "s": 264.81,
+   "e": 269.62
+  },
+  {
+   "t": "För att få en mindre komplex beräkning delar vi in den i två enklare integraler:",
+   "s": 269.62,
+   "e": 290.19
+  },
+  {
+   "t": "integralen av ett i kvadrat parentesen 4 x i kubik plus 5 delat med x slut parentes d x är lika med integralen av ett i kvadrat 4 x i kubik d x plus integralen av ett i kvadrat 5 delat med x d x",
+   "s": 269.62,
+   "e": 290.19
+  },
+  {
+   "t": "Vi beräknar varje integral för sig:",
+   "s": 290.19,
+   "e": 301.02
+  },
+  {
+   "t": "integralen av ett i kvadrat 4 x i kubik d x är lika med 4 x upphöjt till 4 delat med 4 ett i kvadrat som är lika med x upphöjt till 4 ett i kvadrat som är lika med 2 upphöjt till 4 minus 1 upphöjt till 4 som är lika med 16 minus 1 som är lika med 15",
+   "s": 290.19,
+   "e": 312.14
+  },
+  {
+   "t": "integralen av ett i kvadrat 5 delat med x d x är lika med Bigl 5 naturliga logaritmen av x Bigr ett i kvadrat som är lika med 5 naturliga logaritmen av 2 minus 5 naturliga logaritmen av 1 som är lika med 5 naturliga logaritmen av 2 minus 0 som är lika med 5 naturliga logaritmen av 2",
+   "s": 312.09,
+   "e": 330.72
+  },
+  {
+   "t": "Vi lägger nu ihop dessa:",
+   "s": 330.72,
+   "e": 344.31
+  },
+  {
+   "t": "integralen av ett i kvadrat 4 x i kubik d x plus integralen av ett i kvadrat 5 delat med x d x är lika med 15 plus 5 naturliga logaritmen av 2",
+   "s": 330.72,
+   "e": 344.31
+  },
+  {
+   "t": "På motsvarande sätt delar vi den andra integralen med subtraktionsregeln.",
+   "s": 344.31,
+   "e": 349.54
+  },
+  {
+   "t": "Med samma delintegraler som ovan blir:",
+   "s": 349.54,
+   "e": 371.53
+  },
+  {
+   "t": "integralen av ett i kvadrat parentesen 4 x i kubik minus 5 delat med x slut parentes d x är lika med integralen av ett i kvadrat 4 x i kubik d x minus integralen av ett i kvadrat 5 delat med x d x som är lika med 15 minus 5 naturliga logaritmen av 2",
+   "s": 349.54,
+   "e": 371.53
+  },
+  {
+   "t": "Svar: 15 plus 5 naturliga logaritmen av 2 respektive 15 minus 5 naturliga logaritmen av 2",
+   "s": 371.53,
+   "e": 379.44
+  }
+ ]
+}

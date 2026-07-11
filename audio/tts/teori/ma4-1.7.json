@@ -1,0 +1,233 @@
+{
+ "id": "ma4-1.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "4cae2d001f4fe7ac952ea042b19a714ce2a54918",
+ "dur": 289.6,
+ "segments": [
+  {
+   "t": "Trigonometriska ettan",
+   "s": 0.1,
+   "e": 2.84
+  },
+  {
+   "t": "Summan av \"kvadraten av sinus för en vinkel\" och \"kvadraten av cosinus för samma vinkel\" är alltid lika med 1.",
+   "s": 2.79,
+   "e": 10.43
+  },
+  {
+   "t": "Detta samband kallas trigonometriska ettan och gäller för varje vinkel v .",
+   "s": 10.43,
+   "e": 15.75
+  },
+  {
+   "t": "Kvadrater av trigonometriska funktioner, till exempel parentesen sinus v slut parentes i kvadrat , skrivs sinus i kvadrat v för att hålla nere antalet parenteser.",
+   "s": 15.75,
+   "e": 26.9
+  },
+  {
+   "t": "Det betyder alltså samma sak: sinus i kvadrat v är lika med parentesen sinus v slut parentes i kvadrat .",
+   "s": 26.9,
+   "e": 34.9
+  },
+  {
+   "t": "Trigonometriska ettan",
+   "s": 34.9,
+   "e": 37.64
+  },
+  {
+   "t": "För alla vinklar v gäller",
+   "s": 37.64,
+   "e": 40.48
+  },
+  {
+   "t": "sinus i kvadrat v plus cosinus i kvadrat v är lika med 1",
+   "s": 40.48,
+   "e": 45.85
+  },
+  {
+   "t": "Bevis med enhetscirkeln",
+   "s": 45.85,
+   "e": 48.74
+  },
+  {
+   "t": "Vi ritar upp en enhetscirkel (radie 1) och en godtycklig vinkel v .",
+   "s": 48.74,
+   "e": 54.04
+  },
+  {
+   "t": "Radien till punkten på cirkeln bildar tillsammans med sina komposanter en rätvinklig triangel.",
+   "s": 54.04,
+   "e": 60.39
+  },
+  {
+   "t": "Punkten på cirkeln har koordinaterna parentesen cosinus v, sinus v slut parentes , så triangelns vågräta katet är cosinus v och dess lodräta katet är sinus v .",
+   "s": 60.39,
+   "e": 71.61
+  },
+  {
+   "t": "Hypotenusan är radien, som är 1.",
+   "s": 71.61,
+   "e": 75.39
+  },
+  {
+   "t": "Med Pythagoras sats ( a i kvadrat plus b i kvadrat är lika med c i kvadrat ) för den rätvinkliga triangeln får vi",
+   "s": 75.39,
+   "e": 83.51
+  },
+  {
+   "t": "parentesen sinus v slut parentes i kvadrat plus parentesen cosinus v slut parentes i kvadrat är lika med 1 i kvadrat",
+   "s": 83.51,
+   "e": 92.3
+  },
+  {
+   "t": "sinus i kvadrat v plus cosinus i kvadrat v är lika med 1",
+   "s": 92.3,
+   "e": 97.78
+  },
+  {
+   "t": "vilket skulle bevisas.",
+   "s": 97.78,
+   "e": 100.34
+  },
+  {
+   "t": "Beviset gäller även för vinklar över 90 grader, där x - och/eller y -koordinaten blir negativ — när koordinaterna kvadreras i Pythagoras sats blir termerna ändå positiva.",
+   "s": 100.34,
+   "e": 112.1
+  },
+  {
+   "t": "Omskrivningar av trigonometriska ettan",
+   "s": 112.1,
+   "e": 115.9
+  },
+  {
+   "t": "Av trigonometriska ettan följer direkt att",
+   "s": 115.9,
+   "e": 119.81
+  },
+  {
+   "t": "sinus i kvadrat v är lika med 1 minus cosinus i kvadrat v",
+   "s": 119.81,
+   "e": 124.92
+  },
+  {
+   "t": "cosinus i kvadrat v är lika med 1 minus sinus i kvadrat v",
+   "s": 124.92,
+   "e": 129.96
+  },
+  {
+   "t": "Ligger vinkeln i en känd kvadrant kan vi använda trigonometriska ettan för att bestämma den ena av sinus v och cosinus v när den andra är given.",
+   "s": 129.96,
+   "e": 138.99
+  },
+  {
+   "t": "När vi drar roten ur får vi två möjliga värden ( plus minus ) — kvadranten avgör vilket tecken som är rätt.",
+   "s": 138.99,
+   "e": 146.56
+  },
+  {
+   "t": "Kom ihåg indelningen: i första kvadranten är både x och y positiva, i andra kvadranten är x negativ och y positiv, i tredje kvadranten är båda negativa och i fjärde kvadranten är x positiv och y negativ.",
+   "s": 146.56,
+   "e": 159.91
+  },
+  {
+   "t": "Exempel 1 — Bestäm cos v från sin v",
+   "s": 159.91,
+   "e": 163.91
+  },
+  {
+   "t": "Vinkeln v ligger i andra kvadranten.",
+   "s": 163.91,
+   "e": 167.22
+  },
+  {
+   "t": "Bestäm cosinus v om sinus v är lika med 0,6 .",
+   "s": 167.22,
+   "e": 172.04
+  },
+  {
+   "t": "Trigonometriska ettan ger",
+   "s": 172.04,
+   "e": 175.09
+  },
+  {
+   "t": "sinus i kvadrat v plus cosinus i kvadrat v är lika med 1",
+   "s": 175.09,
+   "e": 180.55
+  },
+  {
+   "t": "0,6 i kvadrat plus cosinus i kvadrat v är lika med 1",
+   "s": 180.55,
+   "e": 185.99
+  },
+  {
+   "t": "0,36 plus cosinus i kvadrat v är lika med 1 vilket är ekvivalent med att cosinus i kvadrat v är lika med 1 minus 0,36 som är lika med 0,64",
+   "s": 185.99,
+   "e": 197.53
+  },
+  {
+   "t": "cosinus v är lika med plus minus roten ur 0,64 som är lika med plus minus 0,8",
+   "s": 197.53,
+   "e": 204.75
+  },
+  {
+   "t": "Eftersom vinkeln v ligger i andra kvadranten måste cosinus v ( x - koordinaten) vara negativ.",
+   "s": 204.75,
+   "e": 212.19
+  },
+  {
+   "t": "Vi väljer alltså minustecknet.",
+   "s": 212.19,
+   "e": 215.38
+  },
+  {
+   "t": "Svar: cosinus v är lika med minus 0,8",
+   "s": 215.38,
+   "e": 219.96
+  },
+  {
+   "t": "Exempel 2 — Visa en trigonometrisk identitet",
+   "s": 219.96,
+   "e": 224.38
+  },
+  {
+   "t": "Visa att 1 delat med cosinus i kvadrat x minus tangens i kvadrat x är lika med 1 .",
+   "s": 224.38,
+   "e": 231.04
+  },
+  {
+   "t": "Vi utgår från vänsterledet (vänsterledet) och skriver tangens x är lika med sinus x delat med cosinus x , så att tangens i kvadrat x är lika med sinus i kvadrat x delat med cosinus i kvadrat x .",
+   "s": 231.04,
+   "e": 244.16
+  },
+  {
+   "t": "Då får båda termerna samma nämnare:",
+   "s": 244.16,
+   "e": 262.96
+  },
+  {
+   "t": "vänsterledet är lika med 1 delat med cosinus i kvadrat x minus tangens i kvadrat x som är lika med 1 delat med cosinus i kvadrat x minus sinus i kvadrat x delat med cosinus i kvadrat x som är lika med 1 minus sinus i kvadrat x delat med cosinus i kvadrat x",
+   "s": 244.16,
+   "e": 262.96
+  },
+  {
+   "t": "Enligt trigonometriska ettan är 1 minus sinus i kvadrat x är lika med cosinus i kvadrat x , så täljaren kan bytas ut:",
+   "s": 262.96,
+   "e": 278.7
+  },
+  {
+   "t": "vänsterledet är lika med cosinus i kvadrat x delat med cosinus i kvadrat x som är lika med 1 som är lika med högerledet",
+   "s": 262.96,
+   "e": 278.7
+  },
+  {
+   "t": "vilket skulle visas.",
+   "s": 278.7,
+   "e": 281.26
+  },
+  {
+   "t": "Svar: Identiteten är visad, 1 delat med cosinus i kvadrat x minus tangens i kvadrat x är lika med 1 .",
+   "s": 281.26,
+   "e": 289.6
+  }
+ ]
+}

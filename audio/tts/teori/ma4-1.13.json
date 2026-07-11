@@ -1,0 +1,223 @@
+{
+ "id": "ma4-1.13",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "22f0842c74ded0971015a1853cbcac8302f74ed7",
+ "dur": 295.54,
+ "segments": [
+  {
+   "t": "Grafen till y är lika med tan x",
+   "s": 0.1,
+   "e": 3.73
+  },
+  {
+   "t": "Sedan tidigare vet vi att tangens x är lika med sinus x delat med cosinus x .",
+   "s": 3.67,
+   "e": 9.65
+  },
+  {
+   "t": "Ett bråk är inte definierat när nämnaren är 0 , så tangens är inte definierad där cosinus x är lika med 0 .",
+   "s": 9.65,
+   "e": 17.0
+  },
+  {
+   "t": "Det inträffar för",
+   "s": 17.0,
+   "e": 19.46
+  },
+  {
+   "t": "x är lika med plus minus 90 grader plus n gånger 360 grader,",
+   "s": 19.46,
+   "e": 25.49
+  },
+  {
+   "t": "vilket lika gärna kan skrivas x är lika med 90 grader plus n gånger 180 grader .",
+   "s": 25.49,
+   "e": 32.08
+  },
+  {
+   "t": "Det betyder att grafen till y är lika med tangens x har lodräta asymptoter — den \"sticker av\" mot oändligheten just där den inte är definierad, till exempel vid 90 grader , 270 grader och 450 grader .",
+   "s": 32.08,
+   "e": 45.33
+  },
+  {
+   "t": "Mellan två asymptoter upprepas samma form, så tangensfunktionen har perioden 180 grader (eller pi rad).",
+   "s": 45.33,
+   "e": 53.73
+  },
+  {
+   "t": "Dra i grafen nedan och se hur kurvan stiger brant mot varje asymptot och sedan börjar om.",
+   "s": 53.73,
+   "e": 59.77
+  },
+  {
+   "t": "Förskjutningar och perioder beräknas på motsvarande sätt som för sinus- och cosinusfunktioner.",
+   "s": 59.77,
+   "e": 66.21
+  },
+  {
+   "t": "Tangensfunktionen har dock ingen amplitud — en faktor framför tangens tänjer bara kurvan i höjdled, den ändrar varken perioden eller asymptoternas läge.",
+   "s": 66.21,
+   "e": 75.55
+  },
+  {
+   "t": "Period och förskjutning av tan x",
+   "s": 75.55,
+   "e": 84.26
+  },
+  {
+   "t": "Funktionen y är lika med tangens parentesen B x plus C slut parentes plus D",
+   "s": 75.55,
+   "e": 84.26
+  },
+  {
+   "t": "har perioden 180 grader delat med B eller pi delat med B rad,",
+   "s": 84.26,
+   "e": 90.29
+  },
+  {
+   "t": "förskjuts C enheter i x -led (åt vänster för C är större än 0 och åt höger för C är mindre än 0 ),",
+   "s": 90.29,
+   "e": 97.78
+  },
+  {
+   "t": "förskjuts D enheter i y -led (uppåt för D är större än 0 och nedåt för D är mindre än 0 ).",
+   "s": 97.78,
+   "e": 106.72
+  },
+  {
+   "t": "Exempel 1 — var är funktionen odefinierad?",
+   "s": 106.72,
+   "e": 110.81
+  },
+  {
+   "t": "För vilka värden på x är funktionen tangens parentesen 2 x plus pi delat med 3 slut parentes inte definierad?",
+   "s": 110.81,
+   "e": 118.95
+  },
+  {
+   "t": "Vi skriver om funktionen med sinus och cosinus:",
+   "s": 118.95,
+   "e": 135.09
+  },
+  {
+   "t": "tangens parentesen 2 x plus pi delat med 3 slut parentes är lika med sinus parentesen 2 x plus pi delat med 3 slut parentes delat med cosinus parentesen 2 x plus pi delat med 3 slut parentes",
+   "s": 118.95,
+   "e": 135.09
+  },
+  {
+   "t": "Funktionen är inte definierad då nämnaren är 0 .",
+   "s": 135.09,
+   "e": 139.29
+  },
+  {
+   "t": "Vi undersöker alltså när",
+   "s": 139.29,
+   "e": 142.19
+  },
+  {
+   "t": "cosinus parentesen 2 x plus pi delat med 3 slut parentes är lika med 0 vilket är ekvivalent med att 2 x plus pi delat med 3 är lika med plus minus pi delat med 2 plus n gånger 2 pi",
+   "s": 142.19,
+   "e": 154.79
+  },
+  {
+   "t": "Vi löser ut x :",
+   "s": 154.79,
+   "e": 169.05
+  },
+  {
+   "t": "2 x är lika med minus pi delat med 3 plus minus pi delat med 2 plus n gånger 2 pi vilket är ekvivalent med att x är lika med minus pi delat med 6 plus minus pi delat med 4 plus n gånger pi",
+   "s": 154.79,
+   "e": 169.05
+  },
+  {
+   "t": "Med gemensam nämnare 12 blir minus pi delat med 6 är lika med minus 2 pi delat med 12 och pi delat med 4 är lika med 3 pi delat med 12 , så",
+   "s": 169.05,
+   "e": 178.49
+  },
+  {
+   "t": "x ett är lika med minus 2 pi delat med 12 minus 3 pi delat med 12 plus n gånger pi som är lika med minus 5 pi delat med 12 plus n gånger pi",
+   "s": 178.49,
+   "e": 188.29
+  },
+  {
+   "t": "x två är lika med minus 2 pi delat med 12 plus 3 pi delat med 12 plus n gånger pi som är lika med pi delat med 12 plus n gånger pi",
+   "s": 188.29,
+   "e": 197.39
+  },
+  {
+   "t": "Svar: x ett är lika med minus 5 pi delat med 12 plus n gånger pi och x två är lika med pi delat med 12 plus n gånger pi",
+   "s": 197.39,
+   "e": 205.97
+  },
+  {
+   "t": "Exempel 2 — ange perioden",
+   "s": 205.97,
+   "e": 209.18
+  },
+  {
+   "t": "Ange perioden för. a) tangens 5 x b) 3 tangens x delat med 4",
+   "s": 209.18,
+   "e": 216.96
+  },
+  {
+   "t": "Perioden för tangens x är 180 grader .",
+   "s": 216.96,
+   "e": 221.26
+  },
+  {
+   "t": "Vi dividerar med koefficienten B framför x — faktorn framför tangens påverkar inte perioden.",
+   "s": 221.26,
+   "e": 228.0
+  },
+  {
+   "t": "a) Här är B är lika med 5 , så",
+   "s": 228.0,
+   "e": 231.94
+  },
+  {
+   "t": "180 grader delat med 5 är lika med 36 grader",
+   "s": 231.94,
+   "e": 236.88
+  },
+  {
+   "t": "b) Här är B är lika med 1 delat med 4 , så",
+   "s": 236.88,
+   "e": 241.6
+  },
+  {
+   "t": "180 grader delat med 1 delat med 4 är lika med 4 gånger 180 grader som är lika med 720 grader",
+   "s": 241.6,
+   "e": 250.07
+  },
+  {
+   "t": "Svar: a) 36 grader b) 720 grader",
+   "s": 250.07,
+   "e": 255.44
+  },
+  {
+   "t": "Exempel 3 — beskriv förskjutningen",
+   "s": 255.44,
+   "e": 258.82
+  },
+  {
+   "t": "Beskriv hur grafen till funktionen y är lika med tangens parentesen x minus 4 pi delat med 3 slut parentes minus 3 är förskjuten jämfört med grafen till y är lika med tangens x .",
+   "s": 258.82,
+   "e": 270.68
+  },
+  {
+   "t": "Förskjutningar för tangens x gäller på motsvarande sätt som för sinus- och cosinusfunktioner.",
+   "s": 270.68,
+   "e": 277.2
+  },
+  {
+   "t": "Argumentet x minus 4 pi delat med 3 innebär att grafen är förskjuten 4 pi delat med 3 åt höger (eftersom termen är negativ), och termen minus 3 innebär att den är förskjuten 3 steg nedåt.",
+   "s": 277.2,
+   "e": 289.85
+  },
+  {
+   "t": "Svar: 4 pi delat med 3 rad åt höger och 3 enheter nedåt",
+   "s": 289.85,
+   "e": 295.54
+  }
+ ]
+}

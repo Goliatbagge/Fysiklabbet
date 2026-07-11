@@ -1,0 +1,248 @@
+{
+ "id": "ma4-1.12",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "9735235dce48df54dcf8622f832b116292143c80",
+ "dur": 307.38,
+ "segments": [
+  {
+   "t": "Förskjutning i x- och y-led",
+   "s": 0.1,
+   "e": 3.26
+  },
+  {
+   "t": "Att en graf flyttas i ett koordinatsystem, utan att dess utseende i övrigt ändras, kallas förskjutning.",
+   "s": 3.21,
+   "e": 10.36
+  },
+  {
+   "t": "För sinus- och cosinuskurvorna beror förskjutningen på två konstanter: en som flyttar kurvan i y -led och en som flyttar den i x -led.",
+   "s": 10.36,
+   "e": 18.99
+  },
+  {
+   "t": "Förskjutning i y-led",
+   "s": 18.99,
+   "e": 21.55
+  },
+  {
+   "t": "Vi jämför y är lika med sinus x med y är lika med sinus x plus 3 i en värdetabell.",
+   "s": 21.55,
+   "e": 28.1
+  },
+  {
+   "t": "Varje y -koordinat blir 3 större eftersom 3 adderas till varje värde.",
+   "s": 28.1,
+   "e": 33.7
+  },
+  {
+   "t": "Grafiskt motsvarar det att kurvan till y är lika med sinus x plus 3 förskjuts 3 enheter uppåt ( y -led) jämfört med y är lika med sinus x .",
+   "s": 33.7,
+   "e": 43.58
+  },
+  {
+   "t": "På motsvarande sätt förskjuts y är lika med sinus x minus 2 två enheter nedåt jämfört med y är lika med sinus x .",
+   "s": 43.58,
+   "e": 51.7
+  },
+  {
+   "t": "Förskjutning i x-led",
+   "s": 51.7,
+   "e": 54.4
+  },
+  {
+   "t": "Nu jämför vi y är lika med sinus x med y är lika med sinus parentesen x minus 90 grader slut parentes .",
+   "s": 54.4,
+   "e": 62.41
+  },
+  {
+   "t": "Grafen till y är lika med sinus parentesen x minus 90 grader slut parentes förskjuts 90 grader åt höger ( x -led) jämfört med y är lika med sinus x .",
+   "s": 62.41,
+   "e": 73.19
+  },
+  {
+   "t": "Lägg märke till tecknet: ett minustecken inne i argumentet ger förskjutning åt höger.",
+   "s": 73.19,
+   "e": 79.33
+  },
+  {
+   "t": "På motsvarande sätt förskjuts y är lika med sinus parentesen x plus 50 grader slut parentes med 50 grader åt vänster jämfört med y är lika med sinus x .",
+   "s": 79.33,
+   "e": 89.72
+  },
+  {
+   "t": "Förskjutning i x- och y-led",
+   "s": 89.72,
+   "e": 92.9
+  },
+  {
+   "t": "Grafen till",
+   "s": 92.9,
+   "e": 95.01
+  },
+  {
+   "t": "y är lika med sinus parentesen x plus C slut parentes plus D",
+   "s": 95.01,
+   "e": 101.21
+  },
+  {
+   "t": "förskjuts D enheter i y -led och C grader eller radianer i x -led, jämfört med y är lika med sinus x .",
+   "s": 101.21,
+   "e": 109.92
+  },
+  {
+   "t": "Riktningen i x -led bestäms av tecknet på C :",
+   "s": 109.92,
+   "e": 118.79
+  },
+  {
+   "t": "C är större än 0 vilket ger att åt vänster C är mindre än 0 vilket ger att åt höger",
+   "s": 109.92,
+   "e": 118.79
+  },
+  {
+   "t": "Dra i reglagen nedan och se hur C flyttar kurvan i sidled och D flyttar den uppåt eller nedåt.",
+   "s": 118.79,
+   "e": 125.83
+  },
+  {
+   "t": "Ett positivt C skjuter kurvan åt vänster.",
+   "s": 125.83,
+   "e": 129.7
+  },
+  {
+   "t": "Generell form",
+   "s": 129.7,
+   "e": 131.89
+  },
+  {
+   "t": "Samma sak gäller om kurvan också sträcks.",
+   "s": 131.89,
+   "e": 135.61
+  },
+  {
+   "t": "Med alla fyra konstanterna tillsammans skriver vi den generella sinusfunktionen så här.",
+   "s": 135.61,
+   "e": 141.55
+  },
+  {
+   "t": "Generellt för sinus- och cosinusfunktioner",
+   "s": 141.55,
+   "e": 145.29
+  },
+  {
+   "t": "Grafen till",
+   "s": 145.29,
+   "e": 147.41
+  },
+  {
+   "t": "y är lika med A sinus parentesen B x plus C slut parentes plus D",
+   "s": 147.41,
+   "e": 154.16
+  },
+  {
+   "t": "har amplituden | A |",
+   "s": 154.16,
+   "e": 156.78
+  },
+  {
+   "t": "har perioden 360 grader delat med B (eller 2 pi delat med B rad)",
+   "s": 156.78,
+   "e": 163.11
+  },
+  {
+   "t": "förskjuts minus C delat med B grader eller radianer i x -led jämfört med y är lika med A sinus B x",
+   "s": 163.11,
+   "e": 178.22
+  },
+  {
+   "t": "förskjuts D enheter i y -led jämfört med y är lika med A sinus B x",
+   "s": 163.11,
+   "e": 178.22
+  },
+  {
+   "t": "Motsvarande gäller även för cosinusfunktioner.",
+   "s": 163.11,
+   "e": 178.22
+  },
+  {
+   "t": "Eftersom amplituden är | A | ger till exempel A är lika med minus 2 samma amplitud som A är lika med 2 (kurvan speglas bara i jämviktsläget).",
+   "s": 178.22,
+   "e": 187.91
+  },
+  {
+   "t": "Man kan alltså skriva A är lika med minus 2 , men det försvårar oftast tolkningen av de fortsatta beräkningarna — välj därför gärna ett positivt A .",
+   "s": 187.91,
+   "e": 197.07
+  },
+  {
+   "t": "Exempel 1 — Beskriv förskjutningen",
+   "s": 197.07,
+   "e": 200.57
+  },
+  {
+   "t": "Beskriv hur grafen till y är lika med sinus parentesen x plus 45 grader slut parentes minus 12 ser ut jämfört med y är lika med sinus x .",
+   "s": 200.57,
+   "e": 210.53
+  },
+  {
+   "t": "I argumentet står parentesen x plus 45 grader slut parentes .",
+   "s": 210.53,
+   "e": 216.1
+  },
+  {
+   "t": "Eftersom konstanten är positiv ( C är lika med 45 grader är större än 0 ) är kurvan förskjuten 45 grader åt vänster.",
+   "s": 216.1,
+   "e": 224.6
+  },
+  {
+   "t": "Termen minus 12 (alltså D är lika med minus 12 ) innebär att kurvan förskjuts 12 enheter nedåt.",
+   "s": 224.6,
+   "e": 232.21
+  },
+  {
+   "t": "Svar: Jämfört med y är lika med sinus x är grafen förskjuten 45 grader åt vänster och 12 enheter nedåt.",
+   "s": 232.21,
+   "e": 240.44
+  },
+  {
+   "t": "Exempel 2 — Skriv funktionens ekvation",
+   "s": 240.44,
+   "e": 244.4
+  },
+  {
+   "t": "En kurva har samma form som y är lika med sinus x men är förskjuten 30 grader åt höger och 2 enheter uppåt.",
+   "s": 244.4,
+   "e": 252.15
+  },
+  {
+   "t": "Skriv funktionens ekvation på formen y är lika med sinus parentesen x plus C slut parentes plus D .",
+   "s": 252.15,
+   "e": 260.38
+  },
+  {
+   "t": "Förskjutningen uppåt ger y -ledet direkt: D är lika med 2 .",
+   "s": 260.38,
+   "e": 265.81
+  },
+  {
+   "t": "För x -ledet gäller att förskjutning åt höger kräver ett negativt C .",
+   "s": 265.81,
+   "e": 271.07
+  },
+  {
+   "t": "Vill vi flytta kurvan 30 grader åt höger väljer vi alltså C är lika med minus 30 grader , vilket ger argumentet sinus parentesen x minus 30 grader slut parentes .",
+   "s": 271.07,
+   "e": 282.16
+  },
+  {
+   "t": "y är lika med sinus parentesen x plus C slut parentes plus D som är lika med sinus parentesen x plus parentesen minus 30 grader slut parentes slut parentes plus 2 som är lika med sinus parentesen x minus 30 grader slut parentes plus 2",
+   "s": 282.16,
+   "e": 298.64
+  },
+  {
+   "t": "Svar: y är lika med sinus parentesen x minus 30 grader slut parentes plus 2",
+   "s": 298.64,
+   "e": 307.38
+  }
+ ]
+}

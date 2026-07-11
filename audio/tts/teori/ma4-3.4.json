@@ -1,0 +1,238 @@
+{
+ "id": "ma4-3.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a0daac76fdc1e50aa98aad5ce1bb44bc4a40215f",
+ "dur": 367.76,
+ "segments": [
+  {
+   "t": "Arean mellan två kurvor",
+   "s": 0.1,
+   "e": 3.08
+  },
+  {
+   "t": "I förra avsnittet beräknade vi arean mellan en kurva och x -axeln.",
+   "s": 3.02,
+   "e": 8.21
+  },
+  {
+   "t": "Nu tar vi steget vidare och bestämmer arean av ett område som ligger mellan två kurvor.",
+   "s": 8.21,
+   "e": 14.21
+  },
+  {
+   "t": "Metoden är en repetition från Matematik 3.",
+   "s": 14.21,
+   "e": 18.26
+  },
+  {
+   "t": "Tänk dig två kurvor y är lika med f av x och y är lika med g av x där f av x ligger ovanför g av x i ett intervall.",
+   "s": 18.26,
+   "e": 26.25
+  },
+  {
+   "t": "Arean av området mellan dem får vi genom att integrera skillnaden mellan den övre och den undre funktionen.",
+   "s": 26.25,
+   "e": 33.02
+  },
+  {
+   "t": "Area mellan två kurvor",
+   "s": 33.02,
+   "e": 35.94
+  },
+  {
+   "t": "A är lika med integralen av a upphöjt till b parentesen f av x minus g av x slut parentes d x",
+   "s": 35.94,
+   "e": 44.39
+  },
+  {
+   "t": "där f av x är den övre funktionen och g av x den undre.",
+   "s": 44.39,
+   "e": 49.55
+  },
+  {
+   "t": "Ofta ser vi inte direkt mellan vilka x -värden området ligger.",
+   "s": 49.55,
+   "e": 54.33
+  },
+  {
+   "t": "Då börjar vi med att bestämma skärningspunkterna: vi sätter funktionsuttrycken lika och löser ekvationen.",
+   "s": 54.33,
+   "e": 61.2
+  },
+  {
+   "t": "Skärningspunkternas x -koordinater blir integrationens undre och övre gräns, a och b .",
+   "s": 61.2,
+   "e": 67.72
+  },
+  {
+   "t": "Exempel 1 — Area av det skuggade området",
+   "s": 67.72,
+   "e": 71.79
+  },
+  {
+   "t": "Beräkna arean av det skuggade område som begränsas av linjen y är lika med x plus 1 och parabeln y är lika med x i kvadrat minus 5 .",
+   "s": 71.79,
+   "e": 80.9
+  },
+  {
+   "t": "Eftersom vi inte ser mellan vilka x -värden arean ligger börjar vi med att beräkna skärningspunkterna.",
+   "s": 80.9,
+   "e": 87.16
+  },
+  {
+   "t": "Vi sätter funktionsuttrycken lika och löser ekvationen:",
+   "s": 87.16,
+   "e": 94.7
+  },
+  {
+   "t": "x i kvadrat minus 5 är lika med x plus 1",
+   "s": 87.16,
+   "e": 94.7
+  },
+  {
+   "t": "Vi samlar alla termer på ena sidan och löser med p q -formeln:",
+   "s": 94.7,
+   "e": 102.69
+  },
+  {
+   "t": "x i kvadrat minus x minus 6 är lika med 0",
+   "s": 94.7,
+   "e": 102.69
+  },
+  {
+   "t": "x är lika med 1 delat med 2 plus minus roten ur parentesen 1 delat med 2 slut parentes i kvadrat plus 6 som är lika med 1 delat med 2 plus minus roten ur 25 delat med 4 som är lika med 1 delat med 2 plus minus 5 delat med 2",
+   "s": 102.69,
+   "e": 118.15
+  },
+  {
+   "t": "x ett är lika med 1 delat med 2 minus 5 delat med 2 som är lika med minus 2 x två som är lika med 1 delat med 2 plus 5 delat med 2 som är lika med 3",
+   "s": 118.15,
+   "e": 128.36
+  },
+  {
+   "t": "Integrationsgränserna är alltså x är lika med minus 2 och x är lika med 3 .",
+   "s": 128.36,
+   "e": 134.09
+  },
+  {
+   "t": "I intervallet är linjen y är lika med x plus 1 den övre funktionen och parabeln y är lika med x i kvadrat minus 5 den undre, så",
+   "s": 134.09,
+   "e": 143.41
+  },
+  {
+   "t": "A är lika med integralen av minus 2 i kubik parentesen parentesen x plus 1 slut parentes minus parentesen x i kvadrat minus 5 slut parentes slut parentes d x som är lika med integralen av minus 2 i kubik parentesen minus x i kvadrat plus x plus 6 slut parentes d x",
+   "s": 143.41,
+   "e": 163.43
+  },
+  {
+   "t": "Vi bestämmer integralen med primitiva funktioner:",
+   "s": 163.43,
+   "e": 174.57
+  },
+  {
+   "t": "A är lika med minus x i kubik delat med 3 plus x i kvadrat delat med 2 plus 6 x minus 2 i kubik",
+   "s": 163.43,
+   "e": 174.57
+  },
+  {
+   "t": "är lika med parentesen minus 27 delat med 3 plus 9 delat med 2 plus 18 slut parentes minus parentesen 8 delat med 3 plus 2 minus 12 slut parentes som är lika med 27 delat med 2 minus parentesen minus 22 delat med 3 slut parentes som är lika med 81 delat med 6 plus 44 delat med 6 som är lika med 125 delat med 6",
+   "s": 174.57,
+   "e": 197.86
+  },
+  {
+   "t": "Svar: A är lika med 125 delat med 6 areaenheter är ungefär lika med 20,8 areaenheter",
+   "s": 197.86,
+   "e": 206.2
+  },
+  {
+   "t": "Ibland begränsas området av fler än två kurvor.",
+   "s": 206.2,
+   "e": 210.39
+  },
+  {
+   "t": "Då byter den övre (eller undre) funktionen på vägen, och vi måste dela upp arean i flera integraler — en för varje delintervall.",
+   "s": 210.39,
+   "e": 218.96
+  },
+  {
+   "t": "Det lönar sig att förenkla funktionsuttrycken innan man integrerar.",
+   "s": 218.96,
+   "e": 223.79
+  },
+  {
+   "t": "Exempel 2 — Förenkla uttrycken före integrering",
+   "s": 223.79,
+   "e": 228.15
+  },
+  {
+   "t": "Beräkna arean av det skuggade område som begränsas av linjerna y är lika med 2 x , y är lika med x delat med 2 och y är lika med 6 minus x .",
+   "s": 228.15,
+   "e": 237.91
+  },
+  {
+   "t": "Linjerna skär varandra i x är lika med 0 , x är lika med 2 och x är lika med 4 .",
+   "s": 237.91,
+   "e": 244.35
+  },
+  {
+   "t": "I intervallet x är lika med 0 till x är lika med 2 är y är lika med 2 x överfunktion och y är lika med x delat med 2 underfunktion.",
+   "s": 244.35,
+   "e": 253.28
+  },
+  {
+   "t": "I intervallet x är lika med 2 till x är lika med 4 är y är lika med 6 minus x överfunktion och y är lika med x delat med 2 underfunktion.",
+   "s": 253.28,
+   "e": 262.98
+  },
+  {
+   "t": "Vi ställer alltså upp arean som summan av två integraler:",
+   "s": 262.98,
+   "e": 281.51
+  },
+  {
+   "t": "A är lika med integralen av noll i kvadrat parentesen 2 x minus x delat med 2 slut parentes d x plus integralen av två upphöjt till 4 parentesen 6 minus x minus x delat med 2 slut parentes d x",
+   "s": 262.98,
+   "e": 281.51
+  },
+  {
+   "t": "Vi förenklar funktionsuttrycken för att underlätta integreringen:",
+   "s": 281.51,
+   "e": 293.02
+  },
+  {
+   "t": "A är lika med integralen av noll i kvadrat 3 x delat med 2 d x plus integralen av två upphöjt till 4 parentesen 6 minus 3 x delat med 2 slut parentes d x",
+   "s": 281.51,
+   "e": 299.53
+  },
+  {
+   "t": "Vi beräknar en integral i taget:",
+   "s": 299.48,
+   "e": 318.71
+  },
+  {
+   "t": "integralen av noll i kvadrat 3 x delat med 2 d x är lika med 3 x i kvadrat delat med 4 noll i kvadrat som är lika med 3 gånger 2 i kvadrat delat med 4 minus 3 gånger 0 i kvadrat delat med 4 som är lika med 12 delat med 4 minus 0 som är lika med 3",
+   "s": 299.48,
+   "e": 318.71
+  },
+  {
+   "t": "integralen av två upphöjt till 4 parentesen 6 minus 3 x delat med 2 slut parentes d x är lika med 6 x minus 3 x i kvadrat delat med 4 två upphöjt till 4 som är lika med parentesen 24 minus 12 slut parentes minus parentesen 12 minus 3 slut parentes som är lika med 12 minus 9 som är lika med 3",
+   "s": 318.71,
+   "e": 340.0
+  },
+  {
+   "t": "För att få den sammanlagda arean adderar vi dessa, så A är lika med 3 plus 3 som är lika med 6 areaenheter",
+   "s": 340.0,
+   "e": 347.69
+  },
+  {
+   "t": "Svar: A är lika med 6 areaenheter",
+   "s": 347.69,
+   "e": 351.94
+  },
+  {
+   "t": "Har du tillgång till digitalt hjälpmedel kan arean bestämmas direkt: i GeoGebra ger kommandot IntegralMellan(övre funktion, undre funktion, från x-värde, till x-värde) arean mellan kurvorna — exakt i CAS-läget och som närmevärde i standardvyn.",
+   "s": 351.94,
+   "e": 367.76
+  }
+ ]
+}

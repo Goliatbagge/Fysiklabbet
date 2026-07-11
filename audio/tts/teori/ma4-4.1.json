@@ -1,0 +1,198 @@
+{
+ "id": "ma4-4.1",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "cabbb3053b81e56c6d7e5c16da592c8e4f0a2669",
+ "dur": 296.3,
+ "segments": [
+  {
+   "t": "Imaginära och komplexa tal",
+   "s": 0.1,
+   "e": 2.99
+  },
+  {
+   "t": "När vi har ekvationen x i kvadrat är lika med a med lösningen x är lika med plus minus roten ur a har vi tidigare sagt att ekvationen saknar reella lösningar om a är negativt.",
+   "s": 2.94,
+   "e": 13.8
+  },
+  {
+   "t": "Till exempel ekvationen",
+   "s": 13.8,
+   "e": 16.64
+  },
+  {
+   "t": "x i kvadrat är lika med minus 9 vilket ger att x är lika med plus minus roten ur minus 9",
+   "s": 16.64,
+   "e": 23.76
+  },
+  {
+   "t": "saknar reella lösningar — inget reellt tal kan kvadreras till något negativt.",
+   "s": 23.76,
+   "e": 29.59
+  },
+  {
+   "t": "Om vi inför ett nytt tal, i , med egenskapen att i i kvadrat är lika med minus 1 , kan vi ändå hitta lösningar.",
+   "s": 29.59,
+   "e": 37.42
+  },
+  {
+   "t": "Vi försöker igen och skriver om minus 9 som en produkt där minus 1 ingår:",
+   "s": 37.42,
+   "e": 49.26
+  },
+  {
+   "t": "x i kvadrat är lika med minus 9 x i kvadrat som är lika med 9 gånger parentesen minus 1 slut parentes",
+   "s": 37.42,
+   "e": 49.26
+  },
+  {
+   "t": "Eftersom minus 1 är lika med i i kvadrat enligt definitionen kan vi skriva om ekvationen som x i kvadrat är lika med 9 gånger i i kvadrat , och därefter lösa den som vanligt med rotutdragning:",
+   "s": 49.26,
+   "e": 68.24
+  },
+  {
+   "t": "x är lika med plus minus roten ur 9 i i kvadrat x som är lika med plus minus 3 i",
+   "s": 49.26,
+   "e": 68.24
+  },
+  {
+   "t": "Talet i kallas den imaginära enheten.",
+   "s": 49.26,
+   "e": 68.24
+  },
+  {
+   "t": "Imaginära enheten",
+   "s": 68.24,
+   "e": 70.88
+  },
+  {
+   "t": "För den imaginära enheten i gäller i i kvadrat är lika med minus 1",
+   "s": 70.88,
+   "e": 76.29
+  },
+  {
+   "t": "Tal som innehåller talet i kallas imaginära tal och kan ses som motsatsen till reella tal.",
+   "s": 76.29,
+   "e": 82.47
+  },
+  {
+   "t": "Ett tal kan bestå av både en reell del och en imaginär del; dessa skrivs på formen a plus b i , där a är realdelen och b är imaginärdelen.",
+   "s": 82.47,
+   "e": 92.05
+  },
+  {
+   "t": "Alla tal som kan skrivas på formen a plus b i kallas komplexa tal.",
+   "s": 92.05,
+   "e": 97.28
+  },
+  {
+   "t": "Ett tal som endast består av en imaginärdel kallas för ett rent imaginärt tal.",
+   "s": 97.28,
+   "e": 102.83
+  },
+  {
+   "t": "Alla reella tal och alla rent imaginära tal kan skrivas på formen a plus b i (med b är lika med 0 respektive a är lika med 0 ).",
+   "s": 102.83,
+   "e": 112.03
+  },
+  {
+   "t": "Det innebär att de reella talen är en delmängd av de komplexa talen: mängden av komplexa tal C omfattar alla andra talmängder, inklusive de naturliga talen N , heltalen Z , de rationella talen Q och de reella talen R .",
+   "s": 112.03,
+   "e": 126.45
+  },
+  {
+   "t": "Vid beräkningar med imaginära tal gäller våra vanliga räkneregler oavsett om det gäller addition, subtraktion, multiplikation eller division.",
+   "s": 126.45,
+   "e": 135.84
+  },
+  {
+   "t": "Men kom ihåg att i i kvadrat är lika med minus 1 .",
+   "s": 135.84,
+   "e": 140.24
+  },
+  {
+   "t": "Kvadratroten ur negativa tal",
+   "s": 140.24,
+   "e": 143.5
+  },
+  {
+   "t": "En snabbvariant för att dra kvadratroten ur negativa tal är roten ur minus a är lika med roten ur a gånger i Detta innebär till exempel att roten ur minus 9 är lika med roten ur 9 gånger i som är lika med 3 i .",
+   "s": 143.5,
+   "e": 156.49
+  },
+  {
+   "t": "Exempel 1 — Beräkna med imaginära tal",
+   "s": 156.49,
+   "e": 160.47
+  },
+  {
+   "t": "Beräkna. a) 12 i minus 5 i plus 3 i b) parentesen minus 6 i slut parentes gånger parentesen 4 i slut parentes c) 10 i delat med 2 i plus 3 i",
+   "s": 160.47,
+   "e": 174.28
+  },
+  {
+   "t": "Vi använder vanliga räkneregler och kom ihåg att i i kvadrat är lika med minus 1 .",
+   "s": 174.28,
+   "e": 180.2
+  },
+  {
+   "t": "a) 12 i minus 5 i plus 3 i är lika med parentesen 12 minus 5 plus 3 slut parentes i som är lika med 10 i, 4 p t b) parentesen minus 6 i slut parentes gånger parentesen 4 i slut parentes som är lika med minus 24 i i kvadrat som är lika med minus 24 gånger parentesen minus 1 slut parentes som är lika med 24, 4 p t c) 10 i delat med 2 i plus 3 i som är lika med 5 plus 3 i",
+   "s": 180.2,
+   "e": 215.45
+  },
+  {
+   "t": "Svar: a) 10 i b) 24 c) 5 plus 3 i",
+   "s": 180.2,
+   "e": 215.45
+  },
+  {
+   "t": "Exempel 2 — Lös en ekvation med kvadratrot",
+   "s": 180.2,
+   "e": 215.45
+  },
+  {
+   "t": "Lös ekvationen x i kvadrat plus i i kvadrat plus 65 är lika med 0 .",
+   "s": 215.45,
+   "e": 221.74
+  },
+  {
+   "t": "Vi utnyttjar att i i kvadrat är lika med minus 1 , löser därefter ut x i kvadrat och använder sedan rotutdragning.",
+   "s": 221.74,
+   "e": 229.84
+  },
+  {
+   "t": "x i kvadrat plus i i kvadrat plus 65 är lika med 0 x i kvadrat minus 1 plus 65 som är lika med 0 x i kvadrat plus 64 som är lika med 0 x i kvadrat som är lika med minus 64 x som är lika med plus minus roten ur minus 64 som är lika med plus minus roten ur 64 gånger parentesen minus 1 slut parentes som är lika med plus minus roten ur 64 gånger i i kvadrat som är lika med plus minus 8 i",
+   "s": 229.84,
+   "e": 262.94
+  },
+  {
+   "t": "Svar: x är lika med plus minus 8 i",
+   "s": 229.84,
+   "e": 262.94
+  },
+  {
+   "t": "Exempel 3 — Lös en kvadrerad parentes",
+   "s": 229.84,
+   "e": 262.94
+  },
+  {
+   "t": "Lös ekvationen parentesen x plus 9 slut parentes i kvadrat är lika med minus 49 .",
+   "s": 262.94,
+   "e": 270.09
+  },
+  {
+   "t": "Vi drar kvadratroten ur båda led och löser sedan ut x .",
+   "s": 270.09,
+   "e": 274.96
+  },
+  {
+   "t": "parentesen x plus 9 slut parentes i kvadrat är lika med minus 49 x plus 9 som är lika med plus minus roten ur minus 49 som är lika med plus minus 7 i x som är lika med minus 9 plus minus 7 i",
+   "s": 274.96,
+   "e": 291.27
+  },
+  {
+   "t": "Svar: x ett är lika med minus 9 minus 7 i och x två är lika med minus 9 plus 7 i",
+   "s": 274.96,
+   "e": 296.3
+  }
+ ]
+}

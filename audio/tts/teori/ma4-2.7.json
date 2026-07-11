@@ -1,0 +1,273 @@
+{
+ "id": "ma4-2.7",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "6ce5e1e2878a54e01e287fb24036f1e5aaf996a2",
+ "dur": 419.84,
+ "segments": [
+  {
+   "t": "Produktregeln och kvotregeln",
+   "s": 0.1,
+   "e": 3.06
+  },
+  {
+   "t": "När vi deriverar en funktion som består av flera termer (en summa) har vi lärt oss att derivatan ges av termernas respektive derivata — vi \"deriverar termvis\".",
+   "s": 3.01,
+   "e": 13.38
+  },
+  {
+   "t": "Men hur fungerar derivatan av en produkt?",
+   "s": 13.38,
+   "e": 17.07
+  },
+  {
+   "t": "Vi undersöker derivatan till y är lika med 2 x i kubik gånger 5 x i kvadrat .",
+   "s": 17.07,
+   "e": 23.69
+  },
+  {
+   "t": "Om vi, på motsvarande sätt som för en summa, skulle derivera faktor för faktor blir derivatan",
+   "s": 23.69,
+   "e": 30.38
+  },
+  {
+   "t": "y prim är lika med 6 x i kvadrat gånger 10 x som är lika med 60 x i kubik",
+   "s": 30.38,
+   "e": 37.02
+  },
+  {
+   "t": "Vi kontrollerar om det stämmer genom att först skriva om uttrycket, så att vi kan tillämpa tidigare kända deriveringsregler.",
+   "s": 37.02,
+   "e": 44.66
+  },
+  {
+   "t": "Eftersom y är lika med 2 x i kubik gånger 5 x i kvadrat som är lika med 10 x upphöjt till 5 ger potensregeln",
+   "s": 44.66,
+   "e": 53.05
+  },
+  {
+   "t": "y prim är lika med 50 x upphöjt till 4",
+   "s": 53.05,
+   "e": 57.16
+  },
+  {
+   "t": "Den korrekta derivatan är alltså y prim är lika med 50 x upphöjt till 4 .",
+   "s": 57.16,
+   "e": 62.7
+  },
+  {
+   "t": "Den första metoden \"faktor för faktor\" fungerade inte, eftersom 60 x i kubik är inte lika med 50 x upphöjt till 4 .",
+   "s": 62.7,
+   "e": 70.89
+  },
+  {
+   "t": "Regeln för att derivera produkter kallas produktregeln.",
+   "s": 70.89,
+   "e": 75.22
+  },
+  {
+   "t": "Produktregeln",
+   "s": 75.22,
+   "e": 77.33
+  },
+  {
+   "t": "Om y är lika med f av x gånger g av x gäller y prim är lika med f prim parentesen x slut parentes gånger g av x plus f av x gånger g prim parentesen x slut parentes",
+   "s": 77.33,
+   "e": 89.47
+  },
+  {
+   "t": "Vi kontrollerar att produktregeln stämmer för exemplet ovan.",
+   "s": 89.47,
+   "e": 94.3
+  },
+  {
+   "t": "Här är f av x är lika med 2 x i kubik och g av x är lika med 5 x i kvadrat , alltså f prim parentesen x slut parentes är lika med 6 x i kvadrat och g prim parentesen x slut parentes är lika med 10 x .",
+   "s": 94.3,
+   "e": 108.7
+  },
+  {
+   "t": "Produktregeln ger då",
+   "s": 108.7,
+   "e": 111.3
+  },
+  {
+   "t": "y prim är lika med 6 x i kvadrat gånger 5 x i kvadrat plus 2 x i kubik gånger 10 x som är lika med 30 x upphöjt till 4 plus 20 x upphöjt till 4 som är lika med 50 x upphöjt till 4",
+   "s": 111.3,
+   "e": 124.79
+  },
+  {
+   "t": "vilket stämmer överens med det korrekta uttrycket.",
+   "s": 124.79,
+   "e": 128.61
+  },
+  {
+   "t": "Regeln för att derivera kvoter kallas kvotregeln.",
+   "s": 128.61,
+   "e": 132.74
+  },
+  {
+   "t": "Kvotregeln",
+   "s": 132.74,
+   "e": 134.78
+  },
+  {
+   "t": "Om y är lika med f av x delat med g av x gäller y prim är lika med f prim parentesen x slut parentes gånger g av x minus f av x gånger g prim parentesen x slut parentes delat med bigl parentesen g av x bigr slut parentes i kvadrat",
+   "s": 134.78,
+   "e": 150.31
+  },
+  {
+   "t": "Derivatan för tan x",
+   "s": 150.31,
+   "e": 153.2
+  },
+  {
+   "t": "Med kvotregeln kan vi härleda derivatan för tangens x .",
+   "s": 153.2,
+   "e": 157.74
+  },
+  {
+   "t": "Vi skriver tangens x är lika med sinus x delat med cosinus x och sätter f av x är lika med sinus x och g av x är lika med cosinus x , så att f prim parentesen x slut parentes är lika med cosinus x och g prim parentesen x slut parentes är lika med minus sinus x .",
+   "s": 157.74,
+   "e": 175.45
+  },
+  {
+   "t": "Kvotregeln ger",
+   "s": 175.45,
+   "e": 177.81
+  },
+  {
+   "t": "D parentesen tangens x slut parentes är lika med cosinus x gånger cosinus x minus sinus x gånger parentesen minus sinus x slut parentes delat med cosinus i kvadrat x som är lika med cosinus i kvadrat x plus sinus i kvadrat x delat med cosinus i kvadrat x",
+   "s": 177.81,
+   "e": 195.82
+  },
+  {
+   "t": "Med trigonometriska ettan sinus i kvadrat x plus cosinus i kvadrat x är lika med 1 blir täljaren 1 , så D parentesen tangens x slut parentes är lika med 1 delat med cosinus i kvadrat x .",
+   "s": 195.82,
+   "e": 209.3
+  },
+  {
+   "t": "Delar vi i stället upp bråket term för term får vi den andra formen:",
+   "s": 209.3,
+   "e": 229.81
+  },
+  {
+   "t": "cosinus i kvadrat x plus sinus i kvadrat x delat med cosinus i kvadrat x är lika med cosinus i kvadrat x delat med cosinus i kvadrat x plus sinus i kvadrat x delat med cosinus i kvadrat x som är lika med 1 plus tangens i kvadrat x",
+   "s": 209.3,
+   "e": 229.81
+  },
+  {
+   "t": "Derivatan för tan x",
+   "s": 209.3,
+   "e": 229.81
+  },
+  {
+   "t": "Om f av x är lika med tangens x gäller f prim parentesen x slut parentes är lika med 1 delat med cosinus i kvadrat x som är lika med 1 plus tangens i kvadrat x",
+   "s": 229.81,
+   "e": 242.39
+  },
+  {
+   "t": "Exempel 1 — Produktregeln",
+   "s": 229.81,
+   "e": 242.39
+  },
+  {
+   "t": "Derivera y är lika med x i kvadrat gånger sinus 2 x .",
+   "s": 242.39,
+   "e": 247.65
+  },
+  {
+   "t": "Här är f av x är lika med x i kvadrat och g av x är lika med sinus 2 x , alltså f prim parentesen x slut parentes är lika med 2 x och g prim parentesen x slut parentes är lika med 2 cosinus 2 x (kedjeregeln på sinus 2 x ).",
+   "s": 247.65,
+   "e": 264.21
+  },
+  {
+   "t": "Produktregeln ger",
+   "s": 264.21,
+   "e": 266.62
+  },
+  {
+   "t": "y prim är lika med 2 x gånger sinus 2 x plus x i kvadrat gånger 2 cosinus 2 x som är lika med 2 x sinus 2 x plus 2 x i kvadrat cosinus 2 x",
+   "s": 266.62,
+   "e": 285.81
+  },
+  {
+   "t": "Svar: y prim är lika med 2 x sinus 2 x plus 2 x i kvadrat cosinus 2 x",
+   "s": 266.62,
+   "e": 285.81
+  },
+  {
+   "t": "Exempel 2 — Kvotregeln",
+   "s": 266.62,
+   "e": 285.81
+  },
+  {
+   "t": "Derivera y är lika med sinus x delat med 3 x i kvadrat minus 5 .",
+   "s": 285.81,
+   "e": 291.66
+  },
+  {
+   "t": "Här är f av x är lika med sinus x och g av x är lika med 3 x i kvadrat minus 5 , alltså f prim parentesen x slut parentes är lika med cosinus x och g prim parentesen x slut parentes är lika med 6 x .",
+   "s": 291.66,
+   "e": 308.39
+  },
+  {
+   "t": "Kvotregeln ger",
+   "s": 308.34,
+   "e": 310.68
+  },
+  {
+   "t": "y prim är lika med cosinus x parentesen 3 x i kvadrat minus 5 slut parentes minus sinus x gånger 6 x delat med parentesen 3 x i kvadrat minus 5 slut parentes i kvadrat",
+   "s": 310.68,
+   "e": 324.02
+  },
+  {
+   "t": "Svar: y prim är lika med parentesen 3 x i kvadrat minus 5 slut parentes cosinus x minus 6 x sinus x delat med parentesen 3 x i kvadrat minus 5 slut parentes i kvadrat",
+   "s": 324.02,
+   "e": 337.83
+  },
+  {
+   "t": "Exempel 3 — Kvotregeln med e och ln",
+   "s": 337.83,
+   "e": 342.06
+  },
+  {
+   "t": "Derivera y är lika med naturliga logaritmen av x delat med e upphöjt till 2 x .",
+   "s": 342.06,
+   "e": 348.52
+  },
+  {
+   "t": "Här är f av x är lika med naturliga logaritmen av x och g av x är lika med e upphöjt till 2 x , alltså f prim parentesen x slut parentes är lika med 1 delat med x och g prim parentesen x slut parentes är lika med 2 e upphöjt till 2 x .",
+   "s": 348.52,
+   "e": 364.53
+  },
+  {
+   "t": "Kvotregeln ger",
+   "s": 364.53,
+   "e": 366.89
+  },
+  {
+   "t": "y prim är lika med 1 delat med x gånger e upphöjt till 2 x minus naturliga logaritmen av x gånger 2 e upphöjt till 2 x delat med bigl parentesen e upphöjt till 2 x bigr slut parentes i kvadrat",
+   "s": 366.89,
+   "e": 379.71
+  },
+  {
+   "t": "Nämnaren är bigl parentesen e upphöjt till 2 x bigr slut parentes i kvadrat är lika med e upphöjt till 4 x .",
+   "s": 379.71,
+   "e": 387.51
+  },
+  {
+   "t": "Vi bryter ut e upphöjt till 2 x i täljaren och förkortar bort det mot nämnaren:",
+   "s": 387.51,
+   "e": 419.84
+  },
+  {
+   "t": "är lika med e upphöjt till 2 x parentesen 1 delat med x minus 2 naturliga logaritmen av x slut parentes delat med e upphöjt till 4 x som är lika med 1 delat med x minus 2 naturliga logaritmen av x delat med e upphöjt till 2 x som är lika med 1 minus 2 x naturliga logaritmen av x delat med x e upphöjt till 2 x",
+   "s": 387.51,
+   "e": 419.84
+  },
+  {
+   "t": "Svar: y prim är lika med 1 minus 2 x naturliga logaritmen av x delat med x e upphöjt till 2 x",
+   "s": 387.51,
+   "e": 419.84
+  }
+ ]
+}

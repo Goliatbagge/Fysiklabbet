@@ -1,0 +1,213 @@
+{
+ "id": "ma4-4.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "3c7cc471ae750469886ccff3d4003b6cc5a6283e",
+ "dur": 326.87,
+ "segments": [
+  {
+   "t": "Beräkningar med komplexa tal",
+   "s": 0.1,
+   "e": 2.99
+  },
+  {
+   "t": "Ett komplext tal betecknas ofta z .",
+   "s": 2.94,
+   "e": 6.5
+  },
+  {
+   "t": "I det komplexa talet z är lika med a plus b i kallas a för realdelen av z och b för imaginärdelen av z .",
+   "s": 6.5,
+   "e": 14.26
+  },
+  {
+   "t": "Realdelen av z skrivs Re z och imaginärdelen av z skrivs Im z .",
+   "s": 14.26,
+   "e": 20.79
+  },
+  {
+   "t": "För talet z är lika med 3 minus 2 i gäller alltså Re z är lika med 3 och Im z är lika med minus 2 .",
+   "s": 20.79,
+   "e": 28.64
+  },
+  {
+   "t": "Addition, subtraktion och multiplikation av komplexa tal beräknas enligt tidigare räkneregler — vi behandlar i som vilket tal som helst och använder till slut att i i kvadrat är lika med minus 1 .",
+   "s": 28.64,
+   "e": 40.83
+  },
+  {
+   "t": "Till ett komplext tal z är lika med a plus b i är det komplexa talet bar z är lika med a minus b i dess konjugat.",
+   "s": 40.83,
+   "e": 48.75
+  },
+  {
+   "t": "Konjugatet till ett komplext tal fås alltså genom att byta tecken på imaginärdelen.",
+   "s": 48.75,
+   "e": 54.73
+  },
+  {
+   "t": "Vid division av komplexa tal förlänger vi alltid bråket med nämnarens konjugat.",
+   "s": 54.73,
+   "e": 60.64
+  },
+  {
+   "t": "Produkten parentesen a plus b i slut parentes parentesen a minus b i slut parentes är lika med a i kvadrat plus b i kvadrat är nämligen reell, så vi får en division med ett reellt tal och kan därifrån komma vidare.",
+   "s": 60.64,
+   "e": 74.3
+  },
+  {
+   "t": "Realdel, imaginärdel och konjugat",
+   "s": 74.3,
+   "e": 78.3
+  },
+  {
+   "t": "För ett komplext tal z är lika med a plus b i gäller Re z är lika med a, 2 p t Im z som är lika med b, 2 p t bar z som är lika med a minus b i",
+   "s": 78.3,
+   "e": 92.51
+  },
+  {
+   "t": "Exempel 1 — Addition, subtraktion och multiplikation",
+   "s": 78.3,
+   "e": 92.51
+  },
+  {
+   "t": "Beräkna. a) parentesen 7 plus 2 i slut parentes plus parentesen 5 minus 6 i slut parentes b) parentesen 7 minus i slut parentes minus parentesen 10 minus 3 i slut parentes c) parentesen 3 i plus 8 slut parentes parentesen 2 i minus 5 slut parentes",
+   "s": 92.51,
+   "e": 112.62
+  },
+  {
+   "t": "a) Vi tar bort parenteserna och behåller alla tecken inuti parenteserna.",
+   "s": 112.62,
+   "e": 118.1
+  },
+  {
+   "t": "parentesen 7 plus 2 i slut parentes plus parentesen 5 minus 6 i slut parentes är lika med 7 plus 2 i plus 5 minus 6 i som är lika med 12 minus 4 i",
+   "s": 118.1,
+   "e": 134.14
+  },
+  {
+   "t": "b) Vi tar bort parenteserna och skiftar tecken inuti parentesen med minustecken framför.",
+   "s": 118.1,
+   "e": 134.14
+  },
+  {
+   "t": "parentesen 7 minus i slut parentes minus parentesen 10 minus 3 i slut parentes är lika med 7 minus i minus 10 plus 3 i som är lika med minus 3 plus 2 i",
+   "s": 134.14,
+   "e": 150.4
+  },
+  {
+   "t": "c) Vi multiplicerar ihop parenteserna och använder i i kvadrat är lika med minus 1 .",
+   "s": 134.14,
+   "e": 150.4
+  },
+  {
+   "t": "parentesen 3 i plus 8 slut parentes parentesen 2 i minus 5 slut parentes är lika med 3 i gånger 2 i minus 3 i gånger 5 plus 8 gånger 2 i minus 8 gånger 5 som är lika med 6 i i kvadrat minus 15 i plus 16 i minus 40 som är lika med minus 6 minus 15 i plus 16 i minus 40 som är lika med minus 46 plus i",
+   "s": 150.4,
+   "e": 181.93
+  },
+  {
+   "t": "Svar: a) 12 minus 4 i b) minus 3 plus 2 i c) minus 46 plus i",
+   "s": 150.4,
+   "e": 181.93
+  },
+  {
+   "t": "Exempel 2 — Division genom förlängning med konjugatet",
+   "s": 150.4,
+   "e": 181.93
+  },
+  {
+   "t": "Beräkna. a) 5 plus 3 i delat med 4 minus 2 i b) 9 minus 4 i delat med i",
+   "s": 181.93,
+   "e": 195.79
+  },
+  {
+   "t": "a) Vi förlänger bråket med nämnarens konjugat parentesen 4 plus 2 i slut parentes .",
+   "s": 183.72,
+   "e": 195.79
+  },
+  {
+   "t": "Då blir nämnaren reell.",
+   "s": 195.79,
+   "e": 198.6
+  },
+  {
+   "t": "5 plus 3 i delat med 4 minus 2 i är lika med parentesen 5 plus 3 i slut parentes parentesen 4 plus 2 i slut parentes delat med parentesen 4 minus 2 i slut parentes parentesen 4 plus 2 i slut parentes som är lika med 20 plus 10 i plus 12 i plus 6 i i kvadrat delat med 16 minus 4 i i kvadrat, 4 p t som är lika med 20 plus 22 i minus 6 delat med 16 plus 4 som är lika med 14 plus 22 i delat med 20 som är lika med 14 delat med 20 plus 22 delat med 20 i som är lika med 0,7 plus 1,1 i",
+   "s": 198.6,
+   "e": 235.39
+  },
+  {
+   "t": "b) Vi vill bli av med imaginära tal i nämnaren.",
+   "s": 198.6,
+   "e": 238.74
+  },
+  {
+   "t": "Här räcker det att förlänga bråket med i (det hade också fungerat bra att förlänga med minus i ).",
+   "s": 238.74,
+   "e": 244.78
+  },
+  {
+   "t": "9 minus 4 i delat med i är lika med i parentesen 9 minus 4 i slut parentes delat med i gånger i som är lika med 9 i minus 4 i i kvadrat delat med i i kvadrat som är lika med 9 i plus 4 delat med minus 1 som är lika med minus 9 i minus 4 som är lika med minus 4 minus 9 i",
+   "s": 244.78,
+   "e": 267.56
+  },
+  {
+   "t": "Svar: a) 0,7 plus 1,1 i b) minus 4 minus 9 i",
+   "s": 244.78,
+   "e": 267.56
+  },
+  {
+   "t": "Exempel 3 — Bestäm ett komplext tal med identifikation",
+   "s": 267.56,
+   "e": 272.18
+  },
+  {
+   "t": "Lös ekvationen 2 Re z minus z är lika med 5 minus 3 i .",
+   "s": 272.18,
+   "e": 277.89
+  },
+  {
+   "t": "Eftersom vi inte vet vilket det komplexa talet är skriver vi det i generell form som z är lika med a plus b i .",
+   "s": 277.89,
+   "e": 285.06
+  },
+  {
+   "t": "Då gäller Re z är lika med a och Im z är lika med b .",
+   "s": 285.06,
+   "e": 289.88
+  },
+  {
+   "t": "Detta ger",
+   "s": 289.88,
+   "e": 291.89
+  },
+  {
+   "t": "2 a minus parentesen a plus b i slut parentes är lika med 5 minus 3 i",
+   "s": 291.89,
+   "e": 298.35
+  },
+  {
+   "t": "Vi förenklar och bestämmer sedan a och b med identifikation (jämförelse mellan vänsterled och högerled):",
+   "s": 298.35,
+   "e": 316.67
+  },
+  {
+   "t": "2 a minus a minus b i är lika med 5 minus 3 i vilket ger att a minus b i är lika med 5 minus 3 i",
+   "s": 300.8,
+   "e": 316.67
+  },
+  {
+   "t": "Identifikation ger a är lika med 5 och b är lika med 3 .",
+   "s": 300.8,
+   "e": 316.67
+  },
+  {
+   "t": "Insättning i z är lika med a plus b i ger z är lika med 5 plus 3 i .",
+   "s": 316.62,
+   "e": 322.65
+  },
+  {
+   "t": "Svar: z är lika med 5 plus 3 i",
+   "s": 322.65,
+   "e": 326.87
+  }
+ ]
+}

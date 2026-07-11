@@ -1,0 +1,178 @@
+{
+ "id": "ma4-2.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "108b21ace431398022a5400151f4a9312234e5a7",
+ "dur": 261.76,
+ "segments": [
+  {
+   "t": "Tolkningar av derivata",
+   "s": 0.1,
+   "e": 2.9
+  },
+  {
+   "t": "Vi repeterar hur derivatan kan tolkas från Matematik 3.",
+   "s": 2.85,
+   "e": 7.7
+  },
+  {
+   "t": "Innan vi utvidgar derivatan till nya funktionstyper är det värt att påminna sig om vad ett derivatavärde egentligen betyder — både grafiskt och vid tillämpningar.",
+   "s": 7.7,
+   "e": 17.19
+  },
+  {
+   "t": "Grafiskt motsvarar derivatan tangentens lutning (riktningskoefficient eller k -värde) i en punkt.",
+   "s": 17.19,
+   "e": 24.61
+  },
+  {
+   "t": "En tangent är en rät linje som tangerar kurvan i en enda punkt, och derivatans värde i den punkten är just den räta linjens lutning.",
+   "s": 24.61,
+   "e": 32.95
+  },
+  {
+   "t": "Vid tillämpningar gäller att derivatan står för en förändringshastighet.",
+   "s": 32.95,
+   "e": 38.05
+  },
+  {
+   "t": "Har vi till exempel sträckan som funktion av tid, s parentesen t slut parentes , och deriverar, får vi s prim parentesen t slut parentes som står för hur sträckan förändras med tiden — alltså s delat med t , vilket motsvarar en hastighet.",
+   "s": 38.05,
+   "e": 52.88
+  },
+  {
+   "t": "Derivata vid rörelse",
+   "s": 52.88,
+   "e": 55.56
+  },
+  {
+   "t": "s parentesen t slut parentes sträcka som funktion av tid, 2 p t s prim parentesen t slut parentes är lika med v parentesen t slut parentes hastighet som funktion av tid, 2 p t s bis parentesen t slut parentes som är lika med v prim parentesen t slut parentes som är lika med a parentesen t slut parentes acceleration som funktion av tid",
+   "s": 55.56,
+   "e": 77.92
+  },
+  {
+   "t": "Derivatans enhet fås av \"enheten på y -axeln (funktionen, den beroende variabeln)\" per \"enheten på x -axeln (variabeln, den oberoende variabeln)\".",
+   "s": 77.92,
+   "e": 88.89
+  },
+  {
+   "t": "Om till exempel V parentesen t slut parentes står för antalet liter i ett badkar efter t minuter, så gäller att enheten för derivatan V prim parentesen t slut parentes blir liter/minut.",
+   "s": 88.89,
+   "e": 101.72
+  },
+  {
+   "t": "Exempel 1 — Bestäm tangentens ekvation",
+   "s": 101.72,
+   "e": 105.72
+  },
+  {
+   "t": "Bestäm ekvationen för tangenten i punkten där x är lika med 3 på kurvan y är lika med x i kvadrat plus 4 x minus 7 .",
+   "s": 105.72,
+   "e": 114.28
+  },
+  {
+   "t": "En tangent är en rät linje och kan beskrivas med räta linjens ekvation y är lika med k x plus m .",
+   "s": 114.28,
+   "e": 121.53
+  },
+  {
+   "t": "Vi ska bestämma k och m .",
+   "s": 121.53,
+   "e": 124.44
+  },
+  {
+   "t": "k -värdet står för tangentens lutning, som är samma sak som derivatan i punkten då x är lika med 3 , det vill säga k är lika med y prim, ekvation 3 .",
+   "s": 124.44,
+   "e": 134.57
+  },
+  {
+   "t": "Vi deriverar och sätter in x är lika med 3 :",
+   "s": 134.57,
+   "e": 150.61
+  },
+  {
+   "t": "y är lika med x i kvadrat plus 4 x minus 7 y prim som är lika med 2 x plus 4 k som är lika med y prim, ekvation 3 som är lika med 2 gånger 3 plus 4 som är lika med 6 plus 4 som är lika med 10",
+   "s": 134.57,
+   "e": 150.61
+  },
+  {
+   "t": "Insättning av k är lika med 10 i räta linjens ekvation ger y är lika med 10 x plus m .",
+   "s": 150.61,
+   "e": 157.44
+  },
+  {
+   "t": "Vi bestämmer till sist m genom att sätta in en punkt som tangenten går genom.",
+   "s": 157.44,
+   "e": 162.81
+  },
+  {
+   "t": "Tangenten träffar kurvan y är lika med x i kvadrat plus 4 x minus 7 där x är lika med 3 , så vi sätter in x är lika med 3 för att få punktens y -koordinat:",
+   "s": 162.81,
+   "e": 179.88
+  },
+  {
+   "t": "y är lika med 3 i kvadrat plus 4 gånger 3 minus 7 som är lika med 9 plus 12 minus 7 som är lika med 14",
+   "s": 162.81,
+   "e": 179.88
+  },
+  {
+   "t": "Tangenten går alltså genom punkten parentesen 3, 14 slut parentes .",
+   "s": 179.88,
+   "e": 185.53
+  },
+  {
+   "t": "Insättning av x är lika med 3 och y är lika med 14 i y är lika med 10 x plus m ger",
+   "s": 185.53,
+   "e": 192.65
+  },
+  {
+   "t": "14 är lika med 10 gånger 3 plus m 14 som är lika med 30 plus m 14 minus 30 som är lika med m m som är lika med minus 16",
+   "s": 192.65,
+   "e": 202.06
+  },
+  {
+   "t": "Insättning av k är lika med 10 och m är lika med minus 16 i räta linjens ekvation ger tangentens ekvation y är lika med 10 x minus 16 .",
+   "s": 202.06,
+   "e": 211.79
+  },
+  {
+   "t": "Svar: y är lika med 10 x minus 16",
+   "s": 211.79,
+   "e": 216.28
+  },
+  {
+   "t": "Exempel 2 — Tolka ett derivatavärde",
+   "s": 216.28,
+   "e": 220.09
+  },
+  {
+   "t": "Vattenmängden i ett badkar ges av V parentesen t slut parentes liter efter t minuter.",
+   "s": 220.09,
+   "e": 227.01
+  },
+  {
+   "t": "Vad betyder det att V prim, ekvation 3 är lika med 8 ?",
+   "s": 227.01,
+   "e": 231.8
+  },
+  {
+   "t": "Derivatan står för en förändringshastighet, och enheten för V prim parentesen t slut parentes blir liter per minut.",
+   "s": 231.8,
+   "e": 240.14
+  },
+  {
+   "t": "Värdet V prim, ekvation 3 är lika med 8 avläses alltså i punkten där t är lika med 3 .",
+   "s": 240.14,
+   "e": 247.06
+  },
+  {
+   "t": "Det betyder att vid tidpunkten t är lika med 3 minuter ökar vattenmängden i badkaret med takten 8 liter/minut.",
+   "s": 247.06,
+   "e": 255.16
+  },
+  {
+   "t": "Svar: Vid t är lika med 3 minuter ökar vattenmängden med 8 liter/minut.",
+   "s": 255.16,
+   "e": 261.76
+  }
+ ]
+}

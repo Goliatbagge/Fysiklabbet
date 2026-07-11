@@ -1,0 +1,243 @@
+{
+ "id": "ma4-1.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "d42662cbaf5dc7029a118e5e41eb3e464fc2df08",
+ "dur": 358.27,
+ "segments": [
+  {
+   "t": "Enhetscirkeln",
+   "s": 0.1,
+   "e": 2.38
+  },
+  {
+   "t": "En cirkel med radien 1 placerad med medelpunkten i origo kallas enhetscirkel.",
+   "s": 2.33,
+   "e": 8.14
+  },
+  {
+   "t": "Med hjälp av enhetscirkeln kan vi bestämma sinus, cosinus och tangens för vilken vinkel som helst — även för vinklar över 90 grader och för negativa vinklar, inte bara för de spetsiga vinklarna i en rätvinklig triangel.",
+   "s": 8.14,
+   "e": 21.16
+  },
+  {
+   "t": "Om vi låter en sträcka från origo bilda en vinkel v mot den positiva x -axeln fram till cirkelns rand, får vi en rätvinklig triangel där hypotenusan är cirkelns radie — som alltid är lika med 1.",
+   "s": 21.16,
+   "e": 33.01
+  },
+  {
+   "t": "Den punkt parentesen x, y slut parentes där sträckan träffar randen bär då all information om vinkelns trigonometriska värden.",
+   "s": 33.01,
+   "e": 41.65
+  },
+  {
+   "t": "Sinus, cosinus och tangens på enhetscirkeln",
+   "s": 41.65,
+   "e": 46.12
+  },
+  {
+   "t": "Vinkeln v ger en punkt parentesen x, y slut parentes på enhetscirkeln.",
+   "s": 46.12,
+   "e": 51.91
+  },
+  {
+   "t": "För samtliga vinklar v gäller",
+   "s": 51.91,
+   "e": 55.0
+  },
+  {
+   "t": "sinus v är lika med y delat med 1 som är lika med y",
+   "s": 55.0,
+   "e": 68.67
+  },
+  {
+   "t": "cosinus v är lika med x delat med 1 som är lika med x",
+   "s": 55.0,
+   "e": 68.67
+  },
+  {
+   "t": "tangens v är lika med y delat med x som är lika med sinus v delat med cosinus v, cosinus v är inte lika med 0",
+   "s": 55.0,
+   "e": 68.67
+  },
+  {
+   "t": "Punktens koordinat parentesen x, y slut parentes kan alltså skrivas parentesen cosinus v, sinus v slut parentes : sinus är punktens y -koordinat och cosinus är dess x -koordinat.",
+   "s": 68.67,
+   "e": 81.9
+  },
+  {
+   "t": "En vinkel mäts från den positiva x -axeln och vrids moturs det antal grader som anges.",
+   "s": 81.9,
+   "e": 88.22
+  },
+  {
+   "t": "En vinkel över 360 grader innebär att man går ett helt varv och sedan fortsätter — därför ger v och v plus 360 grader samma punkt på cirkeln och samma trigonometriska värden.",
+   "s": 88.22,
+   "e": 99.75
+  },
+  {
+   "t": "En negativ vinkel motsvarar i stället en vridning medurs.",
+   "s": 99.75,
+   "e": 104.55
+  },
+  {
+   "t": "Exakta värden för standardvinklarna",
+   "s": 104.55,
+   "e": 107.71
+  },
+  {
+   "t": "För några särskilt vanliga vinklar går det att ange sinus, cosinus och tangens som exakta värden i stället för avrundade decimaltal.",
+   "s": 107.71,
+   "e": 116.39
+  },
+  {
+   "t": "Dessa värden är värda att känna igen.",
+   "s": 116.39,
+   "e": 119.72
+  },
+  {
+   "t": "Exakta värden för standardvinklar",
+   "s": 119.72,
+   "e": 122.88
+  },
+  {
+   "t": "v 0 grader 30 grader 45 grader 60 grader 90 grader hline sinus v 0 1 delat med 2 roten ur 2 delat med 2 roten ur 3 delat med 2 1, 2 meter m cosinus v 1 roten ur 3 delat med 2 roten ur 2 delat med 2 1 delat med 2 0, 2 meter m tangens v 0 roten ur 3 delat med 3 1 roten ur 3 odef.",
+   "s": 122.88,
+   "e": 143.71
+  },
+  {
+   "t": "Minnesknep: sinusraden är roten ur 0 delat med 2, roten ur 1 delat med 2, roten ur 2 delat med 2, roten ur 3 delat med 2, roten ur 4 delat med 2 — täljarens rot räknar bara upp 0, 1, 2, 3, 4 , och cosinusraden är samma sak baklänges.",
+   "s": 143.71,
+   "e": 161.57
+  },
+  {
+   "t": "Tangens fås ur tangens v är lika med sinus v delat med cosinus v ; vid 90 grader är cosinus v är lika med 0 , så tangens 90 grader är odefinierad.",
+   "s": 161.57,
+   "e": 171.91
+  },
+  {
+   "t": "Exempel 1 — läs av trigonometriska värden i enhetscirkeln",
+   "s": 171.91,
+   "e": 177.06
+  },
+  {
+   "t": "En punkt på enhetscirkeln har koordinaten parentesen 0,51 ; 0,86 slut parentes .",
+   "s": 177.06,
+   "e": 185.0
+  },
+  {
+   "t": "Bestäm a) cosinus v b) sinus v c) tangens v d) v e) sinus 419,3 grader f) sinus parentesen minus 59,3 grader slut parentes .",
+   "s": 185.0,
+   "e": 198.82
+  },
+  {
+   "t": "a) Cosinus är punktens x -koordinat, alltså cosinus v är lika med 0,51 .",
+   "s": 198.82,
+   "e": 206.05
+  },
+  {
+   "t": "b) Sinus är punktens y -koordinat, alltså sinus v är lika med 0,86 .",
+   "s": 206.05,
+   "e": 213.03
+  },
+  {
+   "t": "c) Tangens är kvoten av sinus och cosinus:",
+   "s": 213.03,
+   "e": 228.71
+  },
+  {
+   "t": "tangens v är lika med sinus v delat med cosinus v som är lika med 0,86 delat med 0,51 som är lika med 1,686 som är ungefär lika med 1,69",
+   "s": 213.03,
+   "e": 228.71
+  },
+  {
+   "t": "d) Vinkeln bestäms med en invers funktion, t.ex. utifrån sinus:",
+   "s": 228.71,
+   "e": 248.14
+  },
+  {
+   "t": "sinus v är lika med 0,86 vilket ger att v är lika med sinus upphöjt till minus 1 parentesen 0,86 slut parentes som är lika med 59,316 grader som är ungefär lika med 59,3 grader",
+   "s": 228.71,
+   "e": 248.14
+  },
+  {
+   "t": "e) Vinkeln 419,3 grader är större än 360 grader .",
+   "s": 248.14,
+   "e": 254.46
+  },
+  {
+   "t": "Vi drar bort ett helt varv för att hitta motsvarande vinkel:",
+   "s": 254.46,
+   "e": 271.51
+  },
+  {
+   "t": "sinus 419,3 grader är lika med sinus parentesen 419,3 grader minus 360 grader slut parentes som är lika med sinus 59,3 grader som är lika med 0,86",
+   "s": 254.46,
+   "e": 271.51
+  },
+  {
+   "t": "f) Vinkeln minus 59,3 grader är en vridning 59,3 grader medurs.",
+   "s": 271.51,
+   "e": 278.49
+  },
+  {
+   "t": "Punkten blir då en spegling av punkten i uppgiften i x -axeln, så y -koordinaten byter tecken:",
+   "s": 278.49,
+   "e": 291.01
+  },
+  {
+   "t": "sinus parentesen minus 59,3 grader slut parentes är lika med minus 0,86",
+   "s": 278.49,
+   "e": 291.01
+  },
+  {
+   "t": "Svar: a) 0,51 b) 0,86 c) 1,69 d) 59,3 grader e) 0,86 f) −0,86",
+   "s": 291.01,
+   "e": 303.77
+  },
+  {
+   "t": "Exempel 2 — exakt värde för en standardvinkel",
+   "s": 303.77,
+   "e": 307.81
+  },
+  {
+   "t": "Bestäm det exakta värdet av cosinus 30 grader och kontrollera med enhetscirkeln.",
+   "s": 307.81,
+   "e": 313.5
+  },
+  {
+   "t": "Från tabellen över standardvinklar avläser vi cosinusraden vid 30 grader :",
+   "s": 313.5,
+   "e": 324.35
+  },
+  {
+   "t": "cosinus 30 grader är lika med roten ur 3 delat med 2",
+   "s": 317.72,
+   "e": 324.35
+  },
+  {
+   "t": "Detta är x -koordinaten för den punkt på enhetscirkeln som svarar mot 30 grader .",
+   "s": 324.3,
+   "e": 330.15
+  },
+  {
+   "t": "Som decimaltal blir det",
+   "s": 330.15,
+   "e": 333.04
+  },
+  {
+   "t": "roten ur 3 delat med 2 är lika med 0,866 som är ungefär lika med 0,87",
+   "s": 333.04,
+   "e": 340.45
+  },
+  {
+   "t": "vilket stämmer med att punkten ligger ganska långt åt höger (nära randen i x -led) men bara en bit upp, eftersom sinus 30 grader är lika med 1 delat med 2 .",
+   "s": 340.45,
+   "e": 350.58
+  },
+  {
+   "t": "Svar: cosinus 30 grader är lika med roten ur 3 delat med 2 som är ungefär lika med 0,87",
+   "s": 350.58,
+   "e": 358.27
+  }
+ ]
+}

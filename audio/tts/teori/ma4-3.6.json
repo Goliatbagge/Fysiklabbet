@@ -1,0 +1,283 @@
+{
+ "id": "ma4-3.6",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "c0021a9f829ee04e86d59193f1e4e9de75b9478e",
+ "dur": 467.64,
+ "segments": [
+  {
+   "t": "Täthetsfunktioner",
+   "s": 0.1,
+   "e": 2.54
+  },
+  {
+   "t": "I tidigare mattekurser har du arbetat med tärningar och mynt.",
+   "s": 2.49,
+   "e": 7.0
+  },
+  {
+   "t": "Där finns ett begränsat antal utfall (till exempel 1, 2, 3, 4, 5, 6 ).",
+   "s": 7.0,
+   "e": 15.03
+  },
+  {
+   "t": "Detta kallas för diskreta händelser, och de möjliga utfallen bildar ett diskret utfallsrum.",
+   "s": 15.03,
+   "e": 21.46
+  },
+  {
+   "t": "Sannolikheten beräknade vi med den klassiska sannolikhetsdefinitionen, P av händelse är lika med antalet gynnsamma utfall delat med antalet möjliga utfall .",
+   "s": 21.46,
+   "e": 31.01
+  },
+  {
+   "t": "Men tänk dig i stället att vi mäter tiden det tar innan en glödlampa går sönder.",
+   "s": 31.01,
+   "e": 36.62
+  },
+  {
+   "t": "Tiden kan vara 1000 timmar, eller 1000,5 timmar, eller 1000,523 timmar — det finns oändligt många möjliga värden.",
+   "s": 36.62,
+   "e": 46.27
+  },
+  {
+   "t": "Detta kallas ett kontinuerligt utfallsrum.",
+   "s": 46.27,
+   "e": 49.99
+  },
+  {
+   "t": "Eftersom det finns oändligt många exakta tal är sannolikheten att få exakt ett specifikt värde lika med noll.",
+   "s": 49.99,
+   "e": 57.06
+  },
+  {
+   "t": "Därför tittar vi i stället på sannolikheten att hamna inom ett intervall, till exempel \"hur stor är sannolikheten att personen är mellan 170 centimeter och 180 centimeter ?\".",
+   "s": 57.06,
+   "e": 68.4
+  },
+  {
+   "t": "För att beräkna sannolikheter i ett intervall använder vi en funktion som kallas täthetsfunktion.",
+   "s": 68.4,
+   "e": 74.79
+  },
+  {
+   "t": "Grafen till funktionen visar hur sannolikheten är \"fördelad\", och sannolikheten för ett intervall är arean under grafen.",
+   "s": 74.79,
+   "e": 82.51
+  },
+  {
+   "t": "Sannolikhet med täthetsfunktion",
+   "s": 82.51,
+   "e": 85.88
+  },
+  {
+   "t": "Sannolikheten P att utfallet hamnar mellan talen a och b är lika med arean under grafen (integralen) till täthetsfunktionen f av x mellan dessa punkter: P av a är mindre än eller lika med X är mindre än eller lika med b är lika med integralen av a upphöjt till b f av x d x",
+   "s": 85.88,
+   "e": 103.71
+  },
+  {
+   "t": "En täthetsfunktion måste uppfylla två krav.",
+   "s": 103.71,
+   "e": 107.41
+  },
+  {
+   "t": "Värdet får aldrig vara negativt — en sannolikhet kan inte vara negativ.",
+   "s": 107.41,
+   "e": 112.56
+  },
+  {
+   "t": "Och den totala sannolikheten är 100 procent , så arean under hela kurvan måste vara exakt 1 .",
+   "s": 112.56,
+   "e": 119.5
+  },
+  {
+   "t": "Krav för en täthetsfunktion",
+   "s": 119.5,
+   "e": 122.49
+  },
+  {
+   "t": "f av x är större än eller lika med 0 för alla x och integralen av -\\infty upphöjt till oändligheten f av x d x är lika med 1",
+   "s": 122.49,
+   "e": 133.01
+  },
+  {
+   "t": "Det finns tre vanliga typer av fördelningar.",
+   "s": 133.01,
+   "e": 136.68
+  },
+  {
+   "t": "Vid en likformig sannolikhetsfördelning (rektangel) är sannolikheten lika stor överallt inom ett intervall — grafen är en vågrät linje (ett \"tak\"), och eftersom arean är en rektangel räcker det ofta att räkna bas gånger höjd .",
+   "s": 136.68,
+   "e": 150.0
+  },
+  {
+   "t": "En normalfördelning (klockkurva) är en symmetrisk kulle med toppen vid medelvärdet my ; dess funktion är krånglig och integralen beräknas med digitalt hjälpmedel.",
+   "s": 150.0,
+   "e": 160.29
+  },
+  {
+   "t": "En exponentialfördelning (rutschkana) startar högt och avtar snabbt mot noll, och där kan man ofta räkna för hand med en primitiv funktion.",
+   "s": 160.29,
+   "e": 169.16
+  },
+  {
+   "t": "Figuren visar en likformig fördelning.",
+   "s": 169.16,
+   "e": 172.69
+  },
+  {
+   "t": "Hela rektangelns area är 1 , och den skuggade delen mellan a och b är sannolikheten P av a är mindre än eller lika med X är mindre än eller lika med b .",
+   "s": 172.69,
+   "e": 182.64
+  },
+  {
+   "t": "Exempel 1 — Bestäm konstanten k",
+   "s": 182.64,
+   "e": 194.34
+  },
+  {
+   "t": "Funktionen f av x är lika med k gånger x i kvadrat är definierad i intervallet 0 är mindre än eller lika med x är mindre än eller lika med 3 .",
+   "s": 182.64,
+   "e": 194.34
+  },
+  {
+   "t": "Bestäm värdet på konstanten k så att f av x är en täthetsfunktion.",
+   "s": 194.34,
+   "e": 199.76
+  },
+  {
+   "t": "Villkoret för en täthetsfunktion är att den totala arean under kurvan är 1 .",
+   "s": 199.76,
+   "e": 205.7
+  },
+  {
+   "t": "Vi ställer upp integralen för hela intervallet, sätter den lika med 1 och löser ekvationen.",
+   "s": 205.7,
+   "e": 211.88
+  },
+  {
+   "t": "integralen av noll i kubik k gånger x i kvadrat d x är lika med 1, 4 p t k gånger x i kubik delat med 3 noll i kubik som är lika med 1, 6 p t parentesen k gånger 3 i kubik delat med 3 slut parentes minus parentesen k gånger 0 i kubik delat med 3 slut parentes som är lika med 1, 6 p t k gånger 27 delat med 3 minus 0 som är lika med 1, 4 p t 9 k som är lika med 1, 4 p t k som är lika med 1 delat med 9",
+   "s": 211.88,
+   "e": 241.55
+  },
+  {
+   "t": "Insättning av k är lika med 1 delat med 9 i den ursprungliga funktionen f av x är lika med k gånger x i kvadrat ger",
+   "s": 241.55,
+   "e": 249.79
+  },
+  {
+   "t": "f av x är lika med 1 delat med 9 gånger x i kvadrat som är lika med x i kvadrat delat med 9",
+   "s": 249.79,
+   "e": 257.19
+  },
+  {
+   "t": "Svar: f av x är lika med x i kvadrat delat med 9",
+   "s": 257.19,
+   "e": 262.36
+  },
+  {
+   "t": "Exempel 2 — Livslängd (exponentialfördelning)",
+   "s": 262.36,
+   "e": 266.84
+  },
+  {
+   "t": "Livslängden för en viss elektronisk komponent beskrivs av täthetsfunktionen f av t är lika med 0,0005 gånger e upphöjt till minus 0,0005 t för t är större än eller lika med 0 , där t är tiden i timmar.",
+   "s": 266.84,
+   "e": 281.51
+  },
+  {
+   "t": "Beräkna sannolikheten att komponenten går sönder inom 1000 timmar.",
+   "s": 281.51,
+   "e": 288.49
+  },
+  {
+   "t": "Vi söker sannolikheten P .",
+   "s": 288.44,
+   "e": 291.5
+  },
+  {
+   "t": "Att den går sönder \"inom 1000 timmar\" betyder att tiden t ligger i intervallet mellan 0 och 1000 .",
+   "s": 291.5,
+   "e": 298.37
+  },
+  {
+   "t": "Vi söker alltså arean under kurvan från t är lika med 0 till t är lika med 1000 .",
+   "s": 298.37,
+   "e": 304.63
+  },
+  {
+   "t": "P av 0 är mindre än eller lika med t är mindre än eller lika med 1000 är lika med integralen av noll upphöjt till 1000 0,0005 gånger e upphöjt till minus 0,0005 t d t som är lika med 0,0005 gånger e upphöjt till minus 0,0005 t delat med minus 0,0005 noll upphöjt till 1000, 6 p t som är lika med minus e upphöjt till minus 0,0005 t noll upphöjt till 1000 som är lika med minus e upphöjt till minus 0,0005 gånger 1000 minus parentesen minus e upphöjt till minus 0,0005 gånger 0 slut parentes, 4 p t som är lika med minus e upphöjt till minus 0,5 plus e upphöjt till 0 som är lika med 1 minus e upphöjt till minus 0,5 som är lika med 0,393 som är ungefär lika med 0,39",
+   "s": 304.63,
+   "e": 356.99
+  },
+  {
+   "t": "Svar: Sannolikheten är ungefär 0,39 är lika med 39 procent .",
+   "s": 356.99,
+   "e": 363.52
+  },
+  {
+   "t": "Exempel 3 — Chipspåsar (normalfördelning)",
+   "s": 363.52,
+   "e": 367.99
+  },
+  {
+   "t": "En fabrik fyller påsar med chips.",
+   "s": 367.99,
+   "e": 371.14
+  },
+  {
+   "t": "Maskinen är inställd på att fylla varje påse med 200 gram, men eftersom processen inte är perfekt varierar vikten slumpmässigt enligt en normalfördelning med medelvärdet 200 gram och standardavvikelsen 5 gram.",
+   "s": 371.14,
+   "e": 383.83
+  },
+  {
+   "t": "Beräkna sannolikheten att en slumpmässigt vald chipspåse väger. a) mellan 195 gram och 210 gram b) över 210 gram.",
+   "s": 383.83,
+   "e": 395.27
+  },
+  {
+   "t": "Funktionen för en normalfördelning har ingen enkel primitiv funktion, så här använder vi ett digitalt hjälpmedel (till exempel sannolikhetskalkylatorn i GeoGebra).",
+   "s": 395.27,
+   "e": 405.75
+  },
+  {
+   "t": "Vi väljer \"Normalfördelning\" och fyller i medelvärdet my är lika med 200 och standardavvikelsen sigma är lika med 5 .",
+   "s": 405.75,
+   "e": 413.49
+  },
+  {
+   "t": "a) Vi söker ett slutet intervall och fyller i gränserna 195 och 210 .",
+   "s": 413.49,
+   "e": 419.94
+  },
+  {
+   "t": "Det digitala hjälpmedlet markerar området under klockkurvan och ger sannolikheten",
+   "s": 419.94,
+   "e": 425.77
+  },
+  {
+   "t": "P av 195 är mindre än eller lika med X är mindre än eller lika med 210 är lika med 0,818 som är ungefär lika med 0,82 som är lika med 82 procent",
+   "s": 425.77,
+   "e": 438.19
+  },
+  {
+   "t": "b) Nu söker vi ett öppet intervall uppåt: sannolikheten att vikten är över 210 gram, alltså P av X är större än 210 .",
+   "s": 438.19,
+   "e": 447.85
+  },
+  {
+   "t": "Med samma medelvärde och standardavvikelse avläser hjälpmedlet",
+   "s": 447.85,
+   "e": 452.77
+  },
+  {
+   "t": "P av X är större än 210 är lika med 0,0227 som är ungefär lika med 0,023 som är lika med 2,3 procent",
+   "s": 452.77,
+   "e": 462.39
+  },
+  {
+   "t": "Svar: a) 82 procent b) 2,3 procent",
+   "s": 462.39,
+   "e": 467.64
+  }
+ ]
+}

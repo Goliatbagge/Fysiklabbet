@@ -1,0 +1,273 @@
+{
+ "id": "ma4-2.5",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "3c1bb464bc71a895bff993e2518e6b80ca9a9c79",
+ "dur": 396.36,
+ "segments": [
+  {
+   "t": "Derivatan av sin x och cos x",
+   "s": 0.1,
+   "e": 3.66
+  },
+  {
+   "t": "Vi ska nu derivera trigonometriska funktioner.",
+   "s": 3.61,
+   "e": 7.6
+  },
+  {
+   "t": "Det visar sig att sinus och cosinus deriveras till varandra på ett enkelt och vackert sätt — men bara under ett villkor: vinkeln måste mätas i radianer.",
+   "s": 7.6,
+   "e": 17.06
+  },
+  {
+   "t": "Derivatan av sin x och cos x",
+   "s": 17.06,
+   "e": 20.64
+  },
+  {
+   "t": "Om vinkeln x är i radianer gäller att f av x är lika med sinus x har derivatan f prim parentesen x slut parentes som är lika med cosinus x, 4 p t f av x som är lika med cosinus x har derivatan f prim parentesen x slut parentes som är lika med minus sinus x",
+   "s": 20.64,
+   "e": 39.23
+  },
+  {
+   "t": "OBS!",
+   "s": 20.64,
+   "e": 39.23
+  },
+  {
+   "t": "Om vinkeln mäts i en annan enhet än radianer, till exempel grader, gäller inte deriveringsregeln.",
+   "s": 39.23,
+   "e": 46.29
+  },
+  {
+   "t": "Sambandet syns tydligt i graferna nedan.",
+   "s": 46.29,
+   "e": 50.01
+  },
+  {
+   "t": "Där sinus x har sitt största värde (vid x är lika med pi delat med 2 ) är kurvans lutning noll — och just där är derivatan cosinus x är lika med 0 .",
+   "s": 50.01,
+   "e": 59.74
+  },
+  {
+   "t": "Där sinus x växer som brantast (vid x är lika med 0 ) är cosinus x är lika med 1 .",
+   "s": 59.74,
+   "e": 66.74
+  },
+  {
+   "t": "Härledning — derivatan av sin x",
+   "s": 66.74,
+   "e": 70.29
+  },
+  {
+   "t": "Vi utgår från derivatans definition.",
+   "s": 70.29,
+   "e": 73.94
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 f av x plus h minus f av x delat med h",
+   "s": 73.94,
+   "e": 83.03
+  },
+  {
+   "t": "Med f av x är lika med sinus x blir ändringskvoten",
+   "s": 83.03,
+   "e": 88.0
+  },
+  {
+   "t": "f av x plus h minus f av x delat med h är lika med sinus parentesen x plus h slut parentes minus sinus x delat med h",
+   "s": 88.0,
+   "e": 106.75
+  },
+  {
+   "t": "Additionsformeln för sinus, sinus parentesen x plus h slut parentes är lika med sinus x cosinus h plus cosinus x sinus h , ger",
+   "s": 88.0,
+   "e": 106.75
+  },
+  {
+   "t": "sinus parentesen x plus h slut parentes minus sinus x delat med h är lika med sinus x cosinus h plus cosinus x sinus h minus sinus x delat med h som är lika med sinus x parentesen cosinus h minus 1 slut parentes plus cosinus x sinus h delat med h",
+   "s": 106.75,
+   "e": 124.91
+  },
+  {
+   "t": "Vi delar upp det rationella uttrycket i två termer.",
+   "s": 124.91,
+   "e": 129.04
+  },
+  {
+   "t": "sinus x parentesen cosinus h minus 1 slut parentes plus cosinus x sinus h delat med h är lika med sinus x gånger cosinus h minus 1 delat med h plus cosinus x gånger sinus h delat med h",
+   "s": 129.04,
+   "e": 143.14
+  },
+  {
+   "t": "Nu undersöker vi gränsvärdet till båda dessa termer då h går mot 0 .",
+   "s": 143.14,
+   "e": 148.6
+  },
+  {
+   "t": "En värdetabell (med h i radianer) visar mönstret:",
+   "s": 148.6,
+   "e": 159.46
+  },
+  {
+   "t": "Vi ser att cosinus h minus 1 delat med h går mot 0 och att sinus h delat med h går mot 1 då h går mot 0 .",
+   "s": 148.6,
+   "e": 159.46
+  },
+  {
+   "t": "Detta ger",
+   "s": 159.46,
+   "e": 161.47
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med gränsvärdet då h går mot 0 parentesen sinus x gånger cosinus h minus 1 delat med h plus cosinus x gånger sinus h delat med h slut parentes som är lika med sinus x gånger 0 plus cosinus x gånger 1 som är lika med cosinus x",
+   "s": 161.47,
+   "e": 180.01
+  },
+  {
+   "t": "Så f av x är lika med sinus x har derivatan f prim parentesen x slut parentes är lika med cosinus x . (vsb) På motsvarande sätt kan man visa att cosinus x har derivatan minus sinus x .",
+   "s": 180.01,
+   "e": 195.97
+  },
+  {
+   "t": "Kombinerat med kedjeregeln",
+   "s": 195.97,
+   "e": 198.86
+  },
+  {
+   "t": "När vinkeln är en inre funktion av x — till exempel sinus parentesen k x slut parentes — deriverar vi med kedjeregeln: derivatan av den yttre funktionen gånger den inre derivatan.",
+   "s": 198.86,
+   "e": 210.66
+  },
+  {
+   "t": "Sinus och cosinus av en inre funktion",
+   "s": 210.66,
+   "e": 214.46
+  },
+  {
+   "t": "D parentesen sinus parentesen k x slut parentes slut parentes är lika med cosinus parentesen k x slut parentes gånger k som är lika med k cosinus parentesen k x slut parentes, 4 p t D parentesen cosinus parentesen k x slut parentes slut parentes som är lika med minus sinus parentesen k x slut parentes gånger k som är lika med minus k sinus parentesen k x slut parentes",
+   "s": 214.46,
+   "e": 242.04
+  },
+  {
+   "t": "Exempel 1 — Derivera",
+   "s": 242.04,
+   "e": 244.93
+  },
+  {
+   "t": "Derivera. a) f av x är lika med 7 cosinus x b) f av x är lika med 3 sinus 5 x c) f av x är lika med minus 5 cosinus x delat med 3 d) f av x är lika med sinus i kubik x",
+   "s": 244.93,
+   "e": 263.32
+  },
+  {
+   "t": "a) f av x är lika med 7 cosinus x ger",
+   "s": 246.76,
+   "e": 263.32
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 7 gånger parentesen minus sinus x slut parentes som är lika med minus 7 sinus x",
+   "s": 263.32,
+   "e": 299.02
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med minus 7 sinus x",
+   "s": 263.32,
+   "e": 299.02
+  },
+  {
+   "t": "b) f av x är lika med 3 sinus 5 x ger, med den inre derivatan 5 :",
+   "s": 263.32,
+   "e": 299.02
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 cosinus 5 x gånger 5 som är lika med 15 cosinus 5 x",
+   "s": 263.32,
+   "e": 299.02
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 15 cosinus 5 x",
+   "s": 263.32,
+   "e": 299.02
+  },
+  {
+   "t": "c) f av x är lika med minus 5 cosinus x delat med 3 ger, med den inre derivatan 1 delat med 3 :",
+   "s": 263.32,
+   "e": 306.27
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med minus 5 gånger parentesen minus sinus x delat med 3 slut parentes gånger 1 delat med 3 som är lika med 5 delat med 3 sinus x delat med 3",
+   "s": 299.02,
+   "e": 316.26
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 5 delat med 3 sinus x delat med 3",
+   "s": 316.21,
+   "e": 323.81
+  },
+  {
+   "t": "d) f av x är lika med sinus i kubik x som är lika med parentesen sinus x slut parentes i kubik ger, med den inre derivatan cosinus x :",
+   "s": 323.81,
+   "e": 348.2
+  },
+  {
+   "t": "f prim parentesen x slut parentes är lika med 3 sinus i kvadrat x gånger cosinus x",
+   "s": 323.81,
+   "e": 348.2
+  },
+  {
+   "t": "Svar: f prim parentesen x slut parentes är lika med 3 sinus i kvadrat x gånger cosinus x",
+   "s": 323.81,
+   "e": 348.2
+  },
+  {
+   "t": "Exempel 2 — Lutning i en punkt",
+   "s": 323.81,
+   "e": 348.2
+  },
+  {
+   "t": "Kurvan y är lika med 3 sinus 2 x har en tangent i punkten där x är lika med pi delat med 6 .",
+   "s": 348.2,
+   "e": 355.57
+  },
+  {
+   "t": "Bestäm tangentens lutning (vinkeln i radianer).",
+   "s": 355.57,
+   "e": 359.84
+  },
+  {
+   "t": "Lutningen ges av derivatans värde i punkten.",
+   "s": 359.84,
+   "e": 363.75
+  },
+  {
+   "t": "Vi deriverar med kedjeregeln (inre derivatan 2 ):",
+   "s": 363.75,
+   "e": 377.7
+  },
+  {
+   "t": "y prim är lika med 3 cosinus 2 x gånger 2 som är lika med 6 cosinus 2 x",
+   "s": 363.75,
+   "e": 377.7
+  },
+  {
+   "t": "Sätt in x är lika med pi delat med 6 , så att 2 x är lika med pi delat med 3 .",
+   "s": 363.75,
+   "e": 377.7
+  },
+  {
+   "t": "Eftersom cosinus pi delat med 3 är lika med 1 delat med 2 får vi",
+   "s": 377.7,
+   "e": 382.82
+  },
+  {
+   "t": "y prim parentesen pi delat med 6 slut parentes är lika med 6 cosinus pi delat med 3 som är lika med 6 gånger 1 delat med 2 som är lika med 3",
+   "s": 382.82,
+   "e": 392.79
+  },
+  {
+   "t": "Svar: Tangentens lutning är 3 .",
+   "s": 392.79,
+   "e": 396.36
+  }
+ ]
+}

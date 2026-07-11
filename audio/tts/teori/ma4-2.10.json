@@ -1,0 +1,178 @@
+{
+ "id": "ma4-2.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "efd8405ae6794fecb07e6816f8050f247653e90f",
+ "dur": 219.79,
+ "segments": [
+  {
+   "t": "Extremvärdesproblem med digitala hjälpmedel",
+   "s": 0.1,
+   "e": 3.92
+  },
+  {
+   "t": "Många optimeringsproblem leder till funktioner som är besvärliga eller omöjliga att derivera och lösa för hand.",
+   "s": 3.88,
+   "e": 11.09
+  },
+  {
+   "t": "Då kan vi i stället använda ett digitalt hjälpmedel, till exempel GeoGebra.",
+   "s": 11.09,
+   "e": 16.6
+  },
+  {
+   "t": "Tumregeln är att vi ritar upp grafen till den funktion vi vill optimera och sedan läser av eventuella maximi- och minimipunkter med verktyget för extrempunkter.",
+   "s": 16.6,
+   "e": 26.21
+  },
+  {
+   "t": "Vill vi i stället veta när en storhet förändras som snabbast söker vi det största värdet på förändringshastigheten, alltså på derivatan.",
+   "s": 26.21,
+   "e": 34.75
+  },
+  {
+   "t": "Då låter vi hjälpmedlet derivera funktionen och undersöker derivatans graf.",
+   "s": 34.75,
+   "e": 40.36
+  },
+  {
+   "t": "Så här går vi till väga med ett digitalt hjälpmedel:",
+   "s": 40.36,
+   "e": 47.79
+  },
+  {
+   "t": "Skriv in funktionen som ska optimeras i inmatningsfältet.",
+   "s": 40.36,
+   "e": 47.79
+  },
+  {
+   "t": "Anpassa koordinataxlarna så att hela grafen syns.",
+   "s": 47.79,
+   "e": 52.11
+  },
+  {
+   "t": "Använd verktyget för extrempunkter och klicka på grafen.",
+   "s": 52.11,
+   "e": 56.55
+  },
+  {
+   "t": "Läs av extrempunktens koordinater.",
+   "s": 56.55,
+   "e": 60.15
+  },
+  {
+   "t": "Punktens y -koordinat är det sökta största eller minsta värdet.",
+   "s": 60.15,
+   "e": 65.09
+  },
+  {
+   "t": "Exempel 1 — Maximal koncentration",
+   "s": 65.09,
+   "e": 68.7
+  },
+  {
+   "t": "En ny typ av läkemedel utvecklas.",
+   "s": 68.7,
+   "e": 72.28
+  },
+  {
+   "t": "Efter att en patient tagit en dos är koncentrationen i kroppen K parentesen t slut parentes är lika med 5 t upphöjt till 1,4 gånger e upphöjt till minus 0,25 t plus 1,5 cosinus parentesen 0,8 t slut parentes plus 3 mg/liter, där t är tiden i timmar efter att läkemedlet intagits och t är större än eller lika med 0 .",
+   "s": 72.28,
+   "e": 94.21
+  },
+  {
+   "t": "För att läkemedlet ska vara effektivt men inte giftigt vill läkarna veta den högsta koncentrationen i blodomloppet.",
+   "s": 94.21,
+   "e": 101.54
+  },
+  {
+   "t": "Beräkna den maximala koncentrationen.",
+   "s": 101.54,
+   "e": 105.1
+  },
+  {
+   "t": "Vi skriver in funktionen K parentesen t slut parentes i GeoGebra och anpassar koordinataxlarna så att grafen syns.",
+   "s": 105.1,
+   "e": 113.21
+  },
+  {
+   "t": "Sedan använder vi verktyget för extrempunkter, klickar på grafen och läser av maximipunkten:",
+   "s": 113.21,
+   "e": 124.53
+  },
+  {
+   "t": "A är lika med parentesen 7,09 ; 17,41 slut parentes",
+   "s": 113.21,
+   "e": 124.53
+  },
+  {
+   "t": "Den maximala koncentrationen är y -koordinaten i punkten A .",
+   "s": 124.53,
+   "e": 129.56
+  },
+  {
+   "t": "Svar: Den maximala koncentrationen är ca 17,4 mg per liter .",
+   "s": 129.56,
+   "e": 135.71
+  },
+  {
+   "t": "Grafen till koncentrationen K parentesen t slut parentes i exemplet ser ut så här, med maximipunkten A markerad.",
+   "s": 135.71,
+   "e": 144.18
+  },
+  {
+   "t": "De streckade hjälplinjerna visar hur vi läser av det största värdet på K -axeln.",
+   "s": 144.18,
+   "e": 149.61
+  },
+  {
+   "t": "Exempel 2 — Snabbaste ökningstakten",
+   "s": 149.61,
+   "e": 153.26
+  },
+  {
+   "t": "Samma läkemedel som i exempel 1.",
+   "s": 153.26,
+   "e": 156.68
+  },
+  {
+   "t": "Läkarna vill också veta när läkemedlet absorberas som snabbast, det vill säga när koncentrationen ökar som mest. Bestäm den tidpunkt då koncentrationen ökar snabbast, och ange den maximala ökningstakten.",
+   "s": 156.68,
+   "e": 170.8
+  },
+  {
+   "t": "Ökningstakten är förändringshastigheten, alltså derivatan K prim parentesen t slut parentes .",
+   "s": 170.8,
+   "e": 177.93
+  },
+  {
+   "t": "Störst ökning inträffar där K prim parentesen t slut parentes har sitt största värde.",
+   "s": 177.93,
+   "e": 184.36
+  },
+  {
+   "t": "Vi låter GeoGebra derivera funktionen och ritar upp derivatans graf.",
+   "s": 184.36,
+   "e": 189.9
+  },
+  {
+   "t": "Eftersom modellen bara gäller för t är större än eller lika med 0 letar vi efter derivatans maximipunkt i det området och läser av:",
+   "s": 189.9,
+   "e": 203.22
+  },
+  {
+   "t": "A är lika med parentesen 0,62 ; 3,83 slut parentes",
+   "s": 189.9,
+   "e": 203.22
+  },
+  {
+   "t": "Tidpunkten är x -koordinaten och den maximala ökningstakten är y -koordinaten.",
+   "s": 203.22,
+   "e": 209.34
+  },
+  {
+   "t": "Svar: Koncentrationen ökar snabbast efter ca 0,62 timme , och den maximala ökningstakten är då ca 3,8 mg per liter per timme.",
+   "s": 209.34,
+   "e": 219.79
+  }
+ ]
+}

@@ -1,0 +1,153 @@
+{
+ "id": "ma4-2.13",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8bac438900e039b3b8d1d7d77c7ff91f00f22ace",
+ "dur": 226.3,
+ "segments": [
+  {
+   "t": "Sneda asymptoter",
+   "s": 0.1,
+   "e": 2.69
+  },
+  {
+   "t": "En asymptot som inte är parallell med någon av koordinataxlarna — det vill säga som varken är lodrät eller vågrät — kallas en sned asymptot.",
+   "s": 2.64,
+   "e": 11.14
+  },
+  {
+   "t": "Sneda asymptoter uppstår för rationella funktioner där täljarens grad är exakt en högre än nämnarens grad.",
+   "s": 11.14,
+   "e": 18.39
+  },
+  {
+   "t": "För att ta fram en sned asymptot till en funktion f av x är målet att skriva om f av x som summan av en rät linje y är lika med k x plus m och en \"restterm\" R parentesen x slut parentes som försvinner när x blir mycket stort.",
+   "s": 18.39,
+   "e": 32.12
+  },
+  {
+   "t": "Bestämma sned asymptot",
+   "s": 32.12,
+   "e": 34.91
+  },
+  {
+   "t": "Skriv om funktionen f av x på formen",
+   "s": 34.91,
+   "e": 38.85
+  },
+  {
+   "t": "f av x är lika med k x plus m plus R parentesen x slut parentes där gränsvärdet då x går mot plus minus oändligheten R parentesen x slut parentes som är lika med 0",
+   "s": 38.85,
+   "e": 51.14
+  },
+  {
+   "t": "Linjen y är lika med k x plus m är då den sneda asymptoten, eftersom funktionsvärdet närmar sig denna räta linje för stora värden (positiva eller negativa) på x .",
+   "s": 51.14,
+   "e": 62.26
+  },
+  {
+   "t": "Testa själv i verktyget nedan.",
+   "s": 62.26,
+   "e": 65.29
+  },
+  {
+   "t": "Dra i reglagen för k och m och se hur den sneda asymptoten flyttar sig, medan resttermen 4 delat med x minus 3 bara ger en lokal \"puckel\" kring x är lika med 3 som klingar av längre ut.",
+   "s": 65.29,
+   "e": 77.31
+  },
+  {
+   "t": "Med k är lika med 2 och m är lika med 1 får du funktionen y är lika med 2 x plus 1 plus 4 delat med x minus 3 från Exempel 2 nedan.",
+   "s": 77.31,
+   "e": 86.78
+  },
+  {
+   "t": "Exempel 1 — Läs av asymptoterna ur grafen",
+   "s": 86.78,
+   "e": 91.08
+  },
+  {
+   "t": "Bestäm samtliga asymptoter till kurvan y är lika med f av x nedan.",
+   "s": 91.08,
+   "e": 96.4
+  },
+  {
+   "t": "Vi ser att kurvan gör ett språng vid x är lika med 2 , vilket betyder att den har en lodrät asymptot x är lika med 2 .",
+   "s": 96.4,
+   "e": 104.17
+  },
+  {
+   "t": "Vi ser även att kurvan för stora x verkar gå mot en rät linje.",
+   "s": 104.17,
+   "e": 109.15
+  },
+  {
+   "t": "Vi bestämmer ekvationen för denna sneda asymptot.",
+   "s": 109.15,
+   "e": 113.24
+  },
+  {
+   "t": "Eftersom det är en rät linje gäller y är lika med k x plus m , där vi läser av",
+   "s": 113.24,
+   "e": 119.2
+  },
+  {
+   "t": "k är lika med minus 1 parentesen riktningskoefficienten slut parentes m som är lika med 1 parentesen skärningen med y -axeln slut parentes",
+   "s": 119.2,
+   "e": 128.66
+  },
+  {
+   "t": "Insättning av k är lika med minus 1 och m är lika med 1 i räta linjens ekvation ger y är lika med minus x plus 1 .",
+   "s": 128.66,
+   "e": 136.78
+  },
+  {
+   "t": "Svar: x är lika med 2 och y är lika med minus x plus 1",
+   "s": 136.78,
+   "e": 142.3
+  },
+  {
+   "t": "Exempel 2 — Bestäm den sneda asymptoten",
+   "s": 142.3,
+   "e": 146.19
+  },
+  {
+   "t": "Bestäm den sneda asymptoten till kurvan. a) y är lika med 2 x plus 1 plus 4 delat med x minus 3 b) y är lika med 2 x i kvadrat minus 4 x plus 3 delat med x .",
+   "s": 146.19,
+   "e": 160.16
+  },
+  {
+   "t": "a) Uttrycket har redan formen y är lika med k x plus m plus R parentesen x slut parentes , där resttermen R parentesen x slut parentes är lika med 4 delat med x minus 3 går mot 0 när x går mot oändligheten.",
+   "s": 160.16,
+   "e": 175.31
+  },
+  {
+   "t": "Den sneda asymptoten kan då direkt skrivas y är lika med 2 x plus 1 .",
+   "s": 175.31,
+   "e": 181.31
+  },
+  {
+   "t": "Svar: y är lika med 2 x plus 1",
+   "s": 181.31,
+   "e": 185.49
+  },
+  {
+   "t": "b) Här skriver vi först om uttrycket som en summa av termer genom att dela upp bråket, så att vi får det på formen y är lika med parentesen k x plus m slut parentes plus R parentesen x slut parentes :",
+   "s": 185.49,
+   "e": 212.24
+  },
+  {
+   "t": "y är lika med 2 x i kvadrat minus 4 x plus 3 delat med x som är lika med 2 x i kvadrat delat med x minus 4 x delat med x plus 3 delat med x som är lika med 2 x minus 4 plus 3 delat med x",
+   "s": 185.49,
+   "e": 212.24
+  },
+  {
+   "t": "Eftersom resttermen 3 delat med x går mot 0 då x går mot oändligheten gäller att den sneda asymptoten kan skrivas y är lika med 2 x minus 4 .",
+   "s": 212.24,
+   "e": 222.09
+  },
+  {
+   "t": "Svar: y är lika med 2 x minus 4",
+   "s": 222.09,
+   "e": 226.3
+  }
+ ]
+}

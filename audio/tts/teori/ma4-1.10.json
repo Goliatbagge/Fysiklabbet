@@ -1,0 +1,183 @@
+{
+ "id": "ma4-1.10",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "637e19b1a0eaa5bc997dacadee3d5b3caeb1c324",
+ "dur": 260.4,
+ "segments": [
+  {
+   "t": "Sinus- och cosinusfunktionen",
+   "s": 0.1,
+   "e": 3.39
+  },
+  {
+   "t": "Funktionen y är lika med sinus x kallas sinusfunktionen och funktionen y är lika med cosinus x kallas cosinusfunktionen.",
+   "s": 3.34,
+   "e": 11.81
+  },
+  {
+   "t": "Vi undersöker hur de ser ut grafiskt genom att ta hjälp av enhetscirkeln och värdena från formelbladet, avrundade till två decimaler.",
+   "s": 11.81,
+   "e": 20.41
+  },
+  {
+   "t": "Ritar vi ut värdena får vi en mjukt vågande kurva.",
+   "s": 20.41,
+   "e": 24.65
+  },
+  {
+   "t": "Dra och zooma i grafen nedan — x -axeln är i radianer, och du ser hur y är lika med sinus x svänger mellan minus 1 och 1 .",
+   "s": 24.65,
+   "e": 33.23
+  },
+  {
+   "t": "Kurvorna för y är lika med sinus x och y är lika med cosinus x ser snarlika ut.",
+   "s": 33.23,
+   "e": 39.41
+  },
+  {
+   "t": "Kurvan för y är lika med sinus x startar vid y är lika med 0 och kurvan för y är lika med cosinus x startar vid y är lika med 1 , men annars har de samma form.",
+   "s": 39.41,
+   "e": 49.34
+  },
+  {
+   "t": "Kurvan för y är lika med cosinus x är förskjuten 90 grader åt vänster jämfört med y är lika med sinus x .",
+   "s": 49.34,
+   "e": 56.98
+  },
+  {
+   "t": "Båda funktionerna upprepar sig med jämna mellanrum — de är periodiska.",
+   "s": 56.98,
+   "e": 61.81
+  },
+  {
+   "t": "Efter ett helt varv upprepas exakt samma värden, så perioden är 360 grader (motsvarande 2 pi radianer).",
+   "s": 61.81,
+   "e": 70.64
+  },
+  {
+   "t": "Eftersom sinus- och cosinusvärdena kommer från punkter på enhetscirkeln kan de aldrig bli större än 1 eller mindre än minus 1 ; värdemängden är därför minus 1 är mindre än eller lika med y är mindre än eller lika med 1 .",
+   "s": 70.64,
+   "e": 83.51
+  },
+  {
+   "t": "Sinus- och cosinusfunktionen",
+   "s": 83.51,
+   "e": 86.78
+  },
+  {
+   "t": "y är lika med sinus x y som är lika med cosinus x",
+   "s": 86.78,
+   "e": 91.39
+  },
+  {
+   "t": "Båda funktionerna är periodiska med perioden 360 grader är lika med 2 pi och har värdemängden",
+   "s": 91.39,
+   "e": 98.58
+  },
+  {
+   "t": "minus 1 är mindre än eller lika med y är mindre än eller lika med 1",
+   "s": 98.58,
+   "e": 104.03
+  },
+  {
+   "t": "Precis som med alla ekvationer kan vi lösa trigonometriska ekvationer grafiskt genom att rita båda leden och ta fram skärningspunkternas x -koordinater.",
+   "s": 104.03,
+   "e": 113.5
+  },
+  {
+   "t": "Vi ritar ekvationens vänsterled y är lika med vänsterledet och högerled y är lika med högerledet i ett grafritande hjälpmedel och läser av x -koordinaten i varje skärningspunkt — det är lösningarna.",
+   "s": 113.5,
+   "e": 125.35
+  },
+  {
+   "t": "Exempel 1 — lös sin x är lika med 0,4 grafiskt, svara i grader",
+   "s": 125.35,
+   "e": 131.53
+  },
+  {
+   "t": "Lös ekvationen sinus x är lika med 0,4 grafiskt och svara i grader.",
+   "s": 131.53,
+   "e": 137.53
+  },
+  {
+   "t": "Vi ritar y är lika med sinus x och den vågräta linjen y är lika med 0,4 i ett grafritande hjälpmedel och tar fram skärningspunkterna.",
+   "s": 137.53,
+   "e": 146.43
+  },
+  {
+   "t": "För att få lösningarna i grader ritar vi sinusfunktionen med gradtecken, y är lika med sinus parentesen x grader slut parentes .",
+   "s": 146.43,
+   "e": 154.93
+  },
+  {
+   "t": "Inom ett varv får vi två skärningspunkter, och därefter upprepas de:",
+   "s": 154.93,
+   "e": 174.78
+  },
+  {
+   "t": "x ett är ungefär lika med 23,6 grader, x två som är ungefär lika med 156,4 grader, x tre som är ungefär lika med 383,6 grader, x fyra som är ungefär lika med 516,4 grader,",
+   "s": 154.93,
+   "e": 174.78
+  },
+  {
+   "t": "Varannan lösning är periodisk med perioden 360 grader : här är x tre är lika med x ett plus 360 grader och x fyra är lika med x två plus 360 grader .",
+   "s": 174.78,
+   "e": 187.04
+  },
+  {
+   "t": "För att beskriva samtliga lösningar anger vi de två första och lägger till ett helt antal perioder n gånger 360 grader , där n är ett heltal.",
+   "s": 187.04,
+   "e": 196.55
+  },
+  {
+   "t": "Svar: x är ungefär lika med 23,6 grader plus n gånger 360 grader och x är ungefär lika med 156,4 grader plus n gånger 360 grader",
+   "s": 196.55,
+   "e": 209.19
+  },
+  {
+   "t": "Exempel 2 — lös cos x är lika med x grafiskt, svara i radianer",
+   "s": 209.19,
+   "e": 215.1
+  },
+  {
+   "t": "Lös ekvationen cosinus x är lika med x grafiskt och svara i radianer.",
+   "s": 215.1,
+   "e": 220.84
+  },
+  {
+   "t": "Vi ritar y är lika med cosinus x och den räta linjen y är lika med x och tar fram skärningspunktens x -koordinat.",
+   "s": 220.84,
+   "e": 228.59
+  },
+  {
+   "t": "Eftersom vi vill ha svaret i radianer ritar vi cosinus utan gradtecken.",
+   "s": 228.59,
+   "e": 233.85
+  },
+  {
+   "t": "De två kurvorna skär varandra i en enda punkt:",
+   "s": 233.85,
+   "e": 240.2
+  },
+  {
+   "t": "x är ungefär lika med 0,74",
+   "s": 233.85,
+   "e": 240.2
+  },
+  {
+   "t": "Eftersom svaret är i radianer skriver vi inte ut någon enhet.",
+   "s": 240.2,
+   "e": 245.1
+  },
+  {
+   "t": "Här ska vi inte heller lägga till perioden n gånger 2 pi , eftersom linjen y är lika med x växer obegränsat och bara korsar cosinuskurvan en enda gång — det finns alltså bara en lösning.",
+   "s": 245.1,
+   "e": 255.9
+  },
+  {
+   "t": "Svar: x är ungefär lika med 0,74",
+   "s": 255.9,
+   "e": 260.4
+  }
+ ]
+}

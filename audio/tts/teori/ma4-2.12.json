@@ -1,0 +1,268 @@
+{
+ "id": "ma4-2.12",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "10a27cff1ba36a658ae6a38e7b63d12aa79565d6",
+ "dur": 358.81,
+ "segments": [
+  {
+   "t": "Vertikala och horisontella asymptoter",
+   "s": 0.1,
+   "e": 3.73
+  },
+  {
+   "t": "En linje som en kurva närmar sig, utan att nå, när den oberoende variabeln går mot oändligheten eller mot ett visst värde, kallas asymptot.",
+   "s": 3.67,
+   "e": 12.85
+  },
+  {
+   "t": "En lodrät asymptot kallas vertikal och en vågrät för horisontell.",
+   "s": 12.85,
+   "e": 18.11
+  },
+  {
+   "t": "När vi studerar hur en funktion beter sig nära ett x -värde a skiljer vi på att närma sig underifrån och ovanifrån.",
+   "s": 18.11,
+   "e": 25.71
+  },
+  {
+   "t": "Ett gränsvärde där x går mot a underifrån skrivs gränsvärdet då x \\to a^- f av x , och ovanifrån gränsvärdet då x \\to a^+ f av x .",
+   "s": 25.71,
+   "e": 38.91
+  },
+  {
+   "t": "Vertikala asymptoter",
+   "s": 38.91,
+   "e": 41.64
+  },
+  {
+   "t": "Vertikala asymptoter uppstår för x -värden där funktionen inte är definierad, till exempel då nämnaren i en rationell funktion är lika med 0.",
+   "s": 41.64,
+   "e": 50.62
+  },
+  {
+   "t": "När x -värdet närmar sig detta värde, underifrån eller ovanifrån, går funktionen mot positiva oändligheten plus oändligheten eller negativa oändligheten minus oändligheten .",
+   "s": 50.62,
+   "e": 62.49
+  },
+  {
+   "t": "Vertikal asymptot",
+   "s": 62.49,
+   "e": 65.16
+  },
+  {
+   "t": "Grafen till f av x har en vertikal asymptot x är lika med a om",
+   "s": 65.16,
+   "e": 70.54
+  },
+  {
+   "t": "gränsvärdet då x går mot a upphöjt till minus f av x är lika med plus minus oändligheten eller gränsvärdet då x går mot a upphöjt till plus f av x som är lika med plus minus oändligheten",
+   "s": 70.54,
+   "e": 82.21
+  },
+  {
+   "t": "Vertikala asymptoter till en rationell funktion beräknas genom att sätta nämnaren lika med 0 och lösa ekvationen.",
+   "s": 82.21,
+   "e": 89.64
+  },
+  {
+   "t": "Horisontella asymptoter",
+   "s": 89.64,
+   "e": 92.41
+  },
+  {
+   "t": "Horisontella asymptoter uppstår när en funktion närmar sig ett bestämt värde när x går mot oändligheten respektive x går mot minus oändligheten .",
+   "s": 92.41,
+   "e": 101.81
+  },
+  {
+   "t": "Detta gäller ofta för rationella funktioner.",
+   "s": 101.81,
+   "e": 105.59
+  },
+  {
+   "t": "Horisontell asymptot",
+   "s": 105.59,
+   "e": 108.22
+  },
+  {
+   "t": "Grafen till f av x har en horisontell asymptot y är lika med m om",
+   "s": 108.22,
+   "e": 113.84
+  },
+  {
+   "t": "gränsvärdet då x går mot minus oändligheten f av x är lika med m eller gränsvärdet då x går mot oändligheten f av x som är lika med m",
+   "s": 113.84,
+   "e": 132.31
+  },
+  {
+   "t": "y -värdet för en horisontell asymptot till en rationell funktion beräknas genom att bestämma funktionens gränsvärde då x går mot oändligheten eller x går mot minus oändligheten .",
+   "s": 113.84,
+   "e": 132.31
+  },
+  {
+   "t": "Studerar vi till exempel grafen till f av x är lika med 1 delat med x minus 2 plus 1 ser vi att den har en vertikal asymptot vid x är lika med 2 — där är nämnaren lika med 0.",
+   "s": 132.31,
+   "e": 143.21
+  },
+  {
+   "t": "Funktionsvärdet går mot minus oändligheten när vi närmar oss x är lika med 2 underifrån och mot plus oändligheten när vi närmar oss ovanifrån.",
+   "s": 143.21,
+   "e": 152.26
+  },
+  {
+   "t": "Grafen har också en horisontell asymptot vid y är lika med 1 , vilket är funktionens gränsvärde då x går mot plus minus oändligheten .",
+   "s": 152.26,
+   "e": 161.25
+  },
+  {
+   "t": "Dra i reglaget a och se hur den vertikala asymptoten x är lika med a flyttar sig i sidled, och i reglaget m för att flytta den horisontella asymptoten y är lika med m i höjdled.",
+   "s": 161.25,
+   "e": 172.3
+  },
+  {
+   "t": "Exempel 1 — Vertikal och horisontell asymptot var för sig",
+   "s": 172.3,
+   "e": 177.21
+  },
+  {
+   "t": "Bestäm den. a) vertikala asymptoten till f av x är lika med 5 delat med 8 minus 2 x b) horisontella asymptoten till f av x är lika med 5 delat med x plus 3 plus 3",
+   "s": 177.21,
+   "e": 190.41
+  },
+  {
+   "t": "a) Vi sätter nämnaren lika med 0 och löser ekvationen.",
+   "s": 190.41,
+   "e": 195.06
+  },
+  {
+   "t": "Lösningen ger asymptotens ekvation.",
+   "s": 195.06,
+   "e": 198.69
+  },
+  {
+   "t": "8 minus 2 x är lika med 0 8 som är lika med 2 x x som är lika med 4",
+   "s": 198.69,
+   "e": 205.03
+  },
+  {
+   "t": "b) Vi bestämmer funktionens gränsvärde då x går mot oändligheten .",
+   "s": 205.03,
+   "e": 210.68
+  },
+  {
+   "t": "Ett rationellt uttryck där x bara finns i nämnaren går mot 0, så",
+   "s": 210.68,
+   "e": 216.11
+  },
+  {
+   "t": "gränsvärdet då x går mot oändligheten parentesen 5 delat med x plus 3 plus 3 slut parentes är lika med 0 plus 3 som är lika med 3",
+   "s": 216.11,
+   "e": 225.85
+  },
+  {
+   "t": "Gränsvärdet då x går mot minus oändligheten blir detsamma.",
+   "s": 225.85,
+   "e": 230.62
+  },
+  {
+   "t": "Svar: a) x är lika med 4 b) y är lika med 3",
+   "s": 230.62,
+   "e": 235.75
+  },
+  {
+   "t": "Exempel 2 — Båda asymptoterna till en rationell funktion",
+   "s": 235.75,
+   "e": 240.45
+  },
+  {
+   "t": "Bestäm den vertikala respektive horisontella asymptoten till f av x är lika med x plus 1 delat med x minus 3 .",
+   "s": 240.45,
+   "e": 248.39
+  },
+  {
+   "t": "Den vertikala asymptoten fås då nämnaren är lika med 0:",
+   "s": 248.39,
+   "e": 255.97
+  },
+  {
+   "t": "x minus 3 är lika med 0 x som är lika med 3",
+   "s": 248.39,
+   "e": 255.97
+  },
+  {
+   "t": "Den horisontella asymptoten fås av gränsvärdet då x går mot oändligheten .",
+   "s": 255.97,
+   "e": 261.85
+  },
+  {
+   "t": "Konstant­termer kan försummas (bortses) vid gränsvärden då x går mot oändligheten , så täljare och nämnare går båda mot x :",
+   "s": 261.85,
+   "e": 279.3
+  },
+  {
+   "t": "gränsvärdet då x går mot oändligheten parentesen x plus 1 delat med x minus 3 slut parentes är lika med x delat med x som är lika med 1",
+   "s": 261.85,
+   "e": 279.3
+  },
+  {
+   "t": "Gränsvärdet då x går mot minus oändligheten blir detsamma.",
+   "s": 279.3,
+   "e": 284.12
+  },
+  {
+   "t": "Svar: x är lika med 3 och y är lika med 1",
+   "s": 284.24,
+   "e": 288.7
+  },
+  {
+   "t": "Exempel 3 — Asymptot åt bara ett håll",
+   "s": 288.65,
+   "e": 292.51
+  },
+  {
+   "t": "Bestäm den horisontella asymptoten till f av x är lika med 2 upphöjt till minus x plus 7 .",
+   "s": 292.51,
+   "e": 299.26
+  },
+  {
+   "t": "Vi bestämmer gränsvärdet då x går mot oändligheten och då x går mot minus oändligheten .",
+   "s": 299.26,
+   "e": 305.79
+  },
+  {
+   "t": "Eftersom 2 upphöjt till minus x är lika med 1 delat med 2 upphöjt till x går termen mot 0 när x växer:",
+   "s": 305.79,
+   "e": 327.99
+  },
+  {
+   "t": "gränsvärdet då x går mot oändligheten parentesen 2 upphöjt till minus x plus 7 slut parentes är lika med gränsvärdet då x går mot oändligheten parentesen 1 delat med 2 upphöjt till x plus 7 slut parentes som är lika med 0 plus 7 som är lika med 7",
+   "s": 305.79,
+   "e": 327.99
+  },
+  {
+   "t": "Så y är lika med 7 är en vågrät asymptot.",
+   "s": 327.99,
+   "e": 332.16
+  },
+  {
+   "t": "Då x går mot minus oändligheten blir exponenten minus x i stället positiv, så 2 upphöjt till minus x växer obegränsat:",
+   "s": 332.16,
+   "e": 348.67
+  },
+  {
+   "t": "gränsvärdet då x går mot minus oändligheten parentesen 2 upphöjt till minus x plus 7 slut parentes är lika med oändligheten",
+   "s": 332.16,
+   "e": 348.67
+  },
+  {
+   "t": "Funktionen har alltså ingen horisontell asymptot åt vänster, men en åt höger.",
+   "s": 348.67,
+   "e": 354.67
+  },
+  {
+   "t": "Svar: y är lika med 7 (åt höger)",
+   "s": 354.67,
+   "e": 358.81
+  }
+ ]
+}

@@ -1,0 +1,218 @@
+{
+ "id": "ma4-2.4",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "c2d2c0de53578d698f99519d9cde43acb5e253d8",
+ "dur": 315.23,
+ "segments": [
+  {
+   "t": "Tillämpningar av kedjeregeln",
+   "s": 0.1,
+   "e": 3.09
+  },
+  {
+   "t": "Vi tittar på ett nytt sätt att skriva kedjeregeln med hjälp av Leibniz notation, vilket underlättar lösningen av problem där flera storheter ändras samtidigt.",
+   "s": 3.04,
+   "e": 12.68
+  },
+  {
+   "t": "Sedan tidigare har vi kedjeregeln, som säger att om y är lika med f parentesen g av x slut parentes så gäller",
+   "s": 12.68,
+   "e": 20.93
+  },
+  {
+   "t": "y prim är lika med f prim parentesen g av x slut parentes gånger g prim parentesen x slut parentes",
+   "s": 20.93,
+   "e": 29.02
+  },
+  {
+   "t": "Om vi ger den inre derivatan ett eget namn, till exempel z , kan vi skriva detta som",
+   "s": 29.02,
+   "e": 35.29
+  },
+  {
+   "t": "y prim är lika med f prim parentesen z slut parentes gånger z prim parentesen x slut parentes",
+   "s": 35.29,
+   "e": 43.19
+  },
+  {
+   "t": "Med Leibniz notation skrivs samma sak som",
+   "s": 43.19,
+   "e": 46.95
+  },
+  {
+   "t": "d y delat med d x är lika med d y delat med d z gånger d z delat med d x",
+   "s": 46.95,
+   "e": 57.23
+  },
+  {
+   "t": "Vi deriverar alltså först den yttre funktionen y med avseende på z , och sedan den inre funktionen z med avseende på x .",
+   "s": 57.23,
+   "e": 65.47
+  },
+  {
+   "t": "Kedjeregeln på annan form",
+   "s": 65.47,
+   "e": 68.45
+  },
+  {
+   "t": "Om y är lika med f av z och z är lika med g av x gäller d y delat med d x är lika med d y delat med d z gånger d z delat med d x",
+   "s": 68.45,
+   "e": 81.58
+  },
+  {
+   "t": "För att komma ihåg de olika delarna kan man se det som ett \"bråk\".",
+   "s": 81.58,
+   "e": 86.25
+  },
+  {
+   "t": "Om vi förkortar d z -termerna i högerledet ser vi att det blir samma sak som det vänstra ledet.",
+   "s": 86.25,
+   "e": 93.22
+  },
+  {
+   "t": "Relaterade förändringshastigheter",
+   "s": 93.22,
+   "e": 96.53
+  },
+  {
+   "t": "Skrivsättet är särskilt användbart i tillämpningar där två storheter ändras med tiden.",
+   "s": 96.53,
+   "e": 102.67
+  },
+  {
+   "t": "Om vi känner den ena förändringshastigheten kan vi ofta bestämma den andra genom att koppla ihop dem med kedjeregeln.",
+   "s": 102.67,
+   "e": 109.59
+  },
+  {
+   "t": "Exempel 1 — oljefläck som växer",
+   "s": 109.59,
+   "e": 112.99
+  },
+  {
+   "t": "En oljetanker läcker olja i havet där oljan sprider sig i en cirkulär form på vattenytan.",
+   "s": 112.99,
+   "e": 119.2
+  },
+  {
+   "t": "Radien på oljefläcken växer med den konstanta hastigheten 0,5 meter per sekund .",
+   "s": 119.2,
+   "e": 125.42
+  },
+  {
+   "t": "Hur snabbt ökar oljefläckens area A i det ögonblick som radien är 10 meter ?",
+   "s": 125.42,
+   "e": 131.3
+  },
+  {
+   "t": "Söks: hur arean ändras per tidsenhet, det vill säga d A delat med d t .",
+   "s": 131.3,
+   "e": 138.72
+  },
+  {
+   "t": "Givet: d r delat med d t är lika med 0,5 meter per sekund och r är lika med 10 meter .",
+   "s": 138.72,
+   "e": 147.11
+  },
+  {
+   "t": "Vi ställer upp kedjeregeln:",
+   "s": 147.11,
+   "e": 158.1
+  },
+  {
+   "t": "d A delat med d t är lika med d A delat med d r gånger d r delat med d t",
+   "s": 147.11,
+   "e": 158.1
+  },
+  {
+   "t": "Här är d r delat med d t är lika med 0,5 meter per sekund , och arean av en cirkel är A parentesen r slut parentes är lika med pi r i kvadrat , vilket ger",
+   "s": 158.1,
+   "e": 170.43
+  },
+  {
+   "t": "d A delat med d r är lika med 2 pi r som är lika med 2 pi gånger 10 meter som är lika med 20 pi meter",
+   "s": 170.43,
+   "e": 178.93
+  },
+  {
+   "t": "Insatt i kedjeregeln:",
+   "s": 178.93,
+   "e": 193.91
+  },
+  {
+   "t": "d A delat med d t är lika med 20 pi gånger 0,5 som är lika med 10 pi som är lika med 31,415 kvadratmeter per sekund som är ungefär lika med 31 kvadratmeter per sekund",
+   "s": 178.93,
+   "e": 193.91
+  },
+  {
+   "t": "Svar: Arean ökar med ungefär 31 kvadratmeter per sekund .",
+   "s": 193.91,
+   "e": 199.34
+  },
+  {
+   "t": "Exempel 2 — ballong som fylls",
+   "s": 199.34,
+   "e": 202.62
+  },
+  {
+   "t": "En klotformad ballong fylls med helium.",
+   "s": 202.62,
+   "e": 206.0
+  },
+  {
+   "t": "Gasen strömmar in i ballongen med den konstanta hastigheten 6 liter per minut.",
+   "s": 206.0,
+   "e": 211.64
+  },
+  {
+   "t": "Hur snabbt ökar ballongens radie i det ögonblick då radien är 2 decimeter ? (Tips: kom ihåg att 1 liter är samma sak som 1 kubikdecimeter .)",
+   "s": 211.64,
+   "e": 222.62
+  },
+  {
+   "t": "Söks: hur ballongens radie ändras med tiden, det vill säga d r delat med d t .",
+   "s": 222.62,
+   "e": 229.93
+  },
+  {
+   "t": "Givet: d V delat med d t är lika med 6 liter per minut som är lika med 6 decimeter i kubik per minut och r är lika med 2 decimeter .",
+   "s": 229.93,
+   "e": 240.62
+  },
+  {
+   "t": "Vi ställer upp kedjeregeln och löser ut d r delat med d t :",
+   "s": 240.62,
+   "e": 265.39
+  },
+  {
+   "t": "d V delat med d t är lika med d V delat med d r gånger d r delat med d t vilket är ekvivalent med att d r delat med d t är lika med d V delat med d t delat med d V delat med d r",
+   "s": 240.62,
+   "e": 265.39
+  },
+  {
+   "t": "Här är d V delat med d t är lika med 6 decimeter i kubik per minut , och volymen för ett klot är V parentesen r slut parentes är lika med 4 pi r i kubik delat med 3 , vilket ger",
+   "s": 265.39,
+   "e": 278.79
+  },
+  {
+   "t": "d V delat med d r är lika med 3 gånger 4 pi r i kvadrat delat med 3 som är lika med 4 pi r i kvadrat som är lika med 4 pi gånger parentesen 2 decimeter slut parentes i kvadrat som är lika med 16 pi decimeter i kvadrat",
+   "s": 278.79,
+   "e": 294.69
+  },
+  {
+   "t": "Insatt:",
+   "s": 294.69,
+   "e": 309.84
+  },
+  {
+   "t": "d r delat med d t är lika med 6 delat med 16 pi som är lika med 0,119 decimeter per minut som är ungefär lika med 0,12 decimeter per minut som är lika med 1,2 centimeter per minut",
+   "s": 294.69,
+   "e": 309.84
+  },
+  {
+   "t": "Svar: Radien ökar med ungefär 1,2 centimeter per minut .",
+   "s": 309.84,
+   "e": 315.23
+  }
+ ]
+}

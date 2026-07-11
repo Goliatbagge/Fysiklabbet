@@ -23,7 +23,7 @@ const fs = require('fs');
 const path = require('path');
 
 const dir = path.join(__dirname, '..', 'data', 'teori');
-const files = fs.readdirSync(dir).filter(f => /^(fy\d|ma\dc)-.*\.md$/.test(f)).sort();
+const files = fs.readdirSync(dir).filter(f => /^(fy\d|ma\dc|ma4)-.*\.md$/.test(f)).sort();
 
 // Tröskelvärden: andel av dimensionen OCH absolut minimum (båda måste
 // överskridas för att flagga → färre falsklarm). Topp/botten striktare än

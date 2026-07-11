@@ -1,0 +1,323 @@
+{
+ "id": "ma4-4.9",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "5f83734fce01f9bc5a6cc4c8d293dc3d25024615",
+ "dur": 641.79,
+ "segments": [
+  {
+   "t": "Ekvationen z upphöjt till n är lika med w",
+   "s": 0.1,
+   "e": 4.55
+  },
+  {
+   "t": "Vi ska nu lösa potensekvationer med komplexa tal på formen z upphöjt till n är lika med w , där n är ett positivt heltal och w är ett komplext tal.",
+   "s": 4.5,
+   "e": 14.54
+  },
+  {
+   "t": "Knepet är att skriva om båda led i polär form och sedan jämföra dem.",
+   "s": 14.54,
+   "e": 19.62
+  },
+  {
+   "t": "En första ekvation: z i kubik är lika med 64",
+   "s": 19.62,
+   "e": 24.46
+  },
+  {
+   "t": "Säg att vi ska lösa ekvationen z i kubik är lika med 64 .",
+   "s": 24.46,
+   "e": 29.69
+  },
+  {
+   "t": "Den har den uppenbara reella lösningen z är lika med 4 eftersom 4 i kubik är lika med 4 gånger 4 gånger 4 som är lika med 64 .",
+   "s": 29.69,
+   "e": 39.12
+  },
+  {
+   "t": "För att även hitta de imaginära lösningarna skriver vi om båda led i polär form.",
+   "s": 39.12,
+   "e": 44.85
+  },
+  {
+   "t": "Låt z är lika med r parentesen cosinus v plus i sinus v slut parentes vara den polära formen för ett godtyckligt komplext tal.",
+   "s": 44.85,
+   "e": 54.06
+  },
+  {
+   "t": "Enligt de Moivres formel gäller då för vänsterledet och högerledet:",
+   "s": 54.06,
+   "e": 73.92
+  },
+  {
+   "t": "vänsterledet är lika med z i kubik som är lika med r i kubik parentesen cosinus 3 v plus i sinus 3 v slut parentes högerledet som är lika med 64 som är lika med 64 parentesen cosinus 0 grader plus i sinus 0 grader slut parentes",
+   "s": 54.06,
+   "e": 73.92
+  },
+  {
+   "t": "Här har vi använt att talet 64 i det komplexa talplanet har absolutbeloppet r är lika med 64 och argumentet (vinkeln mot positiva reella axeln) v är lika med 0 grader .",
+   "s": 73.92,
+   "e": 85.95
+  },
+  {
+   "t": "Ekvationen kan då skrivas",
+   "s": 85.95,
+   "e": 88.95
+  },
+  {
+   "t": "r i kubik parentesen cosinus 3 v plus i sinus 3 v slut parentes är lika med 64 parentesen cosinus 0 grader plus i sinus 0 grader slut parentes",
+   "s": 88.95,
+   "e": 100.36
+  },
+  {
+   "t": "Identifiering mellan de båda leden ger ett samband för absolutbeloppet och ett för argumentet:",
+   "s": 100.36,
+   "e": 116.1
+  },
+  {
+   "t": "r i kubik är lika med 64, ekvation 1 cosinus 3 v plus i sinus 3 v som är lika med cosinus 0 grader plus i sinus 0 grader, ekvation 2",
+   "s": 100.36,
+   "e": 116.1
+  },
+  {
+   "t": "Ur ekvation , ekvation 1 får vi r är lika med tredje roten ur 64 som är lika med 4 .",
+   "s": 116.1,
+   "e": 123.29
+  },
+  {
+   "t": "Ur ekvation , ekvation 2 ska argumenten vara lika, men eftersom en vinkel kan ökas med hela varv utan att punkten flyttar sig gäller",
+   "s": 123.29,
+   "e": 132.61
+  },
+  {
+   "t": "3 v är lika med 0 grader plus n gånger 360 grader vilket är ekvivalent med att v är lika med 0 grader delat med 3 plus n gånger 360 grader delat med 3 som är lika med n gånger 120 grader",
+   "s": 132.61,
+   "e": 146.51
+  },
+  {
+   "t": "där n är ett positivt heltal.",
+   "s": 146.51,
+   "e": 149.71
+  },
+  {
+   "t": "Sätter vi in n är lika med 0, 1, 2 får vi tre olika argument: v är lika med 0 grader, 120 grader, 240 grader .",
+   "s": 149.71,
+   "e": 159.89
+  },
+  {
+   "t": "Med n är lika med 3 blir v är lika med 360 grader , vilket är samma lösning som n är lika med 0 — de trigonometriska funktionerna är periodiska, så vi får inga fler lösningar.",
+   "s": 159.89,
+   "e": 171.18
+  },
+  {
+   "t": "Ekvationen z i kubik är lika med 64 har alltså tre lösningar.",
+   "s": 171.18,
+   "e": 176.6
+  },
+  {
+   "t": "Insättning av r är lika med 4 och argumenten ger:",
+   "s": 176.6,
+   "e": 213.64
+  },
+  {
+   "t": "z ett är lika med 4 parentesen cosinus 0 grader plus i sinus 0 grader slut parentes som är lika med 4 z två som är lika med 4 parentesen cosinus 120 grader plus i sinus 120 grader slut parentes som är lika med 4 parentesen minus 1 delat med 2 plus i gånger roten ur 3 delat med 2 slut parentes som är lika med minus 2 plus 2 roten ur 3 i z tre som är lika med 4 parentesen cosinus 240 grader plus i sinus 240 grader slut parentes som är lika med 4 parentesen minus 1 delat med 2 minus i gånger roten ur 3 delat med 2 slut parentes som är lika med minus 2 minus 2 roten ur 3 i",
+   "s": 176.6,
+   "e": 223.72
+  },
+  {
+   "t": "De tre lösningarna ligger jämnt fördelade på en cirkel med radien tredje roten ur | 64 | är lika med 4 längdenheter och utgör hörnen i en regelbunden 3-hörning (en liksidig triangel) kring origo.",
+   "s": 223.72,
+   "e": 236.21
+  },
+  {
+   "t": "Ekvationen z<sup>n</sup> är lika med w",
+   "s": 236.21,
+   "e": 246.06
+  },
+  {
+   "t": "Ekvationen z upphöjt till n är lika med w , där n är ett positivt heltal,",
+   "s": 236.21,
+   "e": 246.06
+  },
+  {
+   "t": "har exakt n rötter (lösningar),",
+   "s": 246.06,
+   "e": 249.93
+  },
+  {
+   "t": "har sina rötter i det komplexa talplanet på en cirkel med radien r är lika med n:e roten ur | w | , jämnt fördelade som hörnen i en regelbunden n -hörning,",
+   "s": 249.93,
+   "e": 260.25
+  },
+  {
+   "t": "löses genom att skriva om båda led till polär form och sedan identifiera absolutbelopp och argument.",
+   "s": 260.25,
+   "e": 267.26
+  },
+  {
+   "t": "Argumenten ges av v är lika med arg w plus k gånger 360 grader delat med n för k är lika med 0, 1, 2,, n minus 1 (räknaren k genomlöper de n rötterna).",
+   "s": 267.26,
+   "e": 280.12
+  },
+  {
+   "t": "Exempel 1 — z<sup>4</sup> är lika med −81i",
+   "s": 280.12,
+   "e": 286.12
+  },
+  {
+   "t": "Lös ekvationen z upphöjt till 4 är lika med minus 81 i och svara i. a) polär form b) formen a plus b i .",
+   "s": 286.12,
+   "e": 295.12
+  },
+  {
+   "t": "a) Vi får fyra lösningar eftersom exponenten är 4 .",
+   "s": 295.12,
+   "e": 301.46
+  },
+  {
+   "t": "Sätt z är lika med r parentesen cosinus v plus i sinus v slut parentes och skriv båda led i polär form.",
+   "s": 301.41,
+   "e": 309.33
+  },
+  {
+   "t": "Talet minus 81 i har absolutbeloppet r är lika med | minus 81 i | som är lika med 81 och argumentet v är lika med 270 grader .",
+   "s": 309.33,
+   "e": 318.87
+  },
+  {
+   "t": "vänsterledet är lika med z upphöjt till 4 som är lika med r upphöjt till 4 parentesen cosinus 4 v plus i sinus 4 v slut parentes högerledet som är lika med minus 81 i som är lika med 81 parentesen cosinus 270 grader plus i sinus 270 grader slut parentes",
+   "s": 318.87,
+   "e": 337.07
+  },
+  {
+   "t": "Identifiering ger r upphöjt till 4 är lika med 81 vilket är ekvivalent med att r är lika med 4:e roten ur 81 som är lika med 3 samt",
+   "s": 337.07,
+   "e": 346.21
+  },
+  {
+   "t": "4 v är lika med 270 grader plus n gånger 360 grader vilket är ekvivalent med att v är lika med 270 grader delat med 4 plus n gånger 360 grader delat med 4 som är lika med 67,5 grader plus n gånger 90 grader",
+   "s": 346.21,
+   "e": 362.62
+  },
+  {
+   "t": "För n är lika med 0, 1, 2, 3 (fyra lösningar) blir argumenten",
+   "s": 362.62,
+   "e": 369.47
+  },
+  {
+   "t": "v noll är lika med 67,5 grader, v ett som är lika med 157,5 grader, v två som är lika med 247,5 grader, v tre som är lika med 337,5 grader",
+   "s": 369.47,
+   "e": 383.27
+  },
+  {
+   "t": "Insättning av r är lika med 3 och dessa vinklar i z är lika med r parentesen cosinus v plus i sinus v slut parentes ger lösningarna.",
+   "s": 383.27,
+   "e": 392.76
+  },
+  {
+   "t": "Svar (a): z ett är lika med 3 parentesen cosinus 67,5 grader plus i sinus 67,5 grader slut parentes z två som är lika med 3 parentesen cosinus 157,5 grader plus i sinus 157,5 grader slut parentes z tre som är lika med 3 parentesen cosinus 247,5 grader plus i sinus 247,5 grader slut parentes z fyra som är lika med 3 parentesen cosinus 337,5 grader plus i sinus 337,5 grader slut parentes",
+   "s": 392.76,
+   "e": 428.45
+  },
+  {
+   "t": "b) Vi multiplicerar in 3 i parenteserna och räknar ut sinus och cosinus:",
+   "s": 428.45,
+   "e": 472.72
+  },
+  {
+   "t": "z ett är lika med 3 cosinus 67,5 grader plus 3 i sinus 67,5 grader som är ungefär lika med 1,15 plus 2,77 i z två som är ungefär lika med minus 2,77 plus 1,15 i z tre som är ungefär lika med minus 1,15 minus 2,77 i z fyra som är ungefär lika med 2,77 minus 1,15 i",
+   "s": 428.45,
+   "e": 472.72
+  },
+  {
+   "t": "Svar (b): z ett är ungefär lika med 1,15 plus 2,77 i , z två är ungefär lika med minus 2,77 plus 1,15 i , z tre är ungefär lika med minus 1,15 minus 2,77 i , z fyra är ungefär lika med 2,77 minus 1,15 i .",
+   "s": 428.45,
+   "e": 478.07
+  },
+  {
+   "t": "Exempel 2 — z<sup>3</sup> är lika med −4 + 4i√3",
+   "s": 478.07,
+   "e": 484.65
+  },
+  {
+   "t": "Lös ekvationen z i kubik är lika med minus 4 plus 4 i roten ur 3 .",
+   "s": 484.65,
+   "e": 490.68
+  },
+  {
+   "t": "Vi får tre lösningar.",
+   "s": 490.68,
+   "e": 493.43
+  },
+  {
+   "t": "Sätt z är lika med r parentesen cosinus v plus i sinus v slut parentes och skriv om båda led i polär form.",
+   "s": 493.43,
+   "e": 501.4
+  },
+  {
+   "t": "Vänsterledet blir z i kubik är lika med r i kubik parentesen cosinus 3 v plus i sinus 3 v slut parentes .",
+   "s": 501.4,
+   "e": 509.86
+  },
+  {
+   "t": "För högerledet bestämmer vi absolutbelopp och argument.",
+   "s": 509.86,
+   "e": 514.46
+  },
+  {
+   "t": "Absolutbeloppet är",
+   "s": 514.46,
+   "e": 517.05
+  },
+  {
+   "t": "r är lika med | minus 4 plus 4 i roten ur 3 | som är lika med roten ur 4 i kvadrat plus parentesen 4 roten ur 3 slut parentes i kvadrat som är lika med roten ur 16 plus 48 som är lika med roten ur 64 som är lika med 8",
+   "s": 517.05,
+   "e": 532.13
+  },
+  {
+   "t": "Argumentet får vi ur tangens v är lika med 4 roten ur 3 delat med minus 4 som är lika med minus roten ur 3 .",
+   "s": 532.13,
+   "e": 539.96
+  },
+  {
+   "t": "Eftersom minus 4 plus 4 i roten ur 3 ligger i andra kvadranten (negativ realdel, positiv imaginärdel) gäller 90 grader är mindre än v är mindre än 180 grader , vilket ger v är lika med 120 grader .",
+   "s": 539.96,
+   "e": 554.76
+  },
+  {
+   "t": "Alltså är högerledet är lika med 8 parentesen cosinus 120 grader plus i sinus 120 grader slut parentes och ekvationen blir",
+   "s": 554.76,
+   "e": 564.62
+  },
+  {
+   "t": "r i kubik parentesen cosinus 3 v plus i sinus 3 v slut parentes är lika med 8 parentesen cosinus 120 grader plus i sinus 120 grader slut parentes",
+   "s": 564.62,
+   "e": 576.93
+  },
+  {
+   "t": "Identifiering ger r i kubik är lika med 8 vilket är ekvivalent med att r är lika med tredje roten ur 8 som är lika med 2 samt",
+   "s": 576.93,
+   "e": 585.53
+  },
+  {
+   "t": "3 v är lika med 120 grader plus n gånger 360 grader vilket är ekvivalent med att v är lika med 120 grader delat med 3 plus n gånger 360 grader delat med 3 som är lika med 40 grader plus n gånger 120 grader",
+   "s": 585.53,
+   "e": 601.61
+  },
+  {
+   "t": "För n är lika med 0, 1, 2 (tre lösningar) blir argumenten v noll är lika med 40 grader , v ett är lika med 160 grader , v två är lika med 280 grader .",
+   "s": 601.61,
+   "e": 614.13
+  },
+  {
+   "t": "Insättning av r är lika med 2 ger lösningarna.",
+   "s": 614.13,
+   "e": 618.37
+  },
+  {
+   "t": "Svar: z ett är lika med 2 parentesen cosinus 40 grader plus i sinus 40 grader slut parentes z två som är lika med 2 parentesen cosinus 160 grader plus i sinus 160 grader slut parentes z tre som är lika med 2 parentesen cosinus 280 grader plus i sinus 280 grader slut parentes",
+   "s": 618.37,
+   "e": 641.79
+  }
+ ]
+}

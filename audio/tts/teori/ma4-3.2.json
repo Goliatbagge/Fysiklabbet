@@ -1,0 +1,208 @@
+{
+ "id": "ma4-3.2",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "80e2a6e5802074da3ea4950036bd301ea9a89528",
+ "dur": 367.36,
+ "segments": [
+  {
+   "t": "Areaberäkning med integraler",
+   "s": 0.1,
+   "e": 3.21
+  },
+  {
+   "t": "I Matematik 3 mötte du integralen som ett sätt att mäta arean under en kurva.",
+   "s": 3.16,
+   "e": 8.86
+  },
+  {
+   "t": "Vi repeterar den tolkningen och räknar sedan ut areor med hjälp av integralkalkylens fundamentalsats.",
+   "s": 8.86,
+   "e": 15.86
+  },
+  {
+   "t": "Grafiskt motsvaras arean mellan en funktions graf y är lika med f av x och x -axeln, från x är lika med a till x är lika med b , av integralen nedan.",
+   "s": 15.86,
+   "e": 26.36
+  },
+  {
+   "t": "Integralen som area",
+   "s": 26.36,
+   "e": 29.09
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x",
+   "s": 29.09,
+   "e": 34.35
+  },
+  {
+   "t": "I uttrycket betyder de olika symbolerna:",
+   "s": 34.35,
+   "e": 42.92
+  },
+  {
+   "t": "integralen av — integraltecknet (ett summatecken för oändligt många termer),",
+   "s": 34.35,
+   "e": 42.92
+  },
+  {
+   "t": "a — undre integrationsgränsen (grafiskt det x -värde där arean börjar),",
+   "s": 42.92,
+   "e": 49.11
+  },
+  {
+   "t": "b — övre integrationsgränsen (grafiskt det x -värde där arean slutar),",
+   "s": 49.11,
+   "e": 55.4
+  },
+  {
+   "t": "f av x — integranden (grafiskt den funktion vi ska ta arean under),",
+   "s": 55.4,
+   "e": 61.39
+  },
+  {
+   "t": "d x — integrationsvariabeln (grafiskt den oändligt smala bredden på en rektangel).",
+   "s": 61.39,
+   "e": 68.11
+  },
+  {
+   "t": "Areor under x-axeln",
+   "s": 68.11,
+   "e": 70.9
+  },
+  {
+   "t": "En integral kan få ett negativt värde — det sker när grafen ligger under x -axeln i intervallet.",
+   "s": 70.9,
+   "e": 77.14
+  },
+  {
+   "t": "En area kan däremot aldrig vara negativ.",
+   "s": 77.14,
+   "e": 80.84
+  },
+  {
+   "t": "För arean A gäller därför:",
+   "s": 80.84,
+   "e": 86.41
+  },
+  {
+   "t": "Area över respektive under x-axeln",
+   "s": 80.84,
+   "e": 86.41
+  },
+  {
+   "t": "A är lika med integralen av a upphöjt till b f av x d x om f av x är större än 0 (grafen ligger över x -axeln), 4 p t A som är lika med minus integralen av a upphöjt till b f av x d x om f av x är mindre än 0 (grafen ligger under x -axeln)",
+   "s": 86.41,
+   "e": 104.74
+  },
+  {
+   "t": "Ligger området delvis över och delvis under x -axeln måste vi dela upp beräkningen i flera intervall, ett för varje sida (se Exempel 2).",
+   "s": 104.74,
+   "e": 114.41
+  },
+  {
+   "t": "Integralkalkylens fundamentalsats",
+   "s": 114.41,
+   "e": 117.95
+  },
+  {
+   "t": "För att räkna ut en integral använder vi en primitiv funktion F parentesen x slut parentes till f av x (alltså en funktion vars derivata är f ).",
+   "s": 117.95,
+   "e": 128.15
+  },
+  {
+   "t": "Fundamentalsatsen säger att integralens värde är skillnaden mellan primitivfunktionens värden i de två gränserna.",
+   "s": 128.15,
+   "e": 135.14
+  },
+  {
+   "t": "Integralkalkylens fundamentalsats",
+   "s": 135.14,
+   "e": 138.66
+  },
+  {
+   "t": "integralen av a upphöjt till b f av x d x är lika med F parentesen x slut parentes a upphöjt till b som är lika med F parentesen b slut parentes minus F parentesen a slut parentes",
+   "s": 138.66,
+   "e": 151.94
+  },
+  {
+   "t": "Exempel 1 — Beräkna två integraler",
+   "s": 151.94,
+   "e": 155.78
+  },
+  {
+   "t": "Beräkna. a) integralen av ett upphöjt till 4 3 x i kvadrat plus 5 delat med x d x b) integralen av noll upphöjt till pi delat med 4 cosinus 2 x d x",
+   "s": 155.78,
+   "e": 193.89
+  },
+  {
+   "t": "a) Vi skriver det rationella uttrycket som en summa och förenklar:",
+   "s": 157.6,
+   "e": 193.89
+  },
+  {
+   "t": "integralen av ett upphöjt till 4 3 x i kvadrat plus 5 delat med x d x är lika med integralen av ett upphöjt till 4 parentesen 3 x i kvadrat delat med x plus 5 delat med x slut parentes d x som är lika med integralen av ett upphöjt till 4 parentesen 3 x plus 5 delat med x slut parentes d x",
+   "s": 157.6,
+   "e": 197.09
+  },
+  {
+   "t": "Vi integrerar termvis och sätter in gränserna:",
+   "s": 197.09,
+   "e": 232.68
+  },
+  {
+   "t": "integralen av ett upphöjt till 4 parentesen 3 x plus 5 delat med x slut parentes d x är lika med 3 x i kvadrat delat med 2 plus 5 naturliga logaritmen av x ett upphöjt till 4, 4 p t som är lika med 3 gånger 4 i kvadrat delat med 2 plus 5 naturliga logaritmen av 4 minus parentesen 3 gånger 1 i kvadrat delat med 2 plus 5 naturliga logaritmen av 1 slut parentes, 4 p t som är lika med 48 delat med 2 plus 5 naturliga logaritmen av 4 minus parentesen 3 delat med 2 plus 0 slut parentes som är lika med 45 delat med 2 plus 5 naturliga logaritmen av 4",
+   "s": 197.09,
+   "e": 240.85
+  },
+  {
+   "t": "b) Här är en primitiv funktion till cosinus 2 x lika med sinus 2 x delat med 2 :",
+   "s": 240.85,
+   "e": 265.07
+  },
+  {
+   "t": "integralen av noll upphöjt till pi delat med 4 cosinus 2 x d x är lika med sinus 2 x delat med 2 noll upphöjt till pi delat med 4 som är lika med sinus pi delat med 2 delat med 2 minus sinus 0 delat med 2 som är lika med 1 delat med 2 minus 0 som är lika med 1 delat med 2",
+   "s": 240.85,
+   "e": 265.07
+  },
+  {
+   "t": "Svar: a) 45 delat med 2 plus 5 naturliga logaritmen av 4 b) 1 delat med 2",
+   "s": 265.07,
+   "e": 272.65
+  },
+  {
+   "t": "Exempel 2 — Area av ett skuggat område",
+   "s": 272.65,
+   "e": 276.59
+  },
+  {
+   "t": "Kurvan y är lika med x i kubik minus 4 x och x -axeln avgränsar ett område.",
+   "s": 276.59,
+   "e": 283.25
+  },
+  {
+   "t": "Beräkna arean av det skuggade området mellan x är lika med minus 1 och x är lika med 2 .",
+   "s": 283.25,
+   "e": 289.79
+  },
+  {
+   "t": "Grafen ligger över x -axeln mellan x är lika med minus 1 och x är lika med 0 , och under x -axeln mellan x är lika med 0 och x är lika med 2 .",
+   "s": 289.79,
+   "e": 299.73
+  },
+  {
+   "t": "Vi delar därför in integralen i två intervall, där arean för 0 är mindre än x är mindre än 2 motsvaras av den negativa integralen:",
+   "s": 299.73,
+   "e": 344.04
+  },
+  {
+   "t": "A är lika med integralen av minus 1 upphöjt till 0 parentesen x i kubik minus 4 x slut parentes d x minus integralen av noll i kvadrat parentesen x i kubik minus 4 x slut parentes d x, 4 p t som är lika med x upphöjt till 4 delat med 4 minus 4 x i kvadrat delat med 2 minus 1 upphöjt till 0 minus x upphöjt till 4 delat med 4 minus 4 x i kvadrat delat med 2 noll i kvadrat, 4 p t som är lika med 0 minus parentesen 1 delat med 4 minus 2 slut parentes minus parentesen 4 minus 8 slut parentes minus 0, 4 p t som är lika med minus parentesen 1 delat med 4 minus 8 delat med 4 slut parentes minus minus 4 som är lika med 7 delat med 4 plus 4 som är lika med 7 delat med 4 plus 16 delat med 4 som är lika med 23 delat med 4",
+   "s": 307.04,
+   "e": 363.01
+  },
+  {
+   "t": "Svar: 23 delat med 4 areaenheter",
+   "s": 363.01,
+   "e": 367.36
+  }
+ ]
+}

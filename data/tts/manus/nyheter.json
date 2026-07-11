@@ -1,5 +1,332 @@
 [
  {
+  "id": "2026-07-11-boehms-borstar",
+  "title": "Forskare avslöjar ett dolt mönster i ögat med skräddarsytt ljus — och vill göra det till ett nytt ögontest",
+  "segments": [
+   {
+    "t": "Forskare avslöjar ett dolt mönster i ögat med skräddarsytt ljus — och vill göra det till ett nytt ögontest."
+   },
+   {
+    "t": "De flesta har aldrig lagt märke till det, men långt ute i synfältets periferi döljer sig ett svagt, tvåflikigt ljusmönster som bara dyker upp när ljuset är polariserat."
+   },
+   {
+    "t": "Forskare vid University at Buffalo och University of Waterloo har nu, med en teknik hämtad från kvantoptiken, förstärkt mönstret till tydliga figurer med flera flikar."
+   },
+   {
+    "t": "Studien, publicerad i Proceedings of the National Academy of Sciences, är ett första steg mot ett helt nytt sätt att undersöka näthinnans hälsa."
+   },
+   {
+    "t": "Titta länge mot en jämnt vit yta eller en ljusgrå datorskärm, och håll blicken lite vid sidan om det du egentligen tittar på."
+   },
+   {
+    "t": "Hos de flesta människor dyker det då upp, långt ute i synfältets periferi, en svag, flimrande fläck med två motsatta lober — ett mönster nästan ingen lägger märke till, och som bara existerar inne i det egna ögat."
+   },
+   {
+    "t": "Fenomenet kallas Boehms borstar, och det är ett av kroppens mest förbisedda sinnesintryck: ett bevis på att ögat, utan att vi vet om det, faktiskt kan uppfatta åt vilket håll ljus är polariserat."
+   },
+   {
+    "t": "Nu har forskare vid University at Buffalo och University of Waterloo, med en teknik hämtad från kvantoptiken, förstärkt det bleka mönstret till tydliga, mångflikiga figurer — ett resultat publicerat i tidskriften Proceedings of the National Academy of Sciences (PNAS) som forskarna hoppas kan bli grunden för ett helt nytt slags ögontest."
+   },
+   {
+    "t": "Ljus som svänger åt ett bestämt håll."
+   },
+   {
+    "t": "Vanligt dagsljus svänger åt alla håll på en gång, men ljus som studsat mot vatten eller glasrutor, eller strötts av luftens molekyler på himlen, blir delvis polariserat — det elektriska fältet svänger då huvudsakligen åt ett bestämt håll, vinkelrätt mot ljusets färdriktning (se Fysiklabbets genomgång om elektromagnetiska vågor och ljus, Fysik nivå 2, om hur just den vinkelräta svängningen gör ljus till en tvärvåg som går att polarisera — till skillnad från exempelvis ljud)."
+   },
+   {
+    "t": "Människoögat saknar ett eget ”polarisationsfilter” av det slag många insekter har, men det gömmer ändå två svaga, medfödda sätt att ana polarisationsriktningen."
+   },
+   {
+    "t": "Det mest kända är Haidingers borste, en gulaktig, timglasformad fläck mitt i synfältet som den österrikiske fysikern Wilhelm Haidinger beskrev redan 1844, och som beror på färgade pigment i gula fläcken mitt i näthinnan."
+   },
+   {
+    "t": "Boehms borstar, beskrivet av Gundo von Boehm så sent som 1940, är dess mindre kända kusin: det uppstår i stället långt ute i synfältets periferi och anses bero på att polariserat ljus sprids olika mycket i de tunna vävnadslagren längst ut i näthinnan."
+   },
+   {
+    "t": "Ljus skräddarsytt efter ögats egen geometri."
+   },
+   {
+    "t": "För att förstärka det annars nästan omärkliga mönstret använde forskarlaget så kallat strukturerat ljus — en teknik utvecklad inom kvantoptiken, där ljusets polarisationsriktning varierar systematiskt över själva ljusstrålens tvärsnitt i stället för att vara densamma överallt."
+   },
+   {
+    "t": "Genom att forma denna variation så att den speglar näthinnans egen, radiella symmetri kunde forskarna byta ut det svaga, tvåflikiga mönstret mot betydligt ljusare figurer med ett varierande antal flikar, beroende på hur ljuset skräddarsyddes (se bilden ovan för några av de mönster som uppmättes i studien)."
+   },
+   {
+    "t": "Från ja/nej-fråga till mätbart test."
+   },
+   {
+    "t": "Ett dussin friska frivilliga fick titta in i en uppställning som till det yttre påminde om en vanlig synundersökning, vid optometriinstitutionen på University of Waterloo."
+   },
+   {
+    "t": "I stället för att bara fråga om personen såg mönstret eller inte lät forskarna kontrasten justeras automatiskt tills varje persons egen tröskel för att upptäcka det hittades — och mätte samtidigt hur många flikar personen såg, hur mycket kontrast som krävdes, och var i synfältet mönstret dök upp."
+   },
+   {
+    "t": "Resultatet: mönstret var lättast att upptäcka en bit ut från synfältets mitt, precis där Boehms borstar förväntas uppstå."
+   },
+   {
+    "t": "”Vårt strukturerade ljus gjorde de normalt svaga, tvåflikiga mönstren ljusare och lättare att se, med ett varierande antal flikar.”"
+   },
+   {
+    "t": "Nästa steg: sjuka ögon."
+   },
+   {
+    "t": "Eftersom Boehms borstar uppstår just i näthinnans egna vävnadslager finns en förhoppning om att mönstret förändras om vävnaden är skadad."
+   },
+   {
+    "t": "Forskarnas nästa steg är därför att testa metoden på patienter med näthinnesjukdomar, till exempel åldersförändringar i gula fläcken (makuladegeneration), för att se om skadade områden gör att mönstret upplevs annorlunda."
+   },
+   {
+    "t": "Går det att visa ett sådant samband kan ett enkelt, snabbt seendetest med strukturerat ljus i bästa fall bli ett billigt komplement till dagens tyngre bildtagningsutrustning på ögonkliniker."
+   },
+   {
+    "t": "Visste du."
+   },
+   {
+    "t": "Du kan själv leta efter Haidingers borste: titta mot en jämnt ljus, vit yta eller en molnfri himmel och håll utkik efter en svag, gulaktig timglasformad fläck som rör sig med blicken."
+   },
+   {
+    "t": "Bin och många andra insekter navigerar delvis med hjälp av himlens polarisationsmönster — en förmåga som människans öga bara anar via svaga, entoptiska mönster som Boehms borstar."
+   },
+   {
+    "t": "Mönstret i studien uppstår genom så kallad Mie-spridning, då ljus sprids av strukturer ungefär lika stora som våglängden — en annan spridningsprocess än den Rayleigh-spridning som ger himlen dess blå färg."
+   }
+  ]
+ },
+ {
+  "id": "2026-07-10-frost-isbroar",
+  "title": "Forskare avslöjar hur frost sprider sig — via mikroskopiska isbroar som svävar fritt i luften",
+  "segments": [
+   {
+    "t": "Forskare avslöjar hur frost sprider sig — via mikroskopiska isbroar som svävar fritt i luften."
+   },
+   {
+    "t": "En forskargrupp vid University of Illinois Urbana-Champaign har för första gången filmat i tre dimensioner hur frost egentligen sprider sig mellan vattendroppar."
+   },
+   {
+    "t": "Ibland kryper isen längs ytan, men på vissa material bygger den i stället osynliga broar av is som svävar fritt i luften — en upptäckt, publicerad i Nature Physics, som nästan kan fördubbla tiden innan kylskåp och luftkonditionering fryser igen."
+   },
+   {
+    "t": "Två vattendroppar ligger sida vid sida på en kall yta."
+   },
+   {
+    "t": "Den ena har redan frusit till is, den andra är fortfarande flytande — fast långt under 0 grader Celsius, i det som kallas ett underkylt tillstånd."
+   },
+   {
+    "t": "På bara några sekunder växer en tunn, nästan osynlig bro av is mellan dem."
+   },
+   {
+    "t": "Forskare vid University of Illinois Urbana-Champaign har nu för första gången filmat i tre dimensioner hur sådana ”isbroar” bildas — och upptäckt att de ibland kryper längs ytan, ibland svävar fritt i luften ovanför den."
+   },
+   {
+    "t": "Skillnaden, publicerad i tidskriften Nature Physics, visar sig vara nyckeln till att bromsa hur snabbt frost täcker en yta."
+   },
+   {
+    "t": "Ångan väljer den redan frusna droppen."
+   },
+   {
+    "t": "Anledningen till att en bro alls bildas ligger i en skillnad i mättnadsångtryck — det tryck vattenånga har när luften precis är mättad — mellan flytande vatten och is vid samma temperatur under noll grader."
+   },
+   {
+    "t": "Underkylt, flytande vatten har ett högre mättnadsångtryck än is vid samma temperatur, så vattenmolekyler avdunstar lättare från den flytande droppen än de sitter kvar på den redan frusna."
+   },
+   {
+    "t": "Ångan diffunderar genom luften och övergår direkt till is på den frusna droppens yta — en fasövergång som kallas deposition, samma princip som ger rimfrost på gräs kalla nätter (se Fysiklabbets genomgång om faser och fasövergångar, Fysik nivå 1)."
+   },
+   {
+    "t": "Resultatet blir en tunn, växande tråd av is som till slut når hela vägen fram och fryser den flytande droppen också."
+   },
+   {
+    "t": "På så sätt sprider sig frosten vidare, droppe för droppe, i en kedjereaktion över ytan."
+   },
+   {
+    "t": "Fuktavvisande ytor styr bron ut i luften."
+   },
+   {
+    "t": "Med en teknik som kallas fokalplansskiftande avbildning, kombinerad med höghastighetsmikroskopi, kunde forskarlaget för första gången se broarna från sidan i stället för uppifrån — och upptäckte att ytans vätningsegenskaper avgör var bron växer."
+   },
+   {
+    "t": "På en vanlig, fuktvänlig (hydrofil) yta ligger dropparna platta och breda, och isbron växer längs själva ytan, i kontakt med det kalla underlaget hela vägen."
+   },
+   {
+    "t": "På en kraftigt fuktavvisande (superhydrofob) yta — där dropparna i stället bildar nästan perfekta klot, ungefär som daggdroppar på ett lotusblad — tvingas bron i stället växa uppåt och ut i fri luft mellan dropptopparna, utan att någonsin röra själva ytan."
+   },
+   {
+    "t": "Forskarna fann att övergången sker vid en kontaktvinkel på ungefär 105 grader: droppar som är rundare än så ger nästan alltid en svävande bro."
+   },
+   {
+    "t": "Luften isolerar — och bromsar tillväxten."
+   },
+   {
+    "t": "Skillnaden visade sig vara avgörande för hur snabbt frosten sprider sig."
+   },
+   {
+    "t": "En bro som ligger an mot den kalla ytan leder bort värme snabbt, vilket håller ångtrycksskillnaden mellan broens spets och den flytande droppen hög — och bron fortsätter växa i rask takt."
+   },
+   {
+    "t": "En svävande bro omges i stället av luft, en betydligt sämre värmeledare än det fasta underlaget (se Fysiklabbets genomgång om värme och temperatur, Fysik nivå 1)."
+   },
+   {
+    "t": "Spetsen på en svävande bro blir därför varmare i takt med att den växer, ångtrycksskillnaden som driver tillväxten krymper, och hela processen bromsas självmant in."
+   },
+   {
+    "t": "Mätningarna visade att svävande broar växte över 80 procent långsammare än broar i kontakt med ytan."
+   },
+   {
+    "t": "”Vår studie visar att ytans vätningsegenskaper är den avgörande parameter som styr övergången mellan de två sätten att växa på.”"
+   },
+   {
+    "t": "Nästan dubbelt så lång tid innan kylan tar över."
+   },
+   {
+    "t": "Upptäckten är mer än ett labbcuriosum."
+   },
+   {
+    "t": "Forskarna testade en superhydrofob ytbeläggning på fullskaliga, kommersiella värmeväxlare av den typ som sitter i luftkonditionering, kylskåp och bilars kylsystem — och tiden innan frost helt täckte ytan blev nästan dubbelt så lång som på en obehandlad yta."
+   },
+   {
+    "t": "Frost på en värmeväxlare försämrar värmeöverföringen och tvingar systemet att lägga energi på återkommande avfrostning, så insikten om isbroarnas geometri kan ge ingenjörer ett helt nytt grepp: att inte bara fördröja att is börjar bildas, utan att aktivt styra hur den sedan sprider sig vidare."
+   },
+   {
+    "t": "Forskarna pekar själva ut flygplansvingar och kylsystem som exempel på ytor där några extra minuter utan frost kan göra stor skillnad."
+   },
+   {
+    "t": "Visste du."
+   },
+   {
+    "t": "Frost bildas genom deposition — vattenånga övergår direkt till is utan att passera vätskefasen på vägen, exakt samma fasövergång som ger rimfrost på gräs och bilrutor kalla nätter."
+   },
+   {
+    "t": "Superhydrofoba ytor, som får vatten att bilda nästan runda droppar, är ofta inspirerade av lotusbladets självrengörande yta — den så kallade lotuseffekten."
+   },
+   {
+    "t": "Isbroarna i studien var bara några tiotal mikrometer breda, tunnare än ett människohår, och hann bildas helt på under en halv minut."
+   }
+  ]
+ },
+ {
+  "id": "2026-07-09-skort-eller-segt-glas",
+  "title": "Fysiker knäcker gåtan om varför vissa glas spricker tvärt — och andra ger efter mjukt",
+  "segments": [
+   {
+    "t": "Fysiker knäcker gåtan om varför vissa glas spricker tvärt — och andra ger efter mjukt."
+   },
+   {
+    "t": "En ny studie från Tata Institute of Fundamental Research i Hyderabad (TIFRH) visar att en och samma materialegenskap — hur snabbt ett ämne blir trögflytande när det kyls till glas — avgör om det brister plötsligt eller ger efter mjukt under belastning."
+   },
+   {
+    "t": "Upptäckten, publicerad i Nature Communications, gäller långt fler material än fönsterglas: metaller, plaster, skum och geler kan alla vara ”glas” i fysikens mening."
+   },
+   {
+    "t": "En tallrik som far i golvet splittras på ett ögonblick i tiotals vassa skärvor."
+   },
+   {
+    "t": "En plastlinjal går nästan att böja dubbelt utan att gå sönder."
+   },
+   {
+    "t": "Båda räknas som glas i fysikens mening — och nu har forskare vid Tata Institute of Fundamental Research i Hyderabad (TIFRH) hittat en förvånansvärt enkel förklaring till varför vissa glas brister tvärt medan andra ger efter mjukt."
+   },
+   {
+    "t": "Studien, publicerad i tidskriften Nature Communications, pekar ut en enda materialegenskap — dess ”fragilitet” — som avgörande för om utfallet blir skört eller segt."
+   },
+   {
+    "t": "Glas är mer än fönsterrutor."
+   },
+   {
+    "t": "I fysikens mening är ett glas vilket fast ämne som helst där atomerna eller molekylerna har frusit fast i ett oordnat mönster i stället för att packa sig i en regelbunden kristallstruktur."
+   },
+   {
+    "t": "Det sker när en vätska kyls så snabbt att partiklarna inte hinner ordna sig innan rörelsen avstannar helt."
+   },
+   {
+    "t": "Utöver vanligt fönsterglas räknas därför en lång rad vardagliga material dit: vissa metallegeringar, plaster, skum, geler och till och med mjuka material som emulsioner och koloider."
+   },
+   {
+    "t": "Alla kan uppträda helt olika under påfrestning — vissa ger efter mjukt och smidigt (segt beteende), andra håller emot och brister sedan tvärt utan förvarning (skört beteende)."
+   },
+   {
+    "t": "Stark eller skör vätska — långt innan glaset stelnat."
+   },
+   {
+    "t": "Redan innan ett glas ens bildas skiljer forskare på ”starka” och ”sköra” vätskor, en klassificering som den amerikansk-australiske kemisten C."
+   },
+   {
+    "t": "Austen Angell myntade på 1980-talet."
+   },
+   {
+    "t": "När en vätska kyls mot sin glasövergång måste partiklarna ta sig över energibarriärer för att kunna röra på sig."
+   },
+   {
+    "t": "I sköra vätskor växer barriärerna snabbt vid nedkylning, så viskositeten (trögflutenheten) skjuter i höjden redan vid en liten temperatursänkning."
+   },
+   {
+    "t": "I starka vätskor växer barriärerna mer stegvis, så viskositeten ökar jämnare i stället."
+   },
+   {
+    "t": "Forskarna Roni Chatterjee och Monoj Adhikari, i Smarajit Karmakars forskargrupp vid TIFRH, ställde en enkel fråga: styr samma egenskap även hur det färdiga, stelnade glaset beter sig när man böjer, drar eller trycker på det?"
+   },
+   {
+    "t": "Simulerad töjning fram och tillbaka."
+   },
+   {
+    "t": "Med storskaliga datorsimuleringar byggde forskarna modeller av fyra sorters glasbildande system — metalliska glas, molekylära glas, kornformiga (granulära) system och nätverksbildande, kvartsliknande glas — vid en rad olika temperaturer."
+   },
+   {
+    "t": "Varje modellmaterial utsattes sedan för upprepad fram-och-tillbaka-töjning (så kallad oscillerande skjuvning) med varierande amplitud, medan forskarna avläste hur den mekaniska spänningen (kraft per ytenhet — inte att förväxla med elektrisk spänning) förändrades med töjningen, den relativa formändringen."
+   },
+   {
+    "t": "Precis som i den raka, inledande delen av ett fjäderdiagram (se Fysiklabbets genomgång om energi i fjädrar och Hookes lag, Fysik nivå 2) ökade spänningen till en början proportionellt mot töjningen."
+   },
+   {
+    "t": "Vid ett visst värde, sträckgränsen, nådde spänningen ett maximum — och just där skilde sig materialen åt."
+   },
+   {
+    "t": "Ett stort spänningsfall direkt efter sträckgränsen är kännetecknet för skört brott; ett litet fall betyder i stället att materialet fortsätter flyta segt vidare."
+   },
+   {
+    "t": "Energibarriärerna avgör fallhöjden."
+   },
+   {
+    "t": "Mönstret visade sig hänga ihop exakt med fragiliteten."
+   },
+   {
+    "t": "I sköra glas växer energibarriärerna snabbt vid nedkylning, vilket tvingar fram allt större töjning innan materialet ger efter — och en större lagrad spänning ger ett större fall när brottet väl kommer: skört beteende."
+   },
+   {
+    "t": "I starka glas ökar barriärerna mer stegvis, sträckgränsen förblir nästan oförändrad även vid djupare nedkylning, och spänningsfallet blir litet: segt beteende."
+   },
+   {
+    "t": "I sitt pressmaterial illustrerar forskargruppen själva ytterligheterna med två vardagliga bilder: en fönsterruta som spricker i ett nät av sprickor, och smör som mjukt ger efter för en kniv utan att gå sönder."
+   },
+   {
+    "t": "Nästa steg: skräddarsydda material."
+   },
+   {
+    "t": "Insikten är mer än en kuriositet."
+   },
+   {
+    "t": "Ingenjörer väljer redan material efter hur de beter sig vid belastning — en bilruta ska helst spricka i trubbiga korn snarare än vassa skärvor, medan en bärande stålbalk absolut inte får brista utan förvarning."
+   },
+   {
+    "t": "Genom att koppla ihop hur ett material stelnar till glas med hur det sedan brister hoppas forskarna kunna förutsäga, och kanske till och med skräddarsy, ett materials hållfasthet redan innan det tillverkas — bara genom att styra kylhastigheten."
+   },
+   {
+    "t": "Visste du."
+   },
+   {
+    "t": "Även metaller kan bli ”glas”: kyls en metallegering tillräckligt snabbt — för vissa legeringar krävs uppemot en miljon grader per sekund — hinner atomerna aldrig kristallisera."
+   },
+   {
+    "t": "Sådana metalliska glas används bland annat i vissa golfklubbor och i transformatorkärnor, tack vare sin höga hållfasthet och låga energiförluster."
+   },
+   {
+    "t": "Klassificeringen ”stark” och ”skör” vätska visualiseras i det så kallade Angell-diagrammet, en av glasfysikens mest citerade figurer — uppkallat efter kemisten som införde begreppen på 1980-talet."
+   },
+   {
+    "t": "Sträckgränsen är samma begrepp som ingenjörer använder för stål och andra konstruktionsmaterial: den spänning där materialet slutar återgå till sin ursprungsform och i stället börjar deformeras permanent."
+   }
+  ]
+ },
+ {
   "id": "2026-07-08-optisk-nal",
   "title": "Forskare formar ljus till en nål — och ser nästan nio gånger djupare in i ögat",
   "segments": [

@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-11 | `2026-07-11-boehms-borstar` | Forskare avslöjar ett dolt mönster i ögat med skräddarsytt ljus — och vill göra det till ett nytt ögontest | University at Buffalo (pressmeddelande) / Phys.org / PNAS (D. Pushin, D. Sarenac et al. 2026) |
 | 2026-07-10 | `2026-07-10-frost-isbroar` | Forskare avslöjar hur frost sprider sig — via mikroskopiska isbroar som svävar fritt i luften | Physics World / EurekAlert! (University of Illinois Urbana-Champaign, pressmeddelande) / Nature Physics (S. Yang, F. Chu, V. Ganesan et al. 2026) |
 | 2026-07-09 | `2026-07-09-skort-eller-segt-glas` | Fysiker knäcker gåtan om varför vissa glas spricker tvärt — och andra ger efter mjukt | Phys.org / EurekAlert! (TIFR Hyderabad, pressmeddelande) / Nature Communications (R. Chatterjee, M. Adhikari, S. Karmakar 2026) |
 | 2026-07-08 | `2026-07-08-optisk-nal` | Forskare formar ljus till en nål — och ser nästan nio gånger djupare in i ögat | Phys.org / Optica — Optics Letters (J. Huang, Z. Duan, P. Xiao, H. Liang 2026) |

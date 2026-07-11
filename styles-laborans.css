@@ -1990,6 +1990,103 @@ button.lab-card-disabled { pointer-events: none; }
     font-size: 15px;
 }
 
+/* ── Visualiseringar (interaktiva "aha-maskiner", data/visualiseringar/) ──
+   Återanvänder graf-widgetens klasser (lab-graf-card/-scene/-slider m.fl.)
+   och lägger bara till det steg-baserade skalet. */
+.lab-vis-host { margin-top: 18px; }
+.lab-vis-error {
+    font-size: 14px;
+    color: var(--lab-accent);
+    text-align: center;
+}
+.lab-vis .lab-graf-scene { max-width: 560px; }
+.lab-vis-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 4px 0 12px;
+}
+.lab-vis-step {
+    font-family: var(--lab-font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--lab-line-strong);
+    background: transparent;
+    color: var(--lab-ink-soft);
+    cursor: pointer;
+}
+.lab-vis-step:hover {
+    background: var(--lab-bg-raised);
+    color: var(--lab-ink);
+}
+.lab-vis-step.active {
+    background: var(--lab-ink);
+    color: var(--lab-bg-panel);
+    border-color: var(--lab-ink);
+}
+.lab-vis-instr {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--lab-ink-soft);
+    text-align: center;
+    max-width: 62ch;
+    margin: 0 auto 12px;
+}
+.lab-vis-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin: 8px 0 2px;
+    font-size: 13px;
+    color: var(--lab-ink-soft);
+}
+.lab-vis-legend .swatch {
+    display: inline-block;
+    width: 20px;
+    height: 0;
+    border-top: 3px solid currentColor;
+    border-radius: 2px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+.lab-vis-formel {
+    /* Flex med "safe center": centrerad när formeln ryms, scrollbar från
+       vänster (inte klippt i båda kanter) när den är bredare än kortet. */
+    display: flex;
+    justify-content: center;
+    justify-content: safe center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    font-size: 16px;
+    margin-top: 8px;
+    min-height: 24px;
+    padding-bottom: 2px;
+}
+.lab-vis-note {
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--lab-accent);
+    margin-top: 6px;
+    min-height: 18px;
+}
+.lab-vis-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+}
+.lab-vis-actions .lab-btn {
+    padding: 9px 18px;
+    font-size: 13.5px;
+}
+
 /* ── Formelrutans layout (variabellista bredvid eller under formeln) ──
    Byggs av buildFormelLayouts(); fitFormel() växlar till .is-stacked när
    formel + lista inte får plats bredvid varandra. */

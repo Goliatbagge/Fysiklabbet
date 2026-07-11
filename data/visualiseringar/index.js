@@ -54,6 +54,11 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Bygg ett kulträd med och utan återläggning — och se komplementhändelsen ge samma svar med färre räkningar.',
         fil: 'data/visualiseringar/ma1c-5.7.js'
     },
+    'ma3c-2.5': {
+        titel: 'Deriverbarhets-mikroskopet',
+        beskrivning: 'Zooma in med linsen — deriverbara punkter rätas ut till en linje, men ett hörn förblir ett hörn.',
+        fil: 'data/visualiseringar/ma3c-2.5.js'
+    },
     'ma3c-4.1': {
         titel: 'Konkavitetsbilen',
         beskrivning: 'Kör en bil längs kurvan och se teckentabellen byggas av lutningen och dess ändring.',
@@ -144,6 +149,16 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra i basen a och jämför aˣ med sin derivata tills kvoten blir 1 — då har du hittat e.',
         fil: 'data/visualiseringar/ma3c-3.4.js'
     },
+    'ma1c-3.2': {
+        titel: 'Faktorkedjan',
+        beskrivning: 'Gissa om +20 % och −20 % tar dig tillbaka till start — och bygg egna kedjor av förändringsfaktorer.',
+        fil: 'data/visualiseringar/ma1c-3.2.js'
+    },
+    'ma1c-3.3': {
+        titel: 'Faktorkedjan',
+        beskrivning: 'Gissa om +20 % och −20 % tar dig tillbaka till start — och se upprepad ränta växa exponentiellt.',
+        fil: 'data/visualiseringar/ma1c-3.2.js'
+    },
     'ma1c-5.4': {
         titel: 'Tärningsverkstaden',
         beskrivning: 'Utforska utfallsrummet för två tärningar och se den relativa frekvensen stabiliseras mot den klassiska sannolikheten.',
@@ -189,6 +204,21 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra punkten P längs cirkeln och se randvinkeln stå stilla — och testa diameterfallet där den alltid blir 90°.',
         fil: 'data/visualiseringar/ma2c-4.11.js'
     },
+    'ma2c-2.6': {
+        titel: 'Diskriminantens gränsland',
+        beskrivning: 'Dra q uppåt och se rötterna glida ihop till en dubbelrot — och sedan vika av vinkelrätt ut i det komplexa talplanet.',
+        fil: 'data/visualiseringar/ma2c-2.6.js'
+    },
+    'ma4-4.3': {
+        titel: 'Diskriminantens gränsland',
+        beskrivning: 'Dra q uppåt och se rötterna glida ihop till en dubbelrot — och sedan vika av vinkelrätt ut i det komplexa talplanet.',
+        fil: 'data/visualiseringar/ma2c-2.6.js'
+    },
+    'ma4-1.14': {
+        titel: 'En vektor blir en sinuskurva',
+        beskrivning: 'Dra i vektorn (a, b) och se att a·sin x + b·cos x alltid blir en enda sinuskurva med amplitud c.',
+        fil: 'data/visualiseringar/ma4-1.14.js'
+    },
     'ma4-2.3': {
         titel: 'Kedjeregeln: tre tallinjer',
         beskrivning: 'Dra punkten och se x avbildas via u = g(x) till y = f(u) — förstoringsfaktorerna multipliceras.',
@@ -198,6 +228,11 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Kedjeregeln: tre tallinjer',
         beskrivning: 'Dra punkten och se x avbildas via u = g(x) till y = f(u) — förstoringsfaktorerna multipliceras.',
         fil: 'data/visualiseringar/ma4-2.3.js'
+    },
+    'ma4-2.7': {
+        titel: 'Produktregelns rektangel',
+        beskrivning: 'Dra x och Δx och se de två remsorna och hörnet växa — hörnets andel rasar mot noll när Δx krymper.',
+        fil: 'data/visualiseringar/ma4-2.7.js'
     },
     'ma4-3.7': {
         titel: 'Rotationskroppar steg för steg',
@@ -233,5 +268,25 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Multiplikation och de Moivre',
         beskrivning: 'Dra visarna z och w och se multiplikationen vrida och skala — och hur lösningarna till zⁿ = w bildar en regelbunden n-hörning.',
         fil: 'data/visualiseringar/ma4-4.5.js'
+    },
+    'ma3c-6.3': {
+        titel: 'Trig-ekvationens lösningar',
+        beskrivning: 'Dra linjen y = a och se de två lösningsfamiljerna dyka upp i cirkeln och grafen — och vad som händer när de smälter samman eller försvinner.',
+        fil: 'data/visualiseringar/ma3c-6.3.js'
+    },
+    'ma3c-6.4': {
+        titel: 'Trig-ekvationens lösningar',
+        beskrivning: 'Dra linjen y = a och se de två lösningsfamiljerna dyka upp i cirkeln och grafen — och vad som händer när de smälter samman eller försvinner.',
+        fil: 'data/visualiseringar/ma3c-6.3.js'
+    },
+    'ma4-1.3': {
+        titel: 'Trig-ekvationens lösningar',
+        beskrivning: 'Dra linjen y = a och se de två lösningsfamiljerna dyka upp i cirkeln och grafen — och vad som händer när de smälter samman eller försvinner.',
+        fil: 'data/visualiseringar/ma3c-6.3.js'
+    },
+    'ma4-1.4': {
+        titel: 'Trig-ekvationens lösningar',
+        beskrivning: 'Dra linjen y = a och se de två lösningsfamiljerna dyka upp i cirkeln och grafen — och vad som händer när de smälter samman eller försvinner.',
+        fil: 'data/visualiseringar/ma3c-6.3.js'
     }
 };

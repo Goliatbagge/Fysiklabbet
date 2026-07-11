@@ -124,15 +124,55 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra punkten runt enhetscirkeln och se sinuskurvan rullas fram — radianer är den utrullade båglängden.',
         fil: 'data/visualiseringar/ma3c-6.2.js'
     },
+    'ma3c-4.6': {
+        titel: 'Extremvärdesfabriken: lådan',
+        beskrivning: 'Klipp hörn ur ett kartongark och vik en låda — dina mätpunkter blir en kurva och derivatan pekar ut toppen.',
+        fil: 'data/visualiseringar/ma3c-4.6.js'
+    },
+    'ma3c-4.7': {
+        titel: 'Extremvärdesfabriken: lådan',
+        beskrivning: 'Klipp hörn ur ett kartongark och vik en låda — dina mätpunkter blir en kurva och derivatan pekar ut toppen.',
+        fil: 'data/visualiseringar/ma3c-4.6.js'
+    },
+    'ma4-2.9': {
+        titel: 'Extremvärdesfabriken: lådan',
+        beskrivning: 'Klipp hörn ur ett kartongark och vik en låda — dina mätpunkter blir en kurva och derivatan pekar ut toppen.',
+        fil: 'data/visualiseringar/ma3c-4.6.js'
+    },
     'ma3c-5.3': {
         titel: 'Riemann-kläm: arean under kurvan',
         beskrivning: 'Dra i n och se under- och översumman klämma in arean — differensen krymper mot integralens exakta värde.',
         fil: 'data/visualiseringar/ma3c-5.3.js'
     },
+    'ma4-2.12': {
+        titel: 'Sneda asymptoter',
+        beskrivning: 'Dela upp funktionen och zooma ut ×50 — kurvan smälter ihop med sin kvotlinje när resttermen dör ut.',
+        fil: 'data/visualiseringar/ma4-2.12.js'
+    },
+    'ma4-2.13': {
+        titel: 'Sneda asymptoter',
+        beskrivning: 'Dela upp funktionen och zooma ut ×50 — kurvan smälter ihop med sin kvotlinje när resttermen dör ut.',
+        fil: 'data/visualiseringar/ma4-2.12.js'
+    },
+    'ma4-2.14': {
+        titel: 'Sneda asymptoter',
+        beskrivning: 'Dela upp funktionen och zooma ut ×50 — kurvan smälter ihop med sin kvotlinje när resttermen dör ut.',
+        fil: 'data/visualiseringar/ma4-2.12.js'
+    },
     'ma4-3.2': {
         titel: 'Riemann-kläm: arean under kurvan',
         beskrivning: 'Dra i n och se under- och översumman klämma in arean — differensen krymper mot integralens exakta värde.',
         fil: 'data/visualiseringar/ma3c-5.3.js'
+    },
+    'ma2c-5.4': {
+        titel: 'Räknestickan',
+        beskrivning: 'Multiplicera och dividera genom att skjuta log-linjaler — logaritmlagarna är mekanismen som får det att gå ihop.',
+        fil: 'data/visualiseringar/ma2c-5.4.js'
+    },
+    'ma2c-5.5': {
+        titel: 'Räknestickan',
+        beskrivning: 'Multiplicera och dividera genom att skjuta log-linjaler — logaritmlagarna är mekanismen som får det att gå ihop.',
+        fil: 'data/visualiseringar/ma2c-5.4.js'
     },
     'ma2c-6.5': {
         titel: 'Galtonbrädan',
@@ -159,6 +199,26 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Gissa om +20 % och −20 % tar dig tillbaka till start — och se upprepad ränta växa exponentiellt.',
         fil: 'data/visualiseringar/ma1c-3.2.js'
     },
+    'ma1c-6.5': {
+        titel: 'Vektorpromenaden',
+        beskrivning: 'Dra vektorerna och gå promenaden spets till svans — byt ordning och se resultanten stå still.',
+        fil: 'data/visualiseringar/ma1c-6.5.js'
+    },
+    'ma1c-6.6': {
+        titel: 'Vektorpromenaden',
+        beskrivning: 'Dra vektorerna och gå promenaden spets till svans — byt ordning och se resultanten stå still.',
+        fil: 'data/visualiseringar/ma1c-6.5.js'
+    },
+    'ma1c-6.7': {
+        titel: 'Vektorpromenaden',
+        beskrivning: 'Subtraktion är att gå baklänges: vänd v till −v och se kedjan ge u − v.',
+        fil: 'data/visualiseringar/ma1c-6.5.js'
+    },
+    'ma1c-6.8': {
+        titel: 'Vektorpromenaden',
+        beskrivning: 'Komposant-trappan och Pythagoras ger vektorns längd — dra och se formeln räkna live.',
+        fil: 'data/visualiseringar/ma1c-6.5.js'
+    },
     'ma1c-5.4': {
         titel: 'Tärningsverkstaden',
         beskrivning: 'Utforska utfallsrummet för två tärningar och se den relativa frekvensen stabiliseras mot den klassiska sannolikheten.',
@@ -179,6 +239,16 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra din egen linje mot punkterna, se avvikelserna som riktiga kvadrater och låt regressionslinjen minimera dem.',
         fil: 'data/visualiseringar/ma2c-6.6.js'
     },
+    'ma3c-5.7': {
+        titel: 'Integralen som resemätare',
+        beskrivning: 'Forma v(t)-kurvan och kör bilen — arean blir sträckan, och en nollintegral betyder tillbaka vid start.',
+        fil: 'data/visualiseringar/ma3c-5.7.js'
+    },
+    'ma4-3.5': {
+        titel: 'Integralen som resemätare',
+        beskrivning: 'Forma v(t)-kurvan och kör bilen — arean blir sträckan, och en nollintegral betyder tillbaka vid start.',
+        fil: 'data/visualiseringar/ma3c-5.7.js'
+    },
     'ma3c-5.4': {
         titel: 'Arean har en lutning',
         beskrivning: 'Dra x-markören och se den ackumulerade arean A(x) växa i takt med f(x) — fundamentalsatsen i praktiken.',
@@ -198,6 +268,11 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Parabelns tre klädnader',
         beskrivning: 'Dra i nollställena, extrempunkten eller y-skärningen — samma parabel, tre skrivsätt som uppdateras live.',
         fil: 'data/visualiseringar/ma2c-3.1.js'
+    },
+    'ma2c-4.5': {
+        titel: 'Pythagoras areapussel',
+        beskrivning: 'Pussla ihop kvadraterna på kateterna till kvadraten på hypotenusan — det går bara ihop vid rät vinkel.',
+        fil: 'data/visualiseringar/ma2c-4.5.js'
     },
     'ma2c-4.11': {
         titel: 'Randvinkeljakten',

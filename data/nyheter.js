@@ -31,6 +31,47 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-11-boehms-borstar",
+    date: "2026-07-11",
+    title: "Forskare avslöjar ett dolt mönster i ögat med skräddarsytt ljus — och vill göra det till ett nytt ögontest",
+    deck: "De flesta har aldrig lagt märke till det, men långt ute i synfältets periferi döljer sig ett svagt, tvåflikigt ljusmönster som bara dyker upp när ljuset är polariserat. Forskare vid University at Buffalo och University of Waterloo har nu, med en teknik hämtad från kvantoptiken, förstärkt mönstret till tydliga figurer med flera flikar. Studien, publicerad i Proceedings of the National Academy of Sciences, är ett första steg mot ett helt nytt sätt att undersöka näthinnans hälsa.",
+    category: "Optik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-11-boehms-borstar.jpg",
+    imageAlt: "Sex bildrutor mot svart bakgrund, var och en med en grönt lysande ring omgiven av vita, pilspetsliknande flikar som strålar ut symmetriskt — förstärkta versioner av det entoptiska mönstret Boehms borstar, med olika antal flikar i varje bildruta.",
+    imageCredit: "Illustration: Dusan Sarenac/University at Buffalo (CC BY 4.0)",
+    tags: ["optik", "vågor", "polarisation", "ljus", "kvantoptik", "strukturerat ljus", "synen", "näthinnan", "medicinsk fysik", "entoptiskt fenomen", "fysik 2"],
+    sources: [
+      { name: "University at Buffalo (pressmeddelande)", url: "https://www.buffalo.edu/news/releases/2026/07/quantum-eye-test.html" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-quantum-optics-rare-visual-phenomenon.html" }
+    ],
+    research: { citation: "D. Pushin, D. Sarenac et al., ”Topological Expansion of Boehm's Brushes via Structured Light”, Proceedings of the National Academy of Sciences (2026)", url: "https://doi.org/10.1073/pnas.2532243123" },
+    body: [
+      { type: "p", html: "Titta länge mot en jämnt vit yta eller en ljusgrå datorskärm, och håll blicken lite vid sidan om det du egentligen tittar på. Hos de flesta människor dyker det då upp, långt ute i synfältets periferi, en svag, flimrande fläck med två motsatta lober — ett mönster nästan ingen lägger märke till, och som bara existerar inne i det egna ögat. Fenomenet kallas <em>Boehms borstar</em>, och det är ett av kroppens mest förbisedda sinnesintryck: ett bevis på att ögat, utan att vi vet om det, faktiskt kan uppfatta åt vilket håll ljus är polariserat. Nu har forskare vid University at Buffalo och University of Waterloo, med en teknik hämtad från kvantoptiken, förstärkt det bleka mönstret till tydliga, mångflikiga figurer — ett resultat publicerat i tidskriften <em>Proceedings of the National Academy of Sciences</em> (PNAS) som forskarna hoppas kan bli grunden för ett helt nytt slags ögontest." },
+
+      { type: "h2", text: "Ljus som svänger åt ett bestämt håll" },
+      { type: "p", html: "Vanligt dagsljus svänger åt alla håll på en gång, men ljus som studsat mot vatten eller glasrutor, eller strötts av luftens molekyler på himlen, blir delvis <em>polariserat</em> — det elektriska fältet svänger då huvudsakligen åt ett bestämt håll, vinkelrätt mot ljusets färdriktning (se Fysiklabbets genomgång om elektromagnetiska vågor och ljus, Fysik nivå&nbsp;2, om hur just den vinkelräta svängningen gör ljus till en tvärvåg som går att polarisera — till skillnad från exempelvis ljud). Människoögat saknar ett eget ”polarisationsfilter” av det slag många insekter har, men det gömmer ändå två svaga, medfödda sätt att ana polarisationsriktningen. Det mest kända är <em>Haidingers borste</em>, en gulaktig, timglasformad fläck mitt i synfältet som den österrikiske fysikern Wilhelm Haidinger beskrev redan 1844, och som beror på färgade pigment i gula fläcken mitt i näthinnan. Boehms borstar, beskrivet av Gundo von Boehm så sent som 1940, är dess mindre kända kusin: det uppstår i stället långt ute i synfältets periferi och anses bero på att polariserat ljus sprids olika mycket i de tunna vävnadslagren längst ut i näthinnan." },
+
+      { type: "h2", text: "Ljus skräddarsytt efter ögats egen geometri" },
+      { type: "p", html: "För att förstärka det annars nästan omärkliga mönstret använde forskarlaget så kallat <em>strukturerat ljus</em> — en teknik utvecklad inom kvantoptiken, där ljusets polarisationsriktning varierar systematiskt över själva ljusstrålens tvärsnitt i stället för att vara densamma överallt. Genom att forma denna variation så att den speglar näthinnans egen, radiella symmetri kunde forskarna byta ut det svaga, tvåflikiga mönstret mot betydligt ljusare figurer med ett varierande antal flikar, beroende på hur ljuset skräddarsyddes (se bilden ovan för några av de mönster som uppmättes i studien)." },
+
+      { type: "h2", text: "Från ja/nej-fråga till mätbart test" },
+      { type: "p", html: "Ett dussin friska frivilliga fick titta in i en uppställning som till det yttre påminde om en vanlig synundersökning, vid optometriinstitutionen på University of Waterloo. I stället för att bara fråga om personen såg mönstret eller inte lät forskarna kontrasten justeras automatiskt tills varje persons egen tröskel för att upptäcka det hittades — och mätte samtidigt hur många flikar personen såg, hur mycket kontrast som krävdes, och var i synfältet mönstret dök upp. Resultatet: mönstret var lättast att upptäcka en bit ut från synfältets mitt, precis där Boehms borstar förväntas uppstå." },
+
+      { type: "quote", html: "”Vårt strukturerade ljus gjorde de normalt svaga, tvåflikiga mönstren ljusare och lättare att se, med ett varierande antal flikar.”", cite: "Dusan Sarenac, University at Buffalo" },
+
+      { type: "h2", text: "Nästa steg: sjuka ögon" },
+      { type: "p", html: "Eftersom Boehms borstar uppstår just i näthinnans egna vävnadslager finns en förhoppning om att mönstret förändras om vävnaden är skadad. Forskarnas nästa steg är därför att testa metoden på patienter med näthinnesjukdomar, till exempel åldersförändringar i gula fläcken (makuladegeneration), för att se om skadade områden gör att mönstret upplevs annorlunda. Går det att visa ett sådant samband kan ett enkelt, snabbt seendetest med strukturerat ljus i bästa fall bli ett billigt komplement till dagens tyngre bildtagningsutrustning på ögonkliniker." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Du kan själv leta efter Haidingers borste: titta mot en jämnt ljus, vit yta eller en molnfri himmel och håll utkik efter en svag, gulaktig timglasformad fläck som rör sig med blicken.",
+        "Bin och många andra insekter navigerar delvis med hjälp av himlens polarisationsmönster — en förmåga som människans öga bara anar via svaga, entoptiska mönster som Boehms borstar.",
+        "Mönstret i studien uppstår genom så kallad Mie-spridning, då ljus sprids av strukturer ungefär lika stora som våglängden — en annan spridningsprocess än den Rayleigh-spridning som ger himlen dess blå färg."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-10-frost-isbroar",
     date: "2026-07-10",
     title: "Forskare avslöjar hur frost sprider sig — via mikroskopiska isbroar som svävar fritt i luften",

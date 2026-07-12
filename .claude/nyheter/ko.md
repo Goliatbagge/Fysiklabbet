@@ -14,6 +14,64 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-12) — kan tas upp senare
+
+- **OBS — undvik "elektriskt fält tredubblar värmeflödet i keramik" om den dyker
+  upp igen**: ScienceDaily/Physics World återpublicerade 2026-07-09/11 en story
+  om ORNL/Ohio State-forskning (Upreti, Manley, Hermann, Heremans, Rashadfar,
+  Sahul m.fl., PRX Energy) om att ett elektriskt fält kan nästan tredubbla
+  värmeledningen i relaxor-ferroelektriska keramer via förlängd fononlivslängd.
+  Men både ORNL:s eget pressmeddelande (publicerat 5 mars 2026, "Electric field
+  tunes vibrations to ease heat transfer") och phys.org (mars 2026) visar att
+  detta är samma forskning som redan gick ut i våras — inte färsk nyhet trots
+  nytt ScienceDaily-datum. Exakt samma fälla som gallium-gåtan (se
+  2026-07-10-noteringen). Källor:
+  https://www.ornl.gov/news/electric-field-tunes-vibrations-ease-heat-transfer ,
+  https://www.sciencedaily.com/releases/2026/07/260709160651.htm , PRX Energy
+  DOI 10.1103/5d1z-wg4p. (tillagd 2026-07-12)
+- **OBS — undvik "varför guld aldrig fläckas" och "vätskor som spricker som
+  glas" av samma skäl**: ScienceDaily/Quanta skrev om båda i juli, men
+  originalstudierna är flera månader gamla — guld: Santu Biswas & Matthew
+  Montemore (Tulane), Physical Review Letters, publicerad 21 maj 2026; vätske-
+  fraktur: Thamires Lima, Nicolas Alvarez m.fl. (Drexel/ExxonMobil), Physical
+  Review Letters 136, 124002, publicerad 27 mars 2026 (Quanta-artikeln om detta,
+  publicerad 2026-07-10, är i sig ett nyskrivet reportage men bygger på den
+  gamla studien). Vätskefraktur-ämnet ligger dessutom nära "skört/segt glas"
+  (07-09) tematiskt — undvik två brottmekanik-nyheter i följd. Källor:
+  https://www.sciencedaily.com/releases/2026/07/260710003511.htm (guld),
+  https://www.quantamagazine.org/we-know-simple-fluids-can-flow-turns-out-some-can-fracture-20260710/
+  (vätskefraktur). (tillagd 2026-07-12)
+- **Nytt test certifierar kvantmätningar (POVM) som enklare metoder inte kan
+  efterlikna** — Heinrich Heine University Düsseldorf, Lund University och
+  University of Innsbruck, publicerad i PRX Quantum. Teoretiskt tung
+  kvantinformationsnyhet, svår att konkretisera för gymnasienivå, och vi har
+  kört mycket kvantfysik senaste veckorna. Källa:
+  https://phys.org/news/2026-07-certifies-quantum-simpler-methods-mimic.html
+  (tillagd 2026-07-12)
+- **Elektron-på-helium-qubit uppnår stark koppling till en enda
+  mikrovågsfoton** — en femtio år gammal teoretisk förutsägelse äntligen
+  realiserad experimentellt. Intressant kvantfysik-vinkel men nischad
+  kvantdator-nyhet; spara till kvantdatorämnet svalnat något. Källa:
+  ScienceDaily/phys.org (sök "electron-on-helium qubit strong coupling
+  microwave photon 2026"), publicerad kring 2026-07-08. (tillagd 2026-07-12)
+- **AI designar egna partikelfysik-modeller för att förklara neutrinernas
+  massa** — UC Irvine-forskare har byggt ett autonomt system som låter en AI
+  själv föreslå teoretiska partikelmodeller, en uppgift som traditionellt
+  kräver mänskliga teoretiker. Spännande "AI möter grundforskning"-vinkel, men
+  själva resultatet (neutrinomassa-modeller) är abstrakt och svårt att
+  konkretisera för gymnasienivå utan mycket förarbete. Källa: phys.org (sök
+  "AI neutrino mass particle models UC Irvine 2026"), publicerad kring
+  2026-07-09. (tillagd 2026-07-12)
+- **Ny magnetisk design ska ge kraftfullare industriell plasma** ("Reimagining
+  the furnace") — fusions-/inneslutningsfysik-vinkel, potentiellt en bra
+  Fysik 2-nyhet om magnetfält, men ofärdig research när vi tittade förbi.
+  Källa: phys.org (sök "reimagining the furnace magnetic design industrial
+  plasma 2026"). (tillagd 2026-07-12)
+- **MIT: upptäckt kan ge ljusare, mer energieffektiva digitala skärmar** —
+  materialfysik/optik-vinkel (troligen kvantprickar eller lysdiod-relaterat),
+  inte färdigresearchad. Källa: EurekAlert! (MIT, 2026-07-10, sök "brighter
+  more energy-efficient digital displays MIT"). (tillagd 2026-07-12)
+
 ## Fynd som inte användes (2026-07-10) — kan tas upp senare
 
 - **Svarta hål-kollisioner tycks följa en "maximal entropi"-princip** — forskare vid

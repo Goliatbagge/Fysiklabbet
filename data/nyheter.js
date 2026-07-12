@@ -31,6 +31,46 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-12-syntetiskt-svart-hal",
+    date: "2026-07-12",
+    title: "Ett stillastående kretskort får radiovågor att bli starkare — med ett knep lånat från svarta hål",
+    deck: "Forskare vid CUNY Advanced Science Research Center i New York har i tidskriften Nature återskapat en av relativitetsteorins mest exotiska förutsägelser: att ett tillräckligt snabbt roterande föremål kan ge energi till en förbipasserande våg i stället för att bara reflektera den. Genom att låta en ring av elektroniska komponenter växla egenskaper i exakt rätt takt fick de radiovågor att uppträda som om de mötte ett föremål som snurrade snabbare än ljuset — och vågorna kom ut nästan sex gånger starkare än de gick in, utan att en enda del i kretsen någonsin rörde sig.",
+    category: "Vågor",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-12-syntetiskt-svart-hal.jpg",
+    imageAlt: "Konstnärlig målning i mörka toner: en ring med små kvadratiska noder omger en virvlande spiral i blått och orange, med vågmönster som strålar ut åt vänster i blått och åt höger i orange mot en stjärnbeströdd bakgrund.",
+    imageCredit: "Illustration: Dalila Pasotti och Hadiseh Nasari / CUNY Advanced Science Research Center (pressbild, EurekAlert!)",
+    tags: ["vågor", "elektromagnetism", "relativitetsteori", "svarta hål", "resonans", "metamaterial", "radiovågor", "energi", "modern fysik", "fysik 2"],
+    sources: [
+      { name: "EurekAlert! (CUNY Advanced Science Research Center, pressmeddelande)", url: "https://www.eurekalert.org/news-releases/1135209" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-synthetic-rotation-black-hole-energy.html" }
+    ],
+    research: { citation: "H. Nasari, H. Moussa, A. Alù et al., ”Observation of Floquet rotational super-radiance”, Nature (2026)", url: "https://doi.org/10.1038/s41586-026-10725-y" },
+    body: [
+      { type: "p", html: "1969 föreslog den brittiske fysikern Roger Penrose något som lät som ett skämt från naturen själv: ett roterande svart hål kan ge bort energi. Skickar man ett föremål i rätt bana genom <em>ergosfären</em> — den virvlande zonen utanför själva händelsehorisonten där rymdtiden själv dras med i rotationen — och låter det klyvas i två delar där inne, kan den ena delen komma ut med mer rörelseenergi än hela föremålet hade från början. Två år senare, 1971, generaliserade den sovjetiske fysikern Jakov Zeldovitj idén till vågor: en tillräckligt snabbt roterande, absorberande cylinder borde kunna förstärka en radiovåg som studsar mot den, i stället för att bara dämpa den. Fenomenet kallas i dag <em>superradians</em>, eller Penrose–Zeldovitj-processen. Nu har forskare vid Advanced Science Research Center, en del av CUNY Graduate Center i New York (CUNY ASRC), byggt en apparat som återskapar just den fysiken — utan ett enda roterande föremål. Studien publicerades den 8&nbsp;juli i tidskriften <em>Nature</em>." },
+
+      { type: "h2", text: "En ring som aldrig snurrar en enda grad" },
+      { type: "p", html: "Problemet med att pröva Zeldovitjs idé i verkligheten är uppenbart: få saker går att snurra tillräckligt fort för att ge en mätbar effekt, och ingenting med massa kan snurra snabbare än ljuset. Forskarlaget, lett av Andrea Alù tillsammans med Hadiseh Nasari och Hady Moussa, löste problemet genom att aldrig snurra någonting alls. De byggde i stället en ring av tre elektroniska resonatorer — kretskomponenter som svänger vid en bestämd frekvens, ungefär som en gitarrsträng svänger vid sin egenfrekvens (se Fysiklabbets genomgång om resonans, Fysik nivå&nbsp;2) — och lät varje resonators egenskaper växla i tur och ordning med hjälp av <em>varaktordioder</em>, kondensatorer vars förmåga att lagra laddning går att styra elektriskt med en spänning. Växlingen vandrar runt ringen i ett fast mönster, ungefär som en åskådarvåg som sveper runt en fullsatt arena utan att en enda person lämnar sin plats. För en radiovåg som möter ringen är skillnaden mot en verkligt roterande kropp omöjlig att märka — men eftersom det bara är ett tidsschema som vandrar, inte massa som rör sig, går det att sätta mönstrets hastighet hur högt som helst, långt förbi ljushastigheten <em>c</em>. Tekniken kallas <em>Floquet-modulering</em>, efter den franske 1800-talsmatematikern Gaston Floquet, som studerade just system med periodiskt föränderliga egenskaper." },
+
+      { type: "h2", text: "Radiovågorna kom ut starkare än de gick in" },
+      { type: "p", html: "Forskarna skickade in en radiosignal på 100&nbsp;MHz med rätt <em>vinkelegenskaper</em> — samma sak som avgör åt vilket håll en våg ”snurrar” kring sin färdriktning — och mätte i bästa fall en förstärkning på 7,8&nbsp;dB. Omräknat i effekt betyder det att signalen kom ut omkring sex gånger starkare än den gick in. Energin kom inte från signalen själv, utan från den yttre krets som driver den vandrande moduleringen runt ringen — en roll som motsvarar det roterande svarta hålets egen rörelseenergi i Penrose ursprungliga tankeexperiment." },
+
+      { type: "quote", html: "”Vågor med rätt vinkelegenskaper hämtar energi ur den syntetiska, tidsstyrda rotationen — det ger en helt ny form av bredbandig, riktad förstärkning.”", cite: "Andrea Alù, CUNY Advanced Science Research Center" },
+
+      { type: "h2", text: "Ett tryggt labb för extrema fenomen" },
+      { type: "p", html: "Ingen hävdar att en radiokrets på ett skrivbord i New York bevisar exakt hur riktiga svarta hål beter sig — de äkta exemplaren styrs av Einsteins allmänna relativitetsteori i krökt rymdtid, inte av varaktordioder (se Fysiklabbets genomgång om svarta hål, Fysik nivå&nbsp;2, om händelsehorisonten hos ett stillastående svart hål — det roterande fallet med sin ergosfär är ett steg längre). Men matematiken som beskriver hur en våg vinner energi av en tillräckligt snabb rotation är densamma i båda fallen, vilket gör den elektroniska ringen till en ovanligt tillgänglig sandlåda för idéer som annars bara går att undersöka på astronomiskt avstånd — eller inte alls. Forskarna pekar själva ut trådlös kommunikation och radar som möjliga tillämpningar: en förstärkare utan vare sig rörliga delar eller en extern strömkälla kopplad direkt till signalvägen." },
+
+      { type: "quote", html: "”Det här experimentet flyttar tankar om extrem rotationsdynamik från teori till praktik, och skapar en mångsidig experimentell plattform för fenomen i gränslandet mellan astrofysik, vågfysik och kvantvetenskap.”", cite: "Hadiseh Nasari, CUNY Advanced Science Research Center" },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Roger Penrose delade Nobelpriset i fysik 2020 för att ha visat att bildandet av svarta hål är en oundviklig konsekvens av Einsteins allmänna relativitetsteori — samma teori som ligger bakom idén om att ett roterande svart hål kan ge bort energi.",
+        "Namnet Floquet-modulering kommer från den franske matematikern Gaston Floquet, som redan på 1880-talet studerade lösningar till ekvationer med periodiskt varierande koefficienter — helt utan tanke på svarta hål eller radiovågor.",
+        "En förstärkning på 7,8 dB motsvarar att vågens effekt blev omkring sex gånger så stor som innan — jämför med hur till exempel en förstärkares volym ofta anges just i decibel."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-11-boehms-borstar",
     date: "2026-07-11",
     title: "Forskare avslöjar ett dolt mönster i ögat med skräddarsytt ljus — och vill göra det till ett nytt ögontest",

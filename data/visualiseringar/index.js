@@ -29,6 +29,21 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra h mot 0 och se sekanten övergå i tangenten — derivatans definition.',
         fil: 'data/visualiseringar/ma3c-2.3.js'
     },
+    'ma1c-1.6': {
+        titel: 'Potenstrappan',
+        beskrivning: 'Kliv nedåt genom exponenttrappan — a⁰ = 1 och a⁻ⁿ = 1/aⁿ är mönstrets tvingande fortsättning.',
+        fil: 'data/visualiseringar/ma1c-1.6.js'
+    },
+    'ma1c-1.7': {
+        titel: 'Potenstrappan',
+        beskrivning: 'Kliv nedåt genom exponenttrappan — a⁰ = 1 och a⁻ⁿ = 1/aⁿ är mönstrets tvingande fortsättning.',
+        fil: 'data/visualiseringar/ma1c-1.6.js'
+    },
+    'ma1c-2.11': {
+        titel: 'Olikhetens vändpunkt',
+        beskrivning: 'Dela med ett negativt tal och se hela tallinjen speglas kring 0 — det är därför tecknet vänder.',
+        fil: 'data/visualiseringar/ma1c-2.11.js'
+    },
     'ma1c-2.5': {
         titel: 'Ekvationsvågen',
         beskrivning: 'Gör samma operation på båda vågskålarna för att lösa ut x — och testa vad som händer om du fuskar.',
@@ -104,6 +119,16 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Se (a+b)² och konjugatregeln som bokstavliga areor — dra i figuren och flytta pusselbiten.',
         fil: 'data/visualiseringar/ma2c-2.1.js'
     },
+    'ma3c-6.6': {
+        titel: 'Sinussatsen på cirkeln',
+        beskrivning: 'Dra ett hörn längs den omskrivna cirkeln och se kvoten a/sin A stå stilla — den är alltid diametern.',
+        fil: 'data/visualiseringar/ma3c-6.6.js'
+    },
+    'ma3c-6.8': {
+        titel: 'Sinussatsen på cirkeln',
+        beskrivning: 'Dra ett hörn längs den omskrivna cirkeln och se kvoten a/sin A stå stilla — den är alltid diametern.',
+        fil: 'data/visualiseringar/ma3c-6.6.js'
+    },
     'ma3c-6.2': {
         titel: 'Enhetscirkeln rullas ut',
         beskrivning: 'Dra punkten runt enhetscirkeln och se sinuskurvan rullas fram — radianer är den utrullade båglängden.',
@@ -173,6 +198,11 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Räknestickan',
         beskrivning: 'Multiplicera och dividera genom att skjuta log-linjaler — logaritmlagarna är mekanismen som får det att gå ihop.',
         fil: 'data/visualiseringar/ma2c-5.4.js'
+    },
+    'ma2c-4.12': {
+        titel: 'Kordasatsen',
+        beskrivning: 'Dra i två kordor och se att produkten av delsträckorna alltid är densamma — rektangeln vägrar ändra area.',
+        fil: 'data/visualiseringar/ma2c-4.12.js'
     },
     'ma2c-6.5': {
         titel: 'Galtonbrädan',
@@ -279,6 +309,16 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra punkten P längs cirkeln och se randvinkeln stå stilla — och testa diameterfallet där den alltid blir 90°.',
         fil: 'data/visualiseringar/ma2c-4.11.js'
     },
+    'ma2c-2.4': {
+        titel: 'Kvadratkomplettering som bygge',
+        beskrivning: 'Vik px-remsan runt hörnet och se vad som fattas — fyll gapet steg för steg fram till pq-formeln.',
+        fil: 'data/visualiseringar/ma2c-2.4.js'
+    },
+    'ma2c-2.5': {
+        titel: 'Kvadratkomplettering som bygge',
+        beskrivning: 'Vik px-remsan runt hörnet och se vad som fattas — fyll gapet steg för steg fram till pq-formeln.',
+        fil: 'data/visualiseringar/ma2c-2.4.js'
+    },
     'ma2c-2.6': {
         titel: 'Diskriminantens gränsland',
         beskrivning: 'Dra q uppåt och se rötterna glida ihop till en dubbelrot — och sedan vika av vinkelrätt ut i det komplexa talplanet.',
@@ -363,5 +403,10 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Trig-ekvationens lösningar',
         beskrivning: 'Dra linjen y = a och se de två lösningsfamiljerna dyka upp i cirkeln och grafen — och vad som händer när de smälter samman eller försvinner.',
         fil: 'data/visualiseringar/ma3c-6.3.js'
+    },
+    'ma4-3.6': {
+        titel: 'Täthetsfunktionen föds ur histogrammet',
+        beskrivning: 'Krymp klassbredden tills histogrammet smälter samman med kurvan — och se att sannolikhet är arean under den, inte höjden.',
+        fil: 'data/visualiseringar/ma4-3.6.js'
     }
 };

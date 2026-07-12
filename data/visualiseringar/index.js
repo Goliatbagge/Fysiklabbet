@@ -14,6 +14,16 @@
  * Masterlista över planerade visualiseringar: .claude/visualiseringar-plan.md
  */
 window.VISUALISERINGAR_INDEX = {
+    'ma3c-1.1': {
+        titel: 'Rationella uttryckets hål',
+        beskrivning: 'Dra mot hålet i (x²−1)/(x−1) och zooma — gränsvärdet finns fast funktionsvärdet saknas.',
+        fil: 'data/visualiseringar/ma3c-1.4.js'
+    },
+    'ma3c-1.4': {
+        titel: 'Rationella uttryckets hål',
+        beskrivning: 'Dra mot hålet i (x²−1)/(x−1) och zooma — gränsvärdet finns fast funktionsvärdet saknas.',
+        fil: 'data/visualiseringar/ma3c-1.4.js'
+    },
     'ma3c-2.1': {
         titel: 'Sekanten blir tangent',
         beskrivning: 'Dra i punkterna och se sekantens lutning — och vad som händer när h går mot 0.',
@@ -28,6 +38,21 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Sekanten blir tangent',
         beskrivning: 'Dra h mot 0 och se sekanten övergå i tangenten — derivatans definition.',
         fil: 'data/visualiseringar/ma3c-2.3.js'
+    },
+    'ma1c-1.2': {
+        titel: 'Bråkverkstaden',
+        beskrivning: 'Bråk som areor — förläng utan att arean ändras, och se varför addition kräver lika stora bitar.',
+        fil: 'data/visualiseringar/ma1c-1.3.js'
+    },
+    'ma1c-1.3': {
+        titel: 'Bråkverkstaden',
+        beskrivning: 'Bråk som areor — förläng utan att arean ändras, och se varför addition kräver lika stora bitar.',
+        fil: 'data/visualiseringar/ma1c-1.3.js'
+    },
+    'ma1c-1.4': {
+        titel: 'Bråkverkstaden',
+        beskrivning: 'Multiplikation som area av area i ett rutnät — och division som "hur många gånger ryms?".',
+        fil: 'data/visualiseringar/ma1c-1.3.js'
     },
     'ma1c-1.6': {
         titel: 'Potenstrappan',
@@ -124,6 +149,11 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra ett hörn längs den omskrivna cirkeln och se kvoten a/sin A stå stilla — den är alltid diametern.',
         fil: 'data/visualiseringar/ma3c-6.6.js'
     },
+    'ma3c-6.7': {
+        titel: 'Cosinussatsen = Pythagoras',
+        beskrivning: 'Dra vinkeln genom 90° och se korrektionstermen krympa till noll — Pythagoras är specialfallet.',
+        fil: 'data/visualiseringar/ma3c-6.7.js'
+    },
     'ma3c-6.8': {
         titel: 'Sinussatsen på cirkeln',
         beskrivning: 'Dra ett hörn längs den omskrivna cirkeln och se kvoten a/sin A stå stilla — den är alltid diametern.',
@@ -198,6 +228,21 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Riemann-kläm: arean under kurvan',
         beskrivning: 'Dra i n och se under- och översumman klämma in arean — differensen krymper mot integralens exakta värde.',
         fil: 'data/visualiseringar/ma3c-5.3.js'
+    },
+    'ma2c-5.2': {
+        titel: 'Logaritmen som exponentjakt',
+        beskrivning: 'Dra en punkt på 10^x-kurvan och se dess spegling — logaritmkurvan — växa fram i linjen y = x.',
+        fil: 'data/visualiseringar/ma2c-5.2.js'
+    },
+    'ma2c-5.3': {
+        titel: 'Logaritmen som exponentjakt',
+        beskrivning: 'Lös 10^x = 5 genom att dra — och se varför lg tämjer talen som rusar ur bild.',
+        fil: 'data/visualiseringar/ma2c-5.2.js'
+    },
+    'ma2c-5.6': {
+        titel: 'Logaritmen som exponentjakt',
+        beskrivning: 'Byt bas till 2 eller e — samma spegling i y = x gäller för alla logaritmer.',
+        fil: 'data/visualiseringar/ma2c-5.2.js'
     },
     'ma2c-5.4': {
         titel: 'Räknestickan',
@@ -298,6 +343,21 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Minsta kvadratmetoden',
         beskrivning: 'Dra din egen linje mot punkterna, se avvikelserna som riktiga kvadrater och låt regressionslinjen minimera dem.',
         fil: 'data/visualiseringar/ma2c-6.6.js'
+    },
+    'ma3c-5.6': {
+        titel: 'Kurvor emellan: skannern',
+        beskrivning: 'Dra skannern och måla arean mellan kurvorna — och se den naiva integralen slå fel när kurvorna korsas.',
+        fil: 'data/visualiseringar/ma3c-5.6.js'
+    },
+    'ma4-3.4': {
+        titel: 'Kurvor emellan: skannern',
+        beskrivning: 'Dra skannern och måla arean mellan kurvorna — och se den naiva integralen slå fel när kurvorna korsas.',
+        fil: 'data/visualiseringar/ma3c-5.6.js'
+    },
+    'ma4-1.13': {
+        titel: 'Tangenten på tan-linjen',
+        beskrivning: 'tan v är en verklig längd på linjen x = 1 — och perioden är 180°, inte 360°.',
+        fil: 'data/visualiseringar/ma4-1.13.js'
     },
     'ma3c-5.7': {
         titel: 'Integralen som resemätare',

@@ -91,7 +91,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma1c — taluppfattning och algebra
 
-- [ ] **Bråkverkstaden** (ma1c-1.2–1.4). Bråk som area/stapel; addition
+- [x] **Bråkverkstaden** (ma1c-1.2–1.4). KLAR 2026-07-12, `ma1c-1.3.js`. Bråk som area/stapel; addition
   kräver gemensam nämnare — dra i uppdelningen tills bitarna är lika stora
   och se `1/3 + 1/4` bli `4/12 + 3/12`; multiplikation `a/b · c/d` som
   rektangelarea i en enhetskvadrat (raster b × d); division som "hur många
@@ -246,7 +246,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma2c — logaritmer och statistik
 
-- [ ] **Logaritmen som exponentjakt + spegling** (ma2c-5.2–5.3). Dra en
+- [x] **Logaritmen som exponentjakt + spegling** (ma2c-5.2–5.3, 5.6). KLAR 2026-07-12, `ma2c-5.2.js`. Dra en
   punkt på 10^x; spegelpunkten över y = x ritar log-kurvan som spår;
   koordinatpar byter plats live. Uppdrag: "lös 10^x = 500 genom att dra"
   → x ≈ 2,7, sedan knappen "exakt: lg 500". Basglidare (2, e, 10).
@@ -277,7 +277,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma3c — gränsvärden och derivata
 
-- [ ] **Rationella uttryckets hål** (ma3c-1.1, ma3c-1.4). Grafen av
+- [x] **Rationella uttryckets hål** (ma3c-1.1, ma3c-1.4). KLAR 2026-07-12, `ma3c-1.4.js`. Grafen av
   (x²−1)/(x−1) = linjen x+1 med punkterat hål; dra x-markören mot 1 från
   båda håll med live-tabell (0,99 → 1,99 …); zoom kring hålet; toggle
   "faktorisera" stryker gemensam faktor med animation. Insikt: gränsvärdet
@@ -340,7 +340,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   vid markören visas "f(x) = 2,3" och "A:s lutning nu = 2,3" sida vid sida
   — alltid lika. Där f < 0 krymper A synligt. Gissa först: "var växer A
   snabbast?"
-- [ ] **Kurvor emellan: skannern** (ma3c-5.6, ma4-3.4). En vertikal
+- [x] **Kurvor emellan: skannern** (ma3c-5.6, ma4-3.4). KLAR 2026-07-12, `ma3c-5.6.js`. En vertikal
   skanner dras över området mellan två kurvor; vid varje läge visas
   stapeln (övre − undre) med höjd utskriven; bakom skannern fylls arean;
   vid korsning byter stapeln färg (teckenbyte → dela upp integralen);
@@ -374,11 +374,11 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   med hörnen dragbara PÅ sin omskrivna cirkel; a/sin A, b/sin B, c/sin C
   avläses live — alltid identiska; dra ett hörn längs bågen: vinkeln fryst
   (randvinkelsatsen!); glidare för R visar kvoten = 2R.
-- [ ] **Cosinussatsen = Pythagoras + korrektion** (ma3c-6.7). Kvadraterna
+- [x] **Cosinussatsen = Pythagoras + korrektion** (ma3c-6.7). KLAR 2026-07-12, `ma3c-6.7.js`. Kvadraterna
   a², b², c² som areor + korrektionsytan −2ab·cos C (röd dras bort vid
   C < 90°, grön läggs till vid C > 90°); dra C genom 90°: korrektionen
   krymper till noll och Pythagoras blinkar fram som specialfall.
-- [ ] **Tangenten på tan-linjen** (ma4-1.13). Enhetscirkel med vertikal
+- [x] **Tangenten på tan-linjen** (ma4-1.13). KLAR 2026-07-12, `ma4-1.13.js`. Enhetscirkel med vertikal
   tangentlinje i (1, 0); strålen från origo förlängs till skärning — höjden
   ÄR tan v, plottas simultant; nära 90° rusar skärningen mot oändligheten
   (asymptot som rörelsefenomen); efter 180° samma linje igen → perioden π.

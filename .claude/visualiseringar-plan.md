@@ -150,7 +150,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   valbar storlek n och får skattningar; upprepa och se skattningarna
   spridas; felmarginalen krymper som 1/√n (dra n och se intervallet).
   Snedvridet urval som läge (fråga bara i ena hörnet av populationen).
-- [ ] **Korrelationens lekplats** (ma1c-5.3, ma2c-6.6). Måla/dra punkter
+- [x] **Korrelationens lekplats** (ma1c-5.3). KLAR 2026-07-12, `ma1c-5.3.js`. Måla/dra punkter
   fritt med r-mätare live. Utmaningar: "skapa r ≈ 0,9", "skapa ett
   UPPENBART samband med r ≈ 0" (parabel!), "flytta EN punkt så r går
   0,2 → 0,8". Galleri med dold tredje variabel (glass ↔ drunkningar,
@@ -203,7 +203,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   (dubbelrot/tangering) och viker sedan av vinkelrätt ut i komplexa planet
   som konjugatpar. Diskriminantmätare med färgkod. Insikt: "saknar reell
   lösning" = rötterna smiter ut ur reella axeln.
-- [ ] **Rotekvationens falska rot** (ma2c-2.8). √x och x−2 ritas; bredvid
+- [x] **Rotekvationens falska rot** (ma2c-2.8). KLAR 2026-07-12, `ma2c-2.8.js`. √x och x−2 ritas; bredvid
   de kvadrerade graferna där en EXTRA skärningspunkt dykt upp, markerad
   "falsk rot". Insikt: kvadrering glömmer tecken → prövning obligatorisk.
 - [x] **Kastparabelns tre klädnader** (ma2c-3.1–3.3). KLAR 2026-07-11, `ma2c-3.1.js` ("Parabelns tre klädnader"). EN parabel, tre
@@ -229,7 +229,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 - [ ] **Topptriangelsatsen** (ma2c-4.9). Dra den parallella transversalen
   upp/ner; segmentlängder mäts live och kvoterna står stilla; toggla
   "lyft ut" topptriangeln och lägg den bredvid i samma skala.
-- [ ] **SSA-tvetydigheten: hur många trianglar?** (ma2c-4.10, ma3c-6.6).
+- [x] **SSA-tvetydigheten: hur många trianglar?** (ma2c-4.10). KLAR 2026-07-12, `ma2c-4.10.js`.
   Fast sida + fast vinkel; den pendlande sidan ritas som cirkelbåge som
   sveper över baslinjen — 2 skärningar (två trianglar i olika färg),
   tangering (1, rätvinklig) eller miss (0). Insikt: därför är SSA inget
@@ -296,7 +296,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   släta kurvor rätas ut till en linje (lutningen ÄR derivatan), |x| i 0
   förblir ett V oavsett zoom; vänster-/högerlutning visas (−1 vs +1).
   Gissa först: "kommer den att räta ut sig?"
-- [ ] **Rita derivatan själv** (ma3c-3.1–3.2, ma4-2.5). Given kurva;
+- [x] **Rita derivatan själv** (ma3c-3.1–3.2, ma4-2.5). KLAR 2026-07-12, `ma3c-3.1.js`. Given kurva;
   tangent glider med lutningsmätare; eleven RITAR sin gissning av
   f′-kurvan i ett tomt system under; "plotta"-knappen låter lutnings-
   punkterna falla ner och den riktiga kurvan växa fram — elevens gissning
@@ -382,7 +382,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   tangentlinje i (1, 0); strålen från origo förlängs till skärning — höjden
   ÄR tan v, plottas simultant; nära 90° rusar skärningen mot oändligheten
   (asymptot som rörelsefenomen); efter 180° samma linje igen → perioden π.
-- [ ] **Additionsformlerna i rektangeln** (ma4-1.8). Vinkelglidare α, β;
+- [x] **Additionsformlerna i rektangeln** (ma4-1.8). KLAR 2026-07-12, `ma4-1.8.js` (id: 1.8, 1.9). Vinkelglidare α, β;
   klassiska tvåtriangel-figuren i en rektangel med varje segment färgkodat
   (sin α·cos β grönt, cos α·sin β orange); hovra en term i formeln →
   segmentet pulserar; specialfall α = β ger dubbla vinkeln-formeln.
@@ -439,7 +439,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   dra w ett helt varv runt origo → polygonen roterar bara 1/n varv (aha:
   därför n rötter). Klick på en rot animerar z → z² → … → z^n tills den
   landar på w. Missuppfattning: z^n = w har en lösning.
-- [ ] **Eulers formel: den vinkelräta hastigheten** (ma4-4.10). Dra t:
+- [x] **Eulers formel: den vinkelräta hastigheten** (ma4-4.10). KLAR 2026-07-12, `ma4-4.10.js`. Dra t:
   punkten e^(it) med positionsvisare och hastighetspil (alltid vinkelrät,
   lika lång — multiplikation med i); jämförelseläge: samma regel med reell
   tillväxt (hastighet = position → e^t-stråle rakt ut) mot imaginär

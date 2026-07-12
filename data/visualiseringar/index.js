@@ -144,6 +144,16 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra punkten runt enhetscirkeln och se sinuskurvan rullas fram — radianer är den utrullade båglängden.',
         fil: 'data/visualiseringar/ma3c-6.2.js'
     },
+    'ma4-1.8': {
+        titel: 'Rektangeln bakom sin(u+v)',
+        beskrivning: 'Dra i vinklarna och se sin(u+v) byggas av två riktiga linjesegment — inte av sin u + sin v.',
+        fil: 'data/visualiseringar/ma4-1.8.js'
+    },
+    'ma4-1.9': {
+        titel: 'Rektangeln bakom sin(u+v)',
+        beskrivning: 'Dra i vinklarna och se sin(u+v) byggas av två riktiga linjesegment — inte av sin u + sin v.',
+        fil: 'data/visualiseringar/ma4-1.8.js'
+    },
     'ma4-1.10': {
         titel: 'Enhetscirkeln rullas ut',
         beskrivning: 'Dra punkten runt enhetscirkeln och se sinuskurvan rullas fram — radianer är den utrullade båglängden.',
@@ -209,6 +219,21 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Se hur slumpmässiga kulstudsar bygger upp normalfördelningens klockform — och testa 68–95-regeln på dina egna kulor.',
         fil: 'data/visualiseringar/ma2c-6.5.js'
     },
+    'ma3c-3.1': {
+        titel: 'Rita derivatan själv',
+        beskrivning: 'Gissa lutningskurvan innan facit avslöjas — se f′(x) växa fram punkt för punkt.',
+        fil: 'data/visualiseringar/ma3c-3.1.js'
+    },
+    'ma3c-3.2': {
+        titel: 'Rita derivatan själv',
+        beskrivning: 'Gissa lutningskurvan innan facit avslöjas — se f′(x) växa fram punkt för punkt.',
+        fil: 'data/visualiseringar/ma3c-3.1.js'
+    },
+    'ma4-2.5': {
+        titel: 'Rita derivatan själv',
+        beskrivning: 'Rita din gissning och se cos x uppenbara sig ur sin x, punkt för punkt.',
+        fil: 'data/visualiseringar/ma3c-3.1.js'
+    },
     'ma3c-3.4': {
         titel: 'Hitta talet e',
         beskrivning: 'Dra i basen a och jämför aˣ med sin derivata tills kvoten blir 1 — då har du hittat e.',
@@ -248,6 +273,11 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Vektorpromenaden',
         beskrivning: 'Komposant-trappan och Pythagoras ger vektorns längd — dra och se formeln räkna live.',
         fil: 'data/visualiseringar/ma1c-6.5.js'
+    },
+    'ma1c-5.3': {
+        titel: 'Korrelationens lekplats',
+        beskrivning: 'Dra i punkterna och se r ändras live — r mäter bara räta linjer, och korrelation bevisar inte orsak.',
+        fil: 'data/visualiseringar/ma1c-5.3.js'
     },
     'ma1c-5.4': {
         titel: 'Tärningsverkstaden',
@@ -299,10 +329,20 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra i nollställena, extrempunkten eller y-skärningen — samma parabel, tre skrivsätt som uppdateras live.',
         fil: 'data/visualiseringar/ma2c-3.1.js'
     },
+    'ma2c-2.8': {
+        titel: 'Rotekvationens falska rot',
+        beskrivning: 'Kvadrera en rotekvation och se en extra, falsk rot dyka upp — prövningen i originalet avslöjar den.',
+        fil: 'data/visualiseringar/ma2c-2.8.js'
+    },
     'ma2c-4.5': {
         titel: 'Pythagoras areapussel',
         beskrivning: 'Pussla ihop kvadraterna på kateterna till kvadraten på hypotenusan — det går bara ihop vid rät vinkel.',
         fil: 'data/visualiseringar/ma2c-4.5.js'
+    },
+    'ma2c-4.10': {
+        titel: 'SSA-tvetydigheten',
+        beskrivning: 'Sväng en cirkel mot en stråle: samma tre mått ger ibland noll, en eller två trianglar.',
+        fil: 'data/visualiseringar/ma2c-4.10.js'
     },
     'ma2c-4.11': {
         titel: 'Randvinkeljakten',
@@ -408,5 +448,10 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Täthetsfunktionen föds ur histogrammet',
         beskrivning: 'Krymp klassbredden tills histogrammet smälter samman med kurvan — och se att sannolikhet är arean under den, inte höjden.',
         fil: 'data/visualiseringar/ma4-3.6.js'
+    },
+    'ma4-4.10': {
+        titel: 'Puffen som blir en cirkel',
+        beskrivning: 'En vinkelrät puff ändrar aldrig avståndet till origo — det är därför eⁱᵛ blir en cirkelrörelse.',
+        fil: 'data/visualiseringar/ma4-4.10.js'
     }
 };

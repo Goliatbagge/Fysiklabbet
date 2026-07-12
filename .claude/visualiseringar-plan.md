@@ -96,7 +96,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   och se `1/3 + 1/4` bli `4/12 + 3/12`; multiplikation `a/b · c/d` som
   rektangelarea i en enhetskvadrat (raster b × d); division som "hur många
   gånger ryms?". Missuppfattning: täljare+täljare/nämnare+nämnare.
-- [ ] **Potenstrappan ner till a⁰ och a⁻ⁿ** (ma1c-1.6–1.7). Trappa av
+- [x] **Potenstrappan ner till a⁰ och a⁻ⁿ** (ma1c-1.6–1.7). KLAR 2026-07-11, `ma1c-1.6.js`. Trappa av
   staplar 2⁴, 2³, … där varje steg nedåt = "÷2"; eleven kliver själv förbi
   2¹ och nästa steg MÅSTE bli 1, sedan 1/2, 1/4. Basglidare. Insikt:
   a⁰ = 1 är mönstrets tvingande fortsättning, inte en definition.
@@ -116,7 +116,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   x² + 5x + 6 av en x²-kvadrat, x-remsor och enhetsrutor; pussla ihop dem
   till en rektangel — sidorna ÄR faktorerna (x+2)(x+3). Nollprodukt:
   arean = 0 bara när en sida = 0.
-- [ ] **Olikhetens vändpunkt** (ma1c-2.11). Olikhet + tallinje med skuggad
+- [x] **Olikhetens vändpunkt** (ma1c-2.11). KLAR 2026-07-12, `ma1c-2.11.js`. Olikhet + tallinje med skuggad
   lösningsmängd; vid "multiplicera med −1" ANIMERAS tallinjen som spegling
   kring 0 — skuggningen följer med, olikhetstecknet roterar synkront.
   Testpunkt dras och lyser grönt/rött. Insikt: teckenvändningen är en
@@ -193,7 +193,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   a²-kvadraten och remsan flyttas (av eleven) till en (a+b)(a−b)-rektangel.
   Sifferläge: "räkna 19·21 i huvudet" = 20² − 1². Missuppfattning:
   (a+b)² = a² + b² — den missade termen 2ab blir bokstavligt synlig.
-- [ ] **Kvadratkomplettering som bygge** (ma2c-2.4). Kvadrat x·x + remsa
+- [x] **Kvadratkomplettering som bygge** (ma2c-2.4). KLAR 2026-07-11, `ma2c-2.4.js` (id: 2.4, 2.5). Kvadrat x·x + remsa
   p·x; "vik"-reglage klyver remsan och sveper halvan runt hörnet; det
   saknade hörnet (p/2)² blinkar; algebra-raden byggs term för term ända
   fram till pq-formeln. Insikt: formeln är minnesbilden av en rörelse.
@@ -239,7 +239,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   stilla, spårlinje visar alla lägen. Toggle medelpunktsvinkel: kvoten 2,0
   live. Dra P till diametern → 90° (Tales sats). Dra P till andra bågen →
   supplementvinkeln.
-- [ ] **Kordasatsen: rektangeln som vägrar ändra area** (ma2c-4.12).
+- [x] **Kordasatsen: rektangeln som vägrar ändra area** (ma2c-4.12). KLAR 2026-07-11, `ma2c-4.12.js`.
   Rotera en korda genom en fast punkt P: segmenten a, b ändras dramatiskt
   men produktrektangeln a·b bredvid behåller sin AREA (morfar men behåller
   ytan). Dra P → ny konstant. Andra korda för direkt jämförelse.
@@ -370,7 +370,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   sidorna a, b; höjden b·sin C som fallande lod; arean mot C plottas
   parallellt — en sinusbåge med max vid 90°. Gissa först: "vilken vinkel
   ger störst area?"
-- [ ] **Sinussatsen på omskrivna cirkeln** (ma3c-6.6, ma2c-4.11). Triangel
+- [x] **Sinussatsen på omskrivna cirkeln** (ma3c-6.6, ma3c-6.8). KLAR 2026-07-11, `ma3c-6.6.js`. Triangel
   med hörnen dragbara PÅ sin omskrivna cirkel; a/sin A, b/sin B, c/sin C
   avläses live — alltid identiska; dra ett hörn längs bågen: vinkeln fryst
   (randvinkelsatsen!); glidare för R visar kvoten = 2R.
@@ -414,7 +414,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma4 — integraler och komplexa tal
 
-- [ ] **Täthetsfunktionen föds ur histogrammet** (ma4-3.6). 500 datapunkter
+- [x] **Täthetsfunktionen föds ur histogrammet** (ma4-3.6). KLAR 2026-07-11, `ma4-3.6.js`. 500 datapunkter
   regnar ner i ett histogram; glidare för klassbredd 20 cm → 0,5 cm:
   staplarna smalnar och en slät kurva träder fram (normerad, totalarea = 1);
   dra gränser a, b: skuggad area = faktisk andel punkter som landade där.

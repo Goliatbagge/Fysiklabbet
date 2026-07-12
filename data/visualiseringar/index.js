@@ -144,6 +144,11 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Se (a+b)² och konjugatregeln som bokstavliga areor — dra i figuren och flytta pusselbiten.',
         fil: 'data/visualiseringar/ma2c-2.1.js'
     },
+    'ma3c-6.5': {
+        titel: 'Areasatsen: höjden fälls upp',
+        beskrivning: 'Dra vinkeln och se höjden b·sin C växa till max vid 90° — arean mot vinkeln är en sinuskurva.',
+        fil: 'data/visualiseringar/ma3c-6.5.js'
+    },
     'ma3c-6.6': {
         titel: 'Sinussatsen på cirkeln',
         beskrivning: 'Dra ett hörn längs den omskrivna cirkeln och se kvoten a/sin A stå stilla — den är alltid diametern.',
@@ -203,6 +208,16 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Extremvärdesfabriken: lådan',
         beskrivning: 'Klipp hörn ur ett kartongark och vik en låda — dina mätpunkter blir en kurva och derivatan pekar ut toppen.',
         fil: 'data/visualiseringar/ma3c-4.6.js'
+    },
+    'ma3c-5.1': {
+        titel: 'Primitivornas parallellskara',
+        beskrivning: 'Dra i C och se skaran av primitiva funktioner glida fram — ett villkor pekar ut exakt en av dem.',
+        fil: 'data/visualiseringar/ma3c-5.1.js'
+    },
+    'ma3c-5.2': {
+        titel: 'Primitivornas parallellskara',
+        beskrivning: 'Dra i C och se skaran av primitiva funktioner glida fram — ett villkor pekar ut exakt en av dem.',
+        fil: 'data/visualiseringar/ma3c-5.1.js'
     },
     'ma3c-5.3': {
         titel: 'Riemann-kläm: arean under kurvan',
@@ -289,6 +304,11 @@ window.VISUALISERINGAR_INDEX = {
         beskrivning: 'Dra i basen a och jämför aˣ med sin derivata tills kvoten blir 1 — då har du hittat e.',
         fil: 'data/visualiseringar/ma3c-3.4.js'
     },
+    'ma1c-2.13': {
+        titel: 'Talföljdsverkstaden',
+        beskrivning: 'Bygg formeln mot ett växande prickmönster — en formel som stämmer för n = 1 kan spricka vid n = 10.',
+        fil: 'data/visualiseringar/ma1c-2.13.js'
+    },
     'ma1c-3.2': {
         titel: 'Faktorkedjan',
         beskrivning: 'Gissa om +20 % och −20 % tar dig tillbaka till start — och bygg egna kedjor av förändringsfaktorer.',
@@ -318,6 +338,16 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Vektorpromenaden',
         beskrivning: 'Komposant-trappan och Pythagoras ger vektorns längd — dra och se formeln räkna live.',
         fil: 'data/visualiseringar/ma1c-6.5.js'
+    },
+    'ma1c-5.1': {
+        titel: 'Opinionsmätaren',
+        beskrivning: 'Fråga ett urval och se felmarginalen krympa med roten ur n — men ett snedvridet urval ger fel svar oavsett storlek.',
+        fil: 'data/visualiseringar/ma1c-5.1.js'
+    },
+    'ma1c-5.2': {
+        titel: 'Opinionsmätaren',
+        beskrivning: 'Är skillnaden mellan 46 % och 48 % säker? Bygg konfidensintervall och se hur stort urval som krävs.',
+        fil: 'data/visualiseringar/ma1c-5.1.js'
     },
     'ma1c-5.3': {
         titel: 'Korrelationens lekplats',
@@ -408,6 +438,31 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Randvinkeljakten',
         beskrivning: 'Dra punkten P längs cirkeln och se randvinkeln stå stilla — och testa diameterfallet där den alltid blir 90°.',
         fil: 'data/visualiseringar/ma2c-4.11.js'
+    },
+    'ma1c-2.4': {
+        titel: 'Faktorisering som areapussel',
+        beskrivning: 'Pussla ihop x²-bitar till en rektangel — sidlängderna blir faktorerna.',
+        fil: 'data/visualiseringar/ma2c-2.2.js'
+    },
+    'ma2c-2.2': {
+        titel: 'Faktorisering som areapussel',
+        beskrivning: 'Pussla ihop x²-bitar till en rektangel — sidlängderna blir faktorerna, och fel talpar ger glipor.',
+        fil: 'data/visualiseringar/ma2c-2.2.js'
+    },
+    'ma2c-2.3': {
+        titel: 'Faktorisering som areapussel',
+        beskrivning: 'Nollprodukten: dra x och se en faktor krympa till noll — då är produkten noll.',
+        fil: 'data/visualiseringar/ma2c-2.2.js'
+    },
+    'ma2c-6.1': {
+        titel: 'Lådagrammet som lever',
+        beskrivning: 'Dra punkterna och se median, medelvärde och lådagram ändras live — medianen står still när medelvärdet rusar.',
+        fil: 'data/visualiseringar/ma2c-6.2.js'
+    },
+    'ma2c-6.2': {
+        titel: 'Lådagrammet som lever',
+        beskrivning: 'Två helt olika datamängder kan ge exakt samma låda — lådagrammet visar bara fem tal.',
+        fil: 'data/visualiseringar/ma2c-6.2.js'
     },
     'ma2c-2.4': {
         titel: 'Kvadratkomplettering som bygge',

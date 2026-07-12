@@ -112,7 +112,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   högar; vågen tippar direkt vid fusk; algebra-raden synkas per handling.
   Nivåer med x på båda sidor och negativa "ballongvikter". Missuppfattning:
   "flytta över, byt tecken" som magi.
-- [ ] **Faktorisering som areapussel** (ma1c-2.4, ma2c-2.2). Bygg
+- [x] **Faktorisering som areapussel** (ma1c-2.4, ma2c-2.2, ma2c-2.3). KLAR 2026-07-12, `ma2c-2.2.js`. Bygg
   x² + 5x + 6 av en x²-kvadrat, x-remsor och enhetsrutor; pussla ihop dem
   till en rektangel — sidorna ÄR faktorerna (x+2)(x+3). Nollprodukt:
   arean = 0 bara när en sida = 0.
@@ -121,7 +121,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   kring 0 — skuggningen följer med, olikhetstecknet roterar synkront.
   Testpunkt dras och lyser grönt/rött. Insikt: teckenvändningen är en
   spegling, inte en regel.
-- [ ] **Talföljdsverkstaden** (ma1c-2.13). Tändsticksmönster byggs för
+- [x] **Talföljdsverkstaden** (ma1c-2.13). KLAR 2026-07-12, `ma1c-2.13.js` (prickmönster ur genomgången). Tändsticksmönster byggs för
   n = 1, 2, 3 … (glidare till 20); nya stickor per steg lyser (differensen
   = koefficienten); eleven bygger formeln av brickor (n, ×, +, siffror) och
   testar mot figuren — fel formel ger synlig avvikelse vid stora n.
@@ -145,7 +145,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 
 ### Ma1c — statistik och sannolikhet
 
-- [ ] **Opinionsmätaren: urval och felmarginal** (ma1c-5.1–5.2). En dold
+- [x] **Opinionsmätaren: urval och felmarginal** (ma1c-5.1–5.2). KLAR 2026-07-12, `ma1c-5.1.js`. En dold
   population (10 000 prickar, andel p okänd); eleven drar stickprov med
   valbar storlek n och får skattningar; upprepa och se skattningarna
   spridas; felmarginalen krymper som 1/√n (dra n och se intervallet).
@@ -255,7 +255,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   skjuta — och ser sträckorna lg a + lg b adderas som färgade segment.
   Lägen: potenslagen (n kopior av segmentet), division (skjut åt andra
   hållet). Insikt: lagarna är exakt det som får mekanismen att fungera.
-- [ ] **Lådagrammet som lever** (ma2c-6.1–6.2). Dragbara datapunkter med
+- [x] **Lådagrammet som lever** (ma2c-6.1–6.2). KLAR 2026-07-12, `ma2c-6.2.js`. Dragbara datapunkter med
   lådagram + medelvärdesmarkör live; dra en punkt till extremvärde: medel
   rusar, medianen ligger kvar. Uppdrag: "gör två datamängder med SAMMA
   lådagram men helt olika utseende" (lådans blinda fläck).
@@ -325,7 +325,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   elevens egen utforskning; gissa först var maximum ligger; toggle V′(x)
   bekräftar med nollställe. Fler scenarier: staket mot vägg, burk med
   minimal plåtarea.
-- [ ] **Primitivornas parallellskara** (ma3c-5.1–5.2). f given överst;
+- [x] **Primitivornas parallellskara** (ma3c-5.1–5.2). KLAR 2026-07-12, `ma3c-5.1.js`. f given överst;
   under: F(x) + C med C-glidare, hela skaran som spår; tangenter på TRE av
   skarans kurvor samtidigt — alla parallella, lutning = f(x). Uppdrag:
   "hitta den primitiva som går genom (1, 3)" — dra C tills kurvan snäpper.
@@ -366,7 +366,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   (v + n·360° blå, 180° − v + n·360° röd); dra k mot 1 → familjerna
   smälter ihop; över 1 → tomt. Insikt: den "glömda lösningen" är en
   spegling, inte en regel.
-- [ ] **Areasatsen: höjden fälls upp** (ma3c-6.5). Dra vinkeln C mellan
+- [x] **Areasatsen: höjden fälls upp** (ma3c-6.5). KLAR 2026-07-12, `ma3c-6.5.js`. Dra vinkeln C mellan
   sidorna a, b; höjden b·sin C som fallande lod; arean mot C plottas
   parallellt — en sinusbåge med max vid 90°. Gissa först: "vilken vinkel
   ger störst area?"

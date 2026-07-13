@@ -103,7 +103,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
 - [ ] **Exponentglidaren** (ma1c-1.8). Kontinuerlig glidare för n i xⁿ
   (−2 → 3): grafen morfar mjukt hyperbel → konstant → rot → linje →
   parabel; x^(1/2) = √x faller ut som punkt på samma kontinuum.
-- [ ] **Grundpotensform: zoomresan** (ma1c-1.9). Zoomglidare från 10⁻¹⁰ m
+- [x] **Grundpotensform: zoomresan** (ma1c-1.9). Zoomglidare från 10⁻¹⁰ m
   (atom) till 10²⁶ m (universum) med SVG-vinjetter per dekad; aktuell skala
   visas hela tiden som a·10ⁿ. Sökuppdrag: "ställ in 3·10⁸ m". Insikt:
   exponenten är en position, multiplikation med 10 = ett zoomsteg.
@@ -138,7 +138,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   jämför linjär (utan ränta) mot exponentiell; dra räntesats och månadsspar
   och se sluttiden/slutbeloppet live. Prediktionsmoment: "dubbla räntan —
   dubblas slutbeloppet?" (nej, mer!).
-- [ ] **Definitions- och värdemängd som highlight** (ma1c-4.9). Dra ett
+- [x] **Definitions- och värdemängd som highlight** (ma1c-4.9). Dra ett
   intervall på x-axeln → motsvarande y-intervall lyser på kurvan och
   y-axeln; testa funktion med lucka (1/x). Missuppfattning: blandar ihop
   vilken mängd som hör till vilken axel.
@@ -218,15 +218,15 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   triangelns sidor; eleven flyttar pusselbitar från de två små kvadraterna
   in i den stora (klassiskt omflyttningsbevis); dra det räta hörnet och se
   att pusslet bara går ihop vid 90° (koppling till cosinussatsen).
-- [ ] **Vinkelsummans promenad** (ma2c-4.2). En pil vandrar längs
+- [x] **Vinkelsummans promenad** (ma2c-4.2). En pil vandrar längs
   triangelns/månghörningens rand och vrider sig vid varje hörn; efter ett
   varv har den vridit sig exakt 360° → yttervinkelsumman; inre vinkelsumma
   (n−2)·180° faller ut. Dra hörnen fritt — summan står still.
-- [ ] **Likformighetens tre exponenter** (ma2c-4.7–4.8, ma1c-4.11).
+- [x] **Likformighetens tre exponenter** (ma2c-4.7–4.8, ma1c-4.11).
   Skalfaktorglidare k: längd ×k, area ×k², volym ×k³ som tre separerande
   kurvor. Prediktion: "dubbla sidan — hur många småfigurer ryms?" → figuren
   fylls med exakt k² kopior. Missuppfattning: area skalar linjärt.
-- [ ] **Topptriangelsatsen** (ma2c-4.9). Dra den parallella transversalen
+- [x] **Topptriangelsatsen** (ma2c-4.9). Dra den parallella transversalen
   upp/ner; segmentlängder mäts live och kvoterna står stilla; toggla
   "lyft ut" topptriangeln och lägg den bredvid i samma skala.
 - [x] **SSA-tvetydigheten: hur många trianglar?** (ma2c-4.10). KLAR 2026-07-12, `ma2c-4.10.js`.
@@ -259,7 +259,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   lådagram + medelvärdesmarkör live; dra en punkt till extremvärde: medel
   rusar, medianen ligger kvar. Uppdrag: "gör två datamängder med SAMMA
   lådagram men helt olika utseende" (lådans blinda fläck).
-- [ ] **Standardavvikelsen i handen** (ma2c-6.4). Dragbara punkter på
+- [x] **Standardavvikelsen i handen** (ma2c-6.4). Dragbara punkter på
   tallinje; μ som markör, σ som skuggat band; kvadraterna på avvikelserna
   syns svagt (koppling till formeln); dra ut en outlier och se σ svälla.
   Missuppfattning: σ = variationsbredd.

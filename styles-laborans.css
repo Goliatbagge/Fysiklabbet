@@ -2087,6 +2087,96 @@ button.lab-card-disabled { pointer-events: none; }
     font-size: 13.5px;
 }
 
+/* ── Visualisering: fullskärm ─────────────────────────────────────────
+   Fullskärmsknapp uppe till vänster på värd-diven (samma kanoniska ikon
+   som simuleringarnas .fs-btn) + pappersljust fullskärmsläge där kortet
+   centreras stort. */
+.lab-vis-host { position: relative; }
+.lab-vis-fsbtn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 6;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--lab-line-strong);
+    background: var(--lab-bg-panel);
+    color: var(--lab-ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(15, 22, 32, 0.10);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.lab-vis-fsbtn:hover {
+    border-color: var(--lab-ink);
+    transform: scale(1.05);
+}
+.lab-vis-host:fullscreen {
+    background: var(--lab-bg);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 26px clamp(16px, 4vw, 48px) 48px;
+}
+.lab-vis-host:fullscreen .lab-vis-mount,
+.lab-vis-host:fullscreen .lab-vis-error {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+/* Äldre WebKit-prefix (Safari) */
+.lab-vis-host:-webkit-full-screen {
+    background: var(--lab-bg);
+    overflow-y: auto;
+    padding: 26px clamp(16px, 4vw, 48px) 48px;
+}
+
+/* ── Visualisering i presentationsläget ───────────────────────────────
+   Ett eget lager ovanpå presentationen (öppnas från nedre listen).
+   Presentationen är redan i fullskärm → lagret är stort och rent;
+   den inre fullskärmsknappen göms därför här. */
+.lab-pres-vis {
+    position: fixed;
+    inset: 0;
+    z-index: 9100;
+    background: var(--lab-bg);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 20px clamp(16px, 4vw, 48px) 56px;
+    cursor: auto;
+}
+.lab-pres-vis-head {
+    max-width: 1080px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+.lab-pres-vis-body {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+.lab-pres-vis .lab-vis-host { margin-top: 0; }
+.lab-pres-vis .lab-vis-fsbtn { display: none; }
+.lab-pres-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.lab-pres-visbtn {
+    color: var(--lab-accent);
+    border-color: var(--lab-accent);
+}
+.lab-pres-visbtn:hover {
+    color: #fff;
+    background: var(--lab-accent);
+    border-color: var(--lab-accent);
+}
+
 /* ── Formelrutans layout (variabellista bredvid eller under formeln) ──
    Byggs av buildFormelLayouts(); fitFormel() växlar till .is-stacked när
    formel + lista inte får plats bredvid varandra. */

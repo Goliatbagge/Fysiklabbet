@@ -63,10 +63,17 @@ dragbara objekt, prediktionsmoment och koppling algebra ↔ geometri ↔ graf.
   skärmdumpar av varje steg. OBS: headless Chrome har minsta fönsterbredd
   500 px — en "420 px"-dump renderas i 500 och beskärs till 420 (ser ut som
   overflow men är det inte; kolla `debug=1`-utskriften).
-- Fullskärmsknapp (`fs-btn`) enligt sim-mönstret om en framtida scen vinner
-  på det (piloten behövde ingen).
-- Öppen fråga: ska visualiseringarna även dyka upp i presentationsläget?
-  (Troligen ja, samma mount-API — beslutas senare.)
+- **Fullskärm (byggt 2026-07-13)**: `<Visualisering>`-komponenten i
+  katalog.html har en fullskärmsknapp (`.lab-vis-fsbtn`, samma kanoniska
+  ikon som simuleringarnas `fs-btn`) uppe till vänster som fullskärmar
+  värd-diven; CSS i styles-laborans.css (`.lab-vis-host:fullscreen`).
+- **Presentationsläget (byggt 2026-07-13)**: avsnitt med visualisering får
+  en "Visualisering"-knapp i presentationens nedre list som öppnar ett
+  eget lager (`.lab-pres-vis`) ovanpå bildspelet — stort, pappersljust,
+  med "Tillbaka till genomgången"-knapp. Tangentbordsbläddring pausas
+  medan lagret är öppet; den inre fullskärmsknappen göms (presentationen
+  är redan i fullskärm). Testas med
+  `.shots/pres-runner.html?id=<id>&steps=N&vis=1`.
 
 ## Våg 1 — börja här (högst aha-faktor × genomförbarhet)
 

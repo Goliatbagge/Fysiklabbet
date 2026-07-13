@@ -31,6 +31,55 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-13-karnvapen-i-rymden",
+    date: "2026-07-13",
+    title: "En liten satellit ska kunna avslöja gömda kärnvapen i rymden — med hjälp av jordens egen strålning",
+    deck: "MIT-forskaren Areg Danagoulian har i tidskriften Nature visat hur en detektor, inte större än en tjock uppslagsbok, skulle kunna avslöja om en satellit bär på ett kärnvapen — genom att räkna de neutroner som slås loss när jordens naturliga strålningsbälten träffar tunga atomkärnor som uran och plutonium. Metoden kan ge 1967 års rymdfördrag, som helt saknar kontrollmekanism, sina första verkliga tänder.",
+    category: "Kärnfysik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-13-karnvapen-i-rymden.jpg",
+    imageAlt: "Illustration av en liten kubformad satellit med guldfolie och solpaneler i rymden, med tunna vita linjer som konvergerar mot den och gnistrande partikelspår, framför jordklotet omgivet av två svagt lysande gröngula ringar som föreställer Van Allen-bältena, mot en stjärnbeströdd bakgrund.",
+    imageCredit: "Illustration: Fysiklabbet (AI-genererad)",
+    tags: ["kärnfysik", "modern fysik", "radioaktivitet", "neutroner", "spallation", "van allen-bältena", "rymdfysik", "partikeldetektor", "jordmagnetiska fältet", "kärnvapen", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "MIT News (pressmeddelande)", url: "https://news.mit.edu/2026/mit-researcher-proposes-way-to-detect-nuclear-weapons-in-space-0708" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-space-sensor-hidden-nuclear-weapons.html" }
+    ],
+    research: { citation: "A. Danagoulian, ”Verification of the Outer Space Treaty with Cosmic Protons”, Nature (2026)", url: "https://doi.org/10.1038/s41586-026-10783-2" },
+    body: [
+      { type: "p", html: "Sedan 1967 har det funnits en internationell överenskommelse om att aldrig placera kärnvapen i jordens omloppsbana. Men rymdfördraget har alltid haft en svaghet: ingen har haft något sätt att kontrollera att det faktiskt hålls — en satellit går inte att inspektera som ett fartyg i en hamn. Nu föreslår kärnfysikern Areg Danagoulian vid MIT en lösning i tidskriften <em>Nature</em>, och den kräver varken tillstånd eller inspektörer ombord: låt jordens egen strålning göra jobbet." },
+
+      { type: "h2", text: "En osynlig ring av fångade partiklar" },
+      { type: "p", html: "Runt jorden ligger två bälten av laddade partiklar som jordens magnetfält har fångat in — de så kallade Van Allen-bältena (se Fysiklabbets genomgång om det jordmagnetiska fältet, Fysik nivå&nbsp;2, om hur samma fält skyddar oss från strålning vid polerna). I det inre bältet far protoner runt med energier på uppemot en gigaelektronvolt — alltså miljarder elektronvolt, långt mer än energin hos fotonerna i en vanlig röntgenbild. Danagoulians idé är att låta en misstänkt satellit passera rakt igenom denna naturliga partikelstråle, och se vad som händer när protonerna träffar en gömd last av klyvbart material." },
+
+      { type: "h2", text: "En regnskur av neutroner" },
+      { type: "p", html: "Träffar en sådan energirik proton en tung atomkärna, till exempel uran eller plutonium, kan kärnan splittras i en process som kallas spallation — samma princip som ger neutroner vid Europeiska spallationskällan (ESS) i Lund, där protoner i stället skjuts mot ett mål av volfram. En vanlig satellit innehåller nästan inga tunga atomkärnor att klyva på det viset (se Fysiklabbets genomgång om atomkärnan, Fysik nivå&nbsp;1), så en plötslig skur av neutroner blir ett tydligt fingeravtryck av gömt klyvbart material." },
+
+      { type: "quote", html: "”När en energirik proton slår in i grundämnen med högt atomnummer, som uran och plutonium, kan varje proton slå loss något i stil med 40 neutroner.”", cite: "Areg Danagoulian, MIT" },
+
+      { type: "h2", text: "Diamant sorterar bort bruset" },
+      { type: "p", html: "Danagoulians föreslagna detektor är inte större än en tjock uppslagsbok och byggd för att rymmas i en så kallad 9U CubeSat — en liten satellit i standardformat. Den använder två paneler av scintillatorer, material som blixtrar till i ljus när en partikel träffar dem, inklämda mellan skikt av syntetisk diamant. Diamantskikten sorterar bort protoner och elektroner så att bara neutronerna räknas, och de två panelernas inbördes läge gör det möjligt att räkna ut varifrån neutronerna kom — och därmed skilja en riktad skur från en misstänkt satellit från det jämna bruset av bakgrundsstrålning." },
+
+      { type: "h2", text: "99 procents säkerhet — om avståndet är rätt" },
+      { type: "p", html: "Enligt beräkningarna i studien kan detektorn avslöja ett gömt kärnvapen med 99&nbsp;% säkerhet om den befinner sig inom cirka 4&nbsp;km från den misstänkta satelliten i ungefär en vecka. Kommer den närmare, inom 1&nbsp;km, räcker en enda timmes mätning — och med flera detektorer samtidigt kan tiden kortas ytterligare." },
+
+      { type: "quote", html: "”Man kan fejka underrättelser, men man kan inte fejka fysik.”", cite: "Areg Danagoulian, MIT" },
+
+      { type: "h2", text: "Ett fördrag utan tänder" },
+      { type: "p", html: "Rymdfördraget från 1967 har skrivits under av 118 länder, däribland USA, Ryssland och Kina, men saknar en mekanism för att kontrollera efterlevnaden. Frågan är långt ifrån akademisk: när USA 1962 detonerade en kärnladdning 400&nbsp;km över Stilla havet, i testet Starfish Prime, slogs flera dåtida satelliter ut av strålningen som frigjordes. Och 2022 sköt Ryssland upp satelliten Kosmos 2553 i en ovanlig bana rakt igenom den mest strålningsintensiva delen av det inre Van Allen-bältet — en bana som amerikanska tjänstemän 2024 offentligt kopplade till ett misstänkt program för kärnvapenbestyckade satellitvapen. Ryssland förnekar att något sådant program finns." },
+
+      { type: "h2", text: "Bara ett förslag — än så länge" },
+      { type: "p", html: "Danagoulian betonar själv att ingen sådan detektor ännu har byggts eller testats på riktigt — studien är en teoretisk genomförbarhetsstudie. ”Jag skriver i artikeln att det här inte är ett fullständigt bevisat system. Syftet är att visa forskarsamhället att det är vetenskapligt möjligt”, säger han. Nästa steg, hoppas han, är att nationella forskningslaboratorier bygger vidare på idén — och att den med tiden blir ett verktyg som beslutsfattare faktiskt litar på." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Van Allen-bältena upptäcktes 1958 av den amerikanske fysikern James Van Allen, med en Geigermätare ombord på USA:s första satellit, Explorer 1.",
+        "En CubeSat byggs av standardiserade kubar om 10 cm i sidled — en ”9U”-satellit består av nio sådana kubar, ungefär i storlek med en resväska.",
+        "Namnet spallation kommer av engelskans ”to spall”, att flisa av — precis som en proton kan flisa loss neutroner ur en tung atomkärna."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-12-syntetiskt-svart-hal",
     date: "2026-07-12",
     title: "Ett stillastående kretskort får radiovågor att bli starkare — med ett knep lånat från svarta hål",

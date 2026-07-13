@@ -90,6 +90,7 @@ vetenskapsredaktion, ämnestidskrift) — lägg till den här med en rad om vad 
 - **EurekAlert! (AAAS)**: https://www.eurekalert.org/ — aggregerar universitets/labbs pressmeddelanden med länk till originalstudien; bra för att hitta primärkällan.
 - **IEEE Spectrum**: https://spectrum.ieee.org/ — teknik/tillämpad fysik (lasrar, kvantteknik, halvledare).
 - **Optica — Optics & Photonics News (OPN)**: https://www.optica-opn.org/ — optik och fotonik, bra fördjupning i ljus/laser-nyheter.
+- **MIT News**: https://news.mit.edu/ — institutionellt pressrum, hög trovärdighet; utförliga forskarcitat och tekniska detaljer direkt från institutionen (använd t.ex. för kärnfysik-/detektorfysiknyheten 2026-07-13 om satellitburen kärnvapendetektor).
 
 **De sex källorna ovan är utgångspunkten för att HITTA dagens nyhet — inte en gräns
 för var du får läsa.** När du väl valt en nyhet får (och bör) du söka vidare fritt på

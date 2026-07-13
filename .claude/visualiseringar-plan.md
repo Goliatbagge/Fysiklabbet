@@ -100,7 +100,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   staplar 2⁴, 2³, … där varje steg nedåt = "÷2"; eleven kliver själv förbi
   2¹ och nästa steg MÅSTE bli 1, sedan 1/2, 1/4. Basglidare. Insikt:
   a⁰ = 1 är mönstrets tvingande fortsättning, inte en definition.
-- [ ] **Exponentglidaren** (ma1c-1.8). Kontinuerlig glidare för n i xⁿ
+- [x] **Exponentglidaren** (ma1c-1.8). Kontinuerlig glidare för n i xⁿ
   (−2 → 3): grafen morfar mjukt hyperbel → konstant → rot → linje →
   parabel; x^(1/2) = √x faller ut som punkt på samma kontinuum.
 - [x] **Grundpotensform: zoomresan** (ma1c-1.9). Zoomglidare från 10⁻¹⁰ m
@@ -133,7 +133,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   transformeras stegvis. Huvudnummer som prediktion: "+20 % följt av −20 %
   — tillbaka på start?" (0,96!). n-glidare för upprepad faktor →
   exponentialkurvan växer fram. Missuppfattning: procent adderas.
-- [ ] **Ränta på ränta: sparande och lån** (ma1c-3.4–3.5). Två synkade
+- [x] **Ränta på ränta: sparande och lån** (ma1c-3.4–3.5). Två synkade
   vyer: insättningar/amorteringar som staplar + total som kurva;
   jämför linjär (utan ränta) mot exponentiell; dra räntesats och månadsspar
   och se sluttiden/slutbeloppet live. Prediktionsmoment: "dubbla räntan —
@@ -315,7 +315,7 @@ Format per idé: kärninsikt → interaktion → missuppfattning som adresseras.
   rattvridnings-indikator (f″); teckentabellen byggs upp LIVE i takt med
   färden; extrempunkter och inflexionspunkter flaggas vid passage.
   Insikt: teckentabellen är en körjournal, inte död bokföring.
-- [ ] **Tre synkade grafer: f, f′, f″** (ma3c-4.4). Lodrät linje dras i
+- [x] **Tre synkade grafer: f, f′, f″** (ma3c-4.4). Lodrät linje dras i
   x-led över tre staplade grafer; konvex/konkav färgkodas på f samtidigt
   som tecknen på f″ lyser. Missuppfattning: blandar växande/avtagande (f′)
   med buktar upp/ner (f″).

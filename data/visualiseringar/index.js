@@ -110,9 +110,9 @@ window.VISUALISERINGAR_INDEX = {
         fil: 'data/visualiseringar/ma3c-4.1.js'
     },
     'ma3c-4.4': {
-        titel: 'Konkavitetsbilen',
-        beskrivning: 'Kör en bil längs kurvan och se teckentabellen byggas av lutningen och dess ändring.',
-        fil: 'data/visualiseringar/ma3c-4.1.js'
+        titel: 'Tre synkade grafer',
+        beskrivning: 'Dra en lodrät linje genom f, f′ och f″ samtidigt — och upptäck att en kurva kan vara avtagande och samtidigt bukta uppåt.',
+        fil: 'data/visualiseringar/ma3c-4.4.js'
     },
     'ma3c-4.5': {
         titel: 'Konkavitetsbilen',
@@ -603,5 +603,20 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Standardavvikelsen i handen',
         beskrivning: 'Dra punkterna och se kvadraterna, σ och medelvärdet uppdateras live — och se hur en enda extrempunkt sväller spridningen utan att röra variationsbredden.',
         fil: 'data/visualiseringar/ma2c-6.4.js'
+    },
+    'ma1c-1.8': {
+        titel: 'Exponentglidaren',
+        beskrivning: 'Dra i exponenten n från −2 till 3 och se hyperbel, rotkurva, rät linje, parabel och kubik glida fram ur samma kurva xⁿ — roten ur x är bara punkten n = 1/2.',
+        fil: 'data/visualiseringar/ma1c-1.8.js'
+    },
+    'ma1c-3.4': {
+        titel: 'Ränta på ränta: sparande och lån',
+        beskrivning: 'Se sparkonton växa och lån betalas av år för år — jämför enkel ränta mot ränta-på-ränta och gissa om dubblad räntesats dubblar avkastningen.',
+        fil: 'data/visualiseringar/ma1c-3.4.js'
+    },
+    'ma1c-3.5': {
+        titel: 'Ränta på ränta: sparande och lån',
+        beskrivning: 'Se sparkonton växa och lån betalas av år för år — jämför enkel ränta mot ränta-på-ränta och gissa om dubblad räntesats dubblar avkastningen.',
+        fil: 'data/visualiseringar/ma1c-3.4.js'
     }
 };

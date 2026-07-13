@@ -14,6 +14,32 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-13) — kan tas upp senare
+
+- **Adaptiv fotomemristor efterliknar ögats pupill** — forskare vid University of
+  Electronic Science and Technology of China och Penn State (ledd av Jia Zhu) har
+  byggt en TiO₂/PEDOT:PSS-baserad ljussensor som automatiskt dämpar sig i starkt
+  ljus och förstärker sig i svagt ljus, ungefär som ögats pupill, utan extra
+  kretsar eller efterbehandling — 91,3&nbsp;% bildigenkänning i blandad
+  belysning. Bra optik/elektricitets-vinkel (halvledare, fotoström) men mer en
+  teknisk sensorförbättring än en tydlig "aha"-upptäckt för gymnasienivå. Källor:
+  https://physicsworld.com/a/machine-vision-begins-to-work-like-the-human-eye/ ,
+  Nature Communications (2026). (tillagd 2026-07-13)
+- **Mörk energi byter tecken, men Hubble-spänningen vägrar försvinna** — forskare
+  (Sehjal Khandelwal, Abraão Jessé Capistrano de Souza, Suresh Kumar) testar en
+  modifierad mörk energi-modell (LsCDM) där vakuumenergin var negativ tidigt i
+  universums historia och sedan bytte tecken. Den lindrar Hubble-spänningen
+  något men löser den inte. Tungt teoretisk kosmologi och en "olöst
+  fortfarande"-nyhet snarare än en tydlig upptäckt — vi har dessutom kört mycket
+  astronomi/kosmologi senaste veckorna. Källor:
+  https://phys.org/news/2026-07-dark-energy-flips-hubble-tension.html ,
+  Physical Review D, DOI 10.1103/sbdm-9vxz. (tillagd 2026-07-13)
+- **Laserförsegling ska göra glasbehållare säkrare för kärnavfall och
+  batterikemikalier** — industriellt inriktad materialfysik-nyhet, mindre
+  spännande vinkel för gymnasienivå. Källa:
+  https://phys.org/news/2026-07-glass-chemical-laser-welding.html
+  (tillagd 2026-07-13)
+
 ## Fynd som inte användes (2026-07-12) — kan tas upp senare
 
 - **OBS — undvik "elektriskt fält tredubblar värmeflödet i keramik" om den dyker

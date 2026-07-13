@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-13 | `2026-07-13-karnvapen-i-rymden` | En liten satellit ska kunna avslöja gömda kärnvapen i rymden — med hjälp av jordens egen strålning | MIT News (pressmeddelande) / Phys.org / Nature (A. Danagoulian, 2026) |
 | 2026-07-12 | `2026-07-12-syntetiskt-svart-hal` | Ett stillastående kretskort får radiovågor att bli starkare — med ett knep lånat från svarta hål | CUNY Advanced Science Research Center (pressmeddelande via EurekAlert!) / Phys.org / Nature (H. Nasari, H. Moussa, A. Alù et al. 2026) |
 | 2026-07-11 | `2026-07-11-boehms-borstar` | Forskare avslöjar ett dolt mönster i ögat med skräddarsytt ljus — och vill göra det till ett nytt ögontest | University at Buffalo (pressmeddelande) / Phys.org / PNAS (D. Pushin, D. Sarenac et al. 2026) |
 | 2026-07-10 | `2026-07-10-frost-isbroar` | Forskare avslöjar hur frost sprider sig — via mikroskopiska isbroar som svävar fritt i luften | Physics World / EurekAlert! (University of Illinois Urbana-Champaign, pressmeddelande) / Nature Physics (S. Yang, F. Chu, V. Ganesan et al. 2026) |

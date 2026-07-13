@@ -568,5 +568,40 @@ window.VISUALISERINGAR_INDEX = {
         titel: 'Puffen som blir en cirkel',
         beskrivning: 'En vinkelrät puff ändrar aldrig avståndet till origo — det är därför eⁱᵛ blir en cirkelrörelse.',
         fil: 'data/visualiseringar/ma4-4.10.js'
+    },
+    'ma1c-1.9': {
+        titel: 'Zoomresan',
+        beskrivning: 'Zooma från en atom till Vintergatan och se att tiopotensen bara är en position på skalan — a·10ⁿ är siffrorna gånger zoomnivån.',
+        fil: 'data/visualiseringar/ma1c-1.9.js'
+    },
+    'ma1c-4.9': {
+        titel: 'Vad går in, vad kommer ut?',
+        beskrivning: 'Dra i x-bandet och se värdemängden följa på y-axeln — gissa innan du kollar, och hitta fällan när toppen ligger mitt i intervallet.',
+        fil: 'data/visualiseringar/ma1c-4.9.js'
+    },
+    'ma2c-4.2': {
+        titel: 'Vinkelsummans promenad',
+        beskrivning: 'Gå ett varv runt månghörningen och se pilen vrida sig exakt 360° — dra hörnen hur du vill, summan rör sig aldrig.',
+        fil: 'data/visualiseringar/ma2c-4.2.js'
+    },
+    'ma2c-4.7': {
+        titel: 'Likformighetens tre exponenter',
+        beskrivning: 'Dra i skalfaktorn och se hur längd, area och volym skalar olika fort — och varför dubbla sidan ger fyra gånger arean.',
+        fil: 'data/visualiseringar/ma2c-4.7.js'
+    },
+    'ma2c-4.8': {
+        titel: 'Likformighetens tre exponenter',
+        beskrivning: 'Dra i skalfaktorn och se hur längd, area och volym skalar olika fort — och varför dubbla sidan ger fyra gånger arean.',
+        fil: 'data/visualiseringar/ma2c-4.7.js'
+    },
+    'ma2c-4.9': {
+        titel: 'Topptriangelsatsen',
+        beskrivning: 'Dra transversalen och se kvoterna stå stilla — lyft ut topptriangeln och testa genomgångens exempel.',
+        fil: 'data/visualiseringar/ma2c-4.9.js'
+    },
+    'ma2c-6.4': {
+        titel: 'Standardavvikelsen i handen',
+        beskrivning: 'Dra punkterna och se kvadraterna, σ och medelvärdet uppdateras live — och se hur en enda extrempunkt sväller spridningen utan att röra variationsbredden.',
+        fil: 'data/visualiseringar/ma2c-6.4.js'
     }
 };

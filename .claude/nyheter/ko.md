@@ -14,6 +14,43 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-14) — kan tas upp senare
+
+- **Ny 3D-värmekappa gömmer föremål från infrarött ljus i alla riktningar** —
+  forskare vid University of Illinois Urbana-Champaign (Shelly Zhang, Weichen
+  Li, Yibo Wang) och Technical University of Denmark (Ole Sigmund) har byggt
+  den första 3D-"osynlighetsmanteln" för värme som fungerar oavsett vinkel:
+  en aluminiumgitterstruktur kombinerad med gummiliknande material leder
+  värmeflödet runt föremålet i stället för att bara isolera det, så att det
+  blir osynligt för en värmekamera. Utmärkt termodynamik-vinkel (värmeledning,
+  Fysik nivå 1) med riktiga labbfoton av prototypen — mycket stark kandidat,
+  spara den inte för länge. Källor:
+  https://news.illinois.edu/new-3d-thermal-cloak-hides-objects-from-heat-in-any-direction/ ,
+  https://phys.org/news/2026-07-3d-thermal-cloak.html , Nature Communications,
+  DOI 10.1038/s41467-026-73167-0. (tillagd 2026-07-14)
+- **150-årig glödandegåta: eldflugors ljusstyrka har överskattats med upp
+  till 10 000 gånger** — David Silver (Remiza AI) har i American Journal of
+  Physics visat att det klassiska ”1/40 candela”-värdet för en eldflugas
+  blixt, som går tillbaka till mätningar av William Coblentz 1912, är kraftigt
+  överskattat jämfört med moderna mätningar (10⁸–10¹¹ fotoner per blixt mot
+  den gamla siffrans 10¹³–10¹⁴). Trevlig "vetenskapen rättar sig själv"-vinkel
+  om mätfel och källkritik, men mer foto-/biologihistoria än ett nytt
+  fysikaliskt fenomen — bra reservartikel vid nyhetstorka. Källor:
+  https://phys.org/news/2026-07-firefly-brightness-cautionary-tale-older.html ,
+  American Journal of Physics 94(7), 2026. (tillagd 2026-07-14)
+- **Gömd femte dimension kan förklara mörk materias resonans** — teoretiskt
+  förslag om att extra rumsdimensioner kan ge mörk materia dess observerade
+  egenskaper. Spekulativt och tungt för gymnasienivå, och vi har kört mycket
+  kosmologi/mörk materia senaste veckorna. Källa: phys.org (sök "hidden fifth
+  dimension dark matter resonance 2026"). (tillagd 2026-07-14)
+- **Världens första supraledande kvantvärmemotor** och **30 år gammal
+  YBCO-supraledargåta löst** — två separata supraledningsnyheter samma dag;
+  bra ellära-vinkel men vi körde redan en supraledningsnyhet nyligen
+  (grafit, 2026-07-01) och kvantfysik har varit vanligt förekommande — spara
+  till ämnet svalnat. Källa: phys.org (sök "superconducting quantum heat
+  engine 2026" respektive "YBCO superconductor puzzle solved 2026").
+  (tillagd 2026-07-14)
+
 ## Fynd som inte användes (2026-07-13) — kan tas upp senare
 
 - **Adaptiv fotomemristor efterliknar ögats pupill** — forskare vid University of

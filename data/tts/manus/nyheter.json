@@ -1,5 +1,326 @@
 [
  {
+  "id": "2026-07-14-baklanges-sprinkler",
+  "title": "Så snurrar en sprinkler som suger i sig vatten — gåtan från 1883 är äntligen löst",
+  "segments": [
+   {
+    "t": "Så snurrar en sprinkler som suger i sig vatten — gåtan från 1883 är äntligen löst."
+   },
+   {
+    "t": "Vad händer om man kör en trädgårdssprinkler baklänges, så att vatten sugs in i stället för sprutas ut?"
+   },
+   {
+    "t": "Frågan ställdes redan 1883 och gjorde till och med Richard Feynman så nyfiken att han sprängde en glasbehållare i ett misslyckat labbförsök på 1940-talet."
+   },
+   {
+    "t": "Nu har matematiker vid New York University, ledda av Leif Ristroph, byggt en rad olika ”sprinklerleksaker” i böjda rörformer och löst gåtan i tidskriften PNAS: en baklängeskörd sprinkler snurrar visserligen, men av ett helt annat skäl än den vanliga — och omkring 50 gånger långsammare."
+   },
+   {
+    "t": "De flesta har sett en vanlig gräsmatte-sprinkler snurra runt medan den sprutar vatten över gräset — ett läroboksexempel på hur en reaktionskraft kan sätta något i rörelse, precis som hos en raket."
+   },
+   {
+    "t": "Men vad händer om man vänder på alltihop och tvingar in vatten i sprinklern i stället, så att den suger i sig vatten genom de böjda armarna snarare än att spruta ut det?"
+   },
+   {
+    "t": "Snurrar den fortfarande, och i så fall åt vilket håll?"
+   },
+   {
+    "t": "Frågan har irriterat fysiker i över 140 år — och har nu äntligen fått ett tydligt svar, publicerat i tidskriften Proceedings of the National Academy of Sciences (PNAS) av ett forskarlag vid New York University (NYU)."
+   },
+   {
+    "t": "En gåta som sprängde en glasbehållare."
+   },
+   {
+    "t": "Problemet dök första gången upp 1883, då den österrikiske fysikern Ernst Mach beskrev det i sin klassiska bok om mekanik och bara konstaterade att sprinklern inte visade någon tydlig rotation."
+   },
+   {
+    "t": "Frågan blev sedan ordentligt känd tack vare Richard Feynman, som doktorand vid Princeton University på 1940-talet byggde ett eget försök i universitetets cyklotronlaboratorium."
+   },
+   {
+    "t": "Enligt ett vittnesmål från kollegan Edward Creutz ryckte sprinklerhuvudet bara till en aning och stod sedan still hur mycket trycket än ökades — tills glasbehållaren med vatten till slut small sönder."
+   },
+   {
+    "t": "Feynman fick aldrig något ordentligt svar på sin egen fråga."
+   },
+   {
+    "t": "Sprinklerleksaker i olika former."
+   },
+   {
+    "t": "Forskarlaget, med Leif Ristroph vid NYU:s Courant Institute i spetsen, byggde en rad olika ”sprinklerleksaker” — genomskinliga rör böjda i olika mönster: en helt rak variant, spiraler, rör som krokar tillbaka på sig själva och flera andra geometrier."
+   },
+   {
+    "t": "Varje modell monterades på ett extremt friktionsfritt lager och kördes både framlänges (vatten sprutas ut) och baklänges (vatten sugs in), medan höghastighetskameror och färgat vatten fångade hur strömmarna rörde sig både inne i och utanför sprinklerhuvudet."
+   },
+   {
+    "t": "”Det här arbetet ger det experimentella svaret på Feynmans sprinklerproblem, genom att visa — för flera olika sprinklerformer — hur vattenflödenas rörelsemängdsmoment driver sprinklerns rotation.”"
+   },
+   {
+    "t": "Framlänges en raket, baklänges nästan ingenting."
+   },
+   {
+    "t": "Framlänges fungerar sprinklern precis som en roterande raket: vattenstrålarna som sprutar ut ur armarnas mynningar trycker tillbaka på sprinklern enligt Newtons tredje lag (se Fysiklabbets genomgång om just den lagen, Fysik nivå 1) och får den att snurra."
+   },
+   {
+    "t": "Baklänges finns det inga strålar som sprutar ut någonstans — men djupt inne, där armarna möts i ett litet nav, bildas det ändå strålar av det inströmmande vattnet."
+   },
+   {
+    "t": "Dessa inre strålar krockar med varandra, men inte exakt mitt i prick — och just den lilla sneda träffen ger en nettokraft som får sprinklern att rotera, fast åt motsatt håll jämfört med framlänges-fallet."
+   },
+   {
+    "t": "Eftersom mekanismen är så mycket mer indirekt snurrar en baklängeskörd sprinkler omkring 50 gånger långsammare än en vanlig, vid jämförbara vattenflöden."
+   },
+   {
+    "t": "Två gamla teorier föll — en tredje höll hela vägen."
+   },
+   {
+    "t": "De olika sprinklerformerna gjorde det möjligt att skilja mellan konkurrerande förklaringar som cirkulerat sedan Machs dagar."
+   },
+   {
+    "t": "Mach själv trodde att vattnet utanför sprinklern virvlar åt ett håll och sprinklern åt det andra — en teori som de nya mätningarna motbevisar."
+   },
+   {
+    "t": "Feynmans egen idé, som fokuserade på flödet längst ut på armarna, höll inte heller: den yttre delen av flödet visade sig knappt påverka rotationen."
+   },
+   {
+    "t": "Det som till slut förklarade alla sprinklerformernas beteende — i både framlänges- och baklängesläge — var i stället rörelsemängden hos de inre vattenstrålarna, vad forskarna kallar momentum flux-teorin."
+   },
+   {
+    "t": "”Våra resultat ger en säkrare förståelse för hur komponenter reagerar på strömmande vätskor och gaser — kunskap som kan vägleda framtida tekniska framsteg för apparater, som turbiner, som omvandlar sådana flöden till energi.”"
+   },
+   {
+    "t": "Från trädgårdsleksak till framtidens turbiner."
+   },
+   {
+    "t": "Fyndet är mer än en kuriositet för fysiknördar."
+   },
+   {
+    "t": "Alla apparater som omvandlar strömmande luft eller vatten till rörelse eller kraft — från vattenturbiner till vindkraftverk — bygger på samma samspel mellan geometrins form och flödets rörelsemängd (se Fysiklabbets genomgång om rörelsemängd och impuls, Fysik nivå 1)."
+   },
+   {
+    "t": "Genom att reda ut exakt vilken mekanism som styr en så välkänd pryl som en trädgårdssprinkler hoppas forskarna kunna bidra med kunskap som är till nytta långt utanför trädgården."
+   },
+   {
+    "t": "Visste du."
+   },
+   {
+    "t": "Ernst Mach, som ställde sprinklerfrågan redan 1883, är samma fysiker som gett namn åt machtalet — förhållandet mellan en farkosts hastighet och ljudets hastighet (se Fysiklabbets genomgång om dopplereffekt och ljudbangen, Fysik nivå 2)."
+   },
+   {
+    "t": "Trots att Richard Feynman aldrig löste sprinklergåtan själv delade han Nobelpriset i fysik 1965 — men för ett helt annat område, kvantelektrodynamiken."
+   },
+   {
+    "t": "Namnet ”silly sprinklers” syftar på att forskarnas modeller är släkt med de böjda plaströrs-sprinklers som säljs som barnleksaker för att svalka sig en varm sommardag."
+   }
+  ]
+ },
+ {
+  "id": "2026-07-13-karnvapen-i-rymden",
+  "title": "En liten satellit ska kunna avslöja gömda kärnvapen i rymden — med hjälp av jordens egen strålning",
+  "segments": [
+   {
+    "t": "En liten satellit ska kunna avslöja gömda kärnvapen i rymden — med hjälp av jordens egen strålning."
+   },
+   {
+    "t": "MIT-forskaren Areg Danagoulian har i tidskriften Nature visat hur en detektor, inte större än en tjock uppslagsbok, skulle kunna avslöja om en satellit bär på ett kärnvapen — genom att räkna de neutroner som slås loss när jordens naturliga strålningsbälten träffar tunga atomkärnor som uran och plutonium."
+   },
+   {
+    "t": "Metoden kan ge 1967 års rymdfördrag, som helt saknar kontrollmekanism, sina första verkliga tänder."
+   },
+   {
+    "t": "Sedan 1967 har det funnits en internationell överenskommelse om att aldrig placera kärnvapen i jordens omloppsbana."
+   },
+   {
+    "t": "Men rymdfördraget har alltid haft en svaghet: ingen har haft något sätt att kontrollera att det faktiskt hålls — en satellit går inte att inspektera som ett fartyg i en hamn."
+   },
+   {
+    "t": "Nu föreslår kärnfysikern Areg Danagoulian vid MIT en lösning i tidskriften Nature, och den kräver varken tillstånd eller inspektörer ombord: låt jordens egen strålning göra jobbet."
+   },
+   {
+    "t": "En osynlig ring av fångade partiklar."
+   },
+   {
+    "t": "Runt jorden ligger två bälten av laddade partiklar som jordens magnetfält har fångat in — de så kallade Van Allen-bältena (se Fysiklabbets genomgång om det jordmagnetiska fältet, Fysik nivå 2, om hur samma fält skyddar oss från strålning vid polerna)."
+   },
+   {
+    "t": "I det inre bältet far protoner runt med energier på uppemot en gigaelektronvolt — alltså miljarder elektronvolt, långt mer än energin hos fotonerna i en vanlig röntgenbild."
+   },
+   {
+    "t": "Danagoulians idé är att låta en misstänkt satellit passera rakt igenom denna naturliga partikelstråle, och se vad som händer när protonerna träffar en gömd last av klyvbart material."
+   },
+   {
+    "t": "En regnskur av neutroner."
+   },
+   {
+    "t": "Träffar en sådan energirik proton en tung atomkärna, till exempel uran eller plutonium, kan kärnan splittras i en process som kallas spallation — samma princip som ger neutroner vid Europeiska spallationskällan (ESS) i Lund, där protoner i stället skjuts mot ett mål av volfram."
+   },
+   {
+    "t": "En vanlig satellit innehåller nästan inga tunga atomkärnor att klyva på det viset (se Fysiklabbets genomgång om atomkärnan, Fysik nivå 1), så en plötslig skur av neutroner blir ett tydligt fingeravtryck av gömt klyvbart material."
+   },
+   {
+    "t": "”När en energirik proton slår in i grundämnen med högt atomnummer, som uran och plutonium, kan varje proton slå loss något i stil med 40 neutroner.”"
+   },
+   {
+    "t": "Diamant sorterar bort bruset."
+   },
+   {
+    "t": "Danagoulians föreslagna detektor är inte större än en tjock uppslagsbok och byggd för att rymmas i en så kallad 9U CubeSat — en liten satellit i standardformat."
+   },
+   {
+    "t": "Den använder två paneler av scintillatorer, material som blixtrar till i ljus när en partikel träffar dem, inklämda mellan skikt av syntetisk diamant."
+   },
+   {
+    "t": "Diamantskikten sorterar bort protoner och elektroner så att bara neutronerna räknas, och de två panelernas inbördes läge gör det möjligt att räkna ut varifrån neutronerna kom — och därmed skilja en riktad skur från en misstänkt satellit från det jämna bruset av bakgrundsstrålning."
+   },
+   {
+    "t": "99 procents säkerhet — om avståndet är rätt."
+   },
+   {
+    "t": "Enligt beräkningarna i studien kan detektorn avslöja ett gömt kärnvapen med 99 procent säkerhet om den befinner sig inom cirka 4 kilometer från den misstänkta satelliten i ungefär en vecka."
+   },
+   {
+    "t": "Kommer den närmare, inom 1 kilometer, räcker en enda timmes mätning — och med flera detektorer samtidigt kan tiden kortas ytterligare."
+   },
+   {
+    "t": "”Man kan fejka underrättelser, men man kan inte fejka fysik.”"
+   },
+   {
+    "t": "Ett fördrag utan tänder."
+   },
+   {
+    "t": "Rymdfördraget från 1967 har skrivits under av 118 länder, däribland USA, Ryssland och Kina, men saknar en mekanism för att kontrollera efterlevnaden."
+   },
+   {
+    "t": "Frågan är långt ifrån akademisk: när USA 1962 detonerade en kärnladdning 400 kilometer över Stilla havet, i testet Starfish Prime, slogs flera dåtida satelliter ut av strålningen som frigjordes."
+   },
+   {
+    "t": "Och 2022 sköt Ryssland upp satelliten Kosmos 2553 i en ovanlig bana rakt igenom den mest strålningsintensiva delen av det inre Van Allen-bältet — en bana som amerikanska tjänstemän 2024 offentligt kopplade till ett misstänkt program för kärnvapenbestyckade satellitvapen."
+   },
+   {
+    "t": "Ryssland förnekar att något sådant program finns."
+   },
+   {
+    "t": "Bara ett förslag — än så länge."
+   },
+   {
+    "t": "Danagoulian betonar själv att ingen sådan detektor ännu har byggts eller testats på riktigt — studien är en teoretisk genomförbarhetsstudie. ”Jag skriver i artikeln att det här inte är ett fullständigt bevisat system."
+   },
+   {
+    "t": "Syftet är att visa forskarsamhället att det är vetenskapligt möjligt”, säger han."
+   },
+   {
+    "t": "Nästa steg, hoppas han, är att nationella forskningslaboratorier bygger vidare på idén — och att den med tiden blir ett verktyg som beslutsfattare faktiskt litar på."
+   },
+   {
+    "t": "Visste du."
+   },
+   {
+    "t": "Van Allen-bältena upptäcktes 1958 av den amerikanske fysikern James Van Allen, med en Geigermätare ombord på USA:s första satellit, Explorer 1."
+   },
+   {
+    "t": "En CubeSat byggs av standardiserade kubar om 10 centimeter i sidled — en ”9U”-satellit består av nio sådana kubar, ungefär i storlek med en resväska."
+   },
+   {
+    "t": "Namnet spallation kommer av engelskans ”to spall”, att flisa av — precis som en proton kan flisa loss neutroner ur en tung atomkärna."
+   }
+  ]
+ },
+ {
+  "id": "2026-07-12-syntetiskt-svart-hal",
+  "title": "Ett stillastående kretskort får radiovågor att bli starkare — med ett knep lånat från svarta hål",
+  "segments": [
+   {
+    "t": "Ett stillastående kretskort får radiovågor att bli starkare — med ett knep lånat från svarta hål."
+   },
+   {
+    "t": "Forskare vid CUNY Advanced Science Research Center i New York har i tidskriften Nature återskapat en av relativitetsteorins mest exotiska förutsägelser: att ett tillräckligt snabbt roterande föremål kan ge energi till en förbipasserande våg i stället för att bara reflektera den."
+   },
+   {
+    "t": "Genom att låta en ring av elektroniska komponenter växla egenskaper i exakt rätt takt fick de radiovågor att uppträda som om de mötte ett föremål som snurrade snabbare än ljuset — och vågorna kom ut nästan sex gånger starkare än de gick in, utan att en enda del i kretsen någonsin rörde sig."
+   },
+   {
+    "t": "1969 föreslog den brittiske fysikern Roger Penrose något som lät som ett skämt från naturen själv: ett roterande svart hål kan ge bort energi."
+   },
+   {
+    "t": "Skickar man ett föremål i rätt bana genom ergosfären — den virvlande zonen utanför själva händelsehorisonten där rymdtiden själv dras med i rotationen — och låter det klyvas i två delar där inne, kan den ena delen komma ut med mer rörelseenergi än hela föremålet hade från början."
+   },
+   {
+    "t": "Två år senare, 1971, generaliserade den sovjetiske fysikern Jakov Zeldovitj idén till vågor: en tillräckligt snabbt roterande, absorberande cylinder borde kunna förstärka en radiovåg som studsar mot den, i stället för att bara dämpa den."
+   },
+   {
+    "t": "Fenomenet kallas i dag superradians, eller Penrose–Zeldovitj-processen."
+   },
+   {
+    "t": "Nu har forskare vid Advanced Science Research Center, en del av CUNY Graduate Center i New York (CUNY ASRC), byggt en apparat som återskapar just den fysiken — utan ett enda roterande föremål."
+   },
+   {
+    "t": "Studien publicerades den 8 juli i tidskriften Nature."
+   },
+   {
+    "t": "En ring som aldrig snurrar en enda grad."
+   },
+   {
+    "t": "Problemet med att pröva Zeldovitjs idé i verkligheten är uppenbart: få saker går att snurra tillräckligt fort för att ge en mätbar effekt, och ingenting med massa kan snurra snabbare än ljuset."
+   },
+   {
+    "t": "Forskarlaget, lett av Andrea Alù tillsammans med Hadiseh Nasari och Hady Moussa, löste problemet genom att aldrig snurra någonting alls."
+   },
+   {
+    "t": "De byggde i stället en ring av tre elektroniska resonatorer — kretskomponenter som svänger vid en bestämd frekvens, ungefär som en gitarrsträng svänger vid sin egenfrekvens (se Fysiklabbets genomgång om resonans, Fysik nivå 2) — och lät varje resonators egenskaper växla i tur och ordning med hjälp av varaktordioder, kondensatorer vars förmåga att lagra laddning går att styra elektriskt med en spänning."
+   },
+   {
+    "t": "Växlingen vandrar runt ringen i ett fast mönster, ungefär som en åskådarvåg som sveper runt en fullsatt arena utan att en enda person lämnar sin plats."
+   },
+   {
+    "t": "För en radiovåg som möter ringen är skillnaden mot en verkligt roterande kropp omöjlig att märka — men eftersom det bara är ett tidsschema som vandrar, inte massa som rör sig, går det att sätta mönstrets hastighet hur högt som helst, långt förbi ljushastigheten c."
+   },
+   {
+    "t": "Tekniken kallas Floquet-modulering, efter den franske 1800-talsmatematikern Gaston Floquet, som studerade just system med periodiskt föränderliga egenskaper."
+   },
+   {
+    "t": "Radiovågorna kom ut starkare än de gick in."
+   },
+   {
+    "t": "Forskarna skickade in en radiosignal på 100 megahertz med rätt vinkelegenskaper — samma sak som avgör åt vilket håll en våg ”snurrar” kring sin färdriktning — och mätte i bästa fall en förstärkning på 7,8 dB."
+   },
+   {
+    "t": "Omräknat i effekt betyder det att signalen kom ut omkring sex gånger starkare än den gick in."
+   },
+   {
+    "t": "Energin kom inte från signalen själv, utan från den yttre krets som driver den vandrande moduleringen runt ringen — en roll som motsvarar det roterande svarta hålets egen rörelseenergi i Penrose ursprungliga tankeexperiment."
+   },
+   {
+    "t": "”Vågor med rätt vinkelegenskaper hämtar energi ur den syntetiska, tidsstyrda rotationen — det ger en helt ny form av bredbandig, riktad förstärkning.”"
+   },
+   {
+    "t": "Ett tryggt labb för extrema fenomen."
+   },
+   {
+    "t": "Ingen hävdar att en radiokrets på ett skrivbord i New York bevisar exakt hur riktiga svarta hål beter sig — de äkta exemplaren styrs av Einsteins allmänna relativitetsteori i krökt rymdtid, inte av varaktordioder (se Fysiklabbets genomgång om svarta hål, Fysik nivå 2, om händelsehorisonten hos ett stillastående svart hål — det roterande fallet med sin ergosfär är ett steg längre)."
+   },
+   {
+    "t": "Men matematiken som beskriver hur en våg vinner energi av en tillräckligt snabb rotation är densamma i båda fallen, vilket gör den elektroniska ringen till en ovanligt tillgänglig sandlåda för idéer som annars bara går att undersöka på astronomiskt avstånd — eller inte alls."
+   },
+   {
+    "t": "Forskarna pekar själva ut trådlös kommunikation och radar som möjliga tillämpningar: en förstärkare utan vare sig rörliga delar eller en extern strömkälla kopplad direkt till signalvägen."
+   },
+   {
+    "t": "”Det här experimentet flyttar tankar om extrem rotationsdynamik från teori till praktik, och skapar en mångsidig experimentell plattform för fenomen i gränslandet mellan astrofysik, vågfysik och kvantvetenskap.”"
+   },
+   {
+    "t": "Visste du."
+   },
+   {
+    "t": "Roger Penrose delade Nobelpriset i fysik 2020 för att ha visat att bildandet av svarta hål är en oundviklig konsekvens av Einsteins allmänna relativitetsteori — samma teori som ligger bakom idén om att ett roterande svart hål kan ge bort energi."
+   },
+   {
+    "t": "Namnet Floquet-modulering kommer från den franske matematikern Gaston Floquet, som redan på 1880-talet studerade lösningar till ekvationer med periodiskt varierande koefficienter — helt utan tanke på svarta hål eller radiovågor."
+   },
+   {
+    "t": "En förstärkning på 7,8 dB motsvarar att vågens effekt blev omkring sex gånger så stor som innan — jämför med hur till exempel en förstärkares volym ofta anges just i decibel."
+   }
+  ]
+ },
+ {
   "id": "2026-07-11-boehms-borstar",
   "title": "Forskare avslöjar ett dolt mönster i ögat med skräddarsytt ljus — och vill göra det till ett nytt ögontest",
   "segments": [

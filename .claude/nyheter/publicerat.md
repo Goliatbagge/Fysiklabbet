@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-14 | `2026-07-14-baklanges-sprinkler` | Så snurrar en sprinkler som suger i sig vatten — gåtan från 1883 är äntligen löst | EurekAlert! (New York University, pressmeddelande) / Phys.org / PNAS (J. E. Smith, M. Zuo, W. Kuhlke, B. Sprinkle, L. Ristroph, 2026) |
 | 2026-07-13 | `2026-07-13-karnvapen-i-rymden` | En liten satellit ska kunna avslöja gömda kärnvapen i rymden — med hjälp av jordens egen strålning | MIT News (pressmeddelande) / Phys.org / Nature (A. Danagoulian, 2026) |
 | 2026-07-12 | `2026-07-12-syntetiskt-svart-hal` | Ett stillastående kretskort får radiovågor att bli starkare — med ett knep lånat från svarta hål | CUNY Advanced Science Research Center (pressmeddelande via EurekAlert!) / Phys.org / Nature (H. Nasari, H. Moussa, A. Alù et al. 2026) |
 | 2026-07-11 | `2026-07-11-boehms-borstar` | Forskare avslöjar ett dolt mönster i ögat med skräddarsytt ljus — och vill göra det till ett nytt ögontest | University at Buffalo (pressmeddelande) / Phys.org / PNAS (D. Pushin, D. Sarenac et al. 2026) |

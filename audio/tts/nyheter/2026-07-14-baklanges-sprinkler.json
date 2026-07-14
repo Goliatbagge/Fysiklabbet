@@ -1,0 +1,188 @@
+{
+ "id": "2026-07-14-baklanges-sprinkler",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "663bca11ac55e391d33a706d8c4c85cfb9c1e9a9",
+ "dur": 348.61,
+ "segments": [
+  {
+   "t": "Så snurrar en sprinkler som suger i sig vatten — gåtan från 1883 är äntligen löst.",
+   "s": 0.1,
+   "e": 6.49
+  },
+  {
+   "t": "Vad händer om man kör en trädgårdssprinkler baklänges, så att vatten sugs in i stället för sprutas ut?",
+   "s": 6.44,
+   "e": 13.01
+  },
+  {
+   "t": "Frågan ställdes redan 1883 och gjorde till och med Richard Feynman så nyfiken att han sprängde en glasbehållare i ett misslyckat labbförsök på 1940-talet.",
+   "s": 13.01,
+   "e": 23.19
+  },
+  {
+   "t": "Nu har matematiker vid New York University, ledda av Leif Ristroph, byggt en rad olika ”sprinklerleksaker” i böjda rörformer och löst gåtan i tidskriften PNAS: en baklängeskörd sprinkler snurrar visserligen, men av ett helt annat skäl än den vanliga — och omkring 50 gånger långsammare.",
+   "s": 23.19,
+   "e": 40.15
+  },
+  {
+   "t": "De flesta har sett en vanlig gräsmatte-sprinkler snurra runt medan den sprutar vatten över gräset — ett läroboksexempel på hur en reaktionskraft kan sätta något i rörelse, precis som hos en raket.",
+   "s": 40.15,
+   "e": 51.94
+  },
+  {
+   "t": "Men vad händer om man vänder på alltihop och tvingar in vatten i sprinklern i stället, så att den suger i sig vatten genom de böjda armarna snarare än att spruta ut det?",
+   "s": 51.94,
+   "e": 61.39
+  },
+  {
+   "t": "Snurrar den fortfarande, och i så fall åt vilket håll?",
+   "s": 61.39,
+   "e": 65.69
+  },
+  {
+   "t": "Frågan har irriterat fysiker i över 140 år — och har nu äntligen fått ett tydligt svar, publicerat i tidskriften Proceedings of the National Academy of Sciences (PNAS) av ett forskarlag vid New York University (NYU).",
+   "s": 65.69,
+   "e": 79.47
+  },
+  {
+   "t": "En gåta som sprängde en glasbehållare.",
+   "s": 79.47,
+   "e": 82.95
+  },
+  {
+   "t": "Problemet dök första gången upp 1883, då den österrikiske fysikern Ernst Mach beskrev det i sin klassiska bok om mekanik och bara konstaterade att sprinklern inte visade någon tydlig rotation.",
+   "s": 82.95,
+   "e": 94.88
+  },
+  {
+   "t": "Frågan blev sedan ordentligt känd tack vare Richard Feynman, som doktorand vid Princeton University på 1940-talet byggde ett eget försök i universitetets cyklotronlaboratorium.",
+   "s": 94.88,
+   "e": 106.55
+  },
+  {
+   "t": "Enligt ett vittnesmål från kollegan Edward Creutz ryckte sprinklerhuvudet bara till en aning och stod sedan still hur mycket trycket än ökades — tills glasbehållaren med vatten till slut small sönder.",
+   "s": 106.55,
+   "e": 117.7
+  },
+  {
+   "t": "Feynman fick aldrig något ordentligt svar på sin egen fråga.",
+   "s": 117.7,
+   "e": 122.15
+  },
+  {
+   "t": "Sprinklerleksaker i olika former.",
+   "s": 122.15,
+   "e": 125.59
+  },
+  {
+   "t": "Forskarlaget, med Leif Ristroph vid NYU:s Courant Institute i spetsen, byggde en rad olika ”sprinklerleksaker” — genomskinliga rör böjda i olika mönster: en helt rak variant, spiraler, rör som krokar tillbaka på sig själva och flera andra geometrier.",
+   "s": 125.59,
+   "e": 141.43
+  },
+  {
+   "t": "Varje modell monterades på ett extremt friktionsfritt lager och kördes både framlänges (vatten sprutas ut) och baklänges (vatten sugs in), medan höghastighetskameror och färgat vatten fångade hur strömmarna rörde sig både inne i och utanför sprinklerhuvudet.",
+   "s": 141.43,
+   "e": 156.75
+  },
+  {
+   "t": "”Det här arbetet ger det experimentella svaret på Feynmans sprinklerproblem, genom att visa — för flera olika sprinklerformer — hur vattenflödenas rörelsemängdsmoment driver sprinklerns rotation.”",
+   "s": 156.75,
+   "e": 168.6
+  },
+  {
+   "t": "Framlänges en raket, baklänges nästan ingenting.",
+   "s": 168.6,
+   "e": 173.03
+  },
+  {
+   "t": "Framlänges fungerar sprinklern precis som en roterande raket: vattenstrålarna som sprutar ut ur armarnas mynningar trycker tillbaka på sprinklern enligt Newtons tredje lag (se Fysiklabbets genomgång om just den lagen, Fysik nivå 1) och får den att snurra.",
+   "s": 173.03,
+   "e": 188.18
+  },
+  {
+   "t": "Baklänges finns det inga strålar som sprutar ut någonstans — men djupt inne, där armarna möts i ett litet nav, bildas det ändå strålar av det inströmmande vattnet.",
+   "s": 188.18,
+   "e": 198.24
+  },
+  {
+   "t": "Dessa inre strålar krockar med varandra, men inte exakt mitt i prick — och just den lilla sneda träffen ger en nettokraft som får sprinklern att rotera, fast åt motsatt håll jämfört med framlänges-fallet.",
+   "s": 198.24,
+   "e": 210.09
+  },
+  {
+   "t": "Eftersom mekanismen är så mycket mer indirekt snurrar en baklängeskörd sprinkler omkring 50 gånger långsammare än en vanlig, vid jämförbara vattenflöden.",
+   "s": 210.09,
+   "e": 219.66
+  },
+  {
+   "t": "Två gamla teorier föll — en tredje höll hela vägen.",
+   "s": 219.66,
+   "e": 224.0
+  },
+  {
+   "t": "De olika sprinklerformerna gjorde det möjligt att skilja mellan konkurrerande förklaringar som cirkulerat sedan Machs dagar.",
+   "s": 224.0,
+   "e": 231.43
+  },
+  {
+   "t": "Mach själv trodde att vattnet utanför sprinklern virvlar åt ett håll och sprinklern åt det andra — en teori som de nya mätningarna motbevisar.",
+   "s": 231.43,
+   "e": 239.64
+  },
+  {
+   "t": "Feynmans egen idé, som fokuserade på flödet längst ut på armarna, höll inte heller: den yttre delen av flödet visade sig knappt påverka rotationen.",
+   "s": 239.64,
+   "e": 251.51
+  },
+  {
+   "t": "Det som till slut förklarade alla sprinklerformernas beteende — i både framlänges- och baklängesläge — var i stället rörelsemängden hos de inre vattenstrålarna, vad forskarna kallar momentum flux-teorin.",
+   "s": 251.46,
+   "e": 262.81
+  },
+  {
+   "t": "”Våra resultat ger en säkrare förståelse för hur komponenter reagerar på strömmande vätskor och gaser — kunskap som kan vägleda framtida tekniska framsteg för apparater, som turbiner, som omvandlar sådana flöden till energi.”",
+   "s": 262.81,
+   "e": 276.39
+  },
+  {
+   "t": "Från trädgårdsleksak till framtidens turbiner.",
+   "s": 276.39,
+   "e": 280.38
+  },
+  {
+   "t": "Fyndet är mer än en kuriositet för fysiknördar.",
+   "s": 280.38,
+   "e": 284.67
+  },
+  {
+   "t": "Alla apparater som omvandlar strömmande luft eller vatten till rörelse eller kraft — från vattenturbiner till vindkraftverk — bygger på samma samspel mellan geometrins form och flödets rörelsemängd (se Fysiklabbets genomgång om rörelsemängd och impuls, Fysik nivå 1).",
+   "s": 284.67,
+   "e": 300.87
+  },
+  {
+   "t": "Genom att reda ut exakt vilken mekanism som styr en så välkänd pryl som en trädgårdssprinkler hoppas forskarna kunna bidra med kunskap som är till nytta långt utanför trädgården.",
+   "s": 300.87,
+   "e": 311.17
+  },
+  {
+   "t": "Visste du.",
+   "s": 311.17,
+   "e": 313.02
+  },
+  {
+   "t": "Ernst Mach, som ställde sprinklerfrågan redan 1883, är samma fysiker som gett namn åt machtalet — förhållandet mellan en farkosts hastighet och ljudets hastighet (se Fysiklabbets genomgång om dopplereffekt och ljudbangen, Fysik nivå 2).",
+   "s": 313.02,
+   "e": 328.42
+  },
+  {
+   "t": "Trots att Richard Feynman aldrig löste sprinklergåtan själv delade han Nobelpriset i fysik 1965 — men för ett helt annat område, kvantelektrodynamiken.",
+   "s": 328.42,
+   "e": 338.89
+  },
+  {
+   "t": "Namnet ”silly sprinklers” syftar på att forskarnas modeller är släkt med de böjda plaströrs-sprinklers som säljs som barnleksaker för att svalka sig en varm sommardag.",
+   "s": 338.89,
+   "e": 348.61
+  }
+ ]
+}

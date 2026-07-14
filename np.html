@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fysiklabbet — Nationella prov med lösningar steg för steg</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <style>
+        /* ---- NP-specifik styling (bygger på Laborans-variablerna) ---- */
+        .np-main {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 24px 24px 72px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .np-hero-title {
+            font-family: var(--lab-font-display);
+            font-size: clamp(30px, 4.6vw, 44px);
+            line-height: 1.08;
+            margin: 18px 0 12px;
+            font-weight: 400;
+        }
+        .np-hero-title em { color: var(--lab-accent); }
+        .np-lede {
+            color: var(--lab-ink-soft);
+            max-width: 62ch;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0 0 26px;
+        }
+        .np-provkort-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
+            margin: 18px 0 8px;
+        }
+        .np-provkort-grid .lab-card { text-decoration: none; }
+        .np-provkort-grid .lab-card-tag,
+        .np-provkort-grid .lab-card-title,
+        .np-provkort-grid .lab-card-meta { display: block; }
+
+        /* Delprov-info */
+        .np-delprov-rad {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 12px;
+            margin: 16px 0 4px;
+        }
+        .np-delprov-kort {
+            background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line-strong);
+            border-radius: 10px;
+            padding: 14px 16px;
+        }
+        .np-delprov-kort h3 {
+            font-family: var(--lab-font-display);
+            font-weight: 400;
+            font-size: 20px;
+            margin: 0 0 6px;
+        }
+        .np-delprov-kort p {
+            margin: 0 0 4px;
+            font-size: 13.5px;
+            color: var(--lab-ink-soft);
+            line-height: 1.5;
+        }
+
+        /* Uppgiftslista */
+        .np-uppgift-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .np-uppgift-kort {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-align: left;
+            background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line-strong);
+            border-radius: 10px;
+            padding: 12px 14px;
+            text-decoration: none;
+            color: var(--lab-ink);
+            transition: transform .08s ease, box-shadow .08s ease;
+        }
+        .np-uppgift-kort:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(15, 22, 32, 0.10);
+        }
+        .np-uppgift-kort.is-disabled {
+            opacity: .55;
+            pointer-events: none;
+        }
+        .np-uppgift-kort-rad {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .np-uppgift-nr {
+            font-family: var(--lab-font-display);
+            font-size: 19px;
+        }
+        .np-uppgift-omrade {
+            font-size: 13px;
+            color: var(--lab-ink-soft);
+        }
+        .np-poang {
+            font-family: var(--lab-font-mono);
+            font-size: 11.5px;
+            letter-spacing: .04em;
+            color: var(--lab-ink-muted);
+            white-space: nowrap;
+        }
+
+        /* Chips */
+        .np-chiprad {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin: 4px 0 14px;
+        }
+        .np-chip {
+            font-family: var(--lab-font-mono);
+            font-size: 11px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            border: 1px solid var(--lab-line-strong);
+            border-radius: 999px;
+            padding: 4px 11px;
+            color: var(--lab-ink-soft);
+            background: var(--lab-bg-panel);
+        }
+        .np-chip-accent {
+            border-color: rgba(200, 50, 74, 0.45);
+            color: var(--lab-accent);
+            background: var(--lab-accent-soft);
+        }
+
+        /* Frågekort och stegkort */
+        .np-fraga {
+            background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line-strong);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 6px 0 20px;
+        }
+        .np-fraga .np-kortlabel { color: var(--lab-ink-muted); }
+        .np-kortlabel {
+            font-family: var(--lab-font-mono);
+            font-size: 11px;
+            letter-spacing: .09em;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .np-steg {
+            background: var(--lab-bg-panel);
+            border: 1px solid var(--lab-line);
+            border-left: 3px solid var(--lab-accent-2);
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin: 0 0 12px;
+            animation: np-steg-in .25s ease;
+        }
+        @keyframes np-steg-in {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .np-steg-rubrik {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-bottom: 10px;
+        }
+        /* Uppgiftsnummer (t.ex. "17a") — liten, dämpad rad överst i steget */
+        .np-steg-uppgnr {
+            font-family: var(--lab-font-mono);
+            font-size: 10px;
+            letter-spacing: .08em;
+            color: var(--lab-ink-muted);
+            white-space: nowrap;
+        }
+        .np-steg-nr {
+            font-family: var(--lab-font-mono);
+            font-size: 11px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--lab-accent-2);
+            white-space: nowrap;
+        }
+        .np-steg-titel {
+            font-family: var(--lab-font-display);
+            font-size: 19px;
+            line-height: 1.2;
+        }
+        .np-varfor {
+            border: 1px dashed var(--lab-line-strong);
+            border-radius: 8px;
+            background: var(--lab-bg);
+            padding: 10px 14px;
+            margin: 10px 0 12px;
+            font-size: 14px;
+            color: var(--lab-ink-soft);
+            line-height: 1.55;
+        }
+        .np-varfor .np-varfor-label {
+            font-family: var(--lab-font-mono);
+            font-size: 10.5px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--lab-accent);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .np-varfor p { margin: 0 0 6px; }
+        .np-varfor p:last-child { margin-bottom: 0; }
+        .np-svar {
+            background: var(--lab-bg-panel);
+            border: 1.5px solid var(--lab-ink);
+            border-radius: 12px;
+            padding: 16px 22px;
+            margin: 4px 0 12px;
+            animation: np-steg-in .25s ease;
+        }
+        /* Delsvar: en deluppgift (a, b, …) avslutas med sitt svar i det steg
+           som avslutar den — innan nästa deluppgift påbörjas. */
+        .np-delsvar {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            border: 1.5px solid var(--lab-ink);
+            border-radius: 8px;
+            background: var(--lab-bg);
+            padding: 10px 16px;
+            margin-top: 14px;
+        }
+        .np-delsvar .np-delsvar-label {
+            font-family: var(--lab-font-mono);
+            font-size: 10.5px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--lab-accent);
+            white-space: nowrap;
+        }
+        .np-svar .np-kortlabel { color: var(--lab-accent); margin-bottom: 6px; }
+        .np-bedomning {
+            margin: 18px 0 0;
+            border-top: 1px solid var(--lab-line);
+            padding-top: 12px;
+        }
+        /* När delsvar gjort det samlade svaret överflödigt är bedömningen
+           kortets enda innehåll — ingen skiljelinje behövs. */
+        .np-bedomning-ensam {
+            margin-top: 0;
+            border-top: none;
+            padding-top: 0;
+        }
+        .np-bedomning table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 13.5px;
+        }
+        .np-bedomning td {
+            padding: 4px 8px 4px 0;
+            vertical-align: top;
+            border: none;
+        }
+        .np-bedomning td:last-child {
+            font-family: var(--lab-font-mono);
+            font-size: 12px;
+            white-space: nowrap;
+            color: var(--lab-accent-2);
+            text-align: right;
+        }
+
+        /* Knappar för stegvisning */
+        .np-steg-knappar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin: 4px 0 20px;
+        }
+        .np-hint {
+            font-size: 13.5px;
+            color: var(--lab-ink-soft);
+            font-style: italic;
+        }
+
+        /* Figurer */
+        .np-figur {
+            margin: 14px 0 4px;
+            text-align: center;
+        }
+        /* Steg-för-steg-animation i figurer: nya linjer RITAS (stroke-draw),
+           nya mått/etiketter TONAS IN. Elementen får klass + delay av
+           figurgeneratorn; pathLength="1" gör dasharray-trick skal-oberoende. */
+        .np-figur .anim-draw {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+            animation: npDraw 0.8s ease-out forwards;
+        }
+        .np-figur .anim-fade {
+            opacity: 0;
+            animation: npFade 0.7s ease forwards;
+        }
+        @keyframes npDraw { to { stroke-dashoffset: 0; } }
+        @keyframes npFade { to { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) {
+            .np-figur .anim-draw { animation-duration: 0.01s; }
+            .np-figur .anim-fade { animation-duration: 0.01s; }
+        }
+        .np-figur svg {
+            max-width: 100%;
+            height: auto;
+            font-style: normal;
+        }
+        .np-figur-text {
+            font-size: 13px;
+            color: var(--lab-ink-muted);
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        /* Kalkylblad (uppgift 24) */
+        .np-kalkyl { overflow-x: auto; }
+        .np-kalkyl table {
+            border-collapse: collapse;
+            margin: 12px auto 4px;
+            font-size: 13px;
+            background: #fff;
+        }
+        .np-kalkyl th, .np-kalkyl td {
+            border: 1px solid #b9b2a4;
+            padding: 4px 10px;
+            text-align: left;
+            min-width: 64px;
+        }
+        .np-kalkyl th {
+            background: var(--lab-bg-raised);
+            font-weight: 600;
+            font-family: var(--lab-font-mono);
+            font-size: 11.5px;
+            text-align: center;
+        }
+        .np-kalkyl td.np-kalkyl-radnr {
+            background: var(--lab-bg-raised);
+            font-family: var(--lab-font-mono);
+            font-size: 11.5px;
+            text-align: center;
+            min-width: 30px;
+        }
+        .np-kalkyl td.np-tal { text-align: right; }
+
+        /* Navigering mellan uppgifter */
+        .np-uppgift-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 28px;
+            border-top: 1px solid var(--lab-line);
+            padding-top: 16px;
+        }
+
+        /* Markdown-innehåll i kort */
+        .np-md p { margin: 0 0 10px; line-height: 1.6; }
+        .np-md p:last-child { margin-bottom: 0; }
+        .np-md .katex-display { margin: 12px 0; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+        .np-md ul, .np-md ol { margin: 0 0 10px; padding-left: 22px; }
+        .np-md li { margin-bottom: 4px; line-height: 1.55; }
+
+        .np-tillbaka {
+            font-size: 13.5px;
+            text-decoration: none;
+            color: var(--lab-ink-soft);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .np-tillbaka:hover { color: var(--lab-ink); }
+
+        .np-sektionsrubrik {
+            font-family: var(--lab-font-display);
+            font-weight: 400;
+            font-size: 24px;
+            margin: 30px 0 6px;
+        }
+        .np-sektionsrubrik:first-child { margin-top: 8px; }
+
+        /* Rubrikrad med presentationsknapp */
+        .np-losning-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 30px 0 6px;
+        }
+        .np-losning-head .np-sektionsrubrik { margin: 0; }
+        .np-pres-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Presentationsläget: korten ärver np-stilarna; brödtexten är
+           uppskalad av .lab-pres-body, så låt korten andas lite mer. */
+        .np-pres .np-fraga,
+        .np-pres .np-steg,
+        .np-pres .np-svar {
+            margin-bottom: 26px;
+        }
+        .np-pres .np-steg-titel { font-size: 24px; }
+        .np-pres .np-varfor { font-size: 16px; }
+        .np-pres .np-figur svg { max-width: 100%; }
+        /* Entré utan blur-filter: när blur-animationen släpper sitt
+           GPU-lager omritas kortet och kan "snäppa" någon pixel — det
+           syns som ett litet ryck efter att allt stannat. */
+        .np-pres .lab-pres-body .pres-item.is-current {
+            animation-name: npPresInLite;
+        }
+        @keyframes npPresInLite {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobil: låt nav-länkarna radbrytas så att sidan inte tvingas bredare
+           än skärmen (basens .lab-nav saknar wrap). */
+        @media (max-width: 768px) {
+            .lab-nav {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                row-gap: 4px;
+                gap: 16px;
+            }
+            .np-main { padding: 18px 16px 56px; }
+        }
+    </style>
+</head>
+<body class="laborans">
+    <div id="root"></div>
+
+    <script>document.write('<scr' + 'ipt src="data/np/index.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1c-vt2022-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1c-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1c-vt2017-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1c-vt2017.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1c-ht2016-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma1c-ht2016.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2022-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/ma3c-vt2022.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016-figurer.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script>document.write('<scr' + 'ipt src="data/np/fy2-vt2016.js?v=' + window.__CB + '"></scr' + 'ipt>');</script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+
+    <script type="text/babel" data-presets="react">
+        const { useState, useEffect, useMemo, useRef } = React;
+        const NP_INDEX = window.NP_INDEX || [];
+        const NP_PROV = window.NP_PROV || {};
+        const NP_FIGURER = window.NP_FIGURER || {};
+
+        // --- Math-skydd för marked (samma mönster som katalog.html) ---
+        function protectMath(md) {
+            const tokens = [];
+            md = md.replace(/\$\$([\s\S]+?)\$\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            md = md.replace(/\$([^\n$]+?)\$/g, (m) => {
+                tokens.push(m);
+                return '@@LABMATH' + (tokens.length - 1) + '@@';
+            });
+            return { md, tokens };
+        }
+        function restoreMath(html, tokens) {
+            html = html.replace(/@@LABMATH(\d+)@@/g, (_, i) => tokens[+i]);
+            html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
+            return html;
+        }
+
+        function MdBlock({ source, className }) {
+            const ref = useRef(null);
+            const html = useMemo(() => {
+                if (!source) return null;
+                const { md, tokens } = protectMath(source);
+                return restoreMath(marked.parse(md), tokens);
+            }, [source]);
+            useEffect(() => {
+                if (!ref.current || !html) return;
+                renderMathInElement(ref.current, {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                    ],
+                    throwOnError: false,
+                });
+            }, [html]);
+            if (!html) return null;
+            return <div className={'np-md' + (className ? ' ' + className : '')} ref={ref}
+                dangerouslySetInnerHTML={{ __html: html }} />;
+        }
+
+        function Figur({ provId, figurKey, bildtext }) {
+            if (!figurKey) return null;
+            const fig = (NP_FIGURER[provId] || {})[figurKey];
+            if (!fig) return null;
+            return (
+                <div className="np-figur">
+                    <div dangerouslySetInnerHTML={{ __html: fig }} />
+                    {bildtext && <div className="np-figur-text">{bildtext}</div>}
+                </div>
+            );
+        }
+
+        // --- Sidhuvud (samma som katalog.html) ---
+        function Topbar() {
+            return (
+                <div className="lab-topbar">
+                    <div className="lab-topbar-inner">
+                        <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK OCH MATEMATIK</span>
+                    </div>
+                </div>
+            );
+        }
+        function Header() {
+            return (
+                <div className="lab-header">
+                    <div className="lab-header-inner">
+                        <a className="lab-logo" href="index.html">
+                            <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                                <g transform="rotate(-24 18 18)">
+                                    <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" strokeWidth="1.4" />
+                                    <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                                </g>
+                                <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                            </svg>
+                            <span className="lab-logo-text">Fysiklabbet</span>
+                        </a>
+                        <nav className="lab-nav" aria-label="Huvudnavigation">
+                            <a href="index.html">Start</a>
+                            <div className="lab-nav-dd">
+                                <button type="button" className="lab-nav-dd-trigger" aria-haspopup="true">
+                                    Ämne
+                                    <svg className="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                                </button>
+                                <div className="lab-nav-dd-menu">
+                                    <a href="katalog.html#fy1">Fysik nivå 1</a>
+                                    <a href="katalog.html#fy2">Fysik nivå 2</a>
+                                    <a href="katalog.html#ma1c">Matematik nivå 1c</a>
+                                    <a href="katalog.html#ma2c">Matematik nivå 2c</a>
+                                    <a href="katalog.html#ma3c">Matematik fortsättning nivå 1c</a>
+                                    <a href="katalog.html#ma4">Matematik fortsättning nivå 2</a>
+                                </div>
+                            </div>
+                            <a href="simuleringar.html">Simuleringar</a>
+                            <a href="np.html" aria-current="page">Nationella prov</a>
+                            <a href="nyheter.html">Fysiknyheter</a>
+                            <a href="om.html">Om</a>
+                        </nav>
+                    </div>
+                </div>
+            );
+        }
+        function Breadcrumb({ prov, uppgift }) {
+            return (
+                <div className="lab-breadcrumb">
+                    <span className="lab-breadcrumb-current">NATIONELLA PROV</span>
+                    {prov && (
+                        <React.Fragment>
+                            <span className="lab-breadcrumb-sep">/</span>
+                            <span className="lab-breadcrumb-current">{prov.kurs.toUpperCase()}</span>
+                            <span className="lab-breadcrumb-sep">/</span>
+                            <span className="lab-breadcrumb-tail">{uppgift ? `${prov.termin} · Uppgift ${uppgift}` : prov.termin}</span>
+                        </React.Fragment>
+                    )}
+                </div>
+            );
+        }
+        function Footer() {
+            return (
+                <footer className="lab-section lab-footer">
+                    <span>© 2025 FYSIKLABBET</span>
+                    <span>SKAPAD FÖR GYMNASIEELEVER</span>
+                </footer>
+            );
+        }
+
+        // Stegnumrering: vid deluppgifter (steg med del: 'a' | 'b' | …)
+        // börjar räkningen om för varje deluppgift — b-uppgiftens första
+        // steg är "Steg 1 av …", inte en fortsättning på a-uppgiftens.
+        function stegNumrering(uppgift, i) {
+            const s = uppgift.steg[i];
+            if (s.del) {
+                const totalt = uppgift.steg.filter(x => x.del === s.del).length;
+                const nr = uppgift.steg.slice(0, i + 1).filter(x => x.del === s.del).length;
+                return { nr, totalt };
+            }
+            return { nr: i + 1, totalt: uppgift.steg.length };
+        }
+
+        function poangText(p) {
+            return `${p[0]}/${p[1]}/${p[2]}`;
+        }
+        function poangTitle(p) {
+            return `Uppgiften kan ge högst ${p[0]} E-poäng, ${p[1]} C-poäng och ${p[2]} A-poäng`;
+        }
+
+        // --- Startvy: lista över prov ---
+        function Landing() {
+            return (
+                <main className="np-main">
+                    <h1 className="np-hero-title">Nationella prov — <em>lösningar steg för steg</em></h1>
+                    <p className="np-lede">
+                        Träna på riktiga nationella prov. Varje uppgift har en fullständig lösning
+                        som du klickar fram <em>ett steg i taget</em> — med en förklaring till varje steg,
+                        så att du förstår både <em>vad</em> som görs och <em>varför</em>. Försök alltid
+                        lösa uppgiften själv innan du tittar på nästa steg.
+                    </p>
+                    <div className="np-provkort-grid">
+                        {NP_INDEX.map(p => (
+                            <a key={p.id} className="lab-card lab-card-clickable" href={'#' + p.id}>
+                                <span className="lab-card-tag">{p.kurs.toUpperCase()}</span>
+                                <span className="lab-card-title">{p.namn}</span>
+                                <span className="lab-card-meta">{p.meta}</span>
+                            </a>
+                        ))}
+                    </div>
+                    <p className="np-hint" style={{ marginTop: 18 }}>
+                        Fler prov läggs till efter hand.
+                    </p>
+                </main>
+            );
+        }
+
+        // --- Provvy: översikt över uppgifterna ---
+        function ProvView({ prov }) {
+            const delproven = Object.keys(prov.delprov);
+            return (
+                <main className="np-main">
+                    <h1 className="np-hero-title">{prov.namn}</h1>
+                    <MdBlock source={prov.intro} className="np-lede" />
+                    <div className="np-delprov-rad">
+                        {delproven.map(d => (
+                            <div key={d} className="np-delprov-kort">
+                                <h3>Delprov {d}</h3>
+                                <p>{[prov.delprov[d].tid, prov.delprov[d].hjalpmedel].filter(Boolean).join(' · ')}</p>
+                                <p>{prov.delprov[d].beskrivning}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="np-delprov-kort" style={{ margin: '12px 0 4px' }}>
+                        <h3>Kravgränser</h3>
+                        <p>{prov.kravgranser}</p>
+                    </div>
+                    {delproven.map(d => (
+                        <React.Fragment key={d}>
+                            <h2 className="np-sektionsrubrik">Delprov {d}</h2>
+                            <div className="np-uppgift-grid">
+                                {prov.uppgifter.filter(u => u.del === d).map(u => (
+                                    u.sekretess ? (
+                                        <div key={u.nr} className="np-uppgift-kort is-disabled">
+                                            <div className="np-uppgift-kort-rad">
+                                                <span className="np-uppgift-nr">Uppgift {u.nr}</span>
+                                            </div>
+                                            <span className="np-uppgift-omrade">Borttagen på grund av sekretess</span>
+                                        </div>
+                                    ) : (
+                                        <a key={u.nr} className="np-uppgift-kort" href={'#' + prov.id + ':' + u.nr}>
+                                            <div className="np-uppgift-kort-rad">
+                                                <span className="np-uppgift-nr">Uppgift {u.nr}</span>
+                                                <span className="np-poang" title={poangTitle(u.poang)}>{poangText(u.poang)}</span>
+                                            </div>
+                                            <span className="np-uppgift-omrade">{u.omrade}</span>
+                                        </a>
+                                    )
+                                ))}
+                            </div>
+                        </React.Fragment>
+                    ))}
+                </main>
+            );
+        }
+
+        // --- Uppgiftsvy: fråga + lösning steg för steg ---
+        // ?los=1 fäller ut hela lösningen direkt (används för skärmdumpstester)
+        const LOS_DIREKT = new URLSearchParams(window.location.search).has('los');
+        // ?pres=N öppnar presentationsläget direkt på steg N (skärmdumpstester)
+        const PRES_START = (() => {
+            const v = new URLSearchParams(window.location.search).get('pres');
+            return v == null ? null : (parseInt(v, 10) || 0);
+        })();
+
+        // ── Presentationsläge för en uppgift ────────────────────────
+        // Fullskärmsoverlay som teorins presentationsläge: klick (eller →,
+        // mellanslag, Enter) visar nästa steg; föregående steg dimmas och det
+        // nya centreras. Steg 0 = titelbild, 1 = uppgiften, 2… = lösnings-
+        // stegen, sista = svaret. Återanvänder lab-pres-CSS:en.
+        function NpPresentation({ prov, uppgift, onClose, startStep }) {
+            const overlayRef = useRef(null);
+            const stageRefs = useRef([]);
+            const chromeTimer = useRef(null);
+            const antalSteg = uppgift.steg.length;
+            // Har deluppgifterna egna delsvar behövs ingen samlad svarsbild
+            // på slutet — presentationen slutar efter sista stegets delsvar.
+            const harDelsvar = uppgift.steg.some(s => s.delsvar);
+            const total = antalSteg + (harDelsvar ? 1 : 2); // uppgiften + stegen (+ ev. svaret)
+            const [step, setStep] = useState(() => Math.min(startStep || 0, total));
+            const [chrome, setChrome] = useState(true);
+            const totalRef = useRef(total);
+            totalRef.current = total;
+
+            const next = () => setStep(s => Math.min(s + 1, totalRef.current));
+            const prev = () => setStep(s => Math.max(s - 1, 0));
+
+            // Fullskärm + lås sidans egen scroll under presentationen.
+            useEffect(() => {
+                const el = document.documentElement;
+                if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+                const onFs = () => { if (!document.fullscreenElement) onClose(); };
+                document.addEventListener('fullscreenchange', onFs);
+                const prevOverflow = document.body.style.overflow;
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('lab-pres-active');
+                return () => {
+                    document.removeEventListener('fullscreenchange', onFs);
+                    document.body.style.overflow = prevOverflow;
+                    document.body.classList.remove('lab-pres-active');
+                    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+                };
+            }, []);
+
+            // Tangentbordsnavigering
+            useEffect(() => {
+                const onKey = (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown'
+                        || e.key === ' ' || e.key === 'Enter') { e.preventDefault(); next(); }
+                    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'
+                        || e.key === 'Backspace') { e.preventDefault(); prev(); }
+                    else if (e.key === 'Home') { e.preventDefault(); setStep(0); }
+                    else if (e.key === 'End') { e.preventDefault(); setStep(totalRef.current); }
+                    else if (e.key === 'Escape' && !document.fullscreenElement) onClose();
+                };
+                window.addEventListener('keydown', onKey);
+                return () => window.removeEventListener('keydown', onKey);
+            }, []);
+
+            // Centrera det aktuella steget (högre än 62 % av ytan → toppjustera).
+            // Titelbilden morfar (min-height 80vh → 16vh, 0,6 s) när man lämnar
+            // steg 0, så layouten rör sig EFTER stegbytet. Därför skrollar vi
+            // inte mot ett förberäknat mål utan JAGAR målet: positionen räknas
+            // om varje bildruta och skrollningen glider dit med exponentiell
+            // inbromsning — en enda följsam rörelse utan överskjutning
+            // (påpekat 2026-07-14: fast mål gav först för långt, sedan hopp).
+            useEffect(() => {
+                const overlay = overlayRef.current;
+                if (!overlay) return;
+                const reduceMotion = window.matchMedia
+                    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                let rafId = 0;
+                const t0 = performance.now();
+                let last = t0;
+                const computeTop = () => {
+                    if (step === 0) return 0;
+                    const target = stageRefs.current[step];
+                    if (!target) return null;
+                    const r = target.getBoundingClientRect();
+                    const oh = overlay.clientHeight;
+                    const top = (r.height > oh * 0.62)
+                        ? overlay.scrollTop + r.top - oh * 0.10
+                        : overlay.scrollTop + r.top - (oh - r.height) / 2;
+                    return Math.max(0, Math.min(top, overlay.scrollHeight - oh));
+                };
+                const tick = (now) => {
+                    const dt = Math.min(64, now - last);
+                    last = now;
+                    const malRaw = computeTop();
+                    if (malRaw == null) return;
+                    // Heltalsmål: vilar skrollningen på en bråkdels pixel
+                    // renderas allt subpixel-förskjutet, och nästa omritning
+                    // "snäpper" till hela pixlar — det syns som ett litet ryck.
+                    const mal = Math.round(malRaw);
+                    const diff = mal - overlay.scrollTop;
+                    if (Math.abs(diff) >= 1) {
+                        // Sista biten (< 2 px) tas i ett steg i stället för att
+                        // asymptotiskt krypa — osynligt, och viloläget hamnar
+                        // exakt på heltalspixeln.
+                        const k = reduceMotion ? 1 : 1 - Math.exp(-dt / 130);
+                        overlay.scrollTop = Math.abs(diff) < 2
+                            ? mal
+                            : overlay.scrollTop + diff * k;
+                    }
+                    // Följ med tills layout-transitionerna är klara (0,9 s),
+                    // sedan släpper vi — inga sena korrigeringar.
+                    if (now - t0 < 900) rafId = requestAnimationFrame(tick);
+                };
+                rafId = requestAnimationFrame(tick);
+                return () => cancelAnimationFrame(rafId);
+            }, [step]);
+
+            // Kontrollisten göms efter en stunds musinaktivitet
+            const pokeChrome = () => {
+                setChrome(true);
+                clearTimeout(chromeTimer.current);
+                chromeTimer.current = setTimeout(() => setChrome(false), 2800);
+            };
+            useEffect(() => { pokeChrome(); return () => clearTimeout(chromeTimer.current); }, []);
+
+            const onStageClick = (e) => {
+                if (e.target.closest('button, a')) return;
+                const sel = window.getSelection && window.getSelection();
+                if (sel && sel.toString()) return;
+                next();
+            };
+
+            const cls = (k) => 'pres-item' + (k <= step ? ' is-on' : '') + (k === step ? ' is-current' : '');
+            let counter;
+            if (step === 0) counter = 'TITELBILD';
+            else if (step === 1) counter = 'UPPGIFTEN';
+            else if (!harDelsvar && step === total) counter = 'SVAR';
+            else {
+                const s = uppgift.steg[step - 2];
+                const n = stegNumrering(uppgift, step - 2);
+                counter = `${uppgift.nr}${s.del || ''} · STEG ${n.nr} / ${n.totalt}`;
+            }
+
+            return (
+                <div className={'lab-pres np-pres' + (chrome ? ' chrome-on' : '')
+                        + (step === 0 ? ' at-title' : '') + ' is-ready'}
+                    ref={overlayRef} onMouseMove={pokeChrome} onClick={onStageClick}
+                    role="dialog" aria-label={'Presentationsläge: Uppgift ' + uppgift.nr}>
+                    <div className="lab-pres-progress" aria-hidden="true">
+                        <div style={{ width: (step / total) * 100 + '%' }} />
+                    </div>
+                    <div className="lab-pres-stage">
+                        <div className="lab-pres-title">
+                            <span className="lab-mono-label">
+                                {prov.kort.toUpperCase()} · DELPROV {uppgift.del} · {poangText(uppgift.poang)} POÄNG · {(uppgift.omrade || '').toUpperCase()}
+                            </span>
+                            <h1>Uppgift {uppgift.nr}</h1>
+                            <span className="lab-pres-rule" aria-hidden="true" />
+                            <div className="lab-pres-hint">
+                                Klicka — eller tryck <kbd>→</kbd> — för nästa steg · <kbd>Esc</kbd> avslutar
+                            </div>
+                        </div>
+                        <div className="lab-article-body lab-pres-body np-pres-body">
+                            <div className={cls(1)} ref={el => { stageRefs.current[1] = el; }}>
+                                <div className="np-fraga">
+                                    <span className="np-kortlabel">Uppgift</span>
+                                    <MdBlock source={uppgift.fraga} />
+                                    <Figur provId={prov.id} figurKey={uppgift.figur} />
+                                </div>
+                            </div>
+                            {uppgift.steg.map((s, i) => (
+                                <div key={i} className={cls(i + 2)} ref={el => { stageRefs.current[i + 2] = el; }}>
+                                    <div className="np-steg">
+                                        <div className="np-steg-rubrik">
+                                            <span className="np-steg-uppgnr">{uppgift.nr}{s.del || ''}</span>
+                                            <span className="np-steg-nr">Steg {stegNumrering(uppgift, i).nr} av {stegNumrering(uppgift, i).totalt}</span>
+                                            <span className="np-steg-titel">{s.rubrik}</span>
+                                        </div>
+                                        {s.varfor && (
+                                            <div className="np-varfor">
+                                                <span className="np-varfor-label">Varför gör vi så här?</span>
+                                                <MdBlock source={s.varfor} />
+                                            </div>
+                                        )}
+                                        <MdBlock source={s.text} />
+                                        <Figur provId={prov.id} figurKey={s.figur} />
+                                        {s.delsvar && (
+                                            <div className="np-delsvar">
+                                                <span className="np-delsvar-label">Svar {s.delsvar.del})</span>
+                                                <MdBlock source={s.delsvar.text} />
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                            {!harDelsvar && (
+                                <div className={cls(total)} ref={el => { stageRefs.current[total] = el; }}>
+                                    <div className="np-svar">
+                                        <span className="np-kortlabel">Svar</span>
+                                        <MdBlock source={uppgift.svar} />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                    <div className="lab-pres-bar" onClick={(e) => e.stopPropagation()}>
+                        <span className="lab-mono-label lab-pres-counter">{counter}</span>
+                        <div className="lab-pres-bar-btns">
+                            <button type="button" onClick={prev} disabled={step === 0}
+                                aria-label="Föregående steg">←</button>
+                            <button type="button" onClick={next} disabled={step >= total}
+                                aria-label="Nästa steg">→</button>
+                        </div>
+                        <button type="button" className="lab-pres-exit" onClick={onClose}>
+                            Avsluta · Esc
+                        </button>
+                    </div>
+                </div>
+            );
+        }
+
+        function UppgiftView({ prov, uppgift }) {
+            const [visadeSteg, setVisadeSteg] = useState(LOS_DIREKT ? 999 : 0);
+            const [presenting, setPresenting] = useState(PRES_START != null);
+            const stegEls = useRef([]);
+            const svarEl = useRef(null);
+            const prevVisade = useRef(LOS_DIREKT ? 999 : 0);
+            useEffect(() => {
+                setVisadeSteg(LOS_DIREKT ? 999 : 0);
+                prevVisade.current = LOS_DIREKT ? 999 : 0;
+                window.scrollTo(0, 0);
+            }, [uppgift.nr]);
+
+            // När ETT nytt steg klickas fram: skrolla så att det hamnar
+            // centrerat i rutan (som i presentationsläget). "Visa hela
+            // lösningen" hoppar flera steg — då lämnas skrollningen ifred.
+            useEffect(() => {
+                const diff = visadeSteg - prevVisade.current;
+                prevVisade.current = visadeSteg;
+                if (visadeSteg === 0 || diff !== 1) return;
+                const t = setTimeout(() => {
+                    const el = stegEls.current[visadeSteg - 1];
+                    if (!el) return;
+                    let r = el.getBoundingClientRect();
+                    // Sista steget: ta med svarskortet i mätningen så att
+                    // både steget och svaret kommer i bild.
+                    if (visadeSteg >= uppgift.steg.length && svarEl.current) {
+                        const r2 = svarEl.current.getBoundingClientRect();
+                        r = { top: r.top, height: r2.bottom - r.top };
+                    }
+                    const vh = window.innerHeight;
+                    const top = (r.height > vh * 0.62)
+                        ? window.scrollY + r.top - vh * 0.10
+                        : window.scrollY + r.top - (vh - r.height) / 2;
+                    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+                }, 90);
+                return () => clearTimeout(t);
+            }, [visadeSteg, uppgift.steg.length]);
+
+            const ordning = prov.uppgifter.filter(u => !u.sekretess);
+            const idx = ordning.findIndex(u => u.nr === uppgift.nr);
+            const forra = idx > 0 ? ordning[idx - 1] : null;
+            const nasta = idx < ordning.length - 1 ? ordning[idx + 1] : null;
+
+            const antalSteg = uppgift.steg.length;
+            const alltVisat = visadeSteg >= antalSteg;
+            const dp = prov.delprov[uppgift.del];
+
+            return (
+                <main className="np-main">
+                    <a className="np-tillbaka" href={'#' + prov.id}>
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7.5 2.5 4 6l3.5 3.5"/></svg>
+                        Alla uppgifter — {prov.kort}
+                    </a>
+                    <h1 className="np-hero-title" style={{ marginTop: 10 }}>Uppgift {uppgift.nr}</h1>
+                    <div className="np-chiprad">
+                        <span className="np-chip">Delprov {uppgift.del}</span>
+                        <span className="np-chip" title={poangTitle(uppgift.poang)}>{poangText(uppgift.poang)} poäng</span>
+                        <span className="np-chip">{uppgift.omrade}</span>
+                        <span className="np-chip">{uppgift.endastSvar ? 'Endast svar krävs' : 'Redovisning krävs'}</span>
+                        {dp && <span className="np-chip">{dp.hjalpmedelKort}</span>}
+                    </div>
+
+                    <div className="np-fraga">
+                        <span className="np-kortlabel">Uppgift</span>
+                        <MdBlock source={uppgift.fraga} />
+                        <Figur provId={prov.id} figurKey={uppgift.figur} />
+                    </div>
+
+                    <div className="np-losning-head" style={{ marginTop: 8 }}>
+                        <h2 className="np-sektionsrubrik">Lösning steg för steg</h2>
+                        <button type="button" className="lab-btn lab-btn-quiet np-pres-btn"
+                            onClick={() => setPresenting(true)}
+                            title="Presentationsläge — visa uppgiften i fullskärm och klicka fram lösningen ett steg i taget">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" strokeWidth="2"
+                                strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <path d="M2 4h20" />
+                                <rect x="4" y="4" width="16" height="11" rx="1" />
+                                <path d="M10.5 7.6l4 2.15-4 2.15z" fill="currentColor" stroke="none" />
+                                <path d="M12 15v3" />
+                                <path d="M8.5 21l3.5-3 3.5 3" />
+                            </svg>
+                            Presentationsläge
+                        </button>
+                    </div>
+                    {visadeSteg === 0 && (
+                        <p className="np-hint" style={{ margin: '4px 0 14px' }}>
+                            Försök lösa uppgiften själv först — klicka sedan fram lösningen ett steg i taget.
+                        </p>
+                    )}
+
+                    {uppgift.steg.slice(0, visadeSteg).map((s, i) => (
+                        <div className="np-steg" key={i} ref={el => { stegEls.current[i] = el; }}>
+                            <div className="np-steg-rubrik">
+                                <span className="np-steg-uppgnr">{uppgift.nr}{s.del || ''}</span>
+                                            <span className="np-steg-nr">Steg {stegNumrering(uppgift, i).nr} av {stegNumrering(uppgift, i).totalt}</span>
+                                <span className="np-steg-titel">{s.rubrik}</span>
+                            </div>
+                            {s.varfor && (
+                                <div className="np-varfor">
+                                    <span className="np-varfor-label">Varför gör vi så här?</span>
+                                    <MdBlock source={s.varfor} />
+                                </div>
+                            )}
+                            <MdBlock source={s.text} />
+                            <Figur provId={prov.id} figurKey={s.figur} />
+                            {s.delsvar && (
+                                <div className="np-delsvar">
+                                    <span className="np-delsvar-label">Svar {s.delsvar.del})</span>
+                                    <MdBlock source={s.delsvar.text} />
+                                </div>
+                            )}
+                        </div>
+                    ))}
+
+                    {alltVisat && (
+                        <div className="np-svar" ref={svarEl}>
+                            {/* Har deluppgifterna egna delsvar är det samlade
+                                svaret överflödigt — visa bara bedömningen. */}
+                            {!uppgift.steg.some(s => s.delsvar) && (
+                                <React.Fragment>
+                                    <span className="np-kortlabel">Svar</span>
+                                    <MdBlock source={uppgift.svar} />
+                                </React.Fragment>
+                            )}
+                            {uppgift.bedomning && uppgift.bedomning.length > 0 && (
+                                <div className={'np-bedomning' + (uppgift.steg.some(s => s.delsvar) ? ' np-bedomning-ensam' : '')}>
+                                    <span className="np-kortlabel" style={{ color: 'var(--lab-ink-muted)' }}>Så bedöms uppgiften</span>
+                                    <table>
+                                        <tbody>
+                                            {uppgift.bedomning.map((rad, i) => (
+                                                <tr key={i}>
+                                                    <td><MdBlock source={rad[0]} /></td>
+                                                    <td>{rad[1]}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    <div className="np-steg-knappar">
+                        {!alltVisat && (
+                            <button className="lab-btn lab-btn-primary" onClick={() => setVisadeSteg(v => v + 1)}>
+                                {visadeSteg === 0 ? 'Visa första steget' : 'Visa nästa steg'}
+                            </button>
+                        )}
+                        {!alltVisat && visadeSteg > 0 && (
+                            <button className="lab-btn lab-btn-quiet" onClick={() => setVisadeSteg(antalSteg)}>
+                                Visa hela lösningen
+                            </button>
+                        )}
+                        {!alltVisat && visadeSteg === 0 && antalSteg > 1 && (
+                            <span className="np-hint">{antalSteg} steg</span>
+                        )}
+                        {alltVisat && (
+                            <button className="lab-btn lab-btn-quiet" onClick={() => setVisadeSteg(0)}>
+                                Dölj lösningen
+                            </button>
+                        )}
+                    </div>
+
+                    <div className="np-uppgift-nav">
+                        {forra ? (
+                            <a className="lab-btn lab-btn-quiet" href={'#' + prov.id + ':' + forra.nr}>← Uppgift {forra.nr}</a>
+                        ) : <span />}
+                        {nasta ? (
+                            <a className="lab-btn lab-btn-quiet" href={'#' + prov.id + ':' + nasta.nr}>Uppgift {nasta.nr} →</a>
+                        ) : <span />}
+                    </div>
+                    {presenting && (
+                        <NpPresentation prov={prov} uppgift={uppgift}
+                            startStep={PRES_START || 0}
+                            onClose={() => setPresenting(false)} />
+                    )}
+                </main>
+            );
+        }
+
+        // --- Hash-routning: #<provId> eller #<provId>:<uppgiftsnr> ---
+        function parseHash() {
+            const hash = (window.location.hash || '').replace(/^#/, '');
+            if (!hash) return { provId: null, nr: null };
+            const m = hash.match(/^([a-z0-9-]+?)(?::(\d+))?$/);
+            if (!m || !NP_PROV[m[1]]) return { provId: null, nr: null };
+            return { provId: m[1], nr: m[2] ? parseInt(m[2], 10) : null };
+        }
+
+        function App() {
+            const [route, setRoute] = useState(parseHash);
+            useEffect(() => {
+                const onHash = () => setRoute(parseHash());
+                window.addEventListener('hashchange', onHash);
+                return () => window.removeEventListener('hashchange', onHash);
+            }, []);
+
+            const prov = route.provId ? NP_PROV[route.provId] : null;
+            const uppgift = (prov && route.nr != null)
+                ? prov.uppgifter.find(u => u.nr === route.nr && !u.sekretess)
+                : null;
+
+            return (
+                <div className="lab-page">
+                    <Topbar />
+                    <Header />
+                    <Breadcrumb prov={prov} uppgift={uppgift ? uppgift.nr : null} />
+                    {!prov && <Landing />}
+                    {prov && !uppgift && <ProvView prov={prov} />}
+                    {prov && uppgift && <UppgiftView prov={prov} uppgift={uppgift} />}
+                    <Footer />
+                </div>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+
+    <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
+</body>
+</html>

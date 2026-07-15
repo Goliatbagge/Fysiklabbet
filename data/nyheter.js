@@ -10,6 +10,9 @@
  * Fält per artikel:
  *   id        – unik slug, formatet "ÅÅÅÅ-MM-DD-kort-titel" (= URL ?id=)
  *   date      – publiceringsdatum "ÅÅÅÅ-MM-DD"
+ *   time      – (valfritt) publiceringsklockslag "HH:MM" på publiceringsdagen;
+ *               artikeln döljs av datumgrinden tills klockslaget passerats
+ *               (utelämnat = publiceras vid midnatt)
  *   title     – rubrik (svensk meningsform, inte title case)
  *   deck      – ingress (1–2 meningar, sammanfattar nyheten)
  *   category  – ett ord, t.ex. "Partikelfysik", "Kosmologi", "Kvantfysik"
@@ -30,6 +33,137 @@
  *                 { type: 'fact', title: '…', items: ['…', …] }   faktaruta
  */
 const NYHETER_ALL = [
+  {
+    id: "2026-07-17-hannibal-alperna",
+    date: "2026-07-17",
+    time: "09:00",
+    title: "Fysiker räknar ut vilket bergspass Hannibal tog över Alperna — och varför elefanterna klarade sig bäst",
+    deck: "En ny studie i tidskriften PNAS räknar ut den exakta energikostnaden, i terajoule, för Hannibals berömda härfärd över Alperna år 218 f.Kr. — och pekar ut vilket av fyra tänkbara bergspass som var billigast att ta sig över. Beräkningarna visar samtidigt varför hans 37 krigselefanter klarade påfrestningen mycket bättre än soldaterna.",
+    category: "Mekanik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-17-hannibal-alperna.jpg",
+    imageAlt: "Målning i mörka, dramatiska toner: en väldig svart stormsky välver sig över ett karg bergslandskap medan solen bryter igenom som en gul skiva, och en armé av små, knappt urskiljbara soldater kämpar sig fram i dalen nedanför.",
+    imageCredit: "Bild: J. M. W. Turner, ”Snow Storm: Hannibal and his Army Crossing the Alps” (1812), Tate, London — public domain (Wikimedia Commons)",
+    tags: ["mekanik", "arbete", "energi", "lägesenergi", "effekt", "verkningsgrad", "energiprincipen", "arkeologi", "biomekanik", "fysik 1"],
+    sources: [
+      { name: "Physics World", url: "https://physicsworld.com/a/study-reveals-the-energy-cost-of-hannibals-alpine-crossing/" },
+      { name: "EurekAlert! (University of Oxford / iDiv, pressmeddelande)", url: "https://www.eurekalert.org/news-releases/1134397" }
+    ],
+    research: { citation: "E. Berti, F. Vollrath, ”Energy costs of Hannibal's alpine crossing”, Proceedings of the National Academy of Sciences 123 (28) (2026)", url: "https://doi.org/10.1073/pnas.2612764123" },
+    body: [
+      { type: "p", html: "År 218&nbsp;f.Kr. ledde den karthagiske fältherren Hannibal sin här — tiotusentals soldater, tusentals hästar och 37 krigselefanter — över Alperna för att anfalla Rom norrifrån, en av antikens mest berömda militära bedrifter. Men exakt vilket bergspass han valde har historiker och arkeologer tvistat om i över 2&nbsp;100 år. Nu har Emilio Berti vid Tyska centret för integrativ biodiversitetsforskning (iDiv) och Friedrich Schiller-universitetet i Jena, tillsammans med Fritz Vollrath vid University of Oxford, angripit frågan med ett ovanligt verktyg: fysikens energiräkning. I tidskriften <em>Proceedings of the National Academy of Sciences</em> (PNAS) räknar de ut hur mycket energi arméns 40&nbsp;000 man, 7&nbsp;000 hästar och 37 elefanter skulle ha förbrukat på var och en av fyra tänkbara vägar över bergen." },
+
+      { type: "h2", text: "Fyra pass, fyra energinotor" },
+      { type: "p", html: "Col du Clapier har länge varit historikernas favorit, men senare års geologiska och filologiska bevis har i stället pekat mot det högre och brantare Col de la Traversette, 2&nbsp;947&nbsp;m över havet. Forskarna räknade ut den totala energikostnaden för hela armén på varje rutt — i praktiken hur mycket <em>arbete</em> som krävs för att flytta varje kropps massa längs terrängens lutning, sträcka för sträcka. Resultatet: Traversette fick den lägsta totalnotan, 5,42&nbsp;TJ (terajoule — 5,42 följt av tolv nollor joule) för hela armén. Col de Montgenèvre kostade 11&nbsp;% mer, Col du Clapier 16&nbsp;% mer och Col du Mont Cenis hela 19&nbsp;% mer. Trots att Traversette är det högsta av de fyra passen var det alltså det mest direkta — och därför billigast i energi, ungefär som Fysiklabbets genomgång om lägesenergi visar att arbetet <em>W</em> beror lika mycket på hur långt man vandrar som på hur högt man klättrar (Fysik nivå&nbsp;1)." },
+
+      { type: "quote", html: "”Att tillämpa kunskap från studier av afrikanska elefanters energiförbrukning i Kenya ger en helt ny dimension åt den långvariga debatten om Hannibals väg över Alperna.”", cite: "Fritz Vollrath, University of Oxford" },
+
+      { type: "h2", text: "Elefanterna klarade sig bäst" },
+      { type: "p", html: "Energimodellen kalibrerades mot verkliga fältmätningar av hur mycket energi levande afrikanska elefanter förbrukar per kilo kroppsmassa i olika terräng — data insamlad av naturvårdsorganisationen Save the Elephants i Kenya. Samma modell skalades sedan upp till soldater och hästar. Resultatet visar en tydlig skillnad i hur väl olika kroppar klarade påfrestningen: på Traversette-rutten förlorade soldaterna omkring 19&nbsp;% av sina fettreserver och hästarna 11&nbsp;%, medan elefanterna kom undan med bara 4&nbsp;%. Det stämmer väl med den historiska bilden av att en stor del av Hannibals soldater dog eller blev stridsodugliga under fjällpassagen, medan de flesta elefanterna tog sig över levande." },
+
+      { type: "quote", html: "”Den nya analysen tar inte bort all osäkerhet, men den stärker fallet för Traversette-rutten genom att visa att den bättre klarade av att flytta en stor armé med elefanter genom extremt krävande alpin terräng.”", cite: "Emilio Berti, iDiv / Friedrich Schiller-universitetet i Jena" },
+
+      { type: "h2", text: "Matsäcken vägde 233 ton" },
+      { type: "p", html: "Att förbränna 5,42&nbsp;TJ kräver betydligt mer mat än vad den rena lägesenergin (höjden man klättrar) antyder, eftersom kroppens muskler bara omvandlar en bråkdel av matens energi till nyttigt arbete — resten blir värme (se Fysiklabbets genomgång om verkningsgrad, Fysik nivå&nbsp;1: människokroppens verkningsgrad ligger på omkring 20&nbsp;%). Forskarna uppskattar att enbart soldaternas matsäck, om den huvudsakligen bestod av kolhydrater, skulle ha vägt omkring 233&nbsp;ton på Traversette-rutten. En vuxen elefant på tre ton äter normalt omkring 200&nbsp;kg foder om dagen i det vilda — för att helt kompensera energin som gick åt i Alperna skulle den ha behövt lägga 5–6 extra timmar på att beta varje dygn." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Fördelar man arméns totala energiförbrukning, 5,42&nbsp;TJ, jämnt över de cirka 15 dygn som marschen tros ha tagit blir det en snitteffekt på omkring 4,2&nbsp;MW för hela kolonnen — precis Fysiklabbets formel för effekt, <em>P</em> = Δ<em>E</em>/Δ<em>t</em>, fast applicerad på en hel antik armé i stället för en glödlampa.",
+        "Redan den grekiske historikern Polybios, som skrev om det andra puniska kriget bara några decennier efter att det utspelade sig, diskuterade vilken väg Hannibal tagit — debatten om rutten är alltså nästan lika gammal som händelsen själv.",
+        "Målningen ovan, ”Snow Storm: Hannibal and his Army Crossing the Alps” av J.&nbsp;M.&nbsp;W. Turner (1812), föreställer just denna färd — målad drygt 2&nbsp;000 år efter händelsen och över 200 år innan fysiker till sist räknade ut vilket bergspass som troligen var billigast."
+      ]}
+    ]
+  },
+
+  {
+    id: "2026-07-16-neutronlins",
+    date: "2026-07-16",
+    time: "09:00",
+    title: "Neutroner får sin första riktiga lins — sju gånger skarpare bild av ett batteri",
+    deck: "Vid Paul Scherrer-institutet i Schweiz har forskare byggt den första lins som kan fokusera neutroner av olika våglängder till en och samma punkt — en så kallad akromatisk lins. Genom att kombinera brytning och diffraktion i en enda komponent kunde de förstora bilden av ett litiumjonbatteris inre struktur sju gånger, med batteriet placerat sex meter från detektorn.",
+    category: "Optik",
+    readingTime: "5 min",
+    image: "nyheter/bilder/2026-07-16-neutronlins.jpg",
+    imageAlt: "Två forskare skakar hand och håller upp en liten komponent framför en vit industribyggnad med den stora röda texten SINQ, den schweiziska spallationsneutronkällan vid Paul Scherrer-institutet.",
+    imageCredit: "Foto: Paul Scherrer Institute PSI/Markus Fischer (pressbild)",
+    tags: ["optik", "brytning", "diffraktion", "neutroner", "lins", "våg-partikeldualitet", "materialfysik", "batteriforskning", "fysik 2"],
+    sources: [
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-world-neutron-lens-sharp-focus.html" },
+      { name: "Scientific Frontline (referat av PSI:s pressmeddelande)", url: "https://www.sflorg.com/2026/07/phy07142601.html" }
+    ],
+    research: { citation: "M. R. Dhanalakshmi Veeraraj, D. Qu, H.-Y. Chen, J. Vila-Comamala et al., ”An achromatic neutron lens”, Nature Communications (2026)", url: "https://doi.org/10.1038/s41467-026-74925-w" },
+    body: [
+      { type: "p", html: "En stråle av neutroner avslöjar sådant som röntgenstrålning inte kan — neutroner studsar knappt på tunga metallatomer men fastnar desto mer i lätta grundämnen som väte och litium, vilket gör dem perfekta för att se rakt igenom en motor eller ett batterihölje. Problemet har länge varit skärpan: en neutronstråle innehåller nästan alltid neutroner med många olika våglängder blandade, och ingen lins har kunnat fokusera alla dessa våglängder till en och samma punkt. Nu har forskare vid Paul Scherrer-institutet (PSI) i Schweiz löst det. Den 14 juli presenterade de i tidskriften <em>Nature Communications</em> världens första akromatiska neutronlins." },
+
+      { type: "h2", text: "Samma fel som i en billig kikare" },
+      { type: "p", html: "Felet kallas kromatisk aberration och är välkänt från vanlig optik: en enkel glaslins bryter olika färger olika mycket, så en bild av en ljuskälla får färgade kanter i stället för att bli skarp (se Fysiklabbets genomgång om ljusets brytning, Fysik nivå&nbsp;2). Kameralinser löser det genom att kombinera två sorters glas i en akromatisk lins, där felen från den ena glasbiten tar ut felen från den andra. Neutroner har haft samma problem, fast värre — det har helt enkelt inte funnits någon fokuserande lins alls för dem. Forskarna har därför tvingats lägga provet nästan an mot detektorn för att hålla bilden skarp, vilket satt en hård gräns för både upplösningen och hur stora föremål som gått att avbilda." },
+
+      { type: "h2", text: "Brytning och diffraktion i samma komponent" },
+      { type: "p", html: "PSI-forskarnas lösning kombinerar två sätt att böja av en stråle. Den ena delen består av precisionsslipade, linsformade element i diamant som bryter neutronstrålen ungefär som en glaslins böjer av ljus. Den andra delen är ett mönster av koncentriska ringar av nickel, tunnare än 200&nbsp;nanometer där de är som smalast, som fungerar som ett runt diffraktionsgitter och böjer strålen genom diffraktion i stället (se Fysiklabbets genomgång om diffraktion och interferens, Fysik nivå&nbsp;2). De två effekterna sprider ut våglängderna åt motsatta håll, så när de kombineras i rätt proportion tar felen ut varandra — precis som i den akromatiska kameralinsen, fast med brytning och diffraktion i stället för två sorters glas. Resultatet blev en upplösning under 20&nbsp;mikrometer, även med provet placerat långt från detektorn." },
+
+      { type: "h2", text: "Byggd i ett nyöppnat renrum" },
+      { type: "p", html: "De extremt fina nickelringarna tillverkades med elektronstråle-litografi i PSI:s nyinvigda renrumsanläggning PICO, medan diamantstrukturerna tillverkades av det schweiziska företaget Synova. Linsen är resultatet av ett samarbete mellan institutets röntgenoptik-grupp — samma grupp som redan 2022 byggde världens första akromatiska röntgenlins — och neutronavbildningsgruppen vid den schweiziska spallationsneutronkällan SINQ, som tillsammans anpassade grundidén till en helt annan typ av strålning." },
+
+      { type: "quote", html: "”Avsaknaden av en sådan lins har hållit tillbaka neutronavbildningen i decennier.”", cite: "Joan Vila-Comamala, Paul Scherrer-institutet" },
+
+      { type: "h2", text: "En logotyp och ett batteri på håll" },
+      { type: "p", html: "Forskarna testade först linsen på en 3&nbsp;millimeter stor PSI-logotyp placerad 6&nbsp;meter från detektorn — ett avstånd som utan lins hade krävt centimeter, eller till och med millimeter, för samma skärpa. Sedan riktade de linsen mot ett vanligt litiumjonbatteri, fortfarande 6&nbsp;meter bort, och förstorade bilden av batteriets hoprullade, skiktade elektrodstruktur 7&nbsp;gånger." },
+
+      { type: "quote", html: "”Det här är bara början. Vi ser redan sätt att förbättra linsen ytterligare.”", cite: "Mano Raj Dhanalakshmi Veeraraj, Paul Scherrer-institutet" },
+
+      { type: "h2", text: "Från batterier till ugnar under tryck" },
+      { type: "p", html: "Att provet kan sitta långt från detektorn öppnar för att filma processer inuti skrymmande utrustning som tidigare inte gått att avbilda skarpt — ugnar, kryostater och tryckkärl, till exempel. Målet på längre sikt är ett riktigt neutronmikroskop. Fyndet är också ett fint exempel på neutronens dubbla natur: samma partikel bryts som en klassisk stråle men böjer av genom diffraktion som en våg — precis den våg-partikeldualitet som Fysiklabbets genomgång om de Broglies hypotes handlar om (Fysik nivå&nbsp;2)." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Neutronavbildning fungerar som röntgen, fast tvärtom: neutroner interagerar med atomkärnor i stället för elektronmoln, så de ser rakt igenom tunga metaller men fastnar i lätta grundämnen som väte och litium — perfekt för att studera batterier inifrån.",
+        "Samma forskargrupp vid PSI byggde redan 2022 världens första akromatiska röntgenlins — neutronlinsen bygger på samma grundidé, fast överförd till en helt annan typ av strålning.",
+        "En mikrometer är en tusendels millimeter. Linsens finaste nickelringar är bara några hundra nanometer breda — omkring tusen gånger tunnare än ett människohår."
+      ]}
+    ]
+  },
+
+  {
+    id: "2026-07-15-varmekappa-3d",
+    date: "2026-07-15",
+    title: "Ny värmekappa gömmer föremål för infraröd strålning — i alla riktningar",
+    deck: "Forskare vid University of Illinois Urbana-Champaign och Tekniska universitetet i Danmark har byggt den första tredimensionella ”värmekappan” som fungerar oavsett varifrån värmen kommer. I ett av testerna gömde de ett äpple i en kappa formad som ett päron — en värmekamera riktad mot föremålet visade bara en jämnt tempererad päronform.",
+    category: "Termodynamik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-15-varmekappa-3d.jpg",
+    imageAlt: "Fyra silvergrå 3D-printade metallgitterstrukturer i mjukt rundade, organiska former, fotograferade mot svart bakgrund — prototyper av den tredimensionella värmekappan.",
+    imageCredit: "Foto: University of Illinois Urbana-Champaign (pressbild)",
+    tags: ["termodynamik", "värmeledning", "värmestrålning", "infraröd kamera", "metamaterial", "3d-printing", "osynlighetsmantel", "fysik 1"],
+    sources: [
+      { name: "University of Illinois News Bureau (pressmeddelande)", url: "https://news.illinois.edu/new-3d-thermal-cloak-hides-objects-from-heat-in-any-direction/" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-3d-thermal-cloak.html" }
+    ],
+    research: { citation: "W. Li, Y. Wang, O. Sigmund, X. S. Zhang, ”Free-form thermal cloaks in three dimensions”, Nature Communications (2026)", url: "https://doi.org/10.1038/s41467-026-73167-0" },
+    body: [
+      { type: "p", html: "Tänk dig att du riktar en värmekamera mot ett äpple format som ett päron — och att kameran bara visar en jämnt tempererad päronform, utan minsta spår av äpplet som egentligen gömmer sig inuti. Precis det har forskare vid University of Illinois Urbana-Champaign och Tekniska universitetet i Danmark (DTU) lyckats med. I tidskriften <em>Nature Communications</em> presenterar de den första tredimensionella ”värmekappan” som gör föremål osynliga för infraröd strålning, oavsett från vilket håll värmen kommer." },
+
+      { type: "h2", text: "Värme som leds runt, inte blockeras" },
+      { type: "p", html: "En vanlig missuppfattning är att man gömmer värme genom att isolera bort den, ungefär som i en termos. Kappan bygger i stället på en gren av fysiken som kallas transformationstermotik: i stället för att blockera värmeflödet leder materialet det runt det gömda föremålet, i en exakt uträknad omväg. Resultatet är att temperaturfältet utanför kappan ser precis likadant ut som om föremålet inte fanns där alls — värmeenergin fortsätter rakt igenom, som om ytan var tom (se Fysiklabbets genomgång om värme och temperatur, Fysik nivå&nbsp;1, om hur värme alltid strömmar från varmt till kallt och kan transporteras genom ledning, strålning och strömning)." },
+
+      { type: "h2", text: "Ett gitter av aluminium fyllt med gummi" },
+      { type: "p", html: "Nyckeln till att få tekniken att fungera i tre dimensioner — och åt alla håll samtidigt — är ett hybridmaterial. Forskarlaget, med Shelly Zhang vid University of Illinois i spetsen tillsammans med postdoktor Weichen Li, doktoranden Yibo Wang och professor Ole Sigmund vid DTU, 3D-printade ett finmaskigt gitter av aluminium, som leder värme mycket bra, och göt sedan in ett gummiliknande material med låg värmeledningsförmåga i mellanrummen. Genom att variera hur tätt gittret är på olika ställen i strukturen kan forskarna finjustera värmeledningsförmågan i varje liten volymdel för sig — precis den kombination av egenskaper som krävs för att böja värmeflödet runt vilket föremål som helst." },
+
+      { type: "quote", html: "”En riktig värmekappa bör fungera oavsett varifrån värmen kommer. Vår enhet kan gömma ett komplext tredimensionellt föremål i oändligt många riktningar, samtidigt som temperaturen inuti hålls stabil och skyddad.”", cite: "Shelly Zhang, University of Illinois Urbana-Champaign" },
+
+      { type: "h2", text: "En päronformad kappa gömmer ett äpple" },
+      { type: "p", html: "Tidigare värmekappor i tre dimensioner har nästan alltid fungerat åt bara ett håll, ungefär som en skärm värmen måste träffa rakt framifrån för att luras. Genom att kombinera gittertekniken med matematiska verktyg som kallas sfäriska övertoner — samma slags matematik som beskriver hur ljud och gravitation sprids i klotsymmetriska mönster — kunde forskarna skapa kappor med betydligt mer komplicerade former än tidigare, allt från ett människoansikte till vanliga frukter. I ett av experimenten placerade de ett äpple i en kappa formad som ett päron: riktades en värmekamera mot föremålet syntes bara en jämn, päronformad temperaturbild, utan minsta antydan om vad som egentligen dolde sig inuti." },
+
+      { type: "h2", text: "Nästa steg: smarta värmekappor" },
+      { type: "p", html: "I labbet testade forskarna prototyperna genom att placera dem mellan en varm och en kall yta och filma med infraröda kameror hur temperaturfältet betedde sig. Utanför kappan var temperaturmönstret opåverkat, som om föremålet inte fanns, medan temperaturen inuti hölls stabil och skyddad från de extrema förhållandena utanför. Tänkbara tillämpningar handlar om att skydda värmekänslig elektronik och batterier från överhettning, eller att dölja värmekänsliga föremål från infraröda sensorer. Nästa steg, säger Zhang, är att göra kapporna aktiva." },
+
+      { type: "quote", html: "”Vårt mål är att bygga kappor som inte bara gömmer och skyddar, utan som aktivt kan styra värmen på användbara sätt.”", cite: "Shelly Zhang, University of Illinois Urbana-Champaign" },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Metoden kallas transformationstermotik och är värmelärans motsvarighet till transformationsoptik, som redan på 2000-talet användes för att designa de första (tvådimensionella) osynlighetsmantlarna för synligt ljus.",
+        "En värmekamera avläser infraröd strålning — den värmestrålning som alla föremål med en temperatur över absoluta nollpunkten (−273&nbsp;°C) hela tiden sänder ut.",
+        "Forskarna vill härnäst bygga ”aktiva” värmekappor som inte bara döljer värme utan själva kan styra den dit den behövs — till exempel för att kyla känsliga batterier i farkoster och elektronik."
+      ]}
+    ]
+  },
+
   {
     id: "2026-07-14-baklanges-sprinkler",
     date: "2026-07-14",
@@ -1569,13 +1703,13 @@ const NYHETER_ALL = [
  * window.NYHETER_ALL   = hela listan inkl. framtida (för verktyg/förhandsvisning)
  */
 (function () {
-  function todayISO() {
-    const d = new Date();
-    const p = (n) => String(n).padStart(2, '0');
-    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
-  }
-  const today = todayISO();
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  const nowStamp = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate())
+    + 'T' + p(d.getHours()) + ':' + p(d.getMinutes());
   window.NYHETER_ALL = NYHETER_ALL;
-  // date-strängar är ISO (ÅÅÅÅ-MM-DD) → lexikografisk jämförelse = kronologisk
-  window.NYHETER = NYHETER_ALL.filter((a) => a.date <= today);
+  // ISO-strängar (ÅÅÅÅ-MM-DDTHH:MM) → lexikografisk jämförelse = kronologisk.
+  // Valfritt fält `time: "HH:MM"` per artikel = publiceringsklockslag på
+  // publiceringsdagen (utelämnat → midnatt, som tidigare).
+  window.NYHETER = NYHETER_ALL.filter((a) => (a.date + 'T' + (a.time || '00:00')) <= nowStamp);
 })();

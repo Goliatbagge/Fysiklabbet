@@ -1,0 +1,163 @@
+{
+ "id": "2026-07-17-hannibal-alperna",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "25b917041ddc25c0c4bdf5b399c5fba105decff7",
+ "dur": 315.69,
+ "segments": [
+  {
+   "t": "Fysiker räknar ut vilket bergspass Hannibal tog över Alperna — och varför elefanterna klarade sig bäst.",
+   "s": 0.1,
+   "e": 6.71
+  },
+  {
+   "t": "En ny studie i tidskriften PNAS räknar ut den exakta energikostnaden, i terajoule, för Hannibals berömda härfärd över Alperna år 218 f.Kr. — och pekar ut vilket av fyra tänkbara bergspass som var billigast att ta sig över.",
+   "s": 6.66,
+   "e": 21.14
+  },
+  {
+   "t": "Beräkningarna visar samtidigt varför hans 37 krigselefanter klarade påfrestningen mycket bättre än soldaterna.",
+   "s": 21.14,
+   "e": 28.54
+  },
+  {
+   "t": "År 218 f.Kr. ledde den karthagiske fältherren Hannibal sin här — tiotusentals soldater, tusentals hästar och 37 krigselefanter — över Alperna för att anfalla Rom norrifrån, en av antikens mest berömda militära bedrifter.",
+   "s": 28.54,
+   "e": 43.08
+  },
+  {
+   "t": "Men exakt vilket bergspass han valde har historiker och arkeologer tvistat om i över 2 100 år.",
+   "s": 43.08,
+   "e": 50.62
+  },
+  {
+   "t": "Nu har Emilio Berti vid Tyska centret för integrativ biodiversitetsforskning (iDiv) och Friedrich Schiller-universitetet i Jena, tillsammans med Fritz Vollrath vid University of Oxford, angripit frågan med ett ovanligt verktyg: fysikens energiräkning.",
+   "s": 50.62,
+   "e": 66.12
+  },
+  {
+   "t": "I tidskriften Proceedings of the National Academy of Sciences (PNAS) räknar de ut hur mycket energi arméns 40 000 man, 7 000 hästar och 37 elefanter skulle ha förbrukat på var och en av fyra tänkbara vägar över bergen.",
+   "s": 66.12,
+   "e": 80.39
+  },
+  {
+   "t": "Fyra pass, fyra energinotor.",
+   "s": 80.39,
+   "e": 84.1
+  },
+  {
+   "t": "Col du Clapier har länge varit historikernas favorit, men senare års geologiska och filologiska bevis har i stället pekat mot det högre och brantare Col de la Traversette, 2 947 meter över havet.",
+   "s": 84.1,
+   "e": 97.72
+  },
+  {
+   "t": "Forskarna räknade ut den totala energikostnaden för hela armén på varje rutt — i praktiken hur mycket arbete som krävs för att flytta varje kropps massa längs terrängens lutning, sträcka för sträcka.",
+   "s": 97.72,
+   "e": 109.21
+  },
+  {
+   "t": "Resultatet: Traversette fick den lägsta totalnotan, 5,42 TJ (terajoule — 5,42 följt av tolv nollor joule) för hela armén.",
+   "s": 109.21,
+   "e": 119.81
+  },
+  {
+   "t": "Col de Montgenèvre kostade 11 procent mer, Col du Clapier 16 procent mer och Col du Mont Cenis hela 19 procent mer.",
+   "s": 119.81,
+   "e": 128.35
+  },
+  {
+   "t": "Trots att Traversette är det högsta av de fyra passen var det alltså det mest direkta — och därför billigast i energi, ungefär som Fysiklabbets genomgång om lägesenergi visar att arbetet W beror lika mycket på hur långt man vandrar som på hur högt man klättrar (Fysik nivå 1).",
+   "s": 128.35,
+   "e": 144.76
+  },
+  {
+   "t": "”Att tillämpa kunskap från studier av afrikanska elefanters energiförbrukning i Kenya ger en helt ny dimension åt den långvariga debatten om Hannibals väg över Alperna.”",
+   "s": 144.76,
+   "e": 155.57
+  },
+  {
+   "t": "Elefanterna klarade sig bäst.",
+   "s": 155.57,
+   "e": 158.59
+  },
+  {
+   "t": "Energimodellen kalibrerades mot verkliga fältmätningar av hur mycket energi levande afrikanska elefanter förbrukar per kilo kroppsmassa i olika terräng — data insamlad av naturvårdsorganisationen Save the Elephants i Kenya.",
+   "s": 158.59,
+   "e": 171.84
+  },
+  {
+   "t": "Samma modell skalades sedan upp till soldater och hästar.",
+   "s": 171.84,
+   "e": 176.43
+  },
+  {
+   "t": "Resultatet visar en tydlig skillnad i hur väl olika kroppar klarade påfrestningen: på Traversette-rutten förlorade soldaterna omkring 19 procent av sina fettreserver och hästarna 11 procent, medan elefanterna kom undan med bara 4 procent.",
+   "s": 176.43,
+   "e": 191.0
+  },
+  {
+   "t": "Det stämmer väl med den historiska bilden av att en stor del av Hannibals soldater dog eller blev stridsodugliga under fjällpassagen, medan de flesta elefanterna tog sig över levande.",
+   "s": 191.0,
+   "e": 201.69
+  },
+  {
+   "t": "”Den nya analysen tar inte bort all osäkerhet, men den stärker fallet för Traversette-rutten genom att visa att den bättre klarade av att flytta en stor armé med elefanter genom extremt krävande alpin terräng.”",
+   "s": 201.69,
+   "e": 214.0
+  },
+  {
+   "t": "Matsäcken vägde 233 ton.",
+   "s": 214.0,
+   "e": 217.74
+  },
+  {
+   "t": "Att förbränna 5,42 TJ kräver betydligt mer mat än vad den rena lägesenergin (höjden man klättrar) antyder, eftersom kroppens muskler bara omvandlar en bråkdel av matens energi till nyttigt arbete — resten blir värme (se Fysiklabbets genomgång om verkningsgrad, Fysik nivå 1: människokroppens verkningsgrad ligger på omkring 20 procent).",
+   "s": 217.74,
+   "e": 238.99
+  },
+  {
+   "t": "Forskarna uppskattar att enbart soldaternas matsäck, om den huvudsakligen bestod av kolhydrater, skulle ha vägt omkring 233 ton på Traversette-rutten.",
+   "s": 238.99,
+   "e": 249.26
+  },
+  {
+   "t": "En vuxen elefant på tre ton äter normalt omkring 200 kilogram foder om dagen i det vilda — för att helt kompensera energin som gick åt i Alperna skulle den ha behövt lägga 5–6 extra timmar på att beta varje dygn.",
+   "s": 249.26,
+   "e": 263.79
+  },
+  {
+   "t": "Visste du.",
+   "s": 263.74,
+   "e": 265.55
+  },
+  {
+   "t": "Fördelar man arméns totala energiförbrukning, 5,42 TJ, jämnt över de cirka 15 dygn som marschen tros ha tagit blir det en snitteffekt på omkring 4,2 megawatt för hela kolonnen — precis Fysiklabbets formel för effekt, P är lika med ΔE/Δt, fast applicerad på en hel antik armé i stället för en glödlampa.",
+   "s": 265.55,
+   "e": 285.04
+  },
+  {
+   "t": "Redan den grekiske historikern Polybios, som skrev om det andra puniska kriget bara några decennier efter att det utspelade sig, diskuterade vilken väg Hannibal tagit — debatten om rutten är alltså nästan lika gammal som händelsen själv.",
+   "s": 285.04,
+   "e": 298.77
+  },
+  {
+   "t": "Målningen ovan, ”Snow Storm: Hannibal and his Army Crossing the Alps” av J.",
+   "s": 298.77,
+   "e": 315.69
+  },
+  {
+   "t": "M.",
+   "s": 298.77,
+   "e": 315.69
+  },
+  {
+   "t": "W.",
+   "s": 298.77,
+   "e": 315.69
+  },
+  {
+   "t": "Turner (1812), föreställer just denna färd — målad drygt 2 000 år efter händelsen och över 200 år innan fysiker till sist räknade ut vilket bergspass som troligen var billigast.",
+   "s": 298.77,
+   "e": 315.69
+  }
+ ]
+}

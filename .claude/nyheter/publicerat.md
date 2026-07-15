@@ -5,6 +5,9 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-17 | `2026-07-17-hannibal-alperna` | Fysiker räknar ut vilken bergspass Hannibal tog över Alperna — och varför elefanterna klarade sig bäst | Physics World / EurekAlert! (University of Oxford / iDiv, pressmeddelande) / PNAS (E. Berti, F. Vollrath, 2026) |
+| 2026-07-16 | `2026-07-16-neutronlins` | Neutroner får sin första riktiga lins — sju gånger skarpare bild av ett batteri | Phys.org / Scientific Frontline (referat av PSI:s pressmeddelande) / Nature Communications (M. R. Dhanalakshmi Veeraraj, D. Qu, H.-Y. Chen, J. Vila-Comamala et al., 2026) |
+| 2026-07-15 | `2026-07-15-varmekappa-3d` | Ny värmekappa gömmer föremål för infraröd strålning — i alla riktningar | University of Illinois News Bureau (pressmeddelande) / Phys.org / Nature Communications (W. Li, Y. Wang, O. Sigmund, X. S. Zhang, 2026) |
 | 2026-07-14 | `2026-07-14-baklanges-sprinkler` | Så snurrar en sprinkler som suger i sig vatten — gåtan från 1883 är äntligen löst | EurekAlert! (New York University, pressmeddelande) / Phys.org / PNAS (J. E. Smith, M. Zuo, W. Kuhlke, B. Sprinkle, L. Ristroph, 2026) |
 | 2026-07-13 | `2026-07-13-karnvapen-i-rymden` | En liten satellit ska kunna avslöja gömda kärnvapen i rymden — med hjälp av jordens egen strålning | MIT News (pressmeddelande) / Phys.org / Nature (A. Danagoulian, 2026) |
 | 2026-07-12 | `2026-07-12-syntetiskt-svart-hal` | Ett stillastående kretskort får radiovågor att bli starkare — med ett knep lånat från svarta hål | CUNY Advanced Science Research Center (pressmeddelande via EurekAlert!) / Phys.org / Nature (H. Nasari, H. Moussa, A. Alù et al. 2026) |
@@ -49,3 +52,15 @@ gånger** — kontrollera den här listan först. Nyast överst.
 > men döljs av **datumgrinden** i slutet av filen tills respektive datum inträffar
 > enligt besökarens lokala klocka — så de "publiceras" automatiskt utan att något
 > körs lokalt. `window.NYHETER` = publicerade, `window.NYHETER_ALL` = inkl. framtida.
+>
+> Not: nyheterna 2026-07-16 och 2026-07-17 skrevs i förväg 2026-07-15 (användaren
+> på resa) och har fältet `time: "09:00"` satt, så de syns först klockan 09:00
+> sina respektive dagar enligt besökarens lokala klocka — se datumgrinden ovan.
+> Ej committade/pushade av nyhetsagenten själv denna gång; huvudsessionen gör en
+> samlad granskning och commit/push tillsammans med 2026-07-15-artikeln.
+>
+> Not: 2026-07-17-artikeln (Hannibal över Alperna) bygger på en PNAS-studie
+> publicerad redan 2026-07-06 (fortfarande färskt bevakad av Physics World och
+> Nature News in i juli) — inget färskare och lika gymnasievänligt hittades i
+> mekanik/ellära/astronomi/partikelfysik/kärnfysik vid sökningen 2026-07-15, och
+> uppgiften tillät uttryckligen en nyhet från tidigare i veckan/månaden.

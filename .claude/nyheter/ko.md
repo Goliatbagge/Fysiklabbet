@@ -14,20 +14,74 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-16) — kan tas upp senare
+
+- **Gravitationsvågor avslöjar dolda underpopulationer av svarta hål** — två
+  oberoende forskarlag har analyserat LIGO/Virgo/KAGRA-katalogen GWTC-4.0 (390
+  detektioner, se noteringen om samma katalog under 2026-07-06 nedan) och
+  hittat belägg för minst tre distinkta underpopulationer av sammansmältande
+  svarta hål, med skarpa gränser i massa mellan dem — ett tecken på olika
+  bildningsmekanismer (bland annat växande stöd för att vissa svarta hål är
+  produkter av tidigare sammanslagningar, "andra generationens" svarta hål).
+  Publicerad i Physical Review Letters kring 2026-07-14/15. Bra Fysik 2-vinkel
+  (gravitationsvågor, massa) men vi har kört mycket astronomi/svarta hål-
+  nyheter de senaste veckorna (GWTC-katalogen redan nämnd 07-06, kvasarer
+  07-06, gravastjärna 06-20 m.fl.) — spara till ämnet svalnat, eller använd
+  om nästa dag är mager på annat. Källor:
+  https://phys.org/news/2026-07-gravitational-reveal-hidden-populations-black.html ,
+  https://journals.aps.org/prl/abstract/10.1103/blyb-lqv6 (Physical Review
+  Letters, 2026). (tillagd 2026-07-16, research gjord 2026-07-15)
+
+## Fynd som inte användes (2026-07-15, andra sökningen för 07-17-artikeln)
+
+- **Fysiker återskapar svarta hålens energiutvinning (Penrose-processen) i
+  labbet med en stillastående apparat** — forskare har byggt en enhet som
+  producerar en syntetisk, ultrasnabb "rotation" utan att faktiskt snurra,
+  och använder den för att förstärka vågor på samma sätt som ett roterande
+  svart hål teoretiskt kan göra. Häftig optik/modern fysik-vinkel men kräver
+  rejäl pedagogisk förenkling av Penrose-processen för gymnasienivå. Källa:
+  https://phys.org/news/2026-07-synthetic-rotation-black-hole-energy.html ,
+  ScienceDaily 2026-07-11. (tillagd 2026-07-15)
+- **Oobleck-droppar avslöjar fem olika beteenden när majsstärkelseblandning
+  träffar vatten** — Xiaoyu Tang och Boqian Yan vid Northeastern University
+  har filmat hur droppar av den klassiska "icke-newtonska vätskan" oobleck
+  (majsstärkelse + vatten) antingen sprids ut som vanlig vätska, delvis
+  fastnar, viks in som ihåliga bubblor eller studsar som en solid boll,
+  beroende på koncentration och hastighet. Visuellt och lekfullt (bra
+  mekanik/vätskefysik-vinkel om skjuvförtjockning), publicerad i Physical
+  Review Fluids (DOI 10.1103/fxw2-38g4) omkring 2026-07-13 — spara som fin
+  "vardagsfysik"-nyhet en lugnare dag. (tillagd 2026-07-15)
+- **OBS — nära släkt med redan publicerad neutronlins-nyhet (2026-07-16):**
+  "White-beam neutron device unlocks precise control of twisted quantum
+  waves" (phys.org, 2026-07-13) ligger för nära i ämne (neutronoptik) för att
+  användas inom överskådlig tid. (tillagd 2026-07-15)
+
+## Fynd som inte användes (2026-07-15) — kan tas upp senare
+
+- **Metamaterial fyrdubblar värmeöverföring i nanoskala** — forskare vid
+  Carnegie Mellon, Stanford och Purdue (Sheng Shen, Shanhui Fan m.fl.) har i
+  Nature visat att guld-splitringresonatorer på kiselnitridmembran kan öka
+  strålningsvärmeöverföring mellan ytor på nanometeravstånd upp till fyra
+  gånger, via kopplade ytfonon-polaritoner — första experimentella
+  demonstrationen av detta. Bra termodynamik/vågfysik-vinkel, men vi
+  publicerade just en värmelära-nyhet (3D-värmekappa) 2026-07-15 — vänta
+  minst någon dag så ämnet inte känns upprepat. Publicerad 2026-07-13.
+  (tillagd 2026-07-15)
+- **Spontan magnonkoherens vid rumstemperatur direkt observerad** — RPTU
+  Kaiserslautern-Landau har för första gången observerat spontan makroskopisk
+  koherens hos kvantiserade spinnvågor (magnoner) vid rumstemperatur. Bra
+  kvantfysik/magnetism-vinkel, men vi har flera gånger sparat undan
+  magnon-nyheter för att kvantfysikämnet känts återkommande — och detta är
+  fortfarande tekniskt tungt att konkretisera. Publicerad kring 2026-07-14.
+  (tillagd 2026-07-15)
+- **Ny atomfälla ökar kvantprestanda med hjälp av ytkrafter** —
+  Humboldt-Universität zu Berlin har förbättrat hur atomer fångas nära en
+  ultratunn glasfiber för lagring av kvantinformation. Nischad kvantteknik-
+  nyhet, svår att konkretisera för gymnasienivå. Publicerad 2026-07-15.
+  (tillagd 2026-07-15)
+
 ## Fynd som inte användes (2026-07-14) — kan tas upp senare
 
-- **Ny 3D-värmekappa gömmer föremål från infrarött ljus i alla riktningar** —
-  forskare vid University of Illinois Urbana-Champaign (Shelly Zhang, Weichen
-  Li, Yibo Wang) och Technical University of Denmark (Ole Sigmund) har byggt
-  den första 3D-"osynlighetsmanteln" för värme som fungerar oavsett vinkel:
-  en aluminiumgitterstruktur kombinerad med gummiliknande material leder
-  värmeflödet runt föremålet i stället för att bara isolera det, så att det
-  blir osynligt för en värmekamera. Utmärkt termodynamik-vinkel (värmeledning,
-  Fysik nivå 1) med riktiga labbfoton av prototypen — mycket stark kandidat,
-  spara den inte för länge. Källor:
-  https://news.illinois.edu/new-3d-thermal-cloak-hides-objects-from-heat-in-any-direction/ ,
-  https://phys.org/news/2026-07-3d-thermal-cloak.html , Nature Communications,
-  DOI 10.1038/s41467-026-73167-0. (tillagd 2026-07-14)
 - **150-årig glödandegåta: eldflugors ljusstyrka har överskattats med upp
   till 10 000 gånger** — David Silver (Remiza AI) har i American Journal of
   Physics visat att det klassiska ”1/40 candela”-värdet för en eldflugas

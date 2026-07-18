@@ -1,0 +1,723 @@
+{
+ "id": "fy1-7.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "608bf13d2f942cc1ba28a55d863fd9e95bd65e6b",
+ "dur": 794.88,
+ "segments": [
+  {
+   "t": "Sammanfattning — Elektricitet",
+   "s": 0.1,
+   "e": 3.34
+  },
+  {
+   "t": "Kapitlet gick från statisk elektricitet (laddning, influens, Coulombs lag) till elektriska kretsar (ström, spänning, resistans, Ohms och Kirchhoffs lagar, effekt) och vidare till elektriska fält, potential, Faradays bur och Millikans försök.",
+   "s": 3.29,
+   "e": 21.1
+  },
+  {
+   "t": "Du ska efter kapitlet kunna räkna på krafter mellan laddningar, analysera serie- och parallellkopplade kretsar samt räkna med elektrisk fältstyrka och potential.",
+   "s": 21.1,
+   "e": 30.85
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 30.85,
+   "e": 33.17
+  },
+  {
+   "t": "Elektrisk laddning — grundläggande egenskap hos materia, positiv eller negativ, betecknas Q eller q, enhet C (coulomb).",
+   "s": 33.17,
+   "e": 42.49
+  },
+  {
+   "t": "Elementarladdning — den minsta laddningsenheten, q e är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb — elektronens och protonens laddning.",
+   "s": 42.49,
+   "e": 53.27
+  },
+  {
+   "t": "Ledare, isolator, halvledare — hur lätt elektroner rör sig i ett material (metaller/saltlösningar; glas/plast/trä; kisel/selen).",
+   "s": 53.27,
+   "e": 65.69
+  },
+  {
+   "t": "Influens — omfördelning av laddningar i ett neutralt föremål på grund av ett yttre elektriskt fält.",
+   "s": 65.69,
+   "e": 72.5
+  },
+  {
+   "t": "Coulombs lag — kraften mellan två punktladdningar, avtar med kvadraten på avståndet.",
+   "s": 72.5,
+   "e": 78.65
+  },
+  {
+   "t": "Elektrisk ström — laddning per tidsenhet, betecknas I, enhet A (ampere); riktas från plus till minus, motsatt elektronernas rörelse.",
+   "s": 78.65,
+   "e": 88.83
+  },
+  {
+   "t": "Kirchhoffs första lag — summan av strömmarna in i en punkt är lika med summan ut från punkten.",
+   "s": 88.83,
+   "e": 95.16
+  },
+  {
+   "t": "Spänning — energiskillnad per laddning mellan två punkter, betecknas U, enhet V (volt).",
+   "s": 95.16,
+   "e": 102.3
+  },
+  {
+   "t": "Resistans — motstånd mot elektrisk ström, betecknas R, enhet Ω (ohm).",
+   "s": 102.3,
+   "e": 109.01
+  },
+  {
+   "t": "Resistivitet — materialegenskap som avgör hur mycket en ledare motstår ström, betecknas ρ, enhet Ω·m.",
+   "s": 109.01,
+   "e": 123.38
+  },
+  {
+   "t": "Ohms lag — sambandet mellan spänning, resistans och ström, spänningen U är lika med resistansen R gånger strömmen I .",
+   "s": 109.01,
+   "e": 123.38
+  },
+  {
+   "t": "Seriekoppling — komponenter kopplade \"på rad\"; samma ström genom alla.",
+   "s": 123.38,
+   "e": 128.51
+  },
+  {
+   "t": "Parallellkoppling — komponenter kopplade \"över varandra\"; samma spänning över alla.",
+   "s": 128.51,
+   "e": 134.31
+  },
+  {
+   "t": "Ersättningsresistans — den enskilda resistans som kan ersätta flera resistorer i en krets.",
+   "s": 134.31,
+   "e": 141.0
+  },
+  {
+   "t": "Elektrisk effekt — energi som omvandlas per tidsenhet, betecknas P, enhet W (watt).",
+   "s": 141.0,
+   "e": 148.57
+  },
+  {
+   "t": "Elektriskt fält — område runt en laddning där en annan laddning påverkas av en elektrisk kraft; ritas ut från plus, in i minus.",
+   "s": 148.57,
+   "e": 157.45
+  },
+  {
+   "t": "Elektrisk fältstyrka — hur starkt ett elektriskt fält är, betecknas energin E , enhet N/C eller V/m.",
+   "s": 157.45,
+   "e": 171.74
+  },
+  {
+   "t": "Homogent fält — ett fält som är lika starkt överallt, t.ex. mellan två parallella laddade plattor.",
+   "s": 157.45,
+   "e": 171.74
+  },
+  {
+   "t": "Elektrisk potential — \"elektrisk lägesenergi\" i en punkt, betecknas V, enhet V; har till skillnad från spänning ett tecken.",
+   "s": 171.74,
+   "e": 180.5
+  },
+  {
+   "t": "Jordning — nollnivå för potential (0 volt) i en krets; leder bort oönskad laddning/ström.",
+   "s": 180.5,
+   "e": 188.32
+  },
+  {
+   "t": "Kirchhoffs andra lag — summan av alla potentialändringar i en sluten krets är noll.",
+   "s": 188.32,
+   "e": 194.21
+  },
+  {
+   "t": "Faradays bur — ett metallhölje inuti vilket det resulterande elektriska fältet alltid är noll.",
+   "s": 194.21,
+   "e": 200.8
+  },
+  {
+   "t": "Formler",
+   "s": 200.8,
+   "e": 202.59
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 202.59,
+   "e": 204.94
+  },
+  {
+   "t": "Laddning",
+   "s": 204.94,
+   "e": 206.76
+  },
+  {
+   "t": "laddningen Q är lika med n gånger q e",
+   "s": 206.76,
+   "e": 210.62
+  },
+  {
+   "t": "där",
+   "s": 210.62,
+   "e": 212.1
+  },
+  {
+   "t": "Q är lika med total laddning (coulomb)",
+   "s": 212.1,
+   "e": 215.89
+  },
+  {
+   "t": "n är lika med antal överskotts- eller underskottselektroner (st)",
+   "s": 215.89,
+   "e": 221.24
+  },
+  {
+   "t": "q e är lika med elementarladdningen är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb",
+   "s": 221.24,
+   "e": 229.55
+  },
+  {
+   "t": "Coulombs lag",
+   "s": 229.55,
+   "e": 231.59
+  },
+  {
+   "t": "kraften F är lika med k gånger | Q ett | gånger | Q två | delat med r i kvadrat",
+   "s": 231.59,
+   "e": 237.56
+  },
+  {
+   "t": "där",
+   "s": 237.56,
+   "e": 239.04
+  },
+  {
+   "t": "F är lika med elektrisk kraft (newton)",
+   "s": 239.04,
+   "e": 243.05
+  },
+  {
+   "t": "k är lika med Coulombs konstant är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2/C^2",
+   "s": 243.05,
+   "e": 254.56
+  },
+  {
+   "t": "| Q ett | , | Q två | är lika med laddningarnas storlek (coulomb), tecken bortses från",
+   "s": 254.56,
+   "e": 261.09
+  },
+  {
+   "t": "r är lika med avstånd mellan laddningarna (meter)",
+   "s": 261.09,
+   "e": 265.4
+  },
+  {
+   "t": "Elektrisk ström och Kirchhoffs första lag",
+   "s": 265.4,
+   "e": 269.01
+  },
+  {
+   "t": "strömmen I är lika med laddningen Q delat med tiden t sum I i n som är lika med sum I u t",
+   "s": 269.01,
+   "e": 275.76
+  },
+  {
+   "t": "där",
+   "s": 275.76,
+   "e": 277.26
+  },
+  {
+   "t": "I är lika med ström (ampere)",
+   "s": 277.26,
+   "e": 280.26
+  },
+  {
+   "t": "Q är lika med laddning (coulomb)",
+   "s": 280.26,
+   "e": 283.68
+  },
+  {
+   "t": "t är lika med tid (sekunder)",
+   "s": 283.68,
+   "e": 286.95
+  },
+  {
+   "t": "Spänning och elektrisk energi",
+   "s": 286.95,
+   "e": 290.12
+  },
+  {
+   "t": "spänningen U är lika med energin E delat med laddningen Q vilket är ekvivalent med att E är lika med Q gånger U",
+   "s": 290.12,
+   "e": 297.88
+  },
+  {
+   "t": "där",
+   "s": 297.88,
+   "e": 299.39
+  },
+  {
+   "t": "U är lika med spänning mellan två punkter (volt)",
+   "s": 299.39,
+   "e": 303.65
+  },
+  {
+   "t": "E är lika med elektrisk (potentiell) energi eller energiskillnad (joule)",
+   "s": 303.65,
+   "e": 309.73
+  },
+  {
+   "t": "Q är lika med laddning (coulomb)",
+   "s": 309.73,
+   "e": 313.14
+  },
+  {
+   "t": "Ohms lag",
+   "s": 313.3,
+   "e": 315.15
+  },
+  {
+   "t": "spänningen U är lika med resistansen R gånger strömmen I",
+   "s": 315.1,
+   "e": 319.96
+  },
+  {
+   "t": "där",
+   "s": 319.96,
+   "e": 321.44
+  },
+  {
+   "t": "U är lika med spänning (volt)",
+   "s": 321.44,
+   "e": 324.75
+  },
+  {
+   "t": "R är lika med resistans (ohm)",
+   "s": 324.75,
+   "e": 328.16
+  },
+  {
+   "t": "I är lika med ström (ampere)",
+   "s": 328.16,
+   "e": 331.2
+  },
+  {
+   "t": "Resistans i ledare",
+   "s": 331.2,
+   "e": 333.8
+  },
+  {
+   "t": "resistansen R är lika med densiteten rho gånger hävarmen l delat med arean A",
+   "s": 333.8,
+   "e": 340.04
+  },
+  {
+   "t": "där",
+   "s": 340.04,
+   "e": 341.55
+  },
+  {
+   "t": "R är lika med resistans i ledare (ohm)",
+   "s": 341.55,
+   "e": 345.43
+  },
+  {
+   "t": "ρ är lika med resistivitet (Ω·m)",
+   "s": 345.43,
+   "e": 349.19
+  },
+  {
+   "t": "l är lika med ledarens längd (meter)",
+   "s": 349.19,
+   "e": 352.82
+  },
+  {
+   "t": "A är lika med ledarens tvärsnittsarea (m i kvadrat)",
+   "s": 352.82,
+   "e": 357.49
+  },
+  {
+   "t": "Ersättningsresistans",
+   "s": 357.49,
+   "e": 360.23
+  },
+  {
+   "t": "R tiden t o t är lika med R ett plus R två plus parentesen serie slut parentes",
+   "s": 360.23,
+   "e": 367.05
+  },
+  {
+   "t": "1 delat med R tiden t o t är lika med 1 delat med R ett plus 1 delat med R två plus parentesen parallell slut parentes",
+   "s": 367.05,
+   "e": 375.81
+  },
+  {
+   "t": "där",
+   "s": 375.81,
+   "e": 377.32
+  },
+  {
+   "t": "R tiden t o t är lika med ersättningsresistans (ohm)",
+   "s": 377.32,
+   "e": 382.24
+  },
+  {
+   "t": "R ett , R två , … är lika med resistans 1, resistans 2, … (ohm)",
+   "s": 382.24,
+   "e": 389.89
+  },
+  {
+   "t": "Elektrisk effekt",
+   "s": 389.89,
+   "e": 392.3
+  },
+  {
+   "t": "effekten P är lika med spänningen U gånger strömmen I som är lika med resistansen R gånger I i kvadrat som är lika med U i kvadrat delat med R",
+   "s": 392.3,
+   "e": 401.4
+  },
+  {
+   "t": "där",
+   "s": 401.4,
+   "e": 402.91
+  },
+  {
+   "t": "P är lika med elektrisk effekt (watt)",
+   "s": 402.91,
+   "e": 406.76
+  },
+  {
+   "t": "U är lika med spänning över komponent (volt)",
+   "s": 406.76,
+   "e": 411.05
+  },
+  {
+   "t": "I är lika med ström genom komponent (ampere)",
+   "s": 411.05,
+   "e": 415.11
+  },
+  {
+   "t": "R är lika med resistans i komponent (ohm)",
+   "s": 415.11,
+   "e": 419.26
+  },
+  {
+   "t": "Elektrisk fältstyrka",
+   "s": 419.26,
+   "e": 421.88
+  },
+  {
+   "t": "energin E är lika med kraften F delat med laddningen Q E som är lika med k gånger Q delat med r i kvadrat parentesen klot slut parentes E som är lika med spänningen U delat med avståndet d parentesen plattor slut parentes",
+   "s": 421.88,
+   "e": 436.36
+  },
+  {
+   "t": "där",
+   "s": 436.36,
+   "e": 437.88
+  },
+  {
+   "t": "energin E är lika med elektrisk fältstyrka (N/C eller V/m)",
+   "s": 437.88,
+   "e": 444.8
+  },
+  {
+   "t": "F är lika med elektrisk kraft på laddning i fältet (newton)",
+   "s": 444.8,
+   "e": 449.76
+  },
+  {
+   "t": "Q är lika med laddningens (eller klotets) storlek (coulomb)",
+   "s": 449.76,
+   "e": 455.25
+  },
+  {
+   "t": "r är lika med avstånd till klotets medelpunkt (meter)",
+   "s": 455.25,
+   "e": 459.88
+  },
+  {
+   "t": "d är lika med plattavstånd (meter)",
+   "s": 459.88,
+   "e": 463.84
+  },
+  {
+   "t": "Potential, spänning och Kirchhoffs andra lag",
+   "s": 463.84,
+   "e": 467.9
+  },
+  {
+   "t": "spänningen U är lika med | V arean A minus V B | sum delta volymen V som är lika med 0",
+   "s": 467.9,
+   "e": 474.79
+  },
+  {
+   "t": "där",
+   "s": 474.79,
+   "e": 476.3
+  },
+  {
+   "t": "U är lika med spänning mellan punkt A och punkt B (volt)",
+   "s": 476.3,
+   "e": 481.07
+  },
+  {
+   "t": "V arean A , V B är lika med potential i punkt A respektive punkt B (volt)",
+   "s": 481.07,
+   "e": 488.09
+  },
+  {
+   "t": "Millikans oljedroppsförsök",
+   "s": 488.09,
+   "e": 491.16
+  },
+  {
+   "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g gånger avståndet d delat med spänningen U",
+   "s": 491.16,
+   "e": 498.54
+  },
+  {
+   "t": "där",
+   "s": 498.54,
+   "e": 500.05
+  },
+  {
+   "t": "Q är lika med laddning på oljedroppen (coulomb)",
+   "s": 500.05,
+   "e": 504.12
+  },
+  {
+   "t": "m är lika med oljedroppens massa (kilogram)",
+   "s": 504.12,
+   "e": 508.21
+  },
+  {
+   "t": "g är lika med tyngdfaktorn (newton per kilogram)",
+   "s": 508.21,
+   "e": 512.79
+  },
+  {
+   "t": "d är lika med plattavstånd (meter)",
+   "s": 512.79,
+   "e": 516.76
+  },
+  {
+   "t": "U är lika med spänning mellan plattorna (volt)",
+   "s": 516.76,
+   "e": 520.8
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 520.8,
+   "e": 523.67
+  },
+  {
+   "t": "Den elektriska kraften mellan två laddningar är enligt Newtons tredje lag alltid lika stor på båda laddningarna, oavsett om laddningarna själva är olika stora.",
+   "s": 523.67,
+   "e": 533.25
+  },
+  {
+   "t": "Vid beräkning med Coulombs lag: strunta i tecken på laddningarna i själva beräkningen.",
+   "s": 533.25,
+   "e": 539.08
+  },
+  {
+   "t": "Bestäm i stället kraftens riktning genom resonemang: lika tecken repellerar, olika tecken attraherar.",
+   "s": 539.08,
+   "e": 546.27
+  },
+  {
+   "t": "Strömmens riktning definieras från plus till minus — motsatt elektronernas faktiska rörelseriktning.",
+   "s": 546.27,
+   "e": 553.16
+  },
+  {
+   "t": "Amperemetern (ampere) kopplas i serie med komponenten och ska ha låg resistans.",
+   "s": 553.16,
+   "e": 558.96
+  },
+  {
+   "t": "Voltmetern (volt) kopplas parallellt med komponenten och ska ha hög resistans.",
+   "s": 558.96,
+   "e": 565.12
+  },
+  {
+   "t": "Ingen av mätarna får då påverka strömmen den mäter på.",
+   "s": 565.12,
+   "e": 569.36
+  },
+  {
+   "t": "Seriekoppling: strömmen är samma genom alla komponenter, delspänningarna summeras till batterispänningen.",
+   "s": 569.36,
+   "e": 576.73
+  },
+  {
+   "t": "Går en komponent sönder bryts hela kretsen.",
+   "s": 576.73,
+   "e": 580.74
+  },
+  {
+   "t": "Parallellkoppling: spänningen är samma över alla komponenter, delströmmarna summeras till totalströmmen.",
+   "s": 580.74,
+   "e": 587.9
+  },
+  {
+   "t": "Går en komponent sönder fortsätter övriga att fungera oförändrat.",
+   "s": 587.9,
+   "e": 593.14
+  },
+  {
+   "t": "Fler resistorer i serie ökar den totala resistansen.",
+   "s": 593.14,
+   "e": 597.73
+  },
+  {
+   "t": "Fler resistorer i parallell minskar den totala resistansen — ersättningsresistansen blir alltid mindre än den minsta enskilda resistansen.",
+   "s": 597.73,
+   "e": 606.24
+  },
+  {
+   "t": "Komplexa kopplingar löses stegvis: reducera delar av kretsen (t.ex. en parallellkoppling) till en ersättningsresistans innan Ohms lag och Kirchhoffs lagar används på resten av kretsen.",
+   "s": 606.24,
+   "e": 618.19
+  },
+  {
+   "t": "Potentialvandring: starta i en jordad punkt där volymen V är lika med 0 .",
+   "s": 618.19,
+   "e": 623.86
+  },
+  {
+   "t": "Gå genom ett batteri från minuspol till pluspol ger potentialen ökar med U; från pluspol till minuspol ger minskar med U.",
+   "s": 623.86,
+   "e": 636.33
+  },
+  {
+   "t": "Gå genom en resistor mot strömriktningen ger potentialen ökar med resistansen R gånger strömmen I ; med strömriktningen ger minskar med resistansen R gånger strömmen I .",
+   "s": 623.86,
+   "e": 642.86
+  },
+  {
+   "t": "Inuti en Faradays bur är det resulterande elektriska fältet alltid noll — därför är man säker i en bil vid åska tack vare karossens metall, inte de isolerande däcken.",
+   "s": 642.81,
+   "e": 653.1
+  },
+  {
+   "t": "Millikans oljedroppsförsök visade att all laddning är en heltalsmultipel av elementarladdningen 1,602 gånger 10 upphöjt till minus 19 coulomb.",
+   "s": 653.1,
+   "e": 663.11
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 663.11,
+   "e": 666.16
+  },
+  {
+   "t": "Krafter mellan laddningar — lika tecken repellerar, olika attraherar, och en neutral laddning ger ingen kraft alls:",
+   "s": 666.16,
+   "e": 676.93
+  },
+  {
+   "t": "Lika laddning repellerar, olika laddning attraherar.",
+   "s": 666.16,
+   "e": 676.93
+  },
+  {
+   "t": "Vid neutral laddning uppstår ingen elektrisk kraft alls.",
+   "s": 676.93,
+   "e": 681.48
+  },
+  {
+   "t": "Seriekoppling — samma ström genom alla lampor, spänningen delas upp:",
+   "s": 681.48,
+   "e": 688.28
+  },
+  {
+   "t": "Tre seriekopplade lampor.",
+   "s": 681.48,
+   "e": 688.28
+  },
+  {
+   "t": "Batteriets spänning U fördelas som delspänningar U ett, U två, U tre över lamporna.",
+   "s": 688.28,
+   "e": 695.22
+  },
+  {
+   "t": "Parallellkoppling — samma spänning över alla lampor, strömmen delas upp:",
+   "s": 695.22,
+   "e": 702.07
+  },
+  {
+   "t": "Tre parallellkopplade lampor.",
+   "s": 695.22,
+   "e": 702.07
+  },
+  {
+   "t": "Den totala strömmen I delar upp sig i delströmmarna I ett, I två, I tre genom grenarna.",
+   "s": 702.07,
+   "e": 708.72
+  },
+  {
+   "t": "Inför provet",
+   "s": 708.72,
+   "e": 710.87
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan ledare, isolator och halvledare, samt vad influens innebär?",
+   "s": 710.87,
+   "e": 717.53
+  },
+  {
+   "t": "Kan du Coulombs lag och avgöra kraftens riktning utifrån laddningarnas tecken?",
+   "s": 717.53,
+   "e": 723.22
+  },
+  {
+   "t": "Kan du definitionen av ström ( strömmen I är lika med laddningen Q delat med tiden t ) och Kirchhoffs första lag?",
+   "s": 723.22,
+   "e": 730.76
+  },
+  {
+   "t": "Kan du definitionen av spänning ( spänningen U är lika med energin E delat med laddningen Q ) och Ohms lag ( spänningen U är lika med resistansen R gånger strömmen I )?",
+   "s": 730.76,
+   "e": 741.36
+  },
+  {
+   "t": "Kan du formeln för resistans i en ledare och hur längd, area och material påverkar resistansen?",
+   "s": 741.36,
+   "e": 748.03
+  },
+  {
+   "t": "Kan du rita kopplingsscheman och avgöra hur amperemeter respektive voltmeter ska kopplas in?",
+   "s": 748.03,
+   "e": 754.55
+  },
+  {
+   "t": "Kan du räkna ut ersättningsresistans för serie- och parallellkopplade resistorer, även i komplexa (blandade) kopplingar?",
+   "s": 754.55,
+   "e": 763.18
+  },
+  {
+   "t": "Kan du de tre formlerna för elektrisk effekt och veta när du ska använda vilken?",
+   "s": 763.18,
+   "e": 768.6
+  },
+  {
+   "t": "Kan du de tre formlerna för elektrisk fältstyrka (definitionen, laddat klot, mellan två plattor)?",
+   "s": 768.6,
+   "e": 775.95
+  },
+  {
+   "t": "Kan du potentialvandra i en krets och använda Kirchhoffs andra lag för att bestämma en okänd ström?",
+   "s": 775.95,
+   "e": 782.42
+  },
+  {
+   "t": "Vet du varför det resulterande elektriska fältet alltid är noll inuti en Faradays bur?",
+   "s": 782.42,
+   "e": 788.72
+  },
+  {
+   "t": "Kan du redogöra för Millikans oljedroppsförsök och vad det bevisade om elementarladdningen?",
+   "s": 788.72,
+   "e": 794.88
+  }
+ ]
+}

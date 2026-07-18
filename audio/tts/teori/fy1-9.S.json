@@ -1,0 +1,448 @@
+{
+ "id": "fy1-9.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "33c3af75d48db70b8aa4f1f45ac11a0015f96b95",
+ "dur": 535.37,
+ "segments": [
+  {
+   "t": "Sammanfattning — Kärnfysik",
+   "s": 0.1,
+   "e": 3.2
+  },
+  {
+   "t": "Det här kapitlet handlade om atomkärnans uppbyggnad och stabilitet: hur protoner och neutroner hålls samman av den starka kärnkraften, hur massa omvandlas till bindningsenergi, och hur instabila kärnor sönderfaller genom alfa-, beta- och gammastrålning.",
+   "s": 3.15,
+   "e": 18.19
+  },
+  {
+   "t": "Du ska efter kapitlet kunna beräkna massdefekt och bindningsenergi, skriva balanserade sönderfallsformler, räkna med aktivitet och halveringstid, samt bedöma stråldoser och strålningens skadeverkan.",
+   "s": 18.19,
+   "e": 30.75
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 30.75,
+   "e": 33.08
+  },
+  {
+   "t": "Nukleon — samlingsnamn för protoner och neutroner i atomkärnan.",
+   "s": 33.08,
+   "e": 38.04
+  },
+  {
+   "t": "Starka kärnkraften — kraften som håller ihop nukleonerna i kärnan; verkar bara på mycket korta avstånd (ca 10 upphöjt till minus 15 meter ).",
+   "s": 38.04,
+   "e": 47.84
+  },
+  {
+   "t": "Masstal ( arean A ) — totala antalet nukleoner (p och n) i kärnan.",
+   "s": 47.84,
+   "e": 54.41
+  },
+  {
+   "t": "Atomnummer ( Z ) — antalet protoner i kärnan; bestämmer grundämnet.",
+   "s": 54.41,
+   "e": 60.65
+  },
+  {
+   "t": "Isotop — atomer av samma grundämne (samma Z) men olika antal neutroner (olika A).",
+   "s": 60.65,
+   "e": 68.34
+  },
+  {
+   "t": "Massdefekt ( delta massan m ) — skillnaden mellan massan hos partiklarna var för sig och massan hos den sammansatta kärnan.",
+   "s": 68.34,
+   "e": 76.5
+  },
+  {
+   "t": "Bindningsenergi — energin som motsvarar massdefekten via energin E är lika med delta massan m gånger c i kvadrat ; håller ihop kärnan.",
+   "s": 76.5,
+   "e": 85.95
+  },
+  {
+   "t": "Radioaktivt sönderfall — när en instabil kärna spontant omvandlas under utsändning av joniserande strålning.",
+   "s": 85.95,
+   "e": 93.34
+  },
+  {
+   "t": "Positron ( e upphöjt till plus ) och neutrino ( ny ) — positronen är elektronens antipartikel (samma massa, positiv laddning); neutrinon är nästan masslös, oladdad och växelverkar knappt med materia.",
+   "s": 93.34,
+   "e": 107.97
+  },
+  {
+   "t": "Båda bildas vid β-sönderfall.",
+   "s": 107.97,
+   "e": 110.91
+  },
+  {
+   "t": "Aktivitet ( arean A ) och sönderfallskonstant ( våglängden lambda ) — aktiviteten är antalet sönderfall per sekund (Bq); sönderfallskonstanten är proportionalitetskonstanten mellan aktivitet och antal kärnor.",
+   "s": 110.91,
+   "e": 125.61
+  },
+  {
+   "t": "Halveringstid ( T 1 delat med 2 ) — tiden det tar för hälften av kärnorna i ett radioaktivt prov att sönderfalla.",
+   "s": 125.61,
+   "e": 133.54
+  },
+  {
+   "t": "Absorberad dos ( D ) och ekvivalent dos ( H ) — absorberad dos är strålningsenergi per kg vävnad (Gy); ekvivalent dos väger detta med strålslagets skadlighet (Sv).",
+   "s": 133.54,
+   "e": 146.76
+  },
+  {
+   "t": "Formler",
+   "s": 146.76,
+   "e": 148.59
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 148.59,
+   "e": 150.94
+  },
+  {
+   "t": "Atomkärnans sammansättning",
+   "s": 150.94,
+   "e": 153.95
+  },
+  {
+   "t": "Z upphöjt till arean A X",
+   "s": 153.95,
+   "e": 157.46
+  },
+  {
+   "t": "där",
+   "s": 157.46,
+   "e": 158.93
+  },
+  {
+   "t": "X är lika med kemisk beteckning för grundämnet",
+   "s": 158.93,
+   "e": 163.03
+  },
+  {
+   "t": "A är lika med masstal (antal nukleoner, p + n)",
+   "s": 163.03,
+   "e": 168.01
+  },
+  {
+   "t": "Z är lika med atomnummer (antal protoner)",
+   "s": 168.01,
+   "e": 172.46
+  },
+  {
+   "t": "Kärnmassa",
+   "s": 172.46,
+   "e": 174.46
+  },
+  {
+   "t": "m k ä r n accelerationen a är lika med m n u k hävarmen l i avståndet d minus Z gånger m e l e k tiden t r o n",
+   "s": 174.46,
+   "e": 186.4
+  },
+  {
+   "t": "Massdefekt",
+   "s": 174.46,
+   "e": 186.4
+  },
+  {
+   "t": "delta massan m är lika med m trycket p accelerationen a r tiden t i k hävarmen l a r minus m k ä r n a",
+   "s": 186.4,
+   "e": 196.53
+  },
+  {
+   "t": "Bindningsenergi",
+   "s": 186.4,
+   "e": 196.53
+  },
+  {
+   "t": "energin E är lika med delta massan m gånger c i kvadrat",
+   "s": 196.53,
+   "e": 201.72
+  },
+  {
+   "t": "där",
+   "s": 201.72,
+   "e": 203.19
+  },
+  {
+   "t": "E är lika med bindningsenergi (joule)",
+   "s": 203.19,
+   "e": 206.94
+  },
+  {
+   "t": "delta massan m är lika med massdefekt (kilogram)",
+   "s": 206.94,
+   "e": 211.54
+  },
+  {
+   "t": "c är lika med ljusets hastighet i vakuum (≈ 2,998 gånger 10 upphöjt till 8 meter per sekund)",
+   "s": 211.54,
+   "e": 219.81
+  },
+  {
+   "t": "Omvandling mellan enheter",
+   "s": 219.81,
+   "e": 222.76
+  },
+  {
+   "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule 1 u som är lika med 931,49 megaelektronvolt",
+   "s": 222.76,
+   "e": 233.39
+  },
+  {
+   "t": "α-sönderfall",
+   "s": 233.39,
+   "e": 235.41
+  },
+  {
+   "t": "Z upphöjt till arean A X går mot Z minus 2 upphöjt till A minus 4 Y plus två upphöjt till 4 He",
+   "s": 235.41,
+   "e": 243.46
+  },
+  {
+   "t": "β-sönderfall",
+   "s": 243.46,
+   "e": 245.47
+  },
+  {
+   "t": "Z upphöjt till arean A X går mot Z plus 1 upphöjt till A Y plus minus 1 upphöjt till 0 e plus ny (β⁻)",
+   "s": 245.47,
+   "e": 253.99
+  },
+  {
+   "t": "Z upphöjt till arean A X går mot Z minus 1 upphöjt till A Y plus ett upphöjt till 0 e plus ny (β⁺)",
+   "s": 253.99,
+   "e": 262.24
+  },
+  {
+   "t": "γ-sönderfall",
+   "s": 262.24,
+   "e": 264.26
+  },
+  {
+   "t": "Z upphöjt till arean A X upphöjt till * går mot Z upphöjt till A X plus gamma",
+   "s": 264.26,
+   "e": 271.6
+  },
+  {
+   "t": "Aktivitet",
+   "s": 271.6,
+   "e": 273.64
+  },
+  {
+   "t": "arean A är lika med våglängden lambda gånger N",
+   "s": 273.64,
+   "e": 278.34
+  },
+  {
+   "t": "där",
+   "s": 278.34,
+   "e": 279.81
+  },
+  {
+   "t": "A är lika med aktivitet (Bq)",
+   "s": 279.81,
+   "e": 283.34
+  },
+  {
+   "t": "λ är lika med sönderfallskonstant (1/s)",
+   "s": 283.34,
+   "e": 287.98
+  },
+  {
+   "t": "N är lika med antal atomkärnor",
+   "s": 287.98,
+   "e": 291.27
+  },
+  {
+   "t": "Sönderfallskonstanten",
+   "s": 291.27,
+   "e": 293.86
+  },
+  {
+   "t": "våglängden lambda är lika med naturliga logaritmen av 2 delat med T 1 delat med 2",
+   "s": 293.86,
+   "e": 300.31
+  },
+  {
+   "t": "Aktivitetslagen och sönderfallslagen",
+   "s": 300.31,
+   "e": 303.68
+  },
+  {
+   "t": "arean A är lika med A noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2 newton som är lika med N noll gånger 0,5 upphöjt till t delat med T 1 delat med 2",
+   "s": 303.68,
+   "e": 315.38
+  },
+  {
+   "t": "Absorberad dos",
+   "s": 315.38,
+   "e": 317.74
+  },
+  {
+   "t": "D är lika med energin E delat med massan m",
+   "s": 317.74,
+   "e": 321.91
+  },
+  {
+   "t": "där",
+   "s": 321.91,
+   "e": 323.41
+  },
+  {
+   "t": "D är lika med absorberad dos (Gy)",
+   "s": 323.41,
+   "e": 327.66
+  },
+  {
+   "t": "E är lika med strålningens energi (joule)",
+   "s": 327.66,
+   "e": 332.87
+  },
+  {
+   "t": "m är lika med bestrålad massa (kilogram)",
+   "s": 332.82,
+   "e": 336.87
+  },
+  {
+   "t": "Ekvivalent dos",
+   "s": 336.87,
+   "e": 339.27
+  },
+  {
+   "t": "H är lika med D gånger laddningen Q",
+   "s": 339.27,
+   "e": 343.28
+  },
+  {
+   "t": "där",
+   "s": 343.28,
+   "e": 344.79
+  },
+  {
+   "t": "H är lika med ekvivalent stråldos (Sv)",
+   "s": 344.79,
+   "e": 349.06
+  },
+  {
+   "t": "D är lika med absorberad dos (Gy)",
+   "s": 349.06,
+   "e": 353.34
+  },
+  {
+   "t": "Q är lika med kvalitetsfaktor (Q är lika med 20 för α, Q är lika med 1 för β och γ)",
+   "s": 353.34,
+   "e": 359.96
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 359.96,
+   "e": 362.83
+  },
+  {
+   "t": "Massan hos en sammansatt kärna är alltid lägre än summan av massan hos dess beståndsdelar — mellanskillnaden (massdefekten) motsvarar bindningsenergin som håller ihop kärnan.",
+   "s": 362.83,
+   "e": 373.63
+  },
+  {
+   "t": "Vid β-sönderfall ändras antalet elektroner i nukliden, så elektronmassorna måste räknas bort ur nuklidmassorna på båda sidor om pilen.",
+   "s": 373.63,
+   "e": 382.72
+  },
+  {
+   "t": "Det behövs inte vid α- eller γ-sönderfall.",
+   "s": 382.72,
+   "e": 386.06
+  },
+  {
+   "t": "Sönderfallsformler balanseras som ekvationer: masstalen (överst) och atomnumren (nederst) ska summera till samma tal på båda sidor om pilen.",
+   "s": 386.06,
+   "e": 396.41
+  },
+  {
+   "t": "Kvalitetsfaktorn Q skiljer strålslagens skadlighet: samma absorberade dos D ger 20 gånger högre ekvivalent dos H för alfastrålning jämfört med beta- eller gammastrålning.",
+   "s": 396.41,
+   "e": 408.51
+  },
+  {
+   "t": "Genomträngligheten ökar α < β < γ, men den lokala skadeverkan (om strålningen når känslig vävnad) är störst för α och minst för γ — alfa är därför farligast innanför kroppen, gamma farligast utanför.",
+   "s": 408.51,
+   "e": 420.13
+  },
+  {
+   "t": "Aktiviteten och antalet kärnor avtar enligt exakt samma exponentiella samband (samma bas 0,5 upphöjt till tiden t delat med T 1 delat med 2 ) — sjunker det ena till hälften gör det andra det också.",
+   "s": 420.13,
+   "e": 432.58
+  },
+  {
+   "t": "Efter 10 halveringstider återstår ungefär en promille av ursprungsmängden ( 0,5 upphöjt till 10 är ungefär lika med 0,001 ) — det ger kol-14-metoden en övre gräns på omkring femtio tusen år.",
+   "s": 432.58,
+   "e": 445.73
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 445.73,
+   "e": 448.76
+  },
+  {
+   "t": "Atomens uppbyggnad — kärnan med protoner och neutroner, omgiven av elektroner i skal:",
+   "s": 448.76,
+   "e": 458.78
+  },
+  {
+   "t": "En heliumatom där elektronerna finns i ett elektronskal.",
+   "s": 448.76,
+   "e": 458.78
+  },
+  {
+   "t": "Inför provet",
+   "s": 458.78,
+   "e": 460.93
+  },
+  {
+   "t": "Kan du ange en atomkärnas sammansättning (antal protoner och neutroner) utifrån beteckningen Z upphöjt till arean A X ?",
+   "s": 460.93,
+   "e": 469.98
+  },
+  {
+   "t": "Vet du skillnaden mellan masstal, atomnummer och isotop?",
+   "s": 469.98,
+   "e": 474.86
+  },
+  {
+   "t": "Kan du beräkna massdefekt och bindningsenergi med energin E är lika med delta massan m gånger c i kvadrat , och växla mellan u, kg, J, eV och MeV?",
+   "s": 474.86,
+   "e": 485.87
+  },
+  {
+   "t": "Kan du skriva och balansera sönderfallsformler för α-, β upphöjt till minus -, β upphöjt till +- och γ-sönderfall?",
+   "s": 485.87,
+   "e": 493.14
+  },
+  {
+   "t": "Vet du vad en positron och en neutrino är, och varför de förekommer i β-sönderfall?",
+   "s": 493.14,
+   "e": 499.06
+  },
+  {
+   "t": "Kan du formeln för aktivitet ( arean A är lika med våglängden lambda gånger N ) och sambandet mellan sönderfallskonstant och halveringstid?",
+   "s": 499.06,
+   "e": 508.23
+  },
+  {
+   "t": "Kan du använda aktivitets- och sönderfallslagen för att beräkna hur mycket som återstår efter en given tid (t.ex. vid kol-14-datering)?",
+   "s": 508.23,
+   "e": 517.64
+  },
+  {
+   "t": "Känner du till alfa-, beta- och gammastrålningens genomträngningsförmåga och varför de är farliga på olika sätt?",
+   "s": 517.64,
+   "e": 524.71
+  },
+  {
+   "t": "Kan du räkna med absorberad dos ( D är lika med energin E delat med massan m ) och ekvivalent dos ( H är lika med D gånger laddningen Q )?",
+   "s": 524.71,
+   "e": 535.37
+  }
+ ]
+}

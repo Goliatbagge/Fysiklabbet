@@ -106,6 +106,13 @@
                 tokens.push(m);
                 return '@@ATTR' + (tokens.length - 1) + '@@';
             });
+            // Skydda även :::-blockens titelrader (::: formel "… kg/m³ …"):
+            // titeln HTML-escapas av preprocessBlocks, så ett injicerat
+            // <sup>-element skulle visas som bokstavlig text i blocktiteln.
+            md = md.replace(/^:::[^\n]*"[^\n]*$/gm, (m) => {
+                tokens.push(m);
+                return '@@ATTR' + (tokens.length - 1) + '@@';
+            });
             md = md.replace(SUP_RE, (run) => {
                 let ascii = '';
                 for (const ch of run) ascii += (SUP_MAP[ch] || ch);
@@ -649,6 +656,11 @@
             root.querySelectorAll('.lab-block-formel').forEach(box => {
                 if (box.querySelector('.formel-layout')) return;          // redan byggd
                 if (!box.querySelector('.katex-display, .katex')) return;
+                // Samlingsblock med FLERA formler+variabellistor (t.ex.
+                // kapitelsammanfattningarnas formelsektioner) lämnas i sitt
+                // naturliga flöde — tvåkolumnslayouten antar EN formel och EN
+                // "där"-lista och flyttar annars fel lista åt sidan.
+                if (box.querySelectorAll('ul').length > 1) return;
                 // Förklaringen till höger: i första hand en punktlista <ul>,
                 // annars ett stycke som börjar med "där" (prosaförklaring).
                 let right = box.querySelector('ul');
@@ -1609,6 +1621,9 @@
             const sectionIdx = sections.findIndex(s => s.num === section);
 
             const tid = activeSection ? teoriId(course, activeSection.num) : null;
+            // Sammanfattningsavsnitt (num 'K.S'): repetitionsspel i stället för
+            // exit tickets/övningar — visa inga "Kommer snart"-kort där.
+            const isSummary = activeSection && String(activeSection.num).endsWith('.S');
             const hasTeori = tid && TEORI[tid];
             const hasOvningar = tid && OVNINGAR[tid] && OVNINGAR[tid].length > 0;
             const hasExit = tid && EXITTICKETS[tid] && EXITTICKETS[tid].length > 0;
@@ -1753,7 +1768,7 @@
                                                             <div className="lab-card-title">Exit ticket</div>
                                                             <div className="lab-card-meta">{EXITTICKETS[tid].length} frågor</div>
                                                         </button>
-                                                    ) : (
+                                                    ) : isSummary ? null : (
                                                         <div className="lab-card lab-card-disabled">
                                                             <div className="lab-card-tag">Koll</div>
                                                             <div className="lab-card-title">Exit ticket</div>
@@ -1772,9 +1787,9 @@
                                                     {/* Matte har inga simuleringar — visa inte kortet alls där */}
                                                     {!isMath && (activeSection.href ? (
                                                         <a className="lab-card lab-card-clickable" href={activeSection.href}>
-                                                            <div className="lab-card-tag">Experiment</div>
-                                                            <div className="lab-card-title">Simulering</div>
-                                                            <div className="lab-card-meta">Interaktiv</div>
+                                                            <div className="lab-card-tag">{isSummary ? 'Spela' : 'Experiment'}</div>
+                                                            <div className="lab-card-title">{isSummary ? 'Repetitionsspel' : 'Simulering'}</div>
+                                                            <div className="lab-card-meta">{isSummary ? 'Interaktivt' : 'Interaktiv'}</div>
                                                         </a>
                                                     ) : (
                                                         <div className="lab-card lab-card-disabled">
@@ -1791,7 +1806,7 @@
                                                             <div className="lab-card-title">Övningar</div>
                                                             <div className="lab-card-meta">{OVNINGAR[tid].length} st</div>
                                                         </button>
-                                                    ) : (
+                                                    ) : isSummary ? null : (
                                                         <div className="lab-card lab-card-disabled">
                                                             <div className="lab-card-tag">Räkna</div>
                                                             <div className="lab-card-title">Övningar</div>
@@ -1947,7 +1962,7 @@
             const out = { subject: 'Fysik', course: null, chapter: null, section: null, view: 'teori' };
 
             const hash = (window.location.hash || '').replace(/^#/, '');
-            const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
+            const m = hash.match(/^(fy1|fy2|ma1c|ma2c|ma3c|ma4)(?:-(\d+)(?:\.(\d+|S))?)?(?::(teori|ovningar|exitticket|visualisering))?$/);
             if (m && HASH_COURSES[m[1]] && K[HASH_COURSES[m[1]][0]]) {
                 out.subject = HASH_COURSES[m[1]][0];
             }

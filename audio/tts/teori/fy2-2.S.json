@@ -1,0 +1,558 @@
+{
+ "id": "fy2-2.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a0402d141c9c5279be60110a08c1fee4b79450a1",
+ "dur": 668.62,
+ "segments": [
+  {
+   "t": "Sammanfattning — Mekaniska vågor",
+   "s": 0.1,
+   "e": 3.42
+  },
+  {
+   "t": "Kapitlet handlade om svängningar och vågor: från en vikt i en fjäder via harmonisk svängning och pendlar till hur pulser blir vågor som reflekteras, transmitteras, superponeras och bildar stående vågor i strängar och pipor.",
+   "s": 3.38,
+   "e": 17.35
+  },
+  {
+   "t": "Sedan gick vi vidare till ljud (intensitet, ljudnivå, dopplereffekt) och vattenvågor (brytning, diffraktion, interferens).",
+   "s": 17.35,
+   "e": 27.4
+  },
+  {
+   "t": "Du ska efter kapitlet kunna räkna på fjädersvängningar, periodtider, vågors utbredningshastighet, stående vågor, ljudnivå i decibel samt brytnings- och interferensmönster.",
+   "s": 27.4,
+   "e": 38.96
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 38.96,
+   "e": 41.29
+  },
+  {
+   "t": "Fjäderkonstant k — mått på hur \"hård\" en fjäder är; ingår i Hookes lag kraften F är lika med k gånger delta hävarmen l .",
+   "s": 41.29,
+   "e": 49.55
+  },
+  {
+   "t": "Elongation y — ett svängande föremåls läge räknat från jämviktsläget.",
+   "s": 49.55,
+   "e": 55.06
+  },
+  {
+   "t": "Amplitud A — det maximala utslaget från jämviktsläget (i en fjädersvängning, pendel eller våg).",
+   "s": 55.06,
+   "e": 62.48
+  },
+  {
+   "t": "Harmonisk svängning — en odämpad svängning där den återställande kraften är proportionell mot elongationen, F resistansen R är lika med minus k gånger y .",
+   "s": 62.48,
+   "e": 72.24
+  },
+  {
+   "t": "Periodtid T och (egen)frekvens f — tiden för en hel svängning respektive antalet svängningar per sekund, frekvensen f är lika med 1 delat med periodtiden T .",
+   "s": 72.24,
+   "e": 82.81
+  },
+  {
+   "t": "Resonans — kraftig ökning av svängningens amplitud när energi tillförs med samma frekvens som systemets egenfrekvens.",
+   "s": 82.81,
+   "e": 90.91
+  },
+  {
+   "t": "Transversell och longitudinell våg — utslaget sker vinkelrätt mot respektive längs med vågens utbredningsriktning.",
+   "s": 90.91,
+   "e": 98.39
+  },
+  {
+   "t": "Reflexion, transmission och superposition — en våg som studsar tillbaka, förs över till ett nytt medium, respektive två vågor vars elongationer adderas när de möts.",
+   "s": 98.39,
+   "e": 109.3
+  },
+  {
+   "t": "Stående våg — nod och buk — punkter med amplituden 0 (noder) och punkter mitt emellan med maximal amplitud (bukar); energin transporteras inte i mediet utan koncentreras till bukarna.",
+   "s": 109.3,
+   "e": 121.8
+  },
+  {
+   "t": "Ljudintensitet I och ljudnivå L — energitransport per tvärsnittsarea (W/m i kvadrat) respektive samma storhet omräknad till en logaritmisk skala i decibel (dB).",
+   "s": 121.8,
+   "e": 134.34
+  },
+  {
+   "t": "Dopplereffekt — den skenbara frekvensändring som uppstår när sändare och mottagare rör sig i förhållande till varandra.",
+   "s": 134.34,
+   "e": 141.69
+  },
+  {
+   "t": "Diffraktion och interferens — en våg som böjs av vid kanten av en öppning, respektive två vågor som möts och bildar maximilinjer (konstruktiv interferens) och nodlinjer (destruktiv interferens).",
+   "s": 141.69,
+   "e": 154.43
+  },
+  {
+   "t": "Formler",
+   "s": 154.43,
+   "e": 156.25
+  },
+  {
+   "t": "Fjädersvängning",
+   "s": 156.25,
+   "e": 158.44
+  },
+  {
+   "t": "Hookes lag",
+   "s": 158.44,
+   "e": 160.41
+  },
+  {
+   "t": "kraften F är lika med k gånger delta hävarmen l",
+   "s": 160.41,
+   "e": 164.78
+  },
+  {
+   "t": "där",
+   "s": 164.78,
+   "e": 166.24
+  },
+  {
+   "t": "F är lika med kraft som belastar/verkar från fjädern (newton)",
+   "s": 166.24,
+   "e": 172.18
+  },
+  {
+   "t": "k är lika med fjäderkonstant (N/m)",
+   "s": 172.18,
+   "e": 176.38
+  },
+  {
+   "t": "Δl är lika med fjäderns förlängning (meter)",
+   "s": 176.38,
+   "e": 180.28
+  },
+  {
+   "t": "Resulterande kraft på vikt i fjäder",
+   "s": 180.28,
+   "e": 183.69
+  },
+  {
+   "t": "F resistansen R är lika med minus k gånger y",
+   "s": 183.69,
+   "e": 190.45
+  },
+  {
+   "t": "Fjäderns totala (mekaniska) energi",
+   "s": 183.69,
+   "e": 190.45
+  },
+  {
+   "t": "energin E är lika med k gånger arean A i kvadrat delat med 2",
+   "s": 190.45,
+   "e": 195.94
+  },
+  {
+   "t": "där",
+   "s": 195.94,
+   "e": 197.41
+  },
+  {
+   "t": "E är lika med fjäderns totala energi (joule)",
+   "s": 197.41,
+   "e": 201.54
+  },
+  {
+   "t": "A är lika med svängningens amplitud (meter)",
+   "s": 201.54,
+   "e": 205.61
+  },
+  {
+   "t": "Harmonisk svängning",
+   "s": 205.61,
+   "e": 208.15
+  },
+  {
+   "t": "y är lika med arean A gånger sinus parentesen omega gånger tiden t slut parentes hastigheten v som är lika med omega gånger A gånger cosinus parentesen omega gånger t slut parentes accelerationen a som är lika med minus omega i kvadrat gånger A gånger sinus parentesen omega gånger t slut parentes",
+   "s": 208.15,
+   "e": 227.03
+  },
+  {
+   "t": "omega är lika med roten ur k delat med massan m periodtiden T som är lika med 2 pi roten ur m delat med k",
+   "s": 227.03,
+   "e": 234.72
+  },
+  {
+   "t": "där",
+   "s": 234.72,
+   "e": 236.21
+  },
+  {
+   "t": "ω är lika med vinkelhastighet (rad/s)",
+   "s": 236.21,
+   "e": 240.79
+  },
+  {
+   "t": "t är lika med tid efter passage av jämviktsläget uppåt (sekunder)",
+   "s": 240.79,
+   "e": 246.31
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 246.31,
+   "e": 249.68
+  },
+  {
+   "t": "T är lika med periodtid (sekunder)",
+   "s": 249.68,
+   "e": 253.39
+  },
+  {
+   "t": "Plan pendel och egenfrekvens",
+   "s": 253.39,
+   "e": 256.54
+  },
+  {
+   "t": "Periodtid för matematisk pendel vid små utslag",
+   "s": 256.54,
+   "e": 260.74
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur hävarmen l delat med tyngdfaktorn g",
+   "s": 260.74,
+   "e": 266.85
+  },
+  {
+   "t": "där",
+   "s": 266.85,
+   "e": 268.34
+  },
+  {
+   "t": "l är lika med pendellängd (meter)",
+   "s": 268.34,
+   "e": 271.77
+  },
+  {
+   "t": "g är lika med tyngdacceleration (m/s i kvadrat)",
+   "s": 271.77,
+   "e": 277.09
+  },
+  {
+   "t": "Egenfrekvens",
+   "s": 277.09,
+   "e": 279.36
+  },
+  {
+   "t": "frekvensen f är lika med 1 delat med periodtiden T",
+   "s": 279.36,
+   "e": 286.46
+  },
+  {
+   "t": "Vågor — utbredningshastighet och stående vågor",
+   "s": 279.36,
+   "e": 286.46
+  },
+  {
+   "t": "Utbredningshastighet hos våg",
+   "s": 286.46,
+   "e": 289.68
+  },
+  {
+   "t": "hastigheten v är lika med våglängden lambda delat med periodtiden T som är lika med frekvensen f gånger lambda",
+   "s": 289.68,
+   "e": 297.09
+  },
+  {
+   "t": "där",
+   "s": 297.09,
+   "e": 298.6
+  },
+  {
+   "t": "v är lika med vågens utbredningshastighet (meter per sekund)",
+   "s": 298.6,
+   "e": 305.32
+  },
+  {
+   "t": "λ är lika med våglängd (meter)",
+   "s": 305.27,
+   "e": 308.53
+  },
+  {
+   "t": "Stående våg i sträng eller pipa (nod till nod / buk till buk)",
+   "s": 308.53,
+   "e": 314.25
+  },
+  {
+   "t": "hävarmen l är lika med n gånger våglängden lambda delat med 2",
+   "s": 314.25,
+   "e": 319.27
+  },
+  {
+   "t": "Stående våg i halvöppen pipa (nod till buk)",
+   "s": 319.27,
+   "e": 323.93
+  },
+  {
+   "t": "hävarmen l är lika med parentesen 2 n minus 1 slut parentes gånger våglängden lambda delat med 4",
+   "s": 323.93,
+   "e": 331.66
+  },
+  {
+   "t": "där",
+   "s": 331.66,
+   "e": 333.16
+  },
+  {
+   "t": "l är lika med strängens/pipans längd (meter)",
+   "s": 333.16,
+   "e": 337.71
+  },
+  {
+   "t": "n är lika med tonens ordningsnummer (n är lika med 1 grundtonen, n är lika med 2 första övertonen, …)",
+   "s": 337.71,
+   "e": 344.87
+  },
+  {
+   "t": "Ljudintensitet och ljudnivå",
+   "s": 344.87,
+   "e": 348.0
+  },
+  {
+   "t": "strömmen I är lika med effekten P delat med arean A I som är lika med P delat med 4 pi gånger r i kvadrat",
+   "s": 348.0,
+   "e": 355.73
+  },
+  {
+   "t": "där",
+   "s": 355.73,
+   "e": 357.25
+  },
+  {
+   "t": "I är lika med ljudintensitet (W/m i kvadrat)",
+   "s": 357.25,
+   "e": 362.53
+  },
+  {
+   "t": "P är lika med effekt (watt)",
+   "s": 362.53,
+   "e": 365.85
+  },
+  {
+   "t": "A är lika med area (m i kvadrat), r är lika med avstånd till punktkälla (meter)",
+   "s": 365.85,
+   "e": 372.35
+  },
+  {
+   "t": "L är lika med 10 gånger logaritmen av parentesen strömmen I delat med I noll slut parentes",
+   "s": 372.35,
+   "e": 379.12
+  },
+  {
+   "t": "där",
+   "s": 379.12,
+   "e": 380.63
+  },
+  {
+   "t": "L är lika med ljudnivå (dB)",
+   "s": 380.63,
+   "e": 384.02
+  },
+  {
+   "t": "I noll är lika med 10 upphöjt till minus 12 watt/m i kvadrat (hörbarhetsgränsen)",
+   "s": 384.02,
+   "e": 390.97
+  },
+  {
+   "t": "Brytning och interferens hos vattenvågor",
+   "s": 390.97,
+   "e": 394.83
+  },
+  {
+   "t": "Brytningslagen",
+   "s": 394.83,
+   "e": 397.15
+  },
+  {
+   "t": "sinus i delat med sinus b är lika med v ett delat med v två som är lika med våglängden lambda ett delat med lambda två",
+   "s": 397.15,
+   "e": 405.23
+  },
+  {
+   "t": "där",
+   "s": 405.23,
+   "e": 406.73
+  },
+  {
+   "t": "i, b är lika med infallsvinkel respektive brytningsvinkel",
+   "s": 406.73,
+   "e": 411.7
+  },
+  {
+   "t": "v ett, v två är lika med hastighet i medium 1 respektive medium 2",
+   "s": 411.7,
+   "e": 417.78
+  },
+  {
+   "t": "Interferens",
+   "s": 417.78,
+   "e": 419.95
+  },
+  {
+   "t": "delta sträckan s är lika med n gånger våglängden lambda parentesen maximilinjer, konstruktiv slut parentes",
+   "s": 419.95,
+   "e": 427.62
+  },
+  {
+   "t": "delta sträckan s är lika med parentesen n plus 1 delat med 2 slut parentes gånger våglängden lambda parentesen nodlinjer, destruktiv slut parentes",
+   "s": 427.62,
+   "e": 438.13
+  },
+  {
+   "t": "där",
+   "s": 438.13,
+   "e": 439.65
+  },
+  {
+   "t": "Δs är lika med vägskillnad till de två vågkällorna (meter)",
+   "s": 439.65,
+   "e": 444.53
+  },
+  {
+   "t": "n är lika med linjens ordningsnummer (0, 1, 2, …)",
+   "s": 444.53,
+   "e": 449.88
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 449.88,
+   "e": 452.76
+  },
+  {
+   "t": "I jämviktsläget är farten maximal och accelerationen 0; i vändlägena är farten 0 och accelerationen maximal — resultanten pekar alltid mot jämviktsläget.",
+   "s": 452.76,
+   "e": 463.01
+  },
+  {
+   "t": "Periodtiden för en fjädersvängning ( periodtiden T är lika med 2 pi roten ur massan m delat med k ) och för en pendel ( periodtiden T är lika med 2 pi roten ur hävarmen l delat med tyngdfaktorn g ) beror inte på amplituden — bara på massa/fjäderkonstant respektive pendellängd.",
+   "s": 463.01,
+   "e": 480.0
+  },
+  {
+   "t": "Pendelformeln gäller bara vid små utslagsvinklar (annars upphör rörelsen att vara harmonisk) och när snörets massa är försumbar.",
+   "s": 480.0,
+   "e": 488.26
+  },
+  {
+   "t": "En transversell våg som reflekteras mot en fast ände vänder (vågberg ger vågdal); mot en lös ände behåller den sin form.",
+   "s": 488.26,
+   "e": 496.45
+  },
+  {
+   "t": "Vid transmission mellan olika medier: från tätare till tunnare medium transmitteras pulsen förlängd, från tunnare till tätare förkortad — reflexionen är rättvänd respektive omvänd.",
+   "s": 496.45,
+   "e": 507.51
+  },
+  {
+   "t": "I en stående våg är avståndet mellan två närliggande noder (eller två närliggande bukar) alltid en halv våglängd.",
+   "s": 507.51,
+   "e": 515.56
+  },
+  {
+   "t": "Ljudets hastighet beror av temperatur och material: v frekvensen f accelerationen a sträckan s tiden t är större än v hastigheten v ä t s k a är större än v tyngdfaktorn g a s ; i luft räknar man med ca 340 meter per sekund om inget annat anges.",
+   "s": 515.56,
+   "e": 532.87
+  },
+  {
+   "t": "Decibelskalan är logaritmisk: en ökning med ca 3 dB motsvarar en fördubbling av ljudintensiteten, inte en linjär ökning.",
+   "s": 532.87,
+   "e": 541.87
+  },
+  {
+   "t": "Vid brytning av vattenvågor är frekvensen alltid konstant — det är våglängden och hastigheten som ändras (minskar mot grundare vatten, ökar mot djupare).",
+   "s": 541.87,
+   "e": 552.05
+  },
+  {
+   "t": "På en maximilinje är vägskillnaden till de två vågkällorna ett helt antal våglängder (vågorna möts i fas); på en nodlinje ett halvt antal våglängder (vågorna möts i motfas).",
+   "s": 552.05,
+   "e": 563.65
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 563.65,
+   "e": 566.7
+  },
+  {
+   "t": "En vikt i en fjäder förlängs proportionellt mot kraften (Hookes lag) — kraften F och förlängningen Δl är riktade åt samma håll:",
+   "s": 566.7,
+   "e": 589.2
+  },
+  {
+   "t": "Amplitud och våglängd hos en transversell våg — avståndet mellan två vågtoppar är en våglängd, och det maximala utslaget från jämviktsläget är amplituden:",
+   "s": 566.7,
+   "e": 589.2
+  },
+  {
+   "t": "En stående våg med tre bukar — noderna sitter stilla medan bukarna svänger med maximal amplitud:",
+   "s": 566.7,
+   "e": 589.2
+  },
+  {
+   "t": "Inför provet",
+   "s": 566.7,
+   "e": 589.2
+  },
+  {
+   "t": "Kan du Hookes lag och räkna ut fjäderkonstanten från förlängning och kraft?",
+   "s": 589.2,
+   "e": 594.56
+  },
+  {
+   "t": "Kan du bestämma fjäderns totala energi ur amplituden och förklara var energin sitter i olika lägen?",
+   "s": 594.56,
+   "e": 602.95
+  },
+  {
+   "t": "Kan du formlerna för elongation, hastighet och acceleration i en harmonisk svängning, och veta var i rörelsen de är som störst?",
+   "s": 602.9,
+   "e": 611.37
+  },
+  {
+   "t": "Kan du periodtidsformeln för fjädersvängning respektive för plan pendel — och veta att ingen av dem beror på amplituden?",
+   "s": 611.37,
+   "e": 618.75
+  },
+  {
+   "t": "Kan du förklara vad resonans är och ge exempel på resonansfenomen?",
+   "s": 618.75,
+   "e": 623.78
+  },
+  {
+   "t": "Kan du skilja transversell från longitudinell våg, och veta hur en puls reflekteras mot fast/lös ände?",
+   "s": 623.78,
+   "e": 631.2
+  },
+  {
+   "t": "Kan du använda superpositionsprincipen för att rita hur två pulser ser ut när de möts?",
+   "s": 631.2,
+   "e": 637.2
+  },
+  {
+   "t": "Kan du bestämma antalet bukar/noder i en stående våg och koppla det till strängens eller pipans längd (öppen, sluten, halvöppen)?",
+   "s": 637.2,
+   "e": 646.84
+  },
+  {
+   "t": "Kan du räkna med ljudintensitet, ljudnivå i decibel och förstå varför decibelskalan är logaritmisk?",
+   "s": 646.84,
+   "e": 654.19
+  },
+  {
+   "t": "Kan du brytningslagen för vattenvågor och veta vad som förändras (och vad som förblir konstant) vid brytning?",
+   "s": 654.19,
+   "e": 661.5
+  },
+  {
+   "t": "Kan du avgöra om en punkt ligger på en maximilinje eller nodlinje utifrån vägskillnaden till två vågkällor?",
+   "s": 661.5,
+   "e": 668.62
+  }
+ ]
+}

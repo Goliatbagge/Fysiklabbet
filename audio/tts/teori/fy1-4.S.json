@@ -1,0 +1,518 @@
+{
+ "id": "fy1-4.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "b5429234da428cd5c8a8f02df60a22be090c43d5",
+ "dur": 634.97,
+ "segments": [
+  {
+   "t": "Sammanfattning — Energi",
+   "s": 0.1,
+   "e": 2.89
+  },
+  {
+   "t": "I det här kapitlet har du mött energi i sina olika former och hur den flyttas mellan formerna genom arbete.",
+   "s": 2.84,
+   "e": 9.47
+  },
+  {
+   "t": "Du kan nu räkna med lägesenergi, rörelseenergi, effekt och verkningsgrad, och du har sett hur energiprincipen och rörelsemängdens bevarande används för att lösa problem med stötar, kast och rörelse i backar.",
+   "s": 9.47,
+   "e": 22.91
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 22.91,
+   "e": 25.23
+  },
+  {
+   "t": "energi — förmågan att uträtta arbete; betecknas E, SI-enheten J (joule).",
+   "s": 25.23,
+   "e": 31.89
+  },
+  {
+   "t": "arbete — energin som omvandlas när en kraft ger en förflyttning i kraftens riktning: arbetet W är lika med F sträckan s gånger s .",
+   "s": 31.89,
+   "e": 41.2
+  },
+  {
+   "t": "lägesenergi (potentiell energi) — energi som lagras på grund av föremålets höjd över en vald nollnivå.",
+   "s": 41.2,
+   "e": 49.09
+  },
+  {
+   "t": "rörelseenergi (kinetisk energi) — energin ett föremål har på grund av sin hastighet.",
+   "s": 49.09,
+   "e": 56.08
+  },
+  {
+   "t": "energiprincipen — energi kan varken skapas eller förstöras, bara omvandlas mellan olika former.",
+   "s": 56.08,
+   "e": 63.08
+  },
+  {
+   "t": "mekanisk energi — summan av läges- och rörelseenergi, E massan m är lika med E trycket p plus E k .",
+   "s": 63.08,
+   "e": 70.62
+  },
+  {
+   "t": "friktionsvärme — den energi som \"försvinner\" ur den mekaniska energin vid friktion; blir alltid värme.",
+   "s": 70.62,
+   "e": 77.49
+  },
+  {
+   "t": "effekt — arbete eller energi per tidsenhet, effekten P är lika med arbetet W delat med delta tiden t ; SI-enhet W (watt).",
+   "s": 77.49,
+   "e": 87.64
+  },
+  {
+   "t": "verkningsgrad — andelen av tillförd energi som blir nyttig, eta är lika med E n delat med E tiden t ; ett tal mellan 0 och 1.",
+   "s": 87.64,
+   "e": 96.6
+  },
+  {
+   "t": "rörelsemängd — produkten av massa och hastighet, trycket p är lika med massan m gånger hastigheten v ; en vektor.",
+   "s": 96.6,
+   "e": 104.56
+  },
+  {
+   "t": "impuls — en kraft som verkar under en viss tid, strömmen I är lika med kraften F gånger delta tiden t ; ändrar rörelsemängden.",
+   "s": 104.56,
+   "e": 113.55
+  },
+  {
+   "t": "elastisk och oelastisk stöt — vid en elastisk stöt studsar föremålen isär, vid en oelastisk (eller fullkomligt oelastisk) stöt hakar de i varandra; rörelsemängden bevaras i båda fallen.",
+   "s": 113.55,
+   "e": 126.35
+  },
+  {
+   "t": "Formler",
+   "s": 126.35,
+   "e": 128.18
+  },
+  {
+   "t": "Arbete",
+   "s": 128.18,
+   "e": 129.93
+  },
+  {
+   "t": "arbetet W är lika med F sträckan s gånger s",
+   "s": 129.93,
+   "e": 134.56
+  },
+  {
+   "t": "där",
+   "s": 134.56,
+   "e": 136.04
+  },
+  {
+   "t": "W är lika med arbete (Nm eller J)",
+   "s": 136.04,
+   "e": 140.2
+  },
+  {
+   "t": "F sträckan s är lika med kraften i rörelsens riktning (newton)",
+   "s": 140.2,
+   "e": 145.5
+  },
+  {
+   "t": "s är lika med sträckan (meter)",
+   "s": 145.5,
+   "e": 148.93
+  },
+  {
+   "t": "Lägesenergi och rörelseenergi",
+   "s": 148.93,
+   "e": 152.31
+  },
+  {
+   "t": "E trycket p är lika med massan m gånger tyngdfaktorn g gånger höjden h E k som är lika med m gånger hastigheten v i kvadrat delat med 2",
+   "s": 152.31,
+   "e": 161.39
+  },
+  {
+   "t": "där",
+   "s": 161.39,
+   "e": 162.88
+  },
+  {
+   "t": "E trycket p är lika med lägesenergi (joule)",
+   "s": 162.88,
+   "e": 167.1
+  },
+  {
+   "t": "E k är lika med rörelseenergi (joule)",
+   "s": 167.1,
+   "e": 171.22
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 171.22,
+   "e": 174.57
+  },
+  {
+   "t": "g är lika med tyngdfaktor (newton per kilogram) (9,82 newton per kilogram i Sverige)",
+   "s": 174.57,
+   "e": 182.05
+  },
+  {
+   "t": "h är lika med höjd över nollnivån (meter)",
+   "s": 182.05,
+   "e": 186.14
+  },
+  {
+   "t": "v är lika med hastighet (meter per sekund)",
+   "s": 186.14,
+   "e": 190.29
+  },
+  {
+   "t": "Sker höjdändringen utan friktion motsvarar arbetet arbetet W ändringen av lägesenergi: arbetet W är lika med delta E trycket p .",
+   "s": 190.29,
+   "e": 200.14
+  },
+  {
+   "t": "Energiprincipen och mekanisk energi",
+   "s": 200.14,
+   "e": 203.75
+  },
+  {
+   "t": "E massan m är lika med E trycket p plus E k",
+   "s": 203.75,
+   "e": 213.03
+  },
+  {
+   "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 (utan friktion)",
+   "s": 203.75,
+   "e": 213.03
+  },
+  {
+   "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 plus E hastigheten v (med friktionsvärme E v )",
+   "s": 213.03,
+   "e": 221.93
+  },
+  {
+   "t": "där",
+   "s": 221.93,
+   "e": 223.43
+  },
+  {
+   "t": "E massan m är lika med mekanisk energi (joule)",
+   "s": 223.43,
+   "e": 227.78
+  },
+  {
+   "t": "E trycket p 1 , E k 1 är lika med läges- och rörelseenergi vid tidpunkt 1",
+   "s": 227.78,
+   "e": 234.22
+  },
+  {
+   "t": "E trycket p 2 , E k 2 är lika med läges- och rörelseenergi vid tidpunkt 2",
+   "s": 234.22,
+   "e": 240.62
+  },
+  {
+   "t": "E hastigheten v är lika med friktionsvärme (joule), E hastigheten v är lika med delta E massan m eller E hastigheten v är lika med F frekvensen f gånger sträckan s",
+   "s": 240.62,
+   "e": 252.9
+  },
+  {
+   "t": "Effekt och verkningsgrad",
+   "s": 240.62,
+   "e": 252.9
+  },
+  {
+   "t": "effekten P är lika med delta energin E delat med delta tiden t som är lika med arbetet W delat med delta t eta som är lika med E n delat med E t som är lika med P n delat med P t",
+   "s": 252.9,
+   "e": 265.09
+  },
+  {
+   "t": "där",
+   "s": 265.09,
+   "e": 266.6
+  },
+  {
+   "t": "P är lika med effekt (W eller J/s)",
+   "s": 266.6,
+   "e": 271.45
+  },
+  {
+   "t": "ΔE, W är lika med omvandlad energi respektive arbete (joule)",
+   "s": 271.45,
+   "e": 277.51
+  },
+  {
+   "t": "Δt är lika med tid (sekunder)",
+   "s": 277.51,
+   "e": 280.84
+  },
+  {
+   "t": "η är lika med verkningsgrad, 0 ≤ η ≤ 1",
+   "s": 280.84,
+   "e": 284.5
+  },
+  {
+   "t": "E n , P n är lika med nyttig energi respektive effekt",
+   "s": 284.5,
+   "e": 289.82
+  },
+  {
+   "t": "E tiden t , P tiden t är lika med tillförd energi respektive effekt",
+   "s": 289.82,
+   "e": 295.61
+  },
+  {
+   "t": "1 watt är lika med 1 joule per sekund 1 joule som är lika med 1 Ws 1 kilowattimme som är lika med 3,6 gånger 10 upphöjt till 6 joule",
+   "s": 295.61,
+   "e": 304.98
+  },
+  {
+   "t": "Rörelsemängd och impuls",
+   "s": 304.98,
+   "e": 307.95
+  },
+  {
+   "t": "trycket p är lika med massan m gånger hastigheten v strömmen I som är lika med kraften F gånger delta tiden t I som är lika med delta p som är lika med m gånger delta v som är lika med m v två minus m v ett",
+   "s": 307.95,
+   "e": 323.16
+  },
+  {
+   "t": "där",
+   "s": 323.11,
+   "e": 324.61
+  },
+  {
+   "t": "p är lika med rörelsemängd (kg gånger m/s)",
+   "s": 324.61,
+   "e": 329.55
+  },
+  {
+   "t": "I är lika med impuls (Ns)",
+   "s": 329.55,
+   "e": 332.9
+  },
+  {
+   "t": "F är lika med kraft (newton)",
+   "s": 332.9,
+   "e": 336.4
+  },
+  {
+   "t": "Δt är lika med tid (sekunder)",
+   "s": 336.4,
+   "e": 339.71
+  },
+  {
+   "t": "Δp är lika med ändring av rörelsemängd (kg gånger m/s)",
+   "s": 339.71,
+   "e": 345.41
+  },
+  {
+   "t": "I en F-t-graf motsvaras impuls av arean under grafen.",
+   "s": 345.41,
+   "e": 350.67
+  },
+  {
+   "t": "Rörelsemängdens bevarande",
+   "s": 350.67,
+   "e": 353.55
+  },
+  {
+   "t": "m arean A gånger v A 0 plus m B gånger v B 0 är lika med m A gånger v A plus m B gånger v B",
+   "s": 353.55,
+   "e": 371.73
+  },
+  {
+   "t": "m arean A gånger v A plus m B gånger v B är lika med parentesen m A plus m B slut parentes gånger hastigheten v (fullkomligt oelastisk stöt)",
+   "s": 353.55,
+   "e": 371.73
+  },
+  {
+   "t": "där",
+   "s": 371.73,
+   "e": 373.25
+  },
+  {
+   "t": "m arean A , m B är lika med massa föremål A respektive B",
+   "s": 373.25,
+   "e": 391.98
+  },
+  {
+   "t": "v arean A 0 , v B 0 är lika med begynnelsehastighet föremål A respektive B",
+   "s": 373.25,
+   "e": 391.98
+  },
+  {
+   "t": "v arean A , v B är lika med sluthastighet föremål A respektive B",
+   "s": 373.25,
+   "e": 391.98
+  },
+  {
+   "t": "v är lika med gemensam sluthastighet vid fullkomligt oelastisk stöt",
+   "s": 373.25,
+   "e": 391.98
+  },
+  {
+   "t": "Friktionsvärme",
+   "s": 391.98,
+   "e": 394.15
+  },
+  {
+   "t": "E hastigheten v är lika med F frekvensen f gånger sträckan s arbetet W som är lika med delta E trycket p plus E v (arbete vid höjdändring med friktion)",
+   "s": 394.15,
+   "e": 404.77
+  },
+  {
+   "t": "där",
+   "s": 404.77,
+   "e": 406.28
+  },
+  {
+   "t": "E hastigheten v är lika med friktionsvärme (joule)",
+   "s": 406.28,
+   "e": 410.83
+  },
+  {
+   "t": "F frekvensen f är lika med friktionskraft (newton)",
+   "s": 410.83,
+   "e": 415.63
+  },
+  {
+   "t": "s är lika med sträcka (meter)",
+   "s": 415.63,
+   "e": 418.98
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 418.98,
+   "e": 421.86
+  },
+  {
+   "t": "Nollnivån för lägesenergi kan väljas fritt (oftast längst ner i systemet) — det är bara ändringen i höjd som spelar roll för beräkningarna.",
+   "s": 421.86,
+   "e": 430.66
+  },
+  {
+   "t": "En kraft ger bara upphov till arbete om den har en komposant i rörelseriktningen: rör sig föremålet vågrätt med konstant hastighet medan kraften är lodrät blir F sträckan s är lika med 0 och arbetet 0.",
+   "s": 430.66,
+   "e": 443.12
+  },
+  {
+   "t": "Vid rörelse snett (t.ex. att dra en vagn i en vinkel) används bara kraftkomposanten i rörelseriktningen: F sträckan s är lika med kraften F gånger cosinus alfa .",
+   "s": 443.12,
+   "e": 454.33
+  },
+  {
+   "t": "Energiprincipen E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 gäller när mekanisk energi bevaras (ingen friktion); med friktion läggs friktionsvärmen E hastigheten v till i högerledet.",
+   "s": 454.33,
+   "e": 467.75
+  },
+  {
+   "t": "Massan \"försvinner\" ofta ur energiprincipen (den finns i alla termer) — därför slår t.ex. fritt fallande föremål i marken med samma fart oavsett massa.",
+   "s": 467.75,
+   "e": 477.78
+  },
+  {
+   "t": "Rörelsemängd är en vektor och tecken (+/−) måste hållas reda på; rörelseenergi är alltid positiv eftersom hastigheten kvadreras.",
+   "s": 477.78,
+   "e": 487.46
+  },
+  {
+   "t": "I en F-t-graf ger arean under grafen impulsen, precis som arean i en v-t-graf ger förflyttningen.",
+   "s": 487.46,
+   "e": 494.81
+  },
+  {
+   "t": "Rörelsemängden i ett slutet system bevaras alltid vid en stöt, oavsett om stöten är elastisk eller oelastisk.",
+   "s": 494.81,
+   "e": 502.88
+  },
+  {
+   "t": "Vid en fullkomligt oelastisk stöt (föremålen hakar i varandra) får de en gemensam sluthastighet — då kan rörelsemängdslagen skrivas med parentesen m arean A plus m B slut parentes gånger hastigheten v .",
+   "s": 502.88,
+   "e": 516.27
+  },
+  {
+   "t": "Verkningsgraden kan aldrig bli större än 1 (100 procent) — en apparat kan aldrig avge mer energi än den tar emot.",
+   "s": 516.27,
+   "e": 524.5
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 524.5,
+   "e": 527.53
+  },
+  {
+   "t": "Arbete vid förflyttning i en vinkel — bara kraftkomposanten i rörelseriktningen bidrar till arbetet (ur avsnitt 4.1):",
+   "s": 527.53,
+   "e": 548.53
+  },
+  {
+   "t": "Impuls som area under en F-t-graf (ur avsnitt 4.7):",
+   "s": 527.53,
+   "e": 548.53
+  },
+  {
+   "t": "Rörelsemängdens bevarande vid en knuff — den totala rörelsemängden är oförändrad före och efter (ur avsnitt 4.8):",
+   "s": 527.53,
+   "e": 548.53
+  },
+  {
+   "t": "Inför provet",
+   "s": 527.53,
+   "e": 548.53
+  },
+  {
+   "t": "Kan du...?",
+   "s": 548.53,
+   "e": 550.42
+  },
+  {
+   "t": "Beräkna arbete arbetet W är lika med F sträckan s gånger s , även när kraften verkar snett (med en cos-komposant i rörelseriktningen)?",
+   "s": 550.42,
+   "e": 560.26
+  },
+  {
+   "t": "Beräkna lägesenergi E trycket p är lika med massan m gånger tyngdfaktorn g gånger höjden h och förklara att nollnivån kan väljas fritt?",
+   "s": 560.26,
+   "e": 568.88
+  },
+  {
+   "t": "Beräkna rörelseenergi E k är lika med massan m gånger hastigheten v i kvadrat delat med 2 ?",
+   "s": 568.88,
+   "e": 575.77
+  },
+  {
+   "t": "Använda energiprincipen, både utan och med friktion, för att lösa problem med höjdändring och hastighetsändring?",
+   "s": 575.77,
+   "e": 583.26
+  },
+  {
+   "t": "Beräkna effekt effekten P är lika med delta energin E delat med delta tiden t och räkna om mellan J, Ws och kWh?",
+   "s": 583.26,
+   "e": 592.61
+  },
+  {
+   "t": "Beräkna verkningsgrad eta är lika med E n delat med E tiden t och förklara varför den alltid ligger mellan 0 och 1?",
+   "s": 592.61,
+   "e": 600.43
+  },
+  {
+   "t": "Skilja på rörelsemängd trycket p är lika med massan m gånger hastigheten v och rörelseenergi E k , och förklara varför rörelsemängd är en vektor?",
+   "s": 600.43,
+   "e": 609.9
+  },
+  {
+   "t": "Använda impulslagen strömmen I är lika med kraften F gånger delta tiden t som är lika med delta trycket p , även utifrån arean under en F-t-graf?",
+   "s": 610.06,
+   "e": 619.96
+  },
+  {
+   "t": "Ställa upp rörelsemängdslagen vid stötar, både elastiska och (fullkomligt) oelastiska?",
+   "s": 619.91,
+   "e": 626.78
+  },
+  {
+   "t": "Beräkna friktionsvärme E hastigheten v är lika med F frekvensen f gånger sträckan s och använda den i energiprincipen?",
+   "s": 626.78,
+   "e": 634.97
+  }
+ ]
+}

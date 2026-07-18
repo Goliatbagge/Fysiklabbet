@@ -1,0 +1,608 @@
+{
+ "id": "fy2-3.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "a0e8bd3d17d657b2bc6b0303b40cb8ffe5e9a402",
+ "dur": 777.01,
+ "segments": [
+  {
+   "t": "Sammanfattning — Elektromagnetism",
+   "s": 0.1,
+   "e": 3.45
+  },
+  {
+   "t": "Kapitlet handlar om sambandet mellan magnetism och elektricitet.",
+   "s": 3.4,
+   "e": 8.31
+  },
+  {
+   "t": "Du har sett hur strömmar och magneter skapar magnetfält, hur ett magnetfält i sin tur utövar en kraft på rörliga laddningar och strömförande ledare, och hur en ändring av magnetfältet inducerar en spänning (induktion).",
+   "s": 8.31,
+   "e": 21.48
+  },
+  {
+   "t": "Du ska kunna tillämpa högerhandsreglerna och Lenz lag, och känna till hur principerna används i generatorer, transformatorer, hastighetsväljare, masspektrometrar och magnetfältsmätare.",
+   "s": 21.48,
+   "e": 33.06
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 33.06,
+   "e": 35.39
+  },
+  {
+   "t": "magnetfält och magnetisk flödestäthet B — området runt en magnet eller strömförande ledare där andra magnetiska föremål påverkas av en kraft; flödestätheten anger fältets styrka, SI-enhet tesla (tesla).",
+   "s": 35.39,
+   "e": 49.21
+  },
+  {
+   "t": "poler och fältlinjer — magnetfältlinjer går från nordända till sydända utanför magneten; lika poler repellerar, olika poler attraherar.",
+   "s": 49.21,
+   "e": 58.4
+  },
+  {
+   "t": "högerhandsregeln — finns i tre varianter: tumme är lika med ström, fingrar = fält (rak ledare); fingrar är lika med ström, tumme är lika med fält (spole); tumme/pekfinger/ långfinger är lika med ström/fält/kraft (magnetisk kraft).",
+   "s": 58.4,
+   "e": 76.97
+  },
+  {
+   "t": "Endast högerhanden får användas.",
+   "s": 76.97,
+   "e": 80.2
+  },
+  {
+   "t": "magnetisk kraft — kraften ett magnetfält utövar på en rörlig laddning ( kraften F är lika med q gånger hastigheten v gånger B ) eller en strömförande ledare ( kraften F är lika med B gånger strömmen I gånger hävarmen l ).",
+   "s": 80.2,
+   "e": 94.05
+  },
+  {
+   "t": "magnetiskt flöde Φ — antalet fältlinjer som passerar en area, SI-enhet weber (weber); ska inte förväxlas med flödestätheten B.",
+   "s": 94.05,
+   "e": 112.53
+  },
+  {
+   "t": "induktion och ems — en spänning (elektromotorisk spänning, ems) induceras när en ledare rör sig i ett magnetfält, eller när flödet genom en krets ändras.",
+   "s": 94.05,
+   "e": 112.53
+  },
+  {
+   "t": "induktionslagen — den inducerade spänningen ges av hur fort det magnetiska flödet ändras, e är lika med minus delta Phi delat med delta tiden t .",
+   "s": 112.53,
+   "e": 121.81
+  },
+  {
+   "t": "Lenz lag — en inducerad ström får en sådan riktning att orsaken till dess uppkomst motverkas.",
+   "s": 121.81,
+   "e": 128.21
+  },
+  {
+   "t": "virvelströmmar — cirkulerande inducerade strömmar som enligt Lenz lag motverkar sin egen orsak; bromsar rörelse eller ger oönskad värme.",
+   "s": 128.21,
+   "e": 137.39
+  },
+  {
+   "t": "deklination och inklination — jordmagnetiska fältets avvikelse i sidled från geografisk nord (deklination) respektive lutning mot marknivån (inklination).",
+   "s": 137.39,
+   "e": 148.39
+  },
+  {
+   "t": "toppvärde och effektivvärde — momentanvärden (u, i) varierar med tiden; toppvärden (û, î) är maxvärdena; effektivvärden (U, I) är de värden en voltmeter/amperemeter visar.",
+   "s": 148.39,
+   "e": 163.2
+  },
+  {
+   "t": "transformator — två spolar (primär- och sekundärspole) på en gemensam järnkärna; spänning och ström skalas om efter varvtalen.",
+   "s": 163.2,
+   "e": 172.3
+  },
+  {
+   "t": "hastighetsväljare, masspektrometer och Halleffekt — tillämpningar där en magnetisk kraft balanseras mot en elektrisk kraft eller en centripetalkraft för att filtrera fart, väga laddade partiklar eller mäta ett magnetfält.",
+   "s": 172.3,
+   "e": 185.7
+  },
+  {
+   "t": "Formler",
+   "s": 185.7,
+   "e": 187.53
+  },
+  {
+   "t": "Magnetfält kring rak ledare och i spole",
+   "s": 187.53,
+   "e": 191.09
+  },
+  {
+   "t": "B är lika med k gånger strömmen I delat med avståndet d",
+   "s": 191.09,
+   "e": 196.05
+  },
+  {
+   "t": "B är lika med my noll gånger n gånger strömmen I delat med hävarmen l",
+   "s": 196.05,
+   "e": 201.31
+  },
+  {
+   "t": "där",
+   "s": 201.31,
+   "e": 202.81
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet (tesla)",
+   "s": 202.81,
+   "e": 207.38
+  },
+  {
+   "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla·m/A (rak ledare, gäller för vakuum och luft)",
+   "s": 207.38,
+   "e": 216.05
+  },
+  {
+   "t": "my noll är lika med permeabiliteten i vakuum ( 4 pi gånger 10 upphöjt till minus 7 tesla·m/A)",
+   "s": 216.05,
+   "e": 224.4
+  },
+  {
+   "t": "I är lika med strömmen genom ledaren/spolen (ampere)",
+   "s": 224.4,
+   "e": 229.29
+  },
+  {
+   "t": "d är lika med avståndet från den raka ledaren (meter)",
+   "s": 229.29,
+   "e": 234.28
+  },
+  {
+   "t": "n är lika med varvtal (antal varv i spolen)",
+   "s": 234.28,
+   "e": 238.5
+  },
+  {
+   "t": "l är lika med spolens längd (meter)",
+   "s": 238.5,
+   "e": 242.12
+  },
+  {
+   "t": "Magnetisk kraft",
+   "s": 242.12,
+   "e": 244.65
+  },
+  {
+   "t": "kraften F är lika med q gånger hastigheten v gånger B",
+   "s": 244.65,
+   "e": 258.27
+  },
+  {
+   "t": "kraften F är lika med B gånger strömmen I gånger hävarmen l",
+   "s": 244.65,
+   "e": 258.27
+  },
+  {
+   "t": "kraften F är lika med k gånger I ett gånger I två gånger hävarmen l delat med avståndet d",
+   "s": 244.65,
+   "e": 258.27
+  },
+  {
+   "t": "där",
+   "s": 258.27,
+   "e": 259.76
+  },
+  {
+   "t": "F är lika med magnetisk kraft (newton)",
+   "s": 259.76,
+   "e": 263.84
+  },
+  {
+   "t": "q är lika med laddningens storlek (coulomb)",
+   "s": 263.84,
+   "e": 267.76
+  },
+  {
+   "t": "v är lika med laddningens hastighet (meter per sekund)",
+   "s": 267.76,
+   "e": 272.4
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet vinkelrätt mot rörelsen/ledaren (tesla)",
+   "s": 272.4,
+   "e": 279.18
+  },
+  {
+   "t": "I, I ett , I två är lika med ström genom ledaren/ledarna (ampere)",
+   "s": 279.18,
+   "e": 285.52
+  },
+  {
+   "t": "l är lika med ledarens längd, eller den parallella längden mellan två ledare (meter)",
+   "s": 285.52,
+   "e": 293.33
+  },
+  {
+   "t": "d är lika med avståndet mellan två parallella ledare (meter)",
+   "s": 293.28,
+   "e": 298.71
+  },
+  {
+   "t": "k är lika med 2,0 gånger 10 upphöjt till minus 7 tesla·m/A",
+   "s": 298.71,
+   "e": 306.86
+  },
+  {
+   "t": "Induktion och magnetiskt flöde",
+   "s": 298.71,
+   "e": 306.86
+  },
+  {
+   "t": "e är lika med hävarmen l gånger hastigheten v gånger B",
+   "s": 306.86,
+   "e": 314.36
+  },
+  {
+   "t": "Phi är lika med B gånger A \\perp",
+   "s": 306.86,
+   "e": 314.36
+  },
+  {
+   "t": "e är lika med minus delta Phi delat med delta tiden t",
+   "s": 314.36,
+   "e": 322.63
+  },
+  {
+   "t": "e är lika med minus N gånger delta Phi delat med delta tiden t",
+   "s": 314.36,
+   "e": 322.63
+  },
+  {
+   "t": "där",
+   "s": 322.63,
+   "e": 324.15
+  },
+  {
+   "t": "e är lika med inducerad spänning/ems (volt)",
+   "s": 324.15,
+   "e": 329.28
+  },
+  {
+   "t": "l är lika med ledarens längd (meter)",
+   "s": 329.28,
+   "e": 332.91
+  },
+  {
+   "t": "v är lika med ledarens hastighet (meter per sekund)",
+   "s": 332.91,
+   "e": 337.5
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet (tesla)",
+   "s": 337.5,
+   "e": 342.1
+  },
+  {
+   "t": "Φ är lika med magnetiskt flöde (weber)",
+   "s": 342.1,
+   "e": 345.81
+  },
+  {
+   "t": "A \\perp är lika med area vinkelrät mot flödeslinjerna (m i kvadrat)",
+   "s": 345.81,
+   "e": 352.42
+  },
+  {
+   "t": "ΔΦ är lika med ändring av magnetiskt flöde (weber)",
+   "s": 352.42,
+   "e": 356.68
+  },
+  {
+   "t": "Δt är lika med tiden för ändringen (sekunder)",
+   "s": 356.68,
+   "e": 360.67
+  },
+  {
+   "t": "N är lika med antal varv (spole; för en enda ledare/krets gäller N är lika med 1)",
+   "s": 360.67,
+   "e": 367.92
+  },
+  {
+   "t": "Minustecknet kommer från Lenz lag — den inducerade strömmen motverkar den förändring som orsakar den.",
+   "s": 367.92,
+   "e": 374.52
+  },
+  {
+   "t": "Växelström",
+   "s": 374.52,
+   "e": 376.57
+  },
+  {
+   "t": "u är lika med hat u gånger sinus parentesen omega tiden t slut parentes",
+   "s": 376.57,
+   "e": 382.6
+  },
+  {
+   "t": "i är lika med hat imath gånger sinus parentesen omega tiden t slut parentes",
+   "s": 382.6,
+   "e": 388.93
+  },
+  {
+   "t": "omega är lika med 2 pi delat med periodtiden T som är lika med 2 pi gånger frekvensen f",
+   "s": 388.93,
+   "e": 395.47
+  },
+  {
+   "t": "spänningen U är lika med hat u delat med roten ur 2 strömmen I som är lika med hat imath delat med roten ur 2",
+   "s": 395.47,
+   "e": 403.05
+  },
+  {
+   "t": "där",
+   "s": 403.05,
+   "e": 404.55
+  },
+  {
+   "t": "u, i är lika med momentanspänning respektive momentanström (V, A)",
+   "s": 404.55,
+   "e": 410.93
+  },
+  {
+   "t": "û, î är lika med toppspänning respektive toppström (V, A)",
+   "s": 410.93,
+   "e": 416.58
+  },
+  {
+   "t": "U, I är lika med effektivvärden för spänning respektive ström (V, A)",
+   "s": 416.58,
+   "e": 422.76
+  },
+  {
+   "t": "ω är lika med vinkelhastighet (rad/s)",
+   "s": 422.76,
+   "e": 427.43
+  },
+  {
+   "t": "T är lika med periodtid (sekunder)",
+   "s": 427.43,
+   "e": 431.15
+  },
+  {
+   "t": "f är lika med frekvens (hertz)",
+   "s": 431.15,
+   "e": 434.63
+  },
+  {
+   "t": "Transformator",
+   "s": 434.63,
+   "e": 436.83
+  },
+  {
+   "t": "N ett delat med N två är lika med U ett delat med U två som är lika med I två delat med I ett",
+   "s": 436.83,
+   "e": 443.61
+  },
+  {
+   "t": "där",
+   "s": 443.61,
+   "e": 445.08
+  },
+  {
+   "t": "N ett , N två är lika med antalet varv i primär- respektive sekundärspole",
+   "s": 445.08,
+   "e": 451.08
+  },
+  {
+   "t": "U ett , U två är lika med spänning i primär- respektive sekundärspole (volt)",
+   "s": 451.08,
+   "e": 457.83
+  },
+  {
+   "t": "I ett , I två är lika med ström i primär- respektive sekundärspole (ampere)",
+   "s": 457.83,
+   "e": 464.36
+  },
+  {
+   "t": "Hastighetsväljare, masspektrometer och Halleffekt",
+   "s": 464.36,
+   "e": 468.66
+  },
+  {
+   "t": "hastigheten v är lika med energin E delat med B",
+   "s": 468.66,
+   "e": 476.75
+  },
+  {
+   "t": "massan m är lika med q gånger B gånger r delat med hastigheten v",
+   "s": 468.66,
+   "e": 476.75
+  },
+  {
+   "t": "spänningen U är lika med hastigheten v gånger avståndet d gånger B",
+   "s": 476.75,
+   "e": 482.9
+  },
+  {
+   "t": "där",
+   "s": 482.9,
+   "e": 484.41
+  },
+  {
+   "t": "v är lika med partikelns hastighet (meter per sekund)",
+   "s": 484.41,
+   "e": 489.1
+  },
+  {
+   "t": "energin E är lika med elektriskt fält (V/m)",
+   "s": 489.1,
+   "e": 494.27
+  },
+  {
+   "t": "B är lika med magnetisk flödestäthet (tesla)",
+   "s": 494.27,
+   "e": 498.88
+  },
+  {
+   "t": "m är lika med partikelns massa (kilogram)",
+   "s": 498.88,
+   "e": 502.83
+  },
+  {
+   "t": "q är lika med partikelns laddning (coulomb)",
+   "s": 502.83,
+   "e": 506.78
+  },
+  {
+   "t": "r är lika med krökningsradien i masspektrometerns magnetfält (meter)",
+   "s": 506.78,
+   "e": 512.47
+  },
+  {
+   "t": "U är lika med Hallspänning (volt)",
+   "s": 512.47,
+   "e": 516.03
+  },
+  {
+   "t": "d är lika med bredden på magnetfältsmätarens platta (meter)",
+   "s": 516.03,
+   "e": 521.56
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 521.56,
+   "e": 524.43
+  },
+  {
+   "t": "Notation i figurer: en prick i en cirkel betyder en vektor rakt ut ur planet (mot dig); ett kryss i en cirkel betyder rakt in i planet (från dig).",
+   "s": 524.43,
+   "e": 534.86
+  },
+  {
+   "t": "Endast högerhanden får användas i alla tre varianterna av högerhandsregeln — med vänsterhanden pekar riktningarna fel.",
+   "s": 534.86,
+   "e": 542.35
+  },
+  {
+   "t": "Enligt Newtons tredje lag blir kraften mellan två parallella strömförande ledare attraherande om strömriktningarna är lika och repellerande om de är motsatta.",
+   "s": 542.35,
+   "e": 551.72
+  },
+  {
+   "t": "En ems induceras bara om det finns en komponent av rörelsen som är vinkelrät mot både ledaren och fältet — rör sig ledaren längs sin egen längdriktning induceras ingen spänning.",
+   "s": 551.72,
+   "e": 562.26
+  },
+  {
+   "t": "I ett Φ-t-diagram motsvarar lutningen den inducerade spänningen (momentanvärdet), precis som lutningen i ett s-t-diagram motsvarar hastigheten.",
+   "s": 562.26,
+   "e": 571.98
+  },
+  {
+   "t": "Den inducerade strömmen i en sluten krets fås ur ems och resistansen med Ohms lag, e är lika med resistansen R gånger strömmen I .",
+   "s": 571.98,
+   "e": 581.08
+  },
+  {
+   "t": "Skilj på momentanvärde (gemen bokstav: u, i), toppvärde (cirkumflex: û, î) och effektivvärde (versal: U, I) vid växelström — det är effektivvärdet som en vanlig voltmeter/amperemeter visar.",
+   "s": 581.08,
+   "e": 597.12
+  },
+  {
+   "t": "I en transformator bevaras effekten ( P ett är lika med P två ) om förluster ignoreras: ökar spänningen med en viss faktor minskar strömmen med samma faktor.",
+   "s": 597.12,
+   "e": 607.1
+  },
+  {
+   "t": "Den magnetiska kraften kraften F är lika med q gånger hastigheten v gånger B (eller kraften F är lika med B gånger strömmen I gånger hävarmen l ) är alltid vinkelrät mot rörelsen/strömmen — den kan därför fungera som centripetalkraft i en cirkelbana (masspektrometer), men uträttar aldrig arbete.",
+   "s": 607.1,
+   "e": 627.63
+  },
+  {
+   "t": "I en hastighetsväljare balanserar den elektriska och den magnetiska kraften varandra ( F e är lika med F massan m ) — bara partiklar med farten hastigheten v är lika med energin E delat med B passerar rakt igenom.",
+   "s": 627.59,
+   "e": 640.76
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 640.76,
+   "e": 643.81
+  },
+  {
+   "t": "Högerhandens tumregel för fältet kring en rak strömförande ledare: tummen pekar i strömmens riktning, fingrarna ger fältets riktning.",
+   "s": 643.81,
+   "e": 652.41
+  },
+  {
+   "t": "Tre-finger-regeln för magnetisk kraft: tummen är strömmen I, pekfingret fältet B, långfingret kraften F.",
+   "s": 652.41,
+   "e": 664.34
+  },
+  {
+   "t": "Tummen är strömmen, pekfingret magnetfältet och långfingret kraften.",
+   "s": 652.41,
+   "e": 664.34
+  },
+  {
+   "t": "Transformatorns princip: en varierande ström i primärspolen ( N ett varv) ger ett varierande flöde Phi parentesen tiden t slut parentes genom järnkärnan, som inducerar en ny spänning i sekundärspolen ( N två varv).",
+   "s": 664.34,
+   "e": 678.41
+  },
+  {
+   "t": "Inför provet",
+   "s": 678.41,
+   "e": 680.56
+  },
+  {
+   "t": "Kan du förklara varför en strömförande ledare eller spole skapar ett magnetfält, och bestämma fältets riktning med rätt tumregel?",
+   "s": 680.56,
+   "e": 688.6
+  },
+  {
+   "t": "Kan du räkna ut den magnetiska flödestätheten kring en rak ledare och i en spole (solenoid)?",
+   "s": 688.6,
+   "e": 695.51
+  },
+  {
+   "t": "Kan du använda tre-finger-regeln för att bestämma riktningen på den magnetiska kraften på en laddad partikel eller en strömförande ledare?",
+   "s": 695.51,
+   "e": 703.12
+  },
+  {
+   "t": "Kan du räkna ut kraften på en laddad partikel ( kraften F är lika med q gånger hastigheten v gånger B ) och på en strömförande ledare ( kraften F är lika med B gånger strömmen I gånger hävarmen l ), samt kraften mellan två parallella ledare, och avgöra om den är attraherande eller repellerande?",
+   "s": 703.12,
+   "e": 720.26
+  },
+  {
+   "t": "Kan du förklara vad deklination och inklination är hos det jordmagnetiska fältet?",
+   "s": 720.26,
+   "e": 725.93
+  },
+  {
+   "t": "Kan du räkna ut inducerad spänning (ems) för en ledare som rör sig i ett magnetfält, och avgöra när ingen ems induceras?",
+   "s": 725.93,
+   "e": 734.68
+  },
+  {
+   "t": "Kan du använda Lenz lag för att bestämma riktningen på en inducerad ström eller kraft?",
+   "s": 734.68,
+   "e": 740.18
+  },
+  {
+   "t": "Kan du räkna med magnetiskt flöde Φ och induktionslagen, även utifrån ett Φ-t-diagram?",
+   "s": 740.18,
+   "e": 746.36
+  },
+  {
+   "t": "Kan du skilja på momentanvärde, toppvärde och effektivvärde vid växelström, och räkna om mellan dem?",
+   "s": 746.36,
+   "e": 753.37
+  },
+  {
+   "t": "Kan du räkna med transformatorns spännings- och strömomsättning ( N ett delat med N två är lika med U ett delat med U två som är lika med I två delat med I ett )?",
+   "s": 753.37,
+   "e": 763.37
+  },
+  {
+   "t": "Kan du förklara hur en hastighetsväljare och en masspektrometer fungerar, och räkna ut hastighet respektive massa?",
+   "s": 763.37,
+   "e": 770.82
+  },
+  {
+   "t": "Kan du förklara vad virvelströmmar är, och varför de bromsar rörelse eller ger värmeutveckling?",
+   "s": 770.82,
+   "e": 777.01
+  }
+ ]
+}

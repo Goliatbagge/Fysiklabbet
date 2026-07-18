@@ -1,0 +1,468 @@
+{
+ "id": "fy1-6.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "8ae79467d0c6136b7994606cdb88846e5a72b90a",
+ "dur": 511.43,
+ "segments": [
+  {
+   "t": "Sammanfattning — Värmelära",
+   "s": 0.1,
+   "e": 3.08
+  },
+  {
+   "t": "Kapitlet handlar om skillnaden mellan värme och temperatur, hur mycket energi som krävs för att värma, kyla, smälta och förånga ämnen, hur kroppen hanterar värme och kyla, samt termodynamikens fyra huvudsatser.",
+   "s": 3.02,
+   "e": 16.25
+  },
+  {
+   "t": "Du ska kunna räkna på uppvärmning, avsvalning och fasövergångar, sätta upp energibalanser och förklara resultaten med rätt begrepp.",
+   "s": 16.25,
+   "e": 24.84
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 24.84,
+   "e": 27.15
+  },
+  {
+   "t": "Inre energi — summan av atomernas potentiella energi (i kemiska bindningar) och rörelseenergi i ett material.",
+   "s": 27.15,
+   "e": 35.01
+  },
+  {
+   "t": "Värme — energi som självmant strömmar från ett varmare system till ett kallare.",
+   "s": 35.01,
+   "e": 40.36
+  },
+  {
+   "t": "Mäts i joule (joule).",
+   "s": 40.36,
+   "e": 43.29
+  },
+  {
+   "t": "Det finns fysikaliskt inget som heter kyla.",
+   "s": 43.29,
+   "e": 46.98
+  },
+  {
+   "t": "Temperatur — mått på atomernas genomsnittliga rörelseenergi.",
+   "s": 46.98,
+   "e": 51.77
+  },
+  {
+   "t": "SI-enhet kelvin (kelvin).",
+   "s": 51.77,
+   "e": 55.04
+  },
+  {
+   "t": "Absoluta nollpunkten — den lägsta möjliga temperaturen, 0 kelvin är lika med minus 273 grader coulomb , där all termisk rörelse upphör.",
+   "s": 55.04,
+   "e": 64.84
+  },
+  {
+   "t": "Ledning, strålning, strömning — de tre sätten värme transporteras på: genom kontakt mellan material, genom strålning (kräver inget medium) och genom \"virvlande\" gas eller vätska (konvektion).",
+   "s": 64.84,
+   "e": 78.06
+  },
+  {
+   "t": "Specifik värmekapacitet ( c ) — energin som krävs för att höja temperaturen 1 kelvin hos 1 kilogram av ett ämne.",
+   "s": 78.06,
+   "e": 86.53
+  },
+  {
+   "t": "Enhet J/(kg \\cdot K) , olika för olika ämnen och tillstånd.",
+   "s": 86.53,
+   "e": 94.17
+  },
+  {
+   "t": "Specifik smältentalpi ( l sträckan s ) — energin som krävs för att smälta 1 kilogram av ett ämne.",
+   "s": 94.17,
+   "e": 101.64
+  },
+  {
+   "t": "Enhet joule per kilogram .",
+   "s": 101.64,
+   "e": 104.36
+  },
+  {
+   "t": "Specifik ångbildningsentalpi ( l å ) — energin som krävs för att förånga 1 kilogram av ett ämne.",
+   "s": 104.36,
+   "e": 111.72
+  },
+  {
+   "t": "Enhet joule per kilogram .",
+   "s": 111.72,
+   "e": 114.46
+  },
+  {
+   "t": "Faser (aggregationstillstånd) — fast, flytande och gas, samt de sex övergångarna mellan dem: smältning, stelning, förångning, kondensering, sublimering och deposition.",
+   "s": 114.46,
+   "e": 127.89
+  },
+  {
+   "t": "Fasövergång — sker vid konstant temperatur.",
+   "s": 127.89,
+   "e": 131.95
+  },
+  {
+   "t": "Tillförd eller avgiven energi går åt att bryta eller bilda bindningar, inte till att ändra temperaturen.",
+   "s": 131.95,
+   "e": 138.91
+  },
+  {
+   "t": "Svettning och avdunstning — kroppens sätt att kyla sig: avdunstning kräver energi som tas från huden.",
+   "s": 138.91,
+   "e": 146.03
+  },
+  {
+   "t": "Termodynamikens fyra huvudsatser — grundprinciper om jämvikt ekvation 0, energins bevarande ekvation 1, värmets riktning ekvation 2 och absoluta nollpunkten ekvation 3.",
+   "s": 146.03,
+   "e": 157.69
+  },
+  {
+   "t": "Formler",
+   "s": 157.69,
+   "e": 159.51
+  },
+  {
+   "t": "Temperaturskalan",
+   "s": 159.51,
+   "e": 161.9
+  },
+  {
+   "t": "Kelvinskalan",
+   "s": 161.9,
+   "e": 164.16
+  },
+  {
+   "t": "T K är lika med T C plus 273",
+   "s": 164.16,
+   "e": 168.55
+  },
+  {
+   "t": "där",
+   "s": 168.55,
+   "e": 170.01
+  },
+  {
+   "t": "T K är lika med temperatur (kelvin)",
+   "s": 170.01,
+   "e": 173.81
+  },
+  {
+   "t": "T C är lika med temperatur (grader Celsius)",
+   "s": 173.81,
+   "e": 178.1
+  },
+  {
+   "t": "Uppvärmning, avsvalning och energibalans",
+   "s": 178.1,
+   "e": 182.26
+  },
+  {
+   "t": "Uppvärmning och avsvalning",
+   "s": 182.26,
+   "e": 185.18
+  },
+  {
+   "t": "energin E är lika med c gånger massan m gånger delta periodtiden T",
+   "s": 185.18,
+   "e": 196.66
+  },
+  {
+   "t": "(skrivs laddningen Q är lika med c gånger massan m gånger delta periodtiden T i formelhäftet)",
+   "s": 185.18,
+   "e": 196.66
+  },
+  {
+   "t": "där",
+   "s": 196.66,
+   "e": 198.18
+  },
+  {
+   "t": "E, Q är lika med upptagen/avgiven energi (joule)",
+   "s": 198.18,
+   "e": 203.71
+  },
+  {
+   "t": "c är lika med specifik värmekapacitet (J/(kg gånger K)) — olika för olika ämnen och tillstånd",
+   "s": 203.71,
+   "e": 211.93
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 211.93,
+   "e": 215.28
+  },
+  {
+   "t": "delta periodtiden T är lika med temperaturändring (K eller °C)",
+   "s": 215.28,
+   "e": 221.19
+  },
+  {
+   "t": "Avgiven och upptagen energi (utan energiförluster)",
+   "s": 221.19,
+   "e": 226.21
+  },
+  {
+   "t": "E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p",
+   "s": 226.21,
+   "e": 232.81
+  },
+  {
+   "t": "där",
+   "s": 232.81,
+   "e": 234.28
+  },
+  {
+   "t": "E accelerationen a hastigheten v tyngdfaktorn g är lika med avgiven energi",
+   "s": 234.28,
+   "e": 240.34
+  },
+  {
+   "t": "E u trycket p p är lika med upptagen energi",
+   "s": 240.34,
+   "e": 244.62
+  },
+  {
+   "t": "Energi vid fasövergångar",
+   "s": 244.62,
+   "e": 247.65
+  },
+  {
+   "t": "Energi för smältning och stelning",
+   "s": 247.65,
+   "e": 250.9
+  },
+  {
+   "t": "energin E är lika med l sträckan s gånger massan m",
+   "s": 250.9,
+   "e": 255.65
+  },
+  {
+   "t": "där",
+   "s": 255.65,
+   "e": 257.14
+  },
+  {
+   "t": "E är lika med smältenergi (joule)",
+   "s": 257.14,
+   "e": 260.73
+  },
+  {
+   "t": "l sträckan s är lika med specifik smältentalpi (J/kg) — slås upp i tabell",
+   "s": 260.73,
+   "e": 267.5
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 267.5,
+   "e": 270.85
+  },
+  {
+   "t": "Energi för förångning/kondensation",
+   "s": 270.85,
+   "e": 274.91
+  },
+  {
+   "t": "energin E är lika med l å gånger massan m",
+   "s": 274.91,
+   "e": 279.06
+  },
+  {
+   "t": "där",
+   "s": 279.06,
+   "e": 280.52
+  },
+  {
+   "t": "E är lika med förångningsenergi (joule)",
+   "s": 280.52,
+   "e": 284.41
+  },
+  {
+   "t": "l å är lika med specifik ångbildningsentalpi (J/kg) — slås upp i tabell",
+   "s": 284.41,
+   "e": 291.09
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 291.09,
+   "e": 294.45
+  },
+  {
+   "t": "Termodynamikens huvudsatser",
+   "s": 294.45,
+   "e": 297.74
+  },
+  {
+   "t": "Termodynamikens fyra huvudsatser",
+   "s": 297.74,
+   "e": 301.29
+  },
+  {
+   "t": "0.",
+   "s": 301.29,
+   "e": 307.39
+  },
+  {
+   "t": "Två system i kontakt med varandra kommer att utbyta energi tills de är i jämvikt.",
+   "s": 301.29,
+   "e": 307.39
+  },
+  {
+   "t": "1.",
+   "s": 307.39,
+   "e": 312.25
+  },
+  {
+   "t": "Energi kan inte skapas eller förstöras, bara omvandlas.",
+   "s": 307.39,
+   "e": 312.25
+  },
+  {
+   "t": "2.",
+   "s": 312.25,
+   "e": 315.86
+  },
+  {
+   "t": "Värme flödar från varmt till kallt.",
+   "s": 312.25,
+   "e": 315.86
+  },
+  {
+   "t": "Värme flödar aldrig från kallt till varmt av sig själv.",
+   "s": 315.86,
+   "e": 320.04
+  },
+  {
+   "t": "3.",
+   "s": 320.04,
+   "e": 324.3
+  },
+  {
+   "t": "Alla processer upphör vid absoluta nollpunkten.",
+   "s": 320.04,
+   "e": 324.3
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 324.3,
+   "e": 327.14
+  },
+  {
+   "t": "Vid blandning eller kontakt mellan ämnen utan energiförluster gäller energibalansen E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p — ställ upp vad som avger respektive upptar energi och lös ut den efterfrågade storheten (t.ex. sluttemperatur eller mängd smält is).",
+   "s": 327.14,
+   "e": 347.14
+  },
+  {
+   "t": "Vid en fasövergång är temperaturen konstant — kurvan i ett temperatur-tid-diagram blir horisontell vid smält- och kokpunkten.",
+   "s": 347.09,
+   "e": 355.21
+  },
+  {
+   "t": "Uppgifter som blandar uppvärmning och fasövergång (t.ex. is som smälter i varmvatten) löses genom att dela upp energin i delsteg (uppvärmning + smältning/förångning) och sätta upp energibalans mellan alla delsteg.",
+   "s": 355.21,
+   "e": 369.5
+  },
+  {
+   "t": "Specifik värmekapacitet, smältentalpi och ångbildningsentalpi är ämnesberoende och slås upp i tabell.",
+   "s": 369.5,
+   "e": 377.03
+  },
+  {
+   "t": "De skiljer sig även mellan olika tillstånd av samma ämne (t.ex. is och flytande vatten).",
+   "s": 377.03,
+   "e": 383.66
+  },
+  {
+   "t": "Ett material som känns kallare än ett annat behöver inte ha lägre temperatur — det beror ofta på att materialet leder värme bättre (t.ex. aluminium jämfört med plast).",
+   "s": 383.66,
+   "e": 393.95
+  },
+  {
+   "t": "Kroppen reglerar sin temperatur genom svettning (avdunstning kyler) och genom att skaka (kemisk energi blir rörelseenergi och sedan värme).",
+   "s": 393.95,
+   "e": 403.68
+  },
+  {
+   "t": "Vind känns kallare eftersom uppvärmd luft nära huden byts ut mot kallare luft snabbare — samma princip gör att man kyls av att blåsa hårt på huden, medan man värms av att blåsa löst.",
+   "s": 403.68,
+   "e": 414.56
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 414.56,
+   "e": 417.61
+  },
+  {
+   "t": "Kapitlets sex fasövergångar mellan de tre faserna:",
+   "s": 417.61,
+   "e": 424.94
+  },
+  {
+   "t": "De tre faserna och de sex fasövergångarna mellan dem.",
+   "s": 417.61,
+   "e": 424.94
+  },
+  {
+   "t": "Temperatur-tid-diagrammet visar varför temperaturen är konstant vid smältning och förångning:",
+   "s": 424.94,
+   "e": 434.94
+  },
+  {
+   "t": "När vi tillför energi till minusgradig is stiger temperaturen först. Vid 0 grader Celsius blir kurvan horisontell under smältningen, och vid 100 grader Celsius horisontell igen under förångningen — temperaturen ändras alltså inte vid en fasövergång.",
+   "s": 424.94,
+   "e": 446.01
+  },
+  {
+   "t": "Inför provet",
+   "s": 446.01,
+   "e": 448.19
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan värme, temperatur och inre energi?",
+   "s": 448.19,
+   "e": 453.33
+  },
+  {
+   "t": "Kan du räkna om mellan Celsius och kelvin?",
+   "s": 453.33,
+   "e": 457.11
+  },
+  {
+   "t": "Kan du namnge och förklara de tre sätten värme transporteras på (ledning, strålning, strömning)?",
+   "s": 457.11,
+   "e": 464.74
+  },
+  {
+   "t": "Kan du beräkna energin som går åt vid uppvärmning eller avsvalning med energin E är lika med c gånger massan m gånger delta periodtiden T ?",
+   "s": 464.74,
+   "e": 473.91
+  },
+  {
+   "t": "Kan du sätta upp en energibalans ( E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p ) för att lösa blandnings- och smältproblem?",
+   "s": 473.91,
+   "e": 484.33
+  },
+  {
+   "t": "Kan du namnge alla sex fasövergångar och förklara varför temperaturen inte ändras under en fasövergång?",
+   "s": 484.33,
+   "e": 491.25
+  },
+  {
+   "t": "Kan du beräkna energin vid smältning/stelning och förångning/kondensation med l sträckan s respektive l å ?",
+   "s": 491.25,
+   "e": 499.69
+  },
+  {
+   "t": "Kan du förklara hur kroppen värmer och kyler sig (svettning, skakning, isolerande kläder)?",
+   "s": 499.69,
+   "e": 506.61
+  },
+  {
+   "t": "Kan du redogöra för termodynamikens fyra huvudsatser?",
+   "s": 506.61,
+   "e": 511.43
+  }
+ ]
+}

@@ -1,0 +1,638 @@
+{
+ "id": "fy2-4.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "abf9808dcf41a5123203089ceb0074c255d7a92f",
+ "dur": 784.08,
+ "segments": [
+  {
+   "t": "Sammanfattning — Ljus som våg och partikel",
+   "s": 0.1,
+   "e": 4.04
+  },
+  {
+   "t": "Det här kapitlet handlade om ljus som både elektromagnetisk våg och partikel.",
+   "s": 3.99,
+   "e": 9.74
+  },
+  {
+   "t": "Du har sett hur ljus sprids, bryts och interfererar som en våg (diffraktion, gitterformeln, brytningslagen) och hur ljus samtidigt uppträder som partiklar — fotoner — i den fotoelektriska effekten och Comptonspridning.",
+   "s": 9.74,
+   "e": 23.54
+  },
+  {
+   "t": "Kapitlet knyter ihop detta med svartkroppsstrålning, atomens energinivåer, spektrallinjer och de Broglies hypotes om att all materia har vågegenskaper.",
+   "s": 23.54,
+   "e": 33.49
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 33.49,
+   "e": 35.81
+  },
+  {
+   "t": "Elektromagnetisk våg — ljus som ett oscillerande elektriskt och magnetiskt fält, vinkelräta mot varandra och mot utbredningsriktningen; utbreder sig med ljusets hastighet c.",
+   "s": 35.81,
+   "e": 54.99
+  },
+  {
+   "t": "Ljusintensitet — energi per tidsenhet och area (W/m i kvadrat); avtar med kvadraten på avståndet från en punktkälla.",
+   "s": 35.81,
+   "e": 54.99
+  },
+  {
+   "t": "Koherent och monokromatiskt ljus — ljus av samma våglängd (och, för koherent ljus, i fas) — en förutsättning för tydlig interferens.",
+   "s": 54.99,
+   "e": 64.85
+  },
+  {
+   "t": "Diffraktion — vågors böjning runt hinder eller genom en smal öppning.",
+   "s": 64.85,
+   "e": 69.8
+  },
+  {
+   "t": "Interferens och gitterformeln — hur vågor från flera spalter förstärker eller släcker ut varandra i bestämda riktningar.",
+   "s": 69.8,
+   "e": 77.0
+  },
+  {
+   "t": "Svartkroppsstrålning och emittans — ett idealiskt föremåls temperaturberoende utstrålning, beskriven av Wiens förskjutningslag och Stefan–Boltzmanns lag.",
+   "s": 77.0,
+   "e": 86.89
+  },
+  {
+   "t": "Brytningsindex och brytningslagen — hur mycket ljus ändrar riktning vid övergången mellan två medier med olika optisk täthet.",
+   "s": 86.89,
+   "e": 95.3
+  },
+  {
+   "t": "Foton — en kvant (ett \"energipaket\") av elektromagnetisk strålning med energin energin E är lika med höjden h gånger frekvensen f och rörelsemängden trycket p är lika med höjden h delat med våglängden lambda .",
+   "s": 95.3,
+   "e": 108.64
+  },
+  {
+   "t": "Fotoelektrisk effekt — när en foton med tillräcklig energi slår loss en elektron från en metallyta; bevisar ljusets partikelnatur.",
+   "s": 108.64,
+   "e": 117.5
+  },
+  {
+   "t": "de Broglie-våglängd — den våglängd som alla rörliga partiklar (inte bara fotoner) har, våglängden lambda är lika med höjden h delat med parentesen massan m gånger hastigheten v slut parentes .",
+   "s": 117.5,
+   "e": 129.7
+  },
+  {
+   "t": "Emissions- och absorptionsspektrum — diskreta våglängder som är karaktäristiska (ett \"fingeravtryck\") för varje grundämne.",
+   "s": 129.7,
+   "e": 137.62
+  },
+  {
+   "t": "Energinivå och kvantsprång — elektroner i en atom kan bara anta bestämda energier; en foton sänds ut eller absorberas när elektronen byter energinivå.",
+   "s": 137.62,
+   "e": 147.74
+  },
+  {
+   "t": "Formler",
+   "s": 147.74,
+   "e": 149.56
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 149.56,
+   "e": 151.89
+  },
+  {
+   "t": "Ljus som elektromagnetisk våg",
+   "s": 151.89,
+   "e": 155.32
+  },
+  {
+   "t": "frekvensen f är lika med c delat med våglängden lambda",
+   "s": 155.32,
+   "e": 159.89
+  },
+  {
+   "t": "där",
+   "s": 159.89,
+   "e": 161.36
+  },
+  {
+   "t": "f är lika med ljusets frekvens (hertz)",
+   "s": 161.36,
+   "e": 165.15
+  },
+  {
+   "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund i vakuum)",
+   "s": 165.15,
+   "e": 174.4
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 174.4,
+   "e": 178.15
+  },
+  {
+   "t": "strömmen I är lika med effekten P delat med arean A som är lika med P delat med 4 pi gånger r i kvadrat",
+   "s": 178.15,
+   "e": 185.85
+  },
+  {
+   "t": "där",
+   "s": 185.85,
+   "e": 187.36
+  },
+  {
+   "t": "I är lika med ljusintensitet (W/m i kvadrat)",
+   "s": 187.36,
+   "e": 192.69
+  },
+  {
+   "t": "P är lika med effekt (watt)",
+   "s": 192.69,
+   "e": 196.0
+  },
+  {
+   "t": "A är lika med area som träffas (m i kvadrat)",
+   "s": 196.0,
+   "e": 200.4
+  },
+  {
+   "t": "r är lika med avstånd till punktkällan (meter)",
+   "s": 200.4,
+   "e": 204.55
+  },
+  {
+   "t": "Diffraktion och interferens",
+   "s": 204.55,
+   "e": 207.55
+  },
+  {
+   "t": "n gånger våglängden lambda är lika med avståndet d gånger sinus alfa n",
+   "s": 207.55,
+   "e": 213.81
+  },
+  {
+   "t": "där",
+   "s": 213.81,
+   "e": 215.32
+  },
+  {
+   "t": "n är lika med maximilinjens ordning",
+   "s": 215.32,
+   "e": 218.74
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 218.74,
+   "e": 222.46
+  },
+  {
+   "t": "d är lika med spaltavstånd (gitterkonstant) (meter)",
+   "s": 222.46,
+   "e": 227.88
+  },
+  {
+   "t": "alfa n är lika med avböjningsvinkel till n:te ordningens maximum (grader)",
+   "s": 227.88,
+   "e": 233.71
+  },
+  {
+   "t": "Svartkroppsstrålning",
+   "s": 233.71,
+   "e": 236.12
+  },
+  {
+   "t": "kraftmomentet M är lika med effekten P delat med arean A",
+   "s": 236.12,
+   "e": 241.0
+  },
+  {
+   "t": "där",
+   "s": 241.0,
+   "e": 242.47
+  },
+  {
+   "t": "M är lika med emittans (W/m i kvadrat)",
+   "s": 242.47,
+   "e": 247.36
+  },
+  {
+   "t": "P är lika med utstrålad effekt (watt)",
+   "s": 247.36,
+   "e": 251.31
+  },
+  {
+   "t": "A är lika med area (m i kvadrat)",
+   "s": 251.31,
+   "e": 255.0
+  },
+  {
+   "t": "våglängden lambda massan m accelerationen a x gånger periodtiden T är lika med 2,8978 gånger 10 upphöjt till minus 3 meter\\cdot K",
+   "s": 255.0,
+   "e": 266.23
+  },
+  {
+   "t": "där",
+   "s": 266.23,
+   "e": 267.71
+  },
+  {
+   "t": "våglängden lambda massan m accelerationen a x är lika med våglängd med störst emittans/utstrålning (meter)",
+   "s": 267.71,
+   "e": 275.99
+  },
+  {
+   "t": "T är lika med temperatur (kelvin)",
+   "s": 275.99,
+   "e": 279.57
+  },
+  {
+   "t": "kraftmomentet M är lika med sigma gånger periodtiden T upphöjt till 4",
+   "s": 279.57,
+   "e": 285.29
+  },
+  {
+   "t": "där",
+   "s": 285.29,
+   "e": 286.76
+  },
+  {
+   "t": "M är lika med emittans (W/m i kvadrat)",
+   "s": 286.76,
+   "e": 291.69
+  },
+  {
+   "t": "σ är lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m i kvadrat·K upphöjt till 4) (Stefan–Boltzmanns konstant)",
+   "s": 291.69,
+   "e": 302.14
+  },
+  {
+   "t": "T är lika med temperatur (kelvin)",
+   "s": 302.14,
+   "e": 305.76
+  },
+  {
+   "t": "Ljusets brytning",
+   "s": 305.76,
+   "e": 308.25
+  },
+  {
+   "t": "n är lika med c delat med hastigheten v",
+   "s": 308.25,
+   "e": 313.72
+  },
+  {
+   "t": "där",
+   "s": 313.67,
+   "e": 315.14
+  },
+  {
+   "t": "n är lika med brytningsindex för ämne",
+   "s": 315.14,
+   "e": 318.58
+  },
+  {
+   "t": "c är lika med ljushastighet i vakuum ( 2,998 gånger 10 upphöjt till 8 meter per sekund)",
+   "s": 318.58,
+   "e": 326.62
+  },
+  {
+   "t": "v är lika med ljushastighet i ämne (meter per sekund)",
+   "s": 326.62,
+   "e": 331.46
+  },
+  {
+   "t": "n ett gånger sinus i är lika med n två gånger sinus b",
+   "s": 331.46,
+   "e": 336.23
+  },
+  {
+   "t": "där",
+   "s": 336.23,
+   "e": 337.72
+  },
+  {
+   "t": "n ett är lika med brytningsindex för medium 1",
+   "s": 337.72,
+   "e": 341.84
+  },
+  {
+   "t": "i är lika med infallsvinkel i medium 1",
+   "s": 341.84,
+   "e": 345.49
+  },
+  {
+   "t": "n två är lika med brytningsindex för medium 2",
+   "s": 345.49,
+   "e": 349.57
+  },
+  {
+   "t": "b är lika med brytningsvinkel i medium 2",
+   "s": 349.57,
+   "e": 353.38
+  },
+  {
+   "t": "i är lika med r",
+   "s": 353.38,
+   "e": 355.76
+  },
+  {
+   "t": "där i är lika med infallsvinkel och r är lika med reflektionsvinkel (reflektionslagen).",
+   "s": 355.76,
+   "e": 362.38
+  },
+  {
+   "t": "Fotoner och fotoelektrisk effekt",
+   "s": 362.38,
+   "e": 365.88
+  },
+  {
+   "t": "energin E är lika med höjden h gånger c delat med våglängden lambda som är lika med h gånger frekvensen f",
+   "s": 365.88,
+   "e": 373.28
+  },
+  {
+   "t": "där",
+   "s": 373.28,
+   "e": 374.79
+  },
+  {
+   "t": "E är lika med ljusets/fotonens energi (joule)",
+   "s": 374.79,
+   "e": 379.72
+  },
+  {
+   "t": "h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js (Plancks konstant)",
+   "s": 379.72,
+   "e": 387.86
+  },
+  {
+   "t": "c är lika med ljusets hastighet (meter per sekund)",
+   "s": 387.86,
+   "e": 392.42
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 392.42,
+   "e": 396.16
+  },
+  {
+   "t": "f är lika med ljusets frekvens (hertz)",
+   "s": 396.16,
+   "e": 399.99
+  },
+  {
+   "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule",
+   "s": 399.99,
+   "e": 406.74
+  },
+  {
+   "t": "trycket p är lika med höjden h delat med våglängden lambda som är lika med h gånger frekvensen f delat med c",
+   "s": 406.74,
+   "e": 414.27
+  },
+  {
+   "t": "där p är lika med fotonens rörelsemängd (kg·m/s).",
+   "s": 414.27,
+   "e": 420.16
+  },
+  {
+   "t": "trycket p är lika med massan m gånger hastigheten v",
+   "s": 420.16,
+   "e": 424.51
+  },
+  {
+   "t": "där p är lika med rörelsemängd (kg·m/s), m är lika med massa (kilogram) och v är lika med hastighet (meter per sekund) — klassisk rörelsemängd, gäller föremål med massa.",
+   "s": 424.51,
+   "e": 437.62
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med W u plus E k",
+   "s": 437.62,
+   "e": 443.03
+  },
+  {
+   "t": "där",
+   "s": 443.03,
+   "e": 444.51
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med fotonens energi (joule)",
+   "s": 444.51,
+   "e": 449.88
+  },
+  {
+   "t": "W u är lika med utträdesarbete/utträdesenergi (joule)",
+   "s": 449.88,
+   "e": 456.19
+  },
+  {
+   "t": "E k är lika med elektronens rörelseenergi efter frigörelse (joule)",
+   "s": 456.19,
+   "e": 461.93
+  },
+  {
+   "t": "Våg-partikeldualitet",
+   "s": 461.93,
+   "e": 464.76
+  },
+  {
+   "t": "våglängden lambda är lika med höjden h delat med massan m gånger hastigheten v",
+   "s": 464.76,
+   "e": 470.63
+  },
+  {
+   "t": "där λ är lika med de Broglie-våglängd hos en partikel med massan m och hastigheten v (meter).",
+   "s": 470.63,
+   "e": 477.29
+  },
+  {
+   "t": "Bohrs atommodell",
+   "s": 477.29,
+   "e": 479.69
+  },
+  {
+   "t": "höjden h gånger frekvensen f är lika med E n minus E massan m som är lika med h gånger c delat med våglängden lambda",
+   "s": 479.69,
+   "e": 487.94
+  },
+  {
+   "t": "där E n är lika med energin på den högre energinivån och E massan m är lika med energin på den lägre energinivån (båda i J).",
+   "s": 487.94,
+   "e": 496.77
+  },
+  {
+   "t": "E n är ungefär lika med minus 13,6 delat med n i kvadrat elektronvolt",
+   "s": 496.77,
+   "e": 503.34
+  },
+  {
+   "t": "där E n är lika med energi vid energinivå n (n är lika med 1 motsvarar grundtillståndet, n är lika med 2 första exciterade tillståndet osv.) — gäller väteatomen.",
+   "s": 503.34,
+   "e": 516.42
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 516.42,
+   "e": 519.24
+  },
+  {
+   "t": "Det elektromagnetiska spektrumet ordnas efter våglängd: radiovågor, mikrovågor, infrarött, synligt ljus (400–700 nanometer), ultraviolett, röntgenstrålning och gammastrålning — ju kortare våglängd desto högre frekvens och energi.",
+   "s": 519.24,
+   "e": 535.81
+  },
+  {
+   "t": "Ljus uppträder både som våg (diffraktion, interferens, brytning) och som partikel (fotoelektrisk effekt, Comptonspridning) — våg-partikeldualitet gäller all materia, men de Broglie-våglängden är bara märkbar för mikroskopiska partiklar som elektroner, inte för vardagliga föremål.",
+   "s": 535.81,
+   "e": 554.36
+  },
+  {
+   "t": "Vid brytning mot ett optiskt tätare medium bryts strålen mot normalen; mot ett optiskt tunnare medium bryts den från normalen.",
+   "s": 554.36,
+   "e": 562.33
+  },
+  {
+   "t": "Reflektionslagen ( i är lika med r ) gäller alltid samtidigt med brytningen.",
+   "s": 562.33,
+   "e": 568.06
+  },
+  {
+   "t": "Det är fotonens frekvens (energi), inte ljusets intensitet, som avgör om fotoelektrisk effekt sker — ett starkt men lågenergetiskt ljus (t.ex. rött) slår aldrig ut elektroner om höjden h gånger frekvensen f är mindre än utträdesarbetet.",
+   "s": 568.06,
+   "e": 568.06
+  },
+  {
+   "t": "Wiens förskjutningslag: ju hetare kropp, desto kortare toppvåglängd.",
+   "s": 568.06,
+   "e": 568.06
+  },
+  {
+   "t": "Stefan–Boltzmanns lag: emittansen växer snabbt (med periodtiden T upphöjt till 4 ) när temperaturen ökar.",
+   "s": 568.06,
+   "e": 568.06
+  },
+  {
+   "t": "Emissions- och absorptionsspektrum för samma grundämne har spektrallinjer vid exakt samma våglängder — atomer kan bara absorbera samma våglängder som de själva sänder ut.",
+   "s": 568.06,
+   "e": 568.06
+  },
+  {
+   "t": "I ett energinivådiagram är jonisationsgränsen satt till 0 elektronvolt, och alla bundna tillstånd (elektronen kvar i atomen) har negativ energi.",
+   "s": 568.06,
+   "e": 568.06
+  },
+  {
+   "t": "eV är en bekväm energienhet på atomär skala — omvandla alltid till joule ( 1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule ) innan du räknar ut hastigheter eller rörelsemängd.",
+   "s": 568.23,
+   "e": 578.17
+  },
+  {
+   "t": "Rörelsemängden bevaras vid fotonabsorption och Comptonspridning, precis som vid en vanlig kollision — men fotonen saknar massa, så dess rörelsemängd räknas med trycket p är lika med höjden h delat med våglängden lambda , inte trycket p är lika med massan m gånger hastigheten v .",
+   "s": 578.12,
+   "e": 594.59
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 594.59,
+   "e": 597.64
+  },
+  {
+   "t": "En elektromagnetisk våg består av ett elektriskt och ett magnetiskt fält som svänger i fas, vinkelrätt mot varandra och mot utbredningsriktningen:",
+   "s": 597.64,
+   "e": 609.45
+  },
+  {
+   "t": "Illustration över en elektromagnetisk våg.",
+   "s": 597.64,
+   "e": 609.45
+  },
+  {
+   "t": "Det elektriska och det magnetiska fältet svänger i fas, vinkelrätt mot varandra och mot utbredningsriktningen.",
+   "s": 609.45,
+   "e": 616.49
+  },
+  {
+   "t": "Vid brytning mäts infallsvinkel, reflektionsvinkel och brytningsvinkel alltid mellan strålen och normalen:",
+   "s": 616.49,
+   "e": 625.8
+  },
+  {
+   "t": "Strålgång mot ett tätare medium.",
+   "s": 616.49,
+   "e": 625.8
+  },
+  {
+   "t": "Infallsvinkeln i, reflektionsvinkeln r och brytningsvinkeln b mäts alltid mellan strålen och normalen.",
+   "s": 625.8,
+   "e": 633.32
+  },
+  {
+   "t": "Energinivådiagrammet för väte samlar hela avsnitt 4.7–4.8: kvantsprång till n är lika med 1 ger Lyman-serien (UV), till n är lika med 2 Balmer-serien (synligt ljus) och till n är lika med 3 Paschen-serien (IR):",
+   "s": 633.32,
+   "e": 650.68
+  },
+  {
+   "t": "Energinivådiagram för väte.",
+   "s": 633.32,
+   "e": 650.68
+  },
+  {
+   "t": "Lyman-serien slutar på n är lika med 1 (UV), Balmer-serien på n är lika med 2 (synligt ljus — pilarna är ritade i sina spektralfärger) och Paschen-serien på n är lika med 3 (IR).",
+   "s": 650.68,
+   "e": 663.44
+  },
+  {
+   "t": "Inför provet",
+   "s": 663.44,
+   "e": 665.6
+  },
+  {
+   "t": "Kan du beskriva det elektromagnetiska spektrumets uppbyggnad och ordna radiovågor, mikrovågor, infrarött, synligt ljus, ultraviolett, röntgenstrålning och gammastrålning efter våglängd?",
+   "s": 665.6,
+   "e": 678.23
+  },
+  {
+   "t": "Kan du formeln för ljusets frekvens ( frekvensen f är lika med c delat med våglängden lambda ) och för ljusintensitet ( strömmen I är lika med effekten P delat med arean A som är lika med P delat med parentesen 4 pi r i kvadrat slut parentes ) och lösa ut valfri storhet ur dem?",
+   "s": 678.23,
+   "e": 695.54
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan koherent, monokromatiskt och icke-koherent ljus, och mellan diffraktion och interferens?",
+   "s": 695.54,
+   "e": 703.59
+  },
+  {
+   "t": "Kan du gitterformeln ( n gånger våglängden lambda är lika med avståndet d gånger sinus alfa n ) och använda den för att bestämma våglängd, spaltavstånd eller vinkel?",
+   "s": 703.59,
+   "e": 714.75
+  },
+  {
+   "t": "Kan du Wiens förskjutningslag och Stefan–Boltzmanns lag, och förklara vad som händer med en svart kropps strålning när temperaturen ökar?",
+   "s": 714.75,
+   "e": 722.9
+  },
+  {
+   "t": "Kan du brytningslagen (Snells lag) och avgöra åt vilket håll en stråle bryts — mot eller från normalen?",
+   "s": 722.9,
+   "e": 730.47
+  },
+  {
+   "t": "Kan du räkna ut fotonens energi ( energin E är lika med höjden h gånger frekvensen f som är lika med h c delat med våglängden lambda ) och rörelsemängd ( trycket p är lika med höjden h delat med våglängden lambda ), samt omvandla mellan eV och joule?",
+   "s": 730.47,
+   "e": 746.02
+  },
+  {
+   "t": "Kan du formeln för fotoelektrisk effekt ( höjden h gånger frekvensen f är lika med W u plus E k ) och förklara varför bara ljus över en viss frekvens (inte intensitet) kan slå ut elektroner?",
+   "s": 746.02,
+   "e": 758.98
+  },
+  {
+   "t": "Kan du de Broglies formel ( våglängden lambda är lika med höjden h delat med parentesen massan m gånger hastigheten v slut parentes ) och avgöra om en partikel är tillräckligt liten för att uppvisa märkbara vågegenskaper?",
+   "s": 758.98,
+   "e": 772.39
+  },
+  {
+   "t": "Kan du använda energinivådiagrammet för väte för att bestämma vilken våglängd som sänds ut vid ett givet kvantsprång ( höjden h gånger frekvensen f är lika med E n minus E massan m )?",
+   "s": 772.39,
+   "e": 784.08
+  }
+ ]
+}

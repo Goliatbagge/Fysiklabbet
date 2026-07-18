@@ -1,0 +1,448 @@
+{
+ "id": "fy2-5.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "7071d96db954d392bbbb7d0a963acb667c4ad433",
+ "dur": 591.22,
+ "segments": [
+  {
+   "t": "Sammanfattning — Astronomi",
+   "s": 0.1,
+   "e": 3.04
+  },
+  {
+   "t": "Det här kapitlet satte fysiken i ett kosmiskt perspektiv: universums struktur och skala, hur astronomer mäter avstånd till stjärnor med parallax, varför månen har faser, varför himlen är blå och solnedgångar röda, hur svarta hål bildas och upptäcks, samt hur stjärnor föds ur gasmoln.",
+   "s": 2.99,
+   "e": 20.1
+  },
+  {
+   "t": "Du ska efter kapitlet kunna skalorna i universum, räkna med parallaxformeln, förklara månens faser och Rayleighspridning, samt beskriva flykthastighet, Schwarzschildradien och stjärnbildningens faser.",
+   "s": 20.1,
+   "e": 32.59
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 32.59,
+   "e": 34.9
+  },
+  {
+   "t": "Ljusår — sträckan ljuset färdas på ett år, är ungefär lika med 9,5 gånger 10 upphöjt till 15 meter ; ett avståndsmått, inte ett tidsmått.",
+   "s": 34.9,
+   "e": 45.14
+  },
+  {
+   "t": "Astronomisk enhet (AU) — jordens medelavstånd till solen, är ungefär lika med 1,50 gånger 10 upphöjt till 11 meter .",
+   "s": 45.14,
+   "e": 54.35
+  },
+  {
+   "t": "Parallax — den skenbara förflyttningen av ett närbeläget föremål mot bakgrunden när betraktaren flyttar sig.",
+   "s": 54.35,
+   "e": 61.27
+  },
+  {
+   "t": "Parsec (pc) — avståndet som ger en parallax på exakt 1 bågsekund med 1 AU som bas; 1 pc är ungefär lika med 3,26 ljusår.",
+   "s": 61.27,
+   "e": 71.45
+  },
+  {
+   "t": "Synodisk och siderisk månad — synodisk (nymåne till nymåne) tar 29,5 dygn; siderisk (ett varv mätt mot fixstjärnorna) tar 27,3 dygn.",
+   "s": 71.45,
+   "e": 82.91
+  },
+  {
+   "t": "Rayleighspridning — spridning av ljus mot luftmolekyler, starkast för korta våglängder ( sigma är proportionell mot 1 delat med våglängden lambda upphöjt till 4 ); orsaken till blå himmel och röda solnedgångar.",
+   "s": 82.91,
+   "e": 95.99
+  },
+  {
+   "t": "Flykthastighet — den lägsta fart ett föremål måste ha för att helt undkomma en himlakropps gravitation.",
+   "s": 95.99,
+   "e": 102.86
+  },
+  {
+   "t": "Händelsehorisont — gränsytan kring ett svart hål; innanför den kan ingenting, inte ens ljus, ta sig ut.",
+   "s": 102.86,
+   "e": 110.6
+  },
+  {
+   "t": "Schwarzschildradien — radien på händelsehorisonten, det avstånd där flykthastigheten blir lika med ljushastigheten.",
+   "s": 110.6,
+   "e": 118.2
+  },
+  {
+   "t": "Singularitet — punkten i ett svart håls centrum där massan enligt teorin pressas samman till oändlig täthet.",
+   "s": 118.2,
+   "e": 125.61
+  },
+  {
+   "t": "Protostjärna — en het, kollapsande gasklump på väg att bli en stjärna, innan fusionen har tänts.",
+   "s": 125.61,
+   "e": 132.64
+  },
+  {
+   "t": "Huvudserien — det stabila stadium en stjärna når när strålningstrycket från fusionen exakt balanserar gravitationen (hydrostatisk jämvikt).",
+   "s": 132.64,
+   "e": 142.22
+  },
+  {
+   "t": "Formler",
+   "s": 142.22,
+   "e": 144.05
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 144.05,
+   "e": 146.4
+  },
+  {
+   "t": "Ljusår",
+   "s": 146.4,
+   "e": 148.26
+  },
+  {
+   "t": "1 ljusår är lika med c gånger tiden t som är ungefär lika med 9,5 gånger 10 upphöjt till 15 meter",
+   "s": 148.26,
+   "e": 156.0
+  },
+  {
+   "t": "där",
+   "s": 156.0,
+   "e": 157.51
+  },
+  {
+   "t": "c är lika med ljushastigheten, 3,00 gånger 10 upphöjt till 8 meter per sekund",
+   "s": 157.51,
+   "e": 164.22
+  },
+  {
+   "t": "t är lika med ett år är ungefär lika med 3,16 gånger 10 upphöjt till 7 sekund",
+   "s": 164.22,
+   "e": 170.78
+  },
+  {
+   "t": "Astronomisk enhet",
+   "s": 170.78,
+   "e": 173.39
+  },
+  {
+   "t": "1 AU är ungefär lika med 1,50 gånger 10 upphöjt till 8 kilometer som är lika med 1,50 gånger 10 upphöjt till 11 meter",
+   "s": 173.39,
+   "e": 182.15
+  },
+  {
+   "t": "Bågminuter och bågsekunder",
+   "s": 182.15,
+   "e": 185.18
+  },
+  {
+   "t": "1 grader är lika med 60 prim som är lika med 60 gånger 60 bis som är lika med 3 600 bis",
+   "s": 185.18,
+   "e": 192.72
+  },
+  {
+   "t": "där en bågminut skrivs prim och en bågsekund skrivs bis .",
+   "s": 192.72,
+   "e": 197.43
+  },
+  {
+   "t": "Parallaxmetoden",
+   "s": 197.43,
+   "e": 199.72
+  },
+  {
+   "t": "r är lika med 1 delat med trycket p",
+   "s": 199.72,
+   "e": 202.96
+  },
+  {
+   "t": "där",
+   "s": 202.96,
+   "e": 204.41
+  },
+  {
+   "t": "r är lika med avståndet till stjärnan (pc)",
+   "s": 204.41,
+   "e": 208.36
+  },
+  {
+   "t": "p är lika med parallaxvinkeln (bågsekunder, bis )",
+   "s": 208.36,
+   "e": 213.35
+  },
+  {
+   "t": "Parsec till ljusår",
+   "s": 213.35,
+   "e": 215.86
+  },
+  {
+   "t": "1 pc är ungefär lika med 3,26 ljusår",
+   "s": 215.86,
+   "e": 220.4
+  },
+  {
+   "t": "Rayleighspridningens våglängdsberoende",
+   "s": 220.4,
+   "e": 223.96
+  },
+  {
+   "t": "sigma är proportionell mot 1 delat med våglängden lambda upphöjt till 4",
+   "s": 223.96,
+   "e": 229.56
+  },
+  {
+   "t": "där",
+   "s": 229.56,
+   "e": 231.05
+  },
+  {
+   "t": "σ är lika med sannolikheten/intensiteten för spridning",
+   "s": 231.05,
+   "e": 235.94
+  },
+  {
+   "t": "λ är lika med ljusets våglängd (meter)",
+   "s": 235.94,
+   "e": 239.64
+  },
+  {
+   "t": "Flykthastighet",
+   "s": 239.64,
+   "e": 241.99
+  },
+  {
+   "t": "v frekvensen f är lika med roten ur 2 G kraftmomentet M delat med r",
+   "s": 241.99,
+   "e": 248.07
+  },
+  {
+   "t": "där",
+   "s": 248.07,
+   "e": 249.59
+  },
+  {
+   "t": "v frekvensen f är lika med flykthastigheten (meter per sekund)",
+   "s": 249.59,
+   "e": 254.76
+  },
+  {
+   "t": "G är lika med gravitationskonstanten, 6,67 gånger 10 upphöjt till minus 11 newton \\cdot m^2/kg^2",
+   "s": 254.76,
+   "e": 266.51
+  },
+  {
+   "t": "M är lika med himlakroppens massa (kilogram)",
+   "s": 266.51,
+   "e": 270.74
+  },
+  {
+   "t": "r är lika med avståndet från centrum (meter)",
+   "s": 270.74,
+   "e": 274.89
+  },
+  {
+   "t": "Schwarzschildradien",
+   "s": 274.89,
+   "e": 277.34
+  },
+  {
+   "t": "r sträckan s är lika med 2 G kraftmomentet M delat med c i kvadrat",
+   "s": 277.34,
+   "e": 283.26
+  },
+  {
+   "t": "där",
+   "s": 283.26,
+   "e": 284.74
+  },
+  {
+   "t": "r sträckan s är lika med Schwarzschildradien (meter)",
+   "s": 284.74,
+   "e": 289.24
+  },
+  {
+   "t": "G är lika med gravitationskonstanten, 6,67 gånger 10 upphöjt till minus 11 newton \\cdot m^2/kg^2",
+   "s": 289.24,
+   "e": 300.82
+  },
+  {
+   "t": "M är lika med det svarta hålets massa (kilogram)",
+   "s": 300.82,
+   "e": 305.06
+  },
+  {
+   "t": "c är lika med ljushastigheten, 3,00 gånger 10 upphöjt till 8 meter per sekund",
+   "s": 305.06,
+   "e": 311.75
+  },
+  {
+   "t": "Vätefusion (förenklat)",
+   "s": 311.75,
+   "e": 314.81
+  },
+  {
+   "t": "4 upphöjt till 1 ett H går mot upphöjt till 4 två He plus energi",
+   "s": 314.81,
+   "e": 320.62
+  },
+  {
+   "t": "Massdifferensen mellan de fyra protonerna och heliumkärnan frigörs som energi enligt energin E är lika med massan m c i kvadrat .",
+   "s": 320.74,
+   "e": 329.58
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 329.53,
+   "e": 332.39
+  },
+  {
+   "t": "Universum är uppbyggt i nivåer med tydliga skalsprång: solsystemet (ca 0,001 ljusår) ger Vintergatan (ca 100 000 ljusår) ger Lokala gruppen (ca 10 miljoner ljusår) ger superhopen Laniakea (ca 500 miljoner ljusår) ger observerbara universum (ca 93 miljarder ljusår).",
+   "s": 332.39,
+   "e": 353.18
+  },
+  {
+   "t": "Varje steg är tusentals gånger större än det föregående.",
+   "s": 353.18,
+   "e": 357.6
+  },
+  {
+   "t": "Ljusets ändliga hastighet gör att vi alltid ser avlägsna himlakroppar som de såg ut förr — ljuset från en stjärna 1 000 ljusår bort visar hur den såg ut för 1 000 år sedan.",
+   "s": 357.6,
+   "e": 368.0
+  },
+  {
+   "t": "Parallaxmetoden fungerar från jordytan bara ut till ungefär 100 ljusår (atmosfären stör mätningen); satelliten Gaia klarar tiotusentals ljusår.",
+   "s": 368.0,
+   "e": 378.23
+  },
+  {
+   "t": "På norra halvklotet betyder ett D-format ljus (höger sida lyser) att månen är växande mot fullmåne, och ett C-format ljus (vänster sida lyser) att den är avtagande mot nymåne — omvänt på södra halvklotet.",
+   "s": 378.23,
+   "e": 392.23
+  },
+  {
+   "t": "Förmörkelser kräver att sol, jord och måne ligger nästan exakt i linje; de sker inte varje månad eftersom månens bana lutar cirka 5 grader mot jordens bana runt solen.",
+   "s": 392.23,
+   "e": 403.03
+  },
+  {
+   "t": "Rayleighspridningen är starkast för korta våglängder ( är proportionell mot 1 delat med våglängden lambda upphöjt till 4 ): blått ljus sprids ur solstrålen åt alla håll och ger en blå himmel; nära horisonten passerar solljuset upp till cirka 38 luftmassor, så att även blått och grönt hinner spridas bort och bara rött ljus når fram.",
+   "s": 403.03,
+   "e": 422.44
+  },
+  {
+   "t": "Ett svart hål bildas när en stjärna tyngre än ungefär 8 solmassor dör i en supernova och kärnan kollapsar utan att något kan stoppa den; lättare stjärnor blir i stället vita dvärgar.",
+   "s": 422.44,
+   "e": 433.15
+  },
+  {
+   "t": "Ett svart hål syns aldrig direkt utan upptäcks indirekt: het strålning från en ackretionsskiva, banorna hos kringkretsande stjärnor, eller gravitationsvågor (första gången med LIGO år 2015).",
+   "s": 433.15,
+   "e": 445.98
+  },
+  {
+   "t": "Stjärnbildning är en dragkamp mellan gravitationen (drar ihop) och trycket (håller emot); en kollapsande gas värms av sin egen frigjorda lägesenergi, precis som luften i en cykelpump.",
+   "s": 445.98,
+   "e": 458.3
+  },
+  {
+   "t": "Ju tyngre en stjärna är, desto kortare lever den — trots mer bränsle förbränner den vätet så mycket snabbare att det ändå tar slut först.",
+   "s": 458.3,
+   "e": 466.48
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 466.48,
+   "e": 469.54
+  },
+  {
+   "t": "Parallaxmetoden är kapitlets viktigaste avståndsverktyg — jämför var stjärnan verkar ligga mot bakgrundsstjärnorna från jordens två motsatta lägen i banan:",
+   "s": 469.54,
+   "e": 487.69
+  },
+  {
+   "t": "Parallaxvinkeln p (kraftigt överdriven i figuren) mäts genom att jämföra stjärnans position mot avlägsna bakgrundsstjärnor från två motsatta punkter i jordens bana.",
+   "s": 469.54,
+   "e": 487.69
+  },
+  {
+   "t": "Ett svart hål i genomskärning — lägg märke till hur ljusbanorna böjs olika mycket beroende på avstånd till händelsehorisonten:",
+   "s": 487.69,
+   "e": 497.05
+  },
+  {
+   "t": "Ett svart hål i genomskärning.",
+   "s": 487.69,
+   "e": 497.05
+  },
+  {
+   "t": "Ljus som passerar långt från hålet går rakt fram, ljus som passerar nära böjs kraftigt av gravitationen, och ljus innanför händelsehorisonten (radien r sträckan s ) kommer aldrig ut.",
+   "s": 497.05,
+   "e": 508.94
+  },
+  {
+   "t": "Stjärnbildningens tre steg, från glest molekylmoln till tänd protostjärna:",
+   "s": 508.94,
+   "e": 521.7
+  },
+  {
+   "t": "Från glest molekylmoln, via gravitationskollaps, till en protostjärna omgiven av en roterande skiva av gas och stoft.",
+   "s": 508.94,
+   "e": 521.7
+  },
+  {
+   "t": "Inför provet",
+   "s": 521.7,
+   "e": 523.84
+  },
+  {
+   "t": "Kan du beskriva universums nivåer från solsystem till superhopar och ge en ungefärlig storlek på varje nivå?",
+   "s": 523.84,
+   "e": 531.33
+  },
+  {
+   "t": "Vet du varför avstånd i rymden anges i ljusår, AU eller parsec i stället för meter?",
+   "s": 531.33,
+   "e": 537.8
+  },
+  {
+   "t": "Kan du parallaxmetoden och formeln r är lika med 1 delat med trycket p , och förklara varför den bara fungerar för relativt närbelägna stjärnor?",
+   "s": 537.8,
+   "e": 546.55
+  },
+  {
+   "t": "Kan du räkna om mellan bågsekunder, parsec och ljusår?",
+   "s": 546.55,
+   "e": 551.19
+  },
+  {
+   "t": "Kan du förklara varför månen har faser, och skillnaden mellan synodisk och siderisk månad?",
+   "s": 551.19,
+   "e": 557.38
+  },
+  {
+   "t": "Vet du när sol- och månförmörkelser inträffar, och varför de inte sker varje månad?",
+   "s": 557.38,
+   "e": 563.34
+  },
+  {
+   "t": "Kan du förklara Rayleighspridning och varför den gör himlen blå och solnedgångar röda?",
+   "s": 563.34,
+   "e": 569.08
+  },
+  {
+   "t": "Kan du formlerna för flykthastighet och Schwarzschildradien, och förklara sambandet mellan dem?",
+   "s": 569.08,
+   "e": 575.14
+  },
+  {
+   "t": "Kan du beskriva hur ett svart hål bildas och hur astronomer upptäcker ett som inte syns?",
+   "s": 575.14,
+   "e": 582.86
+  },
+  {
+   "t": "Kan du beskriva stjärnbildningens steg, från gasmoln till stabil huvudseriestjärna, och förklara varför tunga stjärnor lever kortare tid?",
+   "s": 582.81,
+   "e": 591.22
+  }
+ ]
+}

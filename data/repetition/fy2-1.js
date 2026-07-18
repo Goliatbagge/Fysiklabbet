@@ -1,0 +1,81 @@
+// Repetitionsspel — Fysik nivå 2, kapitel 1: Rörelse och krafter.
+// Format och regler: .claude/repetition-brief.md
+window.REPETITION = window.REPETITION || {};
+window.REPETITION['fy2-1'] = {
+    course: 'Fysik nivå 2',
+    courseCode: 'fy2',
+    chapter: 'Rörelse och krafter',
+    chapterNumber: 1,
+    intro: 'Här repeterar du kraftmoment, cirkulär rörelse, konisk pendel och kaströrelse.',
+    stations: [
+        {
+            type: 'lucka',
+            title: 'Fyll i rätt begrepp',
+            instruktion: 'Dra rätt ord eller uttryck till varje lucka.',
+            formler: [
+                { fore: 'En kraft vars riktningslinje går genom den valda vridningspunkten ger ett kraftmoment lika med', efter: '.', svar: 'noll' },
+                { fore: 'Farten i en cirkulär bana kan vara konstant, men det gäller aldrig', efter: '.', svar: 'hastigheten' },
+                { fore: 'Centripetalkraften är alltid riktad', efter: 'cirkelns centrum.', svar: 'in mot' },
+                { fore: 'I x-led vid kaströrelse (utan luftmotstånd) är hastigheten', efter: 'under hela rörelsen.', svar: 'konstant' },
+                { fore: 'I y-led vid kaströrelse är accelerationen alltid lika med', efter: '.', svar: '$-g$' },
+                { fore: 'Kastvidd och stighöjd gäller bara när kastet börjar och slutar i', efter: '.', svar: 'samma horisontalplan' },
+            ],
+            distraktorer: ['utåt', 'föränderlig', 'medurs'],
+        },
+        {
+            type: 'par',
+            title: 'Para ihop formel och betydelse',
+            instruktion: 'Dra rätt beskrivning till varje formel.',
+            pairs: [
+                { a: '$M = F \\cdot l$', b: 'Kraftmoment' },
+                { a: '$T = \\dfrac{1}{f}$', b: 'Period givet frekvensen' },
+                { a: '$\\omega = \\dfrac{2\\pi}{T}$', b: 'Vinkelhastighet' },
+                { a: '$v = \\omega \\cdot r$', b: 'Fart i cirkulär bana' },
+                { a: '$a_C = \\dfrac{v^2}{r}$', b: 'Centripetalacceleration' },
+                { a: '$F_C = \\dfrac{m \\cdot v^2}{r}$', b: 'Centripetalkraft' },
+                { a: '$T = 2\\pi\\sqrt{\\dfrac{l \\cdot \\cos\\alpha}{g}}$', b: 'Periodtid för konisk pendel' },
+                { a: '$x_{\\max} = \\dfrac{v_0^2 \\cdot \\sin(2\\alpha)}{g}$', b: 'Kastvidd' },
+            ],
+        },
+        {
+            type: 'sortera',
+            title: 'Kaströrelse: x-led eller y-led?',
+            instruktion: 'Sortera uttrycken efter om de gäller rörelsens x-led eller y-led.',
+            bins: [
+                { name: 'x-led — konstant hastighet', items: ['$v_x = v_0 \\cdot \\cos\\alpha$', '$a_x = 0$', '$x = v_0 \\cdot \\cos\\alpha \\cdot t$'] },
+                { name: 'y-led — konstant acceleration', items: ['$v_y = v_0 \\cdot \\sin\\alpha - g\\cdot t$', '$a_y = -g$', '$y = v_0 \\cdot \\sin\\alpha \\cdot t - \\dfrac{g\\cdot t^2}{2}$'] },
+            ],
+        },
+        {
+            type: 'ordna',
+            title: 'Ordna efter frekvens',
+            instruktion: 'Ordna rotationerna från lägst till högst frekvens. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
+            etikettStart: 'lägst frekvens',
+            etikettSlut: 'högst frekvens',
+            items: ['0,5 Hz', '10 rad/s', '2 varv/s', '180 varv/min', '900 varv/min'],
+        },
+        {
+            type: 'blixt',
+            title: 'Sant eller falskt?',
+            instruktion: 'Avgör om påståendet stämmer.',
+            pastaenden: [
+                { text: 'Ju längre bort från vridningspunkten en kraft verkar (med samma kraft), desto större blir kraftmomentet.',
+                  sant: true, varfor: 'Kraftmomentet $M = F \\cdot l$ ökar med hävarmen $l$ vid oförändrad kraft.' },
+                { text: 'Centripetalkraften är en egen, separat kraft utöver de vanliga krafterna som tyngdkraft och friktion.',
+                  sant: false, varfor: 'Centripetalkraften är resultanten av de faktiska krafterna, t.ex. spännkraft, friktion eller tyngdkraft.' },
+                { text: 'En radian är det vinkelmått där cirkelbågen är lika lång som radien.',
+                  sant: true, varfor: 'Det är just definitionen av 1 radian.' },
+                { text: 'I en kaströrelse (utan luftmotstånd) är hastigheten i x-led konstant.',
+                  sant: true, varfor: 'Ingen kraft verkar i x-led, så accelerationen är noll och hastigheten oförändrad.' },
+                { text: 'Farten i en cirkulär bana med konstant fart innebär att även hastigheten är konstant.',
+                  sant: false, varfor: 'Hastigheten är en vektor vars riktning hela tiden ändras i en cirkelbana, trots att farten (beloppet) är konstant.' },
+                { text: 'I det övre vändläget av en vertikal cirkelrörelse kan spännkraften aldrig bli noll.',
+                  sant: false, varfor: 'I gränsfallet där tråden precis inte slaknar är spännkraften $F_S = 0$ och enbart tyngdkraften utgör centripetalkraften.' },
+                { text: 'Kastvidden blir störst när elevationsvinkeln är 45°, om start- och sluthöjd är desamma.',
+                  sant: true, varfor: 'Då är $\\sin(2\\alpha) = \\sin 90^\\circ = 1$, vilket är det största möjliga värdet.' },
+                { text: 'En konisk pendels periodtid beror på pendelns massa.',
+                  sant: false, varfor: 'Massan förekommer inte i formeln $T = 2\\pi\\sqrt{\\dfrac{l \\cdot \\cos\\alpha}{g}}$ — perioden beror bara på längden, vinkeln och $g$.' },
+            ],
+        },
+    ],
+};

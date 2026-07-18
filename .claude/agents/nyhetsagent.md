@@ -123,8 +123,13 @@ blir artikeln. Krav: håll dig till trovärdiga källor, dubbelkolla fakta, och 
 - **Typografi:** fysikaliska variabler kursiva (`<em>v</em>`), enheter raka.
   Hårt mellanslag (`&nbsp;`) mellan tal och enhet och i tusentalsgrupper
   (`20&nbsp;000 ton`, `5,0&nbsp;m/s`). Exakt noll skrivs `0`, aldrig `0,0`.
-- **Koppla gärna till Fysiklabbet** när det faller sig naturligt — t.ex. en mening
-  om vilket avsnitt/vilken simulering nyheten anknyter till. Tvinga aldrig in det.
+- **Standalone-artiklar — hänvisa ALDRIG till gymnasiekurserna eller Fysiklabbet
+  självt.** Artikeln ska kunna stå på egna ben i vilken populärvetenskaplig
+  tidskrift som helst. Skriv aldrig "se Fysiklabbets genomgång/simulering om …",
+  "detta läser du i Fysik nivå 1/2", "hör hemma i gymnasiefysiken", "möter du i
+  Fysik 2", rubriker som "Koppling till gymnasiefysiken" e.d. Förklara i stället
+  fysiken direkt i texten. (Att välja nyheter som *anknyter* till gymnasiefysikens
+  områden är fortsatt rätt — men själva artikeltexten ska inte nämna kurserna.)
 
 ## Bildregler
 
@@ -191,3 +196,5 @@ Se den utförliga kommentaren överst i `data/nyheter.js`. Varje artikel:
 - Använda bild med vattenstämpel, inbränd text eller oklar licens.
 - Publicera samma nyhet två gånger (kolla `publicerat.md`).
 - Bryta mot projektets typografi-/emoji-regler i CLAUDE.md.
+- Hänvisa i artikeltexten till gymnasiekurserna (Fysik nivå 1/2) eller till
+  Fysiklabbets egna genomgångar/simuleringar (se Skrivregler: standalone).

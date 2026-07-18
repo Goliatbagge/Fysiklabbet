@@ -628,21 +628,6 @@
             );
         }
 
-        // Uppläsningsspelare (talsyntes) för artikeln. Panelen renderas
-        // bara om förgenererat ljud finns (audio/tts/nyheter/<id>).
-        function TtsArtikel({ a, articleRef }) {
-            const ref = React.useRef(null);
-            React.useEffect(() => {
-                if (!ref.current || !window.FYSIKTTS) return;
-                return window.FYSIKTTS.mount(ref.current, {
-                    kind: 'nyheter',
-                    id: a.id,
-                    getContainer: () => articleRef.current,
-                });
-            }, [a.id]);
-            return <div ref={ref} />;
-        }
-
         function ArticleView({ a }) {
             const bodyRef = React.useRef(null);
             const articleRef = React.useRef(null);
@@ -669,7 +654,6 @@
                     <h1 className="article-title">{a.title}</h1>
                     <p className="article-deck">{a.deck}</p>
 
-                    <TtsArtikel a={a} articleRef={articleRef} />
                     <ArticlePodcast a={a} />
 
                     <figure className="article-figure">
@@ -749,8 +733,5 @@
     </script>
 
     <script>document.write('<scr' + 'ipt src="feedback.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
-    <!-- Uppläsning med talsyntes (manus-lib måste laddas före tts.js) -->
-    <script>document.write('<scr' + 'ipt src="data/tts/manus-lib.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
-    <script>document.write('<scr' + 'ipt src="tts.js?v=' + window.__CB + '" defer></scr' + 'ipt>');</script>
 </body>
 </html>

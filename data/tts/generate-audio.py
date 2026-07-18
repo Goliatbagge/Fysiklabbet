@@ -4,10 +4,10 @@
 #   python data/tts/generate-audio.py            # allt som saknas/ändrats
 #   python data/tts/generate-audio.py fy1-7.9    # bara angivna id:n
 #
-# Läser manus från data/tts/manus/{teori,nyheter}.json (byggs av
-# build-manus.js) och skriver:
+# Läser manus från data/tts/manus/teori.json (byggs av build-manus.js)
+# och skriver:
 #   audio/tts/teori/<id>.mp3 + <id>.json
-#   audio/tts/nyheter/<id>.mp3 + <id>.json
+# (Nyhetsartiklar har ingen uppläsning — borttaget 2026-07-18.)
 #
 # JSON-formatet: { id, voice, hash, dur, segments: [{ t, s, e }] }
 # där s/e är start-/sluttid i sekunder för varje mening (segment),
@@ -169,7 +169,8 @@ async def synthesize(doc, out_dir, sem):
 async def main():
     only = set(sys.argv[1:])
     jobs = []
-    for kind in ("teori", "nyheter"):
+    # Nyhetsartiklar har ingen uppläsning (borttaget 2026-07-18) — bara teori.
+    for kind in ("teori",):
         manus_path = MANUS_DIR / f"{kind}.json"
         if not manus_path.exists():
             print(f"Hoppar {kind}: {manus_path} saknas (kör build-manus.js).")

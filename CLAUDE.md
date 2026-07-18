@@ -46,7 +46,8 @@ node data/teori/build.js
 node data/build-nyheter-og.js
 
 # Uppläsning (talsyntes): bygg om manus + ljud efter ändringar i
-# data/teori/*.md, data/nyheter.js eller data/tts/manus-lib.js.
+# data/teori/*.md eller data/tts/manus-lib.js. (Nyhetsartiklar har INGEN
+# uppläsning — borttaget 2026-07-18.)
 # Kräver dev-servern på port 8000 och Python 3.12 med edge-tts.
 # Inkrementellt — bara dokument vars manus ändrats genereras om.
 node data/tts/build-manus.js

@@ -1,5 +1,101 @@
 [
  {
+  "id": "2026-07-18-radium-molekyler",
+  "title": "Fysiker bäddar in radioaktivt radium i en sockerklump — och kyler ner det till några kelvin över absoluta nollpunkten",
+  "segments": [
+   {
+    "t": "Fysiker bäddar in radioaktivt radium i en sockerklump — och kyler ner det till några kelvin över absoluta nollpunkten."
+   },
+   {
+    "t": "Vid Caltech har forskare för första gången lyckats bygga molekyler av det sällsynta, radioaktiva grundämnet radium och kyla ner dem till några enstaka kelvin."
+   },
+   {
+    "t": "Knepet för att hantera det farliga ämnet är lånat från godistillverkningen — och molekylerna ska nu bli extremt känsliga kvantsensorer i jakten på svaret på en av fysikens största olösta frågor: varför universum är fyllt av materia, men nästan helt tomt på antimateria."
+   },
+   {
+    "t": "Radium är ett av naturens mest ökända grundämnen — det radioaktiva ämne som gjorde Marie och Pierre Curie berömda när de upptäckte det 1898, och som senare gav självlysande urtavlor innan strålningsfaran blev känd."
+   },
+   {
+    "t": "Nu har forskare vid Caltech i Kalifornien gjort något ingen lyckats med tidigare: byggt molekyler av radium, kylt ner dem till några enstaka kelvin över absoluta nollpunkten och studerat dem med laser i en apparat som får plats på ett vanligt labbord."
+   },
+   {
+    "t": "Resultatet, publicerat i tidskriften Science den 16 juli, är ett steg mot att besvara en av fysikens största olösta frågor: varför universum överhuvudtaget innehåller materia."
+   },
+   {
+    "t": "Ett recept lånat från godistillverkningen."
+   },
+   {
+    "t": "Radium är sällsynt, extremt radioaktivt och svårt att hantera i ren form — precis den sortens ämne fysiker helst vill hålla på avstånd."
+   },
+   {
+    "t": "Forskargruppen, ledd av professor Nick Hutzler, löste problemet genom att bädda in radiumet i en klibbig sörja: radium blandades med vatten och socker (senare bytt mot sötningsmedlet xylitol), och vattnet fick avdunsta."
+   },
+   {
+    "t": "Klumpen placerades på en bit guldfolie i en vakuumkammare, kyld med heliumgas till omkring −268 grader Celsius — bara några grader över absoluta nollpunkten (0 kelvin är lika med −273,15 grader Celsius, se Fysiklabbets genomgång om värme och temperatur, Fysik nivå 1)."
+   },
+   {
+    "t": "Laserpulser sparkade loss enstaka radiumatomer ur klumpen, som reagerade med gaser i kammaren och bildade tre nya molekyler: radiummonohydroxid, radiummonodeuteroxid och radiummonofluorid."
+   },
+   {
+    "t": "”Vi ville bädda in det i något vi kunde hantera — i praktiken en tjock, trögflytande sörja.”"
+   },
+   {
+    "t": "En päronformad atomkärna."
+   },
+   {
+    "t": "Varför just radium?"
+   },
+   {
+    "t": "Svaret ligger i atomkärnans form."
+   },
+   {
+    "t": "De flesta atomkärnor är antingen klotrunda som en apelsin eller något avlånga som en amerikansk fotboll, förklarar Hutzler."
+   },
+   {
+    "t": "Radiums kärna hör till en sällsynt tredje kategori: den är päronformad, med mer massa i den ena änden än den andra (se Fysiklabbets genomgång om atomkärnan, Fysik nivå 1)."
+   },
+   {
+    "t": "Den asymmetrin gör kärnan extremt känslig för minimala avvikelser från de symmetrier som fysikens standardmodell bygger på — avvikelser som skulle kunna förklara varför universum, enligt teorin, borde innehålla lika delar materia och antimateria, men i praktiken domineras nästan helt av materia."
+   },
+   {
+    "t": "”Päronformade atomkärnor är asymmetriska och förstärker dramatiskt de signaler vi letar efter för att förklara obalansen mellan materia och antimateria.”"
+   },
+   {
+    "t": "En molekyl som antenn."
+   },
+   {
+    "t": "Att fånga en så subtil signal kräver en förstärkare, och det är här molekylerna kommer in."
+   },
+   {
+    "t": "Elektronerna i en molekyl som radiummonofluorid upplever ett mycket starkare elektriskt fält kring atomkärnan än vad en fri radiumatom skulle ge upphov till, vilket gör att molekylen fungerar ungefär som en antenn: den förstärker de svaga signaler forskarna hoppas kunna mäta."
+   },
+   {
+    "t": "Med precisionslasrar kunde forskarna sedan läsa av molekylernas energinivåer i detalj — samma sorts laserspektroskopi som Fysiklabbets genomgång om spektrallinjer beskriver (Fysik nivå 2), fast tillämpad på ett av de mest svårhanterliga grundämnena som finns."
+   },
+   {
+    "t": "Fler isotoper väntar."
+   },
+   {
+    "t": "Nästa steg är att upprepa experimentet med radiumisotoperna 223 och 225, som också har kärnspinn och därför kan avslöja ännu fler typer av symmetribrott."
+   },
+   {
+    "t": "De nedkylda molekylerna är nu redo att användas i regelrätta kvantprecisionsmätningar, och metoden går i princip att återanvända för andra radioaktiva grundämnen — ett bordsstort alternativ till att jaga ny fysik i kilometerlånga partikelacceleratorer."
+   },
+   {
+    "t": "Visste du."
+   },
+   {
+    "t": "Radium upptäcktes av Marie och Pierre Curie 1898 och blev, tillsammans med polonium, ett av de första bevisen för att ett grundämne kan omvandlas till ett annat genom radioaktivt sönderfall."
+   },
+   {
+    "t": "Isotopen som användes i studien, radium-226, har en halveringstid på cirka 1 600 år och sönderfaller genom alfasönderfall till den radioaktiva ädelgasen radon-222 — se Fysiklabbets genomgång om aktivitet och halveringstid, Fysik nivå 1."
+   },
+   {
+    "t": "Molekylerna hölls vid 4–7 kelvin under experimentet — bara några enstaka grader över absoluta nollpunkten, den lägsta temperatur som är fysikaliskt möjlig (0 kelvin är lika med −273,15 grader Celsius)."
+   }
+  ]
+ },
+ {
   "id": "2026-07-17-hannibal-alperna",
   "title": "Fysiker räknar ut vilket bergspass Hannibal tog över Alperna — och varför elefanterna klarade sig bäst",
   "segments": [

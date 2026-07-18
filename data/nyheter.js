@@ -34,6 +34,49 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-18-radium-molekyler",
+    date: "2026-07-18",
+    title: "Fysiker bäddar in radioaktivt radium i en sockerklump — och kyler ner det till några kelvin över absoluta nollpunkten",
+    deck: "Vid Caltech har forskare för första gången lyckats bygga molekyler av det sällsynta, radioaktiva grundämnet radium och kyla ner dem till några enstaka kelvin. Knepet för att hantera det farliga ämnet är lånat från godistillverkningen — och molekylerna ska nu bli extremt känsliga kvantsensorer i jakten på svaret på en av fysikens största olösta frågor: varför universum är fyllt av materia, men nästan helt tomt på antimateria.",
+    category: "Kärnfysik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-18-radium-molekyler.jpg",
+    imageAlt: "Ett tätt nätverk av blå, orange och röda kablar samt optiska speglar, linser och detektorer på ett svart optikbord i ett fysiklaboratorium.",
+    imageCredit: "Foto: Hutzler Lab/Caltech (pressbild)",
+    tags: ["kärnfysik", "atomfysik", "radioaktivitet", "halveringstid", "antimateria", "symmetri", "modern fysik", "molekylfysik", "laserspektroskopi", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "Caltech (pressmeddelande)", url: "https://www.caltech.edu/about/news/cold-radioactive-molecules-prepped-and-readied-for-physics-discoveries" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-cold-radioactive-molecules-prepped-readied.html" }
+    ],
+    research: { citation: "C. J. Conn, P. Yu, M. I. Howard, Y. Yang, C. Zhang, A. Jadbabaie, A. Gorou, A. N. Gaiser, T. C. Steimle, L. Cheng, N. R. Hutzler, ”Production and spectroscopy of cold radioactive molecules”, Science (2026)", url: "https://doi.org/10.1126/science.aea9413" },
+    body: [
+      { type: "p", html: "Radium är ett av naturens mest ökända grundämnen — det radioaktiva ämne som gjorde Marie och Pierre Curie berömda när de upptäckte det 1898, och som senare gav självlysande urtavlor innan strålningsfaran blev känd. Nu har forskare vid Caltech i Kalifornien gjort något ingen lyckats med tidigare: byggt molekyler av radium, kylt ner dem till några enstaka kelvin över absoluta nollpunkten och studerat dem med laser i en apparat som får plats på ett vanligt labbord. Resultatet, publicerat i tidskriften <em>Science</em> den 16&nbsp;juli, är ett steg mot att besvara en av fysikens största olösta frågor: varför universum överhuvudtaget innehåller materia." },
+
+      { type: "h2", text: "Ett recept lånat från godistillverkningen" },
+      { type: "p", html: "Radium är sällsynt, extremt radioaktivt och svårt att hantera i ren form — precis den sortens ämne fysiker helst vill hålla på avstånd. Forskargruppen, ledd av professor Nick Hutzler, löste problemet genom att bädda in radiumet i en klibbig sörja: radium blandades med vatten och socker (senare bytt mot sötningsmedlet xylitol), och vattnet fick avdunsta. Klumpen placerades på en bit guldfolie i en vakuumkammare, kyld med heliumgas till omkring −268&nbsp;°C — bara några grader över absoluta nollpunkten (0&nbsp;K = −273,15&nbsp;°C, se Fysiklabbets genomgång om värme och temperatur, Fysik nivå&nbsp;1). Laserpulser sparkade loss enstaka radiumatomer ur klumpen, som reagerade med gaser i kammaren och bildade tre nya molekyler: radiummonohydroxid, radiummonodeuteroxid och radiummonofluorid." },
+
+      { type: "quote", html: "”Vi ville bädda in det i något vi kunde hantera — i praktiken en tjock, trögflytande sörja.”", cite: "Nick Hutzler, professor i fysik, Caltech" },
+
+      { type: "h2", text: "En päronformad atomkärna" },
+      { type: "p", html: "Varför just radium? Svaret ligger i atomkärnans form. De flesta atomkärnor är antingen klotrunda som en apelsin eller något avlånga som en amerikansk fotboll, förklarar Hutzler. Radiums kärna hör till en sällsynt tredje kategori: den är päronformad, med mer massa i den ena änden än den andra (se Fysiklabbets genomgång om atomkärnan, Fysik nivå&nbsp;1). Den asymmetrin gör kärnan extremt känslig för minimala avvikelser från de symmetrier som fysikens standardmodell bygger på — avvikelser som skulle kunna förklara varför universum, enligt teorin, borde innehålla lika delar materia och antimateria, men i praktiken domineras nästan helt av materia." },
+
+      { type: "quote", html: "”Päronformade atomkärnor är asymmetriska och förstärker dramatiskt de signaler vi letar efter för att förklara obalansen mellan materia och antimateria.”", cite: "Nick Hutzler, Caltech" },
+
+      { type: "h2", text: "En molekyl som antenn" },
+      { type: "p", html: "Att fånga en så subtil signal kräver en förstärkare, och det är här molekylerna kommer in. Elektronerna i en molekyl som radiummonofluorid upplever ett mycket starkare elektriskt fält kring atomkärnan än vad en fri radiumatom skulle ge upphov till, vilket gör att molekylen fungerar ungefär som en antenn: den förstärker de svaga signaler forskarna hoppas kunna mäta. Med precisionslasrar kunde forskarna sedan läsa av molekylernas energinivåer i detalj — samma sorts laserspektroskopi som Fysiklabbets genomgång om spektrallinjer beskriver (Fysik nivå&nbsp;2), fast tillämpad på ett av de mest svårhanterliga grundämnena som finns." },
+
+      { type: "h2", text: "Fler isotoper väntar" },
+      { type: "p", html: "Nästa steg är att upprepa experimentet med radiumisotoperna 223 och 225, som också har kärnspinn och därför kan avslöja ännu fler typer av symmetribrott. De nedkylda molekylerna är nu redo att användas i regelrätta kvantprecisionsmätningar, och metoden går i princip att återanvända för andra radioaktiva grundämnen — ett bordsstort alternativ till att jaga ny fysik i kilometerlånga partikelacceleratorer." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Radium upptäcktes av Marie och Pierre Curie 1898 och blev, tillsammans med polonium, ett av de första bevisen för att ett grundämne kan omvandlas till ett annat genom radioaktivt sönderfall.",
+        "Isotopen som användes i studien, radium-226, har en halveringstid på cirka 1&nbsp;600 år och sönderfaller genom alfasönderfall till den radioaktiva ädelgasen radon-222 — se Fysiklabbets genomgång om aktivitet och halveringstid, Fysik nivå&nbsp;1.",
+        "Molekylerna hölls vid 4–7&nbsp;kelvin under experimentet — bara några enstaka grader över absoluta nollpunkten, den lägsta temperatur som är fysikaliskt möjlig (0&nbsp;K = −273,15&nbsp;°C)."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-17-hannibal-alperna",
     date: "2026-07-17",
     time: "09:00",

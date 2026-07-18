@@ -5,6 +5,7 @@ gånger** — kontrollera den här listan först. Nyast överst.
 
 | Datum | id | Titel | Källa |
 |-------|----|----|-------|
+| 2026-07-18 | `2026-07-18-radium-molekyler` | Fysiker bäddar in radioaktivt radium i en sockerklump — och kyler ner det till några kelvin över absoluta nollpunkten | Caltech (pressmeddelande) / Phys.org / Science (C. J. Conn, N. R. Hutzler et al., 2026) |
 | 2026-07-17 | `2026-07-17-hannibal-alperna` | Fysiker räknar ut vilken bergspass Hannibal tog över Alperna — och varför elefanterna klarade sig bäst | Physics World / EurekAlert! (University of Oxford / iDiv, pressmeddelande) / PNAS (E. Berti, F. Vollrath, 2026) |
 | 2026-07-16 | `2026-07-16-neutronlins` | Neutroner får sin första riktiga lins — sju gånger skarpare bild av ett batteri | Phys.org / Scientific Frontline (referat av PSI:s pressmeddelande) / Nature Communications (M. R. Dhanalakshmi Veeraraj, D. Qu, H.-Y. Chen, J. Vila-Comamala et al., 2026) |
 | 2026-07-15 | `2026-07-15-varmekappa-3d` | Ny värmekappa gömmer föremål för infraröd strålning — i alla riktningar | University of Illinois News Bureau (pressmeddelande) / Phys.org / Nature Communications (W. Li, Y. Wang, O. Sigmund, X. S. Zhang, 2026) |

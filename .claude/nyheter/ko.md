@@ -14,6 +14,41 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-18) — kan tas upp senare
+
+- **OBS — undvik ”PLATON-kameran som spårar osynliga partiklar i 3D” om den dyker
+  upp igen**: ScienceDaily/phys.org/Gizmodo/SciTechDaily skrev alla om detta kring
+  2026-07-16/17 som om det vore färsk nyhet, men ETH Zürichs eget pressmeddelande
+  (”Neutrinos caught on camera”) visar att exakt samma Nature Communications-studie
+  (DOI 10.1038/s41467-026-70918-x, Dieminger/Alonso-Monsalve/Sgalaberna m.fl., ETH
+  Zürich + EPFL) publicerades redan 2026-04-22. Samma fälla som gallium-gåtan
+  (2026-07-10) och elektriska fältet i keramik (2026-07-12) — kolla alltid
+  originalpublikationens datum, inte omtäckningens. Källor:
+  https://www.sciencedaily.com/releases/2026/07/260716023610.htm ,
+  https://www.phys.ethz.ch/news-and-events/d-phys-news/2026/04/neutrinos-caught-on-camera.html
+  (tillagd 2026-07-18)
+- **Månbaserad gravitationsvågsdetektor kan bli känsligare tack vare Månens
+  geologi** — två artiklar i Physical Review Letters (2026-07-09, bl.a. Lei Zhang,
+  Institute of Geology and Geophysics, Kina) visar att Månens tjocka skorpa
+  (särskilt på bortsidan) kan förstärka gravitationsvågssignaler i decihertz-
+  bandet, vilket gör framtida månbaserade detektorer mer lovande än väntat. Bra
+  Fysik 2-vinkel (gravitationsvågor, resonans) men tungt teoretiskt och vi har
+  kört mycket astronomi/gravitationsvågor senaste veckorna. Källa:
+  https://physics.aps.org/articles/v19/s89 (tillagd 2026-07-18)
+- **Rumstempererad ”kvantstatistisk metakristall” av guld-metaatomer** — ett
+  plasmoniskt chip som filtrerar och dirigerar specifika kvanttillstånd av ljus
+  vid rumstemperatur utan kryokylning. Intressant kvantoptik-vinkel men mycket
+  teoretiskt tungt att förklara för gymnasienivå (kvantstatistik, plasmoner).
+  Källa: phys.org (sök ”room-temperature quantum material plasmonic metacrystal
+  2026”). (tillagd 2026-07-18)
+- **Kvantmätningar kan få tiden att ”gå baklänges” och skörda energi ur
+  mätprocessen** — Physical Review X-studie (García-Pintos, Liu, Gorshkov) om
+  kvantkontroll som omformar systemets ”tidspil” och kan driva en kvantbatteri.
+  Häftig termodynamik/kvantfysik-vinkel, men artikeln publicerades redan
+  2026-02-19 — ScienceDaily/Scientific American skrev om den i slutet av juni,
+  så den är för gammal för att räknas som färsk nyhet nu. Källa:
+  https://journals.aps.org/prx/abstract/10.1103/l18s-9vmh (tillagd 2026-07-18)
+
 ## Fynd som inte användes (2026-07-16) — kan tas upp senare
 
 - **Gravitationsvågor avslöjar dolda underpopulationer av svarta hål** — två

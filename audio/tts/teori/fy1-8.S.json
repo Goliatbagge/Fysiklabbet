@@ -1,0 +1,318 @@
+{
+ "id": "fy1-8.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "1b87f3a62d95fec67af58e1c1c830f20f7836b69",
+ "dur": 395.37,
+ "segments": [
+  {
+   "t": "Sammanfattning — Relativitetsteori",
+   "s": 0.1,
+   "e": 3.61
+  },
+  {
+   "t": "Det här korta kapitlet gav en försmak av Einsteins idé om att tid, längd och massa inte är absoluta storheter.",
+   "s": 3.56,
+   "e": 11.09
+  },
+  {
+   "t": "Utgångspunkten är att ljusets hastighet i vakuum alltid är densamma, oavsett hur källa och observatör rör sig — och det får tre konsekvenser: tidsdilatation, längdkontraktion och att massa och energi hör ihop genom energin E är lika med massan m gånger c i kvadrat .",
+   "s": 11.09,
+   "e": 26.89
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 26.89,
+   "e": 29.2
+  },
+  {
+   "t": "Ljushastigheten i vakuum — konstant, c är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund , oavsett hur ljuskällan eller observatören rör sig.",
+   "s": 29.2,
+   "e": 41.11
+  },
+  {
+   "t": "Michelson–Morleys experiment — 1887 års experiment som visade att ljusets hastighet inte adderas med jordens rörelse genom rymden.",
+   "s": 41.11,
+   "e": 50.34
+  },
+  {
+   "t": "Rörelsesystem — ett system (t.ex. en buss eller ett rymdskepp) som rör sig med konstant hastighet v relativt en observatör.",
+   "s": 50.34,
+   "e": 59.11
+  },
+  {
+   "t": "Egentid, t noll — tiden för ett förlopp mätt av någon som befinner sig inifrån rörelsesystemet.",
+   "s": 59.11,
+   "e": 65.96
+  },
+  {
+   "t": "Tidsdilatation — tiden går långsammare för ett rörligt objekt, sett från en observatör i vila.",
+   "s": 65.96,
+   "e": 72.36
+  },
+  {
+   "t": "Längdkontraktion — ett objekts längd i rörelsens riktning blir kortare vid höga hastigheter, sett från en observatör i vila.",
+   "s": 72.36,
+   "e": 80.3
+  },
+  {
+   "t": "Relativistisk massa — ett objekts massa ökar ju närmare ljusets hastighet det kommer.",
+   "s": 80.3,
+   "e": 86.22
+  },
+  {
+   "t": "Massa–energi-ekvivalens — massa och energi är utbytbara storheter enligt energin E är lika med massan m gånger c i kvadrat .",
+   "s": 86.22,
+   "e": 95.17
+  },
+  {
+   "t": "Formler",
+   "s": 95.17,
+   "e": 97.0
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 97.0,
+   "e": 99.36
+  },
+  {
+   "t": "Tidsdilatation",
+   "s": 99.36,
+   "e": 101.58
+  },
+  {
+   "t": "tiden t är lika med t noll delat med roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat",
+   "s": 101.58,
+   "e": 109.49
+  },
+  {
+   "t": "där",
+   "s": 109.49,
+   "e": 110.96
+  },
+  {
+   "t": "t noll är lika med tiden för ett förlopp inifrån ett rörelsesystem, egentid (sekunder)",
+   "s": 110.96,
+   "e": 117.81
+  },
+  {
+   "t": "t är lika med tiden för samma förlopp sett utifrån rörelsesystemet (sekunder)",
+   "s": 117.81,
+   "e": 123.9
+  },
+  {
+   "t": "v är lika med rörelsesystemets hastighet (meter per sekund)",
+   "s": 123.9,
+   "e": 129.12
+  },
+  {
+   "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )",
+   "s": 129.12,
+   "e": 137.88
+  },
+  {
+   "t": "Längdkontraktion",
+   "s": 137.88,
+   "e": 140.24
+  },
+  {
+   "t": "hävarmen l är lika med l noll gånger roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat",
+   "s": 140.24,
+   "e": 147.89
+  },
+  {
+   "t": "där",
+   "s": 147.89,
+   "e": 149.4
+  },
+  {
+   "t": "l noll är lika med längden i rörelsens riktning inifrån ett rörelsesystem (meter)",
+   "s": 149.4,
+   "e": 155.79
+  },
+  {
+   "t": "l är lika med längden i rörelsens riktning sett utifrån rörelsesystemet (meter)",
+   "s": 155.79,
+   "e": 162.05
+  },
+  {
+   "t": "v är lika med rörelsesystemets hastighet (meter per sekund)",
+   "s": 162.05,
+   "e": 167.26
+  },
+  {
+   "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )",
+   "s": 167.26,
+   "e": 175.99
+  },
+  {
+   "t": "Relativistisk massa",
+   "s": 175.99,
+   "e": 178.57
+  },
+  {
+   "t": "massan m är lika med m noll delat med roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat",
+   "s": 178.57,
+   "e": 186.3
+  },
+  {
+   "t": "där",
+   "s": 186.3,
+   "e": 187.81
+  },
+  {
+   "t": "m noll är lika med massan inifrån ett rörelsesystem (kilogram)",
+   "s": 187.81,
+   "e": 193.18
+  },
+  {
+   "t": "m är lika med massan sett utifrån rörelsesystemet (kilogram)",
+   "s": 193.18,
+   "e": 198.56
+  },
+  {
+   "t": "v är lika med rörelsesystemets hastighet (meter per sekund)",
+   "s": 198.56,
+   "e": 203.82
+  },
+  {
+   "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )",
+   "s": 203.82,
+   "e": 212.57
+  },
+  {
+   "t": "Energi hos massa",
+   "s": 212.57,
+   "e": 215.19
+  },
+  {
+   "t": "energin E är lika med massan m gånger c i kvadrat",
+   "s": 215.19,
+   "e": 219.79
+  },
+  {
+   "t": "där",
+   "s": 219.79,
+   "e": 221.26
+  },
+  {
+   "t": "E är lika med energi (joule)",
+   "s": 221.26,
+   "e": 224.54
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 224.54,
+   "e": 227.9
+  },
+  {
+   "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )",
+   "s": 227.9,
+   "e": 236.61
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 236.61,
+   "e": 239.49
+  },
+  {
+   "t": "Ljusets hastighet c är alltid densamma, oavsett hur ljuskällan eller observatören rör sig — det är detta som ger upphov till tidsdilatation, längdkontraktion och relativistisk massa.",
+   "s": 239.49,
+   "e": 250.43
+  },
+  {
+   "t": "t noll , l noll och m noll mäts av någon som befinner sig inifrån rörelsesystemet; t, l och m mäts av en observatör som ser systemet röra sig förbi.",
+   "s": 250.43,
+   "e": 261.15
+  },
+  {
+   "t": "Vid vardagliga hastigheter ( hastigheten v ll c ) blir roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat är ungefär lika med 1 och effekterna försvinnande små — det är först nära ljusets hastighet de blir märkbara.",
+   "s": 261.15,
+   "e": 274.76
+  },
+  {
+   "t": "Ju närmare v kommer c, desto mer ökar t och m, och desto mer minskar l.",
+   "s": 274.76,
+   "e": 288.59
+  },
+  {
+   "t": "Effekten är verklig och måste kompenseras för i praktiken, till exempel vid synkronisering av GPS-satelliters klockor med klockor vid jordytan.",
+   "s": 274.76,
+   "e": 288.59
+  },
+  {
+   "t": "energin E är lika med massan m gånger c i kvadrat visar att massa och energi är samma storhet i olika skepnad — eftersom c i kvadrat är enormt stort motsvarar en liten massa en enorm mängd energi.",
+   "s": 288.59,
+   "e": 303.08
+  },
+  {
+   "t": "Även gravitationsfält påverkar hur fort tiden går: tiden flyter långsammare i ett starkt gravitationsfält än i ett svagt, vilket bekräftats genom studier av GPS-satelliters atomklockor.",
+   "s": 303.03,
+   "e": 314.93
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 314.93,
+   "e": 317.99
+  },
+  {
+   "t": "Michelson och Morleys experiment skickade ljus i två motsatta riktningar parallellt med jordens bana runt solen för att undersöka om ljusets hastighet påverkades av jordens rörelse.",
+   "s": 317.99,
+   "e": 328.97
+  },
+  {
+   "t": "Ljus skickades i två motsatta riktningar parallellt med jordens bana runt solen.",
+   "s": 328.97,
+   "e": 334.59
+  },
+  {
+   "t": "Inför provet",
+   "s": 334.59,
+   "e": 336.71
+  },
+  {
+   "t": "Kan du förklara varför Michelson–Morleys experiment gick emot den klassiska förväntan?",
+   "s": 336.71,
+   "e": 342.77
+  },
+  {
+   "t": "Kan du beskriva vad tidsdilatation, längdkontraktion och relativistisk massa innebär i ord?",
+   "s": 342.77,
+   "e": 349.02
+  },
+  {
+   "t": "Kan du formeln för tidsdilatation och vad t noll respektive t står för?",
+   "s": 349.02,
+   "e": 354.49
+  },
+  {
+   "t": "Kan du formeln för längdkontraktion och vad l noll respektive l står för?",
+   "s": 354.49,
+   "e": 359.88
+  },
+  {
+   "t": "Kan du formeln för relativistisk massa?",
+   "s": 359.88,
+   "e": 363.36
+  },
+  {
+   "t": "Kan du räkna ut hur mycket tiden dilateras vid en given hastighet, till exempel hastigheten v är lika med 0,87 c ?",
+   "s": 363.36,
+   "e": 371.69
+  },
+  {
+   "t": "Kan du förklara varför ljus alltid mäts till hastigheten c, oavsett källans eller observatörens egen rörelse?",
+   "s": 371.69,
+   "e": 379.47
+  },
+  {
+   "t": "Kan du formeln energin E är lika med massan m gånger c i kvadrat och vad den säger om sambandet mellan massa och energi?",
+   "s": 379.47,
+   "e": 387.33
+  },
+  {
+   "t": "Vet du varför relativistiska effekter är omärkbara i vardagen men viktiga att räkna med för till exempel GPS-satelliter?",
+   "s": 387.33,
+   "e": 395.37
+  }
+ ]
+}

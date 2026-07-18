@@ -32,7 +32,11 @@ for (const subj of Object.values(WK.KATALOG)) {
                    : courseName === 'Matematik fortsättning nivå 1c' ? 'ma3c'
                    : courseName === 'Matematik fortsättning nivå 2' ? 'ma4' : 'fy1';
         for (const ch of Object.values(course.chapters || {})) {
-            for (const s of ch.sections || []) sections.push(code + '-' + s.num);
+            // Sammanfattningsavsnitt (num 'K.S') har repetitionsspel i stället
+            // för exit tickets — kräv ingen täckning för dem.
+            for (const s of ch.sections || []) {
+                if (!String(s.num).endsWith('.S')) sections.push(code + '-' + s.num);
+            }
         }
     }
 }

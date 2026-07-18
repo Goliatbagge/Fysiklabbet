@@ -1,0 +1,573 @@
+{
+ "id": "fy2-1.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "109bdd657fb0f9baadfb94e755f2243b53693400",
+ "dur": 659.47,
+ "segments": [
+  {
+   "t": "Sammanfattning — Rörelse och krafter",
+   "s": 0.1,
+   "e": 3.56
+  },
+  {
+   "t": "Det här kapitlet handlade om krafter som vrider och krafter som kröker en bana.",
+   "s": 3.51,
+   "e": 8.74
+  },
+  {
+   "t": "Du har lärt dig räkna med kraftmoment och momentjämvikt, beskriva cirkulär rörelse med period, frekvens, radianer och vinkelhastighet, och använda centripetalkraft för att analysera allt från en konisk pendel till en vertikal cirkelbana.",
+   "s": 8.74,
+   "e": 23.34
+  },
+  {
+   "t": "Kapitlet avslutades med kaströrelse, där rörelsen delas upp i en x-led och en y-led.",
+   "s": 23.34,
+   "e": 29.8
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 29.8,
+   "e": 32.12
+  },
+  {
+   "t": "Vridningspunkt — den axel eller punkt ett föremål vrider sig kring.",
+   "s": 32.12,
+   "e": 37.06
+  },
+  {
+   "t": "Hävarm ( hävarmen l ) — det vinkelräta (kortaste) avståndet mellan kraftens riktningslinje och vridningspunkten.",
+   "s": 37.06,
+   "e": 45.71
+  },
+  {
+   "t": "Kraftmoment ( kraftmomentet M ) — en krafts vridande förmåga, kraftmomentet M är lika med kraften F gånger hävarmen l ; positivt moturs, negativt medurs.",
+   "s": 45.71,
+   "e": 57.5
+  },
+  {
+   "t": "Momentjämvikt — kraftmomentet moturs är lika stort som kraftmomentet medurs, så att föremålet inte vrider sig; vridningspunkten kan då väljas fritt.",
+   "s": 57.5,
+   "e": 67.41
+  },
+  {
+   "t": "Period ( periodtiden T ) — tiden det tar för en rörelse att upprepa sig (t.ex. ett varv eller en svängning).",
+   "s": 67.41,
+   "e": 75.53
+  },
+  {
+   "t": "Frekvens ( frekvensen f ) — antalet upprepningar per sekund.",
+   "s": 75.53,
+   "e": 80.85
+  },
+  {
+   "t": "Radian — vinkelmått där 1 rad är den vinkel vars cirkelbåge är lika lång som radien; 360 grader är lika med 2 pi rad.",
+   "s": 80.85,
+   "e": 89.94
+  },
+  {
+   "t": "Vinkelhastighet (ω) — hur stor vinkel något vrider sig per tidsenhet.",
+   "s": 89.94,
+   "e": 95.14
+  },
+  {
+   "t": "Centripetalkraft ( F C ) — den resulterande kraft, riktad mot cirkelns centrum, som krävs för att hålla ett föremål i cirkulär rörelse.",
+   "s": 95.14,
+   "e": 104.96
+  },
+  {
+   "t": "Är inte en egen kraft, utan en resultant av de faktiska krafterna.",
+   "s": 104.96,
+   "e": 110.25
+  },
+  {
+   "t": "Centripetalacceleration ( a C ) — accelerationen som hör till centripetalkraften, riktad mot cirkelns centrum.",
+   "s": 110.25,
+   "e": 118.7
+  },
+  {
+   "t": "Konisk pendel — en pendel vars vikt sveper i en horisontell cirkel medan tråden bildar en konform.",
+   "s": 118.7,
+   "e": 125.56
+  },
+  {
+   "t": "Kaströrelse — rörelse i en bågformad bana (kastparabel) som kan delas upp i en x-led (konstant hastighet) och en y-led (konstant acceleration minus tyngdfaktorn g ); elevationsvinkeln α, kastvidden och stighöjden beskriver banan.",
+   "s": 125.56,
+   "e": 141.3
+  },
+  {
+   "t": "Formler",
+   "s": 141.3,
+   "e": 143.12
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 143.12,
+   "e": 145.47
+  },
+  {
+   "t": "Kraftmoment",
+   "s": 145.47,
+   "e": 147.6
+  },
+  {
+   "t": "kraftmomentet M är lika med kraften F gånger hävarmen l",
+   "s": 147.6,
+   "e": 152.45
+  },
+  {
+   "t": "där",
+   "s": 152.45,
+   "e": 153.93
+  },
+  {
+   "t": "M är lika med kraftmoment (Nm)",
+   "s": 153.93,
+   "e": 157.59
+  },
+  {
+   "t": "F är lika med kraft (newton)",
+   "s": 157.59,
+   "e": 161.07
+  },
+  {
+   "t": "l är lika med hävarmen (meter)",
+   "s": 161.07,
+   "e": 164.53
+  },
+  {
+   "t": "Momentlagen (momentjämvikt)",
+   "s": 164.53,
+   "e": 168.03
+  },
+  {
+   "t": "M ett är lika med M två",
+   "s": 168.03,
+   "e": 171.07
+  },
+  {
+   "t": "där",
+   "s": 171.07,
+   "e": 172.54
+  },
+  {
+   "t": "M ett är lika med kraftmomentet/kraftmomenten moturs",
+   "s": 172.54,
+   "e": 178.01
+  },
+  {
+   "t": "M två är lika med kraftmomentet/kraftmomenten medurs",
+   "s": 178.01,
+   "e": 183.38
+  },
+  {
+   "t": "Period och frekvens",
+   "s": 183.38,
+   "e": 185.81
+  },
+  {
+   "t": "periodtiden T är lika med 1 delat med frekvensen f vilket är ekvivalent med att f är lika med 1 delat med T",
+   "s": 185.81,
+   "e": 193.24
+  },
+  {
+   "t": "där",
+   "s": 193.24,
+   "e": 194.71
+  },
+  {
+   "t": "T är lika med period (sekunder)",
+   "s": 194.71,
+   "e": 198.19
+  },
+  {
+   "t": "f är lika med frekvens (Hz eller s upphöjt till minus 1)",
+   "s": 198.19,
+   "e": 203.55
+  },
+  {
+   "t": "Grader och radianer",
+   "s": 203.55,
+   "e": 206.07
+  },
+  {
+   "t": "360 grader är lika med 2 pi 180 grader som är lika med pi 90 grader som är lika med pi delat med 2",
+   "s": 206.07,
+   "e": 213.85
+  },
+  {
+   "t": "Vinkelhastighet",
+   "s": 213.85,
+   "e": 216.34
+  },
+  {
+   "t": "omega är lika med 2 pi delat med periodtiden T som är lika med 2 pi gånger frekvensen f",
+   "s": 216.34,
+   "e": 222.9
+  },
+  {
+   "t": "där",
+   "s": 222.9,
+   "e": 224.38
+  },
+  {
+   "t": "ω är lika med vinkelhastighet (rad/s)",
+   "s": 224.38,
+   "e": 229.01
+  },
+  {
+   "t": "T är lika med period (sekunder)",
+   "s": 229.01,
+   "e": 232.51
+  },
+  {
+   "t": "f är lika med frekvens (hertz)",
+   "s": 232.51,
+   "e": 236.01
+  },
+  {
+   "t": "Fart i cirkulär bana",
+   "s": 236.01,
+   "e": 238.79
+  },
+  {
+   "t": "hastigheten v är lika med omega gånger r som är lika med 2 pi gånger r delat med periodtiden T",
+   "s": 238.79,
+   "e": 245.56
+  },
+  {
+   "t": "där",
+   "s": 245.56,
+   "e": 247.07
+  },
+  {
+   "t": "v är lika med fart i rörelsens riktning (meter per sekund)",
+   "s": 247.07,
+   "e": 251.96
+  },
+  {
+   "t": "ω är lika med vinkelhastighet (rad/s)",
+   "s": 251.96,
+   "e": 256.61
+  },
+  {
+   "t": "r är lika med banradien (meter)",
+   "s": 256.61,
+   "e": 260.12
+  },
+  {
+   "t": "T är lika med period (sekunder)",
+   "s": 260.12,
+   "e": 263.64
+  },
+  {
+   "t": "Centripetalacceleration",
+   "s": 263.64,
+   "e": 266.46
+  },
+  {
+   "t": "a C är lika med hastigheten v i kvadrat delat med r som är lika med omega i kvadrat gånger r",
+   "s": 266.46,
+   "e": 274.38
+  },
+  {
+   "t": "Centripetalkraft",
+   "s": 266.46,
+   "e": 274.38
+  },
+  {
+   "t": "F C är lika med massan m gånger hastigheten v i kvadrat delat med r som är lika med 4 pi i kvadrat gånger m gånger r delat med periodtiden T i kvadrat",
+   "s": 274.38,
+   "e": 284.82
+  },
+  {
+   "t": "där",
+   "s": 284.82,
+   "e": 286.31
+  },
+  {
+   "t": "F C är lika med centripetalkraft (newton)",
+   "s": 286.31,
+   "e": 290.75
+  },
+  {
+   "t": "a C är lika med centripetalacceleration (m/s i kvadrat)",
+   "s": 290.75,
+   "e": 296.65
+  },
+  {
+   "t": "m är lika med massan på det som utför rörelsen (kilogram)",
+   "s": 296.65,
+   "e": 301.45
+  },
+  {
+   "t": "v är lika med fart i rörelsens riktning (meter per sekund)",
+   "s": 301.45,
+   "e": 306.4
+  },
+  {
+   "t": "r är lika med banradie (meter)",
+   "s": 306.4,
+   "e": 309.81
+  },
+  {
+   "t": "T är lika med period (sekunder)",
+   "s": 309.81,
+   "e": 313.27
+  },
+  {
+   "t": "Periodtid för konisk pendel",
+   "s": 313.27,
+   "e": 316.32
+  },
+  {
+   "t": "periodtiden T är lika med 2 pi roten ur hävarmen l gånger cosinus alfa delat med tyngdfaktorn g",
+   "s": 316.32,
+   "e": 323.73
+  },
+  {
+   "t": "där",
+   "s": 323.73,
+   "e": 325.2
+  },
+  {
+   "t": "T är lika med periodtid (sekunder)",
+   "s": 325.2,
+   "e": 328.86
+  },
+  {
+   "t": "l är lika med pendellängd (meter)",
+   "s": 328.86,
+   "e": 332.38
+  },
+  {
+   "t": "α är lika med utslagsvinkel mot vertikalplanet",
+   "s": 332.52,
+   "e": 336.69
+  },
+  {
+   "t": "g är lika med tyngdacceleration (m/s i kvadrat)",
+   "s": 336.64,
+   "e": 341.92
+  },
+  {
+   "t": "Kaströrelse i x- och y-led",
+   "s": 341.92,
+   "e": 345.17
+  },
+  {
+   "t": "v x är lika med v noll gånger cosinus alfa x som är lika med v noll gånger cosinus alfa gånger tiden t",
+   "s": 345.17,
+   "e": 363.14
+  },
+  {
+   "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t y som är lika med v noll gånger sinus alfa gånger t minus g gånger t i kvadrat delat med 2",
+   "s": 345.17,
+   "e": 363.14
+  },
+  {
+   "t": "hastigheten v är lika med roten ur v x i kvadrat plus v y i kvadrat",
+   "s": 363.14,
+   "e": 369.46
+  },
+  {
+   "t": "där",
+   "s": 369.46,
+   "e": 370.97
+  },
+  {
+   "t": "v x, y är lika med hastighet i x-/y-led (meter per sekund)",
+   "s": 370.97,
+   "e": 377.54
+  },
+  {
+   "t": "x, y är lika med läge i x-/y-led (meter)",
+   "s": 377.54,
+   "e": 383.05
+  },
+  {
+   "t": "v noll är lika med utgångshastighet (meter per sekund)",
+   "s": 383.05,
+   "e": 387.89
+  },
+  {
+   "t": "α är lika med vinkel mot horisontalplanet (elevationsvinkel)",
+   "s": 387.89,
+   "e": 393.1
+  },
+  {
+   "t": "t är lika med tid (sekunder)",
+   "s": 393.1,
+   "e": 396.39
+  },
+  {
+   "t": "v är lika med fart i kaströrelse (meter per sekund)",
+   "s": 396.39,
+   "e": 401.07
+  },
+  {
+   "t": "Kastvidd och stighöjd",
+   "s": 401.07,
+   "e": 403.75
+  },
+  {
+   "t": "x \\max är lika med v noll i kvadrat gånger sinus parentesen 2 alfa slut parentes delat med tyngdfaktorn g y \\max som är lika med v noll i kvadrat gånger sinus i kvadrat parentesen alfa slut parentes delat med 2 gram",
+   "s": 403.75,
+   "e": 419.69
+  },
+  {
+   "t": "där",
+   "s": 419.69,
+   "e": 421.17
+  },
+  {
+   "t": "x \\max är lika med kastvidd (meter) — gäller när rörelsen startar och slutar i samma horisontalplan",
+   "s": 421.17,
+   "e": 429.4
+  },
+  {
+   "t": "y \\max är lika med stighöjd (meter)",
+   "s": 429.4,
+   "e": 434.3
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 434.3,
+   "e": 437.17
+  },
+  {
+   "t": "Vid momentjämvikt kan vridningspunkten väljas fritt.",
+   "s": 437.17,
+   "e": 441.52
+  },
+  {
+   "t": "En kraft vars riktningslinje går genom den valda vridningspunkten får hävarmen 0 och ger då inget kraftmoment — ett smart val gör att en okänd kraft försvinner ur ekvationen.",
+   "s": 441.52,
+   "e": 451.56
+  },
+  {
+   "t": "Ju närmare tyngdpunkten en stödjande eller bärande kraft sitter, desto större del av tyngden bär den upp.",
+   "s": 451.56,
+   "e": 458.39
+  },
+  {
+   "t": "Ett föremål välter när tyngdpunktens lodräta riktningslinje hamnar utanför stödytan.",
+   "s": 458.39,
+   "e": 464.5
+  },
+  {
+   "t": "Centripetalkraften är ingen egen kraft, utan resultanten av de verkliga krafter som håller kroppen i cirkelbanan (spännkraft, normalkraft, friktion, tyngdkraft, …).",
+   "s": 464.5,
+   "e": 476.76
+  },
+  {
+   "t": "Vid cirkulär rörelse med konstant fart är farten konstant, men hastigheten (vektor) är det inte — riktningen ändras hela tiden.",
+   "s": 476.76,
+   "e": 485.46
+  },
+  {
+   "t": "I gränsfall (toppen av en loop, övre läget i en vertikal cirkel) är spännkraften/normalkraften noll, och enbart tyngdkraften utgör centripetalkraften — det ger den minsta tillåtna farten.",
+   "s": 485.46,
+   "e": 497.66
+  },
+  {
+   "t": "I kaströrelse behandlas x-led och y-led var för sig: konstant hastighet i x-led (ingen kraft verkar), konstant acceleration minus tyngdfaktorn g i y-led (endast tyngdkraften verkar).",
+   "s": 497.66,
+   "e": 510.2
+  },
+  {
+   "t": "Formlerna för kastvidd och stighöjd gäller bara när kastet startar och slutar i samma horisontalplan — annars måste ekvationerna för x och y lösas separat (som i \"kast från höjd\").",
+   "s": 510.2,
+   "e": 521.32
+  },
+  {
+   "t": "Sammansatta uppgifter som \"Den fatala gungan\" kombinerar energiprincipen ( E trycket p är lika med E k ) med centripetalkraft för att bestämma en okänd fart.",
+   "s": 521.32,
+   "e": 531.6
+  },
+  {
+   "t": "Härledningen i \"Den flygande kossan\" bygger på två likformiga trianglar: den geometriska triangeln ( höjden h , r , snörlängden) och kraftriangeln ( F S y , F S x , F S ).",
+   "s": 531.6,
+   "e": 544.76
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 544.76,
+   "e": 547.82
+  },
+  {
+   "t": "Kraftmoment beror på både kraftens storlek och hävarmens längd — samma kraft ger olika vridande förmåga beroende på var den greppar.",
+   "s": 547.82,
+   "e": 555.92
+  },
+  {
+   "t": "I cirkulär rörelse pekar farten v tangentiellt medan centripetalaccelerationen a C pekar rakt in mot cirkelns centrum — de är alltid vinkelräta mot varandra.",
+   "s": 555.92,
+   "e": 565.84
+  },
+  {
+   "t": "I den koniska pendeln bildar snöret vinkeln α mot vertikalen.",
+   "s": 565.84,
+   "e": 570.47
+  },
+  {
+   "t": "Spännkraften F S längs snöret och tyngdkraften F G bestämmer tillsammans periodtiden för det horisontella varvet.",
+   "s": 570.47,
+   "e": 578.24
+  },
+  {
+   "t": "Inför provet",
+   "s": 578.24,
+   "e": 580.39
+  },
+  {
+   "t": "Kan du definiera vridningspunkt och hävarm, och beräkna kraftmoment kraftmomentet M är lika med kraften F gånger hävarmen l ?",
+   "s": 580.39,
+   "e": 588.96
+  },
+  {
+   "t": "Kan du välja vridningspunkt fritt vid momentjämvikt och lösa ut en okänd kraft med momentlagen M ett är lika med M två ?",
+   "s": 588.96,
+   "e": 597.2
+  },
+  {
+   "t": "Kan du växla mellan period periodtiden T och frekvens frekvensen f , och mellan grader och radianer?",
+   "s": 597.2,
+   "e": 603.76
+  },
+  {
+   "t": "Kan du formeln för vinkelhastighet omega är lika med 2 pi delat med periodtiden T som är lika med 2 pi gånger frekvensen f och för banfart hastigheten v är lika med omega gånger r ?",
+   "s": 603.76,
+   "e": 614.66
+  },
+  {
+   "t": "Kan du formlerna för centripetalacceleration och centripetalkraft, och förklara varför centripetalkraften alltid är en resultant av andra krafter?",
+   "s": 614.66,
+   "e": 625.65
+  },
+  {
+   "t": "Kan du analysera en vertikal cirkelrörelse (t.ex. en vikt i ett snöre) i både övre och nedre vändläget, inklusive gränsfallet där spännkraften blir noll?",
+   "s": 625.6,
+   "e": 636.1
+  },
+  {
+   "t": "Kan du formeln för periodtiden hos en konisk pendel?",
+   "s": 636.1,
+   "e": 640.46
+  },
+  {
+   "t": "Kan du dela upp en kaströrelse i x- och y-led och räkna ut hastighet och läge vid en given tid?",
+   "s": 640.46,
+   "e": 647.09
+  },
+  {
+   "t": "Kan du formlerna för kastvidd och stighöjd, och veta när de gäller?",
+   "s": 647.09,
+   "e": 651.87
+  },
+  {
+   "t": "Kan du kombinera energiprincipen med centripetalkraft i en sammansatt uppgift, som i \"Den fatala gungan\"?",
+   "s": 651.87,
+   "e": 659.47
+  }
+ ]
+}

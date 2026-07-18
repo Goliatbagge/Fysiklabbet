@@ -1,0 +1,80 @@
+// Repetitionsspel — Fysik nivå 2, kapitel 5: Astronomi.
+// Format och regler: .claude/repetition-brief.md
+window.REPETITION = window.REPETITION || {};
+window.REPETITION['fy2-5'] = {
+    course: 'Fysik nivå 2',
+    courseCode: 'fy2',
+    chapter: 'Astronomi',
+    chapterNumber: 5,
+    intro: 'Här repeterar du astronomikapitlet: universums skalor, hur avstånd mäts i rymden, månens faser, solens färg, svarta hål och stjärnbildning.',
+    stations: [
+        {
+            type: 'ordna',
+            title: 'Ordna universums strukturer efter storlek',
+            instruktion: 'Ordna strukturerna från minst till störst. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
+            etikettStart: 'minst',
+            etikettSlut: 'störst',
+            items: ['Månens bana runt jorden', 'Solsystemet', 'Vintergatan (galaxen)', 'Lokala galaxgruppen', 'Laniakea (superhopen)'],
+        },
+        {
+            type: 'sortera',
+            title: 'Vilken avståndsenhet passar bäst?',
+            instruktion: 'Sortera avstånden i rätt låda. Dra en bricka till en låda, eller klicka på brickan och sedan på lådan.',
+            bins: [
+                { name: 'Astronomisk enhet (AU)', items: ['Avståndet mellan jorden och solen', 'Avståndet till Neptunus', 'Ett typiskt avstånd inom solsystemet'] },
+                { name: 'Ljusår eller parsec', items: ['Avståndet till en närbelägen stjärna', 'Avståndet till Andromedagalaxen', 'Vintergatans diameter'] },
+            ],
+        },
+        {
+            type: 'par',
+            title: 'Para ihop formel/begrepp och betydelse',
+            instruktion: 'Dra rätt beskrivning till varje formel eller begrepp.',
+            pairs: [
+                { a: '$r = \\dfrac{1}{p}$', b: 'Avstånd i parsec via parallaxvinkeln' },
+                { a: '$v_f = \\sqrt{\\dfrac{2GM}{r}}$', b: 'Flykthastighet' },
+                { a: '$r_s = \\dfrac{2GM}{c^{2}}$', b: 'Schwarzschildradien' },
+                { a: '$\\sigma \\propto \\dfrac{1}{\\lambda^{4}}$', b: 'Rayleighspridningens våglängdsberoende' },
+                { a: '1 AU', b: 'Jordens medelavstånd till solen' },
+                { a: '1 pc', b: 'Ungefär 3,26 ljusår' },
+                { a: '29,5 dygn', b: 'Synodisk månad — nymåne till nymåne' },
+                { a: '27,3 dygn', b: 'Siderisk månad — ett varv mätt mot fixstjärnorna' },
+            ],
+        },
+        {
+            type: 'lucka',
+            title: 'Fyll i rätt ord',
+            instruktion: 'Dra rätt ord eller uttryck till varje lucka.',
+            formler: [
+                { fore: 'Om parallaxvinkeln är liten är avståndet till stjärnan', efter: '.', svar: 'stort' },
+                { fore: 'En parsec är det avstånd som ger en parallax på exakt', efter: '.', svar: '1 bågsekund' },
+                { fore: 'Blått ljus sprids i atmosfären', efter: 'än rött ljus.', svar: 'mer' },
+                { fore: 'Vid solnedgång passerar solljuset en mycket', efter: 'genom atmosfären än mitt på dagen.', svar: 'längre väg' },
+                { fore: 'En stjärna är i hydrostatisk jämvikt när fusionens strålningstryck exakt balanserar', efter: '.', svar: 'gravitationen' },
+            ],
+            distraktorer: ['litet', 'mindre', 'trycket'],
+        },
+        {
+            type: 'blixt',
+            title: 'Sant eller falskt?',
+            instruktion: 'Avgör om påståendet om svarta hål och stjärnbildning stämmer.',
+            pastaenden: [
+                { text: 'Ett svart hål med större massa har en större Schwarzschildradie.',
+                  sant: true, varfor: 'Schwarzschildradien $r_s = 2GM/c^{2}$ är direkt proportionell mot massan $M$.' },
+                { text: 'Ljus som passerat händelsehorisonten kan ta sig ut igen om det rör sig tillräckligt snabbt.',
+                  sant: false, varfor: 'Inget, inte ens ljus som redan rör sig med maxfarten $c$, kan ta sig ut innanför händelsehorisonten.' },
+                { text: 'Astronomer kan upptäcka ett svart hål genom att studera hur närliggande stjärnor rör sig i sina banor.',
+                  sant: true, varfor: 'Genom att mäta stjärnornas banor runt ett osynligt föremål kan man räkna ut dess massa — så kartlades Sagittarius A*.' },
+                { text: 'Ett svart hål syns direkt genom att det lyser starkt vitt.',
+                  sant: false, varfor: 'Ett svart hål sänder inget eget ljus; det upptäcks indirekt, till exempel via en het ackretionsskiva.' },
+                { text: 'Gravitationsvågor från sammansmältande svarta hål detekterades första gången av LIGO år 2015.',
+                  sant: true, varfor: 'LIGO detekterade krusningar i rumtiden från två sammansmältande svarta hål år 2015.' },
+                { text: 'En protostjärna värms upp av den lägesenergi som frigörs när gasen faller inåt.',
+                  sant: true, varfor: 'När gas faller inåt omvandlas lägesenergi till rörelseenergi och värme, precis som luften i en cykelpump.' },
+                { text: 'Fusion i en ny stjärna startar så snart gasmolnet börjar kollapsa.',
+                  sant: false, varfor: 'Fusionen startar först när kärnan efter lång tids kollaps når omkring 10 miljoner kelvin.' },
+                { text: 'Tyngre stjärnor lever längre än lätta stjärnor eftersom de har mer bränsle.',
+                  sant: false, varfor: 'Tunga stjärnor förbränner sitt bränsle så mycket snabbare att de ändå lever kortare tid trots att de har mer av det.' },
+            ],
+        },
+    ],
+};

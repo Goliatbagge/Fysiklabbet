@@ -1,0 +1,438 @@
+{
+ "id": "fy1-3.S",
+ "voice": "sv-SE-SofieNeural",
+ "hash": "522a2c77b8dd64b2c286333defa2f702cfe59ebc",
+ "dur": 572.43,
+ "segments": [
+  {
+   "t": "Sammanfattning — Krafter",
+   "s": 0.1,
+   "e": 2.88
+  },
+  {
+   "t": "Det här kapitlet handlade om vad som får saker att röra sig eller stå still: Newtons tre lagar, tyngdkraft och normalkraft, gravitationen mellan massor, friktion samt hur tyngdkraften delas upp i komposanter på ett lutande plan.",
+   "s": 2.83,
+   "e": 16.74
+  },
+  {
+   "t": "Du ska efter kapitlet kunna rita korrekta kraftdiagram, räkna med Newtons andra lag och avgöra accelerationens tecken i tillämpningar som lutande plan och trissor.",
+   "s": 16.74,
+   "e": 26.74
+  },
+  {
+   "t": "Begrepp att kunna",
+   "s": 26.74,
+   "e": 29.06
+  },
+  {
+   "t": "kraft — påverkan som kan ändra ett föremåls rörelse eller form; SI-enhet N; betecknas F och är en vektorstorhet.",
+   "s": 29.06,
+   "e": 37.17
+  },
+  {
+   "t": "resulterande kraft ( F resistansen R ) — vektorsumman av alla krafter som verkar på ett föremål; är noll vid kraftjämvikt.",
+   "s": 37.17,
+   "e": 45.8
+  },
+  {
+   "t": "komposant — del av en kraft uppdelad i en given riktning, t.ex. längs och vinkelrätt mot ett lutande plan.",
+   "s": 45.8,
+   "e": 53.42
+  },
+  {
+   "t": "Newtons första lag (tröghetslagen) — är F resistansen R är lika med 0 förblir föremålet i vila eller rör sig med konstant hastighet.",
+   "s": 53.42,
+   "e": 62.7
+  },
+  {
+   "t": "tröghet — ett föremåls motstånd mot förändring av sin rörelse; större massa ger större tröghet.",
+   "s": 62.7,
+   "e": 69.76
+  },
+  {
+   "t": "Newtons andra lag (accelerationslagen) — sambandet F resistansen R är lika med massan m gånger accelerationen a mellan resulterande kraft, massa och acceleration.",
+   "s": 69.76,
+   "e": 81.21
+  },
+  {
+   "t": "Newtons tredje lag — till varje kraft på ett föremål (aktion) hör en lika stor, motriktad kraft av samma sort på ett annat föremål (reaktion).",
+   "s": 81.21,
+   "e": 90.88
+  },
+  {
+   "t": "jämviktskrafter — krafter som verkar på samma föremål och håller det i jämvikt; skiljer sig från motkrafter, som alltid verkar på två olika föremål.",
+   "s": 90.88,
+   "e": 100.38
+  },
+  {
+   "t": "tyngdkraft ( F G ) och tyngdfaktor ( tyngdfaktorn g ) — tyngdkraften ges av F G är lika med massan m gånger tyngdfaktorn g ; tyngdfaktorn är 9,82 newton per kilogram i Sverige.",
+   "s": 100.38,
+   "e": 113.51
+  },
+  {
+   "t": "normalkraft ( F N ) — kontaktkraften från ett underlag på ett föremål, alltid riktad vinkelrätt mot ytan.",
+   "s": 113.51,
+   "e": 121.64
+  },
+  {
+   "t": "friktionstal ( my ) — hur stor andel av normalkraften som blir friktionskraft; saknar enhet.",
+   "s": 121.64,
+   "e": 129.24
+  },
+  {
+   "t": "spännkraft ( F S ) — kraften i ett spänt rep eller en lina; lika stor genom hela snöret i en friktionsfri trissa.",
+   "s": 129.24,
+   "e": 137.93
+  },
+  {
+   "t": "Formler",
+   "s": 137.93,
+   "e": 139.75
+  },
+  {
+   "t": "Kapitlets formler",
+   "s": 139.75,
+   "e": 142.09
+  },
+  {
+   "t": "Newtons andra lag",
+   "s": 142.09,
+   "e": 144.51
+  },
+  {
+   "t": "F resistansen R är lika med massan m gånger accelerationen a",
+   "s": 144.51,
+   "e": 149.7
+  },
+  {
+   "t": "där",
+   "s": 149.7,
+   "e": 151.21
+  },
+  {
+   "t": "F resistansen R är lika med resulterande kraft (newton)",
+   "s": 151.21,
+   "e": 156.5
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 156.5,
+   "e": 159.85
+  },
+  {
+   "t": "a är lika med acceleration (m/s i kvadrat)",
+   "s": 159.85,
+   "e": 164.79
+  },
+  {
+   "t": "Newtons tredje lag",
+   "s": 164.79,
+   "e": 167.34
+  },
+  {
+   "t": "vektorn kraften F A på B är lika med minus vektorn F B på A",
+   "s": 167.34,
+   "e": 173.39
+  },
+  {
+   "t": "Tyngdkraft",
+   "s": 167.34,
+   "e": 173.39
+  },
+  {
+   "t": "F G är lika med massan m gånger tyngdfaktorn g",
+   "s": 173.39,
+   "e": 177.64
+  },
+  {
+   "t": "där",
+   "s": 177.64,
+   "e": 179.11
+  },
+  {
+   "t": "F G är lika med tyngdkraft (newton)",
+   "s": 179.11,
+   "e": 183.0
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 183.0,
+   "e": 186.35
+  },
+  {
+   "t": "g är lika med tyngdfaktor (9,82 newton per kilogram i Sverige)",
+   "s": 186.35,
+   "e": 192.49
+  },
+  {
+   "t": "Newtons gravitationslag",
+   "s": 192.49,
+   "e": 195.32
+  },
+  {
+   "t": "F G är lika med G gånger m ett gånger m två delat med r i kvadrat",
+   "s": 195.32,
+   "e": 201.14
+  },
+  {
+   "t": "där",
+   "s": 201.14,
+   "e": 202.61
+  },
+  {
+   "t": "F G är lika med gravitationskraft (newton)",
+   "s": 202.61,
+   "e": 207.09
+  },
+  {
+   "t": "G är lika med gravitationskonstanten ( 6,67 gånger 10 upphöjt till minus 11 Nm i kvadrat per kilogram i kvadrat )",
+   "s": 207.09,
+   "e": 216.38
+  },
+  {
+   "t": "m ett är lika med massa hos föremål 1 (kilogram)",
+   "s": 216.38,
+   "e": 221.14
+  },
+  {
+   "t": "m två är lika med massa hos föremål 2 (kilogram)",
+   "s": 221.14,
+   "e": 225.81
+  },
+  {
+   "t": "r är lika med avståndet mellan föremålens tyngdpunkter (meter)",
+   "s": 225.81,
+   "e": 230.89
+  },
+  {
+   "t": "Friktionskraft",
+   "s": 230.89,
+   "e": 233.18
+  },
+  {
+   "t": "F frekvensen f är lika med my gånger F N",
+   "s": 233.18,
+   "e": 237.44
+  },
+  {
+   "t": "där",
+   "s": 237.44,
+   "e": 238.91
+  },
+  {
+   "t": "F frekvensen f är lika med friktionskraft (newton)",
+   "s": 238.91,
+   "e": 243.71
+  },
+  {
+   "t": "μ är lika med friktionstal (saknar enhet)",
+   "s": 243.71,
+   "e": 247.74
+  },
+  {
+   "t": "F N är lika med normalkraft (newton)",
+   "s": 247.74,
+   "e": 252.01
+  },
+  {
+   "t": "Lutande plan — komposanter av tyngdkraften",
+   "s": 252.01,
+   "e": 255.9
+  },
+  {
+   "t": "F ett är lika med massan m gånger tyngdfaktorn g gånger sinus alfa F två som är lika med m gånger g gånger cosinus alfa",
+   "s": 255.9,
+   "e": 264.5
+  },
+  {
+   "t": "där",
+   "s": 264.5,
+   "e": 266.02
+  },
+  {
+   "t": "F ett är lika med tyngdkraftens komposant nedför planet (newton)",
+   "s": 266.02,
+   "e": 271.56
+  },
+  {
+   "t": "F två är lika med tyngdkraftens komposant vinkelrätt mot planet (newton)",
+   "s": 271.56,
+   "e": 277.52
+  },
+  {
+   "t": "m är lika med föremålets massa (kilogram)",
+   "s": 277.52,
+   "e": 281.62
+  },
+  {
+   "t": "g är lika med tyngdfaktor (newton per kilogram)",
+   "s": 281.62,
+   "e": 286.21
+  },
+  {
+   "t": "α är lika med planets lutningsvinkel mot horisontalplanet",
+   "s": 286.21,
+   "e": 290.86
+  },
+  {
+   "t": "Trigonometri i rätvinklig triangel",
+   "s": 290.86,
+   "e": 294.26
+  },
+  {
+   "t": "sinus hastigheten v är lika med accelerationen a delat med c, cosinus v som är lika med b delat med c, tangens v som är lika med a delat med b",
+   "s": 294.26,
+   "e": 304.01
+  },
+  {
+   "t": "där a är motstående katet, b är närliggande katet och c är hypotenusan till vinkeln v.",
+   "s": 304.01,
+   "e": 310.99
+  },
+  {
+   "t": "Viktiga samband och metoder",
+   "s": 310.99,
+   "e": 313.85
+  },
+  {
+   "t": "Är den resulterande kraften noll ( F resistansen R är lika med 0 ) är föremålet antingen i vila eller rör sig med konstant hastighet (Newtons första lag) — annars accelererar det enligt F resistansen R är lika med massan m gånger accelerationen a .",
+   "s": 313.85,
+   "e": 330.99
+  },
+  {
+   "t": "Skilj på jämviktskrafter (verkar på samma föremål, kan vara olika typer av kraft, summerar till noll) och motkrafter (verkar på två olika föremål, alltid samma typ av kraft, enligt Newtons tredje lag).",
+   "s": 330.94,
+   "e": 344.46
+  },
+  {
+   "t": "Motkraften till en tyngdkraft är alltid en annan tyngdkraft — aldrig en normalkraft.",
+   "s": 344.46,
+   "e": 350.51
+  },
+  {
+   "t": "Normalkraften F N är alltid vinkelrät mot kontaktytan — rakt upp på ett vågrätt bord, men snett ut från ett lutande plan eller vågrätt in från en vägg.",
+   "s": 350.51,
+   "e": 360.14
+  },
+  {
+   "t": "På ett lutande plan: vid vila eller konstant hastighet är F N är lika med F två och F frekvensen f är lika med F ett ; accelererar föremålet gäller i stället F resistansen R är lika med F ett minus F frekvensen f och accelerationen a är lika med F resistansen R delat med massan m .",
+   "s": 360.14,
+   "e": 377.91
+  },
+  {
+   "t": "Vinkeln mellan tyngdkraften och dess komposant vinkelrätt mot planet är alltid lika stor som planets lutningsvinkel — det följer av att vinkelsumman i en triangel är 180 grader.",
+   "s": 377.91,
+   "e": 388.67
+  },
+  {
+   "t": "Vid en dragkloss (dynamometer) gäller: i vila och vid konstant hastighet är F frekvensen f är lika med F avståndet d r accelerationen a tyngdfaktorn g ; accelererar klossen är F frekvensen f är mindre än F avståndet d r accelerationen a tyngdfaktorn g .",
+   "s": 388.67,
+   "e": 406.58
+  },
+  {
+   "t": "I ett trissystem: räkna först på hela systemet för att hitta den gemensamma accelerationen ( F resistansen R är lika med skillnaden mellan tyngdkrafterna, m är lika med totala massan), räkna sedan på en enskild kropp för att hitta spännkraften F S .",
+   "s": 406.58,
+   "e": 421.69
+  },
+  {
+   "t": "Spännkraften i ett snöre är lika stor genom hela snöret (även runt friktionsfria trissor) — i en dragkamp avgör friktionen mot marken, inte olika stor kraft i själva repet.",
+   "s": 421.69,
+   "e": 433.03
+  },
+  {
+   "t": "Accelerationens tecken avgörs av hur hastigheten (med tecken, som vektor) ändras — inte av hur farten ändras.",
+   "s": 433.03,
+   "e": 441.16
+  },
+  {
+   "t": "En hiss som bromsar in på väg ner har en hastighet som blir mindre negativ, det vill säga ökar, så accelerationen är positiv trots att farten minskar.",
+   "s": 441.16,
+   "e": 450.54
+  },
+  {
+   "t": "Figurer värda att minnas",
+   "s": 450.54,
+   "e": 453.58
+  },
+  {
+   "t": "En vikt i vila på ett bord — tyngdkraften och normalkraften är lika stora men verkar på samma föremål (jämviktskrafter, inte kraft och motkraft):",
+   "s": 453.58,
+   "e": 475.73
+  },
+  {
+   "t": "Tyngdkraften delas upp i en komposant längs planet och en vinkelrätt mot planet — grunden för alla beräkningar på lutande plan:",
+   "s": 453.58,
+   "e": 475.73
+  },
+  {
+   "t": "Tyngdkraften delas upp i en komposant F ett nedför planet och en komposant F två vinkelrätt mot planet.",
+   "s": 453.58,
+   "e": 475.73
+  },
+  {
+   "t": "Normalkraften F N är lika lång som F två och friktionskraften F frekvensen f lika lång som F ett.",
+   "s": 475.73,
+   "e": 483.11
+  },
+  {
+   "t": "Två vikter kopplade över trissor på ett bord — spännkraften är lika stor i hela snöret:",
+   "s": 483.11,
+   "e": 490.23
+  },
+  {
+   "t": "Inför provet",
+   "s": 483.11,
+   "e": 490.23
+  },
+  {
+   "t": "Kan du förklara Newtons tre lagar med egna ord och ge ett eget exempel på var och en?",
+   "s": 490.23,
+   "e": 496.36
+  },
+  {
+   "t": "Kan du skilja mellan jämviktskrafter och motkrafter, och förklara varför motkraften till en tyngdkraft aldrig är en normalkraft?",
+   "s": 496.36,
+   "e": 504.19
+  },
+  {
+   "t": "Kan du formeln för tyngdkraft ( F G är lika med massan m gånger tyngdfaktorn g ) och vet du skillnaden mellan massa och tyngd?",
+   "s": 504.19,
+   "e": 512.18
+  },
+  {
+   "t": "Vet du att normalkraften alltid är vinkelrät mot kontaktytan, oavsett om underlaget är vågrätt, lutande eller lodrätt?",
+   "s": 512.18,
+   "e": 521.07
+  },
+  {
+   "t": "Kan du ställa upp och räkna med Newtons gravitationslag och förklara varför tyngdfaktorn på jorden blir just 9,82 newton per kilogram?",
+   "s": 521.07,
+   "e": 530.02
+  },
+  {
+   "t": "Kan du formeln för friktionskraft ( F frekvensen f är lika med my gånger F N ) och avgöra om ett föremål glider eller står stilla?",
+   "s": 530.02,
+   "e": 538.69
+  },
+  {
+   "t": "Kan du dela upp tyngdkraften i komposanter på ett lutande plan och räkna ut normalkraft, friktionskraft och acceleration?",
+   "s": 538.69,
+   "e": 546.88
+  },
+  {
+   "t": "Vet du hur man avgör accelerationens tecken utifrån hur hastigheten (inte farten) ändras, t.ex. i ett hiss- eller kastexempel?",
+   "s": 546.88,
+   "e": 556.39
+  },
+  {
+   "t": "Kan du räkna ut acceleration och spännkraft i ett trissystem genom att först se på hela systemet och sedan på en enskild kropp?",
+   "s": 556.39,
+   "e": 564.53
+  },
+  {
+   "t": "Kan du rita ett korrekt kraftdiagram med rätt angreppspunkter för F G , F N , F frekvensen f och F S ?",
+   "s": 564.53,
+   "e": 572.43
+  }
+ ]
+}

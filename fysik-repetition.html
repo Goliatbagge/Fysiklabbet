@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repetition inför provet - Fysiklabbet</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Fysiklabbet">
+    <meta property="og:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://fysiklabbet.se/og-fysiklabbet.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>window.__CB = String(Date.now());</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
+    <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.29.7/babel.min.js"></script>
+    <script>if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed-mode');</script>
+    <style>
+        html.embed-mode .lab-topbar, html.embed-mode .lab-header, html.embed-mode .breadcrumb { display: none !important; }
+        html.embed-mode #fb-feedback-widget { display: none !important; }
+
+        .rep-main { max-width: 1020px; margin: 0 auto; padding: 26px 18px 60px; }
+        .breadcrumb { font-size: 13px; margin-bottom: 18px; }
+
+        .rep-head { margin-bottom: 18px; }
+        .rep-head h1 {
+            font-family: 'Instrument Serif', serif; font-weight: 400;
+            font-size: clamp(30px, 4.6vw, 44px); line-height: 1.08;
+            color: var(--lab-ink, #0f1620); margin: 6px 0 10px;
+        }
+        .rep-intro { max-width: 68ch; color: var(--lab-ink-soft, #2c3442); font-size: 15px; line-height: 1.65; }
+
+        /* ── Spelytan ── */
+        .rep-stage {
+            position: relative; margin-top: 18px;
+            background: linear-gradient(160deg, #f7f2e8, #ece3d2);
+            border: 1px solid rgba(15,22,32,0.22); border-radius: 14px;
+            box-shadow: inset 0 3px 12px rgba(15,22,32,0.07);
+            padding: 56px 26px 26px;
+            user-select: none; -webkit-user-select: none;
+            min-height: 480px;
+        }
+        .rep-stage:fullscreen, .rep-stage:-webkit-full-screen {
+            width: 100vw; height: 100vh; border-radius: 0; overflow-y: auto;
+        }
+        @media (max-width: 640px) { .rep-stage { padding: 56px 12px 18px; } }
+
+        .rep-station-head { text-align: center; margin-bottom: 6px; }
+        .rep-station-head .rs-kicker {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.14em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170);
+        }
+        .rep-station-head h2 {
+            font-family: 'Instrument Serif', serif; font-weight: 400;
+            font-size: clamp(22px, 3vw, 30px); color: var(--lab-ink, #0f1620); margin: 4px 0 6px;
+        }
+        .rep-station-head .rs-instr { font-size: 14px; color: var(--lab-ink-soft, #2c3442); max-width: 62ch; margin: 0 auto; }
+
+        /* Stations-stegvisare */
+        .rep-steps { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 14px 0 22px; flex-wrap: wrap; }
+        .rep-step {
+            width: 30px; height: 30px; border-radius: 50%;
+            border: 1.6px solid rgba(15,22,32,0.35); background: rgba(255,255,255,0.55);
+            display: inline-flex; align-items: center; justify-content: center;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+            color: var(--lab-ink, #0f1620); cursor: pointer; padding: 0;
+        }
+        .rep-step.done { background: var(--lab-ink, #0f1620); color: #f3eee4; border-color: var(--lab-ink, #0f1620); }
+        .rep-step.active { border-color: var(--lab-accent, #c8324a); border-width: 2.2px; }
+        .rep-step:disabled { opacity: 0.45; cursor: not-allowed; }
+        .rep-step-line { width: 20px; height: 0; border-top: 1.6px dashed rgba(15,22,32,0.3); }
+
+        /* Brickor (chips) */
+        .rep-chip {
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            background: #fdfaf3; border: 1.6px solid rgba(15,22,32,0.4);
+            border-radius: 10px; padding: 9px 14px; font-size: 15px;
+            color: var(--lab-ink, #0f1620);
+            box-shadow: 0 1.5px 0 rgba(15,22,32,0.28);
+            cursor: grab; touch-action: none; line-height: 1.35;
+            text-align: center;
+        }
+        .rep-chip:active { cursor: grabbing; }
+        .rep-chip.selected { border-color: var(--lab-accent, #c8324a); border-width: 2.2px; box-shadow: 0 0 0 3px rgba(200,50,74,0.14); }
+        .rep-chip.ghosted { opacity: 0.25; }
+        .rep-chip.locked { cursor: default; border-color: rgba(47,122,77,0.75); background: #eef4ec; box-shadow: none; }
+
+        .rep-pool { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 16px auto 20px; max-width: 860px; }
+
+        /* Släppytor */
+        .rep-drop {
+            border: 1.8px dashed rgba(15,22,32,0.35); border-radius: 10px;
+            min-height: 46px; display: flex; align-items: center; justify-content: center;
+            padding: 4px 8px; background: rgba(255,255,255,0.35);
+            transition: border-color 120ms, background 120ms;
+        }
+        .rep-drop.over { border-color: var(--lab-accent, #c8324a); background: rgba(200,50,74,0.06); }
+        .rep-drop.filled { border-style: solid; border-color: rgba(47,122,77,0.75); background: #eef4ec; }
+        .rep-drop.wrongflash { animation: repshake 300ms; border-color: var(--lab-accent, #c8324a); }
+        @keyframes repshake {
+            0%,100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); } 75% { transform: translateX(5px); }
+        }
+        .rep-chip.wrongflash { animation: repshake 300ms; border-color: var(--lab-accent, #c8324a); }
+
+        /* Para ihop-raderna */
+        .rep-pairs { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(170px, 1fr); gap: 10px 16px; max-width: 760px; margin: 0 auto; align-items: stretch; }
+        .rep-pair-left {
+            background: rgba(255,255,255,0.6); border: 1px solid rgba(15,22,32,0.22);
+            border-radius: 10px; padding: 9px 14px; font-size: 15px; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: var(--lab-ink, #0f1620); line-height: 1.35;
+        }
+        @media (max-width: 560px) { .rep-pairs { grid-template-columns: 1fr 1fr; } }
+
+        /* Sortera-lådorna */
+        .rep-bins { display: grid; gap: 14px; max-width: 900px; margin: 0 auto; align-items: start; }
+        .rep-bin {
+            border: 1.8px solid rgba(15,22,32,0.35); border-radius: 12px;
+            background: rgba(255,255,255,0.4); padding: 10px; min-height: 120px;
+        }
+        .rep-bin.over { border-color: var(--lab-accent, #c8324a); background: rgba(200,50,74,0.05); }
+        .rep-bin.wrongflash { animation: repshake 300ms; }
+        .rep-bin-title {
+            font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.1em;
+            text-transform: uppercase; font-weight: 600; color: var(--lab-ink, #0f1620);
+            text-align: center; border-bottom: 1px dashed rgba(15,22,32,0.3);
+            padding-bottom: 7px; margin-bottom: 9px;
+        }
+        .rep-bin-items { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
+
+        /* Ordna-listan */
+        .rep-order { display: flex; flex-direction: column; gap: 8px; max-width: 560px; margin: 0 auto; }
+        .rep-order-row { display: flex; align-items: center; gap: 10px; }
+        .rep-order-num {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lab-ink-muted, #5a6170);
+            width: 22px; text-align: right; flex-shrink: 0;
+        }
+        .rep-order-row .rep-chip { flex-grow: 1; }
+        .rep-order-row .rep-chip.rightpos { border-color: rgba(47,122,77,0.75); background: #eef4ec; cursor: default; }
+        .rep-order-ends { display: flex; justify-content: space-between; max-width: 560px; margin: 4px auto 10px; width: 100%;
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); }
+
+        /* Lucka-formlerna */
+        .rep-gaps { display: flex; flex-direction: column; gap: 12px; max-width: 640px; margin: 0 auto 6px; }
+        .rep-gap-row {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            background: rgba(255,255,255,0.55); border: 1px solid rgba(15,22,32,0.2);
+            border-radius: 12px; padding: 12px 14px; font-size: 17px; flex-wrap: wrap;
+        }
+        .rep-gap-row .rep-drop { min-width: 84px; min-height: 42px; }
+
+        /* Sant/falskt */
+        .rep-tf { max-width: 620px; margin: 0 auto; text-align: center; }
+        .rep-tf-card {
+            background: rgba(255,255,255,0.6); border: 1px solid rgba(15,22,32,0.25);
+            border-radius: 14px; padding: 26px 22px; font-size: 18px; line-height: 1.5;
+            color: var(--lab-ink, #0f1620); min-height: 110px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .rep-tf-btns { display: flex; gap: 14px; justify-content: center; margin-top: 18px; }
+        .rep-tf-btn {
+            font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600;
+            padding: 11px 34px; border-radius: 11px; cursor: pointer;
+            border: 1.8px solid var(--lab-ink, #0f1620); background: #fdfaf3; color: var(--lab-ink, #0f1620);
+            box-shadow: 0 2px 0 rgba(15,22,32,0.3);
+        }
+        .rep-tf-btn:hover { background: #f3eee4; }
+        .rep-tf-btn:disabled { opacity: 0.5; cursor: default; }
+        .rep-tf-why {
+            margin-top: 16px; font-size: 14.5px; line-height: 1.55; text-align: left;
+            border-left: 3px solid rgba(15,22,32,0.35); padding: 6px 14px;
+            color: var(--lab-ink-soft, #2c3442); background: rgba(255,255,255,0.45); border-radius: 0 9px 9px 0;
+        }
+        .rep-tf-why.ok { border-left-color: #2f7a4d; }
+        .rep-tf-why.fel { border-left-color: var(--lab-accent, #c8324a); }
+        .rep-tf-why .rw-verdict { font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 3px; }
+        .rep-tf-why.ok .rw-verdict { color: #2f7a4d; }
+        .rep-tf-why.fel .rw-verdict { color: var(--lab-accent, #c8324a); }
+
+        /* Knappar */
+        .rep-btn {
+            font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 600;
+            padding: 10px 26px; border-radius: 10px; cursor: pointer;
+            border: 1.8px solid var(--lab-ink, #0f1620);
+            background: var(--lab-ink, #0f1620); color: #f3eee4;
+            box-shadow: 0 2px 0 rgba(15,22,32,0.35);
+        }
+        .rep-btn:hover { background: #232c3a; }
+        .rep-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .rep-btn.quiet { background: #fdfaf3; color: var(--lab-ink, #0f1620); }
+        .rep-btn.quiet:hover { background: #f3eee4; }
+        .rep-actions { display: flex; gap: 12px; justify-content: center; margin-top: 22px; flex-wrap: wrap; }
+
+        /* Felräknare */
+        .rep-meta { display: flex; justify-content: center; gap: 22px; margin-top: 16px;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); }
+
+        /* Stationsklar-panelen */
+        .rep-done { text-align: center; padding: 30px 10px; }
+        .rep-done h3 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 28px; margin: 12px 0 4px; color: var(--lab-ink, #0f1620); }
+        .rep-done p { font-size: 14.5px; color: var(--lab-ink-soft, #2c3442); }
+        .rep-stars { display: inline-flex; gap: 6px; }
+        .rep-stars svg { display: block; }
+
+        /* Resultatvyn */
+        .rep-result-rows { max-width: 560px; margin: 18px auto 0; display: flex; flex-direction: column; gap: 8px; }
+        .rep-result-row {
+            display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.55);
+            border: 1px solid rgba(15,22,32,0.2); border-radius: 10px; padding: 9px 14px; font-size: 14.5px;
+            color: var(--lab-ink, #0f1620);
+        }
+        .rep-result-row .rr-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--lab-ink-muted, #5a6170); width: 18px; }
+        .rep-result-row .rr-title { flex-grow: 1; text-align: left; }
+
+        /* Kapitelväljaren (utan hash) */
+        .rep-choose h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 26px; margin: 26px 0 10px; color: var(--lab-ink, #0f1620); }
+        .rep-choose-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+        .rep-choose-card {
+            display: block; text-decoration: none; background: #fdfaf3;
+            border: 1px solid rgba(15,22,32,0.28); border-radius: 12px; padding: 14px 16px;
+            color: var(--lab-ink, #0f1620); box-shadow: 0 1.5px 0 rgba(15,22,32,0.22);
+        }
+        .rep-choose-card:hover { border-color: var(--lab-accent, #c8324a); }
+        .rep-choose-card .rc-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--lab-ink-muted, #5a6170); }
+        .rep-choose-card .rc-title { font-weight: 600; font-size: 16px; margin-top: 3px; }
+
+        /* Drag-spöket */
+        .rep-ghost {
+            position: fixed; z-index: 60; pointer-events: none;
+            transform: translate(-50%, -50%) rotate(-1.5deg) scale(1.04);
+            opacity: 0.92; filter: drop-shadow(0 6px 10px rgba(15,22,32,0.28));
+        }
+
+        /* KaTeX i brickor: något mindre */
+        .rep-chip .katex, .rep-pair-left .katex, .rep-gap-row .katex { font-size: 1.02em; }
+    </style>
+</head>
+<body class="lab-sim">
+    <div class="lab-topbar lab-topbar--on-sim">
+        <div class="lab-topbar-inner">
+            <span>FYSIKLABBET — TEORI, SIMULERINGAR OCH ÖVNINGAR I FYSIK</span>
+        </div>
+    </div>
+
+    <div class="lab-header lab-header--on-sim">
+        <div class="lab-header-inner">
+            <a class="lab-logo" href="index.html">
+                <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+                    <g transform="rotate(-24 18 18)">
+                        <ellipse cx="18" cy="18" rx="15" ry="6" fill="none" stroke="currentColor" stroke-width="1.4" />
+                        <circle cx="28.04" cy="13.54" r="1.9" fill="var(--lab-accent)" />
+                    </g>
+                    <circle cx="18" cy="18" r="2.8" fill="var(--lab-accent)" />
+                </svg>
+                <span class="lab-logo-text">Fysiklabbet</span>
+            </a>
+            <nav class="lab-nav" aria-label="Huvudnavigation">
+                <a href="index.html">Start</a>
+                <div class="lab-nav-dd">
+                    <button type="button" class="lab-nav-dd-trigger" aria-haspopup="true">
+                        Ämne
+                        <svg class="lab-nav-dd-caret" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+                    </button>
+                    <div class="lab-nav-dd-menu">
+                        <a href="katalog.html#fy1">Fysik nivå 1</a>
+                        <a href="katalog.html#fy2">Fysik nivå 2</a>
+                        <a href="katalog.html#ma1c">Matematik nivå 1c</a>
+                        <a href="katalog.html#ma2c">Matematik nivå 2c</a>
+                        <a href="katalog.html#ma3c">Matematik fortsättning nivå 1c</a>
+                        <a href="katalog.html#ma4">Matematik fortsättning nivå 2</a>
+                    </div>
+                </div>
+                <a href="simuleringar.html">Simuleringar</a>
+                <a href="nyheter.html">Fysiknyheter</a>
+                <a href="om.html">Om</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="root"></div>
+
+    <!-- Kapitelpaket — ett per kapitel. Läses in före appen. -->
+    <script src="data/repetition/fy1-1.js"></script>
+    <script src="data/repetition/fy1-2.js"></script>
+    <script src="data/repetition/fy1-3.js"></script>
+    <script src="data/repetition/fy1-4.js"></script>
+    <script src="data/repetition/fy1-5.js"></script>
+    <script src="data/repetition/fy1-6.js"></script>
+    <script src="data/repetition/fy1-7.js"></script>
+    <script src="data/repetition/fy1-8.js"></script>
+    <script src="data/repetition/fy1-9.js"></script>
+    <script src="data/repetition/fy2-1.js"></script>
+    <script src="data/repetition/fy2-2.js"></script>
+    <script src="data/repetition/fy2-3.js"></script>
+    <script src="data/repetition/fy2-4.js"></script>
+    <script src="data/repetition/fy2-5.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useMemo, useCallback } = React;
+
+        const PACKS = window.REPETITION || {};
+
+        // ── Hjälpare ─────────────────────────────────────────────
+
+        function shuffled(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            // Undvik att en blandning råkar bli identisk med originalet
+            if (a.length > 2 && a.every((x, i) => x === arr[i])) {
+                [a[0], a[1]] = [a[1], a[0]];
+            }
+            return a;
+        }
+
+        // Renderar en sträng där $...$ är KaTeX och resten vanlig text.
+        // VIKTIGT: allt läggs i EN gemensam wrapper-span. Flera syskon-spans
+        // blir egna flex-items i flex-containrar (kort, brickor) — då bryts
+        // texten i separata kolumncentrerade bitar (buggen där "s-t" lossnade
+        // från raden). En enda span ger normalt inline-flöde med rätt baslinje.
+        function Rich({ text }) {
+            const parts = String(text).split(/(\$[^$]+\$)/g);
+            return (
+                <span>
+                    {parts.map((p, i) => {
+                        if (p.startsWith('$') && p.endsWith('$')) {
+                            const html = katex.renderToString(p.slice(1, -1), { throwOnError: false });
+                            return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
+                        }
+                        return <span key={i}>{p}</span>;
+                    })}
+                </span>
+            );
+        }
+
+        function Star({ filled }) {
+            return (
+                <svg width="26" height="26" viewBox="0 0 24 24"
+                     fill={filled ? 'var(--lab-accent, #c8324a)' : 'none'}
+                     stroke={filled ? 'var(--lab-accent, #c8324a)' : 'rgba(15,22,32,0.4)'}
+                     strokeWidth="1.6" strokeLinejoin="round">
+                    <path d="M12 2.6l2.9 5.9 6.5 0.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-0.9z" />
+                </svg>
+            );
+        }
+
+        function Stars({ n }) {
+            return (
+                <span className="rep-stars" aria-label={n + ' av 3 stjärnor'}>
+                    <Star filled={n >= 1} /><Star filled={n >= 2} /><Star filled={n >= 3} />
+                </span>
+            );
+        }
+
+        // Stjärnor utifrån antal fel i förhållande till antal moment.
+        function starsFor(mistakes, items) {
+            if (mistakes === 0) return 3;
+            if (mistakes <= Math.max(1, Math.round(items * 0.25))) return 2;
+            return 1;
+        }
+
+        // ── Dra-och-släpp (pointer events) + klick-att-välja ────
+        //
+        // Robust klassiskt mönster: pointerdown på brickan registrerar
+        // move/up-lyssnare på window (mus-moves bubblar alltid dit; touch
+        // har implicit capture på startelementet och bubblar också dit).
+        // Spöket är ett permanent DOM-element som flyttas direkt via style
+        // — ingen React-re-render sker under själva draget, så rörelsen är
+        // mjuk och inget event går förlorat. En kort tryckning utan rörelse
+        // (< 4 px) räknas som klick (välj/avvälj); annars är det ett drag
+        // och släpp-ytan hittas via elementFromPoint på [data-drop].
+        function useDragEngine(onDropChip, onClickChip) {
+            const ghostRef = useRef(null);
+            const activeRef = useRef(false);
+
+            const chipHandlers = (chipId, disabled) => ({
+                onPointerDown: (e) => {
+                    if (disabled || activeRef.current) return;
+                    if (e.button !== undefined && e.button !== 0) return;
+                    const el = e.currentTarget;
+                    const st = {
+                        pid: e.pointerId, sx: e.clientX, sy: e.clientY,
+                        w: el.getBoundingClientRect().width,
+                        html: el.innerHTML, moved: false,
+                    };
+                    activeRef.current = true;
+
+                    const setGhostPos = (x, y) => {
+                        const g = ghostRef.current;
+                        if (!g) return;
+                        g.style.left = x + 'px';
+                        g.style.top = y + 'px';
+                    };
+                    const onMove = (ev) => {
+                        if (ev.pointerId !== st.pid) return;
+                        if (!st.moved) {
+                            if (Math.hypot(ev.clientX - st.sx, ev.clientY - st.sy) < 4) return;
+                            st.moved = true;
+                            const g = ghostRef.current;
+                            if (g) {
+                                g.firstChild.innerHTML = st.html;
+                                g.style.width = st.w + 'px';
+                                g.style.display = 'block';
+                            }
+                            el.classList.add('ghosted');
+                        }
+                        setGhostPos(ev.clientX, ev.clientY);
+                        const t = document.elementFromPoint(ev.clientX, ev.clientY);
+                        const drop = t && t.closest('[data-drop]');
+                        document.querySelectorAll('[data-drop].over').forEach(n => { if (n !== drop) n.classList.remove('over'); });
+                        if (drop) drop.classList.add('over');
+                        if (ev.cancelable) ev.preventDefault();   // stoppa scroll under touch-drag
+                    };
+                    const cleanup = () => {
+                        window.removeEventListener('pointermove', onMove);
+                        window.removeEventListener('pointerup', onUp);
+                        window.removeEventListener('pointercancel', onCancel);
+                        const g = ghostRef.current;
+                        if (g) g.style.display = 'none';
+                        el.classList.remove('ghosted');
+                        document.querySelectorAll('[data-drop].over').forEach(n => n.classList.remove('over'));
+                        activeRef.current = false;
+                    };
+                    const onUp = (ev) => {
+                        if (ev.pointerId !== st.pid) return;
+                        cleanup();
+                        if (!st.moved) {
+                            if (onClickChip) onClickChip(chipId);
+                            return;
+                        }
+                        const t = document.elementFromPoint(ev.clientX, ev.clientY);
+                        const drop = t && t.closest('[data-drop]');
+                        if (drop && onDropChip) onDropChip(chipId, drop.getAttribute('data-drop'));
+                    };
+                    const onCancel = (ev) => {
+                        if (ev.pointerId !== st.pid) return;
+                        cleanup();
+                    };
+                    window.addEventListener('pointermove', onMove, { passive: false });
+                    window.addEventListener('pointerup', onUp);
+                    window.addEventListener('pointercancel', onCancel);
+                },
+            });
+
+            // Permanent spök-element — visas/flyttas direkt via style under drag.
+            const ghost = (
+                <div className="rep-ghost" ref={ghostRef} style={{ display: 'none' }} aria-hidden="true">
+                    <div className="rep-chip" />
+                </div>
+            );
+
+            return { chipHandlers, ghost };
+        }
+
+        // Blinka "fel" på ett element via klass
+        function flashWrong(el) {
+            if (!el) return;
+            el.classList.remove('wrongflash');
+            void el.offsetWidth;
+            el.classList.add('wrongflash');
+            setTimeout(() => el.classList.remove('wrongflash'), 350);
+        }
+
+        // ── Station: Para ihop ───────────────────────────────────
+        function ParStation({ station, onComplete }) {
+            const pairs = station.pairs;
+            const [placed, setPlaced] = useState({});     // leftIdx -> chipIdx
+            const [selected, setSelected] = useState(null);
+            const [mistakes, setMistakes] = useState(0);
+            const chips = useMemo(() => shuffled(pairs.map((p, i) => i)), []);
+            const doneCount = Object.keys(placed).length;
+
+            useEffect(() => {
+                if (doneCount === pairs.length) {
+                    onComplete({ mistakes, items: pairs.length });
+                }
+            }, [doneCount]);
+
+            const tryPlace = (chipIdx, leftIdx) => {
+                if (placed[leftIdx] !== undefined) return;
+                if (chipIdx === leftIdx) {
+                    setPlaced(p => ({ ...p, [leftIdx]: chipIdx }));
+                    setSelected(null);
+                } else {
+                    setMistakes(m => m + 1);
+                    flashWrong(document.querySelector('[data-drop="L' + leftIdx + '"]'));
+                    setSelected(null);
+                }
+            };
+
+            const { chipHandlers, ghost } = useDragEngine(
+                (chipId, dropId) => {
+                    if (!dropId.startsWith('L')) return;
+                    tryPlace(parseInt(chipId, 10), parseInt(dropId.slice(1), 10));
+                },
+                (chipId) => setSelected(s => (s === chipId ? null : chipId))
+            );
+
+            const onDropClick = (leftIdx) => {
+                if (selected !== null) tryPlace(parseInt(selected, 10), leftIdx);
+            };
+
+            return (
+                <div>
+                    <div className="rep-pool">
+                        {chips.map(ci => {
+                            const used = Object.values(placed).includes(ci);
+                            if (used) return null;
+                            return (
+                                <button key={ci} type="button"
+                                    className={'rep-chip' + (String(selected) === String(ci) ? ' selected' : '')}
+                                    {...chipHandlers(String(ci), false)}>
+                                    <Rich text={pairs[ci].b} />
+                                </button>
+                            );
+                        })}
+                    </div>
+                    <div className="rep-pairs">
+                        {pairs.map((p, li) => (
+                            <React.Fragment key={li}>
+                                <div className="rep-pair-left"><Rich text={p.a} /></div>
+                                <div className={'rep-drop' + (placed[li] !== undefined ? ' filled' : '')}
+                                     data-drop={'L' + li}
+                                     onClick={() => onDropClick(li)}>
+                                    {placed[li] !== undefined
+                                        ? <span className="rep-chip locked"><Rich text={pairs[placed[li]].b} /></span>
+                                        : <span style={{ fontSize: 12, color: 'var(--lab-ink-muted)' }}>Släpp här</span>}
+                                </div>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                    <div className="rep-meta">
+                        <span>Klara: {doneCount} / {pairs.length}</span>
+                        <span>Fel: {mistakes}</span>
+                    </div>
+                    {ghost}
+                </div>
+            );
+        }
+
+        // ── Station: Sortera i lådor ─────────────────────────────
+        function SorteraStation({ station, onComplete }) {
+            const bins = station.bins;
+            const allItems = useMemo(() => {
+                const list = [];
+                bins.forEach((b, bi) => b.items.forEach(it => list.push({ text: it, bin: bi })));
+                return shuffled(list);
+            }, []);
+            const [placed, setPlaced] = useState({});   // itemIdx -> binIdx
+            const [selected, setSelected] = useState(null);
+            const [mistakes, setMistakes] = useState(0);
+            const doneCount = Object.keys(placed).length;
+
+            useEffect(() => {
+                if (doneCount === allItems.length) onComplete({ mistakes, items: allItems.length });
+            }, [doneCount]);
+
+            const tryPlace = (itemIdx, binIdx) => {
+                if (placed[itemIdx] !== undefined) return;
+                if (allItems[itemIdx].bin === binIdx) {
+                    setPlaced(p => ({ ...p, [itemIdx]: binIdx }));
+                    setSelected(null);
+                } else {
+                    setMistakes(m => m + 1);
+                    flashWrong(document.querySelector('[data-drop="B' + binIdx + '"]'));
+                    setSelected(null);
+                }
+            };
+
+            const { chipHandlers, ghost } = useDragEngine(
+                (chipId, dropId) => {
+                    if (!dropId.startsWith('B')) return;
+                    tryPlace(parseInt(chipId, 10), parseInt(dropId.slice(1), 10));
+                },
+                (chipId) => setSelected(s => (s === chipId ? null : chipId))
+            );
+
+            return (
+                <div>
+                    <div className="rep-pool">
+                        {allItems.map((it, ii) => placed[ii] === undefined && (
+                            <button key={ii} type="button"
+                                className={'rep-chip' + (String(selected) === String(ii) ? ' selected' : '')}
+                                {...chipHandlers(String(ii), false)}>
+                                <Rich text={it.text} />
+                            </button>
+                        ))}
+                    </div>
+                    <div className="rep-bins" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+                        {bins.map((b, bi) => (
+                            <div key={bi} className="rep-bin" data-drop={'B' + bi}
+                                 onClick={() => { if (selected !== null) tryPlace(parseInt(selected, 10), bi); }}>
+                                <div className="rep-bin-title">{b.name}</div>
+                                <div className="rep-bin-items">
+                                    {allItems.map((it, ii) => placed[ii] === bi && (
+                                        <span key={ii} className="rep-chip locked"><Rich text={it.text} /></span>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="rep-meta">
+                        <span>Klara: {doneCount} / {allItems.length}</span>
+                        <span>Fel: {mistakes}</span>
+                    </div>
+                    {ghost}
+                </div>
+            );
+        }
+
+        // ── Station: Ordna i följd ───────────────────────────────
+        function OrdnaStation({ station, onComplete }) {
+            const correct = station.items;
+            const [order, setOrder] = useState(() => shuffled(correct.map((_, i) => i)));
+            const [lockedPos, setLockedPos] = useState({});  // pos -> true (rätt efter kontroll)
+            const [selected, setSelected] = useState(null);
+            const [mistakes, setMistakes] = useState(0);
+            const [checks, setChecks] = useState(0);
+            const [complete, setComplete] = useState(false);
+
+            const swap = (p1, p2) => {
+                if (lockedPos[p1] || lockedPos[p2]) return;
+                setOrder(o => {
+                    const n = o.slice();
+                    [n[p1], n[p2]] = [n[p2], n[p1]];
+                    return n;
+                });
+                setSelected(null);
+            };
+
+            // Drag = flytta brickan TILL platsen (insticks-semantik): brickan
+            // tas ur listan och skjuts in på målplatsen, övriga olåsta brickor
+            // förskjuts. Låsta (rätta) positioner står orörda kvar.
+            const moveTo = (from, to) => {
+                if (from === to || lockedPos[from] || lockedPos[to]) return;
+                setOrder(o => {
+                    const unlocked = o.map((_, p) => p).filter(p => !lockedPos[p]);
+                    const seq = unlocked.map(p => o[p]);
+                    const fi = unlocked.indexOf(from), ti = unlocked.indexOf(to);
+                    if (fi === -1 || ti === -1) return o;
+                    const [item] = seq.splice(fi, 1);
+                    seq.splice(ti, 0, item);
+                    const n = o.slice();
+                    unlocked.forEach((p, i) => { n[p] = seq[i]; });
+                    return n;
+                });
+                setSelected(null);
+            };
+
+            const { chipHandlers, ghost } = useDragEngine(
+                (chipPos, dropId) => {
+                    if (!dropId.startsWith('P')) return;
+                    moveTo(parseInt(chipPos, 10), parseInt(dropId.slice(1), 10));
+                },
+                (chipPos) => {
+                    const p = parseInt(chipPos, 10);
+                    if (lockedPos[p]) return;
+                    setSelected(s => {
+                        if (s === null) return chipPos;
+                        if (s === chipPos) return null;
+                        swap(parseInt(s, 10), p);
+                        return null;
+                    });
+                }
+            );
+
+            const check = () => {
+                let wrong = 0;
+                const newLocked = { ...lockedPos };
+                order.forEach((itemIdx, pos) => {
+                    if (itemIdx === pos) newLocked[pos] = true;
+                    else wrong++;
+                });
+                setLockedPos(newLocked);
+                setChecks(c => c + 1);
+                if (wrong === 0) {
+                    setComplete(true);
+                    onComplete({ mistakes, items: correct.length });
+                } else {
+                    setMistakes(m => m + wrong);
+                    order.forEach((itemIdx, pos) => {
+                        if (itemIdx !== pos) flashWrong(document.querySelector('[data-drop="P' + pos + '"] .rep-chip'));
+                    });
+                }
+            };
+
+            return (
+                <div>
+                    {(station.etikettStart || station.etikettSlut) && (
+                        <div className="rep-order-ends">
+                            <span>Överst: {station.etikettStart}</span>
+                            <span>Nederst: {station.etikettSlut}</span>
+                        </div>
+                    )}
+                    <div className="rep-order">
+                        {order.map((itemIdx, pos) => (
+                            <div key={pos} className="rep-order-row"
+                                 data-drop={lockedPos[pos] ? undefined : 'P' + pos}>
+                                <span className="rep-order-num">{pos + 1}.</span>
+                                <button type="button"
+                                    className={'rep-chip' + (lockedPos[pos] ? ' rightpos' : '') + (String(selected) === String(pos) ? ' selected' : '')}
+                                    {...chipHandlers(String(pos), !!lockedPos[pos] || complete)}>
+                                    <Rich text={correct[itemIdx]} />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="rep-actions">
+                        <button type="button" className="rep-btn" onClick={check} disabled={complete}>
+                            Kontrollera ordningen
+                        </button>
+                    </div>
+                    <div className="rep-meta">
+                        <span>Kontroller: {checks}</span>
+                        <span>Fel: {mistakes}</span>
+                    </div>
+                    {ghost}
+                </div>
+            );
+        }
+
+        // ── Station: Formellucka ─────────────────────────────────
+        function LuckaStation({ station, onComplete }) {
+            const rows = station.formler;   // { fore, efter, svar }  (allt Rich-text)
+            const chipList = useMemo(() => {
+                const list = rows.map((r, i) => ({ text: r.svar, row: i }));
+                (station.distraktorer || []).forEach(d => list.push({ text: d, row: -1 }));
+                return shuffled(list);
+            }, []);
+            const [placed, setPlaced] = useState({});   // rowIdx -> chipIdx
+            const [selected, setSelected] = useState(null);
+            const [mistakes, setMistakes] = useState(0);
+            const doneCount = Object.keys(placed).length;
+
+            useEffect(() => {
+                if (doneCount === rows.length) onComplete({ mistakes, items: rows.length });
+            }, [doneCount]);
+
+            const tryPlace = (chipIdx, rowIdx) => {
+                if (placed[rowIdx] !== undefined) return;
+                if (chipList[chipIdx].row === rowIdx) {
+                    setPlaced(p => ({ ...p, [rowIdx]: chipIdx }));
+                    setSelected(null);
+                } else {
+                    setMistakes(m => m + 1);
+                    flashWrong(document.querySelector('[data-drop="G' + rowIdx + '"]'));
+                    setSelected(null);
+                }
+            };
+
+            const { chipHandlers, ghost } = useDragEngine(
+                (chipId, dropId) => {
+                    if (!dropId.startsWith('G')) return;
+                    tryPlace(parseInt(chipId, 10), parseInt(dropId.slice(1), 10));
+                },
+                (chipId) => setSelected(s => (s === chipId ? null : chipId))
+            );
+
+            return (
+                <div>
+                    <div className="rep-pool">
+                        {chipList.map((c, ci) => {
+                            const used = Object.values(placed).includes(ci);
+                            if (used) return null;
+                            return (
+                                <button key={ci} type="button"
+                                    className={'rep-chip' + (String(selected) === String(ci) ? ' selected' : '')}
+                                    {...chipHandlers(String(ci), false)}>
+                                    <Rich text={c.text} />
+                                </button>
+                            );
+                        })}
+                    </div>
+                    <div className="rep-gaps">
+                        {rows.map((r, ri) => (
+                            <div key={ri} className="rep-gap-row">
+                                {r.fore ? <span><Rich text={r.fore} /></span> : null}
+                                <div className={'rep-drop' + (placed[ri] !== undefined ? ' filled' : '')}
+                                     data-drop={'G' + ri}
+                                     onClick={() => { if (selected !== null) tryPlace(parseInt(selected, 10), ri); }}>
+                                    {placed[ri] !== undefined
+                                        ? <span style={{ padding: '2px 6px' }}><Rich text={chipList[placed[ri]].text} /></span>
+                                        : <span style={{ fontSize: 12, color: 'var(--lab-ink-muted)' }}>?</span>}
+                                </div>
+                                {r.efter ? <span><Rich text={r.efter} /></span> : null}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="rep-meta">
+                        <span>Klara: {doneCount} / {rows.length}</span>
+                        <span>Fel: {mistakes}</span>
+                    </div>
+                    {ghost}
+                </div>
+            );
+        }
+
+        // ── Station: Sant eller falskt ───────────────────────────
+        function BlixtStation({ station, onComplete }) {
+            const items = useMemo(() => shuffled(station.pastaenden), []);
+            const [idx, setIdx] = useState(0);
+            const [answered, setAnswered] = useState(null);   // true om spelarens svar var rätt
+            const [mistakes, setMistakes] = useState(0);
+
+            const cur = items[idx];
+            const answer = (val) => {
+                if (answered !== null) return;
+                const ok = val === cur.sant;
+                if (!ok) setMistakes(m => m + 1);
+                setAnswered(ok);
+            };
+            const next = () => {
+                if (idx + 1 >= items.length) {
+                    onComplete({ mistakes, items: items.length });
+                } else {
+                    setIdx(i => i + 1);
+                    setAnswered(null);
+                }
+            };
+
+            return (
+                <div className="rep-tf">
+                    <div className="rep-meta" style={{ marginTop: 0, marginBottom: 12 }}>
+                        <span>Påstående {idx + 1} / {items.length}</span>
+                        <span>Fel: {mistakes}</span>
+                    </div>
+                    <div className="rep-tf-card"><Rich text={cur.text} /></div>
+                    <div className="rep-tf-btns">
+                        <button type="button" className="rep-tf-btn" disabled={answered !== null} onClick={() => answer(true)}>Sant</button>
+                        <button type="button" className="rep-tf-btn" disabled={answered !== null} onClick={() => answer(false)}>Falskt</button>
+                    </div>
+                    {answered !== null && (
+                        <div className={'rep-tf-why ' + (answered ? 'ok' : 'fel')}>
+                            <span className="rw-verdict">{answered ? 'Rätt' : 'Fel'} — påståendet är {cur.sant ? 'sant' : 'falskt'}</span>
+                            <Rich text={cur.varfor} />
+                        </div>
+                    )}
+                    {answered !== null && (
+                        <div className="rep-actions">
+                            <button type="button" className="rep-btn" onClick={next}>
+                                {idx + 1 >= items.length ? 'Slutför stationen' : 'Nästa påstående'}
+                            </button>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const STATION_TYPES = {
+            par: { comp: ParStation, tag: 'Para ihop' },
+            sortera: { comp: SorteraStation, tag: 'Sortera' },
+            ordna: { comp: OrdnaStation, tag: 'Ordna i följd' },
+            lucka: { comp: LuckaStation, tag: 'Fyll luckan' },
+            blixt: { comp: BlixtStation, tag: 'Sant eller falskt' },
+        };
+
+        // ── Fullskärmsknapp (kanonisk ikon) ──────────────────────
+        function FsBtn({ wrapRef }) {
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            useEffect(() => {
+                const h = () => setIsFullscreen(!!document.fullscreenElement);
+                document.addEventListener('fullscreenchange', h);
+                return () => document.removeEventListener('fullscreenchange', h);
+            }, []);
+            const toggleFullscreen = () => {
+                if (document.fullscreenElement) document.exitFullscreen();
+                else if (wrapRef.current) wrapRef.current.requestFullscreen();
+            };
+            return (
+                <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                    {isFullscreen ? (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                        </svg>
+                    ) : (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                        </svg>
+                    )}
+                </button>
+            );
+        }
+
+        // ── Kapitelväljare (ingen hash) ──────────────────────────
+        function Chooser() {
+            const byCourse = {};
+            Object.entries(PACKS).forEach(([id, p]) => {
+                (byCourse[p.course] = byCourse[p.course] || []).push([id, p]);
+            });
+            Object.values(byCourse).forEach(list => list.sort((a, b) => a[1].chapterNumber - b[1].chapterNumber));
+            return (
+                <main className="rep-main rep-choose">
+                    <div className="breadcrumb">
+                        <a href="index.html">Hem</a> / <span>Repetition inför provet</span>
+                    </div>
+                    <div className="rep-head">
+                        <span className="lab-mono-label">SPELA OCH REPETERA</span>
+                        <h1>Repetition inför provet</h1>
+                        <p className="rep-intro">
+                            Välj ett kapitel och träna det viktigaste i spelform — para ihop formler,
+                            sortera begrepp, ordna i rätt följd och avgör vad som är sant eller falskt.
+                            Varje kapitel har också en sammanfattning i teorikatalogen.
+                        </p>
+                    </div>
+                    {Object.entries(byCourse).map(([course, list]) => (
+                        <React.Fragment key={course}>
+                            <h2>{course}</h2>
+                            <div className="rep-choose-grid" style={{ marginBottom: 26 }}>
+                                {list.map(([id, p]) => (
+                                    <a key={id} className="rep-choose-card" href={'#' + id}>
+                                        <span className="rc-num">Kapitel {p.chapterNumber}</span>
+                                        <div className="rc-title">{p.chapter}</div>
+                                    </a>
+                                ))}
+                            </div>
+                        </React.Fragment>
+                    ))}
+                </main>
+            );
+        }
+
+        // ── Huvudapp ─────────────────────────────────────────────
+        function useHashId() {
+            const read = () => (window.location.hash || '').replace(/^#/, '').trim();
+            const [id, setId] = useState(read);
+            useEffect(() => {
+                const h = () => setId(read());
+                window.addEventListener('hashchange', h);
+                return () => window.removeEventListener('hashchange', h);
+            }, []);
+            return id;
+        }
+
+        function GameView({ packId, pack }) {
+            const stations = pack.stations;
+            // ?station=N (1-baserad) hoppar direkt till en station — för test
+            // och djuplänkar. Normalspel börjar på station 1.
+            const initialStation = (() => {
+                const n = parseInt(new URLSearchParams(location.search).get('station'), 10);
+                return n >= 1 && n <= stations.length ? n - 1 : 0;
+            })();
+            const [stationIdx, setStationIdx] = useState(initialStation);
+            const [results, setResults] = useState({});        // idx -> {mistakes, items, stars}
+            const [phase, setPhase] = useState('spel');        // 'spel' | 'stationKlar' | 'resultat'
+            const [runId, setRunId] = useState(0);             // byts för omstart (nollställer stationer)
+            const wrapRef = useRef(null);
+
+            const cur = stations[stationIdx];
+            const typeInfo = STATION_TYPES[cur && cur.type] || null;
+
+            const onComplete = useCallback((stats) => {
+                const stars = starsFor(stats.mistakes, stats.items);
+                setResults(r => ({ ...r, [stationIdx]: { ...stats, stars } }));
+                setPhase('stationKlar');
+            }, [stationIdx]);
+
+            const goNext = () => {
+                if (stationIdx + 1 >= stations.length) setPhase('resultat');
+                else { setStationIdx(i => i + 1); setPhase('spel'); }
+            };
+            const restart = () => {
+                setResults({}); setStationIdx(0); setPhase('spel'); setRunId(r => r + 1);
+            };
+
+            const totalStars = Object.values(results).reduce((s, r) => s + r.stars, 0);
+            const catalogHref = 'katalog.html#' + packId + '.S';
+
+            const StationComp = typeInfo && typeInfo.comp;
+
+            return (
+                <main className="rep-main">
+                    <div className="breadcrumb">
+                        <a href="index.html">Hem</a> / <a href={'katalog.html#' + pack.courseCode}>{pack.course}</a> / <span>Repetition: {pack.chapter}</span>
+                    </div>
+                    <div className="rep-head">
+                        <span className="lab-mono-label">KAPITEL {pack.chapterNumber} · {pack.chapter.toUpperCase()} · SPELA OCH REPETERA</span>
+                        <h1>Repetition inför provet</h1>
+                        <p className="rep-intro">{pack.intro} Läs gärna <a href={catalogHref}>kapitlets sammanfattning</a> först — spela sedan igenom stationerna.</p>
+                    </div>
+
+                    <div className="rep-stage" ref={wrapRef} data-theme="ljusPapper">
+                        <FsBtn wrapRef={wrapRef} />
+
+                        <div className="rep-steps">
+                            {stations.map((s, i) => (
+                                <React.Fragment key={i}>
+                                    {i > 0 && <span className="rep-step-line" />}
+                                    <button type="button"
+                                        className={'rep-step' + (results[i] ? ' done' : '') + (i === stationIdx && phase !== 'resultat' ? ' active' : '')}
+                                        disabled={!results[i] && i !== stationIdx}
+                                        title={s.title}
+                                        onClick={() => { setStationIdx(i); setPhase(results[i] && i !== stationIdx ? 'stationKlar' : 'spel'); }}>
+                                        {i + 1}
+                                    </button>
+                                </React.Fragment>
+                            ))}
+                        </div>
+
+                        {phase === 'spel' && cur && StationComp && (
+                            <React.Fragment>
+                                <div className="rep-station-head">
+                                    <span className="rs-kicker">Station {stationIdx + 1} av {stations.length} · {typeInfo.tag}</span>
+                                    <h2>{cur.title}</h2>
+                                    <p className="rs-instr"><Rich text={cur.instruktion} /></p>
+                                </div>
+                                <StationComp key={runId + '-' + stationIdx} station={cur} onComplete={onComplete} />
+                            </React.Fragment>
+                        )}
+
+                        {phase === 'stationKlar' && results[stationIdx] && (
+                            <div className="rep-done">
+                                <Stars n={results[stationIdx].stars} />
+                                <h3>Station {stationIdx + 1} klar</h3>
+                                <p>
+                                    {results[stationIdx].mistakes === 0
+                                        ? 'Felfritt — mycket bra.'
+                                        : results[stationIdx].mistakes + ' fel på ' + results[stationIdx].items + ' moment.'}
+                                </p>
+                                <div className="rep-actions">
+                                    <button type="button" className="rep-btn" onClick={goNext}>
+                                        {stationIdx + 1 >= stations.length ? 'Visa resultatet' : 'Nästa station'}
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+
+                        {phase === 'resultat' && (
+                            <div className="rep-done">
+                                <h3>Kapitlet repeterat</h3>
+                                <p>{totalStars} av {stations.length * 3} stjärnor.</p>
+                                <div className="rep-result-rows">
+                                    {stations.map((s, i) => (
+                                        <div key={i} className="rep-result-row">
+                                            <span className="rr-num">{i + 1}.</span>
+                                            <span className="rr-title">{s.title}</span>
+                                            <Stars n={(results[i] || { stars: 0 }).stars} />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="rep-actions">
+                                    <button type="button" className="rep-btn quiet" onClick={restart}>Spela igen</button>
+                                    <a className="rep-btn" style={{ textDecoration: 'none', display: 'inline-block' }} href={catalogHref}>
+                                        Till sammanfattningen
+                                    </a>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </main>
+            );
+        }
+
+        function App() {
+            const id = useHashId();
+            const pack = PACKS[id];
+            if (!pack) return <Chooser />;
+            return <GameView key={id} packId={id} pack={pack} />;
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+    <script src="feedback.js" defer></script>
+</body>
+</html>

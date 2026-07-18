@@ -1,0 +1,75 @@
+// Repetitionsspel — Fysik nivå 1, kapitel 2: Rörelse.
+// Format och regler: .claude/repetition-brief.md
+window.REPETITION = window.REPETITION || {};
+window.REPETITION['fy1-2'] = {
+    course: 'Fysik nivå 1',
+    courseCode: 'fy1',
+    chapter: 'Rörelse',
+    chapterNumber: 2,
+    intro: 'Här repeterar du rörelsebeskrivningen: vektorer, rörelsediagrammen och formlerna för konstant acceleration.',
+    stations: [
+        {
+            type: 'sortera',
+            title: 'Vektor eller skalär?',
+            instruktion: 'Sortera storheterna i rätt låda. Dra en bricka till en låda, eller klicka på brickan och sedan på lådan.',
+            bins: [
+                { name: 'Vektor — storlek och riktning', items: ['hastighet', 'acceleration', 'förflyttning', 'kraft'] },
+                { name: 'Skalär — bara storlek', items: ['fart', 'sträcka', 'tid', 'massa'] },
+            ],
+        },
+        {
+            type: 'par',
+            title: 'Para ihop formel och betydelse',
+            instruktion: 'Dra rätt beskrivning till varje formel.',
+            pairs: [
+                { a: '$v_m = \\dfrac{\\Delta s}{\\Delta t}$', b: 'Medelhastighet' },
+                { a: '$a_m = \\dfrac{\\Delta v}{\\Delta t}$', b: 'Medelacceleration' },
+                { a: '$v = v_0 + a \\cdot t$', b: 'Hastighet vid konstant acceleration' },
+                { a: '$s = v_0 \\cdot t + \\dfrac{a \\cdot t^2}{2}$', b: 'Förflyttning vid konstant acceleration' },
+                { a: '$v_m = \\dfrac{v_0 + v}{2}$', b: 'Medelhastighet vid konstant acceleration' },
+                { a: '$v^2 - v_0^2 = 2 \\cdot a \\cdot s$', b: 'Torricellis ekvation — utan tiden' },
+            ],
+        },
+        {
+            type: 'lucka',
+            title: 'Vad ger diagrammet?',
+            instruktion: 'Dra rätt storhet till varje lucka.',
+            formler: [
+                { fore: 'Lutningen i ett $s\\text{-}t\\text{-diagram}$ ger', efter: '.', svar: 'hastigheten' },
+                { fore: 'Lutningen i ett $v\\text{-}t\\text{-diagram}$ ger', efter: '.', svar: 'accelerationen' },
+                { fore: 'Arean i ett $v\\text{-}t\\text{-diagram}$ ger', efter: '.', svar: 'förflyttningen' },
+                { fore: 'Arean i ett $a\\text{-}t\\text{-diagram}$ ger', efter: '.', svar: 'hastighetsändringen' },
+            ],
+            distraktorer: ['tiden', 'medelfarten'],
+        },
+        {
+            type: 'ordna',
+            title: 'Ordna efter fart',
+            instruktion: 'Ordna hastigheterna från långsammast till snabbast. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
+            etikettStart: 'långsammast',
+            etikettSlut: 'snabbast',
+            items: ['18 km/h', '10 m/s', '54 km/h', '20 m/s', '90 km/h'],
+        },
+        {
+            type: 'blixt',
+            title: 'Sant eller falskt?',
+            instruktion: 'Avgör om påståendet stämmer.',
+            pastaenden: [
+                { text: 'Vid fritt fall i vakuum faller alla föremål lika fort, oavsett massa.',
+                  sant: true, varfor: 'Utan luftmotstånd får alla föremål samma acceleration $g = 9{,}82\\ \\mathrm{m/s^2}$.' },
+                { text: 'Om accelerationen är negativ minskar hastigheten.',
+                  sant: true, varfor: 'Negativ acceleration betyder att hastigheten minskar; positiv att den ökar.' },
+                { text: 'Arean mellan grafen och tidsaxeln i ett $v\\text{-}t\\text{-diagram}$ motsvarar accelerationen.',
+                  sant: false, varfor: 'Arean i ett $v\\text{-}t\\text{-diagram}$ motsvarar förflyttningen — accelerationen är lutningen.' },
+                { text: 'Momentanhastigheten i ett $s\\text{-}t\\text{-diagram}$ ges av tangentens lutning i punkten.',
+                  sant: true, varfor: 'Sekantens lutning ger medelhastigheten i ett intervall; tangentens lutning ger momentanhastigheten.' },
+                { text: 'Hastighet är en skalär storhet.',
+                  sant: false, varfor: 'Hastighet har både storlek och riktning och är därför en vektor — farten är skalären.' },
+                { text: 'En boll som kastas rakt uppåt har accelerationen noll i banans högsta punkt.',
+                  sant: false, varfor: 'I högsta punkten är hastigheten noll ett ögonblick, men accelerationen är hela tiden $g$ nedåt.' },
+                { text: 'Vid inbromsning är det viktigt att räkna med tecken på hastighet och acceleration.',
+                  sant: true, varfor: 'Om rörelsen byter riktning skiljer sig läge och sträcka — teckenräkning håller isär dem.' },
+            ],
+        },
+    ],
+};

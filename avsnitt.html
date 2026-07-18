@@ -280,7 +280,7 @@
         // Slå upp avsnitt i katalogen
         function findSection(id) {
             // id-format: fy1-2.3, fy2-3.4, ...
-            const m = id && id.match(/^fy([12])-(\d+\.\d+)$/);
+            const m = id && id.match(/^fy([12])-(\d+\.(?:\d+|S))$/);
             if (!m) return null;
             const course = m[1] === '1' ? 'Fysik nivå 1' : 'Fysik nivå 2';
             const num = m[2];

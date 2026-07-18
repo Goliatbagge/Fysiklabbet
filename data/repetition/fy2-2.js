@@ -1,0 +1,80 @@
+// Repetitionsspel — Fysik nivå 2, kapitel 2: Mekaniska vågor.
+// Format och regler: .claude/repetition-brief.md
+window.REPETITION = window.REPETITION || {};
+window.REPETITION['fy2-2'] = {
+    course: 'Fysik nivå 2',
+    courseCode: 'fy2',
+    chapter: 'Mekaniska vågor',
+    chapterNumber: 2,
+    intro: 'Här repeterar du svängningar (fjäder, pendel, resonans) och vågor (stående vågor, ljud, brytning och interferens).',
+    stations: [
+        {
+            type: 'sortera',
+            title: 'Transversell, longitudinell eller båda?',
+            instruktion: 'Sortera exemplen i rätt låda. Dra en bricka till en låda, eller klicka på brickan och sedan på lådan.',
+            bins: [
+                { name: 'Transversell — partiklarna rör sig vinkelrätt mot vågriktningen', items: ['våg i en sträng', 'vågberg som vandrar längs ett rep', 'transversell puls i en slinky'] },
+                { name: 'Longitudinell — partiklarna rör sig i vågriktningen', items: ['ljudvåg i luft', 'förtätning och förtunning i en fjäder', 'tryckvariation i luft'] },
+                { name: 'Kombination — partikeln rör sig i en cirkelbana', items: ['vattenvåg', 'Rayleigh-våg (jordbävning)'] },
+            ],
+        },
+        {
+            type: 'par',
+            title: 'Para ihop formel och betydelse',
+            instruktion: 'Dra rätt beskrivning till varje formel.',
+            pairs: [
+                { a: '$F = k \\cdot \\Delta l$', b: 'Hookes lag' },
+                { a: '$F_\\mathrm{R} = -k \\cdot y$', b: 'Resulterande kraft i fjädersvängning' },
+                { a: '$T = 2\\pi\\sqrt{\\dfrac{m}{k}}$', b: 'Periodtid för fjädersvängning' },
+                { a: '$T = 2\\pi\\sqrt{\\dfrac{l}{g}}$', b: 'Periodtid för plan pendel' },
+                { a: '$v = f \\cdot \\lambda$', b: 'Vågens utbredningshastighet' },
+                { a: '$L = 10 \\cdot \\lg\\!\\left(\\dfrac{I}{I_0}\\right)$', b: 'Ljudnivå' },
+                { a: '$\\Delta s = n \\cdot \\lambda$', b: 'Vägskillnad på en maximilinje' },
+            ],
+        },
+        {
+            type: 'lucka',
+            title: 'Begrepp i vågläran',
+            instruktion: 'Dra rätt ord till varje lucka.',
+            formler: [
+                { fore: 'Punkter i en stående våg där amplituden alltid är 0 kallas', efter: '.', svar: 'noder' },
+                { fore: 'Punkter mitt emellan två noder, där amplituden är maximal, kallas', efter: '.', svar: 'bukar' },
+                { fore: 'När energi tillförs med samma frekvens som systemets egenfrekvens förstärks svängningen kraftigt — fenomenet kallas', efter: '.', svar: 'resonans' },
+                { fore: 'Att en våg böjs av vid kanten på en öppning kallas', efter: '.', svar: 'diffraktion' },
+                { fore: 'Ljudstyrkan mätt på en logaritmisk skala i decibel kallas', efter: '.', svar: 'ljudnivå' },
+            ],
+            distraktorer: ['frekvens', 'interferens', 'amplitud'],
+        },
+        {
+            type: 'ordna',
+            title: 'Ordna efter frekvens',
+            instruktion: 'Ordna ljuden från lägst till högst frekvens. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
+            etikettStart: 'lägst frekvens',
+            etikettSlut: 'högst frekvens',
+            items: ['10 Hz (infraljud)', '440 Hz (kammartonen A)', '4 000 Hz (örats känsligaste område)', '18 000 Hz (ljus diskant)', '25 000 Hz (ultraljud)'],
+        },
+        {
+            type: 'blixt',
+            title: 'Sant eller falskt? — Stående vågor och resonans',
+            instruktion: 'Avgör om påståendet stämmer.',
+            pastaenden: [
+                { text: 'I en stående våg är noderna de punkter som har maximal amplitud.',
+                  sant: false, varfor: 'Noder är punkter där amplituden alltid är 0 — det är bukarna som har maximal amplitud.' },
+                { text: 'Avståndet mellan två närliggande bukar i en stående våg är alltid en halv våglängd.',
+                  sant: true, varfor: 'Både mellan två noder och mellan två bukar är avståndet alltid $\\lambda/2$.' },
+                { text: 'I en stående våg transporteras energi längs mediet på samma sätt som i en fortskridande våg.',
+                  sant: false, varfor: 'I en stående våg transporteras ingen energi i mediet — den koncentreras i stället till bukarna.' },
+                { text: 'Resonans uppstår när energi tillförs ett system med samma frekvens som dess egenfrekvens.',
+                  sant: true, varfor: 'Då förstärks svängningens amplitud mer och mer för varje tillskott av energi.' },
+                { text: 'En öppen pipas grundton har alltid en nod mitt i pipan.',
+                  sant: true, varfor: 'Grundtonen i en öppen pipa börjar och slutar med en buk, vilket kräver en nod mitt emellan.' },
+                { text: 'En sluten pipa har bukar vid båda ändarna.',
+                  sant: false, varfor: 'En sluten pipa har noder vid båda ändarna, eftersom luften inte kan svänga fritt där.' },
+                { text: 'Tacoma-bron kollapsade 1940 för att vinden satte bron i resonans.',
+                  sant: true, varfor: 'Vindens periodiska kraft träffade broens egenfrekvens och amplituden växte tills bron slets sönder.' },
+                { text: 'Den fria svängningens frekvens kallas dess amplitud.',
+                  sant: false, varfor: 'Den fria svängningens frekvens kallas egenfrekvens — amplituden är utslagets storlek, inte frekvensen.' },
+            ],
+        },
+    ],
+};

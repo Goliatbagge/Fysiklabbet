@@ -1,0 +1,80 @@
+// Repetitionsspel — Fysik nivå 1, kapitel 9: Kärnfysik.
+// Format och regler: .claude/repetition-brief.md
+window.REPETITION = window.REPETITION || {};
+window.REPETITION['fy1-9'] = {
+    course: 'Fysik nivå 1',
+    courseCode: 'fy1',
+    chapter: 'Kärnfysik',
+    chapterNumber: 9,
+    intro: 'Här repeterar du atomkärnans uppbyggnad, massdefekt och bindningsenergi, radioaktivt sönderfall samt aktivitet, halveringstid och stråldoser.',
+    stations: [
+        {
+            type: 'sortera',
+            title: 'Alfa, beta eller gamma?',
+            instruktion: 'Sortera egenskaperna i rätt låda. Dra en bricka till en låda, eller klicka på brickan och sedan på lådan.',
+            bins: [
+                { name: 'Alfasönderfall', items: ['Heliumkärna sänds ut', 'Stoppas av ett papper', 'Kvalitetsfaktor $Q = 20$'] },
+                { name: 'Betasönderfall', items: ['Elektron eller positron sänds ut', 'Stoppas av tunn metall', 'Neutrino bildas samtidigt'] },
+                { name: 'Gammasönderfall', items: ['Foton sänds ut', 'Stoppas endast av tjockt bly', 'Ingen ändring av kärnpartiklarna'] },
+            ],
+        },
+        {
+            type: 'par',
+            title: 'Para ihop begrepp och betydelse',
+            instruktion: 'Dra rätt beskrivning till varje begrepp.',
+            pairs: [
+                { a: 'Masstal ($A$)', b: 'Antal protoner + neutroner i kärnan' },
+                { a: 'Atomnummer ($Z$)', b: 'Antal protoner i kärnan' },
+                { a: 'Isotop', b: 'Samma grundämne, olika antal neutroner' },
+                { a: 'Massdefekt ($\\Delta m$)', b: 'Skillnaden mellan partiklarnas och kärnans massa' },
+                { a: 'Halveringstid ($T_{1/2}$)', b: 'Tiden för hälften av kärnorna att sönderfalla' },
+                { a: 'Aktivitet ($A$)', b: 'Antal sönderfall per sekund' },
+                { a: 'Absorberad dos ($D$)', b: 'Strålningsenergi per kg vävnad' },
+            ],
+        },
+        {
+            type: 'lucka',
+            title: 'Fyll i rätt begrepp',
+            instruktion: 'Dra rätt ord till varje lucka.',
+            formler: [
+                { fore: 'Kraften som håller ihop kärnpartiklarna kallas den', efter: '.', svar: 'starka kärnkraften' },
+                { fore: 'Vid β⁻-sönderfall omvandlas en neutron till en proton, en elektron och en', efter: '.', svar: 'neutrino' },
+                { fore: 'Skillnaden mellan beståndsdelarnas massa och kärnans massa kallas', efter: '.', svar: 'massdefekten' },
+                { fore: 'Enheten för aktivitet är', efter: ' (Bq).', svar: 'becquerel' },
+                { fore: 'Enheten för ekvivalent dos är', efter: ' (Sv).', svar: 'sievert' },
+            ],
+            distraktorer: ['gray', 'protonen'],
+        },
+        {
+            type: 'ordna',
+            title: 'Ordna efter halveringstid',
+            instruktion: 'Ordna isotoperna från kortast till längst halveringstid. Dra brickorna till rätt plats (eller klicka på två för att byta plats) och tryck sedan på Kontrollera.',
+            etikettStart: 'kortast halveringstid',
+            etikettSlut: 'längst halveringstid',
+            items: ['Radon-222 (3,8 dygn)', 'Cesium-137 (30 år)', 'Kol-14 (5 730 år)', 'Uran-238 (4,5 miljarder år)'],
+        },
+        {
+            type: 'blixt',
+            title: 'Sant eller falskt?',
+            instruktion: 'Avgör om påståendet stämmer.',
+            pastaenden: [
+                { text: 'Efter en halveringstid återstår hälften av den ursprungliga mängden radioaktivt ämne.',
+                  sant: true, varfor: 'Det är själva definitionen av halveringstiden $T_{1/2}$.' },
+                { text: 'Sönderfallskonstanten $\\lambda$ har samma värde för alla radioaktiva ämnen.',
+                  sant: false, varfor: '$\\lambda$ är olika för olika ämnen — den ges av $\\lambda = \\ln 2 / T_{1/2}$.' },
+                { text: 'Vid α-sönderfall minskar masstalet med 4 och atomnumret med 2.',
+                  sant: true, varfor: 'En heliumkärna sänds ut, så kärnan förlorar 4 nukleoner varav 2 protoner.' },
+                { text: 'Vid β⁻-sönderfall ökar atomnumret med 1 medan masstalet är oförändrat.',
+                  sant: true, varfor: 'En neutron omvandlas till en proton, så protonantalet ökar men nukleonantalet är detsamma.' },
+                { text: 'Gammastrålning består av heliumkärnor.',
+                  sant: false, varfor: 'Gammastrålning består av fotoner — det är alfastrålning som består av heliumkärnor.' },
+                { text: 'Massan hos en sammansatt atomkärna är alltid större än summan av dess beståndsdelars massa.',
+                  sant: false, varfor: 'Kärnans massa är lägre — mellanskillnaden är massdefekten som motsvarar bindningsenergin.' },
+                { text: 'Kvalitetsfaktorn för gammastrålning är $Q = 1$.',
+                  sant: true, varfor: 'Gammastrålning används som referens och har $Q = 1$; alfastrålning har $Q = 20$.' },
+                { text: 'Aktiviteten hos ett preparat är oberoende av hur många atomkärnor som finns kvar.',
+                  sant: false, varfor: 'Aktiviteten är proportionell mot antalet kärnor: $A = \\lambda \\cdot N$.' },
+            ],
+        },
+    ],
+};

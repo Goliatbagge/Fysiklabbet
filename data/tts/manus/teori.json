@@ -553,6 +553,175 @@
   ]
  },
  {
+  "id": "fy1-1.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Introduktion"
+   },
+   {
+    "t": "Det här kapitlet handlade om fysikens arbetssätt och verktyg: den naturvetenskapliga metoden, SI-systemet med grundenheter och prefix, samt de två första fysikaliska storheterna — medelfart och densitet."
+   },
+   {
+    "t": "Du ska efter kapitlet kunna räkna med rätt antal värdesiffror, växla mellan prefix och grundpotensform, och använda formlerna för medelfart och densitet."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Naturvetenskapliga metoden — observation, hypotes, hypotesprövning, lagar och teorier."
+   },
+   {
+    "t": "Hypotes — en möjlig förklaring som ännu inte är testad."
+   },
+   {
+    "t": "Lag — en hypotes som testats i flera experiment utan att motbevisas."
+   },
+   {
+    "t": "Teori — flera lagar tillsammans; i fysiken ett väl belagt, säkert samband (inte en gissning som i vardagsspråk)."
+   },
+   {
+    "t": "Modell — en förenklad beskrivning som stämmer tillräckligt bra med verkligheten."
+   },
+   {
+    "t": "Storhet — en egenskap som kan mätas med ett mätetal och en enhet, t.ex. sträcka, tid, kraft."
+   },
+   {
+    "t": "Mätetal — det numeriska värdet en storhet anges med."
+   },
+   {
+    "t": "Enhet — måttstorleken mätetalet anges i."
+   },
+   {
+    "t": "SI-enheter — det internationella enhetssystemet med sju grundenheter (m, kg, s, A, K, mol, cd)."
+   },
+   {
+    "t": "Prefix — skalfaktor framför en enhet (t.ex. kilo, milli) som ersätter en tiopotens."
+   },
+   {
+    "t": "Värdesiffror — antalet siffror i ett mätetal som bär betydelse; styr hur svaret ska avrundas."
+   },
+   {
+    "t": "Medelfart — total tillryggalagd sträcka delat med total tid; skalär storhet, v massan m är lika med sträckan s delat med tiden t ."
+   },
+   {
+    "t": "Densitet — massa per volymenhet, densiteten rho är lika med massan m delat med volymen V ; avgör hur tätt packat ett material är."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Medelfart"
+   },
+   {
+    "t": "v massan m är lika med sträckan s delat med tiden t"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "vₘ är lika med medelfart (meter per sekund)"
+   },
+   {
+    "t": "s är lika med sträcka (meter)"
+   },
+   {
+    "t": "t är lika med tid (sekunder)"
+   },
+   {
+    "t": "Enhetsomvandling — m/s och km/h"
+   },
+   {
+    "t": "meter per sekund xrightarrow gånger 3,6 kilometer per timme kilometer per timme xrightarrow div 3,6 meter per sekund"
+   },
+   {
+    "t": "Densitet"
+   },
+   {
+    "t": "densiteten rho är lika med massan m delat med volymen V"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "ρ är lika med densitet (kg/m i kubik)"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "V är lika med volym (m i kubik)"
+   },
+   {
+    "t": "Enhetsomvandling — kg/m<sup>3</sup> och g/cm<sup>3</sup>"
+   },
+   {
+    "t": "1 gram per centimeter i kubik är lika med 1 000 kilogram per kubikmeter 1 kilogram per kubikmeter som är lika med 0,001 gram per centimeter i kubik"
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Räknar man enbart med SI-enheter i en formel blir svaret automatiskt en SI-enhet — därför lönar det sig att räkna om till grundenheter (m, kg, s) innan man sätter in värden."
+   },
+   {
+    "t": "Avrunda inte förrän i slutet av en uppgift — annars kan felet i svaret bli stort."
+   },
+   {
+    "t": "Antal värdesiffror i svaret styrs av: vid multiplikation/division av värdet med minst antal värdesiffror; vid addition/subtraktion av värdet med minst antal decimaler."
+   },
+   {
+    "t": "I grundpotensform ska den första faktorn vara ett tal mellan 1 och 10; för tal mindre än 1 ges exponentens (negativa) värde av antalet nollor innan den första siffran som inte är 0."
+   },
+   {
+    "t": "Ett prefix är bara ett annat sätt att skriva en tiopotens — byt ut tiopotensen mot dess prefix (eller tvärtom) utan att ändra värdet."
+   },
+   {
+    "t": "Medelfart och medelhastighet är inte samma sak: medelfart är skalär, v massan m är lika med sträckan s delat med tiden t , medelhastighet är en vektor."
+   },
+   {
+    "t": "Skillnaden fördjupas i nästa kapitel."
+   },
+   {
+    "t": "Vattnets densitet, densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter , är bra att kunna utantill — den ger direkt att 1,0 liter vatten väger 1,0 kilogram."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du redogöra för den naturvetenskapliga metodens fyra steg?"
+   },
+   {
+    "t": "Kan du förklara skillnaden mellan hypotes, lag och teori?"
+   },
+   {
+    "t": "Kan du de sju SI-grundenheterna och vilken storhet de mäter?"
+   },
+   {
+    "t": "Kan du skriva om ett tal mellan prefix och grundpotensform i båda riktningarna (t.ex. μm ↔ 10 upphöjt till minus 6 meter)?"
+   },
+   {
+    "t": "Vet du hur man avgör rätt antal värdesiffror i ett svar vid multiplikation/ division respektive addition/subtraktion?"
+   },
+   {
+    "t": "Kan du formeln för medelfart och lösa ut sträcka respektive tid ur den?"
+   },
+   {
+    "t": "Kan du växla mellan m/s och km/h utan miniräknare (omvandlingsfaktor 3,6)?"
+   },
+   {
+    "t": "Kan du formeln för densitet och lösa ut massa respektive volym ur den?"
+   },
+   {
+    "t": "Kan du växla mellan kg/m i kubik och g/cm i kubik (omvandlingsfaktor 1 000)?"
+   },
+   {
+    "t": "Kommer du ihåg vattnets densitet, densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter ?"
+   }
+  ]
+ },
+ {
   "id": "fy1-2.1",
   "title": "Vektoraddition",
   "course": "Fysik nivå 1",
@@ -1862,6 +2031,250 @@
    },
    {
     "t": "Sammanfattningsvis: ekvationen är själva definitionen av vad som händer vid konstant acceleration, och dess stora fördel är att den relaterar hastighet, acceleration och förflyttning utan att man behöver veta tiden (t)."
+   }
+  ]
+ },
+ {
+  "id": "fy1-2.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Rörelse"
+   },
+   {
+    "t": "Kapitlet handlar om hur ett föremåls rörelse beskrivs med vektorer, diagram och formler."
+   },
+   {
+    "t": "Du har mött skillnaden mellan sträcka och förflyttning, hur lutning och area i s-t-, v-t- och a-t-diagram tolkas, och hur formlerna för konstant acceleration — inklusive Torricellis ekvation — används för att lösa rörelseproblem, ibland utan att alls behöva ta omvägen via tiden."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "sträcka — den totala väglängden ett föremål har rört sig; skalär, betecknas s."
+   },
+   {
+    "t": "förflyttning — vektorn mellan start- och slutläge, betecknas Δs; skiljer sig från sträckan så fort rörelsen byter riktning."
+   },
+   {
+    "t": "vektor och skalär — en vektor har både storlek och riktning (t.ex. hastighet, kraft, acceleration); en skalär har bara storlek (t.ex. fart, tid, massa)."
+   },
+   {
+    "t": "medelhastighet — genomsnittlig hastighet under ett tidsintervall, v massan m är lika med delta sträckan s delat med delta tiden t ; motsvaras av sekantens lutning i ett s-t-diagram."
+   },
+   {
+    "t": "momentanhastighet — hastigheten vid en viss tidpunkt; motsvaras av tangentens lutning i ett s-t-diagram."
+   },
+   {
+    "t": "acceleration — hur snabbt hastigheten ändras, betecknas a, SI-enhet m/s i kvadrat; en vektorstorhet."
+   },
+   {
+    "t": "retardation — negativ acceleration, det vill säga en inbromsning."
+   },
+   {
+    "t": "tyngdacceleration — accelerationen ett fritt fallande föremål får av tyngdkraften, betecknas g, med tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat i Sverige."
+   },
+   {
+    "t": "fritt fall — rörelse där enbart tyngdkraften påverkar föremålet (inget luftmotstånd); alla föremål faller då lika fort oavsett massa."
+   },
+   {
+    "t": "begynnelsehastighet — hastigheten vid tidpunkten t är lika med 0, betecknas v noll."
+   },
+   {
+    "t": "s-t-, v-t- och a-t-diagram — diagram med läge, hastighet respektive acceleration på y-axeln och tiden på x-axeln."
+   },
+   {
+    "t": "Torricellis ekvation — \"den tidlösa ekvationen\"; kopplar samman v, v noll, a och s utan att tiden t behöver vara känd."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Vektoraddition (vinkelräta vektorer)"
+   },
+   {
+    "t": "hastigheten v i kvadrat är lika med v ett i kvadrat plus v två i kvadrat vilket är ekvivalent med att v är lika med roten ur v ett i kvadrat plus v två i kvadrat"
+   },
+   {
+    "t": "Gäller när två vektorer (t.ex. hastigheter) verkar vinkelrätt mot varandra."
+   },
+   {
+    "t": "Resultanten fås genom att parallellförflytta vektorerna och sedan använda Pythagoras sats."
+   },
+   {
+    "t": "Medelhastighet och medelacceleration"
+   },
+   {
+    "t": "v massan m är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett"
+   },
+   {
+    "t": "a massan m är lika med delta hastigheten v delat med delta tiden t som är lika med v två minus v ett delat med t två minus t ett"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "Δs är lika med förflyttning (meter)"
+   },
+   {
+    "t": "Δv är lika med hastighetsändring (meter per sekund)"
+   },
+   {
+    "t": "Δt är lika med tidsintervall (sekunder)"
+   },
+   {
+    "t": "vₘ är lika med medelhastighet (meter per sekund)"
+   },
+   {
+    "t": "aₘ är lika med medelacceleration (m/s i kvadrat)"
+   },
+   {
+    "t": "Rörelse med konstant acceleration"
+   },
+   {
+    "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t"
+   },
+   {
+    "t": "sträckan s är lika med parentesen s noll slut parentes plus v noll gånger tiden t plus accelerationen a gånger t i kvadrat delat med 2"
+   },
+   {
+    "t": "v massan m är lika med v noll plus hastigheten v delat med 2"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "v är lika med hastighet (meter per sekund)"
+   },
+   {
+    "t": "v noll är lika med begynnelsehastighet (meter per sekund)"
+   },
+   {
+    "t": "a är lika med acceleration (m/s i kvadrat)"
+   },
+   {
+    "t": "t är lika med tid (sekunder)"
+   },
+   {
+    "t": "s är lika med förflyttning (meter)"
+   },
+   {
+    "t": "s noll är lika med start-/utgångsläge (meter)"
+   },
+   {
+    "t": "vₘ är lika med medelhastighet vid konstant acceleration (meter per sekund)"
+   },
+   {
+    "t": "Specialfall"
+   },
+   {
+    "t": "Utan starthastighet gäller v noll är lika med 0 , vilket ger"
+   },
+   {
+    "t": "hastigheten v är lika med accelerationen a gånger tiden t sträckan s som är lika med a gånger t i kvadrat delat med 2"
+   },
+   {
+    "t": "Vid fritt fall gäller accelerationen a är lika med minus tyngdfaktorn g där tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat , vilket ger"
+   },
+   {
+    "t": "hastigheten v är lika med v noll minus tyngdfaktorn g gånger tiden t sträckan s som är lika med v noll gånger t minus g gånger t i kvadrat delat med 2"
+   },
+   {
+    "t": "Torricellis ekvation"
+   },
+   {
+    "t": "hastigheten v i kvadrat minus v noll i kvadrat är lika med 2 accelerationen a sträckan s"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "v är lika med sluthastighet (meter per sekund)"
+   },
+   {
+    "t": "v noll är lika med begynnelsehastighet (meter per sekund)"
+   },
+   {
+    "t": "a är lika med acceleration (m/s i kvadrat)"
+   },
+   {
+    "t": "s är lika med förflyttning (meter)"
+   },
+   {
+    "t": "Gäller vid konstant acceleration och används när tiden t inte är given."
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "I ett s-t-diagram motsvarar sekantens lutning medelhastigheten i ett intervall och tangentens lutning momentanhastigheten i en punkt."
+   },
+   {
+    "t": "I ett v-t-diagram motsvarar linjens lutning accelerationen."
+   },
+   {
+    "t": "Arean mellan grafen och t-axeln motsvarar förflyttningen — positiv ovanför axeln, negativ under."
+   },
+   {
+    "t": "Den tillryggalagda sträckan i ett v-t-diagram fås genom att räkna ALLA areor som positiva (absolutbelopp), till skillnad från förflyttningen."
+   },
+   {
+    "t": "I ett a-t-diagram motsvarar arean mellan grafen och t-axeln hastighetsändringen Δv."
+   },
+   {
+    "t": "Teckenkonvention: en positiv riktning väljs (ofta uppåt eller åt höger); rörelser åt motsatt håll får negativa värden för läge, hastighet och acceleration."
+   },
+   {
+    "t": "Formeln hastigheten v är lika med sträckan s delat med tiden t gäller ENDAST vid konstant hastighet — vid accelererad rörelse måste formlerna för konstant acceleration (eller Torricellis ekvation) användas istället."
+   },
+   {
+    "t": "Torricellis ekvation använder förflyttning s, inte sträcka, gäller bara i en dimension och bara vid konstant acceleration (alltså inte vid t.ex. luftmotstånd, fjäderkraft eller cirkelrörelse)."
+   },
+   {
+    "t": "Svåra ekvationssystem med två obekanta (t.ex. a och t) kan lösas grafiskt eller med CAS-funktionen i GeoGebra — redovisa alltid hur ekvationssystemet ställdes upp och vilken lösningsmetod som användes."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Sträcka och förflyttning skiljer sig så fort vägen inte är rak — sträckan är hela vägen (4 + 3 meter), förflyttningen är den räta vägen mellan start och mål (5 meter)."
+   },
+   {
+    "t": "I ett s-t-diagram ger sekanten mellan två punkter medelhastigheten, och tangenten i en punkt ger momentanhastigheten där."
+   },
+   {
+    "t": "Formeln för förflyttning vid konstant acceleration härleds ur arean under en v-t-graf: en rektangel (v noll gånger t) plus en triangel (Δv gånger t / 2)."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du skilja på sträcka och förflyttning, och avgöra om en storhet är en vektor eller en skalär?"
+   },
+   {
+    "t": "Kan du addera vinkelräta vektorer genom parallellförflyttning och Pythagoras sats?"
+   },
+   {
+    "t": "Kan du läsa av och tolka lutningen (sekant/tangent) i ett s-t-diagram?"
+   },
+   {
+    "t": "Kan du läsa av och tolka lutningen och arean i ett v-t-diagram, och skilja på förflyttning och tillryggalagd sträcka?"
+   },
+   {
+    "t": "Kan du tolka arean i ett a-t-diagram som en hastighetsändring?"
+   },
+   {
+    "t": "Kan du räkna med tecken vid inbromsning och rörelse i negativ riktning?"
+   },
+   {
+    "t": "Kan du formlerna för hastighet och förflyttning vid konstant acceleration, inklusive specialfallen utan starthastighet och vid fritt fall?"
+   },
+   {
+    "t": "Kan du använda Torricellis ekvation när tiden inte är given, och veta när den INTE får användas?"
+   },
+   {
+    "t": "Kan du ställa upp och lösa ett ekvationssystem med två obekanta, till exempel i GeoGebra?"
    }
   ]
  },
@@ -3339,6 +3752,271 @@
    },
    {
     "t": "Svar: 15 newton"
+   }
+  ]
+ },
+ {
+  "id": "fy1-3.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Krafter"
+   },
+   {
+    "t": "Det här kapitlet handlade om vad som får saker att röra sig eller stå still: Newtons tre lagar, tyngdkraft och normalkraft, gravitationen mellan massor, friktion samt hur tyngdkraften delas upp i komposanter på ett lutande plan."
+   },
+   {
+    "t": "Du ska efter kapitlet kunna rita korrekta kraftdiagram, räkna med Newtons andra lag och avgöra accelerationens tecken i tillämpningar som lutande plan och trissor."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "kraft — påverkan som kan ändra ett föremåls rörelse eller form; SI-enhet N; betecknas F och är en vektorstorhet."
+   },
+   {
+    "t": "resulterande kraft ( F resistansen R ) — vektorsumman av alla krafter som verkar på ett föremål; är noll vid kraftjämvikt."
+   },
+   {
+    "t": "komposant — del av en kraft uppdelad i en given riktning, t.ex. längs och vinkelrätt mot ett lutande plan."
+   },
+   {
+    "t": "Newtons första lag (tröghetslagen) — är F resistansen R är lika med 0 förblir föremålet i vila eller rör sig med konstant hastighet."
+   },
+   {
+    "t": "tröghet — ett föremåls motstånd mot förändring av sin rörelse; större massa ger större tröghet."
+   },
+   {
+    "t": "Newtons andra lag (accelerationslagen) — sambandet F resistansen R är lika med massan m gånger accelerationen a mellan resulterande kraft, massa och acceleration."
+   },
+   {
+    "t": "Newtons tredje lag — till varje kraft på ett föremål (aktion) hör en lika stor, motriktad kraft av samma sort på ett annat föremål (reaktion)."
+   },
+   {
+    "t": "jämviktskrafter — krafter som verkar på samma föremål och håller det i jämvikt; skiljer sig från motkrafter, som alltid verkar på två olika föremål."
+   },
+   {
+    "t": "tyngdkraft ( F G ) och tyngdfaktor ( tyngdfaktorn g ) — tyngdkraften ges av F G är lika med massan m gånger tyngdfaktorn g ; tyngdfaktorn är 9,82 newton per kilogram i Sverige."
+   },
+   {
+    "t": "normalkraft ( F N ) — kontaktkraften från ett underlag på ett föremål, alltid riktad vinkelrätt mot ytan."
+   },
+   {
+    "t": "friktionstal ( my ) — hur stor andel av normalkraften som blir friktionskraft; saknar enhet."
+   },
+   {
+    "t": "spännkraft ( F S ) — kraften i ett spänt rep eller en lina; lika stor genom hela snöret i en friktionsfri trissa."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Kapitlets formler"
+   },
+   {
+    "t": "Newtons andra lag"
+   },
+   {
+    "t": "F resistansen R är lika med massan m gånger accelerationen a"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F resistansen R är lika med resulterande kraft (newton)"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "a är lika med acceleration (m/s i kvadrat)"
+   },
+   {
+    "t": "Newtons tredje lag"
+   },
+   {
+    "t": "vektorn kraften F A på B är lika med minus vektorn F B på A"
+   },
+   {
+    "t": "Tyngdkraft"
+   },
+   {
+    "t": "F G är lika med massan m gånger tyngdfaktorn g"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F G är lika med tyngdkraft (newton)"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "g är lika med tyngdfaktor (9,82 newton per kilogram i Sverige)"
+   },
+   {
+    "t": "Newtons gravitationslag"
+   },
+   {
+    "t": "F G är lika med G gånger m ett gånger m två delat med r i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F G är lika med gravitationskraft (newton)"
+   },
+   {
+    "t": "G är lika med gravitationskonstanten ( 6,67 gånger 10 upphöjt till minus 11 Nm i kvadrat per kilogram i kvadrat )"
+   },
+   {
+    "t": "m ett är lika med massa hos föremål 1 (kilogram)"
+   },
+   {
+    "t": "m två är lika med massa hos föremål 2 (kilogram)"
+   },
+   {
+    "t": "r är lika med avståndet mellan föremålens tyngdpunkter (meter)"
+   },
+   {
+    "t": "Friktionskraft"
+   },
+   {
+    "t": "F frekvensen f är lika med my gånger F N"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F frekvensen f är lika med friktionskraft (newton)"
+   },
+   {
+    "t": "μ är lika med friktionstal (saknar enhet)"
+   },
+   {
+    "t": "F N är lika med normalkraft (newton)"
+   },
+   {
+    "t": "Lutande plan — komposanter av tyngdkraften"
+   },
+   {
+    "t": "F ett är lika med massan m gånger tyngdfaktorn g gånger sinus alfa F två som är lika med m gånger g gånger cosinus alfa"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F ett är lika med tyngdkraftens komposant nedför planet (newton)"
+   },
+   {
+    "t": "F två är lika med tyngdkraftens komposant vinkelrätt mot planet (newton)"
+   },
+   {
+    "t": "m är lika med föremålets massa (kilogram)"
+   },
+   {
+    "t": "g är lika med tyngdfaktor (newton per kilogram)"
+   },
+   {
+    "t": "α är lika med planets lutningsvinkel mot horisontalplanet"
+   },
+   {
+    "t": "Trigonometri i rätvinklig triangel"
+   },
+   {
+    "t": "sinus hastigheten v är lika med accelerationen a delat med c, cosinus v som är lika med b delat med c, tangens v som är lika med a delat med b"
+   },
+   {
+    "t": "där a är motstående katet, b är närliggande katet och c är hypotenusan till vinkeln v."
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Är den resulterande kraften noll ( F resistansen R är lika med 0 ) är föremålet antingen i vila eller rör sig med konstant hastighet (Newtons första lag) — annars accelererar det enligt F resistansen R är lika med massan m gånger accelerationen a ."
+   },
+   {
+    "t": "Skilj på jämviktskrafter (verkar på samma föremål, kan vara olika typer av kraft, summerar till noll) och motkrafter (verkar på två olika föremål, alltid samma typ av kraft, enligt Newtons tredje lag)."
+   },
+   {
+    "t": "Motkraften till en tyngdkraft är alltid en annan tyngdkraft — aldrig en normalkraft."
+   },
+   {
+    "t": "Normalkraften F N är alltid vinkelrät mot kontaktytan — rakt upp på ett vågrätt bord, men snett ut från ett lutande plan eller vågrätt in från en vägg."
+   },
+   {
+    "t": "På ett lutande plan: vid vila eller konstant hastighet är F N är lika med F två och F frekvensen f är lika med F ett ; accelererar föremålet gäller i stället F resistansen R är lika med F ett minus F frekvensen f och accelerationen a är lika med F resistansen R delat med massan m ."
+   },
+   {
+    "t": "Vinkeln mellan tyngdkraften och dess komposant vinkelrätt mot planet är alltid lika stor som planets lutningsvinkel — det följer av att vinkelsumman i en triangel är 180 grader."
+   },
+   {
+    "t": "Vid en dragkloss (dynamometer) gäller: i vila och vid konstant hastighet är F frekvensen f är lika med F avståndet d r accelerationen a tyngdfaktorn g ; accelererar klossen är F frekvensen f är mindre än F avståndet d r accelerationen a tyngdfaktorn g ."
+   },
+   {
+    "t": "I ett trissystem: räkna först på hela systemet för att hitta den gemensamma accelerationen ( F resistansen R är lika med skillnaden mellan tyngdkrafterna, m är lika med totala massan), räkna sedan på en enskild kropp för att hitta spännkraften F S ."
+   },
+   {
+    "t": "Spännkraften i ett snöre är lika stor genom hela snöret (även runt friktionsfria trissor) — i en dragkamp avgör friktionen mot marken, inte olika stor kraft i själva repet."
+   },
+   {
+    "t": "Accelerationens tecken avgörs av hur hastigheten (med tecken, som vektor) ändras — inte av hur farten ändras."
+   },
+   {
+    "t": "En hiss som bromsar in på väg ner har en hastighet som blir mindre negativ, det vill säga ökar, så accelerationen är positiv trots att farten minskar."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "En vikt i vila på ett bord — tyngdkraften och normalkraften är lika stora men verkar på samma föremål (jämviktskrafter, inte kraft och motkraft):"
+   },
+   {
+    "t": "Tyngdkraften delas upp i en komposant längs planet och en vinkelrätt mot planet — grunden för alla beräkningar på lutande plan:"
+   },
+   {
+    "t": "Tyngdkraften delas upp i en komposant F ett nedför planet och en komposant F två vinkelrätt mot planet."
+   },
+   {
+    "t": "Normalkraften F N är lika lång som F två och friktionskraften F frekvensen f lika lång som F ett."
+   },
+   {
+    "t": "Två vikter kopplade över trissor på ett bord — spännkraften är lika stor i hela snöret:"
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du förklara Newtons tre lagar med egna ord och ge ett eget exempel på var och en?"
+   },
+   {
+    "t": "Kan du skilja mellan jämviktskrafter och motkrafter, och förklara varför motkraften till en tyngdkraft aldrig är en normalkraft?"
+   },
+   {
+    "t": "Kan du formeln för tyngdkraft ( F G är lika med massan m gånger tyngdfaktorn g ) och vet du skillnaden mellan massa och tyngd?"
+   },
+   {
+    "t": "Vet du att normalkraften alltid är vinkelrät mot kontaktytan, oavsett om underlaget är vågrätt, lutande eller lodrätt?"
+   },
+   {
+    "t": "Kan du ställa upp och räkna med Newtons gravitationslag och förklara varför tyngdfaktorn på jorden blir just 9,82 newton per kilogram?"
+   },
+   {
+    "t": "Kan du formeln för friktionskraft ( F frekvensen f är lika med my gånger F N ) och avgöra om ett föremål glider eller står stilla?"
+   },
+   {
+    "t": "Kan du dela upp tyngdkraften i komposanter på ett lutande plan och räkna ut normalkraft, friktionskraft och acceleration?"
+   },
+   {
+    "t": "Vet du hur man avgör accelerationens tecken utifrån hur hastigheten (inte farten) ändras, t.ex. i ett hiss- eller kastexempel?"
+   },
+   {
+    "t": "Kan du räkna ut acceleration och spännkraft i ett trissystem genom att först se på hela systemet och sedan på en enskild kropp?"
+   },
+   {
+    "t": "Kan du rita ett korrekt kraftdiagram med rätt angreppspunkter för F G , F N , F frekvensen f och F S ?"
    }
   ]
  },
@@ -4942,6 +5620,319 @@
   ]
  },
  {
+  "id": "fy1-4.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Energi"
+   },
+   {
+    "t": "I det här kapitlet har du mött energi i sina olika former och hur den flyttas mellan formerna genom arbete."
+   },
+   {
+    "t": "Du kan nu räkna med lägesenergi, rörelseenergi, effekt och verkningsgrad, och du har sett hur energiprincipen och rörelsemängdens bevarande används för att lösa problem med stötar, kast och rörelse i backar."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "energi — förmågan att uträtta arbete; betecknas E, SI-enheten J (joule)."
+   },
+   {
+    "t": "arbete — energin som omvandlas när en kraft ger en förflyttning i kraftens riktning: arbetet W är lika med F sträckan s gånger s ."
+   },
+   {
+    "t": "lägesenergi (potentiell energi) — energi som lagras på grund av föremålets höjd över en vald nollnivå."
+   },
+   {
+    "t": "rörelseenergi (kinetisk energi) — energin ett föremål har på grund av sin hastighet."
+   },
+   {
+    "t": "energiprincipen — energi kan varken skapas eller förstöras, bara omvandlas mellan olika former."
+   },
+   {
+    "t": "mekanisk energi — summan av läges- och rörelseenergi, E massan m är lika med E trycket p plus E k ."
+   },
+   {
+    "t": "friktionsvärme — den energi som \"försvinner\" ur den mekaniska energin vid friktion; blir alltid värme."
+   },
+   {
+    "t": "effekt — arbete eller energi per tidsenhet, effekten P är lika med arbetet W delat med delta tiden t ; SI-enhet W (watt)."
+   },
+   {
+    "t": "verkningsgrad — andelen av tillförd energi som blir nyttig, eta är lika med E n delat med E tiden t ; ett tal mellan 0 och 1."
+   },
+   {
+    "t": "rörelsemängd — produkten av massa och hastighet, trycket p är lika med massan m gånger hastigheten v ; en vektor."
+   },
+   {
+    "t": "impuls — en kraft som verkar under en viss tid, strömmen I är lika med kraften F gånger delta tiden t ; ändrar rörelsemängden."
+   },
+   {
+    "t": "elastisk och oelastisk stöt — vid en elastisk stöt studsar föremålen isär, vid en oelastisk (eller fullkomligt oelastisk) stöt hakar de i varandra; rörelsemängden bevaras i båda fallen."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Arbete"
+   },
+   {
+    "t": "arbetet W är lika med F sträckan s gånger s"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "W är lika med arbete (Nm eller J)"
+   },
+   {
+    "t": "F sträckan s är lika med kraften i rörelsens riktning (newton)"
+   },
+   {
+    "t": "s är lika med sträckan (meter)"
+   },
+   {
+    "t": "Lägesenergi och rörelseenergi"
+   },
+   {
+    "t": "E trycket p är lika med massan m gånger tyngdfaktorn g gånger höjden h E k som är lika med m gånger hastigheten v i kvadrat delat med 2"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E trycket p är lika med lägesenergi (joule)"
+   },
+   {
+    "t": "E k är lika med rörelseenergi (joule)"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "g är lika med tyngdfaktor (newton per kilogram) (9,82 newton per kilogram i Sverige)"
+   },
+   {
+    "t": "h är lika med höjd över nollnivån (meter)"
+   },
+   {
+    "t": "v är lika med hastighet (meter per sekund)"
+   },
+   {
+    "t": "Sker höjdändringen utan friktion motsvarar arbetet arbetet W ändringen av lägesenergi: arbetet W är lika med delta E trycket p ."
+   },
+   {
+    "t": "Energiprincipen och mekanisk energi"
+   },
+   {
+    "t": "E massan m är lika med E trycket p plus E k"
+   },
+   {
+    "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 (utan friktion)"
+   },
+   {
+    "t": "E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 plus E hastigheten v (med friktionsvärme E v )"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E massan m är lika med mekanisk energi (joule)"
+   },
+   {
+    "t": "E trycket p 1 , E k 1 är lika med läges- och rörelseenergi vid tidpunkt 1"
+   },
+   {
+    "t": "E trycket p 2 , E k 2 är lika med läges- och rörelseenergi vid tidpunkt 2"
+   },
+   {
+    "t": "E hastigheten v är lika med friktionsvärme (joule), E hastigheten v är lika med delta E massan m eller E hastigheten v är lika med F frekvensen f gånger sträckan s"
+   },
+   {
+    "t": "Effekt och verkningsgrad"
+   },
+   {
+    "t": "effekten P är lika med delta energin E delat med delta tiden t som är lika med arbetet W delat med delta t eta som är lika med E n delat med E t som är lika med P n delat med P t"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "P är lika med effekt (W eller J/s)"
+   },
+   {
+    "t": "ΔE, W är lika med omvandlad energi respektive arbete (joule)"
+   },
+   {
+    "t": "Δt är lika med tid (sekunder)"
+   },
+   {
+    "t": "η är lika med verkningsgrad, 0 ≤ η ≤ 1"
+   },
+   {
+    "t": "E n , P n är lika med nyttig energi respektive effekt"
+   },
+   {
+    "t": "E tiden t , P tiden t är lika med tillförd energi respektive effekt"
+   },
+   {
+    "t": "1 watt är lika med 1 joule per sekund 1 joule som är lika med 1 Ws 1 kilowattimme som är lika med 3,6 gånger 10 upphöjt till 6 joule"
+   },
+   {
+    "t": "Rörelsemängd och impuls"
+   },
+   {
+    "t": "trycket p är lika med massan m gånger hastigheten v strömmen I som är lika med kraften F gånger delta tiden t I som är lika med delta p som är lika med m gånger delta v som är lika med m v två minus m v ett"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "p är lika med rörelsemängd (kg gånger m/s)"
+   },
+   {
+    "t": "I är lika med impuls (Ns)"
+   },
+   {
+    "t": "F är lika med kraft (newton)"
+   },
+   {
+    "t": "Δt är lika med tid (sekunder)"
+   },
+   {
+    "t": "Δp är lika med ändring av rörelsemängd (kg gånger m/s)"
+   },
+   {
+    "t": "I en F-t-graf motsvaras impuls av arean under grafen."
+   },
+   {
+    "t": "Rörelsemängdens bevarande"
+   },
+   {
+    "t": "m arean A gånger v A 0 plus m B gånger v B 0 är lika med m A gånger v A plus m B gånger v B"
+   },
+   {
+    "t": "m arean A gånger v A plus m B gånger v B är lika med parentesen m A plus m B slut parentes gånger hastigheten v (fullkomligt oelastisk stöt)"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "m arean A , m B är lika med massa föremål A respektive B"
+   },
+   {
+    "t": "v arean A 0 , v B 0 är lika med begynnelsehastighet föremål A respektive B"
+   },
+   {
+    "t": "v arean A , v B är lika med sluthastighet föremål A respektive B"
+   },
+   {
+    "t": "v är lika med gemensam sluthastighet vid fullkomligt oelastisk stöt"
+   },
+   {
+    "t": "Friktionsvärme"
+   },
+   {
+    "t": "E hastigheten v är lika med F frekvensen f gånger sträckan s arbetet W som är lika med delta E trycket p plus E v (arbete vid höjdändring med friktion)"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E hastigheten v är lika med friktionsvärme (joule)"
+   },
+   {
+    "t": "F frekvensen f är lika med friktionskraft (newton)"
+   },
+   {
+    "t": "s är lika med sträcka (meter)"
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Nollnivån för lägesenergi kan väljas fritt (oftast längst ner i systemet) — det är bara ändringen i höjd som spelar roll för beräkningarna."
+   },
+   {
+    "t": "En kraft ger bara upphov till arbete om den har en komposant i rörelseriktningen: rör sig föremålet vågrätt med konstant hastighet medan kraften är lodrät blir F sträckan s är lika med 0 och arbetet 0."
+   },
+   {
+    "t": "Vid rörelse snett (t.ex. att dra en vagn i en vinkel) används bara kraftkomposanten i rörelseriktningen: F sträckan s är lika med kraften F gånger cosinus alfa ."
+   },
+   {
+    "t": "Energiprincipen E trycket p 1 plus E k 1 är lika med E p 2 plus E k 2 gäller när mekanisk energi bevaras (ingen friktion); med friktion läggs friktionsvärmen E hastigheten v till i högerledet."
+   },
+   {
+    "t": "Massan \"försvinner\" ofta ur energiprincipen (den finns i alla termer) — därför slår t.ex. fritt fallande föremål i marken med samma fart oavsett massa."
+   },
+   {
+    "t": "Rörelsemängd är en vektor och tecken (+/−) måste hållas reda på; rörelseenergi är alltid positiv eftersom hastigheten kvadreras."
+   },
+   {
+    "t": "I en F-t-graf ger arean under grafen impulsen, precis som arean i en v-t-graf ger förflyttningen."
+   },
+   {
+    "t": "Rörelsemängden i ett slutet system bevaras alltid vid en stöt, oavsett om stöten är elastisk eller oelastisk."
+   },
+   {
+    "t": "Vid en fullkomligt oelastisk stöt (föremålen hakar i varandra) får de en gemensam sluthastighet — då kan rörelsemängdslagen skrivas med parentesen m arean A plus m B slut parentes gånger hastigheten v ."
+   },
+   {
+    "t": "Verkningsgraden kan aldrig bli större än 1 (100 procent) — en apparat kan aldrig avge mer energi än den tar emot."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Arbete vid förflyttning i en vinkel — bara kraftkomposanten i rörelseriktningen bidrar till arbetet (ur avsnitt 4.1):"
+   },
+   {
+    "t": "Impuls som area under en F-t-graf (ur avsnitt 4.7):"
+   },
+   {
+    "t": "Rörelsemängdens bevarande vid en knuff — den totala rörelsemängden är oförändrad före och efter (ur avsnitt 4.8):"
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du...?"
+   },
+   {
+    "t": "Beräkna arbete arbetet W är lika med F sträckan s gånger s , även när kraften verkar snett (med en cos-komposant i rörelseriktningen)?"
+   },
+   {
+    "t": "Beräkna lägesenergi E trycket p är lika med massan m gånger tyngdfaktorn g gånger höjden h och förklara att nollnivån kan väljas fritt?"
+   },
+   {
+    "t": "Beräkna rörelseenergi E k är lika med massan m gånger hastigheten v i kvadrat delat med 2 ?"
+   },
+   {
+    "t": "Använda energiprincipen, både utan och med friktion, för att lösa problem med höjdändring och hastighetsändring?"
+   },
+   {
+    "t": "Beräkna effekt effekten P är lika med delta energin E delat med delta tiden t och räkna om mellan J, Ws och kWh?"
+   },
+   {
+    "t": "Beräkna verkningsgrad eta är lika med E n delat med E tiden t och förklara varför den alltid ligger mellan 0 och 1?"
+   },
+   {
+    "t": "Skilja på rörelsemängd trycket p är lika med massan m gånger hastigheten v och rörelseenergi E k , och förklara varför rörelsemängd är en vektor?"
+   },
+   {
+    "t": "Använda impulslagen strömmen I är lika med kraften F gånger delta tiden t som är lika med delta trycket p , även utifrån arean under en F-t-graf?"
+   },
+   {
+    "t": "Ställa upp rörelsemängdslagen vid stötar, både elastiska och (fullkomligt) oelastiska?"
+   },
+   {
+    "t": "Beräkna friktionsvärme E hastigheten v är lika med F frekvensen f gånger sträckan s och använda den i energiprincipen?"
+   }
+  ]
+ },
+ {
   "id": "fy1-5.1",
   "title": "Tryck och tryckkraft",
   "course": "Fysik nivå 1",
@@ -5996,6 +6987,238 @@
   ]
  },
  {
+  "id": "fy1-5.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Tryck"
+   },
+   {
+    "t": "Det här kapitlet handlade om hur en kraft fördelas över en yta: tryck mellan fasta kroppar, vätsketryck, lufttryck och totalt tryck."
+   },
+   {
+    "t": "Du mötte Arkimedes princip för lyftkraft i vätskor och gaser, ideala gaslagen med kelvinskalan och Pascals princip för hydraulik."
+   },
+   {
+    "t": "Du ska efter kapitlet kunna räkna med alla dessa samband och förklara vardagsfenomen som skidor i snö, dykning, varmluftsballonger och hydrauliska domkrafter."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Tryck — kraft per areaenhet, trycket p är lika med kraften F delat med arean A , mäts i Pa (pascal) eller N/m i kvadrat."
+   },
+   {
+    "t": "Tryckkraft — kraften F som verkar vinkelrätt mot en yta; inte samma sak som trycket."
+   },
+   {
+    "t": "Vätsketryck (hydrostatiskt tryck) — tryck orsakat av en vätskepelares tyngd; beror bara på djupet, inte på kärlets form eller mängden vätska."
+   },
+   {
+    "t": "Lufttryck (gastryck) — tryck orsakat av atmosfärens tyngd; ca 101,3 kilopascal vid havsytan (1 atm)."
+   },
+   {
+    "t": "Totalt tryck — summan av lufttryck och vätsketryck på ett visst djup."
+   },
+   {
+    "t": "Lyftkraft — den uppåtriktade kraft en vätska eller gas ger ett nedsänkt föremål."
+   },
+   {
+    "t": "Arkimedes princip — lyftkraften är lika stor som tyngden av den undanträngda vätskan eller gasen."
+   },
+   {
+    "t": "Ideala gaslagen — sambandet mellan tryck, volym och temperatur för en bestämd mängd gas."
+   },
+   {
+    "t": "Kelvinskalan — absolut temperaturskala som utgår från den absoluta nollpunkten, 0 kelvin är lika med minus 273 grader coulomb ."
+   },
+   {
+    "t": "Pascals princip — en tryckökning i en innesluten vätska fortplantas oförändrad i hela vätskan."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Kapitlets formler"
+   },
+   {
+    "t": "Tryck mellan fasta kroppar"
+   },
+   {
+    "t": "trycket p är lika med kraften F delat med arean A"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "p är lika med tryck (Pa eller N/m i kvadrat)"
+   },
+   {
+    "t": "F är lika med tryckkraft (newton)"
+   },
+   {
+    "t": "A är lika med arean som tryckkraften verkar på (m i kvadrat)"
+   },
+   {
+    "t": "Vätsketryck"
+   },
+   {
+    "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "p är lika med vätsketryck (pascal)"
+   },
+   {
+    "t": "ρ är lika med vätskans densitet (kg/m i kubik)"
+   },
+   {
+    "t": "g är lika med tyngdfaktor (newton per kilogram)"
+   },
+   {
+    "t": "h är lika med vätskedjup (meter)"
+   },
+   {
+    "t": "Totalt tryck"
+   },
+   {
+    "t": "trycket p är lika med p noll plus densiteten rho gånger tyngdfaktorn g gånger höjden h"
+   },
+   {
+    "t": "där p noll är lufttrycket mot vätskeytan (pascal)."
+   },
+   {
+    "t": "Lyftkraft (Arkimedes princip)"
+   },
+   {
+    "t": "F L är lika med densiteten rho gånger tyngdfaktorn g gånger volymen V"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F L är lika med lyftkraft (newton)"
+   },
+   {
+    "t": "ρ är lika med densiteten hos den undanträngda vätskan eller gasen (kg/m i kubik)"
+   },
+   {
+    "t": "V är lika med den undanträngda volymen / föremålets nedsänkta volym (m i kubik)"
+   },
+   {
+    "t": "Ideala gaslagen"
+   },
+   {
+    "t": "p ett gånger V ett delat med T ett är lika med p två gånger V två delat med T två"
+   },
+   {
+    "t": "där p ett, p två är lika med gastryck och V ett, V två är lika med gasvolym i valfri men samma enhet i respektive läge, och T ett, T två är lika med gastemperatur (kelvin) i respektive läge."
+   },
+   {
+    "t": "Kelvinskalan"
+   },
+   {
+    "t": "T K är lika med T C plus 273"
+   },
+   {
+    "t": "där T K är lika med temperatur (kelvin) och T C är lika med temperatur (grader Celsius)."
+   },
+   {
+    "t": "Pascals princip"
+   },
+   {
+    "t": "F ett delat med A ett är lika med F två delat med A två"
+   },
+   {
+    "t": "där F ett, F två är lika med krafterna på respektive kolv (newton) och A ett, A två är lika med areorna hos respektive kolv (samma enhet)."
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Tryckkraft och tryck är olika storheter — samma kraft ger olika tryck beroende på hur stor area den fördelas på (skidor i snö, en stilettklack mot en pansarvagns larvfötter)."
+   },
+   {
+    "t": "Vätsketrycket beror bara på djupet h — inte på kärlets form eller mängden vätska."
+   },
+   {
+    "t": "Vätsketryck verkar alltid vinkelrätt mot den yta det trycker på."
+   },
+   {
+    "t": "Räknar du ut tryckkraften på en nedsänkt kroppsdel (t.ex. en trumhinna) ska du oftast bara använda vätsketrycket — lufttrycket finns även på insidan och tar ut sig självt."
+   },
+   {
+    "t": "När något flyter gäller F L är lika med F G ; när något sjunker gäller F L är mindre än F G ."
+   },
+   {
+    "t": "I Arkimedes princip används densiteten hos det undanträngda mediet (vätskan eller gasen), aldrig densiteten hos föremålet självt."
+   },
+   {
+    "t": "Ett föremål flyter om dess sammanlagda densitet är lägre än mediets densitet — det är därför ett fartyg av järn flyter (mycket luft ombord) medan en massiv järnkub sjunker."
+   },
+   {
+    "t": "I ideala gaslagen räcker det att tryck och volym har samma enhet på båda sidor — men temperaturen måste alltid anges i kelvin, aldrig celsius."
+   },
+   {
+    "t": "Är volymen konstant (t.ex. i ett rum) kan V förkortas bort ur ideala gaslagen och sambandet förenklas till p ett delat med T ett är lika med p två delat med T två ."
+   },
+   {
+    "t": "Pascals princip förklarar varför en liten kraft på en liten kolvarea kan ge en stor kraft på en stor kolvarea — grunden för hydraulisk förstärkning."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Ett flytande och ett sjunkande föremål — lägg märke till att lyftkraften är lika lång som tyngdkraften när föremålet flyter, men kortare när det sjunker."
+   },
+   {
+    "t": "Till vänster flyter föremålet — lyftkraften är lika stor som tyngdkraften."
+   },
+   {
+    "t": "Till höger sjunker föremålet — lyftkraften är mindre än tyngdkraften."
+   },
+   {
+    "t": "En hydraulisk domkraft: en liten kraft på den smala kolven ger en mycket större kraft på den breda kolven, eftersom trycket p ett är lika med p två är detsamma i hela vätskan."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du skilja på tryck och tryckkraft, och förklara varför en stilettklack ger mycket högre tryck än en pansarvagns larvfötter?"
+   },
+   {
+    "t": "Kan du räkna ut vätsketrycket på ett givet djup, och förklara varför det bara beror på djupet?"
+   },
+   {
+    "t": "Kan du räkna ut det totala trycket på ett djup i en vätska, med lufttrycket inräknat?"
+   },
+   {
+    "t": "Kan du förklara varför bara vätsketrycket (inte lufttrycket) ger en nettokraft på till exempel en trumhinna under vattnet?"
+   },
+   {
+    "t": "Kan du använda Arkimedes princip för att räkna ut lyftkraften på ett helt eller delvis nedsänkt föremål?"
+   },
+   {
+    "t": "Kan du avgöra om ett föremål flyter eller sjunker genom att jämföra lyftkraften och tyngdkraften?"
+   },
+   {
+    "t": "Kan du förklara varför en varmluftsballong eller heliumballong stiger?"
+   },
+   {
+    "t": "Kan du omvandla mellan celsius och kelvin, och förklara varför ideala gaslagen kräver kelvin?"
+   },
+   {
+    "t": "Kan du använda ideala gaslagen för att lösa ut ett obekant tryck, en volym eller en temperatur?"
+   },
+   {
+    "t": "Kan du förklara Pascals princip och räkna ut kraftförstärkningen i en hydraulisk domkraft?"
+   }
+  ]
+ },
+ {
   "id": "fy1-6.1",
   "title": "Värme och temperatur",
   "course": "Fysik nivå 1",
@@ -6777,6 +8000,289 @@
    },
    {
     "t": "Alla processer upphör vid absoluta nollpunkten."
+   }
+  ]
+ },
+ {
+  "id": "fy1-6.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Värmelära"
+   },
+   {
+    "t": "Kapitlet handlar om skillnaden mellan värme och temperatur, hur mycket energi som krävs för att värma, kyla, smälta och förånga ämnen, hur kroppen hanterar värme och kyla, samt termodynamikens fyra huvudsatser."
+   },
+   {
+    "t": "Du ska kunna räkna på uppvärmning, avsvalning och fasövergångar, sätta upp energibalanser och förklara resultaten med rätt begrepp."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Inre energi — summan av atomernas potentiella energi (i kemiska bindningar) och rörelseenergi i ett material."
+   },
+   {
+    "t": "Värme — energi som självmant strömmar från ett varmare system till ett kallare."
+   },
+   {
+    "t": "Mäts i joule (joule)."
+   },
+   {
+    "t": "Det finns fysikaliskt inget som heter kyla."
+   },
+   {
+    "t": "Temperatur — mått på atomernas genomsnittliga rörelseenergi."
+   },
+   {
+    "t": "SI-enhet kelvin (kelvin)."
+   },
+   {
+    "t": "Absoluta nollpunkten — den lägsta möjliga temperaturen, 0 kelvin är lika med minus 273 grader coulomb , där all termisk rörelse upphör."
+   },
+   {
+    "t": "Ledning, strålning, strömning — de tre sätten värme transporteras på: genom kontakt mellan material, genom strålning (kräver inget medium) och genom \"virvlande\" gas eller vätska (konvektion)."
+   },
+   {
+    "t": "Specifik värmekapacitet ( c ) — energin som krävs för att höja temperaturen 1 kelvin hos 1 kilogram av ett ämne."
+   },
+   {
+    "t": "Enhet J/(kg \\cdot K) , olika för olika ämnen och tillstånd."
+   },
+   {
+    "t": "Specifik smältentalpi ( l sträckan s ) — energin som krävs för att smälta 1 kilogram av ett ämne."
+   },
+   {
+    "t": "Enhet joule per kilogram ."
+   },
+   {
+    "t": "Specifik ångbildningsentalpi ( l å ) — energin som krävs för att förånga 1 kilogram av ett ämne."
+   },
+   {
+    "t": "Enhet joule per kilogram ."
+   },
+   {
+    "t": "Faser (aggregationstillstånd) — fast, flytande och gas, samt de sex övergångarna mellan dem: smältning, stelning, förångning, kondensering, sublimering och deposition."
+   },
+   {
+    "t": "Fasövergång — sker vid konstant temperatur."
+   },
+   {
+    "t": "Tillförd eller avgiven energi går åt att bryta eller bilda bindningar, inte till att ändra temperaturen."
+   },
+   {
+    "t": "Svettning och avdunstning — kroppens sätt att kyla sig: avdunstning kräver energi som tas från huden."
+   },
+   {
+    "t": "Termodynamikens fyra huvudsatser — grundprinciper om jämvikt ekvation 0, energins bevarande ekvation 1, värmets riktning ekvation 2 och absoluta nollpunkten ekvation 3."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Temperaturskalan"
+   },
+   {
+    "t": "Kelvinskalan"
+   },
+   {
+    "t": "T K är lika med T C plus 273"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "T K är lika med temperatur (kelvin)"
+   },
+   {
+    "t": "T C är lika med temperatur (grader Celsius)"
+   },
+   {
+    "t": "Uppvärmning, avsvalning och energibalans"
+   },
+   {
+    "t": "Uppvärmning och avsvalning"
+   },
+   {
+    "t": "energin E är lika med c gånger massan m gånger delta periodtiden T"
+   },
+   {
+    "t": "(skrivs laddningen Q är lika med c gånger massan m gånger delta periodtiden T i formelhäftet)"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E, Q är lika med upptagen/avgiven energi (joule)"
+   },
+   {
+    "t": "c är lika med specifik värmekapacitet (J/(kg gånger K)) — olika för olika ämnen och tillstånd"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "delta periodtiden T är lika med temperaturändring (K eller °C)"
+   },
+   {
+    "t": "Avgiven och upptagen energi (utan energiförluster)"
+   },
+   {
+    "t": "E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E accelerationen a hastigheten v tyngdfaktorn g är lika med avgiven energi"
+   },
+   {
+    "t": "E u trycket p p är lika med upptagen energi"
+   },
+   {
+    "t": "Energi vid fasövergångar"
+   },
+   {
+    "t": "Energi för smältning och stelning"
+   },
+   {
+    "t": "energin E är lika med l sträckan s gånger massan m"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E är lika med smältenergi (joule)"
+   },
+   {
+    "t": "l sträckan s är lika med specifik smältentalpi (J/kg) — slås upp i tabell"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "Energi för förångning/kondensation"
+   },
+   {
+    "t": "energin E är lika med l å gånger massan m"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E är lika med förångningsenergi (joule)"
+   },
+   {
+    "t": "l å är lika med specifik ångbildningsentalpi (J/kg) — slås upp i tabell"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "Termodynamikens huvudsatser"
+   },
+   {
+    "t": "Termodynamikens fyra huvudsatser"
+   },
+   {
+    "t": "0."
+   },
+   {
+    "t": "Två system i kontakt med varandra kommer att utbyta energi tills de är i jämvikt."
+   },
+   {
+    "t": "1."
+   },
+   {
+    "t": "Energi kan inte skapas eller förstöras, bara omvandlas."
+   },
+   {
+    "t": "2."
+   },
+   {
+    "t": "Värme flödar från varmt till kallt."
+   },
+   {
+    "t": "Värme flödar aldrig från kallt till varmt av sig själv."
+   },
+   {
+    "t": "3."
+   },
+   {
+    "t": "Alla processer upphör vid absoluta nollpunkten."
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Vid blandning eller kontakt mellan ämnen utan energiförluster gäller energibalansen E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p — ställ upp vad som avger respektive upptar energi och lös ut den efterfrågade storheten (t.ex. sluttemperatur eller mängd smält is)."
+   },
+   {
+    "t": "Vid en fasövergång är temperaturen konstant — kurvan i ett temperatur-tid-diagram blir horisontell vid smält- och kokpunkten."
+   },
+   {
+    "t": "Uppgifter som blandar uppvärmning och fasövergång (t.ex. is som smälter i varmvatten) löses genom att dela upp energin i delsteg (uppvärmning + smältning/förångning) och sätta upp energibalans mellan alla delsteg."
+   },
+   {
+    "t": "Specifik värmekapacitet, smältentalpi och ångbildningsentalpi är ämnesberoende och slås upp i tabell."
+   },
+   {
+    "t": "De skiljer sig även mellan olika tillstånd av samma ämne (t.ex. is och flytande vatten)."
+   },
+   {
+    "t": "Ett material som känns kallare än ett annat behöver inte ha lägre temperatur — det beror ofta på att materialet leder värme bättre (t.ex. aluminium jämfört med plast)."
+   },
+   {
+    "t": "Kroppen reglerar sin temperatur genom svettning (avdunstning kyler) och genom att skaka (kemisk energi blir rörelseenergi och sedan värme)."
+   },
+   {
+    "t": "Vind känns kallare eftersom uppvärmd luft nära huden byts ut mot kallare luft snabbare — samma princip gör att man kyls av att blåsa hårt på huden, medan man värms av att blåsa löst."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Kapitlets sex fasövergångar mellan de tre faserna:"
+   },
+   {
+    "t": "De tre faserna och de sex fasövergångarna mellan dem."
+   },
+   {
+    "t": "Temperatur-tid-diagrammet visar varför temperaturen är konstant vid smältning och förångning:"
+   },
+   {
+    "t": "När vi tillför energi till minusgradig is stiger temperaturen först. Vid 0 grader Celsius blir kurvan horisontell under smältningen, och vid 100 grader Celsius horisontell igen under förångningen — temperaturen ändras alltså inte vid en fasövergång."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du förklara skillnaden mellan värme, temperatur och inre energi?"
+   },
+   {
+    "t": "Kan du räkna om mellan Celsius och kelvin?"
+   },
+   {
+    "t": "Kan du namnge och förklara de tre sätten värme transporteras på (ledning, strålning, strömning)?"
+   },
+   {
+    "t": "Kan du beräkna energin som går åt vid uppvärmning eller avsvalning med energin E är lika med c gånger massan m gånger delta periodtiden T ?"
+   },
+   {
+    "t": "Kan du sätta upp en energibalans ( E accelerationen a hastigheten v tyngdfaktorn g är lika med E u trycket p p ) för att lösa blandnings- och smältproblem?"
+   },
+   {
+    "t": "Kan du namnge alla sex fasövergångar och förklara varför temperaturen inte ändras under en fasövergång?"
+   },
+   {
+    "t": "Kan du beräkna energin vid smältning/stelning och förångning/kondensation med l sträckan s respektive l å ?"
+   },
+   {
+    "t": "Kan du förklara hur kroppen värmer och kyler sig (svettning, skakning, isolerande kläder)?"
+   },
+   {
+    "t": "Kan du redogöra för termodynamikens fyra huvudsatser?"
    }
   ]
  },
@@ -9303,6 +10809,442 @@
   ]
  },
  {
+  "id": "fy1-7.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Elektricitet"
+   },
+   {
+    "t": "Kapitlet gick från statisk elektricitet (laddning, influens, Coulombs lag) till elektriska kretsar (ström, spänning, resistans, Ohms och Kirchhoffs lagar, effekt) och vidare till elektriska fält, potential, Faradays bur och Millikans försök."
+   },
+   {
+    "t": "Du ska efter kapitlet kunna räkna på krafter mellan laddningar, analysera serie- och parallellkopplade kretsar samt räkna med elektrisk fältstyrka och potential."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Elektrisk laddning — grundläggande egenskap hos materia, positiv eller negativ, betecknas Q eller q, enhet C (coulomb)."
+   },
+   {
+    "t": "Elementarladdning — den minsta laddningsenheten, q e är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb — elektronens och protonens laddning."
+   },
+   {
+    "t": "Ledare, isolator, halvledare — hur lätt elektroner rör sig i ett material (metaller/saltlösningar; glas/plast/trä; kisel/selen)."
+   },
+   {
+    "t": "Influens — omfördelning av laddningar i ett neutralt föremål på grund av ett yttre elektriskt fält."
+   },
+   {
+    "t": "Coulombs lag — kraften mellan två punktladdningar, avtar med kvadraten på avståndet."
+   },
+   {
+    "t": "Elektrisk ström — laddning per tidsenhet, betecknas I, enhet A (ampere); riktas från plus till minus, motsatt elektronernas rörelse."
+   },
+   {
+    "t": "Kirchhoffs första lag — summan av strömmarna in i en punkt är lika med summan ut från punkten."
+   },
+   {
+    "t": "Spänning — energiskillnad per laddning mellan två punkter, betecknas U, enhet V (volt)."
+   },
+   {
+    "t": "Resistans — motstånd mot elektrisk ström, betecknas R, enhet Ω (ohm)."
+   },
+   {
+    "t": "Resistivitet — materialegenskap som avgör hur mycket en ledare motstår ström, betecknas ρ, enhet Ω·m."
+   },
+   {
+    "t": "Ohms lag — sambandet mellan spänning, resistans och ström, spänningen U är lika med resistansen R gånger strömmen I ."
+   },
+   {
+    "t": "Seriekoppling — komponenter kopplade \"på rad\"; samma ström genom alla."
+   },
+   {
+    "t": "Parallellkoppling — komponenter kopplade \"över varandra\"; samma spänning över alla."
+   },
+   {
+    "t": "Ersättningsresistans — den enskilda resistans som kan ersätta flera resistorer i en krets."
+   },
+   {
+    "t": "Elektrisk effekt — energi som omvandlas per tidsenhet, betecknas P, enhet W (watt)."
+   },
+   {
+    "t": "Elektriskt fält — område runt en laddning där en annan laddning påverkas av en elektrisk kraft; ritas ut från plus, in i minus."
+   },
+   {
+    "t": "Elektrisk fältstyrka — hur starkt ett elektriskt fält är, betecknas energin E , enhet N/C eller V/m."
+   },
+   {
+    "t": "Homogent fält — ett fält som är lika starkt överallt, t.ex. mellan två parallella laddade plattor."
+   },
+   {
+    "t": "Elektrisk potential — \"elektrisk lägesenergi\" i en punkt, betecknas V, enhet V; har till skillnad från spänning ett tecken."
+   },
+   {
+    "t": "Jordning — nollnivå för potential (0 volt) i en krets; leder bort oönskad laddning/ström."
+   },
+   {
+    "t": "Kirchhoffs andra lag — summan av alla potentialändringar i en sluten krets är noll."
+   },
+   {
+    "t": "Faradays bur — ett metallhölje inuti vilket det resulterande elektriska fältet alltid är noll."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Kapitlets formler"
+   },
+   {
+    "t": "Laddning"
+   },
+   {
+    "t": "laddningen Q är lika med n gånger q e"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "Q är lika med total laddning (coulomb)"
+   },
+   {
+    "t": "n är lika med antal överskotts- eller underskottselektroner (st)"
+   },
+   {
+    "t": "q e är lika med elementarladdningen är ungefär lika med 1,602 gånger 10 upphöjt till minus 19 coulomb"
+   },
+   {
+    "t": "Coulombs lag"
+   },
+   {
+    "t": "kraften F är lika med k gånger | Q ett | gånger | Q två | delat med r i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F är lika med elektrisk kraft (newton)"
+   },
+   {
+    "t": "k är lika med Coulombs konstant är ungefär lika med 8,99 gånger 10 upphöjt till 9 newton \\cdot m^2/C^2"
+   },
+   {
+    "t": "| Q ett | , | Q två | är lika med laddningarnas storlek (coulomb), tecken bortses från"
+   },
+   {
+    "t": "r är lika med avstånd mellan laddningarna (meter)"
+   },
+   {
+    "t": "Elektrisk ström och Kirchhoffs första lag"
+   },
+   {
+    "t": "strömmen I är lika med laddningen Q delat med tiden t sum I i n som är lika med sum I u t"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "I är lika med ström (ampere)"
+   },
+   {
+    "t": "Q är lika med laddning (coulomb)"
+   },
+   {
+    "t": "t är lika med tid (sekunder)"
+   },
+   {
+    "t": "Spänning och elektrisk energi"
+   },
+   {
+    "t": "spänningen U är lika med energin E delat med laddningen Q vilket är ekvivalent med att E är lika med Q gånger U"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "U är lika med spänning mellan två punkter (volt)"
+   },
+   {
+    "t": "E är lika med elektrisk (potentiell) energi eller energiskillnad (joule)"
+   },
+   {
+    "t": "Q är lika med laddning (coulomb)"
+   },
+   {
+    "t": "Ohms lag"
+   },
+   {
+    "t": "spänningen U är lika med resistansen R gånger strömmen I"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "U är lika med spänning (volt)"
+   },
+   {
+    "t": "R är lika med resistans (ohm)"
+   },
+   {
+    "t": "I är lika med ström (ampere)"
+   },
+   {
+    "t": "Resistans i ledare"
+   },
+   {
+    "t": "resistansen R är lika med densiteten rho gånger hävarmen l delat med arean A"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "R är lika med resistans i ledare (ohm)"
+   },
+   {
+    "t": "ρ är lika med resistivitet (Ω·m)"
+   },
+   {
+    "t": "l är lika med ledarens längd (meter)"
+   },
+   {
+    "t": "A är lika med ledarens tvärsnittsarea (m i kvadrat)"
+   },
+   {
+    "t": "Ersättningsresistans"
+   },
+   {
+    "t": "R tiden t o t är lika med R ett plus R två plus parentesen serie slut parentes"
+   },
+   {
+    "t": "1 delat med R tiden t o t är lika med 1 delat med R ett plus 1 delat med R två plus parentesen parallell slut parentes"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "R tiden t o t är lika med ersättningsresistans (ohm)"
+   },
+   {
+    "t": "R ett , R två , … är lika med resistans 1, resistans 2, … (ohm)"
+   },
+   {
+    "t": "Elektrisk effekt"
+   },
+   {
+    "t": "effekten P är lika med spänningen U gånger strömmen I som är lika med resistansen R gånger I i kvadrat som är lika med U i kvadrat delat med R"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "P är lika med elektrisk effekt (watt)"
+   },
+   {
+    "t": "U är lika med spänning över komponent (volt)"
+   },
+   {
+    "t": "I är lika med ström genom komponent (ampere)"
+   },
+   {
+    "t": "R är lika med resistans i komponent (ohm)"
+   },
+   {
+    "t": "Elektrisk fältstyrka"
+   },
+   {
+    "t": "energin E är lika med kraften F delat med laddningen Q E som är lika med k gånger Q delat med r i kvadrat parentesen klot slut parentes E som är lika med spänningen U delat med avståndet d parentesen plattor slut parentes"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "energin E är lika med elektrisk fältstyrka (N/C eller V/m)"
+   },
+   {
+    "t": "F är lika med elektrisk kraft på laddning i fältet (newton)"
+   },
+   {
+    "t": "Q är lika med laddningens (eller klotets) storlek (coulomb)"
+   },
+   {
+    "t": "r är lika med avstånd till klotets medelpunkt (meter)"
+   },
+   {
+    "t": "d är lika med plattavstånd (meter)"
+   },
+   {
+    "t": "Potential, spänning och Kirchhoffs andra lag"
+   },
+   {
+    "t": "spänningen U är lika med | V arean A minus V B | sum delta volymen V som är lika med 0"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "U är lika med spänning mellan punkt A och punkt B (volt)"
+   },
+   {
+    "t": "V arean A , V B är lika med potential i punkt A respektive punkt B (volt)"
+   },
+   {
+    "t": "Millikans oljedroppsförsök"
+   },
+   {
+    "t": "laddningen Q är lika med massan m gånger tyngdfaktorn g gånger avståndet d delat med spänningen U"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "Q är lika med laddning på oljedroppen (coulomb)"
+   },
+   {
+    "t": "m är lika med oljedroppens massa (kilogram)"
+   },
+   {
+    "t": "g är lika med tyngdfaktorn (newton per kilogram)"
+   },
+   {
+    "t": "d är lika med plattavstånd (meter)"
+   },
+   {
+    "t": "U är lika med spänning mellan plattorna (volt)"
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Den elektriska kraften mellan två laddningar är enligt Newtons tredje lag alltid lika stor på båda laddningarna, oavsett om laddningarna själva är olika stora."
+   },
+   {
+    "t": "Vid beräkning med Coulombs lag: strunta i tecken på laddningarna i själva beräkningen."
+   },
+   {
+    "t": "Bestäm i stället kraftens riktning genom resonemang: lika tecken repellerar, olika tecken attraherar."
+   },
+   {
+    "t": "Strömmens riktning definieras från plus till minus — motsatt elektronernas faktiska rörelseriktning."
+   },
+   {
+    "t": "Amperemetern (ampere) kopplas i serie med komponenten och ska ha låg resistans."
+   },
+   {
+    "t": "Voltmetern (volt) kopplas parallellt med komponenten och ska ha hög resistans."
+   },
+   {
+    "t": "Ingen av mätarna får då påverka strömmen den mäter på."
+   },
+   {
+    "t": "Seriekoppling: strömmen är samma genom alla komponenter, delspänningarna summeras till batterispänningen."
+   },
+   {
+    "t": "Går en komponent sönder bryts hela kretsen."
+   },
+   {
+    "t": "Parallellkoppling: spänningen är samma över alla komponenter, delströmmarna summeras till totalströmmen."
+   },
+   {
+    "t": "Går en komponent sönder fortsätter övriga att fungera oförändrat."
+   },
+   {
+    "t": "Fler resistorer i serie ökar den totala resistansen."
+   },
+   {
+    "t": "Fler resistorer i parallell minskar den totala resistansen — ersättningsresistansen blir alltid mindre än den minsta enskilda resistansen."
+   },
+   {
+    "t": "Komplexa kopplingar löses stegvis: reducera delar av kretsen (t.ex. en parallellkoppling) till en ersättningsresistans innan Ohms lag och Kirchhoffs lagar används på resten av kretsen."
+   },
+   {
+    "t": "Potentialvandring: starta i en jordad punkt där volymen V är lika med 0 ."
+   },
+   {
+    "t": "Gå genom ett batteri från minuspol till pluspol ger potentialen ökar med U; från pluspol till minuspol ger minskar med U."
+   },
+   {
+    "t": "Gå genom en resistor mot strömriktningen ger potentialen ökar med resistansen R gånger strömmen I ; med strömriktningen ger minskar med resistansen R gånger strömmen I ."
+   },
+   {
+    "t": "Inuti en Faradays bur är det resulterande elektriska fältet alltid noll — därför är man säker i en bil vid åska tack vare karossens metall, inte de isolerande däcken."
+   },
+   {
+    "t": "Millikans oljedroppsförsök visade att all laddning är en heltalsmultipel av elementarladdningen 1,602 gånger 10 upphöjt till minus 19 coulomb."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Krafter mellan laddningar — lika tecken repellerar, olika attraherar, och en neutral laddning ger ingen kraft alls:"
+   },
+   {
+    "t": "Lika laddning repellerar, olika laddning attraherar."
+   },
+   {
+    "t": "Vid neutral laddning uppstår ingen elektrisk kraft alls."
+   },
+   {
+    "t": "Seriekoppling — samma ström genom alla lampor, spänningen delas upp:"
+   },
+   {
+    "t": "Tre seriekopplade lampor."
+   },
+   {
+    "t": "Batteriets spänning U fördelas som delspänningar U ett, U två, U tre över lamporna."
+   },
+   {
+    "t": "Parallellkoppling — samma spänning över alla lampor, strömmen delas upp:"
+   },
+   {
+    "t": "Tre parallellkopplade lampor."
+   },
+   {
+    "t": "Den totala strömmen I delar upp sig i delströmmarna I ett, I två, I tre genom grenarna."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du förklara skillnaden mellan ledare, isolator och halvledare, samt vad influens innebär?"
+   },
+   {
+    "t": "Kan du Coulombs lag och avgöra kraftens riktning utifrån laddningarnas tecken?"
+   },
+   {
+    "t": "Kan du definitionen av ström ( strömmen I är lika med laddningen Q delat med tiden t ) och Kirchhoffs första lag?"
+   },
+   {
+    "t": "Kan du definitionen av spänning ( spänningen U är lika med energin E delat med laddningen Q ) och Ohms lag ( spänningen U är lika med resistansen R gånger strömmen I )?"
+   },
+   {
+    "t": "Kan du formeln för resistans i en ledare och hur längd, area och material påverkar resistansen?"
+   },
+   {
+    "t": "Kan du rita kopplingsscheman och avgöra hur amperemeter respektive voltmeter ska kopplas in?"
+   },
+   {
+    "t": "Kan du räkna ut ersättningsresistans för serie- och parallellkopplade resistorer, även i komplexa (blandade) kopplingar?"
+   },
+   {
+    "t": "Kan du de tre formlerna för elektrisk effekt och veta när du ska använda vilken?"
+   },
+   {
+    "t": "Kan du de tre formlerna för elektrisk fältstyrka (definitionen, laddat klot, mellan två plattor)?"
+   },
+   {
+    "t": "Kan du potentialvandra i en krets och använda Kirchhoffs andra lag för att bestämma en okänd ström?"
+   },
+   {
+    "t": "Vet du varför det resulterande elektriska fältet alltid är noll inuti en Faradays bur?"
+   },
+   {
+    "t": "Kan du redogöra för Millikans oljedroppsförsök och vad det bevisade om elementarladdningen?"
+   }
+  ]
+ },
+ {
   "id": "fy1-8.1",
   "title": "Relativitetsteori",
   "course": "Fysik nivå 1",
@@ -9582,6 +11524,199 @@
    },
    {
     "t": "Rent praktiskt är effekten liten här nere vid jordytan, eftersom ditt huvud åldras ca 90 miljarddelar av en sekund mer än dina fötter under en 79-årig livstid."
+   }
+  ]
+ },
+ {
+  "id": "fy1-8.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Relativitetsteori"
+   },
+   {
+    "t": "Det här korta kapitlet gav en försmak av Einsteins idé om att tid, längd och massa inte är absoluta storheter."
+   },
+   {
+    "t": "Utgångspunkten är att ljusets hastighet i vakuum alltid är densamma, oavsett hur källa och observatör rör sig — och det får tre konsekvenser: tidsdilatation, längdkontraktion och att massa och energi hör ihop genom energin E är lika med massan m gånger c i kvadrat ."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Ljushastigheten i vakuum — konstant, c är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund , oavsett hur ljuskällan eller observatören rör sig."
+   },
+   {
+    "t": "Michelson–Morleys experiment — 1887 års experiment som visade att ljusets hastighet inte adderas med jordens rörelse genom rymden."
+   },
+   {
+    "t": "Rörelsesystem — ett system (t.ex. en buss eller ett rymdskepp) som rör sig med konstant hastighet v relativt en observatör."
+   },
+   {
+    "t": "Egentid, t noll — tiden för ett förlopp mätt av någon som befinner sig inifrån rörelsesystemet."
+   },
+   {
+    "t": "Tidsdilatation — tiden går långsammare för ett rörligt objekt, sett från en observatör i vila."
+   },
+   {
+    "t": "Längdkontraktion — ett objekts längd i rörelsens riktning blir kortare vid höga hastigheter, sett från en observatör i vila."
+   },
+   {
+    "t": "Relativistisk massa — ett objekts massa ökar ju närmare ljusets hastighet det kommer."
+   },
+   {
+    "t": "Massa–energi-ekvivalens — massa och energi är utbytbara storheter enligt energin E är lika med massan m gånger c i kvadrat ."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Kapitlets formler"
+   },
+   {
+    "t": "Tidsdilatation"
+   },
+   {
+    "t": "tiden t är lika med t noll delat med roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "t noll är lika med tiden för ett förlopp inifrån ett rörelsesystem, egentid (sekunder)"
+   },
+   {
+    "t": "t är lika med tiden för samma förlopp sett utifrån rörelsesystemet (sekunder)"
+   },
+   {
+    "t": "v är lika med rörelsesystemets hastighet (meter per sekund)"
+   },
+   {
+    "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )"
+   },
+   {
+    "t": "Längdkontraktion"
+   },
+   {
+    "t": "hävarmen l är lika med l noll gånger roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "l noll är lika med längden i rörelsens riktning inifrån ett rörelsesystem (meter)"
+   },
+   {
+    "t": "l är lika med längden i rörelsens riktning sett utifrån rörelsesystemet (meter)"
+   },
+   {
+    "t": "v är lika med rörelsesystemets hastighet (meter per sekund)"
+   },
+   {
+    "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )"
+   },
+   {
+    "t": "Relativistisk massa"
+   },
+   {
+    "t": "massan m är lika med m noll delat med roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "m noll är lika med massan inifrån ett rörelsesystem (kilogram)"
+   },
+   {
+    "t": "m är lika med massan sett utifrån rörelsesystemet (kilogram)"
+   },
+   {
+    "t": "v är lika med rörelsesystemets hastighet (meter per sekund)"
+   },
+   {
+    "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )"
+   },
+   {
+    "t": "Energi hos massa"
+   },
+   {
+    "t": "energin E är lika med massan m gånger c i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E är lika med energi (joule)"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund )"
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Ljusets hastighet c är alltid densamma, oavsett hur ljuskällan eller observatören rör sig — det är detta som ger upphov till tidsdilatation, längdkontraktion och relativistisk massa."
+   },
+   {
+    "t": "t noll , l noll och m noll mäts av någon som befinner sig inifrån rörelsesystemet; t, l och m mäts av en observatör som ser systemet röra sig förbi."
+   },
+   {
+    "t": "Vid vardagliga hastigheter ( hastigheten v ll c ) blir roten ur 1 minus hastigheten v i kvadrat delat med c i kvadrat är ungefär lika med 1 och effekterna försvinnande små — det är först nära ljusets hastighet de blir märkbara."
+   },
+   {
+    "t": "Ju närmare v kommer c, desto mer ökar t och m, och desto mer minskar l."
+   },
+   {
+    "t": "Effekten är verklig och måste kompenseras för i praktiken, till exempel vid synkronisering av GPS-satelliters klockor med klockor vid jordytan."
+   },
+   {
+    "t": "energin E är lika med massan m gånger c i kvadrat visar att massa och energi är samma storhet i olika skepnad — eftersom c i kvadrat är enormt stort motsvarar en liten massa en enorm mängd energi."
+   },
+   {
+    "t": "Även gravitationsfält påverkar hur fort tiden går: tiden flyter långsammare i ett starkt gravitationsfält än i ett svagt, vilket bekräftats genom studier av GPS-satelliters atomklockor."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Michelson och Morleys experiment skickade ljus i två motsatta riktningar parallellt med jordens bana runt solen för att undersöka om ljusets hastighet påverkades av jordens rörelse."
+   },
+   {
+    "t": "Ljus skickades i två motsatta riktningar parallellt med jordens bana runt solen."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du förklara varför Michelson–Morleys experiment gick emot den klassiska förväntan?"
+   },
+   {
+    "t": "Kan du beskriva vad tidsdilatation, längdkontraktion och relativistisk massa innebär i ord?"
+   },
+   {
+    "t": "Kan du formeln för tidsdilatation och vad t noll respektive t står för?"
+   },
+   {
+    "t": "Kan du formeln för längdkontraktion och vad l noll respektive l står för?"
+   },
+   {
+    "t": "Kan du formeln för relativistisk massa?"
+   },
+   {
+    "t": "Kan du räkna ut hur mycket tiden dilateras vid en given hastighet, till exempel hastigheten v är lika med 0,87 c ?"
+   },
+   {
+    "t": "Kan du förklara varför ljus alltid mäts till hastigheten c, oavsett källans eller observatörens egen rörelse?"
+   },
+   {
+    "t": "Kan du formeln energin E är lika med massan m gånger c i kvadrat och vad den säger om sambandet mellan massa och energi?"
+   },
+   {
+    "t": "Vet du varför relativistiska effekter är omärkbara i vardagen men viktiga att räkna med för till exempel GPS-satelliter?"
    }
   ]
  },
@@ -10796,6 +12931,277 @@
    },
    {
     "t": "Svar: 10 mSv"
+   }
+  ]
+ },
+ {
+  "id": "fy1-9.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Kärnfysik"
+   },
+   {
+    "t": "Det här kapitlet handlade om atomkärnans uppbyggnad och stabilitet: hur protoner och neutroner hålls samman av den starka kärnkraften, hur massa omvandlas till bindningsenergi, och hur instabila kärnor sönderfaller genom alfa-, beta- och gammastrålning."
+   },
+   {
+    "t": "Du ska efter kapitlet kunna beräkna massdefekt och bindningsenergi, skriva balanserade sönderfallsformler, räkna med aktivitet och halveringstid, samt bedöma stråldoser och strålningens skadeverkan."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Nukleon — samlingsnamn för protoner och neutroner i atomkärnan."
+   },
+   {
+    "t": "Starka kärnkraften — kraften som håller ihop nukleonerna i kärnan; verkar bara på mycket korta avstånd (ca 10 upphöjt till minus 15 meter )."
+   },
+   {
+    "t": "Masstal ( arean A ) — totala antalet nukleoner (p och n) i kärnan."
+   },
+   {
+    "t": "Atomnummer ( Z ) — antalet protoner i kärnan; bestämmer grundämnet."
+   },
+   {
+    "t": "Isotop — atomer av samma grundämne (samma Z) men olika antal neutroner (olika A)."
+   },
+   {
+    "t": "Massdefekt ( delta massan m ) — skillnaden mellan massan hos partiklarna var för sig och massan hos den sammansatta kärnan."
+   },
+   {
+    "t": "Bindningsenergi — energin som motsvarar massdefekten via energin E är lika med delta massan m gånger c i kvadrat ; håller ihop kärnan."
+   },
+   {
+    "t": "Radioaktivt sönderfall — när en instabil kärna spontant omvandlas under utsändning av joniserande strålning."
+   },
+   {
+    "t": "Positron ( e upphöjt till plus ) och neutrino ( ny ) — positronen är elektronens antipartikel (samma massa, positiv laddning); neutrinon är nästan masslös, oladdad och växelverkar knappt med materia."
+   },
+   {
+    "t": "Båda bildas vid β-sönderfall."
+   },
+   {
+    "t": "Aktivitet ( arean A ) och sönderfallskonstant ( våglängden lambda ) — aktiviteten är antalet sönderfall per sekund (Bq); sönderfallskonstanten är proportionalitetskonstanten mellan aktivitet och antal kärnor."
+   },
+   {
+    "t": "Halveringstid ( T 1 delat med 2 ) — tiden det tar för hälften av kärnorna i ett radioaktivt prov att sönderfalla."
+   },
+   {
+    "t": "Absorberad dos ( D ) och ekvivalent dos ( H ) — absorberad dos är strålningsenergi per kg vävnad (Gy); ekvivalent dos väger detta med strålslagets skadlighet (Sv)."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Kapitlets formler"
+   },
+   {
+    "t": "Atomkärnans sammansättning"
+   },
+   {
+    "t": "Z upphöjt till arean A X"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "X är lika med kemisk beteckning för grundämnet"
+   },
+   {
+    "t": "A är lika med masstal (antal nukleoner, p + n)"
+   },
+   {
+    "t": "Z är lika med atomnummer (antal protoner)"
+   },
+   {
+    "t": "Kärnmassa"
+   },
+   {
+    "t": "m k ä r n accelerationen a är lika med m n u k hävarmen l i avståndet d minus Z gånger m e l e k tiden t r o n"
+   },
+   {
+    "t": "Massdefekt"
+   },
+   {
+    "t": "delta massan m är lika med m trycket p accelerationen a r tiden t i k hävarmen l a r minus m k ä r n a"
+   },
+   {
+    "t": "Bindningsenergi"
+   },
+   {
+    "t": "energin E är lika med delta massan m gånger c i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E är lika med bindningsenergi (joule)"
+   },
+   {
+    "t": "delta massan m är lika med massdefekt (kilogram)"
+   },
+   {
+    "t": "c är lika med ljusets hastighet i vakuum (≈ 2,998 gånger 10 upphöjt till 8 meter per sekund)"
+   },
+   {
+    "t": "Omvandling mellan enheter"
+   },
+   {
+    "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule 1 u som är lika med 931,49 megaelektronvolt"
+   },
+   {
+    "t": "α-sönderfall"
+   },
+   {
+    "t": "Z upphöjt till arean A X går mot Z minus 2 upphöjt till A minus 4 Y plus två upphöjt till 4 He"
+   },
+   {
+    "t": "β-sönderfall"
+   },
+   {
+    "t": "Z upphöjt till arean A X går mot Z plus 1 upphöjt till A Y plus minus 1 upphöjt till 0 e plus ny (β⁻)"
+   },
+   {
+    "t": "Z upphöjt till arean A X går mot Z minus 1 upphöjt till A Y plus ett upphöjt till 0 e plus ny (β⁺)"
+   },
+   {
+    "t": "γ-sönderfall"
+   },
+   {
+    "t": "Z upphöjt till arean A X upphöjt till * går mot Z upphöjt till A X plus gamma"
+   },
+   {
+    "t": "Aktivitet"
+   },
+   {
+    "t": "arean A är lika med våglängden lambda gånger N"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "A är lika med aktivitet (Bq)"
+   },
+   {
+    "t": "λ är lika med sönderfallskonstant (1/s)"
+   },
+   {
+    "t": "N är lika med antal atomkärnor"
+   },
+   {
+    "t": "Sönderfallskonstanten"
+   },
+   {
+    "t": "våglängden lambda är lika med naturliga logaritmen av 2 delat med T 1 delat med 2"
+   },
+   {
+    "t": "Aktivitetslagen och sönderfallslagen"
+   },
+   {
+    "t": "arean A är lika med A noll gånger 0,5 upphöjt till tiden t delat med T 1 delat med 2 newton som är lika med N noll gånger 0,5 upphöjt till t delat med T 1 delat med 2"
+   },
+   {
+    "t": "Absorberad dos"
+   },
+   {
+    "t": "D är lika med energin E delat med massan m"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "D är lika med absorberad dos (Gy)"
+   },
+   {
+    "t": "E är lika med strålningens energi (joule)"
+   },
+   {
+    "t": "m är lika med bestrålad massa (kilogram)"
+   },
+   {
+    "t": "Ekvivalent dos"
+   },
+   {
+    "t": "H är lika med D gånger laddningen Q"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "H är lika med ekvivalent stråldos (Sv)"
+   },
+   {
+    "t": "D är lika med absorberad dos (Gy)"
+   },
+   {
+    "t": "Q är lika med kvalitetsfaktor (Q är lika med 20 för α, Q är lika med 1 för β och γ)"
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Massan hos en sammansatt kärna är alltid lägre än summan av massan hos dess beståndsdelar — mellanskillnaden (massdefekten) motsvarar bindningsenergin som håller ihop kärnan."
+   },
+   {
+    "t": "Vid β-sönderfall ändras antalet elektroner i nukliden, så elektronmassorna måste räknas bort ur nuklidmassorna på båda sidor om pilen."
+   },
+   {
+    "t": "Det behövs inte vid α- eller γ-sönderfall."
+   },
+   {
+    "t": "Sönderfallsformler balanseras som ekvationer: masstalen (överst) och atomnumren (nederst) ska summera till samma tal på båda sidor om pilen."
+   },
+   {
+    "t": "Kvalitetsfaktorn Q skiljer strålslagens skadlighet: samma absorberade dos D ger 20 gånger högre ekvivalent dos H för alfastrålning jämfört med beta- eller gammastrålning."
+   },
+   {
+    "t": "Genomträngligheten ökar α < β < γ, men den lokala skadeverkan (om strålningen når känslig vävnad) är störst för α och minst för γ — alfa är därför farligast innanför kroppen, gamma farligast utanför."
+   },
+   {
+    "t": "Aktiviteten och antalet kärnor avtar enligt exakt samma exponentiella samband (samma bas 0,5 upphöjt till tiden t delat med T 1 delat med 2 ) — sjunker det ena till hälften gör det andra det också."
+   },
+   {
+    "t": "Efter 10 halveringstider återstår ungefär en promille av ursprungsmängden ( 0,5 upphöjt till 10 är ungefär lika med 0,001 ) — det ger kol-14-metoden en övre gräns på omkring femtio tusen år."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Atomens uppbyggnad — kärnan med protoner och neutroner, omgiven av elektroner i skal:"
+   },
+   {
+    "t": "En heliumatom där elektronerna finns i ett elektronskal."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du ange en atomkärnas sammansättning (antal protoner och neutroner) utifrån beteckningen Z upphöjt till arean A X ?"
+   },
+   {
+    "t": "Vet du skillnaden mellan masstal, atomnummer och isotop?"
+   },
+   {
+    "t": "Kan du beräkna massdefekt och bindningsenergi med energin E är lika med delta massan m gånger c i kvadrat , och växla mellan u, kg, J, eV och MeV?"
+   },
+   {
+    "t": "Kan du skriva och balansera sönderfallsformler för α-, β upphöjt till minus -, β upphöjt till +- och γ-sönderfall?"
+   },
+   {
+    "t": "Vet du vad en positron och en neutrino är, och varför de förekommer i β-sönderfall?"
+   },
+   {
+    "t": "Kan du formeln för aktivitet ( arean A är lika med våglängden lambda gånger N ) och sambandet mellan sönderfallskonstant och halveringstid?"
+   },
+   {
+    "t": "Kan du använda aktivitets- och sönderfallslagen för att beräkna hur mycket som återstår efter en given tid (t.ex. vid kol-14-datering)?"
+   },
+   {
+    "t": "Känner du till alfa-, beta- och gammastrålningens genomträngningsförmåga och varför de är farliga på olika sätt?"
+   },
+   {
+    "t": "Kan du räkna med absorberad dos ( D är lika med energin E delat med massan m ) och ekvivalent dos ( H är lika med D gånger laddningen Q )?"
    }
   ]
  },
@@ -12418,6 +14824,352 @@
    },
    {
     "t": "Vad kan ha orsakat eventuella avvikelser? (Snöret är inte exakt rakt, kossan rör sig inte i en perfekt cirkel, mätfel i tid och höjd, m.m.)"
+   }
+  ]
+ },
+ {
+  "id": "fy2-1.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 2",
+  "segments": [
+   {
+    "t": "Sammanfattning — Rörelse och krafter"
+   },
+   {
+    "t": "Det här kapitlet handlade om krafter som vrider och krafter som kröker en bana."
+   },
+   {
+    "t": "Du har lärt dig räkna med kraftmoment och momentjämvikt, beskriva cirkulär rörelse med period, frekvens, radianer och vinkelhastighet, och använda centripetalkraft för att analysera allt från en konisk pendel till en vertikal cirkelbana."
+   },
+   {
+    "t": "Kapitlet avslutades med kaströrelse, där rörelsen delas upp i en x-led och en y-led."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Vridningspunkt — den axel eller punkt ett föremål vrider sig kring."
+   },
+   {
+    "t": "Hävarm ( hävarmen l ) — det vinkelräta (kortaste) avståndet mellan kraftens riktningslinje och vridningspunkten."
+   },
+   {
+    "t": "Kraftmoment ( kraftmomentet M ) — en krafts vridande förmåga, kraftmomentet M är lika med kraften F gånger hävarmen l ; positivt moturs, negativt medurs."
+   },
+   {
+    "t": "Momentjämvikt — kraftmomentet moturs är lika stort som kraftmomentet medurs, så att föremålet inte vrider sig; vridningspunkten kan då väljas fritt."
+   },
+   {
+    "t": "Period ( periodtiden T ) — tiden det tar för en rörelse att upprepa sig (t.ex. ett varv eller en svängning)."
+   },
+   {
+    "t": "Frekvens ( frekvensen f ) — antalet upprepningar per sekund."
+   },
+   {
+    "t": "Radian — vinkelmått där 1 rad är den vinkel vars cirkelbåge är lika lång som radien; 360 grader är lika med 2 pi rad."
+   },
+   {
+    "t": "Vinkelhastighet (ω) — hur stor vinkel något vrider sig per tidsenhet."
+   },
+   {
+    "t": "Centripetalkraft ( F C ) — den resulterande kraft, riktad mot cirkelns centrum, som krävs för att hålla ett föremål i cirkulär rörelse."
+   },
+   {
+    "t": "Är inte en egen kraft, utan en resultant av de faktiska krafterna."
+   },
+   {
+    "t": "Centripetalacceleration ( a C ) — accelerationen som hör till centripetalkraften, riktad mot cirkelns centrum."
+   },
+   {
+    "t": "Konisk pendel — en pendel vars vikt sveper i en horisontell cirkel medan tråden bildar en konform."
+   },
+   {
+    "t": "Kaströrelse — rörelse i en bågformad bana (kastparabel) som kan delas upp i en x-led (konstant hastighet) och en y-led (konstant acceleration minus tyngdfaktorn g ); elevationsvinkeln α, kastvidden och stighöjden beskriver banan."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Kapitlets formler"
+   },
+   {
+    "t": "Kraftmoment"
+   },
+   {
+    "t": "kraftmomentet M är lika med kraften F gånger hävarmen l"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "M är lika med kraftmoment (Nm)"
+   },
+   {
+    "t": "F är lika med kraft (newton)"
+   },
+   {
+    "t": "l är lika med hävarmen (meter)"
+   },
+   {
+    "t": "Momentlagen (momentjämvikt)"
+   },
+   {
+    "t": "M ett är lika med M två"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "M ett är lika med kraftmomentet/kraftmomenten moturs"
+   },
+   {
+    "t": "M två är lika med kraftmomentet/kraftmomenten medurs"
+   },
+   {
+    "t": "Period och frekvens"
+   },
+   {
+    "t": "periodtiden T är lika med 1 delat med frekvensen f vilket är ekvivalent med att f är lika med 1 delat med T"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "T är lika med period (sekunder)"
+   },
+   {
+    "t": "f är lika med frekvens (Hz eller s upphöjt till minus 1)"
+   },
+   {
+    "t": "Grader och radianer"
+   },
+   {
+    "t": "360 grader är lika med 2 pi 180 grader som är lika med pi 90 grader som är lika med pi delat med 2"
+   },
+   {
+    "t": "Vinkelhastighet"
+   },
+   {
+    "t": "omega är lika med 2 pi delat med periodtiden T som är lika med 2 pi gånger frekvensen f"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "ω är lika med vinkelhastighet (rad/s)"
+   },
+   {
+    "t": "T är lika med period (sekunder)"
+   },
+   {
+    "t": "f är lika med frekvens (hertz)"
+   },
+   {
+    "t": "Fart i cirkulär bana"
+   },
+   {
+    "t": "hastigheten v är lika med omega gånger r som är lika med 2 pi gånger r delat med periodtiden T"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "v är lika med fart i rörelsens riktning (meter per sekund)"
+   },
+   {
+    "t": "ω är lika med vinkelhastighet (rad/s)"
+   },
+   {
+    "t": "r är lika med banradien (meter)"
+   },
+   {
+    "t": "T är lika med period (sekunder)"
+   },
+   {
+    "t": "Centripetalacceleration"
+   },
+   {
+    "t": "a C är lika med hastigheten v i kvadrat delat med r som är lika med omega i kvadrat gånger r"
+   },
+   {
+    "t": "Centripetalkraft"
+   },
+   {
+    "t": "F C är lika med massan m gånger hastigheten v i kvadrat delat med r som är lika med 4 pi i kvadrat gånger m gånger r delat med periodtiden T i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F C är lika med centripetalkraft (newton)"
+   },
+   {
+    "t": "a C är lika med centripetalacceleration (m/s i kvadrat)"
+   },
+   {
+    "t": "m är lika med massan på det som utför rörelsen (kilogram)"
+   },
+   {
+    "t": "v är lika med fart i rörelsens riktning (meter per sekund)"
+   },
+   {
+    "t": "r är lika med banradie (meter)"
+   },
+   {
+    "t": "T är lika med period (sekunder)"
+   },
+   {
+    "t": "Periodtid för konisk pendel"
+   },
+   {
+    "t": "periodtiden T är lika med 2 pi roten ur hävarmen l gånger cosinus alfa delat med tyngdfaktorn g"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "T är lika med periodtid (sekunder)"
+   },
+   {
+    "t": "l är lika med pendellängd (meter)"
+   },
+   {
+    "t": "α är lika med utslagsvinkel mot vertikalplanet"
+   },
+   {
+    "t": "g är lika med tyngdacceleration (m/s i kvadrat)"
+   },
+   {
+    "t": "Kaströrelse i x- och y-led"
+   },
+   {
+    "t": "v x är lika med v noll gånger cosinus alfa x som är lika med v noll gånger cosinus alfa gånger tiden t"
+   },
+   {
+    "t": "v y är lika med v noll gånger sinus alfa minus tyngdfaktorn g gånger tiden t y som är lika med v noll gånger sinus alfa gånger t minus g gånger t i kvadrat delat med 2"
+   },
+   {
+    "t": "hastigheten v är lika med roten ur v x i kvadrat plus v y i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "v x, y är lika med hastighet i x-/y-led (meter per sekund)"
+   },
+   {
+    "t": "x, y är lika med läge i x-/y-led (meter)"
+   },
+   {
+    "t": "v noll är lika med utgångshastighet (meter per sekund)"
+   },
+   {
+    "t": "α är lika med vinkel mot horisontalplanet (elevationsvinkel)"
+   },
+   {
+    "t": "t är lika med tid (sekunder)"
+   },
+   {
+    "t": "v är lika med fart i kaströrelse (meter per sekund)"
+   },
+   {
+    "t": "Kastvidd och stighöjd"
+   },
+   {
+    "t": "x \\max är lika med v noll i kvadrat gånger sinus parentesen 2 alfa slut parentes delat med tyngdfaktorn g y \\max som är lika med v noll i kvadrat gånger sinus i kvadrat parentesen alfa slut parentes delat med 2 gram"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "x \\max är lika med kastvidd (meter) — gäller när rörelsen startar och slutar i samma horisontalplan"
+   },
+   {
+    "t": "y \\max är lika med stighöjd (meter)"
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Vid momentjämvikt kan vridningspunkten väljas fritt."
+   },
+   {
+    "t": "En kraft vars riktningslinje går genom den valda vridningspunkten får hävarmen 0 och ger då inget kraftmoment — ett smart val gör att en okänd kraft försvinner ur ekvationen."
+   },
+   {
+    "t": "Ju närmare tyngdpunkten en stödjande eller bärande kraft sitter, desto större del av tyngden bär den upp."
+   },
+   {
+    "t": "Ett föremål välter när tyngdpunktens lodräta riktningslinje hamnar utanför stödytan."
+   },
+   {
+    "t": "Centripetalkraften är ingen egen kraft, utan resultanten av de verkliga krafter som håller kroppen i cirkelbanan (spännkraft, normalkraft, friktion, tyngdkraft, …)."
+   },
+   {
+    "t": "Vid cirkulär rörelse med konstant fart är farten konstant, men hastigheten (vektor) är det inte — riktningen ändras hela tiden."
+   },
+   {
+    "t": "I gränsfall (toppen av en loop, övre läget i en vertikal cirkel) är spännkraften/normalkraften noll, och enbart tyngdkraften utgör centripetalkraften — det ger den minsta tillåtna farten."
+   },
+   {
+    "t": "I kaströrelse behandlas x-led och y-led var för sig: konstant hastighet i x-led (ingen kraft verkar), konstant acceleration minus tyngdfaktorn g i y-led (endast tyngdkraften verkar)."
+   },
+   {
+    "t": "Formlerna för kastvidd och stighöjd gäller bara när kastet startar och slutar i samma horisontalplan — annars måste ekvationerna för x och y lösas separat (som i \"kast från höjd\")."
+   },
+   {
+    "t": "Sammansatta uppgifter som \"Den fatala gungan\" kombinerar energiprincipen ( E trycket p är lika med E k ) med centripetalkraft för att bestämma en okänd fart."
+   },
+   {
+    "t": "Härledningen i \"Den flygande kossan\" bygger på två likformiga trianglar: den geometriska triangeln ( höjden h , r , snörlängden) och kraftriangeln ( F S y , F S x , F S )."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Kraftmoment beror på både kraftens storlek och hävarmens längd — samma kraft ger olika vridande förmåga beroende på var den greppar."
+   },
+   {
+    "t": "I cirkulär rörelse pekar farten v tangentiellt medan centripetalaccelerationen a C pekar rakt in mot cirkelns centrum — de är alltid vinkelräta mot varandra."
+   },
+   {
+    "t": "I den koniska pendeln bildar snöret vinkeln α mot vertikalen."
+   },
+   {
+    "t": "Spännkraften F S längs snöret och tyngdkraften F G bestämmer tillsammans periodtiden för det horisontella varvet."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du definiera vridningspunkt och hävarm, och beräkna kraftmoment kraftmomentet M är lika med kraften F gånger hävarmen l ?"
+   },
+   {
+    "t": "Kan du välja vridningspunkt fritt vid momentjämvikt och lösa ut en okänd kraft med momentlagen M ett är lika med M två ?"
+   },
+   {
+    "t": "Kan du växla mellan period periodtiden T och frekvens frekvensen f , och mellan grader och radianer?"
+   },
+   {
+    "t": "Kan du formeln för vinkelhastighet omega är lika med 2 pi delat med periodtiden T som är lika med 2 pi gånger frekvensen f och för banfart hastigheten v är lika med omega gånger r ?"
+   },
+   {
+    "t": "Kan du formlerna för centripetalacceleration och centripetalkraft, och förklara varför centripetalkraften alltid är en resultant av andra krafter?"
+   },
+   {
+    "t": "Kan du analysera en vertikal cirkelrörelse (t.ex. en vikt i ett snöre) i både övre och nedre vändläget, inklusive gränsfallet där spännkraften blir noll?"
+   },
+   {
+    "t": "Kan du formeln för periodtiden hos en konisk pendel?"
+   },
+   {
+    "t": "Kan du dela upp en kaströrelse i x- och y-led och räkna ut hastighet och läge vid en given tid?"
+   },
+   {
+    "t": "Kan du formlerna för kastvidd och stighöjd, och veta när de gäller?"
+   },
+   {
+    "t": "Kan du kombinera energiprincipen med centripetalkraft i en sammansatt uppgift, som i \"Den fatala gungan\"?"
    }
   ]
  },
@@ -14929,6 +17681,343 @@
   ]
  },
  {
+  "id": "fy2-2.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 2",
+  "segments": [
+   {
+    "t": "Sammanfattning — Mekaniska vågor"
+   },
+   {
+    "t": "Kapitlet handlade om svängningar och vågor: från en vikt i en fjäder via harmonisk svängning och pendlar till hur pulser blir vågor som reflekteras, transmitteras, superponeras och bildar stående vågor i strängar och pipor."
+   },
+   {
+    "t": "Sedan gick vi vidare till ljud (intensitet, ljudnivå, dopplereffekt) och vattenvågor (brytning, diffraktion, interferens)."
+   },
+   {
+    "t": "Du ska efter kapitlet kunna räkna på fjädersvängningar, periodtider, vågors utbredningshastighet, stående vågor, ljudnivå i decibel samt brytnings- och interferensmönster."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Fjäderkonstant k — mått på hur \"hård\" en fjäder är; ingår i Hookes lag kraften F är lika med k gånger delta hävarmen l ."
+   },
+   {
+    "t": "Elongation y — ett svängande föremåls läge räknat från jämviktsläget."
+   },
+   {
+    "t": "Amplitud A — det maximala utslaget från jämviktsläget (i en fjädersvängning, pendel eller våg)."
+   },
+   {
+    "t": "Harmonisk svängning — en odämpad svängning där den återställande kraften är proportionell mot elongationen, F resistansen R är lika med minus k gånger y ."
+   },
+   {
+    "t": "Periodtid T och (egen)frekvens f — tiden för en hel svängning respektive antalet svängningar per sekund, frekvensen f är lika med 1 delat med periodtiden T ."
+   },
+   {
+    "t": "Resonans — kraftig ökning av svängningens amplitud när energi tillförs med samma frekvens som systemets egenfrekvens."
+   },
+   {
+    "t": "Transversell och longitudinell våg — utslaget sker vinkelrätt mot respektive längs med vågens utbredningsriktning."
+   },
+   {
+    "t": "Reflexion, transmission och superposition — en våg som studsar tillbaka, förs över till ett nytt medium, respektive två vågor vars elongationer adderas när de möts."
+   },
+   {
+    "t": "Stående våg — nod och buk — punkter med amplituden 0 (noder) och punkter mitt emellan med maximal amplitud (bukar); energin transporteras inte i mediet utan koncentreras till bukarna."
+   },
+   {
+    "t": "Ljudintensitet I och ljudnivå L — energitransport per tvärsnittsarea (W/m i kvadrat) respektive samma storhet omräknad till en logaritmisk skala i decibel (dB)."
+   },
+   {
+    "t": "Dopplereffekt — den skenbara frekvensändring som uppstår när sändare och mottagare rör sig i förhållande till varandra."
+   },
+   {
+    "t": "Diffraktion och interferens — en våg som böjs av vid kanten av en öppning, respektive två vågor som möts och bildar maximilinjer (konstruktiv interferens) och nodlinjer (destruktiv interferens)."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Fjädersvängning"
+   },
+   {
+    "t": "Hookes lag"
+   },
+   {
+    "t": "kraften F är lika med k gånger delta hävarmen l"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F är lika med kraft som belastar/verkar från fjädern (newton)"
+   },
+   {
+    "t": "k är lika med fjäderkonstant (N/m)"
+   },
+   {
+    "t": "Δl är lika med fjäderns förlängning (meter)"
+   },
+   {
+    "t": "Resulterande kraft på vikt i fjäder"
+   },
+   {
+    "t": "F resistansen R är lika med minus k gånger y"
+   },
+   {
+    "t": "Fjäderns totala (mekaniska) energi"
+   },
+   {
+    "t": "energin E är lika med k gånger arean A i kvadrat delat med 2"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E är lika med fjäderns totala energi (joule)"
+   },
+   {
+    "t": "A är lika med svängningens amplitud (meter)"
+   },
+   {
+    "t": "Harmonisk svängning"
+   },
+   {
+    "t": "y är lika med arean A gånger sinus parentesen omega gånger tiden t slut parentes hastigheten v som är lika med omega gånger A gånger cosinus parentesen omega gånger t slut parentes accelerationen a som är lika med minus omega i kvadrat gånger A gånger sinus parentesen omega gånger t slut parentes"
+   },
+   {
+    "t": "omega är lika med roten ur k delat med massan m periodtiden T som är lika med 2 pi roten ur m delat med k"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "ω är lika med vinkelhastighet (rad/s)"
+   },
+   {
+    "t": "t är lika med tid efter passage av jämviktsläget uppåt (sekunder)"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "T är lika med periodtid (sekunder)"
+   },
+   {
+    "t": "Plan pendel och egenfrekvens"
+   },
+   {
+    "t": "Periodtid för matematisk pendel vid små utslag"
+   },
+   {
+    "t": "periodtiden T är lika med 2 pi roten ur hävarmen l delat med tyngdfaktorn g"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "l är lika med pendellängd (meter)"
+   },
+   {
+    "t": "g är lika med tyngdacceleration (m/s i kvadrat)"
+   },
+   {
+    "t": "Egenfrekvens"
+   },
+   {
+    "t": "frekvensen f är lika med 1 delat med periodtiden T"
+   },
+   {
+    "t": "Vågor — utbredningshastighet och stående vågor"
+   },
+   {
+    "t": "Utbredningshastighet hos våg"
+   },
+   {
+    "t": "hastigheten v är lika med våglängden lambda delat med periodtiden T som är lika med frekvensen f gånger lambda"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "v är lika med vågens utbredningshastighet (meter per sekund)"
+   },
+   {
+    "t": "λ är lika med våglängd (meter)"
+   },
+   {
+    "t": "Stående våg i sträng eller pipa (nod till nod / buk till buk)"
+   },
+   {
+    "t": "hävarmen l är lika med n gånger våglängden lambda delat med 2"
+   },
+   {
+    "t": "Stående våg i halvöppen pipa (nod till buk)"
+   },
+   {
+    "t": "hävarmen l är lika med parentesen 2 n minus 1 slut parentes gånger våglängden lambda delat med 4"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "l är lika med strängens/pipans längd (meter)"
+   },
+   {
+    "t": "n är lika med tonens ordningsnummer (n är lika med 1 grundtonen, n är lika med 2 första övertonen, …)"
+   },
+   {
+    "t": "Ljudintensitet och ljudnivå"
+   },
+   {
+    "t": "strömmen I är lika med effekten P delat med arean A I som är lika med P delat med 4 pi gånger r i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "I är lika med ljudintensitet (W/m i kvadrat)"
+   },
+   {
+    "t": "P är lika med effekt (watt)"
+   },
+   {
+    "t": "A är lika med area (m i kvadrat), r är lika med avstånd till punktkälla (meter)"
+   },
+   {
+    "t": "L är lika med 10 gånger logaritmen av parentesen strömmen I delat med I noll slut parentes"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "L är lika med ljudnivå (dB)"
+   },
+   {
+    "t": "I noll är lika med 10 upphöjt till minus 12 watt/m i kvadrat (hörbarhetsgränsen)"
+   },
+   {
+    "t": "Brytning och interferens hos vattenvågor"
+   },
+   {
+    "t": "Brytningslagen"
+   },
+   {
+    "t": "sinus i delat med sinus b är lika med v ett delat med v två som är lika med våglängden lambda ett delat med lambda två"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "i, b är lika med infallsvinkel respektive brytningsvinkel"
+   },
+   {
+    "t": "v ett, v två är lika med hastighet i medium 1 respektive medium 2"
+   },
+   {
+    "t": "Interferens"
+   },
+   {
+    "t": "delta sträckan s är lika med n gånger våglängden lambda parentesen maximilinjer, konstruktiv slut parentes"
+   },
+   {
+    "t": "delta sträckan s är lika med parentesen n plus 1 delat med 2 slut parentes gånger våglängden lambda parentesen nodlinjer, destruktiv slut parentes"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "Δs är lika med vägskillnad till de två vågkällorna (meter)"
+   },
+   {
+    "t": "n är lika med linjens ordningsnummer (0, 1, 2, …)"
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "I jämviktsläget är farten maximal och accelerationen 0; i vändlägena är farten 0 och accelerationen maximal — resultanten pekar alltid mot jämviktsläget."
+   },
+   {
+    "t": "Periodtiden för en fjädersvängning ( periodtiden T är lika med 2 pi roten ur massan m delat med k ) och för en pendel ( periodtiden T är lika med 2 pi roten ur hävarmen l delat med tyngdfaktorn g ) beror inte på amplituden — bara på massa/fjäderkonstant respektive pendellängd."
+   },
+   {
+    "t": "Pendelformeln gäller bara vid små utslagsvinklar (annars upphör rörelsen att vara harmonisk) och när snörets massa är försumbar."
+   },
+   {
+    "t": "En transversell våg som reflekteras mot en fast ände vänder (vågberg ger vågdal); mot en lös ände behåller den sin form."
+   },
+   {
+    "t": "Vid transmission mellan olika medier: från tätare till tunnare medium transmitteras pulsen förlängd, från tunnare till tätare förkortad — reflexionen är rättvänd respektive omvänd."
+   },
+   {
+    "t": "I en stående våg är avståndet mellan två närliggande noder (eller två närliggande bukar) alltid en halv våglängd."
+   },
+   {
+    "t": "Ljudets hastighet beror av temperatur och material: v frekvensen f accelerationen a sträckan s tiden t är större än v hastigheten v ä t s k a är större än v tyngdfaktorn g a s ; i luft räknar man med ca 340 meter per sekund om inget annat anges."
+   },
+   {
+    "t": "Decibelskalan är logaritmisk: en ökning med ca 3 dB motsvarar en fördubbling av ljudintensiteten, inte en linjär ökning."
+   },
+   {
+    "t": "Vid brytning av vattenvågor är frekvensen alltid konstant — det är våglängden och hastigheten som ändras (minskar mot grundare vatten, ökar mot djupare)."
+   },
+   {
+    "t": "På en maximilinje är vägskillnaden till de två vågkällorna ett helt antal våglängder (vågorna möts i fas); på en nodlinje ett halvt antal våglängder (vågorna möts i motfas)."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "En vikt i en fjäder förlängs proportionellt mot kraften (Hookes lag) — kraften F och förlängningen Δl är riktade åt samma håll:"
+   },
+   {
+    "t": "Amplitud och våglängd hos en transversell våg — avståndet mellan två vågtoppar är en våglängd, och det maximala utslaget från jämviktsläget är amplituden:"
+   },
+   {
+    "t": "En stående våg med tre bukar — noderna sitter stilla medan bukarna svänger med maximal amplitud:"
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du Hookes lag och räkna ut fjäderkonstanten från förlängning och kraft?"
+   },
+   {
+    "t": "Kan du bestämma fjäderns totala energi ur amplituden och förklara var energin sitter i olika lägen?"
+   },
+   {
+    "t": "Kan du formlerna för elongation, hastighet och acceleration i en harmonisk svängning, och veta var i rörelsen de är som störst?"
+   },
+   {
+    "t": "Kan du periodtidsformeln för fjädersvängning respektive för plan pendel — och veta att ingen av dem beror på amplituden?"
+   },
+   {
+    "t": "Kan du förklara vad resonans är och ge exempel på resonansfenomen?"
+   },
+   {
+    "t": "Kan du skilja transversell från longitudinell våg, och veta hur en puls reflekteras mot fast/lös ände?"
+   },
+   {
+    "t": "Kan du använda superpositionsprincipen för att rita hur två pulser ser ut när de möts?"
+   },
+   {
+    "t": "Kan du bestämma antalet bukar/noder i en stående våg och koppla det till strängens eller pipans längd (öppen, sluten, halvöppen)?"
+   },
+   {
+    "t": "Kan du räkna med ljudintensitet, ljudnivå i decibel och förstå varför decibelskalan är logaritmisk?"
+   },
+   {
+    "t": "Kan du brytningslagen för vattenvågor och veta vad som förändras (och vad som förblir konstant) vid brytning?"
+   },
+   {
+    "t": "Kan du avgöra om en punkt ligger på en maximilinje eller nodlinje utifrån vägskillnaden till två vågkällor?"
+   }
+  ]
+ },
+ {
   "id": "fy2-3.1",
   "title": "Magnetism och magnetfält",
   "course": "Fysik nivå 2",
@@ -17292,6 +20381,373 @@
   ]
  },
  {
+  "id": "fy2-3.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 2",
+  "segments": [
+   {
+    "t": "Sammanfattning — Elektromagnetism"
+   },
+   {
+    "t": "Kapitlet handlar om sambandet mellan magnetism och elektricitet."
+   },
+   {
+    "t": "Du har sett hur strömmar och magneter skapar magnetfält, hur ett magnetfält i sin tur utövar en kraft på rörliga laddningar och strömförande ledare, och hur en ändring av magnetfältet inducerar en spänning (induktion)."
+   },
+   {
+    "t": "Du ska kunna tillämpa högerhandsreglerna och Lenz lag, och känna till hur principerna används i generatorer, transformatorer, hastighetsväljare, masspektrometrar och magnetfältsmätare."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "magnetfält och magnetisk flödestäthet B — området runt en magnet eller strömförande ledare där andra magnetiska föremål påverkas av en kraft; flödestätheten anger fältets styrka, SI-enhet tesla (tesla)."
+   },
+   {
+    "t": "poler och fältlinjer — magnetfältlinjer går från nordända till sydända utanför magneten; lika poler repellerar, olika poler attraherar."
+   },
+   {
+    "t": "högerhandsregeln — finns i tre varianter: tumme är lika med ström, fingrar = fält (rak ledare); fingrar är lika med ström, tumme är lika med fält (spole); tumme/pekfinger/ långfinger är lika med ström/fält/kraft (magnetisk kraft)."
+   },
+   {
+    "t": "Endast högerhanden får användas."
+   },
+   {
+    "t": "magnetisk kraft — kraften ett magnetfält utövar på en rörlig laddning ( kraften F är lika med q gånger hastigheten v gånger B ) eller en strömförande ledare ( kraften F är lika med B gånger strömmen I gånger hävarmen l )."
+   },
+   {
+    "t": "magnetiskt flöde Φ — antalet fältlinjer som passerar en area, SI-enhet weber (weber); ska inte förväxlas med flödestätheten B."
+   },
+   {
+    "t": "induktion och ems — en spänning (elektromotorisk spänning, ems) induceras när en ledare rör sig i ett magnetfält, eller när flödet genom en krets ändras."
+   },
+   {
+    "t": "induktionslagen — den inducerade spänningen ges av hur fort det magnetiska flödet ändras, e är lika med minus delta Phi delat med delta tiden t ."
+   },
+   {
+    "t": "Lenz lag — en inducerad ström får en sådan riktning att orsaken till dess uppkomst motverkas."
+   },
+   {
+    "t": "virvelströmmar — cirkulerande inducerade strömmar som enligt Lenz lag motverkar sin egen orsak; bromsar rörelse eller ger oönskad värme."
+   },
+   {
+    "t": "deklination och inklination — jordmagnetiska fältets avvikelse i sidled från geografisk nord (deklination) respektive lutning mot marknivån (inklination)."
+   },
+   {
+    "t": "toppvärde och effektivvärde — momentanvärden (u, i) varierar med tiden; toppvärden (û, î) är maxvärdena; effektivvärden (U, I) är de värden en voltmeter/amperemeter visar."
+   },
+   {
+    "t": "transformator — två spolar (primär- och sekundärspole) på en gemensam järnkärna; spänning och ström skalas om efter varvtalen."
+   },
+   {
+    "t": "hastighetsväljare, masspektrometer och Halleffekt — tillämpningar där en magnetisk kraft balanseras mot en elektrisk kraft eller en centripetalkraft för att filtrera fart, väga laddade partiklar eller mäta ett magnetfält."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Magnetfält kring rak ledare och i spole"
+   },
+   {
+    "t": "B är lika med k gånger strömmen I delat med avståndet d"
+   },
+   {
+    "t": "B är lika med my noll gånger n gånger strömmen I delat med hävarmen l"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "B är lika med magnetisk flödestäthet (tesla)"
+   },
+   {
+    "t": "k är lika med 2 gånger 10 upphöjt till minus 7 tesla·m/A (rak ledare, gäller för vakuum och luft)"
+   },
+   {
+    "t": "my noll är lika med permeabiliteten i vakuum ( 4 pi gånger 10 upphöjt till minus 7 tesla·m/A)"
+   },
+   {
+    "t": "I är lika med strömmen genom ledaren/spolen (ampere)"
+   },
+   {
+    "t": "d är lika med avståndet från den raka ledaren (meter)"
+   },
+   {
+    "t": "n är lika med varvtal (antal varv i spolen)"
+   },
+   {
+    "t": "l är lika med spolens längd (meter)"
+   },
+   {
+    "t": "Magnetisk kraft"
+   },
+   {
+    "t": "kraften F är lika med q gånger hastigheten v gånger B"
+   },
+   {
+    "t": "kraften F är lika med B gånger strömmen I gånger hävarmen l"
+   },
+   {
+    "t": "kraften F är lika med k gånger I ett gånger I två gånger hävarmen l delat med avståndet d"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "F är lika med magnetisk kraft (newton)"
+   },
+   {
+    "t": "q är lika med laddningens storlek (coulomb)"
+   },
+   {
+    "t": "v är lika med laddningens hastighet (meter per sekund)"
+   },
+   {
+    "t": "B är lika med magnetisk flödestäthet vinkelrätt mot rörelsen/ledaren (tesla)"
+   },
+   {
+    "t": "I, I ett , I två är lika med ström genom ledaren/ledarna (ampere)"
+   },
+   {
+    "t": "l är lika med ledarens längd, eller den parallella längden mellan två ledare (meter)"
+   },
+   {
+    "t": "d är lika med avståndet mellan två parallella ledare (meter)"
+   },
+   {
+    "t": "k är lika med 2,0 gånger 10 upphöjt till minus 7 tesla·m/A"
+   },
+   {
+    "t": "Induktion och magnetiskt flöde"
+   },
+   {
+    "t": "e är lika med hävarmen l gånger hastigheten v gånger B"
+   },
+   {
+    "t": "Phi är lika med B gånger A \\perp"
+   },
+   {
+    "t": "e är lika med minus delta Phi delat med delta tiden t"
+   },
+   {
+    "t": "e är lika med minus N gånger delta Phi delat med delta tiden t"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "e är lika med inducerad spänning/ems (volt)"
+   },
+   {
+    "t": "l är lika med ledarens längd (meter)"
+   },
+   {
+    "t": "v är lika med ledarens hastighet (meter per sekund)"
+   },
+   {
+    "t": "B är lika med magnetisk flödestäthet (tesla)"
+   },
+   {
+    "t": "Φ är lika med magnetiskt flöde (weber)"
+   },
+   {
+    "t": "A \\perp är lika med area vinkelrät mot flödeslinjerna (m i kvadrat)"
+   },
+   {
+    "t": "ΔΦ är lika med ändring av magnetiskt flöde (weber)"
+   },
+   {
+    "t": "Δt är lika med tiden för ändringen (sekunder)"
+   },
+   {
+    "t": "N är lika med antal varv (spole; för en enda ledare/krets gäller N är lika med 1)"
+   },
+   {
+    "t": "Minustecknet kommer från Lenz lag — den inducerade strömmen motverkar den förändring som orsakar den."
+   },
+   {
+    "t": "Växelström"
+   },
+   {
+    "t": "u är lika med hat u gånger sinus parentesen omega tiden t slut parentes"
+   },
+   {
+    "t": "i är lika med hat imath gånger sinus parentesen omega tiden t slut parentes"
+   },
+   {
+    "t": "omega är lika med 2 pi delat med periodtiden T som är lika med 2 pi gånger frekvensen f"
+   },
+   {
+    "t": "spänningen U är lika med hat u delat med roten ur 2 strömmen I som är lika med hat imath delat med roten ur 2"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "u, i är lika med momentanspänning respektive momentanström (V, A)"
+   },
+   {
+    "t": "û, î är lika med toppspänning respektive toppström (V, A)"
+   },
+   {
+    "t": "U, I är lika med effektivvärden för spänning respektive ström (V, A)"
+   },
+   {
+    "t": "ω är lika med vinkelhastighet (rad/s)"
+   },
+   {
+    "t": "T är lika med periodtid (sekunder)"
+   },
+   {
+    "t": "f är lika med frekvens (hertz)"
+   },
+   {
+    "t": "Transformator"
+   },
+   {
+    "t": "N ett delat med N två är lika med U ett delat med U två som är lika med I två delat med I ett"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "N ett , N två är lika med antalet varv i primär- respektive sekundärspole"
+   },
+   {
+    "t": "U ett , U två är lika med spänning i primär- respektive sekundärspole (volt)"
+   },
+   {
+    "t": "I ett , I två är lika med ström i primär- respektive sekundärspole (ampere)"
+   },
+   {
+    "t": "Hastighetsväljare, masspektrometer och Halleffekt"
+   },
+   {
+    "t": "hastigheten v är lika med energin E delat med B"
+   },
+   {
+    "t": "massan m är lika med q gånger B gånger r delat med hastigheten v"
+   },
+   {
+    "t": "spänningen U är lika med hastigheten v gånger avståndet d gånger B"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "v är lika med partikelns hastighet (meter per sekund)"
+   },
+   {
+    "t": "energin E är lika med elektriskt fält (V/m)"
+   },
+   {
+    "t": "B är lika med magnetisk flödestäthet (tesla)"
+   },
+   {
+    "t": "m är lika med partikelns massa (kilogram)"
+   },
+   {
+    "t": "q är lika med partikelns laddning (coulomb)"
+   },
+   {
+    "t": "r är lika med krökningsradien i masspektrometerns magnetfält (meter)"
+   },
+   {
+    "t": "U är lika med Hallspänning (volt)"
+   },
+   {
+    "t": "d är lika med bredden på magnetfältsmätarens platta (meter)"
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Notation i figurer: en prick i en cirkel betyder en vektor rakt ut ur planet (mot dig); ett kryss i en cirkel betyder rakt in i planet (från dig)."
+   },
+   {
+    "t": "Endast högerhanden får användas i alla tre varianterna av högerhandsregeln — med vänsterhanden pekar riktningarna fel."
+   },
+   {
+    "t": "Enligt Newtons tredje lag blir kraften mellan två parallella strömförande ledare attraherande om strömriktningarna är lika och repellerande om de är motsatta."
+   },
+   {
+    "t": "En ems induceras bara om det finns en komponent av rörelsen som är vinkelrät mot både ledaren och fältet — rör sig ledaren längs sin egen längdriktning induceras ingen spänning."
+   },
+   {
+    "t": "I ett Φ-t-diagram motsvarar lutningen den inducerade spänningen (momentanvärdet), precis som lutningen i ett s-t-diagram motsvarar hastigheten."
+   },
+   {
+    "t": "Den inducerade strömmen i en sluten krets fås ur ems och resistansen med Ohms lag, e är lika med resistansen R gånger strömmen I ."
+   },
+   {
+    "t": "Skilj på momentanvärde (gemen bokstav: u, i), toppvärde (cirkumflex: û, î) och effektivvärde (versal: U, I) vid växelström — det är effektivvärdet som en vanlig voltmeter/amperemeter visar."
+   },
+   {
+    "t": "I en transformator bevaras effekten ( P ett är lika med P två ) om förluster ignoreras: ökar spänningen med en viss faktor minskar strömmen med samma faktor."
+   },
+   {
+    "t": "Den magnetiska kraften kraften F är lika med q gånger hastigheten v gånger B (eller kraften F är lika med B gånger strömmen I gånger hävarmen l ) är alltid vinkelrät mot rörelsen/strömmen — den kan därför fungera som centripetalkraft i en cirkelbana (masspektrometer), men uträttar aldrig arbete."
+   },
+   {
+    "t": "I en hastighetsväljare balanserar den elektriska och den magnetiska kraften varandra ( F e är lika med F massan m ) — bara partiklar med farten hastigheten v är lika med energin E delat med B passerar rakt igenom."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Högerhandens tumregel för fältet kring en rak strömförande ledare: tummen pekar i strömmens riktning, fingrarna ger fältets riktning."
+   },
+   {
+    "t": "Tre-finger-regeln för magnetisk kraft: tummen är strömmen I, pekfingret fältet B, långfingret kraften F."
+   },
+   {
+    "t": "Tummen är strömmen, pekfingret magnetfältet och långfingret kraften."
+   },
+   {
+    "t": "Transformatorns princip: en varierande ström i primärspolen ( N ett varv) ger ett varierande flöde Phi parentesen tiden t slut parentes genom järnkärnan, som inducerar en ny spänning i sekundärspolen ( N två varv)."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du förklara varför en strömförande ledare eller spole skapar ett magnetfält, och bestämma fältets riktning med rätt tumregel?"
+   },
+   {
+    "t": "Kan du räkna ut den magnetiska flödestätheten kring en rak ledare och i en spole (solenoid)?"
+   },
+   {
+    "t": "Kan du använda tre-finger-regeln för att bestämma riktningen på den magnetiska kraften på en laddad partikel eller en strömförande ledare?"
+   },
+   {
+    "t": "Kan du räkna ut kraften på en laddad partikel ( kraften F är lika med q gånger hastigheten v gånger B ) och på en strömförande ledare ( kraften F är lika med B gånger strömmen I gånger hävarmen l ), samt kraften mellan två parallella ledare, och avgöra om den är attraherande eller repellerande?"
+   },
+   {
+    "t": "Kan du förklara vad deklination och inklination är hos det jordmagnetiska fältet?"
+   },
+   {
+    "t": "Kan du räkna ut inducerad spänning (ems) för en ledare som rör sig i ett magnetfält, och avgöra när ingen ems induceras?"
+   },
+   {
+    "t": "Kan du använda Lenz lag för att bestämma riktningen på en inducerad ström eller kraft?"
+   },
+   {
+    "t": "Kan du räkna med magnetiskt flöde Φ och induktionslagen, även utifrån ett Φ-t-diagram?"
+   },
+   {
+    "t": "Kan du skilja på momentanvärde, toppvärde och effektivvärde vid växelström, och räkna om mellan dem?"
+   },
+   {
+    "t": "Kan du räkna med transformatorns spännings- och strömomsättning ( N ett delat med N två är lika med U ett delat med U två som är lika med I två delat med I ett )?"
+   },
+   {
+    "t": "Kan du förklara hur en hastighetsväljare och en masspektrometer fungerar, och räkna ut hastighet respektive massa?"
+   },
+   {
+    "t": "Kan du förklara vad virvelströmmar är, och varför de bromsar rörelse eller ger värmeutveckling?"
+   }
+  ]
+ },
+ {
   "id": "fy2-4.1",
   "title": "Elektromagnetiska vågor och ljus",
   "course": "Fysik nivå 2",
@@ -18974,6 +22430,391 @@
   ]
  },
  {
+  "id": "fy2-4.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 2",
+  "segments": [
+   {
+    "t": "Sammanfattning — Ljus som våg och partikel"
+   },
+   {
+    "t": "Det här kapitlet handlade om ljus som både elektromagnetisk våg och partikel."
+   },
+   {
+    "t": "Du har sett hur ljus sprids, bryts och interfererar som en våg (diffraktion, gitterformeln, brytningslagen) och hur ljus samtidigt uppträder som partiklar — fotoner — i den fotoelektriska effekten och Comptonspridning."
+   },
+   {
+    "t": "Kapitlet knyter ihop detta med svartkroppsstrålning, atomens energinivåer, spektrallinjer och de Broglies hypotes om att all materia har vågegenskaper."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Elektromagnetisk våg — ljus som ett oscillerande elektriskt och magnetiskt fält, vinkelräta mot varandra och mot utbredningsriktningen; utbreder sig med ljusets hastighet c."
+   },
+   {
+    "t": "Ljusintensitet — energi per tidsenhet och area (W/m i kvadrat); avtar med kvadraten på avståndet från en punktkälla."
+   },
+   {
+    "t": "Koherent och monokromatiskt ljus — ljus av samma våglängd (och, för koherent ljus, i fas) — en förutsättning för tydlig interferens."
+   },
+   {
+    "t": "Diffraktion — vågors böjning runt hinder eller genom en smal öppning."
+   },
+   {
+    "t": "Interferens och gitterformeln — hur vågor från flera spalter förstärker eller släcker ut varandra i bestämda riktningar."
+   },
+   {
+    "t": "Svartkroppsstrålning och emittans — ett idealiskt föremåls temperaturberoende utstrålning, beskriven av Wiens förskjutningslag och Stefan–Boltzmanns lag."
+   },
+   {
+    "t": "Brytningsindex och brytningslagen — hur mycket ljus ändrar riktning vid övergången mellan två medier med olika optisk täthet."
+   },
+   {
+    "t": "Foton — en kvant (ett \"energipaket\") av elektromagnetisk strålning med energin energin E är lika med höjden h gånger frekvensen f och rörelsemängden trycket p är lika med höjden h delat med våglängden lambda ."
+   },
+   {
+    "t": "Fotoelektrisk effekt — när en foton med tillräcklig energi slår loss en elektron från en metallyta; bevisar ljusets partikelnatur."
+   },
+   {
+    "t": "de Broglie-våglängd — den våglängd som alla rörliga partiklar (inte bara fotoner) har, våglängden lambda är lika med höjden h delat med parentesen massan m gånger hastigheten v slut parentes ."
+   },
+   {
+    "t": "Emissions- och absorptionsspektrum — diskreta våglängder som är karaktäristiska (ett \"fingeravtryck\") för varje grundämne."
+   },
+   {
+    "t": "Energinivå och kvantsprång — elektroner i en atom kan bara anta bestämda energier; en foton sänds ut eller absorberas när elektronen byter energinivå."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Kapitlets formler"
+   },
+   {
+    "t": "Ljus som elektromagnetisk våg"
+   },
+   {
+    "t": "frekvensen f är lika med c delat med våglängden lambda"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "f är lika med ljusets frekvens (hertz)"
+   },
+   {
+    "t": "c är lika med ljusets hastighet ( är ungefär lika med 2,998 gånger 10 upphöjt till 8 meter per sekund i vakuum)"
+   },
+   {
+    "t": "λ är lika med ljusets våglängd (meter)"
+   },
+   {
+    "t": "strömmen I är lika med effekten P delat med arean A som är lika med P delat med 4 pi gånger r i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "I är lika med ljusintensitet (W/m i kvadrat)"
+   },
+   {
+    "t": "P är lika med effekt (watt)"
+   },
+   {
+    "t": "A är lika med area som träffas (m i kvadrat)"
+   },
+   {
+    "t": "r är lika med avstånd till punktkällan (meter)"
+   },
+   {
+    "t": "Diffraktion och interferens"
+   },
+   {
+    "t": "n gånger våglängden lambda är lika med avståndet d gånger sinus alfa n"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "n är lika med maximilinjens ordning"
+   },
+   {
+    "t": "λ är lika med ljusets våglängd (meter)"
+   },
+   {
+    "t": "d är lika med spaltavstånd (gitterkonstant) (meter)"
+   },
+   {
+    "t": "alfa n är lika med avböjningsvinkel till n:te ordningens maximum (grader)"
+   },
+   {
+    "t": "Svartkroppsstrålning"
+   },
+   {
+    "t": "kraftmomentet M är lika med effekten P delat med arean A"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "M är lika med emittans (W/m i kvadrat)"
+   },
+   {
+    "t": "P är lika med utstrålad effekt (watt)"
+   },
+   {
+    "t": "A är lika med area (m i kvadrat)"
+   },
+   {
+    "t": "våglängden lambda massan m accelerationen a x gånger periodtiden T är lika med 2,8978 gånger 10 upphöjt till minus 3 meter\\cdot K"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "våglängden lambda massan m accelerationen a x är lika med våglängd med störst emittans/utstrålning (meter)"
+   },
+   {
+    "t": "T är lika med temperatur (kelvin)"
+   },
+   {
+    "t": "kraftmomentet M är lika med sigma gånger periodtiden T upphöjt till 4"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "M är lika med emittans (W/m i kvadrat)"
+   },
+   {
+    "t": "σ är lika med 5,67 gånger 10 upphöjt till minus 8 watt/(m i kvadrat·K upphöjt till 4) (Stefan–Boltzmanns konstant)"
+   },
+   {
+    "t": "T är lika med temperatur (kelvin)"
+   },
+   {
+    "t": "Ljusets brytning"
+   },
+   {
+    "t": "n är lika med c delat med hastigheten v"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "n är lika med brytningsindex för ämne"
+   },
+   {
+    "t": "c är lika med ljushastighet i vakuum ( 2,998 gånger 10 upphöjt till 8 meter per sekund)"
+   },
+   {
+    "t": "v är lika med ljushastighet i ämne (meter per sekund)"
+   },
+   {
+    "t": "n ett gånger sinus i är lika med n två gånger sinus b"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "n ett är lika med brytningsindex för medium 1"
+   },
+   {
+    "t": "i är lika med infallsvinkel i medium 1"
+   },
+   {
+    "t": "n två är lika med brytningsindex för medium 2"
+   },
+   {
+    "t": "b är lika med brytningsvinkel i medium 2"
+   },
+   {
+    "t": "i är lika med r"
+   },
+   {
+    "t": "där i är lika med infallsvinkel och r är lika med reflektionsvinkel (reflektionslagen)."
+   },
+   {
+    "t": "Fotoner och fotoelektrisk effekt"
+   },
+   {
+    "t": "energin E är lika med höjden h gånger c delat med våglängden lambda som är lika med h gånger frekvensen f"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "E är lika med ljusets/fotonens energi (joule)"
+   },
+   {
+    "t": "h är ungefär lika med 6,626 gånger 10 upphöjt till minus 34 Js (Plancks konstant)"
+   },
+   {
+    "t": "c är lika med ljusets hastighet (meter per sekund)"
+   },
+   {
+    "t": "λ är lika med ljusets våglängd (meter)"
+   },
+   {
+    "t": "f är lika med ljusets frekvens (hertz)"
+   },
+   {
+    "t": "1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule"
+   },
+   {
+    "t": "trycket p är lika med höjden h delat med våglängden lambda som är lika med h gånger frekvensen f delat med c"
+   },
+   {
+    "t": "där p är lika med fotonens rörelsemängd (kg·m/s)."
+   },
+   {
+    "t": "trycket p är lika med massan m gånger hastigheten v"
+   },
+   {
+    "t": "där p är lika med rörelsemängd (kg·m/s), m är lika med massa (kilogram) och v är lika med hastighet (meter per sekund) — klassisk rörelsemängd, gäller föremål med massa."
+   },
+   {
+    "t": "höjden h gånger frekvensen f är lika med W u plus E k"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "höjden h gånger frekvensen f är lika med fotonens energi (joule)"
+   },
+   {
+    "t": "W u är lika med utträdesarbete/utträdesenergi (joule)"
+   },
+   {
+    "t": "E k är lika med elektronens rörelseenergi efter frigörelse (joule)"
+   },
+   {
+    "t": "Våg-partikeldualitet"
+   },
+   {
+    "t": "våglängden lambda är lika med höjden h delat med massan m gånger hastigheten v"
+   },
+   {
+    "t": "där λ är lika med de Broglie-våglängd hos en partikel med massan m och hastigheten v (meter)."
+   },
+   {
+    "t": "Bohrs atommodell"
+   },
+   {
+    "t": "höjden h gånger frekvensen f är lika med E n minus E massan m som är lika med h gånger c delat med våglängden lambda"
+   },
+   {
+    "t": "där E n är lika med energin på den högre energinivån och E massan m är lika med energin på den lägre energinivån (båda i J)."
+   },
+   {
+    "t": "E n är ungefär lika med minus 13,6 delat med n i kvadrat elektronvolt"
+   },
+   {
+    "t": "där E n är lika med energi vid energinivå n (n är lika med 1 motsvarar grundtillståndet, n är lika med 2 första exciterade tillståndet osv.) — gäller väteatomen."
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Det elektromagnetiska spektrumet ordnas efter våglängd: radiovågor, mikrovågor, infrarött, synligt ljus (400–700 nanometer), ultraviolett, röntgenstrålning och gammastrålning — ju kortare våglängd desto högre frekvens och energi."
+   },
+   {
+    "t": "Ljus uppträder både som våg (diffraktion, interferens, brytning) och som partikel (fotoelektrisk effekt, Comptonspridning) — våg-partikeldualitet gäller all materia, men de Broglie-våglängden är bara märkbar för mikroskopiska partiklar som elektroner, inte för vardagliga föremål."
+   },
+   {
+    "t": "Vid brytning mot ett optiskt tätare medium bryts strålen mot normalen; mot ett optiskt tunnare medium bryts den från normalen."
+   },
+   {
+    "t": "Reflektionslagen ( i är lika med r ) gäller alltid samtidigt med brytningen."
+   },
+   {
+    "t": "Det är fotonens frekvens (energi), inte ljusets intensitet, som avgör om fotoelektrisk effekt sker — ett starkt men lågenergetiskt ljus (t.ex. rött) slår aldrig ut elektroner om höjden h gånger frekvensen f är mindre än utträdesarbetet."
+   },
+   {
+    "t": "Wiens förskjutningslag: ju hetare kropp, desto kortare toppvåglängd."
+   },
+   {
+    "t": "Stefan–Boltzmanns lag: emittansen växer snabbt (med periodtiden T upphöjt till 4 ) när temperaturen ökar."
+   },
+   {
+    "t": "Emissions- och absorptionsspektrum för samma grundämne har spektrallinjer vid exakt samma våglängder — atomer kan bara absorbera samma våglängder som de själva sänder ut."
+   },
+   {
+    "t": "I ett energinivådiagram är jonisationsgränsen satt till 0 elektronvolt, och alla bundna tillstånd (elektronen kvar i atomen) har negativ energi."
+   },
+   {
+    "t": "eV är en bekväm energienhet på atomär skala — omvandla alltid till joule ( 1 elektronvolt är lika med 1,602 gånger 10 upphöjt till minus 19 joule ) innan du räknar ut hastigheter eller rörelsemängd."
+   },
+   {
+    "t": "Rörelsemängden bevaras vid fotonabsorption och Comptonspridning, precis som vid en vanlig kollision — men fotonen saknar massa, så dess rörelsemängd räknas med trycket p är lika med höjden h delat med våglängden lambda , inte trycket p är lika med massan m gånger hastigheten v ."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "En elektromagnetisk våg består av ett elektriskt och ett magnetiskt fält som svänger i fas, vinkelrätt mot varandra och mot utbredningsriktningen:"
+   },
+   {
+    "t": "Illustration över en elektromagnetisk våg."
+   },
+   {
+    "t": "Det elektriska och det magnetiska fältet svänger i fas, vinkelrätt mot varandra och mot utbredningsriktningen."
+   },
+   {
+    "t": "Vid brytning mäts infallsvinkel, reflektionsvinkel och brytningsvinkel alltid mellan strålen och normalen:"
+   },
+   {
+    "t": "Strålgång mot ett tätare medium."
+   },
+   {
+    "t": "Infallsvinkeln i, reflektionsvinkeln r och brytningsvinkeln b mäts alltid mellan strålen och normalen."
+   },
+   {
+    "t": "Energinivådiagrammet för väte samlar hela avsnitt 4.7–4.8: kvantsprång till n är lika med 1 ger Lyman-serien (UV), till n är lika med 2 Balmer-serien (synligt ljus) och till n är lika med 3 Paschen-serien (IR):"
+   },
+   {
+    "t": "Energinivådiagram för väte."
+   },
+   {
+    "t": "Lyman-serien slutar på n är lika med 1 (UV), Balmer-serien på n är lika med 2 (synligt ljus — pilarna är ritade i sina spektralfärger) och Paschen-serien på n är lika med 3 (IR)."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du beskriva det elektromagnetiska spektrumets uppbyggnad och ordna radiovågor, mikrovågor, infrarött, synligt ljus, ultraviolett, röntgenstrålning och gammastrålning efter våglängd?"
+   },
+   {
+    "t": "Kan du formeln för ljusets frekvens ( frekvensen f är lika med c delat med våglängden lambda ) och för ljusintensitet ( strömmen I är lika med effekten P delat med arean A som är lika med P delat med parentesen 4 pi r i kvadrat slut parentes ) och lösa ut valfri storhet ur dem?"
+   },
+   {
+    "t": "Kan du förklara skillnaden mellan koherent, monokromatiskt och icke-koherent ljus, och mellan diffraktion och interferens?"
+   },
+   {
+    "t": "Kan du gitterformeln ( n gånger våglängden lambda är lika med avståndet d gånger sinus alfa n ) och använda den för att bestämma våglängd, spaltavstånd eller vinkel?"
+   },
+   {
+    "t": "Kan du Wiens förskjutningslag och Stefan–Boltzmanns lag, och förklara vad som händer med en svart kropps strålning när temperaturen ökar?"
+   },
+   {
+    "t": "Kan du brytningslagen (Snells lag) och avgöra åt vilket håll en stråle bryts — mot eller från normalen?"
+   },
+   {
+    "t": "Kan du räkna ut fotonens energi ( energin E är lika med höjden h gånger frekvensen f som är lika med h c delat med våglängden lambda ) och rörelsemängd ( trycket p är lika med höjden h delat med våglängden lambda ), samt omvandla mellan eV och joule?"
+   },
+   {
+    "t": "Kan du formeln för fotoelektrisk effekt ( höjden h gånger frekvensen f är lika med W u plus E k ) och förklara varför bara ljus över en viss frekvens (inte intensitet) kan slå ut elektroner?"
+   },
+   {
+    "t": "Kan du de Broglies formel ( våglängden lambda är lika med höjden h delat med parentesen massan m gånger hastigheten v slut parentes ) och avgöra om en partikel är tillräckligt liten för att uppvisa märkbara vågegenskaper?"
+   },
+   {
+    "t": "Kan du använda energinivådiagrammet för väte för att bestämma vilken våglängd som sänds ut vid ett givet kvantsprång ( höjden h gånger frekvensen f är lika med E n minus E massan m )?"
+   }
+  ]
+ },
+ {
   "id": "fy2-5.1",
   "title": "Universums struktur",
   "course": "Fysik nivå 2",
@@ -19996,6 +23837,277 @@
    },
    {
     "t": "Varje nytt stjärnsystem, inklusive vårt eget, byggs delvis av resterna från döda stjärnor."
+   }
+  ]
+ },
+ {
+  "id": "fy2-5.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 2",
+  "segments": [
+   {
+    "t": "Sammanfattning — Astronomi"
+   },
+   {
+    "t": "Det här kapitlet satte fysiken i ett kosmiskt perspektiv: universums struktur och skala, hur astronomer mäter avstånd till stjärnor med parallax, varför månen har faser, varför himlen är blå och solnedgångar röda, hur svarta hål bildas och upptäcks, samt hur stjärnor föds ur gasmoln."
+   },
+   {
+    "t": "Du ska efter kapitlet kunna skalorna i universum, räkna med parallaxformeln, förklara månens faser och Rayleighspridning, samt beskriva flykthastighet, Schwarzschildradien och stjärnbildningens faser."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Ljusår — sträckan ljuset färdas på ett år, är ungefär lika med 9,5 gånger 10 upphöjt till 15 meter ; ett avståndsmått, inte ett tidsmått."
+   },
+   {
+    "t": "Astronomisk enhet (AU) — jordens medelavstånd till solen, är ungefär lika med 1,50 gånger 10 upphöjt till 11 meter ."
+   },
+   {
+    "t": "Parallax — den skenbara förflyttningen av ett närbeläget föremål mot bakgrunden när betraktaren flyttar sig."
+   },
+   {
+    "t": "Parsec (pc) — avståndet som ger en parallax på exakt 1 bågsekund med 1 AU som bas; 1 pc är ungefär lika med 3,26 ljusår."
+   },
+   {
+    "t": "Synodisk och siderisk månad — synodisk (nymåne till nymåne) tar 29,5 dygn; siderisk (ett varv mätt mot fixstjärnorna) tar 27,3 dygn."
+   },
+   {
+    "t": "Rayleighspridning — spridning av ljus mot luftmolekyler, starkast för korta våglängder ( sigma är proportionell mot 1 delat med våglängden lambda upphöjt till 4 ); orsaken till blå himmel och röda solnedgångar."
+   },
+   {
+    "t": "Flykthastighet — den lägsta fart ett föremål måste ha för att helt undkomma en himlakropps gravitation."
+   },
+   {
+    "t": "Händelsehorisont — gränsytan kring ett svart hål; innanför den kan ingenting, inte ens ljus, ta sig ut."
+   },
+   {
+    "t": "Schwarzschildradien — radien på händelsehorisonten, det avstånd där flykthastigheten blir lika med ljushastigheten."
+   },
+   {
+    "t": "Singularitet — punkten i ett svart håls centrum där massan enligt teorin pressas samman till oändlig täthet."
+   },
+   {
+    "t": "Protostjärna — en het, kollapsande gasklump på väg att bli en stjärna, innan fusionen har tänts."
+   },
+   {
+    "t": "Huvudserien — det stabila stadium en stjärna når när strålningstrycket från fusionen exakt balanserar gravitationen (hydrostatisk jämvikt)."
+   },
+   {
+    "t": "Formler"
+   },
+   {
+    "t": "Kapitlets formler"
+   },
+   {
+    "t": "Ljusår"
+   },
+   {
+    "t": "1 ljusår är lika med c gånger tiden t som är ungefär lika med 9,5 gånger 10 upphöjt till 15 meter"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "c är lika med ljushastigheten, 3,00 gånger 10 upphöjt till 8 meter per sekund"
+   },
+   {
+    "t": "t är lika med ett år är ungefär lika med 3,16 gånger 10 upphöjt till 7 sekund"
+   },
+   {
+    "t": "Astronomisk enhet"
+   },
+   {
+    "t": "1 AU är ungefär lika med 1,50 gånger 10 upphöjt till 8 kilometer som är lika med 1,50 gånger 10 upphöjt till 11 meter"
+   },
+   {
+    "t": "Bågminuter och bågsekunder"
+   },
+   {
+    "t": "1 grader är lika med 60 prim som är lika med 60 gånger 60 bis som är lika med 3 600 bis"
+   },
+   {
+    "t": "där en bågminut skrivs prim och en bågsekund skrivs bis ."
+   },
+   {
+    "t": "Parallaxmetoden"
+   },
+   {
+    "t": "r är lika med 1 delat med trycket p"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "r är lika med avståndet till stjärnan (pc)"
+   },
+   {
+    "t": "p är lika med parallaxvinkeln (bågsekunder, bis )"
+   },
+   {
+    "t": "Parsec till ljusår"
+   },
+   {
+    "t": "1 pc är ungefär lika med 3,26 ljusår"
+   },
+   {
+    "t": "Rayleighspridningens våglängdsberoende"
+   },
+   {
+    "t": "sigma är proportionell mot 1 delat med våglängden lambda upphöjt till 4"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "σ är lika med sannolikheten/intensiteten för spridning"
+   },
+   {
+    "t": "λ är lika med ljusets våglängd (meter)"
+   },
+   {
+    "t": "Flykthastighet"
+   },
+   {
+    "t": "v frekvensen f är lika med roten ur 2 G kraftmomentet M delat med r"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "v frekvensen f är lika med flykthastigheten (meter per sekund)"
+   },
+   {
+    "t": "G är lika med gravitationskonstanten, 6,67 gånger 10 upphöjt till minus 11 newton \\cdot m^2/kg^2"
+   },
+   {
+    "t": "M är lika med himlakroppens massa (kilogram)"
+   },
+   {
+    "t": "r är lika med avståndet från centrum (meter)"
+   },
+   {
+    "t": "Schwarzschildradien"
+   },
+   {
+    "t": "r sträckan s är lika med 2 G kraftmomentet M delat med c i kvadrat"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "r sträckan s är lika med Schwarzschildradien (meter)"
+   },
+   {
+    "t": "G är lika med gravitationskonstanten, 6,67 gånger 10 upphöjt till minus 11 newton \\cdot m^2/kg^2"
+   },
+   {
+    "t": "M är lika med det svarta hålets massa (kilogram)"
+   },
+   {
+    "t": "c är lika med ljushastigheten, 3,00 gånger 10 upphöjt till 8 meter per sekund"
+   },
+   {
+    "t": "Vätefusion (förenklat)"
+   },
+   {
+    "t": "4 upphöjt till 1 ett H går mot upphöjt till 4 två He plus energi"
+   },
+   {
+    "t": "Massdifferensen mellan de fyra protonerna och heliumkärnan frigörs som energi enligt energin E är lika med massan m c i kvadrat ."
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Universum är uppbyggt i nivåer med tydliga skalsprång: solsystemet (ca 0,001 ljusår) ger Vintergatan (ca 100 000 ljusår) ger Lokala gruppen (ca 10 miljoner ljusår) ger superhopen Laniakea (ca 500 miljoner ljusår) ger observerbara universum (ca 93 miljarder ljusår)."
+   },
+   {
+    "t": "Varje steg är tusentals gånger större än det föregående."
+   },
+   {
+    "t": "Ljusets ändliga hastighet gör att vi alltid ser avlägsna himlakroppar som de såg ut förr — ljuset från en stjärna 1 000 ljusår bort visar hur den såg ut för 1 000 år sedan."
+   },
+   {
+    "t": "Parallaxmetoden fungerar från jordytan bara ut till ungefär 100 ljusår (atmosfären stör mätningen); satelliten Gaia klarar tiotusentals ljusår."
+   },
+   {
+    "t": "På norra halvklotet betyder ett D-format ljus (höger sida lyser) att månen är växande mot fullmåne, och ett C-format ljus (vänster sida lyser) att den är avtagande mot nymåne — omvänt på södra halvklotet."
+   },
+   {
+    "t": "Förmörkelser kräver att sol, jord och måne ligger nästan exakt i linje; de sker inte varje månad eftersom månens bana lutar cirka 5 grader mot jordens bana runt solen."
+   },
+   {
+    "t": "Rayleighspridningen är starkast för korta våglängder ( är proportionell mot 1 delat med våglängden lambda upphöjt till 4 ): blått ljus sprids ur solstrålen åt alla håll och ger en blå himmel; nära horisonten passerar solljuset upp till cirka 38 luftmassor, så att även blått och grönt hinner spridas bort och bara rött ljus når fram."
+   },
+   {
+    "t": "Ett svart hål bildas när en stjärna tyngre än ungefär 8 solmassor dör i en supernova och kärnan kollapsar utan att något kan stoppa den; lättare stjärnor blir i stället vita dvärgar."
+   },
+   {
+    "t": "Ett svart hål syns aldrig direkt utan upptäcks indirekt: het strålning från en ackretionsskiva, banorna hos kringkretsande stjärnor, eller gravitationsvågor (första gången med LIGO år 2015)."
+   },
+   {
+    "t": "Stjärnbildning är en dragkamp mellan gravitationen (drar ihop) och trycket (håller emot); en kollapsande gas värms av sin egen frigjorda lägesenergi, precis som luften i en cykelpump."
+   },
+   {
+    "t": "Ju tyngre en stjärna är, desto kortare lever den — trots mer bränsle förbränner den vätet så mycket snabbare att det ändå tar slut först."
+   },
+   {
+    "t": "Figurer värda att minnas"
+   },
+   {
+    "t": "Parallaxmetoden är kapitlets viktigaste avståndsverktyg — jämför var stjärnan verkar ligga mot bakgrundsstjärnorna från jordens två motsatta lägen i banan:"
+   },
+   {
+    "t": "Parallaxvinkeln p (kraftigt överdriven i figuren) mäts genom att jämföra stjärnans position mot avlägsna bakgrundsstjärnor från två motsatta punkter i jordens bana."
+   },
+   {
+    "t": "Ett svart hål i genomskärning — lägg märke till hur ljusbanorna böjs olika mycket beroende på avstånd till händelsehorisonten:"
+   },
+   {
+    "t": "Ett svart hål i genomskärning."
+   },
+   {
+    "t": "Ljus som passerar långt från hålet går rakt fram, ljus som passerar nära böjs kraftigt av gravitationen, och ljus innanför händelsehorisonten (radien r sträckan s ) kommer aldrig ut."
+   },
+   {
+    "t": "Stjärnbildningens tre steg, från glest molekylmoln till tänd protostjärna:"
+   },
+   {
+    "t": "Från glest molekylmoln, via gravitationskollaps, till en protostjärna omgiven av en roterande skiva av gas och stoft."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du beskriva universums nivåer från solsystem till superhopar och ge en ungefärlig storlek på varje nivå?"
+   },
+   {
+    "t": "Vet du varför avstånd i rymden anges i ljusår, AU eller parsec i stället för meter?"
+   },
+   {
+    "t": "Kan du parallaxmetoden och formeln r är lika med 1 delat med trycket p , och förklara varför den bara fungerar för relativt närbelägna stjärnor?"
+   },
+   {
+    "t": "Kan du räkna om mellan bågsekunder, parsec och ljusår?"
+   },
+   {
+    "t": "Kan du förklara varför månen har faser, och skillnaden mellan synodisk och siderisk månad?"
+   },
+   {
+    "t": "Vet du när sol- och månförmörkelser inträffar, och varför de inte sker varje månad?"
+   },
+   {
+    "t": "Kan du förklara Rayleighspridning och varför den gör himlen blå och solnedgångar röda?"
+   },
+   {
+    "t": "Kan du formlerna för flykthastighet och Schwarzschildradien, och förklara sambandet mellan dem?"
+   },
+   {
+    "t": "Kan du beskriva hur ett svart hål bildas och hur astronomer upptäcker ett som inte syns?"
+   },
+   {
+    "t": "Kan du beskriva stjärnbildningens steg, från gasmoln till stabil huvudseriestjärna, och förklara varför tunga stjärnor lever kortare tid?"
    }
   ]
  },

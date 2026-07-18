@@ -43,6 +43,7 @@ window.KATALOG = {
               { num: '1.2', title: 'Storheter, enheter och prefix', description: 'SI-systemet, grundenheter och prefix från piko till tera.', href: 'fysik1-enhetskollen.html', icon: '📏', keywords: ['si-enheter','enheter','storheter','prefix','beteckningar','quiz'] },
               { num: '1.3', title: 'Medelfart', description: 'Sträcka delat med tid — det första rörelsebegreppet.', href: null, icon: '🏃', keywords: ['rörelse','kinematik','medelfart','hastighet','tid'] },
               { num: '1.4', title: 'Densitet', description: 'Hur tätt packat ett material är — ρ = m / V och vattnets densitet.', href: 'fysik1-densitet-app.html', icon: '🔬', keywords: ['densitet','massa','volym','flytförmåga','flytkraft','atomer','material','vatten'] },
+              { num: '1.S', title: 'Sammanfattning', description: 'Kapitlets begrepp, formler och viktigaste samband — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-1', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','si-enheter','prefix','medelfart','densitet'] },
             ],
           },
           'Rörelse': {
@@ -57,6 +58,7 @@ window.KATALOG = {
               { num: '2.6', title: 'Rörelse med konstant acceleration', description: 'Rörelseformlerna och hur de hänger ihop med diagrammen.', href: 'fysik1-rorelsediagram.html', icon: '🚀', keywords: ['rörelse','kinematik','konstant acceleration','formler','fritt fall','kast'] },
               { num: '2.7', title: 'Lösa ekvationssystem i GeoGebra', description: 'Att använda GeoGebra för att lösa ekvationssystem i fysikproblem.', href: null, icon: '🖥️', keywords: ['geogebra','ekvationssystem','verktyg','digitalt'] },
               { num: '2.8', title: 'Torricellis ekvation', description: 'Sambandet mellan hastighet, acceleration och sträcka utan tid.', href: null, icon: '⚗️', keywords: ['torricelli','kinematik','rörelse','ekvation'] },
+              { num: '2.S', title: 'Sammanfattning', description: 'Rörelsediagrammen och formlerna för konstant acceleration — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-2', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','rörelse','kinematik','diagram','acceleration'] },
             ],
           },
           'Krafter': {
@@ -73,6 +75,7 @@ window.KATALOG = {
               { num: '3.8', title: 'Sneda spännkrafter', description: 'Exempel med spännkrafter i flera riktningar.', href: null, icon: '🪢', keywords: ['krafter','spännkraft','exempel','jämvikt'] },
               { num: '3.9', title: 'Accelerationens riktning', description: 'Att avgöra åt vilket håll accelerationen pekar.', href: null, icon: '↗️', keywords: ['krafter','acceleration','riktning','vektor'] },
               { num: '3.10', title: 'Trissor', description: 'Krafter och rörelse i system med trissor och linor.', href: null, icon: '⚙️', keywords: ['krafter','trissa','remskiva','mekanik'] },
+              { num: '3.S', title: 'Sammanfattning', description: 'Newtons lagar, friktion och lutande plan — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-3', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','krafter','newton','friktion','mekanik'] },
             ],
           },
           'Energi': {
@@ -88,6 +91,7 @@ window.KATALOG = {
               { num: '4.7', title: 'Rörelsemängd och impuls', description: 'p = m · v och I = F · t — bevarande av rörelsemängd.', href: null, icon: '🎱', keywords: ['mekanik','rörelsemängd','impuls','newton','kraft'] },
               { num: '4.8', title: 'Rörelsemängdens bevarande', description: 'Stötar i en eller två dimensioner.', href: null, icon: '💥', keywords: ['mekanik','rörelsemängd','bevarande','stöt','kollision'] },
               { num: '4.9', title: 'Arbete med friktion', description: 'Hur friktion omvandlar mekanisk energi till värme.', href: null, icon: '🔥', keywords: ['energi','friktion','värme','arbete'] },
+              { num: '4.S', title: 'Sammanfattning', description: 'Arbete, energiformer, effekt och rörelsemängd — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-4', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','energi','arbete','effekt','rörelsemängd'] },
             ],
           },
           'Tryck': {
@@ -101,6 +105,7 @@ window.KATALOG = {
               { num: '5.5', title: 'Gasers lyftkraft', description: 'Varför varmluftballonger och vätgasballonger lyfter.', href: null, icon: '🎈', keywords: ['tryck','gas','lyftkraft','ballong','densitet'] },
               { num: '5.6', title: 'Ideala gaslagen och kelvinskalan', description: 'Sambandet mellan tryck, volym och temperatur i en gas.', href: 'fysik1-tryck.html', icon: '💨', keywords: ['tryck','gas','ideala gaslagen','volym','temperatur','kelvin','termodynamik','molekyler'] },
               { num: '5.7', title: 'Pascals princip', description: 'Tryck fortplantas oförändrat i en vätska — hydraulik.', href: null, icon: '🛠️', keywords: ['tryck','pascal','hydraulik','vätska'] },
+              { num: '5.S', title: 'Sammanfattning', description: 'Tryck, lyftkraft och gaslagar — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-5', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','tryck','arkimedes','gaslagen','lyftkraft'] },
             ],
           },
           'Värmelära': {
@@ -112,6 +117,7 @@ window.KATALOG = {
               { num: '6.3', title: 'Faser och fasövergångar', description: 'Fast, flytande och gas — smältning, förångning och kondensation.', href: null, icon: '🧊', keywords: ['värme','fas','fasövergång','smältning','förångning','energi'] },
               { num: '6.4', title: 'Kroppen och värme', description: 'Hur människokroppen avger och tar upp värme.', href: null, icon: '🫀', keywords: ['värme','kropp','biologi','strålning'] },
               { num: '6.5', title: 'Termodynamikens fyra huvudsatser', description: 'Energins bevarande, entropi och absoluta nollpunkten.', href: null, icon: '📜', keywords: ['termodynamik','huvudsatser','entropi','energi'] },
+              { num: '6.S', title: 'Sammanfattning', description: 'Värme, temperatur och fasövergångar — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-6', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','värme','temperatur','fasövergång','termodynamik'] },
             ],
           },
           'Elektricitet': {
@@ -132,6 +138,7 @@ window.KATALOG = {
               { num: '7.12', title: 'Elektrisk potential', description: 'Spänning som potentialskillnad och nivåyta.', href: null, icon: '🔋', keywords: ['ellära','elektrisk potential','spänning','energi'] },
               { num: '7.13', title: 'Faradays bur', description: 'Hur ett metallhölje skärmar av elektriska fält.', href: 'fysik1-faradays-bur.html', icon: '🛡️', keywords: ['ellära','elektricitet','faraday','avskärmning','elektrostatik','ledare','bur'] },
               { num: '7.14', title: 'Millikans oljedroppsförsök', description: 'Hur Millikan mätte elementarladdningen.', href: null, icon: '💧', keywords: ['ellära','millikan','elementarladdning','oljedropp','historia','laddning'] },
+              { num: '7.S', title: 'Sammanfattning', description: 'Laddning, kretsar, Ohms lag och elektriska fält — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-7', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','ellära','elektricitet','krets','ohm'] },
             ],
           },
           'Relativitetsteori': {
@@ -139,6 +146,7 @@ window.KATALOG = {
             intro: 'En försmak av Einsteins idé om att tid och rum inte är absoluta. Vi möter tidsdilatation, längdkontraktion och den berömda ekvationen E = m · c².',
             sections: [
               { num: '8.1', title: 'Relativitetsteori', description: 'Tidsdilatation, längdkontraktion och E = m · c².', href: null, icon: '🌌', keywords: ['modern fysik','relativitet','einstein','tidsdilatation','längdkontraktion'] },
+              { num: '8.S', title: 'Sammanfattning', description: 'Tidsdilatation, längdkontraktion och massenergi — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-8', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','relativitet','einstein','modern fysik'] },
             ],
           },
           'Kärnfysik': {
@@ -150,6 +158,7 @@ window.KATALOG = {
               { num: '9.3', title: 'Radioaktivt sönderfall', description: 'Alfa-, beta- och gammasönderfall av atomkärnor.', href: 'fysik1-sonderfall.html', icon: '☢️', keywords: ['kärnfysik','atomfysik','sönderfall','alfa','beta','gamma','strålning','radioaktivitet','atomkärna'] },
               { num: '9.4', title: 'Aktivitet och halveringstid', description: 'Exponentiellt sönderfall genom fem halveringstider.', href: 'fysik1-halveringstid.html', icon: '⏳', keywords: ['kärnfysik','atomfysik','halveringstid','aktivitet','radioaktivitet','exponentiell','sönderfall','kurva'] },
               { num: '9.5', title: 'Stråldoser', description: 'Alfa, beta och gamma genom textil, aluminium och bly.', href: 'fysik1-stralning-genomtranglighet.html', icon: '🛡️', keywords: ['kärnfysik','atomfysik','strålning','stråldos','alfa','beta','gamma','skärmning','gm-räknare','radioaktivitet'] },
+              { num: '9.S', title: 'Sammanfattning', description: 'Atomkärnan, sönderfall, halveringstid och strålning — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy1-9', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','kärnfysik','sönderfall','halveringstid','strålning'] },
             ],
           },
         },
@@ -181,6 +190,7 @@ window.KATALOG = {
               { num: '1.6', title: 'Kaströrelse', description: 'Projektilrörelse och kastparabeln.', href: 'fysik2-rorelse-app.html', icon: '🎯', keywords: ['rörelse','kast','projektil','parabel','snett kast','kinematik','gravitation'] },
               { num: '1.7', title: 'Exempel — Den fatala gungan', description: 'Räkneexempel: cirkulär rörelse och centripetalkraft i en gunga.', href: null, icon: '🛝', keywords: ['krafter','cirkulär','gunga','exempel','centripetal'] },
               { num: '1.8', title: 'Exempel — Den flygande kossan', description: 'Räkneexempel: snett kast och rörelseanalys.', href: null, icon: '🐄', keywords: ['rörelse','kast','exempel','projektil'] },
+              { num: '1.S', title: 'Sammanfattning', description: 'Kraftmoment, cirkulär rörelse och kaströrelse — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy2-1', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','kraftmoment','cirkulär rörelse','kaströrelse','mekanik'] },
             ],
           },
           'Mekaniska vågor': {
@@ -201,6 +211,7 @@ window.KATALOG = {
               { num: '2.12', title: 'Ljudfrekvens och dopplereffekt', description: 'Mekaniska vågor i 2D och 3D — interferens, doppler, nodlinjer.', href: 'fysik2-vagsimulator.html', icon: '🚓', keywords: ['vågor','ljud','frekvens','doppler','dopplereffekt','rörelse','källa'] },
               { num: '2.13', title: 'Vattenvågor och brytningslagen', description: 'Hur våghastigheten ändras vid gränsen mellan djupt och grunt vatten.', href: 'fysik2-vagsimulator.html', icon: '🌊', keywords: ['vågor','vatten','brytning','snells lag','refraktion','huygens'] },
               { num: '2.14', title: 'Diffraktion och interferens', description: 'Hur vågor böjs och möts — dubbelspaltexperiment.', href: 'fysik2-vagsimulator.html', icon: '〰️', keywords: ['vågor','diffraktion','interferens','dubbelspalt','huygens','nodlinjer'] },
+              { num: '2.S', title: 'Sammanfattning', description: 'Svängningar, vågor, ljud och resonans — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy2-2', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','vågor','svängning','ljud','resonans'] },
             ],
           },
           'Elektromagnetism': {
@@ -221,6 +232,7 @@ window.KATALOG = {
               { num: '3.12', title: 'Hastighetsväljare och masspektrometer', description: 'Partiklar med olika fart skjuts in mellan två laddade plattor — bara de med hastigheten v = 𝔼/B går rakt fram genom hålet, resten sorteras bort. På andra sidan böjer magnetfältet partikeln i en halvcirkel mot en fotografisk plåt, och ur banradien vägs partikeln (m = q · B · r/v). Prova elektron, proton, deuteron och alfapartikel.', href: 'fysik2-hastighetsvaljare-app.html', icon: '⚗️', keywords: ['elektromagnetism','hastighetsväljare','masspektrometer','partikel','laddning','elektriskt fält','magnetfält','magnetisk kraft','elektrisk kraft','centripetalkraft','banradie','cirkelbana','elektron','proton','deuteron','alfapartikel','jon','massa','väga'] },
               { num: '3.13', title: 'Virvelströmmar', description: 'En aluminiumpendel svänger genom ett magnetfält och bromsas in av inducerade virvelströmmar — enligt Lenz lag motverkar de alltid sin orsak. Justera flödestätheten, slå av elektromagneten mitt i svängningen och byt till en platta med spår för att se bromsningen nästan försvinna. Rörelseenergin blir värme, precis som i en induktionshäll.', href: 'fysik2-virvelstrommar-app.html', icon: '🔥', keywords: ['elektromagnetism','virvelström','virvelströmmar','induktion','lenz','lenz lag','broms','magnetbroms','induktionshäll','induktionsspis','pendel','aluminium','platta','spår','värme','flöde'] },
               { num: '3.14', title: 'Magnetfältsmätare (överkurs)', description: 'Hur en magnetfältsmätare fungerar — Hall-effekt.', href: null, icon: '📟', keywords: ['elektromagnetism','hall','mätare','magnetfält','överkurs'] },
+              { num: '3.S', title: 'Sammanfattning', description: 'Magnetfält, magnetiska krafter och induktion — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy2-3', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','elektromagnetism','magnetfält','induktion','generator'] },
             ],
           },
           'Ljus som våg och partikel': {
@@ -235,6 +247,7 @@ window.KATALOG = {
               { num: '4.6', title: 'Våg-partikeldualitet och de Broglies hypotes', description: 'Materievågor — alla partiklar är också vågor.', href: 'fysik2-dubbelspalt.html', icon: '🔬', keywords: ['modern fysik','kvantfysik','dubbelspalt','elektroner','interferens','våg-partikel','våg-partikeldualitet','de broglie','observation'] },
               { num: '4.7', title: 'Spektrallinjer', description: 'Grundämnenas fingeravtryck — emissions- och absorptionsspektrum.', href: 'fysik2-spektrallinjer.html', icon: '🌈', keywords: ['modern fysik','atomfysik','spektrallinjer','grundämnen','emission','absorption','spektrum','periodiska systemet','bohr'] },
               { num: '4.8', title: 'Bohrs atommodell och energinivåer', description: 'Bohrs atommodell — animera elektronhopp och se fotoner emitteras.', href: 'fysik2-energinivaer.html', icon: '⚛️', keywords: ['modern fysik','atomfysik','kvantfysik','energinivåer','bohr','bohrs atommodell','väte','elektron','skal','foton','emission','absorption','lyman','balmer','paschen','h-alfa','spektrum','jonisation'] },
+              { num: '4.S', title: 'Sammanfattning', description: 'Ljusvågor, fotoner och atomens energinivåer — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy2-4', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','ljus','foton','kvantfysik','atomfysik'] },
             ],
           },
           'Astronomi': {
@@ -247,6 +260,7 @@ window.KATALOG = {
               { num: '5.4', title: 'Solens färg', description: 'Rayleighspridning — varför solen skiftar färg över dagen.', href: 'fysik2-solens-farg.html', icon: '🌅', keywords: ['vågor','optik','sol','rayleigh','spridning','atmosfär','färg','ljus','himmel','solnedgång'] },
               { num: '5.5', title: 'Svarta hål', description: 'Flykthastighet, händelsehorisont och Schwarzschildradien.', href: null, icon: '🕳️', keywords: ['astronomi','svart hål','svarta hål','händelsehorisont','schwarzschild','flykthastighet','gravitation','singularitet','supernova','neutronstjärna','relativitet','gravitationsvågor'] },
               { num: '5.6', title: 'Stjärnbildning', description: 'Från gasmoln till stjärna — gravitation mot tryck, fusion tänds.', href: null, icon: '✦', keywords: ['astronomi','stjärna','stjärnbildning','protostjärna','molekylmoln','gravitation','fusion','huvudserien','gasmoln','supernova','stjärnstoft','tryck'] },
+              { num: '5.S', title: 'Sammanfattning', description: 'Universums struktur, avstånd och stjärnors liv — komprimerat inför provet, med repetitionsspel.', href: 'fysik-repetition.html#fy2-5', icon: '∑', keywords: ['sammanfattning','repetition','prov','provkoll','formler','astronomi','universum','stjärnor','svarta hål'] },
             ],
           },
         },

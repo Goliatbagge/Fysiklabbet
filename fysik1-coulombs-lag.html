@@ -483,12 +483,8 @@
                 ctx.fillStyle = '#f3eee4';
                 ctx.fillRect(0, 0, width, height);
 
-                // Bakgrundseffekt
-                const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.6);
-                bgGradient.addColorStop(0, 'rgba(10, 30, 60, 0.4)');
-                bgGradient.addColorStop(1, 'rgba(5, 5, 16, 0)');
-                ctx.fillStyle = bgGradient;
-                ctx.fillRect(0, 0, width, height);
+                // (Bakgrundsvinjetten borttagen — den mörkblå radialen var designad
+                // för mörkt tema och blev en grå fläck på papperstemat)
 
                 // Rutnät (subtilt)
                 ctx.strokeStyle = 'rgba(200, 50, 74, 0.1)';
@@ -624,8 +620,8 @@
                     // Centrera hela texten
                     const startX = x - totalWidth / 2;
 
-                    // Variabel (kursiv)
-                    ctx.fillStyle = isPositive ? '#fca5a5' : '#7dd3fc';
+                    // Variabel (kursiv) — mörka nyanser, läsbara på papper
+                    ctx.fillStyle = isPositive ? '#b91c1c' : '#2a5a7c';
                     ctx.font = 'italic 18px Poppins, sans-serif';
                     ctx.textAlign = 'left';
                     ctx.fillText(labelVar, startX, y + radius + 14);
@@ -673,6 +669,19 @@
                         const rect = containerRef.current.getBoundingClientRect();
                         canvasRef.current.width = rect.width;
                         canvasRef.current.height = rect.height;
+                        // Startpositionerna är satta för bred skärm — på smal
+                        // canvas hamnar Q2 annars utanför. Ligger någon laddning
+                        // utanför: placera om båda proportionellt med god separation.
+                        const margin = MAX_CHARGE_RADIUS + 20;
+                        const maxX = rect.width - margin;
+                        const maxY = rect.height - margin;
+                        setPos1(prev => (prev.x > maxX || prev.y > maxY ||
+                                (rect.width < 700 && prev.x > rect.width * 0.5))
+                            ? { x: rect.width * 0.26, y: rect.height / 2 }
+                            : prev);
+                        setPos2(prev => (prev.x > maxX || prev.y > maxY)
+                            ? { x: rect.width * 0.74, y: rect.height / 2 }
+                            : prev);
                         setCanvasReady(prev => !prev); // Trigga omritning
                     }
                 };

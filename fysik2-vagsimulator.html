@@ -44,6 +44,19 @@
         width: 100vw;
         height: 100vh;
       }
+
+      /* Mobil: stapla — vågcanvas i full bredd överst, kontroller under */
+      @media (max-width: 600px) {
+        body { overflow: auto !important; }
+        #root { height: auto; }
+        .vs-root {
+          flex-direction: column !important;
+          height: auto !important;
+          overflow: visible !important;
+        }
+        .vs-stage { order: -1; width: 100%; padding: 8px 0; }
+        .vs-panel { width: 100% !important; border-right: none !important; }
+      }
     </style>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -1030,9 +1043,9 @@ const WaveSimulator = () => {
 
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white font-sans overflow-hidden">
+    <div className="vs-root flex h-screen bg-gray-900 text-white font-sans overflow-hidden">
       {/* Sidebar Controls */}
-      <div className="w-80 p-6 flex flex-col gap-6 bg-gray-800 border-r border-gray-700 shadow-xl overflow-y-auto z-10">
+      <div className="vs-panel w-80 p-6 flex flex-col gap-6 bg-gray-800 border-r border-gray-700 shadow-xl overflow-y-auto z-10">
         <h1 className="text-2xl font-bold text-blue-400">Vågsimulator</h1>
 
         {/* Play/Pause */}
@@ -1198,7 +1211,7 @@ const WaveSimulator = () => {
       </div>
 
       {/* Main Canvas Area */}
-      <div className="flex-1 relative flex items-center justify-center cursor-crosshair" style={{ background: 'var(--lab-bg)' }}>
+      <div className="vs-stage flex-1 relative flex items-center justify-center cursor-crosshair" style={{ background: 'var(--lab-bg)' }}>
          <canvas
             ref={canvasRef}
             width={800}

@@ -223,33 +223,38 @@
                 const responsiveStyles = `
                     @media (max-width: 900px) {
                         body { padding: 0.5rem; }
+                        /* !important krävs: layouten sätts med inline-stilar */
                         .main-layout-responsive {
-                            grid-template-columns: 1fr;
-                            gap: 1rem;
+                            grid-template-columns: 1fr !important;
+                            gap: 1rem !important;
                         }
                         .simulation-area-responsive {
-                            min-height: 350px;
+                            min-height: 350px !important;
                         }
                         .gas-container-responsive {
                             height: 300px !important;
                         }
                         .thermometer-responsive {
-                            height: 120px;
-                            width: 30px;
-                            top: 0.5rem;
-                            left: 0.5rem;
+                            height: 120px !important;
+                            width: 30px !important;
+                            top: 0.5rem !important;
+                            left: 0.5rem !important;
+                            align-items: flex-start !important;
                         }
                         .thermometer-tube-responsive {
-                            height: 80px;
-                            width: 12px;
+                            height: 80px !important;
+                            width: 12px !important;
                         }
                         .thermometer-bulb-responsive {
-                            width: 20px;
-                            height: 20px;
+                            width: 20px !important;
+                            height: 20px !important;
                         }
+                        /* Avläsningen växer åt höger in i scenen i stället för
+                           att klippas mot vänsterkanten */
                         .thermometer-reading-responsive {
-                            font-size: 0.7rem;
-                            margin-top: 4px;
+                            font-size: 0.7rem !important;
+                            margin-top: 4px !important;
+                            align-self: flex-start;
                         }
                     }
                 `;

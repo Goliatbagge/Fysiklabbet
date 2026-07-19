@@ -61,7 +61,10 @@
         'border-color:var(--lab-ink,#0f1620);cursor:default;}',
         '.secnav .secnav-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;',
         'opacity:.65;font-family:var(--lab-font-mono,monospace);}',
-        '.secnav .secnav-title{font-weight:600;font-size:15px;}'
+        '.secnav .secnav-title{font-weight:600;font-size:15px;}',
+        '@media(max-width:560px){.secnav{padding:0 1rem;gap:6px;}',
+        '.secnav a,.secnav .secnav-cur{min-width:0;flex:1 1 0;padding:7px 10px;align-items:center;}',
+        '.secnav .secnav-title{font-size:13px;}}'
     ].join('');
     document.head.appendChild(style);
 

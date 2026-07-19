@@ -85,6 +85,18 @@
             color: var(--lab-bg);
             box-shadow: none;
         }
+        /* Mobil: kompakt knapppanel längst ned så den inte täcker burken/golvet */
+        @media (max-width: 600px) {
+            .ledare-controls {
+                bottom: 6px !important;
+                padding: 6px 8px !important;
+                gap: 8px !important;
+            }
+            .ledare-controls button {
+                padding: 8px 12px !important;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body class="lab-sim">
@@ -139,7 +151,7 @@
 
         const LedareControls = ({ showCharges, onToggleCharges, onReset }) => {
             return (
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 glass-card p-4 rounded-2xl z-10 w-11/12 max-w-md justify-center">
+                <div className="ledare-controls absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-4 glass-card p-4 rounded-2xl z-10 w-11/12 max-w-md justify-center">
                     <button
                         onClick={onToggleCharges}
                         className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
@@ -233,7 +245,7 @@
                 const canY = floorY - CAN_RADIUS;
 
                 const startCanX = width * 0.75;
-                const startRodX = width * 0.15;
+                const startRodX = Math.max(ROD_WIDTH / 2 + 4, width * 0.15);
                 const startRodY = canY;
 
                 physicsState.current.canX = startCanX;
@@ -420,11 +432,7 @@
                     ctx.fillStyle = '#f3eee4';
                     ctx.fillRect(0, 0, width, height);
 
-                    const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.7);
-                    bgGradient.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
-                    bgGradient.addColorStop(1, 'rgba(5, 5, 16, 0)');
-                    ctx.fillStyle = bgGradient;
-                    ctx.fillRect(0, 0, width, height);
+                    // (Mörkblå bakgrundsvinjett borttagen — blev en grå fläck på papperstemat)
 
                     ctx.shadowBlur = 10;
                     ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
@@ -944,15 +952,11 @@
                         }
                     }
 
-                    // Dark background
+                    // Papper-bakgrund
                     ctx.fillStyle = '#f3eee4';
                     ctx.fillRect(0, 0, width, height);
 
-                    const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.7);
-                    bgGradient.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
-                    bgGradient.addColorStop(1, 'rgba(5, 5, 16, 0)');
-                    ctx.fillStyle = bgGradient;
-                    ctx.fillRect(0, 0, width, height);
+                    // (Mörkblå bakgrundsvinjett borttagen — blev en grå fläck på papperstemat)
 
                     // Draw ceiling
                     const ceilingGradient = ctx.createLinearGradient(0, 0, 0, CEILING_HEIGHT + 30);

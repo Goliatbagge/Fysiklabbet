@@ -87,6 +87,11 @@
             height: 14px;
             border-radius: 50%;
         }
+        /* Mobil: stapla visualisering över kontrollpanelen */
+        @media (max-width: 600px) {
+            .hv-layout { flex-direction: column; }
+            .hv-side { width: 100% !important; }
+        }
     </style>
 </head>
 <body class="lab-sim">
@@ -489,7 +494,7 @@
                         Stega dig genom fem halveringstider och se hur antalet aktiva kärnor minskar.
                     </p>
 
-                    <div className="flex gap-5" style={{ alignItems: 'flex-start' }}>
+                    <div className="flex gap-5 hv-layout" style={{ alignItems: 'flex-start' }}>
                         {/* Canvas */}
                         <div className="glass-card rounded-xl p-4" style={{ flex: '1 1 0' }}>
                             <canvas
@@ -502,7 +507,7 @@
                         </div>
 
                         {/* Sidebar: controls + info */}
-                        <div style={{ width: 240, flexShrink: 0 }}>
+                        <div className="hv-side" style={{ width: 240, flexShrink: 0 }}>
                             {/* Step controls */}
                             <div className="glass-card rounded-xl p-4 mb-4">
                                 <div className="text-center mb-4">

@@ -440,8 +440,9 @@
                     ctx.save();
                     ctx.globalAlpha = alpha;
                     // Bakgrund
-                    const bw = W * 0.38;
-                    const bh = H * 0.14;
+                    // Minimimått så etikett och värde inte kolliderar på smal skärm
+                    const bw = Math.max(W * 0.38, 168);
+                    const bh = Math.max(H * 0.14, 48);
                     const bx = cx - bw/2;
                     const by = massBoxY - bh/2;
                     ctx.fillStyle = 'rgba(243, 238, 228, 0.95)';
@@ -470,9 +471,9 @@
                 if (ph === 'idle') {
                     drawCluster(ctx, lx0, cy, nr, lay1);
                     drawCluster(ctx, rx0, cy, nr, lay2);
-                    txt(ctx, cfg.p1.name,           lx0, cy + nr*3.4, fsB, '#e2e8f0');
+                    txt(ctx, cfg.p1.name,           lx0, cy + nr*3.4, fsB, '#0f1620');
                     txt(ctx, fmt(cfg.p1.mass) + ' u', lx0, cy + nr*5.1, fs, '#64748b');
-                    txt(ctx, cfg.p2.name,           rx0, cy + nr*3.4, fsB, '#e2e8f0');
+                    txt(ctx, cfg.p2.name,           rx0, cy + nr*3.4, fsB, '#0f1620');
                     txt(ctx, fmt(cfg.p2.mass) + ' u', rx0, cy + nr*5.1, fs, '#64748b');
                     // "+" tecken
                     txt(ctx, '+', cx, cy, `bold ${Math.max(20, W*0.044)|0}px Poppins`, '#475569');
@@ -495,9 +496,9 @@
                         const fa = 1 - t * 0.85;
                         drawCluster(ctx, lx, cy, nr, lay1);
                         drawCluster(ctx, rx, cy, nr, lay2);
-                        txt(ctx, cfg.p1.name,             lx, cy + nr*3.4, fsB, '#e2e8f0', fa);
+                        txt(ctx, cfg.p1.name,             lx, cy + nr*3.4, fsB, '#0f1620', fa);
                         txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  '#64748b', fa);
-                        txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#e2e8f0', fa);
+                        txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#0f1620', fa);
                         txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  '#64748b', fa);
                         // Visa total massa hela tiden
                         drawMassBox(sumMass, 1, false);
@@ -518,7 +519,7 @@
                         drawCluster(ctx, cx, cy, nr, layProd, rte * 12);
 
                         txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
-                            cx, cy + nr*3.4, fsB, '#e2e8f0', rte);
+                            cx, cy + nr*3.4, fsB, '#0f1620', rte);
 
                         // Energifotonen skjuts ut från kärnan snett uppåt höger
                         const px = cx + W*0.18 * rte;
@@ -556,7 +557,7 @@
                 if (ph === 'idle') {
                     drawCluster(ctx, cx, cy, nr, layProd);
                     txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
-                        cx, cy + nr*3.4, fsB, '#e2e8f0');
+                        cx, cy + nr*3.4, fsB, '#0f1620');
                     txt(ctx, fmt(cfg.prod.mass) + ' u',
                         cx, cy + nr*5.1, fs, '#64748b');
                     // Massruta visar bundna kärnans massa
@@ -580,7 +581,7 @@
                         drawCluster(ctx, cx, cy, nr, layProd, et * 28);
                         drawEnergyPhoton(ctx, px, py, nr*0.88, 1, null);
                         txt(ctx, cfg.prod.name + ' (' + cfg.prod.sym + ')',
-                            cx, cy + nr*3.4, fsB, '#e2e8f0', 1 - et*0.5);
+                            cx, cy + nr*3.4, fsB, '#0f1620', 1 - et*0.5);
                         // Massruta visar bundna massan
                         drawMassBox(cfg.prod.mass, 1, false);
                         txt(ctx, 'Tillförd energi: ' + fmt(cfg.Eb, 2) + ' MeV',
@@ -602,9 +603,9 @@
                         const rx  = cx + W*0.26*ste;
                         drawCluster(ctx, lx, cy, nr, lay1);
                         drawCluster(ctx, rx, cy, nr, lay2);
-                        txt(ctx, cfg.p1.name,             lx, cy + nr*3.4, fsB, '#e2e8f0', ste);
+                        txt(ctx, cfg.p1.name,             lx, cy + nr*3.4, fsB, '#0f1620', ste);
                         txt(ctx, fmt(cfg.p1.mass) + ' u', lx, cy + nr*5.1, fs,  '#64748b', ste);
-                        txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#e2e8f0', ste);
+                        txt(ctx, cfg.p2.name,             rx, cy + nr*3.4, fsB, '#0f1620', ste);
                         txt(ctx, fmt(cfg.p2.mass) + ' u', rx, cy + nr*5.1, fs,  '#64748b', ste);
 
                         // Massa-rasslet uppåt: från produktmassa till summa

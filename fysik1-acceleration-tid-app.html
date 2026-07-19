@@ -50,6 +50,10 @@
 
         /* ── Scen-wrapper + fullskärm (grafen) ── */
         .scene-wrap { aspect-ratio: 7 / 5; user-select: none; }
+        /* Mobil: skjut ned scen-svg:n så fullskärmsknappen inte täcker vägremsan */
+        @media (max-width: 600px) {
+            .scene-wrap:not(:fullscreen) { padding-top: 48px; }
+        }
         /* Bara den DIREKTA scen-svg:n ska fylla wrappern (inte ikon-svg:n i .fs-btn). */
         .scene-wrap > svg { display: block; width: 100%; height: 100%; }
 
@@ -714,7 +718,7 @@
                                     {/* Status display */}
                                     <div className="mt-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
                                         <h3 className="font-bold text-lg mb-2 text-blue-900">📊 Resultat över intervallet <em>t</em> = {fmt(areaStart)} s till {fmt(areaEnd)} s:</h3>
-                                        <div className="grid grid-cols-2 gap-4">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                                             <div>
                                                 <span className="text-gray-600">Hastighetsändring:</span>
                                                 <span className="ml-2 font-bold text-xl text-blue-600">Δ<em>v</em> = {fmt(deltaV)} m/s</span>

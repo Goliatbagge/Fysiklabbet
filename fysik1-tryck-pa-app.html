@@ -76,6 +76,13 @@
         </section>
 
         <div class="simulation-container">
+            <style>
+                /* Mobil: inre sidan staplas och blir högre — annars klipps
+                   resultatrutan ("Isen håller") vid iframens nederkant */
+                @media (max-width: 600px) {
+                    .simulation-container iframe { height: 1560px !important; }
+                }
+            </style>
             <iframe
                 src="fysik1-tryck-pa/standalone.html"
                 style="width: 100%; height: 1000px; border: none; border-radius: 12px;"

@@ -73,6 +73,11 @@
             cursor: pointer;
             box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
         }
+        /* Mobil: stapla omloppsvyn över "Vy från jorden"-panelen */
+        @media (max-width: 600px) {
+            .sim-row { flex-direction: column; }
+            .sim-row .sim-side { width: 100% !important; }
+        }
     </style>
 </head>
 <body class="lab-sim">
@@ -1310,7 +1315,7 @@
                     </div>
 
                     {/* Main simulation + right control panel */}
-                    <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', alignItems: 'flex-start' }}>
+                    <div className="sim-row" style={{ display: 'flex', gap: '16px', marginBottom: '16px', alignItems: 'flex-start' }}>
                         <div
                             ref={simContainerRef}
                             className="glass-card p-3"
@@ -1439,10 +1444,10 @@
                             )}
                         </div>
 
-                        <div className="glass-card p-4" style={{ width: '280px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                        <div className="glass-card p-4 sim-side" style={{ width: '280px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '14px' }}>
                             {/* Vy från jorden */}
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.9rem', fontWeight: 600, marginBottom: '8px' }}>
+                                <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-soft)', fontSize: '0.9rem', fontWeight: 600, marginBottom: '8px' }}>
                                     Vy från jorden
                                 </p>
                                 <div style={{ width: '180px', aspectRatio: '1', position: 'relative' }}>
@@ -1450,7 +1455,7 @@
                                 </div>
                                 <p style={{
                                     fontFamily: 'Poppins, sans-serif',
-                                    color: '#38bdf8',
+                                    color: 'var(--lab-accent-2)',
                                     fontSize: '1.05rem',
                                     fontWeight: 700,
                                     marginTop: '10px',
@@ -1460,7 +1465,7 @@
                                 </p>
                                 <p style={{
                                     fontFamily: 'Poppins, sans-serif',
-                                    color: '#94a3b8',
+                                    color: 'var(--lab-ink-soft)',
                                     fontSize: '0.75rem',
                                     textAlign: 'center',
                                     marginTop: '4px',
@@ -1473,8 +1478,8 @@
                             {/* Hastighet */}
                             <div style={{ borderTop: '1px solid rgba(100, 116, 139, 0.15)', paddingTop: '12px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.8rem' }}>Hastighet</span>
-                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '0.8rem', fontWeight: 600 }}>{speed.toFixed(1).replace('.', ',')}×</span>
+                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-soft)', fontSize: '0.8rem' }}>Hastighet</span>
+                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink)', fontSize: '0.8rem', fontWeight: 600 }}>{speed.toFixed(1).replace('.', ',')}×</span>
                                 </div>
                                 <input
                                     type="range"
@@ -1490,8 +1495,8 @@
                             {/* Månens position */}
                             <div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.8rem' }}>Månens position</span>
-                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '0.8rem', fontWeight: 600 }}>{Math.round(((angleDeg % 360) + 360) % 360)}°</span>
+                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-soft)', fontSize: '0.8rem' }}>Månens position</span>
+                                    <span style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink)', fontSize: '0.8rem', fontWeight: 600 }}>{Math.round(((angleDeg % 360) + 360) % 360)}°</span>
                                 </div>
                                 <input
                                     type="range"
@@ -1506,7 +1511,7 @@
 
                             {/* Hoppa till fas */}
                             <div>
-                                <p style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.8rem', marginBottom: '6px' }}>
+                                <p style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-soft)', fontSize: '0.8rem', marginBottom: '6px' }}>
                                     Hoppa till fas
                                 </p>
                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px', width: '100%' }}>
@@ -1519,7 +1524,7 @@
                                                 padding: '5px 6px',
                                                 fontSize: '0.7rem',
                                                 background: currentPhase.name === p.name ? 'rgba(56, 189, 248, 0.15)' : 'rgba(100, 116, 139, 0.08)',
-                                                color: currentPhase.name === p.name ? '#38bdf8' : '#94a3b8',
+                                                color: currentPhase.name === p.name ? 'var(--lab-accent-2)' : 'var(--lab-ink-soft)',
                                                 border: `1px solid ${currentPhase.name === p.name ? 'rgba(56, 189, 248, 0.3)' : 'rgba(100, 116, 139, 0.15)'}`,
                                             }}
                                         >
@@ -1533,22 +1538,22 @@
 
                     {/* Explanation */}
                     <div className="glass-card p-6" style={{ marginTop: '16px' }}>
-                        <h3 style={{ fontFamily: 'Poppins, sans-serif', color: '#f1f5f9', fontSize: '1.2rem', fontWeight: 600, marginBottom: '12px' }}>
+                        <h3 style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink)', fontSize: '1.2rem', fontWeight: 600, marginBottom: '12px' }}>
                             Hur uppstår månens faser?
                         </h3>
-                        <div style={{ fontFamily: 'Poppins, sans-serif', color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                        <div style={{ fontFamily: 'Poppins, sans-serif', color: 'var(--lab-ink-soft)', fontSize: '0.95rem', lineHeight: 1.7 }}>
                             <p style={{ marginBottom: '10px' }}>
-                                Månen kretsar runt jorden med en period på cirka <strong style={{ color: '#e2e8f0' }}>29,5 dygn</strong> (en synodisk månad).
+                                Månen kretsar runt jorden med en period på cirka <strong style={{ color: 'var(--lab-accent-2)' }}>29,5 dygn</strong> (en synodisk månad).
                                 Eftersom månen inte har eget ljus ser vi bara den del som belyses av solen.
                             </p>
                             <p style={{ marginBottom: '10px' }}>
-                                Vid <strong style={{ color: '#e2e8f0' }}>nymåne</strong> befinner sig månen mellan jorden och solen, och den belysta sidan är vänd
-                                bort från oss. Vid <strong style={{ color: '#e2e8f0' }}>fullmåne</strong> är jorden mellan solen och månen, och hela den synliga sidan
+                                Vid <strong style={{ color: 'var(--lab-accent-2)' }}>nymåne</strong> befinner sig månen mellan jorden och solen, och den belysta sidan är vänd
+                                bort från oss. Vid <strong style={{ color: 'var(--lab-accent-2)' }}>fullmåne</strong> är jorden mellan solen och månen, och hela den synliga sidan
                                 är upplyst.
                             </p>
                             <p>
-                                Under den <strong style={{ color: '#e2e8f0' }}>vaxande</strong> fasen (nymåne till fullmåne) växer den belysta delen från höger.
-                                Under den <strong style={{ color: '#e2e8f0' }}>avtagande</strong> fasen (fullmåne till nymåne) minskar ljuset från höger.
+                                Under den <strong style={{ color: 'var(--lab-accent-2)' }}>vaxande</strong> fasen (nymåne till fullmåne) växer den belysta delen från höger.
+                                Under den <strong style={{ color: 'var(--lab-accent-2)' }}>avtagande</strong> fasen (fullmåne till nymåne) minskar ljuset från höger.
                                 Detta gäller sett från norra halvklotet.
                             </p>
                         </div>

@@ -89,6 +89,15 @@
             transform: scale(1.03);
             box-shadow: 0 0 25px rgba(220, 38, 38, 0.5);
         }
+        /* Mobil: stapla huvudscen och sidovy, och låt rubriken radbrytas */
+        @media (max-width: 600px) {
+            h1.glow-text {
+                font-size: 1.55rem !important;
+                overflow-wrap: anywhere;
+            }
+            .ds-row { flex-direction: column !important; }
+            .ds-row .ds-side { width: 100% !important; }
+        }
     </style>
 </head>
 <body class="lab-sim">
@@ -883,7 +892,7 @@
             return (
                 <div>
                     {/* Canvas area + screen view */}
-                    <div className="glass-card p-4 mb-4" style={{ position: 'relative', display: 'flex', gap: '16px', alignItems: 'stretch' }}>
+                    <div className="glass-card p-4 mb-4 ds-row" style={{ position: 'relative', display: 'flex', gap: '16px', alignItems: 'stretch' }}>
                         <div style={{ flex: 1, minWidth: 0, position: 'relative' }}>
                         <canvas ref={canvasRef} className="sim-canvas" style={{ width: '100%', display: 'block' }} />
                         <canvas ref={screenCanvasRef} style={{ display: 'none' }} />
@@ -913,7 +922,7 @@
                         )}
                         </div>
                         {/* Screen front view - always visible */}
-                        <div style={{ width: '180px', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <div className="ds-side" style={{ width: '180px', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <p style={{
                                 fontFamily: 'Poppins, sans-serif',
                                 color: 'var(--lab-ink-muted)',

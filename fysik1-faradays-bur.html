@@ -67,6 +67,44 @@
             border-color: rgba(200, 50, 74, 0.15);
             color: #475569;
         }
+        /* On-scene ruta uppe till höger i fullskärm (papper-stil) */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 250px; max-height: 70vh; overflow-y: auto;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles .st-desc {
+            font-size: 12px; color: var(--lab-ink-soft, #3d4654);
+            line-height: 1.45; margin: 2px 0 0;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input[type="radio"] {
+            width: 14px; height: 14px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
+        }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .btn-mini {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; padding: 7px 10px; font-weight: 600; font-size: 13px;
+            cursor: pointer; transition: all 0.15s ease; font-family: inherit;
+        }
+        .btn-mini:hover:not(:disabled) { border-color: var(--lab-accent, #c8324a); }
+        .btn-mini:disabled { opacity: 0.4; cursor: default; }
     </style>
 </head>
 <body class="lab-sim">
@@ -1037,8 +1075,39 @@
         function App() {
             const [step, setStep] = useState(1);
             const [viewMode, setViewMode] = useState('resultant');
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const sceneWrapRef = useRef(null);
 
             const maxStep = 6;
+
+            // Fullskärm: lyssna på ändringar och rita om canvasen i nya storleken
+            useEffect(() => {
+                const handler = () => {
+                    setIsFullscreen(
+                        document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current
+                    );
+                    setTimeout(() => window.dispatchEvent(new Event('resize')), 60);
+                    setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+                if (isFs) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }
+            };
 
             const handleNext = () => {
                 if (step < maxStep) {
@@ -1110,8 +1179,50 @@
 
                         {/* Canvas */}
                         <div className="glass-card rounded-2xl p-4 mb-6">
-                            <div className="relative w-full" style={{ minHeight: '480px', maxHeight: '560px' }}>
+                            <div className="scene-wrap relative w-full" ref={sceneWrapRef} data-theme="ljusPapper"
+                                 style={{ minHeight: '480px', maxHeight: isFullscreen ? 'none' : '560px', userSelect: 'none' }}>
                                 <FaradayCanvas step={step} viewMode={viewMode} />
+                                <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                        title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                    {isFullscreen ? (
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                                        </svg>
+                                    ) : (
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                        </svg>
+                                    )}
+                                </button>
+                                {/* Fullskärm: stegkontroller uppe till höger */}
+                                {isFullscreen && (
+                                    <div className="scene-toggles">
+                                        <div className="st-title">Steg {step} av {maxStep}</div>
+                                        <div className="st-desc">{STEP_DESCRIPTIONS[step - 1]}</div>
+                                        {step === 5 && (
+                                            <React.Fragment>
+                                                <div className="st-title" style={{ marginTop: '7px' }}>Visa</div>
+                                                <label>
+                                                    <input type="radio" name="viewModeFs" value="resultant"
+                                                           checked={viewMode === 'resultant'}
+                                                           onChange={() => setViewMode('resultant')} />
+                                                    <span>Visa resulterande fält</span>
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="viewModeFs" value="separate"
+                                                           checked={viewMode === 'separate'}
+                                                           onChange={() => setViewMode('separate')} />
+                                                    <span>Visa separata fält</span>
+                                                </label>
+                                            </React.Fragment>
+                                        )}
+                                        <div className="st-actions">
+                                            <button className="btn-mini" onClick={handleNext} disabled={step >= maxStep}>Nästa steg →</button>
+                                            <button className="btn-mini" onClick={handlePrev} disabled={step <= 1}>← Föregående steg</button>
+                                            <button className="btn-mini" onClick={handleReset}>Börja om</button>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
 

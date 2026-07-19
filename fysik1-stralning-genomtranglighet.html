@@ -166,6 +166,54 @@
             border-color: rgba(200, 50, 74, 0.4);
             color: #38bdf8;
         }
+        /* On-scene-ruta uppe till höger: visningsval (+ källa/hinder i fullskärm) */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 6;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 240px;
+        }
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+            font-family: 'Poppins', sans-serif;
+        }
+        .scene-toggles input { width: 14px; height: 14px; accent-color: var(--lab-accent, #c8324a); flex-shrink: 0; }
+        .scene-toggles .st-actions {
+            display: flex; flex-direction: column; gap: 7px; margin-top: 9px;
+            padding-top: 9px; border-top: 1px solid var(--lab-line, rgba(15,22,32,0.14));
+        }
+        .scene-toggles .st-actions .btn-toggle { width: 100%; font-size: 13px; padding: 7px 10px; }
+        .btn-toggle {
+            background: var(--lab-bg, #f3eee4); color: var(--lab-ink, #0f1620);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 8px; font-weight: 600; cursor: pointer;
+            font-family: 'Poppins', sans-serif; transition: all 0.15s ease;
+        }
+        .btn-toggle:hover { border-color: var(--lab-accent, #c8324a); }
+        /* Fullskärm: aktivitetsglidare + GM-avläsning uppe till vänster */
+        .fs-sliders {
+            position: absolute; top: 64px; left: 14px; z-index: 6;
+            width: 250px; max-width: 44vw; max-height: 60vh; overflow-y: auto;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 11px 13px; color: var(--lab-ink, #0f1620);
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            font-family: 'Poppins', sans-serif;
+        }
+        .fs-sliders .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
         /* Mobil: stapla scen + GM-räknare över kontrollpanelen */
         @media (max-width: 600px) {
             .str-layout { flex-direction: column; }
@@ -604,6 +652,34 @@
             const [elapsed,      setElapsed]       = useState(0);
             const [showParticles, setShowParticles] = useState(true);
             const [activity, setActivity] = useState(80);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const sceneWrapRef = useRef(null);
+
+            useEffect(() => {
+                const handler = () => {
+                    setIsFullscreen(
+                        document.fullscreenElement === sceneWrapRef.current ||
+                        document.webkitFullscreenElement === sceneWrapRef.current
+                    );
+                };
+                document.addEventListener('fullscreenchange', handler);
+                document.addEventListener('webkitfullscreenchange', handler);
+                return () => {
+                    document.removeEventListener('fullscreenchange', handler);
+                    document.removeEventListener('webkitfullscreenchange', handler);
+                };
+            }, []);
+
+            const toggleFullscreen = () => {
+                const el = sceneWrapRef.current;
+                if (!el) return;
+                const isFs = document.fullscreenElement || document.webkitFullscreenElement;
+                if (isFs) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+                }
+            };
 
             // Synkronisera state-ref med React-state
             useEffect(() => { stateRef.current.source  = source;  }, [source]);
@@ -622,12 +698,18 @@
 
                 function resize() {
                     const parent = canvas.parentElement;
+                    const isFs = document.fullscreenElement === parent ||
+                                 document.webkitFullscreenElement === parent;
                     canvas.width  = parent.clientWidth;
-                    canvas.height = Math.round(parent.clientWidth * 0.42);
+                    // Fullskärm: fyll hela skärmhöjden i stället för 0,42 × bredden
+                    canvas.height = isFs ? parent.clientHeight
+                                         : Math.round(parent.clientWidth * 0.42);
                 }
                 resize();
                 const ro = new ResizeObserver(resize);
                 ro.observe(canvas.parentElement);
+                document.addEventListener('fullscreenchange', resize);
+                document.addEventListener('webkitfullscreenchange', resize);
 
                 let lastFrame = performance.now();
 
@@ -767,6 +849,8 @@
                 return () => {
                     cancelAnimationFrame(st.animId);
                     ro.disconnect();
+                    document.removeEventListener('fullscreenchange', resize);
+                    document.removeEventListener('webkitfullscreenchange', resize);
                 };
             }, []);
 
@@ -978,43 +1062,96 @@
                         <div className="str-layout" style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', alignItems: 'flex-start' }}>
                             {/* Canvas-kort + GM-räknare */}
                             <div style={{ flex: '1 1 0', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <div className="glass-card rounded-2xl p-4" style={{ position: 'relative' }}>
-                                <button
-                                    onClick={toggleSound}
-                                    title={soundOn ? 'Stäng av ljud' : 'Sätt på ljud'}
-                                    style={{
-                                        position: 'absolute', top: '0.75rem', right: '0.75rem', zIndex: 10,
-                                        background: soundOn ? 'rgba(200, 50, 74, 0.15)' : 'rgba(30,41,59,0.7)',
-                                        border: soundOn ? '1px solid rgba(200, 50, 74, 0.4)' : '1px solid rgba(15, 22, 32, 0.35)',
-                                        borderRadius: '0.5rem', padding: '0.4rem 0.5rem',
-                                        cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1,
-                                        color: soundOn ? '#0f1620' : '#64748b',
-                                        transition: 'all 0.2s ease',
-                                    }}
-                                >
-                                    {soundOn ? '🔊' : '🔇'}
-                                </button>
-                                <label
-                                    style={{
-                                        position: 'absolute', top: '0.75rem', left: '0.75rem', zIndex: 10,
-                                        display: 'flex', alignItems: 'center', gap: '0.4rem',
-                                        background: 'rgba(30,41,59,0.8)',
-                                        border: '1px solid rgba(15, 22, 32, 0.35)',
-                                        borderRadius: '0.5rem', padding: '0.35rem 0.6rem',
-                                        cursor: 'pointer', fontSize: '0.8rem',
-                                        color: 'var(--lab-ink-muted)', userSelect: 'none',
-                                    }}
-                                >
-                                    <input
-                                        type="checkbox"
-                                        checked={showParticles}
-                                        onChange={() => setShowParticles(v => !v)}
-                                        style={{ accentColor: '#38bdf8', cursor: 'pointer' }}
-                                    />
-                                    Visa partiklar
-                                </label>
-                                <div style={{ width: '100%' }}>
+                            <div className="glass-card rounded-2xl p-4">
+                                <div className="scene-wrap" data-theme="ljusPapper" ref={sceneWrapRef}
+                                     style={{ width: '100%', userSelect: 'none', boxShadow: 'none' }}>
                                     <canvas ref={canvasRef} style={{ width: '100%' }} />
+                                    <button className="fs-btn" onClick={toggleFullscreen} aria-label="Fullskärm"
+                                            title={isFullscreen ? 'Lämna fullskärm' : 'Fullskärm'}>
+                                        {isFullscreen ? (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                                            </svg>
+                                        ) : (
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                                            </svg>
+                                        )}
+                                    </button>
+                                    <div className="scene-toggles">
+                                        <div className="st-title">Visning</div>
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                checked={showParticles}
+                                                onChange={() => setShowParticles(v => !v)}
+                                            />
+                                            <span>Visa partiklar</span>
+                                        </label>
+                                        <label>
+                                            <input
+                                                type="checkbox"
+                                                checked={soundOn}
+                                                onChange={toggleSound}
+                                            />
+                                            <span>Ljud</span>
+                                        </label>
+                                        {isFullscreen && (
+                                            <React.Fragment>
+                                                <div className="st-title" style={{ marginTop: 8 }}>Strålkälla</div>
+                                                {Object.entries(sourceLabels).map(([key, label]) => (
+                                                    <label key={key}>
+                                                        <input type="radio" name="fsSource" checked={source === key}
+                                                               onChange={() => handleSource(key)} />
+                                                        <span>{label}</span>
+                                                    </label>
+                                                ))}
+                                                <div className="st-title" style={{ marginTop: 8 }}>Hinder</div>
+                                                {Object.entries(barrierLabels).map(([key, label]) => (
+                                                    <label key={key}>
+                                                        <input type="radio" name="fsBarrier" checked={barrier === key}
+                                                               onChange={() => handleBarrier(key)} />
+                                                        <span>{label}</span>
+                                                    </label>
+                                                ))}
+                                                <div className="st-actions">
+                                                    <button className="btn-toggle" onClick={resetCounter}>Nollställ räknaren</button>
+                                                </div>
+                                            </React.Fragment>
+                                        )}
+                                    </div>
+                                    {isFullscreen && (
+                                        <div className="fs-sliders">
+                                            <div className="st-title">Aktivitet</div>
+                                            <input
+                                                type="range"
+                                                min="5"
+                                                max="300"
+                                                step="5"
+                                                value={activity}
+                                                onChange={(e) => setActivity(parseInt(e.target.value))}
+                                                style={{ width: '100%', cursor: 'pointer', accentColor: 'var(--lab-accent, #c8324a)' }}
+                                            />
+                                            <div style={{ fontSize: '0.8rem', textAlign: 'center', marginBottom: 6 }}>
+                                                {activity} Bq
+                                            </div>
+                                            <div className="st-title">GM-räknare</div>
+                                            <div style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <span>Registreringar</span>
+                                                    <span style={{ fontWeight: 600 }}>{String(totalCounts).padStart(5, '0')}</span>
+                                                </div>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <span>Räkningar/min</span>
+                                                    <span style={{ fontWeight: 600 }}>{String(cpm).padStart(4, '0')}</span>
+                                                </div>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <span>Tid</span>
+                                                    <span style={{ fontWeight: 600 }}>{elapsed} s</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 

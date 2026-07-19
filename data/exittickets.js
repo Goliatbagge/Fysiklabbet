@@ -1,7 +1,7 @@
 // Exit tickets — kort förhör per avsnitt. Struktur:
 //   window.EXITTICKETS[id] = [{ question, choices, correct, why }, ...]
 //
-// id är samma som teori-id ('fy1-2.3', 'fy2-4.1' …).
+// id är samma som teori-id ('fy1-2.4', 'fy2-4.1' …).
 //
 // Fält per fråga:
 //   question — frågetext (markdown + KaTeX, dubbla backslash i JS-strängar)
@@ -185,7 +185,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-1.3': [
+'fy1-2.1': [
   {
     question: 'Vilken formel gäller för medelfart?',
     choices: [
@@ -268,7 +268,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-1.4': [
+'fy1-5.1': [
   {
     question: 'Vilken formel gäller för densitet?',
     choices: [
@@ -443,7 +443,7 @@ window.EXITTICKETS = {
 
 // ── 02-fy1-ch2.js ─────────────────────────────────────────────
 
-'fy1-2.1': [
+'fy1-2.2': [
   {
     question: 'En cyklist kör 6,0 m rakt österut och sedan 8,0 m rakt norrut. Vad blir cyklistens sträcka respektive förflyttning?',
     choices: [
@@ -511,7 +511,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-2.2': [
+'fy1-2.3': [
   {
     question: 'I ett s-t-diagram markeras en sekant genom två punkter på grafen. Vad motsvarar sekantens lutning?',
     choices: ['Medelhastigheten', 'Momentanhastigheten', 'Accelerationen', 'Sträckan'],
@@ -569,7 +569,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-2.3': [
+'fy1-2.4': [
   {
     question: 'Vilken SI-enhet har acceleration, och vilken sorts storhet är det?',
     choices: ['m/s, skalär', 'm, vektor', 'm/s², vektor', 'm/s², skalär'],
@@ -643,7 +643,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-2.4': [
+'fy1-2.5': [
   {
     question: 'Vad kallas ett diagram med hastighet på y-axeln och tid på x-axeln?',
     choices: ['s-t-diagram', 'v-t-diagram', 'a-t-diagram', 'F-s-diagram'],
@@ -706,7 +706,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-2.5': [
+'fy1-2.6': [
   {
     question: 'Vad kallas ett diagram med acceleration på y-axeln och tid på x-axeln?',
     choices: ['v-t-diagram', 's-t-diagram', 'a-t-diagram', 'F-t-diagram'],
@@ -753,7 +753,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-2.6': [
+'fy1-2.7': [
   {
     question: 'Vilken formel gäller för hastigheten hos ett föremål vid konstant acceleration?',
     choices: ['$v = v_0 \\cdot a \\cdot t$', '$v = a \\cdot t^2$', '$v = v_0 + a \\cdot t$', '$v = v_0 - a \\cdot t$'],
@@ -822,7 +822,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-2.7': [
+'fy1-2.8': [
   {
     question: 'Varför behöver man ibland ställa upp ett ekvationssystem med två ekvationer i rörelseproblem?',
     choices: [
@@ -889,7 +889,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-2.8': [
+'fy1-2.9': [
   {
     question: 'Vilken är Torricellis ekvation?',
     choices: ['$v^2 - v_0^2 = 2as$', '$v - v_0 = 2as$', '$v^2 + v_0^2 = 2as$', '$v^2 - v_0^2 = as$'],
@@ -2624,7 +2624,7 @@ window.EXITTICKETS = {
 
 // ── 07-fy1-ch5.js ─────────────────────────────────────────────
 
-'fy1-5.1': [
+'fy1-5.2': [
   {
     question: 'Vad är skillnaden mellan tryckkraft och tryck?',
     choices: [
@@ -2697,7 +2697,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-5.2': [
+'fy1-5.3': [
   {
     question: 'Vilken formel gäller för vätsketrycket på djupet h i en vätska med densiteten ρ?',
     choices: ['$p = \\frac{\\rho \\cdot g}{h}$', '$p = \\rho + g + h$', '$p = \\frac{F}{\\rho}$', '$p = \\rho \\cdot g \\cdot h$'],
@@ -2755,7 +2755,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-5.3': [
+'fy1-5.4': [
   {
     question: 'Vad kallas det sammanlagda trycket av lufttryck och vätsketryck på ett visst djup i en vätska?',
     choices: ['Skillnadstryck.', 'Övertryck.', 'Atmosfärstryck.', 'Totalt tryck.'],
@@ -2839,7 +2839,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-5.4': [
+'fy1-5.5': [
   {
     question: 'Vad säger Arkimedes princip?',
     choices: [
@@ -2918,7 +2918,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-5.5': [
+'fy1-5.6': [
   {
     question: 'Gäller Arkimedes princip bara för vätskor, eller även för gaser?',
     choices: ['Endast för vätskor.', 'Endast för gaser.', 'Varken för vätskor eller gaser — bara för fasta ämnen.', 'För både vätskor och gaser.'],
@@ -2981,7 +2981,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-5.6': [
+'fy1-5.7': [
   {
     question: 'Vilket samband är ideala gaslagen för ett bestämt antal gasmolekyler?',
     choices: [
@@ -3065,7 +3065,7 @@ window.EXITTICKETS = {
   },
 ],
 
-'fy1-5.7': [
+'fy1-5.8': [
   {
     question: 'Vad säger Pascals princip om en tryckökning i en innesluten vätska?',
     choices: [

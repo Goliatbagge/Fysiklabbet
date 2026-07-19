@@ -1,298 +1,303 @@
 {
- "id": "fy1-2.4",
+ "id": "fy1-2.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "7ce8199dc3db72a687c6316c0d9c3642f450c821",
- "dur": 404.04,
+ "hash": "8d8b5085e1c7931f947c3b8de2ad2bceeb5b2710",
+ "dur": 326.12,
  "segments": [
   {
-   "t": "Hastighet-tid-diagram",
-   "s": 0.1,
-   "e": 2.75
-  },
-  {
-   "t": "Ett diagram med hastighet på y-axeln och tid på x-axeln kallas hastighet-tid-diagram eller v-t-diagram.",
-   "s": 2.7,
-   "e": 9.75
-  },
-  {
-   "t": "Vid konstant acceleration blir grafen i ett v-t-diagram en rät linje där linjens lutning motsvarar accelerationen — ju brantare lutning desto större acceleration.",
-   "s": 9.75,
-   "e": 19.7
-  },
-  {
-   "t": "På motsvarande sätt som för medelhastighet och momentanhastighet gäller att medelaccelerationen mellan två tidpunkter motsvaras av sekantens lutning och momentanaccelerationen av tangentens lutning.",
-   "s": 19.7,
-   "e": 31.82
-  },
-  {
-   "t": "Oavsett vilken typ av acceleration vi ska beräkna gäller att den relevanta linjens lutning bestäms av delta y delat med delta x är lika med delta hastigheten v delat med delta tiden t .",
-   "s": 31.82,
-   "e": 43.39
-  },
-  {
    "t": "Acceleration",
-   "s": 43.39,
-   "e": 45.46
+   "s": 0.1,
+   "e": 2.17
   },
   {
-   "t": "accelerationen a är lika med delta hastigheten v delat med delta tiden t som är lika med v två minus v ett delat med t två minus t ett",
-   "s": 45.46,
-   "e": 55.26
+   "t": "En förändring av hastighet kallas acceleration, betecknas a, har SI-enheten m/s i kvadrat och är en vektor.",
+   "s": 2.12,
+   "e": 10.4
+  },
+  {
+   "t": "Något med accelerationen 1 meter per sekund i kvadrat ökar sin hastighet med 1 meter per sekund per sekund.",
+   "s": 10.4,
+   "e": 17.85
+  },
+  {
+   "t": "Accelerationens tecken",
+   "s": 17.85,
+   "e": 20.52
+  },
+  {
+   "t": "Om accelerationen är",
+   "s": 20.52,
+   "e": 23.23
+  },
+  {
+   "t": "positiv ökar hastigheten.",
+   "s": 23.23,
+   "e": 26.24
+  },
+  {
+   "t": "negativ minskar hastigheten.",
+   "s": 26.24,
+   "e": 29.39
+  },
+  {
+   "t": "noll är hastigheten konstant.",
+   "s": 29.39,
+   "e": 32.48
+  },
+  {
+   "t": "En inbromsning är alltså också en acceleration (!) även om ordet i vardagsspråket nästan uteslutande används för en hastighetsökning.",
+   "s": 32.48,
+   "e": 40.65
+  },
+  {
+   "t": "En negativ acceleration, eller inbromsning, kallas också retardation.",
+   "s": 40.65,
+   "e": 46.17
+  },
+  {
+   "t": "Den genomsnittliga accelerationen i ett visst tidsintervall kallas medelacceleration.",
+   "s": 46.17,
+   "e": 52.2
+  },
+  {
+   "t": "Medelacceleration",
+   "s": 52.2,
+   "e": 54.77
+  },
+  {
+   "t": "a massan m är lika med delta hastigheten v delat med delta tiden t som är lika med v två minus v ett delat med t två minus t ett",
+   "s": 54.77,
+   "e": 64.35
   },
   {
    "t": "där",
-   "s": 55.26,
-   "e": 56.74
+   "s": 64.35,
+   "e": 65.83
   },
   {
-   "t": "a är lika med konstant acceleration eller medelacceleration (m/s i kvadrat)",
-   "s": 56.74,
-   "e": 63.42
+   "t": "aₘ är lika med acceleration (m/s i kvadrat)",
+   "s": 65.83,
+   "e": 70.69
   },
   {
    "t": "Δv är lika med hastighetsändring (meter per sekund)",
-   "s": 63.42,
-   "e": 68.0
+   "s": 70.69,
+   "e": 75.28
   },
   {
    "t": "Δt är lika med tidsintervall (sekunder)",
-   "s": 68.0,
-   "e": 71.94
+   "s": 75.28,
+   "e": 79.19
   },
   {
-   "t": "t ett, t två är lika med tidpunkt 1 respektive tidpunkt 2 (sekunder)",
-   "s": 71.94,
-   "e": 78.33
+   "t": "Konstant acceleration beräknas på samma sätt som medelacceleration.",
+   "s": 79.19,
+   "e": 84.38
   },
   {
-   "t": "v ett, v två är lika med hastighet vid tidpunkt 1 respektive vid tidpunkt 2 (meter per sekund)",
-   "s": 78.33,
-   "e": 86.12
+   "t": "Hastighet vid konstant acceleration",
+   "s": 84.38,
+   "e": 87.84
   },
   {
-   "t": "Vi kan även enkelt beräkna förflyttningen utifrån ett v-t-diagram.",
-   "s": 86.12,
-   "e": 91.11
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t",
+   "s": 87.84,
+   "e": 93.53
   },
   {
-   "t": "Arean i ett v-t-diagram",
-   "s": 91.11,
-   "e": 94.21
+   "t": "där",
+   "s": 93.53,
+   "e": 95.04
   },
   {
-   "t": "I ett v-t-diagram motsvarar arean mellan grafen och x-axeln förflyttningen.",
-   "s": 94.21,
-   "e": 100.1
+   "t": "v är lika med hastighet (meter per sekund)",
+   "s": 95.04,
+   "e": 99.12
   },
   {
-   "t": "En area över x-axeln tolkar vi som positiv och en area under x-axeln som negativ.",
-   "s": 100.1,
-   "e": 106.44
+   "t": "v noll är lika med begynnelsehastighet / starthastighet / utgångshastighet (meter per sekund)",
+   "s": 99.12,
+   "e": 107.21
   },
   {
-   "t": "Sträckan beräknas likadant, men då räknas även areor under x-axeln som positiva.",
-   "s": 106.44,
-   "e": 113.04
+   "t": "a är lika med acceleration (m/s i kvadrat)",
+   "s": 107.21,
+   "e": 112.14
   },
   {
-   "t": "Härledning — Arean i ett v-t-diagram",
-   "s": 113.04,
-   "e": 116.69
+   "t": "t är lika med tid (sekunder)",
+   "s": 112.14,
+   "e": 115.44
   },
   {
-   "t": "I \"vanliga\" areor multiplicerar vi sträckor med varandra — och enheter!",
-   "s": 116.69,
-   "e": 121.97
+   "t": "OBS — Inte v är lika med s/t vid accelererad rörelse",
+   "s": 115.44,
+   "e": 120.74
   },
   {
-   "t": "Till exempel",
-   "s": 121.97,
-   "e": 124.08
+   "t": "Vid beräkning av fart/hastighet vid accelererad rörelse kan inte formeln hastigheten v är lika med sträckan s delat med tiden t användas!",
+   "s": 120.74,
+   "e": 130.06
   },
   {
-   "t": "10 meter gånger 5 meter är lika med 10 gånger 5 gånger meter gånger meter som är lika med 50 kvadratmeter",
-   "s": 124.08,
-   "e": 131.79
+   "t": "Tyngdacceleration och fritt fall",
+   "s": 130.06,
+   "e": 133.12
   },
   {
-   "t": "I ett v-t-diagram motsvarar arean en multiplikation mellan en hastighet v och en tid Δt.",
-   "s": 131.79,
-   "e": 138.64
+   "t": "När ett objekt faller utan luftmotstånd, det vill säga endast påverkas av tyngdkraften (eller gravitationskraften), befinner det sig i fritt fall med en viss acceleration.",
+   "s": 133.12,
+   "e": 143.25
   },
   {
-   "t": "Men sedan tidigare har vi visat att Δs är lika med v gånger Δt, det vill säga arean motsvarar förflyttningen!",
-   "s": 138.64,
-   "e": 146.19
+   "t": "Denna acceleration kallas tyngdacceleration och betecknas g.",
+   "s": 143.25,
+   "e": 154.03
   },
   {
-   "t": "Förflyttningen får samma enhet som hastigheten har i sig — förutsatt att tidsenheten är densamma som i hastigheten.",
-   "s": 146.19,
-   "e": 153.54
+   "t": "Tyngdaccelerationen vid jordens yta är i stort sett konstant: ca 9,8 meter per sekund i kvadrat.",
+   "s": 143.25,
+   "e": 154.03
   },
   {
-   "t": "Om vi exempelvis har enheterna m/s och s på axlarna kommer förflyttningen få enheten m.",
-   "s": 153.54,
-   "e": 162.01
+   "t": "Tyngdaccelerationen är större ju närmare jordens centrum man befinner sig.",
+   "s": 154.03,
+   "e": 159.07
   },
   {
-   "t": "Exempel 1 — Bilen på parkeringen",
-   "s": 153.54,
-   "e": 162.01
+   "t": "Eftersom jordklotet är aningen tillplattat vid polerna är vi lite närmare jordens centrum om vi befinner oss på nord- eller sydpolen jämfört med om vi är vid ekvatorn.",
+   "s": 159.07,
+   "e": 168.55
   },
   {
-   "t": "En bil rullar in på en parkeringsplats enligt nedanstående graf.",
-   "s": 162.01,
-   "e": 166.74
+   "t": "Jordens tillplattning",
+   "s": 168.55,
+   "e": 171.11
   },
   {
-   "t": "a) Hur fort kör bilen vid tidpunkten 9 sekunder?",
-   "s": 166.74,
-   "e": 171.25
+   "t": "Vi roterar en \"metallglob\" och ser att den blir tillplattad vid polerna.",
+   "s": 171.11,
+   "e": 175.89
   },
   {
-   "t": "b) Vad är accelerationen vid tidpunkten 7 sekunder?",
-   "s": 171.25,
-   "e": 175.82
+   "t": "Det är samma slags krafter som gör att jorden blir tillplattad vid sin rotation.",
+   "s": 175.89,
+   "e": 180.86
   },
   {
-   "t": "c) Hur långt har bilen kört från att den rullar in på parkeringen tills den har parkerat?",
-   "s": 175.82,
-   "e": 181.84
+   "t": "Vi kommer att prata mer om krafter vid cirkulära rörelser i Fysik nivå 2.",
+   "s": 180.86,
+   "e": 186.21
   },
   {
-   "t": "a) Avläsning vid t är lika med 9 sekunder ger v är lika med 11 meter per sekund.",
-   "s": 181.84,
-   "e": 188.44
+   "t": "Tyngdaccelerationen i uppgifter",
+   "s": 186.21,
+   "e": 189.45
   },
   {
-   "t": "Svar: 11 meter per sekund",
-   "s": 188.44,
-   "e": 191.82
+   "t": "När vi räknar på fysikuppgifter förutsätter vi att vi befinner oss i Sverige, om inte annat anges, och räknar med tyngdaccelerationen g är lika med 9,82 meter per sekund i kvadrat.",
+   "s": 189.45,
+   "e": 201.19
   },
   {
-   "t": "b) Eftersom linjen är rät vid t är lika med 7 har vi en konstant acceleration.",
-   "s": 191.82,
-   "e": 198.01
+   "t": "Tyngdaccelerationen är alltid riktad mot jordens centrum.",
+   "s": 201.19,
+   "e": 205.65
   },
   {
-   "t": "Vi väljer två punkter på denna räta linje, till exempel (5, 16) och (13, 6).",
-   "s": 198.01,
-   "e": 205.94
+   "t": "Vid fritt fall faller alla objekt lika fort oavsett form eller massa.",
+   "s": 205.65,
+   "e": 210.61
   },
   {
-   "t": "Insättning i accelerationen a är lika med v två minus v ett delat med t två minus t ett ger",
-   "s": 205.94,
-   "e": 213.8
+   "t": "Här på jorden finns luftmotstånd, vilket hindrar fritt fall (en fjäder faller inte lika fort till marken som en hammare).",
+   "s": 210.61,
+   "e": 218.39
   },
   {
-   "t": "accelerationen a är lika med 6 minus 16 delat med 13 minus 5 som är lika med minus 10 delat med 8 som är lika med minus 1,25 meter per sekund i kvadrat parentesen minustecknet betyder att bilen bromsar in slut parentes",
-   "s": 213.8,
-   "e": 228.71
+   "t": "Men för små föremål och/eller korta tider kan formlerna för fritt fall användas även på jorden.",
+   "s": 218.39,
+   "e": 225.24
   },
   {
-   "t": "Svar: −1,25 meter per sekund i kvadrat",
-   "s": 228.71,
-   "e": 233.4
+   "t": "Fritt fall i vakuumrör",
+   "s": 225.24,
+   "e": 227.94
   },
   {
-   "t": "c) Förflyttningen motsvaras av arean under grafen.",
-   "s": 233.4,
-   "e": 238.32
+   "t": "Vi placerar en fjäder och en metallbricka i ett glasrör.",
+   "s": 227.94,
+   "e": 232.5
   },
   {
-   "t": "Vi delar in arean under grafen i fyra delar — A (rektangel under den platta delen), B (rektangel under den nedre platta delen), C (triangel där hastigheten sjunker från 16 till 6) och D (triangel där hastigheten sjunker från 6 till 0):",
-   "s": 238.32,
-   "e": 258.71
+   "t": "När vi vänder på glasröret faller metallbrickan fortare än fjädern.",
+   "s": 232.5,
+   "e": 237.47
   },
   {
-   "t": "sträckan s är lika med arean A plus B plus C plus D",
-   "s": 238.32,
-   "e": 258.71
+   "t": "Vi pumpar ut luften ur röret och bildar vakuum.",
+   "s": 237.47,
+   "e": 241.57
   },
   {
-   "t": "Rektanglarnas areor är basen multiplicerat med höjden och trianglarnas areor är basen multiplicerat med höjden dividerat med 2.",
-   "s": 258.71,
-   "e": 267.18
+   "t": "När vi nu vänder glasröret faller fjädern och metallbrickan lika fort.",
+   "s": 241.57,
+   "e": 246.82
   },
   {
-   "t": "arean A är lika med 5 gånger 16 som är lika med 80 meter B som är lika med parentesen 17 minus 5 slut parentes gånger 6 som är lika med 12 gånger 6 som är lika med 72 meter C som är lika med parentesen 13 minus 5 slut parentes gånger parentesen 16 minus 6 slut parentes delat med 2 som är lika med 8 gånger 10 delat med 2 som är lika med 80 delat med 2 meter som är lika med 40 meter D som är lika med parentesen 21 minus 17 slut parentes gånger 6 delat med 2 som är lika med 4 gånger 6 delat med 2 som är lika med 24 delat med 2 meter som är lika med 12 meter",
-   "s": 267.18,
-   "e": 306.55
+   "t": "Utan luftmotstånd faller alltså alla föremål lika fort!",
+   "s": 246.82,
+   "e": 251.51
   },
   {
-   "t": "sträckan s är lika med 80 plus 72 plus 40 plus 12 som är lika med 204 meter",
-   "s": 306.5,
-   "e": 313.55
+   "t": "Exempel 1 — Sten i fritt fall",
+   "s": 251.51,
+   "e": 254.78
   },
   {
-   "t": "Svar: 204 meter",
-   "s": 313.55,
-   "e": 316.96
+   "t": "En sten släpps från vila och faller fritt under 2,0 sekunder.",
+   "s": 254.78,
+   "e": 259.64
   },
   {
-   "t": "Exempel 2 — Förflyttning och tillryggalagd sträcka",
-   "s": 316.96,
-   "e": 321.21
+   "t": "Vilken hastighet har den då?",
+   "s": 259.64,
+   "e": 262.5
   },
   {
-   "t": "Ett föremål rör sig enligt v-t-grafen — en rät linje från (0, 10) ned till (10, −10).",
-   "s": 321.21,
-   "e": 329.44
+   "t": "Vi ställer upp formeln för konstant acceleration och löser ut hastighetsändringen Δv.",
+   "s": 262.5,
+   "e": 275.66
   },
   {
-   "t": "Bestäm under de 10 första sekunderna föremålets a) förflyttning, b) tillryggalagda sträcka.",
-   "s": 329.44,
-   "e": 336.62
+   "t": "accelerationen a är lika med delta hastigheten v delat med delta tiden t vilket är ekvivalent med att delta v är lika med a gånger delta t",
+   "s": 262.5,
+   "e": 275.66
   },
   {
-   "t": "a) För förflyttningen Δs gäller",
-   "s": 336.62,
-   "e": 340.19
+   "t": "accelerationen a är lika med tyngdfaktorn g som är lika med minus 9,82 meter per sekund i kvadrat delta tiden t som är lika med 2,0 sekund",
+   "s": 275.66,
+   "e": 285.81
   },
   {
-   "t": "delta sträckan s är lika med A ett plus A två",
-   "s": 340.19,
-   "e": 344.66
+   "t": "delta hastigheten v är lika med parentesen minus 9,82 slut parentes gånger 2,0 som är lika med minus 19,64 meter per sekund",
+   "s": 285.81,
+   "e": 296.45
   },
   {
-   "t": "Observera att A ett ligger ovanför x-axeln (positiv förflyttning) och A två under x-axeln (negativ förflyttning).",
-   "s": 344.66,
-   "e": 352.9
+   "t": "Eftersom stenen släpps från vila (v är lika med 0) och den minskar sin hastighet med 19,64 meter per sekund blir den slutgiltiga hastigheten",
+   "s": 296.45,
+   "e": 308.17
   },
   {
-   "t": "A ett är lika med basen gånger höjden delat med 2 som är lika med 5 gånger 10 delat med 2 som är lika med 25 meter A två som är lika med minus basen gånger höjden delat med 2 som är lika med minus 5 gånger 10 delat med 2 som är lika med minus 25 meter",
-   "s": 352.9,
-   "e": 368.24
+   "t": "0 plus parentesen minus 19,64 slut parentes meter per sekund är lika med minus 19,64 meter per sekund som är ungefär lika med minus 20 meter per sekund",
+   "s": 308.12,
+   "e": 320.06
   },
   {
-   "t": "delta sträckan s är lika med 25 plus parentesen minus 25 slut parentes som är lika med 0",
-   "s": 368.24,
-   "e": 375.76
-  },
-  {
-   "t": "Förflyttningen är alltså 0 (föremålet slutar på samma position som det startade).",
-   "s": 375.76,
-   "e": 381.8
-  },
-  {
-   "t": "Svar: Förflyttningen är 0.",
-   "s": 381.8,
-   "e": 385.0
-  },
-  {
-   "t": "b) Den tillryggalagda sträckan s motsvarar den sammanlagda arean (oavsett om den ligger ovanför eller under x-axeln).",
-   "s": 385.0,
-   "e": 393.74
-  },
-  {
-   "t": "sträckan s är lika med | A ett | plus | A två | som är lika med 25 plus 25 som är lika med 50 meter",
-   "s": 393.74,
-   "e": 401.16
-  },
-  {
-   "t": "Svar: 50 meter",
-   "s": 401.16,
-   "e": 404.04
+   "t": "Svar: −20 meter per sekund alternativt 20 meter per sekund nedåt.",
+   "s": 320.06,
+   "e": 326.12
   }
  ]
 }

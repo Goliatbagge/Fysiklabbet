@@ -1,303 +1,268 @@
 {
- "id": "fy1-5.3",
+ "id": "fy1-5.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "29f8d8fb1291ff480cfe110f08b3b36dd90cfe95",
- "dur": 327.76,
+ "hash": "fd659ccb07b3bd228ab8ee2340567bc4c270d341",
+ "dur": 294.99,
  "segments": [
   {
-   "t": "Lufttryck och totalt tryck",
+   "t": "Vätsketryck",
    "s": 0.1,
-   "e": 3.05
+   "e": 2.14
   },
   {
-   "t": "Det uppochnedvända vattenglaset",
-   "s": 3.0,
-   "e": 6.38
+   "t": "Introduktion — Vätsketryck",
+   "s": 2.09,
+   "e": 4.84
   },
   {
-   "t": "Ett glas fylls till brädden (kanten) med vatten.",
-   "s": 6.38,
-   "e": 10.39
+   "t": "När vi simmar mot botten av en simbassäng känner vi att trycket på öronen ökar.",
+   "s": 4.84,
+   "e": 10.36
   },
   {
-   "t": "En tunn plastskiva läggs på och glaset vänds sedan upp och ned.",
-   "s": 10.39,
-   "e": 15.09
+   "t": "Tryckkraften från vätskans tyngd ovanför blir större ju längre ner vi dyker.",
+   "s": 10.36,
+   "e": 15.69
   },
   {
-   "t": "Plastskivan sitter kvar!",
-   "s": 15.09,
-   "e": 17.65
+   "t": "Och ju större tryckkraften blir desto större blir trycket på våra öron som vi kan uppleva som smärta.",
+   "s": 15.69,
+   "e": 21.71
   },
   {
-   "t": "Lufttrycket som trycker uppåt under plastskivan är alltså större än tyngden nedåt från vattnet inuti glaset.",
-   "s": 17.65,
-   "e": 24.76
+   "t": "Det tryck som orsakas av en vätska kallas vätsketryck eller hydrostatiskt tryck.",
+   "s": 21.71,
+   "e": 27.54
   },
   {
-   "t": "De magdeburgska halvkloten",
-   "s": 24.76,
-   "e": 27.85
+   "t": "Tryckkraften ökar med djupet på grund av en större tyngd från vätskan ovanifrån.",
+   "s": 27.54,
+   "e": 33.21
   },
   {
-   "t": "Två halvklot sätts ihop och vi pumpar ut luften mellan dem.",
-   "s": 27.85,
-   "e": 32.41
-  },
-  {
-   "t": "När vi försöker dra isär kloten, märker vi att det krävs en väldigt stor kraft.",
-   "s": 32.41,
-   "e": 38.12
-  },
-  {
-   "t": "När luften inuti halvkloten pumpas ut verkar endast lufttryck utifrån.",
-   "s": 38.12,
-   "e": 43.77
-  },
-  {
-   "t": "Detta är så stort att det krävs en mycket stor kraft för att få isär kloten.",
-   "s": 43.77,
-   "e": 49.08
-  },
-  {
-   "t": "Lufttrycket på en gummiplatta",
-   "s": 49.08,
-   "e": 52.15
-  },
-  {
-   "t": "En gummiplatta läggs på ett bord så att ingen luft finns mellan plattan och bordet.",
-   "s": 52.15,
-   "e": 57.38
-  },
-  {
-   "t": "Lufttrycket kommer då endast att verka ovanifrån.",
-   "s": 57.38,
-   "e": 61.45
-  },
-  {
-   "t": "Försök att lyfta mattan från bordet!",
-   "s": 61.45,
-   "e": 64.81
-  },
-  {
-   "t": "Återigen krävs en stor kraft för att övervinna lufttrycket.",
-   "s": 64.81,
-   "e": 69.4
-  },
-  {
-   "t": "På samma sätt som att en vätskas tyngd orsakar ett vätsketryck på ett visst djup, så orsakar luftens tyngd ett lufttryck eller gastryck — ett tryck som är större än man kan tro.",
-   "s": 69.4,
-   "e": 79.0
-  },
-  {
-   "t": "Den växande skumbollen",
-   "s": 79.0,
-   "e": 81.59
-  },
-  {
-   "t": "Placera en skumboll i en vakuumkammare.",
-   "s": 81.59,
-   "e": 85.06
-  },
-  {
-   "t": "Pumpa sedan ur luften.",
-   "s": 85.06,
-   "e": 87.62
-  },
-  {
-   "t": "Skumbollen växer och blir stor.",
-   "s": 87.62,
-   "e": 90.67
-  },
-  {
-   "t": "När luften pumpas ur vakuumkammaren försvinner lufttrycket och luftbubblorna i skumbollen utvidgas, vilket gör att skumbollen ser ut att växa.",
-   "s": 90.67,
-   "e": 99.31
-  },
-  {
-   "t": "Normalt lufttryck vid havsnivån är 101,3 kilopascal (101 300 pascal).",
-   "s": 99.31,
-   "e": 107.04
-  },
-  {
-   "t": "Detta tryck har fått enheten atm (atmosfär).",
-   "s": 107.04,
-   "e": 111.24
-  },
-  {
-   "t": "Det finns många olika enheter för lufttryck.",
-   "s": 111.24,
-   "e": 114.95
-  },
-  {
-   "t": "Olika enheter för tryck",
-   "s": 114.95,
-   "e": 117.79
-  },
-  {
-   "t": "Vi befinner oss i ett \"lufthav\" (atmosfären).",
-   "s": 117.79,
-   "e": 121.86
-  },
-  {
-   "t": "Ju högre upp i atmosfären vi kommer desto lägre blir lufttrycket.",
-   "s": 121.86,
-   "e": 126.7
-  },
-  {
-   "t": "Dels på grund av att luften där har lägre densitet, dels för att vi har mindre volym luft ovanför oss (jämför med vätskedjup).",
-   "s": 126.7,
-   "e": 134.76
-  },
-  {
-   "t": "Eftersom det är svårt att pressa ihop vätskor kommer lufttrycket mot en vätskeyta fortplantas i hela vätskan och i alla riktningar.",
-   "s": 134.76,
-   "e": 142.4
-  },
-  {
-   "t": "I en vätska finns alltså både lufttryck och vätsketryck.",
-   "s": 142.4,
-   "e": 146.64
-  },
-  {
-   "t": "Det sammanlagda trycket från lufttrycket och vätsketrycket kallas totalt tryck.",
-   "s": 146.64,
-   "e": 152.19
-  },
-  {
-   "t": "Totalt tryck",
-   "s": 152.19,
-   "e": 154.29
-  },
-  {
-   "t": "trycket p är lika med p noll plus densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 154.29,
-   "e": 160.59
-  },
-  {
-   "t": "där",
-   "s": 160.59,
-   "e": 162.05
-  },
-  {
-   "t": "p är lika med totalt tryck (pascal)",
-   "s": 162.05,
-   "e": 165.75
-  },
-  {
-   "t": "p noll är lika med lufttryck mot vätskeytan (pascal)",
-   "s": 165.75,
-   "e": 170.39
-  },
-  {
-   "t": "ρ är lika med vätskans densitet (kg/m i kubik)",
-   "s": 170.39,
-   "e": 175.49
-  },
-  {
-   "t": "g är lika med tyngdfaktorn (newton per kilogram)",
-   "s": 175.49,
-   "e": 180.06
-  },
-  {
-   "t": "h är lika med vätskedjup (meter)",
-   "s": 180.06,
-   "e": 183.6
-  },
-  {
-   "t": "Exempel 1 — Dyk på 3 meters djup",
-   "s": 183.6,
-   "e": 187.59
-  },
-  {
-   "t": "Du dyker i en sjö där lufttrycket är 101,3 kilopascal.",
-   "s": 187.59,
-   "e": 192.76
-  },
-  {
-   "t": "Bestäm på 3,0 meters djup a) vätsketrycket, b) det totala trycket, c) tryckkraften på din trumhinna om den har arean 80 millimeter i kvadrat.",
-   "s": 192.76,
-   "e": 203.85
-  },
-  {
-   "t": "a)",
-   "s": 203.85,
-   "e": 219.74
+   "t": "Vätsketryck",
+   "s": 33.21,
+   "e": 35.24
   },
   {
    "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 203.85,
-   "e": 219.74
+   "s": 35.24,
+   "e": 40.99
   },
   {
-   "t": "densiteten rho är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter",
-   "s": 203.85,
-   "e": 219.74
+   "t": "där",
+   "s": 40.99,
+   "e": 42.45
   },
   {
-   "t": "trycket p är lika med 998 gånger 9,82 gånger 3,0 som är lika med 29 401,08 pascal som är ungefär lika med 29 000 pascal som är lika med 29 kilopascal",
-   "s": 219.74,
-   "e": 233.68
+   "t": "p är lika med vätsketryck (pascal)",
+   "s": 42.45,
+   "e": 46.04
   },
   {
-   "t": "Svar: 29 kilopascal",
-   "s": 233.68,
-   "e": 237.16
+   "t": "ρ är lika med vätskans densitet (kg/m i kubik) (998 kilogram/m i kubik är ungefär lika med 1 000 kilogram/m i kubik för vatten)",
+   "s": 46.04,
+   "e": 57.9
   },
   {
-   "t": "b)",
-   "s": 237.16,
-   "e": 244.19
+   "t": "g är lika med tyngdfaktor (newton per kilogram) (9,82 newton per kilogram i Sverige)",
+   "s": 57.9,
+   "e": 65.4
   },
   {
-   "t": "trycket p är lika med p noll plus densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 237.16,
-   "e": 244.19
+   "t": "h är lika med vätskedjup (meter)",
+   "s": 65.4,
+   "e": 68.91
   },
   {
-   "t": "p noll är lika med 101,3 kilopascal som är lika med 101 300 pascal densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter",
-   "s": 244.19,
-   "e": 260.88
+   "t": "Härledning — Vätsketryck",
+   "s": 68.91,
+   "e": 71.66
   },
   {
-   "t": "trycket p är lika med 101 300 plus 998 gånger 9,82 gånger 3,0 som är lika med 130 701,08 pascal som är ungefär lika med 0,13 MPa",
-   "s": 260.88,
-   "e": 275.01
+   "t": "Vi ställer upp formeln för tryck.",
+   "s": 71.66,
+   "e": 74.51
   },
   {
-   "t": "Svar: 0,13 MPa",
-   "s": 275.01,
-   "e": 278.48
+   "t": "trycket p är lika med kraften F delat med arean A",
+   "s": 74.51,
+   "e": 83.17
   },
   {
-   "t": "c) Det tryck som kommer att ge en tryckkraft på din trumhinna är endast vätsketrycket.",
-   "s": 278.48,
-   "e": 284.38
+   "t": "Tryckkraften F utgörs av vätskans tyngd m gånger g.",
+   "s": 74.51,
+   "e": 83.17
   },
   {
-   "t": "Lufttrycket finns även inuti örat så det kommer att ta ut det yttre lufttrycket.",
-   "s": 284.38,
-   "e": 289.81
+   "t": "Insättning ger",
+   "s": 74.51,
+   "e": 83.17
   },
   {
-   "t": "trycket p är lika med kraften F delat med arean A vilket är ekvivalent med att F är lika med p gånger A",
-   "s": 289.81,
-   "e": 310.1
+   "t": "trycket p är lika med massan m gånger tyngdfaktorn g delat med arean A",
+   "s": 83.17,
+   "e": 88.7
   },
   {
-   "t": "trycket p är lika med 29 401,08 pascal parentesen vätsketrycket från a-uppgiften slut parentes arean A som är lika med 80 millimeter i kvadrat som är lika med 80 gånger 10 upphöjt till minus 6 kvadratmeter",
-   "s": 289.81,
-   "e": 310.1
+   "t": "Från formeln för densitet densiteten rho är lika med massan m delat med volymen V kan vi lösa ut vätskans massa m är lika med ρ gånger V.",
+   "s": 88.7,
+   "e": 104.83
   },
   {
-   "t": "kraften F är lika med 29 401,08 gånger 80 gånger 10 upphöjt till minus 6 som är lika med 2,352 newton som är ungefär lika med 2,4 newton",
-   "s": 310.1,
-   "e": 324.45
+   "t": "Volymen V kan skrivas som A gånger h där A är basytan och h vätskedjupet, så m är lika med ρ gånger A gånger h.",
+   "s": 88.7,
+   "e": 104.83
   },
   {
-   "t": "Svar: 2,4 newton",
-   "s": 324.4,
-   "e": 327.76
+   "t": "Insättning ger",
+   "s": 88.7,
+   "e": 104.83
+  },
+  {
+   "t": "trycket p är lika med densiteten rho gånger arean A gånger höjden h gånger tyngdfaktorn g delat med A som är lika med rho gånger g gånger h vilket skulle visas",
+   "s": 104.83,
+   "e": 115.16
+  },
+  {
+   "t": "Vätsketryck och vätskedjup",
+   "s": 115.16,
+   "e": 117.97
+  },
+  {
+   "t": "Vi fyller tre olika kärl (behållare) med vatten upp till samma nivå.",
+   "s": 117.97,
+   "e": 123.14
+  },
+  {
+   "t": "Oavsett mängden vatten eller kärlets form så blir trycket detsamma.",
+   "s": 123.14,
+   "e": 127.91
+  },
+  {
+   "t": "Vätsketrycket beror alltså inte på kärlets form eller mängden vatten, utan enbart av vätskedjupet.",
+   "s": 127.91,
+   "e": 134.49
+  },
+  {
+   "t": "Om vi har en bestämd vätska (och är på jorden) avgör endast vätskedjupet vilket vätsketryck som verkar.",
+   "s": 134.49,
+   "e": 141.64
+  },
+  {
+   "t": "Mängden vätska eller kärlets form spelar ingen roll.",
+   "s": 141.64,
+   "e": 145.69
+  },
+  {
+   "t": "Du utsätts för samma vätsketryck oavsett om du dyker två meter ner i ett hav eller två meter ner i en simbassäng.",
+   "s": 145.69,
+   "e": 152.79
+  },
+  {
+   "t": "Vätsketrycket är detsamma i alla fyra bassänger eftersom dykaren befinner sig på samma djup.",
+   "s": 152.79,
+   "e": 158.9
+  },
+  {
+   "t": "Tryckkraftens riktning",
+   "s": 158.9,
+   "e": 161.44
+  },
+  {
+   "t": "Vi täpper för ett luftfyllt rör i botten med ett löst lock och sänker ner i vatten.",
+   "s": 161.44,
+   "e": 166.88
+  },
+  {
+   "t": "Vi ser att locket sitter kvar mot botten av röret.",
+   "s": 166.88,
+   "e": 171.1
+  },
+  {
+   "t": "Det innebär att tryckkraften från vätskan verkar uppåt på locket och är större än tyngdkraften nedåt på locket.",
+   "s": 171.1,
+   "e": 178.05
+  },
+  {
+   "t": "På ett visst djup är vätsketrycket detsamma oavsett riktning på ytan.",
+   "s": 178.05,
+   "e": 183.28
+  },
+  {
+   "t": "Vätsketrycket verkar alltid vinkelrätt mot ytan.",
+   "s": 183.28,
+   "e": 187.43
+  },
+  {
+   "t": "Exempel 1 — Herbert Nitsch på 253 meters djup",
+   "s": 187.43,
+   "e": 192.44
+  },
+  {
+   "t": "I juni 2012 dök Herbert Nitsch, utan lufttuber, ned till 253,2 meters djup utanför Greklands kust. Vilket vätsketryck påverkade honom då?",
+   "s": 192.44,
+   "e": 204.9
+  },
+  {
+   "t": "Räkna med att saltvattnets densitet är 1 028 kilogram/m i kubik.",
+   "s": 204.9,
+   "e": 211.4
+  },
+  {
+   "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h",
+   "s": 211.4,
+   "e": 232.39
+  },
+  {
+   "t": "densiteten rho hastigheten v accelerationen a tiden t t e n är lika med 1 028 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,8 newton per kilogram parentesen han dök inte i Sverige slut parentes höjden h som är lika med 253,2 meter",
+   "s": 211.4,
+   "e": 232.39
+  },
+  {
+   "t": "trycket p är lika med 1 028 gånger 9,8 gånger 253,2 som är lika med 2 550 838,08 pascal som är ungefär lika med 2,6 gånger 10 upphöjt till 6 pascal som är lika med 2,6 MPa",
+   "s": 232.39,
+   "e": 249.53
+  },
+  {
+   "t": "Svar: 2,6 MPa (vilket motsvarar 25 gånger större tryck än normalt lufttryck)",
+   "s": 249.53,
+   "e": 256.8
+  },
+  {
+   "t": "Fysik i vardagen — Vattentorn",
+   "s": 256.8,
+   "e": 260.01
+  },
+  {
+   "t": "Högst upp i ett vattentorn finns en vattentank.",
+   "s": 260.01,
+   "e": 263.81
+  },
+  {
+   "t": "Vatten pumpas upp i tanken med en pump.",
+   "s": 263.81,
+   "e": 267.32
+  },
+  {
+   "t": "När vattnet väl är uppe i tanken behövs inte pumpen längre utan vattnet trycks ut i vattenledningarna av sin egen tyngd.",
+   "s": 267.32,
+   "e": 274.69
+  },
+  {
+   "t": "Ett sådant vattentorn syns till exempel tydligt i Stenstorp.",
+   "s": 274.69,
+   "e": 279.29
+  },
+  {
+   "t": "I Falköping har vi istället vattenreservoarer som fungerar på samma sätt, fast de är under marken (men fortfarande högre upp än vattenkranarna i våra hus).",
+   "s": 279.29,
+   "e": 289.23
+  },
+  {
+   "t": "Tänk till: var någonstans i lägenhetshuset är det störst tryck i vattenkranarna?",
+   "s": 289.23,
+   "e": 294.99
   }
  ]
 }

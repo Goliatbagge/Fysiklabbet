@@ -532,7 +532,7 @@ i md fångas inte av det skriptet — granska manuellt).
 ## SKIP-lista (för avancerade / foton — lämna som `::: bild`)
 Allt som INTE står här är drawable. Markera när bedömt.
 
-- **fy1-1.4** [1][2][3] Aerogel / Osmium / Neutronstjärna — foton ("originalbild från PDF").
+- **fy1-5.1** [1][2][3] Aerogel / Osmium / Neutronstjärna — foton ("originalbild från PDF").
 - **fy1-2.7** [1] GeoGebra-skärmdump (UI).
 - **fy1-3.1** [1] Foto: dynamometer.
 - **fy1-3.3** [3] Foto: astronaut McCandless.

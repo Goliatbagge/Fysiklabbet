@@ -1,98 +1,298 @@
 {
- "id": "fy1-2.5",
+ "id": "fy1-2.4",
  "voice": "sv-SE-SofieNeural",
- "hash": "52fecd2eb3904ee9c5a9fe87bb6c0ff26ec1c91a",
- "dur": 106.08,
+ "hash": "7ce8199dc3db72a687c6316c0d9c3642f450c821",
+ "dur": 404.04,
  "segments": [
   {
-   "t": "Acceleration-tid-diagram",
+   "t": "Hastighet-tid-diagram",
    "s": 0.1,
    "e": 2.75
   },
   {
-   "t": "Ett diagram med acceleration på y-axeln och tid på x-axeln kallas acceleration-tid-diagram eller a-t-diagram.",
+   "t": "Ett diagram med hastighet på y-axeln och tid på x-axeln kallas hastighet-tid-diagram eller v-t-diagram.",
    "s": 2.7,
-   "e": 10.18
+   "e": 9.75
   },
   {
-   "t": "Arean i ett a-t-diagram",
-   "s": 10.18,
-   "e": 13.44
+   "t": "Vid konstant acceleration blir grafen i ett v-t-diagram en rät linje där linjens lutning motsvarar accelerationen — ju brantare lutning desto större acceleration.",
+   "s": 9.75,
+   "e": 19.7
   },
   {
-   "t": "I ett a-t-diagram motsvarar arean mellan grafen och x-axeln hastighetsändringen.",
-   "s": 13.44,
-   "e": 19.86
+   "t": "På motsvarande sätt som för medelhastighet och momentanhastighet gäller att medelaccelerationen mellan två tidpunkter motsvaras av sekantens lutning och momentanaccelerationen av tangentens lutning.",
+   "s": 19.7,
+   "e": 31.82
   },
   {
-   "t": "En area över x-axeln tolkar vi som positiv (hastighetsökning) och en area under x-axeln som negativ (hastighetsminskning).",
-   "s": 19.86,
-   "e": 29.15
+   "t": "Oavsett vilken typ av acceleration vi ska beräkna gäller att den relevanta linjens lutning bestäms av delta y delat med delta x är lika med delta hastigheten v delat med delta tiden t .",
+   "s": 31.82,
+   "e": 43.39
   },
   {
-   "t": "Härledning — Arean i ett a-t-diagram",
-   "s": 29.15,
-   "e": 32.95
+   "t": "Acceleration",
+   "s": 43.39,
+   "e": 45.46
   },
   {
-   "t": "I ett a-t-diagram motsvarar arean en multiplikation mellan en acceleration a och en tid Δt.",
-   "s": 32.95,
-   "e": 40.0
+   "t": "accelerationen a är lika med delta hastigheten v delat med delta tiden t som är lika med v två minus v ett delat med t två minus t ett",
+   "s": 45.46,
+   "e": 55.26
   },
   {
-   "t": "Från definitionen av acceleration har vi",
-   "s": 40.0,
-   "e": 43.92
+   "t": "där",
+   "s": 55.26,
+   "e": 56.74
   },
   {
-   "t": "accelerationen a är lika med delta hastigheten v delat med delta tiden t vilket är ekvivalent med att delta v är lika med a gånger delta t",
-   "s": 43.92,
-   "e": 57.56
+   "t": "a är lika med konstant acceleration eller medelacceleration (m/s i kvadrat)",
+   "s": 56.74,
+   "e": 63.42
   },
   {
-   "t": "Arean i ett a-t-diagram motsvarar alltså hastighetsändringen i intervallet.",
-   "s": 43.92,
-   "e": 57.56
+   "t": "Δv är lika med hastighetsändring (meter per sekund)",
+   "s": 63.42,
+   "e": 68.0
   },
   {
-   "t": "Exempel 1 — Hastighet efter konstant acceleration",
-   "s": 57.56,
-   "e": 62.01
+   "t": "Δt är lika med tidsintervall (sekunder)",
+   "s": 68.0,
+   "e": 71.94
   },
   {
-   "t": "En kropp med utgångshastigheten 8,0 meter per sekund accelererar enligt nedanstående graf.",
-   "s": 62.01,
-   "e": 68.79
+   "t": "t ett, t två är lika med tidpunkt 1 respektive tidpunkt 2 (sekunder)",
+   "s": 71.94,
+   "e": 78.33
   },
   {
-   "t": "Vilken hastighet har kroppen efter 4,0 sekunder?",
-   "s": 68.79,
-   "e": 73.45
+   "t": "v ett, v två är lika med hastighet vid tidpunkt 1 respektive vid tidpunkt 2 (meter per sekund)",
+   "s": 78.33,
+   "e": 86.12
   },
   {
-   "t": "Hastighetsändringen motsvaras av arean under grafen fram till 4,0 sekunder enligt",
-   "s": 73.45,
-   "e": 79.84
+   "t": "Vi kan även enkelt beräkna förflyttningen utifrån ett v-t-diagram.",
+   "s": 86.12,
+   "e": 91.11
   },
   {
-   "t": "delta hastigheten v är lika med arean A som är lika med 4 gånger 5 som är lika med 20 meter per sekund parentesen hastighetsökning med 20 meter per sekund slut parentes",
-   "s": 79.84,
-   "e": 91.08
+   "t": "Arean i ett v-t-diagram",
+   "s": 91.11,
+   "e": 94.21
   },
   {
-   "t": "Eftersom kroppen hade utgångshastigheten 8,0 meter per sekund blir sluthastigheten",
-   "s": 91.08,
-   "e": 97.47
+   "t": "I ett v-t-diagram motsvarar arean mellan grafen och x-axeln förflyttningen.",
+   "s": 94.21,
+   "e": 100.1
   },
   {
-   "t": "8,0 plus 20 är lika med 28 meter per sekund",
-   "s": 97.47,
-   "e": 102.46
+   "t": "En area över x-axeln tolkar vi som positiv och en area under x-axeln som negativ.",
+   "s": 100.1,
+   "e": 106.44
   },
   {
-   "t": "Svar: 28 meter per sekund",
-   "s": 102.46,
-   "e": 106.08
+   "t": "Sträckan beräknas likadant, men då räknas även areor under x-axeln som positiva.",
+   "s": 106.44,
+   "e": 113.04
+  },
+  {
+   "t": "Härledning — Arean i ett v-t-diagram",
+   "s": 113.04,
+   "e": 116.69
+  },
+  {
+   "t": "I \"vanliga\" areor multiplicerar vi sträckor med varandra — och enheter!",
+   "s": 116.69,
+   "e": 121.97
+  },
+  {
+   "t": "Till exempel",
+   "s": 121.97,
+   "e": 124.08
+  },
+  {
+   "t": "10 meter gånger 5 meter är lika med 10 gånger 5 gånger meter gånger meter som är lika med 50 kvadratmeter",
+   "s": 124.08,
+   "e": 131.79
+  },
+  {
+   "t": "I ett v-t-diagram motsvarar arean en multiplikation mellan en hastighet v och en tid Δt.",
+   "s": 131.79,
+   "e": 138.64
+  },
+  {
+   "t": "Men sedan tidigare har vi visat att Δs är lika med v gånger Δt, det vill säga arean motsvarar förflyttningen!",
+   "s": 138.64,
+   "e": 146.19
+  },
+  {
+   "t": "Förflyttningen får samma enhet som hastigheten har i sig — förutsatt att tidsenheten är densamma som i hastigheten.",
+   "s": 146.19,
+   "e": 153.54
+  },
+  {
+   "t": "Om vi exempelvis har enheterna m/s och s på axlarna kommer förflyttningen få enheten m.",
+   "s": 153.54,
+   "e": 162.01
+  },
+  {
+   "t": "Exempel 1 — Bilen på parkeringen",
+   "s": 153.54,
+   "e": 162.01
+  },
+  {
+   "t": "En bil rullar in på en parkeringsplats enligt nedanstående graf.",
+   "s": 162.01,
+   "e": 166.74
+  },
+  {
+   "t": "a) Hur fort kör bilen vid tidpunkten 9 sekunder?",
+   "s": 166.74,
+   "e": 171.25
+  },
+  {
+   "t": "b) Vad är accelerationen vid tidpunkten 7 sekunder?",
+   "s": 171.25,
+   "e": 175.82
+  },
+  {
+   "t": "c) Hur långt har bilen kört från att den rullar in på parkeringen tills den har parkerat?",
+   "s": 175.82,
+   "e": 181.84
+  },
+  {
+   "t": "a) Avläsning vid t är lika med 9 sekunder ger v är lika med 11 meter per sekund.",
+   "s": 181.84,
+   "e": 188.44
+  },
+  {
+   "t": "Svar: 11 meter per sekund",
+   "s": 188.44,
+   "e": 191.82
+  },
+  {
+   "t": "b) Eftersom linjen är rät vid t är lika med 7 har vi en konstant acceleration.",
+   "s": 191.82,
+   "e": 198.01
+  },
+  {
+   "t": "Vi väljer två punkter på denna räta linje, till exempel (5, 16) och (13, 6).",
+   "s": 198.01,
+   "e": 205.94
+  },
+  {
+   "t": "Insättning i accelerationen a är lika med v två minus v ett delat med t två minus t ett ger",
+   "s": 205.94,
+   "e": 213.8
+  },
+  {
+   "t": "accelerationen a är lika med 6 minus 16 delat med 13 minus 5 som är lika med minus 10 delat med 8 som är lika med minus 1,25 meter per sekund i kvadrat parentesen minustecknet betyder att bilen bromsar in slut parentes",
+   "s": 213.8,
+   "e": 228.71
+  },
+  {
+   "t": "Svar: −1,25 meter per sekund i kvadrat",
+   "s": 228.71,
+   "e": 233.4
+  },
+  {
+   "t": "c) Förflyttningen motsvaras av arean under grafen.",
+   "s": 233.4,
+   "e": 238.32
+  },
+  {
+   "t": "Vi delar in arean under grafen i fyra delar — A (rektangel under den platta delen), B (rektangel under den nedre platta delen), C (triangel där hastigheten sjunker från 16 till 6) och D (triangel där hastigheten sjunker från 6 till 0):",
+   "s": 238.32,
+   "e": 258.71
+  },
+  {
+   "t": "sträckan s är lika med arean A plus B plus C plus D",
+   "s": 238.32,
+   "e": 258.71
+  },
+  {
+   "t": "Rektanglarnas areor är basen multiplicerat med höjden och trianglarnas areor är basen multiplicerat med höjden dividerat med 2.",
+   "s": 258.71,
+   "e": 267.18
+  },
+  {
+   "t": "arean A är lika med 5 gånger 16 som är lika med 80 meter B som är lika med parentesen 17 minus 5 slut parentes gånger 6 som är lika med 12 gånger 6 som är lika med 72 meter C som är lika med parentesen 13 minus 5 slut parentes gånger parentesen 16 minus 6 slut parentes delat med 2 som är lika med 8 gånger 10 delat med 2 som är lika med 80 delat med 2 meter som är lika med 40 meter D som är lika med parentesen 21 minus 17 slut parentes gånger 6 delat med 2 som är lika med 4 gånger 6 delat med 2 som är lika med 24 delat med 2 meter som är lika med 12 meter",
+   "s": 267.18,
+   "e": 306.55
+  },
+  {
+   "t": "sträckan s är lika med 80 plus 72 plus 40 plus 12 som är lika med 204 meter",
+   "s": 306.5,
+   "e": 313.55
+  },
+  {
+   "t": "Svar: 204 meter",
+   "s": 313.55,
+   "e": 316.96
+  },
+  {
+   "t": "Exempel 2 — Förflyttning och tillryggalagd sträcka",
+   "s": 316.96,
+   "e": 321.21
+  },
+  {
+   "t": "Ett föremål rör sig enligt v-t-grafen — en rät linje från (0, 10) ned till (10, −10).",
+   "s": 321.21,
+   "e": 329.44
+  },
+  {
+   "t": "Bestäm under de 10 första sekunderna föremålets a) förflyttning, b) tillryggalagda sträcka.",
+   "s": 329.44,
+   "e": 336.62
+  },
+  {
+   "t": "a) För förflyttningen Δs gäller",
+   "s": 336.62,
+   "e": 340.19
+  },
+  {
+   "t": "delta sträckan s är lika med A ett plus A två",
+   "s": 340.19,
+   "e": 344.66
+  },
+  {
+   "t": "Observera att A ett ligger ovanför x-axeln (positiv förflyttning) och A två under x-axeln (negativ förflyttning).",
+   "s": 344.66,
+   "e": 352.9
+  },
+  {
+   "t": "A ett är lika med basen gånger höjden delat med 2 som är lika med 5 gånger 10 delat med 2 som är lika med 25 meter A två som är lika med minus basen gånger höjden delat med 2 som är lika med minus 5 gånger 10 delat med 2 som är lika med minus 25 meter",
+   "s": 352.9,
+   "e": 368.24
+  },
+  {
+   "t": "delta sträckan s är lika med 25 plus parentesen minus 25 slut parentes som är lika med 0",
+   "s": 368.24,
+   "e": 375.76
+  },
+  {
+   "t": "Förflyttningen är alltså 0 (föremålet slutar på samma position som det startade).",
+   "s": 375.76,
+   "e": 381.8
+  },
+  {
+   "t": "Svar: Förflyttningen är 0.",
+   "s": 381.8,
+   "e": 385.0
+  },
+  {
+   "t": "b) Den tillryggalagda sträckan s motsvarar den sammanlagda arean (oavsett om den ligger ovanför eller under x-axeln).",
+   "s": 385.0,
+   "e": 393.74
+  },
+  {
+   "t": "sträckan s är lika med | A ett | plus | A två | som är lika med 25 plus 25 som är lika med 50 meter",
+   "s": 393.74,
+   "e": 401.16
+  },
+  {
+   "t": "Svar: 50 meter",
+   "s": 401.16,
+   "e": 404.04
   }
  ]
 }

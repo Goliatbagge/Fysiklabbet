@@ -1,278 +1,153 @@
 {
  "id": "fy1-1.S",
  "voice": "sv-SE-SofieNeural",
- "hash": "8f666a0ffc867a9cffcc7bf9b88ed3db1860bb38",
- "dur": 343.85,
+ "hash": "54b3420c37a23d2c4d2033c5d472273cc9b3ad3a",
+ "dur": 194.11,
  "segments": [
   {
    "t": "Sammanfattning — Introduktion",
    "s": 0.1,
-   "e": 3.17
+   "e": 3.12
   },
   {
-   "t": "Det här kapitlet handlade om fysikens arbetssätt och verktyg: den naturvetenskapliga metoden, SI-systemet med grundenheter och prefix, samt de två första fysikaliska storheterna — medelfart och densitet.",
-   "s": 3.12,
-   "e": 16.23
+   "t": "Det här kapitlet handlade om fysikens arbetssätt och verktyg: den naturvetenskapliga metoden, samt SI-systemet med sina grundenheter och prefix.",
+   "s": 3.08,
+   "e": 12.74
   },
   {
-   "t": "Du ska efter kapitlet kunna räkna med rätt antal värdesiffror, växla mellan prefix och grundpotensform, och använda formlerna för medelfart och densitet.",
-   "s": 16.23,
-   "e": 25.82
+   "t": "Du ska efter kapitlet kunna räkna med rätt antal värdesiffror och växla mellan prefix och grundpotensform.",
+   "s": 12.74,
+   "e": 19.54
   },
   {
    "t": "Begrepp att kunna",
-   "s": 25.82,
-   "e": 28.15
+   "s": 19.54,
+   "e": 21.84
   },
   {
    "t": "Naturvetenskapliga metoden — observation, hypotes, hypotesprövning, lagar och teorier.",
-   "s": 28.15,
-   "e": 35.61
+   "s": 21.84,
+   "e": 29.3
   },
   {
    "t": "Hypotes — en möjlig förklaring som ännu inte är testad.",
-   "s": 35.61,
-   "e": 40.11
+   "s": 29.3,
+   "e": 33.8
   },
   {
    "t": "Lag — en hypotes som testats i flera experiment utan att motbevisas.",
-   "s": 40.11,
-   "e": 45.84
+   "s": 33.8,
+   "e": 39.52
   },
   {
    "t": "Teori — flera lagar tillsammans; i fysiken ett väl belagt, säkert samband (inte en gissning som i vardagsspråk).",
-   "s": 45.84,
-   "e": 54.2
+   "s": 39.52,
+   "e": 47.89
   },
   {
    "t": "Modell — en förenklad beskrivning som stämmer tillräckligt bra med verkligheten.",
-   "s": 54.2,
-   "e": 59.34
+   "s": 47.89,
+   "e": 53.02
   },
   {
    "t": "Storhet — en egenskap som kan mätas med ett mätetal och en enhet, t.ex. sträcka, tid, kraft.",
-   "s": 59.34,
-   "e": 67.56
+   "s": 53.02,
+   "e": 61.25
   },
   {
    "t": "Mätetal — det numeriska värdet en storhet anges med.",
-   "s": 67.56,
-   "e": 72.04
+   "s": 61.25,
+   "e": 65.72
   },
   {
    "t": "Enhet — måttstorleken mätetalet anges i.",
-   "s": 72.04,
-   "e": 84.2
+   "s": 65.72,
+   "e": 77.89
   },
   {
    "t": "SI-enheter — det internationella enhetssystemet med sju grundenheter (m, kg, s, A, K, mol, cd).",
-   "s": 72.04,
-   "e": 84.2
+   "s": 65.72,
+   "e": 77.89
   },
   {
    "t": "Prefix — skalfaktor framför en enhet (t.ex. kilo, milli) som ersätter en tiopotens.",
-   "s": 84.2,
-   "e": 91.78
+   "s": 77.89,
+   "e": 85.47
   },
   {
    "t": "Värdesiffror — antalet siffror i ett mätetal som bär betydelse; styr hur svaret ska avrundas.",
-   "s": 91.78,
-   "e": 98.45
+   "s": 85.47,
+   "e": 92.14
   },
   {
-   "t": "Medelfart — total tillryggalagd sträcka delat med total tid; skalär storhet, v massan m är lika med sträckan s delat med tiden t .",
-   "s": 98.45,
-   "e": 107.62
-  },
-  {
-   "t": "Densitet — massa per volymenhet, densiteten rho är lika med massan m delat med volymen V ; avgör hur tätt packat ett material är.",
-   "s": 107.62,
-   "e": 116.81
-  },
-  {
-   "t": "Formler",
-   "s": 116.81,
-   "e": 118.64
-  },
-  {
-   "t": "Medelfart",
-   "s": 118.64,
-   "e": 120.66
-  },
-  {
-   "t": "v massan m är lika med sträckan s delat med tiden t",
-   "s": 120.66,
-   "e": 125.2
-  },
-  {
-   "t": "där",
-   "s": 125.2,
-   "e": 126.67
-  },
-  {
-   "t": "vₘ är lika med medelfart (meter per sekund)",
-   "s": 126.67,
-   "e": 130.84
-  },
-  {
-   "t": "s är lika med sträcka (meter)",
-   "s": 130.84,
-   "e": 134.16
-  },
-  {
-   "t": "t är lika med tid (sekunder)",
-   "s": 134.16,
-   "e": 137.45
-  },
-  {
-   "t": "Enhetsomvandling — m/s och km/h",
-   "s": 137.45,
-   "e": 149.51
-  },
-  {
-   "t": "meter per sekund xrightarrow gånger 3,6 kilometer per timme kilometer per timme xrightarrow div 3,6 meter per sekund",
-   "s": 137.45,
-   "e": 149.51
-  },
-  {
-   "t": "Densitet",
-   "s": 149.51,
-   "e": 151.61
-  },
-  {
-   "t": "densiteten rho är lika med massan m delat med volymen V",
-   "s": 151.61,
-   "e": 156.35
-  },
-  {
-   "t": "där",
-   "s": 156.35,
-   "e": 157.81
-  },
-  {
-   "t": "ρ är lika med densitet (kg/m i kubik)",
-   "s": 157.81,
-   "e": 162.41
-  },
-  {
-   "t": "m är lika med massa (kilogram)",
-   "s": 162.41,
-   "e": 165.78
-  },
-  {
-   "t": "V är lika med volym (m i kubik)",
-   "s": 165.78,
-   "e": 169.55
-  },
-  {
-   "t": "Enhetsomvandling — kg/m<sup>3</sup> och g/cm<sup>3</sup>",
-   "s": 169.55,
-   "e": 178.59
-  },
-  {
-   "t": "1 gram per centimeter i kubik är lika med 1 000 kilogram per kubikmeter 1 kilogram per kubikmeter som är lika med 0,001 gram per centimeter i kubik",
-   "s": 178.59,
-   "e": 189.39
+   "t": "Grundpotensform — ett tal skrivet som en faktor mellan 1 och 10 gånger en tiopotens, t.ex. 2,5 gånger 10 upphöjt till 6 .",
+   "s": 92.14,
+   "e": 101.51
   },
   {
    "t": "Viktiga samband och metoder",
-   "s": 189.39,
-   "e": 192.24
+   "s": 101.51,
+   "e": 104.39
   },
   {
    "t": "Räknar man enbart med SI-enheter i en formel blir svaret automatiskt en SI-enhet — därför lönar det sig att räkna om till grundenheter (m, kg, s) innan man sätter in värden.",
-   "s": 192.24,
-   "e": 203.57
+   "s": 104.39,
+   "e": 115.74
   },
   {
    "t": "Avrunda inte förrän i slutet av en uppgift — annars kan felet i svaret bli stort.",
-   "s": 203.57,
-   "e": 209.45
+   "s": 115.74,
+   "e": 121.61
   },
   {
    "t": "Antal värdesiffror i svaret styrs av: vid multiplikation/division av värdet med minst antal värdesiffror; vid addition/subtraktion av värdet med minst antal decimaler.",
-   "s": 209.45,
-   "e": 221.56
+   "s": 121.61,
+   "e": 133.72
   },
   {
    "t": "I grundpotensform ska den första faktorn vara ett tal mellan 1 och 10; för tal mindre än 1 ges exponentens (negativa) värde av antalet nollor innan den första siffran som inte är 0.",
-   "s": 221.56,
-   "e": 233.11
+   "s": 133.72,
+   "e": 145.31
   },
   {
    "t": "Ett prefix är bara ett annat sätt att skriva en tiopotens — byt ut tiopotensen mot dess prefix (eller tvärtom) utan att ändra värdet.",
-   "s": 233.11,
-   "e": 242.15
-  },
-  {
-   "t": "Medelfart och medelhastighet är inte samma sak: medelfart är skalär, v massan m är lika med sträckan s delat med tiden t , medelhastighet är en vektor.",
-   "s": 242.15,
-   "e": 252.81
-  },
-  {
-   "t": "Skillnaden fördjupas i nästa kapitel.",
-   "s": 252.81,
-   "e": 256.12
-  },
-  {
-   "t": "Vattnets densitet, densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter , är bra att kunna utantill — den ger direkt att 1,0 liter vatten väger 1,0 kilogram.",
-   "s": 256.12,
-   "e": 270.32
+   "s": 145.31,
+   "e": 154.36
   },
   {
    "t": "Inför provet",
-   "s": 270.32,
-   "e": 272.48
+   "s": 154.36,
+   "e": 156.53
   },
   {
    "t": "Kan du redogöra för den naturvetenskapliga metodens fyra steg?",
-   "s": 272.48,
-   "e": 277.5
+   "s": 156.53,
+   "e": 161.55
   },
   {
    "t": "Kan du förklara skillnaden mellan hypotes, lag och teori?",
-   "s": 277.5,
-   "e": 282.21
+   "s": 161.55,
+   "e": 166.26
   },
   {
    "t": "Kan du de sju SI-grundenheterna och vilken storhet de mäter?",
-   "s": 282.21,
-   "e": 287.15
+   "s": 166.26,
+   "e": 171.2
   },
   {
    "t": "Kan du skriva om ett tal mellan prefix och grundpotensform i båda riktningarna (t.ex. μm ↔ 10 upphöjt till minus 6 meter)?",
-   "s": 287.15,
-   "e": 296.64
+   "s": 171.2,
+   "e": 180.7
   },
   {
    "t": "Vet du hur man avgör rätt antal värdesiffror i ett svar vid multiplikation/ division respektive addition/subtraktion?",
-   "s": 296.64,
-   "e": 305.5
+   "s": 180.7,
+   "e": 189.55
   },
   {
-   "t": "Kan du formeln för medelfart och lösa ut sträcka respektive tid ur den?",
-   "s": 305.5,
-   "e": 312.32
-  },
-  {
-   "t": "Kan du växla mellan m/s och km/h utan miniräknare (omvandlingsfaktor 3,6)?",
-   "s": 312.27,
-   "e": 320.44
-  },
-  {
-   "t": "Kan du formeln för densitet och lösa ut massa respektive volym ur den?",
-   "s": 320.44,
-   "e": 325.8
-  },
-  {
-   "t": "Kan du växla mellan kg/m i kubik och g/cm i kubik (omvandlingsfaktor 1 000)?",
-   "s": 325.8,
-   "e": 333.72
-  },
-  {
-   "t": "Kommer du ihåg vattnets densitet, densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter ?",
-   "s": 333.72,
-   "e": 343.85
+   "t": "Kan du skriva om ett stort eller litet tal på grundpotensform?",
+   "s": 189.55,
+   "e": 194.11
   }
  ]
 }

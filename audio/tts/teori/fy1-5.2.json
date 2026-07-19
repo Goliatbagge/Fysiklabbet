@@ -1,268 +1,133 @@
 {
- "id": "fy1-5.2",
+ "id": "fy1-5.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "fd659ccb07b3bd228ab8ee2340567bc4c270d341",
- "dur": 294.99,
+ "hash": "668d52d26bc3b7e2b66bbaf68581f9e500c80a7b",
+ "dur": 180.0,
  "segments": [
   {
-   "t": "Vätsketryck",
+   "t": "Tryck och tryckkraft",
    "s": 0.1,
-   "e": 2.14
+   "e": 2.54
   },
   {
-   "t": "Introduktion — Vätsketryck",
-   "s": 2.09,
-   "e": 4.84
+   "t": "En kraft som uppstår när två föremål har kontakt med varandra kallas tryckkraft, betecknas F och har enheten N (newton).",
+   "s": 2.49,
+   "e": 11.03
   },
   {
-   "t": "När vi simmar mot botten av en simbassäng känner vi att trycket på öronen ökar.",
-   "s": 4.84,
-   "e": 10.36
+   "t": "Tryckkraften per areaenhet kallas tryck, betecknas p (från engelskans \"pressure\") och har enheten Pa (pascal) eller N/m i kvadrat (newton per kvadratmeter).",
+   "s": 11.03,
+   "e": 23.14
   },
   {
-   "t": "Tryckkraften från vätskans tyngd ovanför blir större ju längre ner vi dyker.",
-   "s": 10.36,
-   "e": 15.69
+   "t": "Tryckkraft och tryck är alltså olika saker!",
+   "s": 23.14,
+   "e": 26.75
   },
   {
-   "t": "Och ju större tryckkraften blir desto större blir trycket på våra öron som vi kan uppleva som smärta.",
-   "s": 15.69,
-   "e": 21.71
+   "t": "När du går i djup lössnö påverkar du snön med en tryckkraft som motsvaras av din tyngd och du sjunker ner i snön.",
+   "s": 26.75,
+   "e": 33.75
   },
   {
-   "t": "Det tryck som orsakas av en vätska kallas vätsketryck eller hydrostatiskt tryck.",
-   "s": 21.71,
-   "e": 27.54
+   "t": "Om du istället tar på dig skidor så sjunker du inte ner i snön trots att din tyngd och tryckkraft är lika stor.",
+   "s": 33.75,
+   "e": 40.55
   },
   {
-   "t": "Tryckkraften ökar med djupet på grund av en större tyngd från vätskan ovanifrån.",
-   "s": 27.54,
-   "e": 33.21
+   "t": "Det beror på att tryckkraften fördelas på en större area och att trycket då blir lägre.",
+   "s": 40.55,
+   "e": 46.14
   },
   {
-   "t": "Vätsketryck",
-   "s": 33.21,
-   "e": 35.24
-  },
-  {
-   "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 35.24,
-   "e": 40.99
-  },
-  {
-   "t": "där",
-   "s": 40.99,
-   "e": 42.45
-  },
-  {
-   "t": "p är lika med vätsketryck (pascal)",
-   "s": 42.45,
-   "e": 46.04
-  },
-  {
-   "t": "ρ är lika med vätskans densitet (kg/m i kubik) (998 kilogram/m i kubik är ungefär lika med 1 000 kilogram/m i kubik för vatten)",
-   "s": 46.04,
-   "e": 57.9
-  },
-  {
-   "t": "g är lika med tyngdfaktor (newton per kilogram) (9,82 newton per kilogram i Sverige)",
-   "s": 57.9,
-   "e": 65.4
-  },
-  {
-   "t": "h är lika med vätskedjup (meter)",
-   "s": 65.4,
-   "e": 68.91
-  },
-  {
-   "t": "Härledning — Vätsketryck",
-   "s": 68.91,
-   "e": 71.66
-  },
-  {
-   "t": "Vi ställer upp formeln för tryck.",
-   "s": 71.66,
-   "e": 74.51
+   "t": "Tryck mellan fasta kroppar",
+   "s": 46.14,
+   "e": 48.85
   },
   {
    "t": "trycket p är lika med kraften F delat med arean A",
-   "s": 74.51,
-   "e": 83.17
+   "s": 48.85,
+   "e": 53.39
   },
   {
-   "t": "Tryckkraften F utgörs av vätskans tyngd m gånger g.",
-   "s": 74.51,
-   "e": 83.17
+   "t": "där",
+   "s": 53.39,
+   "e": 54.85
   },
   {
-   "t": "Insättning ger",
-   "s": 74.51,
-   "e": 83.17
+   "t": "p är lika med tryck (Pa eller N/m i kvadrat)",
+   "s": 54.85,
+   "e": 59.6
   },
   {
-   "t": "trycket p är lika med massan m gånger tyngdfaktorn g delat med arean A",
-   "s": 83.17,
-   "e": 88.7
+   "t": "F är lika med tryckkraft (newton)",
+   "s": 59.6,
+   "e": 63.25
   },
   {
-   "t": "Från formeln för densitet densiteten rho är lika med massan m delat med volymen V kan vi lösa ut vätskans massa m är lika med ρ gånger V.",
-   "s": 88.7,
-   "e": 104.83
+   "t": "A är lika med arean som tryckkraften verkar på (m i kvadrat)",
+   "s": 63.25,
+   "e": 68.46
   },
   {
-   "t": "Volymen V kan skrivas som A gånger h där A är basytan och h vätskedjupet, så m är lika med ρ gånger A gånger h.",
-   "s": 88.7,
-   "e": 104.83
+   "t": "Exempel 1 — Damen vs pansarvagnen",
+   "s": 68.46,
+   "e": 72.54
   },
   {
-   "t": "Insättning ger",
-   "s": 88.7,
-   "e": 104.83
+   "t": "Vad orsakar störst tryck: en 60-kilos dam som trampar med sin tyngd på en stilettklack med arean 1,0 centimeter i kvadrat eller en stridsvagn på 60 ton med en total larvfötteryta på 6,0 meter i kvadrat?",
+   "s": 72.54,
+   "e": 86.1
   },
   {
-   "t": "trycket p är lika med densiteten rho gånger arean A gånger höjden h gånger tyngdfaktorn g delat med A som är lika med rho gånger g gånger h vilket skulle visas",
-   "s": 104.83,
-   "e": 115.16
+   "t": "Räkna med tyngdfaktorn tyngdfaktorn g är ungefär lika med 10 newton per kilogram .",
+   "s": 86.1,
+   "e": 92.15
   },
   {
-   "t": "Vätsketryck och vätskedjup",
-   "s": 115.16,
-   "e": 117.97
+   "t": "Vi beräknar först trycket från damen.",
+   "s": 92.15,
+   "e": 95.72
   },
   {
-   "t": "Vi fyller tre olika kärl (behållare) med vatten upp till samma nivå.",
-   "s": 117.97,
-   "e": 123.14
+   "t": "p avståndet d accelerationen a massan m är lika med F d a m delat med A d a m",
+   "s": 95.72,
+   "e": 121.89
   },
   {
-   "t": "Oavsett mängden vatten eller kärlets form så blir trycket detsamma.",
-   "s": 123.14,
-   "e": 127.91
+   "t": "F avståndet d accelerationen a massan m är lika med m d a m gånger tyngdfaktorn g som är lika med 60 gånger 10 som är lika med 600 newton A d a m som är lika med 1,0 kvadratcentimeter som är lika med 1,0 gånger 10 upphöjt till minus 4 kvadratmeter",
+   "s": 95.72,
+   "e": 121.89
   },
   {
-   "t": "Vätsketrycket beror alltså inte på kärlets form eller mängden vatten, utan enbart av vätskedjupet.",
-   "s": 127.91,
-   "e": 134.49
+   "t": "p avståndet d accelerationen a massan m är lika med 600 delat med 1,0 gånger 10 upphöjt till minus 4 som är lika med 6 000 000 pascal som är lika med 6,0 MPa",
+   "s": 121.89,
+   "e": 134.01
   },
   {
-   "t": "Om vi har en bestämd vätska (och är på jorden) avgör endast vätskedjupet vilket vätsketryck som verkar.",
-   "s": 134.49,
-   "e": 141.64
+   "t": "Vi beräknar sedan trycket från pansarvagnen med massan m är lika med 60 ton är lika med 60 000 kilogram.",
+   "s": 134.01,
+   "e": 141.41
   },
   {
-   "t": "Mängden vätska eller kärlets form spelar ingen roll.",
-   "s": 141.64,
-   "e": 145.69
+   "t": "p trycket p accelerationen a n sträckan s a r är lika med F p a n s a r delat med A p a n s a r",
+   "s": 141.41,
+   "e": 164.18
   },
   {
-   "t": "Du utsätts för samma vätsketryck oavsett om du dyker två meter ner i ett hav eller två meter ner i en simbassäng.",
-   "s": 145.69,
-   "e": 152.79
+   "t": "F trycket p accelerationen a n sträckan s a r är lika med m p a n s a r gånger tyngdfaktorn g som är lika med 60 000 gånger 10 som är lika med 600 000 newton A p a n s a r som är lika med 6,0 kvadratmeter",
+   "s": 141.41,
+   "e": 164.18
   },
   {
-   "t": "Vätsketrycket är detsamma i alla fyra bassänger eftersom dykaren befinner sig på samma djup.",
-   "s": 152.79,
-   "e": 158.9
+   "t": "p trycket p accelerationen a n sträckan s a r är lika med 600 000 delat med 6,0 som är lika med 100 000 pascal som är lika med 0,10 MPa",
+   "s": 164.18,
+   "e": 174.91
   },
   {
-   "t": "Tryckkraftens riktning",
-   "s": 158.9,
-   "e": 161.44
-  },
-  {
-   "t": "Vi täpper för ett luftfyllt rör i botten med ett löst lock och sänker ner i vatten.",
-   "s": 161.44,
-   "e": 166.88
-  },
-  {
-   "t": "Vi ser att locket sitter kvar mot botten av röret.",
-   "s": 166.88,
-   "e": 171.1
-  },
-  {
-   "t": "Det innebär att tryckkraften från vätskan verkar uppåt på locket och är större än tyngdkraften nedåt på locket.",
-   "s": 171.1,
-   "e": 178.05
-  },
-  {
-   "t": "På ett visst djup är vätsketrycket detsamma oavsett riktning på ytan.",
-   "s": 178.05,
-   "e": 183.28
-  },
-  {
-   "t": "Vätsketrycket verkar alltid vinkelrätt mot ytan.",
-   "s": 183.28,
-   "e": 187.43
-  },
-  {
-   "t": "Exempel 1 — Herbert Nitsch på 253 meters djup",
-   "s": 187.43,
-   "e": 192.44
-  },
-  {
-   "t": "I juni 2012 dök Herbert Nitsch, utan lufttuber, ned till 253,2 meters djup utanför Greklands kust. Vilket vätsketryck påverkade honom då?",
-   "s": 192.44,
-   "e": 204.9
-  },
-  {
-   "t": "Räkna med att saltvattnets densitet är 1 028 kilogram/m i kubik.",
-   "s": 204.9,
-   "e": 211.4
-  },
-  {
-   "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 211.4,
-   "e": 232.39
-  },
-  {
-   "t": "densiteten rho hastigheten v accelerationen a tiden t t e n är lika med 1 028 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,8 newton per kilogram parentesen han dök inte i Sverige slut parentes höjden h som är lika med 253,2 meter",
-   "s": 211.4,
-   "e": 232.39
-  },
-  {
-   "t": "trycket p är lika med 1 028 gånger 9,8 gånger 253,2 som är lika med 2 550 838,08 pascal som är ungefär lika med 2,6 gånger 10 upphöjt till 6 pascal som är lika med 2,6 MPa",
-   "s": 232.39,
-   "e": 249.53
-  },
-  {
-   "t": "Svar: 2,6 MPa (vilket motsvarar 25 gånger större tryck än normalt lufttryck)",
-   "s": 249.53,
-   "e": 256.8
-  },
-  {
-   "t": "Fysik i vardagen — Vattentorn",
-   "s": 256.8,
-   "e": 260.01
-  },
-  {
-   "t": "Högst upp i ett vattentorn finns en vattentank.",
-   "s": 260.01,
-   "e": 263.81
-  },
-  {
-   "t": "Vatten pumpas upp i tanken med en pump.",
-   "s": 263.81,
-   "e": 267.32
-  },
-  {
-   "t": "När vattnet väl är uppe i tanken behövs inte pumpen längre utan vattnet trycks ut i vattenledningarna av sin egen tyngd.",
-   "s": 267.32,
-   "e": 274.69
-  },
-  {
-   "t": "Ett sådant vattentorn syns till exempel tydligt i Stenstorp.",
-   "s": 274.69,
-   "e": 279.29
-  },
-  {
-   "t": "I Falköping har vi istället vattenreservoarer som fungerar på samma sätt, fast de är under marken (men fortfarande högre upp än vattenkranarna i våra hus).",
-   "s": 279.29,
-   "e": 289.23
-  },
-  {
-   "t": "Tänk till: var någonstans i lägenhetshuset är det störst tryck i vattenkranarna?",
-   "s": 289.23,
-   "e": 294.99
+   "t": "Svar: Damen — trycket från klacken är ca 60 gånger större!",
+   "s": 174.91,
+   "e": 180.0
   }
  ]
 }

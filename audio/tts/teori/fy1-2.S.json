@@ -1,403 +1,478 @@
 {
  "id": "fy1-2.S",
  "voice": "sv-SE-SofieNeural",
- "hash": "b580fb80bbed34354dfffeb5c3514c018dc1446d",
- "dur": 512.76,
+ "hash": "7c887ff9a822d012e5b5643c19bb077e2844ebcc",
+ "dur": 616.8,
  "segments": [
   {
    "t": "Sammanfattning — Rörelse",
    "s": 0.1,
-   "e": 3.0
+   "e": 2.99
   },
   {
    "t": "Kapitlet handlar om hur ett föremåls rörelse beskrivs med vektorer, diagram och formler.",
-   "s": 2.95,
-   "e": 9.15
+   "s": 2.94,
+   "e": 9.12
   },
   {
-   "t": "Du har mött skillnaden mellan sträcka och förflyttning, hur lutning och area i s-t-, v-t- och a-t-diagram tolkas, och hur formlerna för konstant acceleration — inklusive Torricellis ekvation — används för att lösa rörelseproblem, ibland utan att alls behöva ta omvägen via tiden.",
-   "s": 9.15,
-   "e": 25.65
+   "t": "Du har mött medelfarten som första rörelsebegrepp, skillnaden mellan fart och hastighet, skillnaden mellan sträcka och förflyttning, hur lutning och area i s-t-, v-t- och a-t-diagram tolkas, och hur formlerna för konstant acceleration — inklusive Torricellis ekvation — används för att lösa rörelseproblem, ibland utan att alls behöva ta omvägen via tiden.",
+   "s": 9.12,
+   "e": 30.02
   },
   {
    "t": "Begrepp att kunna",
-   "s": 25.65,
-   "e": 27.96
+   "s": 30.02,
+   "e": 32.34
   },
   {
    "t": "sträcka — den totala väglängden ett föremål har rört sig; skalär, betecknas s.",
-   "s": 27.96,
-   "e": 40.85
+   "s": 32.34,
+   "e": 45.26
   },
   {
    "t": "förflyttning — vektorn mellan start- och slutläge, betecknas Δs; skiljer sig från sträckan så fort rörelsen byter riktning.",
-   "s": 27.96,
-   "e": 40.85
+   "s": 32.34,
+   "e": 45.26
   },
   {
    "t": "vektor och skalär — en vektor har både storlek och riktning (t.ex. hastighet, kraft, acceleration); en skalär har bara storlek (t.ex. fart, tid, massa).",
-   "s": 40.85,
-   "e": 53.38
+   "s": 45.26,
+   "e": 57.79
+  },
+  {
+   "t": "medelfart — total tillryggalagd sträcka delat med total tid, v massan m är lika med sträckan s delat med tiden t ; en skalär storhet som saknar riktning.",
+   "s": 57.79,
+   "e": 67.8
   },
   {
    "t": "medelhastighet — genomsnittlig hastighet under ett tidsintervall, v massan m är lika med delta sträckan s delat med delta tiden t ; motsvaras av sekantens lutning i ett s-t-diagram.",
-   "s": 53.38,
-   "e": 65.49
+   "s": 67.8,
+   "e": 79.9
   },
   {
    "t": "momentanhastighet — hastigheten vid en viss tidpunkt; motsvaras av tangentens lutning i ett s-t-diagram.",
-   "s": 65.49,
-   "e": 73.14
+   "s": 79.9,
+   "e": 87.54
   },
   {
    "t": "acceleration — hur snabbt hastigheten ändras, betecknas a, SI-enhet m/s i kvadrat; en vektorstorhet.",
-   "s": 73.14,
-   "e": 81.54
+   "s": 87.54,
+   "e": 95.94
   },
   {
    "t": "retardation — negativ acceleration, det vill säga en inbromsning.",
-   "s": 81.54,
-   "e": 86.61
+   "s": 95.94,
+   "e": 101.01
   },
   {
    "t": "tyngdacceleration — accelerationen ett fritt fallande föremål får av tyngdkraften, betecknas g, med tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat i Sverige.",
-   "s": 86.61,
-   "e": 98.36
+   "s": 101.01,
+   "e": 112.76
   },
   {
    "t": "fritt fall — rörelse där enbart tyngdkraften påverkar föremålet (inget luftmotstånd); alla föremål faller då lika fort oavsett massa.",
-   "s": 98.36,
-   "e": 107.42
+   "s": 112.76,
+   "e": 121.83
   },
   {
    "t": "begynnelsehastighet — hastigheten vid tidpunkten t är lika med 0, betecknas v noll.",
-   "s": 107.42,
-   "e": 113.75
+   "s": 121.83,
+   "e": 128.15
   },
   {
    "t": "s-t-, v-t- och a-t-diagram — diagram med läge, hastighet respektive acceleration på y-axeln och tiden på x-axeln.",
-   "s": 113.75,
-   "e": 122.41
+   "s": 128.15,
+   "e": 136.81
   },
   {
    "t": "Torricellis ekvation — \"den tidlösa ekvationen\"; kopplar samman v, v noll, a och s utan att tiden t behöver vara känd.",
-   "s": 122.41,
-   "e": 131.04
+   "s": 136.81,
+   "e": 145.39
   },
   {
    "t": "Formler",
-   "s": 131.04,
-   "e": 132.86
+   "s": 145.39,
+   "e": 147.2
   },
   {
-   "t": "Vektoraddition (vinkelräta vektorer)",
-   "s": 132.86,
-   "e": 136.71
+   "t": "Medelfart",
+   "s": 147.2,
+   "e": 149.22
   },
   {
-   "t": "hastigheten v i kvadrat är lika med v ett i kvadrat plus v två i kvadrat vilket är ekvivalent med att v är lika med roten ur v ett i kvadrat plus v två i kvadrat",
-   "s": 136.71,
-   "e": 147.9
-  },
-  {
-   "t": "Gäller när två vektorer (t.ex. hastigheter) verkar vinkelrätt mot varandra.",
-   "s": 147.9,
-   "e": 154.03
-  },
-  {
-   "t": "Resultanten fås genom att parallellförflytta vektorerna och sedan använda Pythagoras sats.",
-   "s": 154.03,
-   "e": 160.28
-  },
-  {
-   "t": "Medelhastighet och medelacceleration",
-   "s": 160.28,
-   "e": 163.78
-  },
-  {
-   "t": "v massan m är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett",
-   "s": 163.78,
-   "e": 172.82
-  },
-  {
-   "t": "a massan m är lika med delta hastigheten v delat med delta tiden t som är lika med v två minus v ett delat med t två minus t ett",
-   "s": 172.82,
-   "e": 182.21
+   "t": "v massan m är lika med sträckan s delat med tiden t",
+   "s": 149.22,
+   "e": 153.76
   },
   {
    "t": "där",
-   "s": 182.21,
-   "e": 183.7
+   "s": 153.76,
+   "e": 155.24
   },
   {
-   "t": "Δs är lika med förflyttning (meter)",
-   "s": 183.7,
-   "e": 187.22
+   "t": "vₘ är lika med medelfart (meter per sekund)",
+   "s": 155.24,
+   "e": 159.4
   },
   {
-   "t": "Δv är lika med hastighetsändring (meter per sekund)",
-   "s": 187.22,
-   "e": 191.82
-  },
-  {
-   "t": "Δt är lika med tidsintervall (sekunder)",
-   "s": 191.82,
-   "e": 195.78
-  },
-  {
-   "t": "vₘ är lika med medelhastighet (meter per sekund)",
-   "s": 195.78,
-   "e": 200.34
-  },
-  {
-   "t": "aₘ är lika med medelacceleration (m/s i kvadrat)",
-   "s": 200.34,
-   "e": 205.64
-  },
-  {
-   "t": "Rörelse med konstant acceleration",
-   "s": 205.64,
-   "e": 209.06
-  },
-  {
-   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t",
-   "s": 209.06,
-   "e": 222.64
-  },
-  {
-   "t": "sträckan s är lika med parentesen s noll slut parentes plus v noll gånger tiden t plus accelerationen a gånger t i kvadrat delat med 2",
-   "s": 209.06,
-   "e": 222.64
-  },
-  {
-   "t": "v massan m är lika med v noll plus hastigheten v delat med 2",
-   "s": 222.64,
-   "e": 227.94
-  },
-  {
-   "t": "där",
-   "s": 227.94,
-   "e": 229.45
-  },
-  {
-   "t": "v är lika med hastighet (meter per sekund)",
-   "s": 229.45,
-   "e": 233.54
-  },
-  {
-   "t": "v noll är lika med begynnelsehastighet (meter per sekund)",
-   "s": 233.54,
-   "e": 238.66
-  },
-  {
-   "t": "a är lika med acceleration (m/s i kvadrat)",
-   "s": 238.66,
-   "e": 243.59
+   "t": "s är lika med sträcka (meter)",
+   "s": 159.4,
+   "e": 162.72
   },
   {
    "t": "t är lika med tid (sekunder)",
-   "s": 243.59,
-   "e": 246.89
+   "s": 162.72,
+   "e": 166.01
   },
   {
-   "t": "s är lika med förflyttning (meter)",
-   "s": 246.89,
-   "e": 250.44
+   "t": "Enhetsomvandling — m/s och km/h",
+   "s": 166.01,
+   "e": 178.11
   },
   {
-   "t": "s noll är lika med start-/utgångsläge (meter)",
-   "s": 250.44,
-   "e": 255.31
+   "t": "meter per sekund xrightarrow gånger 3,6 kilometer per timme kilometer per timme xrightarrow div 3,6 meter per sekund",
+   "s": 166.01,
+   "e": 178.11
   },
   {
-   "t": "vₘ är lika med medelhastighet vid konstant acceleration (meter per sekund)",
-   "s": 255.31,
-   "e": 261.3
+   "t": "Vektoraddition (vinkelräta vektorer)",
+   "s": 178.11,
+   "e": 182.01
   },
   {
-   "t": "Specialfall",
-   "s": 261.3,
-   "e": 263.41
+   "t": "hastigheten v i kvadrat är lika med v ett i kvadrat plus v två i kvadrat vilket är ekvivalent med att v är lika med roten ur v ett i kvadrat plus v två i kvadrat",
+   "s": 182.01,
+   "e": 193.28
   },
   {
-   "t": "Utan starthastighet gäller v noll är lika med 0 , vilket ger",
-   "s": 263.41,
-   "e": 268.51
+   "t": "Gäller när två vektorer (t.ex. hastigheter) verkar vinkelrätt mot varandra.",
+   "s": 193.28,
+   "e": 199.4
   },
   {
-   "t": "hastigheten v är lika med accelerationen a gånger tiden t sträckan s som är lika med a gånger t i kvadrat delat med 2",
-   "s": 268.51,
-   "e": 276.85
+   "t": "Resultanten fås genom att parallellförflytta vektorerna och sedan använda Pythagoras sats.",
+   "s": 199.4,
+   "e": 205.65
   },
   {
-   "t": "Vid fritt fall gäller accelerationen a är lika med minus tyngdfaktorn g där tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat , vilket ger",
-   "s": 276.85,
-   "e": 287.44
+   "t": "Medelhastighet och medelacceleration",
+   "s": 205.65,
+   "e": 209.15
   },
   {
-   "t": "hastigheten v är lika med v noll minus tyngdfaktorn g gånger tiden t sträckan s som är lika med v noll gånger t minus g gånger t i kvadrat delat med 2",
-   "s": 287.44,
-   "e": 298.01
+   "t": "v massan m är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett",
+   "s": 209.15,
+   "e": 218.2
   },
   {
-   "t": "Torricellis ekvation",
-   "s": 298.01,
-   "e": 300.55
-  },
-  {
-   "t": "hastigheten v i kvadrat minus v noll i kvadrat är lika med 2 accelerationen a sträckan s",
-   "s": 300.65,
-   "e": 307.74
+   "t": "a massan m är lika med delta hastigheten v delat med delta tiden t som är lika med v två minus v ett delat med t två minus t ett",
+   "s": 218.2,
+   "e": 227.59
   },
   {
    "t": "där",
-   "s": 307.69,
-   "e": 309.2
+   "s": 227.59,
+   "e": 229.07
   },
   {
-   "t": "v är lika med sluthastighet (meter per sekund)",
-   "s": 309.2,
-   "e": 313.68
+   "t": "Δs är lika med förflyttning (meter)",
+   "s": 229.07,
+   "e": 232.6
+  },
+  {
+   "t": "Δv är lika med hastighetsändring (meter per sekund)",
+   "s": 232.6,
+   "e": 237.2
+  },
+  {
+   "t": "Δt är lika med tidsintervall (sekunder)",
+   "s": 237.2,
+   "e": 241.15
+  },
+  {
+   "t": "vₘ är lika med medelhastighet (meter per sekund)",
+   "s": 241.15,
+   "e": 245.71
+  },
+  {
+   "t": "aₘ är lika med medelacceleration (m/s i kvadrat)",
+   "s": 245.71,
+   "e": 251.01
+  },
+  {
+   "t": "Rörelse med konstant acceleration",
+   "s": 251.01,
+   "e": 254.44
+  },
+  {
+   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t",
+   "s": 254.44,
+   "e": 268.01
+  },
+  {
+   "t": "sträckan s är lika med parentesen s noll slut parentes plus v noll gånger tiden t plus accelerationen a gånger t i kvadrat delat med 2",
+   "s": 254.44,
+   "e": 268.01
+  },
+  {
+   "t": "v massan m är lika med v noll plus hastigheten v delat med 2",
+   "s": 268.01,
+   "e": 273.31
+  },
+  {
+   "t": "där",
+   "s": 273.31,
+   "e": 274.82
+  },
+  {
+   "t": "v är lika med hastighet (meter per sekund)",
+   "s": 274.82,
+   "e": 278.91
   },
   {
    "t": "v noll är lika med begynnelsehastighet (meter per sekund)",
-   "s": 313.68,
-   "e": 318.8
+   "s": 278.91,
+   "e": 284.04
   },
   {
    "t": "a är lika med acceleration (m/s i kvadrat)",
-   "s": 318.8,
-   "e": 323.73
+   "s": 284.04,
+   "e": 288.96
+  },
+  {
+   "t": "t är lika med tid (sekunder)",
+   "s": 288.96,
+   "e": 292.26
   },
   {
    "t": "s är lika med förflyttning (meter)",
-   "s": 323.73,
-   "e": 327.26
+   "s": 292.26,
+   "e": 295.8
+  },
+  {
+   "t": "s noll är lika med start-/utgångsläge (meter)",
+   "s": 295.8,
+   "e": 300.66
+  },
+  {
+   "t": "vₘ är lika med medelhastighet vid konstant acceleration (meter per sekund)",
+   "s": 300.66,
+   "e": 308.12
+  },
+  {
+   "t": "Specialfall",
+   "s": 308.07,
+   "e": 310.2
+  },
+  {
+   "t": "Utan starthastighet gäller v noll är lika med 0 , vilket ger",
+   "s": 310.2,
+   "e": 315.32
+  },
+  {
+   "t": "hastigheten v är lika med accelerationen a gånger tiden t sträckan s som är lika med a gånger t i kvadrat delat med 2",
+   "s": 315.32,
+   "e": 323.65
+  },
+  {
+   "t": "Vid fritt fall gäller accelerationen a är lika med minus tyngdfaktorn g där tyngdfaktorn g är ungefär lika med 9,82 meter per sekund i kvadrat , vilket ger",
+   "s": 323.65,
+   "e": 334.24
+  },
+  {
+   "t": "hastigheten v är lika med v noll minus tyngdfaktorn g gånger tiden t sträckan s som är lika med v noll gånger t minus g gånger t i kvadrat delat med 2",
+   "s": 334.24,
+   "e": 344.83
+  },
+  {
+   "t": "Torricellis ekvation",
+   "s": 344.83,
+   "e": 347.34
+  },
+  {
+   "t": "hastigheten v i kvadrat minus v noll i kvadrat är lika med 2 accelerationen a sträckan s",
+   "s": 347.34,
+   "e": 354.39
+  },
+  {
+   "t": "där",
+   "s": 354.39,
+   "e": 355.9
+  },
+  {
+   "t": "v är lika med sluthastighet (meter per sekund)",
+   "s": 355.9,
+   "e": 360.38
+  },
+  {
+   "t": "v noll är lika med begynnelsehastighet (meter per sekund)",
+   "s": 360.38,
+   "e": 365.5
+  },
+  {
+   "t": "a är lika med acceleration (m/s i kvadrat)",
+   "s": 365.5,
+   "e": 370.43
+  },
+  {
+   "t": "s är lika med förflyttning (meter)",
+   "s": 370.43,
+   "e": 373.97
   },
   {
    "t": "Gäller vid konstant acceleration och används när tiden t inte är given.",
-   "s": 327.26,
-   "e": 332.48
+   "s": 373.97,
+   "e": 379.18
   },
   {
    "t": "Viktiga samband och metoder",
-   "s": 332.48,
-   "e": 335.36
+   "s": 379.18,
+   "e": 382.05
+  },
+  {
+   "t": "Medelfart och medelhastighet är inte samma sak: medelfarten v massan m är lika med sträckan s delat med tiden t räknas på hela den tillryggalagda sträckan och saknar riktning, medan medelhastigheten v massan m är lika med delta sträckan s delat med delta tiden t räknas på förflyttningen och är en vektor.",
+   "s": 382.05,
+   "e": 400.35
+  },
+  {
+   "t": "Vid en rörelse fram och tillbaka till startpunkten är medelhastigheten noll medan medelfarten inte är det.",
+   "s": 400.35,
+   "e": 407.23
+  },
+  {
+   "t": "Räkna om till SI-enheter innan värden sätts in: dela km/h med 3,6 för att få m/s, multiplicera m/s med 3,6 för att få km/h.",
+   "s": 407.23,
+   "e": 419.79
   },
   {
    "t": "I ett s-t-diagram motsvarar sekantens lutning medelhastigheten i ett intervall och tangentens lutning momentanhastigheten i en punkt.",
-   "s": 335.36,
-   "e": 344.04
+   "s": 419.79,
+   "e": 428.5
   },
   {
    "t": "I ett v-t-diagram motsvarar linjens lutning accelerationen.",
-   "s": 344.04,
-   "e": 349.21
+   "s": 428.5,
+   "e": 433.69
   },
   {
    "t": "Arean mellan grafen och t-axeln motsvarar förflyttningen — positiv ovanför axeln, negativ under.",
-   "s": 349.21,
-   "e": 356.15
+   "s": 433.69,
+   "e": 440.63
   },
   {
    "t": "Den tillryggalagda sträckan i ett v-t-diagram fås genom att räkna ALLA areor som positiva (absolutbelopp), till skillnad från förflyttningen.",
-   "s": 356.15,
-   "e": 365.23
+   "s": 440.63,
+   "e": 449.7
   },
   {
    "t": "I ett a-t-diagram motsvarar arean mellan grafen och t-axeln hastighetsändringen Δv.",
-   "s": 365.23,
-   "e": 380.94
+   "s": 449.7,
+   "e": 465.42
   },
   {
    "t": "Teckenkonvention: en positiv riktning väljs (ofta uppåt eller åt höger); rörelser åt motsatt håll får negativa värden för läge, hastighet och acceleration.",
-   "s": 365.23,
-   "e": 380.94
+   "s": 449.7,
+   "e": 465.42
   },
   {
    "t": "Formeln hastigheten v är lika med sträckan s delat med tiden t gäller ENDAST vid konstant hastighet — vid accelererad rörelse måste formlerna för konstant acceleration (eller Torricellis ekvation) användas istället.",
-   "s": 380.94,
-   "e": 393.81
+   "s": 465.42,
+   "e": 478.29
   },
   {
    "t": "Torricellis ekvation använder förflyttning s, inte sträcka, gäller bara i en dimension och bara vid konstant acceleration (alltså inte vid t.ex. luftmotstånd, fjäderkraft eller cirkelrörelse).",
-   "s": 393.81,
-   "e": 406.75
+   "s": 478.29,
+   "e": 491.23
   },
   {
    "t": "Svåra ekvationssystem med två obekanta (t.ex. a och t) kan lösas grafiskt eller med CAS-funktionen i GeoGebra — redovisa alltid hur ekvationssystemet ställdes upp och vilken lösningsmetod som användes.",
-   "s": 406.75,
-   "e": 419.96
+   "s": 491.23,
+   "e": 504.44
   },
   {
    "t": "Figurer värda att minnas",
-   "s": 419.96,
-   "e": 422.99
+   "s": 504.44,
+   "e": 507.47
   },
   {
    "t": "Sträcka och förflyttning skiljer sig så fort vägen inte är rak — sträckan är hela vägen (4 + 3 meter), förflyttningen är den räta vägen mellan start och mål (5 meter).",
-   "s": 422.99,
-   "e": 434.24
+   "s": 507.47,
+   "e": 518.72
   },
   {
    "t": "I ett s-t-diagram ger sekanten mellan två punkter medelhastigheten, och tangenten i en punkt ger momentanhastigheten där.",
-   "s": 434.24,
-   "e": 442.43
+   "s": 518.72,
+   "e": 526.9
   },
   {
    "t": "Formeln för förflyttning vid konstant acceleration härleds ur arean under en v-t-graf: en rektangel (v noll gånger t) plus en triangel (Δv gånger t / 2).",
-   "s": 442.43,
-   "e": 454.01
+   "s": 526.9,
+   "e": 538.54
   },
   {
    "t": "Inför provet",
-   "s": 454.01,
-   "e": 456.16
+   "s": 538.54,
+   "e": 540.7
+  },
+  {
+   "t": "Kan du formeln för medelfart och lösa ut sträcka respektive tid ur den?",
+   "s": 540.7,
+   "e": 545.87
+  },
+  {
+   "t": "Kan du växla mellan m/s och km/h utan miniräknare (omvandlingsfaktor 3,6)?",
+   "s": 545.87,
+   "e": 554.1
+  },
+  {
+   "t": "Kan du förklara skillnaden mellan medelfart och medelhastighet?",
+   "s": 554.1,
+   "e": 558.75
   },
   {
    "t": "Kan du skilja på sträcka och förflyttning, och avgöra om en storhet är en vektor eller en skalär?",
-   "s": 456.16,
-   "e": 462.74
+   "s": 558.75,
+   "e": 565.3
   },
   {
    "t": "Kan du addera vinkelräta vektorer genom parallellförflyttning och Pythagoras sats?",
-   "s": 462.74,
-   "e": 468.5
+   "s": 565.3,
+   "e": 571.08
   },
   {
    "t": "Kan du läsa av och tolka lutningen (sekant/tangent) i ett s-t-diagram?",
-   "s": 468.5,
-   "e": 474.51
+   "s": 571.08,
+   "e": 577.09
   },
   {
    "t": "Kan du läsa av och tolka lutningen och arean i ett v-t-diagram, och skilja på förflyttning och tillryggalagd sträcka?",
-   "s": 474.51,
-   "e": 481.86
+   "s": 577.09,
+   "e": 584.44
   },
   {
    "t": "Kan du tolka arean i ett a-t-diagram som en hastighetsändring?",
-   "s": 481.86,
-   "e": 486.64
+   "s": 584.44,
+   "e": 589.22
   },
   {
    "t": "Kan du räkna med tecken vid inbromsning och rörelse i negativ riktning?",
-   "s": 486.64,
-   "e": 491.63
+   "s": 589.22,
+   "e": 595.78
   },
   {
    "t": "Kan du formlerna för hastighet och förflyttning vid konstant acceleration, inklusive specialfallen utan starthastighet och vid fritt fall?",
-   "s": 491.63,
-   "e": 500.11
+   "s": 595.73,
+   "e": 604.21
   },
   {
    "t": "Kan du använda Torricellis ekvation när tiden inte är given, och veta när den INTE får användas?",
-   "s": 500.11,
-   "e": 506.44
+   "s": 604.21,
+   "e": 610.48
   },
   {
    "t": "Kan du ställa upp och lösa ett ekvationssystem med två obekanta, till exempel i GeoGebra?",
-   "s": 506.44,
-   "e": 512.76
+   "s": 610.48,
+   "e": 616.8
   }
  ]
 }

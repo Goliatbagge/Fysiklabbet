@@ -14,6 +14,64 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-19) — kan tas upp senare
+
+- **Enda fissionsexperiment kartlägger överskott av gammastrålning från ett
+  dussintal instabila atomkärnor** — internationellt samarbete (ledd av IFJ
+  PAN, Krakow, analys av Michal Ciemala) vid GANIL-acceleratorn i Caen,
+  Frankrike: en beryllium-9-skiva beskjuten med uran-238-joner gav upphov till
+  instabila curium-247-kärnor som klövs i fission, och kombinationen av
+  VAMOS++ (massa/laddning) och PARIS-gammadetektorn kartlade "pygmy"-
+  resonanser (kollektiva vibrationer i neutronrika kärnor) i en hel familj
+  isotoper nära tenn-132 samtidigt. Bra kärnfysik-vinkel (fission,
+  reaktorfysik, kärnavfall) men vi körde precis en kärnfysik/atomfysik-nyhet
+  (radiummolekyler) 2026-07-18 — spara till ämnet inte känns upprepat. Källor:
+  https://phys.org/news/2026-07-fission-excess-gamma-rays-dozen.html ,
+  Physics Letters B, DOI 10.1016/j.physletb.2026.140506 (N. Kumar et al.,
+  2026). (tillagd 2026-07-19)
+- **Kvantsammanflätning förklarar varför "konstiga metaller" har onormalt
+  hög resistans** — TU Wien (Silke Bühler-Paschen, Federico Mazza m.fl.)
+  har med inelastisk neutronspridning på en tungfermion-metall
+  (Ce₃Pd₂₀Si₆) vid ILL Grenoble och kvant-Fisher-information som mått på
+  sammanflätning visat att minst nio kvantsammanflätade enheter samverkar
+  i "strange metal"-tillståndet. Fin ellära-koppling (resistans,
+  temperaturberoende) men teoretiskt tungt (tungfermionfysik,
+  kvant-Fisher-information) och kräver ordentlig förenkling. Publicerad i
+  Nature Physics 2026-07-17. Källa:
+  https://physicsworld.com/a/quantum-entanglement-explains-why-strange-metals-are-so-strange/
+  (tillagd 2026-07-19)
+- **Joner flyter som en vätska genom en fast kristall** — Osaka University
+  med AIST, RIKEN och Institute of Science Tokyo (Takeshi Kawasaki m.fl.)
+  har förklarat superjonledning (t.ex. i silverjodid) via "sublattice
+  melting": de rörliga jonerna tappar sin ordning och rör sig kollektivt,
+  strängformat, medan värdgittret förblir kristallint. Relevant för
+  fastkroppsbatterier men tekniskt tungt (anharmoniska gittervibrationer)
+  för gymnasienivå. Publicerad i PNAS, DOI 10.1073/pnas.2605867123.
+  (tillagd 2026-07-19)
+- **OBS — undvik dubblett med redan publicerad baklänges-sprinkler-nyheten
+  (2026-07-14)**: Physics World skrev 2026-07-17 om samma NYU-forskning
+  (Leif Ristroph m.fl., PNAS) som redan låg till grund för vår artikel
+  ”Så snurrar en sprinkler som suger i sig vatten” — bara nyare
+  omtäckning/officiellt PNAS-publiceringsdatum, inte ny forskning. Källa:
+  https://physicsworld.com/a/experiments-provide-new-insights-into-the-reverse-sprinkler-problem/
+  (tillagd 2026-07-19)
+- **Ovanligt kraftig gravitationsvågssignal (GW250114) mäter för första
+  gången ett svart håls händelsehorisont direkt** — Perimeter Institute
+  (Sizheng Ma) och OzGrav (Ling Sun, Neil Lu m.fl.), publicerad i Nature
+  2026-07-16, signal-brusförhållande ~80 (tre gånger starkare än LIGOs
+  första detektion 2016). Häftig Fysik 2-vinkel (gravitationsvågor,
+  allmän relativitet) men vi har kört mycket svart hål/gravitationsvågs-
+  astronomi senaste veckorna. Källa:
+  https://physicsworld.com (sök "super-loud gravitational waves black
+  hole event horizons"), Nature 2026. (tillagd 2026-07-19)
+- **”Tricky Tension” — översiktsartikel om yt- och linjespänning i textilier**
+  — Warren Jasper, North Carolina State University, Nature Physics.
+  Trevlig vardagsfysik-vinkel (varför regnkläder och sportkläder fungerar)
+  men är en översiktsartikel utan ny experimentell upptäckt, svagare
+  nyhetsvärde. Bra reservartikel vid nyhetstorka. Källa:
+  https://phys.org/news/2026-07-physics-mathematical.html , Nature Physics,
+  DOI 10.1038/s41567-026-03345-w. (tillagd 2026-07-19)
+
 ## Fynd som inte användes (2026-07-18) — kan tas upp senare
 
 - **OBS — undvik ”PLATON-kameran som spårar osynliga partiklar i 3D” om den dyker

@@ -180,6 +180,17 @@
             opacity: 0.85;
         }
 
+        /* Fullskärmsläge: scenen är #canvas-container. Reglageraden i den
+           flytande panelen (.fs-controls, global stil i styles-laborans-sim.css) */
+        #canvas-container {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .fs-controls .fs-row { display: flex; align-items: center; gap: 10px; }
+        .fs-controls .fs-row input[type="range"] { flex: 1; }
+        .fs-controls .fs-label { min-width: 128px; }
+        .fs-controls .fs-value { min-width: 82px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
         /* Mobil: styrknapparna får inte täcka breadcrumb/titel — flytta ned
            dem under titelblocket, i scenens tomma övre yta. */
         @media (max-width: 600px) {
@@ -241,7 +252,7 @@
 
     <main class="min-h-screen w-full dark-container text-slate-100 flex flex-col lg:flex-row">
         <div id="canvas-container" class="flex-grow min-h-[600px] w-full lg:w-1/2 relative" style="background: var(--lab-bg);">
-            <div class="absolute top-4 left-4 z-10 p-2">
+            <div class="absolute top-4 left-16 z-10 p-2">
                 <div class="breadcrumb mb-2" style="font-size: 0.75rem;">
                     <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik nivå 2</a> / Plan pendel
                 </div>
@@ -260,6 +271,42 @@
                     ⏱ Ta tiden för 10 pendlingar
                 </button>
             </div>
+            <button id="fs-btn" class="fs-btn" aria-label="Fullskärm" title="Fullskärm">
+                <svg id="fs-icon-expand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                </svg>
+                <svg id="fs-icon-compress" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                </svg>
+            </button>
+            <div id="fs-controls" class="fs-controls collapsed">
+                <div class="fs-row">
+                    <span class="fs-label">Trådlängd <em>l</em></span>
+                    <input id="fs-length-slider" type="range" min="0.5" max="5" step="0.1" value="1.5">
+                    <span class="fs-value" id="fs-length-value">1,50 m</span>
+                </div>
+                <div class="fs-row">
+                    <span class="fs-label">Tyngdfaktor <em>g</em></span>
+                    <input id="fs-gravity-slider" type="range" min="1" max="25" step="0.1" value="9.81">
+                    <span class="fs-value" id="fs-gravity-value">9,81 m/s²</span>
+                </div>
+                <div class="fs-row">
+                    <span class="fs-label">Massa <em>m</em></span>
+                    <input id="fs-mass-slider" type="range" min="10" max="300" step="5" value="150">
+                    <span class="fs-value" id="fs-mass-value">150 g</span>
+                </div>
+                <div class="fs-row">
+                    <span class="fs-label">Startvinkel <em>θ</em></span>
+                    <input id="fs-angle-slider" type="range" min="0" max="25" step="1" value="0">
+                    <span class="fs-value" id="fs-angle-value">0°</span>
+                </div>
+            </div>
+            <button id="fs-toggle-handle" class="fs-toggle-handle" aria-expanded="false" title="Visa reglage">
+                <svg id="fs-toggle-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg);">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+                <span id="fs-toggle-text">Reglage</span>
+            </button>
         </div>
         <div class="w-full lg:w-1/2 p-6 md:p-8 flex flex-col space-y-8 overflow-y-auto"
              id="controls-container"
@@ -883,6 +930,8 @@
                     canvasTimingButton.textContent = '⏱ Ta tiden för 10 pendlingar';
                 }
             }
+
+            syncFsControls();
         }
 
         // Fast value update - directly update DOM without re-rendering
@@ -909,6 +958,8 @@
             const period = 2 * Math.PI * Math.sqrt(params.length / params.gravity);
             const periodDisplay = container.querySelector('.period-display');
             if (periodDisplay) periodDisplay.textContent = period.toFixed(3).replace('.', ',') + ' s';
+
+            syncFsControls();
         }
 
         // Setup event listeners using event delegation - only runs once
@@ -1002,6 +1053,106 @@
                     renderUI();
                 }
             }
+        });
+
+        // ── Fullskärmsläge ─────────────────────────────────────────────
+        const fsBtn = document.getElementById('fs-btn');
+        const fsIconExpand = document.getElementById('fs-icon-expand');
+        const fsIconCompress = document.getElementById('fs-icon-compress');
+        const fsControlsEl = document.getElementById('fs-controls');
+        const fsToggleHandle = document.getElementById('fs-toggle-handle');
+        const fsToggleText = document.getElementById('fs-toggle-text');
+        const fsToggleChevron = document.getElementById('fs-toggle-chevron');
+
+        function isFullscreenNow() {
+            return !!(document.fullscreenElement || document.webkitFullscreenElement);
+        }
+
+        function resizeRenderer() {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+
+        fsBtn.addEventListener('click', () => {
+            if (isFullscreenNow()) {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            } else {
+                (container.requestFullscreen || container.webkitRequestFullscreen).call(container);
+            }
+        });
+
+        function onFullscreenChange() {
+            const fs = isFullscreenNow();
+            fsIconExpand.style.display = fs ? 'none' : '';
+            fsIconCompress.style.display = fs ? '' : 'none';
+            fsBtn.title = fs ? 'Lämna fullskärm' : 'Fullskärm';
+            requestAnimationFrame(resizeRenderer);
+            setTimeout(resizeRenderer, 150);
+        }
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+        fsToggleHandle.addEventListener('click', () => {
+            fsControlsEl.classList.toggle('collapsed');
+            const nowOpen = !fsControlsEl.classList.contains('collapsed');
+            fsToggleText.textContent = nowOpen ? 'Dölj reglage' : 'Reglage';
+            fsToggleHandle.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+            fsToggleHandle.title = nowOpen ? 'Dölj reglage' : 'Visa reglage';
+            fsToggleChevron.style.transform = nowOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+
+        // Synka fullskärmspanelens glidare med parametrar + tillstånd
+        // (samma state som sidopanelen — varje reglage har samma värde överallt)
+        function syncFsControls() {
+            const idle = simulationState === 'idle';
+            const rows = [
+                ['fs-length-slider', 'fs-length-value', params.length, params.length.toFixed(2).replace('.', ',') + ' m'],
+                ['fs-gravity-slider', 'fs-gravity-value', params.gravity, params.gravity.toFixed(2).replace('.', ',') + ' m/s²'],
+                ['fs-mass-slider', 'fs-mass-value', params.mass * 1000, (params.mass * 1000).toFixed(0) + ' g'],
+                ['fs-angle-slider', 'fs-angle-value', params.initialAngle, Math.round(params.initialAngle) + '°'],
+            ];
+            for (const [sliderId, valueId, val, text] of rows) {
+                const s = document.getElementById(sliderId);
+                const t = document.getElementById(valueId);
+                if (s) {
+                    if (document.activeElement !== s) s.value = val;
+                    s.disabled = !idle;
+                }
+                if (t) t.textContent = text;
+            }
+            // Håll sidopanelens glidare i samma läge
+            const mainRows = [
+                ['length-slider', params.length],
+                ['gravity-slider', params.gravity],
+                ['mass-slider', params.mass * 1000],
+                ['angle-slider', params.initialAngle],
+            ];
+            for (const [id, val] of mainRows) {
+                const el = document.getElementById(id);
+                if (el && document.activeElement !== el) el.value = val;
+            }
+        }
+
+        fsControlsEl.addEventListener('input', (e) => {
+            if (e.target.id === 'fs-length-slider') {
+                params.length = parseFloat(e.target.value);
+                scene.remove(labStand);
+                labStand = createLabStand(params.length);
+                scene.add(labStand);
+                createPendulum(params.length, params.mass);
+                updateCameraTarget();
+                updateAngleVisuals();
+            } else if (e.target.id === 'fs-gravity-slider') {
+                params.gravity = parseFloat(e.target.value);
+            } else if (e.target.id === 'fs-mass-slider') {
+                params.mass = parseFloat(e.target.value) / 1000;
+                createPendulum(params.length, params.mass);
+            } else if (e.target.id === 'fs-angle-slider') {
+                params.initialAngle = parseFloat(e.target.value);
+                updateAngleVisuals();
+            }
+            updateValueDisplays();
         });
 
         renderUI();

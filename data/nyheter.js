@@ -34,6 +34,47 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-19-tour-de-france-aerodynamik",
+    date: "2026-07-19",
+    title: "Valet av följebil kan avgöra Tour de France — fysiker mäter den osynliga knuffen bakom cyklisten",
+    deck: "En ny studie från Heriot-Watt University i Skottland visar att bilen som kör tätt bakom en tempolopp-cyklist ger ett mätbart aerodynamiskt lyft — och att storleken på lyftet nästan helt avgörs av bilens form. Inför tisdagens enda individuella tempolopp i årets Tour de France varnar forskarna för att skillnaden mellan olika följebilar kan bli tillräckligt stor för att avgöra loppet.",
+    category: "Mekanik",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-19-tour-de-france-aerodynamik.jpg",
+    imageAlt: "Åtta gråskaliga 3D-datormodeller av bilar och skåpbilar, alla med tävlingscyklar monterade på taket, uppställda i ett rutnät mot vit bakgrund — fordonstyperna som testades i vindtunnelstudien.",
+    imageCredit: "Bild: Heriot-Watt University (pressbild)",
+    tags: ["mekanik", "krafter", "luftmotstånd", "aerodynamik", "tryck", "newtons lagar", "vindtunnel", "strömningsmekanik", "cykling", "tour de france", "fysik 1"],
+    sources: [
+      { name: "Heriot-Watt University (pressmeddelande)", url: "https://www.hw.ac.uk/news/2026/study-finds-choice-of-team-car-could-decide-the-tour-de-france" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-choice-team-car-de-france.html" },
+      { name: "road.cc", url: "https://road.cc/news/could-this-years-tour-de-france-time-trial-be-decided-by-the-size-of-the-team-car-expert-proposes-a-maximum-cda-value-for-team-cars-and-extended-following-distances-after-research-finds-larger" }
+    ],
+    research: { citation: "B. Blocken, ”Cyclist aerodynamic resistance is influenced by the type of the following team car”, forskningsrapport, Heriot-Watt University / Ansys (2026)", url: "https://www.urbanphysics.net/Article_DiffVehicles_BBlocken.pdf" },
+    body: [
+      { type: "p", html: "På tisdag avgörs det enda individuella tempoloppet i årets Tour de France: 26,1&nbsp;km längs Genèvesjöns strand mellan Évian-les-Bains och Thonon-les-Bains. Men enligt en ny studie från Heriot-Watt University i Skottland kan resultatet påverkas av något som knappt syns i tv-sändningen — vilken bil som kör tätt bakom respektive cyklist. Forskarna, ledda av professor Bert Blocken som är chef för universitetets flygtekniska forskargrupp, har med hjälp av datorsimuleringar och vindtunnelmätningar visat att en följebil ger cyklisten ett mätbart lyft i ryggen, och att lyftets storlek nästan enbart beror på bilens form." },
+
+      { type: "h2", text: "Tryckbubblan som håller cyklisten tillbaka" },
+      { type: "p", html: "Luftmotstånd uppstår genom en kombination av två tryckzoner: en zon av övertryck framför kroppen som trycker den bakåt, och en sugzon i vaken bakom som drar tillbaka den. Ett fordon som kör tätt bakom skapar samma effekt, fast i mycket större skala — och de två tryckzonerna kan delvis ta ut varandra." },
+      { type: "quote", html: "”När en cyklist kör bildas en zon av övertryck framför kroppen som håller den tillbaka, och en sugzon bakom som drar tillbaka den — det är detta som ger luftmotstånd. En bil skapar samma effekt, fast i mycket större skala. Den trycker framför sig en stor bubbla av övertryck, och när bilen kör tätt bakom en cyklist tar den bubblan delvis ut sugzonen bakom föraren, vilket ger cyklisten ett märkbart lyft.”", cite: "Bert Blocken, professor i flygteknik, Heriot-Watt University" },
+
+      { type: "h2", text: "Åtta bilar i vindtunneln" },
+      { type: "p", html: "Forskarlaget, som arbetat tillsammans med mjukvaruföretaget Ansys, testade åtta olika fordonstyper: en liten Mercedes Smart Fortwo, en Jaguar F-Type, en typisk stationsvagn, en typisk SUV, den skåpiga terrängbilen Ineos Grenadier samt tre skåpbilar. Resultatet visade att fördelen bara beror på två saker: avståndet till cyklisten och ett enda tal som beskriver bilens luftmotstånd, den så kallade CdA — dragkoefficienten multiplicerad med bilens tvärsnittsarea. Ju större och klumpigare bil, desto högre CdA och desto större knuff får cyklisten framför." },
+      { type: "p", html: "Vid bara en meters avstånd sjönk cyklistens luftmotstånd med nästan 14&nbsp;procent i mätningarna. Vid tio meters avstånd — närmare det avstånd följebilar faktiskt håller under lopp — gav en typisk stationsvagn cyklisten en tidsvinst på 2,3&nbsp;sekunder över hela den 26,1&nbsp;km långa banan, medan den betydligt skrymmande Ineos Grenadier gav mer än dubbelt så mycket: 5,5&nbsp;sekunder." },
+      { type: "quote", html: "”Man kan tycka att det är små tal, men tempolopp på elitnivå avgörs ibland med en tiondels sekund, till och med en hundradels. I det sammanhanget är de här vinsterna enorma. De skulle kunna avgöra vem som vinner tempoloppet i Tour de France.”", cite: "Bert Blocken, Heriot-Watt University" },
+
+      { type: "h2", text: "Regeln som inte räcker till" },
+      { type: "p", html: "Cykelns internationella förbund UCI utökade redan 2023 minimiavståndet mellan följebil och cyklist från 10 till 25&nbsp;meter, efter en tidigare studie av samma forskargrupp om cyklar som transporterats på bilarnas tak. Målet var uttalat att följebilar inte skulle påverka cyklisternas prestation alls. Den nya studien visar att effekten fortfarande märks långt bortom 25&nbsp;meter — enligt Blocken faller fördelen snabbt av med avståndet, men når aldrig noll, inte ens vid 30&nbsp;meter." },
+      { type: "p", html: "Blocken föreslår två åtgärder: dels ett tak för hur högt CdA-värde en följebil får ha, så att inget lag kan vinna en orättvis fördel bara genom att välja ett klumpigare fordon, dels att avståndsregeln faktiskt kontrolleras — helst genom att öka minimiavståndet till 40–50&nbsp;meter. Resultaten är ännu inte sakkunniggranskade i en vetenskaplig tidskrift utan redovisas i en forskningsrapport som skickats till UCI; det är den tredje studien i en serie om cykelaerodynamik som Blockens forskargrupp publicerat sedan 2023." },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Luftmotståndet på en cyklist växer ungefär med hastigheten i kvadrat — dubbla farten ger fyra gånger så stort motstånd. Det är därför aerodynamik spelar en så mycket större roll i ett snabbt, plant tempolopp än i en långsam bergsetapp.",
+        "CdA — dragkoefficienten <em>C</em><sub>d</sub> multiplicerad med tvärsnittsarean <em>A</em> — är samma typ av storhet som beskriver luftmotståndet hos allt från bilar och cyklister till fallskärmshoppare.",
+        "Tempoloppet mellan Évian-les-Bains och Thonon-les-Bains är i år den enda individuella tempoetappen i Tour de France och kör längs stranden av Genèvesjön, med en väntad snittfart över 50&nbsp;km/h för de snabbaste förarna."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-18-radium-molekyler",
     date: "2026-07-18",
     title: "Fysiker bäddar in radioaktivt radium i en sockerklump — och kyler ner det till några kelvin över absoluta nollpunkten",

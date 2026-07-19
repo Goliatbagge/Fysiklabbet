@@ -443,15 +443,9 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Mobil: låt nav-länkarna radbrytas så att sidan inte tvingas bredare
-           än skärmen (basens .lab-nav saknar wrap). */
+        /* Mobil: basens .lab-nav radbryts numera globalt (styles-laborans.css)
+           — vänsterställd som på övriga sidor. Här bara sidans egen padding. */
         @media (max-width: 768px) {
-            .lab-nav {
-                flex-wrap: wrap;
-                justify-content: flex-end;
-                row-gap: 4px;
-                gap: 16px;
-            }
             .np-main { padding: 18px 16px 56px; }
         }
     </style>
@@ -580,6 +574,7 @@
                             <a href="np.html" aria-current="page">Nationella prov</a>
                             <a href="nyheter.html">Fysiknyheter</a>
                             <a href="om.html">Om</a>
+                            <a href="kontakt.html">Kontakt</a>
                         </nav>
                     </div>
                 </div>

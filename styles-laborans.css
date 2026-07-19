@@ -361,13 +361,54 @@ body.laborans a {
     }
 
     .lab-nav {
-        gap: 18px;
+        flex-wrap: wrap;
+        gap: 4px 18px;
         font-size: 12px;
     }
 
     .lab-topbar-inner {
         font-size: 9px;
         gap: 12px;
+    }
+}
+
+/* Mobil: header staplas — loggan överst, nav-länkarna radbryts under.
+   Utan detta radbryts .lab-nav aldrig (nowrap-länkar) och HELA sidan får
+   horisontell overflow på smala skärmar. */
+@media (max-width: 560px) {
+    .lab-topbar-inner {
+        letter-spacing: 0.12em;
+    }
+
+    .lab-topbar-inner span {
+        white-space: normal;
+    }
+
+    .lab-header-inner {
+        padding-top: 14px;
+        padding-bottom: 12px;
+        row-gap: 10px;
+    }
+
+    .lab-logo-text {
+        font-size: 22px;
+    }
+
+    .lab-nav {
+        width: 100%;
+        gap: 2px 14px;
+    }
+
+    /* Dropdown-menyn är centrerad under sin trigger — nära vänsterkanten
+       klipps den utanför skärmen. Vänsterjustera den på mobil. */
+    .lab-nav-dd-menu {
+        left: 0;
+        transform: translateX(0) translateY(-4px);
+    }
+
+    .lab-nav-dd:hover .lab-nav-dd-menu,
+    .lab-nav-dd:focus-within .lab-nav-dd-menu {
+        transform: translateX(0) translateY(0);
     }
 }
 

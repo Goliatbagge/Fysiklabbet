@@ -42,6 +42,16 @@
                 color: var(--lab-ink-muted, #5a6170); font-weight: 600; line-height: 1.1; }
         .fnum { color: var(--lab-ink); font-size: 19px; }
 
+        /* Mobil: formeln får aldrig radbrytas — behåll EN rad och skrolla
+           kortet i sidled i stället */
+        @media (max-width: 600px) {
+            .formula-card { flex-wrap: nowrap !important; overflow-x: auto;
+                            justify-content: flex-start;
+                            -webkit-overflow-scrolling: touch; }
+            .formula-card > * { flex-shrink: 0; }
+            .formula-card .fnum { font-size: 16px; }
+        }
+
         .scene-info {
             position: absolute; bottom: 12px; right: 14px; z-index: 5;
             background: rgba(246,242,234,0.94);
@@ -294,7 +304,7 @@
         );
 
         const FormulaCard = () => (
-            <div className="glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
+            <div className="formula-card glass-card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-x-3 gap-y-3" style={{ color: 'var(--lab-ink)' }}>
                 <Vbl label="Period"><em>T</em></Vbl>
                 <span className="fnum">=</span>
                 <FracL top="1" botLbl="Frekvens" bot={<em>f</em>} />

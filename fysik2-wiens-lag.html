@@ -74,6 +74,12 @@
             vertical-align: sub;
         }
 
+        /* Mobil: tre kolumner klipper värdena — stapla korten i full bredd */
+        @media (max-width: 600px) {
+            .values-grid { grid-template-columns: 1fr !important; }
+            .value-number { font-size: 1.15rem; }
+        }
+
         /* Formula box */
         .formula-box {
             background: rgba(56, 189, 248, 0.06);
@@ -911,7 +917,7 @@ function WienSim() {
 
             {/* ── Värden ── */}
             <div className="glass-card" style={{padding:'20px 24px',marginBottom:'20px'}}>
-                <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px'}}>
+                <div className="values-grid" style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'12px'}}>
 
                     <div className="value-card">
                         <div className="value-label">Max våglängd</div>

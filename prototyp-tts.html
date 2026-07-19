@@ -159,6 +159,10 @@
         }
         .proto-note { font-size: 12.5px; opacity: 0.65; padding: 10px 16px; border-top: 1px solid rgba(15,22,32,0.1); margin: 0; }
         .proto-hidden { display: none; }
+        /* Mobil: breda KaTeX-displayformler skrollas i sidled i stället för
+           att radbrytas mitt i uttrycket */
+        .katex-display { overflow-x: auto; overflow-y: hidden; }
+        .proto-transcript li .katex { white-space: nowrap; }
     </style>
 </head>
 <body class="laborans">

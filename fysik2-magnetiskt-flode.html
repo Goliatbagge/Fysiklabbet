@@ -75,6 +75,20 @@
         .accent-purple-600::-moz-range-thumb {
             background: #c084fc;
         }
+
+        /* Mobil: formeln får aldrig radbrytas — behåll EN rad och skrolla
+           raden i sidled i stället */
+        @media (max-width: 600px) {
+            .formula-scroll { flex-wrap: nowrap !important; overflow-x: auto;
+                              justify-content: flex-start;
+                              -webkit-overflow-scrolling: touch;
+                              padding-bottom: 4px; }
+            .formula-scroll > * { flex-shrink: 0; }
+            .formula-scroll .text-2xl { font-size: 1.15rem; }
+            .formula-scroll .text-xl { font-size: 1rem; }
+            .formula-scroll .text-lg { font-size: 0.95rem; }
+            .formula-scroll .text-xs { font-size: 0.62rem; }
+        }
     </style>
 </head>
 <body class="lab-sim">
@@ -403,7 +417,7 @@
                             </h1>
 
                             {/* Formula display like densitet */}
-                            <div className="mt-3 flex items-end gap-3 text-cyan-300 flex-wrap" style={{fontFamily: 'Poppins, sans-serif'}}>
+                            <div className="formula-scroll mt-3 flex items-end gap-3 text-cyan-300 flex-wrap" style={{fontFamily: 'Poppins, sans-serif'}}>
                                 <div style={{textAlign: 'center'}}>
                                     <div className="text-xs text-cyan-400/60 font-semibold mb-1">Magnetiskt flöde</div>
                                     <div className="text-2xl font-bold"><em>&Phi;</em></div>
@@ -427,7 +441,7 @@
                                     <div className="text-lg font-mono pb-0.5">{formatNum(A, 2)} m&sup2;</div>
                                 </div>
                                 <div className="text-xl text-slate-500 pb-1">=</div>
-                                <div className="text-2xl font-bold font-mono text-yellow-400" style={{textShadow: '0 0 15px rgba(250, 204, 21, 0.4)'}}>
+                                <div className="text-2xl font-bold font-mono" style={{color: '#8a6d00'}}>
                                     {formatNum(flux, 2)} Wb
                                 </div>
                             </div>

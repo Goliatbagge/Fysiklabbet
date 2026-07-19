@@ -35,7 +35,15 @@
             100% { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in { animation: fadeIn 0.3s ease-in; }
+        /* Inbäddad i wrapper/katalog-iframe: göm sidhuvud och breadcrumb så
+           de inte dubbleras med den yttre sidans header */
+        html.embedded .lab-topbar,
+        html.embedded .lab-header,
+        html.embedded .breadcrumb { display: none !important; }
     </style>
+    <script>
+        try { if (window.top !== window.self) document.documentElement.classList.add('embedded'); } catch (e) {}
+    </script>
 </head>
 <body class="bg-slate-900 text-white lab-sim">
 
@@ -81,7 +89,7 @@
         </div>
     </div>
 
-<div class="breadcrumb">
+<div class="breadcrumb" style="padding: 0 1.25rem;">
     <a href="index.html">Hem</a> / <a href="fysik2.html">Fysik nivå 2</a> / Snett kast
 </div>
 

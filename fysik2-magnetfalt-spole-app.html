@@ -390,7 +390,8 @@
                 const T = {
                     renderer, scene, camera, groups,
                     dots: [], wire: null,
-                    az: 0.55, pol: 1.22, radius: 9.0,
+                    // Smal mobilviewport klipper spolen och I-etiketten — starta längre ut
+                    az: 0.55, pol: 1.22, radius: wrap.clientWidth < 600 ? 12.5 : 9.0,
                 };
                 threeRef.current = T;
 

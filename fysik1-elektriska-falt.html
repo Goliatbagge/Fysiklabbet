@@ -841,12 +841,8 @@
                 ctx.fillStyle = '#f3eee4';
                 ctx.fillRect(0, 0, width, height);
 
-                // Bakgrundseffekt
-                const bgGradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width * 0.6);
-                bgGradient.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
-                bgGradient.addColorStop(1, 'rgba(5, 5, 16, 0)');
-                ctx.fillStyle = bgGradient;
-                ctx.fillRect(0, 0, width, height);
+                // (Bakgrundsvinjetten borttagen — den mörkblå radialen var designad
+                // för mörkt tema och blev en grå fläck på papperstemat)
 
                 // Subtilt rutnät
                 ctx.strokeStyle = 'rgba(200, 50, 74, 0.08)';

@@ -285,12 +285,7 @@
                     ctx.fillStyle = '#f3eee4';
                     ctx.fillRect(0, 0, width, height);
 
-                    // Add subtle gradient overlay
-                    const bgGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, width * 0.7);
-                    bgGradient.addColorStop(0, 'rgba(10, 30, 60, 0.3)');
-                    bgGradient.addColorStop(1, 'rgba(5, 5, 16, 0)');
-                    ctx.fillStyle = bgGradient;
-                    ctx.fillRect(0, 0, width, height);
+                    // (Mörkblå bakgrundsvinjett borttagen — blev en grå fläck på papperstemat)
 
                     const isSealed = simulationState === SimulationState.SEALED;
                     const isPumping = simulationState === SimulationState.PUMPING;
@@ -772,7 +767,7 @@
                     width={width}
                     height={height}
                     className="rounded-xl block mx-auto"
-                    style={{ boxShadow: '0 0 40px rgba(200, 50, 74, 0.15), inset 0 0 60px rgba(0, 0, 0, 0.5)' }}
+                    style={{ boxShadow: '0 0 40px rgba(200, 50, 74, 0.15), inset 0 0 60px rgba(0, 0, 0, 0.5)', maxWidth: '100%', height: 'auto' }}
                 />
             );
         };

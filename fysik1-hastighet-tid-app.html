@@ -316,7 +316,7 @@
                                 {/* Graph */}
                                 <div className="bg-white rounded-xl shadow-lg p-6">
                                     <h2 className="text-2xl font-bold mb-4 text-gray-800">Hastighet-tid-graf</h2>
-                                    <svg width={svgWidth} height={svgHeight} className="border-2 border-gray-200 rounded-lg bg-white">
+                                    <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} style={{ width: '100%', height: 'auto', maxWidth: svgWidth }} className="border-2 border-gray-200 rounded-lg bg-white">
                                         <defs>
                                             <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
                                                 <polygon points="0 0, 10 3, 0 6" fill="#f3eee4" />

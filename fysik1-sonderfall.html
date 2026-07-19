@@ -678,7 +678,8 @@
                     ctx.save();
                     ctx.shadowColor = 'rgba(200, 50, 74, 0.3)';
                     ctx.shadowBlur = 8;
-                    drawNucleusLabel(ctx, w / 2, nucleusTop - 18, nLabels.parent, titleSize, '#e2e8f0');
+                    // Liten canvas (mobil): kläm etiketten under rubriken så de inte överlappar
+                    drawNucleusLabel(ctx, w / 2, Math.max(nucleusTop - 18, 24 + headingSize + 14), nLabels.parent, titleSize, '#e2e8f0');
                     ctx.restore();
 
                     // "Exciterat tillstånd" label for gamma
@@ -691,7 +692,7 @@
                         ctx.textBaseline = 'middle';
                         ctx.shadowColor = '#fbbf24';
                         ctx.shadowBlur = 12;
-                        ctx.fillText('Exciterat tillstånd', w / 2, nucleusTop - 36);
+                        ctx.fillText('Exciterat tillstånd', w / 2, Math.max(nucleusTop - 36, 24 + headingSize + 34));
                         ctx.restore();
                     }
 

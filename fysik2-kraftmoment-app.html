@@ -46,7 +46,7 @@
            utanför glidarnas intervall). */
         .num-wrap { display: inline-flex; align-items: baseline; gap: 3px;
                     flex-shrink: 0; justify-content: flex-end; min-width: 72px; }
-        .num-in { width: 50px; padding: 2px 6px; border-radius: 6px;
+        .num-in { width: 60px; padding: 2px 6px; border-radius: 6px;
                   border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
                   background: var(--lab-bg, #f3eee4);
                   font-family: 'JetBrains Mono', monospace; font-weight: 600;
@@ -527,7 +527,8 @@
                         return (
                             <g key={'fg' + mass.id}>
                                 <Arrow x1={fx} y1={y0} x2={fx} y2={y1} color={COL.tyngd} width={6} head={17} />
-                                <Tag x={lx} y={y1 - 3} color={COL.tyngd} size={13} anchor={anchor}>
+                                {/* Etiketten under pilspetsen, i fri yta — inte på brädan */}
+                                <Tag x={lx} y={y1 + 13} color={COL.tyngd} size={13} anchor={anchor}>
                                     <tspan fontStyle="italic">F</tspan>
                                     <tspan dy="3" fontSize="10">G</tspan>
                                     <tspan dy="-3"> = {fmt(F)} N</tspan>

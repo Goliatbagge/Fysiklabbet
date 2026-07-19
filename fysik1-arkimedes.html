@@ -18,6 +18,13 @@
     <script>window.__CB = String(Date.now());</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans.css?v=' + window.__CB + '">');</script>
     <script>document.write('<link rel="stylesheet" href="styles-laborans-sim.css?v=' + window.__CB + '">');</script>
+    <style>
+        /* Mobil: stapla scen över kontrollpanel och förklaringsspalter */
+        @media (max-width: 600px) {
+            .ark-layout { grid-template-columns: 1fr !important; gap: 1.25rem !important; }
+            .ark-cols2 { grid-template-columns: 1fr !important; }
+        }
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -425,7 +432,7 @@
                 backgroundColor: isHighlighted ? 'rgba(6, 182, 212, 0.2)' : 'transparent'
             }}>
                 <span style={{ color: 'var(--lab-ink-muted)' }}>{label}</span>
-                <span style={{ fontFamily: 'monospace', fontSize: '1.125rem', color: isHighlighted ? '#67E8F9' : '#E2E8F0' }}>{value}</span>
+                <span style={{ fontFamily: 'monospace', fontSize: '1.125rem', fontWeight: 600, whiteSpace: 'nowrap', color: isHighlighted ? '#0E7490' : 'var(--lab-ink)' }}>{value}</span>
             </div>
         );
 
@@ -455,7 +462,7 @@
                     <p style={{ color: 'var(--lab-ink-soft)', marginBottom: '1rem' }}>
                         Arkimedes princip säger att <strong style={{ color: 'var(--lab-accent)' }}>den lyftkraft som verkar på ett föremål nedsänkt i en vätska är lika stor som tyngden av den vätska som föremålet tränger undan.</strong>
                     </p>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', color: 'var(--lab-ink-muted)' }}>
+                    <div className="ark-cols2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', color: 'var(--lab-ink-muted)' }}>
                         <div>
                             <h3 style={{ fontWeight: '600', fontSize: '1.125rem', color: 'var(--lab-ink)', marginBottom: '0.5rem' }}>Hur fungerar det?</h3>
                             <p>
@@ -509,7 +516,7 @@
             return (
                 <div style={{ minHeight: '100vh', backgroundColor: 'transparent', color: 'var(--lab-ink)', fontFamily: 'system-ui, -apple-system, sans-serif', padding: '1rem' }}>
                     <main style={{ maxWidth: '1280px', margin: '0 auto' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem', marginTop: '3rem' }}>
+                        <div className="ark-layout" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem', marginTop: '3rem' }}>
                             <div style={{ backgroundColor: 'var(--lab-bg)', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
                                 <Simulation
                                     dynamometerCalculations={dynamometerCalculations}

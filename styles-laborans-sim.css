@@ -53,6 +53,26 @@ body.lab-sim.bg-black .text-white,
 body.lab-sim.bg-slate-950 .text-white { color: #fff !important; }
 body.lab-sim.bg-black .text-cyan-400,
 body.lab-sim.bg-slate-950 .text-cyan-400 { color: #22d3ee !important; }
+
+/* Rymd-sims: sidhuvudet står på mörk bakgrund — ink-färgade logga/nav-länkar
+   blir annars osynliga (påpekat på Wiens lag + Solens färg, mobilgranskning
+   2026-07-19) */
+body.lab-sim.bg-black .lab-logo,
+body.lab-sim.bg-black .lab-nav a,
+body.lab-sim.bg-black .lab-nav-dd-trigger,
+body.lab-sim.bg-slate-950 .lab-logo,
+body.lab-sim.bg-slate-950 .lab-nav a,
+body.lab-sim.bg-slate-950 .lab-nav-dd-trigger,
+body.lab-sim.bg-gray-950 .lab-logo,
+body.lab-sim.bg-gray-950 .lab-nav a,
+body.lab-sim.bg-gray-950 .lab-nav-dd-trigger {
+    color: #e9edf3;
+}
+body.lab-sim.bg-black .lab-header,
+body.lab-sim.bg-slate-950 .lab-header,
+body.lab-sim.bg-gray-950 .lab-header {
+    border-bottom-color: rgba(233, 237, 243, 0.3);
+}
 body.lab-sim.bg-black .bg-cyan-500,
 body.lab-sim.bg-slate-950 .bg-cyan-500 { background: #06b6d4 !important; }
 
@@ -709,7 +729,18 @@ body.lab-sim .metal-btn {
     border-radius: 4px;
     color: var(--lab-ink);
     font-family: var(--lab-font-sans);
+    /* Stapla symbol / namn / W — utan detta flödar spans ihop till
+       "CsCesiumW = 1,95 eV" */
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    padding: 8px 12px;
+    cursor: pointer;
 }
+body.lab-sim .metal-symbol { font-weight: 700; font-size: 1.05rem; }
+body.lab-sim .metal-name { font-size: 0.72rem; }
+body.lab-sim .metal-w { font-size: 0.7rem; }
 body.lab-sim .metal-btn:hover {
     border-color: var(--lab-ink);
     background: var(--lab-bg-panel);
@@ -1083,6 +1114,128 @@ body.lab-sim .scene-wrap:-webkit-full-screen .scene-canvas > canvas {
     --wave-node: #d4674a;
     --wave-rod: #b8a36f;
     --wave-weight: #7a6b4d;
+}
+
+/* ============================================================
+   8. Mobilanpassning (≤600px)
+   ----------------------------------------------------------------
+   På smala skärmar skalas scenen ner kraftigt — overlay-rutorna
+   (.scene-toggles uppe till höger, .fs-sliders uppe till vänster)
+   täcker då större delen av scenen och skymmer innehållet. I
+   normalläget låter vi dem i stället FLÖDA under scenen (static),
+   så att scenen är fri och alla verktyg ändå nås direkt. I
+   fullskärm behålls overlay-läget (där finns gott om plats och
+   panelen måste ligga ovanpå canvasen).
+   ============================================================ */
+
+@media (max-width: 600px) {
+    body.lab-sim .scene-wrap .scene-toggles,
+    body.lab-sim .canvas-wrap .scene-toggles,
+    body.lab-sim .wave-stage .scene-toggles,
+    body.lab-sim .scene-wrap .fs-sliders,
+    body.lab-sim .canvas-wrap .fs-sliders {
+        position: static;
+        width: auto;
+        max-width: none;
+        max-height: none;
+        margin: 8px;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    /* I fullskärm: tillbaka till overlay */
+    body.lab-sim .scene-wrap:fullscreen .scene-toggles,
+    body.lab-sim .canvas-wrap:fullscreen .scene-toggles,
+    body.lab-sim .wave-stage:fullscreen .scene-toggles {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        margin: 0;
+        max-width: 70vw;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    body.lab-sim .scene-wrap:-webkit-full-screen .scene-toggles,
+    body.lab-sim .canvas-wrap:-webkit-full-screen .scene-toggles,
+    body.lab-sim .wave-stage:-webkit-full-screen .scene-toggles {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        margin: 0;
+        max-width: 70vw;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    body.lab-sim .scene-wrap:fullscreen .fs-sliders,
+    body.lab-sim .canvas-wrap:fullscreen .fs-sliders {
+        position: absolute;
+        top: 64px;
+        left: 14px;
+        margin: 0;
+        max-width: 60vw;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+    body.lab-sim .scene-wrap:-webkit-full-screen .fs-sliders,
+    body.lab-sim .canvas-wrap:-webkit-full-screen .fs-sliders {
+        position: absolute;
+        top: 64px;
+        left: 14px;
+        margin: 0;
+        max-width: 60vw;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+
+    /* Hint-pillen ("Ta tag i …") ligger i scenens nederkant och krockar
+       med avläsningsrutorna på mobil — låt den flöda under scenen i
+       normalläge (samma mönster som .scene-toggles ovan) */
+    body.lab-sim .scene-wrap .scene-hint,
+    body.lab-sim .canvas-wrap .scene-hint,
+    body.lab-sim .wave-stage .scene-hint {
+        position: static;
+        display: block;
+        width: fit-content;
+        margin: 0 8px 8px;
+    }
+    body.lab-sim .scene-wrap:fullscreen .scene-hint,
+    body.lab-sim .canvas-wrap:fullscreen .scene-hint,
+    body.lab-sim .wave-stage:fullscreen .scene-hint {
+        position: absolute;
+        bottom: 10px;
+        left: 12px;
+        margin: 0;
+    }
+    body.lab-sim .scene-wrap:-webkit-full-screen .scene-hint,
+    body.lab-sim .canvas-wrap:-webkit-full-screen .scene-hint,
+    body.lab-sim .wave-stage:-webkit-full-screen .scene-hint {
+        position: absolute;
+        bottom: 10px;
+        left: 12px;
+        margin: 0;
+    }
+
+    /* Mindre fullskärmsknapp på mobil — 40 px-cirkeln täcker annars
+       diagrammens övre vänstra hörn när scenen skalats ner */
+    body.lab-sim .fs-btn {
+        width: 32px;
+        height: 32px;
+        top: 8px;
+        left: 8px;
+    }
+    body.lab-sim .fs-btn svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    /* Fullskärmspanelen med glidare får inte täcka hela mobilskärmen */
+    body.lab-sim .fs-controls {
+        width: min(820px, 96%);
+        padding: 10px 12px;
+        gap: 8px;
+        max-height: 45vh;
+        overflow-y: auto;
+    }
 }
 
 /* SVG-färg-overrides inom .wave-stage */

@@ -93,6 +93,12 @@
             gap: 3px;
             width: 100%;
         }
+        /* Mobil: 18 kolumner på 390 px blir oläsligt — skrolla i sidled med
+           bibehållen cellstorlek i stället */
+        @media (max-width: 600px) {
+            .periodic-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .periodic-scroll .periodic-grid { min-width: 640px; }
+        }
         .pt-cell {
             aspect-ratio: 0.82;
             border-radius: 4px;
@@ -860,11 +866,12 @@
                     }
                 });
 
-                // Axel och etiketter
+                // Axel och etiketter (glesare på smal canvas så de inte kolliderar)
                 ctx.fillStyle = '#64748b';
                 ctx.font = '11px Poppins, sans-serif';
                 ctx.textAlign = 'center';
-                for (let wl = 400; wl <= 700; wl += 50) {
+                const wlStep = W < 480 ? 100 : 50;
+                for (let wl = 400; wl <= 700; wl += wlStep) {
                     const x = wlToX(wl);
                     ctx.fillText(wl + ' nm', x, H - margin.b + 18);
                     ctx.fillStyle = '#334155';
@@ -1017,8 +1024,10 @@
             });
 
             return (
-                <div className="periodic-grid" style={{ gridTemplateRows: 'repeat(10, 1fr)' }}>
-                    {rows}
+                <div className="periodic-scroll">
+                    <div className="periodic-grid" style={{ gridTemplateRows: 'repeat(10, 1fr)' }}>
+                        {rows}
+                    </div>
                 </div>
             );
         }

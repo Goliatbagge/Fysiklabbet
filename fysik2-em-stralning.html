@@ -230,6 +230,22 @@
             pointer-events: none;
         }
 
+        /* Mobil (≤600 px): stapla spalterna, ge chipen egen rad, gles ut bandetiketter */
+        @media (max-width: 600px) {
+            .em-main-grid { grid-template-columns: 1fr !important; }
+            .em-values { grid-template-columns: 1fr !important; }
+            /* "Synligt ljus"-chipen sitter 36 px ovanför spektrumbalken —
+               ge rubriken extra marginal så chipen inte hamnar på den */
+            .em-spectrum-card h2 { margin-bottom: 52px !important; }
+            /* Bandetiketter under spektrumet: rotera snett nedåt så de inte mosas */
+            .region-ticks { height: 64px !important; }
+            .region-tick {
+                transform: rotate(55deg) !important;
+                transform-origin: left top;
+                font-size: 0.58rem !important;
+            }
+        }
+
         /* Scrollbar */
         ::-webkit-scrollbar { width: 7px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.15); }
@@ -714,7 +730,7 @@ function SpectrumBar({ currentLam, onZoomVisible, onLamChange }) {
                         onTouchStart={(e) => e.stopPropagation()}
                         title="Zooma in på synligt ljus"
                     >
-                        🔍 Synligt ljus
+                        Synligt ljus
                     </button>
 
                     {/* Indicator line */}
@@ -722,9 +738,9 @@ function SpectrumBar({ currentLam, onZoomVisible, onLamChange }) {
                 </div>
 
                 {/* Region labels below bar */}
-                <div style={{position:'relative',height:'24px',marginTop:'8px'}}>
+                <div className="region-ticks" style={{position:'relative',height:'24px',marginTop:'8px'}}>
                     {regionTicks.map((t,i) => (
-                        <span key={i} style={{
+                        <span key={i} className="region-tick" style={{
                             position: 'absolute',
                             left: `${t.pos * 100}%`,
                             transform: 'translateX(-50%)',
@@ -1056,7 +1072,7 @@ function EMSpectrum() {
         <div style={{fontFamily:"'Poppins',sans-serif"}}>
 
             {/* ── Spectrum bar ── */}
-            <div className="glass-card" style={{padding:'28px 28px 20px',marginBottom:'22px'}}>
+            <div className="glass-card em-spectrum-card" style={{padding:'28px 28px 20px',marginBottom:'22px'}}>
                 <h2 style={{fontSize:'0.8rem',fontWeight:600,color:'#64748b',
                     textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:'18px'}}>
                     {viewMode === 'full' ? 'Det elektromagnetiska spektrumet' : 'Synligt ljus — detaljvy'}
@@ -1079,7 +1095,7 @@ function EMSpectrum() {
             </div>
 
             {/* ── Knob + displays ── */}
-            <div style={{display:'grid',gridTemplateColumns:'auto 1fr',gap:'22px',
+            <div className="em-main-grid" style={{display:'grid',gridTemplateColumns:'auto 1fr',gap:'22px',
                 alignItems:'start',marginBottom:'22px'}}>
 
                 {/* Knob */}
@@ -1147,7 +1163,7 @@ function EMSpectrum() {
 
                     {/* Value displays */}
                     <div className="glass-card" style={{padding:'20px 24px'}}>
-                        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'12px'}}>
+                        <div className="em-values" style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'12px'}}>
 
                             {/* Wavelength */}
                             <div className="value-card">

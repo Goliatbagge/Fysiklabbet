@@ -27,6 +27,7 @@
         }
     }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
     <style>
         .sim-container {
             display: flex;
@@ -45,6 +46,13 @@
             min-height: 50vh;
             position: relative;
             background: radial-gradient(ellipse at center, #0a1628 0%, #050510 100%);
+            user-select: none;
+        }
+
+        #canvas-container:fullscreen,
+        #canvas-container:-webkit-full-screen {
+            width: 100vw;
+            height: 100vh;
         }
 
         @media (min-width: 1024px) {
@@ -78,41 +86,29 @@
             margin-bottom: 1.5rem;
         }
 
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        /* On-scene visningsval (uppe till höger) — samma mönster som övriga sims */
+        .scene-toggles {
+            position: absolute; top: 14px; right: 14px; z-index: 10;
+            background: rgba(246,242,234,0.94);
+            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+            border: 1px solid var(--lab-line-strong, rgba(15,22,32,0.28));
+            border-radius: 10px; padding: 9px 13px;
+            display: flex; flex-direction: column; gap: 3px;
+            box-shadow: 0 2px 8px rgba(15,22,32,0.12);
+            max-width: 230px;
         }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+        .scene-toggles .st-title {
+            font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+            color: var(--lab-ink-muted, #5a6170); font-weight: 600; margin-bottom: 2px;
+        }
+        .scene-toggles label {
+            display: flex; align-items: center; gap: 7px; cursor: pointer;
+            font-size: 13px; color: var(--lab-ink, #0f1620);
+        }
+        .scene-toggles input {
+            width: 15px; height: 15px;
+            accent-color: var(--lab-accent, #c8324a); flex-shrink: 0;
             cursor: pointer;
-            padding: 0.75rem 1rem;
-            background: rgba(200, 50, 74, 0.05);
-            border: 1px solid rgba(200, 50, 74, 0.2);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .checkbox-item:hover {
-            background: rgba(200, 50, 74, 0.1);
-            border-color: rgba(200, 50, 74, 0.4);
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 1.25rem;
-            height: 1.25rem;
-            accent-color: #38bdf8;
-            cursor: pointer;
-        }
-
-        .checkbox-item label {
-            color: var(--lab-ink);
-            font-weight: 500;
-            cursor: pointer;
-            flex: 1;
         }
 
         .info-box {
@@ -159,9 +155,10 @@
 
         .scene-title {
             position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
+            top: 0.9rem;
+            left: 4.4rem;   /* till höger om fullskärmsknappen */
             z-index: 10;
+            pointer-events: none;
         }
 
         .scene-title h1 {
@@ -224,6 +221,22 @@
                 width: 11px;
                 height: 11px;
             }
+            .scene-title {
+                top: 0.5rem;
+                left: 3rem;   /* fs-btn är 32 px på mobil */
+            }
+            .scene-title h1 {
+                font-size: 1.2rem;
+            }
+            .scene-title p {
+                font-size: 0.75rem;
+            }
+            .scene-toggles {
+                top: 8px; right: 8px;
+                padding: 6px 9px;
+                max-width: 170px;
+            }
+            .scene-toggles label { font-size: 11.5px; }
         }
 
         .legend-line {
@@ -278,9 +291,25 @@
 
     <main class="sim-container">
         <div id="canvas-container">
+            <button class="fs-btn" id="fsBtn" aria-label="Fullskärm" title="Fullskärm">
+                <svg id="fsIconExpand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9V3h6"/><path d="M21 9V3h-6"/><path d="M3 15v6h6"/><path d="M21 15v6h-6"/>
+                </svg>
+                <svg id="fsIconCompress" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <path d="M9 3v6H3"/><path d="M15 21v-6h6"/><path d="M21 9h-6V3"/><path d="M3 15h6v6"/>
+                </svg>
+            </button>
             <div class="scene-title">
                 <h1>Jordmagnetiska fältet</h1>
                 <p>Dra för att rotera modellen</p>
+            </div>
+            <div class="scene-toggles">
+                <div class="st-title">Visa</div>
+                <label><input type="checkbox" id="showField" checked> Magnetfält</label>
+                <label><input type="checkbox" id="showMoreFields"> Fler fältlinjer</label>
+                <label><input type="checkbox" id="showMagnet"> Stavmagnet</label>
             </div>
             <div class="legend" id="legend">
                 <!-- Populated by JS -->
@@ -288,22 +317,7 @@
         </div>
 
         <div class="controls-panel">
-            <h2 class="panel-title">Kontrollpanel</h2>
-
-            <div class="checkbox-group">
-                <div class="checkbox-item">
-                    <input type="checkbox" id="showField" checked>
-                    <label for="showField">Visa magnetfält</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="showMoreFields">
-                    <label for="showMoreFields">Visa fler magnetfält</label>
-                </div>
-                <div class="checkbox-item">
-                    <input type="checkbox" id="showMagnet">
-                    <label for="showMagnet">Visa magnet</label>
-                </div>
-            </div>
+            <h2 class="panel-title">Om simuleringen</h2>
 
             <div class="info-box">
                 <h3>Om jordmagnetiska fältet</h3>
@@ -342,13 +356,16 @@
             <div class="info-box">
                 <h3>Interaktion</h3>
                 <p>
-                    🖱️ <span class="highlight">Vänsterklick + dra</span> - Rotera modellen
+                    <span class="highlight">Vänsterklick + dra</span> — rotera modellen
                 </p>
                 <p>
-                    🖱️ <span class="highlight">Scrollhjul</span> - Zooma in/ut
+                    <span class="highlight">Scrollhjul</span> — zooma in/ut
                 </p>
                 <p>
-                    🖱️ <span class="highlight">Högerklick + dra</span> - Panorera
+                    <span class="highlight">Högerklick + dra</span> — panorera
+                </p>
+                <p>
+                    <span class="highlight">Fullskärm</span> — knappen uppe till vänster i scenen
                 </p>
             </div>
         </div>
@@ -391,106 +408,167 @@
         backLight.position.set(-5, -3, -5);
         scene.add(backLight);
 
-        // Create Earth texture with continents using canvas
-        function createEarthTexture() {
-            const canvas = document.createElement('canvas');
-            canvas.width = 2048;
-            canvas.height = 1024;
-            const ctx = canvas.getContext('2d');
+        // Jordtextur: papper-hav + bläck-kontinenter. Verkliga kustlinjer
+        // (Natural Earth 110m via world-atlas på jsDelivr) ritas när datan
+        // laddats; misslyckas hämtningen ritas förenklade konturer i stället.
+        const textureCanvas = document.createElement('canvas');
+        textureCanvas.width = 2048;
+        textureCanvas.height = 1024;
+        const textureCtx = textureCanvas.getContext('2d');
 
-            // Ocean color (dark blue)
-            ctx.fillStyle = '#f3eee4';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const OCEAN_COLOR = '#f3eee4';
+        const LAND_COLOR = '#0f1620';
 
-            // Continent color (light blue/cyan)
-            ctx.fillStyle = '#0f1620';
-            ctx.strokeStyle = '#0f1620';
-            ctx.lineWidth = 2;
+        // Ekvirektangulär projektion: lon/lat → canvas-koordinater
+        function toCanvas(lon, lat) {
+            return [
+                (lon + 180) * (textureCanvas.width / 360),
+                (90 - lat) * (textureCanvas.height / 180),
+            ];
+        }
 
-            // Helper function to convert lat/lon to canvas coords
-            function toCanvas(lon, lat) {
-                const x = (lon + 180) * (canvas.width / 360);
-                const y = (90 - lat) * (canvas.height / 180);
-                return [x, y];
-            }
+        function drawOcean() {
+            textureCtx.fillStyle = OCEAN_COLOR;
+            textureCtx.fillRect(0, 0, textureCanvas.width, textureCanvas.height);
+        }
 
-            // Draw simplified continents
+        drawOcean();
+        const earthTexture = new THREE.CanvasTexture(textureCanvas);
+
+        function drawRealCoastlines(geometries) {
+            drawOcean();
+            textureCtx.fillStyle = LAND_COLOR;
+            textureCtx.strokeStyle = LAND_COLOR;
+            textureCtx.lineWidth = 1.5; // fetar upp små öar en aning
+            textureCtx.beginPath();
+
+            // Ringar som korsar antimeridianen (±180°) skulle ritade rakt av
+            // dra streck tvärs över kartan. Lös det genom att "veckla upp"
+            // longituden (konsekutiva hopp > 180° justeras med ±360°) och rita
+            // tre kopior förskjutna −360/0/+360 grader — canvasen klipper bort
+            // det som hamnar utanför.
+            const addRing = (ring, shift) => {
+                let prevLon = 0, lonUnwrapped = 0;
+                ring.forEach(([lon, lat], i) => {
+                    if (i === 0) {
+                        lonUnwrapped = lon;
+                    } else {
+                        let d = lon - prevLon;
+                        if (d > 180) d -= 360;
+                        else if (d < -180) d += 360;
+                        lonUnwrapped += d;
+                    }
+                    prevLon = lon;
+                    const [x, y] = toCanvas(lonUnwrapped + shift, lat);
+                    if (i === 0) textureCtx.moveTo(x, y);
+                    else textureCtx.lineTo(x, y);
+                });
+                textureCtx.closePath();
+            };
+
+            geometries.forEach(geometry => {
+                const polygons = geometry.type === 'Polygon'
+                    ? [geometry.coordinates]
+                    : geometry.coordinates;
+                polygons.forEach(polygon => {
+                    polygon.forEach(ring => {
+                        [-360, 0, 360].forEach(shift => addRing(ring, shift));
+                    });
+                });
+            });
+            // evenodd så att inre ringar (hål) i polygonerna blir hav
+            textureCtx.fill('evenodd');
+            textureCtx.stroke();
+            earthTexture.needsUpdate = true;
+        }
+
+        function drawFallbackContinents() {
+            drawOcean();
+            textureCtx.fillStyle = LAND_COLOR;
+            textureCtx.strokeStyle = LAND_COLOR;
+            textureCtx.lineWidth = 2;
+
             function drawContinent(points) {
-                ctx.beginPath();
+                textureCtx.beginPath();
                 const [startX, startY] = toCanvas(points[0][0], points[0][1]);
-                ctx.moveTo(startX, startY);
+                textureCtx.moveTo(startX, startY);
                 for (let i = 1; i < points.length; i++) {
                     const [x, y] = toCanvas(points[i][0], points[i][1]);
-                    ctx.lineTo(x, y);
+                    textureCtx.lineTo(x, y);
                 }
-                ctx.closePath();
-                ctx.fill();
-                ctx.stroke();
+                textureCtx.closePath();
+                textureCtx.fill();
+                textureCtx.stroke();
             }
 
-            // North America (simplified)
+            // Nordamerika
             drawContinent([
                 [-170, 65], [-140, 70], [-100, 70], [-80, 75], [-60, 70],
                 [-55, 50], [-65, 45], [-75, 35], [-80, 25], [-90, 20],
                 [-105, 20], [-115, 25], [-120, 35], [-125, 50], [-130, 55],
                 [-145, 60], [-165, 60]
             ]);
-
-            // South America (simplified)
+            // Sydamerika
             drawContinent([
                 [-80, 10], [-60, 10], [-35, -5], [-35, -20], [-40, -25],
                 [-55, -35], [-65, -55], [-75, -50], [-80, -40], [-70, -20],
                 [-80, -5]
             ]);
-
-            // Europe (simplified)
+            // Europa
             drawContinent([
                 [-10, 35], [0, 40], [5, 45], [10, 45], [30, 45],
                 [40, 50], [50, 55], [60, 60], [70, 70], [30, 72],
                 [10, 70], [-5, 60], [-10, 50]
             ]);
-
-            // Africa (simplified)
+            // Afrika
             drawContinent([
                 [-15, 35], [10, 37], [35, 30], [40, 15], [50, 10],
                 [40, -5], [35, -25], [20, -35], [15, -30], [10, -15],
                 [-5, 5], [-15, 15]
             ]);
-
-            // Asia (simplified)
+            // Asien
             drawContinent([
                 [60, 60], [80, 70], [120, 75], [170, 65], [180, 60],
                 [145, 45], [140, 35], [120, 25], [105, 20], [100, 10],
                 [80, 10], [65, 25], [50, 30], [40, 35], [50, 45],
                 [50, 55]
             ]);
-
-            // Australia (simplified)
+            // Australien
             drawContinent([
                 [115, -20], [130, -15], [145, -15], [155, -25],
                 [150, -35], [140, -40], [130, -35], [115, -30]
             ]);
-
-            // Antarctica (simplified)
+            // Antarktis
             drawContinent([
                 [-180, -65], [-120, -70], [-60, -75], [0, -70],
                 [60, -75], [120, -70], [180, -65], [180, -90],
                 [-180, -90]
             ]);
-
-            // Greenland
+            // Grönland
             drawContinent([
                 [-45, 60], [-20, 65], [-15, 75], [-25, 83],
                 [-50, 80], [-60, 75], [-55, 65]
             ]);
 
-            return new THREE.CanvasTexture(canvas);
+            earthTexture.needsUpdate = true;
         }
+
+        fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json')
+            .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+            .then(topology => {
+                // objects.land är en GeometryCollection → feature() ger en
+                // FeatureCollection; hantera även enkel Feature för säkerhets skull
+                const land = window.topojson.feature(topology, topology.objects.land);
+                const geometries = land.type === 'FeatureCollection'
+                    ? land.features.map(f => f.geometry)
+                    : [land.geometry];
+                drawRealCoastlines(geometries);
+            })
+            .catch(() => drawFallbackContinents());
 
         // Create Earth
         const earthRadius = 1.5;
         const earthGeometry = new THREE.SphereGeometry(earthRadius, 64, 64);
-        const earthTexture = createEarthTexture();
         const earthMaterial = new THREE.MeshStandardMaterial({
             map: earthTexture,
             metalness: 0.1,
@@ -909,11 +987,11 @@
             const legend = document.getElementById('legend');
             legend.innerHTML = `
                 <div class="legend-item">
-                    <div class="legend-color" style="background: #7dd3fc;"></div>
+                    <div class="legend-color" style="background: #0f1620;"></div>
                     <span>Kontinenter</span>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-color" style="background: var(--lab-bg);"></div>
+                    <div class="legend-color" style="background: #f3eee4; border: 1px solid var(--lab-line-strong);"></div>
                     <span>Hav</span>
                 </div>
                 <div class="legend-item">
@@ -961,11 +1039,35 @@
         animate();
 
         // Handle resize
-        window.addEventListener('resize', () => {
+        function handleResize() {
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+        window.addEventListener('resize', handleResize);
+
+        // Fullscreen
+        const fsBtn = document.getElementById('fsBtn');
+        const fsIconExpand = document.getElementById('fsIconExpand');
+        const fsIconCompress = document.getElementById('fsIconCompress');
+
+        fsBtn.addEventListener('click', () => {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            } else {
+                (container.requestFullscreen || container.webkitRequestFullscreen).call(container);
+            }
         });
+
+        function onFullscreenChange() {
+            const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            fsIconExpand.style.display = isFullscreen ? 'none' : '';
+            fsIconCompress.style.display = isFullscreen ? '' : 'none';
+            fsBtn.title = isFullscreen ? 'Lämna fullskärm' : 'Fullskärm';
+            requestAnimationFrame(handleResize);
+        }
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
     </script>
     <script src="feedback.js" defer></script>
     <script src="data/katalog.js"></script>

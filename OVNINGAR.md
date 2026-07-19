@@ -5,7 +5,7 @@ i katalogen. Övningarna lagras i `data/ovningar.js`:
 
 ```js
 window.OVNINGAR = {
-    'fy1-1.3': [
+    'fy1-2.1': [
         { level: 1, question: '<markdown>', solution: '<markdown>' },
         ...
     ],

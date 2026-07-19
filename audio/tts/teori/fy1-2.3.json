@@ -1,303 +1,253 @@
 {
- "id": "fy1-2.3",
+ "id": "fy1-2.2",
  "voice": "sv-SE-SofieNeural",
- "hash": "8d8b5085e1c7931f947c3b8de2ad2bceeb5b2710",
- "dur": 326.12,
+ "hash": "6c08bba6f91b4efc5ee7835b743cfc114462ce06",
+ "dur": 323.79,
  "segments": [
   {
-   "t": "Acceleration",
+   "t": "Medelhastighet, momentanhastighet och läge-tid-diagram",
    "s": 0.1,
-   "e": 2.17
+   "e": 4.95
   },
   {
-   "t": "En förändring av hastighet kallas acceleration, betecknas a, har SI-enheten m/s i kvadrat och är en vektor.",
-   "s": 2.12,
-   "e": 10.4
+   "t": "Ett föremåls genomsnittliga hastighet kallas medelhastighet.",
+   "s": 4.9,
+   "e": 9.76
   },
   {
-   "t": "Något med accelerationen 1 meter per sekund i kvadrat ökar sin hastighet med 1 meter per sekund per sekund.",
-   "s": 10.4,
-   "e": 17.85
+   "t": "Ett föremåls exakta hastighet vid en tidpunkt kallas momentanhastighet.",
+   "s": 9.76,
+   "e": 15.39
   },
   {
-   "t": "Accelerationens tecken",
-   "s": 17.85,
-   "e": 20.52
+   "t": "Kom ihåg att hastighet är en vektor.",
+   "s": 15.39,
+   "e": 18.68
   },
   {
-   "t": "Om accelerationen är",
-   "s": 20.52,
-   "e": 23.23
+   "t": "Medelhastighet",
+   "s": 18.68,
+   "e": 21.02
   },
   {
-   "t": "positiv ökar hastigheten.",
-   "s": 23.23,
-   "e": 26.24
-  },
-  {
-   "t": "negativ minskar hastigheten.",
-   "s": 26.24,
-   "e": 29.39
-  },
-  {
-   "t": "noll är hastigheten konstant.",
-   "s": 29.39,
-   "e": 32.48
-  },
-  {
-   "t": "En inbromsning är alltså också en acceleration (!) även om ordet i vardagsspråket nästan uteslutande används för en hastighetsökning.",
-   "s": 32.48,
-   "e": 40.65
-  },
-  {
-   "t": "En negativ acceleration, eller inbromsning, kallas också retardation.",
-   "s": 40.65,
-   "e": 46.17
-  },
-  {
-   "t": "Den genomsnittliga accelerationen i ett visst tidsintervall kallas medelacceleration.",
-   "s": 46.17,
-   "e": 52.2
-  },
-  {
-   "t": "Medelacceleration",
-   "s": 52.2,
-   "e": 54.77
-  },
-  {
-   "t": "a massan m är lika med delta hastigheten v delat med delta tiden t som är lika med v två minus v ett delat med t två minus t ett",
-   "s": 54.77,
-   "e": 64.35
+   "t": "v massan m är lika med delta sträckan s delat med delta tiden t parentesen som är lika med s två minus s ett delat med t två minus t ett slut parentes",
+   "s": 21.02,
+   "e": 31.74
   },
   {
    "t": "där",
-   "s": 64.35,
-   "e": 65.83
+   "s": 31.74,
+   "e": 33.25
   },
   {
-   "t": "aₘ är lika med acceleration (m/s i kvadrat)",
-   "s": 65.83,
-   "e": 70.69
+   "t": "Δs är lika med förflyttning (meter)",
+   "s": 33.25,
+   "e": 36.79
   },
   {
-   "t": "Δv är lika med hastighetsändring (meter per sekund)",
-   "s": 70.69,
-   "e": 75.28
+   "t": "Δt är lika med tid (sekunder)",
+   "s": 36.79,
+   "e": 40.11
   },
   {
-   "t": "Δt är lika med tidsintervall (sekunder)",
-   "s": 75.28,
-   "e": 79.19
+   "t": "vₘ är lika med medelhastighet (meter per sekund)",
+   "s": 40.11,
+   "e": 44.66
   },
   {
-   "t": "Konstant acceleration beräknas på samma sätt som medelacceleration.",
-   "s": 79.19,
-   "e": 84.38
+   "t": "Ett diagram med läge på y-axeln och tid på x-axeln kallas läge-tid-diagram eller s-t-diagram.",
+   "s": 44.66,
+   "e": 51.2
   },
   {
-   "t": "Hastighet vid konstant acceleration",
-   "s": 84.38,
-   "e": 87.84
+   "t": "En hastighet som inte förändras kallas konstant hastighet.",
+   "s": 51.2,
+   "e": 55.91
   },
   {
-   "t": "hastigheten v är lika med v noll plus accelerationen a gånger tiden t",
-   "s": 87.84,
-   "e": 93.53
+   "t": "Vid konstant hastighet kommer grafen i ett s-t-diagram att bli en rät linje.",
+   "s": 55.91,
+   "e": 61.52
   },
   {
-   "t": "där",
-   "s": 93.53,
-   "e": 95.04
+   "t": "Linjens lutning motsvarar hastigheten och ju brantare lutning desto högre hastighet.",
+   "s": 61.52,
+   "e": 67.4
   },
   {
-   "t": "v är lika med hastighet (meter per sekund)",
-   "s": 95.04,
-   "e": 99.12
+   "t": "I ett s-t-diagram motsvaras …",
+   "s": 67.4,
+   "e": 75.78
   },
   {
-   "t": "v noll är lika med begynnelsehastighet / starthastighet / utgångshastighet (meter per sekund)",
-   "s": 99.12,
-   "e": 107.21
+   "t": "… medelhastigheten i ett visst intervall av medellutningen i samma intervall eller sekantens lutning.",
+   "s": 67.4,
+   "e": 75.78
   },
   {
-   "t": "a är lika med acceleration (m/s i kvadrat)",
-   "s": 107.21,
-   "e": 112.14
+   "t": "… momentanhastigheten av lutningen i en punkt eller tangentens lutning.",
+   "s": 75.78,
+   "e": 80.86
   },
   {
-   "t": "t är lika med tid (sekunder)",
-   "s": 112.14,
-   "e": 115.44
+   "t": "Oavsett om vi ska beräkna en medelhastighet, konstant hastighet eller momentanhastighet utifrån ett s-t-diagram, så görs det genom att beräkna lutningen hos någon form av linje.",
+   "s": 80.86,
+   "e": 92.09
   },
   {
-   "t": "OBS — Inte v är lika med s/t vid accelererad rörelse",
-   "s": 115.44,
-   "e": 120.74
+   "t": "Linjens lutning bestäms genom att välja två valfria punkter (t ett, s ett) och (t två, s två) på linjen och sätta in i",
+   "s": 92.09,
+   "e": 118.6
   },
   {
-   "t": "Vid beräkning av fart/hastighet vid accelererad rörelse kan inte formeln hastigheten v är lika med sträckan s delat med tiden t användas!",
-   "s": 120.74,
-   "e": 130.06
+   "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett (jämför med k som är lika med delta y delat med delta x som är lika med y två minus y ett delat med x två minus x ett från matematiken)",
+   "s": 92.09,
+   "e": 118.6
   },
   {
-   "t": "Tyngdacceleration och fritt fall",
-   "s": 130.06,
-   "e": 133.12
+   "t": "Exempel 1 — Avläsning av konstant hastighet",
+   "s": 118.6,
+   "e": 122.96
   },
   {
-   "t": "När ett objekt faller utan luftmotstånd, det vill säga endast påverkas av tyngdkraften (eller gravitationskraften), befinner det sig i fritt fall med en viss acceleration.",
-   "s": 133.12,
-   "e": 143.25
+   "t": "Beräkna den konstanta hastigheten som åskådliggörs i grafen nedan utifrån de markerade punkterna.",
+   "s": 122.96,
+   "e": 129.51
   },
   {
-   "t": "Denna acceleration kallas tyngdacceleration och betecknas g.",
-   "s": 143.25,
-   "e": 154.03
+   "t": "Den konstanta hastigheten motsvaras av linjens lutning.",
+   "s": 129.51,
+   "e": 134.07
   },
   {
-   "t": "Tyngdaccelerationen vid jordens yta är i stort sett konstant: ca 9,8 meter per sekund i kvadrat.",
-   "s": 143.25,
-   "e": 154.03
+   "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t",
+   "s": 134.07,
+   "e": 154.34
   },
   {
-   "t": "Tyngdaccelerationen är större ju närmare jordens centrum man befinner sig.",
-   "s": 154.03,
-   "e": 159.07
+   "t": "delta sträckan s är lika med parentesen 0,72 minus 0,22 slut parentes meter som är lika med 0,50 meter delta tiden t som är lika med parentesen 0,50 minus 0,15 slut parentes sekund som är lika med 0,35 sekund",
+   "s": 134.07,
+   "e": 154.34
   },
   {
-   "t": "Eftersom jordklotet är aningen tillplattat vid polerna är vi lite närmare jordens centrum om vi befinner oss på nord- eller sydpolen jämfört med om vi är vid ekvatorn.",
-   "s": 159.07,
-   "e": 168.55
+   "t": "hastigheten v är lika med 0,50 delat med 0,35 som är lika med 1,428 meter per sekund som är ungefär lika med 1,4 meter per sekund",
+   "s": 154.34,
+   "e": 165.41
   },
   {
-   "t": "Jordens tillplattning",
-   "s": 168.55,
-   "e": 171.11
+   "t": "Svar: 1,4 meter per sekund",
+   "s": 165.41,
+   "e": 169.18
   },
   {
-   "t": "Vi roterar en \"metallglob\" och ser att den blir tillplattad vid polerna.",
-   "s": 171.11,
-   "e": 175.89
+   "t": "Exempel 2 — Adam och Bertil cyklar",
+   "s": 169.18,
+   "e": 172.91
   },
   {
-   "t": "Det är samma slags krafter som gör att jorden blir tillplattad vid sin rotation.",
-   "s": 175.89,
-   "e": 180.86
+   "t": "Adam cyklar hemifrån till affären samtidigt som Bertil cyklar från affären hem enligt nedanstående graf.",
+   "s": 172.91,
+   "e": 179.66
   },
   {
-   "t": "Vi kommer att prata mer om krafter vid cirkulära rörelser i Fysik nivå 2.",
-   "s": 180.86,
-   "e": 186.21
+   "t": "Vad är Bertils medelhastighet mellan t ett är lika med 0 minut och t två är lika med 25 minut ?",
+   "s": 179.66,
+   "e": 186.62
   },
   {
-   "t": "Tyngdaccelerationen i uppgifter",
-   "s": 186.21,
-   "e": 189.45
+   "t": "Vi ställer upp formeln för medelhastighet.",
+   "s": 186.62,
+   "e": 190.25
   },
   {
-   "t": "När vi räknar på fysikuppgifter förutsätter vi att vi befinner oss i Sverige, om inte annat anges, och räknar med tyngdaccelerationen g är lika med 9,82 meter per sekund i kvadrat.",
-   "s": 189.45,
-   "e": 201.19
+   "t": "v massan m är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett",
+   "s": 190.25,
+   "e": 199.25
   },
   {
-   "t": "Tyngdaccelerationen är alltid riktad mot jordens centrum.",
-   "s": 201.19,
-   "e": 205.65
+   "t": "Vi läser av koordinaterna på den orange grafen vid t ett är lika med 0 minut och t två är lika med 25 minut och får (0, 6) och (25, 0), vilket ger",
+   "s": 199.25,
+   "e": 211.22
   },
   {
-   "t": "Vid fritt fall faller alla objekt lika fort oavsett form eller massa.",
-   "s": 205.65,
-   "e": 210.61
+   "t": "t ett är lika med 0 t två som är lika med 25 minut som är lika med 25 gånger 60 sekund som är lika med 1 500 sekund s ett som är lika med 6 kilometer som är lika med 6 000 meter s två som är lika med 0",
+   "s": 211.22,
+   "e": 225.47
   },
   {
-   "t": "Här på jorden finns luftmotstånd, vilket hindrar fritt fall (en fjäder faller inte lika fort till marken som en hammare).",
-   "s": 210.61,
-   "e": 218.39
+   "t": "v massan m är lika med s två minus s ett delat med t två minus t ett som är lika med 0 minus 6 000 delat med 1 500 minus 0 som är lika med minus 6 000 delat med 1 500 som är lika med minus 4,0 meter per sekund",
+   "s": 225.47,
+   "e": 241.56
   },
   {
-   "t": "Men för små föremål och/eller korta tider kan formlerna för fritt fall användas även på jorden.",
-   "s": 218.39,
-   "e": 225.24
+   "t": "Svar: −4,0 meter per sekund (OBS!",
+   "s": 241.56,
+   "e": 246.01
   },
   {
-   "t": "Fritt fall i vakuumrör",
-   "s": 225.24,
-   "e": 227.94
+   "t": "Minustecknet anger att riktningen är \"tillbaka\".)",
+   "s": 246.01,
+   "e": 249.8
   },
   {
-   "t": "Vi placerar en fjäder och en metallbricka i ett glasrör.",
-   "s": 227.94,
-   "e": 232.5
+   "t": "Exempel 3 — Cecilias momentanhastighet",
+   "s": 249.8,
+   "e": 253.94
   },
   {
-   "t": "När vi vänder på glasröret faller metallbrickan fortare än fjädern.",
-   "s": 232.5,
-   "e": 237.47
+   "t": "Cecilia springer enligt nedanstående s-t-graf.",
+   "s": 253.94,
+   "e": 258.06
   },
   {
-   "t": "Vi pumpar ut luften ur röret och bildar vakuum.",
-   "s": 237.47,
-   "e": 241.57
+   "t": "Bestäm hennes momentanhastighet vid tiden t är lika med 5,0 sekund .",
+   "s": 258.06,
+   "e": 263.56
   },
   {
-   "t": "När vi nu vänder glasröret faller fjädern och metallbrickan lika fort.",
-   "s": 241.57,
-   "e": 246.82
+   "t": "Tangentens lutning där tiden t är lika med 5,0 sekund ger hennes momentanhastighet.",
+   "s": 263.56,
+   "e": 270.06
   },
   {
-   "t": "Utan luftmotstånd faller alltså alla föremål lika fort!",
-   "s": 246.82,
-   "e": 251.51
+   "t": "Vi slår en tangent i punkten där tiden t är lika med 5,0 sekund .",
+   "s": 270.06,
+   "e": 275.35
   },
   {
-   "t": "Exempel 1 — Sten i fritt fall",
-   "s": 251.51,
-   "e": 254.78
+   "t": "Tangenten ska luta lika mycket som grafen gör i den punkten (\"snudda\" grafen).",
+   "s": 275.35,
+   "e": 281.14
   },
   {
-   "t": "En sten släpps från vila och faller fritt under 2,0 sekunder.",
-   "s": 254.78,
-   "e": 259.64
+   "t": "Vi väljer två valfria punkter på tangenten (den orange linjen) och sätter in i formeln",
+   "s": 281.14,
+   "e": 287.25
   },
   {
-   "t": "Vilken hastighet har den då?",
-   "s": 259.64,
-   "e": 262.5
+   "t": "hastigheten v är lika med s två minus s ett delat med t två minus t ett",
+   "s": 287.25,
+   "e": 293.71
   },
   {
-   "t": "Vi ställer upp formeln för konstant acceleration och löser ut hastighetsändringen Δv.",
-   "s": 262.5,
-   "e": 275.66
+   "t": "Vi väljer till exempel punkterna (2, 20) och (8, 50), vilket ger värdena",
+   "s": 293.71,
+   "e": 300.86
   },
   {
-   "t": "accelerationen a är lika med delta hastigheten v delat med delta tiden t vilket är ekvivalent med att delta v är lika med a gånger delta t",
-   "s": 262.5,
-   "e": 275.66
+   "t": "t ett är lika med 2 sekund t två som är lika med 8 sekund s ett som är lika med 20 meter s två som är lika med 50 meter",
+   "s": 300.86,
+   "e": 311.44
   },
   {
-   "t": "accelerationen a är lika med tyngdfaktorn g som är lika med minus 9,82 meter per sekund i kvadrat delta tiden t som är lika med 2,0 sekund",
-   "s": 275.66,
-   "e": 285.81
+   "t": "hastigheten v är lika med 50 minus 20 delat med 8 minus 2 som är lika med 30 delat med 6 som är lika med 5 meter per sekund",
+   "s": 311.39,
+   "e": 320.54
   },
   {
-   "t": "delta hastigheten v är lika med parentesen minus 9,82 slut parentes gånger 2,0 som är lika med minus 19,64 meter per sekund",
-   "s": 285.81,
-   "e": 296.45
-  },
-  {
-   "t": "Eftersom stenen släpps från vila (v är lika med 0) och den minskar sin hastighet med 19,64 meter per sekund blir den slutgiltiga hastigheten",
-   "s": 296.45,
-   "e": 308.17
-  },
-  {
-   "t": "0 plus parentesen minus 19,64 slut parentes meter per sekund är lika med minus 19,64 meter per sekund som är ungefär lika med minus 20 meter per sekund",
-   "s": 308.12,
-   "e": 320.06
-  },
-  {
-   "t": "Svar: −20 meter per sekund alternativt 20 meter per sekund nedåt.",
-   "s": 320.06,
-   "e": 326.12
+   "t": "Svar: 5 meter per sekund",
+   "s": 320.54,
+   "e": 323.79
   }
  ]
 }

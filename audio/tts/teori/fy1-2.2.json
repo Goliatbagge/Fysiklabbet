@@ -1,253 +1,283 @@
 {
- "id": "fy1-2.2",
+ "id": "fy1-2.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "6c08bba6f91b4efc5ee7835b743cfc114462ce06",
- "dur": 323.79,
+ "hash": "b2090c079df564d6773bed29b788d5e78ac82529",
+ "dur": 324.88,
  "segments": [
   {
-   "t": "Medelhastighet, momentanhastighet och läge-tid-diagram",
+   "t": "Vektoraddition",
    "s": 0.1,
-   "e": 4.95
+   "e": 2.29
   },
   {
-   "t": "Ett föremåls genomsnittliga hastighet kallas medelhastighet.",
-   "s": 4.9,
-   "e": 9.76
+   "t": "Det är skillnad på sträcka och förflyttning.",
+   "s": 2.24,
+   "e": 5.55
   },
   {
-   "t": "Ett föremåls exakta hastighet vid en tidpunkt kallas momentanhastighet.",
-   "s": 9.76,
-   "e": 15.39
+   "t": "Avståndet något färdas kallas sträcka och betecknas s.",
+   "s": 5.55,
+   "e": 10.14
   },
   {
-   "t": "Kom ihåg att hastighet är en vektor.",
-   "s": 15.39,
-   "e": 18.68
+   "t": "Hur långt något har flyttats jämfört med utgångspunkten kallas förflyttning och betecknas Δs.",
+   "s": 10.14,
+   "e": 16.24
   },
   {
-   "t": "Medelhastighet",
-   "s": 18.68,
-   "e": 21.02
+   "t": "Båda har SI-enheten m (meter).",
+   "s": 16.24,
+   "e": 19.99
   },
   {
-   "t": "v massan m är lika med delta sträckan s delat med delta tiden t parentesen som är lika med s två minus s ett delat med t två minus t ett slut parentes",
-   "s": 21.02,
-   "e": 31.74
+   "t": "Vi går från start till mål enligt de svarta linjerna i nedanstående figur.",
+   "s": 19.99,
+   "e": 25.21
   },
   {
-   "t": "där",
-   "s": 31.74,
-   "e": 33.25
+   "t": "Sträckan vi går är 4 + 3 är lika med 7 meter.",
+   "s": 25.21,
+   "e": 29.66
   },
   {
-   "t": "Δs är lika med förflyttning (meter)",
-   "s": 33.25,
-   "e": 36.79
+   "t": "Förflyttningen vi gör är 5 meter (den blå pilen).",
+   "s": 29.66,
+   "e": 33.86
   },
   {
-   "t": "Δt är lika med tid (sekunder)",
-   "s": 36.79,
-   "e": 40.11
+   "t": "När vi pratar om förflyttning spelar alltså riktningen roll, vilket inte gäller för sträcka.",
+   "s": 33.86,
+   "e": 39.65
   },
   {
-   "t": "vₘ är lika med medelhastighet (meter per sekund)",
-   "s": 40.11,
-   "e": 44.66
+   "t": "Vektorer och skalärer",
+   "s": 39.65,
+   "e": 42.38
   },
   {
-   "t": "Ett diagram med läge på y-axeln och tid på x-axeln kallas läge-tid-diagram eller s-t-diagram.",
-   "s": 44.66,
-   "e": 51.2
+   "t": "En storhet som har",
+   "s": 42.38,
+   "e": 44.88
   },
   {
-   "t": "En hastighet som inte förändras kallas konstant hastighet.",
-   "s": 51.2,
-   "e": 55.91
+   "t": "både storlek och riktning kallas vektor.",
+   "s": 44.88,
+   "e": 48.5
   },
   {
-   "t": "Vid konstant hastighet kommer grafen i ett s-t-diagram att bli en rät linje.",
-   "s": 55.91,
-   "e": 61.52
+   "t": "storlek, men ingen riktning kallas skalär.",
+   "s": 48.5,
+   "e": 52.75
   },
   {
-   "t": "Linjens lutning motsvarar hastigheten och ju brantare lutning desto högre hastighet.",
-   "s": 61.52,
-   "e": 67.4
+   "t": "När vi adderar vektorer behöver vi alltså ta hänsyn till riktningen.",
+   "s": 52.75,
+   "e": 57.64
   },
   {
-   "t": "I ett s-t-diagram motsvaras …",
-   "s": 67.4,
-   "e": 75.78
+   "t": "För vektorer i samma riktning definierar man ofta positiv riktning uppåt eller åt höger och negativ riktning nedåt eller åt vänster.",
+   "s": 57.64,
+   "e": 65.91
   },
   {
-   "t": "… medelhastigheten i ett visst intervall av medellutningen i samma intervall eller sekantens lutning.",
-   "s": 67.4,
-   "e": 75.78
+   "t": "Riktningar åt höger och uppåt får då positiva värden och riktningar åt vänster och nedåt får negativa värden.",
+   "s": 65.91,
+   "e": 73.01
   },
   {
-   "t": "… momentanhastigheten av lutningen i en punkt eller tangentens lutning.",
-   "s": 75.78,
-   "e": 80.86
+   "t": "Resulterande vektorer och parallellförflyttning",
+   "s": 73.01,
+   "e": 76.83
   },
   {
-   "t": "Oavsett om vi ska beräkna en medelhastighet, konstant hastighet eller momentanhastighet utifrån ett s-t-diagram, så görs det genom att beräkna lutningen hos någon form av linje.",
-   "s": 80.86,
-   "e": 92.09
+   "t": "Om två eller flera vektorer verkar i olika riktning kan vi konstruera den resulterande vektorn genom att flytta vektorer som ska adderas, utan att ändra deras storlek eller riktning.",
+   "s": 76.83,
+   "e": 87.38
   },
   {
-   "t": "Linjens lutning bestäms genom att välja två valfria punkter (t ett, s ett) och (t två, s två) på linjen och sätta in i",
-   "s": 92.09,
-   "e": 118.6
+   "t": "Detta kallas parallellförflyttning.",
+   "s": 87.38,
+   "e": 90.58
   },
   {
-   "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett (jämför med k som är lika med delta y delat med delta x som är lika med y två minus y ett delat med x två minus x ett från matematiken)",
-   "s": 92.09,
-   "e": 118.6
+   "t": "Vi börjar med en valfri vektor att utgå från och sedan flyttar vi nästa vektor, så att den startar där den första slutar.",
+   "s": 90.58,
+   "e": 97.95
   },
   {
-   "t": "Exempel 1 — Avläsning av konstant hastighet",
-   "s": 118.6,
-   "e": 122.96
+   "t": "Den resulterande vektorn (resultanten) är vektorn som går från startpunkten till den sista adderade vektorns spets.",
+   "s": 97.95,
+   "e": 105.7
   },
   {
-   "t": "Beräkna den konstanta hastigheten som åskådliggörs i grafen nedan utifrån de markerade punkterna.",
-   "s": 122.96,
-   "e": 129.51
+   "t": "Om vektorerna verkar vinkelrätt, så kan den resulterande vektorns storlek beräknas med Pythagoras sats.",
+   "s": 105.7,
+   "e": 112.95
   },
   {
-   "t": "Den konstanta hastigheten motsvaras av linjens lutning.",
-   "s": 129.51,
-   "e": 134.07
+   "t": "Exempel 1 — Kayla i tågvagnen",
+   "s": 112.95,
+   "e": 116.45
   },
   {
-   "t": "hastigheten v är lika med delta sträckan s delat med delta tiden t",
-   "s": 134.07,
-   "e": 154.34
+   "t": "Kayla går med farten 2 meter per sekund i en tågvagn relativt vagnen.",
+   "s": 116.45,
+   "e": 121.8
   },
   {
-   "t": "delta sträckan s är lika med parentesen 0,72 minus 0,22 slut parentes meter som är lika med 0,50 meter delta tiden t som är lika med parentesen 0,50 minus 0,15 slut parentes sekund som är lika med 0,35 sekund",
-   "s": 134.07,
-   "e": 154.34
+   "t": "Vagnen rör sig med 10 meter per sekund.",
+   "s": 121.8,
+   "e": 125.45
   },
   {
-   "t": "hastigheten v är lika med 0,50 delat med 0,35 som är lika med 1,428 meter per sekund som är ungefär lika med 1,4 meter per sekund",
-   "s": 154.34,
-   "e": 165.41
+   "t": "Vad blir Kaylas hastighet relativt marken om hon går a) i tågets rörelseriktning, b) mot tågets rörelseriktning?",
+   "s": 125.45,
+   "e": 133.72
   },
   {
-   "t": "Svar: 1,4 meter per sekund",
-   "s": 165.41,
-   "e": 169.18
+   "t": "a) v tiden t o t är lika med v ett plus v två",
+   "s": 133.72,
+   "e": 138.74
   },
   {
-   "t": "Exempel 2 — Adam och Bertil cyklar",
-   "s": 169.18,
-   "e": 172.91
+   "t": "Båda hastighetsvektorerna är i samma riktning och har då samma tecken.",
+   "s": 138.74,
+   "e": 143.47
   },
   {
-   "t": "Adam cyklar hemifrån till affären samtidigt som Bertil cyklar från affären hem enligt nedanstående graf.",
-   "s": 172.91,
-   "e": 179.66
+   "t": "v ett är lika med 10 meter per sekund v två som är lika med 2 meter per sekund",
+   "s": 143.47,
+   "e": 149.59
   },
   {
-   "t": "Vad är Bertils medelhastighet mellan t ett är lika med 0 minut och t två är lika med 25 minut ?",
-   "s": 179.66,
-   "e": 186.62
+   "t": "v tiden t o t är lika med 10 plus 2 som är lika med 12 meter per sekund",
+   "s": 149.59,
+   "e": 155.57
   },
   {
-   "t": "Vi ställer upp formeln för medelhastighet.",
-   "s": 186.62,
-   "e": 190.25
+   "t": "Svar: 12 meter per sekund (i samma riktning som tåget)",
+   "s": 155.57,
+   "e": 160.75
   },
   {
-   "t": "v massan m är lika med delta sträckan s delat med delta tiden t som är lika med s två minus s ett delat med t två minus t ett",
-   "s": 190.25,
-   "e": 199.25
+   "t": "b) v tiden t o t är lika med v ett plus v två",
+   "s": 160.75,
+   "e": 165.94
   },
   {
-   "t": "Vi läser av koordinaterna på den orange grafen vid t ett är lika med 0 minut och t två är lika med 25 minut och får (0, 6) och (25, 0), vilket ger",
-   "s": 199.25,
-   "e": 211.22
+   "t": "Kaylas hastighet är nu riktad mot tågets riktning (negativ).",
+   "s": 165.94,
+   "e": 170.89
   },
   {
-   "t": "t ett är lika med 0 t två som är lika med 25 minut som är lika med 25 gånger 60 sekund som är lika med 1 500 sekund s ett som är lika med 6 kilometer som är lika med 6 000 meter s två som är lika med 0",
-   "s": 211.22,
-   "e": 225.47
+   "t": "v ett är lika med 10 meter per sekund v två som är lika med minus 2 meter per sekund parentesen OBS! Minustecken framför slut parentes",
+   "s": 170.89,
+   "e": 182.09
   },
   {
-   "t": "v massan m är lika med s två minus s ett delat med t två minus t ett som är lika med 0 minus 6 000 delat med 1 500 minus 0 som är lika med minus 6 000 delat med 1 500 som är lika med minus 4,0 meter per sekund",
-   "s": 225.47,
-   "e": 241.56
+   "t": "v tiden t o t är lika med 10 plus parentesen minus 2 slut parentes som är lika med 8 meter per sekund",
+   "s": 182.09,
+   "e": 190.05
   },
   {
-   "t": "Svar: −4,0 meter per sekund (OBS!",
-   "s": 241.56,
-   "e": 246.01
+   "t": "Svar: 8 meter per sekund (i samma riktning som tåget)",
+   "s": 190.05,
+   "e": 195.14
   },
   {
-   "t": "Minustecknet anger att riktningen är \"tillbaka\".)",
-   "s": 246.01,
-   "e": 249.8
+   "t": "Exempel 2 — David över forsen",
+   "s": 195.14,
+   "e": 198.56
   },
   {
-   "t": "Exempel 3 — Cecilias momentanhastighet",
-   "s": 249.8,
-   "e": 253.94
+   "t": "David simmar rakt över en flod med den konstanta farten 1,5 meter per sekund relativt vattnet.",
+   "s": 198.56,
+   "e": 205.5
   },
   {
-   "t": "Cecilia springer enligt nedanstående s-t-graf.",
-   "s": 253.94,
-   "e": 258.06
+   "t": "Vattnet forsar fram med 4,0 meter per sekund.",
+   "s": 205.5,
+   "e": 209.88
   },
   {
-   "t": "Bestäm hennes momentanhastighet vid tiden t är lika med 5,0 sekund .",
-   "s": 258.06,
-   "e": 263.56
+   "t": "a) Hur lång tid tar det för David att simma över forsen om den är 45 meter bred?",
+   "s": 209.88,
+   "e": 215.82
   },
   {
-   "t": "Tangentens lutning där tiden t är lika med 5,0 sekund ger hennes momentanhastighet.",
-   "s": 263.56,
-   "e": 270.06
+   "t": "b) Bestäm Davids hastighet relativt marken.",
+   "s": 215.82,
+   "e": 220.14
   },
   {
-   "t": "Vi slår en tangent i punkten där tiden t är lika med 5,0 sekund .",
-   "s": 270.06,
-   "e": 275.35
+   "t": "a) Vi ritar en figur där v ett är lika med 1,5 meter per sekund (vinkelrätt mot floden) och v två är lika med 4,0 meter per sekund (längs floden).",
+   "s": 220.14,
+   "e": 231.41
   },
   {
-   "t": "Tangenten ska luta lika mycket som grafen gör i den punkten (\"snudda\" grafen).",
-   "s": 275.35,
-   "e": 281.14
+   "t": "Det är endast den vinkelräta hastigheten mot floden v ett och flodens bredd s ett som avgör tiden det tar att korsa floden.",
+   "s": 231.41,
+   "e": 239.4
   },
   {
-   "t": "Vi väljer två valfria punkter på tangenten (den orange linjen) och sätter in i formeln",
-   "s": 281.14,
-   "e": 287.25
+   "t": "Vi ställer upp formeln för konstant hastighet och löser ut tiden.",
+   "s": 239.4,
+   "e": 244.15
   },
   {
-   "t": "hastigheten v är lika med s två minus s ett delat med t två minus t ett",
-   "s": 287.25,
-   "e": 293.71
+   "t": "v ett är lika med s ett delat med tiden t vilket är ekvivalent med att t är lika med s ett delat med v ett",
+   "s": 244.15,
+   "e": 251.6
   },
   {
-   "t": "Vi väljer till exempel punkterna (2, 20) och (8, 50), vilket ger värdena",
-   "s": 293.71,
-   "e": 300.86
+   "t": "s ett är lika med 45 meter v ett som är lika med 1,5 meter per sekund",
+   "s": 251.6,
+   "e": 257.88
   },
   {
-   "t": "t ett är lika med 2 sekund t två som är lika med 8 sekund s ett som är lika med 20 meter s två som är lika med 50 meter",
-   "s": 300.86,
-   "e": 311.44
+   "t": "tiden t är lika med 45 delat med 1,5 som är lika med 30 sekund",
+   "s": 257.88,
+   "e": 263.74
   },
   {
-   "t": "hastigheten v är lika med 50 minus 20 delat med 8 minus 2 som är lika med 30 delat med 6 som är lika med 5 meter per sekund",
-   "s": 311.39,
-   "e": 320.54
+   "t": "Svar: 30 sekunder.",
+   "s": 263.74,
+   "e": 266.64
   },
   {
-   "t": "Svar: 5 meter per sekund",
-   "s": 320.54,
-   "e": 323.79
+   "t": "b) Vi lägger ihop båda hastighetsvektorerna v ett och v två för att få den resulterande hastighetsvektorn v.",
+   "s": 266.64,
+   "e": 274.32
+  },
+  {
+   "t": "Vi parallellförflyttar vektorn v ett till spetsen hos vektorn v två och ritar den resulterande vektorn v.",
+   "s": 274.32,
+   "e": 281.32
+  },
+  {
+   "t": "En rätvinklig triangel har bildats och vi beräknar v med Pythagoras sats.",
+   "s": 281.32,
+   "e": 286.89
+  },
+  {
+   "t": "hastigheten v i kvadrat är lika med v ett i kvadrat plus v två i kvadrat vilket är ekvivalent med att v är lika med roten ur v ett i kvadrat plus v två i kvadrat",
+   "s": 286.89,
+   "e": 298.01
+  },
+  {
+   "t": "v ett är lika med 1,5 meter per sekund v två som är lika med 4,0 meter per sekund",
+   "s": 298.01,
+   "e": 307.04
+  },
+  {
+   "t": "hastigheten v är lika med roten ur 1,5 i kvadrat plus 4,0 i kvadrat som är lika med roten ur 18,25 som är lika med 4,272 som är ungefär lika med 4,3 meter per sekund",
+   "s": 306.99,
+   "e": 321.15
+  },
+  {
+   "t": "Svar: 4,3 meter per sekund",
+   "s": 321.15,
+   "e": 324.88
   }
  ]
 }

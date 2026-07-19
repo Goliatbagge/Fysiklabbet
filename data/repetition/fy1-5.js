@@ -6,7 +6,7 @@ window.REPETITION['fy1-5'] = {
     courseCode: 'fy1',
     chapter: 'Tryck',
     chapterNumber: 5,
-    intro: 'Här repeterar du tryck och tryckkraft, vätsketryck, lufttryck, Arkimedes princip, ideala gaslagen med kelvinskalan och Pascals princip.',
+    intro: 'Här repeterar du densitet, tryck och tryckkraft, vätsketryck, lufttryck, Arkimedes princip, ideala gaslagen med kelvinskalan och Pascals princip.',
     stations: [
         {
             type: 'sortera',
@@ -22,6 +22,7 @@ window.REPETITION['fy1-5'] = {
             title: 'Para ihop formel och namn',
             instruktion: 'Dra rätt namn till varje formel.',
             pairs: [
+                { a: '$\\rho = \\dfrac{m}{V}$', b: 'Densitet' },
                 { a: '$p = \\dfrac{F}{A}$', b: 'Tryck (fasta kroppar)' },
                 { a: '$p = \\rho \\cdot g \\cdot h$', b: 'Vätsketryck' },
                 { a: '$p = p_0 + \\rho \\cdot g \\cdot h$', b: 'Totalt tryck' },
@@ -36,13 +37,14 @@ window.REPETITION['fy1-5'] = {
             title: 'Fyll i rätt begrepp',
             instruktion: 'Dra rätt ord eller uttryck till varje lucka.',
             formler: [
+                { fore: 'Densiteten beräknas som massan delat med', efter: '.', svar: 'volymen' },
                 { fore: 'Vätsketrycket i en bestämd vätska beror bara på', efter: '.', svar: 'djupet' },
                 { fore: 'Temperaturen i ideala gaslagen ska alltid anges i', efter: '.', svar: 'kelvin' },
                 { fore: 'Vid Arkimedes princip används densiteten hos', efter: ', aldrig hos själva föremålet.', svar: 'den undanträngda vätskan' },
                 { fore: 'Vätsketrycket verkar alltid', efter: 'mot den yta det möter.', svar: 'vinkelrätt' },
                 { fore: 'En flytande kropps lyftkraft är', efter: 'tyngdkraften.', svar: 'lika stor som' },
             ],
-            distraktorer: ['kärlets form', 'celsius', 'föremålet'],
+            distraktorer: ['kärlets form', 'celsius', 'föremålet', 'massan'],
         },
         {
             type: 'ordna',
@@ -57,6 +59,10 @@ window.REPETITION['fy1-5'] = {
             title: 'Sant eller falskt?',
             instruktion: 'Avgör om påståendet stämmer.',
             pastaenden: [
+                { text: 'Vattnets densitet är ungefär $1\\,000\\ \\mathrm{kg/m^3}$.',
+                  sant: true, varfor: '1,0 liter vatten väger ungefär 1,0 kg, vilket ger densiteten 1 000 kg/m³.' },
+                { text: 'Ett föremål flyter i vatten om dess densitet är större än vattnets.',
+                  sant: false, varfor: 'Det är tvärtom: föremålet flyter om dess sammanlagda densitet är LÄGRE än vätskans.' },
                 { text: 'Tryckkraften och trycket är alltid lika stora, oavsett vilken area kraften fördelas på.',
                   sant: false, varfor: 'Trycket är kraften delad med arean — samma kraft ger olika tryck beroende på ytans storlek.' },
                 { text: 'Vätsketrycket på ett visst djup är detsamma oavsett kärlets form eller mängden vätska.',

@@ -1,403 +1,303 @@
 {
- "id": "fy1-5.4",
+ "id": "fy1-5.3",
  "voice": "sv-SE-SofieNeural",
- "hash": "87610b306f3b24b72a28992c46510c7fb4ed39de",
- "dur": 500.06,
+ "hash": "29f8d8fb1291ff480cfe110f08b3b36dd90cfe95",
+ "dur": 327.76,
  "segments": [
   {
-   "t": "Lyftkraft och Arkimedes princip",
+   "t": "Lufttryck och totalt tryck",
    "s": 0.1,
-   "e": 3.55
+   "e": 3.05
   },
   {
-   "t": "Vad som flyter",
-   "s": 3.5,
-   "e": 5.81
+   "t": "Det uppochnedvända vattenglaset",
+   "s": 3.0,
+   "e": 6.38
   },
   {
-   "t": "Vi lägger ner olika bollar i en bägare med vatten.",
-   "s": 5.81,
-   "e": 9.75
+   "t": "Ett glas fylls till brädden (kanten) med vatten.",
+   "s": 6.38,
+   "e": 10.39
   },
   {
-   "t": "Pingisbollen flyter högt över ytan, gummibollen flyter lågt under ytan och metallkulan flyter inte alls.",
-   "s": 9.75,
-   "e": 16.98
+   "t": "En tunn plastskiva läggs på och glaset vänds sedan upp och ned.",
+   "s": 10.39,
+   "e": 15.09
   },
   {
-   "t": "Tyngdkraften på bollarna som flyter verkar nedåt.",
-   "s": 16.98,
-   "e": 20.98
+   "t": "Plastskivan sitter kvar!",
+   "s": 15.09,
+   "e": 17.65
   },
   {
-   "t": "Eftersom de inte sjunker måste det påverkas av en lika stor lyftkraft från vattnet.",
-   "s": 20.98,
-   "e": 26.71
+   "t": "Lufttrycket som trycker uppåt under plastskivan är alltså större än tyngden nedåt från vattnet inuti glaset.",
+   "s": 17.65,
+   "e": 24.76
   },
   {
-   "t": "Vi lägger även ner en aluminiumform, som flyter.",
-   "s": 26.71,
-   "e": 30.82
+   "t": "De magdeburgska halvkloten",
+   "s": 24.76,
+   "e": 27.85
   },
   {
-   "t": "Föremål som är helt eller delvis nedsänkta i en vätska påverkas av en uppåtriktad kraft från vätskan som kallas lyftkraft och bestäms med Arkimedes princip.",
-   "s": 30.82,
-   "e": 40.81
+   "t": "Två halvklot sätts ihop och vi pumpar ut luften mellan dem.",
+   "s": 27.85,
+   "e": 32.41
   },
   {
-   "t": "Att vi får en lyftkraft uppåt från vätskan beror på att tryckkraften uppåt på botten blir större än tryckkraften nedåt i toppen på grund av att vätsketrycket är större längre ner.",
-   "s": 40.81,
-   "e": 50.95
+   "t": "När vi försöker dra isär kloten, märker vi att det krävs en väldigt stor kraft.",
+   "s": 32.41,
+   "e": 38.12
   },
   {
-   "t": "Även om ett föremål är helt nedsänkt i vatten påverkas det av en lyftkraft.",
-   "s": 50.95,
-   "e": 56.62
+   "t": "När luften inuti halvkloten pumpas ut verkar endast lufttryck utifrån.",
+   "s": 38.12,
+   "e": 43.77
   },
   {
-   "t": "Ett föremål under vattnet känns \"lättare\".",
-   "s": 56.62,
-   "e": 60.21
+   "t": "Detta är så stort att det krävs en mycket stor kraft för att få isär kloten.",
+   "s": 43.77,
+   "e": 49.08
   },
   {
-   "t": "Det sker dock inte någon massförlust utan orsaken till att det känns lättare är en mindre resulterande kraft nedåt.",
-   "s": 60.21,
-   "e": 67.44
+   "t": "Lufttrycket på en gummiplatta",
+   "s": 49.08,
+   "e": 52.15
   },
   {
-   "t": "Till vänster flyter föremålet — lyftkraften är lika stor som tyngdkraften.",
-   "s": 67.44,
-   "e": 73.03
+   "t": "En gummiplatta läggs på ett bord så att ingen luft finns mellan plattan och bordet.",
+   "s": 52.15,
+   "e": 57.38
   },
   {
-   "t": "Till höger sjunker föremålet — lyftkraften är mindre än tyngdkraften.",
-   "s": 73.03,
-   "e": 78.3
+   "t": "Lufttrycket kommer då endast att verka ovanifrån.",
+   "s": 57.38,
+   "e": 61.45
   },
   {
-   "t": "När något flyter gäller F hävarmen l y frekvensen f tiden t är lika med F t y n tyngdfaktorn g avståndet d och när något sjunker gäller F hävarmen l y frekvensen f tiden t är mindre än F t y n tyngdfaktorn g avståndet d .",
-   "s": 78.3,
-   "e": 94.34
+   "t": "Försök att lyfta mattan från bordet!",
+   "s": 61.45,
+   "e": 64.81
   },
   {
-   "t": "Arkimedes princip är uppkallad efter den grekiske fysikern Arkimedes som enligt en anekdot kom till denna insikt när han steg i sitt badkar och vattnet svämmade över.",
-   "s": 94.34,
-   "e": 104.46
+   "t": "Återigen krävs en stor kraft för att övervinna lufttrycket.",
+   "s": 64.81,
+   "e": 69.4
   },
   {
-   "t": "Av glädje sprang han naken genom gatorna ropandes \"heureka!\" (jag har funnit det!).",
-   "s": 104.46,
-   "e": 111.65
+   "t": "På samma sätt som att en vätskas tyngd orsakar ett vätsketryck på ett visst djup, så orsakar luftens tyngd ett lufttryck eller gastryck — ett tryck som är större än man kan tro.",
+   "s": 69.4,
+   "e": 79.0
   },
   {
-   "t": "Lyftkraft (Arkimedes princip) — med ord",
-   "s": 111.65,
-   "e": 115.96
+   "t": "Den växande skumbollen",
+   "s": 79.0,
+   "e": 81.59
   },
   {
-   "t": "En kropp som är helt eller delvis nedsänkt i en vätska påverkas av en lyftkraft som är lika stor som tyngden hos den undanträngda vätskan.",
-   "s": 115.96,
-   "e": 124.45
+   "t": "Placera en skumboll i en vakuumkammare.",
+   "s": 81.59,
+   "e": 85.06
   },
   {
-   "t": "Lyftkraft (Arkimedes princip)",
-   "s": 124.45,
-   "e": 128.1
+   "t": "Pumpa sedan ur luften.",
+   "s": 85.06,
+   "e": 87.62
   },
   {
-   "t": "F L är lika med densiteten rho gånger tyngdfaktorn g gånger volymen V",
-   "s": 128.1,
-   "e": 134.01
+   "t": "Skumbollen växer och blir stor.",
+   "s": 87.62,
+   "e": 90.67
+  },
+  {
+   "t": "När luften pumpas ur vakuumkammaren försvinner lufttrycket och luftbubblorna i skumbollen utvidgas, vilket gör att skumbollen ser ut att växa.",
+   "s": 90.67,
+   "e": 99.31
+  },
+  {
+   "t": "Normalt lufttryck vid havsnivån är 101,3 kilopascal (101 300 pascal).",
+   "s": 99.31,
+   "e": 107.04
+  },
+  {
+   "t": "Detta tryck har fått enheten atm (atmosfär).",
+   "s": 107.04,
+   "e": 111.24
+  },
+  {
+   "t": "Det finns många olika enheter för lufttryck.",
+   "s": 111.24,
+   "e": 114.95
+  },
+  {
+   "t": "Olika enheter för tryck",
+   "s": 114.95,
+   "e": 117.79
+  },
+  {
+   "t": "Vi befinner oss i ett \"lufthav\" (atmosfären).",
+   "s": 117.79,
+   "e": 121.86
+  },
+  {
+   "t": "Ju högre upp i atmosfären vi kommer desto lägre blir lufttrycket.",
+   "s": 121.86,
+   "e": 126.7
+  },
+  {
+   "t": "Dels på grund av att luften där har lägre densitet, dels för att vi har mindre volym luft ovanför oss (jämför med vätskedjup).",
+   "s": 126.7,
+   "e": 134.76
+  },
+  {
+   "t": "Eftersom det är svårt att pressa ihop vätskor kommer lufttrycket mot en vätskeyta fortplantas i hela vätskan och i alla riktningar.",
+   "s": 134.76,
+   "e": 142.4
+  },
+  {
+   "t": "I en vätska finns alltså både lufttryck och vätsketryck.",
+   "s": 142.4,
+   "e": 146.64
+  },
+  {
+   "t": "Det sammanlagda trycket från lufttrycket och vätsketrycket kallas totalt tryck.",
+   "s": 146.64,
+   "e": 152.19
+  },
+  {
+   "t": "Totalt tryck",
+   "s": 152.19,
+   "e": 154.29
+  },
+  {
+   "t": "trycket p är lika med p noll plus densiteten rho gånger tyngdfaktorn g gånger höjden h",
+   "s": 154.29,
+   "e": 160.59
   },
   {
    "t": "där",
-   "s": 134.01,
-   "e": 135.53
+   "s": 160.59,
+   "e": 162.05
   },
   {
-   "t": "F L är lika med lyftkraft (newton)",
-   "s": 135.53,
-   "e": 139.46
+   "t": "p är lika med totalt tryck (pascal)",
+   "s": 162.05,
+   "e": 165.75
   },
   {
-   "t": "ρ är lika med undanträngda vätskans densitet (kg/m i kubik)",
-   "s": 139.46,
-   "e": 145.32
+   "t": "p noll är lika med lufttryck mot vätskeytan (pascal)",
+   "s": 165.75,
+   "e": 170.39
   },
   {
-   "t": "g är lika med tyngdfaktor (newton per kilogram)",
-   "s": 145.32,
-   "e": 149.91
+   "t": "ρ är lika med vätskans densitet (kg/m i kubik)",
+   "s": 170.39,
+   "e": 175.49
   },
   {
-   "t": "V är lika med undanträngda vätskans volym / föremålets volym under vattnet (m i kubik)",
-   "s": 149.91,
-   "e": 157.21
+   "t": "g är lika med tyngdfaktorn (newton per kilogram)",
+   "s": 175.49,
+   "e": 180.06
   },
   {
-   "t": "För flytande föremål gäller F L är lika med F G .",
-   "s": 157.21,
-   "e": 161.79
+   "t": "h är lika med vätskedjup (meter)",
+   "s": 180.06,
+   "e": 183.6
   },
   {
-   "t": "För sjunkande föremål gäller F L är mindre än F G .",
-   "s": 161.79,
-   "e": 166.69
+   "t": "Exempel 1 — Dyk på 3 meters djup",
+   "s": 183.6,
+   "e": 187.59
   },
   {
-   "t": "Härledning — Lyftkraft",
-   "s": 166.69,
-   "e": 169.47
+   "t": "Du dyker i en sjö där lufttrycket är 101,3 kilopascal.",
+   "s": 187.59,
+   "e": 192.76
   },
   {
-   "t": "Lyftkraften F L är lika stor som den undanträngda vätskans tyngd.",
-   "s": 169.47,
-   "e": 174.6
+   "t": "Bestäm på 3,0 meters djup a) vätsketrycket, b) det totala trycket, c) tryckkraften på din trumhinna om den har arean 80 millimeter i kvadrat.",
+   "s": 192.76,
+   "e": 203.85
   },
   {
-   "t": "Om den undanträngda vätskan har massan m hastigheten v gäller alltså",
-   "s": 174.6,
-   "e": 179.76
+   "t": "a)",
+   "s": 203.85,
+   "e": 219.74
   },
   {
-   "t": "F L är lika med m hastigheten v gånger tyngdfaktorn g",
-   "s": 179.76,
-   "e": 184.64
+   "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h",
+   "s": 203.85,
+   "e": 219.74
   },
   {
-   "t": "Enligt formeln för densitet gäller för en vätska med volymen V och densitet ρ att",
-   "s": 184.64,
-   "e": 190.43
+   "t": "densiteten rho är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter",
+   "s": 203.85,
+   "e": 219.74
   },
   {
-   "t": "densiteten rho är lika med m hastigheten v delat med volymen V vilket är ekvivalent med att m v är lika med rho gånger V",
-   "s": 190.43,
-   "e": 199.65
+   "t": "trycket p är lika med 998 gånger 9,82 gånger 3,0 som är lika med 29 401,08 pascal som är ungefär lika med 29 000 pascal som är lika med 29 kilopascal",
+   "s": 219.74,
+   "e": 233.68
   },
   {
-   "t": "Insättning ger",
-   "s": 190.43,
-   "e": 199.65
+   "t": "Svar: 29 kilopascal",
+   "s": 233.68,
+   "e": 237.16
   },
   {
-   "t": "F L är lika med densiteten rho gånger volymen V gånger tyngdfaktorn g som är lika med rho gånger g gånger V vilket skulle visas",
-   "s": 199.65,
-   "e": 208.46
+   "t": "b)",
+   "s": 237.16,
+   "e": 244.19
   },
   {
-   "t": "Flytförmåga",
-   "s": 208.46,
-   "e": 210.64
+   "t": "trycket p är lika med p noll plus densiteten rho gånger tyngdfaktorn g gånger höjden h",
+   "s": 237.16,
+   "e": 244.19
   },
   {
-   "t": "Ett alternativt sätt att se på flytförmåga är att saker flyter bara om den sammanlagda kroppen har lägre densitet än mediet det befinner sig i.",
-   "s": 210.64,
-   "e": 219.38
+   "t": "p noll är lika med 101,3 kilopascal som är lika med 101 300 pascal densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram höjden h som är lika med 3,0 meter",
+   "s": 244.19,
+   "e": 260.88
   },
   {
-   "t": "Den sammanlagda densiteten för ett fartyg av järn är mindre än densiteten för vatten (fartyget innehåller massa luft).",
-   "s": 219.38,
-   "e": 227.09
+   "t": "trycket p är lika med 101 300 plus 998 gånger 9,82 gånger 3,0 som är lika med 130 701,08 pascal som är ungefär lika med 0,13 MPa",
+   "s": 260.88,
+   "e": 275.01
   },
   {
-   "t": "Därför flyter det.",
-   "s": 227.09,
-   "e": 229.5
+   "t": "Svar: 0,13 MPa",
+   "s": 275.01,
+   "e": 278.48
   },
   {
-   "t": "Av denna orsak är det omöjligt att drunkna i kvicksand eftersom kvicksand har högre densitet (2 000 kilogram/m i kubik) än människokroppen (1 000 kilogram/m i kubik).",
-   "s": 229.5,
-   "e": 241.76
+   "t": "c) Det tryck som kommer att ge en tryckkraft på din trumhinna är endast vätsketrycket.",
+   "s": 278.48,
+   "e": 284.38
   },
   {
-   "t": "Exempel 1 — Båt på 450 kilogram",
-   "s": 241.76,
-   "e": 246.09
+   "t": "Lufttrycket finns även inuti örat så det kommer att ta ut det yttre lufttrycket.",
+   "s": 284.38,
+   "e": 289.81
   },
   {
-   "t": "En båt väger 450 kilogram.",
-   "s": 246.09,
-   "e": 249.84
+   "t": "trycket p är lika med kraften F delat med arean A vilket är ekvivalent med att F är lika med p gånger A",
+   "s": 289.81,
+   "e": 310.1
   },
   {
-   "t": "Hur stor a) lyftkraft utövar vattnet på båten, b) volym vatten tränger båten undan?",
-   "s": 249.84,
-   "e": 256.85
+   "t": "trycket p är lika med 29 401,08 pascal parentesen vätsketrycket från a-uppgiften slut parentes arean A som är lika med 80 millimeter i kvadrat som är lika med 80 gånger 10 upphöjt till minus 6 kvadratmeter",
+   "s": 289.81,
+   "e": 310.1
   },
   {
-   "t": "a) Båten flyter så F L är lika med F G .",
-   "s": 256.85,
-   "e": 261.21
+   "t": "kraften F är lika med 29 401,08 gånger 80 gånger 10 upphöjt till minus 6 som är lika med 2,352 newton som är ungefär lika med 2,4 newton",
+   "s": 310.1,
+   "e": 324.45
   },
   {
-   "t": "F L är lika med F G som är lika med massan m gånger tyngdfaktorn g",
-   "s": 261.21,
-   "e": 272.52
-  },
-  {
-   "t": "massan m är lika med 450 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram",
-   "s": 261.21,
-   "e": 272.52
-  },
-  {
-   "t": "F L är lika med 450 gånger 9,82 som är lika med 4 419 newton som är ungefär lika med 4,4 kilonewton",
-   "s": 272.52,
-   "e": 282.4
-  },
-  {
-   "t": "Svar: 4,4 kilonewton",
-   "s": 282.4,
-   "e": 286.05
-  },
-  {
-   "t": "b) Vi löser ut volymen från Arkimedes princip.",
-   "s": 286.05,
-   "e": 290.77
-  },
-  {
-   "t": "F L är lika med densiteten rho gånger volymen V gånger tyngdfaktorn g vilket är ekvivalent med att V är lika med F L delat med rho gånger g",
-   "s": 290.77,
-   "e": 301.25
-  },
-  {
-   "t": "F L är lika med 4 419 newton densiteten rho som är lika med 998 kilogram per kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram",
-   "s": 290.77,
-   "e": 312.6
-  },
-  {
-   "t": "volymen V är lika med 4 419 delat med 998 gånger 9,82 som är lika med 0,450 kubikmeter som är ungefär lika med 0,45 kubikmeter",
-   "s": 312.55,
-   "e": 325.2
-  },
-  {
-   "t": "Svar: 0,45 meter i kubik (450 liter)",
-   "s": 325.2,
-   "e": 331.0
-  },
-  {
-   "t": "Exempel 2 — Järnkista på havets botten",
-   "s": 331.0,
-   "e": 335.03
-  },
-  {
-   "t": "En kista av järn med måtten 70 × 90 × 40 centimeter som väger 260 kilogram står på havets botten.",
-   "s": 335.03,
-   "e": 342.53
-  },
-  {
-   "t": "Skulle du kunna lyfta kistan?",
-   "s": 342.53,
-   "e": 345.35
-  },
-  {
-   "t": "Eftersom kistan står på botten måste tyngdkraften F G nedåt vara större än lyftkraften F L uppåt.",
-   "s": 345.35,
-   "e": 352.67
-  },
-  {
-   "t": "Den kraft vi måste ta i med för att lyfta kistan F är skillnaden mellan tyngdkraften och lyftkraften, dvs.",
-   "s": 352.67,
-   "e": 368.62
-  },
-  {
-   "t": "kraften F är lika med F G minus F L",
-   "s": 352.67,
-   "e": 368.62
-  },
-  {
-   "t": "Observera att när vi beräknar lyftkraften med Arkimedes princip så är det vattnets densitet vi ska använda, inte järnets!",
-   "s": 352.67,
-   "e": 368.62
-  },
-  {
-   "t": "F G är lika med massan m gånger tyngdfaktorn g som är lika med 260 gånger 9,82 som är lika med 2 553,2 newton F L som är lika med densiteten rho gånger g gånger volymen V som är lika med 998 gånger 9,82 gånger parentesen 0,70 gånger 0,90 gånger 0,40 slut parentes som är lika med 2 469,690 newton",
-   "s": 368.62,
-   "e": 395.12
-  },
-  {
-   "t": "kraften F är lika med F G minus F L som är lika med 2 553,2 minus 2 469,690 som är lika med 83,509 newton",
-   "s": 395.12,
-   "e": 408.13
-  },
-  {
-   "t": "Orkar du lyfta kistan?",
-   "s": 408.13,
-   "e": 410.61
-  },
-  {
-   "t": "Vi undersöker vilken massa som ger motsvarande tyngd.",
-   "s": 410.61,
-   "e": 414.87
-  },
-  {
-   "t": "massan m är lika med kraften F delat med tyngdfaktorn g som är lika med 83,509 delat med 9,82 som är lika med 8,504 kilogram som är ungefär lika med 8,5 kilogram",
-   "s": 414.87,
-   "e": 427.83
-  },
-  {
-   "t": "Svar: Ja, du skulle kunna lyfta kistan.",
-   "s": 427.83,
-   "e": 431.66
-  },
-  {
-   "t": "Den upplevs bara väga 8,5 kilogram.",
-   "s": 431.66,
-   "e": 435.47
-  },
-  {
-   "t": "Alternativ lösning",
-   "s": 435.47,
-   "e": 438.02
-  },
-  {
-   "t": "För att göra beräkningarna enklare kan vi göra om alla mått till dm i kubik och utnyttja att 1 liter vatten väger ca 1 kilogram.",
-   "s": 438.02,
-   "e": 446.1
-  },
-  {
-   "t": "Kom ihåg att 1 decimeter i kubik är lika med 1 liter.",
-   "s": 446.1,
-   "e": 450.53
-  },
-  {
-   "t": "Det undanträngda vattnets volym är",
-   "s": 450.53,
-   "e": 453.91
-  },
-  {
-   "t": "volymen V är lika med 7 decimeter gånger 9 decimeter gånger 4 decimeter som är lika med 252 kubikdecimeter som är lika med 252 liter",
-   "s": 453.91,
-   "e": 464.48
-  },
-  {
-   "t": "Eftersom 1 liter vatten väger ca 1 kilogram, så måste 252 liter vatten väga ca 252 kilogram.",
-   "s": 464.48,
-   "e": 473.28
-  },
-  {
-   "t": "Lyftkraften motsvarar alltså massan hos 252 kilogram medan tyngdkraften motsvarar massan hos 260 kilogram.",
-   "s": 473.28,
-   "e": 481.95
-  },
-  {
-   "t": "Det betyder att den kraft du måste ta i med för att lyfta kistan motsvarar",
-   "s": 481.95,
-   "e": 487.13
-  },
-  {
-   "t": "260 minus 252 är lika med 8 kilogram",
-   "s": 487.13,
-   "e": 492.41
-  },
-  {
-   "t": "Svar: Ja, du skulle kunna lyfta kistan.",
-   "s": 492.41,
-   "e": 496.22
-  },
-  {
-   "t": "Den upplevs bara väga ca 8 kilogram.",
-   "s": 496.22,
-   "e": 500.06
+   "t": "Svar: 2,4 newton",
+   "s": 324.4,
+   "e": 327.76
   }
  ]
 }

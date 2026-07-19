@@ -1,273 +1,238 @@
 {
- "id": "fy1-5.6",
+ "id": "fy1-5.5",
  "voice": "sv-SE-SofieNeural",
- "hash": "8b73014697f1054f0eddc5e3154be899077a1640",
- "dur": 348.59,
+ "hash": "54417e4da3e5a8be848498d1f8ac5e5581bfb339",
+ "dur": 306.55,
  "segments": [
   {
-   "t": "Ideala gaslagen och kelvinskalan",
+   "t": "Gasers lyftkraft",
    "s": 0.1,
-   "e": 3.51
+   "e": 2.66
   },
   {
-   "t": "Simulering — Gastryck, volym och temperatur",
-   "s": 3.46,
-   "e": 7.75
+   "t": "Väga luft",
+   "s": 2.61,
+   "e": 4.67
   },
   {
-   "t": "Vi gör en simulering och undersöker hur volymen och temperaturen påverkar trycket hos en gas.",
-   "s": 7.75,
-   "e": 14.32
+   "t": "Pumpa ut så mycket luft som möjligt ur en e-kolv.",
+   "s": 4.67,
+   "e": 8.53
   },
   {
-   "t": "Trycket bildas av kollisioner mellan gasmolekyler.",
-   "s": 14.32,
-   "e": 18.57
+   "t": "Väg e-kolven efteråt för att beräkna massan på luften vi pumpat ut.",
+   "s": 8.53,
+   "e": 13.6
   },
   {
-   "t": "Vi ser att antalet kollisioner (trycket) ökar när vi minskar volymen och när vi ökar temperaturen.",
-   "s": 18.57,
-   "e": 25.56
+   "t": "Doppa sedan slangen till e-kolven under vatten och öppna ventilen.",
+   "s": 13.6,
+   "e": 18.35
   },
   {
-   "t": "Sambandet mellan temperatur, tryck och volym hos gaser kallas ideala gaslagen och används bland annat som en enkel modell för atmosfären.",
-   "s": 25.56,
-   "e": 34.36
+   "t": "Vatten strömmar in.",
+   "s": 18.35,
+   "e": 20.84
   },
   {
-   "t": "Vi bortser från att gasmolekylerna påverkar varandra med elektromagnetiska krafter, vilket de gör i verkliga gaser, utan ser dem som \"bollar\" som krockar elastiskt.",
-   "s": 34.36,
-   "e": 44.79
+   "t": "Vattnets volym är densamma som den utpumpade luftens.",
+   "s": 20.84,
+   "e": 25.05
   },
   {
-   "t": "Effekten från de elektromagnetiska krafterna är dock försumbar för de flesta gaser, till exempel för luft.",
-   "s": 44.79,
-   "e": 51.89
+   "t": "Nu kan vi bestämma luftens densitet!",
+   "s": 25.05,
+   "e": 28.61
   },
   {
-   "t": "Gaser där vi bortser från sådan här påverkan mellan gasmolekyler kallas ideala — därav \"ideala\" gaslagen.",
-   "s": 51.89,
-   "e": 59.06
+   "t": "Arkimedes princip (formeln för lyftkraft) gäller även för gaser.",
+   "s": 28.61,
+   "e": 33.94
   },
   {
-   "t": "Ideala gaslagen",
-   "s": 59.06,
-   "e": 61.55
+   "t": "Vi befinner oss i \"lufthavet\" vars densitet är ρ är lika med 1,293 kilogram/m i kubik.",
+   "s": 33.94,
+   "e": 41.61
   },
   {
-   "t": "Om vi har ett bestämt antal gasmolekyler gäller",
-   "s": 61.55,
-   "e": 65.54
+   "t": "Lyftkraften ges av den undanträngda gasens tyngd.",
+   "s": 41.61,
+   "e": 45.83
   },
   {
-   "t": "p ett gånger V ett delat med T ett är lika med p två gånger V två delat med T två",
-   "s": 65.54,
-   "e": 72.01
+   "t": "Lyftkraften på dig",
+   "s": 45.83,
+   "e": 48.25
   },
   {
-   "t": "där",
-   "s": 72.01,
-   "e": 73.49
+   "t": "Om vi uppskattar din kropps volym till 0,1 meter i kubik, så påverkas du av en lyftkraft motsvarande tyngden hos den undanträngda luftens massa",
+   "s": 48.25,
+   "e": 57.84
   },
   {
-   "t": "p ett , p två är lika med gastryck i läge 1 respektive läge 2 (valfri tryckenhet, men samma)",
-   "s": 73.49,
-   "e": 81.4
+   "t": "massan m är lika med densiteten rho gånger volymen V som är lika med 1,293 gånger 0,1 som är lika med 0,1293 kilogram som är ungefär lika med 0,13 kilogram",
+   "s": 57.84,
+   "e": 70.26
   },
   {
-   "t": "V ett , V två är lika med gasens volym i läge 1 respektive läge 2 (valfri volymenhet, men samma)",
-   "s": 81.4,
-   "e": 89.92
+   "t": "vilket är litet, men ändå en massa vi skulle känna om vi höll i den (lite mer än ett hektogram).",
+   "s": 70.26,
+   "e": 77.2
   },
   {
-   "t": "T ett , T två är lika med gasens temperatur i läge 1 respektive läge 2 (kelvin)",
-   "s": 89.92,
-   "e": 96.91
+   "t": "Det innebär också att badrumsvågen skulle visa 0,1 kilogram mer om vi pumpade ut luften ur badrummet.",
+   "s": 77.2,
+   "e": 84.17
   },
   {
-   "t": "Vi behöver inte ange mätvärdena för gastryck och volym i sina SI-enheter när vi har en relation som i ideala gaslagen.",
-   "s": 96.91,
-   "e": 104.84
+   "t": "En varmluftsballong stiger för att tyngden på den luft som trängs undan (kalluften) är större än tyngden på \"ballong + korg + varmluft\".",
+   "s": 84.17,
+   "e": 93.0
   },
   {
-   "t": "Huvudsaken är att vi använder samma enhet på båda sidor om ekvationen.",
-   "s": 104.84,
-   "e": 110.25
+   "t": "Det beror på att varmluft har lägre densitet än kalluft.",
+   "s": 93.0,
+   "e": 97.47
   },
   {
-   "t": "Det går alltså bra att ange till exempel trycket i kPa eller volymen i liter.",
-   "s": 110.25,
-   "e": 115.7
+   "t": "Exempel 1 — Algot med heliumballonger",
+   "s": 97.47,
+   "e": 101.28
   },
   {
-   "t": "Kelvinskalan",
-   "s": 115.7,
-   "e": 118.01
+   "t": "Algot väger 20 kilogram och håller i en ballong fylld med 11 liter helium.",
+   "s": 101.28,
+   "e": 106.69
   },
   {
-   "t": "Temperaturen i ideala gaslagen ska alltid anges med enheten K (kelvin) och inte °C (grader celsius)!",
-   "s": 118.01,
-   "e": 126.25
+   "t": "Ballongen utan helium väger 4,0 gram.",
+   "s": 106.69,
+   "e": 110.74
   },
   {
-   "t": "Detta eftersom 20 grader Celsius fysikaliskt inte är dubbelt så hög temperatur som 10 grader Celsius.",
-   "s": 126.25,
-   "e": 133.85
+   "t": "Hur",
+   "s": 110.74,
+   "e": 112.19
   },
   {
-   "t": "Däremot är 20 kelvin dubbelt så hög temperatur som 10 kelvin.",
-   "s": 133.85,
-   "e": 139.07
+   "t": "a) stor kraft krävs för att hålla i ballongen så den inte flyger iväg?",
+   "s": 112.19,
+   "e": 117.41
   },
   {
-   "t": "Enheten för kelvin skrivs K (utan gradtecken) och utgår från den absoluta nollpunkten, det vill säga 0 kelvin motsvarar −273 grader Celsius (där atomerna är helt stilla) och har sedan samma skalsteg som Celsiusskalan.",
-   "s": 139.07,
-   "e": 153.03
+   "t": "b) många ballonger krävs för att lyfta Algot?",
+   "s": 117.41,
+   "e": 121.62
   },
   {
-   "t": "En temperatur i kelvin kan alltså inte vara negativ.",
-   "s": 153.03,
-   "e": 157.18
+   "t": "a) När Algot håller ballongen still råder kraftjämvikt, vilket betyder att de nedåtriktade krafterna är lika stora som den uppåtriktade:",
+   "s": 121.62,
+   "e": 136.4
   },
   {
-   "t": "Kelvinskalan",
-   "s": 157.18,
-   "e": 159.47
+   "t": "F S plus F G är lika med F L vilket är ekvivalent med att F S är lika med F L minus F G",
+   "s": 121.62,
+   "e": 136.4
   },
   {
-   "t": "T K är lika med T C plus 273",
-   "s": 159.47,
-   "e": 163.81
+   "t": "Vi börjar med att bestämma lyftkraften F L .",
+   "s": 136.4,
+   "e": 140.43
   },
   {
-   "t": "där",
-   "s": 163.81,
-   "e": 165.28
+   "t": "F L är lika med densiteten rho hävarmen l u frekvensen f tiden t gånger volymen V gånger tyngdfaktorn g",
+   "s": 140.43,
+   "e": 162.26
   },
   {
-   "t": "T K är lika med temperatur (kelvin)",
-   "s": 165.28,
-   "e": 169.1
+   "t": "densiteten rho hävarmen l u frekvensen f tiden t är lika med 1,293 kilogram per kubikmeter volymen V som är lika med 11 liter som är lika med 0,011 kubikmeter tyngdfaktorn g som är lika med 9,82 newton per kilogram",
+   "s": 140.43,
+   "e": 162.26
   },
   {
-   "t": "T C är lika med temperatur (grader Celsius)",
-   "s": 169.1,
-   "e": 173.4
+   "t": "F L är lika med 1,293 gånger 0,011 gånger 9,82 som är lika med 0,1396 newton",
+   "s": 162.26,
+   "e": 171.91
   },
   {
-   "t": "Exempel 1 — Luftmassa stiger uppåt",
-   "s": 173.4,
-   "e": 177.11
+   "t": "Sedan bestämmer vi F G (tyngden på ballong + helium).",
+   "s": 171.91,
+   "e": 177.04
   },
   {
-   "t": "En luftmassa med volymen 1 200 meter i kubik, trycket 101 kilopascal och temperaturen 15 grader Celsius rör sig vertikalt uppåt.",
-   "s": 177.11,
-   "e": 187.15
+   "t": "F G är lika med parentesen m b accelerationen a hävarmen l l o n tyngdfaktorn g plus m höjden h e l i u massan m slut parentes gånger g",
+   "s": 177.04,
+   "e": 188.4
   },
   {
-   "t": "Trycket sjunker till 80 kilopascal och volymen ökar till 1 400 meter i kubik.",
-   "s": 187.15,
-   "e": 193.64
+   "t": "m b accelerationen a hävarmen l l o n tyngdfaktorn g är lika med 4,0 gram som är lika med 0,0040 kilogram m höjden h e l i u massan m som är lika med densiteten rho h e l i u m gånger V h e l i u m som är lika med 0,178 gånger 0,011 som är lika med 0,001958 kilogram g som är lika med 9,82 newton per kilogram",
+   "s": 188.4,
+   "e": 215.56
   },
   {
-   "t": "Beräkna den nya temperaturen för luftmassan.",
-   "s": 193.64,
-   "e": 197.36
+   "t": "F G är lika med parentesen 0,004 plus 0,001958 slut parentes gånger 9,82 som är lika med 0,0585 newton",
+   "s": 215.56,
+   "e": 227.36
   },
   {
-   "t": "Svara i °C.",
-   "s": 197.36,
-   "e": 199.96
+   "t": "Insättning ger",
+   "s": 227.36,
+   "e": 229.62
   },
   {
-   "t": "Vi ställer upp ideala gaslagen och löser ut den nya temperaturen T två .",
-   "s": 199.96,
-   "e": 205.45
+   "t": "F S är lika med 0,1396 minus 0,0585 som är lika med 0,0811 newton som är ungefär lika med 0,081 newton som är lika med 81 mN",
+   "s": 229.62,
+   "e": 242.32
   },
   {
-   "t": "p ett gånger V ett delat med T ett är lika med p två gånger V två delat med T två vilket är ekvivalent med att T två är lika med p två gånger V två gånger T ett delat med p ett gånger V ett",
-   "s": 205.45,
-   "e": 218.36
+   "t": "Svar: 81 mN",
+   "s": 242.32,
+   "e": 245.41
   },
   {
-   "t": "p ett är lika med 101 kilopascal V ett som är lika med 1 200 kubikmeter T ett som är lika med 15 grader coulomb som är lika med 15 plus 273 som är lika med 288 kelvin p två som är lika med 80 kilopascal V två som är lika med 1 400 kubikmeter",
-   "s": 218.36,
-   "e": 236.78
+   "t": "b) Från a-uppgiften har vi att en ballong ger spännkraften F S är lika med 0,0811… N.",
+   "s": 245.41,
+   "e": 258.1
   },
   {
-   "t": "T två är lika med 80 gånger 1 400 gånger 288 delat med 101 gånger 1 200 som är lika med 266,138 kelvin som är ungefär lika med 266 kelvin som är lika med parentesen 266 minus 273 slut parentes grader coulomb som är lika med minus 7 grader coulomb",
-   "s": 236.78,
-   "e": 261.62
+   "t": "Om vi har n stycken ballonger blir alltså den sammanlagda lyftande kraften",
+   "s": 252.8,
+   "e": 258.1
   },
   {
-   "t": "Svar: −7 grader Celsius",
-   "s": 236.78,
-   "e": 261.62
+   "t": "kraften F är lika med n gånger F S",
+   "s": 258.1,
+   "e": 261.94
   },
   {
-   "t": "Exempel 2 — Klassrum med uppvärmning",
-   "s": 261.62,
-   "e": 265.2
+   "t": "För att ballongerna ska lyfta Algot krävs att den sammanlagda lyftande kraften F är minst lika stor som Algots tyngd F G är lika med massan m gånger tyngdfaktorn g .",
+   "s": 261.94,
+   "e": 271.84
   },
   {
-   "t": "I ett klassrum finns 30 elever.",
-   "s": 265.2,
-   "e": 268.68
+   "t": "Detta ger",
+   "s": 271.84,
+   "e": 273.85
   },
   {
-   "t": "Temperaturen vid lektionens start är 20 grader Celsius och trycket är 103 kilopascal.",
-   "s": 268.68,
-   "e": 275.36
+   "t": "massan m gånger tyngdfaktorn g är lika med n gånger F S vilket är ekvivalent med att n är lika med m gånger g delat med F S",
+   "s": 273.85,
+   "e": 290.6
   },
   {
-   "t": "När lektionen slutar har temperaturen stigit till 28 grader Celsius.",
-   "s": 275.36,
-   "e": 280.71
+   "t": "massan m är lika med 20 kilogram tyngdfaktorn g som är lika med 9,82 newton per kilogram F S som är lika med 0,0811 newton",
+   "s": 273.85,
+   "e": 290.6
   },
   {
-   "t": "Hur stort är det nya trycket i klassrummet?",
-   "s": 280.71,
-   "e": 284.41
+   "t": "n är lika med 20 gånger 9,82 delat med 0,0811 som är lika med 2 419,613 som är ungefär lika med 2 400 ballonger",
+   "s": 290.6,
+   "e": 302.7
   },
   {
-   "t": "Vi ställer upp ideala gaslagen och löser ut det nya trycket p två .",
-   "s": 284.41,
-   "e": 289.59
-  },
-  {
-   "t": "p ett gånger V ett delat med T ett är lika med p två gånger V två delat med T två vilket är ekvivalent med att p två är lika med p ett gånger V ett gånger T två delat med T ett gånger V två",
-   "s": 289.59,
-   "e": 302.2
-  },
-  {
-   "t": "Luftens volym inne i klassrummet är densamma före och efter så V ett är lika med V två .",
-   "s": 302.2,
-   "e": 308.57
-  },
-  {
-   "t": "Det innebär att vi kan förkorta bort V ett och V två i sambandet ovan, så",
-   "s": 308.57,
-   "e": 316.19
-  },
-  {
-   "t": "p två är lika med p ett gånger T två delat med T ett",
-   "s": 316.14,
-   "e": 321.08
-  },
-  {
-   "t": "p ett är lika med 103 kilopascal T ett som är lika med 20 grader coulomb som är lika med 293 kelvin T två som är lika med 28 grader coulomb som är lika med 301 kelvin",
-   "s": 321.08,
-   "e": 333.56
-  },
-  {
-   "t": "p två är lika med 103 gånger 301 delat med 293 som är lika med 105,812 kilopascal som är ungefär lika med 110 kilopascal",
-   "s": 333.56,
-   "e": 344.99
-  },
-  {
-   "t": "Svar: 110 kilopascal",
-   "s": 344.99,
-   "e": 348.59
+   "t": "Svar: 2 400 ballonger",
+   "s": 302.7,
+   "e": 306.55
   }
  ]
 }

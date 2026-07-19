@@ -1,8 +1,8 @@
 {
  "id": "fy1-5.S",
  "voice": "sv-SE-SofieNeural",
- "hash": "129815d7859d13a25b108c36513579031fa5f2b7",
- "dur": 451.76,
+ "hash": "0fb52d1b3357f901f2378bf3177e2dd7325682f9",
+ "dur": 525.9,
  "segments": [
   {
    "t": "Sammanfattning — Tryck",
@@ -10,374 +10,429 @@
    "e": 2.75
   },
   {
-   "t": "Det här kapitlet handlade om hur en kraft fördelas över en yta: tryck mellan fasta kroppar, vätsketryck, lufttryck och totalt tryck.",
+   "t": "Det här kapitlet handlade om hur tätt packad materia är och hur en kraft fördelas över en yta: densitet, tryck mellan fasta kroppar, vätsketryck, lufttryck och totalt tryck.",
    "s": 2.7,
-   "e": 11.61
+   "e": 13.99
   },
   {
    "t": "Du mötte Arkimedes princip för lyftkraft i vätskor och gaser, ideala gaslagen med kelvinskalan och Pascals princip för hydraulik.",
-   "s": 11.61,
-   "e": 20.74
+   "s": 13.99,
+   "e": 23.11
   },
   {
    "t": "Du ska efter kapitlet kunna räkna med alla dessa samband och förklara vardagsfenomen som skidor i snö, dykning, varmluftsballonger och hydrauliska domkrafter.",
-   "s": 20.74,
-   "e": 30.59
+   "s": 23.11,
+   "e": 32.99
   },
   {
    "t": "Begrepp att kunna",
-   "s": 30.59,
-   "e": 32.91
+   "s": 32.99,
+   "e": 35.31
+  },
+  {
+   "t": "Densitet — massa per volymenhet, densiteten rho är lika med massan m delat med volymen V , SI-enhet kg/m i kubik; avgör hur tätt packat ett material är och därmed om ett föremål flyter i ett medium.",
+   "s": 35.31,
+   "e": 49.29
   },
   {
    "t": "Tryck — kraft per areaenhet, trycket p är lika med kraften F delat med arean A , mäts i Pa (pascal) eller N/m i kvadrat.",
-   "s": 32.91,
-   "e": 42.76
+   "s": 49.29,
+   "e": 59.19
   },
   {
    "t": "Tryckkraft — kraften F som verkar vinkelrätt mot en yta; inte samma sak som trycket.",
-   "s": 42.76,
-   "e": 49.2
+   "s": 59.19,
+   "e": 65.65
   },
   {
    "t": "Vätsketryck (hydrostatiskt tryck) — tryck orsakat av en vätskepelares tyngd; beror bara på djupet, inte på kärlets form eller mängden vätska.",
-   "s": 49.2,
-   "e": 58.92
+   "s": 65.65,
+   "e": 75.38
   },
   {
    "t": "Lufttryck (gastryck) — tryck orsakat av atmosfärens tyngd; ca 101,3 kilopascal vid havsytan (1 atm).",
-   "s": 58.92,
-   "e": 68.5
+   "s": 75.38,
+   "e": 84.95
   },
   {
    "t": "Totalt tryck — summan av lufttryck och vätsketryck på ett visst djup.",
-   "s": 68.5,
-   "e": 73.49
+   "s": 84.95,
+   "e": 89.94
   },
   {
    "t": "Lyftkraft — den uppåtriktade kraft en vätska eller gas ger ett nedsänkt föremål.",
-   "s": 73.49,
-   "e": 79.42
+   "s": 89.94,
+   "e": 95.88
   },
   {
    "t": "Arkimedes princip — lyftkraften är lika stor som tyngden av den undanträngda vätskan eller gasen.",
-   "s": 79.42,
-   "e": 86.21
+   "s": 95.88,
+   "e": 102.66
   },
   {
    "t": "Ideala gaslagen — sambandet mellan tryck, volym och temperatur för en bestämd mängd gas.",
-   "s": 86.21,
-   "e": 92.75
+   "s": 102.66,
+   "e": 109.2
   },
   {
    "t": "Kelvinskalan — absolut temperaturskala som utgår från den absoluta nollpunkten, 0 kelvin är lika med minus 273 grader coulomb .",
-   "s": 92.75,
-   "e": 102.16
+   "s": 109.2,
+   "e": 118.61
   },
   {
    "t": "Pascals princip — en tryckökning i en innesluten vätska fortplantas oförändrad i hela vätskan.",
-   "s": 102.16,
-   "e": 108.92
+   "s": 118.61,
+   "e": 125.38
   },
   {
    "t": "Formler",
-   "s": 108.92,
-   "e": 110.71
+   "s": 125.38,
+   "e": 127.16
   },
   {
    "t": "Kapitlets formler",
-   "s": 110.71,
-   "e": 113.04
+   "s": 127.16,
+   "e": 129.5
+  },
+  {
+   "t": "Densitet",
+   "s": 129.5,
+   "e": 131.55
+  },
+  {
+   "t": "densiteten rho är lika med massan m delat med volymen V",
+   "s": 131.55,
+   "e": 136.26
+  },
+  {
+   "t": "där",
+   "s": 136.26,
+   "e": 137.72
+  },
+  {
+   "t": "ρ är lika med densitet (kg/m i kubik)",
+   "s": 137.72,
+   "e": 142.32
+  },
+  {
+   "t": "m är lika med massa (kilogram)",
+   "s": 142.32,
+   "e": 145.69
+  },
+  {
+   "t": "V är lika med volym (m i kubik)",
+   "s": 145.69,
+   "e": 149.46
+  },
+  {
+   "t": "Enhetsomvandling: 1 gram per centimeter i kubik är lika med 1 000 kilogram per kubikmeter .",
+   "s": 149.46,
+   "e": 156.21
   },
   {
    "t": "Tryck mellan fasta kroppar",
-   "s": 113.04,
-   "e": 115.75
+   "s": 156.21,
+   "e": 158.96
   },
   {
    "t": "trycket p är lika med kraften F delat med arean A",
-   "s": 115.75,
-   "e": 120.33
+   "s": 158.96,
+   "e": 163.51
   },
   {
    "t": "där",
-   "s": 120.33,
-   "e": 121.79
+   "s": 163.51,
+   "e": 164.97
   },
   {
    "t": "p är lika med tryck (Pa eller N/m i kvadrat)",
-   "s": 121.79,
-   "e": 126.54
+   "s": 164.97,
+   "e": 169.72
   },
   {
    "t": "F är lika med tryckkraft (newton)",
-   "s": 126.54,
-   "e": 130.18
+   "s": 169.72,
+   "e": 173.36
   },
   {
    "t": "A är lika med arean som tryckkraften verkar på (m i kvadrat)",
-   "s": 130.18,
-   "e": 135.4
+   "s": 173.36,
+   "e": 178.59
   },
   {
    "t": "Vätsketryck",
-   "s": 135.4,
-   "e": 137.46
+   "s": 178.59,
+   "e": 180.65
   },
   {
    "t": "trycket p är lika med densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 137.46,
-   "e": 143.21
+   "s": 180.65,
+   "e": 186.4
   },
   {
    "t": "där",
-   "s": 143.21,
-   "e": 144.69
+   "s": 186.4,
+   "e": 187.88
   },
   {
    "t": "p är lika med vätsketryck (pascal)",
-   "s": 144.69,
-   "e": 148.26
+   "s": 187.88,
+   "e": 191.45
   },
   {
    "t": "ρ är lika med vätskans densitet (kg/m i kubik)",
-   "s": 148.26,
-   "e": 153.34
+   "s": 191.45,
+   "e": 196.53
   },
   {
    "t": "g är lika med tyngdfaktor (newton per kilogram)",
-   "s": 153.34,
-   "e": 157.9
+   "s": 196.53,
+   "e": 201.09
   },
   {
    "t": "h är lika med vätskedjup (meter)",
-   "s": 157.9,
-   "e": 161.45
+   "s": 201.09,
+   "e": 204.64
   },
   {
    "t": "Totalt tryck",
-   "s": 161.45,
-   "e": 163.6
+   "s": 204.64,
+   "e": 206.79
   },
   {
    "t": "trycket p är lika med p noll plus densiteten rho gånger tyngdfaktorn g gånger höjden h",
-   "s": 163.6,
-   "e": 169.94
+   "s": 206.79,
+   "e": 213.12
   },
   {
    "t": "där p noll är lufttrycket mot vätskeytan (pascal).",
-   "s": 169.94,
-   "e": 174.54
+   "s": 213.12,
+   "e": 217.72
   },
   {
    "t": "Lyftkraft (Arkimedes princip)",
-   "s": 174.54,
-   "e": 178.2
+   "s": 217.72,
+   "e": 221.39
   },
   {
    "t": "F L är lika med densiteten rho gånger tyngdfaktorn g gånger volymen V",
-   "s": 178.2,
-   "e": 184.3
+   "s": 221.39,
+   "e": 227.49
   },
   {
    "t": "där",
-   "s": 184.3,
-   "e": 185.78
+   "s": 227.49,
+   "e": 228.96
   },
   {
    "t": "F L är lika med lyftkraft (newton)",
-   "s": 185.78,
-   "e": 189.74
+   "s": 228.96,
+   "e": 232.93
   },
   {
    "t": "ρ är lika med densiteten hos den undanträngda vätskan eller gasen (kg/m i kubik)",
-   "s": 189.74,
-   "e": 196.62
+   "s": 232.93,
+   "e": 239.81
   },
   {
    "t": "V är lika med den undanträngda volymen / föremålets nedsänkta volym (m i kubik)",
-   "s": 196.62,
-   "e": 203.62
+   "s": 239.81,
+   "e": 246.81
   },
   {
    "t": "Ideala gaslagen",
-   "s": 203.62,
-   "e": 206.14
+   "s": 246.81,
+   "e": 249.32
   },
   {
    "t": "p ett gånger V ett delat med T ett är lika med p två gånger V två delat med T två",
-   "s": 206.14,
-   "e": 212.62
+   "s": 249.32,
+   "e": 255.81
   },
   {
    "t": "där p ett, p två är lika med gastryck och V ett, V två är lika med gasvolym i valfri men samma enhet i respektive läge, och T ett, T två är lika med gastemperatur (kelvin) i respektive läge.",
-   "s": 212.62,
-   "e": 226.71
+   "s": 255.81,
+   "e": 269.9
   },
   {
    "t": "Kelvinskalan",
-   "s": 226.71,
-   "e": 229.03
+   "s": 269.9,
+   "e": 272.21
   },
   {
    "t": "T K är lika med T C plus 273",
-   "s": 229.03,
-   "e": 233.4
+   "s": 272.21,
+   "e": 276.59
   },
   {
    "t": "där T K är lika med temperatur (kelvin) och T C är lika med temperatur (grader Celsius).",
-   "s": 233.4,
-   "e": 240.64
+   "s": 276.59,
+   "e": 283.82
   },
   {
    "t": "Pascals princip",
-   "s": 240.64,
-   "e": 243.07
+   "s": 283.82,
+   "e": 286.26
   },
   {
    "t": "F ett delat med A ett är lika med F två delat med A två",
-   "s": 243.07,
-   "e": 247.97
+   "s": 286.26,
+   "e": 291.16
   },
   {
    "t": "där F ett, F två är lika med krafterna på respektive kolv (newton) och A ett, A två är lika med areorna hos respektive kolv (samma enhet).",
-   "s": 247.97,
-   "e": 258.61
+   "s": 291.16,
+   "e": 301.84
   },
   {
    "t": "Viktiga samband och metoder",
-   "s": 258.61,
-   "e": 261.48
+   "s": 301.84,
+   "e": 304.7
+  },
+  {
+   "t": "Vattnets densitet, densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter , är bra att kunna utantill — den ger direkt att 1,0 liter vatten väger 1,0 kilogram, och den behövs i både vätsketrycket och Arkimedes princip.",
+   "s": 304.7,
+   "e": 322.16
   },
   {
    "t": "Tryckkraft och tryck är olika storheter — samma kraft ger olika tryck beroende på hur stor area den fördelas på (skidor i snö, en stilettklack mot en pansarvagns larvfötter).",
-   "s": 261.48,
-   "e": 272.18
+   "s": 322.16,
+   "e": 334.85
   },
   {
    "t": "Vätsketrycket beror bara på djupet h — inte på kärlets form eller mängden vätska.",
-   "s": 272.18,
-   "e": 277.62
+   "s": 334.8,
+   "e": 340.25
   },
   {
    "t": "Vätsketryck verkar alltid vinkelrätt mot den yta det trycker på.",
-   "s": 277.62,
-   "e": 282.15
+   "s": 340.25,
+   "e": 344.77
   },
   {
    "t": "Räknar du ut tryckkraften på en nedsänkt kroppsdel (t.ex. en trumhinna) ska du oftast bara använda vätsketrycket — lufttrycket finns även på insidan och tar ut sig självt.",
-   "s": 282.15,
-   "e": 292.57
+   "s": 344.77,
+   "e": 355.2
   },
   {
    "t": "När något flyter gäller F L är lika med F G ; när något sjunker gäller F L är mindre än F G .",
-   "s": 292.57,
-   "e": 299.79
+   "s": 355.2,
+   "e": 362.43
   },
   {
    "t": "I Arkimedes princip används densiteten hos det undanträngda mediet (vätskan eller gasen), aldrig densiteten hos föremålet självt.",
-   "s": 299.79,
-   "e": 308.91
+   "s": 362.43,
+   "e": 371.53
   },
   {
    "t": "Ett föremål flyter om dess sammanlagda densitet är lägre än mediets densitet — det är därför ett fartyg av järn flyter (mycket luft ombord) medan en massiv järnkub sjunker.",
-   "s": 308.91,
-   "e": 321.4
+   "s": 371.53,
+   "e": 382.11
   },
   {
    "t": "I ideala gaslagen räcker det att tryck och volym har samma enhet på båda sidor — men temperaturen måste alltid anges i kelvin, aldrig celsius.",
-   "s": 321.35,
-   "e": 330.47
+   "s": 382.11,
+   "e": 391.25
   },
   {
    "t": "Är volymen konstant (t.ex. i ett rum) kan V förkortas bort ur ideala gaslagen och sambandet förenklas till p ett delat med T ett är lika med p två delat med T två .",
-   "s": 330.47,
-   "e": 341.65
+   "s": 391.25,
+   "e": 402.4
   },
   {
    "t": "Pascals princip förklarar varför en liten kraft på en liten kolvarea kan ge en stor kraft på en stor kolvarea — grunden för hydraulisk förstärkning.",
-   "s": 341.65,
-   "e": 350.68
+   "s": 402.4,
+   "e": 411.43
   },
   {
    "t": "Figurer värda att minnas",
-   "s": 350.68,
-   "e": 353.71
+   "s": 411.43,
+   "e": 414.46
   },
   {
    "t": "Ett flytande och ett sjunkande föremål — lägg märke till att lyftkraften är lika lång som tyngdkraften när föremålet flyter, men kortare när det sjunker.",
-   "s": 353.71,
-   "e": 362.81
+   "s": 414.46,
+   "e": 423.56
   },
   {
    "t": "Till vänster flyter föremålet — lyftkraften är lika stor som tyngdkraften.",
-   "s": 362.81,
-   "e": 368.42
+   "s": 423.56,
+   "e": 429.17
   },
   {
    "t": "Till höger sjunker föremålet — lyftkraften är mindre än tyngdkraften.",
-   "s": 368.42,
-   "e": 373.68
+   "s": 429.17,
+   "e": 434.43
   },
   {
    "t": "En hydraulisk domkraft: en liten kraft på den smala kolven ger en mycket större kraft på den breda kolven, eftersom trycket p ett är lika med p två är detsamma i hela vätskan.",
-   "s": 373.68,
-   "e": 384.43
+   "s": 434.43,
+   "e": 445.17
   },
   {
    "t": "Inför provet",
-   "s": 384.43,
-   "e": 386.58
+   "s": 445.17,
+   "e": 447.32
+  },
+  {
+   "t": "Kan du formeln för densitet och lösa ut massa respektive volym ur den?",
+   "s": 447.32,
+   "e": 452.67
+  },
+  {
+   "t": "Kan du växla mellan kg/m i kubik och g/cm i kubik (omvandlingsfaktor 1 000)?",
+   "s": 452.67,
+   "e": 460.58
   },
   {
    "t": "Kan du skilja på tryck och tryckkraft, och förklara varför en stilettklack ger mycket högre tryck än en pansarvagns larvfötter?",
-   "s": 386.58,
-   "e": 394.03
+   "s": 460.58,
+   "e": 468.15
   },
   {
    "t": "Kan du räkna ut vätsketrycket på ett givet djup, och förklara varför det bara beror på djupet?",
-   "s": 394.03,
-   "e": 400.23
+   "s": 468.15,
+   "e": 474.37
   },
   {
    "t": "Kan du räkna ut det totala trycket på ett djup i en vätska, med lufttrycket inräknat?",
-   "s": 400.23,
-   "e": 406.12
+   "s": 474.37,
+   "e": 480.26
   },
   {
    "t": "Kan du förklara varför bara vätsketrycket (inte lufttrycket) ger en nettokraft på till exempel en trumhinna under vattnet?",
-   "s": 406.12,
-   "e": 414.05
+   "s": 480.26,
+   "e": 488.18
   },
   {
    "t": "Kan du använda Arkimedes princip för att räkna ut lyftkraften på ett helt eller delvis nedsänkt föremål?",
-   "s": 414.05,
-   "e": 421.06
+   "s": 488.18,
+   "e": 495.2
   },
   {
    "t": "Kan du avgöra om ett föremål flyter eller sjunker genom att jämföra lyftkraften och tyngdkraften?",
-   "s": 421.06,
-   "e": 427.5
+   "s": 495.2,
+   "e": 501.63
   },
   {
    "t": "Kan du förklara varför en varmluftsballong eller heliumballong stiger?",
-   "s": 427.5,
-   "e": 432.42
+   "s": 501.63,
+   "e": 506.56
   },
   {
    "t": "Kan du omvandla mellan celsius och kelvin, och förklara varför ideala gaslagen kräver kelvin?",
-   "s": 432.42,
-   "e": 438.82
+   "s": 506.56,
+   "e": 512.96
   },
   {
    "t": "Kan du använda ideala gaslagen för att lösa ut ett obekant tryck, en volym eller en temperatur?",
-   "s": 438.82,
-   "e": 445.55
+   "s": 512.96,
+   "e": 519.68
   },
   {
    "t": "Kan du förklara Pascals princip och räkna ut kraftförstärkningen i en hydraulisk domkraft?",
-   "s": 445.55,
-   "e": 451.76
+   "s": 519.68,
+   "e": 525.9
   }
  ]
 }

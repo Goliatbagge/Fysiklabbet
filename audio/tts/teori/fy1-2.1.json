@@ -1,283 +1,243 @@
 {
  "id": "fy1-2.1",
  "voice": "sv-SE-SofieNeural",
- "hash": "b2090c079df564d6773bed29b788d5e78ac82529",
- "dur": 324.88,
+ "hash": "3060a5074df1c5e7c4b5dada056176d39fdfb955",
+ "dur": 301.19,
  "segments": [
   {
-   "t": "Vektoraddition",
+   "t": "Medelfart",
    "s": 0.1,
-   "e": 2.29
+   "e": 2.17
   },
   {
-   "t": "Det är skillnad på sträcka och förflyttning.",
-   "s": 2.24,
-   "e": 5.55
+   "t": "Den genomsnittliga farten under ett tidsintervall kallas medelfart, betecknas vₘ och har SI-enheten m/s (meter per sekund).",
+   "s": 2.12,
+   "e": 11.28
   },
   {
-   "t": "Avståndet något färdas kallas sträcka och betecknas s.",
-   "s": 5.55,
-   "e": 10.14
+   "t": "Medelfart och medelhastighet är inte samma sak, vilket vi fördjupar senare i det här kapitlet.",
+   "s": 11.28,
+   "e": 17.95
   },
   {
-   "t": "Hur långt något har flyttats jämfört med utgångspunkten kallas förflyttning och betecknas Δs.",
-   "s": 10.14,
-   "e": 16.24
+   "t": "Medelfart",
+   "s": 17.95,
+   "e": 20.02
   },
   {
-   "t": "Båda har SI-enheten m (meter).",
-   "s": 16.24,
-   "e": 19.99
+   "t": "v massan m är lika med sträckan s delat med tiden t",
+   "s": 20.02,
+   "e": 24.57
   },
   {
-   "t": "Vi går från start till mål enligt de svarta linjerna i nedanstående figur.",
-   "s": 19.99,
-   "e": 25.21
+   "t": "där",
+   "s": 24.57,
+   "e": 26.05
   },
   {
-   "t": "Sträckan vi går är 4 + 3 är lika med 7 meter.",
-   "s": 25.21,
-   "e": 29.66
+   "t": "vₘ är lika med medelfart (meter per sekund)",
+   "s": 26.05,
+   "e": 30.21
   },
   {
-   "t": "Förflyttningen vi gör är 5 meter (den blå pilen).",
-   "s": 29.66,
-   "e": 33.86
+   "t": "s är lika med sträcka (meter)",
+   "s": 30.21,
+   "e": 33.52
   },
   {
-   "t": "När vi pratar om förflyttning spelar alltså riktningen roll, vilket inte gäller för sträcka.",
-   "s": 33.86,
-   "e": 39.65
+   "t": "t är lika med tid (sekunder)",
+   "s": 33.52,
+   "e": 36.83
   },
   {
-   "t": "Vektorer och skalärer",
-   "s": 39.65,
-   "e": 42.38
+   "t": "Enhetsomvandling — m/s och km/h",
+   "s": 36.83,
+   "e": 42.42
   },
   {
-   "t": "En storhet som har",
-   "s": 42.38,
-   "e": 44.88
+   "t": "Härledning",
+   "s": 36.83,
+   "e": 42.42
   },
   {
-   "t": "både storlek och riktning kallas vektor.",
-   "s": 44.88,
-   "e": 48.5
+   "t": "En annan vanlig enhet för hastighet är km/h, så därför kan det vara bra att snabbt kunna växla mellan dessa.",
+   "s": 42.42,
+   "e": 50.3
   },
   {
-   "t": "storlek, men ingen riktning kallas skalär.",
-   "s": 48.5,
-   "e": 52.75
+   "t": "Vi gör en enhetsanalys.",
+   "s": 50.3,
+   "e": 53.27
   },
   {
-   "t": "När vi adderar vektorer behöver vi alltså ta hänsyn till riktningen.",
-   "s": 52.75,
-   "e": 57.64
+   "t": "1 kilometer per timme är lika med 1 kilometer delat med 1 timme som är lika med 1 000 meter delat med 3 600 sekund som är lika med 1 delat med 3,6 meter per sekund",
+   "s": 53.27,
+   "e": 64.53
   },
   {
-   "t": "För vektorer i samma riktning definierar man ofta positiv riktning uppåt eller åt höger och negativ riktning nedåt eller åt vänster.",
-   "s": 57.64,
-   "e": 65.91
+   "t": "Det innebär att om vi vill växla från km/h till m/s så ska vi dividera med 3,6.",
+   "s": 64.53,
+   "e": 72.17
   },
   {
-   "t": "Riktningar åt höger och uppåt får då positiva värden och riktningar åt vänster och nedåt får negativa värden.",
-   "s": 65.91,
-   "e": 73.01
+   "t": "Omvänt gäller att om vi vill växla från m/s till km/h ska vi multiplicera med 3,6.",
+   "s": 72.17,
+   "e": 80.24
   },
   {
-   "t": "Resulterande vektorer och parallellförflyttning",
-   "s": 73.01,
-   "e": 76.83
+   "t": "Man säger att omvandlingsfaktorn är 3,6.",
+   "s": 80.24,
+   "e": 84.36
   },
   {
-   "t": "Om två eller flera vektorer verkar i olika riktning kan vi konstruera den resulterande vektorn genom att flytta vektorer som ska adderas, utan att ändra deras storlek eller riktning.",
-   "s": 76.83,
-   "e": 87.38
+   "t": "Enhetsomvandling — m/s och km/h",
+   "s": 84.36,
+   "e": 93.89
   },
   {
-   "t": "Detta kallas parallellförflyttning.",
-   "s": 87.38,
-   "e": 90.58
+   "t": "Omvandlingsfaktorn mellan m/s och km/h är 3,6.",
+   "s": 84.36,
+   "e": 93.89
   },
   {
-   "t": "Vi börjar med en valfri vektor att utgå från och sedan flyttar vi nästa vektor, så att den startar där den första slutar.",
-   "s": 90.58,
-   "e": 97.95
+   "t": "meter per sekund xrightarrow gånger 3,6 kilometer per timme kilometer per timme xrightarrow div 3,6 meter per sekund",
+   "s": 93.89,
+   "e": 102.78
   },
   {
-   "t": "Den resulterande vektorn (resultanten) är vektorn som går från startpunkten till den sista adderade vektorns spets.",
-   "s": 97.95,
-   "e": 105.7
+   "t": "Exempel 1 — Omvandla mellan km/h och m/s",
+   "s": 102.78,
+   "e": 109.09
   },
   {
-   "t": "Om vektorerna verkar vinkelrätt, så kan den resulterande vektorns storlek beräknas med Pythagoras sats.",
-   "s": 105.7,
-   "e": 112.95
+   "t": "Omvandla. a) 90 kilometer i timmen till m/s b) 20 meter per sekund till km/h.",
+   "s": 102.78,
+   "e": 123.4
   },
   {
-   "t": "Exempel 1 — Kayla i tågvagnen",
-   "s": 112.95,
-   "e": 116.45
+   "t": "a) 90 kilometer per timme är lika med 90 delat med 3,6 meter per sekund som är lika med 25 meter per sekund",
+   "s": 109.09,
+   "e": 123.4
   },
   {
-   "t": "Kayla går med farten 2 meter per sekund i en tågvagn relativt vagnen.",
-   "s": 116.45,
-   "e": 121.8
+   "t": "Svar: 25 meter per sekund",
+   "s": 123.4,
+   "e": 127.03
   },
   {
-   "t": "Vagnen rör sig med 10 meter per sekund.",
-   "s": 121.8,
-   "e": 125.45
+   "t": "b) 20 meter per sekund är lika med 20 gånger 3,6 kilometer per timme som är lika med 72 kilometer per timme",
+   "s": 127.03,
+   "e": 135.8
   },
   {
-   "t": "Vad blir Kaylas hastighet relativt marken om hon går a) i tågets rörelseriktning, b) mot tågets rörelseriktning?",
-   "s": 125.45,
-   "e": 133.72
+   "t": "Svar: 72 kilometer i timmen",
+   "s": 135.8,
+   "e": 139.57
   },
   {
-   "t": "a) v tiden t o t är lika med v ett plus v två",
-   "s": 133.72,
-   "e": 138.74
+   "t": "Exempel 2 — Falköping till Skövde",
+   "s": 139.57,
+   "e": 143.15
   },
   {
-   "t": "Båda hastighetsvektorerna är i samma riktning och har då samma tecken.",
-   "s": 138.74,
-   "e": 143.47
+   "t": "Hur mycket tid sparar man genom att åka med medelfarten 100 kilometer i timmen istället för 90 kilometer i timmen sträckan 30 kilometer mellan Falköping och Skövde?",
+   "s": 143.15,
+   "e": 153.41
   },
   {
-   "t": "v ett är lika med 10 meter per sekund v två som är lika med 2 meter per sekund",
-   "s": 143.47,
-   "e": 149.59
+   "t": "Vi ställer upp formeln för medelfart och löser ut tiden.",
+   "s": 153.41,
+   "e": 157.75
   },
   {
-   "t": "v tiden t o t är lika med 10 plus 2 som är lika med 12 meter per sekund",
-   "s": 149.59,
-   "e": 155.57
+   "t": "v massan m är lika med sträckan s delat med tiden t vilket är ekvivalent med att t är lika med s delat med v m",
+   "s": 157.75,
+   "e": 165.39
   },
   {
-   "t": "Svar: 12 meter per sekund (i samma riktning som tåget)",
-   "s": 155.57,
-   "e": 160.75
+   "t": "sträckan s är lika med 30 kilometer som är lika med 30 000 meter v m1 som är lika med 100 kilometer per timme som är lika med 100 delat med 3,6 meter per sekund som är lika med 27,777 meter per sekund v m2 som är lika med 90 kilometer per timme som är lika med 90 delat med 3,6 meter per sekund som är lika med 25 meter per sekund",
+   "s": 165.39,
+   "e": 189.29
   },
   {
-   "t": "b) v tiden t o t är lika med v ett plus v två",
-   "s": 160.75,
-   "e": 165.94
+   "t": "Tiden det tar att åka sträckan med hastigheten 100 kilometer i timmen är alltså",
+   "s": 189.29,
+   "e": 194.97
   },
   {
-   "t": "Kaylas hastighet är nu riktad mot tågets riktning (negativ).",
-   "s": 165.94,
-   "e": 170.89
+   "t": "t ett är lika med 30 000 delat med 27,777 som är lika med 1 080 sekund",
+   "s": 194.97,
+   "e": 202.49
   },
   {
-   "t": "v ett är lika med 10 meter per sekund v två som är lika med minus 2 meter per sekund parentesen OBS! Minustecken framför slut parentes",
-   "s": 170.89,
-   "e": 182.09
+   "t": "Tiden det tar att åka sträckan med hastigheten 90 kilometer i timmen är",
+   "s": 202.49,
+   "e": 207.69
   },
   {
-   "t": "v tiden t o t är lika med 10 plus parentesen minus 2 slut parentes som är lika med 8 meter per sekund",
-   "s": 182.09,
-   "e": 190.05
+   "t": "t två är lika med 30 000 delat med 25 som är lika med 1 200 sekund",
+   "s": 207.69,
+   "e": 214.1
   },
   {
-   "t": "Svar: 8 meter per sekund (i samma riktning som tåget)",
-   "s": 190.05,
-   "e": 195.14
+   "t": "Tiden man sparar är alltså",
+   "s": 214.1,
+   "e": 216.9
   },
   {
-   "t": "Exempel 2 — David över forsen",
-   "s": 195.14,
-   "e": 198.56
+   "t": "delta tiden t är lika med t två minus t ett som är lika med 1 200 minus 1 080 som är lika med 120 sekund som är lika med 2,0 minuter",
+   "s": 216.9,
+   "e": 227.93
   },
   {
-   "t": "David simmar rakt över en flod med den konstanta farten 1,5 meter per sekund relativt vattnet.",
-   "s": 198.56,
-   "e": 205.5
+   "t": "Svar: 2,0 minuter (tidsvinsten är alltså väldigt liten, håll hastighets­begränsningen!)",
+   "s": 227.93,
+   "e": 235.39
   },
   {
-   "t": "Vattnet forsar fram med 4,0 meter per sekund.",
-   "s": 205.5,
-   "e": 209.88
+   "t": "Exempel 3 — Banansnigeln",
+   "s": 235.39,
+   "e": 238.51
   },
   {
-   "t": "a) Hur lång tid tar det för David att simma över forsen om den är 45 meter bred?",
-   "s": 209.88,
-   "e": 215.82
+   "t": "Banansnigeln anses vara världens långsammaste djur.",
+   "s": 238.51,
+   "e": 242.94
   },
   {
-   "t": "b) Bestäm Davids hastighet relativt marken.",
-   "s": 215.82,
-   "e": 220.14
+   "t": "Den har en topphastighet på 0,0023 centimeter/s.",
+   "s": 242.94,
+   "e": 248.89
   },
   {
-   "t": "a) Vi ritar en figur där v ett är lika med 1,5 meter per sekund (vinkelrätt mot floden) och v två är lika med 4,0 meter per sekund (längs floden).",
-   "s": 220.14,
-   "e": 231.41
+   "t": "Hur långt hinner den som mest på en timme?",
+   "s": 248.89,
+   "e": 252.54
   },
   {
-   "t": "Det är endast den vinkelräta hastigheten mot floden v ett och flodens bredd s ett som avgör tiden det tar att korsa floden.",
-   "s": 231.41,
-   "e": 239.4
+   "t": "Vi ställer upp formeln för medelfart och löser ut sträckan.",
+   "s": 252.54,
+   "e": 256.88
   },
   {
-   "t": "Vi ställer upp formeln för konstant hastighet och löser ut tiden.",
-   "s": 239.4,
-   "e": 244.15
+   "t": "v massan m är lika med sträckan s delat med tiden t vilket är ekvivalent med att s är lika med v m gånger t",
+   "s": 256.88,
+   "e": 284.23
   },
   {
-   "t": "v ett är lika med s ett delat med tiden t vilket är ekvivalent med att t är lika med s ett delat med v ett",
-   "s": 244.15,
-   "e": 251.6
+   "t": "v massan m är lika med 0,0023 centimeter per sekund som är lika med 0,0023 delat med 100 meter per sekund som är lika med 0,000 023 meter per sekund tiden t som är lika med 1,0 timme som är lika med 60 minut som är lika med 60 gånger 60 sekund som är lika med 3 600 sekund",
+   "s": 256.88,
+   "e": 284.23
   },
   {
-   "t": "s ett är lika med 45 meter v ett som är lika med 1,5 meter per sekund",
-   "s": 251.6,
-   "e": 257.88
+   "t": "sträckan s är lika med 0,000 023 gånger 3 600 som är lika med 0,0828 meter som är ungefär lika med 0,083 meter som är lika med 8,3 centimeter",
+   "s": 284.23,
+   "e": 297.65
   },
   {
-   "t": "tiden t är lika med 45 delat med 1,5 som är lika med 30 sekund",
-   "s": 257.88,
-   "e": 263.74
-  },
-  {
-   "t": "Svar: 30 sekunder.",
-   "s": 263.74,
-   "e": 266.64
-  },
-  {
-   "t": "b) Vi lägger ihop båda hastighetsvektorerna v ett och v två för att få den resulterande hastighetsvektorn v.",
-   "s": 266.64,
-   "e": 274.32
-  },
-  {
-   "t": "Vi parallellförflyttar vektorn v ett till spetsen hos vektorn v två och ritar den resulterande vektorn v.",
-   "s": 274.32,
-   "e": 281.32
-  },
-  {
-   "t": "En rätvinklig triangel har bildats och vi beräknar v med Pythagoras sats.",
-   "s": 281.32,
-   "e": 286.89
-  },
-  {
-   "t": "hastigheten v i kvadrat är lika med v ett i kvadrat plus v två i kvadrat vilket är ekvivalent med att v är lika med roten ur v ett i kvadrat plus v två i kvadrat",
-   "s": 286.89,
-   "e": 298.01
-  },
-  {
-   "t": "v ett är lika med 1,5 meter per sekund v två som är lika med 4,0 meter per sekund",
-   "s": 298.01,
-   "e": 307.04
-  },
-  {
-   "t": "hastigheten v är lika med roten ur 1,5 i kvadrat plus 4,0 i kvadrat som är lika med roten ur 18,25 som är lika med 4,272 som är ungefär lika med 4,3 meter per sekund",
-   "s": 306.99,
-   "e": 321.15
-  },
-  {
-   "t": "Svar: 4,3 meter per sekund",
-   "s": 321.15,
-   "e": 324.88
+   "t": "Svar: 8,3 centimeter",
+   "s": 297.65,
+   "e": 301.19
   }
  ]
 }

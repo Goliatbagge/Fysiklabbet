@@ -230,7 +230,101 @@
   ]
  },
  {
-  "id": "fy1-1.3",
+  "id": "fy1-1.S",
+  "title": "Sammanfattning",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Sammanfattning — Introduktion"
+   },
+   {
+    "t": "Det här kapitlet handlade om fysikens arbetssätt och verktyg: den naturvetenskapliga metoden, samt SI-systemet med sina grundenheter och prefix."
+   },
+   {
+    "t": "Du ska efter kapitlet kunna räkna med rätt antal värdesiffror och växla mellan prefix och grundpotensform."
+   },
+   {
+    "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Naturvetenskapliga metoden — observation, hypotes, hypotesprövning, lagar och teorier."
+   },
+   {
+    "t": "Hypotes — en möjlig förklaring som ännu inte är testad."
+   },
+   {
+    "t": "Lag — en hypotes som testats i flera experiment utan att motbevisas."
+   },
+   {
+    "t": "Teori — flera lagar tillsammans; i fysiken ett väl belagt, säkert samband (inte en gissning som i vardagsspråk)."
+   },
+   {
+    "t": "Modell — en förenklad beskrivning som stämmer tillräckligt bra med verkligheten."
+   },
+   {
+    "t": "Storhet — en egenskap som kan mätas med ett mätetal och en enhet, t.ex. sträcka, tid, kraft."
+   },
+   {
+    "t": "Mätetal — det numeriska värdet en storhet anges med."
+   },
+   {
+    "t": "Enhet — måttstorleken mätetalet anges i."
+   },
+   {
+    "t": "SI-enheter — det internationella enhetssystemet med sju grundenheter (m, kg, s, A, K, mol, cd)."
+   },
+   {
+    "t": "Prefix — skalfaktor framför en enhet (t.ex. kilo, milli) som ersätter en tiopotens."
+   },
+   {
+    "t": "Värdesiffror — antalet siffror i ett mätetal som bär betydelse; styr hur svaret ska avrundas."
+   },
+   {
+    "t": "Grundpotensform — ett tal skrivet som en faktor mellan 1 och 10 gånger en tiopotens, t.ex. 2,5 gånger 10 upphöjt till 6 ."
+   },
+   {
+    "t": "Viktiga samband och metoder"
+   },
+   {
+    "t": "Räknar man enbart med SI-enheter i en formel blir svaret automatiskt en SI-enhet — därför lönar det sig att räkna om till grundenheter (m, kg, s) innan man sätter in värden."
+   },
+   {
+    "t": "Avrunda inte förrän i slutet av en uppgift — annars kan felet i svaret bli stort."
+   },
+   {
+    "t": "Antal värdesiffror i svaret styrs av: vid multiplikation/division av värdet med minst antal värdesiffror; vid addition/subtraktion av värdet med minst antal decimaler."
+   },
+   {
+    "t": "I grundpotensform ska den första faktorn vara ett tal mellan 1 och 10; för tal mindre än 1 ges exponentens (negativa) värde av antalet nollor innan den första siffran som inte är 0."
+   },
+   {
+    "t": "Ett prefix är bara ett annat sätt att skriva en tiopotens — byt ut tiopotensen mot dess prefix (eller tvärtom) utan att ändra värdet."
+   },
+   {
+    "t": "Inför provet"
+   },
+   {
+    "t": "Kan du redogöra för den naturvetenskapliga metodens fyra steg?"
+   },
+   {
+    "t": "Kan du förklara skillnaden mellan hypotes, lag och teori?"
+   },
+   {
+    "t": "Kan du de sju SI-grundenheterna och vilken storhet de mäter?"
+   },
+   {
+    "t": "Kan du skriva om ett tal mellan prefix och grundpotensform i båda riktningarna (t.ex. μm ↔ 10 upphöjt till minus 6 meter)?"
+   },
+   {
+    "t": "Vet du hur man avgör rätt antal värdesiffror i ett svar vid multiplikation/ division respektive addition/subtraktion?"
+   },
+   {
+    "t": "Kan du skriva om ett stort eller litet tal på grundpotensform?"
+   }
+  ]
+ },
+ {
+  "id": "fy1-2.1",
   "title": "Medelfart",
   "course": "Fysik nivå 1",
   "segments": [
@@ -241,7 +335,7 @@
     "t": "Den genomsnittliga farten under ett tidsintervall kallas medelfart, betecknas vₘ och har SI-enheten m/s (meter per sekund)."
    },
    {
-    "t": "Medelfart och medelhastighet är inte samma sak, vilket vi fördjupar i nästa kapitel."
+    "t": "Medelfart och medelhastighet är inte samma sak, vilket vi fördjupar senare i det här kapitlet."
    },
    {
     "t": "Medelfart"
@@ -378,351 +472,7 @@
   ]
  },
  {
-  "id": "fy1-1.4",
-  "title": "Densitet",
-  "course": "Fysik nivå 1",
-  "segments": [
-   {
-    "t": "Densitet"
-   },
-   {
-    "t": "Vad väger mest: 1 kilogram bly eller 1 kilogram bomull?"
-   },
-   {
-    "t": "Svaret är förstås att de väger lika mycket."
-   },
-   {
-    "t": "Det krävs dock en mycket större volym bomull jämfört med bly."
-   },
-   {
-    "t": "Hur tätt packat ett material är kallas densitet, betecknas ρ (lilla \"rho\") och har SI-enheten kg/m i kubik."
-   },
-   {
-    "t": "Känn på densitet"
-   },
-   {
-    "t": "Vi skickar runt lika stora kuber av aluminium, koppar, bly och järn."
-   },
-   {
-    "t": "Utifrån det du redan vet, vilket ämne tror du att respektive kub är gjord av?"
-   },
-   {
-    "t": "Blykuben väger mest och har alltså högst densitet och är ganska mjuk."
-   },
-   {
-    "t": "Aluminium är en lätt och ljus metall."
-   },
-   {
-    "t": "Den väger minst. Koppar känns igen på den rödbruna färgen."
-   },
-   {
-    "t": "Järn luktar blod! (Eller egentligen är det blod som luktar järn, eftersom det innehåller just det.)"
-   },
-   {
-    "t": "Densitet"
-   },
-   {
-    "t": "densiteten rho är lika med massan m delat med volymen V"
-   },
-   {
-    "t": "där"
-   },
-   {
-    "t": "ρ är lika med densitet (kg/m i kubik)"
-   },
-   {
-    "t": "m är lika med massa (kilogram)"
-   },
-   {
-    "t": "V är lika med volym (m i kubik)"
-   },
-   {
-    "t": "Enhetsomvandling — kg/m i kubik och g/cm i kubik"
-   },
-   {
-    "t": "Härledning"
-   },
-   {
-    "t": "En annan vanlig enhet för densitet är g/cm i kubik, så därför kan det vara bra att snabbt kunna växla mellan dessa."
-   },
-   {
-    "t": "Vi gör en enhetsanalys."
-   },
-   {
-    "t": "1 kilogram per kubikmeter är lika med 1 kilogram delat med 1 kubikmeter som är lika med 1 000 gram delat med 1 000 000 kubikcentimeter som är lika med 1 delat med 1 000 gram per centimeter i kubik"
-   },
-   {
-    "t": "Det innebär att om vi vill växla från kg/m i kubik till g/cm i kubik så ska vi dividera med 1 000."
-   },
-   {
-    "t": "Omvänt gäller att om vi vill växla från g/cm i kubik till kg/m i kubik ska vi multiplicera med 1 000."
-   },
-   {
-    "t": "Omvandlingsfaktorn är 1 000."
-   },
-   {
-    "t": "Enhetsomvandling — kg/m<sup>3</sup> och g/cm<sup>3</sup>"
-   },
-   {
-    "t": "Omvandlingsfaktorn mellan g/cm i kubik och kg/m i kubik är 1 000, så"
-   },
-   {
-    "t": "1 gram per centimeter i kubik är lika med 1 000 kilogram per kubikmeter"
-   },
-   {
-    "t": "1 kilogram per kubikmeter är lika med 1 delat med 1 000 gram per centimeter i kubik som är lika med 0,001 gram per centimeter i kubik"
-   },
-   {
-    "t": "Vattnets densitet"
-   },
-   {
-    "t": "Vattnets densitet är bra att kunna utantill eftersom vi ofta räknar med den."
-   },
-   {
-    "t": "Den är också lätt att komma ihåg."
-   },
-   {
-    "t": "densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter"
-   },
-   {
-    "t": "vilket innebär att 1,0 liter vatten väger 1,0 kilogram."
-   },
-   {
-    "t": "Exempel 1 — Guldtärning (E)"
-   },
-   {
-    "t": "En kubisk guldtärning har sidan 1,5 centimeter."
-   },
-   {
-    "t": "Hur mycket väger den?"
-   },
-   {
-    "t": "Vi ställer upp formeln för densitet och löser ut massan m."
-   },
-   {
-    "t": "densiteten rho är lika med massan m delat med volymen V vilket är ekvivalent med att m är lika med rho gånger V"
-   },
-   {
-    "t": "densiteten rho är lika med 19,3 gånger 10 i kubik kilogram per kubikmeter parentesen från tabell slut parentes volymen V som är lika med 1,5 centimeter gånger 1,5 centimeter gånger 1,5 centimeter som är lika med 1,5 i kubik kubikcentimeter som är lika med 3,375 kubikcentimeter som är lika med 3,375 gånger 10 upphöjt till minus 6 kubikmeter"
-   },
-   {
-    "t": "massan m är lika med 19,3 gånger 10 i kubik gånger 3,375 gånger 10 upphöjt till minus 6 som är lika med 0,0651 kilogram som är ungefär lika med 0,065 kilogram som är lika med 65 gram"
-   },
-   {
-    "t": "Svar: 65 gram"
-   },
-   {
-    "t": "Lägsta och högsta densiteten"
-   },
-   {
-    "t": "Det fasta ämnet med lägst densitet är aerogel med densiteten 0,0011 gram/cm i kubik."
-   },
-   {
-    "t": "Aerogel — porig vit klump som hålls i en hand, lätt som luft."
-   },
-   {
-    "t": "Originalbild från PDF kan läggas in här."
-   },
-   {
-    "t": "Det fasta grundämnet med högst densitet är osmium med densiteten 22 gram/cm i kubik (bly ligger på ungefär hälften och guld ligger på 19 gram/cm i kubik)."
-   },
-   {
-    "t": "Osmium — silvergrå metallklump med kristallin yta."
-   },
-   {
-    "t": "Originalbild från PDF kan läggas in här."
-   },
-   {
-    "t": "Högst densitet i universum?"
-   },
-   {
-    "t": "Neutronstjärnor med densiteten 4 gånger 10 upphöjt till 14 gram/cm i kubik."
-   },
-   {
-    "t": "Det tomma utrymmet i atomen är istället packat med neutroner som (motvilligt) trycks samman av den starka gravitationen."
-   },
-   {
-    "t": "En kubikcentimeter väger alltså 400 miljoner ton (!)."
-   },
-   {
-    "t": "Neutronstjärna — kompakt blå stjärna med jetstrålar mot ett stjärnfält."
-   },
-   {
-    "t": "Originalbild från PDF kan läggas in här."
-   }
-  ]
- },
- {
-  "id": "fy1-1.S",
-  "title": "Sammanfattning",
-  "course": "Fysik nivå 1",
-  "segments": [
-   {
-    "t": "Sammanfattning — Introduktion"
-   },
-   {
-    "t": "Det här kapitlet handlade om fysikens arbetssätt och verktyg: den naturvetenskapliga metoden, SI-systemet med grundenheter och prefix, samt de två första fysikaliska storheterna — medelfart och densitet."
-   },
-   {
-    "t": "Du ska efter kapitlet kunna räkna med rätt antal värdesiffror, växla mellan prefix och grundpotensform, och använda formlerna för medelfart och densitet."
-   },
-   {
-    "t": "Begrepp att kunna"
-   },
-   {
-    "t": "Naturvetenskapliga metoden — observation, hypotes, hypotesprövning, lagar och teorier."
-   },
-   {
-    "t": "Hypotes — en möjlig förklaring som ännu inte är testad."
-   },
-   {
-    "t": "Lag — en hypotes som testats i flera experiment utan att motbevisas."
-   },
-   {
-    "t": "Teori — flera lagar tillsammans; i fysiken ett väl belagt, säkert samband (inte en gissning som i vardagsspråk)."
-   },
-   {
-    "t": "Modell — en förenklad beskrivning som stämmer tillräckligt bra med verkligheten."
-   },
-   {
-    "t": "Storhet — en egenskap som kan mätas med ett mätetal och en enhet, t.ex. sträcka, tid, kraft."
-   },
-   {
-    "t": "Mätetal — det numeriska värdet en storhet anges med."
-   },
-   {
-    "t": "Enhet — måttstorleken mätetalet anges i."
-   },
-   {
-    "t": "SI-enheter — det internationella enhetssystemet med sju grundenheter (m, kg, s, A, K, mol, cd)."
-   },
-   {
-    "t": "Prefix — skalfaktor framför en enhet (t.ex. kilo, milli) som ersätter en tiopotens."
-   },
-   {
-    "t": "Värdesiffror — antalet siffror i ett mätetal som bär betydelse; styr hur svaret ska avrundas."
-   },
-   {
-    "t": "Medelfart — total tillryggalagd sträcka delat med total tid; skalär storhet, v massan m är lika med sträckan s delat med tiden t ."
-   },
-   {
-    "t": "Densitet — massa per volymenhet, densiteten rho är lika med massan m delat med volymen V ; avgör hur tätt packat ett material är."
-   },
-   {
-    "t": "Formler"
-   },
-   {
-    "t": "Medelfart"
-   },
-   {
-    "t": "v massan m är lika med sträckan s delat med tiden t"
-   },
-   {
-    "t": "där"
-   },
-   {
-    "t": "vₘ är lika med medelfart (meter per sekund)"
-   },
-   {
-    "t": "s är lika med sträcka (meter)"
-   },
-   {
-    "t": "t är lika med tid (sekunder)"
-   },
-   {
-    "t": "Enhetsomvandling — m/s och km/h"
-   },
-   {
-    "t": "meter per sekund xrightarrow gånger 3,6 kilometer per timme kilometer per timme xrightarrow div 3,6 meter per sekund"
-   },
-   {
-    "t": "Densitet"
-   },
-   {
-    "t": "densiteten rho är lika med massan m delat med volymen V"
-   },
-   {
-    "t": "där"
-   },
-   {
-    "t": "ρ är lika med densitet (kg/m i kubik)"
-   },
-   {
-    "t": "m är lika med massa (kilogram)"
-   },
-   {
-    "t": "V är lika med volym (m i kubik)"
-   },
-   {
-    "t": "Enhetsomvandling — kg/m<sup>3</sup> och g/cm<sup>3</sup>"
-   },
-   {
-    "t": "1 gram per centimeter i kubik är lika med 1 000 kilogram per kubikmeter 1 kilogram per kubikmeter som är lika med 0,001 gram per centimeter i kubik"
-   },
-   {
-    "t": "Viktiga samband och metoder"
-   },
-   {
-    "t": "Räknar man enbart med SI-enheter i en formel blir svaret automatiskt en SI-enhet — därför lönar det sig att räkna om till grundenheter (m, kg, s) innan man sätter in värden."
-   },
-   {
-    "t": "Avrunda inte förrän i slutet av en uppgift — annars kan felet i svaret bli stort."
-   },
-   {
-    "t": "Antal värdesiffror i svaret styrs av: vid multiplikation/division av värdet med minst antal värdesiffror; vid addition/subtraktion av värdet med minst antal decimaler."
-   },
-   {
-    "t": "I grundpotensform ska den första faktorn vara ett tal mellan 1 och 10; för tal mindre än 1 ges exponentens (negativa) värde av antalet nollor innan den första siffran som inte är 0."
-   },
-   {
-    "t": "Ett prefix är bara ett annat sätt att skriva en tiopotens — byt ut tiopotensen mot dess prefix (eller tvärtom) utan att ändra värdet."
-   },
-   {
-    "t": "Medelfart och medelhastighet är inte samma sak: medelfart är skalär, v massan m är lika med sträckan s delat med tiden t , medelhastighet är en vektor."
-   },
-   {
-    "t": "Skillnaden fördjupas i nästa kapitel."
-   },
-   {
-    "t": "Vattnets densitet, densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter , är bra att kunna utantill — den ger direkt att 1,0 liter vatten väger 1,0 kilogram."
-   },
-   {
-    "t": "Inför provet"
-   },
-   {
-    "t": "Kan du redogöra för den naturvetenskapliga metodens fyra steg?"
-   },
-   {
-    "t": "Kan du förklara skillnaden mellan hypotes, lag och teori?"
-   },
-   {
-    "t": "Kan du de sju SI-grundenheterna och vilken storhet de mäter?"
-   },
-   {
-    "t": "Kan du skriva om ett tal mellan prefix och grundpotensform i båda riktningarna (t.ex. μm ↔ 10 upphöjt till minus 6 meter)?"
-   },
-   {
-    "t": "Vet du hur man avgör rätt antal värdesiffror i ett svar vid multiplikation/ division respektive addition/subtraktion?"
-   },
-   {
-    "t": "Kan du formeln för medelfart och lösa ut sträcka respektive tid ur den?"
-   },
-   {
-    "t": "Kan du växla mellan m/s och km/h utan miniräknare (omvandlingsfaktor 3,6)?"
-   },
-   {
-    "t": "Kan du formeln för densitet och lösa ut massa respektive volym ur den?"
-   },
-   {
-    "t": "Kan du växla mellan kg/m i kubik och g/cm i kubik (omvandlingsfaktor 1 000)?"
-   },
-   {
-    "t": "Kommer du ihåg vattnets densitet, densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter ?"
-   }
-  ]
- },
- {
-  "id": "fy1-2.1",
+  "id": "fy1-2.2",
   "title": "Vektoraddition",
   "course": "Fysik nivå 1",
   "segments": [
@@ -894,7 +644,7 @@
   ]
  },
  {
-  "id": "fy1-2.2",
+  "id": "fy1-2.3",
   "title": "Medelhastighet, momentanhastighet och läge-tid-diagram",
   "course": "Fysik nivå 1",
   "segments": [
@@ -1048,7 +798,7 @@
   ]
  },
  {
-  "id": "fy1-2.3",
+  "id": "fy1-2.4",
   "title": "Acceleration och fritt fall",
   "course": "Fysik nivå 1",
   "segments": [
@@ -1232,7 +982,7 @@
   ]
  },
  {
-  "id": "fy1-2.4",
+  "id": "fy1-2.5",
   "title": "Hastighet-tid-diagram",
   "course": "Fysik nivå 1",
   "segments": [
@@ -1413,7 +1163,7 @@
   ]
  },
  {
-  "id": "fy1-2.5",
+  "id": "fy1-2.6",
   "title": "Acceleration-tid-diagram",
   "course": "Fysik nivå 1",
   "segments": [
@@ -1474,7 +1224,7 @@
   ]
  },
  {
-  "id": "fy1-2.6",
+  "id": "fy1-2.7",
   "title": "Rörelse med konstant acceleration",
   "course": "Fysik nivå 1",
   "segments": [
@@ -1721,7 +1471,7 @@
   ]
  },
  {
-  "id": "fy1-2.7",
+  "id": "fy1-2.8",
   "title": "Lösa ekvationssystem i GeoGebra",
   "course": "Fysik nivå 1",
   "segments": [
@@ -1842,7 +1592,7 @@
   ]
  },
  {
-  "id": "fy1-2.8",
+  "id": "fy1-2.9",
   "title": "Torricellis ekvation",
   "course": "Fysik nivå 1",
   "segments": [
@@ -2046,7 +1796,7 @@
     "t": "Kapitlet handlar om hur ett föremåls rörelse beskrivs med vektorer, diagram och formler."
    },
    {
-    "t": "Du har mött skillnaden mellan sträcka och förflyttning, hur lutning och area i s-t-, v-t- och a-t-diagram tolkas, och hur formlerna för konstant acceleration — inklusive Torricellis ekvation — används för att lösa rörelseproblem, ibland utan att alls behöva ta omvägen via tiden."
+    "t": "Du har mött medelfarten som första rörelsebegrepp, skillnaden mellan fart och hastighet, skillnaden mellan sträcka och förflyttning, hur lutning och area i s-t-, v-t- och a-t-diagram tolkas, och hur formlerna för konstant acceleration — inklusive Torricellis ekvation — används för att lösa rörelseproblem, ibland utan att alls behöva ta omvägen via tiden."
    },
    {
     "t": "Begrepp att kunna"
@@ -2059,6 +1809,9 @@
    },
    {
     "t": "vektor och skalär — en vektor har både storlek och riktning (t.ex. hastighet, kraft, acceleration); en skalär har bara storlek (t.ex. fart, tid, massa)."
+   },
+   {
+    "t": "medelfart — total tillryggalagd sträcka delat med total tid, v massan m är lika med sträckan s delat med tiden t ; en skalär storhet som saknar riktning."
    },
    {
     "t": "medelhastighet — genomsnittlig hastighet under ett tidsintervall, v massan m är lika med delta sträckan s delat med delta tiden t ; motsvaras av sekantens lutning i ett s-t-diagram."
@@ -2089,6 +1842,30 @@
    },
    {
     "t": "Formler"
+   },
+   {
+    "t": "Medelfart"
+   },
+   {
+    "t": "v massan m är lika med sträckan s delat med tiden t"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "vₘ är lika med medelfart (meter per sekund)"
+   },
+   {
+    "t": "s är lika med sträcka (meter)"
+   },
+   {
+    "t": "t är lika med tid (sekunder)"
+   },
+   {
+    "t": "Enhetsomvandling — m/s och km/h"
+   },
+   {
+    "t": "meter per sekund xrightarrow gånger 3,6 kilometer per timme kilometer per timme xrightarrow div 3,6 meter per sekund"
    },
    {
     "t": "Vektoraddition (vinkelräta vektorer)"
@@ -2208,6 +1985,15 @@
     "t": "Viktiga samband och metoder"
    },
    {
+    "t": "Medelfart och medelhastighet är inte samma sak: medelfarten v massan m är lika med sträckan s delat med tiden t räknas på hela den tillryggalagda sträckan och saknar riktning, medan medelhastigheten v massan m är lika med delta sträckan s delat med delta tiden t räknas på förflyttningen och är en vektor."
+   },
+   {
+    "t": "Vid en rörelse fram och tillbaka till startpunkten är medelhastigheten noll medan medelfarten inte är det."
+   },
+   {
+    "t": "Räkna om till SI-enheter innan värden sätts in: dela km/h med 3,6 för att få m/s, multiplicera m/s med 3,6 för att få km/h."
+   },
+   {
     "t": "I ett s-t-diagram motsvarar sekantens lutning medelhastigheten i ett intervall och tangentens lutning momentanhastigheten i en punkt."
    },
    {
@@ -2248,6 +2034,15 @@
    },
    {
     "t": "Inför provet"
+   },
+   {
+    "t": "Kan du formeln för medelfart och lösa ut sträcka respektive tid ur den?"
+   },
+   {
+    "t": "Kan du växla mellan m/s och km/h utan miniräknare (omvandlingsfaktor 3,6)?"
+   },
+   {
+    "t": "Kan du förklara skillnaden mellan medelfart och medelhastighet?"
    },
    {
     "t": "Kan du skilja på sträcka och förflyttning, och avgöra om en storhet är en vektor eller en skalär?"
@@ -5934,6 +5729,181 @@
  },
  {
   "id": "fy1-5.1",
+  "title": "Densitet",
+  "course": "Fysik nivå 1",
+  "segments": [
+   {
+    "t": "Densitet"
+   },
+   {
+    "t": "Vad väger mest: 1 kilogram bly eller 1 kilogram bomull?"
+   },
+   {
+    "t": "Svaret är förstås att de väger lika mycket."
+   },
+   {
+    "t": "Det krävs dock en mycket större volym bomull jämfört med bly."
+   },
+   {
+    "t": "Hur tätt packat ett material är kallas densitet, betecknas ρ (lilla \"rho\") och har SI-enheten kg/m i kubik."
+   },
+   {
+    "t": "Känn på densitet"
+   },
+   {
+    "t": "Vi skickar runt lika stora kuber av aluminium, koppar, bly och järn."
+   },
+   {
+    "t": "Utifrån det du redan vet, vilket ämne tror du att respektive kub är gjord av?"
+   },
+   {
+    "t": "Blykuben väger mest och har alltså högst densitet och är ganska mjuk."
+   },
+   {
+    "t": "Aluminium är en lätt och ljus metall."
+   },
+   {
+    "t": "Den väger minst. Koppar känns igen på den rödbruna färgen."
+   },
+   {
+    "t": "Järn luktar blod! (Eller egentligen är det blod som luktar järn, eftersom det innehåller just det.)"
+   },
+   {
+    "t": "Densitet"
+   },
+   {
+    "t": "densiteten rho är lika med massan m delat med volymen V"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "ρ är lika med densitet (kg/m i kubik)"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "V är lika med volym (m i kubik)"
+   },
+   {
+    "t": "Enhetsomvandling — kg/m i kubik och g/cm i kubik"
+   },
+   {
+    "t": "Härledning"
+   },
+   {
+    "t": "En annan vanlig enhet för densitet är g/cm i kubik, så därför kan det vara bra att snabbt kunna växla mellan dessa."
+   },
+   {
+    "t": "Vi gör en enhetsanalys."
+   },
+   {
+    "t": "1 kilogram per kubikmeter är lika med 1 kilogram delat med 1 kubikmeter som är lika med 1 000 gram delat med 1 000 000 kubikcentimeter som är lika med 1 delat med 1 000 gram per centimeter i kubik"
+   },
+   {
+    "t": "Det innebär att om vi vill växla från kg/m i kubik till g/cm i kubik så ska vi dividera med 1 000."
+   },
+   {
+    "t": "Omvänt gäller att om vi vill växla från g/cm i kubik till kg/m i kubik ska vi multiplicera med 1 000."
+   },
+   {
+    "t": "Omvandlingsfaktorn är 1 000."
+   },
+   {
+    "t": "Enhetsomvandling — kg/m<sup>3</sup> och g/cm<sup>3</sup>"
+   },
+   {
+    "t": "Omvandlingsfaktorn mellan g/cm i kubik och kg/m i kubik är 1 000, så"
+   },
+   {
+    "t": "1 gram per centimeter i kubik är lika med 1 000 kilogram per kubikmeter"
+   },
+   {
+    "t": "1 kilogram per kubikmeter är lika med 1 delat med 1 000 gram per centimeter i kubik som är lika med 0,001 gram per centimeter i kubik"
+   },
+   {
+    "t": "Vattnets densitet"
+   },
+   {
+    "t": "Vattnets densitet är bra att kunna utantill eftersom vi ofta räknar med den."
+   },
+   {
+    "t": "Den är också lätt att komma ihåg."
+   },
+   {
+    "t": "densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter"
+   },
+   {
+    "t": "vilket innebär att 1,0 liter vatten väger 1,0 kilogram."
+   },
+   {
+    "t": "Exempel 1 — Guldtärning (E)"
+   },
+   {
+    "t": "En kubisk guldtärning har sidan 1,5 centimeter."
+   },
+   {
+    "t": "Hur mycket väger den?"
+   },
+   {
+    "t": "Vi ställer upp formeln för densitet och löser ut massan m."
+   },
+   {
+    "t": "densiteten rho är lika med massan m delat med volymen V vilket är ekvivalent med att m är lika med rho gånger V"
+   },
+   {
+    "t": "densiteten rho är lika med 19,3 gånger 10 i kubik kilogram per kubikmeter parentesen från tabell slut parentes volymen V som är lika med 1,5 centimeter gånger 1,5 centimeter gånger 1,5 centimeter som är lika med 1,5 i kubik kubikcentimeter som är lika med 3,375 kubikcentimeter som är lika med 3,375 gånger 10 upphöjt till minus 6 kubikmeter"
+   },
+   {
+    "t": "massan m är lika med 19,3 gånger 10 i kubik gånger 3,375 gånger 10 upphöjt till minus 6 som är lika med 0,0651 kilogram som är ungefär lika med 0,065 kilogram som är lika med 65 gram"
+   },
+   {
+    "t": "Svar: 65 gram"
+   },
+   {
+    "t": "Lägsta och högsta densiteten"
+   },
+   {
+    "t": "Det fasta ämnet med lägst densitet är aerogel med densiteten 0,0011 gram/cm i kubik."
+   },
+   {
+    "t": "Aerogel — porig vit klump som hålls i en hand, lätt som luft."
+   },
+   {
+    "t": "Originalbild från PDF kan läggas in här."
+   },
+   {
+    "t": "Det fasta grundämnet med högst densitet är osmium med densiteten 22 gram/cm i kubik (bly ligger på ungefär hälften och guld ligger på 19 gram/cm i kubik)."
+   },
+   {
+    "t": "Osmium — silvergrå metallklump med kristallin yta."
+   },
+   {
+    "t": "Originalbild från PDF kan läggas in här."
+   },
+   {
+    "t": "Högst densitet i universum?"
+   },
+   {
+    "t": "Neutronstjärnor med densiteten 4 gånger 10 upphöjt till 14 gram/cm i kubik."
+   },
+   {
+    "t": "Det tomma utrymmet i atomen är istället packat med neutroner som (motvilligt) trycks samman av den starka gravitationen."
+   },
+   {
+    "t": "En kubikcentimeter väger alltså 400 miljoner ton (!)."
+   },
+   {
+    "t": "Neutronstjärna — kompakt blå stjärna med jetstrålar mot ett stjärnfält."
+   },
+   {
+    "t": "Originalbild från PDF kan läggas in här."
+   }
+  ]
+ },
+ {
+  "id": "fy1-5.2",
   "title": "Tryck och tryckkraft",
   "course": "Fysik nivå 1",
   "segments": [
@@ -6015,7 +5985,7 @@
   ]
  },
  {
-  "id": "fy1-5.2",
+  "id": "fy1-5.3",
   "title": "Vätsketryck",
   "course": "Fysik nivå 1",
   "segments": [
@@ -6178,7 +6148,7 @@
   ]
  },
  {
-  "id": "fy1-5.3",
+  "id": "fy1-5.4",
   "title": "Lufttryck och totalt tryck",
   "course": "Fysik nivå 1",
   "segments": [
@@ -6362,7 +6332,7 @@
   ]
  },
  {
-  "id": "fy1-5.4",
+  "id": "fy1-5.5",
   "title": "Lyftkraft och Arkimedes princip",
   "course": "Fysik nivå 1",
   "segments": [
@@ -6606,7 +6576,7 @@
   ]
  },
  {
-  "id": "fy1-5.5",
+  "id": "fy1-5.6",
   "title": "Gasers lyftkraft",
   "course": "Fysik nivå 1",
   "segments": [
@@ -6751,7 +6721,7 @@
   ]
  },
  {
-  "id": "fy1-5.6",
+  "id": "fy1-5.7",
   "title": "Ideala gaslagen och kelvinskalan",
   "course": "Fysik nivå 1",
   "segments": [
@@ -6917,7 +6887,7 @@
   ]
  },
  {
-  "id": "fy1-5.7",
+  "id": "fy1-5.8",
   "title": "Pascals princip",
   "course": "Fysik nivå 1",
   "segments": [
@@ -6995,7 +6965,7 @@
     "t": "Sammanfattning — Tryck"
    },
    {
-    "t": "Det här kapitlet handlade om hur en kraft fördelas över en yta: tryck mellan fasta kroppar, vätsketryck, lufttryck och totalt tryck."
+    "t": "Det här kapitlet handlade om hur tätt packad materia är och hur en kraft fördelas över en yta: densitet, tryck mellan fasta kroppar, vätsketryck, lufttryck och totalt tryck."
    },
    {
     "t": "Du mötte Arkimedes princip för lyftkraft i vätskor och gaser, ideala gaslagen med kelvinskalan och Pascals princip för hydraulik."
@@ -7005,6 +6975,9 @@
    },
    {
     "t": "Begrepp att kunna"
+   },
+   {
+    "t": "Densitet — massa per volymenhet, densiteten rho är lika med massan m delat med volymen V , SI-enhet kg/m i kubik; avgör hur tätt packat ett material är och därmed om ett föremål flyter i ett medium."
    },
    {
     "t": "Tryck — kraft per areaenhet, trycket p är lika med kraften F delat med arean A , mäts i Pa (pascal) eller N/m i kvadrat."
@@ -7041,6 +7014,27 @@
    },
    {
     "t": "Kapitlets formler"
+   },
+   {
+    "t": "Densitet"
+   },
+   {
+    "t": "densiteten rho är lika med massan m delat med volymen V"
+   },
+   {
+    "t": "där"
+   },
+   {
+    "t": "ρ är lika med densitet (kg/m i kubik)"
+   },
+   {
+    "t": "m är lika med massa (kilogram)"
+   },
+   {
+    "t": "V är lika med volym (m i kubik)"
+   },
+   {
+    "t": "Enhetsomvandling: 1 gram per centimeter i kubik är lika med 1 000 kilogram per kubikmeter ."
    },
    {
     "t": "Tryck mellan fasta kroppar"
@@ -7139,6 +7133,9 @@
     "t": "Viktiga samband och metoder"
    },
    {
+    "t": "Vattnets densitet, densiteten rho hastigheten v accelerationen a tiden t t e n är ungefär lika med 1 000 kilogram per kubikmeter , är bra att kunna utantill — den ger direkt att 1,0 liter vatten väger 1,0 kilogram, och den behövs i både vätsketrycket och Arkimedes princip."
+   },
+   {
     "t": "Tryckkraft och tryck är olika storheter — samma kraft ger olika tryck beroende på hur stor area den fördelas på (skidor i snö, en stilettklack mot en pansarvagns larvfötter)."
    },
    {
@@ -7185,6 +7182,12 @@
    },
    {
     "t": "Inför provet"
+   },
+   {
+    "t": "Kan du formeln för densitet och lösa ut massa respektive volym ur den?"
+   },
+   {
+    "t": "Kan du växla mellan kg/m i kubik och g/cm i kubik (omvandlingsfaktor 1 000)?"
    },
    {
     "t": "Kan du skilja på tryck och tryckkraft, och förklara varför en stilettklack ger mycket högre tryck än en pansarvagns larvfötter?"

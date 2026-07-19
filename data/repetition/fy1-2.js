@@ -6,7 +6,7 @@ window.REPETITION['fy1-2'] = {
     courseCode: 'fy1',
     chapter: 'Rörelse',
     chapterNumber: 2,
-    intro: 'Här repeterar du rörelsebeskrivningen: vektorer, rörelsediagrammen och formlerna för konstant acceleration.',
+    intro: 'Här repeterar du rörelsebeskrivningen: medelfart, vektorer, rörelsediagrammen och formlerna för konstant acceleration.',
     stations: [
         {
             type: 'sortera',
@@ -22,6 +22,7 @@ window.REPETITION['fy1-2'] = {
             title: 'Para ihop formel och betydelse',
             instruktion: 'Dra rätt beskrivning till varje formel.',
             pairs: [
+                { a: '$v_\\mathrm{m} = \\dfrac{s}{t}$', b: 'Medelfart' },
                 { a: '$v_m = \\dfrac{\\Delta s}{\\Delta t}$', b: 'Medelhastighet' },
                 { a: '$a_m = \\dfrac{\\Delta v}{\\Delta t}$', b: 'Medelacceleration' },
                 { a: '$v = v_0 + a \\cdot t$', b: 'Hastighet vid konstant acceleration' },
@@ -39,8 +40,9 @@ window.REPETITION['fy1-2'] = {
                 { fore: 'Lutningen i ett $v\\text{-}t\\text{-diagram}$ ger', efter: '.', svar: 'accelerationen' },
                 { fore: 'Arean i ett $v\\text{-}t\\text{-diagram}$ ger', efter: '.', svar: 'förflyttningen' },
                 { fore: 'Arean i ett $a\\text{-}t\\text{-diagram}$ ger', efter: '.', svar: 'hastighetsändringen' },
+                { fore: 'Total sträcka delat med total tid ger', efter: '.', svar: 'medelfarten' },
             ],
-            distraktorer: ['tiden', 'medelfarten'],
+            distraktorer: ['tiden', 'momentanhastigheten'],
         },
         {
             type: 'ordna',
@@ -65,6 +67,10 @@ window.REPETITION['fy1-2'] = {
                   sant: true, varfor: 'Sekantens lutning ger medelhastigheten i ett intervall; tangentens lutning ger momentanhastigheten.' },
                 { text: 'Hastighet är en skalär storhet.',
                   sant: false, varfor: 'Hastighet har både storlek och riktning och är därför en vektor — farten är skalären.' },
+                { text: 'För att omvandla km/h till m/s ska man dividera med 3,6.',
+                  sant: true, varfor: 'Omvandlingsfaktorn mellan m/s och km/h är 3,6; från km/h till m/s divideras.' },
+                { text: 'En löpare som springer ett varv runt en bana och slutar där hen började har medelhastigheten noll, men inte medelfarten noll.',
+                  sant: true, varfor: 'Förflyttningen är noll så medelhastigheten blir noll, men den tillryggalagda sträckan är ett helt varv så medelfarten är det inte.' },
                 { text: 'En boll som kastas rakt uppåt har accelerationen noll i banans högsta punkt.',
                   sant: false, varfor: 'I högsta punkten är hastigheten noll ett ögonblick, men accelerationen är hela tiden $g$ nedåt.' },
                 { text: 'Vid inbromsning är det viktigt att räkna med tecken på hastighet och acceleration.',

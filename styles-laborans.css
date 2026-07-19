@@ -986,13 +986,19 @@ body.laborans a {
 
 .lab-level-4 {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    /* minmax(0, 1fr) i stället för 1fr (= minmax(auto, 1fr)): utan detta kan
+       ett brett innehåll i avsnittsspalten (t.ex. en lång displayformel som
+       inte bryts) tvinga spalten bredare än viewporten. På mobil delar
+       avsnittslistan (aside) samma spalt → listan sträcks ut och sidan får
+       en horisontell scroll. minmax(0, …) låter i stället det breda
+       innehållet spilla/scrolla inuti sin egen ruta. */
+    grid-template-columns: 280px minmax(0, 1fr);
     gap: 0;
     min-height: 460px;
 }
 
 @media (max-width: 820px) {
-    .lab-level-4 { grid-template-columns: 1fr; }
+    .lab-level-4 { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* Kursintro: ersätter normal 2-kolumns-layout med en full-bredd vy som
@@ -1134,6 +1140,7 @@ body.laborans a {
 .lab-sections-aside {
     border-right: 1px solid var(--lab-line-strong);
     padding: 24px 0;
+    min-width: 0;
 }
 
 @media (max-width: 820px) {
@@ -1145,6 +1152,7 @@ body.laborans a {
 
 .lab-section-item {
     width: 100%;
+    min-width: 0;
     text-align: left;
     background: transparent;
     color: var(--lab-ink);
@@ -1153,7 +1161,9 @@ body.laborans a {
     padding: 14px 18px 14px 4px;
     cursor: pointer;
     display: grid;
-    grid-template-columns: 48px 1fr 14px;
+    /* Titelspalten som minmax(0, 1fr) så en lång avsnittstitel wrappar i
+       stället för att tvinga knappen (och hela listan) bredare än scenen. */
+    grid-template-columns: 48px minmax(0, 1fr) 14px;
     gap: 8px;
     align-items: baseline;
 }
@@ -1172,7 +1182,7 @@ body.laborans a {
 
 .lab-section-item.active .lab-section-item-num { color: var(--lab-accent); }
 
-.lab-section-item-title { font-size: 14px; line-height: 1.2; }
+.lab-section-item-title { font-size: 14px; line-height: 1.2; min-width: 0; overflow-wrap: anywhere; }
 .lab-section-item.active .lab-section-item-title { font-weight: 600; }
 
 .lab-section-item-arrow {
@@ -1187,6 +1197,7 @@ body.laborans a {
 
 .lab-section-content {
     padding: 32px 36px 36px;
+    min-width: 0;
 }
 
 @media (max-width: 540px) {
@@ -2238,6 +2249,11 @@ button.lab-card-disabled { pointer-events: none; }
        position för varje formel. Liten indrag (~1.5em) skiljer formeln
        visuellt från kroppstexten. */
     text-align: left !important;
+    /* En bred displayformel scrollar i sidled inuti sin egen ruta i stället
+       för att spilla ut och skapa horisontell scroll på hela sidan (viktigt
+       på mobil, där avsnittsspalten annars sträcks ut). */
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 .lab-article-body .katex-display > .katex {
     text-align: left;

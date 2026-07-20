@@ -34,6 +34,52 @@
  */
 const NYHETER_ALL = [
   {
+    id: "2026-07-20-morka-kometen-1998sh2",
+    date: "2026-07-20",
+    title: "En ”asteroid” har i 27 år dolt att den egentligen är en komet med sin egen lilla raketmotor",
+    deck: "Det jordnära objektet 1998 SH2 spårades som en helt vanlig asteroid i 27 år. Men vid ett nära möte med jorden i augusti 2025 hamnade det 19 standardavvikelser fel jämfört med den bana gravitationen ensam förutspår — en gåta som forskare vid NASA och ESO nu har löst med några av världens största teleskop: 1998 SH2 är i själva verket en sällsynt ”mörk komet”, med en osynlig gasutströmning som fungerar som en egen liten raketmotor.",
+    category: "Astronomi",
+    readingTime: "4 min",
+    image: "nyheter/bilder/2026-07-20-morka-kometen-1998sh2.jpg",
+    imageAlt: "Konstnärlig bild av en mörk, krater­täckt, oregelbunden kropp i rymden med en svag, ljusgrå gassvans som sträcker sig bort från en gulaktig stjärna längst ner till höger i bilden, mot en stjärnbeströdd bakgrund.",
+    imageCredit: "Bild: NASA/JPL-Caltech (pressbild)",
+    tags: ["astronomi", "mekanik", "newtons lagar", "krafter", "asteroider", "kometer", "jordnära objekt", "neo", "planetärt försvar", "gravitation", "omloppsbana", "fysik 1", "fysik 2"],
+    sources: [
+      { name: "NASA/JPL (pressmeddelande)", url: "https://www.jpl.nasa.gov/news/nasa-study-finds-near-earth-asteroid-is-actually-comet/" },
+      { name: "Phys.org", url: "https://phys.org/news/2026-07-asteroid-unexplained-orbital-shift-dark.html" },
+      { name: "NASA — bakgrund om mörka kometer", url: "https://www.nasa.gov/solar-system/comets/nasa-researchers-discover-more-dark-comets/" }
+    ],
+    research: { citation: "D. Farnocchia, O. R. Hainaut, D. Z. Seligman et al., ”Non-gravitational acceleration indicative of cometary activity of near-Earth object”, Nature Astronomy (2026)", url: "https://doi.org/10.1038/s41550-026-02913-7" },
+    body: [
+      { type: "p", html: "I 27&nbsp;år låg det prydligt katalogiserat som en helt vanlig sten i rymden: det jordnära objektet 1998&nbsp;SH2, upptäckt 1998 och sedan dess spårat vid åtskilliga passager förbi jorden. Men den 28&nbsp;augusti 2025, när objektet svepte förbi på omkring 3&nbsp;miljoner kilometers avstånd — knappt åtta gånger så långt som till månen — befann det sig inte alls där banberäkningarna sa att det skulle vara. Avvikelsen motsvarade 19&nbsp;standardavvikelser, en felmarginal så stor att den omöjligen kunde förklaras med mätfel eller gravitationens finjusteringar. Nu, i en studie publicerad i tidskriften <em>Nature Astronomy</em>, har forskare vid NASA:s Jet Propulsion Laboratory (JPL) och European Southern Observatory (ESO) löst gåtan: 1998&nbsp;SH2 är ingen asteroid. Det är en komet — och det har den varit hela tiden." },
+
+      { type: "h2", text: "En kraft utöver gravitationen" },
+      { type: "p", html: "Banan för ett objekt i solsystemet bestäms i grunden av en enda kraft: gravitationen från solen och planeterna, som astronomer kan räkna ut med extrem precision. För en vanlig, inert asteroid stämmer förutsägelsen så gott som perfekt år efter år. Men en komet är inte inert. När dess is värms av solen övergår den direkt från fast form till gas, sublimering, och gasen strömmar ut i rymden i en riktning som beror på var solljuset träffar starkast. Enligt Newtons tredje lag — kraft möts av motkraft — ger den utströmmande gasen kometkärnan en liten men ihållande knuff åt motsatt håll: i praktiken en egen, naturlig raketmotor. Den knuffen är precis den typen av ”icke-gravitationella” störning som långsamt får en bana att driva bort från den rent gravitationella förutsägelsen." },
+
+      { type: "quote", html: "”När vi mätte upp de icke-gravitationella störningarna i banan för 1998&nbsp;SH2 och insåg att de inte var förenliga med att det var en asteroid, misstänkte vi att objektet kunde vara en aktiv komet.”", cite: "Davide Farnocchia, navigationsingenjör, NASA:s Center for Near-Earth Object Studies (JPL)" },
+
+      { type: "h2", text: "Jakten på en osynlig svans" },
+      { type: "p", html: "Problemet var att ingen kunde se någon kometaktivitet alls. En vanlig komet avslöjar sig på långt håll genom sin ljusa koma — gasmolnet runt kärnan — och sin karakteristiska svans. 1998&nbsp;SH2 visade ingetdera i vanliga bilder, vilket var precis det som gjorde objektet till ett mysterium snarare än en enkel omklassificering. Forskarna vände sig därför till några av världens största teleskop: Canada-France-Hawaii-teleskopet (3,6&nbsp;m) på Mauna Kea, ESO:s Danska teleskopet (1,5&nbsp;m) i Chile och till sist ESO:s Very Large Telescope (VLT, 8,2&nbsp;m) på Cerro Paranal. Genom att stapla många långa exponeringar ovanpå varandra kunde astronomerna till slut plocka fram en extremt svag koma och en smal svans, mer än 20&nbsp;bågsekunder lång — osynlig för mindre instrument, men otvetydig i VLT:s djupa bilder." },
+
+      { type: "quote", html: "”Bilderna vi samlade in från de här observatorierna visade en svag men tydlig svans, vilket bekräftade att 1998&nbsp;SH2 faktiskt är en komet. Så fungerar vetenskap — man formulerar en hypotes och sätter sig sedan för att testa den.”", cite: "Olivier Hainaut, astronom, European Southern Observatory" },
+
+      { type: "h2", text: "En ny, mörk klass av objekt" },
+      { type: "p", html: "1998&nbsp;SH2, som nu även fått kometbeteckningen P/1998&nbsp;SH2, tillhör en klass forskare kallar mörka kometer: kroppar som rör sig som kometer men som är för svaga eller för avlägsna för att någonsin visa en synlig koma eller svans i vanliga översiktsobservationer. Den första kända mörka kometen, asteroiden 2003&nbsp;RM, fick sin bana kartlagd redan 2016 utan att gravitationen ensam kunde förklara den, men det dröjde till 2023 innan mönstret gavs ett namn och sju sådana objekt bekräftats. År 2024 fördubblades listan till 14 kända mörka kometer, indelade i två grupper: mindre ”inre” mörka kometer, tiotals meter i diameter eller mindre med nära cirkulära banor nära jorden, och betydligt större ”yttre” mörka kometer, hundratals meter eller mer med avlångare banor som liknar Jupiterfamiljens kometer. Med 1998&nbsp;SH2 har listan nu blivit ännu längre." },
+
+      { type: "h2", text: "Varför det spelar roll för planetförsvaret" },
+      { type: "p", html: "Upptäckten är mer än en kuriositet. Riskberäkningar för jordnära objekt förutsätter att banan går att förutsäga långt in i framtiden med hög precision, en förutsägelse som hittills utgått från att de allra flesta objekten är gravitationellt trogna asteroider utan egna krafter. Om en del av dem i själva verket är mörka kometer med en dold, ihållande liten kraft som gradvis flyttar banan, blir de långsiktiga prognoserna mindre säkra än man trott — särskilt för objekt som, precis som 1998&nbsp;SH2, går flera år mellan varje observationstillfälle. NASA understryker att sannolikheten för att just 1998&nbsp;SH2 ska träffa jorden fortfarande är noll; upptäckten handlar om att förbättra metoderna för alla jordnära objekt, inte om ett akut hot." },
+
+      { type: "quote", html: "”Det här arbetet visar hur viktigt det är att fortlöpande följa jordnära objekt. På grund av utgasningen störs kometers rörelse betydligt mer än asteroiders.”", cite: "Davide Farnocchia, JPL" },
+
+      { type: "fact", title: "Visste du?", items: [
+        "Standardavvikelse (σ) mäter hur långt ett uppmätt värde ligger från det väntade utfallet. Inom partikelfysiken räknas fem standardavvikelser som gränsen för en bekräftad upptäckt (så avgjordes Higgspartikeln 2012) — 19&nbsp;standardavvikelser gör slumpmässiga mätfel praktiskt taget uteslutna som förklaring.",
+        "1998&nbsp;SH2 kretsar kring solen på 4,5&nbsp;år. Det spårades noggrant fram till 2016, men hann sedan gå två hela varv obevakat innan nästa nära möte med jorden avslöjade avvikelsen 2025.",
+        "Namnet ”mörk komet” myntades så sent som 2023 — innan dess klassades objekten helt enkelt som ovanliga asteroider, precis som 1998&nbsp;SH2 självt gjorde i 27&nbsp;år."
+      ]}
+    ]
+  },
+
+  {
     id: "2026-07-19-tour-de-france-aerodynamik",
     date: "2026-07-19",
     title: "Valet av följebil kan avgöra Tour de France — fysiker mäter den osynliga knuffen bakom cyklisten",

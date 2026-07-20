@@ -14,6 +14,41 @@ Format per post:
 
 (tom — se "Reservuppslag" nedan vid nyhetstorka)
 
+## Fynd som inte användes (2026-07-20) — kan tas upp senare
+
+- **150 år gammal gåta om Theta Eridani kan äntligen vara löst** — Idel Waisberg och
+  Boaz Katz visar i en arXiv-preprint (29 juni 2026, ”The forgotten bright star:
+  Theta Eridani as a millenary stellar transient”) att antika astronomer beskrev
+  stjärnan som betydligt ljusare än dagens magnitud 2,9. Theta Eridani är egentligen
+  ett trippelstjärnesystem; den inre binären kretsar extremt tätt (0,083 AU) och
+  båda stjärnorna (2,3 och 2,2 solmassor) fyller ~80&nbsp;% av sin Roche-lob.
+  Forskarna föreslår att massöverföring under en tidigare mer excentrisk bana
+  frigjorde energi som gav en ljusstark period på cirka 1&nbsp;000 år, i linje med
+  de historiska observationerna, innan banan cirkulariserades. Fin koppling till
+  gravitation/omloppsbanor och energiprincipen (Fysik 1/2), men bygger på en
+  opublicerad preprint (inte peer review-granskad ännu) — vänta gärna tills den
+  publiceras i en tidskrift, eller använd med tydlig brasklapp. Källa:
+  https://phys.org/news/2026-07-century-stellar-mystery-explanation.html
+  (tillagd 2026-07-20)
+- **Ovanligt sval och matt Typ Ia-supernova, SN 2023vjh** — Maria Kopsacheili
+  (Institute of Space Sciences, Barcelona) m.fl. har karaktäriserat en extremt kall,
+  underlysande ”91bg-liknande” supernova 271 miljoner ljusår bort. Nischad
+  astrofysiknyhet, bygger på arXiv-preprint (9 juli 2026), teknisk utan tydlig
+  ”aha”-vinkel för gymnasienivå. Källa:
+  https://phys.org/news/2026-07-nature-peculiar-supernova.html (tillagd 2026-07-20)
+- **Vera C. Rubin-observatoriets tioåriga himmelskartläggning har officiellt
+  inletts** (Physics World, ~2026-07-20) — samma projekt som redan noterades och
+  sparades 2026-07-07 (se nedan); fortfarande bra Fysik 2-uppslag (gravitation,
+  ljusinsamling, stordata) men vänta tills astronomiklustret svalnat något.
+  (tillagd 2026-07-20)
+- **Fysiker bekräftar 20 år gammal teori som kan ge bättre kvantteknik** samt
+  **forskare skapar första rumstempererade kvantmaterialet** — två phys.org-
+  rubriker (kring 2026-07-14/15) som dök upp i sökningen men inte hann
+  research­as klart; potentiellt bra kvantfysik-uppslag men vi har kört mycket
+  kvantfysik senaste veckorna. Källor: https://phys.org/news/2026-07-physicists-year-theory-boost-quantum.html ,
+  https://phys.org/news/2026-07-physicists-room-temperature-quantum-material.html
+  (tillagd 2026-07-20)
+
 ## Fynd som inte användes (2026-07-19) — kan tas upp senare
 
 - **Enda fissionsexperiment kartlägger överskott av gammastrålning från ett

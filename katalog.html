@@ -72,6 +72,12 @@
             // ihop parentesen med den efterföljande math-rutan i en nowrap-span.
             // Gäller bara inline-math ($…$), inte display-math ($$…$$).
             html = html.replace(/\(( *)(\$(?!\$)[^$\n]+?\$)/g, '<span class="math-paren">($1$2</span>');
+            // Håll ihop variabel + bindestreck + efterled ("$x$-termen",
+            // "<em>pq</em>-formeln") — KaTeX-/em-spannet och "-termen" är
+            // separata inline-element, så webbläsaren får annars bryta raden
+            // både mellan dem och efter bindestrecket.
+            html = html.replace(/(\$(?!\$)[^$\n]+?\$|<em>[^<]{1,8}<\/em>)-([a-zA-Zåäöé]+)/g,
+                '<span class="var-compound">$1-$2</span>');
             return html;
         }
 

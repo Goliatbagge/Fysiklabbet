@@ -2318,6 +2318,12 @@ button.lab-card-disabled { pointer-events: none; }
 .math-paren {
     white-space: nowrap;
 }
+/* Variabel + bindestreck + efterled ("$x$-termen", "<em>pq</em>-formeln")
+   limmas ihop (sätts i restoreMath) — annars kan raden brytas efter
+   bindestrecket eller mellan variabeln och bindestrecket. */
+.var-compound {
+    white-space: nowrap;
+}
 .katex-display .katex {
     white-space: normal;
 }
